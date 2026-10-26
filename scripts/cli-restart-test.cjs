@@ -87,5 +87,14 @@ function inspect(id,x) {
 });
 async function connectAfterClose(user) {
   for(const c of clients.filter(c=>c.user===user && !c.closed))await c.close();
-  return connect(user);
+  // stompjs disconnect calls back before the server handles transport teardown.
+  // Retry only this deliberate reconnect, within the existing scenario deadline.
+  const until=Date.now()+6000;
+  while(true) {
+    try { return await connect(user); }
+    catch(error) {
+      if(error.message!=='Login rejected' || Date.now()>=until) throw error;
+      await new Promise(resolve=>setTimeout(resolve,25));
+    }
+  }
 }

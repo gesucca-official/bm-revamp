@@ -3,12 +3,14 @@ const {Client} = require('../../scripts/bm-cli.cjs');
 
 // A broker double can lose a reply before SUBSCRIBE registration completes.
 // Exercise the real command, event buffer and bounded wait without a server.
-function fixture(replyOn: number, disconnect = false): any {
+function fixture(replyOn: number, disconnect = false, destination = '/user/queue/game/match/view'): any {
   const client = new Client('http://localhost', 'alice', 'synthetic', 1200);
   const requests: string[] = [];
-  const destination = '/user/queue/game/match/view';
   client.stomp = {
-    subscribe: () => ({}),
+    subscribe: (_path: string, _callback: any, headers: any) => {
+      setImmediate(() => client.receipts.get(headers.receipt)());
+      return {};
+    },
     send: (path: string) => {
       requests.push(path);
       if (disconnect) { client.drop(); }
@@ -21,6 +23,12 @@ function fixture(replyOn: number, disconnect = false): any {
 }
 
 export const tests = [
+  {name: 'CLI profile recovers one lost read reply without repeating a mutation', run: async () => {
+    const {client, requests} = fixture(2, false, '/user/queue/account/data');
+    const result = await client.command({command: 'profile'});
+    assert.equal(result.destination, '/user/queue/account/data');
+    assert.deepEqual(requests, ['/app/user/alice/account', '/app/user/alice/account']);
+  }},
   {name: 'CLI view returns the first reply without repeating the request', run: async () => {
     const {client, requests, destination} = fixture(1);
     const result = await client.command({command: 'view', gameId: 'match'});

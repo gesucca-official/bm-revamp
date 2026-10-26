@@ -1,3 +1,9 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 > Riferimento corrente I22: schema V001–V003 e registro attivi I19b; la chiusura
 > I24 al restart aggiorna atomicamente evento OUTCOME e marker del registro senza
 > nuove migrazioni. Conclusi e prefissi durevoli sono conservati. Catalogo read-only
@@ -15,7 +21,7 @@
 
 L'archivio registra l'esito del motore, non ENDED al leave. Le partite abbandonate prima dell'esito conservano il prefisso, senza inventare un esito. Nessun registro persistente degli attivi, finalizzazione da restart o checkpoint giocabile. `log.db` continua a governare solo il salvataggio legacy: il quick I19a registra sempre, senza sampling. In caso di fallimento la partita prosegue, il recorder segnala WRITE_FAILED e conserva nel processo vivo gli eventi immutabili non persistiti; recupero durevole/retry è I19b.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
 ## Dati pianificati per la base (non implementati)
 

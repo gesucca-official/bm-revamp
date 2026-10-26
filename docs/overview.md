@@ -1,3 +1,9 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 ## Quadro corrente I22 — 26 ottobre 2026
 
 Prerequisiti tecnici della base acquisiti: quick 1vCom, open 1vCom, quick 1v1 e
@@ -8,7 +14,7 @@ cronologie e lavoro preesistente conservati. Il proprietario ha approvato esplic
 26 ottobre 2026; roadmap della base conclusa: [report corrente I22](reports/i22-report.md).
 Le ricognizioni datate sotto non descrivono automaticamente lacune ancora aperte.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
 > Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 

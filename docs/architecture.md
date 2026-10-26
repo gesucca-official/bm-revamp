@@ -1,3 +1,9 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 ## Struttura corrente I22 — 26 ottobre 2026
 
 `E:/bm` è un monorepo: server Spring Boot, client Angular debug, CLI Node,
@@ -13,11 +19,11 @@ Le sezioni datate sotto sono evidenze storiche.
 
 > Aggiornamento I19a, 24 ottobre 2026: journal quick append-only in LOG003, migrazione V002, snapshot copiati ai confini del round e batch SQLite dopo il commit del motore. Export privato dei match conclusi e diagnostica dei fallimenti; nessun restore. [Contratto e limiti](match-archive.md), [report](reports/i19a-report.md). Le architetture e i risultati datati sotto rimangono storici.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
-## Architettura pianificata per la base (non implementata)
+## CLI acquisita nella base (I26 completato)
 
-I26 aggiungerà un adattatore CLI testuale sottile sul protocollo REST/STOMP/SockJS reale e sul server autorevole, riusando runtime e librerie compatibili già disponibili. Non caricherà Angular/Phaser/browser e non duplicherà motore o regole. Input scriptabile, eventi strutturati, processi multiaccount e chiusura risorse renderanno ripetibili gli scenari non UX. Il debug resta la superficie UX. Nessun nuovo componente è presente per effetto di questo documento.
+I26 ha introdotto la CLI testuale sul protocollo REST/STOMP/SockJS reale e sul server autorevole, senza browser né duplicazione del motore. Input scriptabile, eventi strutturati e processi multiaccount sono disponibili; il debug resta la superficie UX. Contratto, comandi e limiti nella [guida CLI](cli.md), prove nel [report I26](reports/i26-report.md).
 
 ## Aggiornamento I11 - transazione del servizio partite
 

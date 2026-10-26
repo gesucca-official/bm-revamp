@@ -12,14 +12,17 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 public class WebSocketAuthenticationSecurityConfig implements WebSocketMessageBrokerConfigurer {
 
     private final AuthChannelInterceptorAdapter authInterceptor;
+    private final SubscriptionReceiptInterceptor subscriptionReceipts;
 
     @Autowired
-    public WebSocketAuthenticationSecurityConfig(AuthChannelInterceptorAdapter authInterceptor) {
+    public WebSocketAuthenticationSecurityConfig(AuthChannelInterceptorAdapter authInterceptor,
+                                                  SubscriptionReceiptInterceptor subscriptionReceipts) {
         this.authInterceptor = authInterceptor;
+        this.subscriptionReceipts = subscriptionReceipts;
     }
 
     @Override
     public void configureClientInboundChannel(final ChannelRegistration registration) {
-        registration.interceptors(authInterceptor);
+        registration.interceptors(authInterceptor, subscriptionReceipts);
     }
 }

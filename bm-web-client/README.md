@@ -18,3 +18,9 @@ Le configurazioni Heroku sono storiche; il percorso locale usa il proxy incluso.
 
 [Regolamento ufficiale](../docs/game-rules.md) · [Monorepo](../README.md) ·
 [Contributi e diritti](../CONTRIBUTING.md)
+
+## Roadmap
+
+La roadmap della base è [archiviata come completata](../docs/roadmap.md).
+La [preparazione della roadmap client](../docs/client-roadmap-preparation.md)
+raccoglie le decisioni da concordare; non è un piano di implementazione.

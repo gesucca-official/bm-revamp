@@ -1,10 +1,16 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 > Stato corrente I22: le criticità storiche di bootstrap, autorizzazione, code,
 > isolamento stati, rollback e persistenza elencate sotto sono state trattate e
 > verificate negli incrementi della base; non costituiscono automaticamente difetti
 > ancora aperti. Limiti attuali e ambito di accettazione nel [report I22](reports/i22-report.md).
 > Nessun requisito futuro viene riattivato da questo censimento storico.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
 > Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
@@ -12,7 +18,7 @@
 
 # Debito tecnico e rischi
 
-**Interpretazione aggiornata dalle risposte:** priorità corrente su debug, sessioni/reconnect, timer multiplayer, log completi e CLI I26; Elo rinviato. Le discrepanze si valutano contro il regolamento vigente 1.3/R00, che supera la vecchia baseline Q03. PostgreSQL può essere sostituito Q02; 20+2 e tetti copie non sono requisiti correnti Q08. Email obbligatoria, admin, Phaser e hosting sono successivi. Le evidenze tecniche sotto rimangono valide, ma le proposte originarie vanno lette attraverso questa priorità. Fonte: [decisioni del proprietario](open-questions.md); [roadmap aggiornata](roadmap.md).
+**Lettura corrente:** il censimento sotto è storico; debug, sessioni/reconnect, timer multiplayer, log completi e CLI I26 sono acquisiti nella base I22. Non costituiscono debito ancora aperto. Elo e sviluppi successivi restano differiti; per lo stato effettivo vedere [I22](reports/i22-report.md) e [preparazione client](client-roadmap-preparation.md).
 
 Analisi statica del 23 ottobre 2026. **V** = evidenza verificata; **D** = impatto dedotto da confermare; **M** = verifica mancante. Nessuna correzione applicata. Priorità relative: **P0** da risolvere prima di esporre il servizio a utenti non fidati; **P1** blocca affidabilità o percorsi fondamentali; **P2** incide su manutenzione, capacità e osservabilità. Non sono dichiarate vulnerabilità CVE né sfruttamenti dimostrati.
 
@@ -74,7 +80,7 @@ Analisi statica del 23 ottobre 2026. **V** = evidenza verificata; **D** = impatt
 | Deployment | [server.js](../bm-web-client/server.js) ha host fissi, upstream ws non cifrato e nessun fallback SPA/upgrade esplicito; origine server fissa nel profilo Heroku. Routing remoto non verificato. |
 | Documentazione/regole | Catalogo, regolamento e codice divergono; non esiste una fonte normativa riconosciuta. Dettagli in [game-rules.md](game-rules.md). |
 
-## Ordine storico suggerito prima degli incrementi (superato dalla roadmap corrente)
+## Ordine storico suggerito prima degli incrementi (superato dalla base I22 conclusa)
 
 1. Recuperare DDL/configurazione e riprodurre build/bootstrap con versioni concordate; verificare mapping JPA e provider Angular.
 2. Chiudere autorizzazione su comandi/sottoscrizioni e validare input/identità lato server, con test negativi.

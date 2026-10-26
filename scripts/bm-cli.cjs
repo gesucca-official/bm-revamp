@@ -14,6 +14,7 @@ class Client {
     this.closed = false; this.failure = null;
     this.url = url; this.user = user; this.password = password; this.timeout = timeout;
     this.events = []; this.waiters = []; this.subs = new Map();
+    this.receipts = new Map(); this.subscriptionSequence = 0;
   }
   event(destination, body) {
     let data; try { data = JSON.parse(body); } catch (_) { data = body; }
@@ -35,14 +36,34 @@ class Client {
     if (!valid) throw new Error('Login rejected');
     this.socket = new SockJS(this.url + '/ws/v1');
     this.stomp = Stomp.over(this.socket); this.stomp.debug = () => {};
+    this.stomp.onreceipt = frame => {
+      const ready = this.receipts.get(frame.headers['receipt-id']);
+      if (ready) ready();
+    };
     await new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error('CONNECT timeout')), this.timeout);
-      this.stomp.connect({login: this.user, passcode: this.password}, () => {clearTimeout(timer); resolve();}, () => {clearTimeout(timer); this.failure = new Error('STOMP connection failed'); for (const wake of this.waiters.splice(0)) wake(); reject(this.failure);});
+      this.stomp.connect({login: this.user, passcode: this.password}, () => {clearTimeout(timer); resolve();}, () => {clearTimeout(timer); this.failure = new Error('STOMP connection failed'); for (const ready of this.receipts.values()) ready(this.failure); for (const wake of this.waiters.splice(0)) wake(); reject(this.failure);});
     });
-    for (const d of ['/user/queue/account/data', '/user/queue/account/error', '/user/queue/illegalMove', '/user/queue/game/open/1vCom/error']) this.subscribe(d);
+    for (const d of ['/user/queue/account/data', '/user/queue/account/error', '/user/queue/illegalMove', '/user/queue/game/open/1vCom/error']) await this.subscribe(d);
   }
   subscribe(destination) {
-    if (!this.subs.has(destination)) this.subs.set(destination, this.stomp.subscribe(destination, frame => this.event(destination, frame.body)));
+    if (!this.subs.has(destination)) {
+      const receipt = 'subscription-' + (++this.subscriptionSequence);
+      const ready = new Promise((resolve, reject) => {
+        const timer = setTimeout(() => {
+          this.receipts.delete(receipt); reject(new Error('Subscription timeout'));
+        }, this.timeout);
+        this.receipts.set(receipt, error => {
+          clearTimeout(timer); this.receipts.delete(receipt);
+          if (error) reject(error); else resolve();
+        });
+      });
+      // Also support callers that subscribe now and await readiness in command().
+      ready.catch(() => {});
+      this.subs.set(destination, ready);
+      this.stomp.subscribe(destination, frame => this.event(destination, frame.body), {receipt});
+    }
+    return this.subs.get(destination);
   }
   send(destination, data) {
     if (this.closed || this.failure) throw new Error("Connection closed");
@@ -63,80 +84,74 @@ class Client {
       });
     }
   }
+  async read(destination, request, mark) {
+    // Read requests are idempotent: recover one lost reply within the deadline.
+    const until = Date.now() + this.timeout;
+    this.send(request);
+    try { return await this.wait(destination, mark, Math.min(1000, this.timeout)); }
+    catch (error) {
+      if (error.message !== 'Event timeout' || this.closed || this.failure || Date.now() >= until) throw error;
+      this.send(request);
+      return this.wait(destination, mark, Math.max(1, until - Date.now()));
+    }
+  }
   async command(c) {
     if (!c || typeof c !== 'object') throw new Error('Invalid command');
+    await Promise.all(this.subs.values());
     const mark = this.events.length, u = this.user;
     switch (c.command) {
       case 'resume': {
-        const d = '/user/queue/session/resume'; this.subscribe(d);
-        // SUBSCRIBE and SEND may be handled by different server workers. A fast
-        // reply can precede subscription registration. Resume is idempotent;
-        // retry the read once inside the original deadline, never a move.
-        const until = Date.now() + this.timeout;
-        this.send('/app/session/resume');
-        try { return await this.wait(d, mark, Math.min(1000, this.timeout)); }
-        catch (error) {
-          if (error.message !== 'Event timeout' || this.closed || this.failure || Date.now() >= until) throw error;
-          this.send('/app/session/resume'); return this.wait(d, mark, Math.max(1, until - Date.now()));
-        }
+        const d = '/user/queue/session/resume'; await this.subscribe(d);
+        return this.read(d, '/app/session/resume', mark);
       }
       case 'leave-queue': case 'logout': {
         const action = c.command === 'logout' ? 'logout' : 'queue/leave';
-        const d = '/user/queue/session/' + action; this.subscribe(d);
+        const d = '/user/queue/session/' + action; await this.subscribe(d);
         this.send('/app/session/' + action); return this.wait(d, mark);
       }
-      case 'profile': this.send('/app/user/' + u + '/account'); return this.wait('/user/queue/account/data', mark);
+      case 'profile': return this.read('/user/queue/account/data', '/app/user/' + u + '/account', mark);
       case 'save': case 'delete':
         this.send('/app/user/' + u + '/deck' + (c.command === 'delete' ? '/delete' : ''), c.deck);
         return this.wait('/user/queue/account/data', mark);
       case 'join': {
         if (!['quick/1vCom', 'quick/1v1', 'quick/ffa', 'open/1vCom'].includes(c.mode)) throw new Error('Unknown mode');
         const d = (c.mode.includes('Com') || c.mode === 'quick/1v1' || c.mode === 'quick/ffa' ? '/user/queue' : '/topic') + '/game/' + c.mode + '/ready';
-        this.subscribe(d);
-        if (c.mode === 'quick/ffa') this.subscribe('/topic/game/quick/ffa/joined');
+        await this.subscribe(d);
+        if (c.mode === 'quick/ffa') await this.subscribe('/topic/game/quick/ffa/joined');
         this.send('/app/game/' + c.mode + '/join' + (c.mode === 'open/1vCom' ? '/' + u + '/' + c.deckId : ''), u);
         return {joined: c.mode};
       }
       case 'watch':
-        for (const d of ['/user/queue/game/' + c.gameId + '/view', '/topic/game/' + c.gameId + '/update', '/topic/game/' + c.gameId + '/move', '/user/queue/game/' + c.gameId + '/leave']) this.subscribe(d);
+        for (const d of ['/user/queue/game/' + c.gameId + '/view', '/topic/game/' + c.gameId + '/update', '/topic/game/' + c.gameId + '/move', '/user/queue/game/' + c.gameId + '/leave']) await this.subscribe(d);
         return {watching: c.gameId};
       case 'view': {
-        const d = '/user/queue/game/' + c.gameId + '/view'; this.subscribe(d);
-        // Like resume, this read may beat a newly registered subscription.
-        // Retry once within the original deadline; never repeat a game action.
-        const until = Date.now() + this.timeout;
-        const request = '/app/game/' + c.gameId + '/' + u + '/view';
-        this.send(request);
-        try { return await this.wait(d, mark, Math.min(1000, this.timeout)); }
-        catch (error) {
-          if (error.message !== 'Event timeout' || this.closed || this.failure || Date.now() >= until) throw error;
-          this.send(request); return this.wait(d, mark, Math.max(1, until - Date.now()));
-        }
+        const d = '/user/queue/game/' + c.gameId + '/view'; await this.subscribe(d);
+        return this.read(d, '/app/game/' + c.gameId + '/' + u + '/view', mark);
       }
       case 'export': {
-        const d = '/user/queue/archive/' + c.gameId + '/export'; this.subscribe(d);
+        const d = '/user/queue/archive/' + c.gameId + '/export'; await this.subscribe(d);
         this.send('/app/archive/' + c.gameId + '/export'); return this.wait(d, mark);
       }
       case 'move': this.send('/app/game/' + c.move.gameId + '/move', c.move); return {sent: true};
       case 'leave': {
-        const d = '/user/queue/game/' + c.gameId + '/leave'; this.subscribe(d);
+        const d = '/user/queue/game/' + c.gameId + '/leave'; await this.subscribe(d);
         this.send('/app/game/' + c.gameId + '/' + u + '/leave'); return this.wait(d, mark);
       }
       case 'start': this.send('/app/game/quick/ffa/start'); return {sent: true};
       case 'add-bot': this.send('/app/game/quick/ffa/join/com'); return {sent: true};
-      case 'subscribe': this.subscribe(c.destination); return {subscribed: c.destination};
+      case 'subscribe': await this.subscribe(c.destination); return {subscribed: c.destination};
       case 'send': this.send(c.destination, c.data); return {sent: true};
       case 'wait': return this.wait(c.destination, c.after === undefined ? 0 : c.after, c.timeout);
       default: throw new Error('Unknown command');
     }
   }
   drop() {
-    this.closed = true;
+    this.closed = true; for (const ready of this.receipts.values()) ready(new Error('Connection closed'));
     for (const wake of this.waiters.splice(0)) wake();
     if (this.socket) this.socket.close();
   }
   async close() {
-    this.closed = true; for (const wake of this.waiters.splice(0)) wake();
+    this.closed = true; for (const ready of this.receipts.values()) ready(new Error('Connection closed')); for (const wake of this.waiters.splice(0)) wake();
     if (!this.socket) return;
     await new Promise(resolve => {
       const timer = setTimeout(resolve, 500);

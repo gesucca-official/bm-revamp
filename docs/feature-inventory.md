@@ -1,3 +1,9 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 ## Stato corrente della base — I22, 26 ottobre 2026
 
 Questa sintesi sostituisce gli stati delle ricognizioni storiche sottostanti;
@@ -23,7 +29,7 @@ le prove e i limiti sono nei report collegati dalla roadmap.
 
 > I16, 25 ottobre 2026: open 1vCom completato con due mazzi salvati distinti via CLI fino a esito/export, configurazioni runtime e isolamento dopo modifica/delete verificati; rifiuto assente/altrui e UX scelta/errori nel debug. I13/I15/I26 riverificati. 219 server + 21 client ordinari, 281 server nel contesto separato, check-rules verde. Regolamento 1.4 invariato. [Report e limiti](reports/i16-report.md). Le sezioni datate precedenti restano storiche.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
 > Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
@@ -35,11 +41,11 @@ le prove e i limiti sono nei report collegati dalla roadmap.
 
 **Evidenza aggiornata I01:** artefatti server/client prodotti con toolchain fissata; [report I01](reports/i01-report.md). Il test di contesto parte ma fallisce per configurazione DB assente; suite client e comportamento applicativo restano non verificati. La ricognizione iniziale qui sotto resta tracciabile come baseline precedente.
 
-Rilevazione del 23 ottobre 2026. Base: [verification-report.md](reports/verification-report.md), [implementation-status.md](implementation-status.md), lettura dei controller, modelli, servizi, menu e configurazioni delle due repository. Non sono state eseguite nuove build o modifiche applicative per questo inventario. La roadmap descrive lavoro futuro, non risultati raggiunti.
+Rilevazione del 23 ottobre 2026. Base: [verification-report.md](reports/verification-report.md), [implementation-status.md](implementation-status.md), lettura dei controller, modelli, servizi, menu e configurazioni delle due repository. Non sono state eseguite nuove build o modifiche applicative per questo inventario. La roadmap della base è ora archiviata come completata; le tabelle datate sotto conservano il censimento originario, salvo aggiornamenti espliciti.
 
-## Perimetro aggiornato dal proprietario
+## Perimetro della base conclusa e censimento storico
 
-Le [risposte Q01–Q18 e i residui R01–R08](open-questions.md) definiscono il lavoro futuro, senza modificare gli esiti delle verifiche. Scope corrente: debug locale, tutte le quattro modalità esistenti, regolamento 1.3 come fonte normativa, mazzi senza limiti di legalità, bot casuale, log completi, sessione unica, reconnect sul processo vivo, 30 s per mossa nei match con altri umani e forfait, restart→draw senza restore; CLI F39 da realizzare in I26. Elo F38 rinviato. Rinviati email obbligatoria, amministrazione, Phaser, client finali, economia e hosting pubblico.
+Le [risposte Q01–Q18 e i residui R01–R08](open-questions.md) definiscono il lavoro futuro, senza modificare gli esiti delle verifiche. Perimetro acquisito in I22: debug locale, tutte le quattro modalità esistenti, regolamento 1.6 come fonte normativa, mazzi senza limiti di legalità, bot casuale, log completi, sessione unica, reconnect sul processo vivo, 30 s per mossa nei match con altri umani e forfait, restart→draw senza restore; CLI F39 completata in I26. Elo F38 rinviato. Rinviati email obbligatoria, amministrazione, Phaser, client finali, economia e hosting pubblico.
 
 DB-E nelle colonne indica PostgreSQL **nel legacy**, non una scelta futura: Q02 permette di sostituirlo ricostruendo schema e dati disponibili. Q01 consente ogni stack/versione, senza imporre una riscrittura. Q03 richiede caratterizzazione del comportamento corrente, non modifiche automatiche degli effetti per allinearli ai testi. Q08 toglie limiti di legalità dei mazzi, non integrità strutturale, binding validi o titolarità. Tutti gli stati implementativi restano invariati.
 
@@ -134,7 +140,7 @@ F31/F32 sono ora richieste nel perimetro corrente; F33–F37 sono differite o no
 | ID / descrizione e comportamento atteso | Stato reale e fonte | Componenti | Dipendenze | Problemi / decisioni aperte | Completata quando | Test necessari |
 |---|---|---|---|---|---|---|
 | F38 — Rating Elo per account | Assente nel codice censito; differito il 24 ottobre 2026, escluso dalla base | S, storage scelto, C debug per lettura minima | F06/F24/F27; R08 | Rating iniziale/K, modalità classificate, bot, FFA, forfait e draw tecnici non specificati | Ogni esito ammesso aggiorna una sola volta rating persistito secondo formula approvata, consultabile; niente doppio conteggio dopo retry/restart | Casi numerici noti vittoria/draw/forfait, FFA se incluso, concorrenza, duplicati, restart, inizializzazione e rilettura |
-| F39 — CLI testuale minimo per test automatici non UX | Da realizzare; nessun client CLI implementato da questa revisione | Runtime già fissato, trasporto REST/STOMP/SockJS, runner esistenti; nessun browser | I01–I11 acquisiti; I26 prossimo | Overhead minimo, nessun framework grafico; estensioni lifecycle nei rispettivi incrementi | Comandi terminale/file/stdin e output strutturato, exit code/attese limitate, multiaccount reale, guida ripetibile; ingresso degli scenari applicativi automatici non UX | Ripetere vista/mossa I09 e round I10, errori e isolamento; misurare avvio/memoria/dipendenze; poi quattro modalità e ciclo di vita |
+| F39 — CLI testuale minimo per test automatici non UX | Completato in I26 e acquisito nella base I22; [guida](cli.md), [report](reports/i26-report.md) | Runtime già fissato, trasporto REST/STOMP/SockJS, runner esistenti; nessun browser | I01–I11 e I26 acquisiti; base I22 conclusa | Overhead minimo, nessun framework grafico; estensioni lifecycle nei rispettivi incrementi | Comandi terminale/file/stdin e output strutturato, exit code/attese limitate, multiaccount reale, guida ripetibile; ingresso degli scenari applicativi automatici non UX | Ripetere vista/mossa I09 e round I10, errori e isolamento; misurare avvio/memoria/dipendenze; poi quattro modalità e ciclo di vita |
 
 ## Strategia di riuso
 

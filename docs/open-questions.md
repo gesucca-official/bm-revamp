@@ -1,3 +1,9 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 > Stato corrente I22, 26 ottobre 2026: candidato `I22-3e71300e057687ba`
 > verificato e approvato esplicitamente dal proprietario insieme ai limiti del
 > [report I22](reports/i22-report.md); [registrazione](reports/i22-approval.json).
@@ -10,7 +16,7 @@
 
 > Stato 25 ottobre 2026: R02/R04 risolte e recepite nel regolamento 1.5 prima del codice. I14/I23 implementati e verificati: clock mossa continuo, confine escluso, forfait simultanei dei soli scaduti in FFA e rientro 30 s anche vsCom. [Chiarimenti sotto](#chiarimenti-del-proprietario--i14i23-25-ottobre-2026), [report](reports/i14-i23-report.md), [roadmap](roadmap.md). Le indicazioni datate precedenti sono storiche; I19b/I24/I19c restano aperti.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
 ## Decisione aggiuntiva Q06/R02 - finestra di rientro
 
@@ -53,13 +59,13 @@ Le formulazioni nella colonna “Risposta” riprendono le risposte del propriet
 
 ## Revisione del proprietario — 24 ottobre 2026
 
-La richiesta corrente prevale sulla precedente Q18: rimuovere Elo dalla base e rinviarlo. Aggiungere I26/F39, CLI testuale con overhead minimo, come prossimo incremento e ingresso standard per tutti gli scenari automatici applicativi senza UX; conservare unit e integrazioni dirette e prove client esistenti. Browser/debug per UX. Conservare I01–I11, ridefinire i residui e chiudere con una base approvata in I22, senza nuovi sviluppi in questa modifica.
+La decisione del 24 ottobre, conservata qui come storico, ha rinviato Elo e introdotto I26/F39, ora completato, come ingresso standard per tutti gli scenari automatici applicativi senza UX; conservare unit e integrazioni dirette e prove client esistenti. Browser/debug per UX. Conservare I01–I11, ridefinire i residui e chiudere con una base approvata in I22, senza nuovi sviluppi in questa modifica.
 
 R01 provisioning è risolto da I05; R02 ha finestra reconnect 30 s già decisa, resta il rapporto con il clock mossa. R03–R06 restano da precisare prima dei relativi incrementi; R07 e il residuo Elo R08 sono futuri. Questi ID di domande non sono le sezioni omonime del regolamento. La vecchia Q03 è superata dal regolamento normativo 1.3/R00.
 
-## Perimetro corrente
+## Perimetro storico della base (conclusa)
 
-Versione base locale da approvare, client debug e CLI I26 per automazione non UX, identità account minima con sessione unica, quattro modalità già esposte, regolamento 1.3 come fonte normativa, mazzi senza limiti di legalità di gioco, bot casuale, raccolta completa dei dati di partita, reconnect sul processo vivo, 30 secondi per mossa nei match con altri umani e forfait, restart→draw senza restore; Elo rinviato.
+Versione base locale approvata in I22, client debug e CLI I26 completato per automazione non UX, identità account minima con sessione unica, quattro modalità già esposte, regolamento 1.6 come fonte normativa, mazzi senza limiti di legalità di gioco, bot casuale, raccolta completa dei dati di partita, reconnect sul processo vivo, 30 secondi per mossa nei match con altri umani e forfait, restart→draw senza restore; Elo rinviato.
 
 Rinviati: email obbligatoria e recupero account completo, amministrazione, completamento Phaser, client desktop/web/mobile finali, set definitivo e bilanciamento, collezione posseduta/economia, ranking avanzato/premi/replay e hosting pubblico. Un requisito deciso resta assente/parziale finché non implementato e verificato.
 

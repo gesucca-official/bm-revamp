@@ -75,3 +75,9 @@ approvato e degli artefatti/evidenze locali:
 Tutti i diritti riservati, come nei repository originali. Non è stata concessa
 una licenza open source; codice, illustrazioni e materiali di gioco non ricevono
 nuovi permessi di utilizzo con questa pulizia.
+
+## Roadmap
+
+La roadmap della base è [archiviata come completata](docs/roadmap.md).
+La [preparazione della roadmap client](docs/client-roadmap-preparation.md)
+raccoglie le decisioni da concordare; non è un piano di implementazione.

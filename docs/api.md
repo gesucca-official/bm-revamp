@@ -1,3 +1,9 @@
+> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
+> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
+> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
+> restano storico, non attività correnti. La nuova roadmap client è ancora
+> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+
 > Riferimento corrente I22: regolamento 1.6; contratto delle quattro modalità,
 > identità/sessione unica, mazzi, export, clock/forfait/reconnect e ricevuta restart
 > consolidato nelle sezioni I24/I14/I23/I19b qui sotto e in [cli.md](cli.md).
@@ -39,7 +45,7 @@ Un join mentre esiste una partita da riprendere/lasciare è rifiutato, senza cre
 
 SEND `/app/archive/{gameId}/export`; SUBSCRIBE `/user/queue/archive/{gameId}/export`. Entrambi richiedono identità umana partecipante ed esito raggiunto. Risposta JSON descritta in [match-archive.md](match-archive.md), disponibile anche dopo la rimozione della sessione di gioco, da dati persistiti. Le viste di gioco restano private e non mostrano l'ordine dei mazzi. Non esiste endpoint anonimo o bypass fixture; l'export non dipende dal pannello admin. Gli errori del controller sono generici su `/user/queue/account/error`; le violazioni della policy possono chiudere il trasporto. Le API amministrative legacy LOG001 restano separate: non esportano né eliminano LOG003.
 
-> Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.
+> La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
 ## Contratto pianificato del CLI I26 (non implementato)
 
