@@ -93,3 +93,7 @@ Prove ripetibili nel contesto separato: `QuickFfaCliTest` usa `scripts/cli-quick
 `ArchiveLifecycleCliTest` usa `scripts/cli-archive-lifecycle-test.cjs`: dodici scenari reali REST/SockJS/STOMP (quattro modalità × leave/reconnect, timeout, recupero guasto). Il runner controlla clock e guasti storage, senza endpoint di bypass. Confronta la sequenza completa attesa, risorse dopo il round, batch forfait, pending dopo resume, hash/byte prima e dopo recupero e export uguali per ogni umano dopo leave ripetuto. Il comando export e lo schema JSON 1 rimangono quelli di I19a; non serve un nuovo comando amministrativo per il retry. Le prove complete e i limiti sono nel [report I19b](reports/i19b-report.md).
 
 La lettura `resume` può essere ritentata una sola volta dalla CLI se non riceve la prima risposta, entro il timeout originale. È idempotente; non vengono reinviate mosse. I19b scarta deliberatamente una prima risposta in ciascuna delle quattro modalità e verifica che rimangano un solo RECONNECTED e la stessa pending.
+
+La lettura `view`, come `resume`, ripete al massimo una richiesta se la prima
+risposta precede la registrazione della sottoscrizione STOMP. Il retry resta
+nel timeout originale; le azioni di gioco non vengono reinviate.

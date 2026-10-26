@@ -1,2 +1,5 @@
 # Preserve the original mixed line endings and candidate hashes on every checkout.
 * -text
+
+# Historical files uses mixed line endings; keep whitespace checks useful.
+* whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

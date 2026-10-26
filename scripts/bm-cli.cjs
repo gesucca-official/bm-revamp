@@ -102,7 +102,16 @@ class Client {
         return {watching: c.gameId};
       case 'view': {
         const d = '/user/queue/game/' + c.gameId + '/view'; this.subscribe(d);
-        this.send('/app/game/' + c.gameId + '/' + u + '/view'); return this.wait(d, mark);
+        // Like resume, this read may beat a newly registered subscription.
+        // Retry once within the original deadline; never repeat a game action.
+        const until = Date.now() + this.timeout;
+        const request = '/app/game/' + c.gameId + '/' + u + '/view';
+        this.send(request);
+        try { return await this.wait(d, mark, Math.min(1000, this.timeout)); }
+        catch (error) {
+          if (error.message !== 'Event timeout' || this.closed || this.failure || Date.now() >= until) throw error;
+          this.send(request); return this.wait(d, mark, Math.max(1, until - Date.now()));
+        }
       }
       case 'export': {
         const d = '/user/queue/archive/' + c.gameId + '/export'; this.subscribe(d);
