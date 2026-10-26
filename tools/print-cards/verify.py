@@ -20,7 +20,7 @@ def main():
     p.add_argument('pdf', nargs='?', type=Path, default=ROOT/'output/pdf/botte-micidiali-carte.pdf')
     a = p.parse_args()
     data = json.loads(a.pdf.with_suffix('.manifest.json').read_text(encoding='utf-8'))
-    cards, _, _, regular, initial = load_catalog(ROOT/'bm-server/src/main/resources/cards.sqlite', ROOT/'docs/game-rules.md', ROOT/'docs/rules-catalog.json')
+    cards, _, _, regular, initial = load_catalog(ROOT/'server/src/main/resources/cards.sqlite', ROOT/'docs/game-rules.md', ROOT/'docs/rules-catalog.json')
     reader = PdfReader(a.pdf)
     assert len(reader.pages) == data['total_pages']
     assert len(cards) == data['catalog_count']

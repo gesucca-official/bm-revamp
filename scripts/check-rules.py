@@ -5,7 +5,7 @@ import sqlite3
 
 root = Path(__file__).resolve().parent.parent
 canonical = root / 'docs/game-rules.md'
-assert canonical.read_text(encoding='utf-8-sig') == (root / 'bm-web-client/src/assets/docs/rules.md').read_text(encoding='utf-8-sig'), 'Client rules differ'
+assert canonical.read_text(encoding='utf-8-sig') == (root / 'client-debug/src/assets/docs/rules.md').read_text(encoding='utf-8-sig'), 'Client rules differ'
 expected = json.loads((root / 'docs/rules-catalog.json').read_text(encoding='utf-8'))
 assert 'Versione **' + expected['version'] + ' —' in canonical.read_text(encoding='utf-8-sig'), 'Annex version differs'
 rows = {}
@@ -32,7 +32,7 @@ for card in expected['cards']:
         assert len(row) == 7
         costs = '' if row[3] == '—' else ','.join(cost_names[v.split()[1]] + '=' + v.split()[0] for v in row[3].split(' + '))
         contracts.append('\t'.join([card['class'], row[4].replace('−', '-'), target_names[row[5]], costs]))
-assert '\n'.join(contracts) + '\n' == (root / 'bm-server/src/test/resources/rules-v1-cards.tsv').read_text(encoding='utf-8'), 'Test contract differs from R07'
+assert '\n'.join(contracts) + '\n' == (root / 'server/src/test/resources/rules-v1-cards.tsv').read_text(encoding='utf-8'), 'Test contract differs from R07'
 for character in expected['characters']:
     row = rows[character['class'].split('.')[-1]]
     assert row[1:3] == [character['type'], character['name']], 'Character missing or misclassified in R07'
@@ -40,9 +40,9 @@ for token in expected['tokens']:
     assert rows[token['class'].split('.')[-1]][1:3] == [token['type'], token['subtype']], 'Token classification differs'
 entries = expected['cards'] + expected['characters'] + expected['tokens']
 types = ['\t'.join([entry['class'], entry['type'], entry.get('subtype', '—')]) for entry in entries]
-assert '\n'.join(types) + '\n' == (root / 'bm-server/src/test/resources/rules-card-types.tsv').read_text(encoding='utf-8'), 'Type test contract differs'
+assert '\n'.join(types) + '\n' == (root / 'server/src/test/resources/rules-card-types.tsv').read_text(encoding='utf-8'), 'Type test contract differs'
 assert len(expected['cards']) == 37 and len(expected['characters']) == 2 and len(expected['tokens']) == 1, 'Set inventory differs'
-with sqlite3.connect((root / 'bm-server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
+with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
     actual = [{'class': r[0], 'name': r[1], 'description': r[2]} for r in db.execute(
         'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION from CRD001_GUI order by C_REF_CLASS')]
     assert actual == [{key: card[key] for key in ('class', 'name', 'description')} for card in expected['cards']], 'Card catalog differs from regulation annex'

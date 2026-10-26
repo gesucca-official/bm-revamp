@@ -220,7 +220,7 @@ def draw_card(pdf, card, x, y, width, height, number, version):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--database', type=Path, default=ROOT/'bm-server/src/main/resources/cards.sqlite')
+    parser.add_argument('--database', type=Path, default=ROOT/'server/src/main/resources/cards.sqlite')
     parser.add_argument('--rules', type=Path, default=ROOT/'docs/game-rules.md')
     parser.add_argument('--annex', type=Path, default=ROOT/'docs/rules-catalog.json')
     parser.add_argument('--output', type=Path, default=ROOT/'output/pdf/botte-micidiali-carte.pdf')

@@ -1,3 +1,8 @@
+> **Aggiornamento client — 26 ottobre 2026:** il client corrente è `client-debug/`,
+> con il solo percorso di gioco debug. Prototipo Phaser, route `/phaser`, selettore
+> grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
+> nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
+
 ## Stato corrente I22 — 26 ottobre 2026
 
 Candidato I22 verificato: 249 server + 28 client, contesto Spring separato 356
@@ -83,36 +88,36 @@ I04 completato: bootstrap browser, Markdown, home/hub/sign-up, wildcard e access
 
 | Funzione | Stato | Evidenza e limite |
 |---|---|---|
-| Registrazione con email | Parziale | [AuthServiceImpl.sendVerificationEmail/completeRegistration](../bm-server/src/main/java/com/gsc/bm/service/session/AuthServiceImpl.java) genera codice e salva BCrypt; [SignUpComponent](../bm-web-client/src/app/connection/sign-up/sign-up.component.ts) ha URL disponibilità senza `/rest`. Codice non legato all'email, nessuna scadenza/tetto tentativi nel servizio. SMTP non provato. |
-| Login | Presente, robustezza parziale | [UserLogInController](../bm-server/src/main/java/com/gsc/bm/api/rest/users/UserLogInController.java) verifica e restituisce booleano; CONNECT riverifica credenziali. Controllo doppio login solo in preflight REST, non nel CONNECT. |
-| Autorizzazione account/partita | Parziale critica | [UserController](../bm-server/src/main/java/com/gsc/bm/api/ws/UserController.java) e [GameController](../bm-server/src/main/java/com/gsc/bm/api/ws/GameController.java) accettano identità richieste senza confronto principal; STOMP permitAll. |
-| Presenza e attività | Presente, gestione disconnessione parziale | [ConnectionsServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/ConnectionsServiceImpl.java) conserva e trasmette utenti; disconnect restituisce login dall'header anziché dall'utente trovato tramite sessionId. |
-| Quick 1vCom | Presente staticamente | [GameFactoryServiceImpl.craftQuick1vComGame](../bm-server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java), join nel client; partita reale non verificata. |
-| Quick 1v1 / FFA | Presente, code parziali | [QueueServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/QueueServiceImpl.java): 2/5 posti, FFA forzabile da 2; nessuna deduplicazione join. Controller permette aggiunta bot/avvio senza verificare appartenenza. |
-| Open 1vCom | Presente, persistenza non verificata | [PlayerFactoryServiceImpl.craftOpenPlayer](../bm-server/src/main/java/com/gsc/bm/service/factories/PlayerFactoryServiceImpl.java) ricostruisce mazzo utente; mapping PK mazzi incoerente. |
-| Open multiplayer | Non rilevato | [OpenGameQueuesController](../bm-server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java) e menu [choose-game.component.html](../bm-web-client/src/app/connection/choose-game/choose-game.component.html) espongono solo 1vCom. |
-| Motore turni simultanei | Presente, validazione parziale | [Game.resolveMoves](../bm-server/src/main/java/com/gsc/bm/model/game/Game.java); [Move.isValidFor](../bm-server/src/main/java/com/gsc/bm/model/game/Move.java) non verifica tutti i target/invarianti. |
-| Bot | Presente, casuale | [ComPlayer.chooseMove](../bm-server/src/main/java/com/gsc/bm/model/game/ComPlayer.java) prova carte casuali, seleziona un target, verifica mossa; nessuna strategia/ricerca delle migliori mosse. |
-| Danni, risorse, stati, timer | Presente con anomalie | [Character](../bm-server/src/main/java/com/gsc/bm/model/Character.java), [Status](../bm-server/src/main/java/com/gsc/bm/model/game/status/Status.java); vedi [regole](game-rules.md). |
+| Registrazione con email | Parziale | [AuthServiceImpl.sendVerificationEmail/completeRegistration](../server/src/main/java/com/gsc/bm/service/session/AuthServiceImpl.java) genera codice e salva BCrypt; [SignUpComponent](../client-debug/src/app/connection/sign-up/sign-up.component.ts) ha URL disponibilità senza `/rest`. Codice non legato all'email, nessuna scadenza/tetto tentativi nel servizio. SMTP non provato. |
+| Login | Presente, robustezza parziale | [UserLogInController](../server/src/main/java/com/gsc/bm/api/rest/users/UserLogInController.java) verifica e restituisce booleano; CONNECT riverifica credenziali. Controllo doppio login solo in preflight REST, non nel CONNECT. |
+| Autorizzazione account/partita | Parziale critica | [UserController](../server/src/main/java/com/gsc/bm/api/ws/UserController.java) e [GameController](../server/src/main/java/com/gsc/bm/api/ws/GameController.java) accettano identità richieste senza confronto principal; STOMP permitAll. |
+| Presenza e attività | Presente, gestione disconnessione parziale | [ConnectionsServiceImpl](../server/src/main/java/com/gsc/bm/service/session/ConnectionsServiceImpl.java) conserva e trasmette utenti; disconnect restituisce login dall'header anziché dall'utente trovato tramite sessionId. |
+| Quick 1vCom | Presente staticamente | [GameFactoryServiceImpl.craftQuick1vComGame](../server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java), join nel client; partita reale non verificata. |
+| Quick 1v1 / FFA | Presente, code parziali | [QueueServiceImpl](../server/src/main/java/com/gsc/bm/service/session/QueueServiceImpl.java): 2/5 posti, FFA forzabile da 2; nessuna deduplicazione join. Controller permette aggiunta bot/avvio senza verificare appartenenza. |
+| Open 1vCom | Presente, persistenza non verificata | [PlayerFactoryServiceImpl.craftOpenPlayer](../server/src/main/java/com/gsc/bm/service/factories/PlayerFactoryServiceImpl.java) ricostruisce mazzo utente; mapping PK mazzi incoerente. |
+| Open multiplayer | Non rilevato | [OpenGameQueuesController](../server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java) e menu [choose-game.component.html](../client-debug/src/app/connection/choose-game/choose-game.component.html) espongono solo 1vCom. |
+| Motore turni simultanei | Presente, validazione parziale | [Game.resolveMoves](../server/src/main/java/com/gsc/bm/model/game/Game.java); [Move.isValidFor](../server/src/main/java/com/gsc/bm/model/game/Move.java) non verifica tutti i target/invarianti. |
+| Bot | Presente, casuale | [ComPlayer.chooseMove](../server/src/main/java/com/gsc/bm/model/game/ComPlayer.java) prova carte casuali, seleziona un target, verifica mossa; nessuna strategia/ricerca delle migliori mosse. |
+| Danni, risorse, stati, timer | Presente con anomalie | [Character](../server/src/main/java/com/gsc/bm/model/Character.java), [Status](../server/src/main/java/com/gsc/bm/model/game/status/Status.java); vedi [regole](game-rules.md). |
 | Catalogo carte/personaggi | Presente | SQLite verificato: 37 carte, 2 personaggi; factory caricano effetti dal codice e GUI dal DB. |
-| Collezione personale | Semplificazione esplicita | [UserAccountServiceImpl.getUserCardCollection](../bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java): “for now everyone has all the cards”; nessun possesso individuale persistito. |
-| Editor e salvataggio mazzi | Parziale | [EditDeckComponent](../bm-web-client/src/app/user-hub/collection/edit-deck/edit-deck.component.ts), servizio account; validazione solo UI, nessun limite copie, mapping JPA da verificare. |
-| Gioco debug | Presente staticamente | [DebugClientComponent](../bm-web-client/src/app/client-debug/debug-client.component.ts) mostra report e chiama leave a fine partita; [CardInHandComponent](../bm-web-client/src/app/client-debug/card-in-hand/card-in-hand.component.ts) costruisce scarto/target item. Nessun test browser. |
-| Gioco Phaser | Parziale | [BattleScene](../bm-web-client/src/app/client-phaser/scnenes/battle/battle-scene.ts): rendering/drag-drop/report, ma oggetti senza TARGET_ITEM e `playTimeBasedAnimation` privo di implementazione effettiva. |
-| Fine partita Phaser | Parziale | [PhaserClientComponent.viewUpdateCallback](../bm-web-client/src/app/client-phaser/phaser-client.component.ts) distrugge il gioco e pulisce lo stato, ma non invia leave/unsubscribe e continua nel ramo restart della scena. |
-| Recovery/resa/timeout | Non rilevato come flusso completo | [WebsocketService](../bm-web-client/src/app/service/websocket.service.ts), [PresenceEventListener](../bm-server/src/main/java/com/gsc/bm/api/ws/PresenceEventListener.java), servizio sessioni: nessuna procedura completa di riconnessione, resa o scadenza turno. |
-| Logging/amministrazione | Presente, incompleto | [GameLoggingServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/GameLoggingServiceImpl.java), controller log, pannello Angular; nessun test DB, ingestione client non autenticata e nessuna retention. |
+| Collezione personale | Semplificazione esplicita | [UserAccountServiceImpl.getUserCardCollection](../server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java): “for now everyone has all the cards”; nessun possesso individuale persistito. |
+| Editor e salvataggio mazzi | Parziale | [EditDeckComponent](../client-debug/src/app/user-hub/collection/edit-deck/edit-deck.component.ts), servizio account; validazione solo UI, nessun limite copie, mapping JPA da verificare. |
+| Gioco debug | Presente staticamente | [DebugClientComponent](../client-debug/src/app/client-debug/debug-client.component.ts) mostra report e chiama leave a fine partita; [CardInHandComponent](../client-debug/src/app/client-debug/card-in-hand/card-in-hand.component.ts) costruisce scarto/target item. Nessun test browser. |
+| Gioco Phaser | Parziale | [BattleScene](../client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts): rendering/drag-drop/report, ma oggetti senza TARGET_ITEM e `playTimeBasedAnimation` privo di implementazione effettiva. |
+| Fine partita Phaser | Parziale | [PhaserClientComponent.viewUpdateCallback](../client-debug/src/app/client-phaser/phaser-client.component.ts) distrugge il gioco e pulisce lo stato, ma non invia leave/unsubscribe e continua nel ramo restart della scena. |
+| Recovery/resa/timeout | Non rilevato come flusso completo | [WebsocketService](../client-debug/src/app/service/websocket.service.ts), [PresenceEventListener](../server/src/main/java/com/gsc/bm/api/ws/PresenceEventListener.java), servizio sessioni: nessuna procedura completa di riconnessione, resa o scadenza turno. |
+| Logging/amministrazione | Presente, incompleto | [GameLoggingServiceImpl](../server/src/main/java/com/gsc/bm/service/session/GameLoggingServiceImpl.java), controller log, pannello Angular; nessun test DB, ingestione client non autenticata e nessuna retention. |
 | Economia, trading, pacchetti, ranking | Non rilevato | Nessuna entità/repository/controller nel censimento oltre a utenti, mazzi, catalogo e log; non si assume che fossero richiesti. |
 
-**V:** esiste un logout UI: [ToolbarComponent.logOut](../bm-web-client/src/app/home/toolbar/toolbar.component.ts) chiede conferma e ricarica la pagina con `window.location.reload()`. Non invia un comando applicativo di logout o leave; il cleanup dipende dalla disconnessione del trasporto e dai limiti del server descritti sopra.
+**V:** esiste un logout UI: [ToolbarComponent.logOut](../client-debug/src/app/home/toolbar/toolbar.component.ts) chiede conferma e ricarica la pagina con `window.location.reload()`. Non invia un comando applicativo di logout o leave; il cleanup dipende dalla disconnessione del trasporto e dai limiti del server descritti sopra.
 
 ## Test e strumenti
 
-**V:** [BmServerApplicationTests.contextLoads](../bm-server/src/test/java/com/gsc/bm/BmServerApplicationTests.java) è l'unico test automatico trovato: metodo vuoto con `@SpringBootTest`, quindi controlla il caricamento del contesto se eseguito. Non copre regole, autorizzazione, contratti o persistenza con asserzioni dedicate.
+**V:** [BmServerApplicationTests.contextLoads](../server/src/test/java/com/gsc/bm/BmServerApplicationTests.java) è l'unico test automatico trovato: metodo vuoto con `@SpringBootTest`, quindi controlla il caricamento del contesto se eseguito. Non copre regole, autorizzazione, contratti o persistenza con asserzioni dedicate.
 
-**V:** [angular.json](../bm-web-client/angular.json) configura `skipTests` per gli schematics, non ha un target `test` e contiene un lint che cita `tsconfig.spec.json` ed `e2e/tsconfig.json`, assenti. [package.json](../bm-web-client/package.json) ha build/start/lint ma non test. La dipendenza Protractor non prova l'esistenza di una suite e2e.
+**V:** [angular.json](../client-debug/angular.json) configura `skipTests` per gli schematics, non ha un target `test` e contiene un lint che cita `tsconfig.spec.json` ed `e2e/tsconfig.json`, assenti. [package.json](../client-debug/package.json) ha build/start/lint ma non test. La dipendenza Protractor non prova l'esistenza di una suite e2e.
 
-**V:** [TestBattleSceneComponent](../bm-web-client/src/app/client-phaser/scnenes/battle/test-battle-scene/test-battle-scene.component.ts) contiene una vista JSON fissa e avvia la scena; è un componente dimostrativo, non un test con runner e asserzioni. È dichiarato nel modulo ma non ha route e il suo selector non risulta usato da altri template censiti: **D**, apparentemente scollegato dal percorso normale.
+**V:** [TestBattleSceneComponent](../client-debug/src/app/client-phaser/scnenes/battle/test-battle-scene/test-battle-scene.component.ts) contiene una vista JSON fissa e avvia la scena; è un componente dimostrativo, non un test con runner e asserzioni. È dichiarato nel modulo ma non ha route e il suo selector non risulta usato da altri template censiti: **D**, apparentemente scollegato dal percorso normale.
 
 **M:** test server e build client non completati per prerequisiti mancanti; esiti esatti in [setup.md](setup.md). Nessuna copertura percentuale disponibile.
 
@@ -122,14 +127,14 @@ I04 completato: bootstrap browser, Markdown, home/hub/sign-up, wildcard e access
 
 | Tema | Punti rilevati |
 |---|---|
-| Sicurezza | TODO “authenticate this” in [WebClientLogsController](../bm-server/src/main/java/com/gsc/bm/api/rest/panel/WebClientLogsController.java) |
-| Ciclo di vita | TODO sulla chiusura di un giocatore in coda in [GameSessionServiceImpl.newGame](../bm-server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java); sottoscrizione FFA mai annullata in [WebsocketService.joinGame](../bm-web-client/src/app/service/websocket.service.ts) |
-| Regole/validazione | TODO in [Move.isValidFor](../bm-server/src/main/java/com/gsc/bm/model/game/Move.java), target multipli in [ComPlayer.choseTarget](../bm-server/src/main/java/com/gsc/bm/model/game/ComPlayer.java), cattura output timer in [Character](../bm-server/src/main/java/com/gsc/bm/model/Character.java) |
+| Sicurezza | TODO “authenticate this” in [WebClientLogsController](../server/src/main/java/com/gsc/bm/api/rest/panel/WebClientLogsController.java) |
+| Ciclo di vita | TODO sulla chiusura di un giocatore in coda in [GameSessionServiceImpl.newGame](../server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java); sottoscrizione FFA mai annullata in [WebsocketService.joinGame](../client-debug/src/app/service/websocket.service.ts) |
+| Regole/validazione | TODO in [Move.isValidFor](../server/src/main/java/com/gsc/bm/model/game/Move.java), target multipli in [ComPlayer.choseTarget](../server/src/main/java/com/gsc/bm/model/game/ComPlayer.java), cattura output timer in [Character](../server/src/main/java/com/gsc/bm/model/Character.java) |
 | UI Phaser | Target item, dettagli durante drag, timeout dell'animazione scarto e globali window nei file Phaser citati |
 | Manutenibilità | Duplicazioni in ViewExtractor/DeckFactory, account monolitico da caricare, cache auth ipotizzata, riflessione con ritorno null |
 | Documentazione | Entrambi i README riportano TODO per una descrizione sensata del progetto |
 
-**V:** molti `applyEffectOnSelf` o `applyEffectOnTarget` ritornano null intenzionalmente; `AbstractCard.resolve` li trasforma in liste vuote. Non sono da classificare automaticamente come carte incompiute. Analogamente gli hook vuoti possono significare assenza di effetti aggiuntivi. [AbstractCard](../bm-server/src/main/java/com/gsc/bm/model/cards/AbstractCard.java).
+**V:** molti `applyEffectOnSelf` o `applyEffectOnTarget` ritornano null intenzionalmente; `AbstractCard.resolve` li trasforma in liste vuote. Non sono da classificare automaticamente come carte incompiute. Analogamente gli hook vuoti possono significare assenza di effetti aggiuntivi. [AbstractCard](../server/src/main/java/com/gsc/bm/model/cards/AbstractCard.java).
 
 **D:** casi realmente sospetti sono invece `SoberUp`, fuori catalogo e senza bersagli inizializzati, `Card.DeserializedCard.resolve` (DTO di input, non carta eseguibile) e `BattleScene.playTimeBasedAnimation` senza corpo operativo. Si distinguono ruoli dei DTO, codice non raggiunto e funzionalità UI incompleta; non si deduce una feature dal solo nome.
 

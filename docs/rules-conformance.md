@@ -62,7 +62,7 @@ Il regolamento corrente e **1.1**. L'eccezione degli stati condivisi conservata 
 | R07 | 33 casi dinamici controllano costo, priorità e bersaglio di ogni azione del catalogo; scenari specifici per CantFeelAnything, GoingBerserk, LethalHeroinDose, RottenBeer via Grab, BeggingMoney, ToxicBloodDrain, AmphetamineReflexes, MarvelousCocktail e stati condivisi |
 | Catalogo e documenti | Controllo coerente di 37 descrizioni, starter, copia client e contratto costi/priorità/bersagli derivato da R07 |
 
-File aggiunti: `bm-server/src/test/java/com/gsc/bm/model/game/RulesConformanceTest.java` (22 scenari), `CardRulesContractTest.java` (33 casi) e `bm-server/src/test/resources/rules-v1-cards.tsv`. Il contratto TSV è trascritto dalla tabella normativa, non viene rigenerato dal codice durante i test. Si aggiungono agli 8 test server e 4 client già esistenti.
+File aggiunti: `server/src/test/java/com/gsc/bm/model/game/RulesConformanceTest.java` (22 scenari), `CardRulesContractTest.java` (33 casi) e `server/src/test/resources/rules-v1-cards.tsv`. Il contratto TSV è trascritto dalla tabella normativa, non viene rigenerato dal codice durante i test. Si aggiungono agli 8 test server e 4 client già esistenti.
 
 ## Risultati riproducibili
 

@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 manifest = json.loads((ROOT / 'scripts/toolchain.json').read_text())
 java = next(t for t in manifest['tools'] if t['name'] == 'java')
 executable = ROOT / '.tools' / java['directory'] / 'bin/java.exe'
-jar = ROOT / 'bm-server/target/bm-server-0.0.1-SNAPSHOT.jar'
+jar = ROOT / 'server/target/bm-server-0.0.1-SNAPSHOT.jar'
 run = ROOT / '.build-logs' / ('i03-smoke-' + uuid.uuid4().hex)
 run.mkdir(parents=True)
 database = run / 'application.sqlite'
@@ -34,7 +34,7 @@ def check_start(number, expected_available):
             str(executable), '-jar', str(jar), '--spring.profiles.active=local',
             '--server.address=127.0.0.1', '--server.port=0', '--app.mail.enabled=false',
             '--app.database.path=' + str(database)
-        ], cwd=ROOT / 'bm-server', env=env, stdout=output, stderr=subprocess.STDOUT)
+        ], cwd=ROOT / 'server', env=env, stdout=output, stderr=subprocess.STDOUT)
         try:
             deadline = time.monotonic() + 60
             port = None

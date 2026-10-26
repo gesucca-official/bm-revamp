@@ -1,3 +1,8 @@
+> **Aggiornamento client — 26 ottobre 2026:** il client corrente è `client-debug/`,
+> con il solo percorso di gioco debug. Prototipo Phaser, route `/phaser`, selettore
+> grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
+> nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
+
 # Preparazione della roadmap client
 
 **26 ottobre 2026 — ricognizione documentale, non roadmap approvata.**
@@ -13,7 +18,7 @@ l'implementazione. L'ordine delle righe non esprime una priorità.
 | [Regolamento 1.6](game-rules.md), [AGENTS.md](../AGENTS.md) | Fonte normativa e procedura per eventuali cambiamenti di comportamento. Nessuna modifica alle regole in questa ricognizione. |
 | [Report I22](reports/i22-report.md), [stato implementazione](implementation-status.md), [conformità](rules-conformance.md) | Base approvata e limiti accettati. I numeri delle prove sono evidenze storiche, non nuove verifiche del client finale. |
 | [Decisioni del proprietario](open-questions.md) Q01/Q04/Q16, residuo R07 | Libertà tecnica; debug per lo sviluppo; Phaser rinviato; direzione desktop, web e mobile senza specifiche o ordine definiti. |
-| [README client](../bm-web-client/README.md), [architettura](architecture.md), [setup](setup.md) | Angular debug operativo locale; Phaser prototipo storico; toolchain e proxy esistenti. Le sezioni legacy non descrivono automaticamente lo stato corrente. |
+| [README client](../client-debug/README.md), [architettura](architecture.md), [setup](setup.md) | Angular debug operativo locale in `client-debug/`; prototipo Phaser rimosso; toolchain e proxy esistenti. Le sezioni legacy non descrivono automaticamente lo stato corrente. |
 | [API](api.md), [dominio](domain-model.md), [archivio partite](match-archive.md), [CLI](cli.md) | Contratti e server autorevole, viste private, comandi, ciclo di vita ed export. Non definiscono una nuova UX o un protocollo multipiattaforma già approvato. |
 | [Inventario feature](feature-inventory.md), [debito tecnico](technical-debt.md) | Identificativi Fxx e diagnosi datate da confrontare con I22; le vecchie lacune non diventano automaticamente lavoro residuo. |
 | [IDEAS.md](../IDEAS.md) | Idee di rework e wrapper desktop/mobile: ipotesi da discutere, non scelte architetturali. |

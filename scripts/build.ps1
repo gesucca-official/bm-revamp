@@ -19,7 +19,7 @@ foreach ($path in @("$javaDir/bin/java.exe", "$nodeDir/node.exe", $maven)) {
 $savedPath = $env:Path
 $savedJava = $env:JAVA_HOME
 $savedAnalytics = $env:NG_CLI_ANALYTICS
-$lock = Join-Path $workspace 'bm-web-client/package-lock.json'
+$lock = Join-Path $workspace 'client-debug/package-lock.json'
 $lockHash = (Get-FileHash -LiteralPath $lock -Algorithm SHA256).Hash
 $npm = Join-Path $nodeDir 'npm.cmd'
 $mavenArgs = @('-s', "$PSScriptRoot/maven-settings.xml", "-Dmaven.repo.local=$workspace/.tools/m2", '-B')
@@ -34,14 +34,14 @@ try {
     $env:Path = "$nodeDir;$javaDir/bin;$savedPath"
     $env:NG_CLI_ANALYTICS = 'false'
     if ($Task -in @('Install', 'All')) {
-        Push-Location "$workspace/bm-web-client"
+        Push-Location "$workspace/client-debug"
         try {
             & $npm ci @npmArgs
             if ($LASTEXITCODE -ne 0) { throw "npm ci failed: $LASTEXITCODE" }
         } finally { Pop-Location }
     }
     if ($Task -in @('Server', 'TestServer', 'TestServerContext', 'Test', 'All')) {
-        Push-Location "$workspace/bm-server"
+        Push-Location "$workspace/server"
         try {
             if ($Task -eq 'TestServerContext') { & $maven @mavenArgs -Pcontext-tests test }
             elseif ($Task -in @('TestServer', 'Test')) { & $maven @mavenArgs test }
@@ -50,14 +50,14 @@ try {
         } finally { Pop-Location }
     }
     if ($Task -in @('TestClient', 'Test')) {
-        Push-Location "$workspace/bm-web-client"
+        Push-Location "$workspace/client-debug"
         try {
             & $npm test @npmArgs
             if ($LASTEXITCODE -ne 0) { throw "Client tests failed: $LASTEXITCODE" }
         } finally { Pop-Location }
     }
     if ($Task -in @('Client', 'All')) {
-        Push-Location "$workspace/bm-web-client"
+        Push-Location "$workspace/client-debug"
         try {
             & $npm run build @npmArgs
             if ($LASTEXITCODE -ne 0) { throw "Client build failed: $LASTEXITCODE" }

@@ -1,7 +1,7 @@
 'use strict';
 // Uses only the transport dependencies already locked by the web client.
 const {createRequire} = require('module');
-const req = createRequire(require('path').resolve(__dirname, '../bm-web-client/package.json'));
+const req = createRequire(require('path').resolve(__dirname, '../client-debug/package.json'));
 const SockJS = req('sockjs-client');
 const Stomp = req('stompjs/lib/stomp').Stomp;
 const readline = require('readline');

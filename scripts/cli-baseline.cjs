@@ -8,9 +8,9 @@ const idle = new Client('http://127.0.0.1:8080/api','fixture','fixture');
 const idleMemory = process.memoryUsage();
 const fs = require('fs');
 const path = require('path');
-const lockPath = path.resolve(__dirname, '../bm-web-client/package-lock.json');
+const lockPath = path.resolve(__dirname, '../client-debug/package-lock.json');
 const lock = require(lockPath);
-const req = require('module').createRequire(path.resolve(__dirname, '../bm-web-client/package.json'));
+const req = require('module').createRequire(path.resolve(__dirname, '../client-debug/package.json'));
 const roots = new Map();
 function packageBytes(dir) {
   return fs.readdirSync(dir, {withFileTypes:true}).filter(e => e.name !== 'node_modules').reduce((n,e) => {
@@ -22,7 +22,7 @@ function dependencies(name, from = req) {
   const file = from.resolve(name + '/package.json');
   if (roots.has(file)) return;
   const manifest = from(file);
-  const location = path.relative(path.resolve(__dirname,'../bm-web-client/node_modules'), path.dirname(file)).replace(/\\/g,'/');
+  const location = path.relative(path.resolve(__dirname,'../client-debug/node_modules'), path.dirname(file)).replace(/\\/g,'/');
   let locked = lock;
   for (const part of location.split('/node_modules/')) locked = locked.dependencies[part];
   assert.strictEqual(manifest.version, locked.version);

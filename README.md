@@ -9,8 +9,8 @@ le decisioni sono in [docs/open-questions.md](docs/open-questions.md).
 
 | Cartella | Contenuto |
 |---|---|
-| `bm-server/` | Server Spring Boot, catalogo SQLite, migrazioni e test Java |
-| `bm-web-client/` | Client Angular debug, asset e test client |
+| `server/` | Server Spring Boot, catalogo SQLite, migrazioni e test Java |
+| `client-debug/` | Client Angular debug, asset e test client |
 | `scripts/` | Toolchain fissata, build, CLI e verifiche applicative |
 | `docs/` | Regolamento, contratti, roadmap e report |
 | `tools/print-cards/` | Generatore e verificatore delle carte stampabili già esistenti |
@@ -50,7 +50,7 @@ certificano l'avvio applicativo. [Guida locale](docs/setup.md),
 
 ## Conservazione
 
-I sorgenti sono rimasti nei percorsi originali. La configurazione `.gitattributes`
+I sorgenti correnti sono in `client-debug/` e `server/` (prima `bm-web-client/` e `bm-server/`). La configurazione `.gitattributes`
 conserva i byte e le terminazioni di riga originali anche nei nuovi checkout,
 per mantenere verificabili le impronte. Le due precedenti directory Git sono
 archiviate integralmente in `.repository-history/bm-server.git` e

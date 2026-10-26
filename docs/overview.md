@@ -24,7 +24,7 @@ Le ricognizioni datate sotto non descrivono automaticamente lacune ancora aperte
 
 **Stato più recente I02:** harness isolato verificato (8 test server + 4 client passati e mutazioni rilevate); contesto completo ancora rosso, nessuna partita end-to-end verificata. [Report I02](reports/i02-report.md). I censimenti iniziali sotto sono precedenti all'aggiunta delle suite.
 
-Analisi del 23 ottobre 2026 delle copie locali `bm-server` e `bm-web-client`. Questa documentazione descrive il codice disponibile, non certifica un prodotto funzionante. Non sono stati modificati sorgenti o configurazioni applicative.
+Analisi del 23 ottobre 2026 delle copie locali `bm-server` e `client-debug`. Questa documentazione descrive il codice disponibile, non certifica un prodotto funzionante. Non sono stati modificati sorgenti o configurazioni applicative.
 
 ## Come leggere i documenti
 
@@ -40,13 +40,13 @@ Le citazioni indicano file e metodi; i riferimenti al catalogo indicano tabella 
 
 | Area | Contenuto verificato e fonte |
 |---|---|
-| Server | Java, Maven, Spring Boot; ingresso [BmServerApplication.java](../bm-server/src/main/java/com/gsc/bm/BmServerApplication.java), dipendenze [pom.xml](../bm-server/pom.xml) |
+| Server | Java, Maven, Spring Boot; ingresso [BmServerApplication.java](../server/src/main/java/com/gsc/bm/BmServerApplication.java), dipendenze [pom.xml](../server/pom.xml) |
 | API | Controller HTTP in `api/rest/users` e `api/rest/panel`; controller STOMP in `api/ws`; [contratti ricostruiti](api.md) |
 | Motore | `model/game`, `model/cards`, `Character`, risorse, danni, stati e timer; [dominio](domain-model.md) |
 | Servizi | `service/session`, `service/account`, `service/factories`, `service/view`: sessioni, code, account, costruzione carte e viste |
-| Persistenza | Repository JPA `repo/internal` e `repo/external`; [cards.sqlite](../bm-server/src/main/resources/cards.sqlite) incluso; PostgreSQL esterno configurato ma non disponibile per verifica |
-| Client | Angular, schermate account/collezione/mazzi, client debug e Phaser; [AppModule](../bm-web-client/src/app/app.module.ts) |
-| Risorse | Immagini di carte/personaggi, CSS, favicon; [regolamento preesistente](../bm-web-client/src/assets/docs/rules.md) |
+| Persistenza | Repository JPA `repo/internal` e `repo/external`; [cards.sqlite](../server/src/main/resources/cards.sqlite) incluso; PostgreSQL esterno configurato ma non disponibile per verifica |
+| Client | Angular, schermate account/collezione/mazzi, client debug e Phaser; [AppModule](../client-debug/src/app/app.module.ts) |
+| Risorse | Immagini di carte/personaggi, CSS, favicon; [regolamento preesistente](../client-debug/src/assets/docs/rules.md) |
 | Esecuzione | Maven wrapper, Angular CLI, proxy locale, Express e Procfile Heroku; [setup](setup.md) |
 | Test | Un solo test server `contextLoads`; nessun test automatico client trovato; componente dimostrativo Phaser con dati fissi |
 | Documentazione | Due README quasi identici e incompleti; regolamento discorsivo da confrontare con il codice |
@@ -55,11 +55,11 @@ Le citazioni indicano file e metodi; i riferimenti al catalogo indicano tabella 
 
 ## Stato attuale
 
-**V:** il progetto contiene un motore di gioco concreto. `Game.submitMove/resolveMoves` gestisce mosse simultanee, costi, priorità, risoluzione ed effetti di fine turno; `Player` gestisce mano e pesca. Le modalità costruite da [GameFactoryServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java) sono quick 1vCom, quick multiplayer e open 1vCom. Le code arrivano a due giocatori per 1v1 e cinque per FFA.
+**V:** il progetto contiene un motore di gioco concreto. `Game.submitMove/resolveMoves` gestisce mosse simultanee, costi, priorità, risoluzione ed effetti di fine turno; `Player` gestisce mano e pesca. Le modalità costruite da [GameFactoryServiceImpl](../server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java) sono quick 1vCom, quick multiplayer e open 1vCom. Le code arrivano a due giocatori per 1v1 e cinque per FFA.
 
 **V:** SQLite contiene 37 carte di catalogo, due personaggi, quattro keyword, 30 righe di composizione dei mazzi e due assegnazioni di carte iniziali; entrambi i mazzi regolari sommano 20 carte. Tutte le classi nominate dal catalogo e tutte le immagini non nulle del catalogo carte esistono nelle copie locali. Questo verifica i riferimenti, non l'eseguibilità delle carte.
 
-**V:** la “collezione” restituisce a tutti l'intero catalogo: [UserAccountServiceImpl.getUserCardCollection](../bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java). Non sono state trovate meccaniche di acquisizione, scambio, valuta o proprietà individuale delle carte. **D:** è un prototipo di combattimento e costruzione mazzi; la componente collezionabile non è ancora un sistema economico/progressivo.
+**V:** la “collezione” restituisce a tutti l'intero catalogo: [UserAccountServiceImpl.getUserCardCollection](../server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java). Non sono state trovate meccaniche di acquisizione, scambio, valuta o proprietà individuale delle carte. **D:** è un prototipo di combattimento e costruzione mazzi; la componente collezionabile non è ancora un sistema economico/progressivo.
 
 **D:** non è prudente considerarlo pronto per utenti reali: identità dei comandi non legata al principal, validazioni incomplete, contratti client/server divergenti e ciclo di vita delle partite fragile. Evidenze e priorità sono in [technical-debt.md](technical-debt.md).
 
@@ -86,75 +86,75 @@ I01–I11 sono acquisiti: SQLite e provisioning locale sono già scelti e verifi
 **V:** censimento ricorsivo delle directory con file propri, esclusi gli interni `.git`; i numeri contano i file direttamente nella directory, non nelle sottodirectory. Questo inventario include anche risorse e configurazioni che non costituiscono funzionalità applicative.
 
 ```text
-bm-server/ (7 file)
-bm-server/.mvn/wrapper/ (3 file)
-bm-server/src/main/java/com/gsc/bm/ (1 file)
-bm-server/src/main/java/com/gsc/bm/api/rest/panel/ (2 file)
-bm-server/src/main/java/com/gsc/bm/api/rest/users/ (2 file)
-bm-server/src/main/java/com/gsc/bm/api/ws/ (5 file)
-bm-server/src/main/java/com/gsc/bm/conf/db/ (2 file)
-bm-server/src/main/java/com/gsc/bm/conf/http/ (1 file)
-bm-server/src/main/java/com/gsc/bm/conf/ws/ (4 file)
-bm-server/src/main/java/com/gsc/bm/model/ (4 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/ (5 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/bitch/ (1 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/bruiser/ (13 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/bruiser/character/ (3 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/com/ (3 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/com/basic/ (2 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/com/items/ (4 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/com/last/ (1 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/com/tokens/ (1 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/junkie/ (10 file)
-bm-server/src/main/java/com/gsc/bm/model/cards/junkie/character/ (3 file)
-bm-server/src/main/java/com/gsc/bm/model/game/ (6 file)
-bm-server/src/main/java/com/gsc/bm/model/game/status/ (5 file)
-bm-server/src/main/java/com/gsc/bm/repo/external/ (9 file)
-bm-server/src/main/java/com/gsc/bm/repo/internal/ (10 file)
-bm-server/src/main/java/com/gsc/bm/service/account/ (2 file)
-bm-server/src/main/java/com/gsc/bm/service/account/model/ (3 file)
-bm-server/src/main/java/com/gsc/bm/service/factories/ (11 file)
-bm-server/src/main/java/com/gsc/bm/service/session/ (10 file)
-bm-server/src/main/java/com/gsc/bm/service/session/model/ (3 file)
-bm-server/src/main/java/com/gsc/bm/service/view/ (2 file)
-bm-server/src/main/java/com/gsc/bm/service/view/model/client/ (5 file)
-bm-server/src/main/java/com/gsc/bm/service/view/model/deck/ (1 file)
-bm-server/src/main/java/com/gsc/bm/service/view/model/logging/ (4 file)
-bm-server/src/main/resources/ (5 file)
-bm-server/src/main/resources/META-INF/ (1 file)
-bm-server/src/test/java/com/gsc/bm/ (1 file)
-bm-web-client/ (13 file)
-bm-web-client/src/ (5 file)
-bm-web-client/src/app/ (4 file)
-bm-web-client/src/app/client-debug/ (3 file)
-bm-web-client/src/app/client-debug/card-in-hand/ (3 file)
-bm-web-client/src/app/client-debug/character-card/ (3 file)
-bm-web-client/src/app/client-debug/code-dialog/ (4 file)
-bm-web-client/src/app/client-phaser/ (4 file)
-bm-web-client/src/app/client-phaser/scnenes/battle/ (1 file)
-bm-web-client/src/app/client-phaser/scnenes/battle/animations/ (4 file)
-bm-web-client/src/app/client-phaser/scnenes/battle/model/ (5 file)
-bm-web-client/src/app/client-phaser/scnenes/battle/test-battle-scene/ (3 file)
-bm-web-client/src/app/connection/choose-game/ (3 file)
-bm-web-client/src/app/connection/choose-game/choose-deck-dialog/ (3 file)
-bm-web-client/src/app/connection/sign-in/ (3 file)
-bm-web-client/src/app/connection/sign-up/ (3 file)
-bm-web-client/src/app/home/ (3 file)
-bm-web-client/src/app/home/rules/ (3 file)
-bm-web-client/src/app/home/sponsor/ (3 file)
-bm-web-client/src/app/home/toolbar/ (3 file)
-bm-web-client/src/app/model/ (10 file)
-bm-web-client/src/app/service/ (4 file)
-bm-web-client/src/app/user-hub/ (3 file)
-bm-web-client/src/app/user-hub/admin-control-panel/ (3 file)
-bm-web-client/src/app/user-hub/collection/ (3 file)
-bm-web-client/src/app/user-hub/collection/character-card/ (3 file)
-bm-web-client/src/app/user-hub/collection/collection-card/ (3 file)
-bm-web-client/src/app/user-hub/collection/edit-deck/ (3 file)
-bm-web-client/src/assets/ (2 file)
-bm-web-client/src/assets/docs/ (1 file)
-bm-web-client/src/assets/img/ (4 file)
-bm-web-client/src/assets/img/cards/ (4 file)
-bm-web-client/src/assets/img/characters/ (4 file)
-bm-web-client/src/environments/ (2 file)
+server/ (7 file)
+server/.mvn/wrapper/ (3 file)
+server/src/main/java/com/gsc/bm/ (1 file)
+server/src/main/java/com/gsc/bm/api/rest/panel/ (2 file)
+server/src/main/java/com/gsc/bm/api/rest/users/ (2 file)
+server/src/main/java/com/gsc/bm/api/ws/ (5 file)
+server/src/main/java/com/gsc/bm/conf/db/ (2 file)
+server/src/main/java/com/gsc/bm/conf/http/ (1 file)
+server/src/main/java/com/gsc/bm/conf/ws/ (4 file)
+server/src/main/java/com/gsc/bm/model/ (4 file)
+server/src/main/java/com/gsc/bm/model/cards/ (5 file)
+server/src/main/java/com/gsc/bm/model/cards/bitch/ (1 file)
+server/src/main/java/com/gsc/bm/model/cards/bruiser/ (13 file)
+server/src/main/java/com/gsc/bm/model/cards/bruiser/character/ (3 file)
+server/src/main/java/com/gsc/bm/model/cards/com/ (3 file)
+server/src/main/java/com/gsc/bm/model/cards/com/basic/ (2 file)
+server/src/main/java/com/gsc/bm/model/cards/com/items/ (4 file)
+server/src/main/java/com/gsc/bm/model/cards/com/last/ (1 file)
+server/src/main/java/com/gsc/bm/model/cards/com/tokens/ (1 file)
+server/src/main/java/com/gsc/bm/model/cards/junkie/ (10 file)
+server/src/main/java/com/gsc/bm/model/cards/junkie/character/ (3 file)
+server/src/main/java/com/gsc/bm/model/game/ (6 file)
+server/src/main/java/com/gsc/bm/model/game/status/ (5 file)
+server/src/main/java/com/gsc/bm/repo/external/ (9 file)
+server/src/main/java/com/gsc/bm/repo/internal/ (10 file)
+server/src/main/java/com/gsc/bm/service/account/ (2 file)
+server/src/main/java/com/gsc/bm/service/account/model/ (3 file)
+server/src/main/java/com/gsc/bm/service/factories/ (11 file)
+server/src/main/java/com/gsc/bm/service/session/ (10 file)
+server/src/main/java/com/gsc/bm/service/session/model/ (3 file)
+server/src/main/java/com/gsc/bm/service/view/ (2 file)
+server/src/main/java/com/gsc/bm/service/view/model/client/ (5 file)
+server/src/main/java/com/gsc/bm/service/view/model/deck/ (1 file)
+server/src/main/java/com/gsc/bm/service/view/model/logging/ (4 file)
+server/src/main/resources/ (5 file)
+server/src/main/resources/META-INF/ (1 file)
+server/src/test/java/com/gsc/bm/ (1 file)
+client-debug/ (13 file)
+client-debug/src/ (5 file)
+client-debug/src/app/ (4 file)
+client-debug/src/app/client-debug/ (3 file)
+client-debug/src/app/client-debug/card-in-hand/ (3 file)
+client-debug/src/app/client-debug/character-card/ (3 file)
+client-debug/src/app/client-debug/code-dialog/ (4 file)
+client-debug/src/app/client-phaser/ (4 file)
+client-debug/src/app/client-phaser/scnenes/battle/ (1 file)
+client-debug/src/app/client-phaser/scnenes/battle/animations/ (4 file)
+client-debug/src/app/client-phaser/scnenes/battle/model/ (5 file)
+client-debug/src/app/client-phaser/scnenes/battle/test-battle-scene/ (3 file)
+client-debug/src/app/connection/choose-game/ (3 file)
+client-debug/src/app/connection/choose-game/choose-deck-dialog/ (3 file)
+client-debug/src/app/connection/sign-in/ (3 file)
+client-debug/src/app/connection/sign-up/ (3 file)
+client-debug/src/app/home/ (3 file)
+client-debug/src/app/home/rules/ (3 file)
+client-debug/src/app/home/sponsor/ (3 file)
+client-debug/src/app/home/toolbar/ (3 file)
+client-debug/src/app/model/ (10 file)
+client-debug/src/app/service/ (4 file)
+client-debug/src/app/user-hub/ (3 file)
+client-debug/src/app/user-hub/admin-control-panel/ (3 file)
+client-debug/src/app/user-hub/collection/ (3 file)
+client-debug/src/app/user-hub/collection/character-card/ (3 file)
+client-debug/src/app/user-hub/collection/collection-card/ (3 file)
+client-debug/src/app/user-hub/collection/edit-deck/ (3 file)
+client-debug/src/assets/ (2 file)
+client-debug/src/assets/docs/ (1 file)
+client-debug/src/assets/img/ (4 file)
+client-debug/src/assets/img/cards/ (4 file)
+client-debug/src/assets/img/characters/ (4 file)
+client-debug/src/environments/ (2 file)
 ```

@@ -15,7 +15,7 @@ from generate import ROOT, load_catalog, starter_decks, select_starters
 
 class GeneratorIntegrationTest(unittest.TestCase):
     def test_starter_selection_and_shared_quantities(self):
-        cards, _, _, regular, initial = load_catalog(ROOT/'bm-server/src/main/resources/cards.sqlite', ROOT/'docs/game-rules.md', ROOT/'docs/rules-catalog.json')
+        cards, _, _, regular, initial = load_catalog(ROOT/'server/src/main/resources/cards.sqlite', ROOT/'docs/game-rules.md', ROOT/'docs/rules-catalog.json')
         decks = starter_decks(cards, regular, initial)
         owners = list(decks)
         with tempfile.TemporaryDirectory() as directory:
@@ -61,7 +61,7 @@ class GeneratorIntegrationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             d = Path(directory)
             db = d/'cards.sqlite'
-            shutil.copyfile(ROOT/'bm-server/src/main/resources/cards.sqlite', db)
+            shutil.copyfile(ROOT/'server/src/main/resources/cards.sqlite', db)
             with closing(sqlite3.connect(db)) as conn:
                 conn.execute("insert into CRD001_GUI(C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION) select 'com.NewGrab','Nuova carta fixture',T_GUI_DESCRIPTION from CRD001_GUI where C_REF_CLASS='com.Grab'")
                 conn.execute("insert into CRD003_CHARACTERS(C_REF_CLASS,T_GUI_NAME) values ('fixture.NewHero','Nuovo eroe fixture')")

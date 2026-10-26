@@ -8,7 +8,7 @@ $savedPath = $env:Path
 $savedAnalytics = $env:NG_CLI_ANALYTICS
 try {
     if ($Task -eq 'Server') {
-        Push-Location "$workspace/bm-server"
+        Push-Location "$workspace/server"
         try {
             $serverArgs = @('--spring.profiles.active=local')
             if ($SeedAccounts) { $serverArgs += '--app.dev.seed-accounts=true' }
@@ -17,7 +17,7 @@ try {
     } else {
         $env:Path = "$workspace/.tools/$($node.directory);$savedPath"
         $env:NG_CLI_ANALYTICS = 'false'
-        Push-Location "$workspace/bm-web-client"
+        Push-Location "$workspace/client-debug"
         try {
             & "$workspace/.tools/$($node.directory)/node.exe" node_modules/@angular/cli/bin/ng serve --host 127.0.0.1 --port 4200 --proxy-config proxy.config.json
         } finally { Pop-Location }

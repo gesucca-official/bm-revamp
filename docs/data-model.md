@@ -33,7 +33,7 @@ I19a/b/c completerà eventi immutabili, contesto iniziale, versioni e manifest d
 
 **Catalogo:** file esistente invariato in I03, aperto read-only tramite JPA. **Applicazione:** nuovo file `app.database.path` (`./data/bm.sqlite`, override BM_DATABASE_PATH), accesso JDBC, nessun PostgreSQL. Il package repo.external e il nome externalDbTransactionManager sono mantenuti per compatibilità, non rappresentano più un database remoto.
 
-Schema eseguibile: [V001__initial.sql](../bm-server/src/main/resources/db/application/V001__initial.sql).
+Schema eseguibile: [V001__initial.sql](../server/src/main/resources/db/application/V001__initial.sql).
 
 | Tabella | Chiave e dati |
 |---|---|
@@ -56,13 +56,13 @@ Verificati account/hash, identità composta dei mazzi, round-trip JSON timestamp
 
 ## Due datasource
 
-[InternalDbConfig](../bm-server/src/main/java/com/gsc/bm/conf/db/InternalDbConfig.java) definisce datasource primario, entity manager e transaction manager per `repo.internal`. [ExternalDbConfig](../bm-server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java) ne definisce altri per `repo.external`. Entrambi istanziano `DriverManagerDataSource`; non configurano un pool in questi bean.
+[InternalDbConfig](../server/src/main/java/com/gsc/bm/conf/db/InternalDbConfig.java) definisce datasource primario, entity manager e transaction manager per `repo.internal`. [ExternalDbConfig](../server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java) ne definisce altri per `repo.external`. Entrambi istanziano `DriverManagerDataSource`; non configurano un pool in questi bean.
 
-**V:** URL interno `jdbc:sqlite::resource:cards.sqlite`; driver `org.sqlite.JDBC`. Il profilo Heroku configura PostgreSQL da variabili d'ambiente. `spring.jpa.hibernate.ddl-auto=none`; non si deve assumere che l'app crei le tabelle. [application.yml](../bm-server/src/main/resources/application.yml), [application-heroku.yml](../bm-server/src/main/resources/application-heroku.yml). La dipendenza sqlite-dialect è nel POM, ma non compare una proprietà di dialetto esplicita nei file YAML inclusi: bootstrap Hibernate da verificare.
+**V:** URL interno `jdbc:sqlite::resource:cards.sqlite`; driver `org.sqlite.JDBC`. Il profilo Heroku configura PostgreSQL da variabili d'ambiente. `spring.jpa.hibernate.ddl-auto=none`; non si deve assumere che l'app crei le tabelle. [application.yml](../server/src/main/resources/application.yml), [application-heroku.yml](../server/src/main/resources/application-heroku.yml). La dipendenza sqlite-dialect è nel POM, ma non compare una proprietà di dialetto esplicita nei file YAML inclusi: bootstrap Hibernate da verificare.
 
 ## SQLite incluso: schema osservato
 
-Fonte primaria: [cards.sqlite](../bm-server/src/main/resources/cards.sqlite), interrogazione `sqlite_master`, conteggi e PRAGMA effettuati il 23 ottobre 2026 con connessione `mode=ro`.
+Fonte primaria: [cards.sqlite](../server/src/main/resources/cards.sqlite), interrogazione `sqlite_master`, conteggi e PRAGMA effettuati il 23 ottobre 2026 con connessione `mode=ro`.
 
 | Tabella | Colonne e vincoli osservati | Righe |
 |---|---|---:|
@@ -76,7 +76,7 @@ Fonte primaria: [cards.sqlite](../bm-server/src/main/resources/cards.sqlite), in
 
 **V:** `integrity_check` restituisce `ok`; `foreign_key_check` nessuna riga. Questo non prova che ogni relazione logica sia protetta: DCK002 non dichiara foreign key, e il personaggio di DCK001 non ha una FK nel DDL osservato. Non è stato verificato `foreign_keys` sulla connessione applicativa.
 
-Mapping: [CardsGuiRecord](../bm-server/src/main/java/com/gsc/bm/repo/internal/CardsGuiRecord.java), [CardKeywordsRecord](../bm-server/src/main/java/com/gsc/bm/repo/internal/CardKeywordsRecord.java), [CharactersGuiRecord](../bm-server/src/main/java/com/gsc/bm/repo/internal/CharactersGuiRecord.java), [StarterDeckRecord](../bm-server/src/main/java/com/gsc/bm/repo/internal/StarterDeckRecord.java), [StarterDeckBasicCardsRecord](../bm-server/src/main/java/com/gsc/bm/repo/internal/StarterDeckBasicCardsRecord.java).
+Mapping: [CardsGuiRecord](../server/src/main/java/com/gsc/bm/repo/internal/CardsGuiRecord.java), [CardKeywordsRecord](../server/src/main/java/com/gsc/bm/repo/internal/CardKeywordsRecord.java), [CharactersGuiRecord](../server/src/main/java/com/gsc/bm/repo/internal/CharactersGuiRecord.java), [StarterDeckRecord](../server/src/main/java/com/gsc/bm/repo/internal/StarterDeckRecord.java), [StarterDeckBasicCardsRecord](../server/src/main/java/com/gsc/bm/repo/internal/StarterDeckBasicCardsRecord.java).
 
 ### Contenuti e coerenza
 
@@ -98,7 +98,7 @@ Mapping: [CardsGuiRecord](../bm-server/src/main/java/com/gsc/bm/repo/internal/Ca
 | LOG001_GAMES | gameId→C_GAME_ID; players→T_PLAYERS; type→T_TYPE; date→T_DATE; status→T_STATUS; fullLog→J_FULL_LOG | gameId `@Id` |
 | LOG002_WEB_CLIENT | timestamp→C_TIMESTAMP; additional→T_ADDITIONAL; message→T_MESSAGE | timestamp `@Id` |
 
-Fonti: [UserCredentialsRecord](../bm-server/src/main/java/com/gsc/bm/repo/external/UserCredentialsRecord.java), [UserDecksRecord](../bm-server/src/main/java/com/gsc/bm/repo/external/UserDecksRecord.java), [UserDeckRecordKey](../bm-server/src/main/java/com/gsc/bm/repo/external/UserDeckRecordKey.java), [GameLogRecord](../bm-server/src/main/java/com/gsc/bm/repo/external/GameLogRecord.java), [WebClientLogRecord](../bm-server/src/main/java/com/gsc/bm/repo/external/WebClientLogRecord.java).
+Fonti: [UserCredentialsRecord](../server/src/main/java/com/gsc/bm/repo/external/UserCredentialsRecord.java), [UserDecksRecord](../server/src/main/java/com/gsc/bm/repo/external/UserDecksRecord.java), [UserDeckRecordKey](../server/src/main/java/com/gsc/bm/repo/external/UserDeckRecordKey.java), [GameLogRecord](../server/src/main/java/com/gsc/bm/repo/external/GameLogRecord.java), [WebClientLogRecord](../server/src/main/java/com/gsc/bm/repo/external/WebClientLogRecord.java).
 
 **V:** J_DECK e J_FULL_LOG usano `@Type(type="jsonb")`, ma `columnDefinition="json"`. **M:** tipo fisico, compatibilità e serializzazione effettivi non verificati. Non risultano vincoli SQL di unicità email, foreign key account→mazzo o indici nel materiale disponibile; l'assenza nel codice non dimostra l'assenza nel database esterno.
 
@@ -106,15 +106,15 @@ Fonti: [UserCredentialsRecord](../bm-server/src/main/java/com/gsc/bm/repo/extern
 
 ### Contenuto JSON del mazzo
 
-`UserStoredDeck` contiene `characterClazz`, `basicActionCardClazz`, `lastResortCardClazz`, `characterBoundCardsClazz[]`, `regularCardsClazz[]`. Non contiene le statistiche del personaggio o gli effetti delle carte: vengono ricostruiti dalle classi e dal catalogo. [UserAccountServiceImpl.fromGuiToStoredDeck/fromStoredToGuiDeck](../bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java).
+`UserStoredDeck` contiene `characterClazz`, `basicActionCardClazz`, `lastResortCardClazz`, `characterBoundCardsClazz[]`, `regularCardsClazz[]`. Non contiene le statistiche del personaggio o gli effetti delle carte: vengono ricostruiti dalle classi e dal catalogo. [UserAccountServiceImpl.fromGuiToStoredDeck/fromStoredToGuiDeck](../server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java).
 
 **D:** rinominare una classe o cambiare il catalogo può rendere illeggibile un mazzo esistente o cambiarne il significato, perché i binding sono riferimenti al codice e non identificatori di contenuto versionati.
 
 ## Scritture e stato non persistito
 
-**V:** registrazione salva hash BCrypt, email e ruolo USER. I mazzi sono salvati e cancellati tramite repository su richiesta STOMP. La collezione non ha tabella: viene calcolata per tutti dal catalogo. [AuthServiceImpl.completeRegistration](../bm-server/src/main/java/com/gsc/bm/service/session/AuthServiceImpl.java), [UserAccountServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java).
+**V:** registrazione salva hash BCrypt, email e ruolo USER. I mazzi sono salvati e cancellati tramite repository su richiesta STOMP. La collezione non ha tabella: viene calcolata per tutti dal catalogo. [AuthServiceImpl.completeRegistration](../server/src/main/java/com/gsc/bm/service/session/AuthServiceImpl.java), [UserAccountServiceImpl](../server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java).
 
-**V:** `GameLoggingServiceImpl` mantiene una lista di ActionLog in memoria, la accoda per salvataggio su un executor singolo quando `log.db=Y`, e salva ENDED quando la sessione viene svuotata. I log comprendono snapshot con mani e mazzi completi, non solo dati pubblici. Il tempo è una stringa locale del server. [GameLoggingServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/GameLoggingServiceImpl.java), [ViewExtractorServiceImpl.extractGlobalSlimView](../bm-server/src/main/java/com/gsc/bm/service/view/ViewExtractorServiceImpl.java).
+**V:** `GameLoggingServiceImpl` mantiene una lista di ActionLog in memoria, la accoda per salvataggio su un executor singolo quando `log.db=Y`, e salva ENDED quando la sessione viene svuotata. I log comprendono snapshot con mani e mazzi completi, non solo dati pubblici. Il tempo è una stringa locale del server. [GameLoggingServiceImpl](../server/src/main/java/com/gsc/bm/service/session/GameLoggingServiceImpl.java), [ViewExtractorServiceImpl.extractGlobalSlimView](../server/src/main/java/com/gsc/bm/service/view/ViewExtractorServiceImpl.java).
 
 **V:** sessioni attive, mosse pendenti, code, presenza e codici di verifica email non vengono ripristinati dal DB nel codice esaminato. Il log è osservabilità, non un salvataggio riprendibile. Non risultano backup, retention o procedure di migrazione.
 

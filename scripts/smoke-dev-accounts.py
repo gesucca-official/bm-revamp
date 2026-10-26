@@ -25,11 +25,11 @@ for number in (1, 2):
     with log.open('w', encoding='utf-8') as output:
         process = subprocess.Popen([
             str(root / '.tools' / java['directory'] / 'bin/java.exe'), '-jar',
-            str(root / 'bm-server/target/bm-server-0.0.1-SNAPSHOT.jar'),
+            str(root / 'server/target/bm-server-0.0.1-SNAPSHOT.jar'),
             '--spring.profiles.active=local', '--server.address=127.0.0.1', '--server.port=0',
             '--app.mail.enabled=false', '--app.database.path=' + str(database),
             '--app.dev.seed-accounts=' + ('true' if number == 1 else 'false')
-        ], cwd=root / 'bm-server', env=env, stdout=output, stderr=subprocess.STDOUT,
+        ], cwd=root / 'server', env=env, stdout=output, stderr=subprocess.STDOUT,
             creationflags=subprocess.CREATE_NO_WINDOW)
         try:
             deadline = time.monotonic() + 60

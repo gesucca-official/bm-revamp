@@ -6,7 +6,7 @@ Versione **1.6 — 26 ottobre 2026**. Fonte normativa del gioco.
 
 Questa prima versione deriva da codice server/client, catalogo SQLite e documentazione esistente. Nei conflitti iniziali prevale il codice. Da questa versione prevale **questo regolamento** su codice, test, catalogo e altri documenti. I test devono verificarlo, non modificarlo implicitamente.
 
-Per modificare il gioco: aggiornare prima versione e regole di questo documento, motivando la modifica; poi adeguare test, codice, catalogo e documentazione nella stessa modifica. Non cambiare un atteso soltanto per accettare una regressione. La copia pubblicata in `bm-web-client/src/assets/docs/rules.md` deve essere identica; `scripts/check-rules.py` controlla l'allineamento. Gli audit precedenti sono storici subordinati. La roadmap non introduce automaticamente regole attive.
+Per modificare il gioco: aggiornare prima versione e regole di questo documento, motivando la modifica; poi adeguare test, codice, catalogo e documentazione nella stessa modifica. Non cambiare un atteso soltanto per accettare una regressione. La copia pubblicata in `client-debug/src/assets/docs/rules.md` deve essere identica; `scripts/check-rules.py` controlla l'allineamento. Gli audit precedenti sono storici subordinati. La roadmap non introduce automaticamente regole attive.
 
 ## R01 — Obiettivo e preparazione
 

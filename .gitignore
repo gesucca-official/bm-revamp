@@ -12,7 +12,7 @@ __pycache__/
 *.db
 *.db-*
 *.match-recovery/
-!bm-server/src/main/resources/cards.sqlite
+!server/src/main/resources/cards.sqlite
 
 # Private configuration and local environment.
 .env

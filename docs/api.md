@@ -1,3 +1,8 @@
+> **Aggiornamento client — 26 ottobre 2026:** il client corrente è `client-debug/`,
+> con il solo percorso di gioco debug. Prototipo Phaser, route `/phaser`, selettore
+> grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
+> nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
+
 > **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
 > [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
 > Le indicazioni datate di incrementi prossimi/aperti e priorità della base
@@ -77,9 +82,9 @@ Contratti **verificati staticamente**, non con richieste reali. Non sono present
 
 ## Trasporto e prefissi
 
-**V:** il server ha context path `/api`, REST sotto `/rest/v1`, handshake SockJS sotto `/ws/v1`. Il browser usa `/rest` e `/ws`; il proxy li riscrive rispettivamente in `/api/rest/v1` e `/api/ws/v1`. Fonti: [application.yml](../bm-server/src/main/resources/application.yml), [WebSocketConfig](../bm-server/src/main/java/com/gsc/bm/conf/ws/WebSocketConfig.java), [proxy.config.json](../bm-web-client/proxy.config.json), [server.js](../bm-web-client/server.js).
+**V:** il server ha context path `/api`, REST sotto `/rest/v1`, handshake SockJS sotto `/ws/v1`. Il browser usa `/rest` e `/ws`; il proxy li riscrive rispettivamente in `/api/rest/v1` e `/api/ws/v1`. Fonti: [application.yml](../server/src/main/resources/application.yml), [WebSocketConfig](../server/src/main/java/com/gsc/bm/conf/ws/WebSocketConfig.java), [proxy.config.json](../client-debug/proxy.config.json), [server.js](../client-debug/server.js).
 
-**V:** STOMP sopra SockJS. CONNECT invia header `login` e `passcode`, con credenziali account; il server associa il token al principal. Prefisso dei comandi `/app`; broker semplice `/user`, `/topic`, `/queue`. Non si usa un bearer token ottenuto dal login REST. [AuthChannelInterceptorAdapter.preSend](../bm-server/src/main/java/com/gsc/bm/conf/ws/AuthChannelInterceptorAdapter.java), [WebsocketService.connect](../bm-web-client/src/app/service/websocket.service.ts).
+**V:** STOMP sopra SockJS. CONNECT invia header `login` e `passcode`, con credenziali account; il server associa il token al principal. Prefisso dei comandi `/app`; broker semplice `/user`, `/topic`, `/queue`. Non si usa un bearer token ottenuto dal login REST. [AuthChannelInterceptorAdapter.preSend](../server/src/main/java/com/gsc/bm/conf/ws/AuthChannelInterceptorAdapter.java), [WebsocketService.connect](../client-debug/src/app/service/websocket.service.ts).
 
 ## REST account
 
@@ -87,13 +92,13 @@ Le route in tabella sono relative a `/api/rest/v1` sul server, o `/rest` dal bro
 
 | Metodo e route | Input | Risposta/errore applicativo | Fonte |
 |---|---|---|---|
-| POST `/sign-in/validate` | `{username,password}` | boolean; false anche se username già connesso; non crea sessione | [UserLogInController.validateCredentials](../bm-server/src/main/java/com/gsc/bm/api/rest/users/UserLogInController.java) |
-| GET `/sign-up/users/{username}/available` | username nel path | boolean | [UserSignUpController.isUsernameValid](../bm-server/src/main/java/com/gsc/bm/api/rest/users/UserSignUpController.java) |
+| POST `/sign-in/validate` | `{username,password}` | boolean; false anche se username già connesso; non crea sessione | [UserLogInController.validateCredentials](../server/src/main/java/com/gsc/bm/api/rest/users/UserLogInController.java) |
+| GET `/sign-up/users/{username}/available` | username nel path | boolean | [UserSignUpController.isUsernameValid](../server/src/main/java/com/gsc/bm/api/rest/users/UserSignUpController.java) |
 | GET `/sign-up/mail/{mail}/available` | email nel path | boolean | stesso controller, `isEmailValid` |
 | POST `/sign-up/verify` | `{username,email}` | corpo vuoto; AuthenticationException → 409 | stesso controller, `sendVerificationMail` |
 | POST `/sign-up/register` | `{username,password,email,code}` | corpo vuoto; AuthenticationException → 409 | stesso controller, `completeRegistration` |
 
-**V:** il client [SignUpComponent.checkUsernameAvailability/checkEmailAvailability](../bm-web-client/src/app/connection/sign-up/sign-up.component.ts) chiama `/sign-up/...`, omettendo `/rest`. Questi URL non corrispondono alle regole del proxy incluso. Invio verifica e registrazione usano invece `/rest/sign-up/...`.
+**V:** il client [SignUpComponent.checkUsernameAvailability/checkEmailAvailability](../client-debug/src/app/connection/sign-up/sign-up.component.ts) chiama `/sign-up/...`, omettendo `/rest`. Questi URL non corrispondono alle regole del proxy incluso. Invio verifica e registrazione usano invece `/rest/sign-up/...`.
 
 ## REST log
 
@@ -108,7 +113,7 @@ Le route in tabella sono relative a `/api/rest/v1` sul server, o `/rest` dal bro
 | GET `/logs/client/web/drain` | byte di JSON, `application/octet-stream` | `isAuthenticated()` |
 | DELETE `/logs/client/web/delete` | cancella tutti i record, true | `isAuthenticated()` |
 
-Fonti: [GameLogsController](../bm-server/src/main/java/com/gsc/bm/api/rest/panel/GameLogsController.java), [WebClientLogsController](../bm-server/src/main/java/com/gsc/bm/api/rest/panel/WebClientLogsController.java). `drain` esporta e **non elimina**. L'ingestione client non salva se `log.db=N`. HTTP Basic usa un account in memoria configurato separatamente; non c'è `hasRole('ADMIN')` sui metodi. [HttpSecurityConfig](../bm-server/src/main/java/com/gsc/bm/conf/http/HttpSecurityConfig.java). Il comportamento effettivo dei filtri e gli status HTTP del framework non sono stati misurati.
+Fonti: [GameLogsController](../server/src/main/java/com/gsc/bm/api/rest/panel/GameLogsController.java), [WebClientLogsController](../server/src/main/java/com/gsc/bm/api/rest/panel/WebClientLogsController.java). `drain` esporta e **non elimina**. L'ingestione client non salva se `log.db=N`. HTTP Basic usa un account in memoria configurato separatamente; non c'è `hasRole('ADMIN')` sui metodi. [HttpSecurityConfig](../server/src/main/java/com/gsc/bm/conf/http/HttpSecurityConfig.java). Il comportamento effettivo dei filtri e gli status HTTP del framework non sono stati misurati.
 
 ## STOMP: comandi e risposte
 
@@ -116,17 +121,17 @@ Tutti i comandi sotto riportati richiedono il prefisso `/app`. Le destinazioni `
 
 | Comando | Corpo | Risposta/notifica | Fonte |
 |---|---|---|---|
-| `/connections/users/tell/me` | vuoto | broadcast `/topic/connections/users`: insieme UserSessionInfo | [PresenceEventListener](../bm-server/src/main/java/com/gsc/bm/api/ws/PresenceEventListener.java) |
-| `/user/{username}/account` | vuoto | user `/account/data`: UserAccountInfo o null | [UserController](../bm-server/src/main/java/com/gsc/bm/api/ws/UserController.java) |
+| `/connections/users/tell/me` | vuoto | broadcast `/topic/connections/users`: insieme UserSessionInfo | [PresenceEventListener](../server/src/main/java/com/gsc/bm/api/ws/PresenceEventListener.java) |
+| `/user/{username}/account` | vuoto | user `/account/data`: UserAccountInfo o null | [UserController](../server/src/main/java/com/gsc/bm/api/ws/UserController.java) |
 | `/user/{username}/deck` | UserGuiDeck JSON | salva/sovrascrive, restituisce account a user `/account/data` | stesso controller |
 | `/user/{username}/deck/delete` | UserGuiDeck (usa deckId) | elimina, restituisce account | stesso controller |
-| `/game/quick/1vCom/join` | playerId, stringa semplice | user `/game/quick/1vCom/ready`: gameId | [QuickGameQueuesController](../bm-server/src/main/java/com/gsc/bm/api/ws/QuickGameQueuesController.java) |
+| `/game/quick/1vCom/join` | playerId, stringa semplice | user `/game/quick/1vCom/ready`: gameId | [QuickGameQueuesController](../server/src/main/java/com/gsc/bm/api/ws/QuickGameQueuesController.java) |
 | `/game/quick/1v1/join` | playerId stringa | `/user/queue/game/quick/1v1/ready`: gameId privato ai due partecipanti quando coda completa (I17a) | stesso controller |
 | `/game/quick/ffa/join` | playerId stringa | `/topic/game/quick/ffa/joined`: lista QueuedPlayer; `/user/queue/game/quick/ffa/ready` privato ai partecipanti se completa | stesso controller |
 | `/game/quick/ffa/join/com` | vuoto | stessa lista joined e ready privato FFA; aggiunge bot | stesso controller |
 | `/game/quick/ffa/start` | vuoto | `/user/queue/game/quick/ffa/ready`: gameId se almeno 2; aggiornamento joined | stesso controller |
-| `/game/open/1vCom/join/{username}/{deckId}` | ignorato dal metodo | user `/game/open/1vCom/ready`: gameId | [OpenGameQueuesController](../bm-server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java) |
-| `/game/{gameId}/move` | Move JSON | `/topic/game/{gameId}/move`: testo; dopo risoluzione `/topic/game/{gameId}/update`: gameId | [GameController.makeYourMove](../bm-server/src/main/java/com/gsc/bm/api/ws/GameController.java) |
+| `/game/open/1vCom/join/{username}/{deckId}` | ignorato dal metodo | user `/game/open/1vCom/ready`: gameId | [OpenGameQueuesController](../server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java) |
+| `/game/{gameId}/move` | Move JSON | `/topic/game/{gameId}/move`: testo; dopo risoluzione `/topic/game/{gameId}/update`: gameId | [GameController.makeYourMove](../server/src/main/java/com/gsc/bm/api/ws/GameController.java) |
 | `/game/{gameId}/{playerId}/view` | vuoto | user `/game/{gameId}/view`: ClientGameView | stesso controller, `getGameView` |
 | `/game/{gameId}/{playerId}/leave` | vuoto | nessuna risposta esplicita | stesso controller, `leaveGame` |
 
@@ -134,9 +139,9 @@ Tutti i comandi sotto riportati richiedono il prefisso `/app`. Le destinazioni `
 
 ## Flusso ordinario ricostruito
 
-**V:** `SignInComponent` verifica via REST → `WebsocketService.connect` apre STOMP → sottoscrive presenza/account e richiede dati → `joinGame` sottoscrive ready e invia join → riceve gameId → `subToGame` sottoscrive move/update/view/illegalMove → richiede vista → invia mossa → dopo update richiede nuovamente la vista completa. Non riceve patch incrementali né un numero di versione. Fonti: [SignInComponent](../bm-web-client/src/app/connection/sign-in/sign-in.component.ts), [WebsocketService](../bm-web-client/src/app/service/websocket.service.ts).
+**V:** `SignInComponent` verifica via REST → `WebsocketService.connect` apre STOMP → sottoscrive presenza/account e richiede dati → `joinGame` sottoscrive ready e invia join → riceve gameId → `subToGame` sottoscrive move/update/view/illegalMove → richiede vista → invia mossa → dopo update richiede nuovamente la vista completa. Non riceve patch incrementali né un numero di versione. Fonti: [SignInComponent](../client-debug/src/app/connection/sign-in/sign-in.component.ts), [WebsocketService](../client-debug/src/app/service/websocket.service.ts).
 
-**Aggiornamento I17a/I17b:** ready quick 1v1 e FFA è inviato su destinazioni private ai soli partecipanti umani. Il client consuma quel ready e annulla le sottoscrizioni della coda; i vecchi topic ready sono negati. Presenza include i campi del [UserSessionInfo](../bm-server/src/main/java/com/gsc/bm/service/session/model/UserSessionInfo.java), incluso sessionId; `QueuedPlayer` espone playerId e human.
+**Aggiornamento I17a/I17b:** ready quick 1v1 e FFA è inviato su destinazioni private ai soli partecipanti umani. Il client consuma quel ready e annulla le sottoscrizioni della coda; i vecchi topic ready sono negati. Presenza include i campi del [UserSessionInfo](../server/src/main/java/com/gsc/bm/service/session/model/UserSessionInfo.java), incluso sessionId; `QueuedPlayer` espone playerId e human.
 
 ## Modelli di messaggio
 
@@ -152,7 +157,7 @@ Mossa esemplificativa, con valori segnaposto: non è stata inviata al server.
 }
 ```
 
-**V:** `choices` usa chiavi `DISCARD_ONE` e `TARGET_ITEM`; può essere null per carte senza scelta. La risposta di una mossa include `moveReport`, mappa SELF/OPPONENT di liste di stringhe, e il getter booleano void. L'ID della partita nel body viene usato per scegliere il motore; quello nel path per i topic. Non c'è un confronto fra i due. [Move](../bm-server/src/main/java/com/gsc/bm/model/game/Move.java), [GameController](../bm-server/src/main/java/com/gsc/bm/api/ws/GameController.java).
+**V:** `choices` usa chiavi `DISCARD_ONE` e `TARGET_ITEM`; può essere null per carte senza scelta. La risposta di una mossa include `moveReport`, mappa SELF/OPPONENT di liste di stringhe, e il getter booleano void. L'ID della partita nel body viene usato per scegliere il motore; quello nel path per i topic. Non c'è un confronto fra i due. [Move](../server/src/main/java/com/gsc/bm/model/game/Move.java), [GameController](../server/src/main/java/com/gsc/bm/api/ws/GameController.java).
 
 | DTO | Campi significativi |
 |---|---|
@@ -164,12 +169,12 @@ Mossa esemplificativa, con valori segnaposto: non è stata inviata al server.
 | UserAccountInfo | username, email, role, decks, collection |
 | UserGuiDeck | deckId, character: CharacterCardView, basicActionCard, lastResortCard, characterBoundCards[], regularCards[] |
 
-Fonti: [ClientGameView](../bm-server/src/main/java/com/gsc/bm/service/view/model/client/ClientGameView.java), [ClientCharacterView](../bm-server/src/main/java/com/gsc/bm/service/view/model/client/ClientCharacterView.java), [Card](../bm-server/src/main/java/com/gsc/bm/model/cards/Card.java), [UserGuiDeck](../bm-server/src/main/java/com/gsc/bm/service/account/model/UserGuiDeck.java).
+Fonti: [ClientGameView](../server/src/main/java/com/gsc/bm/service/view/model/client/ClientGameView.java), [ClientCharacterView](../server/src/main/java/com/gsc/bm/service/view/model/client/ClientCharacterView.java), [Card](../server/src/main/java/com/gsc/bm/model/cards/Card.java), [UserGuiDeck](../server/src/main/java/com/gsc/bm/service/account/model/UserGuiDeck.java).
 
 ## Divergenze e limiti verificati
 
-- Il tipo client [Player](../bm-web-client/src/app/model/player.ts) dichiara `deckSize`, il server manda `deck`. Il tipo [Character](../bm-web-client/src/app/model/character.ts) richiede `dead` e `bindingName`, ma la vista di partita server non li contiene; `GameService.opponents` filtra proprio su `dead`.
-- Il tipo client [Card](../bm-web-client/src/app/model/card.ts) omette `bindingName` e `item` pur ricevendo dati usati nei mazzi. Le risposte sono assegnate via JSON.parse senza validazione runtime.
-- [BattleScene.handleDropEvent](../bm-web-client/src/app/client-phaser/scnenes/battle/battle-scene.ts) manda `choices:null` per carte ordinarie anche quando serve TARGET_ITEM; [UI_Item](../bm-web-client/src/app/client-phaser/scnenes/battle/model/ui-item.ts) usa il nome item come target anziché il suo proprietario. Il client debug costruisce invece TARGET_ITEM in [CardInHandComponent.playThis](../bm-web-client/src/app/client-debug/card-in-hand/card-in-hand.component.ts).
-- I comandi usano username/playerId scelti dal client, senza legame al principal. L'autenticazione CONNECT non garantisce autorizzazione su account, partita, bersagli e sottoscrizioni. [WebSocketAuthorizationSecurityConfig](../bm-server/src/main/java/com/gsc/bm/conf/ws/WebSocketAuthorizationSecurityConfig.java).
-- Non risultano idempotency key, sequence number, versione turno, timeout di richiesta, retry applicativo o recupero sessione in [WebsocketService](../bm-web-client/src/app/service/websocket.service.ts). Il numero `turn` del motore non compare in ClientGameView.
+- Il tipo client [Player](../client-debug/src/app/model/player.ts) dichiara `deckSize`, il server manda `deck`. Il tipo [Character](../client-debug/src/app/model/character.ts) richiede `dead` e `bindingName`, ma la vista di partita server non li contiene; `GameService.opponents` filtra proprio su `dead`.
+- Il tipo client [Card](../client-debug/src/app/model/card.ts) omette `bindingName` e `item` pur ricevendo dati usati nei mazzi. Le risposte sono assegnate via JSON.parse senza validazione runtime.
+- [BattleScene.handleDropEvent](../client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts) manda `choices:null` per carte ordinarie anche quando serve TARGET_ITEM; [UI_Item](../client-debug/src/app/client-phaser/scnenes/battle/model/ui-item.ts) usa il nome item come target anziché il suo proprietario. Il client debug costruisce invece TARGET_ITEM in [CardInHandComponent.playThis](../client-debug/src/app/client-debug/card-in-hand/card-in-hand.component.ts).
+- I comandi usano username/playerId scelti dal client, senza legame al principal. L'autenticazione CONNECT non garantisce autorizzazione su account, partita, bersagli e sottoscrizioni. [WebSocketAuthorizationSecurityConfig](../server/src/main/java/com/gsc/bm/conf/ws/WebSocketAuthorizationSecurityConfig.java).
+- Non risultano idempotency key, sequence number, versione turno, timeout di richiesta, retry applicativo o recupero sessione in [WebsocketService](../client-debug/src/app/service/websocket.service.ts). Il numero `turn` del motore non compare in ClientGameView.

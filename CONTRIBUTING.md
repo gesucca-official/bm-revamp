@@ -21,7 +21,7 @@ unit test non lo sostituiscono. Nella proposta descrivere problema, risultato e
 verifiche realmente eseguite, indicando eventuali limiti.
 
 Non includere database applicativi, journal di recupero, credenziali, cache o
-log locali. Il catalogo `bm-server/src/main/resources/cards.sqlite` e i PDF di
+log locali. Il catalogo `server/src/main/resources/cards.sqlite` e i PDF di
 stampa già prodotti sono invece parte del repository. Non rigenerare i manifest
 I22 per farli corrispondere a modifiche successive: documentano una base storica.
 
