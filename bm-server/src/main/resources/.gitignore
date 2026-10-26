@@ -1,0 +1,2 @@
+# Shared local defaults are tracked; machine secrets belong outside the repository.
+application-private.yml

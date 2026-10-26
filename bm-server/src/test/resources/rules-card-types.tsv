@@ -1,0 +1,40 @@
+bruiser.BadEducation	Azione	Regolare
+bruiser.BreakYourToy	Azione	Regolare
+bruiser.CantFeelAnything	Azione	Regolare
+bruiser.ExtremelyViolentBlow	Azione	Regolare
+bruiser.Glare	Azione	Regolare
+bruiser.HealingBlow	Azione	Regolare
+bruiser.MadeOfStone	Azione	Regolare
+bruiser.SeagullFly	Azione	Regolare
+bruiser.SickeningBlow	Azione	Regolare
+bruiser.StunningBlow	Azione	Regolare
+bruiser.SuperImpact	Azione	Regolare
+bruiser.WhatchaDoin	Azione	Regolare
+bruiser.YouStop	Azione	Regolare
+bruiser.character.LittleRage	Azione	Legata al personaggio
+bruiser.character.LittleSmack	Azione	Legata al personaggio
+com.Grab	Azione	Regolare
+com.ShuffleFeet	Azione	Regolare
+com.Steal	Azione	Regolare
+com.basic.BruiserGrab	Azione	Base
+com.basic.ToxicGrab	Azione	Base
+com.items.AnotherRottenBeer	Oggetto	—
+com.items.CocktailOnTheGround	Oggetto	—
+com.items.MarvelousCocktail	Oggetto	—
+com.items.RottenBeer	Oggetto	—
+com.last.Struggle	Azione	Ultima risorsa
+junkie.AmphetamineReflexes	Azione	Regolare
+junkie.BadTrip	Azione	Regolare
+junkie.BeggingMoney	Azione	Regolare
+junkie.Cough	Azione	Regolare
+junkie.EverythingIsDrug	Azione	Regolare
+junkie.GoingBerserk	Azione	Regolare
+junkie.LethalHeroinDose	Azione	Regolare
+junkie.MethDrivenRage	Azione	Regolare
+junkie.PervertedMetabolism	Azione	Regolare
+junkie.ToxicBloodDrain	Azione	Regolare
+junkie.character.PatheticBlade	Azione	Legata al personaggio
+junkie.character.RottenSmile	Azione	Legata al personaggio
+bruiser.character.BigBadBruiser	Personaggio	—
+junkie.character.ToxicJunkie	Personaggio	—
+com.tokens.BrokenBeerBottle	Oggetto	Token

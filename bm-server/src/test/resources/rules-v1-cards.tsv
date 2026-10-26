@@ -1,0 +1,33 @@
+bruiser.BadEducation	1	OPPONENT	VIOLENCE=10
+bruiser.BreakYourToy	1	FAR_ITEM	VIOLENCE=10
+bruiser.CantFeelAnything	2	SELF	VIOLENCE=20
+bruiser.ExtremelyViolentBlow	1	OPPONENT	VIOLENCE=20
+bruiser.Glare	0	SELF	
+bruiser.HealingBlow	1	OPPONENT	VIOLENCE=20
+bruiser.MadeOfStone	0	SELF	
+bruiser.SeagullFly	1	OPPONENT	VIOLENCE=10
+bruiser.SickeningBlow	1	OPPONENT	VIOLENCE=15
+bruiser.StunningBlow	1	OPPONENT	VIOLENCE=15
+bruiser.SuperImpact	0	OPPONENT	VIOLENCE=25
+bruiser.WhatchaDoin	2	OPPONENT	VIOLENCE=10,ALERTNESS=10
+bruiser.YouStop	2	OPPONENT	VIOLENCE=5
+bruiser.character.LittleRage	2	SELF	
+bruiser.character.LittleSmack	1	OPPONENT	
+com.Grab	1	NEAR_ITEM	
+com.ShuffleFeet	-1	OPPONENT	
+com.Steal	0	FAR_ITEM	ALERTNESS=10
+com.basic.BruiserGrab	-1	NEAR_ITEM	
+com.basic.ToxicGrab	1	NEAR_ITEM	
+com.last.Struggle	1	OPPONENT	
+junkie.AmphetamineReflexes	2	SELF	TOXICITY=10
+junkie.BadTrip	2	SELF	ALERTNESS=10
+junkie.BeggingMoney	0	OPPONENT	TOXICITY=25
+junkie.Cough	1	OPPONENT	TOXICITY=10
+junkie.EverythingIsDrug	1	NEAR_ITEM	
+junkie.GoingBerserk	1	OPPONENT	ALCOHOL=10
+junkie.LethalHeroinDose	1	SELF	
+junkie.MethDrivenRage	1	OPPONENT	TOXICITY=5
+junkie.PervertedMetabolism	1	SELF	
+junkie.ToxicBloodDrain	1	OPPONENT	TOXICITY=10
+junkie.character.PatheticBlade	1	OPPONENT	
+junkie.character.RottenSmile	2	OPPONENT	

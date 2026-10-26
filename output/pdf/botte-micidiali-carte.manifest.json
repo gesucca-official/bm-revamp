@@ -1,0 +1,705 @@
+{
+  "rules_version": "1.5",
+  "catalog_count": 40,
+  "printed_count": 40,
+  "card_pages": 5,
+  "total_pages": 8,
+  "grid": [
+    3,
+    3
+  ],
+  "trim_mm": [
+    62,
+    87
+  ],
+  "minimum_body_pt": 9,
+  "sources": {
+    "bm-server\\src\\main\\resources\\cards.sqlite": "781c467d96acafdd6818427b638a855fbb1b6bc35e462d7396acecc5b2696963",
+    "docs\\game-rules.md": "7f592939e8269ee73b7affc94f451850d4ceaeacac2b6bebe0f5357ed216e5cc",
+    "docs\\rules-catalog.json": "5d34bab69bdde7f11a7d6c0f68933a164338fe3338064e6cef56863706dac280"
+  },
+  "inventory": [
+    {
+      "id": "bruiser.BadEducation",
+      "name": "PERMESSO SCUSA ORA SMETTI",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.BreakYourToy",
+      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.CantFeelAnything",
+      "name": "GENTILE IL TUO CAREZZO",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.ExtremelyViolentBlow",
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.Glare",
+      "name": "PAZIENZA: FINITA",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.HealingBlow",
+      "name": "ORMALE GUARIAMOTI",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.MadeOfStone",
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.SeagullFly",
+      "name": "GABBIANO DUNQUE VOLIAMOTI",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.SickeningBlow",
+      "name": "AMMALIAMOTI DI BOTTE",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.StunningBlow",
+      "name": "STORDIAMOTI HO DETTO",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.SuperImpact",
+      "name": "GARGANTUESCO IMPATTO SUL TU",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.WhatchaDoin",
+      "name": "COSA FAI NON É UNA DOMANDA",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.YouStop",
+      "name": "FAI BASTA",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.character.LittleRage",
+      "name": "LIEVE FASTIDIO",
+      "type": "Azione",
+      "subtype": "Legata al personaggio",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.character.LittleSmack",
+      "name": "SVEGLIAMOCI MA TU NO",
+      "type": "Azione",
+      "subtype": "Legata al personaggio",
+      "copies": 1
+    },
+    {
+      "id": "com.Grab",
+      "name": "Grab",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "com.ShuffleFeet",
+      "name": "Scatto Repentino",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "com.Steal",
+      "name": "Steal",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "com.basic.BruiserGrab",
+      "name": "ADOPERIAMOTI",
+      "type": "Azione",
+      "subtype": "Base",
+      "copies": 1
+    },
+    {
+      "id": "com.basic.ToxicGrab",
+      "name": "Desiderio Incontrollabile",
+      "type": "Azione",
+      "subtype": "Base",
+      "copies": 1
+    },
+    {
+      "id": "com.items.AnotherRottenBeer",
+      "name": "Tennents Super",
+      "type": "Oggetto",
+      "subtype": "",
+      "copies": 1
+    },
+    {
+      "id": "com.items.CocktailOnTheGround",
+      "name": "Negroni Trovato per Terra",
+      "type": "Oggetto",
+      "subtype": "",
+      "copies": 1
+    },
+    {
+      "id": "com.items.MarvelousCocktail",
+      "name": "Mescolone Micidiale",
+      "type": "Oggetto",
+      "subtype": "",
+      "copies": 1
+    },
+    {
+      "id": "com.items.RottenBeer",
+      "name": "Peroni da 66, calda",
+      "type": "Oggetto",
+      "subtype": "",
+      "copies": 1
+    },
+    {
+      "id": "com.last.Struggle",
+      "name": "Last Resort: Banzai!!!",
+      "type": "Azione",
+      "subtype": "Ultima risorsa",
+      "copies": 1
+    },
+    {
+      "id": "junkie.AmphetamineReflexes",
+      "name": "Riflessi Aumentati dalla Speed",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.BadTrip",
+      "name": "Presa Male di Brutto",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.BeggingMoney",
+      "name": "Ce l'hai due spiccioli per il biglietto?",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.Cough",
+      "name": "Tossicone Scatarrante",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.EverythingIsDrug",
+      "name": "Tutto è Droga",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.GoingBerserk",
+      "name": "Estasi da Coca Etilene",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.LethalHeroinDose",
+      "name": "Dose di Eroina da Cavalli",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.MethDrivenRage",
+      "name": "Rabbia Psicotica da Meth",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.PervertedMetabolism",
+      "name": "Metabolismo Corrotto",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.ToxicBloodDrain",
+      "name": "C'è del sangue nella mia droga",
+      "type": "Azione",
+      "subtype": "Regolare",
+      "copies": 1
+    },
+    {
+      "id": "junkie.character.PatheticBlade",
+      "name": "Ago Marcio e Spezzato",
+      "type": "Azione",
+      "subtype": "Legata al personaggio",
+      "copies": 1
+    },
+    {
+      "id": "junkie.character.RottenSmile",
+      "name": "Ghigno co' i' Denti Marci",
+      "type": "Azione",
+      "subtype": "Legata al personaggio",
+      "copies": 1
+    },
+    {
+      "id": "bruiser.character.BigBadBruiser",
+      "name": "Spazienzio de la Ucciso",
+      "type": "Personaggio",
+      "subtype": "",
+      "copies": 1
+    },
+    {
+      "id": "junkie.character.ToxicJunkie",
+      "name": "Tossico del Serraglio",
+      "type": "Personaggio",
+      "subtype": "",
+      "copies": 1
+    },
+    {
+      "id": "com.tokens.BrokenBeerBottle",
+      "name": "Broken Beer Bottle",
+      "type": "Oggetto",
+      "subtype": "Token",
+      "copies": 1
+    }
+  ],
+  "placements": [
+    {
+      "id": "bruiser.BadEducation",
+      "page": 1,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.BreakYourToy",
+      "page": 1,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.CantFeelAnything",
+      "page": 1,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.ExtremelyViolentBlow",
+      "page": 1,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.Glare",
+      "page": 1,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.HealingBlow",
+      "page": 1,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.MadeOfStone",
+      "page": 1,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.SeagullFly",
+      "page": 1,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.SickeningBlow",
+      "page": 1,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.StunningBlow",
+      "page": 2,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.SuperImpact",
+      "page": 2,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.WhatchaDoin",
+      "page": 2,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.YouStop",
+      "page": 2,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.character.LittleRage",
+      "page": 2,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.character.LittleSmack",
+      "page": 2,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.Grab",
+      "page": 2,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.ShuffleFeet",
+      "page": 2,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.Steal",
+      "page": 2,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.basic.BruiserGrab",
+      "page": 3,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.basic.ToxicGrab",
+      "page": 3,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.AnotherRottenBeer",
+      "page": 3,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.CocktailOnTheGround",
+      "page": 3,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.MarvelousCocktail",
+      "page": 3,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.items.RottenBeer",
+      "page": 3,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.last.Struggle",
+      "page": 3,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.AmphetamineReflexes",
+      "page": 3,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.BadTrip",
+      "page": 3,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.BeggingMoney",
+      "page": 4,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.Cough",
+      "page": 4,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.EverythingIsDrug",
+      "page": 4,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.GoingBerserk",
+      "page": 4,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.LethalHeroinDose",
+      "page": 4,
+      "rect_mm": [
+        74.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.MethDrivenRage",
+      "page": 4,
+      "rect_mm": [
+        139.0,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.PervertedMetabolism",
+      "page": 4,
+      "rect_mm": [
+        8.999999999999998,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.ToxicBloodDrain",
+      "page": 4,
+      "rect_mm": [
+        74.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.character.PatheticBlade",
+      "page": 4,
+      "rect_mm": [
+        139.0,
+        14.999999999999977,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.character.RottenSmile",
+      "page": 5,
+      "rect_mm": [
+        8.999999999999998,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "bruiser.character.BigBadBruiser",
+      "page": 5,
+      "rect_mm": [
+        74.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "junkie.character.ToxicJunkie",
+      "page": 5,
+      "rect_mm": [
+        139.0,
+        195.0,
+        62.00000000000001,
+        87.0
+      ]
+    },
+    {
+      "id": "com.tokens.BrokenBeerBottle",
+      "page": 5,
+      "rect_mm": [
+        8.999999999999998,
+        104.99999999999996,
+        62.00000000000001,
+        87.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Local development only: account seeding requires explicit app.dev.seed-accounts=true.
+server:
+  address: 127.0.0.1
+stomp:
+  allowedOrigin: http://localhost:4200
+log:
+  db: Y

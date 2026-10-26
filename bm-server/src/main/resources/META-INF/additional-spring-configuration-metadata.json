@@ -1,0 +1,57 @@
+{
+  "properties": [
+    {
+      "name": "http-auth.username",
+      "type": "java.lang.String",
+      "description": "HTTP Basic Auth Username."
+    },
+    {
+      "name": "http-auth.password",
+      "type": "java.lang.String",
+      "description": "HTTP Basic Auth Password."
+    },
+    {
+      "name": "log.db",
+      "type": "java.lang.String",
+      "description": "Legacy game/client log switch (Y or N). I19a quick match archives are always recorded."
+    },
+    {
+      "name": "spring.datasource.internal.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.spring.datasource.internal.url."
+    },
+    {
+      "name": "spring.datasource.internal.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.spring.datasource.internal.driver-class-name."
+    },
+    {
+      "name": "stomp.allowedOrigin",
+      "type": "java.lang.String",
+      "description": "Allowed origin in WebSocket config (accept requests only from this domain)."
+    },
+    {
+      "name": "app.database.path",
+      "type": "java.lang.String",
+      "description": "Writable application SQLite file, separate from the bundled read-only catalog."
+    },
+    {
+      "name": "app.archive.retry-ms",
+      "type": "java.lang.Long",
+      "defaultValue": 1000,
+      "description": "Delay between retries of immutable match analysis batches; never replays game commands."
+    },
+    {
+      "name": "app.mail.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Explicitly enable SMTP; disabled sender otherwise fails without connecting."
+    },
+    {
+      "name": "app.dev.seed-accounts",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Opt-in synthetic accounts, local profile and loopback binding only; existing identities are preserved."
+    }
+  ]
+}

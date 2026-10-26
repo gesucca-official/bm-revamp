@@ -1,0 +1,2 @@
+# Preserve the original mixed line endings and candidate hashes on every checkout.
+* -text

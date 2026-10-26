@@ -1,0 +1,657 @@
+[
+  {
+    "node": "v12.22.12",
+    "platform": "win32",
+    "arch": "x64",
+    "moduleLoadMs": 58.12720000743866,
+    "idleMemory": {
+      "rss": 42508288,
+      "heapTotal": 9674752,
+      "heapUsed": 5284984,
+      "external": 1501129,
+      "arrayBuffers": 57888
+    },
+    "dependencies": [
+      {
+        "name": "sockjs-client",
+        "location": "sockjs-client",
+        "version": "1.5.0",
+        "locked": "1.5.0",
+        "installedBytes": 839418
+      },
+      {
+        "name": "debug",
+        "location": "sockjs-client/node_modules/debug",
+        "version": "3.2.7",
+        "locked": "3.2.7",
+        "installedBytes": 53459
+      },
+      {
+        "name": "ms",
+        "location": "ms",
+        "version": "2.1.2",
+        "locked": "2.1.2",
+        "installedBytes": 7037
+      },
+      {
+        "name": "eventsource",
+        "location": "eventsource",
+        "version": "1.0.7",
+        "locked": "1.0.7",
+        "installedBytes": 444978
+      },
+      {
+        "name": "original",
+        "location": "original",
+        "version": "1.0.2",
+        "locked": "1.0.2",
+        "installedBytes": 5009
+      },
+      {
+        "name": "url-parse",
+        "location": "url-parse",
+        "version": "1.5.1",
+        "locked": "1.5.1",
+        "installedBytes": 53043
+      },
+      {
+        "name": "querystringify",
+        "location": "querystringify",
+        "version": "2.2.0",
+        "locked": "2.2.0",
+        "installedBytes": 7190
+      },
+      {
+        "name": "requires-port",
+        "location": "requires-port",
+        "version": "1.0.0",
+        "locked": "1.0.0",
+        "installedBytes": 8731
+      },
+      {
+        "name": "faye-websocket",
+        "location": "faye-websocket",
+        "version": "0.11.3",
+        "locked": "0.11.3",
+        "installedBytes": 30938
+      },
+      {
+        "name": "websocket-driver",
+        "location": "websocket-driver",
+        "version": "0.7.4",
+        "locked": "0.7.4",
+        "installedBytes": 67676
+      },
+      {
+        "name": "http-parser-js",
+        "location": "http-parser-js",
+        "version": "0.5.3",
+        "locked": "0.5.3",
+        "installedBytes": 21216
+      },
+      {
+        "name": "safe-buffer",
+        "location": "safe-buffer",
+        "version": "5.1.2",
+        "locked": "5.1.2",
+        "installedBytes": 31908
+      },
+      {
+        "name": "websocket-extensions",
+        "location": "websocket-extensions",
+        "version": "0.1.4",
+        "locked": "0.1.4",
+        "installedBytes": 55286
+      },
+      {
+        "name": "inherits",
+        "location": "inherits",
+        "version": "2.0.4",
+        "locked": "2.0.4",
+        "installedBytes": 4171
+      },
+      {
+        "name": "json3",
+        "location": "json3",
+        "version": "3.3.3",
+        "locked": "3.3.3",
+        "installedBytes": 77303
+      },
+      {
+        "name": "stompjs",
+        "location": "stompjs",
+        "version": "2.3.3",
+        "locked": "2.3.3",
+        "installedBytes": 659409
+      }
+    ],
+    "lockSha256": "f76f9a2af5706b61be42ef7e8ec06d119af82c6681035b7225f7788322866944",
+    "processWallMs": 137.075,
+    "startupToHelpExitMs": 127.6003,
+    "sample": 1
+  },
+  {
+    "node": "v12.22.12",
+    "platform": "win32",
+    "arch": "x64",
+    "moduleLoadMs": 59.656399965286255,
+    "idleMemory": {
+      "rss": 42627072,
+      "heapTotal": 9936896,
+      "heapUsed": 5232480,
+      "external": 1501129,
+      "arrayBuffers": 57888
+    },
+    "dependencies": [
+      {
+        "name": "sockjs-client",
+        "location": "sockjs-client",
+        "version": "1.5.0",
+        "locked": "1.5.0",
+        "installedBytes": 839418
+      },
+      {
+        "name": "debug",
+        "location": "sockjs-client/node_modules/debug",
+        "version": "3.2.7",
+        "locked": "3.2.7",
+        "installedBytes": 53459
+      },
+      {
+        "name": "ms",
+        "location": "ms",
+        "version": "2.1.2",
+        "locked": "2.1.2",
+        "installedBytes": 7037
+      },
+      {
+        "name": "eventsource",
+        "location": "eventsource",
+        "version": "1.0.7",
+        "locked": "1.0.7",
+        "installedBytes": 444978
+      },
+      {
+        "name": "original",
+        "location": "original",
+        "version": "1.0.2",
+        "locked": "1.0.2",
+        "installedBytes": 5009
+      },
+      {
+        "name": "url-parse",
+        "location": "url-parse",
+        "version": "1.5.1",
+        "locked": "1.5.1",
+        "installedBytes": 53043
+      },
+      {
+        "name": "querystringify",
+        "location": "querystringify",
+        "version": "2.2.0",
+        "locked": "2.2.0",
+        "installedBytes": 7190
+      },
+      {
+        "name": "requires-port",
+        "location": "requires-port",
+        "version": "1.0.0",
+        "locked": "1.0.0",
+        "installedBytes": 8731
+      },
+      {
+        "name": "faye-websocket",
+        "location": "faye-websocket",
+        "version": "0.11.3",
+        "locked": "0.11.3",
+        "installedBytes": 30938
+      },
+      {
+        "name": "websocket-driver",
+        "location": "websocket-driver",
+        "version": "0.7.4",
+        "locked": "0.7.4",
+        "installedBytes": 67676
+      },
+      {
+        "name": "http-parser-js",
+        "location": "http-parser-js",
+        "version": "0.5.3",
+        "locked": "0.5.3",
+        "installedBytes": 21216
+      },
+      {
+        "name": "safe-buffer",
+        "location": "safe-buffer",
+        "version": "5.1.2",
+        "locked": "5.1.2",
+        "installedBytes": 31908
+      },
+      {
+        "name": "websocket-extensions",
+        "location": "websocket-extensions",
+        "version": "0.1.4",
+        "locked": "0.1.4",
+        "installedBytes": 55286
+      },
+      {
+        "name": "inherits",
+        "location": "inherits",
+        "version": "2.0.4",
+        "locked": "2.0.4",
+        "installedBytes": 4171
+      },
+      {
+        "name": "json3",
+        "location": "json3",
+        "version": "3.3.3",
+        "locked": "3.3.3",
+        "installedBytes": 77303
+      },
+      {
+        "name": "stompjs",
+        "location": "stompjs",
+        "version": "2.3.3",
+        "locked": "2.3.3",
+        "installedBytes": 659409
+      }
+    ],
+    "lockSha256": "f76f9a2af5706b61be42ef7e8ec06d119af82c6681035b7225f7788322866944",
+    "processWallMs": 124.202,
+    "startupToHelpExitMs": 101.6712,
+    "sample": 2
+  },
+  {
+    "node": "v12.22.12",
+    "platform": "win32",
+    "arch": "x64",
+    "moduleLoadMs": 59.11080002784729,
+    "idleMemory": {
+      "rss": 42622976,
+      "heapTotal": 9674752,
+      "heapUsed": 5256064,
+      "external": 1501129,
+      "arrayBuffers": 57888
+    },
+    "dependencies": [
+      {
+        "name": "sockjs-client",
+        "location": "sockjs-client",
+        "version": "1.5.0",
+        "locked": "1.5.0",
+        "installedBytes": 839418
+      },
+      {
+        "name": "debug",
+        "location": "sockjs-client/node_modules/debug",
+        "version": "3.2.7",
+        "locked": "3.2.7",
+        "installedBytes": 53459
+      },
+      {
+        "name": "ms",
+        "location": "ms",
+        "version": "2.1.2",
+        "locked": "2.1.2",
+        "installedBytes": 7037
+      },
+      {
+        "name": "eventsource",
+        "location": "eventsource",
+        "version": "1.0.7",
+        "locked": "1.0.7",
+        "installedBytes": 444978
+      },
+      {
+        "name": "original",
+        "location": "original",
+        "version": "1.0.2",
+        "locked": "1.0.2",
+        "installedBytes": 5009
+      },
+      {
+        "name": "url-parse",
+        "location": "url-parse",
+        "version": "1.5.1",
+        "locked": "1.5.1",
+        "installedBytes": 53043
+      },
+      {
+        "name": "querystringify",
+        "location": "querystringify",
+        "version": "2.2.0",
+        "locked": "2.2.0",
+        "installedBytes": 7190
+      },
+      {
+        "name": "requires-port",
+        "location": "requires-port",
+        "version": "1.0.0",
+        "locked": "1.0.0",
+        "installedBytes": 8731
+      },
+      {
+        "name": "faye-websocket",
+        "location": "faye-websocket",
+        "version": "0.11.3",
+        "locked": "0.11.3",
+        "installedBytes": 30938
+      },
+      {
+        "name": "websocket-driver",
+        "location": "websocket-driver",
+        "version": "0.7.4",
+        "locked": "0.7.4",
+        "installedBytes": 67676
+      },
+      {
+        "name": "http-parser-js",
+        "location": "http-parser-js",
+        "version": "0.5.3",
+        "locked": "0.5.3",
+        "installedBytes": 21216
+      },
+      {
+        "name": "safe-buffer",
+        "location": "safe-buffer",
+        "version": "5.1.2",
+        "locked": "5.1.2",
+        "installedBytes": 31908
+      },
+      {
+        "name": "websocket-extensions",
+        "location": "websocket-extensions",
+        "version": "0.1.4",
+        "locked": "0.1.4",
+        "installedBytes": 55286
+      },
+      {
+        "name": "inherits",
+        "location": "inherits",
+        "version": "2.0.4",
+        "locked": "2.0.4",
+        "installedBytes": 4171
+      },
+      {
+        "name": "json3",
+        "location": "json3",
+        "version": "3.3.3",
+        "locked": "3.3.3",
+        "installedBytes": 77303
+      },
+      {
+        "name": "stompjs",
+        "location": "stompjs",
+        "version": "2.3.3",
+        "locked": "2.3.3",
+        "installedBytes": 659409
+      }
+    ],
+    "lockSha256": "f76f9a2af5706b61be42ef7e8ec06d119af82c6681035b7225f7788322866944",
+    "processWallMs": 124.0174,
+    "startupToHelpExitMs": 100.4978,
+    "sample": 3
+  },
+  {
+    "node": "v12.22.12",
+    "platform": "win32",
+    "arch": "x64",
+    "moduleLoadMs": 57.45169997215271,
+    "idleMemory": {
+      "rss": 42471424,
+      "heapTotal": 9674752,
+      "heapUsed": 5268200,
+      "external": 1501129,
+      "arrayBuffers": 57888
+    },
+    "dependencies": [
+      {
+        "name": "sockjs-client",
+        "location": "sockjs-client",
+        "version": "1.5.0",
+        "locked": "1.5.0",
+        "installedBytes": 839418
+      },
+      {
+        "name": "debug",
+        "location": "sockjs-client/node_modules/debug",
+        "version": "3.2.7",
+        "locked": "3.2.7",
+        "installedBytes": 53459
+      },
+      {
+        "name": "ms",
+        "location": "ms",
+        "version": "2.1.2",
+        "locked": "2.1.2",
+        "installedBytes": 7037
+      },
+      {
+        "name": "eventsource",
+        "location": "eventsource",
+        "version": "1.0.7",
+        "locked": "1.0.7",
+        "installedBytes": 444978
+      },
+      {
+        "name": "original",
+        "location": "original",
+        "version": "1.0.2",
+        "locked": "1.0.2",
+        "installedBytes": 5009
+      },
+      {
+        "name": "url-parse",
+        "location": "url-parse",
+        "version": "1.5.1",
+        "locked": "1.5.1",
+        "installedBytes": 53043
+      },
+      {
+        "name": "querystringify",
+        "location": "querystringify",
+        "version": "2.2.0",
+        "locked": "2.2.0",
+        "installedBytes": 7190
+      },
+      {
+        "name": "requires-port",
+        "location": "requires-port",
+        "version": "1.0.0",
+        "locked": "1.0.0",
+        "installedBytes": 8731
+      },
+      {
+        "name": "faye-websocket",
+        "location": "faye-websocket",
+        "version": "0.11.3",
+        "locked": "0.11.3",
+        "installedBytes": 30938
+      },
+      {
+        "name": "websocket-driver",
+        "location": "websocket-driver",
+        "version": "0.7.4",
+        "locked": "0.7.4",
+        "installedBytes": 67676
+      },
+      {
+        "name": "http-parser-js",
+        "location": "http-parser-js",
+        "version": "0.5.3",
+        "locked": "0.5.3",
+        "installedBytes": 21216
+      },
+      {
+        "name": "safe-buffer",
+        "location": "safe-buffer",
+        "version": "5.1.2",
+        "locked": "5.1.2",
+        "installedBytes": 31908
+      },
+      {
+        "name": "websocket-extensions",
+        "location": "websocket-extensions",
+        "version": "0.1.4",
+        "locked": "0.1.4",
+        "installedBytes": 55286
+      },
+      {
+        "name": "inherits",
+        "location": "inherits",
+        "version": "2.0.4",
+        "locked": "2.0.4",
+        "installedBytes": 4171
+      },
+      {
+        "name": "json3",
+        "location": "json3",
+        "version": "3.3.3",
+        "locked": "3.3.3",
+        "installedBytes": 77303
+      },
+      {
+        "name": "stompjs",
+        "location": "stompjs",
+        "version": "2.3.3",
+        "locked": "2.3.3",
+        "installedBytes": 659409
+      }
+    ],
+    "lockSha256": "f76f9a2af5706b61be42ef7e8ec06d119af82c6681035b7225f7788322866944",
+    "processWallMs": 123.0023,
+    "startupToHelpExitMs": 103.9801,
+    "sample": 4
+  },
+  {
+    "node": "v12.22.12",
+    "platform": "win32",
+    "arch": "x64",
+    "moduleLoadMs": 57.84179997444153,
+    "idleMemory": {
+      "rss": 42414080,
+      "heapTotal": 9674752,
+      "heapUsed": 5229448,
+      "external": 1501129,
+      "arrayBuffers": 57888
+    },
+    "dependencies": [
+      {
+        "name": "sockjs-client",
+        "location": "sockjs-client",
+        "version": "1.5.0",
+        "locked": "1.5.0",
+        "installedBytes": 839418
+      },
+      {
+        "name": "debug",
+        "location": "sockjs-client/node_modules/debug",
+        "version": "3.2.7",
+        "locked": "3.2.7",
+        "installedBytes": 53459
+      },
+      {
+        "name": "ms",
+        "location": "ms",
+        "version": "2.1.2",
+        "locked": "2.1.2",
+        "installedBytes": 7037
+      },
+      {
+        "name": "eventsource",
+        "location": "eventsource",
+        "version": "1.0.7",
+        "locked": "1.0.7",
+        "installedBytes": 444978
+      },
+      {
+        "name": "original",
+        "location": "original",
+        "version": "1.0.2",
+        "locked": "1.0.2",
+        "installedBytes": 5009
+      },
+      {
+        "name": "url-parse",
+        "location": "url-parse",
+        "version": "1.5.1",
+        "locked": "1.5.1",
+        "installedBytes": 53043
+      },
+      {
+        "name": "querystringify",
+        "location": "querystringify",
+        "version": "2.2.0",
+        "locked": "2.2.0",
+        "installedBytes": 7190
+      },
+      {
+        "name": "requires-port",
+        "location": "requires-port",
+        "version": "1.0.0",
+        "locked": "1.0.0",
+        "installedBytes": 8731
+      },
+      {
+        "name": "faye-websocket",
+        "location": "faye-websocket",
+        "version": "0.11.3",
+        "locked": "0.11.3",
+        "installedBytes": 30938
+      },
+      {
+        "name": "websocket-driver",
+        "location": "websocket-driver",
+        "version": "0.7.4",
+        "locked": "0.7.4",
+        "installedBytes": 67676
+      },
+      {
+        "name": "http-parser-js",
+        "location": "http-parser-js",
+        "version": "0.5.3",
+        "locked": "0.5.3",
+        "installedBytes": 21216
+      },
+      {
+        "name": "safe-buffer",
+        "location": "safe-buffer",
+        "version": "5.1.2",
+        "locked": "5.1.2",
+        "installedBytes": 31908
+      },
+      {
+        "name": "websocket-extensions",
+        "location": "websocket-extensions",
+        "version": "0.1.4",
+        "locked": "0.1.4",
+        "installedBytes": 55286
+      },
+      {
+        "name": "inherits",
+        "location": "inherits",
+        "version": "2.0.4",
+        "locked": "2.0.4",
+        "installedBytes": 4171
+      },
+      {
+        "name": "json3",
+        "location": "json3",
+        "version": "3.3.3",
+        "locked": "3.3.3",
+        "installedBytes": 77303
+      },
+      {
+        "name": "stompjs",
+        "location": "stompjs",
+        "version": "2.3.3",
+        "locked": "2.3.3",
+        "installedBytes": 659409
+      }
+    ],
+    "lockSha256": "f76f9a2af5706b61be42ef7e8ec06d119af82c6681035b7225f7788322866944",
+    "processWallMs": 123.4051,
+    "startupToHelpExitMs": 101.438,
+    "sample": 5
+  }
+]

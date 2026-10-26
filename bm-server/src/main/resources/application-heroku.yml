@@ -1,0 +1,14 @@
+# Historical deployment profile; application storage uses app.database.path, never PostgreSQL.
+spring:
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+http-auth:
+  username: ${HTTP_AUTH_USERNAME}
+  password: ${HTTP_AUTH_PASSWORD}
+stomp:
+  allowedOrigin: https://botte-micidiali.herokuapp.com
+log:
+  db: Y

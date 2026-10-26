@@ -1,0 +1,29 @@
+{
+  "platform": "windows-x64",
+  "tools": [
+    {
+      "name": "java",
+      "version": "11.0.29+7",
+      "url": "https://cdn.azul.com/zulu/bin/zulu11.84.17-ca-jdk11.0.29-win_x64.zip",
+      "algorithm": "sha256",
+      "checksum": "f4002a8090662ff66bf9f3248604be0f9d226e964085bd59bbea4b8535df3de1",
+      "directory": "zulu11.84.17-ca-jdk11.0.29-win_x64"
+    },
+    {
+      "name": "node",
+      "version": "12.22.12",
+      "url": "https://nodejs.org/dist/v12.22.12/node-v12.22.12-win-x64.zip",
+      "algorithm": "sha256",
+      "checksum": "09639bac66d4dc4dd52179968209413ad4b7360e917dcbe8834052a4b936a087",
+      "directory": "node-v12.22.12-win-x64"
+    },
+    {
+      "name": "maven",
+      "version": "3.6.3",
+      "url": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip",
+      "algorithm": "sha1",
+      "checksum": "b36434a3a5c7a6b75ac955df152e4325765d0804",
+      "directory": "apache-maven-3.6.3"
+    }
+  ]
+}

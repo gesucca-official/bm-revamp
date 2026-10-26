@@ -1,0 +1,23 @@
+<div *ngIf="!gameService.graphicClient && gameService.gameState" class="tabbed">
+  <p role="status">{{clockMessage}}</p>
+  <button mat-raised-button color="warn" (click)="leaveGame()">Abbandona e torna all’hub (forfait)</button>
+  <button mat-button (click)="dropConnection()">Simula disconnessione (30 s per rientrare)</button>
+  <div fxLayout="row wrap" fxLayoutGap="5px grid">
+    <app-character-card fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%"
+                        [isPlayer]="true"
+                        [playerState]="gameService.playerState"></app-character-card>
+    <app-character-card fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let opponent of gameService.opponents"
+                        [isPlayer]="false"
+                        [playerState]="opponent"></app-character-card>
+  </div>
+  <br>
+  <app-card-in-hand *ngFor="let card of gameService.cardsInHand"
+                    [cardData]="card"
+                    [targets]="gameService.getTargets(card)"
+                    [chosenTarget]="gameService.getTargets(card)[0]"
+                    [discardableCards]="getDiscardableCards()"
+                    [cardToDiscard]="getDiscardableCards()[0]"
+                    [character]="gameService.playerState.character"
+                    (cardPlayedEvent)="playCard($event)"></app-card-in-hand>
+</div>
+<ngx-loading [show]="sessionService.isLoadingGame" [config]="{fullScreenBackdrop: true}"></ngx-loading>

@@ -1,0 +1,7 @@
+.tools/
+.build-logs/
+data/
+.repository-history/
+tmp/
+__pycache__/
+*.py[cod]

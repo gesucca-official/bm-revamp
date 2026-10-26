@@ -1,0 +1,9 @@
+server:
+  address: 127.0.0.1
+stomp:
+  allowedOrigin: http://localhost:4200
+app:
+  mail:
+    enabled: false
+log:
+  db: N

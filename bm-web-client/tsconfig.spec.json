@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2018",
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": ["tests/**/*.ts"]
+}
