@@ -16,14 +16,16 @@ Eseguire dalla radice `build.ps1 -Task Test -Offline`, `check-rules.py` e,
 separatamente, `build.ps1 -Task TestServerContext -Offline`; quindi
 `verify-match-manifests.py`. Il profilo completo rigenera le evidenze CLI/I24
 richieste dal controllo manifest. Per verificare l'esatto candidato consegnato
-prima di rigenerare artefatti/evidenze: `python scripts/i22-candidate.py --verify`.
+prima di rigenerare artefatti/evidenze: `python scripts/i22-candidate.py --verify --snapshot` (snapshot approvato e
+artefatti/evidenze locali; la sola `--verify` controlla lo stato di lavoro originale).
 Un nuovo build può cambiare il contenitore JAR e le prove hanno ID casuali:
 per una nuova accettazione rigenerare consapevolmente il manifest solo dopo le
 verifiche complete. [Report I22 e limiti](reports/i22-report.md).
 
 Le sezioni datate sotto sono conservate come storico: frasi su I26 parziale,
 regolamenti precedenti o contesto Spring rosso non descrivono lo stato corrente.
-La base richiede ancora approvazione esplicita del proprietario.
+Base approvata esplicitamente il 26 ottobre 2026: candidato
+`I22-3e71300e057687ba`, limiti del report accettati.
 
 ---
 

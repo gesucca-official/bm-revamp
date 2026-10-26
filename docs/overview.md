@@ -4,8 +4,8 @@ Prerequisiti tecnici della base acquisiti: quick 1vCom, open 1vCom, quick 1v1 e
 FFA, mazzi strutturalmente validi, identità/sessione unica, CLI, clock e forfait,
 reconnect 30 s nel processo vivo, archivio completo e restart-draw senza restore.
 Regolamento 1.6; Elo e backlog futuro esclusi. Monorepo unico preparato con
-cronologie e lavoro preesistente conservati. L'approvazione del proprietario
-resta distinta dalla verifica tecnica: [report corrente I22](reports/i22-report.md).
+cronologie e lavoro preesistente conservati. Il proprietario ha approvato esplicitamente il candidato I22 e i limiti il
+26 ottobre 2026; roadmap della base conclusa: [report corrente I22](reports/i22-report.md).
 Le ricognizioni datate sotto non descrivono automaticamente lacune ancora aperte.
 
 > Pianificazione aggiornata il 24 ottobre 2026: [roadmap della versione base approvata](roadmap.md). I01–I11 acquisiti; prossimo I26, CLI testuale leggero per gli scenari automatici applicativi senza UX (unit e integrazioni mirate restano diretti). Elo/I25/F38 rinviato, fuori dalla base. Chiusura I22 con prove tecniche e UX e approvazione esplicita del proprietario. Nessuna nuova implementazione con questa revisione; regolamento vigente 1.3. I censimenti e i risultati datati sotto restano storici nei rispettivi ambiti.

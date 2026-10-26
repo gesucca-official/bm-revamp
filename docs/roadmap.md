@@ -1,6 +1,6 @@
 # Roadmap verso la versione base approvata
 
-Revisione del **26 ottobre 2026**. Pianificazione della base; I14/I23 completati dopo verifica reale di I13/I19a/I26; I16 resta acquisito. **I17a/b, I19b, I24 e I19c completati e verificati**; **I22: candidato verificato, approvazione del proprietario pendente**. I24 recepisce R06 prima del codice e chiude gli attivi dopo arresto pulito/crash con draw consultabile «riavvio server». I19c verifica manifest ed export trasversalmente alle quattro modalità e ai cicli ordinari, leave/forfait, timeout, reconnect, arresto e crash. Fonte normativa: [regolamento corrente 1.6](game-rules.md); evidenze: [stato implementazione](implementation-status.md), [conformità](rules-conformance.md) e report degli incrementi. Nessun restore giocabile o Elo.
+Revisione del **26 ottobre 2026**. Pianificazione della base; I14/I23 completati dopo verifica reale di I13/I19a/I26; I16 resta acquisito. **I17a/b, I19b, I24 e I19c completati e verificati**; **I22 completato: base approvata esplicitamente dal proprietario**. I24 recepisce R06 prima del codice e chiude gli attivi dopo arresto pulito/crash con draw consultabile «riavvio server». I19c verifica manifest ed export trasversalmente alle quattro modalità e ai cicli ordinari, leave/forfait, timeout, reconnect, arresto e crash. Fonte normativa: [regolamento corrente 1.6](game-rules.md); evidenze: [stato implementazione](implementation-status.md), [conformità](rules-conformance.md) e report degli incrementi. Nessun restore giocabile o Elo.
 
 ## Obiettivo e perimetro
 
@@ -24,7 +24,7 @@ I01–I11 rimangono conclusi nei rispettivi ambiti, con prove e limiti originali
 | 7 — concluso | I17a → I17b | Quick 1v1 e FFA verificati |
 | 8a — concluso | I19b | Quattro modalità/cicli di vita, registro attivi, finalizzazioni e recupero scritture verificati |
 | 8b — concluso | I24 → I19c | Restart-draw verificato; manifest/export confrontati con eventi SQLite per tutti gli scenari |
-| 9 — candidato verificato | I22 | Regressione e candidato verificati; approvazione esplicita del proprietario pendente |
+| 9 — concluso | I22 | Candidato I22-3e71300e057687ba verificato e approvato esplicitamente il 26 ottobre 2026 |
 
 I19 è un solo incremento articolato in tre consegne: a abilita I13; b include registro persistente degli attivi e finalizzazioni per I24; c verifica anche gli eventi di restart. I22 raccoglie prove durante tutto il percorso e si chiude per ultimo. Nessun nuovo ramo futuro è un requisito della base.
 
@@ -285,7 +285,7 @@ Le sezioni I01–I11 seguenti sono conservate integralmente. Date, conteggi, ric
 
 ### I22 — Verifica e approvazione della versione base (P2; F30)
 
-**Stato 26 ottobre 2026: candidato verificato, approvazione del proprietario pendente.**
+**Stato 26 ottobre 2026: completato; base approvata esplicitamente dal proprietario.**
 Conclusa la parte tecnica: monorepo unico, cronologie archiviate integralmente
 su autorizzazione e modifiche preesistenti conservate; corretta la ripetibilità
 delle sole fixture I19b senza cambiare attesi o comportamento di gioco.
@@ -296,14 +296,15 @@ manifest/export↔SQLite nelle quattro modalità e nei cicli I19b/I24.
 bundle Angular identificati separatamente, senza promessa di identità binaria
 fra percorsi. UX separata acquisita nei report precedenti, sorgenti applicativi
 invariati. [Report, limiti e approvazione](reports/i22-report.md),
-[manifest del candidato](reports/i22-candidate.json). **I22 non interamente
-concluso fino all'approvazione esplicita del proprietario**; nessun backlog o deploy.
+[manifest del candidato](reports/i22-candidate.json). Il proprietario ha approvato esplicitamente `I22-3e71300e057687ba` e i limiti del
+report il 26 ottobre 2026: [registrazione](reports/i22-approval.json). **I22 e la
+roadmap della base sono conclusi**; nessun backlog o deploy.
 
 - **Prerequisiti per chiusura:** tutti gli incrementi correnti sopra, compreso I19c; le regressioni si aggiungono a ogni consegna, non solo alla fine.
 - **Accettazione tecnica:** ambiente pulito/cache documentata, build e prove unit/integration/contratto/CLI ripetibili, nessun caso critico silenziosamente saltato. Quattro modalità, carte, mazzi, autorizzazioni, log, sessione unica, reconnect, timeout/forfait e restart-draw coperti. UX del debug verificata separatamente; documenti di API/setup/dati/stato allineati a ciò che esiste.
 - **Comandi obbligatori:** `./scripts/build.ps1 -Task Test -Offline`, `python scripts/check-rules.py` e separatamente `./scripts/build.ps1 -Task TestServerContext -Offline`. I runner CLI I26 e degli incrementi successivi sono integrati nel contesto separato; [comandi e contratto CLI](cli.md). Unit verdi non dimostrano avvio Spring riuscito.
 - **Consegna:** identificativo riproducibile del candidato (revisioni delle repository e hash artefatti), manifest configurazione/regole/catalogo, report degli scenari automatici e UX, limiti noti e guida locale; nessun difetto bloccante aperto. Eventuale CI usa gli stessi comandi, senza introdurre hosting come prerequisito.
-- **Approvazione:** il proprietario esamina il candidato concreto e ne registra esplicitamente approvazione, data e limiti accettati. Fino ad allora lo stato è «candidato verificato», non «base approvata». La presente revisione non approva un prodotto né implementa I22.
+- **Approvazione:** il proprietario esamina il candidato concreto e ne registra esplicitamente approvazione, data e limiti accettati. Fino ad allora lo stato è «candidato verificato», non «base approvata». Approvazione effettiva del 26 ottobre 2026 registrata sopra, distinta dalle precedenti revisioni di pianificazione.
 - **Modello consigliato:** **GPT-6.1 Sol, ragionamento alto**, per correlare prove e requisiti e rilevare lacune; Luna per soli aggiornamenti meccanici dei report già validati. L'approvazione resta umana.
 
 ## Backlog successivo, fuori dalla roadmap della base

@@ -1,8 +1,8 @@
-> Stato corrente I22, 26 ottobre 2026: prerequisiti tecnici acquisiti, incluso
-> I19c. Candidato finale verificato; resta richiesta l'approvazione
-> esplicita del proprietario sul candidato verificato e sui limiti indicati nel
-> [report I22](reports/i22-report.md). Nessuna decisione di gioco aggiunta, Elo e
-> backlog futuro rinviati. Le note datate sotto sono storiche.
+> Stato corrente I22, 26 ottobre 2026: candidato `I22-3e71300e057687ba`
+> verificato e approvato esplicitamente dal proprietario insieme ai limiti del
+> [report I22](reports/i22-report.md); [registrazione](reports/i22-approval.json).
+> I22 e roadmap della base conclusi. Nessuna decisione di gioco aggiunta, nessun
+> deploy o backlog futuro. Le note datate sotto sono storiche.
 
 > Stato 26 ottobre 2026: **R06 recepita nel regolamento 1.6 e I24 completato dopo verifica I14/I19b/I26.** Arresto pulito e crash chiudono gli attivi persistenti in draw una sola volta; motivo privato consultabile «riavvio server», senza restore giocabile o Elo. Conclusi e dati precedenti conservati; ripetizioni e interruzione durante finalizzazione verificate con server/CLI su DB isolati, presentazione nel debug finale confermata. 249 server + 28 client, contesto Spring separato 356 e check-rules PASS. [Report I24](reports/i24-report.md). I19c/I22 restano aperti; le note datate sotto sono storiche.
 

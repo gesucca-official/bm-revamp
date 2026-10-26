@@ -59,4 +59,7 @@ Non è incluso in un clone del monorepo.
 I database applicativi e i journal di recupero restano locali: conservare insieme
 SQLite e `<database>.match-recovery`. Il catalogo in `src/main/resources` è invece
 versionato. Non sono stati eliminati dati, configurati remote o effettuati deploy.
-La base richiede approvazione esplicita del proprietario sul candidato verificato.
+Base approvata esplicitamente dal proprietario il 26 ottobre 2026: candidato
+`I22-3e71300e057687ba`, con i limiti del report accettati. Verifica dello snapshot
+approvato e degli artefatti/evidenze locali:
+`python scripts/i22-candidate.py --verify --snapshot`.

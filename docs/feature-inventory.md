@@ -12,7 +12,7 @@ le prove e i limiti sono nei report collegati dalla roadmap.
 | Clock/forfait e reconnect | I14/I23 verificati |
 | Dati completi, manifest/export e restart-draw | I19a/b/c e I24 verificati |
 | F39 CLI | I26 completo, esteso dai successivi incrementi |
-| F30 regressione/accettazione | Candidato I22 verificato; approvazione proprietario ancora richiesta |
+| F30 regressione/accettazione | I22 concluso: candidato verificato e approvato dal proprietario il 26 ottobre 2026 |
 | Elo, hosting, client finali ed economia | Differiti, nessun backlog futuro avviato |
 
 [Report I22](reports/i22-report.md), [struttura del monorepo](../README.md).

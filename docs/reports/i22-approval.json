@@ -1,0 +1,12 @@
+{
+  "candidateId": "I22-3e71300e057687ba",
+  "decision": "approved",
+  "approvedDate": "2026-10-26",
+  "timezone": "Europe/Rome",
+  "ownerStatement": "Approvo il candidato e i limiti del report",
+  "candidateManifestSha256": "97d0476134c052447d124db33c2ffcf11073577012ed7f3eb498a537ffa3d2a6",
+  "sourceRevision": "73184960227a428d037e86c240830a10c1eaf676",
+  "manifestRevision": "7d61c219a01aaed0ce8dca6f47810091a9db65b7",
+  "reportAtApprovalSha256": "f4196a12cf9c545951d0dc1c7e906b629a6980eadc2164e1777e4615116473c6",
+  "acceptedScope": "Versione base locale; limiti del report I22 accettati, incluse le prove UX separate già acquisite senza nuova interazione I22. Nessun deploy o backlog futuro."
+}

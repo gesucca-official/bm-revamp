@@ -1,6 +1,6 @@
 # I22 — Candidato della versione base e monorepo
 
-26 ottobre 2026. **Candidato verificato; approvazione del proprietario pendente.**
+26 ottobre 2026. **Completato: candidato I22-3e71300e057687ba verificato e approvato dal proprietario.**
 L'incremento comprende la regressione finale e la preparazione di un unico Git
 in `E:/bm`. Nessuna nuova regola, funzionalità futura o operazione di deploy.
 
@@ -127,7 +127,17 @@ artefatti storici, senza rigenerazione o nuova certificazione editoriale.
 
 ## Approvazione
 
-**In attesa del proprietario.** I22 non può essere segnato interamente concluso
-prima dell'approvazione esplicita del candidato concreto, con data e limiti
-accettati, come richiesto dalla roadmap. L'ordine di eseguire I22 non sostituisce
-la successiva approvazione del prodotto verificato.
+**Approvato esplicitamente il 26 ottobre 2026 (Europe/Rome).** Alla richiesta
+riferita al candidato `I22-3e71300e057687ba`, al report e alle prove UX già
+acquisite, il proprietario ha risposto: «Approvo il candidato e i limiti del
+report». [Registrazione dell'approvazione](i22-approval.json).
+
+I22 e la roadmap della base sono conclusi. Il manifest originale resta immutato:
+identifica lo snapshot sorgente `73184960227a428d037e86c240830a10c1eaf676` e gli
+artefatti approvati; il commit successivo all'approvazione registra soltanto
+l'esito nei documenti e l'opzione di verifica dello snapshot. Per ricontrollare
+quello snapshot e gli artefatti/evidenze locali dopo questi aggiornamenti:
+`python scripts/i22-candidate.py --verify --snapshot`. Senza `--snapshot` il
+verificatore continua a controllare l'esatto stato di lavoro originale e rileva
+anche le successive modifiche documentali. Nessun artefatto approvato cambiato,
+nessun deploy e nessun lavoro del backlog avviato.

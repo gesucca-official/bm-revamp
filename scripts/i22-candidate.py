@@ -1,10 +1,12 @@
 """Seal or verify the local I22 candidate; no network, deployment or approval."""
 import argparse
 import hashlib
+import io
 import json
 from pathlib import Path
 import re
 import subprocess
+import tarfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -89,9 +91,16 @@ def create():
     print('PASS candidate:', result['candidateId'])
 
 
-def verify():
+def verify(snapshot=False):
     manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
-    current = sources()
+    if snapshot:
+        # Approval records may update documentation after the immutable candidate was sealed.
+        with tarfile.open(fileobj=io.BytesIO(git('archive', '--format=tar', manifest['sourceRevision']))) as archive:
+            current = {entry.name: hashlib.sha256(archive.extractfile(entry).read()).hexdigest()
+                       for entry in archive.getmembers() if entry.isfile()
+                       and entry.name != MANIFEST.relative_to(ROOT).as_posix()}
+    else:
+        current = sources()
     assert current == manifest['sources'], 'Versioned source files changed; candidate is stale'
     assert fingerprint(current) == manifest['sourceTreeSha256']
     for group in ('artifacts', 'evidence'):
@@ -99,7 +108,7 @@ def verify():
             path = ROOT / name
             assert path.is_file() and sha(path) == digest, f'Missing or changed {group}: {name}'
     assert manifest['ownerApproval'] is None, 'Owner approval must be recorded separately'
-    print('PASS verified:', manifest['candidateId'])
+    print('PASS verified' + (' snapshot' if snapshot else '') + ':', manifest['candidateId'])
 
 
 def compare_clean():
@@ -134,9 +143,12 @@ if __name__ == '__main__':
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument('--verify', action='store_true')
     mode.add_argument('--compare-clean', action='store_true')
+    parser.add_argument('--snapshot', action='store_true', help='Verify the sealed Git revision instead of the current working files')
     args = parser.parse_args()
+    if args.snapshot and not args.verify:
+        parser.error('--snapshot requires --verify')
     if args.verify:
-        verify()
+        verify(snapshot=args.snapshot)
     elif args.compare_clean:
         compare_clean()
     else:
