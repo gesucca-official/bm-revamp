@@ -1,0 +1,34 @@
+name: Verify monorepo
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned toolchain
+        run: python scripts/bootstrap.py
+      - name: Install dependencies and build server and client
+        run: ./scripts/build.ps1 -Task All
+      - name: Unit tests and client tests
+        run: ./scripts/build.ps1 -Task Test
+      - name: Rules and catalog consistency
+        run: python scripts/check-rules.py
+      - name: Spring context and CLI integration scenarios
+        run: ./scripts/build.ps1 -Task TestServerContext
+      - name: Match export and persistence audit
+        run: python scripts/verify-match-manifests.py

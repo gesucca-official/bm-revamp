@@ -5,3 +5,27 @@ data/
 tmp/
 __pycache__/
 *.py[cod]
+
+# Local application storage (the versioned game catalog stays included).
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.match-recovery/
+!bm-server/src/main/resources/cards.sqlite
+
+# Private configuration and local environment.
+.env
+.env.*
+!.env.example
+application-private.yml
+application-private.yaml
+*.pem
+*.key
+
+# Machine/editor files and transient diagnostics.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

@@ -2,7 +2,7 @@
 
 # I01 — Toolchain e build riproducibile
 
-**Aggiornamento successivo I02:** il report sotto è storico. Sono ora disponibili 8 unit test server e 4 client superati; contesto applicativo separato e ancora fallito per DB non configurato. [Report più recente I02](E:/bm/docs/reports/i02-report.md).
+**Aggiornamento successivo I02:** il report sotto è storico. Sono ora disponibili 8 unit test server e 4 client superati; contesto applicativo separato e ancora fallito per DB non configurato. [Report più recente I02](i02-report.md).
 
 23 ottobre 2026. Incremento limitato a toolchain, installazione, artefatti e smoke: nessuna modifica alle regole, al motore, alla persistenza o alle schermate applicative. Esiti applicativi e partita completa restano fuori dalla prova di compilazione.
 
@@ -31,14 +31,14 @@ Compatibilità verificata sulla [tabella ufficiale Angular](https://angular.dev/
 | Server | Parent Boot 2.4.3 e dipendenze del POM invariati |
 | Client | package-lock v1 invariato, Angular core/CLI 11.2.1, TS 4.1.5 e versioni risolte originali |
 
-[toolchain.json](E:/bm/scripts/toolchain.json) fissa URL e checksum degli archivi. JDK: SHA-256 pubblicato nei [metadati Azul](https://api.azul.com/metadata/v1/zulu/packages/e9a2f109-c990-421e-8bd8-b9fdcb443fab). Node: SHA-256 dalla [lista ufficiale Node 12.22.12](https://nodejs.org/dist/v12.22.12/SHASUMS256.txt). Maven: SHA-1 pubblicato su Maven Central per l'archivio; non è stato presentato come SHA-256. Tutti gli archivi vengono scaricati su HTTPS e confrontati prima dell'estrazione. Il bootstrap non cerca versioni latest.
+[toolchain.json](../../scripts/toolchain.json) fissa URL e checksum degli archivi. JDK: SHA-256 pubblicato nei [metadati Azul](https://api.azul.com/metadata/v1/zulu/packages/e9a2f109-c990-421e-8bd8-b9fdcb443fab). Node: SHA-256 dalla [lista ufficiale Node 12.22.12](https://nodejs.org/dist/v12.22.12/SHASUMS256.txt). Maven: SHA-1 pubblicato su Maven Central per l'archivio; non è stato presentato come SHA-256. Tutti gli archivi vengono scaricati su HTTPS e confrontati prima dell'estrazione. Il bootstrap non cerca versioni latest.
 
 ## File e strumenti introdotti
 
-- [bootstrap.py](E:/bm/scripts/bootstrap.py): scarica/verifica/estrae gli strumenti sotto `.tools`; richiede Python >=3.9 e Windows x64 per questi pacchetti. Non cambia configurazioni globali.
-- [build.ps1](E:/bm/scripts/build.ps1): task Install/Server/Client/TestServer/All, flag Offline; seleziona strumenti dal manifest e ripristina PATH/JAVA_HOME/analytics al termine. Usa cache Maven/npm nel workspace e configurazioni senza credenziali. Fallisce se cambia il lockfile npm.
-- [maven-settings.xml](E:/bm/scripts/maven-settings.xml) e [npmrc](E:/bm/scripts/npmrc): repository pubblici, nessuna credenziale utente o servizio condiviso.
-- [smoke.cjs](E:/bm/scripts/smoke.cjs): serve soltanto il dist con Express su loopback e porta effimera, confronta byte HTTP di index/bundle/CSS/regolamento, poi chiude. Non carica il proxy Heroku, non avvia Spring e non certifica il bootstrap Angular nel browser.
+- [bootstrap.py](../../scripts/bootstrap.py): scarica/verifica/estrae gli strumenti sotto `.tools`; richiede Python >=3.9 e Windows x64 per questi pacchetti. Non cambia configurazioni globali.
+- [build.ps1](../../scripts/build.ps1): task Install/Server/Client/TestServer/All, flag Offline; seleziona strumenti dal manifest e ripristina PATH/JAVA_HOME/analytics al termine. Usa cache Maven/npm nel workspace e configurazioni senza credenziali. Fallisce se cambia il lockfile npm.
+- [maven-settings.xml](../../scripts/maven-settings.xml) e [npmrc](../../scripts/npmrc): repository pubblici, nessuna credenziale utente o servizio condiviso.
+- [smoke.cjs](../../scripts/smoke.cjs): serve soltanto il dist con Express su loopback e porta effimera, confronta byte HTTP di index/bundle/CSS/regolamento, poi chiude. Non carica il proxy Heroku, non avvia Spring e non certifica il bootstrap Angular nel browser.
 - Client: engines Node/npm esatti in package.json, `.nvmrc` e `.node-version`. Manifest delle dipendenze non cambiato; package-lock intatto. Nessun sorgente applicativo modificato.
 
 Script e documenti comuni sono in `E:/bm`, fuori dalle due repository Git annidate, come i deliverable precedenti. Vanno conservati insieme alle due checkout per riprodurre questa procedura; non risultano inclusi automaticamente in un commit delle singole repository. `.tools` e `.build-logs` sono output/cache esclusi dal `.gitignore` della directory comune.
@@ -77,7 +77,7 @@ Il primo bootstrap e i primi download richiedono accesso di rete. In questa sess
 | Smoke HTTP locale | 6 risorse verificate byte per byte con HTTP 200: index, CSS, runtime, polyfills, main e regolamento; listener chiuso al termine |
 | JUnit contextLoads | Runner realmente avviato: 1 test, 0 failure di asserzione, **1 errore**, 0 skipped; contesto non caricato |
 
-Errore di `contextLoads`: `externalDbEntityManagerFactory → dataSourceExternalDB → NullPointerException`, perché manca `spring.datasource.external.driver-class-name` richiesto da `Objects.requireNonNull` in [ExternalDbConfig.dataSource](E:/bm/bm-server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java:36). Non è errore di compilazione, né una regola di gioco fallita: il test dipende dalla configurazione DB applicativa e non ha un profilo isolato. Non è stato corretto o disabilitato per ottenere un verde artificiale; isolamento del test e bootstrap persistente spettano a I02/I03.
+Errore di `contextLoads`: `externalDbEntityManagerFactory → dataSourceExternalDB → NullPointerException`, perché manca `spring.datasource.external.driver-class-name` richiesto da `Objects.requireNonNull` in [ExternalDbConfig.dataSource](../../bm-server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java). Non è errore di compilazione, né una regola di gioco fallita: il test dipende dalla configurazione DB applicativa e non ha un profilo isolato. Non è stato corretto o disabilitato per ottenere un verde artificiale; isolamento del test e bootstrap persistente spettano a I02/I03.
 
 Log locali: `.build-logs/server-package.log`, `server-rebuild.log`, `client-install.log`, `client-build.log`, `server-test.log`, `clean-offline-build.log`. I log grezzi sono diagnostica generata; questo documento conserva gli esiti necessari anche fuori dalla macchina. La build clean può sostituire target/surefire-reports: la prova JUnit resta registrata in server-test.log.
 

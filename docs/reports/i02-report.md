@@ -30,7 +30,7 @@ Usare lo script comune per non ereditare Java 8 o Node 24 dal PATH locale. La pr
 
 ## Server: JUnit 5 senza Spring
 
-Fonti: [GameFixtures](E:/bm/bm-server/src/test/java/com/gsc/bm/model/game/GameFixtures.java), [PlayerTest](E:/bm/bm-server/src/test/java/com/gsc/bm/model/game/PlayerTest.java), [MoveTest](E:/bm/bm-server/src/test/java/com/gsc/bm/model/game/MoveTest.java).
+Fonti: [GameFixtures](../../bm-server/src/test/java/com/gsc/bm/model/game/GameFixtures.java), [PlayerTest](../../bm-server/src/test/java/com/gsc/bm/model/game/PlayerTest.java), [MoveTest](../../bm-server/src/test/java/com/gsc/bm/model/game/MoveTest.java).
 
 Le fixture istanziano classi reali del motore con nomi GUI sintetici assegnati direttamente, senza factory, catalogo, repository o avvio Spring. Ogni test crea nuovi player/game; l'ordine della pila nelle prove di pesca viene fissato esplicitamente dopo la costruzione. Nessun test si affida alla mescolata casuale o a un ordine di priorità controverso.
 
@@ -49,15 +49,15 @@ Non si approvano così limiti mazzi, intero regolamento o bilanciamento. Usare l
 
 ## Separazione del contesto applicativo
 
-Il test originale [BmServerApplicationTests.contextLoads](E:/bm/bm-server/src/test/java/com/gsc/bm/BmServerApplicationTests.java) resta presente e invariato nel contenuto; aggiunto soltanto `@Tag("context")`.
+Il test originale [BmServerApplicationTests.contextLoads](../../bm-server/src/test/java/com/gsc/bm/BmServerApplicationTests.java) resta presente e invariato nel contenuto; aggiunto soltanto `@Tag("context")`.
 
-Nel [pom.xml](E:/bm/bm-server/pom.xml), Surefire esclude il tag context dalla suite unitaria ordinaria e fallisce se non trova test da eseguire. Il profilo `context-tests` include anche il test completo. Nessun `@Disabled`, mock del contesto o finto test di bootstrap sostituisce l'originale. L'esclusione è un confine esplicito della suite, non una dichiarazione che il contesto sia verde.
+Nel [pom.xml](../../bm-server/pom.xml), Surefire esclude il tag context dalla suite unitaria ordinaria e fallisce se non trova test da eseguire. Il profilo `context-tests` include anche il test completo. Nessun `@Disabled`, mock del contesto o finto test di bootstrap sostituisce l'originale. L'esclusione è un confine esplicito della suite, non una dichiarazione che il contesto sia verde.
 
 **Esito reale del profilo completo:** 9 test, 0 failures, **1 error**, 0 skipped. Gli 8 unitari passano; `contextLoads` fallisce su `externalDbEntityManagerFactory → dataSourceExternalDB → NullPointerException`, per proprietà datasource esterno assente. Il codice richiama `Objects.requireNonNull` sul driver in ExternalDbConfig. Bootstrap isolato dei datasource e profilo applicativo di test rimangono I03.
 
 ## Client: test di classi senza browser
 
-Fonti: [tsconfig.spec.json](E:/bm/bm-web-client/tsconfig.spec.json), [run.ts](E:/bm/bm-web-client/tests/run.ts), [card-in-hand.spec.ts](E:/bm/bm-web-client/tests/card-in-hand.spec.ts).
+Fonti: [tsconfig.spec.json](../../bm-web-client/tsconfig.spec.json), [run.ts](../../bm-web-client/tests/run.ts), [card-in-hand.spec.ts](../../bm-web-client/tests/card-in-hand.spec.ts).
 
 Il nuovo `npm test` usa **ts-node e TypeScript già nel lockfile**, con Node assert; non aggiunge Jest/Karma o dipendenze nuove alla baseline legacy. Il runner scopre i file `tests/*.spec.ts`, esegue i casi esportati, mostra nomi/esiti e restituisce codice non zero su asserzione, errore di caricamento/compilazione o zero test scoperti. Il runner è piccolo e sincrono/asincrono, non una nuova infrastruttura di browser testing.
 

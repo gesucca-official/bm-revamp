@@ -48,7 +48,7 @@ Le sezioni I01–I11 seguenti sono conservate integralmente. Date, conteggi, ric
 
 ### I01 — Scelta tecnica e build riproducibile (P0; F01)
 
-**Stato 23 ottobre 2026: baseline di build e smoke completata.** Scelta conservativa di recupero con strumenti fissati, prima installazione da rete e seconda build pulita da cache offline riuscite; JAR e dist prodotti. JUnit avviato, 1 errore contesto DB non configurato: resta a I02/I03; nessuna suite client o partita dichiarata verificata. Evidenza e limiti in [i01-report.md](E:/bm/docs/reports/i01-report.md). I punti seguenti conservano obiettivo e criteri dell'incremento.
+**Stato 23 ottobre 2026: baseline di build e smoke completata.** Scelta conservativa di recupero con strumenti fissati, prima installazione da rete e seconda build pulita da cache offline riuscite; JAR e dist prodotti. JUnit avviato, 1 errore contesto DB non configurato: resta a I02/I03; nessuna suite client o partita dichiarata verificata. Evidenza e limiti in [i01-report.md](reports/i01-report.md). I punti seguenti conservano obiettivo e criteri dell'incremento.
 
 - **Obiettivo:** confrontare riuso/aggiornamento/sostituzione delle parti e scegliere una toolchain riproducibile. Q01 non impone stack o versioni; non impone riscrittura.
 - **Prerequisiti:** accesso alle dipendenze o cache completa; comportamento attuale identificato per regressioni. Restrizione di rete distinta dalle scelte di stack.
@@ -59,7 +59,7 @@ Le sezioni I01–I11 seguenti sono conservate integralmente. Date, conteggi, ric
 
 ### I02 — Harness di test isolato (P0; F30)
 
-**Stato 23 ottobre 2026: completato l'harness isolato.** Comando unico `build.ps1 -Task Test -Offline`: 8 test JUnit del motore e 4 test client passano. Due mutazioni su copie isolate producono fallimenti di asserzione attesi (2 server, 4 client). Il test originale del contesto resta esplicito con `TestServerContext`: 9 test complessivi, 8 passano e 1 errore datasource; bootstrap isolato a I03. Nessun sorgente applicativo o nuova dipendenza modificati. Evidenza in [i02-report.md](E:/bm/docs/reports/i02-report.md).
+**Stato 23 ottobre 2026: completato l'harness isolato.** Comando unico `build.ps1 -Task Test -Offline`: 8 test JUnit del motore e 4 test client passano. Due mutazioni su copie isolate producono fallimenti di asserzione attesi (2 server, 4 client). Il test originale del contesto resta esplicito con `TestServerContext`: 9 test complessivi, 8 passano e 1 errore datasource; bootstrap isolato a I03. Nessun sorgente applicativo o nuova dipendenza modificati. Evidenza in [i02-report.md](reports/i02-report.md).
 
 - **Obiettivo:** poter eseguire unit test motore e test client, senza SMTP/DB reali; abilitare risultati leggibili.
 - **Prerequisiti:** I01.
@@ -70,7 +70,7 @@ Le sezioni I01–I11 seguenti sono conservate integralmente. Date, conteggi, ric
 
 ### I03 — Persistenza ricostruita e bootstrap (P0; F02/F12 infrastruttura)
 
-**Stato 23 ottobre 2026: completato.** Scelta e implementata persistenza applicativa SQLite/JDBC separata dal catalogo SQLite/JPA read-only, schema iniziale versionato ricostruito, PostgreSQL rimosso. Contesto completo e integrazioni verdi (73 test server); suite ordinaria 65 server + 4 client; smoke JAR su due avvii con dati sintetici persistiti. Nessuna partita/browser verificata. [Report I03](E:/bm/docs/reports/i03-report.md). I punti successivi conservano i criteri dell'incremento.
+**Stato 23 ottobre 2026: completato.** Scelta e implementata persistenza applicativa SQLite/JDBC separata dal catalogo SQLite/JPA read-only, schema iniziale versionato ricostruito, PostgreSQL rimosso. Contesto completo e integrazioni verdi (73 test server); suite ordinaria 65 server + 4 client; smoke JAR su due avvii con dati sintetici persistiti. Nessuna partita/browser verificata. [Report I03](reports/i03-report.md). I punti successivi conservano i criteri dell'incremento.
 
 - **Obiettivo:** ricostruire dati/schema necessari da mapping e SQLite disponibili; scegliere storage account, mazzi, log ed Elo senza vincolo PostgreSQL.
 - **Prerequisiti:** I01/I02; Q02 già autorizza ricostruzione e alternativa a PostgreSQL. Non attendere DDL originale perso.

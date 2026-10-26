@@ -67,15 +67,15 @@ I04 completato: bootstrap browser, Markdown, home/hub/sign-up, wildcard e access
 
 > Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
-**Verifica più recente I03:** contesto Spring ora verde; **73 test server** nel clean verify completo, **65 server + 4 client** nella suite ordinaria. JAR avviato due volte su loopback con nuovo SQLite sintetico, dati persistiti verificati. PostgreSQL sostituito, catalogo read-only. Nessuna partita/browser ancora certificata. [Report I03](E:/bm/docs/reports/i03-report.md). Le precedenti indicazioni di contesto rosso sono storiche.
+**Verifica più recente I03:** contesto Spring ora verde; **73 test server** nel clean verify completo, **65 server + 4 client** nella suite ordinaria. JAR avviato due volte su loopback con nuovo SQLite sintetico, dati persistiti verificati. PostgreSQL sostituito, catalogo read-only. Nessuna partita/browser ancora certificata. [Report I03](reports/i03-report.md). Le precedenti indicazioni di contesto rosso sono storiche.
 
 # Stato dell'implementazione
 
-**Verifica più recente I02:** suite isolata con **8 test server e 4 client superati**, regressioni rilevate su copie separate. Il profilo completo continua a fallire su `contextLoads` (9 test, 1 errore DB). Nessuna partita, browser o persistenza certificati da questi test. [Report I02](E:/bm/docs/reports/i02-report.md). Le sezioni precedenti a questa verifica restano evidenze storiche.
+**Verifica più recente I02:** suite isolata con **8 test server e 4 client superati**, regressioni rilevate su copie separate. Il profilo completo continua a fallire su `contextLoads` (9 test, 1 errore DB). Nessuna partita, browser o persistenza certificati da questi test. [Report I02](reports/i02-report.md). Le sezioni precedenti a questa verifica restano evidenze storiche.
 
-**Verifica più recente I01:** server e client compilano con toolchain locale fissata; il runner JUnit esegue 1 test e restituisce 1 errore di caricamento contesto per datasource esterno non configurato. I vecchi blocchi di download non rappresentano più l'esito della build. Dettagli in [i01-report.md](E:/bm/docs/reports/i01-report.md). Nessuna partita o funzione di gioco è promossa a verificata.
+**Verifica più recente I01:** server e client compilano con toolchain locale fissata; il runner JUnit esegue 1 test e restituisce 1 errore di caricamento contesto per datasource esterno non configurato. I vecchi blocchi di download non rappresentano più l'esito della build. Dettagli in [i01-report.md](reports/i01-report.md). Nessuna partita o funzione di gioco è promossa a verificata.
 
-**Aggiornamento requisiti del proprietario:** i dettagli osservati sotto restano fatti del legacy, non il perimetro finale richiesto. Vedere la sezione conclusiva e [decisioni Q01–Q18](E:/bm/docs/open-questions.md). Nessuna implementazione o nuova verifica eseguita in questa integrazione.
+**Aggiornamento requisiti del proprietario:** i dettagli osservati sotto restano fatti del legacy, non il perimetro finale richiesto. Vedere la sezione conclusiva e [decisioni Q01–Q18](open-questions.md). Nessuna implementazione o nuova verifica eseguita in questa integrazione.
 
 **Presente** significa che esiste un percorso concreto nel codice, non che sia stato collaudato. **Parziale** indica percorso presente con lacune verificabili. **Non rilevato** indica assenza nelle copie esaminate, non cancellazione di un requisito noto. **Non verificabile** indica una prova runtime bloccata o informazioni mancanti.
 
@@ -83,38 +83,38 @@ I04 completato: bootstrap browser, Markdown, home/hub/sign-up, wildcard e access
 
 | Funzione | Stato | Evidenza e limite |
 |---|---|---|
-| Registrazione con email | Parziale | [AuthServiceImpl.sendVerificationEmail/completeRegistration](E:/bm/bm-server/src/main/java/com/gsc/bm/service/session/AuthServiceImpl.java:47) genera codice e salva BCrypt; [SignUpComponent](E:/bm/bm-web-client/src/app/connection/sign-up/sign-up.component.ts:8) ha URL disponibilità senza `/rest`. Codice non legato all'email, nessuna scadenza/tetto tentativi nel servizio. SMTP non provato. |
-| Login | Presente, robustezza parziale | [UserLogInController](E:/bm/bm-server/src/main/java/com/gsc/bm/api/rest/users/UserLogInController.java:14) verifica e restituisce booleano; CONNECT riverifica credenziali. Controllo doppio login solo in preflight REST, non nel CONNECT. |
-| Autorizzazione account/partita | Parziale critica | [UserController](E:/bm/bm-server/src/main/java/com/gsc/bm/api/ws/UserController.java:14) e [GameController](E:/bm/bm-server/src/main/java/com/gsc/bm/api/ws/GameController.java:15) accettano identità richieste senza confronto principal; STOMP permitAll. |
-| Presenza e attività | Presente, gestione disconnessione parziale | [ConnectionsServiceImpl](E:/bm/bm-server/src/main/java/com/gsc/bm/service/session/ConnectionsServiceImpl.java:18) conserva e trasmette utenti; disconnect restituisce login dall'header anziché dall'utente trovato tramite sessionId. |
-| Quick 1vCom | Presente staticamente | [GameFactoryServiceImpl.craftQuick1vComGame](E:/bm/bm-server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java:28), join nel client; partita reale non verificata. |
-| Quick 1v1 / FFA | Presente, code parziali | [QueueServiceImpl](E:/bm/bm-server/src/main/java/com/gsc/bm/service/session/QueueServiceImpl.java:14): 2/5 posti, FFA forzabile da 2; nessuna deduplicazione join. Controller permette aggiunta bot/avvio senza verificare appartenenza. |
-| Open 1vCom | Presente, persistenza non verificata | [PlayerFactoryServiceImpl.craftOpenPlayer](E:/bm/bm-server/src/main/java/com/gsc/bm/service/factories/PlayerFactoryServiceImpl.java:51) ricostruisce mazzo utente; mapping PK mazzi incoerente. |
-| Open multiplayer | Non rilevato | [OpenGameQueuesController](E:/bm/bm-server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java:11) e menu [choose-game.component.html](E:/bm/bm-web-client/src/app/connection/choose-game/choose-game.component.html) espongono solo 1vCom. |
-| Motore turni simultanei | Presente, validazione parziale | [Game.resolveMoves](E:/bm/bm-server/src/main/java/com/gsc/bm/model/game/Game.java:104); [Move.isValidFor](E:/bm/bm-server/src/main/java/com/gsc/bm/model/game/Move.java:75) non verifica tutti i target/invarianti. |
-| Bot | Presente, casuale | [ComPlayer.chooseMove](E:/bm/bm-server/src/main/java/com/gsc/bm/model/game/ComPlayer.java:17) prova carte casuali, seleziona un target, verifica mossa; nessuna strategia/ricerca delle migliori mosse. |
-| Danni, risorse, stati, timer | Presente con anomalie | [Character](E:/bm/bm-server/src/main/java/com/gsc/bm/model/Character.java:17), [Status](E:/bm/bm-server/src/main/java/com/gsc/bm/model/game/status/Status.java:13); vedi [regole](E:/bm/docs/game-rules.md). |
+| Registrazione con email | Parziale | [AuthServiceImpl.sendVerificationEmail/completeRegistration](../bm-server/src/main/java/com/gsc/bm/service/session/AuthServiceImpl.java) genera codice e salva BCrypt; [SignUpComponent](../bm-web-client/src/app/connection/sign-up/sign-up.component.ts) ha URL disponibilità senza `/rest`. Codice non legato all'email, nessuna scadenza/tetto tentativi nel servizio. SMTP non provato. |
+| Login | Presente, robustezza parziale | [UserLogInController](../bm-server/src/main/java/com/gsc/bm/api/rest/users/UserLogInController.java) verifica e restituisce booleano; CONNECT riverifica credenziali. Controllo doppio login solo in preflight REST, non nel CONNECT. |
+| Autorizzazione account/partita | Parziale critica | [UserController](../bm-server/src/main/java/com/gsc/bm/api/ws/UserController.java) e [GameController](../bm-server/src/main/java/com/gsc/bm/api/ws/GameController.java) accettano identità richieste senza confronto principal; STOMP permitAll. |
+| Presenza e attività | Presente, gestione disconnessione parziale | [ConnectionsServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/ConnectionsServiceImpl.java) conserva e trasmette utenti; disconnect restituisce login dall'header anziché dall'utente trovato tramite sessionId. |
+| Quick 1vCom | Presente staticamente | [GameFactoryServiceImpl.craftQuick1vComGame](../bm-server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java), join nel client; partita reale non verificata. |
+| Quick 1v1 / FFA | Presente, code parziali | [QueueServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/QueueServiceImpl.java): 2/5 posti, FFA forzabile da 2; nessuna deduplicazione join. Controller permette aggiunta bot/avvio senza verificare appartenenza. |
+| Open 1vCom | Presente, persistenza non verificata | [PlayerFactoryServiceImpl.craftOpenPlayer](../bm-server/src/main/java/com/gsc/bm/service/factories/PlayerFactoryServiceImpl.java) ricostruisce mazzo utente; mapping PK mazzi incoerente. |
+| Open multiplayer | Non rilevato | [OpenGameQueuesController](../bm-server/src/main/java/com/gsc/bm/api/ws/OpenGameQueuesController.java) e menu [choose-game.component.html](../bm-web-client/src/app/connection/choose-game/choose-game.component.html) espongono solo 1vCom. |
+| Motore turni simultanei | Presente, validazione parziale | [Game.resolveMoves](../bm-server/src/main/java/com/gsc/bm/model/game/Game.java); [Move.isValidFor](../bm-server/src/main/java/com/gsc/bm/model/game/Move.java) non verifica tutti i target/invarianti. |
+| Bot | Presente, casuale | [ComPlayer.chooseMove](../bm-server/src/main/java/com/gsc/bm/model/game/ComPlayer.java) prova carte casuali, seleziona un target, verifica mossa; nessuna strategia/ricerca delle migliori mosse. |
+| Danni, risorse, stati, timer | Presente con anomalie | [Character](../bm-server/src/main/java/com/gsc/bm/model/Character.java), [Status](../bm-server/src/main/java/com/gsc/bm/model/game/status/Status.java); vedi [regole](game-rules.md). |
 | Catalogo carte/personaggi | Presente | SQLite verificato: 37 carte, 2 personaggi; factory caricano effetti dal codice e GUI dal DB. |
-| Collezione personale | Semplificazione esplicita | [UserAccountServiceImpl.getUserCardCollection](E:/bm/bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java:53): “for now everyone has all the cards”; nessun possesso individuale persistito. |
-| Editor e salvataggio mazzi | Parziale | [EditDeckComponent](E:/bm/bm-web-client/src/app/user-hub/collection/edit-deck/edit-deck.component.ts:12), servizio account; validazione solo UI, nessun limite copie, mapping JPA da verificare. |
-| Gioco debug | Presente staticamente | [DebugClientComponent](E:/bm/bm-web-client/src/app/client-debug/debug-client.component.ts:16) mostra report e chiama leave a fine partita; [CardInHandComponent](E:/bm/bm-web-client/src/app/client-debug/card-in-hand/card-in-hand.component.ts:12) costruisce scarto/target item. Nessun test browser. |
-| Gioco Phaser | Parziale | [BattleScene](E:/bm/bm-web-client/src/app/client-phaser/scnenes/battle/battle-scene.ts:10): rendering/drag-drop/report, ma oggetti senza TARGET_ITEM e `playTimeBasedAnimation` privo di implementazione effettiva. |
-| Fine partita Phaser | Parziale | [PhaserClientComponent.viewUpdateCallback](E:/bm/bm-web-client/src/app/client-phaser/phaser-client.component.ts:58) distrugge il gioco e pulisce lo stato, ma non invia leave/unsubscribe e continua nel ramo restart della scena. |
-| Recovery/resa/timeout | Non rilevato come flusso completo | [WebsocketService](E:/bm/bm-web-client/src/app/service/websocket.service.ts:11), [PresenceEventListener](E:/bm/bm-server/src/main/java/com/gsc/bm/api/ws/PresenceEventListener.java:14), servizio sessioni: nessuna procedura completa di riconnessione, resa o scadenza turno. |
-| Logging/amministrazione | Presente, incompleto | [GameLoggingServiceImpl](E:/bm/bm-server/src/main/java/com/gsc/bm/service/session/GameLoggingServiceImpl.java:22), controller log, pannello Angular; nessun test DB, ingestione client non autenticata e nessuna retention. |
+| Collezione personale | Semplificazione esplicita | [UserAccountServiceImpl.getUserCardCollection](../bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java): “for now everyone has all the cards”; nessun possesso individuale persistito. |
+| Editor e salvataggio mazzi | Parziale | [EditDeckComponent](../bm-web-client/src/app/user-hub/collection/edit-deck/edit-deck.component.ts), servizio account; validazione solo UI, nessun limite copie, mapping JPA da verificare. |
+| Gioco debug | Presente staticamente | [DebugClientComponent](../bm-web-client/src/app/client-debug/debug-client.component.ts) mostra report e chiama leave a fine partita; [CardInHandComponent](../bm-web-client/src/app/client-debug/card-in-hand/card-in-hand.component.ts) costruisce scarto/target item. Nessun test browser. |
+| Gioco Phaser | Parziale | [BattleScene](../bm-web-client/src/app/client-phaser/scnenes/battle/battle-scene.ts): rendering/drag-drop/report, ma oggetti senza TARGET_ITEM e `playTimeBasedAnimation` privo di implementazione effettiva. |
+| Fine partita Phaser | Parziale | [PhaserClientComponent.viewUpdateCallback](../bm-web-client/src/app/client-phaser/phaser-client.component.ts) distrugge il gioco e pulisce lo stato, ma non invia leave/unsubscribe e continua nel ramo restart della scena. |
+| Recovery/resa/timeout | Non rilevato come flusso completo | [WebsocketService](../bm-web-client/src/app/service/websocket.service.ts), [PresenceEventListener](../bm-server/src/main/java/com/gsc/bm/api/ws/PresenceEventListener.java), servizio sessioni: nessuna procedura completa di riconnessione, resa o scadenza turno. |
+| Logging/amministrazione | Presente, incompleto | [GameLoggingServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/session/GameLoggingServiceImpl.java), controller log, pannello Angular; nessun test DB, ingestione client non autenticata e nessuna retention. |
 | Economia, trading, pacchetti, ranking | Non rilevato | Nessuna entità/repository/controller nel censimento oltre a utenti, mazzi, catalogo e log; non si assume che fossero richiesti. |
 
-**V:** esiste un logout UI: [ToolbarComponent.logOut](E:/bm/bm-web-client/src/app/home/toolbar/toolbar.component.ts:17) chiede conferma e ricarica la pagina con `window.location.reload()`. Non invia un comando applicativo di logout o leave; il cleanup dipende dalla disconnessione del trasporto e dai limiti del server descritti sopra.
+**V:** esiste un logout UI: [ToolbarComponent.logOut](../bm-web-client/src/app/home/toolbar/toolbar.component.ts) chiede conferma e ricarica la pagina con `window.location.reload()`. Non invia un comando applicativo di logout o leave; il cleanup dipende dalla disconnessione del trasporto e dai limiti del server descritti sopra.
 
 ## Test e strumenti
 
-**V:** [BmServerApplicationTests.contextLoads](E:/bm/bm-server/src/test/java/com/gsc/bm/BmServerApplicationTests.java:7) è l'unico test automatico trovato: metodo vuoto con `@SpringBootTest`, quindi controlla il caricamento del contesto se eseguito. Non copre regole, autorizzazione, contratti o persistenza con asserzioni dedicate.
+**V:** [BmServerApplicationTests.contextLoads](../bm-server/src/test/java/com/gsc/bm/BmServerApplicationTests.java) è l'unico test automatico trovato: metodo vuoto con `@SpringBootTest`, quindi controlla il caricamento del contesto se eseguito. Non copre regole, autorizzazione, contratti o persistenza con asserzioni dedicate.
 
-**V:** [angular.json](E:/bm/bm-web-client/angular.json) configura `skipTests` per gli schematics, non ha un target `test` e contiene un lint che cita `tsconfig.spec.json` ed `e2e/tsconfig.json`, assenti. [package.json](E:/bm/bm-web-client/package.json) ha build/start/lint ma non test. La dipendenza Protractor non prova l'esistenza di una suite e2e.
+**V:** [angular.json](../bm-web-client/angular.json) configura `skipTests` per gli schematics, non ha un target `test` e contiene un lint che cita `tsconfig.spec.json` ed `e2e/tsconfig.json`, assenti. [package.json](../bm-web-client/package.json) ha build/start/lint ma non test. La dipendenza Protractor non prova l'esistenza di una suite e2e.
 
-**V:** [TestBattleSceneComponent](E:/bm/bm-web-client/src/app/client-phaser/scnenes/battle/test-battle-scene/test-battle-scene.component.ts:12) contiene una vista JSON fissa e avvia la scena; è un componente dimostrativo, non un test con runner e asserzioni. È dichiarato nel modulo ma non ha route e il suo selector non risulta usato da altri template censiti: **D**, apparentemente scollegato dal percorso normale.
+**V:** [TestBattleSceneComponent](../bm-web-client/src/app/client-phaser/scnenes/battle/test-battle-scene/test-battle-scene.component.ts) contiene una vista JSON fissa e avvia la scena; è un componente dimostrativo, non un test con runner e asserzioni. È dichiarato nel modulo ma non ha route e il suo selector non risulta usato da altri template censiti: **D**, apparentemente scollegato dal percorso normale.
 
-**M:** test server e build client non completati per prerequisiti mancanti; esiti esatti in [setup.md](E:/bm/docs/setup.md). Nessuna copertura percentuale disponibile.
+**M:** test server e build client non completati per prerequisiti mancanti; esiti esatti in [setup.md](setup.md). Nessuna copertura percentuale disponibile.
 
 ## TODO, commenti e falsi segnali di incompletezza
 
@@ -122,14 +122,14 @@ I04 completato: bootstrap browser, Markdown, home/hub/sign-up, wildcard e access
 
 | Tema | Punti rilevati |
 |---|---|
-| Sicurezza | TODO “authenticate this” in [WebClientLogsController](E:/bm/bm-server/src/main/java/com/gsc/bm/api/rest/panel/WebClientLogsController.java:20) |
-| Ciclo di vita | TODO sulla chiusura di un giocatore in coda in [GameSessionServiceImpl.newGame](E:/bm/bm-server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java:35); sottoscrizione FFA mai annullata in [WebsocketService.joinGame](E:/bm/bm-web-client/src/app/service/websocket.service.ts:68) |
-| Regole/validazione | TODO in [Move.isValidFor](E:/bm/bm-server/src/main/java/com/gsc/bm/model/game/Move.java:75), target multipli in [ComPlayer.choseTarget](E:/bm/bm-server/src/main/java/com/gsc/bm/model/game/ComPlayer.java:35), cattura output timer in [Character](E:/bm/bm-server/src/main/java/com/gsc/bm/model/Character.java:17) |
+| Sicurezza | TODO “authenticate this” in [WebClientLogsController](../bm-server/src/main/java/com/gsc/bm/api/rest/panel/WebClientLogsController.java) |
+| Ciclo di vita | TODO sulla chiusura di un giocatore in coda in [GameSessionServiceImpl.newGame](../bm-server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java); sottoscrizione FFA mai annullata in [WebsocketService.joinGame](../bm-web-client/src/app/service/websocket.service.ts) |
+| Regole/validazione | TODO in [Move.isValidFor](../bm-server/src/main/java/com/gsc/bm/model/game/Move.java), target multipli in [ComPlayer.choseTarget](../bm-server/src/main/java/com/gsc/bm/model/game/ComPlayer.java), cattura output timer in [Character](../bm-server/src/main/java/com/gsc/bm/model/Character.java) |
 | UI Phaser | Target item, dettagli durante drag, timeout dell'animazione scarto e globali window nei file Phaser citati |
 | Manutenibilità | Duplicazioni in ViewExtractor/DeckFactory, account monolitico da caricare, cache auth ipotizzata, riflessione con ritorno null |
 | Documentazione | Entrambi i README riportano TODO per una descrizione sensata del progetto |
 
-**V:** molti `applyEffectOnSelf` o `applyEffectOnTarget` ritornano null intenzionalmente; `AbstractCard.resolve` li trasforma in liste vuote. Non sono da classificare automaticamente come carte incompiute. Analogamente gli hook vuoti possono significare assenza di effetti aggiuntivi. [AbstractCard](E:/bm/bm-server/src/main/java/com/gsc/bm/model/cards/AbstractCard.java:20).
+**V:** molti `applyEffectOnSelf` o `applyEffectOnTarget` ritornano null intenzionalmente; `AbstractCard.resolve` li trasforma in liste vuote. Non sono da classificare automaticamente come carte incompiute. Analogamente gli hook vuoti possono significare assenza di effetti aggiuntivi. [AbstractCard](../bm-server/src/main/java/com/gsc/bm/model/cards/AbstractCard.java).
 
 **D:** casi realmente sospetti sono invece `SoberUp`, fuori catalogo e senza bersagli inizializzati, `Card.DeserializedCard.resolve` (DTO di input, non carta eseguibile) e `BattleScene.playTimeBasedAnimation` senza corpo operativo. Si distinguono ruoli dei DTO, codice non raggiunto e funzionalità UI incompleta; non si deduce una feature dal solo nome.
 
@@ -139,7 +139,7 @@ Prima bootstrap JPA e Angular, poi registrazione/login e routing STOMP; quindi r
 
 ## Aggiornamento: seconda verifica effettiva del 23 ottobre 2026
 
-Le evidenze statiche precedenti restano valide con i limiti indicati. La nuova verifica ha tentato esplicitamente compilazione, test e avvio; comandi riproducibili, messaggi d'errore e percorso minimo sono in [verification-report.md](E:/bm/docs/reports/verification-report.md).
+Le evidenze statiche precedenti restano valide con i limiti indicati. La nuova verifica ha tentato esplicitamente compilazione, test e avvio; comandi riproducibili, messaggi d'errore e percorso minimo sono in [verification-report.md](reports/verification-report.md).
 
 | Area | Nuovo risultato osservato | Interpretazione |
 |---|---|---|
@@ -177,13 +177,13 @@ Le evidenze statiche precedenti restano valide con i limiti indicati. La nuova v
 | Elo rinviato (decisione 24 ottobre 2026) | Nessun rating censito | Requisito superato il 24 ottobre 2026: F38/I25 e residuo R08 rinviati fuori dalla base |
 | Email obbligatoria, admin, economia, set finale e hosting rinviati | Implementazioni legacy e lacune rimangono tali; nessun host corrente | Non bloccano debug locale; la titolarità degli account resta obbligatoria |
 
-Fonti di requisito: risposte in chat, riportate in [open-questions.md](E:/bm/docs/open-questions.md). Gli esiti di [verification-report.md](E:/bm/docs/reports/verification-report.md) non cambiano: nessuna partita completa o test applicativo superato per effetto di queste decisioni. [Inventario aggiornato](E:/bm/docs/feature-inventory.md) e [roadmap](E:/bm/docs/roadmap.md) distinguono lavoro corrente, differito e residui R01–R08.
+Fonti di requisito: risposte in chat, riportate in [open-questions.md](open-questions.md). Gli esiti di [verification-report.md](reports/verification-report.md) non cambiano: nessuna partita completa o test applicativo superato per effetto di queste decisioni. [Inventario aggiornato](feature-inventory.md) e [roadmap](roadmap.md) distinguono lavoro corrente, differito e residui R01–R08.
 
 ## Chiusura baseline I01 — 23 ottobre 2026
 
 Completata la build locale riproducibile e lo smoke degli artefatti: prima compilazione da dipendenze scaricate e seconda reinstallazione/clean build offline entrambe riuscite, lockfile invariato. JAR 51.996.417 byte; client AOT prodotto con hash bundle ripetuto. Smoke HTTP su loopback: 6 risorse identiche al dist; entry point/classe Game e SQLite verificati nel JAR.
 
-F01 è verificata soltanto per questo ambito. Il test esistente ora viene eseguito: 1 test, 1 errore nel caricamento del datasource esterno non configurato; non è un errore di compilazione o una regressione di regole dimostrata. Nessuna suite client disponibile, contesto Spring completo e partita non verificati. Nessun sorgente applicativo modificato: client package.json dichiara soltanto versioni Node/npm e due file di versione, script comuni nuovi in scripts/. Dettagli e comandi in [i01-report.md](E:/bm/docs/reports/i01-report.md). Prossimo incremento I02, con I03 necessario per il contesto persistente.
+F01 è verificata soltanto per questo ambito. Il test esistente ora viene eseguito: 1 test, 1 errore nel caricamento del datasource esterno non configurato; non è un errore di compilazione o una regressione di regole dimostrata. Nessuna suite client disponibile, contesto Spring completo e partita non verificati. Nessun sorgente applicativo modificato: client package.json dichiara soltanto versioni Node/npm e due file di versione, script comuni nuovi in scripts/. Dettagli e comandi in [i01-report.md](reports/i01-report.md). Prossimo incremento I02, con I03 necessario per il contesto persistente.
 
 ## Chiusura I02 — 23 ottobre 2026
 
@@ -191,13 +191,13 @@ Aggiunti test JUnit puri per pesca, capacità FIFO, last resort, scarto, costi, 
 
 Risultato finale del comando unico `./scripts/build.ps1 -Task Test -Offline`: 8 test server, 4 client passano. Mutazioni solo in copie `.tools`: costo SuperImpact 25→24 rilevato da 2 asserzioni, proprietario target errato rilevato da 4 casi client. I sorgenti applicativi originali restano invariati.
 
-Il test originale del contesto non è cancellato né sostituito: tag context e profilo Maven context-tests lo separano dagli unit. `TestServerContext` lo include e propaga l'errore attuale: 9 test, 8 unit passati, 1 errore di bootstrap del datasource. F30 rimane parziale per copertura globale, CI e integrazioni; I02 è concluso come harness. Le vecchie affermazioni di assenza di test nei censimenti iniziali non descrivono più lo stato corrente. Prossimo incremento I03. [Dettagli I02](E:/bm/docs/reports/i02-report.md).
+Il test originale del contesto non è cancellato né sostituito: tag context e profilo Maven context-tests lo separano dagli unit. `TestServerContext` lo include e propaga l'errore attuale: 9 test, 8 unit passati, 1 errore di bootstrap del datasource. F30 rimane parziale per copertura globale, CI e integrazioni; I02 è concluso come harness. Le vecchie affermazioni di assenza di test nei censimenti iniziali non descrivono più lo stato corrente. Prossimo incremento I03. [Dettagli I02](reports/i02-report.md).
 
 ## Chiusura I03 — persistenza e bootstrap
 
 SQLite applicativo su file e schema V001 versionato sostituiscono PostgreSQL/JPA esterno. Corretto il problema di identità dei mazzi usando una PK composta reale; adattatori JDBC mantengono i metodi dei servizi. Test reali su account, mazzi, log JSON, rollback, accessi concorrenti brevi e riapertura; catalogo invariato e non scrivibile. Contesto completo e due avvii HTTP del JAR ora verificati. Il test originale contextLoads non è stato sostituito con un mock.
 
-Email disabilitata senza accesso SMTP e nessuna credenziale amministrativa creata per default. Questo non completa login/provisioning/autorizzazioni o partita. L'invio email, il salvataggio asincrono integrale durante match, Elo/reconnect e restart-draw restano nei loro incrementi. Risorse e modifiche al regolamento presenti prima di I03 preservate e controllate da hash/check-rules. Prossimo incremento I04. [Dettagli](E:/bm/docs/reports/i03-report.md).
+Email disabilitata senza accesso SMTP e nessuna credenziale amministrativa creata per default. Questo non completa login/provisioning/autorizzazioni o partita. L'invio email, il salvataggio asincrono integrale durante match, Elo/reconnect e restart-draw restano nei loro incrementi. Risorse e modifiche al regolamento presenti prima di I03 preservate e controllate da hash/check-rules. Prossimo incremento I04. [Dettagli](reports/i03-report.md).
 
 ## Avanzamento CLI — 24 ottobre 2026
 

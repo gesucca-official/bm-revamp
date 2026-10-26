@@ -4,7 +4,7 @@
 
 ## Stato iniziale e confini
 
-La working copy conteneva già modifiche a regolamento, testi del catalogo, due classi carta e test di conformità, oltre a I01/I02. Sono state preservate. Il nuovo [AGENTS.md](E:/bm/AGENTS.md) indica [game-rules.md](E:/bm/docs/game-rules.md) come fonte normativa: I03 non cambia regole, valori, carte, starter o copia client.
+La working copy conteneva già modifiche a regolamento, testi del catalogo, due classi carta e test di conformità, oltre a I01/I02. Sono state preservate. Il nuovo [AGENTS.md](../../AGENTS.md) indica [game-rules.md](../game-rules.md) come fonte normativa: I03 non cambia regole, valori, carte, starter o copia client.
 
 Registrati gli hash iniziali di questi file in `.build-logs/i03-preserved.json`; ricontrollati invariati al termine. Non attribuire a I03 le modifiche pregresse mostrate da Git su RottenBeer, BrokenBeerBottle e cards.sqlite.
 
@@ -20,7 +20,7 @@ Il termine “external” nei bean e package mantiene compatibilità con l'iniez
 
 ## Schema e protezioni sui file
 
-Fonte eseguibile: [V001__initial.sql](E:/bm/bm-server/src/main/resources/db/application/V001__initial.sql). Inizializzazione: [ApplicationDatabase](E:/bm/bm-server/src/main/java/com/gsc/bm/conf/db/ApplicationDatabase.java).
+Fonte eseguibile: [V001__initial.sql](../../bm-server/src/main/resources/db/application/V001__initial.sql). Inizializzazione: [ApplicationDatabase](../../bm-server/src/main/java/com/gsc/bm/conf/db/ApplicationDatabase.java).
 
 | Tabella | Identità e contenuto |
 |---|---|
@@ -44,7 +44,7 @@ I mazzi conservano le cinque proprietà UserStoredDeck e i binding originali; no
 
 Le scritture singole usano statement parametrizzati e upsert; operazioni composte possono usare `externalDbTransactionManager` (DataSourceTransactionManager). Le cancellazioni multiple dei log sono transazionali; il controllo accessi ai controller resta I06/I20. Un vincolo FK violato in una transazione è provato annullare anche la precedente scrittura dell'account.
 
-Email disabilitata di default: [MailConfiguration](E:/bm/bm-server/src/main/java/com/gsc/bm/conf/MailConfiguration.java) fornisce un sender che fallisce esplicitamente prima di qualsiasi connessione SMTP. Non simula una mail inviata. Per abilitarla servono `app.mail.enabled=true` e configurazione SMTP esplicita, fuori dal perimetro corrente.
+Email disabilitata di default: [MailConfiguration](../../bm-server/src/main/java/com/gsc/bm/conf/MailConfiguration.java) fornisce un sender che fallisce esplicitamente prima di qualsiasi connessione SMTP. Non simula una mail inviata. Per abilitarla servono `app.mail.enabled=true` e configurazione SMTP esplicita, fuori dal perimetro corrente.
 
 Nessun account amministrativo o giocatore viene creato automaticamente. HttpSecurityConfig accetta username/password HTTP Basic solo se entrambi configurati; senza valori non crea credenziali di default. Questo non completa l'autorizzazione applicativa: i difetti legacy su identità e destinazioni STOMP restano I06. I03 non implementa registrazione locale semplificata, Elo, reconnect o draw automatico dei match dopo restart.
 
@@ -59,7 +59,7 @@ Nessun account amministrativo o giocatore viene creato automaticamente. HttpSecu
 | Archivio JAR | Migrazione inclusa, nessun driver PostgreSQL/hibernate-types-52, catalogo incluso byte-identico al sorgente corrente |
 | Hash file preesistenti | Regole, catalogo e modifiche alle carte presenti prima di I03 invariati |
 
-I 73 test includono i test di conformità già presenti nel workspace: non sono tutti nuovi di I03. Nuove prove: [ApplicationSchemaTest](E:/bm/bm-server/src/test/java/com/gsc/bm/ApplicationSchemaTest.java) (2), [ApplicationPersistenceTest](E:/bm/bm-server/src/test/java/com/gsc/bm/ApplicationPersistenceTest.java) (7) e il test originale contextLoads ora verde con [SqliteContextSupport](E:/bm/bm-server/src/test/java/com/gsc/bm/SqliteContextSupport.java).
+I 73 test includono i test di conformità già presenti nel workspace: non sono tutti nuovi di I03. Nuove prove: [ApplicationSchemaTest](../../bm-server/src/test/java/com/gsc/bm/ApplicationSchemaTest.java) (2), [ApplicationPersistenceTest](../../bm-server/src/test/java/com/gsc/bm/ApplicationPersistenceTest.java) (7) e il test originale contextLoads ora verde con [SqliteContextSupport](../../bm-server/src/test/java/com/gsc/bm/SqliteContextSupport.java).
 
 Il profilo `test` usa un nuovo file sotto `target/test-databases` con override DynamicPropertySource; non usa il database locale dell'utente. Copertura:
 
@@ -71,7 +71,7 @@ Il profilo `test` usa un nuovo file sotto `target/test-databases` con override D
 - Email disabilitata; JSON persistito non valido segnalato come errore, non sostituito con un mazzo vuoto.
 - Riapertura schema idempotente; metadata versione/checksum incompatibili rifiutati; file estraneo preservato byte per byte.
 
-Lo smoke [smoke-server.py](E:/bm/scripts/smoke-server.py) crea un file nuovo sotto `.build-logs/i03-smoke-<id>`, rimuove dal processo override di configurazione/credenziali, avvia il JAR su 127.0.0.1 e chiama solo l'endpoint locale di disponibilità username. Inserisce esclusivamente nel suo nuovo file un account sintetico **non utilizzabile per login** e verifica che il secondo processo lo legga. I processi vengono terminati nel finally; nessun proxy o SMTP remoto è contattato.
+Lo smoke [smoke-server.py](../../scripts/smoke-server.py) crea un file nuovo sotto `.build-logs/i03-smoke-<id>`, rimuove dal processo override di configurazione/credenziali, avvia il JAR su 127.0.0.1 e chiama solo l'endpoint locale di disponibilità username. Inserisce esclusivamente nel suo nuovo file un account sintetico **non utilizzabile per login** e verifica che il secondo processo lo legga. I processi vengono terminati nel finally; nessun proxy o SMTP remoto è contattato.
 
 ## Evidenze e limiti
 

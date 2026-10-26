@@ -12,11 +12,11 @@ Le ricognizioni datate sotto non descrivono automaticamente lacune ancora aperte
 
 > Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
-**Aggiornamento I03:** contesto Spring, repository SQLite e JAR locale ora verificati; PostgreSQL sostituito da file applicativo separato, catalogo read-only. 73 test server nel profilo completo, nessun errore; controlli delle regole preesistenti superati e nessuna modifica alle regole in I03. La diagnosi storica di datasource non avviabile e IdClass mazzi incoerente è superata dalla nuova implementazione. [Report corrente](E:/bm/docs/reports/i03-report.md). Partita/browser, autorizzazioni e log asincroni completi restano da verificare.
+**Aggiornamento I03:** contesto Spring, repository SQLite e JAR locale ora verificati; PostgreSQL sostituito da file applicativo separato, catalogo read-only. 73 test server nel profilo completo, nessun errore; controlli delle regole preesistenti superati e nessuna modifica alle regole in I03. La diagnosi storica di datasource non avviabile e IdClass mazzi incoerente è superata dalla nuova implementazione. [Report corrente](reports/i03-report.md). Partita/browser, autorizzazioni e log asincroni completi restano da verificare.
 
 # Botte Micidiali — ricognizione del progetto
 
-**Stato più recente I02:** harness isolato verificato (8 test server + 4 client passati e mutazioni rilevate); contesto completo ancora rosso, nessuna partita end-to-end verificata. [Report I02](E:/bm/docs/reports/i02-report.md). I censimenti iniziali sotto sono precedenti all'aggiunta delle suite.
+**Stato più recente I02:** harness isolato verificato (8 test server + 4 client passati e mutazioni rilevate); contesto completo ancora rosso, nessuna partita end-to-end verificata. [Report I02](reports/i02-report.md). I censimenti iniziali sotto sono precedenti all'aggiunta delle suite.
 
 Analisi del 23 ottobre 2026 delle copie locali `bm-server` e `bm-web-client`. Questa documentazione descrive il codice disponibile, non certifica un prodotto funzionante. Non sono stati modificati sorgenti o configurazioni applicative.
 
@@ -34,14 +34,14 @@ Le citazioni indicano file e metodi; i riferimenti al catalogo indicano tabella 
 
 | Area | Contenuto verificato e fonte |
 |---|---|
-| Server | Java, Maven, Spring Boot; ingresso [BmServerApplication.java](E:/bm/bm-server/src/main/java/com/gsc/bm/BmServerApplication.java:7), dipendenze [pom.xml](E:/bm/bm-server/pom.xml) |
-| API | Controller HTTP in `api/rest/users` e `api/rest/panel`; controller STOMP in `api/ws`; [contratti ricostruiti](E:/bm/docs/api.md) |
-| Motore | `model/game`, `model/cards`, `Character`, risorse, danni, stati e timer; [dominio](E:/bm/docs/domain-model.md) |
+| Server | Java, Maven, Spring Boot; ingresso [BmServerApplication.java](../bm-server/src/main/java/com/gsc/bm/BmServerApplication.java), dipendenze [pom.xml](../bm-server/pom.xml) |
+| API | Controller HTTP in `api/rest/users` e `api/rest/panel`; controller STOMP in `api/ws`; [contratti ricostruiti](api.md) |
+| Motore | `model/game`, `model/cards`, `Character`, risorse, danni, stati e timer; [dominio](domain-model.md) |
 | Servizi | `service/session`, `service/account`, `service/factories`, `service/view`: sessioni, code, account, costruzione carte e viste |
-| Persistenza | Repository JPA `repo/internal` e `repo/external`; [cards.sqlite](E:/bm/bm-server/src/main/resources/cards.sqlite) incluso; PostgreSQL esterno configurato ma non disponibile per verifica |
-| Client | Angular, schermate account/collezione/mazzi, client debug e Phaser; [AppModule](E:/bm/bm-web-client/src/app/app.module.ts:124) |
-| Risorse | Immagini di carte/personaggi, CSS, favicon; [regolamento preesistente](E:/bm/bm-web-client/src/assets/docs/rules.md) |
-| Esecuzione | Maven wrapper, Angular CLI, proxy locale, Express e Procfile Heroku; [setup](E:/bm/docs/setup.md) |
+| Persistenza | Repository JPA `repo/internal` e `repo/external`; [cards.sqlite](../bm-server/src/main/resources/cards.sqlite) incluso; PostgreSQL esterno configurato ma non disponibile per verifica |
+| Client | Angular, schermate account/collezione/mazzi, client debug e Phaser; [AppModule](../bm-web-client/src/app/app.module.ts) |
+| Risorse | Immagini di carte/personaggi, CSS, favicon; [regolamento preesistente](../bm-web-client/src/assets/docs/rules.md) |
+| Esecuzione | Maven wrapper, Angular CLI, proxy locale, Express e Procfile Heroku; [setup](setup.md) |
 | Test | Un solo test server `contextLoads`; nessun test automatico client trovato; componente dimostrativo Phaser con dati fissi |
 | Documentazione | Due README quasi identici e incompleti; regolamento discorsivo da confrontare con il codice |
 
@@ -49,13 +49,13 @@ Le citazioni indicano file e metodi; i riferimenti al catalogo indicano tabella 
 
 ## Stato attuale
 
-**V:** il progetto contiene un motore di gioco concreto. `Game.submitMove/resolveMoves` gestisce mosse simultanee, costi, priorità, risoluzione ed effetti di fine turno; `Player` gestisce mano e pesca. Le modalità costruite da [GameFactoryServiceImpl](E:/bm/bm-server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java:15) sono quick 1vCom, quick multiplayer e open 1vCom. Le code arrivano a due giocatori per 1v1 e cinque per FFA.
+**V:** il progetto contiene un motore di gioco concreto. `Game.submitMove/resolveMoves` gestisce mosse simultanee, costi, priorità, risoluzione ed effetti di fine turno; `Player` gestisce mano e pesca. Le modalità costruite da [GameFactoryServiceImpl](../bm-server/src/main/java/com/gsc/bm/service/factories/GameFactoryServiceImpl.java) sono quick 1vCom, quick multiplayer e open 1vCom. Le code arrivano a due giocatori per 1v1 e cinque per FFA.
 
 **V:** SQLite contiene 37 carte di catalogo, due personaggi, quattro keyword, 30 righe di composizione dei mazzi e due assegnazioni di carte iniziali; entrambi i mazzi regolari sommano 20 carte. Tutte le classi nominate dal catalogo e tutte le immagini non nulle del catalogo carte esistono nelle copie locali. Questo verifica i riferimenti, non l'eseguibilità delle carte.
 
-**V:** la “collezione” restituisce a tutti l'intero catalogo: [UserAccountServiceImpl.getUserCardCollection](E:/bm/bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java:53). Non sono state trovate meccaniche di acquisizione, scambio, valuta o proprietà individuale delle carte. **D:** è un prototipo di combattimento e costruzione mazzi; la componente collezionabile non è ancora un sistema economico/progressivo.
+**V:** la “collezione” restituisce a tutti l'intero catalogo: [UserAccountServiceImpl.getUserCardCollection](../bm-server/src/main/java/com/gsc/bm/service/account/UserAccountServiceImpl.java). Non sono state trovate meccaniche di acquisizione, scambio, valuta o proprietà individuale delle carte. **D:** è un prototipo di combattimento e costruzione mazzi; la componente collezionabile non è ancora un sistema economico/progressivo.
 
-**D:** non è prudente considerarlo pronto per utenti reali: identità dei comandi non legata al principal, validazioni incomplete, contratti client/server divergenti e ciclo di vita delle partite fragile. Evidenze e priorità sono in [technical-debt.md](E:/bm/docs/technical-debt.md).
+**D:** non è prudente considerarlo pronto per utenti reali: identità dei comandi non legata al principal, validazioni incomplete, contratti client/server divergenti e ciclo di vita delle partite fragile. Evidenze e priorità sono in [technical-debt.md](technical-debt.md).
 
 ## Verifiche effettive e limiti
 
@@ -65,7 +65,7 @@ Le citazioni indicano file e metodi; i riferimenti al catalogo indicano tabella 
 
 ## Decisioni del proprietario integrate
 
-Le [risposte Q01–Q18](E:/bm/docs/open-questions.md) definiscono il nuovo obiettivo: debug locale e tutte le modalità attuali, regolamento 1.3 come fonte normativa, nessun limite di legalità dei mazzi per ora, bot casuale, una sessione/account, reconnect nella partita del processo vivo, 30 secondi/mossa e forfait se ci sono altri umani, nessun timeout mossa vsCom, restart→draw senza restore, dati completi per analisi set e CLI I26 per automazione non UX. Rating Elo rinviato.
+Le [risposte Q01–Q18](open-questions.md) definiscono il nuovo obiettivo: debug locale e tutte le modalità attuali, regolamento 1.3 come fonte normativa, nessun limite di legalità dei mazzi per ora, bot casuale, una sessione/account, reconnect nella partita del processo vivo, 30 secondi/mossa e forfait se ci sono altri umani, nessun timeout mossa vsCom, restart→draw senza restore, dati completi per analisi set e CLI I26 per automazione non UX. Rating Elo rinviato.
 
 Versioni/stack sono liberi; DDL storico perso, persistenza da ricostruire senza obbligo PostgreSQL. Nessun host disponibile. Email obbligatoria, admin, Phaser, client finali desktop/web/mobile, economia e set/regolamento definitivi sono successivi. Nessuno di questi requisiti nuovi è dichiarato implementato o verificato.
 
@@ -73,7 +73,7 @@ I01–I11 sono acquisiti: SQLite e provisioning locale sono già scelti e verifi
 
 ## Documenti
 
-[Architettura](E:/bm/docs/architecture.md) · [Dominio](E:/bm/docs/domain-model.md) · [Regole](E:/bm/docs/game-rules.md) · [API](E:/bm/docs/api.md) · [Dati](E:/bm/docs/data-model.md) · [Avvio](E:/bm/docs/setup.md) · [Stato implementazione](E:/bm/docs/implementation-status.md) · [Debito tecnico](E:/bm/docs/technical-debt.md).
+[Architettura](architecture.md) · [Dominio](domain-model.md) · [Regole](game-rules.md) · [API](api.md) · [Dati](data-model.md) · [Avvio](setup.md) · [Stato implementazione](implementation-status.md) · [Debito tecnico](technical-debt.md).
 
 ## Inventario delle directory
 

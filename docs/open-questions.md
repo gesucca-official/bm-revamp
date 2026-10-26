@@ -24,7 +24,7 @@ Risolto il provisioning locale precedentemente indicato come R01: flag esplicito
 
 # Decisioni del proprietario e questioni residue
 
-Aggiornamento del 23 ottobre 2026. Le risposte Q01–Q18 fornite dal proprietario in chat sono integrate qui come fonte di requisiti. **Non costituiscono funzionalità implementate o verificate.** Restano validi gli esiti di [verification-report.md](E:/bm/docs/reports/verification-report.md). [Inventario](E:/bm/docs/feature-inventory.md) e [roadmap](E:/bm/docs/roadmap.md) recepiscono il nuovo perimetro.
+Aggiornamento del 23 ottobre 2026. Le risposte Q01–Q18 fornite dal proprietario in chat sono integrate qui come fonte di requisiti. **Non costituiscono funzionalità implementate o verificate.** Restano validi gli esiti di [verification-report.md](reports/verification-report.md). [Inventario](feature-inventory.md) e [roadmap](roadmap.md) recepiscono il nuovo perimetro.
 
 Le formulazioni nella colonna “Risposta” riprendono le risposte del proprietario, normalizzando solo ortografia e punteggiatura. “Definita” chiude la scelta indicata, non tutti i dettagli tecnici collegati. “Provvisoria” indica esplicitamente un riferimento di sviluppo; “Rinviata” esclude per ora la relativa funzionalità dal percorso minimo.
 

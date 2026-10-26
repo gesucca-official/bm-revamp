@@ -1,6 +1,9 @@
-# Botte Micidiali — monorepo locale
+# Botte Micidiali — monorepo
 
-Server, client debug, CLI, strumenti e documentazione condividono questa repository.
+Gioco di carte con scelte simultanee ambientato in una rissa. Server, client
+debug, CLI, strumenti e documentazione condividono questo repository.
+La base locale I22 è approvata dal 26 ottobre 2026; la roadmap è conclusa
+nel suo perimetro. La pubblicazione dei sorgenti non costituisce un deploy.
 La fonte normativa è [docs/game-rules.md](docs/game-rules.md), versione 1.6;
 le decisioni sono in [docs/open-questions.md](docs/open-questions.md).
 
@@ -21,8 +24,8 @@ Windows x64 e Python 3.12; Java, Maven e Node sono fissati in
 ```powershell
 python scripts/bootstrap.py
 ./scripts/build.ps1 -Task Install
-./scripts/build.ps1 -Task Server -Offline
-./scripts/build.ps1 -Task Client -Offline
+./scripts/build.ps1 -Task Server
+./scripts/build.ps1 -Task Client
 ./scripts/dev.ps1 -Task Server -SeedAccounts
 # In un secondo terminale:
 ./scripts/dev.ps1 -Task Client
@@ -63,3 +66,12 @@ Base approvata esplicitamente dal proprietario il 26 ottobre 2026: candidato
 `I22-3e71300e057687ba`, con i limiti del report accettati. Verifica dello snapshot
 approvato e degli artefatti/evidenze locali:
 `python scripts/i22-candidate.py --verify --snapshot`.
+
+## Contributi e pubblicazione
+
+[Guida ai contributi](CONTRIBUTING.md) · [Preparazione GitHub](docs/publishing.md) ·
+[Verifiche automatiche](.github/workflows/verify.yml).
+
+Tutti i diritti riservati, come nei repository originali. Non è stata concessa
+una licenza open source; codice, illustrazioni e materiali di gioco non ricevono
+nuovi permessi di utilizzo con questa pulizia.
