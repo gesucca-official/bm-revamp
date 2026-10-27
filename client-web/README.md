@@ -1,9 +1,10 @@
-# Client web animato (C1, C2a, O9)
+# Client web animato (C1, C2a, O9, C2b-1)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
-login → partita rapida contro il computer → partita → esito → nuova partita
-oppure ritorno all'hub. Le altre modalità e la parità completa del debug
-arrivano in C2. La scena C0 resta congelata in
+login → hub «Gioca» (contro il computer o uno contro uno) → partita → esito →
+nuova partita nella stessa modalità oppure ritorno all'hub. FFA, open con mazzo
+e il resto della parità del debug arrivano nei blocchi successivi di C2b
+([piano](../docs/client-c2b-plan.md)). La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
 C2a aggiunge la leggibilità di base (O11–O14): carte più grandi, ruolo e
@@ -59,6 +60,20 @@ loopback dietro il proxy, che riconosce come pagina propria anche l'indirizzo
 LAN. Al primo avvio Windows può chiedere di consentire Node sulle reti private.
 Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
 
+## Hub «Gioca» (C2b-1)
+
+- Modalità: contro il computer e uno contro uno; FFA e open compaiono ma sono
+  disattivate fino ai loro blocchi. «Gioca» entra nella coda scelta.
+- In coda: «Esci dalla coda» chiede `/app/session/queue/leave` e torna all'hub solo
+  all'ACK del server; senza ACK (5 s) resta in coda con un errore e si può riprovare.
+  Un ingresso rifiutato (`game/error`) riporta all'hub con il messaggio del server.
+- La coda 1v1 non ha una lista pubblica: l'attesa finisce solo con la partita.
+- «Nuova partita» rientra nella coda della modalità appena giocata.
+- «Al bar»: utenti collegati e attività (`/topic/connections/users`), conteggio,
+  ordinamento per colonna, pagine da 5, 10 o 20 righe.
+- Il `resume` del login si applica una sola volta; un `account/data` successivo
+  aggiorna solo il profilo.
+
 ## Gesti
 
 - Scegli una carta e poi il bersaglio sul tavolo (personaggio o carta oggetto),
@@ -103,6 +118,7 @@ di rotazione.
 ./client-web/run.ps1 -Task Size     # JS 500 KB e totale 4 MB gzip, atlante 2048 px, texture 64 MB
 ./client-web/run.ps1 -Task Atlas    # rigenera l'atlante O9 (servono i PNG locali, fuori da git)
 ./client-web/run.ps1 -Task Verify   # partite reali: richiede server e Serve attivi
+./client-web/run.ps1 -Task VerifyModes   # due account, code e 1v1: richiede server e Serve attivi
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -113,6 +129,11 @@ ritorno all'hub e uscita. A ogni turno controlla anche C2a: misure delle carte,
 plancia uguale alle risorse della vista, attenuazione calcolata come il server,
 ruolo e guadagni uguali all'allegato del regolamento, alzata al passaggio del
 mouse; invia apposta una carta attenuata e si aspetta il rifiuto del server.
+`VerifyModes` usa devAlice e devBob in due contesti Edge: presenza, uscita dalla
+coda, 1v1 fino all'esito con controllo delle viste private, «Nuova partita»,
+ingresso rifiutato con partita riprendibile (da un secondo socket STOMP grezzo
+dello stesso account, perché dal client l'hub non è raggiungibile in quello stato),
+abbandono e uscita. Accetta le stesse variabili di `Verify`.
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
@@ -147,7 +168,9 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
   pavimenti, geometria del tavolo per duello e FFA a cinque.
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
-- `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso, hub,
+- `src/hub.tsx`, `src/presence.ts`: hub «Gioca» e presenza (ordinamento e pagine come
+  funzioni pure).
+- `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso,
   tavolo, esito, dialoghi).
 - `window.__bm`: stato in sola lettura della pagina per la verifica automatica;
   nessun comando. Da rivalutare prima della consegna C5.

@@ -30,3 +30,23 @@ button.primary{background:#9ec5bd;font-size:17px}
 button.info{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;min-width:0;min-height:0;padding:0;border-radius:50%;border:2px solid #30231e;background:#38616a;background-clip:padding-box;color:#f6ecd8;font:italic 700 17px/1 Georgia,serif;box-shadow:1px 2px 0 #20160c88;z-index:4;outline-offset:2px}
 button.info::before{content:'';position:absolute;inset:-10px;border-radius:50%}
 button.info:hover{background:#4d7d86}
+.sheet.hub{width:min(760px,94vw)}
+.hub-head{display:flex;align-items:flex-end;gap:16px}.hub-head .tabs{flex:1}
+.tabs{display:flex;gap:6px;border-bottom:2px solid #9b7652}
+.actions{display:flex;gap:8px}.actions .primary{flex:1}
+.tab{font:bold 14px Arial,sans-serif;padding:6px 14px;background:#f6ecd8;border:2px solid #9b7652;border-bottom:0;border-radius:4px 4px 0 0;color:#30231e}
+.hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.play,.presence{display:flex;flex-direction:column;gap:8px;min-width:0}
+.modes{display:flex;flex-direction:column;gap:6px}
+.mode{text-align:left}
+.mode.on{background:#9ec5bd;outline:2px solid #38616a}
+.mode:disabled:not(.on){opacity:.55}
+.presence h2{margin:0;font-size:16px;color:#742e33}
+.presence table{width:100%;border-collapse:collapse;font-size:14px}
+.presence th,.presence td{text-align:left;padding:4px 6px;border-bottom:1px solid #9b765255}
+.presence tr.me td{font-weight:bold}
+.presence button.link{background:none;border:0;box-shadow:none;padding:2px 0;min-height:32px;font:bold 14px Arial,sans-serif;color:#30231e}
+.pager{display:flex;align-items:center;gap:8px;font-size:14px;flex-wrap:wrap}
+.pager label{display:flex;flex-direction:row;align-items:center;gap:4px;font-weight:normal}
+@media(max-width:640px){.hub-grid{grid-template-columns:1fr}}
+@media(max-height:550px){.hub-grid{gap:10px}.sheet.hub .modes{display:grid;grid-template-columns:1fr 1fr;gap:4px}.sheet.hub .mode{padding:4px 8px;font-size:13px}.sheet.hub .notice{padding:4px 8px;font-size:14px}.sheet.hub .tab{padding:4px 12px}.presence th button.link{min-height:36px}}

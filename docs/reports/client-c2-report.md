@@ -2,8 +2,8 @@
 
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
-confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) **non è
-iniziata**. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
+blocchi: **C2b-1 (modalità e code) è fatto**, gli altri no ([sezione](#c2b-1--modalità-e-code)). Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -257,3 +257,39 @@ cattura nuova, aggiunta a `verify.mjs` senza altre modifiche.
   rigenera da un clone pulito.
 - Il segnaposto neutro non è mai comparso in partita: è coperto solo dal test.
 - Un solo atlante: il caricamento della scena aspetta tutti i 566 KB.
+
+## C2b-1 — Modalità e code
+
+27 ottobre 2026. Regolamento 1.7, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md)). Nessuna modifica a regole, server,
+catalogo o `client-debug`.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| K1 | Corretto in `session.ts`: il `resume` del login si applica una sola volta. Il test che lo riproduceva (due casi) falliva prima della correzione. |
+| K2, K3 | `join(modalità)` al posto di `quick()`, `leaveQueue()` con ACK di `/user/queue/session/queue/leave`; tipi `UserGuiDeck` e `Presence` nel contratto (solo tipi). |
+| Interfaccia | Nuovo `hub.tsx`: scheda «Gioca», selettore delle modalità (1vCom, 1v1; FFA e open visibili e disattivate), attesa con «Esci dalla coda», errore di ingresso, presenza con ordinamento per colonna e pagine 5/10/20. «Nuova partita» ripete la modalità giocata (D11). Tavolo invariato. |
+| Test automatici | Client 46 (34 + 12: K1, 1v1, nuova partita, uscita dalla coda con e senza ACK, annullo prima della conferma, ready più veloce del leave, presenza, ordinamento e pagine). `build.ps1 -Task Test -Offline` e `check-rules.py` passano. |
+| Partite reali | **Sì.** `VerifyModes` (nuovo, `run.ps1 -Task VerifyModes`) con devAlice e devBob in due contesti Edge, a 1366×768 e 844×390: presenza di B che compare e sparisce con il conteggio; uscita dalla coda con ACK e pulsanti di nuovo attivi; B solo in coda resta in attesa senza partita; stesso `gameId` e 1v1 fino all'esito (10 turni ciascuno a 1366×768); mano propria come array e altrui come numero in tutte le viste (28 per account), nessun nome di carta della sola mano altrui nelle parti non pubbliche; «Nuova partita» rientra in 1v1 con un nuovo `gameId`; abbandono con vittoria dell'altro. `Verify` 1vCom rieseguito a entrambe le misure (2 partite ciascuna): regressione assente. |
+| Peso | JS gzip 283323 byte (+1,5 KB rispetto a O9, limite 500 KB); totale gzip 1064763 byte (limite 4 MB). |
+| Emulazione / dispositivo / umano | 844×390 sul PC con il mouse; nessun dispositivo fisico né prova umana in questo blocco. |
+
+### Limiti e residui
+
+- **Ingresso rifiutato con partita riprendibile**: dal client l'hub non è
+  raggiungibile in quello stato, quindi la verifica reale usa un secondo socket
+  STOMP grezzo dello stesso account mentre il client è disconnesso: il server
+  risponde su `/user/queue/game/error` («Leave or resume the current game
+  first»). Il comportamento dell'hub davanti a quel messaggio (ritorno all'hub,
+  nessuno spinner) è coperto solo dal test di sessione con trasporto finto.
+- Senza ACK dell'uscita dalla coda il client resta in coda con un errore (non
+  torna all'hub), per non perdere una partita che il server potrebbe ancora
+  assegnare. Coperto in unità, non provocato sul server reale.
+- Dopo un rientro la modalità giocata non è nota: «Nuova partita» la deduce
+  (avversario `ComPlayer_` → 1vCom, altrimenti 1v1); in FFA andrà rivista (C2b-3).
+- La verifica chiude da sola una partita lasciata da una prova precedente agli
+  account sintetici (`resumedLeftoverA/B` nelle evidenze).
+- Evidenze: [modes.json](client-c2/modes.json), [modes-844x390.json](client-c2/modes-844x390.json),
+  [catture](client-c2/screens/) `modes-*`; `verify*.json` aggiornati.

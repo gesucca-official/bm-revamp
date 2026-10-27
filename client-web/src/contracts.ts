@@ -35,6 +35,11 @@ export interface View {
   outcomeReason: string | null;
 }
 export interface CharacterCard {name: string; bindingName: string; itemsSize: number; resources: Partial<Record<Resource, number>>}
-export interface Account {username: string; email: string | null; role: string; collection: {cards: Card[]; characters?: CharacterCard[]} | null}
+export interface UserGuiDeck {
+  deckId: string; character: CharacterCard; basicActionCard: Card; lastResortCard: Card;
+  characterBoundCards: Card[]; regularCards: Card[];
+}
+export interface Presence {userLogin: string; activity: string}
+export interface Account {username: string; email: string | null; role: string; decks?: UserGuiDeck[]; collection: {cards: Card[]; characters?: CharacterCard[]} | null}
 export interface Outcome {over: boolean; result: string; winner: string | null; reason: string}
 export interface ResumeState {status: 'none' | 'resumed' | 'finished'; gameId?: string; view?: View; archived?: boolean; outcome?: Outcome}

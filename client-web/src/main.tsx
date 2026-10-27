@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import {Session} from './session.ts';
 import {stompConnector} from './net/stomp.ts';
 import {Table} from './table.tsx';
+import {Hub} from './hub.tsx';
 import {PressButton} from './ui.tsx';
 import './style.css';
 
@@ -18,19 +19,6 @@ function Login(){
   {session.error&&<p className="problem" role="alert">{session.error}</p>}
   <PressButton type="submit" disabled={busy||!user.trim()||!password}>{busy?'Mi siedo…':'Siediti al tavolo'}</PressButton>
  </form>;
-}
-
-function Hub(){
- const receipt=session.receipt,queued=session.phase==='queue';
- return <section className="sheet" aria-label="Hub">
-  <h1>Ciao, {session.user}</h1>
-  {receipt?.outcome&&<p className="notice" role="status">Pareggio — {receipt.outcome.reason}. La partita precedente è chiusa: puoi iniziarne un’altra.</p>}
-  {session.notice&&<p className="notice" role="status">{session.notice}</p>}
-  {session.error&&<p className="problem" role="alert">{session.error}</p>}
-  <PressButton data-testid="quick" className="primary" disabled={queued} onClick={()=>session.quick()}>{queued?'Cerco un posto al tavolo…':'Partita rapida contro il computer'}</PressButton>
-  <p className="small">Personaggio assegnato a caso. Le altre modalità sono ancora nel client debug.</p>
-  <PressButton disabled={queued} onClick={()=>void session.logout()}>Esci</PressButton>
- </section>;
 }
 
 function Lost(){
@@ -53,7 +41,7 @@ function App(){
   <Table key={model.view.gameId} session={session} model={model}/>
   {session.phase!=='game'&&<div className="overlay"><Lost/></div>}
  </>;
- return <div className="backdrop">{session.phase==='lost'?<Lost/>:session.phase==='hub'||session.phase==='queue'?<Hub/>:<Login/>}</div>;
+ return <div className="backdrop">{session.phase==='lost'?<Lost/>:session.phase==='hub'||session.phase==='queue'?<Hub session={session}/>:<Login/>}</div>;
 }
 
 createRoot(document.getElementById('root')!).render(<App/>);

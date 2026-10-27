@@ -1,15 +1,16 @@
-import type {Account, Card, ResumeState, View, CharacterCard} from './contracts.ts';
+import type {Account, Card, ResumeState, View, CharacterCard, Presence} from './contracts.ts';
 import type {Connector, Link} from './net/link.ts';
 import {Model} from './model.ts';
 
 export type Phase = 'login' | 'connecting' | 'hub' | 'queue' | 'game' | 'lost';
+export type Mode = 'quick/1vCom' | 'quick/1v1';
 export type Trace = {at: number; channel: string; body: string};
 export type Timers = {set(fn: () => void, ms: number): number; clear(id: number): void};
 const browserTimers: Timers = {set: (fn, ms) => globalThis.setTimeout(fn, ms) as unknown as number, clear: id => globalThis.clearTimeout(id)};
 const PROFILE_TIMEOUT = 10000, VIEW_TIMEOUT = 5000, ACK_TIMEOUT = 5000;
 
 /**
- * Application flow over the server protocol: login, hub, quick 1vCom, game, outcome, rejoin.
+ * Application flow over the server protocol: login, hub, quick queues (1vCom, 1v1), game, outcome, rejoin.
  * Authoritative state comes only from private views; the topics update/move are just a signal
  * to request the private view again. Nothing is ever resent automatically after a drop.
  */
@@ -22,12 +23,19 @@ export class Session {
   error = '';
   notice = '';
   receipt: ResumeState | null = null;
+  /** Queue being waited on, or null; `mode` is the last one joined ("new game" repeats it, D11). */
+  queued: Mode | null = null;
+  mode: Mode | null = null;
+  leavingQueue = false;
+  presence: Presence[] = [];
   readonly trace: Trace[] = [];
   private password = '';
   private link: Link | null = null;
   private generation = 0;
   private gameSubs: (() => void)[] = [];
   private queueSubs: (() => void)[] = [];
+  private queueToken = 0;
+  private joined = false;
   private viewInFlight = 0;
   private viewAgain = false;
   private leaving = false;
@@ -75,20 +83,23 @@ export class Session {
     if (generation !== this.generation) { link.close(); return; }
     this.link = link;
     const guard = (fn: (body: string) => void, channel: string) => (body: string) => { if (generation === this.generation) { this.log(channel, body); fn(body); } };
-    let resume: ResumeState | undefined, profile = false;
-    const settle = () => { if (resume === undefined || !profile) return; this.timers.clear(timer); this.applyResume(resume); };
+    // The login resume is applied once: a later account/data (deck save, refresh) only updates the profile.
+    let resume: ResumeState | undefined, profile = false, applied = false;
+    const settle = () => { if (applied || resume === undefined || !profile) return; applied = true; this.timers.clear(timer); this.applyResume(resume); };
     const timer = this.timers.set(() => { if (generation === this.generation && !(profile && resume)) this.close('Profilo non disponibile: accesso annullato.'); }, PROFILE_TIMEOUT);
     try {
       await Promise.all([
         link.subscribe('/user/queue/session/resume', guard(body => { resume = JSON.parse(body); settle(); }, 'resume')),
         link.subscribe('/user/queue/game/error', guard(body => this.queueFailed(body), 'game/error')),
         link.subscribe('/user/queue/account/error', guard(body => { if (!profile) this.close('Profilo non disponibile. Riprova.'); else { this.error = body; this.emit(); } }, 'account/error')),
-        link.subscribe('/user/queue/account/data', guard(body => { this.account = JSON.parse(body); profile = true; settle(); }, 'account/data'))
+        link.subscribe('/user/queue/account/data', guard(body => { this.account = JSON.parse(body); profile = true; settle(); if (applied) this.emit(); }, 'account/data')),
+        link.subscribe('/topic/connections/users', guard(body => { this.presence = JSON.parse(body); this.emit(); }, 'users'))
       ]);
     } catch { if (generation === this.generation) this.close('Il server non ha confermato le sottoscrizioni.'); return; }
     if (generation !== this.generation) return;
     link.send('/app/session/resume');
     link.send(`/app/user/${this.user}/account`);
+    link.send('/app/connections/users/tell/me');
   }
 
   private applyResume(state: ResumeState) {
@@ -108,21 +119,45 @@ export class Session {
     if (state.status === 'resumed' && !state.view.over) void this.attach(state.gameId, false);
   }
 
-  quick() {
+  join(mode: Mode) {
     if (this.phase !== 'hub' || !this.link) return;
-    const link = this.link, generation = this.generation;
-    this.error = ''; this.notice = ''; this.receipt = null; this.phase = 'queue'; this.emit();
-    void link.subscribe('/user/queue/game/quick/1vCom/ready', body => {
-      if (generation !== this.generation || this.phase !== 'queue') return;
-      this.log('1vCom/ready', body); this.clearQueue(); void this.attach(body, true);
+    const link = this.link, generation = this.generation, token = ++this.queueToken;
+    const stale = () => generation !== this.generation || token !== this.queueToken;
+    this.error = ''; this.notice = ''; this.receipt = null; this.phase = 'queue'; this.queued = mode; this.mode = mode; this.joined = false; this.leavingQueue = false; this.emit();
+    void link.subscribe(`/user/queue/game/${mode}/ready`, body => {
+      if (stale() || this.phase !== 'queue') return;
+      this.log(`${mode}/ready`, body); this.clearQueue(); this.queued = null; this.leavingQueue = false; void this.attach(body, true);
     }).then(unsub => {
-      if (generation !== this.generation) return;
-      this.queueSubs.push(unsub);
-      link.send('/app/game/quick/1vCom/join', this.user);
-    }, () => { if (generation === this.generation) this.close('Il server non ha confermato la coda.'); });
+      if (stale()) { unsub(); return; }
+      this.queueSubs.push(unsub); this.joined = true;
+      link.send(`/app/game/${mode}/join`, this.user);
+    }, () => { if (!stale()) this.close('Il server non ha confermato la coda.'); });
   }
 
-  private queueFailed(body: string) { if (this.phase !== 'queue') return; this.clearQueue(); this.phase = 'hub'; this.error = body; this.emit(); }
+  /** Leave the queue: acknowledged by the server, then subscriptions close. Without ACK the user stays in the queue. */
+  leaveQueue() {
+    const link = this.link;
+    if (this.phase !== 'queue' || !this.queued || !link || this.leavingQueue) return;
+    const generation = this.generation, token = this.queueToken;
+    // The join was never sent (subscription not confirmed yet): cancelling is local.
+    if (!this.joined) { this.queueToken++; this.endQueue(); this.emit(); return; }
+    this.leavingQueue = true; this.error = ''; this.emit();
+    let done = false;
+    const finish = (acknowledged: boolean) => {
+      if (done || generation !== this.generation || token !== this.queueToken) return; done = true; this.timers.clear(timer); unsubscribe.then(unsub => unsub(), () => {});
+      this.leavingQueue = false;
+      if (!this.queued) return; // the game was ready first: the leave no longer applies
+      if (acknowledged) { this.queueToken++; this.endQueue(); }
+      else this.error = 'Il server non ha confermato l’uscita dalla coda. Riprova.';
+      this.emit();
+    };
+    const timer = this.timers.set(() => finish(false), ACK_TIMEOUT);
+    const unsubscribe = link.subscribe('/user/queue/session/queue/leave', body => { this.log('queue/leave', body); finish(true); });
+    unsubscribe.then(() => { if (!done) link.send('/app/session/queue/leave'); }, () => finish(false));
+  }
+
+  private endQueue() { this.clearQueue(); this.queued = null; this.joined = false; this.leavingQueue = false; this.phase = 'hub'; }
+  private queueFailed(body: string) { if (this.phase !== 'queue') return; this.queueToken++; this.endQueue(); this.error = body; this.emit(); }
   private clearQueue() { this.queueSubs.splice(0).forEach(unsub => unsub()); }
 
   private async attach(gameId: string, fresh: boolean) {
@@ -170,9 +205,10 @@ export class Session {
   }
 
   /** Leave after the outcome (acknowledgement) or as an explicit forfeit; then back to the hub. */
-  leave(then: 'hub' | 'quick' = 'hub') {
+  leave(then: 'hub' | 'again' = 'hub') {
     const link = this.link, gameId = this.gameId, generation = this.generation;
     if (this.leaving) return;
+    const again = this.mode ?? this.modeOf(this.model?.view);
     if (!link || !gameId) { this.dropGame(); this.phase = this.link ? 'hub' : 'login'; this.emit(); return; }
     // The leave itself publishes an update; a view request after it would hit a closed game, which the
     // server denies by closing the connection. Stop listening to the game before leaving it.
@@ -183,19 +219,22 @@ export class Session {
       this.dropGame(); this.phase = 'hub';
       if (!acknowledged) this.notice = 'Il server non ha confermato l’uscita: se rientri nella stessa partita, lasciala di nuovo.';
       this.emit();
-      if (acknowledged && then === 'quick') this.quick();
+      if (acknowledged && then === 'again') this.join(again);
     };
     const timer = this.timers.set(() => finish(false), ACK_TIMEOUT);
     const unsubscribe = link.subscribe(`/user/queue/game/${gameId}/leave`, body => { this.log('leave', body); finish(true); });
     unsubscribe.then(() => { if (!done) link.send(`/app/game/${gameId}/${this.user}/leave`); }, () => finish(false));
   }
 
+  // After a rejoin the queue is unknown: a computer opponent means 1vCom, otherwise 1v1.
+  private modeOf(view?: View): Mode { return !view || Object.keys(view.players).some(id => id.startsWith('ComPlayer_')) ? 'quick/1vCom' : 'quick/1v1'; }
+
   private dropGame() { this.leaving = false; this.unsubscribeGame(); this.model = null; this.gameId = null; this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false; }
   private unsubscribeGame() { this.gameSubs.splice(0).forEach(unsub => unsub()); }
 
   private dropped(generation: number) {
     if (generation !== this.generation) return;
-    this.generation++; this.link = null; this.gameSubs = []; this.queueSubs = [];
+    this.generation++; this.link = null; this.gameSubs = []; this.queueSubs = []; this.queued = null; this.leavingQueue = false; this.presence = [];
     this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false;
     this.model?.disconnect();
     this.phase = 'lost';
@@ -204,7 +243,7 @@ export class Session {
   }
 
   private close(message: string) {
-    this.generation++; this.link?.close(); this.link = null; this.dropGame(); this.clearQueue();
+    this.generation++; this.link?.close(); this.link = null; this.dropGame(); this.clearQueue(); this.queued = null; this.leavingQueue = false; this.presence = [];
     this.phase = 'login'; this.error = message; this.password = ''; this.emit();
   }
 
@@ -219,7 +258,7 @@ export class Session {
       });
       link.close();
     }
-    this.link = null; this.dropGame(); this.clearQueue(); this.account = null; this.receipt = null;
+    this.link = null; this.dropGame(); this.clearQueue(); this.queued = null; this.mode = null; this.leavingQueue = false; this.presence = []; this.account = null; this.receipt = null;
     this.user = ''; this.password = ''; this.error = ''; this.notice = ''; this.phase = 'login'; this.emit();
   }
 

@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-27T18:46:22.861Z",
+  "date": "2026-10-27T19:25:25.143Z",
   "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped; textures: WebP header size x 4 bytes (RGBA), no mipmaps counted",
-  "jsGzip": 281851,
-  "totalGzip": 1062954,
+  "jsGzip": 283323,
+  "totalGzip": 1064763,
   "textureDecodedBytes": 18876320,
   "textures": [
     {
@@ -45,10 +45,10 @@
       "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
     },
     {
-      "file": "assets/browserAll-BoF4UI-9.js",
+      "file": "assets/browserAll-Bds087z0.js",
       "bytes": 43507,
-      "gzip": 11135,
-      "sha256": "63ff8bcb61fc320b623cee85802d57d3976cf23b763902c841caeffa27bf2d35"
+      "gzip": 11137,
+      "sha256": "cf0a5bc754557f1c8f8a532695d0614ef4b72921aa389ccf614e7667bc22e3ba"
     },
     {
       "file": "assets/Cache-fEtFvAzf.js",
@@ -99,22 +99,22 @@
       "sha256": "040036b2b3f95fadee76dcf89de80dd72f3dc23173ff7dbf9b341d399fe3f698"
     },
     {
-      "file": "assets/index-BnRElKpR.js",
-      "bytes": 603403,
-      "gzip": 182247,
-      "sha256": "c7ba7bfa7ab2d1bcf05883e507e1e6b4ea4902d2ea0a3405131e65cdd37a6d9a"
+      "file": "assets/index-CUCNh5pP.js",
+      "bytes": 608332,
+      "gzip": 183716,
+      "sha256": "8089188b8b30aa836d7bd86bf37e128422fd1d9ee67e10941e6d3c151613a5a5"
     },
     {
-      "file": "assets/index-D-i91h-s.css",
-      "bytes": 7676,
-      "gzip": 2360,
-      "sha256": "98eb44a18b70f191e2361f69ed9c967f60b7c2423bfafa7ced8b659779d45378"
+      "file": "assets/index-D68GsvOA.css",
+      "bytes": 9237,
+      "gzip": 2694,
+      "sha256": "0722698a1c4515e18d7502648a21fb2af3ce3ea883f4ae342298e49b2a6bc80e"
     },
     {
-      "file": "assets/init-kwbLIMIl.js",
+      "file": "assets/init-Dw_pqQVz.js",
       "bytes": 14842,
-      "gzip": 4561,
-      "sha256": "5587c237abf304fdfd5f4ebebd6759741061dd3a31882e0f2c277b92affe23d7"
+      "gzip": 4562,
+      "sha256": "601e915963b816bc1cf88d66dccdd3b77e4e850ef9f19215248e465e97fa9cda"
     },
     {
       "file": "assets/RenderTargetSystem-9obqq6wg.js",
@@ -123,16 +123,16 @@
       "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
     },
     {
-      "file": "assets/webworkerAll-BcW0aivi.js",
+      "file": "assets/webworkerAll-DaJ5N4AJ.js",
       "bytes": 55,
       "gzip": 63,
-      "sha256": "2e68011255e0e06e6c4b9db999274761589743d43fd5759e486ce93d4efd1448"
+      "sha256": "07d7d47122bef1ea31850f5aa8785ab5c9e1a20d28909e7008e23ea72ec04d83"
     },
     {
       "file": "index.html",
       "bytes": 1152,
-      "gzip": 480,
-      "sha256": "5e3f66cf31eee887322822bacc4b81ad5d97c4cc5e065717848e726edb0f1b96"
+      "gzip": 483,
+      "sha256": "6a9eb1007ce6206c37bfc1deacbf3ad9dba89b44c53794518dcbfb66d85abe40"
     }
   ]
 }

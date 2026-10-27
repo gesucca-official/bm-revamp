@@ -49,7 +49,7 @@ const account = {username: 'Tu', email: null, role: 'USER', collection: {cards: 
 async function inHub() {
   const server = new FakeServer(), clock = timers(), session = new Session(server, clock);
   await session.login('Tu', 'secret'); await flush();
-  assert.deepEqual(server.sent.map(s => s.destination), ['/app/session/resume', '/app/user/Tu/account']);
+  assert.deepEqual(server.sent.map(s => s.destination), ['/app/session/resume', '/app/user/Tu/account', '/app/connections/users/tell/me']);
   server.deliver('/user/queue/session/resume', {status: 'none'});
   server.deliver('/user/queue/account/data', account);
   assert.equal(session.phase, 'hub');
@@ -57,7 +57,7 @@ async function inHub() {
 }
 async function inGame(view = duel()) {
   const ctx = await inHub();
-  ctx.session.quick(); await flush();
+  ctx.session.join('quick/1vCom'); await flush();
   assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/quick/1vCom/join', body: 'Tu'});
   ctx.server.deliver('/user/queue/game/quick/1vCom/ready', 'g1'); await flush();
   assert.deepEqual(ctx.server.sent.at(-1), {destination: '/app/game/g1/Tu/view', body: ''});
@@ -65,6 +65,29 @@ async function inGame(view = duel()) {
   assert.equal(ctx.session.phase, 'game');
   return ctx;
 }
+
+test('K1: a repeated account/data does not reapply the login resume', async () => {
+  const {session, server} = await inGame();
+  const m = session.model!;
+  server.deliver('/user/queue/account/data', account);
+  assert.equal(session.phase, 'game'); assert.equal(session.model, m); assert.equal(session.notice, '');
+  // Same for the hub and the restart receipt: a later profile refresh must not bring them back.
+  const hub = await inHub();
+  hub.session.receipt = null;
+  hub.server.deliver('/user/queue/account/data', account);
+  assert.equal(hub.session.receipt, null); assert.equal(hub.session.phase, 'hub');
+});
+
+test('K1: a profile refresh after a rejoin keeps the rejoined game', async () => {
+  const {session, server} = await inGame();
+  server.drops.at(-1)!();
+  await session.rejoin(); await flush();
+  server.deliver('/user/queue/session/resume', {status: 'resumed', gameId: 'g1', view: duel()});
+  server.deliver('/user/queue/account/data', account); await flush();
+  const m = session.model!; session.notice = '';
+  server.deliver('/user/queue/account/data', account);
+  assert.equal(session.model, m); assert.equal(session.phase, 'game'); assert.equal(session.notice, '');
+});
 
 test('wrong credentials stay on login without opening STOMP', async () => {
   const server = new FakeServer(); server.valid = false;
@@ -143,7 +166,7 @@ test('outcome, leave acknowledgement and a new quick game', async () => {
   const over = duel(4); over.over = true; over.winner = 'Tu'; over.outcomeReason = 'combat';
   server.deliver('/user/queue/game/g1/view', over);
   assert.equal(session.model!.message, 'Hai vinto');
-  session.leave('quick'); await flush();
+  session.leave('again'); await flush();
   assert.ok(!server.handlers.has('/topic/game/g1/update'), 'game topics dropped before leaving');
   const views = server.count('/app/game/g1/Tu/view'); session.requestView();
   assert.equal(server.count('/app/game/g1/Tu/view'), views, 'no view request towards a game being left');
@@ -155,9 +178,88 @@ test('outcome, leave acknowledgement and a new quick game', async () => {
 
 test('queue error returns to the hub with the server message', async () => {
   const {session, server} = await inHub();
-  session.quick(); await flush();
+  session.join('quick/1vCom'); await flush();
   server.deliver('/user/queue/game/error', 'Partita da riprendere');
   assert.equal(session.phase, 'hub'); assert.equal(session.error, 'Partita da riprendere');
+});
+
+test('1v1: joins on its own ready channel and plays like any game', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/1v1'); await flush();
+  assert.equal(session.queued, 'quick/1v1');
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1v1/join', body: 'Tu'});
+  assert.ok(!server.handlers.has('/user/queue/game/quick/1vCom/ready'));
+  server.deliver('/user/queue/game/quick/1v1/ready', 'g1'); await flush();
+  assert.equal(session.queued, null); assert.ok(!server.handlers.has('/user/queue/game/quick/1v1/ready'), 'queue subscription closed');
+  const v = duel(); v.players = {Tu: v.players.Tu, devBob: {...v.players.ComPlayer_7, playerId: 'devBob'}};
+  server.deliver('/user/queue/game/g1/view', v);
+  assert.equal(session.phase, 'game');
+});
+
+test('new game repeats the mode just played (D11)', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/1v1'); await flush();
+  server.deliver('/user/queue/game/quick/1v1/ready', 'g1'); await flush();
+  const over = duel(4); over.over = true; over.winner = 'Tu'; over.outcomeReason = 'combat';
+  server.deliver('/user/queue/game/g1/view', over);
+  session.leave('again'); await flush();
+  server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
+  assert.equal(session.phase, 'queue'); assert.equal(session.queued, 'quick/1v1');
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/1v1/join', body: 'Tu'});
+});
+
+test('leaving the queue: ACK closes the subscriptions and returns to an active hub', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/1v1'); await flush();
+  session.leaveQueue(); await flush();
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/session/queue/leave', body: ''});
+  assert.equal(session.phase, 'queue'); assert.equal(session.leavingQueue, true);
+  session.leaveQueue(); assert.equal(server.count('/app/session/queue/leave'), 1, 'one leave while waiting for the ACK');
+  server.deliver('/user/queue/session/queue/leave', 'true'); await flush();
+  assert.equal(session.phase, 'hub'); assert.equal(session.queued, null); assert.equal(session.leavingQueue, false);
+  assert.ok(!server.handlers.has('/user/queue/game/quick/1v1/ready'), 'ready subscription closed');
+  assert.ok(!server.handlers.has('/user/queue/session/queue/leave'), 'ACK subscription closed');
+  session.join('quick/1v1'); await flush();
+  assert.equal(server.count('/app/game/quick/1v1/join'), 2, 'joining again after the ACK is a new join');
+});
+
+test('leaving the queue without ACK stays in the queue with an error, never a stuck spinner', async () => {
+  const {session, server, clock} = await inHub();
+  session.join('quick/1v1'); await flush();
+  session.leaveQueue(); await flush();
+  clock.fire();
+  assert.equal(session.phase, 'queue'); assert.equal(session.leavingQueue, false); assert.match(session.error, /uscita dalla coda/);
+  session.leaveQueue(); await flush();
+  assert.equal(server.count('/app/session/queue/leave'), 2);
+});
+
+test('cancelling before the subscription is confirmed never sends the join', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/1v1'); session.leaveQueue(); await flush();
+  assert.equal(session.phase, 'hub'); assert.equal(server.count('/app/game/quick/1v1/join'), 0); assert.equal(server.count('/app/session/queue/leave'), 0);
+  assert.ok(!server.handlers.has('/user/queue/game/quick/1v1/ready'));
+});
+
+test('a ready that wins the race against the leave starts the game', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/1v1'); await flush();
+  session.leaveQueue(); await flush();
+  server.deliver('/user/queue/game/quick/1v1/ready', 'g1'); await flush();
+  server.deliver('/user/queue/session/queue/leave', 'true'); await flush();
+  assert.equal(session.phase, 'queue'); assert.equal(session.gameId, 'g1'); assert.equal(session.queued, null);
+  server.deliver('/user/queue/game/g1/view', duel());
+  assert.equal(session.phase, 'game');
+});
+
+test('presence follows the public topic and is cleared on logout', async () => {
+  const {session, server} = await inHub();
+  server.deliver('/topic/connections/users', [{userLogin: 'Tu', activity: 'Free'}, {userLogin: 'devBob', activity: 'Playing'}]);
+  assert.deepEqual(session.presence.map(u => u.userLogin), ['Tu', 'devBob']);
+  server.deliver('/topic/connections/users', [{userLogin: 'Tu', activity: 'Free'}]);
+  assert.equal(session.presence.length, 1);
+  const out = session.logout(); await flush();
+  server.deliver('/user/queue/session/logout', 'true'); await out;
+  assert.deepEqual(session.presence, []);
 });
 
 test('missing profile within the technical timeout returns to login', async () => {

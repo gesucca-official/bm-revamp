@@ -65,7 +65,7 @@ export function Table({session,model}:{session:Session;model:Model}){
   {choice&&model.target&&!finished&&<div className="confirmation" style={confirmAt!}>
    <span role="status" aria-live="polite">{choice.name}<br/>→ {targetLabel}<br/><em>{model.message}</em>{choice.characterBound&&!discardable.length&&<><br/>Nessuna regolare da scartare</>}</span><div><PressButton data-testid="confirm" disabled={!model.ready||!!error||!session.connected} aria-label="Conferma calata" onClick={()=>session.submit()}>✓</PressButton><PressButton aria-label="Annulla calata" disabled={model.phase!=='choose'} onClick={()=>model.cancel()}>×</PressButton></div></div>}
   {finished&&<section className="outcome" aria-label="Esito"><h2>{result}</h2><p>{reasons[view.outcomeReason||'']||(view.over?'Partita conclusa':'')}</p>
-   <div><PressButton data-testid="again" onClick={()=>session.leave('quick')}>Nuova partita</PressButton><PressButton onClick={()=>session.leave('hub')}>Torna all’hub</PressButton><PressButton onClick={()=>open('report')}>Ultimo turno</PressButton></div></section>}
+   <div><PressButton data-testid="again" onClick={()=>session.leave('again')}>Nuova partita</PressButton><PressButton onClick={()=>session.leave('hub')}>Torna all’hub</PressButton><PressButton onClick={()=>open('report')}>Ultimo turno</PressButton></div></section>}
   {!ready&&!error&&<div className="loading">Preparo il tavolo…</div>}
   {error&&<div className="error" role="alert">{error}</div>}
   <div className="portrait"><strong>Il tavolo va in orizzontale.</strong><p>Ruota lo schermo per distinguere le carte e raggiungere i bersagli.</p><p>La selezione è interrotta; il tempo continua.</p></div>
