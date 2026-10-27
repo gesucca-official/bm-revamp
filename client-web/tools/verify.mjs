@@ -107,7 +107,7 @@ async function playTurn(game){
   assert.equal(await page.getByRole('button',{name:/^(Riordina|Dettagli carta)$/}).count(),0,'O1/O5: old buttons removed');
   const card=s.hits.find(h=>h.kind==='hand'&&h.id===s.order[1].key);
   await page.mouse.move(center(card).x,center(card).y);await page.getByTestId('info').waitFor({timeout:3000});await shot('02-info-hover');
-  await page.getByTestId('info').click();await page.locator('dialog .inspection').waitFor({timeout:3000});
+  await page.getByTestId('info').click();await page.locator('dialog .inspection').waitFor({timeout:3000});await shot('02-inspect-art');
   const title=await page.locator('dialog .receipt h2').innerText();await page.keyboard.press('Escape');await page.locator('dialog[open]').waitFor({state:'detached',timeout:3000}).catch(()=>{});
   assert.equal(title,s.order[1].name,'hover (i) opens the hovered card');
   await page.mouse.move(5,5);await tap(card);s=await state();assert.equal(s.selected,card.id);

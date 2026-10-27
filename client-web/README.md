@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a)
+# Client web animato (C1, C2a, O9)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 login → partita rapida contro il computer → partita → esito → nuova partita
@@ -9,7 +9,8 @@ arrivano in C2. La scena C0 resta congelata in
 C2a aggiunge la leggibilità di base (O11–O14): carte più grandi, ruolo e
 guadagni sulle carte, plancia delle risorse, carte non pagabili attenuate.
 Ruolo e guadagni vengono dal catalogo (regolamento 1.7, R07a); nessuna regola
-è calcolata qui. [Rapporto C2](../docs/reports/client-c2-report.md).
+è calcolata qui. O9 aggiunge le illustrazioni provvisorie delle 40 classi
+([rapporto C2](../docs/reports/client-c2-report.md)).
 
 ## Avvio locale
 
@@ -99,7 +100,8 @@ di rotazione.
 ```powershell
 ./client-web/run.ps1 -Task Test     # modello e sessione con trasporto finto
 ./client-web/run.ps1 -Task Build    # tsc + build di produzione
-./client-web/run.ps1 -Task Size     # budget C0 invariato: JS 500 KB, totale 1 MB gzip
+./client-web/run.ps1 -Task Size     # JS 500 KB e totale 4 MB gzip, atlante 2048 px, texture 64 MB
+./client-web/run.ps1 -Task Atlas    # rigenera l'atlante O9 (servono i PNG locali, fuori da git)
 ./client-web/run.ps1 -Task Verify   # partite reali: richiede server e Serve attivi
 ```
 
@@ -120,10 +122,13 @@ non sostituisce il dispositivo fisico né la prova umana.
 
 ## Risorse grafiche
 
-`public/art/` contiene copie identiche delle WebP approvate in C0, con il loro
-manifest; provenienza e prompt in
-[r2-assets](../docs/design/client-c0/r2-assets/README.md). Nessun nuovo asset,
-font remoto o audio in C1–C2a: simboli e timbri di C2a sono vettoriali.
+`public/art/table.webp` è la copia approvata in C0
+([provenienza](../docs/design/client-c0/r2-assets/README.md)). `atlas.webp` è
+l'atlante O9: 2048×1536, 8×6 riquadri da 256 px con le 40 illustrazioni
+provvisorie, più un segnaposto neutro. `manifest.json` dice quale riquadro spetta
+a ogni `bindingName` (`src/art.ts`); un nome sconosciuto usa il segnaposto.
+[Provenienza e scelte](../docs/design/client-c2/o9-art/README.md). Nessun font
+remoto o audio; simboli e timbri di C2a sono vettoriali.
 
 ## Confini del codice
 
@@ -140,6 +145,7 @@ font remoto o audio in C1–C2a: simboli e timbri di C2a sono vettoriali.
 - `src/readability.ts`: funzioni pure di C2a: pagabilità (stesso confronto del
   server), ruolo e guadagni dal catalogo, indicatore delle risorse senza tetti né
   pavimenti, geometria del tavolo per duello e FFA a cinque.
+- `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
 - `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso, hub,
   tavolo, esito, dialoghi).

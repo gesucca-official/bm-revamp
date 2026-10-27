@@ -1,25 +1,42 @@
 {
-  "date": "2026-10-27T17:48:26.051Z",
-  "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped",
-  "jsGzip": 281751,
-  "totalGzip": 968048,
+  "date": "2026-10-27T18:46:22.861Z",
+  "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped; textures: WebP header size x 4 bytes (RGBA), no mipmaps counted",
+  "jsGzip": 281851,
+  "totalGzip": 1062954,
+  "textureDecodedBytes": 18876320,
+  "textures": [
+    {
+      "file": "art/atlas.webp",
+      "width": 2048,
+      "height": 1536,
+      "decodedBytes": 12582912
+    },
+    {
+      "file": "art/table.webp",
+      "width": 1672,
+      "height": 941,
+      "decodedBytes": 6293408
+    }
+  ],
   "budgets": {
     "js": 512000,
-    "total": 1048576
+    "total": 4194304,
+    "atlasSide": 2048,
+    "textureBytes": 67108864
   },
   "pass": true,
   "files": [
     {
       "file": "art/atlas.webp",
-      "bytes": 470490,
-      "gzip": 470653,
-      "sha256": "64e2deeadc4946e00045ebb360ebc79866f8b717d9999d6c61c35607b7020815"
+      "bytes": 566518,
+      "gzip": 564873,
+      "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956"
     },
     {
       "file": "art/manifest.json",
-      "bytes": 705,
-      "gzip": 366,
-      "sha256": "b83568fbaa85b9cafbff346350d2860677feba6091b178f3f9a661ce49601f3c"
+      "bytes": 2330,
+      "gzip": 967,
+      "sha256": "7ef05d3897fc8039e284081e8864fb95113f0d0ee8d8561a069c83e53648c469"
     },
     {
       "file": "art/table.webp",
@@ -28,10 +45,10 @@
       "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
     },
     {
-      "file": "assets/browserAll-CX4xHgMe.js",
+      "file": "assets/browserAll-BoF4UI-9.js",
       "bytes": 43507,
-      "gzip": 11134,
-      "sha256": "1b3f7548f075a2bda8642a54830f387f3fa8ec494ff319395ebb87f5400f5629"
+      "gzip": 11135,
+      "sha256": "63ff8bcb61fc320b623cee85802d57d3976cf23b763902c841caeffa27bf2d35"
     },
     {
       "file": "assets/Cache-fEtFvAzf.js",
@@ -82,22 +99,22 @@
       "sha256": "040036b2b3f95fadee76dcf89de80dd72f3dc23173ff7dbf9b341d399fe3f698"
     },
     {
-      "file": "assets/index-CiE0Y5tP.js",
-      "bytes": 603250,
-      "gzip": 182148,
-      "sha256": "0d1354a7770c1cf029b80b11d7bbbfe1f19b6441c7ed86a0534e63dc894c6162"
+      "file": "assets/index-BnRElKpR.js",
+      "bytes": 603403,
+      "gzip": 182247,
+      "sha256": "c7ba7bfa7ab2d1bcf05883e507e1e6b4ea4902d2ea0a3405131e65cdd37a6d9a"
     },
     {
-      "file": "assets/index-CZYwpWkV.css",
-      "bytes": 7702,
-      "gzip": 2372,
-      "sha256": "ab9983d4ff0c3b3a1cb1d40fc796648f5e628ded7e030a4f256ec965d51207d8"
+      "file": "assets/index-D-i91h-s.css",
+      "bytes": 7676,
+      "gzip": 2360,
+      "sha256": "98eb44a18b70f191e2361f69ed9c967f60b7c2423bfafa7ced8b659779d45378"
     },
     {
-      "file": "assets/init-Dg4eIOnx.js",
+      "file": "assets/init-kwbLIMIl.js",
       "bytes": 14842,
       "gzip": 4561,
-      "sha256": "e0b30dc51e5ecc4ff7ebdea9561954894a59ada2da3bc2df619af311d43b975e"
+      "sha256": "5587c237abf304fdfd5f4ebebd6759741061dd3a31882e0f2c277b92affe23d7"
     },
     {
       "file": "assets/RenderTargetSystem-9obqq6wg.js",
@@ -106,16 +123,16 @@
       "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
     },
     {
-      "file": "assets/webworkerAll-DwWG_0nC.js",
+      "file": "assets/webworkerAll-BcW0aivi.js",
       "bytes": 55,
       "gzip": 63,
-      "sha256": "4f2420b62b5ac50bed1ebd4bbe3aa905dd581313b1288a5f7e3574fc89b03e99"
+      "sha256": "2e68011255e0e06e6c4b9db999274761589743d43fd5759e486ce93d4efd1448"
     },
     {
       "file": "index.html",
       "bytes": 1152,
-      "gzip": 483,
-      "sha256": "b3bbc51a2d08260b40b082a943cb8ecf904bd3338a2a80f8053ae31d25952977"
+      "gzip": 480,
+      "sha256": "5e3f66cf31eee887322822bacc4b81ad5d97c4cc5e065717848e726edb0f1b96"
     }
   ]
 }

@@ -14,6 +14,7 @@
     "verify": "node tools/verify.mjs",
     "measure": "node tools/measure.mjs",
     "size": "node tools/size.mjs",
+    "atlas": "node tools/atlas.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.ts"
   },
   "dependencies": {

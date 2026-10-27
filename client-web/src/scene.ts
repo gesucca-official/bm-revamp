@@ -1,5 +1,6 @@
 import {Application,Assets,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
 import {Model,clone,type Target} from './model.ts';
+import {artIndex,artFrame,loadAtlas} from './art.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container};
@@ -7,11 +8,6 @@ export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
 type Flight={node:Container;from:{x:number;y:number};to:{x:number;y:number};start:number;end:number};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
-export const artIndex=(binding:string)=>{
- if(binding.includes('BigBadBruiser'))return 0;if(binding.includes('ToxicJunkie'))return 1;
- if(binding.includes('BruiserGrab'))return 3;if(binding.includes('LittleSmack'))return 4;if(binding.includes('LittleRage'))return 5;if(binding.endsWith('Glare'))return 6;if(binding.endsWith('Steal'))return 7;
- if(binding.includes('AnotherRottenBeer'))return 9;if(binding.includes('RottenBeer'))return 8;if(binding.includes('CocktailOnTheGround'))return 10;if(binding.includes('MarvelousCocktail'))return 11;return 2;
-};
 const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
 const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
 // Plain vector marks: the shape carries the meaning, the colour only reinforces it (O3, O14).
@@ -57,8 +53,8 @@ export class TableScene {
   // Pixi documents null for detaching; its 8.22 declaration omits the nullable type.
   this.app.renderer.events.setTargetElement(null!);
   host.appendChild(this.app.canvas);this.app.canvas.setAttribute('aria-hidden','true');
-  const [table,atlas]=await Promise.all([Assets.load('/art/table.webp'),Assets.load('/art/atlas.webp')]);
-  for(let i=0;i<12;i++){const cw=atlas.width/4,ch=atlas.height/3;this.art.push(new Texture({source:atlas.source,frame:new Rectangle((i%4)*cw+4,Math.floor(i/4)*ch+4,cw-8,ch-8)}));}
+  const [table,atlas,layout]=await Promise.all([Assets.load('/art/table.webp'),Assets.load('/art/atlas.webp'),loadAtlas()]);
+  for(let i=0;i<layout.cols*layout.rows;i++){const f=artFrame(i,layout);this.art.push(new Texture({source:atlas.source,frame:new Rectangle(f.x,f.y,f.size,f.size)}));}
   this.background=new Sprite(table);this.app.stage.addChild(this.background,this.world,this.fx);this.fx.eventMode='none';
   const canvas=this.app.canvas;
   const bind=(target:EventTarget,event:string,fn:EventListener)=>{target.addEventListener(event,fn);this.disposeFns.push(()=>target.removeEventListener(event,fn));};

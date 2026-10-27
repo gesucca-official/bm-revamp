@@ -8,7 +8,7 @@ stato usato. [Inventario con dimensioni, byte e SHA-256](assets.json).
 | Sorgente | Contenuto | Risorsa distribuita |
 |---|---|---|
 | [table.png](table.png) | Tavolo vuoto illustrato, legno sudicio, bar e decorazioni periferiche | table.webp, 1672×941, qualità 74, 212340 byte |
-| [atlas.png](atlas.png) | Dodici illustrazioni senza lettering in griglia 4×3 | atlas.webp, 1448×1086, qualità 80, 470490 byte |
+| [atlas.png](atlas.png) *(in `client-web` sostituito dall'atlante O9, [qui](../../client-c2/o9-art/README.md); resta la prova C0)* | Dodici illustrazioni senza lettering in griglia 4×3 | atlas.webp, 1448×1086, qualità 80, 470490 byte |
 
 L'atlante contiene Bruiser, Junkie, palmo di stop, presa, schiaffo, rabbia,
 sguardo, furto e quattro bevande. Alcune illustrazioni sono segnaposto

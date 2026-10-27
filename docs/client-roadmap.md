@@ -6,7 +6,8 @@ del proprietario e della prova A sono assegnate alle tappe
 ([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
 primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
 partite reali in locale; iPhone e prova umana non ancora
-([rapporto C2](reports/client-c2-report.md)). C2b non è iniziata. Obiettivo: permettere a giocatori umani di
+([rapporto C2](reports/client-c2-report.md)). C2b non è iniziata. Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
+automatici, partite reali in locale e prova su iPhone confermata dal proprietario). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
 client debug; il web sarà la base riutilizzabile per eventuali client dedicati.
@@ -365,7 +366,7 @@ Non estendere questa prova a un client completo o all'art delle 39 carte.
 |---|---|
 | Scena e leggibilità | Atmosfera R1 approvata; sei carte proprie, quattro mani coperte e oggetti come carte. Testo completo su richiesta, alternativa a drag/hover, nessuno scroll di pannelli per giocare in landscape. Controlli principali almeno 44 CSS px; geometria e dettaglio ≥15 px verificati automaticamente. Lettura e mira sul minimo reale 750×292 confermate nella revisione R5, con riserve sui dettagli grafici. |
 | Fluidità | Cattura di almeno 60 s sulla stessa FFA: obiettivo 60 fps, almeno 95% degli intervalli ≤20 ms desktop e ≤33 ms touch campione. Input→feedback software ≤100 ms. PC Windows/Edge ed emulazione PASS; iPhone 16 Pro: frame PASS, input 116 ms accettato con deroga. |
-| Peso | Massimo 500 KiB gzip JS e 1 MiB gzip complessivo. La misura include tutti i file produzione, anche chunk facoltativi e manifest, quindi è conservativa. Riconfermare a parità C2 e finitura C4. |
+| Peso | Fissato in C0: 500 KiB gzip JS e 1 MiB gzip complessivo. **Dal 27 ottobre 2026, decisione del proprietario per O9:** JS ≤ 500 KB gzip invariato; totale ≤ 4 MB gzip; ogni atlante ≤ 2048×2048; texture decodificate in tutto ≤ 64 MB. La misura include tutti i file produzione, anche chunk facoltativi e manifest, quindi è conservativa; `tools/size.mjs` verifica i quattro limiti. Riconfermare a parità C2 e finitura C4. |
 | Semplicità | Un controller degli intenti e una vista autorevole; animazioni cancellabili senza risolvere le carte nel client. Dorsi da conteggi, nessuna identità avversaria ricostruita o danno ottimistico. |
 
 Desktop 1366×768 e landscape emulato 844×390 sono verificati; su iPhone 16 Pro
@@ -471,7 +472,8 @@ con CLI/fixture, senza far attendere ripetutamente i giocatori.
 **Blocchi.** C2a «leggibilità di base» (O11–O14 con O3/O4, solo quick 1vCom):
 **implementato e verificato su server locale** il 27 ottobre 2026, in attesa di
 iPhone e giudizio del proprietario ([rapporto](reports/client-c2-report.md#c2a--leggibilità-di-base)).
-O9 (illustrazioni provvisorie) non è in C2a. C2b porta le modalità e il resto
+O9 (illustrazioni provvisorie) non è in C2a: è stata fatta dopo, 40 illustrazioni in un atlante
+([rapporto](reports/client-c2-report.md#o9--illustrazioni-provvisorie)). C2b porta le modalità e il resto
 della parità; la FFA usa la geometria già preparata e verificata in unità da C2a
 (oggetti propri sulla riga del personaggio, ventaglio che inizia dopo di loro,
 oggetti avversari sovrapposti al 25% che si alzano al passaggio del mouse o al tocco).
@@ -589,7 +591,7 @@ indicato come decisione aperta.
 | O6 | Oltre al contorno, frecce dalla carta selezionata ai bersagli possibili. | C3 | Frecce verso le sole categorie ammesse dalla carta, come gli attuali contorni: assistenza visiva, non validazione definitiva del server. |
 | O7 | Manca un'animazione della risoluzione: colpi, tagli, effetti spettacolari. | C3 | Effetti per carta e per tipo di danno, nell'ordine di `resolvedMoves`, interrompibili e con movimento ridotto. Con le API attuali i valori finali restano quelli della vista e le variazioni intermedie non sono attribuibili con certezza. **Decisione aperta:** per una sequenza fedele effetto per effetto serve un contratto di eventi strutturati dal server, attività separata. |
 | O8 | Le carte sono tutte uguali; il tipo si capisce solo dalla scritta. | C4 | Cornice, colore o fregio diversi per personaggio, azione regolare, base, legata, ultima risorsa, oggetto e token, mantenendo la scritta. |
-| O9 | Mancano le immagini di molte carte; servono anche provvisorie. | C2 | Una illustrazione provvisoria per ognuna delle 39 carte e del token. **Non immagini prese da Internet:** diritti incerti e progetto «tutti i diritti riservati». Si generano ex novo, come le WebP C0, con prompt e provenienza registrati, oppure si usano fonti con licenza compatibile. Supera la vecchia indicazione che il primo set non richiedesse illustrazioni individuali. |
+| O9 | Mancano le immagini di molte carte; servono anche provvisorie. | C2, **chiusa** (iPhone e giudizio del proprietario) | Una illustrazione provvisoria per ognuna delle 39 carte e del token. **Non immagini prese da Internet:** diritti incerti e progetto «tutti i diritti riservati». Si generano ex novo, come le WebP C0, con prompt e provenienza registrati, oppure si usano fonti con licenza compatibile. Supera la vecchia indicazione che il primo set non richiedesse illustrazioni individuali. |
 | O10 | Priorità, costi ed effetti in basso sulla carta vanno bene, ma con simboli invece delle lettere. | C4 | Famiglia di simboli coerente (fonti e licenze in «Asset iniziali»), sempre con il numero e consultabile in testo. Da usare anche in O3. |
 | O11 | Prova A: non si capisce quando una carta si può giocare con le risorse disponibili. | C2a, **implementata** | Attenuare leggermente le carte in mano il cui costo supera le risorse correnti della vista (R03: costi disponibili all'invio). La carta resta ispezionabile e il percorso di scelta e invio non cambia: il server resta l'unico giudice e il rifiuto resta gestito. Solo il costo in risorse; gli altri requisiti restano al rifiuto. |
 | O12 | Prova A: le carte sono piccole e sul tavolo si leggono male. | C2a **implementata**, finitura C4 | Carte in mano e sul tavolo più grandi ai formati di riferimento, decise insieme alla disposizione FFA a cinque, che riduce lo spazio. La (i) resta per il testo completo. |
@@ -646,12 +648,22 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
 **Prossimo passo:** prova del proprietario di C2a, anche su iPhone, poi C2b solo
-su istruzione esplicita. O9 resta da fare prima della prova umana B. C2 estende lo stesso
+su istruzione esplicita. O9 è chiusa. Resta la prova su iPhone del resto di C2a e la prova umana B. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 13 — 27 ottobre 2026, C2 / O9:** implementate le illustrazioni
+  provvisorie: 40 immagini generate ex novo in un atlante WebP 2048×1536 (riquadri
+  da 256 px), scelte per `bindingName` nel tavolo e nell'ispezione. Decisione del
+  proprietario sul peso, che sostituisce il totale di 1 MB di C0: JS ≤ 500 KB gzip,
+  totale ≤ 4 MB gzip, atlante ≤ 2048×2048, texture decodificate ≤ 64 MB (misurati
+  1,06 MB gzip e 18,9 MB). Sorgenti PNG e prompt restano fuori da git, per
+  decisione del proprietario. Provate con test e partite reali in locale
+  (1366×768 e 844×390); il proprietario le ha provate su iPhone e ha chiuso O9
+  (27 ottobre 2026). Regole, server, catalogo e debug invariati.
 
 - **Versione 12 — 27 ottobre 2026, C2a:** implementata la leggibilità di base nel
   percorso quick 1vCom di `client-web`:

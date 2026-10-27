@@ -3,7 +3,8 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) **non è
-iniziata**.
+iniziata**. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
 
@@ -205,3 +206,54 @@ farebbe una persona.
 
 Regole ed effetti invariati. Server e catalogo cambiano solo per il campo
 descrittivo O14; il client debug solo per la copia delle regole.
+
+## O9 — Illustrazioni provvisorie
+
+27 ottobre 2026. Ogni carta, personaggio e il token hanno un'illustrazione
+provvisoria generata ex novo (40 classi), cercata per `bindingName`. Regole,
+server, catalogo e `client-debug` invariati; nessun altro cambiamento grafico.
+Provenienza, costruzione e scelta di tenere sorgenti e prompt fuori da git in
+[o9-art/README.md](../design/client-c2/o9-art/README.md).
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Implementazione | `public/art/atlas.webp` sostituito da un atlante 2048×1536 (8×6 riquadri da 256 px, WebP 76, 566518 byte) con 40 illustrazioni e un segnaposto neutro; `table.webp` invariato. `src/art.ts` sceglie il riquadro per `bindingName` dal manifest, al posto di `artIndex` con 12 riquadri fissi, in `scene.ts` (carte e personaggi) e nell'ispezione (i) di `table.tsx`. Un nome sconosciuto usa il segnaposto. `tools/atlas.mjs` (`run.ps1 -Task Atlas`) costruisce atlante, manifest e inventario. |
+| Test automatici | Client 34 test (30 + 4 nuovi in `tests/art.test.ts`: ogni classe dell'allegato ha il suo riquadro, senza duplicati e dentro l'immagine; limiti dell'atlante; segnaposto; fondo dell'ispezione). `Test`, `Build` e `Size` passano. Server, regole e debug non rieseguiti: non toccati. |
+| Partite reali su server locale | **Sì.** `Verify` completo contro il server locale (`dev.ps1 -Task Server -SeedAccounts`) e `Serve`, a 1366×768 (2 partite: 1 vittoria, 1 sconfitta) e 844×390 (2 partite: 1 vittoria, 1 sconfitta), con bound, oggetto, drag, tocco, riordino, rifiuto ed effetto periodico. Le evidenze sono quelle dell'ultima esecuzione, dopo l'aggiunta della cattura dell'ispezione; una esecuzione precedente con la stessa verifica era già passata. |
+| Emulazione | 844×390 sullo stesso PC, con il mouse. Nessuna emulazione touch. |
+| Dispositivo fisico | **Sì, solo O9.** Il proprietario ha provato la build con le illustrazioni su iPhone e ha confermato che va bene (27 ottobre 2026: nessuna misura, nessun dettaglio registrato). |
+| Valutazione umana | **Parziale.** Il proprietario ha giudicato adeguate le illustrazioni provvisorie sul telefono. La prova umana B su una partita completa resta separata. |
+
+### Peso (limiti decisi dal proprietario per O9)
+
+| Misura | Limite | Valore |
+|---|---|---|
+| JS gzip | 500 KB (invariato) | 281851 byte |
+| Totale gzip, tutti i file di produzione | 4 MB (prima 1 MB) | 1062954 byte |
+| Lato di ogni atlante | 2048 px | 2048×1536 |
+| Texture decodificate in tutto | 64 MB | 18876320 byte (atlante 12,6 MB + tavolo 6,3 MB, RGBA, senza mipmap) |
+
+`tools/size.mjs` verifica tutti e quattro i limiti e scrive la misura delle
+texture in [size.json](client-c2/size.json); legge le dimensioni dall'intestazione
+WebP. Il limite totale di C0 (1 MB) sarebbe superato di poco (1062954 contro
+1048576) e non vale più. L'atlante WebP non si comprime ulteriormente con gzip.
+La stima del piano (circa 580 KB di atlante, circa 19 MB di texture) è confermata.
+
+### Evidenze
+
+[verify.json](client-c2/verify.json), [verify-844x390.json](client-c2/verify-844x390.json)
+e le [catture](client-c2/screens/) sono ora quelle dell'esecuzione O9; quelle di
+C2a sono nella cronologia git. `Verify` fotografa anche l'ispezione
+([02-inspect-art.jpg](client-c2/screens/02-inspect-art.jpg), con `-844x390`):
+cattura nuova, aggiunta a `verify.mjs` senza altre modifiche.
+
+### Limiti e residui
+
+- O9 **chiusa** dal proprietario dopo la prova su iPhone. Il resto di C2a su iPhone e la prova umana B restano da fare.
+- Le illustrazioni sono provvisorie e senza cornice per tipologia (O8, C4).
+- Le sorgenti PNG e i prompt letterali non sono tracciati: l'atlante non si
+  rigenera da un clone pulito.
+- Il segnaposto neutro non è mai comparso in partita: è coperto solo dal test.
+- Un solo atlante: il caricamento della scena aspetta tutti i 566 KB.
