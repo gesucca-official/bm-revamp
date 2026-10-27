@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-27T17:48:26.051Z",
+  "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped",
+  "jsGzip": 281751,
+  "totalGzip": 968048,
+  "budgets": {
+    "js": 512000,
+    "total": 1048576
+  },
+  "pass": true,
+  "files": [
+    {
+      "file": "art/atlas.webp",
+      "bytes": 470490,
+      "gzip": 470653,
+      "sha256": "64e2deeadc4946e00045ebb360ebc79866f8b717d9999d6c61c35607b7020815"
+    },
+    {
+      "file": "art/manifest.json",
+      "bytes": 705,
+      "gzip": 366,
+      "sha256": "b83568fbaa85b9cafbff346350d2860677feba6091b178f3f9a661ce49601f3c"
+    },
+    {
+      "file": "art/table.webp",
+      "bytes": 212340,
+      "gzip": 212423,
+      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
+    },
+    {
+      "file": "assets/browserAll-CX4xHgMe.js",
+      "bytes": 43507,
+      "gzip": 11134,
+      "sha256": "1b3f7548f075a2bda8642a54830f387f3fa8ec494ff319395ebb87f5400f5629"
+    },
+    {
+      "file": "assets/Cache-fEtFvAzf.js",
+      "bytes": 1100,
+      "gzip": 556,
+      "sha256": "e7e2ce32bbc0d5153c8a36b2bfe1fc748c7f825608266659d52079b26ac458a9"
+    },
+    {
+      "file": "assets/CanvasPool-BZ0sA3Gt.js",
+      "bytes": 71204,
+      "gzip": 23075,
+      "sha256": "e2ccf0eaa2158cc152819a493c056cd66579de2cf2f1aea781cea6acfc14191c"
+    },
+    {
+      "file": "assets/canvasUtils-BlnLdLY1.js",
+      "bytes": 6011,
+      "gzip": 2035,
+      "sha256": "1a9ff1194ab02084137984cd2a2adb2e8c8fa78b073606c1dd564500e48da2bd"
+    },
+    {
+      "file": "assets/Filter-B0XMl_yL.js",
+      "bytes": 41958,
+      "gzip": 11902,
+      "sha256": "5913961319d4cb4a786b7feec6c1cff98b46ae2148570a6089c00772f8b4a12d"
+    },
+    {
+      "file": "assets/GCManagedHash-DAvwKUzM.js",
+      "bytes": 19313,
+      "gzip": 6245,
+      "sha256": "8bf5dc944cafe2a3a9efb3a61a3e5bbcbfeb45d768f1d1ffb688905b254cbb6f"
+    },
+    {
+      "file": "assets/getTexelRangeRects-Bt1M-OmZ.js",
+      "bytes": 11358,
+      "gzip": 2982,
+      "sha256": "221f12045d9e278d2174d6c7b6977169eb7784eae7eb9eb9bd65020007f7250b"
+    },
+    {
+      "file": "assets/getTextureBatchBindGroup-CckcnH94.js",
+      "bytes": 344,
+      "gzip": 269,
+      "sha256": "00cbd0cc9465d16ca748a4205d08ab418c472892e38f6cc38791e5dc5d77720e"
+    },
+    {
+      "file": "assets/GraphicsContext-DJRE2111.js",
+      "bytes": 61680,
+      "gzip": 20468,
+      "sha256": "040036b2b3f95fadee76dcf89de80dd72f3dc23173ff7dbf9b341d399fe3f698"
+    },
+    {
+      "file": "assets/index-CiE0Y5tP.js",
+      "bytes": 603250,
+      "gzip": 182148,
+      "sha256": "0d1354a7770c1cf029b80b11d7bbbfe1f19b6441c7ed86a0534e63dc894c6162"
+    },
+    {
+      "file": "assets/index-CZYwpWkV.css",
+      "bytes": 7702,
+      "gzip": 2372,
+      "sha256": "ab9983d4ff0c3b3a1cb1d40fc796648f5e628ded7e030a4f256ec965d51207d8"
+    },
+    {
+      "file": "assets/init-Dg4eIOnx.js",
+      "bytes": 14842,
+      "gzip": 4561,
+      "sha256": "e0b30dc51e5ecc4ff7ebdea9561954894a59ada2da3bc2df619af311d43b975e"
+    },
+    {
+      "file": "assets/RenderTargetSystem-9obqq6wg.js",
+      "bytes": 58807,
+      "gzip": 16313,
+      "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
+    },
+    {
+      "file": "assets/webworkerAll-DwWG_0nC.js",
+      "bytes": 55,
+      "gzip": 63,
+      "sha256": "4f2420b62b5ac50bed1ebd4bbe3aa905dd581313b1288a5f7e3574fc89b03e99"
+    },
+    {
+      "file": "index.html",
+      "bytes": 1152,
+      "gzip": 483,
+      "sha256": "b3bbc51a2d08260b40b082a943cb8ecf904bd3338a2a80f8053ae31d25952977"
+    }
+  ]
+}

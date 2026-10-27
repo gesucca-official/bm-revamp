@@ -1,4 +1,4 @@
-# Client web animato (C1)
+# Client web animato (C1, C2a)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 login → partita rapida contro il computer → partita → esito → nuova partita
@@ -6,7 +6,10 @@ oppure ritorno all'hub. Le altre modalità e la parità completa del debug
 arrivano in C2. La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
-Regolamento, server, catalogo SQLite e client debug non sono modificati.
+C2a aggiunge la leggibilità di base (O11–O14): carte più grandi, ruolo e
+guadagni sulle carte, plancia delle risorse, carte non pagabili attenuate.
+Ruolo e guadagni vengono dal catalogo (regolamento 1.7, R07a); nessuna regola
+è calcolata qui. [Rapporto C2](../docs/reports/client-c2-report.md).
 
 ## Avvio locale
 
@@ -68,6 +71,19 @@ Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
   il focus (su touch basta sceglierla). Da tastiera: I.
 - ✓ invia **un solo** comando; costi e carte cambiano solo con la vista del server.
   Un rifiuto lascia la scelta sul tavolo per correggerla.
+- Sulla carta: timbro del ruolo sotto il titolo (danno, difesa, risorse,
+  contrasto, disturbo, oggetti, altro), bollini ▲ con le risorse che ti dà,
+  monete scure con il costo e priorità in basso. Una carta più spenta, con «!» sul
+  costo, oggi non è pagabile: si può comunque provare, decide il server.
+- Le carte coperte nel ventaglio si alzano intere passando il mouse, scegliendole
+  con un tocco o con il focus da tastiera.
+- Le tue risorse sono nella plancia accanto al personaggio: simbolo, numero e
+  barra. La salute parte piena; le altre risorse partono a metà, dove c'è la tacca.
+  Una striscia chiara indica che si è oltre la barra, un tratteggio che si è sotto zero.
+- Stati, equipaggiamenti, immunità e timer sono gettoni sulla carta personaggio:
+  passando il mouse o toccandoli compare un riepilogo breve.
+- Un tocco o un clic in un punto vuoto del tavolo riabbassa le carte e annulla la
+  scelta, come Escape.
 - Dopo ogni turno compare una riga di riepilogo non bloccante; toccandola si apre
   l'ultimo turno con mosse, report ed effetti di fine turno.
 - Menu •••: aiuto, ultimo turno, salta effetti, strumenti (Log Card, Log State,
@@ -91,10 +107,15 @@ di rotazione.
 quick 1vCom, partite fino all'esito per entrambi i personaggi, bound con scarto,
 bersaglio oggetto, rifiuto, effetto periodico letto dal riepilogo, calata con
 drag e con click, riordino senza SEND, disconnessione e rientro senza reinvii,
-ritorno all'hub e uscita. `BM_VIEWPORT=844x390` ripete al formato landscape
+ritorno all'hub e uscita. A ogni turno controlla anche C2a: misure delle carte,
+plancia uguale alle risorse della vista, attenuazione calcolata come il server,
+ruolo e guadagni uguali all'allegato del regolamento, alzata al passaggio del
+mouse; invia apposta una carta attenuata e si aspetta il rifiuto del server.
+`BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
-quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze in
-[docs/reports/client-c1](../docs/reports/client-c1/). È un'esecuzione su PC:
+quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
+[docs/reports/client-c2](../docs/reports/client-c2/) (quelle di C1 restano in `client-c1`);
+lì scrive anche `Size`. È un'esecuzione su PC:
 non sostituisce il dispositivo fisico né la prova umana.
 
 ## Risorse grafiche
@@ -102,7 +123,7 @@ non sostituisce il dispositivo fisico né la prova umana.
 `public/art/` contiene copie identiche delle WebP approvate in C0, con il loro
 manifest; provenienza e prompt in
 [r2-assets](../docs/design/client-c0/r2-assets/README.md). Nessun nuovo asset,
-font remoto o audio in C1.
+font remoto o audio in C1–C2a: simboli e timbri di C2a sono vettoriali.
 
 ## Confini del codice
 
@@ -116,6 +137,9 @@ font remoto o audio in C1.
   la partita prima del leave.
 - `src/model.ts`: selezione locale, ordine della mano e comando a cinque campi.
   Nessun effetto delle carte calcolato qui.
+- `src/readability.ts`: funzioni pure di C2a: pagabilità (stesso confronto del
+  server), ruolo e guadagni dal catalogo, indicatore delle risorse senza tetti né
+  pavimenti, geometria del tavolo per duello e FFA a cinque.
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
 - `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso, hub,
   tavolo, esito, dialoghi).

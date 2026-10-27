@@ -7,6 +7,8 @@ export interface Card {
   canTarget: ('SELF' | 'OPPONENT' | 'NEAR_ITEM' | 'FAR_ITEM')[];
   cost: Partial<Record<Resource, number>>;
   image: string | null; sprite: string | null;
+  // Descriptive catalog fields (regulation 1.7 R07a); absent on older servers.
+  role?: string | null; gains?: string | null;
 }
 export interface Status {
   name: string; description: string; type: string; flow: string;
@@ -32,6 +34,7 @@ export interface View {
   moveDeadlines: Record<string, number>; reconnectDeadlines: Record<string, number>;
   outcomeReason: string | null;
 }
-export interface Account {username: string; email: string | null; role: string; collection: {cards: Card[]} | null}
+export interface CharacterCard {name: string; bindingName: string; itemsSize: number; resources: Partial<Record<Resource, number>>}
+export interface Account {username: string; email: string | null; role: string; collection: {cards: Card[]; characters?: CharacterCard[]} | null}
 export interface Outcome {over: boolean; result: string; winner: string | null; reason: string}
 export interface ResumeState {status: 'none' | 'resumed' | 'finished'; gameId?: string; view?: View; archived?: boolean; outcome?: Outcome}

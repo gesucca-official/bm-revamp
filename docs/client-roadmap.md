@@ -1,9 +1,12 @@
 # Roadmap del client web animato
 
-**27 ottobre 2026 — versione 10, C0 e C1 chiuse.** C1 è chiusa dal
+**27 ottobre 2026 — versione 12, C0 e C1 chiuse, C2 avviata.** C1 è chiusa dal
 proprietario dopo la prova su iPhone e la prova umana A; le osservazioni
 del proprietario e della prova A sono assegnate alle tappe
-([O1–O14](#osservazioni-del-proprietario-dopo-c1)). C2 non è iniziata. Obiettivo: permettere a giocatori umani di
+([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
+primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
+partite reali in locale; iPhone e prova umana non ancora
+([rapporto C2](reports/client-c2-report.md)). C2b non è iniziata. Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
 client debug; il web sarà la base riutilizzabile per eventuali client dedicati.
@@ -465,6 +468,14 @@ deve riconoscere attesa, mossa accettata e proprio esito; chi è ancora in FFA
 deve poter continuare dopo un forfait altrui. Le scadenze rare si verificano
 con CLI/fixture, senza far attendere ripetutamente i giocatori.
 
+**Blocchi.** C2a «leggibilità di base» (O11–O14 con O3/O4, solo quick 1vCom):
+**implementato e verificato su server locale** il 27 ottobre 2026, in attesa di
+iPhone e giudizio del proprietario ([rapporto](reports/client-c2-report.md#c2a--leggibilità-di-base)).
+O9 (illustrazioni provvisorie) non è in C2a. C2b porta le modalità e il resto
+della parità; la FFA usa la geometria già preparata e verificata in unità da C2a
+(oggetti propri sulla riga del personaggio, ventaglio che inizia dopo di loro,
+oggetti avversari sovrapposti al 25% che si alzano al passaggio del mouse o al tocco).
+
 **Osservazioni assegnate:** prima della prova umana B, perché aiutano a
 riconoscere le carte in mano e sul tavolo durante i playtest:
 O9 (illustrazione provvisoria per ogni carta); O11 (carte non pagabili
@@ -572,18 +583,18 @@ indicato come decisione aperta.
 |---|---|---|---|
 | O1 | Il pulsante «Riordina» non serve: il riordino si fa trascinando. | C1, **fatto** | Decisione del proprietario: aggiornato il gesto 1. Resta l'alternativa da tastiera; su touch il riordino resta solo trascinando, accettabile perché non è un'azione di gioco. |
 | O2 | Le sedie dello sfondo sono troppo eleganti per un bar marcio. | C4 | Rigenerare la texture del tavolo con lo stesso processo e registro di provenienza delle WebP C0; sedute consumate e spaiate, stessa palette. |
-| O3 | Allerta, tossicità, violenza e alcol sono poco visibili rispetto alla salute. | C2, anticipata da C3 con O13 | Integrarle nel segnapunti della salute con simboli e colori propri, sempre con il numero. Nessuna informazione affidata solo al colore. |
-| O4 | Oltre al numero serve una barra o una torta per capire se una risorsa è tanta o poca. | C2, anticipata da C3 con O13 | Indicatore rispetto al valore iniziale del personaggio. R01 non ha tetti né pavimenti: mostrare eccesso oltre l'iniziale e valori negativi, senza saturare l'indicatore o nascondere il numero. |
+| O3 | Allerta, tossicità, violenza e alcol sono poco visibili rispetto alla salute. | C2a con O13, **implementata** | Integrarle nel segnapunti della salute con simboli e colori propri, sempre con il numero. Nessuna informazione affidata solo al colore. |
+| O4 | Oltre al numero serve una barra o una torta per capire se una risorsa è tanta o poca. | C2a con O13, **implementata** | Indicatore rispetto al valore iniziale del personaggio: salute piena all'inizio, le altre risorse a metà barra (decisione del proprietario in C2a). R01 non ha tetti né pavimenti: mostrare eccesso oltre l'iniziale e valori negativi, senza saturare l'indicatore o nascondere il numero. |
 | O5 | «Dettagli carta» è scomodo: meglio un pulsantino (i) sulla carta. | C1, **fatto** | (i) in alto a sinistra su hover e sulla carta selezionata o con focus. Su touch non c'è hover: il pulsante compare sulla carta selezionata. Tastiera invariata (I). |
 | O6 | Oltre al contorno, frecce dalla carta selezionata ai bersagli possibili. | C3 | Frecce verso le sole categorie ammesse dalla carta, come gli attuali contorni: assistenza visiva, non validazione definitiva del server. |
 | O7 | Manca un'animazione della risoluzione: colpi, tagli, effetti spettacolari. | C3 | Effetti per carta e per tipo di danno, nell'ordine di `resolvedMoves`, interrompibili e con movimento ridotto. Con le API attuali i valori finali restano quelli della vista e le variazioni intermedie non sono attribuibili con certezza. **Decisione aperta:** per una sequenza fedele effetto per effetto serve un contratto di eventi strutturati dal server, attività separata. |
 | O8 | Le carte sono tutte uguali; il tipo si capisce solo dalla scritta. | C4 | Cornice, colore o fregio diversi per personaggio, azione regolare, base, legata, ultima risorsa, oggetto e token, mantenendo la scritta. |
 | O9 | Mancano le immagini di molte carte; servono anche provvisorie. | C2 | Una illustrazione provvisoria per ognuna delle 39 carte e del token. **Non immagini prese da Internet:** diritti incerti e progetto «tutti i diritti riservati». Si generano ex novo, come le WebP C0, con prompt e provenienza registrati, oppure si usano fonti con licenza compatibile. Supera la vecchia indicazione che il primo set non richiedesse illustrazioni individuali. |
 | O10 | Priorità, costi ed effetti in basso sulla carta vanno bene, ma con simboli invece delle lettere. | C4 | Famiglia di simboli coerente (fonti e licenze in «Asset iniziali»), sempre con il numero e consultabile in testo. Da usare anche in O3. |
-| O11 | Prova A: non si capisce quando una carta si può giocare con le risorse disponibili. | C2 | Attenuare leggermente le carte in mano il cui costo supera le risorse correnti della vista (R03: costi disponibili all'invio). La carta resta ispezionabile e il percorso di scelta e invio non cambia: il server resta l'unico giudice e il rifiuto resta gestito. Solo il costo in risorse; gli altri requisiti restano al rifiuto. |
-| O12 | Prova A: le carte sono piccole e sul tavolo si leggono male. | C2, finitura C4 | Carte in mano e sul tavolo più grandi ai formati di riferimento, decise insieme alla disposizione FFA a cinque, che riduce lo spazio. La (i) resta per il testo completo. |
-| O13 | Prova A: non si capisce quali e quante risorse si hanno, né quali carte in mano le fanno ottenere. | C2, con O3 e O4 | Risorse proprie leggibili vicino al proprio personaggio e alla mano; sulle carte, guadagni di risorse riconoscibili a colpo d'occhio dall'effetto, oltre al costo. |
-| O14 | Prova A: le tipologie devono riconoscersi a colpo d'occhio, compresi i ruoli: danno, risorse, contrasto delle mosse avversarie. | C2 essenziale, C4 con O8 | Un segno di ruolo sulla carta senza snaturarne l'aspetto attuale, che piace. In C2 un segno essenziale; in C4 cornici e simboli definitivi con O8 e O10. **Deciso il 27 ottobre 2026:** la classificazione è un campo del catalogo SQLite, così tutte le informazioni sulle carte restano nello stesso posto ([regolamento 1.7, R07a](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17)). Ruoli DAMAGE, DEFENSE, RESOURCES, COUNTER, DISRUPT, ITEMS e OTHER per le carte ambigue, da rivedere con il bilanciamento; accanto, i guadagni a sé usati da O13. Il server li espone come `role` e `gains` della carta. |
+| O11 | Prova A: non si capisce quando una carta si può giocare con le risorse disponibili. | C2a, **implementata** | Attenuare leggermente le carte in mano il cui costo supera le risorse correnti della vista (R03: costi disponibili all'invio). La carta resta ispezionabile e il percorso di scelta e invio non cambia: il server resta l'unico giudice e il rifiuto resta gestito. Solo il costo in risorse; gli altri requisiti restano al rifiuto. |
+| O12 | Prova A: le carte sono piccole e sul tavolo si leggono male. | C2a **implementata**, finitura C4 | Carte in mano e sul tavolo più grandi ai formati di riferimento, decise insieme alla disposizione FFA a cinque, che riduce lo spazio. La (i) resta per il testo completo. |
+| O13 | Prova A: non si capisce quali e quante risorse si hanno, né quali carte in mano le fanno ottenere. | C2a con O3 e O4, **implementata** | Risorse proprie leggibili vicino al proprio personaggio e alla mano; sulle carte, guadagni di risorse riconoscibili a colpo d'occhio dall'effetto, oltre al costo. |
+| O14 | Prova A: le tipologie devono riconoscersi a colpo d'occhio, compresi i ruoli: danno, risorse, contrasto delle mosse avversarie. | C2a essenziale **implementata**, C4 con O8 | Un segno di ruolo sulla carta senza snaturarne l'aspetto attuale, che piace. In C2 un segno essenziale; in C4 cornici e simboli definitivi con O8 e O10. **Deciso il 27 ottobre 2026:** la classificazione è un campo del catalogo SQLite, così tutte le informazioni sulle carte restano nello stesso posto ([regolamento 1.7, R07a](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17)). Ruoli DAMAGE, DEFENSE, RESOURCES, COUNTER, DISRUPT, ITEMS e OTHER per le carte ambigue, da rivedere con il bilanciamento; accanto, i guadagni a sé usati da O13. Il server li espone come `role` e `gains` della carta. |
 
 ## Verifiche proporzionate
 
@@ -634,14 +645,31 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo: C2, solo su istruzione esplicita.** C1 è chiusa. C2
-comincia dalla leggibilità di base emersa dalla prova A (O11–O14 con O3, O4 e
-O9) prima della prova umana B. C2 estende lo stesso
+**Prossimo passo:** prova del proprietario di C2a, anche su iPhone, poi C2b solo
+su istruzione esplicita. O9 resta da fare prima della prova umana B. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 12 — 27 ottobre 2026, C2a:** implementata la leggibilità di base nel
+  percorso quick 1vCom di `client-web`:
+  - O11: carte non pagabili attenuate, con «!» sul costo; restano inviabili;
+  - O12: carte più grandi che si alzano intere al passaggio del mouse, al tocco o
+    con il focus; un tocco altrove le riabbassa e annulla la scelta; geometria FFA
+    preparata e verificata solo in unità;
+  - O13/O3/O4: plancia delle risorse con simbolo, numero e barra (salute piena
+    all'inizio, altre risorse a metà), guadagni ▲ sulle carte;
+  - stati, equipaggiamenti, immunità e timer come gettoni sul personaggio, con
+    riepilogo breve al passaggio del mouse o al tocco;
+  - O14: timbro di ruolo dal catalogo.
+
+  Le ultime quattro voci e le carte più grandi seguono la prova del proprietario
+  prima del commit.
+
+  Verify reale estesa e verde a 1366×768 e 844×390. iPhone e prova umana aperti;
+  C2b non iniziata. [Rapporto C2](reports/client-c2-report.md).
 
 - **Versione 11 — 27 ottobre 2026, decisione O14:** la classificazione per
   ruolo è un campo del catalogo SQLite. Regolamento 1.7 con R07a (ruolo e

@@ -1,4 +1,4 @@
-import type {Account, Card, ResumeState, View} from './contracts.ts';
+import type {Account, Card, ResumeState, View, CharacterCard} from './contracts.ts';
 import type {Connector, Link} from './net/link.ts';
 import {Model} from './model.ts';
 
@@ -40,6 +40,8 @@ export class Session {
   private emit() { this.listeners.forEach(fn => fn()); }
   private log(channel: string, body: string) { this.trace.push({at: Date.now(), channel, body}); if (this.trace.length > 200) this.trace.shift(); }
   get catalog(): Card[] { return this.account?.collection?.cards ?? []; }
+  // Starting resources per character binding: the reference of the resource indicators (O4).
+  get characters(): CharacterCard[] { return this.account?.collection?.characters ?? []; }
   get connected() { return !!this.link; }
 
   async login(user: string, password: string) {
