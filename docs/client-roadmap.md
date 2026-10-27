@@ -1,8 +1,9 @@
 # Roadmap del client web animato
 
-**27 ottobre 2026 — versione 8, C0 chiusa; C1 implementata e verificata
+**27 ottobre 2026 — versione 9, C0 chiusa; C1 implementata e verificata
 con partite reali sul server locale, in attesa di prova umana A e verifica
-fisica del drag.** Obiettivo: permettere a giocatori umani di
+fisica del drag. Prime osservazioni del proprietario sul client registrate
+e assegnate alle tappe ([O1–O10](#osservazioni-del-proprietario-dopo-c1)).** Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
 client debug; il web sarà la base riutilizzabile per eventuali client dedicati.
@@ -189,8 +190,9 @@ Questi giochi sono riferimenti visivi, non fonti di asset riutilizzabili.
 ### Gesto di gioco e feedback
 
 1. Mano riordinabile: drag entro la mano per inserire la carta in un'altra
-   posizione; alternativa click/tap in modalità esplicita «Riordina» per
-   scambiare due carte. Solo ordine grafico locale, nessuna API/ordine mazzo
+   posizione; alternativa da tastiera (Maiusc+frecce). Il pulsante
+   «Riordina» con scambio click/tap è tolto su decisione del proprietario (O1):
+   il riordino è solo locale e non è un'azione essenziale. Solo ordine grafico locale, nessuna API/ordine mazzo
    modificato; copie omonime senza ID d'istanza wire inventati.
 2. Prendere la carta e calarla **direttamente sul bersaglio nel tavolo**:
    carta personaggio/postazione o carta oggetto. Evidenziare la categoria
@@ -297,7 +299,8 @@ sono elaborati di revisione. La scena usa due nuove texture WebP derivate
 dal riferimento approvato, con testo e cornici disegnati separatamente:
 [provenienza](design/client-c0/r2-assets/README.md). Preferire poche risorse locali, senza dipendenze
 da CDN durante la partita; mai importare un intero set quando bastano pochi
-SVG. Il primo set non richiede illustrazioni individuali delle 39 carte.
+SVG. Il primo set non richiedeva illustrazioni individuali delle 39 carte;
+ora sono previste in forma provvisoria in C2 (O9).
 
 | Fonte | Uso proposto | Condizioni da conservare |
 |---|---|---|
@@ -425,6 +428,10 @@ Entrambe devono inviare autonomamente una mossa completa dopo la sola
 spiegazione iniziale. Annotare solo blocchi e principali incomprensioni;
 correggere quelli che impediscono di giocare prima di estendere la copertura.
 
+**Residui prima della prova A:** O1 (togliere il pulsante «Riordina») e O5
+(dettagli carta con un tocco) sono **fatti** e verificati sul server reale
+([rapporto](reports/client-c1-report.md#residui-c1-o1-e-o5)).
+
 ### C2 Raggiungere la parità del client debug
 
 **Dipende da C1. Risultato:** tutte le righe della matrice disponibili nel
@@ -454,6 +461,10 @@ deve riconoscere attesa, mossa accettata e proprio esito; chi è ancora in FFA
 deve poter continuare dopo un forfait altrui. Le scadenze rare si verificano
 con CLI/fixture, senza far attendere ripetutamente i giocatori.
 
+**Osservazioni assegnate:** O9 (illustrazione provvisoria per ogni carta)
+prima della prova umana B, perché aiuta a riconoscere le carte in mano e sul
+tavolo durante i playtest.
+
 ### C3 Rendere leggibile e soddisfacente la risoluzione
 
 **Dipende da C2. Risultato:** il round si comprende dal tavolo, con movimento
@@ -478,6 +489,10 @@ ridotto e salto sequenza conservano le informazioni. Coprire annullamento,
 oggetto scomparso, morte con mossa già inviata e fine turno letale con pochi
 scenari mirati esistenti. La verifica umana del ritmo confluisce nella sessione
 finale C5, evitando un nuovo ciclo separato di playtest.
+
+**Osservazioni assegnate:** O3 e O4 (risorse leggibili nel segnapunti con
+simboli, colori e indicatore a colpo d'occhio), O6 (frecce dalla carta ai
+bersagli ammessi), O7 (effetti di risoluzione: colpo, taglio, veleno e altro).
 
 ### C4 Rifinire grafica e uso su schermi diversi
 
@@ -506,6 +521,10 @@ rivalutare il renderer secondo gli stessi criteri C0, senza una nuova campagna
 di confronti tecnologici.
 La valutazione umana di leggibilità e touch confluisce in C5.
 
+**Osservazioni assegnate:** O2 (sfondo con sedute da bar marcio), O8 (cornice
+diversa per tipo di carta), O10 (simboli per costi, priorità e risorse sulle
+carte). Sostituiscono anche le illustrazioni provvisorie di O9 dove serve.
+
 ### C5 Consegnare il client web per i playtest
 
 **Dipende da C4. Risultato:** versione locale ripetibile, a parità funzionale,
@@ -530,6 +549,25 @@ round osservato e valutare chiarezza e reattività almeno 4/5. È una soglia
 pratica di accettazione, non una misura statistica. Un solo passaggio di
 correzione e controllo mirato; ripetere una sessione completa solo se restano
 problemi che impediscono o falsano il gioco.
+
+## Osservazioni del proprietario dopo C1
+
+27 ottobre 2026, dopo la prima prova del client C1. Ogni osservazione ha una
+tappa; l'ordine C1→C5 resta invariato. Nessuna richiede modifiche a regole,
+server o catalogo, salvo dove indicato come decisione aperta.
+
+| ID | Osservazione | Tappa | Note e vincoli |
+|---|---|---|---|
+| O1 | Il pulsante «Riordina» non serve: il riordino si fa trascinando. | C1, **fatto** | Decisione del proprietario: aggiornato il gesto 1. Resta l'alternativa da tastiera; su touch il riordino resta solo trascinando, accettabile perché non è un'azione di gioco. |
+| O2 | Le sedie dello sfondo sono troppo eleganti per un bar marcio. | C4 | Rigenerare la texture del tavolo con lo stesso processo e registro di provenienza delle WebP C0; sedute consumate e spaiate, stessa palette. |
+| O3 | Allerta, tossicità, violenza e alcol sono poco visibili rispetto alla salute. | C3 | Integrarle nel segnapunti della salute con simboli e colori propri, sempre con il numero. Nessuna informazione affidata solo al colore. |
+| O4 | Oltre al numero serve una barra o una torta per capire se una risorsa è tanta o poca. | C3 | Indicatore rispetto al valore iniziale del personaggio. R01 non ha tetti né pavimenti: mostrare eccesso oltre l'iniziale e valori negativi, senza saturare l'indicatore o nascondere il numero. |
+| O5 | «Dettagli carta» è scomodo: meglio un pulsantino (i) sulla carta. | C1, **fatto** | (i) in alto a sinistra su hover e sulla carta selezionata o con focus. Su touch non c'è hover: il pulsante compare sulla carta selezionata. Tastiera invariata (I). |
+| O6 | Oltre al contorno, frecce dalla carta selezionata ai bersagli possibili. | C3 | Frecce verso le sole categorie ammesse dalla carta, come gli attuali contorni: assistenza visiva, non validazione definitiva del server. |
+| O7 | Manca un'animazione della risoluzione: colpi, tagli, effetti spettacolari. | C3 | Effetti per carta e per tipo di danno, nell'ordine di `resolvedMoves`, interrompibili e con movimento ridotto. Con le API attuali i valori finali restano quelli della vista e le variazioni intermedie non sono attribuibili con certezza. **Decisione aperta:** per una sequenza fedele effetto per effetto serve un contratto di eventi strutturati dal server, attività separata. |
+| O8 | Le carte sono tutte uguali; il tipo si capisce solo dalla scritta. | C4 | Cornice, colore o fregio diversi per personaggio, azione regolare, base, legata, ultima risorsa, oggetto e token, mantenendo la scritta. |
+| O9 | Mancano le immagini di molte carte; servono anche provvisorie. | C2 | Una illustrazione provvisoria per ognuna delle 39 carte e del token. **Non immagini prese da Internet:** diritti incerti e progetto «tutti i diritti riservati». Si generano ex novo, come le WebP C0, con prompt e provenienza registrati, oppure si usano fonti con licenza compatibile. Supera la vecchia indicazione che il primo set non richiedesse illustrazioni individuali. |
+| O10 | Priorità, costi ed effetti in basso sulla carta vanno bene, ma con simboli invece delle lettere. | C4 | Famiglia di simboli coerente (fonti e licenze in «Asset iniziali»), sempre con il numero e consultabile in testo. Da usare anche in O3. |
 
 ## Verifiche proporzionate
 
@@ -562,8 +600,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   registrato. Landscape obbligatorio; 750×292 reali in Safari accettati.
 - **Stack:** PixiJS/TypeScript e React/HTML/Vite confermati a gate C0 chiuso.
   Porting e parità applicativa rimangono attività C1–C2.
-- **Conferma e riordino:** check dopo drop, scambio click/tap e tastiera
-  accettati. In C1 la carta trascinata segue il puntatore a grandezza piena,
+- **Conferma e riordino:** check dopo drop e tastiera accettati; scambio
+  click/tap tolto con il pulsante «Riordina» (O1). In C1 la carta trascinata segue il puntatore a grandezza piena,
   sopra il dito su touch: da confermare sul telefono; aspetto dei controlli in C4.
 - **Origine STOMP locale:** il profilo `local` ammette una sola origine
   (`localhost:4200`). Il proxy di loopback di `client-web` la presenta solo per
@@ -581,13 +619,21 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
 **Prossimo passo: chiusura di C1 su decisione del proprietario**, dopo la
-prova umana A e una prova del drag col dito su iPhone. C2 parte solo su
+prova umana A e una prova del drag col dito su iPhone (residui O1/O5 fatti). C2 parte solo su
 istruzione esplicita. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 9 — 27 ottobre 2026:** registrate e assegnate le osservazioni
+  O1–O10 del proprietario sul client C1. O1/O5 sono residui C1, O9 è in C2,
+  O3/O4/O6/O7 in C3, O2/O8/O10 in C4. Il gesto di riordino perde il pulsante
+  click/tap. Le illustrazioni provvisorie hanno fonti tracciate, non immagini
+  prese da Internet. Gli eventi strutturati per O7 restano una decisione
+  aperta. Nello stesso giorno O1 e O5 sono implementati in `client-web` e
+  verificati sul server reale; regole, server, catalogo e debug invariati.
 
 - **Versione 8 — 27 ottobre 2026, C1:** nuovo `client-web/` dalla scena C0
   congelata; adattatore STOMP/SockJS e REST con sottoscrizioni confermate,

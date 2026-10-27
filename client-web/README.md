@@ -43,8 +43,11 @@ ogni altra origine passa invariata e il server continua a rifiutarla. Il server 
   oppure trascina la carta direttamente sul bersaglio. La carta presa segue
   il puntatore; su touch resta sopra il dito. ✓ conferma, × o Escape annullano.
 - Bound: dopo il bersaglio scegli dalla mano una regolare da scartare.
-- Trascina entro la mano per riordinare, oppure «Riordina» e due tocchi; tastiera:
-  frecce e Invio. Il riordino è solo locale e non invia nulla.
+- Trascina entro la mano per riordinare; da tastiera Maiusc+frecce spostano la
+  carta con il focus. Il riordino è solo locale e non invia nulla.
+- Per leggere una carta tocca la (i) sul suo angolo in alto a sinistra: compare
+  passando il mouse su carte, personaggi e oggetti, e sulla carta scelta o con
+  il focus (su touch basta sceglierla). Da tastiera: I.
 - ✓ invia **un solo** comando; costi e carte cambiano solo con la vista del server.
   Un rifiuto lascia la scelta sul tavolo per correggerla.
 - Dopo ogni turno compare una riga di riepilogo non bloccante; toccandola si apre

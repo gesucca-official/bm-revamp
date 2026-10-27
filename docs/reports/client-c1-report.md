@@ -64,6 +64,10 @@ solo per lo sviluppo). [README del client](../../client-web/README.md).
 Fonti: [verify.json](client-c1/verify.json) (1366×768) e
 [verify-844x390.json](client-c1/verify-844x390.json), con le
 [catture](client-c1/screens/). Script ripetibile: `./client-web/run.ps1 -Task Verify`.
+I numeri di questa tabella vengono dalle due esecuzioni finali della commit
+`82a4080`. Dopo O1/O5 `verify.json` e le catture a 1366×768 sono state
+rigenerate da un nuovo giro (sezione «Residui C1 O1 e O5»); le versioni
+precedenti restano nella storia git.
 
 | Criterio C1 | Evidenza |
 |---|---|
@@ -100,6 +104,31 @@ telefono va ripetuta.
 ([size.json](client-c1/size.json)). Il margine si è ridotto con STOMP/SockJS:
 va tenuto d'occhio in C2.
 
+## Residui C1 O1 e O5
+
+Dopo la prima prova il proprietario ha chiesto due ritocchi
+([osservazioni](../client-roadmap.md#osservazioni-del-proprietario-dopo-c1)):
+
+- **O1:** tolti il pulsante «Riordina» e la modalità di scambio con due tocchi.
+  Il riordino resta trascinando nella mano; da tastiera Maiusc+frecce spostano
+  la carta con il focus di una posizione, solo in locale.
+- **O5:** tolto «Dettagli carta». Un pulsante (i) compare sull'angolo in alto a
+  sinistra della carta: passando il mouse su carte in mano, personaggi e oggetti,
+  oppure sulla carta scelta o con il focus. Su touch basta scegliere la carta.
+  L'angolo sinistro resta visibile anche nel ventaglio, dove ogni carta copre
+  il lato destro della precedente. Area di tocco di 44 px con disco visibile di
+  28 px; la tastiera mantiene I.
+
+Verificati sul server reale a 1366×768 ([verify.json](client-c1/verify.json),
+`checks.o1o5`, [cattura](client-c1/screens/02-info-hover.jpg)): nessun pulsante
+«Riordina» o «Dettagli carta»; la (i) all'hover apre la carta indicata; la (i)
+sulla carta scelta apre quella carta; Maiusc+freccia scambia le prime due
+carte senza SEND di mossa. Le altre prove dello stesso giro restano verdi:
+3 partite fino all'esito con entrambi i personaggi, rientro, 0 errori pagina,
+input p95 15,1 ms su PC. L'esecuzione a 844×390 e le sue catture risalgono a
+prima di O1/O5 e mostrano ancora i vecchi pulsanti. Sul telefono la (i) non è
+provata.
+
 ## Difetti trovati e corretti durante C1
 
 1. **Origine STOMP.** Il profilo `local` accetta solo `http://localhost:4200`, e
@@ -116,6 +145,8 @@ va tenuto d'occhio in C2.
 ## Limiti e riserve aperte
 
 - **Prova umana A** (due persone, partite vsCom, le tre domande): non eseguita.
+- Su touch il riordino si fa solo trascinando: lo scambio con due tocchi è tolto
+  per scelta del proprietario (O1).
 - **Dispositivo fisico:** drag col dito, sollevamento sopra il dito e risposta al
   tocco non verificati su iPhone 16 Pro. Nessuna emulazione touch dei gesti.
 - **Tastiera:** i percorsi da tastiera sono quelli della scena C0, non

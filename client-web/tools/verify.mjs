@@ -63,7 +63,24 @@ async function playTurn(game){
   s=await wait(x=>x&&x.phase==='choose',15000,'rejoined');
   await page.locator('.overlay').waitFor({state:'detached',timeout:15000});s=await state();
   assert.equal(s.turn,turn);assert.deepEqual(s.order.map(c=>c.key),order);assert.equal(moves.length,sentBefore,'no automatic resend after rejoin');
-  evidence.checks.rejoin={sameTurn:true,handOrderKept:true,sendsDuringRejoin:0};}
+  evidence.checks.rejoin={sameTurn:true,handOrderKept:true,sendsDuringRejoin:0};
+  // O1: no reorder or details buttons. O5: (i) on hover and on the selected card opens the details.
+  assert.equal(await page.getByRole('button',{name:/^(Riordina|Dettagli carta)$/}).count(),0,'O1/O5: old buttons removed');
+  const card=s.hits.find(h=>h.kind==='hand'&&h.id===s.order[1].key);
+  await page.mouse.move(card.x,card.y);await page.getByTestId('info').waitFor({timeout:3000});await shot('02-info-hover');
+  await page.getByTestId('info').click();await page.locator('dialog .inspection').waitFor({timeout:3000});
+  const title=await page.locator('dialog .receipt h2').innerText();await page.keyboard.press('Escape');await page.locator('dialog[open]').waitFor({state:'detached',timeout:3000}).catch(()=>{});
+  assert.equal(title,s.order[1].name,'hover (i) opens the hovered card');
+  await page.mouse.move(5,5);await tap(card);s=await state();assert.equal(s.selected,card.id);
+  await page.getByTestId('info').waitFor({timeout:3000});await page.getByTestId('info').click();await page.locator('dialog .inspection').waitFor({timeout:3000});
+  const selectedTitle=await page.locator('dialog .receipt h2').innerText();await page.keyboard.press('Escape');await page.waitForTimeout(150);await cancel();
+  assert.equal(selectedTitle,s.order[1].name,'(i) on the selected card');
+  // Keyboard reorder: Shift+ArrowRight moves the focused hand card one slot, local only.
+  s=await state();const keysBefore=s.order.map(c=>c.key),sentKeys=moves.length;
+  await page.locator(`[data-hit="${keysBefore[0]}"]`).focus();await page.keyboard.press('Shift+ArrowRight');await page.waitForTimeout(100);
+  s=await state();assert.deepEqual(s.order.map(c=>c.key).slice(0,2),[keysBefore[1],keysBefore[0]]);assert.equal(moves.length,sentKeys,'keyboard reorder must not send');
+  await page.locator(`[data-hit="${keysBefore[0]}"]`).blur();
+  evidence.checks.o1o5={oldButtons:0,infoOnHover:true,infoOnSelected:true,keyboardReorder:true,sendsDuring:0};}
  // Candidate plans: try bound, item targets and rejections first when still missing.
  const cards=s.order.map(c=>({key:c.key,name:c.name}));
  const order=[...cards].sort(()=>Math.random()-.5);

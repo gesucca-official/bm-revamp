@@ -18,10 +18,10 @@ export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.ch
 export const cost=(c:Card)=>Object.entries(c.cost).map(([k,v])=>`${v} ${{VIOLENCE:'V',ALERTNESS:'A',TOXICITY:'T',ALCOHOL:'L',HEALTH:'H'}[k]}`).join(' + ')||'—';
 export class TableScene {
  app=new Application();world=new Container();fx=new Container();hits:Hit[]=[];backs:Record<string,number>={};
- drag:Drag|null=null;reordering=false;swapKey:string|null=null;reorderOriginal:string[]=[];focused:string|null=null;
+ drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  width=0;height=0;art:Texture[]=[];background!:Sprite;pendingGhost:Container|null=null;
  reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;blocked=false;contextLost=false;
- onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};
+ onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};onHover=(_id:string|null)=>{};
  preview={x:0,y:0};stats={cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private tickPrev=0;private inputStart=0;
  private measure=false;private ghost:Container|null=null;private ghostH=0;ghostOver=false;private fittedTitles=new Map<string,string>();private retiring:Container[]=[];private retired:Container[]=[];private seqDuration=1200;private visualSnapshot:View;
@@ -44,6 +44,7 @@ export class TableScene {
   bind(canvas,'pointermove',((e:PointerEvent)=>this.move(e)) as EventListener);
   bind(canvas,'pointerup',((e:PointerEvent)=>this.up(e)) as EventListener);
   bind(canvas,'pointercancel',(()=>this.interrupt('pointercancel')) as EventListener);
+  bind(canvas,'pointerleave',(()=>{if(!this.drag)this.setHover(null);}) as EventListener);
   bind(canvas,'lostpointercapture',(()=>{if(this.drag)this.interrupt('lost capture');}) as EventListener);
   bind(canvas,'webglcontextlost',((e:Event)=>{e.preventDefault();this.contextLost=true;this.interrupt('context lost');this.onError('Affaccio sul tavolo interrotto. Attendo il ripristino grafico.');}) as EventListener);
   bind(canvas,'webglcontextrestored',(()=>{this.contextLost=false;this.onError('');this.draw();}) as EventListener);
@@ -97,7 +98,7 @@ export class TableScene {
   const n=this.model.hand.length,hw=compact?94:Math.min(164,w*.12),hh=hw*1.38,step=hw*.72,center=w*.635;
   this.model.hand.forEach((local,i)=>{const a=(i-(n-1)/2)*.055,x=center+(i-(n-1)/2)*step,y=h-hh*.58-12+Math.abs(i-(n-1)/2)*3;
    const c=this.card(local.card,hw,hh);c.position.set(x,y);c.rotation=a;this.world.addChild(c);if(this.drag?.moved&&this.drag.key===local.key)c.alpha=.22;const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:hw,h:hh,angle:a,label:`${local.card.name}, ${subtype(local.card)}, costo ${cost(local.card)}, priorità ${local.card.priority}, copia ${i+1}`,node:c};this.hits.push(hit);
-   if(local.key===this.model.selected||local.key===this.focused||local.key===this.swapKey){c.y-=compact?14:24;hit.y=c.y;this.halo(c,hw,hh);this.world.setChildIndex(c,this.world.children.length-1);}
+   if(local.key===this.model.selected||local.key===this.focused){c.y-=compact?14:24;hit.y=c.y;this.halo(c,hw,hh);this.world.setChildIndex(c,this.world.children.length-1);}
    if(local.key===this.model.discard){this.halo(c,hw,hh,0xdc9699);this.text(c,'SCARTO',0,0,compact?14:22,hw,WINE);}
    if(this.model.selectedCard?.characterBound&&this.model.target&&local.key!==this.model.selected&&(local.card.basicAction||local.card.characterBound||local.card.lastResort))c.alpha=.55;
   });
@@ -112,12 +113,14 @@ export class TableScene {
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);if(!hit)return;
   this.stopEffects();if(hit.kind==='hand'&&!this.model.locked){this.drag={id:e.pointerId,key:hit.key!,x:p.x,y:p.y,lastX:p.x,lastY:p.y,moved:false,insertion:null,touch:e.pointerType!=='mouse'};this.app.canvas.setPointerCapture(e.pointerId);this.focus(hit.key!);}else this.activate(hit.id);}
- move(e:PointerEvent){if(!this.drag||this.drag.id!==e.pointerId)return;const p=this.point(e),d=this.drag;d.lastX=p.x;d.lastY=p.y;if(!d.moved&&Math.hypot(p.x-d.x,p.y-d.y)>8){d.moved=true;this.drawGhost(d.key);this.model.select(d.key);}
+ // Hover is tracked only for a mouse at rest: it drives the (i) inspect button of the shell.
+ private setHover(id:string|null){if(this.hovered!==id){this.hovered=id;this.onHover(id);}}
+ move(e:PointerEvent){if(!this.drag){if(e.pointerType==='mouse'&&!this.blocked){const p=this.point(e);this.setHover(this.hit(p.x,p.y)?.id??null);}return;}if(this.drag.id!==e.pointerId)return;const p=this.point(e),d=this.drag;d.lastX=p.x;d.lastY=p.y;if(!d.moved&&Math.hypot(p.x-d.x,p.y-d.y)>8){d.moved=true;this.setHover(null);this.drawGhost(d.key);this.model.select(d.key);}
   if(!d.moved)return;this.placeGhost(p.x,p.y);d.insertion=p.y>this.height*.68?this.indexAt(p.x):null;
   // The dragged card is lifted out of the fan; the others open a real gap where it would land.
   const hand=this.hits.filter(x=>x.kind==='hand'),gap=(hand[0]?.w||80)*.42,from=this.model.hand.findIndex(c=>c.key===d.key);
   for(const hit of hand){hit.node.x=hit.x;if(d.insertion===null||hit.key===d.key)continue;const idx=this.model.hand.findIndex(c=>c.key===hit.key),slot=idx>from?idx-1:idx;hit.node.x+=slot>=d.insertion?gap:-gap;}
-  const target=this.reordering?undefined:this.dropTarget(p.x,p.y);this.ghostOver=!!target;if(this.ghost)this.ghost.alpha=this.ghostOver||d.insertion!==null?1:.94;
+  const target=this.dropTarget(p.x,p.y);this.ghostOver=!!target;if(this.ghost)this.ghost.alpha=this.ghostOver||d.insertion!==null?1:.94;
  }
  // Touch: the card floats above the finger so it stays visible; mouse: it hangs just under the cursor.
  private placeGhost(x:number,y:number){if(!this.ghost||!this.drag)return;const lift=this.drag.touch?this.ghostH*.62:this.ghostH*.18;this.ghost.position.set(x,Math.max(this.ghostH*.5,y-lift));this.ghost.rotation=Math.max(-.22,Math.min(.22,(x-this.drag.x)/900))-.04;}
@@ -129,23 +132,25 @@ export class TableScene {
  private clearGhost(){if(this.ghost){this.ghost.destroy({children:true});this.ghost=null;}}
  up(e:PointerEvent){const d=this.drag;if(!d||d.id!==e.pointerId)return;this.drag=null;this.clearGhost();if(this.app.canvas.hasPointerCapture(e.pointerId))this.app.canvas.releasePointerCapture(e.pointerId);
   const p=this.point(e);if(!d.moved){this.activate(d.key);return;}
-  this.drag=d;const target=this.reordering?undefined:this.dropTarget(p.x,p.y);this.drag=null;
+  this.drag=d;const target=this.dropTarget(p.x,p.y);this.drag=null;
   // Own objects can share the lower band with the fan: a compatible physical target wins.
   if(target)this.model.aim(target.target!);
   else if(d.insertion!==null&&p.x>this.width*.25&&p.x<this.width*.98){const keys=this.model.hand.map(x=>x.key).filter(k=>k!==d.key);keys.splice(d.insertion,0,d.key);this.model.cancel();this.model.reorder(keys);}
   else this.model.cancel();this.ghostOver=false;this.draw();}
  activate(id:string){if(this.blocked||this.contextLost||this.height>this.width)return;this.inputStart=performance.now();const hit=this.hits.find(h=>h.id===id);if(!hit)return;
-  if(hit.kind==='hand'){if(this.model.locked){this.inspect(id);return;}if(this.reordering){if(!this.swapKey){this.swapKey=hit.key!;}else{const keys=this.model.hand.map(x=>x.key),a=keys.indexOf(this.swapKey),b=keys.indexOf(hit.key!);[keys[a],keys[b]]=[keys[b],keys[a]];this.model.reorder(keys);this.reordering=false;this.swapKey=null;}this.draw();this.onState();}else{this.model.select(hit.key!);}}
+  if(hit.kind==='hand'){if(this.model.locked){this.inspect(id);return;}this.model.select(hit.key!);}
   else if(this.model.selected&&!this.model.locked){this.model.aim(hit.target!);}else this.inspect(id);
  }
  inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'){const card=this.model.hand.find(x=>x.key===hit.key)!.card;this.onInspect({title:card.name,card});}
   else if(hit.kind==='item'){const card=this.model.view.players[hit.target!.owner].character.items[hit.target!.itemIndex!];this.onInspect({title:card.name,card,owner:hit.target!.owner});}
   else this.onInspect({title:this.model.view.players[hit.target!.owner].character.name,owner:hit.target!.owner});}
- reorder(){if(this.model.locked)return;if(this.reordering){this.interrupt('reorder cancelled');return;}this.model.cancel();this.reordering=true;this.swapKey=null;this.reorderOriginal=this.model.hand.map(x=>x.key);this.draw();this.onState();}
- key(id:string,e:KeyboardEvent){if(e.key==='i'||e.key==='I'){e.preventDefault();this.inspect(id);}else if(this.reordering&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();const keys=this.model.hand.map(c=>c.key),i=keys.indexOf(this.swapKey||id);if(i<0)return;this.swapKey=keys[i];const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);this.draw();}else if(this.reordering&&e.key==='Enter'&&this.swapKey){e.preventDefault();this.reordering=false;this.swapKey=null;this.onState();this.draw();}}
+ // Keyboard: I inspects; Shift+arrows move the focused hand card one slot (local order only, no SEND).
+ key(id:string,e:KeyboardEvent){if(e.key==='i'||e.key==='I'){e.preventDefault();this.inspect(id);return;}
+  if(e.shiftKey&&['ArrowLeft','ArrowRight'].includes(e.key)&&!this.model.locked){const keys=this.model.hand.map(c=>c.key),i=keys.indexOf(id);if(i<0)return;e.preventDefault();
+   const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
  focus(id:string|null){this.focused=id;this.draw();}
- interrupt(reason:string,redraw=true){if(this.drag||this.seqStarted||this.reordering)this.stats.cancels.push(reason);const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();this.stopEffects();
-  if(this.reordering){this.reordering=false;this.swapKey=null;this.model.reorder(this.reorderOriginal);}if(d)this.model.cancel();if(redraw)this.draw();this.onState();}
+ interrupt(reason:string,redraw=true){if(this.drag||this.seqStarted)this.stats.cancels.push(reason);const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();this.stopEffects();
+  if(d)this.model.cancel();this.setHover(null);if(redraw)this.draw();this.onState();}
  escape(){this.interrupt('escape');this.model.cancel();}
  beginSequence(previous:View){
   const v=this.model.view,k=`${v.gameId}/${v.turn}`;
