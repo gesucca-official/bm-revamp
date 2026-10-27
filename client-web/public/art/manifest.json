@@ -1,0 +1,24 @@
+{
+  "tool": "imagegen built-in; loss compression only by sharp",
+  "approvedReference": "docs/design/client-c0/r1/duel.png",
+  "files": [
+    {
+      "file": "art/table.webp",
+      "source": "../../docs/design/client-c0/r2-assets/table.png",
+      "quality": 74,
+      "width": 1672,
+      "height": 941,
+      "bytes": 212340,
+      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
+    },
+    {
+      "file": "art/atlas.webp",
+      "source": "../../docs/design/client-c0/r2-assets/atlas.png",
+      "quality": 80,
+      "width": 1448,
+      "height": 1086,
+      "bytes": 470490,
+      "sha256": "64e2deeadc4946e00045ebb360ebc79866f8b717d9999d6c61c35607b7020815"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # Roadmap del client web animato
 
-**27 ottobre 2026 — versione 7, C0 chiusa su decisione del proprietario;
-C1 non iniziata.** Obiettivo: permettere a giocatori umani di
+**27 ottobre 2026 — versione 8, C0 chiusa; C1 implementata e verificata
+con partite reali sul server locale, in attesa di prova umana A e verifica
+fisica del drag.** Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
 client debug; il web sarà la base riutilizzabile per eventuali client dedicati.
@@ -18,9 +19,15 @@ Duello e FFA sono configurazioni della stessa scena, senza collegamento al serve
 su iPhone 16 Pro la fluidità passa e la risposta al tocco (116 ms contro 100)
 è accettata con deroga dal proprietario; revisione umana superata con riserve;
 landscape forzato. [Esiti C0-R5](reports/client-c0-r5-procedure.md#esiti),
-[rapporto ed evidenze](reports/client-c0-r2-report.md). **C1 non è iniziata**
-e attende un'istruzione esplicita.
-L'approvazione delle immagini non certifica una partita reale o la parità.
+[rapporto ed evidenze](reports/client-c0-r2-report.md).
+
+**C1 è implementata** in [client-web](../client-web/README.md): login → quick
+1vCom → partita → esito → nuova partita o hub, sul server reale, con la scena
+e i gesti C0. Partite complete per entrambi i personaggi, bound, oggetti,
+rifiuti, effetto periodico, drag/click, riordino e rientro sono verificati
+automaticamente su PC contro il server locale; prova umana A e drag col dito
+sul telefono restano aperti. [Rapporto C1](reports/client-c1-report.md).
+`client-c0/revision` resta congelata come evidenza del gate C0.
 
 La [checklist P01–P44](client-c0-parity.md) e il [contratto delle interazioni](design/client-c0/interaction-contract.md)
 restano le basi di C1–C2. Il [primo rapporto](reports/client-c0-report.md)
@@ -384,6 +391,12 @@ rifinitura grafica e dei controlli, nuova misura fisica a parità completa.
 
 ### C1 Giocare una partita completa contro computer
 
+**Stato (27 ottobre 2026):** implementata in `client-web/`; criteri
+automatizzabili soddisfatti con partite reali sul server locale
+([rapporto](reports/client-c1-report.md)). Aperti: prova umana A, verifica
+fisica del drag col dito e della risposta al tocco. La chiusura spetta al
+proprietario.
+
 **Dipende da C0. Risultato:** login → quick 1vCom → partita → esito → nuova
 partita nel nuovo client, con il tavolo del bar e le carte/gesti accettati in C0.
 
@@ -550,8 +563,12 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 - **Stack:** PixiJS/TypeScript e React/HTML/Vite confermati a gate C0 chiuso.
   Porting e parità applicativa rimangono attività C1–C2.
 - **Conferma e riordino:** check dopo drop, scambio click/tap e tastiera
-  accettati. Il trascinamento deve mostrare meglio la carta che segue il
-  dito: da curare in C1; aspetto dei controlli in C4.
+  accettati. In C1 la carta trascinata segue il puntatore a grandezza piena,
+  sopra il dito su touch: da confermare sul telefono; aspetto dei controlli in C4.
+- **Origine STOMP locale:** il profilo `local` ammette una sola origine
+  (`localhost:4200`). Il proxy di loopback di `client-web` la presenta solo per
+  la propria pagina, senza modificare il server; per un ambiente condiviso
+  serve una configurazione esplicita delle origini.
 - **Contratto visivo:** accettare animazioni aggregate con le API correnti;
   valutare in seguito eventi strutturati/revisioni/ora server solo per esigenze
   dimostrate. Non condizionare la prima partita a un nuovo protocollo.
@@ -563,15 +580,22 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo: C1, solo su istruzione esplicita del proprietario.**
-Collegare login/quick 1vCom al server con questa scena e questi gesti,
-includendo la riserva sul trascinamento.
-La veste approvata entra in C1 fin dalla prima partita. C2 estende lo stesso
+**Prossimo passo: chiusura di C1 su decisione del proprietario**, dopo la
+prova umana A e una prova del drag col dito su iPhone. C2 parte solo su
+istruzione esplicita. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 8 — 27 ottobre 2026, C1:** nuovo `client-web/` dalla scena C0
+  congelata; adattatore STOMP/SockJS e REST con sottoscrizioni confermate,
+  topic update/move solo come segnale, nessun reinvio automatico; sessione,
+  selezione e animazione separate; drag con carta che segue il puntatore.
+  Partite reali su server locale per entrambi i personaggi con bound, oggetti,
+  rifiuti, effetto periodico, esito, hub e rientro. Prova umana A e touch fisico
+  aperti. Regole/server/catalogo/debug invariati. [Rapporto](reports/client-c1-report.md).
 
 - **Versione 7, riordino documentale — 27 ottobre 2026:** allineate al gate
   chiuso le frasi rimaste da versioni precedenti (prova fisica, lettura al

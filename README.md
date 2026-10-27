@@ -12,7 +12,8 @@ Stato corrente e indice dei documenti: [docs/README.md](docs/README.md).
 |---|---|
 | `server/` | Server Spring Boot, catalogo SQLite, migrazioni e test Java |
 | `client-debug/` | Client Angular debug, asset e test client |
-| `client-c0/` | Scena C0 del client animato in `revision/` (Pixi/React, dati sintetici) e laboratorio Angular storico |
+| `client-web/` | Client web animato (Pixi/React/Vite) collegato al server: quick 1vCom completa (C1) |
+| `client-c0/` | Scena C0 congelata del client animato in `revision/` (Pixi/React, dati sintetici) e laboratorio Angular storico |
 | `scripts/` | Toolchain fissata, build, CLI e verifiche applicative |
 | `docs/` | Regolamento, contratti, roadmap e report |
 | `tools/print-cards/` | Generatore e verificatore delle carte stampabili già esistenti |
@@ -79,5 +80,7 @@ La roadmap della base è [archiviata come completata](docs/roadmap.md).
 La [roadmap del client web animato](docs/client-roadmap.md) pianifica la parità
 funzionale con il debug, dalla prima partita completa alla rifinitura visiva,
 come base per futuri client desktop e mobile. **C0 è chiusa** (scena sintetica
-in [`client-c0/revision/`](client-c0/revision/README.md)); **C1 non è iniziata**.
+in [`client-c0/revision/`](client-c0/revision/README.md)); **C1 è implementata**
+in [`client-web/`](client-web/README.md), in attesa di prova umana e verifica touch
+per la chiusura.
 Stato corrente e classificazione dei documenti: [indice della documentazione](docs/README.md).

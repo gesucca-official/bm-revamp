@@ -13,12 +13,12 @@ Aggiornato al **27 ottobre 2026**.
 |---|---|---|
 | Regolamento | Versione **1.6**, invariata dalla base I22 | [game-rules.md](game-rules.md) |
 | Versione base | Candidato `I22-3e71300e057687ba` **approvato** dal proprietario il 26 ottobre 2026; roadmap della base conclusa e archiviata | [report I22](reports/i22-report.md#approvazione), [roadmap archiviata](history/roadmap-base-i22.md) |
-| Client giocabile | `client-debug/` Angular: unico client collegato al server, con CLI per gli scenari automatici | [client-debug](../client-debug/README.md), [CLI](cli.md) |
+| Client giocabile | `client-debug/` Angular, completo; `client-web/` per la sola quick 1vCom (C1); CLI per gli scenari automatici | [client-debug](../client-debug/README.md), [CLI](cli.md) |
 | Client web animato | **C0 chiusa** il 27 ottobre 2026 su decisione del proprietario, con deroga sulla risposta al tocco (116 ms contro 100) e landscape obbligatorio. Stack confermato: PixiJS/TypeScript, React/HTML, Vite. Solo scena sintetica, nessun collegamento al server | [roadmap client](client-roadmap.md), [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti) |
-| Prossimo passo | **C1** (login → quick 1vCom → partita → esito) **non iniziata**: richiede un'istruzione esplicita del proprietario | [roadmap client, C1](client-roadmap.md#c1-giocare-una-partita-completa-contro-computer) |
+| C1 | **Implementata** in `client-web/`: login → quick 1vCom → partita → esito → nuova partita sul server reale; criteri automatici verificati con partite reali in locale. Aperti prova umana A e drag col dito su iPhone; chiusura su decisione del proprietario | [rapporto C1](reports/client-c1-report.md), [client-web](../client-web/README.md) |
 | Pubblicazione | Sorgenti preparati per GitHub; nessun deploy o hosting | [pubblicazione](publishing.md) |
 
-Regole, server, catalogo e client debug non sono stati modificati dal lavoro C0.
+Regole, server, catalogo e client debug non sono stati modificati dal lavoro C0–C1.
 Le numerazioni I01–I26 e F01–F39 appartengono alla base e non vengono riaperte
 dalle tappe C0–C5.
 
