@@ -34,4 +34,11 @@ public class CardsGuiRecord implements Serializable {
     @Column(name = "T_GUI_SPRITE")
     private String guiSprite;
 
+    // Descriptive only (regulation 1.7 R07a): no rule reads them.
+    @Column(name = "T_GUI_ROLE")
+    private String guiRole;
+
+    @Column(name = "T_GUI_GAINS")
+    private String guiGains;
+
 }

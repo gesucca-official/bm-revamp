@@ -33,8 +33,10 @@ sul telefono restano aperti. [Rapporto C1](reports/client-c1-report.md).
 La [checklist P01–P44](client-c0-parity.md) e il [contratto delle interazioni](design/client-c0/interaction-contract.md)
 restano le basi di C1–C2. Il [primo rapporto](reports/client-c0-report.md)
 e il laboratorio Angular sono evidenze storiche della scena respinta.
-Il [regolamento 1.6](game-rules.md) rimane la fonte normativa: regole,
-server, catalogo e debug non sono modificati dal rifacimento. La base I22
+Il [regolamento 1.7](game-rules.md) rimane la fonte normativa. Il rifacimento
+non cambia regole né effetti; per decisione del proprietario su O14 il catalogo
+ha due campi descrittivi (ruolo e guadagni, R07a), esposti dal server e copiati
+nelle regole del debug. La base I22
 resta [approvata e archiviata](roadmap.md); C0–C5 non riaprono gli incrementi storici differiti.
 
 ## Base effettiva e fonti
@@ -581,7 +583,7 @@ indicato come decisione aperta.
 | O11 | Prova A: non si capisce quando una carta si può giocare con le risorse disponibili. | C2 | Attenuare leggermente le carte in mano il cui costo supera le risorse correnti della vista (R03: costi disponibili all'invio). La carta resta ispezionabile e il percorso di scelta e invio non cambia: il server resta l'unico giudice e il rifiuto resta gestito. Solo il costo in risorse; gli altri requisiti restano al rifiuto. |
 | O12 | Prova A: le carte sono piccole e sul tavolo si leggono male. | C2, finitura C4 | Carte in mano e sul tavolo più grandi ai formati di riferimento, decise insieme alla disposizione FFA a cinque, che riduce lo spazio. La (i) resta per il testo completo. |
 | O13 | Prova A: non si capisce quali e quante risorse si hanno, né quali carte in mano le fanno ottenere. | C2, con O3 e O4 | Risorse proprie leggibili vicino al proprio personaggio e alla mano; sulle carte, guadagni di risorse riconoscibili a colpo d'occhio dall'effetto, oltre al costo. |
-| O14 | Prova A: le tipologie devono riconoscersi a colpo d'occhio, compresi i ruoli: danno, risorse, contrasto delle mosse avversarie. | C2 essenziale, C4 con O8 | Un segno di ruolo sulla carta senza snaturarne l'aspetto attuale, che piace. In C2 un segno essenziale; in C4 cornici e simboli definitivi con O8 e O10. **Decisione aperta:** fonte della classificazione per ruolo, cioè tabella del client rivista dal proprietario oppure campo del catalogo, che richiede di aggiornare il regolamento. |
+| O14 | Prova A: le tipologie devono riconoscersi a colpo d'occhio, compresi i ruoli: danno, risorse, contrasto delle mosse avversarie. | C2 essenziale, C4 con O8 | Un segno di ruolo sulla carta senza snaturarne l'aspetto attuale, che piace. In C2 un segno essenziale; in C4 cornici e simboli definitivi con O8 e O10. **Deciso il 27 ottobre 2026:** la classificazione è un campo del catalogo SQLite, così tutte le informazioni sulle carte restano nello stesso posto ([regolamento 1.7, R07a](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17)). Ruoli DAMAGE, DEFENSE, RESOURCES, COUNTER, DISRUPT, ITEMS e OTHER per le carte ambigue, da rivedere con il bilanciamento; accanto, i guadagni a sé usati da O13. Il server li espone come `role` e `gains` della carta. |
 
 ## Verifiche proporzionate
 
@@ -617,9 +619,6 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 - **Conferma e riordino:** check dopo drop e tastiera accettati; scambio
   click/tap tolto con il pulsante «Riordina» (O1). In C1 la carta trascinata segue il puntatore a grandezza piena,
   sopra il dito su touch: confermato su iPhone dal proprietario; aspetto dei controlli in C4.
-- **Ruoli delle carte (O14):** decidere se la classificazione danno, risorse e
-  contrasto vive in una tabella del client o nel catalogo. La seconda strada
-  modifica il catalogo SQLite e passa prima dal regolamento.
 - **Origine STOMP locale:** il profilo `local` ammette una sola origine
   (`localhost:4200`). Il proxy di loopback di `client-web` la presenta solo per
   la propria pagina, senza modificare il server; per un ambiente condiviso
@@ -643,6 +642,13 @@ C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 11 — 27 ottobre 2026, decisione O14:** la classificazione per
+  ruolo è un campo del catalogo SQLite. Regolamento 1.7 con R07a (ruolo e
+  guadagni a sé, puramente descrittivi; OTHER per le carte ambigue), colonne
+  SQLite, allegato, classe del token, esposizione `role`/`gains` nel server,
+  verifiche e copia delle regole nel debug. Nessun effetto o bilanciamento
+  cambiato. Tolta dalle decisioni aperte.
 
 - **Versione 10 — 27 ottobre 2026, chiusura C1:** il proprietario chiude C1.
   Su iPhone 16 Pro, servito in rete locale con codice d'accesso

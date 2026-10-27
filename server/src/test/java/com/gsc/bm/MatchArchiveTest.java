@@ -140,7 +140,7 @@ class MatchArchiveTest {
         assertThrows(AccessDeniedException.class, () -> reread.export(game.getGameId(), "stranger"));
         assertThrows(AccessDeniedException.class, () -> reread.export("missing", "a"));
         var initialTree = mapper.readTree(initial).path("data");
-        assertEquals("1.6", initialTree.path("versions").path("rulesVersion").asText());
+        assertEquals("1.7", initialTree.path("versions").path("rulesVersion").asText());
         for (String hash : List.of("codeSha256","rulesSha256","catalogSha256","rulesCatalogSha256")) {
             assertTrue(initialTree.path("versions").path(hash).asText().matches("[0-9a-f]{64}"));
         }

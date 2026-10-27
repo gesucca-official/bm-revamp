@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.6 — 26 ottobre 2026**. Fonte normativa del gioco.
+Versione **1.7 — 27 ottobre 2026**. Fonte normativa del gioco.
 
 ## R00 — Autorità
 
@@ -187,6 +187,67 @@ Gli oggetti si attivano tramite Grab/derivate, non alla pesca. Nessun costo prop
 SoberUp è una classe incompleta fuori dal catalogo (bersaglio non definito), non una carta giocabile o un terzo personaggio.
 
 
+## R07a — Ruoli descrittivi delle carte (1.7)
+
+Ogni carta ha un **ruolo** e l'elenco dei **guadagni di risorse a sé**. Sono campi descrittivi del catalogo per aiutare a riconoscere le carte: non sono effetti, non modificano costi, bersagli, priorità o risoluzione e non autorizzano mosse. In caso di dubbio prevale l'effetto di R07. I personaggi non si giocano e non hanno ruolo.
+
+| Ruolo | Significato |
+|---|---|
+| DAMAGE | Danno: il suo scopo principale è infliggere danno all'avversario |
+| DEFENSE | Difesa: riduce il danno ricevuto |
+| RESOURCES | Risorse: fa guadagnare risorse o salute a chi la usa |
+| COUNTER | Contrasto: annulla mosse avversarie |
+| DISRUPT | Disturbo: toglie risorse all'avversario o gli aggiunge tossicità |
+| ITEMS | Oggetti: prende, ruba, scambia o distrugge oggetti |
+| OTHER | Altro: ruolo ambiguo, da rivedere con il bilanciamento |
+
+I guadagni elencano solo le risorse aggiunte a chi gioca o consuma la carta, con le lettere di R07 e H=HEALTH; x indica una quantità variabile. Non includono costi, perdite, effetti sul bersaglio o quelli dell'oggetto consumato da una Grab.
+
+| Carta | Ruolo | Guadagni a sé |
+|---|---|---|
+| BigBadBruiser | — | — |
+| ToxicJunkie | — | — |
+| LittleSmack | DAMAGE | +5 A |
+| LittleRage | DEFENSE | +5 V |
+| PatheticBlade | DAMAGE | +5 T |
+| RottenSmile | DISRUPT | +5 A |
+| BruiserGrab | ITEMS | — |
+| ToxicGrab | ITEMS | — |
+| Struggle | DAMAGE | — |
+| Grab | ITEMS | — |
+| Steal | ITEMS | — |
+| ShuffleFeet | ITEMS | — |
+| BadEducation | OTHER | — |
+| BreakYourToy | ITEMS | — |
+| CantFeelAnything | DEFENSE | +10 A |
+| ExtremelyViolentBlow | DAMAGE | — |
+| Glare | OTHER | +15 V, +15 A |
+| HealingBlow | DAMAGE | — |
+| MadeOfStone | DEFENSE | +10 V |
+| SeagullFly | DAMAGE | — |
+| SickeningBlow | DAMAGE | — |
+| StunningBlow | DAMAGE | — |
+| SuperImpact | DAMAGE | — |
+| YouStop | COUNTER | — |
+| WhatchaDoin | COUNTER | — |
+| AmphetamineReflexes | COUNTER | — |
+| BadTrip | RESOURCES | +x T |
+| BeggingMoney | ITEMS | — |
+| Cough | DISRUPT | — |
+| EverythingIsDrug | OTHER | +20 T |
+| GoingBerserk | DAMAGE | — |
+| LethalHeroinDose | RESOURCES | +x T |
+| MethDrivenRage | DAMAGE | — |
+| PervertedMetabolism | RESOURCES | +x H |
+| ToxicBloodDrain | DISRUPT | — |
+| CocktailOnTheGround | RESOURCES | +20 V, +15 L, +5 T |
+| RottenBeer | RESOURCES | +5 L |
+| AnotherRottenBeer | RESOURCES | +10 L |
+| MarvelousCocktail | RESOURCES | +20 L, +20 T |
+| BrokenBeerBottle | OTHER | — |
+
+Le carte azione e oggetto portano ruolo e guadagni nel catalogo SQLite; il token, che non è nel catalogo, li dichiara nella propria classe come il nome visualizzato.
+
 ## R08 — Informazioni e confini
 
 Le viste di gioco mostrano la mano solo al proprietario, risorse e oggetti a tutti; non mostrano l'ordine del mazzo. Questo non certifica sicurezza di API debug e log. La collezione espone l'intero catalogo a tutti, senza economia o proprietà individuale.
@@ -202,6 +263,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.7 — 27 ottobre 2026, C2a/O14:** aggiunta R07a con ruolo descrittivo e guadagni di risorse a sé per ogni carta e per il token, conservati nel catalogo SQLite e nell'allegato. Decisione del proprietario: la classificazione vive nel catalogo, così tutte le informazioni sulle carte restano nello stesso posto; le carte ambigue hanno ruolo OTHER, da rivedere con il bilanciamento. Motivazione: rendere riconoscibili ruolo e guadagni nel client web (osservazioni O13 e O14 della prova umana A). Campo descrittivo: nessun effetto, costo, bersaglio, priorità, starter o bilanciamento cambia.
 
 - **1.6 — 26 ottobre 2026, I24:** applicata la decisione R06/Q14 del proprietario: draw degli attivi al restart anche dopo crash, motivo consultabile «riavvio server», finalizzazione persistente unica e ripetibile dopo interruzione. Motivazione: chiudere in modo durevole le partite che il processo nuovo non può riprendere, conservando esiti conclusi e dati precedenti. Nessun restore giocabile, Elo o modifica a carte/bilanciamento.
 

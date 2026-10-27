@@ -65,7 +65,7 @@ Fonte primaria: [cards.sqlite](../server/src/main/resources/cards.sqlite), inter
 
 | Tabella | Colonne e vincoli osservati | Righe |
 |---|---|---:|
-| CRD001_GUI | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_DESCRIPTION **int**; T_GUI_IMAGE varchar2; T_GUI_SPRITE varchar2 | 37 |
+| CRD001_GUI | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_DESCRIPTION **int**; T_GUI_IMAGE varchar2; T_GUI_SPRITE varchar2; T_GUI_ROLE varchar2; T_GUI_GAINS varchar2 (descrittivi, regolamento 1.7 R07a, esposti come `role` e `gains` della carta) | 37 |
 | CRD002_KEYWORDS | C_KEYWORD varchar2 PK; T_HTML **int** | 4 |
 | CRD003_CHARACTERS | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_SPRITE varchar2 | 2 |
 | DCK001_STARTERS | C_PG_REF_CLASS varchar2; C_CRD_REF_CLASS varchar2 FK→CRD001_GUI; N_QTY int; PK composta (C_PG_REF_CLASS,C_CRD_REF_CLASS) | 30 |

@@ -30,6 +30,8 @@ public class BrokenBeerBottle extends AbstractItemCard {
         super();
         setGuiName("Broken Beer Bottle");
         setGuiEffectDescription("Equip: Hit Damage x1.5, converted to Cut. Removed at turn end after use; may apply again that turn. Independent status per application: regulation 1.1 R05.");
+        // Not in the SQLite catalog: role and gains are declared here like the name (regulation 1.7 R07a).
+        setGuiRole("OTHER", "—");
     }
 
     @Override

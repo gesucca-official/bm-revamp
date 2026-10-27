@@ -1,3 +1,5 @@
+> **R07a / C2a, 27 ottobre 2026.** Regolamento **1.7**: ruolo descrittivo e guadagni a sé per 37 carte e token, in SQLite (`T_GUI_ROLE`, `T_GUI_GAINS`), allegato e classe del token. `check-rules.py` confronta R07a con allegato, SQLite e `rules-card-roles.tsv`; `CardRulesContractTest.r07a_rolesReachTheCards` e `CatalogRuntimeTest` (contesto) controllano che arrivino alle carte. Nessun effetto, costo o starter cambiato.
+>
 > I22, 26 ottobre 2026: regressione finale sul regolamento 1.6 invariato;
 > nessuna modifica agli attesi di gioco. Esiti, copertura applicativa/CLI e
 > contesto Spring separato nel [report I22](reports/i22-report.md).

@@ -11,7 +11,7 @@ Aggiornato al **27 ottobre 2026**.
 
 | Ambito | Stato | Fonte |
 |---|---|---|
-| Regolamento | Versione **1.6**, invariata dalla base I22 | [game-rules.md](game-rules.md) |
+| Regolamento | Versione **1.7** (27 ottobre 2026): rispetto alla base I22 (1.6) aggiunge solo R07a, ruolo descrittivo e guadagni a sé di ogni carta nel catalogo (O14); nessun effetto cambiato | [game-rules.md](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17) |
 | Versione base | Candidato `I22-3e71300e057687ba` **approvato** dal proprietario il 26 ottobre 2026; roadmap della base conclusa e archiviata | [report I22](reports/i22-report.md#approvazione), [roadmap archiviata](history/roadmap-base-i22.md) |
 | Client giocabile | `client-debug/` Angular, completo; `client-web/` per la sola quick 1vCom (C1); CLI per gli scenari automatici | [client-debug](../client-debug/README.md), [CLI](cli.md) |
 | Client web animato | **C0 chiusa** il 27 ottobre 2026 su decisione del proprietario, con deroga sulla risposta al tocco (116 ms contro 100) e landscape obbligatorio. Stack confermato: PixiJS/TypeScript, React/HTML, Vite. Solo scena sintetica, nessun collegamento al server | [roadmap client](client-roadmap.md), [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti) |
@@ -32,7 +32,7 @@ Documenti da seguire per lavorare sul progetto nello stato attuale.
 | [AGENTS.md](../AGENTS.md), [CONTRIBUTING.md](../CONTRIBUTING.md) | Regole di modifica e **verifiche obbligatorie** (fonte unica dei comandi di verifica) |
 | [Guida locale](setup.md) | Installazione, avvio, dati locali, verifiche e candidato I22 |
 | [CLI](cli.md) | Client testuale per scenari applicativi |
-| [Regolamento 1.6](game-rules.md) | Fonte normativa; la copia client è controllata da `scripts/check-rules.py` |
+| [Regolamento 1.7](game-rules.md) | Fonte normativa; la copia client è controllata da `scripts/check-rules.py` |
 | [Decisioni del proprietario](open-questions.md) | Decisioni Q/R recepite; le note datate sono storiche |
 | [Archivio partite](match-archive.md) | Contratto corrente di journal, export e chiusura al riavvio |
 | [Pubblicazione](publishing.md) | Identità Git, contenuti esclusi, verifiche GitHub |

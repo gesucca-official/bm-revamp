@@ -4,7 +4,7 @@ Gioco di carte con scelte simultanee ambientato in una rissa. Server, client
 debug, CLI, strumenti e documentazione condividono questo repository.
 La base locale I22 è approvata dal 26 ottobre 2026; la roadmap è conclusa
 nel suo perimetro. La pubblicazione dei sorgenti non costituisce un deploy.
-La fonte normativa è [docs/game-rules.md](docs/game-rules.md), versione 1.6;
+La fonte normativa è [docs/game-rules.md](docs/game-rules.md), versione 1.7;
 le decisioni sono in [docs/open-questions.md](docs/open-questions.md).
 Stato corrente e indice dei documenti: [docs/README.md](docs/README.md).
 

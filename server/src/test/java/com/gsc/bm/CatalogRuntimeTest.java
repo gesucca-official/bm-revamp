@@ -24,6 +24,10 @@ class CatalogRuntimeTest extends SqliteContextSupport {
             assertNotNull(card.getName()); assertNotNull(row.getGuiImage());
             assertNotNull(card.getEffect());
             assertNotSame(card, cards.craftCard(row.getClazz()));
+            // R07a descriptive role and gains travel from SQLite to the card JSON.
+            var loaded = (com.gsc.bm.model.cards.AbstractCard) card;
+            assertEquals(row.getGuiRole(), loaded.getRole()); assertEquals(row.getGuiGains(), loaded.getGains());
+            assertTrue(java.util.Set.of("DAMAGE","DEFENSE","RESOURCES","COUNTER","DISRUPT","ITEMS","OTHER").contains(loaded.getRole()));
         }));
     }
     @ParameterizedTest @ValueSource(strings = {"bruiser.character.BigBadBruiser", "junkie.character.ToxicJunkie"})

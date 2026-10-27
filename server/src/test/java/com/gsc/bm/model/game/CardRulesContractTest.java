@@ -3,6 +3,7 @@ package com.gsc.bm.model.game;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -38,6 +39,31 @@ class CardRulesContractTest {
                 assertEquals("Broken Beer Bottle", card.getName());
             }
         }));
+    }
+
+    /** R07a roles are descriptive: the token declares its own, catalog cards receive the SQLite columns unchanged. */
+    @Test void r07a_rolesReachTheCards() throws IOException {
+        Map<String, String[]> roles = new LinkedHashMap<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getResourceAsStream("/rules-card-roles.tsv")), StandardCharsets.UTF_8))) {
+            reader.lines().forEach(line -> roles.put(line.split("	")[0], line.split("	", -1)));
+        }
+        assertEquals(38, roles.size());
+        var token = new com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle();
+        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[1], token.getRole());
+        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[2], token.getGains());
+        var repo = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRepository.class);
+        var record = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRecord.class);
+        org.mockito.Mockito.when(repo.findById("bruiser.HealingBlow")).thenReturn(Optional.of(record));
+        org.mockito.Mockito.when(record.getGuiName()).thenReturn("ORMALE GUARIAMOTI");
+        org.mockito.Mockito.when(record.getGuiDescription()).thenReturn("");
+        org.mockito.Mockito.when(record.getGuiRole()).thenReturn(roles.get("bruiser.HealingBlow")[1]);
+        org.mockito.Mockito.when(record.getGuiGains()).thenReturn(roles.get("bruiser.HealingBlow")[2]);
+        var factory = new com.gsc.bm.service.factories.CardFactoryServiceImpl(repo,
+                org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardKeywordsRepository.class));
+        var blow = (com.gsc.bm.model.cards.AbstractCard) factory.craftCard("bruiser.HealingBlow");
+        assertEquals("DAMAGE", blow.getRole());
+        assertEquals("—", blow.getGains());
     }
 
     /** Fixed expectations transcribed from regulation R07, never regenerated from production code. */

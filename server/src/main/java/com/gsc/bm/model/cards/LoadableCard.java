@@ -10,4 +10,6 @@ public interface LoadableCard extends Card {
 
     void setGuiSprite(String sprite);
 
+    void setGuiRole(String role, String gains);
+
 }

@@ -69,6 +69,11 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     private String image;
     @Setter(AccessLevel.NONE)
     private String sprite;
+    // Descriptive catalog fields (regulation 1.7 R07a), shown by clients; no effect depends on them.
+    @Setter(AccessLevel.NONE)
+    private String role;
+    @Setter(AccessLevel.NONE)
+    private String gains;
 
     @Override
     public void setGuiName(String name) {
@@ -88,6 +93,12 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     @Override
     public void setGuiSprite(String sprite) {
         this.sprite = sprite;
+    }
+
+    @Override
+    public void setGuiRole(String role, String gains) {
+        this.role = role;
+        this.gains = gains;
     }
 
     @Override
