@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-26",
+  "scope": "C0-R1: static artwork and documentation only",
+  "visual_review": "awaiting owner; not approved",
+  "interactive_prototype_started": false,
+  "c1_started": false,
+  "tests": {
+    "unit_and_debug": {
+      "command": "./scripts/build.ps1 -Task Test -Offline",
+      "status": "PASS",
+      "server_tests": 251,
+      "debug_tests": 36,
+      "exit_code": 0
+    },
+    "rules_catalog_consistency": {
+      "command": "python scripts/check-rules.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    "spring_context": {
+      "command": "./scripts/build.ps1 -Task TestServerContext -Offline",
+      "status": "PASS",
+      "tests": 358,
+      "exit_code": 0,
+      "includes_application_startup": true,
+      "note": "Profile includes cases overlapping ordinary tests; do not add totals as distinct cases."
+    },
+    "match_manifests": {
+      "command": "python scripts/verify-match-manifests.py",
+      "status": "PASS",
+      "exit_code": 0,
+      "manifests_modified": false
+    }
+  },
+  "delivery_checks": {
+    "local_markdown_links": 71,
+    "image_dimensions_hashes_and_bytes": "PASS",
+    "prompt_set": "PASS",
+    "markdown_encoding_whitespace": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "work_record": {
+    "session": "C0-R1 only, separate from the original C0 prototype",
+    "tracked_window_start": "2026-10-26T22:18:25+01:00",
+    "tracked_window_end": "2026-10-26T22:32:00+01:00",
+    "scope_of_window": "From protected-file snapshot through final repository checks; preliminary reading and initial image request preceded this window and were not timed",
+    "production": "3 new mockups and 2 targeted FFA corrections; no interactive prototype"
+  },
+  "protected_files": "SHA-256 of rules, catalog JSON, SQLite and debug rules unchanged; pre-existing diff of server, debug and CLI unchanged",
+  "visual_checks": {
+    "duel": {
+      "own_actions": 6,
+      "opponent_backs": 6,
+      "object_cards_by_player": [
+        3,
+        1
+      ]
+    },
+    "ffa": {
+      "players": 5,
+      "own_actions": 6,
+      "opponent_backs": [
+        6,
+        4,
+        5,
+        3
+      ],
+      "object_cards_by_player": [
+        3,
+        1,
+        2,
+        1,
+        1
+      ]
+    },
+    "card": {
+      "id": "bruiser.YouStop",
+      "cost": "5 VIOLENCE",
+      "priority": 2,
+      "target": "opponent",
+      "bonus_recipient": "target",
+      "bonus": "10 ALERTNESS only if subsequent target move found",
+      "discard_after_use": true
+    },
+    "normative_references_in_scene": false,
+    "prior_assets_as_input": false,
+    "method": "manual visual inspection of generated final images, not automated runtime testing"
+  },
+  "limits": [
+    "No renderer benchmark",
+    "No new gameplay or interactive scene",
+    "No physical touch test",
+    "Minimum landscape and portrait not validated",
+    "PNG lettering is concept artwork, not runtime catalog text"
+  ],
+  "historical_snapshot": true,
+  "subsequent_approval": {
+    "status": "approved as visual reference by owner",
+    "record": "approval.md",
+    "scope": [
+      "duel.png",
+      "ffa-five.png",
+      "card.png"
+    ],
+    "does_not_certify_interactions_or_devices": true
+  }
+}

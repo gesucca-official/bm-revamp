@@ -1,0 +1,45 @@
+{
+  "recorded": "2026-10-27",
+  "tool": "built-in imagegen",
+  "approvedReference": "../r1/duel.png",
+  "priorAssetsUsed": false,
+  "exactPromptsAvailable": false,
+  "sources": [
+    {
+      "file": "table.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2716068,
+      "sha256": "42236445205a765c1f09e3e23af96f8078f65951f7c3efd7949d0b0ffb6cee01",
+      "generation": "exec-aab12c73-7003-424c-83e8-715bb6c57ae0"
+    },
+    {
+      "file": "atlas.png",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 3594288,
+      "sha256": "9d38bcd2bcf4aae97f781b5d09177efdff011ffa7959676539b7540f9d4dcf7c",
+      "generation": "exec-fb70fe18-8ea7-4404-bb7d-6fc4e8d2a941"
+    }
+  ],
+  "production": [
+    {
+      "file": "art/table.webp",
+      "source": "../../docs/design/client-c0/r2-assets/table.png",
+      "quality": 74,
+      "width": 1672,
+      "height": 941,
+      "bytes": 212340,
+      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
+    },
+    {
+      "file": "art/atlas.webp",
+      "source": "../../docs/design/client-c0/r2-assets/atlas.png",
+      "quality": 80,
+      "width": 1448,
+      "height": 1086,
+      "bytes": 470490,
+      "sha256": "64e2deeadc4946e00045ebb360ebc79866f8b717d9999d6c61c35607b7020815"
+    }
+  ]
+}

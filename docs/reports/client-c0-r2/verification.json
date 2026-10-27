@@ -1,0 +1,369 @@
+{
+  "date": "2026-10-27T12:23:30.119Z",
+  "browser": "156.0.4314.42",
+  "mode": "automated Edge headless; touch and viewport emulated; no physical touch",
+  "results": [
+    {
+      "sample": {
+        "name": "desktop",
+        "width": 1366,
+        "height": 768,
+        "touch": false
+      },
+      "checks": [
+        "FFA 5, 6 own cards, 4 covered fans and 9 object cards at capacities",
+        "covered counts 0/1/6/4, no opponent action data",
+        "ordinary selection/check exactly once, rejection, no optimistic mutation",
+        "bound discard from regular card in hand, persistent cards excluded",
+        "object owner/GUI name, copies equivalent on wire; pending/drop/resume/old callbacks no resend",
+        "NEAR_ITEM and SELF explicitly selected",
+        "tap swap and pointer reorder, duplicate copies retained, zero commands",
+        "direct drops onto character and object; invalid drop/Escape no command",
+        "keyboard selection/target, arrows reorder, Escape and cancel button restore order",
+        "long inspection HTML >=15px, no normative/wire labels, focus restored",
+        "view/resize/native pointercancel and browser/synthetic hidden signals cancel drag; zero commands",
+        "authoritative new view immediate; duplicate round not replayed; reduced motion suppresses sequence",
+        "health >100 and negative, death distinct from forfeit",
+        "all targets >=44px in landscape, no page scroll, no external/server requests"
+      ],
+      "geometry": {
+        "scrollW": 1366,
+        "scrollH": 768,
+        "w": 1366,
+        "h": 768,
+        "targets": [
+          {
+            "id": "person-Tu",
+            "w": 112.012,
+            "h": 154.57656,
+            "x": 245.88,
+            "y": 591.36
+          },
+          {
+            "id": "item-Tu-0",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 357.443952,
+            "y": 606.817656
+          },
+          {
+            "id": "person-Bice",
+            "w": 112.012,
+            "h": 154.57656,
+            "x": 355.16,
+            "y": 184.32
+          },
+          {
+            "id": "item-Bice-0",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 466.72395200000005,
+            "y": 199.77765599999998
+          },
+          {
+            "id": "item-Bice-1",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 553.372592,
+            "y": 199.77765599999998
+          },
+          {
+            "id": "item-Bice-2",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 640.021232,
+            "y": 199.77765599999998
+          },
+          {
+            "id": "person-Ada",
+            "w": 112.012,
+            "h": 154.57656,
+            "x": 983.52,
+            "y": 184.32
+          },
+          {
+            "id": "item-Ada-0",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 1095.083952,
+            "y": 199.77765599999998
+          },
+          {
+            "id": "person-Nino",
+            "w": 112.012,
+            "h": 154.57656,
+            "x": 218.56,
+            "y": 376.32
+          },
+          {
+            "id": "item-Nino-0",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 330.12395200000003,
+            "y": 391.777656
+          },
+          {
+            "id": "item-Nino-1",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 416.77259200000003,
+            "y": 391.777656
+          },
+          {
+            "id": "item-Nino-2",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 503.42123200000003,
+            "y": 391.777656
+          },
+          {
+            "id": "person-Tito",
+            "w": 112.012,
+            "h": 154.57656,
+            "x": 1106.46,
+            "y": 376.32
+          },
+          {
+            "id": "item-Tito-0",
+            "w": 80.64864,
+            "h": 112.90809599999999,
+            "x": 1218.023952,
+            "y": 391.777656
+          },
+          {
+            "id": "card-106",
+            "w": 163.92,
+            "h": 226.20959999999997,
+            "x": 572.354,
+            "y": 632.298432
+          },
+          {
+            "id": "card-107",
+            "w": 163.92,
+            "h": 226.20959999999997,
+            "x": 690.3764,
+            "y": 629.298432
+          },
+          {
+            "id": "card-108",
+            "w": 163.92,
+            "h": 226.20959999999997,
+            "x": 808.3987999999999,
+            "y": 626.298432
+          },
+          {
+            "id": "card-109",
+            "w": 163.92,
+            "h": 226.20959999999997,
+            "x": 926.4212,
+            "y": 626.298432
+          },
+          {
+            "id": "card-110",
+            "w": 163.92,
+            "h": 226.20959999999997,
+            "x": 1044.4436,
+            "y": 629.298432
+          },
+          {
+            "id": "card-111",
+            "w": 163.92,
+            "h": 226.20959999999997,
+            "x": 1162.466,
+            "y": 632.298432
+          }
+        ],
+        "touch": 0
+      },
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "sample": {
+        "name": "landscape-emulated",
+        "width": 844,
+        "height": 390,
+        "touch": true
+      },
+      "checks": [
+        "FFA 5, 6 own cards, 4 covered fans and 9 object cards at capacities",
+        "covered counts 0/1/6/4, no opponent action data",
+        "ordinary selection/check exactly once, rejection, no optimistic mutation",
+        "bound discard from regular card in hand, persistent cards excluded",
+        "object owner/GUI name, copies equivalent on wire; pending/drop/resume/old callbacks no resend",
+        "NEAR_ITEM and SELF explicitly selected",
+        "tap swap and pointer reorder, duplicate copies retained, zero commands",
+        "direct drops onto character and object; invalid drop/Escape no command",
+        "keyboard selection/target, arrows reorder, Escape and cancel button restore order",
+        "long inspection HTML >=15px, no normative/wire labels, focus restored",
+        "view/resize/native pointercancel and browser/synthetic hidden signals cancel drag; zero commands",
+        "authoritative new view immediate; duplicate round not replayed; reduced motion suppresses sequence",
+        "health >100 and negative, death distinct from forfeit",
+        "all targets >=44px in landscape, no page scroll, no external/server requests"
+      ],
+      "geometry": {
+        "scrollW": 844,
+        "scrollH": 390,
+        "w": 844,
+        "h": 390,
+        "targets": [
+          {
+            "id": "person-Tu",
+            "w": 56,
+            "h": 77.28,
+            "x": 151.92,
+            "y": 300.3
+          },
+          {
+            "id": "item-Tu-0",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 209.71999999999997,
+            "y": 308.028
+          },
+          {
+            "id": "person-Bice",
+            "w": 56,
+            "h": 77.28,
+            "x": 219.44,
+            "y": 93.6
+          },
+          {
+            "id": "item-Bice-0",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 277.24,
+            "y": 101.32799999999999
+          },
+          {
+            "id": "item-Bice-1",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 327.24,
+            "y": 101.32799999999999
+          },
+          {
+            "id": "item-Bice-2",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 377.24,
+            "y": 101.32799999999999
+          },
+          {
+            "id": "person-Ada",
+            "w": 56,
+            "h": 77.28,
+            "x": 607.68,
+            "y": 93.6
+          },
+          {
+            "id": "item-Ada-0",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 665.48,
+            "y": 101.32799999999999
+          },
+          {
+            "id": "person-Nino",
+            "w": 56,
+            "h": 77.28,
+            "x": 135.04,
+            "y": 191.1
+          },
+          {
+            "id": "item-Nino-0",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 192.83999999999997,
+            "y": 198.828
+          },
+          {
+            "id": "item-Nino-1",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 242.83999999999997,
+            "y": 198.828
+          },
+          {
+            "id": "item-Nino-2",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 292.84,
+            "y": 198.828
+          },
+          {
+            "id": "person-Tito",
+            "w": 56,
+            "h": 77.28,
+            "x": 683.6400000000001,
+            "y": 191.1
+          },
+          {
+            "id": "item-Tito-0",
+            "w": 44,
+            "h": 61.599999999999994,
+            "x": 741.4400000000002,
+            "y": 198.828
+          },
+          {
+            "id": "card-106",
+            "w": 94,
+            "h": 129.72,
+            "x": 366.74000000000007,
+            "y": 310.2624
+          },
+          {
+            "id": "card-107",
+            "w": 94,
+            "h": 129.72,
+            "x": 434.4200000000001,
+            "y": 307.2624
+          },
+          {
+            "id": "card-108",
+            "w": 94,
+            "h": 129.72,
+            "x": 502.1000000000001,
+            "y": 304.2624
+          },
+          {
+            "id": "card-109",
+            "w": 94,
+            "h": 129.72,
+            "x": 569.7800000000001,
+            "y": 304.2624
+          },
+          {
+            "id": "card-110",
+            "w": 94,
+            "h": 129.72,
+            "x": 637.46,
+            "y": 307.2624
+          },
+          {
+            "id": "card-111",
+            "w": 94,
+            "h": 129.72,
+            "x": 705.1400000000001,
+            "y": 310.2624
+          }
+        ],
+        "touch": 1
+      },
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "sample": {
+        "name": "portrait-emulated",
+        "width": 390,
+        "height": 844
+      },
+      "status": "PASS",
+      "checks": [
+        "explicit rotation request; no long scrolling panel layout"
+      ],
+      "limitation": "Portrait gameplay is not supported by the C0 scene."
+    }
+  ]
+}

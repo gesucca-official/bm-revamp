@@ -1,0 +1,10 @@
+{
+  "name": "bm-c0-bar-table",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {"node": "24.13.0", "npm": "11.6.2"},
+  "scripts": {"build": "tsc --noEmit && vite build", "start": "vite --host 127.0.0.1 --port 4310", "serve": "node tools/serve.mjs", "physical": "node tools/physical.mjs", "verify": "node tools/verify.mjs && node tools/lifecycle.mjs", "measure": "node tools/measure.mjs", "size": "node tools/size.mjs", "test": "node --experimental-strip-types --test tests/*.test.ts"},
+  "dependencies": {"pixi.js": "8.22.0", "react": "19.3.1", "react-dom": "19.3.1"},
+  "devDependencies": {"@playwright/test": "1.56.1", "@types/react": "19.3.0", "@types/react-dom": "19.3.0", "sharp": "0.35.5", "typescript": "5.9.3", "vite": "8.3.5"}
+}

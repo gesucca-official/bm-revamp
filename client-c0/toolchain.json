@@ -1,0 +1,9 @@
+{
+  "node": "24.13.0",
+  "npm": "11.6.2",
+  "url": "https://nodejs.org/dist/v24.13.0/node-v24.13.0-win-x64.zip",
+  "checksums": "https://nodejs.org/dist/v24.13.0/SHASUMS256.txt",
+  "directory": ".tools/client-c0/node-v24.13.0-win-x64",
+  "cache": ".tools/client-c0/npm-cache",
+  "note": "Nessuna modifica a scripts/toolchain.json o al PATH persistente"
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-26",
+  "purpose": "C0-R1 static visual review; not runtime assets",
+  "tool": "built-in image_gen",
+  "prior_assets_used": false,
+  "artifacts": [
+    {
+      "file": "card.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3029073,
+      "sha256": "4e575d0d7dc9ca43e410ccf7e94b9e16adffd32bafbd6fa7039b6aa5302f259a"
+    },
+    {
+      "file": "duel.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 3053318,
+      "sha256": "2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e"
+    },
+    {
+      "file": "ffa-five.png",
+      "width": 1672,
+      "height": 941,
+      "bytes": 2546965,
+      "sha256": "23b3ba7a8db346cf467f3afba23fdda04a3e5778e469f4db27d509da76a5ab75"
+    }
+  ]
+}

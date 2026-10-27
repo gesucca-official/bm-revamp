@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-26T18:00:14.874Z",
+  "mode": "production",
+  "gzipLevel": 9,
+  "files": [
+    {
+      "name": "index.html",
+      "bytes": 778,
+      "gzipBytes": 506
+    },
+    {
+      "name": "main-GF5FFFJV.js",
+      "bytes": 172377,
+      "gzipBytes": 50377
+    },
+    {
+      "name": "styles-UOJQYLYT.css",
+      "bytes": 7702,
+      "gzipBytes": 2410
+    }
+  ],
+  "jsGzip": 50377,
+  "totalGzip": 53293,
+  "deferredBytes": 0,
+  "jsBudgetBytes": 512000,
+  "totalBudgetBytes": 1048576,
+  "pass": true,
+  "note": "Solo scena sintetica C0, non previsione della parità C2. Nessun font o asset esterno."
+}

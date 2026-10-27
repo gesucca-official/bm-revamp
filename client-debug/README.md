@@ -23,5 +23,7 @@ Le configurazioni Heroku sono storiche; il percorso locale usa il proxy incluso.
 ## Roadmap
 
 La roadmap della base è [archiviata come completata](../docs/roadmap.md).
-La [preparazione della roadmap client](../docs/client-roadmap-preparation.md)
-raccoglie le decisioni da concordare; non è un piano di implementazione.
+La [roadmap del client web animato](../docs/client-roadmap.md) pianifica le stesse
+funzionalità del debug con una nuova esperienza di gioco. Implementazione non
+avviata; asset attuali esclusi dal nuovo client. La
+[ricognizione preparatoria](../docs/client-roadmap-preparation.md) resta disponibile.

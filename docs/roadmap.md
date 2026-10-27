@@ -10,11 +10,17 @@ ha approvato il candidato `I22-3e71300e057687ba` e i limiti del report il
 - [Report I22, approvazione ed evidenze](reports/i22-report.md#approvazione)
 - [Stato implementazione e storico delle verifiche](implementation-status.md)
 - [Preparazione della nuova roadmap client](client-roadmap-preparation.md)
+- [Roadmap del client web animato](client-roadmap.md)
 
-La nuova roadmap client **non è ancora definita né approvata**: la preparazione
-raccoglie fonti e decisioni necessarie, senza attività, priorità, scadenze o
-scelte tecniche già fissate. I18/I20/I21/I25 e le feature differite conservano
-il significato storico; non sono automaticamente trasferiti nel nuovo percorso.
+La [roadmap del client web animato](client-roadmap.md), versione 2 del
+26 ottobre 2026, definisce tappe C0–C5, parità funzionale con il debug,
+direzione visiva provvisoria, confronto tecnologico e prova breve futura in C0.
+Raccomanda Angular supportato con DOM/SVG, valutando l'ibrido solo su evidenze.
+È pianificazione: implementazione non avviata, decisioni aperte indicate nel
+piano. Gli asset attuali sono esclusi.
+I18/I20/I21/I25 e le feature differite conservano il significato storico;
+non sono automaticamente trasferiti nel nuovo percorso. La parità comprende
+le funzioni amministrative già presenti, senza estenderle alla console I20.
 
 Il [regolamento vigente](game-rules.md) resta la fonte normativa. Nessuna
 regola, implementazione o evidenza del candidato I22 cambia con l'archiviazione;

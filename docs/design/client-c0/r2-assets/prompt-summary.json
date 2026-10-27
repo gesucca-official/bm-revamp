@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-27",
+  "tool": "built-in imagegen",
+  "exact_prompts_available": false,
+  "record_type": "descriptive reconstruction after session interruption; not original prompts",
+  "reference": "docs/design/client-c0/r1/duel.png, approved by owner",
+  "prior_assets_used": false,
+  "table": {
+    "generation": "exec-aab12c73-7003-424c-83e8-715bb6c57ae0",
+    "summary": "Derive an empty illustrated dirty dive-bar table from the approved R1 reference. Keep worn walnut/tobacco wood, stains, burns, ashtray, glass and burgundy surroundings; remove game cards and interface text. Preserve an open playable surface."
+  },
+  "atlas": {
+    "generation": "exec-fb70fe18-8ea7-4404-bb7d-6fc4e8d2a941",
+    "summary": "Create twelve coherent ink/comic card illustrations in a 4-column, 3-row atlas using the approved bar style: bruiser, junkie, stop hand, grab; slap, rage, eyes, steal; brown beer, green beer, negroni, cocktail. No lettering or card metadata."
+  }
+}

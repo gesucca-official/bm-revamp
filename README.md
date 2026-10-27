@@ -79,5 +79,7 @@ nuovi permessi di utilizzo con questa pulizia.
 ## Roadmap
 
 La roadmap della base è [archiviata come completata](docs/roadmap.md).
-La [preparazione della roadmap client](docs/client-roadmap-preparation.md)
-raccoglie le decisioni da concordare; non è un piano di implementazione.
+La [roadmap del client web animato](docs/client-roadmap.md) pianifica la parità
+funzionale con il debug, dalla prima partita completa alla rifinitura visiva,
+come base per futuri client desktop e mobile. Implementazione non avviata.
+La [ricognizione preparatoria](docs/client-roadmap-preparation.md) resta disponibile.

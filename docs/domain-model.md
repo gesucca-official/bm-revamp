@@ -1,8 +1,8 @@
 > **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
 > [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
 > Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è ancora
-> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+> restano storico, non attività correnti. La nuova roadmap client è descritta
+> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
 
 > La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 

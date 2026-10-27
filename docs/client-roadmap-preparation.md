@@ -5,6 +5,12 @@
 
 # Preparazione della roadmap client
 
+> **Seguito — 26 ottobre 2026:** è stata redatta la
+> [roadmap del client web animato](client-roadmap.md), con parità funzionale
+> rispetto al debug e asset attuali esclusi. Le domande e i vincoli sotto
+> conservano il contesto preparatorio; per perimetro e tappe vale il nuovo piano.
+> Implementazione non avviata, regolamento invariato.
+
 **26 ottobre 2026 — ricognizione documentale, non roadmap approvata.**
 La [roadmap precedente](history/roadmap-base-i22.md) è chiusa con I22.
 Questo documento raccoglie informazioni disponibili e decisioni da concordare;

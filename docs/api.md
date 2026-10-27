@@ -6,8 +6,8 @@
 > **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
 > [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
 > Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è ancora
-> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+> restano storico, non attività correnti. La nuova roadmap client è descritta
+> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
 
 > Riferimento corrente I22: regolamento 1.6; contratto delle quattro modalità,
 > identità/sessione unica, mazzi, export, clock/forfait/reconnect e ricevuta restart

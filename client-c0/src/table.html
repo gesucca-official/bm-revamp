@@ -1,0 +1,85 @@
+<div class="lab" [class.motion-reduced]="reduced()" (window:resize)="resized()" (window:keydown.escape)="clear()">
+  <header>
+    <div><span class="eyebrow">LABORATORIO C0 · DATI SINTETICI</span><h1>Botte Micidiali <span>Rissa al tavolo</span></h1></div>
+    <div class="turn">Turno {{view().turn}} <strong>◷ {{clock(view().players[me])}}</strong><small>Clock indicativo · tempo fixture</small></div>
+  </header>
+  <details class="lab-controls">
+    <summary>Scenari della prova · nessuna connessione al gioco</summary>
+    <div class="controls">
+      <button data-testid="reset" (click)="reset()">Riparti</button>
+      <button data-testid="after" (click)="apply('after')">Vista successiva + effetti</button>
+      <button data-testid="clock" (click)="apply('clock')">Vista stesso turno / clock</button>
+      <button data-testid="pending" (click)="apply('pending')">Vista pending Steal</button>
+      <button data-testid="reject" (click)="reject()">Rifiuto</button>
+      <button data-testid="drop" (click)="drop()">Drop</button>
+      <button data-testid="edge" (click)="apply('edge')">Morte / forfait / H negativo</button>
+      <button data-testid="motion" [attr.aria-pressed]="reduced()" (click)="toggleMotion()">Movimento ridotto: {{reduced() ? 'sì' : 'no'}}</button>
+    </div>
+  </details>
+  <main>
+    <section class="table" aria-label="Tavolo FFA a cinque">
+      <svg class="table-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M12 38L40 33 47 9 59 32 89 25 75 49 94 68 65 69 50 93 36 73 9 78 23 56Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      @for (p of players(); track p.playerId) {
+        <article [id]="'seat-' + p.playerId" class="seat" [class.self]="p.playerId === me" [class.eliminated]="p.character.dead || view().forfeits[p.playerId]" [class.chosen]="target() === p.playerId || (p.playerId === me && target() === 'SELF')">
+          <div class="seat-top"><span class="avatar" aria-hidden="true">{{p.playerId.slice(0,1)}}</span>
+            <div><h2>{{p.playerId}} {{p.playerId === me ? '· tu' : ''}}</h2><small>{{p.character.name}}</small></div>
+            <strong class="clock" [attr.aria-label]="'Clock ' + p.playerId">◷ {{clock(p)}}</strong>
+          </div>
+          <div class="resources">@for (r of resources; track r.key) {<span [attr.title]="r.key">{{r.label}} <b>{{p.character.resources[r.key] ?? 0}}</b></span>}</div>
+          <meter min="0" max="100" [value]="p.character.resources.HEALTH || 0" aria-label="Indicatore salute, valore esatto sopra"></meter>
+          @if (p.character.dead) {<p class="flag">MORTO</p>}
+          @if (view().forfeits[p.playerId]) {<p class="flag">FORFAIT · {{view().forfeits[p.playerId]}}</p>}
+          <div class="tags">
+            @for (s of p.character.statuses; track $index) {<span [attr.title]="s.description">{{s.equip ? 'Equip' : 'Stato'}}: {{s.name}} · {{s.description}} · durata {{s.lastsForTurns ?? '∞'}}</span>}
+            @for (t of p.character.timers; track $index) {<span>Timer {{t.name}} · {{t.timer}}</span>}
+            @if (p.character.immunities.length) {<span>Immunità: {{p.character.immunities.join(', ')}}</span>}
+          </div>
+          <div class="items" [attr.aria-label]="'Oggetti di ' + p.playerId">
+            <small>Oggetti {{p.character.items.length}}/{{p.character.itemsSize}}</small>
+            @for (i of p.character.items; track $index) {
+              <button [attr.data-item-owner]="p.playerId" [attr.data-item-index]="$index" [disabled]="!allowed(p,true) || locked()" [attr.aria-pressed]="item() === i.name && (target() === p.playerId || (target() === 'SELF' && p.playerId === me))" (click)="choose(p,i)">♧ {{i.name}}</button>
+            }
+          </div>
+          <div class="seat-bottom"><small>Mano {{count(p)}} · Mazzo {{p.deck}}</small><button class="target" [attr.data-target]="p.playerId" [disabled]="!allowed(p) || locked()" (click)="choose(p)">Scegli {{p.playerId}}</button></div>
+        </article>
+      }
+      <div class="center-note"><b>Si sceglie insieme.</b><span>Le mosse altrui restano nascoste.</span></div>
+    </section>
+    <section class="hand-zone" aria-label="La tua mano">
+      <div class="section-title"><h2>La tua mano <span>6 carte</span></h2><small>Click, tap o tastiera · nessun trascinamento richiesto</small></div>
+      <div class="hand">
+        @for (c of hand(); track $index) {
+          <button class="card" [class.selected]="selected() === $index" [class.persistent]="c.basicAction || c.characterBound" [attr.data-card]="$index" [attr.aria-pressed]="selected() === $index" (click)="select($index,$event)">
+            <span class="card-type">{{kind(c)}}</span><strong>{{c.name}}</strong>
+            <span class="card-symbol" aria-hidden="true">{{c.characterBound ? '↔' : c.basicAction ? '♧' : '✦'}}</span>
+            <span class="cost">@for (cost of c.cost | keyvalue; track cost.key) {<span>{{cost.key}} {{cost.value}} </span>}@empty {<span>Costo —</span>}<b>PR {{c.priority}}</b></span>
+            <span class="card-preview">{{c.canTarget.join(' · ')}}</span>
+            <span class="read">Seleziona e leggi il testo ↗</span>
+          </button>
+        }
+      </div>
+    </section>
+    <section class="decision" aria-label="Dettagli e conferma">
+      <article class="inspection" aria-live="polite">
+        @if (card(); as c) {
+          <span class="eyebrow">{{kind(c)}}</span><h2>{{c.name}}</h2>
+          <div class="full-text" [innerHTML]="c.effect"></div>
+          @if (c.characterBound) {<label for="discard">Carta da scartare (un'altra regolare)</label><select id="discard" [value]="discard()" [disabled]="locked()" (change)="discard.set($any($event.target).value)"><option value="">Scegli lo scarto</option>@for (d of discards(); track $index) {<option [value]="d.name">{{d.name}}</option>}</select>}
+          @if (needsItem(c)) {<p>Scegli un oggetto sul tavolo. Il riepilogo mostra anche il proprietario. Copie omonime: stesso comando per nome.</p>}
+        } @else {<h2>La prossima botta?</h2><p>Seleziona una carta, leggi il testo, poi indica il bersaglio. I numeri sul tavolo sono quelli della vista.</p>}
+      </article>
+      <div class="confirmation">
+        <p role="status" data-testid="phase">{{phase()}}</p>
+        <p class="choice">Bersaglio: <b>{{target() || 'da scegliere'}}</b>@if(item()){<span> · Oggetto: <b>{{item()}}</b></span>}@if(discard()){<span> · Scarto: <b>{{discard()}}</b></span>}</p>
+        <div class="controls"><button class="primary" data-testid="confirm" [disabled]="!canConfirm()" (click)="confirm()">Conferma scelta</button><button data-testid="clear" [disabled]="locked()" (click)="clear()">Annulla selezione</button><button (click)="cancel()">Salta effetti</button></div>
+        <small>Anteprima: nessuna risorsa sottratta all'invio. La validazione resta al server.</small>
+      </div>
+    </section>
+    <details class="report" [open]="view().resolvedMoves.length > 0"><summary>Riepilogo dell'ultimo round · consultabile</summary>
+      @for (m of view().resolvedMoves; track $index) {<p><b>{{m.playerId}} → {{m.targetId}}</b> · {{m.playedCardName}}</p>@for (r of m.moveReport | keyvalue; track r.key) {<p>{{r.key}}: {{r.value?.join(' · ')}}</p>}}
+      @if (view().turn === 8) {<p>Variazione complessiva osservata Ada: H 120 → 80; A 20 → 10. Non attribuita a stati intermedi.</p>}
+    </details>
+    <details class="report"><summary>Diagnostica della prova · comando composto</summary><pre>{{sent() || command() | json}}</pre></details>
+  </main>
+  <footer>Proposta fumetto/rissa · SVG e CSS originali · nessun asset del debug · non certifica una partita reale</footer>
+</div>

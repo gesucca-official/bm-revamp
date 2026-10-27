@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-27T12:45:00+00:00",
+  "status": "C0_CLOSED_BY_OWNER_DECISION",
+  "c1_started": false,
+  "r1": "APPROVED_VISUAL_REFERENCE",
+  "r2_r4": "IMPLEMENTED_AUTOMATED_CHECKS_PASS",
+  "r5": "CLOSED_WITH_OWNER_DEVIATION",
+  "remaining_essential": [],
+  "tests": {
+    "model": {
+      "status": "PASS",
+      "count": 8
+    },
+    "production_build": "PASS",
+    "browser_viewports": 3,
+    "lifecycle": {
+      "status": "PASS",
+      "count": 10
+    },
+    "repository_unit": {
+      "status": "PASS",
+      "server": 251,
+      "debug": 36
+    },
+    "rules": "PASS",
+    "spring_context": {
+      "status": "PASS",
+      "count": 358,
+      "includes_startup": true,
+      "overlaps_unit_tests": true
+    },
+    "match_manifests": "PASS",
+    "repository_suites_note": "server/debug/CLI not modified after the recorded runs; repository suites not repeated for the client-only fix"
+  },
+  "protected": [
+    {
+      "file": "docs/game-rules.md",
+      "sha256": "0543cb843a8831c8d9968cb6888dea80188b6317fa2a4826f0d2e45e2007eb41",
+      "unchanged": true
+    },
+    {
+      "file": "docs/rules-catalog.json",
+      "sha256": "e5fe3dad07c7ac31198bad043f15e48b988483928f52da6d1113d4c84eb7e73f",
+      "unchanged": true
+    },
+    {
+      "file": "server/src/main/resources/cards.sqlite",
+      "sha256": "0e3cbb3574c95985ef417ec8a92daedf3d358f0a1cbb7c1201d6fc7ea9c938ee",
+      "unchanged": true
+    },
+    {
+      "file": "client-debug/src/assets/docs/rules.md",
+      "sha256": "0543cb843a8831c8d9968cb6888dea80188b6317fa2a4826f0d2e45e2007eb41",
+      "unchanged": true
+    }
+  ],
+  "preexisting_server_debug_cli_diff_unchanged": true,
+  "measured_sized_current_build_identical": true,
+  "build_files": [
+    {
+      "file": "art/atlas.webp",
+      "sha256": "64e2deeadc4946e00045ebb360ebc79866f8b717d9999d6c61c35607b7020815"
+    },
+    {
+      "file": "art/manifest.json",
+      "sha256": "b83568fbaa85b9cafbff346350d2860677feba6091b178f3f9a661ce49601f3c"
+    },
+    {
+      "file": "art/table.webp",
+      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
+    },
+    {
+      "file": "assets/browserAll-dsP9w1gy.js",
+      "sha256": "18480d54aab33a3e4964bb02ce165eb4a2fb00de93ab7aee0bdbfb987c89eaff"
+    },
+    {
+      "file": "assets/Cache-fEtFvAzf.js",
+      "sha256": "e7e2ce32bbc0d5153c8a36b2bfe1fc748c7f825608266659d52079b26ac458a9"
+    },
+    {
+      "file": "assets/CanvasPool-BZ0sA3Gt.js",
+      "sha256": "e2ccf0eaa2158cc152819a493c056cd66579de2cf2f1aea781cea6acfc14191c"
+    },
+    {
+      "file": "assets/canvasUtils-BlnLdLY1.js",
+      "sha256": "1a9ff1194ab02084137984cd2a2adb2e8c8fa78b073606c1dd564500e48da2bd"
+    },
+    {
+      "file": "assets/Filter-B0XMl_yL.js",
+      "sha256": "5913961319d4cb4a786b7feec6c1cff98b46ae2148570a6089c00772f8b4a12d"
+    },
+    {
+      "file": "assets/GCManagedHash-DAvwKUzM.js",
+      "sha256": "8bf5dc944cafe2a3a9efb3a61a3e5bbcbfeb45d768f1d1ffb688905b254cbb6f"
+    },
+    {
+      "file": "assets/getTexelRangeRects-Bt1M-OmZ.js",
+      "sha256": "221f12045d9e278d2174d6c7b6977169eb7784eae7eb9eb9bd65020007f7250b"
+    },
+    {
+      "file": "assets/getTextureBatchBindGroup-CckcnH94.js",
+      "sha256": "00cbd0cc9465d16ca748a4205d08ab418c472892e38f6cc38791e5dc5d77720e"
+    },
+    {
+      "file": "assets/GraphicsContext-DJRE2111.js",
+      "sha256": "040036b2b3f95fadee76dcf89de80dd72f3dc23173ff7dbf9b341d399fe3f698"
+    },
+    {
+      "file": "assets/index-DKUYofTm.css",
+      "sha256": "cd5f813327c41b6f83f0153cd57986dc3fd6a0bb658148126c2f1ec945d5e862"
+    },
+    {
+      "file": "assets/index-DpJU2q7S.js",
+      "sha256": "a07006ebb1227ed6d99852d4cac210b5bd3e2df224beecd8945d0f188dd653b8"
+    },
+    {
+      "file": "assets/init-Dcn52k02.js",
+      "sha256": "0db4e99adf992c6e987c8b7035ec95e32f60ac5ce2d57a6fec5c65163a9433be"
+    },
+    {
+      "file": "assets/RenderTargetSystem-9obqq6wg.js",
+      "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
+    },
+    {
+      "file": "assets/webworkerAll-DzJOkI4J.js",
+      "sha256": "9e15f857026f585d5f597a1c491bf96a94c4684f610b5ee9a5dc6ee38c33a822"
+    },
+    {
+      "file": "index.html",
+      "sha256": "d00256201a9016ecce84a8b564e0ba01994f640257e7ff6011d7412db7410d2b"
+    }
+  ],
+  "local_markdown_links_checked": 125,
+  "documents_checked": [
+    "docs/client-roadmap.md",
+    "docs/design/client-c0/bar-table-revision.md",
+    "docs/design/client-c0/README.md",
+    "docs/design/client-c0/r1/README.md",
+    "client-c0/README.md",
+    "client-c0/revision/README.md",
+    "docs/reports/client-c0-r2-report.md",
+    "docs/reports/client-c0-resume.md",
+    "docs/design/client-c0/r2-assets/README.md",
+    "docs/design/client-c0/r2-screenshots/README.md"
+  ],
+  "js_gzip": 255535,
+  "total_gzip": 941150,
+  "physical_touch_tested": true,
+  "artifact_prompt_limit": "R2 exact prompts lost at interruption; reconstructed summaries explicitly labelled",
+  "work_record": {
+    "dates": [
+      "2026-10-26",
+      "2026-10-27"
+    ],
+    "usage_limit_interruptions": 2,
+    "active_hours": "not reliably measured",
+    "scope": "one synthetic scene; R1 artwork approval separate from R2-R5 interaction acceptance"
+  },
+  "physical_touch": {
+    "attempts": [
+      {
+        "file": "docs/reports/client-c0-r2/physical/capture-2026-10-27T12-14-14-727Z.json",
+        "device": "iPhone 16 Pro, Safari, 750x292 CSS px, DPR 3, rete locale con codice",
+        "build": "precedente alla correzione",
+        "status": "FAIL",
+        "frame_within_33ms": 0.9626,
+        "input_max_ms": 125,
+        "animations_covered": false
+      },
+      {
+        "file": "docs/reports/client-c0-r2/physical/capture-2026-10-27T12-29-18-527Z.json",
+        "device": "iPhone 16 Pro, Safari, 750x292 CSS px, DPR 3, rete locale con codice",
+        "build": "corretta, identica a performance.json",
+        "status": "FAIL",
+        "frame_within_33ms": 0.987,
+        "input_max_ms": 116,
+        "input_typical_ms": "70-90",
+        "animations_covered": true
+      }
+    ],
+    "fix": "titoli adattati una volta per dimensione; nodi del tavolo distrutti dopo il render successivo per riusare le texture del testo",
+    "fix_diagnostic": "solo PC, CPU rallentata 6x, 750x292 DPR 3 emulato: input mediano 160->86 ms, p95 210->110 ms; non e una misura di telefono",
+    "status": "ACCEPTED_WITH_OWNER_DEVIATION",
+    "owner_decision": {
+      "date": "2026-10-27",
+      "text": "fluidita percepita accettabile; non insistere ora sulle prestazioni",
+      "threshold_changed": false,
+      "measured_input_max_ms": 116,
+      "threshold_input_max_ms": 100,
+      "dom_svg_comparison": "not performed by owner decision",
+      "follow_up": "incremental table redraw to reconsider in C4 with unchanged thresholds"
+    }
+  },
+  "human_review": {
+    "date": "2026-10-27",
+    "reviewer": "proprietario",
+    "device": "iPhone 16 Pro, Safari landscape 750x292",
+    "results": {
+      "B1": "si",
+      "B2": "si",
+      "B3": "si, rifinire dettagli grafici",
+      "B4": "si, poco intuitivo: la carta presa deve seguire dito/mouse",
+      "B5": "si",
+      "B6": "si, controlli da rendere piu curati",
+      "B7": "si",
+      "B8": "si, barra Safari ingombrante; futuro contenitore a schermo intero",
+      "B9": "si"
+    },
+    "orientation": "landscape forced, rotation request in portrait"
+  },
+  "stack_confirmed": "PixiJS 8.22.0 + TypeScript 5.9.3, React/ReactDOM 19.3.1, Vite 8.3.5",
+  "carry_over": {
+    "C1": [
+      "dragged card visibly follows finger/mouse for aiming and reordering",
+      "watch touch input latency (116 ms measured)"
+    ],
+    "C4": [
+      "incremental table redraw with C0 thresholds",
+      "graphic detail and bound/check/cancel control polish",
+      "new physical measurement at full parity"
+    ]
+  }
+}

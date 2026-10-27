@@ -1,0 +1,277 @@
+{
+  "date": "2026-10-26T18:00:14.298Z",
+  "browser": "156.0.4314.42",
+  "mode": "automazione headless, touch emulato",
+  "results": [
+    {
+      "sample": {
+        "name": "desktop",
+        "width": 1366,
+        "height": 768,
+        "touch": false
+      },
+      "pass": true,
+      "geometry": {
+        "overflow": 0,
+        "cards": [
+          {
+            "x": 24,
+            "y": 589.78125,
+            "w": 211.328125,
+            "h": 196
+          },
+          {
+            "x": 245.328125,
+            "y": 589.78125,
+            "w": 211.328125,
+            "h": 196
+          },
+          {
+            "x": 466.65625,
+            "y": 589.78125,
+            "w": 211.328125,
+            "h": 196
+          },
+          {
+            "x": 687.984375,
+            "y": 589.78125,
+            "w": 211.34375,
+            "h": 196
+          },
+          {
+            "x": 909.328125,
+            "y": 589.78125,
+            "w": 211.328125,
+            "h": 196
+          },
+          {
+            "x": 1130.65625,
+            "y": 589.78125,
+            "w": 211.328125,
+            "h": 196
+          }
+        ],
+        "essential": [
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          196,
+          196,
+          196,
+          196,
+          196,
+          196,
+          44,
+          44,
+          44
+        ],
+        "fullTextFont": "15px"
+      },
+      "sequenceMs": 808,
+      "checks": [
+        "6 carte e 5 partecipanti",
+        "testo lungo",
+        "ordinaria/bound/FAR_ITEM/NEAR_ITEM",
+        "duplicati identico comando",
+        "invio/rifiuto/pending/drop senza retry",
+        "cancellazione durante animazione e focus conservato",
+        "resize interrompe effetti",
+        "sequenza completa sotto 2 s",
+        "stesso turno aggiorna clock conservando scelta",
+        "nessun replay vista duplicata",
+        "movimento ridotto dal browser",
+        "H negativo/oltre 100, morto/forfait",
+        "tastiera Enter/Escape",
+        "target >=44 CSS px",
+        "nessuna richiesta esterna"
+      ],
+      "pageErrors": []
+    },
+    {
+      "sample": {
+        "name": "touch-emulated",
+        "width": 844,
+        "height": 390,
+        "touch": true
+      },
+      "pass": true,
+      "geometry": {
+        "overflow": 0,
+        "cards": [
+          {
+            "x": 12,
+            "y": 605.140625,
+            "w": 131.65625,
+            "h": 216
+          },
+          {
+            "x": 149.65625,
+            "y": 605.140625,
+            "w": 131.671875,
+            "h": 216
+          },
+          {
+            "x": 287.328125,
+            "y": 605.140625,
+            "w": 131.671875,
+            "h": 216
+          },
+          {
+            "x": 425,
+            "y": 605.140625,
+            "w": 131.65625,
+            "h": 216
+          },
+          {
+            "x": 562.65625,
+            "y": 605.140625,
+            "w": 131.671875,
+            "h": 216
+          },
+          {
+            "x": 700.328125,
+            "y": 605.140625,
+            "w": 131.671875,
+            "h": 216
+          }
+        ],
+        "essential": [
+          44,
+          51.5625,
+          51.5625,
+          51.5625,
+          44,
+          44,
+          44,
+          44,
+          44,
+          216,
+          216,
+          216,
+          216,
+          216,
+          216,
+          44,
+          44,
+          44
+        ],
+        "fullTextFont": "15px"
+      },
+      "sequenceMs": 807.8000000715256,
+      "checks": [
+        "6 carte e 5 partecipanti",
+        "testo lungo",
+        "ordinaria/bound/FAR_ITEM/NEAR_ITEM",
+        "duplicati identico comando",
+        "invio/rifiuto/pending/drop senza retry",
+        "cancellazione durante animazione e focus conservato",
+        "resize interrompe effetti",
+        "sequenza completa sotto 2 s",
+        "stesso turno aggiorna clock conservando scelta",
+        "nessun replay vista duplicata",
+        "movimento ridotto dal browser",
+        "H negativo/oltre 100, morto/forfait",
+        "tastiera Enter/Escape",
+        "target >=44 CSS px",
+        "nessuna richiesta esterna"
+      ],
+      "pageErrors": []
+    },
+    {
+      "sample": {
+        "name": "portrait-emulated",
+        "width": 390,
+        "height": 844,
+        "touch": true
+      },
+      "pass": true,
+      "geometry": {
+        "overflow": 0,
+        "cards": [
+          {
+            "x": 12,
+            "y": 1052.265625,
+            "w": 116,
+            "h": 241
+          },
+          {
+            "x": 137,
+            "y": 1052.265625,
+            "w": 116,
+            "h": 241
+          },
+          {
+            "x": 262,
+            "y": 1052.265625,
+            "w": 116,
+            "h": 241
+          },
+          {
+            "x": 12,
+            "y": 1302.265625,
+            "w": 116,
+            "h": 225
+          },
+          {
+            "x": 137,
+            "y": 1302.265625,
+            "w": 116,
+            "h": 225
+          },
+          {
+            "x": 262,
+            "y": 1302.265625,
+            "w": 116,
+            "h": 225
+          }
+        ],
+        "essential": [
+          44,
+          64.75,
+          64.75,
+          51.5625,
+          44,
+          44,
+          44,
+          44,
+          44,
+          241,
+          241,
+          241,
+          225,
+          225,
+          225,
+          44,
+          44,
+          44
+        ],
+        "fullTextFont": "15px"
+      },
+      "sequenceMs": 816,
+      "checks": [
+        "6 carte e 5 partecipanti",
+        "testo lungo",
+        "ordinaria/bound/FAR_ITEM/NEAR_ITEM",
+        "duplicati identico comando",
+        "invio/rifiuto/pending/drop senza retry",
+        "cancellazione durante animazione e focus conservato",
+        "resize interrompe effetti",
+        "sequenza completa sotto 2 s",
+        "stesso turno aggiorna clock conservando scelta",
+        "nessun replay vista duplicata",
+        "movimento ridotto dal browser",
+        "H negativo/oltre 100, morto/forfait",
+        "tastiera Enter/Escape",
+        "target >=44 CSS px",
+        "nessuna richiesta esterna"
+      ],
+      "pageErrors": []
+    }
+  ]
+}

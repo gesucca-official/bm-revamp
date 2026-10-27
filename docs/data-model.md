@@ -1,8 +1,8 @@
 > **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
 > [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
 > Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è ancora
-> [in preparazione](client-roadmap-preparation.md), senza piano approvato.
+> restano storico, non attività correnti. La nuova roadmap client è descritta
+> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
 
 > Riferimento corrente I22: schema V001–V003 e registro attivi I19b; la chiusura
 > I24 al restart aggiorna atomicamente evento OUTCOME e marker del registro senza
