@@ -20,8 +20,8 @@ percorso quick 1vCom già esistente (osservazioni O11–O14 con O3 e O4 della
 | Test automatici | Client 30 test unitari (19 di C1 e 11 nuovi su attenuazione, ruoli, guadagni, indicatore, stati e geometria duello/FFA). Server 252 unit test, contesto Spring completo 359, client debug 36, `check-rules.py`: tutti verdi. Typecheck, build e peso entro il budget. |
 | Partite reali su server locale | **Sì.** `Verify` esteso con i controlli C2a, sulla build finale dopo la revisione del proprietario: 5 partite fino all'esito a 1366×768 (2 vittorie, 2 sconfitte, 1 pareggio) e 3 a 844×390 (1 vittoria, 2 sconfitte), entrambi i personaggi in ciascuna esecuzione. |
 | Emulazione | 844×390 sullo stesso PC, con il mouse. Nessuna emulazione touch. |
-| Dispositivo fisico | **No.** Su iPhone C2a non è stata provata. |
-| Valutazione umana | **No.** Resta alla prova umana B. |
+| Dispositivo fisico | **Sì.** Il proprietario ha provato tutta C2a su iPhone (27 ottobre 2026): giudizio umano, nessuna misura. |
+| Valutazione umana | **Sì.** Prova umana B senza rilievi rilevanti; il proprietario ha provato anche su desktop e chiude C2a (27 ottobre 2026). |
 
 ### O14 — Ruolo nel catalogo (commit dati separato)
 
@@ -251,7 +251,7 @@ cattura nuova, aggiunta a `verify.mjs` senza altre modifiche.
 
 ### Limiti e residui
 
-- O9 **chiusa** dal proprietario dopo la prova su iPhone. Il resto di C2a su iPhone e la prova umana B restano da fare.
+- C2a e O9 **chiuse** dal proprietario dopo la prova su iPhone e desktop e la prova umana B, senza rilievi rilevanti.
 - Le illustrazioni sono provvisorie e senza cornice per tipologia (O8, C4).
 - Le sorgenti PNG e i prompt letterali non sono tracciati: l'atlante non si
   rigenera da un clone pulito.

@@ -1,11 +1,12 @@
 # Roadmap del client web animato
 
-**27 ottobre 2026 — versione 12, C0 e C1 chiuse, C2 avviata.** C1 è chiusa dal
+**27 ottobre 2026 — versione 14, C0, C1 e C2a chiuse, C2b non iniziata.** C1 è chiusa dal
 proprietario dopo la prova su iPhone e la prova umana A; le osservazioni
 del proprietario e della prova A sono assegnate alle tappe
 ([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
 primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
-partite reali in locale; iPhone e prova umana non ancora
+partite reali in locale, provato dal proprietario su iPhone e desktop e **chiuso**
+insieme alla prova umana B, che non ha evidenziato nulla di rilevante
 ([rapporto C2](reports/client-c2-report.md)). C2b non è iniziata. Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
 automatici, partite reali in locale e prova su iPhone confermata dal proprietario). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
@@ -470,8 +471,8 @@ deve poter continuare dopo un forfait altrui. Le scadenze rare si verificano
 con CLI/fixture, senza far attendere ripetutamente i giocatori.
 
 **Blocchi.** C2a «leggibilità di base» (O11–O14 con O3/O4, solo quick 1vCom):
-**implementato e verificato su server locale** il 27 ottobre 2026, in attesa di
-iPhone e giudizio del proprietario ([rapporto](reports/client-c2-report.md#c2a--leggibilità-di-base)).
+**chiuso** dal proprietario il 27 ottobre 2026, dopo verifica su server locale,
+prova su iPhone e desktop e prova umana B senza rilievi ([rapporto](reports/client-c2-report.md#c2a--leggibilità-di-base)).
 O9 (illustrazioni provvisorie) non è in C2a: è stata fatta dopo, 40 illustrazioni in un atlante
 ([rapporto](reports/client-c2-report.md#o9--illustrazioni-provvisorie)). C2b porta le modalità e il resto
 della parità; la FFA usa la geometria già preparata e verificata in unità da C2a
@@ -647,13 +648,17 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** prova del proprietario di C2a, anche su iPhone, poi C2b solo
-su istruzione esplicita. O9 è chiusa. Resta la prova su iPhone del resto di C2a e la prova umana B. C2 estende lo stesso
+**Prossimo passo:** C2b solo su istruzione esplicita. C2a e O9 sono chiuse. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 14 — 27 ottobre 2026, chiusura C2a:** il proprietario ha provato
+  tutta C2a su iPhone e su desktop e la giudica adeguata per ora; la prova umana B
+  non ha evidenziato nulla di rilevante. C2a è chiusa. Regole, server, catalogo e
+  debug invariati. C2b non iniziata.
 
 - **Versione 13 — 27 ottobre 2026, C2 / O9:** implementate le illustrazioni
   provvisorie: 40 immagini generate ex novo in un atlante WebP 2048×1536 (riquadri
