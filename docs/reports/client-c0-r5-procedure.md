@@ -8,6 +8,8 @@ Nessuna emulazione ha sostituito questi passaggi; C1 non inizia senza istruzione
 
 ## Evidenze già presenti
 
+Situazione all'avvio della procedura; gli esiti A/B sono registrati [sotto](#esiti).
+
 | Area | Stato | Fonte |
 |---|---|---|
 | R1 riferimento visivo | Approvato dal proprietario | [approval.md](../design/client-c0/r1/approval.md) |

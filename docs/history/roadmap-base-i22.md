@@ -6,7 +6,7 @@
 > «resta aperto», versioni e raccomandazioni modello sono riferite alla data
 > della rispettiva sezione, non costituiscono pianificazione attiva.
 > Il backlog finale è differito, non approvato per l'esecuzione.
-> [Indice corrente](../roadmap.md) · [Preparazione client](../client-roadmap-preparation.md).
+> [Indice corrente](../roadmap.md) · [Preparazione client](client-roadmap-preparation.md).
 
 # Roadmap verso la versione base approvata
 

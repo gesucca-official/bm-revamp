@@ -20,7 +20,7 @@ Il termine “external” nei bean e package mantiene compatibilità con l'iniez
 
 ## Schema e protezioni sui file
 
-Fonte eseguibile: [V001__initial.sql](../../bm-server/src/main/resources/db/application/V001__initial.sql). Inizializzazione: [ApplicationDatabase](../../bm-server/src/main/java/com/gsc/bm/conf/db/ApplicationDatabase.java).
+Fonte eseguibile: [V001__initial.sql](../../server/src/main/resources/db/application/V001__initial.sql). Inizializzazione: [ApplicationDatabase](../../server/src/main/java/com/gsc/bm/conf/db/ApplicationDatabase.java).
 
 | Tabella | Identità e contenuto |
 |---|---|
@@ -44,7 +44,7 @@ I mazzi conservano le cinque proprietà UserStoredDeck e i binding originali; no
 
 Le scritture singole usano statement parametrizzati e upsert; operazioni composte possono usare `externalDbTransactionManager` (DataSourceTransactionManager). Le cancellazioni multiple dei log sono transazionali; il controllo accessi ai controller resta I06/I20. Un vincolo FK violato in una transazione è provato annullare anche la precedente scrittura dell'account.
 
-Email disabilitata di default: [MailConfiguration](../../bm-server/src/main/java/com/gsc/bm/conf/MailConfiguration.java) fornisce un sender che fallisce esplicitamente prima di qualsiasi connessione SMTP. Non simula una mail inviata. Per abilitarla servono `app.mail.enabled=true` e configurazione SMTP esplicita, fuori dal perimetro corrente.
+Email disabilitata di default: [MailConfiguration](../../server/src/main/java/com/gsc/bm/conf/MailConfiguration.java) fornisce un sender che fallisce esplicitamente prima di qualsiasi connessione SMTP. Non simula una mail inviata. Per abilitarla servono `app.mail.enabled=true` e configurazione SMTP esplicita, fuori dal perimetro corrente.
 
 Nessun account amministrativo o giocatore viene creato automaticamente. HttpSecurityConfig accetta username/password HTTP Basic solo se entrambi configurati; senza valori non crea credenziali di default. Questo non completa l'autorizzazione applicativa: i difetti legacy su identità e destinazioni STOMP restano I06. I03 non implementa registrazione locale semplificata, Elo, reconnect o draw automatico dei match dopo restart.
 
@@ -59,7 +59,7 @@ Nessun account amministrativo o giocatore viene creato automaticamente. HttpSecu
 | Archivio JAR | Migrazione inclusa, nessun driver PostgreSQL/hibernate-types-52, catalogo incluso byte-identico al sorgente corrente |
 | Hash file preesistenti | Regole, catalogo e modifiche alle carte presenti prima di I03 invariati |
 
-I 73 test includono i test di conformità già presenti nel workspace: non sono tutti nuovi di I03. Nuove prove: [ApplicationSchemaTest](../../bm-server/src/test/java/com/gsc/bm/ApplicationSchemaTest.java) (2), [ApplicationPersistenceTest](../../bm-server/src/test/java/com/gsc/bm/ApplicationPersistenceTest.java) (7) e il test originale contextLoads ora verde con [SqliteContextSupport](../../bm-server/src/test/java/com/gsc/bm/SqliteContextSupport.java).
+I 73 test includono i test di conformità già presenti nel workspace: non sono tutti nuovi di I03. Nuove prove: [ApplicationSchemaTest](../../server/src/test/java/com/gsc/bm/ApplicationSchemaTest.java) (2), [ApplicationPersistenceTest](../../server/src/test/java/com/gsc/bm/ApplicationPersistenceTest.java) (7) e il test originale contextLoads ora verde con [SqliteContextSupport](../../server/src/test/java/com/gsc/bm/SqliteContextSupport.java).
 
 Il profilo `test` usa un nuovo file sotto `target/test-databases` con override DynamicPropertySource; non usa il database locale dell'utente. Copertura:
 

@@ -1,4 +1,4 @@
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](../game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](../rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](../game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](../rules-conformance.md).
 
 # I01 — Toolchain e build riproducibile
 
@@ -77,7 +77,7 @@ Il primo bootstrap e i primi download richiedono accesso di rete. In questa sess
 | Smoke HTTP locale | 6 risorse verificate byte per byte con HTTP 200: index, CSS, runtime, polyfills, main e regolamento; listener chiuso al termine |
 | JUnit contextLoads | Runner realmente avviato: 1 test, 0 failure di asserzione, **1 errore**, 0 skipped; contesto non caricato |
 
-Errore di `contextLoads`: `externalDbEntityManagerFactory → dataSourceExternalDB → NullPointerException`, perché manca `spring.datasource.external.driver-class-name` richiesto da `Objects.requireNonNull` in [ExternalDbConfig.dataSource](../../bm-server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java). Non è errore di compilazione, né una regola di gioco fallita: il test dipende dalla configurazione DB applicativa e non ha un profilo isolato. Non è stato corretto o disabilitato per ottenere un verde artificiale; isolamento del test e bootstrap persistente spettano a I02/I03.
+Errore di `contextLoads`: `externalDbEntityManagerFactory → dataSourceExternalDB → NullPointerException`, perché manca `spring.datasource.external.driver-class-name` richiesto da `Objects.requireNonNull` in [ExternalDbConfig.dataSource](../../server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java). Non è errore di compilazione, né una regola di gioco fallita: il test dipende dalla configurazione DB applicativa e non ha un profilo isolato. Non è stato corretto o disabilitato per ottenere un verde artificiale; isolamento del test e bootstrap persistente spettano a I02/I03.
 
 Log locali: `.build-logs/server-package.log`, `server-rebuild.log`, `client-install.log`, `client-build.log`, `server-test.log`, `clean-offline-build.log`. I log grezzi sono diagnostica generata; questo documento conserva gli esiti necessari anche fuori dalla macchina. La build clean può sostituire target/surefire-reports: la prova JUnit resta registrata in server-test.log.
 

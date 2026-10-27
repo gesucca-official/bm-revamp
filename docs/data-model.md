@@ -1,8 +1,7 @@
-> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
-> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
-> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è descritta
-> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
+> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
+> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
+> prossimi/aperti e priorità della base restano storico, non attività correnti.
 
 > Riferimento corrente I22: schema V001–V003 e registro attivi I19b; la chiusura
 > I24 al restart aggiorna atomicamente evento OUTCOME e marker del registro senza
@@ -27,7 +26,7 @@ L'archivio registra l'esito del motore, non ENDED al leave. Le partite abbandona
 
 I19a/b/c completerà eventi immutabili, contesto iniziale, versioni e manifest di export; I19b preparerà il registro persistente degli attivi e gli esiti idempotenti necessari a I24. Compatibilità e prove su copia isolata precedono ogni variazione schema. Nessun campo/tabella Elo richiesto; nessun checkpoint giocabile, restore o cancellazione implicita. CLI I26 userà contratti applicativi, senza scritture dirette al DB nei percorsi funzionali.
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 ## Schema corrente I03 — stato verificato
 

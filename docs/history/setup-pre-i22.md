@@ -44,7 +44,7 @@ Da `E:/bm`, in due terminali: `./scripts/dev.ps1 -Task Server` e `./scripts/dev.
 
 Home, regolamento, schermate login/registrazione e redirect senza sessione verificati nel browser. `python scripts/check-local-proxy.py` controlla REST e upgrade WebSocket con entrambi i processi attivi. Nessun account pronto: login e partita non certificati. Email locale disabilitata; Send Code mostra un errore controllato. Non usare start:heroku per il backend locale. [Report I04](../reports/i04-report.md).
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](../game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](../rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](../game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](../rules-conformance.md).
 
 ## Avvio locale I03: SQLite, nessun PostgreSQL
 
@@ -114,14 +114,14 @@ Le istruzioni ricostruiscono i comandi presenti e le configurazioni richieste. *
 
 | Area | Evidenza |
 |---|---|
-| Java | Target 11 in [pom.xml](../../bm-server/pom.xml), runtime 11 in [system.properties](../../bm-server/system.properties) |
+| Java | Target 11 in [pom.xml](../../server/pom.xml), runtime 11 in [system.properties](../../server/system.properties) |
 | Spring | Boot parent 2.4.3; web, websocket, security, mail, JDBC, Spring Data JPA; versione effettiva delle transitive non risolta in questa sessione |
 | Altre Java | sqlite-dialect 1.0; hibernate-types-52 2.10.0; spring-security-oauth2 2.3.4.RELEASE; commons-collections4 4.1; PostgreSQL/SQLite JDBC, Lombok e JUnit da gestione dipendenze del POM |
-| Maven | Wrapper richiede 3.6.3; wrapper Takari 0.5.6, [maven-wrapper.properties](../../bm-server/.mvn/wrapper/maven-wrapper.properties) |
+| Maven | Wrapper richiede 3.6.3; wrapper Takari 0.5.6, [maven-wrapper.properties](../../server/.mvn/wrapper/maven-wrapper.properties) |
 | Client | Angular core/CLI 11.2.1 nel lock; TypeScript 4.1.5; Phaser 3.52.0; Express 4.17.1; http-proxy-middleware 1.0.6; SockJS 1.5.0; stompjs 2.3.3 |
-| Altre client | Material/CDK, Flex Layout, IonPhaser, RxJS, ngx-markdown, ngx-logger, ngx-loading, SweetAlert2; [package.json](../../bm-web-client/package.json) |
-| Lock client | [package-lock.json](../../bm-web-client/package-lock.json), formato 1; range del manifest e versione risolta non sempre coincidono (Phaser dichiarato ^3.24.1) |
-| Target JS | ES2015 e moduli ES2020; non abilitata modalità strict nel [tsconfig.json](../../bm-web-client/tsconfig.json) |
+| Altre client | Material/CDK, Flex Layout, IonPhaser, RxJS, ngx-markdown, ngx-logger, ngx-loading, SweetAlert2; [package.json](../../client-debug/package.json) |
+| Lock client | [package-lock.json](../../client-debug/package-lock.json), formato 1; range del manifest e versione risolta non sempre coincidono (Phaser dichiarato ^3.24.1) |
+| Target JS | ES2015 e moduli ES2020; non abilitata modalità strict nel [tsconfig.json](../../client-debug/tsconfig.json) |
 
 **M:** Node e npm non sono fissati da `engines`, `.nvmrc` o equivalente nelle copie censite. Non si prescrive una versione esatta senza ricostruire l'ambiente storico e verificarne la compatibilità. PostgreSQL e SMTP non hanno una versione/provisioning documentati.
 
@@ -148,9 +148,9 @@ Il profilo incluso `heroku` legge queste variabili; per una prova locale è poss
 | `log.db` | Y abilita log partita su DB; N li evita e disabilita ingestione log client; un valore assente non ha comportamento equivalente per i due logger |
 | `spring.datasource.external.*` | Proprietà utilizzabili direttamente in una configurazione locale, alternativa al profilo Heroku |
 
-Fonti: [application-heroku.yml](../../bm-server/src/main/resources/application-heroku.yml), [HttpSecurityConfig.configureGlobal](../../bm-server/src/main/java/com/gsc/bm/conf/http/HttpSecurityConfig.java), [ExternalDbConfig.dataSource](../../bm-server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java). Il formato esatto dell'hash amministrativo va verificato con la configurazione Security effettiva; `configureGlobal` passa il valore direttamente a `.password(...)`. La configurazione SMTP base abilita auth/startTLS e specifica trust `smtp.gmail.com`: va confrontata con il servizio scelto.
+Fonti: [application-heroku.yml](../../server/src/main/resources/application-heroku.yml), [HttpSecurityConfig.configureGlobal](../../server/src/main/java/com/gsc/bm/conf/http/HttpSecurityConfig.java), [ExternalDbConfig.dataSource](../../server/src/main/java/com/gsc/bm/conf/db/ExternalDbConfig.java). Il formato esatto dell'hash amministrativo va verificato con la configurazione Security effettiva; `configureGlobal` passa il valore direttamente a `.password(...)`. La configurazione SMTP base abilita auth/startTLS e specifica trust `smtp.gmail.com`: va confrontata con il servizio scelto.
 
-**V:** `application-local.yml` è ignorato da [resources/.gitignore](../../bm-server/src/main/resources/.gitignore) e non presente. Non sono state create credenziali né configurazioni sostitutive.
+**V:** `application-local.yml` è ignorato da [resources/.gitignore](../../server/src/main/resources/.gitignore) e non presente. Non sono state create credenziali né configurazioni sostitutive.
 
 ## Comandi ricostruiti
 
@@ -186,7 +186,7 @@ npm run build
 npm run start:heroku
 ```
 
-Questi ultimi comandi generano `dist/bm-web-client` e lanciano Express sulla porta `PORT` o 4200. **V:** `server.js` inoltra le API agli host Heroku fissi; non è configurato per usare automaticamente il backend locale. Il [Procfile server](../../bm-server/Procfile) usa `PORT`, `JAVA_OPTS` e profilo heroku; il [Procfile client](../../bm-web-client/Procfile) lancia `start:heroku`. **M:** esistenza e funzionamento degli ambienti remoti non controllati.
+Questi ultimi comandi generano `dist/bm-web-client` e lanciano Express sulla porta `PORT` o 4200. **V:** `server.js` inoltra le API agli host Heroku fissi; non è configurato per usare automaticamente il backend locale. Il [Procfile server](../../server/Procfile) usa `PORT`, `JAVA_OPTS` e profilo heroku; il [Procfile client](../../client-debug/Procfile) lancia `start:heroku`. **M:** esistenza e funzionamento degli ambienti remoti non controllati.
 
 ## Prove effettuate il 23 ottobre 2026
 

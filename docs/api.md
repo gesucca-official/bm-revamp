@@ -3,11 +3,10 @@
 > grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
 > nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
 
-> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
-> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
-> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è descritta
-> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
+> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
+> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
+> prossimi/aperti e priorità della base restano storico, non attività correnti.
 
 > Riferimento corrente I22: regolamento 1.6; contratto delle quattro modalità,
 > identità/sessione unica, mazzi, export, clock/forfait/reconnect e ricevuta restart
@@ -72,7 +71,7 @@ Client e server devono essere aggiornati insieme: SUBSCRIBE privati ora su `/use
 
 Nessun nuovo endpoint di provisioning: account sintetici creati all'avvio locale con flag esplicito. REST POST `/api/rest/v1/sign-in/validate` ritorna true per credenziali valide, false per errate/sconosciute nelle prove; CONNECT STOMP login/passcode riuscito dal client per due account e dati profilo ricevuti. Questo non certifica autorizzazioni delle destinazioni o sessione unica, previste in I06. [Report I05](reports/i05-report.md).
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 # API e comunicazione client-server
 
@@ -175,6 +174,6 @@ Fonti: [ClientGameView](../server/src/main/java/com/gsc/bm/service/view/model/cl
 
 - Il tipo client [Player](../client-debug/src/app/model/player.ts) dichiara `deckSize`, il server manda `deck`. Il tipo [Character](../client-debug/src/app/model/character.ts) richiede `dead` e `bindingName`, ma la vista di partita server non li contiene; `GameService.opponents` filtra proprio su `dead`.
 - Il tipo client [Card](../client-debug/src/app/model/card.ts) omette `bindingName` e `item` pur ricevendo dati usati nei mazzi. Le risposte sono assegnate via JSON.parse senza validazione runtime.
-- [BattleScene.handleDropEvent](../client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts) manda `choices:null` per carte ordinarie anche quando serve TARGET_ITEM; [UI_Item](../client-debug/src/app/client-phaser/scnenes/battle/model/ui-item.ts) usa il nome item come target anziché il suo proprietario. Il client debug costruisce invece TARGET_ITEM in [CardInHandComponent.playThis](../client-debug/src/app/client-debug/card-in-hand/card-in-hand.component.ts).
+- BattleScene.handleDropEvent (`client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts`, non più presente) manda `choices:null` per carte ordinarie anche quando serve TARGET_ITEM; UI_Item (`client-debug/src/app/client-phaser/scnenes/battle/model/ui-item.ts`, non più presente) usa il nome item come target anziché il suo proprietario. Il client debug costruisce invece TARGET_ITEM in [CardInHandComponent.playThis](../client-debug/src/app/client-debug/card-in-hand/card-in-hand.component.ts).
 - I comandi usano username/playerId scelti dal client, senza legame al principal. L'autenticazione CONNECT non garantisce autorizzazione su account, partita, bersagli e sottoscrizioni. [WebSocketAuthorizationSecurityConfig](../server/src/main/java/com/gsc/bm/conf/ws/WebSocketAuthorizationSecurityConfig.java).
 - Non risultano idempotency key, sequence number, versione turno, timeout di richiesta, retry applicativo o recupero sessione in [WebsocketService](../client-debug/src/app/service/websocket.service.ts). Il numero `turn` del motore non compare in ClientGameView.

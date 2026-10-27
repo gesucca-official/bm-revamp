@@ -1,5 +1,9 @@
 # C0-R1 — Decisione di rendering
 
+> **Esito:** la scelta è stata implementata in C0-R2–R5 e confermata alla
+> chiusura di C0 il 27 ottobre 2026 ([roadmap](../../../client-roadmap.md#decisione-c0-r1-rivalutata-dopo-la-nuova-direzione-artistica)).
+> Il testo sotto è la proposta originale.
+
 26 ottobre 2026. Proposta per la prossima prova, non implementazione o
 accettazione del gate. La richiesta corrente riapre esplicitamente il confronto
 che la versione 4 della roadmap aveva chiuso.

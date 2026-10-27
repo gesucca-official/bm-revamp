@@ -24,6 +24,7 @@ Le configurazioni Heroku sono storiche; il percorso locale usa il proxy incluso.
 
 La roadmap della base è [archiviata come completata](../docs/roadmap.md).
 La [roadmap del client web animato](../docs/client-roadmap.md) pianifica le stesse
-funzionalità del debug con una nuova esperienza di gioco. Implementazione non
-avviata; asset attuali esclusi dal nuovo client. La
-[ricognizione preparatoria](../docs/client-roadmap-preparation.md) resta disponibile.
+funzionalità del debug con una nuova esperienza di gioco: C0 è chiusa con una
+scena sintetica separata, C1 non è iniziata. Gli asset di questo client sono
+esclusi dal nuovo. Il debug resta il riferimento finché la parità non è
+verificata. [Stato corrente](../docs/README.md#stato-corrente).

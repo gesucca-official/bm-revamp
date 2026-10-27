@@ -5,7 +5,7 @@ carta/ispezione](approval.md), nei file identificati da assets.json.
 Queste immagini rimangono mockup statici della consegna del 26 ottobre.
 Dal 27 ottobre sono disponibili la [scena interattiva](../../../../client-c0/revision/README.md)
 e il [rapporto R2–R5](../../../reports/client-c0-r2-report.md).
-C0 resta aperta per prova fisica e giudizio umano interattivo; C1 non iniziata.
+C0 è chiusa dal 27 ottobre 2026 ([esiti](../../../reports/client-c0-r5-procedure.md#esiti)); C1 non iniziata.
 Le sezioni sotto descrivono la fase statica e i suoi limiti al momento della produzione.
 
 ## Duello
@@ -139,4 +139,5 @@ cronometrate. Questi tempi non sono misure del futuro client.
 
 **Stato aggiornato:** R1 approvata come riferimento artistico; R2–R4
 implementate nella scena separata, R5 parziale. Le prove statiche di questa
-pagina non sostituiscono quelle interattive. C0 aperta, C1 non iniziata.
+pagina non sostituiscono quelle interattive. C0 aperta, C1 non iniziata
+(stato alla consegna R1; C0 è stata chiusa il 27 ottobre 2026).

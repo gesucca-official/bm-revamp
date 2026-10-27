@@ -3,11 +3,10 @@
 > grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
 > nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
 
-> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
-> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
-> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è descritta
-> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
+> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
+> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
+> prossimi/aperti e priorità della base restano storico, non attività correnti.
 
 ## Struttura corrente I22 — 26 ottobre 2026
 
@@ -38,7 +37,7 @@ GameSessionServiceImpl salva uno snapshot prima del comando, ripristina il grafo
 
 ActiveSessions gestisce claim/rilascio sincronizzati; AuthChannelInterceptorAdapter autentica CONNECT e lega SEND/SUBSCRIBE alla sessione; DestinationPolicy applica allowlist, identita e membership prima dei controller. Risposte private standard Spring `/user/queue/...` su broker `/queue`; client aggiornato. Log amministrativi riservati ad ADMIN. [Dettagli I06](reports/i06-report.md). Nessun recupero match o timeout di rientro ancora implementato.
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 ## Architettura corrente dopo I03
 
@@ -93,7 +92,7 @@ flowchart LR
 
 **V:** [SessionService](../client-debug/src/app/service/session.service.ts) conserva account, utenti online, coda e indicatori di caricamento; [GameService](../client-debug/src/app/service/game.service.ts) conserva partita, giocatore e vista e calcola bersagli/carte giocabili. Sono oggetti in memoria del browser: non risultano salvataggi localStorage/sessionStorage nei sorgenti esaminati.
 
-**V:** [UserHubComponent.bounceJoinGameEvent](../client-debug/src/app/user-hub/user-hub.component.ts) passa al client debug oppure alla route Phaser. [PhaserClientComponent.joinGame](../client-debug/src/app/client-phaser/phaser-client.component.ts) espone servizi su `window`; [BattleScene](../client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts) li recupera, carica asset, crea oggetti e converte drag/drop in mosse. Le animazioni leggono report testuali del server. È accoppiamento concreto a variabili globali, non un'interfaccia separata del motore.
+**V:** [UserHubComponent.bounceJoinGameEvent](../client-debug/src/app/user-hub/user-hub.component.ts) passa al client debug oppure alla route Phaser. PhaserClientComponent.joinGame (`client-debug/src/app/client-phaser/phaser-client.component.ts`, non più presente) espone servizi su `window`; BattleScene (`client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts`, non più presente) li recupera, carica asset, crea oggetti e converte drag/drop in mosse. Le animazioni leggono report testuali del server. È accoppiamento concreto a variabili globali, non un'interfaccia separata del motore.
 
 **V:** sviluppo tramite Angular CLI e [proxy.config.json](../client-debug/proxy.config.json); distribuzione tramite [server.js](../client-debug/server.js), che serve `dist/client-debug` e inoltra `/rest` e `/ws` a host Heroku fissi. Non contiene fallback esplicito a `index.html` per route profonde. **D:** ricaricare direttamente `/hub` nella distribuzione Express può produrre 404. Supporto upgrade WebSocket e fallback SockJS da verificare: il proxy non dichiara `ws: true`.
 

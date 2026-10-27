@@ -1,6 +1,22 @@
-# Roadmap — stato e archivio
+# Roadmap — indice
 
-Aggiornamento del **26 ottobre 2026**.
+Aggiornamento del **27 ottobre 2026**. Stato complessivo nell'[indice della
+documentazione](README.md#stato-corrente).
+
+## Roadmap attiva: client web animato
+
+La [roadmap del client web animato](client-roadmap.md), versione 7, definisce
+le tappe C0–C5 verso la parità funzionale con il client debug. **C0 è chiusa**
+dal 27 ottobre 2026 su decisione del proprietario, con stack PixiJS/TypeScript,
+React/HTML e Vite confermato; **C1 non è iniziata** e richiede un'istruzione
+esplicita. Le decisioni ancora aperte sono elencate nel piano; gli asset del
+debug sono esclusi dal nuovo client.
+
+I18/I20/I21/I25 e le feature differite della base conservano il significato
+storico; non sono automaticamente trasferiti nel nuovo percorso. La parità
+comprende le funzioni amministrative già presenti, senza estenderle alla console I20.
+
+## Roadmap archiviata: versione base I22
 
 La roadmap della versione base è **completata e archiviata**. Il proprietario
 ha approvato il candidato `I22-3e71300e057687ba` e i limiti del report il
@@ -9,18 +25,7 @@ ha approvato il candidato `I22-3e71300e057687ba` e i limiti del report il
 - [Roadmap della base archiviata: contenuti e revisioni](history/roadmap-base-i22.md)
 - [Report I22, approvazione ed evidenze](reports/i22-report.md#approvazione)
 - [Stato implementazione e storico delle verifiche](implementation-status.md)
-- [Preparazione della nuova roadmap client](client-roadmap-preparation.md)
-- [Roadmap del client web animato](client-roadmap.md)
-
-La [roadmap del client web animato](client-roadmap.md), versione 2 del
-26 ottobre 2026, definisce tappe C0–C5, parità funzionale con il debug,
-direzione visiva provvisoria, confronto tecnologico e prova breve futura in C0.
-Raccomanda Angular supportato con DOM/SVG, valutando l'ibrido solo su evidenze.
-È pianificazione: implementazione non avviata, decisioni aperte indicate nel
-piano. Gli asset attuali sono esclusi.
-I18/I20/I21/I25 e le feature differite conservano il significato storico;
-non sono automaticamente trasferiti nel nuovo percorso. La parità comprende
-le funzioni amministrative già presenti, senza estenderle alla console I20.
+- [Ricognizione preparatoria della roadmap client](history/client-roadmap-preparation.md), superata dal piano attivo
 
 Il [regolamento vigente](game-rules.md) resta la fonte normativa. Nessuna
 regola, implementazione o evidenza del candidato I22 cambia con l'archiviazione;

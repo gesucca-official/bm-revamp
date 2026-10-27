@@ -1,12 +1,11 @@
-> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
-> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
-> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è descritta
-> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
+> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
+> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
+> prossimi/aperti e priorità della base restano storico, non attività correnti.
 
 > La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 # Modello di dominio
 

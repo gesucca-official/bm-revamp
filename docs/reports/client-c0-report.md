@@ -6,7 +6,10 @@ prima scena; non validano il rifacimento richiesto con mano fisica, calata,
 carte oggetto e mani avversarie coperte. La [roadmap v4](../client-roadmap.md)
 e il [piano C0-R1–R5](../design/client-c0/bar-table-revision.md) sostituiscono
 la direzione visiva e l'elenco dei soli due punti residui di questo rapporto.
-Il rapporto originale resta evidenza tecnica storica; C0 è ancora aperta.
+Il rapporto originale resta evidenza tecnica storica. **Seguito:** C0 è stata
+chiusa il 27 ottobre 2026 con la scena Pixi/React ([rapporto R2–R5](client-c0-r2-report.md),
+[esiti](client-c0-r5-procedure.md#esiti)); i riferimenti a «C0 aperta» e alle
+versioni 3–4 della roadmap sotto sono storici.
 
 **26 ottobre 2026 — elaborati e prototipo consegnati; gate C0 ancora aperto.**
 La raccomandazione resta **Angular supportato, TypeScript, DOM/SVG e Web

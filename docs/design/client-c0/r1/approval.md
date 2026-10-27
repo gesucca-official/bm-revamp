@@ -17,3 +17,6 @@ né certifica interazioni, accessibilità, prestazioni o dispositivi non provati
 Il proprietario autorizza ora C0-R2–R5 con dati sintetici conformi ai DTO,
 senza modificare regole, server, catalogo o debug e senza iniziare C1.
 C0 rimane aperta se manca un criterio essenziale, incluso il touch fisico.
+
+**Seguito:** C0 è stata chiusa il 27 ottobre 2026 su decisione del proprietario,
+con deroga sulla risposta al tocco ([esiti C0-R5](../../../reports/client-c0-r5-procedure.md#esiti)).

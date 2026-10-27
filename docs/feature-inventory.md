@@ -3,11 +3,10 @@
 > grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
 > nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
 
-> **Stato documentale — 26 ottobre 2026:** roadmap della base completata e
-> [archiviata](history/roadmap-base-i22.md), con approvazione I22 già registrata.
-> Le indicazioni datate di incrementi prossimi/aperti e priorità della base
-> restano storico, non attività correnti. La nuova roadmap client è descritta
-> nel [piano del client web animato](client-roadmap.md); implementazione non avviata.
+> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
+> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
+> prossimi/aperti e priorità della base restano storico, non attività correnti.
 
 ## Stato corrente della base — I22, 26 ottobre 2026
 
@@ -36,7 +35,7 @@ le prove e i limiti sono nei report collegati dalla roadmap.
 
 > La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale 1.0](game-rules.md) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 **Evidenza corrente I03:** PostgreSQL sostituito da SQLite applicativo/JDBC; catalogo SQLite/JPA read-only, contesto e repository verificati. 73 test server nel profilo completo e 4 client nella suite ordinaria; JAR locale avviato due volte con dati persistiti. [Report I03](reports/i03-report.md). DB-E nei censimenti legacy sotto va ora letto come persistenza applicativa locale. Le modifiche di regolamento antecedenti a I03 restano normative secondo AGENTS.md, senza variazioni in questo incremento.
 
@@ -115,7 +114,7 @@ Le dipendenze Fxx sono funzionalità; Qxx sono decisioni in [open-questions.md](
 | F23 — Bot casuale: scegliere una mossa valida o il comportamento ammesso quando impossibile | Implementata ma non verificata; [ComPlayer.chooseMove](../server/src/main/java/com/gsc/bm/model/game/ComPlayer.java) | S | F19/F22; Q03/Q15 | Bot casuale sufficiente Q15; validità/no-move/stalli da verificare, nessuna strategia nuova richiesta | Scelta valida in ogni fixture e tempo di calcolo limitato; comportamento senza mosse approvato; nessun blocco della catena | Costi insufficienti, scarti assenti, item assenti, target morti, bot morti; sequenze controllate |
 | F24 — Esito partita e cleanup: vincitore/pareggio, leave e rilascio sessione | Parziale; Game.isOver/getWinner, [GameSessionServiceImpl.leaveGame](../server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java), PhaserClientComponent | C, S | F17/F20; Q03/Q10 | 30 s/mossa con altri umani, nessun timeout mossa vsCom; restart draw senza restore. Dettagli R02/R04/R06 | Esiti ordinari/forfait/restart-draw finalizzati una volta; timeout rispettati; nessun restore, cleanup non perde log/esito | Vittoria/tutti morti, confine 30 s, nessun timeout vsCom, restart attivi, duplicate finalization/leave |
 | F25 — Client debug giocabile e report | Parziale; [DebugClientComponent](../client-debug/src/app/client-debug/debug-client.component.ts), [CardInHandComponent](../client-debug/src/app/client-debug/card-in-hand/card-in-hand.component.ts) | C, S | F14/F17–F24; Q04 | Client scelto per il lavoro corrente Q04, contratti/errori/attese ancora da completare | Quattro modalità attuali giocabili dal debug locale senza console, con errori/esiti visibili e reconnect conforme | E2E azione semplice/bound/item, server rifiuta mossa, esito/nuova partita |
-| F26 — Client Phaser: rendering, drag/drop, dettagli, scarto e animazioni | Parziale; [BattleScene](../client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts), [PhaserClientComponent](../client-debug/src/app/client-phaser/phaser-client.component.ts) | C, S, asset | F25; Q04/Q16 | Completamento Phaser rinviato Q04; lacune legacy restano documentate, non gate corrente | Stesse azioni ed esiti del debug eseguibili; errori visibili, asset validi, scena termina e riparte senza listener residui | Browser drag/drop SELF/OPPONENT/item, bound, report EOT, ridimensionamento, distruzione e seconda partita |
+| F26 — Client Phaser: rendering, drag/drop, dettagli, scarto e animazioni | Parziale; BattleScene (`client-debug/src/app/client-phaser/scnenes/battle/battle-scene.ts`, non più presente), PhaserClientComponent (`client-debug/src/app/client-phaser/phaser-client.component.ts`, non più presente) | C, S, asset | F25; Q04/Q16 | Completamento Phaser rinviato Q04; lacune legacy restano documentate, non gate corrente | Stesse azioni ed esiti del debug eseguibili; errori visibili, asset validi, scena termina e riparte senza listener residui | Browser drag/drop SELF/OPPONENT/item, bound, report EOT, ridimensionamento, distruzione e seconda partita |
 
 ### Operatività e qualità
 

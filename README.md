@@ -6,11 +6,13 @@ La base locale I22 è approvata dal 26 ottobre 2026; la roadmap è conclusa
 nel suo perimetro. La pubblicazione dei sorgenti non costituisce un deploy.
 La fonte normativa è [docs/game-rules.md](docs/game-rules.md), versione 1.6;
 le decisioni sono in [docs/open-questions.md](docs/open-questions.md).
+Stato corrente e indice dei documenti: [docs/README.md](docs/README.md).
 
 | Cartella | Contenuto |
 |---|---|
 | `server/` | Server Spring Boot, catalogo SQLite, migrazioni e test Java |
 | `client-debug/` | Client Angular debug, asset e test client |
+| `client-c0/` | Scena C0 del client animato in `revision/` (Pixi/React, dati sintetici) e laboratorio Angular storico |
 | `scripts/` | Toolchain fissata, build, CLI e verifiche applicative |
 | `docs/` | Regolamento, contratti, roadmap e report |
 | `tools/print-cards/` | Generatore e verificatore delle carte stampabili già esistenti |
@@ -36,15 +38,10 @@ account sintetici: `devAlice/local-alice`, `devBob/local-bob`.
 Il primo download richiede rete; `-Offline` richiede le cache Maven/npm già popolate.
 Le cache, `node_modules`, `target` e `dist` sono escluse da Git e ricostruibili.
 
-```powershell
-./scripts/build.ps1 -Task Test -Offline
-python scripts/check-rules.py
-./scripts/build.ps1 -Task TestServerContext -Offline
-python scripts/verify-match-manifests.py
-```
-
-Il contesto Spring separato comprende anche gli scenari CLI e i riavvii reali.
-Eseguirlo prima del confronto dei manifest. I test ordinari da soli non
+Le quattro verifiche da eseguire prima di proporre una modifica sono elencate
+in [CONTRIBUTING.md](CONTRIBUTING.md) e spiegate nella [guida locale](docs/setup.md#verifiche):
+il contesto Spring separato, che comprende scenari CLI e riavvii reali, va
+eseguito prima del confronto dei manifest; i test ordinari da soli non
 certificano l'avvio applicativo. [Guida locale](docs/setup.md),
 [CLI](docs/cli.md), [candidato I22](docs/reports/i22-report.md).
 
@@ -81,5 +78,6 @@ nuovi permessi di utilizzo con questa pulizia.
 La roadmap della base è [archiviata come completata](docs/roadmap.md).
 La [roadmap del client web animato](docs/client-roadmap.md) pianifica la parità
 funzionale con il debug, dalla prima partita completa alla rifinitura visiva,
-come base per futuri client desktop e mobile. Implementazione non avviata.
-La [ricognizione preparatoria](docs/client-roadmap-preparation.md) resta disponibile.
+come base per futuri client desktop e mobile. **C0 è chiusa** (scena sintetica
+in [`client-c0/revision/`](client-c0/revision/README.md)); **C1 non è iniziata**.
+Stato corrente e classificazione dei documenti: [indice della documentazione](docs/README.md).

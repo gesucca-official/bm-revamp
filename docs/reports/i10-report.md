@@ -4,15 +4,15 @@
 
 ## Modifiche circoscritte
 
-- [GameService](../../bm-web-client/src/app/service/game.service.ts): client iniziale Debug, come richiesto per la fase locale. Phaser resta selezionabile, non verificato da I10.
-- [WebsocketService.joinGame](../../bm-web-client/src/app/service/websocket.service.ts): un secondo join mentre queued e vero non invia un altro comando. Il ready privato cancella la sottoscrizione temporanea e libera lo stato di attesa. Non e idempotenza server o protezione da client arbitrari che inviano nuovi join dopo il ready.
-- [CodeDialogComponent template](../../bm-web-client/src/app/client-debug/code-dialog/code-dialog.component.html): pulsante Continue per Begin, Turn Resolution ed End of Turn Effects, senza dipendere da Esc o click sullo sfondo.
+- [GameService](../../client-debug/src/app/service/game.service.ts): client iniziale Debug, come richiesto per la fase locale. Phaser resta selezionabile, non verificato da I10.
+- [WebsocketService.joinGame](../../client-debug/src/app/service/websocket.service.ts): un secondo join mentre queued e vero non invia un altro comando. Il ready privato cancella la sottoscrizione temporanea e libera lo stato di attesa. Non e idempotenza server o protezione da client arbitrari che inviano nuovi join dopo il ready.
+- [CodeDialogComponent template](../../client-debug/src/app/client-debug/code-dialog/code-dialog.component.html): pulsante Continue per Begin, Turn Resolution ed End of Turn Effects, senza dipendere da Esc o click sullo sfondo.
 
 Il percorso server esistente QuickGameQueuesController -> GameFactoryService -> GameSessionService -> Game/ComPlayer e stato mantenuto. I controlli di appartenenza I06 e il validatore I09 restano in funzione. Non e stato necessario riscrivere componenti per eseguire il primo round.
 
 ## Test deterministico end-to-end sul trasporto
 
-[WebSocketIdentityTest.quickJoinReadyAndFirstRoundAgainstRealBot](../../bm-server/src/test/java/com/gsc/bm/WebSocketIdentityTest.java) usa server Spring reale su porta casuale e account SQLite sintetici. Soltanto nel test, una spy della factory restituisce una partita nota al join di roundHuman. Controller, routing, autenticazione, validatore, servizio partita, risoluzione e ComPlayer sono reali. Nessun endpoint fixture o bot deterministico aggiunto all'applicazione.
+[WebSocketIdentityTest.quickJoinReadyAndFirstRoundAgainstRealBot](../../server/src/test/java/com/gsc/bm/WebSocketIdentityTest.java) usa server Spring reale su porta casuale e account SQLite sintetici. Soltanto nel test, una spy della factory restituisce una partita nota al join di roundHuman. Controller, routing, autenticazione, validatore, servizio partita, risoluzione e ComPlayer sono reali. Nessun endpoint fixture o bot deterministico aggiunto all'applicazione.
 
 Fixture: due Bruiser; umano con SuperImpact (25 VIOLENCE, 40 HIT), bot con la sola Struggle disponibile (5 autodanno e 10 HIT al bersaglio). Dopo costruzione si fissano le prossime carte del mazzo: Grab per l'umano e SuperImpact per il bot.
 
@@ -25,7 +25,7 @@ Verifiche:
 
 Le prove I06/I09 continuano a negare sottoscrizioni ai topic/vista di una partita da parte di estranei. Il test I10 aggiunge la mancata consegna del ready alla sessione di un altro account; non considera riservati i broadcast pubblici di presenza.
 
-Client: [a-websocket.spec.ts](../../bm-web-client/tests/a-websocket.spec.ts) verifica che due join consecutivi producano un solo SEND mentre il primo e in attesa, che la destinazione ready sia privata e che la ricezione svuoti queued e annulli la sottoscrizione.
+Client: [a-websocket.spec.ts](../../client-debug/tests/a-websocket.spec.ts) verifica che due join consecutivi producano un solo SEND mentre il primo e in attesa, che la destinazione ready sia privata e che la ricezione svuoti queued e annulli la sottoscrizione.
 
 ## Prova effettiva nel browser
 

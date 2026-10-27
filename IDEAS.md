@@ -9,11 +9,11 @@ gameplay
 
 app
 
-- reworkare client web attuale, da usare come base per futuri client desktop e mobile
 - creare client desktop (wrappare client web?)
 - creare client mobile (wrappare client mobile?)
 
-## Idee già recepite nella base
+## Idee già recepite nella base o nella roadmap
 
 - CLI testuale per scenari automatici applicativi: I26 completato.
+- Rework del client web come base per futuri client desktop e mobile: [roadmap del client web animato](docs/client-roadmap.md), C0 chiusa e C1 non iniziata.
 - Tipologie delle carte: definite nel [regolamento vigente](docs/game-rules.md).

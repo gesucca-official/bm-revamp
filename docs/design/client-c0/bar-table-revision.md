@@ -184,12 +184,15 @@ misure Angular restano storiche. Il debug non è migrato.
 | C0-R2 Mano fisica — implementata e provata automaticamente | Nella sola scena sintetica: ventaglio, sovrapposizione, ispezione, riordino drag e scambio click/tap, tastiera | Sei carte proprie selezionabili/riordinabili, nessun comando di gioco al riordino, copie omonime non perse. Dorsi avversari coerenti coi conteggi 0/1/6, nessun fronte privato ricostruito. |
 | C0-R3 Calata e oggetti — implementata e provata automaticamente | Drag sul personaggio o sulla carta oggetto; anteprima, check/annulla; scarto bound dalla mano; equivalente click/tap | Ordinaria, bound e oggetto esprimono i payload esistenti. Drop invalido/cancellato produce zero SEND; check produce una sola anteprima comando. Oggetti distinti dalle decorazioni e proprietario evidente, anche fra più carte vicine. |
 | C0-R4 Vita della scena — implementata e provata automaticamente | Pending/rifiuto/resume sintetici, vista durante gesto, cancellazione effetti, resize/zoom/orientamento e movimento ridotto | Nessun costo/danno ottimistico, niente mossa nemica rivelata, nessun input catturato da FX, focus recuperato, clock non sospeso. Presentazione del turno corrente utilizzabile senza scroll di pannelli in landscape. |
-| C0-R5 Nuove misure e giudizio — parziale | Produzione: stessa FFA con sei proprie, quattro mani coperte e carte oggetto alle capacità previste; 60 s per desktop e touch fisico; misure gzip includendo nuovi asset | Stesse soglie di frame/input/peso della roadmap; esiti separati dall'emulazione. Breve verifica umana di atmosfera, lettura e precisione del drop sul minimo, poi decisione del gate. |
+| C0-R5 Nuove misure e giudizio — chiusa con deroga | Produzione: stessa FFA con sei proprie, quattro mani coperte e carte oggetto alle capacità previste; 60 s per desktop e touch fisico; misure gzip includendo nuovi asset | Stesse soglie di frame/input/peso della roadmap; esiti separati dall'emulazione. Breve verifica umana di atmosfera, lettura e precisione del drop sul minimo, poi decisione del gate. |
 
 La prima revisione ha avuto esito negativo; la seconda proposta R1 è stata
 approvata esplicitamente. R2–R4 superano le prove automatiche. R5 ha misure
-desktop e touch emulato, ma manca il dispositivo fisico e il giudizio umano
-interattivo: i test verdi non chiudono questi criteri.
+desktop e touch emulato PASS; su iPhone 16 Pro la fluidità passa, la risposta
+al tocco (116 ms contro 100) è accettata con deroga e la revisione umana è
+superata con riserve ([esiti](../../reports/client-c0-r5-procedure.md#esiti)).
+Le riserve entrano in C1 (carta che segue il dito) e C4 (rifinitura, ridisegno
+incrementale).
 Il limite originario di una giornata riguardava la prima prova: il tempo di
 questo rifacimento va registrato separatamente, evitando una serie aperta di
 prototipi o art completa del set. Una sola scena sintetica continua a bastare.
@@ -203,7 +206,8 @@ Non rinviare a C4 il primo aspetto da videogioco.
 ## Verifiche
 
 La consegna corrente è descritta nel [rapporto R2–R5](../../reports/client-c0-r2-report.md),
-con prove effettive, emulazione e criteri fisici mancanti separati.
+con prove effettive ed emulazione separate; prova fisica e revisione umana
+sono nella [procedura C0-R5](../../reports/client-c0-r5-procedure.md).
 [R1](r1/README.md) conserva immagini approvate e verifiche storiche della fase statica.
 
 ### Storico: aggiornamento del piano precedente a R1

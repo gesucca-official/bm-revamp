@@ -7,8 +7,11 @@ selettore grafico/debug sono stati rimossi, senza modificare il gioco.
 Il server è in `server/` (prima `bm-server/`); il nome Maven e il JAR
 `bm-server-0.0.1-SNAPSHOT.jar` restano invariati.
 I percorsi nei report, nei manifest PDF e negli script del candidato storico I22 identificano
-lo snapshot originale e restano invariati.
-La [roadmap](roadmap.md) conserva criteri e risultati; le precedenti istruzioni
+lo snapshot originale e restano invariati; nei report soltanto la destinazione dei
+collegamenti ai sorgenti è stata aggiornata a `server/` e `client-debug/`.
+Stato corrente e indice dei documenti in [docs/README.md](README.md). La scena C0
+del client animato ha una guida propria in [client-c0/revision](../client-c0/revision/README.md),
+con runtime Node isolato. La [roadmap](roadmap.md) conserva criteri e risultati; le precedenti istruzioni
 operative sono nello [storico](history/setup-pre-i22.md).
 
 ## Prima installazione

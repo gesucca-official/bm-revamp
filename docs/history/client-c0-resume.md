@@ -1,10 +1,13 @@
 # Punto di ripresa C0-R2–R5
 
-> **Storico della sospensione, superato dalla consegna del 27 ottobre 2026.**
-> La ripresa ha completato misure finali, rapporto, inventario e allineamento
-> della roadmap. Stato corrente nel [rapporto R2–R5](client-c0-r2-report.md):
-> C0 aperta per touch fisico e giudizio umano interattivo, C1 non iniziata.
-> Le attività restanti elencate sotto descrivono il momento della sospensione.
+> **Documento storico archiviato, concluso.** Punto di ripresa scritto durante
+> la sospensione del 27 ottobre 2026, prima in `docs/reports/`. La ripresa ha
+> completato misure finali, rapporto, inventario e allineamento della roadmap;
+> in seguito la prova fisica e la revisione del proprietario hanno **chiuso C0**
+> ([esiti](../reports/client-c0-r5-procedure.md#esiti)). Stato corrente
+> nell'[indice della documentazione](../README.md#stato-corrente). Attività
+> restanti, comandi e note sul workspace sotto descrivono soltanto il momento
+> della sospensione: non sono istruzioni attuali.
 
 27 ottobre 2026. **Lavoro sospeso su richiesta del proprietario per limite
 di utilizzo. C0 aperta; C1 non iniziata.** Questo documento serve al modello
@@ -65,17 +68,17 @@ suite pesanti: prima leggere le evidenze già disponibili.
   desktop 1366×768, landscape emulato 844×390, portrait emulato 390×844;
   10 ulteriori controlli lifecycle PASS. Log finale locale:
   .build-logs/client-c0-r2/verification-final.log.
-- [verification.json](client-c0-r2/verification.json) e
-  [lifecycle.json](client-c0-r2/lifecycle.json): comandi ordinari/bound/oggetti,
+- [verification.json](../reports/client-c0-r2/verification.json) e
+  [lifecycle.json](../reports/client-c0-r2/lifecycle.json): comandi ordinari/bound/oggetti,
   SELF, copie equivalenti, zero invii da cancel/riordino, touch nativo iniettato
   via CDP, zoom/orientamento emulati, focus rimosso recuperato, clock durante
   drop, perdita/ripristino WebGL tramite vera estensione, teardown React.
   Il background headless usa anche segnale sintetico: è dichiarato nel test.
-- [size.json](client-c0-r2/size.json) aggiornato dopo l'ultima build:
+- [size.json](../reports/client-c0-r2/size.json) aggiornato dopo l'ultima build:
   **255386 byte JS gzip, 941002 byte totali gzip**, PASS sui budget
   512000 / 1048576. Include TUTTI i file produzione, anche chunk facoltativi,
   texture e manifest. PNG di revisione esclusi perché non distribuiti.
-- [performance.json](client-c0-r2/performance.json): due catture di 60+ s
+- [performance.json](../reports/client-c0-r2/performance.json): due catture di 60+ s
   completate in Edge visibile su Windows, Ryzen 5950X, 32 GiB, RTX 2060.
   Desktop: 60.16 s, 7211 frame, p95 8.5 ms, 99.986% entro 20 ms,
   input massimo 27.4 ms. Touch emulato sullo STESSO PC: 61.88 s,

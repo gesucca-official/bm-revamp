@@ -10,11 +10,11 @@ Aggiornati insieme copia client, versione e descrizioni di rules-catalog.json e 
 
 R04 gia richiedeva parita per ordine dei partecipanti nella partita. Game usava HashMap e stabilita dell'ordine di invio delle mosse; un test storico approvava quest'ultimo comportamento, in contrasto con il testo normativo. Corretti mappa e terzo criterio del comparatore, e aggiornato esplicitamente quel test alla regola. La modifica all'atteso e motivata da questo conflitto, non da un fallimento accidentale. Priorita e ALERTNESS dopo i costi restano i primi due criteri.
 
-Fonti: [MadeOfStone](../../bm-server/src/main/java/com/gsc/bm/model/cards/bruiser/MadeOfStone.java), [BrokenBeerBottle](../../bm-server/src/main/java/com/gsc/bm/model/cards/com/tokens/BrokenBeerBottle.java), [Game](../../bm-server/src/main/java/com/gsc/bm/model/game/Game.java), [RulesConformanceTest](../../bm-server/src/test/java/com/gsc/bm/model/game/RulesConformanceTest.java).
+Fonti: [MadeOfStone](../../server/src/main/java/com/gsc/bm/model/cards/bruiser/MadeOfStone.java), [BrokenBeerBottle](../../server/src/main/java/com/gsc/bm/model/cards/com/tokens/BrokenBeerBottle.java), [Game](../../server/src/main/java/com/gsc/bm/model/game/Game.java), [RulesConformanceTest](../../server/src/test/java/com/gsc/bm/model/game/RulesConformanceTest.java).
 
 ## Transazione locale del servizio
 
-[GameSessionServiceImpl.submitMoveToGame](../../bm-server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java) serializza uno snapshot dell'intero grafo Game prima dell'ultimo comando. Sul grafo vivo esegue submit, mosse automatiche e risoluzione, mantenendo il monitor del servizio. Gli eventi dei turni completati vengono accumulati localmente: logging e notifica update partono dopo il successo della risoluzione.
+[GameSessionServiceImpl.submitMoveToGame](../../server/src/main/java/com/gsc/bm/service/session/GameSessionServiceImpl.java) serializza uno snapshot dell'intero grafo Game prima dell'ultimo comando. Sul grafo vivo esegue submit, mosse automatiche e risoluzione, mantenendo il monitor del servizio. Gli eventi dei turni completati vengono accumulati localmente: logging e notifica update partono dopo il successo della risoluzione.
 
 Una RuntimeException durante submit/risoluzione ripristina tramite Game.restoreFrom giocatori, risorse, mano, mazzo, stati, timer, pending/resolved moves, effetti temporali, turno e log interni. Le mosse gia presentate dagli altri restano; l'ultimo comando fallito viene rimosso, consentendo il nuovo tentativo. Gli errori di mossa mantengono il loro messaggio, gli altri errori di risoluzione producono un messaggio generico tramite il canale privato di GameController. Il ripristino puo sostituire riferimenti interni: i chiamanti devono usare lo stato autorevole del Game, non conservare un vecchio riferimento Player.
 
@@ -24,7 +24,7 @@ Dopo il commit, errori di logging o callback update vengono registrati e non ann
 
 ## Verifiche
 
-Nuovo [RoundIsolationTest](../../bm-server/src/test/java/com/gsc/bm/model/game/RoundIsolationTest.java), cinque scenari:
+Nuovo [RoundIsolationTest](../../server/src/test/java/com/gsc/bm/model/game/RoundIsolationTest.java), cinque scenari:
 
 - Eccezione dopo costo ed effetto: ripristino risorse, stati, timer e mossa precedente; nessuna pubblicazione; nuovo tentativo valido completa il round.
 - Eccezione in timer dopo danni/scarti: salute, costi, countdown e pending ripristinati.

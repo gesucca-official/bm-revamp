@@ -32,7 +32,7 @@ resta [approvata e archiviata](roadmap.md); C0–C5 non riaprono gli incrementi 
 ## Base effettiva e fonti
 
 La ricognizione del 26 ottobre comprende [istruzioni](../AGENTS.md),
-[contributi](../CONTRIBUTING.md), [preparazione precedente](client-roadmap-preparation.md),
+[contributi](../CONTRIBUTING.md), [preparazione precedente](history/client-roadmap-preparation.md),
 [setup](setup.md), [decisioni](open-questions.md), [API](api.md),
 [archivio](match-archive.md) e [report I22](reports/i22-report.md), confrontati
 con i sorgenti correnti. I report attestano la base storica; non certificano
@@ -229,11 +229,11 @@ tavolo; React/ReactDOM 19.3.1 con HTML/CSS per shell e ispezione; Vite 8.3.5.**
 Node 24.13.0 e npm 11.6.2 isolati, dipendenze e integrità fissate nel lock.
 La build supera peso e misure sul PC; confermata alla chiusura di C0, con
 deroga del proprietario sulla risposta al tocco su iPhone. [Confronto, fonti primarie e confini](design/client-c0/r1/technology.md).
-La richiesta corrente riapre esplicitamente il confronto: la precedente
+Il confronto è stato riaperto su richiesta del proprietario in C0-R1: la precedente
 raccomandazione Angular/DOM con Pixi limitato agli effetti è superata.
 
 La scena richiesta usa carte ruotate, ombre, sovrapposizione, ventagli di
-dorsi e bersagli sullo stesso tavolo. Preferisco un solo spazio di coordinate
+dorsi e bersagli sullo stesso tavolo. Si preferisce un solo spazio di coordinate
 e una gerarchia grafica per questi elementi. Non servono fisica o simulazione
 locale. La qualità artistica viene da composizione e asset: cambiare libreria
 non produce automaticamente un bar convincente.
@@ -272,7 +272,8 @@ Sono verificati automaticamente perdita/ripristino del contesto grafico,
 teardown, resize, zoom emulato, carte sovrapposte, interruzione del drag e focus. Se la scena non supera
 le soglie dopo una semplificazione mirata, confrontare lo stesso contenuto
 in DOM/SVG; non alzare i budget per giustificare la scelta. Nessun confronto
-aggiuntivo è necessario sulla base delle misure PC; la prova fisica rimane aperta.
+aggiuntivo è stato necessario: sul telefono la fluidità passa e la soglia input
+è accettata con deroga dal proprietario, senza confronto DOM/SVG.
 
 Il riuso futuro riguarda contratti, stato, asset e comportamenti. Un contenitore
 desktop/mobile rimane futuro, senza app native, PWA, service worker, fisica,
@@ -311,8 +312,8 @@ cornice o marchio estratto dai quattro giochi di riferimento.
 Ordine: **C0 → C1 → C2 → C3 → C4 → C5**. Si anticipano gioco completo e
 parità; la finitura costosa arriva dopo. L'aspetto da partita a carte e i gesti
 fondamentali devono però esserci già in C0/C1, non essere rinviati alla finitura.
-C0 ha prodotto una prima prova tecnica, respinta nella direzione visiva;
-seguono i passaggi di revisione sotto. C1–C5 restano future.
+C0 ha prodotto una prima prova tecnica, respinta nella direzione visiva, poi
+i passaggi di revisione R1–R5 che hanno chiuso la tappa. C1–C5 restano future.
 Nessuna stima di calendario finché non sono noti disponibilità e dispositivi;
 la priorità è chiudere un risultato osservabile per tappa.
 
@@ -335,19 +336,20 @@ il laboratorio inietta viste fissate indipendenti dalla scelta.
 |---|---|---|
 | C0-R1 Scena e carte | **Approvata** come riferimento visivo | [Duello, FFA cinque e carta](design/client-c0/r1/approval.md), identificati dall'inventario R1. Non approva automaticamente i gesti successivi. |
 | C0-R2 Mano interattiva | Implementata e verificata automaticamente | Ventaglio, dettagli HTML, drag, scambio click/tap, frecce/Invio/Escape; copie conservate e conteggi 0/1/6/4. Privacy limitata ai dati DTO sintetici. |
-| C0-R3 Calata e oggetti | Implementata e verificata automaticamente | Personaggio/oggetto, proprietario, SELF, scarto bound, check unico, zero comandi su riordino o annullamento. Touch emulato; precisione fisica ancora da valutare. |
+| C0-R3 Calata e oggetti | Implementata e verificata automaticamente | Personaggio/oggetto, proprietario, SELF, scarto bound, check unico, zero comandi su riordino o annullamento. Touch emulato; mira sul telefono confermata nella revisione R5. |
 | C0-R4 Interruzioni e stato | Implementata e verificata automaticamente | Pending/rifiuto/drop/ripresa, viste dello stesso turno, callback vecchie, resize/zoom/orientamento, movimento ridotto, focus, clock e contesto WebGL. Alcuni segnali background sono sintetizzati e dichiarati. |
 | C0-R5 Misure e accettazione | **Chiusa con deroga** | Produzione desktop e touch emulato 60+ s, peso entro budget. iPhone 16 Pro: frame PASS, input 116 ms accettato dal proprietario; revisione umana sì con riserve; landscape forzato. |
 
 La prima prova Angular e le sue misure restano storiche. Il rifacimento
 R1–R5 è registrato separatamente, fra 26 e 27 ottobre con due sospensioni
-per limite d'uso; non è disponibile una misura affidabile delle ore attive.
+per limite d'uso ([punto di ripresa archiviato](history/client-c0-resume.md));
+non è disponibile una misura affidabile delle ore attive.
 Non estendere questa prova a un client completo o all'art delle 39 carte.
 
 | Criterio | Soglia mantenuta e verifica |
 |---|---|
-| Scena e leggibilità | Atmosfera R1 approvata; sei carte proprie, quattro mani coperte e oggetti come carte. Testo completo su richiesta, alternativa a drag/hover, nessuno scroll di pannelli per giocare in landscape. Controlli principali almeno 44 CSS px; geometria e dettaglio ≥15 px verificati automaticamente. Lettura e precisione umane sul minimo ancora aperte. |
-| Fluidità | Cattura di almeno 60 s sulla stessa FFA: obiettivo 60 fps, almeno 95% degli intervalli ≤20 ms desktop e ≤33 ms touch campione. Input→feedback software ≤100 ms. PC Windows/Edge misurato, emulazione separata; manca telefono fisico. |
+| Scena e leggibilità | Atmosfera R1 approvata; sei carte proprie, quattro mani coperte e oggetti come carte. Testo completo su richiesta, alternativa a drag/hover, nessuno scroll di pannelli per giocare in landscape. Controlli principali almeno 44 CSS px; geometria e dettaglio ≥15 px verificati automaticamente. Lettura e mira sul minimo reale 750×292 confermate nella revisione R5, con riserve sui dettagli grafici. |
+| Fluidità | Cattura di almeno 60 s sulla stessa FFA: obiettivo 60 fps, almeno 95% degli intervalli ≤20 ms desktop e ≤33 ms touch campione. Input→feedback software ≤100 ms. PC Windows/Edge ed emulazione PASS; iPhone 16 Pro: frame PASS, input 116 ms accettato con deroga. |
 | Peso | Massimo 500 KiB gzip JS e 1 MiB gzip complessivo. La misura include tutti i file produzione, anche chunk facoltativi e manifest, quindi è conservativa. Riconfermare a parità C2 e finitura C4. |
 | Semplicità | Un controller degli intenti e una vista autorevole; animazioni cancellabili senza risolvere le carte nel client. Dorsi da conteggi, nessuna identità avversaria ricostruita o danno ottimistico. |
 
@@ -479,8 +481,9 @@ possono essere sobri, ma devono restare completi e leggibili.
 
 **Completamento verificabile:** nessun asset casuale precedente nel nuovo
 client; ogni file esterno ha provenienza/licenza. Proposta iniziale di misura:
-desktop 1366×768 e touch landscape circa 844×390 CSS pixel; in portrait
-disposizione verticale o richiesta di rotazione motivata, da decidere in C0.
+desktop 1366×768 e touch landscape circa 844×390 CSS pixel, minimo reale
+750×292 su iPhone 16 Pro/Safari; landscape obbligatorio deciso in C0, con
+richiesta di rotazione in portrait.
 Nessuna azione essenziale dipende dal drag; target principali di almeno 44 CSS
 pixel e testo carta completo consultabile. Sul dispositivo campione puntare
 a 60 fps nelle transizioni comuni, verificando le soglie di frame/input e il
@@ -528,11 +531,9 @@ per ciascuna una breve lista di blocchi, incomprensioni e interventi ordinati
 per impatto. I test automatici non sostituiscono il giudizio su leggibilità
 e soddisfazione; i giocatori non devono ripetere scenari tecnici di crash.
 
-Alle consegne eseguire le verifiche previste da AGENTS/CONTRIBUTING:
-`./scripts/build.ps1 -Task Test -Offline`, `python scripts/check-rules.py`,
-`./scripts/build.ps1 -Task TestServerContext -Offline` e poi
-`python scripts/verify-match-manifests.py`, oltre ai controlli del nuovo client
-che saranno documentati durante la sua realizzazione. Una sola esecuzione
+Alle consegne eseguire le verifiche del repository elencate in
+[CONTRIBUTING](../CONTRIBUTING.md), oltre ai controlli del nuovo client
+(per la scena C0: [verifiche ripetibili](../client-c0/revision/README.md#verifiche-ripetibili)). Una sola esecuzione
 consolidata per consegna è sufficiente se non emergono nuove modifiche o
 difetti. Il contesto Spring resta separato: unit test verdi non attestano
 l'avvio applicativo, né un browser aperto attesta una partita completa.
@@ -551,8 +552,6 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 - **Conferma e riordino:** check dopo drop, scambio click/tap e tastiera
   accettati. Il trascinamento deve mostrare meglio la carta che segue il
   dito: da curare in C1; aspetto dei controlli in C4.
-
-
 - **Contratto visivo:** accettare animazioni aggregate con le API correnti;
   valutare in seguito eventi strutturati/revisioni/ora server solo per esigenze
   dimostrate. Non condizionare la prima partita a un nuovo protocollo.
@@ -573,6 +572,12 @@ C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 7, riordino documentale — 27 ottobre 2026:** allineate al gate
+  chiuso le frasi rimaste da versioni precedenti (prova fisica, lettura al
+  minimo, portrait in C4); verifiche del repository rimandate a CONTRIBUTING;
+  ricognizione preparatoria e punto di ripresa C0 spostati in `history/`.
+  Nessun cambiamento di perimetro, tappe, criteri o decisioni.
 
 - **Versione 7 — 27 ottobre 2026, chiusura C0:** strumento di cattura fisica
   sulla stessa build (USB o rete locale con codice). Due catture su iPhone
