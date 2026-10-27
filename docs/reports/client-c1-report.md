@@ -129,6 +129,24 @@ input p95 15,1 ms su PC. L'esecuzione a 844×390 e le sue catture risalgono a
 prima di O1/O5 e mostrano ancora i vecchi pulsanti. Sul telefono la (i) non è
 provata.
 
+## Modalità rete locale per la prova fisica
+
+Per la prova su iPhone `client-web/run.ps1 -Task Physical` serve la build
+sull'indirizzo privato del PC con un codice d'accesso monouso, come lo
+strumento fisico di C0
+([README](../../client-web/README.md#prova-su-telefono-rete-locale)). Il server
+resta su loopback e invariato; il proxy riconosce come pagina propria anche
+l'origine LAN.
+
+Verificato sul PC (implementazione e test automatico, non dispositivo fisico):
+senza codice pagina, `/rest` e codice errato ricevono 403 e l'upgrade WebSocket
+viene chiuso; con il codice la pagina risponde 200, `/ws/info` passa al server
+e l'upgrade STOMP riceve 101; il loopback 4320 non risponde. `Verify` eseguito
+attraverso l'indirizzo LAN (Edge sullo stesso PC, 1366×768, evidenze non
+salvate nel repository): 5 partite fino all'esito con entrambi i personaggi,
+bound, oggetto, drag, tap, rifiuto, effetto periodico, riordino e rientro senza
+SEND, O1/O5, 0 errori pagina. La prova col dito su iPhone resta da fare.
+
 ## Difetti trovati e corretti durante C1
 
 1. **Origine STOMP.** Il profilo `local` accetta solo `http://localhost:4200`, e

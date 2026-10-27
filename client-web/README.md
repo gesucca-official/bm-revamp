@@ -37,6 +37,24 @@ che provengono dalla pagina del client stesso (`127.0.0.1:4320` o `localhost:432
 ogni altra origine passa invariata e il server continua a rifiutarla. Il server non
 è modificato. `BM_STOMP_ORIGIN` cambia il valore se il profilo cambia.
 
+## Prova su telefono (rete locale)
+
+Il telefono non raggiunge il loopback del PC. Con il server avviato come sopra:
+
+```powershell
+./client-web/run.ps1 -Task Physical
+```
+
+Ricompila e serve la build sull'indirizzo privato del PC (`BM_LAN=lan` sceglie
+il primo IPv4 privato, preferendo 192.168.x; `BM_LAN=<ip>` ne fissa uno). Stampa
+un indirizzo con codice d'accesso monouso, per esempio
+`http://192.168.1.79:4320/?k=…`: aprirlo sul telefono, nella stessa Wi-Fi.
+Il codice imposta un cookie e cambia a ogni avvio; senza cookie ogni richiesta,
+WebSocket compreso, riceve 403 o viene chiusa. Il server di gioco resta su
+loopback dietro il proxy, che riconosce come pagina propria anche l'indirizzo
+LAN. Al primo avvio Windows può chiedere di consentire Node sulle reti private.
+Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
+
 ## Gesti
 
 - Scegli una carta e poi il bersaglio sul tavolo (personaggio o carta oggetto),
@@ -74,7 +92,8 @@ quick 1vCom, partite fino all'esito per entrambi i personaggi, bound con scarto,
 bersaglio oggetto, rifiuto, effetto periodico letto dal riepilogo, calata con
 drag e con click, riordino senza SEND, disconnessione e rientro senza reinvii,
 ritorno all'hub e uscita. `BM_VIEWPORT=844x390` ripete al formato landscape
-compatto; `BM_HEADED=1` mostra Edge. Evidenze in
+compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
+quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze in
 [docs/reports/client-c1](../docs/reports/client-c1/). È un'esecuzione su PC:
 non sostituisce il dispositivo fisico né la prova umana.
 

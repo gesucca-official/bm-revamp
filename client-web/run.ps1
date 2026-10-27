@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Verify','Size')][string]$Task='Build',[switch]$Offline)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','Size')][string]$Task='Build',[switch]$Offline)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -15,6 +15,8 @@ try {
     'Build' {& npm run build}
     'Dev' {& npm run start}
     'Serve' {& npm run serve}
+    # Build, then serve on the private LAN address with an access code (iPhone test).
+    'Physical' {& npm run build;if($LASTEXITCODE -eq 0){$saved=$env:BM_LAN;if(!$env:BM_LAN){$env:BM_LAN='lan'};try{& npm run serve}finally{$env:BM_LAN=$saved}}}
     'Verify' {& npm run verify}
     'Size' {& npm run size}
   }

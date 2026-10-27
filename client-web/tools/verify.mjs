@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
 const user=process.env.BM_USER??'devAlice',password=process.env.BM_PASSWORD??'local-alice';
-const out='../docs/reports/client-c1';
+const out=process.env.BM_OUT??'../docs/reports/client-c1';
 await mkdir(`${out}/screens`,{recursive:true});
 const evidence={date:new Date().toISOString(),url,user,kind:'automated browser run on PC (Edge via Playwright) against the local server; not a physical device',games:[],checks:{},rejections:[],periodic:[],noValidMove:[],errors:[]};
 const browser=await chromium.launch({channel:'msedge',headless:process.env.BM_HEADED!=='1'});

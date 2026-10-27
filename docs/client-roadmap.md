@@ -619,7 +619,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
 **Prossimo passo: chiusura di C1 su decisione del proprietario**, dopo la
-prova umana A e una prova del drag col dito su iPhone (residui O1/O5 fatti). C2 parte solo su
+prova umana A e una prova del drag col dito su iPhone (residui O1/O5 fatti;
+per il telefono `client-web/run.ps1 -Task Physical`). C2 parte solo su
 istruzione esplicita. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
