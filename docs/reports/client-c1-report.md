@@ -13,12 +13,12 @@ Regolamento, server, catalogo SQLite e client debug **non sono modificati**.
 | Prove automatiche | 19 test unitari (modello e sessione con trasporto finto); typecheck e build; peso entro il budget C0. |
 | Partite reali su server locale | **Sì.** Edge guidato da Playwright sul server Spring locale (`dev.ps1 -Task Server -SeedAccounts`), sulla build finale: 7 partite fino all'esito in due esecuzioni (4 a 1366×768, 3 a 844×390), entrambi i personaggi in ciascuna, con 3 vittorie, 3 sconfitte e 1 pareggio. |
 | Emulazione | Formato landscape compatto 844×390 sullo stesso PC, con il mouse. Nessuna emulazione touch dei gesti. |
-| Dispositivo fisico | **Non eseguito** in C1: drag col dito e risposta al tocco su iPhone restano da provare. |
-| Valutazione umana | **Non eseguita**: prova umana A ancora da fare. |
+| Dispositivo fisico | **Sì, giudizio del proprietario:** su iPhone 16 Pro in rete locale drag col dito e risposta al tocco adeguati. Nessuna misura registrata. |
+| Valutazione umana | **Prova umana A eseguita:** nessun blocco riferito; quattro incomprensioni principali (O11–O14). |
 
 Tutti i criteri automatizzabili di C1 sono soddisfatti con il server reale.
-Restano aperti la prova umana A e la verifica fisica del drag (riserva B4 di C0):
-la chiusura del gate spetta al proprietario.
+**C1 è chiusa dal proprietario** il 27 ottobre 2026
+([chiusura](#chiusura-di-c1)).
 
 ## Dove vive il client e cosa è riusato
 
@@ -145,7 +145,32 @@ e l'upgrade STOMP riceve 101; il loopback 4320 non risponde. `Verify` eseguito
 attraverso l'indirizzo LAN (Edge sullo stesso PC, 1366×768, evidenze non
 salvate nel repository): 5 partite fino all'esito con entrambi i personaggi,
 bound, oggetto, drag, tap, rifiuto, effetto periodico, riordino e rientro senza
-SEND, O1/O5, 0 errori pagina. La prova col dito su iPhone resta da fare.
+SEND, O1/O5, 0 errori pagina.
+
+## Chiusura di C1
+
+**Dispositivo fisico.** Il proprietario ha provato il client su iPhone 16 Pro
+attraverso la modalità rete locale: drag col dito, carta sopra il dito, calata,
+(i) e risposta al tocco funzionano adeguatamente a suo giudizio. È una
+valutazione umana sul dispositivo, senza cattura né misura di latenza: il
+valore C0 di 116 ms con deroga resta l'ultima misura registrata, e la misura
+sul telefono torna in C4.
+
+**Prova umana A.** Esito riferito dal proprietario: nessun blocco che
+impedisse di giocare. Le incomprensioni principali, registrate come
+[osservazioni O11–O14](../client-roadmap.md#osservazioni-del-proprietario-dopo-c1):
+
+1. **O11:** non si capisce quando una carta si può giocare con le risorse
+   disponibili; servirebbe attenuare quelle non pagabili.
+2. **O12:** le carte sono piccole e sul tavolo si leggono male.
+3. **O13:** non si capisce quali e quante risorse si hanno, né quali carte in
+   mano le fanno ottenere.
+4. **O14:** le tipologie vanno riconosciute a colpo d'occhio, anche per ruolo
+   (danno, risorse, contrasto), senza snaturare l'aspetto attuale.
+
+Nessuna impedisce di giocare, quindi non sono corrette in C1. Sono assegnate
+a C2 prima della prova umana B, insieme a O3 e O4 anticipate da C3; la
+finitura grafica resta in C4. Su questa base il proprietario chiude C1.
 
 ## Difetti trovati e corretti durante C1
 
@@ -162,11 +187,11 @@ SEND, O1/O5, 0 errori pagina. La prova col dito su iPhone resta da fare.
 
 ## Limiti e riserve aperte
 
-- **Prova umana A** (due persone, partite vsCom, le tre domande): non eseguita.
 - Su touch il riordino si fa solo trascinando: lo scambio con due tocchi è tolto
   per scelta del proprietario (O1).
-- **Dispositivo fisico:** drag col dito, sollevamento sopra il dito e risposta al
-  tocco non verificati su iPhone 16 Pro. Nessuna emulazione touch dei gesti.
+- **Dispositivo fisico:** drag col dito e risposta al tocco giudicati adeguati
+  dal proprietario su iPhone 16 Pro, senza misura. Nessuna emulazione touch
+  automatica dei gesti.
 - **Tastiera:** i percorsi da tastiera sono quelli della scena C0, non
   riverificati sul server reale.
 - **Testo dei rifiuti:** mostrato com'è in inglese («cant be cast with current
