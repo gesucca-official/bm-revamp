@@ -1,0 +1,338 @@
+{
+ "date": "2026-10-28T16:50:31.133Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts, A with touch emulation) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "queueExit": {
+   "alone": {
+    "list": [
+     "devAlice (tu)"
+    ],
+    "startEnabled": false,
+    "addEnabled": true
+   },
+   "withBots": [
+    "devAlice (tu)",
+    "Computer 1",
+    "Computer 2"
+   ],
+   "sendsOnExit": [
+    "/app/session/queue/leave"
+   ],
+   "lastListSeenByA": [],
+   "listSeenByBAfterwards": [
+    "devBob (tu)"
+   ]
+  },
+  "k7RaiseOnly": {
+   "item": "item-ComPlayer_8569-0",
+   "restingW": 45.6,
+   "peekAfterFirstTouch": "item-ComPlayer_8569-0",
+   "widthAfterFirstTouch": 52.44,
+   "secondTouchInspects": true,
+   "inspectionTitle": "Peroni da 66, calda",
+   "widthOnHover": 52.44
+  },
+  "k7Mouse": {
+   "card": "Steal",
+   "owner": "ComPlayer_8569",
+   "index": 0,
+   "raisedOnHover": true,
+   "target": {
+    "owner": "ComPlayer_8569",
+    "itemIndex": 0
+   }
+  },
+  "k7Touch": {
+   "card": "Steal",
+   "owner": "ComPlayer_8569",
+   "index": 0,
+   "afterFirst": {
+    "peek": "item-ComPlayer_8569-0",
+    "target": null,
+    "selected": true
+   },
+   "afterSecond": {
+    "target": {
+     "owner": "ComPlayer_8569",
+     "itemIndex": 0
+    }
+   }
+  },
+  "fiveWithComputers": {
+   "gameId": "df5fe3c6509ac8514b2f602cfb2970652063406c2419380cb4d17e3170ae84fe",
+   "players": [
+    "ComPlayer_2466",
+    "devAlice",
+    "ComPlayer_3393",
+    "ComPlayer_4816",
+    "ComPlayer_8569"
+   ],
+   "characters": {
+    "ComPlayer_2466": "Tossico del Serraglio",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_3393": "Spazienzio de la Ucciso",
+    "ComPlayer_4816": "Spazienzio de la Ucciso",
+    "ComPlayer_8569": "Tossico del Serraglio"
+   },
+   "seatNames": [
+    "Computer 1",
+    "Tu",
+    "Computer 2",
+    "Computer 3",
+    "Computer 4"
+   ],
+   "turnsChecked": 8,
+   "maxHand": 6,
+   "maxObjects": 3,
+   "fansSeen": [
+    6
+   ],
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_4816",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_2466",
+     "devAlice",
+     "ComPlayer_3393",
+     "ComPlayer_8569"
+    ],
+    "turns": 21
+   },
+   "text": "Hai perso Rissa conclusa al tavolo Vince Computer 3 Nuova partita Torna all’hub Ultimo turno"
+  },
+  "newGameRepeatsFfa": {
+   "list": [
+    "devAlice (tu)"
+   ]
+  },
+  "twoHumansThreeComputers": {
+   "gameId": "5cb7297a8cdc7571404a381d0073ac6277dc332b52bd771faeba83cec993d71f",
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso",
+    "ComPlayer_2852": "Tossico del Serraglio",
+    "ComPlayer_1467": "Spazienzio de la Ucciso",
+    "ComPlayer_6338": "Tossico del Serraglio"
+   },
+   "inspectedComputer": {
+    "owner": "ComPlayer_2852",
+    "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+    "text": "Tossico del Serraglio Computer 1 · ID ComPlayer_2852 Salute 100 Allerta 35 Tossicità 10 Oggetti 3 / 3 Mazzo 14 carte Stati ed equipaggiamenti Nessuno. Immunità: Tossicità Torna al tavolo"
+   },
+   "turnsCheckedA": 10,
+   "turnsCheckedB": 19,
+   "watchedA": {
+    "turn": 10,
+    "panel": "Sei fuori dalla partita Eliminato: puoi guardare fino all’esito Resta a guardare Nuova partita Torna all’hub Ultimo turno",
+    "hint": "Sei fuori: guardi fino all’esito",
+    "outcomeTurn": 21
+   },
+   "watchedB": null,
+   "privacyA": {
+    "views": 49,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 5,
+    "leaks": 0
+   },
+   "privacyB": {
+    "views": 49,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 0,
+    "leaks": 0
+   },
+   "outcome": {
+    "winner": "ComPlayer_6338",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devAlice",
+     "devBob",
+     "ComPlayer_2852",
+     "ComPlayer_1467"
+    ],
+    "turns": 21
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Rissa conclusa al tavolo Vince Computer 3 Nuova partita Torna all’hub Ultimo turno"
+  },
+  "startNowWithTwo": {
+   "gameId": "13da5afcc077db4aebd39862c22072dabb6c9d4fc6c8137c3efd3382ea1ae61c",
+   "startDisabledAlone": true,
+   "players": [
+    "devAlice",
+    "devBob"
+   ],
+   "characters": {
+    "devAlice": "Tossico del Serraglio",
+    "devBob": "Tossico del Serraglio"
+   },
+   "outcome": {
+    "winner": "devAlice",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devBob"
+    ],
+    "turns": 7
+   },
+   "textA": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLeaves": {
+   "gameId": "3b4f27b00d20920c8692b7bdfbc1dd56b67b01faf2e2c6301eaaf6b9eaea3277",
+   "characters": {
+    "ComPlayer_5041": "Tossico del Serraglio",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_2638": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_3902": "Spazienzio de la Ucciso"
+   },
+   "forfeitSeenAtTurn": 0,
+   "turnsAfter": 16,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_3902",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "leave"
+    },
+    "dead": [
+     "ComPlayer_5041",
+     "devAlice",
+     "ComPlayer_2638"
+    ],
+    "turns": 16
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 devBob ha abbandonato Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherMoveTimeout": {
+   "gameId": "dca8f82e081b1aeec3616be6649e26dd0aa9c3ba2b0ac397d10917af38d72069",
+   "characters": {
+    "ComPlayer_330": "Spazienzio de la Ucciso",
+    "ComPlayer_4156": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_3482": "Tossico del Serraglio",
+    "devBob": "Tossico del Serraglio"
+   },
+   "clockB": [
+    "◷ 30 s"
+   ],
+   "secondsToForfeit": 30,
+   "bOver": false,
+   "panelB": "Sei fuori dalla partita Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "turnsAfter": 12,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_3482",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "move timeout"
+    },
+    "dead": [
+     "ComPlayer_330",
+     "ComPlayer_4156",
+     "devAlice"
+    ],
+    "turns": 22
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 devBob non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLateRejoin": {
+   "gameId": "55eeb2b8a081d0ae744f63fb68e7455fc0c4c1805bc20f5c2143cee1bc4b35e8",
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_6761": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso",
+    "ComPlayer_1404": "Tossico del Serraglio",
+    "ComPlayer_7567": "Tossico del Serraglio"
+   },
+   "awayShownToA": [
+    "devBob fuori linea · 28 s"
+   ],
+   "resumeStatus": "finished",
+   "resumeTurn": 2,
+   "turnSeenByB": 2,
+   "turnOfA": 2,
+   "forfeits": {
+    "devBob": "reconnect timeout"
+   },
+   "panelB": "Sei fuori dalla partita Non sei rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "framesB": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devBob/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "turnsAfter": 19,
+   "watched": null,
+   "outcome": {
+    "winner": "devAlice",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "reconnect timeout"
+    },
+    "dead": [
+     "ComPlayer_6761",
+     "ComPlayer_1404",
+     "ComPlayer_7567"
+    ],
+    "turns": 21
+   },
+   "textA": "Hai vinto Rissa conclusa al tavolo devBob non è rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "k7": {
+   "mouse": {
+    "card": "Steal",
+    "owner": "ComPlayer_8569",
+    "index": 0,
+    "raisedOnHover": true,
+    "target": {
+     "owner": "ComPlayer_8569",
+     "itemIndex": 0
+    }
+   },
+   "touch": {
+    "card": "Steal",
+    "owner": "ComPlayer_8569",
+    "index": 0,
+    "afterFirst": {
+     "peek": "item-ComPlayer_8569-0",
+     "target": null,
+     "selected": true
+    },
+    "afterSecond": {
+     "target": {
+      "owner": "ComPlayer_8569",
+      "itemIndex": 0
+     }
+    }
+   },
+   "raiseOnly": {
+    "item": "item-ComPlayer_8569-0",
+    "restingW": 45.6,
+    "peekAfterFirstTouch": "item-ComPlayer_8569-0",
+    "widthAfterFirstTouch": 52.44,
+    "secondTouchInspects": true,
+    "inspectionTitle": "Peroni da 66, calda",
+    "widthOnHover": 52.44
+   }
+  }
+ },
+ "errors": [],
+ "ok": true
+}

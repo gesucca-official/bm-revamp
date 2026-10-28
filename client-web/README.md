@@ -1,7 +1,7 @@
-# Client web animato (C1, C2a, O9, C2b-1, C2b-2, C2b-3, C2b-4)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-5)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
-login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
+home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
 cinque o contro il computer con un mazzo salvato) → partita → esito → nuova partita
 nella stessa modalità oppure ritorno all'hub; scheda «Collezione» con catalogo ed
 editor dei mazzi. Il resto della parità del debug arriva nei blocchi successivi di C2b
@@ -60,6 +60,42 @@ WebSocket compreso, riceve 403 o viene chiusa. Il server di gioco resta su
 loopback dietro il proxy, che riconosce come pagina propria anche l'indirizzo
 LAN. Al primo avvio Windows può chiedere di consentire Node sulle reti private.
 Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
+
+## Home, regole e registrazione (C2b-5)
+
+Prima del login la pagina sceglie la schermata dall'hash, senza dipendenze di routing:
+`#/` home, `#/regole`, `#/accedi`, `#/registrati` (ogni altro hash è la home). Indietro e
+avanti del browser funzionano; dopo «Esci» si torna alla home, un login rifiutato resta
+sul modulo con il messaggio. Fuori dal tavolo il portrait è ammesso (D7): il foglio scorre
+in verticale, mai la pagina in orizzontale.
+
+- **Home**: presentazione, «Accedi», «Registrati», «Regole» e una sezione secondaria con
+  gli stessi collegamenti del debug (`href` identici a `home.component.{ts,html}`:
+  Instagram, YouTube, GitHub profilo e due repository, email, PayPal). Testo dei diritti
+  come README e CONTRIBUTING: tutti i diritti riservati, nessuna licenza open source.
+  Nessuna immagine sponsor.
+- **Regole**: `docs/game-rules.md` importato al build (`?raw`, D10), nessuna terza copia.
+  `src/rules.ts` legge solo il sottoinsieme usato (titoli, paragrafi, elenchi, tabelle,
+  grassetto, corsivo, codice) e produce dati resi come testo React: HTML grezzo resta
+  testo, collegamenti e ancore diventano la sola etichetta, i titoli non hanno `id`.
+  L'indice R00–Revisioni scorre alla sezione senza toccare l'hash. Le regole non chiedono
+  nulla al server.
+- **Registrazione**: le regole del modulo del debug (`src/signup.ts`): nome alfanumerico,
+  email (stesso controllo di Angular), codice di sei cifre, password e conferma uguali.
+  «Invia codice» chiede la disponibilità del nome, poi dell'email, poi
+  `POST sign-up/verify`; «Registrati» manda `POST sign-up/register`. Ogni richiesta
+  (`src/net/rest.ts`) finisce con una risposta o con un errore entro 10 s, senza ripetizioni.
+  Risposte osservate sul server locale e messaggi:
+
+  | Caso | Server | Messaggio |
+  |---|---|---|
+  | nome o email occupati | `available` → `false` | «Questo nome è già usato…» / «Questa email è già usata…» |
+  | invio del codice nel profilo locale (`app.mail.enabled: false`) | `verify` → 500 (`Email is disabled`) | «Registrazione non disponibile in questo ambiente: il server non può inviare il codice per email. Nessun account è stato creato.» |
+  | codice errato, anche senza invio | `register` → 409 | «Registrazione rifiutata: il codice non è quello inviato per email…» |
+  | server spento dietro il proxy | 502, o nessuna risposta | «Server non raggiungibile. Riprova tra poco.» |
+
+  Dopo ogni errore il modulo torna attivo. Un invio riuscito (solo con SMTP) blocca un
+  nuovo invio per 15 s, come il debug.
 
 ## Hub «Gioca» (C2b-1, C2b-3)
 
@@ -173,6 +209,7 @@ di rotazione.
 ./client-web/run.ps1 -Task VerifyLifecycle   # clock, forfait, rientri, riavvio: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyFfa     # tutti contro tutti a cinque: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyDecks   # catalogo, mazzi e open 1vCom: avvia da sé il server
+./client-web/run.ps1 -Task VerifyPublic  # home, regole, registrazione: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -203,6 +240,13 @@ mazzi dalla UI, gioca un open 1vCom fino all'esito controllando che personaggio 
 mano vengano dal mazzo, ripete con «Nuova partita», avvia un mazzo con sei carte
 iniziali e provoca «Deck unavailable» riscrivendo il deckId del frame in uscita
 (non raggiungibile dalla UI con un solo account).
+`VerifyPublic` (database temporaneo) confronta gli `href` della home con il sorgente del
+debug senza aprirli, il testo delle regole con `docs/game-rules.md` (titoli, revisioni,
+ogni cella delle tabelle, tutte le parole), prova home → regole → home (anche con
+indietro del browser) → accesso → hub → esci → home, la registrazione (devAlice occupato,
+nome nuovo libero, «Invia codice» indisponibile, codice errato, nessun account creato) e,
+a server fermo, errore di rete su registrazione e login; in più home, regole,
+registrazione e accesso in portrait 390×844. Gli altri script entrano da `#/accedi`.
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
@@ -243,7 +287,9 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
 - `src/collection.tsx`, `src/deck.ts`: scheda «Collezione» (catalogo, mazzi, editor);
   le regole dell'editor e i messaggi del server sono funzioni pure.
 - `src/lifecycle.ts`: esiti, ragioni di forfait e countdown indicativi (funzioni pure).
-- `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso,
+- `src/public.tsx`, `src/rules.ts`, `src/signup.ts`, `src/net/rest.ts`: home, regolamento
+  importato, registrazione (regole del modulo, mappa delle risposte e hash come funzioni pure).
+- `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso, navigazione a hash,
   tavolo, esito, dialoghi).
 - `window.__bm`: stato in sola lettura della pagina per la verifica automatica;
   nessun comando. Da rivalutare prima della consegna C5.

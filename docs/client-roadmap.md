@@ -1,13 +1,13 @@
 # Roadmap del client web animato
 
-**28 ottobre 2026 — versione 16, C0, C1 e C2a chiuse, C2b in corso (C2b-1…C2b-4 fatte).** C1 è chiusa dal
+**28 ottobre 2026 — versione 17, C0, C1 e C2a chiuse, C2b in corso (C2b-1…C2b-5 fatte).** C1 è chiusa dal
 proprietario dopo la prova su iPhone e la prova umana A; le osservazioni
 del proprietario e della prova A sono assegnate alle tappe
 ([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
 primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
 partite reali in locale, provato dal proprietario su iPhone e desktop e **chiuso**
 insieme alla prova umana B, che non ha evidenziato nulla di rilevante
-([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1), C2b-3 (FFA a cinque) e C2b-4 (catalogo, editor mazzi e open 1vCom), verificati con partite reali in locale ([piano C2b](client-c2b-plan.md)). Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
+([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1), C2b-3 (FFA a cinque), C2b-4 (catalogo, editor mazzi e open 1vCom) e C2b-5 (home, regole e registrazione), verificati in locale sul server reale ([piano C2b](client-c2b-plan.md)). Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
 automatici, partite reali in locale e prova su iPhone confermata dal proprietario). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
@@ -476,14 +476,17 @@ prova su iPhone e desktop e prova umana B senza rilievi ([rapporto](reports/clie
 O9 (illustrazioni provvisorie) non è in C2a: è stata fatta dopo, 40 illustrazioni in un atlante
 ([rapporto](reports/client-c2-report.md#o9--illustrazioni-provvisorie)). C2b porta le modalità e il resto
 della parità in sette blocchi ([piano](client-c2b-plan.md)): C2b-1 modalità e code, C2b-2 ciclo
-di vita in 1v1, C2b-3 FFA a cinque e C2b-4 catalogo, mazzi e open 1vCom sono fatti. La FFA usa la geometria di C2a (oggetti
+di vita in 1v1, C2b-3 FFA a cinque, C2b-4 catalogo, mazzi e open 1vCom e C2b-5 home, regole e registrazione sono fatti. La FFA usa la geometria di C2a (oggetti
 propri sulla riga del personaggio, ventaglio che inizia dopo di loro, oggetti avversari
 sovrapposti al 25% che si alzano al passaggio del mouse o al primo tocco), provata
 su viste reali a ogni turno; i ventagli avversari hanno ora uno spazio proprio e
 ruotano meno ([rapporto](reports/client-c2-report.md#c2b-3--ffa-a-cinque)). L'editor dei
 mazzi applica solo le regole del debug e di R02; per decisione del proprietario il
 regolamento 1.8 vieta «/» nel nome di un mazzo, perché l'avvio open lo porta nella
-destinazione ([rapporto](reports/client-c2-report.md#c2b-4--catalogo-editor-mazzi-e-open-1vcom)).
+destinazione ([rapporto](reports/client-c2-report.md#c2b-4--catalogo-editor-mazzi-e-open-1vcom)). Il
+regolamento mostrato dal client web è `docs/game-rules.md` importato al build, senza una
+terza copia; nel profilo locale la registrazione dice solo che non è disponibile
+([rapporto](reports/client-c2-report.md#c2b-5--home-regole-e-registrazione)).
 
 **Osservazioni assegnate:** prima della prova umana B, perché aiutano a
 riconoscere le carte in mano e sul tavolo durante i playtest:
@@ -654,12 +657,22 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** i blocchi successivi di C2b (C2b-4…C2b-7) solo su istruzione esplicita, uno alla volta. C2a e O9 sono chiuse. C2 estende lo stesso
+**Prossimo passo:** i blocchi successivi di C2b (C2b-6 e C2b-7) solo su istruzione esplicita, uno alla volta. C2a e O9 sono chiuse. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 17 — 28 ottobre 2026, C2b-5:** schermate prima del login in `client-web`
+  con navigazione a hash: home con gli stessi collegamenti del debug e il testo dei
+  diritti corretto (tutti i diritti riservati), regolamento importato da
+  `docs/game-rules.md` al build (D10), registrazione con i controlli del debug. Nel
+  profilo locale l'invio del codice risponde 500 (email disabilitata): il client lo dice
+  senza promettere l'onboarding e nessun account viene creato (D4). Verifica sul server
+  reale a 1366×768, 844×390 e in portrait 390×844
+  ([rapporto C2](reports/client-c2-report.md#c2b-5--home-regole-e-registrazione)).
+  Nessuna regola, API o servizio cambiato. C2b-6 e C2b-7 non iniziati.
 
 - **Versione 16 — 28 ottobre 2026, C2b-4:** scheda «Collezione» in `client-web`
   (catalogo completo con illustrazioni, elenco mazzi, editor su copia, salva,

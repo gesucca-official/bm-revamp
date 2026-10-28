@@ -66,7 +66,7 @@ async function open(name){
 }
 async function login(p,{leftover=true}={}){
  const {page}=p;
- await page.goto(url);
+ await page.goto(`${url}#/accedi`);
  await page.getByLabel('Nome').fill(p.user);await page.getByLabel('Password').fill(p.password);
  await page.getByRole('button',{name:'Siediti al tavolo'}).click();
  await page.waitForFunction(()=>document.querySelector('[data-testid=quick]')||window.__bm,null,{timeout:15000});
@@ -188,7 +188,7 @@ try{
  const v5=B.views().filter(v=>v.gameId===g5&&v.over),text5=await B.text('.outcome');
  assert.equal(v5[0].winner,'devBob');assert.equal(v5[0].forfeits.devAlice,'leave');assert.match(text5,/devAlice ha abbandonato/);
  // A second leave of devAlice from a raw STOMP socket after logging out: the server answer and B's outcome.
- await A.page.getByRole('button',{name:'Esci',exact:true}).click();await A.page.getByLabel('Nome').waitFor({timeout:10000});
+ await A.page.getByRole('button',{name:'Esci',exact:true}).click();await A.page.getByTestId('home').waitFor({timeout:10000});
  const raw=await A.page.evaluate(({user,password,game})=>new Promise(resolve=>{
   const ws=new WebSocket(`ws://${location.host}/ws/websocket`),got=[];let receipts=0,closed=false;
   const finish=why=>{if(closed)return;closed=true;try{ws.close();}catch{}resolve({got,why});};
@@ -210,7 +210,7 @@ try{
 
  // 6-7. While A plays, a second login of devAlice from another context is refused; then A logs out in game.
  const g6=await duel(A,B);
- const C=await (await browser.newContext({viewport:{width:vw,height:vh}})).newPage();await C.goto(url);
+ const C=await (await browser.newContext({viewport:{width:vw,height:vh}})).newPage();await C.goto(`${url}#/accedi`);
  await C.getByLabel('Nome').fill(accounts.A.user);await C.getByLabel('Password').fill(accounts.A.password);await C.getByRole('button',{name:'Siediti al tavolo'}).click();
  const refused=(await C.locator('.problem').innerText({timeout:15000})).trim();
  assert.match(refused,/già collegato altrove/);assert.ok(!(await A.state()).over,'the first session is still playing');
@@ -219,7 +219,7 @@ try{
  await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Esci dall’account'}).click();
  const confirm6=await A.text('dialog .menu');await A.shot('09-logout-confirm');
  const mark6=A.sent.length;await A.page.getByRole('button',{name:'Sì, esci'}).click();
- await A.page.getByLabel('Nome').waitFor({timeout:10000});
+ await A.page.getByTestId('home').waitFor({timeout:10000});
  const sends6=A.sends(mark6);
  assert.deepEqual(sends6,['/app/session/logout'],'only the logout after the confirmation');
  await B.wait(x=>x&&x.over,40000,'B sees the logout forfeit');

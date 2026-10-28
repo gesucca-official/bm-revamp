@@ -67,7 +67,7 @@ async function open(name,touch=false){
  return p;
 }
 async function login(p){
- await p.page.goto(url);
+ await p.page.goto(`${url}#/accedi`);
  await p.page.getByLabel('Nome').fill(p.user);await p.page.getByLabel('Password').fill(p.password);
  await p.page.getByRole('button',{name:'Siediti al tavolo'}).click();
  await p.page.getByTestId('quick').waitFor({timeout:15000});

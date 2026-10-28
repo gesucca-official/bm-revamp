@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -271,7 +271,7 @@ catalogo o `client-debug`.
 | K1 | Corretto in `session.ts`: il `resume` del login si applica una sola volta. Il test che lo riproduceva (due casi) falliva prima della correzione. |
 | K2, K3 | `join(modalità)` al posto di `quick()`, `leaveQueue()` con ACK di `/user/queue/session/queue/leave`; tipi `UserGuiDeck` e `Presence` nel contratto (solo tipi). |
 | Interfaccia | Nuovo `hub.tsx`: scheda «Gioca», selettore delle modalità (1vCom, 1v1; FFA e open visibili e disattivate), attesa con «Esci dalla coda», errore di ingresso, presenza con ordinamento per colonna e pagine 5/10/20. «Nuova partita» ripete la modalità giocata (D11). Tavolo invariato. |
-| Test automatici | Client 46 (34 + 12: K1, 1v1, nuova partita, uscita dalla coda con e senza ACK, annullo prima della conferma, ready più veloce del leave, presenza, ordinamento e pagine). `build.ps1 -Task Test -Offline` e `check-rules.py` passano. |
+| Test automatici | Client 46 (34 + 12: K1, 1v1, nuova partita, uscita dalla coda con e senza ACK, annullo prima della conferma, ready più veloce del leave, presenza, ordinamento e pagine). `build.ps1 -Task Test -Offline` (253 server + 36 debug) e `check-rules.py` passano. |
 | Partite reali | **Sì.** `VerifyModes` (nuovo, `run.ps1 -Task VerifyModes`) con devAlice e devBob in due contesti Edge, a 1366×768 e 844×390: presenza di B che compare e sparisce con il conteggio; uscita dalla coda con ACK e pulsanti di nuovo attivi; B solo in coda resta in attesa senza partita; stesso `gameId` e 1v1 fino all'esito (10 turni ciascuno a 1366×768); mano propria come array e altrui come numero in tutte le viste (28 per account), nessun nome di carta della sola mano altrui nelle parti non pubbliche; «Nuova partita» rientra in 1v1 con un nuovo `gameId`; abbandono con vittoria dell'altro. `Verify` 1vCom rieseguito a entrambe le misure (2 partite ciascuna): regressione assente. |
 | Peso | JS gzip 283323 byte (+1,5 KB rispetto a O9, limite 500 KB); totale gzip 1064763 byte (limite 4 MB). |
 | Emulazione / dispositivo / umano | 844×390 sul PC con il mouse; nessun dispositivo fisico né prova umana in questo blocco. |
@@ -583,3 +583,111 @@ commit separato, prima di questo blocco: `Test -Offline` 253 + 36 test e
   [decks-844x390.json](client-c2/c2b-4/decks-844x390.json), [catture](client-c2/c2b-4/screens/)
   `decks-*`; regressione `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*` e
   [size.json](client-c2/c2b-4/size.json) nella stessa cartella.
+
+## C2b-5 — Home, regole e registrazione
+
+28 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md)), in particolare D4 (registrazione locale:
+solo errore esplicito), D7 (portrait fuori dal tavolo), D8 (stessi collegamenti, diritti
+corretti) e D10 (regolamento importato). Nessun cambio a regole, server, protocollo,
+catalogo o `client-debug`.
+
+**Comportamento osservato prima di scrivere il client** (server reale, profilo `local`,
+database temporaneo, richieste dirette e attraverso il proxy di `Serve`):
+
+| Richiesta | Risposta |
+|---|---|
+| GET `sign-up/users/devAlice/available` | 200 `false` |
+| GET `sign-up/users/{nome nuovo}/available`, `sign-up/mail/{email}/available` | 200 `true` (gli account sintetici non hanno email: in locale nessuna email risulta occupata) |
+| GET `sign-up/mail/a%2Fb@x.it/available` (o un nome con `/`) | 400 dal contenitore web, pagina HTML |
+| POST `sign-up/verify` con nome ed email liberi | **500**, corpo JSON con `message` vuoto; nel log `MailSendException: Email is disabled` |
+| POST `sign-up/verify` con devAlice | 409 |
+| POST `sign-up/register` con codice errato, con o senza `verify` precedente | 409; il nome resta disponibile, nessuna riga nuova in `USR001_CREDENTIALS` |
+| POST `sign-up/register` senza `code` | 500 (non raggiungibile dal modulo, che manda sempre sei cifre) |
+| Server spento, attraverso il proxy Vite | 502 |
+
+Il client mappa esattamente questi casi (`failureMessage` in `src/signup.ts`, provata in
+unità): 500 su `verify` → «Registrazione non disponibile in questo ambiente: il server non
+può inviare il codice per email. Nessun account è stato creato.», senza promettere email né
+onboarding; 409 su `register` → codice errato o nome/email già usati; 502 o nessuna
+risposta → «Server non raggiungibile».
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Navigazione (P01) | Prima del login l'hash sceglie la schermata: `#/` home, `#/regole`, `#/accedi`, `#/registrati`; ogni altro hash è la home. Nessuna dipendenza di routing nuova; indietro e avanti del browser funzionano. Dopo «Esci» (hub, linea caduta o logout in partita) si torna alla home; un login rifiutato o una sessione chiusa per errore restano sul modulo di accesso con il messaggio. Lasciando l'accesso il vecchio messaggio sparisce. |
+| Home (P02) | Presentazione, «Accedi», «Registrati», «Regole»; sezione secondaria con Instagram, YouTube, GitHub (profilo, client web, server), email e PayPal, con gli stessi `href` del debug (in una nuova scheda con `noopener`, l'email no). Diritti come README e CONTRIBUTING: «Tutti i diritti riservati. Non è concessa alcuna licenza open source…»; la frase del debug sull'«Open Source» non è ripresa. Nessuna immagine sponsor. |
+| Regole (P03) | `docs/game-rules.md` importato al build con `?raw` (D10): nessuna terza copia, `check-rules.py` e R00 invariati. `src/rules.ts` legge il sottoinsieme usato dal regolamento e produce dati resi come testo React: niente `dangerouslySetInnerHTML`, HTML grezzo come testo, collegamenti ridotti all'etichetta, titoli senza `id` né ancore. Un indice R00–Revisioni scorre alla sezione senza cambiare l'hash; le tabelle larghe scorrono nel proprio riquadro. Le regole si leggono anche a server spento. |
+| Registrazione (P07, P08) | Modulo con i controlli del debug: nome alfanumerico, email (regola di Angular), codice di sei cifre, password e conferma. Gli errori compaiono sotto i campi dopo averli toccati; «Invia codice» è attivo con nome ed email validi, «Registrati» con tutto valido. «Invia codice» chiede la disponibilità del nome, poi dell'email, poi `verify`, e si ferma al primo rifiuto. Ogni richiesta finisce entro 10 s; dopo ogni errore il modulo torna attivo e il messaggio viene portato in vista. Un invio riuscito (solo con SMTP) blocca un nuovo invio per 15 s, come il debug. |
+| Test automatici | Client 97 (88 + 9): nuovo `tests/public.test.ts` sul regolamento vero (titoli, versione, revisioni, ogni riga e cella delle tabelle, tutte le parole), markup in linea e innocuità di collegamenti e HTML, validatori, mappa delle risposte osservate, sequenza «Invia codice», client REST (percorsi codificati, corpi, stati, timeout, risposta non booleana) e hash. Nessun atteso esistente cambiato; typecheck pulito. |
+| Server reale | **Sì.** Nuovo `VerifyPublic` (`run.ps1 -Task VerifyPublic`, `tools/verify-public.mjs`): server avviato da sé su un database temporaneo e fermato per l'ultimo scenario. Verde a 1366×768 e 844×390, più portrait 390×844; scenari sotto. |
+| Regressione | `VerifyPublic`, `Verify` (1vCom) e `VerifyModes` verdi a entrambe le misure con la build finale; `Verify` e `VerifyModes` su un server con database temporaneo. `VerifyLifecycle`, `VerifyFfa` e `VerifyDecks` verdi a entrambe le misure con la build che precede l'ultima correzione (il testo del messaggio di codice inviato, raggiungibile solo con SMTP), che non tocca coda, partita o tavolo. `build.ps1 -Task Test -Offline` (253 server + 36 debug) e `check-rules.py` passano. |
+| Peso | JS gzip 304247 byte (+15224 rispetto a C2b-4, quasi tutto il testo del regolamento); totale gzip 1086878 byte ([size.json](client-c2/c2b-5/size.json)). |
+| Emulazione / dispositivo / umano | Due misure landscape e un portrait sul PC; nessun dispositivo fisico né prova umana. |
+
+### Scenari reali (entrambe le misure)
+
+1. **Home.** Sette collegamenti con `href` uguali all'insieme estratto da
+   `client-debug/src/app/home/home.component.{ts,html}` (confronto, nessuna apertura),
+   ciascuno una volta; testo dei diritti; nessuna immagine né sfondo nel foglio, nessuno
+   «sponsor», nessuna affermazione «open source». Nessuno scorrimento orizzontale.
+2. **Regole.** Intestazione «Regolamento 1.8» uguale alla versione della fonte. I 21
+   titoli, le otto revisioni (1.8…1.1), le sette tabelle con ogni cella (R07: 33 righe;
+   R07a: 40) e tutte le 4189 parole sono uguali a `docs/game-rules.md`, markup a parte. Nel
+   testo reso zero `a`, zero `id`, zero `script`/`iframe`/`img`. L'indice porta R07a in
+   vista lasciando l'hash `#/regole`.
+3. **Ritorno.** Indietro del browser → home, avanti → regole, «← Home» → `#/`.
+4. **Accesso.** Home → «Accedi» (`#/accedi`) → devAlice → hub «Ciao, devAlice» → «Esci» →
+   home. Con la password errata resta su `#/accedi` con «Credenziali errate…».
+5. **Moduli non validi.** All'apertura «Invia codice» e «Registrati» sono spenti; «a b» e
+   «non-una-email» mostrano i due errori e lasciano spento l'invio.
+6. **Nome occupato.** devAlice: una sola richiesta (`users/devAlice/available` 200),
+   nessun `verify`, «Questo nome è già usato: scegline un altro.», modulo attivo.
+7. **Invio del codice nel profilo locale.** Nome nuovo, libero prima della prova: tre
+   richieste, `users/…/available` 200, `mail/…/available` 200, `verify` 500; messaggio di
+   indisponibilità come `alert`, in vista nel foglio, campi e «Invia codice» di nuovo attivi.
+8. **Codice errato.** Con la conferma diversa: «Le due password non coincidono.» e
+   «Registrati» spento. Poi `register` 409 e messaggio di rifiuto. Dopo la prova il nome
+   risulta ancora disponibile e il suo login è falso: **nessun account creato**.
+9. **Server spento.** «Invia codice»: un `available` con 502, «Server non raggiungibile.
+   Riprova tra poco.» in meno di 0,1 s, modulo attivo. Login: stesso messaggio, pulsante
+   attivo. Le regole si aprono comunque.
+10. **Portrait 390×844 (D7).** Home, regole, registrazione e accesso senza scorrimento
+    orizzontale, foglio dentro lo schermo, nessuna richiesta di rotazione; la home ha gli
+    stessi collegamenti e diritti.
+
+### Limiti e residui
+
+- **Percorso positivo della registrazione non provato** (D4): senza SMTP il server non
+  invia il codice. Messaggio di invio riuscito, blocco di 15 s e «Account creato» sono
+  provati solo in unità; serve un ambiente SMTP del proprietario.
+- **Email occupata** non provata sul server: gli account sintetici non hanno email, quindi
+  `mail/…/available` risponde sempre `true` in locale. Il messaggio è provato in unità.
+- **Osservazione sul server, fuori perimetro:** `sendVerificationEmail` salva il codice in
+  memoria *prima* di tentare l'invio, e il codice resta valido dopo il 500. In un profilo
+  senza SMTP chi indovina le sei cifre potrebbe completare la registrazione, e il server non
+  limita i tentativi di `register`. Il client non lo sfrutta e non lo cambia: va valutato
+  dal proprietario (nessuna modifica a server o regole in questo blocco).
+- Un'email con «/» è valida per la regola di Angular e per il client, ma il contenitore web
+  risponde 400 a `mail/…/available`: il client mostra «Il server non accetta questo valore»
+  (il debug dava un errore generico). Provato in unità, non sulla UI.
+- I collegamenti esterni non sono stati aperti, come da piano: destinazione confrontata,
+  raggiungibilità non verificata.
+- **Cambi alle verifiche esistenti.** La pagina parte dalla home, quindi `Verify`,
+  `VerifyModes`, `VerifyLifecycle`, `VerifyFfa` e `VerifyDecks` entrano da `#/accedi` e, dopo
+  «Esci», aspettano la home invece del modulo di accesso. In più `VerifyModes` a 844×390 è
+  fallito due volte sul controllo di riservatezza con un falso positivo: il nome segnalato
+  era nella **mano propria** di chi guardava (`players.<sé>.cardsInHand` della vista finale),
+  pescato all'ultimo turno e quindi mai registrato dal ciclo della UI, che raccoglie la mano
+  solo nei turni giocati. Il controllo ora esclude la mano propria dal testo cercato
+  (resta verificato che sia un array e che quella altrui sia un numero). Nessun altro
+  atteso cambiato.
+- La console registra le risposte 500, 409 e 502 provocate apposta e il 404 di
+  `favicon.ico` già noto.
+- Non provati: dispositivo fisico, iPhone, prova umana, lettore di schermo.
+- Dati locali non toccati: tutte le prove su database temporanei.
+- Evidenze: [public-1366x768.json](client-c2/c2b-5/public-1366x768.json),
+  [public-844x390.json](client-c2/c2b-5/public-844x390.json), [catture](client-c2/c2b-5/screens/)
+  `public-*` (portrait `*-390x844`); regressione `verify-*`, `modes-*`, `lifecycle-*`,
+  `ffa-*`, `decks-*` e [size.json](client-c2/c2b-5/size.json) nella stessa cartella.

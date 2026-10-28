@@ -29,7 +29,7 @@ async function join(name){
  p.ack=dest=>p.received.some(f=>f.command==='MESSAGE'&&f.headers.destination===dest);
  p.count=async()=>Number(await page.getByTestId('presence-count').innerText());
  p.rows=async()=>page.locator('.presence tbody tr td:first-child').allInnerTexts();
- await page.goto(url);
+ await page.goto(`${url}#/accedi`);
  await page.getByLabel('Nome').fill(user);await page.getByLabel('Password').fill(password);
  await page.getByRole('button',{name:'Siediti al tavolo'}).click();
  // A previous run may have left a resumable game for this synthetic account: close it like a player would.
@@ -88,6 +88,8 @@ function checkPrivacy(me,other,hands){
   assert.equal(typeof v.players[other.user].cardsInHand,'number',`${me.name}: the other hand is only a count`);
   const rest=JSON.parse(JSON.stringify(v));delete rest.resolvedMoves;delete rest.pendingMove;delete rest.timeBasedEffects;
   for(const pl of Object.values(rest.players))delete pl.character;
+  // The own hand array is the viewer's own (a card drawn on the last turn was never seen by the UI loop): not a leak.
+  delete rest.players[me.user].cardsInHand;
   const text=JSON.stringify(rest);
   for(const n of onlyOther)assert.ok(!text.includes(JSON.stringify(n)),`${me.name}: ${n} (only in ${other.name}'s hand) leaked in a view`);
  }
@@ -147,7 +149,7 @@ const second=gameId(A);assert.ok(second&&second!==evidence.checks.game1.gameId&&
 evidence.checks.newGameRepeatsMode={firstGame:evidence.checks.game1.gameId,secondGame:second,queue:'quick/1v1'};
 await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Strumenti'}).click();await A.page.getByRole('button',{name:'Simula disconnessione'}).click();
 await A.page.getByRole('button',{name:'Rientra'}).waitFor({timeout:10000});
-const C=await (await browser.newContext()).newPage();await C.goto(url);
+const C=await (await browser.newContext()).newPage();await C.goto(`${url}#/accedi`);
 const refused=await C.evaluate(({user,password})=>new Promise(resolve=>{
  const ws=new WebSocket(`ws://${location.host}/ws/websocket`),got=[];let timer=setTimeout(()=>{ws.close();resolve({got,timeout:true});},8000);
  const send=(command,headers,body='')=>ws.send(`${command}\n${Object.entries(headers).map(([k,v])=>`${k}:${v}`).join('\n')}\n\n${body}\0`);
@@ -170,7 +172,7 @@ evidence.checks.forfeit={winner:won.winner};
 await B.page.getByRole('button',{name:'Torna all’hub'}).click();await B.page.getByTestId('quick').waitFor({timeout:15000});
 
 // 5. B logs out: A sees B disappear and the count drop.
-await B.page.getByRole('button',{name:'Esci',exact:true}).click();await B.page.getByLabel('Nome').waitFor({timeout:10000});
+await B.page.getByRole('button',{name:'Esci',exact:true}).click();await B.page.getByTestId('home').waitFor({timeout:10000});
 await A.page.waitForFunction(()=>![...document.querySelectorAll('.presence tbody td:first-child')].some(td=>td.textContent.startsWith('devBob')),null,{timeout:10000});
 await A.page.getByLabel('Righe').selectOption('20');
 const n2=await A.count();assert.equal(n2,n0);

@@ -43,7 +43,7 @@ async function drag(from,to,snapshot){await page.mouse.move(from.x,from.y);await
  const mid=await state();if(snapshot)await shot(snapshot);await page.mouse.up();await page.waitForTimeout(80);return mid;}
 
 // Login and hub.
-await page.goto(url);
+await page.goto(`${url}#/accedi`);
 await page.getByLabel('Nome').fill(user);await page.getByLabel('Password').fill(password);
 await page.getByRole('button',{name:'Siediti al tavolo'}).click();
 // A previous interrupted run may be resumed by the server: then the table appears directly.
@@ -204,7 +204,7 @@ assert.ok(c2a.turnsChecked>0&&c2a.hover?.raised,'C2a checks ran');
 const s=await wait(x=>x&&!x.over,20000,'last game view');
 if(s){await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();}
 await page.getByTestId('quick').waitFor({timeout:15000});evidence.checks.hubReturn='hub visible after leave acknowledgement';await shot('07-hub-return');
-await page.getByRole('button',{name:'Esci'}).click();await page.getByLabel('Nome').waitFor();
+await page.getByRole('button',{name:'Esci'}).click();await page.getByTestId('home').waitFor();
 const ms=[...(evidence.inputSamples||[])].sort((a,b)=>a-b),pct=p=>ms[Math.min(ms.length-1,Math.floor(ms.length*p))]??null;
 evidence.inputMs={note:'PC headless/headed Edge, input to next frame; not the iPhone measure',samples:ms.length,p50:pct(.5),p95:pct(.95),max:ms.at(-1)??null};delete evidence.inputSamples;
 await writeFile(`${out}/verify${tag}.json`,JSON.stringify(evidence,null,2));

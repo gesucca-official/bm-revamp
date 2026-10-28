@@ -91,3 +91,27 @@ button.danger{background:#d9a3a0}
 .deck-choice{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.deck-choice button{text-align:left}
 @media(max-height:550px){.cards{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}.cc .thumb{flex-basis:44px;height:44px}.slot summary{min-height:36px}}
 @media(max-width:640px){.cards{grid-template-columns:1fr}}
+/* C2b-5: home, rules and sign-up before the login. Portrait allowed (D7); the sheet scrolls, never the page. */
+.public button.link{background:none;border:0;box-shadow:none;padding:2px 4px;min-height:32px;min-width:0;font:bold 14px Arial,sans-serif;color:#2c6262;text-decoration:underline}
+.sheet.public h2{margin:0;font-size:18px;color:#742e33}.sheet.public p{margin:0;line-height:1.45}
+.actions.stack{flex-direction:column}
+.public-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+button.back{align-self:flex-start;padding:4px 12px;min-height:40px}
+.about{display:flex;flex-direction:column;gap:8px;border-top:1px solid #b99772;padding-top:10px}
+.links{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 14px}
+.links a{color:#2c6262;font-weight:bold;display:inline-block;padding:6px 0}.links a:focus-visible{outline:3px solid #6eafaf}
+.rights{font-size:13px}
+.field-error{font-weight:normal;color:#742e33;font-size:13px}
+.sheet input[aria-invalid=true]{border-color:#742e33}
+.sheet.rules{width:min(980px,96vw);transform:none;gap:10px}
+.rules-index{display:flex;flex-wrap:wrap;gap:2px 8px;border-bottom:1px solid #b99772;padding-bottom:6px}
+.rules-text{display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.5;overflow-wrap:anywhere}
+.rules-text h1{font:normal 30px/1 Impact,'Arial Narrow',sans-serif;color:#742e33;margin:0}
+.rules-text h2{font-size:20px;color:#742e33;margin:12px 0 0;scroll-margin-top:8px}.rules-text h3{font-size:16px;margin:6px 0 0}
+.rules-text ol,.rules-text ul{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:4px}
+.rules-text code{font:13px Consolas,monospace;background:#f6ecd8;padding:0 3px;border-radius:3px}
+.table-scroll{overflow-x:auto;max-width:100%}.table-scroll:focus-visible{outline:3px solid #6eafaf}
+.rules-text table{border-collapse:collapse;font-size:13px;line-height:1.35;min-width:100%}
+.rules-text th,.rules-text td{border:1px solid #b99772;padding:4px 6px;vertical-align:top}.rules-text th{background:#efe0c2}
+.rules-text td{overflow-wrap:normal}
+@media(max-height:550px){.sheet.public{padding:14px 18px;gap:8px}.sheet.public h1{font-size:30px}.rules-text{font-size:14px}}

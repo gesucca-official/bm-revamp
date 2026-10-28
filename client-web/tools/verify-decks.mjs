@@ -127,7 +127,7 @@ const startOpen=async(id,{cancelFirst=false}={})=>{
 
 try{
  await startServer();
- await page.goto(url);
+ await page.goto(`${url}#/accedi`);
  await page.getByLabel('Nome').fill(A.user);await page.getByLabel('Password').fill(A.password);
  await page.getByRole('button',{name:'Siediti al tavolo'}).click();
  await page.getByTestId('quick').waitFor({timeout:15000});

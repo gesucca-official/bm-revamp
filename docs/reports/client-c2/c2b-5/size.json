@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-28T16:38:02.465Z",
+  "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped; textures: WebP header size x 4 bytes (RGBA), no mipmaps counted",
+  "jsGzip": 304247,
+  "totalGzip": 1086878,
+  "textureDecodedBytes": 18876320,
+  "textures": [
+    {
+      "file": "art/atlas.webp",
+      "width": 2048,
+      "height": 1536,
+      "decodedBytes": 12582912
+    },
+    {
+      "file": "art/table.webp",
+      "width": 1672,
+      "height": 941,
+      "decodedBytes": 6293408
+    }
+  ],
+  "budgets": {
+    "js": 512000,
+    "total": 4194304,
+    "atlasSide": 2048,
+    "textureBytes": 67108864
+  },
+  "pass": true,
+  "files": [
+    {
+      "file": "art/atlas.webp",
+      "bytes": 566518,
+      "gzip": 564873,
+      "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956"
+    },
+    {
+      "file": "art/manifest.json",
+      "bytes": 2330,
+      "gzip": 967,
+      "sha256": "7ef05d3897fc8039e284081e8864fb95113f0d0ee8d8561a069c83e53648c469"
+    },
+    {
+      "file": "art/table.webp",
+      "bytes": 212340,
+      "gzip": 212423,
+      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
+    },
+    {
+      "file": "assets/browserAll-CNs7Zh7i.js",
+      "bytes": 43507,
+      "gzip": 11134,
+      "sha256": "98c29255b15e76c6b14282aee448952b4d8880937fcee459a69ab43d66e8993c"
+    },
+    {
+      "file": "assets/Cache-fEtFvAzf.js",
+      "bytes": 1100,
+      "gzip": 556,
+      "sha256": "e7e2ce32bbc0d5153c8a36b2bfe1fc748c7f825608266659d52079b26ac458a9"
+    },
+    {
+      "file": "assets/CanvasPool-BZ0sA3Gt.js",
+      "bytes": 71204,
+      "gzip": 23075,
+      "sha256": "e2ccf0eaa2158cc152819a493c056cd66579de2cf2f1aea781cea6acfc14191c"
+    },
+    {
+      "file": "assets/canvasUtils-BlnLdLY1.js",
+      "bytes": 6011,
+      "gzip": 2035,
+      "sha256": "1a9ff1194ab02084137984cd2a2adb2e8c8fa78b073606c1dd564500e48da2bd"
+    },
+    {
+      "file": "assets/Filter-B0XMl_yL.js",
+      "bytes": 41958,
+      "gzip": 11902,
+      "sha256": "5913961319d4cb4a786b7feec6c1cff98b46ae2148570a6089c00772f8b4a12d"
+    },
+    {
+      "file": "assets/GCManagedHash-DAvwKUzM.js",
+      "bytes": 19313,
+      "gzip": 6245,
+      "sha256": "8bf5dc944cafe2a3a9efb3a61a3e5bbcbfeb45d768f1d1ffb688905b254cbb6f"
+    },
+    {
+      "file": "assets/getTexelRangeRects-Bt1M-OmZ.js",
+      "bytes": 11358,
+      "gzip": 2982,
+      "sha256": "221f12045d9e278d2174d6c7b6977169eb7784eae7eb9eb9bd65020007f7250b"
+    },
+    {
+      "file": "assets/getTextureBatchBindGroup-CckcnH94.js",
+      "bytes": 344,
+      "gzip": 269,
+      "sha256": "00cbd0cc9465d16ca748a4205d08ab418c472892e38f6cc38791e5dc5d77720e"
+    },
+    {
+      "file": "assets/GraphicsContext-DJRE2111.js",
+      "bytes": 61680,
+      "gzip": 20468,
+      "sha256": "040036b2b3f95fadee76dcf89de80dd72f3dc23173ff7dbf9b341d399fe3f698"
+    },
+    {
+      "file": "assets/index-CEfda8Hr.js",
+      "bytes": 672334,
+      "gzip": 204644,
+      "sha256": "a6362a39a3e360e99bc55056fabf9a961febbae8c60986d8787e8394d8cf55de"
+    },
+    {
+      "file": "assets/index-DQbQQnrV.css",
+      "bytes": 14681,
+      "gzip": 3886,
+      "sha256": "4577e7fdf86ce9549f3638915e4cb3d0f187a49c26a33df75750c9979e9199de"
+    },
+    {
+      "file": "assets/init-DhCuOln8.js",
+      "bytes": 14842,
+      "gzip": 4561,
+      "sha256": "506a1c7f31626054da57bef05d5e3aea1af905d0165a3499411254da9bfa9aff"
+    },
+    {
+      "file": "assets/RenderTargetSystem-9obqq6wg.js",
+      "bytes": 58807,
+      "gzip": 16313,
+      "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
+    },
+    {
+      "file": "assets/webworkerAll-CrDWyBvO.js",
+      "bytes": 55,
+      "gzip": 63,
+      "sha256": "eeb66b1adcff3154bad610fcd7a82cd1e0fec00f23641256dd1e0bfb6319211a"
+    },
+    {
+      "file": "index.html",
+      "bytes": 1152,
+      "gzip": 482,
+      "sha256": "f002a7cca3371938f0c184524428dc3619db1f778c7d48b6b8a9f17e0f9ec556"
+    }
+  ]
+}
