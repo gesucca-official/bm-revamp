@@ -1,9 +1,10 @@
-# Client web animato (C1, C2a, O9, C2b-1)
+# Client web animato (C1, C2a, O9, C2b-1, C2b-2, C2b-3)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
-login → hub «Gioca» (contro il computer o uno contro uno) → partita → esito →
-nuova partita nella stessa modalità oppure ritorno all'hub. FFA, open con mazzo
-e il resto della parità del debug arrivano nei blocchi successivi di C2b
+login → hub «Gioca» (contro il computer, uno contro uno o tutti contro tutti fino a
+cinque) → partita → esito → nuova partita nella stessa modalità oppure ritorno
+all'hub. Open con mazzo e il resto della parità del debug arrivano nei blocchi
+successivi di C2b
 ([piano](../docs/client-c2b-plan.md)). La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
@@ -60,15 +61,25 @@ loopback dietro il proxy, che riconosce come pagina propria anche l'indirizzo
 LAN. Al primo avvio Windows può chiedere di consentire Node sulle reti private.
 Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
 
-## Hub «Gioca» (C2b-1)
+## Hub «Gioca» (C2b-1, C2b-3)
 
-- Modalità: contro il computer e uno contro uno; FFA e open compaiono ma sono
-  disattivate fino ai loro blocchi. «Gioca» entra nella coda scelta.
+- Modalità: contro il computer, uno contro uno e tutti contro tutti; open compare
+  ma è disattivata fino al suo blocco. «Gioca» entra nella coda scelta.
 - In coda: «Esci dalla coda» chiede `/app/session/queue/leave` e torna all'hub solo
   all'ACK del server; senza ACK (5 s) resta in coda con un errore e si può riprovare.
   Un ingresso rifiutato (`game/error`) riporta all'hub con il messaggio del server.
 - La coda 1v1 non ha una lista pubblica: l'attesa finisce solo con la partita.
-- «Nuova partita» rientra nella coda della modalità appena giocata.
+- Tutti contro tutti (C2b-3): la lista di chi siede al tavolo arriva dal topic
+  pubblico `/topic/game/quick/ffa/joined`, in ordine d'ingresso, con i posti liberi.
+  «Aggiungi computer» chiede un computer; a cinque la partita parte da sola.
+  «Inizia ora» è attivo solo con almeno due iscritti (con meno il server non
+  risponde). Se l'ultimo umano esce dalla coda, i computer rimasti spariscono.
+- Più computer allo stesso tavolo si chiamano «Computer 1–4» nell'ordine della
+  vista del server (stabile per tutta la partita; la coda non li distingue); uno
+  solo resta «Computer». L'ID completo è nell'ispezione del personaggio e in
+  Strumenti → Giocatori.
+- «Nuova partita» rientra nella coda della modalità appena giocata; dopo un rientro
+  la modalità si deduce dalla vista (più di due giocatori: tutti contro tutti).
 - «Al bar»: utenti collegati e attività (`/topic/connections/users`), conteggio,
   ordinamento per colonna, pagine da 5, 10 o 20 righe.
 - Il `resume` del login si applica una sola volta; un `account/data` successivo
@@ -102,8 +113,25 @@ Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
   scelta, come Escape.
 - Dopo ogni turno compare una riga di riepilogo non bloccante; toccandola si apre
   l'ultimo turno con mosse, report ed effetti di fine turno.
+- Tutti contro tutti: quattro ventagli coperti con tante carte quante il server
+  dice, oggetti come carte presso ogni posto. Gli oggetti di un posto si
+  sovrappongono un poco: passando il mouse quello coperto si alza; su touch il
+  primo tocco lo alza e il secondo lo sceglie come bersaglio (o lo ispeziona).
 - Menu •••: aiuto, ultimo turno, salta effetti, strumenti (Log Card, Log State,
-  Log Item, Log JSON, messaggi ricevuti, simula disconnessione), abbandono.
+  Log Item, Log JSON, messaggi ricevuti, giocatori con ID, simula disconnessione),
+  abbandono, uscita dall'account (in partita vale come forfait, con conferma).
+
+## Ciclo di vita (C2b-2, C2b-3)
+
+- Clock indicativo della mossa fra umani, calcolato dall'epoch della vista: non
+  decide mai l'esito. Un avversario caduto mostra «fuori linea · N s».
+- Esiti e forfait tradotti: abbandono, mossa non inviata in 30 s, rientro oltre
+  30 s, pareggio per scadenze simultanee. In tutti contro tutti una sconfitta dice
+  chi ha vinto.
+- Tutti contro tutti: il forfait o la morte di un altro non fermano la partita.
+  Dopo la propria morte si può restare a guardare fino all'esito («Resta a
+  guardare»; dal menu si torna all'hub); dopo il proprio forfait compaiono esito e
+  ritorno all'hub.
 
 Dopo una disconnessione nessun comando parte da solo: «Rientra» riapre la
 connessione con lo stesso account e chiede `resume`; la mossa già accettata resta
@@ -119,6 +147,8 @@ di rotazione.
 ./client-web/run.ps1 -Task Atlas    # rigenera l'atlante O9 (servono i PNG locali, fuori da git)
 ./client-web/run.ps1 -Task Verify   # partite reali: richiede server e Serve attivi
 ./client-web/run.ps1 -Task VerifyModes   # due account, code e 1v1: richiede server e Serve attivi
+./client-web/run.ps1 -Task VerifyLifecycle   # clock, forfait, rientri, riavvio: avvia da sé il server
+./client-web/run.ps1 -Task VerifyFfa     # tutti contro tutti a cinque: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -134,6 +164,15 @@ coda, 1v1 fino all'esito con controllo delle viste private, «Nuova partita»,
 ingresso rifiutato con partita riprendibile (da un secondo socket STOMP grezzo
 dello stesso account, perché dal client l'hub non è raggiungibile in quello stato),
 abbandono e uscita. Accetta le stesse variabili di `Verify`.
+`VerifyLifecycle` e `VerifyFfa` avviano e fermano da sé il server su un database
+temporaneo (la porta 8080 deve essere libera, `Serve` attivo) e aspettano davvero
+i 30 s. `VerifyFfa`: coda con computer e uscita, A più quattro computer fino
+all'esito, A e B con tre computer (viste private), «Inizia ora» a due, forfait
+altrui per abbandono, per tempo scaduto e per rientro tardivo con A che continua
+fino all'esito; a ogni turno rilegge la scena (cinque posti, ventagli uguali a
+`cardsInHand`, oggetti come carte, nessuna sovrapposizione fra posti, mano e
+bordi, con le stesse funzioni dei test) e prova l'oggetto coperto con mouse e
+tocco emulato. `BM_SCENARIOS` sceglie gli scenari (`queue,five,two,start,leave,timeout,drop`).
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
@@ -165,11 +204,13 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
   Nessun effetto delle carte calcolato qui.
 - `src/readability.ts`: funzioni pure di C2a: pagabilità (stesso confronto del
   server), ruolo e guadagni dal catalogo, indicatore delle risorse senza tetti né
-  pavimenti, geometria del tavolo per duello e FFA a cinque.
+  pavimenti, geometria del tavolo per duello e FFA a cinque (ventagli coperti,
+  oggetti coperti da alzare al primo tocco).
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
-- `src/hub.tsx`, `src/presence.ts`: hub «Gioca» e presenza (ordinamento e pagine come
-  funzioni pure).
+- `src/hub.tsx`, `src/presence.ts`: hub «Gioca», coda FFA e presenza (ordinamento,
+  pagine e nomi dei giocatori come funzioni pure).
+- `src/lifecycle.ts`: esiti, ragioni di forfait e countdown indicativi (funzioni pure).
 - `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso,
   tavolo, esito, dialoghi).
 - `window.__bm`: stato in sola lettura della pagina per la verifica automatica;

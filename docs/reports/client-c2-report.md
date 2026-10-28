@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -384,7 +384,100 @@ della vista e l'esito lo decide solo il server.
 - L'indicatore «fuori linea» si basa sull'ultima vista: dopo la caduta di
   un avversario lo aggiorna solo una nuova vista del server, e il conteggio è indicativo come il clock.
 - `README.md`, roadmap e checklist P05/P06/P32–P36 non sono aggiornati in questo
-  commit, per istruzione del proprietario (solo la riga del piano e questo rapporto).
+  commit, per istruzione del proprietario (solo la riga del piano e questo rapporto). Aggiornati
+  con C2b-3.
 - Evidenze: [lifecycle.json](client-c2/c2b-2/lifecycle.json),
   [lifecycle-844x390.json](client-c2/c2b-2/lifecycle-844x390.json),
   [catture](client-c2/c2b-2/screens/) `lifecycle-*`.
+
+## C2b-3 — FFA a cinque
+
+28 ottobre 2026. Regolamento 1.7, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md)). Nessuna modifica a regole, server,
+catalogo o `client-debug`; nessun cambio di protocollo.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Coda FFA (P13–P15, P17) | `join('quick/ffa')` sottoscrive il ready e il topic pubblico `/topic/game/quick/ffa/joined` prima del join; la lista (`[{playerId, human}]`, computer in coda tutti `QueuedComPlayer`) segue il topic. Nell'hub: iscritti in ordine d'ingresso con i posti liberi, «Aggiungi computer» (fino a cinque), «Inizia ora» attivo solo con almeno due iscritti e inviato una volta; a cinque la partita parte da sola. L'uscita con ACK chiude anche il topic. |
+| K4, D9 | `playerName(id, ids)` in `presence.ts`: un solo computer resta «Computer» (1vCom invariato), più computer diventano «Computer 1–4» nell'ordine della vista; la coda li numera allo stesso modo. ID completo nell'ispezione del personaggio e in Strumenti → Giocatori. |
+| K7 | Gli oggetti coperti (in FFA tutti tranne l'ultimo di un posto, `coveredItems`) si alzano al passaggio del mouse, con il focus e **al primo tocco** (`touchRaises`); il secondo tocco li sceglie come bersaglio o li ispeziona. |
+| Tavolo a cinque | Geometria `tableLayout` di C2a, con una correzione emersa dai test sui conteggi reali: con sei carte i ventagli laterali uscivano dallo schermo o coprivano i propri oggetti. Ogni posto ha ora uno spazio per il ventaglio (in alto sopra il personaggio; a sinistra sotto la plancia; a destra sopra gli oggetti, mai sul personaggio); il passo si stringe per starci e in FFA la rotazione scende da 0,13 a 0,05 rad per carta (decorazione ridotta, nessuna carta tolta). Il duello resta com'era. In FFA il riepilogo del turno sta su una riga con puntini: su tre righe, a 844×390 copriva gli oggetti dei posti in alto e intercettava il tocco. |
+| D11, P36 | Dopo la propria morte la partita prosegue: «Sei fuori dalla partita · Eliminato: puoi guardare fino all’esito», con «Resta a guardare» (dal menu si torna all'hub). Dopo il proprio forfait: esito e ritorno all'hub. In FFA una sconfitta dice chi ha vinto («Vince Computer 3»). «Nuova partita» ripete la FFA; dopo un rientro, una vista con più di due giocatori vale FFA. |
+| Correzione trovata nella prova reale | Un tocco che apre un dialogo dal tavolo (ispezione di un oggetto o di un personaggio) era seguito dal suo click di compatibilità, che cadeva sullo sfondo del dialogo e lo richiudeva subito. Ora il click sullo sfondo è ignorato nei primi 500 ms dopo l'apertura. |
+| Hub compatto | In coda, a 844×390 «Esci dalla coda» finiva fuori dal foglio. Durante l'attesa spariscono il suggerimento della modalità, «Esci» (già spento in coda) e, in formato compatto, i pulsanti delle modalità (spenti); i pulsanti della coda non vanno a capo. |
+| Test automatici | Client 71 (57 + 14): nuovo `tests/ffa.test.ts` (nomi, coda, oggetti coperti, primo tocco, ventagli fino a otto carte dentro lo schermo e lontani da posti e mano a entrambe le misure, vincitore in FFA, propria eliminazione) e 6 test di sessione (coda e topic, computer e avvio, limite di cinque, uscita, nuova partita e rientro, forfait altrui e morte). Scritti prima del codice: fallivano tutto il nuovo file e cinque test di sessione su sei; quello sul forfait altrui passava già e documenta il comportamento esistente. Nessun atteso esistente cambiato. Typecheck pulito. |
+| Partite reali | **Sì.** Nuovo `VerifyFfa` (`run.ps1 -Task VerifyFfa`, `tools/verify-ffa.mjs`), che come `VerifyLifecycle` avvia da sé il server su un database temporaneo; devAlice (con tocco emulato) e devBob in due contesti Edge, attese reali. Verde a 1366×768 e 844×390; scenari sotto. |
+| Regressione | `Verify` (1vCom), `VerifyModes` e `VerifyLifecycle` verdi a entrambe le misure con la build finale; `Verify` e `VerifyModes` su un server con database temporaneo. `build.ps1 -Task Test -Offline` 36/36, `check-rules.py` passa. |
+| Peso | JS gzip 285282 byte (+1492 rispetto a C2b-2); totale gzip 1066917 byte ([size.json](client-c2/c2b-3/size.json)). |
+| Emulazione / dispositivo / umano | Due misure sul PC, tocco emulato da Playwright; nessun dispositivo fisico né prova umana. La prova su iPhone a 750×292 spetta al proprietario. |
+
+### Scenari reali (entrambe le misure)
+
+Il server assegna i personaggi a caso: le evidenze registrano quelli di ogni partita
+(Spazienzio de la Ucciso e Tossico del Serraglio, in varie combinazioni).
+
+1. **Uscita dalla coda.** A da solo: lista «devAlice (tu)», «Inizia ora» spento.
+   Con due computer: «Computer 1», «Computer 2». A esce: ACK, e l'ultima lista vista da A
+   è vuota; B entra subito dopo e vede solo sé stesso. Nessuno start inviato con un iscritto.
+2. **A + quattro computer.** Avvio automatico al quinto ingresso, nessuno start
+   inviato. Lettura della scena a ogni turno (10 turni a 1366×768, 12 a 844×390): cinque
+   posti, ordine dei giocatori stabile, quattro ventagli uguali a `cardsInHand` (sempre
+   6), oggetti come carte quanti nella vista (fino a 3), nessuna sovrapposizione fra
+   posti, ventagli, mano e bordi. Esito di combattimento; «Nuova partita» rientra nella
+   coda FFA con A da solo.
+3. **A + B + tre computer.** Stesso `gameId`; l'ispezione di un computer mostra
+   «Computer 1 · ID ComPlayer_…». Entrambi giocano fino all'esito, con la scena controllata
+   a ogni turno. Viste private: 51 per account a 1366×768 e 58 a 844×390, con la propria mano
+   come array e le altre quattro come numero, e nessun nome della sola mano altrui fuori
+   dalle mosse risolte. A muore (turno 9 e turno 13) e con «Resta a guardare» segue la
+   partita fino all'esito (turno 21 e turno 22, pareggio fra gli ultimi).
+4. **«Inizia ora» con due iscritti.** Spento con un iscritto, attivo con due; un solo
+   start; FFA a due (`devAlice`, `devBob`) fino all'esito.
+5. **B abbandona.** A vede il posto di B «forfait» nello stesso turno e continua fino
+   all'esito (14 e 16 turni dopo): «devBob ha abbandonato».
+6. **B lascia scadere il clock.** B vede «◷ 30 s»; forfait `move timeout` dopo 30 s
+   misurati, pannello «Non hai mosso entro 30 secondi», ritorno all'hub; A continua fino
+   all'esito.
+7. **B cade e rientra dopo il termine.** B invia la mossa e cade; A vede «devBob fuori
+   linea · 30 s» e gioca il turno successivo. Dopo 31 s B rientra: `resume` `finished`
+   con la vista corrente (turno 2, lo stesso di A), forfait `reconnect timeout`,
+   «Non sei rientrato entro 30 secondi». Dopo il rientro solo `resume`, profilo e
+   presenza, nessuna SUBSCRIBE né SEND verso la partita. A continua fino all'esito.
+8. **Oggetto avversario coperto (K7).** Senza carta scelta: il primo tocco lo alza
+   (larghezza 89→102 px a 1366×768, 46→52 px a 844×390), il secondo apre l'ispezione; il
+   mouse lo alza al passaggio. Con «BELLO IL TUO GIOCATTOLO SI» (bersaglio FAR_ITEM):
+   un clic sull'oggetto alzato dal mouse lo mira; con il tocco, il primo tocco alza senza
+   mirare e il secondo mira. Nella passata completa la carta adatta non è capitata in mano:
+   la mira è provata in una partita a cinque ripetuta con la build finale
+   ([k7/](client-c2/c2b-3/k7/)); nella passata completa è provata l'alzata.
+
+### Limiti e residui
+
+- **Ordine dei computer.** La vista non elenca i giocatori nell'ordine della coda
+  (devAlice capita prima, seconda o quarta) e in coda i computer sono indistinguibili:
+  «Computer 1–4» segue l'ordine della vista, verificato stabile a ogni turno.
+- Una FFA a due avviata con «Inizia ora» e ripresa dopo un rientro viene presa per un
+  duello: «Nuova partita» rientra in 1v1 o 1vCom.
+- Quando A muore e restano solo computer, il server risolve i turni restanti senza
+  attese: l'esito arriva prima che «Resta a guardare» serva. La visione fino all'esito è
+  provata quando resta un altro umano (scenario 3).
+- Ventagli: nelle partite reali sempre sei carte; uno e otto solo nei test di geometria.
+  Al massimo tre oggetti per posto.
+- Osservazioni di finitura per **C3/C4**: il riepilogo del turno, anche su una riga,
+  copre per 6 s i ventagli dei posti in alto. A 844×390 la carta della mano alzata dal
+  focus copre in parte gli oggetti del posto a destra, e il testo della calata (✓/×) si
+  sovrappone alla plancia di quel posto
+  ([cattura](client-c2/c2b-3/k7/screens/ffa-k7-touch-target-844x390.jpg)). Nel duello
+  (anche nella FFA a due) il ventaglio ruotato scende di pochi pixel sul bordo alto del
+  personaggio, come in C2a: il controllo dei ventagli vale solo per i tavoli a più di due posti.
+- La correzione del dialogo dopo il tocco è provata solo con il tocco emulato.
+- Non provati: iPhone a 750×292 (prova del proprietario), dispositivo fisico, prova umana;
+  hub a 750×292.
+- Dati locali non toccati: tutte le prove su database temporanei. Delle verifiche di
+  regressione si conservano i JSON, non le catture (uguali a quelle dei blocchi precedenti).
+- Evidenze: [ffa-1366x768.json](client-c2/c2b-3/ffa-1366x768.json),
+  [ffa-844x390.json](client-c2/c2b-3/ffa-844x390.json), [k7/](client-c2/c2b-3/k7/),
+  [catture](client-c2/c2b-3/screens/) `ffa-*`; regressione `verify-*`, `modes-*`,
+  `lifecycle-*` nella stessa cartella.

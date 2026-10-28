@@ -1,9 +1,10 @@
 import {Application,Assets,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
 import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
+import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
-export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container};
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
+export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
 type Flight={node:Container;from:{x:number;y:number};to:{x:number;y:number};start:number;end:number};
@@ -27,7 +28,6 @@ export function glyph(g:Graphics,kind:Resource|Role,x:number,y:number,s:number,c
   case 'OTHER':g.circle(x-r*.6,y,r*.24).circle(x,y,r*.24).circle(x+r*.6,y,r*.24).fill(color);break;
  }return g;}
 export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number};item:{w:number;h:number}};hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null};
-export const playerName=(id:string)=>id.startsWith('ComPlayer_')?'Computer':id;
 // Stable seats: the viewer at the bottom, opponents in join order. Five-seat layout kept for C2 FFA.
 const SEATS={me:[.18,.77],duel:[[.46,.24]],ffa:[[.26,.24],[.72,.24],[.16,.49],[.81,.49]]} as const;
 export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.characterBound?'AZIONE LEGATA':c.lastResort?'ULTIMA RISORSA':'AZIONE REGOLARE';
@@ -36,6 +36,8 @@ export const cost=(c:Card)=>Object.entries(c.cost).map(([k,v])=>`${v} ${{VIOLENC
 export class TableScene {
  app=new Application();world=new Container();fx=new Container();hits:Hit[]=[];backs:Record<string,number>={};
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
+ // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
+ peek:string|null=null;
  width=0;height=0;art:Texture[]=[];background!:Sprite;pendingGhost:Container|null=null;
  reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;blocked=false;contextLost=false;
  onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};onHover=(_id:string|null)=>{};
@@ -131,7 +133,7 @@ export class TableScene {
    RESOURCES.forEach((k,i)=>{const y=rh*(i+.5),v=r[k]??0;glyph(g,k,8+gs/2,y,gs,RES_COLOR[k]);
     const t=this.text(c,`${v}`,0,0,fs,undefined,v<0?0xffb7bd:0xfff6e2);t.anchor.set(0,.5);t.position.set(12+gs,y);
     bar(bx,y,bw,Math.max(5,rh*.3),k);rows.push(`${LETTER[k]} ${v}`);});}
-  else{const fs=compact?10:14,top=b.h*.3,name=this.text(c,playerName(id).toUpperCase().slice(0,10),0,0,fs,undefined,0xe9dcc2);name.anchor.set(0,.5);name.position.set(6,top);
+  else{const fs=compact?10:14,top=b.h*.3,name=this.text(c,this.name(id).toUpperCase().slice(0,10),0,0,fs,undefined,0xe9dcc2);name.anchor.set(0,.5);name.position.set(6,top);
    const hp=r.HEALTH??0;glyph(g,'HEALTH',b.w-(compact?44:62),top,fs*1.1,RES_COLOR.HEALTH);const ht=this.text(c,`${hp}`,0,0,fs*1.35,undefined,hp<0?0xffb7bd:0xfff6e2);ht.anchor.set(1,.5);ht.position.set(b.w-6,top);
    const slot=(b.w-8)/4;(['ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'] as Resource[]).forEach((k,i)=>{const x=6+i*slot,y=b.h*.74;glyph(g,k,x+fs*.5,y,fs*.9,RES_COLOR[k]);const t=this.text(c,`${r[k]??0}`,0,0,fs,undefined,0xfff6e2);t.anchor.set(0,.5);t.position.set(x+fs*1.1,y);});
    bar(6,b.h*.52,b.w-14,Math.max(3,b.h*.07),'HEALTH');}
@@ -154,6 +156,8 @@ export class TableScene {
  private back(w:number,h:number){const c=this.frame(w,h);c.addChild(new Graphics().roundRect(-w/2+4,-h/2+4,w-8,h-8,2).fill(WINE).stroke({color:0xa47763,width:1}));
   const g=new Graphics().circle(0,0,w*.2).fill(0xcab184).stroke({color:INK,width:1});g.moveTo(-w*.27,-h*.25).lineTo(w*.27,h*.25).moveTo(w*.27,-h*.25).lineTo(-w*.27,h*.25).stroke({color:0xcab184,width:2});c.addChild(g);return c;}
  private halo(c:Container,w:number,h:number,color=PETROL){c.addChild(new Graphics().roundRect(-w/2-3,-h/2-3,w+6,h+6,6).stroke({color,width:3}));}
+ // K4/D9: "Computer 1–4" in join order when several computers sit at the table.
+ private name(id:string){return playerName(id,Object.keys(this.model.view.players));}
  resize(w:number,h:number){this.width=w;this.height=h;this.app.renderer.resize(w,h);this.background.width=w;this.background.height=h;this.draw();}
  draw(){if(!this.art.length)return;
   // Old nodes survive one render, so Pixi's ref-counted text textures are reused instead of re-rasterized on every tap.
@@ -162,18 +166,20 @@ export class TableScene {
   const L=tableLayout(w,h,ids,me,Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])));this.layout=L;const compact=L.compact,H=L.hand;
   const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null;
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
-   if(id!==me){const count=p.cardsInHand as number,b=seat.backs;this.backs[id]=count;
-    for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(b.w,b.h);bk.position.set(b.x+k*b.w*.64,b.y);bk.rotation=k*.13;this.world.addChild(bk);}}
+   if(id!==me){const count=p.cardsInHand as number,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=count;
+    for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
    const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true);person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
    const dead=p.character.dead,forfeit=view.forfeits[id];if(dead||forfeit){person.alpha=.55;this.text(person,dead?'ELIMINATO':'FORFAIT',0,0,compact?11:16,cw,0xffffff);}
    const r=p.character.resources,summary=RESOURCES.map(k=>`${LETTER[k]} ${r[k]??0}`).join(', ');
-   const charHit:Hit={id:`person-${id}`,kind:'person',x,y,w:cw,h:ch,angle:person.rotation,target:{owner:id},label:`${id===me?'Tu':playerName(id)}, ${p.character.name}, salute ${r.HEALTH}${dead?', eliminato':forfeit?', forfait':''}; risorse ${summary}`,node:person};this.hits.push(charHit);
+   const charHit:Hit={id:`person-${id}`,kind:'person',x,y,w:cw,h:ch,angle:person.rotation,target:{owner:id},label:`${id===me?'Tu':this.name(id)}, ${p.character.name}, salute ${r.HEALTH}${dead?', eliminato':forfeit?', forfait':''}; risorse ${summary}`,node:person};this.hits.push(charHit);
    if(this.model.allows({owner:id})&&!this.model.locked)this.halo(person,cw,ch,this.model.target?.owner===id&&this.model.target.itemIndex===undefined?0xf1e4c4:PETROL);
    const read=this.board(seat.board,p,id,id===me,compact);if(read)board=read;
    this.statusChips(seat.status,id,p);
+   const covered=coveredItems(seat.items);
    p.character.items.forEach((item,index)=>{const b=seat.items[index]??seat.items[seat.items.length-1],c=this.card(item,b.w,b.h,true),hid=`item-${id}-${index}`;c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);
-    const hit:Hit={id:hid,kind:'item',x:b.x,y:b.y,w:b.w,h:b.h,angle:c.rotation,target:{owner:id,itemIndex:index},label:`${item.name}, oggetto di ${id===me?'te':playerName(id)}${roleLabel(item)?`, ruolo ${roleLabel(item).toLowerCase()}`:''}${item.gains&&item.gains!=='—'?`, dà ${item.gains}`:''}, copia ${index+1}`,node:c};this.hits.push(hit);
-    if(hover===hid){c.scale.set(1.15);hit.w*=1.15;hit.h*=1.15;raised.push(c);}
+    const hit:Hit={id:hid,kind:'item',x:b.x,y:b.y,w:b.w,h:b.h,angle:c.rotation,covered:!!covered[index],target:{owner:id,itemIndex:index},label:`${item.name}, oggetto di ${id===me?'te':this.name(id)}${roleLabel(item)?`, ruolo ${roleLabel(item).toLowerCase()}`:''}${item.gains&&item.gains!=='—'?`, dà ${item.gains}`:''}, copia ${index+1}`,node:c};this.hits.push(hit);
+    // Raised (over its neighbour) by the mouse at rest, a first touch (K7) or the keyboard focus.
+    if(hover===hid||this.peek===hid||this.focused===hid){c.scale.set(1.15);hit.w*=1.15;hit.h*=1.15;raised.push(c);}
     if(this.model.allows({owner:id,itemIndex:index})&&!this.model.locked)this.halo(c,b.w,b.h);});
   }
   const n=this.model.hand.length,res=view.players[me]?.character.resources??{},hand:Readout['hand']=[];let lifted:Container|null=null;
@@ -210,6 +216,8 @@ export class TableScene {
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);
   // A tap or click anywhere else lowers raised cards and drops the choice (like Escape).
+  if(hit?.kind==='item'&&touchRaises(e.pointerType,!!hit.covered,this.peek===hit.id)){this.stopEffects();this.peek=hit.id;this.draw();this.onState();return;}
+  this.peek=null;
   if(!hit){this.stopEffects();this.openStatus=null;const had=this.focused;this.focused=null;if(had)(document.activeElement as HTMLElement|null)?.blur?.();if(!this.model.locked&&this.model.selected)this.model.cancel();else{this.draw();this.onState();}return;}
   this.stopEffects();if(hit.kind==='hand'&&!this.model.locked){this.drag={id:e.pointerId,key:hit.key!,x:p.x,y:p.y,lastX:p.x,lastY:p.y,moved:false,insertion:null,touch:e.pointerType!=='mouse'};this.app.canvas.setPointerCapture(e.pointerId);this.focus(hit.key!);}else this.activate(hit.id);}
  // Hover is tracked only for a mouse at rest: it drives the (i) inspect button of the shell.
@@ -252,7 +260,7 @@ export class TableScene {
   if(e.shiftKey&&['ArrowLeft','ArrowRight'].includes(e.key)&&!this.model.locked){const keys=this.model.hand.map(c=>c.key),i=keys.indexOf(id);if(i<0)return;e.preventDefault();
    const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
  focus(id:string|null){this.focused=id;this.draw();}
- interrupt(reason:string,redraw=true){if(this.drag||this.seqStarted)this.stats.cancels.push(reason);const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();this.stopEffects();
+ interrupt(reason:string,redraw=true){if(this.drag||this.seqStarted)this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();this.stopEffects();
   if(d)this.model.cancel();this.setHover(null);if(redraw)this.draw();this.onState();}
  escape(){this.openStatus=null;this.interrupt('escape');this.model.cancel();}
  beginSequence(previous:View){

@@ -1,13 +1,13 @@
 # Roadmap del client web animato
 
-**27 ottobre 2026 — versione 14, C0, C1 e C2a chiuse, C2b non iniziata.** C1 è chiusa dal
+**28 ottobre 2026 — versione 15, C0, C1 e C2a chiuse, C2b in corso (C2b-1, C2b-2 e C2b-3 fatte).** C1 è chiusa dal
 proprietario dopo la prova su iPhone e la prova umana A; le osservazioni
 del proprietario e della prova A sono assegnate alle tappe
 ([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
 primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
 partite reali in locale, provato dal proprietario su iPhone e desktop e **chiuso**
 insieme alla prova umana B, che non ha evidenziato nulla di rilevante
-([rapporto C2](reports/client-c2-report.md)). C2b non è iniziata. Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
+([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1) e C2b-3 (FFA a cinque), verificati con partite reali in locale ([piano C2b](client-c2b-plan.md)). Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
 automatici, partite reali in locale e prova su iPhone confermata dal proprietario). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
@@ -475,9 +475,12 @@ con CLI/fixture, senza far attendere ripetutamente i giocatori.
 prova su iPhone e desktop e prova umana B senza rilievi ([rapporto](reports/client-c2-report.md#c2a--leggibilità-di-base)).
 O9 (illustrazioni provvisorie) non è in C2a: è stata fatta dopo, 40 illustrazioni in un atlante
 ([rapporto](reports/client-c2-report.md#o9--illustrazioni-provvisorie)). C2b porta le modalità e il resto
-della parità; la FFA usa la geometria già preparata e verificata in unità da C2a
-(oggetti propri sulla riga del personaggio, ventaglio che inizia dopo di loro,
-oggetti avversari sovrapposti al 25% che si alzano al passaggio del mouse o al tocco).
+della parità in sette blocchi ([piano](client-c2b-plan.md)): C2b-1 modalità e code, C2b-2 ciclo
+di vita in 1v1 e C2b-3 FFA a cinque sono fatti. La FFA usa la geometria di C2a (oggetti
+propri sulla riga del personaggio, ventaglio che inizia dopo di loro, oggetti avversari
+sovrapposti al 25% che si alzano al passaggio del mouse o al primo tocco), provata
+su viste reali a ogni turno; i ventagli avversari hanno ora uno spazio proprio e
+ruotano meno ([rapporto](reports/client-c2-report.md#c2b-3--ffa-a-cinque)).
 
 **Osservazioni assegnate:** prima della prova umana B, perché aiutano a
 riconoscere le carte in mano e sul tavolo durante i playtest:
@@ -648,12 +651,27 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** C2b solo su istruzione esplicita. C2a e O9 sono chiuse. C2 estende lo stesso
+**Prossimo passo:** i blocchi successivi di C2b (C2b-4…C2b-7) solo su istruzione esplicita, uno alla volta. C2a e O9 sono chiuse. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 15 — 28 ottobre 2026, C2b-1…C2b-3:** in `client-web` sono fatti tre
+  blocchi del [piano C2b](client-c2b-plan.md), ognuno con partite reali in locale a
+  1366×768 e 844×390 ([rapporto C2](reports/client-c2-report.md)):
+  - C2b-1: hub «Gioca», quick 1v1, uscita dalla coda con ACK, presenza, «Nuova
+    partita» nella stessa modalità;
+  - C2b-2: clock indicativo, ragioni di forfait tradotte, logout in partita,
+    rientri prima e dopo il termine, sessione unica, ricevuta di riavvio;
+  - C2b-3: coda FFA con lista pubblica, computer e avvio anticipato, tavolo a
+    cinque con ventagli coperti e oggetti come carte, oggetto coperto che si alza
+    al primo tocco (K7), computer numerati (K4, D9), forfait altrui con la partita
+    che continua, «Resta a guardare» dopo la propria morte (D11).
+
+  Regole, server, catalogo e debug invariati. Prova su iPhone a 750×292 del
+  proprietario aperta; C2b-4…C2b-7 non iniziati.
 
 - **Versione 14 — 27 ottobre 2026, chiusura C2a:** il proprietario ha provato
   tutta C2a su iPhone e su desktop e la giudica adeguata per ora; la prova umana B

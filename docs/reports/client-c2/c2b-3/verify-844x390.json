@@ -1,0 +1,442 @@
+{
+  "date": "2026-10-28T11:41:24.668Z",
+  "url": "http://127.0.0.1:4320",
+  "user": "devAlice",
+  "kind": "automated browser run on PC (Edge via Playwright) against the local server; not a physical device",
+  "games": [
+    {
+      "index": 1,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "Presa Male di Brutto",
+          "target": "SELF",
+          "choices": null,
+          "how": "drag"
+        },
+        {
+          "turn": 1,
+          "card": "Riflessi Aumentati dalla Speed",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "Steal",
+          "target": "ComPlayer_1424",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "Desiderio Incontrollabile",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Mescolone Micidiale"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_1424",
+          "choices": {
+            "DISCARD_ONE": "Estasi da Coca Etilene"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_1424",
+          "choices": {
+            "DISCARD_ONE": "Metabolismo Corrotto"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "Riflessi Aumentati dalla Speed",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_1424",
+          "choices": {
+            "DISCARD_ONE": "Steal"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "Scatto Repentino",
+          "target": "ComPlayer_1424",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "C'è del sangue nella mia droga",
+          "target": "ComPlayer_1424",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_1424",
+          "choices": {
+            "DISCARD_ONE": "Tossicone Scatarrante"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "Tutto è Droga",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Mescolone Micidiale"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "Rabbia Psicotica da Meth",
+          "target": "ComPlayer_1424",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "Desiderio Incontrollabile",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "Dose di Eroina da Cavalli",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-10-28T11:41:25.914Z",
+      "character": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "devAlice",
+        "me": "devAlice",
+        "message": "Hai vinto"
+      },
+      "outcomeText": "Hai vinto\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-10-28T11:41:45.916Z"
+    },
+    {
+      "index": 2,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "COSA FAI NON É UNA DOMANDA",
+          "target": "ComPlayer_329",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_329",
+          "choices": {
+            "DISCARD_ONE": "ORMALE GUARIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_329",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "PERMESSO SCUSA ORA SMETTI ",
+          "target": "ComPlayer_329",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "BELLO IL TUO GIOCATTOLO SI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "STORDIAMOTI HO DETTO",
+          "target": "ComPlayer_329",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_329",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-10-28T11:41:46.244Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "devAlice",
+        "me": "devAlice",
+        "message": "Hai vinto"
+      },
+      "outcomeText": "Hai vinto\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-10-28T11:41:56.967Z"
+    }
+  ],
+  "checks": {
+    "resumedAtStart": false,
+    "login": "hub reached after REST validate, STOMP CONNECT, resume and profile",
+    "reorder": {
+      "before": 6,
+      "firstMovedTo": 5,
+      "sendsDuring": 0,
+      "dragMoved": true
+    },
+    "rejoin": {
+      "sameTurn": true,
+      "handOrderKept": true,
+      "sendsDuringRejoin": 0
+    },
+    "o1o5": {
+      "oldButtons": 0,
+      "infoOnHover": true,
+      "infoOnSelected": true,
+      "keyboardReorder": true,
+      "sendsDuring": 0
+    },
+    "dragFollow": {
+      "ghostOverTargetDuringDrag": true,
+      "dragMoved": true
+    },
+    "item": {
+      "playedCardName": "ADOPERIAMOTI",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "b7ce02f74c229dfb606189c2355a295fe2698bd77fc8dc1dcd45a17b3b7f1c56",
+      "choices": {
+        "TARGET_ITEM": "Negroni Trovato per Terra"
+      }
+    },
+    "bound": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "b7ce02f74c229dfb606189c2355a295fe2698bd77fc8dc1dcd45a17b3b7f1c56",
+      "choices": {
+        "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+      }
+    },
+    "c2a": {
+      "outsideDeselect": {
+        "selectedBefore": true,
+        "selectedAfter": false,
+        "raisedH": 217,
+        "restH": 166
+      },
+      "status": {
+        "chip": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+        "hoverText": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+        "tapOpens": true,
+        "closedElsewhere": true
+      },
+      "turnsChecked": 28,
+      "cardsChecked": 168,
+      "rolesSeen": {
+        "ITEMS": 54,
+        "DISRUPT": 20,
+        "DAMAGE": 58,
+        "RESOURCES": 7,
+        "COUNTER": 7,
+        "OTHER": 10,
+        "DEFENSE": 12
+      },
+      "unpayableSeen": 15,
+      "unpayableDimmed": 15,
+      "boardChecks": 28,
+      "hover": {
+        "restingH": 166,
+        "hoverH": 184,
+        "raised": true
+      },
+      "unpayableSend": {
+        "card": "Estasi da Coca Etilene",
+        "sent": true,
+        "serverAnswer": "Rifiutata: cant be cast with current resources",
+        "choiceKept": true
+      },
+      "layout": {
+        "hand": {
+          "w": 120,
+          "h": 165.6
+        },
+        "person": {
+          "w": 80,
+          "h": 110.39999999999999
+        },
+        "item": {
+          "w": 60.8,
+          "h": 83.904
+        }
+      }
+    },
+    "hubReturn": "hub visible after leave acknowledgement"
+  },
+  "rejections": [
+    {
+      "turn": 0,
+      "card": "Estasi da Coca Etilene",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "Rabbia Psicotica da Meth",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 11,
+      "card": "Rabbia Psicotica da Meth",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 1,
+      "card": "ORMALE GUARIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "BELLO IL TUO GIOCATTOLO SI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    }
+  ],
+  "periodic": [
+    {
+      "game": 1,
+      "text": "Fine turno\n\nTu: (TOXICITY effect) HEALTH: 100->90 (-10)"
+    }
+  ],
+  "noValidMove": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "want": {
+    "characters": [
+      "Tossico del Serraglio",
+      "Spazienzio de la Ucciso"
+    ],
+    "bound": true,
+    "item": true,
+    "drag": true,
+    "tap": true,
+    "reorder": true,
+    "rejection": true,
+    "periodic": true
+  },
+  "inputMs": {
+    "note": "PC headless/headed Edge, input to next frame; not the iPhone measure",
+    "samples": 282,
+    "p50": 11,
+    "p95": 14.5,
+    "max": 15.700000047683716
+  }
+}

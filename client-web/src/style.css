@@ -52,3 +52,11 @@ button.info:hover{background:#4d7d86}
 .pager label{display:flex;flex-direction:row;align-items:center;gap:4px;font-weight:normal}
 @media(max-width:640px){.hub-grid{grid-template-columns:1fr}}
 @media(max-height:550px){.hub-grid{gap:10px}.sheet.hub .modes{display:grid;grid-template-columns:1fr 1fr;gap:4px}.sheet.hub .mode{padding:4px 8px;font-size:13px}.sheet.hub .notice{padding:4px 8px;font-size:14px}.sheet.hub .tab{padding:4px 12px}.presence th button.link{min-height:36px}}
+.ffa-queue{margin:0;padding-left:24px;font-size:14px;display:grid;grid-template-columns:1fr 1fr;gap:2px 12px}
+.ffa-queue li.me{font-weight:bold}.ffa-queue li.bot{color:#2c6262}.ffa-queue li.free{color:#8a6f58;font-style:italic}
+.actions{flex-wrap:wrap}
+.sheet.hub .actions button{white-space:nowrap}.sheet.hub .actions .primary{flex:1 0 auto}
+/* Compact: while waiting the (disabled) mode buttons give their room to the queue; the notice names the queue. */
+@media(max-height:550px){.ffa-queue{font-size:13px}.sheet.hub .actions button{padding:4px 10px}.play.waiting .modes{display:none}}
+.toast.brief{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-height:550px){.toast.brief{min-height:30px;padding:4px 10px}}

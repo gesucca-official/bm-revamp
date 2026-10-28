@@ -15,10 +15,14 @@ export function outcome(view: View, me: string, name: (id: string) => string): O
   const ids = Object.keys(view.forfeits), everyone = ids.length > 1 && ids.length === Object.keys(view.players).length;
   let reason = REASONS[view.outcomeReason || ''] || (view.over ? 'Partita conclusa' : '');
   if (view.over && view.winner === 'NONE' && view.outcomeReason === 'timeout' && everyone) reason = 'Tempo scaduto per tutti';
-  const lines = ids.sort((a, b) => a === me ? -1 : b === me ? 1 : 0).map(id => {
+  // FFA (D11): after the own death the game goes on and can be watched until the outcome.
+  if (!view.over && view.players[me]?.character.dead && !view.forfeits[me]) reason = 'Eliminato: puoi guardare fino all’esito';
+  // In the FFA a loss does not tell who won: name the winner.
+  const winner = view.over && view.winner !== 'NONE' && view.winner !== me && Object.keys(view.players).length > 2 ? [`Vince ${name(view.winner)}`] : [];
+  const lines = winner.concat(ids.sort((a, b) => a === me ? -1 : b === me ? 1 : 0).map(id => {
     const code = view.forfeits[id];
     return id === me ? OWN[code] ?? `Forfait (${code})` : `${name(id)} ${forfeitLabel(code)}`;
-  });
+  }));
   return {title, reason, lines};
 }
 

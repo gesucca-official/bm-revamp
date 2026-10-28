@@ -329,3 +329,107 @@ test('rejoin within the deadline keeps the same game and pending move with zero 
   assert.deepEqual(server.sent.slice(after).map(s => s.destination), ['/app/game/g1/Tu/view']);
   assert.equal(server.count('/app/game/g1/move'), 1);
 });
+
+// C2b-3: FFA queue and five-seat games.
+const QUEUE = '/topic/game/quick/ffa/joined';
+const entry = (playerId: string, human = true) => ({playerId, human});
+const bot = () => entry('QueuedComPlayer', false);
+function five(turn = 1): View {
+  const v = clone(fixtures.before) as View;
+  v.gameId = 'f1'; v.turn = turn; v.moveDeadlines = {}; v.reconnectDeadlines = {}; v.forfeits = {};
+  const [tu, ...others] = Object.values(v.players);
+  v.players = {Tu: tu, devBob: {...others[0], playerId: 'devBob'}, ComPlayer_31: {...others[1], playerId: 'ComPlayer_31'}, ComPlayer_8: {...others[2], playerId: 'ComPlayer_8'}, ComPlayer_502: {...others[3], playerId: 'ComPlayer_502'}};
+  return v;
+}
+
+test('P13: FFA subscribes the ready and the public list before joining; the list follows the topic', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/ffa'); await flush();
+  assert.ok(server.handlers.has('/user/queue/game/quick/ffa/ready')); assert.ok(server.handlers.has(QUEUE));
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu'});
+  server.deliver(QUEUE, [entry('Tu')]);
+  assert.deepEqual(session.ffaQueue, [entry('Tu')]);
+  server.deliver(QUEUE, [entry('Tu'), bot(), entry('devBob')]);
+  assert.equal(session.ffaQueue.length, 3);
+});
+
+test('P14/P15: add a computer; start now only with at least two entries (the server never answers with fewer)', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/ffa'); await flush();
+  server.deliver(QUEUE, [entry('Tu')]);
+  assert.equal(session.canStart, false);
+  session.startNow(); assert.equal(server.count('/app/game/quick/ffa/start'), 0, 'no start with one entry');
+  session.addComputer();
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join/com', body: 'Tu'});
+  server.deliver(QUEUE, [entry('Tu'), bot()]);
+  assert.equal(session.canStart, true);
+  session.startNow(); session.startNow();
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/start', body: 'Tu'});
+  assert.equal(server.count('/app/game/quick/ffa/start'), 1, 'one start while waiting for the game');
+  assert.equal(session.canAddComputer, false, 'no more computers once the start is asked');
+  server.deliver(QUEUE, []);
+  server.deliver('/user/queue/game/quick/ffa/ready', 'f1'); await flush();
+  assert.ok(!server.handlers.has(QUEUE), 'public list closed with the queue'); assert.deepEqual(session.ffaQueue, []);
+  server.deliver('/user/queue/game/f1/view', five());
+  assert.equal(session.phase, 'game');
+});
+
+test('P14: no computer beyond five entries, none outside the FFA queue', async () => {
+  const {session, server} = await inHub();
+  session.addComputer(); assert.equal(server.count('/app/game/quick/ffa/join/com'), 0, 'not in a queue');
+  session.join('quick/1v1'); await flush();
+  session.addComputer(); assert.equal(server.count('/app/game/quick/ffa/join/com'), 0, 'not in the FFA queue');
+  const ffa = await inHub();
+  ffa.session.join('quick/ffa'); await flush();
+  ffa.server.deliver(QUEUE, [entry('Tu'), bot(), bot(), bot(), bot()]);
+  assert.equal(ffa.session.canAddComputer, false); ffa.session.addComputer();
+  assert.equal(ffa.server.count('/app/game/quick/ffa/join/com'), 0);
+});
+
+test('P17: leaving the FFA queue closes the public list after the ACK', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/ffa'); await flush();
+  server.deliver(QUEUE, [entry('Tu'), bot(), bot()]);
+  session.leaveQueue(); await flush();
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/session/queue/leave', body: ''});
+  server.deliver('/user/queue/session/queue/leave', 'true'); await flush();
+  assert.equal(session.phase, 'hub'); assert.deepEqual(session.ffaQueue, []);
+  assert.ok(!server.handlers.has(QUEUE)); assert.ok(!server.handlers.has('/user/queue/game/quick/ffa/ready'));
+});
+
+test('D11: new game after an FFA repeats the FFA; after a rejoin a five-seat game is recognised as FFA', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/ffa'); await flush();
+  server.deliver('/user/queue/game/quick/ffa/ready', 'f1'); await flush();
+  server.deliver('/user/queue/game/f1/view', Object.assign(five(3), {over: true, winner: 'devBob', outcomeReason: 'combat'}));
+  session.leave('again'); await flush();
+  server.deliver('/user/queue/game/f1/leave', 'true'); await flush();
+  assert.equal(session.queued, 'quick/ffa'); assert.deepEqual(server.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu'});
+  // A fresh login that resumes a five-seat game does not know the queue: the view says FFA.
+  const again = new FakeServer(), other = new Session(again, timers());
+  await other.login('Tu', 'secret'); await flush();
+  again.deliver('/user/queue/session/resume', {status: 'resumed', gameId: 'f1', view: Object.assign(five(3), {over: true, winner: 'Tu', outcomeReason: 'combat'})});
+  again.deliver('/user/queue/account/data', account); await flush();
+  other.leave('again'); await flush();
+  again.deliver('/user/queue/game/f1/leave', 'true'); await flush();
+  assert.deepEqual(again.sent.at(-1), {destination: '/app/game/quick/ffa/join', body: 'Tu'});
+});
+
+test('P33: in the FFA another player\'s forfeit keeps the game going; own death keeps watching until the outcome', async () => {
+  const {session, server} = await inHub();
+  session.join('quick/ffa'); await flush();
+  server.deliver('/user/queue/game/quick/ffa/ready', 'f1'); await flush();
+  server.deliver('/user/queue/game/f1/view', five());
+  const m = session.model!;
+  const left = five(2); left.forfeits = {devBob: 'leave'};
+  server.deliver('/user/queue/game/f1/view', left);
+  assert.equal(m.locked, false); assert.equal(m.message, 'Scegli una carta');
+  const dead = five(3); dead.forfeits = {devBob: 'leave'}; dead.players.Tu.character.dead = true;
+  server.deliver('/topic/game/f1/update', 'f1'); server.deliver('/user/queue/game/f1/view', dead);
+  assert.equal(session.phase, 'game'); assert.equal(m.eliminated, true); assert.equal(m.view.over, false);
+  server.deliver('/topic/game/f1/update', 'f1');
+  assert.ok(server.handlers.has('/user/queue/game/f1/view'), 'still listening to the game');
+  const end = five(5); end.players.Tu.character.dead = true; Object.assign(end, {over: true, winner: 'ComPlayer_8', outcomeReason: 'combat'});
+  server.deliver('/user/queue/game/f1/view', end);
+  assert.equal(m.view.over, true); assert.equal(m.message, 'Hai perso');
+});

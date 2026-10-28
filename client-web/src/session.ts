@@ -1,16 +1,17 @@
-import type {Account, Card, ResumeState, View, CharacterCard, Presence} from './contracts.ts';
+import type {Account, Card, ResumeState, View, CharacterCard, Presence, FfaEntry} from './contracts.ts';
 import type {Connector, Link} from './net/link.ts';
 import {Model} from './model.ts';
 
 export type Phase = 'login' | 'connecting' | 'hub' | 'queue' | 'game' | 'lost';
-export type Mode = 'quick/1vCom' | 'quick/1v1';
+export type Mode = 'quick/1vCom' | 'quick/1v1' | 'quick/ffa';
+const FFA_SEATS = 5;
 export type Trace = {at: number; channel: string; body: string};
 export type Timers = {set(fn: () => void, ms: number): number; clear(id: number): void};
 const browserTimers: Timers = {set: (fn, ms) => globalThis.setTimeout(fn, ms) as unknown as number, clear: id => globalThis.clearTimeout(id)};
 const PROFILE_TIMEOUT = 10000, VIEW_TIMEOUT = 5000, ACK_TIMEOUT = 5000;
 
 /**
- * Application flow over the server protocol: login, hub, quick queues (1vCom, 1v1), game, outcome, rejoin.
+ * Application flow over the server protocol: login, hub, quick queues (1vCom, 1v1, FFA), game, outcome, rejoin.
  * Authoritative state comes only from private views; the topics update/move are just a signal
  * to request the private view again. Nothing is ever resent automatically after a drop.
  */
@@ -27,6 +28,9 @@ export class Session {
   queued: Mode | null = null;
   mode: Mode | null = null;
   leavingQueue = false;
+  /** Public FFA queue list in join order (humans and computers); `starting` once "start now" is sent. */
+  ffaQueue: FfaEntry[] = [];
+  starting = false;
   presence: Presence[] = [];
   readonly trace: Trace[] = [];
   private password = '';
@@ -123,16 +127,30 @@ export class Session {
     if (this.phase !== 'hub' || !this.link) return;
     const link = this.link, generation = this.generation, token = ++this.queueToken;
     const stale = () => generation !== this.generation || token !== this.queueToken;
-    this.error = ''; this.notice = ''; this.receipt = null; this.phase = 'queue'; this.queued = mode; this.mode = mode; this.joined = false; this.leavingQueue = false; this.emit();
-    void link.subscribe(`/user/queue/game/${mode}/ready`, body => {
+    this.error = ''; this.notice = ''; this.receipt = null; this.phase = 'queue'; this.queued = mode; this.mode = mode; this.joined = false; this.leavingQueue = false; this.ffaQueue = []; this.starting = false; this.emit();
+    const subscriptions = [link.subscribe(`/user/queue/game/${mode}/ready`, body => {
       if (stale() || this.phase !== 'queue') return;
       this.log(`${mode}/ready`, body); this.clearQueue(); this.queued = null; this.leavingQueue = false; void this.attach(body, true);
-    }).then(unsub => {
-      if (stale()) { unsub(); return; }
-      this.queueSubs.push(unsub); this.joined = true;
+    })];
+    // The FFA list is public: every join, computer, leave or start republishes it to everyone listening.
+    if (mode === 'quick/ffa') subscriptions.push(link.subscribe('/topic/game/quick/ffa/joined', body => {
+      if (stale() || this.queued !== mode) return;
+      this.log('ffa/joined', body); this.ffaQueue = JSON.parse(body); this.emit();
+    }));
+    Promise.all(subscriptions).then(unsubs => {
+      if (stale()) { unsubs.forEach(unsub => unsub()); return; }
+      this.queueSubs.push(...unsubs); this.joined = true;
       link.send(`/app/game/${mode}/join`, this.user);
     }, () => { if (!stale()) this.close('Il server non ha confermato la coda.'); });
   }
+
+  get canAddComputer() { return this.queued === 'quick/ffa' && this.joined && !this.leavingQueue && !this.starting && this.ffaQueue.length < FFA_SEATS; }
+  /** Start now needs two entries: with fewer the server ignores the request without answering. */
+  get canStart() { return this.queued === 'quick/ffa' && this.joined && !this.leavingQueue && !this.starting && this.ffaQueue.length >= 2; }
+
+  /** Adds a computer to the FFA queue; the list comes back on the public topic (five entries start the game). */
+  addComputer() { if (this.canAddComputer) this.link!.send('/app/game/quick/ffa/join/com', this.user); }
+  startNow() { if (!this.canStart) return; this.starting = true; this.link!.send('/app/game/quick/ffa/start', this.user); this.emit(); }
 
   /** Leave the queue: acknowledged by the server, then subscriptions close. Without ACK the user stays in the queue. */
   leaveQueue() {
@@ -157,8 +175,8 @@ export class Session {
   }
 
   private endQueue() { this.clearQueue(); this.queued = null; this.joined = false; this.leavingQueue = false; this.phase = 'hub'; }
+  private clearQueue() { this.queueSubs.splice(0).forEach(unsub => unsub()); this.ffaQueue = []; this.starting = false; }
   private queueFailed(body: string) { if (this.phase !== 'queue') return; this.queueToken++; this.endQueue(); this.error = body; this.emit(); }
-  private clearQueue() { this.queueSubs.splice(0).forEach(unsub => unsub()); }
 
   private async attach(gameId: string, fresh: boolean) {
     const link = this.link!, generation = this.generation;
@@ -227,15 +245,19 @@ export class Session {
     unsubscribe.then(() => { if (!done) link.send(`/app/game/${gameId}/${this.user}/leave`); }, () => finish(false));
   }
 
-  // After a rejoin the queue is unknown: a computer opponent means 1vCom, otherwise 1v1.
-  private modeOf(view?: View): Mode { return !view || Object.keys(view.players).some(id => id.startsWith('ComPlayer_')) ? 'quick/1vCom' : 'quick/1v1'; }
+  // After a rejoin the queue is unknown: more than two players mean FFA, a computer opponent 1vCom, otherwise 1v1.
+  // A two-player FFA started early is taken for a duel.
+  private modeOf(view?: View): Mode {
+    const ids = Object.keys(view?.players ?? {});
+    return ids.length > 2 ? 'quick/ffa' : !view || ids.some(id => id.startsWith('ComPlayer_')) ? 'quick/1vCom' : 'quick/1v1';
+  }
 
   private dropGame() { this.leaving = false; this.unsubscribeGame(); this.model = null; this.gameId = null; this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false; }
   private unsubscribeGame() { this.gameSubs.splice(0).forEach(unsub => unsub()); }
 
   private dropped(generation: number) {
     if (generation !== this.generation) return;
-    this.generation++; this.link = null; this.gameSubs = []; this.queueSubs = []; this.queued = null; this.leavingQueue = false; this.presence = [];
+    this.generation++; this.link = null; this.gameSubs = []; this.queueSubs = []; this.queued = null; this.leavingQueue = false; this.ffaQueue = []; this.starting = false; this.presence = [];
     this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false;
     this.model?.disconnect();
     this.phase = 'lost';

@@ -73,7 +73,8 @@ export function chipsOf(owner:string,c:Character):Chip[]{
 /** O12: card sizes and seat geometry. Sizes follow the height so the compact landscape
  * (844×390) and the desktop (1366×768) share one rule; the five-seat FFA uses the same table. */
 export type Box={x:number;y:number;w:number;h:number};
-export type SeatLayout={id:string;me:boolean;person:Box;items:Box[];backs:Box;board:Box;status:Box};
+/** `backs` is the slot of the covered hand: `back` cards fanned inside it (see fan). */
+export type SeatLayout={id:string;me:boolean;person:Box;items:Box[];backs:Box;back:{w:number;h:number;turn:number};board:Box;status:Box};
 export type TableLayout={compact:boolean;hand:{w:number;h:number;step:number;center:number;y:number;lift:number;zoom:number};preview:{x:number;y:number;w:number;h:number};seats:SeatLayout[]};
 const ME={x:.19,y:.70},DUEL=[{x:.56,y:.25}],FFA=[{x:.24,y:.19},{x:.66,y:.19},{x:.15,y:.43},{x:.72,y:.43}];
 export function tableLayout(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>={}):TableLayout{
@@ -91,18 +92,34 @@ export function tableLayout(w:number,h:number,ids:string[],me:string,itemCounts:
   const gap=ffa?iw*.75:iw+6,ownY=ffa?y+ph*.06:Math.min(y-ph*.34,handTop-ih/2-8);
   const items=Array.from({length:n},(_,i)=>({x:x+pw*.5+iw*.5+8+i*gap,y:own?ownY:y+ph*.06,w:iw,h:ih}));
   const bw=compact?(ffa?18:24):(ffa?30:40),side=ffa&&!own&&others.indexOf(id)>=2,left=side&&spot.x<.5;
+  // FFA fans turn less: four of them share the table (a decoration reduced, never a card removed).
+  const back={w:bw,h:bw*1.4,turn:ffa?.05:FAN.turn},full=bw*(1+7*FAN.step);
   const bwid=own?(compact?110:170):(compact?(ffa?84:100):(ffa?120:150)),bh=own?(compact?92:150):(compact?40:58);
   const board={x:x-pw*.5-8-bwid*.5,y:own?y:y-ph*.12,w:bwid,h:bh};
   // Statuses: a chip row on the lower art of the character card, so no seat needs more room.
   const status={x,y:y+ph/2-ph*.17-sh/2-2,w:pw-8,h:sh};
-  // Covered hands: above the seat, or beside it for the FFA side seats (under the board on the left).
-  const backs=side?(left?{x:board.x,y:board.y+bh/2+bw,w:bw,h:bw*1.4}:{x:x+pw*.5+8+(n-1)*gap+iw+bw,y,w:bw,h:bw*1.4}):{x,y:y-ph*.5-bw*.75,w:bw,h:bw*1.4};
-  return {id,me:own,person,items,backs,board,status};
+  // Covered hands, room for eight backs: above the seat; for the FFA side seats under the board on the left,
+  // above the objects on the right (beside the character, never over it). The step shrinks to fit the slot.
+  const span=[items[0].x-iw/2,items[n-1].x+iw/2],right=Math.max((span[0]+span[1])/2-full/2,x+pw/2+4);
+  const backs=side?(left?{x:(x-pw/2)/2,y:board.y+bh/2+bw,w:x-pw/2-12,h:back.h}:{x:right+full/2,y:items[0].y-ih/2-back.h/2-3,w:full,h:back.h}):{x,y:y-ph*.5-bw*.75-(ffa?3:0),w:full,h:back.h};
+  return {id,me:own,person,items,backs,back,board,status};
  });
  if(ffa){const mine=seats.find(s=>s.me)!,from=Math.max(...mine.items.map(b=>b.x+b.w/2))+10,room=w-8-from;
   hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}
  const pv=compact?{w:70,h:97}:{w:120,h:166};
  return {compact,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats};
 }
+/** K7: in the FFA each object of a seat is partly covered by the next one; only the last is whole. */
+export const coveredItems=(items:Box[])=>items.map((a,i)=>items.slice(i+1).some(b=>overlap(a,b)>0));
+/** K7: a touch has no hover, so its first tap only raises a covered object; the next tap acts on it. */
+export const touchRaises=(pointer:string,covered:boolean,raised:boolean)=>pointer!=='mouse'&&covered&&!raised;
+/** Covered hand of `count` backs fanned in its slot, as the scene draws it: step 64% of a back (less when
+ * the slot is short), each back turned a little more. `box` is the drawn extent, rotation included. */
+export const FAN={step:.64,turn:.13};
+export function fan(slot:Box,back:{w:number;h:number;turn:number},count:number){
+ const step=count>1?Math.min(back.w*FAN.step,(slot.w-back.w)/(count-1)):0;let l=slot.x,r=slot.x,t=slot.y,d=slot.y;
+ for(let n=0;n<count;n++){const k=n-(count-1)/2,a=Math.abs(k*back.turn),x=slot.x+k*step,hw=(back.w*Math.cos(a)+back.h*Math.sin(a))/2,hh=(back.w*Math.sin(a)+back.h*Math.cos(a))/2;
+  l=Math.min(l,x-hw);r=Math.max(r,x+hw);t=Math.min(t,slot.y-hh);d=Math.max(d,slot.y+hh);}
+ return {step,turn:back.turn,box:{x:(l+r)/2,y:(t+d)/2,w:r-l,h:d-t} as Box};}
 export const overlap=(a:Box,b:Box)=>Math.max(0,Math.min(a.x+a.w/2,b.x+b.w/2)-Math.max(a.x-a.w/2,b.x-b.w/2))*Math.max(0,Math.min(a.y+a.h/2,b.y+b.h/2)-Math.max(a.y-a.h/2,b.y-b.h/2));
 export const inside=(a:Box,w:number,h:number)=>a.x-a.w/2>=0&&a.x+a.w/2<=w&&a.y-a.h/2>=0&&a.y+a.h/2<=h;
