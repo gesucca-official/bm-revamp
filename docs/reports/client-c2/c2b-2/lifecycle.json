@@ -1,5 +1,5 @@
 {
- "date": "2026-10-28T10:32:08.815Z",
+ "date": "2026-10-28T12:44:53.087Z",
  "url": "http://127.0.0.1:4320",
  "viewport": {
   "width": 1366,
@@ -12,12 +12,12 @@
    "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
   },
   "moveTimeout": {
-   "gameId": "2e6bc51c71d7125982ee0bd273184226b1a38be8aa0eb6cf0e5b97ce6f1dfe7b",
-   "cardA": "LIEVE FASTIDIO",
-   "clockAAfterSend": "◷ —",
+   "gameId": "6ba57090e924f0724d3e6868f81bfac86b963d9491995ecfcaecc48e58d555c8",
+   "cardA": "Desiderio Incontrollabile",
+   "clockAAfterSend": null,
    "clockB": [
-    null,
-    "◷ 17 s"
+    "◷ 30 s",
+    "◷ 18 s"
    ],
    "secondsToOutcome": 30,
    "outcomeReason": "timeout",
@@ -33,7 +33,7 @@
    "textB": "Hai perso Tempo scaduto Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
   },
   "simultaneousDeadlines": {
-   "gameId": "c0b3b81d4df20d4bd570bf3daa7cae2910e075babee40d3cf280fa204fb8464f",
+   "gameId": "32bf15aa5cff2b49e18eec4ad10ab971e7f22bb0c705b10dd97895412a4ccaf2",
    "winner": "NONE",
    "outcomeReason": "timeout",
    "forfeits": {
@@ -44,21 +44,21 @@
    "textB": "Pareggio Tempo scaduto per tutti Non hai mosso entro 30 secondi devAlice non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
   },
   "rejoinInTime": {
-   "gameId": "10195e77936e6d6ff613d993266cf34aed75c51be8de4fe2e58921ba4cb52ffb",
-   "pending": "LIEVE FASTIDIO",
+   "gameId": "f6c868ca20dc18484837c5ebbf7da98a1b614599054eabb1ac4e67aa4b19382e",
+   "pending": "ADOPERIAMOTI",
    "phase": "pending",
    "sendsAfterRejoin": [
     "/app/session/resume",
     "/app/user/devAlice/account",
     "/app/connections/users/tell/me",
-    "/app/game/10195e77936e6d6ff613d993266cf34aed75c51be8de4fe2e58921ba4cb52ffb/devAlice/view"
+    "/app/game/f6c868ca20dc18484837c5ebbf7da98a1b614599054eabb1ac4e67aa4b19382e/devAlice/view"
    ],
    "awayShownToB": [
     "devAlice fuori linea · 28 s"
    ]
   },
   "rejoinLate": {
-   "gameId": "10195e77936e6d6ff613d993266cf34aed75c51be8de4fe2e58921ba4cb52ffb",
+   "gameId": "f6c868ca20dc18484837c5ebbf7da98a1b614599054eabb1ac4e67aa4b19382e",
    "secondsOut": 31,
    "awayShownToB": [],
    "winner": "devBob",
@@ -82,7 +82,7 @@
    "hubNotices": []
   },
   "leave": {
-   "gameId": "16757d70febb5a0fb6ffe21712be271a963d0686aeefb04c27f3e83d6bbbc3b2",
+   "gameId": "acf26c9c57e5c84ce0a345c21c9b7961ff64a32a2c2f18151c351e3d33eaca47",
    "ack": true,
    "leaveSends": 1,
    "winner": "devBob",
@@ -93,8 +93,8 @@
    "textB": "Hai vinto Abbandono devAlice ha abbandonato Nuova partita Torna all’hub Ultimo turno",
    "secondLeaveRawSocket": {
     "got": [
-     "MESSAGE\ndestination:/user/queue/game/16757d70febb5a0fb6ffe21712be271a963d0686aeefb04c27f3e83d6bbbc3b2/leave\ncontent-type:application/json\nsubscription:l\nmessage-id:66965164-400f-9173-33f9-8485d1a96db3-143\ncontent-length:4 | true",
-     "MESSAGE\ndestination:/user/queue/session/resume\ncontent-type:application/json\nsubscription:r\nmessage-id:66965164-400f-9173-33f9-8485d1a96db3-144\ncontent-length:17 | {\"status\":\"none\"}"
+     "MESSAGE\ndestination:/user/queue/game/acf26c9c57e5c84ce0a345c21c9b7961ff64a32a2c2f18151c351e3d33eaca47/leave\ncontent-type:application/json\nsubscription:l\nmessage-id:e1045870-b8bf-d20f-0ed8-a78665040213-143\ncontent-length:4 | true",
+     "MESSAGE\ndestination:/user/queue/session/resume\ncontent-type:application/json\nsubscription:r\nmessage-id:e1045870-b8bf-d20f-0ed8-a78665040213-144\ncontent-length:17 | {\"status\":\"none\"}"
     ],
     "why": "done"
    },
@@ -108,7 +108,7 @@
    "firstStillPlaying": true
   },
   "logoutInGame": {
-   "gameId": "84e45af4f401a6181dd281125c7df88ccd541d8c02114e8610941ea654b7a96b",
+   "gameId": "ab39c9cf05d51e69465adbd243ba6c7924c09ffba7bf6ba9c9d6a12c59528a45",
    "confirmation": "Uscire dall’account? Uscire durante la partita è un forfait: la partita è persa e torni all’accesso. Sì, esci No, resto al tavolo",
    "sendsAfterConfirm": [
     "/app/session/logout"
@@ -124,10 +124,10 @@
    "resume": "none"
   },
   "restart": {
-   "gameId": "c4622e659dca9f0659b6727bcd6369b3323177a7199918cb0e9b3f2feb3e63e4",
+   "gameId": "ff4ed1ee2a5d33cde480d9c42abfbd9aa4dc774816fa79201c122a70c7bdfeb3",
    "resumeA": {
     "status": "finished",
-    "gameId": "c4622e659dca9f0659b6727bcd6369b3323177a7199918cb0e9b3f2feb3e63e4",
+    "gameId": "ff4ed1ee2a5d33cde480d9c42abfbd9aa4dc774816fa79201c122a70c7bdfeb3",
     "archived": true,
     "outcome": {
      "over": true,
@@ -138,7 +138,7 @@
    },
    "resumeB": {
     "status": "finished",
-    "gameId": "c4622e659dca9f0659b6727bcd6369b3323177a7199918cb0e9b3f2feb3e63e4",
+    "gameId": "ff4ed1ee2a5d33cde480d9c42abfbd9aa4dc774816fa79201c122a70c7bdfeb3",
     "archived": true,
     "outcome": {
      "over": true,
@@ -177,9 +177,9 @@
    "reloginB": "Esci + login"
   },
   "vsComLateRejoin": {
-   "gameId": "3b30ce7479490082860109a96f0073a2788e4bfb9f0b48dc458a908d610562ed",
+   "gameId": "3b3d78f29a14cfb3064f64b4c9499789e383936a7d0ccbc7b775f454d07572b7",
    "status": "finished",
-   "winner": "ComPlayer_2121",
+   "winner": "ComPlayer_5652",
    "forfeits": {
     "devAlice": "reconnect timeout"
    },
