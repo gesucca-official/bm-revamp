@@ -1,3 +1,5 @@
+> **R02 / C2b-4, 28 ottobre 2026.** Regolamento **1.8**: l'identificativo di un mazzo personalizzato non contiene «/», perché è un segmento della destinazione di avvio open. `UserAccountServiceImpl` lo rifiuta con `Invalid deck` su `account/error`; `UserAccountServiceImplTest` (unità) e `cli-security-test.cjs` (contesto) lo verificano. Descrizioni SQLite e allegato al suffisso 1.8; nessun'altra regola cambiata.
+
 > **R07a / C2a, 27 ottobre 2026.** Regolamento **1.7**: ruolo descrittivo e guadagni a sé per 37 carte e token, in SQLite (`T_GUI_ROLE`, `T_GUI_GAINS`), allegato e classe del token. `check-rules.py` confronta R07a con allegato, SQLite e `rules-card-roles.tsv`; `CardRulesContractTest.r07a_rolesReachTheCards` e `CatalogRuntimeTest` (contesto) controllano che arrivino alle carte. Nessun effetto, costo o starter cambiato.
 >
 > I22, 26 ottobre 2026: regressione finale sul regolamento 1.6 invariato;

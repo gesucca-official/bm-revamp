@@ -80,6 +80,9 @@ public class UserAccountServiceImpl implements UserAccountService {
                 || deck.getCharacter() == null || deck.getCharacter().getBindingName() == null
                 || !charactersGuiRepo.existsById(deck.getCharacter().getBindingName()))
             throw new IllegalArgumentException("Deck identifier and catalog character required");
+        // R02 1.8: the identifier is a path segment of the open join destination.
+        if (deck.getDeckId().contains("/"))
+            throw new IllegalArgumentException("Deck identifier cannot contain /");
         if (!catalogCard(deck.getBasicActionCard()).isBasicAction()
                 || !catalogCard(deck.getLastResortCard()).isLastResort())
             throw new IllegalArgumentException("Basic and last resort required");

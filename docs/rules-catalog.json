@@ -1,10 +1,10 @@
 {
-  "version": "1.7",
+  "version": "1.8",
   "cards": [
     {
       "class": "bruiser.BadEducation",
       "name": "PERMESSO SCUSA ORA SMETTI ",
-      "description": "Rimuove equip del bersaglio; 10 HIT. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Rimuove equip del bersaglio; 10 HIT. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "OTHER",
@@ -13,7 +13,7 @@
     {
       "class": "bruiser.BreakYourToy",
       "name": "BELLO IL TUO GIOCATTOLO SI",
-      "description": "Distrugge l'oggetto. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Distrugge l'oggetto. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "ITEMS",
@@ -22,7 +22,7 @@
     {
       "class": "bruiser.CantFeelAnything",
       "name": "GENTILE IL TUO CAREZZO",
-      "description": "HIT ricevuto ×0,35, durata 0; +10 A. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "HIT ricevuto ×0,35, durata 0; +10 A. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DEFENSE",
@@ -31,7 +31,7 @@
     {
       "class": "bruiser.ExtremelyViolentBlow",
       "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
-      "description": "HIT pari a 20 + V residua/2. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "HIT pari a 20 + V residua/2. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -40,7 +40,7 @@
     {
       "class": "bruiser.Glare",
       "name": "PAZIENZA: FINITA",
-      "description": "HIT ricevuto ×1,5, durata 1; +15 V e +15 A. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "HIT ricevuto ×1,5, durata 1; +15 V e +15 A. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "OTHER",
@@ -49,7 +49,7 @@
     {
       "class": "bruiser.HealingBlow",
       "name": "ORMALE GUARIAMOTI",
-      "description": "30 HIT; azzera T e L del bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "30 HIT; azzera T e L del bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -58,7 +58,7 @@
     {
       "class": "bruiser.MadeOfStone",
       "name": "NON GIOCARE COL COLTELLO NO",
-      "description": "CUT ricevuto ×0,5, stato indipendente R05; +10 V. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "CUT ricevuto ×0,5, stato indipendente R05; +10 V. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DEFENSE",
@@ -67,7 +67,7 @@
     {
       "class": "bruiser.SeagullFly",
       "name": "GABBIANO DUNQUE VOLIAMOTI",
-      "description": "15 HIT: solo GOOD dell'autore, tutti gli stati del bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "15 HIT: solo GOOD dell'autore, tutti gli stati del bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -76,7 +76,7 @@
     {
       "class": "bruiser.SickeningBlow",
       "name": "AMMALIAMOTI DI BOTTE",
-      "description": "10 HIT; +10 T al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "10 HIT; +10 T al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -85,7 +85,7 @@
     {
       "class": "bruiser.StunningBlow",
       "name": "STORDIAMOTI HO DETTO",
-      "description": "−10 A; 10 HIT al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "−10 A; 10 HIT al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -94,7 +94,7 @@
     {
       "class": "bruiser.SuperImpact",
       "name": "GARGANTUESCO IMPATTO SUL TU",
-      "description": "40 HIT. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "40 HIT. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -103,7 +103,7 @@
     {
       "class": "bruiser.WhatchaDoin",
       "name": "COSA FAI NON É UNA DOMANDA",
-      "description": "Annulla mossa successiva e ne esegue solo l'effetto target usando sé come autore; non replica self, costi, logica speciale. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Annulla mossa successiva e ne esegue solo l'effetto target usando sé come autore; non replica self, costi, logica speciale. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "COUNTER",
@@ -112,7 +112,7 @@
     {
       "class": "bruiser.YouStop",
       "name": "FAI BASTA",
-      "description": "Annulla mossa del bersaglio solo se successiva; se trovata +10 A al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Annulla mossa del bersaglio solo se successiva; se trovata +10 A al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "COUNTER",
@@ -121,7 +121,7 @@
     {
       "class": "bruiser.character.LittleRage",
       "name": "LIEVE FASTIDIO",
-      "description": "HIT ricevuto ×0,75, durata 0; +5 V. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "HIT ricevuto ×0,75, durata 0; +5 V. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Legata al personaggio",
       "role": "DEFENSE",
@@ -130,7 +130,7 @@
     {
       "class": "bruiser.character.LittleSmack",
       "name": "SVEGLIAMOCI MA TU NO",
-      "description": "+5 A a sé; 5 HIT al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "+5 A a sé; 5 HIT al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Legata al personaggio",
       "role": "DAMAGE",
@@ -139,7 +139,7 @@
     {
       "class": "com.Grab",
       "name": "Grab",
-      "description": "Rimuove l'oggetto, applica solo effetti self/target, non logica speciale. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Rimuove l'oggetto, applica solo effetti self/target, non logica speciale. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "ITEMS",
@@ -148,7 +148,7 @@
     {
       "class": "com.ShuffleFeet",
       "name": "Scatto Repentino",
-      "description": "Scambia tutti gli oggetti rispettando le capacità dei destinatari. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Scambia tutti gli oggetti rispettando le capacità dei destinatari. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "ITEMS",
@@ -157,7 +157,7 @@
     {
       "class": "com.Steal",
       "name": "Steal",
-      "description": "Trasferisce l'oggetto vicino a sé senza consumarlo. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Trasferisce l'oggetto vicino a sé senza consumarlo. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "ITEMS",
@@ -166,7 +166,7 @@
     {
       "class": "com.basic.BruiserGrab",
       "name": "ADOPERIAMOTI",
-      "description": "Basic: consuma come Grab. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Basic: consuma come Grab. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Base",
       "role": "ITEMS",
@@ -175,7 +175,7 @@
     {
       "class": "com.basic.ToxicGrab",
       "name": "Desiderio Incontrollabile",
-      "description": "Basic: perde abs(A/2), poi consuma come Grab; perde A anche se l'oggetto è scomparso. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Basic: perde abs(A/2), poi consuma come Grab; perde A anche se l'oggetto è scomparso. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Base",
       "role": "ITEMS",
@@ -184,7 +184,7 @@
     {
       "class": "com.items.AnotherRottenBeer",
       "name": "Tennents Super",
-      "description": "Crea BrokenBeerBottle vicino a sé; +10 L. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Crea BrokenBeerBottle vicino a sé; +10 L. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Oggetto",
       "subtype": "—",
       "role": "RESOURCES",
@@ -193,7 +193,7 @@
     {
       "class": "com.items.CocktailOnTheGround",
       "name": "Negroni Trovato per Terra",
-      "description": "+20 V, +15 L, +5 T. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "+20 V, +15 L, +5 T. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Oggetto",
       "subtype": "—",
       "role": "RESOURCES",
@@ -202,7 +202,7 @@
     {
       "class": "com.items.MarvelousCocktail",
       "name": "Mescolone Micidiale",
-      "description": "Immunità T e L; +20 L e +20 T; timer 5 cancella tutte le immunità e gli stati, poi 20 POISON. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Immunità T e L; +20 L e +20 T; timer 5 cancella tutte le immunità e gli stati, poi 20 POISON. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Oggetto",
       "subtype": "—",
       "role": "RESOURCES",
@@ -211,7 +211,7 @@
     {
       "class": "com.items.RottenBeer",
       "name": "Peroni da 66, calda",
-      "description": "+5 L. Non equipaggia: Grab non chiama il suo hook speciale, anche se il vecchio report afferma il contrario. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "+5 L. Non equipaggia: Grab non chiama il suo hook speciale, anche se il vecchio report afferma il contrario. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Oggetto",
       "subtype": "—",
       "role": "RESOURCES",
@@ -220,7 +220,7 @@
     {
       "class": "com.last.Struggle",
       "name": "Last Resort: Banzai!!!",
-      "description": "Last resort: 5 HIT a sé; 10 HIT al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Last resort: 5 HIT a sé; 10 HIT al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Ultima risorsa",
       "role": "DAMAGE",
@@ -229,7 +229,7 @@
     {
       "class": "junkie.AmphetamineReflexes",
       "name": "Riflessi Aumentati dalla Speed",
-      "description": "Annulla mosse successive di avversari vivi con target pari al proprio ID; nessun +A. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Annulla mosse successive di avversari vivi con target pari al proprio ID; nessun +A. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "COUNTER",
@@ -238,7 +238,7 @@
     {
       "class": "junkie.BadTrip",
       "name": "Presa Male di Brutto",
-      "description": "Toglie immunità T; timer 3 la aggiunge a sé; aggiunge abs(T) alla propria T. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Toglie immunità T; timer 3 la aggiunge a sé; aggiunge abs(T) alla propria T. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "RESOURCES",
@@ -247,7 +247,7 @@
     {
       "class": "junkie.BeggingMoney",
       "name": "Ce l'hai due spiccioli per il biglietto?",
-      "description": "Aggiunge un oggetto casuale del bersaglio vicino a sé senza rimuoverlo da lui; −10 A al bersaglio. Nessun recupero da alcol. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Aggiunge un oggetto casuale del bersaglio vicino a sé senza rimuoverlo da lui; −10 A al bersaglio. Nessun recupero da alcol. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "ITEMS",
@@ -256,7 +256,7 @@
     {
       "class": "junkie.Cough",
       "name": "Tossicone Scatarrante",
-      "description": "+5 T; −5 A al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "+5 T; −5 A al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DISRUPT",
@@ -265,7 +265,7 @@
     {
       "class": "junkie.EverythingIsDrug",
       "name": "Tutto è Droga",
-      "description": "Consuma senza effetti dell'oggetto; +20 T a sé. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Consuma senza effetti dell'oggetto; +20 T a sé. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "OTHER",
@@ -274,7 +274,7 @@
     {
       "class": "junkie.GoingBerserk",
       "name": "Estasi da Coca Etilene",
-      "description": "30 HIT; nessun costo T. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "30 HIT; nessun costo T. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -283,7 +283,7 @@
     {
       "class": "junkie.LethalHeroinDose",
       "name": "Dose di Eroina da Cavalli",
-      "description": "Se t>=30 perde t HEALTH; aggiunge abs(t−30) a T. Esempio: 40→50, perdendo 40 HEALTH. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Se t>=30 perde t HEALTH; aggiunge abs(t−30) a T. Esempio: 40→50, perdendo 40 HEALTH. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "RESOURCES",
@@ -292,7 +292,7 @@
     {
       "class": "junkie.MethDrivenRage",
       "name": "Rabbia Psicotica da Meth",
-      "description": "5 HIT a sé; 15 HIT al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "5 HIT a sé; 15 HIT al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DAMAGE",
@@ -301,7 +301,7 @@
     {
       "class": "junkie.PervertedMetabolism",
       "name": "Metabolismo Corrotto",
-      "description": "Guadagna abs(T/2) HEALTH; perde abs(T) TOXICITY. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Guadagna abs(T/2) HEALTH; perde abs(T) TOXICITY. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "RESOURCES",
@@ -310,7 +310,7 @@
     {
       "class": "junkie.ToxicBloodDrain",
       "name": "C'è del sangue nella mia droga",
-      "description": "Memorizza T residua, la perde e la aggiunge al bersaglio; rimuove immunità T al bersaglio; timer 1 aggiunge immunità T all'autore. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "Memorizza T residua, la perde e la aggiunge al bersaglio; rimuove immunità T al bersaglio; timer 1 aggiunge immunità T all'autore. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Regolare",
       "role": "DISRUPT",
@@ -319,7 +319,7 @@
     {
       "class": "junkie.character.PatheticBlade",
       "name": "Ago Marcio e Spezzato",
-      "description": "+5 T a sé; 5 CUT e +5 T al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "+5 T a sé; 5 CUT e +5 T al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Legata al personaggio",
       "role": "DAMAGE",
@@ -328,7 +328,7 @@
     {
       "class": "junkie.character.RottenSmile",
       "name": "Ghigno co' i' Denti Marci",
-      "description": "+5 A a sé; −5 A al bersaglio. Riferimento: Regolamento 1.7, R02-R07.",
+      "description": "+5 A a sé; −5 A al bersaglio. Riferimento: Regolamento 1.8, R02-R07.",
       "type": "Azione",
       "subtype": "Legata al personaggio",
       "role": "DISRUPT",

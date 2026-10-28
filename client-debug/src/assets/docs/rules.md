@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.7 — 27 ottobre 2026**. Fonte normativa del gioco.
+Versione **1.8 — 28 ottobre 2026**. Fonte normativa del gioco.
 
 ## R00 — Autorità
 
@@ -55,7 +55,7 @@ Le azioni regolari possono essere gratuite e vengono scartate dopo l'uso. Basic 
 
 Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano è sotto sei, si effettua **una sola pesca**, con eventuale catena di oggetti. Non si riempie tutta la mano. Struggle si scarta e può essere ripescata immediatamente.
 
-I mazzi personalizzati richiedono identificativo non vuoto, personaggio del catalogo, una basic, una last resort e almeno una carta regolare (azione o oggetto). Non sono imposti 20 regolari, due bound, limiti di copie o compatibilità di personaggio delle bound. I riferimenti devono appartenere al catalogo e i sottotipi devono corrispondere ai rispettivi slot.
+I mazzi personalizzati richiedono identificativo non vuoto e senza il carattere «/», personaggio del catalogo, una basic, una last resort e almeno una carta regolare (azione o oggetto). Non sono imposti 20 regolari, due bound, limiti di copie o compatibilità di personaggio delle bound. I riferimenti devono appartenere al catalogo e i sottotipi devono corrispondere ai rispettivi slot.
 
 Le **carte iniziali** si contano prima delle pescate: una basic più il numero di bound, contando ogni copia. Sono al massimo sei (quindi da zero a cinque bound). Personaggio, last resort e mazzo regolare non entrano in questo conteggio. La last resort entra solo con la pesca a mazzo vuoto. Le pescate di preparazione completano la mano fino a sei secondo le regole sopra. Questo conteggio deriva dai campi separati e dalla preparazione del modello Player.
 
@@ -263,6 +263,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.8 — 28 ottobre 2026, C2b-4:** l'identificativo di un mazzo personalizzato non può contenere «/». Decisione del proprietario. Motivazione: l'avvio open 1vCom porta l'identificativo come segmento della destinazione `/app/game/open/1vCom/join/{username}/{deckId}`; con «/» il mazzo si salvava ma la richiesta di avvio veniva rifiutata dal controllo delle destinazioni, quindi il mazzo non era giocabile. Il server rifiuta ora il salvataggio come gli altri mazzi non validi. Nessuna modifica a carte, effetti, starter, bilanciamento o agli altri requisiti dei mazzi.
 
 - **1.7 — 27 ottobre 2026, C2a/O14:** aggiunta R07a con ruolo descrittivo e guadagni di risorse a sé per ogni carta e per il token, conservati nel catalogo SQLite e nell'allegato. Decisione del proprietario: la classificazione vive nel catalogo, così tutte le informazioni sulle carte restano nello stesso posto; le carte ambigue hanno ruolo OTHER, da rivedere con il bilanciamento. Motivazione: rendere riconoscibili ruolo e guadagni nel client web (osservazioni O13 e O14 della prova umana A). Campo descrittivo: nessun effetto, costo, bersaglio, priorità, starter o bilanciamento cambia.
 

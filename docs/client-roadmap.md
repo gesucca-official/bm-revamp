@@ -38,7 +38,7 @@ sul telefono restano aperti. [Rapporto C1](reports/client-c1-report.md).
 La [checklist P01–P44](client-c0-parity.md) e il [contratto delle interazioni](design/client-c0/interaction-contract.md)
 restano le basi di C1–C2. Il [primo rapporto](reports/client-c0-report.md)
 e il laboratorio Angular sono evidenze storiche della scena respinta.
-Il [regolamento 1.7](game-rules.md) rimane la fonte normativa. Il rifacimento
+Il [regolamento 1.8](game-rules.md) rimane la fonte normativa (1.8, C2b-4: nessun «/» nell'identificativo dei mazzi). Il rifacimento
 non cambia regole né effetti; per decisione del proprietario su O14 il catalogo
 ha due campi descrittivi (ruolo e guadagni, R07a), esposti dal server e copiati
 nelle regole del debug. La base I22

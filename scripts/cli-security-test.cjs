@@ -49,7 +49,7 @@ function client(user, password = 'synthetic') {
     {basicActionCard:null}, {lastResortCard:null}, {character:null}, {regularCards:[]},
     {characterBoundCards:Array(6).fill(bound)}, {regularCards:[null]}, {regularCards:[bound]},
     {characterBoundCards:[card('com.Grab')]}, {basicActionCard:card('com.Grab')},
-    {regularCards:[{bindingName:'missing.Card'}]}, {deckId:'   '}, {characterBoundCards:null}
+    {regularCards:[{bindingName:'missing.Card'}]}, {deckId:'   '}, {deckId:'a/b'}, {characterBoundCards:null}
   ];
   for (const patch of invalid) {
     const mark = a.events.length;
