@@ -216,8 +216,9 @@ export class Session {
     let done = false;
     const finish = (acknowledged: boolean) => {
       if (done || generation !== this.generation) return; done = true; this.timers.clear(timer); unsubscribe.then(unsub => unsub(), () => {});
+      // A rejoin notice belongs to the game just left, not to the hub.
       this.dropGame(); this.phase = 'hub';
-      if (!acknowledged) this.notice = 'Il server non ha confermato l’uscita: se rientri nella stessa partita, lasciala di nuovo.';
+      this.notice = acknowledged ? '' : 'Il server non ha confermato l’uscita: se rientri nella stessa partita, lasciala di nuovo.';
       this.emit();
       if (acknowledged && then === 'again') this.join(again);
     };
@@ -247,9 +248,12 @@ export class Session {
     this.phase = 'login'; this.error = message; this.password = ''; this.emit();
   }
 
+  /** Explicit logout, also during a game: the server counts it as a forfeit (K6). */
   async logout() {
     const link = this.link;
     this.generation++;
+    // Like the leave: stop listening to the game first, so no view request reaches a closed game.
+    this.unsubscribeGame(); this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false;
     if (link) {
       await new Promise<void>(resolve => {
         const timer = this.timers.set(resolve, 1500);

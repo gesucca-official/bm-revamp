@@ -13,6 +13,7 @@
     "serve": "vite preview",
     "verify": "node tools/verify.mjs",
     "verify:modes": "node tools/verify-modes.mjs",
+    "verify:lifecycle": "node tools/verify-lifecycle.mjs",
     "measure": "node tools/measure.mjs",
     "size": "node tools/size.mjs",
     "atlas": "node tools/atlas.mjs",

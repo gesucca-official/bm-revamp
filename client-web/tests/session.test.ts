@@ -268,3 +268,64 @@ test('missing profile within the technical timeout returns to login', async () =
   clock.fire();
   assert.equal(session.phase, 'login'); assert.match(session.error, /Profilo/);
 });
+
+// C2b-2: lifecycle in 1v1.
+const versus = (turn = 1): View => { const v = duel(turn); v.players = {Tu: v.players.Tu, devBob: {...v.players.ComPlayer_7, playerId: 'devBob'}}; return v; };
+
+test('K6: logout during a game stops listening to it before the logout, then returns to login', async () => {
+  const {session, server} = await inGame(versus());
+  server.deliver('/user/queue/game/g1/view', versus());
+  const views = server.count('/app/game/g1/Tu/view');
+  const out = session.logout(); await flush();
+  for (const d of ['/user/queue/game/g1/view', '/topic/game/g1/update', '/topic/game/g1/move', '/user/queue/illegalMove']) assert.ok(!server.handlers.has(d), `${d} closed before the logout`);
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/session/logout', body: ''});
+  server.deliver('/user/queue/session/logout', 'true'); await out;
+  assert.equal(session.phase, 'login'); assert.equal(session.model, null); assert.equal(session.gameId, null);
+  assert.equal(server.count('/app/game/g1/Tu/view'), views, 'no view request after the logout');
+  assert.equal(server.count('/app/game/g1/move'), 0); assert.equal(server.count('/app/game/g1/Tu/leave'), 0, 'the server turns the logout into the forfeit');
+});
+
+test('a second leave while the first waits for its ACK sends nothing more', async () => {
+  const {session, server} = await inGame(versus());
+  session.leave('hub'); session.leave('hub'); await flush();
+  assert.equal(server.count('/app/game/g1/Tu/leave'), 1);
+  server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
+  assert.equal(session.phase, 'hub');
+  session.leave('hub'); await flush();
+  assert.equal(server.count('/app/game/g1/Tu/leave'), 1, 'after the ACK there is no game left to leave');
+});
+
+test('rejoin after the deadline shows the own forfeit from the server and never resubscribes the game', async () => {
+  const {session, server} = await inGame(versus());
+  const m = session.model!;
+  m.select(m.hand[2].key); m.aim({owner: 'devBob'}); session.submit();
+  const moves = server.count('/app/game/g1/move');
+  server.drops.at(-1)!();
+  await session.rejoin(); await flush();
+  const lost = versus(); Object.assign(lost, {over: true, winner: 'devBob', outcomeReason: 'timeout', forfeits: {Tu: 'reconnect timeout'}});
+  const sent = server.sent.length;
+  server.deliver('/user/queue/session/resume', {status: 'finished', gameId: 'g1', view: lost});
+  server.deliver('/user/queue/account/data', account); await flush();
+  assert.equal(session.phase, 'game'); assert.equal(session.model!.view.over, true); assert.equal(session.model!.message, 'Hai perso');
+  assert.ok(!server.handlers.has('/user/queue/game/g1/view'), 'no subscription to a finished game');
+  assert.deepEqual(server.sent.slice(sent), [], 'no SEND after the resume');
+  assert.equal(server.count('/app/game/g1/move'), moves, 'the old choice is never resent');
+  session.leave('hub'); await flush();
+  server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
+  assert.equal(session.phase, 'hub'); assert.equal(session.notice, '', 'no stale rejoin notice in the hub');
+});
+
+test('rejoin within the deadline keeps the same game and pending move with zero SEND after the resume', async () => {
+  const {session, server} = await inGame(versus());
+  const m = session.model!;
+  m.select(m.hand[2].key); m.aim({owner: 'devBob'}); session.submit();
+  server.drops.at(-1)!();
+  await session.rejoin(); await flush();
+  const pending = versus(); pending.pendingMove = {...m.lastCommand!, void: false, moveReport: {}}; pending.moveDeadlines = {devBob: Date.now() + 20000};
+  server.deliver('/user/queue/session/resume', {status: 'resumed', gameId: 'g1', view: pending});
+  server.deliver('/user/queue/account/data', account); await flush();
+  const after = server.sent.length - 1; // the reattach asks the private view once
+  assert.equal(session.model, m); assert.equal(m.phase, 'pending'); assert.equal(session.gameId, 'g1');
+  assert.deepEqual(server.sent.slice(after).map(s => s.destination), ['/app/game/g1/Tu/view']);
+  assert.equal(server.count('/app/game/g1/move'), 1);
+});

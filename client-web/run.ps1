@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','Size','Atlas')][string]$Task='Build',[switch]$Offline)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','Size','Atlas')][string]$Task='Build',[switch]$Offline)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -19,6 +19,8 @@ try {
     'Physical' {& npm run build;if($LASTEXITCODE -eq 0){$saved=$env:BM_LAN;if(!$env:BM_LAN){$env:BM_LAN='lan'};try{& npm run serve}finally{$env:BM_LAN=$saved}}}
     'Verify' {& npm run verify}
     'VerifyModes' {& npm run verify:modes}
+    # Starts and stops its own server on a temporary database (D12): port 8080 must be free.
+    'VerifyLifecycle' {& npm run verify:lifecycle}
     'Size' {& npm run size}
     'Atlas' {& npm run atlas}
   }

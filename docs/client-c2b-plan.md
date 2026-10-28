@@ -159,7 +159,7 @@ per due ragioni emerse dal codice:
 | Blocco | Contenuto | Dipende da |
 |---|---|---|
 | C2b-1 | Modalità e code: hub «Gioca», 1v1, uscita dalla coda, presenza — **fatto** (27 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-1--modalità-e-code)) | — |
-| C2b-2 | Ciclo di vita 1v1: clock, forfait, rientri, logout, riavvio | C2b-1 |
+| C2b-2 | Ciclo di vita 1v1: clock, forfait, rientri, logout, riavvio — **fatto con riserva** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-2--ciclo-di-vita-in-1v1)): `Verify` 1vCom rosso, ma fallisce allo stesso modo anche su C2b-1 | C2b-1 |
 | C2b-3 | FFA a cinque con la geometria C2a, bot, avvio anticipato, forfait altrui | C2b-1, C2b-2 |
 | C2b-4 | Catalogo, editor mazzi e open 1vCom | C2b-1 |
 | C2b-5 | Home, regole e registrazione | — (dopo C2b-1 per l'hub) |

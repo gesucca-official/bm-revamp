@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto**, gli altri no ([sezione](#c2b-1--modalità-e-code)). Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto con riserva** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -293,3 +293,87 @@ catalogo o `client-debug`.
   account sintetici (`resumedLeftoverA/B` nelle evidenze).
 - Evidenze: [modes.json](client-c2/modes.json), [modes-844x390.json](client-c2/modes-844x390.json),
   [catture](client-c2/screens/) `modes-*`; `verify*.json` aggiornati.
+
+## C2b-2 — Ciclo di vita in 1v1
+
+28 ottobre 2026. Regolamento 1.7, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md)). Nessuna modifica a regole, server,
+catalogo o `client-debug`; nessun cambio di protocollo. Il countdown parte dall'epoch
+della vista e l'esito lo decide solo il server.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| K5 | Nuovo `src/lifecycle.ts` (funzioni pure): ragioni d'esito e di forfait tradotte. `move timeout` → «non ha mosso entro 30 secondi», `reconnect timeout` → «non è rientrato entro 30 secondi», `leave` → «ha abbandonato» (in seconda persona per sé); un codice sconosciuto resta leggibile. Pareggio per scadenze simultanee: «Pareggio · Tempo scaduto per tutti». Anche l'ispezione di un avversario dice la ragione del forfait. |
+| K6 | Menu ••• → «Esci dall'account» con conferma («Uscire durante la partita è un forfait…»). `logout()` smette di ascoltare la partita prima di `/app/session/logout`, come il leave: nessuna richiesta di vista verso una partita chiusa. Il forfait lo applica il server (`forfeits: {devAlice: "leave"}`). |
+| Altro client | Indicatore «*avversario* fuori linea · N s» da `reconnectDeadlines`, sotto il clock. Corretto un difetto trovato nella prova reale: dopo «Torna all'hub» da una partita ripresa restava nell'hub l'avviso «Rientro nella partita in corso» / «Rientro riuscito»; ora l'ACK del leave lo cancella. |
+| Test automatici | Client 57 (46 + 11: 7 su `lifecycle.ts`, 4 di sessione: logout in partita, secondo leave, rientro dopo il termine senza sottoscrizioni né SEND e senza avviso residuo, rientro nel termine con pending e una sola richiesta di vista). Scritti prima del codice; i tre che descrivevano comportamenti nuovi fallivano. Nessun atteso esistente cambiato. `build.ps1 -Task Test -Offline` (36/36) e `check-rules.py` passano. |
+| Partite reali | **Sì.** Nuovo `VerifyLifecycle` (`run.ps1 -Task VerifyLifecycle`, `tools/verify-lifecycle.mjs`): avvia **da sé** il server su un database temporaneo (D12, giornale di recupero compreso, perché sta accanto al database), con devAlice e devBob in due contesti Edge e attese reali; verde a 1366×768 e 844×390. Esiti dei nove scenari del piano sotto. |
+| `Verify` 1vCom | **Rosso**, ma **non per C2b-2**: fallisce allo stesso modo con i sorgenti di HEAD (C2b-1) ricompilati (stash temporaneo). Vedi i limiti. |
+| Peso | JS gzip 283790 byte (+467 byte rispetto a C2b-1); totale gzip 1065279 byte ([size.json](client-c2/c2b-2/size.json)). |
+| Emulazione / dispositivo / umano | 844×390 sul PC con il mouse; nessun dispositivo fisico né prova umana. |
+
+### Scenari reali (entrambe le misure)
+
+1. **Scadenza di mossa.** A invia, B no: esito dopo 30 s (misurati 30 s),
+   `outcomeReason: "timeout"`, `forfeits: {devBob: "move timeout"}`, A vince. HEALTH
+   di entrambi uguale all'ultima vista prima della scadenza (100/100). Clock di B
+   indicativo (17–18 s a metà attesa), quello di A «—» con la mossa in attesa.
+2. **Pareggio per scadenze simultanee.** Nessuno invia: `winner: "NONE"`, forfait
+   `move timeout` per entrambi; a tutti e due «Pareggio · Tempo scaduto per tutti».
+3. **Rientro nel termine.** A invia, «Simula disconnessione», rientra dopo 3 s:
+   stessa partita (`resume` `resumed`, stesso `gameId`), stessa pending, **zero**
+   SEND di mosse; dopo il rientro solo `resume`, profilo, presenza e una richiesta
+   di vista. B intanto vede «devAlice fuori linea · 28 s».
+4. **Rientro oltre il termine.** Turno successivo: A invia e cade, B invia; dopo
+   31 s fuori A rientra e riceve il proprio forfait (`resume` `finished`,
+   `reconnect timeout`, «Non sei rientrato entro 30 secondi»); B vince. Dal
+   rientro fino a «Torna all'hub» nessuna SUBSCRIBE né SEND verso quella partita;
+   nell'hub nessun avviso residuo.
+5. **Abbandono.** ACK, `forfeits: {devAlice: "leave"}`, ritorno all'hub, un solo
+   SEND di leave. Un **secondo** leave di devAlice da un socket STOMP grezzo, dopo
+   il logout del client, riceve di nuovo `true`, il `resume` successivo dice
+   `none` e B non vede un altro esito (una sola coppia vincitore/forfait).
+6. **Logout in partita.** Conferma, poi un solo SEND (`/app/session/logout`) e
+   ritorno all'accesso; B vince per `leave`. Al login successivo il `resume` è
+   `none`: niente da riprendere.
+7. **Seconda sessione.** Login di devAlice da un terzo contesto mentre gioca:
+   «Credenziali errate, oppure l'account è già collegato altrove.»; la prima
+   sessione continua.
+8. **Riavvio (D12).** 1v1 in corso con una mossa in attesa, server terminato
+   (`taskkill /T /F`) e riavviato sullo stesso database temporaneo. A usa
+   «Rientra», B «Esci» e un nuovo login: entrambi ricevono `resume`
+   `finished`/`archived` senza `view` e vedono nell'hub «Pareggio — riavvio
+   server…»; nei frame dopo la riconnessione nessuna SUBSCRIBE né SEND con il
+   vecchio `gameId`.
+9. **Regressione vsCom.** Caduta di 33 s contro il computer: forfait
+   `reconnect timeout`, «Hai perso».
+
+### Limiti e residui
+
+- **`Verify` 1vCom rosso, preesistente.** Cinque esecuzioni con i sorgenti C2b-2
+  (tre a 1366×768, due a 844×390) e due con quelli di HEAD (una per misura)
+  falliscono negli stessi punti di `tools/verify.mjs`: a
+  1366×768 il trascinamento di riordino non cambia l'ordine (finisce su un oggetto
+  e apre l'ispezione), a 844×390 nessuno dei punti candidati per il tocco «nel
+  vuoto» è libero. Nelle catture delle esecuzioni fallite il server ha assegnato
+  Tossico contro Tossico, quindi sei oggetti sul tavolo
+  ([1366×768](client-c2/c2b-2/screens/verify-head-fail-1366x768-reorder.jpg),
+  [844×390](client-c2/c2b-2/screens/verify-head-fail-844x390-empty-spot.jpg)).
+  Non corretto qui: è fuori dal perimetro e va guardato a parte.
+- **Dati locali.** `./scripts/dev.ps1 -Task Server -SeedAccounts` non parte sul
+  database locale: «Conflicting recovery sequence» in
+  `server/data/bm.sqlite.match-recovery`. I file sono fermi al 27 ottobre alle
+  20:27, prima di questa sessione, e non sono stati toccati né riparati; tutte le
+  prove di C2b-2 e i `Verify` hanno usato database temporanei.
+- Non provati: il clock su un vero cambio di fuso o con una deriva fra gli orologi
+  (lo stesso PC fa da client e server); una riconnessione fallita per rete assente
+  (la prova la simula chiudendo il socket); dispositivo fisico e prova umana.
+- L'indicatore «fuori linea» si basa sull'ultima vista: dopo la caduta di
+  un avversario lo aggiorna solo una nuova vista del server, e il conteggio è indicativo come il clock.
+- `README.md`, roadmap e checklist P05/P06/P32–P36 non sono aggiornati in questo
+  commit, per istruzione del proprietario (solo la riga del piano e questo rapporto).
+- Evidenze: [lifecycle.json](client-c2/c2b-2/lifecycle.json),
+  [lifecycle-844x390.json](client-c2/c2b-2/lifecycle-844x390.json),
+  [catture](client-c2/c2b-2/screens/) `lifecycle-*`.

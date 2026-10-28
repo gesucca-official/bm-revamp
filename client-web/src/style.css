@@ -19,6 +19,8 @@ button.primary{background:#9ec5bd;font-size:17px}
 .outcome{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) rotate(-1.5deg);background:#e8d7b4;border:3px solid #742e33;border-radius:6px;padding:16px 24px;box-shadow:6px 10px 0 #20160c88;text-align:center;z-index:5}
 .outcome h2{font:normal 44px/1 Impact,'Arial Narrow',sans-serif;color:#742e33;margin:0 0 4px}
 .outcome p{margin:0 0 12px}
+.outcome p.why{margin:-6px 0 12px;font-size:15px}
+.clock.away{position:absolute;right:0;top:100%;margin-top:4px;white-space:nowrap;font-size:16px;color:#ffe7b0}
 .outcome div{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .report-move h3{margin:14px 0 4px;font-size:18px}
 .report-move p,.report p{margin:2px 0}
