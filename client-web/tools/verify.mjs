@@ -30,9 +30,15 @@ page.on('request',r=>{if(r.url().includes('xhr_send')&&isMove(r.postData()||''))
 const state=()=>page.evaluate(()=>window.__bm?.state??null);
 const wait=async(pred,ms=15000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`Timeout: ${what}`);};
 const shot=async name=>page.screenshot({path:`${out}/screens/${name}${tag}.jpg`,type:'jpeg',quality:70});
-// Hand cards: the left part stays visible where the fan overlaps (C2a), so press there.
-const center=h=>h.kind==='hand'?{x:h.x-h.w*.22,y:h.y}:{x:h.x,y:h.y};
-const tap=async h=>{const p=center(h);await page.mouse.click(p.x,p.y);await page.waitForTimeout(60);};
+// Box test with a margin (rotation ignored): enough to keep presses off other cards.
+const inside=(pt,h,m)=>Math.abs(pt.x-h.x)<h.w/2+m&&Math.abs(pt.y-h.y)<h.h/2+m;
+// Hand cards: the left part stays visible where the fan overlaps (C2a), so press there. With three
+// items per side (Tossico against Tossico) an item can cover that point: then try another visible spot.
+const grip=(h,hits)=>{for(const dy of [0,.25,.38,-.15])for(const dx of [-.22,-.32,-.12]){const pt={x:h.x+h.w*dx,y:h.y+h.h*dy};if(!hits.some(o=>o.kind!=='hand'&&inside(pt,o,4)))return pt;}return {x:h.x-h.w*.22,y:h.y};};
+const center=(h,hits=[])=>h.kind==='hand'?grip(h,hits):{x:h.x,y:h.y};
+// An empty spot on the felt: a grid away from the brand, the top controls and the resource board.
+const emptySpot=hits=>{for(let b=.3;b<=.72;b+=.04)for(let a=.25;a<=.85;a+=.03){const pt={x:vw*a,y:vh*b};if(!hits.some(h=>inside(pt,h,12)))return pt;}return null;};
+const tap=async h=>{const p=center(h,h.kind==='hand'?(await state())?.hits??[]:[]);await page.mouse.click(p.x,p.y);await page.waitForTimeout(60);};
 async function drag(from,to,snapshot){await page.mouse.move(from.x,from.y);await page.mouse.down();const steps=14;for(let i=1;i<=steps;i++){await page.mouse.move(from.x+(to.x-from.x)*i/steps,from.y+(to.y-from.y)*i/steps);await page.waitForTimeout(16);}
  const mid=await state();if(snapshot)await shot(snapshot);await page.mouse.up();await page.waitForTimeout(80);return mid;}
 
@@ -76,7 +82,7 @@ async function playTurn(game){
  if(!evidence.c2aTable){evidence.c2aTable=true;await shot('08-c2a-table');}
  // Owner feedback: a tap or click anywhere else lowers the raised card and drops the choice.
  if(!c2a.outsideDeselect&&hand.length){await sel(hand[0].key);const chosen=await state();
-  const free=[[.5,.4],[.45,.5],[.35,.45],[.62,.42],[.8,.6]].map(([a,b])=>({x:vw*a,y:vh*b})).find(pt=>!chosen.hits.some(h=>Math.abs(pt.x-h.x)<h.w/2+12&&Math.abs(pt.y-h.y)<h.h/2+12));
+  const free=emptySpot(chosen.hits);
   assert.ok(free,'an empty spot on the table');await page.mouse.click(free.x,free.y);await page.waitForTimeout(100);const after=await state();
   const card=after.hits.find(x=>x.id===hand[0].key),resting=chosen.hits.find(x=>x.id===hand[0].key);
   assert.equal(chosen.selected,hand[0].key);assert.equal(after.selected,null,'deselected');assert.ok(card.h<resting.h,'back to rest');
@@ -86,12 +92,12 @@ async function playTurn(game){
  if(chip&&!c2a.status){await page.mouse.move(chip.x,chip.y);const tip=page.getByTestId('status-tip');await tip.waitFor({timeout:3000});const hoverText=await tip.innerText();await shot('08-c2a-status');
   await page.mouse.move(5,5);await tip.waitFor({state:'detached',timeout:3000});
   await page.mouse.click(chip.x,chip.y);await tip.waitFor({timeout:3000});const tapText=await tip.innerText();
-  const free={x:vw*.5,y:vh*.4};await page.mouse.click(free.x,free.y);await tip.waitFor({state:'detached',timeout:3000});
+  const free=emptySpot(s.hits);assert.ok(free,'an empty spot on the table');await page.mouse.click(free.x,free.y);await tip.waitFor({state:'detached',timeout:3000});
   c2a.status={chip:chip.label,hoverText,tapOpens:tapText===hoverText,closedElsewhere:true};s=await state();}
  const persons=s.hits.filter(h=>h.kind==='person'),items=s.hits.filter(h=>h.kind==='item');
  // Reorder once by dragging inside the fan: local only, no SEND.
  if(!want.reorder&&hand.length>=3){const before=s.order.map(c=>c.key),sent=moves.length,a=s.hits.find(h=>h.id===before[0]),b=s.hits.find(h=>h.id===before.at(-1));
-  const mid=await drag(center(a),{x:b.x+20,y:b.y},'02-reorder-mid-drag');const after=await state();
+  const mid=await drag(center(a,s.hits),{x:b.x+20,y:b.y+b.h*.25},'02-reorder-mid-drag');const after=await state();
   assert.equal(moves.length,sent,'reorder must not send');assert.equal(after.commands,s.commands);assert.notDeepEqual(after.order.map(c=>c.key),before);
   assert.ok(mid.drag?.moved,'card lifted while dragging');want.reorder=true;evidence.checks.reorder={before:before.length,firstMovedTo:after.order.findIndex(c=>c.key===before[0]),sendsDuring:0,dragMoved:mid.drag.moved};await shot('02-after-reorder');s=after;
   // Transport drop from the diagnostics, then explicit rejoin: same game and hand order, nothing resent.
@@ -133,7 +139,7 @@ async function playTurn(game){
   let aimed=null;
   for(const t of targets){const h=(await state()).hits.find(x=>x.id===t.id);if(!h)continue;
    const useDrag=!want.drag&&!aimed;
-   if(useDrag){await cancel();const c=(await state()).hits.find(x=>x.id===card.key);const mid=await drag(center(c),center(h),'02-play-mid-drag');const after=await state();if(after.target){aimed={t,how:'drag'};evidence.checks.dragFollow={ghostOverTargetDuringDrag:mid.ghostOver,dragMoved:mid.drag?.moved};break;}await sel(card.key);continue;}
+   if(useDrag){await cancel();const c=(await state()).hits.find(x=>x.id===card.key);const mid=await drag(center(c,(await state()).hits),center(h),'02-play-mid-drag');const after=await state();if(after.target){aimed={t,how:'drag'};evidence.checks.dragFollow={ghostOverTargetDuringDrag:mid.ghostOver,dragMoved:mid.drag?.moved};break;}await sel(card.key);continue;}
    // A tap on a table element that is not an admitted target drops the choice: choose the card again.
    if((await state()).selected!==card.key)await sel(card.key);
    await tap(h);const after=await state();if(after.target){aimed={t,how:'tap'};break;}}
@@ -170,6 +176,8 @@ for(let g=0;g<8&&(want.characters.size<2||!want.bound||!want.item||!want.periodi
  const game={index:g+1,me,moves:[],started:new Date().toISOString()};
  const character=await page.evaluate(()=>{const s=window.__bm.state;return s.hits.find(h=>h.id===`person-${s.me}`)?.label;});
  game.character=character;
+ // The opponent matters for the layout: Tossico against Tossico puts six items on the table.
+ game.opponent=await page.evaluate(()=>{const s=window.__bm.state;return s.hits.find(h=>h.kind==='person'&&h.id!==`person-${s.me}`)?.label;});
  for(let t=0;t<80;t++){
   const r=await playTurn(game);
   // Periodic effects: read them from the non-blocking report when the server published any.
@@ -185,7 +193,7 @@ for(let g=0;g<8&&(want.characters.size<2||!want.bound||!want.item||!want.periodi
   const outcomeText=await page.locator('.outcome').innerText();game.outcomeText=outcomeText;
   want.characters.add(character.split(', ')[1]);}
  game.ended=new Date().toISOString();evidence.games.push(game);
- console.log(JSON.stringify({game:game.index,character:game.character,moves:game.moves.length,outcome:game.outcome,stuck:!!game.stuck}));
+ console.log(JSON.stringify({game:game.index,character:game.character,opponent:game.opponent,moves:game.moves.length,outcome:game.outcome,stuck:!!game.stuck}));
  if(end?.over)await page.getByTestId('again').click();
  else await page.getByTestId('quick').click();
  await page.waitForTimeout(300);

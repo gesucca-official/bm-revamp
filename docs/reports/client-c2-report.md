@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto con riserva** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -310,7 +310,7 @@ della vista e l'esito lo decide solo il server.
 | Altro client | Indicatore «*avversario* fuori linea · N s» da `reconnectDeadlines`, sotto il clock. Corretto un difetto trovato nella prova reale: dopo «Torna all'hub» da una partita ripresa restava nell'hub l'avviso «Rientro nella partita in corso» / «Rientro riuscito»; ora l'ACK del leave lo cancella. |
 | Test automatici | Client 57 (46 + 11: 7 su `lifecycle.ts`, 4 di sessione: logout in partita, secondo leave, rientro dopo il termine senza sottoscrizioni né SEND e senza avviso residuo, rientro nel termine con pending e una sola richiesta di vista). Scritti prima del codice; i tre che descrivevano comportamenti nuovi fallivano. Nessun atteso esistente cambiato. `build.ps1 -Task Test -Offline` (36/36) e `check-rules.py` passano. |
 | Partite reali | **Sì.** Nuovo `VerifyLifecycle` (`run.ps1 -Task VerifyLifecycle`, `tools/verify-lifecycle.mjs`): avvia **da sé** il server su un database temporaneo (D12, giornale di recupero compreso, perché sta accanto al database), con devAlice e devBob in due contesti Edge e attese reali; verde a 1366×768 e 844×390. Esiti dei nove scenari del piano sotto. |
-| `Verify` 1vCom | **Rosso**, ma **non per C2b-2**: fallisce allo stesso modo con i sorgenti di HEAD (C2b-1) ricompilati (stash temporaneo). Vedi i limiti. |
+| `Verify` 1vCom | **Verde** a 1366×768 e 844×390 dopo una correzione di `tools/verify.mjs` in un commit separato: prima era rosso anche con i sorgenti di C2b-1 (vedi sotto). |
 | Peso | JS gzip 283790 byte (+467 byte rispetto a C2b-1); totale gzip 1065279 byte ([size.json](client-c2/c2b-2/size.json)). |
 | Emulazione / dispositivo / umano | 844×390 sul PC con il mouse; nessun dispositivo fisico né prova umana. |
 
@@ -352,7 +352,7 @@ della vista e l'esito lo decide solo il server.
 
 ### Limiti e residui
 
-- **`Verify` 1vCom rosso, preesistente.** Cinque esecuzioni con i sorgenti C2b-2
+- **`Verify` 1vCom: era rosso già prima di C2b-2, poi corretto.** Cinque esecuzioni con i sorgenti C2b-2
   (tre a 1366×768, due a 844×390) e due con quelli di HEAD (una per misura)
   falliscono negli stessi punti di `tools/verify.mjs`: a
   1366×768 il trascinamento di riordino non cambia l'ordine (finisce su un oggetto
@@ -361,7 +361,18 @@ della vista e l'esito lo decide solo il server.
   Tossico contro Tossico, quindi sei oggetti sul tavolo
   ([1366×768](client-c2/c2b-2/screens/verify-head-fail-1366x768-reorder.jpg),
   [844×390](client-c2/c2b-2/screens/verify-head-fail-844x390-empty-spot.jpg)).
-  Non corretto qui: è fuori dal perimetro e va guardato a parte.
+  **Correzione** (commit separato, solo `tools/verify.mjs`, nessun cambio al client):
+  il punto vuoto si cerca su una griglia del tavolo lontana da ogni bersaglio, anche
+  per chiudere il riepilogo di uno stato; la carta della mano si preme in un punto che
+  nessun oggetto o personaggio copre, sia per il riordino sia per la calata trascinata;
+  il rilascio del riordino scende nella parte bassa della carta. Le evidenze annotano
+  ora anche il personaggio avversario. Dopo la correzione sei esecuzioni verdi
+  (quattro a 844×390, due a 1366×768); una settima si è fermata al login perché il
+  server non era ancora pronto. Quelle conservate hanno Tossico contro Tossico
+  nella prima partita, dove cadono il tocco nel vuoto e il riordino
+  ([verify-1366x768.json](client-c2/c2b-2/verify-1366x768.json),
+  [verify-844x390.json](client-c2/c2b-2/verify-844x390.json), catture senza prefisso
+  `lifecycle-` nella stessa cartella).
 - **Dati locali.** `./scripts/dev.ps1 -Task Server -SeedAccounts` non parte sul
   database locale: «Conflicting recovery sequence» in
   `server/data/bm.sqlite.match-recovery`. I file sono fermi al 27 ottobre alle
