@@ -7,9 +7,14 @@ import {Hub} from './hub.tsx';
 import {PressButton} from './ui.tsx';
 import {Home,Rules,SignUp,go} from './public.tsx';
 import {routeOf,type Route} from './signup.ts';
+import {errorReporter,installReporter} from './report.ts';
 import './style.css';
 
 const session=new Session(stompConnector);
+// Unhandled errors go to the server log (P44): one at a time, 5 s, never the credentials or game data.
+const reporter=errorReporter({secrets:()=>session.secrets()});
+installReporter(reporter);
+(window as any).__bmReports=reporter.stats;
 
 function Login(){
  const [user,setUser]=useState(''),[password,setPassword]=useState('');

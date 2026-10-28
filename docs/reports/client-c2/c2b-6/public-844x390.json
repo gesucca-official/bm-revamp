@@ -1,0 +1,340 @@
+{
+ "date": "2026-10-28T18:01:33.174Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "checks": {
+  "home": {
+   "label": "start",
+   "links": [
+    {
+     "id": "instagram",
+     "href": "https://www.instagram.com/gesucca/",
+     "target": "_blank",
+     "rel": "noopener noreferrer",
+     "text": "Instagram"
+    },
+    {
+     "id": "youtube",
+     "href": "https://www.youtube.com/channel/UCVn26_2xCJDngLicWKxQRmw",
+     "target": "_blank",
+     "rel": "noopener noreferrer",
+     "text": "YouTube"
+    },
+    {
+     "id": "github-profile",
+     "href": "https://github.com/gesucca-official",
+     "target": "_blank",
+     "rel": "noopener noreferrer",
+     "text": "GitHub: profilo"
+    },
+    {
+     "id": "github-web-client",
+     "href": "https://github.com/gesucca-official/bm-web-client",
+     "target": "_blank",
+     "rel": "noopener noreferrer",
+     "text": "GitHub: client web"
+    },
+    {
+     "id": "github-server",
+     "href": "https://github.com/gesucca-official/bm-server",
+     "target": "_blank",
+     "rel": "noopener noreferrer",
+     "text": "GitHub: server"
+    },
+    {
+     "id": "mail",
+     "href": "mailto:gesucca.official@gmail.com",
+     "target": "",
+     "rel": "",
+     "text": "Scrivi un’email"
+    },
+    {
+     "id": "paypal",
+     "href": "https://www.paypal.com/paypalme/gesucca/",
+     "target": "_blank",
+     "rel": "noopener noreferrer",
+     "text": "Sostieni con PayPal"
+    }
+   ],
+   "rights": "Tutti i diritti riservati. Non è concessa alcuna licenza open source: codice, illustrazioni e materiali di gioco non ricevono permessi di utilizzo. Prima di contribuire con codice o materiali, accordati con il proprietario.",
+   "images": 0,
+   "backgroundImages": 0,
+   "sponsor": false,
+   "openSourceClaim": false,
+   "buttons": [
+    "Accedi",
+    "Registrati",
+    "Regole"
+   ],
+   "hash": "",
+   "debugLinks": [
+    "https://github.com/gesucca-official",
+    "https://github.com/gesucca-official/bm-server",
+    "https://github.com/gesucca-official/bm-web-client",
+    "https://www.instagram.com/gesucca/",
+    "https://www.paypal.com/paypalme/gesucca/",
+    "https://www.youtube.com/channel/UCVn26_2xCJDngLicWKxQRmw",
+    "mailto:gesucca.official@gmail.com"
+   ],
+   "layout": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true,
+    "sheetScrolls": true,
+    "rotateOverlay": false
+   }
+  },
+  "rules": {
+   "version": "1.8",
+   "headings": 21,
+   "headingsEqual": true,
+   "index": [
+    "R00",
+    "R01",
+    "R01a",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R07a",
+    "R08",
+    "R09",
+    "Revisioni"
+   ],
+   "revisions": [
+    "1.8",
+    "1.7",
+    "1.6",
+    "1.5",
+    "1.4",
+    "1.3",
+    "1.2",
+    "1.1"
+   ],
+   "tables": [
+    4,
+    5,
+    3,
+    34,
+    6,
+    8,
+    41
+   ],
+   "tablesEqual": true,
+   "r07Rows": 33,
+   "r07aRows": 40,
+   "anchors": 0,
+   "ids": 0,
+   "rawHtml": 0,
+   "textWords": 4189,
+   "sourceWords": 4189,
+   "layout": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true,
+    "sheetScrolls": true,
+    "rotateOverlay": false
+   }
+  },
+  "rulesIndex": {
+   "top": 11,
+   "visible": true,
+   "hash": "#/regole"
+  },
+  "rulesBack": {
+   "historyBack": "",
+   "button": "#/"
+  },
+  "loginPath": {
+   "hub": "Ciao, devAlice",
+   "afterExit": "#/",
+   "refused": {
+    "message": "Credenziali errate, oppure l’account è già collegato altrove.",
+    "hash": "#/accedi"
+   }
+  },
+  "signupInvalid": {
+   "initial": {
+    "send": false,
+    "register": false
+   },
+   "errors": [
+    "Solo lettere latine e cifre, senza spazi.",
+    "Indirizzo email non valido."
+   ],
+   "send": false
+  },
+  "signupTaken": {
+   "message": "Questo nome è già usato: scegline un altro.",
+   "requests": [
+    {
+     "path": "/rest/sign-up/users/devAlice/available",
+     "method": "GET",
+     "status": 200
+    }
+   ],
+   "sendEnabled": true
+  },
+  "signupUnavailable": {
+   "name": "nuovo879",
+   "availableBefore": true,
+   "message": "Registrazione non disponibile in questo ambiente: il server non può inviare il codice per email. Nessun account è stato creato.",
+   "role": "alert",
+   "requests": [
+    {
+     "path": "/rest/sign-up/users/nuovo879/available",
+     "method": "GET",
+     "status": 200
+    },
+    {
+     "path": "/rest/sign-up/mail/c2b5@example.com/available",
+     "method": "GET",
+     "status": 200
+    },
+    {
+     "path": "/rest/sign-up/verify",
+     "method": "POST",
+     "status": 500
+    }
+   ],
+   "inView": true,
+   "sendEnabled": true,
+   "fieldsEnabled": true,
+   "buttonText": "Invia codice"
+  },
+  "signupWrongCode": {
+   "mismatch": {
+    "errors": [
+     "Le due password non coincidono."
+    ],
+    "register": false
+   },
+   "message": "Registrazione rifiutata: il codice non è quello inviato per email, oppure nome o email sono già usati. Nessun account è stato creato.",
+   "requests": [
+    {
+     "path": "/rest/sign-up/register",
+     "method": "POST",
+     "status": 409
+    }
+   ],
+   "registerEnabled": true,
+   "availableAfter": true,
+   "loginAfter": false
+  },
+  "serverDown": {
+   "signup": {
+    "ms": 44,
+    "message": "Server non raggiungibile. Riprova tra poco.",
+    "requests": [
+     {
+      "path": "/rest/sign-up/users/nuovo879x/available",
+      "method": "GET",
+      "status": 502,
+      "failure": "net::ERR_ABORTED"
+     }
+    ],
+    "sendEnabled": true
+   },
+   "login": {
+    "ms": 103,
+    "message": "Server non raggiungibile. Riprova tra poco.",
+    "submitEnabled": true
+   },
+   "rulesOffline": true
+  },
+  "portrait": {
+   "home": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true,
+    "sheetScrolls": true,
+    "rotateOverlay": false
+   },
+   "rules": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true,
+    "sheetScrolls": true,
+    "rotateOverlay": false
+   },
+   "signup": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true,
+    "sheetScrolls": false,
+    "rotateOverlay": false
+   },
+   "login": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true,
+    "sheetScrolls": false,
+    "rotateOverlay": false
+   }
+  }
+ },
+ "errors": [],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+  "error: Failed to load resource: the server responded with a status of 409 (Conflict)",
+  "error: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+  "error: Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+ ],
+ "ok": true,
+ "rest": [
+  {
+   "path": "/rest/sign-in/validate",
+   "method": "POST",
+   "status": 200
+  },
+  {
+   "path": "/rest/sign-in/validate",
+   "method": "POST",
+   "status": 200
+  },
+  {
+   "path": "/rest/sign-up/users/devAlice/available",
+   "method": "GET",
+   "status": 200
+  },
+  {
+   "path": "/rest/sign-up/users/nuovo879/available",
+   "method": "GET",
+   "status": 200
+  },
+  {
+   "path": "/rest/sign-up/mail/c2b5@example.com/available",
+   "method": "GET",
+   "status": 200
+  },
+  {
+   "path": "/rest/sign-up/verify",
+   "method": "POST",
+   "status": 500
+  },
+  {
+   "path": "/rest/sign-up/register",
+   "method": "POST",
+   "status": 409
+  },
+  {
+   "path": "/rest/sign-up/users/nuovo879x/available",
+   "method": "GET",
+   "status": 502,
+   "failure": "net::ERR_ABORTED"
+  },
+  {
+   "path": "/rest/sign-in/validate",
+   "method": "POST",
+   "status": 502,
+   "failure": "net::ERR_ABORTED"
+  }
+ ]
+}

@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','Size','Atlas')][string]$Task='Build',[switch]$Offline)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','Size','Atlas')][string]$Task='Build',[switch]$Offline)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -27,6 +27,8 @@ try {
     'VerifyDecks' {& npm run verify:decks}
     # C2b-5: home, rules and sign-up on its own temporary server (port 8080 free, Serve running); stops it for the last scenario.
     'VerifyPublic' {& npm run verify:public}
+    # C2b-6: profile, admin panel (synthetic ADMIN, HTTP Basic from environment variables), error reports and tools on its own temporary server.
+    'VerifyProfile' {& npm run verify:profile}
     'Size' {& npm run size}
     'Atlas' {& npm run atlas}
   }

@@ -115,3 +115,14 @@ button.back{align-self:flex-start;padding:4px 12px;min-height:40px}
 .rules-text th,.rules-text td{border:1px solid #b99772;padding:4px 6px;vertical-align:top}.rules-text th{background:#efe0c2}
 .rules-text td{overflow-wrap:normal}
 @media(max-height:550px){.sheet.public{padding:14px 18px;gap:8px}.sheet.public h1{font-size:30px}.rules-text{font-size:14px}}
+/* C2b-6: profile and admin panel (outside the table: portrait allowed, the sheet scrolls). */
+.profile{display:flex;flex-direction:column;gap:10px}
+.profile-data{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:6px 0 0;font-size:16px}.profile-data dt{font-weight:bold}.profile-data dd{margin:0;overflow-wrap:anywhere}
+.admin{border-top:2px solid #9b7652;padding-top:8px;display:flex;flex-direction:column;gap:8px}
+.admin h2{margin:0;font:22px Impact,'Arial Narrow',sans-serif;font-weight:normal;color:#742e33}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.admin-log{background:#f6ecd8;border:2px solid #9b765288;border-radius:6px;padding:6px 10px}.admin-log h3{margin:2px 0;font-size:16px}.admin-log p{margin:4px 0}
+.admin-log .confirm span{font-weight:bold;color:#742e33;flex-basis:100%}
+.open-games{border-collapse:collapse;font-size:13px;min-width:100%}.open-games caption{text-align:left;font-weight:bold;margin-bottom:4px}
+.open-games th,.open-games td{border:1px solid #9b765288;padding:3px 6px;text-align:left;overflow-wrap:anywhere}
+@media(max-width:640px){.admin-grid{grid-template-columns:1fr}}

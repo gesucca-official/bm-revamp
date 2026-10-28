@@ -1,0 +1,599 @@
+{
+ "date": "2026-10-28T18:03:56.771Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database with a synthetic ADMIN account and HTTP Basic from environment variables (D5); not a physical device",
+ "checks": {
+  "environment": {
+   "database": "temporary",
+   "accounts": [
+    {
+     "username": "c2b6Admin",
+     "email": "c2b6-admin@example.invalid",
+     "role": "ADMIN"
+    },
+    {
+     "username": "devAlice",
+     "email": null,
+     "role": "USER"
+    },
+    {
+     "username": "devBob",
+     "email": null,
+     "role": "USER"
+    }
+   ],
+   "syntheticGameLogs": [
+    {
+     "gameId": "c2b6-synthetic-1",
+     "players": "c2b6Admin, ComPlayer_1",
+     "type": "c2b6Synthetic",
+     "date": "2026-10-28 12:00:00",
+     "status": "STARTED"
+    },
+    {
+     "gameId": "c2b6-synthetic-2",
+     "players": "devAlice, devBob",
+     "type": "c2b6Synthetic",
+     "date": "2026-10-28 12:00:01",
+     "status": "IN_PROGRESS"
+    },
+    {
+     "gameId": "c2b6-synthetic-3",
+     "players": "devBob, ComPlayer_2",
+     "type": "c2b6Synthetic",
+     "date": "2026-10-28 12:00:02",
+     "status": "ENDED"
+    }
+   ],
+   "basicUser": "c2b6basic",
+   "basicPassword": "generated for this run, BCrypt in HTTP_AUTH_PASSWORD, not recorded"
+  },
+  "adminBasicNotConfigured": {
+   "profile": {
+    "username": "c2b6Admin",
+    "email": "c2b6-admin@example.invalid",
+    "role": "ADMIN",
+    "panel": 1
+   },
+   "counts": {
+    "games": "—",
+    "client": "—"
+   },
+   "error": "Non autorizzato in questo ambiente: servono le credenziali HTTP del server, che chiede il browser. Nessuna operazione eseguita.",
+   "notice": null,
+   "retry": true,
+   "clearEnabled": false,
+   "requests": [
+    "GET /rest/logs/back/games/qty 401"
+   ]
+  },
+  "userProfile": {
+   "profile": {
+    "username": "devAlice",
+    "email": "—",
+    "role": "USER",
+    "panel": 0
+   },
+   "logRequests": 0,
+   "layout": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true
+   },
+   "hubLayout": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true
+   }
+  },
+  "clientErrorReports": {
+   "sent": [
+    {
+     "kind": "error",
+     "status": 200,
+     "body": {
+      "timestamp": "2026-10-28T18:04:18.156Z",
+      "message": "Error: c2b6-synthetic uncaught for *** with ***",
+      "additional": [
+       "client-web"
+      ]
+     }
+    },
+    {
+     "kind": "rejection",
+     "status": 200,
+     "body": {
+      "timestamp": "2026-10-28T18:04:18.494Z",
+      "message": "Error: c2b6-synthetic rejection",
+      "additional": [
+       "client-web"
+      ]
+     }
+    },
+    {
+     "kind": "json",
+     "status": 200,
+     "body": {
+      "timestamp": "2026-10-28T18:04:18.819Z",
+      "message": "SyntaxError: Unexpected token \"…\", ...\"…\":…",
+      "additional": [
+       "client-web"
+      ]
+     }
+    }
+   ],
+   "posts": 3,
+   "stats": {
+    "sent": 3,
+    "dropped": 0,
+    "failed": 0
+   },
+   "qtyBefore": 0,
+   "qtyAfter": 3,
+   "stored": [
+    {
+     "timestamp": "2026-10-28T18:04:18.156Z",
+     "additional": "client-web",
+     "message": "Error: c2b6-synthetic uncaught for *** with ***"
+    },
+    {
+     "timestamp": "2026-10-28T18:04:18.494Z",
+     "additional": "client-web",
+     "message": "Error: c2b6-synthetic rejection"
+    },
+    {
+     "timestamp": "2026-10-28T18:04:18.819Z",
+     "additional": "client-web",
+     "message": "SyntaxError: Unexpected token \"…\", ...\"…\":…"
+    }
+   ]
+  },
+  "ingestionUnreachable": {
+   "refused": {
+    "attempts": 1,
+    "stats": {
+     "sent": 4,
+     "dropped": 2,
+     "failed": 1
+    }
+   },
+   "hanging": {
+    "abortedAfterMs": 5012,
+    "failure": "net::ERR_ABORTED",
+    "attemptsDuringHang": 1,
+    "attemptsAfterNextError": 2
+   },
+   "stats": {
+    "sent": 6,
+    "dropped": 3,
+    "failed": 2
+   }
+  },
+  "diagnostics1v1": {
+   "turn1": {
+    "A": {
+     "checkedNames": 2,
+     "leaks": [],
+     "views": 1,
+     "otherHandInViews": [
+      "number"
+     ],
+     "ownHandInViews": [
+      true
+     ]
+    },
+    "B": {
+     "checkedNames": 2,
+     "leaks": [],
+     "views": 1,
+     "otherHandInViews": [
+      "number"
+     ],
+     "ownHandInViews": [
+      true
+     ]
+    }
+   },
+   "turn2": {
+    "turn": 1,
+    "played": [
+     "LIEVE FASTIDIO",
+     "COSA FAI NON É UNA DOMANDA",
+     "NON GIOCARE COL COLTELLO NO"
+    ],
+    "A": {
+     "checkedNames": 2,
+     "leaks": [],
+     "views": 4,
+     "otherHandInViews": [
+      "number"
+     ],
+     "ownHandInViews": [
+      true
+     ]
+    },
+    "logCardDisabledWithoutChoice": true,
+    "logState": [
+     "name",
+     "bindingName",
+     "dead",
+     "itemsSize",
+     "items",
+     "resources",
+     "statuses",
+     "immunities",
+     "timers",
+     "sprite"
+    ],
+    "logItemPlayers": [
+     "devAlice",
+     "devBob"
+    ],
+    "logJson": [
+     "gameId",
+     "turn",
+     "resolvedMoves",
+     "timeBasedEffects",
+     "pendingMove",
+     "lastCommand"
+    ],
+    "B": {
+     "checkedNames": 3,
+     "leaks": [],
+     "views": 4,
+     "otherHandInViews": [
+      "number"
+     ],
+     "ownHandInViews": [
+      true
+     ]
+    }
+   },
+   "logCard": {
+    "name": "ADOPERIAMOTI",
+    "inOwnHand": true
+   },
+   "ffa": {
+    "players": [
+     "Tu",
+     "devBob",
+     "Computer"
+    ],
+    "A": {
+     "checkedNames": 3,
+     "leaks": [],
+     "views": 5,
+     "otherHandInViews": [
+      "number"
+     ],
+     "ownHandInViews": [
+      true
+     ]
+    },
+    "othersInViews": [
+     "number"
+    ]
+   }
+  },
+  "diagnosticsFfa": {
+   "players": [
+    "Tu",
+    "devBob",
+    "Computer"
+   ],
+   "A": {
+    "checkedNames": 3,
+    "leaks": [],
+    "views": 5,
+    "otherHandInViews": [
+     "number"
+    ],
+    "ownHandInViews": [
+     true
+    ]
+   },
+   "othersInViews": [
+    "number"
+   ]
+  },
+  "gameLogAfterGames": {
+   "log001": 3,
+   "log003": 17,
+   "log003Before": 0
+  },
+  "adminWrongCredentials": {
+   "profile": {
+    "username": "c2b6Admin",
+    "email": "c2b6-admin@example.invalid",
+    "role": "ADMIN",
+    "panel": 1
+   },
+   "counts": {
+    "games": "—",
+    "client": "—"
+   },
+   "error": "Non autorizzato in questo ambiente: servono le credenziali HTTP del server, che chiede il browser. Nessuna operazione eseguita.",
+   "notice": null,
+   "clearEnabled": false,
+   "requests": [
+    "GET /rest/logs/back/games/qty 401",
+    "GET /rest/logs/client/web/drain 401"
+   ]
+  },
+  "adminCounts": {
+   "profile": {
+    "username": "c2b6Admin",
+    "email": "c2b6-admin@example.invalid",
+    "role": "ADMIN",
+    "panel": 1
+   },
+   "counts": {
+    "games": "3",
+    "client": "3"
+   },
+   "error": null,
+   "notice": null,
+   "expected": {
+    "games": 3,
+    "client": 3
+   },
+   "layout": {
+    "pageOverflowX": 0,
+    "sheetOverflowX": 0,
+    "sheetInside": true
+   }
+  },
+  "adminOpenGames": {
+   "rows": [
+    [
+     "c2b6-synthetic-1",
+     "c2b6Synthetic",
+     "c2b6Admin, ComPlayer_1",
+     "2026-10-28 12:00:00",
+     "STARTED"
+    ],
+    [
+     "c2b6-synthetic-2",
+     "c2b6Synthetic",
+     "devAlice, devBob",
+     "2026-10-28 12:00:01",
+     "IN_PROGRESS"
+    ]
+   ],
+   "direct": [
+    "c2b6-synthetic-1",
+    "c2b6-synthetic-2"
+   ]
+  },
+  "adminDownloads": {
+   "games": {
+    "file": "bm-log-partite-20261028-180438.json",
+    "records": 3,
+    "notice": "Scaricato bm-log-partite-20261028-180438.json: 3 record.",
+    "sample": [
+     {
+      "gameId": "c2b6-synthetic-1",
+      "type": "c2b6Synthetic",
+      "status": "STARTED"
+     },
+     {
+      "gameId": "c2b6-synthetic-2",
+      "type": "c2b6Synthetic",
+      "status": "IN_PROGRESS"
+     },
+     {
+      "gameId": "c2b6-synthetic-3",
+      "type": "c2b6Synthetic",
+      "status": "ENDED"
+     }
+    ]
+   },
+   "client": {
+    "file": "bm-log-client-20261028-180438.json",
+    "records": 3,
+    "notice": "Scaricato bm-log-client-20261028-180438.json: 3 record.",
+    "sample": [
+     "Error: c2b6-synthetic uncaught for *** with ***",
+     "Error: c2b6-synthetic rejection",
+     "SyntaxError: Unexpected token \"…\", ...\"…\":…"
+    ]
+   },
+   "countsAfter": {
+    "games": 3,
+    "client": 3
+   }
+  },
+  "adminDelete": {
+   "confirmText": "Cancellare dal database tutti i record (3)? Non si può annullare.",
+   "deletesAfterCancel": 0,
+   "countBefore": 3,
+   "clientCleared": {
+    "counts": {
+     "games": "3",
+     "client": "0"
+    },
+    "error": null,
+    "notice": "Log del client web: log cancellati.",
+    "direct": 0
+   },
+   "gamesCleared": {
+    "counts": {
+     "games": "0",
+     "client": "0"
+    },
+    "error": null,
+    "notice": "Partite registrate: log cancellati.",
+    "direct": 0,
+    "matchEvents": 17
+   },
+   "deletes": [
+    "/rest/logs/client/web/delete 200",
+    "/rest/logs/back/games/delete 200"
+   ],
+   "matchEventsBeforeDelete": 17
+  },
+  "nativePromptCancel": {
+   "pendingWhileShown": true,
+   "cancelMessage": "Non autorizzato in questo ambiente: servono le credenziali HTTP del server, che chiede il browser. Nessuna operazione eseguita.",
+   "statuses": [
+    "GET /rest/logs/back/games/qty 401"
+   ]
+  },
+  "nativePromptEdge": {
+   "pendingWhileShown": true,
+   "cancelMessage": "Non autorizzato in questo ambiente: servono le credenziali HTTP del server, che chiede il browser. Nessuna operazione eseguita.",
+   "screenshot": "screens/profile-10-native-prompt-edge.png",
+   "answeredFromKeyboard": true,
+   "enters": 1,
+   "counts": {
+    "games": "0",
+    "client": "0"
+   },
+   "statuses": [
+    "GET /rest/logs/back/games/qty 401",
+    "GET /rest/logs/back/games/qty 200",
+    "GET /rest/logs/client/web/qty 200"
+   ]
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "rest": {
+  "noBasic": [
+   {
+    "path": "/rest/logs/back/games/qty",
+    "method": "GET",
+    "status": 401,
+    "auth": false
+   }
+  ],
+  "A": [
+   {
+    "path": "/rest/logs/client/web/",
+    "method": "POST",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/",
+    "method": "POST",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/",
+    "method": "POST",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/",
+    "method": "POST",
+    "status": null,
+    "auth": false,
+    "failure": "net::ERR_CONNECTION_REFUSED"
+   },
+   {
+    "path": "/rest/logs/client/web/",
+    "method": "POST",
+    "status": null,
+    "auth": false,
+    "failure": "net::ERR_ABORTED"
+   },
+   {
+    "path": "/rest/logs/client/web/",
+    "method": "POST",
+    "status": null,
+    "auth": false,
+    "failure": "net::ERR_FAILED"
+   }
+  ],
+  "B": [],
+  "adminWrongCredentials": [
+   {
+    "path": "/rest/logs/back/games/qty",
+    "method": "GET",
+    "status": 401,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/drain",
+    "method": "GET",
+    "status": 401,
+    "auth": false
+   }
+  ],
+  "admin": [
+   {
+    "path": "/rest/logs/back/games/qty",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/qty",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/back/games/open",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/back/games/drain",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/drain",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/delete",
+    "method": "DELETE",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/back/games/qty",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/qty",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/back/games/delete",
+    "method": "DELETE",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/back/games/qty",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   },
+   {
+    "path": "/rest/logs/client/web/qty",
+    "method": "GET",
+    "status": 200,
+    "auth": false
+   }
+  ]
+ }
+}

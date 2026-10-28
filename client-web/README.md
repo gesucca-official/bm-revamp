@@ -1,10 +1,11 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-5)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-6)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
 cinque o contro il computer con un mazzo salvato) → partita → esito → nuova partita
 nella stessa modalità oppure ritorno all'hub; scheda «Collezione» con catalogo ed
-editor dei mazzi. Il resto della parità del debug arriva nei blocchi successivi di C2b
+editor dei mazzi; scheda «Profilo» con il pannello di amministrazione per il ruolo
+ADMIN; segnalazione al server degli errori non gestiti. La chiusura della parità del debug è C2b-7
 ([piano](../docs/client-c2b-plan.md)). La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
@@ -144,6 +145,30 @@ in verticale, mai la pagina in orizzontale.
   (sottostringa della carta serializzata), vista Collezione/Mazzo, un tocco aggiunge
   una copia o ne toglie una omonima. Il server resta il giudice.
 
+## Profilo, amministrazione e segnalazione errori (C2b-6)
+
+- **Profilo** (scheda dell'hub): nome, email (o «—») e ruolo da `account/data`, come il
+  debug; nulla da modificare.
+- **Amministrazione**, solo se il ruolo del profilo è `ADMIN`: conteggi delle partite
+  registrate e del log del client, partite non concluse in tabella, download dei due log
+  come file JSON, cancellazione con conferma in linea («Annulla» non invia nulla) e
+  conteggi riletti dopo la cancellazione. Un'operazione alla volta. Gli endpoint
+  `/rest/logs/**` vogliono un'identità **HTTP Basic separata**: la chiede il browser con la
+  sua finestra (D6), il client non la chiede, non la vede e non la conserva. 401 o 403
+  diventano «Non autorizzato in questo ambiente…», mai un successo; anche un 200 con una
+  forma inattesa è un errore. Attesa massima 120 s (la finestra del browser è tempo umano).
+  Le partite quick e open non finiscono nel log delle partite (il server le archivia
+  altrove): con le modalità del client quel conteggio resta 0.
+- **Segnalazione errori** (`src/report.ts`, D14): `error` e `unhandledrejection` della
+  finestra vanno a POST `/rest/logs/client/web/` con `{timestamp, message, additional:
+  ["client-web"]}`. Un invio alla volta (gli errori che arrivano durante un invio sono
+  scartati, non accodati), timeout 5 s, al massimo dieci per caricamento della pagina,
+  nessuna segnalazione sull'invio fallito. Il messaggio è solo nome e testo dell'errore,
+  tagliato prima di qualsiasi JSON, senza valori fra virgolette, con nome utente e
+  password sostituiti da `***`; un valore che non è un `Error` non viene mai serializzato.
+- **Strumenti** del menu in partita (Log Card, State, Item, JSON, messaggi, giocatori,
+  disconnessione simulata): invariati, riprovati in 1v1 e FFA senza la mano altrui.
+
 ## Gesti
 
 - Scegli una carta e poi il bersaglio sul tavolo (personaggio o carta oggetto),
@@ -210,6 +235,7 @@ di rotazione.
 ./client-web/run.ps1 -Task VerifyFfa     # tutti contro tutti a cinque: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyDecks   # catalogo, mazzi e open 1vCom: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyPublic  # home, regole, registrazione: avvia da sé il server
+./client-web/run.ps1 -Task VerifyProfile # profilo, admin, errori, strumenti: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -247,6 +273,18 @@ indietro del browser) → accesso → hub → esci → home, la registrazione (d
 nome nuovo libero, «Invia codice» indisponibile, codice errato, nessun account creato) e,
 a server fermo, errore di rete su registrazione e login; in più home, regole,
 registrazione e accesso in portrait 390×844. Gli altri script entrano da `#/accedi`.
+`VerifyProfile` prepara un ambiente di prova (D5) su database temporaneo: aggiunge un
+account sintetico `ADMIN` e tre righe sintetiche al log delle partite, e avvia il server
+prima senza e poi con HTTP Basic da variabili d'ambiente (`HTTP_AUTH_USERNAME`,
+`HTTP_AUTH_PASSWORD` con l'hash BCrypt di una password generata per l'esecuzione). Prova
+il profilo USER senza pannello, tre errori provocati nella pagina (un POST ciascuno,
+salvati, senza credenziali né dati di gioco), l'ingestione rifiutata e bloccata (un
+invio alla volta, interruzione a 5 s, nessun ciclo), gli strumenti in 1v1 e FFA, il
+pannello senza Basic configurato e con credenziali errate (401, nessun successo), poi
+conteggi, partite non concluse, download e cancellazione con annullamento e conferma.
+Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
+`BM_NATIVE_PROMPT=1` apre anche un Edge visibile, cattura la finestra nativa del browser,
+la annulla (Esc) e la compila da tastiera dopo «Riprova».
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
@@ -289,7 +327,9 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
 - `src/lifecycle.ts`: esiti, ragioni di forfait e countdown indicativi (funzioni pure).
 - `src/public.tsx`, `src/rules.ts`, `src/signup.ts`, `src/net/rest.ts`: home, regolamento
   importato, registrazione (regole del modulo, mappa delle risposte e hash come funzioni pure).
+- `src/profile.tsx`, `src/report.ts`: scheda «Profilo» con il pannello admin (client REST e
+  messaggi in `src/net/rest.ts`) e segnalazione degli errori (testo e limitatore puri).
 - `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso, navigazione a hash,
   tavolo, esito, dialoghi).
-- `window.__bm`: stato in sola lettura della pagina per la verifica automatica;
-  nessun comando. Da rivalutare prima della consegna C5.
+- `window.__bm` e `window.__bmReports` (conteggi della segnalazione errori): stato in sola
+  lettura della pagina per la verifica automatica; nessun comando. Da rivalutare prima della consegna C5.

@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import type {Session,Mode} from './session.ts';
 import {PressButton} from './ui.tsx';
 import {Collection} from './collection.tsx';
+import {Profile} from './profile.tsx';
 import {PAGE_SIZES,activityLabel,presencePage,queueNames,type PresenceSort} from './presence.ts';
 
 const modes:{id:Mode;label:string;hint:string}[]=[
@@ -54,19 +55,21 @@ function DeckDialog({session,onClose,onCollection}:{session:Session;onClose:()=>
  </dialog>;
 }
 
-/** Hub with the "Gioca" and "Collezione" tabs: mode picker, queue wait with exit, online users; decks and catalog. */
+type Tab='play'|'collection'|'profile';
+
+/** Hub with the "Gioca", "Collezione" and "Profilo" tabs: mode picker, queue wait with exit, online users; decks and catalog; account and admin panel. */
 export function Hub({session}:{session:Session}){
- const [choice,setChoice]=useState<Mode>(session.mode??'quick/1vCom'),[tab,setTab]=useState<'play'|'collection'>('play'),[picking,setPicking]=useState(false);
+ const [choice,setChoice]=useState<Mode>(session.mode??'quick/1vCom'),[tab,setTab]=useState<Tab>('play'),[picking,setPicking]=useState(false);
  const receipt=session.receipt,waiting=session.phase==='queue',queued=session.queued!==null,entering=waiting&&!queued;
  const picked=modes.find(m=>m.id===choice)!;
- const tabButton=(id:'play'|'collection',label:string)=><button role="tab" aria-selected={tab===id} data-testid={`tab-${id}`} className={`tab${tab===id?' on':''}`} disabled={waiting&&id!==tab} onClick={()=>{if(id!==tab){session.clearMessages();setTab(id);}}}>{label}</button>;
+ const tabButton=(id:Tab,label:string)=><button role="tab" aria-selected={tab===id} data-testid={`tab-${id}`} className={`tab${tab===id?' on':''}`} disabled={waiting&&id!==tab} onClick={()=>{if(id!==tab){session.clearMessages();setTab(id);}}}>{label}</button>;
  return <section className={`sheet hub${tab==='collection'?' wide':''}`} aria-label="Hub">
   <div className="hub-head"><h1>Ciao, {session.user}</h1>
-   <div role="tablist" aria-label="Sezioni" className="tabs">{tabButton('play','Gioca')}{tabButton('collection','Collezione')}</div></div>
+   <div role="tablist" aria-label="Sezioni" className="tabs">{tabButton('play','Gioca')}{tabButton('collection','Collezione')}{tabButton('profile','Profilo')}</div></div>
   {receipt?.outcome&&<p className="notice" role="status">Pareggio — {receipt.outcome.reason}. La partita precedente è chiusa: puoi iniziarne un’altra.</p>}
   {session.notice&&<p className="notice" role="status">{session.notice}</p>}
   {session.error&&<p className="problem" role="alert">{session.error}</p>}
-  {tab==='collection'?<Collection session={session}/>:<div className="hub-grid">
+  {tab==='collection'?<Collection session={session}/>:tab==='profile'?<Profile session={session}/>:<div className="hub-grid">
    <div className={`play${waiting?' waiting':''}`}>
     <div role="radiogroup" aria-label="Modalità" className="modes">{modes.map(m=><PressButton key={m.label} role="radio" aria-checked={m.id===choice} disabled={waiting} className={`mode${m.id===choice?' on':''}`} onClick={()=>setChoice(m.id)}>{m.label}</PressButton>)}</div>
     {!waiting&&<p className="small">{picked.hint}{choice==='open/1vCom'?'':' Personaggio assegnato a caso.'}</p>}

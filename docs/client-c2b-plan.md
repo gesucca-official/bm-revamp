@@ -163,7 +163,7 @@ per due ragioni emerse dal codice:
 | C2b-3 | FFA a cinque con la geometria C2a, bot, avvio anticipato, forfait altrui — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-3--ffa-a-cinque)) | C2b-1, C2b-2 |
 | C2b-4 | Catalogo, editor mazzi e open 1vCom — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-4--catalogo-editor-mazzi-e-open-1vcom)); per decisione del proprietario regolamento 1.8: nessun «/» nel nome di un mazzo | C2b-1 |
 | C2b-5 | Home, regole e registrazione — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-5--home-regole-e-registrazione)); registrazione nel profilo locale: solo indisponibilità esplicita (D4) | — (dopo C2b-1 per l'hub) |
-| C2b-6 | Profilo, amministrazione, log client e diagnostica | C2b-1 |
+| C2b-6 | Profilo, amministrazione, log client e diagnostica — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-6--profilo-amministrazione-log-client-e-diagnostica)); admin provato nell'ambiente temporaneo D5, prompt Basic nativo verificato su Edge | C2b-1 |
 | C2b-7 | Checklist di parità completa e prova umana B | tutti |
 
 C2b-4, C2b-5 e C2b-6 sono indipendenti fra loro dopo C2b-1 e possono cambiare

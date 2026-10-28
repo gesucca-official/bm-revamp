@@ -62,6 +62,8 @@ export class Session {
   // Starting resources per character binding: the reference of the resource indicators (O4).
   get characters(): CharacterCard[] { return this.account?.collection?.characters ?? []; }
   get connected() { return !!this.link; }
+  /** Values an error report must never carry (D14): the account name and its password. */
+  secrets() { return [this.user, this.password]; }
 
   async login(user: string, password: string) {
     if (this.phase !== 'login' && this.phase !== 'lost') return;

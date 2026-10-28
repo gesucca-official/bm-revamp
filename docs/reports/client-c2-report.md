@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), **C2b-6 (profilo, amministrazione, log client e diagnostica) è fatto** ([sezione](#c2b-6--profilo-amministrazione-log-client-e-diagnostica)), C2b-7 no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -691,3 +691,134 @@ risposta → «Server non raggiungibile».
   [public-844x390.json](client-c2/c2b-5/public-844x390.json), [catture](client-c2/c2b-5/screens/)
   `public-*` (portrait `*-390x844`); regressione `verify-*`, `modes-*`, `lifecycle-*`,
   `ffa-*`, `decks-*` e [size.json](client-c2/c2b-5/size.json) nella stessa cartella.
+
+## C2b-6 — Profilo, amministrazione, log client e diagnostica
+
+28 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md)), in particolare D5 (admin provato in un
+ambiente temporaneo), D6 (credenziali Basic al solo browser) e D14 (solo errori, senza
+nomi utente né credenziali). Nessun cambio a regole, server, protocollo, catalogo o
+`client-debug`.
+
+**Comportamento osservato prima di scrivere il client** (server reale, profilo `local`,
+database temporaneo, richieste dirette e attraverso il proxy di `Serve`):
+
+| Richiesta | Risposta |
+|---|---|
+| GET `logs/back/games/qty`, `logs/client/web/qty`, `…/open`, `…/drain` senza credenziali | 401 con `WWW-Authenticate: Basic realm="Realm"` (anche i conteggi: la regola `/rest/v1/logs/**` vuole ADMIN) |
+| Stesse richieste con Basic errato, o con Basic qualsiasi se il server non lo ha configurato | 401 |
+| Con Basic configurato da `HTTP_AUTH_USERNAME` e `HTTP_AUTH_PASSWORD` (hash BCrypt) | 200: numero, lista JSON, `application/octet-stream` con un array JSON; `DELETE …/delete` → `true` |
+| POST `logs/client/web/` con `{timestamp,message,additional}` | 200 senza corpo, riga salvata (`log.db: Y`); `C_TIMESTAMP` è chiave primaria |
+| POST senza la barra finale | 401 (è pubblico solo il percorso con la barra) |
+| Partite quick e open | **mai in `LOG001_GAMES`**: `GameLoggingServiceImpl` le manda solo all'archivio LOG003. Con le modalità del client il conteggio delle partite resta 0 |
+| Una richiesta qualsiasi con un header Basic errato, anche `sign-in/validate` | 401 (filtro Basic di Spring); il browser memorizza le credenziali solo dopo un successo |
+| Edge, `fetch` verso `/rest/logs/…` attraverso il proxy Vite | la richiesta resta in attesa e compare la finestra nativa «Esegui l'accesso per accedere a questo sito»; Edge headless senza credenziali tiene la sfida aperta |
+
+Il prompt nativo compare, quindi nessun ripiego: il client non gestisce password
+amministrative.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Profilo (P09) | Scheda «Profilo» nell'hub: nome, email (o «—»), ruolo da `account/data`, come il debug; nulla da modificare, nessun recupero password. |
+| Amministrazione (P40–P43) | Solo per il ruolo `ADMIN` del profilo STOMP, come il debug. Conteggi letti uno dopo l'altro (il browser chiede una volta sola), partite non concluse in una tabella del pannello, download dei due log come file JSON (letti e controllati prima di salvarli), cancellazione con conferma in linea e conteggi riletti. Un'operazione alla volta. Il client non manda mai `Authorization`: la sfida Basic la risolve il browser (D6). 401/403 → «Non autorizzato in questo ambiente: servono le credenziali HTTP del server, che chiede il browser. Nessuna operazione eseguita.»; anche un 200 di forma inattesa (non numero, non lista, non `true`, JSON illeggibile) è un errore. Attesa massima 120 s, perché la finestra del browser è tempo umano. |
+| Segnalazione errori (P44) | `src/report.ts`: `error` e `unhandledrejection` → POST `/rest/logs/client/web/` con `{timestamp, message, additional: ["client-web"]}`. Un invio alla volta: gli errori durante un invio sono scartati, non accodati; timeout 5 s; al massimo dieci invii per caricamento; nessuna segnalazione sull'invio fallito e nessun errore dal gestore stesso. Il messaggio è nome e testo dell'errore, tagliato alla prima `{` o `[`, senza valori fra virgolette, con nome utente e password sostituiti da `***`; un valore che non è un `Error` non viene serializzato (potrebbe essere una vista). Il corpo vuoto della risposta viene letto, altrimenti il browser registra la richiesta come interrotta. |
+| Diagnostica (P38, P39) | Strumenti del menu invariati, riprovati in 1v1 e FFA con due umani. |
+| Test automatici | Client 104 (97 + 7): nuovo `tests/report.test.ts` (testo ripulito, limitatore con timer finti, timeout, invio fallito senza nuovo invio, limite di dieci, ascoltatori senza ciclo, client admin con percorsi, nessun `Authorization`, risposte attese e inattese, 401/403, timeout, messaggi). Nessun atteso esistente cambiato; typecheck pulito. |
+| Server reale | **Sì.** Nuovo `VerifyProfile` (`run.ps1 -Task VerifyProfile`, `tools/verify-profile.mjs`): ambiente di prova D5 su database temporaneo, server avviato tre volte (seme, ADMIN senza Basic, ADMIN con Basic). Verde a 1366×768 (con il prompt nativo di Edge) e a 844×390; scenari sotto. |
+| Regressione | Sulla build finale (stesso hash del bundle prima e dopo l'ultima build): `Verify` e `VerifyModes` (server con database temporaneo), `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks` e `VerifyPublic` verdi a 1366×768 e 844×390. `build.ps1 -Task Test -Offline` (253 server + 36 debug) e `check-rules.py` passano. |
+| Peso | JS gzip 306939 byte (+2692 rispetto a C2b-5); totale gzip 1089730 byte ([size.json](client-c2/c2b-6/size.json)). |
+| Emulazione / dispositivo / umano | Due misure landscape sul PC e una finestra Edge visibile per il prompt; nessun dispositivo fisico né prova umana. |
+
+### Ambiente di prova (D5)
+
+`VerifyProfile` avvia il server con `--app.dev.seed-accounts=true` su un database
+temporaneo e lo ferma; poi, a server spento, aggiunge l'account sintetico `c2b6Admin`
+(ruolo `ADMIN`, email `c2b6-admin@example.invalid`, stesso hash di devAlice) e tre righe
+sintetiche in `LOG001_GAMES` (STARTED, IN_PROGRESS, ENDED: le partite reali non ci
+arrivano). Il secondo avvio è senza Basic; il terzo con `HTTP_AUTH_USERNAME=c2b6basic` e
+`HTTP_AUTH_PASSWORD` uguale all'hash BCrypt di una password casuale generata per
+l'esecuzione con l'encoder del server (`spring-security-core` estratto dal jar). La
+password non è scritta nelle evidenze. Nessun file di `scripts/` o del server cambia; i
+DELETE toccano solo il database temporaneo, cancellato alla fine.
+
+### Scenari reali (entrambe le misure)
+
+1. **Basic non configurato.** `c2b6Admin` vede profilo e pannello; con credenziali offerte
+   dal browser il conteggio risponde 401: messaggio di non autorizzazione, conteggi «—»,
+   «Cancella» spento, «Riprova» visibile, nessun DELETE.
+2. **Profilo USER.** devAlice: nome, «—», `USER`, nessun pannello e nessuna richiesta ai
+   log; nessuno scorrimento orizzontale.
+3. **Errori provocati.** Un errore non gestito con nome e password nel testo, un rifiuto non
+   gestito e un errore di `JSON.parse` su un frammento di vista: tre POST, 200, tre righe
+   in più sul server con lo stesso testo. Messaggi: «Error: c2b6-synthetic uncaught for
+   \*\*\* with \*\*\*», «Error: c2b6-synthetic rejection», «SyntaxError: Unexpected token "…",
+   ..."…":…». Nessuna password, nome utente, `gameId`, mano o nome di carta.
+4. **Ingestione irraggiungibile.** Rifiutata: tre errori nello stesso momento → un solo
+   tentativo. Bloccata: il POST viene interrotto dopo circa 5 s (5003–5014 ms nelle esecuzioni), un errore
+   arrivato durante l'attesa non parte, il successivo sì (uno solo). In 2 s di attesa
+   finale nessun invio spontaneo.
+5. **Strumenti in 1v1.** devAlice e devBob in coda 1v1. Al primo turno e dopo un turno
+   risolto, da entrambi i lati, Log State, Log Item, Log JSON, messaggi ricevuti e giocatori
+   non contengono nessun nome della sola mano altrui (carte giocate e scarti delle azioni
+   legate esclusi, perché pubblici); nelle viste la mano propria è un array e quella altrui
+   un numero. Log Card è spento senza carta scelta e, con una carta scelta, mostra quella
+   carta della propria mano.
+6. **Strumenti in FFA.** devAlice, devBob e un computer, «Inizia ora»: stesso controllo dal
+   lato di A, tutte le mani altrui solo come numero.
+7. **Credenziali errate.** `c2b6Admin` con Basic sbagliato: 401 su conteggi e download,
+   messaggio di non autorizzazione, nessun messaggio di successo, «Cancella» spento.
+8. **Conteggi.** Con Basic giusto: 3 partite e le righe del log client, uguali alle
+   risposte dirette del server.
+9. **Partite non concluse.** Tabella con `c2b6-synthetic-1` (STARTED) e
+   `c2b6-synthetic-2` (IN_PROGRESS), uguale a `open`; la ENDED non compare.
+10. **Download.** `bm-log-partite-….json` e `bm-log-client-….json` letti come JSON: tre
+    partite sintetiche e le segnalazioni dello scenario 3; conteggi invariati (drain non
+    cancella).
+11. **Cancellazione.** «Cancella» → «Cancellare dal database tutti i record (3)? Non si
+    può annullare.» → «Annulla»: nessun DELETE. Poi conferma: un DELETE per log (200),
+    conteggi riletti a 0, «… log cancellati.»; le righe dell'archivio LOG003 restano le
+    stesse.
+12. **Prompt nativo su Edge** (solo 1366×768, `BM_NATIVE_PROMPT=1`, finestra visibile):
+    con il pannello aperto la richiesta resta in attesa e Edge mostra la propria finestra
+    di accesso ([cattura](client-c2/c2b-6/screens/profile-10-native-prompt-edge.png)); Esc
+    → 401 e messaggio di non autorizzazione; «Riprova» → la finestra torna
+    ([cattura](client-c2/c2b-6/screens/profile-11-native-prompt-retry-edge.png)), nome e
+    password digitati da tastiera (SendKeys) → conteggi
+    ([cattura](client-c2/c2b-6/screens/profile-12-native-prompt-answered-edge.png)).
+
+### Limiti e residui
+
+- **Prompt nativo provato solo su Edge per Windows** e solo in questo ambiente: la
+  digitazione è simulata con SendKeys sulla finestra portata in primo piano. Altri browser,
+  telefoni e un ambiente pubblico con TLS non sono provati. Negli scenari headless il
+  browser risponde alla sfida con le credenziali del contesto Playwright, come farebbe la
+  finestra nativa; Edge headless senza credenziali tiene la sfida aperta, per questo il
+  caso «annullato» headless è sostituito da credenziali errate. Due esecuzioni su
+  quattro hanno perso un tasto (la prima volta la digitazione è partita prima che la
+  finestra tornasse, l'altra l'Invio è arrivato a finestra non più in primo piano): ora la
+  prova aspetta 2 s, cattura la finestra, digita e manda l'Invio a parte, ripetendolo una
+  volta se i conteggi non arrivano. È fragilità dell'automazione da tastiera, non del client.
+- **Partite registrate**: con le modalità raggiungibili dal client (quick e open) il server
+  non scrive mai `LOG001_GAMES`; conteggio, elenco e download delle partite sono provati
+  su righe sintetiche. È un comportamento del server, fuori perimetro.
+- **403** non è raggiungibile: l'unico utente Basic è ADMIN. Il messaggio è provato in
+  unità.
+- Il limite di dieci invii per caricamento è in più rispetto al debug (che non ne ha),
+  per non inondare il log se un errore si ripete a ogni fotogramma.
+- **Osservazione sul server, fuori perimetro:** l'ingestione dei log client è pubblica e
+  senza limiti (il controller ha «TODO authenticate this!!!»); chiunque raggiunga il server
+  può riempire `LOG002_WEB_CLIENT`, e due righe con lo stesso timestamp collidono sulla
+  chiave primaria.
+- Il controllo della mano altrui negli strumenti cerca i nomi presenti **solo** nella mano
+  dell'altro giocatore. In una prova precedente aveva segnalato «Grab», scartata da B con
+  un'azione legata (scelta pubblica della mossa risolta) mentre anche A ne aveva una: falso
+  positivo, ora escluso insieme alle carte giocate.
+- Dispositivo fisico, iPhone, prova umana e lettore di schermo non provati.
+- Dati locali non toccati: tutte le prove su database temporanei.
+- Evidenze: [profile-1366x768.json](client-c2/c2b-6/profile-1366x768.json),
+  [profile-844x390.json](client-c2/c2b-6/profile-844x390.json), [catture](client-c2/c2b-6/screens/)
+  `profile-*` (prompt nativo `profile-10…12-*-edge.png`); regressione `verify-*`, `modes-*`,
+  `lifecycle-*`, `ffa-*`, `decks-*`, `public-*` e [size.json](client-c2/c2b-6/size.json)
+  nella stessa cartella.
