@@ -1,0 +1,192 @@
+{
+ "date": "2026-10-28T12:22:55.739Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "moveTimeout": {
+   "gameId": "e03a897d5dc4fd7112abb5e90923b10bd3eb66ccc3043a7e9887593765fa889b",
+   "cardA": "Ago Marcio e Spezzato",
+   "clockAAfterSend": "◷ —",
+   "clockB": [
+    null,
+    "◷ 17 s"
+   ],
+   "secondsToOutcome": 30,
+   "outcomeReason": "timeout",
+   "forfeits": {
+    "devBob": "move timeout"
+   },
+   "winner": "devAlice",
+   "health": {
+    "devAlice": 100,
+    "devBob": 100
+   },
+   "textA": "Hai vinto Tempo scaduto devBob non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Tempo scaduto Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "simultaneousDeadlines": {
+   "gameId": "6e091eb7f359ca5e54124793b054c537e20d488ef915389f190b463a6ae1af72",
+   "winner": "NONE",
+   "outcomeReason": "timeout",
+   "forfeits": {
+    "devAlice": "move timeout",
+    "devBob": "move timeout"
+   },
+   "textA": "Pareggio Tempo scaduto per tutti Non hai mosso entro 30 secondi devBob non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Pareggio Tempo scaduto per tutti Non hai mosso entro 30 secondi devAlice non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "rejoinInTime": {
+   "gameId": "e5f6abb3598df963871201421d9037061da9e177d5244bc1c8d7617b4333490a",
+   "pending": "ADOPERIAMOTI",
+   "phase": "pending",
+   "sendsAfterRejoin": [
+    "/app/session/resume",
+    "/app/user/devAlice/account",
+    "/app/connections/users/tell/me",
+    "/app/game/e5f6abb3598df963871201421d9037061da9e177d5244bc1c8d7617b4333490a/devAlice/view"
+   ],
+   "awayShownToB": [
+    "devAlice fuori linea · 28 s"
+   ]
+  },
+  "rejoinLate": {
+   "gameId": "e5f6abb3598df963871201421d9037061da9e177d5244bc1c8d7617b4333490a",
+   "secondsOut": 31,
+   "awayShownToB": [],
+   "winner": "devBob",
+   "forfeits": {
+    "devAlice": "reconnect timeout"
+   },
+   "outcomeReason": "timeout",
+   "resumeStatus": "finished",
+   "textA": "Hai perso Tempo scaduto Non sei rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai vinto Tempo scaduto devAlice non è rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "framesAfterRejoin": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devAlice/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "hubNotices": []
+  },
+  "leave": {
+   "gameId": "ee7e6d33a4d44b90a5b2c28f9bdb090b78267ec408964207ea932a877d74e87e",
+   "ack": true,
+   "leaveSends": 1,
+   "winner": "devBob",
+   "forfeits": {
+    "devAlice": "leave"
+   },
+   "outcomeReason": "leave",
+   "textB": "Hai vinto Abbandono devAlice ha abbandonato Nuova partita Torna all’hub Ultimo turno",
+   "secondLeaveRawSocket": {
+    "got": [
+     "MESSAGE\ndestination:/user/queue/game/ee7e6d33a4d44b90a5b2c28f9bdb090b78267ec408964207ea932a877d74e87e/leave\ncontent-type:application/json\nsubscription:l\nmessage-id:ea9b016b-b753-5acb-0f09-a42d00f1ff1c-143\ncontent-length:4 | true",
+     "MESSAGE\ndestination:/user/queue/session/resume\ncontent-type:application/json\nsubscription:r\nmessage-id:ea9b016b-b753-5acb-0f09-a42d00f1ff1c-144\ncontent-length:17 | {\"status\":\"none\"}"
+    ],
+    "why": "done"
+   },
+   "overViewsSeenByB": 1,
+   "outcomesSeenByB": [
+    "devBob {\"devAlice\":\"leave\"}"
+   ]
+  },
+  "secondSession": {
+   "message": "Credenziali errate, oppure l’account è già collegato altrove.",
+   "firstStillPlaying": true
+  },
+  "logoutInGame": {
+   "gameId": "22cd061e22a32617b533f4e5c1b06e74de8bc9ba3d9c065de1d4e78926d56677",
+   "confirmation": "Uscire dall’account? Uscire durante la partita è un forfait: la partita è persa e torni all’accesso. Sì, esci No, resto al tavolo",
+   "sendsAfterConfirm": [
+    "/app/session/logout"
+   ],
+   "winner": "devBob",
+   "forfeits": {
+    "devAlice": "leave"
+   },
+   "outcomeReason": "leave",
+   "textB": "Hai vinto Abbandono devAlice ha abbandonato Nuova partita Torna all’hub Ultimo turno"
+  },
+  "afterLogoutLogin": {
+   "resume": "none"
+  },
+  "restart": {
+   "gameId": "da04d505bb5a54317cdf7d495e8e45c299b988054af1e3a0f4262f338690801b",
+   "resumeA": {
+    "status": "finished",
+    "gameId": "da04d505bb5a54317cdf7d495e8e45c299b988054af1e3a0f4262f338690801b",
+    "archived": true,
+    "outcome": {
+     "over": true,
+     "result": "draw",
+     "winner": null,
+     "reason": "riavvio server"
+    }
+   },
+   "resumeB": {
+    "status": "finished",
+    "gameId": "da04d505bb5a54317cdf7d495e8e45c299b988054af1e3a0f4262f338690801b",
+    "archived": true,
+    "outcome": {
+     "over": true,
+     "result": "draw",
+     "winner": null,
+     "reason": "riavvio server"
+    }
+   },
+   "hubA": [
+    "Pareggio — riavvio server. La partita precedente è chiusa: puoi iniziarne un’altra."
+   ],
+   "hubB": [
+    "Pareggio — riavvio server. La partita precedente è chiusa: puoi iniziarne un’altra."
+   ],
+   "framesA": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devAlice/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "framesB": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devBob/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "rejoinA": "Rientra",
+   "reloginB": "Esci + login"
+  },
+  "vsComLateRejoin": {
+   "gameId": "a756dfb2b5d1dcddadd31724cc2c04f6ab10eec2e98f4039152e1f1c9d8693cd",
+   "status": "finished",
+   "winner": "ComPlayer_1300",
+   "forfeits": {
+    "devAlice": "reconnect timeout"
+   },
+   "outcomeReason": "timeout",
+   "text": "Hai perso Tempo scaduto Non sei rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  }
+ },
+ "errors": [],
+ "ok": true
+}

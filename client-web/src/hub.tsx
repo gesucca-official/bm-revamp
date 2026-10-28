@@ -1,13 +1,14 @@
-import React,{useState} from 'react';
+import React,{useEffect,useRef,useState} from 'react';
 import type {Session,Mode} from './session.ts';
 import {PressButton} from './ui.tsx';
+import {Collection} from './collection.tsx';
 import {PAGE_SIZES,activityLabel,presencePage,queueNames,type PresenceSort} from './presence.ts';
 
-const modes:{id:Mode|null;label:string;hint:string}[]=[
+const modes:{id:Mode;label:string;hint:string}[]=[
  {id:'quick/1vCom',label:'Contro il computer',hint:'Partita rapida, subito.'},
  {id:'quick/1v1',label:'Uno contro uno',hint:'Contro un altro giocatore: aspetti finché ne arriva uno.'},
  {id:'quick/ffa',label:'Tutti contro tutti',hint:'Fino a cinque al tavolo: parte da sola a cinque, oppure aggiungi computer e inizia con almeno due.'},
- {id:null,label:'Open con un tuo mazzo',hint:'Arriva in un prossimo blocco: per ora nel client debug.'}
+ {id:'open/1vCom',label:'Con un tuo mazzo',hint:'Contro il computer, con un mazzo salvato nella collezione.'}
 ];
 
 /** Online users: who is where, sortable by column, in pages of 5, 10 or 20. */
@@ -35,25 +36,44 @@ function FfaQueue({session}:{session:Session}){
  return <ol className="ffa-queue" data-testid="ffa-list" aria-label="Al tavolo tutti contro tutti">{seats.map((s,i)=><li key={i} className={s.me?'me':s.human?undefined:'bot'}>{s.label}</li>)}{Array.from({length:Math.max(0,5-seats.length)},(_,i)=><li key={`free-${i}`} className="free">posto libero</li>)}</ol>;
 }
 
-/** Hub with the "Gioca" tab: mode picker, queue wait with exit, online users. */
+/** Open 1vCom (P16): choose one of the saved decks; none saved sends to the collection. */
+function DeckDialog({session,onClose,onCollection}:{session:Session;onClose:()=>void;onCollection:()=>void}){
+ const ref=useRef<HTMLDialogElement>(null),decks=[...session.decks].sort((a,b)=>a.deckId.localeCompare(b.deckId));
+ const [chosen,setChosen]=useState<string|null>(decks.some(d=>d.deckId===session.openDeck)?session.openDeck:null);
+ useEffect(()=>{const d=ref.current;if(d&&!d.open)d.showModal();},[]);
+ return <dialog ref={ref} aria-label="Scegli il mazzo" data-testid="deck-dialog" onCancel={e=>{e.preventDefault();onClose();}}>
+  <h2>Scegli il mazzo</h2>
+  {!decks.length?<p data-testid="no-saved-decks">Nessun mazzo salvato. Creane uno nella collezione, poi torna qui.</p>
+  :<div role="radiogroup" aria-label="Mazzi salvati" className="deck-choice">{decks.map(d=><PressButton key={d.deckId} role="radio" aria-checked={chosen===d.deckId} className={chosen===d.deckId?'on':undefined} onClick={()=>setChosen(d.deckId)}>
+    <strong>{d.deckId}</strong> <small>{d.character.name} · {d.regularCards.length} regolari</small></PressButton>)}</div>}
+  <div className="actions">
+   {decks.length?<PressButton data-testid="start-open" className="primary" disabled={!chosen} onClick={()=>{onClose();if(chosen)session.join('open/1vCom',chosen);}}>Inizia</PressButton>
+   :<PressButton className="primary" onClick={()=>{onClose();onCollection();}}>Vai alla collezione</PressButton>}
+   <PressButton data-testid="cancel-open" onClick={onClose}>Annulla</PressButton>
+  </div>
+ </dialog>;
+}
+
+/** Hub with the "Gioca" and "Collezione" tabs: mode picker, queue wait with exit, online users; decks and catalog. */
 export function Hub({session}:{session:Session}){
- const [choice,setChoice]=useState<Mode>(session.mode??'quick/1vCom');
+ const [choice,setChoice]=useState<Mode>(session.mode??'quick/1vCom'),[tab,setTab]=useState<'play'|'collection'>('play'),[picking,setPicking]=useState(false);
  const receipt=session.receipt,waiting=session.phase==='queue',queued=session.queued!==null,entering=waiting&&!queued;
  const picked=modes.find(m=>m.id===choice)!;
- return <section className="sheet hub" aria-label="Hub">
+ const tabButton=(id:'play'|'collection',label:string)=><button role="tab" aria-selected={tab===id} data-testid={`tab-${id}`} className={`tab${tab===id?' on':''}`} disabled={waiting&&id!==tab} onClick={()=>{if(id!==tab){session.clearMessages();setTab(id);}}}>{label}</button>;
+ return <section className={`sheet hub${tab==='collection'?' wide':''}`} aria-label="Hub">
   <div className="hub-head"><h1>Ciao, {session.user}</h1>
-   <div role="tablist" aria-label="Sezioni" className="tabs"><button role="tab" aria-selected="true" className="tab">Gioca</button></div></div>
+   <div role="tablist" aria-label="Sezioni" className="tabs">{tabButton('play','Gioca')}{tabButton('collection','Collezione')}</div></div>
   {receipt?.outcome&&<p className="notice" role="status">Pareggio — {receipt.outcome.reason}. La partita precedente è chiusa: puoi iniziarne un’altra.</p>}
   {session.notice&&<p className="notice" role="status">{session.notice}</p>}
   {session.error&&<p className="problem" role="alert">{session.error}</p>}
-  <div className="hub-grid">
+  {tab==='collection'?<Collection session={session}/>:<div className="hub-grid">
    <div className={`play${waiting?' waiting':''}`}>
-    <div role="radiogroup" aria-label="Modalità" className="modes">{modes.map(m=><PressButton key={m.label} role="radio" aria-checked={m.id===choice} aria-disabled={m.id===null||undefined} disabled={waiting||m.id===null} className={`mode${m.id===choice?' on':''}`} onClick={()=>m.id&&setChoice(m.id)}>{m.label}</PressButton>)}</div>
-    {!waiting&&<p className="small">{picked.hint} Personaggio assegnato a caso.</p>}
-    {waiting&&<p className="notice" role="status" data-testid="waiting">{entering?'Entro nella partita…':session.queued==='quick/1v1'?'In attesa di un altro giocatore…':session.queued==='quick/ffa'?(session.starting?'Si parte…':`Al tavolo ${session.ffaQueue.length} su 5: si parte da soli a cinque.`):'Cerco un posto al tavolo…'}</p>}
+    <div role="radiogroup" aria-label="Modalità" className="modes">{modes.map(m=><PressButton key={m.label} role="radio" aria-checked={m.id===choice} disabled={waiting} className={`mode${m.id===choice?' on':''}`} onClick={()=>setChoice(m.id)}>{m.label}</PressButton>)}</div>
+    {!waiting&&<p className="small">{picked.hint}{choice==='open/1vCom'?'':' Personaggio assegnato a caso.'}</p>}
+    {waiting&&<p className="notice" role="status" data-testid="waiting">{entering?'Entro nella partita…':session.queued==='quick/1v1'?'In attesa di un altro giocatore…':session.queued==='quick/ffa'?(session.starting?'Si parte…':`Al tavolo ${session.ffaQueue.length} su 5: si parte da soli a cinque.`):session.queued==='open/1vCom'?`Preparo il tavolo con «${session.openDeck}»…`:'Cerco un posto al tavolo…'}</p>}
     {session.queued==='quick/ffa'&&<FfaQueue session={session}/>}
     <div className="actions">
-     {!waiting&&<PressButton data-testid="quick" className="primary" onClick={()=>session.join(choice)}>Gioca</PressButton>}
+     {!waiting&&<PressButton data-testid="quick" className="primary" onClick={()=>choice==='open/1vCom'?setPicking(true):session.join(choice)}>Gioca</PressButton>}
      {session.queued==='quick/ffa'&&<>
       <PressButton data-testid="add-computer" disabled={!session.canAddComputer} onClick={()=>session.addComputer()}>Aggiungi computer</PressButton>
       <PressButton data-testid="start-now" disabled={!session.canStart} title={session.ffaQueue.length<2?'Serve almeno un altro giocatore o un computer':undefined} onClick={()=>session.startNow()}>Inizia ora</PressButton></>}
@@ -62,6 +82,7 @@ export function Hub({session}:{session:Session}){
     </div>
    </div>
    <Presence session={session}/>
-  </div>
+  </div>}
+  {picking&&<DeckDialog session={session} onClose={()=>setPicking(false)} onCollection={()=>setTab('collection')}/>}
  </section>;
 }

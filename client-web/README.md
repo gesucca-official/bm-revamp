@@ -1,10 +1,10 @@
-# Client web animato (C1, C2a, O9, C2b-1, C2b-2, C2b-3)
+# Client web animato (C1, C2a, O9, C2b-1, C2b-2, C2b-3, C2b-4)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
-login → hub «Gioca» (contro il computer, uno contro uno o tutti contro tutti fino a
-cinque) → partita → esito → nuova partita nella stessa modalità oppure ritorno
-all'hub. Open con mazzo e il resto della parità del debug arrivano nei blocchi
-successivi di C2b
+login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
+cinque o contro il computer con un mazzo salvato) → partita → esito → nuova partita
+nella stessa modalità oppure ritorno all'hub; scheda «Collezione» con catalogo ed
+editor dei mazzi. Il resto della parità del debug arriva nei blocchi successivi di C2b
 ([piano](../docs/client-c2b-plan.md)). La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
@@ -63,8 +63,9 @@ Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
 
 ## Hub «Gioca» (C2b-1, C2b-3)
 
-- Modalità: contro il computer, uno contro uno e tutti contro tutti; open compare
-  ma è disattivata fino al suo blocco. «Gioca» entra nella coda scelta.
+- Modalità: contro il computer, uno contro uno, tutti contro tutti e «Con un tuo
+  mazzo» (open 1vCom, C2b-4). «Gioca» entra nella coda scelta; per open apre prima la
+  scelta fra i mazzi salvati (nessun mazzo: rimando alla collezione).
 - In coda: «Esci dalla coda» chiede `/app/session/queue/leave` e torna all'hub solo
   all'ACK del server; senza ACK (5 s) resta in coda con un errore e si può riprovare.
   Un ingresso rifiutato (`game/error`) riporta all'hub con il messaggio del server.
@@ -78,12 +79,34 @@ Ctrl+C chiude; mentre è attivo, `127.0.0.1:4320` non risponde.
   vista del server (stabile per tutta la partita; la coda non li distingue); uno
   solo resta «Computer». L'ID completo è nell'ispezione del personaggio e in
   Strumenti → Giocatori.
-- «Nuova partita» rientra nella coda della modalità appena giocata; dopo un rientro
-  la modalità si deduce dalla vista (più di due giocatori: tutti contro tutti).
+- «Nuova partita» rientra nella coda della modalità appena giocata (open: con lo
+  stesso mazzo); dopo un rientro con un nuovo login la modalità si deduce dalla vista
+  (più di due giocatori: tutti contro tutti; una partita open vale quick 1vCom).
+- Open 1vCom: `/app/game/open/1vCom/join/{utente}/{deckId}` dopo le sottoscrizioni di
+  `open/1vCom/ready` e `open/1vCom/error`; un mazzo assente (o una partita ancora da
+  riprendere, che il server segnala con lo stesso messaggio) riporta all'hub con
+  «Mazzo non disponibile sul server».
 - «Al bar»: utenti collegati e attività (`/topic/connections/users`), conteggio,
   ordinamento per colonna, pagine da 5, 10 o 20 righe.
 - Il `resume` del login si applica una sola volta; un `account/data` successivo
   aggiorna solo il profilo.
+
+## Collezione (C2b-4)
+
+- **Catalogo**: le carte di `account/data.collection` (37 fra azioni e oggetti più i
+  2 personaggi) con l'illustrazione O9, tipologia, costo, priorità, ruolo, guadagni,
+  bersaglio e testo, in ordine stabile.
+- **Mazzi**: elenco, «Nuovo mazzo», «Modifica» su una copia (nome bloccato),
+  «Annulla» che non invia nulla, «Salva» / «Sovrascrivi» e «Cancella» con conferma.
+  Salvataggio e cancellazione aspettano il nuovo `account/data` (o `account/error`,
+  tradotto); senza risposta in 5 s l'editor resta aperto con un errore.
+- **Editor**, solo le regole del debug e di R02 (`src/deck.ts`, funzioni pure):
+  personaggio, azione base e ultima risorsa obbligatori; azioni legate ripetibili
+  fino a cinque (carte iniziali base + legate ≤ 6) con «Svuota»; almeno una carta
+  regolare; nome non vuoto e senza «/» (regolamento 1.8). Nessun limite di copie,
+  nessun 20+2, nessun filtro di compatibilità delle legate. Ricerca come il debug
+  (sottostringa della carta serializzata), vista Collezione/Mazzo, un tocco aggiunge
+  una copia o ne toglie una omonima. Il server resta il giudice.
 
 ## Gesti
 
@@ -149,6 +172,7 @@ di rotazione.
 ./client-web/run.ps1 -Task VerifyModes   # due account, code e 1v1: richiede server e Serve attivi
 ./client-web/run.ps1 -Task VerifyLifecycle   # clock, forfait, rientri, riavvio: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyFfa     # tutti contro tutti a cinque: avvia da sé il server
+./client-web/run.ps1 -Task VerifyDecks   # catalogo, mazzi e open 1vCom: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -173,6 +197,12 @@ fino all'esito; a ogni turno rilegge la scena (cinque posti, ventagli uguali a
 `cardsInHand`, oggetti come carte, nessuna sovrapposizione fra posti, mano e
 bordi, con le stesse funzioni dei test) e prova l'oggetto coperto con mouse e
 tocco emulato. `BM_SCENARIOS` sceglie gli scenari (`queue,five,two,start,leave,timeout,drop`).
+`VerifyDecks` (anche lui su database temporaneo) confronta il catalogo con l'allegato
+del regolamento, prova bozze non salvabili, crea, annulla, sovrascrive e cancella
+mazzi dalla UI, gioca un open 1vCom fino all'esito controllando che personaggio e
+mano vengano dal mazzo, ripete con «Nuova partita», avvia un mazzo con sei carte
+iniziali e provoca «Deck unavailable» riscrivendo il deckId del frame in uscita
+(non raggiungibile dalla UI con un solo account).
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
@@ -208,8 +238,10 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
   oggetti coperti da alzare al primo tocco).
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
-- `src/hub.tsx`, `src/presence.ts`: hub «Gioca», coda FFA e presenza (ordinamento,
-  pagine e nomi dei giocatori come funzioni pure).
+- `src/hub.tsx`, `src/presence.ts`: hub «Gioca», coda FFA, scelta del mazzo open e
+  presenza (ordinamento, pagine e nomi dei giocatori come funzioni pure).
+- `src/collection.tsx`, `src/deck.ts`: scheda «Collezione» (catalogo, mazzi, editor);
+  le regole dell'editor e i messaggi del server sono funzioni pure.
 - `src/lifecycle.ts`: esiti, ragioni di forfait e countdown indicativi (funzioni pure).
 - `src/table.tsx`, `src/main.tsx`, `src/ui.tsx`: shell React (accesso,
   tavolo, esito, dialoghi).

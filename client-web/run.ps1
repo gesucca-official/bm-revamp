@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','Size','Atlas')][string]$Task='Build',[switch]$Offline)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','Size','Atlas')][string]$Task='Build',[switch]$Offline)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -23,6 +23,8 @@ try {
     'VerifyLifecycle' {& npm run verify:lifecycle}
     # C2b-3: five-seat FFA on its own temporary server, like VerifyLifecycle (port 8080 free, Serve running).
     'VerifyFfa' {& npm run verify:ffa}
+    # C2b-4: catalog, decks and open 1vCom with devAlice on its own temporary server (port 8080 free, Serve running).
+    'VerifyDecks' {& npm run verify:decks}
     'Size' {& npm run size}
     'Atlas' {& npm run atlas}
   }

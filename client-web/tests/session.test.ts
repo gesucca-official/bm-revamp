@@ -433,3 +433,90 @@ test('P33: in the FFA another player\'s forfeit keeps the game going; own death 
   server.deliver('/user/queue/game/f1/view', end);
   assert.equal(m.view.over, true); assert.equal(m.message, 'Hai perso');
 });
+
+// C2b-4: decks and open 1vCom.
+const savedDeck = {deckId: 'Strano', character: {name: 'Spazienzio', bindingName: 'bruiser.character.BigBadBruiser', itemsSize: 3, resources: {}},
+  basicActionCard: fixtures.cards.grab ?? Object.values(fixtures.cards)[0], lastResortCard: Object.values(fixtures.cards)[0], characterBoundCards: [], regularCards: [Object.values(fixtures.cards)[0]]} as any;
+
+test('saving a deck waits for the refreshed profile; the login resume is not reapplied (K1)', async () => {
+  const {session, server} = await inHub();
+  server.deliver('/user/queue/session/resume', {status: 'resumed', gameId: 'old', view: duel()});
+  const saved = session.saveDeck(savedDeck);
+  assert.equal(session.deckBusy, true);
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/user/Tu/deck', body: JSON.stringify(savedDeck)});
+  assert.equal(await Promise.race([saved, flush().then(() => 'pending')]), 'pending');
+  server.deliver('/user/queue/account/data', {...account, decks: [savedDeck]});
+  assert.equal(await saved, null);
+  assert.equal(session.deckBusy, false);
+  assert.deepEqual(session.decks.map(d => d.deckId), ['Strano']);
+  assert.equal(session.phase, 'hub');
+  assert.equal(session.model, null);
+});
+
+test('a refused save keeps the editor open with the server reason in Italian; delete answers the same way', async () => {
+  const {session, server} = await inHub();
+  const refused = session.saveDeck(savedDeck);
+  server.deliver('/user/queue/account/error', 'Invalid deck: Deck identifier cannot contain /');
+  assert.equal(await refused, 'Il server ha rifiutato il mazzo (Deck identifier cannot contain /).');
+  assert.equal(session.error, '');
+  const deleted = session.deleteDeck(savedDeck);
+  assert.equal(server.sent.at(-1)!.destination, '/app/user/Tu/deck/delete');
+  server.deliver('/user/queue/account/data', {...account, decks: []});
+  assert.equal(await deleted, null);
+  assert.deepEqual(session.decks, []);
+});
+
+test('a deck request without answer times out once; a later profile is only a refresh', async () => {
+  const {session, server, clock} = await inHub();
+  const saved = session.saveDeck(savedDeck);
+  assert.equal(await session.saveDeck(savedDeck), 'Operazione non disponibile adesso.', 'one request at a time');
+  assert.equal(server.count('/app/user/Tu/deck'), 1);
+  clock.fire();
+  assert.match(String(await saved), /non ha risposto/);
+  server.deliver('/user/queue/account/data', {...account, decks: [savedDeck]});
+  assert.equal(session.deckBusy, false);
+  assert.equal(session.decks.length, 1);
+});
+
+test('a drop during a save resolves it instead of leaving the editor waiting', async () => {
+  const {session, server} = await inHub();
+  const saved = session.saveDeck(savedDeck);
+  server.drops.at(-1)!();
+  assert.match(String(await saved), /Connessione interrotta/);
+  assert.equal(session.deckBusy, false);
+});
+
+test('open 1vCom subscribes ready and its error channel, then joins with user and deckId', async () => {
+  const {session, server} = await inHub();
+  session.join('open/1vCom', null);
+  assert.equal(session.phase, 'hub', 'open needs a deck');
+  session.join('open/1vCom', 'Strano'); await flush();
+  assert.ok(server.handlers.has('/user/queue/game/open/1vCom/ready'));
+  assert.ok(server.handlers.has('/user/queue/game/open/1vCom/error'));
+  assert.deepEqual(server.sent.at(-1), {destination: '/app/game/open/1vCom/join/Tu/Strano', body: 'Tu'});
+  server.deliver('/user/queue/game/open/1vCom/error', 'Deck unavailable. Choose a saved deck from your account and retry.');
+  assert.equal(session.phase, 'hub');
+  assert.equal(session.error, 'Mazzo non disponibile sul server: scegli un mazzo salvato e riprova.');
+  assert.ok(!server.handlers.has('/user/queue/game/open/1vCom/ready'), 'queue subscriptions closed');
+  assert.ok(!server.handlers.has('/user/queue/game/open/1vCom/error'));
+});
+
+test('new game after an open game repeats open with the same deck (D11)', async () => {
+  const {session, server} = await inHub();
+  session.join('open/1vCom', 'Strano'); await flush();
+  server.deliver('/user/queue/game/open/1vCom/ready', 'g1'); await flush();
+  server.deliver('/user/queue/game/g1/view', {...duel(), over: true, winner: 'Tu'});
+  session.leave('again'); await flush();
+  server.deliver('/user/queue/game/g1/leave', 'true'); await flush();
+  assert.equal(server.count('/app/game/open/1vCom/join/Tu/Strano'), 2);
+  assert.equal(server.count('/app/game/quick/1vCom/join'), 0);
+});
+
+test('switching hub tab clears the messages of the previous tab', async () => {
+  const {session, server} = await inHub();
+  session.join('open/1vCom', 'Assente'); await flush();
+  server.deliver('/user/queue/game/open/1vCom/error', 'Deck unavailable. Choose a saved deck from your account and retry.');
+  assert.ok(session.error);
+  session.clearMessages();
+  assert.equal(session.error, '');
+});

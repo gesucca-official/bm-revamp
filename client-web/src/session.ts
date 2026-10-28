@@ -1,9 +1,10 @@
-import type {Account, Card, ResumeState, View, CharacterCard, Presence, FfaEntry} from './contracts.ts';
+import type {Account, Card, ResumeState, View, CharacterCard, Presence, FfaEntry, UserGuiDeck} from './contracts.ts';
 import type {Connector, Link} from './net/link.ts';
 import {Model} from './model.ts';
+import {serverMessage} from './deck.ts';
 
 export type Phase = 'login' | 'connecting' | 'hub' | 'queue' | 'game' | 'lost';
-export type Mode = 'quick/1vCom' | 'quick/1v1' | 'quick/ffa';
+export type Mode = 'quick/1vCom' | 'quick/1v1' | 'quick/ffa' | 'open/1vCom';
 const FFA_SEATS = 5;
 export type Trace = {at: number; channel: string; body: string};
 export type Timers = {set(fn: () => void, ms: number): number; clear(id: number): void};
@@ -11,7 +12,8 @@ const browserTimers: Timers = {set: (fn, ms) => globalThis.setTimeout(fn, ms) as
 const PROFILE_TIMEOUT = 10000, VIEW_TIMEOUT = 5000, ACK_TIMEOUT = 5000;
 
 /**
- * Application flow over the server protocol: login, hub, quick queues (1vCom, 1v1, FFA), game, outcome, rejoin.
+ * Application flow over the server protocol: login, hub, quick queues (1vCom, 1v1, FFA), open 1vCom with a saved
+ * deck, deck save/delete, game, outcome, rejoin.
  * Authoritative state comes only from private views; the topics update/move are just a signal
  * to request the private view again. Nothing is ever resent automatically after a drop.
  */
@@ -27,6 +29,10 @@ export class Session {
   /** Queue being waited on, or null; `mode` is the last one joined ("new game" repeats it, D11). */
   queued: Mode | null = null;
   mode: Mode | null = null;
+  /** Saved deck of the last open join ("new game" repeats it). */
+  openDeck: string | null = null;
+  /** A deck save or delete waiting for the new account/data (or account/error). */
+  deckBusy = false;
   leavingQueue = false;
   /** Public FFA queue list in join order (humans and computers); `starting` once "start now" is sent. */
   ffaQueue: FfaEntry[] = [];
@@ -43,6 +49,7 @@ export class Session {
   private viewInFlight = 0;
   private viewAgain = false;
   private leaving = false;
+  private deckReply: ((error: string | null) => void) | null = null;
   private listeners = new Set<() => void>();
   private readonly connector: Connector;
   private readonly timers: Timers;
@@ -95,8 +102,8 @@ export class Session {
       await Promise.all([
         link.subscribe('/user/queue/session/resume', guard(body => { resume = JSON.parse(body); settle(); }, 'resume')),
         link.subscribe('/user/queue/game/error', guard(body => this.queueFailed(body), 'game/error')),
-        link.subscribe('/user/queue/account/error', guard(body => { if (!profile) this.close('Profilo non disponibile. Riprova.'); else { this.error = body; this.emit(); } }, 'account/error')),
-        link.subscribe('/user/queue/account/data', guard(body => { this.account = JSON.parse(body); profile = true; settle(); if (applied) this.emit(); }, 'account/data')),
+        link.subscribe('/user/queue/account/error', guard(body => { if (!profile) this.close('Profilo non disponibile. Riprova.'); else if (this.deckReply) this.deckDone(serverMessage(body)); else { this.error = serverMessage(body); this.emit(); } }, 'account/error')),
+        link.subscribe('/user/queue/account/data', guard(body => { this.account = JSON.parse(body); profile = true; settle(); if (this.deckReply) this.deckDone(null); else if (applied) this.emit(); }, 'account/data')),
         link.subscribe('/topic/connections/users', guard(body => { this.presence = JSON.parse(body); this.emit(); }, 'users'))
       ]);
     } catch { if (generation === this.generation) this.close('Il server non ha confermato le sottoscrizioni.'); return; }
@@ -123,16 +130,43 @@ export class Session {
     if (state.status === 'resumed' && !state.view.over) void this.attach(state.gameId, false);
   }
 
-  join(mode: Mode) {
-    if (this.phase !== 'hub' || !this.link) return;
+  get decks(): UserGuiDeck[] { return this.account?.decks ?? []; }
+  /** Hub messages belong to the tab that produced them: switching tab clears them (not the restart receipt). */
+  clearMessages() { if (!this.error && !this.notice) return; this.error = ''; this.notice = ''; this.emit(); }
+
+  /** Save (or overwrite, same deckId) and wait for the refreshed profile: null on success, else the reason. */
+  saveDeck(deck: UserGuiDeck) { return this.deckRequest(`/app/user/${this.user}/deck`, deck); }
+  /** Delete by deckId; the profile without the deck confirms it. */
+  deleteDeck(deck: UserGuiDeck) { return this.deckRequest(`/app/user/${this.user}/deck/delete`, deck); }
+
+  private deckRequest(destination: string, deck: UserGuiDeck): Promise<string | null> {
+    if (!this.link || this.phase !== 'hub' || this.deckBusy) return Promise.resolve('Operazione non disponibile adesso.');
+    const generation = this.generation;
+    this.deckBusy = true; this.error = ''; this.emit();
+    return new Promise(resolve => {
+      const timer = this.timers.set(() => { if (generation === this.generation) this.deckDone('Il server non ha risposto. Ricarica il profilo prima di riprovare.'); }, ACK_TIMEOUT);
+      this.deckReply = error => { this.timers.clear(timer); resolve(error); };
+      this.link!.send(destination, JSON.stringify(deck));
+    });
+  }
+  private deckDone(error: string | null) { const reply = this.deckReply; this.deckReply = null; this.deckBusy = false; reply?.(error); this.emit(); }
+
+  join(mode: Mode, deckId: string | null = this.openDeck) {
+    if (this.phase !== 'hub' || !this.link || (mode === 'open/1vCom' && !deckId)) return;
     const link = this.link, generation = this.generation, token = ++this.queueToken;
     const stale = () => generation !== this.generation || token !== this.queueToken;
+    if (mode === 'open/1vCom') this.openDeck = deckId;
     this.error = ''; this.notice = ''; this.receipt = null; this.phase = 'queue'; this.queued = mode; this.mode = mode; this.joined = false; this.leavingQueue = false; this.ffaQueue = []; this.starting = false; this.emit();
     const subscriptions = [link.subscribe(`/user/queue/game/${mode}/ready`, body => {
       if (stale() || this.phase !== 'queue') return;
       this.log(`${mode}/ready`, body); this.clearQueue(); this.queued = null; this.leavingQueue = false; void this.attach(body, true);
     })];
     // The FFA list is public: every join, computer, leave or start republishes it to everyone listening.
+    // Open: a missing deck (or a game still to resume) is answered on its own error channel, not on game/error.
+    if (mode === 'open/1vCom') subscriptions.push(link.subscribe('/user/queue/game/open/1vCom/error', body => {
+      if (stale() || this.phase !== 'queue') return;
+      this.log('open/1vCom/error', body); this.queueFailed(serverMessage(body));
+    }));
     if (mode === 'quick/ffa') subscriptions.push(link.subscribe('/topic/game/quick/ffa/joined', body => {
       if (stale() || this.queued !== mode) return;
       this.log('ffa/joined', body); this.ffaQueue = JSON.parse(body); this.emit();
@@ -140,7 +174,7 @@ export class Session {
     Promise.all(subscriptions).then(unsubs => {
       if (stale()) { unsubs.forEach(unsub => unsub()); return; }
       this.queueSubs.push(...unsubs); this.joined = true;
-      link.send(`/app/game/${mode}/join`, this.user);
+      link.send(mode === 'open/1vCom' ? `/app/game/open/1vCom/join/${this.user}/${deckId}` : `/app/game/${mode}/join`, this.user);
     }, () => { if (!stale()) this.close('Il server non ha confermato la coda.'); });
   }
 
@@ -238,7 +272,7 @@ export class Session {
       this.dropGame(); this.phase = 'hub';
       this.notice = acknowledged ? '' : 'Il server non ha confermato l’uscita: se rientri nella stessa partita, lasciala di nuovo.';
       this.emit();
-      if (acknowledged && then === 'again') this.join(again);
+      if (acknowledged && then === 'again') this.join(again, this.openDeck);
     };
     const timer = this.timers.set(() => finish(false), ACK_TIMEOUT);
     const unsubscribe = link.subscribe(`/user/queue/game/${gameId}/leave`, body => { this.log('leave', body); finish(true); });
@@ -246,7 +280,7 @@ export class Session {
   }
 
   // After a rejoin the queue is unknown: more than two players mean FFA, a computer opponent 1vCom, otherwise 1v1.
-  // A two-player FFA started early is taken for a duel.
+  // A two-player FFA started early is taken for a duel; an open game rejoined after a new login for a quick 1vCom.
   private modeOf(view?: View): Mode {
     const ids = Object.keys(view?.players ?? {});
     return ids.length > 2 ? 'quick/ffa' : !view || ids.some(id => id.startsWith('ComPlayer_')) ? 'quick/1vCom' : 'quick/1v1';
@@ -260,6 +294,7 @@ export class Session {
     this.generation++; this.link = null; this.gameSubs = []; this.queueSubs = []; this.queued = null; this.leavingQueue = false; this.ffaQueue = []; this.starting = false; this.presence = [];
     this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false;
     this.model?.disconnect();
+    if (this.deckReply) this.deckDone('Connessione interrotta: controlla l’elenco dei mazzi dopo il rientro.');
     this.phase = 'lost';
     this.error = this.model ? 'Connessione interrotta. Rientra entro 30 secondi: la partita e il clock proseguono sul server.' : 'Connessione interrotta.';
     this.emit();
@@ -267,6 +302,7 @@ export class Session {
 
   private close(message: string) {
     this.generation++; this.link?.close(); this.link = null; this.dropGame(); this.clearQueue(); this.queued = null; this.leavingQueue = false; this.presence = [];
+    if (this.deckReply) this.deckDone(message);
     this.phase = 'login'; this.error = message; this.password = ''; this.emit();
   }
 
@@ -274,6 +310,7 @@ export class Session {
   async logout() {
     const link = this.link;
     this.generation++;
+    if (this.deckReply) this.deckDone('Uscita in corso.');
     // Like the leave: stop listening to the game first, so no view request reaches a closed game.
     this.unsubscribeGame(); this.timers.clear(this.viewInFlight); this.viewInFlight = 0; this.viewAgain = false;
     if (link) {
@@ -284,7 +321,7 @@ export class Session {
       });
       link.close();
     }
-    this.link = null; this.dropGame(); this.clearQueue(); this.queued = null; this.mode = null; this.leavingQueue = false; this.presence = []; this.account = null; this.receipt = null;
+    this.link = null; this.dropGame(); this.clearQueue(); this.queued = null; this.mode = null; this.openDeck = null; this.leavingQueue = false; this.presence = []; this.account = null; this.receipt = null;
     this.user = ''; this.password = ''; this.error = ''; this.notice = ''; this.phase = 'login'; this.emit();
   }
 

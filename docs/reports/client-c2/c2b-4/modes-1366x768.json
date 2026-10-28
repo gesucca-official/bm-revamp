@@ -1,0 +1,65 @@
+{
+ "date": "2026-10-28T12:39:00.402Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts) against the local server; not a physical device",
+ "checks": {
+  "presenceAppears": {
+   "before": 1,
+   "after": 2
+  },
+  "presenceSort": "descending by name after a second click on the active column",
+  "queueExitA": {
+   "ack": true,
+   "hubButtonsEnabled": true
+  },
+  "queueExitB": {
+   "aloneWaitedWithoutGame": true,
+   "ack": true
+  },
+  "sameGame": true,
+  "game1": {
+   "a": "Pareggio",
+   "b": "Pareggio",
+   "turnsA": 11,
+   "turnsB": 11,
+   "gameId": "2aa385b53464ac5ff3ad5c9c58e8b6974b5b8e20baa784f829ee39640031506d"
+  },
+  "privacy": {
+   "A": {
+    "views": 35,
+    "ownHandArray": true,
+    "otherHandNumber": true,
+    "otherOnlyNames": 13,
+    "leaks": 0
+   },
+   "B": {
+    "views": 35,
+    "ownHandArray": true,
+    "otherHandNumber": true,
+    "otherOnlyNames": 12,
+    "leaks": 0
+   }
+  },
+  "newGameRepeatsMode": {
+   "firstGame": "2aa385b53464ac5ff3ad5c9c58e8b6974b5b8e20baa784f829ee39640031506d",
+   "secondGame": "4af0c13d9d39202ce2dc479bcefcd30232b8e1cf96168c7693bbdb76d349750c",
+   "queue": "quick/1v1"
+  },
+  "joinRefusedWhileResumable": {
+   "channel": "/user/queue/game/error",
+   "message": "Leave or resume the current game first",
+   "note": "raw STOMP client of the same account while its client is dropped; the hub handling of this message is covered by the session unit test"
+  },
+  "forfeit": {
+   "winner": "devBob"
+  },
+  "presenceDisappears": {
+   "count": 1
+  }
+ },
+ "errors": []
+}

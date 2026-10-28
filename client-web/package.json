@@ -15,6 +15,7 @@
     "verify:modes": "node tools/verify-modes.mjs",
     "verify:lifecycle": "node tools/verify-lifecycle.mjs",
     "verify:ffa": "node tools/verify-ffa.mjs",
+    "verify:decks": "node tools/verify-decks.mjs",
     "measure": "node tools/measure.mjs",
     "size": "node tools/size.mjs",
     "atlas": "node tools/atlas.mjs",

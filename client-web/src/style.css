@@ -60,3 +60,34 @@ button.info:hover{background:#4d7d86}
 @media(max-height:550px){.ffa-queue{font-size:13px}.sheet.hub .actions button{padding:4px 10px}.play.waiting .modes{display:none}}
 .toast.brief{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-height:550px){.toast.brief{min-height:30px;padding:4px 10px}}
+/* C2b-4: collection, deck editor and open deck choice. Outside the table portrait is allowed (D7); the sheet scrolls. */
+.sheet.hub.wide{width:min(1100px,96vw);transform:none}
+.tab.on{background:#9ec5bd}
+.collection,.editor{display:flex;flex-direction:column;gap:10px}
+.collection h3{margin:8px 0 4px;font-size:16px;color:#742e33}
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.cc{display:flex;gap:8px;align-items:flex-start;text-align:left;background:#f6ecd8;border:2px solid #9b765288;border-radius:6px;padding:6px;height:100%}
+.cc .thumb{flex:0 0 56px;height:56px;border-radius:4px;background:#c9b48c url('/art/atlas.webp') no-repeat}
+.cc-text{display:flex;flex-direction:column;gap:2px;min-width:0;font-weight:normal}
+.cc-text strong{font-size:14px}.cc-text small{font-size:12px;color:#5a4232}.cc-text p{margin:2px 0 0;font-size:12px;line-height:1.3}
+.copies{color:#2c6262}
+button.pick{display:block;width:100%;height:100%;padding:0;border:0;background:none;box-shadow:none;font-weight:normal}
+button.pick:hover .cc{border-color:#38616a}
+button.pick.on .cc{border-color:#38616a;background:#cfe3dd;outline:2px solid #38616a}
+.decks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.decks li{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:#f6ecd8;border:2px solid #9b765288;border-radius:6px;padding:6px 10px}
+.decks li>div:first-child{display:flex;flex-direction:column}.decks small{font-size:12px;color:#5a4232}
+.decks .confirm span{font-weight:bold;color:#742e33;align-self:center}
+button.danger{background:#d9a3a0}
+.editor-head{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}.editor-head label{flex:1 1 220px}
+.editor-head input[readonly]{background:#e3d3b2;color:#5a4232}
+.missing{margin:0;padding-left:20px;color:#742e33;font-size:14px}
+.slot{border:2px solid #9b7652;border-radius:6px;background:#efe0c2;padding:4px 8px}
+.slot summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px;min-height:40px;align-items:center;font-weight:bold}
+.slot summary b{font-weight:normal;color:#5a4232;text-align:right}
+.slot[open] summary{margin-bottom:6px}
+.regular-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}.regular-bar label{flex:1 1 200px}.regular-bar+.small{margin-top:6px}
+.pool{display:flex;gap:4px}.pool .on,.deck-choice .on{background:#9ec5bd;outline:2px solid #38616a}
+.deck-choice{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.deck-choice button{text-align:left}
+@media(max-height:550px){.cards{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}.cc .thumb{flex-basis:44px;height:44px}.slot summary{min-height:36px}}
+@media(max-width:640px){.cards{grid-template-columns:1fr}}

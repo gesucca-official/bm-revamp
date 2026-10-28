@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), gli altri no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -481,3 +481,105 @@ Il server assegna i personaggi a caso: le evidenze registrano quelli di ogni par
   [ffa-844x390.json](client-c2/c2b-3/ffa-844x390.json), [k7/](client-c2/c2b-3/k7/),
   [catture](client-c2/c2b-3/screens/) `ffa-*`; regressione `verify-*`, `modes-*`,
   `lifecycle-*` nella stessa cartella.
+
+## C2b-4 — Catalogo, editor mazzi e open 1vCom
+
+28 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md)). Nessun cambio di protocollo né di
+`client-debug` (salvo la copia del regolamento).
+
+**Decisione del proprietario durante il blocco.** R02 chiedeva solo un identificativo
+non vuoto, e il debug non pone altri limiti. Però l'avvio open porta il nome nella
+destinazione `/app/game/open/1vCom/join/{utente}/{deckId}`: un mazzo «a/b» si salvava,
+ma il controllo delle destinazioni rifiutava il suo avvio, quindi non era giocabile.
+Alla domanda, il proprietario ha scelto di vietare «/». Il regolamento passa a **1.8**
+(R02 e revisioni), il server rifiuta il salvataggio con `Invalid deck`, i test
+(`UserAccountServiceImplTest` in unità, `cli-security-test.cjs` nel contesto) lo
+provano, e descrizioni SQLite e allegato sono al suffisso 1.8. Tutto questo è in un
+commit separato, prima di questo blocco: `Test -Offline` 253 + 36 test e
+`TestServerContext` 360 test, verdi. Nessun'altra regola, carta o API cambia.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Catalogo (P18) | Scheda «Collezione» → «Catalogo»: le 37 carte e i 2 personaggi di `account/data.collection`, in ordine stabile (base, legate, ultima risorsa, azioni regolari, oggetti; poi per nome), con l'illustrazione O9 (`artCss`), tipologia, costo, priorità, ruolo, guadagni, bersaglio e testo. I personaggi mostrano risorse iniziali e capacità degli oggetti. |
+| Mazzi (P19, P20, P23, P24) | Elenco ordinato per nome, «Nuovo mazzo», «Modifica» su una copia (nome in sola lettura), «Annulla» senza invio, «Salva», o «Sovrascrivi» se il nome esiste già, e «Cancella» con conferma in riga (D11). Salvataggio e cancellazione sono una richiesta alla volta. Si chiudono con il nuovo `account/data` o con `account/error` (tradotto, l'editor resta aperto). Senza risposta in 5 s, o se la linea cade, compare un errore e nessuno spinner resta acceso. K1 resta chiuso: un `account/data` dopo il salvataggio aggiorna solo il profilo. |
+| Editor (P21, P22) | Modulo puro `src/deck.ts`: le regole del debug e di R02, nient'altro. Personaggio, azione base e ultima risorsa obbligatori. Azioni legate ripetibili fino a cinque, con il conteggio delle carte iniziali (base + legate ≤ 6) e «Svuota». Almeno una carta regolare; nome non vuoto e senza «/» (1.8). Nessun limite di copie, nessun 20+2, nessun filtro di compatibilità delle legate. Ricerca come il debug (sottostringa della carta serializzata, quindi anche nel testo e nel `bindingName`). Vista Collezione/Mazzo: la vista Mazzo raggruppa le copie (×n), e un tocco toglie una copia omonima. Ciò che manca è elencato, e «Salva» resta spento finché c'è qualcosa. |
+| Open 1vCom (P16) | Modalità «Con un tuo mazzo»: «Gioca» apre il dialogo dei mazzi salvati (nessuno: «Vai alla collezione»), «Annulla» non invia nulla. L'avvio sottoscrive `open/1vCom/ready` e `open/1vCom/error`, poi manda il join con utente e `deckId`. L'errore riporta all'hub con «Mazzo non disponibile sul server». «Nuova partita» ripete open con lo stesso mazzo (D11). Cambiando scheda, il messaggio della scheda precedente sparisce. |
+| Test automatici | Client 88 (71 + 17): nuovo `tests/deck.test.ts`, con 10 test su slot, requisiti, «/», legate, copie, ricerca, copia di modifica, ordine e messaggi. In più 7 test di sessione: salvataggio con K1, rifiuto e cancellazione, timeout, caduta, open con il canale d'errore, nuova partita open, pulizia dei messaggi. Nessun atteso esistente cambiato; typecheck pulito. |
+| Partite reali | **Sì.** Nuovo `VerifyDecks` (`run.ps1 -Task VerifyDecks`, `tools/verify-decks.mjs`): devAlice in Edge, server avviato da sé su un database temporaneo. Verde a 1366×768 e 844×390; scenari sotto. |
+| Regressione | `VerifyDecks`, `Verify` (1vCom) e `VerifyModes` verdi a entrambe le misure con la build finale; `Verify` e `VerifyModes` su un server con database temporaneo. `VerifyLifecycle` e `VerifyFfa` verdi a entrambe le misure con la build che precede le ultime due correzioni (messaggio dell'hub cancellato al cambio scheda, margine nell'editor), che non toccano coda, partita o tavolo. `build.ps1 -Task Test -Offline` (253 server + 36 debug) e `check-rules.py` passano. |
+| Peso | JS gzip 289023 byte (+3741 rispetto a C2b-3); totale gzip 1071229 byte ([size.json](client-c2/c2b-4/size.json)). |
+| Emulazione / dispositivo / umano | Due misure sul PC; nessun dispositivo fisico né prova umana. |
+
+### Scenari reali (entrambe le misure)
+
+1. **Catalogo.** 37 carte e 2 personaggi, 39 in tutto. Classi e nomi sono uguali a
+   `docs/rules-catalog.json` (versione 1.8) e ognuna ha l'illustrazione. Nessuno
+   scorrimento orizzontale; il foglio scorre in verticale.
+2. **Bozze non salvabili.** Una bozza vuota elenca cinque mancanze. Senza regolari
+   resta «Metti almeno una carta regolare» (più il nome). Con il nome «a/b» resta solo
+   «Il nome non può contenere «/»». «Salva» resta spento e nessun SEND parte verso `/deck`.
+3. **Creazione di «Strano».** Spazienzio de la Ucciso, BruiserGrab, Struggle. Tre
+   LittleSmack aggiunte («×3»), «Svuota», poi LittleSmack e PatheticBlade: una legata
+   del Junkie in un mazzo del Bruiser, senza filtro. In più 4 Glare e 3 ShuffleFeet; la
+   ricerca «ShuffleFeet» trova una carta, e nella vista Mazzo una copia viene tolta
+   («×4», «×2»). Un solo SEND `/app/user/devAlice/deck`, poi il mazzo arriva in
+   `account/data` e nell'elenco.
+4. **Riapri e annulla.** Nome in sola lettura. Due SuperImpact aggiunti e legate
+   svuotate, poi «Annulla»: zero SEND. Riaperto, il mazzo è quello salvato (3 iniziali,
+   6 regolari, le stesse due legate).
+5. **Sovrascrittura.** Aggiunte LittleRage e due Glare. Il pulsante dice «Sovrascrivi»,
+   parte un SEND e resta un solo mazzo «Strano» (3 legate, 8 regolari).
+6. **Open 1vCom fino all'esito.** Dialogo con «Strano»: «Annulla» non invia nulla, poi
+   l'avvio manda un solo join `/app/game/open/1vCom/join/devAlice/Strano`. Personaggio
+   BigBadBruiser contro un computer, mano iniziale con base e tre legate, mano più mazzo
+   uguale a 12 (1 + 3 + 8). La scena è pronta 0,4–0,6 s dopo la richiesta. La partita
+   va giocata dalla UI fino all'esito (nella passata finale 5 turni e vittoria a entrambe le misure; nelle passate precedenti anche 7 turni e sconfitta). In tutte le viste ogni carta della mano
+   viene dal mazzo salvato.
+7. **«Nuova partita».** Riparte con lo stesso join open e lo stesso mazzo; la partita
+   viene poi abbandonata dal menu (forfait) e si torna all'hub.
+8. **Valido ma strano.** «Sei iniziali»: Tossico del Serraglio, ToxicGrab, Struggle,
+   cinque legate (LittleSmack e RottenSmile alternate, sei carte iniziali) e 12 Cough
+   tutte uguali. Si salva, e l'open parte con la mano di sei carte iniziali, mazzo 12,
+   tutte dal mazzo. Con la mano piena non c'è pesca. Senza una regolare in mano, le
+   legate non hanno uno scarto e ToxicGrab non ha un oggetto: nessuna mossa è
+   possibile. È il limite noto di R03, non una regola nuova; la partita viene abbandonata.
+9. **Deck unavailable.** Provocato riscrivendo il `deckId` del frame di join in uscita
+   (`Strano` → `Assente`, Playwright `routeWebSocket`). Il server risponde su
+   `open/1vCom/error` con «Deck unavailable. …». Il client torna all'hub con «Mazzo non
+   disponibile sul server: scegli un mazzo salvato e riprova.», nessun ready e «Gioca»
+   attivo. Passando a «Collezione» il messaggio sparisce.
+10. **Cancellazione.** La conferma in riga con «Annulla» non invia nulla. Poi entrambi i
+    mazzi vengono cancellati (due SEND `/deck/delete`) ed escono dall'elenco. Il dialogo
+    open dice «Nessun mazzo salvato» e «Vai alla collezione» porta alla scheda.
+
+### Limiti e residui
+
+- **`Deck unavailable` non è raggiungibile dalla UI** con un solo account: il dialogo
+  elenca solo mazzi salvati, e la sessione è unica. La prova reale altera il frame in
+  uscita, quindi mostra la gestione della risposta vera del server, non un percorso da
+  utente. Lo stesso messaggio arriva quando l'account ha una partita da riprendere
+  (`checkAvailable` lancia `IllegalArgumentException`, gestita dal canale open). Dal
+  client quell'hub non è raggiungibile; il messaggio, però, non distingue le due cause.
+- Un mazzo con sei carte iniziali si salva e si avvia, ma senza regolari in mano non ha
+  mosse (limite di R03, scenario 8). L'editor non lo impedisce, perché R02 lo ammette.
+- Dopo un rientro con un nuovo login una partita open vale quick 1vCom per «Nuova
+  partita»: la vista non dice da quale mazzo viene.
+- Il nome di un mazzo nuovo uguale a uno esistente sovrascrive, come nel debug; il
+  pulsante lo dice («Sovrascrivi»), senza una conferma in più. Spazi iniziali o finali
+  nel nome sono conservati, come nel debug.
+- Gli oggetti vicino al personaggio non sono controllati come «dal mazzo»: ShuffleFeet li
+  scambia con l'avversario (in una passata è comparsa una birra del computer), e i token
+  nascono da effetti.
+- La console del browser registra un 404 per `favicon.ico`, presente anche prima di
+  questo blocco.
+- Non provati: dispositivo fisico, iPhone a 750×292, prova umana, portrait (ammesso
+  fuori dal tavolo per D7, ma non misurato).
+- Dati locali non toccati: tutte le prove su database temporanei. Delle verifiche di
+  regressione si conservano i JSON, non le catture.
+- Evidenze: [decks-1366x768.json](client-c2/c2b-4/decks-1366x768.json),
+  [decks-844x390.json](client-c2/c2b-4/decks-844x390.json), [catture](client-c2/c2b-4/screens/)
+  `decks-*`; regressione `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*` e
+  [size.json](client-c2/c2b-4/size.json) nella stessa cartella.
