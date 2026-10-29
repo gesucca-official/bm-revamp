@@ -164,7 +164,7 @@ per due ragioni emerse dal codice:
 | C2b-4 | Catalogo, editor mazzi e open 1vCom — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-4--catalogo-editor-mazzi-e-open-1vcom)); per decisione del proprietario regolamento 1.8: nessun «/» nel nome di un mazzo | C2b-1 |
 | C2b-5 | Home, regole e registrazione — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-5--home-regole-e-registrazione)); registrazione nel profilo locale: solo indisponibilità esplicita (D4) | — (dopo C2b-1 per l'hub) |
 | C2b-6 | Profilo, amministrazione, log client e diagnostica — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-6--profilo-amministrazione-log-client-e-diagnostica)); admin provato nell'ambiente temporaneo D5, prompt Basic nativo verificato su Edge | C2b-1 |
-| C2b-7 | Checklist di parità completa e prova umana B — **parte automatica fatta** (29 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)): verifiche sulla stessa build, checklist chiusa con evidenze o limiti, [scheda della prova B](reports/client-c2/c2b-7/prova-b-scheda.md); prova umana B e giudizio del proprietario da fare | tutti |
+| C2b-7 | Checklist di parità completa e prova umana B — **fatto** (29 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)): verifiche sulla stessa build, checklist chiusa con evidenze o limiti, [prova umana B](reports/client-c2/c2b-7/prova-b-scheda.md) senza blocchi; **C2 chiusa** dal proprietario | tutti |
 
 C2b-4, C2b-5 e C2b-6 sono indipendenti fra loro dopo C2b-1 e possono cambiare
 ordine. C2b-3 non parte prima di C2b-2.

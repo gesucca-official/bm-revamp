@@ -4,7 +4,7 @@
 completa del client web (D3, D13 del [piano C2b](../../../client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
 La conduce il proprietario; la parte automatica di C2b-7 è nel
 [rapporto C2](../../client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b).
-**Da compilare:** nessuna sessione è ancora stata fatta.
+**Sessione fatta il 29 ottobre 2026** dal proprietario (esiti [sotto](#osservazioni)); **C2 chiusa** dal proprietario lo stesso giorno.
 
 Scopo: vedere se persone che non hanno scritto il client riconoscono da sole
 **attesa**, **mossa accettata**, **proprio esito** e, in FFA, **il forfait di un
@@ -161,24 +161,23 @@ capire come), I = incomprensione (ci si riesce, ma dopo aver chiesto o sbagliato
 
 | # | Scenario | Account / dispositivo | Cosa è successo (parole della persona) | Tipo B/I | Tappa C2/C3/C4/Regole | Note del proprietario |
 |---|---|---|---|---|---|---|
-| 1 | | | | | | |
-| 2 | | | | | | |
-| 3 | | | | | | |
-| 4 | | | | | | |
-| 5 | | | | | | |
-| 6 | | | | | | |
-| 7 | | | | | | |
-| 8 | | | | | | |
+| 1 | S1 duello | — | Niente da segnalare, tutto ok. | — | — | |
+| 2 | S2 FFA con computer | — | Niente da segnalare, tutto ok. | — | — | |
+| 3 | S3 mazzo salvato | — | Non si capisce bene cosa è nel mazzo e cosa no: manca un riepilogo del mazzo corrente. | I | con il nuovo editor (riga 4), deciso dal proprietario | O15 nella roadmap |
+| 4 | S3 mazzo salvato | — | L'editor riprende la struttura del debug; si può cambiare per un deckbuilder più funzionale. | proposta | C4 o attività dedicata al deckbuilder | O16; solo client |
+| 5 | S3 mazzo salvato | — | In seguito ci sarà la collezione dell'utente: il mazzo si costruisce con le carte che l'utente possiede. | proposta | Regole: attività separata | O17; cambia R02 e server, passa da `docs/game-rules.md` |
+| 6 | S3 mazzo salvato | — | Il mazzo si sceglie sempre, non in una coda a parte: uno starter sempre selezionabile per ogni personaggio, oppure un mazzo proprio. | proposta | Regole: attività separata | O18; cambia R00/R02, code e protocollo |
+| 7 | S4 telefono | — | Niente da segnalare, tutto ok. | — | — | |
 
 ## Riepilogo per persona
 
 | Account | Attesa riconosciuta | Mossa accettata riconosciuta | Proprio esito riconosciuto | In FFA ha continuato dopo il forfait altrui | Telefono |
 |---|---|---|---|---|---|
-| `devAlice` | | | | | |
-| `devBob` | | | | | |
-| `devCarol` | | | | | |
-| `devDave` | | | | | |
-| `devErin` | | | | | |
+| tutti | sì (S1, S2, S4 «tutto ok») | sì | sì | sì | sì, nessun rilievo |
+
+Esito riferito dal proprietario per scenario, non per persona. Dal log del server: almeno
+`devAlice`, `devBob` e `devCarol` in una FFA con due computer; il proxy di `Physical` ha
+ammesso un secondo dispositivo in rete locale oltre al PC.
 
 ## Giudizio del proprietario
 
@@ -186,4 +185,8 @@ Data, numero di persone, dispositivi, blocchi C2 aperti (se ce ne sono, C2 resta
 aperta finché non sono corretti e riverificati), osservazioni passate a C3/C4,
 decisione su C2:
 
-> _da compilare_
+> Nessun blocco. Una incomprensione (riepilogo del mazzo, riga 3) e tre proposte sul
+> deckbuilder, sulla collezione e sulla scelta del mazzo (righe 4–6), registrate come
+> O15–O18 nella [roadmap](../../../client-roadmap.md#osservazioni-della-prova-umana-b-c2b-7).
+> Decisione su C2 (29 ottobre 2026): **C2 chiusa**. O15 non si corregge in C2: va con il
+> nuovo deckbuilder (O16).

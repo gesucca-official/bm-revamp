@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), **C2b-6 (profilo, amministrazione, log client e diagnostica) è fatto** ([sezione](#c2b-6--profilo-amministrazione-log-client-e-diagnostica)), di **C2b-7** è fatta la parte automatica ([sezione](#c2b-7--checklist-di-parità-e-prova-umana-b)); mancano la prova umana B e il giudizio del proprietario, quindi C2 non è chiusa. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), **C2b-6 (profilo, amministrazione, log client e diagnostica) è fatto** ([sezione](#c2b-6--profilo-amministrazione-log-client-e-diagnostica)), **C2b-7 (checklist e prova umana B) è fatto** ([sezione](#c2b-7--checklist-di-parità-e-prova-umana-b)). **C2 è chiusa** dal proprietario il 29 ottobre 2026. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -828,8 +828,8 @@ DELETE toccano solo il database temporaneo, cancellato alla fine.
 29 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
 ([client-c2b-plan.md](../client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)),
 in particolare D3 (cinque account sintetici locali, commit `30b8855`) e D13 (prova B
-completa). Questo commit contiene **solo la parte automatica**. La prova umana B e il
-giudizio del proprietario non sono fatti: **C2 non è chiusa**.
+completa). La parte automatica è nel commit `4cab6ba`; la prova umana B è stata fatta lo stesso giorno
+([sotto](#prova-umana-b)). **C2 è chiusa** dal proprietario il 29 ottobre 2026.
 
 ### Esito in breve
 
@@ -839,7 +839,8 @@ giudizio del proprietario non sono fatti: **C2 non è chiusa**.
 | Verifiche sulla stessa build | **Tutte verdi** dopo la correzione, sulla build finale (hash di `dist` uguale prima e dopo la serie): `Verify` e `VerifyModes` su un server con database temporaneo avviato per la serie, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks`, `VerifyPublic` e `VerifyProfile` ciascuno sul proprio server temporaneo, a 1366×768 e 844×390 (14 esecuzioni, zero errori pagina); `Size`; `client-web` `Test` 104/104 (nessun test nuovo: la correzione è CSS e la copre `Verify`); `build.ps1 -Task Test -Offline` 253 server + 36 debug, verdi; `check-rules.py` passa. Contesto Spring non rieseguito: server invariato in questo blocco. Nessuna partita lasciata da prove precedenti (`resumedLeftover*` assenti). |
 | Peso | JS gzip 306934 byte (−5 rispetto a C2b-6), totale gzip 1089729 byte, texture 18876320 byte ([size.json](client-c2/c2b-7/size.json)). |
 | Checklist P01–P44 | Tutte con evidenza. Le voci ancora aperte (P04, P10, P11, P12, P27–P31, P37) citano le evidenze di questo blocco e dei precedenti; i limiti della base o dell'ambiente sono scritti nella riga ([checklist](../client-c0-parity.md)). Per P37 `VerifyDecks` controlla ora, nella partita reale senza mosse, che il menu spieghi il limite R03 (`sixInitialPlayed.menuExplainsR03`). |
-| Prova umana B | **Non fatta.** Scheda pronta: [prova-b-scheda.md](client-c2/c2b-7/prova-b-scheda.md). |
+| Prova umana B | **Fatta** il 29 ottobre 2026 dal proprietario ([sezione](#prova-umana-b), [scheda compilata](client-c2/c2b-7/prova-b-scheda.md)): nessun blocco. |
+| Giudizio del proprietario | **C2 chiusa** (29 ottobre 2026); O15 con il nuovo deckbuilder (O16). |
 | Emulazione / dispositivo / umano | Due misure landscape sul PC, tocco emulato in `VerifyFfa`; nessun dispositivo fisico né prova umana. |
 
 ### Esecuzione consolidata (stessa build, entrambe le misure)
@@ -860,10 +861,6 @@ blocchi precedenti: ID di partita, carte casuali, tempi.
 
 ### Limiti e residui
 
-- **Prova umana B e giudizio del proprietario non fatti**: la parte umana di C2b-7 è nella
-  [scheda](client-c2/c2b-7/prova-b-scheda.md), con avvio del server con `-SeedAccounts`, le cinque
-  credenziali, quattro scenari (duello, FFA con computer e forfait altrui, mazzo salvato, telefono con
-  `Physical`) e la tabella delle osservazioni da assegnare a C2/C3/C4.
 - **Prompt Basic nativo non ripetuto**: `VerifyProfile` è stato eseguito headless; la prova con la
   finestra di Edge e la digitazione da tastiera (`BM_NATIVE_PROMPT=1`) prende il primo piano del desktop
   e resta quella di C2b-6 ([catture](client-c2/c2b-6/screens/)), su un client che da allora cambia solo
@@ -882,3 +879,25 @@ blocchi precedenti: ID di partita, carte casuali, tempi.
 - Non provati: dispositivo fisico, iPhone a 750×292, lettore di schermo.
 - Evidenze: [c2b-7/](client-c2/c2b-7/) — `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*`, `decks-*`,
   `public-*`, `profile-*` alle due misure, [size.json](client-c2/c2b-7/size.json), catture in `screens/`.
+
+### Prova umana B
+
+29 ottobre 2026, condotta dal proprietario con la [scheda](client-c2/c2b-7/prova-b-scheda.md), sulla
+build di C2b-7 servita con `Physical` (indirizzo Ethernet del PC) e il server con `-SeedAccounts` su un
+database dedicato. Dal log del server: almeno devAlice, devBob e devCarol nella stessa FFA con due
+computer; oltre al PC è entrato in rete locale un secondo dispositivo. Esito riferito per scenario:
+
+| Scenario | Esito |
+|---|---|
+| S1 duello | Niente da segnalare. |
+| S2 FFA con computer (forfait altrui) | Niente da segnalare. |
+| S3 mazzo salvato | Una incomprensione: non si capisce bene cosa è nel mazzo e cosa no, manca un riepilogo del mazzo corrente (**O15**). Tre proposte: un deckbuilder più funzionale della struttura del debug (**O16**); il mazzo costruito con la collezione posseduta dall'utente (**O17**); la scelta del mazzo in ogni modalità, con uno starter selezionabile per ogni personaggio o un mazzo proprio (**O18**). |
+| S4 telefono | Niente da segnalare. |
+
+Nessun blocco: attesa, mossa accettata, proprio esito e forfait altrui in FFA sono stati riconosciuti.
+O15 e O16 riguardano solo il client; O17 e O18 cambiano R00/R02, server e code, quindi non si toccano
+senza passare dal regolamento (AGENTS.md). Assegnazione nella
+[roadmap](../client-roadmap.md#osservazioni-della-prova-umana-b-c2b-7).
+
+**Giudizio del proprietario (29 ottobre 2026):** C2 è chiusa. O15 non si corregge in C2 e va con il
+nuovo deckbuilder (O16).

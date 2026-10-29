@@ -1,13 +1,13 @@
 # Roadmap del client web animato
 
-**29 ottobre 2026 — versione 19, C0, C1 e C2a chiuse, C2b in corso (C2b-1…C2b-6 fatte, di C2b-7 la parte automatica; mancano la prova umana B e il giudizio del proprietario).** C1 è chiusa dal
+**29 ottobre 2026 — versione 21, C0, C1 e C2 chiuse.** C2 è chiusa dal proprietario il 29 ottobre 2026, dopo la prova umana B di C2b-7 senza blocchi; le osservazioni sul mazzo O15–O18 sono assegnate oltre C2. C1 è chiusa dal
 proprietario dopo la prova su iPhone e la prova umana A; le osservazioni
 del proprietario e della prova A sono assegnate alle tappe
 ([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
 primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
 partite reali in locale, provato dal proprietario su iPhone e desktop e **chiuso**
 insieme alla prova umana B, che non ha evidenziato nulla di rilevante
-([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1), C2b-3 (FFA a cinque), C2b-4 (catalogo, editor mazzi e open 1vCom), C2b-5 (home, regole e registrazione) e C2b-6 (profilo, amministrazione, log client e diagnostica), verificati in locale sul server reale ([piano C2b](client-c2b-plan.md)). Di C2b-7 è fatta la parte automatica: tutte le verifiche ripetute sulla stessa build e checklist P01–P44 chiusa con evidenze o limiti espliciti ([rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)); **C2 non è chiusa** finché non si fanno la prova umana B ([scheda](reports/client-c2/c2b-7/prova-b-scheda.md)) e il giudizio del proprietario. Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
+([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1), C2b-3 (FFA a cinque), C2b-4 (catalogo, editor mazzi e open 1vCom), C2b-5 (home, regole e registrazione) e C2b-6 (profilo, amministrazione, log client e diagnostica), verificati in locale sul server reale ([piano C2b](client-c2b-plan.md)). Di C2b-7 è fatta la parte automatica: tutte le verifiche ripetute sulla stessa build e checklist P01–P44 chiusa con evidenze o limiti espliciti ([rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)). La prova umana B è fatta (29 ottobre 2026, [scheda](reports/client-c2/c2b-7/prova-b-scheda.md)): nessun blocco, osservazioni sul mazzo registrate come [O15–O18](#osservazioni-della-prova-umana-b-c2b-7). **C2 è chiusa** dal proprietario (29 ottobre 2026); O15 va con il nuovo deckbuilder (O16). Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
 automatici, partite reali in locale e prova su iPhone confermata dal proprietario). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
@@ -476,7 +476,7 @@ prova su iPhone e desktop e prova umana B senza rilievi ([rapporto](reports/clie
 O9 (illustrazioni provvisorie) non è in C2a: è stata fatta dopo, 40 illustrazioni in un atlante
 ([rapporto](reports/client-c2-report.md#o9--illustrazioni-provvisorie)). C2b porta le modalità e il resto
 della parità in sette blocchi ([piano](client-c2b-plan.md)): C2b-1 modalità e code, C2b-2 ciclo
-di vita in 1v1, C2b-3 FFA a cinque, C2b-4 catalogo, mazzi e open 1vCom, C2b-5 home, regole e registrazione e C2b-6 profilo, amministrazione e log client sono fatti. La FFA usa la geometria di C2a (oggetti
+di vita in 1v1, C2b-3 FFA a cinque, C2b-4 catalogo, mazzi e open 1vCom, C2b-5 home, regole e registrazione e C2b-6 profilo, amministrazione e log client e C2b-7 checklist e prova umana B sono fatti: **C2 è chiusa** dal proprietario il 29 ottobre 2026 ([rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)). La FFA usa la geometria di C2a (oggetti
 propri sulla riga del personaggio, ventaglio che inizia dopo di loro, oggetti avversari
 sovrapposti al 25% che si alzano al passaggio del mouse o al primo tocco), provata
 su viste reali a ogni turno; i ventagli avversari hanno ora uno spazio proprio e
@@ -611,6 +611,19 @@ indicato come decisione aperta.
 | O13 | Prova A: non si capisce quali e quante risorse si hanno, né quali carte in mano le fanno ottenere. | C2a con O3 e O4, **implementata** | Risorse proprie leggibili vicino al proprio personaggio e alla mano; sulle carte, guadagni di risorse riconoscibili a colpo d'occhio dall'effetto, oltre al costo. |
 | O14 | Prova A: le tipologie devono riconoscersi a colpo d'occhio, compresi i ruoli: danno, risorse, contrasto delle mosse avversarie. | C2a essenziale **implementata**, C4 con O8 | Un segno di ruolo sulla carta senza snaturarne l'aspetto attuale, che piace. In C2 un segno essenziale; in C4 cornici e simboli definitivi con O8 e O10. **Deciso il 27 ottobre 2026:** la classificazione è un campo del catalogo SQLite, così tutte le informazioni sulle carte restano nello stesso posto ([regolamento 1.7, R07a](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17)). Ruoli DAMAGE, DEFENSE, RESOURCES, COUNTER, DISRUPT, ITEMS e OTHER per le carte ambigue, da rivedere con il bilanciamento; accanto, i guadagni a sé usati da O13. Il server li espone come `role` e `gains` della carta. |
 
+## Osservazioni della prova umana B (C2b-7)
+
+29 ottobre 2026, prova condotta dal proprietario con la
+[scheda](reports/client-c2/c2b-7/prova-b-scheda.md): duello, FFA con computer e telefono
+senza rilievi; dal mazzo salvato (S3) una incomprensione e tre proposte. Nessun blocco.
+
+| ID | Osservazione | Tappa | Note e vincoli |
+|---|---|---|---|
+| O15 | Prova B: nell'editor non si capisce bene cosa è nel mazzo e cosa no; manca un riepilogo del mazzo corrente. | Con O16, **deciso** dal proprietario alla chiusura di C2 | Solo client: riepilogo sempre visibile di personaggio, base, ultima risorsa, legate e regolari con le copie. Nessuna regola cambia. |
+| O16 | Prova B: l'editor riprende la struttura del debug; un deckbuilder più funzionale. | C4 o attività dedicata | Solo client, se resta dentro R02. Da progettare tenendo conto di O17. |
+| O17 | Prova B: in seguito il mazzo si costruirà con le carte della collezione dell'utente. | **Regole**, attività separata | Concetto nuovo di carte possedute: oggi la collezione dell'account (`account/data.collection`) è l'intero catalogo e R02 non limita le carte a quelle possedute. Cambia regolamento, server e dati: prima `docs/game-rules.md` con versione e motivazione (AGENTS.md). Fuori dal perimetro attuale («economia», «modifiche ai mazzi»). |
+| O18 | Prova B: il mazzo si sceglie sempre, non in una coda a parte; starter sempre selezionabile per ogni personaggio, oppure un mazzo proprio. | **Regole**, attività separata | Oggi R00 assegna a caso personaggio e starter nelle code quick, e solo open usa un mazzo salvato. Richiede regolamento (R00/R02), code e protocollo di ingresso. |
+
 ## Verifiche proporzionate
 
 Conservare test del motore e scenari CLI già acquisiti. Aggiungere prove
@@ -660,12 +673,24 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** prova umana B di C2b-7, condotta dal proprietario con la [scheda](reports/client-c2/c2b-7/prova-b-scheda.md); poi il giudizio del proprietario su C2. Eventuali blocchi C2 emersi si correggono e si riverificano prima della chiusura. C2a e O9 sono chiuse. C2 estende lo stesso
+**Prossimo passo:** C3 (risoluzione osservabile) solo su istruzione esplicita del proprietario. O15 e O16 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme, in C4 o in un'attività dedicata; O17 e O18 cambiano regole e protocollo: attività separate, da aprire dal regolamento. C2a e O9 sono chiuse. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 21 — 29 ottobre 2026, chiusura di C2:** il proprietario chiude C2 dopo la
+  prova umana B di C2b-7 (nessun blocco). O15 (riepilogo del mazzo) non si corregge in C2:
+  va con il nuovo deckbuilder O16. O17 e O18 restano attività separate che partono dal
+  regolamento. Nessuna regola, API o servizio cambiato.
+
+- **Versione 20 — 29 ottobre 2026, prova umana B (C2b-7):** prova condotta dal
+  proprietario: duello, FFA con computer e telefono senza rilievi; nessun blocco. Dal
+  mazzo salvato O15 (manca un riepilogo del mazzo corrente, tappa da decidere), O16
+  (deckbuilder più funzionale), O17 (mazzo dalla collezione posseduta) e O18 (scelta del
+  mazzo in ogni modalità, starter selezionabile); O17 e O18 richiedono regole e server,
+  quindi attività separate. Giudizio su C2 non ancora dato. Nessuna regola cambiata.
 
 - **Versione 19 — 29 ottobre 2026, C2b-7 (parte automatica):** tutte le verifiche di
   `client-web` (Verify, VerifyModes, VerifyLifecycle, VerifyFfa, VerifyDecks, VerifyPublic,

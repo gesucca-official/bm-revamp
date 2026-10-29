@@ -120,8 +120,7 @@ in un ambiente dedicato o non è raggiungibile con la base, la riga lo dice
 (in particolare P04, P08, P10, P12, P16, P29, P30, P31, P37, P40–P43). Le evidenze
 consolidate sono in [client-c2/c2b-7](reports/client-c2/c2b-7/), sulla stessa build
 ([rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
-La checklist completa non chiude C2: mancano la prova umana B e il giudizio del
-proprietario.
+Dopo la prova umana B senza blocchi il proprietario ha chiuso C2 (29 ottobre 2026).
 
 Fonti server: [account REST](../server/src/main/java/com/gsc/bm/api/rest/users/UserSignUpController.java),
 [account STOMP](../server/src/main/java/com/gsc/bm/api/ws/UserController.java),
