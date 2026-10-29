@@ -1,7 +1,7 @@
 # Roadmap del client web animato
 
-**29 ottobre 2026 — versione 22. C0, C1 e C2 sono chiuse; la prossima tappa è
-C3.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**29 ottobre 2026 — versione 23. C0, C1 e C2 sono chiuse; la prossima tappa è
+C3, pianificata nel [piano C3](client-c3-plan.md).** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -496,6 +496,9 @@ l'unico giudice di costi e legalità.
 **Dipende da C2. Risultato:** il round si comprende dal tavolo, con movimento
 ed enfasi coerenti, senza rallentare le decisioni.
 
+**Piano (29 ottobre 2026):** sette blocchi C3-1…C3-7, osservazione del server reale,
+regole di non-regressione e decisioni nel [piano C3](client-c3-plan.md).
+
 **Attività:** affinare selezione/bersagli, costo, carta confermata, annullamento,
 variazioni risorse, trasferimento/consumo oggetti, scarto/pesca osservabili,
 fine turno ed esito. Usare i report disponibili come spiegazione testuale;
@@ -593,7 +596,7 @@ indicato come decisione aperta.
 | O4 | Oltre al numero serve una barra o una torta per capire se una risorsa è tanta o poca. | C2a con O13, **implementata** | Indicatore rispetto al valore iniziale del personaggio: salute piena all'inizio, le altre risorse a metà barra (decisione del proprietario in C2a). R01 non ha tetti né pavimenti: mostrare eccesso oltre l'iniziale e valori negativi, senza saturare l'indicatore o nascondere il numero. |
 | O5 | «Dettagli carta» è scomodo: meglio un pulsantino (i) sulla carta. | C1, **fatto** | (i) in alto a sinistra su hover e sulla carta selezionata o con focus. Su touch non c'è hover: il pulsante compare sulla carta selezionata. Tastiera invariata (I). |
 | O6 | Oltre al contorno, frecce dalla carta selezionata ai bersagli possibili. | C3 | Frecce verso le sole categorie ammesse dalla carta, come gli attuali contorni: assistenza visiva, non validazione definitiva del server. |
-| O7 | Manca un'animazione della risoluzione: colpi, tagli, effetti spettacolari. | C3 | Effetti per carta e per tipo di danno, nell'ordine di `resolvedMoves`, interrompibili e con movimento ridotto. Con le API attuali i valori finali restano quelli della vista e le variazioni intermedie non sono attribuibili con certezza. **Decisione aperta:** per una sequenza fedele effetto per effetto serve un contratto di eventi strutturati dal server, attività separata. |
+| O7 | Manca un'animazione della risoluzione: colpi, tagli, effetti spettacolari. | C3 | Effetti per carta e per tipo di danno, nell'ordine di `resolvedMoves`, interrompibili e con movimento ridotto. Con le API attuali i valori finali restano quelli della vista e le variazioni intermedie non sono attribuibili con certezza. **Deciso il 29 ottobre 2026** ([piano C3](client-c3-plan.md), D1–D2): solo dati certi, nessun evento strutturato dal server in C3; il tipo di danno, che il server non pubblica, verrà da un campo descrittivo del catalogo (attività A1, dal regolamento). |
 | O8 | Le carte sono tutte uguali; il tipo si capisce solo dalla scritta. | C4 | Cornice, colore o fregio diversi per personaggio, azione regolare, base, legata, ultima risorsa, oggetto e token, mantenendo la scritta. |
 | O9 | Mancano le immagini di molte carte; servono anche provvisorie. | C2, **chiusa** (iPhone e giudizio del proprietario) | Una illustrazione provvisoria per ognuna delle 39 carte e del token. **Non immagini prese da Internet:** diritti incerti e progetto «tutti i diritti riservati». Si generano ex novo, come le WebP C0, con prompt e provenienza registrati, oppure si usano fonti con licenza compatibile. Supera la vecchia indicazione che il primo set non richiedesse illustrazioni individuali. |
 | O10 | Priorità, costi ed effetti in basso sulla carta vanno bene, ma con simboli invece delle lettere. | C4 | Famiglia di simboli coerente (fonti e licenze in «Asset iniziali»), sempre con il numero e consultabile in testo. Da usare anche in O3. |
@@ -655,7 +658,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   serve una configurazione esplicita delle origini.
 - **Contratto visivo:** accettare animazioni aggregate con le API correnti;
   valutare in seguito eventi strutturati/revisioni/ora server solo per esigenze
-  dimostrate. Non condizionare la prima partita a un nuovo protocollo.
+  dimostrate. Non condizionare la prima partita a un nuovo protocollo. Confermato
+  per C3 dal proprietario (D1 del [piano C3](client-c3-plan.md)).
 - **Lingua e audio:** proposta UI italiana con identificatori wire invariati;
   decidere suoni e volume iniziale. La copia di regole pubblicata deve restare
   identica alla fonte; nessuna traduzione normativa implicita.
@@ -664,7 +668,9 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** C3 (risoluzione osservabile: O6, O7), poi C4 (rifinitura
+**Prossimo passo:** C3-1 del [piano C3](client-c3-plan.md), su istruzione del
+proprietario e dopo la conferma delle decisioni D5–D11; l'attività A1 (tipo di
+danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
 un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo:
@@ -673,6 +679,12 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 23 — 29 ottobre 2026, piano C3:** [piano C3](client-c3-plan.md) in sette
+  blocchi, fondato su un'osservazione del server reale su database temporaneo. Il
+  proprietario conferma D1–D4: risoluzione animata con i soli dati certi, tipo di
+  danno da un campo del catalogo (A1, dal regolamento), frecce O6 verso i posti
+  ammessi, nessuna animazione dopo un salto di turni. O7 non è più una decisione
+  aperta. Nessuna regola, API o servizio cambiato.
 - **Versione 22 — 29 ottobre 2026, riordino documentale prima di C3:** apertura
   ridotta a sintesi con rimando all'indice, «Prossimo passo» aggiornato (C3 è la
   prossima tappa), O15 e O16 assegnate dal proprietario a un'attività successiva
