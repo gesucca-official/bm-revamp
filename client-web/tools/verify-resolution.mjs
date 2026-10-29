@@ -7,7 +7,10 @@
 //  - model (blocking): the per-seat differences added to the previous view give the new view; jumps, other games and
 //    repeated turns carry no difference; the facts do not depend on the server's sentences (D1); objects are linked to
 //    a move only through its TARGET_ITEM on the seat they left.
-//  - scene (recorded only, K1 is fixed in C3-2): rules 1, 2, 3 and 6 of the C3 plan.
+//  - scene (blocking since C3-2): rules 1, 2, 3 and 6 of the C3 plan; every contiguous round with moves plays one
+//    sequence that no view interrupts; the static summary of the round is on the table at the next choice; after a
+//    jump no sequence, no summary and the line of the resolved turns. Scenario `interrupt`: «Salta effetti», a tap,
+//    a card chosen during the sequence (rule 4) and a hidden tab (K5).
 // BM_RECORD=1 also writes the real view pairs used by tests/resolution.test.ts (tests/resolution-views.json).
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
 import {chromium} from '@playwright/test';
@@ -117,6 +120,18 @@ async function playOne(p,prefer){
  throw new Error(`${p.name}: no playable card`);
 }
 
+// Hidden tab: a real one (another page in front) when the browser reports it, otherwise emulated by overriding
+// document.hidden/visibilityState and dispatching visibilitychange (declared in the evidence).
+let hiddenMode=null;
+async function setHidden(p,on){
+ if(hiddenMode===null){const other=await p.context.newPage();await other.bringToFront();await p.page.waitForTimeout(300);
+  hiddenMode=await p.page.evaluate(()=>document.visibilityState)==='hidden'?'real':'emulated';p.cover=other;if(hiddenMode==='emulated'){await other.close();p.cover=null;}}
+ if(hiddenMode==='real'){if(on){if(!p.cover||p.cover.isClosed())p.cover=await p.context.newPage();await p.cover.bringToFront();}else{await p.page.bringToFront();await p.cover?.close();p.cover=null;}}
+ else await p.page.evaluate(on=>{if(on){Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});Object.defineProperty(document,'visibilityState',{configurable:true,get:()=>'hidden'});}
+  else{delete document.hidden;delete document.visibilityState;}document.dispatchEvent(new Event('visibilitychange'));},on);
+ await p.page.waitForTimeout(200);return hiddenMode;
+}
+
 // --- Rule 2 read-back: the scene shows exactly the last view (own board, opponent hand backs, objects, own hand) ---
 function finalState(s,v){
  const problems=[];if(!v)return problems;
@@ -152,7 +167,7 @@ const scramble=v=>{const x=structuredClone(v);for(const m of x.resolvedMoves)for
 const strip=f=>JSON.parse(JSON.stringify(f));
 // Paths where two JSON values differ (first levels only), for the evidence.
 const paths=(a,b,at='')=>{if(JSON.stringify(a)===JSON.stringify(b))return[];if(!a||!b||typeof a!=='object'||typeof b!=='object'||at.split('.').length>5)return[at||'.'];return [...new Set([...Object.keys(a),...Object.keys(b)])].flatMap(k=>paths(a[k],b[k],`${at}.${k}`));};
-function analyse(label,p,game,log,catalog){
+function analyse(label,p,game,log,catalog,{expectSequences=true,quiet=new Set()}={}){
  const views=p.views(game),me=p.user;
  // Distinct turns as received (two views per round are expected; only pendingMove may differ).
  const byTurn=new Map();for(const v of views){if(!byTurn.has(v.turn))byTurn.set(v.turn,[]);byTurn.get(v.turn).push(v);}
@@ -204,6 +219,7 @@ function analyse(label,p,game,log,catalog){
   if(newCancels.includes('view'))k1.push(f.key);
   if(f.relation==='jump'||f.relation==='other-game'){if(f.seats)problems.push(`${f.key}: client facts with seats on ${f.relation}`);if(started||deltas){rules[3].push(`${f.key}: ${f.relation} animated (sequence ${started}, deltas ${deltas})`);k2.push(f.key);}}
   if(f.relation==='same'&&started)rules[6].push(`${f.key}: same-turn view started a sequence`);
+  if(expectSequences&&f.relation==='next'&&f.moves.length&&e.why==='view'&&!started&&!quiet.has(f.key))rules[1].push(`${f.key}: contiguous round without its sequence`);
   if(f.relation==='next'){const prev=byTurn.get(f.turn-1)?.at(-1),next=byTurn.get(f.turn)?.[0];
    if(prev&&next){const wire=resolve(prev,next,me,catalog);if(JSON.stringify(strip(wire.seats))!==JSON.stringify(strip(f.seats)))problems.push(`${f.key}: client seats differ from wire views`);}}
   client.push({why:e.why,key:f.key,relation:f.relation,sequenceStarted:started,cancels:newCancels,deltas});
@@ -214,14 +230,17 @@ function analyse(label,p,game,log,catalog){
 
 // Plays a game to the outcome (or the own exit), reading rule 2 at each own turn; returns the client log.
 async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}={}){
- const finals=[];let watched=false,n=0,noValidMove=null,lastLog=[],lastStats=null;
+ const finals=[],notes=new Set();let watched=false,n=0,noValidMove=null,lastLog=[],lastStats=null;
  while(true){
   const s=await p.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),300000,'next turn');
   if(s.over)break;
   if(s.eliminated){
-   if(watch&&await p.page.getByTestId('watch').count()){await p.page.getByTestId('watch').click();watched=true;await p.shot(`${shots}-watching`);await p.wait(x=>x.over,600000,'outcome while watching');}
+   if(watch&&await p.page.getByTestId('watch').count()){await p.page.getByTestId('watch').click();watched=true;await p.shot(`${shots}-watching`);
+    // Watching: the line of the resolved turns (D4) in the short summary or, at the outcome, on the panel.
+    const end=Date.now()+600000;while(Date.now()<end){const t=await p.page.locator('.toast').count()?await p.page.locator('.toast').first().innerText().catch(()=>''):'';if(t)notes.add(t.replace(/\s+/g,' '));if((await p.state()).over)break;await p.page.waitForTimeout(250);}
+    const panel=await p.page.locator('[data-testid=round-note]').first().innerText().catch(()=>'');if(panel)notes.add(`panel: ${panel}`);}
    break;}
-  finals.push({turn:s.turn,problems:finalState(s,lastView(p,s.turn))});
+  finals.push({turn:s.turn,problems:finalState(s,lastView(p,s.turn)),summary:s.summary?{key:s.summary.key,seats:Object.keys(s.summary.seats).length,texts:Object.values(s.summary.seats).map(x=>x.texts.join(' '))}:null,running:s.sequence.running});
   lastLog=await p.log();lastStats=s.stats;
   if(n===2)await p.shot(`${shots}-turn${s.turn}`);
   if(onTurn&&await onTurn(p,s))continue;
@@ -233,22 +252,38 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
   n++;
   if(n>maxTurns)throw new Error('too many turns');
   await p.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,300000,'turn resolved');
+  // Let the round's sequence run to its end (1.2 s today), so that its completion is measured.
+  await p.wait(x=>!x||!x.sequence?.running,5000,'sequence end').catch(()=>{});
  }
- const end=await p.state();finals.push({turn:end.turn,problems:finalState(end,lastView(p,end.turn))});
+ await p.wait(x=>!x||!x.sequence?.running,5000,'sequence end').catch(()=>{});
+ const end=await p.state();
+ // D4 on the outcome panel (a death with only computers left is followed by the whole chain at once).
+ if(end.over||end.eliminated){const panel=await p.page.locator('[data-testid=round-note]').count()?await p.text('[data-testid=round-note]'):'';if(panel)notes.add(`panel: ${panel}`);}finals.push({turn:end.turn,problems:finalState(end,lastView(p,end.turn)),summary:end.summary?{key:end.summary.key,seats:Object.keys(end.summary.seats).length,texts:Object.values(end.summary.seats).map(x=>x.texts.join(' '))}:null,running:end.sequence.running});
  await p.page.waitForTimeout(300);
- return {log:await p.log(),stats:end.stats,finals,watched,end,noValidMove};
+ return {log:await p.log(),stats:end.stats,finals,watched,end,noValidMove,notes:[...notes]};
 }
 const lastView=(p,turn)=>p.views().filter(v=>v.turn===turn).at(-1);
 const catalogOf=p=>{const acc=p.messages('/user/queue/account/data').at(-1);return acc?JSON.parse(acc.body).collection?.cards??[]:[];};
-function summarise(label,p,game,r){
- const a=analyse(label,p,game,r.log,catalogOf(p));
+function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
+ const a=analyse(label,p,game,r.log,catalogOf(p),{expectSequences,quiet});
  const rule2=r.finals.filter(f=>f.problems.length);
- const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6]};
+ // C3-2: how each sequence ended, the static summary at each choice, the line after a jump.
+ const ends=r.stats.sequenceEnds??[],relation=Object.fromEntries((r.log??[]).filter(e=>e.facts.relation!=='same').map(e=>[e.facts.key,e.facts]));
+ const c32=[];
+ for(const e of ends){if(e.reason==='view')c32.push(`${e.key}: ended by a view (K1)`);if(e.reason==='complete'&&e.ms<1100)c32.push(`${e.key}: completed in ${e.ms} ms`);}
+ for(const f of r.finals){if(!f.turn)continue;const key=`${game}/${f.turn}`,facts=relation[key];if(!facts)continue;
+  if(facts.relation==='next'&&!f.summary)c32.push(`${key}: no static summary at the choice`);
+  if(facts.relation==='next'&&f.summary&&(f.summary.key!==key||f.summary.seats!==Object.keys(facts.seats).length))c32.push(`${key}: summary of ${f.summary.key} with ${f.summary.seats} seats`);
+  if(facts.relation!=='next'&&f.summary)c32.push(`${key}: summary after a ${facts.relation}`);}
+ const jumps=(r.log??[]).filter(e=>e.facts.relation==='jump').map(e=>e.facts.key);
+ const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32};
  evidence.games[label]={timerOrderOnly:a.timerOrderOnly,noValidMove:r.noValidMove??null,gameId:game,turnsSeen:a.turns,views:a.views,rows:a.rows,client:a.client,watched:r.watched,outcome:{over:r.end.over,winner:r.end.winner,eliminated:r.end.eliminated}};
  evidence.scene[label]={rules:Object.fromEntries(Object.entries(sceneRules).map(([k,v])=>[k,{ok:!v.length,violations:v}])),
-  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas};
- step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`});
+  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas};
+ step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`,ends:Object.entries(ends.reduce((m,e)=>(m[e.reason]=(m[e.reason]??0)+1,m),{})).map(([k,v])=>`${k} ${v}`).join(', '),msComplete:ends.filter(e=>e.reason==='complete').map(e=>e.ms),notes:r.notes});
  assert.deepEqual(a.problems,[],`${label}: model problems`);
+ for(const [k,v] of Object.entries(sceneRules))assert.deepEqual(v,[],`${label}: scene rule ${k}`);
+ if(jumps.length)assert.ok((r.notes??[]).some(t=>t.includes('Risolti')),`${label}: line of the resolved turns after a jump`);
  return a;
 }
 const run=name=>!only||only.includes(name);
@@ -282,22 +317,61 @@ try{
   await toHub(A);
  }
 
- // K3 (starting state): reduced motion emulated, three rounds of quick 1vCom, then abandon. The scene starts no sequence
- // and shows no difference; the model still has the round's differences. Recorded, not blocking (fixed in C3-2).
+ // K3: reduced motion emulated, three rounds of quick 1vCom, then abandon. No sequence; the static summary is there.
  if(run('reduced')){
   await A.page.emulateMedia({reducedMotion:'reduce'});
   await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();await table(A);
   const game=readyId(A,/quick\/1vCom\/ready$/),rounds=[];
   for(let i=0;i<3;i++){const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');if(s.over||s.eliminated)break;
    await playOne(A);const t=await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');await A.page.waitForTimeout(300);
-   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,toast});void t;}
+   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast});void t;}
   await A.shot('reduced-motion');
   const st=await A.state();
-  if(!st.over&&!st.eliminated){await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}
+  if(!st.over&&!st.eliminated){await A.page.keyboard.press('Escape');await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}
   else await toHub(A);
   await A.page.emulateMedia({reducedMotion:'no-preference'});
-  evidence.scene.reduced={gameId:game,rounds,k3:rounds.every(r=>r.sequences===0&&r.aggregateDeltas===0)&&rounds.some(r=>r.modelChanges>0)?'confirmed: no sequence and no difference in the scene with reduced motion, while the model has them':'not confirmed'};
+  evidence.scene.reduced={gameId:game,rounds};
+  // C3-2 (K3 fixed): no sequence, and the static summary of every round on the table.
+  for(const x of rounds){assert.equal(x.sequences,0,'reduced motion: no sequence');assert.equal(x.summaryKey,x.expectedKey,`reduced motion: summary of turn ${x.turn}`);}
   step('reducedMotion',evidence.scene.reduced);
+ }
+
+ // C3-2: interruptions in quick 1vCom. «Salta effetti», a tap on the empty table and a card chosen during the
+ // sequence bring it to the final state and leave the summary (rules 4, 5); a round resolved while the tab is
+ // hidden starts no sequence on return, keeps the summary and a short summary that did not expire (K3, K5).
+ if(run('interrupt')){
+  await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();await table(A);
+  const game=readyId(A,/quick\/1vCom\/ready$/),out={};
+  const ready=()=>A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');
+  const resolved=s=>A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');
+  const lastEnd=st=>st.sequence.ends.at(-1);
+  // A point of the canvas outside every hit and under no HTML element: a tap on the empty table.
+  const empty=async()=>{const st=await A.state();for(let y=vh*.12;y<vh*.6;y+=vh*.04)for(let x=vw*.25;x<vw*.8;x+=vw*.04){
+   if(st.hits.some(h=>Math.abs(x-h.x)<h.w/2+6&&Math.abs(y-h.y)<h.h/2+6))continue;if(await A.page.evaluate(([x,y])=>document.elementFromPoint(x,y)?.tagName==='CANVAS',[x,y]))return {x,y};}throw new Error('no empty spot');};
+  const round=async(name,during)=>{const s=await ready();if(s.over||s.eliminated)return false;await playOne(A);await resolved(s);
+   const running=await A.state();const key=`${game}/${running.turn}`;if(!running.sequence.running){out[name]={key,skipped:'sequence already over before the action',ends:running.sequence.ends.slice(-2)};return true;}
+   await during(running);await A.page.waitForTimeout(150);const st=await A.state();
+   out[name]={key,runningBefore:true,running:st.sequence.running,end:lastEnd(st),summaryKey:st.summary?.key??null,selected:st.selected,final:finalState(st,lastView(A,st.turn))};
+   assert.equal(st.sequence.running,false,`${name}: sequence brought to its end`);assert.equal(lastEnd(st).key,key);assert.deepEqual(out[name].final,[],`${name}: final state is the view`);return true;};
+  const skip=async()=>{await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Salta effetti'}).click();};
+  if(await round('skip',skip)&&out.skip.runningBefore){assert.equal(out.skip.end.reason,'skip','opening the menu does not end the sequence, «Salta effetti» does');assert.equal(out.skip.summaryKey,out.skip.key,'«Salta effetti» leaves the summary');}
+  if(await round('tap',async()=>{const p=await empty();await A.page.mouse.click(p.x,p.y);})&&out.tap.runningBefore){assert.equal(out.tap.end.reason,'input');assert.equal(out.tap.summaryKey,out.tap.key,'a tap leaves the summary');}
+  // Rule 4: during the sequence the first tap on a card chooses it (and ends the sequence); D6 then hides the summary.
+  if(await round('cardDuringSequence',async st=>{const h=st.hits.find(x=>x.kind==='hand');await A.page.mouse.click(h.x-h.w*.22,h.y);out.cardKey=h.id;})){
+   if(out.cardDuringSequence.runningBefore){assert.equal(out.cardDuringSequence.selected,out.cardKey,'card chosen at the first tap');assert.equal(out.cardDuringSequence.end.reason,'input');assert.equal(out.cardDuringSequence.summaryKey,null,'D6: the choice dismisses the summary');}
+   await A.page.keyboard.press('Escape');}
+  // Hidden tab while the round resolves.
+  const s=await ready();
+  if(!s.over&&!s.eliminated){
+   const mode=await setHidden(A,true);const before=(await A.state()).stats.sequences;await playOne(A);await resolved(s);
+   await A.page.waitForTimeout(7000);const toastHidden=await A.page.locator('.toast').count();
+   await setHidden(A,false);await A.page.waitForTimeout(400);const st=await A.state(),toast=await A.page.locator('.toast').count()?await A.text('.toast'):null;
+   out.hidden={mode,key:`${game}/${st.turn}`,sequencesBefore:before,sequencesAfter:st.stats.sequences,summaryKey:st.summary?.key??null,toastAfter7s:toast,toastWhileHidden:toastHidden};
+   assert.equal(st.stats.sequences,before,'hidden: no sequence on return');assert.equal(st.summary?.key,out.hidden.key,'hidden: summary present');assert.ok(toast&&toast.startsWith(`Turno ${st.turn}`),'K5: the short summary did not expire while hidden');
+   await A.shot('interrupt-after-hidden');
+   const left=await A.state();if(!left.over&&!left.eliminated){await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}else await toHub(A);
+  }else await toHub(A);
+  evidence.scene.interrupt={gameId:game,...out};step('interruptions',out);
  }
 
  // 2. FFA: devAlice and four computers to the outcome, watching after the own death (a jump may follow).
@@ -318,6 +392,13 @@ try{
   await Promise.all([A.wait(x=>x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'),30000),B.wait(x=>x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'),30000)]);
   await Promise.all([playOne(A),playOne(B)]);
   await Promise.all([A.wait(x=>x.turn>=1||x.over,60000,'turn 1'),B.wait(x=>x.turn>=1||x.over,60000,'turn 1')]);
+  // Rule 4 between humans: during the sequence a card is chosen at the first tap and the 30 s clock goes on.
+  const during=await A.state(),clock=async()=>Number((await A.page.locator('.clock:not(.away)').first().innerText().catch(()=>'')).match(/\d+/)?.[0]??NaN);
+  const c0=await clock(),hand=during.hits.find(h=>h.kind==='hand');await A.page.mouse.click(hand.x-hand.w*.22,hand.y);await A.page.waitForTimeout(100);
+  const chosen=await A.state();await A.page.waitForTimeout(2300);const c1=await clock();
+  const rule4={runningAtTap:during.sequence.running,selected:chosen.selected===hand.id,end:chosen.sequence.ends.at(-1)??null,clockBefore:c0,clockAfter2s:c1};
+  step('rule4WithClock',rule4);assert.ok(rule4.selected,'card chosen at the first tap');assert.ok(c1<c0,'clock goes on');if(rule4.runningAtTap)assert.equal(rule4.end.reason,'input');
+  await A.page.keyboard.press('Escape');
   const t0=Date.now();
   await A.wait(x=>x.eliminated||x.over,60000,'A forfeit');
   // The chain resolves after the forfeits: wait for the outcome view.
@@ -325,10 +406,12 @@ try{
   const end=await A.wait(x=>x.over,60000,'outcome after the chain').catch(()=>null);
   await A.shot('jump-after');
   const log=await A.log(),st=await A.state();
-  const r={log,stats:st.stats,finals:[],watched:false,end:st};
+  const note=await A.page.locator('[data-testid=round-note]').count()?await A.text('[data-testid=round-note]'):null;
+  const r={log,stats:st.stats,finals:[],watched:false,end:st,notes:note?[`panel: ${note}`]:[]};
   const a=summarise('jump',A,game,r);
+  assert.match(note??'',/Risolti \d+ turni/,'outcome panel: line of the resolved turns');assert.equal(st.summary,null,'no summary after the jump');
   const jumps=a.rows.filter(x=>x.relation==='jump');
-  step('jumpObserved',{secondsToForfeit:Math.round((Date.now()-t0)/1000),over:!!end,turnsFromTo:jumps.map(x=>`${x.from}→${x.turn}`),clientRelations:a.client.map(c=>`${c.key} ${c.relation}`),sceneK2:evidence.scene.jump.k2});
+  step('jumpObserved',{secondsToForfeit:Math.round((Date.now()-t0)/1000),over:!!end,turnsFromTo:jumps.map(x=>`${x.from}→${x.turn}`),clientRelations:a.client.map(c=>`${c.key} ${c.relation}`),sceneK2:evidence.scene.jump.k2,note,rule4});
   await toHub(A);await toHub(B).catch(()=>{});
  }
 

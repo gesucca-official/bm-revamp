@@ -1,4 +1,5 @@
 import type {Card, View, Command, Move} from './contracts.ts';
+import {resolve,type Round} from './resolution.ts';
 export type LocalCard = {key:string; card:Card};
 export type Target = {owner:string; itemIndex?:number};
 export type Change = 'choice'|'view'|'reset'|'disconnect'|'feedback';
@@ -14,6 +15,8 @@ export class Model {
   view:View; hand:LocalCard[]=[]; selected:string|null=null; target:Target|null=null; discard:string|null=null;
   phase:'choose'|'sending'|'pending'|'uncertain'='choose'; message='Scegli una carta'; generation=1;
   commandCount=0; lastCommand:Command|null=null; sequence=0; readonly history:Command[]=[];
+  // C3-2: the last resolved round (unchanged by views of the same turn) and the connection of the last view.
+  round:Round|null=null; private viewGeneration=1;
   private serial=0; private listeners=new Set<(why:Change)=>void>();
   readonly me:string;
   constructor(view:View,me:string){this.me=me;this.view=clone(view);this.receive(view,this.generation,true);}
@@ -49,7 +52,10 @@ export class Model {
     if(!reset&&(view.gameId!==this.view.gameId||view.turn<this.view.turn))return false;
     const copy=clone(view);if(!Array.isArray(copy.players[this.me]?.cardsInHand))throw new Error('Vista privata mancante');
     for(const [id,p] of Object.entries(copy.players))if(id!==this.me&&typeof p.cardsInHand!=='number')throw new Error('Una mano avversaria non può contenere fronti');
-    const changedTurn=reset||copy.turn!==this.view.turn;this.view=copy;
+    const changedTurn=reset||copy.turn!==this.view.turn;
+    // Contiguity (rule 3): a view after a reset or a drop never shows a difference against the view held before.
+    const facts=resolve(this.view,copy,this.me);if(facts.relation!=='same')this.round={facts,crossed:reset||recovered||this.viewGeneration!==generation};
+    this.viewGeneration=generation;this.view=copy;
     this.hand=reconcile(reset?[]:this.hand,copy.players[this.me].cardsInHand as Card[],()=>`card-${++this.serial}`);
     if(changedTurn||!this.hand.some(c=>c.key===this.selected))this.clear();
     // Same-turn clock/view notifications do not establish the outcome of an in-flight SEND.

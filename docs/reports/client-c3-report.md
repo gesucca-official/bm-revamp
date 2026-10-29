@@ -1,10 +1,12 @@
 # Rapporto C3 — Rendere leggibile e soddisfacente la risoluzione
 
-29 ottobre 2026. Regolamento **1.8**. C3 procede a blocchi secondo il
+29 ottobre 2026. Regolamento **1.9** (1.8 per C3-1). C3 procede a blocchi secondo il
 [piano C3](../client-c3-plan.md), con le decisioni D1–D11 confermate dal proprietario.
 **C3-1 (modello puro della risoluzione e strumento di verifica) è fatto**
-([sezione](#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)). Gli altri
-blocchi non sono iniziati.
+([sezione](#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)), **C3-2
+(sequenza affidabile) è fatto** ([sezione](#c3-2--sequenza-affidabile)). Gli altri
+blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
+è fatta a parte.
 
 ## C3-1 — Modello puro della risoluzione e strumento di verifica
 
@@ -146,3 +148,95 @@ Valori delle esecuzioni finali ([1366×768](client-c3/c3-1/resolution-1366x768.j
   [resolution-844x390.json](client-c3/c3-1/resolution-844x390.json), [catture](client-c3/c3-1/screens/)
   `resolution-*`; regressione `verify-*` e [size.json](client-c3/c3-1/size.json) nella
   stessa cartella.
+
+## C3-2 — Sequenza affidabile
+
+29 ottobre 2026. Regolamento **1.9** (A1 fatta a parte, commit `32d30b8`; nessun
+effetto per questo blocco). Regole di non-regressione 1–6 del piano, decisioni D4, D5
+(il passo delle barre resta a C3-4), D6. Nessun cambio a regole, server, protocollo,
+catalogo o `client-debug`. Prima delle partite il jar del server è stato ricostruito
+sui sorgenti correnti (quello presente era precedente ad A1).
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Modello (`src/model.ts`) | `Model.round`: fatti del **round** (`resolve` di C3-1) aggiornati solo quando cambia il turno; una vista dello stesso turno lo lascia identico. `crossed` se la vista precedente è di una connessione precedente (caduta, rientro) o di un reset: un round così non ha mai differenze (regola 3). |
+| Funzioni pure (`src/resolution.ts`) | `hasDifference` (contiguo, stessa connessione), `plays` (in più: mosse presenti, chiave non ancora animata, movimento possibile), `seatMarks` (variazioni per posto dalle `seats` del modello, oggetti spariti e comparsi) e `roundNote` (la riga dopo un salto o un rientro). Nessun testo del server letto. |
+| K1 | Una vista dello stesso turno annulla solo un trascinamento (C0-R4 invariato), **non** la sequenza. Si chiude solo con nuovo turno, reset, caduta, input sul tavolo (tocco, clic, tasto), «Salta effetti», ridimensionamento o zoom, scheda nascosta, cambio di movimento ridotto. Aprire un dialogo o perdere il fuoco della finestra non la chiude più: così «Salta effetti» ha davvero una sequenza da fermare. |
+| K2 | Nessuna sequenza e nessuna variazione se il round non è contiguo o arriva dopo una caduta; al loro posto la riga «Risolti N turni fino al turno T: valori finali della vista. L’ultimo turno è in «Ultimo turno».» nel riepilogo breve e sul pannello d'esito, finché non arriva il round successivo o si sceglie una carta. |
+| K3, K4 | **Riepilogo statico del round** disegnato nel tavolo (non nel livello effetti): per ogni posto una striscia larga quanto la plancia, sopra la propria e sopra quella del posto FFA di sinistra (dove sotto ci sono le carte coperte), sotto le altre, con «H −7 A −10 V +5 ogg −1 ogg +1» o «invariato». Compare a sequenza finita, saltata o interrotta, subito con movimento ridotto, scheda nascosta o contesto grafico perso; resta fino alla prima scelta di carta o al round successivo (D6). Geometria in `tableLayout`, controllata in unità a 1366×768 e 844×390 in duello e FFA a cinque: dentro lo schermo e lontana da mano, posti, oggetti, stati, ventagli di otto carte e dalle altre strisce. |
+| K5 | Il riepilogo breve conta i suoi 6 s solo a scheda visibile. Resta il limite FFA di P31 (copre i posti in alto per qualche secondo), assegnato a C3-6. |
+| Contenuto animato | Invariato rispetto a prima: voli delle carte giocate nell'ordine di `resolvedMoves`, accenti sui bersagli, totale di HEALTH a fine sequenza, trasferimenti uno a uno; durata 1,2 s. Il contenuto nuovo (costi, pesca, annullate, fine turno) è di C3-4. |
+| Test automatici | Client **131** (123 + 8): riepilogo per posto uguale alle differenze del modello su tutte le viste reali registrate, nessun riepilogo e riga dei turni dopo un salto o un rientro, sequenza una volta per chiave e mai senza movimento, `Model.round` invariato dallo stesso turno e `crossed` dopo caduta o reset, quattro controlli di geometria delle strisce. Nessun atteso esistente cambiato. |
+| Server reale | **Sì.** `VerifyResolution` esteso: le regole 1, 2, 3, 6 e i controlli di C3-2 sono ora bloccanti; nuovo scenario `interrupt`. Verde a 1366×768 e 844×390. |
+| Regressione | Il blocco tocca il tavolo di ogni partita: sulla build finale `Verify` e `VerifyModes` (server su database temporaneo), `VerifyLifecycle`, `VerifyFfa` e `VerifyDecks` verdi a 1366×768 e 844×390. `VerifyPublic` e `VerifyProfile` non ripetute (home, regole, profilo e amministrazione non cambiano). `build.ps1 -Task Test -Offline` (254 server + 36 debug) e `check-rules.py` passano. |
+| Peso | JS gzip 310185 byte (+2140 rispetto a C3-1); totale gzip 1092979 byte ([size.json](client-c3/c3-2/size.json)). |
+| Emulazione / dispositivo / umano | Due misure landscape sul PC; movimento ridotto emulato dal browser; scheda nascosta **emulata** (Edge headless riporta sempre la pagina come visibile, anche con un'altra pagina in primo piano: lo strumento sovrascrive `document.hidden` e `visibilityState` e invia `visibilitychange`). Nessun dispositivo fisico né prova umana. |
+
+### Scenari reali (entrambe le misure)
+
+Esecuzioni finali ([1366×768](client-c3/c3-2/resolution-1366x768.json),
+[844×390](client-c3/c3-2/resolution-844x390.json), campi `scene.*.sequenceEnds`,
+`summariesAtChoice`, `notes`). Lo strumento lascia finire ogni sequenza prima della
+mossa successiva, così la completezza è misurata.
+
+| Partita | 1366×768 | 844×390 |
+|---|---|---|
+| Quick 1vCom con caduta e rientro | 19 round contigui, 19 sequenze tutte complete (1200–1208 ms), riepilogo a ogni scelta; rientro: sequenze 2 → 2, nessuna rianimazione | 7 round, 7 complete (1201–1208 ms); rientro 2 → 2 |
+| FFA con quattro computer | 12 round, 12 complete; devAlice muore e il server risolve il resto a catena: salto 12→24 senza sequenza né riepilogo, riga sul pannello d'esito | 18 round, 18 complete; devAlice resta fino all'esito senza salti |
+| FFA con devBob e tre computer, forfait per tempo | salto 1→20: nessuna sequenza, nessun riepilogo, «Risolti 19 turni fino al turno 20…» sul pannello | salto 1→23, «Risolti 22 turni…» |
+| Open «C3 contrasti» | 19 round, 19 complete | 15 round, 15 complete |
+| Open «C3 furti» | 18 round, 18 complete | 8 round, 8 complete |
+| Sequenze chiuse da una vista (K1) | **0** | **0** |
+| Regole 1, 2, 3, 6 | rispettate in tutte le partite | rispettate in tutte le partite |
+
+**Interruzioni** (scenario `interrupt`, quick 1vCom, entrambe le misure):
+
+1. **«Salta effetti»** durante la sequenza: menu aperto (la sequenza continua), poi il
+   pulsante la chiude con motivo `skip` dopo 128–137 ms; stato finale uguale alla vista,
+   riepilogo del round presente.
+2. **Tocco sul tavolo vuoto** (punto del canvas senza bersagli né HTML sopra): chiusa
+   con motivo `input` dopo circa 100 ms, nessuna carta scelta, riepilogo presente.
+3. **Carta toccata durante la sequenza** (regola 4): scelta al primo tocco, sequenza
+   chiusa (`input`), riepilogo nascosto dalla scelta (D6).
+4. **Scheda nascosta** (emulata) dalla calata alla risoluzione e per altri 7 s: al
+   ritorno nessuna sequenza (3 → 3), riepilogo del turno presente, riepilogo breve ancora
+   visibile («Turno 4: …»): i 6 s non sono passati a scheda nascosta (K5).
+5. **Movimento ridotto** emulato per tre round: zero sequenze, riepilogo statico di ogni
+   round sul tavolo (per esempio «H −2 A −7 V +20 T +5 L +7 ogg −1» presso il computer).
+
+**Regola 4 fra umani** (FFA con devBob, primo round): durante la sequenza una carta di
+devAlice si sceglie al primo tocco (sequenza chiusa con `input`) e il clock della mossa
+passa da 30 a 28 s nei 2,3 s successivi.
+
+### Limiti e residui
+
+- **Scheda nascosta emulata:** in Edge headless la visibilità non cambia; lo strumento
+  prova prima con un'altra pagina in primo piano e, se la pagina resta visibile, emula
+  l'evento. Il percorso reale del browser (timer sospesi, `app.stop`) non è provato qui.
+- **«Resta a guardare» con la riga dei turni:** quando restano solo computer il server
+  risolve il resto della partita in un colpo, quindi la vista successiva alla morte è
+  già l'esito: la riga compare sul pannello d'esito, non durante la visione. Guardare
+  con almeno un altro umano vivo non produce salti (il round aspetta la sua mossa); il
+  percorso del riepilogo breve con la riga è provato in unità (`roundNote`).
+- **Rientro al turno successivo** (vista di una connessione precedente): provato in
+  unità (`Model.round.crossed`, nessuna differenza, riga «… mentre eri fuori linea»);
+  nelle partite reali il rientro è avvenuto nello stesso turno.
+- **Resize e cambio di orientamento** chiudono la sequenza (non la riavviano: regola 1);
+  non c'è una prova reale dedicata in questo blocco.
+- Il riepilogo statico mostra variazioni **complessive** del round: costi, effetti e fine
+  turno sommati, come previsto dal piano; l'attribuzione resta impossibile (D1).
+- Il riepilogo breve in alto copre ancora per 6 s i posti superiori della FFA (P31):
+  C3-6.
+- Durata della sequenza ancora 1,2 s con il contenuto di prima: i 5 s di D10 servono a
+  C3-4.
+- Dispositivo fisico, iPhone e prova umana non provati in questo blocco.
+- Dati locali non toccati: tutte le prove su database temporanei.
+- Evidenze: [resolution-1366x768.json](client-c3/c3-2/resolution-1366x768.json),
+  [resolution-844x390.json](client-c3/c3-2/resolution-844x390.json),
+  [catture](client-c3/c3-2/screens/) `resolution-*` (riepiloghi statici in `*-turn2-*`,
+  movimento ridotto, dopo la scheda nascosta, dopo il salto); regressione `verify-*`,
+  `lifecycle-*`, `ffa-*`, `decks-*`, `modes-*` e [size.json](client-c3/c3-2/size.json)
+  nella stessa cartella (catture conservate solo per `VerifyResolution` e `Verify`, per
+  non appesantire il repository).

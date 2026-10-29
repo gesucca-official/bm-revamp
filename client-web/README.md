@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1, C3-2)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -234,10 +234,34 @@ dal catalogo; solo per un round contiguo, per posto, la variazione complessiva d
 ogni risorsa, oggetti spariti e comparsi, mano e mazzo, morte e forfait; chi ha
 effetti di fine turno; esito. Un oggetto sparito è collegato a una mossa solo se la
 sua `TARGET_ITEM` lo nomina sul posto da cui è sparito e nessun'altra mossa lo
-contende. Non legge mai il testo del server e non calcola effetti. In C3-1 i fatti
-sono solo esposti in `window.__bm.resolutions` (e `state.resolution`) per la
-verifica: **la scena non li usa ancora** e si comporta come prima (K1–K6 del piano
-restano, misurati nel [rapporto C3](../docs/reports/client-c3-report.md)).
+contende. Non legge mai il testo del server e non calcola effetti. I fatti di ogni
+vista sono esposti anche in `window.__bm.resolutions` (e `state.resolution`) per la
+verifica.
+
+## Sequenza e riepilogo del round (C3-2)
+
+`Model.round` conserva l'ultimo round risolto: le viste dello stesso turno non lo
+cambiano; dopo una caduta o un reset è marcato `crossed` e non mostra differenze.
+La scena anima lo stesso contenuto di prima (voli delle carte nell'ordine di
+`resolvedMoves`, accenti, totale di salute), ma **fino in fondo** (1,2 s):
+
+- una vista dello stesso turno annulla solo un trascinamento, non la sequenza (K1);
+- la sequenza si chiude solo con un nuovo turno, un reset, una caduta, un input sul
+  tavolo (tocco, clic, tasto: la carta toccata si sceglie subito), «Salta effetti»,
+  ridimensionamento o scheda nascosta; aprire un dialogo o perdere il fuoco della
+  finestra non la ferma;
+- parte al massimo una volta per `gameId/turn` e solo per un round contiguo della
+  stessa connessione, con movimento possibile;
+- dopo un salto di turni o un round arrivato dopo una caduta: nessuna sequenza,
+  nessuna variazione e una riga «Risolti N turni…» che rimanda a «Ultimo turno» (nel
+  riepilogo breve e sul pannello d'esito) (K2, D4).
+
+**Riepilogo statico** (K3, K4, D6): per ogni posto una striscia larga quanto la
+plancia (sopra la propria e sopra quella del posto FFA di sinistra, sotto le altre)
+con le variazioni complessive del round («H −7 A −10 ogg +1», «invariato»), presa dal
+modello. Compare a sequenza finita, saltata o interrotta, subito con movimento
+ridotto o a scheda nascosta, e resta fino alla prima scelta di carta o al round
+successivo. Il riepilogo breve testuale conta i suoi 6 s solo a scheda visibile (K5).
 
 ## Verifiche
 
@@ -306,17 +330,22 @@ conteggi, partite non concluse, download e cancellazione con annullamento e conf
 Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
 `BM_NATIVE_PROMPT=1` apre anche un Edge visibile, cattura la finestra nativa del browser,
 la annulla (Esc) e la compila da tastiera dopo «Riprova».
-`VerifyResolution` (C3-1, database temporaneo) gioca quick 1vCom con caduta e rientro,
-tre round con movimento ridotto emulato (K3),
+`VerifyResolution` (C3-1, C3-2, database temporaneo) gioca quick 1vCom con caduta e rientro,
+tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
+tocco sul tavolo vuoto, carta scelta durante la sequenza, scheda nascosta: reale se il
+browser la riporta, altrimenti emulata e dichiarata),
 FFA con quattro computer (guardando dopo la propria morte), FFA con devBob e tre computer
 in cui i due umani lasciano scadere il clock (salto di turni) e open 1vCom con due mazzi
 sintetici salvati dall'editor («C3 contrasti», «C3 furti»: annullamenti, oggetti presi,
 rubati e token). A ogni vista confronta i fatti esposti dal client con quelli ricalcolati
 sulle viste ricevute, controlla che le variazioni sommate alla vista precedente diano la
 nuova, che salti, altre partite e viste dello stesso turno non portino differenze e che i
-fatti non cambino sostituendo il testo del server; registra, senza fermarsi, le regole
-1, 2, 3 e 6 del piano sulla scena (K1 e K2 si correggono in C3-2). `BM_SCENARIOS` sceglie
-gli scenari (`quick,reduced,ffa,jump,open`); `BM_RECORD=1` aggiunge a
+fatti non cambino sostituendo il testo del server. Da C3-2 controlla anche la scena:
+regole 1, 2, 3 e 6 del piano, una sequenza completa (circa 1,2 s) per ogni round
+contiguo con mosse, mai chiusa da una vista, riepilogo statico del round a ogni scelta,
+nessuna sequenza né riepilogo dopo un salto e la riga dei turni risolti; fra umani, la
+regola 4 con il clock che continua. `BM_SCENARIOS` sceglie
+gli scenari (`quick,reduced,interrupt,ffa,jump,open`); `BM_RECORD=1` aggiunge a
 `tests/resolution-views.json` i casi non ancora registrati (viste reali, carte ridotte
 ai campi che il modello legge).
 `BM_VIEWPORT=844x390` ripete al formato landscape
@@ -355,7 +384,8 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
   oggetti coperti da alzare al primo tocco).
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
-- `src/resolution.ts`: fatti certi del round da due viste (C3-1), funzione pura;
+- `src/resolution.ts`: fatti certi del round da due viste (C3-1), riepilogo per posto
+  e riga dei turni risolti (C3-2), funzioni pure;
   nessun testo del server letto, nessun effetto calcolato.
 - `src/hub.tsx`, `src/presence.ts`: hub «Gioca», coda FFA, scelta del mazzo open e
   presenza (ordinamento, pagine e nomi dei giocatori come funzioni pure).

@@ -154,7 +154,7 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | Blocco | Contenuto | Dipende da |
 |---|---|---|
 | C3-1 | Modello puro della risoluzione e strumento di verifica — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)) | — |
-| C3-2 | Sequenza affidabile: K1–K5 e riepilogo statico | C3-1 |
+| C3-2 | Sequenza affidabile: K1–K5 e riepilogo statico — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-2--sequenza-affidabile)) | C3-1 |
 | C3-3 | O6, frecce verso i bersagli ammessi | — |
 | C3-4 | Sequenza del round con i soli dati certi | C3-2 |
 | C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |

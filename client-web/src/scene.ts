@@ -3,6 +3,7 @@ import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
+import {plays,seatMarks,type Round,type SeatMark} from './resolution.ts';
 import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -27,7 +28,8 @@ export function glyph(g:Graphics,kind:Resource|Role,x:number,y:number,s:number,c
   case 'ITEMS':g.roundRect(x-r*.95,y-r*.55,r*1.1,r*1.4,r*.15).stroke({color,width:Math.max(1.2,s*.11)}).roundRect(x-r*.15,y-r*.85,r*1.1,r*1.4,r*.15).fill(color);break;
   case 'OTHER':g.circle(x-r*.6,y,r*.24).circle(x,y,r*.24).circle(x+r*.6,y,r*.24).fill(color);break;
  }return g;}
-export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number};item:{w:number;h:number}};hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null};
+export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number};item:{w:number;h:number}};hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
+ summary:{key:string;seats:Record<string,{texts:string[];box:Box}>}|null};
 // Stable seats: the viewer at the bottom, opponents in join order. Five-seat layout kept for C2 FFA.
 const SEATS={me:[.18,.77],duel:[[.46,.24]],ffa:[[.26,.24],[.72,.24],[.16,.49],[.81,.49]]} as const;
 export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.characterBound?'AZIONE LEGATA':c.lastResort?'ULTIMA RISORSA':'AZIONE REGOLARE';
@@ -41,11 +43,15 @@ export class TableScene {
  width=0;height=0;art:Texture[]=[];background!:Sprite;pendingGhost:Container|null=null;
  reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;blocked=false;contextLost=false;
  onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};onHover=(_id:string|null)=>{};
- preview={x:0,y:0};stats={cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0};
- private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private tickPrev=0;private inputStart=0;
+ preview={x:0,y:0};stats={cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0,
+  // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
+  sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0};
+ private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
+ // Static round summary (rule 5, D6): drawn on the table until the first card choice or the next round.
+ marks:Record<string,SeatMark[]>|null=null;marksKey='';private tickPrev=0;private inputStart=0;
  private measure=false;private ghost:Container|null=null;private ghostH=0;ghostOver=false;private fittedTitles=new Map<string,string>();private retiring:Container[]=[];private retired:Container[]=[];private seqDuration=1200;private visualSnapshot:View;
  private flights:Flight[]=[];private accents:Container[]=[];private deltas:Container[]=[];
- layout:TableLayout|null=null;readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},hand:[],board:null};private starts=new Map<string,Partial<Record<Resource,number>>>();
+ layout:TableLayout|null=null;readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},hand:[],board:null,summary:null};private starts=new Map<string,Partial<Record<Resource,number>>>();
  // Status chips on the table, for the summary the shell shows on hover, tap or focus.
  chips:Record<string,Chip&{x:number;y:number}>={};openStatus:string|null=null;
  constructor(readonly model:Model,private readonly catalog:()=>Card[]=()=>[],private readonly characters:()=>CharacterCard[]=()=>[]){this.visualSnapshot=clone(model.view);}
@@ -73,10 +79,17 @@ export class TableScene {
   bind(canvas,'webglcontextrestored',(()=>{this.contextLost=false;this.onError('');this.draw();}) as EventListener);
   bind(window,'resize',(()=>{this.interrupt('resize');this.resize(host.clientWidth,host.clientHeight);}) as EventListener);
   if(window.visualViewport)bind(window.visualViewport,'resize',(()=>{this.interrupt('visual viewport / zoom');this.resize(host.clientWidth,host.clientHeight);}) as EventListener);
-  bind(window,'blur',(()=>this.interrupt('window blur')) as EventListener);
+  bind(window,'blur',(()=>this.interrupt('window blur',true,false)) as EventListener);
   bind(document,'visibilitychange',(()=>{if(document.hidden){this.interrupt('background');this.app.stop();}else{this.tickPrev=0;this.app.start();}}) as EventListener);
   const media=matchMedia('(prefers-reduced-motion: reduce)');bind(media,'change',((e:MediaQueryListEvent)=>{this.reduced=e.matches;this.interrupt('reduced motion');}) as EventListener);
-  this.disposeFns.push(this.model.subscribe(why=>{const previous=this.visualSnapshot;if(why==='view'||why==='reset'||why==='disconnect'){this.interrupt(why,false);if(why==='reset')this.seqSeen='';this.visualSnapshot=clone(this.model.view);}this.draw();if(why==='view')this.beginSequence(previous);}));
+  // C3-2 (K1): a view of the same turn only cancels a drag (C0-R4); the sequence goes on. A new round, a reset or a
+  // drop end it. A round without a difference (jump, other connection) gets no sequence and no summary (K2, rule 3).
+  this.disposeFns.push(this.model.subscribe(why=>{const previous=this.visualSnapshot,round=this.model.round,fresh=round!==this.lastRound;
+   if(why==='view'||why==='reset'||why==='disconnect'){this.interrupt(why,false,why!=='view'||fresh);this.visualSnapshot=clone(this.model.view);}
+   if(fresh){this.lastRound=round;this.marks=seatMarks(round);this.marksKey=round?.facts.key??'';if(this.marks)this.stats.summaries++;}
+   // D6: the first card choice dismisses the summary of the round.
+   if(why==='choice'&&this.model.selected&&this.marks)this.marks=null;
+   this.draw();if(fresh&&why==='view')this.beginSequence(previous);}));
   this.app.ticker.add(()=>this.tick());this.resize(host.clientWidth,host.clientHeight);
  }
  private text(parent:Container,value:string,x:number,y:number,size:number,width?:number,color=INK){const t=new Text({text:value,style:{fontFamily:'Impact, Arial Narrow, sans-serif',fontSize:size,fill:color,wordWrap:!!width,wordWrapWidth:width,align:'center',lineHeight:size*1.05}});t.anchor.set(.5,0);t.position.set(x,y);parent.addChild(t);return t;}
@@ -153,6 +166,13 @@ export class TableScene {
    this.world.addChild(c);this.chips[chip.id]={...chip,x,y:y-ch/2};
    // Same owner as the character: with a card chosen, a tap here aims at that character.
    this.hits.push({id:chip.id,kind:'status',x,y,w:cw,h:ch,angle:0,target:{owner:id},label:`${chip.title}. ${chip.text}`,node:c});});}
+ // C3-2: the round's overall change of a seat, as the model gives it; nothing computed here. Shrinks to its strip.
+ private seatSummary(b:Box,marks:SeatMark[],compact:boolean){const c=new Container(),g=new Graphics(),row=new Container();c.addChild(g,row);c.position.set(b.x,b.y);
+  g.roundRect(-b.w/2,-b.h/2,b.w,b.h,b.h*.4).fill({color:0x120c08,alpha:.86}).stroke({color:0xd9b98a,width:1});
+  const fs=compact?10:14,texts=marks.length?marks.map(m=>m.text):['invariato'];let x=0;
+  texts.forEach((t,i)=>{const m=marks[i],color=!m?0xcbbca2:m.key==='ITEMS'?0xe9dcc2:m.delta<0?0xffb7bd:0xc9f0b0;const tx=this.text(row,t,0,0,fs,undefined,color);tx.anchor.set(0,.5);tx.position.set(x,0);x+=tx.width+fs*.55;});
+  const width=Math.max(1,x-fs*.55),scale=Math.min(1,(b.w-8)/width);row.scale.set(scale);row.position.set(-width*scale/2,0);
+  this.world.addChild(c);return texts;}
  private back(w:number,h:number){const c=this.frame(w,h);c.addChild(new Graphics().roundRect(-w/2+4,-h/2+4,w-8,h-8,2).fill(WINE).stroke({color:0xa47763,width:1}));
   const g=new Graphics().circle(0,0,w*.2).fill(0xcab184).stroke({color:INK,width:1});g.moveTo(-w*.27,-h*.25).lineTo(w*.27,h*.25).moveTo(w*.27,-h*.25).lineTo(-w*.27,h*.25).stroke({color:0xcab184,width:2});c.addChild(g);return c;}
  private halo(c:Container,w:number,h:number,color=PETROL){c.addChild(new Graphics().roundRect(-w/2-3,-h/2-3,w+6,h+6,6).stroke({color,width:3}));}
@@ -164,7 +184,7 @@ export class TableScene {
   this.retiring.push(...this.world.removeChildren());this.hits=[];this.backs={};this.chips={};this.pendingGhost=null;
   const w=this.width,h=this.height,view=this.model.view,me=this.model.me,ids=Object.keys(view.players);
   const L=tableLayout(w,h,ids,me,Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])));this.layout=L;const compact=L.compact,H=L.hand;
-  const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null;
+  const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null,roundSummary:Readout['summary']=null;
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
    if(id!==me){const count=p.cardsInHand as number,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=count;
     for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
@@ -175,6 +195,7 @@ export class TableScene {
    if(this.model.allows({owner:id})&&!this.model.locked)this.halo(person,cw,ch,this.model.target?.owner===id&&this.model.target.itemIndex===undefined?0xf1e4c4:PETROL);
    const read=this.board(seat.board,p,id,id===me,compact);if(read)board=read;
    this.statusChips(seat.status,id,p);
+   if(this.marks&&!this.seqStarted){const texts=this.seatSummary(seat.summary,this.marks[id]??[],compact);(roundSummary??={key:this.marksKey,seats:{}}).seats[id]={texts,box:seat.summary};}
    const covered=coveredItems(seat.items);
    p.character.items.forEach((item,index)=>{const b=seat.items[index]??seat.items[seat.items.length-1],c=this.card(item,b.w,b.h,true),hid=`item-${id}-${index}`;c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);
     const hit:Hit={id:hid,kind:'item',x:b.x,y:b.y,w:b.w,h:b.h,angle:c.rotation,covered:!!covered[index],target:{owner:id,itemIndex:index},label:`${item.name}, oggetto di ${id===me?'te':this.name(id)}${roleLabel(item)?`, ruolo ${roleLabel(item).toLowerCase()}`:''}${item.gains&&item.gains!=='—'?`, dà ${item.gains}`:''}, copia ${index+1}`,node:c};this.hits.push(hit);
@@ -208,7 +229,7 @@ export class TableScene {
   if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
    const dest=this.hits.find(z=>z.target?.owner===this.model.target!.owner&&z.target?.itemIndex===this.model.target!.itemIndex);if(dest){this.world.addChild(new Graphics().moveTo(this.preview.x,this.preview.y-35).quadraticCurveTo(this.preview.x,dest.y,dest.x,dest.y).stroke({color:PETROL,width:2,alpha:.8}));}
   }
-  const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},hand,board};
+  const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},hand,board,summary:roundSummary};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
   this.onLayout();
  }
@@ -216,10 +237,10 @@ export class TableScene {
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);
   // A tap or click anywhere else lowers raised cards and drops the choice (like Escape).
-  if(hit?.kind==='item'&&touchRaises(e.pointerType,!!hit.covered,this.peek===hit.id)){this.stopEffects();this.peek=hit.id;this.draw();this.onState();return;}
+  if(hit?.kind==='item'&&touchRaises(e.pointerType,!!hit.covered,this.peek===hit.id)){this.finish('input');this.peek=hit.id;this.draw();this.onState();return;}
   this.peek=null;
-  if(!hit){this.stopEffects();this.openStatus=null;const had=this.focused;this.focused=null;if(had)(document.activeElement as HTMLElement|null)?.blur?.();if(!this.model.locked&&this.model.selected)this.model.cancel();else{this.draw();this.onState();}return;}
-  this.stopEffects();if(hit.kind==='hand'&&!this.model.locked){this.drag={id:e.pointerId,key:hit.key!,x:p.x,y:p.y,lastX:p.x,lastY:p.y,moved:false,insertion:null,touch:e.pointerType!=='mouse'};this.app.canvas.setPointerCapture(e.pointerId);this.focus(hit.key!);}else this.activate(hit.id);}
+  if(!hit){this.finish('input');this.openStatus=null;const had=this.focused;this.focused=null;if(had)(document.activeElement as HTMLElement|null)?.blur?.();if(!this.model.locked&&this.model.selected)this.model.cancel();else{this.draw();this.onState();}return;}
+  this.finish('input');if(hit.kind==='hand'&&!this.model.locked){this.drag={id:e.pointerId,key:hit.key!,x:p.x,y:p.y,lastX:p.x,lastY:p.y,moved:false,insertion:null,touch:e.pointerType!=='mouse'};this.app.canvas.setPointerCapture(e.pointerId);this.focus(hit.key!);}else this.activate(hit.id);}
  // Hover is tracked only for a mouse at rest: it drives the (i) inspect button of the shell.
  private setHover(id:string|null){if(this.hovered!==id){const was=this.hovered;this.hovered=id;this.onHover(id);if(!this.drag&&[was,id].some(x=>x&&!x.startsWith('person-')))this.draw();else this.onState();}}
  move(e:PointerEvent){if(!this.drag){if(e.pointerType==='mouse'&&!this.blocked){const p=this.point(e);this.setHover(this.hit(p.x,p.y)?.id??null);}return;}if(this.drag.id!==e.pointerId)return;const p=this.point(e),d=this.drag;d.lastX=p.x;d.lastY=p.y;if(!d.moved&&Math.hypot(p.x-d.x,p.y-d.y)>8){d.moved=true;this.setHover(null);this.drawGhost(d.key);this.model.select(d.key);}
@@ -244,7 +265,7 @@ export class TableScene {
   if(target)this.model.aim(target.target!);
   else if(d.insertion!==null&&p.x>this.width*.25&&p.x<this.width*.98){const keys=this.model.hand.map(x=>x.key).filter(k=>k!==d.key);keys.splice(d.insertion,0,d.key);this.model.cancel();this.model.reorder(keys);}
   else this.model.cancel();this.ghostOver=false;this.draw();}
- activate(id:string){if(this.blocked||this.contextLost||this.height>this.width)return;this.inputStart=performance.now();const hit=this.hits.find(h=>h.id===id);if(!hit)return;
+ activate(id:string){if(this.blocked||this.contextLost||this.height>this.width)return;this.inputStart=performance.now();this.finish('input');const hit=this.hits.find(h=>h.id===id);if(!hit)return;
   if(hit.kind==='hand'){if(this.model.locked){this.inspect(id);return;}this.model.select(hit.key!);}
   // A table element that is not an admitted target also counts as "elsewhere".
   else if(this.model.selected&&!this.model.locked){if(!this.model.aim(hit.target!))this.model.cancel();}
@@ -256,17 +277,20 @@ export class TableScene {
  /** The status summary to show: hovered, focused or opened by a tap. */
  get statusShown(){const id=[this.hovered,this.focused,this.openStatus].find(x=>x?.startsWith('status-'));return id?this.chips[id]??null:null;}
  // Keyboard: I inspects; Shift+arrows move the focused hand card one slot (local order only, no SEND).
- key(id:string,e:KeyboardEvent){if(e.key==='i'||e.key==='I'){e.preventDefault();this.inspect(id);return;}
+ key(id:string,e:KeyboardEvent){this.finish('input');if(e.key==='i'||e.key==='I'){e.preventDefault();this.inspect(id);return;}
   if(e.shiftKey&&['ArrowLeft','ArrowRight'].includes(e.key)&&!this.model.locked){const keys=this.model.hand.map(c=>c.key),i=keys.indexOf(id);if(i<0)return;e.preventDefault();
    const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
  focus(id:string|null){this.focused=id;this.draw();}
- interrupt(reason:string,redraw=true){if(this.drag||this.seqStarted)this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();this.stopEffects();
+ // `sequence` false: only the gesture is cancelled (same-turn view, window blur), the sequence goes on.
+ interrupt(reason:string,redraw=true,sequence=true){if(this.drag||(sequence&&this.seqStarted))this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();if(sequence)this.finish(reason,false);
   if(d)this.model.cancel();this.setHover(null);if(redraw)this.draw();this.onState();}
  escape(){this.openStatus=null;this.interrupt('escape');this.model.cancel();}
  beginSequence(previous:View){
-  const v=this.model.view,k=`${v.gameId}/${v.turn}`;
-  if(this.seqSeen===k||!v.resolvedMoves.length)return;this.seqSeen=k;
-  if(this.reduced||matchMedia('(prefers-reduced-motion: reduce)').matches||document.hidden||this.contextLost)return;
+  const v=this.model.view,round=this.model.round;
+  // Rule 1: once per gameId/turn. Rule 3: only a contiguous round of the same connection. K3: no motion, no sequence
+  // (the static summary is already on the table).
+  if(!plays(round,this.seqSeen,{reduced:this.reduced||matchMedia('(prefers-reduced-motion: reduce)').matches,hidden:document.hidden,contextLost:this.contextLost}))return;
+  const k=round!.facts.key;this.seqSeen=k;this.seqKey=k;
   // Only published identities and ordered moves are animated. Resources already use the final view.
   const seen=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(previous.players).flatMap(p=>p.character.items),...Object.values(v.players).flatMap(p=>p.character.items)];
   const registry=[...new Map(seen.map(c=>[c.name,c])).values()];
@@ -289,13 +313,18 @@ export class TableScene {
    if(lost.length===1&&gained.length===1){const from=seat(lost[0]),to=seat(gained[0]);if(from&&to){const node=this.card(object,this.height<550?44:65,this.height<550?62:91);node.visible=false;this.fx.addChild(node);this.flights.push({node,from,to,start:.2,end:.65});this.stats.transfers++;}}
   }
   for(const [id,p] of Object.entries(v.players)){const health=p.character.resources.HEALTH,old=previous.players[id]?.character.resources.HEALTH,pos=seat(id);if(health!==undefined&&old!==undefined&&health!==old&&pos){const n=health-old;const label=this.text(this.fx,`${n>0?'+':''}${n} · totale turno`,pos.x,pos.y-30,this.height<550?12:17,undefined,0xffefdb);label.visible=false;this.deltas.push(label);this.stats.aggregateDeltas++;}}
-  this.seqStarted=performance.now();this.stats.sequences++;
+  this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
+ get sequenceRunning(){return !!this.seqStarted;}
+ /** Brings a running sequence to the final state (the view is already drawn); the static summary stays. */
+ finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.stopEffects();if(redraw){this.draw();this.onState();}}
+ /** «Salta effetti». */
+ skip(){this.finish('skip');}
  stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.flights=[];this.accents=[];this.deltas=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private tick(){const now=performance.now();
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.inputStart){const start=this.inputStart;this.inputStart=0;requestAnimationFrame(()=>this.stats.inputMs.push(performance.now()-start));}
-  if(this.seqStarted){const t=(now-this.seqStarted)/this.seqDuration;if(t>=1)this.stopEffects();else{
+  if(this.seqStarted){const t=(now-this.seqStarted)/this.seqDuration;if(t>=1)this.finish('complete');else{
    this.flights.forEach(f=>{const p=(t-f.start)/(f.end-f.start);f.node.visible=p>=0&&p<=1;if(f.node.visible){const eased=1-Math.pow(1-p,2);f.node.position.set(f.from.x+(f.to.x-f.from.x)*eased,f.from.y+(f.to.y-f.from.y)*eased-Math.sin(p*Math.PI)*35);f.node.rotation=(1-p)*-.12;}});
    this.accents.forEach((node,i)=>{const end=(i+1)*.7/Math.max(1,this.model.view.resolvedMoves.length),p=(t-end)/.13;node.visible=p>=0&&p<=1;node.scale.set(1+Math.max(0,p));node.alpha=1-Math.max(0,p);});
    this.deltas.forEach(node=>{node.visible=t>=.7;node.alpha=Math.min(1,(1-t)/.12);});

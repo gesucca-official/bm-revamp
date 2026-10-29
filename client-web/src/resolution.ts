@@ -173,3 +173,43 @@ export function mismatches(previous: View, next: View, facts: ResolutionFacts): 
   }
   return out;
 }
+
+/** One round as the client holds it (C3-2): facts plus whether they may be shown as a difference. */
+export type Round = {
+  facts: ResolutionFacts;
+  /** The previous view belongs to an earlier connection or to a reset: never a difference (rule 3). */
+  crossed: boolean;
+};
+/** A round has a per-seat difference only when contiguous and from the same connection (D4, rule 3). */
+export const hasDifference = (r: Round | null) => !!r && r.facts.contiguous && !r.crossed && !!r.facts.seats;
+/** The sequence plays only for such a round with moves, at most once per key, and only when motion is possible. */
+export function plays(r: Round | null, seen: string, motion: {reduced: boolean; hidden: boolean; contextLost: boolean}) {
+  return hasDifference(r) && r!.facts.moves.length > 0 && r!.facts.key !== seen && !motion.reduced && !motion.hidden && !motion.contextLost;
+}
+
+export type SeatMark = {key: Resource | 'ITEMS'; delta: number; text: string};
+const MARK_LETTER: Record<Resource, string> = {HEALTH: 'H', ALERTNESS: 'A', VIOLENCE: 'V', TOXICITY: 'T', ALCOHOL: 'L'};
+const signed = (n: number) => `${n > 0 ? '+' : '−'}${Math.abs(n)}`;
+/**
+ * Static round summary per seat (rule 5): the overall change of every resource and the objects gone and
+ * appeared, as the model gives them. Null without a difference (jump, other game, earlier connection).
+ */
+export function seatMarks(r: Round | null): Record<string, SeatMark[]> | null {
+  if (!hasDifference(r)) return null;
+  return Object.fromEntries(Object.entries(r!.facts.seats!).map(([id, s]) => {
+    const marks: SeatMark[] = (Object.entries(s.resources) as [Resource, ResourceChange][]).filter(([, c]) => c.delta)
+      .map(([k, c]) => ({key: k, delta: c.delta, text: `${MARK_LETTER[k] ?? k} ${signed(c.delta)}`}));
+    if (s.itemsGone.length) marks.push({key: 'ITEMS', delta: -s.itemsGone.length, text: `ogg ${signed(-s.itemsGone.length)}`});
+    if (s.itemsAppeared.length) marks.push({key: 'ITEMS', delta: s.itemsAppeared.length, text: `ogg ${signed(s.itemsAppeared.length)}`});
+    return [id, marks];
+  }));
+}
+
+/** The line shown instead of a difference (D4); null when the round has its difference. Turns are shown 1-based. */
+export function roundNote(r: Round | null): string | null {
+  if (!r || hasDifference(r)) return null;
+  const f = r.facts, last = `Turno ${f.turn}`;
+  if (f.relation === 'jump') return `Risolti ${f.turnsAdvanced} turni fino al ${last.toLowerCase()}: valori finali della vista. L’ultimo turno è in «Ultimo turno».`;
+  if (r.crossed) return `${last} risolto mentre eri fuori linea: valori finali della vista. Dettagli in «Ultimo turno».`;
+  return null;
+}

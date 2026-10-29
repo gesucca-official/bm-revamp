@@ -143,3 +143,44 @@ test('forfeit appearing in a contiguous round is a fact of the seat',()=>{
  assert.equal(resolve(c.previous,next,c.me,catalog).seats![id].forfeit,'leave');
  assert.equal(resolve(next,{...clone(next),turn:next.turn+1},c.me,catalog).seats![id].forfeit,null,'an old forfeit is not new');
 });
+
+// C3-2: what the scene and the shell may show of a round.
+import {Model} from '../src/model.ts';
+import {seatMarks,roundNote,plays,hasDifference,type Round} from '../src/resolution.ts';
+const round=(name:string,crossed=false):Round=>({facts:facts(name),crossed});
+const still={reduced:false,hidden:false,contextLost:false};
+
+test('static summary: every non-zero resource change and the objects of each seat, as the facts give them',()=>{
+ for(const name of contiguous){const r=round(name),marks=seatMarks(r)!;
+  for(const [id,s] of Object.entries(r.facts.seats!)){
+   const res=Object.entries(s.resources).filter(([,c])=>c!.delta).map(([k,c])=>`${k}:${c!.delta}`);
+   assert.deepEqual(marks[id].filter(m=>m.key!=='ITEMS').map(m=>`${m.key}:${m.delta}`),res,`${name} ${id}`);
+   assert.equal(marks[id].filter(m=>m.key==='ITEMS'&&m.delta<0).reduce((n,m)=>n-m.delta,0),s.itemsGone.length);
+   assert.equal(marks[id].filter(m=>m.key==='ITEMS'&&m.delta>0).reduce((n,m)=>n+m.delta,0),s.itemsAppeared.length);}}
+ const c=pair('death'),f=round('death'),id=Object.keys(f.facts.seats!).find(i=>f.facts.seats![i].resources.HEALTH?.delta)!;
+ const d=f.facts.seats![id].resources.HEALTH!.delta;
+ assert.ok(seatMarks(f)![id].some(m=>m.text===`H ${d>0?'+':'−'}${Math.abs(d)}`));void c;
+});
+
+test('no summary, no sequence, a note instead after a jump or from an earlier connection (D4, rule 3)',()=>{
+ for(const name of ['jump','jumpAfterForfeits']){const r=round(name);assert.equal(seatMarks(r),null);assert.equal(plays(r,'',still),false);
+  assert.match(roundNote(r)!,new RegExp(`Risolti ${r.facts.turnsAdvanced} turni fino al turno ${r.facts.turn}`));assert.match(roundNote(r)!,/Ultimo turno/);}
+ const crossed=round('void',true);assert.equal(hasDifference(crossed),false);assert.equal(seatMarks(crossed),null);assert.equal(plays(crossed,'',still),false);assert.match(roundNote(crossed)!,/fuori linea/);
+ const fine=round('void');assert.equal(roundNote(fine),null);assert.equal(roundNote(null),null);
+});
+
+test('sequence plays once per key and never without motion (rules 1, 3; K3)',()=>{
+ const r=round('void');assert.equal(plays(r,'',still),true);assert.equal(plays(r,r.facts.key,still),false);
+ for(const k of ['reduced','hidden','contextLost'] as const){assert.equal(plays(r,'',{...still,[k]:true}),false,k);assert.ok(seatMarks(r),`${k}: the summary is still there`);}
+ const empty={facts:{...r.facts,moves:[]},crossed:false};assert.equal(plays(empty,'',still),false);
+});
+
+test('model round: set by a new turn, kept by views of the same turn, crossed after a drop or a reset',()=>{
+ const c=pair('void'),m=new Model(c.previous,c.me);assert.equal(m.round,null);
+ m.receive(clone(c.next));const r=m.round!;assert.equal(r.facts.relation,'next');assert.equal(r.crossed,false);assert.ok(hasDifference(r));
+ const pending=clone(c.next);pending.pendingMove={...clone(c.next.resolvedMoves[0]),playerId:c.me};m.receive(pending);assert.equal(m.round,r,'same turn keeps the round');
+ // A drop between the two views: the round of the next view is not a difference.
+ const d=new Model(c.previous,c.me);d.disconnect();d.receive(clone(c.next),d.generation,false,true);assert.equal(d.round!.crossed,true);assert.equal(hasDifference(d.round),false);
+ const s=new Model(c.previous,c.me);s.reset(clone(c.next));assert.equal(s.round!.crossed,true);
+ const j=pair('jumpAfterForfeits'),jm=new Model(j.previous,j.me);jm.receive(clone(j.next));assert.equal(jm.round!.facts.relation,'jump');assert.equal(hasDifference(jm.round),false);
+});

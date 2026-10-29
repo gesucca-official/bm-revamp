@@ -81,3 +81,13 @@ for(const [w,h] of VIEWPORTS)for(const players of [2,5])test(`O12: ${players===2
  }
  const me=l.seats.find(s=>s.me)!;assert.ok(me.person.w>=(players>2?(h<550?60:117):(h<550?80:150))-1);
 });
+
+// C3-2: the static round summary strip of every seat stays inside, clear of the hand, of every seat and of the covered fans.
+import {fan} from '../src/readability.ts';
+for(const [w,h] of [[1366,768],[844,390]] as const)for(const ids of [['me','b'],['me','b','c','d','e']])test(`summary strips at ${w}×${h} with ${ids.length} seats`,()=>{
+ const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,3]))),hand=handBox(l,7);
+ for(const s of l.seats){const b=s.summary;assert.ok(inside(b,w,h),`${s.id} inside ${JSON.stringify(b)}`);assert.equal(overlap(b,hand),0,`${s.id} clear of the hand`);assert.equal(b.w,s.board.w);
+  for(const o of l.seats){for(const x of [o.person,...o.items,o.board,o.status])assert.equal(overlap(b,x),0,`${s.id} clear of ${o.id}`);
+   if(!o.me)assert.equal(overlap(b,fan(o.backs,o.back,8).box),0,`${s.id} clear of ${o.id}'s eight backs`);
+   if(o!==s)assert.equal(overlap(b,o.summary),0,`${s.id}/${o.id} strips`);}}
+});
