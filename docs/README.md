@@ -11,7 +11,7 @@ Aggiornato al **29 ottobre 2026**.
 
 | Ambito | Stato | Fonte |
 |---|---|---|
-| Regolamento | Versione **1.8** (28 ottobre 2026): rispetto alla base I22 (1.6) aggiunge R07a, ruolo descrittivo e guadagni a sé di ogni carta nel catalogo (O14, 1.7), e vieta «/» nell'identificativo dei mazzi personalizzati (R02, 1.8); nessun effetto cambiato | [game-rules.md](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17) |
+| Regolamento | Versione **1.9** (29 ottobre 2026): rispetto alla base I22 (1.6) aggiunge R07a, ruolo descrittivo e guadagni a sé di ogni carta nel catalogo (O14, 1.7), vieta «/» nell'identificativo dei mazzi personalizzati (R02, 1.8) e aggiunge a R07a il danno nominale di ogni carta (A1 del piano C3, 1.9); nessun effetto cambiato | [game-rules.md](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17) |
 | Versione base | Candidato `I22-3e71300e057687ba` **approvato** dal proprietario il 26 ottobre 2026; roadmap della base conclusa e archiviata | [report I22](reports/i22-report.md#approvazione), [roadmap archiviata](history/roadmap-base-i22.md) |
 | Client giocabili | `client-debug/` Angular, completo; `client-web/` animato (PixiJS/TypeScript, React/HTML, Vite) collegato al server, con la parità del debug; CLI per gli scenari automatici | [client-web](../client-web/README.md), [client-debug](../client-debug/README.md), [CLI](cli.md) |
 | C0 | **Chiusa** il 27 ottobre 2026, con deroga sulla risposta al tocco (116 ms contro 100) e landscape obbligatorio; scena sintetica congelata in `client-c0/revision/` | [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti) |
@@ -36,7 +36,7 @@ Documenti da seguire per lavorare sul progetto nello stato attuale.
 | [AGENTS.md](../AGENTS.md), [CONTRIBUTING.md](../CONTRIBUTING.md) | Regole di modifica e **verifiche obbligatorie** (fonte unica dei comandi di verifica) |
 | [Guida locale](setup.md) | Installazione, avvio, dati locali, verifiche e candidato I22 |
 | [CLI](cli.md) | Client testuale per scenari applicativi |
-| [Regolamento 1.8](game-rules.md) | Fonte normativa; la copia client è controllata da `scripts/check-rules.py` |
+| [Regolamento 1.9](game-rules.md) | Fonte normativa; la copia client è controllata da `scripts/check-rules.py` |
 | [Decisioni del proprietario](open-questions.md) | Decisioni Q/R recepite; le note datate sono storiche |
 | [Archivio partite](match-archive.md) | Contratto corrente di journal, export e chiusura al riavvio |
 | [Pubblicazione](publishing.md) | Identità Git, contenuti esclusi, verifiche GitHub |

@@ -1,6 +1,7 @@
 """Read-only checks: published rules and catalog must match the reviewed baseline."""
 from pathlib import Path
 import json
+import re
 import sqlite3
 
 root = Path(__file__).resolve().parent.parent
@@ -55,15 +56,36 @@ for entry in entries:
     else:
         assert role in role_names, entry['class'] + ': unknown role ' + role
         assert [entry['role'], entry['gains']] == [role, gains], entry['class'] + ': role or gains differ from R07a'
-roles_contract = ['\t'.join([e['class'], e['role'], e['gains']]) for e in expected['cards'] + expected['tokens']]
+# R07a 1.9: nominal damage types, also descriptive. Checked against the Damage each card's code builds;
+# the only exception listed is delayed timer damage, which R07a excludes by name.
+damage_names = ['HIT', 'CUT', 'POISON']
+damages = {}
+for line in role_section.split('### Danno nominale', 1)[1].splitlines():
+    fields = [part.strip() for part in line.strip('|').split('|')]
+    if line.startswith('| ') and len(fields) == 2 and fields[0] != 'Carta':
+        damages[fields[0]] = fields[1]
+assert list(damages) == list(roles), 'R07a damage table must list the R07 set in order'
+excluded_by_rules = {'com.items.MarvelousCocktail': {'POISON'}}
+for entry in entries:
+    damage = damages[entry['class'].split('.')[-1]]
+    if entry['type'] == 'Personaggio':
+        assert damage == '—' and 'damage' not in entry, entry['class'] + ': characters have no damage'
+        continue
+    kinds = [] if damage == '—' else damage.split(', ')
+    assert kinds == [k for k in damage_names if k in kinds], entry['class'] + ': unknown, repeated or unordered damage ' + damage
+    assert entry['damage'] == damage, entry['class'] + ': damage differs from R07a'
+    code = (root / 'server/src/main/java/com/gsc/bm/model/cards' / (entry['class'].replace('.', '/') + '.java')).read_text(encoding='utf-8')
+    built = set(re.findall(r'new Damage\(\s*Damage\.DamageType\.(\w+)', code)) - excluded_by_rules.get(entry['class'], set())
+    assert built == set(kinds), entry['class'] + ': R07a damage ' + damage + ' differs from code ' + str(sorted(built))
+roles_contract = ['\t'.join([e['class'], e['role'], e['gains'], e['damage']]) for e in expected['cards'] + expected['tokens']]
 assert '\n'.join(roles_contract) + '\n' == (root / 'server/src/test/resources/rules-card-roles.tsv').read_text(encoding='utf-8'), 'Role test contract differs from R07a'
 types = ['\t'.join([entry['class'], entry['type'], entry.get('subtype', '—')]) for entry in entries]
 assert '\n'.join(types) + '\n' == (root / 'server/src/test/resources/rules-card-types.tsv').read_text(encoding='utf-8'), 'Type test contract differs'
 assert len(expected['cards']) == 37 and len(expected['characters']) == 2 and len(expected['tokens']) == 1, 'Set inventory differs'
 with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
-    actual = [{'class': r[0], 'name': r[1], 'description': r[2], 'role': r[3], 'gains': r[4]} for r in db.execute(
-        'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION,T_GUI_ROLE,T_GUI_GAINS from CRD001_GUI order by C_REF_CLASS')]
-    assert actual == [{key: card[key] for key in ('class', 'name', 'description', 'role', 'gains')} for card in expected['cards']], 'Card catalog differs from regulation annex'
+    actual = [{'class': r[0], 'name': r[1], 'description': r[2], 'role': r[3], 'gains': r[4], 'damage': r[5]} for r in db.execute(
+        'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION,T_GUI_ROLE,T_GUI_GAINS,T_GUI_DAMAGE from CRD001_GUI order by C_REF_CLASS')]
+    assert actual == [{key: card[key] for key in ('class', 'name', 'description', 'role', 'gains', 'damage')} for card in expected['cards']], 'Card catalog differs from regulation annex'
     characters = [{'class': r[0], 'name': r[1], 'type': 'Personaggio'} for r in db.execute(
         'select C_REF_CLASS,T_GUI_NAME from CRD003_CHARACTERS order by C_REF_CLASS')]
     assert characters == expected['characters'], 'Character catalog differs from regulation annex'
@@ -72,4 +94,4 @@ with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() 
         assert actual == expected[key], table + ' differs from regulation annex'
     assert db.execute('pragma integrity_check').fetchone()[0] == 'ok'
     assert not db.execute('pragma foreign_key_check').fetchall()
-print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli R07a, testi e starter coerenti; SQLite integro.')
+print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli e danno nominale R07a, testi e starter coerenti; SQLite integro.')

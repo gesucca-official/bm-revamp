@@ -1,6 +1,6 @@
 # Piano C3 — Rendere leggibile e soddisfacente la risoluzione
 
-29 ottobre 2026. Regolamento **1.8**, [roadmap del client](client-roadmap.md)
+29 ottobre 2026. Regolamento **1.8** (1.9 dopo [A1](#attività-separate)), [roadmap del client](client-roadmap.md)
 versione 24. **Solo piano:** nessun codice client, nessuna modifica a regole,
 server, protocollo, catalogo o `client-debug`. C0, C1 e C2 sono chiuse; C3 parte
 su istruzione del proprietario, **un blocco alla volta**. Stato corrente
@@ -111,7 +111,7 @@ incompleto), **manca**.
 | Oggetti consumati, rubati, distrutti, comparsi | parziale: solo trasferimento uno a uno | oggetti per posto + `TARGET_ITEM` | C3-4 |
 | Scarto e pesca osservabili | manca | propria mano, `DISCARD_ONE`, conteggi altrui | C3-4 |
 | Effetti di fine turno | parziale: solo conteggio e testo | `timeBasedEffects` (chi), testo | C3-4 |
-| Effetti per tipo di danno (O7) | manca | non pubblicato: serve A1 | C3-5 |
+| Effetti per tipo di danno (O7) | manca | campo `damage` della carta (A1, regolamento 1.9) | C3-5 |
 | Morte, forfait ed esito | c'è come pannello; nessuna enfasi nel round | `dead`, `forfeits`, `over`, `winner` | C3-4, C3-5 |
 | Report dell'ultimo round | c'è: riepilogo di 6 s e «Ultimo turno» con il testo del server | come sopra | C3-6 |
 | Viste ripetute e stesso turno | parziale: K1 | `gameId`, `turn` | C3-2 |
@@ -371,6 +371,20 @@ registrate e assegnate, non risolte in C3.
   motivazione. Il proprietario decide i casi ambigui: BrokenBeerBottle che converte
   i colpi in tagli, il veleno ritardato di Marvelous Cocktail; il veleno di fine
   turno è R06 e non una carta. Nessun effetto cambia.
+
+  **Fatta il 29 ottobre 2026 (regolamento 1.9).** Sottosezione «Danno nominale»
+  di [R07a](game-rules.md#danno-nominale-19): i tipi di danno che la carta infligge
+  quando si risolve. Casi ambigui decisi dal proprietario: hanno «—»
+  BrokenBeerBottle (converte, non infligge), le difese con `impactedProperty`,
+  MarvelousCocktail (il veleno arriva dal timer), WhatchaDoin (effetto replicato) e
+  LethalHeroinDose (perdita di HEALTH, non un danno R05); il veleno di fine turno
+  resta R06. Oggi solo HIT e CUT compaiono (11 carte HIT, PatheticBlade CUT); nessuna
+  carta ha più tipi o POISON, ma la forma li ammette.
+  **Forma esposta dal server per C3-5:** campo `damage` della carta JSON, accanto a
+  `role` e `gains`: stringa `"HIT"`, `"CUT"`, `"POISON"`, più tipi in ordine
+  HIT, CUT, POISON separati da `", "` (es. `"HIT, CUT"`), oppure `"—"` per nessuno.
+  Assente sui server precedenti. In `contracts.ts` C3-5 potrà aggiungere
+  `damage?: string | null` accanto a `role` e `gains`; i personaggi non lo hanno.
 - **A2 — Clock della mossa più lungo** (eventuale, indicato dal proprietario con D10).
   Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino a 5 s tolgono troppo
   tempo per scegliere. Cambia R06 (clock di 30 s, regolamento 1.5): prima il

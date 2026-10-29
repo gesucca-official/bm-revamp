@@ -28,6 +28,9 @@ class CatalogRuntimeTest extends SqliteContextSupport {
             var loaded = (com.gsc.bm.model.cards.AbstractCard) card;
             assertEquals(row.getGuiRole(), loaded.getRole()); assertEquals(row.getGuiGains(), loaded.getGains());
             assertTrue(java.util.Set.of("DAMAGE","DEFENSE","RESOURCES","COUNTER","DISRUPT","ITEMS","OTHER").contains(loaded.getRole()));
+            // R07a 1.9 nominal damage travels the same way.
+            assertEquals(row.getGuiDamage(), loaded.getDamage());
+            assertTrue(loaded.getDamage().matches("—|(HIT|CUT|POISON)(, (HIT|CUT|POISON))*"), loaded.getDamage());
         }));
     }
     @ParameterizedTest @ValueSource(strings = {"bruiser.character.BigBadBruiser", "junkie.character.ToxicJunkie"})

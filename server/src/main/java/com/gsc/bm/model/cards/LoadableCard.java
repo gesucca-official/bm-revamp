@@ -12,4 +12,6 @@ public interface LoadableCard extends Card {
 
     void setGuiRole(String role, String gains);
 
+    void setGuiDamage(String damage);
+
 }

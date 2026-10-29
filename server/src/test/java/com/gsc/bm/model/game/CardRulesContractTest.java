@@ -52,6 +52,8 @@ class CardRulesContractTest {
         var token = new com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle();
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[1], token.getRole());
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[2], token.getGains());
+        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[3], token.getDamage());
+        assertEquals("—", token.getDamage(), "the conversion is not the token's own damage (R07a 1.9)");
         var repo = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRepository.class);
         var record = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRecord.class);
         org.mockito.Mockito.when(repo.findById("bruiser.HealingBlow")).thenReturn(Optional.of(record));
@@ -59,11 +61,30 @@ class CardRulesContractTest {
         org.mockito.Mockito.when(record.getGuiDescription()).thenReturn("");
         org.mockito.Mockito.when(record.getGuiRole()).thenReturn(roles.get("bruiser.HealingBlow")[1]);
         org.mockito.Mockito.when(record.getGuiGains()).thenReturn(roles.get("bruiser.HealingBlow")[2]);
+        org.mockito.Mockito.when(record.getGuiDamage()).thenReturn(roles.get("bruiser.HealingBlow")[3]);
         var factory = new com.gsc.bm.service.factories.CardFactoryServiceImpl(repo,
                 org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardKeywordsRepository.class));
         var blow = (com.gsc.bm.model.cards.AbstractCard) factory.craftCard("bruiser.HealingBlow");
         assertEquals("DAMAGE", blow.getRole());
         assertEquals("—", blow.getGains());
+        assertEquals("HIT", blow.getDamage());
+    }
+
+    /** R07a 1.9 nominal damage: one of the allowed forms for every card and the token, never for characters. */
+    @Test void r07a_damageHasTheRegulationForm() throws IOException {
+        List<String[]> rows;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getResourceAsStream("/rules-card-roles.tsv")), StandardCharsets.UTF_8))) {
+            rows = reader.lines().map(line -> line.split("\t", -1)).collect(Collectors.toList());
+        }
+        assertEquals(38, rows.size());
+        for (String[] row : rows) {
+            assertEquals(4, row.length, row[0]);
+            assertTrue(row[3].matches("—|(HIT|CUT|POISON)(, (HIT|CUT|POISON))*"), row[0] + ": " + row[3]);
+        }
+        assertEquals("CUT", rows.stream().filter(r -> r[0].equals("junkie.character.PatheticBlade")).findFirst().orElseThrow()[3]);
+        assertEquals("—", rows.stream().filter(r -> r[0].equals("com.items.MarvelousCocktail")).findFirst().orElseThrow()[3],
+                "timer poison is excluded by R07a 1.9");
     }
 
     /** Fixed expectations transcribed from regulation R07, never regenerated from production code. */

@@ -1,38 +1,38 @@
-bruiser.BadEducation	OTHER	—
-bruiser.BreakYourToy	ITEMS	—
-bruiser.CantFeelAnything	DEFENSE	+10 A
-bruiser.ExtremelyViolentBlow	DAMAGE	—
-bruiser.Glare	OTHER	+15 V, +15 A
-bruiser.HealingBlow	DAMAGE	—
-bruiser.MadeOfStone	DEFENSE	+10 V
-bruiser.SeagullFly	DAMAGE	—
-bruiser.SickeningBlow	DAMAGE	—
-bruiser.StunningBlow	DAMAGE	—
-bruiser.SuperImpact	DAMAGE	—
-bruiser.WhatchaDoin	COUNTER	—
-bruiser.YouStop	COUNTER	—
-bruiser.character.LittleRage	DEFENSE	+5 V
-bruiser.character.LittleSmack	DAMAGE	+5 A
-com.Grab	ITEMS	—
-com.ShuffleFeet	ITEMS	—
-com.Steal	ITEMS	—
-com.basic.BruiserGrab	ITEMS	—
-com.basic.ToxicGrab	ITEMS	—
-com.items.AnotherRottenBeer	RESOURCES	+10 L
-com.items.CocktailOnTheGround	RESOURCES	+20 V, +15 L, +5 T
-com.items.MarvelousCocktail	RESOURCES	+20 L, +20 T
-com.items.RottenBeer	RESOURCES	+5 L
-com.last.Struggle	DAMAGE	—
-junkie.AmphetamineReflexes	COUNTER	—
-junkie.BadTrip	RESOURCES	+x T
-junkie.BeggingMoney	ITEMS	—
-junkie.Cough	DISRUPT	—
-junkie.EverythingIsDrug	OTHER	+20 T
-junkie.GoingBerserk	DAMAGE	—
-junkie.LethalHeroinDose	RESOURCES	+x T
-junkie.MethDrivenRage	DAMAGE	—
-junkie.PervertedMetabolism	RESOURCES	+x H
-junkie.ToxicBloodDrain	DISRUPT	—
-junkie.character.PatheticBlade	DAMAGE	+5 T
-junkie.character.RottenSmile	DISRUPT	+5 A
-com.tokens.BrokenBeerBottle	OTHER	—
+bruiser.BadEducation	OTHER	—	HIT
+bruiser.BreakYourToy	ITEMS	—	—
+bruiser.CantFeelAnything	DEFENSE	+10 A	—
+bruiser.ExtremelyViolentBlow	DAMAGE	—	HIT
+bruiser.Glare	OTHER	+15 V, +15 A	—
+bruiser.HealingBlow	DAMAGE	—	HIT
+bruiser.MadeOfStone	DEFENSE	+10 V	—
+bruiser.SeagullFly	DAMAGE	—	HIT
+bruiser.SickeningBlow	DAMAGE	—	HIT
+bruiser.StunningBlow	DAMAGE	—	HIT
+bruiser.SuperImpact	DAMAGE	—	HIT
+bruiser.WhatchaDoin	COUNTER	—	—
+bruiser.YouStop	COUNTER	—	—
+bruiser.character.LittleRage	DEFENSE	+5 V	—
+bruiser.character.LittleSmack	DAMAGE	+5 A	HIT
+com.Grab	ITEMS	—	—
+com.ShuffleFeet	ITEMS	—	—
+com.Steal	ITEMS	—	—
+com.basic.BruiserGrab	ITEMS	—	—
+com.basic.ToxicGrab	ITEMS	—	—
+com.items.AnotherRottenBeer	RESOURCES	+10 L	—
+com.items.CocktailOnTheGround	RESOURCES	+20 V, +15 L, +5 T	—
+com.items.MarvelousCocktail	RESOURCES	+20 L, +20 T	—
+com.items.RottenBeer	RESOURCES	+5 L	—
+com.last.Struggle	DAMAGE	—	HIT
+junkie.AmphetamineReflexes	COUNTER	—	—
+junkie.BadTrip	RESOURCES	+x T	—
+junkie.BeggingMoney	ITEMS	—	—
+junkie.Cough	DISRUPT	—	—
+junkie.EverythingIsDrug	OTHER	+20 T	—
+junkie.GoingBerserk	DAMAGE	—	HIT
+junkie.LethalHeroinDose	RESOURCES	+x T	—
+junkie.MethDrivenRage	DAMAGE	—	HIT
+junkie.PervertedMetabolism	RESOURCES	+x H	—
+junkie.ToxicBloodDrain	DISRUPT	—	—
+junkie.character.PatheticBlade	DAMAGE	+5 T	CUT
+junkie.character.RottenSmile	DISRUPT	+5 A	—
+com.tokens.BrokenBeerBottle	OTHER	—	—

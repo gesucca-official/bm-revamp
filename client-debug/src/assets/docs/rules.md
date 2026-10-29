@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.8 — 28 ottobre 2026**. Fonte normativa del gioco.
+Versione **1.9 — 29 ottobre 2026**. Fonte normativa del gioco.
 
 ## R00 — Autorità
 
@@ -248,6 +248,63 @@ I guadagni elencano solo le risorse aggiunte a chi gioca o consuma la carta, con
 
 Le carte azione e oggetto portano ruolo e guadagni nel catalogo SQLite; il token, che non è nel catalogo, li dichiara nella propria classe come il nome visualizzato.
 
+### Danno nominale (1.9)
+
+Ogni carta ha anche un **danno nominale**: i tipi di danno di R05 (HIT, CUT, POISON) che la carta stessa infligge quando si risolve, a chi la gioca o al bersaglio, separati da virgola se sono più di uno; — se nessuno. Come ruolo e guadagni è un campo descrittivo: non è un effetto e non cambia la risoluzione. Il danno effettivo può avere un altro tipo per una conversione R05 o non avvenire, per esempio se la mossa è annullata. In caso di dubbio prevale l'effetto di R07. I personaggi non si giocano e non hanno danno nominale.
+
+Non entrano nel danno nominale:
+
+- il veleno di fine turno da TOXICITY (R06), quindi nemmeno le carte che aggiungono TOXICITY;
+- i danni dei timer, che arrivano dopo la risoluzione: MarvelousCocktail ha — anche se il suo timer infligge 20 POISON;
+- le perdite di HEALTH che non sono danni R05: LethalHeroinDose ha —;
+- gli stati che modificano il danno inflitto o ricevuto: LittleRage, CantFeelAnything, Glare e MadeOfStone hanno —; BrokenBeerBottle ha —, perché converte i colpi di chi lo porta ma di suo non infligge danno;
+- gli effetti presi da altre carte: quello replicato da WhatchaDoin e quello dell'oggetto consumato da una Grab.
+
+| Carta | Danno nominale |
+|---|---|
+| BigBadBruiser | — |
+| ToxicJunkie | — |
+| LittleSmack | HIT |
+| LittleRage | — |
+| PatheticBlade | CUT |
+| RottenSmile | — |
+| BruiserGrab | — |
+| ToxicGrab | — |
+| Struggle | HIT |
+| Grab | — |
+| Steal | — |
+| ShuffleFeet | — |
+| BadEducation | HIT |
+| BreakYourToy | — |
+| CantFeelAnything | — |
+| ExtremelyViolentBlow | HIT |
+| Glare | — |
+| HealingBlow | HIT |
+| MadeOfStone | — |
+| SeagullFly | HIT |
+| SickeningBlow | HIT |
+| StunningBlow | HIT |
+| SuperImpact | HIT |
+| YouStop | — |
+| WhatchaDoin | — |
+| AmphetamineReflexes | — |
+| BadTrip | — |
+| BeggingMoney | — |
+| Cough | — |
+| EverythingIsDrug | — |
+| GoingBerserk | HIT |
+| LethalHeroinDose | — |
+| MethDrivenRage | HIT |
+| PervertedMetabolism | — |
+| ToxicBloodDrain | — |
+| CocktailOnTheGround | — |
+| RottenBeer | — |
+| AnotherRottenBeer | — |
+| MarvelousCocktail | — |
+| BrokenBeerBottle | — |
+
+Il danno nominale sta nel catalogo SQLite accanto a ruolo e guadagni; il token lo dichiara nella propria classe.
+
 ## R08 — Informazioni e confini
 
 Le viste di gioco mostrano la mano solo al proprietario, risorse e oggetti a tutti; non mostrano l'ordine del mazzo. Questo non certifica sicurezza di API debug e log. La collezione espone l'intero catalogo a tutti, senza economia o proprietà individuale.
@@ -263,6 +320,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.9 — 29 ottobre 2026, A1 (C3/D2, O7):** aggiunto a R07a il danno nominale di ogni carta e del token: i tipi di danno HIT, CUT o POISON che la carta infligge quando si risolve, più tipi o nessuno, conservati nel catalogo SQLite e nell'allegato accanto a ruolo e guadagni. Decisione del proprietario (D2 del piano C3 e casi ambigui confermati il 29 ottobre 2026): contano solo i danni inflitti dalla carta alla risoluzione; hanno — BrokenBeerBottle (conversione), le difese, MarvelousCocktail (veleno del timer), WhatchaDoin (effetto replicato) e LethalHeroinDose (perdita di HEALTH); il veleno di fine turno è R06. Motivazione: rendere riconoscibile il tipo di danno nel client web per gli effetti di C3-5 (osservazione O7), nello stesso posto delle altre informazioni sulle carte, come per O14. Campo descrittivo: nessun effetto, costo, bersaglio, priorità, starter o bilanciamento cambia.
 
 - **1.8 — 28 ottobre 2026, C2b-4:** l'identificativo di un mazzo personalizzato non può contenere «/». Decisione del proprietario. Motivazione: l'avvio open 1vCom porta l'identificativo come segmento della destinazione `/app/game/open/1vCom/join/{username}/{deckId}`; con «/» il mazzo si salvava ma la richiesta di avvio veniva rifiutata dal controllo delle destinazioni, quindi il mazzo non era giocabile. Il server rifiuta ora il salvataggio come gli altri mazzi non validi. Nessuna modifica a carte, effetti, starter, bilanciamento o agli altri requisiti dei mazzi.
 

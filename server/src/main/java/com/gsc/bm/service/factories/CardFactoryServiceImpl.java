@@ -49,6 +49,7 @@ public class CardFactoryServiceImpl implements CardFactoryService {
         card.setGuiImage(rec.getGuiImage());
         card.setGuiSprite(rec.getGuiSprite());
         card.setGuiRole(rec.getGuiRole(), rec.getGuiGains());
+        card.setGuiDamage(rec.getGuiDamage());
     }
 
     private String buildHtml(Card c, String d) {
