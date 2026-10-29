@@ -37,6 +37,10 @@ class DevelopmentAccountsTest {
         AuthServiceImpl auth = new AuthServiceImpl(mail, encoder, reopened);
         assertEquals("devAlice", auth.getAuthTokenOrFail("devAlice", "local-alice").getName());
         assertEquals("devBob", auth.getAuthTokenOrFail("devBob", "local-bob").getName());
+        for (String name : new String[]{"Carol", "Dave", "Erin"}) {
+            assertEquals("dev" + name, auth.getAuthTokenOrFail("dev" + name, "local-" + name.toLowerCase()).getName());
+        }
+        assertThrows(BadCredentialsException.class, () -> auth.getAuthTokenOrFail("devCarol", "local-alice"));
         assertThrows(BadCredentialsException.class, () -> auth.getAuthTokenOrFail("devAlice", "wrong"));
         assertThrows(BadCredentialsException.class, () -> auth.getAuthTokenOrFail("unknown", "wrong"));
         verifyNoInteractions(mail);

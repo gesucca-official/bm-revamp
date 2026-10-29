@@ -35,7 +35,8 @@ python scripts/bootstrap.py
 ```
 
 Aprire `http://localhost:4200/hub`. Il provisioning è locale e facoltativo;
-account sintetici: `devAlice/local-alice`, `devBob/local-bob`.
+account sintetici: `devAlice/local-alice`, `devBob/local-bob`, `devCarol/local-carol`,
+`devDave/local-dave`, `devErin/local-erin` (cinque umani per le prove FFA).
 Il primo download richiede rete; `-Offline` richiede le cache Maven/npm già popolate.
 Le cache, `node_modules`, `target` e `dist` sono escluse da Git e ricostruibili.
 

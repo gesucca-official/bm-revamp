@@ -34,6 +34,9 @@ public class DevelopmentAccounts implements ApplicationRunner {
         }
         seed("devAlice", "local-alice");
         seed("devBob", "local-bob");
+        seed("devCarol", "local-carol");
+        seed("devDave", "local-dave");
+        seed("devErin", "local-erin");
     }
 
     private void seed(String username, String password) {

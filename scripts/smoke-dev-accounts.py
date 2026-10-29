@@ -36,7 +36,7 @@ for number in (1, 2):
             while True:
                 text = log.read_text(encoding='utf-8', errors='replace')
                 match = re.search(r'Tomcat started on port\(s\): (\d+)', text)
-                ready = match and (number == 2 or 'Development account devBob: created' in text)
+                ready = match and (number == 2 or 'Development account devErin: created' in text)
                 if ready:
                     break
                 if process.poll() is not None or time.monotonic() > deadline:
@@ -45,6 +45,7 @@ for number in (1, 2):
             base = 'http://127.0.0.1:' + match.group(1) + '/api/rest/v1/sign-in/validate'
             for username, password, expected in [
                 ('devAlice', 'local-alice', True), ('devBob', 'local-bob', True),
+                ('devCarol', 'local-carol', True), ('devDave', 'local-dave', True), ('devErin', 'local-erin', True),
                 ('devAlice', 'wrong', False), ('unknown', 'wrong', False)]:
                 request = urllib.request.Request(base, data=json.dumps({
                     'username': username, 'password': password}).encode(),
@@ -53,11 +54,11 @@ for number in (1, 2):
                     assert json.load(response) is expected
             with sqlite3.connect(database) as db:
                 rows = db.execute('SELECT C_USERNAME,T_SALTED_HASH,T_EMAIL,T_ROLE FROM USR001_CREDENTIALS ORDER BY C_USERNAME').fetchall()
-                assert len(rows) == 2 and all(r[1].startswith('$2') and r[2] is None and r[3] == 'USER' for r in rows)
+                assert len(rows) == 5 and all(r[1].startswith('$2') and r[2] is None and r[3] == 'USER' for r in rows)
                 if hashes is not None:
                     assert rows == hashes
                 hashes = rows
-            print('PASS startup', number, ': two valid identities; invalid/unknown rejected; persistent BCrypt records', flush=True)
+            print('PASS startup', number, ': five valid identities; invalid/unknown rejected; persistent BCrypt records', flush=True)
         finally:
             process.terminate()
             try:

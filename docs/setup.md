@@ -42,7 +42,8 @@ certifica un servizio pronto per l'esposizione pubblica.
 ```
 
 Aprire `http://localhost:4200/hub`. Gli account sintetici facoltativi sono
-`devAlice/local-alice` e `devBob/local-bob`; il provisioning non sovrascrive
+`devAlice/local-alice`, `devBob/local-bob`, `devCarol/local-carol`,
+`devDave/local-dave` e `devErin/local-erin`; il provisioning non sovrascrive
 identità esistenti. Ai riavvii basta `./scripts/dev.ps1 -Task Server`.
 Fermare i processi con Ctrl+C prima di ricompilare. Non usare Procfile,
 `start:heroku` o `server.js` legacy per l'avvio locale. [Guida CLI](cli.md).
