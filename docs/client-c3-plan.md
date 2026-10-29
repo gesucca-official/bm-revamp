@@ -1,14 +1,14 @@
 # Piano C3 — Rendere leggibile e soddisfacente la risoluzione
 
 29 ottobre 2026. Regolamento **1.8**, [roadmap del client](client-roadmap.md)
-versione 23. **Solo piano:** nessun codice client, nessuna modifica a regole,
+versione 24. **Solo piano:** nessun codice client, nessuna modifica a regole,
 server, protocollo, catalogo o `client-debug`. C0, C1 e C2 sono chiuse; C3 parte
 su istruzione del proprietario, **un blocco alla volta**. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
-**Decisioni D1–D4 confermate dal proprietario il 29 ottobre 2026; D5–D11 sono
-proposte in attesa di conferma.** Una modifica di regole e catalogo (A1) è
-un'attività separata che parte dal regolamento.
+**Decisioni D1–D11 confermate dal proprietario il 29 ottobre 2026**, D10 con una
+durata più lunga della proposta: fino a 5 s per round. Le modifiche di regole e
+catalogo (A1, eventualmente A2) sono attività separate che partono dal regolamento.
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -146,7 +146,8 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
    risolvono anche dopo la morte dell'autore (R04).
 8. **Privacy:** nessun fronte avversario fuori da quanto `resolvedMoves` identifica;
    dorsi dai conteggi.
-9. **Durata:** di norma entro 2 s per round, anche con cinque mosse in FFA.
+9. **Durata:** fino a 5 s per round (D10), anche con cinque mosse in FFA; resta
+   valida la regola 4, quindi la sequenza non toglie la possibilità di scegliere.
 
 ## Blocchi
 
@@ -274,7 +275,8 @@ misura di C0 vale per la scena sintetica, va ripresa con le frecce).
    ogni risorsa (D5), poi resta il riepilogo statico; morti e forfait ricevono
    l'enfasi.
 
-Le mosse continuano dopo una morte (regola 7). Durata entro 2 s (D10), interrompibile.
+Le mosse continuano dopo una morte (regola 7). Durata fino a 5 s (D10),
+interrompibile.
 
 **Completamento verificabile (partite reali, entrambe le misure).** A ogni round il
 numero di calate, timbri, gettoni e oggetti animati coincide con i fatti del modello;
@@ -283,12 +285,16 @@ partita reale con i mazzi sintetici di D8: **annullamento**, **oggetto consumato
 oggetto rubato**, **oggetto scomparso prima della risoluzione** (se non si ottiene,
 unità con viste registrate dichiarate come limite), **morte con mossa già inviata**,
 **fine turno letale**, bound con scarto, oggetto pescato sul tavolo. FFA a cinque
-con cinque mosse entro 2 s. Catture dei passaggi.
+con cinque mosse entro 5 s. Durata registrata a ogni round e, nelle partite fra umani,
+tempo residuo del clock di 30 s alla fine della sequenza (dato per A2). Catture dei
+passaggi.
 
 **File toccati.** `src/scene.ts`, `src/resolution.ts` (linea temporale pura),
 test, verifica, documenti comuni.
 
-**Rischi.** Leggibilità di cinque calate in 2 s; costo nominale diverso da quello
+**Rischi.** Una sequenza lunga riduce il tempo di lettura prima del clock di 30 s
+nelle partite fra umani: l'input resta libero (regola 4) e il dato raccolto decide
+A2. Costo nominale diverso da quello
 pagato con stati di risorsa (si mostra il nominale, la variazione vera arriva nel
 complessivo); prestazioni su iPhone (misura di C4).
 
@@ -345,7 +351,8 @@ giudizio del proprietario su desktop e iPhone (D11). La prova umana del ritmo re
 nella sessione finale C5, come da roadmap.
 
 **Completamento verificabile.** Tutte le verifiche verdi sulla stessa build; regole
-1–9 verificate su partite reali e dichiarate per ciascun blocco; giudizio del
+1–9 verificate su partite reali e dichiarate per ciascun blocco; durate delle
+sequenze e tempo residuo del clock riassunti per decidere se proporre A2; giudizio del
 proprietario registrato.
 
 **File toccati.** Documenti, evidenze, correzioni puntuali.
@@ -364,6 +371,11 @@ registrate e assegnate, non risolte in C3.
   motivazione. Il proprietario decide i casi ambigui: BrokenBeerBottle che converte
   i colpi in tagli, il veleno ritardato di Marvelous Cocktail; il veleno di fine
   turno è R06 e non una carta. Nessun effetto cambia.
+- **A2 — Clock della mossa più lungo** (eventuale, indicato dal proprietario con D10).
+  Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino a 5 s tolgono troppo
+  tempo per scegliere. Cambia R06 (clock di 30 s, regolamento 1.5): prima il
+  regolamento con versione e motivazione, poi server, test e copia del debug. Non è
+  in C3.
 - **Eventi strutturati dal server:** non pianificati (D1). Si riconsiderano solo se
   la prova C5 mostra che il round resta incomprensibile con i dati certi.
 - **Osservazione da valutare a parte, senza conclusioni ora:** nella FFA osservata,
@@ -373,8 +385,8 @@ registrate e assegnate, non risolte in C3.
 
 ## Decisioni del proprietario
 
-In grassetto la raccomandazione. D1–D4 sono **confermate** il 29 ottobre 2026; D5–D11
-sono proposte da confermare.
+In grassetto la scelta. Tutte **confermate** dal proprietario il 29 ottobre 2026:
+D1–D4 prima della stesura, D5–D11 dopo; D10 con una modifica rispetto alla proposta.
 
 | ID | Domanda | Opzioni | Raccomandazione |
 |---|---|---|---|
@@ -382,13 +394,13 @@ sono proposte da confermare.
 | D2 | Fonte del tipo di danno per gli effetti | campo descrittivo nel catalogo (A1, regolamento 1.9) / solo ruolo R07a / tabella nel client | **Campo nel catalogo** — confermata, come O14: le informazioni sulle carte restano in un posto. Senza A1, C3-5 ripiega sul ruolo. |
 | D3 (O6) | Frecce in FFA | posti ammessi, oggetti contornati / ogni bersaglio / solo verso il bersaglio sotto il puntatore | **Posti ammessi, oggetti contornati** — confermata. |
 | D4 | Dopo un salto di turni | stato finale e testo / animare l'ultimo round senza numeri | **Stato finale e testo** — confermata. |
-| D5 | Barre e numeri durante la sequenza | dal valore precedente al finale nel passo delle variazioni / subito il valore finale come oggi | **Dal precedente al finale** nel passo 5, solo con round contiguo; con movimento ridotto, salto o interruzione subito il finale. Le decisioni usano sempre la vista finale. |
-| D6 | Quanto resta il riepilogo statico | fino alla prima scelta di carta o al round successivo / tempo fisso | **Fino alla prima scelta di carta o al round successivo**; sempre consultabile in «Ultimo turno». |
-| D7 | Lingua del report | fatti certi in italiano più testo del server invariato / tradurre le frasi del server | **Fatti in italiano più testo del server** in sezione secondaria; tradurre vorrebbe dire interpretare frasi che non sono un contratto. |
-| D8 | Casi rari su partite reali | mazzi sintetici validi per R02 salvati sul database temporaneo e usati in open 1vCom, più viste registrate per le unità / ganci di test nel server | **Mazzi sintetici e viste registrate**: per esempio molte carte di contrasto, presa e furto, tossicità alta, Banzai. Nessun cambio al server; i casi non ottenuti si dichiarano. |
-| D9 | Asset degli effetti | grafica vettoriale Pixi / nuove texture e suoni | **Vettoriale**; texture e suoni restano a C4 con provenienza e licenze. |
-| D10 | Ritmo | entro 2 s per round, ogni input lo chiude / sequenza a durata piena | **Entro 2 s**, chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. |
-| D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. |
+| D5 | Barre e numeri durante la sequenza | dal valore precedente al finale nel passo delle variazioni / subito il valore finale come oggi | **Dal precedente al finale** nel passo 5, solo con round contiguo; con movimento ridotto, salto o interruzione subito il finale. Le decisioni usano sempre la vista finale. Confermata. |
+| D6 | Quanto resta il riepilogo statico | fino alla prima scelta di carta o al round successivo / tempo fisso | **Fino alla prima scelta di carta o al round successivo**; sempre consultabile in «Ultimo turno». Confermata. |
+| D7 | Lingua del report | fatti certi in italiano più testo del server invariato / tradurre le frasi del server | **Fatti in italiano più testo del server** in sezione secondaria; tradurre vorrebbe dire interpretare frasi che non sono un contratto. Confermata. |
+| D8 | Casi rari su partite reali | mazzi sintetici validi per R02 salvati sul database temporaneo e usati in open 1vCom, più viste registrate per le unità / ganci di test nel server | **Mazzi sintetici e viste registrate**: per esempio molte carte di contrasto, presa e furto, tossicità alta, Banzai. Nessun cambio al server; i casi non ottenuti si dichiarano. Confermata. |
+| D9 | Asset degli effetti | grafica vettoriale Pixi / nuove texture e suoni | **Vettoriale**; texture e suoni restano a C4 con provenienza e licenze. Confermata. |
+| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. |
+| D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. Confermata. |
 
 ## Cosa non è in C3
 

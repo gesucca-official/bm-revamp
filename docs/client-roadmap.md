@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**29 ottobre 2026 — versione 23. C0, C1 e C2 sono chiuse; la prossima tappa è
+**29 ottobre 2026 — versione 24. C0, C1 e C2 sono chiuse; la prossima tappa è
 C3, pianificata nel [piano C3](client-c3-plan.md).** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
@@ -213,7 +213,8 @@ Questi giochi sono riferimenti visivi, non fonti di asset riutilizzabili.
    attribuibili con certezza, mantenendo il report leggibile a richiesta.
 
 Durate iniziali proposte: 100–150 ms per selezione, 200–350 ms per spostamento
-carta o impatto; sequenza totale normalmente entro 2 s. Il nuovo turno è
+carta o impatto; sequenza totale normalmente entro 2 s, portata **fino a 5 s** dal
+proprietario per C3 (D10 del [piano C3](client-c3-plan.md)). Il nuovo turno è
 utilizzabile appena la vista autorevole arriva: animazioni interrompibili,
 accelerate o saltate se ostacolano l'input, con riepilogo consultabile. Nessun
 Continue obbligatorio tra turni e nessuna pausa del clock multiplayer. Con
@@ -669,7 +670,7 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
 **Prossimo passo:** C3-1 del [piano C3](client-c3-plan.md), su istruzione del
-proprietario e dopo la conferma delle decisioni D5–D11; l'attività A1 (tipo di
+proprietario (decisioni D1–D11 confermate); l'attività A1 (tipo di
 danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -679,6 +680,10 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 24 — 29 ottobre 2026, decisioni del piano C3:** il proprietario conferma
+  D5–D11; D10 cambia: sequenza del round fino a 5 s invece di 2, per animazioni più
+  curate. Un clock della mossa più lungo resta un'eventuale attività A2 dal
+  regolamento (R06). Nessuna regola, API o servizio cambiato.
 - **Versione 23 — 29 ottobre 2026, piano C3:** [piano C3](client-c3-plan.md) in sette
   blocchi, fondato su un'osservazione del server reale su database temporaneo. Il
   proprietario conferma D1–D4: risoluzione animata con i soli dati certi, tipo di
