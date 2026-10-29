@@ -49,9 +49,11 @@ certificano l'avvio applicativo. [Guida locale](docs/setup.md),
 
 ## Conservazione
 
-I sorgenti correnti sono in `client-debug/` e `server/` (prima `bm-web-client/` e `bm-server/`). La configurazione `.gitattributes`
-conserva i byte e le terminazioni di riga originali anche nei nuovi checkout,
-per mantenere verificabili le impronte. Le due precedenti directory Git sono
+I sorgenti correnti sono in `client-debug/` e `server/` (prima `bm-web-client/` e `bm-server/`). Dal 29 ottobre 2026
+`.gitattributes` normalizza i file di testo a LF (CRLF solo per `*.cmd`/`*.bat`);
+`output/` conserva i byte originali. Le impronte storiche restano verificabili
+sulle revisioni registrate: `i22-candidate.py --verify --snapshot` legge il
+commit del candidato con `git archive`, che usa gli attributi di quel commit. Le due precedenti directory Git sono
 archiviate integralmente in `.repository-history/bm-server.git` e
 `.repository-history/bm-web-client.git`, escluse dal nuovo Git. L'archivio include
 stato iniziale, patch binarie e inventario SHA-256 dei file e dei metadati;
