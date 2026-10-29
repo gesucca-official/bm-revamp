@@ -3,7 +3,7 @@
 27 ottobre 2026. Regolamento **1.7**. C2 è avviata su istruzione esplicita del
 proprietario a partire dal primo blocco, C2a «leggibilità di base», con il piano
 confermato. C2b (1v1, FFA, code, open, editor e il resto della parità) è in corso a
-blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), **C2b-6 (profilo, amministrazione, log client e diagnostica) è fatto** ([sezione](#c2b-6--profilo-amministrazione-log-client-e-diagnostica)), C2b-7 no. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
+blocchi: **C2b-1 (modalità e code) è fatto** ([sezione](#c2b-1--modalità-e-code)), **C2b-2 (ciclo di vita in 1v1) è fatto** ([sezione](#c2b-2--ciclo-di-vita-in-1v1)), **C2b-3 (FFA a cinque) è fatto** ([sezione](#c2b-3--ffa-a-cinque)), **C2b-4 (catalogo, editor mazzi e open 1vCom) è fatto** ([sezione](#c2b-4--catalogo-editor-mazzi-e-open-1vcom)), **C2b-5 (home, regole e registrazione) è fatto** ([sezione](#c2b-5--home-regole-e-registrazione)), **C2b-6 (profilo, amministrazione, log client e diagnostica) è fatto** ([sezione](#c2b-6--profilo-amministrazione-log-client-e-diagnostica)), di **C2b-7** è fatta la parte automatica ([sezione](#c2b-7--checklist-di-parità-e-prova-umana-b)); mancano la prova umana B e il giudizio del proprietario, quindi C2 non è chiusa. Dopo C2a è fatta e chiusa O9, le illustrazioni provvisorie
 ([sezione O9](#o9--illustrazioni-provvisorie)).
 
 ## C2a — Leggibilità di base
@@ -822,3 +822,63 @@ DELETE toccano solo il database temporaneo, cancellato alla fine.
   `profile-*` (prompt nativo `profile-10…12-*-edge.png`); regressione `verify-*`, `modes-*`,
   `lifecycle-*`, `ffa-*`, `decks-*`, `public-*` e [size.json](client-c2/c2b-6/size.json)
   nella stessa cartella.
+
+## C2b-7 — Checklist di parità e prova umana B
+
+29 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
+([client-c2b-plan.md](../client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)),
+in particolare D3 (cinque account sintetici locali, commit `30b8855`) e D13 (prova B
+completa). Questo commit contiene **solo la parte automatica**. La prova umana B e il
+giudizio del proprietario non sono fatti: **C2 non è chiusa**.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Correzione emersa | **Il tavolo poteva scorrere di 14 px.** Prima esecuzione consolidata: `Verify` a 1366×768 è fallito (riepilogo di uno stato non aperto dal mouse), e di nuovo su un server temporaneo nuovo. Diagnosi: i pulsanti semantici delle carte della mano (lo strato accessibile sopra il canvas) escono dal bordo basso dello schermo (fino a y 782 su 768). Il documento diventava alto 782 px, e mettere a fuoco una di quelle carte (Tab, oppure il ritorno del fuoco dopo un'ispezione) faceva scorrere la pagina di 14 px. Il gioco restava coerente, perché `point()` usa `getBoundingClientRect`, ma il tavolo saliva lasciando una banda scura in basso. La verifica, che clicca in coordinate dello schermo, mancava il gettone. Correzione in `src/style.css`: `overflow: clip` sullo strato semantico. Dopo la correzione documento 768 px, scorrimento 0. `Verify` ha un controllo nuovo e deterministico (`checks.noScroll`). Il difetto c'era almeno da C2a (carte più grandi), non da D3. |
+| Verifiche sulla stessa build | **Tutte verdi** dopo la correzione, sulla build finale (hash di `dist` uguale prima e dopo la serie): `Verify` e `VerifyModes` su un server con database temporaneo avviato per la serie, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks`, `VerifyPublic` e `VerifyProfile` ciascuno sul proprio server temporaneo, a 1366×768 e 844×390 (14 esecuzioni, zero errori pagina); `Size`; `client-web` `Test` 104/104 (nessun test nuovo: la correzione è CSS e la copre `Verify`); `build.ps1 -Task Test -Offline` 253 server + 36 debug, verdi; `check-rules.py` passa. Contesto Spring non rieseguito: server invariato in questo blocco. Nessuna partita lasciata da prove precedenti (`resumedLeftover*` assenti). |
+| Peso | JS gzip 306934 byte (−5 rispetto a C2b-6), totale gzip 1089729 byte, texture 18876320 byte ([size.json](client-c2/c2b-7/size.json)). |
+| Checklist P01–P44 | Tutte con evidenza. Le voci ancora aperte (P04, P10, P11, P12, P27–P31, P37) citano le evidenze di questo blocco e dei precedenti; i limiti della base o dell'ambiente sono scritti nella riga ([checklist](../client-c0-parity.md)). Per P37 `VerifyDecks` controlla ora, nella partita reale senza mosse, che il menu spieghi il limite R03 (`sixInitialPlayed.menuExplainsR03`). |
+| Prova umana B | **Non fatta.** Scheda pronta: [prova-b-scheda.md](client-c2/c2b-7/prova-b-scheda.md). |
+| Emulazione / dispositivo / umano | Due misure landscape sul PC, tocco emulato in `VerifyFfa`; nessun dispositivo fisico né prova umana. |
+
+### Esecuzione consolidata (stessa build, entrambe le misure)
+
+| Verifica | 1366×768 | 844×390 |
+|---|---|---|
+| `Verify` (quick 1vCom, C1+C2a) | 2 partite (pareggio, vittoria), entrambi i personaggi; 20 rifiuti reali con scelta conservata; effetto periodico letto; legata con scarto, oggetto, drag, tocco, riordino, rientro senza SEND; 32 turni con controlli C2a; nessuno scorrimento (`noScroll`: 768/768); input p95 14,8 ms su PC | 4 partite (2 vittorie, 2 sconfitte), entrambi i personaggi; 14 rifiuti; stessi controlli; 53 turni C2a; `noScroll` 390/390; p95 14,7 ms |
+| `VerifyModes` (1v1, code, presenza) | stesso `gameId`, vittoria/sconfitta in 11 turni, viste private corrette, «Nuova partita» in 1v1, ingresso rifiutato con partita riprendibile, presenza | idem, 12 turni |
+| `VerifyLifecycle` | nove scenari di C2b-2: scadenza di mossa in 30 s, pareggio per scadenze simultanee, rientro nel termine con pending e zero SEND di mosse, rientro tardivo, abbandono idempotente, logout in partita, seconda sessione rifiutata, riavvio con ricevuta senza vista, vsCom | idem |
+| `VerifyFfa` | sette scenari di C2b-3; cinque posti controllati a ogni turno; mira sull'oggetto coperto provata con mouse **e** tocco nella passata completa | idem, mouse e tocco |
+| `VerifyDecks` | dieci scenari di C2b-4 e, nuovo, menu R03 nella partita senza mosse | idem |
+| `VerifyPublic` | undici scenari di C2b-5, portrait 390×844 compreso | idem |
+| `VerifyProfile` | tredici scenari di C2b-6 (headless) | idem |
+
+Controllo a campione: JSON letti uno per uno (`ok`, errori, chiavi citate dalla checklist), catture del
+riepilogo di uno stato, del menu R03 e degli esiti FFA guardate; differenze rispetto alle evidenze dei
+blocchi precedenti: ID di partita, carte casuali, tempi.
+
+### Limiti e residui
+
+- **Prova umana B e giudizio del proprietario non fatti**: la parte umana di C2b-7 è nella
+  [scheda](client-c2/c2b-7/prova-b-scheda.md), con avvio del server con `-SeedAccounts`, le cinque
+  credenziali, quattro scenari (duello, FFA con computer e forfait altrui, mazzo salvato, telefono con
+  `Physical`) e la tabella delle osservazioni da assegnare a C2/C3/C4.
+- **Prompt Basic nativo non ripetuto**: `VerifyProfile` è stato eseguito headless; la prova con la
+  finestra di Edge e la digitazione da tastiera (`BM_NATIVE_PROMPT=1`) prende il primo piano del desktop
+  e resta quella di C2b-6 ([catture](client-c2/c2b-6/screens/)), su un client che da allora cambia solo
+  per il ritaglio dello strato semantico.
+- **La correzione dello scorrimento** è provata a 1366×768 e 844×390 su Edge, con il fuoco messo da
+  programma su una carta che esce dal bordo; non su iPhone né con la tastiera di una persona. Il
+  difetto era intermittente in `Verify` (3 esecuzioni fallite su 15 fra serie e diagnosi, tutte con il gettone di uno stato del proprio
+  personaggio); il nuovo controllo è invece deterministico.
+- **Database locale non toccato**: tutte le prove su database temporanei. Lo stato di
+  `server/data/bm.sqlite` («Conflicting recovery sequence» in C2b-2) non è stato riprovato; la scheda
+  propone un database dedicato per la prova B.
+- Il menu del tavolo a 844×390 richiede di scorrere il dialogo per vedere la spiegazione R03 e
+  «Abbandona» ([cattura](client-c2/c2b-7/screens/decks-08b-six-initial-menu-844x390.jpg)); finitura C4.
+- Restano validi i limiti dei blocchi C2b-1…C2b-6 (registrazione positiva senza SMTP, `Deck unavailable`
+  provocato riscrivendo il frame, 403 admin solo in unità, pagine della presenza solo in unità).
+- Non provati: dispositivo fisico, iPhone a 750×292, lettore di schermo.
+- Evidenze: [c2b-7/](client-c2/c2b-7/) — `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*`, `decks-*`,
+  `public-*`, `profile-*` alle due misure, [size.json](client-c2/c2b-7/size.json), catture in `screens/`.

@@ -12,7 +12,7 @@ Stato corrente e indice dei documenti: [docs/README.md](docs/README.md).
 |---|---|
 | `server/` | Server Spring Boot, catalogo SQLite, migrazioni e test Java |
 | `client-debug/` | Client Angular debug, asset e test client |
-| `client-web/` | Client web animato (Pixi/React/Vite) collegato al server: quick 1vCom completa (C1) |
+| `client-web/` | Client web animato (Pixi/React/Vite) collegato al server: tutte le modalità, collezione e mazzi, profilo e admin (C1, C2a, C2b); chiusura di C2 in attesa della prova umana B |
 | `client-c0/` | Scena C0 congelata del client animato in `revision/` (Pixi/React, dati sintetici) e laboratorio Angular storico |
 | `scripts/` | Toolchain fissata, build, CLI e verifiche applicative |
 | `docs/` | Regolamento, contratti, roadmap e report |
@@ -82,5 +82,8 @@ La [roadmap del client web animato](docs/client-roadmap.md) pianifica la parità
 funzionale con il debug, dalla prima partita completa alla rifinitura visiva,
 come base per futuri client desktop e mobile. **C0 è chiusa** (scena sintetica
 in [`client-c0/revision/`](client-c0/revision/README.md)); **C1 è chiusa**
-in [`client-web/`](client-web/README.md): quick 1vCom completa sul server reale.
+in [`client-web/`](client-web/README.md): quick 1vCom completa sul server reale. Di **C2** sono chiusi
+C2a e O9; la parità con il debug (C2b) è implementata e verificata in automatico
+(checklist P01–P44, C2b-7), mentre la prova umana B e il giudizio del proprietario
+sono ancora da fare.
 Stato corrente e classificazione dei documenti: [indice della documentazione](docs/README.md).

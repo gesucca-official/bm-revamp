@@ -283,7 +283,11 @@ try{
   hand:sixView.cardsInHand.map(c=>c.bindingName),deck:sixView.deck,handFromDeck:sixFrom,
   note:'basic + five bound fill the hand: no draw, and with no regular card in hand neither the bound (discard) nor ToxicGrab (no item) can be played; R03 known limit, the game is then abandoned'});
  assert.equal(sixView.cardsInHand.length,6);assert.equal(sixView.deck,12);assert.deepEqual(sixFrom.foreign,[]);assert.equal(sixView.character.bindingName,'junkie.character.ToxicJunkie');
- await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();
+ await page.getByLabel('Apri menu').click();
+ // C2b-7, P37: in this real no-move state the menu explains the R03 limit and offers the leave.
+ const menuText=await page.locator('section.menu').first().innerText();await A.shot('08b-six-initial-menu');
+ assert.ok(menuText.includes('il gioco non prevede di passare'),'R03 explanation in the table menu');evidence.checks.sixInitialPlayed.menuExplainsR03=true;
+ await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();
  await page.getByTestId('quick').waitFor({timeout:15000});
 
  // Deck unavailable (open/1vCom/error): provoked by rewriting the outgoing deckId, not reachable from the UI.

@@ -1,12 +1,16 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-6)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
 cinque o contro il computer con un mazzo salvato) → partita → esito → nuova partita
 nella stessa modalità oppure ritorno all'hub; scheda «Collezione» con catalogo ed
 editor dei mazzi; scheda «Profilo» con il pannello di amministrazione per il ruolo
-ADMIN; segnalazione al server degli errori non gestiti. La chiusura della parità del debug è C2b-7
-([piano](../docs/client-c2b-plan.md)). La scena C0 resta congelata in
+ADMIN; segnalazione al server degli errori non gestiti. La parte automatica di C2b-7 è fatta:
+checklist P01–P44 chiusa con evidenze o limiti espliciti e tutte le verifiche ripetute
+sulla stessa build ([piano](../docs/client-c2b-plan.md),
+[rapporto](../docs/reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
+C2 **non è chiusa**: mancano la prova umana B
+([scheda](../docs/reports/client-c2/c2b-7/prova-b-scheda.md)) e il giudizio del proprietario. La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
 C2a aggiunge la leggibilità di base (O11–O14): carte più grandi, ruolo e
@@ -245,7 +249,9 @@ drag e con click, riordino senza SEND, disconnessione e rientro senza reinvii,
 ritorno all'hub e uscita. A ogni turno controlla anche C2a: misure delle carte,
 plancia uguale alle risorse della vista, attenuazione calcolata come il server,
 ruolo e guadagni uguali all'allegato del regolamento, alzata al passaggio del
-mouse; invia apposta una carta attenuata e si aspetta il rifiuto del server.
+mouse; invia apposta una carta attenuata e si aspetta il rifiuto del server. Mette a fuoco
+una carta che esce dal bordo e controlla che la pagina del tavolo non scorra (C2b-7: lo
+strato semantico è ritagliato con `overflow: clip`).
 `VerifyModes` usa devAlice e devBob in due contesti Edge: presenza, uscita dalla
 coda, 1v1 fino all'esito con controllo delle viste private, «Nuova partita»,
 ingresso rifiutato con partita riprendibile (da un secondo socket STOMP grezzo
@@ -265,7 +271,8 @@ del regolamento, prova bozze non salvabili, crea, annulla, sovrascrive e cancell
 mazzi dalla UI, gioca un open 1vCom fino all'esito controllando che personaggio e
 mano vengano dal mazzo, ripete con «Nuova partita», avvia un mazzo con sei carte
 iniziali e provoca «Deck unavailable» riscrivendo il deckId del frame in uscita
-(non raggiungibile dalla UI con un solo account).
+(non raggiungibile dalla UI con un solo account); in quella partita senza mosse controlla
+che il menu spieghi il limite R03 (C2b-7).
 `VerifyPublic` (database temporaneo) confronta gli `href` della home con il sorgente del
 debug senza aprirli, il testo delle regole con `docs/game-rules.md` (titoli, revisioni,
 ogni cella delle tabelle, tutte le parole), prova home → regole → home (anche con

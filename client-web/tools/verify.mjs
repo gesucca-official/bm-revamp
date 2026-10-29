@@ -76,6 +76,9 @@ async function playTurn(game){
  let s=await wait(x=>x&&x.hits.some(h=>h.kind==='hand')&&(x.over||x.phase==='choose'||x.message.startsWith('Sei fuori')),20000,'choose phase');
  if(s.over||s.message.startsWith('Sei fuori'))return false;
  const turn=s.turn,hand=s.order;await checkC2a(s);
+ // C2b-7: focusing a hit that crosses the screen edge (a hand card) must not scroll the table page.
+ if(!evidence.checks.noScroll){const r=await page.evaluate(()=>{const se=document.scrollingElement,b=[...document.querySelectorAll('.semantic')].find(x=>{const q=x.getBoundingClientRect();return q.bottom>innerHeight||q.right>innerWidth||q.top<0||q.left<0;});b?.focus();const out={overflowingHit:b?.dataset.hit??null,scrollTop:se.scrollTop,scrollHeight:se.scrollHeight,innerHeight};b?.blur();return out;});
+  assert.equal(r.scrollTop,0,'focusing a hit at the screen edge scrolled the table');assert.ok(r.scrollHeight<=r.innerHeight,'the table page is taller than the screen');evidence.checks.noScroll=r;s=await state();}
  // O12: hovering a covered card lifts it whole (larger hit than the resting card).
  if(!c2a.hover&&hand.length>=3){const h=s.hits.find(x=>x.id===hand[1].key);await page.mouse.move(center(h).x,h.y+h.h*.3);await page.waitForTimeout(150);const after=await state();const lifted=after.hits.find(x=>x.id===hand[1].key);
   c2a.hover={restingH:Math.round(h.h),hoverH:Math.round(lifted.h),raised:lifted.h>h.h};assert.ok(lifted.h>h.h,'O12 hover lifts the card');await shot('08-c2a-hover');await page.mouse.move(5,5);await page.waitForTimeout(100);s=await state();}

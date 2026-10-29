@@ -1,13 +1,13 @@
 # Roadmap del client web animato
 
-**28 ottobre 2026 — versione 18, C0, C1 e C2a chiuse, C2b in corso (C2b-1…C2b-6 fatte).** C1 è chiusa dal
+**29 ottobre 2026 — versione 19, C0, C1 e C2a chiuse, C2b in corso (C2b-1…C2b-6 fatte, di C2b-7 la parte automatica; mancano la prova umana B e il giudizio del proprietario).** C1 è chiusa dal
 proprietario dopo la prova su iPhone e la prova umana A; le osservazioni
 del proprietario e della prova A sono assegnate alle tappe
 ([O1–O14](#osservazioni-del-proprietario-dopo-c1)). Di C2 è implementato il
 primo blocco **C2a, leggibilità di base** (O11–O14 con O3/O4), verificato con
 partite reali in locale, provato dal proprietario su iPhone e desktop e **chiuso**
 insieme alla prova umana B, che non ha evidenziato nulla di rilevante
-([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1), C2b-3 (FFA a cinque), C2b-4 (catalogo, editor mazzi e open 1vCom), C2b-5 (home, regole e registrazione) e C2b-6 (profilo, amministrazione, log client e diagnostica), verificati in locale sul server reale ([piano C2b](client-c2b-plan.md)). Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
+([rapporto C2](reports/client-c2-report.md)). Di C2b sono fatti i blocchi C2b-1 (modalità e code), C2b-2 (ciclo di vita in 1v1), C2b-3 (FFA a cinque), C2b-4 (catalogo, editor mazzi e open 1vCom), C2b-5 (home, regole e registrazione) e C2b-6 (profilo, amministrazione, log client e diagnostica), verificati in locale sul server reale ([piano C2b](client-c2b-plan.md)). Di C2b-7 è fatta la parte automatica: tutte le verifiche ripetute sulla stessa build e checklist P01–P44 chiusa con evidenze o limiti espliciti ([rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)); **C2 non è chiusa** finché non si fanno la prova umana B ([scheda](reports/client-c2/c2b-7/prova-b-scheda.md)) e il giudizio del proprietario. Dopo C2a è **chiusa O9** (illustrazioni provvisorie: test
 automatici, partite reali in locale e prova su iPhone confermata dal proprietario). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
@@ -660,12 +660,22 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** l'ultimo blocco di C2b (C2b-7, checklist completa e prova umana B) solo su istruzione esplicita. C2a e O9 sono chiuse. C2 estende lo stesso
+**Prossimo passo:** prova umana B di C2b-7, condotta dal proprietario con la [scheda](reports/client-c2/c2b-7/prova-b-scheda.md); poi il giudizio del proprietario su C2. Eventuali blocchi C2 emersi si correggono e si riverificano prima della chiusura. C2a e O9 sono chiuse. C2 estende lo stesso
 linguaggio ai 44 percorsi e alla FFA; C3 affina la risoluzione osservabile,
 C4 rifinisce art/audio/layout e prestazioni, C5 verifica i playtest finali.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 19 — 29 ottobre 2026, C2b-7 (parte automatica):** tutte le verifiche di
+  `client-web` (Verify, VerifyModes, VerifyLifecycle, VerifyFfa, VerifyDecks, VerifyPublic,
+  VerifyProfile) ripetute sulla stessa build a 1366×768 e 844×390, più `Size` e le verifiche
+  del repository. Una correzione emersa: il tavolo poteva scorrere di 14 px quando il fuoco
+  finiva su una carta della mano (strato semantico oltre il bordo); ora è ritagliato.
+  Checklist P01–P44 con evidenza o limite esplicito. Scheda della prova umana B pronta,
+  con i cinque account D3. Prova B e giudizio del proprietario **non fatti**: C2 resta aperta
+  ([rapporto C2](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
+  Nessuna regola, API o servizio cambiato.
 
 - **Versione 18 — 28 ottobre 2026, C2b-6:** scheda «Profilo» in `client-web` (nome, email,
   ruolo) con il pannello di amministrazione per il ruolo ADMIN: conteggi, partite non
