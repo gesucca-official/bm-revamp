@@ -261,7 +261,7 @@ cattura nuova, aggiunta a `verify.mjs` senza altre modifiche.
 ## C2b-1 — Modalità e code
 
 27 ottobre 2026. Regolamento 1.7, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md)). Nessuna modifica a regole, server,
+([client-c2b-plan.md](../history/client-c2b-plan.md)). Nessuna modifica a regole, server,
 catalogo o `client-debug`.
 
 ### Esito in breve
@@ -297,7 +297,7 @@ catalogo o `client-debug`.
 ## C2b-2 — Ciclo di vita in 1v1
 
 28 ottobre 2026. Regolamento 1.7, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md)). Nessuna modifica a regole, server,
+([client-c2b-plan.md](../history/client-c2b-plan.md)). Nessuna modifica a regole, server,
 catalogo o `client-debug`; nessun cambio di protocollo. Il countdown parte dall'epoch
 della vista e l'esito lo decide solo il server.
 
@@ -393,7 +393,7 @@ della vista e l'esito lo decide solo il server.
 ## C2b-3 — FFA a cinque
 
 28 ottobre 2026. Regolamento 1.7, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md)). Nessuna modifica a regole, server,
+([client-c2b-plan.md](../history/client-c2b-plan.md)). Nessuna modifica a regole, server,
 catalogo o `client-debug`; nessun cambio di protocollo.
 
 ### Esito in breve
@@ -485,7 +485,7 @@ Il server assegna i personaggi a caso: le evidenze registrano quelli di ogni par
 ## C2b-4 — Catalogo, editor mazzi e open 1vCom
 
 28 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md)). Nessun cambio di protocollo né di
+([client-c2b-plan.md](../history/client-c2b-plan.md)). Nessun cambio di protocollo né di
 `client-debug` (salvo la copia del regolamento).
 
 **Decisione del proprietario durante il blocco.** R02 chiedeva solo un identificativo
@@ -587,7 +587,7 @@ commit separato, prima di questo blocco: `Test -Offline` 253 + 36 test e
 ## C2b-5 — Home, regole e registrazione
 
 28 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md)), in particolare D4 (registrazione locale:
+([client-c2b-plan.md](../history/client-c2b-plan.md)), in particolare D4 (registrazione locale:
 solo errore esplicito), D7 (portrait fuori dal tavolo), D8 (stessi collegamenti, diritti
 corretti) e D10 (regolamento importato). Nessun cambio a regole, server, protocollo,
 catalogo o `client-debug`.
@@ -695,7 +695,7 @@ risposta → «Server non raggiungibile».
 ## C2b-6 — Profilo, amministrazione, log client e diagnostica
 
 28 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md)), in particolare D5 (admin provato in un
+([client-c2b-plan.md](../history/client-c2b-plan.md)), in particolare D5 (admin provato in un
 ambiente temporaneo), D6 (credenziali Basic al solo browser) e D14 (solo errori, senza
 nomi utente né credenziali). Nessun cambio a regole, server, protocollo, catalogo o
 `client-debug`.
@@ -826,7 +826,7 @@ DELETE toccano solo il database temporaneo, cancellato alla fine.
 ## C2b-7 — Checklist di parità e prova umana B
 
 29 ottobre 2026. Regolamento **1.8**, decisioni D1–D14 del piano
-([client-c2b-plan.md](../client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)),
+([client-c2b-plan.md](../history/client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)),
 in particolare D3 (cinque account sintetici locali, commit `30b8855`) e D13 (prova B
 completa). La parte automatica è nel commit `4cab6ba`; la prova umana B è stata fatta lo stesso giorno
 ([sotto](#prova-umana-b)). **C2 è chiusa** dal proprietario il 29 ottobre 2026.

@@ -14,7 +14,9 @@ report; nessun backlog futuro avviato. Monorepo locale in `E:/bm`, cronologie
 precedenti conservate su autorizzazione del proprietario. Regolamento 1.6,
 quattro modalità, CLI, mazzi strutturali, sessione unica, clock/forfait/reconnect,
 archivio completo e restart-draw. [Report corrente I22](reports/i22-report.md).
-La base è approvata; le sezioni datate sotto sono storiche.
+La base è approvata; le sezioni datate sotto sono storiche. Lo stato corrente
+del progetto, compreso il regolamento vigente, è nell'[indice della
+documentazione](README.md#stato-corrente).
 
 > **I19c completato, 26 ottobre 2026.** Verificatore ripetibile indipendente per 7 conclusioni ordinarie delle quattro modalità, 12 cicli I19b (169 eventi) e 12 chiusure I24 (12 OUTCOME draw, 36 eventi totali). Controllati tutti i byte evento esportati contro SQLite, ordine/hash/duplicati/gap, stati/versioni/report/transizioni/esiti, ricevute del registro, tre export dopo riavvio, segreti e preservazione dei dati preesistenti. Individuato e superato un riepilogo storico I19b con ID/hash obsoleti: non usato come fonte di verità. [Report e manifest](reports/i19c-report.md); comando `python scripts/verify-match-manifests.py`. Regolamento 1.6 invariato; nessun difetto strutturale riprodotto. **I19c chiude; I22 resta aperto.**
 

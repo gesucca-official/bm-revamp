@@ -1,7 +1,7 @@
 # C2b-7 — Scheda della prova umana B
 
 29 ottobre 2026. Regolamento **1.8**. Scheda per la prova umana B sulla parità
-completa del client web (D3, D13 del [piano C2b](../../../client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
+completa del client web (D3, D13 del [piano C2b](../../../history/client-c2b-plan.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
 La conduce il proprietario; la parte automatica di C2b-7 è nel
 [rapporto C2](../../client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b).
 **Sessione fatta il 29 ottobre 2026** dal proprietario (esiti [sotto](#osservazioni)); **C2 chiusa** dal proprietario lo stesso giorno.

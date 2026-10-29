@@ -12,7 +12,7 @@ Stato corrente e indice dei documenti: [docs/README.md](docs/README.md).
 |---|---|
 | `server/` | Server Spring Boot, catalogo SQLite, migrazioni e test Java |
 | `client-debug/` | Client Angular debug, asset e test client |
-| `client-web/` | Client web animato (Pixi/React/Vite) collegato al server: tutte le modalità, collezione e mazzi, profilo e admin (C1 e C2 chiuse) |
+| `client-web/` | Client web animato (Pixi/React/Vite) collegato al server: tutte le modalità, collezione e mazzi, profilo e admin |
 | `client-c0/` | Scena C0 congelata del client animato in `revision/` (Pixi/React, dati sintetici) e laboratorio Angular storico |
 | `scripts/` | Toolchain fissata, build, CLI e verifiche applicative |
 | `docs/` | Regolamento, contratti, roadmap e report |
@@ -80,9 +80,6 @@ nuovi permessi di utilizzo con questa pulizia.
 La roadmap della base è [archiviata come completata](docs/roadmap.md).
 La [roadmap del client web animato](docs/client-roadmap.md) pianifica la parità
 funzionale con il debug, dalla prima partita completa alla rifinitura visiva,
-come base per futuri client desktop e mobile. **C0 è chiusa** (scena sintetica
-in [`client-c0/revision/`](client-c0/revision/README.md)); **C1 è chiusa**
-in [`client-web/`](client-web/README.md): quick 1vCom completa sul server reale. **C2 è chiusa**
-(29 ottobre 2026): parità con il debug verificata (checklist P01–P44) e prova umana B
-senza blocchi.
-Stato corrente e classificazione dei documenti: [indice della documentazione](docs/README.md).
+come base per futuri client desktop e mobile. C0, C1 e C2 sono chiuse; la
+prossima tappa è C3. Stato corrente e classificazione dei documenti:
+[indice della documentazione](docs/README.md#stato-corrente).

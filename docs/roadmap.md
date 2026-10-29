@@ -1,16 +1,14 @@
 # Roadmap — indice
 
-Aggiornamento del **27 ottobre 2026**. Stato complessivo nell'[indice della
+Aggiornamento del **29 ottobre 2026**. Stato complessivo nell'[indice della
 documentazione](README.md#stato-corrente).
 
 ## Roadmap attiva: client web animato
 
-La [roadmap del client web animato](client-roadmap.md), versione 7, definisce
-le tappe C0–C5 verso la parità funzionale con il client debug. **C0 è chiusa**
-dal 27 ottobre 2026 su decisione del proprietario, con stack PixiJS/TypeScript,
-React/HTML e Vite confermato; **C1 non è iniziata** e richiede un'istruzione
-esplicita. Le decisioni ancora aperte sono elencate nel piano; gli asset del
-debug sono esclusi dal nuovo client.
+La [roadmap del client web animato](client-roadmap.md) definisce le tappe
+C0–C5 verso la parità funzionale con il client debug e oltre. C0, C1 e C2 sono
+chiuse; la prossima tappa è C3. Le decisioni ancora aperte sono elencate nel
+piano; gli asset del debug sono esclusi dal nuovo client.
 
 I18/I20/I21/I25 e le feature differite della base conservano il significato
 storico; non sono automaticamente trasferiti nel nuovo percorso. La parità

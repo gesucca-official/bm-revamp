@@ -3,8 +3,7 @@
 > grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
 > nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
 
-> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
-> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> **Stato documentale:** lo stato corrente del progetto è nell'[indice della
 > documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
 > prossimi/aperti e priorità della base restano storico, non attività correnti.
 
@@ -35,7 +34,7 @@ le prove e i limiti sono nei report collegati dalla roadmap.
 
 > La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data; versione vigente nell'[indice](README.md#stato-corrente)) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 **Evidenza corrente I03:** PostgreSQL sostituito da SQLite applicativo/JDBC; catalogo SQLite/JPA read-only, contesto e repository verificati. 73 test server nel profilo completo e 4 client nella suite ordinaria; JAR locale avviato due volte con dati persistiti. [Report I03](reports/i03-report.md). DB-E nei censimenti legacy sotto va ora letto come persistenza applicativa locale. Le modifiche di regolamento antecedenti a I03 restano normative secondo AGENTS.md, senza variazioni in questo incremento.
 

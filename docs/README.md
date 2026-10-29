@@ -7,23 +7,24 @@ su codice, test, catalogo e documentazione storica ([istruzioni](../AGENTS.md)).
 
 ## Stato corrente
 
-Aggiornato al **27 ottobre 2026**.
+Aggiornato al **29 ottobre 2026**.
 
 | Ambito | Stato | Fonte |
 |---|---|---|
 | Regolamento | Versione **1.8** (28 ottobre 2026): rispetto alla base I22 (1.6) aggiunge R07a, ruolo descrittivo e guadagni a sé di ogni carta nel catalogo (O14, 1.7), e vieta «/» nell'identificativo dei mazzi personalizzati (R02, 1.8); nessun effetto cambiato | [game-rules.md](game-rules.md#r07a--ruoli-descrittivi-delle-carte-17) |
 | Versione base | Candidato `I22-3e71300e057687ba` **approvato** dal proprietario il 26 ottobre 2026; roadmap della base conclusa e archiviata | [report I22](reports/i22-report.md#approvazione), [roadmap archiviata](history/roadmap-base-i22.md) |
-| Client giocabile | `client-debug/` Angular, completo; `client-web/` con la parità del debug (C2 chiusa); CLI per gli scenari automatici | [client-debug](../client-debug/README.md), [CLI](cli.md) |
-| Client web animato | **C0 chiusa** il 27 ottobre 2026 su decisione del proprietario, con deroga sulla risposta al tocco (116 ms contro 100) e landscape obbligatorio. Stack confermato: PixiJS/TypeScript, React/HTML, Vite. Solo scena sintetica, nessun collegamento al server | [roadmap client](client-roadmap.md), [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti) |
-| C2 | **C2a e O9 chiuse** dal proprietario (leggibilità di base O11–O14 con O3/O4, solo quick 1vCom; illustrazioni provvisorie delle 40 classi): partite reali in locale a 1366×768 e 844×390, prova su iPhone e desktop, prova umana B senza rilievi. **C2b:** blocchi C2b-1…C2b-6 fatti; di C2b-7 è fatta la parte automatica (verifiche sulla stessa build, checklist P01–P44 con evidenze o limiti, [scheda della prova B](reports/client-c2/c2b-7/prova-b-scheda.md)). Prova umana B senza blocchi: **C2 chiusa** dal proprietario il 29 ottobre 2026 | [rapporto C2](reports/client-c2-report.md), [roadmap](client-roadmap.md#c2-raggiungere-la-parità-del-client-debug) |
-| C1 | **Chiusa** dal proprietario in `client-web/`: login → quick 1vCom → partita → esito → nuova partita sul server reale; criteri automatici verificati con partite reali in locale; iPhone e prova umana A superati. Osservazioni O1–O14 assegnate alle tappe; C2 non iniziata | [rapporto C1](reports/client-c1-report.md), [client-web](../client-web/README.md), [osservazioni](client-roadmap.md#osservazioni-del-proprietario-dopo-c1) |
+| Client giocabili | `client-debug/` Angular, completo; `client-web/` animato (PixiJS/TypeScript, React/HTML, Vite) collegato al server, con la parità del debug; CLI per gli scenari automatici | [client-web](../client-web/README.md), [client-debug](../client-debug/README.md), [CLI](cli.md) |
+| C0 | **Chiusa** il 27 ottobre 2026, con deroga sulla risposta al tocco (116 ms contro 100) e landscape obbligatorio; scena sintetica congelata in `client-c0/revision/` | [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti) |
+| C1 | **Chiusa** il 27 ottobre 2026: login → quick 1vCom → partita → esito → nuova partita sul server reale; iPhone e prova umana A superati | [rapporto C1](reports/client-c1-report.md) |
+| C2 | **Chiusa** dal proprietario il 29 ottobre 2026. C2a (leggibilità di base) e O9 (40 illustrazioni provvisorie: 39 carte e il token) chiuse il 27 ottobre dopo una prova del proprietario su iPhone e desktop; C2b-1…C2b-7 fatti, checklist P01–P44 con evidenze o limiti; prova umana B del 29 ottobre senza blocchi | [rapporto C2](reports/client-c2-report.md), [piano C2b (storico)](history/client-c2b-plan.md) |
+| Prossima tappa | **C3**, risoluzione osservabile (O6, O7), poi C4 e C5. O15 e O16 in un'attività successiva dedicata al deckbuilder; O17 e O18 cambiano regole e protocollo e partono dal regolamento | [roadmap client](client-roadmap.md#c3-rendere-leggibile-e-soddisfacente-la-risoluzione), [osservazioni](client-roadmap.md#osservazioni-della-prova-umana-b-c2b-7) |
 | Pubblicazione | Sorgenti preparati per GitHub; nessun deploy o hosting | [pubblicazione](publishing.md) |
 
-Regole ed effetti non sono cambiati dal lavoro C0–C2a e O9. Per la decisione O14 il regolamento 1.7
-aggiunge un campo descrittivo (ruolo e guadagni) al catalogo, esposto dal server
-e copiato nelle regole del debug.
-Le numerazioni I01–I26 e F01–F39 appartengono alla base e non vengono riaperte
-dalle tappe C0–C5.
+Regole ed effetti non sono cambiati dal lavoro C0–C2; il regolamento 1.7
+aggiunge solo un campo descrittivo (ruolo e guadagni) al catalogo, esposto dal
+server e copiato nelle regole del debug. I conteggi dei test sono nei rapporti
+della relativa consegna. Le numerazioni I01–I26 e F01–F39 appartengono alla
+base e non vengono riaperte dalle tappe C0–C5.
 
 ## Istruzioni operative
 
@@ -47,7 +48,7 @@ Documenti da seguire per lavorare sul progetto nello stato attuale.
 | Documento | Contenuto |
 |---|---|
 | [Indice delle roadmap](roadmap.md) | Roadmap attiva e archiviata |
-| [Roadmap del client web animato](client-roadmap.md) | Tappe C0–C5, gate C0 chiuso, criteri di C1–C5, decisioni aperte |
+| [Roadmap del client web animato](client-roadmap.md) | Tappe C0–C5 (C0–C2 chiuse), criteri di C3–C5, osservazioni O1–O18, decisioni aperte; [revisioni](history/client-roadmap-revisions.md) |
 | [Checklist di parità P01–P44](client-c0-parity.md) | Funzioni del debug da portare nel nuovo client (C1–C2) |
 | [Contratto delle interazioni](design/client-c0/interaction-contract.md), [revisione del tavolo del bar](design/client-c0/bar-table-revision.md) | Composizione dei comandi e criteri UX accettati per C1 |
 | [Riferimento visivo R1](design/client-c0/r1/approval.md), [tecnologia](design/client-c0/r1/technology.md) | Mockup approvati e motivazione dello stack |
@@ -74,7 +75,7 @@ per adeguarli a modifiche successive. Manifest e PDF I22 sono una base storica.
 | Base I01–I26 | [rapporti in reports/](reports/), dal [rapporto I01](reports/i01-report.md) al [rapporto I22](reports/i22-report.md); [verifiche iniziali](reports/verification-report.md); [audit del regolamento](reports/game-rules-audit-2026-10-23.md) |
 | Client C0 | [primo rapporto, grafica Angular respinta](reports/client-c0-report.md) e [laboratorio Angular](../client-c0/README.md); [rapporto R2–R5](reports/client-c0-r2-report.md); [procedura ed esiti R5](reports/client-c0-r5-procedure.md); [prima proposta visiva](design/client-c0/README.md) |
 | Stampa carte | [verifica del generatore, 25 ottobre 2026](../tools/print-cards/VERIFICATION.md) |
-| Archivio in history/ | [roadmap della base I22](history/roadmap-base-i22.md), [setup precedente a I22](history/setup-pre-i22.md), [ricognizione preparatoria della roadmap client](history/client-roadmap-preparation.md), [punto di ripresa C0-R2–R5](history/client-c0-resume.md) |
+| Archivio in history/ | [roadmap della base I22](history/roadmap-base-i22.md), [setup precedente a I22](history/setup-pre-i22.md), [ricognizione preparatoria della roadmap client](history/client-roadmap-preparation.md), [punto di ripresa C0-R2–R5](history/client-c0-resume.md), [piano C2b](history/client-c2b-plan.md), [revisioni 1–21 della roadmap client](history/client-roadmap-revisions.md) |
 
 Nei rapporti i collegamenti ai sorgenti puntano ai percorsi correnti `server/`
 e `client-debug/` (prima `bm-server/` e `bm-web-client/`); i file rimossi in

@@ -3,8 +3,7 @@
 > grafico/debug e dipendenze dedicate sono stati rimossi. Le descrizioni Phaser
 > nelle ricognizioni precedenti restano storiche. Regole e protocollo invariati.
 
-> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
-> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> **Stato documentale:** lo stato corrente del progetto è nell'[indice della
 > documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
 > prossimi/aperti e priorità della base restano storico, non attività correnti.
 
@@ -16,7 +15,7 @@
 
 > La base I22 è completata e approvata. **I26/F39 è completato**: la CLI è disponibile per gli scenari applicativi automatici non UX; unit e integrazioni mirate restano diretti, browser/debug per UX. [Guida CLI](cli.md), [report I26](reports/i26-report.md), [roadmap archiviata](history/roadmap-base-i22.md).
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data; versione vigente nell'[indice](README.md#stato-corrente)) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 **Aggiornamento I03:** contesto Spring, repository SQLite e JAR locale ora verificati; PostgreSQL sostituito da file applicativo separato, catalogo read-only. 73 test server nel profilo completo, nessun errore; controlli delle regole preesistenti superati e nessuna modifica alle regole in I03. La diagnosi storica di datasource non avviabile e IdClass mazzi incoerente è superata dalla nuova implementazione. [Report corrente](reports/i03-report.md). Partita/browser, autorizzazioni e log asincroni completi restano da verificare.
 

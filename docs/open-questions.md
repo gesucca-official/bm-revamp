@@ -1,5 +1,4 @@
-> **Stato documentale:** lo stato corrente del progetto (base I22 approvata,
-> client animato con C0 chiusa e C1 non iniziata) è nell'[indice della
+> **Stato documentale:** lo stato corrente del progetto è nell'[indice della
 > documentazione](README.md#stato-corrente). Le indicazioni datate di incrementi
 > prossimi/aperti e priorità della base restano storico, non attività correnti.
 
@@ -25,7 +24,7 @@ Il proprietario ha fissato la finestra di riconnessione a **30 secondi** (23 ott
 
 Risolto il provisioning locale precedentemente indicato come R01: flag esplicito `app.dev.seed-accounts=true` nel solo profilo local e bind loopback crea devAlice/devBob, conserva duplicati e non invia email. [Dettagli e prove](reports/i05-report.md). Nessuna modifica a R01 del regolamento. Le domande di autorizzazione, reconnect e gestione account finale restano aperte o in roadmap.
 
-> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data, ora 1.6) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
+> Aggiornamento normativo 23 ottobre 2026: il [Regolamento ufficiale](game-rules.md) (1.0 a quella data; versione vigente nell'[indice](README.md#stato-corrente)) prevale su questo documento per le regole di gioco. Le indicazioni precedenti «codice come riferimento provvisorio», le questioni sulle regole già risolte da R01–R07 e i risultati di test qui riportati sono storici; le richieste non implementate restano roadmap. Verifiche attuali: [conformità](rules-conformance.md).
 
 # Decisioni del proprietario e questioni residue
 

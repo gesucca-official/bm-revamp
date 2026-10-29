@@ -1,16 +1,22 @@
 # Piano C2b — Parità del client debug
 
+> **Documento storico.** Piano completato: C2b-1…C2b-7 sono fatti e C2 è
+> chiusa dal proprietario il 29 ottobre 2026. Gli stati «non iniziata» e «da
+> fare» sotto valgono alla data del piano. Esiti nel
+> [rapporto C2](../reports/client-c2-report.md); stato corrente
+> nell'[indice della documentazione](../README.md#stato-corrente).
+
 **Decisioni D1–D14: tutte le raccomandazioni sono state confermate dal proprietario il 27 ottobre 2026.**
 
-27 ottobre 2026. Regolamento **1.7**, [roadmap del client](client-roadmap.md)
+27 ottobre 2026. Regolamento **1.7**, [roadmap del client](../client-roadmap.md)
 versione 14. **Solo piano:** nessun codice, nessuna modifica a regole, server,
 catalogo o `client-debug`. C2a e O9 sono chiuse; C2b non è iniziata e parte
 solo su istruzione esplicita del proprietario, un blocco alla volta.
 
-Fonti lette: [regolamento](game-rules.md), [roadmap](client-roadmap.md)
-(C2, matrice di parità, O1–O14, C3/C4), [rapporto C2](reports/client-c2-report.md),
-[client-web](../client-web/README.md) e i suoi sorgenti, [checklist P01–P44](client-c0-parity.md),
-[CLI](cli.md), [setup](setup.md), i sorgenti di `client-debug` (hub, modalità,
+Fonti lette: [regolamento](../game-rules.md), [roadmap](../client-roadmap.md)
+(C2, matrice di parità, O1–O14, C3/C4), [rapporto C2](../reports/client-c2-report.md),
+[client-web](../../client-web/README.md) e i suoi sorgenti, [checklist P01–P44](../client-c0-parity.md),
+[CLI](../cli.md), [setup](../setup.md), i sorgenti di `client-debug` (hub, modalità,
 dialogo mazzo, collezione, editor, registrazione, admin, home, log errori,
 trasporto) e dei controller server (code, partita, sessione, account, sign-up,
 sicurezza HTTP).
@@ -37,8 +43,8 @@ Valgono per **ogni** blocco:
   Il contesto Spring non serve se il server non cambia; se un blocco lo
   tocca per decisione del proprietario, va eseguito a parte.
 - Documenti aggiornati nello stesso commit: `client-web/README.md`, una sezione
-  «C2b-n» in [rapporto C2](reports/client-c2-report.md), la revisione della
-  [roadmap](client-roadmap.md), le righe P della [checklist](client-c0-parity.md)
+  «C2b-n» in [rapporto C2](../reports/client-c2-report.md), la revisione della
+  [roadmap](../client-roadmap.md), le righe P della [checklist](../client-c0-parity.md)
   chiuse dal blocco con il collegamento all'evidenza. Evidenze in
   `docs/reports/client-c2/c2b-n/` (`BM_OUT`), senza sovrascrivere quelle di C2a/O9.
 - Lingua dei testi nuovi secondo D1; identificatori wire, nomi carta e
@@ -158,13 +164,13 @@ per due ragioni emerse dal codice:
 
 | Blocco | Contenuto | Dipende da |
 |---|---|---|
-| C2b-1 | Modalità e code: hub «Gioca», 1v1, uscita dalla coda, presenza — **fatto** (27 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-1--modalità-e-code)) | — |
-| C2b-2 | Ciclo di vita 1v1: clock, forfait, rientri, logout, riavvio — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-2--ciclo-di-vita-in-1v1)) | C2b-1 |
-| C2b-3 | FFA a cinque con la geometria C2a, bot, avvio anticipato, forfait altrui — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-3--ffa-a-cinque)) | C2b-1, C2b-2 |
-| C2b-4 | Catalogo, editor mazzi e open 1vCom — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-4--catalogo-editor-mazzi-e-open-1vcom)); per decisione del proprietario regolamento 1.8: nessun «/» nel nome di un mazzo | C2b-1 |
-| C2b-5 | Home, regole e registrazione — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-5--home-regole-e-registrazione)); registrazione nel profilo locale: solo indisponibilità esplicita (D4) | — (dopo C2b-1 per l'hub) |
-| C2b-6 | Profilo, amministrazione, log client e diagnostica — **fatto** (28 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-6--profilo-amministrazione-log-client-e-diagnostica)); admin provato nell'ambiente temporaneo D5, prompt Basic nativo verificato su Edge | C2b-1 |
-| C2b-7 | Checklist di parità completa e prova umana B — **fatto** (29 ottobre 2026, [rapporto](reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)): verifiche sulla stessa build, checklist chiusa con evidenze o limiti, [prova umana B](reports/client-c2/c2b-7/prova-b-scheda.md) senza blocchi; **C2 chiusa** dal proprietario | tutti |
+| C2b-1 | Modalità e code: hub «Gioca», 1v1, uscita dalla coda, presenza — **fatto** (27 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-1--modalità-e-code)) | — |
+| C2b-2 | Ciclo di vita 1v1: clock, forfait, rientri, logout, riavvio — **fatto** (28 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-2--ciclo-di-vita-in-1v1)) | C2b-1 |
+| C2b-3 | FFA a cinque con la geometria C2a, bot, avvio anticipato, forfait altrui — **fatto** (28 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-3--ffa-a-cinque)) | C2b-1, C2b-2 |
+| C2b-4 | Catalogo, editor mazzi e open 1vCom — **fatto** (28 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-4--catalogo-editor-mazzi-e-open-1vcom)); per decisione del proprietario regolamento 1.8: nessun «/» nel nome di un mazzo | C2b-1 |
+| C2b-5 | Home, regole e registrazione — **fatto** (28 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-5--home-regole-e-registrazione)); registrazione nel profilo locale: solo indisponibilità esplicita (D4) | — (dopo C2b-1 per l'hub) |
+| C2b-6 | Profilo, amministrazione, log client e diagnostica — **fatto** (28 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-6--profilo-amministrazione-log-client-e-diagnostica)); admin provato nell'ambiente temporaneo D5, prompt Basic nativo verificato su Edge | C2b-1 |
+| C2b-7 | Checklist di parità completa e prova umana B — **fatto** (29 ottobre 2026, [rapporto](../reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)): verifiche sulla stessa build, checklist chiusa con evidenze o limiti, [prova umana B](../reports/client-c2/c2b-7/prova-b-scheda.md) senza blocchi; **C2 chiusa** dal proprietario | tutti |
 
 C2b-4, C2b-5 e C2b-6 sono indipendenti fra loro dopo C2b-1 e possono cambiare
 ordine. C2b-3 non parte prima di C2b-2.

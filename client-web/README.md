@@ -5,12 +5,10 @@ home (regole, registrazione) → login → hub «Gioca» (contro il computer, un
 cinque o contro il computer con un mazzo salvato) → partita → esito → nuova partita
 nella stessa modalità oppure ritorno all'hub; scheda «Collezione» con catalogo ed
 editor dei mazzi; scheda «Profilo» con il pannello di amministrazione per il ruolo
-ADMIN; segnalazione al server degli errori non gestiti. La parte automatica di C2b-7 è fatta:
-checklist P01–P44 chiusa con evidenze o limiti espliciti e tutte le verifiche ripetute
-sulla stessa build ([piano](../docs/client-c2b-plan.md),
-[rapporto](../docs/reports/client-c2-report.md#c2b-7--checklist-di-parità-e-prova-umana-b)).
-Dopo la prova umana B senza blocchi
-([scheda](../docs/reports/client-c2/c2b-7/prova-b-scheda.md)) **C2 è chiusa** dal proprietario (29 ottobre 2026). La scena C0 resta congelata in
+ADMIN; segnalazione al server degli errori non gestiti. Lo stato delle tappe è
+nell'[indice della documentazione](../docs/README.md#stato-corrente); il
+[rapporto C2](../docs/reports/client-c2-report.md) e il
+[piano C2b (storico)](../docs/history/client-c2b-plan.md) descrivono come ci si è arrivati. La scena C0 resta congelata in
 [client-c0/revision](../client-c0/revision/README.md) come evidenza del gate.
 
 C2a aggiunge la leggibilità di base (O11–O14): carte più grandi, ruolo e
