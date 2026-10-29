@@ -213,3 +213,28 @@ export function roundNote(r: Round | null): string | null {
   if (r.crossed) return `${last} risolto mentre eri fuori linea: valori finali della vista. Dettagli in «Ultimo turno».`;
   return null;
 }
+
+/**
+ * Pace of the round sequence (C3-2 revision, owner after the C3-2 trial; D10 raised to 10 s, D12): one card at a time
+ * — it appears at the author, flies to the target and hits it — then the object transfers, then the totals. Moves share
+ * what the 10 s budget leaves, between moveMin and moveMax; with many moves everything is scaled to stay within the budget.
+ */
+export const PACE = {budget: 10000, moveMin: 850, moveMax: 1500, objects: 550, tail: 800};
+/** Phases inside a move, as fractions of its duration: appear at the author, fly, hit the target. */
+export const MOVE_PHASE = {appear: .22, fly: .72};
+export type Span = {at: number; dur: number};
+export type Pace = {moves: Span[]; objects: Span | null; tail: Span; total: number};
+export function pace(moves: number, objects: boolean): Pace {
+  const fixed = PACE.tail + (objects ? PACE.objects : 0);
+  const move = moves ? Math.max(PACE.moveMin, Math.min(PACE.moveMax, (PACE.budget - fixed) / moves)) : 0;
+  const scale = Math.min(1, PACE.budget / (fixed + moves * move));
+  let at = 0;
+  const span = (d: number): Span => { const s = {at: Math.round(at), dur: Math.round(d * scale)}; at += d * scale; return s; };
+  const list = Array.from({length: moves}, () => span(move)), obj = objects ? span(PACE.objects) : null, tail = span(PACE.tail);
+  return {moves: list, objects: obj, tail, total: Math.round(at)};
+}
+/** D12: a tap jumps to the next card (then the objects, the totals); past the last stop it means the end. */
+export function nextStop(p: Pace, elapsed: number) {
+  const stops = [...p.moves.map(m => m.at), ...(p.objects ? [p.objects.at] : []), p.tail.at, p.total];
+  return stops.find(s => s > elapsed + 1) ?? p.total;
+}

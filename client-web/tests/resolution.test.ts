@@ -184,3 +184,21 @@ test('model round: set by a new turn, kept by views of the same turn, crossed af
  const s=new Model(c.previous,c.me);s.reset(clone(c.next));assert.equal(s.round!.crossed,true);
  const j=pair('jumpAfterForfeits'),jm=new Model(j.previous,j.me);jm.receive(clone(j.next));assert.equal(jm.round!.facts.relation,'jump');assert.equal(hasDifference(jm.round),false);
 });
+
+// C3-2 revision (owner, D10 raised to 10 s, D12): one card at a time, slower, within the budget; a tap goes to the next card.
+import {pace,nextStop,PACE} from '../src/resolution.ts';
+test('pace: one card at a time, slower in a duel, five cards of the FFA within 10 s',()=>{
+ for(const n of [1,2,3,4,5])for(const objects of [false,true]){const p=pace(n,objects);
+  assert.ok(p.total<=PACE.budget+1,`${n} moves within the budget (${p.total})`);
+  p.moves.forEach((m,i)=>{if(i)assert.ok(m.at>=p.moves[i-1].at+p.moves[i-1].dur-1,'cards do not overlap');});
+  const last=p.moves.at(-1)!;assert.ok((p.objects?.at??p.tail.at)>=last.at+last.dur-1,'objects and totals after the cards');}
+ assert.equal(pace(2,false).moves[0].dur,PACE.moveMax,'duel: each card at the slowest pace');
+ assert.ok(pace(2,false).moves[0].dur>=3*360,'about three times slower than the 1.2 s sequence shared by two cards');
+ assert.equal(pace(5,true).moves[0].dur,PACE.moveMax,'FFA, five cards and objects: same slow pace as the duel');assert.ok(pace(5,true).total<=10000);
+ assert.deepEqual(pace(0,false).moves,[]);
+});
+test('D12: each tap jumps to the next card, then the objects, the totals and the end',()=>{
+ const p=pace(3,true),stops=[p.moves[1].at,p.moves[2].at,p.objects!.at,p.tail.at,p.total];let t=10;
+ for(const s of stops){t=nextStop(p,t);assert.equal(t,s);}
+ assert.equal(nextStop(p,p.total),p.total,'past the last stop: the end');
+});

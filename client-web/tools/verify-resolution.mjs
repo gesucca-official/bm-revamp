@@ -13,6 +13,7 @@
 //    a card chosen during the sequence (rule 4) and a hidden tab (K5).
 // BM_RECORD=1 also writes the real view pairs used by tests/resolution.test.ts (tests/resolution-views.json).
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
+// BM_SERVER_PORT runs the temporary server on another port (with a preview on BM_PORT proxying to it via BM_SERVER).
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
@@ -38,15 +39,16 @@ const toolchain=JSON.parse(await readFile(join(repo,'scripts/toolchain.json'),'u
 const java=process.env.BM_JAVA??join(repo,'.tools',toolchain.tools.find(t=>t.name==='java').directory,'bin','java.exe');
 const jar=process.env.BM_JAR??'target/bm-server-0.0.1-SNAPSHOT.jar';
 const data=await mkdtemp(join(tmpdir(),'bm-resolution-'));
+const serverPort=process.env.BM_SERVER_PORT??'8080',api=`http://127.0.0.1:${serverPort}`;
 let server=null;
 async function startServer(){
  const log=createWriteStream(join(data,'server.log'),{flags:'a'});
- server=spawn(java,['-jar',jar,'--spring.profiles.active=local','--app.dev.seed-accounts=true'],{cwd:join(repo,'server'),env:{...process.env,BM_DATABASE_PATH:join(data,'bm.sqlite')},stdio:['ignore','pipe','pipe']});
+ server=spawn(java,['-jar',jar,'--spring.profiles.active=local','--app.dev.seed-accounts=true',`--server.port=${serverPort}`],{cwd:join(repo,'server'),env:{...process.env,BM_DATABASE_PATH:join(data,'bm.sqlite')},stdio:['ignore','pipe','pipe']});
  server.stdout.pipe(log);server.stderr.pipe(log);
  const end=Date.now()+90000;
  while(Date.now()<end){
   if(server.exitCode!==null)throw new Error(`server exited (${server.exitCode}); log in ${data}`);
-  try{const r=await fetch('http://127.0.0.1:8080/api/rest/v1/sign-in/validate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'devAlice',password:'local-alice'})});if(r.ok)return;}catch{}
+  try{const r=await fetch(`${api}/api/rest/v1/sign-in/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'devAlice',password:'local-alice'})});if(r.ok)return;}catch{}
   await new Promise(r=>setTimeout(r,500));}
  throw new Error('server did not start in 90 s');
 }
@@ -56,7 +58,7 @@ async function stopServer(){
  try{execFileSync('taskkill',['/PID',String(server.pid),'/T','/F'],{stdio:'ignore'});}catch{server.kill('SIGKILL');}
  await gone;server=null;
 }
-if(await fetch('http://127.0.0.1:8080/api/rest/v1/sign-in/validate',{method:'POST'}).then(()=>true,()=>false))throw new Error('port 8080 is in use: stop the other server first');
+if(await fetch(`${api}/api/rest/v1/sign-in/validate`,{method:'POST'}).then(()=>true,()=>false))throw new Error(`port ${serverPort} is in use: stop the other server first`);
 
 // --- Browser helpers ---
 const browser=await chromium.launch({channel:'msedge',headless:process.env.BM_HEADED!=='1'});
@@ -162,6 +164,31 @@ function record(name,me,previous,next,note){
 }
 
 // --- Per-game analysis of the views and of the facts the client exposed ---
+// D1 measurement (owner request after C3-2, not used by the client): do the regular "RESOURCE: a->b (d)" lines of the
+// server report, plus nominal costs and end-of-turn lines, give the real difference between the two views?
+// sum: totals per seat and resource; chain: each line starts from the value the previous step left (costs first, R04).
+const LINE=/(HEALTH|ALERTNESS|VIOLENCE|TOXICITY|ALCOHOL): (-?\d+)->(-?\d+) \((-?\d+)\)/;
+function reportCheck(prev,next,catalog){
+ const cost=new Map(catalog.map(c=>[c.name,c.cost]));const val={},sum={},issues=[];
+ for(const [id,p] of Object.entries(prev.players)){val[id]={...p.character.resources};sum[id]={};}
+ const add=(id,k,d)=>{sum[id][k]=(sum[id][k]??0)+d;};
+ const step=(id,line,where)=>{const m=line.match(LINE);if(!m)return;const [,k,a,b,d]=m;const A=+a,B=+b;if(B-A!==+d)issues.push(`${where}: delta text`);
+  if(!(id in val)){issues.push(`${where}: unknown seat`);return;}
+  if((val[id][k]??0)!==A)issues.push(`${where}: ${id} ${k} chain ${val[id][k]??0}≠${A}`);val[id][k]=B;add(id,k,B-A);};
+ let unknownCost=0;
+ for(const m of next.resolvedMoves){const c=cost.get(m.playedCardName);if(!c){unknownCost++;continue;}
+  for(const [k,v] of Object.entries(c)){val[m.playerId][k]=(val[m.playerId][k]??0)-v;add(m.playerId,k,-v);}}
+ next.resolvedMoves.forEach((m,i)=>{const target=m.targetId==='SELF'?m.playerId:m.targetId;
+  for(const line of m.moveReport?.SELF??[])step(m.playerId,line,`move ${i} SELF`);
+  for(const line of m.moveReport?.OPPONENT??[])step(target,line,`move ${i} OPPONENT`);});
+ for(const [id,lines] of Object.entries(next.timeBasedEffects??{}))for(const line of lines)step(id,line,`end ${id}`);
+ const sumIssues=[];
+ for(const [id,p] of Object.entries(next.players))for(const k of new Set([...Object.keys(p.character.resources),...Object.keys(prev.players[id]?.character.resources??{})])){
+  const real=(p.character.resources[k]??0)-(prev.players[id]?.character.resources[k]??0);if((sum[id]?.[k]??0)!==real)sumIssues.push(`${id} ${k}: report ${sum[id]?.[k]??0} vs view ${real}`);}
+ return {sumOk:!sumIssues.length,chainOk:!issues.length&&!sumIssues.length,unknownCost,sumIssues,chainIssues:issues,moves:next.resolvedMoves.map(m=>m.playedCardName)};
+}
+const reports=[];
+
 const cases={};const seen=(name,where)=>{(cases[name]??=[]).push(where);};
 const scramble=v=>{const x=structuredClone(v);for(const m of x.resolvedMoves)for(const k of Object.keys(m.moveReport??{}))m.moveReport[k]=m.moveReport[k].map(()=>'∅');for(const k of Object.keys(x.timeBasedEffects??{}))x.timeBasedEffects[k]=x.timeBasedEffects[k].map(()=>'∅');return x;};
 const strip=f=>JSON.parse(JSON.stringify(f));
@@ -204,6 +231,7 @@ function analyse(label,p,game,log,catalog,{expectSequences=true,quiet=new Set()}
    if(next.over){seen('over',where);record('over',me,prev,next,`${label}: fine partita ${next.winner}`);}
    if(Object.values(facts.seats).some(s=>s.forfeit))seen('forfeit',where);
   }
+  if(facts.contiguous){reports.push({game:label,turn:next.turn,...reportCheck(prev,next,catalog)});}
   if(facts.contiguous){const st=Object.values(facts.seats);k6.rounds++;if(st.some(x=>Object.entries(x.resources).some(([k,c])=>k!=='HEALTH'&&c.delta)))k6.otherResources++;if(st.some(x=>x.resources.HEALTH?.delta))k6.health++;
    if(st.some(x=>x.itemsGone.length||x.itemsAppeared.length))k6.objects++;if(facts.moves.some(m=>m.void))k6.voided++;if(facts.endOfTurn.length)k6.endOfTurn++;if(st.some(x=>x.deck.before!==x.deck.after))k6.draws++;}
   rows.push({turn:next.turn,from:prev.turn,relation:facts.relation,views:byTurn.get(turns[i]).length,moves:facts.moves.map(m=>`${m.author}:${m.card}${m.void?' (void)':''}${m.item?` [${m.item.name}${m.itemGone?' gone':''}]`:''}`),
@@ -253,9 +281,9 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
   if(n>maxTurns)throw new Error('too many turns');
   await p.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,300000,'turn resolved');
   // Let the round's sequence run to its end (1.2 s today), so that its completion is measured.
-  await p.wait(x=>!x||!x.sequence?.running,5000,'sequence end').catch(()=>{});
+  await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});
  }
- await p.wait(x=>!x||!x.sequence?.running,5000,'sequence end').catch(()=>{});
+ await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});
  const end=await p.state();
  // D4 on the outcome panel (a death with only computers left is followed by the whole chain at once).
  if(end.over||end.eliminated){const panel=await p.page.locator('[data-testid=round-note]').count()?await p.text('[data-testid=round-note]'):'';if(panel)notes.add(`panel: ${panel}`);}finals.push({turn:end.turn,problems:finalState(end,lastView(p,end.turn)),summary:end.summary?{key:end.summary.key,seats:Object.keys(end.summary.seats).length,texts:Object.values(end.summary.seats).map(x=>x.texts.join(' '))}:null,running:end.sequence.running});
@@ -270,7 +298,11 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
  // C3-2: how each sequence ended, the static summary at each choice, the line after a jump.
  const ends=r.stats.sequenceEnds??[],relation=Object.fromEntries((r.log??[]).filter(e=>e.facts.relation!=='same').map(e=>[e.facts.key,e.facts]));
  const c32=[];
- for(const e of ends){if(e.reason==='view')c32.push(`${e.key}: ended by a view (K1)`);if(e.reason==='complete'&&e.ms<1100)c32.push(`${e.key}: completed in ${e.ms} ms`);}
+ const plans=Object.fromEntries((r.stats.sequencePlans??[]).map(x=>[x.key,x]));
+ for(const e of ends){if(e.reason==='view')c32.push(`${e.key}: ended by a view (K1)`);const plan=plans[e.key];
+  // C3-2 revision: a completed sequence lasts what its plan says (one card at a time), never more than 10 s (D10).
+  if(e.reason==='complete'&&plan&&Math.abs(e.ms-plan.total)>250)c32.push(`${e.key}: completed in ${e.ms} ms, planned ${plan.total}`);}
+ for(const x of Object.values(plans))if(x.total>10000)c32.push(`${x.key}: planned ${x.total} ms with ${x.moves} moves`);
  for(const f of r.finals){if(!f.turn)continue;const key=`${game}/${f.turn}`,facts=relation[key];if(!facts)continue;
   if(facts.relation==='next'&&!f.summary)c32.push(`${key}: no static summary at the choice`);
   if(facts.relation==='next'&&f.summary&&(f.summary.key!==key||f.summary.seats!==Object.keys(facts.seats).length))c32.push(`${key}: summary of ${f.summary.key} with ${f.summary.seats} seats`);
@@ -355,7 +387,10 @@ try{
    assert.equal(st.sequence.running,false,`${name}: sequence brought to its end`);assert.equal(lastEnd(st).key,key);assert.deepEqual(out[name].final,[],`${name}: final state is the view`);return true;};
   const skip=async()=>{await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Salta effetti'}).click();};
   if(await round('skip',skip)&&out.skip.runningBefore){assert.equal(out.skip.end.reason,'skip','opening the menu does not end the sequence, «Salta effetti» does');assert.equal(out.skip.summaryKey,out.skip.key,'«Salta effetti» leaves the summary');}
-  if(await round('tap',async()=>{const p=await empty();await A.page.mouse.click(p.x,p.y);})&&out.tap.runningBefore){assert.equal(out.tap.end.reason,'input');assert.equal(out.tap.summaryKey,out.tap.key,'a tap leaves the summary');}
+  // D12: each tap on the empty table moves the sequence to the next card; the last one ends it (reason input).
+  if(await round('tap',async st=>{const plan=st.stats.sequencePlans.at(-1),stops=plan.moves+3;let taps=0;
+   for(;taps<stops;taps++){const before=await A.state();if(!before.sequence.running)break;const p=await empty();await A.page.mouse.click(p.x,p.y);await A.page.waitForTimeout(60);}
+   out.tapCount=taps;out.tapPlan=plan;})&&out.tap.runningBefore){assert.equal(out.tap.end.reason,'input','the last tap ends the sequence');assert.ok(out.tapCount>=2,'a first tap does not end a sequence with more cards');assert.equal(out.tap.summaryKey,out.tap.key,'taps leave the summary');}
   // Rule 4: during the sequence the first tap on a card chooses it (and ends the sequence); D6 then hides the summary.
   if(await round('cardDuringSequence',async st=>{const h=st.hits.find(x=>x.kind==='hand');await A.page.mouse.click(h.x-h.w*.22,h.y);out.cardKey=h.id;})){
    if(out.cardDuringSequence.runningBefore){assert.equal(out.cardDuringSequence.selected,out.cardKey,'card chosen at the first tap');assert.equal(out.cardDuringSequence.end.reason,'input');assert.equal(out.cardDuringSequence.summaryKey,null,'D6: the choice dismisses the summary');}
@@ -453,6 +488,8 @@ try{
   }
  }
 
+ evidence.reportConsistency={rounds:reports.length,sumOk:reports.filter(x=>x.sumOk).length,chainOk:reports.filter(x=>x.chainOk).length,unknownCost:reports.filter(x=>x.unknownCost).length,failures:reports.filter(x=>!x.chainOk)};
+ step('reportConsistency',{rounds:reports.length,sumOk:evidence.reportConsistency.sumOk,chainOk:evidence.reportConsistency.chainOk});
  evidence.cases=cases;
  const wanted=['void','itemConsumed','drawnToTable','death','over','jump','rejoinSame'];
  step('casesOnRealServer',{seen:Object.fromEntries(Object.entries(cases).map(([k,v])=>[k,v.length])),missing:wanted.filter(k=>!cases[k])});

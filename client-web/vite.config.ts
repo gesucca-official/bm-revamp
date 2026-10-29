@@ -5,7 +5,8 @@ import os from 'node:os';
 
 // Same rewrite as client-debug/proxy.config.json: the browser only sees /rest and /ws on loopback.
 const target = process.env.BM_SERVER ?? 'http://127.0.0.1:8080';
-const port = 4320;
+// BM_PORT lets a verification run beside a preview already open on 4320.
+const port = Number(process.env.BM_PORT ?? 4320);
 
 // Physical device mode (run.ps1 -Task Physical): BM_LAN=lan, or a private IPv4, serves the preview on
 // one private LAN address for a phone. The game server stays on loopback behind the proxy; every

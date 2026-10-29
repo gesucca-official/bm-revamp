@@ -7,7 +7,10 @@ su istruzione del proprietario, **un blocco alla volta**. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 **Decisioni D1–D11 confermate dal proprietario il 29 ottobre 2026**, D10 con una
-durata più lunga della proposta: fino a 5 s per round. Le modifiche di regole e
+durata più lunga della proposta: fino a 5 s per round. **Dopo la prova del
+proprietario su C3-2** (stesso giorno) D1 è riaperta e cambiata (variazioni per
+carta dalle righe regolari del report, verificate) e si aggiunge D12 (un tocco passa
+alla carta successiva): vedi [decisioni](#decisioni-del-proprietario). Le modifiche di regole e
 catalogo (A1, eventualmente A2) sono attività separate che partono dal regolamento.
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
@@ -135,8 +138,9 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
    salto, nessuna animazione e nessuna variazione (D4). Mai effetti calcolati nel
    client, mai interpretazione delle frasi del server (D1).
 4. **Le animazioni non bloccano invio né clock.** La scelta è possibile appena
-   arriva la vista; il primo tocco o tasto sul tavolo porta la sequenza allo stato
-   finale; il clock HTML continua; nessun Continue.
+   arriva la vista; scegliere una carta della mano porta la sequenza allo stato
+   finale; dalla revisione di C3-2 (D12) un tocco o tasto sul resto del tavolo passa
+   alla carta successiva, «Salta effetti» chiude; il clock HTML continua; nessun Continue.
 5. **Movimento ridotto e salto sequenza conservano le informazioni.** Il riepilogo
    statico del round (variazioni per posto, annullate, oggetti, eliminazioni, fine
    turno) appare comunque, e «Ultimo turno» resta consultabile.
@@ -146,7 +150,7 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
    risolvono anche dopo la morte dell'autore (R04).
 8. **Privacy:** nessun fronte avversario fuori da quanto `resolvedMoves` identifica;
    dorsi dai conteggi.
-9. **Durata:** fino a 5 s per round (D10), anche con cinque mosse in FFA; resta
+9. **Durata:** fino a 5 s per round (D10), portati a **10 s** dal proprietario nella revisione di C3-2, anche con cinque mosse in FFA; resta
    valida la regola 4, quindi la sequenza non toglie la possibilità di scegliere.
 
 ## Blocchi
@@ -234,6 +238,13 @@ restare valida l'interruzione del drag (C0-R4) senza chiudere la sequenza nel li
 effetti. Il riepilogo statico nella FFA a 844×390 compete per lo spazio con stati e
 ventagli.
 
+**Revisione dopo la prova del proprietario (29 ottobre 2026).** Le carte volano troppo in
+fretta per capire il round. Su decisione del proprietario, nella revisione di C3-2: **una
+carta per volta**, che compare presso l'autore, vola al bersaglio e lo colpisce, più
+lenta ed entro i 10 s di D10 (portati da 5 a 10 dal proprietario) anche in FFA a cinque; **un tocco o tasto sul tavolo passa
+alla carta successiva** (D12), scegliere una carta della mano e «Salta effetti»
+chiudono. Il contenuto animato non cambia: le variazioni per carta restano a C3-4.
+
 ### C3-3 — O6: frecce verso i bersagli ammessi
 
 **Perimetro.** Con una carta scelta o trascinata, frecce dalla carta ai bersagli
@@ -259,6 +270,14 @@ misura di C0 vale per la scena sintetica, va ripresa con le frecce).
 
 ### C3-4 — Sequenza del round con i soli dati certi
 
+**Revisione dopo la prova del proprietario su C3-2 (29 ottobre 2026).** Il proprietario
+trova le variazioni slegate dalle carte: in C3-4 **variazioni per carta** dalle righe
+regolari del report secondo D1 riaperta, con la barra della risorsa interessata
+ingrandita per un momento. Il passo 5 resta come ripiego quando la verifica delle righe
+non torna. Misura che ha motivato D1 riaperta:
+[evidenza](reports/client-c3/c3-4/d1-measure.json). Il ritmo (una carta per volta, D12)
+è già nella revisione di C3-2.
+
 **Perimetro.** Sequenza nell'ordine di `resolvedMoves`, secondo D1:
 
 1. **Costi:** gettoni del costo nominale lasciano ogni autore, tutti insieme
@@ -270,10 +289,13 @@ misura di C0 vale per la scena sintetica, va ripresa con le frecce).
 3. **Pesca:** la propria carta giocata va allo scarto e le nuove arrivano dal mazzo;
    gli avversari mostrano un dorso dal mazzo solo se i conteggi lo dicono; un
    oggetto comparso senza mossa collegata arriva dal mazzo al tavolo.
-4. **Fine turno:** un accento sui posti con effetti, senza numeri propri.
-5. **Variazioni:** barre e numeri vanno dal valore precedente a quello finale per
-   ogni risorsa (D5), poi resta il riepilogo statico; morti e forfait ricevono
-   l'enfasi.
+4. **Fine turno:** un accento sui posti con effetti; con D1 riaperta, le loro
+   variazioni verificate.
+5. **Variazioni:** con le righe verificate (D1) i costi, ogni mossa e il fine turno
+   muovono barre e numeri dei posti toccati nel proprio passo, ingrandendo la risorsa
+   interessata; altrimenti barre e numeri vanno dal valore precedente a quello
+   finale per ogni risorsa (D5). Poi resta il riepilogo statico; morti e forfait
+   ricevono l'enfasi.
 
 Le mosse continuano dopo una morte (regola 7). Durata fino a 5 s (D10),
 interrompibile.
@@ -404,7 +426,7 @@ D1–D4 prima della stesura, D5–D11 dopo; D10 con una modifica rispetto alla p
 
 | ID | Domanda | Opzioni | Raccomandazione |
 |---|---|---|---|
-| D1 (O7) | Con quali informazioni si anima la risoluzione | solo dati certi / anche i numeri `RISORSA: a->b` del report / eventi strutturati dal server prima di C3 | **Solo dati certi** — confermata. Il testo del server resta da leggere, non viene interpretato; gli eventi strutturati non sono pianificati. |
+| D1 (O7) | Con quali informazioni si anima la risoluzione | solo dati certi / anche i numeri `RISORSA: a->b` del report / eventi strutturati dal server prima di C3 | **Solo dati certi** — confermata, poi **riaperta e cambiata dal proprietario il 29 ottobre 2026** dopo la prova di C3-2: anche le sole righe regolari `RISORSA: a->b (d)` del report (mossa per mossa, `SELF` all'autore, `OPPONENT` al bersaglio, e fine turno), **solo se** sommate ai costi nominali danno esattamente la differenza fra le due viste e ogni riga parte dal valore lasciato dalla precedente; altrimenti solo il totale del round (passo 5). Misura su 118 round reali: 113 tornano, i 5 restanti sono il veleno a timer di MarvelousCocktail, che il server non scrive. Le altre frasi restano non interpretate; gli eventi strutturati non sono pianificati. |
 | D2 | Fonte del tipo di danno per gli effetti | campo descrittivo nel catalogo (A1, regolamento 1.9) / solo ruolo R07a / tabella nel client | **Campo nel catalogo** — confermata, come O14: le informazioni sulle carte restano in un posto. Senza A1, C3-5 ripiega sul ruolo. |
 | D3 (O6) | Frecce in FFA | posti ammessi, oggetti contornati / ogni bersaglio / solo verso il bersaglio sotto il puntatore | **Posti ammessi, oggetti contornati** — confermata. |
 | D4 | Dopo un salto di turni | stato finale e testo / animare l'ultimo round senza numeri | **Stato finale e testo** — confermata. |
@@ -413,7 +435,8 @@ D1–D4 prima della stesura, D5–D11 dopo; D10 con una modifica rispetto alla p
 | D7 | Lingua del report | fatti certi in italiano più testo del server invariato / tradurre le frasi del server | **Fatti in italiano più testo del server** in sezione secondaria; tradurre vorrebbe dire interpretare frasi che non sono un contratto. Confermata. |
 | D8 | Casi rari su partite reali | mazzi sintetici validi per R02 salvati sul database temporaneo e usati in open 1vCom, più viste registrate per le unità / ganci di test nel server | **Mazzi sintetici e viste registrate**: per esempio molte carte di contrasto, presa e furto, tossicità alta, Banzai. Nessun cambio al server; i casi non ottenuti si dichiarano. Confermata. |
 | D9 | Asset degli effetti | grafica vettoriale Pixi / nuove texture e suoni | **Vettoriale**; texture e suoni restano a C4 con provenienza e licenze. Confermata. |
-| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. |
+| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. **Portata a 10 s** dal proprietario il 29 ottobre 2026, nella revisione di C3-2 (una carta per volta, D12): con cinque mosse in FFA ogni carta mantiene il ritmo del duello. |
+| D12 | Avanzamento fra le carte (dopo la prova di C3-2) | automatico, un tocco passa alla carta successiva / manuale solo contro computer / manuale sempre | **Automatico, un tocco accelera** — scelta del proprietario il 29 ottobre 2026. Una carta per volta, più lenta, entro D10; un tocco o tasto sul tavolo passa alla carta successiva, scegliere una carta della mano chiude la sequenza, «Salta effetti» chiude; regola 4 invariata nella sostanza (nessun blocco, nessun Continue). |
 | D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. Confermata. |
 
 ## Cosa non è in C3

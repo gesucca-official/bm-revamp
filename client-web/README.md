@@ -243,13 +243,19 @@ verifica.
 `Model.round` conserva l'ultimo round risolto: le viste dello stesso turno non lo
 cambiano; dopo una caduta o un reset è marcato `crossed` e non mostra differenze.
 La scena anima lo stesso contenuto di prima (voli delle carte nell'ordine di
-`resolvedMoves`, accenti, totale di salute), ma **fino in fondo** (1,2 s):
+`resolvedMoves`, accenti, totale di salute), ma **fino in fondo** e, dopo la prova del
+proprietario, **una carta per volta**: ogni carta compare presso l'autore, vola al
+bersaglio e lo colpisce in 1,5 s; poi i trasferimenti di oggetti e i totali. Il ritmo
+(`pace` in `src/resolution.ts`) sta entro 10 s per round (D10 portata a 10 s): con
+cinque carte in FFA ognuna mantiene 1,5 s.
 
 - una vista dello stesso turno annulla solo un trascinamento, non la sequenza (K1);
-- la sequenza si chiude solo con un nuovo turno, un reset, una caduta, un input sul
-  tavolo (tocco, clic, tasto: la carta toccata si sceglie subito), «Salta effetti»,
-  ridimensionamento o scheda nascosta; aprire un dialogo o perdere il fuoco della
-  finestra non la ferma;
+- un tocco, clic o tasto sul tavolo passa alla carta successiva, poi agli oggetti e ai
+  totali; dopo l'ultimo la sequenza finisce (D12). Scegliere una carta della mano la
+  chiude e sceglie subito la carta;
+- la sequenza si chiude anche con un nuovo turno, un reset, una caduta, «Salta
+  effetti», ridimensionamento o scheda nascosta; aprire un dialogo o perdere il fuoco
+  della finestra non la ferma;
 - parte al massimo una volta per `gameId/turn` e solo per un round contiguo della
   stessa connessione, con movimento possibile;
 - dopo un salto di turni o un round arrivato dopo una caduta: nessuna sequenza,
@@ -332,7 +338,8 @@ Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
 la annulla (Esc) e la compila da tastiera dopo «Riprova».
 `VerifyResolution` (C3-1, C3-2, database temporaneo) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
-tocco sul tavolo vuoto, carta scelta durante la sequenza, scheda nascosta: reale se il
+tocchi sul tavolo vuoto che passano di carta in carta, carta scelta durante la sequenza,
+scheda nascosta: reale se il
 browser la riporta, altrimenti emulata e dichiarata),
 FFA con quattro computer (guardando dopo la propria morte), FFA con devBob e tre computer
 in cui i due umani lasciano scadere il clock (salto di turni) e open 1vCom con due mazzi
@@ -341,13 +348,19 @@ rubati e token). A ogni vista confronta i fatti esposti dal client con quelli ri
 sulle viste ricevute, controlla che le variazioni sommate alla vista precedente diano la
 nuova, che salti, altre partite e viste dello stesso turno non portino differenze e che i
 fatti non cambino sostituendo il testo del server. Da C3-2 controlla anche la scena:
-regole 1, 2, 3 e 6 del piano, una sequenza completa (circa 1,2 s) per ogni round
+regole 1, 2, 3 e 6 del piano, una sequenza completa della durata pianificata (al
+massimo 10 s) per ogni round
 contiguo con mosse, mai chiusa da una vista, riepilogo statico del round a ogni scelta,
 nessuna sequenza né riepilogo dopo un salto e la riga dei turni risolti; fra umani, la
 regola 4 con il clock che continua. `BM_SCENARIOS` sceglie
 gli scenari (`quick,reduced,interrupt,ffa,jump,open`); `BM_RECORD=1` aggiunge a
 `tests/resolution-views.json` i casi non ancora registrati (viste reali, carte ridotte
-ai campi che il modello legge).
+ai campi che il modello legge). Misura anche, senza effetti sul client, quanto spesso le
+righe «RISORSA: a->b» del report più costi e fine turno danno la differenza fra le viste
+(`reportConsistency`, base della decisione D1 riaperta). `BM_SERVER_PORT` avvia il server
+temporaneo su un'altra porta, con un'anteprima su `BM_PORT` (variabile letta da
+`vite.config.ts`) che punta a lui con `BM_SERVER`: serve per verificare accanto a un
+server locale già acceso.
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in

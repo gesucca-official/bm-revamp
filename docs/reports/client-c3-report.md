@@ -4,7 +4,9 @@
 [piano C3](../client-c3-plan.md), con le decisioni D1–D11 confermate dal proprietario.
 **C3-1 (modello puro della risoluzione e strumento di verifica) è fatto**
 ([sezione](#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)), **C3-2
-(sequenza affidabile) è fatto** ([sezione](#c3-2--sequenza-affidabile)). Gli altri
+(sequenza affidabile) è fatto** ([sezione](#c3-2--sequenza-affidabile)), con una
+**revisione dopo la prova del proprietario** (una carta per volta, tocco che passa alla
+successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-proprietario)). Gli altri
 blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
 è fatta a parte.
 
@@ -240,3 +242,88 @@ passa da 30 a 28 s nei 2,3 s successivi.
   `lifecycle-*`, `ffa-*`, `decks-*`, `modes-*` e [size.json](client-c3/c3-2/size.json)
   nella stessa cartella (catture conservate solo per `VerifyResolution` e `Verify`, per
   non appesantire il repository).
+
+## C3-2 — Revisione dopo la prova del proprietario
+
+29 ottobre 2026. Il proprietario ha provato C3-2 sul client locale e ha osservato:
+
+1. le carte sono troppo veloci e non si capisce cosa succede;
+2. guadagni e perdite non seguono l'attivazione delle carte: compaiono solo come totale
+   nella striscia sopra le risorse.
+
+**Decisioni del proprietario** (piano C3 aggiornato):
+
+- **D12:** una carta per volta, più lenta, con avanzamento automatico. Un tocco passa alla
+  carta successiva; scegliere una carta della mano e «Salta effetti» chiudono la sequenza.
+  Nessun blocco della scelta, nessun Continue: la regola 4 resta nella sostanza.
+- **D10 portata a 10 s per round**, così anche le cinque carte di una FFA hanno il ritmo
+  del duello.
+- **D1 riaperta.** Le variazioni carta per carta, con la barra della risorsa ingrandita,
+  verranno dalle sole righe regolari del report, verificate sulla vista, con ripiego sul
+  totale. **Restano a C3-4.** Questa revisione cambia solo il ritmo.
+
+### Misura che ha motivato D1 riaperta
+
+Prima di decidere ho misurato, senza toccare il client, su partite reali (quick 1vCom,
+FFA con computer, open con i mazzi sintetici; database temporaneo). Per ogni round
+contiguo: righe «RISORSA: a->b» del report (autore per `SELF`, bersaglio per `OPPONENT`,
+anche sulle mosse su sé), più i costi nominali tolti prima degli effetti (R04), più le
+righe di fine turno, confrontate con la differenza fra le due viste. Due controlli: la
+**somma** per posto e risorsa, e la **catena**, cioè ogni riga parte dal valore lasciato
+dalla precedente.
+
+| Esecuzioni | Round | Somma e catena tornano |
+|---|---|---|
+| Misura dedicata, due esecuzioni ([d1-measure.json](client-c3/c3-4/d1-measure.json)) | 118 | 113 (96%) |
+| Esecuzioni finali di questa revisione, entrambe le misure (`reportConsistency`) | 131 | 128 |
+
+Tutti gli scarti della misura dedicata hanno la stessa causa: mancano esattamente 20 di
+HEALTH presso un posto con un timer di **MarvelousCocktail** (Mescolone Micidiale) in
+scadenza. Quel veleno arriva dal timer, e per i timer il server scrive solo «Timer
+expired … effect triggered», senza numeri. Dove la somma torna, torna sempre anche la
+catena.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Ritmo (`pace` in `src/resolution.ts`) | Una carta per volta: per il 22% della sua durata compare presso l'autore (ingrandendosi), fino al 72% vola al bersaglio, poi lo colpisce (accento) e svanisce. Dopo le carte vengono i trasferimenti di oggetti (550 ms) e il totale di HEALTH (800 ms). Ogni carta dura fra 0,85 e 1,5 s, in base a quanto lascia il budget di 10 s: in duello 1,5 s per carta (3,8 s per round, contro 1,2 s di prima); in FFA con cinque carte e oggetti ancora 1,5 s (8,85 s). Contenuto animato invariato. |
+| Avanzamento (D12) | Tocco o clic sul tavolo, anche su un personaggio o un oggetto, e tasto su un elemento: la sequenza salta all'inizio della carta successiva, poi agli oggetti, ai totali, e infine finisce. Il tocco fa anche la sua azione (ispezione, alzare un oggetto coperto). Una carta della mano chiude la sequenza e viene scelta subito. «Salta effetti», nuovo turno, reset, caduta, ridimensionamento e scheda nascosta la chiudono come in C3-2. |
+| Test automatici | Client **133** (131 + 2): ritmo entro il budget e senza sovrapposizioni fra carte per 1–5 carte con e senza oggetti, 1,5 s in duello e in FFA; ogni tocco porta alla fermata successiva fino alla fine. |
+| Server reale | **Sì.** `VerifyResolution` controlla che ogni sequenza completata duri quanto il suo piano (±250 ms) e che nessun piano superi 10 s. Lo scenario dei tocchi attraversa un round tocco dopo tocco. Verde a 1366×768 e 844×390 sulla build finale. |
+| Regressione | Sulla build finale: `Verify` e `VerifyModes` (server su database temporaneo), `VerifyLifecycle`, `VerifyFfa` e `VerifyDecks` verdi a 1366×768 e 844×390; `build.ps1 -Task Test -Offline` (254 server + 36 debug) e `check-rules.py` passano. |
+| Peso | JS gzip 310757 byte (+572 rispetto a C3-2); totale gzip 1093552 byte ([size.json](client-c3/c3-2r/size.json)). |
+| Strumenti | Porte configurabili per verificare accanto a un server locale acceso: `BM_SERVER_PORT` nello strumento, `BM_PORT` in `vite.config.ts`. Predefiniti invariati (8080, 4320). |
+
+### Scenari reali (entrambe le misure)
+
+Esecuzioni finali: [1366×768](client-c3/c3-2r/resolution-1366x768.json) e
+[844×390](client-c3/c3-2r/resolution-844x390.json).
+
+| Partita | 1366×768 | 844×390 |
+|---|---|---|
+| Quick 1vCom con caduta e rientro | 12 round, 12 sequenze complete in 3800–3806 ms | 17 round, 17 complete in 3800–3808 ms |
+| FFA con quattro computer | 20 round, 20 complete in 5305–8850 ms; salto 20→22 dopo la morte di devAlice, riga sul pannello | 19 round, 19 complete in 3800–8856 ms |
+| FFA con devBob, forfait per tempo | salto 1→16 senza sequenza né riepilogo, riga «Risolti 15 turni…» | salto 1→21, «Risolti 20 turni…» |
+| Open «C3 contrasti» / «C3 furti» | 14 e 13 round, tutte complete (3,8 s) | 17 e 17 round, tutte complete (3,8–4,36 s con oggetti) |
+| Tocchi (D12) | round di due carte, piano 3800 ms: tre tocchi sul tavolo vuoto (seconda carta, totali, fine), chiusa dopo 3076 ms con motivo `input`, riepilogo presente | uguale, chiusa dopo 3079 ms |
+| «Salta effetti», carta scelta, scheda nascosta (emulata) | `skip` dopo 123 ms; la carta toccata è scelta subito (`input`); nessuna sequenza al ritorno | `skip` dopo 119 ms; come a sinistra |
+| Regola 4 fra umani | carta scelta durante la sequenza, clock da 30 a 28 s | come a sinistra |
+| Sequenze chiuse da una vista | 0 | 0 |
+
+### Limiti e residui
+
+- **Tempo di lettura fra umani:** una FFA con cinque mosse dura fino a 8,85 s dei 30 s
+  del clock. La scelta resta libera durante la sequenza (regola 4), e la sequenza si
+  attraversa con i tocchi. Il dato per un'eventuale A2 si raccoglie in C3-4 e C3-7.
+- **Avanzamento con un tocco su un bersaglio:** quando non c'è una carta scelta, il tocco
+  su un personaggio o un oggetto apre anche l'ispezione, come prima. È voluto (il tocco
+  non perde la sua azione), ma da valutare nella prova.
+- Variazioni carta per carta e barra ingrandita: C3-4, con D1 riaperta.
+- Scheda nascosta ancora **emulata** (Edge headless); dispositivo fisico, iPhone e
+  prova umana del ritmo non fatti in questa revisione.
+- Dati locali non toccati dalle verifiche: tutte su database temporanei.
+- Evidenze: `resolution-*`, regressione `verify-*`, `lifecycle-*`, `ffa-*`, `decks-*`,
+  `modes-*` e [size.json](client-c3/c3-2r/size.json) in
+  [client-c3/c3-2r](client-c3/c3-2r/) (catture solo per `VerifyResolution` e `Verify`);
+  misura D1 in [c3-4/d1-measure.json](client-c3/c3-4/d1-measure.json).

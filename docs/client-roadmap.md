@@ -1,7 +1,8 @@
 # Roadmap del client web animato
 
-**29 ottobre 2026 — versione 26. C0, C1 e C2 sono chiuse; C3 è in corso nel
-[piano C3](client-c3-plan.md): C3-1 e C3-2 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**29 ottobre 2026 — versione 27. C0, C1 e C2 sono chiuse; C3 è in corso nel
+[piano C3](client-c3-plan.md): C3-1 e C3-2 (con la revisione dopo la prova del
+proprietario) sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -506,6 +507,9 @@ regole di non-regressione e decisioni nel [piano C3](client-c3-plan.md).
 dello stesso turno e arriva in fondo; nessuna animazione dopo un salto di turni, con la
 riga dei turni risolti; riepilogo statico delle variazioni accanto a ogni posto, anche
 con movimento ridotto, dopo «Salta effetti», un tocco o la scheda nascosta.
+**Revisione di C3-2 dopo la prova del proprietario:** una carta per volta (1,5 s), un
+tocco passa alla carta successiva (D12), budget del round portato a 10 s (D10); D1
+riaperta per le variazioni carta per carta in C3-4, dopo una misura su partite reali.
 
 **Attività:** affinare selezione/bersagli, costo, carta confermata, annullamento,
 variazioni risorse, trasferimento/consumo oggetti, scarto/pesca osservabili,
@@ -688,6 +692,12 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 27 — 29 ottobre 2026, revisione di C3-2:** dopo la prova del proprietario
+  la sequenza mostra una carta per volta, più lenta, e un tocco passa alla successiva
+  (D12); budget del round da 5 a 10 s (D10). D1 riaperta: in C3-4 le variazioni carta per
+  carta verranno dalle righe regolari del report, verificate sulla vista (misura: 113 round
+  su 118 tornano, gli altri sono il veleno a timer di MarvelousCocktail). Nessuna regola,
+  API o servizio cambiato.
 - **Versione 26 — 29 ottobre 2026, C3-2:** sequenza del round affidabile (K1–K5 del
   piano C3): non più annullata dalla seconda vista del round, mai dopo un salto di turni
   o un rientro, riepilogo statico per posto fino alla prima scelta o al round successivo,

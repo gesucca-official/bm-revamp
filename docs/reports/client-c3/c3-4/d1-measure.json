@@ -1,0 +1,107 @@
+{
+ "date": "2026-10-29T17:41:26.479Z",
+ "kind": "D1 measurement: regular RESOURCE: a->b lines of moveReport and timeBasedEffects plus nominal catalog costs, compared with the difference between two consecutive real views (quick 1vCom, FFA with computers, open 1vCom with synthetic decks; temporary database; tools/verify-resolution.mjs reportCheck)",
+ "runs": [
+  {
+   "date": "2026-10-29T17:29:42.302Z",
+   "rounds": 56,
+   "sumOk": 52,
+   "chainOk": 52,
+   "unknownCost": 0,
+   "failures": [
+    {
+     "game": "quick",
+     "turn": 13,
+     "sumOk": false,
+     "chainOk": false,
+     "unknownCost": 0,
+     "sumIssues": [
+      "devAlice HEALTH: report -5 vs view -25"
+     ],
+     "chainIssues": [],
+     "moves": [
+      "Ago Marcio e Spezzato",
+      "Ago Marcio e Spezzato"
+     ]
+    },
+    {
+     "game": "quick",
+     "turn": 14,
+     "sumOk": false,
+     "chainOk": false,
+     "unknownCost": 0,
+     "sumIssues": [
+      "ComPlayer_2895 HEALTH: report -5 vs view -25"
+     ],
+     "chainIssues": [],
+     "moves": [
+      "Ghigno co' i' Denti Marci",
+      "Ago Marcio e Spezzato"
+     ]
+    },
+    {
+     "game": "ffa",
+     "turn": 5,
+     "sumOk": false,
+     "chainOk": false,
+     "unknownCost": 0,
+     "sumIssues": [
+      "devAlice HEALTH: report 0 vs view -20"
+     ],
+     "chainIssues": [],
+     "moves": [
+      "Ghigno co' i' Denti Marci",
+      "LIEVE FASTIDIO",
+      "Ago Marcio e Spezzato",
+      "Ago Marcio e Spezzato",
+      "Desiderio Incontrollabile"
+     ]
+    },
+    {
+     "game": "open C3 contrasti",
+     "turn": 16,
+     "sumOk": false,
+     "chainOk": false,
+     "unknownCost": 0,
+     "sumIssues": [
+      "ComPlayer_7416 HEALTH: report -30 vs view -50"
+     ],
+     "chainIssues": [],
+     "moves": [
+      "Grab",
+      "Last Resort: Banzai!!!"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-29T17:32:22.638Z",
+   "rounds": 62,
+   "sumOk": 61,
+   "chainOk": 61,
+   "unknownCost": 0,
+   "failures": [
+    {
+     "game": "open C3 furti",
+     "turn": 14,
+     "sumOk": false,
+     "chainOk": false,
+     "unknownCost": 0,
+     "sumIssues": [
+      "devAlice HEALTH: report -10 vs view -30"
+     ],
+     "chainIssues": [],
+     "moves": [
+      "Last Resort: Banzai!!!",
+      "Desiderio Incontrollabile"
+     ]
+    }
+   ]
+  }
+ ],
+ "total": {
+  "rounds": 118,
+  "sumOk": 113,
+  "chainOk": 113
+ }
+}
