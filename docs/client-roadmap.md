@@ -1,7 +1,7 @@
 # Roadmap del client web animato
 
-**29 ottobre 2026 — versione 24. C0, C1 e C2 sono chiuse; la prossima tappa è
-C3, pianificata nel [piano C3](client-c3-plan.md).** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**29 ottobre 2026 — versione 25. C0, C1 e C2 sono chiuse; C3 è in corso nel
+[piano C3](client-c3-plan.md): C3-1 è fatto.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -499,6 +499,9 @@ ed enfasi coerenti, senza rallentare le decisioni.
 
 **Piano (29 ottobre 2026):** sette blocchi C3-1…C3-7, osservazione del server reale,
 regole di non-regressione e decisioni nel [piano C3](client-c3-plan.md).
+**C3-1 fatto (29 ottobre 2026):** modello puro dei fatti certi del round e verifica
+`VerifyResolution` su partite reali; la scena non cambia ancora, K1–K6 misurati nel
+[rapporto C3](reports/client-c3-report.md).
 
 **Attività:** affinare selezione/bersagli, costo, carta confermata, annullamento,
 variazioni risorse, trasferimento/consumo oggetti, scarto/pesca osservabili,
@@ -669,8 +672,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** C3-1 del [piano C3](client-c3-plan.md), su istruzione del
-proprietario (decisioni D1–D11 confermate); l'attività A1 (tipo di
+**Prossimo passo:** C3-2 del [piano C3](client-c3-plan.md) (sequenza affidabile,
+K1–K5), su istruzione del proprietario; C3-1 è fatto; l'attività A1 (tipo di
 danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -680,6 +683,13 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 25 — 29 ottobre 2026, C3-1:** modello puro della risoluzione
+  (`client-web/src/resolution.ts`), test su viste reali registrate e verifica
+  `VerifyResolution` su quick 1vCom, FFA e open 1vCom con mazzi sintetici, a 1366×768 e
+  844×390; K1–K6 misurati come stato di partenza
+  ([rapporto C3](reports/client-c3-report.md)). Osservato che il server può cambiare
+  l'ordine dei timer fra viste dello stesso turno (fuori perimetro). Nessuna regola,
+  API o servizio cambiato.
 - **Versione 24 — 29 ottobre 2026, decisioni del piano C3:** il proprietario conferma
   D5–D11; D10 cambia: sequenza del round fino a 5 s invece di 2, per animazioni più
   curate. Un clock della mossa più lungo resta un'eventuale attività A2 dal

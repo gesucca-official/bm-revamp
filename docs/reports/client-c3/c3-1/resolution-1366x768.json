@@ -1,0 +1,3181 @@
+{
+ "date": "2026-10-29T13:49:45.154Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "games": {
+  "quick": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c",
+   "turnsSeen": 8,
+   "views": 17,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Desiderio Incontrollabile [Mescolone Micidiale gone]",
+      "ComPlayer_5004:SPEDIAMOTI DUNQUE IN O-AHIO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -22,
+       "ALERTNESS": -17,
+       "TOXICITY": 20,
+       "ALCOHOL": 20
+      },
+      "ComPlayer_5004": {
+       "VIOLENCE": -20
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_5004:LIEVE FASTIDIO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_5004": {
+       "HEALTH": -7,
+       "VIOLENCE": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_5004"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Ago Marcio e Spezzato",
+      "ComPlayer_5004:PAZIENZA: FINITA"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_5004": {
+       "HEALTH": -10,
+       "ALERTNESS": 15,
+       "VIOLENCE": 15,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_5004"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5004:LIEVE FASTIDIO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_5004": {
+       "HEALTH": -12,
+       "VIOLENCE": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_5004"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5004:LIEVE FASTIDIO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -20,
+       "TOXICITY": 5
+      },
+      "ComPlayer_5004": {
+       "HEALTH": -15,
+       "VIOLENCE": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5004"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5004:SVEGLIAMOCI MA TU NO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -32,
+       "ALERTNESS": -10,
+       "TOXICITY": 5,
+       "ALCOHOL": -11
+      },
+      "ComPlayer_5004": {
+       "HEALTH": -17,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5004"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5004:SVEGLIAMOCI MA TU NO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -35,
+       "ALERTNESS": -4,
+       "TOXICITY": 5,
+       "ALCOHOL": -5
+      },
+      "ComPlayer_5004": {
+       "HEALTH": -20,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5004"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_5004",
+    "eliminated": true
+   }
+  },
+  "ffa": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb",
+   "turnsSeen": 17,
+   "views": 33,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_3327:Riflessi Aumentati dalla Speed",
+      "ComPlayer_8773:LIEVE FASTIDIO",
+      "devAlice:Ago Marcio e Spezzato",
+      "ComPlayer_725:Ago Marcio e Spezzato",
+      "ComPlayer_1162:PAZIENZA: FINITA"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -7,
+       "ALERTNESS": 15,
+       "VIOLENCE": 15,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -7,
+       "VIOLENCE": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_3327": {
+       "TOXICITY": -10
+      },
+      "ComPlayer_725": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_1162",
+      "ComPlayer_8773"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1162:LIEVE FASTIDIO",
+      "ComPlayer_725:Ghigno co' i' Denti Marci",
+      "devAlice:Ago Marcio e Spezzato",
+      "ComPlayer_3327:Ago Marcio e Spezzato",
+      "ComPlayer_8773:SPEDIAMOTI DUNQUE IN O-AHIO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -37,
+       "VIOLENCE": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -2,
+       "VIOLENCE": -20
+      },
+      "ComPlayer_3327": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_725": {
+       "HEALTH": -5,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_1162",
+      "ComPlayer_8773"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Ago Marcio e Spezzato",
+      "ComPlayer_1162:AMMALIAMOTI DI BOTTE",
+      "devAlice:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "ComPlayer_3327:Steal [Peroni da 66, calda gone]",
+      "ComPlayer_8773:PAZIENZA: FINITA"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -17,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -5,
+       "VIOLENCE": -15
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -17,
+       "ALERTNESS": 15,
+       "VIOLENCE": 15,
+       "TOXICITY": 10
+      },
+      "ComPlayer_3327": {
+       "HEALTH": -5,
+       "ALERTNESS": -10,
+       "TOXICITY": 5
+      },
+      "ComPlayer_725": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1162",
+      "ComPlayer_8773"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Ago Marcio e Spezzato",
+      "ComPlayer_1162:SVEGLIAMOCI MA TU NO",
+      "devAlice:Ago Marcio e Spezzato",
+      "ComPlayer_8773:GARGANTUESCO IMPATTO SUL TU",
+      "ComPlayer_3327:Steal [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -40,
+       "ALERTNESS": -1,
+       "TOXICITY": 5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -12,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -7,
+       "VIOLENCE": -25
+      },
+      "ComPlayer_3327": {
+       "HEALTH": -10,
+       "ALERTNESS": -10,
+       "TOXICITY": 5
+      },
+      "ComPlayer_725": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1162",
+      "ComPlayer_8773"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1162:FAI BASTA",
+      "ComPlayer_725:Ghigno co' i' Denti Marci",
+      "ComPlayer_8773:SVEGLIAMOCI MA TU NO (void)",
+      "ComPlayer_3327:Desiderio Incontrollabile [Negroni Trovato per Terra gone]",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -15,
+       "VIOLENCE": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -7,
+       "ALERTNESS": 5
+      },
+      "ComPlayer_3327": {
+       "ALERTNESS": -14,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_1162",
+      "ComPlayer_8773",
+      "ComPlayer_3327"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Riflessi Aumentati dalla Speed",
+      "ComPlayer_8773:LIEVE FASTIDIO",
+      "ComPlayer_1162:PERMESSO SCUSA ORA SMETTI ",
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]",
+      "ComPlayer_3327:Ago Marcio e Spezzato (void)"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -11,
+       "ALCOHOL": 4
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -10,
+       "VIOLENCE": -10
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -14,
+       "VIOLENCE": 5
+      },
+      "ComPlayer_3327": {
+       "ALERTNESS": -3,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_725": {
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1162",
+      "ComPlayer_8773",
+      "ComPlayer_3327"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Ghigno co' i' Denti Marci",
+      "ComPlayer_1162:LIEVE FASTIDIO",
+      "ComPlayer_8773:SVEGLIAMOCI MA TU NO",
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]",
+      "ComPlayer_3327:Rabbia Psicotica da Meth"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -7,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -13,
+       "ALERTNESS": -5,
+       "VIOLENCE": 5
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -22,
+       "ALERTNESS": 5
+      },
+      "ComPlayer_3327": {
+       "HEALTH": -5,
+       "ALERTNESS": -1,
+       "TOXICITY": -5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1162",
+      "ComPlayer_8773",
+      "ComPlayer_3327"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "ComPlayer_8773:SVEGLIAMOCI MA TU NO",
+      "ComPlayer_3327:C'è del sangue nella mia droga",
+      "devAlice:Desiderio Incontrollabile [Broken Beer Bottle gone]",
+      "ComPlayer_1162:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -6,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_1162": {
+       "HEALTH": -15,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 10,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_8773": {
+       "HEALTH": -7,
+       "ALERTNESS": 5
+      },
+      "ComPlayer_3327": {
+       "TOXICITY": -15,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": -27,
+       "ALCOHOL": 2
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1162",
+      "ComPlayer_8773",
+      "ComPlayer_3327",
+      "ComPlayer_725"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 9,
+     "from": 8,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Ghigno co' i' Denti Marci",
+      "ComPlayer_3327:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "devAlice:Desiderio Incontrollabile [Broken Beer Bottle gone]",
+      "ComPlayer_8773:NON GIOCARE COL COLTELLO NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -7,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {
+       "HEALTH": -7,
+       "ALERTNESS": -5,
+       "VIOLENCE": 10
+      },
+      "ComPlayer_3327": {
+       "ALERTNESS": -3,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": 4,
+       "ALCOHOL": -2
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_8773",
+      "ComPlayer_3327",
+      "ComPlayer_725"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 10,
+     "from": 9,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Ghigno co' i' Denti Marci",
+      "ComPlayer_8773:SVEGLIAMOCI MA TU NO",
+      "ComPlayer_3327:Dose di Eroina da Cavalli",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {
+       "HEALTH": -12,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_3327": {
+       "ALERTNESS": -6,
+       "TOXICITY": 30,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8773",
+      "ComPlayer_3327"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 11,
+     "from": 10,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_3327:Ghigno co' i' Denti Marci",
+      "ComPlayer_725:Desiderio Incontrollabile [Tennents Super gone]",
+      "devAlice:Desiderio Incontrollabile [Peroni da 66, calda gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -11,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {},
+      "ComPlayer_3327": {
+       "ALERTNESS": 5
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": -23,
+       "ALCOHOL": 4
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_725"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 12,
+     "from": 11,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Ghigno co' i' Denti Marci",
+      "ComPlayer_3327:Ago Marcio e Spezzato",
+      "devAlice:Desiderio Incontrollabile [Mescolone Micidiale gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -15,
+       "TOXICITY": 25,
+       "ALCOHOL": 20
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {},
+      "ComPlayer_3327": {
+       "ALERTNESS": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": 3,
+       "ALCOHOL": -3
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_725"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 13,
+     "from": 12,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_3327:Ghigno co' i' Denti Marci",
+      "ComPlayer_725:Ago Marcio e Spezzato",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "TOXICITY": 10
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {},
+      "ComPlayer_3327": {
+       "HEALTH": -5,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_725": {
+       "ALERTNESS": -5,
+       "TOXICITY": 5,
+       "ALCOHOL": -1
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_725"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 14,
+     "from": 13,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_3327:Ghigno co' i' Denti Marci",
+      "ComPlayer_725:Tossicone Scatarrante",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {},
+      "ComPlayer_3327": {
+       "HEALTH": -5,
+       "TOXICITY": 10
+      },
+      "ComPlayer_725": {
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 15,
+     "from": 14,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Riflessi Aumentati dalla Speed",
+      "ComPlayer_3327:Desiderio Incontrollabile [Mescolone Micidiale gone]",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_1162": {},
+      "ComPlayer_8773": {},
+      "ComPlayer_3327": {
+       "HEALTH": -5,
+       "ALERTNESS": -3,
+       "TOXICITY": 25,
+       "ALCOHOL": 20
+      },
+      "ComPlayer_725": {
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 27,
+     "from": 15,
+     "relation": "jump",
+     "views": 2,
+     "moves": [
+      "ComPlayer_725:Last Resort: Banzai!!!",
+      "ComPlayer_3327:Last Resort: Banzai!!!"
+     ],
+     "deltas": null,
+     "endOfTurn": [
+      "ComPlayer_725"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 4
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/9",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/10",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/10",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/11",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/11",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/12",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/12",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/13",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/13",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/14",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/14",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/15",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/15",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/27",
+     "relation": "jump",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/27",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "NONE",
+    "eliminated": true
+   }
+  },
+  "jump": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255",
+   "turnsSeen": 3,
+   "views": 5,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1919:LIEVE FASTIDIO",
+      "devBob:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "ComPlayer_3342:Ago Marcio e Spezzato",
+      "ComPlayer_8707:Scatto Repentino",
+      "devAlice:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "ComPlayer_8707": {
+       "HEALTH": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_1919": {
+       "VIOLENCE": 5
+      },
+      "ComPlayer_3342": {
+       "TOXICITY": 5
+      },
+      "devAlice": {},
+      "devBob": {
+       "ALERTNESS": -19,
+       "ALCOHOL": 2
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_1919",
+      "devBob"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 21,
+     "from": 1,
+     "relation": "jump",
+     "views": 1,
+     "moves": [
+      "ComPlayer_8707:Ghigno co' i' Denti Marci",
+      "ComPlayer_1919:Last Resort: Banzai!!!"
+     ],
+     "deltas": null,
+     "endOfTurn": [
+      "ComPlayer_8707",
+      "ComPlayer_1919"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/0",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/21",
+     "relation": "jump",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_8707",
+    "eliminated": true
+   }
+  },
+  "open C3 contrasti": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73",
+   "turnsSeen": 14,
+   "views": 37,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_476:Grab (void) [Peroni da 66, calda]"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "ALERTNESS": 10
+      },
+      "devAlice": {
+       "VIOLENCE": -5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_476:Scatto Repentino (void)"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "ALERTNESS": 10
+      },
+      "devAlice": {
+       "VIOLENCE": -5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_476:Presa Male di Brutto",
+      "devAlice:FAI BASTA"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "HEALTH": -10,
+       "ALERTNESS": -10,
+       "TOXICITY": 10
+      },
+      "devAlice": {
+       "VIOLENCE": -5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_476"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_476:Ghigno co' i' Denti Marci",
+      "devAlice:FAI BASTA"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "HEALTH": -10,
+       "ALERTNESS": 5
+      },
+      "devAlice": {
+       "ALERTNESS": -5,
+       "VIOLENCE": -5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_476"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_476:Riflessi Aumentati dalla Speed",
+      "devAlice:Grab [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "HEALTH": -5,
+       "TOXICITY": -10
+      },
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_476",
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_476:Desiderio Incontrollabile (void) [Peroni da 66, calda]"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "ALERTNESS": 10
+      },
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -3,
+       "VIOLENCE": -5,
+       "ALCOHOL": -4
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_476:Ago Marcio e Spezzato (void)"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "ALERTNESS": 10
+      },
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -1,
+       "VIOLENCE": -5,
+       "ALCOHOL": -2
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_476:Grab [Mescolone Micidiale gone]",
+      "devAlice:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "TOXICITY": 20,
+       "ALCOHOL": 20
+      },
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -8,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 6
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 9,
+     "from": 8,
+     "relation": "next",
+     "views": 5,
+     "moves": [
+      "ComPlayer_476:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "devAlice:GARGANTUESCO IMPATTO SUL TU"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "HEALTH": -40,
+       "ALERTNESS": -35,
+       "ALCOHOL": 5
+      },
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -3,
+       "VIOLENCE": -25,
+       "ALCOHOL": -4
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 10,
+     "from": 9,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "ComPlayer_476:Estasi da Coca Etilene"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "ALCOHOL": -10
+      },
+      "devAlice": {
+       "HEALTH": -27,
+       "ALERTNESS": -1,
+       "VIOLENCE": 5,
+       "ALCOHOL": -2
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 11,
+     "from": 10,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_476:Tutto è Droga (void) [Tennents Super]"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "ALERTNESS": 10
+      },
+      "devAlice": {
+       "HEALTH": -5,
+       "VIOLENCE": -5,
+       "ALCOHOL": -1
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 12,
+     "from": 11,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_476:Tossicone Scatarrante",
+      "devAlice:Grab [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "HEALTH": -20,
+       "TOXICITY": -10
+      },
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -12,
+       "VIOLENCE": 20,
+       "TOXICITY": 10,
+       "ALCOHOL": 7
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_476",
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 13,
+     "from": 12,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_476:Rabbia Psicotica da Meth",
+      "devAlice:GARGANTUESCO IMPATTO SUL TU"
+     ],
+     "deltas": {
+      "ComPlayer_476": {
+       "HEALTH": -45,
+       "TOXICITY": -5
+      },
+      "devAlice": {
+       "HEALTH": -25,
+       "ALERTNESS": -3,
+       "VIOLENCE": -25,
+       "ALCOHOL": -4
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/9",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/10",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/10",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/11",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/11",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/11",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/12",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/12",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/12",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/13",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73/13",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "devAlice",
+    "eliminated": false
+   }
+  },
+  "open C3 furti": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a",
+   "turnsSeen": 9,
+   "views": 27,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8565:Ago Marcio e Spezzato",
+      "devAlice:Steal [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -10,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8565": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8565:Ago Marcio e Spezzato",
+      "devAlice:Tutto è Droga [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "TOXICITY": 25
+      },
+      "ComPlayer_8565": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_8565:Tossicone Scatarrante",
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -20,
+       "TOXICITY": 5,
+       "ALCOHOL": 4
+      },
+      "ComPlayer_8565": {
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_8565:Ghigno co' i' Denti Marci",
+      "devAlice:Desiderio Incontrollabile [Broken Beer Bottle gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -7,
+       "ALCOHOL": -3
+      },
+      "ComPlayer_8565": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_8565:C'è del sangue nella mia droga",
+      "devAlice:Rabbia Psicotica da Meth"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -27,
+       "TOXICITY": -5,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_8565": {
+       "HEALTH": -22,
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_8565"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]",
+      "ComPlayer_8565:Steal [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -20,
+       "ALERTNESS": -6,
+       "ALCOHOL": 4
+      },
+      "ComPlayer_8565": {
+       "ALERTNESS": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_8565:Desiderio Incontrollabile [Tennents Super gone]",
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -20,
+       "ALERTNESS": -11,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_8565": {
+       "ALERTNESS": -20,
+       "ALCOHOL": 4
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_8565"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8565:Ago Marcio e Spezzato",
+      "devAlice:Desiderio Incontrollabile [Broken Beer Bottle gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -27,
+       "ALERTNESS": -12,
+       "TOXICITY": 5,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_8565": {
+       "ALERTNESS": -2,
+       "TOXICITY": 5,
+       "ALCOHOL": -3
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_8565"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 1
+    },
+    {
+     "why": "view",
+     "key": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [
+      "view"
+     ],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_8565",
+    "eliminated": true
+   }
+  }
+ },
+ "cases": {
+  "rejoinSame": [
+   "quick T2"
+  ],
+  "itemConsumed": [
+   "quick T1",
+   "ffa T3",
+   "ffa T5",
+   "ffa T6",
+   "ffa T7",
+   "ffa T8",
+   "ffa T9",
+   "ffa T11",
+   "ffa T12",
+   "ffa T15",
+   "jump T1",
+   "open C3 contrasti T5",
+   "open C3 contrasti T8",
+   "open C3 contrasti T9",
+   "open C3 contrasti T12",
+   "open C3 furti T2",
+   "open C3 furti T3",
+   "open C3 furti T4",
+   "open C3 furti T6",
+   "open C3 furti T7",
+   "open C3 furti T8"
+  ],
+  "boundDiscard": [
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T6",
+   "quick T7",
+   "ffa T1",
+   "ffa T2",
+   "ffa T3",
+   "ffa T4",
+   "ffa T5",
+   "ffa T6",
+   "ffa T7",
+   "ffa T8",
+   "ffa T9",
+   "ffa T10",
+   "ffa T11",
+   "ffa T12",
+   "ffa T13",
+   "ffa T14",
+   "ffa T15",
+   "jump T1",
+   "open C3 contrasti T4",
+   "open C3 contrasti T7",
+   "open C3 contrasti T10",
+   "open C3 furti T1",
+   "open C3 furti T2",
+   "open C3 furti T4",
+   "open C3 furti T8"
+  ],
+  "endOfTurn": [
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T6",
+   "quick T7",
+   "ffa T1",
+   "ffa T2",
+   "ffa T3",
+   "ffa T4",
+   "ffa T5",
+   "ffa T6",
+   "ffa T7",
+   "ffa T8",
+   "ffa T9",
+   "ffa T10",
+   "ffa T11",
+   "ffa T12",
+   "ffa T13",
+   "jump T1",
+   "open C3 contrasti T3",
+   "open C3 contrasti T4",
+   "open C3 contrasti T5",
+   "open C3 contrasti T6",
+   "open C3 contrasti T7",
+   "open C3 contrasti T8",
+   "open C3 contrasti T9",
+   "open C3 contrasti T10",
+   "open C3 contrasti T11",
+   "open C3 contrasti T12",
+   "open C3 contrasti T13",
+   "open C3 furti T3",
+   "open C3 furti T4",
+   "open C3 furti T5",
+   "open C3 furti T6",
+   "open C3 furti T7",
+   "open C3 furti T8"
+  ],
+  "death": [
+   "quick T7",
+   "ffa T8",
+   "ffa T10",
+   "open C3 contrasti T13",
+   "open C3 furti T8"
+  ],
+  "over": [
+   "quick T7",
+   "open C3 contrasti T13",
+   "open C3 furti T8"
+  ],
+  "drawnToTable": [
+   "ffa T2",
+   "ffa T5",
+   "ffa T10",
+   "open C3 contrasti T7",
+   "open C3 contrasti T10",
+   "open C3 furti T1",
+   "open C3 furti T5"
+  ],
+  "itemFromOther": [
+   "ffa T3",
+   "ffa T4",
+   "open C3 furti T1",
+   "open C3 furti T6"
+  ],
+  "void": [
+   "ffa T5",
+   "ffa T6",
+   "open C3 contrasti T1",
+   "open C3 contrasti T2",
+   "open C3 contrasti T6",
+   "open C3 contrasti T7",
+   "open C3 contrasti T11"
+  ],
+  "jump": [
+   "ffa T27",
+   "jump T21"
+  ]
+ },
+ "scene": {
+  "quick": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 7,
+    "cancelledByView": 7,
+    "sequenceMs": [
+     22.90000000037253,
+     18.199999999254942,
+     20.5,
+     14.900000000372529,
+     15.5,
+     12.199999999254942,
+     13.199999999254942
+    ],
+    "cancels": [
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view"
+    ]
+   },
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 7,
+     "health": 7,
+     "otherResources": 7,
+     "objects": 2,
+     "voided": 0,
+     "endOfTurn": 6,
+     "draws": 7
+    },
+    "sceneHealthDeltas": 10,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 14,
+   "transfers": 0,
+   "aggregateDeltas": 10,
+   "rejoin": {
+    "turn": 2,
+    "entries": [
+     {
+      "why": "view",
+      "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+      "relation": "same",
+      "seats": false
+     },
+     {
+      "why": "view",
+      "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+      "relation": "same",
+      "seats": false
+     }
+    ],
+    "sequencesBefore": 2,
+    "sequencesAfter": 2,
+    "moveSends": 0,
+    "resumeTurn": 2,
+    "reanimated": false
+   }
+  },
+  "reduced": {
+   "gameId": "364b121388897447d4ae7f6fb2028d8502a3341888d1419261f835bcc6ebcf18",
+   "rounds": [
+    {
+     "turn": 1,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "toast": 1
+    },
+    {
+     "turn": 2,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "toast": 1
+    },
+    {
+     "turn": 3,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 4,
+     "toast": 1
+    }
+   ],
+   "k3": "confirmed: no sequence and no difference in the scene with reduced motion, while the model has them"
+  },
+  "ffa": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": false,
+     "violations": [
+      "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/27: jump animated (sequence 1, deltas 3)"
+     ]
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 16,
+    "cancelledByView": 16,
+    "sequenceMs": [
+     20.40000000037253,
+     20.200000001117587,
+     19.09999999962747,
+     18.09999999962747,
+     19.09999999962747,
+     19.199999999254942,
+     18.59999999962747,
+     20.299999998882413,
+     18.600000001490116,
+     20.90000000037253,
+     18.5,
+     29.90000000037253,
+     20.199999999254942,
+     21,
+     21.40000000037253,
+     13.199999999254942
+    ],
+    "cancels": [
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view"
+    ]
+   },
+   "k2": [
+    "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/27"
+   ],
+   "k6": {
+    "modelRounds": {
+     "rounds": 15,
+     "health": 14,
+     "otherResources": 15,
+     "objects": 14,
+     "voided": 2,
+     "endOfTurn": 13,
+     "draws": 15
+    },
+    "sceneHealthDeltas": 33,
+    "sceneTransfers": 3,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 65,
+   "transfers": 3,
+   "aggregateDeltas": 33
+  },
+  "jump": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": false,
+     "violations": [
+      "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/21: jump animated (sequence 1, deltas 5)"
+     ]
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 2,
+    "cancelledByView": 1,
+    "sequenceMs": [
+     26,
+     1204.5
+    ],
+    "cancels": [
+     "view"
+    ]
+   },
+   "k2": [
+    "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/21"
+   ],
+   "k6": {
+    "modelRounds": {
+     "rounds": 1,
+     "health": 1,
+     "otherResources": 1,
+     "objects": 1,
+     "voided": 0,
+     "endOfTurn": 1,
+     "draws": 1
+    },
+    "sceneHealthDeltas": 6,
+    "sceneTransfers": 1,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 7,
+   "transfers": 1,
+   "aggregateDeltas": 6
+  },
+  "open C3 contrasti": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 13,
+    "cancelledByView": 13,
+    "sequenceMs": [
+     15.400000000372529,
+     11.099999999627471,
+     12.799999998882413,
+     15.399999998509884,
+     6.300000000745058,
+     10.200000001117587,
+     13.299999998882413,
+     11.199999999254942,
+     10.299999998882413,
+     11.700000001117587,
+     10.799999998882413,
+     9.300000000745058,
+     5.5
+    ],
+    "cancels": [
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view"
+    ]
+   },
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 13,
+     "health": 11,
+     "otherResources": 13,
+     "objects": 7,
+     "voided": 5,
+     "endOfTurn": 11,
+     "draws": 13
+    },
+    "sceneHealthDeltas": 15,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 26,
+   "transfers": 0,
+   "aggregateDeltas": 15
+  },
+  "open C3 furti": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 8,
+    "cancelledByView": 8,
+    "sequenceMs": [
+     11.099999999627471,
+     8.099999999627471,
+     15,
+     16,
+     12.699999999254942,
+     13.900000000372529,
+     5.5,
+     14.5
+    ],
+    "cancels": [
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view",
+     "view"
+    ]
+   },
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 8,
+     "health": 6,
+     "otherResources": 8,
+     "objects": 8,
+     "voided": 0,
+     "endOfTurn": 6,
+     "draws": 7
+    },
+    "sceneHealthDeltas": 7,
+    "sceneTransfers": 2,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 16,
+   "transfers": 2,
+   "aggregateDeltas": 7
+  }
+ },
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "quickRejoin": {
+   "turn": 2,
+   "entries": [
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+     "relation": "same",
+     "seats": false
+    },
+    {
+     "why": "view",
+     "key": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c/2",
+     "relation": "same",
+     "seats": false
+    }
+   ],
+   "sequencesBefore": 2,
+   "sequencesAfter": 2,
+   "moveSends": 0,
+   "resumeTurn": 2
+  },
+  "quick": {
+   "gameId": "d269025433c3f80bbe696db7636516dd246075538cc0c61fce5cf0e2cb2c6c9c",
+   "turns": 8,
+   "views": 17,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "7 of 7 sequences cancelled by view"
+  },
+  "reducedMotion": {
+   "gameId": "364b121388897447d4ae7f6fb2028d8502a3341888d1419261f835bcc6ebcf18",
+   "rounds": [
+    {
+     "turn": 1,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "toast": 1
+    },
+    {
+     "turn": 2,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "toast": 1
+    },
+    {
+     "turn": 3,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 4,
+     "toast": 1
+    }
+   ],
+   "k3": "confirmed: no sequence and no difference in the scene with reduced motion, while the model has them"
+  },
+  "ffa": {
+   "gameId": "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb",
+   "turns": 17,
+   "views": 33,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": false,
+     "violations": [
+      "1bc543675f80f8ed3ab04206842a67e6436751e4049b741c01fc100b3093bbdb/27: jump animated (sequence 1, deltas 3)"
+     ]
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "16 of 16 sequences cancelled by view"
+  },
+  "jump": {
+   "gameId": "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255",
+   "turns": 3,
+   "views": 5,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": false,
+     "violations": [
+      "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/21: jump animated (sequence 1, deltas 5)"
+     ]
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "1 of 2 sequences cancelled by view"
+  },
+  "jumpObserved": {
+   "secondsToForfeit": 34,
+   "over": true,
+   "turnsFromTo": [
+    "1→21"
+   ],
+   "clientRelations": [
+    "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/0 same",
+    "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/1 next",
+    "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/1 same",
+    "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/21 jump"
+   ],
+   "sceneK2": [
+    "89a7b6b770c1012c6b735c0a9e9ee381df10257f4e672beba9d4d50888bd3255/21"
+   ]
+  },
+  "open C3 contrasti": {
+   "gameId": "ba9774254806a94a8b184dd30f353f388ba28d091852e4722198b19db353eb73",
+   "turns": 14,
+   "views": 37,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "13 of 13 sequences cancelled by view"
+  },
+  "open C3 furti": {
+   "gameId": "92f4eba288b84287c034e888bea5a1dc1c557437468a1541faf290ac83aa822a",
+   "turns": 9,
+   "views": 27,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "8 of 8 sequences cancelled by view"
+  },
+  "casesOnRealServer": {
+   "seen": {
+    "rejoinSame": 1,
+    "itemConsumed": 21,
+    "boundDiscard": 29,
+    "endOfTurn": 37,
+    "death": 5,
+    "over": 3,
+    "drawnToTable": 7,
+    "itemFromOther": 4,
+    "void": 7,
+    "jump": 2
+   },
+   "missing": []
+  }
+ },
+ "errors": [],
+ "ok": true
+}

@@ -7,6 +7,7 @@ import {playerName} from './presence.ts';
 import {ROLES,roleOf,shortfall} from './readability.ts';
 import {PressButton,effect,resourceNames,targetNames} from './ui.tsx';
 import {outcome,forfeitLabel,secondsLeft,reconnecting} from './lifecycle.ts';
+import {resolve,type ResolutionFacts} from './resolution.ts';
 
 type Modal='inspect'|'menu'|'report'|'tools'|'leave'|'logout';
 
@@ -30,9 +31,14 @@ export function Table({session,model}:{session:Session;model:Model}){
   const unsubscribe=model.subscribe(why=>{update();if(why==='view'&&model.sequence!==seen){seen=model.sequence;const v=model.view,eot=Object.values(v.timeBasedEffects).flat().length;
    setToast(`Turno ${v.turn}: ${v.resolvedMoves.map(m=>`${m.playerId===me?'tu':playerName(m.playerId,Object.keys(v.players))} → ${m.playedCardName}${m.void?' (annullata)':''}`).join(' · ')}${eot?` · fine turno: ${eot} effett${eot===1?'o':'i'}`:''}`);
    clearTimeout(toastTimer);toastTimer=window.setTimeout(()=>setToast(''),6000);}});
+  // C3-1: certain facts of each received view, exposed for the verification only; the scene does not use them yet.
+  // Scene counters are read after every listener has run, so they belong to the same view.
+  let held=model.view;const resolutions:{why:string;facts:ResolutionFacts;scene?:{sequences:number;cancels:string[];aggregateDeltas:number;flights:number;transfers:number}}[]=[];
+  const record=model.subscribe(why=>{if(why!=='view'&&why!=='reset')return;const entry={why,facts:resolve(held,model.view,me,[...session.catalog,...model.hand.map(c=>c.card)])};held=model.view;resolutions.push(entry);if(resolutions.length>400)resolutions.shift();
+   queueMicrotask(()=>{const s=table.stats;(entry as typeof resolutions[number]).scene={sequences:s.sequences,cancels:[...s.cancels],aggregateDeltas:s.aggregateDeltas,flights:s.flights,transfers:s.transfers};});});
   const esc=(e:KeyboardEvent)=>{if(e.key==='Escape'&&!dialog.current?.open)table.escape();};window.addEventListener('keydown',esc);
-  (window as any).__bm={get state(){return {phase:model.phase,turn:model.view.turn,over:model.view.over,winner:model.view.winner,eliminated:model.eliminated,me,order:model.hand.map(c=>({key:c.key,name:c.card.name})),selected:model.selected,target:model.target,discard:model.discard,commands:model.commandCount,lastCommand:model.lastCommand,message:model.message,drag:table.drag,ghostOver:table.ghostOver,backs:table.backs,stats:table.stats,hits:table.hits.map(({node,...hit})=>hit),readout:table.readout,layout:table.layout,peek:table.peek,statusShown:table.statusShown,resources:model.view.players[me]?.character.resources??{},cards:model.hand.map(c=>({key:c.key,name:c.card.name,cost:c.card.cost,role:c.card.role??null,gains:c.card.gains??null}))};},measureStart:()=>table.startMeasure(),measureEnd:()=>table.endMeasure()};
-  return()=>{active=false;clearTimeout(toastTimer);clearTimeout(hoverTimer);unsubscribe();window.removeEventListener('keydown',esc);table.destroy();delete (window as any).__bm;};
+  (window as any).__bm={get state(){return {phase:model.phase,turn:model.view.turn,over:model.view.over,winner:model.view.winner,eliminated:model.eliminated,me,order:model.hand.map(c=>({key:c.key,name:c.card.name})),selected:model.selected,target:model.target,discard:model.discard,commands:model.commandCount,lastCommand:model.lastCommand,message:model.message,drag:table.drag,ghostOver:table.ghostOver,backs:table.backs,stats:table.stats,hits:table.hits.map(({node,...hit})=>hit),readout:table.readout,layout:table.layout,peek:table.peek,statusShown:table.statusShown,resources:model.view.players[me]?.character.resources??{},cards:model.hand.map(c=>({key:c.key,name:c.card.name,cost:c.card.cost,role:c.card.role??null,gains:c.card.gains??null})),resolution:resolutions.at(-1)?.facts??null};},measureStart:()=>table.startMeasure(),measureEnd:()=>table.endMeasure(),get resolutions(){return resolutions;}};
+  return()=>{active=false;clearTimeout(toastTimer);clearTimeout(hoverTimer);unsubscribe();record();window.removeEventListener('keydown',esc);table.destroy();delete (window as any).__bm;};
  },[model]);
  // Indicative countdowns from the server epoch: they never decide a forfeit. vsCom has no move clock.
  useEffect(()=>{const timer=setInterval(()=>{const now=Date.now();setClock(secondsLeft(model.view.moveDeadlines?.[me],now));setAway(reconnecting(model.view,me,now));},250);return()=>clearInterval(timer);},[model]);

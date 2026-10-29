@@ -18,6 +18,7 @@
     "verify:decks": "node tools/verify-decks.mjs",
     "verify:public": "node tools/verify-public.mjs",
     "verify:profile": "node tools/verify-profile.mjs",
+    "verify:resolution": "node tools/verify-resolution.mjs",
     "measure": "node tools/measure.mjs",
     "size": "node tools/size.mjs",
     "atlas": "node tools/atlas.mjs",

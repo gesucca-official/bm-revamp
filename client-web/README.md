@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -224,6 +224,21 @@ connessione con lo stesso account e chiede `resume`; la mossa già accettata res
 in attesa sul server. Landscape obbligatorio: in portrait compare la richiesta
 di rotazione.
 
+## Fatti della risoluzione (C3-1)
+
+`src/resolution.ts` ricava da due viste i **fatti certi** del round (D1 del
+[piano C3](../docs/client-c3-plan.md)): relazione fra le viste (`next`, `same`,
+`jump`, `other-game`, `older`, `first`), mosse nell'ordine di `resolvedMoves` con
+autore, carta, bersaglio, oggetto scelto, scarto, annullamento e costo **nominale**
+dal catalogo; solo per un round contiguo, per posto, la variazione complessiva di
+ogni risorsa, oggetti spariti e comparsi, mano e mazzo, morte e forfait; chi ha
+effetti di fine turno; esito. Un oggetto sparito è collegato a una mossa solo se la
+sua `TARGET_ITEM` lo nomina sul posto da cui è sparito e nessun'altra mossa lo
+contende. Non legge mai il testo del server e non calcola effetti. In C3-1 i fatti
+sono solo esposti in `window.__bm.resolutions` (e `state.resolution`) per la
+verifica: **la scena non li usa ancora** e si comporta come prima (K1–K6 del piano
+restano, misurati nel [rapporto C3](../docs/reports/client-c3-report.md)).
+
 ## Verifiche
 
 ```powershell
@@ -238,6 +253,7 @@ di rotazione.
 ./client-web/run.ps1 -Task VerifyDecks   # catalogo, mazzi e open 1vCom: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyPublic  # home, regole, registrazione: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyProfile # profilo, admin, errori, strumenti: avvia da sé il server
+./client-web/run.ps1 -Task VerifyResolution # fatti della risoluzione su partite reali: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -290,10 +306,24 @@ conteggi, partite non concluse, download e cancellazione con annullamento e conf
 Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
 `BM_NATIVE_PROMPT=1` apre anche un Edge visibile, cattura la finestra nativa del browser,
 la annulla (Esc) e la compila da tastiera dopo «Riprova».
+`VerifyResolution` (C3-1, database temporaneo) gioca quick 1vCom con caduta e rientro,
+tre round con movimento ridotto emulato (K3),
+FFA con quattro computer (guardando dopo la propria morte), FFA con devBob e tre computer
+in cui i due umani lasciano scadere il clock (salto di turni) e open 1vCom con due mazzi
+sintetici salvati dall'editor («C3 contrasti», «C3 furti»: annullamenti, oggetti presi,
+rubati e token). A ogni vista confronta i fatti esposti dal client con quelli ricalcolati
+sulle viste ricevute, controlla che le variazioni sommate alla vista precedente diano la
+nuova, che salti, altre partite e viste dello stesso turno non portino differenze e che i
+fatti non cambino sostituendo il testo del server; registra, senza fermarsi, le regole
+1, 2, 3 e 6 del piano sulla scena (K1 e K2 si correggono in C3-2). `BM_SCENARIOS` sceglie
+gli scenari (`quick,reduced,ffa,jump,open`); `BM_RECORD=1` aggiunge a
+`tests/resolution-views.json` i casi non ancora registrati (viste reali, carte ridotte
+ai campi che il modello legge).
 `BM_VIEWPORT=844x390` ripete al formato landscape
 compatto; `BM_HEADED=1` mostra Edge; `BM_CLIENT` cambia l'indirizzo (anche
 quello LAN con `?k=`); `BM_OUT` scrive altrove le evidenze. Evidenze correnti in
-[docs/reports/client-c2](../docs/reports/client-c2/) (quelle di C1 restano in `client-c1`);
+[docs/reports/client-c2](../docs/reports/client-c2/) (quelle di C1 restano in `client-c1`;
+quelle di C3 in [docs/reports/client-c3](../docs/reports/client-c3/));
 lì scrive anche `Size`. È un'esecuzione su PC:
 non sostituisce il dispositivo fisico né la prova umana.
 
@@ -325,6 +355,8 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
   oggetti coperti da alzare al primo tocco).
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
+- `src/resolution.ts`: fatti certi del round da due viste (C3-1), funzione pura;
+  nessun testo del server letto, nessun effetto calcolato.
 - `src/hub.tsx`, `src/presence.ts`: hub «Gioca», coda FFA, scelta del mazzo open e
   presenza (ordinamento, pagine e nomi dei giocatori come funzioni pure).
 - `src/collection.tsx`, `src/deck.ts`: scheda «Collezione» (catalogo, mazzi, editor);
