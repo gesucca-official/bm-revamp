@@ -174,3 +174,19 @@ export function aimArrows(source:Box,targets:AimTarget[],view:{w:number;h:number
   const head:[Pt,Pt,Pt]=[to,{x:base.x-uy*s*.6,y:base.y+ux*s*.6},{x:base.x+uy*s*.6,y:base.y-ux*s*.6}];
   return {id:t.id,owner:t.owner,kind:t.kind,itemIndex:t.itemIndex,from,control,to,head,reached,crosses};});
 }
+
+/** Pop-art arrow (owner, after C3-3): a ribbon along the curve that widens from the tail to a barbed head, as one polygon (x, y, x, y…).
+ * The tip is `arrow.to`; the barbs sit a little behind the neck so the back of the head is notched. `width` is the body width at the
+ * tail and at the neck; the head is as wide as `arrow.head` plus `grow`. */
+export function arrowOutline(a:Arrow,opts:{tail:number;neck:number;grow?:number}):number[]{
+ const N=18,[tip,hl,hr]=a.head,bx=(hl.x+hr.x)/2,by=(hl.y+hr.y)/2,headLen=Math.hypot(tip.x-bx,tip.y-by)||1,half=Math.hypot(hl.x-hr.x,hl.y-hr.y)/2*(opts.grow??1.25);
+ const ux=(tip.x-bx)/headLen,uy=(tip.y-by)/headLen;
+ let len=0,prev=a.from;for(let i=1;i<=24;i++){const p=bezier(a.from,a.control,a.to,i/24);len+=Math.hypot(p.x-prev.x,p.y-prev.y);prev=p;}
+ const tn=Math.max(.15,1-.7*headLen/Math.max(len,1)),L:Pt[]=[],R:Pt[]=[];
+ for(let i=0;i<=N;i++){const t=tn*i/N,p=bezier(a.from,a.control,a.to,t),q=bezier(a.from,a.control,a.to,Math.min(1,t+.01)),r=bezier(a.from,a.control,a.to,Math.max(0,t-.01));
+  const dx=q.x-r.x,dy=q.y-r.y,d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d,w=(opts.tail+(opts.neck-opts.tail)*Math.pow(i/N,1.3))/2;
+  L.push({x:p.x+nx*w,y:p.y+ny*w});R.push({x:p.x-nx*w,y:p.y-ny*w});}
+ const back=1.12*headLen,bc={x:tip.x-ux*back,y:tip.y-uy*back},nx=-uy,ny=ux;
+ const pts=[tip,{x:bc.x-nx*half,y:bc.y-ny*half},...R.reverse(),...L,{x:bc.x+nx*half,y:bc.y+ny*half}];
+ return pts.flatMap(p=>[p.x,p.y]);
+}

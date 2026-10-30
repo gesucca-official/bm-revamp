@@ -93,7 +93,7 @@ for(const [w,h] of [[1366,768],[844,390]] as const)for(const ids of [['me','b'],
 });
 
 // C3-3 (O6): arrows from the chosen card to the admitted targets.
-import {aimArrows,confirmBox,confirmButtons,edgePoint,bezier,type AimTarget} from '../src/readability.ts';
+import {aimArrows,arrowOutline,confirmBox,confirmButtons,edgePoint,bezier,type AimTarget} from '../src/readability.ts';
 const aimSetup=(w:number,h:number,ids:string[],items=3)=>{
  const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),H=l.hand;
  const source:Box={x:H.center,y:H.y-H.lift,w:H.w*H.zoom,h:H.h*H.zoom};
@@ -106,7 +106,7 @@ const samples=(a:{from:{x:number;y:number};control:{x:number;y:number};to:{x:num
 for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`arrows at ${w}×${h} with ${ids.length} seats: one per target, on the border, inside the screen`,()=>{
  const {l,source,persons,objects,avoid}=aimSetup(w,h,ids);
  for(const [name,targets] of [['characters',persons],['objects',objects],['both',[...persons,...objects]],['opponents only',persons.filter(t=>t.owner!=='me')],['none',[]]] as [string,AimTarget[]][]){
-  const arrows=aimArrows(source,targets,{w,h},{avoid,head:l.compact?11:15});
+  const arrows=aimArrows(source,targets,{w,h},{avoid,head:l.compact?20:30});
   assert.equal(arrows.length,targets.length,`${name}: one arrow per target`);
   const reached=arrows.filter(a=>a.reached).map(a=>a.id);
   // Only in the five-seat FFA is a character right against the raised card.
@@ -122,12 +122,12 @@ for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']
 });
 for(const [w,h] of VIEWPORTS)test(`arrows at ${w}×${h} in the duel keep clear of ✓ and ×`,()=>{
  const {l,source,persons,objects,avoid}=aimSetup(w,h,['me','b']);
- const arrows=aimArrows(source,[...persons,...objects],{w,h},{avoid,head:l.compact?11:15});
+ const arrows=aimArrows(source,[...persons,...objects],{w,h},{avoid,head:l.compact?20:30});
  for(const a of arrows){assert.equal(a.crosses,false,`${a.id} crosses the confirmation`);for(const p of [...samples(a),...a.head].filter(p=>Math.abs(p.x-source.x)>source.w/2+3||Math.abs(p.y-source.y)>source.h/2+3))assert.ok(!(Math.abs(p.x-avoid[0].x)<=avoid[0].w/2&&Math.abs(p.y-avoid[0].y)<=avoid[0].h/2),`${a.id} over the confirmation`);}
 });
 for(const [w,h] of VIEWPORTS)test(`arrows at ${w}×${h} in the five-seat FFA keep clear of the ✓ and × buttons`,()=>{
  const {l,source,persons,objects}=aimSetup(w,h,['me','b','c','d','e']),buttons=confirmButtons(l.preview,w,l.compact);
- const arrows=aimArrows(source,[...persons,...objects],{w,h},{avoid:[buttons],head:l.compact?11:15});
+ const arrows=aimArrows(source,[...persons,...objects],{w,h},{avoid:[buttons],head:l.compact?20:30});
  for(const a of arrows){if(a.reached)continue;assert.equal(a.crosses,false,`${a.id} crosses the buttons`);
   for(const p of [...samples(a),...a.head].filter(p=>Math.abs(p.x-source.x)>source.w/2+3||Math.abs(p.y-source.y)>source.h/2+3))assert.ok(!(Math.abs(p.x-buttons.x)<=buttons.w/2&&Math.abs(p.y-buttons.y)<=buttons.h/2),`${a.id} over the buttons`);}
 });
@@ -146,4 +146,12 @@ test('arrows bend the other way when the first bend crosses the region to keep c
  // A region on the first bend: the control point moves to the other side.
  const blocked=aimArrows(src,[t],{w:1366,h:768},{avoid:[{x:bezier(free.from,free.control,free.to,.5).x,y:bezier(free.from,free.control,free.to,.5).y,w:60,h:60}]})[0];
  assert.notDeepEqual(blocked.control,free.control);assert.equal(blocked.crosses,false);assert.ok(Math.hypot(mid.x-blocked.control.x,mid.y-blocked.control.y)>0);
+});
+
+for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`pop-art outline at ${w}×${h} with ${ids.length} seats: tip on the target, whole shape and extrusion inside the screen`,()=>{
+ const {l,source,persons,objects}=aimSetup(w,h,ids),depth=l.compact?5:9;
+ for(const a of aimArrows(source,[...persons,...objects],{w,h},{head:l.compact?20:30}).filter(x=>!x.reached)){
+  const pts=arrowOutline(a,{tail:l.compact?9:14,neck:l.compact?18:30,grow:1.5});
+  assert.deepEqual([pts[0],pts[1]],[a.to.x,a.to.y],`${a.id}: the tip is the end of the arrow`);assert.ok(pts.length>=40&&pts.length%2===0);
+  for(let i=0;i<pts.length;i+=2){const x=pts[i]-depth,y=pts[i+1]+depth*.7;assert.ok(pts[i]>=-1&&pts[i]<=w+1&&pts[i+1]>=-1&&pts[i+1]<=h+1,`${a.id}: vertex ${i/2} outside ${Math.round(pts[i])},${Math.round(pts[i+1])}`);void x;void y;}}
 });
