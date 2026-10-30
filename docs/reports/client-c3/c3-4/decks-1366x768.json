@@ -1,0 +1,192 @@
+{
+ "date": "2026-10-30T12:34:33.652Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "checks": {
+  "catalog": {
+   "cards": 37,
+   "characters": 2,
+   "total": 39,
+   "annexVersion": "1.9",
+   "withIllustration": 39,
+   "noHorizontalScroll": true,
+   "sheetScrolls": true
+  },
+  "invalidNotSendable": {
+   "emptyDraft": [
+    "Dai un nome al mazzo.",
+    "Scegli il personaggio.",
+    "Scegli l’azione base.",
+    "Scegli l’ultima risorsa.",
+    "Metti almeno una carta regolare nel mazzo."
+   ],
+   "withoutRegular": [
+    "Dai un nome al mazzo.",
+    "Metti almeno una carta regolare nel mazzo."
+   ],
+   "slashName": [
+    "Il nome non può contenere «/»."
+   ],
+   "saveEnabledWithSlash": false,
+   "deckSends": 0
+  },
+  "createAndSave": {
+   "threeBound": "SVEGLIAMOCI MA TU NO ×3",
+   "afterClear": "nessuna",
+   "searchShuffle": 1,
+   "deckViewAfterSearch": [
+    "Scatto Repentino ×2"
+   ],
+   "deckView": [
+    "PAZIENZA: FINITA ×4",
+    "Scatto Repentino ×2"
+   ],
+   "counts": "Carte iniziali 3 / 6 (base + legate) · regolari 6 (almeno 1). Nessun limite di copie.",
+   "sends": [
+    "/app/user/devAlice/deck"
+   ],
+   "saved": {
+    "character": "bruiser.character.BigBadBruiser",
+    "basic": "com.basic.BruiserGrab",
+    "last": "com.last.Struggle",
+    "bound": [
+     "bruiser.character.LittleSmack",
+     "junkie.character.PatheticBlade"
+    ],
+    "regular": [
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "com.ShuffleFeet",
+     "com.ShuffleFeet"
+    ]
+   },
+   "listed": [
+    "Strano"
+   ]
+  },
+  "cancelKeepsSaved": {
+   "nameReadOnly": true,
+   "sends": [],
+   "reopened": {
+    "counts": "Carte iniziali 3 / 6 (base + legate) · regolari 6 (almeno 1). Nessun limite di copie. Il nome di un mazzo salvato non si cambia.",
+    "bound": "SVEGLIAMOCI MA TU NO, Ago Marcio e Spezzato"
+   },
+   "profileUnchanged": true
+  },
+  "overwrite": {
+   "button": "Sovrascrivi",
+   "sends": [
+    "/app/user/devAlice/deck"
+   ],
+   "decks": [
+    "Strano"
+   ],
+   "bound": [
+    "bruiser.character.LittleSmack",
+    "junkie.character.PatheticBlade",
+    "bruiser.character.LittleRage"
+   ],
+   "regular": 8
+  },
+  "openGame": {
+   "sceneReadyMs": 382,
+   "game": "99eef0b65989ac284792360147edda65c865f8a7204a1f49a4d7c89cc3e8febd",
+   "listed": [
+    "Strano"
+   ],
+   "join": [
+    "/app/game/open/1vCom/join/devAlice/Strano"
+   ],
+   "character": "bruiser.character.BigBadBruiser",
+   "hand": [
+    "com.basic.BruiserGrab",
+    "bruiser.character.LittleSmack",
+    "junkie.character.PatheticBlade",
+    "bruiser.character.LittleRage",
+    "bruiser.Glare",
+    "com.ShuffleFeet"
+   ],
+   "deck": 6,
+   "opponent": "ComPlayer_1937",
+   "turnsPlayed": 7,
+   "over": true,
+   "winner": "NONE",
+   "outcome": "Pareggio Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "handFromDeck": {
+    "views": 15,
+    "foreign": []
+   }
+  },
+  "newGameRepeatsOpen": {
+   "join": [
+    "/app/game/open/1vCom/join/devAlice/Strano"
+   ]
+  },
+  "sixInitialPlayed": {
+   "counts": "Carte iniziali 6 / 6 (base + legate) · regolari 12 (almeno 1). Nessun limite di copie.",
+   "listed": [
+    "Sei iniziali",
+    "Strano"
+   ],
+   "bound": [
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack"
+   ],
+   "regular": 12,
+   "character": "junkie.character.ToxicJunkie",
+   "hand": [
+    "com.basic.ToxicGrab",
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack"
+   ],
+   "deck": 12,
+   "handFromDeck": {
+    "views": 1,
+    "foreign": []
+   },
+   "note": "basic + five bound fill the hand: no draw, and with no regular card in hand neither the bound (discard) nor ToxicGrab (no item) can be played; R03 known limit, the game is then abandoned",
+   "menuExplainsR03": true
+  },
+  "deckUnavailableProvoked": {
+   "rewrittenFrames": 1,
+   "shown": "Mazzo non disponibile sul server: scegli un mazzo salvato e riprova.",
+   "serverError": [
+    "Deck unavailable. Choose a saved deck from your account and retry."
+   ],
+   "ready": 3,
+   "playEnabled": true,
+   "sentDestination": [
+    "/app/game/open/1vCom/join/devAlice/Assente"
+   ],
+   "alertsAfterTabSwitch": 0
+  },
+  "delete": {
+   "sendsAfterCancel": 0,
+   "deletes": [
+    "/app/user/devAlice/deck/delete",
+    "/app/user/devAlice/deck/delete"
+   ],
+   "decks": 0,
+   "dialog": "no saved decks, link to the collection"
+  }
+ },
+ "errors": [],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it."
+ ],
+ "ok": true
+}

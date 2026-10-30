@@ -57,8 +57,11 @@ async function checkC2a(s){
  const r=s.readout,res=s.resources;assert.ok(r&&r.board,'C2a readout present');
  const minHand=vh<550?120:210,minPerson=vh<550?80:150;
  assert.ok(r.layout.hand.w>=minHand-1&&r.layout.person.w>=minPerson-1,`O12 sizes ${JSON.stringify(r.layout)}`);c2a.layout=r.layout;
- for(const k of ['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'])assert.ok(r.board.rows.includes(`${{HEALTH:'H',ALERTNESS:'A',VIOLENCE:'V',TOXICITY:'T',ALCOHOL:'L'}[k]} ${res[k]??0}`),`O13 board shows ${k}`);
- c2a.boardChecks++;
+ // C3-4 (D5): while the round's sequence runs the board shows the step reached (r.boards); once it is over, the view.
+ // Choosing a card ends the sequence (rule 4), and O11 below always uses the view.
+ const shown=s.sequence?.running?r.boards?.[s.me]??res:res;
+ for(const k of ['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'])assert.ok(r.board.rows.includes(`${{HEALTH:'H',ALERTNESS:'A',VIOLENCE:'V',TOXICITY:'T',ALCOHOL:'L'}[k]} ${shown[k]??0}`),`O13 board shows ${k}`);
+ c2a.boardChecks++;if(s.sequence?.running)c2a.boardDuringSequence=(c2a.boardDuringSequence??0)+1;
  for(const card of s.cards){const shown=r.hand.find(h=>h.key===card.key);assert.ok(shown,'card drawn');
   const payable=Object.entries(card.cost).every(([k,v])=>(res[k]??0)>=v);
   assert.equal(shown.payable,payable,`O11 ${card.name}`);if(!payable){c2a.unpayableSeen++;assert.ok(shown.alpha<1,'O11 dimmed');c2a.unpayableDimmed++;}else if(!s.selected)assert.equal(shown.alpha,1,'payable not dimmed');

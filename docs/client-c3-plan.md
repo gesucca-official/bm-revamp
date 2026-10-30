@@ -7,7 +7,7 @@ su istruzione del proprietario, **un blocco alla volta**. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 **Decisioni D1–D11 confermate dal proprietario il 29 ottobre 2026**, D10 con una
-durata più lunga della proposta: fino a 5 s per round. **Dopo la prova del
+durata più lunga della proposta (5 s per round alla conferma, poi **10 s**). **Dopo la prova del
 proprietario su C3-2** (stesso giorno) D1 è riaperta e cambiata (variazioni per
 carta dalle righe regolari del report, verificate) e si aggiunge D12 (un tocco passa
 alla carta successiva): vedi [decisioni](#decisioni-del-proprietario). Le modifiche di regole e
@@ -150,7 +150,7 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
    risolvono anche dopo la morte dell'autore (R04).
 8. **Privacy:** nessun fronte avversario fuori da quanto `resolvedMoves` identifica;
    dorsi dai conteggi.
-9. **Durata:** fino a 5 s per round (D10), portati a **10 s** dal proprietario nella revisione di C3-2, anche con cinque mosse in FFA; resta
+9. **Durata:** fino a **10 s** per round (D10: 5 s alla conferma, portati a 10 s dal proprietario nella revisione di C3-2), anche con cinque mosse in FFA; resta
    valida la regola 4, quindi la sequenza non toglie la possibilità di scegliere.
 
 ## Blocchi
@@ -160,7 +160,7 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-1 | Modello puro della risoluzione e strumento di verifica — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)) | — |
 | C3-2 | Sequenza affidabile: K1–K5 e riepilogo statico — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-2--sequenza-affidabile)) | C3-1 |
 | C3-3 | O6, frecce verso i bersagli ammessi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi)) | — |
-| C3-4 | Sequenza del round con i soli dati certi | C3-2 |
+| C3-4 | Sequenza del round con i soli dati certi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)) | C3-2 |
 | C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili | C3-2 |
 | C3-7 | Consolidamento e giudizio del proprietario | tutti |
@@ -272,6 +272,10 @@ misura di C0 vale per la scena sintetica, va ripresa con le frecce).
 
 ### C3-4 — Sequenza del round con i soli dati certi
 
+**Fatto il 30 ottobre 2026** ([rapporto](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi), verifica `VerifyResolution`): linea temporale pura in
+`resolution.ts` (`timeline`, `reportSteps`), variazioni per carta quando le righe regolari
+tornano, altrimenti totale del round; dato per A2 nel rapporto.
+
 **Revisione dopo la prova del proprietario su C3-2 (29 ottobre 2026).** Il proprietario
 trova le variazioni slegate dalle carte: in C3-4 **variazioni per carta** dalle righe
 regolari del report secondo D1 riaperta, con la barra della risorsa interessata
@@ -299,7 +303,7 @@ non torna. Misura che ha motivato D1 riaperta:
    finale per ogni risorsa (D5). Poi resta il riepilogo statico; morti e forfait
    ricevono l'enfasi.
 
-Le mosse continuano dopo una morte (regola 7). Durata fino a 5 s (D10),
+Le mosse continuano dopo una morte (regola 7). Durata fino a 10 s (D10),
 interrompibile.
 
 **Completamento verificabile (partite reali, entrambe le misure).** A ogni round il
@@ -309,7 +313,7 @@ partita reale con i mazzi sintetici di D8: **annullamento**, **oggetto consumato
 oggetto rubato**, **oggetto scomparso prima della risoluzione** (se non si ottiene,
 unità con viste registrate dichiarate come limite), **morte con mossa già inviata**,
 **fine turno letale**, bound con scarto, oggetto pescato sul tavolo. FFA a cinque
-con cinque mosse entro 5 s. Durata registrata a ogni round e, nelle partite fra umani,
+con cinque mosse entro 10 s. Durata registrata a ogni round e, nelle partite fra umani,
 tempo residuo del clock di 30 s alla fine della sequenza (dato per A2). Catture dei
 passaggi.
 
@@ -410,7 +414,7 @@ registrate e assegnate, non risolte in C3.
   Assente sui server precedenti. In `contracts.ts` C3-5 potrà aggiungere
   `damage?: string | null` accanto a `role` e `gains`; i personaggi non lo hanno.
 - **A2 — Clock della mossa più lungo** (eventuale, indicato dal proprietario con D10).
-  Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino a 5 s tolgono troppo
+  Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino a 10 s tolgono troppo
   tempo per scegliere. Cambia R06 (clock di 30 s, regolamento 1.5): prima il
   regolamento con versione e motivazione, poi server, test e copia del debug. Non è
   in C3.

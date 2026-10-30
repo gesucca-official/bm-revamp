@@ -3,13 +3,18 @@ import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,pace,nextStop,MOVE_PHASE,type Pace,type Round,type SeatMark} from './resolution.ts';
+import {plays,seatMarks,nextStop,timeline,beats,MOVE_PHASE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,type AimTarget,type Arrow,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
-// Times in ms from the start of the sequence. A move card first appears at its author (`appear`), then flies.
-type Flight={node:Container;from:{x:number;y:number};to:{x:number;y:number};start:number;end:number;appear?:number};
+// Times in ms from the start of the sequence. A move card first appears at its author (`appear`), flies, hits and then
+// goes to the author's discard (`after`). Other flights: a cost token rises, an object shrinks into its consumer, breaks,
+// or simply travels (passed objects, discards, draws).
+type Point={x:number;y:number};
+type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:number;after?:Point;mode?:'travel'|'rise'|'shrink'|'break'};
+// Marks over the table: an impact ring, a stamp (voided, eliminated) and the enlarged resource of a change (pop).
+type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
 const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
@@ -30,7 +35,9 @@ export function glyph(g:Graphics,kind:Resource|Role,x:number,y:number,s:number,c
   case 'OTHER':g.circle(x-r*.6,y,r*.24).circle(x,y,r*.24).circle(x+r*.6,y,r*.24).fill(color);break;
  }return g;}
 export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number};item:{w:number;h:number}};hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
- summary:{key:string;seats:Record<string,{texts:string[];box:Box}>}|null};
+ summary:{key:string;seats:Record<string,{texts:string[];box:Box}>}|null;
+ /** C3-4: resource values each board shows (the view, or the step reached during a sequence). */
+ boards:Record<string,Partial<Record<Resource,number>>>};
 // Stable seats: the viewer at the bottom, opponents in join order. Five-seat layout kept for C2 FFA.
 const SEATS={me:[.18,.77],duel:[[.46,.24]],ffa:[[.26,.24],[.72,.24],[.16,.49],[.81,.49]]} as const;
 export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.characterBound?'AZIONE LEGATA':c.lastResort?'ULTIMA RISORSA':'AZIONE REGOLARE';
@@ -51,15 +58,20 @@ hits:Hit[]=[];backs:Record<string,number>={};
   // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
   sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0,
   // C3-2 revision (D12): planned length of each sequence and taps that moved it to the next card.
-  sequencePlans:[] as {key:string;moves:number;total:number}[],advances:0,
+  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>}[],advances:0,
+  // C3-4: what each sequence animated (counted on the nodes built), the bar mode and, for the totals, why.
+  beats:[] as {key:string;bars:'per-card'|'total';reason:string|null;drops:number;stamps:number;tokens:number;objects:number;consumed:number;passed:number;broken:number;discards:number;draws:number;endOfTurn:number;emphasis:number;steps:number;pops:number}[],
   // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
   aimDraws:0,aimMs:[] as number[]};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
  // Static round summary (rule 5, D6): drawn on the table until the first card choice or the next round.
  marks:Record<string,SeatMark[]>|null=null;marksKey='';private tickPrev=0;private inputStart=0;
  private measure=false;private ghost:Container|null=null;private ghostH=0;ghostOver=false;private fittedTitles=new Map<string,string>();private retiring:Container[]=[];private retired:Container[]=[];private visualSnapshot:View;
- private flights:Flight[]=[];private accents:{node:Container;at:number;dur:number}[]=[];private deltas:Container[]=[];private pace:Pace|null=null;
- layout:TableLayout|null=null;readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},hand:[],board:null,summary:null};private starts=new Map<string,Partial<Record<Resource,number>>>();
+ private flights:Flight[]=[];private accents:Accent[]=[];private pace:Pace|null=null;
+ // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
+ // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
+ display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
+ layout:TableLayout|null=null;readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},hand:[],board:null,summary:null,boards:{}};private starts=new Map<string,Partial<Record<Resource,number>>>();
  // Status chips on the table, for the summary the shell shows on hover, tap or focus.
  chips:Record<string,Chip&{x:number;y:number}>={};openStatus:string|null=null;
  constructor(readonly model:Model,private readonly catalog:()=>Card[]=()=>[],private readonly characters:()=>CharacterCard[]=()=>[]){this.visualSnapshot=clone(model.view);}
@@ -137,10 +149,12 @@ hits:Hit[]=[];backs:Record<string,number>={};
  // Starting value of each resource: the character card of the catalog, else the first view seen.
  private start(id:string,p:Player){const key=`${this.model.view.gameId}:${id}`,known=this.characters().find(c=>c.bindingName===p.character.bindingName)?.resources;
   if(known)return known;if(!this.starts.has(key))this.starts.set(key,{...p.character.resources});return this.starts.get(key)!;}
+ /** Values drawn on a board: the view, or during a sequence the step reached (C3-4). */
+ private shown(id:string,p:Player){return this.display?.[id]??p.character.resources;}
  // O3/O4/O13: resources as glyph, letter, number and a bar against the start (no cap or floor).
  private board(b:Box,p:Player,id:string,own:boolean,compact:boolean){const c=new Container(),g=new Graphics();c.addChild(g);c.position.set(b.x-b.w/2,b.y-b.h/2);
   g.roundRect(0,0,b.w,b.h,8).fill({color:0x1d140f,alpha:.84}).stroke({color:0xb18c60,width:1.5});
-  const r=p.character.resources,start=this.start(id,p),rows:string[]=[];
+  const r=this.shown(id,p),start=this.start(id,p),rows:string[]=[];
   const bar=(x:number,y:number,bw:number,th:number,kind:Resource)=>{const v=r[kind]??0,m=meter(v,start[kind],kind==='HEALTH'),neg=bw*.18,zero=x+neg,pos=bw-neg;
    g.rect(x,y-th/2,bw,th).fill({color:0x000000,alpha:.45});
    if(m.fill)g.rect(zero,y-th/2,pos*m.fill,th).fill(RES_COLOR[kind]);
@@ -237,7 +251,7 @@ hits:Hit[]=[];backs:Record<string,number>={};
   if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
    const dest=this.hits.find(z=>z.target?.owner===this.model.target!.owner&&z.target?.itemIndex===this.model.target!.itemIndex);if(dest){this.world.addChild(new Graphics().moveTo(this.preview.x,this.preview.y-35).quadraticCurveTo(this.preview.x,dest.y,dest.x,dest.y).stroke({color:PETROL,width:2,alpha:.8}));}
   }
-  const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},hand,board,summary:roundSummary};
+  const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
   this.drawAim();this.onLayout();
  }
@@ -327,32 +341,82 @@ hits:Hit[]=[];backs:Record<string,number>={};
   // (the static summary is already on the table).
   if(!plays(round,this.seqSeen,{reduced:this.reduced||matchMedia('(prefers-reduced-motion: reduce)').matches,hidden:document.hidden,contextLost:this.contextLost}))return;
   const k=round!.facts.key;this.seqSeen=k;this.seqKey=k;
-  // Only published identities and ordered moves are animated. Resources already use the final view.
   const seen=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(previous.players).flatMap(p=>p.character.items),...Object.values(v.players).flatMap(p=>p.character.items)];
   const registry=[...new Map(seen.map(c=>[c.name,c])).values()];
+  // C3-4: the round from certain data only (timeline in resolution.ts): costs, cards, voids, objects, draws, end of turn,
+  // changes per card when the report lines are verified, otherwise the totals (D5).
+  const T=timeline(previous,v,round!.facts,[...this.catalog(),...this.model.hand.map(c=>c.card)]);if(!T)return;
   // Opponent cards are known only by the published name; an unknown name still flies as a plain face.
   const named=(name:string):Card=>registry.find(c=>c.name===name)??{name,bindingName:'',effect:'',item:false,basicAction:false,lastResort:false,characterBound:false,boundToCharacter:null,priority:0,canTarget:[],cost:{},image:null,sprite:null};
-  const seat=(id:string)=>this.hits.find(h=>h.id===`person-${id}`);
-  // A visible count decrease and increase of the same object is enough for an aggregate transfer.
-  // No instance identity or hidden draws are inferred; ambiguous sources are not animated.
-  const counts=(view:View,name:string,id:string)=>view.players[id]?.character.items.filter(c=>c.name===name).length||0;
-  const transfers=registry.filter(c=>c.item).flatMap(object=>{const lost=Object.keys(v.players).filter(id=>counts(previous,object.name,id)>counts(v,object.name,id));const gained=Object.keys(v.players).filter(id=>counts(previous,object.name,id)<counts(v,object.name,id));
-   const from=lost.length===1&&gained.length===1?seat(lost[0]):undefined,to=from?seat(gained[0]):undefined;return from&&to?[{object,from,to}]:[];});
-  // One card at a time (owner, C3-2 revision): it appears at its author, flies to the target and hits it.
-  const p=pace(v.resolvedMoves.length,transfers.length>0);this.pace=p;
-  v.resolvedMoves.forEach((move,i)=>{
-   const card=named(move.playedCardName),from=seat(move.playerId),to=seat(move.targetId==='SELF'?move.playerId:move.targetId),span=p.moves[i];
-   if(!from||!to)return;
-   const node=this.card(card,this.height<550?52:80,this.height<550?72:112);node.visible=false;this.fx.addChild(node);
-   this.flights.push({node,from:{x:from.x,y:from.y-(this.height<550?20:34)},to,start:span.at,end:span.at+span.dur,appear:MOVE_PHASE.appear});this.stats.flights++;
-   const accent=new Graphics().circle(0,0,24).stroke({color:PETROL,width:4});accent.position.set(to.x,to.y);accent.visible=false;this.fx.addChild(accent);
-   this.accents.push({node:accent,at:span.at+span.dur*MOVE_PHASE.fly,dur:span.dur*(1-MOVE_PHASE.fly)});
-  });
-  for(const t of transfers){const node=this.card(t.object,this.height<550?44:65,this.height<550?62:91);node.visible=false;this.fx.addChild(node);this.flights.push({node,from:t.from,to:t.to,start:p.objects!.at,end:p.objects!.at+p.objects!.dur});this.stats.transfers++;}
-  for(const [id,pl] of Object.entries(v.players)){const health=pl.character.resources.HEALTH,old=previous.players[id]?.character.resources.HEALTH,pos=seat(id);if(health!==undefined&&old!==undefined&&health!==old&&pos){const n=health-old;const label=this.text(this.fx,`${n>0?'+':''}${n} · totale turno`,pos.x,pos.y-30,this.height<550?12:17,undefined,0xffefdb);label.visible=false;this.deltas.push(label);this.stats.aggregateDeltas++;}}
-  this.stats.sequencePlans.push({key:k,moves:v.resolvedMoves.length,total:p.total});
+  const C=this.height<550,L=this.layout,p=T.pace;this.pace=p;this.plan=T;
+  const seat=(id:string)=>this.hits.find(h=>h.id===`person-${id}`),place=(id:string)=>L?.seats.find(s=>s.id===id);
+  const inside=(x:number,y:number):Point=>({x:Math.max(30,Math.min(this.width-30,x)),y:Math.max(30,Math.min(this.height-30,y))});
+  // No deck or discard pile is drawn: both sit beside the character, the deck on the right, the discard on the left.
+  const deck=(id:string)=>{const s=seat(id);return s?inside(s.x+s.w*.85,s.y-s.h*.15):null;},discard=(id:string)=>{const s=seat(id);return s?inside(s.x-s.w*.85,s.y+s.h*.1):null;};
+  const itemAt=(id:string,name:string,before:boolean):Point|null=>{const view=before?previous:v,items=view.players[id]?.character.items??[],i=before?items.findIndex(c=>c.name===name):items.map(c=>c.name).lastIndexOf(name),slots=place(id)?.items??[];
+   const b=i<0?null:slots[i]??slots.at(-1);return b?{x:b.x,y:b.y}:null;};
+  const add=<N extends Container>(node:N)=>{node.visible=false;this.fx.addChild(node);return node;};
+  const count={drops:0,stamps:0,tokens:0,objects:0,consumed:0,passed:0,broken:0,discards:0,draws:0,endOfTurn:0,emphasis:0,steps:0,pops:0};
+  const mw=C?52:80,mh=C?72:112,iw=C?44:65,ih=C?62:91;
+  // Board values start from the previous view; each step moves them (per card) or the tail sets the final ones (total).
+  this.display=Object.fromEntries(Object.keys(v.players).map(id=>[id,{...(previous.players[id]?.character.resources??{})}]));
+  this.events=[];
+  const change=(at:number,dur:number,steps:Step[])=>{if(!steps.length)return;count.steps+=steps.length;
+   this.events.push({at,run:()=>{for(const s of steps)(this.display![s.seat]??={})[s.resource]=s.to;}});
+   const stack=new Map<string,number>();for(const s of steps){const n=stack.get(s.seat)??0;stack.set(s.seat,n+1);if(this.pop(s,n,at,dur))count.pops++;}};
+  // 1. Costs (R04): every author's nominal cost leaves together, voided moves too.
+  if(p.costs){const per=new Map<string,number>();for(const tk of T.tokens){const b=place(tk.seat)?.board;if(!b)continue;const n=per.get(tk.seat)??0;per.set(tk.seat,n+1);
+    const r=C?10:14,node=add(new Container()),g=new Graphics().circle(0,0,r).fill(RES_COLOR[tk.resource]).stroke({color:INK,width:2});node.addChild(g);glyph(g,tk.resource,-r*.35,0,r*.9,0xfff6e2);
+    const label=this.text(node,`−${tk.amount}`,r*.45,0,C?10:13,undefined,0xfff6e2);label.anchor.set(0,.5);
+    const from=inside(b.x-b.w*.3+n*(r*2.6),b.y-b.h*.5);this.flights.push({node,from,to:{x:from.x,y:from.y-(C?34:52)},start:p.costs.at+n*60,end:p.costs.at+p.costs.dur,mode:'rise'});count.tokens++;}
+   change(p.costs.at+p.costs.dur*.45,p.costs.dur*.55,T.costSteps);}
+  // 2. One card at a time (owner, C3-2 revision): it appears at its author, flies to the target and hits it, then goes to the discard.
+  T.moves.forEach((m,i)=>{const from=seat(m.author),to=seat(m.target),span=p.moves[i];if(!from||!to)return;
+   const hit=span.at+span.dur*MOVE_PHASE.fly,rest=span.dur*(1-MOVE_PHASE.fly);
+   const node=add(this.card(named(m.card),mw,mh));
+   this.flights.push({node,from:{x:from.x,y:from.y-(C?20:34)},to,start:span.at,end:span.at+span.dur,appear:MOVE_PHASE.appear,after:discard(m.author)??undefined});this.stats.flights++;count.drops++;
+   if(m.void){const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:rest,kind:'stamp'});count.stamps++;}
+   else{const ring=add(new Graphics().circle(0,0,24).stroke({color:PETROL,width:4}));ring.position.set(to.x,to.y);this.accents.push({node:ring,at:hit,dur:rest});}
+   // The bound's extra card leaves the author's hand for the discard while the card appears.
+   if(m.discard){const d=add(this.card(named(m.discard),iw,ih)),a={x:from.x+from.w*.5,y:from.y-(C?10:18)};this.flights.push({node:d,from:a,to:discard(m.author)??a,start:span.at,end:span.at+span.dur*MOVE_PHASE.fly,mode:'travel'});count.discards++;}
+   // The chosen object that left its seat: consumed by its owner, passed to the author, or gone (broken).
+   if(m.item){const it=m.item,src=itemAt(it.owner,it.name,true)??to,node=add(this.card(named(it.name),iw,ih));count.objects++;count[it.fate]++;
+    if(it.fate==='consumed')this.flights.push({node,from:src,to:{x:from.x,y:from.y},start:hit,end:span.at+span.dur,mode:'shrink'});
+    else if(it.fate==='passed'){this.flights.push({node,from:src,to:itemAt(m.author,it.name,false)??{x:from.x,y:from.y},start:hit,end:span.at+span.dur,mode:'travel'});this.stats.transfers++;}
+    else{node.addChild(new Graphics().moveTo(-iw*.1,-ih*.5).lineTo(iw*.08,-ih*.1).lineTo(-iw*.12,ih*.15).lineTo(iw*.05,ih*.5).stroke({color:INK,width:3}));this.flights.push({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:hit,end:span.at+span.dur,mode:'break'});}}
+   change(hit,rest+span.dur*.12,m.steps);});
+  // 3. Draws: cards leave each deck as the counts say; own new cards face up, opponents' as backs, deck objects to the table.
+  if(p.draws){const n=T.draws.length,used=new Set<string>();T.draws.forEach((d,i)=>{const src=deck(d.seat);if(!src)return;let dest:Point|null=null,node:Container;
+    if(d.to==='table'){dest=itemAt(d.seat,d.name!,false);node=this.card(named(d.name!),iw,ih);count.objects++;}
+    else if(d.seat===this.model.me&&d.name){const h=this.hits.find(x=>x.kind==='hand'&&!used.has(x.id)&&this.model.hand.find(c=>c.key===x.key)?.card.name===d.name);if(h){used.add(h.id);dest={x:h.x,y:h.y};}node=this.card(named(d.name),iw,ih);}
+    else{const b=place(d.seat)?.backs;dest=b?{x:b.x,y:b.y}:null;node=this.back(C?18:28,C?25:39);}
+    add(node);const start=p.draws!.at+i*p.draws!.dur*.4/Math.max(1,n);this.flights.push({node,from:src,to:dest??src,start,end:start+p.draws!.dur*.6,mode:'travel'});count.draws++;});}
+  // 4. End of turn: a mark on every seat with end-of-turn lines (who, never what) and, when verified, their changes.
+  if(p.endOfTurn){for(const id of T.endOfTurn.seats){const s=seat(id);if(!s)continue;const ring=add(new Graphics().roundRect(-s.w*.6,-s.h*.6,s.w*1.2,s.h*1.2,10).stroke({color:RES_COLOR.TOXICITY,width:4}));ring.position.set(s.x,s.y);this.accents.push({node:ring,at:p.endOfTurn.at,dur:p.endOfTurn.dur});count.endOfTurn++;}
+   change(p.endOfTurn.at+p.endOfTurn.dur*.35,p.endOfTurn.dur*.65,T.endOfTurn.steps);}
+  // 5. Tail: without verified lines the bars go from the previous to the final value (D5); deaths and forfeits are stamped.
+  if(T.bars==='total')change(p.tail.at,p.tail.dur,T.totals);
+  this.events.push({at:p.tail.at,run:()=>{this.display=null;}});
+  for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:p.tail.dur,kind:'stamp'});count.emphasis++;}
+  this.events.sort((a,b)=>a.at-b.at);
+  this.stats.beats.push({key:k,bars:T.bars,reason:T.reason,...count});
+  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T)});
   this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
+ /** «ANNULLATA», «ELIMINATO»: a wine stamp pressed on a card or a character. */
+ private stamp(word:string,compact:boolean){const c=new Container(),label=this.text(c,word,0,0,compact?13:20,undefined,0xffe9e9);label.anchor.set(.5);
+  const w=label.width+18,h=label.height+8;c.addChildAt(new Graphics().roundRect(-w/2,-h/2,w,h,4).fill({color:WINE,alpha:.92}).stroke({color:0xffd9d9,width:2.5}),0);c.rotation=-.18;return c;}
+ /** The resource a step changes, enlarged over its board for a moment: glyph, bar and «before → after» (C3-4). */
+ private pop(s:Step,n:number,at:number,dur:number){const b=this.layout?.seats.find(x=>x.id===s.seat)?.board,p=this.model.view.players[s.seat];if(!b||!p)return false;
+  const C=this.height<550,own=s.seat===this.model.me,fs=C?12:17,c=new Container(),g=new Graphics();c.addChild(g);
+  const d=s.to-s.from,label=this.text(c,`${s.from} → ${s.to}`,0,0,fs,undefined,d<0?0xffb7bd:0xc9f0b0);label.anchor.set(0,.5);
+  const gs=fs*1.3,bw=C?54:84,w=gs+8+label.width+10+bw+12,h=fs*2;label.position.set(-w/2+gs+12,0);
+  g.roundRect(-w/2,-h/2,w,h,h*.35).fill({color:0x120c08,alpha:.92}).stroke({color:RES_COLOR[s.resource],width:2});glyph(g,s.resource,-w/2+6+gs/2,0,gs,RES_COLOR[s.resource]);
+  const m=meter(s.to,this.start(s.seat,p)[s.resource],s.resource==='HEALTH'),x=w/2-bw-8,th=fs*.6;
+  g.rect(x,-th/2,bw,th).fill({color:0x000000,alpha:.5});if(m.fill)g.rect(x,-th/2,bw*m.fill,th).fill(RES_COLOR[s.resource]);if(m.negative)g.rect(x,-th/2,2,th).fill(0xe0707a);
+  const row=own?RESOURCES.indexOf(s.resource):-1,y=own?b.y-b.h/2+b.h/RESOURCES.length*(row+.5):b.y-b.h/2-h*(n+.6);
+  c.position.set(Math.max(w/2+4,Math.min(this.width-w/2-4,b.x+(own?b.w*.15:0))),Math.max(h/2+2,y-(own?h*n*.2:0)));c.visible=false;this.fx.addChild(c);
+  this.accents.push({node:c,at,dur:Math.max(300,dur),kind:'pop'});this.stats.aggregateDeltas++;return true;}
  get sequenceRunning(){return !!this.seqStarted;}
  /** D12: a tap on the table during the sequence moves it to the next card; past the last one it ends. */
  advance(){if(!this.seqStarted||!this.pace)return false;const elapsed=performance.now()-this.seqStarted,next=nextStop(this.pace,elapsed);
@@ -361,7 +425,7 @@ hits:Hit[]=[];backs:Record<string,number>={};
  finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.stopEffects();if(redraw){this.draw();this.onState();}}
  /** «Salta effetti». */
  skip(){this.finish('skip');}
- stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.pace=null;this.flights=[];this.accents=[];this.deltas=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+ stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.accents=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private tick(){const now=performance.now();
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.aimDirty)this.drawAim();
@@ -369,14 +433,23 @@ hits:Hit[]=[];backs:Record<string,number>={};
   if(this.arrows.length)this.aimLayer.alpha=this.reduced?1:.88+.12*Math.sin(now/280);
   if(this.inputStart){const start=this.inputStart;this.inputStart=0;requestAnimationFrame(()=>this.stats.inputMs.push(performance.now()-start));}
   if(this.seqStarted&&this.pace){const t=now-this.seqStarted,P=this.pace;if(t>=P.total)this.finish('complete');else{
+   // Board steps reached (also several at once after a tap): applied, then one redraw.
+   let due=0;while(due<this.events.length&&this.events[due].at<=t)due++;if(due){this.events.splice(0,due).forEach(e=>e.run());this.draw();}
    this.flights.forEach(f=>{const d=f.end-f.start,p=(t-f.start)/d;f.node.visible=p>=0&&p<=1;if(!f.node.visible)return;
-    // Move: appear at the author (grow), fly, then rest on the target while it is hit and fade out.
-    const a=f.appear??0,fly=f.appear!==undefined?MOVE_PHASE.fly:1;
-    if(p<a){const q=p/a;f.node.position.set(f.from.x,f.from.y);f.node.scale.set(.6+.4*(1-Math.pow(1-q,2)));f.node.rotation=-.12;f.node.alpha=Math.min(1,q*2);return;}
-    const q=Math.min(1,(p-a)/(fly-a)),eased=1-Math.pow(1-q,2);f.node.scale.set(1);f.node.position.set(f.from.x+(f.to.x-f.from.x)*eased,f.from.y+(f.to.y-f.from.y)*eased-Math.sin(q*Math.PI)*35);f.node.rotation=(1-q)*-.12;
-    f.node.alpha=p>fly?Math.max(0,1-(p-fly)/(1-fly)*.85):1;});
-   this.accents.forEach(x=>{const p=(t-x.at)/x.dur;x.node.visible=p>=0&&p<=1;x.node.scale.set(1+Math.max(0,p)*1.2);x.node.alpha=1-Math.max(0,p);});
-   this.deltas.forEach(node=>{node.visible=t>=P.tail.at;node.alpha=Math.min(1,(P.total-t)/(P.tail.dur*.25));});
+    if(f.appear!==undefined){const a=f.appear,fly=MOVE_PHASE.fly;
+     // Move: appear at the author (grow), fly, hit the target, then slide to the author's discard and fade.
+     if(p<a){const q=p/a;f.node.position.set(f.from.x,f.from.y);f.node.scale.set(.6+.4*(1-Math.pow(1-q,2)));f.node.rotation=-.12;f.node.alpha=Math.min(1,q*2);return;}
+     if(p<=fly){const q=Math.min(1,(p-a)/(fly-a)),eased=1-Math.pow(1-q,2);f.node.scale.set(1);f.node.position.set(f.from.x+(f.to.x-f.from.x)*eased,f.from.y+(f.to.y-f.from.y)*eased-Math.sin(q*Math.PI)*35);f.node.rotation=(1-q)*-.12;f.node.alpha=1;return;}
+     const q=(p-fly)/(1-fly),hold=Math.max(0,(q-.35)/.65),to=f.after??f.to;f.node.position.set(f.to.x+(to.x-f.to.x)*hold*hold,f.to.y+(to.y-f.to.y)*hold*hold);f.node.scale.set(1-.35*hold);f.node.alpha=1-.85*hold;return;}
+    const eased=1-Math.pow(1-p,2);f.node.position.set(f.from.x+(f.to.x-f.from.x)*eased,f.from.y+(f.to.y-f.from.y)*eased);
+    if(f.mode==='rise'){f.node.alpha=1-p*p;}
+    else if(f.mode==='shrink'){f.node.scale.set(1-.75*p);f.node.alpha=1-.8*p;}
+    else if(f.mode==='break'){f.node.rotation=Math.sin(p*Math.PI*6)*.12*(1-p)+p*.5;f.node.alpha=1-p;}
+    else f.node.alpha=p>.85?1-(p-.85)/.15*.6:1;});
+   this.accents.forEach(x=>{const p=(t-x.at)/x.dur;x.node.visible=p>=0&&p<=1;if(!x.node.visible)return;
+    if(x.kind==='stamp'){x.node.scale.set(p<.2?1.8-.8*(p/.2):1);x.node.alpha=p>.8?1-(p-.8)/.2:1;}
+    else if(x.kind==='pop'){x.node.scale.set(p<.25?.7+.6*(p/.25):p<.45?1.3-.3*((p-.25)/.2):1);x.node.alpha=p>.85?1-(p-.85)/.15:1;}
+    else{x.node.scale.set(1+p*1.2);x.node.alpha=1-p;}});
   }}
  }
  startMeasure(){this.stats.frames=[];this.stats.inputMs=[];this.tickPrev=0;this.measure=true;}

@@ -1,13 +1,15 @@
 # Rapporto C3 — Rendere leggibile e soddisfacente la risoluzione
 
 29 ottobre 2026. Regolamento **1.9** (1.8 per C3-1). C3 procede a blocchi secondo il
-[piano C3](../client-c3-plan.md), con le decisioni D1–D11 confermate dal proprietario.
+[piano C3](../client-c3-plan.md), con le decisioni D1–D11 confermate dal proprietario,
+poi D12 e D1 riaperta dopo la prova di C3-2.
 **C3-1 (modello puro della risoluzione e strumento di verifica) è fatto**
 ([sezione](#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)), **C3-2
 (sequenza affidabile) è fatto** ([sezione](#c3-2--sequenza-affidabile)), con una
 **revisione dopo la prova del proprietario** (una carta per volta, tocco che passa alla
 successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-proprietario)). **C3-3 (frecce verso i bersagli ammessi, O6) è fatto**
-([sezione](#c3-3--o6-frecce-verso-i-bersagli-ammessi)). Gli altri
+([sezione](#c3-3--o6-frecce-verso-i-bersagli-ammessi)). **C3-4 (sequenza del round con i soli dati certi) è
+fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)). Gli altri
 blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
 è fatta a parte.
 
@@ -438,3 +440,102 @@ nessun testo, regola, server o protocollo cambiato.
   del proprietario sul nuovo aspetto. La porta 8080 era occupata da un altro server: le verifiche hanno usato un server
   temporaneo su 18080 con un'anteprima su 4321 (`BM_SERVER_PORT`, `BM_PORT`, `BM_SERVER`, `BM_CLIENT`).
 
+
+## C3-4 — Sequenza del round con i soli dati certi
+
+30 ottobre 2026. Decisioni D1 (come riaperta dopo la prova di C3-2), D5, D10 (10 s), D12; regole di
+non-regressione 1–9; difetto K6. Nessun cambio a regolamento (1.9), server, protocollo, catalogo o
+`client-debug`.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Linea temporale pura (`src/resolution.ts`) | `timeline(precedente, nuova, fatti, catalogo)` costruisce il round dai fatti di C3-1, dal catalogo (costo nominale per nome, quali nomi sono oggetti del mazzo) e dalle righe verificate. Cinque fasi nell'ordine di R04: **costi** (un gettone per mossa e risorsa del costo nominale, anche per le annullate), **mosse** (calata, timbro «ANNULLATA», oggetto scelto e sparito che si consuma, passa all'autore o si rompe, scarto della bound non annullata), **pesca** (dal mazzo quante carte dice il conteggio: proprie per nome, avversarie come dorsi, oggetti del mazzo comparsi senza mossa che li passi al tavolo, mai il token), **fine turno** (chi ha righe, mai cosa), **coda** (barre di D5 se serve, «ELIMINATO» e «FORFAIT»). `beats` conta ciò che la sequenza anima, con le stesse regole per scena e verifiche. `pace` aggiunge le fasi di costi, pesca e fine turno al ritmo di C3-2, sempre entro 10 s. |
+| Righe del report (D1 riaperta) | `regularLine` accetta solo `RISORSA: a->b (d)` a fine riga, al più dopo un'etichetta tra parentesi (le righe di fine turno «(TOXICITY effect) …»), con il delta coerente; ogni altro testo resta non interpretato. `reportSteps` applica in ordine costi nominali, righe di ogni mossa (`SELF` all'autore, `OPPONENT` al bersaglio, che per una mossa su sé è l'autore) e fine turno: ogni riga deve partire dal valore lasciato dal passo precedente e i passi devono finire **esattamente** sulla nuova vista. Altrimenti `verified: false` con il motivo, e la scena ripiega sul totale (passo 5, D5). |
+| Scena (`src/scene.ts`) | `beginSequence` disegna la linea temporale. Durante la sequenza le plance mostrano i valori del passo raggiunto (`display`): per carta, ogni passo cambia barra e numero al colpo della carta e ingrandisce sopra la plancia la risorsa toccata («95 → 90» con la barra); col ripiego le plance restano al valore precedente fino alla coda e poi vanno al finale, ingrandite allo stesso modo. Solo il disegno delle plance segue i passi: decisioni, contorni, mira, mano, oggetti e dorsi usano sempre la vista finale (regola 2), e a sequenza finita, saltata o interrotta le plance mostrano la vista. Le carte giocate vanno allo scarto dell'autore dopo il colpo; mazzo e scarto non sono disegnati e stanno ai lati del personaggio. D12 invariato: un tocco o tasto passa alla carta successiva, poi alla pesca, al fine turno e alla coda; una carta della mano e «Salta effetti» chiudono; nessun blocco di invio né del clock. |
+| Test automatici | Client **154** (149 + 5): forma regolare e testo libero; su tutte le viste reali registrate i passi si concatenano dalla vista precedente alla nuova; ripiego con motivo (veleno a timer simulato, riga che non parte dal valore lasciato, costo sconosciuto); D1 (testo del server sostituito: stesse animazioni, solo ripiego sulle barre); linea temporale uguale ai fatti (calate, timbri, gettoni, destini degli oggetti, pesche entro il conteggio del mazzo, token mai dal mazzo, morte con mossa già presentata, fine turno letale, bound annullata senza scarto); ritmo con tutte le fasi entro 10 s e fermate di D12. I due test del ritmo di C3-2 sono stati adeguati alle nuove fasi (cambio deliberato di C3-4, stesse proprietà). Nuove viste reali registrate: `itemGoneBefore`, `deathWithMove`, `lethalEndOfTurn` e il **catalogo dell'account** (nomi e costi nominali, comprese le carte dei computer), necessario per i costi nelle unità. |
+| Server reale | **Sì.** `VerifyResolution` esteso e verde a 1366×768 e 844×390. A ogni sequenza confronta i conteggi costruiti dalla scena (`stats.beats`) con i fatti ricalcolati sulle viste del socket: calate, timbri, gettoni e destini degli oggetti direttamente dai fatti, pesche, scarti e passi dalla linea temporale. Le barre devono essere per carta **esattamente** quando la misura D1 indipendente (non ancorata, quella di C3-2) dice che le righe tornano, con lo stesso numero di passi, e ogni passo deve avere la sua risorsa ingrandita. Lo stato finale di **ogni** plancia deve essere la vista. Nuovo scenario `humans` e catture dei passaggi (costi, carta, coda). |
+| Regressione | Sulla build finale, server su database temporaneo: `Verify` e `VerifyModes`, `VerifyLifecycle`, `VerifyFfa` e `VerifyDecks` verdi a 1366×768 e 844×390. **Un controllo di `Verify` adeguato, non un atteso rilassato:** O13 confrontava la plancia propria con la vista anche quando la scelta avviene durante la sequenza (regola 4); con D5 e le variazioni per carta, durante la sequenza la plancia mostra il passo raggiunto. Ora a sequenza ferma deve mostrare la vista come prima, durante la sequenza i valori del passo esposti dalla scena (`readout.boards`); O11 (pagabilità) resta sempre sulla vista finale. Il ramo nuovo è stato attraversato 25 volte su 27 turni a 1366×768 e 28 su 30 a 844×390. Il primo fallimento aveva lasciato una partita aperta sullo stesso server e fatto cadere anche `VerifyModes` a 1366×768 e `Verify` a 844×390; rilanciate ciascuna su un server nuovo, sono verdi. `VerifyPublic`, `VerifyProfile` e `VerifyAim` non ripetute (home, regole, profilo, amministrazione e mira non cambiano). `build.ps1 -Task Test -Offline` (254 server + 36 debug) e `check-rules.py` passano. |
+| Peso | JS gzip 317372 byte (+5085 rispetto a C3-3); totale gzip 1100317 byte ([size.json](client-c3/c3-4/size.json)). Budget rispettato. |
+| Emulazione / dispositivo / umano | Due misure landscape sul PC (Edge via Playwright); nessun dispositivo fisico né prova umana del ritmo. |
+
+### Scenari reali (entrambe le misure)
+
+Esecuzioni finali: [1366×768](client-c3/c3-4/resolution-1366x768.json) e
+[844×390](client-c3/c3-4/resolution-844x390.json), campi `scene.*.rounds` (conteggi, modo delle
+barre, durata di ogni round), `scene.humans.clock`, `cases`, `reportConsistency`. Mazzi sintetici di
+D8 come in C3-1 («C3 contrasti», «C3 furti»), salvati dall'editor sul database temporaneo.
+
+| Partita | 1366×768 | 844×390 |
+|---|---|---|
+| Quick 1vCom con caduta e rientro | 8 round, tutte complete in 4,46–5,86 s, 8 per carta | 7 round, complete in 5,20–5,86 s, 6 per carta e 1 totale |
+| FFA con quattro computer | 21 round, complete in 4,55–10,01 s (9 con cinque mosse), 20 per carta e 1 totale | 8 round, complete in 9,70–10,01 s (8 con cinque mosse), 7 per carta e 1 totale |
+| FFA con devBob, forfait per tempo | salto 1→19: nessuna sequenza, «Risolti 18 turni…» | salto 1→20, «Risolti 19 turni…» |
+| **FFA fra umani** (`humans`: devAlice, devBob, tre computer, otto round) | 8 round tutti con cinque mosse, complete in 9,70–10,01 s; 7 per carta e 1 totale | 8 round con cinque mosse, complete in 9,70–10,01 s; 8 per carta |
+| Open «C3 contrasti» / «C3 furti» | 14 e 9 round, complete in 4,46–5,86 s; 14 e 8 per carta, 1 totale | 18 e 12 round, complete in 3,80–5,86 s; 18 e 11 per carta, 1 totale |
+| Animato in tutto (calate · timbri · gettoni · oggetti · scarti · pesche · fine turno · enfasi · passi) | 185 · 11 · 55 · 57 · 88 · 174 · 121 · 7 · 500 | 159 · 13 · 43 · 55 · 73 · 150 · 89 · 5 · 437 |
+| Conteggi della scena diversi dai fatti / plance diverse dalla vista a fine sequenza | **0** / **0** | **0** / **0** |
+| Barre per carta senza che la misura D1 torni, o viceversa | 0 (58 per carta, 3 totali su 61 round) | 0 (51 per carta, 3 totali su 54 round) |
+| Regole 1, 2, 3, 6 e controlli di C3-2 | rispettate | rispettate |
+| Interruzioni | «Salta effetti» `skip` dopo 127 ms; tocchi: cinque tocchi attraversano un round fino a `input`; carta scelta subito (`input`); scheda nascosta: nessuna sequenza al ritorno | `skip` dopo 134 ms; come a sinistra |
+
+**Ripiego sul totale.** Tutti i sei round con barre totali hanno la causa già misurata per D1: 20 di HEALTH tolti dal
+timer di MarvelousCocktail (Mescolone Micidiale), che il server riporta senza numeri. La scena lo dice con il motivo
+in `stats.beats` (per esempio «devAlice HEALTH: steps end at 65, view 45») e anima le stesse carte, solo con le barre
+al finale nella coda.
+
+**Scenari richiesti** (`cases`; ciascuno su partite reali, mazzi sintetici di D8 compresi):
+
+| Scenario | 1366×768 | 844×390 |
+|---|---|---|
+| Annullamento (timbro «ANNULLATA», carta allo scarto) | 11 round | 13 |
+| Oggetto consumato / rubato (passato all'autore) | 20 / 3 | 22 / 2 |
+| Oggetto scomparso prima della risoluzione | 2 round (Steal di un computer sul Negroni di devAlice, ADOPERIAMOTI di devAlice sullo stesso: «Couldn't Grab»); registrato come `itemGoneBefore` | non capitato |
+| Morte con mossa già presentata (regola 7) | 7 | 4 |
+| Fine turno letale (riga di fine turno che porta HEALTH da positivo a ≤ 0, verificata) | 5 | 3 |
+| Bound con scarto | 46 | 37 |
+| Oggetto pescato sul tavolo | 6 | 6 |
+| FFA a cinque con cinque mosse entro 10 s | 18 round (17 completi, uno chiuso dal tocco della regola 4), massimo 10,01 s | 17 round (16 completi), massimo 10,01 s |
+
+L'oggetto scomparso prima della risoluzione è conteso da due mosse che lo nominano sullo stesso posto, con una sola
+sparizione: per la regola di C3-1 **nessuna** delle due anima l'oggetto (né il furto né la presa mancata), e il
+riepilogo statico mantiene «ogg −1 / ogg +1». È la scelta prudente di D1; il caso è anche nelle unità con le viste
+registrate.
+
+### Durata e clock fra umani (dato per A2)
+
+Scenario `humans`, otto round per misura, ogni umano lascia finire la sequenza; clock della mossa letto a fine
+sequenza (`scene.humans.clock`).
+
+| Misura | Mosse per round | Sequenza | Clock residuo a fine sequenza |
+|---|---|---|---|
+| 1366×768 | 5 in tutti gli otto round | 9,70–10,01 s | 20–21 s su 30, per entrambi gli umani |
+| 844×390 | 5 in tutti gli otto round | 9,70–10,01 s | 20–21 s su 30 |
+
+Con cinque mosse la sequenza usa quasi tutto il budget di D10: chi aspetta la fine per scegliere ha circa due terzi del
+clock. La scelta resta libera durante la sequenza (regola 4: carta scelta al primo tocco, clock da 30 a 28 s nei 2,3 s
+successivi, entrambe le misure) e si attraversa a tocchi. Per un duello la sequenza dura 3,8–5,9 s. Il dato va a C3-7 e a
+un'eventuale A2; nessuna conclusione qui.
+
+### Limiti e residui
+
+- **Plance durante la sequenza:** mostrano il passo raggiunto, quindi per qualche secondo valori precedenti a quelli
+  finali; le decisioni usano la vista, e scegliere una carta porta subito al finale. Oggetti, dorsi e mano sul tavolo
+  sono quelli della vista finale fin dall'inizio: le animazioni di oggetti e pesca volano verso la loro posizione finale.
+- **Mazzo e scarto** non sono disegnati: le carte partono e arrivano ai lati del personaggio. Gli oggetti spariti senza
+  una mossa collegata (capienza superata, contese) non si animano; restano nel riepilogo statico.
+- **«Si rompe»** indica un oggetto sparito da un altro posto senza ricomparire presso l'autore: il client non distingue
+  consumo a distanza e distruzione (nessuna lettura del testo del server).
+- **Costo nominale:** con uno stato di risorsa l'importo pagato può differire; in quel caso le righe non tornano e il
+  round ripiega sul totale (nessun caso osservato oltre MarvelousCocktail).
+- **Morti e forfait** sono timbrati in coda, non nel momento in cui avvengono (il server non pubblica il momento).
+- Oggetto scomparso prima della risoluzione non capitato a 844×390 (visto a 1366×768 e in unità).
+- Dispositivo fisico, iPhone, prova umana del ritmo e scheda nascosta reale non provati (headless emula la visibilità).
+- Dati locali non toccati: tutte le prove su database temporanei; `VerifyResolution` a 844×390 ha usato un server
+  temporaneo su 18080 con un'anteprima su 4321, in parallelo all'esecuzione a 1366×768.
+- Evidenze: [resolution-1366x768.json](client-c3/c3-4/resolution-1366x768.json),
+  [resolution-844x390.json](client-c3/c3-4/resolution-844x390.json), [catture](client-c3/c3-4/screens/)
+  `resolution-*-sequence-costs|card|tail-*` (passaggi di una sequenza) e `resolution-humans-*`; regressione
+  `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*`, `decks-*` e [size.json](client-c3/c3-4/size.json) nella stessa cartella
+  (catture solo per `VerifyResolution` e `Verify`).

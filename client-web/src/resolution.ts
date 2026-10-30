@@ -215,26 +215,182 @@ export function roundNote(r: Round | null): string | null {
 }
 
 /**
- * Pace of the round sequence (C3-2 revision, owner after the C3-2 trial; D10 raised to 10 s, D12): one card at a time
- * — it appears at the author, flies to the target and hits it — then the object transfers, then the totals. Moves share
- * what the 10 s budget leaves, between moveMin and moveMax; with many moves everything is scaled to stay within the budget.
+ * Pace of the round sequence (C3-2 revision, owner after the C3-2 trial; D10 raised to 10 s, D12; phases of C3-4): the
+ * costs leave the authors together, then one card at a time — it appears at the author, flies to the target and hits it
+ * — then the draws, the end of turn and the tail (total bars of D5, deaths). Moves share what the 10 s budget leaves,
+ * between moveMin and moveMax; with many moves everything is scaled to stay within the budget.
  */
-export const PACE = {budget: 10000, moveMin: 850, moveMax: 1500, objects: 550, tail: 800};
-/** Phases inside a move, as fractions of its duration: appear at the author, fly, hit the target. */
+export const PACE = {budget: 10000, moveMin: 850, moveMax: 1500, costs: 650, draws: 650, endOfTurn: 750, tail: 800};
+/** Phases inside a move, as fractions of its duration: appear at the author, fly, hit the target (then to the discard). */
 export const MOVE_PHASE = {appear: .22, fly: .72};
 export type Span = {at: number; dur: number};
-export type Pace = {moves: Span[]; objects: Span | null; tail: Span; total: number};
-export function pace(moves: number, objects: boolean): Pace {
-  const fixed = PACE.tail + (objects ? PACE.objects : 0);
+export type Pace = {costs: Span | null; moves: Span[]; draws: Span | null; endOfTurn: Span | null; tail: Span; total: number};
+export function pace(moves: number, phases: {costs?: boolean; draws?: boolean; endOfTurn?: boolean} = {}): Pace {
+  const fixed = PACE.tail + (phases.costs ? PACE.costs : 0) + (phases.draws ? PACE.draws : 0) + (phases.endOfTurn ? PACE.endOfTurn : 0);
   const move = moves ? Math.max(PACE.moveMin, Math.min(PACE.moveMax, (PACE.budget - fixed) / moves)) : 0;
   const scale = Math.min(1, PACE.budget / (fixed + moves * move));
   let at = 0;
   const span = (d: number): Span => { const s = {at: Math.round(at), dur: Math.round(d * scale)}; at += d * scale; return s; };
-  const list = Array.from({length: moves}, () => span(move)), obj = objects ? span(PACE.objects) : null, tail = span(PACE.tail);
-  return {moves: list, objects: obj, tail, total: Math.round(at)};
+  const costs = phases.costs ? span(PACE.costs) : null, list = Array.from({length: moves}, () => span(move));
+  const draws = phases.draws ? span(PACE.draws) : null, endOfTurn = phases.endOfTurn ? span(PACE.endOfTurn) : null, tail = span(PACE.tail);
+  return {costs, moves: list, draws, endOfTurn, tail, total: Math.round(at)};
 }
-/** D12: a tap jumps to the next card (then the objects, the totals); past the last stop it means the end. */
+/** D12: a tap jumps to the next card (then the draws, the end of turn, the tail); past the last stop it means the end. */
 export function nextStop(p: Pace, elapsed: number) {
-  const stops = [...p.moves.map(m => m.at), ...(p.objects ? [p.objects.at] : []), p.tail.at, p.total];
+  const stops = [...p.moves.map(m => m.at), ...[p.draws, p.endOfTurn].flatMap(x => x ? [x.at] : []), p.tail.at, p.total];
   return stops.find(s => s > elapsed + 1) ?? p.total;
+}
+
+// --- C3-4: per-card changes from the regular report lines, verified on the views (plan D1 as reopened by the owner) ---
+
+/** One change of a resource at a seat, from a nominal cost or a regular report line. */
+export type Step = {seat: string; resource: Resource; from: number; to: number};
+export type ReportSteps =
+  | {verified: true; costs: Step[]; moves: Step[][]; endOfTurn: Step[]}
+  | {verified: false; reason: string};
+
+// The only form read: "RESOURCE: before->after (delta)", written by one server method, ending the line and preceded at
+// most by a label in parentheses (end-of-turn lines). Any other line, or any other part of a line, is free text and is
+// never interpreted (D1).
+const REGULAR = /^(?:\([^()]*\) )?(HEALTH|ALERTNESS|VIOLENCE|TOXICITY|ALCOHOL): (-?\d+)->(-?\d+) \((-?\d+)\)$/;
+export function regularLine(line: string): {resource: Resource; from: number; to: number; consistent: boolean} | null {
+  const m = REGULAR.exec(line);
+  if (!m) return null;
+  const from = Number(m[2]), to = Number(m[3]);
+  return {resource: m[1] as Resource, from, to, consistent: to - from === Number(m[4])};
+}
+
+/**
+ * Steps of a contiguous round in resolution order (R04): the nominal costs of every move first, then the regular lines
+ * of each move (SELF at the author, OPPONENT at the target, which for a move on oneself is the author), then the
+ * end-of-turn lines. Accepted only when every line starts where the previous step on that seat and resource left it
+ * and the steps end exactly at the new view; otherwise the round falls back to its totals (D5) with the reason.
+ */
+export function reportSteps(previous: View, next: View, facts: ResolutionFacts, costOf: (card: string) => MoveFact['cost'] = () => null): ReportSteps {
+  if (!facts.contiguous || !facts.seats) return {verified: false, reason: 'round without a difference'};
+  const fail = (reason: string): ReportSteps => ({verified: false, reason});
+  const value: Record<string, Partial<Record<Resource, number>>> = {};
+  for (const id of Object.keys(next.players)) value[id] = {...(previous.players[id]?.character.resources ?? {})};
+  const costs: Step[] = [];
+  for (const m of facts.moves) {
+    const cost = m.cost ?? costOf(m.card);
+    if (!cost) return fail(`unknown cost of ${m.card}`);
+    if (!value[m.author]) return fail(`unknown seat ${m.author}`);
+    for (const r of RESOURCE_ORDER) {
+      const c = cost[r];
+      if (!c) continue;
+      const from = value[m.author][r] ?? 0;
+      costs.push({seat: m.author, resource: r, from, to: from - c}); value[m.author][r] = from - c;
+    }
+  }
+  let problem: string | null = null;
+  const apply = (seat: string, lines: string[] | undefined, where: string, into: Step[]) => {
+    for (const line of lines ?? []) {
+      const l = regularLine(line);
+      if (!l || problem) continue;
+      if (!l.consistent) { problem = `${where}: delta of ${l.resource}`; return; }
+      if (!value[seat]) { problem = `${where}: unknown seat ${seat}`; return; }
+      const at = value[seat][l.resource] ?? 0;
+      if (at !== l.from) { problem = `${where}: ${seat} ${l.resource} from ${l.from}, previous step left ${at}`; return; }
+      into.push({seat, resource: l.resource, from: l.from, to: l.to}); value[seat][l.resource] = l.to;
+    }
+  };
+  const moves = facts.moves.map((m, i) => {
+    const steps: Step[] = [], report = next.resolvedMoves[i]?.moveReport ?? {};
+    apply(m.author, report.SELF, `move ${i} SELF`, steps); apply(m.target, report.OPPONENT, `move ${i} OPPONENT`, steps);
+    return steps;
+  });
+  const endOfTurn: Step[] = [];
+  for (const [id, lines] of Object.entries(next.timeBasedEffects ?? {})) apply(id, lines, `end of turn ${id}`, endOfTurn);
+  if (problem) return fail(problem);
+  for (const [id, p] of Object.entries(next.players)) {
+    const keys = new Set([...Object.keys(previous.players[id]?.character.resources ?? {}), ...Object.keys(p.character.resources)] as Resource[]);
+    for (const r of keys) if ((value[id]?.[r] ?? 0) !== (p.character.resources[r] ?? 0))
+      return fail(`${id} ${r}: steps end at ${value[id]?.[r] ?? 0}, view ${p.character.resources[r] ?? 0}`);
+  }
+  return {verified: true, costs, moves, endOfTurn};
+}
+
+/** What happens to the object a move chose and that left its seat: consumed by its owner, passed to the author, or gone. */
+export type ItemFate = 'consumed' | 'passed' | 'broken';
+export type MoveBeat = {
+  index: number; author: string; target: string; card: string; void: boolean;
+  item: {owner: string; name: string; fate: ItemFate} | null;
+  /** The card a bound move discarded (DISCARD_ONE); not for a voided bound, which keeps it (R04). */
+  discard: string | null;
+  /** Verified changes of this move (empty when the round falls back to totals). */
+  steps: Step[];
+};
+export type Draw = {seat: string; to: 'hand' | 'table'; name: string | null};
+export type Timeline = {
+  key: string; pace: Pace;
+  /** per-card: the verified lines move the bars step by step; total: previous to final in the tail (D5). */
+  bars: 'per-card' | 'total'; reason: string | null;
+  /** Nominal cost tokens leaving each author, voided moves included (one per move and resource). */
+  tokens: {seat: string; move: number; resource: Resource; amount: number}[];
+  costSteps: Step[]; moves: MoveBeat[]; draws: Draw[];
+  endOfTurn: {seats: string[]; steps: Step[]};
+  /** Previous to final of every changed resource: the tail of the total mode and the end state of both modes. */
+  totals: Step[];
+  emphasis: {seat: string; kind: 'died' | 'forfeit'}[];
+};
+
+/**
+ * The round as the scene plays it (C3-4), only for a round with a difference: every element comes from the facts,
+ * the catalog (nominal costs, which names are deck objects) and the verified report lines.
+ */
+export function timeline(previous: View, next: View, facts: ResolutionFacts, catalog: Card[] = []): Timeline | null {
+  if (!facts.contiguous || !facts.seats) return null;
+  const known = new Map<string, Card>();
+  for (const c of catalog) if (!known.has(c.name)) known.set(c.name, c);
+  const costOf = (name: string) => { const c = known.get(name); return c ? {...c.cost} : null; };
+  const steps = reportSteps(previous, next, facts, costOf), seats = facts.seats;
+  const tokens: Timeline['tokens'] = [];
+  for (const m of facts.moves) {
+    const cost = m.cost ?? costOf(m.card);
+    for (const r of RESOURCE_ORDER) if (cost?.[r]) tokens.push({seat: m.author, move: m.index, resource: r, amount: cost[r]!});
+  }
+  const moves: MoveBeat[] = facts.moves.map((m, i) => ({
+    index: m.index, author: m.author, target: m.target, card: m.card, void: m.void,
+    item: m.item && m.itemGone ? {...m.item, fate: m.author === m.item.owner ? 'consumed' : m.itemAtAuthor ? 'passed' : 'broken'} : null,
+    discard: m.void ? null : m.discard,
+    steps: steps.verified ? steps.moves[i] : [],
+  }));
+  // Cards leaving each deck: deck objects that appeared without a move passing them go to the table (the token is not in
+  // the catalog), the rest to the hand; own arrivals by name, opponents as backs, and only as many as the deck count says.
+  const draws: Draw[] = [];
+  for (const [id, s] of Object.entries(seats)) {
+    const left = Math.max(0, s.deck.before - s.deck.after);
+    const passedIn = moves.filter(m => m.item?.fate === 'passed' && m.author === id).map(m => m.item!.name);
+    const table = minus(s.itemsAppeared, passedIn).filter(n => known.get(n)?.item).slice(0, left);
+    for (const name of table) draws.push({seat: id, to: 'table', name});
+    if (s.handArrived) for (const name of s.handArrived) draws.push({seat: id, to: 'hand', name});
+    else for (let k = 0; k < left - table.length; k++) draws.push({seat: id, to: 'hand', name: null});
+  }
+  const totals: Step[] = [];
+  for (const [id, s] of Object.entries(seats)) for (const [r, c] of Object.entries(s.resources) as [Resource, ResourceChange][])
+    if (c.delta) totals.push({seat: id, resource: r, from: c.before ?? 0, to: c.after ?? 0});
+  const emphasis = Object.entries(seats).flatMap(([id, s]) => [
+    ...(s.died ? [{seat: id, kind: 'died' as const}] : []), ...(s.forfeit ? [{seat: id, kind: 'forfeit' as const}] : [])]);
+  return {
+    key: facts.key,
+    pace: pace(moves.length, {costs: tokens.length > 0, draws: draws.length > 0, endOfTurn: facts.endOfTurn.length > 0}),
+    bars: steps.verified ? 'per-card' : 'total', reason: steps.verified ? null : steps.reason,
+    tokens, costSteps: steps.verified ? steps.costs : [], moves, draws,
+    endOfTurn: {seats: facts.endOfTurn, steps: steps.verified ? steps.endOfTurn : []},
+    totals, emphasis,
+  };
+}
+
+/** What a sequence of the timeline animates, counted the same way by the scene and by the checks. */
+export function beats(t: Timeline) {
+  const items = t.moves.filter(m => m.item);
+  return {
+    drops: t.moves.length, stamps: t.moves.filter(m => m.void).length, tokens: t.tokens.length,
+    objects: items.length + t.draws.filter(d => d.to === 'table').length,
+    consumed: items.filter(m => m.item!.fate === 'consumed').length, passed: items.filter(m => m.item!.fate === 'passed').length,
+    broken: items.filter(m => m.item!.fate === 'broken').length, discards: t.moves.filter(m => m.discard).length,
+    draws: t.draws.length, endOfTurn: t.endOfTurn.seats.length, emphasis: t.emphasis.length,
+    steps: t.bars === 'per-card' ? t.costSteps.length + t.moves.reduce((n, m) => n + m.steps.length, 0) + t.endOfTurn.steps.length : t.totals.length,
+  };
 }

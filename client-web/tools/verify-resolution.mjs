@@ -1,4 +1,6 @@
 // C3-1 end-to-end check against the REAL server: the pure resolution model (src/resolution.ts) on real games.
+// C3-4: each sequence animates what the timeline of the facts says (cards, voids, cost tokens, objects, draws, end of
+// turn, per-card bars only when the report lines verify) and ends on the view; scenario `humans` measures the 30 s clock.
 // Like VerifyFfa it starts the server itself on a temporary database (the local data is never touched) and stops it
 // at the end. Scenarios: quick 1vCom with a drop and rejoin, five-seat FFA with computers, FFA where both humans let
 // the clock run out (turn jump), open 1vCom with two synthetic decks saved through the editor (D8).
@@ -21,7 +23,7 @@ import {createWriteStream,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
-import {resolve,mismatches} from '../src/resolution.ts';
+import {resolve,mismatches,timeline,beats} from '../src/resolution.ts';
 
 const repo=resolvePath(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
@@ -144,6 +146,9 @@ function finalState(s,v){
   const items=s.hits.filter(h=>h.kind==='item'&&h.target.owner===id).length;if(!p.character.dead&&!v.forfeits[id]&&items!==p.character.items.length)problems.push(`${id} objects ${items}≠${p.character.items.length}`);
  }
  const hand=[...s.order.map(c=>c.name)].sort().join('|'),view=[...mine.cardsInHand.map(c=>c.name)].sort().join('|');if(!s.eliminated&&hand!==view)problems.push('own hand');
+ // C3-4: every board shows the view again once the sequence is over (the steps of the round end there).
+ for(const [id,p] of Object.entries(v.players)){const shown=s.readout.boards?.[id];if(!shown)continue;
+  for(const k of new Set([...Object.keys(shown),...Object.keys(p.character.resources)]))if((shown[k]??0)!==(p.character.resources[k]??0))problems.push(`${id} board ${k} ${shown[k]}≠${p.character.resources[k]}`);}
  return problems;
 }
 
@@ -167,17 +172,18 @@ function record(name,me,previous,next,note){
 // D1 measurement (owner request after C3-2, not used by the client): do the regular "RESOURCE: a->b (d)" lines of the
 // server report, plus nominal costs and end-of-turn lines, give the real difference between the two views?
 // sum: totals per seat and resource; chain: each line starts from the value the previous step left (costs first, R04).
+// Kept as written for the measurement (unanchored match): C3-4 compares the client's anchored reading with it on every round.
 const LINE=/(HEALTH|ALERTNESS|VIOLENCE|TOXICITY|ALCOHOL): (-?\d+)->(-?\d+) \((-?\d+)\)/;
 function reportCheck(prev,next,catalog){
- const cost=new Map(catalog.map(c=>[c.name,c.cost]));const val={},sum={},issues=[];
+ const cost=new Map(catalog.map(c=>[c.name,c.cost]));const val={},sum={},issues=[];let lines=0,costs=0;
  for(const [id,p] of Object.entries(prev.players)){val[id]={...p.character.resources};sum[id]={};}
  const add=(id,k,d)=>{sum[id][k]=(sum[id][k]??0)+d;};
- const step=(id,line,where)=>{const m=line.match(LINE);if(!m)return;const [,k,a,b,d]=m;const A=+a,B=+b;if(B-A!==+d)issues.push(`${where}: delta text`);
+ const step=(id,line,where)=>{const m=line.match(LINE);if(!m)return;lines++;const [,k,a,b,d]=m;const A=+a,B=+b;if(B-A!==+d)issues.push(`${where}: delta text`);
   if(!(id in val)){issues.push(`${where}: unknown seat`);return;}
   if((val[id][k]??0)!==A)issues.push(`${where}: ${id} ${k} chain ${val[id][k]??0}≠${A}`);val[id][k]=B;add(id,k,B-A);};
  let unknownCost=0;
  for(const m of next.resolvedMoves){const c=cost.get(m.playedCardName);if(!c){unknownCost++;continue;}
-  for(const [k,v] of Object.entries(c)){val[m.playerId][k]=(val[m.playerId][k]??0)-v;add(m.playerId,k,-v);}}
+  for(const [k,v] of Object.entries(c)){if(v)costs++;val[m.playerId][k]=(val[m.playerId][k]??0)-v;add(m.playerId,k,-v);}}
  next.resolvedMoves.forEach((m,i)=>{const target=m.targetId==='SELF'?m.playerId:m.targetId;
   for(const line of m.moveReport?.SELF??[])step(m.playerId,line,`move ${i} SELF`);
   for(const line of m.moveReport?.OPPONENT??[])step(target,line,`move ${i} OPPONENT`);});
@@ -185,7 +191,7 @@ function reportCheck(prev,next,catalog){
  const sumIssues=[];
  for(const [id,p] of Object.entries(next.players))for(const k of new Set([...Object.keys(p.character.resources),...Object.keys(prev.players[id]?.character.resources??{})])){
   const real=(p.character.resources[k]??0)-(prev.players[id]?.character.resources[k]??0);if((sum[id]?.[k]??0)!==real)sumIssues.push(`${id} ${k}: report ${sum[id]?.[k]??0} vs view ${real}`);}
- return {sumOk:!sumIssues.length,chainOk:!issues.length&&!sumIssues.length,unknownCost,sumIssues,chainIssues:issues,moves:next.resolvedMoves.map(m=>m.playedCardName)};
+ return {sumOk:!sumIssues.length,chainOk:!issues.length&&!sumIssues.length,unknownCost,steps:costs+lines,sumIssues,chainIssues:issues,moves:next.resolvedMoves.map(m=>m.playedCardName)};
 }
 const reports=[];
 
@@ -230,6 +236,13 @@ function analyse(label,p,game,log,catalog,{expectSequences=true,quiet=new Set()}
    if(facts.endOfTurn.length)seen('endOfTurn',where);
    if(next.over){seen('over',where);record('over',me,prev,next,`${label}: fine partita ${next.winner}`);}
    if(Object.values(facts.seats).some(s=>s.forfeit))seen('forfeit',where);
+   // C3-4 scenarios: a move presented by a player who dies in the round still resolves (rule 7); a death at the end of
+   // turn whose verified HEALTH line crosses zero; an object chosen and no longer there to take (more claims than losses).
+   if(facts.moves.some(m=>facts.seats[m.author]?.died)){seen('deathWithMove',where);record('deathWithMove',me,prev,next,`${label}: morte con mossa già presentata`);}
+   const T=timeline(prev,next,facts,catalog);
+   if(T.bars==='per-card'&&T.endOfTurn.steps.some(s=>s.resource==='HEALTH'&&s.from>0&&s.to<=0&&facts.seats[s.seat]?.died)){seen('lethalEndOfTurn',where);record('lethalEndOfTurn',me,prev,next,`${label}: fine turno letale`);}
+   if(facts.moves.some(m=>m.item&&!m.void&&!m.itemGone&&(prev.players[m.item.owner]?.character.items??[]).some(c=>c.name===m.item.name)&&facts.seats[m.item.owner]?.itemsGone.includes(m.item.name))){seen('itemGoneBefore',where);record('itemGoneBefore',me,prev,next,`${label}: oggetto conteso, sparito per una sola mossa`);}
+   seen(T.bars==='per-card'?'barsPerCard':'barsTotal',where);
   }
   if(facts.contiguous){reports.push({game:label,turn:next.turn,...reportCheck(prev,next,catalog)});}
   if(facts.contiguous){const st=Object.values(facts.seats);k6.rounds++;if(st.some(x=>Object.entries(x.resources).some(([k,c])=>k!=='HEALTH'&&c.delta)))k6.otherResources++;if(st.some(x=>x.resources.HEALTH?.delta))k6.health++;
@@ -280,7 +293,10 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
   n++;
   if(n>maxTurns)throw new Error('too many turns');
   await p.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,300000,'turn resolved');
-  // Let the round's sequence run to its end (1.2 s today), so that its completion is measured.
+  // C3-4: the steps of one sequence (costs, first card hitting, the end) captured while it runs.
+  if(n===3){const t0=Date.now(),plan=(await p.state())?.stats.sequencePlans.at(-1);if((await p.state())?.sequence.running&&plan){
+   for(const [name,at] of [['costs',350],['card',1300],['tail',plan.total-500]]){const wait=at-(Date.now()-t0);if(wait>0)await p.page.waitForTimeout(wait);if(!(await p.state())?.sequence.running)break;await p.shot(`${shots}-sequence-${name}`);}}}
+  // Let the round's sequence run to its end (up to 10 s, D10), so that its completion is measured.
   await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});
  }
  await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});
@@ -303,16 +319,34 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
   // C3-2 revision: a completed sequence lasts what its plan says (one card at a time), never more than 10 s (D10).
   if(e.reason==='complete'&&plan&&Math.abs(e.ms-plan.total)>250)c32.push(`${e.key}: completed in ${e.ms} ms, planned ${plan.total}`);}
  for(const x of Object.values(plans))if(x.total>10000)c32.push(`${x.key}: planned ${x.total} ms with ${x.moves} moves`);
+ // C3-4: what each sequence animated, counted on the nodes the scene built, against the facts recomputed from the wire
+ // views (drops, stamps, tokens and object fates directly from the facts; draws, discards and steps from the timeline);
+ // bars per card exactly when the measurement of D1 (unanchored, independent) says the report lines rebuild the views.
+ const c34=[],rounds34=[],cat=catalogOf(p),costOf=new Map(cat.map(c=>[c.name,c.cost])),endOf=Object.fromEntries(ends.map(e=>[e.key,e]));
+ for(const b of r.stats.beats??[]){const turn=Number(b.key.split('/').pop()),prev=p.views(game).filter(v=>v.turn===turn-1).at(-1),next=p.views(game).filter(v=>v.turn===turn)[0];
+  if(!prev||!next){c34.push(`${b.key}: wire views missing`);continue;}
+  const f=resolve(prev,next,p.user,cat),T=timeline(prev,next,f,cat),exp=beats(T),rc=reportCheck(prev,next,cat),gone=f.moves.filter(m=>m.itemGone);
+  const direct={drops:f.moves.length,stamps:f.moves.filter(m=>m.void).length,tokens:f.moves.reduce((n,m)=>n+Object.values(costOf.get(m.card)??{}).filter(v=>v).length,0),
+   consumed:gone.filter(m=>m.author===m.item.owner).length,passed:gone.filter(m=>m.author!==m.item.owner&&m.itemAtAuthor).length,broken:gone.filter(m=>m.author!==m.item.owner&&!m.itemAtAuthor).length,
+   endOfTurn:f.endOfTurn.length,emphasis:Object.values(f.seats).filter(s=>s.died||s.forfeit).length};
+  for(const [k,v] of Object.entries(direct))if(b[k]!==v)c34.push(`${b.key}: ${k} ${b[k]}, facts ${v}`);
+  for(const k of ['objects','discards','draws','steps'])if(b[k]!==exp[k])c34.push(`${b.key}: ${k} ${b[k]}, timeline ${exp[k]}`);
+  const verified=rc.sumOk&&rc.chainOk;if((b.bars==='per-card')!==verified)c34.push(`${b.key}: bars ${b.bars} (${b.reason}), measurement ${verified}`);
+  if(verified&&b.steps!==rc.steps)c34.push(`${b.key}: ${b.steps} steps, measurement ${rc.steps}`);
+  if(b.pops!==b.steps)c34.push(`${b.key}: ${b.pops} enlarged changes for ${b.steps} steps`);
+  rounds34.push({key:b.key,moves:b.drops,bars:b.bars,reason:b.reason,planned:plans[b.key]?.total??null,ms:endOf[b.key]?.ms??null,end:endOf[b.key]?.reason??null,
+   beats:Object.fromEntries(Object.entries(b).filter(([k,v])=>!['key','bars','reason'].includes(k)&&v))});}
  for(const f of r.finals){if(!f.turn)continue;const key=`${game}/${f.turn}`,facts=relation[key];if(!facts)continue;
   if(facts.relation==='next'&&!f.summary)c32.push(`${key}: no static summary at the choice`);
   if(facts.relation==='next'&&f.summary&&(f.summary.key!==key||f.summary.seats!==Object.keys(facts.seats).length))c32.push(`${key}: summary of ${f.summary.key} with ${f.summary.seats} seats`);
   if(facts.relation!=='next'&&f.summary)c32.push(`${key}: summary after a ${facts.relation}`);}
  const jumps=(r.log??[]).filter(e=>e.facts.relation==='jump').map(e=>e.facts.key);
- const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32};
+ const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32,c34};
  evidence.games[label]={timerOrderOnly:a.timerOrderOnly,noValidMove:r.noValidMove??null,gameId:game,turnsSeen:a.turns,views:a.views,rows:a.rows,client:a.client,watched:r.watched,outcome:{over:r.end.over,winner:r.end.winner,eliminated:r.end.eliminated}};
  evidence.scene[label]={rules:Object.fromEntries(Object.entries(sceneRules).map(([k,v])=>[k,{ok:!v.length,violations:v}])),
-  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas};
- step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`,ends:Object.entries(ends.reduce((m,e)=>(m[e.reason]=(m[e.reason]??0)+1,m),{})).map(([k,v])=>`${k} ${v}`).join(', '),msComplete:ends.filter(e=>e.reason==='complete').map(e=>e.ms),notes:r.notes});
+  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34};
+ step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`,ends:Object.entries(ends.reduce((m,e)=>(m[e.reason]=(m[e.reason]??0)+1,m),{})).map(([k,v])=>`${k} ${v}`).join(', '),msComplete:ends.filter(e=>e.reason==='complete').map(e=>e.ms),
+  bars:`${rounds34.filter(x=>x.bars==='per-card').length} per card, ${rounds34.filter(x=>x.bars==='total').length} total`,notes:r.notes});
  assert.deepEqual(a.problems,[],`${label}: model problems`);
  for(const [k,v] of Object.entries(sceneRules))assert.deepEqual(v,[],`${label}: scene rule ${k}`);
  if(jumps.length)assert.ok((r.notes??[]).some(t=>t.includes('Risolti')),`${label}: line of the resolved turns after a jump`);
@@ -429,7 +463,8 @@ try{
   await Promise.all([A.wait(x=>x.turn>=1||x.over,60000,'turn 1'),B.wait(x=>x.turn>=1||x.over,60000,'turn 1')]);
   // Rule 4 between humans: during the sequence a card is chosen at the first tap and the 30 s clock goes on.
   const during=await A.state(),clock=async()=>Number((await A.page.locator('.clock:not(.away)').first().innerText().catch(()=>'')).match(/\d+/)?.[0]??NaN);
-  const c0=await clock(),hand=during.hits.find(h=>h.kind==='hand');await A.page.mouse.click(hand.x-hand.w*.22,hand.y);await A.page.waitForTimeout(100);
+  // The HTML clock refreshes every 250 ms from the deadline of the view: read it once the new turn is shown.
+  await A.page.waitForTimeout(300);const c0=await clock(),hand=during.hits.find(h=>h.kind==='hand');await A.page.mouse.click(hand.x-hand.w*.22,hand.y);await A.page.waitForTimeout(100);
   const chosen=await A.state();await A.page.waitForTimeout(2300);const c1=await clock();
   const rule4={runningAtTap:during.sequence.running,selected:chosen.selected===hand.id,end:chosen.sequence.ends.at(-1)??null,clockBefore:c0,clockAfter2s:c1};
   step('rule4WithClock',rule4);assert.ok(rule4.selected,'card chosen at the first tap');assert.ok(c1<c0,'clock goes on');if(rule4.runningAtTap)assert.equal(rule4.end.reason,'input');
@@ -448,6 +483,39 @@ try{
   const jumps=a.rows.filter(x=>x.relation==='jump');
   step('jumpObserved',{secondsToForfeit:Math.round((Date.now()-t0)/1000),over:!!end,turnsFromTo:jumps.map(x=>`${x.from}→${x.turn}`),clientRelations:a.client.map(c=>`${c.key} ${c.relation}`),sceneK2:evidence.scene.jump.k2,note,rule4});
   await toHub(A);await toHub(B).catch(()=>{});
+ }
+
+ // C3-4. FFA with devAlice, devBob and three computers, both humans playing every round and letting each sequence run:
+ // five moves within 10 s (D10) and the 30 s clock left to each human when the sequence ends (data for A2).
+ if(run('humans')){
+  if(!B){B=await open('B');await login(B);}
+  await joinFfa(A);await waitList(A,1);await joinFfa(B);await waitList(A,2);await addComputers(A,3);
+  await Promise.all([table(A),table(B)]);const game=readyId(A,/quick\/ffa\/ready$/);assert.equal(game,readyId(B,/quick\/ffa\/ready$/));
+  const clockOf=async p=>Number((await p.page.locator('.clock:not(.away)').first().innerText().catch(()=>'')).match(/\d+/)?.[0]??NaN);
+  const ready=x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand')));
+  const rounds=[],finals=[];
+  for(let i=0;i<8;i++){
+   const [sa,sb]=await Promise.all([A.wait(ready,60000,'A turn'),B.wait(ready,60000,'B turn')]);
+   if(sa.over||sb.over||sa.eliminated||sb.eliminated)break;
+   finals.push({turn:sa.turn,problems:finalState(sa,lastView(A,sa.turn)),summary:sa.summary?{key:sa.summary.key,seats:Object.keys(sa.summary.seats).length,texts:Object.values(sa.summary.seats).map(x=>x.texts.join(' '))}:null,running:sa.sequence.running});
+   if(i===1){await A.shot('humans-choice');await B.shot('humans-choice');}
+   await Promise.all([playOne(A),playOne(B)]);
+   const row=await Promise.all([A,B].map(async p=>{await p.wait(x=>!x||x.over||x.turn!==sa.turn,60000,'resolved');
+    if(i===1)await p.page.waitForTimeout(1800).then(()=>p.shot('humans-sequence'));
+    await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});const clock=await clockOf(p),st=await p.state();
+    return {who:p.user,turn:st.turn,clockAtSequenceEnd:clock,end:st.sequence.ends.at(-1)??null,plan:st.stats.sequencePlans.at(-1)??null};}));
+   rounds.push(...row);}
+  const st=await A.state();
+  for(const p of [A,B]){const s=await p.state();
+   if(s&&!s.over&&!s.eliminated){await p.page.keyboard.press('Escape');await p.page.getByLabel('Apri menu').click();await p.page.getByRole('button',{name:'Abbandona la partita'}).click();await p.page.getByRole('button',{name:'Sì, abbandona'}).click();await p.page.getByTestId('quick').waitFor({timeout:15000});}
+   else await toHub(p).catch(async()=>{await p.page.goto(`${url}#/`);await p.page.getByTestId('quick').waitFor({timeout:15000});});}
+  const r={log:await A.log().catch(()=>[]),stats:st.stats,finals,watched:false,end:st,notes:[]};
+  summarise('humans',A,game,r);
+  const played=rounds.filter(x=>x.end&&x.plan&&x.end.key===x.plan.key);
+  evidence.scene.humans.clock=rounds;
+  const five=played.filter(x=>x.plan.moves===5);
+  step('humansClock',{rounds:rounds.length,fiveMoves:five.map(x=>`${x.who} T${x.turn}: ${x.end.ms} ms (${x.end.reason})`),clockAtSequenceEnd:played.map(x=>`${x.who} T${x.turn} ${x.plan.moves} mosse ${x.end.ms} ms → ${x.clockAtSequenceEnd} s`)});
+  for(const x of played){assert.ok(x.plan.total<=10000,`${x.who} T${x.turn}: within 10 s`);if(x.end.reason==='complete')assert.ok(x.clockAtSequenceEnd>=30-Math.ceil(x.end.ms/1000)-2,`${x.who} T${x.turn}: the clock runs during the sequence (rule 4)`);}
  }
 
  // 4. Open 1vCom with synthetic decks (D8), saved through the editor on the temporary database.
@@ -491,7 +559,7 @@ try{
  evidence.reportConsistency={rounds:reports.length,sumOk:reports.filter(x=>x.sumOk).length,chainOk:reports.filter(x=>x.chainOk).length,unknownCost:reports.filter(x=>x.unknownCost).length,failures:reports.filter(x=>!x.chainOk)};
  step('reportConsistency',{rounds:reports.length,sumOk:evidence.reportConsistency.sumOk,chainOk:evidence.reportConsistency.chainOk});
  evidence.cases=cases;
- const wanted=['void','itemConsumed','drawnToTable','death','over','jump','rejoinSame'];
+ const wanted=['void','itemConsumed','itemFromOther','drawnToTable','death','deathWithMove','lethalEndOfTurn','boundDiscard','over','jump','rejoinSame'];
  step('casesOnRealServer',{seen:Object.fromEntries(Object.entries(cases).map(([k,v])=>[k,v.length])),missing:wanted.filter(k=>!cases[k])});
  assert.deepEqual(evidence.errors,[],'no page errors');
  evidence.ok=true;
@@ -500,6 +568,8 @@ try{
 finally{
  evidence.cases=cases;
  await writeFile(`${out}/resolution${tag}.json`,JSON.stringify(evidence,null,1));
+ // C3-4: the account catalog (names and nominal costs, also of the computers' cards) for the unit tests of the timeline.
+ if(recorded&&!recorded.catalog&&A)try{const c=catalogOf(A);if(c.length)recorded.catalog=c.map(slimCard);}catch{}
  if(recorded){recorded.source='client-web/tools/verify-resolution.mjs with BM_RECORD=1 on the real server (temporary database); card objects trimmed to the fields the model reads, everything else as received';await writeFile(recordPath,JSON.stringify(recorded,null,1));}
  await browser.close().catch(()=>{});
  await stopServer();

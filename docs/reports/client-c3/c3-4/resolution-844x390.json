@@ -1,0 +1,6396 @@
+{
+ "date": "2026-10-30T12:24:47.011Z",
+ "url": "http://127.0.0.1:4321",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "games": {
+  "quick": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204",
+   "turnsSeen": 8,
+   "views": 17,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1879:Ghigno co' i' Denti Marci",
+      "devAlice:Desiderio Incontrollabile [Peroni da 66, calda gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -22,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_1879": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_1879:Desiderio Incontrollabile [Mescolone Micidiale gone]",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -1,
+       "TOXICITY": 5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_1879": {
+       "HEALTH": -5,
+       "ALERTNESS": -20,
+       "TOXICITY": 25,
+       "ALCOHOL": 20
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "ComPlayer_1879:Steal [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -8,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_1879": {
+       "ALERTNESS": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1879:C'è del sangue nella mia droga",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -22,
+       "ALERTNESS": -1,
+       "TOXICITY": 30,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_1879": {
+       "HEALTH": -5,
+       "TOXICITY": -30
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1879"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1879:Ghigno co' i' Denti Marci",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -25,
+       "ALERTNESS": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_1879": {
+       "HEALTH": -5,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1879:Tossicone Scatarrante",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -30,
+       "ALERTNESS": -5,
+       "TOXICITY": 10
+      },
+      "ComPlayer_1879": {
+       "HEALTH": -25,
+       "TOXICITY": -5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1879"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_1879:Ago Marcio e Spezzato",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -40,
+       "TOXICITY": 10
+      },
+      "ComPlayer_1879": {
+       "HEALTH": -12,
+       "ALERTNESS": -10,
+       "TOXICITY": 10,
+       "ALCOHOL": -11
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_1879"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 8
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 9
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 10
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_1879",
+    "eliminated": true
+   }
+  },
+  "ffa": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9",
+   "turnsSeen": 10,
+   "views": 19,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Ghigno co' i' Denti Marci",
+      "ComPlayer_482:LIEVE FASTIDIO",
+      "devAlice:Desiderio Incontrollabile [Peroni da 66, calda gone]",
+      "ComPlayer_365:Metabolismo Corrotto",
+      "ComPlayer_8187:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -7,
+       "VIOLENCE": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8187": {
+       "ALERTNESS": -5,
+       "TOXICITY": 5
+      },
+      "devAlice": {
+       "ALERTNESS": -19,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_365": {
+       "HEALTH": 5,
+       "TOXICITY": -10
+      },
+      "ComPlayer_247": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Grab [Tennents Super gone]",
+      "ComPlayer_365:Desiderio Incontrollabile [Mescolone Micidiale gone]",
+      "ComPlayer_8187:C'è del sangue nella mia droga",
+      "ComPlayer_482:SVEGLIAMOCI MA TU NO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -10,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_8187": {
+       "HEALTH": -5,
+       "TOXICITY": -15
+      },
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -1,
+       "TOXICITY": 10,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_365": {
+       "ALERTNESS": -17,
+       "TOXICITY": 20,
+       "ALCOHOL": 20
+      },
+      "ComPlayer_247": {
+       "ALERTNESS": -5,
+       "ALCOHOL": 4
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "ComPlayer_8187",
+      "devAlice",
+      "ComPlayer_247"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Ghigno co' i' Denti Marci",
+      "ComPlayer_8187:Ghigno co' i' Denti Marci",
+      "ComPlayer_482:FAI BASTA",
+      "ComPlayer_365:Ago Marcio e Spezzato",
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -5,
+       "VIOLENCE": -5
+      },
+      "ComPlayer_8187": {
+       "ALERTNESS": 5
+      },
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -15,
+       "ALCOHOL": 4
+      },
+      "ComPlayer_365": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_247": {
+       "HEALTH": -5,
+       "ALERTNESS": -2,
+       "TOXICITY": 5,
+       "ALCOHOL": -3
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "devAlice",
+      "ComPlayer_247"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8187:Ghigno co' i' Denti Marci",
+      "ComPlayer_247:Ghigno co' i' Denti Marci",
+      "ComPlayer_365:Riflessi Aumentati dalla Speed",
+      "ComPlayer_482:ORMALE GUARIAMOTI (void)",
+      "devAlice:Desiderio Incontrollabile [Broken Beer Bottle gone]"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -5,
+       "ALERTNESS": -5,
+       "VIOLENCE": -20
+      },
+      "ComPlayer_8187": {
+       "ALERTNESS": 5
+      },
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -9,
+       "ALCOHOL": -3
+      },
+      "ComPlayer_365": {
+       "TOXICITY": -10
+      },
+      "ComPlayer_247": {
+       "ALERTNESS": 5,
+       "ALCOHOL": -1
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "devAlice",
+      "ComPlayer_247"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Ghigno co' i' Denti Marci",
+      "ComPlayer_8187:Presa Male di Brutto",
+      "devAlice:Ago Marcio e Spezzato",
+      "ComPlayer_482:ADOPERIAMOTI [Negroni Trovato per Terra gone]",
+      "ComPlayer_365:Scatto Repentino"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -15,
+       "ALERTNESS": -12,
+       "VIOLENCE": 20,
+       "TOXICITY": 10,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_8187": {
+       "ALERTNESS": -10
+      },
+      "devAlice": {
+       "HEALTH": -12,
+       "TOXICITY": 5,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_365": {},
+      "ComPlayer_247": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Ghigno co' i' Denti Marci",
+      "ComPlayer_8187:Ghigno co' i' Denti Marci",
+      "ComPlayer_365:Ghigno co' i' Denti Marci",
+      "ComPlayer_482:LIEVE FASTIDIO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -17,
+       "ALERTNESS": -3,
+       "VIOLENCE": 5,
+       "TOXICITY": 5,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_8187": {
+       "ALERTNESS": -5
+      },
+      "devAlice": {
+       "HEALTH": -15,
+       "TOXICITY": 5
+      },
+      "ComPlayer_365": {
+       "HEALTH": -20
+      },
+      "ComPlayer_247": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "devAlice",
+      "ComPlayer_365"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Riflessi Aumentati dalla Speed",
+      "ComPlayer_8187:Ghigno co' i' Denti Marci (void)",
+      "ComPlayer_365:Ghigno co' i' Denti Marci",
+      "ComPlayer_482:SVEGLIAMOCI MA TU NO",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -20,
+       "ALERTNESS": -1,
+       "TOXICITY": 5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_8187": {},
+      "devAlice": {
+       "HEALTH": -22,
+       "TOXICITY": 5
+      },
+      "ComPlayer_365": {
+       "HEALTH": -7,
+       "ALERTNESS": -5,
+       "ALCOHOL": -11
+      },
+      "ComPlayer_247": {
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "ComPlayer_8187",
+      "devAlice",
+      "ComPlayer_365"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8187:Ghigno co' i' Denti Marci",
+      "ComPlayer_247:Ago Marcio e Spezzato",
+      "ComPlayer_365:Ago Marcio e Spezzato",
+      "ComPlayer_482:AMMALIAMOTI DI BOTTE",
+      "devAlice:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "ComPlayer_482": {
+       "HEALTH": -37,
+       "VIOLENCE": -15,
+       "TOXICITY": 15,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_8187": {
+       "ALERTNESS": 5
+      },
+      "devAlice": {
+       "HEALTH": -20,
+       "ALERTNESS": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_365": {
+       "HEALTH": -25,
+       "ALERTNESS": -4,
+       "TOXICITY": 15,
+       "ALCOHOL": -5
+      },
+      "ComPlayer_247": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_482",
+      "devAlice",
+      "ComPlayer_365"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 23,
+     "from": 8,
+     "relation": "jump",
+     "views": 2,
+     "moves": [
+      "ComPlayer_247:Last Resort: Banzai!!!",
+      "ComPlayer_8187:Last Resort: Banzai!!!"
+     ],
+     "deltas": null,
+     "endOfTurn": [],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 13
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 18
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 16
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 13
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 16
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 10
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 15
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 21
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/23",
+     "relation": "jump",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/23",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_247",
+    "eliminated": true
+   }
+  },
+  "jump": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f",
+   "turnsSeen": 3,
+   "views": 4,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_7745:Ghigno co' i' Denti Marci",
+      "ComPlayer_4421:LIEVE FASTIDIO",
+      "ComPlayer_1930:COSA FAI NON É UNA DOMANDA",
+      "devAlice:Ago Marcio e Spezzato",
+      "devBob:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "ComPlayer_4421": {
+       "HEALTH": -15,
+       "ALERTNESS": -5,
+       "VIOLENCE": 5,
+       "TOXICITY": 10
+      },
+      "devAlice": {
+       "TOXICITY": 5
+      },
+      "devBob": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_1930": {
+       "ALERTNESS": -10,
+       "VIOLENCE": -10
+      },
+      "ComPlayer_7745": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_4421"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 20,
+     "from": 1,
+     "relation": "jump",
+     "views": 1,
+     "moves": [
+      "ComPlayer_7745:Ghigno co' i' Denti Marci",
+      "ComPlayer_1930:Last Resort: Banzai!!!"
+     ],
+     "deltas": null,
+     "endOfTurn": [
+      "ComPlayer_1930"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 12
+    },
+    {
+     "why": "view",
+     "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/20",
+     "relation": "jump",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_7745",
+    "eliminated": true
+   }
+  },
+  "humans": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5",
+   "turnsSeen": 9,
+   "views": 25,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "ComPlayer_8407:Metabolismo Corrotto",
+      "ComPlayer_7427:SVEGLIAMOCI MA TU NO",
+      "ComPlayer_8240:PAZIENZA: FINITA",
+      "devBob:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "HEALTH": 5,
+       "TOXICITY": -10
+      },
+      "ComPlayer_8240": {
+       "ALERTNESS": 15,
+       "VIOLENCE": 15
+      },
+      "devAlice": {
+       "HEALTH": -3,
+       "VIOLENCE": 5
+      },
+      "devBob": {
+       "HEALTH": -2,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "devBob"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "devBob:LIEVE FASTIDIO",
+      "ComPlayer_8240:GABBIANO DUNQUE VOLIAMOTI",
+      "ComPlayer_8407:Ago Marcio e Spezzato",
+      "ComPlayer_7427:ADOPERIAMOTI [Peroni da 66, calda gone]"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "TOXICITY": 5
+      },
+      "ComPlayer_8240": {
+       "VIOLENCE": -10
+      },
+      "devAlice": {
+       "VIOLENCE": 5
+      },
+      "devBob": {
+       "HEALTH": -10,
+       "ALERTNESS": -3,
+       "VIOLENCE": 5,
+       "TOXICITY": 5,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_7427": {
+       "HEALTH": -15,
+       "ALERTNESS": -2,
+       "ALCOHOL": 2
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8240",
+      "devAlice",
+      "devBob",
+      "ComPlayer_7427"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "devBob:LIEVE FASTIDIO",
+      "ComPlayer_8240:STORDIAMOTI HO DETTO",
+      "ComPlayer_7427:SPEDIAMOTI DUNQUE IN O-AHIO",
+      "ComPlayer_8407:Scatto Repentino"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {},
+      "ComPlayer_8240": {
+       "VIOLENCE": -15
+      },
+      "devAlice": {
+       "HEALTH": -7,
+       "ALERTNESS": -10,
+       "VIOLENCE": 5
+      },
+      "devBob": {
+       "HEALTH": -21,
+       "ALERTNESS": -1,
+       "VIOLENCE": 5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": -1,
+       "VIOLENCE": -20,
+       "ALCOHOL": -2
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "devBob",
+      "ComPlayer_7427"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_8240:LIEVE FASTIDIO",
+      "devAlice:LIEVE FASTIDIO",
+      "devBob:LIEVE FASTIDIO",
+      "ComPlayer_7427:SVEGLIAMOCI MA TU NO",
+      "ComPlayer_8407:Steal [Tennents Super gone]"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "HEALTH": -5,
+       "ALERTNESS": -10
+      },
+      "ComPlayer_8240": {
+       "VIOLENCE": 5
+      },
+      "devAlice": {
+       "VIOLENCE": 5
+      },
+      "devBob": {
+       "HEALTH": -5,
+       "VIOLENCE": 5,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8240",
+      "devAlice",
+      "devBob"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "devBob:LIEVE FASTIDIO",
+      "ComPlayer_7427:SVEGLIAMOCI MA TU NO",
+      "ComPlayer_8407:Desiderio Incontrollabile [Tennents Super gone]",
+      "ComPlayer_8240:NON GIOCARE COL COLTELLO NO"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "ALERTNESS": -17,
+       "ALCOHOL": 4
+      },
+      "ComPlayer_8240": {
+       "HEALTH": -5,
+       "VIOLENCE": 10
+      },
+      "devAlice": {
+       "VIOLENCE": 5
+      },
+      "devBob": {
+       "HEALTH": -5,
+       "VIOLENCE": 5
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8407",
+      "devAlice",
+      "devBob"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "devBob:LIEVE FASTIDIO",
+      "ComPlayer_8407:Ghigno co' i' Denti Marci",
+      "ComPlayer_8240:PERMESSO SCUSA ORA SMETTI ",
+      "ComPlayer_7427:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "HEALTH": -5,
+       "ALERTNESS": 3,
+       "ALCOHOL": -3
+      },
+      "ComPlayer_8240": {
+       "VIOLENCE": -10
+      },
+      "devAlice": {
+       "HEALTH": -7,
+       "ALERTNESS": -5,
+       "VIOLENCE": 5
+      },
+      "devBob": {
+       "HEALTH": -5,
+       "VIOLENCE": 5
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8407",
+      "devAlice",
+      "devBob"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_8240:GENTILE IL TUO CAREZZO",
+      "devBob:LIEVE FASTIDIO",
+      "ComPlayer_8407:Grab [Broken Beer Bottle gone]",
+      "ComPlayer_7427:PAZIENZA: FINITA",
+      "devAlice:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "ALCOHOL": -1
+      },
+      "ComPlayer_8240": {
+       "ALERTNESS": 10,
+       "VIOLENCE": -20
+      },
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      },
+      "devBob": {
+       "HEALTH": -5,
+       "VIOLENCE": 5
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": 15,
+       "VIOLENCE": 15
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8407",
+      "ComPlayer_8240",
+      "devAlice",
+      "devBob"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8240:LIEVE FASTIDIO",
+      "ComPlayer_7427:COSA FAI NON É UNA DOMANDA",
+      "devAlice:LIEVE FASTIDIO",
+      "ComPlayer_8407:Grab [Peroni da 66, calda]",
+      "devBob:ADOPERIAMOTI (void) [Peroni da 66, calda]"
+     ],
+     "deltas": {
+      "ComPlayer_8407": {
+       "ALERTNESS": -2,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_8240": {
+       "VIOLENCE": 5
+      },
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -3,
+       "VIOLENCE": 5,
+       "ALCOHOL": -4
+      },
+      "devBob": {
+       "HEALTH": -5
+      },
+      "ComPlayer_7427": {
+       "ALERTNESS": -10,
+       "VIOLENCE": -10
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_8407",
+      "ComPlayer_8240",
+      "devAlice",
+      "devBob",
+      "ComPlayer_7427"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [],
+   "watched": false,
+   "outcome": {
+    "over": false,
+    "winner": "NONE",
+    "eliminated": false
+   }
+  },
+  "open C3 contrasti": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17",
+   "turnsSeen": 19,
+   "views": 46,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:COSA FAI NON É UNA DOMANDA",
+      "ComPlayer_8730:Ago Marcio e Spezzato (void)"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -10,
+       "VIOLENCE": -10
+      },
+      "ComPlayer_8730": {
+       "HEALTH": -5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_8730:Grab (void) [Peroni da 66, calda]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "VIOLENCE": -5
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 10
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:Grab [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -12,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:FAI BASTA"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -8,
+       "VIOLENCE": -5,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_8730:Grab (void) [Peroni da 66, calda]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -1,
+       "VIOLENCE": -5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:LIEVE FASTIDIO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "ALERTNESS": -5,
+       "VIOLENCE": 5,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_8730:Tutto è Droga (void) [Peroni da 66, calda]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "VIOLENCE": -5
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8730:Riflessi Aumentati dalla Speed",
+      "devAlice:LIEVE FASTIDIO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "VIOLENCE": 5
+      },
+      "ComPlayer_8730": {
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 9,
+     "from": 8,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_8730:Metabolismo Corrotto (void)"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -2,
+       "VIOLENCE": -5
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 10,
+     "from": 9,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -12,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 11,
+     "from": 10,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:GARGANTUESCO IMPATTO SUL TU"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -8,
+       "VIOLENCE": -25,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_8730": {
+       "HEALTH": -40,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 12,
+     "from": 11,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_8730:Desiderio Incontrollabile (void) [Mescolone Micidiale]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -1,
+       "VIOLENCE": -5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 13,
+     "from": 12,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "devAlice:FAI BASTA",
+      "ComPlayer_8730:Steal (void) [Negroni Trovato per Terra]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "VIOLENCE": -5,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_8730": {}
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 14,
+     "from": 13,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_8730:Ago Marcio e Spezzato",
+      "devAlice:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -15,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 10,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_8730": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 15,
+     "from": 14,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:GARGANTUESCO IMPATTO SUL TU"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -8,
+       "VIOLENCE": -25,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_8730": {
+       "HEALTH": -40,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 16,
+     "from": 15,
+     "relation": "next",
+     "views": 3,
+     "moves": [
+      "ComPlayer_8730:Ghigno co' i' Denti Marci",
+      "devAlice:LIEVE FASTIDIO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -6,
+       "VIOLENCE": 5,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_8730": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 17,
+     "from": 16,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:LIEVE FASTIDIO",
+      "ComPlayer_8730:Ago Marcio e Spezzato"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -17,
+       "VIOLENCE": 5,
+       "TOXICITY": 5,
+       "ALCOHOL": -1
+      },
+      "ComPlayer_8730": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 18,
+     "from": 17,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_8730:Last Resort: Banzai!!!",
+      "devAlice:Last Resort: Banzai!!!"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -15
+      },
+      "ComPlayer_8730": {
+       "HEALTH": -15
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 4
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 8
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/9",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 3
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/10",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 8
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/10",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/10",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/11",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/11",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/12",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/12",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/13",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/13",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/13",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/14",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 9
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/14",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/14",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/15",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/15",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/15",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/16",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/16",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/16",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/17",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/17",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/18",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 4
+    },
+    {
+     "why": "view",
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/18",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "NONE",
+    "eliminated": true
+   }
+  },
+  "open C3 furti": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d",
+   "turnsSeen": 13,
+   "views": 27,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5169:COSA FAI NON É UNA DOMANDA",
+      "devAlice:Tutto è Droga (void) [Tennents Super]"
+     ],
+     "deltas": {
+      "devAlice": {},
+      "ComPlayer_5169": {
+       "ALERTNESS": -10,
+       "VIOLENCE": -10
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5169:FAI BASTA",
+      "devAlice:Tutto è Droga (void) [Tennents Super]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": 10
+      },
+      "ComPlayer_5169": {
+       "VIOLENCE": -5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Tutto è Droga [Tennents Super gone]",
+      "ComPlayer_5169:NON GIOCARE COL COLTELLO NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "TOXICITY": 20
+      },
+      "ComPlayer_5169": {
+       "VIOLENCE": 10
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5169:FAI BASTA",
+      "devAlice:Desiderio Incontrollabile (void) [Tennents Super]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": 10
+      },
+      "ComPlayer_5169": {
+       "VIOLENCE": -5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]",
+      "ComPlayer_5169:PERMESSO SCUSA ORA SMETTI "
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -10,
+       "ALERTNESS": -32,
+       "ALCOHOL": 4
+      },
+      "ComPlayer_5169": {
+       "VIOLENCE": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Desiderio Incontrollabile [Mescolone Micidiale gone]",
+      "ComPlayer_5169:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -11,
+       "TOXICITY": 20,
+       "ALCOHOL": 20
+      },
+      "ComPlayer_5169": {
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_5169:LIEVE FASTIDIO",
+      "devAlice:Desiderio Incontrollabile [Broken Beer Bottle gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "ALERTNESS": -6
+      },
+      "ComPlayer_5169": {
+       "VIOLENCE": 5
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Rabbia Psicotica da Meth",
+      "ComPlayer_5169:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -7,
+       "TOXICITY": -5
+      },
+      "ComPlayer_5169": {
+       "HEALTH": -24,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 5,
+       "ALCOHOL": 7
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 9,
+     "from": 8,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5169:LIEVE FASTIDIO",
+      "devAlice:Rabbia Psicotica da Meth"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "TOXICITY": -5
+      },
+      "ComPlayer_5169": {
+       "HEALTH": -13,
+       "ALERTNESS": -3,
+       "VIOLENCE": 5,
+       "ALCOHOL": -4
+      }
+     },
+     "endOfTurn": [
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 10,
+     "from": 9,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Rabbia Psicotica da Meth",
+      "ComPlayer_5169:STORDIAMOTI HO DETTO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -35,
+       "ALERTNESS": -10,
+       "TOXICITY": -5
+      },
+      "ComPlayer_5169": {
+       "HEALTH": -17,
+       "ALERTNESS": -1,
+       "VIOLENCE": -15,
+       "ALCOHOL": -2
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 11,
+     "from": 10,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_5169:GABBIANO DUNQUE VOLIAMOTI",
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -32,
+       "ALERTNESS": -19,
+       "ALCOHOL": -8
+      },
+      "ComPlayer_5169": {
+       "HEALTH": -2,
+       "VIOLENCE": -10,
+       "ALCOHOL": -1
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 12,
+     "from": 11,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:Desiderio Incontrollabile [Tennents Super gone]",
+      "ComPlayer_5169:PAZIENZA: FINITA"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -17,
+       "ALERTNESS": -24,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_5169": {
+       "HEALTH": -2,
+       "ALERTNESS": 15,
+       "VIOLENCE": 15
+      }
+     },
+     "endOfTurn": [
+      "devAlice",
+      "ComPlayer_5169"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 2
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 9
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/9",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/10",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/10",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/11",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 10
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/11",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/12",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 8
+    },
+    {
+     "why": "view",
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/12",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_5169",
+    "eliminated": true
+   }
+  }
+ },
+ "cases": {
+  "rejoinSame": [
+   "quick T2"
+  ],
+  "itemConsumed": [
+   "quick T1",
+   "quick T2",
+   "quick T3",
+   "ffa T1",
+   "ffa T2",
+   "ffa T3",
+   "ffa T4",
+   "ffa T5",
+   "humans T1",
+   "humans T2",
+   "humans T5",
+   "humans T7",
+   "open C3 contrasti T3",
+   "open C3 contrasti T10",
+   "open C3 contrasti T14",
+   "open C3 furti T3",
+   "open C3 furti T5",
+   "open C3 furti T6",
+   "open C3 furti T7",
+   "open C3 furti T8",
+   "open C3 furti T11",
+   "open C3 furti T12"
+  ],
+  "boundDiscard": [
+   "quick T1",
+   "quick T2",
+   "quick T4",
+   "quick T5",
+   "quick T6",
+   "quick T7",
+   "ffa T1",
+   "ffa T2",
+   "ffa T3",
+   "ffa T4",
+   "ffa T5",
+   "ffa T6",
+   "ffa T7",
+   "ffa T8",
+   "jump T1",
+   "humans T1",
+   "humans T2",
+   "humans T3",
+   "humans T4",
+   "humans T5",
+   "humans T6",
+   "humans T7",
+   "humans T8",
+   "open C3 contrasti T1",
+   "open C3 contrasti T3",
+   "open C3 contrasti T4",
+   "open C3 contrasti T6",
+   "open C3 contrasti T8",
+   "open C3 contrasti T10",
+   "open C3 contrasti T11",
+   "open C3 contrasti T14",
+   "open C3 contrasti T15",
+   "open C3 contrasti T16",
+   "open C3 contrasti T17",
+   "open C3 furti T6",
+   "open C3 furti T7",
+   "open C3 furti T9"
+  ],
+  "endOfTurn": [
+   "quick T1",
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T6",
+   "quick T7",
+   "ffa T1",
+   "ffa T2",
+   "ffa T3",
+   "ffa T4",
+   "ffa T5",
+   "ffa T6",
+   "ffa T7",
+   "ffa T8",
+   "jump T1",
+   "humans T1",
+   "humans T2",
+   "humans T3",
+   "humans T4",
+   "humans T5",
+   "humans T6",
+   "humans T7",
+   "humans T8",
+   "open C3 contrasti T3",
+   "open C3 contrasti T4",
+   "open C3 contrasti T5",
+   "open C3 contrasti T6",
+   "open C3 contrasti T7",
+   "open C3 contrasti T8",
+   "open C3 contrasti T9",
+   "open C3 contrasti T10",
+   "open C3 contrasti T11",
+   "open C3 contrasti T12",
+   "open C3 contrasti T13",
+   "open C3 contrasti T14",
+   "open C3 contrasti T15",
+   "open C3 contrasti T16",
+   "open C3 contrasti T17",
+   "open C3 furti T5",
+   "open C3 furti T6",
+   "open C3 furti T7",
+   "open C3 furti T8",
+   "open C3 furti T9",
+   "open C3 furti T10",
+   "open C3 furti T11",
+   "open C3 furti T12"
+  ],
+  "barsPerCard": [
+   "quick T1",
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T7",
+   "ffa T1",
+   "ffa T2",
+   "ffa T3",
+   "ffa T4",
+   "ffa T5",
+   "ffa T7",
+   "ffa T8",
+   "jump T1",
+   "humans T1",
+   "humans T2",
+   "humans T3",
+   "humans T4",
+   "humans T5",
+   "humans T6",
+   "humans T7",
+   "humans T8",
+   "open C3 contrasti T1",
+   "open C3 contrasti T2",
+   "open C3 contrasti T3",
+   "open C3 contrasti T4",
+   "open C3 contrasti T5",
+   "open C3 contrasti T6",
+   "open C3 contrasti T7",
+   "open C3 contrasti T8",
+   "open C3 contrasti T9",
+   "open C3 contrasti T10",
+   "open C3 contrasti T11",
+   "open C3 contrasti T12",
+   "open C3 contrasti T13",
+   "open C3 contrasti T14",
+   "open C3 contrasti T15",
+   "open C3 contrasti T16",
+   "open C3 contrasti T17",
+   "open C3 contrasti T18",
+   "open C3 furti T1",
+   "open C3 furti T2",
+   "open C3 furti T3",
+   "open C3 furti T4",
+   "open C3 furti T5",
+   "open C3 furti T6",
+   "open C3 furti T7",
+   "open C3 furti T8",
+   "open C3 furti T9",
+   "open C3 furti T11",
+   "open C3 furti T12"
+  ],
+  "drawnToTable": [
+   "quick T2",
+   "ffa T2",
+   "humans T6",
+   "open C3 contrasti T9",
+   "open C3 contrasti T12",
+   "open C3 furti T10"
+  ],
+  "itemFromOther": [
+   "quick T3",
+   "humans T4"
+  ],
+  "barsTotal": [
+   "quick T6",
+   "ffa T6",
+   "open C3 furti T10"
+  ],
+  "death": [
+   "quick T7",
+   "ffa T8",
+   "open C3 contrasti T18",
+   "open C3 furti T12"
+  ],
+  "over": [
+   "quick T7",
+   "open C3 contrasti T18",
+   "open C3 furti T12"
+  ],
+  "deathWithMove": [
+   "quick T7",
+   "ffa T8",
+   "open C3 contrasti T18",
+   "open C3 furti T12"
+  ],
+  "lethalEndOfTurn": [
+   "quick T7",
+   "ffa T8",
+   "open C3 furti T12"
+  ],
+  "void": [
+   "ffa T4",
+   "ffa T7",
+   "humans T8",
+   "open C3 contrasti T1",
+   "open C3 contrasti T2",
+   "open C3 contrasti T5",
+   "open C3 contrasti T7",
+   "open C3 contrasti T9",
+   "open C3 contrasti T12",
+   "open C3 contrasti T13",
+   "open C3 furti T1",
+   "open C3 furti T2",
+   "open C3 furti T4"
+  ],
+  "jump": [
+   "ffa T23",
+   "jump T20"
+  ],
+  "itemNamedNotGone": [
+   "humans T8"
+  ]
+ },
+ "scene": {
+  "quick": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 7,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     5206,
+     5202.79999999702,
+     5853.699999988079,
+     5857.70000000298,
+     5203.4000000059605,
+     5858.0999999940395,
+     5205.5
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/1",
+     "reason": "complete",
+     "ms": 5206
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "reason": "complete",
+     "ms": 5203
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/3",
+     "reason": "complete",
+     "ms": 5854
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/4",
+     "reason": "complete",
+     "ms": 5858
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/5",
+     "reason": "complete",
+     "ms": 5203
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/6",
+     "reason": "complete",
+     "ms": 5858
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/7",
+     "reason": "complete",
+     "ms": 5206
+    }
+   ],
+   "summariesAtChoice": [
+    {
+     "turn": 0,
+     "summary": null
+    },
+    {
+     "turn": 1,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/1",
+      "seats": 2,
+      "texts": [
+       "A −22 L +2 ogg −1",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+      "seats": 2,
+      "texts": [
+       "A −1 T +5 L −2 ogg +2",
+       "H −5 A −20 T +25 L +20 ogg −1"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+      "seats": 2,
+      "texts": [
+       "A −1 T +5 L −2 ogg +2",
+       "H −5 A −20 T +25 L +20 ogg −1"
+      ]
+     }
+    },
+    {
+     "turn": 3,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/3",
+      "seats": 2,
+      "texts": [
+       "A −8 L +2 ogg −2",
+       "A −10 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 4,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/4",
+      "seats": 2,
+      "texts": [
+       "H −22 A −1 T +30 L −2",
+       "H −5 T −30"
+      ]
+     }
+    },
+    {
+     "turn": 5,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/5",
+      "seats": 2,
+      "texts": [
+       "H −25 A −5 T +5",
+       "H −5 A +5 T +5"
+      ]
+     }
+    },
+    {
+     "turn": 6,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/6",
+      "seats": 2,
+      "texts": [
+       "H −30 A −5 T +10",
+       "H −25 T −5"
+      ]
+     }
+    },
+    {
+     "turn": 7,
+     "summary": {
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/7",
+      "seats": 2,
+      "texts": [
+       "H −40 T +10",
+       "H −12 A −10 T +10 L −11"
+      ]
+     }
+    }
+   ],
+   "jumps": [],
+   "notes": [],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 7,
+     "health": 5,
+     "otherResources": 7,
+     "objects": 3,
+     "voided": 0,
+     "endOfTurn": 7,
+     "draws": 7
+    },
+    "sceneHealthDeltas": 49,
+    "sceneTransfers": 1,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 14,
+   "transfers": 1,
+   "aggregateDeltas": 49,
+   "rounds": [
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/1",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5206,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5203,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 3,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 3,
+      "endOfTurn": 1,
+      "steps": 8,
+      "pops": 8
+     }
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/3",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5854,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "objects": 2,
+      "consumed": 1,
+      "passed": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5
+     }
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/4",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5858,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 2,
+      "steps": 9,
+      "pops": 9
+     }
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/5",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5203,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "discards": 2,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/6",
+     "moves": 2,
+     "bars": "total",
+     "reason": "ComPlayer_1879 HEALTH: steps end at 80, view 60",
+     "planned": 5850,
+     "ms": 5858,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 2,
+      "steps": 5,
+      "pops": 5
+     }
+    },
+    {
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/7",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5206,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "discards": 2,
+      "draws": 2,
+      "endOfTurn": 2,
+      "emphasis": 1,
+      "steps": 10,
+      "pops": 10
+     }
+    }
+   ],
+   "rejoin": {
+    "turn": 2,
+    "entries": [
+     {
+      "why": "view",
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+      "relation": "same",
+      "seats": false
+     },
+     {
+      "why": "view",
+      "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+      "relation": "same",
+      "seats": false
+     }
+    ],
+    "sequencesBefore": 2,
+    "sequencesAfter": 2,
+    "moveSends": 0,
+    "resumeTurn": 2,
+    "reanimated": false
+   }
+  },
+  "reduced": {
+   "gameId": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab",
+   "rounds": [
+    {
+     "turn": 1,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 4,
+     "summaryKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/1",
+     "summary": [
+      "H −12 V +5 T +10",
+      "V −15"
+     ],
+     "expectedKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/1",
+     "toast": 1
+    },
+    {
+     "turn": 2,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "summaryKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/2",
+     "summary": [
+      "H −8 V +5",
+      "A +5"
+     ],
+     "expectedKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/2",
+     "toast": 1
+    },
+    {
+     "turn": 3,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "summaryKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/3",
+     "summary": [
+      "H −5 V +5",
+      "V +5"
+     ],
+     "expectedKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/3",
+     "toast": 1
+    }
+   ]
+  },
+  "interrupt": {
+   "gameId": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534",
+   "skip": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/1",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/1",
+     "reason": "skip",
+     "ms": 134
+    },
+    "summaryKey": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/1",
+    "selected": null,
+    "final": []
+   },
+   "tapCount": 5,
+   "tapPlan": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+    "moves": 2,
+    "total": 5100,
+    "expected": {
+     "drops": 2,
+     "stamps": 1,
+     "tokens": 2,
+     "objects": 0,
+     "consumed": 0,
+     "passed": 0,
+     "broken": 0,
+     "discards": 0,
+     "draws": 1,
+     "endOfTurn": 0,
+     "emphasis": 0,
+     "steps": 2
+    }
+   },
+   "tap": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+     "reason": "input",
+     "ms": 4381
+    },
+    "summaryKey": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+    "selected": null,
+    "final": []
+   },
+   "cardKey": "card-1",
+   "cardDuringSequence": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/3",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/3",
+     "reason": "input",
+     "ms": 94
+    },
+    "summaryKey": null,
+    "selected": "card-1",
+    "final": []
+   },
+   "hidden": {
+    "mode": "emulated",
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/4",
+    "sequencesBefore": 3,
+    "sequencesAfter": 3,
+    "summaryKey": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/4",
+    "toastAfter7s": "Turno 4: tu → Desiderio Incontrollabile · Computer → PAZIENZA: FINITA",
+    "toastWhileHidden": 1
+   }
+  },
+  "ffa": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 8,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     9701.199999988079,
+     10001.79999999702,
+     10007.59999999404,
+     10005.59999999404,
+     10002.5,
+     9704.59999999404,
+     10004.39999999106,
+     10000.70000000298
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/1",
+     "reason": "complete",
+     "ms": 9701
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/2",
+     "reason": "complete",
+     "ms": 10002
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/3",
+     "reason": "complete",
+     "ms": 10008
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/4",
+     "reason": "complete",
+     "ms": 10006
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/5",
+     "reason": "complete",
+     "ms": 10003
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/6",
+     "reason": "complete",
+     "ms": 9705
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/7",
+     "reason": "complete",
+     "ms": 10004
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/8",
+     "reason": "complete",
+     "ms": 10001
+    }
+   ],
+   "summariesAtChoice": [
+    {
+     "turn": 0,
+     "summary": null
+    },
+    {
+     "turn": 1,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/1",
+      "seats": 5,
+      "texts": [
+       "H −7 V +5 T +5",
+       "A −5 T +5",
+       "A −19 L +2 ogg −1",
+       "H +5 T −10 ogg +1",
+       "A +5 ogg +2"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/2",
+      "seats": 5,
+      "texts": [
+       "H −10 A +5 T +5",
+       "H −5 T −15",
+       "H −10 A −1 T +10 L −2 ogg +1",
+       "A −17 T +20 L +20 ogg −1",
+       "A −5 L +4 ogg −1 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 3,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/3",
+      "seats": 5,
+      "texts": [
+       "H −5 V −5",
+       "A +5",
+       "H −10 A −15 L +4 ogg −1 ogg +1",
+       "T +5",
+       "H −5 A −2 T +5 L −3"
+      ]
+     }
+    },
+    {
+     "turn": 4,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/4",
+      "seats": 5,
+      "texts": [
+       "H −5 A −5 V −20",
+       "A +5 ogg +2",
+       "H −10 A −9 L −3 ogg −1",
+       "T −10",
+       "A +5 L −1"
+      ]
+     }
+    },
+    {
+     "turn": 5,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/5",
+      "seats": 5,
+      "texts": [
+       "H −15 A −12 V +20 T +10 L +7 ogg −1",
+       "A −10 ogg −2",
+       "H −12 T +5 L −1",
+       "ogg +2",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 6,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/6",
+      "seats": 5,
+      "texts": [
+       "H −17 A −3 V +5 T +5 L −4",
+       "A −5",
+       "H −15 T +5",
+       "H −20",
+       "A +5 ogg −1 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 7,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/7",
+      "seats": 5,
+      "texts": [
+       "H −20 A −1 T +5 L −2",
+       "invariato",
+       "H −22 T +5",
+       "H −7 A −5 L −11 ogg −1 ogg +2",
+       "T −10"
+      ]
+     }
+    },
+    {
+     "turn": 8,
+     "summary": {
+      "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/8",
+      "seats": 5,
+      "texts": [
+       "H −37 V −15 T +15 L −1",
+       "A +5 ogg +1",
+       "H −20 A −5 T +5",
+       "H −25 A −4 T +15 L −5",
+       "T +5"
+      ]
+     }
+    },
+    {
+     "turn": 23,
+     "summary": null
+    }
+   ],
+   "jumps": [
+    "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/23"
+   ],
+   "notes": [
+    "panel: Risolti 15 turni fino al turno 23: valori finali della vista. L’ultimo turno è in «Ultimo turno»."
+   ],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 8,
+     "health": 8,
+     "otherResources": 8,
+     "objects": 8,
+     "voided": 2,
+     "endOfTurn": 8,
+     "draws": 8
+    },
+    "sceneHealthDeltas": 122,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 40,
+   "transfers": 0,
+   "aggregateDeltas": 122,
+   "rounds": [
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/1",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 9700,
+     "ms": 9701,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "objects": 4,
+      "consumed": 1,
+      "discards": 3,
+      "draws": 8,
+      "endOfTurn": 2,
+      "steps": 13,
+      "pops": 13
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/2",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10002,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 3,
+      "consumed": 2,
+      "discards": 2,
+      "draws": 5,
+      "endOfTurn": 4,
+      "steps": 18,
+      "pops": 18
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/3",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10008,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 3,
+      "draws": 4,
+      "endOfTurn": 3,
+      "steps": 16,
+      "pops": 16
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/4",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10006,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "stamps": 1,
+      "tokens": 2,
+      "objects": 3,
+      "consumed": 1,
+      "discards": 2,
+      "draws": 6,
+      "endOfTurn": 3,
+      "steps": 13,
+      "pops": 13
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/5",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10003,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 2,
+      "consumed": 1,
+      "discards": 2,
+      "draws": 4,
+      "endOfTurn": 2,
+      "steps": 16,
+      "pops": 16
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/6",
+     "moves": 5,
+     "bars": "total",
+     "reason": "ComPlayer_365 HEALTH: steps end at 105, view 85",
+     "planned": 9700,
+     "ms": 9705,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "objects": 1,
+      "discards": 5,
+      "draws": 6,
+      "endOfTurn": 3,
+      "steps": 10,
+      "pops": 10
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/7",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10004,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "stamps": 1,
+      "tokens": 1,
+      "objects": 2,
+      "discards": 3,
+      "draws": 6,
+      "endOfTurn": 4,
+      "steps": 15,
+      "pops": 15
+     }
+    },
+    {
+     "key": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9/8",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10001,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 1,
+      "discards": 4,
+      "draws": 6,
+      "endOfTurn": 3,
+      "emphasis": 1,
+      "steps": 21,
+      "pops": 21
+     }
+    }
+   ]
+  },
+  "jump": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 1,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     401.20000000298023
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1",
+     "reason": "input",
+     "ms": 401
+    }
+   ],
+   "summariesAtChoice": [],
+   "jumps": [
+    "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/20"
+   ],
+   "notes": [
+    "panel: Risolti 19 turni fino al turno 20: valori finali della vista. L’ultimo turno è in «Ultimo turno»."
+   ],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 1,
+     "health": 1,
+     "otherResources": 1,
+     "objects": 1,
+     "voided": 0,
+     "endOfTurn": 1,
+     "draws": 1
+    },
+    "sceneHealthDeltas": 12,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 5,
+   "transfers": 0,
+   "aggregateDeltas": 12,
+   "rounds": [
+    {
+     "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 401,
+     "end": "input",
+     "beats": {
+      "drops": 5,
+      "tokens": 2,
+      "objects": 1,
+      "discards": 4,
+      "draws": 7,
+      "endOfTurn": 1,
+      "steps": 12,
+      "pops": 12
+     }
+    }
+   ]
+  },
+  "humans": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 8,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     9703.10000000894,
+     10001,
+     10006.79999999702,
+     10000.79999999702,
+     9705,
+     10007.40000000596,
+     10001.29999999702,
+     10004.29999999702
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+     "reason": "complete",
+     "ms": 9703
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+     "reason": "complete",
+     "ms": 10001
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+     "reason": "complete",
+     "ms": 10007
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+     "reason": "complete",
+     "ms": 10001
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+     "reason": "complete",
+     "ms": 9705
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+     "reason": "complete",
+     "ms": 10007
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+     "reason": "complete",
+     "ms": 10001
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/8",
+     "reason": "complete",
+     "ms": 10004
+    }
+   ],
+   "summariesAtChoice": [
+    {
+     "turn": 0,
+     "summary": null
+    },
+    {
+     "turn": 1,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+      "seats": 5,
+      "texts": [
+       "H +5 T −10",
+       "A +15 V +15",
+       "H −3 V +5",
+       "H −2 A −7 V +20 T +5 L +7 ogg −1",
+       "A +5 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+      "seats": 5,
+      "texts": [
+       "T +5",
+       "V −10",
+       "V +5",
+       "H −10 A −3 V +5 T +5 L −4",
+       "H −15 A −2 L +2 ogg −1"
+      ]
+     }
+    },
+    {
+     "turn": 3,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+      "seats": 5,
+      "texts": [
+       "ogg −1",
+       "V −15 ogg +1",
+       "H −7 A −10 V +5",
+       "H −21 A −1 V +5 L −2",
+       "A −1 V −20 L −2"
+      ]
+     }
+    },
+    {
+     "turn": 4,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+      "seats": 5,
+      "texts": [
+       "H −5 A −10 ogg +1",
+       "V +5 ogg −1",
+       "V +5",
+       "H −5 V +5 L −1",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 5,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+      "seats": 5,
+      "texts": [
+       "A −17 L +4 ogg −1 ogg +1",
+       "H −5 V +10",
+       "V +5",
+       "H −5 V +5",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 6,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+      "seats": 5,
+      "texts": [
+       "H −5 A +3 L −3",
+       "V −10",
+       "H −7 A −5 V +5 ogg +1",
+       "H −5 V +5",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 7,
+     "summary": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+      "seats": 5,
+      "texts": [
+       "L −1 ogg −1 ogg +1",
+       "A +10 V −20",
+       "H −2 A −7 V +20 T +5 L +7 ogg −1",
+       "H −5 V +5 ogg +1",
+       "A +15 V +15"
+      ]
+     }
+    }
+   ],
+   "jumps": [],
+   "notes": [],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 8,
+     "health": 8,
+     "otherResources": 8,
+     "objects": 8,
+     "voided": 1,
+     "endOfTurn": 8,
+     "draws": 8
+    },
+    "sceneHealthDeltas": 93,
+    "sceneTransfers": 1,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 40,
+   "transfers": 1,
+   "aggregateDeltas": 93,
+   "rounds": [
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 9700,
+     "ms": 9703,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "objects": 2,
+      "consumed": 1,
+      "discards": 2,
+      "draws": 5,
+      "endOfTurn": 2,
+      "steps": 13,
+      "pops": 13
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10001,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 3,
+      "draws": 4,
+      "endOfTurn": 4,
+      "steps": 13,
+      "pops": 13
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10007,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 2,
+      "objects": 1,
+      "discards": 2,
+      "draws": 5,
+      "endOfTurn": 3,
+      "steps": 12,
+      "pops": 12
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10001,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 1,
+      "passed": 1,
+      "discards": 4,
+      "draws": 5,
+      "endOfTurn": 3,
+      "steps": 9,
+      "pops": 9
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 9700,
+     "ms": 9705,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 3,
+      "draws": 4,
+      "endOfTurn": 3,
+      "steps": 10,
+      "pops": 10
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10007,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 1,
+      "discards": 4,
+      "draws": 6,
+      "endOfTurn": 3,
+      "steps": 11,
+      "pops": 11
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10001,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "tokens": 1,
+      "objects": 4,
+      "consumed": 2,
+      "discards": 1,
+      "draws": 6,
+      "endOfTurn": 4,
+      "steps": 14,
+      "pops": 14
+     }
+    },
+    {
+     "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/8",
+     "moves": 5,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 10000,
+     "ms": 10004,
+     "end": "complete",
+     "beats": {
+      "drops": 5,
+      "stamps": 1,
+      "tokens": 2,
+      "objects": 1,
+      "discards": 2,
+      "draws": 6,
+      "endOfTurn": 5,
+      "steps": 11,
+      "pops": 11
+     }
+    }
+   ],
+   "clock": [
+    {
+     "who": "devAlice",
+     "turn": 1,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+      "reason": "complete",
+      "ms": 9703
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+      "moves": 5,
+      "total": 9700,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 0,
+       "objects": 2,
+       "consumed": 1,
+       "passed": 0,
+       "broken": 0,
+       "discards": 2,
+       "draws": 5,
+       "endOfTurn": 2,
+       "emphasis": 0,
+       "steps": 13
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 1,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+      "reason": "complete",
+      "ms": 9706
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/1",
+      "moves": 5,
+      "total": 9700,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 0,
+       "objects": 2,
+       "consumed": 1,
+       "passed": 0,
+       "broken": 0,
+       "discards": 2,
+       "draws": 5,
+       "endOfTurn": 2,
+       "emphasis": 0,
+       "steps": 13
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 2,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+      "reason": "complete",
+      "ms": 10001
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 1,
+       "consumed": 1,
+       "passed": 0,
+       "broken": 0,
+       "discards": 3,
+       "draws": 4,
+       "endOfTurn": 4,
+       "emphasis": 0,
+       "steps": 13
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 2,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+      "reason": "complete",
+      "ms": 10004
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/2",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 1,
+       "consumed": 1,
+       "passed": 0,
+       "broken": 0,
+       "discards": 3,
+       "draws": 4,
+       "endOfTurn": 4,
+       "emphasis": 0,
+       "steps": 13
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 3,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+      "reason": "complete",
+      "ms": 10007
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 2,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 0,
+       "broken": 0,
+       "discards": 2,
+       "draws": 5,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 12
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 3,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+      "reason": "complete",
+      "ms": 10007
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/3",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 2,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 0,
+       "broken": 0,
+       "discards": 2,
+       "draws": 5,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 12
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 4,
+     "clockAtSequenceEnd": 20,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+      "reason": "complete",
+      "ms": 10001
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 1,
+       "broken": 0,
+       "discards": 4,
+       "draws": 5,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 9
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 4,
+     "clockAtSequenceEnd": 20,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+      "reason": "complete",
+      "ms": 10004
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/4",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 1,
+       "broken": 0,
+       "discards": 4,
+       "draws": 5,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 9
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 5,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+      "reason": "complete",
+      "ms": 9705
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+      "moves": 5,
+      "total": 9700,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 0,
+       "objects": 1,
+       "consumed": 1,
+       "passed": 0,
+       "broken": 0,
+       "discards": 3,
+       "draws": 4,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 10
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 5,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+      "reason": "complete",
+      "ms": 9702
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/5",
+      "moves": 5,
+      "total": 9700,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 0,
+       "objects": 1,
+       "consumed": 1,
+       "passed": 0,
+       "broken": 0,
+       "discards": 3,
+       "draws": 4,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 10
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 6,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+      "reason": "complete",
+      "ms": 10007
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 0,
+       "broken": 0,
+       "discards": 4,
+       "draws": 6,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 11
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 6,
+     "clockAtSequenceEnd": 21,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+      "reason": "complete",
+      "ms": 10001
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/6",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 0,
+       "broken": 0,
+       "discards": 4,
+       "draws": 6,
+       "endOfTurn": 3,
+       "emphasis": 0,
+       "steps": 11
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 7,
+     "clockAtSequenceEnd": 20,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+      "reason": "complete",
+      "ms": 10001
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 4,
+       "consumed": 2,
+       "passed": 0,
+       "broken": 0,
+       "discards": 1,
+       "draws": 6,
+       "endOfTurn": 4,
+       "emphasis": 0,
+       "steps": 14
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 7,
+     "clockAtSequenceEnd": 20,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+      "reason": "complete",
+      "ms": 10003
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/7",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 0,
+       "tokens": 1,
+       "objects": 4,
+       "consumed": 2,
+       "passed": 0,
+       "broken": 0,
+       "discards": 1,
+       "draws": 5,
+       "endOfTurn": 4,
+       "emphasis": 0,
+       "steps": 14
+      }
+     }
+    },
+    {
+     "who": "devAlice",
+     "turn": 8,
+     "clockAtSequenceEnd": 20,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/8",
+      "reason": "complete",
+      "ms": 10004
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/8",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 1,
+       "tokens": 2,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 0,
+       "broken": 0,
+       "discards": 2,
+       "draws": 6,
+       "endOfTurn": 5,
+       "emphasis": 0,
+       "steps": 11
+      }
+     }
+    },
+    {
+     "who": "devBob",
+     "turn": 8,
+     "clockAtSequenceEnd": 20,
+     "end": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/8",
+      "reason": "complete",
+      "ms": 10006
+     },
+     "plan": {
+      "key": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5/8",
+      "moves": 5,
+      "total": 10000,
+      "expected": {
+       "drops": 5,
+       "stamps": 1,
+       "tokens": 2,
+       "objects": 1,
+       "consumed": 0,
+       "passed": 0,
+       "broken": 0,
+       "discards": 2,
+       "draws": 6,
+       "endOfTurn": 5,
+       "emphasis": 0,
+       "steps": 11
+      }
+     }
+    }
+   ]
+  },
+  "open C3 contrasti": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 18,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     5100.5,
+     5106.199999988079,
+     5205,
+     5854.899999991059,
+     5857,
+     5207.699999988079,
+     5857.70000000298,
+     5855.5,
+     5856.600000008941,
+     5207.5,
+     5854.5,
+     5856.20000000298,
+     5850.600000008941,
+     5206.20000000298,
+     5200.79999999702,
+     4550.29999999702,
+     4556.29999999702,
+     3804.2999999970198
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/1",
+     "reason": "complete",
+     "ms": 5101
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/2",
+     "reason": "complete",
+     "ms": 5106
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/3",
+     "reason": "complete",
+     "ms": 5205
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/4",
+     "reason": "complete",
+     "ms": 5855
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/5",
+     "reason": "complete",
+     "ms": 5857
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/6",
+     "reason": "complete",
+     "ms": 5208
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+     "reason": "complete",
+     "ms": 5858
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/8",
+     "reason": "complete",
+     "ms": 5856
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/9",
+     "reason": "complete",
+     "ms": 5857
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/10",
+     "reason": "complete",
+     "ms": 5208
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/11",
+     "reason": "complete",
+     "ms": 5855
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/12",
+     "reason": "complete",
+     "ms": 5856
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/13",
+     "reason": "complete",
+     "ms": 5851
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/14",
+     "reason": "complete",
+     "ms": 5206
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/15",
+     "reason": "complete",
+     "ms": 5201
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/16",
+     "reason": "complete",
+     "ms": 4550
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/17",
+     "reason": "complete",
+     "ms": 4556
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/18",
+     "reason": "complete",
+     "ms": 3804
+    }
+   ],
+   "summariesAtChoice": [
+    {
+     "turn": 0,
+     "summary": null
+    },
+    {
+     "turn": 1,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/1",
+      "seats": 2,
+      "texts": [
+       "A −10 V −10",
+       "H −5 T +5"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/2",
+      "seats": 2,
+      "texts": [
+       "V −5",
+       "A +10"
+      ]
+     }
+    },
+    {
+     "turn": 3,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/3",
+      "seats": 2,
+      "texts": [
+       "H −2 A −12 V +20 T +5 L +7 ogg −1",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 4,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/4",
+      "seats": 2,
+      "texts": [
+       "H −2 A −8 V −5 L −4",
+       "A +5 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 5,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/5",
+      "seats": 2,
+      "texts": [
+       "H −2 A −1 V −5 L −2",
+       "A +10"
+      ]
+     }
+    },
+    {
+     "turn": 6,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/6",
+      "seats": 2,
+      "texts": [
+       "H −2 A −5 V +5 L −1",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 7,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+      "seats": 2,
+      "texts": [
+       "H −2 V −5",
+       "A +10"
+      ]
+     }
+    },
+    {
+     "turn": 8,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/8",
+      "seats": 2,
+      "texts": [
+       "H −2 V +5",
+       "T −10"
+      ]
+     }
+    },
+    {
+     "turn": 9,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/9",
+      "seats": 2,
+      "texts": [
+       "H −2 V −5 ogg +1",
+       "A +10 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 10,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/10",
+      "seats": 2,
+      "texts": [
+       "H −5 A −12 V +20 T +5 L +7 ogg −1",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 11,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/11",
+      "seats": 2,
+      "texts": [
+       "H −5 A −8 V −25 L −4",
+       "H −40 A +5"
+      ]
+     }
+    },
+    {
+     "turn": 12,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/12",
+      "seats": 2,
+      "texts": [
+       "H −5 A −1 V −5 L −2 ogg +1",
+       "A +10"
+      ]
+     }
+    },
+    {
+     "turn": 13,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/13",
+      "seats": 2,
+      "texts": [
+       "H −5 V −5 L −1",
+       "ogg −1 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 14,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/14",
+      "seats": 2,
+      "texts": [
+       "H −15 A −7 V +20 T +10 L +7 ogg −1",
+       "T +5 ogg −1 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 15,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/15",
+      "seats": 2,
+      "texts": [
+       "H −10 A −8 V −25 L −4",
+       "H −40 A +5"
+      ]
+     }
+    },
+    {
+     "turn": 16,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/16",
+      "seats": 2,
+      "texts": [
+       "H −10 A −6 V +5 L −2",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 17,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/17",
+      "seats": 2,
+      "texts": [
+       "H −17 V +5 T +5 L −1",
+       "T +5"
+      ]
+     }
+    },
+    {
+     "turn": 18,
+     "summary": {
+      "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/18",
+      "seats": 2,
+      "texts": [
+       "H −15",
+       "H −15"
+      ]
+     }
+    }
+   ],
+   "jumps": [],
+   "notes": [],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 18,
+     "health": 17,
+     "otherResources": 17,
+     "objects": 7,
+     "voided": 7,
+     "endOfTurn": 15,
+     "draws": 14
+    },
+    "sceneHealthDeltas": 99,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 36,
+   "transfers": 0,
+   "aggregateDeltas": 99,
+   "rounds": [
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/1",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5100,
+     "ms": 5101,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 2,
+      "draws": 1,
+      "steps": 4,
+      "pops": 4
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/2",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5100,
+     "ms": 5106,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "draws": 2,
+      "steps": 2,
+      "pops": 2
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/3",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5205,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 8,
+      "pops": 8
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/4",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5855,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "objects": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/5",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5857,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/6",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5208,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "discards": 2,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/7",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5858,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 3,
+      "pops": 3
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/8",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5856,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 3,
+      "pops": 3
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/9",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5857,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "objects": 2,
+      "draws": 4,
+      "endOfTurn": 1,
+      "steps": 3,
+      "pops": 3
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/10",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5208,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 8,
+      "pops": 8
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/11",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5855,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 7,
+      "pops": 7
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/12",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5856,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "objects": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/13",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5851,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 2,
+      "objects": 1,
+      "draws": 3,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/14",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5206,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 2,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 9,
+      "pops": 9
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/15",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5201,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "endOfTurn": 1,
+      "steps": 7,
+      "pops": 7
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/16",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 4550,
+     "ms": 4550,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "discards": 2,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/17",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 4550,
+     "ms": 4556,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "discards": 2,
+      "endOfTurn": 1,
+      "steps": 7,
+      "pops": 7
+     }
+    },
+    {
+     "key": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17/18",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 3800,
+     "ms": 3804,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "emphasis": 2,
+      "steps": 4,
+      "pops": 4
+     }
+    }
+   ]
+  },
+  "open C3 furti": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 12,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     5102.899999991059,
+     5104.5,
+     4457.20000000298,
+     5104.899999991059,
+     5852.399999991059,
+     5207.70000000298,
+     5201.29999999702,
+     5205,
+     5856,
+     5851.600000008941,
+     5850.100000008941,
+     5202.5
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/1",
+     "reason": "complete",
+     "ms": 5103
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/2",
+     "reason": "complete",
+     "ms": 5105
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/3",
+     "reason": "complete",
+     "ms": 4457
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/4",
+     "reason": "complete",
+     "ms": 5105
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/5",
+     "reason": "complete",
+     "ms": 5852
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/6",
+     "reason": "complete",
+     "ms": 5208
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+     "reason": "complete",
+     "ms": 5201
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/8",
+     "reason": "complete",
+     "ms": 5205
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/9",
+     "reason": "complete",
+     "ms": 5856
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/10",
+     "reason": "complete",
+     "ms": 5852
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/11",
+     "reason": "complete",
+     "ms": 5850
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/12",
+     "reason": "complete",
+     "ms": 5203
+    }
+   ],
+   "summariesAtChoice": [
+    {
+     "turn": 0,
+     "summary": null
+    },
+    {
+     "turn": 1,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/1",
+      "seats": 2,
+      "texts": [
+       "invariato",
+       "A −10 V −10"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/2",
+      "seats": 2,
+      "texts": [
+       "A +10",
+       "V −5"
+      ]
+     }
+    },
+    {
+     "turn": 3,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/3",
+      "seats": 2,
+      "texts": [
+       "T +20 ogg −1",
+       "V +10"
+      ]
+     }
+    },
+    {
+     "turn": 4,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/4",
+      "seats": 2,
+      "texts": [
+       "A +10",
+       "V −5"
+      ]
+     }
+    },
+    {
+     "turn": 5,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/5",
+      "seats": 2,
+      "texts": [
+       "H −10 A −32 L +4 ogg −1 ogg +1",
+       "V −10"
+      ]
+     }
+    },
+    {
+     "turn": 6,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/6",
+      "seats": 2,
+      "texts": [
+       "H −5 A −11 T +20 L +20 ogg −1",
+       "A +5"
+      ]
+     }
+    },
+    {
+     "turn": 7,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+      "seats": 2,
+      "texts": [
+       "A −6 ogg −1",
+       "V +5 ogg +1"
+      ]
+     }
+    },
+    {
+     "turn": 8,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/8",
+      "seats": 2,
+      "texts": [
+       "H −7 T −5",
+       "H −24 A −7 V +20 T +5 L +7 ogg −1"
+      ]
+     }
+    },
+    {
+     "turn": 9,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/9",
+      "seats": 2,
+      "texts": [
+       "H −5 T −5",
+       "H −13 A −3 V +5 L −4"
+      ]
+     }
+    },
+    {
+     "turn": 10,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/10",
+      "seats": 2,
+      "texts": [
+       "H −35 A −10 T −5 ogg +2",
+       "H −17 A −1 V −15 L −2"
+      ]
+     }
+    },
+    {
+     "turn": 11,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/11",
+      "seats": 2,
+      "texts": [
+       "H −32 A −19 L −8 ogg −1 ogg +1",
+       "H −2 V −10 L −1"
+      ]
+     }
+    },
+    {
+     "turn": 12,
+     "summary": {
+      "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/12",
+      "seats": 2,
+      "texts": [
+       "H −17 A −24 L −4 ogg −1 ogg +1",
+       "H −2 A +15 V +15"
+      ]
+     }
+    }
+   ],
+   "jumps": [],
+   "notes": [],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 12,
+     "health": 7,
+     "otherResources": 12,
+     "objects": 8,
+     "voided": 3,
+     "endOfTurn": 8,
+     "draws": 12
+    },
+    "sceneHealthDeltas": 62,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 24,
+   "transfers": 0,
+   "aggregateDeltas": 62,
+   "rounds": [
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/1",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5100,
+     "ms": 5103,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 2,
+      "draws": 2,
+      "steps": 2,
+      "pops": 2
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/2",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5100,
+     "ms": 5105,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "draws": 1,
+      "steps": 2,
+      "pops": 2
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/3",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 4450,
+     "ms": 4457,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "draws": 2,
+      "steps": 2,
+      "pops": 2
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/4",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5100,
+     "ms": 5105,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "stamps": 1,
+      "tokens": 1,
+      "draws": 1,
+      "steps": 2,
+      "pops": 2
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/5",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5852,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "objects": 1,
+      "consumed": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/6",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5208,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/7",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5201,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 2,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 2,
+      "pops": 2
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/8",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5205,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "objects": 1,
+      "consumed": 1,
+      "endOfTurn": 2,
+      "steps": 9,
+      "pops": 9
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/9",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5856,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 7,
+      "pops": 7
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/10",
+     "moves": 2,
+     "bars": "total",
+     "reason": "devAlice HEALTH: steps end at 58, view 38",
+     "planned": 5850,
+     "ms": 5852,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 2,
+      "objects": 2,
+      "draws": 3,
+      "endOfTurn": 2,
+      "steps": 7,
+      "pops": 7
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/11",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5850,
+     "ms": 5850,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "tokens": 1,
+      "objects": 1,
+      "consumed": 1,
+      "draws": 1,
+      "endOfTurn": 2,
+      "steps": 10,
+      "pops": 10
+     }
+    },
+    {
+     "key": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d/12",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "planned": 5200,
+     "ms": 5203,
+     "end": "complete",
+     "beats": {
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "draws": 1,
+      "endOfTurn": 2,
+      "emphasis": 1,
+      "steps": 8,
+      "pops": 8
+     }
+    }
+   ]
+  }
+ },
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "quickRejoin": {
+   "turn": 2,
+   "entries": [
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "relation": "same",
+     "seats": false
+    },
+    {
+     "why": "view",
+     "key": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204/2",
+     "relation": "same",
+     "seats": false
+    }
+   ],
+   "sequencesBefore": 2,
+   "sequencesAfter": 2,
+   "moveSends": 0,
+   "resumeTurn": 2
+  },
+  "quick": {
+   "gameId": "ecaf0b04c4bf6118aea668da41dbe7021bb04fcb620849017c639b4f128bc204",
+   "turns": 8,
+   "views": 17,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 7 sequences cancelled by view",
+   "ends": "complete 7",
+   "msComplete": [
+    5206,
+    5203,
+    5854,
+    5858,
+    5203,
+    5858,
+    5206
+   ],
+   "bars": "6 per card, 1 total",
+   "notes": []
+  },
+  "reducedMotion": {
+   "gameId": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab",
+   "rounds": [
+    {
+     "turn": 1,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 4,
+     "summaryKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/1",
+     "summary": [
+      "H −12 V +5 T +10",
+      "V −15"
+     ],
+     "expectedKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/1",
+     "toast": 1
+    },
+    {
+     "turn": 2,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "summaryKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/2",
+     "summary": [
+      "H −8 V +5",
+      "A +5"
+     ],
+     "expectedKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/2",
+     "toast": 1
+    },
+    {
+     "turn": 3,
+     "sequences": 0,
+     "aggregateDeltas": 0,
+     "modelSeats": true,
+     "modelChanges": 3,
+     "summaryKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/3",
+     "summary": [
+      "H −5 V +5",
+      "V +5"
+     ],
+     "expectedKey": "0c8bebc565ab6879ab8f3d7be5ecfb0f8d820fde31f3b46cba9cb8521be3ffab/3",
+     "toast": 1
+    }
+   ]
+  },
+  "interruptions": {
+   "skip": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/1",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/1",
+     "reason": "skip",
+     "ms": 134
+    },
+    "summaryKey": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/1",
+    "selected": null,
+    "final": []
+   },
+   "tapCount": 5,
+   "tapPlan": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+    "moves": 2,
+    "total": 5100,
+    "expected": {
+     "drops": 2,
+     "stamps": 1,
+     "tokens": 2,
+     "objects": 0,
+     "consumed": 0,
+     "passed": 0,
+     "broken": 0,
+     "discards": 0,
+     "draws": 1,
+     "endOfTurn": 0,
+     "emphasis": 0,
+     "steps": 2
+    }
+   },
+   "tap": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+     "reason": "input",
+     "ms": 4381
+    },
+    "summaryKey": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/2",
+    "selected": null,
+    "final": []
+   },
+   "cardKey": "card-1",
+   "cardDuringSequence": {
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/3",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/3",
+     "reason": "input",
+     "ms": 94
+    },
+    "summaryKey": null,
+    "selected": "card-1",
+    "final": []
+   },
+   "hidden": {
+    "mode": "emulated",
+    "key": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/4",
+    "sequencesBefore": 3,
+    "sequencesAfter": 3,
+    "summaryKey": "6673c489ba77703e7d977c4645e39c66085a7dd6ad5b8b9b76bdbc9247107534/4",
+    "toastAfter7s": "Turno 4: tu → Desiderio Incontrollabile · Computer → PAZIENZA: FINITA",
+    "toastWhileHidden": 1
+   }
+  },
+  "ffa": {
+   "gameId": "372744db3d31c9174f430bfd9c45e5e1629a96828ef79d7c47d6a78a18cc34e9",
+   "turns": 10,
+   "views": 19,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 8 sequences cancelled by view",
+   "ends": "complete 8",
+   "msComplete": [
+    9701,
+    10002,
+    10008,
+    10006,
+    10003,
+    9705,
+    10004,
+    10001
+   ],
+   "bars": "7 per card, 1 total",
+   "notes": [
+    "panel: Risolti 15 turni fino al turno 23: valori finali della vista. L’ultimo turno è in «Ultimo turno»."
+   ]
+  },
+  "rule4WithClock": {
+   "runningAtTap": true,
+   "selected": true,
+   "end": {
+    "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1",
+    "reason": "input",
+    "ms": 401
+   },
+   "clockBefore": 30,
+   "clockAfter2s": 28
+  },
+  "jump": {
+   "gameId": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f",
+   "turns": 3,
+   "views": 4,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 1 sequences cancelled by view",
+   "ends": "input 1",
+   "msComplete": [],
+   "bars": "1 per card, 0 total",
+   "notes": [
+    "panel: Risolti 19 turni fino al turno 20: valori finali della vista. L’ultimo turno è in «Ultimo turno»."
+   ]
+  },
+  "jumpObserved": {
+   "secondsToForfeit": 32,
+   "over": true,
+   "turnsFromTo": [
+    "1→20"
+   ],
+   "clientRelations": [
+    "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1 next",
+    "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1 same",
+    "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/20 jump"
+   ],
+   "sceneK2": [],
+   "note": "Risolti 19 turni fino al turno 20: valori finali della vista. L’ultimo turno è in «Ultimo turno».",
+   "rule4": {
+    "runningAtTap": true,
+    "selected": true,
+    "end": {
+     "key": "4e94848baf906ed72e506a8c399ac78b80b640a5696ea618a228dcfa4e777f4f/1",
+     "reason": "input",
+     "ms": 401
+    },
+    "clockBefore": 30,
+    "clockAfter2s": 28
+   }
+  },
+  "humans": {
+   "gameId": "1abe8d7f2509d06083b6013489d00887edabc026c59b154012ef946e77c81da5",
+   "turns": 9,
+   "views": 25,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 8 sequences cancelled by view",
+   "ends": "complete 8",
+   "msComplete": [
+    9703,
+    10001,
+    10007,
+    10001,
+    9705,
+    10007,
+    10001,
+    10004
+   ],
+   "bars": "8 per card, 0 total",
+   "notes": []
+  },
+  "humansClock": {
+   "rounds": 16,
+   "fiveMoves": [
+    "devAlice T1: 9703 ms (complete)",
+    "devBob T1: 9706 ms (complete)",
+    "devAlice T2: 10001 ms (complete)",
+    "devBob T2: 10004 ms (complete)",
+    "devAlice T3: 10007 ms (complete)",
+    "devBob T3: 10007 ms (complete)",
+    "devAlice T4: 10001 ms (complete)",
+    "devBob T4: 10004 ms (complete)",
+    "devAlice T5: 9705 ms (complete)",
+    "devBob T5: 9702 ms (complete)",
+    "devAlice T6: 10007 ms (complete)",
+    "devBob T6: 10001 ms (complete)",
+    "devAlice T7: 10001 ms (complete)",
+    "devBob T7: 10003 ms (complete)",
+    "devAlice T8: 10004 ms (complete)",
+    "devBob T8: 10006 ms (complete)"
+   ],
+   "clockAtSequenceEnd": [
+    "devAlice T1 5 mosse 9703 ms → 21 s",
+    "devBob T1 5 mosse 9706 ms → 21 s",
+    "devAlice T2 5 mosse 10001 ms → 21 s",
+    "devBob T2 5 mosse 10004 ms → 21 s",
+    "devAlice T3 5 mosse 10007 ms → 21 s",
+    "devBob T3 5 mosse 10007 ms → 21 s",
+    "devAlice T4 5 mosse 10001 ms → 20 s",
+    "devBob T4 5 mosse 10004 ms → 20 s",
+    "devAlice T5 5 mosse 9705 ms → 21 s",
+    "devBob T5 5 mosse 9702 ms → 21 s",
+    "devAlice T6 5 mosse 10007 ms → 21 s",
+    "devBob T6 5 mosse 10001 ms → 21 s",
+    "devAlice T7 5 mosse 10001 ms → 20 s",
+    "devBob T7 5 mosse 10003 ms → 20 s",
+    "devAlice T8 5 mosse 10004 ms → 20 s",
+    "devBob T8 5 mosse 10006 ms → 20 s"
+   ]
+  },
+  "open C3 contrasti": {
+   "gameId": "f1959507e296cd32135cb79384c6d703a616ce571ea0654fec8590c6e5541d17",
+   "turns": 19,
+   "views": 46,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 18 sequences cancelled by view",
+   "ends": "complete 18",
+   "msComplete": [
+    5101,
+    5106,
+    5205,
+    5855,
+    5857,
+    5208,
+    5858,
+    5856,
+    5857,
+    5208,
+    5855,
+    5856,
+    5851,
+    5206,
+    5201,
+    4550,
+    4556,
+    3804
+   ],
+   "bars": "18 per card, 0 total",
+   "notes": []
+  },
+  "open C3 furti": {
+   "gameId": "9eefde4262a89999b7f8ec7eb9b3aec43b0ccfb003cc72918737addc756e669d",
+   "turns": 13,
+   "views": 27,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 12 sequences cancelled by view",
+   "ends": "complete 12",
+   "msComplete": [
+    5103,
+    5105,
+    4457,
+    5105,
+    5852,
+    5208,
+    5201,
+    5205,
+    5856,
+    5852,
+    5850,
+    5203
+   ],
+   "bars": "11 per card, 1 total",
+   "notes": []
+  },
+  "reportConsistency": {
+   "rounds": 54,
+   "sumOk": 51,
+   "chainOk": 51
+  },
+  "casesOnRealServer": {
+   "seen": {
+    "rejoinSame": 1,
+    "itemConsumed": 22,
+    "boundDiscard": 37,
+    "endOfTurn": 47,
+    "barsPerCard": 51,
+    "drawnToTable": 6,
+    "itemFromOther": 2,
+    "barsTotal": 3,
+    "death": 4,
+    "over": 3,
+    "deathWithMove": 4,
+    "lethalEndOfTurn": 3,
+    "void": 13,
+    "jump": 2,
+    "itemNamedNotGone": 1
+   },
+   "missing": []
+  }
+ },
+ "errors": [],
+ "reportConsistency": {
+  "rounds": 54,
+  "sumOk": 51,
+  "chainOk": 51,
+  "unknownCost": 0,
+  "failures": [
+   {
+    "game": "quick",
+    "turn": 6,
+    "sumOk": false,
+    "chainOk": false,
+    "unknownCost": 0,
+    "steps": 7,
+    "sumIssues": [
+     "ComPlayer_1879 HEALTH: report -5 vs view -25"
+    ],
+    "chainIssues": [],
+    "moves": [
+     "Tossicone Scatarrante",
+     "Ago Marcio e Spezzato"
+    ]
+   },
+   {
+    "game": "ffa",
+    "turn": 6,
+    "sumOk": false,
+    "chainOk": false,
+    "unknownCost": 0,
+    "steps": 14,
+    "sumIssues": [
+     "ComPlayer_365 HEALTH: report 0 vs view -20"
+    ],
+    "chainIssues": [],
+    "moves": [
+     "Ghigno co' i' Denti Marci",
+     "Ghigno co' i' Denti Marci",
+     "Ghigno co' i' Denti Marci",
+     "LIEVE FASTIDIO",
+     "Ago Marcio e Spezzato"
+    ]
+   },
+   {
+    "game": "open C3 furti",
+    "turn": 10,
+    "sumOk": false,
+    "chainOk": false,
+    "unknownCost": 0,
+    "steps": 9,
+    "sumIssues": [
+     "devAlice HEALTH: report -15 vs view -35"
+    ],
+    "chainIssues": [],
+    "moves": [
+     "Rabbia Psicotica da Meth",
+     "STORDIAMOTI HO DETTO"
+    ]
+   }
+  ]
+ },
+ "ok": true
+}

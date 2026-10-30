@@ -5376,6 +5376,1842 @@
     "reconnectDeadlines": {},
     "outcomeReason": "timeout"
    }
+  },
+  "itemGoneBefore": {
+   "note": "quick: oggetto conteso, sparito per una sola mossa",
+   "me": "devAlice",
+   "recordedAt": "2026-10-30T12:12:43.273Z",
+   "viewport": "1366x768",
+   "previous": {
+    "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+    "players": {
+     "devAlice": {
+      "playerId": "devAlice",
+      "character": {
+       "name": "Spazienzio de la Ucciso",
+       "bindingName": "bruiser.character.BigBadBruiser",
+       "dead": false,
+       "itemsSize": 1,
+       "items": [
+        {
+         "name": "Negroni Trovato per Terra",
+         "bindingName": "com.items.CocktailOnTheGround",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": 100,
+        "ALERTNESS": 20,
+        "VIOLENCE": 25
+       },
+       "statuses": [],
+       "immunities": [],
+       "timers": [],
+       "sprite": "spazienzio.png"
+      },
+      "cardsInHand": [
+       {
+        "name": "ADOPERIAMOTI",
+        "bindingName": "com.basic.BruiserGrab",
+        "item": false,
+        "basicAction": true,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": -1,
+        "canTarget": [
+         "NEAR_ITEM"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "bindingName": "bruiser.character.LittleSmack",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "bindingName": "bruiser.character.LittleRage",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 2,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "AMMALIAMOTI DI BOTTE",
+        "bindingName": "bruiser.SickeningBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 15
+        }
+       },
+       {
+        "name": "STORDIAMOTI HO DETTO",
+        "bindingName": "bruiser.StunningBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 15
+        }
+       },
+       {
+        "name": "PERMESSO SCUSA ORA SMETTI ",
+        "bindingName": "bruiser.BadEducation",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 10
+        }
+       }
+      ],
+      "deck": 15
+     },
+     "ComPlayer_6723": {
+      "playerId": "ComPlayer_6723",
+      "character": {
+       "name": "Tossico del Serraglio",
+       "bindingName": "junkie.character.ToxicJunkie",
+       "dead": false,
+       "itemsSize": 3,
+       "items": [],
+       "resources": {
+        "HEALTH": 100,
+        "ALERTNESS": 35,
+        "TOXICITY": 10
+       },
+       "statuses": [],
+       "immunities": [
+        "TOXICITY"
+       ],
+       "timers": [],
+       "sprite": "tossico.png"
+      },
+      "cardsInHand": 6,
+      "deck": 17
+     }
+    },
+    "resolvedMoves": [],
+    "timeBasedEffects": {},
+    "over": false,
+    "winner": "NONE",
+    "turn": 0,
+    "pendingMove": null,
+    "forfeits": {},
+    "moveDeadlines": {},
+    "reconnectDeadlines": {},
+    "outcomeReason": null
+   },
+   "next": {
+    "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+    "players": {
+     "devAlice": {
+      "playerId": "devAlice",
+      "character": {
+       "name": "Spazienzio de la Ucciso",
+       "bindingName": "bruiser.character.BigBadBruiser",
+       "dead": false,
+       "itemsSize": 1,
+       "items": [],
+       "resources": {
+        "HEALTH": 100,
+        "ALERTNESS": 20,
+        "VIOLENCE": 25
+       },
+       "statuses": [],
+       "immunities": [],
+       "timers": [],
+       "sprite": "spazienzio.png"
+      },
+      "cardsInHand": [
+       {
+        "name": "ADOPERIAMOTI",
+        "bindingName": "com.basic.BruiserGrab",
+        "item": false,
+        "basicAction": true,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": -1,
+        "canTarget": [
+         "NEAR_ITEM"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "bindingName": "bruiser.character.LittleSmack",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "bindingName": "bruiser.character.LittleRage",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 2,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "AMMALIAMOTI DI BOTTE",
+        "bindingName": "bruiser.SickeningBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 15
+        }
+       },
+       {
+        "name": "STORDIAMOTI HO DETTO",
+        "bindingName": "bruiser.StunningBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 15
+        }
+       },
+       {
+        "name": "PERMESSO SCUSA ORA SMETTI ",
+        "bindingName": "bruiser.BadEducation",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 10
+        }
+       }
+      ],
+      "deck": 15
+     },
+     "ComPlayer_6723": {
+      "playerId": "ComPlayer_6723",
+      "character": {
+       "name": "Tossico del Serraglio",
+       "bindingName": "junkie.character.ToxicJunkie",
+       "dead": false,
+       "itemsSize": 3,
+       "items": [
+        {
+         "name": "Negroni Trovato per Terra",
+         "bindingName": "com.items.CocktailOnTheGround",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": 100,
+        "ALERTNESS": 25,
+        "TOXICITY": 10
+       },
+       "statuses": [],
+       "immunities": [
+        "TOXICITY"
+       ],
+       "timers": [],
+       "sprite": "tossico.png"
+      },
+      "cardsInHand": 6,
+      "deck": 16
+     }
+    },
+    "resolvedMoves": [
+     {
+      "playedCardName": "Steal",
+      "playerId": "ComPlayer_6723",
+      "targetId": "devAlice",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "TARGET_ITEM": "Negroni Trovato per Terra"
+      },
+      "moveReport": {
+       "OPPONENT": [],
+       "SELF": [
+        "Stolen Negroni Trovato per Terra from devAlice"
+       ]
+      },
+      "void": false
+     },
+     {
+      "playedCardName": "ADOPERIAMOTI",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "TARGET_ITEM": "Negroni Trovato per Terra"
+      },
+      "moveReport": {
+       "OPPONENT": [],
+       "SELF": [
+        "Couldn't Grab that Item!"
+       ]
+      },
+      "void": false
+     }
+    ],
+    "timeBasedEffects": {
+     "devAlice": [],
+     "ComPlayer_6723": []
+    },
+    "over": false,
+    "winner": "NONE",
+    "turn": 1,
+    "pendingMove": null,
+    "forfeits": {},
+    "moveDeadlines": {},
+    "reconnectDeadlines": {},
+    "outcomeReason": null
+   }
+  },
+  "deathWithMove": {
+   "note": "quick: morte con mossa già presentata",
+   "me": "devAlice",
+   "recordedAt": "2026-10-30T12:12:43.280Z",
+   "viewport": "1366x768",
+   "previous": {
+    "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+    "players": {
+     "devAlice": {
+      "playerId": "devAlice",
+      "character": {
+       "name": "Spazienzio de la Ucciso",
+       "bindingName": "bruiser.character.BigBadBruiser",
+       "dead": false,
+       "itemsSize": 1,
+       "items": [],
+       "resources": {
+        "HEALTH": 2,
+        "ALERTNESS": -1,
+        "VIOLENCE": 90,
+        "TOXICITY": 25,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [],
+       "timers": [],
+       "sprite": "spazienzio.png"
+      },
+      "cardsInHand": [
+       {
+        "name": "ADOPERIAMOTI",
+        "bindingName": "com.basic.BruiserGrab",
+        "item": false,
+        "basicAction": true,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": -1,
+        "canTarget": [
+         "NEAR_ITEM"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "bindingName": "bruiser.character.LittleSmack",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "bindingName": "bruiser.character.LittleRage",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 2,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "GARGANTUESCO IMPATTO SUL TU",
+        "bindingName": "bruiser.SuperImpact",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 0,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 25
+        }
+       },
+       {
+        "name": "ORMALE GUARIAMOTI",
+        "bindingName": "bruiser.HealingBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 20
+        }
+       },
+       {
+        "name": "NON GIOCARE COL COLTELLO NO",
+        "bindingName": "bruiser.MadeOfStone",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 0,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       }
+      ],
+      "deck": 6
+     },
+     "ComPlayer_6723": {
+      "playerId": "ComPlayer_6723",
+      "character": {
+       "name": "Tossico del Serraglio",
+       "bindingName": "junkie.character.ToxicJunkie",
+       "dead": false,
+       "itemsSize": 3,
+       "items": [
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Peroni da 66, calda",
+         "bindingName": "com.items.RottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": 95,
+        "ALERTNESS": 15,
+        "TOXICITY": 15,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [
+        "TOXICITY"
+       ],
+       "timers": [],
+       "sprite": "tossico.png"
+      },
+      "cardsInHand": 6,
+      "deck": 2
+     }
+    },
+    "resolvedMoves": [
+     {
+      "playedCardName": "LIEVE FASTIDIO",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "DISCARD_ONE": "FAI BASTA"
+      },
+      "moveReport": {
+       "OPPONENT": [],
+       "SELF": [
+        "Gained status: ONLY DISCOMFORT",
+        "VIOLENCE: 85->90 (5)"
+       ]
+      },
+      "void": false
+     },
+     {
+      "playedCardName": "Ago Marcio e Spezzato",
+      "playerId": "ComPlayer_6723",
+      "targetId": "devAlice",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "DISCARD_ONE": "Presa Male di Brutto"
+      },
+      "moveReport": {
+       "OPPONENT": [
+        "HEALTH: 19->14 (-5)",
+        "TOXICITY: 20->25 (5)"
+       ],
+       "SELF": [
+        "TOXICITY: 10->15 (5)"
+       ]
+      },
+      "void": false
+     }
+    ],
+    "timeBasedEffects": {
+     "devAlice": [
+      "(TOXICITY effect) HEALTH: 14->2 (-12)",
+      "Cleared out of ONLY A LITTLE DISCOMFORT status"
+     ],
+     "ComPlayer_6723": [
+      "(ALCOHOL effect) ALERTNESS: 16->15 (-1)",
+      "(ALCOHOL effect) ALCOHOL: 2->0 (-2)"
+     ]
+    },
+    "over": false,
+    "winner": "NONE",
+    "turn": 11,
+    "pendingMove": null,
+    "forfeits": {},
+    "moveDeadlines": {},
+    "reconnectDeadlines": {},
+    "outcomeReason": null
+   },
+   "next": {
+    "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+    "players": {
+     "devAlice": {
+      "playerId": "devAlice",
+      "character": {
+       "name": "Spazienzio de la Ucciso",
+       "bindingName": "bruiser.character.BigBadBruiser",
+       "dead": true,
+       "itemsSize": 1,
+       "items": [
+        {
+         "name": "Peroni da 66, calda",
+         "bindingName": "com.items.RottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": -13,
+        "ALERTNESS": -1,
+        "VIOLENCE": 95,
+        "TOXICITY": 30,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [],
+       "timers": [],
+       "sprite": "spazienzio.png"
+      },
+      "cardsInHand": [
+       {
+        "name": "ADOPERIAMOTI",
+        "bindingName": "com.basic.BruiserGrab",
+        "item": false,
+        "basicAction": true,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": -1,
+        "canTarget": [
+         "NEAR_ITEM"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "bindingName": "bruiser.character.LittleSmack",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "bindingName": "bruiser.character.LittleRage",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 2,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "ORMALE GUARIAMOTI",
+        "bindingName": "bruiser.HealingBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 20
+        }
+       },
+       {
+        "name": "NON GIOCARE COL COLTELLO NO",
+        "bindingName": "bruiser.MadeOfStone",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 0,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "FAI BASTA",
+        "bindingName": "bruiser.YouStop",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 2,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 5
+        }
+       }
+      ],
+      "deck": 4
+     },
+     "ComPlayer_6723": {
+      "playerId": "ComPlayer_6723",
+      "character": {
+       "name": "Tossico del Serraglio",
+       "bindingName": "junkie.character.ToxicJunkie",
+       "dead": false,
+       "itemsSize": 3,
+       "items": [
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Peroni da 66, calda",
+         "bindingName": "com.items.RottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": 95,
+        "ALERTNESS": 15,
+        "TOXICITY": 0,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [
+        "TOXICITY"
+       ],
+       "timers": [],
+       "sprite": "tossico.png"
+      },
+      "cardsInHand": 6,
+      "deck": 1
+     }
+    },
+    "resolvedMoves": [
+     {
+      "playedCardName": "LIEVE FASTIDIO",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+      },
+      "moveReport": {
+       "OPPONENT": [],
+       "SELF": [
+        "Gained status: ONLY DISCOMFORT",
+        "VIOLENCE: 90->95 (5)"
+       ]
+      },
+      "void": false
+     },
+     {
+      "playedCardName": "C'è del sangue nella mia droga",
+      "playerId": "ComPlayer_6723",
+      "targetId": "devAlice",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {},
+      "moveReport": {
+       "OPPONENT": [
+        "TOXICITY: 25->30 (5)"
+       ],
+       "SELF": [
+        "TOXICITY: 5->0 (-5)"
+       ]
+      },
+      "void": false
+     }
+    ],
+    "timeBasedEffects": {
+     "devAlice": [
+      "(TOXICITY effect) HEALTH: 2->-13 (-15)",
+      "Cleared out of ONLY A LITTLE DISCOMFORT status"
+     ],
+     "ComPlayer_6723": [
+      "Timer expired for Blood Drain: effect triggered"
+     ]
+    },
+    "over": true,
+    "winner": "ComPlayer_6723",
+    "turn": 12,
+    "pendingMove": null,
+    "forfeits": {},
+    "moveDeadlines": {},
+    "reconnectDeadlines": {},
+    "outcomeReason": "combat"
+   }
+  },
+  "lethalEndOfTurn": {
+   "note": "quick: fine turno letale",
+   "me": "devAlice",
+   "recordedAt": "2026-10-30T12:12:43.281Z",
+   "viewport": "1366x768",
+   "previous": {
+    "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+    "players": {
+     "devAlice": {
+      "playerId": "devAlice",
+      "character": {
+       "name": "Spazienzio de la Ucciso",
+       "bindingName": "bruiser.character.BigBadBruiser",
+       "dead": false,
+       "itemsSize": 1,
+       "items": [],
+       "resources": {
+        "HEALTH": 2,
+        "ALERTNESS": -1,
+        "VIOLENCE": 90,
+        "TOXICITY": 25,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [],
+       "timers": [],
+       "sprite": "spazienzio.png"
+      },
+      "cardsInHand": [
+       {
+        "name": "ADOPERIAMOTI",
+        "bindingName": "com.basic.BruiserGrab",
+        "item": false,
+        "basicAction": true,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": -1,
+        "canTarget": [
+         "NEAR_ITEM"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "bindingName": "bruiser.character.LittleSmack",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "bindingName": "bruiser.character.LittleRage",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 2,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "GARGANTUESCO IMPATTO SUL TU",
+        "bindingName": "bruiser.SuperImpact",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 0,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 25
+        }
+       },
+       {
+        "name": "ORMALE GUARIAMOTI",
+        "bindingName": "bruiser.HealingBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 20
+        }
+       },
+       {
+        "name": "NON GIOCARE COL COLTELLO NO",
+        "bindingName": "bruiser.MadeOfStone",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 0,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       }
+      ],
+      "deck": 6
+     },
+     "ComPlayer_6723": {
+      "playerId": "ComPlayer_6723",
+      "character": {
+       "name": "Tossico del Serraglio",
+       "bindingName": "junkie.character.ToxicJunkie",
+       "dead": false,
+       "itemsSize": 3,
+       "items": [
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Peroni da 66, calda",
+         "bindingName": "com.items.RottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": 95,
+        "ALERTNESS": 15,
+        "TOXICITY": 15,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [
+        "TOXICITY"
+       ],
+       "timers": [],
+       "sprite": "tossico.png"
+      },
+      "cardsInHand": 6,
+      "deck": 2
+     }
+    },
+    "resolvedMoves": [
+     {
+      "playedCardName": "LIEVE FASTIDIO",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "DISCARD_ONE": "FAI BASTA"
+      },
+      "moveReport": {
+       "OPPONENT": [],
+       "SELF": [
+        "Gained status: ONLY DISCOMFORT",
+        "VIOLENCE: 85->90 (5)"
+       ]
+      },
+      "void": false
+     },
+     {
+      "playedCardName": "Ago Marcio e Spezzato",
+      "playerId": "ComPlayer_6723",
+      "targetId": "devAlice",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "DISCARD_ONE": "Presa Male di Brutto"
+      },
+      "moveReport": {
+       "OPPONENT": [
+        "HEALTH: 19->14 (-5)",
+        "TOXICITY: 20->25 (5)"
+       ],
+       "SELF": [
+        "TOXICITY: 10->15 (5)"
+       ]
+      },
+      "void": false
+     }
+    ],
+    "timeBasedEffects": {
+     "devAlice": [
+      "(TOXICITY effect) HEALTH: 14->2 (-12)",
+      "Cleared out of ONLY A LITTLE DISCOMFORT status"
+     ],
+     "ComPlayer_6723": [
+      "(ALCOHOL effect) ALERTNESS: 16->15 (-1)",
+      "(ALCOHOL effect) ALCOHOL: 2->0 (-2)"
+     ]
+    },
+    "over": false,
+    "winner": "NONE",
+    "turn": 11,
+    "pendingMove": null,
+    "forfeits": {},
+    "moveDeadlines": {},
+    "reconnectDeadlines": {},
+    "outcomeReason": null
+   },
+   "next": {
+    "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+    "players": {
+     "devAlice": {
+      "playerId": "devAlice",
+      "character": {
+       "name": "Spazienzio de la Ucciso",
+       "bindingName": "bruiser.character.BigBadBruiser",
+       "dead": true,
+       "itemsSize": 1,
+       "items": [
+        {
+         "name": "Peroni da 66, calda",
+         "bindingName": "com.items.RottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": -13,
+        "ALERTNESS": -1,
+        "VIOLENCE": 95,
+        "TOXICITY": 30,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [],
+       "timers": [],
+       "sprite": "spazienzio.png"
+      },
+      "cardsInHand": [
+       {
+        "name": "ADOPERIAMOTI",
+        "bindingName": "com.basic.BruiserGrab",
+        "item": false,
+        "basicAction": true,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": -1,
+        "canTarget": [
+         "NEAR_ITEM"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "bindingName": "bruiser.character.LittleSmack",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "bindingName": "bruiser.character.LittleRage",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": true,
+        "priority": 2,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "ORMALE GUARIAMOTI",
+        "bindingName": "bruiser.HealingBlow",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 1,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 20
+        }
+       },
+       {
+        "name": "NON GIOCARE COL COLTELLO NO",
+        "bindingName": "bruiser.MadeOfStone",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 0,
+        "canTarget": [
+         "SELF"
+        ],
+        "cost": {}
+       },
+       {
+        "name": "FAI BASTA",
+        "bindingName": "bruiser.YouStop",
+        "item": false,
+        "basicAction": false,
+        "lastResort": false,
+        "characterBound": false,
+        "priority": 2,
+        "canTarget": [
+         "OPPONENT"
+        ],
+        "cost": {
+         "VIOLENCE": 5
+        }
+       }
+      ],
+      "deck": 4
+     },
+     "ComPlayer_6723": {
+      "playerId": "ComPlayer_6723",
+      "character": {
+       "name": "Tossico del Serraglio",
+       "bindingName": "junkie.character.ToxicJunkie",
+       "dead": false,
+       "itemsSize": 3,
+       "items": [
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Peroni da 66, calda",
+         "bindingName": "com.items.RottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        },
+        {
+         "name": "Tennents Super",
+         "bindingName": "com.items.AnotherRottenBeer",
+         "item": true,
+         "basicAction": false,
+         "lastResort": false,
+         "characterBound": false,
+         "priority": 1,
+         "canTarget": [
+          "SELF"
+         ],
+         "cost": {}
+        }
+       ],
+       "resources": {
+        "HEALTH": 95,
+        "ALERTNESS": 15,
+        "TOXICITY": 0,
+        "ALCOHOL": 0
+       },
+       "statuses": [],
+       "immunities": [
+        "TOXICITY"
+       ],
+       "timers": [],
+       "sprite": "tossico.png"
+      },
+      "cardsInHand": 6,
+      "deck": 1
+     }
+    },
+    "resolvedMoves": [
+     {
+      "playedCardName": "LIEVE FASTIDIO",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {
+       "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+      },
+      "moveReport": {
+       "OPPONENT": [],
+       "SELF": [
+        "Gained status: ONLY DISCOMFORT",
+        "VIOLENCE: 90->95 (5)"
+       ]
+      },
+      "void": false
+     },
+     {
+      "playedCardName": "C'è del sangue nella mia droga",
+      "playerId": "ComPlayer_6723",
+      "targetId": "devAlice",
+      "gameId": "a1affcf827e5f2b880d8bfb8e0da16f77a67e1061dcab0fa35872d53fa304929",
+      "choices": {},
+      "moveReport": {
+       "OPPONENT": [
+        "TOXICITY: 25->30 (5)"
+       ],
+       "SELF": [
+        "TOXICITY: 5->0 (-5)"
+       ]
+      },
+      "void": false
+     }
+    ],
+    "timeBasedEffects": {
+     "devAlice": [
+      "(TOXICITY effect) HEALTH: 2->-13 (-15)",
+      "Cleared out of ONLY A LITTLE DISCOMFORT status"
+     ],
+     "ComPlayer_6723": [
+      "Timer expired for Blood Drain: effect triggered"
+     ]
+    },
+    "over": true,
+    "winner": "ComPlayer_6723",
+    "turn": 12,
+    "pendingMove": null,
+    "forfeits": {},
+    "moveDeadlines": {},
+    "reconnectDeadlines": {},
+    "outcomeReason": "combat"
+   }
   }
- }
+ },
+ "catalog": [
+  {
+   "name": "Tossicone Scatarrante",
+   "bindingName": "junkie.Cough",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "TOXICITY": 10
+   }
+  },
+  {
+   "name": "Last Resort: Banzai!!!",
+   "bindingName": "com.last.Struggle",
+   "item": false,
+   "basicAction": false,
+   "lastResort": true,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Estasi da Coca Etilene",
+   "bindingName": "junkie.GoingBerserk",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "ALCOHOL": 10
+   }
+  },
+  {
+   "name": "AMMALIAMOTI DI BOTTE",
+   "bindingName": "bruiser.SickeningBlow",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 15
+   }
+  },
+  {
+   "name": "Steal",
+   "bindingName": "com.Steal",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 0,
+   "canTarget": [
+    "FAR_ITEM"
+   ],
+   "cost": {
+    "ALERTNESS": 10
+   }
+  },
+  {
+   "name": "Presa Male di Brutto",
+   "bindingName": "junkie.BadTrip",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 2,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {
+    "ALERTNESS": 10
+   }
+  },
+  {
+   "name": "STORDIAMOTI HO DETTO",
+   "bindingName": "bruiser.StunningBlow",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 15
+   }
+  },
+  {
+   "name": "Mescolone Micidiale",
+   "bindingName": "com.items.MarvelousCocktail",
+   "item": true,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Ce l'hai due spiccioli per il biglietto?",
+   "bindingName": "junkie.BeggingMoney",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 0,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "TOXICITY": 25
+   }
+  },
+  {
+   "name": "Ago Marcio e Spezzato",
+   "bindingName": "junkie.character.PatheticBlade",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": true,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Grab",
+   "bindingName": "com.Grab",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "NEAR_ITEM"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "FAI BASTA",
+   "bindingName": "bruiser.YouStop",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 2,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 5
+   }
+  },
+  {
+   "name": "BELLO IL TUO GIOCATTOLO SI",
+   "bindingName": "bruiser.BreakYourToy",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "FAR_ITEM"
+   ],
+   "cost": {
+    "VIOLENCE": 10
+   }
+  },
+  {
+   "name": "Negroni Trovato per Terra",
+   "bindingName": "com.items.CocktailOnTheGround",
+   "item": true,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "PAZIENZA: FINITA",
+   "bindingName": "bruiser.Glare",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 0,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "LIEVE FASTIDIO",
+   "bindingName": "bruiser.character.LittleRage",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": true,
+   "priority": 2,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "SVEGLIAMOCI MA TU NO",
+   "bindingName": "bruiser.character.LittleSmack",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": true,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "COSA FAI NON É UNA DOMANDA",
+   "bindingName": "bruiser.WhatchaDoin",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 2,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "ALERTNESS": 10,
+    "VIOLENCE": 10
+   }
+  },
+  {
+   "name": "Peroni da 66, calda",
+   "bindingName": "com.items.RottenBeer",
+   "item": true,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Scatto Repentino",
+   "bindingName": "com.ShuffleFeet",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": -1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+   "bindingName": "bruiser.ExtremelyViolentBlow",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 20
+   }
+  },
+  {
+   "name": "GARGANTUESCO IMPATTO SUL TU",
+   "bindingName": "bruiser.SuperImpact",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 0,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 25
+   }
+  },
+  {
+   "name": "PERMESSO SCUSA ORA SMETTI ",
+   "bindingName": "bruiser.BadEducation",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 10
+   }
+  },
+  {
+   "name": "GABBIANO DUNQUE VOLIAMOTI",
+   "bindingName": "bruiser.SeagullFly",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 10
+   }
+  },
+  {
+   "name": "C'è del sangue nella mia droga",
+   "bindingName": "junkie.ToxicBloodDrain",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "TOXICITY": 10
+   }
+  },
+  {
+   "name": "Tutto è Droga",
+   "bindingName": "junkie.EverythingIsDrug",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "NEAR_ITEM"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Riflessi Aumentati dalla Speed",
+   "bindingName": "junkie.AmphetamineReflexes",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 2,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {
+    "TOXICITY": 10
+   }
+  },
+  {
+   "name": "NON GIOCARE COL COLTELLO NO",
+   "bindingName": "bruiser.MadeOfStone",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 0,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "GENTILE IL TUO CAREZZO",
+   "bindingName": "bruiser.CantFeelAnything",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 2,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {
+    "VIOLENCE": 20
+   }
+  },
+  {
+   "name": "Desiderio Incontrollabile",
+   "bindingName": "com.basic.ToxicGrab",
+   "item": false,
+   "basicAction": true,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "NEAR_ITEM"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Ghigno co' i' Denti Marci",
+   "bindingName": "junkie.character.RottenSmile",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": true,
+   "priority": 2,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Tennents Super",
+   "bindingName": "com.items.AnotherRottenBeer",
+   "item": true,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Rabbia Psicotica da Meth",
+   "bindingName": "junkie.MethDrivenRage",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "TOXICITY": 5
+   }
+  },
+  {
+   "name": "ORMALE GUARIAMOTI",
+   "bindingName": "bruiser.HealingBlow",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 20
+   }
+  },
+  {
+   "name": "Dose di Eroina da Cavalli",
+   "bindingName": "junkie.LethalHeroinDose",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "ADOPERIAMOTI",
+   "bindingName": "com.basic.BruiserGrab",
+   "item": false,
+   "basicAction": true,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": -1,
+   "canTarget": [
+    "NEAR_ITEM"
+   ],
+   "cost": {}
+  },
+  {
+   "name": "Metabolismo Corrotto",
+   "bindingName": "junkie.PervertedMetabolism",
+   "item": false,
+   "basicAction": false,
+   "lastResort": false,
+   "characterBound": false,
+   "priority": 1,
+   "canTarget": [
+    "SELF"
+   ],
+   "cost": {}
+  }
+ ]
 }

@@ -8,14 +8,15 @@ const recorded=JSON.parse(readFileSync(new URL('./resolution-views.json',import.
 type Pair={me:string;note:string;previous:View;next:View};
 const pair=(name:string):Pair=>{const c=recorded.cases[name];assert.ok(c,`recorded case ${name}`);return c;};
 const clone=<T>(v:T):T=>structuredClone(v);
-// Catalog as the client has it: every card the own hands and the tables of the recordings show, with its cost.
-const catalog:Card[]=Object.values(recorded.cases as Record<string,Pair>).flatMap(c=>[c.previous,c.next]).flatMap(v=>Object.values(v.players).flatMap(p=>[...(Array.isArray(p.cardsInHand)?p.cardsInHand:[]),...p.character.items]));
+// Catalog as the client has it: the account catalog recorded from the real server (C3-4, also the computers' cards),
+// then every card the own hands and the tables of the recordings show, with its cost.
+const catalog:Card[]=[...(recorded.catalog??[]),...Object.values(recorded.cases as Record<string,Pair>).flatMap(c=>[c.previous,c.next]).flatMap(v=>Object.values(v.players).flatMap(p=>[...(Array.isArray(p.cardsInHand)?p.cardsInHand:[]),...p.character.items]))];
 const facts=(name:string)=>{const c=pair(name);return resolve(c.previous,c.next,c.me,catalog);};
-const contiguous=['itemConsumed','boundDiscard','drawnToTable','death','over','void','itemNamedNotGone','itemFromOther'];
+const contiguous=['itemConsumed','boundDiscard','drawnToTable','death','over','void','itemNamedNotGone','itemFromOther','itemGoneBefore','deathWithMove','lethalEndOfTurn'];
 
 test('recordings come from the real server and cover the cases of the plan',()=>{
  for(const name of [...contiguous,'jump','jumpAfterForfeits','rejoinSame'])assert.ok(recorded.cases[name],name);
- assert.match(recorded.source,/real server/);
+ assert.match(recorded.source,/real server/);assert.ok(recorded.catalog?.length,'account catalog recorded (C3-4)');
 });
 
 test('relation: first, same, next, jump, other game, older',()=>{
@@ -186,19 +187,104 @@ test('model round: set by a new turn, kept by views of the same turn, crossed af
 });
 
 // C3-2 revision (owner, D10 raised to 10 s, D12): one card at a time, slower, within the budget; a tap goes to the next card.
+// C3-4 adds the phases of costs, draws and end of turn around the cards: the same checks with every combination.
 import {pace,nextStop,PACE} from '../src/resolution.ts';
+const phaseSets=[{},{costs:true},{costs:true,draws:true},{costs:true,draws:true,endOfTurn:true},{endOfTurn:true}];
 test('pace: one card at a time, slower in a duel, five cards of the FFA within 10 s',()=>{
- for(const n of [1,2,3,4,5])for(const objects of [false,true]){const p=pace(n,objects);
+ for(const n of [1,2,3,4,5])for(const ph of phaseSets){const p=pace(n,ph);
   assert.ok(p.total<=PACE.budget+1,`${n} moves within the budget (${p.total})`);
+  assert.ok(!p.costs||p.moves[0].at>=p.costs.at+p.costs.dur-1,'costs before the cards (R04)');
   p.moves.forEach((m,i)=>{if(i)assert.ok(m.at>=p.moves[i-1].at+p.moves[i-1].dur-1,'cards do not overlap');});
-  const last=p.moves.at(-1)!;assert.ok((p.objects?.at??p.tail.at)>=last.at+last.dur-1,'objects and totals after the cards');}
- assert.equal(pace(2,false).moves[0].dur,PACE.moveMax,'duel: each card at the slowest pace');
- assert.ok(pace(2,false).moves[0].dur>=3*360,'about three times slower than the 1.2 s sequence shared by two cards');
- assert.equal(pace(5,true).moves[0].dur,PACE.moveMax,'FFA, five cards and objects: same slow pace as the duel');assert.ok(pace(5,true).total<=10000);
- assert.deepEqual(pace(0,false).moves,[]);
+  const last=p.moves.at(-1)!,after=[p.draws,p.endOfTurn,p.tail].filter(x=>!!x) as {at:number;dur:number}[];
+  assert.ok(after[0].at>=last.at+last.dur-1,'draws, end of turn and tail after the cards');
+  after.forEach((x,i)=>{if(i)assert.ok(x.at>=after[i-1].at+after[i-1].dur-1,'phases in order');});}
+ assert.equal(pace(2,{costs:true,draws:true}).moves[0].dur,PACE.moveMax,'duel: each card at the slowest pace');
+ assert.ok(pace(2).moves[0].dur>=3*360,'about three times slower than the 1.2 s sequence shared by two cards');
+ const ffa=pace(5,{costs:true,draws:true,endOfTurn:true});assert.ok(ffa.moves[0].dur>=1400,'FFA, five cards with every phase: almost the duel pace');assert.ok(ffa.total<=10000);
+ assert.deepEqual(pace(0).moves,[]);
 });
-test('D12: each tap jumps to the next card, then the objects, the totals and the end',()=>{
- const p=pace(3,true),stops=[p.moves[1].at,p.moves[2].at,p.objects!.at,p.tail.at,p.total];let t=10;
+test('D12: each tap jumps to the next card, then the draws, the end of turn, the tail and the end',()=>{
+ const p=pace(3,{costs:true,draws:true,endOfTurn:true}),stops=[p.moves[0].at,p.moves[1].at,p.moves[2].at,p.draws!.at,p.endOfTurn!.at,p.tail.at,p.total];let t=1;
  for(const s of stops){t=nextStop(p,t);assert.equal(t,s);}
  assert.equal(nextStop(p,p.total),p.total,'past the last stop: the end');
+});
+
+// C3-4: per-card changes from the regular report lines (D1 reopened), verified on the views, and the round timeline.
+import {regularLine,reportSteps,timeline,beats,type Step} from '../src/resolution.ts';
+const stepsOf=(name:string)=>{const c=pair(name);return reportSteps(c.previous,c.next,facts(name));};
+const timelineOf=(name:string)=>{const c=pair(name);return timeline(c.previous,c.next,facts(name),catalog)!;};
+test('regular line: only the form RESOURCE: a->b (d), at the end, after at most a label in parentheses',()=>{
+ assert.deepEqual(regularLine('HEALTH: 100->95 (-5)'),{resource:'HEALTH',from:100,to:95,consistent:true});
+ assert.deepEqual(regularLine('(TOXICITY effect) HEALTH: 12->-3 (-15)'),{resource:'HEALTH',from:12,to:-3,consistent:true});
+ assert.equal(regularLine('HEALTH: 100->95 (-4)')!.consistent,false);
+ for(const free of ['Grabbed and consumed Item Negroni Trovato per Terra',"Countered Target's own Move",'Lost HEALTH: 100->95 (-5) somehow','HEALTH: 100 -> 95','Timer expired for MarvelousCocktail effect triggered','POWER: 1->2 (1)'])
+  assert.equal(regularLine(free),null,free);
+});
+const chained=(list:Step[],start:Record<string,Record<string,number>>)=>{const v=structuredClone(start);for(const s of list){assert.equal(v[s.seat][s.resource]??0,s.from,`${s.seat} ${s.resource} chain`);v[s.seat][s.resource]=s.to;}return v;};
+test('every recorded contiguous round: steps chain from the previous view to the new one',()=>{
+ for(const name of contiguous){const c=pair(name),r=stepsOf(name);assert.ok(r.verified,`${name}: ${!r.verified&&r.reason}`);if(!r.verified)continue;
+  const start=Object.fromEntries(Object.entries(c.previous.players).map(([id,p])=>[id,{...p.character.resources}]));
+  const end=chained([...r.costs,...r.moves.flat(),...r.endOfTurn],start as Record<string,Record<string,number>>);
+  for(const [id,p] of Object.entries(c.next.players))for(const [k,v] of Object.entries(p.character.resources))assert.equal(end[id][k],v,`${name} ${id} ${k}`);
+  assert.equal(r.moves.length,c.next.resolvedMoves.length);}
+ // Costs come first and leave the author (R04).
+ const v=stepsOf('void');assert.ok(v.verified&&v.costs.length&&v.costs.every(s=>s.to<s.from));
+});
+test('fallback to the totals (D5) when the lines do not rebuild the views, with the reason',()=>{
+ const c=pair('death'),f=facts('death');
+ // As with MarvelousCocktail: 20 HEALTH lost to a timer the server reports without numbers.
+ const timer=clone(c.next),id=Object.keys(timer.players)[0];timer.players[id].character.resources.HEALTH!-=20;
+ const a=reportSteps(c.previous,timer,resolve(c.previous,timer,c.me,catalog));assert.equal(a.verified,false);assert.match((a as {reason:string}).reason,/HEALTH: steps end/);
+ // A line that does not start where the previous step left.
+ const broken=clone(c.next),m=broken.resolvedMoves.find(x=>(x.moveReport.OPPONENT??[]).some(l=>l.startsWith('HEALTH')))!;
+ m.moveReport.OPPONENT=m.moveReport.OPPONENT!.map(l=>l.replace(/^HEALTH: (-?\d+)->(-?\d+) \((-?\d+)\)/,(_,x,y,d)=>`HEALTH: ${+x+1}->${+y+1} (${d})`));
+ const b=reportSteps(c.previous,broken,f);assert.equal(b.verified,false);assert.match((b as {reason:string}).reason,/previous step left/);
+ // Unknown nominal cost: no per-card bars.
+ assert.equal(reportSteps(c.previous,c.next,{...f,moves:f.moves.map(x=>({...x,cost:null}))}).verified,false);
+ // No difference, no steps.
+ assert.equal(reportSteps(pair('jump').previous,pair('jump').next,facts('jump')).verified,false);
+ const t=timeline(c.previous,timer,resolve(c.previous,timer,c.me,catalog),catalog)!;assert.equal(t.bars,'total');assert.ok(t.moves.every(x=>!x.steps.length));
+ assert.ok(t.totals.some(s=>s.seat===id&&s.resource==='HEALTH'));
+});
+test('D1: replacing the server sentences never changes the numbers shown, it only drops to the totals',()=>{
+ for(const name of contiguous){const c=pair(name),t=timelineOf(name);
+  const s=clone(c.next);for(const m of s.resolvedMoves)for(const k of Object.keys(m.moveReport) as ('SELF'|'OPPONENT')[])m.moveReport[k]=m.moveReport[k]!.map(()=>'∅');for(const k of Object.keys(s.timeBasedEffects))s.timeBasedEffects[k]=s.timeBasedEffects[k].map(()=>'∅');
+  const u=timeline(c.previous,s,resolve(c.previous,s,c.me,catalog),catalog)!;
+  // Without lines only the costs remain: they rebuild a round only when nothing else changed, otherwise the totals.
+  if(u.bars==='per-card')assert.ok(u.moves.every(m=>!m.steps.length)&&!u.endOfTurn.steps.length&&u.costSteps.length===u.totals.length,`${name}: only costs`);else assert.equal(u.reason!.length>0,true);
+  assert.deepEqual({...beats(u),steps:0},{...beats(t),steps:0},`${name}: same beats`);assert.deepEqual(u.totals,t.totals);}
+});
+test('timeline: cards, voids, costs, objects, draws, end of turn and deaths as the facts give them',()=>{
+ for(const name of contiguous){const f=facts(name),t=timelineOf(name),b=beats(t);
+  assert.equal(t.bars,'per-card',name);
+  assert.equal(b.drops,f.moves.length,name);assert.equal(b.stamps,f.moves.filter(m=>m.void).length,name);
+  assert.equal(b.tokens,f.moves.reduce((n,m)=>n+Object.values(m.cost??{}).filter(v=>v).length,0),`${name} tokens`);
+  assert.equal(b.consumed+b.passed+b.broken,f.moves.filter(m=>m.itemGone).length,name);
+  assert.equal(b.endOfTurn,f.endOfTurn.length);assert.equal(b.emphasis,Object.values(f.seats!).filter(s=>s.died||s.forfeit).length);
+  assert.ok(t.pace.total<=PACE.budget+1);
+  for(const [id,s] of Object.entries(f.seats!)){const d=t.draws.filter(x=>x.seat===id),left=Math.max(0,s.deck.before-s.deck.after);
+   assert.ok(d.filter(x=>x.to==='table').length<=Math.min(left,s.itemsAppeared.length),`${name} ${id}: table draws only from the deck count`);
+   if(s.handArrived)assert.deepEqual(d.filter(x=>x.to==='hand').map(x=>x.name),s.handArrived);else assert.equal(d.length,left,`${name} ${id}: as many backs as cards left the deck`);}}
+ assert.equal(timelineOf('void').moves.find(m=>m.void)!.card,'SVEGLIAMOCI MA TU NO');
+ assert.equal(timelineOf('itemConsumed').moves.find(m=>m.item)!.item!.fate,'consumed');
+ assert.equal(timelineOf('itemFromOther').moves.find(m=>m.item)!.item!.fate,'passed');
+ const named=timelineOf('itemNamedNotGone');assert.equal(named.moves.find(m=>m.card==='Grab')!.item,null,'nothing animated without a disappearance');
+ // The token created in that round is not a deck card: it appears in place, never from the deck.
+ assert.ok(!named.draws.some(d=>d.to==='table'&&d.name==='Broken Beer Bottle'),'token not drawn');
+ // Object gone before the resolution (real game): a Steal takes devAlice's Negroni, devAlice's ADOPERIAMOTI on it finds
+ // nothing; two claims for one disappearance, so neither move animates the object (C3-1 rule), the summary keeps it.
+ const contested=timelineOf('itemGoneBefore');assert.ok(contested.moves.filter(m=>m.card!=='').length>=2&&contested.moves.every(m=>!m.item));
+ assert.ok(beats(timelineOf('boundDiscard')).discards>=1);
+ const drawn=timelineOf('drawnToTable');assert.ok(drawn.draws.some(d=>d.seat===pair('drawnToTable').me&&d.to==='table'),'object drawn to the own table');
+ // Lethal end of turn: the TOXICITY line after the moves takes devAlice from 12 to -3.
+ const death=timelineOf('death'),dead=death.emphasis.find(e=>e.kind==='died')!;assert.ok(dead);
+ assert.ok(death.endOfTurn.steps.some(s=>s.seat===dead.seat&&s.resource==='HEALTH'&&s.from>0&&s.to<=0),'lethal end of turn');
+ assert.equal(timeline(pair('jump').previous,pair('jump').next,facts('jump'),catalog),null,'no timeline after a jump');
+ // Rule 7 (real game): the author dies in the round and the move already presented is still played, with its steps.
+ const dwm=pair('deathWithMove'),df=facts('deathWithMove'),dt=timelineOf('deathWithMove');
+ const late=dt.moves.find(m=>df.seats![m.author].died)!;assert.ok(late,'a move of a player who dies');assert.equal(dt.moves.length,dwm.next.resolvedMoves.length);
+ assert.ok(dt.emphasis.some(e=>e.seat===late.author&&e.kind==='died'));
+ const lt=timelineOf('lethalEndOfTurn');assert.ok(lt.endOfTurn.steps.some(s=>s.resource==='HEALTH'&&s.from>0&&s.to<=0));
+ // A voided bound keeps its extra card (R04): no discard shown.
+ const vf=facts('boundDiscard'),vb=timeline(pair('boundDiscard').previous,pair('boundDiscard').next,{...vf,moves:vf.moves.map(m=>({...m,void:!!m.discard}))},catalog)!;assert.equal(beats(vb).discards,0);
 });

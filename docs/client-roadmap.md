@@ -1,8 +1,8 @@
 # Roadmap del client web animato
 
-**30 ottobre 2026 — versione 28. C0, C1 e C2 sono chiuse; C3 è in corso nel
+**30 ottobre 2026 — versione 29. C0, C1 e C2 sono chiuse; C3 è in corso nel
 [piano C3](client-c3-plan.md): C3-1, C3-2 (con la revisione dopo la prova del
-proprietario) e C3-3 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+proprietario), C3-3 e C3-4 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -214,8 +214,8 @@ Questi giochi sono riferimenti visivi, non fonti di asset riutilizzabili.
    attribuibili con certezza, mantenendo il report leggibile a richiesta.
 
 Durate iniziali proposte: 100–150 ms per selezione, 200–350 ms per spostamento
-carta o impatto; sequenza totale normalmente entro 2 s, portata **fino a 5 s** dal
-proprietario per C3 (D10 del [piano C3](client-c3-plan.md)). Il nuovo turno è
+carta o impatto; sequenza totale normalmente entro 2 s, portata **fino a 10 s** dal
+proprietario per C3 (D10 del [piano C3](client-c3-plan.md): 5 s alla conferma, 10 s dalla revisione di C3-2). Il nuovo turno è
 utilizzabile appena la vista autorevole arriva: animazioni interrompibili,
 accelerate o saltate se ostacolano l'input, con riepilogo consultabile. Nessun
 Continue obbligatorio tra turni e nessuna pausa del clock multiplayer. Con
@@ -515,6 +515,12 @@ ammessi (un personaggio per categoria, un posto per le carte che prendono un ogg
 statiche con movimento ridotto, nessuna a scelta bloccata, controllate su partite reali
 a 1366×768 e 844×390 (`VerifyAim`), prestazioni del trascinamento invariate
 ([rapporto C3](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi)).
+**C3-4 fatto (30 ottobre 2026):** la sequenza mostra costi, carte, annullate, oggetti
+consumati, passati o rotti, scarti delle bound, pesca, fine turno, morti e forfait, dai
+soli dati certi; barre e numeri si muovono carta per carta quando le righe regolari del
+report ricostruiscono esattamente la vista, altrimenti dal valore precedente al finale
+(D1 riaperta, D5). Fra umani, in FFA a cinque, la sequenza usa quasi tutti i 10 s e lascia
+20–21 s del clock: dato per A2 ([rapporto C3](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)).
 
 **Attività:** affinare selezione/bersagli, costo, carta confermata, annullamento,
 variazioni risorse, trasferimento/consumo oggetti, scarto/pesca osservabili,
@@ -686,8 +692,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
 **Prossimo passo:** il blocco successivo del [piano C3](client-c3-plan.md) su
-istruzione del proprietario (C3-4, oppure C3-6 che non dipende da C3-4);
-C3-1, C3-2 e C3-3 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
+istruzione del proprietario (C3-5, che dipende da A1, già fatta, oppure C3-6);
+C3-1, C3-2, C3-3 e C3-4 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
 danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -697,6 +703,11 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 29 — 30 ottobre 2026, C3-4:** sequenza del round con i soli dati certi
+  (linea temporale pura `timeline` e verifica delle righe `reportSteps` in `resolution.ts`),
+  variazioni per carta secondo D1 riaperta con ripiego sul totale (D5), verificata su partite
+  reali a 1366×768 e 844×390; i «5 s» rimasti nei documenti portati ai 10 s di D10.
+  Nessuna regola, API o servizio cambiato.
 - **Versione 28 — 30 ottobre 2026, C3-3:** frecce verso i bersagli ammessi (O6, D3):
   geometria pura in `readability.ts`, livello dedicato in `scene.ts`, nessuna freccia a scelta
   bloccata, statiche con movimento ridotto; `VerifyAim` su partite reali a 1366×768 e
