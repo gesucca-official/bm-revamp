@@ -247,7 +247,7 @@ chiudono. Il contenuto animato non cambia: le variazioni per carta restano a C3-
 
 ### C3-3 — O6: frecce verso i bersagli ammessi
 
-**Fatto il 30 ottobre 2026** ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi), verifica `VerifyAim`). Osservazione del proprietario emersa durante il blocco, fuori perimetro: le scritte «Scegli una carta» e «Scegli il bersaglio sul tavolo» al centro sono brutte e coperte dalle carte alzate; da togliere o spostare con un richiamo di attenzione (attività separata).
+**Fatto il 30 ottobre 2026** ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi), verifica `VerifyAim`). Osservazione del proprietario emersa durante il blocco, fuori perimetro: le scritte «Scegli una carta» e «Scegli il bersaglio sul tavolo» al centro sono brutte e coperte dalle carte alzate; **fatta a parte** il 30 ottobre 2026: spostate in basso a sinistra con alone di richiamo ([rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)).
 
 **Perimetro.** Con una carta scelta o trascinata, frecce dalla carta ai bersagli
 delle **sole categorie ammesse** (`canTarget`, come i contorni di `Model.allows`),

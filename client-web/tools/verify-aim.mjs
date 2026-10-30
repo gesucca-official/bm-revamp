@@ -194,6 +194,7 @@ async function cardsPass(p,scope,turn,learn,touch,out){
  }
 }
 async function pulse(p,scope,reduced,touch,shot){
+ await p.page.waitForTimeout(80);{const h0=await hintClear(p,scope,true);if(h0&&!reduced&&h0.animation==='none')bad(scope,'attention class without animation');if(h0&&reduced&&h0.animation!=='none')bad(scope,'reduced motion but the hint animates');}
  const s=await p.state(),v=view(p,s);let card=null;
  for(const c of s.cards)if(expected(s,v,c.name).some(id=>id.startsWith('person-')&&id!==`person-${s.me}`)){card=c;break;}
  if(!card)for(const c of s.cards)if(expected(s,v,c.name).length){card=c;break;}
@@ -204,8 +205,20 @@ async function pulse(p,scope,reduced,touch,shot){
  if(reduced&&!(r.min===1&&r.max===1))bad(scope,`reduced motion but the arrows pulse ${JSON.stringify(r)}`);
  if(!reduced&&!(r.max-r.min>.05))bad(scope,`normal motion but no pulse ${JSON.stringify(r)}`);
  if(reduced&&!r.reduced)bad(scope,'reduced motion not emulated');
- if(shot)await p.shot(shot);
+ r.hint=await hintClear(p,scope,false);if(shot)await p.shot(shot);
  await p.page.keyboard.press('Escape');await p.page.waitForTimeout(70);return r;
+}
+// Owner feedback after C3-3: the hint of the table («Scegli…», «Mossa ricevuta…») sits in the free corner, whole inside the screen and
+// clear of every character, object, hand card and board; while a choice is asked for it carries the attention class.
+async function hintClear(p,scope,expectAsk){
+ const s=await p.state(),r=await p.page.locator('.hint').first().evaluate(e=>{const b=e.getBoundingClientRect();return {l:b.left,t:b.top,r:b.right,b:b.bottom,cls:e.className,text:e.textContent,anim:getComputedStyle(e).animationName};}).catch(()=>null);
+ if(!r){bad(scope,'no hint on the table');return null;}
+ const box={x:(r.l+r.r)/2,y:(r.t+r.b)/2,w:r.r-r.l,h:r.b-r.t};
+ if(r.l<0||r.t<0||r.r>vw||r.b>vh)bad(scope,`hint outside the screen ${JSON.stringify(r)}`);
+ const blocks=[...s.hits.filter(h=>h.kind!=='status').map(h=>({id:h.id,x:h.x,y:h.y,w:h.w,h:h.h})),...(s.layout?.seats??[]).flatMap(q=>[{id:`board-${q.id}`,...q.board},{id:`backs-${q.id}`,...q.backs}])];
+ for(const b of blocks){if(Math.abs(box.x-b.x)<(box.w+b.w)/2&&Math.abs(box.y-b.y)<(box.h+b.h)/2)bad(scope,`hint "${r.text}" over ${b.id}`);}
+ if(expectAsk&&!r.cls.split(' ').includes('ask'))bad(scope,`hint without the attention class: ${r.cls}`);
+ return {text:r.text,cls:r.cls,box,animation:r.anim};
 }
 // A point of the canvas outside every hit, in the middle band of the table.
 async function emptyPoint(p){const s=await p.state();
@@ -302,7 +315,7 @@ async function dragPerf(p,scope){
 // Locked: the move was sent (pending) or the player is out: choosing a card draws no arrows.
 async function lockedPass(p,scope,touch){
  const s=await p.state();if(!(s.phase==='pending'||s.over||s.eliminated))return null;
- const out=[];for(const c of s.cards.slice(0,3)){const h=s.hits.find(x=>x.id===c.key);if(!h)continue;await tapAt(p,h,touch);const t=await settle(p,130);out.push({phase:t.phase,selected:t.selected,arrows:t.arrows.length});
+ const out=[];for(const c of s.cards.slice(0,3)){const h=s.hits.find(x=>x.id===c.key);if(!h)continue;await tapAt(p,h,touch);const t=await settle(p,130);out.push({phase:t.phase,selected:t.selected,arrows:t.arrows.length,hint:t.phase==='pending'?await hintClear(p,scope,false):null});
   if(t.arrows.length||t.selected)bad(scope,`locked (${t.phase}) but selected=${t.selected} arrows=${t.arrows.length}`);await p.page.keyboard.press('Escape');await p.page.waitForTimeout(50);}
  return out;
 }

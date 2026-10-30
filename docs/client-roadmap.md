@@ -687,8 +687,7 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 
 **Prossimo passo:** il blocco successivo del [piano C3](client-c3-plan.md) su
 istruzione del proprietario (C3-4, oppure C3-6 che non dipende da C3-4);
-C3-1, C3-2 e C3-3 sono fatti; da decidere come attività separata lo spostamento delle scritte
-«Scegli una carta» e «Scegli il bersaglio» (osservazione del proprietario); l'attività A1 (tipo di
+C3-1, C3-2 e C3-3 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
 danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -702,7 +701,8 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
   geometria pura in `readability.ts`, livello dedicato in `scene.ts`, nessuna freccia a scelta
   bloccata, statiche con movimento ridotto; `VerifyAim` su partite reali a 1366×768 e
   844×390 ([rapporto C3](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi)).
-  Osservazione del proprietario sulle scritte al centro del tavolo registrata, non fatta.
+  Le scritte «Scegli…» al centro del tavolo (osservazione del proprietario) sono poi state spostate
+  nell'angolo in basso a sinistra con alone di richiamo.
   Nessuna regola, API o servizio cambiato.
 - **Versione 27 — 29 ottobre 2026, revisione di C3-2:** dopo la prova del proprietario
   la sequenza mostra una carta per volta, più lenta, e un tocco passa alla successiva

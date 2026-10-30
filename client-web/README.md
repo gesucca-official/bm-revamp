@@ -282,6 +282,10 @@ che già tocca il bersaglio la freccia non si disegna. La pulsazione leggera si 
 movimento ridotto. La geometria è `aimArrows` in `src/readability.ts` (curve nello schermo,
 lontane dai pulsanti ✓ e ×), disegnata da `drawAim` in `src/scene.ts`.
 
+Il suggerimento del tavolo («Scegli una carta», «Scegli il bersaglio sul tavolo», «Mossa ricevuta…») sta
+nell'angolo in basso a sinistra (`.hint`), con un alone che pulsa piano quando si chiede una scelta (classe `ask`,
+fisso con movimento ridotto).
+
 ## Verifiche
 
 ```powershell

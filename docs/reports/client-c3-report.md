@@ -410,8 +410,32 @@ frecce nella stessa corsa (nessun interruttore nel codice) né su dispositivo fi
 - **Regressione sulla build finale:** `Verify` e `VerifyModes` verdi a entrambe le misure; `VerifyResolution` verde a entrambe; `VerifyFfa` verde a entrambe le misure (la corsa a 844×390 è finita dopo un mio rilancio sovrapposto, che ha trovato la porta occupata dal suo server). `build.ps1 -Task Test -Offline` e `check-rules.py` passano.
 - Dispositivo fisico, iPhone, prova umana: non fatti. Dati locali non toccati.
 - **Osservazione del proprietario durante il blocco:** le scritte «Scegli una carta» e «Scegli il bersaglio sul
-  tavolo» al centro del tavolo sono brutte e finiscono sotto le carte alzate; da togliere o spostare in una zona
-  meno affollata con un modo per richiamare l'attenzione. **Non fatto in C3-3** (fuori perimetro): proposto come
-  attività separata.
+  tavolo» al centro del tavolo erano brutte e finivano sotto le carte alzate. Fatto a parte: vedi
+  [C3-3 — Scritte di scelta](#c3-3--scritte-di-scelta).
 - Evidenze: [aim-1366x768.json](client-c3/c3-3/aim-1366x768.json), [aim-844x390.json](client-c3/c3-3/aim-844x390.json),
   [catture](client-c3/c3-3/screens/) `aim-*`; regressione e [size.json](client-c3/c3-3/size.json) nella stessa cartella.
+
+## C3-3 — Scritte di scelta
+
+30 ottobre 2026. Attività separata da C3-3, su osservazione del proprietario: le scritte «Scegli una carta» e
+«Scegli il bersaglio sul tavolo» stavano al centro del tavolo e finivano sotto la carta alzata. Solo presentazione:
+nessun testo, regola, server o protocollo cambiato.
+
+- **Posizione:** il suggerimento (`.hint`) è ora una pillola scura con bordo nell'angolo in basso a sinistra, l'unica
+  zona libera in entrambe le misure e nei due modi (sotto la plancia propria, a sinistra della mano), larga al massimo
+  380 px (250 px a 844×390).
+- **Richiamo dell'attenzione:** quando si chiede una scelta («Scegli …», fase `choose`) la pillola prende la classe
+  `ask`: bordo petrolio e alone che pulsa piano (2,2 s). Con movimento ridotto l'alone è fisso. Gli altri messaggi
+  («Mossa ricevuta · In attesa», «Invio in corso», «Sei fuori…») restano in tinta sobria, senza alone.
+- **Invariato:** `role="status"` e `aria-live="polite"`, i testi di `model.ts`, ✓/× (il suggerimento si nasconde con la
+  conferma, come prima), semantic layer.
+- **Verifica:** `VerifyAim` esteso: a ogni scelta il suggerimento sta tutto nello schermo e non tocca personaggi, oggetti,
+  mano, plance né mani coperte; ha la classe `ask` e l'animazione in movimento normale, nessuna animazione con movimento
+  ridotto; in pending resta visibile senza `ask`. Verde a 1366×768 e 844×390 (duello, tocco, ridotto, FFA a cinque, pending),
+  server temporaneo. `Verify` verde a entrambe le misure; test client 144; server e `check-rules.py` verdi; JS gzip
+  312287 byte, totale 1095232 ([size.json](client-c3/c3-3r/size.json)). Catture dopo in [c3-3r](client-c3/c3-3r/screens/)
+  (`aim-*-chosen-*`), prima in [c3-3](client-c3/c3-3/screens/) con gli stessi nomi.
+- **Non provato:** `VerifyModes`, `VerifyFfa` e `VerifyResolution` (percorso non toccato); dispositivo fisico e giudizio
+  del proprietario sul nuovo aspetto. La porta 8080 era occupata da un altro server: le verifiche hanno usato un server
+  temporaneo su 18080 con un'anteprima su 4321 (`BM_SERVER_PORT`, `BM_PORT`, `BM_SERVER`, `BM_CLIENT`).
+
