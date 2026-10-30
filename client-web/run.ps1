@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','Size','Atlas')][string]$Task='Build',[switch]$Offline)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','VerifyLayout','Size','Atlas')][string]$Task='Build',[switch]$Offline)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -33,6 +33,8 @@ try {
     'VerifyResolution' {& npm run verify:resolution}
     # C3-3: aim arrows (number, destination, locked choice, FFA, reduced motion, drag performance) on its own temporary server (port 8080 free, Serve running).
     'VerifyAim' {& npm run verify:aim}
+    # C3-L: table geometry (own character larger, own piles in the middle, sizes, overlaps, close-ups) in the duel and the five-seat FFA on its own temporary server (port 8080 free, Serve running).
+    'VerifyLayout' {& npm run verify:layout}
     'Size' {& npm run size}
     'Atlas' {& npm run atlas}
   }

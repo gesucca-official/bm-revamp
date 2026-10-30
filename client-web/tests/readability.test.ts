@@ -173,18 +173,66 @@ test('a short arrow keeps a readable head: the tip goes into the target and the 
 });
 
 // C3-4 revision (D13): the author's close-up and the target's, at both sizes, in the duel and the five-seat FFA.
-import {closeUp,targetUp,seatBoxes} from '../src/readability.ts';
+import {closeUp,targetOf,seatBoxes,closeUpRange} from '../src/readability.ts';
 for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`D13 close-ups at ${w}×${h} with ${ids.length} seats: on the screen, clear of the other seats and of the hand`,()=>{
  const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(id=>[id,2]))),H=l.hand,n=7;
  // The fan as the scene draws it, with the lift of a raised card.
  const hand:Box[]=Array.from({length:n},(_,i)=>({x:H.center+(i-(n-1)/2)*H.step,y:H.y-H.lift/2,w:H.w*H.zoom,h:H.h+H.lift}));
- for(const seat of l.seats){const others=l.seats.filter(s=>s!==seat).flatMap(seatBoxes),c=closeUp(seat.person,{w,h},[...others,...hand]);
-  assert.equal(c.placed,'middle',`${seat.id}: a free place exists`);assert.ok(c.scale>=1.15,`${seat.id}: enlarged (${c.scale})`);
+ for(const seat of l.seats){const others=l.seats.filter(s=>s!==seat).flatMap(seatBoxes),c=closeUp(seat.person,{w,h},[...others,...hand],closeUpRange(seat.me));
+  // C3-L: the own character, already the largest, may keep its size in the middle; the others are enlarged.
+  assert.equal(c.placed,'middle',`${seat.id}: a free place exists`);assert.ok(c.scale>=(seat.me?1:1.15),`${seat.id}: enlarged (${c.scale})`);
   for(const b of [c.box,c.person,c.card])assert.ok(inside(b,w,h),`${seat.id}: inside the screen`);
   for(const o of [...others,...hand])assert.equal(overlap(c.box,o),0,`${seat.id}: covers nothing of the other seats or the hand`);
-  assert.ok(c.person.h>seat.person.h*1.1&&c.card.x>c.person.x,`${seat.id}: character bigger, card beside it`);
-  const t=targetUp(seat.person,{w,h});assert.ok(inside(t,w,h),`${seat.id}: target close-up inside`);
+  assert.ok(c.person.h>=seat.person.h*(seat.me?1:1.1)&&c.card.x>c.person.x,`${seat.id}: character bigger, card beside it`);
+  const t=targetOf(seat,{w,h},l.seats.filter(s=>s!==seat).map(s=>s.person));assert.ok(t.h>seat.person.h,`${seat.id}: target close-up bigger`);assert.ok(inside(t,w,h),`${seat.id}: target close-up inside`);
   for(const o of l.seats.filter(s=>s!==seat))assert.equal(overlap(t,o.person),0,`${seat.id}: target close-up clear of ${o.id}'s character`);}
  // Nowhere to go: the character grows in its seat, still on the screen.
  const s=l.seats[0],f=closeUp(s.person,{w,h},[{x:w/2,y:h/2,w,h}]);assert.equal(f.placed,'seat');assert.ok(inside(f.box,w,h));
+});
+
+// C3-L: scale and use of the table space (owner, 30 October 2026): the own character larger than the others, resources larger, the
+// cards of the last round in the middle, own deck and discard pile small beside the own character; when the table has no room objects give way first, then the others, the resources, the own character.
+import {SCALE,YIELD,fitScale,arrange,layoutProblems,tableBoxes,shellBoxes,discardTop} from '../src/readability.ts';
+const FITTED:Record<string,{me:number;others:number;items:number;resources:number}>={
+ '1366x768:2':{me:1.5,others:1.2,items:1,resources:1.25},'1366x768:5':{me:1.5,others:1,items:1,resources:1.25},
+ '844x390:2':{me:1.5,others:1,items:1,resources:1.1},'844x390:5':{me:1.5,others:1,items:1,resources:1.05}};
+for(const [w,h] of VIEWPORTS)for(const n of [2,5])test(`C3-L at ${w}×${h} with ${n} seats: own character larger, everything fits, round cards in the middle`,()=>{
+ assert.deepEqual(fitScale(w,h,n),FITTED[`${w}x${h}:${n}`],'fitted factors');
+ for(const items of [0,1,2,3]){const ids=['me','b','c','d','e'].slice(0,n),l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items])));
+  assert.deepEqual(layoutProblems(l,w,h),[],`${items} objects per seat`);
+  const me=l.seats.find(s=>s.me)!;for(const o of l.seats.filter(s=>!s.me)){assert.ok(me.person.w>=o.person.w*1.24,`own ${me.person.w} vs ${o.person.w}`);}
+  // Every clickable target at least 44 CSS px on its short side (C4): characters and objects.
+  for(const s of l.seats)for(const b of [s.person,...s.items])assert.ok(Math.min(b.w,b.h)>=44,`${s.id} ${b.w}×${b.h}`);
+  // The round's cards: one slot per seat, in the middle of the table (central half of the width, below the top tenth), a cascade (each
+  // next slot lower and drawn over the previous one, the title strip of every card left visible); clear of everything else.
+  const P=l.played!;assert.ok(P,'round cards placed');assert.equal(P.slots.length,n);assert.ok(inside(P.box,w,h));
+  for(const o of tableBoxes(l,w,h))assert.equal(overlap(P.box,o),0,`round cards over ${JSON.stringify(o)}`);
+  assert.ok(Math.abs(P.box.x-w/2)<=w*.25&&P.box.y-P.box.h/2>=h*.1,`round cards in the middle ${Math.round(P.box.x)},${Math.round(P.box.y)}`);
+  P.slots.forEach((b,i)=>{assert.ok(Math.abs(b.x-P.box.x)<=(P.box.w-b.w)/2+.01&&Math.abs(b.y-P.box.y)<=(P.box.h-b.h)/2+.01,'slot inside the area');const q=P.slots[i+1];if(q)assert.ok(q.y-b.y>=b.h*.19,'title strip visible');});
+  // Own deck and discard pile: small, by the own seat (beside the character in the FFA, in the row of objects above it in the duel),
+  // clear of everything else and of the round's cards.
+  const me2=l.seats.find(s=>s.me)!,K=l.piles!;assert.ok(K,'piles placed');for(const b of [K.deck,K.discard]){assert.ok(inside(b,w,h));for(const o of [...tableBoxes(l,w,h),P.box])assert.equal(overlap(b,o),0,`pile over ${JSON.stringify(o)}`);
+   assert.ok(Math.hypot(b.x-me2.person.x,b.y-me2.person.y)<=me2.person.h+me2.person.w,'pile by the own seat');}
+  // Seats clear of the HTML hint and of the clock, turn and menu.
+  const sh=shellBoxes(w,h,l.compact);for(const s of l.seats)for(const b of [s.person,s.board,s.summary,...s.items])for(const x of [sh.hint,sh.top])assert.equal(overlap(b,x),0);}
+});
+test('C3-L: factors give way in the owner order, objects first and the own character last',()=>{
+ assert.deepEqual(YIELD,['items','others','resources','me']);assert.deepEqual(SCALE,{me:1.5,others:1.2,items:1,resources:1.25});
+ for(const [w,h] of VIEWPORTS)for(const n of [2,5]){const s=fitScale(w,h,n);
+  YIELD.forEach((k,i)=>{if(s[k]<SCALE[k])for(const j of YIELD.slice(0,i))assert.equal(s[j],1,`${w}×${h} ${n}: ${k} gave way before ${j} was down to 1`);});
+  // The fitted factors are the largest that fit: one step more on the first factor that gave way no longer fits.
+  const k=[...YIELD].reverse().find(k=>s[k]<SCALE[k]);if(!k)continue;const ids=['me','b','c','d','e'].slice(0,n);
+  assert.notDeepEqual(layoutProblems(arrange(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,3])),{...s,[k]:s[k]+.05}),w,h),[],`${w}×${h} ${n}: ${k} +0.05 does not fit`);}
+});
+test('C3-L: 750×292 (iPhone minimum) does not fit yet, recorded for C4',()=>{
+ const l=tableLayout(750,292,['me','b'],'me',{me:2,b:2});assert.notDeepEqual(layoutProblems(l,750,292),[],'if this fits now, C4 can drop the note');
+});
+test('C3-L: top of the own discard pile from the last round (R02)',()=>{
+ const cards=[card({name:'Reg'}),card({name:'Base',basicAction:true}),card({name:'Bound',characterBound:true}),card({name:'Last',lastResort:true})];
+ const mv=(name:string,o:object={})=>[{playerId:'Bice',playedCardName:'Reg'},{playerId:'me',playedCardName:name,...o}];
+ assert.equal(discardTop(mv('Reg'),'me',cards),'Reg');assert.equal(discardTop(mv('Reg',{void:true}),'me',cards),'Reg','a voided move still discards');
+ assert.equal(discardTop(mv('Last'),'me',cards),'Last');assert.equal(discardTop(mv('Base'),'me',cards),null,'a basic stays in hand');
+ assert.equal(discardTop(mv('Bound',{choices:{DISCARD_ONE:'Reg'}}),'me',cards),'Reg','a bound discards its extra card');
+ assert.equal(discardTop(mv('Bound',{void:true,choices:{DISCARD_ONE:'Reg'}}),'me',cards),null,'a voided bound keeps it');
+ assert.equal(discardTop(mv('Unknown'),'me',cards),'Unknown');assert.equal(discardTop([{playerId:'Bice',playedCardName:'Reg'}],'me',cards),null);
 });

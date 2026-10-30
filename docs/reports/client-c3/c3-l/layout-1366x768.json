@@ -1,0 +1,1555 @@
+{
+ "date": "2026-10-30T20:53:17.498Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "scenarios": {
+  "duel": {
+   "ffa": false,
+   "turns": [
+    {
+     "turn": 0,
+     "scale": {
+      "me": 1.5,
+      "others": 1.2,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "card": {
+       "x": 407,
+       "y": 235,
+       "w": 150,
+       "h": 207
+      },
+      "shows": []
+     },
+     "piles": {
+      "deck": {
+       "x": 26,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 74,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 17,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 114,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 339,
+       "y": 553,
+       "w": 225,
+       "h": 310
+      },
+      "item": {
+       "x": 159,
+       "y": 311,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 339,
+       "y": 635,
+       "w": 217,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9929",
+       "person": {
+        "x": 874,
+        "y": 201,
+        "w": 180,
+        "h": 248
+       },
+       "item": {
+        "x": 1029,
+        "y": 216,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 683,
+        "y": 171,
+        "w": 188,
+        "h": 73
+       },
+       "back": {
+        "w": 48,
+        "h": 67
+       }
+      }
+     ],
+     "free": {
+      "x": 1212,
+      "y": 264,
+      "w": 247,
+      "h": 412,
+      "share": 0.097
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.621
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9929-imm-TOXICITY",
+       "kind": "status",
+       "w": 49,
+       "h": 29
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1311,
+       "y": 35,
+       "w": 79,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 1,
+     "scale": {
+      "me": 1.5,
+      "others": 1.2,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "card": {
+       "x": 407,
+       "y": 235,
+       "w": 150,
+       "h": 207
+      },
+      "shows": [
+       {
+        "name": "LIEVE FASTIDIO",
+        "author": "devAlice",
+        "void": false
+       },
+       {
+        "name": "Dose di Eroina da Cavalli",
+        "author": "ComPlayer_9929",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 26,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 74,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": "STORDIAMOTI HO DETTO"
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 114,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 339,
+       "y": 553,
+       "w": 225,
+       "h": 310
+      },
+      "item": {
+       "x": 159,
+       "y": 311,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 339,
+       "y": 635,
+       "w": 217,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9929",
+       "person": {
+        "x": 874,
+        "y": 201,
+        "w": 180,
+        "h": 248
+       },
+       "item": {
+        "x": 1029,
+        "y": 216,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 683,
+        "y": 171,
+        "w": 188,
+        "h": 73
+       },
+       "back": {
+        "w": 48,
+        "h": 67
+       }
+      }
+     ],
+     "free": {
+      "x": 1212,
+      "y": 264,
+      "w": 247,
+      "h": 412,
+      "share": 0.097
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.621
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9929-imm-TOXICITY",
+       "kind": "status",
+       "w": 49,
+       "h": 29
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 81,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 2,
+     "scale": {
+      "me": 1.5,
+      "others": 1.2,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "card": {
+       "x": 407,
+       "y": 235,
+       "w": 150,
+       "h": 207
+      },
+      "shows": [
+       {
+        "name": "LIEVE FASTIDIO",
+        "author": "devAlice",
+        "void": false
+       },
+       {
+        "name": "Ago Marcio e Spezzato",
+        "author": "ComPlayer_9929",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 26,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 74,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 15,
+       "discard": "PAZIENZA: FINITA"
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 114,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 339,
+       "y": 553,
+       "w": 225,
+       "h": 310
+      },
+      "item": {
+       "x": 159,
+       "y": 311,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 339,
+       "y": 635,
+       "w": 217,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9929",
+       "person": {
+        "x": 874,
+        "y": 201,
+        "w": 180,
+        "h": 248
+       },
+       "item": {
+        "x": 1029,
+        "y": 216,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 683,
+        "y": 171,
+        "w": 188,
+        "h": 73
+       },
+       "back": {
+        "w": 48,
+        "h": 67
+       }
+      }
+     ],
+     "free": {
+      "x": 1212,
+      "y": 264,
+      "w": 247,
+      "h": 412,
+      "share": 0.097
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.609
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9929-imm-TOXICITY",
+       "kind": "status",
+       "w": 49,
+       "h": 29
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 82,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "turn": 0,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 363,
+      "y": 313,
+      "w": 427,
+      "h": 310
+     },
+     "target": {
+      "x": 339,
+      "y": 553,
+      "w": 247,
+      "h": 341
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_9929",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 751,
+      "y": 260,
+      "w": 546,
+      "h": 397
+     },
+     "target": {
+      "x": 874,
+      "y": 201,
+      "w": 225,
+      "h": 310
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 363,
+      "y": 313,
+      "w": 427,
+      "h": 310
+     },
+     "target": {
+      "x": 339,
+      "y": 553,
+      "w": 247,
+      "h": 341
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_9929",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 751,
+      "y": 212,
+      "w": 546,
+      "h": 397
+     },
+     "target": {
+      "x": 339,
+      "y": 553,
+      "w": 247,
+      "h": 341
+     },
+     "overPiles": false
+    }
+   ],
+   "perf": [
+    {
+     "turn": 0,
+     "intervals": 1107,
+     "p95": 8.4,
+     "max": 55.5,
+     "within": 0.998,
+     "limit": 20,
+     "inputMax": 21.1,
+     "inputs": 11
+    },
+    {
+     "turn": 1,
+     "intervals": 1148,
+     "p95": 8.5,
+     "max": 28.7,
+     "within": 0.999,
+     "limit": 20,
+     "inputMax": 12,
+     "inputs": 11
+    }
+   ]
+  },
+  "ffa": {
+   "ffa": true,
+   "turns": [
+    {
+     "turn": 0,
+     "scale": {
+      "me": 1.5,
+      "others": 1,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 656,
+       "y": 322,
+       "w": 183,
+       "h": 203
+      },
+      "card": {
+       "x": 605,
+       "y": 276,
+       "w": 82,
+       "h": 113
+      },
+      "shows": []
+     },
+     "piles": {
+      "deck": {
+       "x": 430,
+       "y": 583,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 430,
+       "y": 646,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 98,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 314,
+       "y": 553,
+       "w": 175,
+       "h": 242
+      },
+      "item": {
+       "x": 502,
+       "y": 567,
+       "w": 89,
+       "h": 123
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 314,
+       "y": 613,
+       "w": 167,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_241",
+       "person": {
+        "x": 328,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 439,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 186,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4169",
+       "person": {
+        "x": 847,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 958,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 706,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_3286",
+       "person": {
+        "x": 222,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 333,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 81,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_5361",
+       "person": {
+        "x": 984,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 1094,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 842,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      }
+     ],
+     "free": {
+      "x": 1134,
+      "y": 102,
+      "w": 264,
+      "h": 203,
+      "share": 0.051
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.537
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_3286-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      },
+      {
+       "id": "status-devAlice-imm-TOXICITY",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1311,
+       "y": 35,
+       "w": 79,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 1,
+     "scale": {
+      "me": 1.5,
+      "others": 1,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 656,
+       "y": 322,
+       "w": 183,
+       "h": 203
+      },
+      "card": {
+       "x": 605,
+       "y": 276,
+       "w": 82,
+       "h": 113
+      },
+      "shows": [
+       {
+        "name": "GENTILE IL TUO CAREZZO",
+        "author": "ComPlayer_241",
+        "void": false
+       },
+       {
+        "name": "FAI BASTA",
+        "author": "ComPlayer_4169",
+        "void": false
+       },
+       {
+        "name": "Desiderio Incontrollabile",
+        "author": "devAlice",
+        "void": false
+       },
+       {
+        "name": "Metabolismo Corrotto",
+        "author": "ComPlayer_3286",
+        "void": true
+       },
+       {
+        "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+        "author": "ComPlayer_5361",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 430,
+       "y": 583,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 430,
+       "y": 646,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 98,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 314,
+       "y": 553,
+       "w": 175,
+       "h": 242
+      },
+      "item": {
+       "x": 502,
+       "y": 567,
+       "w": 89,
+       "h": 123
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 314,
+       "y": 613,
+       "w": 167,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_241",
+       "person": {
+        "x": 328,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 439,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 186,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4169",
+       "person": {
+        "x": 847,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 958,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 706,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_3286",
+       "person": {
+        "x": 222,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 333,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 81,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_5361",
+       "person": {
+        "x": 984,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 1094,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 842,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      }
+     ],
+     "free": {
+      "x": 1134,
+      "y": 102,
+      "w": 264,
+      "h": 203,
+      "share": 0.051
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.485
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_3286-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      },
+      {
+       "id": "status-devAlice-imm-TOXICITY",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 81,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 2,
+     "scale": {
+      "me": 1.5,
+      "others": 1,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 656,
+       "y": 322,
+       "w": 183,
+       "h": 203
+      },
+      "card": {
+       "x": 605,
+       "y": 276,
+       "w": 82,
+       "h": 113
+      },
+      "shows": [
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "author": "ComPlayer_241",
+        "void": false
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "author": "ComPlayer_5361",
+        "void": false
+       },
+       {
+        "name": "PERMESSO SCUSA ORA SMETTI ",
+        "author": "ComPlayer_4169",
+        "void": false
+       },
+       {
+        "name": "Desiderio Incontrollabile",
+        "author": "devAlice",
+        "void": false
+       },
+       {
+        "name": "Scatto Repentino",
+        "author": "ComPlayer_3286",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 430,
+       "y": 583,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 430,
+       "y": 646,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 98,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 314,
+       "y": 553,
+       "w": 175,
+       "h": 242
+      },
+      "item": {
+       "x": 502,
+       "y": 567,
+       "w": 89,
+       "h": 123
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 314,
+       "y": 613,
+       "w": 167,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_241",
+       "person": {
+        "x": 328,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 439,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 186,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4169",
+       "person": {
+        "x": 847,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 958,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 706,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_3286",
+       "person": {
+        "x": 222,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 333,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 81,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_5361",
+       "person": {
+        "x": 984,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 1094,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 842,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      }
+     ],
+     "free": {
+      "x": 1134,
+      "y": 102,
+      "w": 264,
+      "h": 203,
+      "share": 0.051
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.485
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_3286-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      },
+      {
+       "id": "status-devAlice-imm-TOXICITY",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      },
+      {
+       "id": "status-devAlice-st-0",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 82,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "turn": 0,
+     "author": "ComPlayer_241",
+     "placed": "middle",
+     "scale": 1.5,
+     "box": {
+      "x": 588,
+      "y": 295,
+      "w": 333,
+      "h": 242
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_4169",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 680,
+      "y": 135,
+      "w": 355,
+      "h": 258
+     },
+     "target": {
+      "x": 222,
+      "y": 330,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 412,
+      "y": 543,
+      "w": 333,
+      "h": 242
+     },
+     "target": {
+      "x": 314,
+      "y": 553,
+      "w": 193,
+      "h": 266
+     },
+     "overPiles": true
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_3286",
+     "placed": "middle",
+     "scale": 1.2,
+     "box": {
+      "x": 627,
+      "y": 319,
+      "w": 266,
+      "h": 193
+     },
+     "target": {
+      "x": 222,
+      "y": 330,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_5361",
+     "placed": "middle",
+     "scale": 1.25,
+     "box": {
+      "x": 641,
+      "y": 315,
+      "w": 277,
+      "h": 202
+     },
+     "target": {
+      "x": 222,
+      "y": 330,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_241",
+     "placed": "middle",
+     "scale": 1.5,
+     "box": {
+      "x": 588,
+      "y": 295,
+      "w": 333,
+      "h": 242
+     },
+     "target": {
+      "x": 314,
+      "y": 553,
+      "w": 193,
+      "h": 266
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_5361",
+     "placed": "middle",
+     "scale": 1.25,
+     "box": {
+      "x": 641,
+      "y": 315,
+      "w": 277,
+      "h": 202
+     },
+     "target": {
+      "x": 847,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_4169",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 680,
+      "y": 135,
+      "w": 355,
+      "h": 258
+     },
+     "target": {
+      "x": 314,
+      "y": 553,
+      "w": 193,
+      "h": 266
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 412,
+      "y": 543,
+      "w": 333,
+      "h": 242
+     },
+     "target": {
+      "x": 314,
+      "y": 553,
+      "w": 193,
+      "h": 266
+     },
+     "overPiles": true
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_3286",
+     "placed": "middle",
+     "scale": 1.2,
+     "box": {
+      "x": 627,
+      "y": 319,
+      "w": 266,
+      "h": 193
+     },
+     "target": {
+      "x": 984,
+      "y": 330,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    }
+   ],
+   "perf": [
+    {
+     "turn": 0,
+     "intervals": 2077,
+     "p95": 8.5,
+     "max": 115.2,
+     "within": 0.995,
+     "limit": 20,
+     "inputMax": 36.2,
+     "inputs": 5
+    },
+    {
+     "turn": 1,
+     "intervals": 2089,
+     "p95": 8.5,
+     "max": 101.6,
+     "within": 0.998,
+     "limit": 20,
+     "inputMax": 23,
+     "inputs": 5
+    }
+   ]
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "problems": []
+}

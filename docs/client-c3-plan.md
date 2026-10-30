@@ -14,7 +14,9 @@ alla carta successiva): vedi [decisioni](#decisioni-del-proprietario). **Dopo la
 proprietario su C3-4** (30 ottobre 2026) si aggiunge D13 (regia per ogni carta: costo, primi
 piani di chi gioca e del bersaglio, volo, variazioni) e D10 diventa un **tetto di 20 s**. Le
 modifiche di regole e catalogo (A1, eventualmente A2) sono attività separate che partono dal
-regolamento.
+regolamento. **Dopo il feedback del proprietario del 30 ottobre 2026** (centro del tavolo vuoto, tutto un po'
+piccolo, personaggio proprio grande quanto gli altri) si aggiunge il blocco **C3-L** (scala e spazio del tavolo),
+fra C3-4r e C3-6, con la decisione D14; ordine dei blocchi restanti: C3-L, C3-6, C3-5, C3-7.
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -166,11 +168,13 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-2 | Sequenza affidabile: K1–K5 e riepilogo statico — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-2--sequenza-affidabile)) | C3-1 |
 | C3-3 | O6, frecce verso i bersagli ammessi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi)) | — |
 | C3-4 | Sequenza del round con i soli dati certi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)); **revisione C3-4r** (regia D13) fatta lo stesso giorno ([rapporto](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario)) | C3-2 |
-| C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
+| C3-L | Scala e uso dello spazio del tavolo — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)) | C3-4 |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili | C3-2 |
+| C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
 | C3-7 | Consolidamento e giudizio del proprietario | tutti |
 
-C3-3 è indipendente e può andare in qualunque punto; C3-6 può precedere C3-4. Se A1
+C3-3 è indipendente e può andare in qualunque punto; C3-6 può precedere C3-4. Dal 30 ottobre 2026 l'ordine
+dei blocchi restanti è C3-L, C3-6, C3-5, C3-7 (proprietario). Se A1
 non è approvata o non è pronta, C3-5 ripiega sugli impatti per ruolo R07a (D2) e lo
 dichiara.
 
@@ -341,6 +345,35 @@ volo e impatto → primo piano del bersaglio → variazioni; tetto del round 20 
 riepilogo statico piccolo con lettere resta a C3-6. Esito nel
 [rapporto](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario).
 
+### C3-L — Scala e uso dello spazio del tavolo
+
+**Fatto il 30 ottobre 2026** ([rapporto](reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo), verifica
+`VerifyLayout`). Nato dal feedback del proprietario del 30 ottobre 2026: il centro del tavolo è quasi sempre vuoto;
+risorse, personaggi e oggetti di tutti sono un po' piccoli; il proprio personaggio è grande quanto gli altri. È
+geometria, non arte: sfondo, cornici, simboli e texture restano a C4 (O2, O8, O10).
+
+**Perimetro.** Misura dello stato di partenza su partite reali, proposta con numeri e catture, scelta del
+proprietario (D14), poi: funzioni pure in `readability.ts` (fattori di scala con ordine di cessione, controllo della
+disposizione, posto delle carte del round e delle pile, primi piani adattati) con test in unità per duello e FFA a
+cinque alle due misure; `scene.ts` e `table.tsx` solo per applicare la geometria (disegno di cascata e pile, carte
+che si posano al centro, plance proporzionali, esposizione per la verifica); nuova verifica `VerifyLayout`.
+
+**Vincoli.** La FFA conserva quattro mani coperte e gli oggetti come carte presso le postazioni; primi piani di
+C3-4r, frecce di C3-3 e striscia di C3-2 continuano a funzionare senza sovrapposizioni; nessun posto esce dallo
+schermo; mano utilizzabile al tocco (passo ≥ 44 px); il riepilogo breve di C3-2 si ridimensiona in C3-6.
+
+**Completamento verificabile (partite reali, entrambe le misure).** Personaggio proprio più grande degli altri;
+fattori di D14 raggiunti secondo la priorità; centro usato come deciso; nessuna sovrapposizione fra posti, mano,
+frecce, primi piani, striscia e clock; nessun elemento fuori schermo; peso e cadenza dei frame entro budget; tutte
+le verifiche di C3 verdi sulla build finale.
+
+**Osservazioni registrate, non fatte:**
+- 750×292 (minimo iPhone) non entra, come già prima del blocco: a C4, con mano e FFA.
+- Carte del round piccole a 844×390 (36–40 px di larghezza in partita, 30 px in FFA con tre oggetti per posto): per leggerle serve «Ultimo turno»; un tocco per
+  ispezionarle è un'idea per C3-6 o C4.
+- In FFA gli altri personaggi restano ×1: due file di avversari con le mani coperte e la mano non lasciano spazio
+  (844×390), i primi piani dei posti centrali (1366×768).
+
 ### C3-5 — Effetti per tipo di danno ed enfasi (O7)
 
 **Perimetro.** Impatti diversi per **colpo, taglio e veleno** dal campo descrittivo
@@ -460,6 +493,7 @@ la prova di C3-2; D13 e D10 a 20 s dopo la prova di C3-4 (30 ottobre 2026).
 | D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. **Portata a 10 s** dal proprietario il 29 ottobre 2026, nella revisione di C3-2 (una carta per volta, D12): con cinque mosse in FFA ogni carta mantiene il ritmo del duello. **Rivista dopo la prova di C3-4 (30 ottobre 2026): tetto di 20 s**, anche in FFA con cinque mosse; il tetto non è la durata tipica. Il clock della mossa resta 30 s (regolamento 1.9). Misurato nella revisione C3-4r (D13) su partite reali: duello 7,0–8,6 s; FFA a cinque con cinque mosse 15,2–18,2 s; fra umani (FFA con due umani e tre computer, cinque mosse in ogni round) restano **12–15 s** di clock a fine sequenza, mai meno di 10 s: nessun segnale per A2 da questo dato. |
 | D12 | Avanzamento fra le carte (dopo la prova di C3-2) | automatico, un tocco passa alla carta successiva / manuale solo contro computer / manuale sempre | **Automatico, un tocco accelera** — scelta del proprietario il 29 ottobre 2026. Una carta per volta, più lenta, entro D10; un tocco o tasto sul tavolo passa alla carta successiva, scegliere una carta della mano chiude la sequenza, «Salta effetti» chiude; regola 4 invariata nella sostanza (nessun blocco, nessun Continue). |
 | D13 | Regia di ogni carta (dopo la prova di C3-4) | — (decisione del proprietario) | **Ordine fisso per ogni carta, sempre, duello contro computer compreso:** costo (chi muove paga gettoni ed eventuale scarto prima di tutto) → primo piano di chi gioca (personaggio ingrandito in una parte libera del tavolo, con accanto la carta, circa un secondo) → ritorno al posto → volo e impatto come prima → primo piano del bersaglio (un po' più grande, circa mezzo secondo) → variazioni di quella carta. Il tocco o tasto sul tavolo passa al passo successivo (D12), una carta della mano e «Salta effetti» chiudono, nessun blocco di invio né del clock. Decisa dal proprietario il 30 ottobre 2026. Il costo di ogni carta si mostra prima di lei, mentre il server paga tutti i costi prima degli effetti (R04): presentazione, non regola; i passi conservano la variazione e finiscono sulla vista. **Osservazione per dopo (C4/C5), non fatta:** una versione velocizzata della sequenza, attivabile dall'utente. |
+| D14 (C3-L) | Scala e uso del centro del tavolo | (a) centro: mazzo e scarti / turno e clock / nulla; (b) fattori B1 prudente / B2 marcato / B3 massimo; (c) priorità quando lo spazio non basta | Scelte del proprietario del 30 ottobre 2026: **B2** (personaggio proprio ×1,5, altri ×1,2, oggetti ×1, risorse ×1,25) con priorità **personaggio proprio, risorse, altri, oggetti** (cedono prima gli oggetti); al centro prima **mazzo e scarti propri**, poi, **cambiato in corsa dal proprietario** durante il blocco: al centro le **carte giocate nell'ultimo round**, impilate in ordine di risoluzione (le prime sotto) **a cascata leggera** con l'autore accanto, e **mazzo e scarti propri piccoli accanto al proprio posto** (ogni giocatore ha la sua pila degli scarti: oggi non è rilevante distinguerli, potrà esserlo con il set base). 750×292 solo registrato, per C4. |
 | D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. Confermata. |
 
 ## Cosa non è in C3

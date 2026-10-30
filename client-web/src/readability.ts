@@ -75,43 +75,125 @@ export function chipsOf(owner:string,c:Character):Chip[]{
 export type Box={x:number;y:number;w:number;h:number};
 /** `backs` is the slot of the covered hand: `back` cards fanned inside it (see fan). */
 export type SeatLayout={id:string;me:boolean;person:Box;items:Box[];backs:Box;back:{w:number;h:number;turn:number};board:Box;status:Box;summary:Box};
-export type TableLayout={compact:boolean;hand:{w:number;h:number;step:number;center:number;y:number;lift:number;zoom:number};preview:{x:number;y:number;w:number;h:number};seats:SeatLayout[]};
-const ME={x:.19,y:.70},DUEL=[{x:.56,y:.25}],FFA=[{x:.24,y:.19},{x:.66,y:.19},{x:.15,y:.43},{x:.72,y:.43}];
-export function tableLayout(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>={}):TableLayout{
- const compact=h<550,ffa=ids.length>2;
+/** C3-L: own deck and own discard pile, small, beside the own character (each player has their own, R02). */
+export type Piles={deck:Box;discard:Box};
+/** C3-L: the cards of the last resolved round in the middle of the table, a light cascade in resolution order: slot 0 (the first
+ * resolved) at the bottom of the pile and highest, each next one a title strip lower and drawn over it. One slot per seat. */
+export type Played={box:Box;slots:Box[];
+ /** The author of each slot, in a column right of the cascade, level with that card's title strip. */
+ tags:Box[]};
+export type TableLayout={compact:boolean;scale:Scale;hand:{w:number;h:number;step:number;center:number;y:number;lift:number;zoom:number};preview:{x:number;y:number;w:number;h:number};seats:SeatLayout[];played:Played|null;piles:Piles|null};
+/** C3-L (owner, 30 October 2026): the own character larger than the others, resources larger, the middle of the table used for
+ * the cards of the last round. Factors on the C2 sizes; when the table has no room they give way in `YIELD` order (objects first,
+ * then the others, then the resources, the own character last), 0.05 at a time down to 1. */
+export type Scale={me:number;others:number;items:number;resources:number};
+export const SCALE:Scale={me:1.5,others:1.2,items:1,resources:1.25};
+export const YIELD:(keyof Scale)[]=['items','others','resources','me'];
+/** HTML over the table (table.tsx, style.css): the «Scegli…» hint at the bottom left, one line, and the clock, turn and menu at the top
+ * right, with room for a clock. Seats stay clear of both. */
+export function shellBoxes(w:number,h:number,compact:boolean):{hint:Box;top:Box}{
+ return compact?{hint:{x:10+70,y:h-8-15,w:140,h:30},top:{x:w-8-75,y:6+23,w:150,h:46}}:{hint:{x:14+115,y:h-12-19,w:230,h:38},top:{x:w-16-95,y:12+23,w:190,h:46}};}
+/** D13 close-up range: the own character is already the largest on the table, so its close-up may keep its size. */
+export const closeUpRange=(own:boolean)=>own?{min:1,max:1.3}:{};
+/** D13 target close-up: smaller for the own character, already large. */
+export const targetScale=(own:boolean)=>own?1.1:1.25;
+export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>,s:Scale):TableLayout{
+ const compact=h<550,ffa=ids.length>2,shell=shellBoxes(w,h,compact);
  const hw=compact?120:Math.min(214,h*.28),hh=hw*1.38;
  const hand={w:hw,h:hh,step:hw*(compact?.6:.62),center:w*.63,y:h-hh*.5-6,lift:compact?18:30,zoom:compact?1.2:1.12};
- const pw=compact?(ffa?60:80):Math.min(150,h*.195)*(ffa?.78:1),ph=pw*1.38,iw=pw*.76,ih=iw*1.38;
- const others=ids.filter(id=>id!==me),handTop=hand.y-hh/2,sh=compact?18:24;
+ const base=compact?(ffa?60:80):Math.min(150,h*.195)*(ffa?.78:1),iw=base*.76*s.items,ih=iw*1.38;
+ const others=ids.filter(id=>id!==me),mh=compact?14:20;
+ // Own deck and discard pile: two small cards. FFA: one above the other right of the own character, at its foot, the own objects after
+ // them (narrow, so the hand keeps its step).
+ // Duel: in the row of own objects above the seat, before them (desktop) or after room for three (compact: the middle stays to the
+ // round's cards and the own character keeps its size); the hand does not move.
+ const kw=compact?26:40,kh=kw*1.38,kg=compact?6:8,kspan=2*kw+kg+8,kffa=kw+8;
  const seats=ids.map(id=>{
-  const own=id===me,spot=own?ME:(ffa?FFA:DUEL)[others.indexOf(id)]??{x:.5,y:.3};
-  const x=w*spot.x,y=h*spot.y,person={x,y,w:pw,h:ph},n=Math.max(1,itemCounts[id]??1);
-  // Duel: own objects sit up and to the right of the character, leaving the lower band to the hand.
-  // FFA: the middle row needs that space, so own objects stay beside the character and the fan
-  // starts after them. Opponents' objects follow their character; in FFA they overlap a little.
-  const gap=ffa?iw*.75:iw+6,ownY=ffa?y+ph*.06:Math.min(y-ph*.34,handTop-ih/2-8);
-  const items=Array.from({length:n},(_,i)=>({x:x+pw*.5+iw*.5+8+i*gap,y:own?ownY:y+ph*.06,w:iw,h:ih}));
-  const bw=compact?(ffa?18:24):(ffa?30:40),side=ffa&&!own&&others.indexOf(id)>=2,left=side&&spot.x<.5;
+  const own=id===me,k=others.indexOf(id),f=own?s.me:s.others,pw=base*f,ph=pw*1.38,n=Math.max(1,itemCounts[id]??1);
+  const bwid=(own?(compact?110:170):(compact?(ffa?84:100):(ffa?120:150)))*s.resources,bh=(own?(compact?92:150):(compact?40:58))*s.resources;
   // FFA fans turn less: four of them share the table (a decoration reduced, never a card removed).
-  const back={w:bw,h:bw*1.4,turn:ffa?.05:FAN.turn},full=bw*(1+7*FAN.step);
-  const bwid=own?(compact?110:170):(compact?(ffa?84:100):(ffa?120:150)),bh=own?(compact?92:150):(compact?40:58);
+  const bw=(compact?(ffa?18:24):(ffa?30:40))*Math.min(s.others,1.25),back={w:bw,h:bw*1.4,turn:ffa?.05:FAN.turn},full=bw*(1+7*FAN.step);
+  // Own seat: the board on the left edge, the character beside it, its foot just above the hint. Opponents: the covered hand above
+  // the character; in the FFA two rows, the left seats against the left edge, the right middle seat with its objects inside the screen.
+  let x:number,y:number;
+  if(own){x=6+bwid+8+pw/2;y=Math.min(h*.72,shell.hint.y-shell.hint.h/2-6-ph/2);}
+  else if(!ffa){x=w*(compact?.56:.64);y=Math.max(h*.25,4+back.h+6+ph/2);}
+  else{const top=Math.max(h*.19,4+back.h+4+ph/2),middle=Math.max(h*.43,top+ph+(compact?6:10)),flush=6+bwid+8+pw/2,reach=pw/2+8+iw+2*iw*.75;
+   x=k===0?Math.max(w*.24,flush):k===1?w*.62:k===2?flush:Math.min(w*.72,w-6-reach);y=k<2?top:middle;}
+  const person={x,y,w:pw,h:ph};
+  // Duel (C3-L): own objects in a row above the own seat (with the own piles), leaving the middle of the table to the round's cards and the
+  // lower band to the hand. FFA: the middle row needs that space, so own objects stay beside the character and the fan
+  // starts after them. Opponents' objects follow their character; in FFA they overlap a little.
+  const gap=ffa?iw*.75:iw+6,above=!ffa&&own;
+  const items=Array.from({length:n},(_,i)=>above?{x:6+(compact?0:kspan)+iw/2+i*gap,y:Math.min(y-ph/2,y-bh/2-mh-3)-ih/2-8,w:iw,h:ih}:{x:x+pw*.5+iw*.5+8+(own&&ffa?kffa:0)+i*gap,y:y+ph*.06,w:iw,h:ih});
+  const side=ffa&&!own&&k>=2,left=side&&x<w/2;
   const board={x:x-pw*.5-8-bwid*.5,y:own?y:y-ph*.12,w:bwid,h:bh};
-  // Statuses: a chip row on the lower art of the character card, so no seat needs more room.
-  const status={x,y:y+ph/2-ph*.17-sh/2-2,w:pw-8,h:sh};
+  // Statuses: a chip row on the lower art of the character card, so no seat needs more room; it grows with the character.
+  const sh=(compact?18:24)*Math.min(f,1.5),status={x,y:y+ph/2-ph*.17-sh/2-2,w:pw-8,h:sh};
   // Covered hands, room for eight backs: above the seat; for the FFA side seats under the board on the left,
   // above the objects on the right (beside the character, never over it). The step shrinks to fit the slot.
   const span=[items[0].x-iw/2,items[n-1].x+iw/2],right=Math.max((span[0]+span[1])/2-full/2,x+pw/2+4);
   const backs=side?(left?{x:(x-pw/2)/2,y:board.y+bh/2+bw,w:x-pw/2-12,h:back.h}:{x:right+full/2,y:items[0].y-ih/2-back.h/2-3,w:full,h:back.h}):{x,y:y-ph*.5-bw*.75-(ffa?3:0),w:full,h:back.h};
   // C3-2: static round summary in a strip as wide as the board, above it for the own seat and where the covered
-  // hand lies under the board (left FFA seat), below it otherwise.
-  const mh=compact?14:20,above=own||backs.y>board.y,summary={x:board.x,y:above?board.y-bh/2-mh/2-3:board.y+bh/2+mh/2+3,w:bwid,h:mh};
+  // hand lies under the board (left FFA seat), below it otherwise; in the duel above it when the covered hand leaves room.
+  const strip={x:board.x,y:board.y-bh/2-mh/2-3,w:bwid,h:mh},room=!ffa&&!own&&strip.y-mh/2>=0&&overlap(strip,fan(backs,back,8).box)===0;
+  const summary=own||backs.y>board.y||room?strip:{...strip,y:board.y+bh/2+mh/2+3};
   return {id,me:own,person,items,backs,back,board,status,summary};
  });
- if(ffa){const mine=seats.find(s=>s.me)!,from=Math.max(...mine.items.map(b=>b.x+b.w/2))+10,room=w-8-from;
-  hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}
+ const mine=seats.find(x=>x.me);
+ if(mine&&ffa){const from=Math.max(...mine.items.map(b=>b.x+b.w/2))+10,room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}
+ else if(mine){const from=Math.max(mine.person.x+mine.person.w/2,mine.board.x+mine.board.w/2)+10;
+  if(hand.center-(hw+5*hand.step)/2<from){const room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}}
  const pv=compact?{w:70,h:97}:{w:120,h:166};
- return {compact,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats};
+ const L:TableLayout={compact,scale:s,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats,played:null,piles:null};
+ if(mine){const row=mine.items[0],x=ffa?mine.person.x+mine.person.w/2+8+kw/2:compact?6+3*(iw+6)+kw/2:6+kw/2,y=ffa?mine.person.y+mine.person.h/2-kh/2:row.y+row.h/2-kh/2;L.piles=ffa?{deck:{x,y:y-kh-kg,w:kw,h:kh},discard:{x,y,w:kw,h:kh}}:{deck:{x,y,w:kw,h:kh},discard:{x:x+kw+kg,y,w:kw,h:kh}};}
+ // A raised hand card (hover, focus) does not reach the round's cards.
+ const raised={x:hand.center,y:hand.y-hand.lift/2,w:hw+6*hand.step,h:hh+hand.lift},avoid=[...tableBoxes(L,w,h),raised,...(L.piles?[L.piles.deck,L.piles.discard]:[])];
+ // The round's cards: the largest card (from the size of a character down to half of it) whose cascade of one card per seat, with the
+ // column of authors on its right, finds a
+ // free place near the middle of the table; each next card a title strip (20% of the card) lower and a little to the right.
+ for(const k of [1,.9,.8,.7,.6,.5]){const cw=base*k,ch=cw*1.38,dy=ch*.2,dx=cw*.06,n=ids.length,tw=compact?42:78,th=Math.min(dy-2,compact?14:20),size={w:cw+(n-1)*dx+4+tw,h:ch+(n-1)*dy};
+  const spot=freeSpot(size,{w,h},avoid,{x:w*.5,y:h*.42},compact?8:12);
+  if(spot&&Math.hypot(spot.x-w*.5,spot.y-h*.42)<=Math.min(w,h)*.4){const left=spot.x-size.w/2,top=spot.y-size.h/2;
+   L.played={box:spot,slots:Array.from({length:n},(_,i)=>({x:left+cw/2+i*dx,y:top+ch/2+i*dy,w:cw,h:ch})),tags:Array.from({length:n},(_,i)=>({x:left+size.w-tw/2,y:top+i*dy+dy/2,w:tw,h:th}))};break;}}
+ return L;
 }
+/** Everything drawn on the table but the round's cards and the piles: the seven-card hand, the shell, every seat with its strip and a fan of eight backs. */
+export function tableBoxes(l:TableLayout,w:number,h:number):Box[]{const H=l.hand,shell=shellBoxes(w,h,l.compact);
+ const out:Box[]=[{x:H.center,y:H.y,w:H.w+6*H.step,h:H.h},shell.hint,shell.top];
+ for(const s of l.seats){out.push(s.person,s.board,s.summary,...s.items);if(!s.me)out.push(fan(s.backs,s.back,8).box);}return out;}
+/** The place nearest `mid` for a box of `size` with `pad` around it, clear of `avoid` and inside the screen. */
+export function freeSpot(size:{w:number;h:number},screen:{w:number;h:number},avoid:Box[],mid:Pt,pad:number,step=8):Box|null{
+ let best:Box|null=null,dist=Infinity;
+ for(let y=size.h/2+pad;y<=screen.h-size.h/2-pad;y+=step)for(let x=size.w/2+pad;x<=screen.w-size.w/2-pad;x+=step){
+  const d=Math.hypot(x-mid.x,y-mid.y);if(d>=dist)continue;const b={x,y,w:size.w+2*pad,h:size.h+2*pad};if(avoid.some(a=>overlap(b,a)>0))continue;best={x,y,...size};dist=d;}
+ return best;}
+/** Why a layout does not fit: anything off the screen, a seat over another seat, a covered hand, the hand, the shell, the round's
+ * cards or the piles, a hand step under 44 px, no place for the round's cards or the piles near their spot, a close-up (D13) without a free place in the middle. Empty when it fits. */
+export function layoutProblems(l:TableLayout,w:number,h:number,closeUpStep=12,strict=false):string[]{
+ const bad:string[]=[],H=l.hand,hand:Box={x:H.center,y:H.y,w:H.w+6*H.step,h:H.h},shell=shellBoxes(w,h,l.compact);
+ if(!inside(hand,w,h))bad.push('hand off screen');if(H.step<44)bad.push('hand step');if(!l.played)bad.push('no round cards');if(!l.piles)bad.push('no piles');
+ for(const s of l.seats){const own=[s.person,s.board,s.summary,...s.items];
+  for(const b of [...own,s.backs])if(!inside(b,w,h))bad.push(`${s.id} off screen`);
+  for(const b of own)for(const o of [hand,shell.hint,shell.top,...(l.played?[l.played.box]:[]),...(l.piles?[l.piles.deck,l.piles.discard]:[])])if(overlap(b,o)>0)bad.push(`${s.id} over hand, shell, round cards or piles`);
+  for(const o of l.seats)if(o!==s){for(const a of own){for(const b of [o.person,o.board,o.summary,...o.items])if(overlap(a,b)>0)bad.push(`${s.id}/${o.id}`);if(!o.me&&overlap(a,fan(o.backs,o.back,8).box)>0)bad.push(`${s.id}/backs of ${o.id}`);}}}
+ const hb=Array.from({length:7},(_,i)=>({x:H.center+(i-3)*H.step,y:H.y-H.lift/2,w:H.w*H.zoom,h:H.h+H.lift}));
+ // C3-3 arrows from the raised card in the middle of the hand to every character and object keep clear of the ✓ and × buttons (what the
+ // scene avoids); in the duel none starts on its target. `strict`: in the duel clear of the whole confirmation (the C3-3 unit criterion,
+ // with three objects per seat, as fitScale arranges the table).
+ const ffa=l.seats.length>2,src={x:H.center,y:H.y-H.lift,w:H.w*H.zoom,h:H.h*H.zoom},aims:AimTarget[]=l.seats.flatMap(s=>[{id:`person-${s.id}`,owner:s.id,kind:'person' as const,box:s.person},{id:`item-${s.id}`,owner:s.id,kind:'item' as const,box:s.items[s.items.length-1]}]);
+ for(const a of aimArrows(src,aims,{w,h},{avoid:[strict&&!ffa?confirmBox(l.preview,w,l.compact):confirmButtons(l.preview,w,l.compact)],head:l.compact?20:30}))if((a.crosses&&!a.reached)||(!ffa&&a.reached))bad.push(`arrow to ${a.id}`);
+ for(const s of l.seats){const t=targetOf(s,{w,h},l.seats.filter(o=>o!==s).map(o=>o.person));if(l.seats.some(o=>o!==s&&overlap(t,o.person)>0))bad.push(`${s.id} target close-up`);}
+ for(const s of l.seats)if(closeUp(s.person,{w,h},[...l.seats.filter(x=>x!==s).flatMap(seatBoxes),...hb],{...closeUpRange(s.me),step:closeUpStep}).placed!=='middle')bad.push(`${s.id} close-up`);
+ return [...new Set(bad)];}
+// The factors depend only on the screen and the number of seats (three objects per seat, the worst case kept apart): fitted once.
+const fitted=new Map<string,Scale>();
+export function fitScale(w:number,h:number,seats:number):Scale{const key=`${w}x${h}:${seats}`,known=fitted.get(key);if(known)return known;
+ const ids=['me','b','c','d','e'].slice(0,seats),items=Object.fromEntries(ids.map(i=>[i,3])),s={...SCALE};
+ for(;;){if(!layoutProblems(arrange(w,h,ids,'me',items,s),w,h,12,true).length)break;const k=YIELD.find(k=>s[k]>1);if(!k)break;s[k]=Math.max(1,Math.round((s[k]-.05)*100)/100);}
+ fitted.set(key,s);return s;}
+export function tableLayout(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>={}):TableLayout{
+ return arrange(w,h,ids,me,itemCounts,fitScale(w,h,ids.length));}
 /** K7: in the FFA each object of a seat is partly covered by the next one; only the last is whole. */
 export const coveredItems=(items:Box[])=>items.map((a,i)=>items.slice(i+1).some(b=>overlap(a,b)>0));
 /** K7: a touch has no hover, so its first tap only raises a covered object; the next tap acts on it. */
@@ -230,6 +312,19 @@ export function closeUp(person:Box,screen:{w:number;h:number},avoid:Box[],o:{max
  if(nearest)return nearest;
  const c=shape(min,person.x,person.y),bx=Math.max(c.box.w/2+m,Math.min(screen.w-c.box.w/2-m,c.box.x+c.box.w/2-c.person.w/2)),by=Math.max(c.box.h/2+m,Math.min(screen.h-c.box.h/2-m,c.box.y));
  return {...shape(min,bx,by),placed:'seat'};}
-/** D13: the target comes forward a little in its own seat, kept on the screen. */
-export function targetUp(person:Box,screen:{w:number;h:number},scale=1.25,m=4):Box{const w=person.w*scale,h=person.h*scale;
- return {x:Math.max(w/2+m,Math.min(screen.w-w/2-m,person.x)),y:Math.max(h/2+m,Math.min(screen.h-h/2-m,person.y)),w,h};}
+/** D13: the target comes forward a little in its own seat, kept on the screen. `down` keeps its top edge (C3-L: the own character,
+ * at the foot of the table, grows towards the edge of the screen and not over the seats above it). */
+export function targetUp(person:Box,screen:{w:number;h:number},scale=1.25,m=4,grow:'both'|'down'|'up'='both'):Box{const w=person.w*scale,h=person.h*scale,d=(h-person.h)/2,y=person.y+(grow==='down'?d:grow==='up'?-d:0);
+ return {x:Math.max(w/2+m,Math.min(screen.w-w/2-m,person.x)),y:Math.max(h/2+m,Math.min(screen.h-h/2-m,y)),w,h};}
+/** D13 target close-up of a seat, as the scene draws it (C3-L): smaller for the own character; it grows around its centre, or else
+ * from its top or bottom edge, the first way that stays clear of the other characters (`others`). */
+export function targetOf(s:{me:boolean;person:Box},screen:{w:number;h:number},others:Box[]=[]):Box{
+ const ways=(['both','down','up'] as const).map(g=>targetUp(s.person,screen,targetScale(s.me),4,g));return ways.find(t=>!others.some(o=>overlap(t,o)>0))??ways[0];}
+
+/** C3-L: the card on top of the own discard pile after the last resolved round of the view, or null when that round put nothing there.
+ * R02: a regular or last-resort card goes to the discard after use, voided or not; basic and bound stay in hand; a bound discards its
+ * extra card first, unless voided (R04). `cards` knows the subtype of the played card; an unknown name counts as regular. */
+export function discardTop(moves:{playerId:string;playedCardName:string;void?:boolean;choices?:Record<string,string>|null}[],me:string,cards:Card[]):string|null{
+ const m=moves.find(x=>x.playerId===me);if(!m)return null;const c=cards.find(x=>x.name===m.playedCardName);
+ if(c&&(c.basicAction||c.characterBound))return !m.void&&m.choices?.DISCARD_ONE?m.choices.DISCARD_ONE:null;
+ return m.playedCardName;}

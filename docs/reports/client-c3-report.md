@@ -11,7 +11,8 @@ successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-p
 ([sezione](#c3-3--o6-frecce-verso-i-bersagli-ammessi)). **C3-4 (sequenza del round con i soli dati certi) è
 fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)), con una **revisione dopo la prova del
 proprietario** (regia D13 di ogni carta con primi piani di chi gioca e del bersaglio:
-[sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). Gli altri
+[sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). **C3-L (scala e uso dello spazio del tavolo), blocco
+aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). Gli altri
 blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
 è fatta a parte.
 
@@ -150,6 +151,8 @@ Valori delle esecuzioni finali ([1366×768](client-c3/c3-1/resolution-1366x768.j
   per emulazione del browser.
 - Dispositivo fisico, iPhone, prova umana e lettore di schermo non provati in questo
   blocco.
+- **Caso K7 col mouse:** dipende dalle carte pescate (serve una carta che miri un oggetto lontano); nel giro finale
+  è stato eseguito e verde, ma un giro con altre pescate può saltarlo.
 - Dati locali non toccati: tutte le prove su database temporanei.
 - Evidenze: [resolution-1366x768.json](client-c3/c3-1/resolution-1366x768.json),
   [resolution-844x390.json](client-c3/c3-1/resolution-844x390.json), [catture](client-c3/c3-1/screens/)
@@ -669,3 +672,102 @@ resta: carta scelta al primo tocco durante la sequenza, clock da 30 a 28 s nei 2
   - `resolution-*`, con le catture `resolution-*-sequence-cost|author|flight|target|changes|tail-*` (i passi di una carta);
   - regressione `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*`, `decks-*` e [size.json](client-c3/c3-4r/size.json), con catture
     solo per `VerifyResolution` e `Verify`.
+
+## C3-L — Scala e uso dello spazio del tavolo
+
+30 ottobre 2026. Blocco nuovo fra C3-4r e C3-6, dal feedback del proprietario dello stesso giorno: (1) il centro
+del tavolo è quasi sempre vuoto; (2) risorse, personaggi e oggetti di tutti sono ancora un po' piccoli; (3) il proprio
+personaggio è grande quanto gli altri. Geometria, non arte: sfondo, cornici, simboli e texture restano a C4. Nessun
+cambio a regolamento, server, protocollo, catalogo o `client-debug`.
+
+### Stato di partenza misurato
+
+Build di HEAD (836ce39), partite reali su database temporaneo (quick 1vCom e FFA con quattro computer, turni 0–2),
+Edge via Playwright; la nuova verifica `VerifyLayout` con `BM_OUT=…/before` legge scena e shell HTML. Evidenze:
+[duello](client-c3/c3-l/before/), [FFA](client-c3/c3-l/before-ffa/).
+
+| CSS px | 1366×768 duello | 1366×768 FFA5 | 844×390 duello | 844×390 FFA5 |
+|---|---|---|---|---|
+| Personaggio proprio | 150×207 | 117×161 | 80×110 | 60×83 |
+| Altri personaggi | 150×207 (uguale) | 117×161 | 80×110 | 60×83 |
+| Oggetti | 114×157 | 89×123 | 61×84 | 46×63 |
+| Plancia propria / riga di una risorsa | 170×150 / 30 | 170×150 / 30 | 110×92 / 18,4 | 110×92 / 18,4 |
+| Plancia altrui (carattere) | 150×58 (14 px) | 120×58 (14 px) | 100×40 (10 px) | 84×40 (10 px) |
+| Mano: carta / passo | 214×295 / 133 | 214×295 / 120 | 120×166 / 72 | 120×166 / 71 |
+| Centro libero (36%×30% dello schermo al centro) | 78–80% | 87–91% | 65–82% | 70–86% |
+| Bersagli sotto 44 px | gettoni di stato 41×24 | 41×24 | 31×18 | 31×18, 17×18 |
+| Sovrapposizioni | nessuna | nessuna | nessuna | plancia in alto a sinistra sulla scritta decorativa |
+
+Rispetto al minimo di C4 (44 px dove si tocca): personaggi, oggetti e carte della mano erano già sopra la soglia, i
+gettoni di stato no. **Trovato in più:** a 750×292 (minimo iPhone) la disposizione di allora già si sovrapponeva
+(duello: posto proprio sul posto avversario e sulla mano; FFA: un posto fuori schermo, nessun posto per i primi piani):
+le dimensioni compatte sono fisse e la mano occupa 166 px su 292.
+
+### Proposta e scelte del proprietario (D14)
+
+Prima di implementare: tre insiemi di fattori misurati con un prototipo della geometria sugli stessi controlli dei
+test, con schemi sullo sfondo vero del tavolo ([1366×768](client-c3/c3-l/proposal/options-1366x768.jpg),
+[844×390](client-c3/c3-l/proposal/options-844x390.jpg)). Scelte: **B2** (proprio ×1,5, altri ×1,2, oggetti ×1, risorse
+×1,25), priorità **personaggio proprio, risorse, altri, oggetti**, 750×292 solo registrato per C4. Per il centro il
+proprietario ha scelto prima **mazzo e scarti propri**, ogni giocatore con la sua pila degli scarti; viste le catture
+della prima versione ha **cambiato in corsa**: al centro le **carte giocate nell'ultimo round**, impilate in ordine di
+risoluzione con le prime sotto, a **cascata leggera**; **mazzo e scarti propri piccoli accanto al proprio posto**.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Geometria pura (`src/readability.ts`) | `SCALE` e `YIELD` (ordine di cessione: oggetti, altri, risorse, proprio); `arrange` (disposizione a fattori dati); `layoutProblems`: tutto nello schermo; nessun posto su un altro, su una mano coperta, sulla mano, sul suggerimento, sui controlli in alto, sulle carte del round o sulle pile; passo della mano ≥ 44 px; un posto libero per ogni primo piano D13; primi piani dei bersagli che non coprono altri personaggi; frecce di C3-3 lontane da ✓ e ×. `fitScale` (una volta per misura e numero di posti, con tre oggetti per posto) e `tableLayout` che li compone. Nuovi `played` (cascata, un posto per giocatore, colonna degli autori), `piles`, `shellBoxes`, `freeSpot`, `tableBoxes`, `closeUpRange`, `targetOf`, `discardTop` (R02). |
+| Fattori ottenuti | 1366×768: duello proprio ×1,5, altri ×1,2, risorse ×1,25; FFA proprio ×1,5, altri ×1, risorse ×1,25. 844×390: duello proprio ×1,5, altri ×1, risorse ×1,1; FFA proprio ×1,5, altri ×1, risorse ×1,05. Oggetti ×1 ovunque (B2). |
+| Scena (`src/scene.ts`) | Disegna la cascata delle carte del round (`roundCards`) e le pile (`piles`). In sequenza ogni carta, dopo le sue variazioni, si posa nel suo posto della cascata (`land`), che intanto mostra solo le carte già posate. Pescate e scarti delle bound propri partono e arrivano alle pile. Plance con caratteri e colonne proporzionali; sulle plance altrui il nome ha la prima riga intera e la salute sta accanto alla barra. Primi piani con `closeUpRange` e `targetOf`; evitano cascata e pile salvo crescere di più o avvicinarsi al centro. In FFA le due pile stanno una sopra l'altra a destra del proprio personaggio (affiancate spingevano la mano). `table.tsx` espone `deckCount` e `lastMoves` per la verifica e, con una carta scelta, toglie la (i) della carta alzata quando cadrebbe su un personaggio o un oggetto del tavolo, così un clic lì mira (trovato da `VerifyFfa` K7 a 844×390, dove la carta alzata copre un oggetto avversario). |
+| Duello | Oggetti propri in una riga sopra il proprio posto (con le pile su desktop) per lasciare il centro alla cascata; avversario a 0,64 della larghezza su desktop, a 0,56 in compatto (più a destra la freccia verso di lui attraversa la conferma). |
+| Test automatici | Client **168** (161 + 7). Nuovi: fattori ottenuti alle due misure in duello e FFA; nessun problema di disposizione con 0–3 oggetti per posto; proprio almeno ×1,24 degli altri; personaggi e oggetti ≥ 44 px; cascata al centro con la striscia di ogni titolo visibile; pile presso il proprio posto; ordine di cessione e massimalità dei fattori; 750×292 ancora fuori (avvisa quando cambia); `discardTop` sui casi di R02. **Cambio deliberato:** i test dei primi piani di C3-4r usano `closeUpRange` e `targetOf` (il proprio, già il più grande, può restare a scala 1; come bersaglio cresce di 1,1). |
+| Server reale | **Sì.** `VerifyLayout` nuova (`run.ps1 -Task VerifyLayout`), verde a 1366×768 e 844×390. |
+| Regressione | Sulla build finale, a 1366×768 e 844×390: `Verify`, `VerifyModes`, `VerifyResolution`, `VerifyAim`, `VerifyLifecycle`, `VerifyFfa` (K7 mouse e tocco eseguiti), `VerifyDecks`, `VerifyLayout` tutte verdi. `Test` e `Build` del client verdi (168 test). `./scripts/build.ps1 -Task Test -Offline` verde (server 254, `client-debug` 36); `python scripts/check-rules.py` verde. |
+| Peso | JS gzip 321781 byte (+2911 rispetto a C3-4r), totale gzip 1104726 byte ([size.json](client-c3/c3-l/size.json)). Budget rispettato. |
+| Emulazione / dispositivo / umano | Edge via Playwright sul PC, due misure landscape; nessun dispositivo fisico, iPhone o prova umana. |
+
+### Misure dopo C3-L (partite reali)
+
+[1366×768](client-c3/c3-l/layout-1366x768.json), [844×390](client-c3/c3-l/layout-844x390.json), catture in
+[screens](client-c3/c3-l/screens/) (`layout-*-T*` a turno fermo, `layout-*-closeup-*` durante la sequenza).
+
+| CSS px | 1366×768 duello | 1366×768 FFA5 | 844×390 duello | 844×390 FFA5 |
+|---|---|---|---|---|
+| Personaggio proprio | **225×310** (prima 150×207) | **175×242** (117×161) | **120×166** (80×110) | **90×124** (60×83) |
+| Altri personaggi | **180×248** (150×207) | 117×161 | 80×110 | 60×83 |
+| Oggetti | 114×157 | 89×123 | 61×84 | 46×63 |
+| Plancia propria / riga | **213×188 / 37,5** | **213×188 / 37,5** | **121×101 / 20,2** | **116×97 / 19,3** |
+| Plancia altrui | **188×73** | **150×73** | **110×44** | **88×42** |
+| Carte del round (una carta) | 150×207 | 82×113 | 40×55 | 36×50 |
+| Pile proprie (una carta) | 40×55 | 40×55 | 26×36 | 26×36 |
+| Mano: carta / passo | 214×295 / 114 | 214×295 / 98 | 120×166 / 72 | 120×166 / 66 |
+| Bersagli sotto 44 px | gettoni 49×29 | gettoni 41×24, 61×36 | gettoni 31×18 | gettoni 31×18, 46×27 |
+| Sovrapposizioni | nessuna | nessuna | nessuna | come prima: plancia sulla scritta decorativa |
+| Primi piani D13 (numero, posto, scala) | 4, al centro, 1,0–1,6 | 10, al centro, 1,0–1,6 | 4, al centro, 1,0–1,6 | 10, al centro, 1,0–1,55 |
+| Frame dalla scelta alla fine della sequenza (criterio C0) | p95 8,4–8,5 ms, 99,8% entro 20 ms, max 56 ms | p95 8,5 ms, 99,5% entro 20 ms, max 115 ms | p95 8,5 ms, 100% entro 33 ms, max 30 ms | p95 8,5–8,6 ms, 100% entro 33 ms, max 70 ms |
+| Input → frame, massimo | 21 ms | 36 ms | 29 ms | 22 ms |
+
+Il centro (riquadro 36%×30% dello schermo) ora è libero solo per il 49–64% (prima 65–91%): ci stanno la cascata,
+i personaggi più grandi e, nel duello, l'avversario più grande.
+
+### Limiti e residui
+
+- **Gli altri personaggi crescono solo nel duello desktop (×1,2).** In FFA, a 844×390 due file di avversari con le
+  mani coperte sopra e la mano in basso lasciano circa 175 px per due personaggi; a 1366×768, già con gli altri a
+  ×1,05, i primi piani dei bersagli centrali coprirebbero i vicini. Nel duello compatto la freccia verso l'oggetto
+  avversario e i primi piani fermano gli altri a ×1. Le risorse altrui crescono comunque (×1,05–1,25).
+- **Carte del round piccole a 844×390** (40×55 nel duello, 36×50 in FFA; con tre oggetti per posto la FFA scende a 30×41): il titolo è al limite, l'autore si legge
+  nella colonna accanto. Per i dettagli resta «Ultimo turno»; un tocco per ispezionarle è un'idea per C3-6 o C4.
+- **Primo piano proprio a scala 1:** il personaggio proprio, già il più grande, non trova al centro un posto più
+  grande di sé; il primo piano porta la carta accanto e si sposta verso il centro quando c'è posto.
+- **Frame:** qualche intervallo isolato fino a 115 ms su desktop FFA (122 ms in un giro precedente) durante la sequenza (ridisegno di cascata e
+  testi a ogni passo), sempre oltre il 99% entro soglia. Non misurato su dispositivo fisico.
+- **`fitScale`** costa fino a circa 150 ms la prima volta per una misura e un numero di posti (FFA desktop), poi resta
+  in memoria: si paga a ogni ridimensionamento verso una misura nuova.
+- **750×292** non entra, come prima: registrato in roadmap per C4, con un test che avvisa quando cambia.
+- **Frecce verso l'oggetto avversario con 1–2 oggetti a 844×390:** già prima di C3-L attraversavano il riquadro
+  intero della conferma (non i pulsanti ✓ e ×, che la scena evita). Il controllo di C3-3 resta con tre oggetti per
+  posto; il nuovo controllo per 0–3 oggetti usa i pulsanti, come `VerifyAim`.
+- **Scritta decorativa:** in FFA a 844×390 la plancia in alto a sinistra copre «BOTTE MICIDIALI», come prima.
+- Dati locali non toccati: tutte le prove su database temporanei.

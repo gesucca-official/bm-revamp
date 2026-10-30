@@ -1,0 +1,346 @@
+{
+ "date": "2026-10-30T16:46:02.926Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "scenarios": {
+  "duel": {
+   "ffa": false,
+   "turns": [
+    {
+     "turn": 0,
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 72,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 160,
+       "y": 273,
+       "w": 80,
+       "h": 110
+      },
+      "item": {
+       "x": 239,
+       "y": 168,
+       "w": 61,
+       "h": 84
+      },
+      "board": {
+       "x": 57,
+       "y": 273,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 160,
+       "y": 298,
+       "w": 72,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9838",
+       "person": {
+        "x": 473,
+        "y": 98,
+        "w": 80,
+        "h": 110
+       },
+       "item": {
+        "x": 551,
+        "y": 104,
+        "w": 61,
+        "h": 84
+       },
+       "board": {
+        "x": 375,
+        "y": 84,
+        "w": 100,
+        "h": 40
+       },
+       "back": {
+        "w": 24,
+        "h": 34
+       }
+      }
+     ],
+     "free": {
+      "x": 714,
+      "y": 126,
+      "w": 260,
+      "h": 144,
+      "share": 0.114
+     },
+     "middle": {
+      "box": {
+       "x": 422,
+       "y": 164,
+       "w": 304,
+       "h": 117
+      },
+      "free": 0.817
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9838-imm-TOXICITY",
+       "kind": "status",
+       "w": 31,
+       "h": 18
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 800,
+       "y": 29,
+       "w": 73,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 1,
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 72,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 160,
+       "y": 273,
+       "w": 80,
+       "h": 110
+      },
+      "item": {
+       "x": 239,
+       "y": 168,
+       "w": 61,
+       "h": 84
+      },
+      "board": {
+       "x": 57,
+       "y": 273,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 160,
+       "y": 298,
+       "w": 72,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9838",
+       "person": {
+        "x": 473,
+        "y": 98,
+        "w": 80,
+        "h": 110
+       },
+       "item": {
+        "x": 551,
+        "y": 104,
+        "w": 61,
+        "h": 84
+       },
+       "board": {
+        "x": 375,
+        "y": 84,
+        "w": 100,
+        "h": 40
+       },
+       "back": {
+        "w": 24,
+        "h": 34
+       }
+      }
+     ],
+     "free": {
+      "x": 714,
+      "y": 126,
+      "w": 260,
+      "h": 144,
+      "share": 0.114
+     },
+     "middle": {
+      "box": {
+       "x": 422,
+       "y": 164,
+       "w": 304,
+       "h": 117
+      },
+      "free": 0.647
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9838-imm-TOXICITY",
+       "kind": "status",
+       "w": 31,
+       "h": 18
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 798,
+       "y": 29,
+       "w": 75,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 2,
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 72,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 160,
+       "y": 273,
+       "w": 80,
+       "h": 110
+      },
+      "item": {
+       "x": 239,
+       "y": 168,
+       "w": 61,
+       "h": 84
+      },
+      "board": {
+       "x": 57,
+       "y": 273,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 160,
+       "y": 298,
+       "w": 72,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9838",
+       "person": {
+        "x": 473,
+        "y": 98,
+        "w": 80,
+        "h": 110
+       },
+       "item": {
+        "x": 551,
+        "y": 104,
+        "w": 61,
+        "h": 84
+       },
+       "board": {
+        "x": 375,
+        "y": 84,
+        "w": 100,
+        "h": 40
+       },
+       "back": {
+        "w": 24,
+        "h": 34
+       }
+      }
+     ],
+     "free": {
+      "x": 102,
+      "y": 126,
+      "w": 204,
+      "h": 157,
+      "share": 0.097
+     },
+     "middle": {
+      "box": {
+       "x": 422,
+       "y": 164,
+       "w": 304,
+       "h": 117
+      },
+      "free": 0.773
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9838-imm-TOXICITY",
+       "kind": "status",
+       "w": 31,
+       "h": 18
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 798,
+       "y": 29,
+       "w": 76,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     }
+    }
+   ]
+  }
+ },
+ "errors": [],
+ "ok": false,
+ "failure": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('quick') to be visible\u001b[22m\n\n    at login (E:\\bm\\client-web\\tools\\verify-layout.mjs:65:36)\n    at async scenario (E:\\bm\\client-web\\tools\\verify-layout.mjs:127:26)\n    at async file:///E:/bm/client-web/tools/verify-layout.mjs:145:16"
+}

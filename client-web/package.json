@@ -20,6 +20,7 @@
     "verify:profile": "node tools/verify-profile.mjs",
     "verify:resolution": "node tools/verify-resolution.mjs",
     "verify:aim": "node tools/verify-aim.mjs",
+    "verify:layout": "node tools/verify-layout.mjs",
     "measure": "node tools/measure.mjs",
     "size": "node tools/size.mjs",
     "atlas": "node tools/atlas.mjs",

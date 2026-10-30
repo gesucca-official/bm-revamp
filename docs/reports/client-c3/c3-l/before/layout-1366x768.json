@@ -1,0 +1,346 @@
+{
+ "date": "2026-10-30T16:45:14.819Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "scenarios": {
+  "duel": {
+   "ffa": false,
+   "turns": [
+    {
+     "turn": 0,
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 133,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 260,
+       "y": 538,
+       "w": 150,
+       "h": 207
+      },
+      "item": {
+       "x": 399,
+       "y": 380,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 92,
+       "y": 538,
+       "w": 170,
+       "h": 150
+      },
+      "boardRow": 30,
+      "status": {
+       "x": 260,
+       "y": 592,
+       "w": 142,
+       "h": 24
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9164",
+       "person": {
+        "x": 765,
+        "y": 192,
+        "w": 150,
+        "h": 207
+       },
+       "item": {
+        "x": 905,
+        "y": 204,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 607,
+        "y": 167,
+        "w": 150,
+        "h": 58
+       },
+       "back": {
+        "w": 40,
+        "h": 56
+       }
+      }
+     ],
+     "free": {
+      "x": 336,
+      "y": 150,
+      "w": 390,
+      "h": 300,
+      "share": 0.112
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.801
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9164-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1311,
+       "y": 35,
+       "w": 79,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 1,
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 133,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 260,
+       "y": 538,
+       "w": 150,
+       "h": 207
+      },
+      "item": {
+       "x": 399,
+       "y": 380,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 92,
+       "y": 538,
+       "w": 170,
+       "h": 150
+      },
+      "boardRow": 30,
+      "status": {
+       "x": 260,
+       "y": 592,
+       "w": 142,
+       "h": 24
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9164",
+       "person": {
+        "x": 765,
+        "y": 192,
+        "w": 150,
+        "h": 207
+       },
+       "item": {
+        "x": 905,
+        "y": 204,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 607,
+        "y": 167,
+        "w": 150,
+        "h": 58
+       },
+       "back": {
+        "w": 40,
+        "h": 56
+       }
+      }
+     ],
+     "free": {
+      "x": 1164,
+      "y": 264,
+      "w": 404,
+      "h": 404,
+      "share": 0.156
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.78
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9164-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 81,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    },
+    {
+     "turn": 2,
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 133,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 260,
+       "y": 538,
+       "w": 150,
+       "h": 207
+      },
+      "item": {
+       "x": 399,
+       "y": 380,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 92,
+       "y": 538,
+       "w": 170,
+       "h": 150
+      },
+      "boardRow": 30,
+      "status": {
+       "x": 260,
+       "y": 592,
+       "w": 142,
+       "h": 24
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9164",
+       "person": {
+        "x": 765,
+        "y": 192,
+        "w": 150,
+        "h": 207
+       },
+       "item": {
+        "x": 905,
+        "y": 204,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 607,
+        "y": 167,
+        "w": 150,
+        "h": 58
+       },
+       "back": {
+        "w": 40,
+        "h": 56
+       }
+      }
+     ],
+     "free": {
+      "x": 1164,
+      "y": 264,
+      "w": 404,
+      "h": 404,
+      "share": 0.156
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.78
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_9164-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 82,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     }
+    }
+   ]
+  }
+ },
+ "errors": [],
+ "ok": false,
+ "failure": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('quick') to be visible\u001b[22m\n\n    at login (E:\\bm\\client-web\\tools\\verify-layout.mjs:65:36)\n    at async scenario (E:\\bm\\client-web\\tools\\verify-layout.mjs:127:26)\n    at async file:///E:/bm/client-web/tools/verify-layout.mjs:145:16"
+}

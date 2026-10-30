@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1, C3-2, C3-3)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -293,8 +293,10 @@ proprietario su C3-4) e `directionProblems` ne controlla l'ordine. La scena
      si consuma (oggetto proprio), passa all'autore (stesso nome comparso presso di lui) o si
      rompe (sparito da un altro posto senza ricomparire);
    - **variazioni** (0,45 s, solo se la carta ne ha di verificate): barre e numeri della
-     carta, con la risorsa ingrandita. Poi la carta va allo scarto dell'autore;
-2. **pesca:** dal mazzo di ogni posto escono quante carte dice il conteggio. Le proprie
+     carta, con la risorsa ingrandita. Poi la carta si posa nella cascata delle carte del round
+     al centro del tavolo (C3-L, sezione sotto); oltre i posti della cascata va allo scarto dell'autore;
+2. **pesca:** dal mazzo di ogni posto escono quante carte dice il conteggio (il proprio mazzo è
+   disegnato accanto al proprio personaggio da C3-L). Le proprie
    arrivano scoperte nella mano, quelle degli avversari come dorsi. Gli oggetti del mazzo
    comparsi senza una mossa che li passi vanno al tavolo (il token non è nel catalogo e non
    arriva dal mazzo);
@@ -327,6 +329,50 @@ sul tavolo sono sempre quelli della vista finale. I conteggi di ogni sequenza so
 programmato in `stats.schedule`, i primi piani (riquadro, scala, posto) in `stats.closeUps`.
 Con movimento ridotto non c'è sequenza: lo stesso contenuto resta nel riepilogo statico per
 posto (il riepilogo piccolo con lettere è di C3-6).
+
+## Scala e spazio del tavolo (C3-L)
+
+Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
+([rapporto C3](../docs/reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)). Solo geometria: sfondo,
+cornici, simboli e texture restano a C4.
+
+- **Fattori (`SCALE` in `src/readability.ts`)** sulle dimensioni di C2: personaggio proprio ×1,5, altri ×1,2,
+  oggetti ×1, plance delle risorse ×1,25. Quando il tavolo non basta cedono, 0,05 alla volta fino a 1, in
+  quest'ordine (`YIELD`): oggetti, altri, risorse, personaggio proprio. `fitScale` prova la disposizione con tre
+  oggetti per posto e la tiene una volta per misura dello schermo e numero di posti. Il controllo è
+  `layoutProblems`: tutto nello schermo, nessun posto su un altro, sulla mano coperta di un altro, sulla mano, sul
+  suggerimento, sui controlli in alto, sulle carte del round o sulle pile, passo della mano ≥ 44 px, un posto
+  libero per ogni primo piano D13, primi piani dei bersagli che non coprono gli altri personaggi, frecce di
+  C3-3 lontane da ✓ e ×.
+- **Risultato:** 1366×768 duello tuo ×1,5, altri ×1,2, risorse ×1,25; FFA tuo ×1,5, altri ×1, risorse ×1,25;
+  844×390 duello tuo ×1,5, altri ×1, risorse ×1,1; FFA tuo ×1,5, altri ×1, risorse ×1,05.
+- **Tuo posto:** plancia contro il bordo sinistro, personaggio accanto, il piede appena sopra il suggerimento
+  «Scegli…». Caratteri e colonne delle plance seguono la loro misura; sulle plance altrui il nome ha la prima riga
+  intera, la salute sta accanto alla sua barra. I gettoni di stato crescono con il personaggio.
+- **Carte del round al centro (`played`):** le carte dell'ultimo round risolto della vista, nell'ordine di
+  `resolvedMoves`: la prima risolta sotto, ogni successiva una striscia del titolo più in basso e un po' a destra,
+  sopra la precedente. Accanto, una colonna con l'autore di ogni carta («TU», «COMPUTER 2»…); l'annullata ha
+  l'etichetta color vino con «✕» e una riga sulla sua striscia. La carta più grande la cui cascata (un posto per
+  giocatore) trova posto vicino al centro, da quella di un personaggio a metà. Durante la sequenza ogni carta,
+  dopo le sue variazioni, si posa nel suo posto della cascata; prima, la cascata mostra solo quelle già posate. A
+  sequenza finita, saltata o con movimento ridotto mostra la vista. Restano fino al round successivo; dopo un salto
+  di turni, l'ultimo round della vista senza animazione (D4).
+- **Mazzo e scarti propri (`piles`), piccoli accanto al tuo posto:** il mazzo con il conteggio della vista, la
+  pila degli scarti con l'illustrazione dell'ultima carta che vi è andata (`discardTop`, R02: regolare o ultima
+  risorsa dopo l'uso anche se annullata, la carta scartata da una bound non annullata; basic e bound restano in
+  mano). Nella FFA uno sopra l'altro a destra del personaggio, prima degli oggetti (stretti, perché la mano tenga il passo); nel duello nella riga degli oggetti sopra il posto.
+  Pescate e scarti delle bound partono e arrivano lì; quelli degli avversari restano accanto al loro posto.
+- **Duello:** gli oggetti propri stanno in una riga sopra il proprio posto, per lasciare il centro alle carte del
+  round; l'avversario sta più a destra su desktop.
+- **Primi piani (D13):** il personaggio proprio, già il più grande, può restare alla sua scala nel primo piano
+  (`closeUpRange`) e come bersaglio cresce poco (`targetScale`). Il primo piano di un bersaglio cresce attorno al
+  centro, oppure dal bordo alto o basso, nel primo modo che non copre gli altri personaggi (`targetOf`). Un primo
+  piano evita le carte del round e le pile, salvo quando passarci sopra gli permette di crescere di più o di
+  avvicinarsi al centro.
+- **(i) della carta alzata:** con una carta scelta, la (i) che cadrebbe su un personaggio o un oggetto del tavolo
+  non compare, così un clic lì mira (a 844×390 la carta alzata può coprire un oggetto avversario).
+- **750×292 (minimo iPhone):** non entra ancora, come già prima di C3-L. Registrato per C4 e controllato da un
+  test che avvisa quando cambia.
 
 ## Frecce verso i bersagli (C3-3, O6)
 
@@ -361,6 +407,7 @@ fisso con movimento ridotto).
 ./client-web/run.ps1 -Task VerifyProfile # profilo, admin, errori, strumenti: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyResolution # fatti della risoluzione su partite reali: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyAim # frecce verso i bersagli ammessi su partite reali: avvia da sé il server
+./client-web/run.ps1 -Task VerifyLayout # scala e spazio del tavolo su partite reali: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -419,6 +466,13 @@ vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dai retta
 di ✓ e ×), nessuna freccia a scelta bloccata (pending fra due umani, esito), mira con mouse
 e tocco senza comandi, riordino, annullamento, interruzione del trascinamento, D12 e
 prestazioni del trascinamento. `BM_SCENARIOS` sceglie `duel,touch,reduced,ffa,pending`.
+`VerifyLayout` (C3-L, database temporaneo) gioca tre turni di quick 1vCom e di FFA con quattro computer e a ogni
+turno legge la scena e la shell HTML: misure in CSS px, spazio libero al centro, sovrapposizioni. Controlla il
+personaggio proprio più grande degli altri, le carte del round uguali per nome e ordine a `resolvedMoves`, il mazzo
+con il conteggio della vista, personaggi e oggetti di almeno 44 px, nessun posto fuori schermo o sovrapposto
+(salvo la scritta decorativa «BOTTE MICIDIALI»), ogni primo piano della sequenza dentro lo schermo e lontano dagli
+altri posti e dalla mano, e la cadenza dei frame del criterio di C0 dalla scelta alla fine della sequenza.
+`BM_OUT=…/before` misura una build precedente senza controlli. `BM_SCENARIOS` sceglie `duel,ffa`.
 `VerifyResolution` (C3-1, C3-2, C3-4 e revisione, database temporaneo) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
 tocchi sul tavolo vuoto che passano di passo in passo, carta scelta durante la sequenza,
