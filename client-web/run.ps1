@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','Size','Atlas')][string]$Task='Build',[switch]$Offline)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','Size','Atlas')][string]$Task='Build',[switch]$Offline)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -31,6 +31,8 @@ try {
     'VerifyProfile' {& npm run verify:profile}
     # C3-1: resolution facts on real games (quick 1vCom, FFA, turn jump, open 1vCom with synthetic decks) on its own temporary server; BM_RECORD=1 rewrites the unit-test views.
     'VerifyResolution' {& npm run verify:resolution}
+    # C3-3: aim arrows (number, destination, locked choice, FFA, reduced motion, drag performance) on its own temporary server (port 8080 free, Serve running).
+    'VerifyAim' {& npm run verify:aim}
     'Size' {& npm run size}
     'Atlas' {& npm run atlas}
   }

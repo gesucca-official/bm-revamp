@@ -91,3 +91,59 @@ for(const [w,h] of [[1366,768],[844,390]] as const)for(const ids of [['me','b'],
    if(!o.me)assert.equal(overlap(b,fan(o.backs,o.back,8).box),0,`${s.id} clear of ${o.id}'s eight backs`);
    if(o!==s)assert.equal(overlap(b,o.summary),0,`${s.id}/${o.id} strips`);}}
 });
+
+// C3-3 (O6): arrows from the chosen card to the admitted targets.
+import {aimArrows,confirmBox,confirmButtons,edgePoint,bezier,type AimTarget} from '../src/readability.ts';
+const aimSetup=(w:number,h:number,ids:string[],items=3)=>{
+ const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),H=l.hand;
+ const source:Box={x:H.center,y:H.y-H.lift,w:H.w*H.zoom,h:H.h*H.zoom};
+ const persons:AimTarget[]=l.seats.map(s=>({id:`person-${s.id}`,owner:s.id,kind:'person',box:s.person}));
+ // One arrow per seat that has objects, to its last (whole) one.
+ const objects:AimTarget[]=l.seats.map(s=>({id:`item-${s.id}-${items-1}`,owner:s.id,kind:'item',itemIndex:items-1,box:s.items[items-1]}));
+ return {l,source,persons,objects,avoid:[confirmBox(l.preview,w,l.compact)]};
+};
+const samples=(a:{from:{x:number;y:number};control:{x:number;y:number};to:{x:number;y:number}})=>Array.from({length:25},(_,i)=>bezier(a.from,a.control,a.to,i/24));
+for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`arrows at ${w}×${h} with ${ids.length} seats: one per target, on the border, inside the screen`,()=>{
+ const {l,source,persons,objects,avoid}=aimSetup(w,h,ids);
+ for(const [name,targets] of [['characters',persons],['objects',objects],['both',[...persons,...objects]],['opponents only',persons.filter(t=>t.owner!=='me')],['none',[]]] as [string,AimTarget[]][]){
+  const arrows=aimArrows(source,targets,{w,h},{avoid,head:l.compact?11:15});
+  assert.equal(arrows.length,targets.length,`${name}: one arrow per target`);
+  const reached=arrows.filter(a=>a.reached).map(a=>a.id);
+  // Only in the five-seat FFA is a character right against the raised card.
+  // (the raised card lies against the lower edge of the right middle seat: its tail would be a stub of a few pixels)
+  assert.deepEqual(reached,ids.length>2&&['characters','both','opponents only'].includes(name)?['person-e']:[],`${name}: arrows reached`);
+  arrows.forEach((a,i)=>{const t=targets[i];assert.equal(a.id,t.id);assert.equal(a.owner,t.owner);assert.equal(a.kind,t.kind);assert.equal(a.itemIndex,t.itemIndex);if(a.reached)return;
+   // The tip is just outside the border of its target (gap 4), never inside it, and the tail leaves the card.
+   assert.ok(overlap({x:a.to.x,y:a.to.y,w:1,h:1},t.box)===0,`${t.id}: tip outside the target`);
+   const dx=Math.max(Math.abs(a.to.x-t.box.x)-t.box.w/2,0),dy=Math.max(Math.abs(a.to.y-t.box.y)-t.box.h/2,0);assert.ok(Math.hypot(dx,dy)<=6,`${t.id}: tip at the border (${Math.hypot(dx,dy).toFixed(1)})`);
+   assert.ok(Math.abs(a.from.x-source.x)<=source.w/2+3&&Math.abs(a.from.y-source.y)<=source.h/2+3,`${t.id}: tail at the card`);
+   for(const p of [...samples(a),...a.head])assert.ok(p.x>=0&&p.x<=w&&p.y>=0&&p.y<=h,`${t.id}: inside the screen ${JSON.stringify(p)}`);});
+ }
+});
+for(const [w,h] of VIEWPORTS)test(`arrows at ${w}×${h} in the duel keep clear of ✓ and ×`,()=>{
+ const {l,source,persons,objects,avoid}=aimSetup(w,h,['me','b']);
+ const arrows=aimArrows(source,[...persons,...objects],{w,h},{avoid,head:l.compact?11:15});
+ for(const a of arrows){assert.equal(a.crosses,false,`${a.id} crosses the confirmation`);for(const p of [...samples(a),...a.head].filter(p=>Math.abs(p.x-source.x)>source.w/2+3||Math.abs(p.y-source.y)>source.h/2+3))assert.ok(!(Math.abs(p.x-avoid[0].x)<=avoid[0].w/2&&Math.abs(p.y-avoid[0].y)<=avoid[0].h/2),`${a.id} over the confirmation`);}
+});
+for(const [w,h] of VIEWPORTS)test(`arrows at ${w}×${h} in the five-seat FFA keep clear of the ✓ and × buttons`,()=>{
+ const {l,source,persons,objects}=aimSetup(w,h,['me','b','c','d','e']),buttons=confirmButtons(l.preview,w,l.compact);
+ const arrows=aimArrows(source,[...persons,...objects],{w,h},{avoid:[buttons],head:l.compact?11:15});
+ for(const a of arrows){if(a.reached)continue;assert.equal(a.crosses,false,`${a.id} crosses the buttons`);
+  for(const p of [...samples(a),...a.head].filter(p=>Math.abs(p.x-source.x)>source.w/2+3||Math.abs(p.y-source.y)>source.h/2+3))assert.ok(!(Math.abs(p.x-buttons.x)<=buttons.w/2&&Math.abs(p.y-buttons.y)<=buttons.h/2),`${a.id} over the buttons`);}
+});
+test('arrows: a card resting on a target (drag over it) is marked reached, not drawn twice',()=>{
+ const t:AimTarget={id:'person-b',owner:'b',kind:'person',box:{x:500,y:200,w:100,h:140}};
+ const [a]=aimArrows({x:510,y:210,w:120,h:160},[t],{w:1366,h:768});assert.equal(a.reached,true);
+});
+test('edgePoint leaves a box on the ray towards a point, grown by the gap',()=>{
+ const b:Box={x:100,y:100,w:40,h:20};
+ assert.deepEqual(edgePoint(b,{x:300,y:100}),{x:120,y:100});assert.deepEqual(edgePoint(b,{x:100,y:0},3),{x:100,y:87});
+ const d=edgePoint(b,{x:200,y:200});assert.ok(Math.abs(d.x-110)<1e-9&&Math.abs(d.y-110)<1e-9,'a corner-ish ray leaves through the short side');
+});
+test('arrows bend the other way when the first bend crosses the region to keep clear',()=>{
+ const t:AimTarget={id:'person-b',owner:'b',kind:'person',box:{x:900,y:100,w:60,h:80}},src:Box={x:300,y:600,w:100,h:140};
+ const free=aimArrows(src,[t],{w:1366,h:768})[0],mid={x:(free.from.x+free.to.x)/2,y:(free.from.y+free.to.y)/2};
+ // A region on the first bend: the control point moves to the other side.
+ const blocked=aimArrows(src,[t],{w:1366,h:768},{avoid:[{x:bezier(free.from,free.control,free.to,.5).x,y:bezier(free.from,free.control,free.to,.5).y,w:60,h:60}]})[0];
+ assert.notDeepEqual(blocked.control,free.control);assert.equal(blocked.crosses,false);assert.ok(Math.hypot(mid.x-blocked.control.x,mid.y-blocked.control.y)>0);
+});

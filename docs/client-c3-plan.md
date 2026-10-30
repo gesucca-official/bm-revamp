@@ -159,7 +159,7 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 |---|---|---|
 | C3-1 | Modello puro della risoluzione e strumento di verifica — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)) | — |
 | C3-2 | Sequenza affidabile: K1–K5 e riepilogo statico — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-2--sequenza-affidabile)) | C3-1 |
-| C3-3 | O6, frecce verso i bersagli ammessi | — |
+| C3-3 | O6, frecce verso i bersagli ammessi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi)) | — |
 | C3-4 | Sequenza del round con i soli dati certi | C3-2 |
 | C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili | C3-2 |
@@ -246,6 +246,8 @@ alla carta successiva** (D12), scegliere una carta della mano e «Salta effetti�
 chiudono. Il contenuto animato non cambia: le variazioni per carta restano a C3-4.
 
 ### C3-3 — O6: frecce verso i bersagli ammessi
+
+**Fatto il 30 ottobre 2026** ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi), verifica `VerifyAim`). Osservazione del proprietario emersa durante il blocco, fuori perimetro: le scritte «Scegli una carta» e «Scegli il bersaglio sul tavolo» al centro sono brutte e coperte dalle carte alzate; da togliere o spostare con un richiamo di attenzione (attività separata).
 
 **Perimetro.** Con una carta scelta o trascinata, frecce dalla carta ai bersagli
 delle **sole categorie ammesse** (`canTarget`, come i contorni di `Model.allows`),

@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1, C3-2)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1, C3-2, C3-3)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -269,6 +269,19 @@ modello. Compare a sequenza finita, saltata o interrotta, subito con movimento
 ridotto o a scheda nascosta, e resta fino alla prima scelta di carta o al round
 successivo. Il riepilogo breve testuale conta i suoi 6 s solo a scheda visibile (K5).
 
+## Frecce verso i bersagli (C3-3, O6)
+
+Con una carta scelta o trascinata, una freccia parte dal bordo della carta e arriva al
+bordo di ogni bersaglio ammesso: un personaggio per ogni categoria `SELF`/`OPPONENT` che
+la carta dichiara (stessa chiamata dei contorni, `Model.allows`, quindi niente morti né
+forfait) e, per le carte che prendono un oggetto, una per posto che ne ha, verso
+l'ultimo oggetto ammesso. Gli oggetti restano contornati. Sono un aiuto visivo: il server
+giudica la mossa. Nessuna freccia quando la scelta è bloccata (pending, eliminato,
+esito) e quando il bersaglio è già scelto (resta la linea verso l'anteprima); con la carta
+che già tocca il bersaglio la freccia non si disegna. La pulsazione leggera si spegne con
+movimento ridotto. La geometria è `aimArrows` in `src/readability.ts` (curve nello schermo,
+lontane dai pulsanti ✓ e ×), disegnata da `drawAim` in `src/scene.ts`.
+
 ## Verifiche
 
 ```powershell
@@ -284,6 +297,7 @@ successivo. Il riepilogo breve testuale conta i suoi 6 s solo a scheda visibile 
 ./client-web/run.ps1 -Task VerifyPublic  # home, regole, registrazione: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyProfile # profilo, admin, errori, strumenti: avvia da sé il server
 ./client-web/run.ps1 -Task VerifyResolution # fatti della risoluzione su partite reali: avvia da sé il server
+./client-web/run.ps1 -Task VerifyAim # frecce verso i bersagli ammessi su partite reali: avvia da sé il server
 ```
 
 `Verify` guida il client con Edge (Playwright) contro il server locale: login,
@@ -336,6 +350,12 @@ conteggi, partite non concluse, download e cancellazione con annullamento e conf
 Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
 `BM_NATIVE_PROMPT=1` apre anche un Edge visibile, cattura la finestra nativa del browser,
 la annulla (Esc) e la compila da tastiera dopo «Riprova».
+`VerifyAim` (C3-3, database temporaneo): per ogni carta della mano in duello, tocco emulato,
+movimento ridotto e FFA a cinque, confronta le frecce della scena con i bersagli che la
+vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dai rettangoli reali
+di ✓ e ×), nessuna freccia a scelta bloccata (pending fra due umani, esito), mira con mouse
+e tocco senza comandi, riordino, annullamento, interruzione del trascinamento, D12 e
+prestazioni del trascinamento. `BM_SCENARIOS` sceglie `duel,touch,reduced,ffa,pending`.
 `VerifyResolution` (C3-1, C3-2, database temporaneo) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
 tocchi sul tavolo vuoto che passano di carta in carta, carta scelta durante la sequenza,
@@ -391,7 +411,7 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
   la partita prima del leave.
 - `src/model.ts`: selezione locale, ordine della mano e comando a cinque campi.
   Nessun effetto delle carte calcolato qui.
-- `src/readability.ts`: funzioni pure di C2a: pagabilità (stesso confronto del
+- `src/readability.ts`: funzioni pure di C2a e, da C3-3, la geometria delle frecce di mira: pagabilità (stesso confronto del
   server), ruolo e guadagni dal catalogo, indicatore delle risorse senza tetti né
   pavimenti, geometria del tavolo per duello e FFA a cinque (ventagli coperti,
   oggetti coperti da alzare al primo tocco).

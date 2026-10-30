@@ -19,6 +19,7 @@
     "verify:public": "node tools/verify-public.mjs",
     "verify:profile": "node tools/verify-profile.mjs",
     "verify:resolution": "node tools/verify-resolution.mjs",
+    "verify:aim": "node tools/verify-aim.mjs",
     "measure": "node tools/measure.mjs",
     "size": "node tools/size.mjs",
     "atlas": "node tools/atlas.mjs",

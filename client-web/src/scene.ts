@@ -4,7 +4,7 @@ import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,pace,nextStop,MOVE_PHASE,type Pace,type Round,type SeatMark} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,confirmButtons,type AimTarget,type Arrow,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
@@ -37,7 +37,10 @@ export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.ch
 export const roleLabel=(c:Card)=>{const r=roleOf(c);return r?ROLES[r].label:'';};
 export const cost=(c:Card)=>Object.entries(c.cost).map(([k,v])=>`${v} ${{VIOLENCE:'V',ALERTNESS:'A',TOXICITY:'T',ALCOHOL:'L',HEALTH:'H'}[k]}`).join(' + ')||'—';
 export class TableScene {
- app=new Application();world=new Container();fx=new Container();hits:Hit[]=[];backs:Record<string,number>={};
+ app=new Application();world=new Container();fx=new Container();aimLayer=new Container();private aimG=new Graphics();
+ // C3-3 (O6): arrows from the chosen or dragged card to the admitted targets; redrawn at most once per frame while dragging.
+ arrows:Arrow[]=[];private aimDirty=false;
+hits:Hit[]=[];backs:Record<string,number>={};
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
  peek:string|null=null;
@@ -48,7 +51,9 @@ export class TableScene {
   // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
   sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0,
   // C3-2 revision (D12): planned length of each sequence and taps that moved it to the next card.
-  sequencePlans:[] as {key:string;moves:number;total:number}[],advances:0};
+  sequencePlans:[] as {key:string;moves:number;total:number}[],advances:0,
+  // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
+  aimDraws:0,aimMs:[] as number[]};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
  // Static round summary (rule 5, D6): drawn on the table until the first card choice or the next round.
  marks:Record<string,SeatMark[]>|null=null;marksKey='';private tickPrev=0;private inputStart=0;
@@ -66,7 +71,7 @@ export class TableScene {
   host.appendChild(this.app.canvas);this.app.canvas.setAttribute('aria-hidden','true');
   const [table,atlas,layout]=await Promise.all([Assets.load('/art/table.webp'),Assets.load('/art/atlas.webp'),loadAtlas()]);
   for(let i=0;i<layout.cols*layout.rows;i++){const f=artFrame(i,layout);this.art.push(new Texture({source:atlas.source,frame:new Rectangle(f.x,f.y,f.size,f.size)}));}
-  this.background=new Sprite(table);this.app.stage.addChild(this.background,this.world,this.fx);this.fx.eventMode='none';
+  this.background=new Sprite(table);this.app.stage.addChild(this.background,this.world,this.aimLayer,this.fx);this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
   const canvas=this.app.canvas;
   const bind=(target:EventTarget,event:string,fn:EventListener)=>{target.addEventListener(event,fn);this.disposeFns.push(()=>target.removeEventListener(event,fn));};
   bind(host.parentElement!,'pointerup',((e:PointerEvent)=>{if((e.target as HTMLElement)?.closest('button'))this.inputStart=performance.now();}) as EventListener);
@@ -234,8 +239,29 @@ export class TableScene {
   }
   const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},hand,board,summary:roundSummary};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
-  this.onLayout();
+  this.drawAim();this.onLayout();
  }
+ // C3-3 (O6, D3): one arrow per admitted character and, for a card that takes an object, one per seat that has some. Only
+ // visual help: the categories are the ones of the outlines (Model.allows) and the server stays the judge. None when the
+ // choice is locked (pending, eliminated, outcome) or once a target is chosen (the single line to the preview remains).
+ drawAim(){const t0=performance.now(),g=this.aimG,m=this.model,L=this.layout,d=this.drag;this.aimDirty=false;g.clear();this.arrows=[];this.aimLayer.alpha=1;
+  if(!L||!m.selected||m.target||m.locked||!m.selectedCard)return;
+  let source:Box|null=null;
+  if(d?.moved){if(this.ghost)source={x:this.ghost.x,y:this.ghost.y,w:this.ghostH/1.38,h:this.ghostH};}
+  else{const h=this.hits.find(x=>x.kind==='hand'&&x.key===m.selected);if(h)source={x:h.x,y:h.y-L.hand.lift/2,w:h.w,h:h.h-L.hand.lift};}
+  if(!source)return;
+  const targets:AimTarget[]=[],lastItem=new Map<string,Hit>();
+  for(const h of this.hits){if(!h.target||!m.allows(h.target))continue;
+   if(h.kind==='person')targets.push({id:h.id,owner:h.target.owner,kind:'person',box:{x:h.x,y:h.y,w:h.w,h:h.h}});
+   else if(h.kind==='item'&&(h.target.itemIndex??-1)>(lastItem.get(h.target.owner)?.target?.itemIndex??-1))lastItem.set(h.target.owner,h);}
+  for(const h of lastItem.values())targets.push({id:h.id,owner:h.target!.owner,kind:'item',itemIndex:h.target!.itemIndex,box:{x:h.x,y:h.y,w:h.w,h:h.h}});
+  this.arrows=aimArrows(source,targets,{w:this.width,h:this.height},{avoid:[confirmButtons(L.preview,this.width,L.compact)],head:L.compact?11:15});
+  for(const a of this.arrows){if(a.reached)continue;
+   const line=()=>g.moveTo(a.from.x,a.from.y).quadraticCurveTo(a.control.x,a.control.y,a.to.x,a.to.y);
+   // A light edge and a dark one under the petrol line: readable on the wood and on the light cards.
+   line().stroke({color:PAPER,width:11,alpha:.4,cap:'round'});line().stroke({color:INK,width:8,alpha:.6,cap:'round'});line().stroke({color:PETROL,width:5,cap:'round'});
+   g.poly(a.head.flatMap(p=>[p.x,p.y])).fill(PETROL).stroke({color:INK,width:2.5,join:'round'});}
+  this.stats.aimDraws++;this.stats.aimMs.push(performance.now()-t0);if(this.stats.aimMs.length>600)this.stats.aimMs.shift();}
  hit(x:number,y:number,targetsOnly=false){return [...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).find(r=>{if(targetsOnly&&r.kind==='hand')return false;const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);
@@ -247,7 +273,7 @@ export class TableScene {
  // Hover is tracked only for a mouse at rest: it drives the (i) inspect button of the shell.
  private setHover(id:string|null){if(this.hovered!==id){const was=this.hovered;this.hovered=id;this.onHover(id);if(!this.drag&&[was,id].some(x=>x&&!x.startsWith('person-')))this.draw();else this.onState();}}
  move(e:PointerEvent){if(!this.drag){if(e.pointerType==='mouse'&&!this.blocked){const p=this.point(e);this.setHover(this.hit(p.x,p.y)?.id??null);}return;}if(this.drag.id!==e.pointerId)return;const p=this.point(e),d=this.drag;d.lastX=p.x;d.lastY=p.y;if(!d.moved&&Math.hypot(p.x-d.x,p.y-d.y)>8){d.moved=true;this.setHover(null);this.drawGhost(d.key);this.model.select(d.key);}
-  if(!d.moved)return;this.placeGhost(p.x,p.y);d.insertion=p.y>this.height*.68?this.indexAt(p.x):null;
+  if(!d.moved)return;this.placeGhost(p.x,p.y);this.aimDirty=true;d.insertion=p.y>this.height*.68?this.indexAt(p.x):null;
   // The dragged card is lifted out of the fan; the others open a real gap where it would land.
   const hand=this.hits.filter(x=>x.kind==='hand'),gap=(hand[0]?.w||80)*.42,from=this.model.hand.findIndex(c=>c.key===d.key);
   for(const hit of hand){hit.node.x=hit.x;if(d.insertion===null||hit.key===d.key)continue;const idx=this.model.hand.findIndex(c=>c.key===hit.key),slot=idx>from?idx-1:idx;hit.node.x+=slot>=d.insertion?gap:-gap;}
@@ -333,6 +359,9 @@ export class TableScene {
  stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.pace=null;this.flights=[];this.accents=[];this.deltas=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private tick(){const now=performance.now();
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
+  if(this.aimDirty)this.drawAim();
+  // Quiet pulse while arrows are shown; reduced motion keeps them static.
+  if(this.arrows.length)this.aimLayer.alpha=this.reduced?1:.8+.2*Math.sin(now/280);
   if(this.inputStart){const start=this.inputStart;this.inputStart=0;requestAnimationFrame(()=>this.stats.inputMs.push(performance.now()-start));}
   if(this.seqStarted&&this.pace){const t=now-this.seqStarted,P=this.pace;if(t>=P.total)this.finish('complete');else{
    this.flights.forEach(f=>{const d=f.end-f.start,p=(t-f.start)/d;f.node.visible=p>=0&&p<=1;if(!f.node.visible)return;

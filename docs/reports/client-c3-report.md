@@ -6,7 +6,8 @@
 ([sezione](#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)), **C3-2
 (sequenza affidabile) è fatto** ([sezione](#c3-2--sequenza-affidabile)), con una
 **revisione dopo la prova del proprietario** (una carta per volta, tocco che passa alla
-successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-proprietario)). Gli altri
+successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-proprietario)). **C3-3 (frecce verso i bersagli ammessi, O6) è fatto**
+([sezione](#c3-3--o6-frecce-verso-i-bersagli-ammessi)). Gli altri
 blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
 è fatta a parte.
 
@@ -327,3 +328,90 @@ Esecuzioni finali: [1366×768](client-c3/c3-2r/resolution-1366x768.json) e
   `modes-*` e [size.json](client-c3/c3-2r/size.json) in
   [client-c3/c3-2r](client-c3/c3-2r/) (catture solo per `VerifyResolution` e `Verify`);
   misura D1 in [c3-4/d1-measure.json](client-c3/c3-4/d1-measure.json).
+
+## C3-3 — O6: frecce verso i bersagli ammessi
+
+30 ottobre 2026. Decisione D3 del piano (confermata). Nessun cambio a regole, server,
+protocollo, catalogo o `client-debug`; la sequenza del round non cambia.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Geometria pura (`src/readability.ts`) | `aimArrows(carta, bersagli, schermo, {avoid, head})`: una freccia per bersaglio che le viene dato, dal bordo della carta al bordo del bersaglio (scarto 4 px) su una curva quadratica il cui punto di controllo resta nello schermo (quindi lo restano curva e punta). La curva piega verso il centro dello schermo; se attraversa la zona da tenere libera (la colonna di ✓ e ×, `confirmButtons`, con 8 px di margine) prova partenze lungo il bordo della carta e piegature maggiori dai due lati e sceglie la meno interferente; `crosses` dice se non basta. `reached`: la carta è già sul bersaglio o la freccia sarebbe un moncone (< 12 px): niente da disegnare. Appoggi: `edgePoint`, `bezier`, `confirmBox`, `confirmButtons`. |
+| Scena (`src/scene.ts`) | `drawAim()` su un livello `aimLayer` fra tavolo ed effetti: una freccia per personaggio per cui `Model.allows` è vero (le stesse categorie dei contorni) e, per le carte che prendono un oggetto, una per posto che ne ha, verso l'ultimo oggetto ammesso (l'unico per intero nella FFA); gli oggetti restano contornati come prima. Ridisegno a ogni vista, scelta e trascinamento (al massimo una volta per frame; la partenza segue la carta trascinata). Nessuna freccia se la scelta è bloccata (`Model.locked`: pending, eliminato, esito) o se è già stato scelto un bersaglio (resta la linea verso l'anteprima). Pulsazione leggera dell'opacità (0,6–1); con movimento ridotto il livello è fisso a opacità 1. Il server resta il giudice: le frecce non validano nulla. |
+| Esposizione | `window.__bm.state.arrows` (con `reached` e `crosses`), `aimAlpha`, `reduced`, `stats.aimDraws` e `aimMs`: solo per la verifica. |
+| Test automatici | Client **144** (da 133): 11 nuovi in `tests/readability.test.ts` per duello e FFA a cinque a 1366×768 e 844×390 (una freccia per bersaglio, punta sul bordo, curva e testa nello schermo, fuori da ✓ e ×, `reached`, scelta del lato). Nessun atteso esistente cambiato; typecheck pulito. |
+| Server reale | **Sì.** Nuovo `VerifyAim` (`run.ps1 -Task VerifyAim`, `tools/verify-aim.mjs`), server avviato dallo strumento su database temporaneo. Verde a 1366×768 e 844×390, zero problemi. |
+| Peso | JS gzip 312257 byte (+4212 rispetto a C3-1), totale gzip 1095052 ([size.json](client-c3/c3-3/size.json)). |
+| Emulazione / dispositivo / umano | Edge via Playwright sul PC; tocco emulato con eventi reali del protocollo; nessun dispositivo fisico né prova umana. |
+
+### Cosa controlla `VerifyAim`
+
+Gli attesi sono ricalcolati dalla **vista ricevuta sul socket** (categorie `canTarget` della carta,
+morti e forfait, oggetti per posto), non dalla chiamata del client. Per ogni carta della mano, a tre
+turni di partita, la carta si sceglie con un tocco e si legge la scena.
+
+| Scenario | Cosa si prova |
+|---|---|
+| `duel` (quick 1vCom, mouse) | frecce per ogni carta; trascinamento con le frecce che seguono la carta; rilascio su un bersaglio (mira senza comandi); annullamento per rilascio sul tavolo vuoto; riordino; interruzione del trascinamento con `blur` (C0-R4); pulsazione; prestazioni; poi la partita fino all'esito (nessuna freccia e nessuna scelta a partita finita) |
+| `touch` (quick 1vCom, tocco emulato) | tocco carta e tocco bersaglio; trascinamento con eventi di tocco reali (carta sopra il dito); nessun comando |
+| `reduced` (movimento ridotto) | livello fisso a opacità 1 su 14 campioni in 1 s, frecce presenti |
+| `ffa` (cinque posti, quattro computer) | frecce ai quattro avversari e agli oggetti, nessuna fuori dallo schermo né sopra ✓ o ×, prestazioni del trascinamento |
+| `pending` (FFA con devAlice, devBob e tre computer) | devAlice invia e resta in pending: scegliere una carta o trascinarla non disegna frecce |
+
+Per ogni carta: insieme degli id delle frecce uguale a quello della vista; punta entro 8 px dal bordo del
+bersaglio e mai dentro; 25 campioni della curva e i tre punti della testa dentro lo schermo; nessun campione
+(fuori dalla carta) sopra i **rettangoli reali** di ✓ e × letti dal DOM dopo aver mirato; zero frecce a mira fatta
+e dopo Esc. D12: scegliere una carta con la sequenza in corso la chiude (`input`), la carta resta scelta e le sue
+frecce sono quelle ammesse (esercitato 3 volte su 3 in ogni scenario con sequenza, a entrambe le misure).
+
+| | 1366×768 | 844×390 |
+|---|---:|---:|
+| Carte controllate (duello, tocco, ridotto, FFA, pending) | 72 | 72 |
+| Frecce disegnate / già sul bersaglio (`reached`) | 92 / 6 | 105 / 12 |
+| Carte senza bersagli ammessi (zero frecce, come la vista) | 11 | 1 |
+| Problemi | 0 | 0 |
+
+### Prestazioni del trascinamento con le frecce
+
+Stesso criterio di C0 (almeno 95% degli intervalli entro 20 ms desktop e 33 ms touch, nessun input oltre
+100 ms), ma su **partita reale**: trascinamenti consecutivi sui bersagli per 3,6 s, con la misura della scena
+(`startMeasure` e `endMeasure`). Edge senza finestra visibile, 120 Hz.
+
+| | duello 1366×768 | FFA 1366×768 | duello 844×390 | FFA 844×390 |
+|---|---:|---:|---:|---:|
+| Intervalli rAF | 501 | 513 | 507 | 513 |
+| Cadenza | 120 Hz | 120,1 Hz | 120 Hz | 120,1 Hz |
+| p95 / massimo | 8,5 / 12,7 ms | 8,5 / 10,2 ms | 8,5 / 9,8 ms | 8,5 / 11,2 ms |
+| Entro soglia | 100% (20 ms) | 100% (20 ms) | 100% (33 ms) | 100% (33 ms) |
+| Input → frame p95 / max | 12,2 / 12,2 ms | 10,3 / 10,3 ms | 12,1 / 12,1 ms | 11,7 / 11,7 ms |
+| Ridisegni delle frecce | 467 | 467 | 459 | 467 |
+| Costo di un ridisegno p95 / max | 0,1 / 0,2 ms | 0,1 / 0,2 ms | 0,1 / 0,2 ms | 0,2 / 0,2 ms |
+
+Confronto con C0 (p95 8,4 ms; input p95 7,3 ms desktop e 16,6 ms touch emulato): le frecce non cambiano la
+cadenza. Il campione di input è piccolo (una `pointerdown` per trascinamento). **Non misurato** né senza
+frecce nella stessa corsa (nessun interruttore nel codice) né su dispositivo fisico.
+
+### Limiti e residui
+
+- **Frecce «già sul bersaglio»:** quando la carta alzata tocca il bordo del bersaglio (FFA: la carta alzata sta
+  contro il personaggio in mezzo a destra; nel trascinamento, appena la carta gli passa sopra) la freccia sarebbe
+  un moncone e non si disegna (`reached`); il contorno resta e l'elenco la conta.
+- **Carte che prendono un oggetto proprio** (azioni base): la carta alzata copre in parte i propri oggetti e la
+  freccia è corta, a volte assente. Il contorno resta.
+- **Zona di ✓ e ×:** le frecce evitano la colonna dei due pulsanti, non l'intero pannello. In alcune scelte
+  (`crossPanel` nelle evidenze) una freccia attraversa l'area del testo del pannello, che però compare solo a
+  scelta fatta, quando le frecce non ci sono più.
+- **Pending ed esito** provati su partite reali (due umani; duello perso fino alla fine). L'eliminazione in FFA
+  con un morto che guarda passa dallo stesso `Model.locked` ma non è capitata in queste partite.
+- Frecce dello stesso colore per personaggi e oggetti: la differenza è la destinazione. Un tratteggio per gli
+  oggetti può seguire dalla prova umana.
+- **Regressione sulla build finale:** `Verify` e `VerifyModes` verdi a entrambe le misure; `VerifyResolution` verde a entrambe; `VerifyFfa` verde a entrambe le misure (la corsa a 844×390 è finita dopo un mio rilancio sovrapposto, che ha trovato la porta occupata dal suo server). `build.ps1 -Task Test -Offline` e `check-rules.py` passano.
+- Dispositivo fisico, iPhone, prova umana: non fatti. Dati locali non toccati.
+- **Osservazione del proprietario durante il blocco:** le scritte «Scegli una carta» e «Scegli il bersaglio sul
+  tavolo» al centro del tavolo sono brutte e finiscono sotto le carte alzate; da togliere o spostare in una zona
+  meno affollata con un modo per richiamare l'attenzione. **Non fatto in C3-3** (fuori perimetro): proposto come
+  attività separata.
+- Evidenze: [aim-1366x768.json](client-c3/c3-3/aim-1366x768.json), [aim-844x390.json](client-c3/c3-3/aim-844x390.json),
+  [catture](client-c3/c3-3/screens/) `aim-*`; regressione e [size.json](client-c3/c3-3/size.json) nella stessa cartella.
