@@ -242,16 +242,15 @@ verifica.
 
 `Model.round` conserva l'ultimo round risolto: le viste dello stesso turno non lo
 cambiano; dopo una caduta o un reset è marcato `crossed` e non mostra differenze.
-La sequenza va **fino in fondo** e, dopo la prova del proprietario, **una carta per
-volta**: ogni carta compare presso l'autore, vola al bersaglio e lo colpisce (fino a
-1,5 s). Il contenuto è quello di C3-4 (sezione sotto). Il ritmo (`pace` in
-`src/resolution.ts`) sta entro 10 s per round (D10 portata a 10 s): in duello ogni
-carta dura 1,5 s, con cinque carte in FFA e tutte le fasi circa 1,43 s.
+La sequenza va **fino in fondo**, **una carta per volta**, con la regia di D13 (revisione
+di C3-4, sezione sotto). Il ritmo (`pace` in `src/resolution.ts`) sta entro il **tetto di
+20 s** per round di D10, anche in FFA con cinque mosse; il tetto non è la durata tipica: un
+duello dura meno della metà.
 
 - una vista dello stesso turno annulla solo un trascinamento, non la sequenza (K1);
-- un tocco, clic o tasto sul tavolo passa alla carta successiva, poi alla pesca, al fine
-  turno e alla coda; dopo l'ultima la sequenza finisce (D12). Scegliere una carta della mano la
-  chiude e sceglie subito la carta;
+- un tocco, clic o tasto sul tavolo passa al **passo successivo** della carta (D12 con
+  D13), poi alla pesca, al fine turno e alla coda; dopo l'ultimo la sequenza finisce. Scegliere
+  una carta della mano la chiude e sceglie subito la carta;
 - la sequenza si chiude anche con un nuovo turno, un reset, una caduta, «Salta
   effetti», ridimensionamento o scheda nascosta; aprire un dialogo o perdere il fuoco
   della finestra non la ferma;
@@ -268,41 +267,66 @@ modello. Compare a sequenza finita, saltata o interrotta, subito con movimento
 ridotto o a scheda nascosta, e resta fino alla prima scelta di carta o al round
 successivo. Il riepilogo breve testuale conta i suoi 6 s solo a scheda visibile (K5).
 
-## Contenuto della sequenza (C3-4)
+## Contenuto e regia della sequenza (C3-4, revisione D13)
 
 `timeline` in `src/resolution.ts` (funzione pura) costruisce il round dai soli dati
 certi: fatti del modello, catalogo (costo nominale, quali nomi sono oggetti del mazzo) e
-righe regolari del report verificate. La scena (`beginSequence` in `src/scene.ts`) la
-disegna in cinque fasi:
+righe regolari del report verificate. `pace` ne fa la regia (D13, dopo la prova del
+proprietario su C3-4) e `directionProblems` ne controlla l'ordine. La scena
+(`beginSequence` in `src/scene.ts`) la disegna così:
 
-1. **costi:** un gettone per mossa e risorsa del costo nominale lascia ogni autore,
-   tutti insieme, anche per le mosse poi annullate (R04);
-2. **mosse,** nell'ordine di `resolvedMoves`: la carta compare scoperta all'autore, si
-   cala sul bersaglio (o su sé) con un impatto generico e poi va allo scarto dell'autore.
-   L'annullata riceve il timbro «ANNULLATA». L'oggetto scelto e sparito da quel posto si
-   consuma (oggetto proprio), passa all'autore (stesso nome comparso presso di lui) o si
-   rompe (sparito da un altro posto senza ricomparire). La bound mostra la carta scartata;
-3. **pesca:** dal mazzo di ogni posto escono quante carte dice il conteggio. Le proprie
+1. **per ogni carta,** nell'ordine di `resolvedMoves` (duello contro computer compreso), sei
+   passi uno dopo l'altro:
+   - **costo** (0,4 s): i gettoni del costo nominale lasciano **quell'**autore, anche per
+     le mosse poi annullate; la bound scarta la carta in più; con le righe verificate le
+     risorse del costo calano. Senza nulla da pagare il passo non dura nulla;
+   - **primo piano di chi gioca** (0,9 s): una copia del suo personaggio si ingrandisce e va
+     in una parte libera del tavolo, con accanto la carta giocata in primo piano, e resta lì.
+     Il posto è `closeUp` in `src/readability.ts`: dentro lo schermo, lontano dagli altri
+     posti (personaggio, plancia, oggetti, mano coperta) e dalla mano, la scala più grande
+     vicina al centro; se non c'è posto il personaggio si ingrandisce nel suo posto;
+   - **ritorno** (0,3 s) alla posizione originale;
+   - **volo e impatto** (0,65 s), come prima: la carta vola dal posto dell'autore al
+     bersaglio (o su sé) e lo colpisce; l'annullata riceve il timbro «ANNULLATA»;
+   - **primo piano del bersaglio** (0,5 s): il bersaglio si ingrandisce un po' nel suo posto
+     (`targetUp`), sotto la carta che lo ha colpito. L'oggetto scelto e sparito da quel posto
+     si consuma (oggetto proprio), passa all'autore (stesso nome comparso presso di lui) o si
+     rompe (sparito da un altro posto senza ricomparire);
+   - **variazioni** (0,45 s, solo se la carta ne ha di verificate): barre e numeri della
+     carta, con la risorsa ingrandita. Poi la carta va allo scarto dell'autore;
+2. **pesca:** dal mazzo di ogni posto escono quante carte dice il conteggio. Le proprie
    arrivano scoperte nella mano, quelle degli avversari come dorsi. Gli oggetti del mazzo
    comparsi senza una mossa che li passi vanno al tavolo (il token non è nel catalogo e non
    arriva dal mazzo);
-4. **fine turno:** un riquadro sui posti con righe di fine turno (chi, mai cosa);
-5. **coda:** timbri «ELIMINATO» e «FORFAIT».
+3. **fine turno:** un riquadro sui posti con righe di fine turno (chi, mai cosa);
+4. **coda:** timbri «ELIMINATO» e «FORFAIT».
+
+Oltre il tetto di 20 s (più di cinque carte con tutto) ogni durata si riduce in
+proporzione. Il server paga **tutti** i costi prima di qualsiasi effetto (R04); la regia
+mostra invece il costo di ogni carta subito prima della carta. I passi conservano la loro
+variazione e partono dal valore mostrato, quindi finiscono sempre sulla vista; quando un
+autore successivo paga con una risorsa cambiata da una carta precedente, il valore di
+partenza mostrato differisce da quello del server (`drift` della linea temporale e di
+`stats.beats`).
 
 **Barre e numeri (D1 riaperta, D5).** `reportSteps` legge solo le righe nella forma
 regolare `RISORSA: a->b (d)`, alla fine della riga e al più dopo un'etichetta tra
-parentesi. Il resto del testo del server non si interpreta mai. Prima vengono i costi
-nominali, poi le righe di ogni mossa (`SELF` all'autore, `OPPONENT` al bersaglio), poi il
-fine turno. Ogni riga deve partire da dove ha lasciato il passo precedente e i passi
-devono finire esattamente sulla nuova vista. Allora le plance si muovono **per carta**:
-ogni passo cambia barra e numero nel suo momento, con la risorsa ingrandita sopra la
-plancia («95 → 90» e barra). Altrimenti (veleno a timer di MarvelousCocktail, costo
+parentesi. Il resto del testo del server non si interpreta mai. La verifica segue R04:
+prima i costi nominali, poi le righe di ogni mossa (`SELF` all'autore, `OPPONENT` al
+bersaglio), poi il fine turno. Ogni riga deve partire da dove ha lasciato il passo
+precedente e i passi devono finire esattamente sulla nuova vista. Allora le plance si
+muovono **per carta**, nell'ordine di D13 (costo della carta nel suo passo costo, righe nel
+suo passo variazioni): ogni passo cambia barra e numero nel suo momento, con la risorsa
+ingrandita sopra la plancia («95 → 90» e barra). Altrimenti (veleno a timer di MarvelousCocktail, costo
 pagato diverso dal nominale, nome sconosciuto) barre e numeri restano al valore
 precedente e vanno al finale nella coda (D5), ingranditi allo stesso modo. Le decisioni
 usano sempre la vista finale: solo il disegno delle plance segue i passi, e a sequenza
 finita, saltata o interrotta le plance mostrano la vista. Gli oggetti, i dorsi e la mano
 sul tavolo sono sempre quelli della vista finale. I conteggi di ogni sequenza sono in
-`window.__bm.state.stats.beats`.
+`window.__bm.state.stats.beats`, l'inizio di ogni passo di ogni carta come la scena lo ha
+programmato in `stats.schedule`, i primi piani (riquadro, scala, posto) in `stats.closeUps`.
+Con movimento ridotto non c'è sequenza: lo stesso contenuto resta nel riepilogo statico per
+posto (il riepilogo piccolo con lettere è di C3-6).
 
 ## Frecce verso i bersagli (C3-3, O6)
 
@@ -395,9 +419,9 @@ vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dai retta
 di ✓ e ×), nessuna freccia a scelta bloccata (pending fra due umani, esito), mira con mouse
 e tocco senza comandi, riordino, annullamento, interruzione del trascinamento, D12 e
 prestazioni del trascinamento. `BM_SCENARIOS` sceglie `duel,touch,reduced,ffa,pending`.
-`VerifyResolution` (C3-1, C3-2, C3-4, database temporaneo) gioca quick 1vCom con caduta e rientro,
+`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, database temporaneo) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
-tocchi sul tavolo vuoto che passano di carta in carta, carta scelta durante la sequenza,
+tocchi sul tavolo vuoto che passano di passo in passo, carta scelta durante la sequenza,
 scheda nascosta: reale se il
 browser la riporta, altrimenti emulata e dichiarata),
 FFA con quattro computer (guardando dopo la propria morte), FFA con devBob e tre computer
@@ -408,14 +432,20 @@ sulle viste ricevute, controlla che le variazioni sommate alla vista precedente 
 nuova, che salti, altre partite e viste dello stesso turno non portino differenze e che i
 fatti non cambino sostituendo il testo del server. Da C3-2 controlla anche la scena:
 regole 1, 2, 3 e 6 del piano, una sequenza completa della durata pianificata (al
-massimo 10 s) per ogni round
+massimo 20 s dalla revisione di C3-4) per ogni round
 contiguo con mosse, mai chiusa da una vista, riepilogo statico del round a ogni scelta,
 nessuna sequenza né riepilogo dopo un salto e la riga dei turni risolti; fra umani, la
 regola 4 con il clock che continua. Da C3-4, a ogni sequenza, calate, timbri, gettoni,
 oggetti, scarti, pesche e passi animati uguali ai fatti ricalcolati sulle viste del socket,
 barre per carta esattamente quando la misura delle righe del report torna, ogni plancia
 uguale alla vista a sequenza finita; lo scenario `humans` (FFA con devAlice, devBob e tre
-computer, otto round) registra durata e clock residuo a fine sequenza. `BM_SCENARIOS` sceglie
+computer, otto round) registra durata e clock residuo a fine sequenza (sotto 10 s lo segnala
+in `under10s`, come dato per A2). Dalla revisione di C3-4 (D13), per ogni carta: tutti i passi
+nell'ordine di D13 alle ore pianificate (costo, primo piano, ritorno, volo con l'impatto
+dentro, primo piano del bersaglio, variazioni), le variazioni del costo dentro il passo costo
+della propria carta e mai prima, un primo piano dell'autore e uno del bersaglio, piano della
+scena uguale a quello ricalcolato sulle viste del socket, primi piani dentro lo schermo e senza
+coprire gli altri posti. `BM_SCENARIOS` sceglie
 gli scenari (`quick,reduced,interrupt,ffa,jump,humans,open`); `BM_RECORD=1` aggiunge a
 `tests/resolution-views.json` i casi non ancora registrati (viste reali, carte ridotte
 ai campi che il modello legge) e il catalogo dell'account se manca. Misura anche, senza effetti sul client, quanto spesso le

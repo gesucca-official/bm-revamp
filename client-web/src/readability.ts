@@ -209,3 +209,27 @@ export function arrowShape(a:Arrow,o:{tail:number;neck:number;head:number;minLen
  const flat=(ps:Pt[])=>ps.flatMap(p=>[p.x,p.y]);
  return {outline:flat([tip,bl,...[...L].reverse(),...R,br]),body:flat([...L,...[...R].reverse()]),head:flat(head),shine:[inward(lerp(tip,bl,.2)),inward(lerp(tip,bl,.62))],tip};
 }
+
+/** D13: the boxes a seat occupies on the table (character, board, objects, covered hand); a close-up must leave other seats clear. */
+export const seatBoxes=(s:SeatLayout):Box[]=>[s.person,s.board,...s.items,s.backs];
+export type CloseUp={person:Box;card:Box;box:Box;scale:number;placed:'middle'|'seat'};
+/** D13: the author's close-up, its character enlarged with the played card beside it, in a free part of the table: inside the
+ * screen and clear of `avoid` (the other seats, the hand). The biggest scale whose free place is near the middle of the table
+ * wins (within `near` of the smaller side); failing that, the place nearest to the middle at any scale. If nothing fits even
+ * at `min`, the character grows in its own seat, kept on the screen (`placed: 'seat'`). */
+export function closeUp(person:Box,screen:{w:number;h:number},avoid:Box[],o:{max?:number;min?:number;margin?:number;step?:number;near?:number}={}):CloseUp{
+ const max=o.max??1.6,min=o.min??1.15,m=o.margin??6,step=o.step??8,mid={x:screen.w*.5,y:screen.h*.42},near=(o.near??.4)*Math.min(screen.w,screen.h);
+ let nearest:CloseUp|null=null,nearestD=Infinity;
+ const shape=(s:number,x:number,y:number):CloseUp=>{const pw=person.w*s,ph=person.h*s,ch=ph*.82,cw=ch/1.38,gap=Math.max(6,pw*.08),w=pw+gap+cw;
+  return {person:{x:x-w/2+pw/2,y,w:pw,h:ph},card:{x:x+w/2-cw/2,y,w:cw,h:ch},box:{x,y,w,h:ph},scale:s,placed:'middle'};};
+ for(let k=Math.round(max*20);k>=Math.round(min*20);k--){const s=k/20,probe=shape(s,0,0).box;let best:CloseUp|null=null,dist=Infinity;
+  for(let y=probe.h/2+m;y<=screen.h-probe.h/2-m;y+=step)for(let x=probe.w/2+m;x<=screen.w-probe.w/2-m;x+=step){
+   const d=Math.hypot(x-mid.x,y-mid.y);if(d>=dist)continue;const c=shape(s,x,y),pad={...c.box,w:c.box.w+2*m,h:c.box.h+2*m};
+   if(avoid.some(a=>overlap(pad,a)>0))continue;best=c;dist=d;}
+  if(best&&dist<=near)return best;if(best&&dist<nearestD-1){nearest=best;nearestD=dist;}}
+ if(nearest)return nearest;
+ const c=shape(min,person.x,person.y),bx=Math.max(c.box.w/2+m,Math.min(screen.w-c.box.w/2-m,c.box.x+c.box.w/2-c.person.w/2)),by=Math.max(c.box.h/2+m,Math.min(screen.h-c.box.h/2-m,c.box.y));
+ return {...shape(min,bx,by),placed:'seat'};}
+/** D13: the target comes forward a little in its own seat, kept on the screen. */
+export function targetUp(person:Box,screen:{w:number;h:number},scale=1.25,m=4):Box{const w=person.w*scale,h=person.h*scale;
+ return {x:Math.max(w/2+m,Math.min(screen.w-w/2-m,person.x)),y:Math.max(h/2+m,Math.min(screen.h-h/2-m,person.y)),w,h};}

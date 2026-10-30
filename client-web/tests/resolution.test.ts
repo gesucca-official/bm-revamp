@@ -186,27 +186,40 @@ test('model round: set by a new turn, kept by views of the same turn, crossed af
  const j=pair('jumpAfterForfeits'),jm=new Model(j.previous,j.me);jm.receive(clone(j.next));assert.equal(jm.round!.facts.relation,'jump');assert.equal(hasDifference(jm.round),false);
 });
 
-// C3-2 revision (owner, D10 raised to 10 s, D12): one card at a time, slower, within the budget; a tap goes to the next card.
-// C3-4 adds the phases of costs, draws and end of turn around the cards: the same checks with every combination.
-import {pace,nextStop,PACE} from '../src/resolution.ts';
-const phaseSets=[{},{costs:true},{costs:true,draws:true},{costs:true,draws:true,endOfTurn:true},{endOfTurn:true}];
-test('pace: one card at a time, slower in a duel, five cards of the FFA within 10 s',()=>{
- for(const n of [1,2,3,4,5])for(const ph of phaseSets){const p=pace(n,ph);
-  assert.ok(p.total<=PACE.budget+1,`${n} moves within the budget (${p.total})`);
-  assert.ok(!p.costs||p.moves[0].at>=p.costs.at+p.costs.dur-1,'costs before the cards (R04)');
-  p.moves.forEach((m,i)=>{if(i)assert.ok(m.at>=p.moves[i-1].at+p.moves[i-1].dur-1,'cards do not overlap');});
-  const last=p.moves.at(-1)!,after=[p.draws,p.endOfTurn,p.tail].filter(x=>!!x) as {at:number;dur:number}[];
-  assert.ok(after[0].at>=last.at+last.dur-1,'draws, end of turn and tail after the cards');
-  after.forEach((x,i)=>{if(i)assert.ok(x.at>=after[i-1].at+after[i-1].dur-1,'phases in order');});}
- assert.equal(pace(2,{costs:true,draws:true}).moves[0].dur,PACE.moveMax,'duel: each card at the slowest pace');
- assert.ok(pace(2).moves[0].dur>=3*360,'about three times slower than the 1.2 s sequence shared by two cards');
- const ffa=pace(5,{costs:true,draws:true,endOfTurn:true});assert.ok(ffa.moves[0].dur>=1400,'FFA, five cards with every phase: almost the duel pace');assert.ok(ffa.total<=10000);
+// C3-4 revision (owner, D13; D10 raised to a 20 s cap): every card has the same six beats in order — cost, author close-up,
+// back to its seat, flight and impact, target close-up, changes — then draws, end of turn and tail; a tap goes to the next
+// beat. This replaces the pace of C3-2/C3-4 (costs of every author first, then the cards): a deliberate change of D13.
+import {pace,nextStop,directionProblems,PACE,BEATS} from '../src/resolution.ts';
+const needSets=[{},{cost:true},{changes:true},{cost:true,changes:true}];
+const phaseSets=[{},{draws:true},{draws:true,endOfTurn:true},{endOfTurn:true}];
+test('D13 pace: every card has its beats in order, back to back, within the 20 s cap',()=>{
+ for(const n of [1,2,3,4,5,8])for(const need of needSets)for(const ph of phaseSets){const p=pace(Array.from({length:n},()=>need),ph);
+  assert.deepEqual(directionProblems(p),[],`${n} cards ${JSON.stringify(need)} ${JSON.stringify(ph)}`);
+  assert.ok(p.total<=PACE.budget+1,`${n} cards within the cap (${p.total})`);
+  for(const m of p.moves){assert.equal(m.cost.dur>0,!!need.cost);assert.equal(m.changes.dur>0,!!need.changes);
+   assert.ok(m.cost.at<=m.author.at&&m.author.at<m.back.at&&m.back.at<m.flight.at&&m.flight.at<m.target.at&&m.target.at<=m.changes.at,'cost, author, back, flight, target, changes');}}
+ // Duel: two cards with everything and every phase stay well under the cap, at the full pace.
+ const duel=pace(2,{draws:true,endOfTurn:true});assert.equal(duel.total,2*BEATS.reduce((n,b)=>n+PACE[b],0)+PACE.draws+PACE.endOfTurn+PACE.tail);assert.ok(duel.total<10000);
+ // FFA: five cards with everything still at the full pace, within 20 s; the close-ups in the ranges proposed to the owner.
+ const ffa=pace(5,{draws:true,endOfTurn:true});assert.ok(ffa.total<=PACE.budget,`five cards ${ffa.total}`);
+ for(const m of ffa.moves){assert.ok(m.author.dur>=600&&m.author.dur<=1000);assert.ok(m.target.dur>=400&&m.target.dur<=600);assert.equal(m.author.dur,PACE.author);}
+ // Beyond the cap (eight cards) everything is scaled, still in order.
+ const many=pace(8,{draws:true,endOfTurn:true});assert.ok(many.total<=PACE.budget+1&&many.total>=PACE.budget-8);assert.ok(many.moves[0].author.dur<PACE.author);
  assert.deepEqual(pace(0).moves,[]);
 });
-test('D12: each tap jumps to the next card, then the draws, the end of turn, the tail and the end',()=>{
- const p=pace(3,{costs:true,draws:true,endOfTurn:true}),stops=[p.moves[0].at,p.moves[1].at,p.moves[2].at,p.draws!.at,p.endOfTurn!.at,p.tail.at,p.total];let t=1;
- for(const s of stops){t=nextStop(p,t);assert.equal(t,s);}
+test('D12 with D13: each tap jumps to the next beat that shows something, then the draws, the end of turn, the tail and the end',()=>{
+ const p=pace([{cost:true,changes:true},{},{changes:true}],{draws:true,endOfTurn:true});
+ const stops=[...p.moves.flatMap(m=>BEATS.filter(b=>m[b].dur>0).map(b=>m[b].at)),p.draws!.at,p.endOfTurn!.at,p.tail.at,p.total];let t=1;
+ assert.equal(stops.length,6+4+5+4,'zero-length beats are no stop');
+ for(const s of stops.slice(1)){t=nextStop(p,t);assert.equal(t,s);}
  assert.equal(nextStop(p,p.total),p.total,'past the last stop: the end');
+});
+test('D13 order checker: a plan out of order, overlapping or beyond the cap is reported',()=>{
+ const p=pace(2,{draws:true});assert.deepEqual(directionProblems(p),[]);
+ const swapped=structuredClone(p);[swapped.moves[0].flight,swapped.moves[0].back]=[swapped.moves[0].back,swapped.moves[0].flight];assert.ok(directionProblems(swapped).length);
+ const late=structuredClone(p);late.total=PACE.budget+500;assert.ok(directionProblems(late).some(x=>x.includes('cap')));
+ const lap=structuredClone(p);lap.moves[1]={...lap.moves[1],at:lap.moves[0].at+10};assert.ok(directionProblems(lap).some(x=>x.includes('overlaps')));
+ const flat=structuredClone(p);flat.moves[0].author={at:flat.moves[0].author.at,dur:0};assert.ok(directionProblems(flat).some(x=>x.includes('no author')));
 });
 
 // C3-4: per-card changes from the regular report lines (D1 reopened), verified on the views, and the round timeline.
@@ -251,7 +264,7 @@ test('D1: replacing the server sentences never changes the numbers shown, it onl
   const s=clone(c.next);for(const m of s.resolvedMoves)for(const k of Object.keys(m.moveReport) as ('SELF'|'OPPONENT')[])m.moveReport[k]=m.moveReport[k]!.map(()=>'∅');for(const k of Object.keys(s.timeBasedEffects))s.timeBasedEffects[k]=s.timeBasedEffects[k].map(()=>'∅');
   const u=timeline(c.previous,s,resolve(c.previous,s,c.me,catalog),catalog)!;
   // Without lines only the costs remain: they rebuild a round only when nothing else changed, otherwise the totals.
-  if(u.bars==='per-card')assert.ok(u.moves.every(m=>!m.steps.length)&&!u.endOfTurn.steps.length&&u.costSteps.length===u.totals.length,`${name}: only costs`);else assert.equal(u.reason!.length>0,true);
+  if(u.bars==='per-card')assert.ok(u.moves.every(m=>!m.steps.length)&&!u.endOfTurn.steps.length&&u.moves.reduce((n,m)=>n+m.costSteps.length,0)===u.totals.length,`${name}: only costs`);else assert.equal(u.reason!.length>0,true);
   assert.deepEqual({...beats(u),steps:0},{...beats(t),steps:0},`${name}: same beats`);assert.deepEqual(u.totals,t.totals);}
 });
 test('timeline: cards, voids, costs, objects, draws, end of turn and deaths as the facts give them',()=>{
@@ -287,4 +300,43 @@ test('timeline: cards, voids, costs, objects, draws, end of turn and deaths as t
  const lt=timelineOf('lethalEndOfTurn');assert.ok(lt.endOfTurn.steps.some(s=>s.resource==='HEALTH'&&s.from>0&&s.to<=0));
  // A voided bound keeps its extra card (R04): no discard shown.
  const vf=facts('boundDiscard'),vb=timeline(pair('boundDiscard').previous,pair('boundDiscard').next,{...vf,moves:vf.moves.map(m=>({...m,void:!!m.discard}))},catalog)!;assert.equal(beats(vb).discards,0);
+});
+
+// C3-4 revision (D13): each card's cost is shown just before it, so the steps are re-chained from what the boards show.
+test('D13: per card, its cost then its changes, re-chained from the previous view, end exactly on the new view',()=>{
+ let drift=0;
+ for(const name of contiguous){const c=pair(name),t=timelineOf(name);
+  const start=Object.fromEntries(Object.entries(c.previous.players).map(([id,p])=>[id,{...p.character.resources}]));
+  const end=chained([...t.moves.flatMap(m=>[...m.costSteps,...m.steps]),...t.endOfTurn.steps],start as Record<string,Record<string,number>>);
+  for(const [id,p] of Object.entries(c.next.players))for(const [k,v] of Object.entries(p.character.resources))assert.equal(end[id][k],v,`${name} ${id} ${k}`);
+  // Same changes as the server's lines, only the starting values may move (drift), and the costs are this card's own.
+  const r=stepsOf(name);if(!r.verified)continue;
+  t.moves.forEach((m,i)=>{assert.deepEqual(m.costSteps.map(x=>[x.seat,x.resource,x.to-x.from]),r.moveCosts[i].map(x=>[x.seat,x.resource,x.to-x.from]));
+   assert.deepEqual(m.steps.map(x=>[x.seat,x.resource,x.to-x.from]),r.moves[i].map(x=>[x.seat,x.resource,x.to-x.from]));
+   assert.ok(m.costSteps.every(x=>x.seat===m.author),'cost at the author');assert.equal(m.tokens.length,m.costSteps.length,'one token per cost step');});
+  drift+=t.drift;
+  assert.deepEqual(directionProblems(t.pace),[],name);
+  t.pace.moves.forEach((p,i)=>{assert.equal(p.cost.dur>0,t.moves[i].tokens.length>0||!!t.moves[i].discard,`${name}: cost beat only to pay`);assert.equal(p.changes.dur>0,t.moves[i].steps.length>0);});}
+ assert.ok(drift>=0);
+});
+test('D13 drift: a later author paying with a resource an earlier card changed starts from the shown value, still ends on the view',()=>{
+ // Built from a real round: move j's author was hit (HEALTH line) by an earlier move i; j's card is given a HEALTH cost
+ // of 1 and every server value of that seat's HEALTH after the costs moves down by 1, as the server would write it.
+ let done=false;
+ for(const name of contiguous){const c=pair(name),f=facts(name);
+  for(const [i,mi] of f.moves.entries()){if(mi.self)continue;const j=f.moves.findIndex((m,k)=>k>i&&m.author===mi.target);if(j<0)continue;
+   if(!(c.next.resolvedMoves[i].moveReport.OPPONENT??[]).some(l=>l.startsWith('HEALTH:')))continue;
+   const seat=mi.target,next=clone(c.next),shift=(l:string)=>l.replace(/^(\([^()]*\) )?HEALTH: (-?\d+)->(-?\d+) \((-?\d+)\)$/,(_,lab,a,b,d)=>`${lab??''}HEALTH: ${+a-1}->${+b-1} (${d})`);
+   next.resolvedMoves.forEach((m,k)=>{const who=(side:string)=>side==='SELF'?m.playerId:(f.moves[k].target);for(const side of ['SELF','OPPONENT'] as const)if(who(side)===seat&&m.moveReport[side])m.moveReport[side]=m.moveReport[side]!.map(shift);});
+   if(next.timeBasedEffects[seat])next.timeBasedEffects[seat]=next.timeBasedEffects[seat].map(shift);
+   next.players[seat].character.resources.HEALTH!-=1;
+   const cat=[{...catalog.find(x=>x.name===f.moves[j].card)!,cost:{...catalog.find(x=>x.name===f.moves[j].card)!.cost,HEALTH:1}},...catalog];
+   const nf=resolve(c.previous,next,c.me,cat),t=timeline(c.previous,next,nf,cat)!;
+   assert.equal(t.bars,'per-card',`${name}: still verified`);assert.ok(t.drift>=1,`${name}: drift ${t.drift}`);
+   const start=Object.fromEntries(Object.entries(c.previous.players).map(([id,p])=>[id,{...p.character.resources}]));
+   const end=chained([...t.moves.flatMap(m=>[...m.costSteps,...m.steps]),...t.endOfTurn.steps],start as Record<string,Record<string,number>>);
+   for(const [id,p] of Object.entries(next.players))for(const [k,v] of Object.entries(p.character.resources))assert.equal(end[id][k],v,`${name} ${id} ${k}`);
+   done=true;break;}
+  if(done)break;}
+ assert.ok(done,'a recorded round with an author hit before playing');
 });

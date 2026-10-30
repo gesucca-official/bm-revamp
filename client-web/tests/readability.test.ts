@@ -171,3 +171,20 @@ test('a short arrow keeps a readable head: the tip goes into the target and the 
   assert.ok(headLen>=Math.min(o.head,len*.45)-.5&&headLen<=o.head+.5&&headLen<=len*.6,`gap ${gapPx}: head ${headLen.toFixed(1)} of ${len.toFixed(1)}`);
   assert.ok(s.tip.y<a.to.y+.01,`gap ${gapPx}: the tip points up, into the target`);}
 });
+
+// C3-4 revision (D13): the author's close-up and the target's, at both sizes, in the duel and the five-seat FFA.
+import {closeUp,targetUp,seatBoxes} from '../src/readability.ts';
+for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`D13 close-ups at ${w}×${h} with ${ids.length} seats: on the screen, clear of the other seats and of the hand`,()=>{
+ const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(id=>[id,2]))),H=l.hand,n=7;
+ // The fan as the scene draws it, with the lift of a raised card.
+ const hand:Box[]=Array.from({length:n},(_,i)=>({x:H.center+(i-(n-1)/2)*H.step,y:H.y-H.lift/2,w:H.w*H.zoom,h:H.h+H.lift}));
+ for(const seat of l.seats){const others=l.seats.filter(s=>s!==seat).flatMap(seatBoxes),c=closeUp(seat.person,{w,h},[...others,...hand]);
+  assert.equal(c.placed,'middle',`${seat.id}: a free place exists`);assert.ok(c.scale>=1.15,`${seat.id}: enlarged (${c.scale})`);
+  for(const b of [c.box,c.person,c.card])assert.ok(inside(b,w,h),`${seat.id}: inside the screen`);
+  for(const o of [...others,...hand])assert.equal(overlap(c.box,o),0,`${seat.id}: covers nothing of the other seats or the hand`);
+  assert.ok(c.person.h>seat.person.h*1.1&&c.card.x>c.person.x,`${seat.id}: character bigger, card beside it`);
+  const t=targetUp(seat.person,{w,h});assert.ok(inside(t,w,h),`${seat.id}: target close-up inside`);
+  for(const o of l.seats.filter(s=>s!==seat))assert.equal(overlap(t,o.person),0,`${seat.id}: target close-up clear of ${o.id}'s character`);}
+ // Nowhere to go: the character grows in its seat, still on the screen.
+ const s=l.seats[0],f=closeUp(s.person,{w,h},[{x:w/2,y:h/2,w,h}]);assert.equal(f.placed,'seat');assert.ok(inside(f.box,w,h));
+});

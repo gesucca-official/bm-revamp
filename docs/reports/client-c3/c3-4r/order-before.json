@@ -1,0 +1,371 @@
+{
+ "date": "2026-10-30",
+ "kind": "reproduction on the HEAD build (f75d85a) before the change: real quick 1vCom, server on a temporary database, Edge via Playwright; boards sampled every ~30 ms from the moment the new turn is drawn; plan = pace of resolution.ts at HEAD",
+ "runs": {
+  "1366x768.run1": [
+   {
+    "turn": 1,
+    "moves": [
+     "ComPlayer_9041:Rabbia Psicotica da Meth",
+     "devAlice:STORDIAMOTI HO DETTO"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": {
+      "at": 0,
+      "dur": 650
+     },
+     "firstCardAppears": 650,
+     "firstHit": 1730
+    },
+    "firstBoardChangeMs": 282,
+    "boardChanges": [
+     {
+      "ms": 282,
+      "seat": "ComPlayer_9041",
+      "resource": "TOXICITY",
+      "from": 10,
+      "to": 5
+     },
+     {
+      "ms": 282,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 25,
+      "to": 10
+     },
+     {
+      "ms": 1715,
+      "seat": "ComPlayer_9041",
+      "resource": "HEALTH",
+      "from": 100,
+      "to": 95
+     },
+     {
+      "ms": 1715,
+      "seat": "devAlice",
+      "resource": "HEALTH",
+      "from": 100,
+      "to": 85
+     }
+    ],
+    "tokens": [
+     {
+      "seat": "ComPlayer_9041",
+      "move": 0,
+      "resource": "TOXICITY",
+      "amount": 5
+     },
+     {
+      "seat": "devAlice",
+      "move": 1,
+      "resource": "VIOLENCE",
+      "amount": 15
+     }
+    ]
+   }
+  ],
+  "844x390": [
+   {
+    "turn": 1,
+    "moves": [
+     "ComPlayer_5000:Riflessi Aumentati dalla Speed",
+     "devAlice:LIEVE FASTIDIO"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": {
+      "at": 0,
+      "dur": 650
+     },
+     "firstCardAppears": 650,
+     "firstHit": 1730
+    },
+    "firstBoardChangeMs": 287,
+    "boardChanges": [
+     {
+      "ms": 287,
+      "seat": "ComPlayer_5000",
+      "resource": "TOXICITY",
+      "from": 10,
+      "to": 0
+     }
+    ],
+    "tokens": [
+     {
+      "seat": "ComPlayer_5000",
+      "move": 0,
+      "resource": "TOXICITY",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "turn": 2,
+    "moves": [
+     "ComPlayer_5000:Ghigno co' i' Denti Marci",
+     "devAlice:LIEVE FASTIDIO"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1049,
+    "boardChanges": [
+     {
+      "ms": 1049,
+      "seat": "devAlice",
+      "resource": "ALERTNESS",
+      "from": 20,
+      "to": 15
+     },
+     {
+      "ms": 1049,
+      "seat": "ComPlayer_5000",
+      "resource": "ALERTNESS",
+      "from": 35,
+      "to": 40
+     }
+    ],
+    "tokens": []
+   },
+   {
+    "turn": 3,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_5000:Grab"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1011,
+    "boardChanges": [
+     {
+      "ms": 1011,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 35,
+      "to": 40
+     }
+    ],
+    "tokens": []
+   },
+   {
+    "turn": 4,
+    "moves": [
+     "ComPlayer_5000:Ghigno co' i' Denti Marci",
+     "devAlice:LIEVE FASTIDIO"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1041,
+    "boardChanges": [
+     {
+      "ms": 1041,
+      "seat": "devAlice",
+      "resource": "ALERTNESS",
+      "from": 15,
+      "to": 10
+     },
+     {
+      "ms": 1041,
+      "seat": "ComPlayer_5000",
+      "resource": "ALERTNESS",
+      "from": 38,
+      "to": 43
+     }
+    ],
+    "tokens": []
+   },
+   {
+    "turn": 5,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_5000:Metabolismo Corrotto"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1025,
+    "boardChanges": [
+     {
+      "ms": 1025,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 45,
+      "to": 50
+     }
+    ],
+    "tokens": []
+   }
+  ],
+  "1366x768": [
+   {
+    "turn": 1,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_3507:Steal"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": {
+      "at": 0,
+      "dur": 650
+     },
+     "firstCardAppears": 650,
+     "firstHit": 1730
+    },
+    "firstBoardChangeMs": 214,
+    "boardChanges": [
+     {
+      "ms": 214,
+      "seat": "ComPlayer_3507",
+      "resource": "ALERTNESS",
+      "from": 35,
+      "to": 25
+     },
+     {
+      "ms": 1656,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 25,
+      "to": 30
+     }
+    ],
+    "tokens": [
+     {
+      "seat": "ComPlayer_3507",
+      "move": 1,
+      "resource": "ALERTNESS",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "turn": 2,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_3507:Ago Marcio e Spezzato"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1035,
+    "boardChanges": [
+     {
+      "ms": 1035,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 30,
+      "to": 35
+     }
+    ],
+    "tokens": []
+   },
+   {
+    "turn": 3,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_3507:Rabbia Psicotica da Meth"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": {
+      "at": 0,
+      "dur": 650
+     },
+     "firstCardAppears": 650,
+     "firstHit": 1730
+    },
+    "firstBoardChangeMs": 236,
+    "boardChanges": [
+     {
+      "ms": 236,
+      "seat": "ComPlayer_3507",
+      "resource": "TOXICITY",
+      "from": 15,
+      "to": 10
+     },
+     {
+      "ms": 1678,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 35,
+      "to": 40
+     }
+    ],
+    "tokens": [
+     {
+      "seat": "ComPlayer_3507",
+      "move": 1,
+      "resource": "TOXICITY",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "turn": 4,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_3507:Metabolismo Corrotto"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1027,
+    "boardChanges": [
+     {
+      "ms": 1027,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 40,
+      "to": 45
+     }
+    ],
+    "tokens": []
+   },
+   {
+    "turn": 5,
+    "moves": [
+     "devAlice:LIEVE FASTIDIO",
+     "ComPlayer_3507:Ago Marcio e Spezzato"
+    ],
+    "bars": "per-card",
+    "plan": {
+     "costs": null,
+     "firstCardAppears": 0,
+     "firstHit": 1080
+    },
+    "firstBoardChangeMs": 1026,
+    "boardChanges": [
+     {
+      "ms": 1026,
+      "seat": "devAlice",
+      "resource": "VIOLENCE",
+      "from": 45,
+      "to": 50
+     }
+    ],
+    "tokens": []
+   }
+  ]
+ }
+}

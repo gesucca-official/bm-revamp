@@ -1,8 +1,8 @@
 # Roadmap del client web animato
 
-**30 ottobre 2026 — versione 29. C0, C1 e C2 sono chiuse; C3 è in corso nel
-[piano C3](client-c3-plan.md): C3-1, C3-2 (con la revisione dopo la prova del
-proprietario), C3-3 e C3-4 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**30 ottobre 2026 — versione 30. C0, C1 e C2 sono chiuse; C3 è in corso nel
+[piano C3](client-c3-plan.md): C3-1, C3-2 e C3-4 (ciascuno con la revisione dopo la prova del
+proprietario) e C3-3 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -521,6 +521,13 @@ soli dati certi; barre e numeri si muovono carta per carta quando le righe regol
 report ricostruiscono esattamente la vista, altrimenti dal valore precedente al finale
 (D1 riaperta, D5). Fra umani, in FFA a cinque, la sequenza usa quasi tutti i 10 s e lascia
 20–21 s del clock: dato per A2 ([rapporto C3](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)).
+**Revisione di C3-4 dopo la prova del proprietario (D13):** le risorse non si animano più
+prima della carta (i costi di tutti gli autori precedevano la prima carta); ogni carta, anche
+in duello, segue costo → primo piano di chi gioca con la carta → ritorno → volo e impatto →
+primo piano del bersaglio → variazioni; tetto del round 20 s (D10), un tocco passa al passo
+successivo. Misurato: duello 7,0–8,6 s, FFA con cinque mosse 15,2–18,2 s, fra umani 12–15 s di
+clock residuo, mai sotto 10 s ([rapporto C3](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario)).
+Osservazione per C4/C5: sequenza velocizzata attivabile dall'utente.
 
 **Attività:** affinare selezione/bersagli, costo, carta confermata, annullamento,
 variazioni risorse, trasferimento/consumo oggetti, scarto/pesca osservabili,
@@ -703,6 +710,12 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 30 — 30 ottobre 2026, revisione di C3-4 (C3-4r):** regia D13 per ogni carta
+  (costo, primo piano di chi gioca, ritorno, volo e impatto, primo piano del bersaglio,
+  variazioni), funzione pura `pace`/`directionProblems` in `resolution.ts` e geometria dei primi
+  piani `closeUp`/`targetUp` in `readability.ts`; tetto del round 20 s (D10); verificata su
+  partite reali a 1366×768 e 844×390. Osservazione «sequenza velocizzata attivabile» registrata
+  per C4/C5. Nessuna regola, API o servizio cambiato.
 - **Versione 29 — 30 ottobre 2026, C3-4:** sequenza del round con i soli dati certi
   (linea temporale pura `timeline` e verifica delle righe `reportSteps` in `resolution.ts`),
   variazioni per carta secondo D1 riaperta con ripiego sul totale (D5), verificata su partite

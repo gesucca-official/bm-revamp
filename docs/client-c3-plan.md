@@ -10,8 +10,11 @@ nell'[indice della documentazione](README.md#stato-corrente).
 durata più lunga della proposta (5 s per round alla conferma, poi **10 s**). **Dopo la prova del
 proprietario su C3-2** (stesso giorno) D1 è riaperta e cambiata (variazioni per
 carta dalle righe regolari del report, verificate) e si aggiunge D12 (un tocco passa
-alla carta successiva): vedi [decisioni](#decisioni-del-proprietario). Le modifiche di regole e
-catalogo (A1, eventualmente A2) sono attività separate che partono dal regolamento.
+alla carta successiva): vedi [decisioni](#decisioni-del-proprietario). **Dopo la prova del
+proprietario su C3-4** (30 ottobre 2026) si aggiunge D13 (regia per ogni carta: costo, primi
+piani di chi gioca e del bersaglio, volo, variazioni) e D10 diventa un **tetto di 20 s**. Le
+modifiche di regole e catalogo (A1, eventualmente A2) sono attività separate che partono dal
+regolamento.
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -150,8 +153,10 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
    risolvono anche dopo la morte dell'autore (R04).
 8. **Privacy:** nessun fronte avversario fuori da quanto `resolvedMoves` identifica;
    dorsi dai conteggi.
-9. **Durata:** fino a **10 s** per round (D10: 5 s alla conferma, portati a 10 s dal proprietario nella revisione di C3-2), anche con cinque mosse in FFA; resta
-   valida la regola 4, quindi la sequenza non toglie la possibilità di scegliere.
+9. **Durata:** **tetto di 20 s** per round, anche con cinque mosse in FFA (D10: 5 s alla
+   conferma, 10 s nella revisione di C3-2, tetto di 20 s nella revisione di C3-4 con D13). Il
+   tetto non è la durata tipica; ogni carta segue l'ordine di D13. Resta valida la regola 4,
+   quindi la sequenza non toglie la possibilità di scegliere.
 
 ## Blocchi
 
@@ -160,7 +165,7 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-1 | Modello puro della risoluzione e strumento di verifica — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)) | — |
 | C3-2 | Sequenza affidabile: K1–K5 e riepilogo statico — **fatto** il 29 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-2--sequenza-affidabile)) | C3-1 |
 | C3-3 | O6, frecce verso i bersagli ammessi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-3--o6-frecce-verso-i-bersagli-ammessi)) | — |
-| C3-4 | Sequenza del round con i soli dati certi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)) | C3-2 |
+| C3-4 | Sequenza del round con i soli dati certi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)); **revisione C3-4r** (regia D13) fatta lo stesso giorno ([rapporto](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario)) | C3-2 |
 | C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili | C3-2 |
 | C3-7 | Consolidamento e giudizio del proprietario | tutti |
@@ -303,7 +308,7 @@ non torna. Misura che ha motivato D1 riaperta:
    finale per ogni risorsa (D5). Poi resta il riepilogo statico; morti e forfait
    ricevono l'enfasi.
 
-Le mosse continuano dopo una morte (regola 7). Durata fino a 10 s (D10),
+Le mosse continuano dopo una morte (regola 7). Durata fino a 10 s (D10; tetto di 20 s dalla revisione C3-4r),
 interrompibile.
 
 **Completamento verificabile (partite reali, entrambe le misure).** A ogni round il
@@ -325,6 +330,16 @@ nelle partite fra umani: l'input resta libero (regola 4) e il dato raccolto deci
 A2. Costo nominale diverso da quello
 pagato con stati di risorsa (si mostra il nominale, la variazione vera arriva nel
 complessivo); prestazioni su iPhone (misura di C4).
+
+**Revisione C3-4r dopo la prova del proprietario su C3-4 (30 ottobre 2026).** Il proprietario
+osserva che, quando un personaggio gioca una carta, prima si animano le sue risorse e poi la
+carta. Accertato su partite reali: la fase dei costi di **tutti** gli autori precedeva la prima
+carta (barre mosse a 214–287 ms, prima carta a 650 ms; anche il costo della seconda carta prima
+della prima: [evidenza](reports/client-c3/c3-4r/order-before.json)). Su decisione del
+proprietario (D13) ogni carta ha la sua regia: costo → primo piano di chi gioca → ritorno →
+volo e impatto → primo piano del bersaglio → variazioni; tetto del round 20 s (D10). Il
+riepilogo statico piccolo con lettere resta a C3-6. Esito nel
+[rapporto](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario).
 
 ### C3-5 — Effetti per tipo di danno ed enfasi (O7)
 
@@ -414,7 +429,7 @@ registrate e assegnate, non risolte in C3.
   Assente sui server precedenti. In `contracts.ts` C3-5 potrà aggiungere
   `damage?: string | null` accanto a `role` e `gains`; i personaggi non lo hanno.
 - **A2 — Clock della mossa più lungo** (eventuale, indicato dal proprietario con D10).
-  Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino a 10 s tolgono troppo
+  Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino al tetto di D10 (20 s da D13) tolgono troppo
   tempo per scegliere. Cambia R06 (clock di 30 s, regolamento 1.5): prima il
   regolamento con versione e motivazione, poi server, test e copia del debug. Non è
   in C3.
@@ -428,7 +443,8 @@ registrate e assegnate, non risolte in C3.
 ## Decisioni del proprietario
 
 In grassetto la scelta. Tutte **confermate** dal proprietario il 29 ottobre 2026:
-D1–D4 prima della stesura, D5–D11 dopo; D10 con una modifica rispetto alla proposta.
+D1–D4 prima della stesura, D5–D11 dopo; D10 con una modifica rispetto alla proposta. D12 dopo
+la prova di C3-2; D13 e D10 a 20 s dopo la prova di C3-4 (30 ottobre 2026).
 
 | ID | Domanda | Opzioni | Raccomandazione |
 |---|---|---|---|
@@ -441,8 +457,9 @@ D1–D4 prima della stesura, D5–D11 dopo; D10 con una modifica rispetto alla p
 | D7 | Lingua del report | fatti certi in italiano più testo del server invariato / tradurre le frasi del server | **Fatti in italiano più testo del server** in sezione secondaria; tradurre vorrebbe dire interpretare frasi che non sono un contratto. Confermata. |
 | D8 | Casi rari su partite reali | mazzi sintetici validi per R02 salvati sul database temporaneo e usati in open 1vCom, più viste registrate per le unità / ganci di test nel server | **Mazzi sintetici e viste registrate**: per esempio molte carte di contrasto, presa e furto, tossicità alta, Banzai. Nessun cambio al server; i casi non ottenuti si dichiarano. Confermata. |
 | D9 | Asset degli effetti | grafica vettoriale Pixi / nuove texture e suoni | **Vettoriale**; texture e suoni restano a C4 con provenienza e licenze. Confermata. |
-| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. **Portata a 10 s** dal proprietario il 29 ottobre 2026, nella revisione di C3-2 (una carta per volta, D12): con cinque mosse in FFA ogni carta mantiene il ritmo del duello. |
+| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. **Portata a 10 s** dal proprietario il 29 ottobre 2026, nella revisione di C3-2 (una carta per volta, D12): con cinque mosse in FFA ogni carta mantiene il ritmo del duello. **Rivista dopo la prova di C3-4 (30 ottobre 2026): tetto di 20 s**, anche in FFA con cinque mosse; il tetto non è la durata tipica. Il clock della mossa resta 30 s (regolamento 1.9). Misurato nella revisione C3-4r (D13) su partite reali: duello 7,0–8,6 s; FFA a cinque con cinque mosse 15,2–18,2 s; fra umani (FFA con due umani e tre computer, cinque mosse in ogni round) restano **12–15 s** di clock a fine sequenza, mai meno di 10 s: nessun segnale per A2 da questo dato. |
 | D12 | Avanzamento fra le carte (dopo la prova di C3-2) | automatico, un tocco passa alla carta successiva / manuale solo contro computer / manuale sempre | **Automatico, un tocco accelera** — scelta del proprietario il 29 ottobre 2026. Una carta per volta, più lenta, entro D10; un tocco o tasto sul tavolo passa alla carta successiva, scegliere una carta della mano chiude la sequenza, «Salta effetti» chiude; regola 4 invariata nella sostanza (nessun blocco, nessun Continue). |
+| D13 | Regia di ogni carta (dopo la prova di C3-4) | — (decisione del proprietario) | **Ordine fisso per ogni carta, sempre, duello contro computer compreso:** costo (chi muove paga gettoni ed eventuale scarto prima di tutto) → primo piano di chi gioca (personaggio ingrandito in una parte libera del tavolo, con accanto la carta, circa un secondo) → ritorno al posto → volo e impatto come prima → primo piano del bersaglio (un po' più grande, circa mezzo secondo) → variazioni di quella carta. Il tocco o tasto sul tavolo passa al passo successivo (D12), una carta della mano e «Salta effetti» chiudono, nessun blocco di invio né del clock. Decisa dal proprietario il 30 ottobre 2026. Il costo di ogni carta si mostra prima di lei, mentre il server paga tutti i costi prima degli effetti (R04): presentazione, non regola; i passi conservano la variazione e finiscono sulla vista. **Osservazione per dopo (C4/C5), non fatta:** una versione velocizzata della sequenza, attivabile dall'utente. |
 | D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. Confermata. |
 
 ## Cosa non è in C3

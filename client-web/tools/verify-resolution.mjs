@@ -1,6 +1,8 @@
 // C3-1 end-to-end check against the REAL server: the pure resolution model (src/resolution.ts) on real games.
 // C3-4: each sequence animates what the timeline of the facts says (cards, voids, cost tokens, objects, draws, end of
 // turn, per-card bars only when the report lines verify) and ends on the view; scenario `humans` measures the 30 s clock.
+// C3-4 revision (D13): every card has its beats in order (cost, author close-up, back, flight and impact, target close-up,
+// changes) as the scene scheduled them; close-ups stay on the screen and clear of the other seats; plans within the 20 s cap.
 // Like VerifyFfa it starts the server itself on a temporary database (the local data is never touched) and stops it
 // at the end. Scenarios: quick 1vCom with a drop and rejoin, five-seat FFA with computers, FFA where both humans let
 // the clock run out (turn jump), open 1vCom with two synthetic decks saved through the editor (D8).
@@ -23,7 +25,8 @@ import {createWriteStream,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
-import {resolve,mismatches,timeline,beats} from '../src/resolution.ts';
+import {resolve,mismatches,timeline,beats,directionProblems,BEATS,PACE} from '../src/resolution.ts';
+import {overlap,inside} from '../src/readability.ts';
 
 const repo=resolvePath(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
@@ -293,13 +296,15 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
   n++;
   if(n>maxTurns)throw new Error('too many turns');
   await p.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,300000,'turn resolved');
-  // C3-4: the steps of one sequence (costs, first card hitting, the end) captured while it runs.
-  if(n===3){const t0=Date.now(),plan=(await p.state())?.stats.sequencePlans.at(-1);if((await p.state())?.sequence.running&&plan){
-   for(const [name,at] of [['costs',350],['card',1300],['tail',plan.total-500]]){const wait=at-(Date.now()-t0);if(wait>0)await p.page.waitForTimeout(wait);if(!(await p.state())?.sequence.running)break;await p.shot(`${shots}-sequence-${name}`);}}}
-  // Let the round's sequence run to its end (up to 10 s, D10), so that its completion is measured.
-  await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});
+  // C3-4 revision: the beats of the first card of one sequence (D13: cost, author close-up, flight, target close-up, changes)
+  // and the tail, captured while it runs.
+  if(n===3){const t0=Date.now(),plan=(await p.state())?.stats.sequencePlans.at(-1);if((await p.state())?.sequence.running&&plan?.pace?.moves.length){const c=plan.pace.moves[0];
+   const beats=[...(c.cost.dur?[['cost',c.cost.at+c.cost.dur*.6]]:[]),['author',c.author.at+c.author.dur*.6],['flight',c.flight.at+c.flight.dur*.5],['target',c.target.at+c.target.dur*.5],...(c.changes.dur?[['changes',c.changes.at+c.changes.dur*.5]]:[]),['tail',plan.total-500]];
+   for(const [name,at] of beats){const wait=at-(Date.now()-t0);if(wait>0)await p.page.waitForTimeout(wait);if(!(await p.state())?.sequence.running)break;await p.shot(`${shots}-sequence-${name}`);}}}
+  // Let the round's sequence run to its end (up to the 20 s cap, D10), so that its completion is measured.
+  await p.wait(x=>!x||!x.sequence?.running,22000,'sequence end').catch(()=>{});
  }
- await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});
+ await p.wait(x=>!x||!x.sequence?.running,22000,'sequence end').catch(()=>{});
  const end=await p.state();
  // D4 on the outcome panel (a death with only computers left is followed by the whole chain at once).
  if(end.over||end.eliminated){const panel=await p.page.locator('[data-testid=round-note]').count()?await p.text('[data-testid=round-note]'):'';if(panel)notes.add(`panel: ${panel}`);}finals.push({turn:end.turn,problems:finalState(end,lastView(p,end.turn)),summary:end.summary?{key:end.summary.key,seats:Object.keys(end.summary.seats).length,texts:Object.values(end.summary.seats).map(x=>x.texts.join(' '))}:null,running:end.sequence.running});
@@ -316,9 +321,9 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
  const c32=[];
  const plans=Object.fromEntries((r.stats.sequencePlans??[]).map(x=>[x.key,x]));
  for(const e of ends){if(e.reason==='view')c32.push(`${e.key}: ended by a view (K1)`);const plan=plans[e.key];
-  // C3-2 revision: a completed sequence lasts what its plan says (one card at a time), never more than 10 s (D10).
+  // C3-2 revision: a completed sequence lasts what its plan says (one card at a time), never more than the cap of D10 (20 s since D13).
   if(e.reason==='complete'&&plan&&Math.abs(e.ms-plan.total)>250)c32.push(`${e.key}: completed in ${e.ms} ms, planned ${plan.total}`);}
- for(const x of Object.values(plans))if(x.total>10000)c32.push(`${x.key}: planned ${x.total} ms with ${x.moves} moves`);
+ for(const x of Object.values(plans))if(x.total>PACE.budget)c32.push(`${x.key}: planned ${x.total} ms with ${x.moves} moves`);
  // C3-4: what each sequence animated, counted on the nodes the scene built, against the facts recomputed from the wire
  // views (drops, stamps, tokens and object fates directly from the facts; draws, discards and steps from the timeline);
  // bars per card exactly when the measurement of D1 (unanchored, independent) says the report lines rebuild the views.
@@ -334,19 +339,42 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
   const verified=rc.sumOk&&rc.chainOk;if((b.bars==='per-card')!==verified)c34.push(`${b.key}: bars ${b.bars} (${b.reason}), measurement ${verified}`);
   if(verified&&b.steps!==rc.steps)c34.push(`${b.key}: ${b.steps} steps, measurement ${rc.steps}`);
   if(b.pops!==b.steps)c34.push(`${b.key}: ${b.pops} enlarged changes for ${b.steps} steps`);
-  rounds34.push({key:b.key,moves:b.drops,bars:b.bars,reason:b.reason,planned:plans[b.key]?.total??null,ms:endOf[b.key]?.ms??null,end:endOf[b.key]?.reason??null,
+  // D13: one author close-up and one target close-up per card; the plan of the scene equals the plan of the wire views.
+  if(b.closeUps!==f.moves.length||b.targetUps!==f.moves.length)c34.push(`${b.key}: ${b.closeUps} author and ${b.targetUps} target close-ups for ${f.moves.length} cards`);
+  const plan=plans[b.key]?.pace;if(!plan)c34.push(`${b.key}: no plan`);else{for(const x of directionProblems(plan))c34.push(`${b.key}: ${x}`);if(JSON.stringify(plan)!==JSON.stringify(T.pace))c34.push(`${b.key}: scene plan differs from the wire timeline`);}
+  if(b.drift!==T.drift)c34.push(`${b.key}: drift ${b.drift}, timeline ${T.drift}`);
+  rounds34.push({key:b.key,moves:b.drops,bars:b.bars,reason:b.reason,drift:b.drift,planned:plans[b.key]?.total??null,ms:endOf[b.key]?.ms??null,end:endOf[b.key]?.reason??null,
    beats:Object.fromEntries(Object.entries(b).filter(([k,v])=>!['key','bars','reason'].includes(k)&&v))});}
+ // D13 on what the scene actually scheduled, card by card: each beat at its planned time and in the order of D13; the
+ // board steps of a card (its cost, its changes) never before that card starts; the hit inside the flight.
+ const d13=[],closeUps=[];
+ for(const x of r.stats.schedule??[]){const plan=plans[x.key]?.pace?.moves[x.move];if(!plan){d13.push(`${x.key} card ${x.move}: no plan`);continue;}
+  for(const b of BEATS)if(x[b]!==plan[b].at)d13.push(`${x.key} card ${x.move}: ${b} scheduled at ${x[b]}, planned ${plan[b].at}`);
+  const seq=[x.tokens??x.cost,x.closeUp,x.goesBack,x.flies,x.hit,x.targetUp,x.pops??x.targetUp];
+  if(seq.some((t,i)=>i&&t<seq[i-1]))d13.push(`${x.key} card ${x.move}: beats out of order ${seq.join(',')}`);
+  if(x.closeUp<=x.cost&&plan.cost.dur>0)d13.push(`${x.key} card ${x.move}: close-up before the cost`);
+  if(x.costPops!==null&&(x.costPops<plan.at||x.costPops>=x.closeUp))d13.push(`${x.key} card ${x.move}: cost changes at ${x.costPops}, outside the cost beat`);
+  if(x.pops!==null&&x.pops<x.targetUp)d13.push(`${x.key} card ${x.move}: changes before the target close-up`);
+  if(!(x.hit>x.flies&&x.hit<x.targetUp))d13.push(`${x.key} card ${x.move}: hit at ${x.hit} outside the flight`);}
+ // Close-ups: on the screen and clear of the other seats, as laid out when the sequence started (character, board, objects,
+ // covered hand of each other seat); the target's, a little bigger in its seat, clear of the other characters.
+ for(const c of r.stats.closeUps??[]){const target=c.target,covers=c.others.filter(o=>overlap(c.box,o)>0).length;
+  const others=r.end?.layout?.seats?.filter(s=>s.id!==c.targetId).map(s=>s.person)??[],targetCovers=target?others.filter(o=>overlap(target,o)>0).length:0;
+  closeUps.push({key:c.key,move:c.move,author:c.author,scale:c.scale,placed:c.placed,box:Object.fromEntries(Object.entries(c.box).map(([k,v])=>[k,Math.round(v)])),covers,targetCovers,inside:inside(c.box,vw,vh)&&(!target||inside(target,vw,vh))});
+  if(!inside(c.box,vw,vh)||(target&&!inside(target,vw,vh)))d13.push(`${c.key} card ${c.move}: close-up off the screen`);
+  if(covers)d13.push(`${c.key} card ${c.move}: author close-up covers ${covers} boxes of other seats`);
+  if(targetCovers)d13.push(`${c.key} card ${c.move}: target close-up covers ${targetCovers} other characters`);}
  for(const f of r.finals){if(!f.turn)continue;const key=`${game}/${f.turn}`,facts=relation[key];if(!facts)continue;
   if(facts.relation==='next'&&!f.summary)c32.push(`${key}: no static summary at the choice`);
   if(facts.relation==='next'&&f.summary&&(f.summary.key!==key||f.summary.seats!==Object.keys(facts.seats).length))c32.push(`${key}: summary of ${f.summary.key} with ${f.summary.seats} seats`);
   if(facts.relation!=='next'&&f.summary)c32.push(`${key}: summary after a ${facts.relation}`);}
  const jumps=(r.log??[]).filter(e=>e.facts.relation==='jump').map(e=>e.facts.key);
- const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32,c34};
+ const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32,c34,d13};
  evidence.games[label]={timerOrderOnly:a.timerOrderOnly,noValidMove:r.noValidMove??null,gameId:game,turnsSeen:a.turns,views:a.views,rows:a.rows,client:a.client,watched:r.watched,outcome:{over:r.end.over,winner:r.end.winner,eliminated:r.end.eliminated}};
  evidence.scene[label]={rules:Object.fromEntries(Object.entries(sceneRules).map(([k,v])=>[k,{ok:!v.length,violations:v}])),
-  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34};
+  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34,closeUps};
  step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`,ends:Object.entries(ends.reduce((m,e)=>(m[e.reason]=(m[e.reason]??0)+1,m),{})).map(([k,v])=>`${k} ${v}`).join(', '),msComplete:ends.filter(e=>e.reason==='complete').map(e=>e.ms),
-  bars:`${rounds34.filter(x=>x.bars==='per-card').length} per card, ${rounds34.filter(x=>x.bars==='total').length} total`,notes:r.notes});
+  bars:`${rounds34.filter(x=>x.bars==='per-card').length} per card, ${rounds34.filter(x=>x.bars==='total').length} total`,cards:(r.stats.schedule??[]).length,closeUps:`${closeUps.filter(c=>c.placed==='middle').length} middle, ${closeUps.filter(c=>c.placed!=='middle').length} in the seat`,drift:rounds34.reduce((n,x)=>n+(x.drift??0),0),notes:r.notes});
  assert.deepEqual(a.problems,[],`${label}: model problems`);
  for(const [k,v] of Object.entries(sceneRules))assert.deepEqual(v,[],`${label}: scene rule ${k}`);
  if(jumps.length)assert.ok((r.notes??[]).some(t=>t.includes('Risolti')),`${label}: line of the resolved turns after a jump`);
@@ -422,7 +450,8 @@ try{
   const skip=async()=>{await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Salta effetti'}).click();};
   if(await round('skip',skip)&&out.skip.runningBefore){assert.equal(out.skip.end.reason,'skip','opening the menu does not end the sequence, «Salta effetti» does');assert.equal(out.skip.summaryKey,out.skip.key,'«Salta effetti» leaves the summary');}
   // D12: each tap on the empty table moves the sequence to the next card; the last one ends it (reason input).
-  if(await round('tap',async st=>{const plan=st.stats.sequencePlans.at(-1),stops=plan.moves+3;let taps=0;
+  // D13: the stops are the beats that show something, then draws, end of turn, tail and the end.
+  if(await round('tap',async st=>{const plan=st.stats.sequencePlans.at(-1),stops=plan.pace.moves.reduce((n,m)=>n+BEATS.filter(b=>m[b].dur>0).length,0)+[plan.pace.draws,plan.pace.endOfTurn].filter(Boolean).length+2;let taps=0;
    for(;taps<stops;taps++){const before=await A.state();if(!before.sequence.running)break;const p=await empty();await A.page.mouse.click(p.x,p.y);await A.page.waitForTimeout(60);}
    out.tapCount=taps;out.tapPlan=plan;})&&out.tap.runningBefore){assert.equal(out.tap.end.reason,'input','the last tap ends the sequence');assert.ok(out.tapCount>=2,'a first tap does not end a sequence with more cards');assert.equal(out.tap.summaryKey,out.tap.key,'taps leave the summary');}
   // Rule 4: during the sequence the first tap on a card chooses it (and ends the sequence); D6 then hides the summary.
@@ -486,7 +515,7 @@ try{
  }
 
  // C3-4. FFA with devAlice, devBob and three computers, both humans playing every round and letting each sequence run:
- // five moves within 10 s (D10) and the 30 s clock left to each human when the sequence ends (data for A2).
+ // five moves within the 20 s cap (D10 since D13) and the 30 s clock left to each human when the sequence ends (data for A2).
  if(run('humans')){
   if(!B){B=await open('B');await login(B);}
   await joinFfa(A);await waitList(A,1);await joinFfa(B);await waitList(A,2);await addComputers(A,3);
@@ -502,7 +531,7 @@ try{
    await Promise.all([playOne(A),playOne(B)]);
    const row=await Promise.all([A,B].map(async p=>{await p.wait(x=>!x||x.over||x.turn!==sa.turn,60000,'resolved');
     if(i===1)await p.page.waitForTimeout(1800).then(()=>p.shot('humans-sequence'));
-    await p.wait(x=>!x||!x.sequence?.running,12000,'sequence end').catch(()=>{});const clock=await clockOf(p),st=await p.state();
+    await p.wait(x=>!x||!x.sequence?.running,22000,'sequence end').catch(()=>{});const clock=await clockOf(p),st=await p.state();
     return {who:p.user,turn:st.turn,clockAtSequenceEnd:clock,end:st.sequence.ends.at(-1)??null,plan:st.stats.sequencePlans.at(-1)??null};}));
    rounds.push(...row);}
   const st=await A.state();
@@ -511,11 +540,15 @@ try{
    else await toHub(p).catch(async()=>{await p.page.goto(`${url}#/`);await p.page.getByTestId('quick').waitFor({timeout:15000});});}
   const r={log:await A.log().catch(()=>[]),stats:st.stats,finals,watched:false,end:st,notes:[]};
   summarise('humans',A,game,r);
-  const played=rounds.filter(x=>x.end&&x.plan&&x.end.key===x.plan.key);
+  // A round counts when the sequence measured is the one of that turn; a human out of the game (turn jump after an
+  // elimination) has no clock left to read, so it is kept in the evidence but not measured.
+  const played=rounds.filter(x=>x.end&&x.plan&&x.end.key===x.plan.key&&x.plan.key.endsWith(`/${x.turn}`)&&Number.isFinite(x.clockAtSequenceEnd));
   evidence.scene.humans.clock=rounds;
   const five=played.filter(x=>x.plan.moves===5);
   step('humansClock',{rounds:rounds.length,fiveMoves:five.map(x=>`${x.who} T${x.turn}: ${x.end.ms} ms (${x.end.reason})`),clockAtSequenceEnd:played.map(x=>`${x.who} T${x.turn} ${x.plan.moves} mosse ${x.end.ms} ms → ${x.clockAtSequenceEnd} s`)});
-  for(const x of played){assert.ok(x.plan.total<=10000,`${x.who} T${x.turn}: within 10 s`);if(x.end.reason==='complete')assert.ok(x.clockAtSequenceEnd>=30-Math.ceil(x.end.ms/1000)-2,`${x.who} T${x.turn}: the clock runs during the sequence (rule 4)`);}
+  // Under 10 s of clock left at the end of a sequence is reported (data for A2, rule 1.9 unchanged), not a failure.
+  evidence.scene.humans.under10s=played.filter(x=>x.end.reason==='complete'&&x.clockAtSequenceEnd<10).map(x=>`${x.who} T${x.turn}: ${x.clockAtSequenceEnd} s`);
+  for(const x of played){assert.ok(x.plan.total<=PACE.budget,`${x.who} T${x.turn}: within the cap`);if(x.end.reason==='complete')assert.ok(x.clockAtSequenceEnd>=30-Math.ceil(x.end.ms/1000)-2,`${x.who} T${x.turn}: the clock runs during the sequence (rule 4)`);}
  }
 
  // 4. Open 1vCom with synthetic decks (D8), saved through the editor on the temporary database.

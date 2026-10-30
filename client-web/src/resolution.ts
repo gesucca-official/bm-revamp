@@ -215,30 +215,59 @@ export function roundNote(r: Round | null): string | null {
 }
 
 /**
- * Pace of the round sequence (C3-2 revision, owner after the C3-2 trial; D10 raised to 10 s, D12; phases of C3-4): the
- * costs leave the authors together, then one card at a time — it appears at the author, flies to the target and hits it
- * — then the draws, the end of turn and the tail (total bars of D5, deaths). Moves share what the 10 s budget leaves,
- * between moveMin and moveMax; with many moves everything is scaled to stay within the budget.
+ * Direction of the round sequence (D13, owner after the C3-4 trial; D10 raised to a 20 s cap). For EVERY card, in the
+ * resolution order, the same six beats: its author pays it (cost tokens, the bound's discard), the author's character
+ * comes forward with the card beside it, goes back to its seat, the card flies to the target and hits it, the target
+ * comes forward a little, then the changes of that card. Then the draws, the end of turn and the tail (total bars of D5,
+ * deaths). A beat with nothing to show (no cost, no verified change) takes no time; beyond the cap every duration is
+ * scaled. The cap is not the typical length: a duel lasts well under it.
  */
-export const PACE = {budget: 10000, moveMin: 850, moveMax: 1500, costs: 650, draws: 650, endOfTurn: 750, tail: 800};
-/** Phases inside a move, as fractions of its duration: appear at the author, fly, hit the target (then to the discard). */
-export const MOVE_PHASE = {appear: .22, fly: .72};
+export const PACE = {budget: 20000, cost: 400, author: 900, back: 300, flight: 650, target: 500, changes: 450, draws: 650, endOfTurn: 750, tail: 800};
+export const BEATS = ['cost', 'author', 'back', 'flight', 'target', 'changes'] as const;
+export type Beat = typeof BEATS[number];
+/** Inside the author beat: the character grows to its close-up, stays, and (in `back`) returns. Inside the flight: fly, then hit. */
+export const BEAT_PHASE = {grow: .25, fly: .7};
 export type Span = {at: number; dur: number};
-export type Pace = {costs: Span | null; moves: Span[]; draws: Span | null; endOfTurn: Span | null; tail: Span; total: number};
-export function pace(moves: number, phases: {costs?: boolean; draws?: boolean; endOfTurn?: boolean} = {}): Pace {
-  const fixed = PACE.tail + (phases.costs ? PACE.costs : 0) + (phases.draws ? PACE.draws : 0) + (phases.endOfTurn ? PACE.endOfTurn : 0);
-  const move = moves ? Math.max(PACE.moveMin, Math.min(PACE.moveMax, (PACE.budget - fixed) / moves)) : 0;
-  const scale = Math.min(1, PACE.budget / (fixed + moves * move));
+export type CardPace = Span & Record<Beat, Span>;
+export type Pace = {moves: CardPace[]; draws: Span | null; endOfTurn: Span | null; tail: Span; total: number};
+/** What a card has to show in its optional beats; a number of cards means every beat for each. */
+export type CardNeeds = {cost?: boolean; changes?: boolean};
+export function pace(cards: CardNeeds[] | number, phases: {draws?: boolean; endOfTurn?: boolean} = {}): Pace {
+  const list = typeof cards === 'number' ? Array.from({length: cards}, (): CardNeeds => ({cost: true, changes: true})) : cards;
+  const need = (c: CardNeeds, b: Beat) => b === 'cost' ? (c.cost ? PACE.cost : 0) : b === 'changes' ? (c.changes ? PACE.changes : 0) : PACE[b];
+  const raw = list.reduce((n, c) => n + BEATS.reduce((m, b) => m + need(c, b), 0), 0) + PACE.tail + (phases.draws ? PACE.draws : 0) + (phases.endOfTurn ? PACE.endOfTurn : 0);
+  const scale = Math.min(1, PACE.budget / raw);
   let at = 0;
   const span = (d: number): Span => { const s = {at: Math.round(at), dur: Math.round(d * scale)}; at += d * scale; return s; };
-  const costs = phases.costs ? span(PACE.costs) : null, list = Array.from({length: moves}, () => span(move));
+  const moves = list.map(c => {
+    const start = Math.round(at), beats = Object.fromEntries(BEATS.map(b => [b, span(need(c, b))])) as Record<Beat, Span>;
+    return {...beats, at: start, dur: Math.round(at) - start};
+  });
   const draws = phases.draws ? span(PACE.draws) : null, endOfTurn = phases.endOfTurn ? span(PACE.endOfTurn) : null, tail = span(PACE.tail);
-  return {costs, moves: list, draws, endOfTurn, tail, total: Math.round(at)};
+  return {moves, draws, endOfTurn, tail, total: Math.round(at)};
 }
-/** D12: a tap jumps to the next card (then the draws, the end of turn, the tail); past the last stop it means the end. */
+/** D12 with D13: a tap jumps to the next beat that shows something (then the draws, the end of turn, the tail); past the last stop it means the end. */
 export function nextStop(p: Pace, elapsed: number) {
-  const stops = [...p.moves.map(m => m.at), ...[p.draws, p.endOfTurn].flatMap(x => x ? [x.at] : []), p.tail.at, p.total];
+  const stops = [...p.moves.flatMap(m => BEATS.filter(b => m[b].dur > 0).map(b => m[b].at)), ...[p.draws, p.endOfTurn].flatMap(x => x ? [x.at] : []), p.tail.at, p.total];
   return stops.find(s => s > elapsed + 1) ?? p.total;
+}
+/** Violations of the order of D13 in a plan (empty when every card has its beats in order, back to back, within the cap). */
+export function directionProblems(p: Pace): string[] {
+  const out: string[] = [];
+  p.moves.forEach((m, i) => {
+    let end = m.at;
+    for (const b of BEATS) {
+      if (Math.abs(m[b].at - end) > 1) out.push(`card ${i}: ${b} at ${m[b].at}, previous beat ends at ${end}`);
+      if (b !== 'cost' && b !== 'changes' && m[b].dur <= 0) out.push(`card ${i}: no ${b}`);
+      end = m[b].at + m[b].dur;
+    }
+    if (Math.abs(m.at + m.dur - end) > 1) out.push(`card ${i}: span ${m.at}+${m.dur}, beats end at ${end}`);
+    if (i && m.at < p.moves[i - 1].at + p.moves[i - 1].dur - 1) out.push(`card ${i}: overlaps card ${i - 1}`);
+  });
+  const last = p.moves.at(-1), first = [p.draws, p.endOfTurn, p.tail].find(x => !!x)!;
+  if (last && first.at < last.at + last.dur - 1) out.push('phases after the cards overlap the last card');
+  if (p.total > PACE.budget + 1) out.push(`total ${p.total} beyond the cap ${PACE.budget}`);
+  return out;
 }
 
 // --- C3-4: per-card changes from the regular report lines, verified on the views (plan D1 as reopened by the owner) ---
@@ -246,7 +275,7 @@ export function nextStop(p: Pace, elapsed: number) {
 /** One change of a resource at a seat, from a nominal cost or a regular report line. */
 export type Step = {seat: string; resource: Resource; from: number; to: number};
 export type ReportSteps =
-  | {verified: true; costs: Step[]; moves: Step[][]; endOfTurn: Step[]}
+  | {verified: true; costs: Step[]; moveCosts: Step[][]; moves: Step[][]; endOfTurn: Step[]}
   | {verified: false; reason: string};
 
 // The only form read: "RESOURCE: before->after (delta)", written by one server method, ending the line and preceded at
@@ -271,17 +300,19 @@ export function reportSteps(previous: View, next: View, facts: ResolutionFacts, 
   const fail = (reason: string): ReportSteps => ({verified: false, reason});
   const value: Record<string, Partial<Record<Resource, number>>> = {};
   for (const id of Object.keys(next.players)) value[id] = {...(previous.players[id]?.character.resources ?? {})};
-  const costs: Step[] = [];
+  const costs: Step[] = [], moveCosts: Step[][] = [];
   for (const m of facts.moves) {
     const cost = m.cost ?? costOf(m.card);
     if (!cost) return fail(`unknown cost of ${m.card}`);
     if (!value[m.author]) return fail(`unknown seat ${m.author}`);
+    const own: Step[] = [];
     for (const r of RESOURCE_ORDER) {
       const c = cost[r];
       if (!c) continue;
       const from = value[m.author][r] ?? 0;
-      costs.push({seat: m.author, resource: r, from, to: from - c}); value[m.author][r] = from - c;
+      own.push({seat: m.author, resource: r, from, to: from - c}); value[m.author][r] = from - c;
     }
+    costs.push(...own); moveCosts.push(own);
   }
   let problem: string | null = null;
   const apply = (seat: string, lines: string[] | undefined, where: string, into: Step[]) => {
@@ -308,7 +339,7 @@ export function reportSteps(previous: View, next: View, facts: ResolutionFacts, 
     for (const r of keys) if ((value[id]?.[r] ?? 0) !== (p.character.resources[r] ?? 0))
       return fail(`${id} ${r}: steps end at ${value[id]?.[r] ?? 0}, view ${p.character.resources[r] ?? 0}`);
   }
-  return {verified: true, costs, moves, endOfTurn};
+  return {verified: true, costs, moveCosts, moves, endOfTurn};
 }
 
 /** What happens to the object a move chose and that left its seat: consumed by its owner, passed to the author, or gone. */
@@ -318,8 +349,10 @@ export type MoveBeat = {
   item: {owner: string; name: string; fate: ItemFate} | null;
   /** The card a bound move discarded (DISCARD_ONE); not for a voided bound, which keeps it (R04). */
   discard: string | null;
-  /** Verified changes of this move (empty when the round falls back to totals). */
-  steps: Step[];
+  /** Nominal cost tokens this card's author pays in its cost beat (D13), voided moves included. */
+  tokens: {resource: Resource; amount: number}[];
+  /** Verified cost steps and changes of this card as the boards show them (empty when the round falls back to totals). */
+  costSteps: Step[]; steps: Step[];
 };
 export type Draw = {seat: string; to: 'hand' | 'table'; name: string | null};
 export type Timeline = {
@@ -328,16 +361,22 @@ export type Timeline = {
   bars: 'per-card' | 'total'; reason: string | null;
   /** Nominal cost tokens leaving each author, voided moves included (one per move and resource). */
   tokens: {seat: string; move: number; resource: Resource; amount: number}[];
-  costSteps: Step[]; moves: MoveBeat[]; draws: Draw[];
+  moves: MoveBeat[]; draws: Draw[];
   endOfTurn: {seats: string[]; steps: Step[]};
   /** Previous to final of every changed resource: the tail of the total mode and the end state of both modes. */
   totals: Step[];
   emphasis: {seat: string; kind: 'died' | 'forfeit'}[];
+  /**
+   * D13 shows each card's cost just before the card, while the server pays every cost before any effect (R04). The
+   * steps keep their change and start from the value the board shows, so they still end on the view; this counts the
+   * steps whose shown start differs from the server's (a later author paying with a resource an earlier card changed).
+   */
+  drift: number;
 };
 
 /**
- * The round as the scene plays it (C3-4), only for a round with a difference: every element comes from the facts,
- * the catalog (nominal costs, which names are deck objects) and the verified report lines.
+ * The round as the scene plays it (C3-4, directed by D13), only for a round with a difference: every element comes from
+ * the facts, the catalog (nominal costs, which names are deck objects) and the verified report lines.
  */
 export function timeline(previous: View, next: View, facts: ResolutionFacts, catalog: Card[] = []): Timeline | null {
   if (!facts.contiguous || !facts.seats) return null;
@@ -350,12 +389,25 @@ export function timeline(previous: View, next: View, facts: ResolutionFacts, cat
     const cost = m.cost ?? costOf(m.card);
     for (const r of RESOURCE_ORDER) if (cost?.[r]) tokens.push({seat: m.author, move: m.index, resource: r, amount: cost[r]!});
   }
+  // Each step keeps its change and starts from the value the board shows, in the order of D13.
+  const board: Record<string, Partial<Record<Resource, number>>> = {};
+  for (const id of Object.keys(next.players)) board[id] = {...(previous.players[id]?.character.resources ?? {})};
+  let drift = 0;
+  const shown = (list: Step[]) => list.map(s => {
+    const from = board[s.seat]?.[s.resource] ?? 0, to = from + s.to - s.from;
+    if (from !== s.from) drift++;
+    (board[s.seat] ??= {})[s.resource] = to;
+    return {...s, from, to};
+  });
   const moves: MoveBeat[] = facts.moves.map((m, i) => ({
     index: m.index, author: m.author, target: m.target, card: m.card, void: m.void,
     item: m.item && m.itemGone ? {...m.item, fate: m.author === m.item.owner ? 'consumed' : m.itemAtAuthor ? 'passed' : 'broken'} : null,
     discard: m.void ? null : m.discard,
-    steps: steps.verified ? steps.moves[i] : [],
+    tokens: tokens.filter(t => t.move === m.index).map(({resource, amount}) => ({resource, amount})),
+    costSteps: steps.verified ? shown(steps.moveCosts[i]) : [],
+    steps: steps.verified ? shown(steps.moves[i]) : [],
   }));
+  const endSteps = steps.verified ? shown(steps.endOfTurn) : [];
   // Cards leaving each deck: deck objects that appeared without a move passing them go to the table (the token is not in
   // the catalog), the rest to the hand; own arrivals by name, opponents as backs, and only as many as the deck count says.
   const draws: Draw[] = [];
@@ -374,11 +426,11 @@ export function timeline(previous: View, next: View, facts: ResolutionFacts, cat
     ...(s.died ? [{seat: id, kind: 'died' as const}] : []), ...(s.forfeit ? [{seat: id, kind: 'forfeit' as const}] : [])]);
   return {
     key: facts.key,
-    pace: pace(moves.length, {costs: tokens.length > 0, draws: draws.length > 0, endOfTurn: facts.endOfTurn.length > 0}),
+    pace: pace(moves.map(m => ({cost: m.tokens.length > 0 || !!m.discard, changes: m.steps.length > 0})), {draws: draws.length > 0, endOfTurn: facts.endOfTurn.length > 0}),
     bars: steps.verified ? 'per-card' : 'total', reason: steps.verified ? null : steps.reason,
-    tokens, costSteps: steps.verified ? steps.costs : [], moves, draws,
-    endOfTurn: {seats: facts.endOfTurn, steps: steps.verified ? steps.endOfTurn : []},
-    totals, emphasis,
+    tokens, moves, draws,
+    endOfTurn: {seats: facts.endOfTurn, steps: endSteps},
+    totals, emphasis, drift,
   };
 }
 
@@ -391,6 +443,6 @@ export function beats(t: Timeline) {
     consumed: items.filter(m => m.item!.fate === 'consumed').length, passed: items.filter(m => m.item!.fate === 'passed').length,
     broken: items.filter(m => m.item!.fate === 'broken').length, discards: t.moves.filter(m => m.discard).length,
     draws: t.draws.length, endOfTurn: t.endOfTurn.seats.length, emphasis: t.emphasis.length,
-    steps: t.bars === 'per-card' ? t.costSteps.length + t.moves.reduce((n, m) => n + m.steps.length, 0) + t.endOfTurn.steps.length : t.totals.length,
+    steps: t.bars === 'per-card' ? t.moves.reduce((n, m) => n + m.costSteps.length + m.steps.length, 0) + t.endOfTurn.steps.length : t.totals.length,
   };
 }

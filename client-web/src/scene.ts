@@ -3,16 +3,19 @@ import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,nextStop,timeline,beats,MOVE_PHASE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,type AimTarget,type Arrow,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
+import {plays,seatMarks,nextStop,timeline,beats,BEAT_PHASE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetUp,seatBoxes,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type TableLayout} from './readability.ts';
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
-// Times in ms from the start of the sequence. A move card first appears at its author (`appear`), flies, hits and then
+// Times in ms from the start of the sequence. A move card flies from its author, hits (`fly`, fraction of the flight) and then
 // goes to the author's discard (`after`). Other flights: a cost token rises, an object shrinks into its consumer, breaks,
 // or simply travels (passed objects, discards, draws).
 type Point={x:number;y:number};
-type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:number;after?:Point;mode?:'travel'|'rise'|'shrink'|'break'};
+type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:number;fly?:number;after?:Point;mode?:'travel'|'rise'|'shrink'|'break'};
+// D13 close-ups: a copy of a character (with the played card for the author) grows from its seat (`rest`) to `up`, stays
+// until `hold`, then goes back by `end`; `fade` (the card beside the author) appears with it and leaves before it.
+type Zoom={node:Container;rest:{x:number;y:number;s:number};up:{x:number;y:number;s:number};at:number;grow:number;hold:number;end:number;fade?:Container};
 // Marks over the table: an impact ring, a stamp (voided, eliminated) and the enlarged resource of a change (pop).
 type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
@@ -58,16 +61,19 @@ hits:Hit[]=[];backs:Record<string,number>={};
   // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
   sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0,
   // C3-2 revision (D12): planned length of each sequence and taps that moved it to the next card.
-  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>}[],advances:0,
+  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>;pace?:Pace}[],advances:0,
   // C3-4: what each sequence animated (counted on the nodes built), the bar mode and, for the totals, why.
-  beats:[] as {key:string;bars:'per-card'|'total';reason:string|null;drops:number;stamps:number;tokens:number;objects:number;consumed:number;passed:number;broken:number;discards:number;draws:number;endOfTurn:number;emphasis:number;steps:number;pops:number}[],
+  beats:[] as {key:string;bars:'per-card'|'total';reason:string|null;drift:number;drops:number;stamps:number;tokens:number;objects:number;consumed:number;passed:number;broken:number;discards:number;draws:number;endOfTurn:number;emphasis:number;steps:number;pops:number;closeUps:number;targetUps:number}[],
+  // C3-4 revision (D13): when each beat of each card starts as the scene scheduled it, and where each close-up went.
+  schedule:[] as {key:string;move:number;cost:number;author:number;back:number;flight:number;target:number;changes:number;hit:number;tokens:number|null;closeUp:number;goesBack:number;flies:number;targetUp:number;pops:number|null;costPops:number|null}[],
+  closeUps:[] as {key:string;move:number;author:string;box:Box;person:Box;card:Box;scale:number;placed:string;targetId:string;target:Box|null;others:Box[]}[],
   // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
   aimDraws:0,aimMs:[] as number[]};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
  // Static round summary (rule 5, D6): drawn on the table until the first card choice or the next round.
  marks:Record<string,SeatMark[]>|null=null;marksKey='';private tickPrev=0;private inputStart=0;
  private measure=false;private ghost:Container|null=null;private ghostH=0;ghostOver=false;private fittedTitles=new Map<string,string>();private retiring:Container[]=[];private retired:Container[]=[];private visualSnapshot:View;
- private flights:Flight[]=[];private accents:Accent[]=[];private pace:Pace|null=null;
+ private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private pace:Pace|null=null;
  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
@@ -343,8 +349,8 @@ hits:Hit[]=[];backs:Record<string,number>={};
   const k=round!.facts.key;this.seqSeen=k;this.seqKey=k;
   const seen=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(previous.players).flatMap(p=>p.character.items),...Object.values(v.players).flatMap(p=>p.character.items)];
   const registry=[...new Map(seen.map(c=>[c.name,c])).values()];
-  // C3-4: the round from certain data only (timeline in resolution.ts): costs, cards, voids, objects, draws, end of turn,
-  // changes per card when the report lines are verified, otherwise the totals (D5).
+  // C3-4: the round from certain data only (timeline in resolution.ts), directed card by card by D13: cost, close-ups, flight,
+  // voids, objects, changes per card when the report lines are verified (otherwise the totals, D5), then draws and end of turn.
   const T=timeline(previous,v,round!.facts,[...this.catalog(),...this.model.hand.map(c=>c.card)]);if(!T)return;
   // Opponent cards are known only by the published name; an unknown name still flies as a plain face.
   const named=(name:string):Card=>registry.find(c=>c.name===name)??{name,bindingName:'',effect:'',item:false,basicAction:false,lastResort:false,characterBound:false,boundToCharacter:null,priority:0,canTarget:[],cost:{},image:null,sprite:null};
@@ -356,7 +362,7 @@ hits:Hit[]=[];backs:Record<string,number>={};
   const itemAt=(id:string,name:string,before:boolean):Point|null=>{const view=before?previous:v,items=view.players[id]?.character.items??[],i=before?items.findIndex(c=>c.name===name):items.map(c=>c.name).lastIndexOf(name),slots=place(id)?.items??[];
    const b=i<0?null:slots[i]??slots.at(-1);return b?{x:b.x,y:b.y}:null;};
   const add=<N extends Container>(node:N)=>{node.visible=false;this.fx.addChild(node);return node;};
-  const count={drops:0,stamps:0,tokens:0,objects:0,consumed:0,passed:0,broken:0,discards:0,draws:0,endOfTurn:0,emphasis:0,steps:0,pops:0};
+  const count={drops:0,stamps:0,tokens:0,objects:0,consumed:0,passed:0,broken:0,discards:0,draws:0,endOfTurn:0,emphasis:0,steps:0,pops:0,closeUps:0,targetUps:0};
   const mw=C?52:80,mh=C?72:112,iw=C?44:65,ih=C?62:91;
   // Board values start from the previous view; each step moves them (per card) or the tail sets the final ones (total).
   this.display=Object.fromEntries(Object.keys(v.players).map(id=>[id,{...(previous.players[id]?.character.resources??{})}]));
@@ -364,27 +370,44 @@ hits:Hit[]=[];backs:Record<string,number>={};
   const change=(at:number,dur:number,steps:Step[])=>{if(!steps.length)return;count.steps+=steps.length;
    this.events.push({at,run:()=>{for(const s of steps)(this.display![s.seat]??={})[s.resource]=s.to;}});
    const stack=new Map<string,number>();for(const s of steps){const n=stack.get(s.seat)??0;stack.set(s.seat,n+1);if(this.pop(s,n,at,dur))count.pops++;}};
-  // 1. Costs (R04): every author's nominal cost leaves together, voided moves too.
-  if(p.costs){const per=new Map<string,number>();for(const tk of T.tokens){const b=place(tk.seat)?.board;if(!b)continue;const n=per.get(tk.seat)??0;per.set(tk.seat,n+1);
+  // D13 (owner after the C3-4 trial), for every card in resolution order: its author pays it, comes forward with the card
+  // beside it, goes back to its seat, the card flies to the target and hits it, the target comes forward a little, then
+  // the card's changes. Close-ups avoid the other seats and the hand (readability.ts).
+  const hand=this.hits.filter(x=>x.kind==='hand').map(x=>({x:x.x,y:x.y,w:x.w,h:x.h}));
+  const ups=new Map<string,CloseUp>();const upOf=(id:string)=>{if(!ups.has(id)){const s=place(id)!;ups.set(id,closeUp(s.person,{w:this.width,h:this.height},[...(L?.seats??[]).filter(x=>x.id!==id).flatMap(seatBoxes),...hand]));}return ups.get(id)!;};
+  const character=(id:string,w:number,h:number)=>{const p=v.players[id]?.character??previous.players[id]?.character;return this.face(p?.name??'',artIndex(p?.bindingName??''),w,h,'PERSONAGGIO',true);};
+  T.moves.forEach((m,i)=>{const from=seat(m.author),to=seat(m.target),P=p.moves[i],home=place(m.author)?.person,aim=place(m.target)?.person;if(!from||!to||!home||!aim)return;
+   const at={cost:P.cost.at,author:P.author.at,back:P.back.at,flight:P.flight.at,target:P.target.at,changes:P.changes.at};
+   // 1. Cost: this card's tokens leave its author; the bound's extra card leaves the hand for the discard.
+   m.tokens.forEach((tk,n)=>{const b=place(m.author)?.board;if(!b)return;
     const r=C?10:14,node=add(new Container()),g=new Graphics().circle(0,0,r).fill(RES_COLOR[tk.resource]).stroke({color:INK,width:2});node.addChild(g);glyph(g,tk.resource,-r*.35,0,r*.9,0xfff6e2);
     const label=this.text(node,`−${tk.amount}`,r*.45,0,C?10:13,undefined,0xfff6e2);label.anchor.set(0,.5);
-    const from=inside(b.x-b.w*.3+n*(r*2.6),b.y-b.h*.5);this.flights.push({node,from,to:{x:from.x,y:from.y-(C?34:52)},start:p.costs.at+n*60,end:p.costs.at+p.costs.dur,mode:'rise'});count.tokens++;}
-   change(p.costs.at+p.costs.dur*.45,p.costs.dur*.55,T.costSteps);}
-  // 2. One card at a time (owner, C3-2 revision): it appears at its author, flies to the target and hits it, then goes to the discard.
-  T.moves.forEach((m,i)=>{const from=seat(m.author),to=seat(m.target),span=p.moves[i];if(!from||!to)return;
-   const hit=span.at+span.dur*MOVE_PHASE.fly,rest=span.dur*(1-MOVE_PHASE.fly);
-   const node=add(this.card(named(m.card),mw,mh));
-   this.flights.push({node,from:{x:from.x,y:from.y-(C?20:34)},to,start:span.at,end:span.at+span.dur,appear:MOVE_PHASE.appear,after:discard(m.author)??undefined});this.stats.flights++;count.drops++;
-   if(m.void){const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:rest,kind:'stamp'});count.stamps++;}
-   else{const ring=add(new Graphics().circle(0,0,24).stroke({color:PETROL,width:4}));ring.position.set(to.x,to.y);this.accents.push({node:ring,at:hit,dur:rest});}
-   // The bound's extra card leaves the author's hand for the discard while the card appears.
-   if(m.discard){const d=add(this.card(named(m.discard),iw,ih)),a={x:from.x+from.w*.5,y:from.y-(C?10:18)};this.flights.push({node:d,from:a,to:discard(m.author)??a,start:span.at,end:span.at+span.dur*MOVE_PHASE.fly,mode:'travel'});count.discards++;}
-   // The chosen object that left its seat: consumed by its owner, passed to the author, or gone (broken).
-   if(m.item){const it=m.item,src=itemAt(it.owner,it.name,true)??to,node=add(this.card(named(it.name),iw,ih));count.objects++;count[it.fate]++;
-    if(it.fate==='consumed')this.flights.push({node,from:src,to:{x:from.x,y:from.y},start:hit,end:span.at+span.dur,mode:'shrink'});
-    else if(it.fate==='passed'){this.flights.push({node,from:src,to:itemAt(m.author,it.name,false)??{x:from.x,y:from.y},start:hit,end:span.at+span.dur,mode:'travel'});this.stats.transfers++;}
-    else{node.addChild(new Graphics().moveTo(-iw*.1,-ih*.5).lineTo(iw*.08,-ih*.1).lineTo(-iw*.12,ih*.15).lineTo(iw*.05,ih*.5).stroke({color:INK,width:3}));this.flights.push({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:hit,end:span.at+span.dur,mode:'break'});}}
-   change(hit,rest+span.dur*.12,m.steps);});
+    const p0=inside(b.x-b.w*.3+n*(r*2.6),b.y-b.h*.5);this.flights.push({node,from:p0,to:{x:p0.x,y:p0.y-(C?34:52)},start:P.cost.at+n*60,end:P.cost.at+P.cost.dur,mode:'rise'});count.tokens++;});
+   if(m.discard){const d=add(this.card(named(m.discard),iw,ih)),a={x:from.x+from.w*.5,y:from.y-(C?10:18)};this.flights.push({node:d,from:a,to:discard(m.author)??a,start:P.cost.at,end:P.cost.at+P.cost.dur,mode:'travel'});count.discards++;}
+   change(P.cost.at+P.cost.dur*.3,P.cost.dur*.7,m.costSteps);
+   // 2–3. Close-up of the author: its character grows to the free place with the card beside it, stays, then goes back.
+   const up=upOf(m.author),node=add(new Container()),person=character(m.author,up.person.w,up.person.h),card=this.card(named(m.card),up.card.w,up.card.h);
+   person.position.set(up.person.x-up.box.x,0);card.position.set(up.card.x-up.box.x,0);card.rotation=.04;this.halo(card,up.card.w,up.card.h,0xf1e4c4);node.addChild(person,card);
+   const s0=home.h/up.person.h,rest={x:home.x-(up.person.x-up.box.x)*s0,y:home.y,s:s0};
+   this.zooms.push({node,rest,up:{x:up.box.x,y:up.box.y,s:1},at:P.author.at,grow:P.author.dur*BEAT_PHASE.grow,hold:P.back.at,end:P.back.at+P.back.dur,fade:card});count.closeUps++;
+   this.stats.closeUps.push({key:k,move:i,author:m.author,box:up.box,person:up.person,card:up.card,scale:up.scale,placed:up.placed,targetId:m.target,target:null,others:(L?.seats??[]).filter(x=>x.id!==m.author).flatMap(seatBoxes)});
+   // 4. Flight and impact, as before: from the author's seat to the target, then to the author's discard after the changes.
+   const fly=add(this.card(named(m.card),mw,mh)),end=P.changes.at+Math.max(P.changes.dur,P.target.dur*.4),hit=P.flight.at+P.flight.dur*BEAT_PHASE.fly;
+   this.flights.push({node:fly,from:{x:from.x,y:from.y-(C?20:34)},to,start:P.flight.at,end,appear:0,fly:(hit-P.flight.at)/(end-P.flight.at),after:discard(m.author)??undefined});this.stats.flights++;count.drops++;
+   const after=end-hit;
+   if(m.void){const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:after,kind:'stamp'});count.stamps++;}
+   else{const ring=add(new Graphics().circle(0,0,24).stroke({color:PETROL,width:4}));ring.position.set(to.x,to.y);this.accents.push({node:ring,at:hit,dur:P.flight.at+P.flight.dur-hit+P.target.dur});}
+   // 5. Close-up of the target: it grows a little in its seat, under the card that hit it; the chosen object meets its fate.
+   const tu=targetUp(aim,{w:this.width,h:this.height}),tn=add(character(m.target,tu.w,tu.h)),t0=aim.h/tu.h;this.fx.setChildIndex(tn,0);
+   this.zooms.push({node:tn,rest:{x:aim.x,y:aim.y,s:t0},up:{x:tu.x,y:tu.y,s:1},at:P.target.at,grow:P.target.dur*.3,hold:P.target.at+P.target.dur*.75,end:P.target.at+P.target.dur});count.targetUps++;
+   this.stats.closeUps.at(-1)!.target=tu;
+   if(m.item){const it=m.item,src=itemAt(it.owner,it.name,true)??to,node=add(this.card(named(it.name),iw,ih)),s=P.target.at,e=P.target.at+P.target.dur;count.objects++;count[it.fate]++;
+    if(it.fate==='consumed')this.flights.push({node,from:src,to:{x:from.x,y:from.y},start:s,end:e,mode:'shrink'});
+    else if(it.fate==='passed'){this.flights.push({node,from:src,to:itemAt(m.author,it.name,false)??{x:from.x,y:from.y},start:s,end:e,mode:'travel'});this.stats.transfers++;}
+    else{node.addChild(new Graphics().moveTo(-iw*.1,-ih*.5).lineTo(iw*.08,-ih*.1).lineTo(-iw*.12,ih*.15).lineTo(iw*.05,ih*.5).stroke({color:INK,width:3}));this.flights.push({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:s,end:e,mode:'break'});}}
+   // 6. The card's changes.
+   change(P.changes.at,P.changes.dur,m.steps);
+   this.stats.schedule.push({key:k,move:i,...at,hit:Math.round(hit),tokens:m.tokens.length?P.cost.at:null,closeUp:P.author.at,goesBack:P.back.at,flies:P.flight.at,targetUp:P.target.at,pops:m.steps.length?P.changes.at:null,costPops:m.costSteps.length?Math.round(P.cost.at+P.cost.dur*.3):null});});
   // 3. Draws: cards leave each deck as the counts say; own new cards face up, opponents' as backs, deck objects to the table.
   if(p.draws){const n=T.draws.length,used=new Set<string>();T.draws.forEach((d,i)=>{const src=deck(d.seat);if(!src)return;let dest:Point|null=null,node:Container;
     if(d.to==='table'){dest=itemAt(d.seat,d.name!,false);node=this.card(named(d.name!),iw,ih);count.objects++;}
@@ -399,8 +422,8 @@ hits:Hit[]=[];backs:Record<string,number>={};
   this.events.push({at:p.tail.at,run:()=>{this.display=null;}});
   for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:p.tail.dur,kind:'stamp'});count.emphasis++;}
   this.events.sort((a,b)=>a.at-b.at);
-  this.stats.beats.push({key:k,bars:T.bars,reason:T.reason,...count});
-  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T)});
+  this.stats.beats.push({key:k,bars:T.bars,reason:T.reason,drift:T.drift,...count});
+  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p});
   this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
  /** «ANNULLATA», «ELIMINATO»: a wine stamp pressed on a card or a character. */
@@ -425,7 +448,7 @@ hits:Hit[]=[];backs:Record<string,number>={};
  finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.stopEffects();if(redraw){this.draw();this.onState();}}
  /** «Salta effetti». */
  skip(){this.finish('skip');}
- stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.accents=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+ stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private tick(){const now=performance.now();
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.aimDirty)this.drawAim();
@@ -436,8 +459,8 @@ hits:Hit[]=[];backs:Record<string,number>={};
    // Board steps reached (also several at once after a tap): applied, then one redraw.
    let due=0;while(due<this.events.length&&this.events[due].at<=t)due++;if(due){this.events.splice(0,due).forEach(e=>e.run());this.draw();}
    this.flights.forEach(f=>{const d=f.end-f.start,p=(t-f.start)/d;f.node.visible=p>=0&&p<=1;if(!f.node.visible)return;
-    if(f.appear!==undefined){const a=f.appear,fly=MOVE_PHASE.fly;
-     // Move: appear at the author (grow), fly, hit the target, then slide to the author's discard and fade.
+    if(f.appear!==undefined){const a=f.appear,fly=f.fly??.72;
+     // Move: (appear at the author,) fly, hit the target, stay through its close-up and changes, then slide to the discard and fade.
      if(p<a){const q=p/a;f.node.position.set(f.from.x,f.from.y);f.node.scale.set(.6+.4*(1-Math.pow(1-q,2)));f.node.rotation=-.12;f.node.alpha=Math.min(1,q*2);return;}
      if(p<=fly){const q=Math.min(1,(p-a)/(fly-a)),eased=1-Math.pow(1-q,2);f.node.scale.set(1);f.node.position.set(f.from.x+(f.to.x-f.from.x)*eased,f.from.y+(f.to.y-f.from.y)*eased-Math.sin(q*Math.PI)*35);f.node.rotation=(1-q)*-.12;f.node.alpha=1;return;}
      const q=(p-fly)/(1-fly),hold=Math.max(0,(q-.35)/.65),to=f.after??f.to;f.node.position.set(f.to.x+(to.x-f.to.x)*hold*hold,f.to.y+(to.y-f.to.y)*hold*hold);f.node.scale.set(1-.35*hold);f.node.alpha=1-.85*hold;return;}
@@ -446,6 +469,10 @@ hits:Hit[]=[];backs:Record<string,number>={};
     else if(f.mode==='shrink'){f.node.scale.set(1-.75*p);f.node.alpha=1-.8*p;}
     else if(f.mode==='break'){f.node.rotation=Math.sin(p*Math.PI*6)*.12*(1-p)+p*.5;f.node.alpha=1-p;}
     else f.node.alpha=p>.85?1-(p-.85)/.15*.6:1;});
+   this.zooms.forEach(z=>{z.node.visible=t>=z.at&&t<=z.end;if(!z.node.visible)return;
+    const q=t<z.at+z.grow?(t-z.at)/z.grow:t<z.hold?1:1-(t-z.hold)/Math.max(1,z.end-z.hold),e=q*q*(3-2*q);
+    z.node.position.set(z.rest.x+(z.up.x-z.rest.x)*e,z.rest.y+(z.up.y-z.rest.y)*e);z.node.scale.set(z.rest.s+(z.up.s-z.rest.s)*e);
+    if(z.fade)z.fade.alpha=Math.min(1,Math.max(0,q*1.6-.4));});
    this.accents.forEach(x=>{const p=(t-x.at)/x.dur;x.node.visible=p>=0&&p<=1;if(!x.node.visible)return;
     if(x.kind==='stamp'){x.node.scale.set(p<.2?1.8-.8*(p/.2):1);x.node.alpha=p>.8?1-(p-.8)/.2:1;}
     else if(x.kind==='pop'){x.node.scale.set(p<.25?.7+.6*(p/.25):p<.45?1.3-.3*((p-.25)/.2):1);x.node.alpha=p>.85?1-(p-.85)/.15:1;}

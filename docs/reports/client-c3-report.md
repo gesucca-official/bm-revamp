@@ -2,14 +2,16 @@
 
 29 ottobre 2026. Regolamento **1.9** (1.8 per C3-1). C3 procede a blocchi secondo il
 [piano C3](../client-c3-plan.md), con le decisioni D1–D11 confermate dal proprietario,
-poi D12 e D1 riaperta dopo la prova di C3-2.
+poi D12 e D1 riaperta dopo la prova di C3-2, D13 e il tetto di 20 s (D10) dopo la prova di C3-4.
 **C3-1 (modello puro della risoluzione e strumento di verifica) è fatto**
 ([sezione](#c3-1--modello-puro-della-risoluzione-e-strumento-di-verifica)), **C3-2
 (sequenza affidabile) è fatto** ([sezione](#c3-2--sequenza-affidabile)), con una
 **revisione dopo la prova del proprietario** (una carta per volta, tocco che passa alla
 successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-proprietario)). **C3-3 (frecce verso i bersagli ammessi, O6) è fatto**
 ([sezione](#c3-3--o6-frecce-verso-i-bersagli-ammessi)). **C3-4 (sequenza del round con i soli dati certi) è
-fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)). Gli altri
+fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)), con una **revisione dopo la prova del
+proprietario** (regia D13 di ogni carta con primi piani di chi gioca e del bersaglio:
+[sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). Gli altri
 blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
 è fatta a parte.
 
@@ -539,3 +541,131 @@ un'eventuale A2; nessuna conclusione qui.
   `resolution-*-sequence-costs|card|tail-*` (passaggi di una sequenza) e `resolution-humans-*`; regressione
   `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*`, `decks-*` e [size.json](client-c3/c3-4/size.json) nella stessa cartella
   (catture solo per `VerifyResolution` e `Verify`).
+
+## C3-4 — Revisione dopo la prova del proprietario
+
+30 ottobre 2026. Il proprietario ha provato C3-4 e ha osservato che, quando un personaggio gioca una carta, **prima
+si animano le sue risorse e poi la carta**. Decisione D13 (piano C3 aggiornato), con D10 rivista a un **tetto di
+20 s** per round; il clock della mossa resta 30 s (regolamento 1.9). Nessun cambio a regolamento, server,
+protocollo, catalogo o `client-debug`. Il riepilogo statico piccolo con lettere non è in questa revisione (C3-6).
+
+**D13, per ogni carta del round, sempre (duello contro computer compreso):** costo → primo piano di chi gioca →
+ritorno al posto → volo e impatto → primo piano del bersaglio → variazioni. Il tocco o tasto sul tavolo passa al
+passo successivo (D12), una carta della mano e «Salta effetti» chiudono; nessun blocco di invio né del clock.
+Una sequenza velocizzata attivabile dall'utente è un'osservazione per C4/C5, **non fatta**.
+
+### Causa accertata
+
+Riprodotta prima della modifica, sulla build di HEAD (f75d85a), in quick 1vCom reali su database temporaneo, campionando
+ogni ~30 ms i valori delle plance dal momento in cui il nuovo turno è disegnato
+([order-before.json](client-c3/c3-4r/order-before.json), tre esecuzioni, 1366×768 e 844×390):
+
+| Round con costi | Prima plancia che cambia | Prima carta compare |
+|---|---|---|
+| devAlice → LIEVE FASTIDIO, poi computer → Steal | 214 ms: ALERTNESS del computer 35 → 25 (costo di Steal, **seconda** carta) | 650 ms |
+| computer → Rabbia Psicotica da Meth, poi devAlice | 282–287 ms: TOXICITY del computer (costo) | 650 ms |
+| devAlice → LIEVE FASTIDIO, poi computer → Rabbia Psicotica da Meth | 236 ms: TOXICITY del computer (costo della seconda carta) | 650 ms |
+
+Nei round senza costi la prima variazione arrivava solo all'impatto (circa 1,03 s), dopo la carta. **Causa nel codice:** la
+fase 1 di `timeline`/`pace` (C3-4) metteva i costi di **tutti** gli autori in un unico passo iniziale di 650 ms
+(`PACE.costs`), e `beginSequence` in `src/scene.ts` vi faceva salire i gettoni e cambiare le barre del costo
+(`T.costSteps`, dal 45% della fase) prima della prima calata. Le righe `SELF` non c'entrano: si applicavano già al colpo.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Regia pura (`src/resolution.ts`) | `pace(carte, fasi)` dà a ogni carta sei passi consecutivi, `BEATS`: **costo** 0,4 s (solo se c'è da pagare: gettoni o scarto della bound), **primo piano di chi gioca** 0,9 s (crescita nel primo 25%), **ritorno** 0,3 s, **volo e impatto** 0,65 s (colpo al 70%), **primo piano del bersaglio** 0,5 s, **variazioni** 0,45 s (solo se la carta ne ha di verificate); poi pesca 0,65 s, fine turno 0,75 s e coda 0,8 s. Oltre il tetto di 20 s (`PACE.budget`) tutto si riduce in proporzione. `nextStop` ferma a ogni passo che mostra qualcosa. `directionProblems` controlla ordine, contiguità, passi obbligatori e tetto: lo usano test e verifica. `timeline` dà a ogni carta i suoi gettoni (`tokens`), le variazioni del costo (`costSteps`) e quelle della carta (`steps`). |
+| Costo prima di ogni carta e R04 | Il server paga **tutti** i costi prima di ogni effetto (R04) e la verifica delle righe (`reportSteps`) resta in quell'ordine. Mostrati per carta, i passi conservano la propria variazione e partono dal valore mostrato, quindi finiscono sempre sulla vista. Quando un autore successivo paga con una risorsa cambiata da una carta precedente, il valore di partenza mostrato differisce da quello del server: `drift` lo conta. È una scelta di presentazione di D13, non una regola. |
+| Primi piani (`src/readability.ts`) | `closeUp`: copia del personaggio ingrandita con la carta giocata accanto, nella parte libera del tavolo, dentro lo schermo e senza toccare personaggio, plancia, oggetti e mano coperta degli altri posti né la mano propria. Vince la scala più grande (fino a 1,6) con un posto vicino al centro; se nessun posto esiste anche a 1,15, il personaggio cresce nel suo posto. `targetUp`: il bersaglio a 1,25 nel suo posto, sotto la carta che lo ha colpito. |
+| Scena (`src/scene.ts`) | `beginSequence` disegna la regia carta per carta. Registra quando ogni passo inizia (`stats.schedule`), dove va ogni primo piano (`stats.closeUps`) e i conteggi, con `closeUps`, `targetUps` e `drift` (`stats.beats`). Le decisioni usano sempre la vista finale (regola 2); movimento ridotto: nessuna sequenza, riepilogo statico (regola 5). |
+| Test automatici | Client **161** (154 + 7). Regia: ordine e tetto per 1–5 e 8 carte con ogni combinazione di passi; duello sotto 10 s; FFA a cinque con primi piani nelle durate proposte; fermate dei tocchi; controllo d'ordine che riconosce piani sbagliati. Ogni round registrato con costi e righe della propria carta, finale uguale alla vista; caso sintetico con `drift` che finisce comunque sulla vista. Primi piani dentro lo schermo, senza coprire altri posti né la mano, in duello e FFA alle due misure. **Cambio deliberato:** i due test del ritmo di C3-2/C3-4, con i costi di tutti gli autori per primi e il budget di 10 s, sono sostituiti da quelli di D13. |
+| Server reale | **Sì.** `VerifyResolution` estesa, verde a 1366×768 e 844×390 (dettagli sotto). |
+| Regressione | Sulla build finale, ogni strumento su un server nuovo con database temporaneo: `Verify`, `VerifyModes`, `VerifyLifecycle`, `VerifyFfa` e `VerifyDecks` verdi a 1366×768 e 844×390. `build.ps1 -Task Test -Offline` (254 server, 36 debug) e `check-rules.py` passano. `VerifyPublic`, `VerifyProfile` e `VerifyAim` non ripetute: home, profilo e mira non cambiano. |
+| Peso | JS gzip 318870 byte (+1498 rispetto a C3-4), totale gzip 1101815 byte ([size.json](client-c3/c3-4r/size.json)). Budget rispettato. |
+| Emulazione / dispositivo / umano | Edge via Playwright sul PC, due misure landscape; nessun dispositivo fisico, iPhone o prova umana del ritmo. |
+
+### Cosa controlla in più `VerifyResolution`
+
+A ogni sequenza, oltre ai controlli di C3-1…C3-4:
+
+- **Ordine D13 per ogni carta**, su ciò che la scena ha programmato (`stats.schedule`):
+  - ogni passo all'ora del piano;
+  - gettoni ≤ primo piano < ritorno < volo < colpo < primo piano del bersaglio ≤ variazioni;
+  - variazioni del costo dentro il passo costo della propria carta, mai prima che la carta inizi;
+  - variazioni della carta mai prima del primo piano del bersaglio.
+- **Piano corretto:** il piano della scena è identico a quello ricalcolato sulle viste del socket, `directionProblems` è vuoto e il piano resta entro 20 s.
+- **Un primo piano dell'autore e uno del bersaglio per carta.**
+- **Geometria dei primi piani:**
+  - dentro lo schermo;
+  - quello dell'autore senza sovrapporsi ai riquadri degli altri posti, come erano disposti all'inizio della sequenza;
+  - quello del bersaglio senza coprire gli altri personaggi.
+- **Clock fra umani:** sotto 10 s residui viene segnalato in `under10s` come dato per A2, senza far fallire la verifica.
+- **Tocchi:** attraversano un round passo dopo passo fino alla chiusura con motivo `input`.
+
+### Scenari reali (entrambe le misure)
+
+Esecuzioni finali: [1366×768](client-c3/c3-4r/resolution-1366x768.json) e
+[844×390](client-c3/c3-4r/resolution-844x390.json) (campi `scene.*.rounds`, `scene.*.closeUps`, `scene.humans.clock`,
+`cases`, `reportConsistency`).
+
+| Partita | 1366×768 | 844×390 |
+|---|---|---|
+| Quick 1vCom con caduta e rientro | 9 round, tutti completi in 7,05–8,61 s; 8 per carta, 1 totale | 14 round, completi in 7,16–8,61 s; 14 per carta |
+| FFA con quattro computer | 7 round con cinque mosse, completi in 15,15–18,20 s; 6 per carta, 1 totale | 14 round con 3–5 mosse, completi in 11,00–18,20 s (cinque mosse: 17,8–18,2 s); 14 per carta |
+| FFA con devBob, forfait per tempo (salto) | turno 0 chiuso dal tocco della regola 4; poi salto senza sequenza, «Risolti 21 turni…» | uguale |
+| **FFA fra umani** (`humans`) | 8 round con cinque mosse, completi in 16,05–18,21 s; 8 per carta | 8 round (6 con cinque mosse, 2 con quattro), completi in 14,15–18,21 s; 7 per carta, 1 totale |
+| Open «C3 contrasti» / «C3 furti» | 12 e 18 round, completi in 7,00–8,60 s; 11 e 18 per carta | 21 e 5 round (in «C3 furti» devAlice resta senza mosse valide, limite R03 noto, e abbandona), completi in 6,35–8,61 s; tutti per carta |
+| Carte animate · primi piani dell'autore al centro (`placed: middle`) · nel posto | 158 · 158 · 0 | 187 · 187 · 0 |
+| Scala del primo piano dell'autore | 1,15–1,60 | 1,15–1,60 |
+| Ordine D13, piano e geometria violati | **0** | **0** |
+| Conteggi della scena diversi dai fatti / plance diverse dalla vista a fine sequenza | **0** / **0** | **0** / **0** |
+| Passi con partenza mostrata diversa dal server (`drift`), sempre finiti sulla vista | 4 (FFA 2, «C3 furti» 2) | 4 («C3 contrasti» 2, «C3 furti» 2) |
+| Regole 1, 2, 3, 6 e controlli di C3-2 e C3-4 | rispettate | rispettate |
+| Interruzioni | «Salta effetti» `skip` dopo 138 ms; 14 tocchi attraversano un round di due carte fino a `input` (7,5 s); carta scelta subito; scheda nascosta (emulata): nessuna sequenza al ritorno | `skip` dopo 135 ms; 13 tocchi fino a `input`; come a sinistra |
+| Movimento ridotto emulato | tre round, zero sequenze, riepilogo statico del round presente | uguale |
+
+Tutti i round con barre totali hanno la causa già nota di D1: 20 di HEALTH tolti dal timer di MarvelousCocktail
+(Mescolone Micidiale), che il server riporta senza numeri. Gli scenari di C3-4 sono di nuovo tutti visti su partite
+reali, alle due misure: annullamento, oggetto consumato e rubato, oggetto scomparso prima della risoluzione, morte
+con mossa già presentata, fine turno letale, bound con scarto, oggetto pescato sul tavolo, salto e rientro.
+
+### Durata e clock fra umani (dato per A2)
+
+Scenario `humans`, FFA con devAlice, devBob e tre computer. Otto round per misura; ogni umano lascia finire la
+sequenza e il clock della mossa (30 s) viene letto alla fine.
+
+| Misura | Mosse per round | Sequenza | Clock residuo a fine sequenza |
+|---|---|---|---|
+| 1366×768 | 5 in tutti gli otto round | 16,05–18,21 s | **12–15 s** su 30, per entrambi gli umani |
+| 844×390 | 5 in sei round, 4 in due | 14,15–18,21 s | **12–16 s** su 30 |
+
+**Nessun round fra umani lascia meno di 10 s** (`under10s` vuoto alle due misure), quindi nessun segnale per A2 da questo dato.
+Il margine è però stretto: una sequenza con cinque mosse occupa da 16 a 18 dei 30 s. **Il tetto basta per cinque mosse:**
+sulla carta 18,2 s con tutti i passi e tutte le fasi, misurati al massimo 18,21 s. Oltre il tetto, con sei o più carte che è
+impossibile al tavolo da cinque, le durate si ridurrebbero in proporzione. Il duello dura 6,4–8,6 s (prima 3,8–5,9). La regola 4
+resta: carta scelta al primo tocco durante la sequenza, clock da 30 a 28 s nei 2 s successivi, alle due misure.
+
+### Limiti e residui
+
+- **Primo piano piccolo in alcuni posti:** nel duello a 1366×768 il proprio personaggio arriva solo a 1,15. Il centro libero
+  è stretto fra la mano e il posto avversario, e il posto più vicino al centro prevale su una scala maggiore. Lo stesso
+  vale nella FFA a 844×390 per i posti laterali, a 1,15–1,2. Va giudicato nella prova del proprietario; scala e
+  preferenza per il centro sono parametri di `closeUp`.
+- **Valori intermedi (drift):** 8 passi su quasi mille (985) partono da un valore mostrato diverso da quello del server. Il
+  finale è sempre la vista. È il prezzo di mostrare ogni costo prima della propria carta (D13) mentre il server li paga
+  tutti prima (R04).
+- **Rapporto dei rilanci:**
+  - la prima esecuzione a 844×390, in parallelo con l'avvio delle regressioni, ha chiuso un round di «C3 furti» in 8553 ms
+    contro 8200 previsti, oltre la tolleranza di 250 ms di C3-2: probabile carico della macchina, con l'ordine D13 verde;
+  - la seconda ha trovato un difetto dello strumento: il clock veniva letto anche per un umano già fuori partita, dove
+    non c'è (`NaN`). Lo strumento ora misura solo i round della propria sequenza con un clock leggibile;
+  - la terza, da sola, è quella registrata. L'esecuzione a 1366×768 è precedente a questa correzione, che riguarda solo
+    quel filtro, ed era verde.
+- Dispositivo fisico, iPhone, prova umana del ritmo e scheda nascosta reale non provati: Edge headless emula la visibilità.
+- Dati locali non toccati: tutte le prove su database temporanei.
+- Evidenze in [client-c3/c3-4r](client-c3/c3-4r/):
+  - riproduzione [order-before.json](client-c3/c3-4r/order-before.json);
+  - `resolution-*`, con le catture `resolution-*-sequence-cost|author|flight|target|changes|tail-*` (i passi di una carta);
+  - regressione `verify-*`, `modes-*`, `lifecycle-*`, `ffa-*`, `decks-*` e [size.json](client-c3/c3-4r/size.json), con catture
+    solo per `VerifyResolution` e `Verify`.
