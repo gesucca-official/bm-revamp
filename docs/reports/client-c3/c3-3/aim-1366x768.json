@@ -1,5 +1,5 @@
 {
- "date": "2026-10-30T08:26:48.311Z",
+ "date": "2026-10-30T11:47:40.427Z",
  "url": "http://127.0.0.1:4320",
  "viewport": {
   "width": 1366,
@@ -20,35 +20,11 @@
     {
      "turn": 0,
      "card": "Desiderio Incontrollabile",
-     "want": 1,
+     "want": 0,
      "drawn": 0,
-     "reached": 1,
+     "reached": 0,
      "crossPanel": 0,
-     "reachedDetail": [
-      {
-       "id": "item-devAlice-0",
-       "from": {
-        "x": 426.4483700771618,
-        "y": 424.4608
-       },
-       "to": {
-        "x": 449.83750654302463,
-        "y": 462.68000000000006
-       },
-       "source": {
-        "x": 528.88,
-        "y": 606.84,
-        "w": 239.68000000000004,
-        "h": 360.75840000000005
-       },
-       "target": {
-        "x": 399.3288,
-        "y": 380.1458560000001,
-        "w": 113.8176,
-        "h": 157.068288
-       }
-      }
-     ]
+     "reachedDetail": []
     },
     {
      "turn": 0,
@@ -70,7 +46,7 @@
     },
     {
      "turn": 0,
-     "card": "Riflessi Aumentati dalla Speed",
+     "card": "C'è del sangue nella mia droga",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -79,18 +55,18 @@
     },
     {
      "turn": 0,
-     "card": "Presa Male di Brutto",
-     "want": 1,
-     "drawn": 1,
+     "card": "Grab",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 0,
-     "card": "Riflessi Aumentati dalla Speed",
-     "want": 1,
-     "drawn": 1,
+     "card": "Steal",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
@@ -115,18 +91,18 @@
     },
     {
      "turn": 1,
-     "card": "Riflessi Aumentati dalla Speed",
-     "want": 1,
-     "drawn": 1,
+     "card": "Grab",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 1,
-     "card": "Presa Male di Brutto",
-     "want": 1,
-     "drawn": 1,
+     "card": "Steal",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
@@ -134,19 +110,19 @@
     {
      "turn": 1,
      "card": "Desiderio Incontrollabile",
-     "want": 1,
-     "drawn": 1,
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 1,
-     "card": "Rabbia Psicotica da Meth",
-     "want": 1,
-     "drawn": 1,
+     "card": "Grab",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
-     "crossPanel": 1,
+     "crossPanel": 0,
      "reachedDetail": []
     },
     {
@@ -169,9 +145,18 @@
     },
     {
      "turn": 2,
-     "card": "Presa Male di Brutto",
-     "want": 1,
-     "drawn": 1,
+     "card": "Grab",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Steal",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
@@ -179,28 +164,19 @@
     {
      "turn": 2,
      "card": "Desiderio Incontrollabile",
-     "want": 1,
-     "drawn": 1,
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 2,
-     "card": "Rabbia Psicotica da Meth",
+     "card": "Riflessi Aumentati dalla Speed",
      "want": 1,
      "drawn": 1,
      "reached": 0,
-     "crossPanel": 1,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "Scatto Repentino",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 1,
+     "crossPanel": 0,
      "reachedDetail": []
     }
    ],
@@ -252,7 +228,7 @@
      "arrows": 1
     }
    ],
-   "game": "227a3ecc6007dcf44628bcbab9670435d2a3e6d57c27db9c00d6260967f11b8c",
+   "game": "b4d548bd385cf93f5408c641f3d45cb04d48a7affe3b144616838d5bef894e63",
    "confirm": {
     "buttons": {
      "x": 941.59375,
@@ -270,8 +246,8 @@
    "pulse": {
     "card": "Ghigno co' i' Denti Marci",
     "reduced": false,
-    "min": 0.7950720810649574,
-    "max": 0.9987765172243717,
+    "min": 0.7686340836995875,
+    "max": 0.9999726114028449,
     "samples": 14,
     "hint": {
      "text": "Scegli il bersaglio sul tavolo",
@@ -303,7 +279,7 @@
      "crossPanel": 0,
      "reachedDetail": [
       {
-       "id": "person-ComPlayer_629",
+       "id": "person-ComPlayer_6417",
        "from": {
         "x": 753.2229608881134,
         "y": 215.69439340820313
@@ -326,12 +302,12 @@
      "ghostOver": true,
      "arrows": 1,
      "reached": [
-      "person-ComPlayer_629"
+      "person-ComPlayer_6417"
      ]
     },
     "dropped": {
      "target": {
-      "owner": "ComPlayer_629"
+      "owner": "ComPlayer_6417"
      },
      "arrows": 0
     },
@@ -353,19 +329,19 @@
     }
    },
    "perf": {
-    "drags": 5,
-    "intervals": 531,
+    "drags": 7,
+    "intervals": 448,
     "cadenceHz": 120,
     "p50": 8.3,
-    "p95": 8.4,
+    "p95": 8.5,
     "max": 9.9,
     "limitMs": 20,
     "withinLimit": 100,
-    "inputSamples": 5,
-    "inputP95": 12,
-    "inputMax": 12,
-    "aimRedraws": 483,
-    "aimCostP95": 0.1,
+    "inputSamples": 7,
+    "inputP95": 12.1,
+    "inputMax": 12.1,
+    "aimRedraws": 395,
+    "aimCostP95": 0.2,
     "aimCostMax": 0.2
    },
    "end": {
@@ -376,10 +352,10 @@
    "summary": {
     "turns": 3,
     "cardsChecked": 18,
-    "arrowsDrawn": 17,
-    "arrowsReached": 1,
-    "cardsWithoutTargets": 0,
-    "crossPanel": 3,
+    "arrowsDrawn": 8,
+    "arrowsReached": 0,
+    "cardsWithoutTargets": 10,
+    "crossPanel": 0,
     "d12Exercised": 3,
     "lockedChecks": 1
    }
@@ -389,14 +365,14 @@
    "touch": {
     "moved": true,
     "arrows": {
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "want": 1,
      "drawn": 0,
      "reached": 1,
      "crossPanel": 0,
      "reachedDetail": [
       {
-       "id": "person-ComPlayer_7226",
+       "id": "person-ComPlayer_2811",
        "from": {
         "x": 717.8303833007812,
         "y": 233.88084126614655
@@ -417,12 +393,12 @@
     },
     "dropped": {
      "target": {
-      "owner": "ComPlayer_7226"
+      "owner": "ComPlayer_2811"
      },
      "arrows": 0
     },
     "tapChosen": {
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -431,7 +407,7 @@
     },
     "tapAimed": {
      "target": {
-      "owner": "ComPlayer_7226"
+      "owner": "ComPlayer_2811"
      },
      "arrows": 0
     }
@@ -445,7 +421,7 @@
    "cards": [
     {
      "turn": 0,
-     "card": "Desiderio Incontrollabile",
+     "card": "ADOPERIAMOTI",
      "want": 0,
      "drawn": 0,
      "reached": 0,
@@ -454,7 +430,7 @@
     },
     {
      "turn": 0,
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -463,7 +439,7 @@
     },
     {
      "turn": 0,
-     "card": "Ago Marcio e Spezzato",
+     "card": "LIEVE FASTIDIO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -472,16 +448,16 @@
     },
     {
      "turn": 0,
-     "card": "Grab",
-     "want": 0,
-     "drawn": 0,
+     "card": "ORMALE GUARIAMOTI",
+     "want": 1,
+     "drawn": 1,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 0,
-     "card": "Tossicone Scatarrante",
+     "card": "GARGANTUESCO IMPATTO SUL TU",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -490,7 +466,7 @@
     },
     {
      "turn": 0,
-     "card": "Riflessi Aumentati dalla Speed",
+     "card": "PAZIENZA: FINITA",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -499,7 +475,7 @@
     },
     {
      "turn": 1,
-     "card": "Desiderio Incontrollabile",
+     "card": "ADOPERIAMOTI",
      "want": 0,
      "drawn": 0,
      "reached": 0,
@@ -508,7 +484,7 @@
     },
     {
      "turn": 1,
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -517,7 +493,7 @@
     },
     {
      "turn": 1,
-     "card": "Ago Marcio e Spezzato",
+     "card": "LIEVE FASTIDIO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -526,70 +502,25 @@
     },
     {
      "turn": 1,
-     "card": "Grab",
-     "want": 0,
-     "drawn": 0,
+     "card": "GARGANTUESCO IMPATTO SUL TU",
+     "want": 1,
+     "drawn": 1,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 1,
-     "card": "Tossicone Scatarrante",
+     "card": "PAZIENZA: FINITA",
      "want": 1,
      "drawn": 1,
      "reached": 0,
-     "crossPanel": 1,
+     "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 1,
-     "card": "Riflessi Aumentati dalla Speed",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "Desiderio Incontrollabile",
-     "want": 0,
-     "drawn": 0,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "Ghigno co' i' Denti Marci",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "Ago Marcio e Spezzato",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "Grab",
-     "want": 0,
-     "drawn": 0,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "Tossicone Scatarrante",
+     "card": "STORDIAMOTI HO DETTO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -598,11 +529,56 @@
     },
     {
      "turn": 2,
-     "card": "Riflessi Aumentati dalla Speed",
+     "card": "ADOPERIAMOTI",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "SVEGLIAMOCI MA TU NO",
      "want": 1,
      "drawn": 1,
      "reached": 0,
      "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "PAZIENZA: FINITA",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "STORDIAMOTI HO DETTO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "GABBIANO DUNQUE VOLIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
      "reachedDetail": []
     }
    ],
@@ -611,7 +587,7 @@
     {
      "turn": 0,
      "exercised": true,
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "running": false,
      "reason": "input",
      "selected": true,
@@ -620,7 +596,7 @@
     {
      "turn": 1,
      "exercised": true,
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "running": false,
      "reason": "input",
      "selected": true,
@@ -629,33 +605,33 @@
     {
      "turn": 2,
      "exercised": true,
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "ADOPERIAMOTI",
      "running": false,
      "reason": "input",
      "selected": true,
      "arrows": 1
     }
    ],
-   "game": "f49ee65d6e35fe2cb737a6938745e22b4bc6c029f91d73e6285bfcee89e5dd48",
+   "game": "a998e098bc3d523aaeb3eab97e991d9440a14f68142253030d5f0291b0bac398",
    "confirm": {
     "buttons": {
      "x": 941.59375,
-     "y": 460.75,
+     "y": 478.9375,
      "w": 104,
      "h": 52
     },
     "panel": {
      "x": 971.59375,
-     "y": 420.375,
+     "y": 429.46875,
      "w": 164,
-     "h": 132.75
+     "h": 150.9375
     }
    },
    "pulse": {
-    "card": "Ghigno co' i' Denti Marci",
+    "card": "SVEGLIAMOCI MA TU NO",
     "reduced": false,
-    "min": 0.760004923656636,
-    "max": 0.9775950428965458,
+    "min": 0.7612080232403233,
+    "max": 0.9756641397628865,
     "samples": 14,
     "hint": {
      "text": "Scegli il bersaglio sul tavolo",
@@ -672,10 +648,10 @@
    "summary": {
     "turns": 3,
     "cardsChecked": 18,
-    "arrowsDrawn": 12,
+    "arrowsDrawn": 15,
     "arrowsReached": 0,
-    "cardsWithoutTargets": 6,
-    "crossPanel": 3,
+    "cardsWithoutTargets": 3,
+    "crossPanel": 4,
     "d12Exercised": 3,
     "lockedChecks": 0
    }
@@ -692,11 +668,35 @@
     {
      "turn": 0,
      "card": "Desiderio Incontrollabile",
-     "want": 0,
+     "want": 1,
      "drawn": 0,
-     "reached": 0,
+     "reached": 1,
      "crossPanel": 0,
-     "reachedDetail": []
+     "reachedDetail": [
+      {
+       "id": "item-devAlice-2",
+       "from": {
+        "x": 615.9195916705188,
+        "y": 424.4608
+       },
+       "to": {
+        "x": 596.0450579054279,
+        "y": 462.68000000000006
+       },
+       "source": {
+        "x": 528.88,
+        "y": 606.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 638.9639999999999,
+        "y": 380.1458560000001,
+        "w": 113.8176,
+        "h": 157.068288
+       }
+      }
+     ]
     },
     {
      "turn": 0,
@@ -718,7 +718,7 @@
     },
     {
      "turn": 0,
-     "card": "Riflessi Aumentati dalla Speed",
+     "card": "Scatto Repentino",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -727,7 +727,7 @@
     },
     {
      "turn": 0,
-     "card": "Steal",
+     "card": "Rabbia Psicotica da Meth",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -736,7 +736,7 @@
     },
     {
      "turn": 0,
-     "card": "Steal",
+     "card": "Estasi da Coca Etilene",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -746,11 +746,35 @@
     {
      "turn": 1,
      "card": "Desiderio Incontrollabile",
-     "want": 0,
+     "want": 1,
      "drawn": 0,
-     "reached": 0,
+     "reached": 1,
      "crossPanel": 0,
-     "reachedDetail": []
+     "reachedDetail": [
+      {
+       "id": "item-devAlice-1",
+       "from": {
+        "x": 521.1839808738403,
+        "y": 424.4608
+       },
+       "to": {
+        "x": 522.9412822242263,
+        "y": 462.68000000000006
+       },
+       "source": {
+        "x": 528.88,
+        "y": 606.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 519.1464,
+        "y": 380.1458560000001,
+        "w": 113.8176,
+        "h": 157.068288
+       }
+      }
+     ]
     },
     {
      "turn": 1,
@@ -772,25 +796,25 @@
     },
     {
      "turn": 1,
-     "card": "Steal",
-     "want": 0,
-     "drawn": 0,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 1,
-     "card": "Steal",
-     "want": 0,
-     "drawn": 0,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 1,
      "card": "Scatto Repentino",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Rabbia Psicotica da Meth",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Estasi da Coca Etilene",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -811,7 +835,7 @@
      "why": "sequence not running (none planned or already over)"
     }
    ],
-   "game": "85cac9416ae234ae2e25adaa9fb1ca6e1099ebe3ca2d0f8c542aeec5c816301a",
+   "game": "30c30bcc3167080b19d84602145b40f60ef6e4f8ceb883100a881dcfd080ad82",
    "confirm": {
     "buttons": {
      "x": 941.59375,
@@ -847,10 +871,10 @@
    "summary": {
     "turns": 2,
     "cardsChecked": 12,
-    "arrowsDrawn": 8,
-    "arrowsReached": 0,
-    "cardsWithoutTargets": 4,
-    "crossPanel": 3,
+    "arrowsDrawn": 10,
+    "arrowsReached": 2,
+    "cardsWithoutTargets": 0,
+    "crossPanel": 4,
     "d12Exercised": 0,
     "lockedChecks": 0
    }
@@ -894,25 +918,73 @@
     },
     {
      "turn": 0,
-     "card": "NON GIOCARE COL COLTELLO NO",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 0,
-     "card": "PAZIENZA: FINITA",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
+     "card": "AMMALIAMOTI DI BOTTE",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 1,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_1263",
+       "from": {
+        "x": 972.39980267518,
+        "y": 418.4608
+       },
+       "to": {
+        "x": 972.856098225317,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 951.30172,
+        "y": 600.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
     },
     {
      "turn": 0,
      "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 2,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_1263",
+       "from": {
+        "x": 1014.4423103939118,
+        "y": 421.4608
+       },
+       "to": {
+        "x": 1012.1982530594687,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 1071.181032,
+        "y": 603.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 0,
+     "card": "GARGANTUESCO IMPATTO SUL TU",
      "want": 4,
      "drawn": 4,
      "reached": 0,
@@ -939,23 +1011,47 @@
     },
     {
      "turn": 1,
-     "card": "PAZIENZA: FINITA",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
      "crossPanel": 0,
-     "reachedDetail": []
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_1263",
+       "from": {
+        "x": 931.0232423931393,
+        "y": 418.4608
+       },
+       "to": {
+        "x": 933.1773441768523,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 831.422408,
+        "y": 600.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
     },
     {
      "turn": 1,
-     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "card": "GARGANTUESCO IMPATTO SUL TU",
      "want": 4,
      "drawn": 3,
      "reached": 1,
      "crossPanel": 1,
      "reachedDetail": [
       {
-       "id": "person-ComPlayer_6213",
+       "id": "person-ComPlayer_1263",
        "from": {
         "x": 972.39980267518,
         "y": 418.4608
@@ -990,11 +1086,11 @@
     },
     {
      "turn": 1,
-     "card": "GABBIANO DUNQUE VOLIAMOTI",
-     "want": 4,
-     "drawn": 4,
+     "card": "PAZIENZA: FINITA",
+     "want": 1,
+     "drawn": 1,
      "reached": 0,
-     "crossPanel": 2,
+     "crossPanel": 0,
      "reachedDetail": []
     },
     {
@@ -1024,7 +1120,7 @@
      "crossPanel": 0,
      "reachedDetail": [
       {
-       "id": "person-ComPlayer_6213",
+       "id": "person-ComPlayer_1263",
        "from": {
         "x": 931.0232423931393,
         "y": 418.4608
@@ -1050,34 +1146,25 @@
     },
     {
      "turn": 2,
-     "card": "ADOPERIAMOTI",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 2,
-     "card": "GABBIANO DUNQUE VOLIAMOTI",
+     "card": "GARGANTUESCO IMPATTO SUL TU",
      "want": 4,
      "drawn": 3,
      "reached": 1,
-     "crossPanel": 2,
+     "crossPanel": 1,
      "reachedDetail": [
       {
-       "id": "person-ComPlayer_6213",
+       "id": "person-ComPlayer_1263",
        "from": {
-        "x": 1014.4423103939118,
-        "y": 421.4608
+        "x": 972.39980267518,
+        "y": 418.4608
        },
        "to": {
-        "x": 1012.1982530594687,
+        "x": 972.856098225317,
         "y": 414.840832
        },
        "source": {
-        "x": 1071.181032,
-        "y": 603.84,
+        "x": 951.30172,
+        "y": 600.84,
         "w": 239.68000000000004,
         "h": 360.75840000000005
        },
@@ -1092,7 +1179,16 @@
     },
     {
      "turn": 2,
-     "card": "GENTILE IL TUO CAREZZO",
+     "card": "ADOPERIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "PAZIENZA: FINITA",
      "want": 1,
      "drawn": 1,
      "reached": 0,
@@ -1130,7 +1226,7 @@
      "arrows": 4
     }
    ],
-   "game": "0cd9c91f3556b8ae80124a3fd8669f9688515eb13a5c70f04fd44720165a5b37",
+   "game": "b6c8c7d2bbb41ec3f03b4ee3097c0bdcc1e8ebb252dcdc8ebfdb8d85b4b1eae0",
    "confirm": {
     "buttons": {
      "x": 941.59375,
@@ -1148,8 +1244,8 @@
    "pulse": {
     "card": "SVEGLIAMOCI MA TU NO",
     "reduced": false,
-    "min": 0.7604842686909647,
-    "max": 0.9983854844891253,
+    "min": 0.7602636317841522,
+    "max": 0.999615601788054,
     "samples": 14,
     "hint": {
      "text": "Scegli il bersaglio sul tavolo",
@@ -1185,13 +1281,13 @@
      "ghostOver": true,
      "arrows": 4,
      "reached": [
-      "person-ComPlayer_1750",
-      "person-ComPlayer_1888"
+      "person-ComPlayer_2960",
+      "person-ComPlayer_884"
      ]
     },
     "dropped": {
      "target": {
-      "owner": "ComPlayer_1750"
+      "owner": "ComPlayer_2960"
      },
      "arrows": 0
     },
@@ -1214,25 +1310,25 @@
    },
    "perf": {
     "drags": 4,
-    "intervals": 513,
-    "cadenceHz": 118.7,
+    "intervals": 518,
+    "cadenceHz": 119.3,
     "p50": 8.3,
-    "p95": 8.5,
-    "max": 15.7,
+    "p95": 8.6,
+    "max": 12.9,
     "limitMs": 20,
     "withinLimit": 100,
     "inputSamples": 4,
-    "inputP95": 17.1,
-    "inputMax": 17.1,
+    "inputP95": 13.5,
+    "inputMax": 13.5,
     "aimRedraws": 467,
-    "aimCostP95": 0.2,
-    "aimCostMax": 0.3
+    "aimCostP95": 0.3,
+    "aimCostMax": 0.4
    },
    "summary": {
     "turns": 3,
     "cardsChecked": 18,
-    "arrowsDrawn": 39,
-    "arrowsReached": 3,
+    "arrowsDrawn": 42,
+    "arrowsReached": 6,
     "cardsWithoutTargets": 0,
     "crossPanel": 10,
     "d12Exercised": 3,
@@ -1242,7 +1338,7 @@
   "pending": {
    "locked": [
     {
-     "played": "Desiderio Incontrollabile",
+     "played": "LIEVE FASTIDIO",
      "checks": [
       {
        "phase": "pending",
@@ -1298,16 +1394,16 @@
    "cards": [
     {
      "turn": 0,
-     "card": "Desiderio Incontrollabile",
-     "want": 1,
-     "drawn": 1,
+     "card": "ADOPERIAMOTI",
+     "want": 0,
+     "drawn": 0,
      "reached": 0,
      "crossPanel": 0,
      "reachedDetail": []
     },
     {
      "turn": 0,
-     "card": "Ghigno co' i' Denti Marci",
+     "card": "SVEGLIAMOCI MA TU NO",
      "want": 4,
      "drawn": 4,
      "reached": 0,
@@ -1316,24 +1412,33 @@
     },
     {
      "turn": 0,
-     "card": "Ago Marcio e Spezzato",
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "ORMALE GUARIAMOTI",
      "want": 4,
      "drawn": 3,
      "reached": 1,
-     "crossPanel": 0,
+     "crossPanel": 1,
      "reachedDetail": [
       {
-       "id": "person-ComPlayer_538",
+       "id": "person-ComPlayer_1004",
        "from": {
-        "x": 931.0232423931393,
+        "x": 972.39980267518,
         "y": 418.4608
        },
        "to": {
-        "x": 933.1773441768523,
+        "x": 972.856098225317,
         "y": 414.840832
        },
        "source": {
-        "x": 831.422408,
+        "x": 951.30172,
         "y": 600.84,
         "w": 239.68000000000004,
         "h": 360.75840000000005
@@ -1349,44 +1454,59 @@
     },
     {
      "turn": 0,
-     "card": "Steal",
-     "want": 3,
+     "card": "AMMALIAMOTI DI BOTTE",
+     "want": 4,
      "drawn": 3,
+     "reached": 1,
+     "crossPanel": 2,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_1004",
+       "from": {
+        "x": 1014.4423103939118,
+        "y": 421.4608
+       },
+       "to": {
+        "x": 1012.1982530594687,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 1071.181032,
+        "y": 603.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 0,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 4,
+     "drawn": 4,
      "reached": 0,
      "crossPanel": 2,
-     "reachedDetail": []
-    },
-    {
-     "turn": 0,
-     "card": "Grab",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
-     "reachedDetail": []
-    },
-    {
-     "turn": 0,
-     "card": "Tutto è Droga",
-     "want": 1,
-     "drawn": 1,
-     "reached": 0,
-     "crossPanel": 0,
      "reachedDetail": []
     }
    ],
    "confirm": {
     "buttons": {
      "x": 941.59375,
-     "y": 460.75,
+     "y": 478.9375,
      "w": 104,
      "h": 52
     },
     "panel": {
      "x": 971.59375,
-     "y": 420.375,
+     "y": 429.46875,
      "w": 164,
-     "h": 132.75
+     "h": 150.9375
     }
    },
    "dragWhilePending": {
@@ -1396,8 +1516,8 @@
    },
    "summary": {
     "cardsChecked": 6,
-    "arrowsDrawn": 13,
-    "arrowsReached": 1,
+    "arrowsDrawn": 15,
+    "arrowsReached": 2,
     "lockedChecks": 1
    }
   }
@@ -1410,17 +1530,17 @@
   "duel-1366x768": {
    "turns": 3,
    "cardsChecked": 18,
-   "arrowsDrawn": 17,
-   "arrowsReached": 1,
-   "cardsWithoutTargets": 0,
-   "crossPanel": 3,
+   "arrowsDrawn": 8,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 10,
+   "crossPanel": 0,
    "d12Exercised": 3,
    "lockedChecks": 1,
    "pulse": {
     "card": "Ghigno co' i' Denti Marci",
     "reduced": false,
-    "min": 0.7950720810649574,
-    "max": 0.9987765172243717,
+    "min": 0.7686340836995875,
+    "max": 0.9999726114028449,
     "samples": 14,
     "hint": {
      "text": "Scegli il bersaglio sul tavolo",
@@ -1435,19 +1555,19 @@
     }
    },
    "perf": {
-    "drags": 5,
-    "intervals": 531,
+    "drags": 7,
+    "intervals": 448,
     "cadenceHz": 120,
     "p50": 8.3,
-    "p95": 8.4,
+    "p95": 8.5,
     "max": 9.9,
     "limitMs": 20,
     "withinLimit": 100,
-    "inputSamples": 5,
-    "inputP95": 12,
-    "inputMax": 12,
-    "aimRedraws": 483,
-    "aimCostP95": 0.1,
+    "inputSamples": 7,
+    "inputP95": 12.1,
+    "inputMax": 12.1,
+    "aimRedraws": 395,
+    "aimCostP95": 0.2,
     "aimCostMax": 0.2
    },
    "confirm": {
@@ -1460,17 +1580,17 @@
   "touch-1366x768": {
    "turns": 3,
    "cardsChecked": 18,
-   "arrowsDrawn": 12,
+   "arrowsDrawn": 15,
    "arrowsReached": 0,
-   "cardsWithoutTargets": 6,
-   "crossPanel": 3,
+   "cardsWithoutTargets": 3,
+   "crossPanel": 4,
    "d12Exercised": 3,
    "lockedChecks": 0,
    "pulse": {
-    "card": "Ghigno co' i' Denti Marci",
+    "card": "SVEGLIAMOCI MA TU NO",
     "reduced": false,
-    "min": 0.760004923656636,
-    "max": 0.9775950428965458,
+    "min": 0.7612080232403233,
+    "max": 0.9756641397628865,
     "samples": 14,
     "hint": {
      "text": "Scegli il bersaglio sul tavolo",
@@ -1486,7 +1606,7 @@
    },
    "confirm": {
     "x": 941.59375,
-    "y": 460.75,
+    "y": 478.9375,
     "w": 104,
     "h": 52
    }
@@ -1494,10 +1614,10 @@
   "reduced-1366x768": {
    "turns": 2,
    "cardsChecked": 12,
-   "arrowsDrawn": 8,
-   "arrowsReached": 0,
-   "cardsWithoutTargets": 4,
-   "crossPanel": 3,
+   "arrowsDrawn": 10,
+   "arrowsReached": 2,
+   "cardsWithoutTargets": 0,
+   "crossPanel": 4,
    "d12Exercised": 0,
    "lockedChecks": 0,
    "pulse": {
@@ -1528,8 +1648,8 @@
   "ffa-1366x768": {
    "turns": 3,
    "cardsChecked": 18,
-   "arrowsDrawn": 39,
-   "arrowsReached": 3,
+   "arrowsDrawn": 42,
+   "arrowsReached": 6,
    "cardsWithoutTargets": 0,
    "crossPanel": 10,
    "d12Exercised": 3,
@@ -1537,8 +1657,8 @@
    "pulse": {
     "card": "SVEGLIAMOCI MA TU NO",
     "reduced": false,
-    "min": 0.7604842686909647,
-    "max": 0.9983854844891253,
+    "min": 0.7602636317841522,
+    "max": 0.999615601788054,
     "samples": 14,
     "hint": {
      "text": "Scegli il bersaglio sul tavolo",
@@ -1554,19 +1674,19 @@
    },
    "perf": {
     "drags": 4,
-    "intervals": 513,
-    "cadenceHz": 118.7,
+    "intervals": 518,
+    "cadenceHz": 119.3,
     "p50": 8.3,
-    "p95": 8.5,
-    "max": 15.7,
+    "p95": 8.6,
+    "max": 12.9,
     "limitMs": 20,
     "withinLimit": 100,
     "inputSamples": 4,
-    "inputP95": 17.1,
-    "inputMax": 17.1,
+    "inputP95": 13.5,
+    "inputMax": 13.5,
     "aimRedraws": 467,
-    "aimCostP95": 0.2,
-    "aimCostMax": 0.3
+    "aimCostP95": 0.3,
+    "aimCostMax": 0.4
    },
    "confirm": {
     "x": 941.59375,
@@ -1577,8 +1697,8 @@
   },
   "pending-1366x768": {
    "cardsChecked": 6,
-   "arrowsDrawn": 13,
-   "arrowsReached": 1,
+   "arrowsDrawn": 15,
+   "arrowsReached": 2,
    "lockedChecks": 1
   }
  },
@@ -1587,38 +1707,38 @@
   "duel": {
    "turns": 3,
    "cardsChecked": 18,
-   "arrowsDrawn": 17,
-   "arrowsReached": 1,
-   "cardsWithoutTargets": 0,
-   "crossPanel": 3,
+   "arrowsDrawn": 8,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 10,
+   "crossPanel": 0,
    "d12Exercised": 3,
    "lockedChecks": 1
   },
   "touch": {
    "turns": 3,
    "cardsChecked": 18,
-   "arrowsDrawn": 12,
+   "arrowsDrawn": 15,
    "arrowsReached": 0,
-   "cardsWithoutTargets": 6,
-   "crossPanel": 3,
+   "cardsWithoutTargets": 3,
+   "crossPanel": 4,
    "d12Exercised": 3,
    "lockedChecks": 0
   },
   "reduced": {
    "turns": 2,
    "cardsChecked": 12,
-   "arrowsDrawn": 8,
-   "arrowsReached": 0,
-   "cardsWithoutTargets": 4,
-   "crossPanel": 3,
+   "arrowsDrawn": 10,
+   "arrowsReached": 2,
+   "cardsWithoutTargets": 0,
+   "crossPanel": 4,
    "d12Exercised": 0,
    "lockedChecks": 0
   },
   "ffa": {
    "turns": 3,
    "cardsChecked": 18,
-   "arrowsDrawn": 39,
-   "arrowsReached": 3,
+   "arrowsDrawn": 42,
+   "arrowsReached": 6,
    "cardsWithoutTargets": 0,
    "crossPanel": 10,
    "d12Exercised": 3,
@@ -1626,8 +1746,8 @@
   },
   "pending": {
    "cardsChecked": 6,
-   "arrowsDrawn": 13,
-   "arrowsReached": 1,
+   "arrowsDrawn": 15,
+   "arrowsReached": 2,
    "lockedChecks": 1
   }
  },

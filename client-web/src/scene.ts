@@ -4,7 +4,7 @@ import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,pace,nextStop,MOVE_PHASE,type Pace,type Round,type SeatMark} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowOutline,confirmButtons,type AimTarget,type Arrow,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,type AimTarget,type Arrow,type Box,type Chip,type Role,type TableLayout} from './readability.ts';
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
@@ -37,7 +37,7 @@ export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.ch
 export const roleLabel=(c:Card)=>{const r=roleOf(c);return r?ROLES[r].label:'';};
 export const cost=(c:Card)=>Object.entries(c.cost).map(([k,v])=>`${v} ${{VIOLENCE:'V',ALERTNESS:'A',TOXICITY:'T',ALCOHOL:'L',HEALTH:'H'}[k]}`).join(' + ')||'—';
 export class TableScene {
- app=new Application();world=new Container();fx=new Container();aimLayer=new Container();private aimG=new Graphics();private aimAlpha=new AlphaFilter({alpha:.85});
+ app=new Application();world=new Container();fx=new Container();aimLayer=new Container();private aimG=new Graphics();private aimAlpha=new AlphaFilter({alpha:.82});
  // C3-3 (O6): arrows from the chosen or dragged card to the admitted targets; redrawn at most once per frame while dragging.
  arrows:Arrow[]=[];private aimDirty=false;
 hits:Hit[]=[];backs:Record<string,number>={};
@@ -256,12 +256,15 @@ hits:Hit[]=[];backs:Record<string,number>={};
    else if(h.kind==='item'&&(h.target.itemIndex??-1)>(lastItem.get(h.target.owner)?.target?.itemIndex??-1))lastItem.set(h.target.owner,h);}
   for(const h of lastItem.values())targets.push({id:h.id,owner:h.target!.owner,kind:'item',itemIndex:h.target!.itemIndex,box:{x:h.x,y:h.y,w:h.w,h:h.h}});
   this.arrows=aimArrows(source,targets,{w:this.width,h:this.height},{avoid:[confirmButtons(L.preview,this.width,L.compact)],head:L.compact?20:30});
-  // Pop-art style (owner's reference, after C3-3): a white ribbon that widens into a barbed head, a bold black outline and a solid black
-  // extrusion down and to the left. The layer is translucent as a whole (one filter, so overlaps do not darken) to leave what the arrows cross
-  // partly visible.
-  const drawn=this.arrows.filter(a=>!a.reached),tail=L.compact?9:14,neck=L.compact?18:30,depth=L.compact?5:9,shapes=drawn.map(a=>arrowOutline(a,{tail,neck,grow:1.5}));
-  for(const pts of shapes){for(let k=1;k<=4;k++){const o=depth*k/4;g.poly(pts.map((v,i)=>i%2?v+o*.7:v-o)).fill(INK).stroke({color:INK,width:3,join:'round'});}}
-  for(const pts of shapes)g.poly(pts).fill(0xfffaf0).stroke({color:INK,width:L.compact?3:4.5,join:'round'});
+  // Pop-art style (owner's reference, after C3-3): one ribbon that ends in a barbed head, all in the light blue of the target outlines,
+  // with a bold black outline, a cartoon highlight on the head and a solid black extrusion down and to the left. The layer is translucent
+  // as a whole (one filter, so overlaps do not darken) to leave what the arrows cross partly visible. A short arrow pushes its tip into
+  // the target rather than shrinking to a blob.
+  const C=L.compact,drawn=this.arrows.filter(a=>!a.reached),depth=C?5:8,line=C?3:4,boxes=new Map(targets.map(t=>[t.id,t.box]));
+  const shapes=drawn.map(a=>arrowShape(a,{tail:C?9:13,neck:C?16:26,head:C?32:50,minLen:C?78:120,reach:C?30:46,push:C?6:10,target:boxes.get(a.id)}));
+  for(const s of shapes)for(let k=1;k<=4;k++){const o=depth*k/4;g.poly(s.outline.map((v,i)=>i%2?v+o*.7:v-o)).fill(INK).stroke({color:INK,width:3,join:'round'});}
+  for(const s of shapes){g.poly(s.outline).fill(PETROL).stroke({color:INK,width:line,join:'miter',miterLimit:8});
+   g.moveTo(s.shine[0].x,s.shine[0].y).lineTo(s.shine[1].x,s.shine[1].y).stroke({color:0xe6fbfb,width:C?2.5:3.5,cap:'round',alpha:.9});}
   this.aimLayer.filters=drawn.length?[this.aimAlpha]:null;
   this.stats.aimDraws++;this.stats.aimMs.push(performance.now()-t0);if(this.stats.aimMs.length>600)this.stats.aimMs.shift();}
  hit(x:number,y:number,targetsOnly=false){return [...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).find(r=>{if(targetsOnly&&r.kind==='hand')return false;const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}

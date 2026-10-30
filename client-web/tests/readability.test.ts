@@ -93,7 +93,7 @@ for(const [w,h] of [[1366,768],[844,390]] as const)for(const ids of [['me','b'],
 });
 
 // C3-3 (O6): arrows from the chosen card to the admitted targets.
-import {aimArrows,arrowOutline,confirmBox,confirmButtons,edgePoint,bezier,type AimTarget} from '../src/readability.ts';
+import {aimArrows,arrowShape,confirmBox,confirmButtons,edgePoint,bezier,type AimTarget} from '../src/readability.ts';
 const aimSetup=(w:number,h:number,ids:string[],items=3)=>{
  const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),H=l.hand;
  const source:Box={x:H.center,y:H.y-H.lift,w:H.w*H.zoom,h:H.h*H.zoom};
@@ -148,10 +148,26 @@ test('arrows bend the other way when the first bend crosses the region to keep c
  assert.notDeepEqual(blocked.control,free.control);assert.equal(blocked.crosses,false);assert.ok(Math.hypot(mid.x-blocked.control.x,mid.y-blocked.control.y)>0);
 });
 
-for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`pop-art outline at ${w}×${h} with ${ids.length} seats: tip on the target, whole shape and extrusion inside the screen`,()=>{
- const {l,source,persons,objects}=aimSetup(w,h,ids),depth=l.compact?5:9;
+const shapeOpts=(compact:boolean)=>({tail:compact?9:13,neck:compact?16:26,head:compact?32:50,minLen:compact?78:120,reach:compact?30:46,push:compact?6:10});
+const tipAngle=(head:number[])=>{const [tx,ty,lx,ly]=head,rx=head[8],ry=head[9],a=Math.atan2(lx-tx,ly-ty)-Math.atan2(rx-tx,ry-ty),d=Math.abs(Math.atan2(Math.sin(a),Math.cos(a)));return d*180/Math.PI;};
+for(const [w,h] of VIEWPORTS)for(const ids of [['me','b'],['me','b','c','d','e']])test(`pop-art shape at ${w}×${h} with ${ids.length} seats: sharp tip on or into the target, whole shape inside the screen`,()=>{
+ const {l,source,persons,objects}=aimSetup(w,h,ids),o=shapeOpts(l.compact);
  for(const a of aimArrows(source,[...persons,...objects],{w,h},{head:l.compact?20:30}).filter(x=>!x.reached)){
-  const pts=arrowOutline(a,{tail:l.compact?9:14,neck:l.compact?18:30,grow:1.5});
-  assert.deepEqual([pts[0],pts[1]],[a.to.x,a.to.y],`${a.id}: the tip is the end of the arrow`);assert.ok(pts.length>=40&&pts.length%2===0);
-  for(let i=0;i<pts.length;i+=2){const x=pts[i]-depth,y=pts[i+1]+depth*.7;assert.ok(pts[i]>=-1&&pts[i]<=w+1&&pts[i+1]>=-1&&pts[i+1]<=h+1,`${a.id}: vertex ${i/2} outside ${Math.round(pts[i])},${Math.round(pts[i+1])}`);void x;void y;}}
+  const t=[...persons,...objects].find(x=>x.id===a.id)!.box,s=arrowShape(a,{...o,target:t});
+  assert.deepEqual([s.head[0],s.head[1]],[s.tip.x,s.tip.y],`${a.id}: the head starts at the tip`);assert.equal(s.head.length,10);assert.ok(s.body.length>=8&&s.body.length%2===0);
+  assert.equal(s.outline.length,s.body.length+6,`${a.id}: one shape, ribbon and head`);assert.deepEqual([s.outline[0],s.outline[1]],[s.tip.x,s.tip.y]);
+  // The tip is the end of the arrow or past it, into the target, never more than `reach`.
+  const past=Math.hypot(s.tip.x-a.to.x,s.tip.y-a.to.y);assert.ok(past<=o.reach+.01,`${a.id}: tip ${past.toFixed(1)} px past the border`);
+  if(past>.5)assert.ok(Math.abs(s.tip.x-t.x)<=t.w/2+5&&Math.abs(s.tip.y-t.y)<=t.h/2+5,`${a.id}: a pushed tip stays on its target`);
+  assert.ok(Math.abs(tipAngle(s.head)-64)<3,`${a.id}: tip angle ${tipAngle(s.head).toFixed(1)}°`);
+  for(const pts of [s.outline])for(let i=0;i<pts.length;i+=2)assert.ok(pts[i]>=-1&&pts[i]<=w+1&&pts[i+1]>=-1&&pts[i+1]<=h+1,`${a.id}: vertex ${i/2} outside ${Math.round(pts[i])},${Math.round(pts[i+1])}`);}
+});
+test('a short arrow keeps a readable head: the tip goes into the target and the head is never a stub',()=>{
+ const o=shapeOpts(false);
+ for(const gapPx of [14,30,60,140]){const src:Box={x:500,y:600,w:160,h:220},t:AimTarget={id:'t',owner:'b',kind:'person',box:{x:500,y:600-110-gapPx-80,w:120,h:160}};
+  const a=aimArrows(src,[t],{w:1366,h:768})[0];if(a.reached)continue;const s=arrowShape(a,{...o,target:t.box});
+  const len=Math.hypot(s.tip.x-a.from.x,s.tip.y-a.from.y),headLen=Math.hypot(s.tip.x-(s.head[2]+s.head[8])/2,s.tip.y-(s.head[3]+s.head[9])/2);
+  assert.ok(len>=.8*Math.min(o.minLen,Math.hypot(a.to.x-a.from.x,a.to.y-a.from.y)+o.reach),`gap ${gapPx}: arrow ${len.toFixed(1)} px`);
+  assert.ok(headLen>=Math.min(o.head,len*.45)-.5&&headLen<=o.head+.5&&headLen<=len*.6,`gap ${gapPx}: head ${headLen.toFixed(1)} of ${len.toFixed(1)}`);
+  assert.ok(s.tip.y<a.to.y+.01,`gap ${gapPx}: the tip points up, into the target`);}
 });

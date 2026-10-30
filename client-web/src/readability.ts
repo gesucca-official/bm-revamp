@@ -175,18 +175,37 @@ export function aimArrows(source:Box,targets:AimTarget[],view:{w:number;h:number
   return {id:t.id,owner:t.owner,kind:t.kind,itemIndex:t.itemIndex,from,control,to,head,reached,crosses};});
 }
 
-/** Pop-art arrow (owner, after C3-3): a ribbon along the curve that widens from the tail to a barbed head, as one polygon (x, y, x, y…).
- * The tip is `arrow.to`; the barbs sit a little behind the neck so the back of the head is notched. `width` is the body width at the
- * tail and at the neck; the head is as wide as `arrow.head` plus `grow`. */
-export function arrowOutline(a:Arrow,opts:{tail:number;neck:number;grow?:number}):number[]{
- const N=18,[tip,hl,hr]=a.head,bx=(hl.x+hr.x)/2,by=(hl.y+hr.y)/2,headLen=Math.hypot(tip.x-bx,tip.y-by)||1,half=Math.hypot(hl.x-hr.x,hl.y-hr.y)/2*(opts.grow??1.25);
- const ux=(tip.x-bx)/headLen,uy=(tip.y-by)/headLen;
- let len=0,prev=a.from;for(let i=1;i<=24;i++){const p=bezier(a.from,a.control,a.to,i/24);len+=Math.hypot(p.x-prev.x,p.y-prev.y);prev=p;}
- const tn=Math.max(.15,1-.7*headLen/Math.max(len,1)),L:Pt[]=[],R:Pt[]=[];
- for(let i=0;i<=N;i++){const t=tn*i/N,p=bezier(a.from,a.control,a.to,t),q=bezier(a.from,a.control,a.to,Math.min(1,t+.01)),r=bezier(a.from,a.control,a.to,Math.max(0,t-.01));
-  const dx=q.x-r.x,dy=q.y-r.y,d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d,w=(opts.tail+(opts.neck-opts.tail)*Math.pow(i/N,1.3))/2;
-  L.push({x:p.x+nx*w,y:p.y+ny*w});R.push({x:p.x-nx*w,y:p.y-ny*w});}
- const back=1.12*headLen,bc={x:tip.x-ux*back,y:tip.y-uy*back},nx=-uy,ny=ux;
- const pts=[tip,{x:bc.x-nx*half,y:bc.y-ny*half},...R.reverse(),...L,{x:bc.x+nx*half,y:bc.y+ny*half}];
- return pts.flatMap(p=>[p.x,p.y]);
+/** Pop-art arrow (owner, after C3-3, heads refined): a ribbon along the curve that ends in a barbed head, as one polygon
+ * (x, y, x, y…) in `outline`; `body` and `head` are the two parts alone. The head keeps a fixed sharp angle; on a short arrow it shrinks
+ * with the arrow (at most `share` of its length). The tip always pushes `push` past `arrow.to` into the target, so it lands on the
+ * card rather than on its outline, and more on a short arrow, up to `reach` and to half the way across `target` (when given),
+ * until the arrow is `minLen` long: covering a little of the target card is accepted, a stub without a readable point is not.
+ * `shine` is the cartoon highlight along one side of the head. */
+export type ArrowShape={outline:number[];body:number[];head:number[];shine:[Pt,Pt];tip:Pt};
+export function arrowShape(a:Arrow,o:{tail:number;neck:number;head:number;minLen:number;reach:number;push?:number;share?:number;target?:Box}):ArrowShape{
+ const line:Pt[]=[];for(let i=0;i<=24;i++)line.push(bezier(a.from,a.control,a.to,i/24));
+ const end=line[23],ex=a.to.x-end.x,ey=a.to.y-end.y,el=Math.hypot(ex,ey)||1,ux=ex/el,uy=ey/el;
+ let len=0;for(let i=1;i<line.length;i++)len+=Math.hypot(line[i].x-line[i-1].x,line[i].y-line[i-1].y);
+ // How far the tip can travel along its direction and stay on the target: to the middle of the ray's run through it, none if it misses.
+ let across=Infinity;const T=o.target;if(T){let lo=0,hi=Infinity;
+  for(const [p,d,c,h] of [[a.to.x,ux,T.x,T.w/2],[a.to.y,uy,T.y,T.h/2]]){if(Math.abs(d)<1e-9){if(Math.abs(p-c)>h)hi=-1;continue;}
+   const t1=(c-h-p)/d,t2=(c+h-p)/d;lo=Math.max(lo,Math.min(t1,t2));hi=Math.min(hi,Math.max(t1,t2));}
+  across=hi>lo?(lo+hi)/2:0;}
+ const ext=Math.max(0,Math.min(o.reach,across,Math.max(o.push??0,o.minLen-len))),tip={x:a.to.x+ux*ext,y:a.to.y+uy*ext};if(ext>.5)line.push(tip);
+ const total=len+ext,headLen=Math.min(o.head,total*(o.share??.55)),k=headLen/o.head,half=headLen*.62;
+ // Body widths shrink with a short head, but not below 60%, so the ribbon still reads behind it.
+ const ws=Math.max(.6,k),tail=o.tail*ws,neck=Math.min(o.neck*ws,half*1.3);
+ // Walk back from the tip to the neck (the notch of the barbs) and keep the centreline up to there.
+ const notch=headLen*.74;let left=total-notch,cut=line[0],kept:Pt[]=[line[0]];
+ for(let i=1;i<line.length;i++){const d=Math.hypot(line[i].x-line[i-1].x,line[i].y-line[i-1].y);
+  if(d>=left){const f=d?left/d:0;cut={x:line[i-1].x+(line[i].x-line[i-1].x)*f,y:line[i-1].y+(line[i].y-line[i-1].y)*f};break;}left-=d;kept.push(line[i]);}
+ if(Math.hypot(cut.x-kept[kept.length-1].x,cut.y-kept[kept.length-1].y)>.5)kept.push(cut);else cut=kept[kept.length-1];
+ const L:Pt[]=[],R:Pt[]=[],n=kept.length;
+ for(let i=0;i<n;i++){const q=kept[Math.min(n-1,i+1)],r=kept[Math.max(0,i-1)],dx=i===n-1?ux:q.x-r.x,dy=i===n-1?uy:q.y-r.y,d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d;
+  const w=(tail+(neck-tail)*Math.pow(i/Math.max(1,n-1),1.3))/2;L.push({x:kept[i].x+nx*w,y:kept[i].y+ny*w});R.push({x:kept[i].x-nx*w,y:kept[i].y-ny*w});}
+ const nx=-uy,ny=ux,back={x:tip.x-ux*headLen,y:tip.y-uy*headLen},bl={x:back.x+nx*half,y:back.y+ny*half},br={x:back.x-nx*half,y:back.y-ny*half};
+ const head=[tip,bl,{x:cut.x+nx*neck/2,y:cut.y+ny*neck/2},{x:cut.x-nx*neck/2,y:cut.y-ny*neck/2},br];
+ const lerp=(p:Pt,q:Pt,f:number):Pt=>({x:p.x+(q.x-p.x)*f,y:p.y+(q.y-p.y)*f}),inward=(p:Pt):Pt=>({x:p.x-nx*half*.22-ux*headLen*.04,y:p.y-ny*half*.22-uy*headLen*.04});
+ const flat=(ps:Pt[])=>ps.flatMap(p=>[p.x,p.y]);
+ return {outline:flat([tip,bl,...[...L].reverse(),...R,br]),body:flat([...L,...[...R].reverse()]),head:flat(head),shine:[inward(lerp(tip,bl,.2)),inward(lerp(tip,bl,.62))],tip};
 }
