@@ -74,7 +74,7 @@ export function chipsOf(owner:string,c:Character):Chip[]{
  * (844×390) and the desktop (1366×768) share one rule; the five-seat FFA uses the same table. */
 export type Box={x:number;y:number;w:number;h:number};
 /** `backs` is the slot of the covered hand: `back` cards fanned inside it (see fan). */
-export type SeatLayout={id:string;me:boolean;person:Box;items:Box[];backs:Box;back:{w:number;h:number;turn:number};board:Box;status:Box;summary:Box};
+export type SeatLayout={id:string;me:boolean;person:Box;items:Box[];backs:Box;back:{w:number;h:number;turn:number};board:Box;status:Box};
 /** C3-L: own deck and own discard pile, small, beside the own character (each player has their own, R02). */
 export type Piles={deck:Box;discard:Box};
 /** C3-L: the cards of the last resolved round in the middle of the table, a light cascade in resolution order: slot 0 (the first
@@ -93,6 +93,8 @@ export const YIELD:(keyof Scale)[]=['items','others','resources','me'];
  * right, with room for a clock. Seats stay clear of both. */
 export function shellBoxes(w:number,h:number,compact:boolean):{hint:Box;top:Box}{
  return compact?{hint:{x:10+70,y:h-8-15,w:140,h:30},top:{x:w-8-75,y:6+23,w:150,h:46}}:{hint:{x:14+115,y:h-12-19,w:230,h:38},top:{x:w-16-95,y:12+23,w:190,h:46}};}
+/** The decorative title at the top left (style.css `.brand`, a little rotated): the short summary stays off it, though it is no seat. */
+export const brandBox=(compact:boolean):Box=>compact?{x:10+48,y:8+24,w:96,h:48}:{x:20+75,y:15+36,w:150,h:72};
 /** D13 close-up range: the own character is already the largest on the table, so its close-up may keep its size. */
 export const closeUpRange=(own:boolean)=>own?{min:1,max:1.3}:{};
 /** D13 target close-up: smaller for the own character, already large. */
@@ -134,11 +136,7 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
   // above the objects on the right (beside the character, never over it). The step shrinks to fit the slot.
   const span=[items[0].x-iw/2,items[n-1].x+iw/2],right=Math.max((span[0]+span[1])/2-full/2,x+pw/2+4);
   const backs=side?(left?{x:(x-pw/2)/2,y:board.y+bh/2+bw,w:x-pw/2-12,h:back.h}:{x:right+full/2,y:items[0].y-ih/2-back.h/2-3,w:full,h:back.h}):{x,y:y-ph*.5-bw*.75-(ffa?3:0),w:full,h:back.h};
-  // C3-2: static round summary in a strip as wide as the board, above it for the own seat and where the covered
-  // hand lies under the board (left FFA seat), below it otherwise; in the duel above it when the covered hand leaves room.
-  const strip={x:board.x,y:board.y-bh/2-mh/2-3,w:bwid,h:mh},room=!ffa&&!own&&strip.y-mh/2>=0&&overlap(strip,fan(backs,back,8).box)===0;
-  const summary=own||backs.y>board.y||room?strip:{...strip,y:board.y+bh/2+mh/2+3};
-  return {id,me:own,person,items,backs,back,board,status,summary};
+  return {id,me:own,person,items,backs,back,board,status};
  });
  const mine=seats.find(x=>x.me);
  if(mine&&ffa){const from=Math.max(...mine.items.map(b=>b.x+b.w/2))+10,room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}
@@ -158,10 +156,26 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
    L.played={box:spot,slots:Array.from({length:n},(_,i)=>({x:left+cw/2+i*dx,y:top+ch/2+i*dy,w:cw,h:ch})),tags:Array.from({length:n},(_,i)=>({x:left+size.w-tw/2,y:top+i*dy+dy/2,w:tw,h:th}))};break;}}
  return L;
 }
+/** Boxes of the short summary to try: from two lines of 520 px (desktop) or 360 px (compact) to a narrow column of eight, with room for about
+ * 40 characters, the widest of the fewest lines first; then one line, which the full compact FFA leaves at its right edge. */
+export function briefShapes(compact:boolean):[number,number][]{const wide=compact?360:520,room=compact?480:900,out:[number,number][]=[];
+ for(let lines=2;lines<=8;lines++)for(let bw=wide;bw>=96;bw-=20)if(bw*lines>=room)out.push([bw,lines]);
+ for(let bw=wide;bw>=120;bw-=20)out.push([bw,1]);return out;}
+/** C3-6: the place of the short summary line (the toast of table.tsx): clear of everything the layout holds and of the strips already placed
+ * (`taken`), near the top middle of the table; null when the table has no room (compact FFA with many objects and strips), then it is not
+ * shown and the dialog «Ultimo turno» stays in the menu. Text clamped to `lines`. */
+export function briefSpot(l:TableLayout,w:number,h:number,taken:Box[]=[]):{box:Box;lines:number}|null{
+ const avoid=[...stripAvoid(l,w,h),...taken,brandBox(l.compact)],middle={x:w*.5,y:h*.42,w:w*.3,h:h*.3};
+ // First outside the middle of the table, where the close-ups of the sequence (D13) play; inside it only when nothing else is left.
+ for(const keep of [[middle],[]])for(const [bw,lines] of briefShapes(l.compact)){const box=freeSpot({w:bw,h:briefHeight(l.compact,lines)},{w,h},[...avoid,...keep],{x:w*.5,y:0},2);if(box)return {box,lines};}
+ return null;}
+/** C3-6: the short summary in 16 px (desktop) or 13 px (compact) text of 1.3 line height, with room for the padding of the box. */
+export const briefFont=(compact:boolean)=>compact?13:16;
+export const briefHeight=(compact:boolean,lines:number)=>Math.ceil(lines*briefFont(compact)*1.3)+(compact?10:14);
 /** Everything drawn on the table but the round's cards and the piles: the seven-card hand, the shell, every seat with its strip and a fan of eight backs. */
 export function tableBoxes(l:TableLayout,w:number,h:number):Box[]{const H=l.hand,shell=shellBoxes(w,h,l.compact);
  const out:Box[]=[{x:H.center,y:H.y,w:H.w+6*H.step,h:H.h},shell.hint,shell.top];
- for(const s of l.seats){out.push(s.person,s.board,s.summary,...s.items);if(!s.me)out.push(fan(s.backs,s.back,8).box);}return out;}
+ for(const s of l.seats){out.push(s.person,s.board,...s.items);if(!s.me)out.push(fan(s.backs,s.back,8).box);}return out;}
 /** The place nearest `mid` for a box of `size` with `pad` around it, clear of `avoid` and inside the screen. */
 export function freeSpot(size:{w:number;h:number},screen:{w:number;h:number},avoid:Box[],mid:Pt,pad:number,step=8):Box|null{
  let best:Box|null=null,dist=Infinity;
@@ -173,10 +187,10 @@ export function freeSpot(size:{w:number;h:number},screen:{w:number;h:number},avo
 export function layoutProblems(l:TableLayout,w:number,h:number,closeUpStep=12,strict=false):string[]{
  const bad:string[]=[],H=l.hand,hand:Box={x:H.center,y:H.y,w:H.w+6*H.step,h:H.h},shell=shellBoxes(w,h,l.compact);
  if(!inside(hand,w,h))bad.push('hand off screen');if(H.step<44)bad.push('hand step');if(!l.played)bad.push('no round cards');if(!l.piles)bad.push('no piles');
- for(const s of l.seats){const own=[s.person,s.board,s.summary,...s.items];
+ for(const s of l.seats){const own=[s.person,s.board,...s.items];
   for(const b of [...own,s.backs])if(!inside(b,w,h))bad.push(`${s.id} off screen`);
   for(const b of own)for(const o of [hand,shell.hint,shell.top,...(l.played?[l.played.box]:[]),...(l.piles?[l.piles.deck,l.piles.discard]:[])])if(overlap(b,o)>0)bad.push(`${s.id} over hand, shell, round cards or piles`);
-  for(const o of l.seats)if(o!==s){for(const a of own){for(const b of [o.person,o.board,o.summary,...o.items])if(overlap(a,b)>0)bad.push(`${s.id}/${o.id}`);if(!o.me&&overlap(a,fan(o.backs,o.back,8).box)>0)bad.push(`${s.id}/backs of ${o.id}`);}}}
+  for(const o of l.seats)if(o!==s){for(const a of own){for(const b of [o.person,o.board,...o.items])if(overlap(a,b)>0)bad.push(`${s.id}/${o.id}`);if(!o.me&&overlap(a,fan(o.backs,o.back,8).box)>0)bad.push(`${s.id}/backs of ${o.id}`);}}}
  const hb=Array.from({length:7},(_,i)=>({x:H.center+(i-3)*H.step,y:H.y-H.lift/2,w:H.w*H.zoom,h:H.h+H.lift}));
  // C3-3 arrows from the raised card in the middle of the hand to every character and object keep clear of the ✓ and × buttons (what the
  // scene avoids); in the duel none starts on its target. `strict`: in the duel clear of the whole confirmation (the C3-3 unit criterion,
@@ -342,3 +356,45 @@ export function labelSpot(base:Box,screen:{w:number;h:number},taken:Box[]):Box{
  const rows=[0,-1,1,-2,2,-3,3,-4,4,-5,5,-6,6,-7,7,-8,8];
  for(const c of [0,1,-1,2,-2])for(const k of rows){const b={...base,x:base.x+c*(base.w+4),y:base.y+k*(base.h+3)};if(inside(b,screen.w,screen.h)&&!taken.some(o=>overlap(b,o)>0))return b;}
  return base;}
+
+
+/**
+ * C3-6 (owner, 30 October 2026): the static summary of a seat was too small and used the letters of the resources. Now one cell per
+ * entry, the same symbol as on the boards and the signed number, in the largest type that finds a place. The size depends on the
+ * entries of the round, so the place is searched for each round, next to the board (or the character) of the seat, clear of
+ * everything on the table; the unit tests keep the worst case (all five resources, objects gone and appeared) placed.
+ */
+export const STRIP_FONT=(compact:boolean)=>compact?{pref:14,min:12}:{pref:19,min:16};
+export type StripCell={x:number;y:number;w:number};
+export type StripSize={fs:number;cols:number;rows:number;w:number;h:number;glyph:number;cells:StripCell[]};
+/** Width of one cell: the symbol, a gap and the digits of the signed number (a bold digit is under 0.62 of the type size). */
+export const stripCellWidth=(text:string,fs:number)=>(/\d/.test(text)?fs*1.2:0)+text.length*fs*.62;
+export function stripSize(texts:string[],fs:number,cols:number):StripSize{
+ const gap=fs*.7,pad=fs*.35,rowH=fs*1.45,rows=Math.max(1,Math.ceil(texts.length/cols)),cells:StripCell[]=[];let width=0;
+ for(let r=0;r<rows;r++){let x=pad;for(const t of texts.slice(r*cols,(r+1)*cols)){const cw=stripCellWidth(t,fs);cells.push({x,y:pad*.5+r*rowH,w:cw});x+=cw+gap;}width=Math.max(width,x-gap+pad);}
+ return {fs,cols,rows,w:width,h:rows*rowH+pad,glyph:fs*.95,cells};}
+/** A place for a strip of `size` touching one of the `anchors` (the board first, then the character) at a gap of 3 px: above, below, left
+ * or right of it, sliding along the side; the one nearest to the board, clear of `avoid` and inside the screen. */
+export function stripSpot(size:{w:number;h:number},anchors:Box[],screen:{w:number;h:number},avoid:Box[],gap=3,step=4,foreign:Box[]=[]):Box|null{
+ let best:Box|null=null,dist=Infinity;
+ // A place that also touches another seat is ambiguous (whose changes are these?): it costs 80 px per such seat, so it wins only when nothing else is left.
+ const touches=(b:Box,a:Box)=>Math.max(Math.abs(b.x-a.x)-(b.w+a.w)/2,Math.abs(b.y-a.y)-(b.h+a.h)/2)<=gap+3;
+ anchors.forEach((a,k)=>{const side=(x:number,y:number)=>{const b={x,y,w:size.w,h:size.h};if(!inside(b,screen.w,screen.h)||avoid.some(o=>overlap(b,o)>0))return;
+   const d=Math.hypot(x-anchors[0].x,y-anchors[0].y)+(k?40:0)+80*foreign.filter(f=>touches(b,f)).length;if(d<dist){dist=d;best=b;}};
+  const x0=a.x-a.w/2-size.w/2+Math.min(24,size.w/2),x1=a.x+a.w/2+size.w/2-Math.min(24,size.w/2),y0=a.y-a.h/2-size.h/2+Math.min(12,size.h/2),y1=a.y+a.h/2+size.h/2-Math.min(12,size.h/2);
+  for(let x=x0;x<=x1;x+=step){side(x,a.y-a.h/2-gap-size.h/2);side(x,a.y+a.h/2+gap+size.h/2);}
+  for(let y=y0;y<=y1;y+=step){side(a.x-a.w/2-gap-size.w/2,y);side(a.x+a.w/2+gap+size.w/2,y);}});
+ return best;}
+/** What the table has in the way of the strips of a layout: everything drawn, the round's cards, the piles and the raised hand card. */
+export function stripAvoid(l:TableLayout,w:number,h:number):Box[]{const H=l.hand;
+ return [...tableBoxes(l,w,h),{x:H.center,y:H.y-H.lift/2,w:H.w+6*H.step,h:H.h+H.lift},...(l.played?[l.played.box]:[]),...(l.piles?[l.piles.deck,l.piles.discard]:[])];}
+export type StripPlan={box:Box;size:StripSize};
+/** The strips of a round: for each seat with entries, the largest type (down to the minimum) and then the fewest rows that find a place;
+ * null for a seat where none does (then nothing is drawn and the short summary and the dialog carry the facts). The own seat goes first. */
+export function stripPlan(l:TableLayout,w:number,h:number,texts:Record<string,string[]>):Record<string,StripPlan|null>{
+ const F=STRIP_FONT(l.compact),avoid=stripAvoid(l,w,h),out:Record<string,StripPlan|null>={};
+ for(const s of [...l.seats].sort((a,b)=>Number(b.me)-Number(a.me))){const t=texts[s.id]??[];if(!t.length){out[s.id]=null;continue;}
+  out[s.id]=null;
+  search:for(let fs=F.pref;fs>=F.min;fs--)for(let cols=t.length;cols>=1;cols--){const size=stripSize(t,fs,cols),box=stripSpot(size,[s.board,s.person,...(s.me?[]:[fan(s.backs,s.back,8).box])],{w,h},avoid,3,4,l.seats.filter(o=>o!==s).flatMap(o=>[o.board,o.person]));
+   if(box){out[s.id]={box,size};avoid.push(box);break search;}}}
+ return out;}

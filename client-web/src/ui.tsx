@@ -1,7 +1,8 @@
 import React,{useRef} from 'react';
 import type {Card} from './contracts.ts';
+import {RESOURCE_NAMES} from './resolution.ts';
 
-export const resourceNames:Record<string,string>={HEALTH:'Salute',ALERTNESS:'Allerta',VIOLENCE:'Violenza',TOXICITY:'Tossicità',ALCOHOL:'Alcol'};
+export const resourceNames:Record<string,string>=RESOURCE_NAMES;
 export const targetNames:Record<string,string>={SELF:'Te stesso',OPPONENT:'Un avversario',NEAR_ITEM:'Un tuo oggetto',FAR_ITEM:'Un oggetto avversario'};
 export const effect=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effect,'text/html');return (doc.querySelector('p:last-child')?.textContent||doc.body.textContent||'').replace(/\s*Riferimento: Regolamento[\s\S]*$/,'').trim();};
 

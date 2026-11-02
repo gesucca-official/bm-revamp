@@ -18,18 +18,30 @@ button.primary{background:#9ec5bd;font-size:17px}
 .turn{font:20px Impact,'Arial Narrow',sans-serif;color:#f1e3c7;text-shadow:1px 2px #20130e}
 .hint.sending,.hint.uncertain{color:#ffe7b0}
 .hint.pending{color:#bfe6df}
-.toast{position:absolute;left:50%;top:12px;transform:translateX(-50%);max-width:52vw;font-size:13px;font-weight:normal;background:#e8d7b4ee;padding:6px 12px;text-align:left;line-height:1.3}
+/* C3-6: the short summary: box, size and clamp come from the layout (clear of every seat); 16 px desktop, 13 px compact. */
+.toast{position:absolute;min-height:0;min-width:0;font-weight:normal;background:#e8d7b4f2;border:1px solid #4d3628;padding:6px 10px;text-align:left;line-height:1.3;overflow:hidden}
+.toast span{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
 .outcome{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) rotate(-1.5deg);background:#e8d7b4;border:3px solid #742e33;border-radius:6px;padding:16px 24px;box-shadow:6px 10px 0 #20160c88;text-align:center;z-index:5}
 .outcome h2{font:normal 44px/1 Impact,'Arial Narrow',sans-serif;color:#742e33;margin:0 0 4px}
 .outcome p{margin:0 0 12px}
 .outcome p.why{margin:-6px 0 12px;font-size:15px}
 .clock.away{position:absolute;right:0;top:100%;margin-top:4px;white-space:nowrap;font-size:16px;color:#ffe7b0}
 .outcome div{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.report-move h3{margin:14px 0 4px;font-size:18px}
-.report-move p,.report p{margin:2px 0}
+.report h3{margin:16px 0 4px;font-size:20px;color:#742e33}
+.report .note{background:#f6ecd8;border-left:5px solid #38616a;padding:8px 12px;margin:6px 0 10px}
+.report .small{font-size:15px;color:#5a4232;margin:2px 0 6px}
+.report ol.facts{list-style:none;margin:4px 0;padding-left:4px}
+.report ul.facts{margin:4px 0;padding-left:26px}
+.report .facts li{margin:0 0 8px;font-size:18px;line-height:1.4}
+.report .facts li strong{display:block}
+.report .facts li span{display:block;font-size:17px;color:#3e2e24}
+.server-text{margin-top:18px;border-top:1px solid #b99772;padding-top:8px;color:#5a4232}
+.server-text summary{cursor:pointer;font-weight:bold;min-height:36px;display:flex;align-items:center}
+.report-move h4{margin:10px 0 2px;font-size:16px}
+.report-move p,.report .server-text p{margin:2px 0;font-size:16px}
 .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .tools pre{max-height:240px;overflow:auto;font-size:12px;background:#f3e8d5;padding:12px}
-@media(max-height:550px){.sheet{padding:14px 18px;gap:8px}.sheet h1{font-size:28px}.outcome{top:36%;padding:10px 16px}.outcome h2{font-size:32px}.toast{max-width:46vw;font-size:12px;top:6px}.tool-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-height:550px){.report .facts li{font-size:16px}.report .facts li span{font-size:15px}.report h3{font-size:18px}.report .note{padding:6px 10px}.report .small{font-size:14px}.sheet{padding:14px 18px;gap:8px}.sheet h1{font-size:28px}.outcome{top:36%;padding:10px 16px}.outcome h2{font-size:32px}.tool-grid{grid-template-columns:repeat(3,1fr)}}
 
 /* (i): small visible disc, 44px touch area through the transparent border. */
 button.info{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;min-width:0;min-height:0;padding:0;border-radius:50%;border:2px solid #30231e;background:#38616a;background-clip:padding-box;color:#f6ecd8;font:italic 700 17px/1 Georgia,serif;box-shadow:1px 2px 0 #20160c88;z-index:4;outline-offset:2px}
@@ -61,8 +73,7 @@ button.info:hover{background:#4d7d86}
 .sheet.hub .actions button{white-space:nowrap}.sheet.hub .actions .primary{flex:1 0 auto}
 /* Compact: while waiting the (disabled) mode buttons give their room to the queue; the notice names the queue. */
 @media(max-height:550px){.ffa-queue{font-size:13px}.sheet.hub .actions button{padding:4px 10px}.play.waiting .modes{display:none}}
-.toast.brief{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-height:550px){.toast.brief{min-height:30px;padding:4px 10px}}
+@media(max-height:550px){.toast{padding:4px 8px}}
 /* C2b-4: collection, deck editor and open deck choice. Outside the table portrait is allowed (D7); the sheet scrolls. */
 .sheet.hub.wide{width:min(1100px,96vw);transform:none}
 .tab.on{background:#9ec5bd}

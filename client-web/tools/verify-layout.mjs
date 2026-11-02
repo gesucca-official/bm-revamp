@@ -5,7 +5,9 @@
 // 30 October 2026): own character larger than the others, the cards of the last round in the middle, in the order and with the names of
 // the view's resolvedMoves (owner, during the block), own deck and discard pile small beside the own character with the count of the view, nothing
 // off the screen, no overlap between seats, hand, round cards, piles, strips and shell, characters and objects at least 44 px, every close-up of the
-// round's sequence (D13) on the screen and clear of the other seats and of the hand. BM_OUT=…/before measured the build before C3-L.
+// round's sequence (D13) on the screen and clear of the other seats and of the hand. C3-6: the strips of the round's summary (one per seat, symbols
+// and signed numbers) and the short summary line stay clear of every seat, the hand, the piles, the round's cards and the shell, in the type size the plan
+// requires (16/12 px at least for the strips, 16/13 px for the line), and the line's box is the one the scene gave it. BM_OUT=…/before measured the build before C3-L.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
@@ -109,6 +111,7 @@ const R=b=>({x:Math.round(b.x),y:Math.round(b.y),w:Math.round(b.w),h:Math.round(
 // DOM rectangles of the shell over the table, as centre boxes like the scene's.
 const shell=p=>p.page.evaluate(()=>{const box=el=>{if(!el)return null;const r=el.getBoundingClientRect();return r.width&&r.height?{x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height}:null;};
  return {top:box(document.querySelector('.top-actions')),brand:box(document.querySelector('.brand')),hint:box(document.querySelector('.hint')),toast:box(document.querySelector('.toast'))};});
+const toastFont=p=>p.page.evaluate(()=>{const e=document.querySelector('.toast');return e?parseFloat(getComputedStyle(e).fontSize):null;});
 // Largest free rectangle (several aspect ratios, grown around a grid of centres) clear of everything drawn and of the shell.
 function freeSpace(occupied,w,h){let best=null,area=0;
  for(let cy=12;cy<h-12;cy+=6)for(let cx=12;cx<w-12;cx+=6)for(const asp of [.6,.8,1,1.3,1.8,2.5]){let lo=0,hi=Math.max(w,h);
@@ -119,7 +122,7 @@ function freeSpace(occupied,w,h){let best=null,area=0;
 function measure(s,dom){
  const L=s.layout,hand=s.hits.filter(h=>h.kind==='hand'),boxes=[];
  for(const seat of L.seats){boxes.push(seat.person,seat.board,...seat.items.slice(0,Math.max(1,(s.hits.filter(h=>h.target?.owner===seat.id&&h.kind==='item').length)||0)));
-  if(s.summary?.seats?.[seat.id])boxes.push(seat.summary);if(!seat.me)boxes.push(fan(seat.backs,seat.back,s.backs[seat.id]??0).box);}
+  {const sb=s.summary?.seats?.[seat.id]?.box;if(sb)boxes.push(sb);}if(!seat.me)boxes.push(fan(seat.backs,seat.back,s.backs[seat.id]??0).box);}
  const shellBoxes=Object.values(dom).filter(Boolean),piles=[...(L.played?[L.played.box]:[]),...(L.piles?[L.piles.deck,L.piles.discard]:[])],occupied=[...boxes,...hand,...shellBoxes,...piles];
  const me=L.seats.find(x=>x.me),others=L.seats.filter(x=>!x.me);
  // Middle of the table: the region between the seats, above the hand. How much of it is free.
@@ -134,6 +137,32 @@ function measure(s,dom){
   me:{person:R(me.person),item:R(me.items[0]),board:R(me.board),boardRow:+(me.board.h/5).toFixed(1),status:R(me.status)},
   others:others.map(o=>({id:o.id,person:R(o.person),item:R(o.items[0]),board:R(o.board),back:{w:Math.round(o.back.w),h:Math.round(o.back.h)}})),
   free:freeSpace(occupied,vw,vh),middle:{box:R(mid),free:midFree},below44:small,clash:[...new Set(clash)],shell:Object.fromEntries(Object.entries(dom).map(([k,v])=>[k,v&&R(v)]))};}
+
+// C3-6: boxes the strips and the short summary line must stay clear of: every seat (character, board, the objects the view shows, the covered hand as drawn),
+// the hand, the piles, the cards of the round and the HTML shell (clock, turn, menu, hint).
+function obstacles(s,dom){
+ const L=s.layout,items=id=>s.hits.filter(h=>h.target?.owner===id&&h.kind==='item').length,out=[];
+ for(const seat of L.seats){out.push({n:`${seat.id} character`,b:seat.person},{n:`${seat.id} board`,b:seat.board});
+  seat.items.slice(0,Math.max(1,items(seat.id))).forEach((b,i)=>{if(i<items(seat.id))out.push({n:`${seat.id} object ${i}`,b});});
+  if(!seat.me)out.push({n:`${seat.id} covered hand`,b:fan(seat.backs,seat.back,s.backs[seat.id]??0).box});}
+ s.hits.filter(h=>h.kind==='hand').forEach((h,i)=>out.push({n:`hand ${i}`,b:h}));
+ if(L.piles)out.push({n:'deck',b:L.piles.deck},{n:'discard',b:L.piles.discard});if(L.played)out.push({n:'round cards',b:L.played.box});
+ for(const k of ['top','hint'])if(dom[k])out.push({n:k,b:dom[k]});
+ return out;}
+const FONT={strip:c=>c?12:16,brief:c=>c?13:16};
+function stripProblems(s,dom){const out=[],L=s.layout,sum=s.summary,seats=Object.entries(sum?.seats??{}),obs=obstacles(s,dom);
+ const drawn=seats.filter(([,x])=>x.drawn);
+ for(const [id,x] of drawn){const at=`strip ${id}`;if(!inside(x.box,vw,vh))out.push(`${at} off screen`);if(x.fs<FONT.strip(L.compact))out.push(`${at} type ${x.fs}`);
+  for(const o of obs)if(overlap(x.box,o.b)>0)out.push(`${at} over ${o.n}`);
+  for(const [oid,y] of drawn)if(oid!==id&&overlap(x.box,y.box)>0)out.push(`${at} over strip ${oid}`);
+  if(dom.toast&&overlap(x.box,dom.toast)>0)out.push(`${at} over the short summary`);}
+ return {out,seats:seats.length,drawn:drawn.length,missing:seats.filter(([,x])=>!x.drawn).map(([id])=>id),fonts:drawn.map(([,x])=>x.fs),texts:Object.fromEntries(seats.map(([id,x])=>[id,x.texts.join(' ')]))};}
+function briefProblems(s,dom){const out=[],L=s.layout,t=dom.toast,obs=obstacles(s,dom);
+ if(!t)return {out:['short summary not on the page'],shown:false};
+ if(!s.brief)out.push('short summary without a place in the scene');
+ if(!inside(t,vw,vh))out.push('short summary off screen');for(const o of obs)if(overlap(t,o.b)>0)out.push(`short summary over ${o.n}`);
+ if(s.brief&&(Math.abs(t.x-s.brief.box.x)>1.5||Math.abs(t.y-s.brief.box.y)>1.5||Math.abs(t.w-s.brief.box.w)>1.5||Math.abs(t.h-s.brief.box.h)>1.5))out.push(`short summary box ${JSON.stringify(R(t))} is not the scene's ${JSON.stringify(R(s.brief.box))}`);
+ return {out,shown:true,box:R(t),lines:s.brief?.lines,font:s.brief?.font};}
 
 const run=name=>!only||only.includes(name);
 async function scenario(name,{ffa=false,turns=2}){
@@ -152,8 +181,18 @@ async function scenario(name,{ffa=false,turns=2}){
     if(!m.played)bad(scope,'no round cards');else if(JSON.stringify((m.played.shows??[]).map(x=>x.name))!==JSON.stringify(now.lastMoves.slice(0,m.played.shows?.length??0))||(m.played.shows??[]).length!==Math.min(now.lastMoves.length,now.layout.played.slots.length))bad(scope,`round cards ${JSON.stringify(m.played.shows)} vs view ${JSON.stringify(now.lastMoves)}`);
     if(!m.piles)bad(scope,'no piles');else if(m.piles.shows?.deck!==now.deckCount)bad(scope,`deck shows ${m.piles.shows?.deck}, view ${now.deckCount}`);
     for(const b of m.below44)if(b.kind!=='status')bad(scope,`${b.id} under 44 px`);}
+   // C3-6: the strips of the round's summary (they stay until the first card choice) clear of everything, in the type size of the plan.
+   if(now.summary){const sp=stripProblems(now,await shell(A));rec.turns.at(-1).strips={seats:sp.seats,drawn:sp.drawn,missing:sp.missing,fonts:sp.fonts,texts:sp.texts};step(`${name}${tag} T${now.turn} strips`,rec.turns.at(-1).strips);
+    if(!old){for(const m of sp.out)bad(`${name}${tag} T${now.turn}`,m);
+     // The compact FFA may lack the room for a strip when a round changes many entries; everywhere else every seat has its strip.
+     if(sp.missing.length&&!(now.layout.compact&&now.layout.seats.length>2))bad(`${name}${tag} T${now.turn}`,`no strip for ${sp.missing}`);
+     if(sp.seats!==now.layout.seats.length)bad(`${name}${tag} T${now.turn}`,`summary of ${sp.seats} seats on a table of ${now.layout.seats.length}`);}}
    await A.shot(`${name}-T${now.turn}`);
    if(t<turns){await A.page.evaluate(()=>window.__bm.measureStart());await playOne(A);await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,40000,'resolved');
+    // C3-6: the short summary line, as the round arrives: where the scene put it, clear of everything, 16 px (desktop) or 13 px (compact).
+    {const arrival=await A.state();if(arrival&&!arrival.over&&!arrival.eliminated){const dom=await shell(A),bp=briefProblems(arrival,dom),font=await toastFont(A);rec.briefs=(rec.briefs??[]).concat({turn:arrival.turn,...bp,fontPx:font});step(`${name}${tag} T${arrival.turn} short summary`,rec.briefs.at(-1));
+     if(!old){for(const m of bp.out)bad(`${name}${tag} T${arrival.turn}`,m);if(bp.shown&&font<FONT.brief(arrival.layout.compact))bad(`${name}${tag} T${arrival.turn}`,`short summary type ${font}`);}
+     await A.shot(`${name}-T${arrival.turn}-summary`);}}
     // During the sequence: a screenshot of the first close-up, then every close-up recorded by the scene is checked.
     await A.wait(x=>!x||x.stats.closeUps.length>closeUpsSeen,8000,'close-up').catch(()=>{});await A.page.waitForTimeout(500);await A.shot(`${name}-T${s.turn}-closeup`);
     const done=await A.wait(x=>!x||!x.sequence.running,30000,'sequence end');const ups=done.stats.closeUps.slice(closeUpsSeen);

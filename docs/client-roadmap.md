@@ -1,8 +1,8 @@
 # Roadmap del client web animato
 
-**2 novembre 2026 — versione 32. C0, C1 e C2 sono chiuse; C3 è in corso nel
+**2 novembre 2026 — versione 33. C0, C1 e C2 sono chiuse; C3 è in corso nel
 [piano C3](client-c3-plan.md): C3-1, C3-2 e C3-4 (ciascuno con la revisione dopo la prova del
-proprietario, C3-4 anche con la rifinitura C3-4s), C3-3 e C3-L sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+proprietario, C3-4 anche con la rifinitura C3-4s), C3-3, C3-L e C3-6 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -530,6 +530,9 @@ clock residuo, mai sotto 10 s ([rapporto C3](reports/client-c3-report.md#c3-4--r
 Osservazione per C4/C5: sequenza velocizzata attivabile dall'utente.
 **C3-4s fatto (2 novembre 2026), dopo la prova di C3-L:** scritte leggibili, oggetti e scarti animati, pesche dal
 mazzo, (i) sempre disponibili ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)).
+**C3-6 fatto (2 novembre 2026), con l'osservazione del proprietario del 30 ottobre:** strisce del riepilogo con i
+simboli delle risorse e testo grande, riga breve fuori dai posti, «Ultimo turno» con i fatti prima del testo del
+server ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili)).
 
 **C3-L fatto (30 ottobre 2026), dopo il feedback del proprietario** (centro vuoto, tutto piccolo, proprio
 personaggio grande quanto gli altri; D14): personaggio proprio ×1,5 e risorse fino a ×1,25 su desktop; gli altri
@@ -712,8 +715,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
 **Prossimo passo:** il blocco successivo del [piano C3](client-c3-plan.md) su
-istruzione del proprietario, nell'ordine C3-6, C3-5, C3-7;
-C3-1, C3-2, C3-3, C3-4, C3-L e C3-4s sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
+istruzione del proprietario, nell'ordine C3-5, C3-7;
+C3-1, C3-2, C3-3, C3-4, C3-L, C3-4s e C3-6 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
 danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -723,6 +726,13 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 33 — 2 novembre 2026, C3-6:** riepilogo e «Ultimo turno» leggibili. La striscia statica per posto ha
+  i simboli delle plance al posto delle lettere e il testo grande (19 px a 1366×768, 14 px a 844×390),
+  disposta a ogni round accanto al proprio posto senza coprire altro (`stripPlan` in `readability.ts`); la
+  riga breve ha un posto libero fuori dai posti (`briefSpot`, 16 e 13 px); «Ultimo turno» dice prima i fatti
+  certi in italiano, dal modello (`roundReport`), poi il testo del server, e dopo un salto di turni quanti
+  ne sono stati risolti ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili)). Nessuna regola, API o servizio cambiato; ordine dei blocchi
+  restanti C3-5, C3-7.
 - **Versione 32 — 2 novembre 2026, C3-4s:** rifinitura delle animazioni dopo la prova di C3-L: scritte delle risorse
   con 1200 ms di lettura, oggetti animati secondo i fatti, carte giocate alla pila, pesche dal mazzo; difetto delle (i)
   perse in partita avanzata riprodotto e corretto, con controllo a ogni round in `VerifyResolution`

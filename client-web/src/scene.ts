@@ -3,8 +3,8 @@ import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,nextStop,timeline,beats,BEAT_PHASE,LABEL,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type TableLayout} from './readability.ts';
+import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -48,7 +48,7 @@ export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number}
  piles:{deck:number;discard:string|null}|null;
  /** C3-L: the round's cards drawn in the middle, bottom first (during a sequence only those already landed). */
  played:{name:string;author:string;void:boolean}[]|null;hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
- summary:{key:string;seats:Record<string,{texts:string[];box:Box}>}|null;
+ summary:{key:string;seats:Record<string,{texts:string[];box:Box|null;fs:number|null;drawn:boolean}>}|null;
  /** C3-4: resource values each board shows (the view, or the step reached during a sequence). */
  boards:Record<string,Partial<Record<Resource,number>>>};
 // Stable seats: the viewer at the bottom, opponents in join order. Five-seat layout kept for C2 FFA.
@@ -92,7 +92,10 @@ hits:Hit[]=[];backs:Record<string,number>={};
  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
- layout:TableLayout|null=null;readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:null,played:null,hand:[],board:null,summary:null,boards:{}};
+ layout:TableLayout|null=null;
+ /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
+ brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
+readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:null,played:null,hand:[],board:null,summary:null,boards:{}};
  // C3-L: round's cards already landed in the middle during a sequence.
  private landed=0;
  // C3-4s: what the table shows during a sequence, until each flight lands; at its end, and for decisions at any time, the view (rule 2).
@@ -221,13 +224,14 @@ hits:Hit[]=[];backs:Record<string,number>={};
    this.world.addChild(c);this.chips[chip.id]={...chip,x,y:y-ch/2};
    // Same owner as the character: with a card chosen, a tap here aims at that character.
    this.hits.push({id:chip.id,kind:'status',x,y,w:cw,h:ch,angle:0,target:{owner:id},label:`${chip.title}. ${chip.text}`,node:c});});}
- // C3-2: the round's overall change of a seat, as the model gives it; nothing computed here. Shrinks to its strip.
- private seatSummary(b:Box,marks:SeatMark[],compact:boolean){const c=new Container(),g=new Graphics(),row=new Container();c.addChild(g,row);c.position.set(b.x,b.y);
-  g.roundRect(-b.w/2,-b.h/2,b.w,b.h,b.h*.4).fill({color:0x120c08,alpha:.86}).stroke({color:0xd9b98a,width:1});
-  const fs=compact?10:14,texts=marks.length?marks.map(m=>m.text):['invariato'];let x=0;
-  texts.forEach((t,i)=>{const m=marks[i],color=!m?0xcbbca2:m.key==='ITEMS'?0xe9dcc2:m.delta<0?0xffb7bd:0xc9f0b0;const tx=this.text(row,t,0,0,fs,undefined,color);tx.anchor.set(0,.5);tx.position.set(x,0);x+=tx.width+fs*.55;});
-  const width=Math.max(1,x-fs*.55),scale=Math.min(1,(b.w-8)/width);row.scale.set(scale);row.position.set(-width*scale/2,0);
-  this.world.addChild(c);return texts;}
+ // C3-2, C3-6: the round's overall change of a seat, as the model gives it; nothing computed here. One cell per entry: the symbol of the
+ // resource (the one of the boards) or of the objects, and the signed number, in the type size and cells of the plan (readability.ts).
+ private seatSummary(plan:StripPlan,marks:SeatMark[]){const {box:b,size}=plan,c=new Container(),g=new Graphics(),row=new Container();c.addChild(g,row);c.position.set(b.x-b.w/2,b.y-b.h/2);
+  g.roundRect(0,0,b.w,b.h,Math.min(b.h*.3,10)).fill({color:0x120c08,alpha:.9}).stroke({color:0xd9b98a,width:1.2});
+  marks.forEach((m,i)=>{const cell=size.cells[i],y=cell.y+size.fs*.72,color=m.delta<0?0xffb7bd:0xc9f0b0;
+   if(m.key!=='NONE')glyph(g,m.key==='ITEMS'?'ITEMS':m.key,cell.x+size.glyph/2,y,size.glyph,m.key==='ITEMS'?PAPER:RES_COLOR[m.key]);
+   const tx=this.text(row,m.text,0,0,size.fs,undefined,m.key==='NONE'?0xcbbca2:color);tx.anchor.set(0,.5);tx.position.set(cell.x+(m.key==='NONE'?0:size.glyph+size.fs*.25),y);});
+  this.world.addChild(c);return marks.map(m=>m.text);}
  // C3-L: own deck (backs, with the count of the view) and discard pile (the last card that went there, R02), small, beside the own character.
  private piles(L:TableLayout,compact:boolean):Readout['piles']{const P=L.piles,v=this.model.view,me=this.model.me,p=v.players[me];if(!P||!p)return null;
   const cards=[...this.catalog(),...this.model.hand.map(c=>c.card)];
@@ -267,6 +271,11 @@ hits:Hit[]=[];backs:Record<string,number>={};
   const w=this.width,h=this.height,view=this.model.view,me=this.model.me,ids=Object.keys(view.players);
   const L=tableLayout(w,h,ids,me,Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])));this.layout=L;const compact=L.compact,H=L.hand;
   const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null,roundSummary:Readout['summary']=null;
+  // C3-6: the strips of the round's summary are placed first, for all seats, clear of everything the layout holds.
+  // The short summary line (toast of table.tsx) takes the place the strips leave; kept for the round and the size, so it does not move when the strips go.
+  const strips0=this.marks&&!this.seqStarted?stripPlan(L,w,h,Object.fromEntries(L.seats.map(x=>[x.id,(this.marks![x.id]?.length?this.marks![x.id]:NO_CHANGE).map(m=>m.text)]))):null,strips=strips0;
+  const briefKey=`${this.model.round?.facts.key??''}|${w}x${h}`;
+  if(this.briefFor!==briefKey){this.briefFor=briefKey;const spot=briefSpot(L,w,h,Object.values(strips0??{}).flatMap(p=>p?[p.box]:[]));this.brief=spot?{...spot,font:briefFont(compact)}:null;}
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
    if(id!==me){const final=p.cardsInHand as number,count=this.staged?.backs[id]??final,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=final;
     for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
@@ -277,7 +286,8 @@ hits:Hit[]=[];backs:Record<string,number>={};
    if(this.model.allows({owner:id})&&!this.model.locked)this.halo(person,cw,ch,this.model.target?.owner===id&&this.model.target.itemIndex===undefined?0xf1e4c4:PETROL);
    const read=this.board(seat.board,p,id,id===me,compact);if(read)board=read;
    this.statusChips(seat.status,id,p);
-   if(this.marks&&!this.seqStarted){const texts=this.seatSummary(seat.summary,this.marks[id]??[],compact);(roundSummary??={key:this.marksKey,seats:{}}).seats[id]={texts,box:seat.summary};}
+   const strip=strips?.[id];if(this.marks&&!this.seqStarted)(roundSummary??={key:this.marksKey,seats:{}}).seats[id]={texts:(this.marks[id]?.length?this.marks[id]:NO_CHANGE).map(m=>m.text),box:strip?.box??null,fs:strip?.size.fs??null,drawn:!!strip};
+   if(strip)this.seatSummary(strip,this.marks![id]?.length?this.marks![id]:NO_CHANGE);
    const covered=coveredItems(seat.items),table=this.staged?.items[id];
    p.character.items.forEach((item,index)=>{const b=seat.items[index]??seat.items[seat.items.length-1],c=this.card(item,b.w,b.h,true),hid=`item-${id}-${index}`;c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);
     if(table)c.visible=false;

@@ -160,7 +160,9 @@ test('static summary: every non-zero resource change and the objects of each sea
    assert.equal(marks[id].filter(m=>m.key==='ITEMS'&&m.delta>0).reduce((n,m)=>n+m.delta,0),s.itemsAppeared.length);}}
  const c=pair('death'),f=round('death'),id=Object.keys(f.facts.seats!).find(i=>f.facts.seats![i].resources.HEALTH?.delta)!;
  const d=f.facts.seats![id].resources.HEALTH!.delta;
- assert.ok(seatMarks(f)![id].some(m=>m.text===`H ${d>0?'+':'−'}${Math.abs(d)}`));void c;
+ assert.ok(seatMarks(f)![id].some(m=>m.key==='HEALTH'&&m.text===`${d>0?'+':'−'}${Math.abs(d)}`));void c;
+ // C3-6: the strip has symbols, so the marks carry the signed number alone: no resource letters, no «ogg».
+ for(const name of contiguous)for(const list of Object.values(seatMarks(round(name))!))for(const m of list)assert.match(m.text,/^[+−]\d+$/,`${name} ${m.key}`);
 });
 
 test('no summary, no sequence, a note instead after a jump or from an earlier connection (D4, rule 3)',()=>{
@@ -366,4 +368,88 @@ test('C3-4s: a label is readable for its whole time inside the round, in every r
  const totals=pace(1,{totals:true});assert.ok(totals.tail.at+LABEL.in+LABEL.read<=totals.total);
  // Past the first stops the tap of D12 is unchanged: the cleared middle is not a stop of its own.
  const clear=pace(1,{clear:true});assert.equal(nextStop(clear,1),clear.moves[0].cost.at);assert.ok(directionProblems({...clear,moves:clear.moves.map(m=>({...m,at:0}))}).some(x=>x.includes('cleared')));
+});
+
+// C3-6: the dialog «Ultimo turno»: every sentence from the facts (D1, D7).
+import {roundReport,reportNote,briefLine,NO_CHANGE,RESOURCE_NAMES,type ReportContext} from '../src/resolution.ts';
+const names:Record<string,string>={};
+const ctxFor=(me:string):ReportContext=>({me,name:id=>names[id]??id,forfeit:(id,code)=>`${id} forfeit ${code}`,costOf:card=>{const c=catalog.find(x=>x.name===card);return c?{...c.cost}:null;}});
+const reportOf=(name:string,crossed=false)=>{const c=pair(name),f=resolve(c.previous,c.next,c.me,catalog);return {c,f,r:roundReport(f,crossed,ctxFor(c.me))};};
+const signedText=(n:number)=>`${n>0?'+':'−'}${Math.abs(n)}`;
+
+test('report, five-seat FFA with a voided move: every move in resolution order with its nominal cost, the void said, no cause invented',()=>{
+ const {c,f,r}=reportOf('void');
+ assert.equal(r.note,null);assert.equal(r.moves.length,5);assert.equal(r.moves.length,c.next.resolvedMoves.length);
+ f.moves.forEach((m,i)=>{const t=r.moves[i].title;assert.ok(t.startsWith(`${i+1}. `),t);assert.ok(t.includes(`«${m.card}»`),t);
+  assert.equal(t.includes(`${m.author===c.me?'Tu':m.author} ${m.author===c.me?'giochi':'gioca'} `),true,t);
+  assert.equal(r.moves[i].lines.some(l=>/^Annullata/.test(l)),m.void,`${i} void`);
+  const nominal=catalog.find(x=>x.name===m.card)?.cost??null;
+  assert.equal(r.moves[i].lines.some(l=>l.startsWith('Costo nominale: ')),!!nominal&&Object.values(nominal).some(v=>v),`${i} cost`);
+  for(const [k,v] of Object.entries(nominal??{}))if(v)assert.ok(r.moves[i].lines.join(' ').includes(`${v} ${RESOURCE_NAMES[k as keyof typeof RESOURCE_NAMES]}`),`${i} ${k}`);});
+ // Which move voided it is not published, so the sentence says it is not known and never names a canceller.
+ const voided=r.moves.flatMap(m=>m.lines).filter(l=>/^Annullata/.test(l));assert.equal(voided.length,1);assert.match(voided[0],/non dice da quale mossa/);
+ assert.ok(r.costNote);
+ // One line of changes per seat of the view, and nothing about a seat that is not there.
+ assert.equal(r.changes!.length,Object.keys(c.next.players).length);
+});
+
+test('report, overall changes: the resources and objects of every seat as the facts give them, with before and after',()=>{
+ for(const name of contiguous){const {c,f,r}=reportOf(name);
+  Object.entries(f.seats!).forEach(([id,s],i)=>{const line=r.changes![i];assert.ok(line.startsWith(`${id===c.me?'Tu':id}: `),line);
+   for(const [k,ch] of Object.entries(s.resources)){const text=`${RESOURCE_NAMES[k as keyof typeof RESOURCE_NAMES]} ${signedText(ch!.delta)} (da ${ch!.before??0} a ${ch!.after??0})`;
+    assert.equal(line.includes(text),!!ch!.delta,`${name} ${id} ${k}`);}
+   assert.equal(/oggetti spariti/.test(line),s.itemsGone.length>0,`${name} ${id} gone`);assert.equal(/oggetti comparsi/.test(line),s.itemsAppeared.length>0,`${name} ${id} appeared`);
+   for(const n of [...s.itemsGone,...s.itemsAppeared])assert.ok(line.includes(`«${n}»`),`${name} ${id} ${n}`);
+   if(!Object.values(s.resources).some(x=>x!.delta)&&!s.itemsGone.length&&!s.itemsAppeared.length)assert.match(line,/nessuna variazione/);});}
+});
+
+test('report, objects: chosen object linked only when the facts say it left the seat; the arrival is a fact, not a cause',()=>{
+ const a=reportOf('itemConsumed'),m=a.f.moves.findIndex(x=>x.item);assert.ok(a.f.moves[m].itemGone);
+ const line=a.r.moves[m].lines.find(l=>l.startsWith('Oggetto scelto'))!;assert.ok(line.includes(`«${a.f.moves[m].item!.name}»`));assert.match(line,/sparito da quel posto/);assert.doesNotMatch(line,/rubat|consumat|distrutt|spezzat/);
+ const b=reportOf('itemNamedNotGone');b.f.moves.forEach((x,i)=>{if(!x.item)return;const l=b.r.moves[i].lines.find(y=>y.startsWith('Oggetto scelto'))!;
+  assert.equal(/sparito da quel posto/.test(l),x.itemGone,l);if(!x.itemGone)assert.match(l,/non permette di dire con certezza/);});
+ const o=reportOf('itemFromOther'),k=o.f.moves.findIndex(x=>x.item);const l=o.r.moves[k].lines.find(y=>y.startsWith('Oggetto scelto'))!;
+ assert.equal(/comparso fra gli oggetti/.test(l),o.f.moves[k].itemAtAuthor,l);assert.doesNotMatch(l,/rubat|passat/);
+ // A bound's discard is the published choice, nothing more.
+ const d=reportOf('boundDiscard'),j=d.f.moves.findIndex(x=>x.discard);assert.ok(j>=0);assert.ok(d.r.moves[j].lines.includes(`Carta da scartare indicata: «${d.f.moves[j].discard}».`));
+});
+
+test('report, deaths, end of turn and outcome come from the seats, the lines of the round and the view',()=>{
+ for(const name of ['death','deathWithMove','lethalEndOfTurn','over']){const {c,f,r}=reportOf(name);
+  const died=Object.entries(f.seats!).filter(([,s])=>s.died).map(([id])=>id);assert.equal(r.eliminations.length,died.length,name);
+  for(const id of died)assert.ok(r.eliminations.some(l=>id===c.me?/Sei stato eliminato/.test(l):l.startsWith(`${id} è stato eliminato`)),`${name} ${id}`);
+  assert.equal(!!r.endOfTurn,f.endOfTurn.length>0,name);if(r.endOfTurn)for(const id of f.endOfTurn)assert.ok(r.endOfTurn.includes(id===c.me?'Tu':id),`${name} ${id}`);
+  assert.equal(!!r.outcome,f.outcome.over,name);}
+ const w=reportOf('over');assert.match(w.r.outcome!,w.c.next.winner===w.c.me?/hai vinto/:w.c.next.winner==='NONE'?/pareggio/:new RegExp(`vince ${w.c.next.winner}`));
+ // A forfeit that appears in the round is said with the sentence the lifecycle gives.
+ const c=pair('death'),next=clone(c.next),id=Object.keys(next.players).find(x=>x!==c.me)!;next.forfeits={...next.forfeits,[id]:'leave'};
+ const r=roundReport(resolve(c.previous,next,c.me,catalog),false,ctxFor(c.me));assert.ok(r.eliminations.includes(`${id} forfeit leave.`));
+});
+
+test('report, jump of turns: says how many were resolved, that the facts are the last one\'s, and gives no change, object or death',()=>{
+ for(const name of ['jump','jumpAfterForfeits']){const {f,r}=reportOf(name);
+  assert.match(r.note!,new RegExp(`Sono stati risolti ${f.turnsAdvanced} turni, fino a il turno ${f.turn}\\.`));assert.match(r.note!,/solo l’ultimo/);
+  assert.equal(r.changes,null);assert.deepEqual(r.eliminations,[]);assert.equal(r.moves.length,f.moves.length,'the moves of the last round are certain');
+  for(const m of r.moves)for(const l of m.lines)if(l.startsWith('Oggetto scelto'))assert.doesNotMatch(l,/sparito/);}
+ assert.equal(reportOf('jumpAfterForfeits').f.turnsAdvanced,21);
+});
+
+test('report, a round from an earlier connection and a first view: no differences, said plainly',()=>{
+ const x=reportOf('void',true);assert.match(x.r.note!,/mentre eri fuori linea/);assert.equal(x.r.changes,null);assert.deepEqual(x.r.eliminations,[]);assert.equal(x.r.moves.length,5);
+ const c=pair('rejoinSame'),first=roundReport(resolve(null,c.next,c.me,catalog),false,ctxFor(c.me));
+ assert.match(first.note!,/Non c’è una vista precedente/);assert.equal(first.changes,null);assert.equal(first.moves.length,c.next.resolvedMoves.length);
+ assert.equal(reportNote(resolve(c.previous,c.next,c.me,catalog),false),first.note,'same view, same words');
+ assert.equal(reportOf('void').r.note,null);
+});
+
+test('report, unknown card: the nominal cost is said unknown, not invented',()=>{
+ const c=pair('void'),f=resolve(c.previous,c.next,c.me,[]),r=roundReport(f,false,{...ctxFor(c.me),costOf:()=>null});
+ assert.ok(r.moves.every(m=>m.lines.includes('Costo nominale non noto al client.')));assert.equal(r.costNote,null);
+});
+
+test('short summary line: the moves of the facts in resolution order, voided and end of turn marked',()=>{
+ const {c,f}=reportOf('void'),line=briefLine(f,c.me,id=>id);
+ assert.ok(line.startsWith(`Turno ${f.turn}: `));assert.equal(line.split(' · ').filter(x=>x.includes(' → ')).length,5);assert.match(line,/\(annullata\)/);assert.match(line,/fine turno: \d+ giocator/);
+ f.moves.forEach(m=>assert.ok(line.includes(`${m.author===c.me?'tu':m.author} → ${m.card}`)));
+ assert.equal(NO_CHANGE[0].text,'invariato');
 });

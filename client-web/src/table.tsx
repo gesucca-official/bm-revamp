@@ -6,8 +6,8 @@ import {TableScene,cost,subtype,type Hit,type Inspection} from './scene.ts';
 import {playerName} from './presence.ts';
 import {ROLES,roleOf,shortfall} from './readability.ts';
 import {PressButton,effect,resourceNames,targetNames} from './ui.tsx';
-import {outcome,forfeitLabel,secondsLeft,reconnecting} from './lifecycle.ts';
-import {resolve,roundNote,type ResolutionFacts} from './resolution.ts';
+import {outcome,forfeitLabel,forfeitOwn,secondsLeft,reconnecting} from './lifecycle.ts';
+import {resolve,roundNote,roundReport,briefLine,type ResolutionFacts} from './resolution.ts';
 
 type Modal='inspect'|'menu'|'report'|'tools'|'leave'|'logout';
 
@@ -36,9 +36,9 @@ export function Table({session,model}:{session:Session;model:Model}){
   const visibility=()=>{if(document.hidden){if(since)left=Math.max(0,left-(Date.now()-since));clearTimeout(toastTimer);toastTimer=0;since=0;}else arm();};
   document.addEventListener('visibilitychange',visibility);
   const unsubscribe=model.subscribe(why=>{update();
-   if((why==='view'||why==='reset')&&model.round!==seen){seen=model.round;const v=model.view,eot=Object.values(v.timeBasedEffects).flat().length,line=roundNote(model.round);
+   if((why==='view'||why==='reset')&&model.round!==seen){seen=model.round;const v=model.view,line=roundNote(model.round);
     if(line){clearTimeout(toastTimer);toastTimer=0;left=0;note=true;setToast(line);}
-    else if(why==='view'&&v.resolvedMoves.length){note=false;setToast(`Turno ${v.turn}: ${v.resolvedMoves.map(m=>`${m.playerId===me?'tu':playerName(m.playerId,Object.keys(v.players))} → ${m.playedCardName}${m.void?' (annullata)':''}`).join(' · ')}${eot?` · fine turno: ${eot} effett${eot===1?'o':'i'}`:''}`);left=6000;arm();}}
+    else if(why==='view'&&model.round&&v.resolvedMoves.length){note=false;setToast(briefLine(model.round.facts,me,id=>playerName(id,Object.keys(v.players))));left=6000;arm();}}
    else if(why==='choice'&&note&&model.selected)hide();});
   // C3-1: certain facts of each received view, exposed for the verification only; the scene does not use them yet.
   // Scene counters are read after every listener has run, so they belong to the same view.
@@ -46,13 +46,13 @@ export function Table({session,model}:{session:Session;model:Model}){
   const record=model.subscribe(why=>{if(why!=='view'&&why!=='reset')return;const entry={why,facts:resolve(held,model.view,me,[...session.catalog,...model.hand.map(c=>c.card)])};held=model.view;resolutions.push(entry);if(resolutions.length>400)resolutions.shift();
    queueMicrotask(()=>{const s=table.stats;(entry as typeof resolutions[number]).scene={sequences:s.sequences,cancels:[...s.cancels],aggregateDeltas:s.aggregateDeltas,flights:s.flights,transfers:s.transfers};});});
   const esc=(e:KeyboardEvent)=>{if(e.key==='Escape'&&!dialog.current?.open)table.escape();};window.addEventListener('keydown',esc);
-  (window as any).__bm={get state(){return {phase:model.phase,turn:model.view.turn,over:model.view.over,winner:model.view.winner,eliminated:model.eliminated,me,order:model.hand.map(c=>({key:c.key,name:c.card.name})),selected:model.selected,target:model.target,discard:model.discard,commands:model.commandCount,lastCommand:model.lastCommand,message:model.message,drag:table.drag,ghostOver:table.ghostOver,backs:table.backs,stats:table.stats,hits:table.hits.map(({node,...hit})=>hit),readout:table.readout,layout:table.layout,peek:table.peek,statusShown:table.statusShown,resources:model.view.players[me]?.character.resources??{},deckCount:model.view.players[me]?.deck??null,lastMoves:model.view.resolvedMoves.map(m=>m.playedCardName),cards:model.hand.map(c=>({key:c.key,name:c.card.name,cost:c.card.cost,role:c.card.role??null,gains:c.card.gains??null})),resolution:resolutions.at(-1)?.facts??null,sequence:{running:table.sequenceRunning,ends:table.stats.sequenceEnds,summaries:table.stats.summaries},summary:table.readout.summary,arrows:table.arrows.map(({id,owner,kind,itemIndex,from,control,to,head,reached,crosses})=>({id,owner,kind,itemIndex,from,control,to,head,reached,crosses})),aimAlpha:table.aimLayer.alpha,reduced:table.reduced,round:model.round?{key:model.round.facts.key,relation:model.round.facts.relation,crossed:model.round.crossed}:null};},measureStart:()=>table.startMeasure(),measureEnd:()=>table.endMeasure(),get resolutions(){return resolutions;}};
+  (window as any).__bm={get state(){return {phase:model.phase,turn:model.view.turn,over:model.view.over,winner:model.view.winner,eliminated:model.eliminated,me,order:model.hand.map(c=>({key:c.key,name:c.card.name})),selected:model.selected,target:model.target,discard:model.discard,commands:model.commandCount,lastCommand:model.lastCommand,message:model.message,drag:table.drag,ghostOver:table.ghostOver,backs:table.backs,stats:table.stats,hits:table.hits.map(({node,...hit})=>hit),readout:table.readout,layout:table.layout,brief:table.brief,peek:table.peek,statusShown:table.statusShown,resources:model.view.players[me]?.character.resources??{},deckCount:model.view.players[me]?.deck??null,lastMoves:model.view.resolvedMoves.map(m=>m.playedCardName),cards:model.hand.map(c=>({key:c.key,name:c.card.name,cost:c.card.cost,role:c.card.role??null,gains:c.card.gains??null})),resolution:resolutions.at(-1)?.facts??null,sequence:{running:table.sequenceRunning,ends:table.stats.sequenceEnds,summaries:table.stats.summaries},summary:table.readout.summary,arrows:table.arrows.map(({id,owner,kind,itemIndex,from,control,to,head,reached,crosses})=>({id,owner,kind,itemIndex,from,control,to,head,reached,crosses})),aimAlpha:table.aimLayer.alpha,reduced:table.reduced,round:model.round?{key:model.round.facts.key,relation:model.round.facts.relation,crossed:model.round.crossed}:null};},measureStart:()=>table.startMeasure(),measureEnd:()=>table.endMeasure(),get resolutions(){return resolutions;}};
   return()=>{active=false;clearTimeout(toastTimer);document.removeEventListener('visibilitychange',visibility);clearTimeout(hoverTimer);unsubscribe();record();window.removeEventListener('keydown',esc);table.destroy();delete (window as any).__bm;};
  },[model]);
  // Indicative countdowns from the server epoch: they never decide a forfeit. vsCom has no move clock.
  useEffect(()=>{const timer=setInterval(()=>{const now=Date.now();setClock(secondsLeft(model.view.moveDeadlines?.[me],now));setAway(reconnecting(model.view,me,now));},250);return()=>clearInterval(timer);},[model]);
  useEffect(()=>{const s=scene.current;if(s){s.blocked=!!modal;if(modal)s.interrupt('dialog',true,false);}if(modal){if(!dialog.current?.open){dialog.current?.showModal();openedAt.current=performance.now();}dialog.current?.querySelector<HTMLButtonElement>('button')?.focus();}else dialog.current?.close();},[modal]);
- const table=scene.current,choice=model.selectedCard;
+ const table=scene.current,choice=model.selectedCard,brief=table?.brief??null;
  const targetLabel=model.target?`${model.target.owner===me?'te':name(model.target.owner)}${model.target.itemIndex!==undefined?` · ${view.players[model.target.owner].character.items[model.target.itemIndex].name}`:''}`:'';
  const finished=view.over||model.eliminated;
  // D11: after the own death (not a forfeit) the FFA goes on and can be watched until the outcome.
@@ -84,8 +84,8 @@ export function Table({session,model}:{session:Session;model:Model}){
   <div className="brand" aria-hidden="true">BOTTE<br/>MICIDIALI</div>
   <div className="top-actions">{!panel&&away.map(a=><span key={a.id} className="clock away" role="status" aria-label={`${name(a.id)} è fuori linea: rientro entro ${a.seconds} secondi`}>{name(a.id)} fuori linea · {a.seconds} s</span>)}{clock!==null&&!finished&&<span className="clock" aria-label="Tempo indicativo per la mossa">◷ {model.phase==='pending'?'—':`${clock} s`}</span>}<span className="turn" aria-label={`Turno ${view.turn+1}`}>T{view.turn+1}</span><PressButton className="menu-button round" aria-label="Apri menu" onClick={()=>open('menu')}>•••</PressButton></div>
   {!panel&&!confirmAt&&<p className={`hint ${model.phase}${model.phase==='choose'&&!dead&&/^Scegli /.test(model.message)?' ask':''}`} role="status" aria-live="polite">{dead?'Sei fuori: guardi fino all’esito':model.message}</p>}
-  {/* FFA: one line, so the summary does not cover the seats at the top; the full report stays one tap away. */}
-  {toast&&!panel&&<PressButton className={`toast${ids.length>2?' brief':''}`} onClick={()=>open('report')}>{toast}</PressButton>}
+  {/* C3-6: the short summary lies in the place the layout keeps for it (clear of every seat), clamped to its lines; the full report is one tap away. */}
+  {toast&&!panel&&brief&&<PressButton className="toast" data-testid="toast" style={{left:brief.box.x-brief.box.w/2,top:brief.box.y-brief.box.h/2,width:brief.box.w,height:brief.box.h,fontSize:brief.font}} onClick={()=>open('report')}><span style={{WebkitLineClamp:brief.lines}}>{toast}</span></PressButton>}
   {tip&&<div className={`status-tip ${tip.kind}`} role="tooltip" data-testid="status-tip" style={{left:Math.max(8,Math.min(tip.x-120,innerWidth-248)),top:tip.y>150?undefined:tip.y+30,bottom:tip.y>150?innerHeight-tip.y+6:undefined}}><strong>{tip.title}</strong><span>{tip.text}</span></div>}
   {info&&<PressButton key={info.id} className="info" data-testid="info" aria-label={`Dettagli: ${info.label}`} style={{left:info.cx,top:info.cy}} onPointerEnter={()=>setOverInfo(info.id)} onPointerLeave={()=>setOverInfo(null)} onClick={()=>{setOverInfo(null);table?.inspect(info.id);}}>i</PressButton>}
   {choice&&model.target&&!finished&&<div className="confirmation" style={confirmAt!}>
@@ -106,8 +106,23 @@ export function Table({session,model}:{session:Session;model:Model}){
     <PressButton onClick={()=>setModal('report')}>Ultimo turno</PressButton><PressButton onClick={()=>{table?.skip();close();}}>Salta effetti</PressButton><PressButton onClick={()=>{setTool(null);setModal('tools');}}>Strumenti</PressButton>{!finished&&<PressButton onClick={()=>setModal('leave')}>Abbandona la partita</PressButton>}{dead&&watching&&<PressButton onClick={()=>{close();session.leave('hub');}}>Torna all’hub</PressButton>}<PressButton onClick={()=>setModal('logout')}>Esci dall’account</PressButton></section>}
    {modal==='leave'&&<section className="menu"><h2>Abbandonare?</h2><p>Abbandonare è un forfait: la partita è persa e torni all’hub.</p><PressButton onClick={()=>{close();session.leave('hub');}}>Sì, abbandona</PressButton><PressButton onClick={close}>No, resto al tavolo</PressButton></section>}
    {modal==='logout'&&<section className="menu"><h2>Uscire dall’account?</h2><p>{finished?'La partita è conclusa: esci e torni all’accesso.':'Uscire durante la partita è un forfait: la partita è persa e torni all’accesso.'}</p><PressButton onClick={()=>{close();void session.logout();}}>Sì, esci</PressButton><PressButton onClick={close}>No, resto al tavolo</PressButton></section>}
-   {modal==='report'&&<section className="report"><h2>Ultimo turno</h2>{view.resolvedMoves.length?view.resolvedMoves.map((m,i)=><div key={i} className="report-move"><h3>{i+1}. {m.playerId===me?'Tu':name(m.playerId)} → {m.targetId==='SELF'?'se stesso':m.targetId===me?'te':name(m.targetId)}: {m.playedCardName}{m.void?' · annullata':''}</h3>{Object.values(m.moveReport).flat().map((line,j)=><p key={j}>{line}</p>)}</div>):<p>Nessuna risoluzione disponibile.</p>}
-    {Object.entries(view.timeBasedEffects).some(([,l])=>l.length)&&<><h3>Fine turno</h3>{Object.entries(view.timeBasedEffects).filter(([,l])=>l.length).map(([id,lines])=><p key={id}><b>{id===me?'Tu':name(id)}:</b> {lines.join(' ')}</p>)}</>}</section>}
+   {modal==='report'&&(()=>{
+    // C3-6 (D7): the facts the model gives, in Italian, first; the server's text, unchanged, in a secondary section.
+    const catalog=[...session.catalog,...model.hand.map(c=>c.card)],crossed=model.round?.crossed??false,facts=model.round?.facts??resolve(null,view,me,catalog);
+    const r=roundReport(facts,crossed,{me,name,forfeit:(id,code)=>id===me?forfeitOwn(code):`${name(id)} ${forfeitLabel(code)}`,costOf:card=>{const c=catalog.find(x=>x.name===card);return c?{...c.cost}:null;}});
+    const server=Object.entries(view.timeBasedEffects).filter(([,l])=>l.length);
+    return <section className="report"><h2>Ultimo turno</h2>
+     {r.note&&<p className="note" data-testid="report-note">{r.note}</p>}
+     <h3>Cosa è successo nel turno {r.turn}</h3>
+     {r.moves.length?<ol className="facts" data-testid="report-facts">{r.moves.map((m,i)=><li key={i}><strong>{m.title}</strong>{m.lines.map((l,j)=><span key={j}>{l}</span>)}</li>)}</ol>:<p>Nessuna risoluzione disponibile.</p>}
+     {r.costNote&&<p className="small">{r.costNote}</p>}
+     {r.changes&&<><h3>Variazioni complessive</h3><p className="small">Costi, effetti e fine turno insieme: non sono attribuite a una singola mossa.</p><ul className="facts" data-testid="report-changes">{r.changes.map((l,i)=><li key={i}>{l}</li>)}</ul></>}
+     {r.eliminations.length>0&&<><h3>Eliminazioni</h3><ul className="facts" data-testid="report-eliminations">{r.eliminations.map((l,i)=><li key={i}>{l}</li>)}</ul></>}
+     {r.endOfTurn&&<><h3>Fine turno</h3><p data-testid="report-end">{r.endOfTurn}</p></>}
+     {r.outcome&&<p data-testid="report-outcome"><b>{r.outcome}</b></p>}
+     <details className="server-text" data-testid="server-text"><summary>Testo del server (in inglese, invariato)</summary>
+      {view.resolvedMoves.length?view.resolvedMoves.map((m,i)=><div key={i} className="report-move"><h4>{i+1}. {m.playerId===me?'Tu':name(m.playerId)} → {m.targetId==='SELF'?'se stesso':m.targetId===me?'te':name(m.targetId)}: {m.playedCardName}{m.void?' · annullata':''}</h4>{Object.values(m.moveReport).flat().map((line,j)=><p key={j}>{line}</p>)}</div>):<p>Nessuna risoluzione disponibile.</p>}
+      {server.length>0&&<><p className="label"><b>Testo di fine turno</b></p>{server.map(([id,lines])=><p key={id}><b>{id===me?'Tu':name(id)}:</b> {lines.join(' ')}</p>)}</>}</details></section>;})()}
    {modal==='tools'&&<section className="tools"><h2>Strumenti</h2><p>Dati già visibili a te, per diagnosi: nessuna mano altrui né ordine dei mazzi.</p><div className="tool-grid">
     <PressButton disabled={!choice} onClick={()=>showTool('Log Card',choice)}>Log Card</PressButton><PressButton onClick={()=>showTool('Log State',view.players[me].character)}>Log State</PressButton><PressButton onClick={()=>showTool('Log Item',Object.fromEntries(Object.entries(view.players).map(([id,p])=>[id,p.character.items])))}>Log Item</PressButton>
     <PressButton onClick={()=>showTool('Log JSON',{gameId:view.gameId,turn:view.turn,resolvedMoves:view.resolvedMoves,timeBasedEffects:view.timeBasedEffects,pendingMove:view.pendingMove,lastCommand:model.lastCommand})}>Log JSON</PressButton><PressButton onClick={()=>showTool('Trasporto',session.trace.slice(-40))}>Messaggi ricevuti</PressButton><PressButton onClick={()=>showTool('Giocatori',Object.fromEntries(ids.map(id=>[id,id===me?'Tu':name(id)])))}>Giocatori</PressButton><PressButton onClick={()=>{close();session.dropConnection();}}>Simula disconnessione</PressButton></div>

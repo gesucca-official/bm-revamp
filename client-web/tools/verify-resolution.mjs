@@ -18,6 +18,8 @@
 // C3-4s: every card of the previous round leaves the middle for its pile (R02), every bound's extra card and every draw flies, every object gone or
 // appeared moves with a flight, counted against the facts of the wire views; every label stays readable for LABEL.read ms and no two visible labels overlap.
 // Scenarios `info`, `infoFfa`, `infoTouch`: the (i) and the inspection at every round of long games, after every interruption.
+// C3-6: scenario `report` reads the dialog «Ultimo turno» on real games (duel and five-seat FFA) and after the turn jump against the wire views: facts first, the server's text
+// second and unchanged, the jump described, type size for the screen.
 // BM_RECORD=1 also writes the real view pairs used by tests/resolution.test.ts (tests/resolution-views.json).
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
 // BM_SERVER_PORT runs the temporary server on another port (with a preview on BM_PORT proxying to it via BM_SERVER).
@@ -316,6 +318,73 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
 }
 const lastView=(p,turn)=>p.views().filter(v=>v.turn===turn).at(-1);
 const catalogOf=p=>{const acc=p.messages('/user/queue/account/data').at(-1);return acc?JSON.parse(acc.body).collection?.cards??[]:[];};
+// --- C3-6: the dialog «Ultimo turno», read back from the page and checked against the RAW views of the wire (not against the client's own function):
+// the facts come first (moves in resolution order, nominal costs from the account catalog, overall changes per seat with before and after, objects gone and
+// appeared, eliminations, end of turn), the server's text second and unchanged, a jump of turns said as such, and the type big enough to read without zoom.
+const RES_IT={HEALTH:'Salute',ALERTNESS:'Allerta',VIOLENCE:'Violenza',TOXICITY:'Tossicità',ALCOHOL:'Alcol'};
+const sgn=n=>`${n>0?'+':'−'}${Math.abs(n)}`;
+const label=(p,id,ids)=>{if(id===p.user)return 'Tu';if(!id.startsWith('ComPlayer_'))return id;const bots=ids.filter(x=>x.startsWith('ComPlayer_'));return bots.length>1?`Computer ${bots.indexOf(id)+1}`:'Computer';};
+const names=cards=>m=>{const c=cards.find(x=>x.name===m);return c?c.cost:null;};
+async function reportDialog(p,game,{via='menu',scope}){
+ const views=p.views(game),next=views.at(-1),before=[...views].reverse().find(v=>v.turn<next.turn)??null,ids=Object.keys(next.players),L=id=>label(p,id,ids),cards=catalogOf(p),problems=[];
+ if(via==='menu'){await p.page.getByLabel('Apri menu').click();await p.page.getByRole('button',{name:'Ultimo turno'}).click();}else await p.page.getByRole('button',{name:'Ultimo turno'}).first().click();
+ await p.page.locator('dialog[open] .report').waitFor({timeout:5000});await p.page.waitForTimeout(150);
+ const dom=await p.page.evaluate(()=>{const t=e=>e?e.textContent.replace(/\s+/g,' ').trim():null,q=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)].map(t),dlg=q('dialog[open]'),r=dlg.getBoundingClientRect(),fs=e=>e?parseFloat(getComputedStyle(e).fontSize):null,rep=q('.report'),det=q('.server-text');
+  return {h2:t(q('.report h2')),note:t(q('[data-testid=report-note]')),
+   moves:[...document.querySelectorAll('[data-testid=report-facts] > li')].map(li=>({title:t(li.querySelector('strong')),lines:[...li.querySelectorAll('span')].map(t)})),noMoves:!q('[data-testid=report-facts]'),
+   changes:q('[data-testid=report-changes]')?all('[data-testid=report-changes] li'):null,elim:all('[data-testid=report-eliminations] li'),end:t(q('[data-testid=report-end]')),outcome:t(q('[data-testid=report-outcome]')),
+   server:{open:!!det?.open,summary:t(q('.server-text summary')),moves:[...document.querySelectorAll('.server-text .report-move')].map(m=>({title:t(m.querySelector('h4')),lines:[...m.querySelectorAll('p')].map(t)})),
+    ends:[...document.querySelectorAll('.server-text > p')].map(t)},
+   order:{facts:rep.querySelector('[data-testid=report-facts]')?.compareDocumentPosition(det)&Node.DOCUMENT_POSITION_FOLLOWING?'facts-before-server':'server-first-or-missing'},
+   type:{move:fs(q('[data-testid=report-facts] li strong')),line:fs(q('[data-testid=report-facts] li span')),change:fs(q('[data-testid=report-changes] li')),note:fs(q('[data-testid=report-note]')),h3:fs(q('.report h3')),serverLine:fs(q('.server-text p'))},
+   box:{x:r.x,y:r.y,w:r.width,h:r.height,scrollH:dlg.scrollHeight,clientH:dlg.clientHeight,scrollW:dlg.scrollWidth,clientW:dlg.clientWidth,vw:innerWidth,vh:innerHeight}};});
+ // 1. The moves: the view's resolvedMoves in order, with who, what, on whom, void, nominal cost, chosen object and discard.
+ const cost=names(cards);
+ if(dom.moves.length!==next.resolvedMoves.length)problems.push(`moves ${dom.moves.length} vs view ${next.resolvedMoves.length}`);
+ next.resolvedMoves.forEach((m,i)=>{const d=dom.moves[i];if(!d){return;}const self=m.targetId==='SELF'||m.targetId===m.playerId,target=self?m.playerId:m.targetId;
+  const who=L(m.playerId),on=self?(m.playerId===p.user?'te stesso':'se stesso'):target===p.user?'di te':L(target),verb=m.playerId===p.user?'giochi':'gioca';
+  if(d.title!==`${i+1}. ${who} ${verb} «${m.playedCardName}» su ${on}`)problems.push(`move ${i} title «${d.title}»`);
+  if(d.lines.some(l=>/^Annullata/.test(l))!==!!m.void)problems.push(`move ${i} void`);
+  const c=cost(m.playedCardName),costLine=d.lines.find(l=>/^(Costo nominale|Nessun costo|Costo nominale non noto)/.test(l));
+  if(c===null){if(costLine!=='Costo nominale non noto al client.')problems.push(`move ${i} unknown cost: ${costLine}`);}
+  else{const parts=Object.entries(c).filter(([,v])=>v).map(([k,v])=>`${v} ${RES_IT[k]}`);const exp=parts.length?`Costo nominale: ${['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'].filter(k=>c[k]).map(k=>`${c[k]} ${RES_IT[k]}`).join(' + ')}.`:'Nessun costo nominale in risorse.';if(costLine!==exp)problems.push(`move ${i} cost «${costLine}» vs «${exp}»`);}
+  const item=m.choices?.TARGET_ITEM,itemLine=d.lines.find(l=>l.startsWith('Oggetto scelto'));if(!!item!==!!itemLine||(item&&!itemLine.includes(`«${item}»`)))problems.push(`move ${i} object`);
+  const disc=m.choices?.DISCARD_ONE,discLine=d.lines.find(l=>l.startsWith('Carta da scartare'));if(!!disc!==!!discLine||(disc&&!discLine.includes(`«${disc}»`)))problems.push(`move ${i} discard`);
+  for(const l of d.lines)if(/rubat|consumat|distrutt|spezzat|annullata da|contrastat/i.test(l))problems.push(`move ${i} claims a cause: ${l}`);});
+ // 2. The overall changes: only for a contiguous round (the previous view is the previous turn of this game).
+ const adv=before?next.turn-before.turn:null,contiguous=adv===1&&before.gameId===next.gameId;
+ if(contiguous){
+  if(!dom.changes||dom.changes.length!==ids.length)problems.push(`changes ${dom.changes?.length} lines for ${ids.length} seats`);
+  ids.forEach((id,i)=>{const line=dom.changes?.[i]??'',a=before.players[id],b=next.players[id];if(!line.startsWith(`${L(id)}: `))problems.push(`changes ${id}: «${line}»`);
+   for(const k of Object.keys(RES_IT)){const x=a?.character.resources[k]??0,y=b.character.resources[k]??0,text=`${RES_IT[k]} ${sgn(y-x)} (da ${x} a ${y})`;if((y!==x)!==line.includes(text))problems.push(`changes ${id} ${k}: expected ${y!==x?'':'no '}«${text}» in «${line}»`);
+    if(line.includes(`${RES_IT[k]} `)&&y===x&&new RegExp(`${RES_IT[k]} [+−]\\d`).test(line))problems.push(`changes ${id} ${k}: a change that did not happen`);}
+   const gone=[...(a?.character.items??[]).map(c=>c.name)],now=b.character.items.map(c=>c.name),minus=(x,y)=>{const z=[...y];return x.filter(n=>{const k=z.indexOf(n);if(k>=0){z.splice(k,1);return false;}return true;});};
+   const goneNames=minus(gone,now),appeared=minus(now,gone);if(/oggetti spariti/.test(line)!==(goneNames.length>0))problems.push(`changes ${id} gone`);if(/oggetti comparsi/.test(line)!==(appeared.length>0))problems.push(`changes ${id} appeared`);
+   for(const n of [...goneNames,...appeared])if(!line.includes(`«${n}»`))problems.push(`changes ${id} ${n}`);
+   const died=!a?.character.dead&&b.character.dead;if(dom.elim.some(e=>e.startsWith(id===p.user?'Sei stato eliminato':`${L(id)} è stato eliminato`))!==died)problems.push(`eliminations ${id}`);});
+  const eot=Object.entries(next.timeBasedEffects??{}).filter(([,l])=>l.length).map(([id])=>id);if(!!dom.end!==(eot.length>0))problems.push('end of turn section');for(const id of eot)if(!dom.end?.includes(L(id)))problems.push(`end of turn ${id}`);
+  if(dom.note)problems.push(`a note on a contiguous round: ${dom.note}`);
+ }else{
+  if(dom.changes!==null)problems.push('changes shown without a contiguous previous view');if(dom.elim.length)problems.push('eliminations shown without a contiguous previous view');
+  if(adv>1&&(!dom.note||!new RegExp(`Sono stati risolti ${adv} turni, fino a il turno ${next.turn}\\.`).test(dom.note)||!/solo l’ultimo/.test(dom.note)))problems.push(`jump of ${adv} turns not described: ${dom.note}`);
+  if(!dom.note)problems.push('no note without a difference');}
+ if(next.over&&!dom.outcome)problems.push('outcome missing');if(!next.over&&dom.outcome)problems.push('outcome on a game that goes on');
+ // 3. The server's text, unchanged and second.
+ if(dom.order.facts!=='facts-before-server')problems.push(`order: ${dom.order.facts}`);
+ if(dom.server.moves.length!==next.resolvedMoves.length)problems.push(`server text of ${dom.server.moves.length} moves`);
+ next.resolvedMoves.forEach((m,i)=>{const lines=Object.values(m.moveReport).flat(),d=dom.server.moves[i];if(!d)return;if(JSON.stringify(d.lines)!==JSON.stringify(lines))problems.push(`server text of move ${i}: ${JSON.stringify(d.lines)} vs ${JSON.stringify(lines)}`);});
+ const eotLines=Object.entries(next.timeBasedEffects??{}).filter(([,l])=>l.length);
+ eotLines.forEach(([id,lines],i)=>{const t=dom.server.ends[i+1]??'';if(!t.endsWith(lines.join(' ').replace(/\s+/g,' ').trim()))problems.push(`server end-of-turn text of ${id}`);});
+ // 4. Legibility at this size, without zoom: type, the dialog inside the screen, nothing cut sideways, the facts at the top.
+ const compact=vh<550,min={move:compact?16:18,line:compact?15:17,change:compact?16:18,note:compact?16:18};
+ if(dom.type.move!==null&&dom.type.move<min.move)problems.push(`move title ${dom.type.move}px`);if(dom.type.line!==null&&dom.type.line<min.line)problems.push(`move line ${dom.type.line}px`);
+ if(dom.type.change!==null&&dom.type.change<min.change)problems.push(`change ${dom.type.change}px`);if(dom.type.note!==null&&dom.type.note<min.note)problems.push(`note ${dom.type.note}px`);
+ if(dom.box.x<-.5||dom.box.y<-.5||dom.box.x+dom.box.w>dom.box.vw+.5||dom.box.y+dom.box.h>dom.box.vh+.5)problems.push(`dialog off screen ${JSON.stringify(dom.box)}`);
+ if(dom.box.scrollW>dom.box.clientW+1)problems.push('dialog scrolls sideways');
+ const firstFact=await p.page.evaluate(()=>{const dlg=document.querySelector('dialog[open]'),li=document.querySelector('[data-testid=report-facts] li'),d=dlg.getBoundingClientRect(),r=li?.getBoundingClientRect();return r?{top:r.top-d.top,bottom:r.bottom-d.top,dialogH:d.height}:null;});
+ if(firstFact&&firstFact.bottom>firstFact.dialogH+1)problems.push('the first move is not visible when the dialog opens');
+ return {scope,turn:next.turn,advanced:adv,moves:dom.moves.length,type:dom.type,box:dom.box,firstFact,note:dom.note,problems,close:async()=>{await p.page.keyboard.press('Escape');await p.page.waitForTimeout(120);}};
+}
 function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
  const a=analyse(label,p,game,r.log,catalogOf(p),{expectSequences,quiet});
  const rule2=r.finals.filter(f=>f.problems.length);
@@ -431,6 +500,31 @@ try{
   summarise('quick',A,game,r);
   evidence.scene.quick.rejoin={...rejoin,reanimated:rejoin.sequencesAfter>rejoin.sequencesBefore};
   await toHub(A);
+ }
+
+ // C3-6: the dialog «Ultimo turno» on real games, in the duel (quick 1vCom) and the five-seat FFA (four computers), opened from the menu at several turns: every sentence
+ // of the facts checked on the wire views, the server's text unchanged and second, the type big enough for this size (BM_VIEWPORT), nothing off the screen.
+ if(run('report')){
+  const rows=[];
+  for(const mode of ['duel','ffa']){
+   if(mode==='duel'){await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+   else{await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
+   await table(A);const game=readyId(A,mode==='duel'?/quick\/1vCom\/ready$/:/quick\/ffa\/ready$/);let checked=0;
+   for(let t=0;t<6&&checked<4;t++){
+    const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand')&&!x.sequence.running)),90000,'turn');
+    if(s.over||s.eliminated)break;
+    if(s.turn>=1){const res=await reportDialog(A,game,{scope:`${mode} T${s.turn}`});rows.push({mode,turn:res.turn,advanced:res.advanced,moves:res.moves,type:res.type,box:res.box,firstFact:res.firstFact,problems:res.problems});
+     if(checked===1)await A.shot(`report-${mode}-dialog`);
+     await A.page.evaluate(()=>document.querySelector('dialog[open]')?.scrollTo(0,1e6));await A.page.waitForTimeout(100);if(checked===1)await A.shot(`report-${mode}-dialog-end`);
+     await res.close();checked++;}
+    await playOne(A);await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,90000,'resolved');}
+   const st=await A.state();if(!st.over&&!st.eliminated){await A.page.keyboard.press('Escape');await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}
+   else await toHub(A);
+   step(`report-${mode}`,{game,dialogs:rows.filter(r=>r.mode===mode).length});}
+  evidence.report={rows};
+  assert.ok(rows.filter(r=>r.mode==='duel').length>=2&&rows.filter(r=>r.mode==='ffa').length>=2,'dialogs checked in both modes');
+  assert.deepEqual(rows.flatMap(r=>r.problems.map(x=>`${r.mode} T${r.turn}: ${x}`)),[],'report dialog');
+  assert.ok(rows.filter(r=>r.mode==='ffa').some(r=>r.moves>=4),'an FFA round with several moves was read');
  }
 
  // K3: reduced motion emulated, three rounds of quick 1vCom, then abandon. No sequence; the static summary is there.
@@ -637,6 +731,9 @@ try{
   assert.match(note??'',/Risolti \d+ turni/,'outcome panel: line of the resolved turns');assert.equal(st.summary,null,'no summary after the jump');
   const jumps=a.rows.filter(x=>x.relation==='jump');
   step('jumpObserved',{secondsToForfeit:Math.round((Date.now()-t0)/1000),over:!!end,turnsFromTo:jumps.map(x=>`${x.from}→${x.turn}`),clientRelations:a.client.map(c=>`${c.key} ${c.relation}`),sceneK2:evidence.scene.jump.k2,note,rule4});
+  // C3-6: «Ultimo turno» after the jump: how many turns were resolved, the moves of the last one, no change, object or death, the server's text.
+  const jr=await reportDialog(A,game,{via:'panel',scope:'jump'});step('jumpDialog',{turn:jr.turn,advanced:jr.advanced,moves:jr.moves,note:jr.note,problems:jr.problems,type:jr.type,box:jr.box});await A.shot('jump-dialog');
+  assert.deepEqual(jr.problems,[],'jump dialog');assert.ok(jr.advanced>1,'the dialog was read after a real jump');await jr.close();
   await toHub(A);await toHub(B).catch(()=>{});
  }
 

@@ -187,20 +187,25 @@ export function plays(r: Round | null, seen: string, motion: {reduced: boolean; 
   return hasDifference(r) && r!.facts.moves.length > 0 && r!.facts.key !== seen && !motion.reduced && !motion.hidden && !motion.contextLost;
 }
 
-export type SeatMark = {key: Resource | 'ITEMS'; delta: number; text: string};
-const MARK_LETTER: Record<Resource, string> = {HEALTH: 'H', ALERTNESS: 'A', VIOLENCE: 'V', TOXICITY: 'T', ALCOHOL: 'L'};
+/** Italian names of the resources, as the dialogs say them (the table draws their symbols). */
+export const RESOURCE_NAMES: Record<Resource, string> = {HEALTH: 'Salute', ALERTNESS: 'Allerta', VIOLENCE: 'Violenza', TOXICITY: 'Tossicità', ALCOHOL: 'Alcol'};
 const signed = (n: number) => `${n > 0 ? '+' : '−'}${Math.abs(n)}`;
+/** One entry of the static summary of a seat: the scene draws the symbol of `key` (a resource, or the objects) and `text`, the signed number. */
+export type SeatMark = {key: Resource | 'ITEMS' | 'NONE'; delta: number; text: string};
+/** What the strip of a seat says when the round changed nothing there: text only, no symbol. */
+export const NO_CHANGE: SeatMark[] = [{key: 'NONE', delta: 0, text: 'invariato'}];
 /**
  * Static round summary per seat (rule 5): the overall change of every resource and the objects gone and
  * appeared, as the model gives them. Null without a difference (jump, other game, earlier connection).
+ * C3-6: no letters; the number alone, the symbol is drawn by the scene (the same as on the boards).
  */
 export function seatMarks(r: Round | null): Record<string, SeatMark[]> | null {
   if (!hasDifference(r)) return null;
   return Object.fromEntries(Object.entries(r!.facts.seats!).map(([id, s]) => {
     const marks: SeatMark[] = (Object.entries(s.resources) as [Resource, ResourceChange][]).filter(([, c]) => c.delta)
-      .map(([k, c]) => ({key: k, delta: c.delta, text: `${MARK_LETTER[k] ?? k} ${signed(c.delta)}`}));
-    if (s.itemsGone.length) marks.push({key: 'ITEMS', delta: -s.itemsGone.length, text: `ogg ${signed(-s.itemsGone.length)}`});
-    if (s.itemsAppeared.length) marks.push({key: 'ITEMS', delta: s.itemsAppeared.length, text: `ogg ${signed(s.itemsAppeared.length)}`});
+      .map(([k, c]) => ({key: k, delta: c.delta, text: signed(c.delta)}));
+    if (s.itemsGone.length) marks.push({key: 'ITEMS', delta: -s.itemsGone.length, text: signed(-s.itemsGone.length)});
+    if (s.itemsAppeared.length) marks.push({key: 'ITEMS', delta: s.itemsAppeared.length, text: signed(s.itemsAppeared.length)});
     return [id, marks];
   }));
 }
@@ -212,6 +217,97 @@ export function roundNote(r: Round | null): string | null {
   if (f.relation === 'jump') return `Risolti ${f.turnsAdvanced} turni fino al ${last.toLowerCase()}: valori finali della vista. L’ultimo turno è in «Ultimo turno».`;
   if (r.crossed) return `${last} risolto mentre eri fuori linea: valori finali della vista. Dettagli in «Ultimo turno».`;
   return null;
+}
+
+/** The short line of the toast (C3-6): who played what, in resolution order, from the moves of the facts. */
+export function briefLine(f: ResolutionFacts, me: string, name: (id: string) => string): string {
+  const eot = f.endOfTurn.length;
+  return `Turno ${f.turn}: ${f.moves.map(m => `${m.author === me ? 'tu' : name(m.author)} → ${m.card}${m.void ? ' (annullata)' : ''}`).join(' · ')}${eot ? ` · fine turno: ${eot} ${eot === 1 ? 'giocatore' : 'giocatori'}` : ''}`;
+}
+
+// --- C3-6: the dialog «Ultimo turno»: certain facts in Italian first, the server's text after (plan D7) ---
+
+export type ReportContext = {
+  me: string; name: (id: string) => string;
+  /** The sentence for a forfeit that appeared in the round (the wire code stays visible when unknown). */
+  forfeit: (id: string, code: string) => string;
+  /** Nominal cost of a card by display name from the catalog the client holds; null if unknown. */
+  costOf: (card: string) => MoveFact['cost'];
+};
+export type ReportMove = {title: string; lines: string[]};
+export type RoundReport = {
+  turn: number;
+  /** After a jump of turns, a round from an earlier connection or a first view: what the facts below do not cover. */
+  note: string | null;
+  moves: ReportMove[];
+  /** Said once when a nominal cost is shown: the paid amount may differ (R05). */
+  costNote: string | null;
+  /** Overall change of every seat (costs, effects and end of turn together), null without a difference. */
+  changes: string[] | null;
+  eliminations: string[];
+  endOfTurn: string | null;
+  outcome: string | null;
+};
+
+const quoted = (names: string[]) => names.map(n => `«${n}»`).join(', ');
+
+/** What the facts of a round cannot say, in the words of D4 and rule 3; null for a round with its difference. */
+export function reportNote(f: ResolutionFacts, crossed: boolean): string | null {
+  const last = `il turno ${f.turn}`;
+  if (f.relation === 'jump') return `Sono stati risolti ${f.turnsAdvanced} turni, fino a ${last}. I fatti qui sotto riguardano solo l’ultimo: variazioni, oggetti ed eliminazioni degli altri turni non sono disponibili.`;
+  if (f.relation === 'next') return crossed ? `${last[0].toUpperCase()}${last.slice(1)} è stato risolto mentre eri fuori linea. I fatti riguardano solo questo turno e le variazioni non sono disponibili: non c’è una vista precedente della stessa connessione.` : null;
+  return `Non c’è una vista precedente con cui confrontare (primo arrivo, ricarica o rientro). I fatti riguardano solo ${last} e le variazioni non sono disponibili.`;
+}
+
+/**
+ * Every sentence of the dialog's first part, from the facts alone (D1, D7): the moves in resolution order with what the view
+ * publishes of each, the overall changes of every seat (not attributed to a move), objects, eliminations, end of turn and
+ * outcome. A link the facts do not make certain is said as not certain; nothing is read from the server's sentences.
+ */
+export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportContext): RoundReport {
+  const who = (id: string) => id === c.me ? 'Tu' : c.name(id), of = (id: string) => id === c.me ? 'di te' : `di ${c.name(id)}`;
+  const diff = f.contiguous && !crossed && !!f.seats;
+  let costShown = false;
+  const moves = f.moves.map((m, i): ReportMove => {
+    const verb = m.author === c.me ? 'giochi' : 'gioca';
+    const onto = m.self ? (m.author === c.me ? 'te stesso' : 'se stesso') : m.target === c.me ? 'di te' : c.name(m.target);
+    const lines: string[] = [];
+    if (m.void) lines.push('Annullata durante il round (la vista non dice da quale mossa).');
+    const nominal = m.cost ?? c.costOf(m.card);
+    if (!nominal) lines.push('Costo nominale non noto al client.');
+    else {
+      const cost = RESOURCE_ORDER.filter(r => nominal[r]).map(r => `${nominal[r]} ${RESOURCE_NAMES[r]}`);
+      lines.push(cost.length ? `Costo nominale: ${cost.join(' + ')}.` : 'Nessun costo nominale in risorse.'); costShown = true;
+    }
+    if (m.item) {
+      const what = `«${m.item.name}» ${of(m.item.owner)}`;
+      if (!f.seats) lines.push(`Oggetto scelto: ${what}.`);
+      else if (m.itemGone) lines.push(`Oggetto scelto: ${what}, sparito da quel posto.${m.itemAtAuthor ? ` Un oggetto con lo stesso nome è comparso fra gli oggetti ${of(m.author)}.` : ''}`);
+      else lines.push(`Oggetto scelto: ${what}. La vista non permette di dire con certezza se sia sparito per questa mossa.`);
+    }
+    if (m.discard) lines.push(`Carta da scartare indicata: «${m.discard}».`);
+    return {title: `${i + 1}. ${who(m.author)} ${verb} «${m.card}» su ${onto}`, lines};
+  });
+  const changes = diff ? Object.entries(f.seats!).map(([id, s]) => {
+    const parts = (Object.entries(s.resources) as [Resource, ResourceChange][]).filter(([, r]) => r.delta)
+      .map(([k, r]) => `${RESOURCE_NAMES[k]} ${signed(r.delta)} (da ${r.before ?? 0} a ${r.after ?? 0})`);
+    if (s.itemsGone.length) parts.push(`oggetti spariti: ${quoted(s.itemsGone)}`);
+    if (s.itemsAppeared.length) parts.push(`oggetti comparsi: ${quoted(s.itemsAppeared)}`);
+    return `${who(id)}: ${parts.length ? parts.join('; ') : 'nessuna variazione'}.`;
+  }) : null;
+  const eliminations: string[] = [];
+  if (diff) for (const [id, s] of Object.entries(f.seats!)) {
+    if (s.died) eliminations.push(id === c.me ? 'Sei stato eliminato in questo turno.' : `${c.name(id)} è stato eliminato in questo turno.`);
+    if (s.forfeit) eliminations.push(`${c.forfeit(id, s.forfeit)}.`);
+  }
+  const o = f.outcome;
+  return {
+    turn: f.turn, note: reportNote(f, crossed), moves,
+    costNote: costShown ? 'I costi sono quelli nominali delle carte: l’importo pagato può differire (R05).' : null,
+    changes, eliminations,
+    endOfTurn: f.endOfTurn.length ? `Effetti di fine turno su: ${f.endOfTurn.map(who).join(', ')}. Cosa hanno fatto lo dice solo il testo del server, più sotto.` : null,
+    outcome: o.over ? (o.winner === 'NONE' ? 'Partita conclusa in pareggio.' : o.winner === c.me ? 'Partita conclusa: hai vinto.' : `Partita conclusa: vince ${c.name(o.winner)}.`) : null,
+  };
 }
 
 /**

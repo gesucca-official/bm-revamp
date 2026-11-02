@@ -17,6 +17,7 @@ modifiche di regole e catalogo (A1, A3, eventualmente A2) sono attività separat
 regolamento. **Dopo il feedback del proprietario del 30 ottobre 2026** (centro del tavolo vuoto, tutto un po'
 piccolo, personaggio proprio grande quanto gli altri) si aggiunge il blocco **C3-L** (scala e spazio del tavolo),
 fra C3-4r e C3-6, con la decisione D14; ordine dei blocchi restanti: C3-L, C3-6, C3-5, C3-7.
+**C3-6 fatto il 2 novembre 2026**; restano C3-5 e C3-7.
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -121,7 +122,7 @@ incompleto), **manca**.
 | Effetti di fine turno | parziale: solo conteggio e testo | `timeBasedEffects` (chi), testo | C3-4 |
 | Effetti per tipo di danno (O7) | manca | campo `damage` della carta (A1, regolamento 1.9); importo nel campo `damageAmount` (A3, 1.10) | C3-5 |
 | Morte, forfait ed esito | c'è come pannello; nessuna enfasi nel round | `dead`, `forfeits`, `over`, `winner` | C3-4, C3-5 |
-| Report dell'ultimo round | c'è: riepilogo di 6 s e «Ultimo turno» con il testo del server | come sopra | C3-6 |
+| Report dell'ultimo round | c'è: fatti certi in italiano e poi il testo del server in «Ultimo turno»; strisce con simboli e riga breve leggibili (C3-6) | come sopra | C3-6 |
 | Viste ripetute e stesso turno | parziale: K1 | `gameId`, `turn` | C3-2 |
 | Round saltati | parziale: K2 | salto di `turn` | C3-1, C3-2 |
 | Movimento ridotto, salto, background | parziale: K3–K5 | — | C3-2 |
@@ -170,12 +171,12 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-4 | Sequenza del round con i soli dati certi — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-4--sequenza-del-round-con-i-soli-dati-certi)); **revisione C3-4r** (regia D13) fatta lo stesso giorno ([rapporto](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario)) | C3-2 |
 | C3-L | Scala e uso dello spazio del tavolo — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)) | C3-4 |
 | C3-4s | Rifinitura delle animazioni della sequenza e difetto delle (i) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)) | C3-4, C3-L |
-| C3-6 | Riepilogo e «Ultimo turno» leggibili | C3-2 |
+| C3-6 | Riepilogo e «Ultimo turno» leggibili — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili)) | C3-2 |
 | C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
 | C3-7 | Consolidamento e giudizio del proprietario | tutti |
 
 C3-3 è indipendente e può andare in qualunque punto; C3-6 può precedere C3-4. Dal 30 ottobre 2026 l'ordine
-dei blocchi restanti è C3-L, C3-6, C3-5, C3-7 (proprietario). Se A1
+dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 restano C3-5 e C3-7. Se A1
 non è approvata o non è pronta, C3-5 ripiega sugli impatti per ruolo R07a (D2) e lo
 dichiara.
 
@@ -412,6 +413,13 @@ sull'intero catalogo. Movimento ridotto senza scosse. Peso entro budget.
 prima si semplificano gli effetti, poi si riconsidera la durata.
 
 ### C3-6 — Riepilogo e «Ultimo turno» leggibili
+
+**Fatto il 2 novembre 2026** ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili), verifiche `VerifyResolution` scenario `report` e `VerifyLayout`).
+Osservazione del proprietario del 30 ottobre 2026 inclusa: la striscia statica per posto («H −7 A −10 ogg +1») era troppo
+piccola e usava le lettere delle risorse; ora celle con il simbolo già disegnato nelle plance (nessun simbolo nuovo,
+O10 resta a C4) e il numero con segno, 19 px a 1366×768 e 14 px a 844×390, disposte per ogni round accanto al proprio
+posto senza coprire altro. Il riepilogo breve ha un posto riservato fuori dai posti, a 16 e 13 px. «Ultimo turno» dice
+prima i fatti dal modello (`roundReport`), poi il testo del server in una sezione secondaria.
 
 **Perimetro.** Il riepilogo breve non copre i posti della FFA (limite di P31). Il
 dialogo «Ultimo turno» mette prima i **fatti certi in italiano** (chi, cosa, su chi,

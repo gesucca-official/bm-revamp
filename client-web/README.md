@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s, C3-6)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -197,8 +197,9 @@ in verticale, mai la pagina in orizzontale.
   passando il mouse o toccandoli compare un riepilogo breve.
 - Un tocco o un clic in un punto vuoto del tavolo riabbassa le carte e annulla la
   scelta, come Escape.
-- Dopo ogni turno compare una riga di riepilogo non bloccante; toccandola si apre
-  l'ultimo turno con mosse, report ed effetti di fine turno.
+- Dopo ogni turno compare una riga di riepilogo non bloccante, in un posto che il tavolo le
+  riserva senza coprire nessun personaggio (C3-6); toccandola si apre l'ultimo turno: prima i fatti
+  certi in italiano, poi il testo del server.
 - Tutti contro tutti: quattro ventagli coperti con tante carte quante il server
   dice, oggetti come carte presso ogni posto. Gli oggetti di un posto si
   sovrappongono un poco: passando il mouse quello coperto si alza; su touch il
@@ -260,12 +261,46 @@ duello dura meno della metà.
   nessuna variazione e una riga «Risolti N turni…» che rimanda a «Ultimo turno» (nel
   riepilogo breve e sul pannello d'esito) (K2, D4).
 
-**Riepilogo statico** (K3, K4, D6): per ogni posto una striscia larga quanto la
-plancia (sopra la propria e sopra quella del posto FFA di sinistra, sotto le altre)
-con le variazioni complessive del round («H −7 A −10 ogg +1», «invariato»), presa dal
-modello. Compare a sequenza finita, saltata o interrotta, subito con movimento
-ridotto o a scheda nascosta, e resta fino alla prima scelta di carta o al round
-successivo. Il riepilogo breve testuale conta i suoi 6 s solo a scheda visibile (K5).
+**Riepilogo statico** (K3, K4, D6; leggibile dal C3-6): per ogni posto una striscia con le variazioni
+complessive del round, presa dal modello: una cella per voce, il **simbolo** della risorsa (lo stesso delle
+plance; per gli oggetti quello degli oggetti) e il numero con segno («−7», «+1»); «invariato» se nulla è
+cambiato. Il testo è grande (19 px a 1366×768, 14 px a 844×390, mai sotto 16 e 12 px) e la striscia, con la
+dimensione delle sue celle, si dispone a ogni round (`stripPlan` in `readability.ts`): accanto alla plancia
+o al personaggio del suo posto, libera da ogni altra cosa del tavolo e da un altro posto, nel carattere più
+grande che trova posto e con meno righe possibile. Dove non c'è posto (FFA compatta con tutte e cinque le
+risorse cambiate) la striscia manca e restano riga breve e «Ultimo turno». Compare a sequenza finita, saltata
+o interrotta, subito con movimento ridotto o a scheda nascosta, e resta fino alla prima scelta di carta o al
+round successivo.
+
+**Riepilogo breve** (K5, C3-6): una riga («Turno 3: tu → Gancio · Computer 1 → …», dai fatti del modello) di
+16 px (13 px a 844×390), di due o più righe di testo, nel posto che `briefSpot` trova libero fuori dal centro
+del tavolo, dal titolo decorativo e dalle strisce; il testo è troncato con «…» e un tocco apre «Ultimo
+turno». Conta i suoi 6 s solo a scheda visibile. A 844×390 in FFA il posto libero è stretto (una riga di
+120–160 px o poco più) e, se manca del tutto, la riga non compare e «Ultimo turno» resta nel menu.
+
+## «Ultimo turno» (C3-6)
+
+Il dialogo dell'ultimo round dice **prima i fatti certi in italiano** (`roundReport`, funzione pura di
+`resolution.ts`, D7) e **poi il testo del server**, invariato, in una sezione secondaria («Testo del server»,
+chiusa, un tocco la apre). Ogni frase viene dai fatti del modello: nessuna frase del server è letta, nessun
+collegamento solo probabile è detto certo.
+
+- **Cosa è successo nel turno N:** le mosse nell'ordine di risoluzione («2. Computer 1 gioca «X» su Computer 3»),
+  ciascuna con il costo **nominale** del catalogo (l'importo pagato può differire, R05; «non noto» se la carta non è
+  nel catalogo del client), «Annullata durante il round (la vista non dice da quale mossa)», l'oggetto scelto con
+  «sparito da quel posto» solo se la vista lo conferma (altrimenti «non permette di dire con certezza»; la
+  comparsa di un oggetto con lo stesso nome presso l'autore è un fatto, non una causa) e la carta da scartare indicata.
+- **Variazioni complessive:** per ogni posto, risorse con «da a a b» e oggetti spariti e comparsi, non attribuite a una
+  singola mossa (costi, effetti e fine turno insieme). Eliminazioni e forfait del turno. **Fine turno:** su quali
+  giocatori, mai cosa è successo (lo dice solo il testo del server). Esito se la partita è finita.
+- **Dopo un salto di turni**, un round arrivato dopo una caduta o una prima vista (ricarica, rientro): una nota dice quanti
+  turni sono stati risolti, che i fatti riguardano solo l'ultimo e che variazioni, oggetti ed eliminazioni non sono
+  disponibili; restano le mosse dell'ultimo round, che sono sempre certe.
+- Nessuna cronologia persistente né replay: solo l'ultimo round della vista.
+
+Il testo è di 18 px (16 px a 844×390) per i titoli delle mosse e delle variazioni, 17 e 15 px per le loro righe;
+il dialogo scorre, con i fatti in cima. `VerifyResolution`, scenario `report`, lo rilegge nelle partite reali
+(duello e FFA a cinque, due misure) contro le **viste grezze del socket**, non contro la funzione del client.
 
 ## Contenuto e regia della sequenza (C3-4, revisione D13)
 
@@ -328,7 +363,7 @@ la sequenza (C3-4s, sotto); punti d'interazione e decisioni restano sulla vista 
 `window.__bm.state.stats.beats`, l'inizio di ogni passo di ogni carta come la scena lo ha
 programmato in `stats.schedule`, i primi piani (riquadro, scala, posto) in `stats.closeUps`.
 Con movimento ridotto non c'è sequenza: lo stesso contenuto resta nel riepilogo statico per
-posto (il riepilogo piccolo con lettere è di C3-6).
+posto (con i simboli e il testo grande di C3-6).
 
 ## Rifinitura della sequenza (C3-4s)
 
@@ -490,8 +525,8 @@ personaggio proprio più grande degli altri, le carte del round uguali per nome 
 con il conteggio della vista, personaggi e oggetti di almeno 44 px, nessun posto fuori schermo o sovrapposto
 (salvo la scritta decorativa «BOTTE MICIDIALI»), ogni primo piano della sequenza dentro lo schermo e lontano dagli
 altri posti e dalla mano, e la cadenza dei frame del criterio di C0 dalla scelta alla fine della sequenza.
-`BM_OUT=…/before` misura una build precedente senza controlli. `BM_SCENARIOS` sceglie `duel,ffa`.
-`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, C3-4s, database temporaneo) gioca quick 1vCom con caduta e rientro,
+`BM_OUT=…/before` misura una build precedente senza controlli. Da C3-6 controlla anche le strisce del riepilogo (una per posto, nel carattere richiesto, libere da ogni posto, dalla mano, dalle pile, dalle carte del round e dalla riga breve) e la riga breve stessa (nel posto che la scena le ha dato, a 16 o 13 px, mai su un posto). `BM_SCENARIOS` sceglie `duel,ffa`.
+`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, C3-4s, C3-6, database temporaneo) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
 tocchi sul tavolo vuoto che passano di passo in passo, carta scelta durante la sequenza,
 scheda nascosta: reale se il
@@ -566,8 +601,8 @@ remoto o audio; simboli e timbri di C2a sono vettoriali.
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
 - `src/resolution.ts`: fatti certi del round da due viste (C3-1), riepilogo per posto
-  e riga dei turni risolti (C3-2), funzioni pure;
-  nessun testo del server letto, nessun effetto calcolato.
+  e riga dei turni risolti (C3-2), il testo di «Ultimo turno» e la riga breve (`roundReport`, `briefLine`, C3-6),
+  funzioni pure; nessun testo del server letto, nessun effetto calcolato.
 - `src/hub.tsx`, `src/presence.ts`: hub «Gioca», coda FFA, scelta del mazzo open e
   presenza (ordinamento, pagine e nomi dei giocatori come funzioni pure).
 - `src/collection.tsx`, `src/deck.ts`: scheda «Collezione» (catalogo, mazzi, editor);

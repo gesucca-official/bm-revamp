@@ -12,8 +12,8 @@ successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-p
 fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)), con una **revisione dopo la prova del
 proprietario** (regia D13 di ogni carta con primi piani di chi gioca e del bersaglio:
 [sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). **C3-L (scala e uso dello spazio del tavolo), blocco
-aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). Gli altri
-blocchi non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
+aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). Gli altri
+blocchi (C3-5, C3-7) non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
 è fatta a parte.
 
 ## C3-1 — Modello puro della risoluzione e strumento di verifica
@@ -874,3 +874,58 @@ del 2,4%, come già previsto da D13; le scritte hanno comunque il loro tempo pie
   TU NO): gestiti dal ripiego sul totale di C3-4 (`barsTotal` negli stessi conteggi). Il server non è cambiato.
 - **Evidenze:** le catture restano solo per `VerifyResolution` e `Verify` ([c3-4s](client-c3/c3-4s/)); gli altri strumenti tengono i JSON.
 - Dati locali non toccati: tutte le prove su database temporanei.
+
+## C3-6 — Riepilogo e «Ultimo turno» leggibili
+
+2 novembre 2026. Include l'osservazione del proprietario del 30 ottobre 2026: la striscia statica per posto («H −7 A −10
+ogg +1») e il riepilogo breve erano troppo piccoli, anche su desktop, e usavano le lettere delle risorse. Nessuna
+regola, server, protocollo, catalogo o `client-debug` cambiato.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Modello (`src/resolution.ts`) | `seatMarks` non ha più lettere: `key` e numero con segno (`NO_CHANGE` per «invariato»). Nuovi `roundReport` (ogni frase del dialogo dai fatti), `reportNote` (salto di turni, round dopo una caduta, prima vista), `briefLine` (riga breve dai fatti), `RESOURCE_NAMES`. Nessun testo del server letto; «annullata» e «oggetto sparito» solo come fatti, la comparsa di un oggetto presso l'autore come fatto e non come causa. |
+| Geometria (`src/readability.ts`) | Tolta la striscia fissa di 14/20 px. `stripPlan`: per ogni posto una striscia di celle (simbolo + numero con segno) nel carattere più grande che trova posto (19→16 px desktop, 14→12 px compatto) e con meno righe, accanto a plancia, personaggio o mano coperta del proprio posto, libera da tutto il resto e da un altro posto (penalità se toccherebbe un altro posto). `briefSpot`: posto della riga breve, fuori dal centro, dal titolo e dalle strisce. |
+| Scena e shell | `scene.ts` disegna le celle con `glyph` (gli stessi simboli delle plance; per gli oggetti quello degli oggetti) e legge il posto della riga breve (`table.brief`); `table.tsx` mette la riga breve nel suo posto (16/13 px, troncata a N righe) e il dialogo: prima i fatti, poi «Testo del server» (chiuso, invariato). |
+| Dialogo | Mosse in ordine con costo nominale, annullata, oggetto scelto, scarto indicato; variazioni complessive per posto (da a), oggetti spariti e comparsi, eliminazioni, fine turno (su chi), esito; nota dopo un salto («Sono stati risolti N turni… solo l'ultimo»). 18/17 px (16/15 a 844×390). |
+| Test automatici | Client **185** (168 + 17): report su FFA a cinque con annullata, variazioni, oggetti, morti, fine turno, esito, salto di 2 e 21 turni, round dopo una caduta, prima vista, carta ignota; strisce e riga breve a due misure, duello e FFA, 0–3 oggetti, 3 e 6 voci; fattori di C3-L invariati. **Cambi deliberati:** il test delle voci del riepilogo ora cerca il numero con segno senza lettere; il vecchio test delle strisce fisse è sostituito da quello di `stripPlan`. |
+| Server reale | `VerifyResolution` (nuovo scenario `report`) e `VerifyLayout` (strisce e riga breve). |
+| Peso | JS gzip 327212 byte (+5431 rispetto a C3-L/C3-4s), totale gzip 1110288 ([size.json](client-c3/c3-6/size.json)). |
+
+### Verifiche sulla build finale
+
+- **1366×768:** `VerifyLayout`, `VerifyResolution`, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks`, `Verify`, `VerifyModes` verdi.
+- **844×390:** `VerifyLayout`, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks`, `Verify`, `VerifyModes` verdi. **`VerifyResolution` non è
+  verde:** nello scenario `ffa` il controllo C3-4s sulle scritte (leggibili almeno `LABEL.read` − 50 ms) segna 1075–1125 ms invece
+  di 1150, in due esecuzioni (turno 17 e turno 6). **Non è una regressione di C3-6:** la stessa verifica sul commit precedente
+  (e47a0a9, senza le modifiche di questo blocco) fallisce nello stesso scenario con 1122 ms. Residuo di C3-4s a quella
+  misura, da guardare in C3-7. Lo scenario `report` a 844×390 e tutto il resto di `VerifyResolution` a 1366×768 sono verdi.
+- `./client-web/run.ps1 -Task Test` (185), `Build`, `Size` verdi; `./scripts/build.ps1 -Task Test -Offline` verde (client-debug 36);
+  `python scripts/check-rules.py` verde. Il jar del server è quello del 29 ottobre (il server non cambia).
+
+### Cosa è stato misurato (partite reali, duello e FFA a cinque)
+
+Evidenze: [1366×768](client-c3/c3-6/layout-1366x768.json), [844×390](client-c3/c3-6/layout-844x390.json),
+[dialogo 1366×768](client-c3/c3-6/resolution-1366x768.json), catture in [screens](client-c3/c3-6/screens/).
+
+- **Strisce:** a ogni round una per posto, tutte disegnate nelle partite verificate, nessuna sovrapposizione con posti, mano, pile,
+  carte del round, comandi in alto, suggerimento e riga breve; carattere 19 px (1366×768) e 14 px (844×390), prima 14 e 10.
+- **Riga breve:** nel posto che la scena le assegna, mai su un posto. Misure: duello 520×56 (16 px) e 280×44 (13 px); FFA 340×77 (16 px) e,
+  a 844×390, da 100×95 a 140×27 (13 px). A 844×390 in FFA lo spazio è poco: la riga è stretta e troncata, «Ultimo turno» è il rimedio.
+- **Dialogo** (scenario `report`, 4 dialoghi per duello e per FFA a ogni misura): confrontato con le **viste grezze del socket**:
+  mosse, titoli, costi nominali dal catalogo dell'account, annullate, oggetti scelti, scarti, variazioni per posto con prima e dopo,
+  oggetti spariti e comparsi, eliminazioni, fine turno, esito, testo del server riga per riga uguale alla vista, fatti prima del testo del
+  server, carattere minimo e dialogo dentro lo schermo senza scorrimento laterale; il primo fatto è visibile all'apertura. A 844×390
+  il dialogo FFA scorre (circa 2,4 schermate).
+- **Salto di turni:** il dialogo dice quanti turni sono stati risolti (21 nella FFA con i due umani in forfait), che i fatti sono quelli
+  dell'ultimo, e non mostra variazioni, oggetti né eliminazioni.
+
+### Limiti e residui
+
+- **FFA compatta (844×390):** con tutte e cinque le risorse cambiate in un round, il posto a sinistra può restare senza striscia (nei test,
+  al più uno); lì la striscia può toccare anche la plancia vicina. Con tre oggetti per posto la riga breve può non trovare posto e non compare.
+- **Riga breve in FFA compatta:** una riga di 120–220 px, utile solo come aggancio a «Ultimo turno».
+- **Stima delle celle:** larghezza di una cifra al 62% del corpo (conservativa): il testo reale è più stretto.
+- **Pre-esistente, non risolto qui:** scritte di C3-4s leggibili meno di 1150 ms in FFA a 844×390 (sopra).
+- Nessun dispositivo fisico, iPhone o prova umana. Dati locali non toccati: tutte le prove su database temporanei.

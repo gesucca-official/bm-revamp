@@ -9,6 +9,9 @@ const OWN: Record<string, string> = {leave: 'Hai abbandonato', 'move timeout': '
 /** Forfeit reason of another player (K5); an unknown wire code stays visible as it is. */
 export const forfeitLabel = (code: string) => OTHER[code] ?? `forfait (${code})`;
 
+/** Forfeit reason of the own player; an unknown wire code stays visible as it is. */
+export const forfeitOwn = (code: string) => OWN[code] ?? `Forfait (${code})`;
+
 export type Outcome = {title: string; reason: string; lines: string[]};
 export function outcome(view: View, me: string, name: (id: string) => string): Outcome {
   const title = view.over ? (view.winner === 'NONE' ? 'Pareggio' : view.winner === me ? 'Hai vinto' : 'Hai perso') : 'Sei fuori dalla partita';

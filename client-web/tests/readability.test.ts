@@ -82,14 +82,46 @@ for(const [w,h] of VIEWPORTS)for(const players of [2,5])test(`O12: ${players===2
  const me=l.seats.find(s=>s.me)!;assert.ok(me.person.w>=(players>2?(h<550?60:117):(h<550?80:150))-1);
 });
 
-// C3-2: the static round summary strip of every seat stays inside, clear of the hand, of every seat and of the covered fans.
-import {fan} from '../src/readability.ts';
+// C3-6: the static round summary of a seat (symbols and signed numbers in large type) and the short summary line stay clear of everything on
+// the table in the duel and the five-seat FFA at both sizes, with the entries of a typical round and of all five resources plus objects.
+import {fan,stripPlan,stripSize,stripAvoid,briefSpot,brandBox,STRIP_FONT,briefFont,briefHeight} from '../src/readability.ts';
+const TYPICAL=['−7','−10','+1'],HEAVY=['−10','+20','−7','+10','+7','−1'];
 for(const [w,h] of [[1366,768],[844,390]] as const)for(const ids of [['me','b'],['me','b','c','d','e']])test(`summary strips at ${w}×${h} with ${ids.length} seats`,()=>{
- const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,3]))),hand=handBox(l,7);
- for(const s of l.seats){const b=s.summary;assert.ok(inside(b,w,h),`${s.id} inside ${JSON.stringify(b)}`);assert.equal(overlap(b,hand),0,`${s.id} clear of the hand`);assert.equal(b.w,s.board.w);
-  for(const o of l.seats){for(const x of [o.person,...o.items,o.board,o.status])assert.equal(overlap(b,x),0,`${s.id} clear of ${o.id}`);
-   if(!o.me)assert.equal(overlap(b,fan(o.backs,o.back,8).box),0,`${s.id} clear of ${o.id}'s eight backs`);
-   if(o!==s)assert.equal(overlap(b,o.summary),0,`${s.id}/${o.id} strips`);}}
+ for(const items of [0,1,2,3])for(const marks of [TYPICAL,HEAVY,['invariato']]){
+  const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),F=STRIP_FONT(l.compact),plan=stripPlan(l,w,h,Object.fromEntries(ids.map(i=>[i,marks]))),avoid=stripAvoid(l,w,h);
+  // Every seat gets its strip, but the compact FFA with all five resources and objects changed (HEAVY) may lack the room for the one at the left edge.
+  const placed=ids.map(id=>plan[id]).filter(Boolean) as NonNullable<typeof plan[string]>[];
+  if(!(l.compact&&ids.length>2&&marks===HEAVY))assert.equal(placed.length,ids.length,`${items} objects, ${marks.length} entries: every seat has a place`);else assert.ok(placed.length>=ids.length-1,'at most one seat without a place');
+  ids.forEach((id,i)=>{const p=plan[id];if(!p)return;const at=`${id}, ${items} objects, ${marks.length} entries`;
+   assert.ok(p.size.fs>=F.min&&p.size.fs<=F.pref,`${at}: type ${p.size.fs}`);assert.ok(inside(p.box,w,h),`${at}: inside`);
+   // Measured by the same estimate the scene draws with: every cell inside its strip.
+   p.size.cells.forEach(c=>assert.ok(c.x+c.w<=p.size.w+.01,`${at}: cell inside`));
+   // Clear of the hand, every seat (characters, boards, objects, the eight covered backs), the shell, the round's cards and the piles.
+   for(const o of avoid)assert.equal(overlap(p.box,o),0,`${at}: clear of ${JSON.stringify(o)}`);
+   ids.forEach((o,j)=>{const q=plan[o];if(j!==i&&q)assert.equal(overlap(p.box,q.box),0,`${at}: strips ${id}/${o}`);});
+   // Next to its own seat: touching the board, the character or the covered hand within a few pixels.
+   const s=l.seats.find(x=>x.id===id)!,near=[s.board,s.person,...(s.me?[]:[fan(s.backs,s.back,8).box])].some(a=>Math.max(Math.abs(p.box.x-a.x)-(p.box.w+a.w)/2,Math.abs(p.box.y-a.y)-(p.box.h+a.h)/2)<=6);
+   assert.ok(near,`${at}: next to its seat`);
+   // Not touching the board or the character of another seat (whose changes would these be?), except in the compact FFA, where the table has no other place.
+   if(!(l.compact&&ids.length>2))for(const o of l.seats)if(o.id!==id)for(const a of [o.board,o.person])assert.ok(Math.max(Math.abs(p.box.x-a.x)-(p.box.w+a.w)/2,Math.abs(p.box.y-a.y)-(p.box.h+a.h)/2)>6,`${at}: touches ${o.id}`);});}
+});
+test('summary strips: type at least 16 px (desktop) and 12 px (compact), the preferred size for a typical round in the duel, larger than the 14 and 10 px of C3-2',()=>{
+ assert.deepEqual([STRIP_FONT(false),STRIP_FONT(true)],[{pref:19,min:16},{pref:14,min:12}]);
+ for(const [w,h] of [[1366,768],[844,390]] as const){const ids=['me','b'],l=tableLayout(w,h,ids,'me',{me:2,b:2}),plan=stripPlan(l,w,h,{me:TYPICAL,b:TYPICAL});
+  for(const id of ids)assert.equal(plan[id]!.size.fs,STRIP_FONT(l.compact).pref,`${w}×${h} ${id}`);}
+ const z=stripSize(HEAVY,16,3);assert.equal(z.rows,2);assert.ok(z.w>0&&z.h>16*2);
+});
+for(const [w,h] of [[1366,768],[844,390]] as const)for(const ids of [['me','b'],['me','b','c','d','e']])test(`short summary line at ${w}×${h} with ${ids.length} seats`,()=>{
+ // Alone on the table: a place with up to three objects per seat; after the strips of a typical round: always on the desktop size and in the compact duel,
+ // in the compact FFA when the strips leave room (then it is not shown and the dialog stays in the menu).
+ for(const items of [0,1,2,3]){const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),clear=[...stripAvoid(l,w,h)];
+  const alone=briefSpot(l,w,h);assert.ok(alone,`${items} objects: a place alone`);
+  const plan=stripPlan(l,w,h,Object.fromEntries(ids.map(i=>[i,TYPICAL]))),taken=Object.values(plan).flatMap(p=>p?[p.box]:[]),after=briefSpot(l,w,h,taken);
+  if(!(l.compact&&ids.length>2))assert.ok(after,`${items} objects: a place after the strips`);
+  for(const r of [alone,after]){if(!r)continue;assert.ok(inside(r.box,w,h));assert.equal(r.box.h,briefHeight(l.compact,r.lines));
+   for(const o of [...clear,brandBox(l.compact),...(r===after?taken:[])])assert.equal(overlap(r.box,o),0,`${items} objects: clear of ${JSON.stringify(o)}`);}
+  assert.deepEqual(layoutProblems(l,w,h),[]);}
+ assert.equal(briefFont(false),16);assert.equal(briefFont(true),13);
 });
 
 // C3-3 (O6): arrows from the chosen card to the admitted targets.
@@ -214,7 +246,7 @@ for(const [w,h] of VIEWPORTS)for(const n of [2,5])test(`C3-L at ${w}×${h} with 
   const me2=l.seats.find(s=>s.me)!,K=l.piles!;assert.ok(K,'piles placed');for(const b of [K.deck,K.discard]){assert.ok(inside(b,w,h));for(const o of [...tableBoxes(l,w,h),P.box])assert.equal(overlap(b,o),0,`pile over ${JSON.stringify(o)}`);
    assert.ok(Math.hypot(b.x-me2.person.x,b.y-me2.person.y)<=me2.person.h+me2.person.w,'pile by the own seat');}
   // Seats clear of the HTML hint and of the clock, turn and menu.
-  const sh=shellBoxes(w,h,l.compact);for(const s of l.seats)for(const b of [s.person,s.board,s.summary,...s.items])for(const x of [sh.hint,sh.top])assert.equal(overlap(b,x),0);}
+  const sh=shellBoxes(w,h,l.compact);for(const s of l.seats)for(const b of [s.person,s.board,...s.items])for(const x of [sh.hint,sh.top])assert.equal(overlap(b,x),0);}
 });
 test('C3-L: factors give way in the owner order, objects first and the own character last',()=>{
  assert.deepEqual(YIELD,['items','others','resources','me']);assert.deepEqual(SCALE,{me:1.5,others:1.2,items:1,resources:1.25});
