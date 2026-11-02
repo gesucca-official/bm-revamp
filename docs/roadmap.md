@@ -14,6 +14,10 @@ I18/I20/I21/I25 e le feature differite della base conservano il significato
 storico; non sono automaticamente trasferiti nel nuovo percorso. La parità
 comprende le funzioni amministrative già presenti, senza estenderle alla console I20.
 
+## Piano successivo: Set Base
+
+Il [piano del Set Base](set-base-plan.md) porta il set provvisorio a circa 115 carte bilanciate. Parte a client web completato e non introduce regole attive finché i suoi blocchi non passano dal regolamento.
+
 ## Roadmap archiviata: versione base I22
 
 La roadmap della versione base è **completata e archiviata**. Il proprietario

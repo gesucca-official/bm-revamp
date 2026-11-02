@@ -4,6 +4,8 @@ La [roadmap della base](docs/roadmap.md) è conclusa con approvazione del 26 ott
 
 ### Set Base:
 
+Appunti di partenza, superati dal [piano del Set Base](docs/set-base-plan.md), che raccoglie le decisioni del proprietario.
+
 110-120 carte totali
 ognuna con la sua rarità
 
