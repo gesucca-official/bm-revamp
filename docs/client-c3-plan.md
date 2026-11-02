@@ -516,7 +516,8 @@ registrate e assegnate, non risolte in C3.
 - **Osservazione da valutare a parte, senza conclusioni ora:** nella FFA osservata,
   dopo il forfait per tempo dei due umani i computer hanno combattuto altri 25
   round, e l'esito riporta `outcomeReason: timeout` con un computer vincitore. Non
-  riguarda C3.
+  riguarda C3. Registrata come O20 nella [roadmap](client-roadmap.md#osservazioni-registrate-durante-c3),
+  insieme a O19 (sequenza velocizzata, C4/C5) e O21–O22 (residui dei blocchi).
 
 ## Decisioni del proprietario
 

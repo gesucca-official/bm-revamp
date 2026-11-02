@@ -6,7 +6,7 @@ proprietario, C3-4 anche con la rifinitura C3-4s), C3-3, C3-L, C3-6 e C3-5 sono 
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
-[O15–O18](#osservazioni-della-prova-umana-b-c2b-7) e decisioni aperte; le revisioni
+[O15–O18](#osservazioni-della-prova-umana-b-c2b-7), [O19–O22](#osservazioni-registrate-durante-c3) e decisioni aperte; le revisioni
 1–20 sono [archiviate](history/client-roadmap-revisions.md). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
@@ -667,6 +667,19 @@ senza rilievi; dal mazzo salvato (S3) una incomprensione e tre proposte. Nessun 
 | O16 | Prova B: l'editor riprende la struttura del debug; un deckbuilder più funzionale. | Attività successiva dedicata, con O15 | Solo client, se resta dentro R02. Da progettare tenendo conto di O17. |
 | O17 | Prova B: in seguito il mazzo si costruirà con le carte della collezione dell'utente. | **Regole**, attività separata | Concetto nuovo di carte possedute: oggi la collezione dell'account (`account/data.collection`) è l'intero catalogo e R02 non limita le carte a quelle possedute. Cambia regolamento, server e dati: prima `docs/game-rules.md` con versione e motivazione (AGENTS.md). Fuori dal perimetro attuale («economia», «modifiche ai mazzi»). |
 | O18 | Prova B: il mazzo si sceglie sempre, non in una coda a parte; starter sempre selezionabile per ogni personaggio, oppure un mazzo proprio. | **Regole**, attività separata | Oggi R00 assegna a caso personaggio e starter nelle code quick, e solo open usa un mazzo salvato. Richiede regolamento (R00/R02), code e protocollo di ingresso. |
+
+## Osservazioni registrate durante C3
+
+2 novembre 2026, dalle prove del proprietario su C3-2, C3-4 e C3-L e dal lavoro dei blocchi. Sono
+**registrate e assegnate, non risolte in C3** ([piano C3](client-c3-plan.md), rischi di C3-7). Nessuna
+modifica a regole, server o catalogo è già decisa.
+
+| ID | Osservazione | Tappa | Note e vincoli |
+|---|---|---|---|
+| O19 | Prova C3-4: oltre alla sequenza una carta per volta (D12, D13) serve una **versione velocizzata, attivabile dall'utente**. | C4/C5 | Impostazione dell'utente, non un default. Deve conservare le regole 1–9 del piano C3: stato finale uguale alla vista del server, nessun blocco di invio né del clock di 30 s, movimento ridotto che mantiene le informazioni. Decidere dopo la prova umana del ritmo in C5, con le durate misurate in C3 (due mosse 7,1–10,4 s; FFA a cinque mosse 15,9–19,7 s; tetto 20 s di D10/D13). |
+| O20 | Prova FFA: dopo il forfait per tempo dei due umani, i computer hanno combattuto altri **25 round**; l'esito riporta `outcomeReason: timeout` con un **computer vincitore**. | **Da valutare a parte** dal proprietario prima di C3-7; non riguarda il client | Nessuna conclusione: va letto contro R06 («Clock, forfait e disconnessione», regolamento 1.5, in particolare i forfait simultanei in FFA) per decidere se è comportamento voluto o anomalia. Se è anomalia che cambia l'esito osservabile, prima registrare comportamento precedente, motivazione, effetto e test ([domande aperte](open-questions.md)); se cambia regole, prima `docs/game-rules.md` con versione e motivazione. Diverso da `VerifyFfa` `otherMoveTimeout`, dove un solo umano va in forfait e gli altri proseguono (R06). |
+| O21 | Residui dichiarati da C3-5 e C3-6. | C3-7 e C4 | **POISON:** simbolo e impatto provati solo in unità, nessuna carta lo usa. **ExtremelyViolentBlow (`HIT 20+x`)**: la V reale sul volto della carta in mano non è stata vista nelle partite, solo il «20+» del catalogo. **Carte piccole del round (36–40 px):** solo il simbolo del danno, l'importo è nell'ispezione. **Movimento ridotto:** il segno del tipo di danno resta sul volto ma non c'è impatto sul bersaglio; se lo si vuole statico, da decidere. **Controllo delle scritte a 844×390 in FFA:** il guasto di C3-6 non si è riprodotto; il controllo ora misura fino all'inizio della sfumatura (soglia `LABEL.read` − 50 ms invariata, approvato il 2 novembre 2026), e le scritte registrano `end` e `gap` per spiegarlo se ricapita. |
+| O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 | Adattare mano e FFA all'altezza minima (vedi C4); un test in unità segnala quando la disposizione entra. Aggiunta qui per non perderla. |
 
 ## Verifiche proporzionate
 
