@@ -140,7 +140,8 @@ async function tryK7(p,game){
  const {page}=p;let s=await p.state();
  // The visible left part of a covered opponent object, where nothing of the HTML shell lies on top of the canvas.
  const onCanvas=h=>page.evaluate(([x,y])=>document.elementFromPoint(x,y)?.tagName==='CANVAS',[h.x-h.w*.3,h.y]);
- let covered=null;for(const h of s.hits.filter(h=>h.kind==='item'&&h.covered&&h.target.owner!==s.me))if(await onCanvas(h)){covered=h;break;}
+ // An eliminated seat is no target (Model.allows): its objects cannot be aimed.
+ let covered=null;for(const h of s.hits.filter(h=>h.kind==='item'&&h.covered&&h.target.owner!==s.me&&!s.hits.find(x=>x.id===`person-${h.target.owner}`)?.label.includes('eliminato')&&!s.hits.find(x=>x.id===`person-${h.target.owner}`)?.label.includes('forfait')))if(await onCanvas(h)){covered=h;break;}
  if(!covered)return;
  const v=p.views(game).filter(x=>x.turn===s.turn).at(-1),hand=v?.players[s.me].cardsInHand??[];
  const far=s.order.find(c=>hand.find(h=>h.name===c.name)?.canTarget.includes('FAR_ITEM'));

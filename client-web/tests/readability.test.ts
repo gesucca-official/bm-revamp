@@ -236,3 +236,23 @@ test('C3-L: top of the own discard pile from the last round (R02)',()=>{
  assert.equal(discardTop(mv('Bound',{void:true,choices:{DISCARD_ONE:'Reg'}}),'me',cards),null,'a voided bound keeps it');
  assert.equal(discardTop(mv('Unknown'),'me',cards),'Unknown');assert.equal(discardTop([{playerId:'Bice',playedCardName:'Reg'}],'me',cards),null);
 });
+
+import {nextPile,labelSpot} from '../src/readability.ts';
+test('C3-4s: the played card reaches the own pile when it leaves the middle, a bound\'s extra card in its own round',()=>{
+ const cards=[card({name:'Reg'}),card({name:'Old'}),card({name:'Base',basicAction:true}),card({name:'Bound',characterBound:true})];
+ const mv=(name:string,o:object={})=>[{playerId:'me',playedCardName:name,...o}];
+ let pile=nextPile({top:null,middle:null},mv('Old'),'me',cards);assert.deepEqual(pile,{top:null,middle:'Old'},'in the middle, not yet on the pile');
+ pile=nextPile(pile,mv('Reg'),'me',cards);assert.deepEqual(pile,{top:'Old',middle:'Reg'});
+ pile=nextPile(pile,mv('Base'),'me',cards);assert.deepEqual(pile,{top:'Reg',middle:null},'a basic stays in hand');
+ pile=nextPile(pile,mv('Bound',{choices:{DISCARD_ONE:'Old'}}),'me',cards);assert.deepEqual(pile,{top:'Old',middle:null},'the extra card goes at once');
+ pile=nextPile(pile,mv('Bound',{void:true,choices:{DISCARD_ONE:'Reg'}}),'me',cards);assert.deepEqual(pile,{top:'Old',middle:null},'a voided bound keeps it');
+ pile=nextPile(pile,[],'me',cards);assert.deepEqual(pile,{top:'Old',middle:null});
+});
+test('C3-4s: a label takes the nearest row clear of the visible ones, on the screen',()=>{
+ const screen={w:400,h:200},base={x:100,y:50,w:80,h:24};assert.deepEqual(labelSpot(base,screen,[]),base);
+ const a=labelSpot(base,screen,[base]);assert.ok(overlap(a,base)===0&&inside(a,400,200));assert.ok(a.y<base.y,'up first');
+ const b=labelSpot(base,screen,[base,a]);assert.ok(overlap(b,base)===0&&overlap(b,a)===0&&inside(b,400,200));
+ const top={...base,y:14},c=labelSpot(top,screen,[top]);assert.ok(c.y>top.y&&overlap(c,top)===0,'down when there is no room above');
+ // A whole column taken: the next one beside it.
+ const column=Array.from({length:8},(_,i)=>({...base,y:14+i*27})),d=labelSpot(base,screen,column);assert.ok(d.x!==base.x&&inside(d,400,200)&&column.every(o=>overlap(d,o)===0),'a column to the side');
+});

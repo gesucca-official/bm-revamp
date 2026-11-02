@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -292,7 +292,7 @@ proprietario su C3-4) e `directionProblems` ne controlla l'ordine. La scena
      (`targetUp`), sotto la carta che lo ha colpito. L'oggetto scelto e sparito da quel posto
      si consuma (oggetto proprio), passa all'autore (stesso nome comparso presso di lui) o si
      rompe (sparito da un altro posto senza ricomparire);
-   - **variazioni** (0,45 s, solo se la carta ne ha di verificate): barre e numeri della
+   - **variazioni** (0,6 s, solo se la carta ne ha di verificate): barre e numeri della
      carta, con la risorsa ingrandita. Poi la carta si posa nella cascata delle carte del round
      al centro del tavolo (C3-L, sezione sotto); oltre i posti della cascata va allo scarto dell'autore;
 2. **pesca:** dal mazzo di ogni posto escono quante carte dice il conteggio (il proprio mazzo è
@@ -323,12 +323,30 @@ ingrandita sopra la plancia («95 → 90» e barra). Altrimenti (veleno a timer 
 pagato diverso dal nominale, nome sconosciuto) barre e numeri restano al valore
 precedente e vanno al finale nella coda (D5), ingranditi allo stesso modo. Le decisioni
 usano sempre la vista finale: solo il disegno delle plance segue i passi, e a sequenza
-finita, saltata o interrotta le plance mostrano la vista. Gli oggetti, i dorsi e la mano
-sul tavolo sono sempre quelli della vista finale. I conteggi di ogni sequenza sono in
+finita, saltata o interrotta le plance mostrano la vista. Oggetti, dorsi e mano in arrivo seguono
+la sequenza (C3-4s, sotto); punti d'interazione e decisioni restano sulla vista finale. I conteggi di ogni sequenza sono in
 `window.__bm.state.stats.beats`, l'inizio di ogni passo di ogni carta come la scena lo ha
 programmato in `stats.schedule`, i primi piani (riquadro, scala, posto) in `stats.closeUps`.
 Con movimento ridotto non c'è sequenza: lo stesso contenuto resta nel riepilogo statico per
 posto (il riepilogo piccolo con lettere è di C3-6).
+
+## Rifinitura della sequenza (C3-4s)
+
+Dopo la prova di C3-L ([rapporto](../docs/reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)).
+Tutto viene dai fatti di C3-1 (D1); con movimento ridotto nessun volo né scritta, stesso contenuto nel riepilogo statico.
+
+- **Scritte delle variazioni** (`LABEL` in `src/resolution.ts`): entrata 120 ms, lettura 1200 ms a piena opacità, uscita
+  180 ms, contati dal primo fotogramma che le mostra. Durano più del loro passo; `labelSpot` (`src/readability.ts`) le
+  tiene separate. In `stats.labels` posto, risorsa, riquadro, tempi e lettura misurata.
+- **Sgombero** (fase `clear`, 0,5 s): all'inizio della sequenza le carte del round prima lasciano la cascata. Regolari e
+  ultima risorsa vanno alla pila dell'autore, base e legate tornano in mano (R02). Le pile altrui non sono disegnate: la
+  carta vola accanto al posto e sfuma. La legata scartata in più parte dalla mano o dai dorsi.
+- **Pesche:** dal mazzo del posto, proprie scoperte, altrui come dorsi nel ventaglio.
+- **Oggetti:** in sequenza la scena disegna lo stato intermedio (`staged`). Pescato: dal mazzo o comparsa al posto;
+  consumato, rubato, rotto: volo o scomparsa dai fatti. Senza legame con una mossa: compare o svanisce nella fase pesche.
+- **Conteggi per la verifica:** `stats.flown` (voli costruiti, visti, verso pila e mano, oggetti a inizio e fine).
+- **(i) e fuoco:** `table.tsx` azzera `overInfo` quando il suo id non è più esposto (un elemento tolto sotto il puntatore
+  non dà `pointerleave`); `escape()` e ogni round nuovo azzerano il fuoco lasciato dalla pressione, non quello da tastiera.
 
 ## Scala e spazio del tavolo (C3-L)
 
@@ -473,7 +491,7 @@ con il conteggio della vista, personaggi e oggetti di almeno 44 px, nessun posto
 (salvo la scritta decorativa «BOTTE MICIDIALI»), ogni primo piano della sequenza dentro lo schermo e lontano dagli
 altri posti e dalla mano, e la cadenza dei frame del criterio di C0 dalla scelta alla fine della sequenza.
 `BM_OUT=…/before` misura una build precedente senza controlli. `BM_SCENARIOS` sceglie `duel,ffa`.
-`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, database temporaneo) gioca quick 1vCom con caduta e rientro,
+`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, C3-4s, database temporaneo) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
 tocchi sul tavolo vuoto che passano di passo in passo, carta scelta durante la sequenza,
 scheda nascosta: reale se il
@@ -494,7 +512,10 @@ oggetti, scarti, pesche e passi animati uguali ai fatti ricalcolati sulle viste 
 barre per carta esattamente quando la misura delle righe del report torna, ogni plancia
 uguale alla vista a sequenza finita; lo scenario `humans` (FFA con devAlice, devBob e tre
 computer, otto round) registra durata e clock residuo a fine sequenza (sotto 10 s lo segnala
-in `under10s`, come dato per A2). Dalla revisione di C3-4 (D13), per ogni carta: tutti i passi
+in `under10s`, come dato per A2). Da C3-4s, a ogni sequenza, voli uguali ai fatti (sgombero, pila, mano, scarti, oggetti,
+pesche, dorsi) e scritte lette almeno `LABEL.read` − 50 ms, dentro lo schermo e non sovrapposte; gli scenari `info`,
+`infoFfa` e `infoTouch` (partite lunghe, anche iPhone emulato) controllano (i) e ispezione a ogni round dopo ogni azione:
+tocchi, «Salta effetti», carta durante la sequenza, ispezione, puntatore fermo sulla (i). Dalla revisione di C3-4 (D13), per ogni carta: tutti i passi
 nell'ordine di D13 alle ore pianificate (costo, primo piano, ritorno, volo con l'impatto
 dentro, primo piano del bersaglio, variazioni), le variazioni del costo dentro il passo costo
 della propria carta e mai prima, un primo piano dell'autore e uno del bersaglio, piano della

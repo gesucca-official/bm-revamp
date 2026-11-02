@@ -3,9 +3,10 @@ import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,nextStop,timeline,beats,BEAT_PHASE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,discardTop,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type TableLayout} from './readability.ts';
-export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean};
+import {plays,seatMarks,nextStop,timeline,beats,BEAT_PHASE,LABEL,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type TableLayout} from './readability.ts';
+// `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
+export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
 // Times in ms from the start of the sequence. A move card flies from its author, hits (`fly`, fraction of the flight) and then
@@ -13,12 +14,16 @@ type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;move
 // or simply travels (passed objects, discards, draws).
 type Point={x:number;y:number};
 // `land` (C3-L): the move card does not fade on its way to `after` but lands there at this scale, in the cascade of the round's cards.
-type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:number;fly?:number;after?:Point;land?:number;mode?:'travel'|'rise'|'shrink'|'break'};
+// C3-4s: `s0`/`s1` scale of a travelling card, `fade` its opacity on arrival (1 when it lands on something drawn, 0 at a pile not drawn); `tag` what it counts as.
+type FlownTag='clear'|'discard'|'drawHand'|'drawBack'|'itemOut'|'itemIn';
+type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:number;fly?:number;after?:Point;land?:number;mode?:'travel'|'rise'|'shrink'|'break'|'vanish'|'pop';s0?:number;s1?:number;fade?:number;tag?:FlownTag;also?:FlownTag;seen?:boolean};
 // D13 close-ups: a copy of a character (with the played card for the author) grows from its seat (`rest`) to `up`, stays
 // until `hold`, then goes back by `end`; `fade` (the card beside the author) appears with it and leaves before it.
 type Zoom={node:Container;rest:{x:number;y:number;s:number};up:{x:number;y:number;s:number};at:number;grow:number;hold:number;end:number;fade?:Container};
 // Marks over the table: an impact ring, a stamp (voided, eliminated) and the enlarged resource of a change (pop).
-type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'};
+type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop';label?:Label};
+// C3-4s: a label of a change and the wall-clock span it was readable (popped in, not fading), measured on the frames.
+type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:number;last:number};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
 const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
@@ -74,21 +79,26 @@ hits:Hit[]=[];backs:Record<string,number>={};
   // C3-4 revision (D13): when each beat of each card starts as the scene scheduled it, and where each close-up went.
   schedule:[] as {key:string;move:number;cost:number;author:number;back:number;flight:number;target:number;changes:number;hit:number;tokens:number|null;closeUp:number;goesBack:number;flies:number;targetUp:number;pops:number|null;costPops:number|null}[],
   closeUps:[] as {key:string;move:number;author:string;box:Box;person:Box;card:Box;scale:number;placed:string;targetId:string;target:Box|null;others:Box[]}[],
+  // C3-4s: flights built and flights actually seen per sequence, objects on the table at its start and end, and how long each label stayed readable.
+  flown:[] as {key:string;built:Record<FlownTag,number>;seen:Record<FlownTag,number>;toPile:number;toHand:number;itemsStart:Record<string,string[]>;itemsEnd:Record<string,string[]>|null;advanced:boolean}[],
+  labels:[] as {key:string;seat:string;resource:Resource;box:Box;from:number;to:number;readable:number}[],
   // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
   aimDraws:0,aimMs:[] as number[]};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
  // Static round summary (rule 5, D6): drawn on the table until the first card choice or the next round.
  marks:Record<string,SeatMark[]>|null=null;marksKey='';private tickPrev=0;private inputStart=0;
  private measure=false;private ghost:Container|null=null;private ghostH=0;ghostOver=false;private fittedTitles=new Map<string,string>();private retiring:Container[]=[];private retired:Container[]=[];private visualSnapshot:View;
- private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private pace:Pace|null=null;
+ private advancesAtStart=0;private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private pace:Pace|null=null;
  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
  layout:TableLayout|null=null;readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:null,played:null,hand:[],board:null,summary:null,boards:{}};
  // C3-L: round's cards already landed in the middle during a sequence.
  private landed=0;
+ // C3-4s: what the table shows during a sequence, until each flight lands; at its end, and for decisions at any time, the view (rule 2).
+ private staged:{items:Record<string,Card[]>;slots:TableLayout;backs:Record<string,number>;deck:number;discard:string|null}|null=null;private arriving=new Set<string>();private labels:Label[]=[];
  // C3-L: top of the own discard pile, kept per game and refreshed by each resolved round of the view.
- private pile={game:'',turn:-1,top:null as string|null};private starts=new Map<string,Partial<Record<Resource,number>>>();
+ private pile={game:'',turn:-1,top:null as string|null,middle:null as string|null,before:null as string|null};private starts=new Map<string,Partial<Record<Resource,number>>>();
  // Status chips on the table, for the summary the shell shows on hover, tap or focus.
  chips:Record<string,Chip&{x:number;y:number}>={};openStatus:string|null=null;
  constructor(readonly model:Model,private readonly catalog:()=>Card[]=()=>[],private readonly characters:()=>CharacterCard[]=()=>[]){this.visualSnapshot=clone(model.view);}
@@ -123,6 +133,8 @@ hits:Hit[]=[];backs:Record<string,number>={};
   // drop end it. A round without a difference (jump, other connection) gets no sequence and no summary (K2, rule 3).
   this.disposeFns.push(this.model.subscribe(why=>{const previous=this.visualSnapshot,round=this.model.round,fresh=round!==this.lastRound;
    if(why==='view'||why==='reset'||why==='disconnect'){this.interrupt(why,false,why!=='view'||fresh);this.visualSnapshot=clone(this.model.view);}
+   // C3-4s: a press on a hand card marks it as focused without the DOM focus; left there, a basic or bound just played would stay raised in the next rounds, over its neighbours and their (i). Keyboard focus stays.
+   if(fresh&&this.focused&&document.activeElement?.getAttribute('data-hit')!==this.focused)this.focused=null;
    if(fresh){this.lastRound=round;this.marks=seatMarks(round);this.marksKey=round?.facts.key??'';if(this.marks)this.stats.summaries++;}
    // D6: the first card choice dismisses the summary of the round.
    if(why==='choice'&&this.model.selected&&this.marks)this.marks=null;
@@ -219,16 +231,16 @@ hits:Hit[]=[];backs:Record<string,number>={};
  // C3-L: own deck (backs, with the count of the view) and discard pile (the last card that went there, R02), small, beside the own character.
  private piles(L:TableLayout,compact:boolean):Readout['piles']{const P=L.piles,v=this.model.view,me=this.model.me,p=v.players[me];if(!P||!p)return null;
   const cards=[...this.catalog(),...this.model.hand.map(c=>c.card)];
-  if(this.pile.game!==v.gameId)this.pile={game:v.gameId,turn:-1,top:null};
-  if(this.pile.turn!==v.turn){const t=discardTop(v.resolvedMoves,me,cards);if(t)this.pile.top=t;this.pile.turn=v.turn;}
+  if(this.pile.game!==v.gameId)this.pile={game:v.gameId,turn:-1,top:null,middle:null,before:null};
+  if(this.pile.turn!==v.turn){const n=nextPile(this.pile,v.resolvedMoves,me,cards);this.pile={...this.pile,...n,before:this.pile.top,turn:v.turn};}
   const empty=(b:Box)=>this.world.addChild(new Graphics().roundRect(b.x-b.w/2,b.y-b.h/2,b.w,b.h,4).fill({color:0x1d140f,alpha:.35}).stroke({color:0xb18c60,width:1.5,alpha:.8}));
-  const d=P.deck,count=p.deck;
+  const d=P.deck,count=this.staged?.deck??p.deck;
   if(count>0){for(let i=Math.min(3,count)-1;i>=0;i--){const bk=this.back(d.w,d.h);bk.position.set(d.x-i*1.5,d.y-i*1.5);this.world.addChild(bk);}
    const r=compact?8:11,badge=new Container();badge.addChild(new Graphics().circle(0,0,r).fill(INK).stroke({color:PAPER,width:1.5}));badge.position.set(d.x+d.w/2-r*.4,d.y-d.h/2+r*.4);
    const t=this.text(badge,String(count),0,0,compact?9:12,undefined,0xfff6e2);t.anchor.set(.5);this.world.addChild(badge);}
   else empty(d);
   // The discard pile is too small for a readable face: frame and art of the top card, its name in «Ultimo turno» and the inspection.
-  const s=P.discard,name=this.pile.top;
+  const s=P.discard,name=this.staged?this.staged.discard:this.pile.top;
   if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h),art=new Sprite(this.art[artIndex(c.bindingName)]);art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
   else empty(s);
   return {deck:count,discard:name};}
@@ -256,7 +268,7 @@ hits:Hit[]=[];backs:Record<string,number>={};
   const L=tableLayout(w,h,ids,me,Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])));this.layout=L;const compact=L.compact,H=L.hand;
   const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null,roundSummary:Readout['summary']=null;
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
-   if(id!==me){const count=p.cardsInHand as number,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=count;
+   if(id!==me){const final=p.cardsInHand as number,count=this.staged?.backs[id]??final,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=final;
     for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
    const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true);person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
    const dead=p.character.dead,forfeit=view.forfeits[id];if(dead||forfeit){person.alpha=.55;this.text(person,dead?'ELIMINATO':'FORFAIT',0,0,compact?11:16,cw,0xffffff);}
@@ -266,12 +278,15 @@ hits:Hit[]=[];backs:Record<string,number>={};
    const read=this.board(seat.board,p,id,id===me,compact);if(read)board=read;
    this.statusChips(seat.status,id,p);
    if(this.marks&&!this.seqStarted){const texts=this.seatSummary(seat.summary,this.marks[id]??[],compact);(roundSummary??={key:this.marksKey,seats:{}}).seats[id]={texts,box:seat.summary};}
-   const covered=coveredItems(seat.items);
+   const covered=coveredItems(seat.items),table=this.staged?.items[id];
    p.character.items.forEach((item,index)=>{const b=seat.items[index]??seat.items[seat.items.length-1],c=this.card(item,b.w,b.h,true),hid=`item-${id}-${index}`;c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);
-    const hit:Hit={id:hid,kind:'item',x:b.x,y:b.y,w:b.w,h:b.h,angle:c.rotation,covered:!!covered[index],target:{owner:id,itemIndex:index},label:`${item.name}, oggetto di ${id===me?'te':this.name(id)}${roleLabel(item)?`, ruolo ${roleLabel(item).toLowerCase()}`:''}${item.gains&&item.gains!=='—'?`, dà ${item.gains}`:''}, copia ${index+1}`,node:c};this.hits.push(hit);
+    if(table)c.visible=false;
+    const hit:Hit={id:hid,kind:'item',x:b.x,y:b.y,w:b.w,h:b.h,angle:c.rotation,covered:!!covered[index],hidden:!!table&&!table.some(x=>x.name===item.name),target:{owner:id,itemIndex:index},label:`${item.name}, oggetto di ${id===me?'te':this.name(id)}${roleLabel(item)?`, ruolo ${roleLabel(item).toLowerCase()}`:''}${item.gains&&item.gains!=='—'?`, dà ${item.gains}`:''}, copia ${index+1}`,node:c};this.hits.push(hit);
     // Raised (over its neighbour) by the mouse at rest, a first touch (K7) or the keyboard focus.
     if(hover===hid||this.peek===hid||this.focused===hid){c.scale.set(1.15);hit.w*=1.15;hit.h*=1.15;raised.push(c);}
     if(this.model.allows({owner:id,itemIndex:index})&&!this.model.locked)this.halo(c,b.w,b.h);});
+   // During a sequence the objects as they stand so far: drawn apart from the view's, which keep hits and decisions (rule 2).
+   if(table){const slots=this.staged!.slots.seats.find(x=>x.id===id)?.items??seat.items;table.forEach((item,index)=>{const b=slots[index]??slots[slots.length-1],c=this.card(item,b.w,b.h,true);c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);});}
   }
   const played=this.roundCards(L,compact),piles=this.piles(L,compact);
   const n=this.model.hand.length,res=view.players[me]?.character.resources??{},hand:Readout['hand']=[];let lifted:Container|null=null;
@@ -279,8 +294,10 @@ hits:Hit[]=[];backs:Record<string,number>={};
    // O11: a light visual hint only. The card stays selectable, inspectable and sendable; the server judges.
    const short=shortfall(local.card,res),payable=!short.length,role=roleOf(local.card),gains=gainsOf(local.card).map(gainText);
    const c=this.card(local.card,H.w,H.h,false,short);c.position.set(x,y);c.rotation=a;this.world.addChild(c);if(!payable)c.alpha=.66;
+   // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
+   const coming=this.arriving.has(local.key);if(coming)c.visible=false;
    if(this.drag?.moved&&this.drag.key===local.key)c.alpha=.22;
-   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}, copia ${i+1}`,node:c};this.hits.push(hit);
+   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
    // O12: hover (mouse), tap (selection) or focus lifts the whole card; its hit keeps the old slot too, so it does not flicker.
    // Once a target is chosen the card is shown in the centre preview: in the hand it rests, so a bound
    // card does not cover the neighbour to discard.
@@ -383,7 +400,8 @@ hits:Hit[]=[];backs:Record<string,number>={};
  // `sequence` false: only the gesture is cancelled (same-turn view, window blur), the sequence goes on.
  interrupt(reason:string,redraw=true,sequence=true){if(this.drag||(sequence&&this.seqStarted))this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();if(sequence)this.finish(reason,false);
   if(d)this.model.cancel();this.setHover(null);if(redraw)this.draw();this.onState();}
- escape(){this.openStatus=null;this.interrupt('escape');this.model.cancel();}
+ // Esc drops a focus left by a press too (the card would stay raised over its neighbours); the keyboard's stays.
+ escape(){this.openStatus=null;if(this.focused&&document.activeElement?.getAttribute('data-hit')!==this.focused)this.focused=null;this.interrupt('escape');this.model.cancel();}
  beginSequence(previous:View){
   const v=this.model.view,round=this.model.round;
   // Rule 1: once per gameId/turn. Rule 3: only a contiguous round of the same connection. K3: no motion, no sequence
@@ -404,17 +422,33 @@ hits:Hit[]=[];backs:Record<string,number>={};
   // the deck on the right, the discard on the left.
   const own=(id:string,b:Box|undefined)=>id===this.model.me&&b?{x:b.x,y:b.y}:null;
   const deck=(id:string)=>{const s=seat(id);return own(id,L?.piles?.deck)??(s?inside(s.x+s.w*.85,s.y-s.h*.15):null);},discard=(id:string)=>{const s=seat(id);return own(id,L?.piles?.discard)??(s?inside(s.x-s.w*.85,s.y+s.h*.1):null);};
-  const itemAt=(id:string,name:string,before:boolean):Point|null=>{const view=before?previous:v,items=view.players[id]?.character.items??[],i=before?items.findIndex(c=>c.name===name):items.map(c=>c.name).lastIndexOf(name),slots=place(id)?.items??[];
-   const b=i<0?null:slots[i]??slots.at(-1);return b?{x:b.x,y:b.y}:null;};
+  // C3-4s: the table as it stood before the round; every change of it lands with its flight. The slots hold as many objects as the larger of the two views.
+  const ids=Object.keys(v.players),before=(id:string)=>previous.players[id]?.character.items??[],slots=tableLayout(this.width,this.height,ids,this.model.me,Object.fromEntries(ids.map(id=>[id,Math.max(before(id).length,v.players[id].character.items.length)])));
+  const objectsBefore=Object.fromEntries(ids.map(id=>[id,[...before(id)]]));
+  const handDraws=(id:string)=>T.draws.filter(d=>d.seat===id&&d.to==='hand').length;
+  const shown={items:objectsBefore,slots,backs:Object.fromEntries(ids.filter(id=>id!==this.model.me).map(id=>[id,Math.max(0,(v.players[id].cardsInHand as number)-handDraws(id))])),deck:previous.players[this.model.me]?.deck??v.players[this.model.me]?.deck??0,discard:this.pile.before};
+  const slotBox=(id:string,i:number):Box|null=>{const list=slots.seats.find(s=>s.id===id)?.items??[];return i<0?null:list[i]??list.at(-1)??null;};
+  const itemBox=(id:string,name:string,old:boolean):Box|null=>{const items=old?before(id):v.players[id]?.character.items??[];return slotBox(id,old?items.findIndex(c=>c.name===name):items.map(c=>c.name).lastIndexOf(name));};
+  const itemAt=(id:string,name:string,old:boolean):Point|null=>{const b=itemBox(id,name,old);return b?{x:b.x,y:b.y}:null;};
+  const objectGoes=(at:number,id:string,name:string)=>this.events.push({at,run:()=>{const l=shown.items[id],i=l?.findIndex(c=>c.name===name)??-1;if(i>=0)l.splice(i,1);}});
+  const objectComes=(at:number,id:string,name:string)=>this.events.push({at,run:()=>{const l=shown.items[id],end=(v.players[id]?.character.items??[]).map(c=>c.name).lastIndexOf(name);if(l)l.splice(end<0?l.length:Math.min(end,l.length),0,named(name));}});
+  const flown={key:k,built:{clear:0,discard:0,drawHand:0,drawBack:0,itemOut:0,itemIn:0} as Record<FlownTag,number>,seen:{clear:0,discard:0,drawHand:0,drawBack:0,itemOut:0,itemIn:0} as Record<FlownTag,number>,toPile:0,toHand:0,itemsStart:Object.fromEntries(ids.map(id=>[id,before(id).map(c=>c.name)])),itemsEnd:null as Record<string,string[]>|null,advanced:false};
+  const flight=(f:Flight)=>{this.flights.push(f);if(f.tag)flown.built[f.tag]++;if(f.also)flown.built[f.also]++;};
   const add=<N extends Container>(node:N)=>{node.visible=false;this.fx.addChild(node);return node;};
-  const count={played:0,drops:0,stamps:0,tokens:0,objects:0,consumed:0,passed:0,broken:0,discards:0,draws:0,endOfTurn:0,emphasis:0,steps:0,pops:0,closeUps:0,targetUps:0};
+  const count={played:0,cleared:0,vanished:0,appeared:0,drops:0,stamps:0,tokens:0,objects:0,consumed:0,passed:0,broken:0,discards:0,draws:0,endOfTurn:0,emphasis:0,steps:0,pops:0,closeUps:0,targetUps:0};
   const mw=C?52:80,mh=C?72:112,iw=C?44:65,ih=C?62:91;
   // Board values start from the previous view; each step moves them (per card) or the tail sets the final ones (total).
   this.display=Object.fromEntries(Object.keys(v.players).map(id=>[id,{...(previous.players[id]?.character.resources??{})}]));
-  this.events=[];this.landed=0;
-  const change=(at:number,dur:number,steps:Step[])=>{if(!steps.length)return;count.steps+=steps.length;
+  this.events=[];this.landed=0;this.labels=[];this.arriving.clear();
+  // C3-4s: the cards of the previous round leave the middle first, the top of the pile first: regular and last resort to the discard pile (the
+  // own one, or beside the seat for the others, whose piles are not drawn), basic and bound back to the hand (R02).
+  if(p.clear&&L?.played){const list=T.clear.slice(0,L.played.slots.length),n=list.length,mine=this.model.me;list.forEach((c,i)=>{const b=L.played!.slots[i],node=add(this.card(named(c.card),b.w,b.h,true)),own=c.author===mine,start=p.clear!.at+(n-1-i)*p.clear!.dur*.25/Math.max(1,n),end=start+p.clear!.dur*.75;let to:Point|null=null,s1=.5,fade=.0;
+    if(c.to==='discard'){const k=own?L.piles?.discard:null;to=k?{x:k.x,y:k.y}:discard(c.author);if(k){s1=k.w/b.w;fade=1;}if(own)this.events.push({at:end,run:()=>{shown.discard=c.card;}});flown.toPile++;}
+    else{const h=own?this.hits.find(x=>x.kind==='hand'&&this.model.hand.find(y=>y.key===x.key)?.card.name===c.card):null,bk=place(c.author)?.backs;to=h?{x:h.x,y:h.y}:bk?{x:bk.x,y:bk.y}:seat(c.author)??null;if(h)s1=h.w/b.w;flown.toHand++;}
+    flight({node,from:{x:b.x,y:b.y},to:to??{x:b.x,y:b.y},start,end,mode:'travel',s0:1,s1,fade,tag:'clear'});count.cleared++;});}
+  const change=(at:number,steps:Step[])=>{if(!steps.length)return;count.steps+=steps.length;
    this.events.push({at,run:()=>{for(const s of steps)(this.display![s.seat]??={})[s.resource]=s.to;}});
-   const stack=new Map<string,number>();for(const s of steps){const n=stack.get(s.seat)??0;stack.set(s.seat,n+1);if(this.pop(s,n,at,dur))count.pops++;}};
+   for(const s of steps)if(this.pop(s,at))count.pops++;};
   // D13 (owner after the C3-4 trial), for every card in resolution order: its author pays it, comes forward with the card
   // beside it, goes back to its seat, the card flies to the target and hits it, the target comes forward a little, then
   // the card's changes. Close-ups avoid the other seats and the hand (readability.ts).
@@ -433,8 +467,10 @@ hits:Hit[]=[];backs:Record<string,number>={};
     const r=C?10:14,node=add(new Container()),g=new Graphics().circle(0,0,r).fill(RES_COLOR[tk.resource]).stroke({color:INK,width:2});node.addChild(g);glyph(g,tk.resource,-r*.35,0,r*.9,0xfff6e2);
     const label=this.text(node,`−${tk.amount}`,r*.45,0,C?10:13,undefined,0xfff6e2);label.anchor.set(0,.5);
     const p0=inside(b.x-b.w*.3+n*(r*2.6),b.y-b.h*.5);this.flights.push({node,from:p0,to:{x:p0.x,y:p0.y-(C?34:52)},start:P.cost.at+n*60,end:P.cost.at+P.cost.dur,mode:'rise'});count.tokens++;});
-   if(m.discard){const d=add(this.card(named(m.discard),iw,ih)),a={x:from.x+from.w*.5,y:from.y-(C?10:18)};this.flights.push({node:d,from:a,to:discard(m.author)??a,start:P.cost.at,end:P.cost.at+P.cost.dur,mode:'travel'});count.discards++;}
-   change(P.cost.at+P.cost.dur*.3,P.cost.dur*.7,m.costSteps);
+   // C3-4s: the bound's extra card goes from the hand (the own, or the covered one) to the discard pile (the own, or beside the seat).
+   if(m.discard){const own=m.author===this.model.me,k=own?L?.piles?.discard:null,bk=place(m.author)?.backs,d=add(this.card(named(m.discard),iw,ih)),a=own&&L?{x:L.hand.center,y:L.hand.y-L.hand.h*.3}:bk?{x:bk.x,y:bk.y}:{x:from.x,y:from.y},e=P.cost.at+P.cost.dur;
+    flight({node:d,from:a,to:k?{x:k.x,y:k.y}:discard(m.author)??a,start:P.cost.at,end:e,mode:'travel',s0:own?1:.5,s1:k?k.w/iw:.5,fade:k?1:0,tag:'discard'});count.discards++;if(own){const name=m.discard;this.events.push({at:e,run:()=>{shown.discard=name;}});}}
+   change(P.cost.at+P.cost.dur*BEAT_PHASE.costLabel,m.costSteps);
    // 2–3. Close-up of the author: its character grows to the free place with the card beside it, stays, then goes back.
    const up=upOf(m.author),node=add(new Container()),person=character(m.author,up.person.w,up.person.h),card=this.card(named(m.card),up.card.w,up.card.h);
    person.position.set(up.person.x-up.box.x,0);card.position.set(up.card.x-up.box.x,0);card.rotation=.04;this.halo(card,up.card.w,up.card.h,0xf1e4c4);node.addChild(person,card);
@@ -454,45 +490,57 @@ hits:Hit[]=[];backs:Record<string,number>={};
    const tu=targetOf({me:m.target===this.model.me,person:aim},{w:this.width,h:this.height},(L?.seats??[]).filter(x=>x.id!==m.target).map(x=>x.person)),tn=add(character(m.target,tu.w,tu.h)),t0=aim.h/tu.h;this.fx.setChildIndex(tn,0);
    this.zooms.push({node:tn,rest:{x:aim.x,y:aim.y,s:t0},up:{x:tu.x,y:tu.y,s:1},at:P.target.at,grow:P.target.dur*.3,hold:P.target.at+P.target.dur*.75,end:P.target.at+P.target.dur});count.targetUps++;
    this.stats.closeUps.at(-1)!.target=tu;
-   if(m.item){const it=m.item,src=itemAt(it.owner,it.name,true)??to,node=add(this.card(named(it.name),iw,ih)),s=P.target.at,e=P.target.at+P.target.dur;count.objects++;count[it.fate]++;
-    if(it.fate==='consumed')this.flights.push({node,from:src,to:{x:from.x,y:from.y},start:s,end:e,mode:'shrink'});
-    else if(it.fate==='passed'){this.flights.push({node,from:src,to:itemAt(m.author,it.name,false)??{x:from.x,y:from.y},start:s,end:e,mode:'travel'});this.stats.transfers++;}
-    else{node.addChild(new Graphics().moveTo(-iw*.1,-ih*.5).lineTo(iw*.08,-ih*.1).lineTo(-iw*.12,ih*.15).lineTo(iw*.05,ih*.5).stroke({color:INK,width:3}));this.flights.push({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:s,end:e,mode:'break'});}}
+   if(m.item){const it=m.item,box=itemBox(it.owner,it.name,true),src=box?{x:box.x,y:box.y}:to,bw=box?.w??iw,bh=box?.h??ih,node=add(this.card(named(it.name),bw,bh,true)),s=P.target.at,e=P.target.at+P.target.dur;count.objects++;count[it.fate]++;objectGoes(s,it.owner,it.name);
+    if(it.fate==='consumed')flight({node,from:src,to:{x:from.x,y:from.y},start:s,end:e,mode:'shrink',tag:'itemOut'});
+    else if(it.fate==='passed'){const dest=itemBox(m.author,it.name,false);flight({node,from:src,to:dest?{x:dest.x,y:dest.y}:{x:from.x,y:from.y},start:s,end:e,mode:'travel',s0:1,s1:dest?dest.w/bw:1,fade:1,tag:'itemOut',also:'itemIn'});objectComes(e,m.author,it.name);this.stats.transfers++;}
+    else{node.addChild(new Graphics().moveTo(-bw*.1,-bh*.5).lineTo(bw*.08,-bh*.1).lineTo(-bw*.12,bh*.15).lineTo(bw*.05,bh*.5).stroke({color:INK,width:3}));flight({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:s,end:e,mode:'break',tag:'itemOut'});}}
    // 6. The card's changes.
-   change(P.changes.at,P.changes.dur,m.steps);
+   change(P.changes.at,m.steps);
    this.stats.schedule.push({key:k,move:i,...at,hit:Math.round(hit),tokens:m.tokens.length?P.cost.at:null,closeUp:P.author.at,goesBack:P.back.at,flies:P.flight.at,targetUp:P.target.at,pops:m.steps.length?P.changes.at:null,costPops:m.costSteps.length?Math.round(P.cost.at+P.cost.dur*.3):null});});
   // 3. Draws: cards leave each deck as the counts say; own new cards face up, opponents' as backs, deck objects to the table.
-  if(p.draws){const n=T.draws.length,used=new Set<string>();T.draws.forEach((d,i)=>{const src=deck(d.seat);if(!src)return;let dest:Point|null=null,node:Container;
-    if(d.to==='table'){dest=itemAt(d.seat,d.name!,false);node=this.card(named(d.name!),iw,ih);count.objects++;}
-    else if(d.seat===this.model.me&&d.name){const h=this.hits.find(x=>x.kind==='hand'&&!used.has(x.id)&&this.model.hand.find(c=>c.key===x.key)?.card.name===d.name);if(h){used.add(h.id);dest={x:h.x,y:h.y};}node=this.card(named(d.name),iw,ih);}
-    else{const b=place(d.seat)?.backs;dest=b?{x:b.x,y:b.y}:null;node=this.back(C?18:28,C?25:39);}
-    add(node);const start=p.draws!.at+i*p.draws!.dur*.4/Math.max(1,n);this.flights.push({node,from:src,to:dest??src,start,end:start+p.draws!.dur*.6,mode:'travel'});count.draws++;});}
+  // C3-4s: what leaves a deck is on the table only when it lands. An object whose change no move explains vanishes from or appears at its seat (D1).
+  if(p.draws){const n=T.draws.length,used=new Set<string>(),me=this.model.me,pileW=L?.piles?.deck.w,spread=(i:number)=>p.draws!.at+i*p.draws!.dur*.4/Math.max(1,n),left=Object.fromEntries(ids.map(id=>[id,shown.backs[id]??0]));
+   T.draws.forEach((d,i)=>{const src=deck(d.seat);if(!src)return;const start=spread(i),end=start+p.draws!.dur*.6;if(d.seat===me)this.events.push({at:start,run:()=>{shown.deck=Math.max(0,shown.deck-1);}});
+    if(d.to==='table'){const b=itemBox(d.seat,d.name!,false),bw=b?.w??iw,node=add(this.card(named(d.name!),bw,b?.h??ih,true));count.objects++;flight({node,from:src,to:b?{x:b.x,y:b.y}:src,start,end,mode:'travel',s0:d.seat===me&&pileW?pileW/bw:.5,s1:1,fade:1,tag:'itemIn'});objectComes(end,d.seat,d.name!);count.draws++;return;}
+    if(d.seat===me&&d.name){const h=this.hits.find(x=>x.kind==='hand'&&!used.has(x.id)&&this.model.hand.find(c=>c.key===x.key)?.card.name===d.name);
+     if(h){used.add(h.id);this.arriving.add(h.key!);const key=h.key!;this.events.push({at:end,run:()=>{this.arriving.delete(key);}});}
+     const node=add(this.card(named(d.name),iw,ih));flight({node,from:src,to:h?{x:h.x,y:h.y}:src,start,end,mode:'travel',s0:pileW?pileW/iw:.5,s1:h?h.w/iw:1,fade:1,tag:'drawHand'});count.draws++;return;}
+    const seatBox=place(d.seat),bk=seatBox?.back,b=seatBox?.backs,f=b&&bk?fan(b,{...bk},left[d.seat]+1):null,tail=f?f.step*(left[d.seat]/2):0,dest=b?{x:b.x+tail,y:b.y}:src;left[d.seat]++;
+    const node=add(this.back(bk?.w??(C?18:28),bk?.h??(C?25:39)));flight({node,from:src,to:dest,start,end,mode:'travel',s0:.6,s1:1,fade:1,tag:'drawBack'});this.events.push({at:end,run:()=>{shown.backs[d.seat]=(shown.backs[d.seat]??0)+1;}});count.draws++;});
+   const at=p.draws.at,dur=p.draws.dur;
+   for(const o of T.vanished){const b=itemBox(o.seat,o.name,true);if(!b)continue;const node=add(this.card(named(o.name),b.w,b.h,true));objectGoes(at,o.seat,o.name);flight({node,from:{x:b.x,y:b.y},to:{x:b.x,y:b.y},start:at,end:at+dur*.7,mode:'vanish',tag:'itemOut'});count.vanished++;}
+   for(const o of T.appeared){const b=itemBox(o.seat,o.name,false);if(!b)continue;const node=add(this.card(named(o.name),b.w,b.h,true));flight({node,from:{x:b.x,y:b.y},to:{x:b.x,y:b.y},start:at+dur*.3,end:at+dur,mode:'pop',tag:'itemIn'});objectComes(at+dur,o.seat,o.name);count.appeared++;}}
   // 4. End of turn: a mark on every seat with end-of-turn lines (who, never what) and, when verified, their changes.
   if(p.endOfTurn){for(const id of T.endOfTurn.seats){const s=seat(id);if(!s)continue;const ring=add(new Graphics().roundRect(-s.w*.6,-s.h*.6,s.w*1.2,s.h*1.2,10).stroke({color:RES_COLOR.TOXICITY,width:4}));ring.position.set(s.x,s.y);this.accents.push({node:ring,at:p.endOfTurn.at,dur:p.endOfTurn.dur});count.endOfTurn++;}
-   change(p.endOfTurn.at+p.endOfTurn.dur*.35,p.endOfTurn.dur*.65,T.endOfTurn.steps);}
+   change(p.endOfTurn.at+p.endOfTurn.dur*BEAT_PHASE.endLabel,T.endOfTurn.steps);}
   // 5. Tail: without verified lines the bars go from the previous to the final value (D5); deaths and forfeits are stamped.
-  if(T.bars==='total')change(p.tail.at,p.tail.dur,T.totals);
+  if(T.bars==='total')change(p.tail.at,T.totals);
   this.events.push({at:p.tail.at,run:()=>{this.display=null;}});
   for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:p.tail.dur,kind:'stamp'});count.emphasis++;}
   this.events.sort((a,b)=>a.at-b.at);
+  // The labels stay over the close-ups they may outlive.
+  for(const a of this.accents)if(a.kind==='pop')this.fx.addChild(a.node);
   this.stats.beats.push({key:k,bars:T.bars,reason:T.reason,drift:T.drift,...count});
   this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p});
-  this.seqStarted=performance.now();this.stats.sequences++;this.draw();
+  this.stats.flown.push(flown);this.advancesAtStart=this.stats.advances;
+  this.staged=shown;this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
  /** «ANNULLATA», «ELIMINATO»: a wine stamp pressed on a card or a character. */
  private stamp(word:string,compact:boolean){const c=new Container(),label=this.text(c,word,0,0,compact?13:20,undefined,0xffe9e9);label.anchor.set(.5);
   const w=label.width+18,h=label.height+8;c.addChildAt(new Graphics().roundRect(-w/2,-h/2,w,h,4).fill({color:WINE,alpha:.92}).stroke({color:0xffd9d9,width:2.5}),0);c.rotation=-.18;return c;}
  /** The resource a step changes, enlarged over its board for a moment: glyph, bar and «before → after» (C3-4). */
- private pop(s:Step,n:number,at:number,dur:number){const b=this.layout?.seats.find(x=>x.id===s.seat)?.board,p=this.model.view.players[s.seat];if(!b||!p)return false;
+ private pop(s:Step,at:number){const b=this.layout?.seats.find(x=>x.id===s.seat)?.board,p=this.model.view.players[s.seat];if(!b||!p)return false;
   const C=this.height<550,own=s.seat===this.model.me,fs=C?12:17,c=new Container(),g=new Graphics();c.addChild(g);
   const d=s.to-s.from,label=this.text(c,`${s.from} → ${s.to}`,0,0,fs,undefined,d<0?0xffb7bd:0xc9f0b0);label.anchor.set(0,.5);
   const gs=fs*1.3,bw=C?54:84,w=gs+8+label.width+10+bw+12,h=fs*2;label.position.set(-w/2+gs+12,0);
   g.roundRect(-w/2,-h/2,w,h,h*.35).fill({color:0x120c08,alpha:.92}).stroke({color:RES_COLOR[s.resource],width:2});glyph(g,s.resource,-w/2+6+gs/2,0,gs,RES_COLOR[s.resource]);
   const m=meter(s.to,this.start(s.seat,p)[s.resource],s.resource==='HEALTH'),x=w/2-bw-8,th=fs*.6;
   g.rect(x,-th/2,bw,th).fill({color:0x000000,alpha:.5});if(m.fill)g.rect(x,-th/2,bw*m.fill,th).fill(RES_COLOR[s.resource]);if(m.negative)g.rect(x,-th/2,2,th).fill(0xe0707a);
-  const row=own?RESOURCES.indexOf(s.resource):-1,y=own?b.y-b.h/2+b.h/RESOURCES.length*(row+.5):b.y-b.h/2-h*(n+.6);
-  c.position.set(Math.max(w/2+4,Math.min(this.width-w/2-4,b.x+(own?b.w*.15:0))),Math.max(h/2+2,y-(own?h*n*.2:0)));c.visible=false;this.fx.addChild(c);
-  this.accents.push({node:c,at,dur:Math.max(300,dur),kind:'pop'});this.stats.aggregateDeltas++;return true;}
+  const row=own?RESOURCES.indexOf(s.resource):-1,y=own?b.y-b.h/2+b.h/RESOURCES.length*(row+.5):b.y-b.h/2-h*.6,dur=LABEL.in+LABEL.read+LABEL.out;
+  // C3-4s: a label outlives its beat: its place stays clear of the ones still visible when it appears.
+  const base={x:Math.max(w/2+4,Math.min(this.width-w/2-4,b.x+(own?b.w*.15:0))),y:Math.max(h/2+2,y),w,h},box=labelSpot(base,{w:this.width,h:this.height},this.labels.filter(l=>l.to>at&&l.from<at+dur).map(l=>l.box));
+  c.position.set(box.x,box.y);c.visible=false;this.fx.addChild(c);const entry:Label={seat:s.seat,resource:s.resource,box,from:Math.round(at),to:Math.round(at+dur),first:0,last:0};this.labels.push(entry);
+  this.accents.push({node:c,at,dur,kind:'pop',label:entry});this.stats.aggregateDeltas++;return true;}
  get sequenceRunning(){return !!this.seqStarted;}
  /** D12: a tap on the table during the sequence moves it to the next card; past the last one it ends. */
  advance(){if(!this.seqStarted||!this.pace)return false;const elapsed=performance.now()-this.seqStarted,next=nextStop(this.pace,elapsed);
@@ -501,7 +549,9 @@ hits:Hit[]=[];backs:Record<string,number>={};
  finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.stopEffects();if(redraw){this.draw();this.onState();}}
  /** «Salta effetti». */
  skip(){this.finish('skip');}
- stopEffects(){if(this.seqStarted)this.stats.sequenceMs.push(performance.now()-this.seqStarted);this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+ stopEffects(){if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
+   for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round(l.last-l.first):0});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
+  this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private tick(){const now=performance.now();
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.aimDirty)this.drawAim();
@@ -512,6 +562,7 @@ hits:Hit[]=[];backs:Record<string,number>={};
    // Board steps reached (also several at once after a tap): applied, then one redraw.
    let due=0;while(due<this.events.length&&this.events[due].at<=t)due++;if(due){this.events.splice(0,due).forEach(e=>e.run());this.draw();}
    this.flights.forEach(f=>{const d=f.end-f.start,p=(t-f.start)/d;f.node.visible=p>=0&&p<=1;if(!f.node.visible)return;
+    if(f.tag&&!f.seen){f.seen=true;const n=this.stats.flown.at(-1);if(n){n.seen[f.tag]++;if(f.also)n.seen[f.also]++;}}
     if(f.appear!==undefined){const a=f.appear,fly=f.fly??.72;
      // Move: (appear at the author,) fly, hit the target, stay through its close-up and changes, then slide to the discard and fade.
      if(p<a){const q=p/a;f.node.position.set(f.from.x,f.from.y);f.node.scale.set(.6+.4*(1-Math.pow(1-q,2)));f.node.rotation=-.12;f.node.alpha=Math.min(1,q*2);return;}
@@ -521,14 +572,19 @@ hits:Hit[]=[];backs:Record<string,number>={};
     if(f.mode==='rise'){f.node.alpha=1-p*p;}
     else if(f.mode==='shrink'){f.node.scale.set(1-.75*p);f.node.alpha=1-.8*p;}
     else if(f.mode==='break'){f.node.rotation=Math.sin(p*Math.PI*6)*.12*(1-p)+p*.5;f.node.alpha=1-p;}
-    else f.node.alpha=p>.85?1-(p-.85)/.15*.6:1;});
+    else if(f.mode==='vanish'){f.node.scale.set(1-.5*p);f.node.alpha=1-p;}
+    else if(f.mode==='pop'){f.node.scale.set(p<.6?.3+1*(p/.6):1.3-.3*((p-.6)/.4));f.node.alpha=Math.min(1,p*3);}
+    else{const s0=f.s0??1,s1=f.s1??s0,end=f.fade??.4;f.node.scale.set(s0+(s1-s0)*eased);f.node.alpha=Math.min(1,p*6)*(p>.85?1-(p-.85)/.15*(1-end):1);}});
    this.zooms.forEach(z=>{z.node.visible=t>=z.at&&t<=z.end;if(!z.node.visible)return;
     const q=t<z.at+z.grow?(t-z.at)/z.grow:t<z.hold?1:1-(t-z.hold)/Math.max(1,z.end-z.hold),e=q*q*(3-2*q);
     z.node.position.set(z.rest.x+(z.up.x-z.rest.x)*e,z.rest.y+(z.up.y-z.rest.y)*e);z.node.scale.set(z.rest.s+(z.up.s-z.rest.s)*e);
     if(z.fade)z.fade.alpha=Math.min(1,Math.max(0,q*1.6-.4));});
-   this.accents.forEach(x=>{const p=(t-x.at)/x.dur;x.node.visible=p>=0&&p<=1;if(!x.node.visible)return;
+   this.accents.forEach(x=>{const held=x.label?.first?now-x.label.first<LABEL.read+LABEL.out:false,p=held?Math.min(1,(t-x.at)/x.dur):(t-x.at)/x.dur;x.node.visible=p>=0&&p<=1;if(!x.node.visible)return;
     if(x.kind==='stamp'){x.node.scale.set(p<.2?1.8-.8*(p/.2):1);x.node.alpha=p>.8?1-(p-.8)/.2:1;}
-    else if(x.kind==='pop'){x.node.scale.set(p<.25?.7+.6*(p/.25):p<.45?1.3-.3*((p-.25)/.2):1);x.node.alpha=p>.85?1-(p-.85)/.15:1;}
+    else if(x.kind==='pop'){const e=t-x.at,settle=LABEL.in+200;x.node.scale.set(e<LABEL.in?.7+.5*(e/LABEL.in):e<settle?1.2-.2*((e-LABEL.in)/200):1);
+     // The reading time counts from the frame that really shows it: a frame held back (the first upload of many labels) does not take it away.
+     const l=x.label,read=l?.first?now-l.first:0,fading=e>LABEL.in&&read>=LABEL.read;x.node.alpha=fading?Math.max(0,1-(read-LABEL.read)/LABEL.out):1;
+     if(l&&e>=LABEL.in&&!fading){l.first||=now;l.last=now;}}
     else{x.node.scale.set(1+p*1.2);x.node.alpha=1-p;}});
   }}
  }

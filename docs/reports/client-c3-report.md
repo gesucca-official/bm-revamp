@@ -771,3 +771,106 @@ i personaggi più grandi e, nel duello, l'avversario più grande.
   posto; il nuovo controllo per 0–3 oggetti usa i pulsanti, come `VerifyAim`.
 - **Scritta decorativa:** in FFA a 844×390 la plancia in alto a sinistra copre «BOTTE MICIDIALI», come prima.
 - Dati locali non toccati: tutte le prove su database temporanei.
+
+## C3-4s — Rifinitura delle animazioni della sequenza
+
+2 novembre 2026. Blocco dopo la prova di C3-L del proprietario (30 ottobre): (1) le scritte delle risorse durano
+troppo poco; (2) gli oggetti compaiono senza animazione; (3) le carte giocate non volano alla pila degli scarti e le
+pesche non partono dal mazzo; (4) in una partita avanzata contro il computer (i) e ispezione spariscono, in una
+partita nuova no. Nessun cambio a regolamento, server, protocollo, catalogo o `client-debug`: solo presentazione.
+
+### Il difetto delle (i): causa accertata
+
+**Riprodotto** su partite lunghe con server temporaneo, sul codice del commit precedente, prima di correggere
+(evidenze in [before/](client-c3/c3-4s/before/)).
+
+**Causa.** In `table.tsx` lo stato `overInfo` (il puntatore è sulla (i) di una carta o di un oggetto) vince su tutto ed
+è cancellato solo da `pointerleave` o dal clic. Se la vista toglie quell'oggetto o quella carta mentre il puntatore è
+sulla sua (i), React rimuove il pulsante senza alcun `pointerleave`: resta un id che non esiste più, quindi nessuna (i)
+in tutto il tavolo fino al ritorno di quell'id o a una nuova partita (`Table key={gameId}` azzera lo stato). Spiega
+i sintomi riferiti: partita avanzata (servono oggetti), partita nuova che funziona.
+
+| Misura sul commit precedente | Round controllati | Round senza alcuna (i) | Dove |
+|---|---|---|---|
+| 1366×768, duello, mouse | 25 | **16** (tutti i punti provati) | partita 0 T8–T16, partita 1 T1–T7 |
+| 844×390, duello, mouse | 28 | **13** (tutti i punti provati) | partita 0 T8–T10, partita 1 T7–T16 |
+| FFA, mouse (1366×768 + 844×390) | 17 + 12 | 0 | |
+| iPhone emulato (tocco, nessun passaggio del puntatore) | 24 | 0 | dal registro del giro, non nel JSON conservato; **non riprodotto al tocco** |
+
+Il campo `missing` delle righe è il dato che conta. In quei JSON `lost` vale 25/25 e 28/28 perché allora contava come
+perdita anche la (i) della carta vicina alzata sopra (criterio troppo severo, poi sostituito da `stuck`): non è il difetto.
+
+**Gesti.** Innesco riprodotto: Invio su ✓ con il puntatore fermo sulla (i) di un proprio oggetto che la mossa consuma;
+con il solo mouse, alla velocità dello strumento (la vista arriva 44–87 ms dopo ✓). Esclusi da soli: tocchi, «Salta
+effetti», carta scelta durante la sequenza, ispezione, primi piani. Con il mouse e la velocità di una persona la
+finestra è stretta: **il gesto esatto del proprietario resta non noto.** Ciò che la correzione ripulisce è lo stato, a
+prescindere dalla via che lo produce.
+
+**Correzione.** Un effetto azzera `overInfo` quando il suo id non è più fra quelli esposti. Il controllo ripetuto ha
+trovato un secondo difetto, della stessa famiglia: una carta base o legata giocata col mouse restava alzata perché teneva
+il fuoco della pressione e copriva i vicini e le loro (i) (FFA T3). Ora il fuoco da pressione si azzera a ogni round
+nuovo e con Esc; quello da tastiera resta.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Scritte delle variazioni | `LABEL` = entrata 120 ms, **lettura a piena opacità 1200 ms**, uscita 180 ms. Prima, calcolato dal codice: 255 ms (costo), 382 (variazioni), 414 (fine turno), 680 (coda). Taratura: circa 250 ms per trovare la scritta, 3 elementi (nome, risorsa, valore) a circa 240 parole al minuto, cioè 250 ms ciascuno, e 200 ms di margine. **È una stima, non una prova con lettori.** Il tempo parte dal primo fotogramma che la mostra davvero; `labelSpot` evita che scritte contemporanee si coprano. |
+| Pila degli scarti | Fase nuova `clear` (0,5 s) a inizio sequenza: le carte del round prima lasciano la cascata. Regolari e ultima risorsa volano alla pila, base e legate tornano in mano (R02, R04). La carta legata scartata in più parte dalla mano (o dai dorsi) e arriva alla pila. `nextPile` tiene la cima della pila com'era mostrata. |
+| Pesche | Partono dal mazzo del posto: le proprie scoperte in mano, le altrui come dorsi che atterrano nel ventaglio. |
+| Oggetti | Quello pescato arriva dal mazzo o compare al posto; quello consumato, rubato o rotto vola o svanisce secondo i fatti di C3-1. Durante la sequenza la scena mostra gli oggetti in stato intermedio (`staged`); i punti d'interazione restano sulla vista finale (regola 4). Senza legame con una mossa: compare o svanisce nella fase pesche (D1, nessun effetto inventato). |
+| Movimento ridotto | Nessun volo né scritta: stesso contenuto nel riepilogo statico, controllato uguale ai segni per posto. |
+| Regia | `PACE`: variazioni 0,6 s (era 0,45), pesche 0,8 s (0,65), coda 0,9 s (0,8), coda con totali 1,7 s. D12 invariata: il tocco passa al passo dopo. |
+| Test automatici | Client **172** (168 + 4): conteggi di oggetti e sgombero secondo R02, scritte dentro il round e caso peggiore nel tetto, `nextPile`, `labelSpot`. Nessun atteso esistente modificato per accettare una regressione. |
+| Server reale | **Sì.** `VerifyResolution` confronta in ogni sequenza i voli con i fatti (`c4s`) e aggiunge gli scenari `info`, `infoFfa`, `infoTouch`: (i) e ispezione a ogni round di partite lunghe, dopo ogni azione. |
+| Regressione | Sulla build finale, a 1366×768 e 844×390: `VerifyResolution`, `VerifyAim`, `VerifyLayout`, `Verify`, `VerifyModes`, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks` tutte verdi. `Test`, `Build`, `Size` del client verdi. `./scripts/build.ps1 -Task Test -Offline` verde (server 254, `client-debug` 36); `python scripts/check-rules.py` verde. |
+| Peso | JS gzip 324093 byte (+2312 rispetto a C3-L), totale gzip 1107039 byte ([size.json](client-c3/c3-4s/size.json)). Budget rispettato. |
+| Emulazione / dispositivo / umano | Edge via Playwright sul PC, due misure landscape, iPhone emulato per il tocco; nessun dispositivo fisico, iPhone reale o prova umana. |
+
+### Misure sulla build finale (partite reali)
+
+| Misura | 1366×768 | 844×390 |
+|---|---|---|
+| Carte del round uscite dal centro (alla pila / in mano) | 169 (66 / 103) | 191 (74 / 117) |
+| Carte scartate in più volate alla pila | 83 | 91 |
+| Oggetti: animazioni in uscita / in entrata | 37 / 34 | 58 / 61 |
+| di cui senza mossa collegata: svaniti / comparsi | 2 / 6 | 13 / 13 |
+| Pesche proprie / dorsi altrui | 37 / 104 | 46 / 109 |
+| Differenze fra voli e fatti | 0 | 0 |
+| Scritte misurate: lettura a piena opacità | 507: 1175–1200 ms | 563: 1167–1200 ms |
+| Sequenze, due mosse | 7,2–9,66 s | 7,1–9,66 s |
+| Sequenze, FFA con cinque mosse | 17,5–19,70 s | 15,9–19,73 s |
+| Clock residuo fra umani a fine sequenza, cinque mosse | 10–12 s | 11–12 s |
+| (i), duello: round / punti provati / pressioni / persi | 22 / 194 / 59 / **0** | 20 / 179 / 57 / **0** |
+| (i), FFA: stessi dati | 11 / 156 / 33 / **0** | 11 / 157 / 33 / **0** |
+| (i), iPhone emulato (844×390 in entrambi i giri): stessi dati | 24 / 144 / 24 / **0** | 31 / 186 / 31 / **0** |
+| Fotogrammi entro soglia (33 ms desktop, 20 ms compatto), minimo per scenario di `VerifyLayout` | 98,3% | 99,8% |
+| Intervallo massimo / input massimo | 161,9 / 48,2 ms | 104,3 / 54,4 ms |
+
+I fotogrammi sono misurati con i due giri in parallelo sullo stesso PC: il picco di 161,9 ms non è isolabile dal carico.
+
+### Il tetto di 20 s (D10) in FFA a cinque
+
+**Entra, con margine stretto.** Caso peggiore pianificato con ogni fase: 19,7 s; misurato al massimo 19,73 s. Per
+entrare le scritte **sopravvivono al loro passo**: durano 1500 ms contro i 600 del passo variazioni e si sovrappongono al
+passo dopo, senza coprirsi fra loro. Se invece il passo durasse tutta la scritta, cinque carte farebbero circa 24,2 s,
+oltre il tetto. In un round con cinque mosse e totali (coda 1,7 s) il grezzo può arrivare a 20,5 s e `pace` comprime tutto
+del 2,4%, come già previsto da D13; le scritte hanno comunque il loro tempo pieno. Il clock residuo scende a 10–12 s (era
+12–15 s in C3-4r), mai sotto 10 s: `under10s` vuoto, nessun segnale per A2, ma il margine si è ridotto.
+
+### Limiti e residui
+
+- **Non provato:** dispositivo fisico, iPhone reale, prova umana; il gesto esatto del proprietario; la leggibilità
+  reale delle scritte (1200 ms è una stima, da giudicare in C3-7).
+- **Un tocco (D12) accorcia le scritte:** il tempo salta al passo dopo, quindi una scritta può durare meno del minimo. È
+  la scelta di D12; il controllo del minimo vale per le sequenze non avanzate.
+- **La carta giocata resta al centro fino al round dopo** (D14) e vola alla pila all'inizio della sequenza successiva.
+  Quindi a riposo la cima della propria pila mostra la carta precedente e dopo un ricaricamento la pila è vuota fino al
+  round dopo: il client non conosce gli scarti precedenti.
+- **Le pile altrui non sono disegnate** (D14): la carta vola accanto al posto dell'autore e sfuma. Nessuna pila inventata.
+- **FFA, oggetti propri oltre il conteggio finale:** durante la sequenza possono finire per un attimo sotto la mano,
+  perché i posti sono calcolati sulla vista finale.
+- **Scarti fra report e vista in 3 round su 141** (`reportConsistency`, «report 0 vs view −20», tutti con SVEGLIAMOCI MA
+  TU NO): gestiti dal ripiego sul totale di C3-4 (`barsTotal` negli stessi conteggi). Il server non è cambiato.
+- **Evidenze:** le catture restano solo per `VerifyResolution` e `Verify` ([c3-4s](client-c3/c3-4s/)); gli altri strumenti tengono i JSON.
+- Dati locali non toccati: tutte le prove su database temporanei.

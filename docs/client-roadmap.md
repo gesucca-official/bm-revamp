@@ -1,8 +1,8 @@
 # Roadmap del client web animato
 
-**30 ottobre 2026 — versione 31. C0, C1 e C2 sono chiuse; C3 è in corso nel
+**2 novembre 2026 — versione 32. C0, C1 e C2 sono chiuse; C3 è in corso nel
 [piano C3](client-c3-plan.md): C3-1, C3-2 e C3-4 (ciascuno con la revisione dopo la prova del
-proprietario), C3-3 e C3-L sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+proprietario, C3-4 anche con la rifinitura C3-4s), C3-3 e C3-L sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -528,6 +528,9 @@ primo piano del bersaglio → variazioni; tetto del round 20 s (D10), un tocco p
 successivo. Misurato: duello 7,0–8,6 s, FFA con cinque mosse 15,2–18,2 s, fra umani 12–15 s di
 clock residuo, mai sotto 10 s ([rapporto C3](reports/client-c3-report.md#c3-4--revisione-dopo-la-prova-del-proprietario)).
 Osservazione per C4/C5: sequenza velocizzata attivabile dall'utente.
+**C3-4s fatto (2 novembre 2026), dopo la prova di C3-L:** scritte leggibili, oggetti e scarti animati, pesche dal
+mazzo, (i) sempre disponibili ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)).
+
 **C3-L fatto (30 ottobre 2026), dopo il feedback del proprietario** (centro vuoto, tutto piccolo, proprio
 personaggio grande quanto gli altri; D14): personaggio proprio ×1,5 e risorse fino a ×1,25 su desktop; gli altri
 ×1,2 nel duello desktop e ×1 dove lo spazio non basta, con le priorità del proprietario (cedono prima gli
@@ -710,7 +713,7 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 
 **Prossimo passo:** il blocco successivo del [piano C3](client-c3-plan.md) su
 istruzione del proprietario, nell'ordine C3-6, C3-5, C3-7;
-C3-1, C3-2, C3-3, C3-4 e C3-L sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
+C3-1, C3-2, C3-3, C3-4, C3-L e C3-4s sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); l'attività A1 (tipo di
 danno nel catalogo, dal regolamento) precede C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -720,6 +723,11 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 32 — 2 novembre 2026, C3-4s:** rifinitura delle animazioni dopo la prova di C3-L: scritte delle risorse
+  con 1200 ms di lettura, oggetti animati secondo i fatti, carte giocate alla pila, pesche dal mazzo; difetto delle (i)
+  perse in partita avanzata riprodotto e corretto, con controllo a ogni round in `VerifyResolution`
+  ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)). FFA con cinque mosse
+  fino a 19,7 s, tetto di 20 s rispettato. Nessuna regola, API o servizio cambiato.
 - **Versione 31 — 30 ottobre 2026, C3-L:** scala e uso dello spazio del tavolo dopo il feedback del proprietario
   (D14): fattori `SCALE` con ordine di cessione `YIELD` e controllo `layoutProblems` in `readability.ts`, carte
   dell'ultimo round a cascata al centro (cambio in corsa del proprietario rispetto a mazzo e scarti al centro), mazzo

@@ -340,3 +340,30 @@ test('D13 drift: a later author paying with a resource an earlier card changed s
   if(done)break;}
  assert.ok(done,'a recorded round with an author hit before playing');
 });
+
+import {labelTimes,LABEL} from '../src/resolution.ts';
+test('C3-4s: every object gone and appeared has its animation, the previous round leaves the middle as R02 says',()=>{
+ for(const name of contiguous){const c=pair(name),f=facts(name),t=timelineOf(name),b=beats(t),seats=Object.values(f.seats!);
+  assert.equal(b.itemsOut,seats.reduce((n,s)=>n+s.itemsGone.length,0),`${name}: objects gone`);
+  assert.equal(b.itemsIn,seats.reduce((n,s)=>n+s.itemsAppeared.length,0),`${name}: objects appeared`);
+  assert.equal(t.clear.length,c.previous.resolvedMoves.length,`${name}: the cards of the previous round`);
+  for(const x of t.clear){const k=catalog.find(y=>y.name===x.card);assert.equal(x.to,k&&(k.basicAction||k.characterBound)?'hand':'discard',`${name}: ${x.card}`);}
+  assert.equal(!!t.pace.clear,t.clear.length>0,name);assert.equal(!!t.pace.draws,t.draws.length+t.vanished.length+t.appeared.length>0,name);}
+ // The object contested by two moves (C3-4: neither animates it) now vanishes from its seat and appears at the other, without saying who took it.
+ const contested=timelineOf('itemGoneBefore'),f=facts('itemGoneBefore');assert.ok(contested.vanished.length>=1);
+ assert.equal(contested.appeared.length,Object.values(f.seats!).reduce((n,s)=>n+s.itemsAppeared.length,0)-contested.draws.filter(d=>d.to==='table').length);
+ // A token is not a deck card: it appears at the seat.
+ assert.ok(timelineOf('itemNamedNotGone').appeared.some(a=>a.name==='Broken Beer Bottle'));
+});
+test('C3-4s: a label is readable for its whole time inside the round, in every recorded round and in the worst five-card round',()=>{
+ assert.ok(LABEL.read>=1000&&LABEL.read<=1500,'reading time');
+ for(const name of contiguous){const t=timelineOf(name),at=labelTimes(t);assert.equal(at.length,beats(t).steps,`${name}: a label per step`);for(const x of at)assert.ok(x+LABEL.in+LABEL.read<=t.pace.total,`${name}: label at ${x} within ${t.pace.total}`);}
+ // Five cards with every beat and phase, a cleared middle included: within the cap with nothing scaled.
+ const worst=pace(5,{clear:true,draws:true,endOfTurn:true});assert.equal(worst.total,PACE.clear+5*BEATS.reduce((n,b)=>n+PACE[b],0)+PACE.draws+PACE.endOfTurn+PACE.tail);assert.ok(worst.total<=PACE.budget,`worst round ${worst.total}`);assert.equal(worst.moves[0].author.dur,PACE.author);assert.deepEqual(directionProblems(worst),[]);
+ // The last label of the last card and the end-of-turn ones fit even without further phases, and in the totals mode.
+ const bare=pace([{changes:true}]);assert.ok(bare.moves[0].changes.at+LABEL.in+LABEL.read<=bare.total);
+ const eot=pace([{changes:true}],{endOfTurn:true});assert.ok(eot.endOfTurn!.at+eot.endOfTurn!.dur*.15+LABEL.in+LABEL.read<=eot.total);
+ const totals=pace(1,{totals:true});assert.ok(totals.tail.at+LABEL.in+LABEL.read<=totals.total);
+ // Past the first stops the tap of D12 is unchanged: the cleared middle is not a stop of its own.
+ const clear=pace(1,{clear:true});assert.equal(nextStop(clear,1),clear.moves[0].cost.at);assert.ok(directionProblems({...clear,moves:clear.moves.map(m=>({...m,at:0}))}).some(x=>x.includes('cleared')));
+});

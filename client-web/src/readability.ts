@@ -324,7 +324,21 @@ export function targetOf(s:{me:boolean;person:Box},screen:{w:number;h:number},ot
 /** C3-L: the card on top of the own discard pile after the last resolved round of the view, or null when that round put nothing there.
  * R02: a regular or last-resort card goes to the discard after use, voided or not; basic and bound stay in hand; a bound discards its
  * extra card first, unless voided (R04). `cards` knows the subtype of the played card; an unknown name counts as regular. */
-export function discardTop(moves:{playerId:string;playedCardName:string;void?:boolean;choices?:Record<string,string>|null}[],me:string,cards:Card[]):string|null{
- const m=moves.find(x=>x.playerId===me);if(!m)return null;const c=cards.find(x=>x.name===m.playedCardName);
- if(c&&(c.basicAction||c.characterBound))return !m.void&&m.choices?.DISCARD_ONE?m.choices.DISCARD_ONE:null;
- return m.playedCardName;}
+type PlayedMove={playerId:string;playedCardName:string;void?:boolean;choices?:Record<string,string>|null};
+export function discardTop(moves:PlayedMove[],me:string,cards:Card[]):string|null{const o=ownDiscards(moves,me,cards);return o.extra??o.played;}
+/** What the own move of a round sends to the discard pile (R02): the played card, a bound's extra card (unless voided, R04). */
+export function ownDiscards(moves:PlayedMove[],me:string,cards:Card[]):{played:string|null;extra:string|null}{
+ const m=moves.find(x=>x.playerId===me);if(!m)return {played:null,extra:null};const c=cards.find(x=>x.name===m.playedCardName);
+ if(c&&(c.basicAction||c.characterBound))return {played:null,extra:!m.void&&m.choices?.DISCARD_ONE?m.choices.DISCARD_ONE:null};
+ return {played:m.playedCardName,extra:null};}
+/** C3-4s: the own discard pile when a new round arrives. The card played in the previous round lay in the middle (D14) and only now reaches
+ * the pile; a bound's extra card goes there during its own round; the card played now stays in the middle (`middle`) until the next one. */
+export type DiscardPile={top:string|null;middle:string|null};
+export function nextPile(pile:DiscardPile,moves:PlayedMove[],me:string,cards:Card[]):DiscardPile{const o=ownDiscards(moves,me,cards);
+ return {top:o.extra??pile.middle??pile.top,middle:o.played};}
+/** C3-4s: a place for a label of a change: `base` or, moving away a row at a time (up first), then a column to the side, the nearest one on
+ * the screen and clear of the labels in `taken` (the ones still visible when this one appears). */
+export function labelSpot(base:Box,screen:{w:number;h:number},taken:Box[]):Box{
+ const rows=[0,-1,1,-2,2,-3,3,-4,4,-5,5,-6,6,-7,7,-8,8];
+ for(const c of [0,1,-1,2,-2])for(const k of rows){const b={...base,x:base.x+c*(base.w+4),y:base.y+k*(base.h+3)};if(inside(b,screen.w,screen.h)&&!taken.some(o=>overlap(b,o)>0))return b;}
+ return base;}

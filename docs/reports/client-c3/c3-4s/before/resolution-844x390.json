@@ -1,0 +1,1299 @@
+{
+ "date": "2026-11-02T11:09:27.010Z",
+ "url": "http://127.0.0.1:4321",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "games": {},
+ "cases": {},
+ "scene": {
+  "info": {
+   "rounds": 28,
+   "lost": 28,
+   "firstLoss": {
+    "at": "duel game 0 T1",
+    "action": "let it run",
+    "rested": null,
+    "missing": [],
+    "wrong": [
+     {
+      "hovered": "card-2",
+      "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+     },
+     {
+      "hovered": "card-5",
+      "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+     },
+     {
+      "hovered": "card-7",
+      "info": "Dettagli: STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno"
+     }
+    ],
+    "problems": []
+   },
+   "newGameAfterLoss": {
+    "missing": 0,
+    "hovered": 8
+   },
+   "byAction": {
+    "let it run": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "tap": {
+     "rounds": 2,
+     "lost": 2
+    },
+    "skip": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "card during the sequence": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "inspection during the sequence": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "rest on the (i) through the close-ups": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "rest on the (i) of the card sent": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "rest on the (i) of an object": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "to the (i) right after ✓, mouse only": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "new game": {
+     "rounds": 2,
+     "lost": 2
+    }
+   },
+   "hovered": 252,
+   "pressed": 42,
+   "gaveWay": 0,
+   "rows": [
+    {
+     "where": "duel game 0 T0",
+     "hovered": 8,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-4",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, co"
+      }
+     ],
+     "pressed": 2,
+     "problems": [],
+     "action": "new game"
+    },
+    {
+     "where": "duel game 0 T1",
+     "hovered": 10,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-5",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "let it run",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T2",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-5",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "tap",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T3",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "skip",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T4",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: GENTILE IL TUO CAREZZO, AZIONE REGOLARE, ruolo dif"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "card during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T5",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-10",
+       "info": "Dettagli: FAI BASTA, AZIONE REGOLARE, ruolo contrasto, costo"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "inspection during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T6",
+     "hovered": 8,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-11",
+       "info": "Dettagli: SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruol"
+      }
+     ],
+     "pressed": 2,
+     "problems": [],
+     "action": "rest on the (i) through the close-ups",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T7",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-10",
+       "info": "Dettagli: FAI BASTA, AZIONE REGOLARE, ruolo contrasto, costo"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) of the card sent",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 0 T8",
+     "hovered": 8,
+     "missing": [
+      "person-ComPlayer_7829",
+      "person-devAlice",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-9",
+      "card-10",
+      "card-11"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "rest on the (i) of an object",
+     "running": true,
+     "rested": "Dettagli: Peroni da 66, calda, oggetto di te, ruolo risorse, dà +5 L, copia 1",
+     "race": null
+    },
+    {
+     "where": "duel game 0 T9",
+     "hovered": 8,
+     "missing": [
+      "person-ComPlayer_7829",
+      "person-devAlice",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-10",
+      "card-11",
+      "card-12"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "to the (i) right after ✓, mouse only",
+     "running": true,
+     "rested": null,
+     "race": {
+      "afterClickMs": 217,
+      "viewAfterClickMs": 47
+     }
+    },
+    {
+     "where": "duel game 0 T10",
+     "hovered": 9,
+     "missing": [
+      "person-ComPlayer_7829",
+      "item-ComPlayer_7829-0",
+      "person-devAlice",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-11",
+      "card-12",
+      "card-13"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "let it run",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T0",
+     "hovered": 8,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-4",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: Dose di Eroina da Cavalli, AZIONE REGOLARE, ruolo "
+      }
+     ],
+     "pressed": 2,
+     "problems": [],
+     "action": "new game"
+    },
+    {
+     "where": "duel game 1 T1",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-5",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: Riflessi Aumentati dalla Speed, AZIONE REGOLARE, r"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "skip",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T2",
+     "hovered": 10,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: Grab, AZIONE REGOLARE, ruolo oggetti, costo —, pri"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "card during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T3",
+     "hovered": 10,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: Grab, AZIONE REGOLARE, ruolo oggetti, costo —, pri"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "inspection during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T4",
+     "hovered": 9,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: Grab, AZIONE REGOLARE, ruolo oggetti, costo —, pri"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) through the close-ups",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T5",
+     "hovered": 10,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: Tossicone Scatarrante, AZIONE REGOLARE, ruolo dist"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) of the card sent",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T6",
+     "hovered": 10,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo ogge"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno,"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: Tossicone Scatarrante, AZIONE REGOLARE, ruolo dist"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) of an object",
+     "running": true,
+     "rested": "Dettagli: Mescolone Micidiale, oggetto di Computer, ruolo risorse, dà +20 L, +20 T, copia 3",
+     "race": null
+    },
+    {
+     "where": "duel game 1 T7",
+     "hovered": 10,
+     "missing": [
+      "person-devAlice",
+      "item-devAlice-0",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-7",
+      "card-8",
+      "card-9"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "to the (i) right after ✓, mouse only",
+     "running": true,
+     "rested": "Dettagli: Broken Beer Bottle, oggetto di te, ruolo altro, copia 3",
+     "race": {
+      "afterClickMs": 95,
+      "viewAfterClickMs": 50
+     }
+    },
+    {
+     "where": "duel game 1 T8",
+     "hovered": 10,
+     "missing": [
+      "person-devAlice",
+      "item-devAlice-0",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-7",
+      "card-8",
+      "card-9"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "let it run",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T9",
+     "hovered": 9,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-7",
+      "card-8",
+      "card-9"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "tap",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T10",
+     "hovered": 9,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-8",
+      "card-9",
+      "card-10"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "skip",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T11",
+     "hovered": 10,
+     "missing": [
+      "person-devAlice",
+      "item-devAlice-0",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-9",
+      "card-10",
+      "card-11"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "card during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T12",
+     "hovered": 9,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-9",
+      "card-10",
+      "card-11"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "inspection during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T13",
+     "hovered": 9,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "item-ComPlayer_206-0",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-10",
+      "card-11",
+      "card-12"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "rest on the (i) through the close-ups",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T14",
+     "hovered": 8,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-11",
+      "card-12",
+      "card-13"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "rest on the (i) of the card sent",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T15",
+     "hovered": 8,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-12",
+      "card-13",
+      "card-14"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "rest on the (i) of an object",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "duel game 1 T16",
+     "hovered": 8,
+     "missing": [
+      "person-devAlice",
+      "person-ComPlayer_206",
+      "card-1",
+      "card-2",
+      "card-3",
+      "card-13",
+      "card-14",
+      "card-15"
+     ],
+     "wrong": [],
+     "pressed": 0,
+     "problems": [],
+     "action": "to the (i) right after ✓, mouse only",
+     "running": true,
+     "rested": null,
+     "race": {
+      "afterClickMs": 214,
+      "viewAfterClickMs": 44
+     }
+    }
+   ]
+  },
+  "infoFfa": {
+   "rounds": 12,
+   "lost": 12,
+   "firstLoss": {
+    "at": "ffa game 0 T1",
+    "action": "let it run",
+    "rested": null,
+    "missing": [],
+    "wrong": [
+     {
+      "hovered": "card-2",
+      "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+     },
+     {
+      "hovered": "card-5",
+      "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+     },
+     {
+      "hovered": "card-7",
+      "info": "Dettagli: PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, co"
+     }
+    ],
+    "problems": []
+   },
+   "newGameAfterLoss": null,
+   "byAction": {
+    "let it run": {
+     "rounds": 2,
+     "lost": 2
+    },
+    "tap": {
+     "rounds": 2,
+     "lost": 2
+    },
+    "skip": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "card during the sequence": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "inspection during the sequence": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "rest on the (i) through the close-ups": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "rest on the (i) of the card sent": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "rest on the (i) of an object": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "to the (i) right after ✓, mouse only": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "new game": {
+     "rounds": 1,
+     "lost": 1
+    }
+   },
+   "hovered": 168,
+   "pressed": 36,
+   "gaveWay": 0,
+   "rows": [
+    {
+     "where": "ffa game 0 T0",
+     "hovered": 12,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-4",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: FAI BASTA, AZIONE REGOLARE, ruolo contrasto, costo"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "new game"
+    },
+    {
+     "where": "ffa game 0 T1",
+     "hovered": 12,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-5",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, co"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "let it run",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T2",
+     "hovered": 13,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-6",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruol"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "tap",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T3",
+     "hovered": 15,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: ORMALE GUARIAMOTI, AZIONE REGOLARE, ruolo danno, c"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "skip",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T4",
+     "hovered": 14,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-7",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: ORMALE GUARIAMOTI, AZIONE REGOLARE, ruolo danno, c"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "card during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T5",
+     "hovered": 14,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-8",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-10",
+       "info": "Dettagli: NON GIOCARE COL COLTELLO NO, AZIONE REGOLARE, ruol"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "inspection during the sequence",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T6",
+     "hovered": 14,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-9",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-11",
+       "info": "Dettagli: COSA FAI NON É UNA DOMANDA, AZIONE REGOLARE, ruolo"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) through the close-ups",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T7",
+     "hovered": 15,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-10",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-12",
+       "info": "Dettagli: FAI BASTA, AZIONE REGOLARE, ruolo contrasto, costo"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) of the card sent",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T8",
+     "hovered": 15,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-11",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-13",
+       "info": "Dettagli: GARGANTUESCO IMPATTO SUL TU, AZIONE REGOLARE, ruol"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "rest on the (i) of an object",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T9",
+     "hovered": 15,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-12",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-14",
+       "info": "Dettagli: SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruol"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "to the (i) right after ✓, mouse only",
+     "running": true,
+     "rested": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "race": {
+      "afterClickMs": 195,
+      "viewAfterClickMs": 87
+     }
+    },
+    {
+     "where": "ffa game 0 T10",
+     "hovered": 14,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-13",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-15",
+       "info": "Dettagli: GABBIANO DUNQUE VOLIAMOTI, AZIONE REGOLARE, ruolo "
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "let it run",
+     "running": true,
+     "rested": null,
+     "race": null
+    },
+    {
+     "where": "ffa game 0 T11",
+     "hovered": 15,
+     "missing": [],
+     "wrong": [
+      {
+       "hovered": "card-2",
+       "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+      },
+      {
+       "hovered": "card-14",
+       "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+      },
+      {
+       "hovered": "card-16",
+       "info": "Dettagli: BELLO IL TUO GIOCATTOLO SI, AZIONE REGOLARE, ruolo"
+      }
+     ],
+     "pressed": 3,
+     "problems": [],
+     "action": "tap",
+     "running": true,
+     "rested": null,
+     "race": null
+    }
+   ]
+  }
+ },
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "infoDuel": {
+   "rounds": 28,
+   "lost": 28,
+   "firstLoss": {
+    "at": "duel game 0 T1",
+    "action": "let it run",
+    "rested": null,
+    "missing": [],
+    "wrong": [
+     {
+      "hovered": "card-2",
+      "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+     },
+     {
+      "hovered": "card-5",
+      "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+     },
+     {
+      "hovered": "card-7",
+      "info": "Dettagli: STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno"
+     }
+    ],
+    "problems": []
+   },
+   "newGameAfterLoss": {
+    "missing": 0,
+    "hovered": 8
+   },
+   "byAction": {
+    "let it run": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "tap": {
+     "rounds": 2,
+     "lost": 2
+    },
+    "skip": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "card during the sequence": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "inspection during the sequence": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "rest on the (i) through the close-ups": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "rest on the (i) of the card sent": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "rest on the (i) of an object": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "to the (i) right after ✓, mouse only": {
+     "rounds": 3,
+     "lost": 3
+    },
+    "new game": {
+     "rounds": 2,
+     "lost": 2
+    }
+   },
+   "hovered": 252,
+   "pressed": 42
+  },
+  "infoFfa": {
+   "rounds": 12,
+   "lost": 12,
+   "firstLoss": {
+    "at": "ffa game 0 T1",
+    "action": "let it run",
+    "rested": null,
+    "missing": [],
+    "wrong": [
+     {
+      "hovered": "card-2",
+      "info": "Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,"
+     },
+     {
+      "hovered": "card-5",
+      "info": "Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo"
+     },
+     {
+      "hovered": "card-7",
+      "info": "Dettagli: PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, co"
+     }
+    ],
+    "problems": []
+   },
+   "byAction": {
+    "let it run": {
+     "rounds": 2,
+     "lost": 2
+    },
+    "tap": {
+     "rounds": 2,
+     "lost": 2
+    },
+    "skip": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "card during the sequence": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "inspection during the sequence": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "rest on the (i) through the close-ups": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "rest on the (i) of the card sent": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "rest on the (i) of an object": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "to the (i) right after ✓, mouse only": {
+     "rounds": 1,
+     "lost": 1
+    },
+    "new game": {
+     "rounds": 1,
+     "lost": 1
+    }
+   },
+   "hovered": 168,
+   "pressed": 36
+  },
+  "reportConsistency": {
+   "rounds": 0,
+   "sumOk": 0,
+   "chainOk": 0
+  },
+  "casesOnRealServer": {
+   "seen": {},
+   "missing": [
+    "void",
+    "itemConsumed",
+    "itemFromOther",
+    "drawnToTable",
+    "death",
+    "deathWithMove",
+    "lethalEndOfTurn",
+    "boundDiscard",
+    "over",
+    "jump",
+    "rejoinSame"
+   ]
+  }
+ },
+ "errors": [],
+ "reportConsistency": {
+  "rounds": 0,
+  "sumOk": 0,
+  "chainOk": 0,
+  "unknownCost": 0,
+  "failures": []
+ },
+ "ok": false,
+ "failure": "AssertionError [ERR_ASSERTION]: info: the (i) or the inspection lost at {\"at\":\"duel game 0 T1\",\"action\":\"let it run\",\"rested\":null,\"missing\":[],\"wrong\":[{\"hovered\":\"card-2\",\"info\":\"Dettagli: ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —,\"},{\"hovered\":\"card-5\",\"info\":\"Dettagli: LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo\"},{\"hovered\":\"card-7\",\"info\":\"Dettagli: STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno\"}],\"problems\":[]}\n\n28 !== 0\n\n    at file:///E:/bm/client-web/tools/verify-resolution.mjs:720:76"
+}

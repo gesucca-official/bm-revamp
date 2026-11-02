@@ -15,6 +15,9 @@
 //    sequence that no view interrupts; the static summary of the round is on the table at the next choice; after a
 //    jump no sequence, no summary and the line of the resolved turns. Scenario `interrupt`: «Salta effetti», a tap,
 //    a card chosen during the sequence (rule 4) and a hidden tab (K5).
+// C3-4s: every card of the previous round leaves the middle for its pile (R02), every bound's extra card and every draw flies, every object gone or
+// appeared moves with a flight, counted against the facts of the wire views; every label stays readable for LABEL.read ms and no two visible labels overlap.
+// Scenarios `info`, `infoFfa`, `infoTouch`: the (i) and the inspection at every round of long games, after every interruption.
 // BM_RECORD=1 also writes the real view pairs used by tests/resolution.test.ts (tests/resolution-views.json).
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
 // BM_SERVER_PORT runs the temporary server on another port (with a preview on BM_PORT proxying to it via BM_SERVER).
@@ -25,7 +28,7 @@ import {createWriteStream,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
-import {resolve,mismatches,timeline,beats,directionProblems,BEATS,PACE} from '../src/resolution.ts';
+import {resolve,mismatches,timeline,beats,directionProblems,seatMarks,BEATS,PACE,LABEL} from '../src/resolution.ts';
 import {overlap,inside} from '../src/readability.ts';
 
 const repo=resolvePath(import.meta.dirname,'../..');
@@ -102,7 +105,7 @@ async function joinFfa(p){await p.page.getByRole('radio',{name:'Tutti contro tut
 async function addComputers(p,n){for(let i=0;i<n;i++){const before=(await list(p)).length;await p.page.getByTestId('add-computer').click();if(before+1<5)await waitList(p,before+1);}}
 
 // One move through the UI, as in VerifyFfa; `prefer` orders the hand (synthetic decks aim at the rare cases).
-async function playOne(p,prefer){
+async function playOne(p,prefer,confirm){
  const {page}=p,esc=()=>page.keyboard.press('Escape');
  const tap=async h=>{const c=h.kind==='hand'?{x:h.x-h.w*.22,y:h.y}:h.kind==='person'?{x:h.x,y:h.y+h.h*.15}:{x:h.x-h.w*.2,y:h.y};await page.mouse.click(c.x,c.y);await page.waitForTimeout(60);if(await dialogOpen(p)){await esc();await page.waitForTimeout(60);}};
  const moves=()=>p.sends().filter(d=>/\/app\/game\/[^/]+\/move$/.test(d)).length;
@@ -118,7 +121,7 @@ async function playOne(p,prefer){
   const s=await p.state();
   if(s.message.includes('scartare')){let ok=false;for(const r of s.hits.filter(h=>h.kind==='hand'&&h.id!==card.key)){await tap(r);if((await p.state()).discard){ok=true;break;}}if(!ok){await esc();continue;}}
   if(!(await page.getByTestId('confirm').isEnabled())){await esc();continue;}
-  const before=moves();await page.getByTestId('confirm').click();
+  const before=moves();if(confirm)await confirm(card);else await page.getByTestId('confirm').click();
   const r=await p.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
   assert.equal(moves()-before,1,`${p.name}: one SEND per confirmation`);
   if(r&&r.phase==='choose'&&r.message.startsWith('Rifiutata')&&r.turn===s.turn){await esc();continue;}
@@ -299,7 +302,7 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
   // C3-4 revision: the beats of the first card of one sequence (D13: cost, author close-up, flight, target close-up, changes)
   // and the tail, captured while it runs.
   if(n===3){const t0=Date.now(),plan=(await p.state())?.stats.sequencePlans.at(-1);if((await p.state())?.sequence.running&&plan?.pace?.moves.length){const c=plan.pace.moves[0];
-   const beats=[...(c.cost.dur?[['cost',c.cost.at+c.cost.dur*.6]]:[]),['author',c.author.at+c.author.dur*.6],['flight',c.flight.at+c.flight.dur*.5],['target',c.target.at+c.target.dur*.5],...(c.changes.dur?[['changes',c.changes.at+c.changes.dur*.5]]:[]),['tail',plan.total-500]];
+   const beats=[...(plan.pace.clear?[['clear',plan.pace.clear.at+plan.pace.clear.dur*.5]]:[]),...(c.cost.dur?[['cost',c.cost.at+c.cost.dur*.6]]:[]),['author',c.author.at+c.author.dur*.6],['flight',c.flight.at+c.flight.dur*.5],['target',c.target.at+c.target.dur*.5],...(c.changes.dur?[['changes',c.changes.at+c.changes.dur*.5]]:[]),...(plan.pace.draws?[['draws',plan.pace.draws.at+plan.pace.draws.dur*.5]]:[]),['tail',plan.total-500]];
    for(const [name,at] of beats){const wait=at-(Date.now()-t0);if(wait>0)await p.page.waitForTimeout(wait);if(!(await p.state())?.sequence.running)break;await p.shot(`${shots}-sequence-${name}`);}}}
   // Let the round's sequence run to its end (up to the 20 s cap, D10), so that its completion is measured.
   await p.wait(x=>!x||!x.sequence?.running,22000,'sequence end').catch(()=>{});
@@ -364,17 +367,36 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
   if(!inside(c.box,vw,vh)||(target&&!inside(target,vw,vh)))d13.push(`${c.key} card ${c.move}: close-up off the screen`);
   if(covers)d13.push(`${c.key} card ${c.move}: author close-up covers ${covers} boxes of other seats`);
   if(targetCovers)d13.push(`${c.key} card ${c.move}: target close-up covers ${targetCovers} other characters`);}
+ // C3-4s: flights against the facts recomputed on the wire views, for every sequence; what was seen and how long labels lasted, for those let run to the end.
+ const c4s=[],flownRows=[],labelMs=[];
+ for(const x of r.stats.flown??[]){const turn=Number(x.key.split('/').pop()),prev=p.views(game).filter(v=>v.turn===turn-1).at(-1),next=p.views(game).filter(v=>v.turn===turn)[0];if(!prev||!next){c4s.push(`${x.key}: wire views missing`);continue;}
+  const f=resolve(prev,next,p.user,cat),T=timeline(prev,next,f,cat),seats=Object.values(f.seats),byName=new Map(cat.map(c=>[c.name,c])),end=endOf[x.key];
+  const toHand=prev.resolvedMoves.filter(m=>{const c=byName.get(m.playedCardName);return c&&(c.basicAction||c.characterBound);}).length;
+  const want={clear:prev.resolvedMoves.length,toPile:prev.resolvedMoves.length-toHand,toHand,discard:f.moves.filter(m=>m.discard&&!m.void).length,itemOut:seats.reduce((n,o)=>n+o.itemsGone.length,0),itemIn:seats.reduce((n,o)=>n+o.itemsAppeared.length,0),
+   drawHand:f.seats[p.user]?.handArrived?.length??0,drawBack:Object.entries(f.seats).filter(([id])=>id!==p.user).reduce((n,[,o])=>n+Math.max(0,o.deck.before-o.deck.after),0)-T.draws.filter(d=>d.seat!==p.user&&d.to==='table').length};
+  const got={clear:x.built.clear,toPile:x.toPile,toHand:x.toHand,discard:x.built.discard,itemOut:x.built.itemOut,itemIn:x.built.itemIn,drawHand:x.built.drawHand,drawBack:x.built.drawBack};
+  for(const k of Object.keys(want))if(want[k]!==got[k])c4s.push(`${x.key}: ${k} ${got[k]} flights, facts ${want[k]}`);
+  const names=v=>Object.fromEntries(Object.entries(v.players).map(([id,o])=>[id,o.character.items.map(c=>c.name)])),sorted=o=>JSON.stringify(Object.keys(o).sort().map(k=>[k,[...o[k]].sort()]));
+  if(sorted(x.itemsStart)!==sorted(names(prev)))c4s.push(`${x.key}: objects at the start ${sorted(x.itemsStart)}, previous view ${sorted(names(prev))}`);
+  const whole=end?.reason==='complete'&&!x.advanced,labels=(r.stats.labels??[]).filter(l=>l.key===x.key);
+  if(whole){for(const k of Object.keys(x.built))if(x.seen[k]!==x.built[k])c4s.push(`${x.key}: ${k} built ${x.built[k]}, seen ${x.seen[k]}`);
+   if(x.itemsEnd&&sorted(x.itemsEnd)!==sorted(names(next)))c4s.push(`${x.key}: objects at the end ${sorted(x.itemsEnd)}, view ${sorted(names(next))}`);
+   const b=(r.stats.beats??[]).find(y=>y.key===x.key);if(b&&labels.length!==b.pops)c4s.push(`${x.key}: ${labels.length} labels for ${b.pops} changes`);
+   for(const l of labels){labelMs.push(l.readable);if(l.readable<LABEL.read-50)c4s.push(`${x.key}: label ${l.seat} ${l.resource} readable ${l.readable} ms`);if(!inside(l.box,vw,vh))c4s.push(`${x.key}: label ${l.seat} ${l.resource} off the screen`);}}
+  labels.forEach((a,i)=>labels.slice(i+1).forEach(o=>{if(a.to>o.from&&o.to>a.from&&overlap(a.box,o.box)>0)c4s.push(`${x.key}: labels ${a.seat} ${a.resource} and ${o.seat} ${o.resource} overlap`);}));
+  flownRows.push({key:x.key,end:end?.reason??null,advanced:x.advanced,...got,vanished:T.vanished.length,appeared:T.appeared.length,labels:labels.length,minReadable:labels.length?Math.min(...labels.map(l=>l.readable)):null});
+  if(T.vanished.length)seen('objectVanished',x.key);if(T.appeared.length)seen('objectAppeared',x.key);if(want.toHand)seen('clearToHand',x.key);if(want.discard)seen('boundDiscardFlown',x.key);}
  for(const f of r.finals){if(!f.turn)continue;const key=`${game}/${f.turn}`,facts=relation[key];if(!facts)continue;
   if(facts.relation==='next'&&!f.summary)c32.push(`${key}: no static summary at the choice`);
   if(facts.relation==='next'&&f.summary&&(f.summary.key!==key||f.summary.seats!==Object.keys(facts.seats).length))c32.push(`${key}: summary of ${f.summary.key} with ${f.summary.seats} seats`);
   if(facts.relation!=='next'&&f.summary)c32.push(`${key}: summary after a ${facts.relation}`);}
  const jumps=(r.log??[]).filter(e=>e.facts.relation==='jump').map(e=>e.facts.key);
- const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32,c34,d13};
+ const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32,c34,d13,c4s};
  evidence.games[label]={timerOrderOnly:a.timerOrderOnly,noValidMove:r.noValidMove??null,gameId:game,turnsSeen:a.turns,views:a.views,rows:a.rows,client:a.client,watched:r.watched,outcome:{over:r.end.over,winner:r.end.winner,eliminated:r.end.eliminated}};
  evidence.scene[label]={rules:Object.fromEntries(Object.entries(sceneRules).map(([k,v])=>[k,{ok:!v.length,violations:v}])),
-  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34,closeUps};
+  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34,closeUps,flown:flownRows,labelReadable:labelMs.length?{labels:labelMs.length,min:Math.min(...labelMs),max:Math.max(...labelMs)}:null};
  step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`,ends:Object.entries(ends.reduce((m,e)=>(m[e.reason]=(m[e.reason]??0)+1,m),{})).map(([k,v])=>`${k} ${v}`).join(', '),msComplete:ends.filter(e=>e.reason==='complete').map(e=>e.ms),
-  bars:`${rounds34.filter(x=>x.bars==='per-card').length} per card, ${rounds34.filter(x=>x.bars==='total').length} total`,cards:(r.stats.schedule??[]).length,closeUps:`${closeUps.filter(c=>c.placed==='middle').length} middle, ${closeUps.filter(c=>c.placed!=='middle').length} in the seat`,drift:rounds34.reduce((n,x)=>n+(x.drift??0),0),notes:r.notes});
+  bars:`${rounds34.filter(x=>x.bars==='per-card').length} per card, ${rounds34.filter(x=>x.bars==='total').length} total`,cards:(r.stats.schedule??[]).length,closeUps:`${closeUps.filter(c=>c.placed==='middle').length} middle, ${closeUps.filter(c=>c.placed!=='middle').length} in the seat`,drift:rounds34.reduce((n,x)=>n+(x.drift??0),0),flown:flownRows.reduce((m,x)=>{for(const k of ['clear','toPile','toHand','discard','itemOut','itemIn','drawHand','drawBack','vanished','appeared'])m[k]=(m[k]??0)+x[k];return m;},{}),labelReadable:evidence.scene[label].labelReadable,notes:r.notes});
  assert.deepEqual(a.problems,[],`${label}: model problems`);
  for(const [k,v] of Object.entries(sceneRules))assert.deepEqual(v,[],`${label}: scene rule ${k}`);
  if(jumps.length)assert.ok((r.notes??[]).some(t=>t.includes('Risolti')),`${label}: line of the resolved turns after a jump`);
@@ -418,7 +440,7 @@ try{
   const game=readyId(A,/quick\/1vCom\/ready$/),rounds=[];
   for(let i=0;i<3;i++){const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');if(s.over||s.eliminated)break;
    await playOne(A);const t=await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');await A.page.waitForTimeout(300);
-   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast});void t;}
+   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast,flown:st.stats.flown.length,flights:st.stats.flights,labels:st.stats.labels.length,marks:(()=>{const mk=f?seatMarks({facts:f,crossed:false}):null;return mk?Object.values(mk).map(l=>l.map(m=>m.text).join(' ')||'invariato'):null;})()});void t;}
   await A.shot('reduced-motion');
   const st=await A.state();
   if(!st.over&&!st.eliminated){await A.page.keyboard.press('Escape');await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}
@@ -426,7 +448,9 @@ try{
   await A.page.emulateMedia({reducedMotion:'no-preference'});
   evidence.scene.reduced={gameId:game,rounds};
   // C3-2 (K3 fixed): no sequence, and the static summary of every round on the table.
-  for(const x of rounds){assert.equal(x.sequences,0,'reduced motion: no sequence');assert.equal(x.summaryKey,x.expectedKey,`reduced motion: summary of turn ${x.turn}`);}
+  for(const x of rounds){assert.equal(x.sequences,0,'reduced motion: no sequence');assert.equal(x.summaryKey,x.expectedKey,`reduced motion: summary of turn ${x.turn}`);
+   // C3-4s: no flight and no label; the same content (changes and objects gone and appeared per seat, as the model gives them) in the static summary.
+   assert.equal(x.flown+x.flights+x.labels,0,'reduced motion: no flights');assert.deepEqual([...x.summary].sort(),[...x.marks].sort(),`reduced motion: summary of turn ${x.turn} as the model`);}
   step('reducedMotion',evidence.scene.reduced);
  }
 
@@ -470,6 +494,108 @@ try{
    const left=await A.state();if(!left.over&&!left.eliminated){await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}else await toHub(A);
   }else await toHub(A);
   evidence.scene.interrupt={gameId:game,...out};step('interruptions',out);
+ }
+
+ // C3-4s (owner's report, point 4): the (i) button and the inspection at EVERY round of long games, after everything that can leave a
+ // state behind: a sequence let run, taps, «Salta effetti», a card chosen and an inspection during the sequence, a pointer resting on the (i)
+ // during the close-ups, a pointer resting on the (i) of a card or object that leaves the table when the view arrives. Every card of the hand
+ // (and one object and one character per seat) is hovered and must get its (i); one (i) per kind is pressed and must open the inspection.
+ // Failures are collected, not fatal at once: the evidence says at which round and after which action the (i) was lost.
+ const infoButton=p=>p.page.locator('[data-testid=info]');
+ async function infoLabel(p,ms=450){const end=Date.now()+ms;while(Date.now()<end){if(await infoButton(p).count())return await infoButton(p).first().getAttribute('aria-label').catch(()=>null);await p.page.waitForTimeout(25);}return null;}
+ const spotFree=async(p,s)=>{for(let y=vh*.1;y<vh*.62;y+=vh*.03)for(let x=vw*.2;x<vw*.9;x+=vw*.03){if(s.hits.some(h=>Math.abs(x-h.x)<h.w/2+24&&Math.abs(y-h.y)<h.h/2+24))continue;if(await p.page.evaluate(([x,y])=>document.elementFromPoint(x,y)?.tagName==='CANVAS',[x,y]))return {x,y};}return {x:vw*.5,y:6};};
+ // A point of a hit no other hit covers (the fan overlaps to the right; objects overlap in the FFA).
+ const visiblePoint=(h,hits)=>{const hand=hits.filter(o=>o.kind==='hand');
+  for(const [dx,dy] of [[-.3,.1],[-.2,.3],[-.35,.35],[-.1,.2],[0,0],[.25,.3],[0,-.3]]){const c=Math.cos(h.angle),s=Math.sin(h.angle),ax=h.w*dx,ay=h.h*dy,pt={x:h.x+ax*c-ay*s,y:h.y+ax*s+ay*c};
+   const over=hits.filter(o=>o!==h&&(o.kind!=='hand'||h.kind!=='hand'||hand.indexOf(o)>hand.indexOf(h)));
+   if(!over.some(o=>Math.abs(pt.x-o.x)<o.w/2+4&&Math.abs(pt.y-o.y)<o.h/2+4))return pt;}return null;};
+ async function probeMouse(p,where){
+  const out={where,hovered:0,missing:[],stuck:[],neighbours:0,pressed:0,problems:[]},s=await p.state(),given={};
+  if(!s||await dialogOpen(p)){out.problems.push('no table');return out;}
+  const rest=await spotFree(p,s);await p.page.mouse.move(rest.x,rest.y);await p.page.waitForTimeout(190);
+  const seats=new Set(),pick=s.hits.filter(h=>{if(h.kind==='hand')return true;if(h.kind==='status')return false;const k=`${h.kind}-${h.target.owner}`;if(seats.has(k))return false;seats.add(k);return true;});
+  // From the free spot each time: a raised card keeps the hover while the pointer slides within its width.
+  for(const h of pick){const pt=visiblePoint(h,s.hits);if(!pt)continue;await p.page.mouse.move(rest.x,rest.y);await p.page.waitForTimeout(20);await p.page.mouse.move(pt.x,pt.y);out.hovered++;const label=await infoLabel(p);
+   if(!label)out.missing.push(h.id);else if(!s.hits.some(x=>label===`Dettagli: ${x.label}`))out.problems.push(`${h.id}: (i) of an unknown hit: ${label}`);else{if(label!==`Dettagli: ${h.label}`)out.neighbours++;(given[label]??=new Set()).add(h.id);}}
+  // A pointer on a card may meet the neighbour raised over it or its (i), which is fine; the same (i) for several different things is an (i) left stuck.
+  for(const [label,on] of Object.entries(given))if(on.size>=3)out.stuck.push({info:label.slice(0,70),hovered:[...on]});
+  // One (i) per kind opens the inspection of what it names, and the table comes back.
+  for(const kind of ['hand','item','person']){const h=pick.find(x=>x.kind===kind);if(!h)continue;const pt=visiblePoint(h,s.hits);if(!pt)continue;await p.page.mouse.move(pt.x,pt.y);if(!await infoLabel(p))continue;
+   await infoButton(p).first().click();await p.page.waitForTimeout(60);if(!await dialogOpen(p)||!await p.page.locator('dialog .inspection').count()){out.problems.push(`${kind}: the (i) opens no inspection`);continue;}
+   out.pressed++;await p.page.keyboard.press('Escape');await p.page.waitForTimeout(60);if(await dialogOpen(p))out.problems.push(`${kind}: the inspection does not close`);}
+  const back=await spotFree(p,await p.state());await p.page.mouse.move(back.x,back.y);await p.page.waitForTimeout(190);
+  return out;
+ }
+ // Touch (iPhone emulated): a tap chooses a hand card and shows its (i), a tap on it opens the inspection. `gave`: the (i) of a chosen card
+ // gave way to a character or object under it (C3-L) and the card has no way to be read while it stays chosen.
+ async function probeTouch(p,where){
+  const out={where,tapped:0,missing:[],gave:[],pressed:0,problems:[]},s=await p.state();
+  if(!s||await dialogOpen(p)){out.problems.push('no table');return out;}
+  for(const h of s.hits.filter(x=>x.kind==='hand')){const pt=visiblePoint(h,s.hits);if(!pt)continue;await p.page.touchscreen.tap(pt.x,pt.y);await p.page.waitForTimeout(90);out.tapped++;
+   if(await dialogOpen(p)){await p.page.keyboard.press('Escape');await p.page.waitForTimeout(60);continue;}
+   const label=await infoLabel(p,300),now=await p.state();
+   if(!label)(now.selected===h.id?out.gave:out.missing).push(h.id);
+   else if(out.pressed<1){const b=await infoButton(p).first().boundingBox();await p.page.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);await p.page.waitForTimeout(120);if(await dialogOpen(p)&&await p.page.locator('dialog .inspection').count()){out.pressed++;await p.page.keyboard.press('Escape');await p.page.waitForTimeout(60);}else out.problems.push(`${h.id}: the (i) opens no inspection`);}
+   await p.page.keyboard.press('Escape');await p.page.waitForTimeout(50);}
+  return out;
+ }
+ // What happens during the round before the probes. The last two send with Enter on ✓, the pointer left on an (i).
+ const ACTIONS=['let it run','tap','skip','card during the sequence','inspection during the sequence','rest on the (i) through the close-ups','rest on the (i) of the card sent','rest on the (i) of an object','to the (i) right after ✓, mouse only'];
+ const restOn=async p=>{const label=await infoLabel(p,200);if(label){const b=await infoButton(p).first().boundingBox();await p.page.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.page.waitForTimeout(40);}return label;};
+ const enterOnConfirm=async p=>{await p.page.getByTestId('confirm').focus();await p.page.keyboard.press('Enter');};
+ async function infoGames(p,label,{start,games=2,maxRounds=16,touch=false}){
+  const rows=[],probe=touch?probeTouch:probeMouse;let firstLoss=null,round=0,newGameAfterLoss=null;
+  const failed=r=>r.missing.length||r.problems.length||r.stuck?.length;
+  for(let g=0;g<games;g++){await start();await table(p);
+   const fresh=await probe(p,`${label} game ${g} T0`);rows.push({...fresh,action:'new game'});if(firstLoss&&newGameAfterLoss===null)newGameAfterLoss={missing:fresh.missing.length,hovered:fresh.hovered??fresh.tapped};
+   for(let n=0;n<maxRounds;n++){
+    const s=await p.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');if(s.over||s.eliminated)break;
+    const chosen=ACTIONS[round%ACTIONS.length],action=touch&&chosen.startsWith('rest')?'let it run':chosen;round++;
+    let confirm=null,rested=null,race=null;
+    if(action==='rest on the (i) of the card sent')confirm=async()=>{rested=await restOn(p);await enterOnConfirm(p);};
+    if(action==='rest on the (i) of an object')confirm=async()=>{const st=await p.state(),it=st.hits.filter(x=>x.kind==='item').at(-1),pt=it&&visiblePoint(it,st.hits);if(pt){await p.page.mouse.move(pt.x,pt.y);rested=await restOn(p);}await enterOnConfirm(p);};
+    // The only way with the mouse alone: ✓ pressed, then straight onto the (i) of what the round may remove, as fast as the tool can.
+    if(action==='to the (i) right after ✓, mouse only')confirm=async card=>{const st=await p.state(),it=st.hits.filter(x=>x.kind==='item'&&x.target.owner===st.me).at(-1)??st.hits.find(x=>x.id===card.key),pt=it&&visiblePoint(it,st.hits);const from=p.received?.length??0;await p.page.getByTestId('confirm').click();const t0=Date.now();if(pt){await p.page.mouse.move(pt.x,pt.y);rested=await restOn(p);}
+     const view=(p.received??[]).slice(from).find(f=>f.command==='MESSAGE'&&/\/view$/.test(f.headers.destination));race={afterClickMs:Date.now()-t0,viewAfterClickMs:view?view.at-t0:null};};
+    try{await playOne(p,null,confirm);}catch(e){if(!String(e).includes('no playable card'))throw e;rows.push({where:`${label} T${s.turn}`,action,noValidMove:true,missing:[],problems:[]});break;}
+    const t=await p.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');if(!t)break;
+    const st=await p.state(),running=st.sequence.running,at=`${label} game ${g} T${st.turn}`;
+    if(running){const h=st.hits.find(x=>x.kind==='hand'),pt=h&&visiblePoint(h,st.hits);
+     if(action==='tap')for(let k=0;k<2;k++){const e=await spotFree(p,await p.state());if(touch)await p.page.touchscreen.tap(e.x,e.y);else await p.page.mouse.click(e.x,e.y);await p.page.waitForTimeout(80);}
+     if(action==='skip'){await p.page.getByLabel('Apri menu').click();await p.page.getByRole('button',{name:'Salta effetti'}).click();}
+     if(action==='card during the sequence'&&pt){if(touch)await p.page.touchscreen.tap(pt.x,pt.y);else await p.page.mouse.click(pt.x,pt.y);await p.page.waitForTimeout(80);await p.page.keyboard.press('Escape');}
+     if(action==='inspection during the sequence'&&pt&&!touch){await p.page.mouse.move(pt.x,pt.y);if(await infoLabel(p)){await infoButton(p).first().click();await p.page.waitForTimeout(250);await p.page.keyboard.press('Escape');}}
+     if(action==='rest on the (i) through the close-ups'&&pt){await p.page.mouse.move(pt.x,pt.y);await restOn(p);}
+    }
+    await p.wait(x=>!x||!x.sequence?.running,23000,'sequence end').catch(()=>{});await p.page.waitForTimeout(60);
+    const now=await p.state();if(!now||now.over||now.eliminated)break;
+    const r=await probe(p,at);rows.push({...r,action,running,rested,race});
+    if(failed(r)){console.log('INFO LOST',JSON.stringify({at,action,rested,race,missing:r.missing,stuck:r.stuck,problems:r.problems}));if(!firstLoss){firstLoss={at,action,rested,missing:r.missing,stuck:r.stuck,problems:r.problems};await p.shot(`info-lost-${label}`);}}
+   }
+   const left=await p.state();
+   if(left?.over||left?.eliminated){const hub=p.page.getByRole('button',{name:'Torna all’hub'});if(await hub.count())await hub.first().click();else await p.page.goto(`${url}#/`);await p.page.getByTestId('quick').waitFor({timeout:15000});}
+   else{await p.page.keyboard.press('Escape');await p.page.getByLabel('Apri menu').click();await p.page.getByRole('button',{name:'Abbandona la partita'}).click();await p.page.getByRole('button',{name:'Sì, abbandona'}).click();await p.page.getByTestId('quick').waitFor({timeout:15000});}
+  }
+  const lost=rows.filter(failed);
+  return {rounds:rows.length,lost:lost.length,firstLoss,newGameAfterLoss,byAction:Object.fromEntries([...ACTIONS,'new game'].map(a=>[a,{rounds:rows.filter(r=>r.action===a).length,lost:rows.filter(r=>r.action===a&&failed(r)).length}])),hovered:rows.reduce((n,r)=>n+(r.hovered??r.tapped??0),0),pressed:rows.reduce((n,r)=>n+(r.pressed??0),0),gaveWay:rows.reduce((n,r)=>n+(r.gave?.length??0),0),rows};
+ }
+ const startDuel=p=>async()=>{await p.page.getByRole('radio',{name:'Contro il computer'}).click();await p.page.getByTestId('quick').click();};
+ if(run('info')){
+  const r=await infoGames(A,'duel',{start:startDuel(A)});evidence.scene.info=r;step('infoDuel',{rounds:r.rounds,lost:r.lost,firstLoss:r.firstLoss,newGameAfterLoss:r.newGameAfterLoss,byAction:r.byAction,hovered:r.hovered,pressed:r.pressed});
+ }
+ if(run('infoFfa')){
+  const r=await infoGames(A,'ffa',{start:async()=>{await joinFfa(A);await waitList(A,1);await addComputers(A,4);},games:1});evidence.scene.infoFfa=r;step('infoFfa',{rounds:r.rounds,lost:r.lost,firstLoss:r.firstLoss,byAction:r.byAction,hovered:r.hovered,pressed:r.pressed});
+ }
+ // iPhone emulated: touch, no hover, 844×390, on its own context with the other account.
+ if(run('infoTouch')){
+  const phone=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:2}),page=await phone.newPage();page.on('pageerror',e=>evidence.errors.push(`touch: ${e}`));
+  const T={name:'T',user:accounts.B.user,password:accounts.B.password,page,context:phone,sent:[],received:[]};
+  page.on('websocket',ws=>{ws.on('framesent',f=>T.sent.push(...stompFrames(f.payload)));});
+  T.state=()=>page.evaluate(()=>window.__bm?.state??null);T.wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await T.state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`T: timeout ${what}`);};
+  T.shot=async n=>page.screenshot({path:`${out}/screens/resolution-${n}-touch.jpg`,type:'jpeg',quality:70});T.sends=(from=0)=>T.sent.slice(from).filter(f=>f.command==='SEND').map(f=>f.headers.destination);
+  await login(T);
+  const r=await infoGames(T,'touch',{start:startDuel(T),games:2,touch:true});evidence.scene.infoTouch=r;step('infoTouch',{rounds:r.rounds,lost:r.lost,firstLoss:r.firstLoss,byAction:r.byAction,tapped:r.hovered,pressed:r.pressed,gaveWay:r.gaveWay});
+  await phone.close();
  }
 
  // 2. FFA: devAlice and four computers to the outcome, watching after the own death (a jump may follow).
@@ -528,7 +654,8 @@ try{
    if(sa.over||sb.over||sa.eliminated||sb.eliminated)break;
    finals.push({turn:sa.turn,problems:finalState(sa,lastView(A,sa.turn)),summary:sa.summary?{key:sa.summary.key,seats:Object.keys(sa.summary.seats).length,texts:Object.values(sa.summary.seats).map(x=>x.texts.join(' '))}:null,running:sa.sequence.running});
    if(i===1){await A.shot('humans-choice');await B.shot('humans-choice');}
-   await Promise.all([playOne(A),playOne(B)]);
+   // R03: a human without a valid move cannot pass (known limit): the round cannot be played, the measure stops there.
+   try{await Promise.all([playOne(A),playOne(B)]);}catch(e){if(!String(e).includes('no playable card'))throw e;seen('noValidMove',`humans T${sa.turn}`);await A.page.keyboard.press('Escape');await B.page.keyboard.press('Escape');break;}
    const row=await Promise.all([A,B].map(async p=>{await p.wait(x=>!x||x.over||x.turn!==sa.turn,60000,'resolved');
     if(i===1)await p.page.waitForTimeout(1800).then(()=>p.shot('humans-sequence'));
     await p.wait(x=>!x||!x.sequence?.running,22000,'sequence end').catch(()=>{});const clock=await clockOf(p),st=await p.state();
@@ -594,6 +721,7 @@ try{
  evidence.cases=cases;
  const wanted=['void','itemConsumed','itemFromOther','drawnToTable','death','deathWithMove','lethalEndOfTurn','boundDiscard','over','jump','rejoinSame'];
  step('casesOnRealServer',{seen:Object.fromEntries(Object.entries(cases).map(([k,v])=>[k,v.length])),missing:wanted.filter(k=>!cases[k])});
+ for(const k of ['info','infoFfa','infoTouch'])if(evidence.scene[k])assert.equal(evidence.scene[k].lost,0,`${k}: the (i) or the inspection lost at ${JSON.stringify(evidence.scene[k].firstLoss)}`);
  assert.deepEqual(evidence.errors,[],'no page errors');
  evidence.ok=true;
 }catch(e){evidence.ok=false;evidence.failure=String(e?.stack??e);console.error(e);

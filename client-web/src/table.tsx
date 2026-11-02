@@ -59,7 +59,7 @@ export function Table({session,model}:{session:Session;model:Model}){
  const dead=!view.over&&!!view.players[me]?.character.dead&&!view.forfeits[me],panel=finished&&!(dead&&watching);
  // (i) on the hovered card (mouse), else on the selected or focused hand card (touch, keyboard).
  // Top-left corner: in the fan each card covers the right side of the previous one.
- const infoId=table?.drag||modal?null:overInfo??[hover,model.selected,table?.focused].find(x=>x&&!x.startsWith('status-'))??null,infoHit=hits.find(h=>h.id===infoId);
+ const infoId=table?.drag||modal?null:overInfo??[hover,model.selected,table?.focused].find(x=>x&&!x.startsWith('status-'))??null,infoHit=hits.find(h=>h.id===infoId&&!h.hidden);
  // Status summary on hover, tap or focus: a short card above the chip, inside the viewport.
  const tip=modal||table?.drag?null:table?.statusShown??null;
  // The confirmation controls win over a nearby (i): it never covers ✓ or ×.
@@ -68,6 +68,9 @@ export function Table({session,model}:{session:Session;model:Model}){
  // C3-L: with a card chosen, an (i) that would lie on a character or object of the table gives way too, so a click there aims.
  const onTarget=(x:number,y:number)=>!!model.selected&&infoHit?.kind==='hand'&&hits.some(h=>h.kind!=='hand'&&Math.abs(x-h.x)<=h.w/2+16&&Math.abs(y-h.y)<=h.h/2+16);
  const info=infoHit&&(()=>{const r=Math.min(16,infoHit.w*.2),lx=-infoHit.w/2+r+2,ly=-infoHit.h/2+r+2,c=Math.cos(infoHit.angle),s=Math.sin(infoHit.angle);const cx=infoHit.x+lx*c-ly*s,cy=infoHit.y+lx*s+ly*c;return covers(cx,cy)||onTarget(cx,cy)?null:{id:infoHit.id,label:infoHit.label,cx,cy};})();
+ // C3-4s: a button removed under the pointer gets no pointerleave. `overInfo` wins over everything above, so left behind (the object or card
+ // gone with the view) it would hide every (i) until the id came back, then stick to that one. It means something only while its button is there.
+ useEffect(()=>{if(overInfo&&info?.id!==overInfo)setOverInfo(null);},[overInfo,info?.id]);
  const end=outcome(view,me,name);
  // D4: on the outcome panel too, the turns resolved without a difference are said, with the way to the last one.
  const jumpNote=roundNote(model.round);
