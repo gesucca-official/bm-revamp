@@ -3,8 +3,8 @@ import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -21,15 +21,22 @@ type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:
 // until `hold`, then goes back by `end`; `fade` (the card beside the author) appears with it and leaves before it.
 type Zoom={node:Container;rest:{x:number;y:number;s:number};up:{x:number;y:number;s:number};at:number;grow:number;hold:number;end:number;fade?:Container};
 // Marks over the table: an impact ring, a stamp (voided, eliminated) and the enlarged resource of a change (pop).
-type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop';label?:Label};
+// C3-5: `impact` is the mark of a card on its target (its type of damage or its role, or the cross of a voided move); a seat shakes only for a blow.
+type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'|'impact';label?:Label;impact?:ImpactKind|'VOID';y?:number};
+type Shake={id:string;at:number;dur:number;amp:number};
 // C3-4s: a label of a change and the wall-clock span it was readable (popped in, not fading), measured on the frames.
-type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:number;last:number};
+// `end`: the frame that starts the fade, which is when the label stops being shown whole; `last`: the last frame drawn whole before it; `gap`: the longest interval between two frames inside the reading window.
+type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:number;last:number;end:number;gap:number};
+/** C3-5: what a drawn face shows, in its own coordinates (centre at the middle of the card): damage pills, cost chips and every text, for the checks. */
+type DrawnDamage={type:DamageType;text:string;box:Box};
+export type FaceInfo={w:number;h:number;damage:DrawnDamage[];costs:Box[];texts:string[]};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
 const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
 // Plain vector marks: the shape carries the meaning, the colour only reinforces it (O3, O14).
-export function glyph(g:Graphics,kind:Resource|Role,x:number,y:number,s:number,color:number){const r=s/2,pts=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
+export function glyph(g:Graphics,kind:Resource|Role|DamageType,x:number,y:number,s:number,color:number){const r=s/2,pts=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
  switch(kind){
+  case 'HIT':case 'CUT':case 'POISON':for(const poly of DAMAGE_SHAPES[kind])g.poly(pts(poly)).fill(color);if(kind==='POISON')g.circle(x-r*.18,y+r*.38,r*.17).fill(PAPER);break;
   case 'HEALTH':g.circle(x-r*.45,y-r*.25,r*.5).circle(x+r*.45,y-r*.25,r*.5).fill(color).poly(pts([-.93,-.05,.93,-.05,0,.95])).fill(color);break;
   case 'ALERTNESS':g.ellipse(x,y,r,r*.62).fill(0xf3ead2).stroke({color,width:Math.max(1.5,s*.13)}).circle(x,y,r*.36).fill(color);break;
   case 'VIOLENCE':g.poly(pts([.3,-1,-.65,.15,-.05,.15,-.3,1,.7,-.2,.08,-.2])).fill(color);break;
@@ -47,7 +54,7 @@ export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number}
  /** C3-L: what the own piles show: cards left in the deck and the card on top of the discard pile. */
  piles:{deck:number;discard:string|null}|null;
  /** C3-L: the round's cards drawn in the middle, bottom first (during a sequence only those already landed). */
- played:{name:string;author:string;void:boolean}[]|null;hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
+ played:{name:string;author:string;void:boolean}[]|null;hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number;face:FaceInfo|null}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
  summary:{key:string;seats:Record<string,{texts:string[];box:Box|null;fs:number|null;drawn:boolean}>}|null;
  /** C3-4: resource values each board shows (the view, or the step reached during a sequence). */
  boards:Record<string,Partial<Record<Resource,number>>>};
@@ -62,7 +69,7 @@ export class TableScene {
  app=new Application();world=new Container();fx=new Container();aimLayer=new Container();private aimG=new Graphics();private aimAlpha=new AlphaFilter({alpha:.82});
  // C3-3 (O6): arrows from the chosen or dragged card to the admitted targets; redrawn at most once per frame while dragging.
  arrows:Arrow[]=[];private aimDirty=false;
-hits:Hit[]=[];backs:Record<string,number>={};
+hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInfo>();
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
  peek:string|null=null;
@@ -81,14 +88,16 @@ hits:Hit[]=[];backs:Record<string,number>={};
   closeUps:[] as {key:string;move:number;author:string;box:Box;person:Box;card:Box;scale:number;placed:string;targetId:string;target:Box|null;others:Box[]}[],
   // C3-4s: flights built and flights actually seen per sequence, objects on the table at its start and end, and how long each label stayed readable.
   flown:[] as {key:string;built:Record<FlownTag,number>;seen:Record<FlownTag,number>;toPile:number;toHand:number;itemsStart:Record<string,string[]>;itemsEnd:Record<string,string[]>|null;advanced:boolean}[],
-  labels:[] as {key:string;seat:string;resource:Resource;box:Box;from:number;to:number;readable:number}[],
+  labels:[] as {key:string;seat:string;resource:Resource;box:Box;from:number;to:number;readable:number;gap:number}[],
+  // C3-5: what each card made on its target, as the scene built it (the kinds of the mark, the knock, a voided move's cross) and the closing emphasis.
+  impacts:[] as {key:string;move:number;card:string;void:boolean;kinds:string[];shake:number}[],emphasis:[] as {key:string;kind:string;seat?:string;text?:string}[],
   // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
   aimDraws:0,aimMs:[] as number[]};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
  // Static round summary (rule 5, D6): drawn on the table until the first card choice or the next round.
  marks:Record<string,SeatMark[]>|null=null;marksKey='';private tickPrev=0;private inputStart=0;
  private measure=false;private ghost:Container|null=null;private ghostH=0;ghostOver=false;private fittedTitles=new Map<string,string>();private retiring:Container[]=[];private retired:Container[]=[];private visualSnapshot:View;
- private advancesAtStart=0;private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private pace:Pace|null=null;
+ private advancesAtStart=0;private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private shakes:Shake[]=[];private pace:Pace|null=null;
  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
@@ -162,7 +171,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.text(c,footer,0,h/2-footH+3,small?Math.max(7,w*.085):Math.max(12,w*.10),w-10);return c;}
  // C2a card face: role stamp under the title, self gains on the art, cost coins and priority in the footer.
  // Everything sits on the left, which stays visible where the fan overlaps. short = unpaid cost resources.
- private card(c:Card,w:number,h:number,small=false,short:Resource[]=[]){const f=this.face(c.name,artIndex(c.bindingName),w,h,c.item?'OGGETTO':'',small,subtype(c));
+ private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[];const f=this.face(c.name,artIndex(c.bindingName),w,h,c.item?'OGGETTO':'',small,subtype(c));
   const titleH=small?h*.27:h*.24,footH=small?h*.17:h*.18,role=roleOf(c),g=new Graphics();f.addChild(g);
   if(role){if(small){const d=Math.max(13,w*.22),cx=-w/2+6+d/2,cy=-h/2+titleH+d/2+2;g.circle(cx,cy,d/2).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,cx,cy,d*.62,PAPER);}
    else{const th=Math.max(14,h*.082),fs=th*.66,label=this.text(f,ROLES[role].label,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const tw=th+label.width+8,tx=-w/2+6,ty=-h/2+titleH+2+th/2;
@@ -174,10 +183,25 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const costs=Object.entries(c.cost) as [Resource,number][];
    if(!costs.length){const dash=this.text(f,'—',cx+4,fy,fs,undefined,INK);dash.anchor.set(0,.5);}
    for(const [k,v] of costs){const unpaid=short.includes(k),label=this.text(f,`${unpaid?'! ':''}${v} ${LETTER[k]}`,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const cw=label.width+10;
-    g.roundRect(cx,fy-ch/2,cw,ch,ch*.45).fill(unpaid?WINE:INK);label.position.set(cx+5,fy);f.addChild(label);
+    costBoxes.push({x:cx+cw/2,y:fy,w:cw,h:ch});g.roundRect(cx,fy-ch/2,cw,ch,ch*.45).fill(unpaid?WINE:INK);label.position.set(cx+5,fy);f.addChild(label);
     if(unpaid)g.moveTo(cx+3,fy+ch*.3).lineTo(cx+cw-3,fy-ch*.3).stroke({color:0xffd9d9,width:1.5});cx+=cw+3;}
-   const pr=this.text(f,`P ${c.priority}${c.basicAction||c.characterBound?' ↻':''}`,w/2-8,fy,fs,undefined,INK);pr.anchor.set(1,.5);}
+   if(small)this.damageMarks(f,c,w,h,footH,drawnDamage);else this.damageBadges(f,c,w,fy,fs,cx,left,drawnDamage);}
+  this.faces.set(f,{w,h,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text)});
   return f;}
+ // C3-5 (owner's decision of 30 October 2026): the face shows the type and the nominal amount of the damage, as symbols, where the priority used to be
+ // (the priority stays in the inspection). One pill per type of `damage`, right-aligned in the footer; the type alone when the server gives no amount.
+ // The amount is the catalog's nominal one: states and defenses can change the real damage (D1).
+ private damageBadges(f:Container,c:Card,w:number,fy:number,fs:number,from:number,left:number|null,drawn:DrawnDamage[]){const entries=damageOf(c);if(!entries.length)return;
+  const ch=fs*1.4,gap=3,room=w/2-4-from,g=new Graphics();let k=1;f.addChild(g);
+  const build=(k:number)=>entries.map(e=>{const t=damageText(e,left),label=t?this.text(f,t,0,0,fs*k,undefined,INK):null;label?.anchor.set(0,.5);return {e,label,w:ch*k*.9+(label?label.width+4:0)+4};});
+  let items=build(1);if(items.reduce((n,x)=>n+x.w+gap,-gap)>room){items.forEach(x=>x.label?.destroy());k=Math.max(.7,room/items.reduce((n,x)=>n+x.w+gap,-gap));items=build(k);}
+  let x=w/2-6;
+  for(const it of items.reverse()){const bw=it.w,bh=ch*k,x0=x-bw;g.roundRect(x0,fy-bh/2,bw,bh,bh*.3).fill(0xf6efd9).stroke({color:DAMAGE_COLOR[it.e.type],width:1.5});
+   glyph(g,it.e.type,x0+bh*.48+2,fy,bh*.7,DAMAGE_COLOR[it.e.type]);if(it.label)it.label.position.set(x0+bh*.9+4,fy);
+   drawn.push({type:it.e.type,text:it.label?.text??'',box:{x:x0+bw/2,y:fy,w:bw,h:bh}});x=x0-gap;}}
+ // A card too small for a pill (the round's cards in the middle, 36–40 px): the symbol of each type alone, at the bottom right of the art.
+ private damageMarks(f:Container,c:Card,w:number,h:number,footH:number,drawn:DrawnDamage[]){const entries=damageOf(c);if(!entries.length||w<28)return;const d=Math.max(9,w*.26),g=new Graphics();f.addChild(g);
+  entries.forEach((e,i)=>{const cx=w/2-6-d/2-i*(d+2),cy=h/2-footH-d/2-3;g.circle(cx,cy,d*.62).fill(0xf6efd9).stroke({color:DAMAGE_COLOR[e.type],width:1});glyph(g,e.type,cx,cy,d,DAMAGE_COLOR[e.type]);drawn.push({type:e.type,text:'',box:{x:cx,y:cy,w:d*1.24,h:d*1.24}});});}
  // Starting value of each resource: the character card of the catalog, else the first view seen.
  private start(id:string,p:Player){const key=`${this.model.view.gameId}:${id}`,known=this.characters().find(c=>c.bindingName===p.character.bindingName)?.resources;
   if(known)return known;if(!this.starts.has(key))this.starts.set(key,{...p.character.resources});return this.starts.get(key)!;}
@@ -303,11 +327,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.model.hand.forEach((local,i)=>{const k=i-(n-1)/2,a=k*.05,x=H.center+k*H.step,y=H.y+Math.abs(k)*3;
    // O11: a light visual hint only. The card stays selectable, inspectable and sendable; the server judges.
    const short=shortfall(local.card,res),payable=!short.length,role=roleOf(local.card),gains=gainsOf(local.card).map(gainText);
-   const c=this.card(local.card,H.w,H.h,false,short);c.position.set(x,y);c.rotation=a;this.world.addChild(c);if(!payable)c.alpha=.66;
+   const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);if(!payable)c.alpha=.66;
    // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
    const coming=this.arriving.has(local.key);if(coming)c.visible=false;
    if(this.drag?.moved&&this.drag.key===local.key)c.alpha=.22;
-   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
+   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${damageLabel(local.card,leftV(local.card,res))?`, danno ${damageLabel(local.card,leftV(local.card,res))}`:''}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
    // O12: hover (mouse), tap (selection) or focus lifts the whole card; its hit keeps the old slot too, so it does not flicker.
    // Once a target is chosen the card is shown in the centre preview: in the hand it rests, so a bound
    // card does not cover the neighbour to discard.
@@ -319,12 +343,12 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    if(local.key===this.model.selected||local.key===this.focused)this.halo(c,H.w,H.h);
    if(local.key===this.model.discard){this.halo(c,H.w,H.h,0xdc9699);this.text(c,'SCARTO',0,0,compact?14:22,H.w,WINE);}
    if(this.model.selectedCard?.characterBound&&this.model.target&&local.key!==this.model.selected&&(local.card.basicAction||local.card.characterBound||local.card.lastResort))c.alpha=Math.min(c.alpha,.55);
-   hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:c.alpha});
+   hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:c.alpha,face:this.faces.get(c)??null});
   });
   // Raised cards on top, the selected one last.
   if(lifted)raised.push(lifted);raised.forEach(c=>this.world.setChildIndex(c,this.world.children.length-1));
   this.preview={x:L.preview.x,y:L.preview.y};
-  if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
+  if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res),leftV(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
    const dest=this.hits.find(z=>z.target?.owner===this.model.target!.owner&&z.target?.itemIndex===this.model.target!.itemIndex);if(dest){this.world.addChild(new Graphics().moveTo(this.preview.x,this.preview.y-35).quadraticCurveTo(this.preview.x,dest.y,dest.x,dest.y).stroke({color:PETROL,width:2,alpha:.8}));}
   }
   const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
@@ -379,7 +403,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  // A compatible target under the pointer, or under the lifted card on touch.
  private dropTarget(x:number,y:number){const ok=(h?:Hit)=>h?.target&&this.model.allows(h.target)?h:undefined;return ok(this.hit(x,y,true))??(this.drag?.touch?ok(this.hit(x,y-this.ghostH*.62,true)):undefined);}
  private indexAt(x:number){const hs=this.hits.filter(h=>h.kind==='hand'&&h.key!==this.drag?.key);let i=hs.findIndex(h=>x<h.x);return i<0?hs.length:i;}
- private drawGhost(key:string){this.clearGhost();const c=this.model.hand.find(x=>x.key===key);if(!c)return;const gw=this.layout?.hand.w??(this.height<550?112:180);this.ghostH=gw*1.38;this.ghost=this.card(c.card,gw,this.ghostH);
+ private drawGhost(key:string){this.clearGhost();const c=this.model.hand.find(x=>x.key===key);if(!c)return;const gw=this.layout?.hand.w??(this.height<550?112:180);this.ghostH=gw*1.38;this.ghost=this.card(c.card,gw,this.ghostH,false,[],leftV(c.card,this.model.view.players[this.model.me]?.character.resources));
   this.ghost.addChildAt(new Graphics().roundRect(-gw/2+10,-this.ghostH/2+16,gw,this.ghostH,8).fill({color:0x0c0705,alpha:.45}),0);this.fx.addChild(this.ghost);this.placeGhost(this.drag?.lastX??0,this.drag?.lastY??0);}
  private clearGhost(){if(this.ghost){this.ghost.destroy({children:true});this.ghost=null;}}
  up(e:PointerEvent){const d=this.drag;if(!d||d.id!==e.pointerId)return;this.drag=null;this.clearGhost();if(this.app.canvas.hasPointerCapture(e.pointerId))this.app.canvas.releasePointerCapture(e.pointerId);
@@ -482,7 +506,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     flight({node:d,from:a,to:k?{x:k.x,y:k.y}:discard(m.author)??a,start:P.cost.at,end:e,mode:'travel',s0:own?1:.5,s1:k?k.w/iw:.5,fade:k?1:0,tag:'discard'});count.discards++;if(own){const name=m.discard;this.events.push({at:e,run:()=>{shown.discard=name;}});}}
    change(P.cost.at+P.cost.dur*BEAT_PHASE.costLabel,m.costSteps);
    // 2–3. Close-up of the author: its character grows to the free place with the card beside it, stays, then goes back.
-   const up=upOf(m.author),node=add(new Container()),person=character(m.author,up.person.w,up.person.h),card=this.card(named(m.card),up.card.w,up.card.h);
+   const up=upOf(m.author),node=add(new Container()),person=character(m.author,up.person.w,up.person.h),card=this.card(named(m.card),up.card.w,up.card.h,false,[],leftV(named(m.card),previous.players[m.author]?.character.resources));
    person.position.set(up.person.x-up.box.x,0);card.position.set(up.card.x-up.box.x,0);card.rotation=.04;this.halo(card,up.card.w,up.card.h,0xf1e4c4);node.addChild(person,card);
    const s0=home.h/up.person.h,rest={x:home.x-(up.person.x-up.box.x)*s0,y:home.y,s:s0};
    this.zooms.push({node,rest,up:{x:up.box.x,y:up.box.y,s:1},at:P.author.at,grow:P.author.dur*BEAT_PHASE.grow,hold:P.back.at,end:P.back.at+P.back.dur,fade:card});count.closeUps++;
@@ -494,8 +518,14 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    this.flights.push({node:fly,from:{x:from.x,y:from.y-(C?20:34)},to,start:P.flight.at,end,appear:0,fly:(hit-P.flight.at)/(end-P.flight.at),after:slot??discard(m.author)??undefined,land:slot?slot.w/mw:undefined});this.stats.flights++;count.drops++;
    if(slot){count.played++;this.events.push({at:end,run:()=>{this.landed=Math.max(this.landed,i+1);}});}
    const after=end-hit;
-   if(m.void){const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:after,kind:'stamp'});count.stamps++;}
-   else{const ring=add(new Graphics().circle(0,0,24).stroke({color:PETROL,width:4}));ring.position.set(to.x,to.y);this.accents.push({node:ring,at:hit,dur:P.flight.at+P.flight.dur-hit+P.target.dur});}
+   // C3-5: a card that resolves makes the impact of its type of damage (A1) or, where none applies, of its role (D2): the nature of the card, not the
+   // damage dealt (a conversion is not visible). A voided one gets a cross and the stamp.
+   if(m.void){const cross=add(this.impactMark('VOID',C));cross.position.set(to.x,to.y);this.accents.push({node:cross,at:hit,dur:after,kind:'impact',impact:'VOID',y:to.y});
+    const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:after,kind:'stamp'});count.stamps++;this.stats.impacts.push({key:k,move:i,card:m.card,void:true,kinds:['VOID'],shake:0});}
+   else{const imp=impactOf(named(m.card),this.reduced),dur=P.flight.at+P.flight.dur-hit+P.target.dur,gap=C?44:70;
+    imp.kinds.forEach((kind,n)=>{const mark=add(this.impactMark(kind,C));mark.position.set(to.x+(n-(imp.kinds.length-1)/2)*gap,to.y);this.accents.push({node:mark,at:hit,dur,kind:'impact',impact:kind,y:to.y});});
+    if(imp.shake)this.shakes.push({id:m.target,at:hit,dur:Math.min(dur,420),amp:C?3:5});
+    this.stats.impacts.push({key:k,move:i,card:m.card,void:false,kinds:[...imp.kinds],shake:imp.shake});}
    // 5. Close-up of the target: it grows a little in its seat, under the card that hit it; the chosen object meets its fate.
    const tu=targetOf({me:m.target===this.model.me,person:aim},{w:this.width,h:this.height},(L?.seats??[]).filter(x=>x.id!==m.target).map(x=>x.person)),tn=add(character(m.target,tu.w,tu.h)),t0=aim.h/tu.h;this.fx.setChildIndex(tn,0);
    this.zooms.push({node:tn,rest:{x:aim.x,y:aim.y,s:t0},up:{x:tu.x,y:tu.y,s:1},at:P.target.at,grow:P.target.dur*.3,hold:P.target.at+P.target.dur*.75,end:P.target.at+P.target.dur});count.targetUps++;
@@ -526,7 +556,13 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // 5. Tail: without verified lines the bars go from the previous to the final value (D5); deaths and forfeits are stamped.
   if(T.bars==='total')change(p.tail.at,T.totals);
   this.events.push({at:p.tail.at,run:()=>{this.display=null;}});
-  for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:p.tail.dur,kind:'stamp'});count.emphasis++;}
+  // C3-5: an elimination also knocks the seat and sends out a wine ring; a forfeit is only stamped. The outcome closes the tail with its banner.
+  const tailEnd=T.outcome?p.tail.at+p.tail.dur-PACE.outcome:p.tail.at+p.tail.dur;
+  for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:tailEnd-p.tail.at,kind:'stamp'});count.emphasis++;
+   if(e.kind==='died'){const ring=add(new Graphics().roundRect(-s.w*.6,-s.h*.6,s.w*1.2,s.h*1.2,10).stroke({color:WINE,width:5}));ring.position.set(s.x,s.y);this.accents.push({node:ring,at:p.tail.at,dur:Math.min(600,tailEnd-p.tail.at)});this.shakes.push({id:e.seat,at:p.tail.at,dur:420,amp:C?3:5});}
+   this.stats.emphasis.push({key:k,kind:e.kind,seat:e.seat});}
+  if(T.outcome){const me=this.model.me,w=T.outcome.winner,text=w==='NONE'?'PAREGGIO':w===me?'VITTORIA':'SCONFITTA',banner=add(this.stamp(text,C,2));banner.position.set(this.width/2,this.height*.42);
+   this.accents.push({node:banner,at:tailEnd,dur:PACE.outcome,kind:'stamp'});this.stats.emphasis.push({key:k,kind:'outcome',text});}
   this.events.sort((a,b)=>a.at-b.at);
   // The labels stay over the close-ups they may outlive.
   for(const a of this.accents)if(a.kind==='pop')this.fx.addChild(a.node);
@@ -535,8 +571,20 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.stats.flown.push(flown);this.advancesAtStart=this.stats.advances;
   this.staged=shown;this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
+/** C3-5: the mark of one impact, vector only (D9): a burst for a blow, a slash for a cut, a drop for poison, the symbol of its role in a ring where the type does not apply, a cross for a voided move. */
+ private impactMark(kind:ImpactKind|'VOID',compact:boolean){const c=new Container(),g=new Graphics(),R=compact?26:40;c.addChild(g);
+  if(kind==='HIT'){glyph(g,'HIT',0,0,R*2.3,INK);glyph(g,'HIT',0,0,R*2,DAMAGE_COLOR.HIT);glyph(g,'HIT',0,0,R*.95,0xf6e3a8);}
+  else if(kind==='CUT'){glyph(g,'CUT',0,0,R*2.3,INK);glyph(g,'CUT',0,0,R*2,0xdfe8ef);g.moveTo(R*.75,-R*.75).lineTo(-R*.75,R*.75).stroke({color:0xffffff,width:compact?2:3,cap:'round'});}
+  else if(kind==='POISON'){glyph(g,'POISON',0,0,R*2.1,INK);glyph(g,'POISON',0,0,R*1.8,0x78b02c);for(const [bx,by,br] of [[.9,-.2,.2],[-.9,.15,.16],[.6,.8,.13]])g.circle(bx*R,by*R,br*R).fill(0x78b02c).stroke({color:INK,width:1.5});}
+  else if(kind==='VOID'){const a=R*.9;g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:INK,width:compact?9:13,cap:'round'});g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:WINE,width:compact?5:8,cap:'round'});}
+  else if(kind==='PLAIN')g.circle(0,0,24).stroke({color:PETROL,width:4});
+  else{g.circle(0,0,R).fill({color:0x120c08,alpha:.55}).stroke({color:ROLE_COLOR[kind],width:compact?3:4});glyph(g,kind,0,0,R*1.5,INK);glyph(g,kind,0,0,R*1.25,kind==='COUNTER'||kind==='DEFENSE'?0x8fd0d0:PAPER);}
+  return c;}
+ /** C3-5, for the checks: each card drawn as the hand (or the small card of the round's cascade) draws it, what it shows read back, then thrown away. */
+ faceInfos(cards:Card[],small=false){const L=this.layout,w=small?L?.played?.slots[0]?.w??40:L?.hand.w??112,h=small?L?.played?.slots[0]?.h??56:L?.hand.h??w*1.38;
+  return cards.map(c=>{const f=this.card(c,w,h,small,[],null),info=this.faces.get(f)!;f.destroy({children:true});return {name:c.name,catalogDamage:c.damage??null,catalogAmount:c.damageAmount??null,priority:c.priority,item:c.item,...info};});}
  /** «ANNULLATA», «ELIMINATO»: a wine stamp pressed on a card or a character. */
- private stamp(word:string,compact:boolean){const c=new Container(),label=this.text(c,word,0,0,compact?13:20,undefined,0xffe9e9);label.anchor.set(.5);
+ private stamp(word:string,compact:boolean,size=1){const c=new Container(),label=this.text(c,word,0,0,(compact?13:20)*size,undefined,0xffe9e9);label.anchor.set(.5);
   const w=label.width+18,h=label.height+8;c.addChildAt(new Graphics().roundRect(-w/2,-h/2,w,h,4).fill({color:WINE,alpha:.92}).stroke({color:0xffd9d9,width:2.5}),0);c.rotation=-.18;return c;}
  /** The resource a step changes, enlarged over its board for a moment: glyph, bar and «before → after» (C3-4). */
  private pop(s:Step,at:number){const b=this.layout?.seats.find(x=>x.id===s.seat)?.board,p=this.model.view.players[s.seat];if(!b||!p)return false;
@@ -549,7 +597,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const row=own?RESOURCES.indexOf(s.resource):-1,y=own?b.y-b.h/2+b.h/RESOURCES.length*(row+.5):b.y-b.h/2-h*.6,dur=LABEL.in+LABEL.read+LABEL.out;
   // C3-4s: a label outlives its beat: its place stays clear of the ones still visible when it appears.
   const base={x:Math.max(w/2+4,Math.min(this.width-w/2-4,b.x+(own?b.w*.15:0))),y:Math.max(h/2+2,y),w,h},box=labelSpot(base,{w:this.width,h:this.height},this.labels.filter(l=>l.to>at&&l.from<at+dur).map(l=>l.box));
-  c.position.set(box.x,box.y);c.visible=false;this.fx.addChild(c);const entry:Label={seat:s.seat,resource:s.resource,box,from:Math.round(at),to:Math.round(at+dur),first:0,last:0};this.labels.push(entry);
+  c.position.set(box.x,box.y);c.visible=false;this.fx.addChild(c);const entry:Label={seat:s.seat,resource:s.resource,box,from:Math.round(at),to:Math.round(at+dur),first:0,last:0,end:0,gap:0};this.labels.push(entry);
   this.accents.push({node:c,at,dur,kind:'pop',label:entry});this.stats.aggregateDeltas++;return true;}
  get sequenceRunning(){return !!this.seqStarted;}
  /** D12: a tap on the table during the sequence moves it to the next card; past the last one it ends. */
@@ -560,9 +608,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  /** «Salta effetti». */
  skip(){this.finish('skip');}
  stopEffects(){if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
-   for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round(l.last-l.first):0});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
-  this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
- private tick(){const now=performance.now();
+   for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
+  this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+ private lastTick=0;
+ private tick(){const now=performance.now(),lastTick=this.lastTick;this.lastTick=now;
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.aimDirty)this.drawAim();
   // Quiet pulse while arrows are shown; reduced motion keeps them static.
@@ -594,8 +643,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     else if(x.kind==='pop'){const e=t-x.at,settle=LABEL.in+200;x.node.scale.set(e<LABEL.in?.7+.5*(e/LABEL.in):e<settle?1.2-.2*((e-LABEL.in)/200):1);
      // The reading time counts from the frame that really shows it: a frame held back (the first upload of many labels) does not take it away.
      const l=x.label,read=l?.first?now-l.first:0,fading=e>LABEL.in&&read>=LABEL.read;x.node.alpha=fading?Math.max(0,1-(read-LABEL.read)/LABEL.out):1;
-     if(l&&e>=LABEL.in&&!fading){l.first||=now;l.last=now;}}
+     if(l&&fading&&!l.end)l.end=now;if(l&&e>=LABEL.in&&!fading){l.first||=now;l.last=now;l.gap=Math.max(l.gap,lastTick?now-lastTick:0);}}
+    else if(x.kind==='impact'){const m=impactMotion(x.impact!,p,this.reduced);x.node.scale.set(m.scale);x.node.alpha=m.alpha;x.node.rotation=m.rot;x.node.y=x.y!+m.dy;}
     else{x.node.scale.set(1+p*1.2);x.node.alpha=1-p;}});
+   // C3-5: a seat hit by a blow, or eliminated, knocks for a moment; never with reduced motion.
+   for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(!h)continue;const q=(t-sh.at)/sh.dur;h.node.x=h.x+(this.reduced||q<0||q>1?0:Math.sin(q*Math.PI*8)*sh.amp*(1-q));}
   }}
  }
  startMeasure(){this.stats.frames=[];this.stats.inputMs=[];this.tickPrev=0;this.measure=true;}

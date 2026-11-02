@@ -12,9 +12,9 @@ successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-p
 fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)), con una **revisione dopo la prova del
 proprietario** (regia D13 di ogni carta con primi piani di chi gioca e del bersaglio:
 [sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). **C3-L (scala e uso dello spazio del tavolo), blocco
-aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). Gli altri
-blocchi (C3-5, C3-7) non sono iniziati; l'attività A1 (tipo di danno nel catalogo, regolamento 1.9)
-è fatta a parte.
+aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). **C3-5 (volto della carta ed effetti per tipo di danno, O7) è fatto** ([sezione](#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)). L'altro
+blocco (C3-7) non è iniziato; le attività A1 e A3 (tipo e importo del danno nel catalogo, regolamento 1.9 e 1.10)
+sono fatte a parte.
 
 ## C3-1 — Modello puro della risoluzione e strumento di verifica
 
@@ -929,3 +929,96 @@ Evidenze: [1366×768](client-c3/c3-6/layout-1366x768.json), [844×390](client-c3
 - **Stima delle celle:** larghezza di una cifra al 62% del corpo (conservativa): il testo reale è più stretto.
 - **Pre-esistente, non risolto qui:** scritte di C3-4s leggibili meno di 1150 ms in FFA a 844×390 (sopra).
 - Nessun dispositivo fisico, iPhone o prova umana. Dati locali non toccati: tutte le prove su database temporanei.
+
+## C3-5 — Volto della carta ed effetti per tipo di danno (O7)
+
+2 novembre 2026. Decisioni del proprietario del 30 ottobre 2026: sul **volto** di ogni carta danno compaiono, oltre a costo e
+cambiamenti di risorse, il **tipo e l'importo** del danno che infligge (campi di A1 e A3), come simboli e non come lettere; la
+**priorità** si toglie dal volto e resta visibile solo nelle informazioni della carta (ispezione). Nessuna regola, protocollo,
+catalogo o `client-debug` cambiato; il **server non cambia**: per la verifica il jar è stato ricostruito dal sorgente corrente (A3 è del
+2 novembre e quello in `server/target` era del 29 ottobre, senza `damageAmount`). Con quel jar vecchio i controlli sul volto passavano a
+vuoto (importi vuoti): lo si è visto solo guardando una cattura, quindi **i controlli di questo rapporto sono tutti sul jar nuovo**.
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Contratto e funzioni pure (`contracts.ts`, `readability.ts`) | `Card.damage` e `Card.damageAmount` (opzionali: server precedenti). `damageOf` legge `damageAmount` (`HIT 15`, `HIT 10, CUT 5`, `HIT 20+x`), ripiega sul solo tipo se manca l'importo e su nulla se mancano i campi; `damageText`: per `20+x` il totale con la V di chi gioca (metà della V **rimasta dopo il costo**, troncata verso zero: così fa `ExtremelyViolentBlow` nel server, `20 + V/2` dopo i costi) oppure «20+» dove la V non è nota (catalogo, editor, carte del round); `DAMAGE_SHAPES`: i tre simboli (esplosione per il colpo, lama per il taglio, goccia per il veleno) come poligoni, disegnati uguali da Pixi e da SVG; `impactOf` e `impactMotion` per gli impatti. Mai calcolato né corretto dal client (D1): è il danno **nominale**. |
+| Volto (`scene.ts`, `collection.tsx`, `ui.tsx`) | In basso a destra, dove stava la priorità, un bollino per tipo: simbolo e importo (solo il simbolo sulle carte piccole del round, 36–40 px). La priorità non c'è più sul volto (mano, anteprima, trascinamento, primo piano D13, carte piccole). Catalogo ed editor: lo stesso bollino, SVG con gli stessi poligoni (`DamagePills`), nella riga di tipo e costo. Ispezione: «Priorità» resta e c'è la riga «Danno nominale» con la nota che quello inflitto può differire. Etichetta accessibile della carta: costo, danno, priorità. Il bollino si rimpicciolisce (fino al 70%) se non ci sta accanto ai costi. |
+| Impatti (`scene.ts`, `impactOf`) | A ogni carta che si risolve il segno del **suo tipo**: colpo = esplosione con scossa del bersaglio, taglio = lama, veleno = goccia che sale; più tipi, un segno ciascuno. Dove il tipo non si applica il segno del **ruolo** R07a nel suo cerchio colorato (difesa, risorse, contrasto, disturbo, oggetti, altro); carta senza tipo né ruolo: anello semplice. Natura della carta e non danno risolto: `BrokenBeerBottle` (ruolo altro, danno «—») fa il segno del ruolo e non quello del taglio. |
+| Enfasi | Annullata: croce rossa sul bersaglio e timbro «ANNULLATA» (nessun impatto di tipo). Eliminazione: timbro «ELIMINATO», anello vino e scossa del posto. Esito: banner «VITTORIA», «SCONFITTA» o «PAREGGIO» al centro, nel nuovo passo `PACE.outcome` di 700 ms in coda al solo round che chiude la partita. Forfait: solo il timbro. Solo grafica vettoriale Pixi (D9): nessuna texture né suono. |
+| Movimento ridotto | Come da C3-2 non parte nessuna sequenza: né impatti, né enfasi, né scosse (`impactOf(carta, true).shake` è 0 e `impactMotion` toglie salita e rotazione, ma il segno resta). Il segno del tipo di danno resta comunque sul volto, che è statico. |
+| Test automatici | Client **191** (185 + 6, `tests/impact.test.ts`): lettura dei campi e dei casi senza importo o senza campi; `20+x` con V nota, metà troncata verso zero, V sconosciuta; simboli distinti; **intero catalogo** dell'allegato (37 carte e il token): l'impatto di ognuna è quello del suo tipo, in mancanza quello del ruolo, solo i colpi scuotono, `BrokenBeerBottle` e `MarvelousCocktail` fanno il segno del ruolo; movimento ridotto; coda dell'esito dentro il tetto. Nessun atteso esistente cambiato. |
+| Server reale | `VerifyLayout`, `VerifyResolution` (nuovi controlli), `VerifyDecks` (nuovi controlli sul catalogo e sull'editor), `VerifyAim`, `Verify`, `VerifyModes`, `VerifyLifecycle`, `VerifyFfa`, a 1366×768 e 844×390: tutte verdi sulla build finale. |
+| Peso | JS gzip 329960 byte (+2748 rispetto a C3-6), totale gzip 1113153 ([size.json](client-c3/c3-5/size.json)). |
+| Repository | `./scripts/build.ps1 -Task Test -Offline` verde (server 266, client-debug 36), `python scripts/check-rules.py` verde. |
+
+### Residuo di C3-6: scritte leggibili meno di 1150 ms in FFA a 844×390
+
+**Causa: la misura, non il comportamento; correzione della misura, soglia invariata. Da approvare.** Il controllo (`VerifyResolution`,
+C3-4s) calcolava il tempo leggibile come «ultimo frame disegnato intero − primo frame disegnato». La scritta comincia a sfumare al primo
+frame che arriva a `LABEL.read` (1200 ms) dal primo frame in cui si vede, quindi in codice è intera per almeno 1200 ms; ma l'ultimo frame
+intero precede quello che sfuma di un intervallo fra due frame. A 16–33 ms la differenza è 10–30 ms (misurato: 1170–1200 ms); a 75–125 ms,
+come può succedere in un round pesante in FFA a 844×390, diventa il 1075–1125 ms del rapporto C3-6.
+
+- **Non è il budget di 20 s.** Il budget scala le durate solo sopra i 20 000 ms grezzi. Cinque carte con ogni passo (costo, primi piani,
+  volo, bersaglio, variazioni), sgombero, pesche, fine turno e coda fanno 19 700 ms: scala 1, scritte intatte. Con il totale ripiegato (coda
+  1700 ms) sarebbero 20 500 ms, scala 0,976: l'ultima scritta ha comunque almeno 1470 ms davanti a sé, contro i 1320 che servono. Con il
+  banner dell'esito (+700 ms) 20 400 ms, scala 0,98: lo stesso margine (calcolo sui tempi del piano, `pace` in `resolution.ts`).
+- **Cosa ho provato.** Sulla build precedente, due esecuzioni dello scenario ffa a 844×390: **entrambe passano** (minimo 1170 e 1183 ms). Il
+  guasto di C3-6 non si è riprodotto, quindi la spiegazione dell'intervallo fra frame è dedotta dai numeri e dal codice, non osservata nel
+  caso fallito. Per poterla provare la prossima volta ogni scritta registra ora anche il frame in cui comincia a sfumare (`end`) e il più
+  lungo intervallo fra frame nella sua finestra di lettura (`gap`), e un caso corto finisce nelle evidenze con `gap`, margine rispetto alla
+  fine della sequenza e piano.
+- **Correzione.** In `scene.ts` il tempo leggibile è ora «frame che comincia a sfumare − primo frame intero» (`end`, o l'ultimo frame
+  intero se la sequenza finisce prima: una scritta tagliata resta quindi corta e il controllo la segnala). La soglia `LABEL.read` − 50 ms è
+  la stessa. **Chiedo la tua approvazione** a questa lettura del controllo; se preferisci la misura vecchia con una soglia più bassa, la
+  soglia giusta sarebbe `LABEL.read` − 150 ms (un intervallo fra frame di 125 ms più 25 ms di tolleranza).
+- **Dopo la correzione**, sulla build finale: nessuna scritta sotto soglia in nessuna partita (1366×768 e 844×390, duello, FFA, partite fra
+  umani, open): tempi leggibili 1200–1289 ms; durata massima di un round 19 710 ms.
+
+### Cosa è stato misurato (partite reali)
+
+Evidenze: [layout 1366×768](client-c3/c3-5/layout-1366x768.json), [layout 844×390](client-c3/c3-5/layout-844x390.json),
+[risoluzione 1366×768](client-c3/c3-5/resolution-1366x768.json), [risoluzione 844×390](client-c3/c3-5/resolution-844x390.json),
+[mazzi](client-c3/c3-5/decks-1366x768.json), catture in [screens](client-c3/c3-5/screens/).
+
+- **Volto di tutte le carte del catalogo** (`VerifyLayout`, una volta per partita, duello e FFA, due misure): le 37 carte disegnate dalla scena
+  come la mano e come carte piccole del round: 12 con danno (11 colpo, 1 taglio), con tipo e importo identici all'allegato letto qui con
+  un'altra espressione regolare (`HIT 20+x` come «20+» senza V); nessun bollino per le altre; nessun testo con la priorità («P n», «↻») né
+  codici a lettere del danno; ogni bollino dentro il volto e fuori dai gettoni del costo. Con i 2 personaggi fanno le **39 carte**:
+  `VerifyDecks` controlla le 37 carte e i 2 personaggi del catalogo DOM, i bollini uguali all'allegato, nessuna priorità e nessun tipo in
+  lettere nelle righe del volto, e i volti dell'editor (nessuna priorità, bollini presenti).
+- **Mano a ogni turno** (duello e FFA): le carte in mano hanno il danno del catalogo, con la V del giocatore per `20+x`.
+- **Ispezione:** mostra «Priorità N» e, per le carte con danno, i simboli del danno (uno per tipo).
+- **Impatti** (`VerifyResolution`): per ogni mossa di ogni round il segno costruito dalla scena è quello atteso dalle stringhe del
+  catalogo (`damage`, altrimenti `role`; croce per le annullate) e scuote solo un colpo. Conteggi 1366×768 / 844×390: colpo 43 / 34,
+  taglio 11 / 12, ruolo 116 / 116, annullate 8 / 10. Eliminazioni e forfait stampigliati come i fatti; banner dell'esito solo nei 3 / 3
+  round che chiudono la partita e con il testo giusto. **Veleno:** nessuna carta ha oggi un tipo POISON, quindi solo in unità. Per le carte
+  non uscite in partita: lo stesso `impactOf` in unità sull'intero catalogo.
+- **Movimento ridotto** (3 round per misura): nessuna sequenza, nessun segno di impatto né scossa, le carte in mano disegnate con il loro volto.
+- **Durata:** due mosse 7,1–10,4 s, FFA a cinque mosse 15,9–19,7 s e partite fra umani 17,2–19,7 s: sotto il tetto di 20 s anche con il
+  banner dell'esito. Clock rimasto a fine sequenza fra umani: 11 s (1366×768), 11–13 s (844×390), mai meno di 10 s: nessun segnale per A2.
+- **Sovrapposizioni:** `VerifyLayout` e `VerifyResolution` senza nuove sovrapposizioni (posti, mano, pile, strisce, riga breve, primi piani).
+
+### Verifiche sulla build finale
+
+Tutte verdi a 1366×768 e 844×390: `VerifyLayout`, `VerifyAim`, `VerifyDecks`, `VerifyLifecycle`, `VerifyFfa`, `VerifyResolution`, `Verify`,
+`VerifyModes`. `Verify` e `VerifyModes` non avviano il server da sole: sono state eseguite contro un server su **database temporaneo** avviato a
+parte con gli account di prova (dati locali non toccati). Test client 191, `Build` e `Size` verdi; `./scripts/build.ps1 -Task Test -Offline` e
+`python scripts/check-rules.py` verdi.
+
+### Limiti e residui
+
+- **Da approvare:** la lettura corretta del controllo delle scritte (sopra).
+- **Due difetti trovati strada facendo:** il numero dell'importo era nascosto sotto lo sfondo del bollino (visto in una cattura, non dai
+  controlli, che leggono i dati disegnati e non la sovrapposizione dei nodi; corretto e riverificato a occhio sulla cattura) e la sonda `info`
+  cliccava la (i) in un round che chiudeva la partita, coperta dal pannello dell'esito (la sonda ora salta quei round; non mi risulta legato al blocco).
+- `ExtremelyViolentBlow` con `20+x` risolto sulla V reale: provato in unità; non verificato sul volto di una carta in mano nelle partite (la carta non è
+  uscita nelle mani dei test), solo il «20+» del catalogo.
+- **POISON:** impatto e simbolo provati solo in unità e dal disegno, nessuna carta lo usa ancora.
+- Il volto mostra l'importo **nominale**: stati e difese possono cambiare il danno reale (D1). Sulle carte del round al centro (36–40 px) c'è il solo
+  simbolo: per l'importo serve l'ispezione.
+- Con movimento ridotto non c'è impatto animato: il «segno» del tipo è quello del volto. Se lo vuoi anche statico sul bersaglio, è un'aggiunta da decidere.
+- Nessun dispositivo fisico, iPhone o prova umana. Dati locali non toccati: tutte le prove su database temporanei.
+- Il giudizio sull'estetica degli impatti (dimensione, durata, colore) resta al proprietario in C3-7.

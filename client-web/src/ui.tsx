@@ -1,10 +1,20 @@
 import React,{useRef} from 'react';
 import type {Card} from './contracts.ts';
 import {RESOURCE_NAMES} from './resolution.ts';
+import {DAMAGE_COLOR,DAMAGE_NAMES,DAMAGE_SHAPES,damageOf,damageText,leftV,type DamageType} from './readability.ts';
 
 export const resourceNames:Record<string,string>=RESOURCE_NAMES;
 export const targetNames:Record<string,string>={SELF:'Te stesso',OPPONENT:'Un avversario',NEAR_ITEM:'Un tuo oggetto',FAR_ITEM:'Un oggetto avversario'};
 export const effect=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effect,'text/html');return (doc.querySelector('p:last-child')?.textContent||doc.body.textContent||'').replace(/\s*Riferimento: Regolamento[\s\S]*$/,'').trim();};
+
+const hex=(n:number)=>`#${n.toString(16).padStart(6,'0')}`;
+/** C3-5: the symbol of a type of damage in HTML, from the same polygons the table draws (catalog, editor, inspection). */
+export const DamageMark=({type}:{type:DamageType})=><svg className="dmg-mark" viewBox="-1 -1 2 2" aria-hidden="true" data-damage={type}>{DAMAGE_SHAPES[type].map((poly,i)=><polygon key={i} fill={hex(DAMAGE_COLOR[type])} points={poly.map((v,j)=>j%2?`,${v} `:String(v)).join('')}/>)}{type==='POISON'&&<circle cx={-.18} cy={.38} r={.17} fill="#e8d7b4"/>}</svg>;
+/** The nominal damage of a card as symbols with the amount of the catalog (1.10); `resources` of the player resolves the `x`, else «20+». Nothing for a card without damage. */
+export function DamagePills({card,resources}:{card:Card;resources?:Partial<Record<string,number>>|null}){
+ const entries=damageOf(card),left=leftV(card,resources as never);
+ return entries.length?<span className="dmg-pills" data-testid="damage">{entries.map(e=><span key={e.type} className="dmg-pill" data-damage={e.type} role="img" aria-label={`danno: ${DAMAGE_NAMES[e.type]}${damageText(e,left)?` ${damageText(e,left)}`:''}`}><DamageMark type={e.type}/>{damageText(e,left)}</span>)}</span>:null;
+}
 
 // Commit touch buttons on a stationary pointer release. Some mobile browsers suppress
 // the compatibility click immediately after a captured drag. Keyboard/AT keep native click.

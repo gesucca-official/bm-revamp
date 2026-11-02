@@ -398,3 +398,59 @@ export function stripPlan(l:TableLayout,w:number,h:number,texts:Record<string,st
   search:for(let fs=F.pref;fs>=F.min;fs--)for(let cols=t.length;cols>=1;cols--){const size=stripSize(t,fs,cols),box=stripSpot(size,[s.board,s.person,...(s.me?[]:[fan(s.backs,s.back,8).box])],{w,h},avoid,3,4,l.seats.filter(o=>o!==s).flatMap(o=>[o.board,o.person]));
    if(box){out[s.id]={box,size};avoid.push(box);break search;}}}
  return out;}
+
+// --- C3-5 (O7): nominal damage on the face of a card and the impact each card makes (rules 1.9, 1.10) ---
+
+export type DamageType='HIT'|'CUT'|'POISON';
+export const DAMAGE_TYPES:DamageType[]=['HIT','CUT','POISON'];
+/** Name of each type, for the accessible text and the inspection; the face shows the symbol, never the letters. */
+export const DAMAGE_NAMES:Record<DamageType,string>={HIT:'colpo',CUT:'taglio',POISON:'veleno'};
+/** One entry of `damageAmount`: the type and the fixed part of the amount (null when the server gives the type only); `x` when it adds half the V left. */
+export type DamageEntry={type:DamageType;base:number|null;x:boolean};
+/**
+ * The nominal damage of a card as the catalog publishes it (A1 `damage`, A3 `damageAmount`): never computed or corrected here (D1).
+ * An older server without `damageAmount` still gives the types; one without either gives none.
+ */
+export function damageOf(card:Card):DamageEntry[]{
+ const typed=(card.damage??'').split(',').map(s=>s.trim()).filter((s):s is DamageType=>(DAMAGE_TYPES as string[]).includes(s));
+ const out:DamageEntry[]=[];
+ for(const part of (card.damageAmount??'').split(',')){const m=/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(part);if(m)out.push({type:m[1] as DamageType,base:Number(m[2]),x:!!m[3]});}
+ return out.length?out:typed.map(type=>({type,base:null,x:false}));
+}
+/** V left after paying the card: the `x` of a variable amount is half of it, truncated toward zero (1.10). Null when the viewer's V is unknown. */
+export const leftV=(card:Card,resources?:Partial<Record<Resource,number>>|null)=>resources&&resources.VIOLENCE!==undefined?resources.VIOLENCE-(card.cost.VIOLENCE??0):null;
+/** «15», «31» for 20+x with V known, «20+» when it is not (the catalog, a card of another round), «» for the type alone. */
+export const damageText=(e:DamageEntry,left:number|null)=>e.base===null?'':e.x?(left===null?`${e.base}+`:String(e.base+Math.trunc(left/2))):String(e.base);
+export const damageLabel=(card:Card,left:number|null)=>damageOf(card).map(e=>`${DAMAGE_NAMES[e.type]}${damageText(e,left)?` ${damageText(e,left)}`:''}`).join(' e ');
+/** Polygons (in -1..1) of the symbols of the three types, drawn alike by the table (Pixi) and by the catalog (SVG): a fist-burst, a slash, a drop. */
+export const DAMAGE_SHAPES:Record<DamageType,number[][]>={
+ HIT:[Array.from({length:16},(_,i)=>{const a=Math.PI*i/8,k=i%2?.52:1;return [Math.cos(a)*k,Math.sin(a)*k];}).flat()],
+ CUT:[[1,-1,.5,-1,-1,.5,-1,1,-.5,1,1,-.5]],
+ POISON:[[0,-1,.62,.1,.62,.45,.38,.82,0,.95,-.38,.82,-.62,.45,-.62,.1]],
+};
+export const DAMAGE_COLOR:Record<DamageType,number>={HIT:0xa3313d,CUT:0x4d6070,POISON:0x5f8a1f};
+
+/**
+ * What a card makes on impact (C3-5, D2): the nominal types of damage when it has any (the nature of the card, not damage dealt: a conversion
+ * such as BrokenBeerBottle is not visible and is never deduced), otherwise its role of R07a where the type does not apply. A card with neither
+ * gets the plain ring. A voided move makes none (its stamp is the emphasis). `shake` is 0 with reduced motion: the same mark, no knock.
+ */
+export type ImpactKind=DamageType|Role|'PLAIN';
+export type Impact={kinds:ImpactKind[];shake:number};
+export function impactOf(card:Card,reduced=false):Impact{
+ const types=damageOf(card).map(e=>e.type),role=roleOf(card);
+ const kinds:ImpactKind[]=types.length?types:role?[role]:['PLAIN'];
+ return {kinds,shake:reduced||!types.includes('HIT')?0:1};
+}
+/** Motion of one impact mark at fraction `p` of its time (scale, opacity, rise, turn). Reduced motion keeps the mark and its pop, without the rise, the turn or any knock. */
+export type Motion={scale:number;alpha:number;dy:number;rot:number};
+export function impactMotion(kind:ImpactKind|'VOID',p:number,reduced=false):Motion{
+ const q=Math.max(0,Math.min(1,p)),e=1-(1-q)*(1-q);
+ switch(kind){
+  case 'HIT':return {scale:.3+1.3*e,alpha:1-q*q,dy:0,rot:reduced?0:(1-q)*.3};
+  case 'CUT':return {scale:.5+.9*e,alpha:q<.6?1:1-(q-.6)/.4,dy:0,rot:0};
+  case 'POISON':return {scale:.8+.4*e,alpha:1-q*q,dy:reduced?0:-26*e,rot:0};
+  case 'VOID':return {scale:q<.25?1.8-.8*(q/.25):1,alpha:q>.8?1-(q-.8)/.2:1,dy:0,rot:0};
+  default:return {scale:.6+.8*e,alpha:1-q,dy:0,rot:0};
+ }
+}

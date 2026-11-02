@@ -17,7 +17,7 @@ modifiche di regole e catalogo (A1, A3, eventualmente A2) sono attività separat
 regolamento. **Dopo il feedback del proprietario del 30 ottobre 2026** (centro del tavolo vuoto, tutto un po'
 piccolo, personaggio proprio grande quanto gli altri) si aggiunge il blocco **C3-L** (scala e spazio del tavolo),
 fra C3-4r e C3-6, con la decisione D14; ordine dei blocchi restanti: C3-L, C3-6, C3-5, C3-7.
-**C3-6 fatto il 2 novembre 2026**; restano C3-5 e C3-7.
+**C3-6 e C3-5 fatti il 2 novembre 2026**; resta C3-7.
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -120,7 +120,7 @@ incompleto), **manca**.
 | Oggetti consumati, rubati, distrutti, comparsi | parziale: solo trasferimento uno a uno | oggetti per posto + `TARGET_ITEM` | C3-4 |
 | Scarto e pesca osservabili | manca | propria mano, `DISCARD_ONE`, conteggi altrui | C3-4 |
 | Effetti di fine turno | parziale: solo conteggio e testo | `timeBasedEffects` (chi), testo | C3-4 |
-| Effetti per tipo di danno (O7) | manca | campo `damage` della carta (A1, regolamento 1.9); importo nel campo `damageAmount` (A3, 1.10) | C3-5 |
+| Effetti per tipo di danno (O7) | c'è (C3-5): impatto del tipo o del ruolo, volto con tipo e importo | campo `damage` della carta (A1, regolamento 1.9); importo nel campo `damageAmount` (A3, 1.10) | C3-5 |
 | Morte, forfait ed esito | c'è come pannello; nessuna enfasi nel round | `dead`, `forfeits`, `over`, `winner` | C3-4, C3-5 |
 | Report dell'ultimo round | c'è: fatti certi in italiano e poi il testo del server in «Ultimo turno»; strisce con simboli e riga breve leggibili (C3-6) | come sopra | C3-6 |
 | Viste ripetute e stesso turno | parziale: K1 | `gameId`, `turn` | C3-2 |
@@ -172,11 +172,11 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-L | Scala e uso dello spazio del tavolo — **fatto** il 30 ottobre 2026 ([rapporto](reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)) | C3-4 |
 | C3-4s | Rifinitura delle animazioni della sequenza e difetto delle (i) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)) | C3-4, C3-L |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili)) | C3-2 |
-| C3-5 | Effetti per tipo di danno ed enfasi (O7) | C3-4, A1 |
+| C3-5 | Volto della carta ed effetti per tipo di danno, enfasi (O7) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)) | C3-4, A1, A3 |
 | C3-7 | Consolidamento e giudizio del proprietario | tutti |
 
 C3-3 è indipendente e può andare in qualunque punto; C3-6 può precedere C3-4. Dal 30 ottobre 2026 l'ordine
-dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 restano C3-5 e C3-7. Se A1
+dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 e C3-5 resta C3-7. Se A1
 non è approvata o non è pronta, C3-5 ripiega sugli impatti per ruolo R07a (D2) e lo
 dichiara.
 
@@ -390,7 +390,9 @@ il puntatore, corretto, con controllo ripetuto a ogni round in `VerifyResolution
 sovrappongono al passo dopo: così il caso peggiore a cinque carte è 19,7 s; col passo lungo quanto la scritta sarebbe
 circa 24,2 s. Da giudicare in C3-7: durata delle scritte e carta che resta al centro fino al round dopo.
 
-### C3-5 — Effetti per tipo di danno ed enfasi (O7)
+### C3-5 — Volto della carta ed effetti per tipo di danno (O7)
+
+**Fatto il 2 novembre 2026** ([rapporto](reports/client-c3-report.md#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7), verifiche `VerifyLayout`, `VerifyResolution` e `VerifyDecks`). Decisioni del proprietario del 30 ottobre 2026: sul volto di ogni carta danno, oltre a costo e variazioni, il tipo e l'**importo** nominale del danno (A1 e A3), come simboli; la **priorità** si toglie dal volto e resta nell'ispezione; stesso volto in mano, nel primo piano di D13, nel catalogo e nell'editor. Con il blocco si chiude il residuo di C3-6 sulle scritte in FFA a 844×390 (era la misura; soglia invariata, da approvare).
 
 **Perimetro.** Impatti diversi per **colpo, taglio e veleno** dal campo descrittivo
 di A1 (D2), presentati come natura della carta e non come danno risolto: una
@@ -533,7 +535,7 @@ la prova di C3-2; D13 e D10 a 20 s dopo la prova di C3-4 (30 ottobre 2026).
 | D7 | Lingua del report | fatti certi in italiano più testo del server invariato / tradurre le frasi del server | **Fatti in italiano più testo del server** in sezione secondaria; tradurre vorrebbe dire interpretare frasi che non sono un contratto. Confermata. |
 | D8 | Casi rari su partite reali | mazzi sintetici validi per R02 salvati sul database temporaneo e usati in open 1vCom, più viste registrate per le unità / ganci di test nel server | **Mazzi sintetici e viste registrate**: per esempio molte carte di contrasto, presa e furto, tossicità alta, Banzai. Nessun cambio al server; i casi non ottenuti si dichiarano. Confermata. |
 | D9 | Asset degli effetti | grafica vettoriale Pixi / nuove texture e suoni | **Vettoriale**; texture e suoni restano a C4 con provenienza e licenze. Confermata. |
-| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. **Portata a 10 s** dal proprietario il 29 ottobre 2026, nella revisione di C3-2 (una carta per volta, D12): con cinque mosse in FFA ogni carta mantiene il ritmo del duello. **Rivista dopo la prova di C3-4 (30 ottobre 2026): tetto di 20 s**, anche in FFA con cinque mosse; il tetto non è la durata tipica. Il clock della mossa resta 30 s (regolamento 1.9). Misurato nella revisione C3-4r (D13) su partite reali: duello 7,0–8,6 s; FFA a cinque con cinque mosse 15,2–18,2 s; fra umani (FFA con due umani e tre computer, cinque mosse in ogni round) restano **12–15 s** di clock a fine sequenza, mai meno di 10 s: nessun segnale per A2 da questo dato. Dopo C3-4s (scritte più lunghe, sgombero e pesche animate; 2 novembre 2026): due mosse 7,1–9,7 s; FFA con cinque mosse 15,9–19,7 s; fra umani restano **10–12 s**, mai meno di 10 s: nessun segnale per A2, margine ridotto. |
+| D10 | Ritmo | entro 2 s per round (proposta) / più lunga per animazioni più curate | **Fino a 5 s per round** — confermata con modifica dal proprietario: si preferiscono animazioni più curate. La sequenza resta chiusa dal primo input sul tavolo e da «Salta effetti»; nessuna impostazione di velocità in C3. Se il clock di 30 s ne risente, A2. **Portata a 10 s** dal proprietario il 29 ottobre 2026, nella revisione di C3-2 (una carta per volta, D12): con cinque mosse in FFA ogni carta mantiene il ritmo del duello. **Rivista dopo la prova di C3-4 (30 ottobre 2026): tetto di 20 s**, anche in FFA con cinque mosse; il tetto non è la durata tipica. Il clock della mossa resta 30 s (regolamento 1.9). Misurato nella revisione C3-4r (D13) su partite reali: duello 7,0–8,6 s; FFA a cinque con cinque mosse 15,2–18,2 s; fra umani (FFA con due umani e tre computer, cinque mosse in ogni round) restano **12–15 s** di clock a fine sequenza, mai meno di 10 s: nessun segnale per A2 da questo dato. Dopo C3-4s (scritte più lunghe, sgombero e pesche animate; 2 novembre 2026): due mosse 7,1–9,7 s; FFA con cinque mosse 15,9–19,7 s; fra umani restano **10–12 s**, mai meno di 10 s: nessun segnale per A2, margine ridotto. Dopo C3-5 (banner dell'esito di 700 ms nel solo round che chiude la partita): due mosse 7,1–10,4 s; FFA con cinque mosse 15,9–19,7 s; fra umani 17,2–19,7 s e restano **11–13 s**, mai meno di 10 s: nessun segnale per A2. |
 | D12 | Avanzamento fra le carte (dopo la prova di C3-2) | automatico, un tocco passa alla carta successiva / manuale solo contro computer / manuale sempre | **Automatico, un tocco accelera** — scelta del proprietario il 29 ottobre 2026. Una carta per volta, più lenta, entro D10; un tocco o tasto sul tavolo passa alla carta successiva, scegliere una carta della mano chiude la sequenza, «Salta effetti» chiude; regola 4 invariata nella sostanza (nessun blocco, nessun Continue). |
 | D13 | Regia di ogni carta (dopo la prova di C3-4) | — (decisione del proprietario) | **Ordine fisso per ogni carta, sempre, duello contro computer compreso:** costo (chi muove paga gettoni ed eventuale scarto prima di tutto) → primo piano di chi gioca (personaggio ingrandito in una parte libera del tavolo, con accanto la carta, circa un secondo) → ritorno al posto → volo e impatto come prima → primo piano del bersaglio (un po' più grande, circa mezzo secondo) → variazioni di quella carta. Il tocco o tasto sul tavolo passa al passo successivo (D12), una carta della mano e «Salta effetti» chiudono, nessun blocco di invio né del clock. Decisa dal proprietario il 30 ottobre 2026. Il costo di ogni carta si mostra prima di lei, mentre il server paga tutti i costi prima degli effetti (R04): presentazione, non regola; i passi conservano la variazione e finiscono sulla vista. **Osservazione per dopo (C4/C5), non fatta:** una versione velocizzata della sequenza, attivabile dall'utente. |
 | D14 (C3-L) | Scala e uso del centro del tavolo | (a) centro: mazzo e scarti / turno e clock / nulla; (b) fattori B1 prudente / B2 marcato / B3 massimo; (c) priorità quando lo spazio non basta | Scelte del proprietario del 30 ottobre 2026: **B2** (personaggio proprio ×1,5, altri ×1,2, oggetti ×1, risorse ×1,25) con priorità **personaggio proprio, risorse, altri, oggetti** (cedono prima gli oggetti); al centro prima **mazzo e scarti propri**, poi, **cambiato in corsa dal proprietario** durante il blocco: al centro le **carte giocate nell'ultimo round**, impilate in ordine di risoluzione (le prime sotto) **a cascata leggera** con l'autore accanto, e **mazzo e scarti propri piccoli accanto al proprio posto** (ogni giocatore ha la sua pila degli scarti: oggi non è rilevante distinguerli, potrà esserlo con il set base). 750×292 solo registrato, per C4. |

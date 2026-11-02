@@ -437,7 +437,7 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
   if(covers)d13.push(`${c.key} card ${c.move}: author close-up covers ${covers} boxes of other seats`);
   if(targetCovers)d13.push(`${c.key} card ${c.move}: target close-up covers ${targetCovers} other characters`);}
  // C3-4s: flights against the facts recomputed on the wire views, for every sequence; what was seen and how long labels lasted, for those let run to the end.
- const c4s=[],flownRows=[],labelMs=[];
+ const c4s=[],flownRows=[],labelMs=[],shortLabels=[],expectKinds=c=>{const t=c?.damage&&c.damage!=='—'?c.damage.split(',').map(x=>x.trim()):[];if(t.length)return t;return c?.role&&['DAMAGE','DEFENSE','RESOURCES','COUNTER','DISRUPT','ITEMS','OTHER'].includes(c.role)?[c.role]:['PLAIN'];};
  for(const x of r.stats.flown??[]){const turn=Number(x.key.split('/').pop()),prev=p.views(game).filter(v=>v.turn===turn-1).at(-1),next=p.views(game).filter(v=>v.turn===turn)[0];if(!prev||!next){c4s.push(`${x.key}: wire views missing`);continue;}
   const f=resolve(prev,next,p.user,cat),T=timeline(prev,next,f,cat),seats=Object.values(f.seats),byName=new Map(cat.map(c=>[c.name,c])),end=endOf[x.key];
   const toHand=prev.resolvedMoves.filter(m=>{const c=byName.get(m.playedCardName);return c&&(c.basicAction||c.characterBound);}).length;
@@ -451,9 +451,21 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
   if(whole){for(const k of Object.keys(x.built))if(x.seen[k]!==x.built[k])c4s.push(`${x.key}: ${k} built ${x.built[k]}, seen ${x.seen[k]}`);
    if(x.itemsEnd&&sorted(x.itemsEnd)!==sorted(names(next)))c4s.push(`${x.key}: objects at the end ${sorted(x.itemsEnd)}, view ${sorted(names(next))}`);
    const b=(r.stats.beats??[]).find(y=>y.key===x.key);if(b&&labels.length!==b.pops)c4s.push(`${x.key}: ${labels.length} labels for ${b.pops} changes`);
-   for(const l of labels){labelMs.push(l.readable);if(l.readable<LABEL.read-50)c4s.push(`${x.key}: label ${l.seat} ${l.resource} readable ${l.readable} ms`);if(!inside(l.box,vw,vh))c4s.push(`${x.key}: label ${l.seat} ${l.resource} off the screen`);}}
+   const plan=(r.stats.sequencePlans??[]).find(y=>y.key===x.key);for(const l of labels){labelMs.push(l.readable);if(l.readable<LABEL.read-50){c4s.push(`${x.key}: label ${l.seat} ${l.resource} readable ${l.readable} ms`);shortLabels.push({key:x.key,seat:l.seat,resource:l.resource,readable:l.readable,gap:l.gap,from:l.from,toEnd:plan?plan.total-l.from:null,total:plan?.total??null,moves:plan?.moves??null});}if(!inside(l.box,vw,vh))c4s.push(`${x.key}: label ${l.seat} ${l.resource} off the screen`);}}
   labels.forEach((a,i)=>labels.slice(i+1).forEach(o=>{if(a.to>o.from&&o.to>a.from&&overlap(a.box,o.box)>0)c4s.push(`${x.key}: labels ${a.seat} ${a.resource} and ${o.seat} ${o.resource} overlap`);}));
-  flownRows.push({key:x.key,end:end?.reason??null,advanced:x.advanced,...got,vanished:T.vanished.length,appeared:T.appeared.length,labels:labels.length,minReadable:labels.length?Math.min(...labels.map(l=>l.readable)):null});
+  // C3-5: what each card made on its target, against the catalog strings read here independently of the client (the type of damage, else the role; a voided move a cross);
+  // the knock only for a blow; the closing emphasis against the facts of the wire views.
+  const imps=(r.stats.impacts??[]).filter(y=>y.key===x.key);
+  if(imps.length!==T.moves.length)c4s.push(`${x.key}: ${imps.length} impacts for ${T.moves.length} moves`);
+  else T.moves.forEach((m,i)=>{const c=byName.get(m.card),want=m.void?['VOID']:expectKinds(c),got=imps[i];
+   if(JSON.stringify(got.kinds)!==JSON.stringify(want))c4s.push(`${x.key} card ${i} ${m.card}: impact ${JSON.stringify(got.kinds)}, catalog ${JSON.stringify(want)}`);
+   if(!!got.shake!==(!m.void&&want.includes('HIT')))c4s.push(`${x.key} card ${i} ${m.card}: knock ${got.shake} for ${JSON.stringify(want)}`);
+   for(const k of got.kinds)seen(k==='VOID'?'impactVoid':['HIT','CUT','POISON'].includes(k)?`impact${k}`:'impactRole',`${x.key}#${i}`);});
+  const em=(r.stats.emphasis??[]).filter(y=>y.key===x.key),wantEm=T.emphasis.map(e=>e.kind==='died'?'died':'forfeit').sort(),gotEm=em.filter(y=>y.kind!=='outcome').map(y=>y.kind).sort();
+  if(JSON.stringify(wantEm)!==JSON.stringify(gotEm))c4s.push(`${x.key}: emphasis ${JSON.stringify(gotEm)}, facts ${JSON.stringify(wantEm)}`);
+  const ending=em.filter(y=>y.kind==='outcome'),wantText=!T.outcome?null:T.outcome.winner==='NONE'?'PAREGGIO':T.outcome.winner===p.user?'VITTORIA':'SCONFITTA';
+  if((ending[0]?.text??null)!==wantText||ending.length>(wantText?1:0))c4s.push(`${x.key}: outcome banner ${JSON.stringify(ending)}, facts ${wantText}`);else if(wantText)seen('outcomeBanner',x.key);
+  flownRows.push({key:x.key,end:end?.reason??null,impacts:imps.map(y=>y.kinds.join('+')),emphasis:em.map(y=>y.kind),advanced:x.advanced,...got,vanished:T.vanished.length,appeared:T.appeared.length,labels:labels.length,minReadable:labels.length?Math.min(...labels.map(l=>l.readable)):null});
   if(T.vanished.length)seen('objectVanished',x.key);if(T.appeared.length)seen('objectAppeared',x.key);if(want.toHand)seen('clearToHand',x.key);if(want.discard)seen('boundDiscardFlown',x.key);}
  for(const f of r.finals){if(!f.turn)continue;const key=`${game}/${f.turn}`,facts=relation[key];if(!facts)continue;
   if(facts.relation==='next'&&!f.summary)c32.push(`${key}: no static summary at the choice`);
@@ -463,7 +475,7 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
  const sceneRules={1:a.rules[1],2:rule2.map(f=>`T${f.turn}: ${f.problems.join(', ')}`),3:a.rules[3],6:a.rules[6],c32,c34,d13,c4s};
  evidence.games[label]={timerOrderOnly:a.timerOrderOnly,noValidMove:r.noValidMove??null,gameId:game,turnsSeen:a.turns,views:a.views,rows:a.rows,client:a.client,watched:r.watched,outcome:{over:r.end.over,winner:r.end.winner,eliminated:r.end.eliminated}};
  evidence.scene[label]={rules:Object.fromEntries(Object.entries(sceneRules).map(([k,v])=>[k,{ok:!v.length,violations:v}])),
-  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34,closeUps,flown:flownRows,labelReadable:labelMs.length?{labels:labelMs.length,min:Math.min(...labelMs),max:Math.max(...labelMs)}:null};
+  k1:{sequences:r.stats.sequences,cancelledByView:a.k1.length,sequenceMs:r.stats.sequenceMs,cancels:r.stats.cancels},sequenceEnds:ends,summariesAtChoice:r.finals.map(f=>({turn:f.turn,summary:f.summary})),jumps,notes:r.notes??[],k2:a.k2,k6:{modelRounds:a.k6,sceneHealthDeltas:r.stats.aggregateDeltas,sceneTransfers:r.stats.transfers,note:'the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene'},flights:r.stats.flights,transfers:r.stats.transfers,aggregateDeltas:r.stats.aggregateDeltas,rounds:rounds34,closeUps,flown:flownRows,labelReadable:labelMs.length?{labels:labelMs.length,min:Math.min(...labelMs),max:Math.max(...labelMs)}:null,shortLabels};
  step(label,{gameId:game,turns:a.turns,views:a.views,modelProblems:a.problems,repeatedViewDiffs:a.repeated,timerOrderOnly:a.timerOrderOnly,scene:evidence.scene[label].rules,k1:`${a.k1.length} of ${r.stats.sequences} sequences cancelled by view`,ends:Object.entries(ends.reduce((m,e)=>(m[e.reason]=(m[e.reason]??0)+1,m),{})).map(([k,v])=>`${k} ${v}`).join(', '),msComplete:ends.filter(e=>e.reason==='complete').map(e=>e.ms),
   bars:`${rounds34.filter(x=>x.bars==='per-card').length} per card, ${rounds34.filter(x=>x.bars==='total').length} total`,cards:(r.stats.schedule??[]).length,closeUps:`${closeUps.filter(c=>c.placed==='middle').length} middle, ${closeUps.filter(c=>c.placed!=='middle').length} in the seat`,drift:rounds34.reduce((n,x)=>n+(x.drift??0),0),flown:flownRows.reduce((m,x)=>{for(const k of ['clear','toPile','toHand','discard','itemOut','itemIn','drawHand','drawBack','vanished','appeared'])m[k]=(m[k]??0)+x[k];return m;},{}),labelReadable:evidence.scene[label].labelReadable,notes:r.notes});
  assert.deepEqual(a.problems,[],`${label}: model problems`);
@@ -534,7 +546,7 @@ try{
   const game=readyId(A,/quick\/1vCom\/ready$/),rounds=[];
   for(let i=0;i<3;i++){const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');if(s.over||s.eliminated)break;
    await playOne(A);const t=await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');await A.page.waitForTimeout(300);
-   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast,flown:st.stats.flown.length,flights:st.stats.flights,labels:st.stats.labels.length,marks:(()=>{const mk=f?seatMarks({facts:f,crossed:false}):null;return mk?Object.values(mk).map(l=>l.map(m=>m.text).join(' ')||'invariato'):null;})()});void t;}
+   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,impacts:st.stats.impacts.length+st.stats.emphasis.length,faces:st.readout.hand.map(h=>h.face?.damage.length??-1),sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast,flown:st.stats.flown.length,flights:st.stats.flights,labels:st.stats.labels.length,marks:(()=>{const mk=f?seatMarks({facts:f,crossed:false}):null;return mk?Object.values(mk).map(l=>l.map(m=>m.text).join(' ')||'invariato'):null;})()});void t;}
   await A.shot('reduced-motion');
   const st=await A.state();
   if(!st.over&&!st.eliminated){await A.page.keyboard.press('Escape');await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}
@@ -544,7 +556,7 @@ try{
   // C3-2 (K3 fixed): no sequence, and the static summary of every round on the table.
   for(const x of rounds){assert.equal(x.sequences,0,'reduced motion: no sequence');assert.equal(x.summaryKey,x.expectedKey,`reduced motion: summary of turn ${x.turn}`);
    // C3-4s: no flight and no label; the same content (changes and objects gone and appeared per seat, as the model gives them) in the static summary.
-   assert.equal(x.flown+x.flights+x.labels,0,'reduced motion: no flights');assert.deepEqual([...x.summary].sort(),[...x.marks].sort(),`reduced motion: summary of turn ${x.turn} as the model`);}
+   assert.equal(x.flown+x.flights+x.labels+x.impacts,0,'reduced motion: no flights, no impact marks, no knock (C3-5)');assert.ok(x.faces.every(n=>n>=0),'reduced motion: every hand card still has its drawn face');assert.deepEqual([...x.summary].sort(),[...x.marks].sort(),`reduced motion: summary of turn ${x.turn} as the model`);}
   step('reducedMotion',evidence.scene.reduced);
  }
 
@@ -658,7 +670,7 @@ try{
      if(action==='tap')for(let k=0;k<2;k++){const e=await spotFree(p,await p.state());if(touch)await p.page.touchscreen.tap(e.x,e.y);else await p.page.mouse.click(e.x,e.y);await p.page.waitForTimeout(80);}
      if(action==='skip'){await p.page.getByLabel('Apri menu').click();await p.page.getByRole('button',{name:'Salta effetti'}).click();}
      if(action==='card during the sequence'&&pt){if(touch)await p.page.touchscreen.tap(pt.x,pt.y);else await p.page.mouse.click(pt.x,pt.y);await p.page.waitForTimeout(80);await p.page.keyboard.press('Escape');}
-     if(action==='inspection during the sequence'&&pt&&!touch){await p.page.mouse.move(pt.x,pt.y);if(await infoLabel(p)){await infoButton(p).first().click();await p.page.waitForTimeout(250);await p.page.keyboard.press('Escape');}}
+     if(action==='inspection during the sequence'&&pt&&!touch&&!st.over&&!st.eliminated){await p.page.mouse.move(pt.x,pt.y);if(await infoLabel(p)){await infoButton(p).first().click();await p.page.waitForTimeout(250);await p.page.keyboard.press('Escape');}}
      if(action==='rest on the (i) through the close-ups'&&pt){await p.page.mouse.move(pt.x,pt.y);await restOn(p);}
     }
     await p.wait(x=>!x||!x.sequence?.running,23000,'sequence end').catch(()=>{});await p.page.waitForTimeout(60);
@@ -816,7 +828,7 @@ try{
  evidence.reportConsistency={rounds:reports.length,sumOk:reports.filter(x=>x.sumOk).length,chainOk:reports.filter(x=>x.chainOk).length,unknownCost:reports.filter(x=>x.unknownCost).length,failures:reports.filter(x=>!x.chainOk)};
  step('reportConsistency',{rounds:reports.length,sumOk:evidence.reportConsistency.sumOk,chainOk:evidence.reportConsistency.chainOk});
  evidence.cases=cases;
- const wanted=['void','itemConsumed','itemFromOther','drawnToTable','death','deathWithMove','lethalEndOfTurn','boundDiscard','over','jump','rejoinSame'];
+ const wanted=['impactHIT','impactRole','impactVoid','impactCUT','outcomeBanner','void','itemConsumed','itemFromOther','drawnToTable','death','deathWithMove','lethalEndOfTurn','boundDiscard','over','jump','rejoinSame'];
  step('casesOnRealServer',{seen:Object.fromEntries(Object.entries(cases).map(([k,v])=>[k,v.length])),missing:wanted.filter(k=>!cases[k])});
  for(const k of ['info','infoFfa','infoTouch'])if(evidence.scene[k])assert.equal(evidence.scene[k].lost,0,`${k}: the (i) or the inspection lost at ${JSON.stringify(evidence.scene[k].firstLoss)}`);
  assert.deepEqual(evidence.errors,[],'no page errors');

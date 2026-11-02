@@ -320,7 +320,7 @@ export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportConte
  * C3-4s: before the first card the cards of the previous round leave the middle for their piles (`clear`); `tailTotals`
  * is the tail of a round that falls back to its totals, whose labels all appear there.
  */
-export const PACE = {budget: 20000, clear: 500, cost: 400, author: 900, back: 300, flight: 650, target: 500, changes: 600, draws: 800, endOfTurn: 750, tail: 900, tailTotals: 1700};
+export const PACE = {budget: 20000, clear: 500, cost: 400, author: 900, back: 300, flight: 650, target: 500, changes: 600, draws: 800, endOfTurn: 750, tail: 900, tailTotals: 1700, outcome: 700};
 /**
  * C3-4s (owner: the labels of the changes are barely readable; they lasted 255–680 ms at full opacity). A label pops in for
  * `in` ms, stays readable for `read` ms, fades in `out` ms. `read`, for «95 → 90» with its glyph on a table where it may
@@ -338,10 +338,10 @@ export type CardPace = Span & Record<Beat, Span>;
 export type Pace = {clear: Span | null; moves: CardPace[]; draws: Span | null; endOfTurn: Span | null; tail: Span; total: number};
 /** What a card has to show in its optional beats; a number of cards means every beat for each. */
 export type CardNeeds = {cost?: boolean; changes?: boolean};
-export function pace(cards: CardNeeds[] | number, phases: {clear?: boolean; draws?: boolean; endOfTurn?: boolean; totals?: boolean} = {}): Pace {
+export function pace(cards: CardNeeds[] | number, phases: {clear?: boolean; draws?: boolean; endOfTurn?: boolean; totals?: boolean; outcome?: boolean} = {}): Pace {
   const list = typeof cards === 'number' ? Array.from({length: cards}, (): CardNeeds => ({cost: true, changes: true})) : cards;
   const need = (c: CardNeeds, b: Beat) => b === 'cost' ? (c.cost ? PACE.cost : 0) : b === 'changes' ? (c.changes ? PACE.changes : 0) : PACE[b];
-  const tailDur = phases.totals ? PACE.tailTotals : PACE.tail;
+  const tailDur = (phases.totals ? PACE.tailTotals : PACE.tail) + (phases.outcome ? PACE.outcome : 0);
   const raw = list.reduce((n, c) => n + BEATS.reduce((m, b) => m + need(c, b), 0), 0) + tailDur + (phases.clear ? PACE.clear : 0) + (phases.draws ? PACE.draws : 0) + (phases.endOfTurn ? PACE.endOfTurn : 0);
   const scale = Math.min(1, PACE.budget / raw);
   let at = 0;
@@ -483,6 +483,8 @@ export type Timeline = {
   /** Previous to final of every changed resource: the tail of the total mode and the end state of both modes. */
   totals: Step[];
   emphasis: {seat: string; kind: 'died' | 'forfeit'}[];
+  /** C3-5: the game ends with this round (the winner as the view names it, `NONE` for a draw): a short emphasis closes the tail. */
+  outcome: {winner: string} | null;
   /**
    * D13 shows each card's cost just before the card, while the server pays every cost before any effect (R04). The
    * steps keep their change and start from the value the board shows, so they still end on the view; this counts the
@@ -555,11 +557,11 @@ export function timeline(previous: View, next: View, facts: ResolutionFacts, cat
     ...(s.died ? [{seat: id, kind: 'died' as const}] : []), ...(s.forfeit ? [{seat: id, kind: 'forfeit' as const}] : [])]);
   return {
     key: facts.key,
-    pace: pace(moves.map(m => ({cost: m.tokens.length > 0 || !!m.discard, changes: m.steps.length > 0})), {clear: clear.length > 0, draws: draws.length > 0 || vanished.length > 0 || appeared.length > 0, endOfTurn: facts.endOfTurn.length > 0, totals: !steps.verified}),
+    pace: pace(moves.map(m => ({cost: m.tokens.length > 0 || !!m.discard, changes: m.steps.length > 0})), {clear: clear.length > 0, draws: draws.length > 0 || vanished.length > 0 || appeared.length > 0, endOfTurn: facts.endOfTurn.length > 0, totals: !steps.verified, outcome: facts.outcome.over}),
     bars: steps.verified ? 'per-card' : 'total', reason: steps.verified ? null : steps.reason,
     tokens, moves, draws, clear, vanished, appeared,
     endOfTurn: {seats: facts.endOfTurn, steps: endSteps},
-    totals, emphasis, drift,
+    totals, emphasis, drift, outcome: facts.outcome.over ? {winner: facts.outcome.winner} : null,
   };
 }
 

@@ -1,0 +1,1636 @@
+{
+ "date": "2026-11-02T20:10:46.502Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "scenarios": {
+  "duel": {
+   "ffa": false,
+   "touch": false,
+   "reduced": false,
+   "turns": [
+    0,
+    1,
+    2
+   ],
+   "cards": [
+    {
+     "turn": 0,
+     "card": "ADOPERIAMOTI",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "PERMESSO SCUSA ORA SMETTI ",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "STORDIAMOTI HO DETTO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "GABBIANO DUNQUE VOLIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "STORDIAMOTI HO DETTO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "GABBIANO DUNQUE VOLIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "ADOPERIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "FAI BASTA",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "GABBIANO DUNQUE VOLIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "ADOPERIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "FAI BASTA",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    }
+   ],
+   "locked": [
+    {
+     "outcome": true,
+     "checks": [
+      {
+       "over": true,
+       "eliminated": true,
+       "selected": null,
+       "arrows": 0
+      },
+      {
+       "over": true,
+       "eliminated": true,
+       "selected": null,
+       "arrows": 0
+      }
+     ]
+    }
+   ],
+   "d12": [
+    {
+     "turn": 0,
+     "exercised": true,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 1
+    },
+    {
+     "turn": 1,
+     "exercised": true,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 1
+    },
+    {
+     "turn": 2,
+     "exercised": true,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 1
+    }
+   ],
+   "game": "85a52b2ea01a3530509a07abcedfcf1025c97de38b2c4291b1031d63b8e4b331",
+   "confirm": {
+    "buttons": {
+     "x": 941.59375,
+     "y": 478.9375,
+     "w": 104,
+     "h": 52
+    },
+    "panel": {
+     "x": 971.59375,
+     "y": 429.46875,
+     "w": 164,
+     "h": 150.9375
+    }
+   },
+   "pulse": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "reduced": false,
+    "min": 0.7609334668922267,
+    "max": 0.935460763031287,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "ask"
+    }
+   },
+   "mouse": {
+    "moved": true,
+    "arrowsAtStart": {
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    "arrowsAfterMove": {
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 0,
+     "reached": 1,
+     "crossPanel": 0,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_2334",
+       "from": {
+        "x": 858.958039712213,
+        "y": 228.084987890625
+       },
+       "to": {
+        "x": 801.4780697742945,
+        "y": 329.20255999999995
+       },
+       "source": null,
+       "target": {
+        "x": 874.24,
+        "y": 201.20127999999997,
+        "w": 179.712,
+        "h": 248.00255999999996
+       }
+      }
+     ]
+    },
+    "overTarget": {
+     "ghostOver": true,
+     "arrows": 1,
+     "reached": [
+      "person-ComPlayer_2334"
+     ]
+    },
+    "dropped": {
+     "target": {
+      "owner": "ComPlayer_2334"
+     },
+     "arrows": 0
+    },
+    "cancel": {
+     "selected": null,
+     "target": null,
+     "arrows": 0
+    },
+    "reorder": {
+     "changed": true,
+     "arrows": 0,
+     "selected": null
+    },
+    "blur": {
+     "arrowsDuring": 1,
+     "dragAfter": null,
+     "selected": null,
+     "arrows": 0
+    }
+   },
+   "perf": {
+    "drags": 6,
+    "intervals": 383,
+    "cadenceHz": 105.6,
+    "p50": 9.2,
+    "p95": 10.1,
+    "max": 12.2,
+    "limitMs": 20,
+    "withinLimit": 100,
+    "inputSamples": 6,
+    "inputP95": 15.3,
+    "inputMax": 15.3,
+    "aimRedraws": 339,
+    "aimCostP95": 0.2,
+    "aimCostMax": 0.2
+   },
+   "end": {
+    "over": true,
+    "eliminated": true,
+    "winner": "ComPlayer_2334"
+   },
+   "summary": {
+    "turns": 3,
+    "cardsChecked": 18,
+    "arrowsDrawn": 17,
+    "arrowsReached": 0,
+    "cardsWithoutTargets": 1,
+    "crossPanel": 7,
+    "d12Exercised": 3,
+    "lockedChecks": 1
+   }
+  },
+  "touch": {
+   "ffa": false,
+   "touch": {
+    "moved": true,
+    "arrows": {
+     "card": "Ghigno co' i' Denti Marci",
+     "want": 1,
+     "drawn": 0,
+     "reached": 1,
+     "crossPanel": 0,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_6843",
+       "from": {
+        "x": 800.7750244140625,
+        "y": 259.3968488691541
+       },
+       "to": {
+        "x": 780.384,
+        "y": 275.54967892370223
+       },
+       "source": null,
+       "target": {
+        "x": 874.24,
+        "y": 201.20127999999997,
+        "w": 179.712,
+        "h": 248.00255999999996
+       }
+      }
+     ]
+    },
+    "dropped": {
+     "target": {
+      "owner": "ComPlayer_6843"
+     },
+     "arrows": 0
+    },
+    "tapChosen": {
+     "card": "Ghigno co' i' Denti Marci",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    "tapAimed": {
+     "target": {
+      "owner": "ComPlayer_6843"
+     },
+     "arrows": 0
+    }
+   },
+   "reduced": false,
+   "turns": [
+    0,
+    1,
+    2
+   ],
+   "cards": [
+    {
+     "turn": 0,
+     "card": "Desiderio Incontrollabile",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "Ghigno co' i' Denti Marci",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "Ago Marcio e Spezzato",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "Presa Male di Brutto",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "Steal",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "Riflessi Aumentati dalla Speed",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Desiderio Incontrollabile",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Ghigno co' i' Denti Marci",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Ago Marcio e Spezzato",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Presa Male di Brutto",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Steal",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "Riflessi Aumentati dalla Speed",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Desiderio Incontrollabile",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Ghigno co' i' Denti Marci",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Ago Marcio e Spezzato",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Presa Male di Brutto",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Steal",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "Riflessi Aumentati dalla Speed",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    }
+   ],
+   "locked": [],
+   "d12": [
+    {
+     "turn": 0,
+     "exercised": true,
+     "card": "Desiderio Incontrollabile",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 1
+    },
+    {
+     "turn": 1,
+     "exercised": true,
+     "card": "Desiderio Incontrollabile",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 1
+    },
+    {
+     "turn": 2,
+     "exercised": true,
+     "card": "Ghigno co' i' Denti Marci",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 1
+    }
+   ],
+   "game": "37ea4f6c5ac9cd73d1c5613efcd54dd7461f8af16a72fc97d1e1d5e458d4d9cf",
+   "confirm": {
+    "buttons": {
+     "x": 941.59375,
+     "y": 460.75,
+     "w": 104,
+     "h": 52
+    },
+    "panel": {
+     "x": 971.59375,
+     "y": 420.375,
+     "w": 164,
+     "h": 132.75
+    }
+   },
+   "pulse": {
+    "card": "Ghigno co' i' Denti Marci",
+    "reduced": false,
+    "min": 0.819014483445186,
+    "max": 0.999231446084315,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "ask"
+    }
+   },
+   "summary": {
+    "turns": 3,
+    "cardsChecked": 18,
+    "arrowsDrawn": 17,
+    "arrowsReached": 0,
+    "cardsWithoutTargets": 1,
+    "crossPanel": 2,
+    "d12Exercised": 3,
+    "lockedChecks": 0
+   }
+  },
+  "reduced": {
+   "ffa": false,
+   "touch": false,
+   "reduced": true,
+   "turns": [
+    0,
+    1
+   ],
+   "cards": [
+    {
+     "turn": 0,
+     "card": "ADOPERIAMOTI",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "BELLO IL TUO GIOCATTOLO SI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "STORDIAMOTI HO DETTO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "ADOPERIAMOTI",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "BELLO IL TUO GIOCATTOLO SI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "NON GIOCARE COL COLTELLO NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    }
+   ],
+   "locked": [],
+   "d12": [
+    {
+     "turn": 0,
+     "exercised": false,
+     "why": "sequence not running (none planned or already over)"
+    },
+    {
+     "turn": 1,
+     "exercised": false,
+     "why": "sequence not running (none planned or already over)"
+    }
+   ],
+   "game": "32f39c869fad470f8a5c034856c5f90d591cfc4786d749a5a89374098745d938",
+   "confirm": {
+    "buttons": {
+     "x": 941.59375,
+     "y": 478.9375,
+     "w": 104,
+     "h": 52
+    },
+    "panel": {
+     "x": 971.59375,
+     "y": 429.46875,
+     "w": 164,
+     "h": 150.9375
+    }
+   },
+   "pulse": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "reduced": true,
+    "min": 1,
+    "max": 1,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "none"
+    }
+   },
+   "summary": {
+    "turns": 2,
+    "cardsChecked": 12,
+    "arrowsDrawn": 10,
+    "arrowsReached": 0,
+    "cardsWithoutTargets": 2,
+    "crossPanel": 5,
+    "d12Exercised": 0,
+    "lockedChecks": 0
+   }
+  },
+  "ffa": {
+   "ffa": true,
+   "touch": false,
+   "reduced": false,
+   "turns": [
+    0,
+    1,
+    2
+   ],
+   "cards": [
+    {
+     "turn": 0,
+     "card": "ADOPERIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 0,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_318",
+       "from": {
+        "x": 922.4425228587656,
+        "y": 421.4608
+       },
+       "to": {
+        "x": 926.8749652863228,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 810.372696,
+        "y": 603.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 0,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "PAZIENZA: FINITA",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 2,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_318",
+       "from": {
+        "x": 1026.0629796072142,
+        "y": 421.4608
+       },
+       "to": {
+        "x": 1022.9756008117596,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 1104.1242320000001,
+        "y": 603.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 0,
+     "card": "BELLO IL TUO GIOCATTOLO SI",
+     "want": 2,
+     "drawn": 2,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 4,
+     "drawn": 4,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 0,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_318",
+       "from": {
+        "x": 957.5541868505206,
+        "y": 418.4608
+       },
+       "to": {
+        "x": 958.6196432133636,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 908.2898746666667,
+        "y": 600.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 1,
+     "card": "BELLO IL TUO GIOCATTOLO SI",
+     "want": 3,
+     "drawn": 3,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "ADOPERIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 1,
+     "card": "AMMALIAMOTI DI BOTTE",
+     "want": 4,
+     "drawn": 4,
+     "reached": 0,
+     "crossPanel": 3,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 4,
+     "drawn": 4,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "BELLO IL TUO GIOCATTOLO SI",
+     "want": 2,
+     "drawn": 2,
+     "reached": 0,
+     "crossPanel": 1,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "ADOPERIAMOTI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 2,
+     "card": "AMMALIAMOTI DI BOTTE",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 2,
+     "reachedDetail": [
+      {
+       "id": "person-ComPlayer_318",
+       "from": {
+        "x": 1026.0629796072142,
+        "y": 421.4608
+       },
+       "to": {
+        "x": 1022.9756008117596,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 1104.1242320000001,
+        "y": 603.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 2,
+     "card": "STORDIAMOTI HO DETTO",
+     "want": 4,
+     "drawn": 4,
+     "reached": 0,
+     "crossPanel": 3,
+     "reachedDetail": []
+    }
+   ],
+   "locked": [],
+   "d12": [
+    {
+     "turn": 0,
+     "exercised": true,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 4
+    },
+    {
+     "turn": 1,
+     "exercised": true,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 4
+    },
+    {
+     "turn": 2,
+     "exercised": true,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "running": false,
+     "reason": "input",
+     "selected": true,
+     "arrows": 4
+    }
+   ],
+   "game": "2cc0d586f61881d3b6ec4672d7067213fa111ad94efdba1126b502577030c152",
+   "confirm": {
+    "buttons": {
+     "x": 941.59375,
+     "y": 478.9375,
+     "w": 104,
+     "h": 52
+    },
+    "panel": {
+     "x": 971.59375,
+     "y": 429.46875,
+     "w": 164,
+     "h": 150.9375
+    }
+   },
+   "pulse": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "reduced": false,
+    "min": 0.7601130086277896,
+    "max": 0.9999419888203007,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "ask"
+    }
+   },
+   "mouse": {
+    "moved": true,
+    "arrowsAtStart": {
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 4,
+     "drawn": 4,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    "arrowsAfterMove": {
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 4,
+     "drawn": 4,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    "overTarget": {
+     "ghostOver": true,
+     "arrows": 4,
+     "reached": [
+      "person-ComPlayer_9086",
+      "person-ComPlayer_3634"
+     ]
+    },
+    "dropped": {
+     "target": {
+      "owner": "ComPlayer_9086"
+     },
+     "arrows": 0
+    },
+    "cancel": {
+     "selected": null,
+     "target": null,
+     "arrows": 0
+    },
+    "reorder": {
+     "changed": true,
+     "arrows": 0,
+     "selected": null
+    },
+    "blur": {
+     "arrowsDuring": 4,
+     "dragAfter": null,
+     "selected": null,
+     "arrows": 0
+    }
+   },
+   "perf": {
+    "drags": 3,
+    "intervals": 383,
+    "cadenceHz": 105,
+    "p50": 9.4,
+    "p95": 10.3,
+    "max": 15.2,
+    "limitMs": 20,
+    "withinLimit": 100,
+    "inputSamples": 3,
+    "inputP95": 15.4,
+    "inputMax": 15.4,
+    "aimRedraws": 351,
+    "aimCostP95": 0.3,
+    "aimCostMax": 1.2
+   },
+   "summary": {
+    "turns": 3,
+    "cardsChecked": 18,
+    "arrowsDrawn": 42,
+    "arrowsReached": 4,
+    "cardsWithoutTargets": 0,
+    "crossPanel": 15,
+    "d12Exercised": 3,
+    "lockedChecks": 0
+   }
+  },
+  "pending": {
+   "locked": [
+    {
+     "played": "SVEGLIAMOCI MA TU NO",
+     "checks": [
+      {
+       "phase": "pending",
+       "selected": null,
+       "arrows": 0,
+       "hint": {
+        "text": "Mossa ricevuta · In attesa",
+        "cls": "hint pending",
+        "box": {
+         "x": 115.875,
+         "y": 738.625,
+         "w": 203.75,
+         "h": 34.75
+        },
+        "animation": "none"
+       }
+      },
+      {
+       "phase": "pending",
+       "selected": null,
+       "arrows": 0,
+       "hint": {
+        "text": "Mossa ricevuta · In attesa",
+        "cls": "hint pending",
+        "box": {
+         "x": 115.875,
+         "y": 738.625,
+         "w": 203.75,
+         "h": 34.75
+        },
+        "animation": "none"
+       }
+      },
+      {
+       "phase": "pending",
+       "selected": null,
+       "arrows": 0,
+       "hint": {
+        "text": "Mossa ricevuta · In attesa",
+        "cls": "hint pending",
+        "box": {
+         "x": 115.875,
+         "y": 738.625,
+         "w": 203.75,
+         "h": 34.75
+        },
+        "animation": "none"
+       }
+      }
+     ]
+    }
+   ],
+   "cards": [
+    {
+     "turn": 0,
+     "card": "ADOPERIAMOTI",
+     "want": 0,
+     "drawn": 0,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "SVEGLIAMOCI MA TU NO",
+     "want": 4,
+     "drawn": 3,
+     "reached": 1,
+     "crossPanel": 0,
+     "reachedDetail": [
+      {
+       "id": "person-devBob",
+       "from": {
+        "x": 922.4425228587656,
+        "y": 421.4608
+       },
+       "to": {
+        "x": 926.8749652863228,
+        "y": 414.840832
+       },
+       "source": {
+        "x": 810.372696,
+        "y": 603.84,
+        "w": 239.68000000000004,
+        "h": 360.75840000000005
+       },
+       "target": {
+        "x": 983.52,
+        "y": 330.24,
+        "w": 116.8128,
+        "h": 161.201664
+       }
+      }
+     ]
+    },
+    {
+     "turn": 0,
+     "card": "LIEVE FASTIDIO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "BELLO IL TUO GIOCATTOLO SI",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "NON GIOCARE COL COLTELLO NO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    },
+    {
+     "turn": 0,
+     "card": "GENTILE IL TUO CAREZZO",
+     "want": 1,
+     "drawn": 1,
+     "reached": 0,
+     "crossPanel": 0,
+     "reachedDetail": []
+    }
+   ],
+   "confirm": {
+    "buttons": {
+     "x": 941.59375,
+     "y": 478.9375,
+     "w": 104,
+     "h": 52
+    },
+    "panel": {
+     "x": 971.59375,
+     "y": 429.46875,
+     "w": 164,
+     "h": 150.9375
+    }
+   },
+   "dragWhilePending": {
+    "drag": null,
+    "arrows": 0,
+    "selected": null
+   },
+   "summary": {
+    "cardsChecked": 6,
+    "arrowsDrawn": 7,
+    "arrowsReached": 1,
+    "lockedChecks": 1
+   }
+  }
+ },
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "duel-1366x768": {
+   "turns": 3,
+   "cardsChecked": 18,
+   "arrowsDrawn": 17,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 1,
+   "crossPanel": 7,
+   "d12Exercised": 3,
+   "lockedChecks": 1,
+   "pulse": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "reduced": false,
+    "min": 0.7609334668922267,
+    "max": 0.935460763031287,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "ask"
+    }
+   },
+   "perf": {
+    "drags": 6,
+    "intervals": 383,
+    "cadenceHz": 105.6,
+    "p50": 9.2,
+    "p95": 10.1,
+    "max": 12.2,
+    "limitMs": 20,
+    "withinLimit": 100,
+    "inputSamples": 6,
+    "inputP95": 15.3,
+    "inputMax": 15.3,
+    "aimRedraws": 339,
+    "aimCostP95": 0.2,
+    "aimCostMax": 0.2
+   },
+   "confirm": {
+    "x": 941.59375,
+    "y": 478.9375,
+    "w": 104,
+    "h": 52
+   }
+  },
+  "touch-1366x768": {
+   "turns": 3,
+   "cardsChecked": 18,
+   "arrowsDrawn": 17,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 1,
+   "crossPanel": 2,
+   "d12Exercised": 3,
+   "lockedChecks": 0,
+   "pulse": {
+    "card": "Ghigno co' i' Denti Marci",
+    "reduced": false,
+    "min": 0.819014483445186,
+    "max": 0.999231446084315,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "ask"
+    }
+   },
+   "confirm": {
+    "x": 941.59375,
+    "y": 460.75,
+    "w": 104,
+    "h": 52
+   }
+  },
+  "reduced-1366x768": {
+   "turns": 2,
+   "cardsChecked": 12,
+   "arrowsDrawn": 10,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 2,
+   "crossPanel": 5,
+   "d12Exercised": 0,
+   "lockedChecks": 0,
+   "pulse": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "reduced": true,
+    "min": 1,
+    "max": 1,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "none"
+    }
+   },
+   "confirm": {
+    "x": 941.59375,
+    "y": 478.9375,
+    "w": 104,
+    "h": 52
+   }
+  },
+  "ffa-1366x768": {
+   "turns": 3,
+   "cardsChecked": 18,
+   "arrowsDrawn": 42,
+   "arrowsReached": 4,
+   "cardsWithoutTargets": 0,
+   "crossPanel": 15,
+   "d12Exercised": 3,
+   "lockedChecks": 0,
+   "pulse": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "reduced": false,
+    "min": 0.7601130086277896,
+    "max": 0.9999419888203007,
+    "samples": 14,
+    "hint": {
+     "text": "Scegli il bersaglio sul tavolo",
+     "cls": "hint choose ask",
+     "box": {
+      "x": 122.1328125,
+      "y": 738.625,
+      "w": 216.265625,
+      "h": 34.75
+     },
+     "animation": "ask"
+    }
+   },
+   "perf": {
+    "drags": 3,
+    "intervals": 383,
+    "cadenceHz": 105,
+    "p50": 9.4,
+    "p95": 10.3,
+    "max": 15.2,
+    "limitMs": 20,
+    "withinLimit": 100,
+    "inputSamples": 3,
+    "inputP95": 15.4,
+    "inputMax": 15.4,
+    "aimRedraws": 351,
+    "aimCostP95": 0.3,
+    "aimCostMax": 1.2
+   },
+   "confirm": {
+    "x": 941.59375,
+    "y": 478.9375,
+    "w": 104,
+    "h": 52
+   }
+  },
+  "pending-1366x768": {
+   "cardsChecked": 6,
+   "arrowsDrawn": 7,
+   "arrowsReached": 1,
+   "lockedChecks": 1
+  }
+ },
+ "errors": [],
+ "scenarioSummary": {
+  "duel": {
+   "turns": 3,
+   "cardsChecked": 18,
+   "arrowsDrawn": 17,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 1,
+   "crossPanel": 7,
+   "d12Exercised": 3,
+   "lockedChecks": 1
+  },
+  "touch": {
+   "turns": 3,
+   "cardsChecked": 18,
+   "arrowsDrawn": 17,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 1,
+   "crossPanel": 2,
+   "d12Exercised": 3,
+   "lockedChecks": 0
+  },
+  "reduced": {
+   "turns": 2,
+   "cardsChecked": 12,
+   "arrowsDrawn": 10,
+   "arrowsReached": 0,
+   "cardsWithoutTargets": 2,
+   "crossPanel": 5,
+   "d12Exercised": 0,
+   "lockedChecks": 0
+  },
+  "ffa": {
+   "turns": 3,
+   "cardsChecked": 18,
+   "arrowsDrawn": 42,
+   "arrowsReached": 4,
+   "cardsWithoutTargets": 0,
+   "crossPanel": 15,
+   "d12Exercised": 3,
+   "lockedChecks": 0
+  },
+  "pending": {
+   "cardsChecked": 6,
+   "arrowsDrawn": 7,
+   "arrowsReached": 1,
+   "lockedChecks": 1
+  }
+ },
+ "ok": true,
+ "problems": []
+}

@@ -150,6 +150,13 @@ try{
  const art=await page.locator('[data-testid=catalog] .thumb').evaluateAll(n=>n.filter(e=>getComputedStyle(e).backgroundImage.includes('atlas')&&e.style.backgroundPosition).length);
  const scroll=await page.evaluate(()=>({page:document.documentElement.scrollWidth<=innerWidth,sheet:(s=>s.scrollHeight>s.clientHeight)(document.querySelector('.sheet'))}));
  await A.shot('01-catalog');
+ // C3-5: the same face as the table in the catalog: the nominal damage of the annex as symbols and amounts (no letters), nothing for a card without damage, no priority.
+ {const faces=await page.locator('[data-testid=catalog] [data-testid=card-face]').evaluateAll(n=>n.map(e=>({binding:e.dataset.binding,text:e.innerText,lines:[...e.querySelectorAll('small')].map(x=>x.innerText),pills:[...e.querySelectorAll('.dmg-pill')].map(x=>({type:x.dataset.damage,text:x.innerText.trim(),svg:x.querySelectorAll('svg').length}))})));
+  let withDamage=0;
+  for(const f of faces){const c=annex.cards.find(x=>x.class===f.binding),want=c.damageAmount&&c.damageAmount!=='—'?c.damageAmount.split(',').map(x=>{const m=/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(x);return {type:m[1],text:m[3]?`${m[2]}+`:m[2],svg:1};}):[];
+   assert.deepEqual(f.pills,want,`catalog face of ${f.binding}: damage pills`);if(want.length)withDamage++;
+   assert.ok(!/priorit/i.test(f.text),`catalog face of ${f.binding}: no priority on the face`);assert.ok(!f.lines.some(l=>/\b(HIT|CUT|POISON)\b/.test(l)),`catalog face of ${f.binding}: no type written in letters on the face lines (the effect text below is the catalog's own)`);}
+  assert.equal(withDamage,12,'12 catalog faces with damage');step('catalogDamage',{faces:faces.length,withDamage,characters:shownChars.length,faceTotal:faces.length+shownChars.length});assert.equal(faces.length+shownChars.length,39);}
  step('catalog',{cards:shownCards.length,characters:shownChars.length,total:shownCards.length+shownChars.length,annexVersion:annex.version,withIllustration:art,noHorizontalScroll:scroll.page,sheetScrolls:scroll.sheet});
  assert.equal(shownCards.length+shownChars.length,39);assert.equal(art,39);assert.ok(scroll.page);
  await page.getByTestId('show-catalog').click();
@@ -189,6 +196,8 @@ try{
  await slot('Mazzo regolare');
  await addRegular('bruiser.Glare',4);await addRegular('com.ShuffleFeet',3);
  // Search on the card text, then the deck view: remove one copy with the same name.
+ {const pool=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>({text:e.innerText,pills:e.querySelectorAll('.dmg-pill').length})));
+  assert.ok(pool.length>0&&pool.every(f=>!/priorit/i.test(f.text)),'editor faces: no priority');assert.ok(pool.some(f=>f.pills>0),'editor faces: damage pills present');step('editorFaces',{faces:pool.length,withDamage:pool.filter(f=>f.pills).length});}
  await page.getByTestId('card-search').fill('ShuffleFeet');const searched=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').count();
  await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card('com.ShuffleFeet')}`);
  const deckView=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();await page.getByTestId('card-search').fill('');

@@ -8,6 +8,8 @@
 // round's sequence (D13) on the screen and clear of the other seats and of the hand. C3-6: the strips of the round's summary (one per seat, symbols
 // and signed numbers) and the short summary line stay clear of every seat, the hand, the piles, the round's cards and the shell, in the type size the plan
 // requires (16/12 px at least for the strips, 16/13 px for the line), and the line's box is the one the scene gave it. BM_OUT=…/before measured the build before C3-L.
+// C3-5: the face of every card of the catalog as the table draws it (hand size and the small cards of the round): the nominal damage of the catalog (type and amount, symbols and numbers, no letters), nothing
+// for a card without damage, the priority nowhere on the face (the inspection still gives it), no overlap with the cost chips; the faces of the hand at every turn with the amount resolved on the own V.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
@@ -164,6 +166,20 @@ function briefProblems(s,dom){const out=[],L=s.layout,t=dom.toast,obs=obstacles(
  if(s.brief&&(Math.abs(t.x-s.brief.box.x)>1.5||Math.abs(t.y-s.brief.box.y)>1.5||Math.abs(t.w-s.brief.box.w)>1.5||Math.abs(t.h-s.brief.box.h)>1.5))out.push(`short summary box ${JSON.stringify(R(t))} is not the scene's ${JSON.stringify(R(s.brief.box))}`);
  return {out,shown:true,box:R(t),lines:s.brief?.lines,font:s.brief?.font};}
 
+// C3-5: expected pills from the catalog strings, read independently of the client's parser: `HIT 15` is the type and «15», `HIT 20+x` is «20+» without the V (the catalog) or 20 + half the V left.
+const pills=(card,left)=>{const amount=card.catalogAmount??card.damageAmount;if(amount&&amount!=='—')return amount.split(',').map(x=>{const m=/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(x);return m?{type:m[1],text:m[3]?(left===null?`${m[2]}+`:String(Number(m[2])+Math.trunc(left/2))):m[2]}:{type:'?',text:x};});
+ const types=card.catalogDamage??card.damage;return types&&types!=='—'?types.split(',').map(t=>({type:t.trim(),text:''})):[];};
+function faceProblems(f,card,{small,left}){const out=[];if(card.item){if(f.damage.length)out.push('an object with a damage pill');return out;}
+ const want=pills(card,left),got=f.damage.map(d=>({type:d.type,text:d.text}));
+ if(JSON.stringify(got.map(x=>x.type))!==JSON.stringify(want.map(x=>x.type)))out.push(`damage types ${JSON.stringify(got.map(x=>x.type))}, catalog ${JSON.stringify(want.map(x=>x.type))}`);
+ else if(!small&&JSON.stringify(got.map(x=>x.text))!==JSON.stringify(want.map(x=>x.text)))out.push(`damage amounts ${JSON.stringify(got.map(x=>x.text))}, catalog ${JSON.stringify(want.map(x=>x.text))}`);
+ if(f.texts.some(t=>/^P \d/.test(t)||t.includes('↻')))out.push(`priority on the face: ${JSON.stringify(f.texts.filter(t=>/^P \d/.test(t)||t.includes('↻')))}`);
+ if(!small&&f.texts.some(t=>/^(HIT|CUT|POISON)|^[HCP] \d/.test(t)))out.push('a letter code for the damage');
+ f.damage.forEach((d,i)=>{if(!inside({...d.box,x:d.box.x+f.w/2,y:d.box.y+f.h/2},f.w,f.h))out.push(`pill ${i} ${JSON.stringify(R(d.box))} outside the face`);
+  for(const c of f.costs)if(overlap(d.box,c)>0)out.push(`pill ${i} over a cost chip`);f.damage.slice(i+1).forEach(o=>{if(overlap(d.box,o.box)>0)out.push(`pill ${i} over another pill`);});});
+ return out;}
+const handFaces=(s,scope)=>{const res=s.resources,rows=[];s.readout.hand.forEach((h,i)=>{const card=s.cards.find(c=>c.key===h.key);if(!card||!h.face){bad(scope,`hand card ${h.name} without a drawn face`);return;}
+ const left=res.VIOLENCE===undefined?null:res.VIOLENCE-(card.cost?.VIOLENCE??0),pr=faceProblems(h.face,{...card,item:false},{small:false,left});for(const m of pr)bad(scope,`face of ${h.name}: ${m}`);rows.push({name:h.name,damage:h.face.damage.map(d=>`${d.type} ${d.text}`),texts:h.face.texts.length});});return rows;};
 const run=name=>!only||only.includes(name);
 async function scenario(name,{ffa=false,turns=2}){
  const A=await open('A');await login(A);const rec={ffa,turns:[],closeUps:[]};evidence.scenarios[name]=rec;let closeUpsSeen=0;
@@ -181,6 +197,19 @@ async function scenario(name,{ffa=false,turns=2}){
     if(!m.played)bad(scope,'no round cards');else if(JSON.stringify((m.played.shows??[]).map(x=>x.name))!==JSON.stringify(now.lastMoves.slice(0,m.played.shows?.length??0))||(m.played.shows??[]).length!==Math.min(now.lastMoves.length,now.layout.played.slots.length))bad(scope,`round cards ${JSON.stringify(m.played.shows)} vs view ${JSON.stringify(now.lastMoves)}`);
     if(!m.piles)bad(scope,'no piles');else if(m.piles.shows?.deck!==now.deckCount)bad(scope,`deck shows ${m.piles.shows?.deck}, view ${now.deckCount}`);
     for(const b of m.below44)if(b.kind!=='status')bad(scope,`${b.id} under 44 px`);}
+   // C3-5: faces of the hand with the amount resolved on the own V; once per game the whole catalog drawn as the hand and as the round's small cards, and the inspection.
+   if(!old){const scope=`${name}${tag} T${now.turn}`;rec.turns.at(-1).faces=handFaces(now,scope);
+    if(t===0){const big=await A.page.evaluate(()=>window.__bm.faces(false)),small=await A.page.evaluate(()=>window.__bm.faces(true));
+     rec.catalog={cards:big.length,withDamage:big.filter(c=>c.damage.length).length,rows:big.map(f=>({name:f.name,damage:f.damage.map(d=>`${d.type} ${d.text}`),catalog:f.catalogAmount}))};
+     if(big.length!==37)bad(scope,`the catalog has ${big.length} cards, not 37`);if(rec.catalog.withDamage!==12)bad(scope,`${rec.catalog.withDamage} faces with damage, the catalog has 12`);
+     for(const f of big)for(const m of faceProblems(f,f,{small:false,left:null}))bad(scope,`catalog face of ${f.name}: ${m}`);
+     for(const f of small)for(const m of faceProblems(f,f,{small:true,left:null}))bad(scope,`small face of ${f.name}: ${m}`);
+     step(`${name}${tag} catalog faces`,{cards:big.length,withDamage:rec.catalog.withDamage,small:small.filter(f=>f.damage.length).length});
+     const pick=now.cards.find(c=>c.damage&&c.damage!=='—')??now.cards[0];await A.page.locator(`[data-hit="${pick.key}"]`).focus();await A.page.keyboard.press('i');
+     await A.page.waitForSelector('dialog[open] .receipt',{timeout:5000});const txt=await A.page.locator('dialog[open] .receipt').innerText(),marks=await A.page.locator('[data-testid=inspect-damage] svg').count();
+     const types=pick.damage&&pick.damage!=='—'?pick.damage.split(',').length:0;rec.inspection={card:pick.name,priority:pick.priority,marks,text:txt.slice(0,300)};
+     if(!new RegExp(`Priorità\\s*${pick.priority}\\b`).test(txt))bad(scope,`the inspection of ${pick.name} does not show the priority ${pick.priority}`);if(marks!==types)bad(scope,`the inspection shows ${marks} damage symbols for ${types} types`);
+     await A.page.keyboard.press('Escape');await A.page.waitForTimeout(150);if(await dialogOpen(A))await A.page.keyboard.press('Escape');}}
    // C3-6: the strips of the round's summary (they stay until the first card choice) clear of everything, in the type size of the plan.
    if(now.summary){const sp=stripProblems(now,await shell(A));rec.turns.at(-1).strips={seats:sp.seats,drawn:sp.drawn,missing:sp.missing,fonts:sp.fonts,texts:sp.texts};step(`${name}${tag} T${now.turn} strips`,rec.turns.at(-1).strips);
     if(!old){for(const m of sp.out)bad(`${name}${tag} T${now.turn}`,m);

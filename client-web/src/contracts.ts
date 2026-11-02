@@ -7,8 +7,9 @@ export interface Card {
   canTarget: ('SELF' | 'OPPONENT' | 'NEAR_ITEM' | 'FAR_ITEM')[];
   cost: Partial<Record<Resource, number>>;
   image: string | null; sprite: string | null;
-  // Descriptive catalog fields (regulation 1.7 R07a); absent on older servers.
-  role?: string | null; gains?: string | null;
+  // Descriptive catalog fields (regulation 1.7 R07a, 1.9 and 1.10); absent on older servers.
+  // `damage`: "HIT", "CUT", "POISON", several as "HIT, CUT" or "—"; `damageAmount`: "HIT 15", "HIT 20+x", "—".
+  role?: string | null; gains?: string | null; damage?: string | null; damageAmount?: string | null;
 }
 export interface Status {
   name: string; description: string; type: string; flow: string;

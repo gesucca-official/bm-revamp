@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s, C3-6)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s, C3-6, C3-5)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -186,8 +186,10 @@ in verticale, mai la pagina in orizzontale.
   Un rifiuto lascia la scelta sul tavolo per correggerla.
 - Sulla carta: timbro del ruolo sotto il titolo (danno, difesa, risorse,
   contrasto, disturbo, oggetti, altro), bollini ▲ con le risorse che ti dà,
-  monete scure con il costo e priorità in basso. Una carta più spenta, con «!» sul
-  costo, oggi non è pagabile: si può comunque provare, decide il server.
+  monete scure con il costo in basso a sinistra e, in basso a destra, il bollino del danno
+  nominale: simbolo del tipo (esplosione per il colpo, lama per il taglio, goccia per il
+  veleno) e importo del catalogo (C3-5). La priorità non è sul volto: sta nella (i).
+  Una carta più spenta, con «!» sul costo, oggi non è pagabile: si può comunque provare, decide il server.
 - Le carte coperte nel ventaglio si alzano intere passando il mouse, scegliendole
   con un tocco o con il focus da tastiera.
 - Le tue risorse sono nella plancia accanto al personaggio: simbolo, numero e
@@ -277,6 +279,26 @@ round successivo.
 del tavolo, dal titolo decorativo e dalle strisce; il testo è troncato con «…» e un tocco apre «Ultimo
 turno». Conta i suoi 6 s solo a scheda visibile. A 844×390 in FFA il posto libero è stretto (una riga di
 120–160 px o poco più) e, se manca del tutto, la riga non compare e «Ultimo turno» resta nel menu.
+
+## Volto della carta ed effetti per tipo di danno (C3-5)
+
+- **Volto:** in basso a destra il bollino del danno **nominale** della carta: simbolo del tipo (esplosione per il colpo, lama per il taglio, goccia per
+  il veleno) e importo del catalogo, uno per tipo; nessun bollino per le carte senza danno. Viene da `damage` e `damageAmount` (regolamento 1.9 e 1.10),
+  letti da `contracts.ts` e interpretati da `damageOf` in `readability.ts`; il client non calcola né corregge (D1): stati e difese possono cambiare il
+  danno reale. `HIT 20+x` mostra il totale con la V di chi gioca (metà della V rimasta dopo il costo, troncata verso zero) in mano, nell'anteprima, nel
+  trascinamento e nel primo piano; «20+» dove la V non è nota (catalogo, editor); le carte piccole del round hanno il solo simbolo.
+- **Priorità:** non è più sul volto. Sta nell'ispezione («Priorità», con la riga «Danno nominale») e nell'etichetta accessibile della carta.
+- **Stesso volto ovunque:** mano, anteprima, trascinamento, primo piano della regia (D13), catalogo ed editor (in HTML con gli stessi simboli, `DamagePills`
+  in `ui.tsx`, poligoni in `DAMAGE_SHAPES`).
+- **Impatto di ogni carta** (`impactOf`): il segno del suo tipo di danno sul bersaglio (colpo: esplosione con scossa del posto; taglio: lama; veleno:
+  goccia che sale; più tipi, un segno ciascuno) oppure, dove il tipo non si applica, quello del ruolo R07a in un cerchio colorato (difesa, risorse,
+  contrasto, disturbo, oggetti, altro); senza tipo né ruolo l'anello semplice. È la natura della carta, non il danno risolto: una conversione come
+  `BrokenBeerBottle` non si vede e non si deduce.
+- **Enfasi brevi:** annullata = croce e timbro «ANNULLATA» (senza impatto di tipo); eliminazione = timbro, anello e scossa del posto; forfait = timbro;
+  esito = banner «VITTORIA», «SCONFITTA» o «PAREGGIO» in 700 ms (`PACE.outcome`) in coda al solo round che chiude la partita. Tutto vettoriale (D9).
+- **Movimento ridotto:** nessuna sequenza, quindi nessun impatto né scossa; il segno del tipo resta sul volto (`impactOf(carta, true).shake` è 0).
+- **Scritte delle variazioni:** il tempo leggibile misurato va dal primo frame intero al frame in cui comincia a sfumare (`end`); la scena registra anche il
+  più lungo intervallo fra frame nella finestra (`gap`).
 
 ## «Ultimo turno» (C3-6)
 
@@ -525,8 +547,8 @@ personaggio proprio più grande degli altri, le carte del round uguali per nome 
 con il conteggio della vista, personaggi e oggetti di almeno 44 px, nessun posto fuori schermo o sovrapposto
 (salvo la scritta decorativa «BOTTE MICIDIALI»), ogni primo piano della sequenza dentro lo schermo e lontano dagli
 altri posti e dalla mano, e la cadenza dei frame del criterio di C0 dalla scelta alla fine della sequenza.
-`BM_OUT=…/before` misura una build precedente senza controlli. Da C3-6 controlla anche le strisce del riepilogo (una per posto, nel carattere richiesto, libere da ogni posto, dalla mano, dalle pile, dalle carte del round e dalla riga breve) e la riga breve stessa (nel posto che la scena le ha dato, a 16 o 13 px, mai su un posto). `BM_SCENARIOS` sceglie `duel,ffa`.
-`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, C3-4s, C3-6, database temporaneo) gioca quick 1vCom con caduta e rientro,
+`BM_OUT=…/before` misura una build precedente senza controlli. Da C3-5 disegna ogni carta del catalogo come la mano e come carta piccola del round e controlla il danno del catalogo (tipo e importo, senza lettere, senza priorità, dentro il volto e fuori dai gettoni del costo), le facce della mano a ogni turno e l'ispezione (priorità e simboli del danno). Da C3-6 controlla anche le strisce del riepilogo (una per posto, nel carattere richiesto, libere da ogni posto, dalla mano, dalle pile, dalle carte del round e dalla riga breve) e la riga breve stessa (nel posto che la scena le ha dato, a 16 o 13 px, mai su un posto). `BM_SCENARIOS` sceglie `duel,ffa`.
+`VerifyResolution` (C3-1, C3-2, C3-4 e revisione, C3-4s, C3-6, C3-5, database temporaneo; da C3-5 controlla anche gli impatti di ogni carta giocata contro le stringhe del catalogo, le enfasi e il banner dell'esito, e in movimento ridotto nessun segno né scossa) gioca quick 1vCom con caduta e rientro,
 tre round con movimento ridotto emulato, interruzioni in quick 1vCom («Salta effetti»,
 tocchi sul tavolo vuoto che passano di passo in passo, carta scelta durante la sequenza,
 scheda nascosta: reale se il

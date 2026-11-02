@@ -1,0 +1,463 @@
+{
+  "date": "2026-11-02T21:45:41.517Z",
+  "url": "http://127.0.0.1:4320",
+  "user": "devAlice",
+  "kind": "automated browser run on PC (Edge via Playwright) against the local server; not a physical device",
+  "games": [
+    {
+      "index": 1,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "drag"
+        },
+        {
+          "turn": 1,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "NON GIOCARE COL COLTELLO NO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_6921",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "PERMESSO SCUSA ORA SMETTI ",
+          "target": "ComPlayer_6921",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "ORMALE GUARIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "BELLO IL TUO GIOCATTOLO SI",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "PAZIENZA: FINITA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "GABBIANO DUNQUE VOLIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "COSA FAI NON É UNA DOMANDA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 17,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6921",
+          "choices": {
+            "DISCARD_ONE": "COSA FAI NON É UNA DOMANDA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 18,
+          "card": "STORDIAMOTI HO DETTO",
+          "target": "ComPlayer_6921",
+          "choices": null,
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-02T21:45:42.648Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "outcome": {
+        "winner": "ComPlayer_6921",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-02T21:46:13.943Z"
+    },
+    {
+      "index": 2,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "Ago Marcio e Spezzato",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Steal"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Presa Male di Brutto"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "Ago Marcio e Spezzato",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Steal"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "Ago Marcio e Spezzato",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Rabbia Psicotica da Meth"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Grab"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "Dose di Eroina da Cavalli",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "Desiderio Incontrollabile",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Tossicone Scatarrante"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Mescolone Micidiale"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "Desiderio Incontrollabile",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_965",
+          "choices": {
+            "DISCARD_ONE": "Scatto Repentino"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-02T21:46:14.284Z",
+      "character": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "ComPlayer_965",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-02T21:46:25.792Z"
+    }
+  ],
+  "checks": {
+    "resumedAtStart": false,
+    "login": "hub reached after REST validate, STOMP CONNECT, resume and profile",
+    "noScroll": {
+      "overflowingHit": "card-1",
+      "scrollTop": 0,
+      "scrollHeight": 390,
+      "innerHeight": 390
+    },
+    "reorder": {
+      "before": 6,
+      "firstMovedTo": 5,
+      "sendsDuring": 0,
+      "dragMoved": true
+    },
+    "rejoin": {
+      "sameTurn": true,
+      "handOrderKept": true,
+      "sendsDuringRejoin": 0
+    },
+    "o1o5": {
+      "oldButtons": 0,
+      "infoOnHover": true,
+      "infoOnSelected": true,
+      "keyboardReorder": true,
+      "sendsDuring": 0
+    },
+    "dragFollow": {
+      "ghostOverTargetDuringDrag": true,
+      "dragMoved": true
+    },
+    "bound": {
+      "playedCardName": "Ghigno co' i' Denti Marci",
+      "playerId": "devAlice",
+      "targetId": "ComPlayer_965",
+      "gameId": "9e01694f7f1b9ecb51acef033568bc4089f9b3889940109f7944d5317f8f0795",
+      "choices": {
+        "DISCARD_ONE": "Scatto Repentino"
+      }
+    },
+    "item": {
+      "playedCardName": "Desiderio Incontrollabile",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "9e01694f7f1b9ecb51acef033568bc4089f9b3889940109f7944d5317f8f0795",
+      "choices": {
+        "TARGET_ITEM": "Tennents Super"
+      }
+    },
+    "c2a": {
+      "outsideDeselect": {
+        "selectedBefore": true,
+        "selectedAfter": false,
+        "raisedH": 217,
+        "restH": 166
+      },
+      "status": {
+        "chip": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+        "hoverText": "Stato negativo: NO PATIENCE - Damage Intake Boost\nColpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+        "tapOpens": true,
+        "closedElsewhere": true
+      },
+      "turnsChecked": 30,
+      "cardsChecked": 180,
+      "rolesSeen": {
+        "ITEMS": 48,
+        "DAMAGE": 56,
+        "DEFENSE": 24,
+        "COUNTER": 14,
+        "OTHER": 11,
+        "DISRUPT": 14,
+        "RESOURCES": 13
+      },
+      "unpayableSeen": 13,
+      "unpayableDimmed": 13,
+      "boardChecks": 30,
+      "hover": {
+        "restingH": 166,
+        "hoverH": 184,
+        "raised": true
+      },
+      "unpayableSend": {
+        "card": "GARGANTUESCO IMPATTO SUL TU",
+        "sent": true,
+        "serverAnswer": "Rifiutata: cant be cast with current resources",
+        "choiceKept": true
+      },
+      "layout": {
+        "hand": {
+          "w": 120,
+          "h": 165.6
+        },
+        "person": {
+          "w": 120,
+          "h": 165.6
+        },
+        "item": {
+          "w": 60.8,
+          "h": 83.904
+        }
+      },
+      "boardDuringSequence": 28
+    },
+    "hubReturn": "hub visible after leave acknowledgement"
+  },
+  "rejections": [
+    {
+      "turn": 11,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 14,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 16,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 16,
+      "card": "GENTILE IL TUO CAREZZO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    }
+  ],
+  "periodic": [
+    {
+      "game": 1,
+      "text": "Fine turno\n\nEffetti di fine turno su: Computer. Cosa hanno fatto lo dice solo il testo del server, più sotto.\n\nTesto del server (in inglese, invariato)"
+    }
+  ],
+  "noValidMove": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "want": {
+    "characters": [
+      "Spazienzio de la Ucciso",
+      "Tossico del Serraglio"
+    ],
+    "bound": true,
+    "item": true,
+    "drag": true,
+    "tap": true,
+    "reorder": true,
+    "rejection": true,
+    "periodic": true
+  },
+  "inputMs": {
+    "note": "PC headless/headed Edge, input to next frame; not the iPhone measure",
+    "samples": 277,
+    "p50": 11.300000011920929,
+    "p95": 23.30000001192093,
+    "max": 32
+  }
+}
