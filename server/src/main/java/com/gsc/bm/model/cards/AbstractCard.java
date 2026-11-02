@@ -77,6 +77,9 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     // Nominal damage types (regulation 1.9 R07a), e.g. "HIT" or "—"; descriptive like role and gains.
     @Setter(AccessLevel.NONE)
     private String damage;
+    // Nominal damage amount to the target (regulation 1.10 R07a), e.g. "HIT 15", "HIT 20+x" or "—".
+    @Setter(AccessLevel.NONE)
+    private String damageAmount;
 
     @Override
     public void setGuiName(String name) {
@@ -107,6 +110,11 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     @Override
     public void setGuiDamage(String damage) {
         this.damage = damage;
+    }
+
+    @Override
+    public void setGuiDamageAmount(String damageAmount) {
+        this.damageAmount = damageAmount;
     }
 
     @Override

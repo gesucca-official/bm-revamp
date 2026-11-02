@@ -3,6 +3,7 @@ from pathlib import Path
 import json
 import re
 import sqlite3
+import sys
 
 root = Path(__file__).resolve().parent.parent
 canonical = root / 'docs/game-rules.md'
@@ -44,7 +45,7 @@ entries = expected['cards'] + expected['characters'] + expected['tokens']
 # R07a: descriptive role and self gains, one row per set entry; no effect depends on them.
 role_names = {'DAMAGE', 'DEFENSE', 'RESOURCES', 'COUNTER', 'DISRUPT', 'ITEMS', 'OTHER'}
 roles = {}
-for line in role_section.splitlines():
+for line in role_section.split('### Danno nominale', 1)[0].splitlines():
     fields = [part.strip() for part in line.strip('|').split('|')]
     if line.startswith('| ') and len(fields) == 3 and fields[0] != 'Carta':
         roles[fields[0]] = fields[1:]
@@ -56,36 +57,114 @@ for entry in entries:
     else:
         assert role in role_names, entry['class'] + ': unknown role ' + role
         assert [entry['role'], entry['gains']] == [role, gains], entry['class'] + ': role or gains differ from R07a'
-# R07a 1.9: nominal damage types, also descriptive. Checked against the Damage each card's code builds;
-# the only exception listed is delayed timer damage, which R07a excludes by name.
+# R07a 1.9 / 1.10: nominal damage type and amount, also descriptive. Both are checked against the Damage each card's
+# code builds: the target damages are read from the source text (a fixed amount literally, a variable one through its
+# declared formula) and compared with the R07a table, the annex, SQLite and the test contract.
+NONE = '\u2014'
 damage_names = ['HIT', 'CUT', 'POISON']
 damages = {}
 for line in role_section.split('### Danno nominale', 1)[1].splitlines():
     fields = [part.strip() for part in line.strip('|').split('|')]
-    if line.startswith('| ') and len(fields) == 2 and fields[0] != 'Carta':
-        damages[fields[0]] = fields[1]
+    if line.startswith('| ') and len(fields) == 3 and fields[0] != 'Carta':
+        damages[fields[0]] = fields[1:]
 assert list(damages) == list(roles), 'R07a damage table must list the R07 set in order'
+# Delayed timer damage is excluded by R07a by name; variable amounts are written with x and declared with their formula.
 excluded_by_rules = {'com.items.MarvelousCocktail': {'POISON'}}
+variable_formulas = {'20+x': '20+(self.getResources().get(Resource.VIOLENCE)/2)'}
+
+
+def scan_call(code, open_index):
+    """Text between the parenthesis at open_index and its match."""
+    depth = 0
+    for i in range(open_index, len(code)):
+        depth += {'(': 1, ')': -1}.get(code[i], 0)
+        if depth == 0:
+            return code[open_index + 1:i]
+    raise AssertionError('unbalanced parenthesis')
+
+
+def code_damages(entry):
+    """[(type, amount expression, recipient, file:line)] of each Damage the card's class builds."""
+    path = root / 'server/src/main/java/com/gsc/bm/model/cards' / (entry['class'].replace('.', '/') + '.java')
+    code = path.read_text(encoding='utf-8')
+    found = []
+    for m in re.finditer(r'new Damage\(', code):
+        inner = scan_call(code, m.end() - 1)
+        kind, amount = [part.strip() for part in inner.split(',', 1)]
+        assert kind.startswith('Damage.DamageType.'), entry['class'] + ': unreadable damage type ' + kind
+        before = code[:m.start()]
+        recipient = re.search(r'\.inflictDamage\(\s*(\w+)\s*,\s*$', before)
+        if recipient:
+            who = recipient.group(1)
+        else:
+            assert re.search(r'\.takeDamage\(\s*$', before), entry['class'] + ': Damage built outside inflictDamage/takeDamage'
+            who = 'timer'
+        found.append((kind.rsplit('.', 1)[1], re.sub(r'\s+', '', amount), who,
+                      path.relative_to(root).as_posix() + ':' + str(code.count('\n', 0, m.start()) + 1)))
+    return found
+
+
+def amount_from_code(entry):
+    """Nominal amount written from the code (target damages only, HIT, CUT, POISON order) and its source lines."""
+    per_type, lines = {}, []
+    for kind, amount, who, where in code_damages(entry):
+        if who == 'timer':
+            assert kind in excluded_by_rules.get(entry['class'], set()), entry['class'] + ': undeclared timer damage ' + kind
+            continue
+        if who != 'target':
+            assert who == 'self', entry['class'] + ': damage to an unknown recipient ' + who
+            continue
+        per_type.setdefault(kind, []).append(amount)
+        lines.append(where)
+    parts = []
+    for kind in damage_names:
+        if kind not in per_type:
+            continue
+        amounts = per_type[kind]
+        if all(a.isdigit() for a in amounts):
+            parts.append(kind + ' ' + str(sum(int(a) for a in amounts)))
+        else:
+            assert len(amounts) == 1, entry['class'] + ': several amounts with a variable one'
+            wanted = [x for x, formula in variable_formulas.items() if formula == amounts[0]]
+            assert wanted, entry['class'] + ': variable damage formula not declared: ' + amounts[0]
+            parts.append(kind + ' ' + wanted[0])
+    return (', '.join(parts) or NONE), lines
+
+
 for entry in entries:
-    damage = damages[entry['class'].split('.')[-1]]
+    name = entry['class'].split('.')[-1]
+    damage, amount = damages[name]
     if entry['type'] == 'Personaggio':
-        assert damage == '—' and 'damage' not in entry, entry['class'] + ': characters have no damage'
+        assert [damage, amount] == [NONE, NONE] and 'damage' not in entry and 'damageAmount' not in entry, entry['class'] + ': characters have no damage'
         continue
-    kinds = [] if damage == '—' else damage.split(', ')
+    kinds = [] if damage == NONE else damage.split(', ')
     assert kinds == [k for k in damage_names if k in kinds], entry['class'] + ': unknown, repeated or unordered damage ' + damage
     assert entry['damage'] == damage, entry['class'] + ': damage differs from R07a'
-    code = (root / 'server/src/main/java/com/gsc/bm/model/cards' / (entry['class'].replace('.', '/') + '.java')).read_text(encoding='utf-8')
-    built = set(re.findall(r'new Damage\(\s*Damage\.DamageType\.(\w+)', code)) - excluded_by_rules.get(entry['class'], set())
-    assert built == set(kinds), entry['class'] + ': R07a damage ' + damage + ' differs from code ' + str(sorted(built))
-roles_contract = ['\t'.join([e['class'], e['role'], e['gains'], e['damage']]) for e in expected['cards'] + expected['tokens']]
+    assert entry['damageAmount'] == amount, entry['class'] + ': damage amount differs from R07a'
+    parts = [] if amount == NONE else amount.split(', ')
+    assert len(parts) == len(kinds) and all(re.fullmatch(k + r' (\d+|\d+\+x)', a) for k, a in zip(kinds, parts)), entry['class'] + ': malformed damage amount ' + amount
+    built, _ = amount_from_code(entry)
+    assert built == amount, entry['class'] + ': R07a damage amount ' + amount + ' differs from code ' + built
+    if entry['type'] == 'Azione':
+        for part in parts:
+            kind, number = part.split(' ')
+            shown = kind + ' pari a 20 + V residua/2' if number.endswith('+x') else number + ' ' + kind
+            assert shown in rows[name][-1], entry['class'] + ': R07 effect text does not show ' + part
+if '--sources' in sys.argv:
+    print('| Carta | Tipo | Importo | Codice |\n|---|---|---|---|')
+    for entry in entries:
+        if entry['type'] != 'Personaggio':
+            _, lines = amount_from_code(entry)
+            print('| ' + entry['class'].split('.')[-1] + ' | ' + entry['damage'] + ' | ' + entry['damageAmount'] + ' | ' + (', '.join(lines) or NONE) + ' |')
+roles_contract = ['\t'.join([e['class'], e['role'], e['gains'], e['damage'], e['damageAmount']]) for e in expected['cards'] + expected['tokens']]
 assert '\n'.join(roles_contract) + '\n' == (root / 'server/src/test/resources/rules-card-roles.tsv').read_text(encoding='utf-8'), 'Role test contract differs from R07a'
 types = ['\t'.join([entry['class'], entry['type'], entry.get('subtype', '—')]) for entry in entries]
 assert '\n'.join(types) + '\n' == (root / 'server/src/test/resources/rules-card-types.tsv').read_text(encoding='utf-8'), 'Type test contract differs'
 assert len(expected['cards']) == 37 and len(expected['characters']) == 2 and len(expected['tokens']) == 1, 'Set inventory differs'
 with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
-    actual = [{'class': r[0], 'name': r[1], 'description': r[2], 'role': r[3], 'gains': r[4], 'damage': r[5]} for r in db.execute(
-        'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION,T_GUI_ROLE,T_GUI_GAINS,T_GUI_DAMAGE from CRD001_GUI order by C_REF_CLASS')]
-    assert actual == [{key: card[key] for key in ('class', 'name', 'description', 'role', 'gains', 'damage')} for card in expected['cards']], 'Card catalog differs from regulation annex'
+    actual = [{'class': r[0], 'name': r[1], 'description': r[2], 'role': r[3], 'gains': r[4], 'damage': r[5], 'damageAmount': r[6]} for r in db.execute(
+        'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION,T_GUI_ROLE,T_GUI_GAINS,T_GUI_DAMAGE,T_GUI_DAMAGE_AMOUNT from CRD001_GUI order by C_REF_CLASS')]
+    assert actual == [{key: card[key] for key in ('class', 'name', 'description', 'role', 'gains', 'damage', 'damageAmount')} for card in expected['cards']], 'Card catalog differs from regulation annex'
     characters = [{'class': r[0], 'name': r[1], 'type': 'Personaggio'} for r in db.execute(
         'select C_REF_CLASS,T_GUI_NAME from CRD003_CHARACTERS order by C_REF_CLASS')]
     assert characters == expected['characters'], 'Character catalog differs from regulation annex'
@@ -94,4 +173,4 @@ with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() 
         assert actual == expected[key], table + ' differs from regulation annex'
     assert db.execute('pragma integrity_check').fetchone()[0] == 'ok'
     assert not db.execute('pragma foreign_key_check').fetchall()
-print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli e danno nominale R07a, testi e starter coerenti; SQLite integro.')
+print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; SQLite integro.')

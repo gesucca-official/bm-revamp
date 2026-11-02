@@ -34,6 +34,7 @@ public class BrokenBeerBottle extends AbstractItemCard {
         setGuiRole("OTHER", "—");
         // It converts the holder's hits but deals no damage itself (regulation 1.9 R07a).
         setGuiDamage("—");
+        setGuiDamageAmount("—");
     }
 
     @Override

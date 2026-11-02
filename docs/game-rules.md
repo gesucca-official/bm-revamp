@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.9 — 29 ottobre 2026**. Fonte normativa del gioco.
+Versione **1.10 — 2 novembre 2026**. Fonte normativa del gioco.
 
 ## R00 — Autorità
 
@@ -260,50 +260,52 @@ Non entrano nel danno nominale:
 - gli stati che modificano il danno inflitto o ricevuto: LittleRage, CantFeelAnything, Glare e MadeOfStone hanno —; BrokenBeerBottle ha —, perché converte i colpi di chi lo porta ma di suo non infligge danno;
 - gli effetti presi da altre carte: quello replicato da WhatchaDoin e quello dell'oggetto consumato da una Grab.
 
-| Carta | Danno nominale |
-|---|---|
-| BigBadBruiser | — |
-| ToxicJunkie | — |
-| LittleSmack | HIT |
-| LittleRage | — |
-| PatheticBlade | CUT |
-| RottenSmile | — |
-| BruiserGrab | — |
-| ToxicGrab | — |
-| Struggle | HIT |
-| Grab | — |
-| Steal | — |
-| ShuffleFeet | — |
-| BadEducation | HIT |
-| BreakYourToy | — |
-| CantFeelAnything | — |
-| ExtremelyViolentBlow | HIT |
-| Glare | — |
-| HealingBlow | HIT |
-| MadeOfStone | — |
-| SeagullFly | HIT |
-| SickeningBlow | HIT |
-| StunningBlow | HIT |
-| SuperImpact | HIT |
-| YouStop | — |
-| WhatchaDoin | — |
-| AmphetamineReflexes | — |
-| BadTrip | — |
-| BeggingMoney | — |
-| Cough | — |
-| EverythingIsDrug | — |
-| GoingBerserk | HIT |
-| LethalHeroinDose | — |
-| MethDrivenRage | HIT |
-| PervertedMetabolism | — |
-| ToxicBloodDrain | — |
-| CocktailOnTheGround | — |
-| RottenBeer | — |
-| AnotherRottenBeer | — |
-| MarvelousCocktail | — |
-| BrokenBeerBottle | — |
+**Importo nominale (1.10).** Ogni carta con danno nominale ha anche l'**importo** che infligge al bersaglio quando si risolve, scritto come tipo e numero, per esempio `HIT 15`; con più tipi, uno per tipo nell'ordine HIT, CUT, POISON, separati da virgola (somma degli importi dello stesso tipo); — se nessun danno. Un importo che dipende da una risorsa di chi gioca usa x per la quantità variabile, come i guadagni: ExtremelyViolentBlow è `HIT 20+x`, dove x è metà della V residua di chi gioca. L'importo è quello della carta prima di qualsiasi stato o conversione di R05: il danno effettivo può essere diverso, o non avvenire. Il danno che la carta infligge a sé non entra: Struggle e MethDrivenRage infliggono 5 HIT a sé e mostrano solo l'importo al bersaglio (10 e 15). Le carte con — nel tipo hanno — anche nell'importo. È descrittivo come il tipo: nessun effetto cambia, e in caso di dubbio prevale R07.
 
-Il danno nominale sta nel catalogo SQLite accanto a ruolo e guadagni; il token lo dichiara nella propria classe.
+| Carta | Danno nominale | Importo nominale |
+|---|---|---|
+| BigBadBruiser | — | — |
+| ToxicJunkie | — | — |
+| LittleSmack | HIT | HIT 5 |
+| LittleRage | — | — |
+| PatheticBlade | CUT | CUT 5 |
+| RottenSmile | — | — |
+| BruiserGrab | — | — |
+| ToxicGrab | — | — |
+| Struggle | HIT | HIT 10 |
+| Grab | — | — |
+| Steal | — | — |
+| ShuffleFeet | — | — |
+| BadEducation | HIT | HIT 10 |
+| BreakYourToy | — | — |
+| CantFeelAnything | — | — |
+| ExtremelyViolentBlow | HIT | HIT 20+x |
+| Glare | — | — |
+| HealingBlow | HIT | HIT 30 |
+| MadeOfStone | — | — |
+| SeagullFly | HIT | HIT 15 |
+| SickeningBlow | HIT | HIT 10 |
+| StunningBlow | HIT | HIT 10 |
+| SuperImpact | HIT | HIT 40 |
+| YouStop | — | — |
+| WhatchaDoin | — | — |
+| AmphetamineReflexes | — | — |
+| BadTrip | — | — |
+| BeggingMoney | — | — |
+| Cough | — | — |
+| EverythingIsDrug | — | — |
+| GoingBerserk | HIT | HIT 30 |
+| LethalHeroinDose | — | — |
+| MethDrivenRage | HIT | HIT 15 |
+| PervertedMetabolism | — | — |
+| ToxicBloodDrain | — | — |
+| CocktailOnTheGround | — | — |
+| RottenBeer | — | — |
+| AnotherRottenBeer | — | — |
+| MarvelousCocktail | — | — |
+| BrokenBeerBottle | — | — |
+
+Il danno nominale e il suo importo stanno nel catalogo SQLite accanto a ruolo e guadagni; il token lo dichiara nella propria classe.
 
 ## R08 — Informazioni e confini
 
@@ -320,6 +322,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.10 — 2 novembre 2026, A3 (C3-5, O7):** aggiunto a R07a l'importo nominale del danno di ogni carta e del token, accanto al tipo (1.9): `HIT 15`, `HIT 20+x` per ExtremelyViolentBlow (x = metà della V residua di chi gioca), — se nessun danno, conservato nel catalogo SQLite e nell'allegato. Decisione del proprietario (2 novembre 2026): contano solo gli importi inflitti al bersaglio alla risoluzione, prima di stati e conversioni; il danno a sé di Struggle e MethDrivenRage non entra; i casi esclusi dal tipo in 1.9 restano —. Motivazione: mostrare l'importo del danno sul volto della carta nel client web, accanto a costo e variazioni. Campo descrittivo: nessun effetto, costo, bersaglio, priorità, starter o bilanciamento cambia.
 
 - **1.9 — 29 ottobre 2026, A1 (C3/D2, O7):** aggiunto a R07a il danno nominale di ogni carta e del token: i tipi di danno HIT, CUT o POISON che la carta infligge quando si risolve, più tipi o nessuno, conservati nel catalogo SQLite e nell'allegato accanto a ruolo e guadagni. Decisione del proprietario (D2 del piano C3 e casi ambigui confermati il 29 ottobre 2026): contano solo i danni inflitti dalla carta alla risoluzione; hanno — BrokenBeerBottle (conversione), le difese, MarvelousCocktail (veleno del timer), WhatchaDoin (effetto replicato) e LethalHeroinDose (perdita di HEALTH); il veleno di fine turno è R06. Motivazione: rendere riconoscibile il tipo di danno nel client web per gli effetti di C3-5 (osservazione O7), nello stesso posto delle altre informazioni sulle carte, come per O14. Campo descrittivo: nessun effetto, costo, bersaglio, priorità, starter o bilanciamento cambia.
 

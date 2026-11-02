@@ -50,6 +50,7 @@ public class CardFactoryServiceImpl implements CardFactoryService {
         card.setGuiSprite(rec.getGuiSprite());
         card.setGuiRole(rec.getGuiRole(), rec.getGuiGains());
         card.setGuiDamage(rec.getGuiDamage());
+        card.setGuiDamageAmount(rec.getGuiDamageAmount());
     }
 
     private String buildHtml(Card c, String d) {

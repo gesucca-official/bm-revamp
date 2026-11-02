@@ -31,6 +31,9 @@ class CatalogRuntimeTest extends SqliteContextSupport {
             // R07a 1.9 nominal damage travels the same way.
             assertEquals(row.getGuiDamage(), loaded.getDamage());
             assertTrue(loaded.getDamage().matches("—|(HIT|CUT|POISON)(, (HIT|CUT|POISON))*"), loaded.getDamage());
+            // R07a 1.10 nominal damage amount: same path, one amount per type, "x" for a variable one.
+            assertEquals(row.getGuiDamageAmount(), loaded.getDamageAmount());
+            assertTrue(loaded.getDamageAmount().matches("—|(HIT|CUT|POISON) \\d+(\\+x)?(, (HIT|CUT|POISON) \\d+(\\+x)?)*"), loaded.getDamageAmount());
         }));
     }
     @ParameterizedTest @ValueSource(strings = {"bruiser.character.BigBadBruiser", "junkie.character.ToxicJunkie"})

@@ -45,4 +45,8 @@ public class CardsGuiRecord implements Serializable {
     @Column(name = "T_GUI_DAMAGE")
     private String guiDamage;
 
+    // Descriptive only (regulation 1.10 R07a): nominal damage amount to the target, no rule reads it.
+    @Column(name = "T_GUI_DAMAGE_AMOUNT")
+    private String guiDamageAmount;
+
 }

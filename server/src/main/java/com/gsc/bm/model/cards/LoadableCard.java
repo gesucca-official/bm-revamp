@@ -14,4 +14,6 @@ public interface LoadableCard extends Card {
 
     void setGuiDamage(String damage);
 
+    void setGuiDamageAmount(String damageAmount);
+
 }

@@ -1,6 +1,6 @@
 # Piano C3 — Rendere leggibile e soddisfacente la risoluzione
 
-29 ottobre 2026. Regolamento **1.8** (1.9 dopo [A1](#attività-separate)), [roadmap del client](client-roadmap.md)
+29 ottobre 2026. Regolamento **1.8** (1.9 dopo [A1](#attività-separate), 1.10 dopo A3), [roadmap del client](client-roadmap.md)
 versione 24. **Solo piano:** nessun codice client, nessuna modifica a regole,
 server, protocollo, catalogo o `client-debug`. C0, C1 e C2 sono chiuse; C3 parte
 su istruzione del proprietario, **un blocco alla volta**. Stato corrente
@@ -13,7 +13,7 @@ carta dalle righe regolari del report, verificate) e si aggiunge D12 (un tocco p
 alla carta successiva): vedi [decisioni](#decisioni-del-proprietario). **Dopo la prova del
 proprietario su C3-4** (30 ottobre 2026) si aggiunge D13 (regia per ogni carta: costo, primi
 piani di chi gioca e del bersaglio, volo, variazioni) e D10 diventa un **tetto di 20 s**. Le
-modifiche di regole e catalogo (A1, eventualmente A2) sono attività separate che partono dal
+modifiche di regole e catalogo (A1, A3, eventualmente A2) sono attività separate che partono dal
 regolamento. **Dopo il feedback del proprietario del 30 ottobre 2026** (centro del tavolo vuoto, tutto un po'
 piccolo, personaggio proprio grande quanto gli altri) si aggiunge il blocco **C3-L** (scala e spazio del tavolo),
 fra C3-4r e C3-6, con la decisione D14; ordine dei blocchi restanti: C3-L, C3-6, C3-5, C3-7.
@@ -119,7 +119,7 @@ incompleto), **manca**.
 | Oggetti consumati, rubati, distrutti, comparsi | parziale: solo trasferimento uno a uno | oggetti per posto + `TARGET_ITEM` | C3-4 |
 | Scarto e pesca osservabili | manca | propria mano, `DISCARD_ONE`, conteggi altrui | C3-4 |
 | Effetti di fine turno | parziale: solo conteggio e testo | `timeBasedEffects` (chi), testo | C3-4 |
-| Effetti per tipo di danno (O7) | manca | campo `damage` della carta (A1, regolamento 1.9) | C3-5 |
+| Effetti per tipo di danno (O7) | manca | campo `damage` della carta (A1, regolamento 1.9); importo nel campo `damageAmount` (A3, 1.10) | C3-5 |
 | Morte, forfait ed esito | c'è come pannello; nessuna enfasi nel round | `dead`, `forfeits`, `over`, `winner` | C3-4, C3-5 |
 | Report dell'ultimo round | c'è: riepilogo di 6 s e «Ultimo turno» con il testo del server | come sopra | C3-6 |
 | Viste ripetute e stesso turno | parziale: K1 | `gameId`, `turn` | C3-2 |
@@ -405,7 +405,7 @@ catalogo con tipo di danno produce l'impatto di quel tipo, verificato sulle cart
 giocate nelle partite e, per quelle non uscite, con la stessa funzione in unità
 sull'intero catalogo. Movimento ridotto senza scosse. Peso entro budget.
 
-**File toccati.** `src/scene.ts`, `src/contracts.ts` (campo di A1),
+**File toccati.** `src/scene.ts`, `src/contracts.ts` (campi di A1 e A3),
 `src/resolution.ts`, test, verifica, documenti comuni.
 
 **Rischi.** Dipende da A1. Effetti «spettacolari» contro ritmo e prestazioni:
@@ -476,6 +476,26 @@ registrate e assegnate, non risolte in C3.
   HIT, CUT, POISON separati da `", "` (es. `"HIT, CUT"`), oppure `"—"` per nessuno.
   Assente sui server precedenti. In `contracts.ts` C3-5 potrà aggiungere
   `damage?: string | null` accanto a `role` e `gains`; i personaggi non lo hanno.
+- **A3 — Importo del danno nominale nel catalogo** (richiesta dal proprietario per il volto
+  delle carte, **prima di C3-5**). Stessa via di A1: regolamento 1.10, poi catalogo SQLite,
+  allegato, `check-rules.py`, server e copia del debug. Il volto della carta si disegna in C3-5
+  (client): A3 non tocca client-web, `scene.ts` né le animazioni.
+
+  **Fatta il 2 novembre 2026 (regolamento 1.10).** Nella sottosezione «Danno nominale» di
+  [R07a](game-rules.md#danno-nominale-19) la tabella ha la colonna «Importo nominale»: l'importo
+  che la carta infligge al **bersaglio** alla risoluzione, prima di stati e conversioni. Decisioni
+  del proprietario: campo separato `damageAmount` (il tipo `damage` resta com'è); importo variabile
+  con `x` come i guadagni (`HIT 20+x` per ExtremelyViolentBlow: x è metà della V residua di chi
+  gioca); il danno a sé di Struggle e MethDrivenRage non entra (mostrano 10 e 15); i casi senza
+  danno nominale in A1 restano «—». Oggi 12 carte hanno un importo (11 HIT, PatheticBlade CUT).
+  **Forma esposta dal server per C3-5:** campo `damageAmount` della carta JSON, accanto a `role`,
+  `gains` e `damage`: stringa, un elemento `"<TIPO> <importo>"` per ogni tipo di `damage`, nello
+  stesso ordine HIT, CUT, POISON, separati da `", "`; l'importo è un intero (`"HIT 15"`, `"CUT 5"`)
+  oppure `"20+x"` per il variabile (`"HIT 20+x"`); `"—"` se la carta non ha danno nominale.
+  Assente sui server precedenti 1.10. In `contracts.ts` C3-5 potrà aggiungere
+  `damageAmount?: string | null` accanto a `damage`; i personaggi non lo hanno. `x` si risolve
+  con la V di chi gioca al momento della giocata (metà, troncata verso zero), se il client la conosce;
+  altrimenti si mostra «20+».
 - **A2 — Clock della mossa più lungo** (eventuale, indicato dal proprietario con D10).
   Solo se C3-4 e C3-7, o la prova C5, mostrano che sequenze fino al tetto di D10 (20 s da D13) tolgono troppo
   tempo per scegliere. Cambia R06 (clock di 30 s, regolamento 1.5): prima il

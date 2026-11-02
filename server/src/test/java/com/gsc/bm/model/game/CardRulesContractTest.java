@@ -54,6 +54,8 @@ class CardRulesContractTest {
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[2], token.getGains());
         assertEquals(roles.get("com.tokens.BrokenBeerBottle")[3], token.getDamage());
         assertEquals("—", token.getDamage(), "the conversion is not the token's own damage (R07a 1.9)");
+        assertEquals(roles.get("com.tokens.BrokenBeerBottle")[4], token.getDamageAmount());
+        assertEquals("—", token.getDamageAmount());
         var repo = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRepository.class);
         var record = org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardsGuiRecord.class);
         org.mockito.Mockito.when(repo.findById("bruiser.HealingBlow")).thenReturn(Optional.of(record));
@@ -62,12 +64,14 @@ class CardRulesContractTest {
         org.mockito.Mockito.when(record.getGuiRole()).thenReturn(roles.get("bruiser.HealingBlow")[1]);
         org.mockito.Mockito.when(record.getGuiGains()).thenReturn(roles.get("bruiser.HealingBlow")[2]);
         org.mockito.Mockito.when(record.getGuiDamage()).thenReturn(roles.get("bruiser.HealingBlow")[3]);
+        org.mockito.Mockito.when(record.getGuiDamageAmount()).thenReturn(roles.get("bruiser.HealingBlow")[4]);
         var factory = new com.gsc.bm.service.factories.CardFactoryServiceImpl(repo,
                 org.mockito.Mockito.mock(com.gsc.bm.repo.internal.CardKeywordsRepository.class));
         var blow = (com.gsc.bm.model.cards.AbstractCard) factory.craftCard("bruiser.HealingBlow");
         assertEquals("DAMAGE", blow.getRole());
         assertEquals("—", blow.getGains());
         assertEquals("HIT", blow.getDamage());
+        assertEquals("HIT 30", blow.getDamageAmount());
     }
 
     /** R07a 1.9 nominal damage: one of the allowed forms for every card and the token, never for characters. */
@@ -79,12 +83,45 @@ class CardRulesContractTest {
         }
         assertEquals(38, rows.size());
         for (String[] row : rows) {
-            assertEquals(4, row.length, row[0]);
+            assertEquals(5, row.length, row[0]);
             assertTrue(row[3].matches("—|(HIT|CUT|POISON)(, (HIT|CUT|POISON))*"), row[0] + ": " + row[3]);
+            // R07a 1.10: one amount per damage type, in the same order, or none.
+            assertTrue(row[4].matches("—|(HIT|CUT|POISON) \\d+(\\+x)?(, (HIT|CUT|POISON) \\d+(\\+x)?)*"), row[0] + ": " + row[4]);
+            assertEquals(row[3].equals("—") ? List.of() : Arrays.asList(row[3].split(", ")),
+                    row[4].equals("—") ? List.of() : Arrays.stream(row[4].split(", ")).map(a -> a.split(" ")[0]).collect(Collectors.toList()), row[0]);
         }
         assertEquals("CUT", rows.stream().filter(r -> r[0].equals("junkie.character.PatheticBlade")).findFirst().orElseThrow()[3]);
         assertEquals("—", rows.stream().filter(r -> r[0].equals("com.items.MarvelousCocktail")).findFirst().orElseThrow()[3],
                 "timer poison is excluded by R07a 1.9");
+    }
+
+    /**
+     * R07a 1.10: the nominal amount is what the card really inflicts on the target. Each card with an amount is played
+     * on bare characters, so no status changes the damage, and the health lost by the target is compared with the table.
+     * A variable amount ("+x": half the violence of whoever plays) is checked at several values of V.
+     */
+    @TestFactory Stream<DynamicTest> r07a_damageAmountIsWhatTheCardInflicts() throws IOException {
+        List<String[]> rows;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(getClass().getResourceAsStream("/rules-card-roles.tsv")), StandardCharsets.UTF_8))) {
+            rows = reader.lines().map(line -> line.split("	", -1)).filter(r -> !r[4].equals("—")).collect(Collectors.toList());
+        }
+        assertEquals(12, rows.size());
+        return rows.stream().map(row -> DynamicTest.dynamicTest("damage: " + row[0] + " " + row[4], () -> {
+            String[] amount = row[4].split(" ");
+            assertEquals(1, row[4].split(", ").length, "no card has several damage types yet");
+            boolean variable = amount[1].endsWith("+x");
+            for (int violence : variable ? new int[]{0, 10, 41, 60} : new int[]{0}) {
+                var card = (com.gsc.bm.model.cards.AbstractCard) Class.forName("com.gsc.bm.model.cards." + row[0]).getDeclaredConstructor().newInstance();
+                var self = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
+                var target = new com.gsc.bm.model.cards.junkie.character.ToxicJunkie();
+                self.getResources().put(Resource.VIOLENCE, violence);
+                int before = target.getResources().get(Resource.HEALTH);
+                card.applyEffectOnTarget(self, target);
+                int expected = variable ? Integer.parseInt(amount[1].replace("+x", "")) + violence / 2 : Integer.parseInt(amount[1]);
+                assertEquals(expected, before - target.getResources().get(Resource.HEALTH), row[0] + " at V=" + violence);
+            }
+        }));
     }
 
     /** Fixed expectations transcribed from regulation R07, never regenerated from production code. */
