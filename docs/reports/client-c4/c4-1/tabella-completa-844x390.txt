@@ -1,0 +1,18 @@
+build: HEAD d41fbb5 + uncommitted · jar 2026-11-03T13:18:16.815Z 4980864687ecdb02 (rebuilt)
+
+verification  measure    result  duration
+test          —          OK      1 s
+build         —          OK      2 s
+size          —          OK      0 s
+verify        844x390    OK      1 min 47 s
+modes         844x390    OK      23 s
+lifecycle     844x390    OK      2 min 38 s
+ffa           844x390    OK      7 min 41 s
+decks         844x390    OK      39 s
+public        844x390    OK      9 s
+profile       844x390    OK      43 s
+resolution    844x390    OK      31 min 55 s
+aim           844x390    OK      1 min 52 s
+layout        844x390    OK      1 min 10 s
+
+total 49 min 00 s · 13/13 green

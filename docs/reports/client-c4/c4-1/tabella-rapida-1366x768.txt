@@ -1,0 +1,19 @@
+*** QUICK MODE — NOT equivalent to the consolidation (reduced scenarios, one measure) ***
+build: HEAD a807aa0 + uncommitted · jar 2026-11-03T13:05:47.776Z f77a838bd38a0607 (rebuilt)
+
+verification  measure    result  duration
+test          —          OK      1 s
+build         —          OK      2 s
+size          —          OK      0 s
+verify        1366x768   OK      46 s
+modes         1366x768   OK      30 s
+lifecycle     1366x768   OK      2 min 41 s
+ffa           1366x768   OK      1 min 16 s
+decks         1366x768   OK      33 s
+public        1366x768   OK      10 s
+profile       1366x768   OK      44 s
+resolution    1366x768   OK      1 min 58 s
+aim           1366x768   OK      1 min 13 s
+layout        1366x768   OK      1 min 16 s
+
+total 11 min 10 s · 13/13 green

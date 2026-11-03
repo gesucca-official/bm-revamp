@@ -466,6 +466,40 @@ Il suggerimento del tavolo («Scegli una carta», «Scegli il bersaglio sul tavo
 nell'angolo in basso a sinistra (`.hint`), con un alone che pulsa piano quando si chiede una scelta (classe `ask`,
 fisso con movimento ridotto).
 
+## Lancio unico (C4-1, O23)
+
+```powershell
+./client-web/run.ps1 -Task VerifyAll                 # giro completo, due misure, nessuna evidenza copiata
+./client-web/run.ps1 -Task VerifyAll -Publish docs/reports/client-c4/<blocco>   # a fine giro verde e completo copia le evidenze
+./client-web/run.ps1 -Task VerifyAll -Quick          # controllo di sviluppo: NON equivalente al consolidamento
+```
+
+Un solo comando, in serie: controlla che 8080 (e 4320) siano libere e si ferma se non lo sono, **ricostruisce il jar**
+(`build.ps1 -Task Server -Offline`; `-ReuseJar` lo riusa e lo dichiara), esegue `Test`, `Build`, `Size`, avvia da sé
+l'anteprima della build appena fatta, poi `Verify` e `VerifyModes` su **un solo** server temporaneo con gli account di
+prova e infine, per ogni misura, le verifiche che avviano il server da sole (Lifecycle, Ffa, Decks, Public, Profile,
+Resolution, Aim, Layout; per loro il server resta uno per verifica, perché alcune lo fermano o lo riavviano di proposito).
+Ferma solo i processi che ha avviato. Se una verifica fallisce prosegue e restituisce errore alla fine. In coda stampa
+HEAD e data del jar verificati, la tabella (verifica, misura, esito, durata), gli avvisi e le cartelle di evidenze e log.
+
+- **Misure:** `-Measures 1366x768,844x390`; qualunque altra (per esempio `750x292`, base di C4-1b) è un'esecuzione dichiarata **non equivalente** al consolidamento e non si pubblica (predefinite le due; in `-Quick` solo la prima). **Selezione:** `-Only verify,modes,resolution,…`
+  (nomi: `test build size verify modes lifecycle ffa decks public profile resolution aim layout`); un giro parziale non si pubblica.
+- **Evidenze (D13 del [piano C4](../docs/client-c4-plan.md)):** sempre in una cartella temporanea (`%TEMP%\bm-verify-all-…\evidence`, con `logs`), mai nel
+  repository finché non si chiede `-Publish <cartella>`. La pubblicazione avviene solo se tutto è verde e il giro è completo (due misure,
+  nessun `-Only`, non rapido) e copia: **i JSON finali sempre** (con `run-summary.json`), **le catture solo finali e ricompresse**
+  (JPEG, qualità 0,55) fino a circa 10 MB (`BM_CAPTURE_BUDGET_MB`, un'indicazione e non una soglia: quante ne restano fuori è
+  dichiarato), il resto resta nella cartella temporanea. `Size` scrive nella stessa cartella: `docs/reports/client-c2/size.json` non cambia.
+  `run-summary.json` registra HEAD, jar (data, hash), `dist` (file e hash), modifiche non committate nei percorsi verificati,
+  risultati e avvisi. Un solo giro alla volta: un secondo lancio è rifiutato (blocco in `%TEMP%\bm-verify-all.lock`).
+- **Avvisi (mai soglie):** un contatore di controllo a zero (`turnsChecked`, `cardsChecked`, `boardChecks`, `unpayableSeen`,
+  `arrowsDrawn`, `turnsSeen`) è segnalato come «VACUOUS?»; un jar più vecchio del sorgente del server come «STALE JAR». Soglie e attesi delle
+  verifiche non sono toccati.
+- **`-Quick`:** scenari ridotti dove lo script ha già `BM_SCENARIOS` (ffa `queue,five`; aim `duel,ffa`; layout `duel,ffa`;
+  resolution `quick,reduced`) e una sola misura. Intestazione e riepilogo dicono che **non è equivalente** al consolidamento, non pubblica,
+  e non va citato come verifica di blocco.
+- **Durata:** il giro completo a due misure costa circa due ore e mezza (`Resolution` circa 35 minuti per misura); `-Quick` qualche decina di minuti.
+- `-ReuseClient` usa l'anteprima già attiva su 4320 (non è un processo suo, la sua build non è dichiarata).
+
 ## Verifiche
 
 ```powershell
@@ -535,7 +569,7 @@ conteggi, partite non concluse, download e cancellazione con annullamento e conf
 Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
 `BM_NATIVE_PROMPT=1` apre anche un Edge visibile, cattura la finestra nativa del browser,
 la annulla (Esc) e la compila da tastiera dopo «Riprova».
-**Consolidamento (C3-7).** Prima di eseguire tutte le verifiche, ricostruire il jar dal sorgente (`./scripts/build.ps1 -Task Server -Offline`: il jar in `server/target` può essere vecchio e i controlli sul volto passano a vuoto) e tenere `Serve` attivo. `Verify` e `VerifyModes` **non** avviano il server (serve un server su database temporaneo con `--app.dev.seed-accounts=true` sulla 8080); le altre lo avviano da sole e vogliono la 8080 libera. Non lanciare due verifiche insieme: usano gli stessi account. `BM_OUT=../docs/reports/client-c3/c3-7` e `BM_VIEWPORT=1366x768|844x390`. `Size` scrive in `docs/reports/client-c2/size.json`. Durata indicativa: `VerifyResolution` circa 35 minuti per misura, `VerifyLayout` e `VerifyAim` ridotti con `BM_SCENARIOS=duel,ffa` pochi minuti.
+**Consolidamento (C3-7).** Dal C4-1 si lancia tutto con `-Task VerifyAll` (sezione «Lancio unico»); quanto segue vale per le singole verifiche. Prima di eseguire tutte le verifiche, ricostruire il jar dal sorgente (`./scripts/build.ps1 -Task Server -Offline`: il jar in `server/target` può essere vecchio e i controlli sul volto passano a vuoto) e tenere `Serve` attivo. `Verify` e `VerifyModes` **non** avviano il server (serve un server su database temporaneo con `--app.dev.seed-accounts=true` sulla 8080); le altre lo avviano da sole e vogliono la 8080 libera. Non lanciare due verifiche insieme: usano gli stessi account. `BM_OUT=../docs/reports/client-c3/c3-7` e `BM_VIEWPORT=1366x768|844x390`. `Size` scrive in `docs/reports/client-c2/size.json`. Durata indicativa: `VerifyResolution` circa 35 minuti per misura, `VerifyLayout` e `VerifyAim` ridotti con `BM_SCENARIOS=duel,ffa` pochi minuti.
 `VerifyAim` (C3-3, database temporaneo): per ogni carta della mano in duello, tocco emulato,
 movimento ridotto e FFA a cinque, confronta le frecce della scena con i bersagli che la
 vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dai rettangoli reali

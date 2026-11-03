@@ -1,0 +1,65 @@
+{
+ "date": "2026-11-03T13:20:14.580Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts) against the local server; not a physical device",
+ "checks": {
+  "presenceAppears": {
+   "before": 1,
+   "after": 2
+  },
+  "presenceSort": "descending by name after a second click on the active column",
+  "queueExitA": {
+   "ack": true,
+   "hubButtonsEnabled": true
+  },
+  "queueExitB": {
+   "aloneWaitedWithoutGame": true,
+   "ack": true
+  },
+  "sameGame": true,
+  "game1": {
+   "a": "Hai vinto",
+   "b": "Hai perso",
+   "turnsA": 11,
+   "turnsB": 11,
+   "gameId": "baa7c0b2301239707dbfcea7f9b2758d92cf4273aadc49499a11074b9874b0d4"
+  },
+  "privacy": {
+   "A": {
+    "views": 37,
+    "ownHandArray": true,
+    "otherHandNumber": true,
+    "otherOnlyNames": 12,
+    "leaks": 0
+   },
+   "B": {
+    "views": 35,
+    "ownHandArray": true,
+    "otherHandNumber": true,
+    "otherOnlyNames": 13,
+    "leaks": 0
+   }
+  },
+  "newGameRepeatsMode": {
+   "firstGame": "baa7c0b2301239707dbfcea7f9b2758d92cf4273aadc49499a11074b9874b0d4",
+   "secondGame": "0f3aa6714928e1ab8c227f83295515d2e1039b7041d9f23940a084b41a3aefd4",
+   "queue": "quick/1v1"
+  },
+  "joinRefusedWhileResumable": {
+   "channel": "/user/queue/game/error",
+   "message": "Leave or resume the current game first",
+   "note": "raw STOMP client of the same account while its client is dropped; the hub handling of this message is covered by the session unit test"
+  },
+  "forfeit": {
+   "winner": "devBob"
+  },
+  "presenceDisappears": {
+   "count": 1
+  }
+ },
+ "errors": []
+}

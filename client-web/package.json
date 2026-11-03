@@ -21,7 +21,7 @@
     "verify:resolution": "node tools/verify-resolution.mjs",
     "verify:aim": "node tools/verify-aim.mjs",
     "verify:layout": "node tools/verify-layout.mjs",
-    "measure": "node tools/measure.mjs",
+    "verify:all": "node tools/verify-all.mjs",
     "size": "node tools/size.mjs",
     "atlas": "node tools/atlas.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.ts"

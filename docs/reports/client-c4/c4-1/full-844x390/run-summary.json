@@ -1,0 +1,133 @@
+{
+  "date": "2026-11-03T14:07:25.106Z",
+  "quick": false,
+  "equivalentToConsolidation": false,
+  "measures": [
+    "844x390"
+  ],
+  "only": [],
+  "build": {
+    "head": "d41fbb581951f6ad390320608dca9b730f7a0f1f",
+    "dirtyPaths": [
+      "M client-web/package.json",
+      " M client-web/tools/size.mjs",
+      "?? client-web/tools/verify-all.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-03T13:18:16.815Z",
+      "bytes": 50693917,
+      "sha256_16": "4980864687ecdb02",
+      "rebuilt": true
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 1,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 107,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "modes",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 23,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "lifecycle",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 158,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 461,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "decks",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 39,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "public",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 9,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "profile",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 43,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 1915,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 112,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 70,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/package.json;  M client-web/tools/size.mjs; ?? client-web/tools/verify-all.mjs"
+  ]
+}
