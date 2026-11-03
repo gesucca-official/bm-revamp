@@ -1026,7 +1026,7 @@ parte con gli account di prova (dati locali non toccati). Test client 191, `Buil
 
 2–3 novembre 2026. Regolamento **1.10**. Nessuna funzione nuova, nessuna modifica a regole, protocollo, catalogo o server. Il consolidamento è stato
 eseguito sul codice del client di C3-5 (`git diff 703d96b HEAD -- client-web server scripts` vuoto al momento delle verifiche); **dopo la prova
-del proprietario**, lo stesso giorno, sono entrati tre ritocchi di presentazione al client, riverificati: [sezione](#c3-7--ritocchi-dopo-la-prova-del-proprietario).
+del proprietario**, lo stesso giorno, sono entrati quattro ritocchi di presentazione al client, riverificati: [sezione](#c3-7--ritocchi-dopo-la-prova-del-proprietario).
 Come in C3-5 il jar del server è stato **ricostruito dal sorgente corrente** (`build.ps1 -Task Server -Offline`, 2 novembre 23:23) e tutte le verifiche sono state
 eseguite su quella build, su database temporanei (`server/data` non toccato). **C3-7 è fatto, in attesa del giudizio del proprietario su
 desktop e iPhone ([scheda](client-c3/c3-7/prova-scheda.md)): C3 non è chiusa (D11).**
@@ -1036,7 +1036,7 @@ desktop e iPhone ([scheda](client-c3/c3-7/prova-scheda.md)): C3 non è chiusa (D
 | Livello | Stato |
 |---|---|
 | Verifiche di `client-web` a 1366×768 e 844×390 | `Verify`, `VerifyModes`, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks`, `VerifyPublic`, `VerifyProfile`, `VerifyResolution` (completa), `VerifyLayout` (completa: ha solo gli scenari duello e FFA): **verdi**. `VerifyAim`: **verde con copertura ridotta** (sotto). |
-| Client | Test **191/191**, `Build` e `Size` verdi. Sul codice di C3-5: JS gzip 329960 byte, totale gzip 1113153; **dopo i ritocchi: JS gzip 330567, totale gzip 1113760**, texture 18876320 byte decodificati ([size.json](client-c3/c3-7/size.json), della build finale). |
+| Client | Test **191/191**, `Build` e `Size` verdi. Sul codice di C3-5: JS gzip 329960 byte, totale gzip 1113153; **dopo i ritocchi: JS gzip 330459, totale gzip 1113651**, texture 18876320 byte decodificati ([size.json](client-c3/c3-7/size.json), della build finale). |
 | Repository | `./scripts/build.ps1 -Task Test -Offline` verde (server **266**, client-debug **36**); `python scripts/check-rules.py` verde (39 carte, 1 token). |
 | Contesto Spring | `./scripts/build.ps1 -Task TestServerContext -Offline` (profilo `context-tests`): **373 test, 0 errori, `BUILD SUCCESS`**. È un esito separato dai test unitari. In più il jar impacchettato ha avviato il contesto completo a ogni verifica che lo avvia (profilo `local`, account di prova). |
 | Dispositivo fisico, iPhone, prova umana | **Non provati.** Tutte le misure sono Edge via Playwright sul PC. Il giudizio spetta al proprietario. |
@@ -1139,20 +1139,21 @@ provato.
 
 ### C3-7 — Ritocchi dopo la prova del proprietario
 
-3 novembre 2026, durante la prova del proprietario sul desktop. Sono ritocchi di **presentazione** al client: nessuna regola, protocollo, catalogo o server cambiato. Quelli sul
+3 novembre 2026, durante la prova del proprietario sul desktop. Sono quattro ritocchi di **presentazione** al client: nessuna regola, protocollo, catalogo o server cambiato. Quelli sul
 ritmo e sulla finitura restano da giudicare con la [scheda](client-c3/c3-7/prova-scheda.md); non si chiede qui nessuna nuova tappa.
 
 | # | Richiesta | Cosa cambia |
 |---|---|---|
 | 1 | «Sulla pila c'è un simbolo di troppo, anche per i danni da taglio» | Sulle carte piccole del round (la cascata al centro) il cerchio del **ruolo** si disegna solo se la carta non ha già il simbolo del suo danno: per un attacco ripeteva la stessa stella. Le carte piccole senza danno (difesa, risorse, contrasto, disturbo, oggetti) lo tengono. `VerifyLayout` controlla su tutto il catalogo che nessuna carta piccola con danno abbia il cerchio del ruolo; **provato su una build senza la correzione: 24 carte segnalate** (tra cui «Ago Marcio e Spezzato», da taglio), con la correzione nessuna. |
 | 2 | «Quando c'è l'animazione del danno, simula un impatto sulla carta, anche per il taglio: abbuiarla e farla vibrare» | La **carta del personaggio colpito** vibra e si scurisce (fino al 55% di nero, circa 0,4 s) per ogni carta con danno nominale, colpo, taglio o veleno (`impactOf().shake` vale 1 se la carta ha un tipo di danno). Prima vibrava solo per il colpo e non si scuriva. Annullate e carte senza danno: né l'una né l'altra; movimento ridotto: nessuna sequenza e nessuna vibrazione. Se la sequenza si interrompe a metà si ripristinano colore e posizione. |
-| 3 | «Pugno stilizzato per l'impatto e coltello per il taglio; bicolori; giallo, celeste chiaro, verde chiaro» | Tre simboli nuovi, gli stessi poligoni per Pixi (volto e impatto) e per l'SVG (catalogo, editor, ispezione): **pugno** alzato e inclinato, sagoma rossa con pieghe scure e luci gialle, con tre linee d'urto nell'impatto (ispirato a un riferimento del proprietario, ridisegnato, non copiato); **coltello** in diagonale, blu-grigio con riflesso celeste sulla lama; **goccia** con riflesso verde chiaro (tolto il pallino chiaro). Nessun asset raster (D9). Più passaggi di disegno su anteprime a 200–16 px. |
+| 3 | «Un coltello per il taglio, impatti bicolori per dare profondità; giallo, celeste chiaro, verde chiaro» | Simboli bicolori, gli stessi poligoni per Pixi (volto e impatto) e per l'SVG (catalogo, editor, ispezione): **stella** del colpo (la prima versione di C3-5) rossa con un **cuore giallo**; **coltello** in diagonale, blu-grigio con riflesso celeste sulla lama; **goccia** con riflesso verde chiaro (tolto il pallino chiaro). Nessun asset raster (D9). Il proprietario ha provato anche un pugno (due versioni, la seconda ispirata a un suo riferimento, ridisegnata e non copiata) e **non lo ha voluto**: è stato tolto dal codice. |
+| 4 | «Le righe sull'animazione del colpo non mi piacciono: un cerchio che si espande, come un'esplosione» | Tolte le tre linee d'urto; per ogni carta con danno da **colpo** parte sul bersaglio, sotto la stella, un'**onda d'urto**: un anello giallo con bordo scuro e un disco giallo trasparente che cresce fino a circa 2,5 volte e svanisce in circa 0,65 s (`shockWave` in `scene.ts`). Solo per il colpo; mai con movimento ridotto (nessuna sequenza). |
 
 **Atteso dei test cambiato di proposito:** `tests/impact.test.ts` («solo un colpo scuote» → «scuote ogni carta con danno nominale») e il controllo `knock` di `VerifyResolution` (ora colpo, taglio e veleno). È una decisione del proprietario sulla presentazione, non una regressione accettata; il controllo
 nuovo `darkened` verifica, sulle frasi reali delle partite, che ogni bersaglio che vibra si scurisca davvero (letto dai fotogrammi disegnati).
 
-**Verifiche dopo i ritocchi** (server dal jar rebuild, database temporanei, 1366×768 e 844×390), evidenze in [c3-7](client-c3/c3-7/) e [ritocchi](client-c3/c3-7/ritocchi/): test 191/191; `Build` e `Size` verdi; `VerifyLayout` completo e `VerifyDecks`
-verdi; `VerifyResolution` su duello e FFA verde con 0 errori, **bersagli oscurati 58 e 45** (colpi 54 e 37, tagli 4 e 8), nessuna sequenza annullata dalla vista, regole `1 2 3 6` e controlli di C3-4 e C3-5 rispettati, **durata massima 19,7 s** come prima: nessun cambio al ritmo. Le evidenze di `ritocchi/` sono solo duello e FFA (i casi `jump`, `itemFromOther` e `lethalEndOfTurn`
+**Verifiche dopo i ritocchi** (server dal jar ricostruito, database temporanei, 1366×768 e 844×390), evidenze in [c3-7](client-c3/c3-7/) e [ritocchi](client-c3/c3-7/ritocchi/): test 191/191; `Build` e `Size` verdi; `VerifyLayout` completo e `VerifyDecks`
+verdi; `VerifyResolution` su duello e FFA verde con 0 errori, **bersagli oscurati 14 e 42, onde d'urto 11 e 37 (una per ogni colpo, 11 e 37)**, tagli 3 e 5, nessuna sequenza annullata dalla vista, regole `1 2 3 6` e controlli di C3-4 e C3-5 rispettati, **durata massima 19,7 s** (19,3 e 19,7) come prima: nessun cambio al ritmo. Le evidenze di `ritocchi/` sono solo duello e FFA (i casi `jump`, `itemFromOther` e `lethalEndOfTurn`
 risultano «mancanti» perché sono di altri scenari: sono in `resolution-*.json` della cartella principale).
 
-**Da giudicare dal proprietario:** quanto scuro e quanto lungo l'oscuramento; leggibilità del pugno sotto i 24 px (le pieghe diventano un tratto scuro, la sagoma inclinata resta); se il pugno vuole il contorno intero come nel riferimento.
+**Da giudicare dal proprietario:** quanto scuro e quanto lungo l'oscuramento; la grandezza e la velocità dell'onda d'urto; il cuore giallo della stella sulle carte piccole.

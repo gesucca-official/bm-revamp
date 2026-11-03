@@ -4,7 +4,7 @@ import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_CREASE_SHAPES,DAMAGE_CREASE,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -22,7 +22,7 @@ type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:
 type Zoom={node:Container;rest:{x:number;y:number;s:number};up:{x:number;y:number;s:number};at:number;grow:number;hold:number;end:number;fade?:Container};
 // Marks over the table: an impact ring, a stamp (voided, eliminated) and the enlarged resource of a change (pop).
 // C3-5: `impact` is the mark of a card on its target (its type of damage or its role, or the cross of a voided move); the character card of the target knocks and darkens for any damage (blow or cut), never with reduced motion.
-type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'|'impact';label?:Label;impact?:ImpactKind|'VOID';y?:number};
+type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'|'impact'|'shock';label?:Label;impact?:ImpactKind|'VOID';y?:number};
 type Shake={id:string;at:number;dur:number;amp:number;dark?:{key:string;move:number;seat:string;min:number}};
 // C3-4s: a label of a change and the wall-clock span it was readable (popped in, not fading), measured on the frames.
 // `end`: the frame that starts the fade, which is when the label stops being shown whole; `last`: the last frame drawn whole before it; `gap`: the longest interval between two frames inside the reading window.
@@ -36,7 +36,7 @@ const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES
 // Plain vector marks: the shape carries the meaning, the colour only reinforces it (O3, O14).
 export function glyph(g:Graphics,kind:Resource|Role|DamageType,x:number,y:number,s:number,color:number,accent?:number){const r=s/2,pts=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
  switch(kind){
-  case 'HIT':case 'CUT':case 'POISON':for(const poly of DAMAGE_SHAPES[kind])g.poly(pts(poly)).fill(color);if(accent!==undefined){for(const poly of DAMAGE_ACCENT_SHAPES[kind])g.poly(pts(poly)).fill(accent);for(const poly of DAMAGE_CREASE_SHAPES[kind])g.poly(pts(poly)).fill(DAMAGE_CREASE);}break;
+  case 'HIT':case 'CUT':case 'POISON':for(const poly of DAMAGE_SHAPES[kind])g.poly(pts(poly)).fill(color);if(accent!==undefined)for(const poly of DAMAGE_ACCENT_SHAPES[kind])g.poly(pts(poly)).fill(accent);break;
   case 'HEALTH':g.circle(x-r*.45,y-r*.25,r*.5).circle(x+r*.45,y-r*.25,r*.5).fill(color).poly(pts([-.93,-.05,.93,-.05,0,.95])).fill(color);break;
   case 'ALERTNESS':g.ellipse(x,y,r,r*.62).fill(0xf3ead2).stroke({color,width:Math.max(1.5,s*.13)}).circle(x,y,r*.36).fill(color);break;
   case 'VIOLENCE':g.poly(pts([.3,-1,-.65,.15,-.05,.15,-.3,1,.7,-.2,.08,-.2])).fill(color);break;
@@ -90,7 +90,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
   flown:[] as {key:string;built:Record<FlownTag,number>;seen:Record<FlownTag,number>;toPile:number;toHand:number;itemsStart:Record<string,string[]>;itemsEnd:Record<string,string[]>|null;advanced:boolean}[],
   labels:[] as {key:string;seat:string;resource:Resource;box:Box;from:number;to:number;readable:number;gap:number}[],
   // C3-5: what each card made on its target, as the scene built it (the kinds of the mark, the knock, a voided move's cross) and the closing emphasis.
-  impacts:[] as {key:string;move:number;card:string;void:boolean;kinds:string[];shake:number}[],
+  impacts:[] as {key:string;move:number;card:string;void:boolean;kinds:string[];shake:number;wave:number}[],
   // The darkest grey (255 = none) the target's character card reached for each card that knocked it, read back from the frames drawn.
   darks:[] as {key:string;move:number;seat:string;min:number}[],emphasis:[] as {key:string;kind:string;seat?:string;text?:string}[],
   // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
@@ -525,11 +525,12 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    // C3-5: a card that resolves makes the impact of its type of damage (A1) or, where none applies, of its role (D2): the nature of the card, not the
    // damage dealt (a conversion is not visible). A voided one gets a cross and the stamp.
    if(m.void){const cross=add(this.impactMark('VOID',C));cross.position.set(to.x,to.y);this.accents.push({node:cross,at:hit,dur:after,kind:'impact',impact:'VOID',y:to.y});
-    const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:after,kind:'stamp'});count.stamps++;this.stats.impacts.push({key:k,move:i,card:m.card,void:true,kinds:['VOID'],shake:0});}
+    const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:after,kind:'stamp'});count.stamps++;this.stats.impacts.push({key:k,move:i,card:m.card,void:true,kinds:['VOID'],shake:0,wave:0});}
    else{const imp=impactOf(named(m.card),this.reduced),dur=P.flight.at+P.flight.dur-hit+P.target.dur,gap=C?44:70;
+    if(imp.kinds.includes('HIT')){const wave=add(this.shockWave(C));wave.position.set(to.x,to.y);this.accents.push({node:wave,at:hit,dur:Math.min(dur,650),kind:'shock'});}
     imp.kinds.forEach((kind,n)=>{const mark=add(this.impactMark(kind,C));mark.position.set(to.x+(n-(imp.kinds.length-1)/2)*gap,to.y);this.accents.push({node:mark,at:hit,dur,kind:'impact',impact:kind,y:to.y});});
     if(imp.shake){const dark={key:k,move:i,seat:m.target,min:255};this.stats.darks.push(dark);this.shakes.push({id:m.target,at:hit,dur:Math.min(dur,420),amp:C?3:5,dark});}
-    this.stats.impacts.push({key:k,move:i,card:m.card,void:false,kinds:[...imp.kinds],shake:imp.shake});}
+    this.stats.impacts.push({key:k,move:i,card:m.card,void:false,kinds:[...imp.kinds],shake:imp.shake,wave:imp.kinds.includes('HIT')?1:0});}
    // 5. Close-up of the target: it grows a little in its seat, under the card that hit it; the chosen object meets its fate.
    const tu=targetOf({me:m.target===this.model.me,person:aim},{w:this.width,h:this.height},(L?.seats??[]).filter(x=>x.id!==m.target).map(x=>x.person)),tn=add(character(m.target,tu.w,tu.h)),t0=aim.h/tu.h;this.fx.setChildIndex(tn,0);
    this.zooms.push({node:tn,rest:{x:aim.x,y:aim.y,s:t0},up:{x:tu.x,y:tu.y,s:1},at:P.target.at,grow:P.target.dur*.3,hold:P.target.at+P.target.dur*.75,end:P.target.at+P.target.dur});count.targetUps++;
@@ -576,8 +577,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.staged=shown;this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
 /** C3-5: the mark of one impact, vector only (D9): a burst for a blow, a slash for a cut, a drop for poison, the symbol of its role in a ring where the type does not apply, a cross for a voided move. */
+ // The blow's shock wave: a ring with a soft disc that grows and fades like an explosion, under the burst (owner trial, C3-7).
+ private shockWave(compact:boolean){const c=new Container(),g=new Graphics(),R=compact?26:40;c.addChild(g);g.circle(0,0,R).fill({color:DAMAGE_ACCENT.HIT,alpha:.22}).stroke({color:INK,width:compact?7:10});g.circle(0,0,R).stroke({color:DAMAGE_ACCENT.HIT,width:compact?4:6});g.circle(0,0,R*.82).stroke({color:DAMAGE_COLOR.HIT,width:compact?2:3});return c;}
  private impactMark(kind:ImpactKind|'VOID',compact:boolean){const c=new Container(),g=new Graphics(),R=compact?26:40;c.addChild(g);
-  if(kind==='HIT'){glyph(g,'HIT',0,0,R*2.3,INK);glyph(g,'HIT',0,0,R*2,DAMAGE_COLOR.HIT,DAMAGE_ACCENT.HIT);for(const [x0,y0,x1,y1] of [[-.55,-1.1,-.72,-1.45],[0,-1.15,0,-1.55],[.55,-1.1,.72,-1.45]])g.moveTo(x0*R,y0*R).lineTo(x1*R,y1*R).stroke({color:INK,width:compact?5:7,cap:'round'}).moveTo(x0*R,y0*R).lineTo(x1*R,y1*R).stroke({color:0xf6e3a8,width:compact?2.5:3.5,cap:'round'});}
+  if(kind==='HIT'){glyph(g,'HIT',0,0,R*2.3,INK);glyph(g,'HIT',0,0,R*2,DAMAGE_COLOR.HIT,DAMAGE_ACCENT.HIT);}
   else if(kind==='CUT'){glyph(g,'CUT',0,0,R*2.3,INK);glyph(g,'CUT',0,0,R*2,0x6b8296,DAMAGE_ACCENT.CUT);}
   else if(kind==='POISON'){glyph(g,'POISON',0,0,R*2.1,INK);glyph(g,'POISON',0,0,R*1.8,0x78b02c,DAMAGE_ACCENT.POISON);for(const [bx,by,br] of [[.9,-.2,.2],[-.9,.15,.16],[.6,.8,.13]])g.circle(bx*R,by*R,br*R).fill(0x78b02c).stroke({color:INK,width:1.5});}
   else if(kind==='VOID'){const a=R*.9;g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:INK,width:compact?9:13,cap:'round'});g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:WINE,width:compact?5:8,cap:'round'});}
@@ -648,6 +651,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
      // The reading time counts from the frame that really shows it: a frame held back (the first upload of many labels) does not take it away.
      const l=x.label,read=l?.first?now-l.first:0,fading=e>LABEL.in&&read>=LABEL.read;x.node.alpha=fading?Math.max(0,1-(read-LABEL.read)/LABEL.out):1;
      if(l&&fading&&!l.end)l.end=now;if(l&&e>=LABEL.in&&!fading){l.first||=now;l.last=now;l.gap=Math.max(l.gap,lastTick?now-lastTick:0);}}
+    else if(x.kind==='shock'){const e=1-(1-p)*(1-p);x.node.scale.set(.2+2.3*e);x.node.alpha=.9*(1-p)*(1-p);}
     else if(x.kind==='impact'){const m=impactMotion(x.impact!,p,this.reduced);x.node.scale.set(m.scale);x.node.alpha=m.alpha;x.node.rotation=m.rot;x.node.y=x.y!+m.dy;}
     else{x.node.scale.set(1+p*1.2);x.node.alpha=1-p;}});
    // C3-5: a seat hit by damage (blow or cut), or eliminated, knocks for a moment; the one hit by a card also darkens and clears; never with reduced motion.

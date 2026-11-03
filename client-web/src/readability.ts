@@ -422,12 +422,12 @@ export const leftV=(card:Card,resources?:Partial<Record<Resource,number>>|null)=
 /** «15», «31» for 20+x with V known, «20+» when it is not (the catalog, a card of another round), «» for the type alone. */
 export const damageText=(e:DamageEntry,left:number|null)=>e.base===null?'':e.x?(left===null?`${e.base}+`:String(e.base+Math.trunc(left/2))):String(e.base);
 export const damageLabel=(card:Card,left:number|null)=>damageOf(card).map(e=>`${DAMAGE_NAMES[e.type]}${damageText(e,left)?` ${damageText(e,left)}`:''}`).join(' e ');
-/** Polygons (in -1..1) of the symbols of the three types, drawn alike by the table (Pixi) and by the catalog (SVG): a fist, a knife, a drop. Every polygon of a type takes the same fill; the slits between them draw the fingers, the thumb, the guard. */
+/** Polygons (in -1..1) of the symbols of the three types, drawn alike by the table (Pixi) and by the catalog (SVG): a burst, a knife, a drop. Every polygon of a type takes the same fill; the slits between them draw the guard of the knife. */
 const turn=(poly:number[],deg:number)=>{const t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);return poly.map((v,i,a)=>i%2?a[i-1]*s+v*c:v*c-a[i+1]*s);};
-const fist=(poly:number[])=>turn(poly,20).map(v=>v*.88);
+const star=(r:number)=>Array.from({length:16},(_,i)=>{const a=Math.PI*i/8,k=(i%2?.52:1)*r;return [Math.cos(a)*k,Math.sin(a)*k];}).flat();
 export const DAMAGE_SHAPES:Record<DamageType,number[][]>={
- // Raised fist leaning to the right (owner reference, C3-7): one solid silhouette, the creases and the lights come on top (DAMAGE_CREASE_SHAPES, DAMAGE_ACCENT_SHAPES).
- HIT:[[-.66,-.20,-.60,-.66,-.38,-.88,.58,-.88,.78,-.62,.80,-.10,.60,.30,.50,.50,.52,1,-.34,1,-.34,.50,-.58,.30]].map(fist),
+ // Burst of sixteen points (the first impact of C3-5); its second colour is a smaller burst inside, for depth.
+ HIT:[star(1)],
  // Knife, tip up and to the right: blade, guard and handle, drawn upright then turned.
  CUT:[
   [.02,-1,.30,-.55,.30,.12,-.26,.12,-.26,-.35,-.12,-.72],[-.42,.20,.46,.20,.46,.34,-.42,.34],[-.20,.42,.24,.42,.28,1,-.24,1],
@@ -435,22 +435,12 @@ export const DAMAGE_SHAPES:Record<DamageType,number[][]>={
  POISON:[[0,-1,.62,.1,.62,.45,.38,.82,0,.95,-.38,.82,-.62,.45,-.62,.1]],
 };
 export const DAMAGE_COLOR:Record<DamageType,number>={HIT:0xa3313d,CUT:0x4d6070,POISON:0x5f8a1f};
-/** The second colour of each symbol (owner trial, C3-7): yellow knuckles and thumb on the fist, the light glint on the blade, the light glint on the drop. */
+/** The second colour of each symbol (owner trial, C3-7): the yellow heart of the burst, the light glint on the blade, the light glint on the drop. */
 export const DAMAGE_ACCENT:Record<DamageType,number>={HIT:0xf2c84b,CUT:0xbfe5f6,POISON:0xb4e06a};
 export const DAMAGE_ACCENT_SHAPES:Record<DamageType,number[][]>={
- HIT:[[-.34,-.15],[-.15,.12],[.12,.38],[.38,.78]].map(([l,r])=>[l+.06,-.58,l+.09,-.80,r-.09,-.80,r-.06,-.58]).concat([[-.20,.64,.02,.64,.06,.96,-.24,.96]]).map(fist),
+ HIT:[star(.52)],
  CUT:[[.10,-.80,.19,-.60,.19,-.02,.10,-.02]].map(poly=>turn(poly,45)),
  POISON:[[-.46,.14,-.46,.44,-.30,.68,-.20,.62,-.34,.40,-.34,.18]],
-};
-/** Dark creases drawn over the colour and the accent: the knuckles and the thumb of the fist. */
-export const DAMAGE_CREASE=0x2b1a15;
-export const DAMAGE_CREASE_SHAPES:Record<DamageType,number[][]>={
- HIT:[
-  ...[-.15,.12,.38].map(x=>[x-.04,-.88,x+.04,-.88,x+.03,-.34,x-.03,-.34]),
-  [-.62,-.34,.80,-.34,.80,-.25,-.62,-.25],[-.62,-.14,-.56,-.20,.22,.14,.20,.28],
- ].map(fist),
- CUT:[],
- POISON:[],
 };
 
 /**

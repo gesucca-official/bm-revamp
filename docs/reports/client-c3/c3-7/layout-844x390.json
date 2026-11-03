@@ -1,5 +1,5 @@
 {
- "date": "2026-11-03T11:37:11.433Z",
+ "date": "2026-11-03T12:24:12.414Z",
  "url": "http://127.0.0.1:4320",
  "viewport": {
   "width": 844,
@@ -87,7 +87,7 @@
      },
      "others": [
       {
-       "id": "ComPlayer_4444",
+       "id": "ComPlayer_3970",
        "person": {
         "x": 473,
         "y": 99,
@@ -128,20 +128,7 @@
       },
       "free": 0.632
      },
-     "below44": [
-      {
-       "id": "status-ComPlayer_4444-imm-TOXICITY",
-       "kind": "status",
-       "w": 31,
-       "h": 18
-      },
-      {
-       "id": "status-devAlice-imm-TOXICITY",
-       "kind": "status",
-       "w": 46,
-       "h": 27
-      }
-     ],
+     "below44": [],
      "clash": [],
      "shell": {
       "top": {
@@ -166,36 +153,40 @@
      },
      "faces": [
       {
-       "name": "Desiderio Incontrollabile",
+       "name": "ADOPERIAMOTI",
        "damage": [],
        "texts": 5
       },
       {
-       "name": "Ghigno co' i' Denti Marci",
-       "damage": [],
-       "texts": 6
-      },
-      {
-       "name": "Ago Marcio e Spezzato",
+       "name": "SVEGLIAMOCI MA TU NO",
        "damage": [
-        "CUT 5"
+        "HIT 5"
        ],
        "texts": 7
       },
       {
-       "name": "Steal",
-       "damage": [],
-       "texts": 5
-      },
-      {
-       "name": "Metabolismo Corrotto",
+       "name": "LIEVE FASTIDIO",
        "damage": [],
        "texts": 6
       },
       {
-       "name": "Steal",
+       "name": "GARGANTUESCO IMPATTO SUL TU",
+       "damage": [
+        "HIT 40"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "NON GIOCARE COL COLTELLO NO",
        "damage": [],
-       "texts": 5
+       "texts": 6
+      },
+      {
+       "name": "STORDIAMOTI HO DETTO",
+       "damage": [
+        "HIT 10"
+       ],
+       "texts": 6
       }
      ]
     },
@@ -222,13 +213,13 @@
       },
       "shows": [
        {
-        "name": "Ghigno co' i' Denti Marci",
+        "name": "SVEGLIAMOCI MA TU NO",
         "author": "devAlice",
         "void": false
        },
        {
-        "name": "Grab",
-        "author": "ComPlayer_4444",
+        "name": "SVEGLIAMOCI MA TU NO",
+        "author": "ComPlayer_3970",
         "void": false
        }
       ]
@@ -248,7 +239,7 @@
       },
       "shows": {
        "deck": 16,
-       "discard": "Metabolismo Corrotto"
+       "discard": "NON GIOCARE COL COLTELLO NO"
       }
      },
      "problems": [],
@@ -287,7 +278,7 @@
      },
      "others": [
       {
-       "id": "ComPlayer_4444",
+       "id": "ComPlayer_3970",
        "person": {
         "x": 473,
         "y": 99,
@@ -328,20 +319,7 @@
       },
       "free": 0.632
      },
-     "below44": [
-      {
-       "id": "status-ComPlayer_4444-imm-TOXICITY",
-       "kind": "status",
-       "w": 31,
-       "h": 18
-      },
-      {
-       "id": "status-devAlice-imm-TOXICITY",
-       "kind": "status",
-       "w": 46,
-       "h": 27
-      }
-     ],
+     "below44": [],
      "clash": [],
      "shell": {
       "top": {
@@ -366,34 +344,38 @@
      },
      "faces": [
       {
-       "name": "Desiderio Incontrollabile",
+       "name": "ADOPERIAMOTI",
        "damage": [],
        "texts": 5
       },
       {
-       "name": "Ghigno co' i' Denti Marci",
-       "damage": [],
-       "texts": 6
-      },
-      {
-       "name": "Ago Marcio e Spezzato",
+       "name": "SVEGLIAMOCI MA TU NO",
        "damage": [
-        "CUT 5"
+        "HIT 5"
        ],
        "texts": 7
       },
       {
-       "name": "Steal",
+       "name": "LIEVE FASTIDIO",
        "damage": [],
-       "texts": 5
+       "texts": 6
       },
       {
-       "name": "Steal",
-       "damage": [],
-       "texts": 5
+       "name": "GARGANTUESCO IMPATTO SUL TU",
+       "damage": [
+        "HIT 40"
+       ],
+       "texts": 6
       },
       {
-       "name": "Grab",
+       "name": "STORDIAMOTI HO DETTO",
+       "damage": [
+        "HIT 10"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "FAI BASTA",
        "damage": [],
        "texts": 5
       }
@@ -407,8 +389,8 @@
        14
       ],
       "texts": {
-       "ComPlayer_4444": "−10 +4 −1 +1",
-       "devAlice": "+5"
+       "ComPlayer_3970": "−5 +5",
+       "devAlice": "−5 +5"
       }
      }
     },
@@ -435,13 +417,13 @@
       },
       "shows": [
        {
-        "name": "Ghigno co' i' Denti Marci",
+        "name": "SVEGLIAMOCI MA TU NO",
         "author": "devAlice",
         "void": false
        },
        {
-        "name": "Ghigno co' i' Denti Marci",
-        "author": "ComPlayer_4444",
+        "name": "PAZIENZA: FINITA",
+        "author": "ComPlayer_3970",
         "void": false
        }
       ]
@@ -460,8 +442,8 @@
        "h": 36
       },
       "shows": {
-       "deck": 15,
-       "discard": "Steal"
+       "deck": 14,
+       "discard": "STORDIAMOTI HO DETTO"
       }
      },
      "problems": [],
@@ -500,7 +482,7 @@
      },
      "others": [
       {
-       "id": "ComPlayer_4444",
+       "id": "ComPlayer_3970",
        "person": {
         "x": 473,
         "y": 99,
@@ -543,16 +525,10 @@
      },
      "below44": [
       {
-       "id": "status-ComPlayer_4444-imm-TOXICITY",
+       "id": "status-ComPlayer_3970-st-0",
        "kind": "status",
        "w": 31,
        "h": 18
-      },
-      {
-       "id": "status-devAlice-imm-TOXICITY",
-       "kind": "status",
-       "w": 46,
-       "h": 27
       }
      ],
      "clash": [],
@@ -579,35 +555,39 @@
      },
      "faces": [
       {
-       "name": "Desiderio Incontrollabile",
+       "name": "ADOPERIAMOTI",
        "damage": [],
        "texts": 5
       },
       {
-       "name": "Ghigno co' i' Denti Marci",
-       "damage": [],
-       "texts": 6
-      },
-      {
-       "name": "Ago Marcio e Spezzato",
+       "name": "SVEGLIAMOCI MA TU NO",
        "damage": [
-        "CUT 5"
+        "HIT 5"
        ],
        "texts": 7
       },
       {
-       "name": "Steal",
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "GARGANTUESCO IMPATTO SUL TU",
+       "damage": [
+        "HIT 40"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "FAI BASTA",
        "damage": [],
        "texts": 5
       },
       {
-       "name": "Grab",
-       "damage": [],
-       "texts": 5
-      },
-      {
-       "name": "Presa Male di Brutto",
-       "damage": [],
+       "name": "ORMALE GUARIAMOTI",
+       "damage": [
+        "HIT 30"
+       ],
        "texts": 6
       }
      ],
@@ -620,8 +600,8 @@
        14
       ],
       "texts": {
-       "ComPlayer_4444": "−2 −3",
-       "devAlice": "invariato"
+       "ComPlayer_3970": "−5 +15 +15",
+       "devAlice": "+5 +1"
       }
      }
     }
@@ -648,7 +628,7 @@
     },
     {
      "turn": 0,
-     "author": "ComPlayer_4444",
+     "author": "ComPlayer_3970",
      "placed": "middle",
      "scale": 1.6,
      "box": {
@@ -658,10 +638,10 @@
       "h": 177
      },
      "target": {
-      "x": 473,
-      "y": 99,
-      "w": 100,
-      "h": 138
+      "x": 195,
+      "y": 263,
+      "w": 132,
+      "h": 182
      },
      "overPiles": false
     },
@@ -686,7 +666,7 @@
     },
     {
      "turn": 1,
-     "author": "ComPlayer_4444",
+     "author": "ComPlayer_3970",
      "placed": "middle",
      "scale": 1.6,
      "box": {
@@ -696,10 +676,10 @@
       "h": 177
      },
      "target": {
-      "x": 195,
-      "y": 263,
-      "w": 132,
-      "h": 182
+      "x": 473,
+      "y": 99,
+      "w": 100,
+      "h": 138
      },
      "overPiles": false
     }
@@ -709,21 +689,7 @@
     "withDamage": 12,
     "rows": [
      {
-      "name": "ORMALE GUARIAMOTI",
-      "damage": [
-       "HIT 30"
-      ],
-      "catalog": "HIT 30"
-     },
-     {
-      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
-      "damage": [
-       "HIT 20+"
-      ],
-      "catalog": "HIT 20+x"
-     },
-     {
-      "name": "Presa Male di Brutto",
+      "name": "Ghigno co' i' Denti Marci",
       "damage": [],
       "catalog": "—"
      },
@@ -733,38 +699,21 @@
       "catalog": "—"
      },
      {
-      "name": "GENTILE IL TUO CAREZZO",
+      "name": "Tutto è Droga",
       "damage": [],
       "catalog": "—"
      },
      {
-      "name": "C'è del sangue nella mia droga",
+      "name": "ADOPERIAMOTI",
       "damage": [],
       "catalog": "—"
      },
      {
-      "name": "SVEGLIAMOCI MA TU NO",
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
       "damage": [
-       "HIT 5"
+       "HIT 20+"
       ],
-      "catalog": "HIT 5"
-     },
-     {
-      "name": "Metabolismo Corrotto",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Ghigno co' i' Denti Marci",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Rabbia Psicotica da Meth",
-      "damage": [
-       "HIT 15"
-      ],
-      "catalog": "HIT 15"
+      "catalog": "HIT 20+x"
      },
      {
       "name": "Ce l'hai due spiccioli per il biglietto?",
@@ -772,7 +721,12 @@
       "catalog": "—"
      },
      {
-      "name": "Tutto è Droga",
+      "name": "Mescolone Micidiale",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "BELLO IL TUO GIOCATTOLO SI",
       "damage": [],
       "catalog": "—"
      },
@@ -784,73 +738,6 @@
       "catalog": "HIT 10"
      },
      {
-      "name": "FAI BASTA",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Mescolone Micidiale",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Steal",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "BELLO IL TUO GIOCATTOLO SI",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Desiderio Incontrollabile",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "NON GIOCARE COL COLTELLO NO",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Negroni Trovato per Terra",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Estasi da Coca Etilene",
-      "damage": [
-       "HIT 30"
-      ],
-      "catalog": "HIT 30"
-     },
-     {
-      "name": "LIEVE FASTIDIO",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Tennents Super",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "COSA FAI NON É UNA DOMANDA",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Dose di Eroina da Cavalli",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "ADOPERIAMOTI",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
       "name": "Last Resort: Banzai!!!",
       "damage": [
        "HIT 10"
@@ -858,7 +745,12 @@
       "catalog": "HIT 10"
      },
      {
-      "name": "Tossicone Scatarrante",
+      "name": "PAZIENZA: FINITA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Presa Male di Brutto",
       "damage": [],
       "catalog": "—"
      },
@@ -870,7 +762,97 @@
       "catalog": "CUT 5"
      },
      {
-      "name": "PAZIENZA: FINITA",
+      "name": "Metabolismo Corrotto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Rabbia Psicotica da Meth",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "LIEVE FASTIDIO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Scatto Repentino",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SVEGLIAMOCI MA TU NO",
+      "damage": [
+       "HIT 5"
+      ],
+      "catalog": "HIT 5"
+     },
+     {
+      "name": "Steal",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Estasi da Coca Etilene",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "Tossicone Scatarrante",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Riflessi Aumentati dalla Speed",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tennents Super",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GENTILE IL TUO CAREZZO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Peroni da 66, calda",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "STORDIAMOTI HO DETTO",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "Desiderio Incontrollabile",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ORMALE GUARIAMOTI",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "COSA FAI NON É UNA DOMANDA",
       "damage": [],
       "catalog": "—"
      },
@@ -889,6 +871,11 @@
       "catalog": "HIT 15"
      },
      {
+      "name": "Dose di Eroina da Cavalli",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
       "name": "GARGANTUESCO IMPATTO SUL TU",
       "damage": [
        "HIT 40"
@@ -896,34 +883,27 @@
       "catalog": "HIT 40"
      },
      {
-      "name": "Peroni da 66, calda",
+      "name": "FAI BASTA",
       "damage": [],
       "catalog": "—"
      },
      {
-      "name": "Scatto Repentino",
+      "name": "Negroni Trovato per Terra",
       "damage": [],
       "catalog": "—"
      },
      {
-      "name": "STORDIAMOTI HO DETTO",
-      "damage": [
-       "HIT 10"
-      ],
-      "catalog": "HIT 10"
-     },
-     {
-      "name": "Riflessi Aumentati dalla Speed",
+      "name": "C'è del sangue nella mia droga",
       "damage": [],
       "catalog": "—"
      }
     ]
    },
    "inspection": {
-    "card": "Ago Marcio e Spezzato",
+    "card": "SVEGLIAMOCI MA TU NO",
     "priority": 1,
     "marks": 1,
-    "text": "Ago Marcio e Spezzato\n\nazione legata\n\nCosto\nNessun costo in risorse\nPriorità\n1\nDanno nominale\n5\n taglio 5. Quello inflitto può differire: stati e difese.\nRuolo\ndanno: infligge danno\nTi dà\n+5 T\nBersaglio\nUn avversario\n\n+5 T a sé; 5 CUT e +5 T al bersaglio.\n\nResta in mano. Richiede lo scarto di un’alt"
+    "text": "SVEGLIAMOCI MA TU NO\n\nazione legata\n\nCosto\nNessun costo in risorse\nPriorità\n1\nDanno nominale\n5\n colpo 5. Quello inflitto può differire: stati e difese.\nRuolo\ndanno: infligge danno\nTi dà\n+5 A\nBersaglio\nUn avversario\n\n+5 A a sé; 5 HIT al bersaglio.\n\nResta in mano. Richiede lo scarto di un’altra azione"
    },
    "briefs": [
     {
@@ -958,22 +938,22 @@
    "perf": [
     {
      "turn": 0,
-     "intervals": 1222,
-     "p95": 8.6,
-     "max": 24.9,
-     "within": 1,
+     "intervals": 1188,
+     "p95": 9.4,
+     "max": 37.5,
+     "within": 0.999,
      "limit": 33,
-     "inputMax": 22.5,
+     "inputMax": 28.1,
      "inputs": 15
     },
     {
      "turn": 1,
-     "intervals": 1326,
-     "p95": 8.6,
-     "max": 20.5,
+     "intervals": 1206,
+     "p95": 10.3,
+     "max": 24.6,
      "within": 1,
      "limit": 33,
-     "inputMax": 14.4,
+     "inputMax": 19.5,
      "inputs": 15
     }
    ]
@@ -1058,7 +1038,7 @@
      },
      "others": [
       {
-       "id": "ComPlayer_7937",
+       "id": "ComPlayer_582",
        "person": {
         "x": 203,
         "y": 75,
@@ -1083,7 +1063,7 @@
        }
       },
       {
-       "id": "ComPlayer_4023",
+       "id": "ComPlayer_3377",
        "person": {
         "x": 523,
         "y": 75,
@@ -1108,7 +1088,7 @@
        }
       },
       {
-       "id": "ComPlayer_2092",
+       "id": "ComPlayer_21",
        "person": {
         "x": 132,
         "y": 168,
@@ -1133,7 +1113,7 @@
        }
       },
       {
-       "id": "ComPlayer_7315",
+       "id": "ComPlayer_845",
        "person": {
         "x": 608,
         "y": 168,
@@ -1176,26 +1156,20 @@
      },
      "below44": [
       {
-       "id": "status-ComPlayer_7937-imm-TOXICITY",
+       "id": "status-ComPlayer_3377-imm-TOXICITY",
        "kind": "status",
        "w": 31,
        "h": 18
       },
       {
-       "id": "status-ComPlayer_4023-imm-TOXICITY",
-       "kind": "status",
-       "w": 31,
-       "h": 18
-      },
-      {
-       "id": "status-ComPlayer_2092-imm-TOXICITY",
+       "id": "status-ComPlayer_845-imm-TOXICITY",
        "kind": "status",
        "w": 31,
        "h": 18
       }
      ],
      "clash": [
-      "ComPlayer_7937/brand"
+      "ComPlayer_582/brand"
      ],
      "shell": {
       "top": {
@@ -1242,17 +1216,13 @@
        "texts": 5
       },
       {
-       "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
-       "damage": [
-        "HIT 22"
-       ],
-       "texts": 6
+       "name": "FAI BASTA",
+       "damage": [],
+       "texts": 5
       },
       {
-       "name": "STORDIAMOTI HO DETTO",
-       "damage": [
-        "HIT 10"
-       ],
+       "name": "GENTILE IL TUO CAREZZO",
+       "damage": [],
        "texts": 6
       }
      ]
@@ -1281,17 +1251,12 @@
       "shows": [
        {
         "name": "Ghigno co' i' Denti Marci",
-        "author": "ComPlayer_7937",
+        "author": "ComPlayer_3377",
         "void": false
        },
        {
-        "name": "Ghigno co' i' Denti Marci",
-        "author": "ComPlayer_4023",
-        "void": false
-       },
-       {
-        "name": "Ago Marcio e Spezzato",
-        "author": "ComPlayer_2092",
+        "name": "FAI BASTA",
+        "author": "ComPlayer_582",
         "void": false
        },
        {
@@ -1300,8 +1265,13 @@
         "void": false
        },
        {
-        "name": "PAZIENZA: FINITA",
-        "author": "ComPlayer_7315",
+        "name": "AMMALIAMOTI DI BOTTE",
+        "author": "ComPlayer_21",
+        "void": false
+       },
+       {
+        "name": "Steal",
+        "author": "ComPlayer_845",
         "void": false
        }
       ]
@@ -1320,8 +1290,8 @@
        "h": 36
       },
       "shows": {
-       "deck": 16,
-       "discard": "SPEDIAMOTI DUNQUE IN O-AHIO"
+       "deck": 15,
+       "discard": "FAI BASTA"
       }
      },
      "problems": [],
@@ -1360,7 +1330,7 @@
      },
      "others": [
       {
-       "id": "ComPlayer_7937",
+       "id": "ComPlayer_582",
        "person": {
         "x": 203,
         "y": 75,
@@ -1385,7 +1355,7 @@
        }
       },
       {
-       "id": "ComPlayer_4023",
+       "id": "ComPlayer_3377",
        "person": {
         "x": 523,
         "y": 75,
@@ -1410,7 +1380,7 @@
        }
       },
       {
-       "id": "ComPlayer_2092",
+       "id": "ComPlayer_21",
        "person": {
         "x": 132,
         "y": 168,
@@ -1435,7 +1405,7 @@
        }
       },
       {
-       "id": "ComPlayer_7315",
+       "id": "ComPlayer_845",
        "person": {
         "x": 608,
         "y": 168,
@@ -1461,11 +1431,11 @@
       }
      ],
      "free": {
-      "x": 792,
-      "y": 138,
-      "w": 103,
-      "h": 172,
-      "share": 0.054
+      "x": 294,
+      "y": 186,
+      "w": 113,
+      "h": 141,
+      "share": 0.048
      },
      "middle": {
       "box": {
@@ -1478,32 +1448,20 @@
      },
      "below44": [
       {
-       "id": "status-ComPlayer_7937-imm-TOXICITY",
+       "id": "status-ComPlayer_3377-imm-TOXICITY",
        "kind": "status",
        "w": 31,
        "h": 18
       },
       {
-       "id": "status-ComPlayer_4023-imm-TOXICITY",
-       "kind": "status",
-       "w": 31,
-       "h": 18
-      },
-      {
-       "id": "status-ComPlayer_2092-imm-TOXICITY",
-       "kind": "status",
-       "w": 31,
-       "h": 18
-      },
-      {
-       "id": "status-ComPlayer_7315-st-0",
+       "id": "status-ComPlayer_845-imm-TOXICITY",
        "kind": "status",
        "w": 31,
        "h": 18
       }
      ],
      "clash": [
-      "ComPlayer_7937/brand"
+      "ComPlayer_582/brand"
      ],
      "shell": {
       "top": {
@@ -1550,17 +1508,13 @@
        "texts": 5
       },
       {
-       "name": "STORDIAMOTI HO DETTO",
-       "damage": [
-        "HIT 10"
-       ],
+       "name": "GENTILE IL TUO CAREZZO",
+       "damage": [],
        "texts": 6
       },
       {
-       "name": "ORMALE GUARIAMOTI",
-       "damage": [
-        "HIT 30"
-       ],
+       "name": "COSA FAI NON É UNA DOMANDA",
+       "damage": [],
        "texts": 6
       }
      ],
@@ -1572,15 +1526,15 @@
        14,
        14,
        14,
-       12,
+       14,
        14
       ],
       "texts": {
-       "ComPlayer_7937": "−10 +5 +5",
-       "ComPlayer_4023": "+5",
-       "devAlice": "invariato",
-       "ComPlayer_2092": "+5 +1",
-       "ComPlayer_7315": "+10 +15"
+       "ComPlayer_582": "−5 −5 −5 +1",
+       "ComPlayer_3377": "−10 +5 +10",
+       "ComPlayer_21": "−15 −1",
+       "devAlice": "+5 +1",
+       "ComPlayer_845": "−10 +3"
       }
      }
     },
@@ -1607,27 +1561,27 @@
       },
       "shows": [
        {
-        "name": "Presa Male di Brutto",
-        "author": "ComPlayer_7937",
+        "name": "Ghigno co' i' Denti Marci",
+        "author": "ComPlayer_3377",
         "void": false
        },
        {
         "name": "LIEVE FASTIDIO",
-        "author": "ComPlayer_7315",
+        "author": "ComPlayer_21",
+        "void": false
+       },
+       {
+        "name": "LIEVE FASTIDIO",
+        "author": "ComPlayer_582",
         "void": false
        },
        {
         "name": "Dose di Eroina da Cavalli",
-        "author": "ComPlayer_4023",
+        "author": "ComPlayer_845",
         "void": false
        },
        {
-        "name": "Dose di Eroina da Cavalli",
-        "author": "ComPlayer_2092",
-        "void": false
-       },
-       {
-        "name": "SVEGLIAMOCI MA TU NO",
+        "name": "ADOPERIAMOTI",
         "author": "devAlice",
         "void": false
        }
@@ -1648,7 +1602,7 @@
       },
       "shows": {
        "deck": 15,
-       "discard": "STORDIAMOTI HO DETTO"
+       "discard": "FAI BASTA"
       }
      },
      "problems": [],
@@ -1687,7 +1641,7 @@
      },
      "others": [
       {
-       "id": "ComPlayer_7937",
+       "id": "ComPlayer_582",
        "person": {
         "x": 203,
         "y": 75,
@@ -1712,7 +1666,7 @@
        }
       },
       {
-       "id": "ComPlayer_4023",
+       "id": "ComPlayer_3377",
        "person": {
         "x": 523,
         "y": 75,
@@ -1737,7 +1691,7 @@
        }
       },
       {
-       "id": "ComPlayer_2092",
+       "id": "ComPlayer_21",
        "person": {
         "x": 132,
         "y": 168,
@@ -1762,7 +1716,7 @@
        }
       },
       {
-       "id": "ComPlayer_7315",
+       "id": "ComPlayer_845",
        "person": {
         "x": 608,
         "y": 168,
@@ -1788,11 +1742,11 @@
       }
      ],
      "free": {
-      "x": 792,
-      "y": 138,
-      "w": 103,
-      "h": 172,
-      "share": 0.054
+      "x": 330,
+      "y": 78,
+      "w": 88,
+      "h": 146,
+      "share": 0.039
      },
      "middle": {
       "box": {
@@ -1801,30 +1755,24 @@
        "w": 304,
        "h": 117
       },
-      "free": 0.641
+      "free": 0.62
      },
      "below44": [
       {
-       "id": "status-ComPlayer_7937-tm-0",
+       "id": "status-ComPlayer_3377-imm-TOXICITY",
        "kind": "status",
        "w": 31,
        "h": 18
       },
       {
-       "id": "status-ComPlayer_4023-imm-TOXICITY",
-       "kind": "status",
-       "w": 31,
-       "h": 18
-      },
-      {
-       "id": "status-ComPlayer_2092-imm-TOXICITY",
+       "id": "status-ComPlayer_845-imm-TOXICITY",
        "kind": "status",
        "w": 31,
        "h": 18
       }
      ],
      "clash": [
-      "ComPlayer_7937/brand"
+      "ComPlayer_582/brand"
      ],
      "shell": {
       "top": {
@@ -1871,16 +1819,14 @@
        "texts": 5
       },
       {
-       "name": "ORMALE GUARIAMOTI",
-       "damage": [
-        "HIT 30"
-       ],
+       "name": "GENTILE IL TUO CAREZZO",
+       "damage": [],
        "texts": 6
       },
       {
-       "name": "FAI BASTA",
+       "name": "COSA FAI NON É UNA DOMANDA",
        "damage": [],
-       "texts": 5
+       "texts": 6
       }
      ],
      "strips": {
@@ -1891,15 +1837,15 @@
        14,
        14,
        14,
-       12,
+       14,
        14
       ],
       "texts": {
-       "ComPlayer_7937": "−20 −10 +15",
-       "ComPlayer_4023": "+20 +2",
-       "devAlice": "+5",
-       "ComPlayer_2092": "+15",
-       "ComPlayer_7315": "+5"
+       "ComPlayer_582": "+5",
+       "ComPlayer_3377": "+5 +1",
+       "ComPlayer_21": "−5 +5",
+       "devAlice": "−2 −7 +20 +5 +7 −1",
+       "ComPlayer_845": "+20 −1 +1"
       }
      }
     }
@@ -1907,26 +1853,7 @@
    "closeUps": [
     {
      "turn": 0,
-     "author": "ComPlayer_7937",
-     "placed": "middle",
-     "scale": 1.55,
-     "box": {
-      "x": 302,
-      "y": 70,
-      "w": 177,
-      "h": 128
-     },
-     "target": {
-      "x": 608,
-      "y": 168,
-      "w": 75,
-      "h": 104
-     },
-     "overPiles": false
-    },
-    {
-     "turn": 0,
-     "author": "ComPlayer_4023",
+     "author": "ComPlayer_3377",
      "placed": "middle",
      "scale": 1.55,
      "box": {
@@ -1936,26 +1863,26 @@
       "h": 128
      },
      "target": {
-      "x": 175,
-      "y": 281,
-      "w": 99,
-      "h": 137
+      "x": 203,
+      "y": 75,
+      "w": 75,
+      "h": 104
      },
      "overPiles": false
     },
     {
      "turn": 0,
-     "author": "ComPlayer_2092",
+     "author": "ComPlayer_582",
      "placed": "middle",
-     "scale": 1.45,
+     "scale": 1.55,
      "box": {
-      "x": 393,
-      "y": 154,
-      "w": 165,
-      "h": 120
+      "x": 302,
+      "y": 70,
+      "w": 177,
+      "h": 128
      },
      "target": {
-      "x": 203,
+      "x": 523,
       "y": 75,
       "w": 75,
       "h": 104
@@ -1983,7 +1910,7 @@
     },
     {
      "turn": 0,
-     "author": "ComPlayer_7315",
+     "author": "ComPlayer_21",
      "placed": "middle",
      "scale": 1.45,
      "box": {
@@ -1991,63 +1918,6 @@
       "y": 154,
       "w": 165,
       "h": 120
-     },
-     "target": {
-      "x": 608,
-      "y": 168,
-      "w": 75,
-      "h": 104
-     },
-     "overPiles": false
-    },
-    {
-     "turn": 1,
-     "author": "ComPlayer_7937",
-     "placed": "middle",
-     "scale": 1.55,
-     "box": {
-      "x": 302,
-      "y": 70,
-      "w": 177,
-      "h": 128
-     },
-     "target": {
-      "x": 203,
-      "y": 75,
-      "w": 75,
-      "h": 104
-     },
-     "overPiles": false
-    },
-    {
-     "turn": 1,
-     "author": "ComPlayer_7315",
-     "placed": "middle",
-     "scale": 1.45,
-     "box": {
-      "x": 393,
-      "y": 154,
-      "w": 165,
-      "h": 120
-     },
-     "target": {
-      "x": 608,
-      "y": 168,
-      "w": 75,
-      "h": 104
-     },
-     "overPiles": false
-    },
-    {
-     "turn": 1,
-     "author": "ComPlayer_4023",
-     "placed": "middle",
-     "scale": 1.55,
-     "box": {
-      "x": 382,
-      "y": 150,
-      "w": 177,
-      "h": 128
      },
      "target": {
       "x": 523,
@@ -2058,8 +1928,8 @@
      "overPiles": false
     },
     {
-     "turn": 1,
-     "author": "ComPlayer_2092",
+     "turn": 0,
+     "author": "ComPlayer_845",
      "placed": "middle",
      "scale": 1.45,
      "box": {
@@ -2078,6 +1948,82 @@
     },
     {
      "turn": 1,
+     "author": "ComPlayer_3377",
+     "placed": "middle",
+     "scale": 1.55,
+     "box": {
+      "x": 382,
+      "y": 150,
+      "w": 177,
+      "h": 128
+     },
+     "target": {
+      "x": 132,
+      "y": 157,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_21",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 393,
+      "y": 154,
+      "w": 165,
+      "h": 120
+     },
+     "target": {
+      "x": 132,
+      "y": 157,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_582",
+     "placed": "middle",
+     "scale": 1.55,
+     "box": {
+      "x": 302,
+      "y": 70,
+      "w": 177,
+      "h": 128
+     },
+     "target": {
+      "x": 203,
+      "y": 75,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_845",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 393,
+      "y": 154,
+      "w": 165,
+      "h": 120
+     },
+     "target": {
+      "x": 608,
+      "y": 168,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
      "author": "devAlice",
      "placed": "middle",
      "scale": 1,
@@ -2088,10 +2034,10 @@
       "h": 124
      },
      "target": {
-      "x": 203,
-      "y": 75,
-      "w": 75,
-      "h": 104
+      "x": 175,
+      "y": 281,
+      "w": 99,
+      "h": 137
      },
      "overPiles": true
     }
@@ -2101,35 +2047,6 @@
     "withDamage": 12,
     "rows": [
      {
-      "name": "FAI BASTA",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
-      "damage": [
-       "HIT 20+"
-      ],
-      "catalog": "HIT 20+x"
-     },
-     {
-      "name": "PAZIENZA: FINITA",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Rabbia Psicotica da Meth",
-      "damage": [
-       "HIT 15"
-      ],
-      "catalog": "HIT 15"
-     },
-     {
-      "name": "ADOPERIAMOTI",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
       "name": "GARGANTUESCO IMPATTO SUL TU",
       "damage": [
        "HIT 40"
@@ -2137,73 +2054,7 @@
       "catalog": "HIT 40"
      },
      {
-      "name": "Negroni Trovato per Terra",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Dose di Eroina da Cavalli",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Mescolone Micidiale",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Tutto è Droga",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Ago Marcio e Spezzato",
-      "damage": [
-       "CUT 5"
-      ],
-      "catalog": "CUT 5"
-     },
-     {
-      "name": "Scatto Repentino",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
       "name": "C'è del sangue nella mia droga",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Riflessi Aumentati dalla Speed",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Desiderio Incontrollabile",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Estasi da Coca Etilene",
-      "damage": [
-       "HIT 30"
-      ],
-      "catalog": "HIT 30"
-     },
-     {
-      "name": "STORDIAMOTI HO DETTO",
-      "damage": [
-       "HIT 10"
-      ],
-      "catalog": "HIT 10"
-     },
-     {
-      "name": "Tennents Super",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Steal",
       "damage": [],
       "catalog": "—"
      },
@@ -2215,12 +2066,108 @@
       "catalog": "HIT 10"
      },
      {
-      "name": "Presa Male di Brutto",
+      "name": "PAZIENZA: FINITA",
       "damage": [],
       "catalog": "—"
      },
      {
-      "name": "Ghigno co' i' Denti Marci",
+      "name": "Dose di Eroina da Cavalli",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tossicone Scatarrante",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Grab",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Riflessi Aumentati dalla Speed",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Metabolismo Corrotto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "STORDIAMOTI HO DETTO",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "Peroni da 66, calda",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Rabbia Psicotica da Meth",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "Desiderio Incontrollabile",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GENTILE IL TUO CAREZZO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Mescolone Micidiale",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "damage": [
+       "HIT 20+"
+      ],
+      "catalog": "HIT 20+x"
+     },
+     {
+      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tutto è Droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Scatto Repentino",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Negroni Trovato per Terra",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Steal",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Presa Male di Brutto",
       "damage": [],
       "catalog": "—"
      },
@@ -2232,58 +2179,7 @@
       "catalog": "HIT 10"
      },
      {
-      "name": "NON GIOCARE COL COLTELLO NO",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "ORMALE GUARIAMOTI",
-      "damage": [
-       "HIT 30"
-      ],
-      "catalog": "HIT 30"
-     },
-     {
-      "name": "SVEGLIAMOCI MA TU NO",
-      "damage": [
-       "HIT 5"
-      ],
-      "catalog": "HIT 5"
-     },
-     {
-      "name": "Tossicone Scatarrante",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "GENTILE IL TUO CAREZZO",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "GABBIANO DUNQUE VOLIAMOTI",
-      "damage": [
-       "HIT 15"
-      ],
-      "catalog": "HIT 15"
-     },
-     {
-      "name": "LIEVE FASTIDIO",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
       "name": "COSA FAI NON É UNA DOMANDA",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Metabolismo Corrotto",
-      "damage": [],
-      "catalog": "—"
-     },
-     {
-      "name": "Peroni da 66, calda",
       "damage": [],
       "catalog": "—"
      },
@@ -2295,12 +2191,12 @@
       "catalog": "HIT 10"
      },
      {
-      "name": "Grab",
+      "name": "FAI BASTA",
       "damage": [],
       "catalog": "—"
      },
      {
-      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "name": "Ghigno co' i' Denti Marci",
       "damage": [],
       "catalog": "—"
      },
@@ -2308,6 +2204,56 @@
       "name": "Ce l'hai due spiccioli per il biglietto?",
       "damage": [],
       "catalog": "—"
+     },
+     {
+      "name": "Ago Marcio e Spezzato",
+      "damage": [
+       "CUT 5"
+      ],
+      "catalog": "CUT 5"
+     },
+     {
+      "name": "ORMALE GUARIAMOTI",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "LIEVE FASTIDIO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tennents Super",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ADOPERIAMOTI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GABBIANO DUNQUE VOLIAMOTI",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "Estasi da Coca Etilene",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "SVEGLIAMOCI MA TU NO",
+      "damage": [
+       "HIT 5"
+      ],
+      "catalog": "HIT 5"
      }
     ]
    },
@@ -2323,9 +2269,9 @@
      "out": [],
      "shown": true,
      "box": {
-      "x": 344,
-      "y": 16,
-      "w": 140,
+      "x": 774,
+      "y": 72,
+      "w": 120,
       "h": 27
      },
      "lines": 1,
@@ -2337,9 +2283,9 @@
      "out": [],
      "shown": true,
      "box": {
-      "x": 760,
-      "y": 72,
-      "w": 140,
+      "x": 234,
+      "y": 360,
+      "w": 160,
       "h": 27
      },
      "lines": 1,
@@ -2350,23 +2296,23 @@
    "perf": [
     {
      "turn": 0,
-     "intervals": 2402,
-     "p95": 9,
-     "max": 79.8,
+     "intervals": 2296,
+     "p95": 11.1,
+     "max": 102.4,
      "within": 1,
      "limit": 33,
-     "inputMax": 22,
+     "inputMax": 33.5,
      "inputs": 21
     },
     {
      "turn": 1,
-     "intervals": 2583,
-     "p95": 10.2,
-     "max": 55.4,
+     "intervals": 2336,
+     "p95": 11.5,
+     "max": 62.1,
      "within": 1,
      "limit": 33,
-     "inputMax": 19.8,
-     "inputs": 25
+     "inputMax": 23.6,
+     "inputs": 5
     }
    ]
   }

@@ -1,8 +1,8 @@
 {
-  "date": "2026-11-03T11:35:46.091Z",
+  "date": "2026-11-03T12:22:37.453Z",
   "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped; textures: WebP header size x 4 bytes (RGBA), no mipmaps counted",
-  "jsGzip": 330567,
-  "totalGzip": 1113760,
+  "jsGzip": 330459,
+  "totalGzip": 1113651,
   "textureDecodedBytes": 18876320,
   "textures": [
     {
@@ -45,10 +45,10 @@
       "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
     },
     {
-      "file": "assets/browserAll-D48mjdS8.js",
+      "file": "assets/browserAll-DX2eUSkK.js",
       "bytes": 43507,
       "gzip": 11135,
-      "sha256": "d6ece3343c728529a159ff7d01348c303eb7983d7764d3682f1b434e4469eac7"
+      "sha256": "45b0cdfe16b20b257b06b62156ae23aeb4cf8cd5a9d11172c5797f6927c63d0c"
     },
     {
       "file": "assets/Cache-fEtFvAzf.js",
@@ -105,16 +105,16 @@
       "sha256": "bc35e4e7e92e8e921f8ddbfe24a704128f5ee094f3473c2042ec4e92d00d19b4"
     },
     {
-      "file": "assets/index-Ibw8zEnA.js",
-      "bytes": 747770,
-      "gzip": 231071,
-      "sha256": "bd15f115d7bbdfcc4e1a927f7d989b4fd3dd65d7edcb74afd51519563b2e858f"
+      "file": "assets/index-tUn1Nkd8.js",
+      "bytes": 747555,
+      "gzip": 230963,
+      "sha256": "c508e7bdaf3caca061dc8537155447d19f092933411f81927cc2b14d40a67adb"
     },
     {
-      "file": "assets/init-CMpSRdse.js",
+      "file": "assets/init-szw0pk2m.js",
       "bytes": 14216,
       "gzip": 4453,
-      "sha256": "46fdb8476bb0314f861eff69ae60b57dabfb6d70fff76de6b1380fefa3966bcb"
+      "sha256": "e5d5919e1249ccc9cf22e9f638918c3d8a18125fc45387db3a358c4250a7c8d7"
     },
     {
       "file": "assets/RenderTargetSystem-9obqq6wg.js",
@@ -123,16 +123,16 @@
       "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
     },
     {
-      "file": "assets/webworkerAll-jt8kB12Y.js",
+      "file": "assets/webworkerAll-BwChk4U3.js",
       "bytes": 55,
       "gzip": 63,
-      "sha256": "448032390a0822cd4d9ab9edf1b45894a6faa43441093f18897b5f1276701c04"
+      "sha256": "4e9f1fdc2b163d89ef75851aa0f9bd4a308b31d7d9330168a23b23fbe062bb14"
     },
     {
       "file": "index.html",
       "bytes": 1152,
-      "gzip": 481,
-      "sha256": "ca97f3ac1c3568ef61b2c0d776c307227a97396110507451ba36fec47d0d7ea7"
+      "gzip": 480,
+      "sha256": "a60cee423d8ffa2c3449aff669e982c78d919f87f0849582dbbf6f84a1838a25"
     }
   ]
 }
