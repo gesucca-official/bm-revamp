@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**3 novembre 2026 — versione 36. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4.** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**3 novembre 2026 — versione 37. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4 ([piano C4](client-c4-plan.md), decisioni da prendere).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -575,6 +575,9 @@ anticipate in C2 con O13.
 **Dipende da C3. Risultato:** identità provvisoria coerente in tutte le
 schermate e controlli utilizzabili anche senza hover.
 
+**Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
+decisioni D1–D14, ancora da prendere, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
+
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder
 incoerenti con il piccolo set selezionato; ottimizzare SVG e caricamento,
@@ -676,7 +679,7 @@ modifica a regole, server o catalogo è già decisa.
 
 | ID | Osservazione | Tappa | Note e vincoli |
 |---|---|---|---|
-| O19 | Prova C3-4: oltre alla sequenza una carta per volta (D12, D13) serve una **versione velocizzata, attivabile dall'utente**. | C4/C5 | Impostazione dell'utente, non un default. Deve conservare le regole 1–9 del piano C3: stato finale uguale alla vista del server, nessun blocco di invio né del clock di 30 s, movimento ridotto che mantiene le informazioni. Decidere dopo la prova umana del ritmo in C5, con le durate misurate in C3 (due mosse 7,1–10,4 s; FFA a cinque mosse 15,9–19,7 s; tetto 20 s di D10/D13). |
+| O19 | Prova C3-4: oltre alla sequenza una carta per volta (D12, D13) serve una **versione velocizzata, attivabile dall'utente**. | C5 | Impostazione dell'utente, non un default. Deve conservare le regole 1–9 del piano C3: stato finale uguale alla vista del server, nessun blocco di invio né del clock di 30 s, movimento ridotto che mantiene le informazioni. Decidere dopo la prova umana del ritmo in C5, con le durate misurate in C3 (due mosse 7,1–10,4 s; FFA a cinque mosse 15,9–19,7 s; tetto 20 s di D10/D13). |
 | O20 | Prova FFA: dopo il forfait per tempo dei due umani, i computer hanno combattuto altri **25 round**; l'esito riporta `outcomeReason: timeout` con un **computer vincitore**. | **Da valutare a parte** dal proprietario prima di C3-7; non riguarda il client | Nessuna conclusione: va letto contro R06 («Clock, forfait e disconnessione», regolamento 1.5, in particolare i forfait simultanei in FFA) per decidere se è comportamento voluto o anomalia. Se è anomalia che cambia l'esito osservabile, prima registrare comportamento precedente, motivazione, effetto e test ([domande aperte](open-questions.md)); se cambia regole, prima `docs/game-rules.md` con versione e motivazione. Diverso da `VerifyFfa` `otherMoveTimeout`, dove un solo umano va in forfait e gli altri proseguono (R06). |
 | O21 | Residui dichiarati da C3-5 e C3-6. | C3-7 e C4 | **POISON:** simbolo e impatto provati solo in unità, nessuna carta lo usa. **ExtremelyViolentBlow (`HIT 20+x`)**: la V reale sul volto della carta in mano non è stata vista nelle partite, solo il «20+» del catalogo. **Carte piccole del round (36–40 px):** solo il simbolo del danno, l'importo è nell'ispezione. **Movimento ridotto:** il segno del tipo di danno resta sul volto ma non c'è impatto sul bersaglio; se lo si vuole statico, da decidere. **Controllo delle scritte a 844×390 in FFA:** il guasto di C3-6 non si è riprodotto; il controllo ora misura fino all'inizio della sfumatura (soglia `LABEL.read` − 50 ms invariata, approvato il 2 novembre 2026), e le scritte registrano `end` e `gap` per spiegarlo se ricapita. |
 | O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 | Adattare mano e FFA all'altezza minima (vedi C4); un test in unità segnala quando la disposizione entra. Aggiunta qui per non perderla. |
@@ -725,18 +728,19 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   dimostrate. Non condizionare la prima partita a un nuovo protocollo. Confermato
   per C3 dal proprietario (D1 del [piano C3](client-c3-plan.md)).
 - **Lingua e audio:** proposta UI italiana con identificatori wire invariati;
-  decidere suoni e volume iniziale. La copia di regole pubblicata deve restare
+  decidere suoni e volume iniziale ([D2 del piano C4](client-c4-plan.md#decisioni-del-proprietario)). La copia di regole pubblicata deve restare
   identica alla fonte; nessuna traduzione normativa implicita.
 - **Organizzazione:** disponibilità dei giocatori, responsabile dell'accettazione,
   tempo/budget e configurazioni per provare registrazione/admin. Resta da
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** C4, rifinitura di art, audio, layout e prestazioni, poi C5 (playtest finali, con la prova umana del ritmo e la decisione sulla sequenza velocizzata O19). C3 è chiusa ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)); le attività A1 e A3 (tipo e importo del danno nel catalogo, dal regolamento) l'hanno preceduta. O15 e O16 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo: attività separate, da aprire dal regolamento; O20 resta da valutare a parte dal proprietario.
+**Prossimo passo:** C4, rifinitura di art, audio, layout e prestazioni ([piano](client-c4-plan.md)), poi C5 (playtest finali, con la prova umana del ritmo e la decisione sulla sequenza velocizzata O19). C3 è chiusa ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)); le attività A1 e A3 (tipo e importo del danno nel catalogo, dal regolamento) l'hanno preceduta. O15 e O16 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo: attività separate, da aprire dal regolamento; O20 resta da valutare a parte dal proprietario.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 37 — 3 novembre 2026, piano C4:** [piano C4](client-c4-plan.md) con blocchi, regole di non regressione e decisioni D1–D14 proposte, non ancora prese. O19 passa a C5 su indicazione del proprietario. Nessuna regola, API o servizio cambiato.
 - **Versione 36 — 3 novembre 2026, chiusura di C3:** il proprietario, dopo la prova su desktop e iPhone, chiude C3-7 e con esso C3. Seguono tre ritocchi di presentazione già nel codice (onda d'urto circolare per il colpo al posto delle righe, stella e coltello bicolori al posto del pugno scartato). Pulizia della documentazione: indice, piano, rapporto e righe P allineati, intestazioni e «prossima tappa» portate a C4. Nessuna regola, API o servizio cambiato ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).
 - **Versione 35 — 3 novembre 2026, C3-7:** consolidamento. Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta), test del repository, `check-rules.py` e contesto Spring verdi; regole di non regressione 1–9 dichiarate; durate fino a 19,7 s e clock fra umani 11–13 s, nessun segnale per A2; righe P30, P31, P36 aggiornate; scheda di prova per il proprietario; O23 registrata. Nessuna regola, API o servizio cambiato; al client quattro ritocchi di presentazione dopo la prova del proprietario (simbolo doppio tolto dalle carte piccole, bersaglio che vibra e si scurisce per ogni danno, stella, coltello e goccia bicolori, onda d'urto circolare per il colpo). **C3 non è chiusa:** attende il giudizio del proprietario ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).
 - **Versione 34 — 2 novembre 2026, C3-5:** volto della carta con tipo e importo nominale del danno (simboli) e senza priorità, che resta
