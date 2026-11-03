@@ -1,0 +1,1860 @@
+{
+ "date": "2026-11-03T15:58:51.432Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 750,
+  "height": 292
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "scenarios": {
+  "duel": {
+   "ffa": false,
+   "turns": [
+    {
+     "turn": 0,
+     "scale": {
+      "me": 1,
+      "others": 1,
+      "items": 1,
+      "resources": 1
+     },
+     "played": null,
+     "piles": {
+      "deck": {
+       "x": 219,
+       "y": 104,
+       "w": 26,
+       "h": 36
+      },
+      "discard": {
+       "x": 251,
+       "y": 104,
+       "w": 26,
+       "h": 36
+      },
+      "shows": {
+       "deck": 17,
+       "discard": null
+      }
+     },
+     "problems": [
+      "no round cards",
+      "ComPlayer_1443 over hand, shell, round cards or piles",
+      "devAlice over hand, shell, round cards or piles",
+      "arrow to person-ComPlayer_1443",
+      "arrow to item-ComPlayer_1443",
+      "ComPlayer_1443 close-up"
+     ],
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 72,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 164,
+       "y": 193,
+       "w": 80,
+       "h": 110
+      },
+      "item": {
+       "x": 36,
+       "y": 80,
+       "w": 61,
+       "h": 84
+      },
+      "board": {
+       "x": 61,
+       "y": 193,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 164,
+       "y": 218,
+       "w": 72,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_1443",
+       "person": {
+        "x": 420,
+        "y": 99,
+        "w": 80,
+        "h": 110
+       },
+       "item": {
+        "x": 498,
+        "y": 105,
+        "w": 61,
+        "h": 84
+       },
+       "board": {
+        "x": 322,
+        "y": 86,
+        "w": 100,
+        "h": 40
+       },
+       "back": {
+        "w": 24,
+        "h": 34
+       }
+      }
+     ],
+     "free": {
+      "x": 600,
+      "y": 54,
+      "w": 138,
+      "h": 106,
+      "share": 0.067
+     },
+     "middle": {
+      "box": {
+       "x": 375,
+       "y": 123,
+       "w": 270,
+       "h": 88
+      },
+      "free": 0.136
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_1443-imm-TOXICITY",
+       "kind": "status",
+       "w": 31,
+       "h": 18
+      }
+     ],
+     "clash": [
+      "ComPlayer_1443/hand",
+      "devAlice/brand"
+     ],
+     "shell": {
+      "top": {
+       "x": 706,
+       "y": 29,
+       "w": 73,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 271,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "COSA FAI NON É UNA DOMANDA",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "PAZIENZA: FINITA",
+       "damage": [],
+       "texts": 7
+      },
+      {
+       "name": "FAI BASTA",
+       "damage": [],
+       "texts": 5
+      }
+     ]
+    },
+    {
+     "turn": 1,
+     "scale": {
+      "me": 1,
+      "others": 1,
+      "items": 1,
+      "resources": 1
+     },
+     "played": null,
+     "piles": {
+      "deck": {
+       "x": 219,
+       "y": 104,
+       "w": 26,
+       "h": 36
+      },
+      "discard": {
+       "x": 251,
+       "y": 104,
+       "w": 26,
+       "h": 36
+      },
+      "shows": {
+       "deck": 16,
+       "discard": "FAI BASTA"
+      }
+     },
+     "problems": [
+      "no round cards",
+      "ComPlayer_1443 over hand, shell, round cards or piles",
+      "devAlice over hand, shell, round cards or piles",
+      "arrow to person-ComPlayer_1443",
+      "arrow to item-ComPlayer_1443",
+      "ComPlayer_1443 close-up"
+     ],
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 72,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 164,
+       "y": 193,
+       "w": 80,
+       "h": 110
+      },
+      "item": {
+       "x": 36,
+       "y": 80,
+       "w": 61,
+       "h": 84
+      },
+      "board": {
+       "x": 61,
+       "y": 193,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 164,
+       "y": 218,
+       "w": 72,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_1443",
+       "person": {
+        "x": 420,
+        "y": 99,
+        "w": 80,
+        "h": 110
+       },
+       "item": {
+        "x": 498,
+        "y": 105,
+        "w": 61,
+        "h": 84
+       },
+       "board": {
+        "x": 322,
+        "y": 86,
+        "w": 100,
+        "h": 40
+       },
+       "back": {
+        "w": 24,
+        "h": 34
+       }
+      }
+     ],
+     "free": {
+      "x": 594,
+      "y": 60,
+      "w": 120,
+      "h": 120,
+      "share": 0.066
+     },
+     "middle": {
+      "box": {
+       "x": 375,
+       "y": 123,
+       "w": 270,
+       "h": 88
+      },
+      "free": 0.136
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_1443-imm-TOXICITY",
+       "kind": "status",
+       "w": 31,
+       "h": 18
+      }
+     ],
+     "clash": [
+      "ComPlayer_1443/hand",
+      "devAlice/brand"
+     ],
+     "shell": {
+      "top": {
+       "x": 704,
+       "y": 29,
+       "w": 75,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 271,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "COSA FAI NON É UNA DOMANDA",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "PAZIENZA: FINITA",
+       "damage": [],
+       "texts": 7
+      },
+      {
+       "name": "PAZIENZA: FINITA",
+       "damage": [],
+       "texts": 7
+      }
+     ],
+     "strips": {
+      "seats": 2,
+      "drawn": 2,
+      "missing": [],
+      "fonts": [
+       14,
+       14
+      ],
+      "texts": {
+       "ComPlayer_1443": "+20 −1",
+       "devAlice": "+5"
+      }
+     }
+    },
+    {
+     "turn": 2,
+     "scale": {
+      "me": 1,
+      "others": 1,
+      "items": 1,
+      "resources": 1
+     },
+     "played": null,
+     "piles": {
+      "deck": {
+       "x": 219,
+       "y": 104,
+       "w": 26,
+       "h": 36
+      },
+      "discard": {
+       "x": 251,
+       "y": 104,
+       "w": 26,
+       "h": 36
+      },
+      "shows": {
+       "deck": 15,
+       "discard": "PAZIENZA: FINITA"
+      }
+     },
+     "problems": [
+      "no round cards",
+      "ComPlayer_1443 over hand, shell, round cards or piles",
+      "devAlice over hand, shell, round cards or piles",
+      "arrow to person-ComPlayer_1443",
+      "arrow to item-ComPlayer_1443",
+      "ComPlayer_1443 close-up"
+     ],
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 72,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 164,
+       "y": 193,
+       "w": 80,
+       "h": 110
+      },
+      "item": {
+       "x": 36,
+       "y": 80,
+       "w": 61,
+       "h": 84
+      },
+      "board": {
+       "x": 61,
+       "y": 193,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 164,
+       "y": 218,
+       "w": 72,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_1443",
+       "person": {
+        "x": 420,
+        "y": 99,
+        "w": 80,
+        "h": 110
+       },
+       "item": {
+        "x": 498,
+        "y": 105,
+        "w": 61,
+        "h": 84
+       },
+       "board": {
+        "x": 322,
+        "y": 86,
+        "w": 100,
+        "h": 40
+       },
+       "back": {
+        "w": 24,
+        "h": 34
+       }
+      }
+     ],
+     "free": {
+      "x": 594,
+      "y": 60,
+      "w": 120,
+      "h": 120,
+      "share": 0.066
+     },
+     "middle": {
+      "box": {
+       "x": 375,
+       "y": 123,
+       "w": 270,
+       "h": 88
+      },
+      "free": 0.136
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_1443-imm-TOXICITY",
+       "kind": "status",
+       "w": 31,
+       "h": 18
+      }
+     ],
+     "clash": [
+      "ComPlayer_1443/hand",
+      "devAlice/brand"
+     ],
+     "shell": {
+      "top": {
+       "x": 704,
+       "y": 29,
+       "w": 76,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 271,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "COSA FAI NON É UNA DOMANDA",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "PAZIENZA: FINITA",
+       "damage": [],
+       "texts": 7
+      },
+      {
+       "name": "ORMALE GUARIAMOTI",
+       "damage": [
+        "HIT 30"
+       ],
+       "texts": 6
+      }
+     ],
+     "strips": {
+      "seats": 2,
+      "drawn": 2,
+      "missing": [],
+      "fonts": [
+       14,
+       14
+      ],
+      "texts": {
+       "ComPlayer_1443": "+5",
+       "devAlice": "−7 +5 +5"
+      }
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "turn": 0,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 186,
+      "y": 61,
+      "w": 152,
+      "h": 110
+     },
+     "target": {
+      "x": 164,
+      "y": 193,
+      "w": 88,
+      "h": 121
+     },
+     "overPiles": true
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_1443",
+     "placed": "seat",
+     "scale": 1.15,
+     "box": {
+      "x": 461,
+      "y": 99,
+      "w": 175,
+      "h": 127
+     },
+     "target": {
+      "x": 420,
+      "y": 99,
+      "w": 100,
+      "h": 138
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 186,
+      "y": 61,
+      "w": 152,
+      "h": 110
+     },
+     "target": {
+      "x": 164,
+      "y": 193,
+      "w": 88,
+      "h": 121
+     },
+     "overPiles": true
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_1443",
+     "placed": "seat",
+     "scale": 1.15,
+     "box": {
+      "x": 461,
+      "y": 99,
+      "w": 175,
+      "h": 127
+     },
+     "target": {
+      "x": 164,
+      "y": 193,
+      "w": 88,
+      "h": 121
+     },
+     "overPiles": false
+    }
+   ],
+   "catalog": {
+    "cards": 37,
+    "withDamage": 12,
+    "rows": [
+     {
+      "name": "STORDIAMOTI HO DETTO",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "Tossicone Scatarrante",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Rabbia Psicotica da Meth",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "Peroni da 66, calda",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GARGANTUESCO IMPATTO SUL TU",
+      "damage": [
+       "HIT 40"
+      ],
+      "catalog": "HIT 40"
+     },
+     {
+      "name": "Ago Marcio e Spezzato",
+      "damage": [
+       "CUT 5"
+      ],
+      "catalog": "CUT 5"
+     },
+     {
+      "name": "ADOPERIAMOTI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "FAI BASTA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Ghigno co' i' Denti Marci",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Last Resort: Banzai!!!",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "Ce l'hai due spiccioli per il biglietto?",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Estasi da Coca Etilene",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "Tennents Super",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Grab",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Steal",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GABBIANO DUNQUE VOLIAMOTI",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "ORMALE GUARIAMOTI",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "Tutto è Droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Dose di Eroina da Cavalli",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Presa Male di Brutto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "PERMESSO SCUSA ORA SMETTI ",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "PAZIENZA: FINITA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "AMMALIAMOTI DI BOTTE",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "GENTILE IL TUO CAREZZO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Negroni Trovato per Terra",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Scatto Repentino",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SVEGLIAMOCI MA TU NO",
+      "damage": [
+       "HIT 5"
+      ],
+      "catalog": "HIT 5"
+     },
+     {
+      "name": "Metabolismo Corrotto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "damage": [
+       "HIT 20+"
+      ],
+      "catalog": "HIT 20+x"
+     },
+     {
+      "name": "COSA FAI NON É UNA DOMANDA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "C'è del sangue nella mia droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Desiderio Incontrollabile",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Riflessi Aumentati dalla Speed",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "LIEVE FASTIDIO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Mescolone Micidiale",
+      "damage": [],
+      "catalog": "—"
+     }
+    ]
+   },
+   "inspection": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "priority": 1,
+    "marks": 1,
+    "text": "SVEGLIAMOCI MA TU NO\n\nazione legata\n\nCosto\nNessun costo in risorse\nPriorità\n1\nDanno nominale\n5\n colpo 5. Quello inflitto può differire: stati e difese.\nRuolo\ndanno: infligge danno\nTi dà\n+5 A\nBersaglio\nUn avversario\n\n+5 A a sé; 5 HIT al bersaglio.\n\nResta in mano. Richiede lo scarto di un’altra azione"
+   },
+   "briefs": [
+    {
+     "turn": 1,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 182,
+      "y": 41,
+      "w": 120,
+      "h": 78
+     },
+     "lines": 4,
+     "font": 13,
+     "fontPx": 13
+    },
+    {
+     "turn": 2,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 204,
+      "y": 33,
+      "w": 180,
+      "h": 61
+     },
+     "lines": 3,
+     "font": 13,
+     "fontPx": 13
+    }
+   ],
+   "perf": [
+    {
+     "turn": 0,
+     "intervals": 1293,
+     "p95": 9.4,
+     "max": 45.9,
+     "within": 0.999,
+     "limit": 33,
+     "inputMax": 23.1,
+     "inputs": 20
+    },
+    {
+     "turn": 1,
+     "intervals": 1338,
+     "p95": 8.5,
+     "max": 33,
+     "within": 1,
+     "limit": 33,
+     "inputMax": 14,
+     "inputs": 15
+    }
+   ]
+  },
+  "ffa": {
+   "ffa": true,
+   "turns": [
+    {
+     "turn": 0,
+     "scale": {
+      "me": 1,
+      "others": 1,
+      "items": 1,
+      "resources": 1
+     },
+     "played": null,
+     "piles": {
+      "deck": {
+       "x": 205,
+       "y": 188,
+       "w": 26,
+       "h": 36
+      },
+      "discard": {
+       "x": 205,
+       "y": 230,
+       "w": 26,
+       "h": 36
+      },
+      "shows": {
+       "deck": 17,
+       "discard": null
+      }
+     },
+     "problems": [
+      "no round cards",
+      "devAlice/ComPlayer_7132",
+      "devAlice/backs of ComPlayer_7132",
+      "ComPlayer_7132 over hand, shell, round cards or piles",
+      "ComPlayer_7132/devAlice",
+      "ComPlayer_5565 over hand, shell, round cards or piles",
+      "devAlice target close-up",
+      "ComPlayer_7132 target close-up",
+      "ComPlayer_2827 close-up",
+      "ComPlayer_7132 close-up",
+      "ComPlayer_5565 close-up"
+     ],
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 57,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 154,
+       "y": 207,
+       "w": 60,
+       "h": 83
+      },
+      "item": {
+       "x": 249,
+       "y": 212,
+       "w": 46,
+       "h": 63
+      },
+      "board": {
+       "x": 61,
+       "y": 207,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 154,
+       "y": 223,
+       "w": 52,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9691",
+       "person": {
+        "x": 180,
+        "y": 75,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 241,
+        "y": 80,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 100,
+        "y": 65,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      },
+      {
+       "id": "ComPlayer_2827",
+       "person": {
+        "x": 465,
+        "y": 75,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 526,
+        "y": 80,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 385,
+        "y": 65,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      },
+      {
+       "id": "ComPlayer_7132",
+       "person": {
+        "x": 128,
+        "y": 163,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 189,
+        "y": 168,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 48,
+        "y": 153,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      },
+      {
+       "id": "ComPlayer_5565",
+       "person": {
+        "x": 540,
+        "y": 163,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 601,
+        "y": 168,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 460,
+        "y": 153,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      }
+     ],
+     "free": {
+      "x": 606,
+      "y": 54,
+      "w": 107,
+      "h": 107,
+      "share": 0.053
+     },
+     "middle": {
+      "box": {
+       "x": 375,
+       "y": 123,
+       "w": 270,
+       "h": 88
+      },
+      "free": 0.478
+     },
+     "below44": [],
+     "clash": [
+      "ComPlayer_9691/brand",
+      "devAlice/ComPlayer_7132",
+      "ComPlayer_7132/piles",
+      "ComPlayer_5565/hand"
+     ],
+     "shell": {
+      "top": {
+       "x": 706,
+       "y": 29,
+       "w": 73,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 271,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "GENTILE IL TUO CAREZZO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "BELLO IL TUO GIOCATTOLO SI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+       "damage": [
+        "HIT 22"
+       ],
+       "texts": 6
+      }
+     ]
+    },
+    {
+     "turn": 1,
+     "scale": {
+      "me": 1,
+      "others": 1,
+      "items": 1,
+      "resources": 1
+     },
+     "played": null,
+     "piles": {
+      "deck": {
+       "x": 205,
+       "y": 188,
+       "w": 26,
+       "h": 36
+      },
+      "discard": {
+       "x": 205,
+       "y": 230,
+       "w": 26,
+       "h": 36
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [
+      "no round cards",
+      "devAlice/ComPlayer_7132",
+      "devAlice/backs of ComPlayer_7132",
+      "ComPlayer_7132 over hand, shell, round cards or piles",
+      "ComPlayer_7132/devAlice",
+      "ComPlayer_5565 over hand, shell, round cards or piles",
+      "devAlice target close-up",
+      "ComPlayer_7132 target close-up",
+      "ComPlayer_2827 close-up",
+      "ComPlayer_7132 close-up",
+      "ComPlayer_5565 close-up"
+     ],
+     "hand": {
+      "w": 120,
+      "h": 166,
+      "step": 57,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 154,
+       "y": 207,
+       "w": 60,
+       "h": 83
+      },
+      "item": {
+       "x": 249,
+       "y": 212,
+       "w": 46,
+       "h": 63
+      },
+      "board": {
+       "x": 61,
+       "y": 207,
+       "w": 110,
+       "h": 92
+      },
+      "boardRow": 18.4,
+      "status": {
+       "x": 154,
+       "y": 223,
+       "w": 52,
+       "h": 18
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_9691",
+       "person": {
+        "x": 180,
+        "y": 75,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 241,
+        "y": 80,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 100,
+        "y": 65,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      },
+      {
+       "id": "ComPlayer_2827",
+       "person": {
+        "x": 465,
+        "y": 75,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 526,
+        "y": 80,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 385,
+        "y": 65,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      },
+      {
+       "id": "ComPlayer_7132",
+       "person": {
+        "x": 128,
+        "y": 163,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 189,
+        "y": 168,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 48,
+        "y": 153,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      },
+      {
+       "id": "ComPlayer_5565",
+       "person": {
+        "x": 540,
+        "y": 163,
+        "w": 60,
+        "h": 83
+       },
+       "item": {
+        "x": 601,
+        "y": 168,
+        "w": 46,
+        "h": 63
+       },
+       "board": {
+        "x": 460,
+        "y": 153,
+        "w": 84,
+        "h": 40
+       },
+       "back": {
+        "w": 18,
+        "h": 25
+       }
+      }
+     ],
+     "free": {
+      "x": 606,
+      "y": 54,
+      "w": 107,
+      "h": 107,
+      "share": 0.053
+     },
+     "middle": {
+      "box": {
+       "x": 375,
+       "y": 123,
+       "w": 270,
+       "h": 88
+      },
+      "free": 0.478
+     },
+     "below44": [],
+     "clash": [
+      "ComPlayer_9691/brand",
+      "devAlice/ComPlayer_7132",
+      "ComPlayer_7132/piles",
+      "ComPlayer_5565/hand"
+     ],
+     "shell": {
+      "top": {
+       "x": 704,
+       "y": 29,
+       "w": 75,
+       "h": 46
+      },
+      "brand": {
+       "x": 47,
+       "y": 25,
+       "w": 77,
+       "h": 42
+      },
+      "hint": {
+       "x": 66,
+       "y": 271,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "BELLO IL TUO GIOCATTOLO SI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+       "damage": [
+        "HIT 13"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "AMMALIAMOTI DI BOTTE",
+       "damage": [
+        "HIT 10"
+       ],
+       "texts": 6
+      }
+     ],
+     "strips": {
+      "seats": 5,
+      "drawn": 3,
+      "missing": [
+       "ComPlayer_7132",
+       "ComPlayer_5565"
+      ],
+      "fonts": [
+       14,
+       12,
+       14
+      ],
+      "texts": {
+       "ComPlayer_9691": "−10 −10",
+       "devAlice": "−8 +10 −20 +10",
+       "ComPlayer_2827": "+10 −20",
+       "ComPlayer_7132": "−15",
+       "ComPlayer_5565": "invariato"
+      }
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "turn": 0,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 616,
+      "y": 55,
+      "w": 115,
+      "h": 83
+     },
+     "target": {
+      "x": 154,
+      "y": 207,
+      "w": 66,
+      "h": 91
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_2827",
+     "placed": "middle",
+     "scale": 1.3,
+     "box": {
+      "x": 376,
+      "y": 60,
+      "w": 148,
+      "h": 108
+     },
+     "target": {
+      "x": 465,
+      "y": 75,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_9691",
+     "placed": "middle",
+     "scale": 1.2,
+     "box": {
+      "x": 267,
+      "y": 72,
+      "w": 137,
+      "h": 99
+     },
+     "target": {
+      "x": 540,
+      "y": 163,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_7132",
+     "placed": "middle",
+     "scale": 1.15,
+     "box": {
+      "x": 624,
+      "y": 54,
+      "w": 132,
+      "h": 95
+     },
+     "target": {
+      "x": 154,
+      "y": 207,
+      "w": 66,
+      "h": 91
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_5565",
+     "placed": "middle",
+     "scale": 1.15,
+     "box": {
+      "x": 624,
+      "y": 62,
+      "w": 132,
+      "h": 95
+     },
+     "target": {
+      "x": 540,
+      "y": 163,
+      "w": 75,
+      "h": 104
+     },
+     "overPiles": false
+    }
+   ],
+   "catalog": {
+    "cards": 37,
+    "withDamage": 12,
+    "rows": [
+     {
+      "name": "STORDIAMOTI HO DETTO",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "Scatto Repentino",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Mescolone Micidiale",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Desiderio Incontrollabile",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Metabolismo Corrotto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "FAI BASTA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Rabbia Psicotica da Meth",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "Riflessi Aumentati dalla Speed",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "LIEVE FASTIDIO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tossicone Scatarrante",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SVEGLIAMOCI MA TU NO",
+      "damage": [
+       "HIT 5"
+      ],
+      "catalog": "HIT 5"
+     },
+     {
+      "name": "Dose di Eroina da Cavalli",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "PERMESSO SCUSA ORA SMETTI ",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "ORMALE GUARIAMOTI",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "Negroni Trovato per Terra",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Ago Marcio e Spezzato",
+      "damage": [
+       "CUT 5"
+      ],
+      "catalog": "CUT 5"
+     },
+     {
+      "name": "Ce l'hai due spiccioli per il biglietto?",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Grab",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tutto è Droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "C'è del sangue nella mia droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Presa Male di Brutto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GENTILE IL TUO CAREZZO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Last Resort: Banzai!!!",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "PAZIENZA: FINITA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Estasi da Coca Etilene",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "damage": [
+       "HIT 20+"
+      ],
+      "catalog": "HIT 20+x"
+     },
+     {
+      "name": "Tennents Super",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Peroni da 66, calda",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ADOPERIAMOTI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "COSA FAI NON É UNA DOMANDA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Steal",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "AMMALIAMOTI DI BOTTE",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "GARGANTUESCO IMPATTO SUL TU",
+      "damage": [
+       "HIT 40"
+      ],
+      "catalog": "HIT 40"
+     },
+     {
+      "name": "Ghigno co' i' Denti Marci",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GABBIANO DUNQUE VOLIAMOTI",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     }
+    ]
+   },
+   "inspection": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "priority": 1,
+    "marks": 1,
+    "text": "SVEGLIAMOCI MA TU NO\n\nazione legata\n\nCosto\nNessun costo in risorse\nPriorità\n1\nDanno nominale\n5\n colpo 5. Quello inflitto può differire: stati e difese.\nRuolo\ndanno: infligge danno\nTi dà\n+5 A\nBersaglio\nUn avversario\n\n+5 A a sé; 5 HIT al bersaglio.\n\nResta in mano. Richiede lo scarto di un’altra azione"
+   },
+   "briefs": [
+    {
+     "turn": 1,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 644,
+      "y": 72,
+      "w": 180,
+      "h": 27
+     },
+     "lines": 1,
+     "font": 13,
+     "fontPx": 13
+    }
+   ],
+   "perf": [
+    {
+     "turn": 0,
+     "intervals": 2521,
+     "p95": 10.4,
+     "max": 65.2,
+     "within": 1,
+     "limit": 33,
+     "inputMax": 20.2,
+     "inputs": 39
+    }
+   ]
+  }
+ },
+ "errors": [
+  "ffa: Error: A: no playable card\n    at playOne (file:///E:/bm/client-web/tools/verify-layout.mjs:102:8)\n    at async scenario (file:///E:/bm/client-web/tools/verify-layout.mjs:221:70)\n    at async file:///E:/bm/client-web/tools/verify-layout.mjs:246:16"
+ ],
+ "ok": false,
+ "failure": "AssertionError [ERR_ASSERTION]: no page errors\n+ actual - expected\n\n+ [\n+   'ffa: Error: A: no playable card\\n' +\n+     '    at playOne (file:///E:/bm/client-web/tools/verify-layout.mjs:102:8)\\n' +\n+     '    at async scenario (file:///E:/bm/client-web/tools/verify-layout.mjs:221:70)\\n' +\n+     '    at async file:///E:/bm/client-web/tools/verify-layout.mjs:246:16'\n+ ]\n- []\n\n    at file:///E:/bm/client-web/tools/verify-layout.mjs:247:9",
+ "problems": [
+  "duel-750x292 T0: overlaps ComPlayer_1443/hand,devAlice/brand",
+  "duel-750x292 T0: layout no round cards,ComPlayer_1443 over hand, shell, round cards or piles,devAlice over hand, shell, round cards or piles,arrow to person-ComPlayer_1443,arrow to item-ComPlayer_1443,ComPlayer_1443 close-up",
+  "duel-750x292 T0: own 80 not larger than ComPlayer_1443 80",
+  "duel-750x292 T0: no round cards",
+  "duel-750x292 T0 close-up ComPlayer_1443: placed seat",
+  "duel-750x292 T0 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}",
+  "duel-750x292 T0 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}",
+  "duel-750x292 T0 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}",
+  "duel-750x292 T0 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}",
+  "duel-750x292 T1: overlaps ComPlayer_1443/hand,devAlice/brand",
+  "duel-750x292 T1: layout no round cards,ComPlayer_1443 over hand, shell, round cards or piles,devAlice over hand, shell, round cards or piles,arrow to person-ComPlayer_1443,arrow to item-ComPlayer_1443,ComPlayer_1443 close-up",
+  "duel-750x292 T1: own 80 not larger than ComPlayer_1443 80",
+  "duel-750x292 T1: no round cards",
+  "duel-750x292 T1 close-up ComPlayer_1443: placed seat",
+  "duel-750x292 T1 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}",
+  "duel-750x292 T1 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}",
+  "duel-750x292 T1 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}",
+  "duel-750x292 T1 close-up ComPlayer_1443: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}",
+  "duel-750x292 T2: overlaps ComPlayer_1443/hand,devAlice/brand",
+  "duel-750x292 T2: layout no round cards,ComPlayer_1443 over hand, shell, round cards or piles,devAlice over hand, shell, round cards or piles,arrow to person-ComPlayer_1443,arrow to item-ComPlayer_1443,ComPlayer_1443 close-up",
+  "duel-750x292 T2: own 80 not larger than ComPlayer_1443 80",
+  "duel-750x292 T2: no round cards",
+  "ffa-750x292 T0: overlaps ComPlayer_9691/brand,devAlice/ComPlayer_7132,ComPlayer_7132/piles,ComPlayer_5565/hand",
+  "ffa-750x292 T0: layout no round cards,devAlice/ComPlayer_7132,devAlice/backs of ComPlayer_7132,ComPlayer_7132 over hand, shell, round cards or piles,ComPlayer_7132/devAlice,ComPlayer_5565 over hand, shell, round cards or piles,devAlice target close-up,ComPlayer_7132 target close-up,ComPlayer_2827 close-up,ComPlayer_7132 close-up,ComPlayer_5565 close-up",
+  "ffa-750x292 T0: own 60 not larger than ComPlayer_9691 60",
+  "ffa-750x292 T0: own 60 not larger than ComPlayer_2827 60",
+  "ffa-750x292 T0: own 60 not larger than ComPlayer_7132 60",
+  "ffa-750x292 T0: own 60 not larger than ComPlayer_5565 60",
+  "ffa-750x292 T0: no round cards",
+  "ffa-750x292 T1: overlaps ComPlayer_9691/brand,devAlice/ComPlayer_7132,ComPlayer_7132/piles,ComPlayer_5565/hand",
+  "ffa-750x292 T1: layout no round cards,devAlice/ComPlayer_7132,devAlice/backs of ComPlayer_7132,ComPlayer_7132 over hand, shell, round cards or piles,ComPlayer_7132/devAlice,ComPlayer_5565 over hand, shell, round cards or piles,devAlice target close-up,ComPlayer_7132 target close-up,ComPlayer_2827 close-up,ComPlayer_7132 close-up,ComPlayer_5565 close-up",
+  "ffa-750x292 T1: own 60 not larger than ComPlayer_9691 60",
+  "ffa-750x292 T1: own 60 not larger than ComPlayer_2827 60",
+  "ffa-750x292 T1: own 60 not larger than ComPlayer_7132 60",
+  "ffa-750x292 T1: own 60 not larger than ComPlayer_5565 60",
+  "ffa-750x292 T1: no round cards"
+ ]
+}

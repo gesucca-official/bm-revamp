@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**3 novembre 2026 — versione 38. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4 ([piano C4](client-c4-plan.md), decisioni da prendere).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**3 novembre 2026 — versione 38. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4 ([piano C4](client-c4-plan.md); C4-1 e C4-1b fatti, prossimo C4-3).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -579,6 +579,7 @@ schermate e controlli utilizzabili anche senza hover.
 
 **Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
 decisioni D1–D14, in parte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
+**Stato (3 novembre 2026):** C4-1 (strumenti) e C4-1b (misura di partenza) fatti, [rapporto C4](reports/client-c4-report.md); prossimo C4-3.
 
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder

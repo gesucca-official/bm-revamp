@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-03T15:59:54.176Z",
+  "quick": false,
+  "nonStandardMeasures": [
+    "750x292"
+  ],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "750x292"
+  ],
+  "only": [
+    "verify",
+    "ffa",
+    "aim",
+    "layout"
+  ],
+  "build": {
+    "head": "a6f6b1af2620765424cb487663ee852f9c7ac8b9",
+    "dirtyPaths": [],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-03T15:53:07.081Z",
+      "bytes": 50693917,
+      "sha256_16": "904686d9ac6f8be9",
+      "rebuilt": true
+    },
+    "dist": {
+      "files": 18,
+      "sha256_16": "512975aa314a8f9f"
+    }
+  },
+  "results": [
+    {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 191,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 13,
+      "exit": 1,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 132,
+      "exit": 1,
+      "problems": 7
+    },
+    {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 63,
+      "exit": 1,
+      "problems": 36
+    }
+  ],
+  "warnings": [
+    "ffa-750x292.json: evidence says ok=false",
+    "aim-750x292.json: evidence says ok=false",
+    "layout-750x292.json: evidence says ok=false"
+  ]
+}
