@@ -1,5 +1,5 @@
 {
- "date": "2026-11-02T22:49:34.857Z",
+ "date": "2026-11-03T11:39:09.485Z",
  "url": "http://127.0.0.1:4320",
  "viewport": {
   "width": 844,
@@ -105,8 +105,8 @@
    "regular": 8
   },
   "openGame": {
-   "sceneReadyMs": 529,
-   "game": "531f0f017cd459ec9edf1e3d1221ceefc4dda830bf8a9183c34b18e336d48118",
+   "sceneReadyMs": 521,
+   "game": "92aded196ed8f157e6dd0f31cdd8b5355e02c0fe4e1089d5256bae8b9c927996",
    "listed": [
     "Strano"
    ],
@@ -120,16 +120,16 @@
     "junkie.character.PatheticBlade",
     "bruiser.character.LittleRage",
     "bruiser.Glare",
-    "bruiser.Glare"
+    "com.ShuffleFeet"
    ],
    "deck": 6,
-   "opponent": "ComPlayer_615",
-   "turnsPlayed": 10,
+   "opponent": "ComPlayer_7626",
+   "turnsPlayed": 11,
    "over": true,
    "winner": "devAlice",
    "outcome": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
    "handFromDeck": {
-    "views": 21,
+    "views": 23,
     "foreign": []
    }
   },

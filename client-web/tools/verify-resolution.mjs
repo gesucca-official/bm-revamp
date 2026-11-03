@@ -459,7 +459,9 @@ function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
   if(imps.length!==T.moves.length)c4s.push(`${x.key}: ${imps.length} impacts for ${T.moves.length} moves`);
   else T.moves.forEach((m,i)=>{const c=byName.get(m.card),want=m.void?['VOID']:expectKinds(c),got=imps[i];
    if(JSON.stringify(got.kinds)!==JSON.stringify(want))c4s.push(`${x.key} card ${i} ${m.card}: impact ${JSON.stringify(got.kinds)}, catalog ${JSON.stringify(want)}`);
-   if(!!got.shake!==(!m.void&&want.includes('HIT')))c4s.push(`${x.key} card ${i} ${m.card}: knock ${got.shake} for ${JSON.stringify(want)}`);
+   if(!!got.shake!==(!m.void&&want.some(k=>['HIT','CUT','POISON'].includes(k))))c4s.push(`${x.key} card ${i} ${m.card}: knock ${got.shake} for ${JSON.stringify(want)}`);
+   // The knocked character card also darkens: read back from the frames of a sequence that ran to its end.
+   if(got.shake&&endOf[x.key]?.reason==='complete'){const dk=(r.stats.darks??[]).find(d=>d.key===x.key&&d.move===i);if(!dk||dk.min>=255)c4s.push(`${x.key} card ${i} ${m.card}: the target was not darkened (${dk?.min})`);else seen('darkened',`${x.key}#${i} min ${dk.min}`);}
    for(const k of got.kinds)seen(k==='VOID'?'impactVoid':['HIT','CUT','POISON'].includes(k)?`impact${k}`:'impactRole',`${x.key}#${i}`);});
   const em=(r.stats.emphasis??[]).filter(y=>y.key===x.key),wantEm=T.emphasis.map(e=>e.kind==='died'?'died':'forfeit').sort(),gotEm=em.filter(y=>y.kind!=='outcome').map(y=>y.kind).sort();
   if(JSON.stringify(wantEm)!==JSON.stringify(gotEm))c4s.push(`${x.key}: emphasis ${JSON.stringify(gotEm)}, facts ${JSON.stringify(wantEm)}`);

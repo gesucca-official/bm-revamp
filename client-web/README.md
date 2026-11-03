@@ -187,7 +187,7 @@ in verticale, mai la pagina in orizzontale.
 - Sulla carta: timbro del ruolo sotto il titolo (danno, difesa, risorse,
   contrasto, disturbo, oggetti, altro), bollini ▲ con le risorse che ti dà,
   monete scure con il costo in basso a sinistra e, in basso a destra, il bollino del danno
-  nominale: simbolo del tipo (esplosione per il colpo, lama per il taglio, goccia per il
+  nominale: simbolo del tipo (pugno per il colpo, coltello per il taglio, goccia per il
   veleno) e importo del catalogo (C3-5). La priorità non è sul volto: sta nella (i).
   Una carta più spenta, con «!» sul costo, oggi non è pagabile: si può comunque provare, decide il server.
 - Le carte coperte nel ventaglio si alzano intere passando il mouse, scegliendole
@@ -282,7 +282,7 @@ turno». Conta i suoi 6 s solo a scheda visibile. A 844×390 in FFA il posto lib
 
 ## Volto della carta ed effetti per tipo di danno (C3-5)
 
-- **Volto:** in basso a destra il bollino del danno **nominale** della carta: simbolo del tipo (esplosione per il colpo, lama per il taglio, goccia per
+- **Volto:** in basso a destra il bollino del danno **nominale** della carta: simbolo del tipo (pugno per il colpo, coltello per il taglio, goccia per
   il veleno) e importo del catalogo, uno per tipo; nessun bollino per le carte senza danno. Viene da `damage` e `damageAmount` (regolamento 1.9 e 1.10),
   letti da `contracts.ts` e interpretati da `damageOf` in `readability.ts`; il client non calcola né corregge (D1): stati e difese possono cambiare il
   danno reale. `HIT 20+x` mostra il totale con la V di chi gioca (metà della V rimasta dopo il costo, troncata verso zero) in mano, nell'anteprima, nel
@@ -290,8 +290,8 @@ turno». Conta i suoi 6 s solo a scheda visibile. A 844×390 in FFA il posto lib
 - **Priorità:** non è più sul volto. Sta nell'ispezione («Priorità», con la riga «Danno nominale») e nell'etichetta accessibile della carta.
 - **Stesso volto ovunque:** mano, anteprima, trascinamento, primo piano della regia (D13), catalogo ed editor (in HTML con gli stessi simboli, `DamagePills`
   in `ui.tsx`, poligoni in `DAMAGE_SHAPES`).
-- **Impatto di ogni carta** (`impactOf`): il segno del suo tipo di danno sul bersaglio (colpo: esplosione con scossa del posto; taglio: lama; veleno:
-  goccia che sale; più tipi, un segno ciascuno) oppure, dove il tipo non si applica, quello del ruolo R07a in un cerchio colorato (difesa, risorse,
+- **Impatto di ogni carta** (`impactOf`): il segno del suo tipo di danno sul bersaglio (colpo: pugno con le linee d'urto; taglio: coltello; veleno:
+  goccia che sale; la carta personaggio del bersaglio vibra e si scurisce per ogni danno, colpo o taglio, mai con movimento ridotto; più tipi, un segno ciascuno) oppure, dove il tipo non si applica, quello del ruolo R07a in un cerchio colorato (difesa, risorse,
   contrasto, disturbo, oggetti, altro); senza tipo né ruolo l'anello semplice. È la natura della carta, non il danno risolto: una conversione come
   `BrokenBeerBottle` non si vede e non si deduce.
 - **Enfasi brevi:** annullata = croce e timbro «ANNULLATA» (senza impatto di tipo); eliminazione = timbro, anello e scossa del posto; forfait = timbro;

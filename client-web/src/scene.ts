@@ -4,7 +4,7 @@ import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_CREASE_SHAPES,DAMAGE_CREASE,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -21,22 +21,22 @@ type Flight={node:Container;from:Point;to:Point;start:number;end:number;appear?:
 // until `hold`, then goes back by `end`; `fade` (the card beside the author) appears with it and leaves before it.
 type Zoom={node:Container;rest:{x:number;y:number;s:number};up:{x:number;y:number;s:number};at:number;grow:number;hold:number;end:number;fade?:Container};
 // Marks over the table: an impact ring, a stamp (voided, eliminated) and the enlarged resource of a change (pop).
-// C3-5: `impact` is the mark of a card on its target (its type of damage or its role, or the cross of a voided move); a seat shakes only for a blow.
+// C3-5: `impact` is the mark of a card on its target (its type of damage or its role, or the cross of a voided move); the character card of the target knocks and darkens for any damage (blow or cut), never with reduced motion.
 type Accent={node:Container;at:number;dur:number;kind?:'ring'|'stamp'|'pop'|'impact';label?:Label;impact?:ImpactKind|'VOID';y?:number};
-type Shake={id:string;at:number;dur:number;amp:number};
+type Shake={id:string;at:number;dur:number;amp:number;dark?:{key:string;move:number;seat:string;min:number}};
 // C3-4s: a label of a change and the wall-clock span it was readable (popped in, not fading), measured on the frames.
 // `end`: the frame that starts the fade, which is when the label stops being shown whole; `last`: the last frame drawn whole before it; `gap`: the longest interval between two frames inside the reading window.
 type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:number;last:number;end:number;gap:number};
 /** C3-5: what a drawn face shows, in its own coordinates (centre at the middle of the card): damage pills, cost chips and every text, for the checks. */
 type DrawnDamage={type:DamageType;text:string;box:Box};
-export type FaceInfo={w:number;h:number;damage:DrawnDamage[];costs:Box[];texts:string[]};
+export type FaceInfo={w:number;h:number;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
 const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
 // Plain vector marks: the shape carries the meaning, the colour only reinforces it (O3, O14).
-export function glyph(g:Graphics,kind:Resource|Role|DamageType,x:number,y:number,s:number,color:number){const r=s/2,pts=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
+export function glyph(g:Graphics,kind:Resource|Role|DamageType,x:number,y:number,s:number,color:number,accent?:number){const r=s/2,pts=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
  switch(kind){
-  case 'HIT':case 'CUT':case 'POISON':for(const poly of DAMAGE_SHAPES[kind])g.poly(pts(poly)).fill(color);if(kind==='POISON')g.circle(x-r*.18,y+r*.38,r*.17).fill(PAPER);break;
+  case 'HIT':case 'CUT':case 'POISON':for(const poly of DAMAGE_SHAPES[kind])g.poly(pts(poly)).fill(color);if(accent!==undefined){for(const poly of DAMAGE_ACCENT_SHAPES[kind])g.poly(pts(poly)).fill(accent);for(const poly of DAMAGE_CREASE_SHAPES[kind])g.poly(pts(poly)).fill(DAMAGE_CREASE);}break;
   case 'HEALTH':g.circle(x-r*.45,y-r*.25,r*.5).circle(x+r*.45,y-r*.25,r*.5).fill(color).poly(pts([-.93,-.05,.93,-.05,0,.95])).fill(color);break;
   case 'ALERTNESS':g.ellipse(x,y,r,r*.62).fill(0xf3ead2).stroke({color,width:Math.max(1.5,s*.13)}).circle(x,y,r*.36).fill(color);break;
   case 'VIOLENCE':g.poly(pts([.3,-1,-.65,.15,-.05,.15,-.3,1,.7,-.2,.08,-.2])).fill(color);break;
@@ -90,7 +90,9 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
   flown:[] as {key:string;built:Record<FlownTag,number>;seen:Record<FlownTag,number>;toPile:number;toHand:number;itemsStart:Record<string,string[]>;itemsEnd:Record<string,string[]>|null;advanced:boolean}[],
   labels:[] as {key:string;seat:string;resource:Resource;box:Box;from:number;to:number;readable:number;gap:number}[],
   // C3-5: what each card made on its target, as the scene built it (the kinds of the mark, the knock, a voided move's cross) and the closing emphasis.
-  impacts:[] as {key:string;move:number;card:string;void:boolean;kinds:string[];shake:number}[],emphasis:[] as {key:string;kind:string;seat?:string;text?:string}[],
+  impacts:[] as {key:string;move:number;card:string;void:boolean;kinds:string[];shake:number}[],
+  // The darkest grey (255 = none) the target's character card reached for each card that knocked it, read back from the frames drawn.
+  darks:[] as {key:string;move:number;seat:string;min:number}[],emphasis:[] as {key:string;kind:string;seat?:string;text?:string}[],
   // C3-3: redraws of the aim arrows and the time each took (ms), kept for the last 600.
   aimDraws:0,aimMs:[] as number[]};
  private disposeFns:(()=>void)[]=[];private seqStarted=0;private seqSeen='';private seqKey='';private lastRound:Round|null=null;
@@ -173,7 +175,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  // Everything sits on the left, which stays visible where the fan overlaps. short = unpaid cost resources.
  private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[];const f=this.face(c.name,artIndex(c.bindingName),w,h,c.item?'OGGETTO':'',small,subtype(c));
   const titleH=small?h*.27:h*.24,footH=small?h*.17:h*.18,role=roleOf(c),g=new Graphics();f.addChild(g);
-  if(role){if(small){const d=Math.max(13,w*.22),cx=-w/2+6+d/2,cy=-h/2+titleH+d/2+2;g.circle(cx,cy,d/2).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,cx,cy,d*.62,PAPER);}
+  // The small card of the round shows the symbol of its damage at the bottom right: a role circle beside it would repeat it (owner trial, C3-7).
+  const roleDrawn=!!role&&!(small&&damageOf(c).length);
+  if(role&&roleDrawn){if(small){const d=Math.max(13,w*.22),cx=-w/2+6+d/2,cy=-h/2+titleH+d/2+2;g.circle(cx,cy,d/2).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,cx,cy,d*.62,PAPER);}
    else{const th=Math.max(14,h*.082),fs=th*.66,label=this.text(f,ROLES[role].label,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const tw=th+label.width+8,tx=-w/2+6,ty=-h/2+titleH+2+th/2;
     g.roundRect(tx,ty-th/2,tw,th,th*.3).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,tx+th*.55,ty,th*.62,PAPER);label.position.set(tx+th,ty);f.addChild(label);}}
   const gains=gainsOf(c);if(gains.length){const fs=small?Math.max(8,w*.12):Math.max(10,w*.075),ch=fs*1.45;let gx=-w/2+7;const gy=h/2-footH-5-ch/2;
@@ -186,7 +190,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     costBoxes.push({x:cx+cw/2,y:fy,w:cw,h:ch});g.roundRect(cx,fy-ch/2,cw,ch,ch*.45).fill(unpaid?WINE:INK);label.position.set(cx+5,fy);f.addChild(label);
     if(unpaid)g.moveTo(cx+3,fy+ch*.3).lineTo(cx+cw-3,fy-ch*.3).stroke({color:0xffd9d9,width:1.5});cx+=cw+3;}
    if(small)this.damageMarks(f,c,w,h,footH,drawnDamage);else this.damageBadges(f,c,w,fy,fs,cx,left,drawnDamage);}
-  this.faces.set(f,{w,h,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text)});
+  this.faces.set(f,{w,h,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text)});
   return f;}
  // C3-5 (owner's decision of 30 October 2026): the face shows the type and the nominal amount of the damage, as symbols, where the priority used to be
  // (the priority stays in the inspection). One pill per type of `damage`, right-aligned in the footer; the type alone when the server gives no amount.
@@ -197,11 +201,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   let items=build(1);if(items.reduce((n,x)=>n+x.w+gap,-gap)>room){items.forEach(x=>x.label?.destroy());k=Math.max(.7,room/items.reduce((n,x)=>n+x.w+gap,-gap));items=build(k);}
   let x=w/2-6;
   for(const it of items.reverse()){const bw=it.w,bh=ch*k,x0=x-bw;g.roundRect(x0,fy-bh/2,bw,bh,bh*.3).fill(0xf6efd9).stroke({color:DAMAGE_COLOR[it.e.type],width:1.5});
-   glyph(g,it.e.type,x0+bh*.48+2,fy,bh*.7,DAMAGE_COLOR[it.e.type]);if(it.label)it.label.position.set(x0+bh*.9+4,fy);
+   glyph(g,it.e.type,x0+bh*.48+2,fy,bh*.7,DAMAGE_COLOR[it.e.type],DAMAGE_ACCENT[it.e.type]);if(it.label)it.label.position.set(x0+bh*.9+4,fy);
    drawn.push({type:it.e.type,text:it.label?.text??'',box:{x:x0+bw/2,y:fy,w:bw,h:bh}});x=x0-gap;}}
  // A card too small for a pill (the round's cards in the middle, 36–40 px): the symbol of each type alone, at the bottom right of the art.
  private damageMarks(f:Container,c:Card,w:number,h:number,footH:number,drawn:DrawnDamage[]){const entries=damageOf(c);if(!entries.length||w<28)return;const d=Math.max(9,w*.26),g=new Graphics();f.addChild(g);
-  entries.forEach((e,i)=>{const cx=w/2-6-d/2-i*(d+2),cy=h/2-footH-d/2-3;g.circle(cx,cy,d*.62).fill(0xf6efd9).stroke({color:DAMAGE_COLOR[e.type],width:1});glyph(g,e.type,cx,cy,d,DAMAGE_COLOR[e.type]);drawn.push({type:e.type,text:'',box:{x:cx,y:cy,w:d*1.24,h:d*1.24}});});}
+  entries.forEach((e,i)=>{const cx=w/2-6-d/2-i*(d+2),cy=h/2-footH-d/2-3;g.circle(cx,cy,d*.62).fill(0xf6efd9).stroke({color:DAMAGE_COLOR[e.type],width:1});glyph(g,e.type,cx,cy,d,DAMAGE_COLOR[e.type],DAMAGE_ACCENT[e.type]);drawn.push({type:e.type,text:'',box:{x:cx,y:cy,w:d*1.24,h:d*1.24}});});}
  // Starting value of each resource: the character card of the catalog, else the first view seen.
  private start(id:string,p:Player){const key=`${this.model.view.gameId}:${id}`,known=this.characters().find(c=>c.bindingName===p.character.bindingName)?.resources;
   if(known)return known;if(!this.starts.has(key))this.starts.set(key,{...p.character.resources});return this.starts.get(key)!;}
@@ -524,7 +528,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     const stamp=add(this.stamp('ANNULLATA',C));stamp.position.set(to.x,to.y);this.accents.push({node:stamp,at:hit,dur:after,kind:'stamp'});count.stamps++;this.stats.impacts.push({key:k,move:i,card:m.card,void:true,kinds:['VOID'],shake:0});}
    else{const imp=impactOf(named(m.card),this.reduced),dur=P.flight.at+P.flight.dur-hit+P.target.dur,gap=C?44:70;
     imp.kinds.forEach((kind,n)=>{const mark=add(this.impactMark(kind,C));mark.position.set(to.x+(n-(imp.kinds.length-1)/2)*gap,to.y);this.accents.push({node:mark,at:hit,dur,kind:'impact',impact:kind,y:to.y});});
-    if(imp.shake)this.shakes.push({id:m.target,at:hit,dur:Math.min(dur,420),amp:C?3:5});
+    if(imp.shake){const dark={key:k,move:i,seat:m.target,min:255};this.stats.darks.push(dark);this.shakes.push({id:m.target,at:hit,dur:Math.min(dur,420),amp:C?3:5,dark});}
     this.stats.impacts.push({key:k,move:i,card:m.card,void:false,kinds:[...imp.kinds],shake:imp.shake});}
    // 5. Close-up of the target: it grows a little in its seat, under the card that hit it; the chosen object meets its fate.
    const tu=targetOf({me:m.target===this.model.me,person:aim},{w:this.width,h:this.height},(L?.seats??[]).filter(x=>x.id!==m.target).map(x=>x.person)),tn=add(character(m.target,tu.w,tu.h)),t0=aim.h/tu.h;this.fx.setChildIndex(tn,0);
@@ -573,9 +577,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  }
 /** C3-5: the mark of one impact, vector only (D9): a burst for a blow, a slash for a cut, a drop for poison, the symbol of its role in a ring where the type does not apply, a cross for a voided move. */
  private impactMark(kind:ImpactKind|'VOID',compact:boolean){const c=new Container(),g=new Graphics(),R=compact?26:40;c.addChild(g);
-  if(kind==='HIT'){glyph(g,'HIT',0,0,R*2.3,INK);glyph(g,'HIT',0,0,R*2,DAMAGE_COLOR.HIT);glyph(g,'HIT',0,0,R*.95,0xf6e3a8);}
-  else if(kind==='CUT'){glyph(g,'CUT',0,0,R*2.3,INK);glyph(g,'CUT',0,0,R*2,0xdfe8ef);g.moveTo(R*.75,-R*.75).lineTo(-R*.75,R*.75).stroke({color:0xffffff,width:compact?2:3,cap:'round'});}
-  else if(kind==='POISON'){glyph(g,'POISON',0,0,R*2.1,INK);glyph(g,'POISON',0,0,R*1.8,0x78b02c);for(const [bx,by,br] of [[.9,-.2,.2],[-.9,.15,.16],[.6,.8,.13]])g.circle(bx*R,by*R,br*R).fill(0x78b02c).stroke({color:INK,width:1.5});}
+  if(kind==='HIT'){glyph(g,'HIT',0,0,R*2.3,INK);glyph(g,'HIT',0,0,R*2,DAMAGE_COLOR.HIT,DAMAGE_ACCENT.HIT);for(const [x0,y0,x1,y1] of [[-.55,-1.1,-.72,-1.45],[0,-1.15,0,-1.55],[.55,-1.1,.72,-1.45]])g.moveTo(x0*R,y0*R).lineTo(x1*R,y1*R).stroke({color:INK,width:compact?5:7,cap:'round'}).moveTo(x0*R,y0*R).lineTo(x1*R,y1*R).stroke({color:0xf6e3a8,width:compact?2.5:3.5,cap:'round'});}
+  else if(kind==='CUT'){glyph(g,'CUT',0,0,R*2.3,INK);glyph(g,'CUT',0,0,R*2,0x6b8296,DAMAGE_ACCENT.CUT);}
+  else if(kind==='POISON'){glyph(g,'POISON',0,0,R*2.1,INK);glyph(g,'POISON',0,0,R*1.8,0x78b02c,DAMAGE_ACCENT.POISON);for(const [bx,by,br] of [[.9,-.2,.2],[-.9,.15,.16],[.6,.8,.13]])g.circle(bx*R,by*R,br*R).fill(0x78b02c).stroke({color:INK,width:1.5});}
   else if(kind==='VOID'){const a=R*.9;g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:INK,width:compact?9:13,cap:'round'});g.moveTo(-a,-a).lineTo(a,a).moveTo(a,-a).lineTo(-a,a).stroke({color:WINE,width:compact?5:8,cap:'round'});}
   else if(kind==='PLAIN')g.circle(0,0,24).stroke({color:PETROL,width:4});
   else{g.circle(0,0,R).fill({color:0x120c08,alpha:.55}).stroke({color:ROLE_COLOR[kind],width:compact?3:4});glyph(g,kind,0,0,R*1.5,INK);glyph(g,kind,0,0,R*1.25,kind==='COUNTER'||kind==='DEFENSE'?0x8fd0d0:PAPER);}
@@ -609,7 +613,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  skip(){this.finish('skip');}
  stopEffects(){if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
-  this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+  this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private lastTick=0;
  private tick(){const now=performance.now(),lastTick=this.lastTick;this.lastTick=now;
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
@@ -646,8 +650,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
      if(l&&fading&&!l.end)l.end=now;if(l&&e>=LABEL.in&&!fading){l.first||=now;l.last=now;l.gap=Math.max(l.gap,lastTick?now-lastTick:0);}}
     else if(x.kind==='impact'){const m=impactMotion(x.impact!,p,this.reduced);x.node.scale.set(m.scale);x.node.alpha=m.alpha;x.node.rotation=m.rot;x.node.y=x.y!+m.dy;}
     else{x.node.scale.set(1+p*1.2);x.node.alpha=1-p;}});
-   // C3-5: a seat hit by a blow, or eliminated, knocks for a moment; never with reduced motion.
-   for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(!h)continue;const q=(t-sh.at)/sh.dur;h.node.x=h.x+(this.reduced||q<0||q>1?0:Math.sin(q*Math.PI*8)*sh.amp*(1-q));}
+   // C3-5: a seat hit by damage (blow or cut), or eliminated, knocks for a moment; the one hit by a card also darkens and clears; never with reduced motion.
+   for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(!h)continue;const q=(t-sh.at)/sh.dur,on=!this.reduced&&q>=0&&q<=1;h.node.x=h.x+(on?Math.sin(q*Math.PI*8)*sh.amp*(1-q):0);
+    if(sh.dark){const k=on?(q<.2?q/.2:1-(q-.2)/.8)*.55:0,v=Math.round(255*(1-k));h.node.tint=(v<<16)|(v<<8)|v;if(on)sh.dark.min=Math.min(sh.dark.min,v);}}
   }}
  }
  startMeasure(){this.stats.frames=[];this.stats.inputMs=[];this.tickPrev=0;this.measure=true;}

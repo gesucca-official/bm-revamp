@@ -46,7 +46,7 @@ test('C3-5: the impact of every card of the catalog is that of its type of damag
   const types=damageOf(c).map(e=>e.type),imp=impactOf(c),role=c.role&&Object.hasOwn(ROLES,c.role)?c.role:null;
   const want:ImpactKind[]=types.length?types:role?[role as ImpactKind]:['PLAIN'];
   assert.deepEqual(imp.kinds,want,c.name);
-  assert.equal(imp.shake,types.includes('HIT')?1:0,`${c.name}: only a blow knocks`);
+  assert.equal(imp.shake,types.length?1:0,`${c.name}: a card with a nominal damage, blow or cut, knocks and darkens its target`);
   assert.equal(impactOf(c,true).shake,0,`${c.name}: reduced motion never knocks`);
   assert.deepEqual(impactOf(c,true).kinds,imp.kinds,`${c.name}: the same mark with reduced motion`);
  }

@@ -170,6 +170,7 @@ function briefProblems(s,dom){const out=[],L=s.layout,t=dom.toast,obs=obstacles(
 const pills=(card,left)=>{const amount=card.catalogAmount??card.damageAmount;if(amount&&amount!=='—')return amount.split(',').map(x=>{const m=/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(x);return m?{type:m[1],text:m[3]?(left===null?`${m[2]}+`:String(Number(m[2])+Math.trunc(left/2))):m[2]}:{type:'?',text:x};});
  const types=card.catalogDamage??card.damage;return types&&types!=='—'?types.split(',').map(t=>({type:t.trim(),text:''})):[];};
 function faceProblems(f,card,{small,left}){const out=[];if(card.item){if(f.damage.length)out.push('an object with a damage pill');return out;}
+ if(small&&f.role&&f.damage.length)out.push('a role circle beside the damage symbol (it repeats it)');
  const want=pills(card,left),got=f.damage.map(d=>({type:d.type,text:d.text}));
  if(JSON.stringify(got.map(x=>x.type))!==JSON.stringify(want.map(x=>x.type)))out.push(`damage types ${JSON.stringify(got.map(x=>x.type))}, catalog ${JSON.stringify(want.map(x=>x.type))}`);
  else if(!small&&JSON.stringify(got.map(x=>x.text))!==JSON.stringify(want.map(x=>x.text)))out.push(`damage amounts ${JSON.stringify(got.map(x=>x.text))}, catalog ${JSON.stringify(want.map(x=>x.text))}`);
