@@ -3,6 +3,7 @@ import type {Card,Character,Resource} from './contracts.ts';
 // things look. Costs are never subtracted here and the server stays the judge of legality.
 
 export const RESOURCES:Resource[]=['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'];
+/** The letters of the catalog: kept for the text that can be consulted (labels, tools, the server's strings); the face, the boards and the chips show the symbols of symbols.ts. */
 export const LETTER:Record<Resource,string>={HEALTH:'H',ALERTNESS:'A',VIOLENCE:'V',TOXICITY:'T',ALCOHOL:'L'};
 const BY_LETTER=Object.fromEntries(Object.entries(LETTER).map(([k,v])=>[v,k])) as Record<string,Resource>;
 
@@ -56,13 +57,14 @@ const TIMER_TEXT:Record<string,string>={
  'Marvelous Cocktail':'toglie immunità e stati, poi 20 danni da veleno',
 };
 const NAMES:Record<string,string>={TOXICITY:'tossicità',ALCOHOL:'alcol'};
-export type Chip={id:string;kind:'good'|'bad'|'equip'|'immunity'|'timer';short:string;title:string;text:string};
+/** `short` is the consultable text of the chip; an immunity also names its `resource`, which the table draws as the symbol (C4-3). */
+export type Chip={id:string;kind:'good'|'bad'|'equip'|'immunity'|'timer';short:string;title:string;text:string;resource?:Resource};
 export const statusText=(name:string,fallback:string)=>STATUS_TEXT[name]??fallback;
 // R05: duration d decreases at turn end and the status disappears below zero (0 = this turn only).
 const lasting=(d:number|null)=>d===null?'resta finché non viene tolto':d<=0?'finisce a fine turno':`dura ancora ${d} turn${d===1?'o':'i'} dopo questo`;
 export function chipsOf(owner:string,c:Character):Chip[]{
  const chips:Chip[]=[];
- c.immunities.forEach(r=>chips.push({id:`status-${owner}-imm-${r}`,kind:'immunity',short:LETTER[r],title:`Immune a ${NAMES[r]??r}`,text:'Blocca il suo effetto di fine turno, non costi, variazioni o veleno.'}));
+ c.immunities.forEach(r=>chips.push({id:`status-${owner}-imm-${r}`,kind:'immunity',short:LETTER[r],resource:r,title:`Immune a ${NAMES[r]??r}`,text:'Blocca il suo effetto di fine turno, non costi, variazioni o veleno.'}));
  c.statuses.forEach((s,i)=>chips.push({id:`status-${owner}-st-${i}`,kind:s.equip?'equip':s.type==='BAD'?'bad':'good',short:s.lastsForTurns===null?'∞':String(Math.max(0,s.lastsForTurns)),
   title:`${s.equip?'Equipaggiamento':s.type==='BAD'?'Stato negativo':'Stato positivo'}: ${s.name}`,text:`${statusText(s.name,s.description)}. ${s.singleUse&&!s.equip?'Si consuma dopo l’uso; ':''}${lasting(s.lastsForTurns)}.`}));
  // R06: timers count down at each turn end and fire at zero.
@@ -435,6 +437,9 @@ export const DAMAGE_SHAPES:Record<DamageType,number[][]>={
  POISON:[[0,-1,.62,.1,.62,.45,.38,.82,0,.95,-.38,.82,-.62,.45,-.62,.1]],
 };
 export const DAMAGE_COLOR:Record<DamageType,number>={HIT:0xa3313d,CUT:0x4d6070,POISON:0x5f8a1f};
+/** Colours of the resources and of the roles (the table and the HTML shell share them, C4-3): the colour only reinforces the shape. */
+export const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
+export const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
 /** The second colour of each symbol (owner trial, C3-7): the yellow heart of the burst, the light glint on the blade, the light glint on the drop. */
 export const DAMAGE_ACCENT:Record<DamageType,number>={HIT:0xf2c84b,CUT:0xbfe5f6,POISON:0xb4e06a};
 export const DAMAGE_ACCENT_SHAPES:Record<DamageType,number[][]>={

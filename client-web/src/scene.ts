@@ -4,7 +4,8 @@ import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {RESOURCES,LETTER,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -29,27 +30,11 @@ type Shake={id:string;at:number;dur:number;amp:number;dark?:{key:string;move:num
 type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:number;last:number;end:number;gap:number};
 /** C3-5: what a drawn face shows, in its own coordinates (centre at the middle of the card): damage pills, cost chips and every text, for the checks. */
 type DrawnDamage={type:DamageType;text:string;box:Box};
-export type FaceInfo={w:number;h:number;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean};
+/** `marks`: the resources whose symbol the face draws on its cost coins and on its gains, in drawing order (C4-3: never a letter on the face; the letters stay in `texts` only where the catalog gives them as text). */
+export type FaceInfo={w:number;h:number;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean;marks:{cost:Resource[];gains:Resource[]}};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
-const RES_COLOR:Record<Resource,number>={HEALTH:0xa3313d,ALERTNESS:0x2f8189,VIOLENCE:0xc0582c,TOXICITY:0x78962c,ALCOHOL:0xc98d1f};
-const ROLE_COLOR:Record<Role,number>={DAMAGE:0x742e33,DEFENSE:0x2c6262,RESOURCES:0x4b6a2d,COUNTER:0x343f6b,DISRUPT:0x5c3a6a,ITEMS:0x86561b,OTHER:0x5d5247};
-// Plain vector marks: the shape carries the meaning, the colour only reinforces it (O3, O14).
-export function glyph(g:Graphics,kind:Resource|Role|DamageType,x:number,y:number,s:number,color:number,accent?:number){const r=s/2,pts=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
- switch(kind){
-  case 'HIT':case 'CUT':case 'POISON':for(const poly of DAMAGE_SHAPES[kind])g.poly(pts(poly)).fill(color);if(accent!==undefined)for(const poly of DAMAGE_ACCENT_SHAPES[kind])g.poly(pts(poly)).fill(accent);break;
-  case 'HEALTH':g.circle(x-r*.45,y-r*.25,r*.5).circle(x+r*.45,y-r*.25,r*.5).fill(color).poly(pts([-.93,-.05,.93,-.05,0,.95])).fill(color);break;
-  case 'ALERTNESS':g.ellipse(x,y,r,r*.62).fill(0xf3ead2).stroke({color,width:Math.max(1.5,s*.13)}).circle(x,y,r*.36).fill(color);break;
-  case 'VIOLENCE':g.poly(pts([.3,-1,-.65,.15,-.05,.15,-.3,1,.7,-.2,.08,-.2])).fill(color);break;
-  case 'TOXICITY':g.poly(pts([0,-1,.6,.12,-.6,.12])).fill(color).circle(x,y+r*.32,r*.6).fill(color);break;
-  case 'ALCOHOL':g.roundRect(x-r*.48,y-r*.2,r*.96,r*1.2,r*.22).fill(color).rect(x-r*.17,y-r,r*.34,r*.9).fill(color);break;
-  case 'DAMAGE':g.poly(pts(Array.from({length:20},(_,i)=>{const a=Math.PI*i/10,k=i%2?.45:1;return [Math.cos(a)*k,Math.sin(a)*k];}).flat())).fill(color);break;
-  case 'DEFENSE':g.poly(pts([-.8,-.85,.8,-.85,.8,.05,0,1,-.8,.05])).fill(color);break;
-  case 'RESOURCES':g.poly(pts([0,-.95,.9,.6,-.9,.6])).fill(color);break;
-  case 'COUNTER':g.poly(pts(Array.from({length:8},(_,i)=>{const a=Math.PI/8+Math.PI*i/4;return [Math.cos(a),Math.sin(a)];}).flat())).stroke({color,width:Math.max(1.5,s*.14)}).rect(x-r*.6,y-r*.14,r*1.2,r*.28).fill(color);break;
-  case 'DISRUPT':g.poly(pts([0,.95,.9,-.6,-.9,-.6])).fill(color);break;
-  case 'ITEMS':g.roundRect(x-r*.95,y-r*.55,r*1.1,r*1.4,r*.15).stroke({color,width:Math.max(1.2,s*.11)}).roundRect(x-r*.15,y-r*.85,r*1.1,r*1.4,r*.15).fill(color);break;
-  case 'OTHER':g.circle(x-r*.6,y,r*.24).circle(x,y,r*.24).circle(x+r*.6,y,r*.24).fill(color);break;
- }return g;}
+// Plain vector marks (symbols.ts, shared with the HTML shell): the shape carries the meaning, the colour only reinforces it (O3, O14).
+export function glyph(g:Graphics,kind:SymbolKind,x:number,y:number,s:number,color:number,accent?:number){drawSymbol(g as unknown as Pen,kind,x,y,s,{main:color,accent});return g;}
 export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number};item:{w:number;h:number}};
  /** C3-L: what the own piles show: cards left in the deck and the card on top of the discard pile. */
  piles:{deck:number;discard:string|null}|null;
@@ -173,7 +158,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.text(c,footer,0,h/2-footH+3,small?Math.max(7,w*.085):Math.max(12,w*.10),w-10);return c;}
  // C2a card face: role stamp under the title, self gains on the art, cost coins and priority in the footer.
  // Everything sits on the left, which stays visible where the fan overlaps. short = unpaid cost resources.
- private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[];const f=this.face(c.name,artIndex(c.bindingName),w,h,c.item?'OGGETTO':'',small,subtype(c));
+ private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[],costMarks:Resource[]=[],gainMarks:Resource[]=[];const f=this.face(c.name,artIndex(c.bindingName),w,h,c.item?'OGGETTO':'',small,subtype(c));
   const titleH=small?h*.27:h*.24,footH=small?h*.17:h*.18,role=roleOf(c),g=new Graphics();f.addChild(g);
   // The small card of the round shows the symbol of its damage at the bottom right: a role circle beside it would repeat it (owner trial, C3-7).
   const roleDrawn=!!role&&!(small&&damageOf(c).length);
@@ -181,16 +166,17 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    else{const th=Math.max(14,h*.082),fs=th*.66,label=this.text(f,ROLES[role].label,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const tw=th+label.width+8,tx=-w/2+6,ty=-h/2+titleH+2+th/2;
     g.roundRect(tx,ty-th/2,tw,th,th*.3).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,tx+th*.55,ty,th*.62,PAPER);label.position.set(tx+th,ty);f.addChild(label);}}
   const gains=gainsOf(c);if(gains.length){const fs=small?Math.max(8,w*.12):Math.max(10,w*.075),ch=fs*1.45;let gx=-w/2+7;const gy=h/2-footH-5-ch/2;
-   for(const gain of gains){const label=this.text(f,gainText(gain),0,0,fs,undefined,INK);label.anchor.set(0,.5);const cw=ch*.9+label.width+5;if(gx+cw>w/2-4){label.destroy();break;}
-    g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});glyph(g,'RESOURCES',gx+ch*.48,gy,ch*.55,RES_COLOR[gain.resource]);label.position.set(gx+ch*.9,gy);f.addChild(label);gx+=cw+3;}}
+   for(const gain of gains){const label=this.text(f,`+${gain.amount??'x'}`,0,0,fs,undefined,INK);label.anchor.set(0,.5);const gd=ch*.78,cw=label.width+gd+9;if(gx+cw>w/2-4){label.destroy();break;}
+    g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});label.position.set(gx+4,gy);f.addChild(label);glyph(g,gain.resource,gx+4+label.width+2+gd/2,gy,gd,RES_COLOR[gain.resource]);gainMarks.push(gain.resource);gx+=cw+3;}}
   if(!c.item){const fs=small?Math.max(7,w*.085):Math.max(11,w*.088),fy=h/2-footH/2-1,ch=fs*1.4;let cx=-w/2+8;
    const costs=Object.entries(c.cost) as [Resource,number][];
    if(!costs.length){const dash=this.text(f,'—',cx+4,fy,fs,undefined,INK);dash.anchor.set(0,.5);}
-   for(const [k,v] of costs){const unpaid=short.includes(k),label=this.text(f,`${unpaid?'! ':''}${v} ${LETTER[k]}`,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const cw=label.width+10;
+   for(const [k,v] of costs){const unpaid=short.includes(k),label=this.text(f,`${unpaid?'! ':''}${v}`,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const dd=ch*.8,cw=label.width+dd+10,dx=cx+5+label.width+2+dd/2;
     costBoxes.push({x:cx+cw/2,y:fy,w:cw,h:ch});g.roundRect(cx,fy-ch/2,cw,ch,ch*.45).fill(unpaid?WINE:INK);label.position.set(cx+5,fy);f.addChild(label);
+    g.circle(dx,fy,dd/2).fill(0xf6efd9);glyph(g,k,dx,fy,dd*.78,RES_COLOR[k]);costMarks.push(k);
     if(unpaid)g.moveTo(cx+3,fy+ch*.3).lineTo(cx+cw-3,fy-ch*.3).stroke({color:0xffd9d9,width:1.5});cx+=cw+3;}
    if(small)this.damageMarks(f,c,w,h,footH,drawnDamage);else this.damageBadges(f,c,w,fy,fs,cx,left,drawnDamage);}
-  this.faces.set(f,{w,h,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text)});
+  this.faces.set(f,{w,h,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text),marks:{cost:costMarks,gains:gainMarks}});
   return f;}
  // C3-5 (owner's decision of 30 October 2026): the face shows the type and the nominal amount of the damage, as symbols, where the priority used to be
  // (the priority stays in the inspection). One pill per type of `damage`, right-aligned in the footer; the type alone when the server gives no amount.
@@ -245,9 +231,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   chips.forEach((chip,i)=>{const x=b.x-b.w/2+cw/2+i*step,y=b.y,c=new Container(),g=new Graphics();c.addChild(g);c.position.set(x,y);
    g.roundRect(-cw/2,-ch/2,cw,ch,ch*.35).fill(fill[chip.kind]).stroke({color:PAPER,width:1.2});const gx=-cw/2+ch*.45,s=ch*.6;
    if(chip.kind==='good')glyph(g,'RESOURCES',gx,0,s,PAPER);else if(chip.kind==='bad')glyph(g,'DISRUPT',gx,0,s,PAPER);else if(chip.kind==='equip')glyph(g,'DAMAGE',gx,0,s,PAPER);
-   else if(chip.kind==='immunity')g.circle(gx,0,s/2).stroke({color:PAPER,width:1.5}).moveTo(gx-s*.35,s*.35).lineTo(gx+s*.35,-s*.35).stroke({color:PAPER,width:1.5});
+   else if(chip.kind==='immunity'&&chip.resource){const d=Math.min(ch*.92,cw*.62);g.circle(0,0,d/2).fill(0xf6efd9);glyph(g,chip.resource,0,0,d*.68,RES_COLOR[chip.resource]);g.moveTo(-d*.4,d*.4).lineTo(d*.4,-d*.4).stroke({color:WINE,width:Math.max(1.5,d*.13)});}
    else g.circle(gx,0,s/2).stroke({color:PAPER,width:1.5}).moveTo(gx,0).lineTo(gx,-s*.32).moveTo(gx,0).lineTo(gx+s*.25,0).stroke({color:PAPER,width:1.3});
-   const tx=this.text(c,chip.short,0,0,fs,undefined,0xfff6e2);tx.anchor.set(0,.5);tx.position.set(gx+s*.6,0);
+   if(chip.kind!=='immunity'){const tx=this.text(c,chip.short,0,0,fs,undefined,0xfff6e2);tx.anchor.set(0,.5);tx.position.set(gx+s*.6,0);}
    if(this.openStatus===chip.id||this.hovered===chip.id||this.focused===chip.id)g.roundRect(-cw/2-2,-ch/2-2,cw+4,ch+4,ch*.4).stroke({color:0xf1e4c4,width:2});
    this.world.addChild(c);this.chips[chip.id]={...chip,x,y:y-ch/2};
    // Same owner as the character: with a card chosen, a tap here aims at that character.
@@ -283,8 +269,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const moves=v.resolvedMoves.slice(0,P.slots.length),shown=this.seqStarted?Math.min(this.landed,moves.length):moves.length,strip=P.slots.length>1?P.slots[1].y-P.slots[0].y:P.slots[0].h*.2;
   return moves.slice(0,shown).map((m,i)=>{const b=P.slots[i],f=this.card(known.find(x=>x.name===m.playedCardName)??plain(m.playedCardName),b.w,b.h,true);f.position.set(b.x,b.y);f.rotation=i%2?.025:-.025;this.world.addChild(f);
    // Author in the column beside the cascade, level with the title strip; a voided move has a wine tag and a line across its strip.
-   const t=P.tags[i],tag=new Container(),who=this.text(tag,`${m.playerId===this.model.me?'TU':this.name(m.playerId).toUpperCase()}${m.void?' ✕':''}`,0,0,t.h*.62,undefined,0xfff6e2);who.anchor.set(.5);
-   if(who.width>t.w-6)who.scale.set((t.w-6)/who.width);tag.addChildAt(new Graphics().roundRect(-t.w/2,-t.h/2,t.w,t.h,t.h*.35).fill({color:m.void?WINE:INK,alpha:.92}).stroke({color:PAPER,width:1}),0);tag.position.set(t.x,t.y);this.world.addChild(tag);
+   // A voided move has the cross of symbols.ts after the name (never the ✕ of a font: Impact and Arial lack it).
+   const t=P.tags[i],tag=new Container(),x=m.void?t.h*.55:0,who=this.text(tag,m.playerId===this.model.me?'TU':this.name(m.playerId).toUpperCase(),0,0,t.h*.62,undefined,0xfff6e2);who.anchor.set(.5);
+   if(who.width>t.w-6-x)who.scale.set((t.w-6-x)/who.width);who.position.x=-x/2;tag.addChildAt(new Graphics().roundRect(-t.w/2,-t.h/2,t.w,t.h,t.h*.35).fill({color:m.void?WINE:INK,alpha:.92}).stroke({color:PAPER,width:1}),0);if(m.void){const cg=new Graphics();drawMark(cg as unknown as Pen,'cross',who.x+who.width/2+t.h*.4,0,t.h*.5,0xfff6e2);tag.addChild(cg);}tag.position.set(t.x,t.y);this.world.addChild(tag);
    if(m.void){const y=b.y-b.h/2+strip*.5;this.world.addChild(new Graphics().moveTo(b.x-b.w/2+3,y+strip*.25).lineTo(b.x+b.w/2-3,y-strip*.25).stroke({color:WINE,width:compact?2:3}));}
    return {name:m.playedCardName,author:m.playerId,void:!!m.void};});}
  private back(w:number,h:number){const c=this.frame(w,h);c.addChild(new Graphics().roundRect(-w/2+4,-h/2+4,w-8,h-8,2).fill(WINE).stroke({color:0xa47763,width:1}));
@@ -589,7 +576,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   return c;}
  /** C3-5, for the checks: each card drawn as the hand (or the small card of the round's cascade) draws it, what it shows read back, then thrown away. */
  faceInfos(cards:Card[],small=false){const L=this.layout,w=small?L?.played?.slots[0]?.w??40:L?.hand.w??112,h=small?L?.played?.slots[0]?.h??56:L?.hand.h??w*1.38;
-  return cards.map(c=>{const f=this.card(c,w,h,small,[],null),info=this.faces.get(f)!;f.destroy({children:true});return {name:c.name,catalogDamage:c.damage??null,catalogAmount:c.damageAmount??null,priority:c.priority,item:c.item,...info};});}
+  return cards.map(c=>{const f=this.card(c,w,h,small,[],null),info=this.faces.get(f)!;f.destroy({children:true});return {name:c.name,catalogDamage:c.damage??null,catalogAmount:c.damageAmount??null,priority:c.priority,item:c.item,cost:c.cost,gains:c.gains??null,...info};});}
  /** «ANNULLATA», «ELIMINATO»: a wine stamp pressed on a card or a character. */
  private stamp(word:string,compact:boolean,size=1){const c=new Container(),label=this.text(c,word,0,0,(compact?13:20)*size,undefined,0xffe9e9);label.anchor.set(.5);
   const w=label.width+18,h=label.height+8;c.addChildAt(new Graphics().roundRect(-w/2,-h/2,w,h,4).fill({color:WINE,alpha:.92}).stroke({color:0xffd9d9,width:2.5}),0);c.rotation=-.18;return c;}

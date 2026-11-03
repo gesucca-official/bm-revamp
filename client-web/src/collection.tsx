@@ -2,9 +2,9 @@ import React,{useEffect,useState} from 'react';
 import type {Session} from './session.ts';
 import type {Card,CharacterCard,UserGuiDeck} from './contracts.ts';
 import {artCss,artIndex,loadAtlas} from './art.ts';
-import {cost,subtype} from './scene.ts';
+import {subtype} from './scene.ts';
 import {ROLES,roleOf} from './readability.ts';
-import {DamagePills,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
+import {Cost,DamagePills,Gains,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
 import {MAX_BOUND,MAX_INITIAL,addBound,addRegular,basics,bounds,catalogOrder,clearBound,copies,editCopy,emptyDraft,initialCards,lastResorts,
  payload,problems,removeRegular,setBasic,setCharacter,setLastResort,setName,shown,type Draft,type Pool} from './deck.ts';
 
@@ -15,8 +15,8 @@ function CardFace({card,full=false,count}:{card:Card;full?:boolean;count?:number
  const role=roleOf(card);
  return <div className="cc" data-testid="card-face" data-binding={card.bindingName}><Art binding={card.bindingName}/>
   <div className="cc-text"><strong>{card.name}{count!==undefined&&<span className="copies"> ×{count}</span>}</strong>
-   <small>{subtype(card).toLocaleLowerCase('it')}{card.item?'':` · costo ${cost(card)}`}{!card.item&&<DamagePills card={card}/>}</small>
-   {(role||(card.gains&&card.gains!=='—'))&&<small>{role&&`${ROLES[role].label.toLowerCase()}`}{card.gains&&card.gains!=='—'?`${role?' · ':''}ti dà ${card.gains}`:''}</small>}
+   <small>{subtype(card).toLocaleLowerCase('it')}{!card.item&&<> · costo <Cost card={card}/></>}{!card.item&&<DamagePills card={card}/>}</small>
+   {(role||(card.gains&&card.gains!=='—'))&&<small>{role&&`${ROLES[role].label.toLowerCase()}`}{card.gains&&card.gains!=='—'&&<>{role&&' · '}ti dà <Gains card={card}/></>}</small>}
    {full&&!card.item&&<small>Bersaglio: {card.canTarget.map(t=>targetNames[t]).join(' / ')}</small>}
    <p>{effect(card)}</p></div></div>;
 }

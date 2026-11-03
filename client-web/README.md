@@ -185,8 +185,8 @@ in verticale, mai la pagina in orizzontale.
 - ✓ invia **un solo** comando; costi e carte cambiano solo con la vista del server.
   Un rifiuto lascia la scelta sul tavolo per correggerla.
 - Sulla carta: timbro del ruolo sotto il titolo (danno, difesa, risorse,
-  contrasto, disturbo, oggetti, altro), bollini ▲ con le risorse che ti dà,
-  monete scure con il costo in basso a sinistra e, in basso a destra, il bollino del danno
+  contrasto, disturbo, oggetti, altro), bollini col numero e il simbolo di ogni risorsa che ti dà (C4-3),
+  monete scure con il costo (numero e simbolo della risorsa) in basso a sinistra e, in basso a destra, il bollino del danno
   nominale: simbolo del tipo (stella per il colpo, coltello per il taglio, goccia per il
   veleno) e importo del catalogo (C3-5). La priorità non è sul volto: sta nella (i).
   Una carta più spenta, con «!» sul costo, oggi non è pagabile: si può comunque provare, decide il server.
@@ -289,7 +289,7 @@ turno». Conta i suoi 6 s solo a scheda visibile. A 844×390 in FFA il posto lib
   trascinamento e nel primo piano; «20+» dove la V non è nota (catalogo, editor); le carte piccole del round hanno il solo simbolo.
 - **Priorità:** non è più sul volto. Sta nell'ispezione («Priorità», con la riga «Danno nominale») e nell'etichetta accessibile della carta.
 - **Stesso volto ovunque:** mano, anteprima, trascinamento, primo piano della regia (D13), catalogo ed editor (in HTML con gli stessi simboli, `DamagePills`
-  in `ui.tsx`, poligoni in `DAMAGE_SHAPES`).
+  in `ui.tsx`, poligoni in `DAMAGE_SHAPES`). Dal C4-3 anche costi e guadagni sono simboli (sezione sotto).
 - **Impatto di ogni carta** (`impactOf`): il segno del suo tipo di danno sul bersaglio (colpo: stella rossa con cuore giallo e onda d'urto circolare che si espande; taglio: coltello; veleno:
   goccia che sale; la carta personaggio del bersaglio vibra e si scurisce per ogni danno, colpo o taglio, mai con movimento ridotto; più tipi, un segno ciascuno) oppure, dove il tipo non si applica, quello del ruolo R07a in un cerchio colorato (difesa, risorse,
   contrasto, disturbo, oggetti, altro); senza tipo né ruolo l'anello semplice. È la natura della carta, non il danno risolto: una conversione come
@@ -405,6 +405,25 @@ Tutto viene dai fatti di C3-1 (D1); con movimento ridotto nessun volo né scritt
 - **(i) e fuoco:** `table.tsx` azzera `overInfo` quando il suo id non è più esposto (un elemento tolto sotto il puntatore
   non dà `pointerleave`); `escape()` e ogni round nuovo azzerano il fuoco lasciato dalla pressione, non quello da tastiera.
 
+## Simboli, font e inventario (C4-3)
+
+Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello di `DAMAGE_SHAPES`: **`src/symbols.ts`** descrive in dati (-1…1) le quindici forme approvate
+(cinque risorse, sette ruoli, tre tipi di danno, invariate: i poligoni dei danni vengono da `readability.ts`) e i due segni ✓ e ✕; `drawSymbol` le disegna con Graphics
+(`glyph` in `scene.ts`), `svgParts` le dà come elementi SVG (`SymbolMark`, `Mark`, `Cost`, `Gains` in `ui.tsx`). Colori in `RES_COLOR` e `ROLE_COLOR` di `readability.ts`.
+
+- **Nessuna lettera di risorsa sul volto, nelle plance e nei gettoni, sempre col numero.** Monete del costo: numero e simbolo della risorsa su un disco chiaro dentro la moneta scura
+  (la «!» e la barra delle non pagabili restano); guadagni: `+15` e il simbolo della risorsa, nel bollino col bordo del colore della risorsa (non c'è più il triangolo dei ruoli);
+  gettoni di immunità: il simbolo della risorsa su un disco chiaro con una barra obliqua, senza lettera (nessun numero: l'immunità non ne ha). La plancia mostrava già simbolo e numero.
+  In HTML (catalogo, editor, ispezione) gli stessi simboli con le stesse monete e gli stessi bollini; il testo per un lettore è il nome della risorsa.
+- **Le lettere restano nel testo consultabile:** `gainText`, le righe `rows` della plancia, le etichette delle carte (`cost()`), il testo di `Chip.short` e le stringhe del catalogo.
+  `FaceInfo.marks` dice quali simboli ha disegnato il volto; `VerifyLayout` controlla che coincidano col costo e con i guadagni del catalogo e che nessun testo del volto sia una lettera di risorsa.
+- **Font:** Impact (tavolo, con ripiego Arial Narrow) e Arial (shell). Tolti Georgia (la «i») e Consolas (codice delle regole e strumenti, che era anche il carattere predefinito di `pre`). Nessun font distribuito,
+  nessuna richiesta di rete. **Impact su iOS: non verificato.** ✓ e ✕ non sono in Impact né in Arial (misurato su Windows): sono forme proprie; → × − ▲ ▼ ∞ restano testo (presenti in entrambi).
+- **Inventario:** [docs/design/client-c4/assets/](../docs/design/client-c4/assets/README.md) (`inventory.json`). `tests/assets.test.ts` percorre `public/` (e `dist/`, se costruita) e fallisce per un file non registrato,
+  con impronta diversa, con un campo mancante o per una voce senza file; controlla anche che non ci siano font, `@font-face` o origini remote e che le famiglie siano solo queste.
+- **`Size`:** legge le dimensioni di ogni formato raster (`tools/image-size.mjs`: WebP, PNG, JPEG, GIF, AVIF; un raster che non sa leggere fa fallire il giro) e controlla **due cose distinte**: i limiti rigidi di C2 (invariati) e i tetti di C4 (D9: JS 400 KB, totale 2,2 MB,
+  texture 32 MiB; JS e totale in chilo e megabyte decimali, la lettura prudente di C4-1b). `size.json` riporta margine e percentuale di ciascun tetto e un riepilogo per estensione.
+
 ## Scala e spazio del tavolo (C3-L)
 
 Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
@@ -505,7 +524,7 @@ HEAD e data del jar verificati, la tabella (verifica, misura, esito, durata), gl
 ```powershell
 ./client-web/run.ps1 -Task Test     # modello e sessione con trasporto finto
 ./client-web/run.ps1 -Task Build    # tsc + build di produzione
-./client-web/run.ps1 -Task Size     # JS 500 KB e totale 4 MB gzip, atlante 2048 px, texture 64 MB
+./client-web/run.ps1 -Task Size     # limiti rigidi (JS 500 KB e totale 4 MB gzip, atlante 2048 px, texture 64 MB) e, a parte, tetti di C4 (JS 400 KB, totale 2,2 MB, texture 32 MiB)
 ./client-web/run.ps1 -Task Atlas    # rigenera l'atlante O9 (servono i PNG locali, fuori da git)
 ./client-web/run.ps1 -Task Verify   # partite reali: richiede server e Serve attivi
 ./client-web/run.ps1 -Task VerifyModes   # due account, code e 1v1: richiede server e Serve attivi
@@ -637,7 +656,8 @@ l'atlante O9: 2048×1536, 8×6 riquadri da 256 px con le 40 illustrazioni
 provvisorie, più un segnaposto neutro. `manifest.json` dice quale riquadro spetta
 a ogni `bindingName` (`src/art.ts`); un nome sconosciuto usa il segnaposto.
 [Provenienza e scelte](../docs/design/client-c2/o9-art/README.md). Nessun font
-remoto o audio; simboli e timbri di C2a sono vettoriali.
+distribuito o remoto e nessun audio; simboli e timbri sono vettoriali. Da C4-3 ogni file di `public/` è nell'[inventario](../docs/design/client-c4/assets/README.md)
+e `tests/assets.test.ts` fallisce per un file non registrato o con impronta diversa (vedi «Simboli, font e inventario»).
 
 ## Confini del codice
 

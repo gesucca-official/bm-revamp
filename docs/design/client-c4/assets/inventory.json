@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "block": "C4-3",
+  "rule": "Regola 10 del piano C4: nessun asset senza provenienza e licenza. Ogni file di client-web/public/ ha una voce qui con la stessa impronta SHA-256; tests/assets.test.ts fallisce per un file non registrato o con impronta diversa.",
+  "thirdParty": false,
+  "files": [
+    {
+      "file": "art/table.webp",
+      "kind": "image",
+      "author": "Progetto Botte Micidiali: generata ex novo con imagegen integrato (C0-R2), prendendo come riferimento il duello R1 approvato; nessun asset dei giochi di riferimento, di Internet o del debug",
+      "url": "nessuno: non scaricata",
+      "version": "2026-10-27",
+      "license": "Diritti riservati del progetto; nessuna licenza concessa, nessuna dichiarazione di esclusività dell'output",
+      "modifications": "Solo compressione WebP, qualità 74, da table.png (1672x941), con sharp 0.35.5; nessun ritocco né ridimensionamento",
+      "destination": "Sfondo del tavolo (client-web/src/scene.ts), servito come /art/table.webp",
+      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e",
+      "bytes": 212340,
+      "source": {"file": "docs/design/client-c0/r2-assets/table.png", "sha256": "42236445205a765c1f09e3e23af96f8078f65951f7c3efd7949d0b0ffb6cee01", "tracked": true},
+      "provenance": ["docs/design/client-c0/r2-assets/README.md", "docs/design/client-c0/r2-assets/assets.json"],
+      "gap": "I prompt letterali di C0-R2 non sono stati conservati: la provenienza è nell'inventario delle generazioni (prompt-summary.json è una ricostruzione descrittiva)"
+    },
+    {
+      "file": "art/atlas.webp",
+      "kind": "image",
+      "author": "Progetto Botte Micidiali: 40 illustrazioni generate ex novo con imagegen integrato (O9), una per classe dell'allegato rules-catalog.json; nessuna immagine da Internet, nessun asset di C0 o del debug, nessun pixel riusato",
+      "url": "nessuno: non scaricata",
+      "version": "2026-10-27",
+      "license": "Diritti riservati del progetto; nessuna licenza concessa, nessuna dichiarazione di esclusività dell'output",
+      "modifications": "Ogni PNG (1254x1254) ridotto a 252 px (Lanczos3) con 2 px di bordo copiato, composto in 8x6 riquadri da 256 px e compresso in WebP qualità 76 con sharp 0.35.5; il riquadro 40 è un segnaposto tinta unita #30231e; nessun ritocco",
+      "destination": "Illustrazioni delle carte (client-web/src/art.ts, scene.ts e HTML), servito come /art/atlas.webp",
+      "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956",
+      "bytes": 566518,
+      "source": {"file": "docs/design/client-c2/o9-art/*.png (40 PNG)", "sha256": "per ogni riquadro in docs/design/client-c2/o9-art/assets.json", "tracked": false},
+      "provenance": ["docs/design/client-c2/o9-art/README.md", "docs/design/client-c2/o9-art/assets.json"],
+      "gap": "I 40 PNG sorgente e i prompt letterali sono solo su questo PC (fuori da git, decisione del proprietario): atlas.webp è verificabile con le impronte, `Atlas` non si riesegue da un clone pulito; modello registrato dal C2PA come «ChatGPT gpt-image», versione esatta non esposta"
+    },
+    {
+      "file": "art/manifest.json",
+      "kind": "data",
+      "author": "Progetto Botte Micidiali: scritto da client-web/tools/atlas.mjs (riquadri dell'atlante) e a mano (voce di table.webp)",
+      "url": "nessuno",
+      "version": "2026-10-27",
+      "license": "Diritti riservati del progetto; nessuna licenza concessa",
+      "modifications": "Nessuna: dati del progetto, non un materiale di terzi",
+      "destination": "Mappa bindingName -> riquadro letta a runtime (client-web/src/art.ts), servita come /art/manifest.json",
+      "sha256": "7ef05d3897fc8039e284081e8864fb95113f0d0ee8d8561a069c83e53648c469",
+      "bytes": 2330,
+      "source": {"file": "client-web/tools/atlas.mjs", "sha256": "non applicabile", "tracked": true},
+      "provenance": ["docs/design/client-c2/o9-art/README.md"]
+    }
+  ],
+  "fonts": {
+    "distributed": [],
+    "system": ["Impact", "Arial", "Arial Narrow (ripiego di Impact)"],
+    "note": "Nessun font è distribuito né richiesto in rete (D4 del piano C4). Il tavolo usa Impact con ripiego Arial Narrow e poi il sans-serif del dispositivo; la shell usa Arial. Impact può mancare su iOS: non verificato."
+  },
+  "symbols": {
+    "origin": "Disegnati dal progetto come dati geometrici in client-web/src/symbols.ts e client-web/src/readability.ts (DAMAGE_SHAPES): 5 risorse, 7 ruoli, 3 tipi di danno e i segni ✓ e ✕; nessun file, nessuna icona di terzi (D3 (c) del piano C4: Game-icons solo per lacune reali, nessuna è emersa).",
+    "license": "Diritti riservati del progetto; nessuna licenza concessa"
+  }
+}

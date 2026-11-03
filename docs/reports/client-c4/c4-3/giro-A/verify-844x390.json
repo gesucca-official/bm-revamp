@@ -1,0 +1,477 @@
+{
+  "date": "2026-11-03T16:33:22.400Z",
+  "url": "http://127.0.0.1:4320",
+  "user": "devAlice",
+  "kind": "automated browser run on PC (Edge via Playwright) against the local server; not a physical device",
+  "games": [
+    {
+      "index": 1,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "Riflessi Aumentati dalla Speed",
+          "target": "SELF",
+          "choices": null,
+          "how": "drag"
+        },
+        {
+          "turn": 1,
+          "card": "Steal",
+          "target": "ComPlayer_8248",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_8248",
+          "choices": {
+            "DISCARD_ONE": "Estasi da Coca Etilene"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "Scatto Repentino",
+          "target": "ComPlayer_8248",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "Tutto è Droga",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_8248",
+          "choices": {
+            "DISCARD_ONE": "C'è del sangue nella mia droga"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "Tossicone Scatarrante",
+          "target": "ComPlayer_8248",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Mescolone Micidiale"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "Metabolismo Corrotto",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "Dose di Eroina da Cavalli",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "Presa Male di Brutto",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "Riflessi Aumentati dalla Speed",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-03T16:33:23.573Z",
+      "character": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "ComPlayer_8248",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-03T16:33:48.488Z"
+    },
+    {
+      "index": 2,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "AMMALIAMOTI DI BOTTE",
+          "target": "ComPlayer_5625",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5625",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "NON GIOCARE COL COLTELLO NO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_5625",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5625",
+          "choices": {
+            "DISCARD_ONE": "GABBIANO DUNQUE VOLIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5625",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5625",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_5625",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "GENTILE IL TUO CAREZZO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5625",
+          "choices": {
+            "DISCARD_ONE": "BELLO IL TUO GIOCATTOLO SI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "COSA FAI NON É UNA DOMANDA",
+          "target": "ComPlayer_5625",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "PERMESSO SCUSA ORA SMETTI ",
+          "target": "ComPlayer_5625",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "Last Resort: Banzai!!!",
+          "target": "ComPlayer_5625",
+          "choices": null,
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-03T16:33:48.812Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "devAlice",
+        "me": "devAlice",
+        "message": "Hai vinto"
+      },
+      "outcomeText": "Hai vinto\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-03T16:34:17.388Z"
+    }
+  ],
+  "checks": {
+    "resumedAtStart": false,
+    "login": "hub reached after REST validate, STOMP CONNECT, resume and profile",
+    "noScroll": {
+      "overflowingHit": "card-1",
+      "scrollTop": 0,
+      "scrollHeight": 390,
+      "innerHeight": 390
+    },
+    "reorder": {
+      "before": 6,
+      "firstMovedTo": 5,
+      "sendsDuring": 0,
+      "dragMoved": true
+    },
+    "rejoin": {
+      "sameTurn": true,
+      "handOrderKept": true,
+      "sendsDuringRejoin": 0
+    },
+    "o1o5": {
+      "oldButtons": 0,
+      "infoOnHover": true,
+      "infoOnSelected": true,
+      "keyboardReorder": true,
+      "sendsDuring": 0
+    },
+    "dragFollow": {
+      "ghostOverTargetDuringDrag": true,
+      "dragMoved": true
+    },
+    "item": {
+      "playedCardName": "ADOPERIAMOTI",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "8a2621e444a02323f4e44973754fbd86e99eed1112678b7afda20ee722ca2a47",
+      "choices": {
+        "TARGET_ITEM": "Peroni da 66, calda"
+      }
+    },
+    "bound": {
+      "playedCardName": "SVEGLIAMOCI MA TU NO",
+      "playerId": "devAlice",
+      "targetId": "ComPlayer_5625",
+      "gameId": "8a2621e444a02323f4e44973754fbd86e99eed1112678b7afda20ee722ca2a47",
+      "choices": {
+        "DISCARD_ONE": "BELLO IL TUO GIOCATTOLO SI"
+      }
+    },
+    "c2a": {
+      "outsideDeselect": {
+        "selectedBefore": true,
+        "selectedAfter": false,
+        "raisedH": 217,
+        "restH": 166
+      },
+      "status": {
+        "chip": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+        "hoverText": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+        "tapOpens": true,
+        "closedElsewhere": true
+      },
+      "turnsChecked": 30,
+      "cardsChecked": 180,
+      "rolesSeen": {
+        "ITEMS": 45,
+        "DISRUPT": 21,
+        "DAMAGE": 58,
+        "COUNTER": 15,
+        "OTHER": 12,
+        "RESOURCES": 7,
+        "DEFENSE": 22
+      },
+      "unpayableSeen": 33,
+      "unpayableDimmed": 33,
+      "boardChecks": 30,
+      "hover": {
+        "restingH": 166,
+        "hoverH": 184,
+        "raised": true
+      },
+      "unpayableSend": {
+        "card": "Estasi da Coca Etilene",
+        "sent": true,
+        "serverAnswer": "Rifiutata: cant be cast with current resources",
+        "choiceKept": true
+      },
+      "layout": {
+        "hand": {
+          "w": 120,
+          "h": 165.6
+        },
+        "person": {
+          "w": 120,
+          "h": 165.6
+        },
+        "item": {
+          "w": 60.8,
+          "h": 83.904
+        }
+      },
+      "boardDuringSequence": 28
+    },
+    "hubReturn": "hub visible after leave acknowledgement"
+  },
+  "rejections": [
+    {
+      "turn": 0,
+      "card": "Estasi da Coca Etilene",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 1,
+      "card": "C'è del sangue nella mia droga",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 2,
+      "card": "Estasi da Coca Etilene",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 9,
+      "card": "Riflessi Aumentati dalla Speed",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 5,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 6,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "COSA FAI NON É UNA DOMANDA",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "BELLO IL TUO GIOCATTOLO SI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 16,
+      "card": "ORMALE GUARIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    }
+  ],
+  "periodic": [
+    {
+      "game": 1,
+      "text": "Fine turno\n\nEffetti di fine turno su: Computer. Cosa hanno fatto lo dice solo il testo del server, più sotto.\n\nTesto del server (in inglese, invariato)"
+    }
+  ],
+  "noValidMove": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "want": {
+    "characters": [
+      "Tossico del Serraglio",
+      "Spazienzio de la Ucciso"
+    ],
+    "bound": true,
+    "item": true,
+    "drag": true,
+    "tap": true,
+    "reorder": true,
+    "rejection": true,
+    "periodic": true
+  },
+  "inputMs": {
+    "note": "PC headless/headed Edge, input to next frame; not the iPhone measure",
+    "samples": 324,
+    "p50": 10.900000035762787,
+    "p95": 20,
+    "max": 27.900000035762787
+  }
+}

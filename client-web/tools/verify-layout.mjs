@@ -169,7 +169,16 @@ function briefProblems(s,dom){const out=[],L=s.layout,t=dom.toast,obs=obstacles(
 // C3-5: expected pills from the catalog strings, read independently of the client's parser: `HIT 15` is the type and «15», `HIT 20+x` is «20+» without the V (the catalog) or 20 + half the V left.
 const pills=(card,left)=>{const amount=card.catalogAmount??card.damageAmount;if(amount&&amount!=='—')return amount.split(',').map(x=>{const m=/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(x);return m?{type:m[1],text:m[3]?(left===null?`${m[2]}+`:String(Number(m[2])+Math.trunc(left/2))):m[2]}:{type:'?',text:x};});
  const types=card.catalogDamage??card.damage;return types&&types!=='—'?types.split(',').map(t=>({type:t.trim(),text:''})):[];};
-function faceProblems(f,card,{small,left}){const out=[];if(card.item){if(f.damage.length)out.push('an object with a damage pill');return out;}
+// C4-3: costs and gains as symbols, never letters. The coins of the face name the resources of the catalog cost, in order; the gains are a prefix of the catalog gains (one that does not fit is left out, as before);
+// no text of the face is a number with the letter of a resource, nor a letter alone.
+const LETTER_RES={H:'HEALTH',A:'ALERTNESS',V:'VIOLENCE',T:'TOXICITY',L:'ALCOHOL'};
+function symbolProblems(f,card){const out=[],gainsWant=[...(card.gains??'').matchAll(/\+(?:\d+|x) ([HAVTL])\b/g)].map(m=>LETTER_RES[m[1]]),costWant=card.item?[]:Object.keys(card.cost??{});
+ if(!f.marks)return ['the face does not report its symbols'];
+ if(JSON.stringify(f.marks.cost)!==JSON.stringify(costWant))out.push(`cost symbols ${JSON.stringify(f.marks.cost)}, catalog ${JSON.stringify(costWant)}`);
+ if(JSON.stringify(f.marks.gains)!==JSON.stringify(gainsWant.slice(0,f.marks.gains.length)))out.push(`gain symbols ${JSON.stringify(f.marks.gains)}, catalog ${JSON.stringify(gainsWant)} (gains ${JSON.stringify(card.gains)})`);
+ const letters=f.texts.filter(t=>/^[!+\s]*(\d+|x)\s*[HAVTL]$/.test(t)||/^[HAVTL]$/.test(t));if(letters.length)out.push(`a letter of a resource on the face: ${JSON.stringify(letters)}`);
+ return out;}
+function faceProblems(f,card,{small,left}){const out=symbolProblems(f,card);if(card.item){if(f.damage.length)out.push('an object with a damage pill');return out;}
  if(small&&f.role&&f.damage.length)out.push('a role circle beside the damage symbol (it repeats it)');
  const want=pills(card,left),got=f.damage.map(d=>({type:d.type,text:d.text}));
  if(JSON.stringify(got.map(x=>x.type))!==JSON.stringify(want.map(x=>x.type)))out.push(`damage types ${JSON.stringify(got.map(x=>x.type))}, catalog ${JSON.stringify(want.map(x=>x.type))}`);
