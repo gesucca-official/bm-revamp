@@ -4,7 +4,7 @@
 `a807aa0`. **Solo piano:** nessun codice client, nessuna modifica a regole, server, protocollo, catalogo o
 `client-debug`. C0, C1, C2 e C3 sono chiuse. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
-**D3, D4, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
+**D3, D4, D6, D11, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
 proprietario. Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
 **Stato di C4-1 alla stesura.** Una sessione separata sta già lavorando a C4-1 nello stesso checkout: modifiche **non
@@ -33,7 +33,7 @@ Valgono per **ogni** blocco, come in C3:
   opzioni, scelta del proprietario, implementazione, come ha funzionato C3-L. Le prove di C3 hanno portato revisioni in quasi
   tutti i blocchi visibili (C3-2, C3-4, C3-L, C3-7): è previsto che accada anche qui, e una revisione è un commit proprio.
 - **Partite reali** sul server locale, su database temporaneo, guidate da Edge/Playwright. Misure ufficiali: **1366×768 e
-  844×390**, più **750×292** da C4-2 se D6 la conferma. Scene sintetiche e fixture valgono per i test unitari, non come
+  844×390**, più **750×292** da C4-2, confermata da D6. Scene sintetiche e fixture valgono per i test unitari, non come
   partita reale. Edge sul PC non sostituisce l'iPhone.
 - Verifiche: `./client-web/run.ps1 -Task Test`, `Build`, `Size`, quelle del blocco
   ([matrice](#verifiche-da-rieseguire-per-blocco)) e quelle di AGENTS: `./scripts/build.ps1 -Task Test -Offline` e
@@ -348,11 +348,12 @@ come in C3-5. Cattura in scala di grigi: le tipologie restano distinguibili. Giu
 ritaglio con una zona sicura centrale e dettagli periferici sacrificabili, così a 750×292 e a 1366×768 la scena non si deforma. Stessa
 identità nella scritta decorativa del tavolo, senza coprire i posti.
 
-**Dipendenze.** D11. La generazione può andare in parallelo; l'integrazione è in fila. Non dipende dalle cornici, ma si giudica meglio dopo.
+**Dipendenze.** D11 (confermata: genera il proprietario, l'agente scrive prompt e registro). La generazione può andare in parallelo; l'integrazione è in fila. Non dipende dalle cornici, ma si giudica meglio dopo.
 
 **File toccati.** `public/art/table.webp`, `scene.ts` (solo `resize`), `style.css` (`.brand`), inventario, `docs/design/client-c4/`, documenti comuni.
 
-**Rischi.** Il prompt va salvato **prima** di generare: i prompt letterali di C0-R2 sono andati persi. La direzione R1 è approvata e non va
+**Rischi.** Il prompt va salvato e committato **prima** di generare: i prompt letterali di C0-R2 sono andati persi. Lo strumento del proprietario può non
+essere quello di R1: stile da giudicare accanto a carte e plance. La direzione R1 è approvata e non va
 rifatta: si correggono le sedie, non il bar. Leggibilità di carte e plance sopra un fondo più ricco. Peso entro D9.
 
 **Completamento verificabile.** Registro completo e test della regola 10 verde; nessuna deformazione alle tre misure (proporzioni calcolate nel
@@ -391,7 +392,7 @@ nessuna tinta fuori dai token (controllo sul sorgente); nessun controllo sotto 4
 ### C4-6* — Illustrazioni delle carte (opzionale)
 
 **Perimetro.** Secondo D1. Con la raccomandazione: sostituire **solo** le illustrazioni che non reggono accanto alle cornici nuove, da una lista
-approvata, con lo stesso processo di O9. Nessuna guida di stile né lotti: sono di [SB-32](set-base-plan.md#sb-32--illustrazioni-del-set).
+approvata, con il processo di D11. Nessuna guida di stile né lotti: sono di [SB-32](set-base-plan.md#sb-32--illustrazioni-del-set).
 
 **Dipendenze.** C4-4, D1, D11. Da saltare se D1 dice no.
 
@@ -399,7 +400,7 @@ approvata, con lo stesso processo di O9. Nessuna guida di stile né lotti: sono 
 inventario, documenti comuni.
 
 **Rischi.** D24 del Set Base dice di non generare ciò che può sparire. I PNG sorgente O9 sono solo su questo PC e `Atlas` non si riesegue da un clone
-pulito: una loro perdita bloccherebbe il blocco. Stile diverso fra lotti.
+pulito: una loro perdita bloccherebbe il blocco. Stile diverso fra lotti, e rispetto alle illustrazioni O9 se lo strumento del proprietario non è lo stesso.
 
 **Completamento verificabile.** Ogni riquadro sostituito ha registro e impronta; nessun duplicato, atlante ≤ 2048 px; `Size` verde; leggibili sul
 volto, nell'ispezione e nei primi piani; giudizio del proprietario.
@@ -495,7 +496,7 @@ non è provato.
 ## Verifiche da rieseguire per blocco
 
 ● completa alle misure ufficiali · ○ scenari ridotti o una misura, dichiarati · vuoto: non serve, il blocco non tocca quel percorso. `Test`, `Build`, `Size`,
-`build.ps1 -Task Test -Offline` e `check-rules.py` valgono **sempre**. «750» indica che si aggiunge la misura 750×292 una volta decisa D6.
+`build.ps1 -Task Test -Offline` e `check-rules.py` valgono **sempre**. «750» indica che si aggiunge la misura 750×292, confermata da D6.
 
 | Blocco | Verify | Modes | Lifecycle | Ffa | Decks | Public | Profile | Resolution | Aim | Layout | iPhone (proprietario) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -514,7 +515,7 @@ non è provato.
 
 ## Decisioni del proprietario
 
-**D3, D4, D13 e D14 sono confermate; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
+**D3, D4, D6, D11, D13 e D14 sono confermate; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
 
 | ID | Domanda | Opzioni | Raccomandazione e motivo | Cosa blocca | Se si rimanda |
 |---|---|---|---|---|---|
@@ -523,12 +524,12 @@ non è provato.
 | D3 | Simboli | (a) Game-icons per tutti (CC BY 3.0); (b) tutti disegnati da noi; (c) i nostri, Game-icons solo per lacune reali | **(c), confermata dal proprietario il 3 novembre 2026, con l'attesa che le lacune siano poche o nessuna.** Esistono già 15 simboli propri, quelli del danno approvati in C3-7, e il residuo di O10 è fatto di soli costi, guadagni e immunità, tutti coperti dai simboli delle risorse. Sostituirli non migliora e aggiunge attribuzioni per ogni icona. Questo si discosta dalla roadmap, che indicava Game-icons come fonte principale. | C4-3 | Blocca C4-3 e a catena C4-2, C4-4, C4-5b. |
 | D4 | Font | (a) quelli di sistema, ridotti a due; (b) Play (OFL); (c) altro OFL scelto su campione | **(a), confermata dal proprietario il 3 novembre 2026 dopo il campione: Impact e Arial.** Il volto attuale piace, zero peso e zero licenze. Sul campione (Edge, Windows; 1366×768, 844×390, 750×292) Play Bold rende meglio i numeri, ma ha titoli più larghi del 22% in media, più troncamenti e diverse etichette tagliate; non ha `→`, `✓`, `▲`, `✕`. Play Regular è troppo sottile sulle carte. **Resta da controllare sull'iPhone:** Impact non è distribuito e potrebbe mancare su iOS (non verificato). Se manca, si torna qui con (c) sullo stesso campione. | C4-3 (solo font), a catena C4-2 | Decisa; si riapre solo per il controllo su iPhone. |
 | D5 | Segno statico sul bersaglio con movimento ridotto (O21) | (a) sì, sul bersaglio; (b) no, ma tipo di danno in «Ultimo turno»; (c) no, nulla di nuovo | **(b).** Con movimento ridotto il tipo si legge già sul volto e sulla carta piccola al centro. Un segno fisso sul bersaglio toglie spazio dove la striscia già manca in FFA compatta, e con più mosse suggerirebbe un'attribuzione che il server non dà (D1 di C3). `roundReport` oggi non riporta il tipo: basta una riga. | Una parte di C4-8a | Non blocca. Vale (c): resta un limite dichiarato. |
-| D6 | 750×292 resta il minimo supportato | (a) sì, duello e FFA; (b) sì per il duello, FFA da 844×390; (c) no, minimo 844×390 | **(a), con D7.** È ciò che l'iPhone campione lascia davvero e il proprietario lo ha già giudicato sufficiente in C0. Con (b) o (c) la FFA sul dispositivo campione non sarebbe supportata proprio mentre si prepara il playtest. Se C4-2 dimostra che la FFA non è giocabile, si torna qui con le catture. | C4-2, misura 750 nelle verifiche | Blocca C4-2 e di fatto il layout; C4-3 può precedere. |
-| D7 | Cosa cede sotto i 384 px, in ordine (se D6 conferma) | Proposta: 1. primi piani nel proprio posto anziché al centro; 2. carte del round ridotte alla sola ultima, con «Ultimo turno»; 3. mano più piccola e più alzata al tocco; 4. oggetti più sovrapposti; 5. mani coperte più piccole; mai togliere bersagli | **Quest'ordine, da giudicare sulle catture.** Toglie prima ciò che si ritrova altrove (decisioni di presentazione) e tiene le carte come oggetti sul tavolo. Le mani coperte restano tutte e quattro. | C4-2 | Blocca C4-2. Decidibile dopo C4-1b, con i numeri veri. |
+| D6 | 750×292 resta il minimo supportato | (a) sì, duello e FFA; (b) sì per il duello, FFA da 844×390; (c) no, minimo 844×390 | **(a), con D7, confermata dal proprietario il 3 novembre 2026.** È ciò che l'iPhone campione lascia davvero e il proprietario lo ha già giudicato sufficiente in C0. Con (b) o (c) la FFA sul dispositivo campione non sarebbe supportata proprio mentre si prepara il playtest. Se C4-2 dimostra che la FFA non è giocabile, si torna qui con le catture, e (b) è il ripiego naturale. Oggi a larghezza 750 servono 384 px di altezza in duello e 417 in FFA, misurati con le funzioni del client. | C4-2, misura 750 nelle verifiche | Decisa. Si riapre solo con le catture di C4-2. |
+| D7 | Cosa cede sotto i 384 px, in ordine (D6 confermata) | Proposta: 1. primi piani nel proprio posto anziché al centro; 2. carte del round ridotte alla sola ultima, con «Ultimo turno»; 3. mano più piccola e più alzata al tocco; 4. oggetti più sovrapposti; 5. mani coperte più piccole; mai togliere bersagli | **Quest'ordine, da giudicare sulle catture.** Toglie prima ciò che si ritrova altrove (decisioni di presentazione) e tiene le carte come oggetti sul tavolo. Le mani coperte restano tutte e quattro. | C4-2 | Blocca C4-2. Decidibile dopo C4-1b, con i numeri veri. |
 | D8 | Cosa deve avere 44 px | (a) ogni elemento toccabile; (b) tutti i controlli, ma i gettoni di stato possono restare più piccoli se lo stesso contenuto è raggiungibile altrove; (c) solo i controlli principali | **(b).** La roadmap chiede 44 px per i target principali; i gettoni 31×18 in una FFA piena non possono crescere senza coprire il personaggio. C4-2 deve provare che il loro contenuto è raggiungibile col tocco su un'area più grande o dall'ispezione. | C4-2, C4-5b | C4-2 parte con (b); rischio di rifare i gettoni. |
 | D9 | Budget di download | (a) soli limiti attuali (JS 500 KB, totale 4 MB, atlante 2048 px, texture 64 MB); (b) limiti attuali più tetto di C4: **JS ≤ 400 KB, totale ≤ 2,2 MB, texture ≤ 32 MB** | **(b).** Il Set Base stima 1,7 MB e 38 MB per i suoi atlanti: con (a) C4 potrebbe consumare il margine che gli serve. I tetti lasciano circa 0,7 MB e 6 MB secondo quelle stime, che **non sono misure**. I limiti rigidi non si alzano. | C4-3 per gli asset, C4-5a, C4-6, C4-7, C4-8b | Vale (a): non blocca, ma il Set Base può ereditare un budget esaurito. |
 | D10 | Soglie di prestazioni su iPhone | Frame: (a) soglia C0 (≥ 95% ≤ 33 ms) come vincolo e 60 fps come obiettivo riportato; (b) 60 fps come vincolo. Input: (c) ≤ 100 ms senza deroga; (d) ≤ 100 ms come obiettivo, vincolo «non peggio dei 116 ms di C0» | **(a) e (d).** La roadmap dice «puntare a 60 fps» e lascia le soglie di C0; un vincolo a 60 fps su iPhone chiederebbe di tagliare molta grafica senza che nessuno abbia segnalato disagio. La deroga di C0 resta motivata, ma non si allarga: se il client supera i 116 ms si interviene. Decisione finale sui numeri di C4-1b. | C4-8b | Non blocca fino a C4-8b. Decidibile dopo C4-1b. |
-| D11 | Generazione degli asset e registro | Generazione: (a) il proprietario genera con il suo strumento, l'agente scrive prompt e registro; (b) una sessione con uno strumento di generazione, come C0 e O9. Registro: (c) come O9, sorgenti e prompt fuori da git; (d) prompt letterale tracciato e salvato prima di generare, sorgente tracciata solo per lo sfondo | **Da confermare (a) o (b): serve sapere quale strumento è disponibile. Questa sessione non ne ha uno.** Per il registro **(d):** i prompt di C0-R2 sono andati persi, e i PNG di O9 sono solo su questo PC. Solo immagini nuove, riferimento ammesso solo a materiali del progetto (R1, `table.png`), mai i quattro giochi né Internet. Modello e versione annotati, C2PA se esposto. | C4-5a, C4-6 | Blocca O2, quindi la chiusura di C4 senza deroga; il resto procede. |
+| D11 | Generazione degli asset e registro | Generazione: (a) il proprietario genera con il suo strumento, l'agente scrive prompt e registro; (b) una sessione con uno strumento di generazione, come C0 e O9. Registro: (c) come O9, sorgenti e prompt fuori da git; (d) prompt letterale tracciato e salvato prima di generare, sorgente tracciata solo per lo sfondo | **(a) e (d), confermate dal proprietario il 3 novembre 2026.** Il proprietario genera con il suo strumento e consegna i file; l'agente scrive e committa il prompt prima della generazione, poi registra e integra. Il registro serve perché i prompt di C0-R2 sono andati persi e i PNG di O9 sono solo su questo PC. Solo immagini nuove, riferimento ammesso solo a materiali del progetto (R1, `table.png`), mai i quattro giochi né Internet. Il proprietario indica strumento, modello, versione e data; nel registro anche i termini d'uso dello strumento, C2PA se esposto. | C4-5a, C4-6 | Decisa. La chiusura di O2 dipende dall'immagine del proprietario. |
 | D12 | Riferimento di accessibilità e lettore di schermo | Contrasto: (a) WCAG 2.2 AA come obiettivo (4,5:1 testo, 3:1 testo grande e simboli), senza dichiarare conformità; (b) nessuna soglia. Lettore: (c) una breve prova del proprietario con VoiceOver; (d) dichiarato non provato | **(a) e (d); (c) se il proprietario ha dieci minuti.** La soglia rende il controllo ripetibile; le eccezioni si elencano. Il lettore non è automatizzabile qui e in C5 non è un criterio: meglio un limite onesto che una promessa. | C4-8a | C4-8a parte con la raccomandazione. |
 | D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b), confermata dal proprietario il 3 novembre 2026.** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | C4-1 è in corso e pubblicherebbe secondo la sua logica attuale, con il rischio di altri 200 MB. **Urgente.** |
 | D14 | Ordine e divisione dei blocchi | (a) la bozza: C4-2 prima di C4-3, nessun C4-1b, C4-5 e C4-8 interi; (b) [correzioni proposte](#blocchi) | **(b), confermata dal proprietario il 3 novembre 2026.** Il font condiziona la geometria; lo stato su iPhone è ignoto; sfondo e shell, accessibilità e prestazioni hanno rischi diversi. Costa due commit in più. | Ordine dopo C4-1 | Non si può partire dopo C4-1 senza. |
@@ -538,8 +539,8 @@ non è provato.
 1. **D13:** confermata il 3 novembre 2026.
 2. **D14:** confermata il 3 novembre 2026.
 3. **D4 e D3:** confermate il 3 novembre 2026; per D4 resta il controllo su iPhone prima del codice di C4-3.
-4. **D11:** la generazione ha tempi propri e può avanzare in parallelo.
-5. **D6, D7, D8:** servono a C4-2; D7 e D8 si giudicano meglio coi numeri di C4-1b.
+4. **D11:** confermata il 3 novembre 2026; la generazione ha tempi propri e può avanzare in parallelo.
+5. **D6, D7, D8:** servono a C4-2; D6 è confermata il 3 novembre 2026; D7 e D8 si giudicano meglio coi numeri di C4-1b.
 6. **D9:** prima di aggiungere il primo asset pesante.
 7. **D1, D2:** scelte di perimetro, senza blocchi per gli altri.
 8. **D12, D5:** prima di C4-8a.
