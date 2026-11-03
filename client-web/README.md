@@ -1,4 +1,4 @@
-# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s, C3-6, C3-5)
+# Client web animato (C1, C2a, O9, C2b-1…C2b-7, C3-1…C3-4, C3-L, C3-4s, C3-6, C3-5, C3-7)
 
 Il tavolo del bar approvato in C0, collegato al server reale. Percorso disponibile:
 home (regole, registrazione) → login → hub «Gioca» (contro il computer, uno contro uno, tutti contro tutti fino a
@@ -535,6 +535,7 @@ conteggi, partite non concluse, download e cancellazione con annullamento e conf
 Il browser risponde alla sfida Basic con le credenziali del contesto Playwright;
 `BM_NATIVE_PROMPT=1` apre anche un Edge visibile, cattura la finestra nativa del browser,
 la annulla (Esc) e la compila da tastiera dopo «Riprova».
+**Consolidamento (C3-7).** Prima di eseguire tutte le verifiche, ricostruire il jar dal sorgente (`./scripts/build.ps1 -Task Server -Offline`: il jar in `server/target` può essere vecchio e i controlli sul volto passano a vuoto) e tenere `Serve` attivo. `Verify` e `VerifyModes` **non** avviano il server (serve un server su database temporaneo con `--app.dev.seed-accounts=true` sulla 8080); le altre lo avviano da sole e vogliono la 8080 libera. Non lanciare due verifiche insieme: usano gli stessi account. `BM_OUT=../docs/reports/client-c3/c3-7` e `BM_VIEWPORT=1366x768|844x390`. `Size` scrive in `docs/reports/client-c2/size.json`. Durata indicativa: `VerifyResolution` circa 35 minuti per misura, `VerifyLayout` e `VerifyAim` ridotti con `BM_SCENARIOS=duel,ffa` pochi minuti.
 `VerifyAim` (C3-3, database temporaneo): per ogni carta della mano in duello, tocco emulato,
 movimento ridotto e FFA a cinque, confronta le frecce della scena con i bersagli che la
 vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dai rettangoli reali

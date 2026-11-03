@@ -1,0 +1,2353 @@
+{
+ "date": "2026-11-03T10:52:32.381Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "scenarios": {
+  "duel": {
+   "ffa": false,
+   "turns": [
+    {
+     "turn": 0,
+     "scale": {
+      "me": 1.5,
+      "others": 1.2,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "card": {
+       "x": 407,
+       "y": 235,
+       "w": 150,
+       "h": 207
+      },
+      "shows": []
+     },
+     "piles": {
+      "deck": {
+       "x": 26,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 74,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 114,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 339,
+       "y": 553,
+       "w": 225,
+       "h": 310
+      },
+      "item": {
+       "x": 159,
+       "y": 311,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 339,
+       "y": 635,
+       "w": 217,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_3577",
+       "person": {
+        "x": 874,
+        "y": 201,
+        "w": 180,
+        "h": 248
+       },
+       "item": {
+        "x": 1029,
+        "y": 216,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 683,
+        "y": 171,
+        "w": 188,
+        "h": 73
+       },
+       "back": {
+        "w": 48,
+        "h": 67
+       }
+      }
+     ],
+     "free": {
+      "x": 1164,
+      "y": 378,
+      "w": 400,
+      "h": 160,
+      "share": 0.061
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.621
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_3577-imm-TOXICITY",
+       "kind": "status",
+       "w": 49,
+       "h": 29
+      },
+      {
+       "id": "status-devAlice-imm-TOXICITY",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1311,
+       "y": 35,
+       "w": 79,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "Desiderio Incontrollabile",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Ghigno co' i' Denti Marci",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "Ago Marcio e Spezzato",
+       "damage": [
+        "CUT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "C'è del sangue nella mia droga",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Steal",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Grab",
+       "damage": [],
+       "texts": 5
+      }
+     ]
+    },
+    {
+     "turn": 1,
+     "scale": {
+      "me": 1.5,
+      "others": 1.2,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "card": {
+       "x": 407,
+       "y": 235,
+       "w": 150,
+       "h": 207
+      },
+      "shows": [
+       {
+        "name": "Ghigno co' i' Denti Marci",
+        "author": "ComPlayer_3577",
+        "void": false
+       },
+       {
+        "name": "Desiderio Incontrollabile",
+        "author": "devAlice",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 26,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 74,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 114,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 339,
+       "y": 553,
+       "w": 225,
+       "h": 310
+      },
+      "item": {
+       "x": 159,
+       "y": 311,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 339,
+       "y": 635,
+       "w": 217,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_3577",
+       "person": {
+        "x": 874,
+        "y": 201,
+        "w": 180,
+        "h": 248
+       },
+       "item": {
+        "x": 1029,
+        "y": 216,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 683,
+        "y": 171,
+        "w": 188,
+        "h": 73
+       },
+       "back": {
+        "w": 48,
+        "h": 67
+       }
+      }
+     ],
+     "free": {
+      "x": 1164,
+      "y": 378,
+      "w": 400,
+      "h": 160,
+      "share": 0.061
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.621
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_3577-imm-TOXICITY",
+       "kind": "status",
+       "w": 49,
+       "h": 29
+      },
+      {
+       "id": "status-devAlice-imm-TOXICITY",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 81,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "Desiderio Incontrollabile",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Ghigno co' i' Denti Marci",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "Ago Marcio e Spezzato",
+       "damage": [
+        "CUT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "C'è del sangue nella mia droga",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Steal",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Grab",
+       "damage": [],
+       "texts": 5
+      }
+     ],
+     "strips": {
+      "seats": 2,
+      "drawn": 2,
+      "missing": [],
+      "fonts": [
+       19,
+       19
+      ],
+      "texts": {
+       "ComPlayer_3577": "+5",
+       "devAlice": "−22 +2 −1"
+      }
+     }
+    },
+    {
+     "turn": 2,
+     "scale": {
+      "me": 1.5,
+      "others": 1.2,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "card": {
+       "x": 407,
+       "y": 235,
+       "w": 150,
+       "h": 207
+      },
+      "shows": [
+       {
+        "name": "Ghigno co' i' Denti Marci",
+        "author": "devAlice",
+        "void": false
+       },
+       {
+        "name": "Grab",
+        "author": "ComPlayer_3577",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 26,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 74,
+       "y": 362,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 15,
+       "discard": "Steal"
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 114,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 339,
+       "y": 553,
+       "w": 225,
+       "h": 310
+      },
+      "item": {
+       "x": 159,
+       "y": 311,
+       "w": 114,
+       "h": 157
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 339,
+       "y": 635,
+       "w": 217,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_3577",
+       "person": {
+        "x": 874,
+        "y": 201,
+        "w": 180,
+        "h": 248
+       },
+       "item": {
+        "x": 1029,
+        "y": 216,
+        "w": 114,
+        "h": 157
+       },
+       "board": {
+        "x": 683,
+        "y": 171,
+        "w": 188,
+        "h": 73
+       },
+       "back": {
+        "w": 48,
+        "h": 67
+       }
+      }
+     ],
+     "free": {
+      "x": 1164,
+      "y": 378,
+      "w": 400,
+      "h": 160,
+      "share": 0.061
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.621
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_3577-imm-TOXICITY",
+       "kind": "status",
+       "w": 49,
+       "h": 29
+      },
+      {
+       "id": "status-devAlice-imm-TOXICITY",
+       "kind": "status",
+       "w": 61,
+       "h": 36
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 82,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "Desiderio Incontrollabile",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Ghigno co' i' Denti Marci",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "Ago Marcio e Spezzato",
+       "damage": [
+        "CUT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "C'è del sangue nella mia droga",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Grab",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "Riflessi Aumentati dalla Speed",
+       "damage": [],
+       "texts": 5
+      }
+     ],
+     "strips": {
+      "seats": 2,
+      "drawn": 2,
+      "missing": [],
+      "fonts": [
+       19,
+       19
+      ],
+      "texts": {
+       "ComPlayer_3577": "−10 +4 −1 +1",
+       "devAlice": "+4 −2"
+      }
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "turn": 0,
+     "author": "ComPlayer_3577",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 751,
+      "y": 260,
+      "w": 546,
+      "h": 397
+     },
+     "target": {
+      "x": 339,
+      "y": 553,
+      "w": 247,
+      "h": 341
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 363,
+      "y": 313,
+      "w": 427,
+      "h": 310
+     },
+     "target": {
+      "x": 339,
+      "y": 553,
+      "w": 247,
+      "h": 341
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 363,
+      "y": 313,
+      "w": 427,
+      "h": 310
+     },
+     "target": {
+      "x": 874,
+      "y": 201,
+      "w": 225,
+      "h": 310
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_3577",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 751,
+      "y": 260,
+      "w": 546,
+      "h": 397
+     },
+     "target": {
+      "x": 874,
+      "y": 201,
+      "w": 225,
+      "h": 310
+     },
+     "overPiles": false
+    }
+   ],
+   "catalog": {
+    "cards": 37,
+    "withDamage": 12,
+    "rows": [
+     {
+      "name": "Rabbia Psicotica da Meth",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "FAI BASTA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "LIEVE FASTIDIO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "STORDIAMOTI HO DETTO",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "COSA FAI NON É UNA DOMANDA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Scatto Repentino",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Desiderio Incontrollabile",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Grab",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Steal",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tossicone Scatarrante",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Ghigno co' i' Denti Marci",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GENTILE IL TUO CAREZZO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Mescolone Micidiale",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GARGANTUESCO IMPATTO SUL TU",
+      "damage": [
+       "HIT 40"
+      ],
+      "catalog": "HIT 40"
+     },
+     {
+      "name": "Metabolismo Corrotto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Dose di Eroina da Cavalli",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tennents Super",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Riflessi Aumentati dalla Speed",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Ago Marcio e Spezzato",
+      "damage": [
+       "CUT 5"
+      ],
+      "catalog": "CUT 5"
+     },
+     {
+      "name": "GABBIANO DUNQUE VOLIAMOTI",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "damage": [
+       "HIT 20+"
+      ],
+      "catalog": "HIT 20+x"
+     },
+     {
+      "name": "Presa Male di Brutto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Estasi da Coca Etilene",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "Ce l'hai due spiccioli per il biglietto?",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "PERMESSO SCUSA ORA SMETTI ",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Negroni Trovato per Terra",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ADOPERIAMOTI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "PAZIENZA: FINITA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SVEGLIAMOCI MA TU NO",
+      "damage": [
+       "HIT 5"
+      ],
+      "catalog": "HIT 5"
+     },
+     {
+      "name": "AMMALIAMOTI DI BOTTE",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "Peroni da 66, calda",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Last Resort: Banzai!!!",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "C'è del sangue nella mia droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ORMALE GUARIAMOTI",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "Tutto è Droga",
+      "damage": [],
+      "catalog": "—"
+     }
+    ]
+   },
+   "inspection": {
+    "card": "Ago Marcio e Spezzato",
+    "priority": 1,
+    "marks": 1,
+    "text": "Ago Marcio e Spezzato\n\nazione legata\n\nCosto\nNessun costo in risorse\nPriorità\n1\nDanno nominale\n5\n taglio 5. Quello inflitto può differire: stati e difese.\nRuolo\ndanno: infligge danno\nTi dà\n+5 T\nBersaglio\nUn avversario\n\n+5 T a sé; 5 CUT e +5 T al bersaglio.\n\nResta in mano. Richiede lo scarto di un’alt"
+   },
+   "briefs": [
+    {
+     "turn": 1,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 462,
+      "y": 30,
+      "w": 520,
+      "h": 56
+     },
+     "lines": 2,
+     "font": 16,
+     "fontPx": 16
+    },
+    {
+     "turn": 2,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 462,
+      "y": 30,
+      "w": 520,
+      "h": 56
+     },
+     "lines": 2,
+     "font": 16,
+     "fontPx": 16
+    }
+   ],
+   "perf": [
+    {
+     "turn": 0,
+     "intervals": 1127,
+     "p95": 8.5,
+     "max": 51.6,
+     "within": 0.998,
+     "limit": 20,
+     "inputMax": 22.2,
+     "inputs": 7
+    },
+    {
+     "turn": 1,
+     "intervals": 1308,
+     "p95": 8.5,
+     "max": 27.1,
+     "within": 0.999,
+     "limit": 20,
+     "inputMax": 16.2,
+     "inputs": 19
+    }
+   ]
+  },
+  "ffa": {
+   "ffa": true,
+   "turns": [
+    {
+     "turn": 0,
+     "scale": {
+      "me": 1.5,
+      "others": 1,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 656,
+       "y": 322,
+       "w": 183,
+       "h": 203
+      },
+      "card": {
+       "x": 605,
+       "y": 276,
+       "w": 82,
+       "h": 113
+      },
+      "shows": []
+     },
+     "piles": {
+      "deck": {
+       "x": 430,
+       "y": 583,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 430,
+       "y": 646,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 98,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 314,
+       "y": 553,
+       "w": 175,
+       "h": 242
+      },
+      "item": {
+       "x": 502,
+       "y": 567,
+       "w": 89,
+       "h": 123
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 314,
+       "y": 613,
+       "w": 167,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_6537",
+       "person": {
+        "x": 328,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 439,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 186,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4014",
+       "person": {
+        "x": 847,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 958,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 706,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_679",
+       "person": {
+        "x": 222,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 333,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 81,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4092",
+       "person": {
+        "x": 984,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 1094,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 842,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      }
+     ],
+     "free": {
+      "x": 1134,
+      "y": 102,
+      "w": 264,
+      "h": 203,
+      "share": 0.051
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.529
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_6537-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      },
+      {
+       "id": "status-ComPlayer_679-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1311,
+       "y": 35,
+       "w": 79,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "GARGANTUESCO IMPATTO SUL TU",
+       "damage": [
+        "HIT 40"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "GABBIANO DUNQUE VOLIAMOTI",
+       "damage": [
+        "HIT 15"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "STORDIAMOTI HO DETTO",
+       "damage": [
+        "HIT 10"
+       ],
+       "texts": 6
+      }
+     ]
+    },
+    {
+     "turn": 1,
+     "scale": {
+      "me": 1.5,
+      "others": 1,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 656,
+       "y": 322,
+       "w": 183,
+       "h": 203
+      },
+      "card": {
+       "x": 605,
+       "y": 276,
+       "w": 82,
+       "h": 113
+      },
+      "shows": [
+       {
+        "name": "LIEVE FASTIDIO",
+        "author": "ComPlayer_4014",
+        "void": false
+       },
+       {
+        "name": "Metabolismo Corrotto",
+        "author": "ComPlayer_6537",
+        "void": false
+       },
+       {
+        "name": "Tossicone Scatarrante",
+        "author": "ComPlayer_679",
+        "void": false
+       },
+       {
+        "name": "STORDIAMOTI HO DETTO",
+        "author": "ComPlayer_4092",
+        "void": false
+       },
+       {
+        "name": "ADOPERIAMOTI",
+        "author": "devAlice",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 430,
+       "y": 583,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 430,
+       "y": 646,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 16,
+       "discard": null
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 98,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 314,
+       "y": 553,
+       "w": 175,
+       "h": 242
+      },
+      "item": {
+       "x": 502,
+       "y": 567,
+       "w": 89,
+       "h": 123
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 314,
+       "y": 613,
+       "w": 167,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_6537",
+       "person": {
+        "x": 328,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 439,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 186,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4014",
+       "person": {
+        "x": 847,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 958,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 706,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_679",
+       "person": {
+        "x": 222,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 333,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 81,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4092",
+       "person": {
+        "x": 984,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 1094,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 842,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      }
+     ],
+     "free": {
+      "x": 1134,
+      "y": 102,
+      "w": 264,
+      "h": 203,
+      "share": 0.051
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.507
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_6537-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      },
+      {
+       "id": "status-ComPlayer_679-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 81,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "GARGANTUESCO IMPATTO SUL TU",
+       "damage": [
+        "HIT 40"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "GABBIANO DUNQUE VOLIAMOTI",
+       "damage": [
+        "HIT 15"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "STORDIAMOTI HO DETTO",
+       "damage": [
+        "HIT 10"
+       ],
+       "texts": 6
+      }
+     ],
+     "strips": {
+      "seats": 5,
+      "drawn": 5,
+      "missing": [],
+      "fonts": [
+       19,
+       19,
+       19,
+       19,
+       19
+      ],
+      "texts": {
+       "ComPlayer_6537": "−5 −15 −5",
+       "ComPlayer_4014": "+5",
+       "devAlice": "−2 +2 −1",
+       "ComPlayer_679": "−10 +1",
+       "ComPlayer_4092": "−15"
+      }
+     }
+    },
+    {
+     "turn": 2,
+     "scale": {
+      "me": 1.5,
+      "others": 1,
+      "items": 1,
+      "resources": 1.25
+     },
+     "played": {
+      "box": {
+       "x": 656,
+       "y": 322,
+       "w": 183,
+       "h": 203
+      },
+      "card": {
+       "x": 605,
+       "y": 276,
+       "w": 82,
+       "h": 113
+      },
+      "shows": [
+       {
+        "name": "LIEVE FASTIDIO",
+        "author": "ComPlayer_4014",
+        "void": false
+       },
+       {
+        "name": "Grab",
+        "author": "ComPlayer_679",
+        "void": false
+       },
+       {
+        "name": "Desiderio Incontrollabile",
+        "author": "ComPlayer_6537",
+        "void": false
+       },
+       {
+        "name": "GABBIANO DUNQUE VOLIAMOTI",
+        "author": "ComPlayer_4092",
+        "void": false
+       },
+       {
+        "name": "SVEGLIAMOCI MA TU NO",
+        "author": "devAlice",
+        "void": false
+       }
+      ]
+     },
+     "piles": {
+      "deck": {
+       "x": 430,
+       "y": 583,
+       "w": 40,
+       "h": 55
+      },
+      "discard": {
+       "x": 430,
+       "y": 646,
+       "w": 40,
+       "h": 55
+      },
+      "shows": {
+       "deck": 14,
+       "discard": "GABBIANO DUNQUE VOLIAMOTI"
+      }
+     },
+     "problems": [],
+     "hand": {
+      "w": 214,
+      "h": 295,
+      "step": 98,
+      "cards": 6
+     },
+     "me": {
+      "person": {
+       "x": 314,
+       "y": 553,
+       "w": 175,
+       "h": 242
+      },
+      "item": {
+       "x": 502,
+       "y": 567,
+       "w": 89,
+       "h": 123
+      },
+      "board": {
+       "x": 112,
+       "y": 553,
+       "w": 213,
+       "h": 188
+      },
+      "boardRow": 37.5,
+      "status": {
+       "x": 314,
+       "y": 613,
+       "w": 167,
+       "h": 36
+      }
+     },
+     "others": [
+      {
+       "id": "ComPlayer_6537",
+       "person": {
+        "x": 328,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 439,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 186,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4014",
+       "person": {
+        "x": 847,
+        "y": 146,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 958,
+        "y": 156,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 706,
+        "y": 127,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_679",
+       "person": {
+        "x": 222,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 333,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 81,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      },
+      {
+       "id": "ComPlayer_4092",
+       "person": {
+        "x": 984,
+        "y": 330,
+        "w": 117,
+        "h": 161
+       },
+       "item": {
+        "x": 1094,
+        "y": 340,
+        "w": 89,
+        "h": 123
+       },
+       "board": {
+        "x": 842,
+        "y": 311,
+        "w": 150,
+        "h": 73
+       },
+       "back": {
+        "w": 30,
+        "h": 42
+       }
+      }
+     ],
+     "free": {
+      "x": 1134,
+      "y": 102,
+      "w": 264,
+      "h": 203,
+      "share": 0.051
+     },
+     "middle": {
+      "box": {
+       "x": 683,
+       "y": 323,
+       "w": 492,
+       "h": 230
+      },
+      "free": 0.498
+     },
+     "below44": [
+      {
+       "id": "status-ComPlayer_6537-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      },
+      {
+       "id": "status-ComPlayer_679-imm-TOXICITY",
+       "kind": "status",
+       "w": 41,
+       "h": 24
+      }
+     ],
+     "clash": [],
+     "shell": {
+      "top": {
+       "x": 1309,
+       "y": 35,
+       "w": 82,
+       "h": 46
+      },
+      "brand": {
+       "x": 78,
+       "y": 42,
+       "w": 121,
+       "h": 66
+      },
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null
+     },
+     "faces": [
+      {
+       "name": "ADOPERIAMOTI",
+       "damage": [],
+       "texts": 5
+      },
+      {
+       "name": "SVEGLIAMOCI MA TU NO",
+       "damage": [
+        "HIT 5"
+       ],
+       "texts": 7
+      },
+      {
+       "name": "LIEVE FASTIDIO",
+       "damage": [],
+       "texts": 6
+      },
+      {
+       "name": "GARGANTUESCO IMPATTO SUL TU",
+       "damage": [
+        "HIT 40"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "STORDIAMOTI HO DETTO",
+       "damage": [
+        "HIT 10"
+       ],
+       "texts": 6
+      },
+      {
+       "name": "PAZIENZA: FINITA",
+       "damage": [],
+       "texts": 7
+      }
+     ],
+     "strips": {
+      "seats": 5,
+      "drawn": 5,
+      "missing": [],
+      "fonts": [
+       19,
+       19,
+       19,
+       19,
+       19
+      ],
+      "texts": {
+       "ComPlayer_6537": "−20 −15 +4 −1 +1",
+       "ComPlayer_4014": "+5",
+       "devAlice": "+4 −2 +1",
+       "ComPlayer_679": "−5 +4 −1 +2",
+       "ComPlayer_4092": "−10"
+      }
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "turn": 0,
+     "author": "ComPlayer_4014",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 736,
+      "y": 135,
+      "w": 355,
+      "h": 258
+     },
+     "target": {
+      "x": 847,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_6537",
+     "placed": "middle",
+     "scale": 1.55,
+     "box": {
+      "x": 586,
+      "y": 323,
+      "w": 344,
+      "h": 250
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_679",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 599,
+      "y": 347,
+      "w": 322,
+      "h": 234
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "ComPlayer_4092",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 615,
+      "y": 347,
+      "w": 322,
+      "h": 234
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 0,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 428,
+      "y": 543,
+      "w": 333,
+      "h": 242
+     },
+     "target": {
+      "x": 314,
+      "y": 553,
+      "w": 193,
+      "h": 266
+     },
+     "overPiles": true
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_4014",
+     "placed": "middle",
+     "scale": 1.6,
+     "box": {
+      "x": 736,
+      "y": 135,
+      "w": 355,
+      "h": 258
+     },
+     "target": {
+      "x": 847,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_679",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 599,
+      "y": 347,
+      "w": 322,
+      "h": 234
+     },
+     "target": {
+      "x": 222,
+      "y": 330,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_6537",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 463,
+      "y": 155,
+      "w": 322,
+      "h": 234
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "ComPlayer_4092",
+     "placed": "middle",
+     "scale": 1.45,
+     "box": {
+      "x": 615,
+      "y": 347,
+      "w": 322,
+      "h": 234
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": false
+    },
+    {
+     "turn": 1,
+     "author": "devAlice",
+     "placed": "middle",
+     "scale": 1,
+     "box": {
+      "x": 428,
+      "y": 543,
+      "w": 333,
+      "h": 242
+     },
+     "target": {
+      "x": 328,
+      "y": 146,
+      "w": 146,
+      "h": 202
+     },
+     "overPiles": true
+    }
+   ],
+   "catalog": {
+    "cards": 37,
+    "withDamage": 12,
+    "rows": [
+     {
+      "name": "Ago Marcio e Spezzato",
+      "damage": [
+       "CUT 5"
+      ],
+      "catalog": "CUT 5"
+     },
+     {
+      "name": "Tennents Super",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Negroni Trovato per Terra",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Dose di Eroina da Cavalli",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "PERMESSO SCUSA ORA SMETTI ",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "PAZIENZA: FINITA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Mescolone Micidiale",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Last Resort: Banzai!!!",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "FAI BASTA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GARGANTUESCO IMPATTO SUL TU",
+      "damage": [
+       "HIT 40"
+      ],
+      "catalog": "HIT 40"
+     },
+     {
+      "name": "Rabbia Psicotica da Meth",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "Estasi da Coca Etilene",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "AMMALIAMOTI DI BOTTE",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "GENTILE IL TUO CAREZZO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ADOPERIAMOTI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "LIEVE FASTIDIO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Tutto è Droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "NON GIOCARE COL COLTELLO NO",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Ghigno co' i' Denti Marci",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "COSA FAI NON É UNA DOMANDA",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Scatto Repentino",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Desiderio Incontrollabile",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Riflessi Aumentati dalla Speed",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SVEGLIAMOCI MA TU NO",
+      "damage": [
+       "HIT 5"
+      ],
+      "catalog": "HIT 5"
+     },
+     {
+      "name": "Ce l'hai due spiccioli per il biglietto?",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "BELLO IL TUO GIOCATTOLO SI",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Presa Male di Brutto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Grab",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Peroni da 66, calda",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "ORMALE GUARIAMOTI",
+      "damage": [
+       "HIT 30"
+      ],
+      "catalog": "HIT 30"
+     },
+     {
+      "name": "STORDIAMOTI HO DETTO",
+      "damage": [
+       "HIT 10"
+      ],
+      "catalog": "HIT 10"
+     },
+     {
+      "name": "C'è del sangue nella mia droga",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "Metabolismo Corrotto",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "GABBIANO DUNQUE VOLIAMOTI",
+      "damage": [
+       "HIT 15"
+      ],
+      "catalog": "HIT 15"
+     },
+     {
+      "name": "Tossicone Scatarrante",
+      "damage": [],
+      "catalog": "—"
+     },
+     {
+      "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "damage": [
+       "HIT 20+"
+      ],
+      "catalog": "HIT 20+x"
+     },
+     {
+      "name": "Steal",
+      "damage": [],
+      "catalog": "—"
+     }
+    ]
+   },
+   "inspection": {
+    "card": "SVEGLIAMOCI MA TU NO",
+    "priority": 1,
+    "marks": 1,
+    "text": "SVEGLIAMOCI MA TU NO\n\nazione legata\n\nCosto\nNessun costo in risorse\nPriorità\n1\nDanno nominale\n5\n colpo 5. Quello inflitto può differire: stati e difese.\nRuolo\ndanno: infligge danno\nTi dà\n+5 A\nBersaglio\nUn avversario\n\n+5 A a sé; 5 HIT al bersaglio.\n\nResta in mano. Richiede lo scarto di un’altra azione"
+   },
+   "briefs": [
+    {
+     "turn": 1,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 1180,
+      "y": 105,
+      "w": 340,
+      "h": 77
+     },
+     "lines": 3,
+     "font": 16,
+     "fontPx": 16
+    },
+    {
+     "turn": 2,
+     "out": [],
+     "shown": true,
+     "box": {
+      "x": 1180,
+      "y": 105,
+      "w": 340,
+      "h": 77
+     },
+     "lines": 3,
+     "font": 16,
+     "fontPx": 16
+    }
+   ],
+   "perf": [
+    {
+     "turn": 0,
+     "intervals": 2275,
+     "p95": 8.5,
+     "max": 113.8,
+     "within": 0.994,
+     "limit": 20,
+     "inputMax": 21.2,
+     "inputs": 7
+    },
+    {
+     "turn": 1,
+     "intervals": 2569,
+     "p95": 8.6,
+     "max": 116.4,
+     "within": 0.992,
+     "limit": 20,
+     "inputMax": 28.2,
+     "inputs": 29
+    }
+   ]
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "problems": []
+}

@@ -12,9 +12,8 @@ successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-p
 fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)), con una **revisione dopo la prova del
 proprietario** (regia D13 di ogni carta con primi piani di chi gioca e del bersaglio:
 [sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). **C3-L (scala e uso dello spazio del tavolo), blocco
-aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). **C3-5 (volto della carta ed effetti per tipo di danno, O7) è fatto** ([sezione](#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)). L'altro
-blocco (C3-7) non è iniziato; le attività A1 e A3 (tipo e importo del danno nel catalogo, regolamento 1.9 e 1.10)
-sono fatte a parte.
+aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). **C3-5 (volto della carta ed effetti per tipo di danno, O7) è fatto** ([sezione](#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)). **C3-7 (consolidamento) è fatto, in attesa del giudizio del proprietario** ([sezione](#c3-7--consolidamento)); C3 non è chiusa. Le attività A1 e A3
+(tipo e importo del danno nel catalogo, regolamento 1.9 e 1.10) sono fatte a parte.
 
 ## C3-1 — Modello puro della risoluzione e strumento di verifica
 
@@ -1022,3 +1021,115 @@ parte con gli account di prova (dati locali non toccati). Test client 191, `Buil
 - Con movimento ridotto non c'è impatto animato: il «segno» del tipo è quello del volto. Se lo vuoi anche statico sul bersaglio, è un'aggiunta da decidere.
 - Nessun dispositivo fisico, iPhone o prova umana. Dati locali non toccati: tutte le prove su database temporanei.
 - Il giudizio sull'estetica degli impatti (dimensione, durata, colore) resta al proprietario in C3-7.
+
+## C3-7 — Consolidamento
+
+2–3 novembre 2026. Regolamento **1.10**. Nessuna funzione nuova, nessuna modifica a regole, protocollo, catalogo, server o codice del client:
+`git diff 703d96b HEAD -- client-web server scripts` è vuoto, il blocco aggiunge solo documenti ed evidenze. Come in C3-5 il jar del
+server è stato **ricostruito dal sorgente corrente** (`build.ps1 -Task Server -Offline`, 2 novembre 23:23) e tutte le verifiche sono state
+eseguite su quella build, su database temporanei (`server/data` non toccato). **C3-7 è fatto, in attesa del giudizio del proprietario su
+desktop e iPhone ([scheda](client-c3/c3-7/prova-scheda.md)): C3 non è chiusa (D11).**
+
+### Esito in breve
+
+| Livello | Stato |
+|---|---|
+| Verifiche di `client-web` a 1366×768 e 844×390 | `Verify`, `VerifyModes`, `VerifyLifecycle`, `VerifyFfa`, `VerifyDecks`, `VerifyPublic`, `VerifyProfile`, `VerifyResolution` (completa), `VerifyLayout` (completa: ha solo gli scenari duello e FFA): **verdi**. `VerifyAim`: **verde con copertura ridotta** (sotto). |
+| Client | Test **191/191**, `Build` e `Size` verdi: JS gzip 329960 byte, totale gzip 1113153, texture 18876320 byte decodificati ([size.json](client-c3/c3-7/size.json)); identico a C3-5, nessun codice cambiato. |
+| Repository | `./scripts/build.ps1 -Task Test -Offline` verde (server **266**, client-debug **36**); `python scripts/check-rules.py` verde (39 carte, 1 token). |
+| Contesto Spring | `./scripts/build.ps1 -Task TestServerContext -Offline` (profilo `context-tests`): **373 test, 0 errori, `BUILD SUCCESS`**. È un esito separato dai test unitari. In più il jar impacchettato ha avviato il contesto completo a ogni verifica che lo avvia (profilo `local`, account di prova). |
+| Dispositivo fisico, iPhone, prova umana | **Non provati.** Tutte le misure sono Edge via Playwright sul PC. Il giudizio spetta al proprietario. |
+
+### Verifiche sulla build finale
+
+| Verifica | 1366×768 | 844×390 | Evidenza |
+|---|---|---|---|
+| `Verify` (quick 1vCom, fino all'esito) | verde | verde | [verify](client-c3/c3-7/verify-1366x768.json) |
+| `VerifyModes` | verde | verde | [modes](client-c3/c3-7/modes-1366x768.json) |
+| `VerifyLifecycle` | verde | verde | [lifecycle](client-c3/c3-7/lifecycle-1366x768.json) |
+| `VerifyFfa` | verde | verde | [ffa](client-c3/c3-7/ffa-1366x768.json) |
+| `VerifyDecks` | verde | verde | [decks](client-c3/c3-7/decks-1366x768.json) |
+| `VerifyPublic` | verde | verde | [public](client-c3/c3-7/public-1366x768.json) |
+| `VerifyProfile` | verde | verde | [profile](client-c3/c3-7/profile-1366x768.json) |
+| `VerifyResolution` | verde, 75 round | verde, 80 round | [resolution](client-c3/c3-7/resolution-1366x768.json) |
+| `VerifyLayout` (duello e FFA, 3 turni ciascuno) | verde; fotogrammi entro soglia 99,2–99,9%, p95 8,5 ms | verde; entro soglia 100%, p95 8,4–8,5 ms | [layout](client-c3/c3-7/layout-1366x768.json) |
+| `VerifyAim` (duello e FFA, 3 turni ciascuno) | verde | verde | [aim](client-c3/c3-7/aim-1366x768.json) |
+
+**Copertura ridotta di `VerifyAim` (scelta del proprietario, per il tempo):** eseguiti solo gli scenari `duel` e `ffa` (18 carte
+controllate per scenario; frecce disegnate 17/33 a 1366×768 e 16/42 a 844×390; controllo della scelta bloccata nel solo duello).
+**Non rieseguiti nella build finale:** gli scenari `touch` (mira con tocco emulato), `reduced` (frecce statiche con movimento ridotto) e
+`pending` (scelta bloccata dalla mossa inviata, con le attese reali di 30 s). Erano verdi in C3-5 e il codice del client non è cambiato
+da allora, ma qui non sono riprovati sul jar nuovo.
+
+**Controlli dei dati in `VerifyResolution`:** le variazioni del modello sommate alla vista precedente danno la vista nuova a ogni round
+contiguo; i fatti del dialogo coincidono con le viste del socket; per ogni mossa l'impatto costruito dalla scena è quello atteso dalle
+stringhe del catalogo. Le righe regolari del report tornano con la vista in **75 round su 75** a 1366×768 e **76 su 80** a 844×390. I 4
+che non tornano (quick T15, FFA T11 e T17, umani T6) seguono tutti, di quattro turni, un Mescolone Micidiale consumato dallo stesso
+giocatore: è il veleno a timer che il server non scrive, già noto in D1, e per questi round la scena usa il totale del round come
+previsto (`bars: 4 total`). Non è un difetto nuovo né una soglia rilassata.
+
+**Note sull'esecuzione, nessuna evidenza intermedia conservata.** Il primo lancio di `Verify` è rimasto vivo mentre ne partiva un secondo:
+le due esecuzioni si sono scontrate sull'account (login rifiutato, «già collegato altrove»). Ho fermato i miei processi, riavviato il
+server su un database nuovo e rilanciato: i file in `client-c3/c3-7/` sono solo delle esecuzioni finali, le due catture del login fallito
+sono state rimosse. Sulla porta 4320 girava un `vite preview` che non era mio: serve `client-web/dist` da disco, quindi ha servito la
+build ricostruita.
+
+### Regole di non regressione 1–9 sulla build finale
+
+Tutte le partite sono reali, su server avviato dal jar nuovo con database temporaneo. «Duello» = quick 1vCom; «FFA» = cinque posti con
+computer; «umani» = FFA con devAlice e devBob più tre computer, cinque mosse a ogni round; «open» = open 1vCom con i due mazzi sintetici
+«C3 contrasti» e «C3 furti» (D8). Il rimando ai blocchi dice dove la regola era già provata.
+
+| # | Regola | Evidenza sulla build finale | Già provata in |
+|---|---|---|---|
+| 1 | Una risoluzione si anima al massimo una volta | Regola `1` rispettata in tutte le partite e misure; **0 sequenze annullate dalla vista** su 75 + 80 round. Rientro dopo «Simula disconnessione»: sequenze 2 → 2, zero SEND (`quickRejoin`). Resize, cambio di orientamento e ritorno dal background con scheda nascosta emulata: **non riprovati qui** (Playwright non cambia la visibilità in modo affidabile). | [C3-2](#c3-2--sequenza-affidabile) |
+| 2 | Lo stato finale è la vista server | Regola `2` rispettata a ogni scelta in tutte le partite: duello, FFA, umani, open e salto; `drift` della linea temporale uguale ai passi. | C3-1, [C3-4](#c3-4--sequenza-del-round-con-i-soli-dati-certi) |
+| 3 | Nessuna risoluzione inventata dopo un salto | Salto 1 → 24 (1366×768) e 1 → 25 (844×390) in FFA con i due umani in forfait: nessuna sequenza di scena (`sceneK2` vuoto), il dialogo dice «Risolti 23 turni» e «24 turni» e non mostra variazioni. Il salto è riconosciuto `jump` dal client. | [C3-2](#c3-2--sequenza-affidabile) |
+| 4 | Le animazioni non bloccano invio né clock | `rule4WithClock` in entrambe le misure: carta scelta durante la sequenza al primo tocco, sequenza chiusa per `input` a 431 e 366 ms, clock da 30 a 28 s dopo 2 s. Interruzioni `skip`, tocco e carta scelta controllate sui round campionati (`interrupt`, `infoFfa`: 0 perdite). | C3-2, [revisione](#c3-2--revisione-dopo-la-prova-del-proprietario) |
+| 5 | Movimento ridotto e salto conservano le informazioni | `reducedMotion` (3 round per misura): **0 sequenze, 0 impatti**, riepilogo statico presente a ogni round con le variazioni del modello; 4 dialoghi di «Ultimo turno» per duello e per FFA a ogni misura (`report-duel`, `report-ffa`) coincidono con le viste del socket. | C3-2, [C3-6](#c3-6--riepilogo-e-ultimo-turno-leggibili) |
+| 6 | La pending dello stesso turno non tocca la sequenza | Regola `6` rispettata in tutte le partite; due viste per round senza riavvio. | C3-1, C3-2 |
+| 7 | La sequenza non si ferma alla prima eliminazione | Mosse presentate risolte dopo la morte dell'autore: **7** round (1366×768) e **4** (844×390); fine turno letale 4 e 3; esito con banner 4 e 3. | [C3-4](#c3-4--sequenza-del-round-con-i-soli-dati-certi) |
+| 8 | Privacy | `VerifyFfa` (due umani e tre computer, entrambe le misure): le mani altrui sono solo un conteggio nelle viste, la propria è l'elenco, **0 nomi di carte altrui** trapelati fuori da `resolvedMoves`, `pendingMove`, `timeBasedEffects` e dal personaggio. `VerifyResolution`: pesche altrui disegnate come dorsi (`drawBack`). **Limite:** i controlli sono sui dati ricevuti e sul disegno atteso, non su un'ispezione dei pixel del tavolo. | C2b-3, [C3-4s](#c3-4s--rifinitura-delle-animazioni-della-sequenza) |
+| 9 | Durata, tetto di 20 s | Massimo **19,7 s** a entrambe le misure, in FFA con cinque mosse e fra umani (sotto). | C3-4r, C3-4s, C3-5 |
+
+### Durate e clock tra umani (D10, D13)
+
+Sequenze completate (`reason: complete`) delle partite reali, in secondi, per numero di mosse del round:
+
+| Caso | 1366×768 | 844×390 | Round (1366×768; 844×390) |
+|---|---|---|---|
+| Due mosse: duello e open 1vCom | 6,6–10,4 | 6,5–10,0 | 40; 54 |
+| FFA, due mosse | 7,3–9,3 | — | 9; — |
+| FFA, tre mosse | 11,6–12,0 | — | 2; — |
+| FFA, quattro mosse | 15,4–16,0 | 13,6–16,0 | 6; 4 |
+| **FFA, cinque mosse** | **17,5–19,7** | **17,1–19,7** | 9; 13 |
+| **Fra umani, cinque mosse a ogni round** | **17,9–19,3** | **17,1–19,3** | 8; 8 |
+
+**Clock rimasto a fine sequenza fra umani** (`humansClock`, 16 osservazioni per misura, due giocatori per round): **11–13 s** di 30 a entrambe
+le misure, mai meno di 10 s. Il tetto di 20 s è rispettato: massimo 19,7 s. Le misure del clock sono di giocatori automatici che aspettano
+la fine della sequenza prima di scegliere; non rappresentano una persona che sceglie mentre la sequenza gira (regola 4).
+
+**Conclusione su A2: nessun segnale per proporlo.** Anche nel caso peggiore (cinque mosse fra umani) restano almeno 11 s di clock a fine
+sequenza, la scelta è libera durante la sequenza, un tocco passa al passo successivo e «Salta effetti» la chiude. Il margine si è ridotto da
+12–15 s (C3-4r) a 10–12 s (C3-4s) e 11–13 s (C3-5) per le scritte più lunghe, non per una causa nuova. Il segnale vero, cioè se una persona
+sente di avere poco tempo per scegliere, non è misurabile qui: è la voce 14 della [scheda](client-c3/c3-7/prova-scheda.md). **A2 non viene
+proposto né fatto; il clock resta 30 s.**
+
+### Righe P30, P31 e P36
+
+Aggiornate in [client-c0-parity.md](../client-c0-parity.md) con l'evidenza di questo blocco, e **lasciate com'erano come chiuse**: le tre
+righe erano già «Fatto» da C1/C2 e C3-7 non toglie né aggiunge criteri. P30 conserva il limite L (nessun ACK correlato al comando); P31 e P36
+dichiarano che la leggibilità della sequenza e l'estetica dell'enfasi sono del giudizio del proprietario e che nessun dispositivo fisico è stato
+provato.
+
+### Limiti e residui
+
+- **Giudizio del proprietario su desktop e iPhone, non ancora dato.** Estetica degli impatti, scala del tavolo, ritmo e durata complessiva si
+  giudicano con la [scheda](client-c3/c3-7/prova-scheda.md). Niente di tutto questo è dimostrabile dalle verifiche automatiche.
+- **`VerifyAim` a copertura ridotta** (sopra): mira con tocco, movimento ridotto e scelta bloccata da pending non rieseguiti sul jar nuovo.
+- **Regola 1** (resize, orientamento, ritorno dal background) e **regola 8** (pixel del tavolo) con i limiti dichiarati nella tabella.
+- **Residui già registrati, non toccati:** O19 (sequenza velocizzata), **O20 (anomalia FFA del timeout, del proprietario)**, O21 (POISON solo in
+  unità; `ExtremelyViolentBlow` con V reale non vista sul volto; carte piccole del round; segno statico con movimento ridotto) e O22 (750×292).
+- **Nuova osservazione O23** (strumenti di verifica, tappa C4): `VerifyResolution` dura circa 35 minuti per misura e il consolidamento
+  completo circa due ore e mezza; `Verify` e `VerifyModes` non avviano il server mentre le altre sì ([roadmap](../client-roadmap.md#osservazioni-registrate-durante-c3)).
+- Nessun difetto nuovo trovato in questo blocco; nessuna correzione al codice.

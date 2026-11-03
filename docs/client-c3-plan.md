@@ -17,7 +17,7 @@ modifiche di regole e catalogo (A1, A3, eventualmente A2) sono attività separat
 regolamento. **Dopo il feedback del proprietario del 30 ottobre 2026** (centro del tavolo vuoto, tutto un po'
 piccolo, personaggio proprio grande quanto gli altri) si aggiunge il blocco **C3-L** (scala e spazio del tavolo),
 fra C3-4r e C3-6, con la decisione D14; ordine dei blocchi restanti: C3-L, C3-6, C3-5, C3-7.
-**C3-6 e C3-5 fatti il 2 novembre 2026**; resta C3-7.
+**C3-6 e C3-5 fatti il 2 novembre 2026**; **C3-7 fatto il 3 novembre 2026, in attesa del giudizio del proprietario** (C3 non è chiusa).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -173,10 +173,10 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-4s | Rifinitura delle animazioni della sequenza e difetto delle (i) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)) | C3-4, C3-L |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili)) | C3-2 |
 | C3-5 | Volto della carta ed effetti per tipo di danno, enfasi (O7) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)) | C3-4, A1, A3 |
-| C3-7 | Consolidamento e giudizio del proprietario | tutti |
+| C3-7 | Consolidamento e giudizio del proprietario — **fatto** il 3 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)), **in attesa del giudizio del proprietario** ([scheda](reports/client-c3/c3-7/prova-scheda.md)); C3 non è chiusa | tutti |
 
 C3-3 è indipendente e può andare in qualunque punto; C3-6 può precedere C3-4. Dal 30 ottobre 2026 l'ordine
-dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 e C3-5 resta C3-7. Se A1
+dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 e C3-5 resta C3-7 (fatto, in attesa del giudizio). Se A1
 non è approvata o non è pronta, C3-5 ripiega sugli impatti per ruolo R07a (D2) e lo
 dichiara.
 
@@ -444,6 +444,8 @@ test, verifica, documenti comuni.
 un collegamento solo probabile: ogni frase deve venire dal modello.
 
 ### C3-7 — Consolidamento e giudizio del proprietario
+
+**Fatto il 3 novembre 2026, in attesa del giudizio del proprietario** ([rapporto](reports/client-c3-report.md#c3-7--consolidamento), evidenze in [c3-7](reports/client-c3/c3-7/)). Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta: solo duello e FFA), test del repository e contesto Spring verdi, regole 1–9 dichiarate una per una, durate massime 19,7 s e clock fra umani 11–13 s: **nessun segnale per A2**. Righe P30, P31 e P36 aggiornate con l'evidenza. Nuova osservazione O23 (strumenti). **Restano:** il giudizio del proprietario con la [scheda](reports/client-c3/c3-7/prova-scheda.md) (desktop e iPhone) e l'eventuale correzione di difetti C3 che ne emergessero; «C3 chiusa» si scrive solo dopo di esso (D11).
 
 **Perimetro.** Nessuna funzione nuova salvo correzioni di blocchi emersi.
 Esecuzione consolidata di tutte le verifiche a 1366×768 e 844×390, `Size`, verifiche

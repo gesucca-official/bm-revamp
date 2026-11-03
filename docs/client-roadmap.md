@@ -680,6 +680,7 @@ modifica a regole, server o catalogo è già decisa.
 | O20 | Prova FFA: dopo il forfait per tempo dei due umani, i computer hanno combattuto altri **25 round**; l'esito riporta `outcomeReason: timeout` con un **computer vincitore**. | **Da valutare a parte** dal proprietario prima di C3-7; non riguarda il client | Nessuna conclusione: va letto contro R06 («Clock, forfait e disconnessione», regolamento 1.5, in particolare i forfait simultanei in FFA) per decidere se è comportamento voluto o anomalia. Se è anomalia che cambia l'esito osservabile, prima registrare comportamento precedente, motivazione, effetto e test ([domande aperte](open-questions.md)); se cambia regole, prima `docs/game-rules.md` con versione e motivazione. Diverso da `VerifyFfa` `otherMoveTimeout`, dove un solo umano va in forfait e gli altri proseguono (R06). |
 | O21 | Residui dichiarati da C3-5 e C3-6. | C3-7 e C4 | **POISON:** simbolo e impatto provati solo in unità, nessuna carta lo usa. **ExtremelyViolentBlow (`HIT 20+x`)**: la V reale sul volto della carta in mano non è stata vista nelle partite, solo il «20+» del catalogo. **Carte piccole del round (36–40 px):** solo il simbolo del danno, l'importo è nell'ispezione. **Movimento ridotto:** il segno del tipo di danno resta sul volto ma non c'è impatto sul bersaglio; se lo si vuole statico, da decidere. **Controllo delle scritte a 844×390 in FFA:** il guasto di C3-6 non si è riprodotto; il controllo ora misura fino all'inizio della sfumatura (soglia `LABEL.read` − 50 ms invariata, approvato il 2 novembre 2026), e le scritte registrano `end` e `gap` per spiegarlo se ricapita. |
 | O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 | Adattare mano e FFA all'altezza minima (vedi C4); un test in unità segnala quando la disposizione entra. Aggiunta qui per non perderla. |
+| O23 | C3-7: il consolidamento completo costa circa due ore e mezza (`VerifyResolution` circa 35 minuti per misura); `Verify` e `VerifyModes` non avviano il server mentre le altre verifiche sì, e due verifiche insieme collidono sugli account. | C4 | Solo strumenti, nessun effetto sul gioco: un lancio unico che serializzi le verifiche, avvii il server una volta, scelga la build e conservi solo le esecuzioni finali; `BM_SCENARIOS` ridotti per i controlli rapidi. Nessuna soglia da rilassare. |
 
 ## Verifiche proporzionate
 
@@ -731,9 +732,9 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** il blocco successivo del [piano C3](client-c3-plan.md) su
-istruzione del proprietario: resta C3-7;
-C3-1, C3-2, C3-3, C3-4, C3-L, C3-4s, C3-6 e C3-5 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); le attività A1 e A3 (tipo e importo del
+**Prossimo passo:** il **giudizio del proprietario** su desktop (Edge) e iPhone (Safari, landscape) con la
+[scheda](reports/client-c3/c3-7/prova-scheda.md); **C3 non è chiusa** finché non lo dà (D11).
+C3-1, C3-2, C3-3, C3-4, C3-L, C3-4s, C3-6, C3-5 e C3-7 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); le attività A1 e A3 (tipo e importo del
 danno nel catalogo, dal regolamento) hanno preceduto C3-5. Poi C4 (rifinitura
 di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
@@ -743,6 +744,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 35 — 3 novembre 2026, C3-7:** consolidamento. Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta), test del repository, `check-rules.py` e contesto Spring verdi; regole di non regressione 1–9 dichiarate; durate fino a 19,7 s e clock fra umani 11–13 s, nessun segnale per A2; righe P30, P31, P36 aggiornate; scheda di prova per il proprietario; O23 registrata. Nessuna regola, API, servizio o codice del client cambiato. **C3 non è chiusa:** attende il giudizio del proprietario ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).
 - **Versione 34 — 2 novembre 2026, C3-5:** volto della carta con tipo e importo nominale del danno (simboli) e senza priorità, che resta
   nell'ispezione; impatti per tipo di danno o per ruolo, enfasi per annullamento, eliminazione ed esito; movimento ridotto senza scosse; residuo
   di C3-6 sulle scritte (misura corretta, soglia invariata, da approvare). Nessuna regola, API o servizio cambiato; resta C3-7
