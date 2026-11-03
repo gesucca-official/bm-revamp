@@ -4,7 +4,7 @@
 `a807aa0`. **Solo piano:** nessun codice client, nessuna modifica a regole, server, protocollo, catalogo o
 `client-debug`. C0, C1, C2 e C3 sono chiuse. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
-**D13 è confermata dal proprietario il 3 novembre 2026; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
+**D3, D4, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
 proprietario. Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
 **Stato di C4-1 alla stesura.** Una sessione separata sta già lavorando a C4-1 nello stesso checkout: modifiche **non
@@ -131,13 +131,13 @@ stesso turno non tocca la sequenza; la sequenza non si ferma alla prima eliminaz
 
 ## Blocchi
 
-Numeri della bozza del proprietario, con tre correzioni sotto. Opzionali segnati con *.
+Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opzionali segnati con *.
 
 | Blocco | Contenuto | Dipende da | Modello, sforzo | Perché |
 |---|---|---|---|---|
 | C4-1 | Strumenti di verifica (O23) | — | Sonnet, alto | Ben delimitato, ma un controllo indebolito senza accorgersene sarebbe costoso |
 | C4-1b | Misura di partenza: giro completo, cattura su iPhone, 750×292 | C4-1 | Sonnet, medio | Porting e misura; il giudizio è sui numeri |
-| C4-3 | Simboli, font, inventario e crediti | C4-1b, D3, D4 | Sonnet, alto | Licenze da leggere bene; font in Pixi delicato |
+| C4-3 | Simboli, font, inventario e crediti | C4-1b, D3, D4 | Sonnet, alto | Licenze da leggere bene; resa di Impact su iPhone da controllare |
 | C4-2 | Layout all'altezza minima e finitura delle dimensioni | C4-3, D6, D7, D8 | Opus, alto | Geometria vincolata e compromessi: è il blocco più difficile |
 | C4-4 | Cornici per tipologia e segno del ruolo | C4-3, C4-2 | Opus, medio | Giudizio visivo su due disegni, codice non difficile |
 | C4-5a | Sfondo e identità del bar (O2) | D11 | Sonnet, medio | Processo di asset e poca geometria |
@@ -148,10 +148,11 @@ Numeri della bozza del proprietario, con tre correzioni sotto. Opzionali segnati
 | C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
 | C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
 
-**Correzioni alla bozza** (da confermare, [D14](#decisioni-del-proprietario)):
+**Correzioni alla bozza** (confermate dal proprietario, [D14](#decisioni-del-proprietario)):
 
 1. **C4-3 prima di C4-2.** Il font cambia le larghezze su cui si basano `stripPlan`, riga breve e volti: fare la geometria minima
-   prima vorrebbe dire rifarla e riverificarla. I numeri restano quelli della bozza; cambia l'ordine.
+   prima vorrebbe dire rifarla e riverificarla. I numeri restano quelli della bozza; cambia l'ordine. Con D4 (a) Impact resta e su Windows
+   le larghezze del font non cambiano: l'ordine regge perché i simboli al posto delle lettere cambiano le stesse misure e l'iPhone può riaprire D4.
 2. **Nuovo C4-1b.** C4-1 è strumento; serve una misura di partenza prima di aggiungere peso e grafica, e oggi lo stato su iPhone è
    ignoto. È anche il punto in cui si salda il debito di C3.
 3. **C4-5 e C4-8 divisi in due.** Sfondo e shell hanno rischi e verifiche diversi. Accessibilità e prestazioni pure: il ridisegno
@@ -163,7 +164,7 @@ configurazioni diverse). Il criterio giusto è **un solo punto che avvia i serve
 
 ### Ordine e parallelo
 
-**Ordine consigliato:** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-8a → C4-8b → C4-9. C4-8b viene dopo
+**Ordine (D14):** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-8a → C4-8b → C4-9. C4-8b viene dopo
 tutti gli asset, perché il peso e la cadenza vanno misurati su quelli veri.
 
 | Blocco | `scene.ts` | `readability.ts` | `style.css` | Shell (`ui`, `table`, `collection`, `hub`, `public`, `profile`) | Strumenti | Asset e inventario |
@@ -253,30 +254,28 @@ sequenza, catture a 750×292. La tabella «Cosa c'è oggi» è corretta dove la 
 
 ### C4-3 — Famiglia di simboli, font e inventario degli asset
 
-**Perimetro.** Secondo D3 e D4.
+**Perimetro.** Secondo D3 (confermata: i simboli del progetto, Game-icons solo per lacune reali) e D4 (confermata: font di sistema, Impact e Arial).
 
 - Sostituisce le lettere rimaste (monete del costo, guadagni, immunità) con simboli, sempre col numero. Le lettere restano dove
   servono al testo consultabile.
 - Un solo sistema di simboli per Pixi e HTML, com'è già `DAMAGE_SHAPES`.
-- Riduce le famiglie di font a quanto deciso; nessuna richiesta remota.
+- Riduce le famiglie di font a Impact e Arial, togliendo Georgia dalla «i», senza cambiare il font del tavolo; nessun font distribuito e nessuna richiesta remota.
 - **Inventario unico** in `docs/design/client-c4/assets/`: file, autore, URL, versione o data, licenza, modifiche, destinazione,
   SHA-256; comprende anche `table.webp` e `atlas.webp`, che rimandano alle provenienze esistenti.
 - Se entra un asset di terzi: **pagina «Crediti e licenze»** raggiungibile dalla home, testi di licenza distribuiti e frase sui diritti
   corretta: i materiali di terzi restano sotto la loro licenza. I documenti dei diritti si allineano nello stesso commit.
 - Test della regola 10 ed estensione di `size.mjs` ai formati usati.
 
-**Dipendenze.** C4-1b; D3, D4, D11 per il registro. Prima del codice: campione con i font candidati su un volto vero, alle dimensioni
-più piccole, su Edge e su iPhone.
+**Dipendenze.** C4-1b; D3, D4, D11 per il registro. Il campione dei font su volti veri è stato guardato su Edge il 3 novembre 2026. Prima
+del codice resta da controllare sull'iPhone se i titoli delle carte sono davvero in Impact: se è il font di ripiego, si torna a D4.
 
 **File toccati.** `scene.ts`, `readability.ts`, `ui.tsx`, `collection.tsx`, `public.tsx`, `style.css`, `tools/size.mjs`, nuovi test,
-`docs/design/client-c4/assets/`, eventuali `public/fonts/`.
+`docs/design/client-c4/assets/`.
 
 **Rischi.**
 
-- Un font caricato dopo il primo disegno lascia in Pixi il testo con il ripiego: attesa di `document.fonts`, ridisegno e ripristino del
-  contesto grafico da provare.
-- Glifi usati oggi (`→`, `✓`, `×`, `−`, `▲`, `✕`) possono mancare nel font.
-- Nomi riservati di Play.
+- Il font dipende dal dispositivo: Impact potrebbe mancare su iOS (da verificare), e allora la resa approvata esisterebbe solo su PC.
+- Glifi usati oggi (`→`, `✓`, `×`, `−`, `▲`, `✕`) possono uscire da un font di ripiego diverso per dispositivo.
 - Le icone esterne dettagliate a 14–18 px diventano macchie e stonano accanto ai simboli approvati.
 - Misurare testo su Safari è già costato in C0: niente misure in più nel ridisegno.
 - Il volto approvato è esplicitamente da non snaturare (O14).
@@ -515,14 +514,14 @@ non è provato.
 
 ## Decisioni del proprietario
 
-**D13 è confermata; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
+**D3, D4, D13 e D14 sono confermate; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
 
 | ID | Domanda | Opzioni | Raccomandazione e motivo | Cosa blocca | Se si rimanda |
 |---|---|---|---|---|---|
 | D1 | Illustrazioni individuali in C4 | (a) nessuna; (b) solo quelle che non reggono, da lista approvata; (c) tutte e 40 | **(b).** D24 del Set Base dice di generarle a carte finalizzate: tutte ora rischia lavoro che sparisce. La roadmap chiede di sostituirle «dove serve», e dove serve si vede solo dopo le cornici. | C4-6 | Non blocca altro. Vale (a) e C4-6 si salta; si può aprire fino a C4-8b. |
 | D2 | Audio | (a) no; (b) 4–6 suoni con volume basso e muto, nessuna musica; (c) anche ambiente o musica | **(b), per ultimo e primo da tagliare.** Costa poco, la fonte è CC0 e la prova C può giudicarlo; (c) porta peso e fastidio in sequenze da 20 s. Volume iniziale basso, attivo. | C4-7 | Non blocca altro. Se non è deciso prima di C4-9, la prova C si fa senza suoni. |
-| D3 | Simboli | (a) Game-icons per tutti (CC BY 3.0); (b) tutti disegnati da noi; (c) i nostri, Game-icons solo per lacune reali | **(c), con l'attesa che le lacune siano poche o nessuna.** Esistono già 15 simboli propri, quelli del danno approvati in C3-7, e il residuo di O10 è fatto di soli costi, guadagni e immunità, tutti coperti dai simboli delle risorse. Sostituirli non migliora e aggiunge attribuzioni per ogni icona. Questo si discosta dalla roadmap, che indicava Game-icons come fonte principale. | C4-3 | Blocca C4-3 e a catena C4-2, C4-4, C4-5b. |
-| D4 | Font | (a) quelli di sistema, ridotti a due; (b) Play (OFL); (c) altro OFL scelto su campione | **(a), salvo campione che mostri un vantaggio netto a 750×292.** Nessuna osservazione riguarda i font, il volto attuale piace, zero peso e zero licenze. Contro: resa non garantita identica fra Windows e iOS, **da confermare sull'iPhone**. Play viene dalla prima lista di asset della roadmap e non è mai stato provato sul tavolo; porta nomi riservati e il caricamento in Pixi. Un campione a tre dimensioni costa poco e va guardato prima di chiudere la decisione. | C4-3 (solo font), a catena C4-2 | Blocca C4-2, che dipende dalle larghezze del testo. Sui soli simboli C4-3 può procedere. |
+| D3 | Simboli | (a) Game-icons per tutti (CC BY 3.0); (b) tutti disegnati da noi; (c) i nostri, Game-icons solo per lacune reali | **(c), confermata dal proprietario il 3 novembre 2026, con l'attesa che le lacune siano poche o nessuna.** Esistono già 15 simboli propri, quelli del danno approvati in C3-7, e il residuo di O10 è fatto di soli costi, guadagni e immunità, tutti coperti dai simboli delle risorse. Sostituirli non migliora e aggiunge attribuzioni per ogni icona. Questo si discosta dalla roadmap, che indicava Game-icons come fonte principale. | C4-3 | Blocca C4-3 e a catena C4-2, C4-4, C4-5b. |
+| D4 | Font | (a) quelli di sistema, ridotti a due; (b) Play (OFL); (c) altro OFL scelto su campione | **(a), confermata dal proprietario il 3 novembre 2026 dopo il campione: Impact e Arial.** Il volto attuale piace, zero peso e zero licenze. Sul campione (Edge, Windows; 1366×768, 844×390, 750×292) Play Bold rende meglio i numeri, ma ha titoli più larghi del 22% in media, più troncamenti e diverse etichette tagliate; non ha `→`, `✓`, `▲`, `✕`. Play Regular è troppo sottile sulle carte. **Resta da controllare sull'iPhone:** Impact non è distribuito e potrebbe mancare su iOS (non verificato). Se manca, si torna qui con (c) sullo stesso campione. | C4-3 (solo font), a catena C4-2 | Decisa; si riapre solo per il controllo su iPhone. |
 | D5 | Segno statico sul bersaglio con movimento ridotto (O21) | (a) sì, sul bersaglio; (b) no, ma tipo di danno in «Ultimo turno»; (c) no, nulla di nuovo | **(b).** Con movimento ridotto il tipo si legge già sul volto e sulla carta piccola al centro. Un segno fisso sul bersaglio toglie spazio dove la striscia già manca in FFA compatta, e con più mosse suggerirebbe un'attribuzione che il server non dà (D1 di C3). `roundReport` oggi non riporta il tipo: basta una riga. | Una parte di C4-8a | Non blocca. Vale (c): resta un limite dichiarato. |
 | D6 | 750×292 resta il minimo supportato | (a) sì, duello e FFA; (b) sì per il duello, FFA da 844×390; (c) no, minimo 844×390 | **(a), con D7.** È ciò che l'iPhone campione lascia davvero e il proprietario lo ha già giudicato sufficiente in C0. Con (b) o (c) la FFA sul dispositivo campione non sarebbe supportata proprio mentre si prepara il playtest. Se C4-2 dimostra che la FFA non è giocabile, si torna qui con le catture. | C4-2, misura 750 nelle verifiche | Blocca C4-2 e di fatto il layout; C4-3 può precedere. |
 | D7 | Cosa cede sotto i 384 px, in ordine (se D6 conferma) | Proposta: 1. primi piani nel proprio posto anziché al centro; 2. carte del round ridotte alla sola ultima, con «Ultimo turno»; 3. mano più piccola e più alzata al tocco; 4. oggetti più sovrapposti; 5. mani coperte più piccole; mai togliere bersagli | **Quest'ordine, da giudicare sulle catture.** Toglie prima ciò che si ritrova altrove (decisioni di presentazione) e tiene le carte come oggetti sul tavolo. Le mani coperte restano tutte e quattro. | C4-2 | Blocca C4-2. Decidibile dopo C4-1b, con i numeri veri. |
@@ -532,13 +531,13 @@ non è provato.
 | D11 | Generazione degli asset e registro | Generazione: (a) il proprietario genera con il suo strumento, l'agente scrive prompt e registro; (b) una sessione con uno strumento di generazione, come C0 e O9. Registro: (c) come O9, sorgenti e prompt fuori da git; (d) prompt letterale tracciato e salvato prima di generare, sorgente tracciata solo per lo sfondo | **Da confermare (a) o (b): serve sapere quale strumento è disponibile. Questa sessione non ne ha uno.** Per il registro **(d):** i prompt di C0-R2 sono andati persi, e i PNG di O9 sono solo su questo PC. Solo immagini nuove, riferimento ammesso solo a materiali del progetto (R1, `table.png`), mai i quattro giochi né Internet. Modello e versione annotati, C2PA se esposto. | C4-5a, C4-6 | Blocca O2, quindi la chiusura di C4 senza deroga; il resto procede. |
 | D12 | Riferimento di accessibilità e lettore di schermo | Contrasto: (a) WCAG 2.2 AA come obiettivo (4,5:1 testo, 3:1 testo grande e simboli), senza dichiarare conformità; (b) nessuna soglia. Lettore: (c) una breve prova del proprietario con VoiceOver; (d) dichiarato non provato | **(a) e (d); (c) se il proprietario ha dieci minuti.** La soglia rende il controllo ripetibile; le eccezioni si elencano. Il lettore non è automatizzabile qui e in C5 non è un criterio: meglio un limite onesto che una promessa. | C4-8a | C4-8a parte con la raccomandazione. |
 | D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b), confermata dal proprietario il 3 novembre 2026.** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | C4-1 è in corso e pubblicherebbe secondo la sua logica attuale, con il rischio di altri 200 MB. **Urgente.** |
-| D14 | Ordine e divisione dei blocchi | (a) la bozza: C4-2 prima di C4-3, nessun C4-1b, C4-5 e C4-8 interi; (b) [correzioni proposte](#blocchi) | **(b).** Il font condiziona la geometria; lo stato su iPhone è ignoto; sfondo e shell, accessibilità e prestazioni hanno rischi diversi. Costa due commit in più. | Ordine dopo C4-1 | Non si può partire dopo C4-1 senza. |
+| D14 | Ordine e divisione dei blocchi | (a) la bozza: C4-2 prima di C4-3, nessun C4-1b, C4-5 e C4-8 interi; (b) [correzioni proposte](#blocchi) | **(b), confermata dal proprietario il 3 novembre 2026.** Il font condiziona la geometria; lo stato su iPhone è ignoto; sfondo e shell, accessibilità e prestazioni hanno rischi diversi. Costa due commit in più. | Ordine dopo C4-1 | Non si può partire dopo C4-1 senza. |
 
 ### Ordine di urgenza
 
 1. **D13:** confermata il 3 novembre 2026.
-2. **D14:** serve prima del blocco successivo a C4-1.
-3. **D3 e D4:** C4-3 è il primo blocco con codice di gioco; per D4 basta guardare il campione.
+2. **D14:** confermata il 3 novembre 2026.
+3. **D4 e D3:** confermate il 3 novembre 2026; per D4 resta il controllo su iPhone prima del codice di C4-3.
 4. **D11:** la generazione ha tempi propri e può avanzare in parallelo.
 5. **D6, D7, D8:** servono a C4-2; D7 e D8 si giudicano meglio coi numeri di C4-1b.
 6. **D9:** prima di aggiungere il primo asset pesante.
@@ -549,8 +548,9 @@ non è provato.
 ## Cosa questo piano ha e non ha verificato
 
 **Verificato:** lettura delle fonti indicate; misure della geometria con le funzioni del client (non in partita reale); tinte e accoppiamenti
-calcolati dai sorgenti; scansione statica di `style.css`; i pesi dalle evidenze di C3-7; le tre pagine di licenza alla data di questo piano.
+calcolati dai sorgenti; scansione statica di `style.css`; i pesi dalle evidenze di C3-7; le tre pagine di licenza alla data di questo piano. Dopo la stesura, per D4: campione dei font sulle viste registrate, con il codice reale della scena,
+su Edge a tre dimensioni, e copertura dei glifi di Play; Play è stato scaricato solo in una cartella temporanea e non è nel repository.
 
-**Non verificato:** nessuna partita reale, verifica Playwright o build lanciata per questo piano; nulla su iPhone; nessun font o icona scaricato,
-quindi nessun campione visivo e nessuna prova dei glifi; `viewport-fit=cover` è un'ipotesi; i contrasti non sono misurati sul disegno composto;
+**Non verificato:** nessuna partita reale, verifica Playwright o build lanciata per questo piano; nulla su iPhone, quindi nemmeno se Impact è presente su iOS; il campione dei font mostra solo il canvas, non la shell HTML; nessuna icona scaricata;
+`viewport-fit=cover` è un'ipotesi; i contrasti non sono misurati sul disegno composto;
 i tetti di D9 si reggono su stime del piano Set Base; le modifiche non committate della sessione di C4-1 non sono state eseguite.
