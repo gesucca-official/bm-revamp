@@ -12,7 +12,7 @@ successiva, D1 riaperta per C3-4: [sezione](#c3-2--revisione-dopo-la-prova-del-p
 fatto** ([sezione](#c3-4--sequenza-del-round-con-i-soli-dati-certi)), con una **revisione dopo la prova del
 proprietario** (regia D13 di ogni carta con primi piani di chi gioca e del bersaglio:
 [sezione](#c3-4--revisione-dopo-la-prova-del-proprietario)). **C3-L (scala e uso dello spazio del tavolo), blocco
-aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). **C3-5 (volto della carta ed effetti per tipo di danno, O7) è fatto** ([sezione](#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)). **C3-7 (consolidamento) è fatto, in attesa del giudizio del proprietario** ([sezione](#c3-7--consolidamento)); C3 non è chiusa. Le attività A1 e A3
+aggiunto dopo il feedback del proprietario, è fatto** ([sezione](#c3-l--scala-e-uso-dello-spazio-del-tavolo)). **C3-6 (riepilogo e «Ultimo turno» leggibili) è fatto** ([sezione](#c3-6--riepilogo-e-ultimo-turno-leggibili)). **C3-5 (volto della carta ed effetti per tipo di danno, O7) è fatto** ([sezione](#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)). **C3-7 (consolidamento) è fatto** ([sezione](#c3-7--consolidamento)) e **C3 è chiusa dal proprietario il 3 novembre 2026**, dopo la prova su desktop e iPhone. Le attività A1 e A3
 (tipo e importo del danno nel catalogo, regolamento 1.9 e 1.10) sono fatte a parte.
 
 ## C3-1 — Modello puro della risoluzione e strumento di verifica
@@ -1028,8 +1028,8 @@ parte con gli account di prova (dati locali non toccati). Test client 191, `Buil
 eseguito sul codice del client di C3-5 (`git diff 703d96b HEAD -- client-web server scripts` vuoto al momento delle verifiche); **dopo la prova
 del proprietario**, lo stesso giorno, sono entrati quattro ritocchi di presentazione al client, riverificati: [sezione](#c3-7--ritocchi-dopo-la-prova-del-proprietario).
 Come in C3-5 il jar del server è stato **ricostruito dal sorgente corrente** (`build.ps1 -Task Server -Offline`, 2 novembre 23:23) e tutte le verifiche sono state
-eseguite su quella build, su database temporanei (`server/data` non toccato). **C3-7 è fatto, in attesa del giudizio del proprietario su
-desktop e iPhone ([scheda](client-c3/c3-7/prova-scheda.md)): C3 non è chiusa (D11).**
+eseguite su quella build, su database temporanei (`server/data` non toccato). **C3-7 è fatto e C3 è chiusa dal proprietario** dopo la prova su
+desktop e iPhone ([scheda](client-c3/c3-7/prova-scheda.md), D11): vedi [Giudizio del proprietario](#c3-7--giudizio-del-proprietario).
 
 ### Esito in breve
 
@@ -1039,7 +1039,7 @@ desktop e iPhone ([scheda](client-c3/c3-7/prova-scheda.md)): C3 non è chiusa (D
 | Client | Test **191/191**, `Build` e `Size` verdi. Sul codice di C3-5: JS gzip 329960 byte, totale gzip 1113153; **dopo i ritocchi: JS gzip 330459, totale gzip 1113651**, texture 18876320 byte decodificati ([size.json](client-c3/c3-7/size.json), della build finale). |
 | Repository | `./scripts/build.ps1 -Task Test -Offline` verde (server **266**, client-debug **36**); `python scripts/check-rules.py` verde (39 carte, 1 token). |
 | Contesto Spring | `./scripts/build.ps1 -Task TestServerContext -Offline` (profilo `context-tests`): **373 test, 0 errori, `BUILD SUCCESS`**. È un esito separato dai test unitari. In più il jar impacchettato ha avviato il contesto completo a ogni verifica che lo avvia (profilo `local`, account di prova). |
-| Dispositivo fisico, iPhone, prova umana | **Non provati.** Tutte le misure sono Edge via Playwright sul PC. Il giudizio spetta al proprietario. |
+| Dispositivo fisico, iPhone, prova umana | Le misure automatiche sono Edge via Playwright sul PC, senza dispositivo fisico. La **prova umana** su desktop e iPhone è del proprietario, che l'ha dichiarata positiva: [giudizio](#c3-7--giudizio-del-proprietario). |
 
 ### Verifiche sulla build finale
 
@@ -1127,8 +1127,8 @@ provato.
 
 ### Limiti e residui
 
-- **Giudizio del proprietario su desktop e iPhone, non ancora dato.** Estetica degli impatti, scala del tavolo, ritmo e durata complessiva si
-  giudicano con la [scheda](client-c3/c3-7/prova-scheda.md). Niente di tutto questo è dimostrabile dalle verifiche automatiche.
+- **Estetica, scala del tavolo, ritmo e durata complessiva** non sono dimostrabili dalle verifiche automatiche: le ha giudicate il proprietario con la
+  [scheda](client-c3/c3-7/prova-scheda.md) ([giudizio](#c3-7--giudizio-del-proprietario)).
 - **`VerifyAim` a copertura ridotta** (sopra): mira con tocco, movimento ridotto e scelta bloccata da pending non rieseguiti sul jar nuovo.
 - **Regola 1** (resize, orientamento, ritorno dal background) e **regola 8** (pixel del tavolo) con i limiti dichiarati nella tabella.
 - **Residui già registrati, non toccati:** O19 (sequenza velocizzata), **O20 (anomalia FFA del timeout, del proprietario)**, O21 (POISON solo in
@@ -1157,3 +1157,7 @@ verdi; `VerifyResolution` su duello e FFA verde con 0 errori, **bersagli oscurat
 risultano «mancanti» perché sono di altri scenari: sono in `resolution-*.json` della cartella principale).
 
 **Da giudicare dal proprietario:** quanto scuro e quanto lungo l'oscuramento; la grandezza e la velocità dell'onda d'urto; il cuore giallo della stella sulle carte piccole.
+
+### C3-7 — Giudizio del proprietario
+
+Giudizio del proprietario (3 novembre 2026), dichiarato in chat dopo la prova su desktop e iPhone: «tutto a posto», C3-7 si può chiudere e C3 è chiusa. Ritocchi chiesti durante la prova e già nel codice: simbolo doppio tolto dalle carte piccole, bersaglio che vibra e si scurisce per ogni danno, simboli bicolori (stella del colpo, coltello, goccia), onda d'urto circolare per il colpo; un pugno, provato in due versioni, è stato scartato. **C3 chiusa.** A2 (clock più lungo) non è stato proposto: nessun segnale dai dati e nessuna richiesta dalla prova. Restano fuori da C3, assegnate: O19 (sequenza velocizzata) a C4/C5, O21 e O22 a C4 (O21 anche a C3-7, ora chiuso), O23 a C4, O20 al proprietario ([roadmap](../client-roadmap.md#osservazioni-registrate-durante-c3)). La prova umana formale del ritmo resta nella sessione finale C5.

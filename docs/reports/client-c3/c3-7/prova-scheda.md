@@ -2,8 +2,7 @@
 
 3 novembre 2026. Regolamento **1.10**. Scheda per il giudizio del proprietario su **desktop (Edge)** e **iPhone
 (Safari, landscape)** al termine di C3 (D11 del [piano C3](../../../client-c3-plan.md#decisioni-del-proprietario)).
-La parte automatica è nel [rapporto C3](../../client-c3-report.md#c3-7--consolidamento). **C3-7 è fatto, in attesa del tuo
-giudizio**: C3 si chiude solo dopo questa prova.
+La parte automatica è nel [rapporto C3](../../client-c3-report.md#c3-7--consolidamento). **C3-7 è fatto e C3 è chiusa**: il giudizio è in fondo a questa scheda.
 
 Scopo: giudicare se il round si capisce guardando il tavolo e se la sequenza è piacevole senza togliere tempo per
 scegliere. Le verifiche automatiche dicono che i dati sono giusti, non che **siano belli o leggibili**: questo lo
@@ -106,4 +105,5 @@ playtest, compresa una versione velocizzata; **Regole** un dubbio sul gioco (sol
 Data, dispositivi usati, partite giocate, difetti C3 aperti (se ce ne sono C3 resta aperta fino alla correzione e alla
 riverifica), osservazioni passate a C4/C5, decisione su A2 (clock più lungo: solo con un segnale dalla voce 14) e su C3:
 
-> _da compilare_
+> Giudizio del proprietario (3 novembre 2026), dichiarato in chat dopo la prova su desktop e iPhone: «tutto a posto», C3-7 si può chiudere e C3 è chiusa. Ritocchi chiesti durante la prova e già nel codice: simbolo doppio tolto dalle carte piccole, bersaglio che vibra e si scurisce per ogni danno, simboli bicolori (stella del colpo, coltello, goccia), onda d'urto circolare per il colpo; un pugno, provato in due versioni, è stato scartato.
+> Difetti C3 aperti: nessuno. Decisione su A2: non serve. **Decisione su C3: chiusa.**

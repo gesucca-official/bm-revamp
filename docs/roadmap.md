@@ -6,8 +6,8 @@ documentazione](README.md#stato-corrente).
 ## Roadmap attiva: client web animato
 
 La [roadmap del client web animato](client-roadmap.md) definisce le tappe
-C0–C5 verso la parità funzionale con il client debug e oltre. C0, C1 e C2 sono
-chiuse; la prossima tappa è C3. Le decisioni ancora aperte sono elencate nel
+C0–C5 verso la parità funzionale con il client debug e oltre. C0, C1, C2 e C3
+sono chiuse; la prossima tappa è C4. Le decisioni ancora aperte sono elencate nel
 piano; gli asset del debug sono esclusi dal nuovo client.
 
 I18/I20/I21/I25 e le feature differite della base conservano il significato

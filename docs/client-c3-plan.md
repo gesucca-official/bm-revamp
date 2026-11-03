@@ -2,8 +2,8 @@
 
 29 ottobre 2026. Regolamento **1.8** (1.9 dopo [A1](#attività-separate), 1.10 dopo A3), [roadmap del client](client-roadmap.md)
 versione 24. **Solo piano:** nessun codice client, nessuna modifica a regole,
-server, protocollo, catalogo o `client-debug`. C0, C1 e C2 sono chiuse; C3 parte
-su istruzione del proprietario, **un blocco alla volta**. Stato corrente
+server, protocollo, catalogo o `client-debug`. C0, C1 e C2 erano chiuse; C3 è partita
+su istruzione del proprietario, **un blocco alla volta**, ed è **chiusa dal proprietario il 3 novembre 2026**. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 **Decisioni D1–D11 confermate dal proprietario il 29 ottobre 2026**, D10 con una
@@ -17,7 +17,7 @@ modifiche di regole e catalogo (A1, A3, eventualmente A2) sono attività separat
 regolamento. **Dopo il feedback del proprietario del 30 ottobre 2026** (centro del tavolo vuoto, tutto un po'
 piccolo, personaggio proprio grande quanto gli altri) si aggiunge il blocco **C3-L** (scala e spazio del tavolo),
 fra C3-4r e C3-6, con la decisione D14; ordine dei blocchi restanti: C3-L, C3-6, C3-5, C3-7.
-**C3-6 e C3-5 fatti il 2 novembre 2026**; **C3-7 fatto il 3 novembre 2026, in attesa del giudizio del proprietario** (C3 non è chiusa).
+**C3-6 e C3-5 fatti il 2 novembre 2026**; **C3-7 fatto il 3 novembre 2026 e C3 chiusa dal proprietario** dopo la prova su desktop e iPhone (D11).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [roadmap](client-roadmap.md)
 (C3, O6, O7, «Contratti disponibili e lacune», «Decisioni ancora aperte»),
@@ -173,10 +173,10 @@ Valgono da C3-2 in poi e sono controllate a **ogni round** dalla verifica di C3-
 | C3-4s | Rifinitura delle animazioni della sequenza e difetto delle (i) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-4s--rifinitura-delle-animazioni-della-sequenza)) | C3-4, C3-L |
 | C3-6 | Riepilogo e «Ultimo turno» leggibili — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-6--riepilogo-e-ultimo-turno-leggibili)) | C3-2 |
 | C3-5 | Volto della carta ed effetti per tipo di danno, enfasi (O7) — **fatto** il 2 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)) | C3-4, A1, A3 |
-| C3-7 | Consolidamento e giudizio del proprietario — **fatto** il 3 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)), **in attesa del giudizio del proprietario** ([scheda](reports/client-c3/c3-7/prova-scheda.md)); C3 non è chiusa | tutti |
+| C3-7 | Consolidamento e giudizio del proprietario — **fatto** il 3 novembre 2026 ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)); **C3 chiusa dal proprietario** dopo la prova ([scheda](reports/client-c3/c3-7/prova-scheda.md)) | tutti |
 
 C3-3 è indipendente e può andare in qualunque punto; C3-6 può precedere C3-4. Dal 30 ottobre 2026 l'ordine
-dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 e C3-5 resta C3-7 (fatto, in attesa del giudizio). Se A1
+dei blocchi restanti era C3-L, C3-6, C3-5, C3-7 (proprietario); dopo C3-6 e C3-5 restava C3-7 (fatto, C3 chiusa). Se A1
 non è approvata o non è pronta, C3-5 ripiega sugli impatti per ruolo R07a (D2) e lo
 dichiara.
 
@@ -445,7 +445,7 @@ un collegamento solo probabile: ogni frase deve venire dal modello.
 
 ### C3-7 — Consolidamento e giudizio del proprietario
 
-**Fatto il 3 novembre 2026, in attesa del giudizio del proprietario** ([rapporto](reports/client-c3-report.md#c3-7--consolidamento), evidenze in [c3-7](reports/client-c3/c3-7/)). Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta: solo duello e FFA), test del repository e contesto Spring verdi, regole 1–9 dichiarate una per una, durate massime 19,7 s e clock fra umani 11–13 s: **nessun segnale per A2**. Righe P30, P31 e P36 aggiornate con l'evidenza. Nuova osservazione O23 (strumenti). Dopo la prova del proprietario quattro ritocchi di presentazione al client (carte piccole senza simbolo doppio, bersaglio che vibra e si scurisce per ogni danno, stella, coltello e goccia bicolori, onda d'urto circolare per il colpo), riverificati: [rapporto](reports/client-c3-report.md#c3-7--ritocchi-dopo-la-prova-del-proprietario). **Restano:** il giudizio del proprietario con la [scheda](reports/client-c3/c3-7/prova-scheda.md) (desktop e iPhone) e l'eventuale correzione di difetti C3 che ne emergessero; «C3 chiusa» si scrive solo dopo di esso (D11).
+**Fatto il 3 novembre 2026; C3 chiusa dal proprietario il 3 novembre 2026** ([rapporto](reports/client-c3-report.md#c3-7--consolidamento), evidenze in [c3-7](reports/client-c3/c3-7/)). Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta: solo duello e FFA), test del repository e contesto Spring verdi, regole 1–9 dichiarate una per una, durate massime 19,7 s e clock fra umani 11–13 s: **nessun segnale per A2**. Righe P30, P31 e P36 aggiornate con l'evidenza. Nuova osservazione O23 (strumenti). Dopo la prova del proprietario quattro ritocchi di presentazione al client (carte piccole senza simbolo doppio, bersaglio che vibra e si scurisce per ogni danno, stella, coltello e goccia bicolori, onda d'urto circolare per il colpo), riverificati: [rapporto](reports/client-c3-report.md#c3-7--ritocchi-dopo-la-prova-del-proprietario). **Esito del giudizio (3 novembre 2026):** il proprietario, dopo la prova su desktop e iPhone, giudica tutto a posto e chiude C3-7 e C3 (D11); durante la prova ha chiesto quattro ritocchi di presentazione, già nel codice e riverificati ([rapporto](reports/client-c3-report.md#c3-7--ritocchi-dopo-la-prova-del-proprietario)). A2 non è stato né proposto né fatto. Le osservazioni O19–O23 restano a C4, C5 o al proprietario.
 
 **Perimetro.** Nessuna funzione nuova salvo correzioni di blocchi emersi.
 Esecuzione consolidata di tutte le verifiche a 1366×768 e 844×390, `Size`, verifiche
@@ -542,7 +542,7 @@ la prova di C3-2; D13 e D10 a 20 s dopo la prova di C3-4 (30 ottobre 2026).
 | D12 | Avanzamento fra le carte (dopo la prova di C3-2) | automatico, un tocco passa alla carta successiva / manuale solo contro computer / manuale sempre | **Automatico, un tocco accelera** — scelta del proprietario il 29 ottobre 2026. Una carta per volta, più lenta, entro D10; un tocco o tasto sul tavolo passa alla carta successiva, scegliere una carta della mano chiude la sequenza, «Salta effetti» chiude; regola 4 invariata nella sostanza (nessun blocco, nessun Continue). |
 | D13 | Regia di ogni carta (dopo la prova di C3-4) | — (decisione del proprietario) | **Ordine fisso per ogni carta, sempre, duello contro computer compreso:** costo (chi muove paga gettoni ed eventuale scarto prima di tutto) → primo piano di chi gioca (personaggio ingrandito in una parte libera del tavolo, con accanto la carta, circa un secondo) → ritorno al posto → volo e impatto come prima → primo piano del bersaglio (un po' più grande, circa mezzo secondo) → variazioni di quella carta. Il tocco o tasto sul tavolo passa al passo successivo (D12), una carta della mano e «Salta effetti» chiudono, nessun blocco di invio né del clock. Decisa dal proprietario il 30 ottobre 2026. Il costo di ogni carta si mostra prima di lei, mentre il server paga tutti i costi prima degli effetti (R04): presentazione, non regola; i passi conservano la variazione e finiscono sulla vista. **Osservazione per dopo (C4/C5), non fatta:** una versione velocizzata della sequenza, attivabile dall'utente. |
 | D14 (C3-L) | Scala e uso del centro del tavolo | (a) centro: mazzo e scarti / turno e clock / nulla; (b) fattori B1 prudente / B2 marcato / B3 massimo; (c) priorità quando lo spazio non basta | Scelte del proprietario del 30 ottobre 2026: **B2** (personaggio proprio ×1,5, altri ×1,2, oggetti ×1, risorse ×1,25) con priorità **personaggio proprio, risorse, altri, oggetti** (cedono prima gli oggetti); al centro prima **mazzo e scarti propri**, poi, **cambiato in corsa dal proprietario** durante il blocco: al centro le **carte giocate nell'ultimo round**, impilate in ordine di risoluzione (le prime sotto) **a cascata leggera** con l'autore accanto, e **mazzo e scarti propri piccoli accanto al proprio posto** (ogni giocatore ha la sua pila degli scarti: oggi non è rilevante distinguerli, potrà esserlo con il set base). 750×292 solo registrato, per C4. |
-| D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. Confermata. |
+| D11 | Chiusura | giudizio del proprietario su desktop e iPhone, prova formale in C5 / nuova prova umana in C3 | **Giudizio del proprietario**, come C2a; la prova del ritmo resta in C5. Confermata.**Giudizio dato il 3 novembre 2026:** C3 chiusa. |
 
 ## Cosa non è in C3
 

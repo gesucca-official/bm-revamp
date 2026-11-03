@@ -1,8 +1,6 @@
 # Roadmap del client web animato
 
-**2 novembre 2026 — versione 34. C0, C1 e C2 sono chiuse; C3 è in corso nel
-[piano C3](client-c3-plan.md): C3-1, C3-2 e C3-4 (ciascuno con la revisione dopo la prova del
-proprietario, C3-4 anche con la rifinitura C3-4s), C3-3, C3-L, C3-6 e C3-5 sono fatti.** Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**3 novembre 2026 — versione 36. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4.** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -546,6 +544,8 @@ con l'autore accanto; dopo l'impatto le carte della sequenza vi si posano. Mazzo
 al proprio posto. Verificato su partite reali a 1366×768 e 844×390 (`VerifyLayout`); 750×292 non entra, come prima,
 e passa a C4 ([rapporto C3](reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)).
 
+**C3-7 fatto e C3 chiusa dal proprietario (3 novembre 2026):** consolidamento di tutte le verifiche a 1366×768 e 844×390 sulla stessa build, regole di non regressione 1–9 dichiarate, durate fino a 19,7 s e clock tra umani almeno 11 s (nessun segnale per A2); giudizio del proprietario su desktop e iPhone positivo, con quattro ritocchi di presentazione chiesti durante la prova ([rapporto C3](reports/client-c3-report.md#c3-7--consolidamento)). Le osservazioni O19–O23 passano a C4, C5 o al proprietario.
+
 **Attività:** affinare selezione/bersagli, costo, carta confermata, annullamento,
 variazioni risorse, trasferimento/consumo oggetti, scarto/pesca osservabili,
 fine turno ed esito. Usare i report disponibili come spiegazione testuale;
@@ -732,18 +732,12 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   decidere come trattare in un'attività distinta il limite umano senza mosse,
   se le prove ne mostrano frequenza incompatibile con i playtest.
 
-**Prossimo passo:** il **giudizio del proprietario** su desktop (Edge) e iPhone (Safari, landscape) con la
-[scheda](reports/client-c3/c3-7/prova-scheda.md); **C3 non è chiusa** finché non lo dà (D11).
-C3-1, C3-2, C3-3, C3-4, C3-L, C3-4s, C3-6, C3-5 e C3-7 sono fatti (le scritte «Scegli…» sono state spostate in basso a sinistra con un alone di richiamo, [rapporto](reports/client-c3-report.md#c3-3--scritte-di-scelta)); le attività A1 e A3 (tipo e importo del
-danno nel catalogo, dal regolamento) hanno preceduto C3-5. Poi C4 (rifinitura
-di art, audio, layout e prestazioni) e C5 (playtest finali). O15 e O16
-(riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in
-un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo:
-attività separate, da aprire dal regolamento.
+**Prossimo passo:** C4, rifinitura di art, audio, layout e prestazioni, poi C5 (playtest finali, con la prova umana del ritmo e la decisione sulla sequenza velocizzata O19). C3 è chiusa ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)); le attività A1 e A3 (tipo e importo del danno nel catalogo, dal regolamento) l'hanno preceduta. O15 e O16 (riepilogo del mazzo e deckbuilder più funzionale) vanno insieme in un'attività successiva dedicata; O17 e O18 cambiano regole e protocollo: attività separate, da aprire dal regolamento; O20 resta da valutare a parte dal proprietario.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 36 — 3 novembre 2026, chiusura di C3:** il proprietario, dopo la prova su desktop e iPhone, chiude C3-7 e con esso C3. Seguono tre ritocchi di presentazione già nel codice (onda d'urto circolare per il colpo al posto delle righe, stella e coltello bicolori al posto del pugno scartato). Pulizia della documentazione: indice, piano, rapporto e righe P allineati, intestazioni e «prossima tappa» portate a C4. Nessuna regola, API o servizio cambiato ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).
 - **Versione 35 — 3 novembre 2026, C3-7:** consolidamento. Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta), test del repository, `check-rules.py` e contesto Spring verdi; regole di non regressione 1–9 dichiarate; durate fino a 19,7 s e clock fra umani 11–13 s, nessun segnale per A2; righe P30, P31, P36 aggiornate; scheda di prova per il proprietario; O23 registrata. Nessuna regola, API o servizio cambiato; al client quattro ritocchi di presentazione dopo la prova del proprietario (simbolo doppio tolto dalle carte piccole, bersaglio che vibra e si scurisce per ogni danno, stella, coltello e goccia bicolori, onda d'urto circolare per il colpo). **C3 non è chiusa:** attende il giudizio del proprietario ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).
 - **Versione 34 — 2 novembre 2026, C3-5:** volto della carta con tipo e importo nominale del danno (simboli) e senza priorità, che resta
   nell'ispezione; impatti per tipo di danno o per ruolo, enfasi per annullamento, eliminazione ed esito; movimento ridotto senza scosse; residuo

@@ -82,6 +82,6 @@ nuovi permessi di utilizzo con questa pulizia.
 La roadmap della base è [archiviata come completata](docs/roadmap.md).
 La [roadmap del client web animato](docs/client-roadmap.md) pianifica la parità
 funzionale con il debug, dalla prima partita completa alla rifinitura visiva,
-come base per futuri client desktop e mobile. C0, C1 e C2 sono chiuse; la
-prossima tappa è C3. Stato corrente e classificazione dei documenti:
+come base per futuri client desktop e mobile. C0, C1, C2 e C3 sono chiuse; la
+prossima tappa è C4. Stato corrente e classificazione dei documenti:
 [indice della documentazione](docs/README.md#stato-corrente).
