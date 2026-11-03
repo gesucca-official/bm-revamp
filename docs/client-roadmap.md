@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**3 novembre 2026 — versione 37. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4 ([piano C4](client-c4-plan.md), decisioni da prendere).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**3 novembre 2026 — versione 38. C0, C1, C2 e C3 sono chiuse; la prossima tappa è C4 ([piano C4](client-c4-plan.md), decisioni da prendere).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -365,7 +365,9 @@ Desktop 1366×768 e landscape emulato 844×390 sono verificati; su iPhone 16 Pro
 Safari lascia 750×292 CSS px, giudicati sufficienti dal proprietario. **Decisione:
 landscape obbligatorio**; in portrait resta la richiesta di rotazione, senza
 layout verticale. Un futuro contenitore a schermo intero recupererà lo spazio
-della barra del browser; il touch web non è un'app nativa.
+della barra del browser; il touch web non è un'app nativa. **Dal 3 novembre 2026
+(D6 del [piano C4](client-c4-plan.md#decisioni-del-proprietario)):** il minimo garantito è 844×390; 750×292 resta
+protetta da regressioni, senza essere un obiettivo. Il supporto vero al telefono è dell'app futura (Q16).
 
 **Stato del gate C0:**
 
@@ -576,7 +578,7 @@ anticipate in C2 con O13.
 schermate e controlli utilizzabili anche senza hover.
 
 **Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
-decisioni D1–D14, ancora da prendere, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
+decisioni D1–D14, in parte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
 
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder
@@ -588,13 +590,14 @@ possono essere sobri, ma devono restare completi e leggibili.
 
 **Completamento verificabile:** nessun asset casuale precedente nel nuovo
 client; ogni file esterno ha provenienza/licenza. Proposta iniziale di misura:
-desktop 1366×768 e touch landscape circa 844×390 CSS pixel, minimo reale
-750×292 su iPhone 16 Pro/Safari; landscape obbligatorio deciso in C0, con
-richiesta di rotazione in portrait.
+desktop 1366×768 e touch landscape circa 844×390 CSS pixel come minimo garantito; 750×292
+su iPhone 16 Pro/Safari non peggiora, senza essere un obiettivo (D6 del piano C4); landscape
+obbligatorio deciso in C0, con richiesta di rotazione in portrait.
 Nessuna azione essenziale dipende dal drag; target principali di almeno 44 CSS
-pixel e testo carta completo consultabile. Sul dispositivo campione puntare
-a 60 fps nelle transizioni comuni, verificando le soglie di frame/input e il
-budget di download stabiliti in C0 su round normale e FFA, a parità completa.
+pixel e testo carta completo consultabile. Su desktop puntare
+a 60 fps nelle transizioni comuni, verificando il criterio di C3-L e il
+budget di download stabilito in C0 su round normale e FFA, a parità completa.
+La cattura fisica su iPhone non è più richiesta in C4.
 Distinguere ritardo rete; se il budget non regge, ridurre decorazioni prima di
 rivalutare il renderer secondo gli stessi criteri C0, senza una nuova campagna
 di confronti tecnologici.
@@ -605,8 +608,9 @@ O14 (cornice per tipologia e segno del ruolo nella stessa grafica), O10
 (simboli per costi, priorità e risorse sulle carte), finitura di O12 su
 desktop e touch. Sostituiscono anche le illustrazioni provvisorie di O9 dove
 serve.
-Da C3-L: a 750×292 (minimo iPhone) il tavolo non entra (la mano compatta occupa 166 px di 292;
-in FFA un posto esce dallo schermo), già prima di C3-L: adattare mano e FFA all'altezza minima; un test in unità
+Da C3-L: a 750×292 (iPhone in Safari) il tavolo non entra (la mano compatta occupa 166 px di 292;
+in FFA un posto esce dallo schermo), già prima di C3-L. In C4 non si colma: quella misura non deve peggiorare e un
+miglioramento economico si fa; l'adattamento completo passa all'app futura. Un test in unità
 segnala quando la disposizione entra.
 
 ### C5 Consegnare il client web per i playtest
@@ -629,7 +633,8 @@ da checkout con cache predisposte, esiti e rientro ripetibili.
 circa un'ora; un duello, una FFA e passaggi mirati su editor/touch. Ciascuno
 deve riconoscere costo, bersaglio, scarto, accettazione ed esito senza aprire
 diagnostica; almeno tre su quattro devono spiegare correttamente l'ultimo
-round osservato e valutare chiarezza e reattività almeno 4/5. È una soglia
+round osservato e valutare chiarezza e reattività almeno 4/5. I passaggi touch si fanno
+da almeno 844×390; su iPhone in Safari la FFA ha un limite dichiarato (D6 del piano C4). È una soglia
 pratica di accettazione, non una misura statistica. Un solo passaggio di
 correzione e controllo mirato; ripetere una sessione completa solo se restano
 problemi che impediscono o falsano il gioco.
@@ -682,7 +687,7 @@ modifica a regole, server o catalogo è già decisa.
 | O19 | Prova C3-4: oltre alla sequenza una carta per volta (D12, D13) serve una **versione velocizzata, attivabile dall'utente**. | C5 | Impostazione dell'utente, non un default. Deve conservare le regole 1–9 del piano C3: stato finale uguale alla vista del server, nessun blocco di invio né del clock di 30 s, movimento ridotto che mantiene le informazioni. Decidere dopo la prova umana del ritmo in C5, con le durate misurate in C3 (due mosse 7,1–10,4 s; FFA a cinque mosse 15,9–19,7 s; tetto 20 s di D10/D13). |
 | O20 | Prova FFA: dopo il forfait per tempo dei due umani, i computer hanno combattuto altri **25 round**; l'esito riporta `outcomeReason: timeout` con un **computer vincitore**. | **Da valutare a parte** dal proprietario prima di C3-7; non riguarda il client | Nessuna conclusione: va letto contro R06 («Clock, forfait e disconnessione», regolamento 1.5, in particolare i forfait simultanei in FFA) per decidere se è comportamento voluto o anomalia. Se è anomalia che cambia l'esito osservabile, prima registrare comportamento precedente, motivazione, effetto e test ([domande aperte](open-questions.md)); se cambia regole, prima `docs/game-rules.md` con versione e motivazione. Diverso da `VerifyFfa` `otherMoveTimeout`, dove un solo umano va in forfait e gli altri proseguono (R06). |
 | O21 | Residui dichiarati da C3-5 e C3-6. | C3-7 e C4 | **POISON:** simbolo e impatto provati solo in unità, nessuna carta lo usa. **ExtremelyViolentBlow (`HIT 20+x`)**: la V reale sul volto della carta in mano non è stata vista nelle partite, solo il «20+» del catalogo. **Carte piccole del round (36–40 px):** solo il simbolo del danno, l'importo è nell'ispezione. **Movimento ridotto:** il segno del tipo di danno resta sul volto ma non c'è impatto sul bersaglio; se lo si vuole statico, da decidere. **Controllo delle scritte a 844×390 in FFA:** il guasto di C3-6 non si è riprodotto; il controllo ora misura fino all'inizio della sfumatura (soglia `LABEL.read` − 50 ms invariata, approvato il 2 novembre 2026), e le scritte registrano `end` e `gap` per spiegarlo se ricapita. |
-| O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 | Adattare mano e FFA all'altezza minima (vedi C4); un test in unità segnala quando la disposizione entra. Aggiunta qui per non perderla. |
+| O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 per la non regressione, app futura per l'adattamento | Decisione del proprietario del 3 novembre 2026 (D6 del piano C4): 750×292 non peggiora e un miglioramento economico si fa, ma non è un obiettivo di C4. Un test in unità segnala quando la disposizione entra. |
 | O23 | C3-7: il consolidamento completo costa circa due ore e mezza (`VerifyResolution` circa 35 minuti per misura); `Verify` e `VerifyModes` non avviano il server mentre le altre verifiche sì, e due verifiche insieme collidono sugli account. | C4 | Solo strumenti, nessun effetto sul gioco: un lancio unico che serializzi le verifiche, avvii il server una volta, scelga la build e conservi solo le esecuzioni finali; `BM_SCENARIOS` ridotti per i controlli rapidi. Nessuna soglia da rilassare. |
 
 ## Verifiche proporzionate
@@ -713,7 +718,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
   e C1; gli asset precedenti restano esclusi. Resta da giudicare il risultato
   interattivo, senza riaprire automaticamente il confronto artistico.
 - **Dispositivi:** PC Windows/Edge e iPhone 16 Pro/Safari come touch campione
-  registrato. Landscape obbligatorio; 750×292 reali in Safari accettati.
+  registrato. Landscape obbligatorio; 750×292 reali in Safari accettati. Da C4 (D6) le misure
+  garantite sono 1366×768 e 844×390; l'iPhone è una prova facoltativa e 750×292 non deve peggiorare.
 - **Stack:** PixiJS/TypeScript e React/HTML/Vite confermati a gate C0 chiuso.
   Porting e parità applicativa rimangono attività C1–C2.
 - **Conferma e riordino:** check dopo drop e tastiera accettati; scambio
@@ -740,6 +746,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 38 — 3 novembre 2026, priorità dell'iPhone (D6 del [piano C4](client-c4-plan.md#decisioni-del-proprietario)):** su indicazione del proprietario, il supporto vero al telefono è dell'app futura. Il minimo garantito è 844×390; 750×292 è protetta da una regola di non regressione e un miglioramento economico si fa. O22 cambia destinazione; cattura fisica e soglie su iPhone non sono più richieste in C4. Nessuna regola, API o servizio cambiato.
 - **Versione 37 — 3 novembre 2026, piano C4:** [piano C4](client-c4-plan.md) con blocchi, regole di non regressione e decisioni D1–D14 proposte, non ancora prese. O19 passa a C5 su indicazione del proprietario. Nessuna regola, API o servizio cambiato.
 - **Versione 36 — 3 novembre 2026, chiusura di C3:** il proprietario, dopo la prova su desktop e iPhone, chiude C3-7 e con esso C3. Seguono tre ritocchi di presentazione già nel codice (onda d'urto circolare per il colpo al posto delle righe, stella e coltello bicolori al posto del pugno scartato). Pulizia della documentazione: indice, piano, rapporto e righe P allineati, intestazioni e «prossima tappa» portate a C4. Nessuna regola, API o servizio cambiato ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).
 - **Versione 35 — 3 novembre 2026, C3-7:** consolidamento. Tutte le verifiche di `client-web` verdi a 1366×768 e 844×390 sul jar ricostruito dal sorgente (`VerifyAim` a copertura ridotta), test del repository, `check-rules.py` e contesto Spring verdi; regole di non regressione 1–9 dichiarate; durate fino a 19,7 s e clock fra umani 11–13 s, nessun segnale per A2; righe P30, P31, P36 aggiornate; scheda di prova per il proprietario; O23 registrata. Nessuna regola, API o servizio cambiato; al client quattro ritocchi di presentazione dopo la prova del proprietario (simbolo doppio tolto dalle carte piccole, bersaglio che vibra e si scurisce per ogni danno, stella, coltello e goccia bicolori, onda d'urto circolare per il colpo). **C3 non è chiusa:** attende il giudizio del proprietario ([rapporto](reports/client-c3-report.md#c3-7--consolidamento)).

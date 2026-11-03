@@ -1,10 +1,10 @@
 # Piano C4 — Rifinire grafica e uso su schermi diversi
 
-3 novembre 2026. Regolamento **1.10**, [roadmap del client](client-roadmap.md) versione 37, HEAD di partenza
+3 novembre 2026. Regolamento **1.10**, [roadmap del client](client-roadmap.md) versione 38, HEAD di partenza
 `a807aa0`. **Solo piano:** nessun codice client, nessuna modifica a regole, server, protocollo, catalogo o
 `client-debug`. C0, C1, C2 e C3 sono chiuse. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
-**D3, D4, D6, D11, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
+**D3, D4, D6, D11, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; D7 e D10 non servono più dopo la revisione di D6; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
 proprietario. Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
 **Stato di C4-1 alla stesura.** Una sessione separata sta già lavorando a C4-1 nello stesso checkout: modifiche **non
@@ -33,8 +33,10 @@ Valgono per **ogni** blocco, come in C3:
   opzioni, scelta del proprietario, implementazione, come ha funzionato C3-L. Le prove di C3 hanno portato revisioni in quasi
   tutti i blocchi visibili (C3-2, C3-4, C3-L, C3-7): è previsto che accada anche qui, e una revisione è un commit proprio.
 - **Partite reali** sul server locale, su database temporaneo, guidate da Edge/Playwright. Misure ufficiali: **1366×768 e
-  844×390**, più **750×292** da C4-2, confermata da D6. Scene sintetiche e fixture valgono per i test unitari, non come
-  partita reale. Edge sul PC non sostituisce l'iPhone.
+  844×390**. Scene sintetiche e fixture valgono per i test unitari, non come partita reale.
+- **iPhone e 750×292: bene se funziona, senza diventare un obiettivo** ([D6](#decisioni-del-proprietario)). Il client web serve soprattutto a provare il gioco;
+  il supporto vero al telefono arriverà con l'app ([Q16](open-questions.md)). Il lavoro già fatto non si perde: 750×292 è protetta dalla regola 18 e un
+  miglioramento economico si fa, ma nessun blocco si apre o si allunga per quella misura. Edge sul PC non sostituisce l'iPhone: ciò che non è provato si dichiara.
 - Verifiche: `./client-web/run.ps1 -Task Test`, `Build`, `Size`, quelle del blocco
   ([matrice](#verifiche-da-rieseguire-per-blocco)) e quelle di AGENTS: `./scripts/build.ps1 -Task Test -Offline` e
   `python scripts/check-rules.py`. Il contesto Spring ha una verifica separata, eseguita in C4-9.
@@ -51,7 +53,7 @@ Valgono per **ogni** blocco, come in C3:
 | Voce | Cosa resta da fare | Blocco |
 |---|---|---|
 | [O23](client-roadmap.md#osservazioni-registrate-durante-c3) | Lancio unico delle verifiche, soglie invariate | C4-1 |
-| [O22](client-roadmap.md#osservazioni-registrate-durante-c3) | Mano e FFA all'altezza minima | C4-2 |
+| [O22](client-roadmap.md#osservazioni-registrate-durante-c3) | Solo non regressione e miglioramenti economici a 750×292; l'adattamento completo passa all'app futura (D6) | C4-1b, C4-2, C4-9 |
 | [O12](client-roadmap.md#osservazioni-del-proprietario-dopo-c1), finitura | Dimensioni su desktop e touch, bersagli da 44 px, carte piccole del round | C4-2 |
 | [O10](client-roadmap.md#osservazioni-del-proprietario-dopo-c1) | Simboli al posto delle lettere rimaste, famiglia coerente; la priorità è già fuori dal volto ([C3-5](client-c3-plan.md#c3-5--volto-della-carta-ed-effetti-per-tipo-di-danno-o7)) | C4-3 |
 | [O8 con O14](client-roadmap.md#osservazioni-del-proprietario-dopo-c1) | Cornice per tipologia e segno del ruolo nella stessa grafica | C4-4 |
@@ -61,7 +63,7 @@ Valgono per **ogni** blocco, come in C3:
 | Suoni | **Opzionale**, D2: con volume e muto, mai necessari al gioco | C4-7 |
 | Accessibilità | Focus visibile, contrasto, movimento ridotto, tastiera, zoom del testo | C4-8a |
 | [O21](client-roadmap.md#osservazioni-registrate-durante-c3) | Residui di C3-5 e C3-6 (tabella sotto) | C4-2, C4-8a, D5 |
-| Prestazioni | 60 fps come obiettivo, soglie C0, budget di download, ridisegno incrementale (riserva C0), misura fisica a parità completa | C4-1b, C4-8b |
+| Prestazioni | 60 fps come obiettivo su desktop, budget di download, ridisegno incrementale (riserva C0) solo se serve | C4-1b, C4-8b |
 
 **O21, voce per voce:**
 
@@ -83,6 +85,7 @@ Valgono per **ogni** blocco, come in C3:
 - **O15, O16 (deckbuilder)** nell'attività successiva dedicata; **O17, O18** dal regolamento. C4-5b rende l'editor coerente, non
   lo riprogetta.
 - **Illustrazioni finali del set:** [SB-32](set-base-plan.md#sb-32--illustrazioni-del-set) (decisione D24 del piano Set Base).
+- **Adattamento completo a 750×292 (O22) e cattura fisica su iPhone:** all'app futura, secondo D6.
 - **Prova umana C, `window.__bm`, guida di avvio:** C5. Nessun deploy, PWA, app nativa, 3D o sfondo video.
 - **Regole, server, protocollo, catalogo, `client-debug`:** nessuna modifica. Se un blocco scopre di averne bisogno si ferma e
   si riparte dal regolamento, come prescrive AGENTS.
@@ -94,8 +97,8 @@ le funzioni del client, senza partite reali: serve a dimensionare, non è un'evi
 
 | Tema | Stato verificato | Conseguenza |
 |---|---|---|
-| Altezza minima | Sotto 550 px le dimensioni compatte sono fisse: mano 120×166, cioè il 57% di 292 px. Sonda con `tableLayout` e `layoutProblems`, 0–3 oggetti per posto: **larghezza 750, nessun problema da 384 px in duello e da 417 px in FFA**; larghezza 844, da 384 e da **389 px** (a 844×390 la FFA entra con 1 px di margine). A 750×292: 5–6 problemi in duello, 11–14 in FFA (posti sovrapposti, un posto sopra la mano, nessun posto per le carte del round e per i primi piani, frecce). | Mancano circa **92 px di altezza in duello e 125 in FFA**. Non basta rimpicciolire la mano: va deciso cosa cede (D7). |
-| Spazio su iPhone | `index.html` non ha `viewport-fit=cover`. 750×292 è ciò che Safari lascia su iPhone 16 Pro. | **Ipotesi da provare sull'iPhone:** potrebbe recuperare larghezza nelle aree laterali, non altezza. Non cambia la conclusione sopra. |
+| Altezza minima | Sotto 550 px le dimensioni compatte sono fisse: mano 120×166, cioè il 57% di 292 px. Sonda con `tableLayout` e `layoutProblems`, 0–3 oggetti per posto: **larghezza 750, nessun problema da 384 px in duello e da 417 px in FFA**; larghezza 844, da 384 e da **389 px** (a 844×390 la FFA entra con 1 px di margine). A 750×292: 5–6 problemi in duello, 11–14 in FFA (posti sovrapposti, un posto sopra la mano, nessun posto per le carte del round e per i primi piani, frecce). | Mancano circa **92 px di altezza in duello e 125 in FFA**, e non basta rimpicciolire la mano. Con D6 non si colmano in C4: questi numeri diventano la base della regola 18. Le dimensioni compatte valgono sotto i 550 px, quindi anche a 844×390: restano in uso e verificate. |
+| Spazio su iPhone | `index.html` non ha `viewport-fit=cover`. 750×292 è ciò che Safari lascia su iPhone 16 Pro. | **Ipotesi non provata:** potrebbe recuperare larghezza nelle aree laterali, non altezza. Da provare solo se costa poco; non cambia la conclusione sopra. |
 | Sfondo | `scene.ts` **stira** `table.webp` (1672×941, rapporto 1,78) sull'intero schermo: a 844×390 l'altezza è schiacciata a circa l'82%, a 750×292 a circa il 69%. | O2 non è solo rigenerare le sedie: sedute e tavolo si deformano al variare del formato. C4-5a deve scegliere fra ritaglio e zone sicure. |
 | Cornici | Un solo `frame()` per tutte le carte; la tipologia è solo testo (`subtype`) e il token risulta «OGGETTO». Il token non ha un campo nel wire: si riconosce da `bindingName` (`com.tokens.…`). Catalogo e volto delle carte sono disegnati **due volte**: Pixi (`scene.ts`) e HTML (`ui.tsx`, `collection.tsx`, `style.css`). | C4-4 tocca due disegni e deve avere un ripiego per i nomi sconosciuti, perché il Set Base «rispetta» le decisioni di C4. |
 | Simboli | Quindici simboli **già disegnati nel progetto** in `glyph` (5 risorse, 3 danni, 7 ruoli); quelli del danno sono stati rifiniti e approvati nella prova di C3-7. **Lettere rimaste:** monete del costo (`scene.ts`, `LETTER`), guadagni (`gainText`), gettoni di immunità (`chipsOf`). | Il residuo reale di O10 è piccolo; pesa su D3. |
@@ -104,7 +107,7 @@ le funzioni del client, senza partite reali: serve a dimensionare, non è un'evi
 | Controlli sotto 44 px | Scansione statica di `style.css`, da confermare sul DOM: `.presence button.link` 32 e 36, `.public button.link` 32, `.server-text summary` 36, `.slot summary` 36 e 40, `button.back` 40. La (i) è 28 px con 10 px di area invisibile per lato: 48 px. Gettoni di stato nel tavolo: 31×18 a 844×390, 41×24 in FFA a 1366×768 ([C3-L](reports/client-c3-report.md#misure-dopo-c3-l-partite-reali)). | Lista di partenza di C4-2 e C4-5b; D8 per i gettoni. |
 | Contrasto | Calcolo su tinte piene, indicativo: testo su carta 10,7:1; timbri di ruolo 5,8–9,4:1. Da controllare sul disegno reale: colori delle risorse su `#38271f` (HEALTH 2,1:1, ALERTNESS e VIOLENCE 3,1–3,2:1) e su carta (ALCOHOL 2,0:1, TOXICITY 2,4:1), focus `#6eafaf` su carta 1,8:1. | Nessun difetto dichiarato: C4-8a misura sul disegno reale. |
 | Peso | JS gzip 330459 byte su 512000; totale gzip 1113651 su 4194304; texture decodificate 18,9 MB su 64 MB ([size.json](reports/client-c3/c3-7/size.json)). Atlante con 7 riquadri liberi su 48. `size.mjs` legge le dimensioni solo delle WebP. | C'è margine, ma va diviso col Set Base (D9). Altri formati raster non verrebbero contati nelle texture: da correggere prima di usarli. |
-| Misura fisica | L'ultima cattura su iPhone è **C0, su scena sintetica**: frame p95 19 ms, input 116 ms contro 100, deroga accettata; costo principale il ricostruire tutto il tavolo a ogni tocco. Da allora, in C3 si è aggiunta tutta la sequenza. `client-web` **non ha** lo strumento di cattura (`physical-probe.js` è in `client-c0/revision/tools`) e `npm run measure` punta a un `tools/measure.mjs` che non esiste. Le misure in Edge girano a 120 Hz senza vincoli reali. | Lo stato su iPhone è **ignoto**. Va misurato prima di aggiungere grafica: blocco nuovo C4-1b. |
+| Misura fisica | L'ultima cattura su iPhone è **C0, su scena sintetica**: frame p95 19 ms, input 116 ms contro 100, deroga accettata; costo principale il ricostruire tutto il tavolo a ogni tocco. Da allora, in C3 si è aggiunta tutta la sequenza. `client-web` **non ha** lo strumento di cattura (`physical-probe.js` è in `client-c0/revision/tools`) e `npm run measure` punta a un `tools/measure.mjs` che non esiste. Le misure in Edge girano a 120 Hz senza vincoli reali. | Lo stato su iPhone è **ignoto** e, secondo D6, non si misura in C4: lo strumento di C0 resta dov'è, disponibile per l'app futura. Su iPhone vale la prova facoltativa del proprietario. |
 | Debito di C3 | Dopo i ritocchi di C3-7 **non sono state rieseguite** `Verify`, `VerifyModes`, `VerifyLifecycle`, `VerifyFfa`, `VerifyPublic`, `VerifyProfile`, `VerifyResolution` completa e `VerifyAim` (che già non aveva `touch`, `reduced`, `pending`). Il [rapporto](reports/client-c3-report.md#verifiche-sulla-build-finale-2) diceva di ripeterle a un commit di chiusura; la chiusura ha cambiato solo documenti. | Il primo giro completo di C4-1b salda il debito: è la base di confronto. |
 | Evidenze | `docs/reports/client-c3` traccia **1880 file per 223 MB**, di cui 48 MB la sola C3-7. | Da non ripetere (D13). |
 | Licenze, consultate oggi | [Game-icons](https://game-icons.net/about.html): CC BY 3.0, autore da citare. [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds): CC0, 100 file, versione 1.0 del 2020, formato non indicato. [Play](https://raw.githubusercontent.com/google/fonts/main/ofl/play/OFL.txt): OFL 1.1, © 2011 Jonas Hecksher, Playtypes, e-types AS, **nomi riservati Play, Playtype, Playtype Sans**. Kenney UI Pack e Lucide non ricontrollati: non sono previsti. | Un sottoinsieme o una conversione di Play può contare come versione modificata e chiedere un altro nome: da chiarire con le FAQ della OFL prima di includerlo. Ogni pagina si ricontrolla all'inclusione. |
@@ -128,6 +131,7 @@ stesso turno non tocca la sequenza; la sequenza non si ferma alla prima eliminaz
 | 15 | **Nessuna dipendenza remota in partita:** niente CDN, font remoti o tracciamenti. | Durante le verifiche, nessuna richiesta verso un'origine diversa dalla pagina. |
 | 16 | **Nessuna funzione tolta per fare spazio o per la grafica:** righe P01–P44 invariate; nessuna soglia rilassata e nessun atteso cambiato per accettare una regressione (AGENTS). Un atteso cambia solo per una decisione registrata del proprietario. | Diff degli attesi citato nel rapporto; giro completo in C4-9. |
 | 17 | **Le misure già valide non peggiorano:** a 1366×768 e 844×390 i fattori e le dimensioni di C3-L restano o crescono, salvo decisione. | Test sui fattori ottenuti; `VerifyLayout`. |
+| 18 | **750×292 non peggiora:** ciò che a quella misura funziona alla base di C4-1b continua a funzionare, e il codice compatto non si toglie. | Test che fissa il numero di `layoutProblems` della base, che può solo scendere; a C4-2 e C4-9, `Verify`, `VerifyFfa`, `VerifyAim` e `VerifyLayout` a 750×292: passa ciò che passava alla base. Non è un obiettivo di adattamento e non chiede prove su iPhone. |
 
 ## Blocchi
 
@@ -136,14 +140,14 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | Blocco | Contenuto | Dipende da | Modello, sforzo | Perché |
 |---|---|---|---|---|
 | C4-1 | Strumenti di verifica (O23) | — | Sonnet, alto | Ben delimitato, ma un controllo indebolito senza accorgersene sarebbe costoso |
-| C4-1b | Misura di partenza: giro completo, cattura su iPhone, 750×292 | C4-1 | Sonnet, medio | Porting e misura; il giudizio è sui numeri |
-| C4-3 | Simboli, font, inventario e crediti | C4-1b, D3, D4 | Sonnet, alto | Licenze da leggere bene; resa di Impact su iPhone da controllare |
-| C4-2 | Layout all'altezza minima e finitura delle dimensioni | C4-3, D6, D7, D8 | Opus, alto | Geometria vincolata e compromessi: è il blocco più difficile |
+| C4-1b | Misura di partenza: giro completo e base a 750×292 | C4-1 | Sonnet, medio | Misura; il giudizio è sui numeri |
+| C4-3 | Simboli, font, inventario e crediti | C4-1b, D3, D4 | Sonnet, alto | Licenze da leggere bene |
+| C4-2 | Finitura delle dimensioni e tutela di 750×292 | C4-3, D6, D8 | Opus, medio | Geometria delicata, ma senza una nuova disposizione: la FFA a 844×390 entra con 1 px di margine |
 | C4-4 | Cornici per tipologia e segno del ruolo | C4-3, C4-2 | Opus, medio | Giudizio visivo su due disegni, codice non difficile |
 | C4-5a | Sfondo e identità del bar (O2) | D11 | Sonnet, medio | Processo di asset e poca geometria |
 | C4-5b | Coerenza di hub, form, editor, catalogo | C4-3, C4-4 | Sonnet, medio | CSS esteso e ripetitivo, con verifiche già esistenti |
 | C4-6* | Illustrazioni delle carte | C4-4, D1, D11 | Sonnet, medio | Lista corta e processo noto |
-| C4-7* | Suoni | D2 | Sonnet, medio | Piccolo; l'attenzione va a iOS e alla regola 13 |
+| C4-7* | Suoni | D2 | Sonnet, medio | Piccolo; l'attenzione va alla regola 13 |
 | C4-8a | Accessibilità e residui O21 | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
 | C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
 | C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
@@ -152,9 +156,9 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 
 1. **C4-3 prima di C4-2.** Il font cambia le larghezze su cui si basano `stripPlan`, riga breve e volti: fare la geometria minima
    prima vorrebbe dire rifarla e riverificarla. I numeri restano quelli della bozza; cambia l'ordine. Con D4 (a) Impact resta e su Windows
-   le larghezze del font non cambiano: l'ordine regge perché i simboli al posto delle lettere cambiano le stesse misure e l'iPhone può riaprire D4.
-2. **Nuovo C4-1b.** C4-1 è strumento; serve una misura di partenza prima di aggiungere peso e grafica, e oggi lo stato su iPhone è
-   ignoto. È anche il punto in cui si salda il debito di C3.
+   le larghezze del font non cambiano: l'ordine regge perché i simboli al posto delle lettere cambiano le stesse misure.
+2. **Nuovo C4-1b.** C4-1 è strumento; serve una misura di partenza prima di aggiungere peso e grafica.
+   È anche il punto in cui si salda il debito di C3 e si fissa la base di 750×292 per la regola 18.
 3. **C4-5 e C4-8 divisi in due.** Sfondo e shell hanno rischi e verifiche diversi. Accessibilità e prestazioni pure: il ridisegno
    incrementale non deve finire nello stesso commit di una decina di correzioni di accessibilità.
 
@@ -234,23 +238,20 @@ in C3. Una rifattorizzazione degli script dei server che cambia ciò che provano
 
 1. **Giro completo** sul client di `a807aa0` (il codice del client non cambia con C4-1), `VerifyAim` compresi `touch`, `reduced` e
    `pending`: salda il debito di C3 e fissa la base. Un rosso qui è un difetto da trattare, non una nuova base.
-2. **Cattura fisica:** porta in `client-web` lo strumento di C0 (`physical-probe.js`, 65 s, stesse soglie, file marcato candidato
-   finché l'operatore non dichiara modello e input), sul client reale con sequenza.
-3. **Prima misura reale a 750×292:** catture di duello e FFA in partita reale, per confrontare i problemi segnalati da `layoutProblems`
-   con ciò che si vede e con la prova del proprietario su iPhone, che non ha segnalato blocchi.
+2. **Base a 750×292 per la regola 18:** `Verify`, `VerifyFfa`, `VerifyAim` e `VerifyLayout` a quella misura, in Edge con tocco emulato, e catture di duello e
+   FFA in partita reale. Si registra cosa passa e cosa no, e il numero di `layoutProblems`, senza correggere nulla. Il confronto col giudizio del proprietario su iPhone,
+   che non ha segnalato blocchi, dice quanto quei problemi pesano davvero.
 
-**Dipendenze.** C4-1. Solo il proprietario può fare la cattura su iPhone: circa 10 minuti (Modalità risparmio energetico disattivata,
-come in C0).
+**Dipendenze.** C4-1.
 
-**File toccati.** `client-web/tools/`, `vite.config.ts` per iniettare lo strumento solo in modalità misura, `run.ps1`, documenti comuni.
+**File toccati.** Documenti comuni, evidenze; `client-web/tools/` solo se la misura 750×292 richiede un parametro.
 
-**Rischi.** Lo strumento non deve finire nella build distribuita: stessi hash di quella misurata su PC, come in C0. Il giro completo
-dura circa due ore e mezza.
+**Rischi.** Il giro completo dura circa due ore e mezza. Un rosso a 750×292 non è un difetto da correggere qui: è la base dichiarata. Un rosso alle misure ufficiali sì.
 
-**Completamento verificabile.** Base documentata nel rapporto: esiti, peso, durate, frame e input su iPhone in duello e FFA con
-sequenza, catture a 750×292. La tabella «Cosa c'è oggi» è corretta dove la misura la smentisce, e D6–D10 ricevono i numeri veri.
+**Completamento verificabile.** Base documentata nel rapporto: esiti, peso, durate e frame su desktop in duello e FFA con sequenza; esiti e catture a 750×292.
+La tabella «Cosa c'è oggi» è corretta dove la misura la smentisce, e D8 e D9 ricevono i numeri veri.
 
-**Verifiche.** Tutte; cattura fisica del proprietario.
+**Verifiche.** Tutte alle misure ufficiali; le quattro della base a 750×292.
 
 ### C4-3 — Famiglia di simboli, font e inventario degli asset
 
@@ -266,15 +267,14 @@ sequenza, catture a 750×292. La tabella «Cosa c'è oggi» è corretta dove la 
   corretta: i materiali di terzi restano sotto la loro licenza. I documenti dei diritti si allineano nello stesso commit.
 - Test della regola 10 ed estensione di `size.mjs` ai formati usati.
 
-**Dipendenze.** C4-1b; D3, D4, D11 per il registro. Il campione dei font su volti veri è stato guardato su Edge il 3 novembre 2026. Prima
-del codice resta da controllare sull'iPhone se i titoli delle carte sono davvero in Impact: se è il font di ripiego, si torna a D4.
+**Dipendenze.** C4-1b; D3, D4, D11 per il registro. Il campione dei font su volti veri è stato guardato su Edge il 3 novembre 2026.
 
 **File toccati.** `scene.ts`, `readability.ts`, `ui.tsx`, `collection.tsx`, `public.tsx`, `style.css`, `tools/size.mjs`, nuovi test,
 `docs/design/client-c4/assets/`.
 
 **Rischi.**
 
-- Il font dipende dal dispositivo: Impact potrebbe mancare su iOS (da verificare), e allora la resa approvata esisterebbe solo su PC.
+- Il font dipende dal dispositivo: Impact potrebbe mancare su iOS (non verificato). Secondo D4 e D6 è un limite accettato, da dichiarare.
 - Glifi usati oggi (`→`, `✓`, `×`, `−`, `▲`, `✕`) possono uscire da un font di ripiego diverso per dispositivo.
 - Le icone esterne dettagliate a 14–18 px diventano macchie e stonano accanto ai simboli approvati.
 - Misurare testo su Safari è già costato in C0: niente misure in più nel ridisegno.
@@ -286,38 +286,35 @@ coerenti con l'inventario, se servono; `Size` verde; giudizio del proprietario s
 
 **Verifiche.** `Verify`, `VerifyDecks`, `VerifyPublic`, `VerifyLayout`, `VerifyResolution` (`quick`, `ffa`), a due misure.
 
-### C4-2 — Layout all'altezza minima e finitura delle dimensioni
+### C4-2 — Finitura delle dimensioni e tutela di 750×292
 
-**Perimetro.** Secondo D6, D7 e D8.
+**Perimetro.** Secondo D6 e D8.
 
-- Geometria pura in `readability.ts`: una nuova classe sotto i 384 px circa, o scala continua, con l'ordine di cessione deciso. Le
-  misure esistenti non cambiano (regola 17).
+- **Tutela di 750×292:** il test e le verifiche della regola 18. Miglioramenti solo se economici: nessuna nuova classe di disposizione, nessuna cessione da decidere,
+  misure ufficiali invariate (regola 17). Quello che non rientra va nell'elenco per l'app futura.
 - O12: finitura delle dimensioni su desktop e touch; carte piccole del round.
 - Bersagli da 44 px sul tavolo e nei controlli della partita.
-- `viewport-fit=cover` se la prova su iPhone lo giustifica, con le aree sicure.
+- `viewport-fit=cover` solo se costa poco e non cambia le misure ufficiali, con le aree sicure.
 - Cambio di orientamento e resize provati su partita reale (limite dichiarato della regola 1 in C3-7).
-- Il test «750×292 non entra» diventa il test che entra, con cambio di atteso dichiarato.
+- Il test «750×292 non entra» resta com'è: registra un limite noto.
 
-**Dipendenze.** C4-3; D6, D7, D8; i numeri di C4-1b. Prima del codice: schemi sullo sfondo vero, come in C3-L.
+**Dipendenze.** C4-3; D6, D8; i numeri di C4-1b. Prima del codice: schemi sullo sfondo vero, come in C3-L.
 
 **File toccati.** `readability.ts`, `scene.ts`, `table.tsx`, `style.css`, `index.html`, `tests/readability.test.ts`, `tools/verify-layout.mjs`,
 `verify-ffa.mjs`, `verify-aim.mjs`, documenti comuni.
 
-**Rischi.** Il rischio principale è la fattibilità: mancano 92–125 px e la FFA potrebbe non restare giocabile senza togliere qualcosa che oggi è
-richiesto (quattro mani coperte, oggetti come carte); se accade, il blocco si ferma e torna al proprietario, non abbandona quei
-requisiti. Testo sul volto sotto la soglia di leggibilità. Frecce e primi piani con poco spazio. `fitScale` costa fino a 150 ms a
+**Rischi.** Allargare 750×292 fino a farne di nuovo l'obiettivo del blocco: si ferma al primo miglioramento che non è economico. La FFA a 844×390 entra con 1 px di margine:
+i bersagli più grandi non devono farla uscire. Testo sul volto sotto la soglia di leggibilità. `fitScale` costa fino a 150 ms a
 ogni misura nuova: non deve scattare a ogni barra di Safari che appare.
 
 **Completamento verificabile.**
 
-- `layoutProblems` vuoto a 750×292 in duello e in FFA con 0–3 oggetti, salvo le cessioni approvate che il controllo conosce esplicitamente.
-- Partite reali a 750×292 in duello e FFA fino all'esito, con tocco emulato: nessun posto fuori schermo, passo della mano ≥ 44 px,
-  conferma raggiungibile senza scorrere.
+- Regola 18: `layoutProblems` a 750×292 non aumenta rispetto alla base; passa ciò che passava alla base di C4-1b.
 - Fattori e dimensioni di C3-L invariati a 1366×768 e 844×390.
 - Elenco DOM dei controlli sotto 44 px vuoto, salvo eccezioni di D8.
-- Giudizio del proprietario su iPhone: nessuna verifica automatica può sostituirlo.
+- Giudizio del proprietario su desktop; prova su iPhone facoltativa.
 
-**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` (`quick`, `ffa`), alle due misure e a 750×292;
+**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` (`quick`, `ffa`), alle due misure; regola 18 a 750×292;
 `VerifyLifecycle` a una misura per il pannello d'esito.
 
 ### C4-4 — Cornici per tipologia e segno del ruolo (O8 con O14)
@@ -357,7 +354,7 @@ essere quello di R1: stile da giudicare accanto a carte e plance. La direzione R
 rifatta: si correggono le sedie, non il bar. Leggibilità di carte e plance sopra un fondo più ricco. Peso entro D9.
 
 **Completamento verificabile.** Registro completo e test della regola 10 verde; nessuna deformazione alle tre misure (proporzioni calcolate nel
-test); posti e testi leggibili sopra il nuovo fondo (contrasto misurato in C4-8a); `Size` verde; giudizio del proprietario su desktop e iPhone.
+test); posti e testi leggibili sopra il nuovo fondo (contrasto misurato in C4-8a); `Size` verde; giudizio del proprietario su desktop, iPhone facoltativo.
 
 **Verifiche.** `Verify`, `VerifyLayout`, alle misure ufficiali.
 
@@ -416,11 +413,11 @@ browser; un suono non porta mai un'informazione che manca a schermo; rispetta sa
 
 **File toccati.** nuovo `src/sound.ts`, `public/audio/`, agganci in `scene.ts` e `table.tsx`, `tools/size.mjs` se serve, verifica, inventario, documenti comuni.
 
-**Rischi.** Su iOS l'audio parte solo dopo un gesto e l'interruttore silenzioso prevale. Latenza che degrada l'input su iPhone. Suono su eventi
+**Rischi.** Su iOS l'audio parte solo dopo un gesto e l'interruttore silenzioso prevale. Latenza che degrada l'input. Suono su eventi
 interrotti, o doppio su una vista ripetuta (regola 1). Fastidio in sequenze da 20 s con cinque carte.
 
 **Completamento verificabile.** Partita completa con audio assente, bloccato e file mancanti: stesso esito, nessun errore (regola 13). Un suono per evento, mai
-due per la stessa risoluzione. Muto ricordato. Input su iPhone non peggiorato. `Size` verde. Giudizio del proprietario.
+due per la stessa risoluzione. Muto ricordato. Input non peggiorato alle misure ufficiali. `Size` verde. Giudizio del proprietario.
 
 **Verifiche.** `Verify` (con audio bloccato), `VerifyResolution` (`quick`, `interrupt`).
 
@@ -453,31 +450,31 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 
 ### C4-8b — Prestazioni e budget
 
-**Perimetro.** Secondo D9 e D10, sugli asset finali.
+**Perimetro.** Secondo D9, sugli asset finali.
 
-- Nuova cattura fisica sul client completo, duello e FFA con sequenza.
-- Se le soglie non reggono o l'input è peggiorato: ridisegno incrementale (riserva di C0: ogni tocco che cambia la scelta ricostruisce il tavolo) e
+- Nuova misura su desktop sul client completo, duello e FFA con sequenza, con lo stesso criterio di C3-L e la base di C4-1b.
+- Se quel criterio non regge, l'input è peggiorato o il proprietario segnala un disagio grave provando su iPhone: ridisegno incrementale (riserva di C0: ogni tocco che cambia la scelta ricostruisce il tavolo) e
   riduzione delle decorazioni **prima** di rivalutare il renderer, come da roadmap. Distinguere il ritardo di rete.
 - Caricamento mirato e, dove rende, compressione degli asset.
 - Picchi isolati fino a 115 ms in FFA misurati in C3-L.
 
-**Dipendenze.** Tutti i blocchi visivi; D9, D10. Cattura del proprietario.
+**Dipendenze.** Tutti i blocchi visivi; D9.
 
-**File toccati.** `scene.ts`, `readability.ts`, eventualmente `art.ts` e la cattura, documenti comuni.
+**File toccati.** `scene.ts`, `readability.ts`, eventualmente `art.ts`, documenti comuni.
 
 **Rischi.** Il ridisegno incrementale è la modifica più pericolosa di C4: disegno e sequenza sono intrecciati (`staged`, `overInfo`, stati intermedi) e un
-elemento non ridisegnato smentirebbe la regola 2. Se la misura di partenza e quella finale sono già entro soglia, **non si fa**. Un solo tentativo
+elemento non ridisegnato smentirebbe la regola 2. Se la misura di partenza e quella finale sono già entro soglia, **non si fa**. Le misure in Edge girano senza i vincoli di un telefono: non dicono nulla sull'iPhone, e va dichiarato. Un solo tentativo
 mirato per passo, come in C0; le soglie non cambiano per farle passare.
 
-**Completamento verificabile.** Evidenza di ≥ 60 s su iPhone con operatore dichiarato, con esito esplicito contro D10; desktop con lo stesso criterio di C3-L; `Size` entro D9.
+**Completamento verificabile.** Desktop con lo stesso criterio di C3-L, confrontato con la base di C4-1b; `Size` entro D9.
 Regole 1–9 verdi; a sequenza finita ogni plancia e ogni oggetto coincidono con la vista.
 
-**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` completa; cattura fisica.
+**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` completa.
 
 ### C4-9 — Consolidamento e giudizio del proprietario
 
-**Perimetro.** Nessuna funzione nuova salvo correzioni di blocchi emersi. Giro completo sulla stessa build; regole 1–17 dichiarate una per una; righe P
-aggiornate; inventario riconciliato coi file distribuiti; budget e soglie riassunti; scheda di prova per il proprietario su desktop e iPhone, sul modello
+**Perimetro.** Nessuna funzione nuova salvo correzioni di blocchi emersi. Giro completo sulla stessa build; regole 1–18 dichiarate una per una; righe P
+aggiornate; inventario riconciliato coi file distribuiti; budget e soglie riassunti; scheda di prova per il proprietario su desktop, con una parte facoltativa su iPhone, sul modello
 della [scheda di C3-7](reports/client-c3/c3-7/prova-scheda.md). Roadmap con «C4 chiusa» solo dopo il suo giudizio. La prova umana C e O19 restano a C5.
 
 **Dipendenze.** Tutti.
@@ -488,7 +485,7 @@ della [scheda di C3-7](reports/client-c3/c3-7/prova-scheda.md). Roadmap con «C4
 lasciare debiti. Osservazioni di ritmo: vanno a C5.
 
 **Completamento verificabile.** Tutte le verifiche verdi sulla **stessa** build dell'ultimo commit di codice; test del client e del repository, `check-rules.py`,
-`verify-match-manifests.py` e contesto Spring come esiti separati; cattura fisica finale; nessun asset senza registro; giudizio registrato con ciò che
+`verify-match-manifests.py` e contesto Spring come esiti separati; regola 18 a 750×292; nessun asset senza registro; giudizio registrato con ciò che
 non è provato.
 
 **Verifiche.** Tutte.
@@ -496,39 +493,39 @@ non è provato.
 ## Verifiche da rieseguire per blocco
 
 ● completa alle misure ufficiali · ○ scenari ridotti o una misura, dichiarati · vuoto: non serve, il blocco non tocca quel percorso. `Test`, `Build`, `Size`,
-`build.ps1 -Task Test -Offline` e `check-rules.py` valgono **sempre**. «750» indica che si aggiunge la misura 750×292, confermata da D6.
+`build.ps1 -Task Test -Offline` e `check-rules.py` valgono **sempre**. «750» indica che si aggiunge il controllo a 750×292 della regola 18. La prova su iPhone è facoltativa e non compare (D6).
 
-| Blocco | Verify | Modes | Lifecycle | Ffa | Decks | Public | Profile | Resolution | Aim | Layout | iPhone (proprietario) |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| C4-1 | ● | ● | ● | ● | ● | ● | ● | ● | ● | ● | |
-| C4-1b | ● | ● | ● | ● | ● | ● | ● | ● | ● | ● | cattura |
-| C4-3 | ● | | | | ● | ● | | ○ | | ● | giudizio |
-| C4-2 | ● 750 | | ○ | ● 750 | | | | ○ 750 | ● 750 | ● 750 | giudizio |
-| C4-4 | ● | | | | ● | | | ○ | | ● | giudizio |
-| C4-5a | ● | | | | | | | | | ● | giudizio |
-| C4-5b | | ● | ● | ● | ● | ● | ● | | | | giudizio |
-| C4-6* | | | | | ● | | | | | ● | giudizio |
-| C4-7* | ● | | | | | | | ○ | | | giudizio |
-| C4-8a | ● | | | | ● | ● | | ○ | ○ | | giudizio |
-| C4-8b | ● | | | ● | | | | ● | ● | ● | cattura |
-| C4-9 | ● 750 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 | cattura e giudizio |
+| Blocco | Verify | Modes | Lifecycle | Ffa | Decks | Public | Profile | Resolution | Aim | Layout |
+|---|---|---|---|---|---|---|---|---|---|---|
+| C4-1 | ● | ● | ● | ● | ● | ● | ● | ● | ● | ● |
+| C4-1b | ● 750 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 |
+| C4-3 | ● | | | | ● | ● | | ○ | | ● |
+| C4-2 | ● 750 | | ○ | ● 750 | | | | ○ | ● 750 | ● 750 |
+| C4-4 | ● | | | | ● | | | ○ | | ● |
+| C4-5a | ● | | | | | | | | | ● |
+| C4-5b | | ● | ● | ● | ● | ● | ● | | | |
+| C4-6* | | | | | ● | | | | | ● |
+| C4-7* | ● | | | | | | | ○ | | |
+| C4-8a | ● | | | | ● | ● | | ○ | ○ | |
+| C4-8b | ● | | | ● | | | | ● | ● | ● |
+| C4-9 | ● 750 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 |
 
 ## Decisioni del proprietario
 
-**D3, D4, D6, D11, D13 e D14 sono confermate; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
+**D3, D4, D6, D11, D13 e D14 sono confermate; D7 e D10 non servono più; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
 
 | ID | Domanda | Opzioni | Raccomandazione e motivo | Cosa blocca | Se si rimanda |
 |---|---|---|---|---|---|
 | D1 | Illustrazioni individuali in C4 | (a) nessuna; (b) solo quelle che non reggono, da lista approvata; (c) tutte e 40 | **(b).** D24 del Set Base dice di generarle a carte finalizzate: tutte ora rischia lavoro che sparisce. La roadmap chiede di sostituirle «dove serve», e dove serve si vede solo dopo le cornici. | C4-6 | Non blocca altro. Vale (a) e C4-6 si salta; si può aprire fino a C4-8b. |
 | D2 | Audio | (a) no; (b) 4–6 suoni con volume basso e muto, nessuna musica; (c) anche ambiente o musica | **(b), per ultimo e primo da tagliare.** Costa poco, la fonte è CC0 e la prova C può giudicarlo; (c) porta peso e fastidio in sequenze da 20 s. Volume iniziale basso, attivo. | C4-7 | Non blocca altro. Se non è deciso prima di C4-9, la prova C si fa senza suoni. |
 | D3 | Simboli | (a) Game-icons per tutti (CC BY 3.0); (b) tutti disegnati da noi; (c) i nostri, Game-icons solo per lacune reali | **(c), confermata dal proprietario il 3 novembre 2026, con l'attesa che le lacune siano poche o nessuna.** Esistono già 15 simboli propri, quelli del danno approvati in C3-7, e il residuo di O10 è fatto di soli costi, guadagni e immunità, tutti coperti dai simboli delle risorse. Sostituirli non migliora e aggiunge attribuzioni per ogni icona. Questo si discosta dalla roadmap, che indicava Game-icons come fonte principale. | C4-3 | Blocca C4-3 e a catena C4-2, C4-4, C4-5b. |
-| D4 | Font | (a) quelli di sistema, ridotti a due; (b) Play (OFL); (c) altro OFL scelto su campione | **(a), confermata dal proprietario il 3 novembre 2026 dopo il campione: Impact e Arial.** Il volto attuale piace, zero peso e zero licenze. Sul campione (Edge, Windows; 1366×768, 844×390, 750×292) Play Bold rende meglio i numeri, ma ha titoli più larghi del 22% in media, più troncamenti e diverse etichette tagliate; non ha `→`, `✓`, `▲`, `✕`. Play Regular è troppo sottile sulle carte. **Resta da controllare sull'iPhone:** Impact non è distribuito e potrebbe mancare su iOS (non verificato). Se manca, si torna qui con (c) sullo stesso campione. | C4-3 (solo font), a catena C4-2 | Decisa; si riapre solo per il controllo su iPhone. |
+| D4 | Font | (a) quelli di sistema, ridotti a due; (b) Play (OFL); (c) altro OFL scelto su campione | **(a), confermata dal proprietario il 3 novembre 2026 dopo il campione: Impact e Arial.** Il volto attuale piace, zero peso e zero licenze. Sul campione (Edge, Windows; 1366×768, 844×390, 750×292) Play Bold rende meglio i numeri, ma ha titoli più larghi del 22% in media, più troncamenti e diverse etichette tagliate; non ha `→`, `✓`, `▲`, `✕`. Play Regular è troppo sottile sulle carte. Impact non è distribuito e potrebbe mancare su iOS (non verificato): secondo D6 il controllo non blocca, e se manca si accetta il ripiego. | C4-3 (solo font), a catena C4-2 | Decisa. |
 | D5 | Segno statico sul bersaglio con movimento ridotto (O21) | (a) sì, sul bersaglio; (b) no, ma tipo di danno in «Ultimo turno»; (c) no, nulla di nuovo | **(b).** Con movimento ridotto il tipo si legge già sul volto e sulla carta piccola al centro. Un segno fisso sul bersaglio toglie spazio dove la striscia già manca in FFA compatta, e con più mosse suggerirebbe un'attribuzione che il server non dà (D1 di C3). `roundReport` oggi non riporta il tipo: basta una riga. | Una parte di C4-8a | Non blocca. Vale (c): resta un limite dichiarato. |
-| D6 | 750×292 resta il minimo supportato | (a) sì, duello e FFA; (b) sì per il duello, FFA da 844×390; (c) no, minimo 844×390 | **(a), con D7, confermata dal proprietario il 3 novembre 2026.** È ciò che l'iPhone campione lascia davvero e il proprietario lo ha già giudicato sufficiente in C0. Con (b) o (c) la FFA sul dispositivo campione non sarebbe supportata proprio mentre si prepara il playtest. Se C4-2 dimostra che la FFA non è giocabile, si torna qui con le catture, e (b) è il ripiego naturale. Oggi a larghezza 750 servono 384 px di altezza in duello e 417 in FFA, misurati con le funzioni del client. | C4-2, misura 750 nelle verifiche | Decisa. Si riapre solo con le catture di C4-2. |
-| D7 | Cosa cede sotto i 384 px, in ordine (D6 confermata) | Proposta: 1. primi piani nel proprio posto anziché al centro; 2. carte del round ridotte alla sola ultima, con «Ultimo turno»; 3. mano più piccola e più alzata al tocco; 4. oggetti più sovrapposti; 5. mani coperte più piccole; mai togliere bersagli | **Quest'ordine, da giudicare sulle catture.** Toglie prima ciò che si ritrova altrove (decisioni di presentazione) e tiene le carte come oggetti sul tavolo. Le mani coperte restano tutte e quattro. | C4-2 | Blocca C4-2. Decidibile dopo C4-1b, con i numeri veri. |
+| D6 | 750×292 resta il minimo supportato | (a) sì, duello e FFA; (b) sì per il duello, FFA da 844×390; (c) no, minimo 844×390; (d) minimo garantito 844×390, con 750×292 protetta dalla regola 18 | **(d), scelta dal proprietario il 3 novembre 2026; sostituisce (a), confermata poco prima lo stesso giorno.** Il proprietario: il web è un client, il supporto vero al telefono arriverà con l'app; non si spreca tanto lavoro, ma non si perde quello fatto e non si ignora quella misura. Oggi a larghezza 750 servirebbero 384 px di altezza in duello e 417 in FFA, misurati con le funzioni del client; un futuro contenitore a schermo intero recupererà lo spazio della barra del browser. **Limite dichiarato:** la FFA su iPhone in Safari resta con i problemi noti, compreso un posto fuori schermo. | C4-2, regola 18 | Decisa. |
+| D7 | Cosa cede sotto i 384 px, in ordine. **Non serve più in C4 (D6, 3 novembre 2026);** proposta conservata per l'app futura | Proposta: 1. primi piani nel proprio posto anziché al centro; 2. carte del round ridotte alla sola ultima, con «Ultimo turno»; 3. mano più piccola e più alzata al tocco; 4. oggetti più sovrapposti; 5. mani coperte più piccole; mai togliere bersagli | **Quest'ordine, da giudicare sulle catture.** Toglie prima ciò che si ritrova altrove (decisioni di presentazione) e tiene le carte come oggetti sul tavolo. Le mani coperte restano tutte e quattro. | Nessun blocco | Non si decide in C4. |
 | D8 | Cosa deve avere 44 px | (a) ogni elemento toccabile; (b) tutti i controlli, ma i gettoni di stato possono restare più piccoli se lo stesso contenuto è raggiungibile altrove; (c) solo i controlli principali | **(b).** La roadmap chiede 44 px per i target principali; i gettoni 31×18 in una FFA piena non possono crescere senza coprire il personaggio. C4-2 deve provare che il loro contenuto è raggiungibile col tocco su un'area più grande o dall'ispezione. | C4-2, C4-5b | C4-2 parte con (b); rischio di rifare i gettoni. |
 | D9 | Budget di download | (a) soli limiti attuali (JS 500 KB, totale 4 MB, atlante 2048 px, texture 64 MB); (b) limiti attuali più tetto di C4: **JS ≤ 400 KB, totale ≤ 2,2 MB, texture ≤ 32 MB** | **(b).** Il Set Base stima 1,7 MB e 38 MB per i suoi atlanti: con (a) C4 potrebbe consumare il margine che gli serve. I tetti lasciano circa 0,7 MB e 6 MB secondo quelle stime, che **non sono misure**. I limiti rigidi non si alzano. | C4-3 per gli asset, C4-5a, C4-6, C4-7, C4-8b | Vale (a): non blocca, ma il Set Base può ereditare un budget esaurito. |
-| D10 | Soglie di prestazioni su iPhone | Frame: (a) soglia C0 (≥ 95% ≤ 33 ms) come vincolo e 60 fps come obiettivo riportato; (b) 60 fps come vincolo. Input: (c) ≤ 100 ms senza deroga; (d) ≤ 100 ms come obiettivo, vincolo «non peggio dei 116 ms di C0» | **(a) e (d).** La roadmap dice «puntare a 60 fps» e lascia le soglie di C0; un vincolo a 60 fps su iPhone chiederebbe di tagliare molta grafica senza che nessuno abbia segnalato disagio. La deroga di C0 resta motivata, ma non si allarga: se il client supera i 116 ms si interviene. Decisione finale sui numeri di C4-1b. | C4-8b | Non blocca fino a C4-8b. Decidibile dopo C4-1b. |
+| D10 | Soglie di prestazioni su iPhone. **Non serve più in C4 (D6, 3 novembre 2026);** proposta conservata per l'app futura | Frame: (a) soglia C0 (≥ 95% ≤ 33 ms) come vincolo e 60 fps come obiettivo riportato; (b) 60 fps come vincolo. Input: (c) ≤ 100 ms senza deroga; (d) ≤ 100 ms come obiettivo, vincolo «non peggio dei 116 ms di C0» | **(a) e (d).** La roadmap dice «puntare a 60 fps» e lascia le soglie di C0; un vincolo a 60 fps su iPhone chiederebbe di tagliare molta grafica senza che nessuno abbia segnalato disagio. La deroga di C0 resta motivata, ma non si allarga: se il client supera i 116 ms si interviene. | Nessun blocco | Non si decide in C4. |
 | D11 | Generazione degli asset e registro | Generazione: (a) il proprietario genera con il suo strumento, l'agente scrive prompt e registro; (b) una sessione con uno strumento di generazione, come C0 e O9. Registro: (c) come O9, sorgenti e prompt fuori da git; (d) prompt letterale tracciato e salvato prima di generare, sorgente tracciata solo per lo sfondo | **(a) e (d), confermate dal proprietario il 3 novembre 2026.** Il proprietario genera con il suo strumento e consegna i file; l'agente scrive e committa il prompt prima della generazione, poi registra e integra. Il registro serve perché i prompt di C0-R2 sono andati persi e i PNG di O9 sono solo su questo PC. Solo immagini nuove, riferimento ammesso solo a materiali del progetto (R1, `table.png`), mai i quattro giochi né Internet. Il proprietario indica strumento, modello, versione e data; nel registro anche i termini d'uso dello strumento, C2PA se esposto. | C4-5a, C4-6 | Decisa. La chiusura di O2 dipende dall'immagine del proprietario. |
 | D12 | Riferimento di accessibilità e lettore di schermo | Contrasto: (a) WCAG 2.2 AA come obiettivo (4,5:1 testo, 3:1 testo grande e simboli), senza dichiarare conformità; (b) nessuna soglia. Lettore: (c) una breve prova del proprietario con VoiceOver; (d) dichiarato non provato | **(a) e (d); (c) se il proprietario ha dieci minuti.** La soglia rende il controllo ripetibile; le eccezioni si elencano. Il lettore non è automatizzabile qui e in C5 non è un criterio: meglio un limite onesto che una promessa. | C4-8a | C4-8a parte con la raccomandazione. |
 | D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b), confermata dal proprietario il 3 novembre 2026.** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | C4-1 è in corso e pubblicherebbe secondo la sua logica attuale, con il rischio di altri 200 MB. **Urgente.** |
@@ -538,13 +535,12 @@ non è provato.
 
 1. **D13:** confermata il 3 novembre 2026.
 2. **D14:** confermata il 3 novembre 2026.
-3. **D4 e D3:** confermate il 3 novembre 2026; per D4 resta il controllo su iPhone prima del codice di C4-3.
+3. **D4 e D3:** confermate il 3 novembre 2026.
 4. **D11:** confermata il 3 novembre 2026; la generazione ha tempi propri e può avanzare in parallelo.
-5. **D6, D7, D8:** servono a C4-2; D6 è confermata il 3 novembre 2026; D7 e D8 si giudicano meglio coi numeri di C4-1b.
+5. **D6, D8:** servono a C4-2; D6 è confermata il 3 novembre 2026 e fa cadere D7 e D10; D8 si giudica meglio coi numeri di C4-1b.
 6. **D9:** prima di aggiungere il primo asset pesante.
 7. **D1, D2:** scelte di perimetro, senza blocchi per gli altri.
 8. **D12, D5:** prima di C4-8a.
-9. **D10:** sui numeri di C4-1b, prima di C4-8b.
 
 ## Cosa questo piano ha e non ha verificato
 
