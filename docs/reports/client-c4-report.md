@@ -215,7 +215,9 @@ Da [size.json del giro A](client-c4/c4-3/giro-A/size.json) (JS e totale gzip di 
 | Texture decodificate | 18 876 320 B | **18 876 320 B** (invariate) | 67 108 864 | 33 554 432 | 56,3%, margine 14 678 112 B |
 | Atlante | 2048×1536 | 2048×1536 | lato 2048 | | |
 
-Entrambi i controlli passano con margine. Il JS ha il margine più stretto: restano circa 68 KB di tetto per tutta la grafica e il resto di C4.
+Entrambi i controlli passano con margine. Il JS aveva il margine più stretto (circa 68 KB di tetto).
+
+**Revisione di D9 (3 novembre 2026, dopo C4-3).** Il proprietario ha tolto i tetti di JS (400 KB) e totale (2,2 MB): il client si serve in locale, 2,2 o 4,4 MB gzip non pesano e i limiti rigidi di C2 fermano già un errore accidentale. Restano i limiti rigidi e il tetto sulle texture decodificate (32 MiB), perché sul telefono costa la memoria e non il download. `size.mjs` applica solo quel tetto; le colonne «Tetto di D9» di JS e totale qui sopra sono storiche.
 
 ### Verifiche
 

@@ -421,8 +421,8 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
   nessuna richiesta di rete. **Impact su iOS: non verificato.** ✓ e ✕ non sono in Impact né in Arial (misurato su Windows): sono forme proprie; → × − ▲ ▼ ∞ restano testo (presenti in entrambi).
 - **Inventario:** [docs/design/client-c4/assets/](../docs/design/client-c4/assets/README.md) (`inventory.json`). `tests/assets.test.ts` percorre `public/` (e `dist/`, se costruita) e fallisce per un file non registrato,
   con impronta diversa, con un campo mancante o per una voce senza file; controlla anche che non ci siano font, `@font-face` o origini remote e che le famiglie siano solo queste.
-- **`Size`:** legge le dimensioni di ogni formato raster (`tools/image-size.mjs`: WebP, PNG, JPEG, GIF, AVIF; un raster che non sa leggere fa fallire il giro) e controlla **due cose distinte**: i limiti rigidi di C2 (invariati) e i tetti di C4 (D9: JS 400 KB, totale 2,2 MB,
-  texture 32 MiB; JS e totale in chilo e megabyte decimali, la lettura prudente di C4-1b). `size.json` riporta margine e percentuale di ciascun tetto e un riepilogo per estensione.
+- **`Size`:** legge le dimensioni di ogni formato raster (`tools/image-size.mjs`: WebP, PNG, JPEG, GIF, AVIF; un raster che non sa leggere fa fallire il giro) e controlla **due cose distinte**: i limiti rigidi di C2 (invariati) e il tetto di C4 (D9, rivista il 3 novembre 2026:
+  solo le texture decodificate, 32 MiB; per JS e totale valgono i soli limiti rigidi). `size.json` riporta margine e percentuale del tetto e un riepilogo per estensione.
 
 ## Scala e spazio del tavolo (C3-L)
 
@@ -524,7 +524,7 @@ HEAD e data del jar verificati, la tabella (verifica, misura, esito, durata), gl
 ```powershell
 ./client-web/run.ps1 -Task Test     # modello e sessione con trasporto finto
 ./client-web/run.ps1 -Task Build    # tsc + build di produzione
-./client-web/run.ps1 -Task Size     # limiti rigidi (JS 500 KB e totale 4 MB gzip, atlante 2048 px, texture 64 MB) e, a parte, tetti di C4 (JS 400 KB, totale 2,2 MB, texture 32 MiB)
+./client-web/run.ps1 -Task Size     # limiti rigidi (JS 500 KB e totale 4 MB gzip, atlante 2048 px, texture 64 MB) e, a parte, il tetto di C4 sulle texture (32 MiB)
 ./client-web/run.ps1 -Task Atlas    # rigenera l'atlante O9 (servono i PNG locali, fuori da git)
 ./client-web/run.ps1 -Task Verify   # partite reali: richiede server e Serve attivi
 ./client-web/run.ps1 -Task VerifyModes   # due account, code e 1v1: richiede server e Serve attivi
