@@ -4,7 +4,7 @@
 `a807aa0`. **Solo piano:** nessun codice client, nessuna modifica a regole, server, protocollo, catalogo o
 `client-debug`. C0, C1, C2 e C3 sono chiuse. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
-**Nessuna decisione di questo piano è presa.** Le voci D1–D14 sono proposte con una raccomandazione: decide il
+**D13 è confermata dal proprietario il 3 novembre 2026; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
 proprietario. Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
 **Stato di C4-1 alla stesura.** Una sessione separata sta già lavorando a C4-1 nello stesso checkout: modifiche **non
@@ -207,7 +207,7 @@ blocco dovrebbe toccare `client-web/`.
 
 Rimuove o corregge lo script `measure` che punta a un file inesistente.
 
-**Dipendenze.** Nessuna. D13 stabilisce cosa si pubblica.
+**Dipendenze.** Nessuna. D13, confermata, stabilisce cosa si pubblica: JSON finali sempre; catture solo finali e compresse, circa 10 MB per blocco; il resto in cartella temporanea. Copiare l'intera cartella delle evidenze non basta.
 
 **File toccati.** `client-web/tools/` (nuovo lancio; `size.mjs`), `run.ps1`, `package.json`, `README.md`, documenti comuni.
 
@@ -515,7 +515,7 @@ non è provato.
 
 ## Decisioni del proprietario
 
-**Tutte da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
+**D13 è confermata; le altre sono da decidere.** Le raccomandazioni sono proposte motivate. Ordine di urgenza in [fondo](#ordine-di-urgenza).
 
 | ID | Domanda | Opzioni | Raccomandazione e motivo | Cosa blocca | Se si rimanda |
 |---|---|---|---|---|---|
@@ -531,12 +531,12 @@ non è provato.
 | D10 | Soglie di prestazioni su iPhone | Frame: (a) soglia C0 (≥ 95% ≤ 33 ms) come vincolo e 60 fps come obiettivo riportato; (b) 60 fps come vincolo. Input: (c) ≤ 100 ms senza deroga; (d) ≤ 100 ms come obiettivo, vincolo «non peggio dei 116 ms di C0» | **(a) e (d).** La roadmap dice «puntare a 60 fps» e lascia le soglie di C0; un vincolo a 60 fps su iPhone chiederebbe di tagliare molta grafica senza che nessuno abbia segnalato disagio. La deroga di C0 resta motivata, ma non si allarga: se il client supera i 116 ms si interviene. Decisione finale sui numeri di C4-1b. | C4-8b | Non blocca fino a C4-8b. Decidibile dopo C4-1b. |
 | D11 | Generazione degli asset e registro | Generazione: (a) il proprietario genera con il suo strumento, l'agente scrive prompt e registro; (b) una sessione con uno strumento di generazione, come C0 e O9. Registro: (c) come O9, sorgenti e prompt fuori da git; (d) prompt letterale tracciato e salvato prima di generare, sorgente tracciata solo per lo sfondo | **Da confermare (a) o (b): serve sapere quale strumento è disponibile. Questa sessione non ne ha uno.** Per il registro **(d):** i prompt di C0-R2 sono andati persi, e i PNG di O9 sono solo su questo PC. Solo immagini nuove, riferimento ammesso solo a materiali del progetto (R1, `table.png`), mai i quattro giochi né Internet. Modello e versione annotati, C2PA se esposto. | C4-5a, C4-6 | Blocca O2, quindi la chiusura di C4 senza deroga; il resto procede. |
 | D12 | Riferimento di accessibilità e lettore di schermo | Contrasto: (a) WCAG 2.2 AA come obiettivo (4,5:1 testo, 3:1 testo grande e simboli), senza dichiarare conformità; (b) nessuna soglia. Lettore: (c) una breve prova del proprietario con VoiceOver; (d) dichiarato non provato | **(a) e (d); (c) se il proprietario ha dieci minuti.** La soglia rende il controllo ripetibile; le eccezioni si elencano. Il lettore non è automatizzabile qui e in C5 non è un criterio: meglio un limite onesto che una promessa. | C4-8a | C4-8a parte con la raccomandazione. |
-| D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b).** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | C4-1 è in corso e pubblicherebbe secondo la sua logica attuale, con il rischio di altri 200 MB. **Urgente.** |
+| D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b), confermata dal proprietario il 3 novembre 2026.** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | C4-1 è in corso e pubblicherebbe secondo la sua logica attuale, con il rischio di altri 200 MB. **Urgente.** |
 | D14 | Ordine e divisione dei blocchi | (a) la bozza: C4-2 prima di C4-3, nessun C4-1b, C4-5 e C4-8 interi; (b) [correzioni proposte](#blocchi) | **(b).** Il font condiziona la geometria; lo stato su iPhone è ignoto; sfondo e shell, accessibilità e prestazioni hanno rischi diversi. Costa due commit in più. | Ordine dopo C4-1 | Non si può partire dopo C4-1 senza. |
 
 ### Ordine di urgenza
 
-1. **D13:** C4-1 è già in corso e decide dove finiscono le evidenze.
+1. **D13:** confermata il 3 novembre 2026.
 2. **D14:** serve prima del blocco successivo a C4-1.
 3. **D3 e D4:** C4-3 è il primo blocco con codice di gioco; per D4 basta guardare il campione.
 4. **D11:** la generazione ha tempi propri e può avanzare in parallelo.
