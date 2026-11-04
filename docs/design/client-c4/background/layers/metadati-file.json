@@ -1,0 +1,368 @@
+{
+  "files": [
+    {
+      "file": "anteprime/1366x768-C.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 163150,
+      "sha256": "e46967f0071da95727f4334d55bba0cb578ace13ac2c4765c58c12e35fd9ce7f",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/1366x768-H1-stirato.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 198320,
+      "sha256": "c51ead0c82a9276dec5419c4754dbc9d321e21e70c2af5d3d494a8dd154b81dc",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/1366x768-S.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 201876,
+      "sha256": "5e987fe1e8421280be1a42edd3154786e71a5bb12df600a7696683cc86c110a9",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/750x292-C.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 53826,
+      "sha256": "bc4dda9d12f53c609a00559809fd83d72a212f8e0041faee3a1f3796ba9aae47",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/750x292-H1-stirato.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 54744,
+      "sha256": "dab71f43fc57a9b6b8b17e3f3e3bcdf5548fe5795b59b0aa771eed4f4af8e800",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/750x292-S.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 53888,
+      "sha256": "6116eac8fef3f6a2a7aa3cdf4bbc5f9cd1233e125feada820eb0d92cb77e7eab",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/844x390-C.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 77082,
+      "sha256": "15aaa583ea0445f8b849e4eb48fcf3be8dbb8a8b6f0fe32ce5a6a3f343ef7754",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/844x390-H1-stirato.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 80832,
+      "sha256": "cd48808760200ebbdef4a48e515f3a9bccce891d0fac89a065bddd66857a27f8",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/844x390-S.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 79726,
+      "sha256": "d6ac20b750724b7f2f53d4de053a817e290850a2a5dbb88a76dbaa4e758f8895",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/bordi-negroni.webp",
+      "format": "webp",
+      "width": 1260,
+      "height": 442,
+      "bytes": 120410,
+      "sha256": "06f8d7ec3afc967ade38008c74f66b63794575f50cae61dda53622a2f91eb16f",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/bordi-posacenere.webp",
+      "format": "webp",
+      "width": 1260,
+      "height": 442,
+      "bytes": 132842,
+      "sha256": "cce527d3519a3282d3d8651a0fc60b84aa788d87021bc34386bc5eb6d423a8df",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/bordi-sottobicchiere.webp",
+      "format": "webp",
+      "width": 1260,
+      "height": 442,
+      "bytes": 98866,
+      "sha256": "8c0969eafa694f3aef04b738e63f0f9cde53b93c3414aec56232b44aad153955",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/deriva-piano-1.webp",
+      "format": "webp",
+      "width": 1000,
+      "height": 391,
+      "bytes": 130988,
+      "sha256": "67ca3a173cd52c07883cf9a9ac4544eb9d328381f62cb1028950d63167b8bd15",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/deriva-piano-2.webp",
+      "format": "webp",
+      "width": 1000,
+      "height": 391,
+      "bytes": 91548,
+      "sha256": "192294f31a1a06e4d5a816a9ac87c90f1093a0e23cc54d72affe5ef94082cf26",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "negroni.png",
+      "format": "png",
+      "width": 834,
+      "height": 962,
+      "bytes": 1679440,
+      "sha256": "8c31f7a5385dcff7e9fc3a7246c7bf8e58bca667ebc484b97a99645fd4ab45c5",
+      "hasAlpha": true,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "piano-1.png",
+      "format": "png",
+      "width": 2006,
+      "height": 784,
+      "bytes": 2422044,
+      "sha256": "0c981448aa45d2b56ff06cdce7939245c209aa56bb00894ee39b1fac702006aa",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "piano-2.png",
+      "format": "png",
+      "width": 2006,
+      "height": 784,
+      "bytes": 2414884,
+      "sha256": "5597b4cfc7c0cfe9660286f5f54002db3b0979c4dae7aa7ed5d4b0f36d225320",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "posacenere.png",
+      "format": "png",
+      "width": 973,
+      "height": 844,
+      "bytes": 1660712,
+      "sha256": "0941a046094a9bdcd05fd450d9b569be7fd306e77fbfe17ca78906f3d64e422b",
+      "hasAlpha": true,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "riferimenti/negroni-H1.png",
+      "format": "png",
+      "width": 291,
+      "height": 340,
+      "bytes": 254850,
+      "sha256": "ed56aab268ed2d973ecacd8e8ef8c5eb2e16f7555a975780596f589722efdaa6",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "riferimenti/posacenere-H1.png",
+      "format": "png",
+      "width": 300,
+      "height": 365,
+      "bytes": 244805,
+      "sha256": "2a324404d9d5ae88af819b728ad2ec8c9441801e6478992e7625beba308ea3c0",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "riferimenti/sottobicchiere-H1.png",
+      "format": "png",
+      "width": 330,
+      "height": 194,
+      "bytes": 161792,
+      "sha256": "dce1cbd7c82795b0d0d1fa1e77f366010203eff809d65ad84ddc7298711d8d31",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "scheda-composizione.webp",
+      "format": "webp",
+      "width": 1848,
+      "height": 1038,
+      "bytes": 288766,
+      "sha256": "a356e61c4162ed2006626ccc51a33383a792bb242df509b073193270e2a1efaf",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "sottobicchiere.png",
+      "format": "png",
+      "width": 937,
+      "height": 630,
+      "bytes": 1238800,
+      "sha256": "2d674b7b079efa85d33b45d45089dee800605f4c349d89e381a2e738200dc674",
+      "hasAlpha": true,
+      "C2PA": {
+        "present": false,
+        "softwareAgentStringObserved": "non esposto dallo strumento o non conservato nel derivato",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "sprite-negroni-fondo.png",
+      "format": "png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1834871,
+      "sha256": "6055563532a37582ad5175f1699443520378545b0faebd37407f52bb6c105818",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "sprite-posacenere-fondo.png",
+      "format": "png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1805147,
+      "sha256": "6677699b5070ca15cdc47e3f66213f4f431850bcef8718f3eab9f8a48b89ff90",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "signatureValidation": "non verificato"
+      }
+    },
+    {
+      "file": "sprite-sottobicchiere-fondo.png",
+      "format": "png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1567430,
+      "sha256": "aa24f532b9e4d4ead82a145b4278783686ad072a357c164a2b0a87ebb3882267",
+      "hasAlpha": false,
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "signatureValidation": "non verificato"
+      }
+    }
+  ]
+}

@@ -1,0 +1,602 @@
+{
+  "method": {
+    "commonWidth": 1000,
+    "metric": "max absolute RGB channel difference > threshold, outside union of exclusion rectangles",
+    "threshold": 16,
+    "secondThreshold": 32,
+    "resizeKernel": "lanczos3"
+  },
+  "geometry": {
+    "source": "candidati/H1.png",
+    "width": 2006,
+    "height": 784,
+    "method": "Riquadri e centri stimati manualmente sull’immagine, non segmentazione esatta. Coordinate in pixel H1; crop deterministico sharp 0.35.5 senza modello.",
+    "objects": [
+      {
+        "name": "sottobicchiere",
+        "crop": {
+          "left": 145,
+          "top": 590,
+          "width": 330,
+          "height": 194
+        },
+        "box": {
+          "left": 174,
+          "top": 612,
+          "width": 264,
+          "height": 164
+        },
+        "exclude": {
+          "left": 130,
+          "top": 570,
+          "width": 380,
+          "height": 214
+        },
+        "key": [
+          0,
+          0,
+          255
+        ],
+        "reference": "riferimenti/sottobicchiere-H1.png",
+        "sha256": "dce1cbd7c82795b0d0d1fa1e77f366010203eff809d65ad84ddc7298711d8d31",
+        "center": [
+          306,
+          694
+        ]
+      },
+      {
+        "name": "negroni",
+        "crop": {
+          "left": 1715,
+          "top": 85,
+          "width": 291,
+          "height": 340
+        },
+        "box": {
+          "left": 1755,
+          "top": 108,
+          "width": 251,
+          "height": 286
+        },
+        "exclude": {
+          "left": 1680,
+          "top": 65,
+          "width": 326,
+          "height": 410
+        },
+        "key": [
+          0,
+          255,
+          0
+        ],
+        "reference": "riferimenti/negroni-H1.png",
+        "sha256": "ed56aab268ed2d973ecacd8e8ef8c5eb2e16f7555a975780596f589722efdaa6",
+        "center": [
+          1880.5,
+          251
+        ]
+      },
+      {
+        "name": "posacenere",
+        "crop": {
+          "left": 0,
+          "top": 125,
+          "width": 300,
+          "height": 365
+        },
+        "box": {
+          "left": 0,
+          "top": 151,
+          "width": 260,
+          "height": 298
+        },
+        "exclude": {
+          "left": 0,
+          "top": 110,
+          "width": 340,
+          "height": 410
+        },
+        "key": [
+          0,
+          0,
+          255
+        ],
+        "reference": "riferimenti/posacenere-H1.png",
+        "sha256": "2a324404d9d5ae88af819b728ad2ec8c9441801e6478992e7625beba308ea3c0",
+        "center": [
+          130,
+          300
+        ]
+      }
+    ]
+  },
+  "drift": [
+    {
+      "name": "piano-1",
+      "native": [
+        2006,
+        784
+      ],
+      "comparedPixels": 302128,
+      "excludedPixels": 88872,
+      "above16": 127950,
+      "percentAbove16": 42.3496001694646,
+      "above32": 60895,
+      "percentAbove32": 20.155364613673676,
+      "meanAbsoluteChannelDifference": 12.264209209341736,
+      "rmse": 21.309448190243625
+    },
+    {
+      "name": "piano-2",
+      "native": [
+        2006,
+        784
+      ],
+      "comparedPixels": 302128,
+      "excludedPixels": 88872,
+      "above16": 35228,
+      "percentAbove16": 11.65995869300429,
+      "above32": 8170,
+      "percentAbove32": 2.7041518826457662,
+      "meanAbsoluteChannelDifference": 5.196787454323995,
+      "rmse": 9.143234696229726
+    }
+  ],
+  "sprites": [
+    {
+      "name": "sottobicchiere",
+      "key": [
+        0,
+        0,
+        255
+      ],
+      "generatedSize": [
+        1254,
+        1254
+      ],
+      "trim": {
+        "left": 155,
+        "top": 303,
+        "width": 937,
+        "height": 630
+      },
+      "feather": "3x3 separable binomial filter, radius 1px (2px transition)",
+      "spillRemoval": "unmix key channel with estimated alpha, clamp excess key channel on partial alpha",
+      "removedIslandPixels": 0,
+      "visiblePixels": 454646,
+      "partialAlphaPixels": 9674,
+      "borderVisiblePixels": 0,
+      "keyDominantPartialPixels": 0,
+      "normalizedH1Size": [
+        243.91746031746032,
+        164
+      ],
+      "sizeRule": "uniform scale from H1 manually estimated object height; width follows generated aspect, not independently stretched",
+      "center": [
+        306,
+        694
+      ]
+    },
+    {
+      "name": "negroni",
+      "key": [
+        0,
+        255,
+        0
+      ],
+      "generatedSize": [
+        1254,
+        1254
+      ],
+      "trim": {
+        "left": 197,
+        "top": 144,
+        "width": 834,
+        "height": 962
+      },
+      "feather": "3x3 separable binomial filter, radius 1px (2px transition)",
+      "spillRemoval": "unmix key channel with estimated alpha, clamp excess key channel on partial alpha",
+      "removedIslandPixels": 4,
+      "visiblePixels": 593409,
+      "partialAlphaPixels": 11607,
+      "borderVisiblePixels": 0,
+      "keyDominantPartialPixels": 0,
+      "normalizedH1Size": [
+        247.94594594594597,
+        286
+      ],
+      "sizeRule": "uniform scale from H1 manually estimated object height; width follows generated aspect, not independently stretched",
+      "center": [
+        1880.5,
+        251
+      ]
+    },
+    {
+      "name": "posacenere",
+      "key": [
+        0,
+        0,
+        255
+      ],
+      "generatedSize": [
+        1254,
+        1254
+      ],
+      "trim": {
+        "left": 140,
+        "top": 196,
+        "width": 973,
+        "height": 844
+      },
+      "feather": "3x3 separable binomial filter, radius 1px (2px transition)",
+      "spillRemoval": "unmix key channel with estimated alpha, clamp excess key channel on partial alpha",
+      "removedIslandPixels": 0,
+      "visiblePixels": 668742,
+      "partialAlphaPixels": 11520,
+      "borderVisiblePixels": 0,
+      "keyDominantPartialPixels": 0,
+      "normalizedH1Size": [
+        343.5473933649289,
+        298
+      ],
+      "sizeRule": "uniform scale from H1 manually estimated object height; width follows generated aspect, not independently stretched",
+      "center": [
+        130,
+        300
+      ]
+    }
+  ],
+  "shadows": [
+    {
+      "name": "sottobicchiere",
+      "widthFactor": 0.72,
+      "heightFactor": 0.055,
+      "dyFactor": 0.18,
+      "alpha": 0.18,
+      "sigmaSource": 3
+    },
+    {
+      "name": "negroni",
+      "widthFactor": 0.8,
+      "heightFactor": 0.08,
+      "dyFactor": 0.43,
+      "alpha": 0.23,
+      "sigmaSource": 3
+    },
+    {
+      "name": "posacenere",
+      "widthFactor": 0.8,
+      "heightFactor": 0.08,
+      "dyFactor": 0.43,
+      "alpha": 0.23,
+      "sigmaSource": 3
+    }
+  ],
+  "previews": [
+    {
+      "scene": [
+        1366,
+        768
+      ],
+      "mode": "S",
+      "plate": "piano-2",
+      "scale": 0.8167374390565953,
+      "plateScaleX": 0.6809571286141576,
+      "plateScaleY": 0.9795918367346939,
+      "offset": [
+        0,
+        0
+      ],
+      "placements": [
+        {
+          "name": "sottobicchiere",
+          "center": [
+            208.3728813559322,
+            679.8367346938776
+          ],
+          "drawnSize": [
+            199,
+            134
+          ],
+          "uniformScale": 0.8167374390565953
+        },
+        {
+          "name": "negroni",
+          "center": [
+            1280.5398803589233,
+            245.87755102040816
+          ],
+          "drawnSize": [
+            203,
+            234
+          ],
+          "uniformScale": 0.8167374390565953
+        },
+        {
+          "name": "posacenere",
+          "center": [
+            88.52442671984049,
+            293.87755102040813
+          ],
+          "drawnSize": [
+            281,
+            243
+          ],
+          "uniformScale": 0.8167374390565953
+        }
+      ],
+      "file": "anteprime/1366x768-S.webp"
+    },
+    {
+      "scene": [
+        1366,
+        768
+      ],
+      "mode": "C",
+      "plate": "piano-2",
+      "scale": 0.9795918367346939,
+      "plateScaleX": 0.9795918367346939,
+      "plateScaleY": 0.9795918367346939,
+      "offset": [
+        -299.53061224489795,
+        0
+      ],
+      "placements": [
+        {
+          "name": "sottobicchiere",
+          "center": [
+            0.22448979591837315,
+            679.8367346938776
+          ],
+          "drawnSize": [
+            239,
+            161
+          ],
+          "uniformScale": 0.9795918367346939
+        },
+        {
+          "name": "negroni",
+          "center": [
+            1542.591836734694,
+            245.87755102040816
+          ],
+          "drawnSize": [
+            243,
+            280
+          ],
+          "uniformScale": 0.9795918367346939
+        },
+        {
+          "name": "posacenere",
+          "center": [
+            -172.18367346938777,
+            293.87755102040813
+          ],
+          "drawnSize": [
+            337,
+            292
+          ],
+          "uniformScale": 0.9795918367346939
+        }
+      ],
+      "file": "anteprime/1366x768-C.webp"
+    },
+    {
+      "scene": [
+        844,
+        390
+      ],
+      "mode": "S",
+      "plate": "piano-2",
+      "scale": 0.4574883415343342,
+      "plateScaleX": 0.42073778664007977,
+      "plateScaleY": 0.49744897959183676,
+      "offset": [
+        0,
+        0
+      ],
+      "placements": [
+        {
+          "name": "sottobicchiere",
+          "center": [
+            128.74576271186442,
+            345.2295918367347
+          ],
+          "drawnSize": [
+            112,
+            75
+          ],
+          "uniformScale": 0.4574883415343342
+        },
+        {
+          "name": "negroni",
+          "center": [
+            791.19740777667,
+            124.85969387755102
+          ],
+          "drawnSize": [
+            113,
+            131
+          ],
+          "uniformScale": 0.4574883415343342
+        },
+        {
+          "name": "posacenere",
+          "center": [
+            54.69591226321037,
+            149.23469387755102
+          ],
+          "drawnSize": [
+            157,
+            136
+          ],
+          "uniformScale": 0.4574883415343342
+        }
+      ],
+      "file": "anteprime/844x390-S.webp"
+    },
+    {
+      "scene": [
+        844,
+        390
+      ],
+      "mode": "C",
+      "plate": "piano-2",
+      "scale": 0.49744897959183676,
+      "plateScaleX": 0.49744897959183676,
+      "plateScaleY": 0.49744897959183676,
+      "offset": [
+        -76.94132653061229,
+        0
+      ],
+      "placements": [
+        {
+          "name": "sottobicchiere",
+          "center": [
+            75.27806122448976,
+            345.2295918367347
+          ],
+          "drawnSize": [
+            121,
+            82
+          ],
+          "uniformScale": 0.49744897959183676
+        },
+        {
+          "name": "negroni",
+          "center": [
+            858.5114795918367,
+            124.85969387755102
+          ],
+          "drawnSize": [
+            123,
+            142
+          ],
+          "uniformScale": 0.49744897959183676
+        },
+        {
+          "name": "posacenere",
+          "center": [
+            -12.272959183673507,
+            149.23469387755102
+          ],
+          "drawnSize": [
+            171,
+            148
+          ],
+          "uniformScale": 0.49744897959183676
+        }
+      ],
+      "file": "anteprime/844x390-C.webp"
+    },
+    {
+      "scene": [
+        750,
+        292
+      ],
+      "mode": "S",
+      "plate": "piano-2",
+      "scale": 0.37316298784905966,
+      "plateScaleX": 0.37387836490528414,
+      "plateScaleY": 0.37244897959183676,
+      "offset": [
+        0,
+        0
+      ],
+      "placements": [
+        {
+          "name": "sottobicchiere",
+          "center": [
+            114.40677966101694,
+            258.4795918367347
+          ],
+          "drawnSize": [
+            91,
+            61
+          ],
+          "uniformScale": 0.37316298784905966
+        },
+        {
+          "name": "negroni",
+          "center": [
+            703.0782652043869,
+            93.48469387755102
+          ],
+          "drawnSize": [
+            93,
+            107
+          ],
+          "uniformScale": 0.37316298784905966
+        },
+        {
+          "name": "posacenere",
+          "center": [
+            48.60418743768694,
+            111.73469387755102
+          ],
+          "drawnSize": [
+            128,
+            111
+          ],
+          "uniformScale": 0.37316298784905966
+        }
+      ],
+      "file": "anteprime/750x292-S.webp"
+    },
+    {
+      "scene": [
+        750,
+        292
+      ],
+      "mode": "C",
+      "plate": "piano-2",
+      "scale": 0.37387836490528414,
+      "plateScaleX": 0.37387836490528414,
+      "plateScaleY": 0.37387836490528414,
+      "offset": [
+        0,
+        -0.5603190428713845
+      ],
+      "placements": [
+        {
+          "name": "sottobicchiere",
+          "center": [
+            114.40677966101694,
+            258.91126620139585
+          ],
+          "drawnSize": [
+            91,
+            61
+          ],
+          "uniformScale": 0.37387836490528414
+        },
+        {
+          "name": "negroni",
+          "center": [
+            703.0782652043869,
+            93.28315054835494
+          ],
+          "drawnSize": [
+            93,
+            107
+          ],
+          "uniformScale": 0.37387836490528414
+        },
+        {
+          "name": "posacenere",
+          "center": [
+            48.60418743768694,
+            111.60319042871386
+          ],
+          "drawnSize": [
+            128,
+            111
+          ],
+          "uniformScale": 0.37387836490528414
+        }
+      ],
+      "file": "anteprime/750x292-C.webp"
+    }
+  ],
+  "previewPlate": "piano-2"
+}

@@ -1,0 +1,86 @@
+{
+  "meaning": "Controlli numerici sul compositing e sulla dominante chiave; non certificano assenza percettiva di aloni. Nessuna verifica applicativa.",
+  "qa": [
+    {
+      "sprite": "sottobicchiere",
+      "background": "chiaro",
+      "transparentPixels": 135664,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 9674,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "sottobicchiere",
+      "background": "scuro",
+      "transparentPixels": 135664,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 9674,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "sottobicchiere",
+      "background": "legno-H1",
+      "transparentPixels": 135664,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 9674,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "negroni",
+      "background": "chiaro",
+      "transparentPixels": 208899,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 11607,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "negroni",
+      "background": "scuro",
+      "transparentPixels": 208899,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 11607,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "negroni",
+      "background": "legno-H1",
+      "transparentPixels": 208899,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 11607,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "posacenere",
+      "background": "chiaro",
+      "transparentPixels": 152470,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 11520,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "posacenere",
+      "background": "scuro",
+      "transparentPixels": 152470,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 11520,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    },
+    {
+      "sprite": "posacenere",
+      "background": "legno-H1",
+      "transparentPixels": 152470,
+      "transparentPixelsChangingBackground": 0,
+      "partialPixels": 11520,
+      "keyDominantPartialPixels": 0,
+      "maxDifferenceFromStraightAlphaEquation": 1
+    }
+  ]
+}
