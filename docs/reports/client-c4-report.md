@@ -440,7 +440,7 @@ Catture: [duello a 1366×768](client-c4/c4-2/dopo-giudizio/catture/layout-duel-1
 
 ## C4-4 — Cornici per tipologia e segno del ruolo (O8 con O14)
 
-4 novembre 2026. **Fatto, in attesa del giudizio del proprietario.** Regole, server, protocollo, catalogo e `client-debug` non sono cambiati. Nessuna soglia né atteso è stato allentato; i controlli aggiunti stanno sotto.
+4 novembre 2026. **Fatto e approvato dal proprietario lo stesso giorno, col filetto medio.** Regole, server, protocollo, catalogo e `client-debug` non sono cambiati. Nessuna soglia né atteso è stato allentato; i controlli aggiunti stanno sotto.
 
 ### Varianti e scelta
 
@@ -524,13 +524,13 @@ Client finale `dist` `559e1ef260a4f12e`, jar `07fa99f4457cf36e`. Con `-Only` il 
 
 ### Giudizio del proprietario
 
-Catture del client finale in [catture](client-c4/c4-4/catture/):
+**Approvato il 4 novembre 2026**, sulle catture del client finale in [catture](client-c4/c4-4/catture/):
 
 - [duello a 1366×768](client-c4/c4-4/catture/duello-1366x768.jpg) e [in grigi](client-c4/c4-4/catture/duello-grigi-1366x768.jpg);
 - [FFA a 844×390](client-c4/c4-4/catture/ffa-844x390.jpg) e [in grigi](client-c4/c4-4/catture/ffa-grigi-844x390.jpg);
 - [catalogo a 1366×768](client-c4/c4-4/catture/catalogo-1366x768.jpg), [editor a 844×390](client-c4/c4-4/catture/editor-844x390.jpg), [ispezione](client-c4/c4-4/catture/ispezione-1366x768.jpg).
 
-Da giudicare: lo spessore sul tavolo, la distinzione in grigi, soprattutto tra oggetto, token e legata a 36 px, dove le scritte non si leggono, e la minore densità del catalogo.
+Sottoposti al giudizio: lo spessore sul tavolo, la distinzione in grigi, soprattutto tra oggetto, token e legata a 36 px, dove le scritte non si leggono, e la minore densità del catalogo.
 
 ### Non verificato
 
