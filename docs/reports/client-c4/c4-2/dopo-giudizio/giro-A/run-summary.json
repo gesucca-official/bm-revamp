@@ -1,0 +1,150 @@
+{
+  "date": "2026-11-04T13:30:12.129Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "test",
+    "build",
+    "size",
+    "verify",
+    "ffa",
+    "aim",
+    "layout",
+    "lifecycle"
+  ],
+  "build": {
+    "head": "a45c92df0507e5c294ec6f2ce5b7cff6d30be953",
+    "dirtyPaths": [
+      "M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/verify-aim.mjs",
+      " M client-web/tools/verify-layout.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-04T12:56:57.834Z",
+      "bytes": 50693917,
+      "sha256_16": "89cdf5e8f7ce99e6",
+      "rebuilt": true
+    },
+    "dist": {
+      "files": 18,
+      "sha256_16": "707acd1cd192a59c"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 5,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 104,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 72,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "lifecycle",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 158,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 452,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 169,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 129,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "lifecycle",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 159,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 431,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 177,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 130,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/table.tsx;  M client-web/tools/verify-aim.mjs;  M client-web/tools/verify-layout.mjs"
+  ]
+}

@@ -342,11 +342,7 @@ Il giro A è stato eseguito prima di aggiungere `roundLinkPass`: dopo è cambiat
 
 `./scripts/build.ps1 -Task Test -Offline` verde (l'ultima suite: 36 su 36), `python scripts/check-rules.py` verde. Il picco di 341,7 ms a 844×390 FFA non è ricomparso: massimi 108,4 e 88,9 ms a 844×390, 183,5 e 122,8 ms a 1366×768 (FFA, giro A, 4 novembre).
 
-**Un rosso vero che esisteva già, non corretto.** `VerifyLayout` a 1366×768 FFA ha segnalato `ComPlayer_6021 close-up` con Computer 1, 2, 3, 4 e il proprietario con 2, 3, 0, 0 e 1 oggetti. `layoutProblems` non trova un posto al centro per il primo piano del quarto avversario quando il secondo ne ha 3 e la mano è considerata di 7 carte.
-
-- **Non viene da C4-2:** su tutte le 1024 distribuzioni da 0 a 3 oggetti scatta in **144**, sia sul codice di oggi sia su quello di C4-1b; a 844×390 in nessuna.
-- **In quella partita il primo piano vero è stato messo al centro** (`placed: middle`).
-- **Conseguenza:** a 1366×768 FFA il verde di `VerifyLayout` dipende anche dagli oggetti distribuiti, e i verdi precedenti non lo escludevano. Soglia non toccata, geometria non toccata. Serve una decisione del proprietario.
+**Rosso `close-up` a 1366×768 FFA:** in questo giro è comparso e nel successivo no. La diagnosi e la correzione sono in [Dopo il giudizio](#dopo-il-giudizio-del-proprietario-freccia-e-close-up).
 
 ### Controllo «a letter code for the damage»
 
@@ -395,3 +391,49 @@ Miglioramenti economici a 750×292: nessuno trovato, i problemi sono tutti di al
 ### Da guardare
 
 Giudizio del proprietario su: [conferma in duello a 1366×768](client-c4/c4-2/catture/layout-duel-1366x768-confirmation-1366x768.jpg), [FFA a 1366×768](client-c4/c4-2/catture/layout-ffa-1366x768-confirmation-1366x768.jpg), [duello a 844×390](client-c4/c4-2/catture/layout-duel-844x390-confirmation-844x390.jpg), [FFA a 844×390](client-c4/c4-2/catture/layout-ffa-844x390-confirmation-844x390.jpg), [scarto di una legata](client-c4/c4-2/catture/03-bound-discard-844x390.jpg), [ultimo turno dalle carte del round](client-c4/c4-2/catture/layout-ffa-last-turn-844x390.jpg). Le [simulazioni](client-c4/c4-2/schemi/proposta-1366x768.png) approvate hanno ancora le tinte accese: fanno fede le catture.
+
+### Dopo il giudizio del proprietario: freccia e `close-up`
+
+4 novembre 2026, dopo il commit `a45c92d`. Le tabelle sopra descrivono quel commit; dove differiscono, vale questa sezione. Evidenze in [dopo-giudizio](client-c4/c4-2/dopo-giudizio/).
+
+**Freccia (richiesta del proprietario).** Mentre la mossa aspetta ✓ o ×, dalla carta al bersaglio va la stessa freccia cartoon della scelta del bersaglio, al posto della linea sottile. `VerifyAim` controlla che esista per ogni bersaglio, parta dalla carta, finisca sul bersaglio e resti nello schermo.
+
+**Due modifiche che ne discendono, non chieste esplicitamente:**
+
+- **Spazio per la freccia:** con la carta a ridosso del bersaglio restava un moncone, quindi `previewSpot` lascia uno spazio attorno al bersaglio (24 px per lato su desktop, 15 px a 844×390) e torna a 6 px solo se non c'è altro posto. La carta sta quindi un po' più lontana dal rilascio.
+- **Difetto corretto:** il passaggio del mouse solleva il bersaglio e la carta veniva ricalcolata, quindi poteva spostarsi mentre si andava verso ✓ o ×. Ora la posizione si calcola dal bersaglio a riposo.
+
+**Rosso `close-up`: era un falso rosso dello strumento.** Nel rapporto precedente l'avevo chiamato rosso vero: era sbagliato.
+
+| Griglia del controllo | Distribuzioni rosse su 1024 |
+|---|---|
+| 24 px (`verify-layout.mjs`) | 144 |
+| 16, 12, 8, 6, 4 px | 0 |
+
+La scena cerca il posto con un passo di 8 px; il controllo ne usava uno da 24 e saltava posti che esistono. Ora `verify-layout.mjs` usa lo stesso passo della scena e un test unitario fissa i casi che fallivano. **Nessuna geometria del tavolo è cambiata e nessuna soglia è stata toccata:** il controllo cerca meglio, ma resta rosso se il posto non c'è. La griglia di `fitScale` e del resto di `layoutProblems` non è stata toccata.
+
+**Verifiche, jar `89cdf5e8f7ce99e6`:**
+
+| Giro | Esito |
+|---|---|
+| [A](client-c4/c4-2/dopo-giudizio/giro-A/): Test, Build, Size, Verify, VerifyFfa, VerifyAim, VerifyLayout, VerifyLifecycle, alle due misure | **13 su 13 verdi** |
+| [B](client-c4/c4-2/dopo-giudizio/giro-B/): Test, Build, Size, VerifyResolution (`quick`, `ffa`), alle due misure | **5 su 5 verdi** |
+| Test unitari | 216 su 216 |
+| `build.ps1 -Task Test -Offline`, `check-rules.py` | verdi |
+| Size | JS 332 790 B, totale 1 116 354 B, texture 18 876 320 B (56,3% del tetto) |
+
+Fattori di C3-L invariati. Massimi dei frame nelle FFA: 135,4 ms a 1366×768, 105,4 ms a 844×390; il picco di 341,7 ms non è ricomparso.
+
+**Quota coperta, ricalcolata con le funzioni pure:** invariata o quasi nei casi comuni (0–1%). Con 3 oggetti per posto in FFA il massimo sale: a 1366×768 da 27% a 29%, a 844×390 da 10% a 17%.
+
+**Distanza dal rilascio in partita, ora e al vecchio posto:** 1366×768 duello 134 e 108 px, FFA 224 e 560 px; 844×390 duello 179 e 51 px, FFA 120 e 249 px.
+
+**[Base a 750×292](client-c4/c4-2/dopo-giudizio/base-750x292/), non equivalente:**
+
+- `layoutProblems` resta **6, 6, 6** e **11, 11, 11**; `Verify` verde in questo giro; `VerifyFfa` rosso come alla base.
+- `VerifyAim`: 10 messaggi. Gli 8 sul testo della mossa sono quelli già dichiarati, più «partita non finita» e tocco, che c'erano già alla base.
+- `VerifyLayout`: 48 messaggi, 5 più del giro precedente. 4 sono «no link on the round cards», un controllo nuovo su carte del round che a questa misura non c'erano nemmeno prima. **L'altro è una segnalazione nuova in `chips`:** il testo di un gettone proprio non è stato trovato nell'ispezione a questa misura. Nel giro precedente non era comparsa; non l'ho indagata, perché 750×292 è solo non regressione.
+
+**Non verificato:** la freccia su iPhone e Safari; con movimento ridotto, solo che la pulsazione usa la stessa regola delle altre frecce.
+
+Catture: [duello a 1366×768](client-c4/c4-2/dopo-giudizio/catture/layout-duel-1366x768-confirmation-1366x768.jpg), [FFA a 1366×768](client-c4/c4-2/dopo-giudizio/catture/layout-ffa-1366x768-confirmation-1366x768.jpg), [duello a 844×390](client-c4/c4-2/dopo-giudizio/catture/layout-duel-844x390-confirmation-844x390.jpg), [FFA a 844×390](client-c4/c4-2/dopo-giudizio/catture/layout-ffa-844x390-confirmation-844x390.jpg), [FFA a 750×292](client-c4/c4-2/dopo-giudizio/catture/layout-ffa-750x292-confirmation-750x292.jpg).

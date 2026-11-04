@@ -19,6 +19,8 @@ import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
 import {fan,overlap,inside,seatBoxes,layoutProblems,tableLayout} from '../src/readability.ts';
+// The grid on which the scene looks for the place of a close-up (`closeUp`, 8 px): at 24 px the check missed places the scene finds (1366×768 FFA, 144 object distributions out of 1024).
+const CLOSE_UP_STEP=8;
 
 const repo=resolvePath(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
@@ -135,7 +137,7 @@ function measure(s,dom){
   L.seats.slice(i+1).forEach(b=>{for(const x of own)for(const y of [b.person,b.board,...b.items])if(overlap(x,y)>0)clash.push(`${a.id}/${b.id}`);});
   for(const x of own){for(const hh of hand)if(overlap(x,hh)>0)clash.push(`${a.id}/hand`);for(const p of piles)if(overlap(x,p)>0)clash.push(`${a.id}/piles`);for(const [k,d] of Object.entries(dom))if(d&&k!=='toast'&&overlap(x,d)>0)clash.push(`${a.id}/${k}`);if(!inside(x,vw,vh))clash.push(`${a.id} off screen`);}});
  for(const p of piles){if(!inside(p,vw,vh))clash.push('piles off screen');for(const hh of hand)if(overlap(p,hh)>0)clash.push('piles/hand');for(const [k,d] of Object.entries(dom))if(d&&k!=='toast'&&overlap(p,d)>0)clash.push(`piles/${k}`);}
- return {scale:L.scale,played:L.played?{box:R(L.played.box),card:R(L.played.slots[0]),shows:s.readout.played}:null,piles:L.piles?{deck:R(L.piles.deck),discard:R(L.piles.discard),shows:s.readout.piles}:null,problems:L.piles!==undefined?layoutProblems(L,vw,vh,24):['old build'],hand:{w:Math.round(L.hand.w),h:Math.round(L.hand.h),step:Math.round(L.hand.step),cards:hand.length},
+ return {scale:L.scale,played:L.played?{box:R(L.played.box),card:R(L.played.slots[0]),shows:s.readout.played}:null,piles:L.piles?{deck:R(L.piles.deck),discard:R(L.piles.discard),shows:s.readout.piles}:null,problems:L.piles!==undefined?layoutProblems(L,vw,vh,CLOSE_UP_STEP):['old build'],hand:{w:Math.round(L.hand.w),h:Math.round(L.hand.h),step:Math.round(L.hand.step),cards:hand.length},
   me:{person:R(me.person),item:R(me.items[0]),board:R(me.board),boardRow:+(me.board.h/5).toFixed(1),status:R(me.status)},
   others:others.map(o=>({id:o.id,person:R(o.person),item:R(o.items[0]),board:R(o.board),back:{w:Math.round(o.back.w),h:Math.round(o.back.h)}})),
   free:freeSpace(occupied,vw,vh),middle:{box:R(mid),free:midFree},below44:small,clash:[...new Set(clash)],shell:Object.fromEntries(Object.entries(dom).map(([k,v])=>[k,v&&R(v)]))};}

@@ -5,7 +5,7 @@ import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
-import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,edgePoint,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -53,7 +53,7 @@ export const cost=(c:Card)=>Object.entries(c.cost).map(([k,v])=>`${v} ${{VIOLENC
 export class TableScene {
  app=new Application();world=new Container();fx=new Container();aimLayer=new Container();private aimG=new Graphics();private aimAlpha=new AlphaFilter({alpha:.82});
  // C3-3 (O6): arrows from the chosen or dragged card to the admitted targets; redrawn at most once per frame while dragging.
- arrows:Arrow[]=[];private aimDirty=false;
+ arrows:Arrow[]=[];confirmArrow:Arrow|null=null;private confirmTo:Box|null=null;private aimDirty=false;
 hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInfo>();
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
@@ -343,9 +343,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.preview={x:L.preview.x,y:L.preview.y};
   const dest=this.model.target?this.hits.find(z=>(z.kind==='person'||z.kind==='item')&&z.target?.owner===this.model.target!.owner&&z.target?.itemIndex===this.model.target!.itemIndex):undefined;
   if(!this.model.target)this.dropPoint=null;
-  if(dest){const key=`${dest.id}:${w}x${h}:${dest.x},${dest.y}:${this.dropPoint?.x},${this.dropPoint?.y}`;if(this.placed?.key!==key)this.placed={key,spot:previewSpot(L,w,h,{x:dest.x,y:dest.y,w:dest.w,h:dest.h},this.dropPoint??{x:dest.x,y:dest.y})};this.preview=this.placed.spot;}
+  this.confirmTo=dest&&this.model.selectedCard?{x:dest.x,y:dest.y,w:dest.w,h:dest.h}:null;
+  // The card is placed from the target at rest: a hover lifts the target, and the card must not move under a pointer on its way to ✓ or ×.
+  if(dest){const seat=L.seats.find(s=>s.id===dest.target!.owner),index=dest.target!.itemIndex,rest:Box=(index!=null?seat?.items[index]:seat?.person)??{x:dest.x,y:dest.y,w:dest.w,h:dest.h},key=`${dest.id}:${w}x${h}:${rest.x},${rest.y}:${this.dropPoint?.x},${this.dropPoint?.y}`;if(this.placed?.key!==key)this.placed={key,spot:previewSpot(L,w,h,rest,this.dropPoint??rest)};this.preview=this.placed.spot;}
   if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res),leftV(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
-   if(dest){const from=edgePoint({...this.preview,w:L.preview.w,h:L.preview.h},dest,2);this.world.addChild(new Graphics().moveTo(from.x,from.y).quadraticCurveTo(from.x,dest.y,dest.x,dest.y).stroke({color:PETROL,width:2,alpha:.8}));}
   }
   const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
@@ -354,7 +355,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  // C3-3 (O6, D3): one arrow per admitted character and, for a card that takes an object, one per seat that has some. Only
  // visual help: the categories are the ones of the outlines (Model.allows) and the server stays the judge. None when the
  // choice is locked (pending, eliminated, outcome) or once a target is chosen (the single line to the preview remains).
- drawAim(){const t0=performance.now(),g=this.aimG,m=this.model,L=this.layout,d=this.drag;this.aimDirty=false;g.clear();this.arrows=[];this.aimLayer.alpha=1;
+ drawAim(){const t0=performance.now(),g=this.aimG,m=this.model,L=this.layout,d=this.drag;this.aimDirty=false;g.clear();this.arrows=[];this.confirmArrow=null;this.aimLayer.alpha=1;
+  // Owner, after C4-2: while the move waits for ✓ or ×, the same arrow goes from the chosen card to its target.
+  if(L&&this.confirmTo){const source={...this.preview,w:L.preview.w,h:L.preview.h},[a]=aimArrows(source,[{id:'confirm',owner:m.target?.owner??'',kind:'person',box:this.confirmTo}],{w:this.width,h:this.height},{head:L.compact?20:30});this.confirmArrow=a;this.paintArrows([a],new Map([[a.id,this.confirmTo]]));return;}
   if(!L||!m.selected||m.target||m.locked||!m.selectedCard)return;
   let source:Box|null=null;
   if(d?.moved){if(this.ghost)source={x:this.ghost.x,y:this.ghost.y,w:this.ghostH/1.38,h:this.ghostH};}
@@ -366,17 +369,19 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    else if(h.kind==='item'&&(h.target.itemIndex??-1)>(lastItem.get(h.target.owner)?.target?.itemIndex??-1))lastItem.set(h.target.owner,h);}
   for(const h of lastItem.values())targets.push({id:h.id,owner:h.target!.owner,kind:'item',itemIndex:h.target!.itemIndex,box:{x:h.x,y:h.y,w:h.w,h:h.h}});
   this.arrows=aimArrows(source,targets,{w:this.width,h:this.height},{avoid:[confirmButtons(L.preview,this.width,L.compact)],head:L.compact?20:30});
+  this.paintArrows(this.arrows.filter(a=>!a.reached),new Map(targets.map(t=>[t.id,t.box])));
+  this.stats.aimDraws++;this.stats.aimMs.push(performance.now()-t0);if(this.stats.aimMs.length>600)this.stats.aimMs.shift();}
+ private paintArrows(drawn:Arrow[],boxes:Map<string,Box>){const g=this.aimG,L=this.layout!;
   // Pop-art style (owner's reference, after C3-3): one ribbon that ends in a barbed head, all in the light blue of the target outlines,
   // with a bold black outline, a cartoon highlight on the head and a solid black extrusion down and to the left. The layer is translucent
   // as a whole (one filter, so overlaps do not darken) to leave what the arrows cross partly visible. A short arrow pushes its tip into
   // the target rather than shrinking to a blob.
-  const C=L.compact,drawn=this.arrows.filter(a=>!a.reached),depth=C?5:8,line=C?3:4,boxes=new Map(targets.map(t=>[t.id,t.box]));
+  const C=L.compact,depth=C?5:8,line=C?3:4;
   const shapes=drawn.map(a=>arrowShape(a,{tail:C?9:13,neck:C?16:26,head:C?32:50,minLen:C?78:120,reach:C?30:46,push:C?6:10,target:boxes.get(a.id)}));
   for(const s of shapes)for(let k=1;k<=4;k++){const o=depth*k/4;g.poly(s.outline.map((v,i)=>i%2?v+o*.7:v-o)).fill(INK).stroke({color:INK,width:3,join:'round'});}
   for(const s of shapes){g.poly(s.outline).fill(PETROL).stroke({color:INK,width:line,join:'miter',miterLimit:8});
    g.moveTo(s.shine[0].x,s.shine[0].y).lineTo(s.shine[1].x,s.shine[1].y).stroke({color:0xe6fbfb,width:C?2.5:3.5,cap:'round',alpha:.9});}
-  this.aimLayer.filters=drawn.length?[this.aimAlpha]:null;
-  this.stats.aimDraws++;this.stats.aimMs.push(performance.now()-t0);if(this.stats.aimMs.length>600)this.stats.aimMs.shift();}
+  this.aimLayer.filters=drawn.length?[this.aimAlpha]:null;}
  hit(x:number,y:number,targetsOnly=false){return [...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).find(r=>{if(targetsOnly&&r.kind==='hand')return false;const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);
@@ -614,7 +619,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.aimDirty)this.drawAim();
   // Quiet pulse while arrows are shown; reduced motion keeps them static.
-  if(this.arrows.length)this.aimLayer.alpha=this.reduced?1:.88+.12*Math.sin(now/280);
+  if(this.arrows.length||this.confirmArrow)this.aimLayer.alpha=this.reduced?1:.88+.12*Math.sin(now/280);
   if(this.inputStart){const start=this.inputStart;this.inputStart=0;requestAnimationFrame(()=>this.stats.inputMs.push(performance.now()-start));}
   if(this.seqStarted&&this.pace){const t=now-this.seqStarted,P=this.pace;if(t>=P.total)this.finish('complete');else{
    // Board steps reached (also several at once after a tap): applied, then one redraw.

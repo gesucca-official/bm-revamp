@@ -161,7 +161,10 @@ async function confirmPass(p,touch,scope){
  const read=()=>p.page.evaluate(()=>{const box=e=>{const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height};},card=document.querySelector('.confirmation'),strip=document.querySelector('.hint.confirming');
   return {card:card&&box(card),strip:strip&&box(strip),text:strip?.textContent??'',buttons:[...document.querySelectorAll('.confirmation button')].map(b=>{const q=box(b),top=document.elementFromPoint(q.x,q.y);return {w:b.offsetWidth,h:b.offsetHeight,...{x:q.x,y:q.y},reach:!!top&&(top===b||b.contains(top))};})};});
  const check=async(id,hit,t,label)=>{const r=await read(),row={card:c.name,target:id,how:label,spot:t.preview,buttons:r.buttons.map(b=>({w:b.w,h:b.h,reach:b.reach}))};out.push(row);
-  if(t.arrows.length)bad(scope,`${id}: ${t.arrows.length} arrows once a target is chosen`);if(t.sequence.running)bad(scope,`${id}: a close-up can run with the confirmation up`);
+  if(t.arrows.length)bad(scope,`${id}: ${t.arrows.length} arrows once a target is chosen`);
+  // After C4-2: one arrow of the same style from the card to the target, its tip at the target's border, on the screen.
+  const ca=t.confirmArrow;if(!ca)bad(scope,`${id}: no arrow from the card to its target`);else{const near=(q,b,pad)=>Math.abs(q.x-b.x)<=b.w/2+pad&&Math.abs(q.y-b.y)<=b.h/2+pad;row.arrow={from:ca.from,to:ca.to};if(!near(ca.to,rectBox(t.hits.find(h=>h.id===id)??hit),8))bad(scope,`${id}: the arrow ends off its target ${JSON.stringify(ca.to)}`);if(!near(ca.from,{x:t.preview.x,y:t.preview.y,w:t.layout.preview.w,h:t.layout.preview.h},8))bad(scope,`${id}: the arrow does not start at the card ${JSON.stringify(ca.from)}`);for(const q of [ca.from,ca.control,ca.to])if(!inScreen(q))bad(scope,`${id}: the arrow leaves the screen`);}
+  if(t.sequence.running)bad(scope,`${id}: a close-up can run with the confirmation up`);
   if(!r.card||r.buttons.length!==2){bad(scope,`${id}: no ✓ and × on the card`);return row;}
   for(const b of r.buttons){if(Math.min(b.w,b.h)<44)bad(scope,`${id}: control ${b.w}×${b.h} under 44 px`);if(!b.reach)bad(scope,`${id}: control covered at its centre`);if(!inScreen(b))bad(scope,`${id}: control off the screen`);}
   if(overlap(r.card,rectBox(hit))>0)bad(scope,`${id}: the card covers its target ${JSON.stringify(r.card)} ${JSON.stringify(rectBox(hit))}`);

@@ -306,6 +306,14 @@ for(const [w,h] of VIEWPORTS)for(const n of [2,5])test(`C4-2 at ${w}×${h} with 
   const strip=confirmTextBox(l,h);assert.ok(strip.w>=140,`text ${strip.w} wide`);assert.ok(inside(strip,w,h));for(const s of l.seats)for(const b of [s.person,s.board,...s.items])assert.equal(overlap(strip,b),0,`text over ${s.id}`);if(l.piles)for(const b of [l.piles.deck,l.piles.discard])assert.equal(overlap(strip,b),0,'text over the piles');
  }
 });
+test('after C4-2: the close-up finds its place on the grid of the scene where a 24 px grid missed it (1366×768 FFA)',()=>{
+ const ids=['me','b','c','d','e'];for(const items of [{me:1,b:2,c:3,d:0,e:0},{me:0,b:0,c:3,d:3,e:0},{me:3,b:3,c:3,d:3,e:3}]){const l=tableLayout(1366,768,ids,'me',items);
+  assert.deepEqual(layoutProblems(l,1366,768,8).filter(m=>m.includes('close-up')),[],JSON.stringify(items));}
+});
+test('after C4-2: the arrow of the confirmation goes from the card to its target, also when the card lies next to it',()=>{
+ const ids=['me','b','c','d','e'],l=tableLayout(844,390,ids,'me',{me:1,b:1,c:1,d:1,e:1});for(const s of l.seats){const p=previewSpot(l,844,390,s.person),source={x:p.x,y:p.y,w:l.preview.w,h:l.preview.h},[a]=aimArrows(source,[{id:'t',owner:s.id,kind:'person',box:s.person}],{w:844,h:390},{head:20}),shape=arrowShape(a,{tail:9,neck:16,head:32,minLen:78,reach:30,push:6,target:s.person});
+  assert.ok(Math.hypot(shape.tip.x-a.from.x,shape.tip.y-a.from.y)>=20,`${s.id}: a readable arrow`);assert.ok(overlap({x:shape.tip.x,y:shape.tip.y,w:1,h:1},s.person)>0,`${s.id}: the tip lands on the target`);}
+});
 test('C4-2: the card goes where the gesture ended when the table is free there',()=>{
  const w=1366,h=768,l=tableLayout(w,h,['me','b'],'me',{me:0,b:0}),t=l.seats.find(s=>!s.me)!.person;
  const tap=previewSpot(l,w,h,t),left=previewSpot(l,w,h,t,{x:t.x-t.w/2,y:t.y+t.h/2}),d=(p:{x:number;y:number},q:{x:number;y:number})=>Math.hypot(p.x-q.x,p.y-q.y);

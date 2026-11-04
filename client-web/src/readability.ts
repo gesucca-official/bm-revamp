@@ -259,13 +259,16 @@ export function previewAvoid(l:TableLayout,w:number,h:number):Box[]{const H=l.ha
  if(l.piles)out.push(l.piles.deck,l.piles.discard);if(l.played)out.push(l.played.box);return out;}
 /** C4-2 (owner, 4 November 2026): the chosen card waits for ✓ and × where the gesture ended: nearest to `anchor` (the drop point; on a tap or from the keyboard, the
  * target). Covering costs far more than distance, leaving the middle of the table a little; the target is never covered, so a second press on it cannot land on ✓.
+ * A gap is kept around the target for the arrow from the card, unless only a place next to the target is left.
  * The rest place of the layout when nothing else is left. */
 export function previewSpot(l:TableLayout,w:number,h:number,target:Box,anchor:Pt=target):Pt{
- const pw=l.preview.w+18,ph=l.preview.h+18,k=l.compact?6:12,avoid=previewAvoid(l,w,h),clear={...target,w:target.w+12,h:target.h+12};let best:Pt|null=null,score=Infinity;
- for(let y=ph/2+2;y<=h-ph/2-2;y+=6)for(let x=pw/2+2;x<=w-pw/2-2;x+=6){const b={x,y,w:pw,h:ph};if(overlap(b,clear)>0)continue;
-  const out=Math.max(0,w*.2-(x-pw/2),x+pw/2-w*.85)+Math.max(0,h*.05-(y-ph/2),y+ph/2-h*.95);let s=Math.hypot(x-anchor.x,y-anchor.y)*k+out*k*.5;if(s>=score)continue;
-  for(const a of avoid)s+=overlap(b,a);if(s<score){score=s;best={x,y};}}
- return best??{x:l.preview.x,y:l.preview.y};}
+ const pw=l.preview.w+18,ph=l.preview.h+18,k=l.compact?6:12,avoid=previewAvoid(l,w,h);
+ for(const gap of [l.compact?30:48,12]){const clear={...target,w:target.w+gap,h:target.h+gap};let best:Pt|null=null,score=Infinity;
+  for(let y=ph/2+2;y<=h-ph/2-2;y+=6)for(let x=pw/2+2;x<=w-pw/2-2;x+=6){const b={x,y,w:pw,h:ph};if(overlap(b,clear)>0)continue;
+   const out=Math.max(0,w*.2-(x-pw/2),x+pw/2-w*.85)+Math.max(0,h*.05-(y-ph/2),y+ph/2-h*.95);let s=Math.hypot(x-anchor.x,y-anchor.y)*k+out*k*.5;if(s>=score)continue;
+   for(const a of avoid)s+=overlap(b,a);if(s<score){score=s;best={x,y};}}
+  if(best)return best;}
+ return {x:l.preview.x,y:l.preview.y};}
 export function aimArrows(source:Box,targets:AimTarget[],view:{w:number;h:number},opts:{avoid?:Box[];head?:number;gap?:number}={}):Arrow[]{
  const avoid=opts.avoid??[],s=opts.head??10,gap=opts.gap??4,m=4,clampPt=(p:Pt):Pt=>({x:Math.max(m,Math.min(view.w-m,p.x)),y:Math.max(m,Math.min(view.h-m,p.y))});
  const grown={...source,w:source.w+6,h:source.h+6},crossings=(a:Pt,c:Pt,b:Pt)=>{let n=0;for(let i=1;i<24;i++){const p=bezier(a,c,b,i/24);if(!within(p,grown)&&avoid.some(x=>within(p,x,8)))n++;}return n;};

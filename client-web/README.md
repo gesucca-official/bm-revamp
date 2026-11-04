@@ -429,7 +429,8 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 ## Conferma sulla carta e dimensioni (C4-2)
 
 - **✓ e × stanno sulla carta scelta**, velata e divisa a metà (✓ sopra, × sotto) con tinte leggere; il testo della mossa sta in basso a sinistra, accanto alla mano (`confirmTextBox`).
-- **`previewSpot`** in `src/readability.ts`, pura: la carta sta il più vicino possibile al punto di rilascio (col tocco o la tastiera, al bersaglio), non copre mai il bersaglio e coprire il resto costa più della distanza; la zona centrale è solo indicativa.
+- **`previewSpot`** in `src/readability.ts`, pura: la carta sta il più vicino possibile al punto di rilascio (col tocco o la tastiera, al bersaglio), non copre mai il bersaglio e coprire il resto costa più della distanza; la zona centrale è solo indicativa, e lascia uno spazio per la freccia. La posizione parte dal bersaglio a riposo, così la carta non si sposta quando il mouse lascia il bersaglio.
+- **Freccia della conferma:** dalla carta al bersaglio, la stessa freccia cartoon della scelta del bersaglio (`confirmArrow`, stesso disegno di `drawAim`).
 - **`resize`:** la scena attende 120 ms che la misura si fermi e ridisegna solo se è cambiata, così le barre di Safari non fanno scattare `fitScale` a ogni passo.
 - **44 px:** al tavolo sotto 44 px restano solo i gettoni di stato (D8), il cui testo compare toccando il personaggio. Le carte del round aprono «Ultimo turno», che dice costo e guadagno.
 - **`viewport-fit=cover` resta fuori:** Safari già rientra dalle aree sicure e qui non si può provare; passa all'app futura con il resto di 750×292 ([rapporto](../docs/reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)).
