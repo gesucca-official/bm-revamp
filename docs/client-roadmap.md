@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**4 novembre 2026 — versione 40. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; in corso C4-5a).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**4 novembre 2026 — versione 41. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; C4-5a fatto, in attesa del giudizio del proprietario, O2 aperta; prossimo C4-5b).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -579,7 +579,7 @@ schermate e controlli utilizzabili anche senza hover.
 
 **Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
 decisioni D1–D14, in parte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
-**Stato (4 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); in corso C4-5a.
+**Stato (4 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **fatto, in attesa del giudizio del proprietario**, O2 aperta ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); prossimo C4-5b.
 
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder
@@ -650,7 +650,7 @@ indicato come decisione aperta.
 | ID | Osservazione | Tappa | Note e vincoli |
 |---|---|---|---|
 | O1 | Il pulsante «Riordina» non serve: il riordino si fa trascinando. | C1, **fatto** | Decisione del proprietario: aggiornato il gesto 1. Resta l'alternativa da tastiera; su touch il riordino resta solo trascinando, accettabile perché non è un'azione di gioco. |
-| O2 | Le sedie dello sfondo sono troppo eleganti per un bar marcio. | C4 | Rigenerare la texture del tavolo con lo stesso processo e registro di provenienza delle WebP C0; sedute consumate e spaiate, stessa palette. |
+| O2 | Le sedie dello sfondo sono troppo eleganti per un bar marcio. | C4-5a: **fatto, in attesa del giudizio del proprietario** | 4 novembre 2026: piano 2 stirato e tre sprite uniformi, modalità S scelta dal proprietario. [Registri](design/client-c4/background/layers/NOTA.md), [rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). O2 resta aperta fino al giudizio sul tavolo vero alle tre misure. |
 | O3 | Allerta, tossicità, violenza e alcol sono poco visibili rispetto alla salute. | C2a con O13, **implementata** | Integrarle nel segnapunti della salute con simboli e colori propri, sempre con il numero. Nessuna informazione affidata solo al colore. |
 | O4 | Oltre al numero serve una barra o una torta per capire se una risorsa è tanta o poca. | C2a con O13, **implementata** | Indicatore rispetto al valore iniziale del personaggio: salute piena all'inizio, le altre risorse a metà barra (decisione del proprietario in C2a). R01 non ha tetti né pavimenti: mostrare eccesso oltre l'iniziale e valori negativi, senza saturare l'indicatore o nascondere il numero. |
 | O5 | «Dettagli carta» è scomodo: meglio un pulsantino (i) sulla carta. | C1, **fatto** | (i) in alto a sinistra su hover e sulla carta selezionata o con focus. Su touch non c'è hover: il pulsante compare sulla carta selezionata. Tastiera invariata (I). |
@@ -755,6 +755,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 41 — 4 novembre 2026, C4-5a:** integrato piano 2 in modalità S, con tre sprite uniformi non interattivi e ombre dal codice; scelta esplicita del proprietario al posto del cover senza deformazione. Registri e inventario aggiornati; giro ufficiale 7/7 verde, Size entro limiti rigidi e 32 MiB di texture; rossi 750 preesistenti e conteggi invariati documentati; rossi separati Spring/manifest registrati senza cambiare attesi. O2 **fatto, in attesa del giudizio del proprietario** sul tavolo vero. Nessuna regola, API, protocollo o catalogo cambiati. [Rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2).
 
 - **Versione 40 — 4 novembre 2026, C4-3, C4-2 e C4-4 approvati:** il proprietario approva i tre blocchi. C4-4 dà a ogni tipologia di carta il proprio filetto nel margine, nello spessore medio scelto dal proprietario, e un segno del ruolo che esce dalla cornice. Nessuna regola, API o protocollo cambiati. [Rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14).
 - **Versione 39 — 4 novembre 2026, C4-2:** il proprietario sposta ✓ e × sulla carta scelta, divisa a metà, con il testo della mossa in basso a sinistra e la carta il più vicino possibile a dove è stata rilasciata; D8 è confermata. Nessuna regola, API o protocollo cambiati. [Rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292).

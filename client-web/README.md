@@ -435,6 +435,12 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 - **44 px:** al tavolo sotto 44 px restano solo i gettoni di stato (D8), il cui testo compare toccando il personaggio. Le carte del round aprono «Ultimo turno», che dice costo e guadagno.
 - **`viewport-fit=cover` resta fuori:** Safari già rientra dalle aree sicure e qui non si può provare; passa all'app futura con il resto di 750×292 ([rapporto](../docs/reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)).
 
+## Sfondo del tavolo (C4-5a, O2)
+
+`src/background.ts` calcola la geometria pura dalle dimensioni intrinseche delle texture. Con riferimento 2006×784: sx=W/2006, sy=H/784, centri degli oggetti (xi·sx, yi·sy), scala uniforme √(sx·sy) moltiplicata per altezza nominale/altezza texture. Il piano copre esattamente W×H. È una deformazione voluta del solo piano (circa +43,86% verticale a 1366×768, +18,23% a 844×390, −0,38% a 750×292), scelta al posto del cover uniforme. Nessuna geometria degli elementi di gioco cambia.
+
+`scene.ts` imposta trasformazioni assolute a ogni resize; ellissi scure con alfa e sfocatura separata seguono i parametri di NOTA.md. Ordine: piano, tre ombre, tre sprite, gioco. Decorazioni con eventi disattivati e fuori dagli hit; O24 è futuro. I test esercitano le tre misure e resize consecutivi, compreso il ritorno alla misura iniziale. Il test regola 10 conserva tutti i vincoli, anche su dist.
+
 ## Scala e spazio del tavolo (C3-L)
 
 Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
@@ -661,8 +667,7 @@ non sostituisce il dispositivo fisico né la prova umana.
 
 ## Risorse grafiche
 
-`public/art/table.webp` è la copia approvata in C0
-([provenienza](../docs/design/client-c0/r2-assets/README.md)). `atlas.webp` è
+`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: fatto, in attesa del giudizio del proprietario** sul tavolo vero. `atlas.webp` è
 l'atlante O9: 2048×1536, 8×6 riquadri da 256 px con le 40 illustrazioni
 provvisorie, più un segnaposto neutro. `manifest.json` dice quale riquadro spetta
 a ogni `bindingName` (`src/art.ts`); un nome sconosciuto usa il segnaposto.
@@ -687,6 +692,7 @@ e `tests/assets.test.ts` fallisce per un file non registrato o con impronta dive
   pavimenti, geometria del tavolo per duello e FFA a cinque (ventagli coperti,
   oggetti coperti da alzare al primo tocco).
 - `src/art.ts`: riquadro dell'atlante per `bindingName` (manifest letto a runtime).
+- `src/background.ts`: geometria pura del piano e dei tre sprite decorativi, indipendente dal layout di gioco.
 - `src/scene.ts`: tavolo Pixi, gesti e animazioni aggregate; non modifica il modello.
 - `src/resolution.ts`: fatti certi del round da due viste (C3-1), riepilogo per posto
   e riga dei turni risolti (C3-2), il testo di «Ultimo turno» e la riga breve (`roundReport`, `briefLine`, C3-6),

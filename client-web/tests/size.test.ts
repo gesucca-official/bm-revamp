@@ -6,9 +6,13 @@ import {RASTER,imageSize} from '../tools/image-size.mjs';
 // C4-3: size.mjs reads the pixel size of every raster format a block may bring, not only WebP.
 const art=(f:string)=>readFileSync(new URL(`../public/art/${f}`,import.meta.url));
 
-test('WebP: the two distributed images give the sizes of the manifest',()=>{
+test('WebP: the distributed images give the intrinsic sizes recorded for C4-5a',()=>{
  assert.deepEqual(imageSize(art('atlas.webp'),'atlas.webp'),{w:2048,h:1536});
- assert.deepEqual(imageSize(art('table.webp'),'table.webp'),{w:1672,h:941});
+ // Owner-selected plane 2 (4 November 2026); the game geometry and all size budgets stay unchanged.
+ assert.deepEqual(imageSize(art('table.webp'),'table.webp'),{w:2006,h:784});
+ assert.deepEqual(imageSize(art('sottobicchiere.webp'),'sottobicchiere.webp'),{w:937,h:630});
+ assert.deepEqual(imageSize(art('negroni.webp'),'negroni.webp'),{w:834,h:962});
+ assert.deepEqual(imageSize(art('posacenere.webp'),'posacenere.webp'),{w:973,h:844});
 });
 
 test('PNG, JPEG, GIF and AVIF headers give width and height',()=>{

@@ -1,5 +1,8 @@
 # C4-5a-prep — Specifica proposta del ritaglio
 
+**Specifica storica superata per C4-5a:** il 4 novembre 2026 il proprietario ha scelto la modalità S di [layers/NOTA.md](layers/NOTA.md#formule-proposte-e-simulazioni), piano 2 stirato e tre sprite uniformi. I calcoli cover sotto restano archiviati come proposta precedente; non sono il contratto del renderer integrato. [Decisione e limiti ammessi](../../../client-c4-plan.md#c4-5a--sfondo-e-identità-del-bar-o2).
+
+
 4 novembre 2026. **Specifica per il blocco successivo, non implementazione né prova di rendering.** Si applica allo sfondo; le coordinate dei posti e delle carte non devono seguire il ritaglio dell'immagine. Fonti: [C4-5a, D6, D9, D11](../../../client-c4-plan.md), [direzione visiva](../../../client-roadmap.md#direzione-visiva-e-interazioni), [scene.ts](../../../../client-web/src/scene.ts), [readability.ts](../../../../client-web/src/readability.ts).
 
 ## Base letta e metodo

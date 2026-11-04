@@ -1,0 +1,163 @@
+{
+  "sourceBase": "docs/reports/client-c4/c4-4/base-750x292/layout-750x292.json",
+  "scenarios": {
+    "duel": {
+      "baseCounts": [
+        6,
+        6,
+        6
+      ],
+      "currentCounts": [
+        6,
+        6,
+        6
+      ],
+      "baseScale": [
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        }
+      ],
+      "currentScale": [
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        }
+      ],
+      "frames": [
+        {
+          "turn": 0,
+          "intervals": 1099,
+          "p95": 8.6,
+          "max": 30.5,
+          "within": 1,
+          "limit": 33,
+          "inputMax": 14.7,
+          "inputs": 3
+        },
+        {
+          "turn": 1,
+          "intervals": 1316,
+          "p95": 8.5,
+          "max": 20,
+          "within": 1,
+          "limit": 33,
+          "inputMax": 13.9,
+          "inputs": 14
+        }
+      ]
+    },
+    "ffa": {
+      "baseCounts": [
+        11,
+        11,
+        11
+      ],
+      "currentCounts": [
+        11,
+        11,
+        11
+      ],
+      "baseScale": [
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        }
+      ],
+      "currentScale": [
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        },
+        {
+          "me": 1,
+          "others": 1,
+          "items": 1,
+          "resources": 1
+        }
+      ],
+      "frames": [
+        {
+          "turn": 0,
+          "intervals": 2513,
+          "p95": 9.7,
+          "max": 57.7,
+          "within": 1,
+          "limit": 33,
+          "inputMax": 18.2,
+          "inputs": 31
+        },
+        {
+          "turn": 1,
+          "intervals": 2225,
+          "p95": 9.1,
+          "max": 39.4,
+          "within": 1,
+          "limit": 33,
+          "inputMax": 17.1,
+          "inputs": 3
+        }
+      ]
+    }
+  },
+  "oldProblems": 48,
+  "newProblems": 48,
+  "oldErrors": [],
+  "newErrors": [],
+  "unchanged": {
+    "client-web/src/readability.ts": true,
+    "client-web/src/style.css": true,
+    "client-web/tests/readability.test.ts": true,
+    "client-web/tests/assets.test.ts": true
+  }
+}

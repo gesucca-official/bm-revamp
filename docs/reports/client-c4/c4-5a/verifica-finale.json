@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-04",
+  "clientDist": "56c79f79ca274f09",
+  "actualDistFilesMatchOfficialSize": true,
+  "sourceAndTestsSha256": {
+    "client-web/src/background.ts": "f28c63569c7fbeb0242daf797505472f5c1fa08b34297f32861a969a7e1a35ac",
+    "client-web/src/scene.ts": "d42dd86d9fe4e877d6e19c960801bc13f6c04210d7b4bdab651f073d3130bbba",
+    "client-web/tests/background.test.ts": "54fc31ed45ce7e4e43d0cff05acec0cb4429b9233b5908918e1ccb286615b2ed",
+    "client-web/tests/size.test.ts": "e60b888162faa3d0aa950af61d9953051748e8bb26641328bbdda4c89c35c9ad",
+    "client-web/tests/assets.test.ts": "ee6cdb9978a7aa674301e6f5bf09a83985fbd4443d8604449cf166c3fe17469c",
+    "client-web/src/readability.ts": "dde7e201f1eea335367c8aede249d244f75f4f8ab64e58277bb1d4a860a5ac1b",
+    "client-web/src/style.css": "fa3ce62cb4dbc61011d75bcfc4be64d0c24bab860f86c6d8da70b56601f4b413",
+    "docs/design/client-c4/assets/inventory.json": "e1ef10b21e55eefe8d5c7f492243550abb772de309732821cf1ab0063ddfffd8"
+  },
+  "noThresholdRelaxed": true,
+  "expectedDimensionChange": "owner-selected table 1672x941 -> 2006x784; three prop intrinsic sizes added; game geometry and BASE_750 expectations unchanged",
+  "knownRed": [
+    "Verify 750 status-tip (same-view before/after identical)",
+    "VerifyLayout 750: 48 messages, same as C4-4",
+    "Full Spring context: one timeout/null private account error; focused method green",
+    "Manifest audit: expects rules 1.6, fresh CLI exports have 1.10"
+  ]
+}

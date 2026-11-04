@@ -1,0 +1,244 @@
+{
+  "runtime": "v24.13.0",
+  "versions": {
+    "aom": "3.15.1",
+    "archive": "3.8.9",
+    "cairo": "1.18.6",
+    "cgif": "0.5.4",
+    "exif": "0.6.26",
+    "expat": "2.8.5",
+    "ffi": "3.8.0",
+    "fontconfig": "2.18.3",
+    "freetype": "2.14.3",
+    "fribidi": "1.0.17",
+    "glib": "2.90.0",
+    "harfbuzz": "14.5.0",
+    "heif": "1.23.5",
+    "highway": "1.4.0",
+    "imagequant": "2.4.1",
+    "lcms": "2.19.1",
+    "mozjpeg": "0826579",
+    "pango": "1.58.2",
+    "pixman": "0.46.4",
+    "png": "1.6.58",
+    "proxy-libintl": "0.5",
+    "rsvg": "2.63.2",
+    "tiff": "4.7.2",
+    "uhdr": "2.0.2",
+    "vips": "8.18.7",
+    "webp": "1.6.0",
+    "xml2": "2.15.4",
+    "zlib-ng": "2.3.3",
+    "sharp": "0.35.5"
+  },
+  "filter": "nessuno: nessun ridimensionamento o ritaglio",
+  "options": {
+    "alphaQuality": 100,
+    "effort": 6,
+    "smartSubsample": true,
+    "lossless": false,
+    "preset": "default",
+    "metadata": "rimossi (default sharp), originali conservati"
+  },
+  "files": [
+    {
+      "source": "piano-2.png",
+      "sha256": "5597b4cfc7c0cfe9660286f5f54002db3b0979c4dae7aa7ed5d4b0f36d225320",
+      "bytes": 2414884,
+      "width": 2006,
+      "height": 784,
+      "variants": [
+        {
+          "quality": 80,
+          "file": "piano-2-q80.webp",
+          "bytes": 255590,
+          "sha256": "f8ba00bcc5eb49c1946677859885f6f04d533125cede3ddd8f56a1778de73eec",
+          "hasAlpha": false
+        },
+        {
+          "quality": 90,
+          "file": "piano-2-q90.webp",
+          "bytes": 417820,
+          "sha256": "87ee30faf1190af1759533f8c9640b98d3da9377f2d5ce98609129a4fac92d3e",
+          "hasAlpha": false
+        }
+      ],
+      "chosen": {
+        "quality": 90,
+        "file": "piano-2-q90.webp",
+        "bytes": 417820,
+        "sha256": "87ee30faf1190af1759533f8c9640b98d3da9377f2d5ce98609129a4fac92d3e",
+        "hasAlpha": false,
+        "destination": "art/table.webp"
+      }
+    },
+    {
+      "source": "sottobicchiere.png",
+      "sha256": "2d674b7b079efa85d33b45d45089dee800605f4c349d89e381a2e738200dc674",
+      "bytes": 1238800,
+      "width": 937,
+      "height": 630,
+      "variants": [
+        {
+          "quality": 80,
+          "file": "sottobicchiere-q80.webp",
+          "bytes": 80982,
+          "sha256": "c2927c9515a7bb6301efe3f108f384ed3bdaee9bbf6cae955e71bae88fd2a700",
+          "hasAlpha": true
+        },
+        {
+          "quality": 90,
+          "file": "sottobicchiere-q90.webp",
+          "bytes": 134052,
+          "sha256": "5b10316858161c05f47b9671536d6b79aa2a6c2303b272157de3243d816a3bb6",
+          "hasAlpha": true
+        }
+      ],
+      "chosen": {
+        "quality": 80,
+        "file": "sottobicchiere-q80.webp",
+        "bytes": 80982,
+        "sha256": "c2927c9515a7bb6301efe3f108f384ed3bdaee9bbf6cae955e71bae88fd2a700",
+        "hasAlpha": true,
+        "destination": "art/sottobicchiere.webp"
+      },
+      "alphaCheck": {
+        "differentPixels": 0,
+        "maxDifference": 0
+      }
+    },
+    {
+      "source": "negroni.png",
+      "sha256": "8c31f7a5385dcff7e9fc3a7246c7bf8e58bca667ebc484b97a99645fd4ab45c5",
+      "bytes": 1679440,
+      "width": 834,
+      "height": 962,
+      "variants": [
+        {
+          "quality": 80,
+          "file": "negroni-q80.webp",
+          "bytes": 126188,
+          "sha256": "f718a05da027b7b059ff8e51ad2946ae50d07aca759da18b235bc48b91031fc0",
+          "hasAlpha": true
+        },
+        {
+          "quality": 90,
+          "file": "negroni-q90.webp",
+          "bytes": 192392,
+          "sha256": "97cb121448d3a15a419e5ae3a64cf3dfcdedb788c349e068f61bcd3e5ea0b82a",
+          "hasAlpha": true
+        }
+      ],
+      "chosen": {
+        "quality": 80,
+        "file": "negroni-q80.webp",
+        "bytes": 126188,
+        "sha256": "f718a05da027b7b059ff8e51ad2946ae50d07aca759da18b235bc48b91031fc0",
+        "hasAlpha": true,
+        "destination": "art/negroni.webp"
+      },
+      "alphaCheck": {
+        "differentPixels": 0,
+        "maxDifference": 0
+      }
+    },
+    {
+      "source": "posacenere.png",
+      "sha256": "0941a046094a9bdcd05fd450d9b569be7fd306e77fbfe17ca78906f3d64e422b",
+      "bytes": 1660712,
+      "width": 973,
+      "height": 844,
+      "variants": [
+        {
+          "quality": 80,
+          "file": "posacenere-q80.webp",
+          "bytes": 134242,
+          "sha256": "de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7",
+          "hasAlpha": true
+        },
+        {
+          "quality": 90,
+          "file": "posacenere-q90.webp",
+          "bytes": 204484,
+          "sha256": "80a2f761091a55bde5aca0a425bdb356b08fe4ed842aea580ddca038d09f9bd3",
+          "hasAlpha": true
+        }
+      ],
+      "chosen": {
+        "quality": 80,
+        "file": "posacenere-q80.webp",
+        "bytes": 134242,
+        "sha256": "de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7",
+        "hasAlpha": true,
+        "destination": "art/posacenere.webp"
+      },
+      "alphaCheck": {
+        "differentPixels": 0,
+        "maxDifference": 0
+      }
+    }
+  ],
+  "provenance": {
+    "date": "2026-11-04",
+    "h1": "c8729f36a25cadfff882d090cf9d2c2058bd57c8c7d085af83d26fdeb7d778f8",
+    "check": [
+      {
+        "file": "piano-2.png",
+        "sha256": "5597b4cfc7c0cfe9660286f5f54002db3b0979c4dae7aa7ed5d4b0f36d225320",
+        "bytes": 2414884
+      },
+      {
+        "file": "sottobicchiere.png",
+        "sha256": "2d674b7b079efa85d33b45d45089dee800605f4c349d89e381a2e738200dc674",
+        "bytes": 1238800
+      },
+      {
+        "file": "negroni.png",
+        "sha256": "8c31f7a5385dcff7e9fc3a7246c7bf8e58bca667ebc484b97a99645fd4ab45c5",
+        "bytes": 1679440
+      },
+      {
+        "file": "posacenere.png",
+        "sha256": "0941a046094a9bdcd05fd450d9b569be7fd306e77fbfe17ca78906f3d64e422b",
+        "bytes": 1660712
+      },
+      {
+        "file": "sprite-sottobicchiere-fondo.png",
+        "sha256": "aa24f532b9e4d4ead82a145b4278783686ad072a357c164a2b0a87ebb3882267",
+        "bytes": 1567430
+      },
+      {
+        "file": "sprite-negroni-fondo.png",
+        "sha256": "6055563532a37582ad5175f1699443520378545b0faebd37407f52bb6c105818",
+        "bytes": 1834871
+      },
+      {
+        "file": "sprite-posacenere-fondo.png",
+        "sha256": "6677699b5070ca15cdc47e3f66213f4f431850bcef8718f3eab9f8a48b89ff90",
+        "bytes": 1805147
+      },
+      {
+        "file": "riferimenti/sottobicchiere-H1.png",
+        "sha256": "dce1cbd7c82795b0d0d1fa1e77f366010203eff809d65ad84ddc7298711d8d31",
+        "bytes": 161792
+      },
+      {
+        "file": "riferimenti/negroni-H1.png",
+        "sha256": "ed56aab268ed2d973ecacd8e8ef8c5eb2e16f7555a975780596f589722efdaa6",
+        "bytes": 254850
+      },
+      {
+        "file": "riferimenti/posacenere-H1.png",
+        "sha256": "2a324404d9d5ae88af819b728ad2ec8c9441801e6478992e7625beba308ea3c0",
+        "bytes": 244805
+      }
+    ]
+  },
+  "date": "2026-11-04",
+  "review": {
+    "order": "originale, qualità 80, qualità 90; legno scuro sopra e chiaro sotto",
+    "plane": "A qualità 80 visibili blocchi e perdita delle venature a pixel nativi; a 90 non noto artefatti visibili nel campione. Scelta 90, più bassa delle qualità confrontate priva di questi artefatti.",
+    "sprites": "Non noto nuovi aloni o frange blu/verdi sui compositi su legno chiaro e scuro a scala 360 px; il bordo scuro illustrato è già nel PNG. Non noto vantaggi visibili di 90 rispetto a 80. Scelta 80 per tutti e tre; osservazione visiva, non certificazione percettiva.",
+    "limits": "Il vetro resta coprente come nel PNG; non ricostruisce la trasmissione fisica della luce."
+  }
+}

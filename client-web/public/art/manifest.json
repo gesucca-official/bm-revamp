@@ -4,12 +4,12 @@
   "files": [
     {
       "file": "art/table.webp",
-      "source": "../../docs/design/client-c0/r2-assets/table.png",
-      "quality": 74,
-      "width": 1672,
-      "height": 941,
-      "bytes": 212340,
-      "sha256": "47433a9739acc1eef24d559772bd9cd94b6c2390d2658275eff2a9660007e53e"
+      "source": "docs/design/client-c4/background/layers/piano-2.png",
+      "quality": 90,
+      "width": 2006,
+      "height": 784,
+      "bytes": 417820,
+      "sha256": "87ee30faf1190af1759533f8c9640b98d3da9377f2d5ce98609129a4fac92d3e"
     },
     {
       "file": "art/atlas.webp",
@@ -66,6 +66,33 @@
         "junkie.character.RottenSmile": 38,
         "junkie.character.ToxicJunkie": 39
       }
+    },
+    {
+      "file": "art/sottobicchiere.webp",
+      "source": "docs/design/client-c4/background/layers/sottobicchiere.png",
+      "quality": 80,
+      "width": 937,
+      "height": 630,
+      "bytes": 80982,
+      "sha256": "c2927c9515a7bb6301efe3f108f384ed3bdaee9bbf6cae955e71bae88fd2a700"
+    },
+    {
+      "file": "art/negroni.webp",
+      "source": "docs/design/client-c4/background/layers/negroni.png",
+      "quality": 80,
+      "width": 834,
+      "height": 962,
+      "bytes": 126188,
+      "sha256": "f718a05da027b7b059ff8e51ad2946ae50d07aca759da18b235bc48b91031fc0"
+    },
+    {
+      "file": "art/posacenere.webp",
+      "source": "docs/design/client-c4/background/layers/posacenere.png",
+      "quality": 80,
+      "width": 973,
+      "height": 844,
+      "bytes": 134242,
+      "sha256": "de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7"
     }
   ]
 }

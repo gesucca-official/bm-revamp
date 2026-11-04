@@ -1,6 +1,6 @@
 # C4-5a-layers — Registro sprite-posacenere
 
-4 novembre 2026. Risultato non approvato né integrato. Operatore Codex, modello agente gpt-6.1-sol. Struttura tratta dal modello registro-generazione.md, rimasto invariato. Richiesta effettiva in richieste-generazione.json; dati e SHA-256 in metadati-file.json. Termini e condizioni **da verificare dal proprietario**.
+4 novembre 2026. Scelto per l’integrazione C4-5a secondo la modalità S; giudizio sul tavolo vero ancora da dare. Operatore Codex, modello agente gpt-6.1-sol. Struttura tratta dal modello registro-generazione.md, rimasto invariato. Richiesta effettiva in richieste-generazione.json; dati e SHA-256 in metadati-file.json. Termini forniti dal proprietario: «quelli delle immagini generate da te»; dettagli non verificati restano dichiarati sotto.
 
 ## Identificazione e cronologia
 
@@ -72,20 +72,20 @@ Se il servizio ha modificato gli allegati internamente e lo espone, annotarlo. N
 
 | Campo | Valore da compilare |
 |---|---|
-| Titolo e URL dei termini applicabili allo strumento usato | non verificato — da verificare dal proprietario |
-| Versione / data dei termini | non verificato — da verificare dal proprietario |
-| Data di consultazione | non verificato — da verificare dal proprietario |
-| Piano/account o condizioni specifiche rilevanti, senza dati riservati | non verificato — da verificare dal proprietario |
-| Riferimento alla copia/evidenza dei termini consultati | non verificato — da verificare dal proprietario |
-| Condizioni dichiarate per uso dell'output e distribuzione nel progetto | non verificato — da verificare dal proprietario |
-| Restrizioni o attribuzioni richieste dallo strumento | non verificato — da verificare dal proprietario |
+| Titolo e URL dei termini applicabili allo strumento usato | non verificato; il proprietario indica «quelli delle immagini generate da te» |
+| Versione / data dei termini | non verificato |
+| Data di consultazione | non verificato; dichiarazione di consultazione ricevuta il 4 novembre 2026 |
+| Piano/account o condizioni specifiche rilevanti, senza dati riservati | non verificato |
+| Riferimento alla copia/evidenza dei termini consultati | [Dichiarazione testuale del proprietario](decisione-proprietario.md), 4 novembre 2026; nessuna copia dei termini fornita |
+| Condizioni dichiarate per uso dell'output e distribuzione nel progetto | «quelli delle immagini generate da te» (fonte: proprietario, messaggio C4-5a del 4 novembre 2026); condizioni specifiche non verificate |
+| Restrizioni o attribuzioni richieste dallo strumento | non verificato |
 | C2PA presente/esposto, assente o non verificato | Presente nel PNG originale; firma, certificati e validità crittografica non verificati. |
 | Strumento e versione usati per leggere C2PA | Node 24.13.0, ricerca delle stringhe nel PNG; non un validatore C2PA. |
 | Dati C2PA esposti e riferimento al manifest/evidenza conservata | Originale sprite-posacenere-fondo.png: c2pa.actions.v2 e stringa ChatGPT / gpt-image osservati; altri dettagli non verificati. |
 | Eventuali differenze tra dati dichiarati, C2PA e metadati | Tool restituisce image_url/output_hint; nome generico letto nel PNG. Derivati prodotti da sharp non conservano C2PA; originale invariato conserva i metadati. |
-| Dichiarazione di provenienza/licenza da usare nell'inventario, con fonte | non verificato — da verificare dal proprietario |
+| Dichiarazione di provenienza/licenza da usare nell'inventario, con fonte | Diritti riservati del progetto (CONTRIBUTING.md); termini d’uso «quelli delle immagini generate da te», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusività dell’output dichiarata. |
 
-Non dedurre versione del modello, diritti esclusivi o licenza dal semplice fatto che il file sia generato. Conservare l'originale prima delle conversioni: non presumere che la WebP mantenga metadati o C2PA. La lettura dei termini e l'eventuale valutazione delle condizioni appartengono al blocco successivo; nessun termine è stato verificato in questa preparazione.
+Non dedurre versione del modello, diritti esclusivi o licenza dal semplice fatto che il file sia generato. Conservare l'originale prima delle conversioni: non presumere che la WebP mantenga metadati o C2PA. Il proprietario dichiara di aver consultato i termini e fornisce la frase sopra; la presente integrazione non ne deduce dettagli ulteriori.
 
 ## File generato originale
 
@@ -109,19 +109,17 @@ Chiave colore con stima alfa e soglia 0,12; rimozione spill; componente connessa
 
 | Passo | File di ingresso e SHA-256 | Operazione e parametri esatti | Strumento e versione | File di uscita e SHA-256 | Dimensioni / byte |
 |---|---|---|---|---|---|
-| | | | | | |
-| | | | | | |
-| | | | | | |
+| WebP C4-5a | posacenere.png, `0941a046094a9bdcd05fd450d9b569be7fd306e77fbfe17ca78906f3d64e422b` | Nessun resize/crop; filtro nessuno; WebP lossy q=80, alphaQuality=100, effort=6, smartSubsample=true, preset=default; metadati/C2PA rimossi dal derivato | Node 24.13.0; sharp 0.35.5; libvips 8.18.7; libwebp 1.6.0 | `client-web/public/art/posacenere.webp`, `de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7` | 973×844; 134242 B |
 
 Registrare separatamente: eventuale ritaglio permanente con rettangolo x/y/larghezza/altezza in pixel del sorgente; eventuali ritocchi; ridimensionamento con filtro; compressione WebP con qualità, modalità e gestione dei metadati; ogni file intermedio conservato. Se non si effettua ritaglio permanente, dichiararlo.
 
 | Campo | Valore da compilare |
 |---|---|
-| File finale distribuito e SHA-256 | |
-| Parametri del ritaglio dinamico del renderer / collegamento alla specifica adottata | |
-| Risultati del calcolo alle tre misure con le dimensioni finali | |
-| Voce dell'inventario aggiornata / commit d'integrazione | |
-| Collegamento alle evidenze e ai risultati delle verifiche successive | |
+| File finale distribuito e SHA-256 | `client-web/public/art/posacenere.webp` — `de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7` |
+| Parametri del ritaglio dinamico del renderer / collegamento alla specifica adottata | [Modalità S](NOTA.md#formule-proposte-e-simulazioni), scelta il 4 novembre 2026: piano W×H; centri proporzionali; sprite uniformi; taglio solo ai bordi della scena |
+| Risultati del calcolo alle tre misure con le dimensioni finali | [Piano e limiti](../../../../client-c4-plan.md#c4-5a--sfondo-e-identità-del-bar-o2); test background.test.ts; geometria finale nel rapporto |
+| Voce dell'inventario aggiornata / commit d'integrazione | [inventory.json](../../assets/inventory.json), C4-5a (stesso commit di questa scheda) |
+| Collegamento alle evidenze e ai risultati delle verifiche successive | [Rapporto C4-5a](../../../../reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2); [conversione e hash](../../../../reports/client-c4/c4-5a/conversione.json) |
 
 Il cover dinamico non modifica i byte della WebP e non va confuso con un ritaglio eseguito sul file.
 
@@ -129,17 +127,17 @@ Il cover dinamico non modifica i byte della WebP e non va confuso con un ritagli
 
 | Campo | Valore da compilare |
 |---|---|
-| Data e autore del giudizio | |
-| File / hash della variante giudicata | |
-| Contesto: originale isolato, proposta sul tavolo, integrazione finale | |
-| Sedute consumate e spaiate, senza eleganza (O2) | |
-| Continuità con palette, legno, luce, composizione e identità R1 | |
-| Assenza di testo, marchi, persone, carte e interfaccia nel bitmap | |
-| Esito sui ritagli 1366×768 / 844×390 / 750×292 | |
-| Leggibilità con posti, mano, pile e scritta sovrapposti | |
-| Giudizio su desktop; eventuale iPhone e limiti dichiarati | |
-| Esito: approvata / da correggere / respinta | |
-| Motivazione e correzioni richieste | |
-| Riferimento al messaggio o evidenza del giudizio | |
+| Data e autore del giudizio | 4 novembre 2026, proprietario (messaggio C4-5a) |
+| File / hash della variante giudicata | Simulazione S-piano2 di layers/NOTA.md; sorgente scelta `posacenere.png`, `0941a046094a9bdcd05fd450d9b569be7fd306e77fbfe17ca78906f3d64e422b`; integrazione finale non ancora giudicata |
+| Contesto: originale isolato, proposta sul tavolo, integrazione finale | Simulazione S-piano2, prima dell’integrazione sul tavolo vero |
+| Sedute consumate e spaiate, senza eleganza (O2) | non fornito per il tavolo vero |
+| Continuità con palette, legno, luce, composizione e identità R1 | non fornito per il tavolo vero |
+| Assenza di testo, marchi, persone, carte e interfaccia nel bitmap | non fornito per il tavolo vero |
+| Esito sui ritagli 1366×768 / 844×390 / 750×292 | non fornito per il tavolo vero |
+| Leggibilità con posti, mano, pile e scritta sovrapposti | non fornito per il tavolo vero |
+| Giudizio su desktop; eventuale iPhone e limiti dichiarati | non fornito per il tavolo vero |
+| Esito: approvata / da correggere / respinta | Scelta per l’integrazione in modalità S; giudizio sul tavolo vero ancora da dare |
+| Motivazione e correzioni richieste | Il proprietario ha giudicato la simulazione S-piano2 la migliore; piano stirato e tre sprite uniformi, centri proporzionali |
+| Riferimento al messaggio o evidenza del giudizio | [Istruzione del proprietario](decisione-proprietario.md) |
 
-L'approvazione della sola immagine non chiude l'integrazione né sostituisce il giudizio sul tavolo vero. Il registro completo accompagna inventario ed evidenze, secondo la [checklist](checklist-integrazione.md).
+L'approvazione della sola immagine non chiude l'integrazione né sostituisce il giudizio sul tavolo vero. Il registro completo accompagna inventario ed evidenze, secondo la [checklist](../checklist-integrazione.md).

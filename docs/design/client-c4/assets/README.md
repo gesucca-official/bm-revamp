@@ -1,6 +1,6 @@
-# Inventario degli asset del client web (C4-3)
+# Inventario degli asset del client web (C4-3, C4-5a)
 
-3 novembre 2026. Registro unico di ciò che `client-web` distribuisce e di come ci è arrivato, secondo la
+4 novembre 2026. Registro unico di ciò che `client-web` distribuisce e di come ci è arrivato, secondo la
 [regola 10](../../../client-c4-plan.md#regole-di-non-regressione) del piano C4 (nessun asset senza provenienza e licenza) e la
 regola 14 (nessun asset dai quattro giochi di riferimento né da Internet con diritti incerti). Il dato è in
 [inventory.json](inventory.json); questa pagina lo spiega. Il test `client-web/tests/assets.test.ts` lo confronta con i file.
@@ -9,14 +9,21 @@ regola 14 (nessun asset dai quattro giochi di riferimento né da Internet con di
 
 | File | Autore e origine | URL | Versione | Licenza | Modifiche | Destinazione | SHA-256 |
 |---|---|---|---|---|---|---|---|
-| `art/table.webp` | Progetto: generata ex novo con imagegen integrato (C0-R2) da un riferimento del progetto (duello R1 approvato) | nessuno, non scaricata | 27 ottobre 2026 | diritti riservati del progetto, nessuna licenza concessa | solo compressione WebP (qualità 74) da `table.png` con sharp 0.35.5 | sfondo del tavolo | `47433a97…0e` |
+| `art/table.webp` | image_gen.imagegen integrato; stringa osservata ChatGPT / gpt-image, versione numerica non esposta (schede sotto) | nessun URL di download, funzione integrata | 4 novembre 2026 | diritti riservati del progetto; termini forniti: «quelli delle immagini generate da te» (fonte proprietario, [dichiarazione](../background/layers/decisione-proprietario.md)); dettagli non verificati | piano 2, WebP q90, alfa 100, effort 6, smartSubsample; nessun resize/crop aggiuntivo; metadati rimossi | tavolo, piano stirato | `87ee30faf1190af1759533f8c9640b98d3da9377f2d5ce98609129a4fac92d3e` |
+| `art/sottobicchiere.webp` | image_gen.imagegen integrato; stringa osservata ChatGPT / gpt-image, versione numerica non esposta (schede sotto) | nessun URL di download, funzione integrata | 4 novembre 2026 | diritti riservati del progetto; termini forniti: «quelli delle immagini generate da te» (fonte proprietario, [dichiarazione](../background/layers/decisione-proprietario.md)); dettagli non verificati | sottobicchiere, WebP q80, alfa 100, effort 6, smartSubsample; nessun resize/crop aggiuntivo; metadati rimossi | tavolo, sprite uniforme non interattivo | `c2927c9515a7bb6301efe3f108f384ed3bdaee9bbf6cae955e71bae88fd2a700` |
+| `art/negroni.webp` | image_gen.imagegen integrato; stringa osservata ChatGPT / gpt-image, versione numerica non esposta (schede sotto) | nessun URL di download, funzione integrata | 4 novembre 2026 | diritti riservati del progetto; termini forniti: «quelli delle immagini generate da te» (fonte proprietario, [dichiarazione](../background/layers/decisione-proprietario.md)); dettagli non verificati | negroni, WebP q80, alfa 100, effort 6, smartSubsample; nessun resize/crop aggiuntivo; metadati rimossi | tavolo, sprite uniforme non interattivo | `f718a05da027b7b059ff8e51ad2946ae50d07aca759da18b235bc48b91031fc0` |
+| `art/posacenere.webp` | image_gen.imagegen integrato; stringa osservata ChatGPT / gpt-image, versione numerica non esposta (schede sotto) | nessun URL di download, funzione integrata | 4 novembre 2026 | diritti riservati del progetto; termini forniti: «quelli delle immagini generate da te» (fonte proprietario, [dichiarazione](../background/layers/decisione-proprietario.md)); dettagli non verificati | posacenere, WebP q80, alfa 100, effort 6, smartSubsample; nessun resize/crop aggiuntivo; metadati rimossi | tavolo, sprite uniforme non interattivo | `de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7` |
 | `art/atlas.webp` | Progetto: 40 illustrazioni generate ex novo con imagegen integrato (O9), una per classe dell'allegato | nessuno, non scaricata | 27 ottobre 2026 | diritti riservati del progetto, nessuna licenza concessa | ridotte a 252 px (Lanczos3) con 2 px di bordo copiato, composte 8×6 da 256 px, WebP qualità 76; segnaposto tinta unita | illustrazioni delle carte | `839cffc9…ef956` |
-| `art/manifest.json` | Progetto: scritto da `tools/atlas.mjs` e a mano | nessuno | 27 ottobre 2026 | diritti riservati del progetto | nessuna | riquadro di ogni `bindingName` | `7ef05d38…c469` |
+| `art/manifest.json` | Progetto: scritto da `tools/atlas.mjs` e a mano | nessuno | 4 novembre 2026 | diritti riservati del progetto | metadati piano/sprite aggiornati; riquadri invariati | riquadro di ogni `bindingName` | impronta completa in inventory.json |
 
 Le impronte complete sono in [inventory.json](inventory.json). **Provenienze esistenti**, che l'inventario richiama senza ripetere:
 
-- `table.webp`: [risorse C0-R2](../../client-c0/r2-assets/README.md) e [assets.json](../../client-c0/r2-assets/assets.json); la sorgente
-  [table.png](../../client-c0/r2-assets/table.png) è tracciata (SHA-256 `42236445…ee01`).
+- `table.webp`: [registro piano 2](../background/layers/registro-piano-2.md), [sorgente tracciata](../background/layers/piano-2.png).
+- `sottobicchiere.webp`: [registro](../background/layers/registro-sprite-sottobicchiere.md), [sorgente RGBA](../background/layers/sottobicchiere.png).
+- `negroni.webp`: [registro](../background/layers/registro-sprite-negroni.md), [sorgente RGBA](../background/layers/negroni.png).
+- `posacenere.webp`: [registro](../background/layers/registro-sprite-posacenere.md), [sorgente RGBA](../background/layers/posacenere.png).
+- Conversione: [parametri, hash/byte prima e dopo, due qualità e controllo alfa](../../../reports/client-c4/c4-5a/conversione.json). Solo riferimenti H1 del progetto e suoi ritagli; hash confrontati con schede e metadati. Altri candidati archiviati, nessuno distribuito. C2PA degli originali presente, firma/certificati non verificati, non conservato nelle WebP.
+- Il vecchio `table.webp` C0-R2 resta nella storia: [registro](../../client-c0/r2-assets/README.md), [table.png](../../client-c0/r2-assets/table.png). Le lacune storiche non vengono sanate dalla nuova generazione.
 - `atlas.webp`: [illustrazioni O9](../../client-c2/o9-art/README.md) e [assets.json](../../client-c2/o9-art/assets.json) (impronta di ogni
   PNG e di ogni prompt, strumento, modello, data).
 

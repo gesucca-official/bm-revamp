@@ -7,7 +7,7 @@
 **D3, D4, D6, D9, D11, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; D7 e D10 non servono più dopo la revisione di D6; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
 proprietario. Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato di C4-1, C4-1b, C4-3, C4-2 e C4-4.** C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
+**Stato di C4-1, C4-1b, C4-3, C4-2, C4-4 e C4-5a.** C4-5a è **fatto, in attesa del giudizio del proprietario** sul tavolo vero alle tre misure; O2 resta aperta ([rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)). C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
 [rapporto](reports/client-c4-report.md#c4-1b--misura-di-partenza). I criteri di [C4-1](#c4-1--strumenti-di-verifica-o23) restano quelli con cui
 si è giudicato lo strumento.
@@ -348,22 +348,29 @@ come in C3-5. Cattura in scala di grigi: le tipologie restano distinguibili. Giu
 
 ### C4-5a — Sfondo e identità del bar (O2)
 
-**Perimetro.** Nuova texture con sedute consumate e spaiate, stessa palette, con il processo e il registro di D11. **Toglie lo stiramento**:
-ritaglio con una zona sicura centrale e dettagli periferici sacrificabili, così a 750×292 e a 1366×768 la scena non si deforma. Stessa
-identità nella scritta decorativa del tavolo, senza coprire i posti.
+**Stato, 4 novembre 2026: fatto, in attesa del giudizio del proprietario.** O2 resta aperta; [verifiche, Size e catture sul tavolo vero](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). Giro ufficiale 7/7 verde; a 750×292 conteggi invariati e rossi preesistenti dichiarati nel rapporto; controlli separati Spring/manifest rossi e diagnosticati, senza modifiche fuori ambito.
 
-**Dipendenze.** D11 (confermata: genera il proprietario, l'agente scrive prompt e registro). La generazione può andare in parallelo; l'integrazione è in fila. Non dipende dalle cornici, ma si giudica meglio dopo.
+**Decisione del proprietario del 4 novembre 2026 (sostituisce l'obiettivo precedente «nessuna deformazione alle tre misure»).** Scelto **piano 2 stirato a riempire la scena**, più sottobicchiere, Negroni e posacenere separati, senza stiramento: modalità **S** di [layers/NOTA.md](design/client-c4/background/layers/NOTA.md#formule-proposte-e-simulazioni). Motivo fornito: il proprietario ha giudicato la simulazione **S-piano2 la migliore**. La scelta della simulazione non costituisce approvazione dell'integrazione sul tavolo vero.
 
-**File toccati.** `public/art/table.webp`, `scene.ts` (solo `resize`), `style.css` (`.brand`), inventario, `docs/design/client-c4/`, documenti comuni.
+**Perimetro.** Riferimento 2006×784: sx=W/2006, sy=H/784; piano W×H, origine (0,0). Centro di ogni sprite (xi×sx, yi×sy); scala uniforme √(sx×sy), dopo la normalizzazione altezza nominale/altezza intrinseca della texture. Ombre separate dal codice con i parametri di NOTA.md. Nessuna modifica a posti, carte, mano, pile o comandi; decorazioni senza interazione (O24 futuro). Stessa scritta decorativa, da ritoccare solo se copre posti.
 
-**Rischi.** Il prompt va salvato e committato **prima** di generare: i prompt letterali di C0-R2 sono andati persi. Lo strumento del proprietario può non
-essere quello di R1: stile da giudicare accanto a carte e plance. La direzione R1 è approvata e non va
-rifatta: si correggono le sedie, non il bar. Leggibilità di carte e plance sopra un fondo più ricco. Peso entro D9.
+**Deformazione ammessa del solo piano.** Rapporto verticale relativo sy/sx−1 (negativo = lieve schiacciamento verticale); il test applica i massimi seguenti, arrotondati verso l'alto, senza tollerare deformazione degli sprite:
 
-**Completamento verificabile.** Registro completo e test della regola 10 verde; nessuna deformazione alle tre misure (proporzioni calcolate nel
-test); posti e testi leggibili sopra il nuovo fondo (contrasto misurato in C4-8a); `Size` verde; giudizio del proprietario su desktop, iPhone facoltativo.
+| Scena | sy/sx−1 calcolato | Massimo assoluto ammesso |
+|---|---:|---:|
+| 1366×768 | +43,8551% | 43,86% |
+| 844×390 | +18,2325% | 18,24% |
+| 750×292 | −0,3823% | 0,39% |
 
-**Verifiche.** `Verify`, `VerifyLayout`, alle misure ufficiali.
+**Dipendenze.** D11; prompt e originali già tracciati in [background/layers](design/client-c4/background/layers/NOTA.md). Il proprietario fornisce in questa sessione i termini: «quelli delle immagini generate da te»; titolo/URL/versione e condizioni specifiche non verificati restano tali nei registri. Solo riferimenti del progetto, hash coincidenti con le schede (regola 14). Altri candidati archiviati, mai in public/.
+
+**File toccati.** `public/art/table.webp`, tre WebP con alfa, geometria pura dello sfondo, `scene.ts`, relativo test, inventario, registri e documenti comuni. `style.css` solo se occorre spostare `.brand`.
+
+**Rischi.** Il piano è volutamente deformato; gli oggetti uniformi possono raccordarsi in modo approssimativo al bordo. Leggibilità su un fondo più chiaro e ricco, aloni degli sprite, costo in FFA e texture entro D9 rivista. Non si deducono licenze o versioni non esposte.
+
+**Completamento verificabile.** Registri e regole 10/14 verificati; confronto di almeno due qualità WebP, bordi su legno chiaro/scuro; copertura completa, centri proporzionali e scala uniforme degli sprite alle tre misure anche dopo resize consecutivi; deformazione del piano entro i massimi sopra; geometria di gioco e BASE_750 invariate; posti e testi osservati sul tavolo vero (contrasto formale a C4-8a); `Size` prima/dopo nei limiti rigidi e 32 MiB di texture; giudizio del proprietario ancora richiesto sul risultato integrato.
+
+**Verifiche.** `VerifyAll -Only 'test,build,size,verify,layout'` alle misure ufficiali; `Verify` e `VerifyLayout` aggiuntive a 750×292 per regola 18, dichiarando i rossi preesistenti senza rilassare soglie. Verifiche comuni di AGENTS. O2: «fatto, in attesa del giudizio del proprietario» solo dopo l'integrazione e le prove.
 
 ### C4-5b — Coerenza di tutte le schermate
 
@@ -509,7 +516,7 @@ non è provato.
 | C4-3 | ● | | | | ● | ● | | ○ | | ● |
 | C4-2 | ● 750 | | ○ | ● 750 | | | | ○ | ● 750 | ● 750 |
 | C4-4 | ● | | | | ● | | | ○ | | ● |
-| C4-5a | ● | | | | | | | | | ● |
+| C4-5a | ● 750 | | | | | | | | | ● 750 |
 | C4-5b | | ● | ● | ● | ● | ● | ● | | | |
 | C4-6* | | | | | ● | | | | | ● |
 | C4-7* | ● | | | | | | | ○ | | |

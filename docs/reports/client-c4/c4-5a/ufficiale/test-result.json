@@ -1,0 +1,9 @@
+{
+  "tests": 230,
+  "pass": 230,
+  "fail": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "runtime": "Node v24.13.0",
+  "rawLogSha256": "8d453345478eea8b67fe82a3540f4bfd0c88e3ef72989cf6b37768aab8be6a06"
+}

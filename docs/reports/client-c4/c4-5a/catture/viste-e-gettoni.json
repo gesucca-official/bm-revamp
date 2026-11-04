@@ -1,0 +1,326 @@
+{
+  "date": "2026-11-04T19:01:33.647Z",
+  "kind": "partite reali; stessa vista del server nelle coppie prima/dopo, build precedente archiviata temporaneamente e build finale su Edge, Node 24; mano alzata con focus",
+  "records": [
+    {
+      "mode": "duello",
+      "before": {
+        "turn": 2,
+        "order": [
+          "ADOPERIAMOTI",
+          "SVEGLIAMOCI MA TU NO",
+          "LIEVE FASTIDIO",
+          "STORDIAMOTI HO DETTO",
+          "BELLO IL TUO GIOCATTOLO SI",
+          "ORMALE GUARIAMOTI"
+        ],
+        "resources": {
+          "HEALTH": 85,
+          "ALERTNESS": 35,
+          "VIOLENCE": 30
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Rabbia Psicotica da Meth",
+          "PAZIENZA: FINITA"
+        ],
+        "items": [
+          "Peroni da 66, calda",
+          "Tennents Super",
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "after": {
+        "turn": 2,
+        "order": [
+          "ADOPERIAMOTI",
+          "SVEGLIAMOCI MA TU NO",
+          "LIEVE FASTIDIO",
+          "STORDIAMOTI HO DETTO",
+          "BELLO IL TUO GIOCATTOLO SI",
+          "ORMALE GUARIAMOTI"
+        ],
+        "resources": {
+          "HEALTH": 85,
+          "ALERTNESS": 35,
+          "VIOLENCE": 30
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Rabbia Psicotica da Meth",
+          "PAZIENZA: FINITA"
+        ],
+        "items": [
+          "Peroni da 66, calda",
+          "Tennents Super",
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "sameView": true,
+      "beforeChips": [
+        {
+          "id": "status-ComPlayer_6071-imm-TOXICITY",
+          "x": 399.30000000000007,
+          "y": 124.23199999999997,
+          "shown": false,
+          "text": null
+        },
+        {
+          "id": "status-devAlice-st-0",
+          "x": 143.3,
+          "y": 218.232,
+          "shown": true,
+          "text": "Stato negativo: NO PATIENCE - Damage Intake Boost\nColpi (HIT) ricevuti ×1,5. finisce a fine turno."
+        }
+      ]
+    },
+    {
+      "mode": "duello",
+      "width": 844,
+      "height": 390,
+      "view": {
+        "turn": 2,
+        "order": [
+          "ADOPERIAMOTI",
+          "SVEGLIAMOCI MA TU NO",
+          "LIEVE FASTIDIO",
+          "STORDIAMOTI HO DETTO",
+          "BELLO IL TUO GIOCATTOLO SI",
+          "ORMALE GUARIAMOTI"
+        ],
+        "resources": {
+          "HEALTH": 85,
+          "ALERTNESS": 35,
+          "VIOLENCE": 30
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Rabbia Psicotica da Meth",
+          "PAZIENZA: FINITA"
+        ],
+        "items": [
+          "Peroni da 66, calda",
+          "Tennents Super",
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "chips": null
+    },
+    {
+      "mode": "duello",
+      "width": 750,
+      "height": 292,
+      "view": {
+        "turn": 2,
+        "order": [
+          "ADOPERIAMOTI",
+          "SVEGLIAMOCI MA TU NO",
+          "LIEVE FASTIDIO",
+          "STORDIAMOTI HO DETTO",
+          "BELLO IL TUO GIOCATTOLO SI",
+          "ORMALE GUARIAMOTI"
+        ],
+        "resources": {
+          "HEALTH": 85,
+          "ALERTNESS": 35,
+          "VIOLENCE": 30
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Rabbia Psicotica da Meth",
+          "PAZIENZA: FINITA"
+        ],
+        "items": [
+          "Peroni da 66, calda",
+          "Tennents Super",
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "chips": [
+        {
+          "id": "status-ComPlayer_6071-imm-TOXICITY",
+          "x": 399.30000000000007,
+          "y": 124.23199999999997,
+          "shown": false,
+          "text": null
+        },
+        {
+          "id": "status-devAlice-st-0",
+          "x": 143.3,
+          "y": 218.232,
+          "shown": true,
+          "text": "Stato negativo: NO PATIENCE - Damage Intake Boost\nColpi (HIT) ricevuti ×1,5. finisce a fine turno."
+        }
+      ]
+    },
+    {
+      "mode": "ffa",
+      "before": {
+        "turn": 2,
+        "order": [
+          "Desiderio Incontrollabile",
+          "Ghigno co' i' Denti Marci",
+          "Ago Marcio e Spezzato",
+          "Tutto è Droga",
+          "Rabbia Psicotica da Meth",
+          "Estasi da Coca Etilene"
+        ],
+        "resources": {
+          "HEALTH": 63,
+          "ALERTNESS": 20,
+          "TOXICITY": 10
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Ghigno co' i' Denti Marci",
+          "Riflessi Aumentati dalla Speed",
+          "LIEVE FASTIDIO",
+          "Grab",
+          "SVEGLIAMOCI MA TU NO"
+        ],
+        "items": [
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "after": {
+        "turn": 2,
+        "order": [
+          "Desiderio Incontrollabile",
+          "Ghigno co' i' Denti Marci",
+          "Ago Marcio e Spezzato",
+          "Tutto è Droga",
+          "Rabbia Psicotica da Meth",
+          "Estasi da Coca Etilene"
+        ],
+        "resources": {
+          "HEALTH": 63,
+          "ALERTNESS": 20,
+          "TOXICITY": 10
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Ghigno co' i' Denti Marci",
+          "Riflessi Aumentati dalla Speed",
+          "LIEVE FASTIDIO",
+          "Grab",
+          "SVEGLIAMOCI MA TU NO"
+        ],
+        "items": [
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "sameView": true,
+      "beforeChips": [
+        {
+          "id": "status-ComPlayer_5736-imm-TOXICITY",
+          "x": 169.3,
+          "y": 90.924,
+          "shown": true,
+          "text": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno."
+        },
+        {
+          "id": "status-ComPlayer_5901-imm-TOXICITY",
+          "x": 454.3,
+          "y": 90.924,
+          "shown": true,
+          "text": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno."
+        },
+        {
+          "id": "status-devAlice-tm-0",
+          "x": 143.3,
+          "y": 222.924,
+          "shown": true,
+          "text": "Timer: Bad Trip\nScatta a fine turno: ridà l’immunità alla tossicità."
+        }
+      ]
+    },
+    {
+      "mode": "ffa",
+      "width": 844,
+      "height": 390,
+      "view": {
+        "turn": 2,
+        "order": [
+          "Desiderio Incontrollabile",
+          "Ghigno co' i' Denti Marci",
+          "Ago Marcio e Spezzato",
+          "Tutto è Droga",
+          "Rabbia Psicotica da Meth",
+          "Estasi da Coca Etilene"
+        ],
+        "resources": {
+          "HEALTH": 63,
+          "ALERTNESS": 20,
+          "TOXICITY": 10
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Ghigno co' i' Denti Marci",
+          "Riflessi Aumentati dalla Speed",
+          "LIEVE FASTIDIO",
+          "Grab",
+          "SVEGLIAMOCI MA TU NO"
+        ],
+        "items": [
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "chips": null
+    },
+    {
+      "mode": "ffa",
+      "width": 750,
+      "height": 292,
+      "view": {
+        "turn": 2,
+        "order": [
+          "Desiderio Incontrollabile",
+          "Ghigno co' i' Denti Marci",
+          "Ago Marcio e Spezzato",
+          "Tutto è Droga",
+          "Rabbia Psicotica da Meth",
+          "Estasi da Coca Etilene"
+        ],
+        "resources": {
+          "HEALTH": 63,
+          "ALERTNESS": 20,
+          "TOXICITY": 10
+        },
+        "deck": 14,
+        "lastMoves": [
+          "Ghigno co' i' Denti Marci",
+          "Riflessi Aumentati dalla Speed",
+          "LIEVE FASTIDIO",
+          "Grab",
+          "SVEGLIAMOCI MA TU NO"
+        ],
+        "items": [
+          "Negroni Trovato per Terra"
+        ]
+      },
+      "chips": [
+        {
+          "id": "status-ComPlayer_5736-imm-TOXICITY",
+          "x": 169.3,
+          "y": 90.924,
+          "shown": true,
+          "text": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno."
+        },
+        {
+          "id": "status-ComPlayer_5901-imm-TOXICITY",
+          "x": 454.3,
+          "y": 90.924,
+          "shown": true,
+          "text": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno."
+        },
+        {
+          "id": "status-devAlice-tm-0",
+          "x": 143.3,
+          "y": 222.924,
+          "shown": true,
+          "text": "Timer: Bad Trip\nScatta a fine turno: ridà l’immunità alla tossicità."
+        }
+      ]
+    }
+  ]
+}

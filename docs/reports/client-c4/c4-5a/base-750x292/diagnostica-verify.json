@@ -1,0 +1,19 @@
+{
+  "attempts": [
+    {
+      "folder": "bm-verify-all-2026-11-04T18-51-46-620Z-3ygP0M",
+      "exit": 1
+    },
+    {
+      "folder": "bm-verify-all-2026-11-04T18-54-35-435Z-N3AJkk",
+      "exit": 1
+    }
+  ],
+  "commonFailure": {
+    "source": "client-web/tools/verify.mjs:98",
+    "action": "hover chip centre; wait for status-tip",
+    "timeoutMs": 3000
+  },
+  "sameViewBeforeAfterEvidence": "../catture/viste-e-gettoni.json",
+  "sameViewBeforeAfterResult": "Opponent duel chip at 399.3,124.232 has no tip in both the prior and final clients; own duel chip and three FFA chips respond identically."
+}

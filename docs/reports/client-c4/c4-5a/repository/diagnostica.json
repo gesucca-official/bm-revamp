@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-04",
+  "fullContext": {
+    "command": "./scripts/build.ps1 -Task TestServerContext -Offline",
+    "tests": 373,
+    "failures": 1,
+    "errors": 0,
+    "failed": "WebSocketIdentityTest.databaseFailureReturnsPrivateGenericError",
+    "line": 162,
+    "observed": "errors.poll(4, TimeUnit.SECONDS) returned null; expected non-null private account error",
+    "sourceAndTestsUnchanged": true,
+    "rawLogSha256": "c76e469798f16d74eb2d14765fb398faff0ad5cf03b60dd50a7c5e045f1727d2",
+    "summary": [
+      "[ERROR]   WebSocketIdentityTest.databaseFailureReturnsPrivateGenericError:162 expected: not <null>",
+      "[ERROR] Tests run: 373, Failures: 1, Errors: 0, Skipped: 0",
+      "[INFO] BUILD FAILURE"
+    ]
+  },
+  "focusedContext": {
+    "command": "Maven offline -Pcontext-tests -Dtest=WebSocketIdentityTest#databaseFailureReturnsPrivateGenericError test",
+    "tests": 1,
+    "failures": 0,
+    "exit": 0,
+    "fullContextStillRed": true,
+    "rawLogSha256": "c0d09909fe96510be470d58dd7f69abb4d8921b5f5ab181bd9309057cb131371"
+  },
+  "manifest": {
+    "command": "python scripts/verify-match-manifests.py",
+    "exit": 1,
+    "line": 53,
+    "expectedRulesVersion": "1.6",
+    "actualRulesVersion": "1.10",
+    "sourceExport": ".build-logs/i19b-open1vCom-leave.json",
+    "assertionUnchanged": true,
+    "trackedHistoricalManifestsUnchanged": true,
+    "rawLogSha256": "c90acadc71c03454777c755c172266afcd28e1db551b505f85616f3e0717c1ee"
+  },
+  "rawLogs": "Conservati solo nella cartella temporanea bm-c45a-integration; non distribuiti nel repository."
+}

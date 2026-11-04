@@ -1,0 +1,19 @@
+{
+  "test": "WebP: the two distributed images give the sizes of the manifest",
+  "source": "client-web/tests/size.test.ts:11",
+  "expectedBefore": {
+    "w": 1672,
+    "h": 941
+  },
+  "actualOwnerSelectedPlane": {
+    "w": 2006,
+    "h": 784
+  },
+  "initialTests": {
+    "total": 230,
+    "pass": 229,
+    "fail": 1
+  },
+  "resolution": "Only intrinsic asset dimensions updated for the deliberate owner decision; three prop sizes added. Game geometry, BASE_750 and all thresholds unchanged. Full official run repeated: 230/230 green.",
+  "rawLogSha256": "3788301adef9e9310ea0b7f7a4bb94006f80223dc2a0eccfe11c5e25c4e0e837"
+}

@@ -1,4 +1,5 @@
-import {AlphaFilter,Application,Assets,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
+import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
+import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
@@ -59,7 +60,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
  peek:string|null=null;
- width=0;height=0;art:Texture[]=[];background!:Sprite;pendingGhost:Container|null=null;
+ width=0;height=0;art:Texture[]=[];background!:Sprite;private decor=new Container();private props={} as Record<PropId,Sprite>;private shadows={} as Record<PropId,{node:Graphics;blur:BlurFilter}>;pendingGhost:Container|null=null;
  reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;blocked=false;contextLost=false;
  onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};onHover=(_id:string|null)=>{};
  preview={x:0,y:0};private dropPoint:{x:number;y:number}|null=null;private placed:{key:string;spot:{x:number;y:number}}|null=null;private resizeTimer=0;stats={resizes:0,cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0,
@@ -108,9 +109,13 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // Pixi documents null for detaching; its 8.22 declaration omits the nullable type.
   this.app.renderer.events.setTargetElement(null!);
   host.appendChild(this.app.canvas);this.app.canvas.setAttribute('aria-hidden','true');
-  const [table,atlas,layout]=await Promise.all([Assets.load('/art/table.webp'),Assets.load('/art/atlas.webp'),loadAtlas()]);
+  const [table,atlas,layout,props]=await Promise.all([Assets.load('/art/table.webp'),Assets.load('/art/atlas.webp'),loadAtlas(),Promise.all(PROPS.map(p=>Assets.load<Texture>(`/art/${p.id}.webp`)))]);
   for(let i=0;i<layout.cols*layout.rows;i++){const f=artFrame(i,layout);this.art.push(new Texture({source:atlas.source,frame:new Rectangle(f.x,f.y,f.size,f.size)}));}
-  this.background=new Sprite(table);this.app.stage.addChild(this.background,this.world,this.aimLayer,this.fx);this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
+  this.background=new Sprite(table);this.background.eventMode='none';this.decor.eventMode='none';this.decor.interactiveChildren=false;
+  // All soft ellipses before all props, behind every gameplay node. O24 has no interaction here.
+  PROPS.forEach(p=>{const node=new Graphics(),blur=new BlurFilter({strength:3,quality:4,resolution:1});node.eventMode='none';node.filters=[blur];this.shadows[p.id]={node,blur};this.decor.addChild(node);});
+  PROPS.forEach((p,i)=>{const sprite=new Sprite(props[i]);sprite.anchor.set(.5);sprite.eventMode='none';this.props[p.id]=sprite;this.decor.addChild(sprite);});
+  this.app.stage.addChild(this.background,this.decor,this.world,this.aimLayer,this.fx);this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
   const canvas=this.app.canvas;
   const bind=(target:EventTarget,event:string,fn:EventListener)=>{target.addEventListener(event,fn);this.disposeFns.push(()=>target.removeEventListener(event,fn));};
   bind(host.parentElement!,'pointerup',((e:PointerEvent)=>{if((e.target as HTMLElement)?.closest('button'))this.inputStart=performance.now();}) as EventListener);
@@ -288,7 +293,12 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  private halo(c:Container,w:number,h:number,color=PETROL){c.addChild(new Graphics().roundRect(-w/2-3,-h/2-3,w+6,h+6,6).stroke({color,width:3}));}
  // K4/D9: "Computer 1–4" in join order when several computers sit at the table.
  private name(id:string){return playerName(id,Object.keys(this.model.view.players));}
- resize(w:number,h:number){this.width=w;this.height=h;this.app.renderer.resize(w,h);this.background.width=w;this.background.height=h;this.draw();}
+ resize(w:number,h:number){this.width=w;this.height=h;this.app.renderer.resize(w,h);// Use texture.orig, never Sprite.width/height (already scaled by the preceding resize).
+  const size=(s:Sprite)=>({w:s.texture.orig.width,h:s.texture.orig.height});
+  const g=backgroundGeometry(w,h,{table:size(this.background),sottobicchiere:size(this.props.sottobicchiere),negroni:size(this.props.negroni),posacenere:size(this.props.posacenere)});
+  placeBackground(this.background,this.props,g);
+  for(const p of g.props){const {node,blur}=this.shadows[p.id],s=p.shadow;node.clear().ellipse(0,0,s.w/2,s.h/2).fill({color:0x100905,alpha:s.alpha});node.position.set(s.x,s.y);blur.strength=s.sigma;}
+  this.draw();}
  draw(){if(!this.art.length)return;
   // Old nodes survive one render, so Pixi's ref-counted text textures are reused instead of re-rasterized on every tap.
   this.retiring.push(...this.world.removeChildren());this.hits=[];this.backs={};this.chips={};this.pendingGhost=null;

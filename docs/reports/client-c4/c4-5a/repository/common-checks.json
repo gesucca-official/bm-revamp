@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "command": "./scripts/build.ps1 -Task Test -Offline",
+      "exit": 0,
+      "seconds": 27.0,
+      "error": null,
+      "ok": true,
+      "name": "repository-test"
+    },
+    {
+      "command": "python scripts/check-rules.py",
+      "exit": 0,
+      "seconds": 0.1,
+      "error": null,
+      "ok": true,
+      "name": "rules"
+    },
+    {
+      "command": "./scripts/build.ps1 -Task TestServerContext -Offline",
+      "exit": 1,
+      "seconds": 432.2,
+      "error": "Maven failed: 1",
+      "ok": false,
+      "name": "spring-context"
+    },
+    {
+      "exit": 0,
+      "seconds": 9.6,
+      "error": null,
+      "name": "spring-focused",
+      "command": "Maven offline, context-tests, only WebSocketIdentityTest#databaseFailureReturnsPrivateGenericError",
+      "ok": true
+    },
+    {
+      "exit": 1,
+      "seconds": 0.8,
+      "error": null,
+      "name": "match-manifests",
+      "command": "python scripts/verify-match-manifests.py",
+      "ok": false
+    }
+  ],
+  "date": "2026-11-04T19:12:18.9641352Z"
+}
