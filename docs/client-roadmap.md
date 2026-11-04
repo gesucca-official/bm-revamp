@@ -691,6 +691,15 @@ modifica a regole, server o catalogo è già decisa.
 | O22 | C3-L: a 750×292 (minimo iPhone) il tavolo non entra; già prima di C3-L, in FFA un posto esce dallo schermo. | C4 per la non regressione, app futura per l'adattamento | Decisione del proprietario del 3 novembre 2026 (D6 del piano C4): 750×292 non peggiora e un miglioramento economico si fa, ma non è un obiettivo di C4. Un test in unità segnala quando la disposizione entra. |
 | O23 | C3-7: il consolidamento completo costa circa due ore e mezza (`VerifyResolution` circa 35 minuti per misura); `Verify` e `VerifyModes` non avviano il server mentre le altre verifiche sì, e due verifiche insieme collidono sugli account. | C4 | Solo strumenti, nessun effetto sul gioco: un lancio unico che serializzi le verifiche, avvii il server una volta, scelga la build e conservi solo le esecuzioni finali; `BM_SCENARIOS` ridotti per i controlli rapidi. Nessuna soglia da rilassare. |
 
+## Osservazioni registrate durante C4
+
+4 novembre 2026, dal proprietario durante C4-5a. **Registrate, non assegnate a un blocco di C4.**
+
+| ID | Osservazione | Tappa | Note e vincoli |
+|---|---|---|---|
+| O24 | **Easter egg**: cliccando gli oggetti aggiunti sopra il tavolo (sottobicchiere sul bordo, Negroni, posacenere, ed eventuali altri) deve partire una breve **animazione buffa**. | Dopo C4-5a; probabile C5 o un blocco C4 facoltativo (come C4-6/C4-7) | Gli oggetti sono sprite separati dal piano (C4-5a-layers), quindi cliccabili. Vincoli: nessuna azione di gioco dipende da essi (regola 12: mai azione essenziale solo con tocco su elemento decorativo); non devono coprire né intercettare i tocchi su posti, mano, pile e comandi (zone sicure di `specifica-ritaglio.md`); movimento ridotto = niente animazione o una versione statica (regola 11 e D5); nessun suono obbligatorio (regola 13); costo in frame da guardare in FFA; ogni asset o animazione nuova con provenienza (regola 10). |
+| O25 | **Varianti dello sfondo** per cambiare l'atmosfera di gioco (diverse versioni del piano e degli sprite generati). | Dopo C4-5a, anche dopo C4 | La qualità del piano e degli sprite di C4-5a è provvisoria e da rivedere. Ogni variante ha prompt committato prima, registro e voce di inventario (D11). Se vengono scelte in partita, l'atlante delle texture resta sotto il tetto di 32 MiB (D9). |
+
 ## Verifiche proporzionate
 
 Conservare test del motore e scenari CLI già acquisiti. Aggiungere prove
