@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-04T12:16:08.448Z",
+  "quick": false,
+  "nonStandardMeasures": [
+    "750x292"
+  ],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "750x292"
+  ],
+  "only": [
+    "verify",
+    "ffa",
+    "aim",
+    "layout"
+  ],
+  "build": {
+    "head": "3b89e484d50dc54971aba54922095f5ec2a64bf1",
+    "dirtyPaths": [
+      "M client-web/src/readability.ts",
+      " M client-web/src/resolution.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/style.css",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/verify-aim.mjs",
+      " M client-web/tools/verify-layout.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-04T11:29:05.302Z",
+      "bytes": 50693917,
+      "sha256_16": "4094dce64490a86f",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 18,
+      "sha256_16": "9726b37a5a9e11ee"
+    }
+  },
+  "results": [
+    {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 137,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 11,
+      "exit": 1,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 161,
+      "exit": 1,
+      "problems": 17
+    },
+    {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 100,
+      "exit": 1,
+      "problems": 43
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/readability.ts;  M client-web/src/resolution.ts;  M client-web/src/scene.ts;  M client-web/src/style.css;  M client-web/src/table.tsx;  M client-web/tools/verify-aim.mjs",
+    "ffa-750x292.json: evidence says ok=false",
+    "aim-750x292.json: evidence says ok=false",
+    "layout-750x292.json: evidence says ok=false"
+  ]
+}

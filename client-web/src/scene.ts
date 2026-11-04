@@ -5,7 +5,7 @@ import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
-import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,edgePoint,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -61,7 +61,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
  width=0;height=0;art:Texture[]=[];background!:Sprite;pendingGhost:Container|null=null;
  reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;blocked=false;contextLost=false;
  onLayout=()=>{};onInspect=(_v:Inspection)=>{};onState=()=>{};onError=(_v:string)=>{};onHover=(_id:string|null)=>{};
- preview={x:0,y:0};stats={cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0,
+ preview={x:0,y:0};private dropPoint:{x:number;y:number}|null=null;private placed:{key:string;spot:{x:number;y:number}}|null=null;private resizeTimer=0;stats={resizes:0,cancels:[] as string[],inputMs:[] as number[],frames:[] as number[],sequences:0,sequenceMs:[] as number[],flights:0,transfers:0,aggregateDeltas:0,
   // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
   sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0,
   // C3-2 revision (D12): planned length of each sequence and taps that moved it to the next card.
@@ -123,8 +123,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   bind(canvas,'lostpointercapture',(()=>{if(this.drag)this.interrupt('lost capture');}) as EventListener);
   bind(canvas,'webglcontextlost',((e:Event)=>{e.preventDefault();this.contextLost=true;this.interrupt('context lost');this.onError('Affaccio sul tavolo interrotto. Attendo il ripristino grafico.');}) as EventListener);
   bind(canvas,'webglcontextrestored',(()=>{this.contextLost=false;this.onError('');this.draw();}) as EventListener);
-  bind(window,'resize',(()=>{this.interrupt('resize');this.resize(host.clientWidth,host.clientHeight);}) as EventListener);
-  if(window.visualViewport)bind(window.visualViewport,'resize',(()=>{this.interrupt('visual viewport / zoom');this.resize(host.clientWidth,host.clientHeight);}) as EventListener);
+  // C4-2: a new size is applied once the size has settled and only if it changed: fitScale costs up to 150 ms per new measure, and a browser bar sliding in gives many.
+  const settle=()=>{clearTimeout(this.resizeTimer);this.resizeTimer=window.setTimeout(()=>{if(host.clientWidth!==this.width||host.clientHeight!==this.height){this.stats.resizes++;this.resize(host.clientWidth,host.clientHeight);}},120);};
+  bind(window,'resize',(()=>{this.interrupt('resize');settle();}) as EventListener);
+  if(window.visualViewport)bind(window.visualViewport,'resize',(()=>{this.interrupt('visual viewport / zoom');settle();}) as EventListener);
   bind(window,'blur',(()=>this.interrupt('window blur',true,false)) as EventListener);
   bind(document,'visibilitychange',(()=>{if(document.hidden){this.interrupt('background');this.app.stop();}else{this.tickPrev=0;this.app.start();}}) as EventListener);
   const media=matchMedia('(prefers-reduced-motion: reduce)');bind(media,'change',((e:MediaQueryListEvent)=>{this.reduced=e.matches;this.interrupt('reduced motion');}) as EventListener);
@@ -168,7 +170,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const gains=gainsOf(c);if(gains.length){const fs=small?Math.max(8,w*.12):Math.max(10,w*.075),ch=fs*1.45;let gx=-w/2+7;const gy=h/2-footH-5-ch/2;
    for(const gain of gains){const label=this.text(f,`+${gain.amount??'x'}`,0,0,fs,undefined,INK);label.anchor.set(0,.5);const gd=ch*.78,cw=label.width+gd+9;if(gx+cw>w/2-4){label.destroy();break;}
     g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});label.position.set(gx+4,gy);f.addChild(label);glyph(g,gain.resource,gx+4+label.width+2+gd/2,gy,gd,RES_COLOR[gain.resource]);gainMarks.push(gain.resource);gx+=cw+3;}}
-  if(!c.item){const fs=small?Math.max(7,w*.085):Math.max(11,w*.088),fy=h/2-footH/2-1,ch=fs*1.4;let cx=-w/2+8;
+  if(!c.item){const fs=small?Math.max(7,w*.085,Math.min(10,w*.11)):Math.max(11,w*.088),fy=h/2-footH/2-1,ch=fs*1.4;let cx=-w/2+8;
    const costs=Object.entries(c.cost) as [Resource,number][];
    if(!costs.length){const dash=this.text(f,'—',cx+4,fy,fs,undefined,INK);dash.anchor.set(0,.5);}
    for(const [k,v] of costs){const unpaid=short.includes(k),label=this.text(f,`${unpaid?'! ':''}${v}`,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const dd=ch*.8,cw=label.width+dd+10,dx=cx+5+label.width+2+dd/2;
@@ -339,8 +341,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // Raised cards on top, the selected one last.
   if(lifted)raised.push(lifted);raised.forEach(c=>this.world.setChildIndex(c,this.world.children.length-1));
   this.preview={x:L.preview.x,y:L.preview.y};
+  const dest=this.model.target?this.hits.find(z=>(z.kind==='person'||z.kind==='item')&&z.target?.owner===this.model.target!.owner&&z.target?.itemIndex===this.model.target!.itemIndex):undefined;
+  if(!this.model.target)this.dropPoint=null;
+  if(dest){const key=`${dest.id}:${w}x${h}:${dest.x},${dest.y}:${this.dropPoint?.x},${this.dropPoint?.y}`;if(this.placed?.key!==key)this.placed={key,spot:previewSpot(L,w,h,{x:dest.x,y:dest.y,w:dest.w,h:dest.h},this.dropPoint??{x:dest.x,y:dest.y})};this.preview=this.placed.spot;}
   if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res),leftV(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
-   const dest=this.hits.find(z=>z.target?.owner===this.model.target!.owner&&z.target?.itemIndex===this.model.target!.itemIndex);if(dest){this.world.addChild(new Graphics().moveTo(this.preview.x,this.preview.y-35).quadraticCurveTo(this.preview.x,dest.y,dest.x,dest.y).stroke({color:PETROL,width:2,alpha:.8}));}
+   if(dest){const from=edgePoint({...this.preview,w:L.preview.w,h:L.preview.h},dest,2);this.world.addChild(new Graphics().moveTo(from.x,from.y).quadraticCurveTo(from.x,dest.y,dest.x,dest.y).stroke({color:PETROL,width:2,alpha:.8}));}
   }
   const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
@@ -401,7 +406,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const p=this.point(e);if(!d.moved){this.activate(d.key,true);return;}
   this.drag=d;const target=this.dropTarget(p.x,p.y);this.drag=null;
   // Own objects can share the lower band with the fan: a compatible physical target wins.
-  if(target)this.model.aim(target.target!);
+  if(target){this.dropPoint=p;this.model.aim(target.target!);}
   else if(d.insertion!==null&&p.x>this.width*.25&&p.x<this.width*.98){const keys=this.model.hand.map(x=>x.key).filter(k=>k!==d.key);keys.splice(d.insertion,0,d.key);this.model.cancel();this.model.reorder(keys);}
   else this.model.cancel();this.ghostOver=false;this.draw();}
  // `pointer`: the sequence was already handled on pointerdown. Keyboard and the semantic layer: a hand card ends it, the rest advances.
@@ -409,7 +414,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   if(!pointer){if(hit.kind==='hand')this.finish('input');else this.advance();}
   if(hit.kind==='hand'){if(this.model.locked){this.inspect(id);return;}this.model.select(hit.key!);}
   // A table element that is not an admitted target also counts as "elsewhere".
-  else if(this.model.selected&&!this.model.locked){if(!this.model.aim(hit.target!))this.model.cancel();}
+  else if(this.model.selected&&!this.model.locked){this.dropPoint=null;if(!this.model.aim(hit.target!))this.model.cancel();}
   else if(hit.kind==='status'){this.openStatus=this.openStatus===id?null:id;this.draw();this.onState();}else this.inspect(id);
  }
  inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'){const card=this.model.hand.find(x=>x.key===hit.key)!.card;this.onInspect({title:card.name,card});}
@@ -648,5 +653,5 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  }
  startMeasure(){this.stats.frames=[];this.stats.inputMs=[];this.tickPrev=0;this.measure=true;}
  endMeasure(){this.measure=false;return this.stats;}
- destroy(){this.disposeFns.forEach(fn=>fn());[...this.retired,...this.retiring].forEach(c=>c.destroy({children:true}));this.retired=[];this.retiring=[];this.app.destroy(true,{children:true});}
+ destroy(){clearTimeout(this.resizeTimer);this.disposeFns.forEach(fn=>fn());[...this.retired,...this.retiring].forEach(c=>c.destroy({children:true}));this.retired=[];this.retiring=[];this.app.destroy(true,{children:true});}
 }

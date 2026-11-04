@@ -6,7 +6,7 @@
 // view, not from the client's own call):
 //  - number and destination: one arrow per admitted character and, for a card that takes an object, one per seat that has some;
 //    each tip at the border of its target, the whole arrow (curve and head) inside the screen;
-//  - clear of the ✓ and × buttons (their real rectangles, read from the DOM after aiming) outside the card itself;
+//  - clear of the old place of the ✓ and × buttons (the rectangles of the base of C4-1b) outside the card itself; C4-2: ✓ and × on the chosen card, reachable, off the target (confirmPass);
 //  - no arrow when the choice is locked (move pending, the choice cancelled) and after an interruption of the drag (window blur);
 //  - pulse in normal motion, a constant layer with reduced motion;
 //  - aiming with the mouse (drag, tap) and with emulated touch (tap, CDP touch drag) as before; reordering and cancelling send nothing;
@@ -21,7 +21,7 @@ import {createWriteStream,existsSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
-import {bezier,confirmBox} from '../src/readability.ts';
+import {bezier,confirmBox,overlap,previewSpot} from '../src/readability.ts';
 
 const repo=resolvePath(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
@@ -150,19 +150,33 @@ async function grab(p,key,touch){
  return null;
 }
 const settle=async(p,ms=110)=>{await p.page.waitForTimeout(ms);return p.state();};
-// Real rectangle of ✓ and × (and of the whole panel): where the confirmation appears does not depend on the target.
-async function learnButtons(p,touch,scope){
- const s=await p.state();
- for(const c of s.cards){const v=view(p,s),want=expected(s,v,c.name).filter(id=>id.startsWith('person-'));if(!want.length)continue;
-  await tapAt(p,s.hits.find(h=>h.id===c.key),touch);let t=await settle(p);if(t.selected!==c.key)continue;
-  const hit=t.hits.find(h=>h.id===want[0]);await tapAt(p,hit,touch);t=await settle(p);if(!t.target){await p.page.keyboard.press('Escape');continue;}
-  const boxes=await p.page.locator('.confirmation button').evaluateAll(els=>els.map(e=>{const r=e.getBoundingClientRect();return {l:r.left,t:r.top,r:r.right,b:r.bottom};}));
-  const panel=await p.page.locator('.confirmation').evaluate(e=>{const r=e.getBoundingClientRect();return {l:r.left,t:r.top,r:r.right,b:r.bottom};});
-  const l=Math.min(...boxes.map(b=>b.l)),r=Math.max(...boxes.map(b=>b.r)),tp=Math.min(...boxes.map(b=>b.t)),b=Math.max(...boxes.map(b=>b.b));
-  if(t.arrows.length)bad(scope,`${t.arrows.length} arrows once a target is chosen`);
-  await p.page.keyboard.press('Escape');await p.page.waitForTimeout(80);
-  return {buttons:{x:(l+r)/2,y:(tp+b)/2,w:r-l,h:b-tp},panel:{x:(panel.l+panel.r)/2,y:(panel.t+panel.b)/2,w:panel.r-panel.l,h:panel.b-panel.t}};}
- return null;
+// C4-2: ✓ and × now lie on the card, but the arrows keep clear of their old place as C3-3 asks: the rectangles this check read from the DOM at the base of C4-1b (both heights of the text, as one rectangle).
+const reserved=s=>{const L=s.layout,c=confirmBox(L.preview,vw,L.compact),left=c.x-c.w/2,top=c.y-c.h/2,[a,b]=L.compact?[66.4,118.4]:[80.8,150.9];return {buttons:{x:left+52,y:top+(a+b)/2,w:104,h:b-a},panel:c};};
+const rectBox=r=>({x:r.x,y:r.y,w:r.w,h:r.h});
+// C4-2: for every target the card admits: ✓ and × at least 44 px, on the screen and the topmost thing at their centre, the card off the target, no arrow, no close-up running, the text of the move at the foot of the table, clear of the seats and the hand. With the mouse also a drop: the card lies where the pure function puts it for that drop point.
+async function confirmPass(p,touch,scope){
+ const s0=await p.state(),v=view(p,s0),out=[];if(!v)return out;
+ const count=(x,how)=>expected(s0,v,x.name).filter(id=>id.startsWith(how)).length,best=how=>[...s0.cards].sort((a,b)=>count(b,how)-count(a,how))[0],picks=[...new Set([best('person-'),best('item-')])].filter(x=>x&&expected(s0,v,x.name).length);if(!picks.length){bad(scope,'no card with a target for the confirmation');return out;}
+ let c=picks[0];
+ const read=()=>p.page.evaluate(()=>{const box=e=>{const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height};},card=document.querySelector('.confirmation'),strip=document.querySelector('.hint.confirming');
+  return {card:card&&box(card),strip:strip&&box(strip),text:strip?.textContent??'',buttons:[...document.querySelectorAll('.confirmation button')].map(b=>{const q=box(b),top=document.elementFromPoint(q.x,q.y);return {w:b.offsetWidth,h:b.offsetHeight,...{x:q.x,y:q.y},reach:!!top&&(top===b||b.contains(top))};})};});
+ const check=async(id,hit,t,label)=>{const r=await read(),row={card:c.name,target:id,how:label,spot:t.preview,buttons:r.buttons.map(b=>({w:b.w,h:b.h,reach:b.reach}))};out.push(row);
+  if(t.arrows.length)bad(scope,`${id}: ${t.arrows.length} arrows once a target is chosen`);if(t.sequence.running)bad(scope,`${id}: a close-up can run with the confirmation up`);
+  if(!r.card||r.buttons.length!==2){bad(scope,`${id}: no ✓ and × on the card`);return row;}
+  for(const b of r.buttons){if(Math.min(b.w,b.h)<44)bad(scope,`${id}: control ${b.w}×${b.h} under 44 px`);if(!b.reach)bad(scope,`${id}: control covered at its centre`);if(!inScreen(b))bad(scope,`${id}: control off the screen`);}
+  if(overlap(r.card,rectBox(hit))>0)bad(scope,`${id}: the card covers its target ${JSON.stringify(r.card)} ${JSON.stringify(rectBox(hit))}`);
+  if(!r.text.includes(c.name))bad(scope,`${id}: the text of the move lacks the card: ${r.text}`);
+  if(!r.strip)bad(scope,`${id}: no text of the move`);else{for(const st of t.layout.seats)for(const x of [st.person,st.board,...st.items])if(overlap(r.strip,x)>0)bad(scope,`${id}: the text of the move over a seat`);if(r.strip.x+r.strip.w/2>t.layout.hand.center-(t.layout.hand.w*t.layout.hand.zoom+6*t.layout.hand.step)/2)bad(scope,`${id}: the text of the move over the hand`);}
+  return row;};
+ for(c of picks)for(const id of expected(s0,v,c.name)){
+  let t=await p.state();if(t.selected!==c.key){const own=t.hits.find(h=>h.id===c.key);if(!own)break;await tapAt(p,own,touch);t=await settle(p);}
+  if(t.selected!==c.key)continue;const hit=t.hits.find(h=>h.id===id);if(!hit)continue;await tapAt(p,hit,touch);t=await settle(p);if(!t.target){await p.page.keyboard.press('Escape');await settle(p);continue;}
+  await check(id,hit,t,touch?'tap (touch)':'tap');await p.page.keyboard.press('Escape');await settle(p);}
+ c=picks[0];if(!touch){const t0=await p.state(),own=t0.hits.find(h=>h.id===c.key),id=expected(t0,v,c.name).find(x=>x.startsWith('person-')),hit=id&&t0.hits.find(h=>h.id===id);
+  if(own&&hit){const drop={x:hit.x-hit.w*.3,y:hit.y+hit.h*.3};await p.page.mouse.move(own.x-own.w*.22,own.y);await p.page.mouse.down();await p.page.mouse.move(drop.x,drop.y,{steps:8});await p.page.mouse.up();const t=await settle(p,160);
+   if(t.target){const row=await check(id,hit,t,'drop');const far=(q,o)=>Math.hypot(q.x-o.x,q.y-o.y);row.fromDrop=Math.round(far(t.preview,drop));row.oldFromDrop=Math.round(far(t.layout.preview,drop));const want=previewSpot(t.layout,vw,vh,rectBox(hit),drop);if(want.x!==t.preview.x||want.y!==t.preview.y)bad(scope,`${id}: the card at ${JSON.stringify(t.preview)}, for the drop point at ${JSON.stringify(want)}`);}
+   await p.page.keyboard.press('Escape');await settle(p);}}
+ return out;
 }
 function checkArrows(scope,s,v,card,{buttons,panel,source}={}){
  const want=expected(s,v,card.name).sort(),got=s.arrows.map(a=>a.id).sort();
@@ -356,7 +370,7 @@ async function scenario(name,{ffa=false,touch=false,reduced=false,turns=3,drags=
    let s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');
    if(s.over||s.eliminated)break;
    rec.turns.push(s.turn);
-   if(t===0){learn=await learnButtons(A,touch,scope);rec.confirm=learn;if(!learn)bad(scope,'could not learn the confirmation rectangle');}
+   if(t===0){learn=reserved(s);rec.confirm=learn;rec.confirmOnCard=await confirmPass(A,touch,scope);}
    await cardsPass(A,scope,s.turn,learn,touch,rec.cards);
    if(t===0){
     rec.pulse=await pulse(A,scope,reduced,touch,`${name}-chosen`);
@@ -398,7 +412,7 @@ async function scenarioPending(){
  try{
   await joinFfa(A);await waitList(A,1);await joinFfa(B);await waitList(A,2);await addComputers(A,3);await Promise.all([table(A),table(B)]);
   let s=await A.wait(x=>x&&x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'),30000,'A turn');
-  const learn=await learnButtons(A,false,scope);rec.confirm=learn;await cardsPass(A,scope,s.turn,learn,false,rec.cards);
+  const learn=reserved(s);rec.confirm=learn;rec.confirmOnCard=await confirmPass(A,false,scope);await cardsPass(A,scope,s.turn,learn,false,rec.cards);
   const played=await playOne(A);s=await A.state();
   if(s.phase!=='pending')bad(scope,`A is ${s.phase} after sending, expected pending`);
   const lk=await lockedPass(A,scope,false);rec.locked.push({played,checks:lk});

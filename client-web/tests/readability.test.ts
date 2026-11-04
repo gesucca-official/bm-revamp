@@ -288,3 +288,37 @@ test('C3-4s: a label takes the nearest row clear of the visible ones, on the scr
  // A whole column taken: the next one beside it.
  const column=Array.from({length:8},(_,i)=>({...base,y:14+i*27})),d=labelSpot(base,screen,column);assert.ok(d.x!==base.x&&inside(d,400,200)&&column.every(o=>overlap(d,o)===0),'a column to the side');
 });
+
+// C4-2 (owner, 4 November 2026): ✓ and × on the chosen card, the card where the gesture ended, its text at the foot of the table.
+import {previewSpot,previewAvoid,confirmTextBox} from '../src/readability.ts';
+const cardBox=(l:ReturnType<typeof tableLayout>,p:{x:number;y:number})=>({x:p.x,y:p.y,w:l.preview.w+18,h:l.preview.h+18});
+const covered=(l:ReturnType<typeof tableLayout>,p:{x:number;y:number},w:number,h:number)=>previewAvoid(l,w,h).reduce((a,o)=>a+overlap(cardBox(l,p),o),0);
+for(const [w,h] of VIEWPORTS)for(const n of [2,5])test(`C4-2 at ${w}×${h} with ${n} seats: the chosen card, every target, 0–3 objects`,()=>{
+ const ids=['me','b','c','d','e'].slice(0,n);
+ for(const items of [0,1,2,3]){const l=tableLayout(w,h,ids,'me',Object.fromEntries(ids.map(i=>[i,items])));
+  // ✓ and × are the halves of the card: 44 px at least.
+  assert.ok(l.preview.h/2>=44&&l.preview.w>=44,`${l.preview.w}×${l.preview.h}`);
+  for(const s of l.seats)for(const t of [s.person,...(items?s.items:[])]){const p=previewSpot(l,w,h,t),again=previewSpot(l,w,h,t),b=cardBox(l,p),at=`${s.id} ${items} objects`;
+   assert.deepEqual(p,again,'deterministic');assert.ok(inside(b,w,h),`${at}: on the screen`);assert.equal(overlap(b,t),0,`${at}: off its target`);
+   assert.ok(covered(l,p,w,h)<=covered(l,l.preview,w,h),`${at}: covers no more than the old place`);
+   assert.ok(covered(l,p,w,h)<=.3*b.w*b.h,`${at}: covers ${Math.round(100*covered(l,p,w,h)/(b.w*b.h))}% of the card`);}
+  // The text of the move clear of every seat and of the hand (a card raised too), never narrower than the old hint.
+  const strip=confirmTextBox(l,h);assert.ok(strip.w>=140,`text ${strip.w} wide`);assert.ok(inside(strip,w,h));for(const s of l.seats)for(const b of [s.person,s.board,...s.items])assert.equal(overlap(strip,b),0,`text over ${s.id}`);if(l.piles)for(const b of [l.piles.deck,l.piles.discard])assert.equal(overlap(strip,b),0,'text over the piles');
+ }
+});
+test('C4-2: the card goes where the gesture ended when the table is free there',()=>{
+ const w=1366,h=768,l=tableLayout(w,h,['me','b'],'me',{me:0,b:0}),t=l.seats.find(s=>!s.me)!.person;
+ const tap=previewSpot(l,w,h,t),left=previewSpot(l,w,h,t,{x:t.x-t.w/2,y:t.y+t.h/2}),d=(p:{x:number;y:number},q:{x:number;y:number})=>Math.hypot(p.x-q.x,p.y-q.y);
+ assert.notDeepEqual(tap,left,'the drop point counts');assert.ok(d(left,{x:t.x-t.w/2,y:t.y+t.h/2})<=l.preview.h,'free there: the card lies by the drop point');
+ assert.deepEqual(previewSpot(l,w,h,t,t),tap,'a tap anchors on the target');
+});
+test('C4-2: no free place at all: the old place of the layout, never an error',()=>{
+ const w=844,h=390,l=tableLayout(w,h,['me','b'],'me',{}),all={x:w/2,y:h/2,w:w*2,h:h*2};assert.deepEqual(previewSpot(l,w,h,all),{x:l.preview.x,y:l.preview.y});
+ // 750×292, five seats, three objects: the table is full, but a place off the target is still found.
+ const crowded=tableLayout(750,292,['me','b','c','d','e'],'me',{me:3,b:3,c:3,d:3,e:3}),t=crowded.seats[1].person,p=previewSpot(crowded,750,292,t);assert.equal(overlap(cardBox(crowded,p),t),0);assert.ok(inside(cardBox(crowded,p),750,292));
+});
+// Rule 18 (D6): 750×292 is no target of C4, but it does not get worse. The base of C4-1b, here for 0–3 objects per seat, with what the real games met (6 in the duel, 11 in the FFA, at 1 object per seat): may only go down.
+const BASE_750:Record<number,number[]>={2:[6,6,6,5],5:[11,11,12,14]};
+for(const n of [2,5])test(`C4-2, rule 18: layoutProblems at 750×292 with ${n} seats do not exceed the base`,()=>{const ids=['me','b','c','d','e'].slice(0,n);
+ BASE_750[n].forEach((base,items)=>{const count=layoutProblems(tableLayout(750,292,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),750,292).length;assert.ok(count<=base,`${items} objects: ${count} problems, base ${base}`);});
+});

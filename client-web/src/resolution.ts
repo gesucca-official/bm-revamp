@@ -1,4 +1,5 @@
 import type {Card, Move, Resource, View} from './contracts.ts';
+import type {Gain} from './readability.ts';
 
 // Certain facts of one resolved round (C3-1, plan D1). Built only from structured fields of two views and the
 // catalog: the server's sentences (moveReport, timeBasedEffects lines) are never read, no card effect is computed
@@ -233,6 +234,8 @@ export type ReportContext = {
   forfeit: (id: string, code: string) => string;
   /** Nominal cost of a card by display name from the catalog the client holds; null if unknown. */
   costOf: (card: string) => MoveFact['cost'];
+  /** Nominal gains of a card (C4-2, O12): the round's small cards are too small for them, so the dialog says them. */
+  gainsOf?: (card: string) => Gain[];
 };
 export type ReportMove = {title: string; lines: string[]};
 export type RoundReport = {
@@ -279,6 +282,8 @@ export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportConte
       const cost = RESOURCE_ORDER.filter(r => nominal[r]).map(r => `${nominal[r]} ${RESOURCE_NAMES[r]}`);
       lines.push(cost.length ? `Costo nominale: ${cost.join(' + ')}.` : 'Nessun costo nominale in risorse.'); costShown = true;
     }
+    const gains = c.gainsOf?.(m.card) ?? [];
+    if (gains.length) lines.push(`Guadagno nominale: ${gains.map(g => `+${g.amount ?? 'x'} ${RESOURCE_NAMES[g.resource]}`).join(', ')}.`);
     if (m.item) {
       const what = `«${m.item.name}» ${of(m.item.owner)}`;
       if (!f.seats) lines.push(`Oggetto scelto: ${what}.`);

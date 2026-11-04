@@ -1,6 +1,6 @@
 # Rapporto C4 — Grafica e schermi
 
-3 novembre 2026. Regolamento invariato. C4 procede a blocchi secondo il [piano C4](../client-c4-plan.md). Questo rapporto
+3–4 novembre 2026. Regolamento invariato. C4 procede a blocchi secondo il [piano C4](../client-c4-plan.md). Questo rapporto
 cresce un blocco alla volta.
 
 ## C4-1 — Strumenti di verifica (O23)
@@ -279,3 +279,119 @@ su sei giri, **tre rossi in 6 s per la stessa causa e tre verdi**; con C4-3 tre 
 - **Il campione** non ha una cattura per ogni schermata: solo mano, carte del round, primo piano, plancia, FFA, conferma, catalogo ed editor.
 - **Un difetto preesistente di `verify-layout.mjs`**, non toccato: la riga «a letter code for the damage» ha nel sorgente un carattere di controllo (backspace) al posto di `\b` nell'espressione regolare, quindi in pratica non scatta mai. Non l'ho corretto per non cambiare un controllo in questo blocco.
 - **Librerie npm nel pacchetto** (pixi.js, react, react-dom, sockjs-client: MIT; @stomp/stompjs: Apache-2.0): non sono asset e non sono nell'inventario, ma le loro note di licenza non risultano distribuite con la build. Non verificato né risolto qui; è un tema di pubblicazione.
+
+## C4-2 — Finitura delle dimensioni e tutela di 750×292
+
+4 novembre 2026. **Fatto, in attesa del giudizio del proprietario.** Nessuna regola, server, protocollo, catalogo o `client-debug` toccati. Evidenze in [client-c4/c4-2](client-c4/c4-2/) (7,5 MB).
+
+### Cosa è cambiato
+
+- **Conferma, ridisegnata dal proprietario sugli schemi:** ✓ e × stanno sulla carta scelta, velata e divisa a metà (✓ sopra, × sotto), con tinte più leggere del primo schema. Il testo della mossa sta in basso a sinistra (`confirmTextBox`). La carta aspetta il più vicino possibile a dove è stata rilasciata; col tocco o da tastiera, vicino al bersaglio (`previewSpot`, funzione pura). Non copre mai il bersaglio; la zona centrale è solo indicativa.
+- **Carte piccole del round (O12):** non ho ingrandito costo e guadagno, che a 36–40 px non si leggerebbero senza deformare il volto (O14). **Alternativa dichiarata:** tutte le carte del round sono un bersaglio unico che apre «Ultimo turno», che ora dice anche il guadagno nominale. Il corpo minimo del costo sulle carte piccole è salito leggermente.
+- **Bersagli:** `.server-text summary` a 44 px e area di 44 px sul riepilogo breve.
+- **Gettoni di stato (D8):** l'ispezione del personaggio riporta il testo di ogni gettone.
+- **Resize:** la scena attende 120 ms che la misura si fermi e ridisegna solo se è cambiata, così `fitScale` non scatta a ogni barra di Safari.
+- **Strumenti:** corretto il controllo «a letter code for the damage»; aggiunti ai `verify` i passaggi su controlli, gettoni, resize, carte del round e conferma sulla carta.
+
+Il vecchio posto della conferma resta libero per frecce e `fitScale`: serve a non spostare i fattori di C3-L (regola 17) né i conteggi a 750×292.
+
+### Controlli sotto 44 px
+
+| Dove | Prima | Dopo (DOM, partite reali, con carta scelta, conferma, ispezione, menu, ultimo turno e riepilogo breve) |
+|---|---|---|
+| `.server-text summary` | 36 px | 44 px |
+| Riepilogo breve (`.toast`) | circa 27 px (calcolato) | area di 44 px |
+| ✓ e × | in mezzo al tavolo, sopra il bersaglio nei casi peggiori | 82 px minimo a 1366×768, 48 px a 844×390 |
+| Gettoni di stato | 31×18 – 61×36 | **invariati, eccezione di D8:** 49×29, 61×36, 36×24, 41×24, 56×36 a 1366×768; 26×18, 31×18, 46×27 a 844×390 |
+
+L'elenco al tavolo contiene quindi **solo i gettoni**. Hub, pubblico e profilo (`.presence`, `.public button.link`, `.slot summary`, `button.back`) non sono stati toccati: sono di C4-5b.
+
+**Prova sui gettoni (`scenarioChips`, tocco emulato su partita reale):** il tocco sul personaggio apre l'ispezione e il testo del gettone è presente, per tutti i gettoni visti. Personaggi da 60×83 e 90×124 a 844×390, 117×161 e 175×242 a 1366×768. Solo gettoni di immunità sono comparsi in questi giri; il meccanismo è lo stesso per gli altri, ma non è stato visto.
+
+### Carte del round
+
+Provato in partita (`roundLinkPass`): bersaglio da 241×248 e 198×232 a 1366×768, 88×66 e 91×89 a 844×390; apre «Ultimo turno», dove costo e guadagno compaiono ogni volta che il catalogo ne prevede uno.
+
+### Dove sta la carta
+
+Quota della carta sovrapposta agli altri oggetti del tavolo, calcolata con le funzioni pure su tutti i bersagli. La somma può contare due volte le zone comuni.
+
+| Misura e posti | Oggetti per posto | Prima | Ora, media e massimo |
+|---|---|---|---|
+| 1366×768 duello | 0–3 | 45–52% | 0%, 0% |
+| 1366×768 FFA | 0–1 | 59% | 0%, 1% |
+| 1366×768 FFA | 3 | 57% | 13%, 27% |
+| 844×390 duello | 0–3 | 85% | 0%, 0% |
+| 844×390 FFA | 0–1 | 101% | 1%, 3% |
+| 844×390 FFA | 3 | 101% | 1%, 10% |
+
+**Da giudicare:** la vicinanza cede quando coprire costerebbe di più. Distanza dal punto di rilascio in partita, ora e al vecchio posto: 1366×768 duello 117 e 108 px, FFA 206–283 e 560 px; 844×390 duello 179 e 51 px, FFA 146–463 e 249 px. Nel duello il vecchio posto era più vicino solo perché stava sopra il bersaglio. Nel caso peggiore a 844×390 la carta finisce più lontana di prima.
+
+### Verifiche
+
+Tutte su HEAD `3b89e48` più le modifiche, jar `4094dce64490a86f`.
+
+| Giro | Cosa | Esito |
+|---|---|---|
+| [A](client-c4/c4-2/giro-A/) | Test, Build, Size, Verify, VerifyFfa, VerifyAim, VerifyLayout, VerifyLifecycle, alle due misure | **13 su 13 verdi**, 29 min 47 s |
+| [B](client-c4/c4-2/giro-B/) | Test, Build, Size, VerifyResolution (`quick`, `ffa`), alle due misure | **5 su 5 verdi**, 10 min 09 s |
+| [Layout dopo l'ultimo controllo](client-c4/c4-2/giro-layout/) | VerifyLayout con `roundLinkPass` | 844×390 verde; 1366×768 **un rosso, poi verde**: sotto |
+| [Base](client-c4/c4-2/base-750x292/) | 750×292, non equivalente | sotto |
+
+Il giro A è stato eseguito prima di aggiungere `roundLinkPass`: dopo è cambiato solo lo strumento, non il client. `VerifyLifecycle` è stato eseguito a entrambe le misure.
+
+`./scripts/build.ps1 -Task Test -Offline` verde (l'ultima suite: 36 su 36), `python scripts/check-rules.py` verde. Il picco di 341,7 ms a 844×390 FFA non è ricomparso: massimi 108,4 e 88,9 ms a 844×390, 183,5 e 122,8 ms a 1366×768 (FFA, giro A, 4 novembre).
+
+**Un rosso vero che esisteva già, non corretto.** `VerifyLayout` a 1366×768 FFA ha segnalato `ComPlayer_6021 close-up` con Computer 1, 2, 3, 4 e il proprietario con 2, 3, 0, 0 e 1 oggetti. `layoutProblems` non trova un posto al centro per il primo piano del quarto avversario quando il secondo ne ha 3 e la mano è considerata di 7 carte.
+
+- **Non viene da C4-2:** su tutte le 1024 distribuzioni da 0 a 3 oggetti scatta in **144**, sia sul codice di oggi sia su quello di C4-1b; a 844×390 in nessuna.
+- **In quella partita il primo piano vero è stato messo al centro** (`placed: middle`).
+- **Conseguenza:** a 1366×768 FFA il verde di `VerifyLayout` dipende anche dagli oggetti distribuiti, e i verdi precedenti non lo escludevano. Soglia non toccata, geometria non toccata. Serve una decisione del proprietario.
+
+### Controllo «a letter code for the damage»
+
+Il carattere di controllo è ora `\b` vero. **Scatta:** lo strumento verifica all'avvio che riconosca `HIT 15`, `CUT` e `P 5` e non `HITMAN` né `Colpo`; se no, si ferma. **Nessun falso rosso:** nessuna segnalazione su nessuna faccia nei giri reali. Il caso positivo è costruito: nessuna carta reale lo fa scattare.
+
+### Base a 750×292 (regola 18)
+
+Edge con tocco emulato, misura non equivalente, evidenze copiate a mano.
+
+| Verifica | C4-3 | C4-2 |
+|---|---|---|
+| `layoutProblems` duello | 6, 6, 6 | **6, 6, 6** |
+| `layoutProblems` FFA | 11, 11, 11 | **11, 11, 11** |
+| Test con la base fissata (`BASE_750`) | non c'era | aggiunto, può solo scendere |
+| `Verify` | verde in un giro su tre | verde nell'unico giro: non prova che il difetto del gettone sotto la mano sia sparito |
+| `VerifyFfa` | rosso, stessa asserzione | uguale |
+| `VerifyLayout` | 43 messaggi | **43, stessi messaggi**; `resize` non arriva in fondo (`no playable card`, come alla base in altri scenari) e quindi **orientamento e resize non sono provati a questa misura** |
+| `VerifyAim` | 6 messaggi | **17:** stessi rossi di base più **11 nuovi** |
+
+**Gli 11 nuovi messaggi sono un criterio nuovo su una cosa nuova:** «the text of the move over a seat», solo in FFA. A questa misura la striscia del testo tocca il proprio posto ([cattura](client-c4/c4-2/base-750x292/screens/layout-ffa-750x292-confirmation-750x292.jpg)). Il testo resta leggibile e ✓ e × restano da 48 e 50 px, ma è una sovrapposizione in più e **non la presento come assenza di peggioramento**. Il proprietario ha deciso quel posto del testo; spostarlo solo a 750×292 sarebbe una disposizione nuova, quindi passa all'app futura.
+
+Miglioramenti economici a 750×292: nessuno trovato, i problemi sono tutti di altezza. Il test «750×292 non entra» resta com'è.
+
+### Size contro limiti e tetto (D9)
+
+| Voce | Misura | Limite o tetto |
+|---|---|---|
+| JS gzip | 332 664 B | 500 KB |
+| Totale gzip | 1 116 229 B | 4 MB |
+| Texture decodificate | 18 876 320 B | 32 MiB in C4 (56,3%, margine 14 678 112 B); 64 MB rigido |
+
+### Elenco per l'app futura
+
+- Disposizione completa a 750×292, compreso il testo della mossa sul proprio posto.
+- `Verify` a 750×292: il gettone sotto la mano.
+- `viewport-fit=cover` e aree sicure: Safari già rientra, nessun guadagno misurabile qui e nessun modo di provarlo.
+- FFA su iPhone e `resize` a 750×292.
+
+### Cosa non è stato verificato
+
+- **iPhone e Safari:** niente. Il resize è provato in Edge con una raffica di 10 misure (una sola applicata, nessun comando inviato, partita proseguita) e col passaggio all'altra misura e in verticale; le barre di Safari no.
+- **Gettoni diversi dall'immunità** nella prova di D8.
+- **Scala di grigi e contrasto** della nuova conferma (C4-8a).
+- **Lettore di schermo** sui due nuovi bersagli.
+
+### Da guardare
+
+Giudizio del proprietario su: [conferma in duello a 1366×768](client-c4/c4-2/catture/layout-duel-1366x768-confirmation-1366x768.jpg), [FFA a 1366×768](client-c4/c4-2/catture/layout-ffa-1366x768-confirmation-1366x768.jpg), [duello a 844×390](client-c4/c4-2/catture/layout-duel-844x390-confirmation-844x390.jpg), [FFA a 844×390](client-c4/c4-2/catture/layout-ffa-844x390-confirmation-844x390.jpg), [scarto di una legata](client-c4/c4-2/catture/03-bound-discard-844x390.jpg), [ultimo turno dalle carte del round](client-c4/c4-2/catture/layout-ffa-last-turn-844x390.jpg). Le [simulazioni](client-c4/c4-2/schemi/proposta-1366x768.png) approvate hanno ancora le tinte accese: fanno fede le catture.

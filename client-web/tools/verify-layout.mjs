@@ -18,7 +18,7 @@ import {createWriteStream} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
-import {fan,overlap,inside,seatBoxes,layoutProblems} from '../src/readability.ts';
+import {fan,overlap,inside,seatBoxes,layoutProblems,tableLayout} from '../src/readability.ts';
 
 const repo=resolvePath(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320';
@@ -58,9 +58,9 @@ async function stopServer(){
 if(await fetch(`${api}/api/rest/v1/sign-in/validate`,{method:'POST'}).then(()=>true,()=>false))throw new Error(`port ${serverPort} is in use: stop the other server first`);
 
 const browser=await chromium.launch({channel:'msedge',headless:process.env.BM_HEADED!=='1'});
-async function open(name){
+async function open(name,opts={}){
  const {user,password}=accounts[name];
- const context=await browser.newContext({viewport:{width:vw,height:vh}}),page=await context.newPage();
+ const context=await browser.newContext({viewport:{width:vw,height:vh},...opts}),page=await context.newPage();
  const p={name,user,password,page,context};
  page.on('pageerror',e=>evidence.errors.push(`${name}: ${e}`));
  p.state=()=>page.evaluate(()=>window.__bm?.state??null);
@@ -178,19 +178,77 @@ function symbolProblems(f,card){const out=[],gainsWant=[...(card.gains??'').matc
  if(JSON.stringify(f.marks.gains)!==JSON.stringify(gainsWant.slice(0,f.marks.gains.length)))out.push(`gain symbols ${JSON.stringify(f.marks.gains)}, catalog ${JSON.stringify(gainsWant)} (gains ${JSON.stringify(card.gains)})`);
  const letters=f.texts.filter(t=>/^[!+\s]*(\d+|x)\s*[HAVTL]$/.test(t)||/^[HAVTL]$/.test(t));if(letters.length)out.push(`a letter of a resource on the face: ${JSON.stringify(letters)}`);
  return out;}
+// C4-2: this check never fired (a backspace stood in the source for the word boundary): it proves itself at every run on a built case.
+const LETTER_CODE=/^(HIT|CUT|POISON)\b|^[HCP] \d/;assert.ok(LETTER_CODE.test('HIT 15')&&LETTER_CODE.test('CUT')&&LETTER_CODE.test('P 5')&&!LETTER_CODE.test('HITMAN')&&!LETTER_CODE.test('Colpo'),'the letter-code check fires');
 function faceProblems(f,card,{small,left}){const out=symbolProblems(f,card);if(card.item){if(f.damage.length)out.push('an object with a damage pill');return out;}
  if(small&&f.role&&f.damage.length)out.push('a role circle beside the damage symbol (it repeats it)');
  const want=pills(card,left),got=f.damage.map(d=>({type:d.type,text:d.text}));
  if(JSON.stringify(got.map(x=>x.type))!==JSON.stringify(want.map(x=>x.type)))out.push(`damage types ${JSON.stringify(got.map(x=>x.type))}, catalog ${JSON.stringify(want.map(x=>x.type))}`);
  else if(!small&&JSON.stringify(got.map(x=>x.text))!==JSON.stringify(want.map(x=>x.text)))out.push(`damage amounts ${JSON.stringify(got.map(x=>x.text))}, catalog ${JSON.stringify(want.map(x=>x.text))}`);
  if(f.texts.some(t=>/^P \d/.test(t)||t.includes('↻')))out.push(`priority on the face: ${JSON.stringify(f.texts.filter(t=>/^P \d/.test(t)||t.includes('↻')))}`);
- if(!small&&f.texts.some(t=>/^(HIT|CUT|POISON)|^[HCP] \d/.test(t)))out.push('a letter code for the damage');
+ if(!small&&f.texts.some(t=>LETTER_CODE.test(t)))out.push('a letter code for the damage');
  f.damage.forEach((d,i)=>{if(!inside({...d.box,x:d.box.x+f.w/2,y:d.box.y+f.h/2},f.w,f.h))out.push(`pill ${i} ${JSON.stringify(R(d.box))} outside the face`);
   for(const c of f.costs)if(overlap(d.box,c)>0)out.push(`pill ${i} over a cost chip`);f.damage.slice(i+1).forEach(o=>{if(overlap(d.box,o.box)>0)out.push(`pill ${i} over another pill`);});});
  return out;}
 const handFaces=(s,scope)=>{const res=s.resources,rows=[];s.readout.hand.forEach((h,i)=>{const card=s.cards.find(c=>c.key===h.key);if(!card||!h.face){bad(scope,`hand card ${h.name} without a drawn face`);return;}
  const left=res.VIOLENCE===undefined?null:res.VIOLENCE-(card.cost?.VIOLENCE??0),pr=faceProblems(h.face,{...card,item:false},{small:false,left});for(const m of pr)bad(scope,`face of ${h.name}: ${m}`);rows.push({name:h.name,damage:h.face.damage.map(d=>`${d.type} ${d.text}`),texts:h.face.texts.length});});return rows;};
 const run=name=>!only||only.includes(name);
+// C4-2 (D8): every control of the table and of the game's dialogs at least 44 px, its own touch area included (::before); the semantic buttons only read the canvas, so what counts for them is
+// the hit, and only the chips may stay under it. The list is the evidence: empty but for the chips.
+const smallControls=p=>p.page.evaluate(()=>{const out=[];for(const e of document.querySelectorAll('main button,main summary,main a,main input,main select')){const st=getComputedStyle(e);if(st.display==='none'||st.visibility==='hidden'||e.closest('dialog:not([open])'))continue;
+ if(!e.offsetWidth||!e.offsetHeight)continue;const b=getComputedStyle(e,'::before'),w=Math.max(e.offsetWidth,b.content!=='none'?parseFloat(b.width)||0:0),h=Math.max(e.offsetHeight,b.content!=='none'?parseFloat(b.height)||0:0);
+ if(Math.min(w,h)<44)out.push({cls:String(e.className).slice(0,30),tag:e.tagName,hit:e.dataset.hit??null,w:+w.toFixed(1),h:+h.toFixed(1)});}return out;});
+// A card and a target through the UI: the first card that admits a character.
+async function aimAny(p){const s=await p.state();for(const c of s.cards){const now=await p.state(),own=now.hits.find(h=>h.id===c.key);if(!own)continue;await p.page.mouse.click(own.x-own.w*.22,own.y);await p.page.waitForTimeout(80);if((await p.state()).selected!==c.key)continue;
+  for(const t of (await p.state()).hits.filter(h=>h.kind==='person').sort((a,b)=>Number(a.target.owner===s.me)-Number(b.target.owner===s.me))){if((await p.state()).selected!==c.key)break;await p.page.mouse.click(t.x,t.y-t.h*.2);await p.page.waitForTimeout(120);if(await dialogOpen(p)){await p.page.keyboard.press('Escape');await p.page.waitForTimeout(60);}if((await p.state()).target)return c;}
+  await p.page.keyboard.press('Escape');await p.page.waitForTimeout(60);}return null;}
+async function controlPass(p,scope){const seen={},note=async what=>{const l=await smallControls(p);seen[what]=l;for(const c of l)if(!(c.hit&&c.hit.startsWith('status-')))bad(scope,`${what}: control under 44 px ${JSON.stringify(c)}`);};
+ const s=await p.state(),esc=()=>p.page.keyboard.press('Escape');await note('idle');
+ const own=s.hits.find(h=>h.kind==='hand');await p.page.mouse.click(own.x-own.w*.22,own.y);await p.page.waitForTimeout(100);await note('card chosen');await esc();await p.page.waitForTimeout(100);
+ if(await aimAny(p)){await note('confirmation');await p.shot(`${scope}-confirmation`);}else bad(scope,'no card admits a character: the confirmation was not seen');await esc();await p.page.waitForTimeout(100);await esc();await p.page.waitForTimeout(100);
+ const me=(await p.state()).hits.find(h=>h.kind==='person'&&h.target.owner===s.me);await p.page.mouse.click(me.x,me.y-me.h*.2);await p.page.waitForTimeout(150);if(await dialogOpen(p)){await note('inspection');await esc();await p.page.waitForTimeout(100);}
+ await p.page.getByLabel('Apri menu').click();await p.page.waitForTimeout(100);await note('menu');await p.page.getByRole('button',{name:'Ultimo turno'}).click();await p.page.waitForTimeout(100);await note('last turn');await esc();await p.page.waitForTimeout(150);
+ return seen;}
+// O12: from the first turn with played cards on: the round's cards are a target of 44 px or more that opens «Ultimo turno», which says the cost and, when a card played has one, the gain of the catalog (read from the faces, not from the client's parser).
+async function roundLinkPass(p,scope){const s=await p.state(),link=p.page.getByTestId('round-link');if(!s.lastMoves.length)return null;if(!await link.count()){bad(scope,'no link on the round cards');return {link:false};}
+ const box=await link.boundingBox(),faces=await p.page.evaluate(()=>window.__bm.faces(false)),withGain=s.lastMoves.filter(n=>/\+(\d+|x) [HAVTL]\b/.test(faces.find(f=>f.name===n)?.gains??''));
+ if(Math.min(box.width,box.height)<44)bad(scope,`round cards link ${box.width}×${box.height}`);await link.click();await p.page.waitForTimeout(120);const report=p.page.locator('dialog[open] .report'),open=await report.count()===1;if(!open){bad(scope,'the round cards do not open the last turn');return {link:true,opens:false};}
+ const txt=await report.innerText(),cost=/Costo nominale|Nessun costo nominale/.test(txt),gain=/Guadagno nominale/.test(txt);if(!cost)bad(scope,'the last turn says no cost');if(withGain.length&&!gain)bad(scope,`the last turn says no gain for ${withGain}`);await p.shot(`${scope}-last-turn`);await p.page.keyboard.press('Escape');await p.page.waitForTimeout(120);
+ return {link:true,size:`${Math.round(box.width)}×${Math.round(box.height)}`,opens:true,moves:s.lastMoves,withGain,cost,gain};}
+// C4-2 (D8): with a real finger path (emulated touch) each chip's content is reached from a target of 44 px or more: a tap on its character opens the inspection, which says what the chip says.
+async function scenarioChips(){const scope=`chips${tag}`,A=await open('A',{hasTouch:true});await login(A);const rec={chips:[]};evidence.scenarios.chips=rec;
+ try{await joinFfa(A);await waitList(A,1);await addComputers(A,4);await table(A);
+  for(let t=0;t<6&&!rec.chips.length;t++){const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&!x.sequence.running)),60000,'turn');if(s.over||s.eliminated)break;
+   const chips=s.hits.filter(h=>h.kind==='status');
+   for(const c of chips){const now=await A.state(),person=now.hits.find(h=>h.kind==='person'&&h.target.owner===c.target.owner),chipRow=now.hits.filter(h=>h.kind==='status'&&h.target.owner===c.target.owner);if(!person){bad(scope,`${c.id}: no character`);continue;}
+    if(Math.min(person.w,person.h)<44)bad(scope,`${c.id}: character ${person.w}×${person.h}`);const y=person.y-person.h*.25;if(chipRow.some(k=>Math.abs(k.y-y)<=k.h/2))bad(scope,`${c.id}: the tap would land on a chip`);
+    await A.page.touchscreen.tap(person.x,y);await A.page.waitForSelector('dialog[open] .receipt',{timeout:5000}).catch(()=>{});const txt=await A.page.locator('dialog[open] .receipt').innerText().catch(()=>'');const has=txt.replace(/\s+/g,' ').includes(c.label.replace(/\s+/g,' '));
+    rec.chips.push({id:c.id,chip:`${Math.round(c.w)}×${Math.round(c.h)}`,character:`${Math.round(person.w)}×${Math.round(person.h)}`,label:c.label,inInspection:has});if(!has)bad(scope,`${c.id}: «${c.label}» not in the inspection: ${txt.slice(0,300)}`);
+    await A.page.getByRole('button',{name:'Torna al tavolo'}).click().catch(()=>{});await A.page.waitForTimeout(650);}
+   if(!rec.chips.length)await playOne(A);await A.page.waitForTimeout(200);}
+  if(!rec.chips.length)bad(scope,'no chip seen in six turns: nothing proved');
+  await leave(A);
+ }catch(e){evidence.errors.push(`chips: ${e?.stack??e}`);await A.shot('failure-chips').catch(()=>{});}finally{await A.context.close().catch(()=>{});}}
+// C4-2: orientation and size changes on a real game (the limit of rule 1 declared in C3-7): with a card and a target chosen, to the other official measure, to portrait and back; a burst of sizes as a sliding browser bar gives. Nothing is sent by it, the table fits the measure it is at, ✓ and × stay reachable and off the target, and the game goes on.
+async function scenarioResize(name,ffa){const scope=`${name}${tag}`,A=await open('A');await login(A);const rec={steps:[]};evidence.scenarios[name]=rec;
+ const other=vw===1366?{width:844,height:390}:{width:1366,height:768},home={width:vw,height:vh};
+ const look=async(what,size)=>{await A.page.waitForTimeout(350);const s=await A.state(),L=s.layout,mine=L.seats.find(x=>x.me),dom=await A.page.evaluate(()=>{const b=[...document.querySelectorAll('.confirmation button')].map(e=>{const r=e.getBoundingClientRect(),t=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return {x:r.x+r.width/2,y:r.y+r.height/2,reach:t===e||e.contains(t)};}),c=document.querySelector('.confirmation')?.getBoundingClientRect();return {b,card:c?{x:c.x+c.width/2,y:c.y+c.height/2,w:c.width,h:c.height}:null};});
+  const row={what,size,commands:s.commands,target:s.target,resizes:s.stats.resizes,scale:L.scale,person:mine?R(mine.person):null,problems:layoutProblems(tableLayout(size.width,size.height,Object.keys(s.backs).concat(s.me),s.me,{}),size.width,size.height).length};rec.steps.push(row);
+  if(s.target&&dom.card){const hit=s.hits.find(h=>(h.kind==='person'||h.kind==='item')&&h.target.owner===s.target.owner&&h.target.itemIndex===s.target.itemIndex);if(hit&&overlap(dom.card,hit)>0)bad(scope,`${what}: the card covers its target`);for(const b of dom.b){if(!b.reach)bad(scope,`${what}: control not reachable`);if(b.x<0||b.y<0||b.x>size.width||b.y>size.height)bad(scope,`${what}: control off the screen`);}}
+  return s;};
+ try{if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}await table(A);
+  await playOne(A);let s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&!x.sequence.running&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');
+  if(!await aimAny(A))bad(scope,'no card admits a character');
+  const before=await look('start',home);if(!before.target)bad(scope,'no target chosen at the start');
+  await A.page.setViewportSize(other);await look('other measure',other);await A.shot(`${name}-other`);
+  const portrait={width:other.height,height:other.width};await A.page.setViewportSize(portrait);await A.page.waitForTimeout(250);rec.portrait=await A.page.locator('.portrait').isVisible();if(!rec.portrait)bad(scope,'no portrait notice');await A.shot(`${name}-portrait`);
+  await A.page.setViewportSize(home);const back=await look('back',home);await A.shot(`${name}-back`);if(JSON.stringify(back.layout.scale)!==JSON.stringify(before.layout.scale))bad(scope,'factors changed on the way back');
+  // A browser bar sliding in: many sizes in a row give one redraw at the end.
+  const r0=(await A.state()).stats.resizes;for(let i=1;i<=10;i++){await A.page.setViewportSize({width:vw,height:vh-i*4});await A.page.waitForTimeout(25);}await A.page.waitForTimeout(350);const r1=(await A.state()).stats.resizes;rec.burst={sizes:10,applied:r1-r0};if(r1-r0>3)bad(scope,`${r1-r0} sizes applied for one sliding bar`);
+  await A.page.setViewportSize(home);await A.page.waitForTimeout(350);const end=await A.state();if(end.commands!==before.commands)bad(scope,`${end.commands-before.commands} commands sent by resizing`);
+  await A.page.keyboard.press('Escape');await A.page.waitForTimeout(100);await A.page.keyboard.press('Escape');await A.page.waitForTimeout(100);const T=(await A.state()).turn;rec.playedAfter=await playOne(A);await A.wait(x=>!x||x.over||x.eliminated||x.turn!==T,40000,'resolved after resizing');
+  await leave(A);
+ }catch(e){evidence.errors.push(`${name}: ${e?.stack??e}`);await A.shot(`failure-${name}`).catch(()=>{});}finally{await A.context.close().catch(()=>{});}}
 async function scenario(name,{ffa=false,turns=2}){
  const A=await open('A');await login(A);const rec={ffa,turns:[],closeUps:[]};evidence.scenarios[name]=rec;let closeUpsSeen=0;
  try{
@@ -227,10 +285,13 @@ async function scenario(name,{ffa=false,turns=2}){
      if(sp.missing.length&&!(now.layout.compact&&now.layout.seats.length>2))bad(`${name}${tag} T${now.turn}`,`no strip for ${sp.missing}`);
      if(sp.seats!==now.layout.seats.length)bad(`${name}${tag} T${now.turn}`,`summary of ${sp.seats} seats on a table of ${now.layout.seats.length}`);}}
    await A.shot(`${name}-T${now.turn}`);
+   if(!old&&t===0){rec.controls=await controlPass(A,`${name}${tag}`);step(`${name}${tag} controls`,rec.controls);}
+   if(!old&&!rec.roundLink?.gain){const r=await roundLinkPass(A,`${name}${tag}`);if(r){rec.roundLink=r;step(`${name}${tag} round link`,r);}}
    if(t<turns){await A.page.evaluate(()=>window.__bm.measureStart());await playOne(A);await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,40000,'resolved');
     // C3-6: the short summary line, as the round arrives: where the scene put it, clear of everything, 16 px (desktop) or 13 px (compact).
     {const arrival=await A.state();if(arrival&&!arrival.over&&!arrival.eliminated){const dom=await shell(A),bp=briefProblems(arrival,dom),font=await toastFont(A);rec.briefs=(rec.briefs??[]).concat({turn:arrival.turn,...bp,fontPx:font});step(`${name}${tag} T${arrival.turn} short summary`,rec.briefs.at(-1));
-     if(!old){for(const m of bp.out)bad(`${name}${tag} T${arrival.turn}`,m);if(bp.shown&&font<FONT.brief(arrival.layout.compact))bad(`${name}${tag} T${arrival.turn}`,`short summary type ${font}`);}
+     if(!old){for(const m of bp.out)bad(`${name}${tag} T${arrival.turn}`,m);if(bp.shown&&font<FONT.brief(arrival.layout.compact))bad(`${name}${tag} T${arrival.turn}`,`short summary type ${font}`);
+      for(const c of await smallControls(A))if(!(c.hit&&c.hit.startsWith('status-')))bad(`${name}${tag} T${arrival.turn}`,`with the short summary: control under 44 px ${JSON.stringify(c)}`);}
      await A.shot(`${name}-T${arrival.turn}-summary`);}}
     // During the sequence: a screenshot of the first close-up, then every close-up recorded by the scene is checked.
     await A.wait(x=>!x||x.stats.closeUps.length>closeUpsSeen,8000,'close-up').catch(()=>{});await A.page.waitForTimeout(500);await A.shot(`${name}-T${s.turn}-closeup`);
@@ -253,6 +314,9 @@ try{
  await startServer();
  if(run('duel'))await scenario('duel',{});
  if(run('ffa'))await scenario('ffa',{ffa:true});
+ if(run('chips'))await scenarioChips();
+ if(run('resize'))await scenarioResize('resize-duel',false);
+ if(run('resize'))await scenarioResize('resize-ffa',true);
  assert.deepEqual(evidence.errors,[],'no page errors');
  assert.deepEqual(problems,[],'layout problems');
  evidence.ok=true;

@@ -243,11 +243,29 @@ export function edgePoint(b:Box,toward:Pt,gap=0):Pt{const dx=toward.x-b.x,dy=tow
  const t=Math.min(dx?(b.w/2+gap)/Math.abs(dx):Infinity,dy?(b.h/2+gap)/Math.abs(dy):Infinity);return {x:b.x+dx*t,y:b.y+dy*t};}
 export const bezier=(a:Pt,c:Pt,b:Pt,t:number):Pt=>({x:(1-t)*(1-t)*a.x+2*(1-t)*t*c.x+t*t*b.x,y:(1-t)*(1-t)*a.y+2*(1-t)*t*c.y+t*t*b.y});
 const within=(p:Pt,b:Box,pad=0)=>Math.abs(p.x-b.x)<=b.w/2+pad&&Math.abs(p.y-b.y)<=b.h/2+pad;
-/** Rectangle of the confirmation controls (✓ and ×) of table.tsx, as the layout places them. */
+/** C4-2: the place the confirmation had until C4-2, in the middle of the table. Nothing is drawn there any more (see `previewSpot`), but the aim arrows and the
+ * layout still keep it clear, as C3-3 asks, so the factors of C3-L do not move (rule 17). */
 export const confirmBox=(preview:{x:number;y:number},w:number,compact:boolean):Box=>{const bw=compact?150:164,bh=compact?96:124,left=Math.min(preview.x+70,w-175),top=Math.max(50,preview.y-30);return {x:left+bw/2,y:top+bh/2,w:bw,h:bh};};
-/** The ✓ and × buttons alone, with a margin for the text above them to wrap to more lines: a column as wide as the two buttons,
- * from below the first lines of the confirmation down well past the buttons (measured on the real DOM by VerifyAim). */
+/** The ✓ and × buttons of that place alone, with a margin for the text above them to wrap to more lines: a column as wide as the two buttons,
+ * from below the first lines of the confirmation down well past the buttons. */
 export const confirmButtons=(preview:{x:number;y:number},w:number,compact:boolean):Box=>{const c=confirmBox(preview,w,compact),left=c.x-c.w/2,top=c.y-c.h/2,from=top+(compact?54:76),to=top+(compact?150:190),bw=compact?112:116;return {x:left+bw/2,y:(from+to)/2,w:bw,h:to-from};};
+/** C4-2: the strip of the text of a chosen move, at the foot of the table left of the hand (the place of the hint, under the own seat): two lines, as wide as the hand leaves. */
+export function confirmTextBox(l:TableLayout,h:number):Box{const H=l.hand,left=l.compact?10:14,right=H.center-(H.w*H.zoom+6*H.step)/2-8,bh=l.compact?38:47,bottom=l.compact?5:10;
+ return {x:(left+right)/2,y:h-bottom-bh/2,w:right-left,h:bh};}
+/** What the chosen card should not cover: every seat, the piles, the round's cards, the shell, the text of the move and the hand with a card raised. */
+export function previewAvoid(l:TableLayout,w:number,h:number):Box[]{const H=l.hand,shell=shellBoxes(w,h,l.compact),top=H.y-H.lift-H.h*H.zoom/2,bottom=H.y+H.h/2;
+ const out:Box[]=[{x:H.center,y:(top+bottom)/2,w:H.w*H.zoom+6*H.step,h:bottom-top},shell.top,brandBox(l.compact),confirmTextBox(l,h)];
+ for(const s of l.seats){out.push(s.person,s.board,...s.items);if(!s.me)out.push(fan(s.backs,s.back,8).box);}
+ if(l.piles)out.push(l.piles.deck,l.piles.discard);if(l.played)out.push(l.played.box);return out;}
+/** C4-2 (owner, 4 November 2026): the chosen card waits for ✓ and × where the gesture ended: nearest to `anchor` (the drop point; on a tap or from the keyboard, the
+ * target). Covering costs far more than distance, leaving the middle of the table a little; the target is never covered, so a second press on it cannot land on ✓.
+ * The rest place of the layout when nothing else is left. */
+export function previewSpot(l:TableLayout,w:number,h:number,target:Box,anchor:Pt=target):Pt{
+ const pw=l.preview.w+18,ph=l.preview.h+18,k=l.compact?6:12,avoid=previewAvoid(l,w,h),clear={...target,w:target.w+12,h:target.h+12};let best:Pt|null=null,score=Infinity;
+ for(let y=ph/2+2;y<=h-ph/2-2;y+=6)for(let x=pw/2+2;x<=w-pw/2-2;x+=6){const b={x,y,w:pw,h:ph};if(overlap(b,clear)>0)continue;
+  const out=Math.max(0,w*.2-(x-pw/2),x+pw/2-w*.85)+Math.max(0,h*.05-(y-ph/2),y+ph/2-h*.95);let s=Math.hypot(x-anchor.x,y-anchor.y)*k+out*k*.5;if(s>=score)continue;
+  for(const a of avoid)s+=overlap(b,a);if(s<score){score=s;best={x,y};}}
+ return best??{x:l.preview.x,y:l.preview.y};}
 export function aimArrows(source:Box,targets:AimTarget[],view:{w:number;h:number},opts:{avoid?:Box[];head?:number;gap?:number}={}):Arrow[]{
  const avoid=opts.avoid??[],s=opts.head??10,gap=opts.gap??4,m=4,clampPt=(p:Pt):Pt=>({x:Math.max(m,Math.min(view.w-m,p.x)),y:Math.max(m,Math.min(view.h-m,p.y))});
  const grown={...source,w:source.w+6,h:source.h+6},crossings=(a:Pt,c:Pt,b:Pt)=>{let n=0;for(let i=1;i<24;i++){const p=bezier(a,c,b,i/24);if(!within(p,grown)&&avoid.some(x=>within(p,x,8)))n++;}return n;};

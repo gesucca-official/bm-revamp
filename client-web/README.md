@@ -175,7 +175,9 @@ in verticale, mai la pagina in orizzontale.
 
 - Scegli una carta e poi il bersaglio sul tavolo (personaggio o carta oggetto),
   oppure trascina la carta direttamente sul bersaglio. La carta presa segue
-  il puntatore; su touch resta sopra il dito. ✓ conferma, × o Escape annullano.
+  il puntatore; su touch resta sopra il dito. La carta scelta aspetta vicino a dove l'hai
+  rilasciata (col tocco, vicino al bersaglio): la metà alta col ✓ conferma, la metà bassa col ×
+  o Escape annullano; nome e bersaglio sono scritti in basso a sinistra.
 - Bound: dopo il bersaglio scegli dalla mano una regolare da scartare.
 - Trascina entro la mano per riordinare; da tastiera Maiusc+frecce spostano la
   carta con il focus. Il riordino è solo locale e non invia nulla.
@@ -424,6 +426,14 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 - **`Size`:** legge le dimensioni di ogni formato raster (`tools/image-size.mjs`: WebP, PNG, JPEG, GIF, AVIF; un raster che non sa leggere fa fallire il giro) e controlla **due cose distinte**: i limiti rigidi di C2 (invariati) e il tetto di C4 (D9, rivista il 3 novembre 2026:
   solo le texture decodificate, 32 MiB; per JS e totale valgono i soli limiti rigidi). `size.json` riporta margine e percentuale del tetto e un riepilogo per estensione.
 
+## Conferma sulla carta e dimensioni (C4-2)
+
+- **✓ e × stanno sulla carta scelta**, velata e divisa a metà (✓ sopra, × sotto) con tinte leggere; il testo della mossa sta in basso a sinistra, accanto alla mano (`confirmTextBox`).
+- **`previewSpot`** in `src/readability.ts`, pura: la carta sta il più vicino possibile al punto di rilascio (col tocco o la tastiera, al bersaglio), non copre mai il bersaglio e coprire il resto costa più della distanza; la zona centrale è solo indicativa.
+- **`resize`:** la scena attende 120 ms che la misura si fermi e ridisegna solo se è cambiata, così le barre di Safari non fanno scattare `fitScale` a ogni passo.
+- **44 px:** al tavolo sotto 44 px restano solo i gettoni di stato (D8), il cui testo compare toccando il personaggio. Le carte del round aprono «Ultimo turno», che dice costo e guadagno.
+- **`viewport-fit=cover` resta fuori:** Safari già rientra dalle aree sicure e qui non si può provare; passa all'app futura con il resto di 750×292 ([rapporto](../docs/reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)).
+
 ## Scala e spazio del tavolo (C3-L)
 
 Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
@@ -437,7 +447,7 @@ cornici, simboli e texture restano a C4.
   `layoutProblems`: tutto nello schermo, nessun posto su un altro, sulla mano coperta di un altro, sulla mano, sul
   suggerimento, sui controlli in alto, sulle carte del round o sulle pile, passo della mano ≥ 44 px, un posto
   libero per ogni primo piano D13, primi piani dei bersagli che non coprono gli altri personaggi, frecce di
-  C3-3 lontane da ✓ e ×.
+  C3-3 lontane dal vecchio posto di ✓ e × (tenuto libero perché i fattori non cambino, regola 17).
 - **Risultato:** 1366×768 duello tuo ×1,5, altri ×1,2, risorse ×1,25; FFA tuo ×1,5, altri ×1, risorse ×1,25;
   844×390 duello tuo ×1,5, altri ×1, risorse ×1,1; FFA tuo ×1,5, altri ×1, risorse ×1,05.
 - **Tuo posto:** plancia contro il bordo sinistro, personaggio accanto, il piede appena sopra il suggerimento
@@ -479,7 +489,7 @@ giudica la mossa. Nessuna freccia quando la scelta è bloccata (pending, elimina
 esito) e quando il bersaglio è già scelto (resta la linea verso l'anteprima); con la carta
 che già tocca il bersaglio la freccia non si disegna. La pulsazione leggera si spegne con
 movimento ridotto. La geometria è `aimArrows` in `src/readability.ts` (curve nello schermo,
-lontane dai pulsanti ✓ e ×), disegnata da `drawAim` in `src/scene.ts`.
+lontane dal vecchio posto dei pulsanti ✓ e ×; da C4-2 la freccia sparisce appena il bersaglio è scelto), disegnata da `drawAim` in `src/scene.ts`.
 
 Il suggerimento del tavolo («Scegli una carta», «Scegli il bersaglio sul tavolo», «Mossa ricevuta…») sta
 nell'angolo in basso a sinistra (`.hint`), con un alone che pulsa piano quando si chiede una scelta (classe `ask`,
@@ -591,8 +601,8 @@ la annulla (Esc) e la compila da tastiera dopo «Riprova».
 **Consolidamento (C3-7).** Dal C4-1 si lancia tutto con `-Task VerifyAll` (sezione «Lancio unico»); quanto segue vale per le singole verifiche. Prima di eseguire tutte le verifiche, ricostruire il jar dal sorgente (`./scripts/build.ps1 -Task Server -Offline`: il jar in `server/target` può essere vecchio e i controlli sul volto passano a vuoto) e tenere `Serve` attivo. `Verify` e `VerifyModes` **non** avviano il server (serve un server su database temporaneo con `--app.dev.seed-accounts=true` sulla 8080); le altre lo avviano da sole e vogliono la 8080 libera. Non lanciare due verifiche insieme: usano gli stessi account. `BM_OUT=../docs/reports/client-c3/c3-7` e `BM_VIEWPORT=1366x768|844x390`. `Size` scrive in `docs/reports/client-c2/size.json`. Durata indicativa: `VerifyResolution` circa 35 minuti per misura, `VerifyLayout` e `VerifyAim` ridotti con `BM_SCENARIOS=duel,ffa` pochi minuti.
 `VerifyAim` (C3-3, database temporaneo): per ogni carta della mano in duello, tocco emulato,
 movimento ridotto e FFA a cinque, confronta le frecce della scena con i bersagli che la
-vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dai rettangoli reali
-di ✓ e ×), nessuna freccia a scelta bloccata (pending fra due umani, esito), mira con mouse
+vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dal vecchio posto
+di ✓ e ×; da C4-2 ✓ e × sulla carta: almeno 44 px, raggiungibili, carta fuori dal bersaglio, testo fuori da posti e mano), nessuna freccia a scelta bloccata (pending fra due umani, esito), mira con mouse
 e tocco senza comandi, riordino, annullamento, interruzione del trascinamento, D12 e
 prestazioni del trascinamento. `BM_SCENARIOS` sceglie `duel,touch,reduced,ffa,pending`.
 `VerifyLayout` (C3-L, database temporaneo) gioca tre turni di quick 1vCom e di FFA con quattro computer e a ogni

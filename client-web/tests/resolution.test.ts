@@ -453,3 +453,10 @@ test('short summary line: the moves of the facts in resolution order, voided and
  f.moves.forEach(m=>assert.ok(line.includes(`${m.author===c.me?'tu':m.author} → ${m.card}`)));
  assert.equal(NO_CHANGE[0].text,'invariato');
 });
+
+test('C4-2 (O12): the report says the nominal gain of a move when the context knows it, and only then',()=>{
+ const c=pair('void'),f=resolve(c.previous,c.next,c.me,catalog),card=f.moves[0].card;
+ const plain=roundReport(f,false,ctxFor(c.me)),said=roundReport(f,false,{...ctxFor(c.me),gainsOf:n=>n===card?[{resource:'VIOLENCE',amount:15},{resource:'ALERTNESS',amount:null}]:[]});
+ assert.ok(!plain.moves[0].lines.some(l=>l.startsWith('Guadagno nominale')));
+ assert.ok(said.moves[0].lines.includes(`Guadagno nominale: +15 ${RESOURCE_NAMES.VIOLENCE}, +x ${RESOURCE_NAMES.ALERTNESS}.`),said.moves[0].lines.join(' | '));
+});
