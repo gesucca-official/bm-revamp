@@ -1,0 +1,188 @@
+{
+  "files": [
+    {
+      "file": "candidati/D1.png",
+      "format": "png",
+      "width": 2007,
+      "height": 783,
+      "bytes": 2634292,
+      "sha256": "ae193f005a9e50dad90a33fc4e5deabc77889973828282c6e01abfc2c2edb18d",
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "cryptographicValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/D1-intero.webp",
+      "format": "webp",
+      "width": 1000,
+      "height": 390,
+      "bytes": 58166,
+      "sha256": "940f9158cbd984269c7e2ca3807f2f7aca9f04f9651626b8b3ea253802d45566"
+    },
+    {
+      "file": "anteprime/D1-1366x768.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 115756,
+      "sha256": "6173744a2058a46ef824fe8e9c02c147e7bb7668266b606337543dae738bb8a7"
+    },
+    {
+      "file": "anteprime/D1-844x390.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 46012,
+      "sha256": "7fecca8b2b98d72822bed45222b3329dcf92c42a27fabd89323f7c3d4e10ebac"
+    },
+    {
+      "file": "anteprime/D1-750x292.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 32180,
+      "sha256": "e1a6c1c2986c7530df5b8dda68fa4b9934e009854b6b68f4bd28340725a31d2e"
+    },
+    {
+      "file": "candidati/D2.png",
+      "format": "png",
+      "width": 2007,
+      "height": 783,
+      "bytes": 2494610,
+      "sha256": "b46371453929a265bb70e35f153e62115f55e9dd70cd4f15653e7a3dc503f18b",
+      "C2PA": {
+        "present": true,
+        "softwareAgentStringObserved": "ChatGPT / gpt-image",
+        "cryptographicValidation": "non verificato"
+      }
+    },
+    {
+      "file": "anteprime/D2-intero.webp",
+      "format": "webp",
+      "width": 1000,
+      "height": 390,
+      "bytes": 47078,
+      "sha256": "85195e3fec35bed7ec08be9667dce986a1dc3f13a29d630428be288f86bc6268"
+    },
+    {
+      "file": "anteprime/D2-1366x768.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 102268,
+      "sha256": "d0bd6a6e364aff7145580bd00fcb0adaccfebe990f6ceda29463ed7b8397ef82"
+    },
+    {
+      "file": "anteprime/D2-844x390.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 39774,
+      "sha256": "f5bcd174a70b36197f6da1d1a0f4b9c64e3e4117b95a44a63b64f995fc088074"
+    },
+    {
+      "file": "anteprime/D2-750x292.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 26290,
+      "sha256": "34deba6bfaa05a55578e56e5c36b214642a8daf1cbc241c5382da3cbdfa7a438"
+    },
+    {
+      "file": "scheda-tutti.webp",
+      "format": "webp",
+      "width": 2560,
+      "height": 1135,
+      "bytes": 302660,
+      "sha256": "d8b0eead036abf0493989b49a3b3d558a24963016d77ef5b8b2f4c4e9c1d776a"
+    }
+  ],
+  "crops": [
+    {
+      "id": "D1",
+      "scene": [
+        1366,
+        768
+      ],
+      "scale": 0.9808429118773946,
+      "offset": [
+        -301.27586206896547,
+        0
+      ]
+    },
+    {
+      "id": "D1",
+      "scene": [
+        844,
+        390
+      ],
+      "scale": 0.49808429118773945,
+      "offset": [
+        -77.82758620689651,
+        0
+      ]
+    },
+    {
+      "id": "D1",
+      "scene": [
+        750,
+        292
+      ],
+      "scale": 0.37369207772795215,
+      "offset": [
+        0,
+        -0.30044843049327596
+      ]
+    },
+    {
+      "id": "D2",
+      "scene": [
+        1366,
+        768
+      ],
+      "scale": 0.9808429118773946,
+      "offset": [
+        -301.27586206896547,
+        0
+      ]
+    },
+    {
+      "id": "D2",
+      "scene": [
+        844,
+        390
+      ],
+      "scale": 0.49808429118773945,
+      "offset": [
+        -77.82758620689651,
+        0
+      ]
+    },
+    {
+      "id": "D2",
+      "scene": [
+        750,
+        292
+      ],
+      "scale": 0.37369207772795215,
+      "offset": [
+        0,
+        -0.30044843049327596
+      ]
+    }
+  ],
+  "originalsUnmodified": true,
+  "totalOriginalBytes": 13108337,
+  "previewSettings": {
+    "sharp": "0.35.5",
+    "vips": "8.18.7",
+    "kernel": "lanczos3",
+    "fit": "cover",
+    "position": "centre",
+    "quality": 76,
+    "effort": 5,
+    "contactQuality": 74
+  }
+}

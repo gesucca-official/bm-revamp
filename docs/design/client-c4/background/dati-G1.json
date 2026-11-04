@@ -1,0 +1,107 @@
+{
+  "original": {
+    "file": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-background-originali\\G1.png",
+    "automaticOriginal": "C:/Users/gesucca/.codex/generated_images/01a1a749-3a3c-7213-8806-63cc15ffea87/exec-fdd07774-b5a4-4928-8e59-f01f0b97948a.png",
+    "inRepository": false,
+    "format": "png",
+    "width": 2006,
+    "height": 784,
+    "bytes": 2449293,
+    "sha256": "a764db29c0b21632cca2d6a74d5aef035f4045902b25a483060979cfa51f7437",
+    "C2PA": {
+      "present": true,
+      "softwareAgent": "ChatGPT / gpt-image",
+      "cryptographicValidation": "non verificato"
+    }
+  },
+  "existingRepositoryOriginalBytes": 18010356,
+  "projectedOriginalBytes": 20459649,
+  "reasonOriginalOutsideRepository": "Limite cumulativo 20.000.000 byte; originali precedenti conservati senza modifiche.",
+  "files": [
+    {
+      "file": "anteprime/G1-intero.webp",
+      "format": "webp",
+      "width": 1000,
+      "height": 391,
+      "bytes": 78540,
+      "sha256": "3c9c251f9dde2254b3982185d8206357a88859cca1339621698b2a18b1be7cb2"
+    },
+    {
+      "file": "anteprime/G1-1366x768.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 145918,
+      "sha256": "cfbd17be61ce970d84caaef1f8bbf6b54b52365de58f0fdfe2d7bb84cb0e4a15"
+    },
+    {
+      "file": "anteprime/G1-844x390.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 63340,
+      "sha256": "c422765845d5aba09be0051b4ff8ab5111f98a617c347271eccda0703e7db945"
+    },
+    {
+      "file": "anteprime/G1-750x292.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 45060,
+      "sha256": "ee4b0e69fca9c0911366ed043198b540c00f6a4a27ab83c01733bbb76f556f73"
+    },
+    {
+      "file": "scheda-G1.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 1530,
+      "bytes": 155328,
+      "sha256": "614fd97acb84a5814e687efefb64f1d8474ccd745671064d622efc4cda391a9f"
+    }
+  ],
+  "crops": [
+    {
+      "scene": [
+        1366,
+        768
+      ],
+      "scale": 0.9795918367346939,
+      "offset": [
+        -299.53061224489795,
+        0
+      ]
+    },
+    {
+      "scene": [
+        844,
+        390
+      ],
+      "scale": 0.49744897959183676,
+      "offset": [
+        -76.94132653061229,
+        0
+      ]
+    },
+    {
+      "scene": [
+        750,
+        292
+      ],
+      "scale": 0.37387836490528414,
+      "offset": [
+        0,
+        -0.5603190428713845
+      ]
+    }
+  ],
+  "previewSettings": {
+    "sharp": "0.35.5",
+    "vips": "8.18.7",
+    "quality": 76,
+    "effort": 5,
+    "kernel": "lanczos3",
+    "fit": "cover",
+    "position": "centre",
+    "contactQuality": 72
+  }
+}

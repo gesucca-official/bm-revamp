@@ -1,0 +1,97 @@
+{
+  "files": [
+    {
+      "file": "candidati/C1.png",
+      "format": "png",
+      "width": 2006,
+      "height": 784,
+      "bytes": 2714029,
+      "sha256": "00b0be1a0d784a5c02a8bdcc191a7d872d33e30dfe62894394b5ec8ad231b26c"
+    },
+    {
+      "file": "anteprime/C1-intero.webp",
+      "format": "webp",
+      "width": 1000,
+      "height": 391,
+      "bytes": 70990,
+      "sha256": "d2217583b78afa411c108bd07605a775846788e149dcddd35f3ea4747150939d"
+    },
+    {
+      "file": "anteprime/C1-1366x768.webp",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 139804,
+      "sha256": "bf40baef063fd0c2871791420c13db8439c2e666ab1744bbef781c04b83ac112"
+    },
+    {
+      "file": "anteprime/C1-844x390.webp",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 56478,
+      "sha256": "1add69ad58e978cd07f5febe9b23480c35b6c8a0af7fe7778153a4873f29eeb2"
+    },
+    {
+      "file": "anteprime/C1-750x292.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 39838,
+      "sha256": "88d3efdecda800eb51817baa6dd716d8ccfac51da6c2cf57b2c9c9cd38b0fe73"
+    },
+    {
+      "file": "scheda-C1.webp",
+      "format": "webp",
+      "width": 750,
+      "height": 1530,
+      "bytes": 137606,
+      "sha256": "ae8575e36c274bab813a616af6c197c5404983606ac0e6f7089772a81af85df8"
+    }
+  ],
+  "crops": [
+    {
+      "scene": [
+        1366,
+        768
+      ],
+      "scale": 0.9795918367346939,
+      "offset": [
+        -299.53061224489795,
+        0
+      ]
+    },
+    {
+      "scene": [
+        844,
+        390
+      ],
+      "scale": 0.49744897959183676,
+      "offset": [
+        -76.94132653061229,
+        0
+      ]
+    },
+    {
+      "scene": [
+        750,
+        292
+      ],
+      "scale": 0.37387836490528414,
+      "offset": [
+        0,
+        -0.5603190428713845
+      ]
+    }
+  ],
+  "originalUnmodified": true,
+  "previewTool": {
+    "sharp": "0.35.5",
+    "vips": "8.18.7"
+  },
+  "C2PA": {
+    "present": true,
+    "softwareAgentStringObserved": "dnamegChatGPTgversionigpt-image",
+    "cryptographicValidation": "non verificato"
+  }
+}

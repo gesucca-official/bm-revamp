@@ -1,0 +1,257 @@
+{
+  "tool": "image_gen.imagegen",
+  "originalsChanged": false,
+  "originalsInRepository": true,
+  "originalBytesTotal": 5265406,
+  "limitsBytes": {
+    "perOriginal": 6000000,
+    "totalOriginals": 20000000
+  },
+  "previewsOnly": true,
+  "previewTool": {
+    "sharp": "0.35.5",
+    "vips": "8.18.7",
+    "webp": "1.6.0"
+  },
+  "previewSettings": {
+    "quality": 76,
+    "effort": 5,
+    "kernel": "lanczos3",
+    "crop": "cover, centre; arrotondamento raster ai pixel interi",
+    "wholeWidth": 1000,
+    "contactSheetQuality": 72
+  },
+  "files": [
+    {
+      "file": "candidati/A1.png",
+      "kind": "originale invariato",
+      "format": "png",
+      "width": 2006,
+      "height": 784,
+      "bytes": 2577890,
+      "sha256": "53ba5a5b363263b9d93cfe5ed2c6ac279c35f0cfcce6eadf1184e4dcabab18f3",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/A1-intero.webp",
+      "kind": "anteprima intera",
+      "format": "webp",
+      "width": 1000,
+      "height": 391,
+      "bytes": 67956,
+      "sha256": "f548fbf045467f0fd55cd6a8c63f1fcbb4f35f58c4de5501d6f33af2f049f0aa",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/A1-1366x768.webp",
+      "kind": "ritaglio solo visione",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 135034,
+      "sha256": "2214c4cbf01360829515d8c60025a219745b6f88888a154c23e9f50d264135da",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/A1-844x390.webp",
+      "kind": "ritaglio solo visione",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 53998,
+      "sha256": "a1421a20f29509ddc57fcf1f34e6bed6dee3d26810bd15a9d77f90e16c12ad84",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/A1-750x292.webp",
+      "kind": "ritaglio solo visione",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 38458,
+      "sha256": "0dbd8dbd97dfaa559ad234b6418b3d1b0776d7a30bbd61357dd250a7adc29ed5",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "candidati/B1.png",
+      "kind": "originale invariato",
+      "format": "png",
+      "width": 2007,
+      "height": 784,
+      "bytes": 2687516,
+      "sha256": "0f07fbab9678cbe5f0542f7932930245da8a560b90f13bfc0d71ad3c112a270a",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/B1-intero.webp",
+      "kind": "anteprima intera",
+      "format": "webp",
+      "width": 1000,
+      "height": 391,
+      "bytes": 73488,
+      "sha256": "96df6a304327a3bb88512caaa3d17fce8a058cb47456ab30c60acc6aa91f8a55",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/B1-1366x768.webp",
+      "kind": "ritaglio solo visione",
+      "format": "webp",
+      "width": 1366,
+      "height": 768,
+      "bytes": 153526,
+      "sha256": "b6213cda99b6b7d8dc5bd210db0f6fc293a6daaaa136f017a37190ed0929ed90",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/B1-844x390.webp",
+      "kind": "ritaglio solo visione",
+      "format": "webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 59354,
+      "sha256": "4645abd518333a028c2629ed60c31338d57eccc4f8174c4d3df2e7bf1f208d8e",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "anteprime/B1-750x292.webp",
+      "kind": "ritaglio solo visione",
+      "format": "webp",
+      "width": 750,
+      "height": 292,
+      "bytes": 41180,
+      "sha256": "38e687b06a5f36e00b98e62c822f781d732ebc76ac58b551d0471673b0f63346",
+      "hasAlpha": false,
+      "space": "srgb"
+    },
+    {
+      "file": "scheda-contatto.webp",
+      "kind": "scheda di contatto",
+      "format": "webp",
+      "width": 1290,
+      "height": 1421,
+      "bytes": 194854,
+      "sha256": "e5d81e5422a4fc862038fed9a1106ef7d5fdda2831bc73c4cbb7256dccc7153c",
+      "hasAlpha": false,
+      "space": "srgb"
+    }
+  ],
+  "crops": [
+    {
+      "id": "A1",
+      "scene": [
+        1366,
+        768
+      ],
+      "scale": 0.9795918367346939,
+      "offset": [
+        -299.53061224489795,
+        0
+      ],
+      "visibleSourcePercent": [
+        15.242813226985707,
+        0,
+        84.7571867730143,
+        100
+      ]
+    },
+    {
+      "id": "A1",
+      "scene": [
+        844,
+        390
+      ],
+      "scale": 0.49744897959183676,
+      "offset": [
+        -76.94132653061229,
+        0
+      ],
+      "visibleSourcePercent": [
+        7.710458368484295,
+        0,
+        92.2895416315157,
+        100
+      ]
+    },
+    {
+      "id": "A1",
+      "scene": [
+        750,
+        292
+      ],
+      "scale": 0.37387836490528414,
+      "offset": [
+        0,
+        -0.5603190428713845
+      ],
+      "visibleSourcePercent": [
+        0,
+        0.19115646258503355,
+        100,
+        99.80884353741497
+      ]
+    },
+    {
+      "id": "B1",
+      "scene": [
+        1366,
+        768
+      ],
+      "scale": 0.9795918367346939,
+      "offset": [
+        -300.0204081632653,
+        0
+      ],
+      "visibleSourcePercent": [
+        15.260131207440624,
+        0,
+        84.73986879255938,
+        100
+      ]
+    },
+    {
+      "id": "B1",
+      "scene": [
+        844,
+        390
+      ],
+      "scale": 0.49744897959183676,
+      "offset": [
+        -77.19005102040819,
+        0
+      ],
+      "visibleSourcePercent": [
+        7.731529390722219,
+        0,
+        92.26847060927778,
+        100
+      ]
+    },
+    {
+      "id": "B1",
+      "scene": [
+        750,
+        292
+      ],
+      "scale": 0.37369207772795215,
+      "offset": [
+        0,
+        -0.48729446935723786
+      ],
+      "visibleSourcePercent": [
+        0,
+        0.16632653061224087,
+        100,
+        99.83367346938776
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# C1 — Revisione delle sedute e della composizione
+
+4 novembre 2026. Prompt preventivo in commit 1b64c70; originale [C1.png](candidati/C1.png), registro [C1](registro-C1.md), richiesta letterale [JSON](richiesta-C1.json), dati e hash di ogni immagine [JSON](dati-C1.json). Originale invariato: PNG 2006×784, 2.714.029 byte. Con A1 e B1 gli originali totalizzano 7.979.435 byte: restano sotto 20 MB, ciascuno sotto 6 MB.
+
+Osservazione dell'operatore, non approvazione: sono presenti solo booth imbottiti laterali e due sgabelli imbottiti centrali, con usura differente. Fascia superiore più contenuta e sottobicchiere vuoto spostato verso l'interno, separato dall'allineamento del posacenere. Posacenere e Negroni sono leggibili nell'intero. Il bordo del tavolo descrive una curva continua e gli oggetti non appaiono stirati, ma il piano rimane molto largo: la plausibilità della forma va giudicata dal proprietario.
+
+Limiti: gli sgabelli restano piuttosto allineati, quindi il disordine richiesto è solo parziale. Il cover centrato 1366×768 elimina quasi completamente posacenere e Negroni; a 844×390 sono troncati. La loro buona visibilità vale soprattutto per l'intero e 750×292. Non è stato cambiato il ritaglio per nascondere questo limite. Non noto testo, marchi, persone, carte o interfaccia; non riconosco richiami specifici ad altri giochi.
+
+[Scheda di visione](scheda-C1.webp): intero e tre ritagli, con etichette fuori dall'immagine. Anteprime in anteprime/C1-*.webp: cover centrato secondo la specifica sulle dimensioni reali, Lanczos3, sharp 0.35.5/libvips 8.18.7, WebP qualità 76 effort 5; scheda qualità 72. Arrotondamento raster ai pixel interi. Originale mai ritagliato o ricompresso. Script temporaneo fuori dal repository. Queste sono solo immagini di revisione, senza sovrapposizioni del client.
+
+Termini d'uso da verificare dal proprietario; seed e versione numerica del modello non esposti. C2PA presente, firma non verificata. Il proprietario deve decidere se C1 soddisfa forma e composizione, oppure se chiedere un'altra revisione, in particolare per disordine degli sgabelli e visibilità degli oggetti nei crop più stretti. Nessuna integrazione, server, verifica applicativa o push.
