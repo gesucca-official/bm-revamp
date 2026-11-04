@@ -2,7 +2,7 @@
 
 3 novembre 2026. Catture **reali** (partite sul server locale, Edge/Playwright, build `1ab2185` più le modifiche di C4-3) a 1366×768 e 844×390, prese dal giro A
 di [VerifyAll](../giro-A/run-summary.json) (`-Only test,build,size,verify,decks,public,layout`, 11 su 11 verdi). Sono JPEG già compressi dallo strumento; il campione pesa circa 2,4 MB
-(il tetto indicativo di D13 è 10 MB). Nessuna scena sintetica. Il blocco C4-3 è **fatto, in attesa del giudizio del proprietario**.
+(il tetto indicativo di D13 è 10 MB). Nessuna scena sintetica. Il blocco C4-3 è **fatto, approvato dal proprietario il 4 novembre 2026**.
 
 | Cosa guardare | 1366×768 | 844×390 |
 |---|---|---|

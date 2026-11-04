@@ -174,7 +174,7 @@ non so dire quanto questi problemi pesino su un dispositivo vero. La FFA lì ha 
 
 ## C4-3 — Simboli, font e inventario degli asset
 
-3 novembre 2026. Nessuna regola, server, protocollo, catalogo né `client-debug` toccati. **Stato: fatto, in attesa del giudizio del proprietario** sul
+3 novembre 2026. Nessuna regola, server, protocollo, catalogo né `client-debug` toccati. **Stato: fatto, approvato dal proprietario il 4 novembre 2026** sul
 [campione](client-c4/c4-3/campione/README.md). Evidenze in [client-c4/c4-3](client-c4/c4-3/) (giro A, giro B, base a 750×292, campione).
 Build verificata: HEAD `1ab2185` più le modifiche del blocco (non ancora committate al momento delle verifiche).
 
@@ -282,7 +282,7 @@ su sei giri, **tre rossi in 6 s per la stessa causa e tre verdi**; con C4-3 tre 
 
 ## C4-2 — Finitura delle dimensioni e tutela di 750×292
 
-4 novembre 2026. **Fatto, in attesa del giudizio del proprietario.** Nessuna regola, server, protocollo, catalogo o `client-debug` toccati. Evidenze in [client-c4/c4-2](client-c4/c4-2/) (7,5 MB).
+4 novembre 2026. **Fatto e approvato dal proprietario lo stesso giorno.** Nessuna regola, server, protocollo, catalogo o `client-debug` toccati. Evidenze in [client-c4/c4-2](client-c4/c4-2/) (7,5 MB).
 
 ### Cosa è cambiato
 
