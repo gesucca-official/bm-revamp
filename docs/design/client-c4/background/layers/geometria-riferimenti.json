@@ -1,0 +1,104 @@
+{
+  "source": "candidati/H1.png",
+  "width": 2006,
+  "height": 784,
+  "method": "Riquadri e centri stimati manualmente sull’immagine, non segmentazione esatta. Coordinate in pixel H1; crop deterministico sharp 0.35.5 senza modello.",
+  "objects": [
+    {
+      "name": "sottobicchiere",
+      "crop": {
+        "left": 145,
+        "top": 590,
+        "width": 330,
+        "height": 194
+      },
+      "box": {
+        "left": 174,
+        "top": 612,
+        "width": 264,
+        "height": 164
+      },
+      "exclude": {
+        "left": 130,
+        "top": 570,
+        "width": 380,
+        "height": 214
+      },
+      "key": [
+        0,
+        0,
+        255
+      ],
+      "reference": "riferimenti/sottobicchiere-H1.png",
+      "sha256": "dce1cbd7c82795b0d0d1fa1e77f366010203eff809d65ad84ddc7298711d8d31",
+      "center": [
+        306,
+        694
+      ]
+    },
+    {
+      "name": "negroni",
+      "crop": {
+        "left": 1715,
+        "top": 85,
+        "width": 291,
+        "height": 340
+      },
+      "box": {
+        "left": 1755,
+        "top": 108,
+        "width": 251,
+        "height": 286
+      },
+      "exclude": {
+        "left": 1680,
+        "top": 65,
+        "width": 326,
+        "height": 410
+      },
+      "key": [
+        0,
+        255,
+        0
+      ],
+      "reference": "riferimenti/negroni-H1.png",
+      "sha256": "ed56aab268ed2d973ecacd8e8ef8c5eb2e16f7555a975780596f589722efdaa6",
+      "center": [
+        1880.5,
+        251
+      ]
+    },
+    {
+      "name": "posacenere",
+      "crop": {
+        "left": 0,
+        "top": 125,
+        "width": 300,
+        "height": 365
+      },
+      "box": {
+        "left": 0,
+        "top": 151,
+        "width": 260,
+        "height": 298
+      },
+      "exclude": {
+        "left": 0,
+        "top": 110,
+        "width": 340,
+        "height": 410
+      },
+      "key": [
+        0,
+        0,
+        255
+      ],
+      "reference": "riferimenti/posacenere-H1.png",
+      "sha256": "2a324404d9d5ae88af819b728ad2ec8c9441801e6478992e7625beba308ea3c0",
+      "center": [
+        130,
+        300
+      ]
+    }
+  ]
+}
