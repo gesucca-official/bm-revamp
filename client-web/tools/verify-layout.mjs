@@ -192,7 +192,11 @@ function faceProblems(f,card,{small,left}){const out=symbolProblems(f,card);if(c
  f.damage.forEach((d,i)=>{if(!inside({...d.box,x:d.box.x+f.w/2,y:d.box.y+f.h/2},f.w,f.h))out.push(`pill ${i} ${JSON.stringify(R(d.box))} outside the face`);
   for(const c of f.costs)if(overlap(d.box,c)>0)out.push(`pill ${i} over a cost chip`);f.damage.slice(i+1).forEach(o=>{if(overlap(d.box,o.box)>0)out.push(`pill ${i} over another pill`);});});
  return out;}
-const handFaces=(s,scope)=>{const res=s.resources,rows=[];s.readout.hand.forEach((h,i)=>{const card=s.cards.find(c=>c.key===h.key);if(!card||!h.face){bad(scope,`hand card ${h.name} without a drawn face`);return;}
+// C4-4: the frame of each card drawn at the table, from the cards of the real game, against the type in the annex of the regulation.
+const annex=JSON.parse(await readFile(join(repo,'docs/rules-catalog.json'),'utf8'));
+const ANNEX_FRAME=Object.fromEntries([...annex.cards.map(c=>[c.name.trim(),c.type==='Oggetto'?'item':{Regolare:'regular',Base:'basic','Legata al personaggio':'bound','Ultima risorsa':'lastResort'}[c.subtype]]),...annex.tokens.map(c=>[c.name.trim(),'token'])]);
+const frameProblem=(scope,name,frame)=>{const want=ANNEX_FRAME[name.trim()];if(frame!==want)bad(scope,`${name}: frame ${frame}, the annex says ${want}`);};
+const handFaces=(s,scope)=>{const res=s.resources,rows=[];for(const it of s.readout.items)frameProblem(scope,it.name,it.frame);s.readout.hand.forEach((h,i)=>{const card=s.cards.find(c=>c.key===h.key);if(!card||!h.face){bad(scope,`hand card ${h.name} without a drawn face`);return;}frameProblem(scope,h.name,h.face.frame);
  const left=res.VIOLENCE===undefined?null:res.VIOLENCE-(card.cost?.VIOLENCE??0),pr=faceProblems(h.face,{...card,item:false},{small:false,left});for(const m of pr)bad(scope,`face of ${h.name}: ${m}`);rows.push({name:h.name,damage:h.face.damage.map(d=>`${d.type} ${d.text}`),texts:h.face.texts.length});});return rows;};
 const run=name=>!only||only.includes(name);
 // C4-2 (D8): every control of the table and of the game's dialogs at least 44 px, its own touch area included (::before); the semantic buttons only read the canvas, so what counts for them is
@@ -272,10 +276,12 @@ async function scenario(name,{ffa=false,turns=2}){
     if(t===0){const big=await A.page.evaluate(()=>window.__bm.faces(false)),small=await A.page.evaluate(()=>window.__bm.faces(true));
      rec.catalog={cards:big.length,withDamage:big.filter(c=>c.damage.length).length,rows:big.map(f=>({name:f.name,damage:f.damage.map(d=>`${d.type} ${d.text}`),catalog:f.catalogAmount}))};
      if(big.length!==37)bad(scope,`the catalog has ${big.length} cards, not 37`);if(rec.catalog.withDamage!==12)bad(scope,`${rec.catalog.withDamage} faces with damage, the catalog has 12`);
-     for(const f of big)for(const m of faceProblems(f,f,{small:false,left:null}))bad(scope,`catalog face of ${f.name}: ${m}`);
+     for(const f of big){frameProblem(scope,f.name,f.frame);for(const m of faceProblems(f,f,{small:false,left:null}))bad(scope,`catalog face of ${f.name}: ${m}`);}
      for(const f of small)for(const m of faceProblems(f,f,{small:true,left:null}))bad(scope,`small face of ${f.name}: ${m}`);
      step(`${name}${tag} catalog faces`,{cards:big.length,withDamage:rec.catalog.withDamage,small:small.filter(f=>f.damage.length).length});
      const pick=now.cards.find(c=>c.damage&&c.damage!=='—')??now.cards[0];await A.page.locator(`[data-hit="${pick.key}"]`).focus();await A.page.keyboard.press('i');
+     // C4-4: where the large card is shown, it has the frame of its type, the one of the same card at the table.
+     {const large=await A.page.waitForFunction(()=>{const e=document.querySelector('.large-card');if(!e)return null;if(!e.offsetWidth)return {shown:false};const f=e.querySelector('.card-frame');return f?{shown:true,frame:e.dataset.frame,parts:f.children.length}:null;},null,{timeout:3000}).then(h=>h.jsonValue(),()=>null);if(!large)bad(scope,'the inspection has no frame');else if(large.shown){frameProblem(scope,pick.name,large.frame);step(`${name}${tag} inspection frame`,large);}}
      await A.page.waitForSelector('dialog[open] .receipt',{timeout:5000});const txt=await A.page.locator('dialog[open] .receipt').innerText(),marks=await A.page.locator('[data-testid=inspect-damage] svg').count();
      const types=pick.damage&&pick.damage!=='—'?pick.damage.split(',').length:0;rec.inspection={card:pick.name,priority:pick.priority,marks,text:txt.slice(0,300)};
      if(!new RegExp(`Priorità\\s*${pick.priority}\\b`).test(txt))bad(scope,`the inspection of ${pick.name} does not show the priority ${pick.priority}`);if(marks!==types)bad(scope,`the inspection shows ${marks} damage symbols for ${types} types`);

@@ -147,6 +147,11 @@ try{
  assert.deepEqual([...shownCards].sort(),annex.cards.map(c=>c.class).sort(),'catalog cards = annex');
  assert.deepEqual([...shownChars].sort(),annex.characters.map(c=>c.class).sort(),'catalog characters = annex');
  assert.deepEqual(shownNames.map(n=>n.trim()),shownCards.map(b=>names1[b].trim()),'names from the catalog');
+ // C4-4: the frame of every card as the real server publishes it, against the type in the annex.
+ {const want=c=>c.type==='Oggetto'?'item':{Regolare:'regular',Base:'basic','Legata al personaggio':'bound','Ultima risorsa':'lastResort'}[c.subtype];
+  const frames=await page.locator('[data-testid=catalog] [data-frame]').evaluateAll(n=>n.map(e=>({binding:e.dataset.binding,frame:e.dataset.frame})));
+  for(const f of frames){const c=annex.cards.find(x=>x.class===f.binding);assert.equal(f.frame,c?want(c):'character',`frame of ${f.binding}`);}
+  assert.equal(frames.length,39);step('catalogFrames',{cards:frames.length});}
  const art=await page.locator('[data-testid=catalog] .thumb').evaluateAll(n=>n.filter(e=>getComputedStyle(e).backgroundImage.includes('atlas')&&e.style.backgroundPosition).length);
  const scroll=await page.evaluate(()=>({page:document.documentElement.scrollWidth<=innerWidth,sheet:(s=>s.scrollHeight>s.clientHeight)(document.querySelector('.sheet'))}));
  await A.shot('01-catalog');

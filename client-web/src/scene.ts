@@ -5,6 +5,7 @@ import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
+import {drawFrame,frameOf,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
@@ -31,7 +32,7 @@ type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:nu
 /** C3-5: what a drawn face shows, in its own coordinates (centre at the middle of the card): damage pills, cost chips and every text, for the checks. */
 type DrawnDamage={type:DamageType;text:string;box:Box};
 /** `marks`: the resources whose symbol the face draws on its cost coins and on its gains, in drawing order (C4-3: never a letter on the face; the letters stay in `texts` only where the catalog gives them as text). */
-export type FaceInfo={w:number;h:number;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean;marks:{cost:Resource[];gains:Resource[]}};
+export type FaceInfo={w:number;h:number;frame:FrameKind;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean;marks:{cost:Resource[];gains:Resource[]}};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 // Plain vector marks (symbols.ts, shared with the HTML shell): the shape carries the meaning, the colour only reinforces it (O3, O14).
 export function glyph(g:Graphics,kind:SymbolKind,x:number,y:number,s:number,color:number,accent?:number){drawSymbol(g as unknown as Pen,kind,x,y,s,{main:color,accent});return g;}
@@ -39,7 +40,7 @@ export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number}
  /** C3-L: what the own piles show: cards left in the deck and the card on top of the discard pile. */
  piles:{deck:number;discard:string|null}|null;
  /** C3-L: the round's cards drawn in the middle, bottom first (during a sequence only those already landed). */
- played:{name:string;author:string;void:boolean}[]|null;hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number;face:FaceInfo|null}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
+ played:{name:string;author:string;void:boolean}[]|null;items:{name:string;frame:FrameKind}[];hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number;face:FaceInfo|null}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
  summary:{key:string;seats:Record<string,{texts:string[];box:Box|null;fs:number|null;drawn:boolean}>}|null;
  /** C3-4: resource values each board shows (the view, or the step reached during a sequence). */
  boards:Record<string,Partial<Record<Resource,number>>>};
@@ -47,7 +48,7 @@ export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number}
 const SEATS={me:[.18,.77],duel:[[.46,.24]],ffa:[[.26,.24],[.72,.24],[.16,.49],[.81,.49]]} as const;
 /** A card known only by its published name (an opponent's card): a plain face. */
 const plain=(name:string):Card=>({name,bindingName:'',effect:'',item:false,basicAction:false,lastResort:false,characterBound:false,boundToCharacter:null,priority:0,canTarget:[],cost:{},image:null,sprite:null});
-export const subtype=(c:Card)=>c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.characterBound?'AZIONE LEGATA':c.lastResort?'ULTIMA RISORSA':'AZIONE REGOLARE';
+export const subtype=(c:Card)=>frameOf(c)==='neutral'?'CARTA':frameOf(c)==='token'?'OGGETTO TOKEN':c.item?'OGGETTO':c.basicAction?'AZIONE BASE':c.characterBound?'AZIONE LEGATA':c.lastResort?'ULTIMA RISORSA':'AZIONE REGOLARE';
 export const roleLabel=(c:Card)=>{const r=roleOf(c);return r?ROLES[r].label:'';};
 export const cost=(c:Card)=>Object.entries(c.cost).map(([k,v])=>`${v} ${{VIOLENCE:'V',ALERTNESS:'A',TOXICITY:'T',ALCOHOL:'L',HEALTH:'H'}[k]}`).join(' + ')||'—';
 export class TableScene {
@@ -91,7 +92,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
  layout:TableLayout|null=null;
  /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
  brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
-readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:null,played:null,hand:[],board:null,summary:null,boards:{}};
+readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:null,played:null,items:[],hand:[],board:null,summary:null,boards:{}};
  // C3-L: round's cards already landed in the middle during a sequence.
  private landed=0;
  // C3-4s: what the table shows during a sequence, until each flight lands; at its end, and for decisions at any time, the view (rule 2).
@@ -143,30 +144,34 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.app.ticker.add(()=>this.tick());this.resize(host.clientWidth,host.clientHeight);
  }
  private text(parent:Container,value:string,x:number,y:number,size:number,width?:number,color=INK){const t=new Text({text:value,style:{fontFamily:'Impact, Arial Narrow, sans-serif',fontSize:size,fill:color,wordWrap:!!width,wordWrapWidth:width,align:'center',lineHeight:size*1.05}});t.anchor.set(.5,0);t.position.set(x,y);parent.addChild(t);return t;}
- private frame(w:number,h:number){const c=new Container();c.addChild(new Graphics().roundRect(-w/2+4,-h/2+6,w,h,5).fill({color:0x160e09,alpha:.6}));
-  c.addChild(new Graphics().roundRect(-w/2,-h/2,w,h,5).fill(PAPER).stroke({color:INK,width:2}).roundRect(-w/2+4,-h/2+4,w-8,h-8,2).stroke({color:0x9b7652,width:1}));
+ private frame(w:number,h:number,kind:FrameKind='regular'){const c=new Container();c.addChild(new Graphics().roundRect(-w/2+4,-h/2+6,w,h,5).fill({color:0x160e09,alpha:.6}));
+  const paper=new Graphics().roundRect(-w/2,-h/2,w,h,5).fill(PAPER).stroke({color:INK,width:2});drawFrame(paper as unknown as Pen,kind,w,h);c.addChild(paper);
   const flecks=new Graphics();for(let i=0;i<12;i++)flecks.circle(-w/2+5+(i*23%(w-10)),-h/2+4+(i%2? h-8:0),1+i%2).fill({color:0x795034,alpha:.25});c.addChild(flecks);return c;}
- private face(name:string,art:number,w:number,h:number,footer:string,small=false,sub=''){const c=this.frame(w,h);const titleH=small?h*.27:h*.24, footH=small?h*.17:h*.18;
+ private face(name:string,art:number,w:number,h:number,footer:string,small=false,sub='',kind:FrameKind='regular'){const c=this.frame(w,h,kind);const titleH=small?h*.27:h*.24, footH=small?h*.17:h*.18;
+  // The written type ends where the art begins, however large the card: at 1366x768 it used to fall half on the art.
+  const subSize=Math.max(7,w*.056),subH=Math.max(10,subSize*1.25);
   const sprite=new Sprite(this.art[art]);sprite.position.set(-w/2+6,-h/2+titleH);sprite.width=w-12;sprite.height=h-titleH-footH-4;c.addChild(sprite);
   const title=this.text(c,name,0,-h/2+6,small?Math.max(9,w*.105):Math.max(12,w*.11),w-12);
-  const maxTitle=titleH-(small?8:15);
+  const maxTitle=titleH-(small?8:subH+5);
   // Each shortening step re-measures the wrapped title: fit once per size, not on every redraw.
   const fitKey=`${name}|${title.style.fontSize}|${w}|${maxTitle}`,fitted=this.fittedTitles.get(fitKey);
   // A smaller type (down to 75%) comes before the ellipsis, so long names stay whole on readable cards.
   if(fitted!==undefined){const [size,text]=fitted.split('|');title.style.fontSize=Number(size);title.style.lineHeight=Number(size)*1.05;title.text=text;}
   else{const base=Number(title.style.fontSize);for(let s=base;title.height>maxTitle&&s>base*.75;s-=1){title.style.fontSize=s;title.style.lineHeight=s*1.05;}
    let len=name.length;while(title.height>maxTitle&&len>5){len--;title.text=name.slice(0,len)+'…';}this.fittedTitles.set(fitKey,`${title.style.fontSize}|${title.text}`);}
-  if(sub&&!small)this.text(c,sub,0,-h/2+titleH-10,Math.max(7,w*.056),w-12);
+  if(sub&&!small)this.text(c,sub,0,-h/2+titleH-subH,subSize,w-12);
   this.text(c,footer,0,h/2-footH+3,small?Math.max(7,w*.085):Math.max(12,w*.10),w-10);return c;}
  // C2a card face: role stamp under the title, self gains on the art, cost coins and priority in the footer.
  // Everything sits on the left, which stays visible where the fan overlaps. short = unpaid cost resources.
- private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[],costMarks:Resource[]=[],gainMarks:Resource[]=[];const f=this.face(c.name,artIndex(c.bindingName),w,h,c.item?'OGGETTO':'',small,subtype(c));
+ private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[],costMarks:Resource[]=[],gainMarks:Resource[]=[];const kind=frameOf(c),f=this.face(c.name,artIndex(c.bindingName),w,h,kind==='token'?'TOKEN':c.item?'OGGETTO':'',small,subtype(c),kind);
   const titleH=small?h*.27:h*.24,footH=small?h*.17:h*.18,role=roleOf(c),g=new Graphics();f.addChild(g);
   // The small card of the round shows the symbol of its damage at the bottom right: a role circle beside it would repeat it (owner trial, C3-7).
   const roleDrawn=!!role&&!(small&&damageOf(c).length);
   if(role&&roleDrawn){if(small){const d=Math.max(13,w*.22),cx=-w/2+6+d/2,cy=-h/2+titleH+d/2+2;g.circle(cx,cy,d/2).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,cx,cy,d*.62,PAPER);}
    else{const th=Math.max(14,h*.082),fs=th*.66,label=this.text(f,ROLES[role].label,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const tw=th+label.width+8,tx=-w/2+6,ty=-h/2+titleH+2+th/2;
-    g.roundRect(tx,ty-th/2,tw,th,th*.3).fill(ROLE_COLOR[role]).stroke({color:INK,width:1});glyph(g,role,tx+th*.55,ty,th*.62,PAPER);label.position.set(tx+th,ty);f.addChild(label);}}
+    this.roleTab(g,ROLE_COLOR[role],tx,ty,tw,th,w);glyph(g,role,tx+th*.55,ty,th*.62,PAPER);label.position.set(tx+th,ty);f.addChild(label);}}
+  // No role, or one this client does not know (Set Base): the same tab, hollow and without a word.
+  if(!role&&!small){const th=Math.max(14,h*.082);this.roleTab(g,null,-w/2+6,-h/2+titleH+2+th/2,th*1.3,th,w);}
   const gains=gainsOf(c);if(gains.length){const fs=small?Math.max(8,w*.12):Math.max(10,w*.075),ch=fs*1.45;let gx=-w/2+7;const gy=h/2-footH-5-ch/2;
    for(const gain of gains){const label=this.text(f,`+${gain.amount??'x'}`,0,0,fs,undefined,INK);label.anchor.set(0,.5);const gd=ch*.78,cw=label.width+gd+9;if(gx+cw>w/2-4){label.destroy();break;}
     g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});label.position.set(gx+4,gy);f.addChild(label);glyph(g,gain.resource,gx+4+label.width+2+gd/2,gy,gd,RES_COLOR[gain.resource]);gainMarks.push(gain.resource);gx+=cw+3;}}
@@ -178,8 +183,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     g.circle(dx,fy,dd/2).fill(0xf6efd9);glyph(g,k,dx,fy,dd*.78,RES_COLOR[k]);costMarks.push(k);
     if(unpaid)g.moveTo(cx+3,fy+ch*.3).lineTo(cx+cw-3,fy-ch*.3).stroke({color:0xffd9d9,width:1.5});cx+=cw+3;}
    if(small)this.damageMarks(f,c,w,h,footH,drawnDamage);else this.damageBadges(f,c,w,fy,fs,cx,left,drawnDamage);}
-  this.faces.set(f,{w,h,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text),marks:{cost:costMarks,gains:gainMarks}});
+  this.faces.set(f,{w,h,frame:kind,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text),marks:{cost:costMarks,gains:gainMarks}});
   return f;}
+ /** C4-4: the mark of the role comes out of the fillet, from the left edge of the card to the end of its word. */
+ private roleTab(g:Graphics,color:number|null,tx:number,ty:number,tw:number,th:number,w:number){const t=ty-th/2,b=ty+th/2,l=-w/2+2.5,r=tx+tw;g.poly([l,t,r-th*.2,t,r,t+th*.2,r,b-th*.2,r-th*.2,b,l,b]);if(color!==null)g.fill(color);g.stroke({color:color===null?FRAME_GREY:INK,width:1});}
  // C3-5 (owner's decision of 30 October 2026): the face shows the type and the nominal amount of the damage, as symbols, where the priority used to be
  // (the priority stays in the inspection). One pill per type of `damage`, right-aligned in the footer; the type alone when the server gives no amount.
  // The amount is the catalog's nominal one: states and defenses can change the real damage (D1).
@@ -261,7 +268,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   else empty(d);
   // The discard pile is too small for a readable face: frame and art of the top card, its name in «Ultimo turno» and the inspection.
   const s=P.discard,name=this.staged?this.staged.discard:this.pile.top;
-  if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h),art=new Sprite(this.art[artIndex(c.bindingName)]);art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
+  if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h,frameOf(c)),art=new Sprite(this.art[artIndex(c.bindingName)]);art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
   else empty(s);
   return {deck:count,discard:name};}
  // C3-L: the cards of the last resolved round in the middle, in resolution order (the first at the bottom), each with its author;
@@ -276,7 +283,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    if(who.width>t.w-6-x)who.scale.set((t.w-6-x)/who.width);who.position.x=-x/2;tag.addChildAt(new Graphics().roundRect(-t.w/2,-t.h/2,t.w,t.h,t.h*.35).fill({color:m.void?WINE:INK,alpha:.92}).stroke({color:PAPER,width:1}),0);if(m.void){const cg=new Graphics();drawMark(cg as unknown as Pen,'cross',who.x+who.width/2+t.h*.4,0,t.h*.5,0xfff6e2);tag.addChild(cg);}tag.position.set(t.x,t.y);this.world.addChild(tag);
    if(m.void){const y=b.y-b.h/2+strip*.5;this.world.addChild(new Graphics().moveTo(b.x-b.w/2+3,y+strip*.25).lineTo(b.x+b.w/2-3,y-strip*.25).stroke({color:WINE,width:compact?2:3}));}
    return {name:m.playedCardName,author:m.playerId,void:!!m.void};});}
- private back(w:number,h:number){const c=this.frame(w,h);c.addChild(new Graphics().roundRect(-w/2+4,-h/2+4,w-8,h-8,2).fill(WINE).stroke({color:0xa47763,width:1}));
+ private back(w:number,h:number){const c=this.frame(w,h,'back');c.addChild(new Graphics().roundRect(-w/2+4,-h/2+4,w-8,h-8,2).fill(WINE).stroke({color:0xa47763,width:1}));
   const g=new Graphics().circle(0,0,w*.2).fill(0xcab184).stroke({color:INK,width:1});g.moveTo(-w*.27,-h*.25).lineTo(w*.27,h*.25).moveTo(w*.27,-h*.25).lineTo(-w*.27,h*.25).stroke({color:0xcab184,width:2});c.addChild(g);return c;}
  private halo(c:Container,w:number,h:number,color=PETROL){c.addChild(new Graphics().roundRect(-w/2-3,-h/2-3,w+6,h+6,6).stroke({color,width:3}));}
  // K4/D9: "Computer 1–4" in join order when several computers sit at the table.
@@ -293,10 +300,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const strips0=this.marks&&!this.seqStarted?stripPlan(L,w,h,Object.fromEntries(L.seats.map(x=>[x.id,(this.marks![x.id]?.length?this.marks![x.id]:NO_CHANGE).map(m=>m.text)]))):null,strips=strips0;
   const briefKey=`${this.model.round?.facts.key??''}|${w}x${h}`;
   if(this.briefFor!==briefKey){this.briefFor=briefKey;const spot=briefSpot(L,w,h,Object.values(strips0??{}).flatMap(p=>p?[p.box]:[]));this.brief=spot?{...spot,font:briefFont(compact)}:null;}
+  const drawnItems:{name:string;frame:FrameKind}[]=[];
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
    if(id!==me){const final=p.cardsInHand as number,count=this.staged?.backs[id]??final,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=final;
     for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
-   const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true);person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
+   const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true,'','character');person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
    const dead=p.character.dead,forfeit=view.forfeits[id];if(dead||forfeit){person.alpha=.55;this.text(person,dead?'ELIMINATO':'FORFAIT',0,0,compact?11:16,cw,0xffffff);}
    const r=p.character.resources,summary=RESOURCES.map(k=>`${LETTER[k]} ${r[k]??0}`).join(', ');
    const charHit:Hit={id:`person-${id}`,kind:'person',x,y,w:cw,h:ch,angle:person.rotation,target:{owner:id},label:`${id===me?'Tu':this.name(id)}, ${p.character.name}, salute ${r.HEALTH}${dead?', eliminato':forfeit?', forfait':''}; risorse ${summary}`,node:person};this.hits.push(charHit);
@@ -306,7 +314,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const strip=strips?.[id];if(this.marks&&!this.seqStarted)(roundSummary??={key:this.marksKey,seats:{}}).seats[id]={texts:(this.marks[id]?.length?this.marks[id]:NO_CHANGE).map(m=>m.text),box:strip?.box??null,fs:strip?.size.fs??null,drawn:!!strip};
    if(strip)this.seatSummary(strip,this.marks![id]?.length?this.marks![id]:NO_CHANGE);
    const covered=coveredItems(seat.items),table=this.staged?.items[id];
-   p.character.items.forEach((item,index)=>{const b=seat.items[index]??seat.items[seat.items.length-1],c=this.card(item,b.w,b.h,true),hid=`item-${id}-${index}`;c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);
+   p.character.items.forEach((item,index)=>{const b=seat.items[index]??seat.items[seat.items.length-1],c=this.card(item,b.w,b.h,true),hid=`item-${id}-${index}`;drawnItems.push({name:item.name,frame:this.faces.get(c)!.frame});c.position.set(b.x,b.y);c.rotation=(index-1)*.025;this.world.addChild(c);
     if(table)c.visible=false;
     const hit:Hit={id:hid,kind:'item',x:b.x,y:b.y,w:b.w,h:b.h,angle:c.rotation,covered:!!covered[index],hidden:!!table&&!table.some(x=>x.name===item.name),target:{owner:id,itemIndex:index},label:`${item.name}, oggetto di ${id===me?'te':this.name(id)}${roleLabel(item)?`, ruolo ${roleLabel(item).toLowerCase()}`:''}${item.gains&&item.gains!=='—'?`, dà ${item.gains}`:''}, copia ${index+1}`,node:c};this.hits.push(hit);
     // Raised (over its neighbour) by the mouse at rest, a first touch (K7) or the keyboard focus.
@@ -348,7 +356,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   if(dest){const seat=L.seats.find(s=>s.id===dest.target!.owner),index=dest.target!.itemIndex,rest:Box=(index!=null?seat?.items[index]:seat?.person)??{x:dest.x,y:dest.y,w:dest.w,h:dest.h},key=`${dest.id}:${w}x${h}:${rest.x},${rest.y}:${this.dropPoint?.x},${this.dropPoint?.y}`;if(this.placed?.key!==key)this.placed={key,spot:previewSpot(L,w,h,rest,this.dropPoint??rest)};this.preview=this.placed.spot;}
   if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res),leftV(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
   }
-  const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
+  const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,items:drawnItems,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
   this.drawAim();this.onLayout();
  }
@@ -494,7 +502,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const ups=new Map<string,CloseUp>();const upOf=(id:string)=>{if(!ups.has(id)){const s=place(id)!,avoid=[...(L?.seats??[]).filter(x=>x.id!==id).flatMap(seatBoxes),...hand],range=closeUpRange(id===this.model.me);
    const c=closeUp(s.person,{w:this.width,h:this.height},[...avoid,...pileBoxes],range),o=closeUp(s.person,{w:this.width,h:this.height},avoid,range);
    const far=(x:CloseUp)=>Math.hypot(x.box.x-this.width/2,x.box.y-this.height*.42);ups.set(id,c.placed==='middle'&&(c.scale>o.scale||(c.scale===o.scale&&far(c)<=far(o)))?c:o);}return ups.get(id)!;};
-  const character=(id:string,w:number,h:number)=>{const p=v.players[id]?.character??previous.players[id]?.character;return this.face(p?.name??'',artIndex(p?.bindingName??''),w,h,'PERSONAGGIO',true);};
+  const character=(id:string,w:number,h:number)=>{const p=v.players[id]?.character??previous.players[id]?.character;return this.face(p?.name??'',artIndex(p?.bindingName??''),w,h,'PERSONAGGIO',true,'','character');};
   T.moves.forEach((m,i)=>{const from=seat(m.author),to=seat(m.target),P=p.moves[i],home=place(m.author)?.person,aim=place(m.target)?.person;if(!from||!to||!home||!aim)return;
    const at={cost:P.cost.at,author:P.author.at,back:P.back.at,flight:P.flight.at,target:P.target.at,changes:P.changes.at};
    // 1. Cost: this card's tokens leave its author; the bound's extra card leaves the hand for the discard.

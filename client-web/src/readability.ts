@@ -24,6 +24,13 @@ export const ROLES={
 } as const;
 export type Role=keyof typeof ROLES;
 export const roleOf=(card:Card):Role|null=>card.role&&Object.hasOwn(ROLES,card.role)?card.role as Role:null;
+// C4-4: the type of a card, from the flags of the wire. The token has no flag of its own: it is recognised from `bindingName`, stable on the wire but not a dedicated field.
+// A card without a binding (known by name only) or with contradictory flags is neutral; a new class with no flag set counts as a regular action, as the server plays it.
+export type CardType='character'|'regular'|'basic'|'bound'|'lastResort'|'item'|'token'|'neutral';
+export const TOKEN_PREFIX='com.tokens.';
+export function cardType(c:Card):CardType{
+ if(!c.bindingName||[c.item,c.basicAction,c.characterBound,c.lastResort].filter(Boolean).length>1)return 'neutral';
+ return c.item?(c.bindingName.startsWith(TOKEN_PREFIX)?'token':'item'):c.basicAction?'basic':c.characterBound?'bound':c.lastResort?'lastResort':'regular';}
 
 /** O13: self gains as published by the catalog, e.g. "+15 V, +15 A" or "+x T" (x = variable). */
 export type Gain={resource:Resource;amount:number|null};

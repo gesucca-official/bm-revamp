@@ -437,3 +437,104 @@ Fattori di C3-L invariati. Massimi dei frame nelle FFA: 135,4 ms a 1366×768, 10
 **Non verificato:** la freccia su iPhone e Safari; con movimento ridotto, solo che la pulsazione usa la stessa regola delle altre frecce.
 
 Catture: [duello a 1366×768](client-c4/c4-2/dopo-giudizio/catture/layout-duel-1366x768-confirmation-1366x768.jpg), [FFA a 1366×768](client-c4/c4-2/dopo-giudizio/catture/layout-ffa-1366x768-confirmation-1366x768.jpg), [duello a 844×390](client-c4/c4-2/dopo-giudizio/catture/layout-duel-844x390-confirmation-844x390.jpg), [FFA a 844×390](client-c4/c4-2/dopo-giudizio/catture/layout-ffa-844x390-confirmation-844x390.jpg), [FFA a 750×292](client-c4/c4-2/dopo-giudizio/catture/layout-ffa-750x292-confirmation-750x292.jpg).
+
+## C4-4 — Cornici per tipologia e segno del ruolo (O8 con O14)
+
+4 novembre 2026. **Fatto, in attesa del giudizio del proprietario.** Regole, server, protocollo, catalogo e `client-debug` non sono cambiati. Nessuna soglia né atteso è stato allentato; i controlli aggiunti stanno sotto.
+
+### Varianti e scelta
+
+Tre varianti su carte vere, disegnate dalla scena reale a 1366×768 e 844×390, anche in grigi: [proposte e README](client-c4/c4-4/proposte/README.md).
+
+| Variante | Cornice | Esito |
+|---|---|---|
+| V1 Filetto | linea diversa lungo tutto il margine | **scelta** |
+| V2 Angoli e fregio | angoli e fregio, linea di oggi | nel ventaglio della mano restano quasi solo gli angoli a sinistra |
+| V3 Sagoma | contorno della carta | la più lontana dal volto attuale (O14) |
+
+Il proprietario ha scelto la V1 chiedendo un filetto meno flebile. Provati due spessori, ha scelto il **medio**: [confronto a 36 px](client-c4/c4-4/proposte/confronto-spessori-36px-844x390.jpg). Il pieno a colori si legge meglio a 36 px; in grigi il medio tiene più aperti i tratteggi.
+
+### Cosa è cambiato
+
+| Tipologia | Filetto | Scritta |
+|---|---|---|
+| Regolare (26 carte su 37) | la linea di oggi, identica | AZIONE REGOLARE |
+| Personaggio | fascia oro con filo scuro | PERSONAGGIO |
+| Base | doppia linea petrolio | AZIONE BASE |
+| Legata | tratti lunghi color vino | AZIONE LEGATA |
+| Ultima risorsa | fascia nera piena | ULTIMA RISORSA |
+| Oggetto | puntini ocra | OGGETTO |
+| Token | linea e punto color ruggine | OGGETTO TOKEN, TOKEN (prima: OGGETTO) |
+| Neutra | tratteggio grigio sottile e rado | CARTA |
+| Dorso | filo oro | nessuna |
+
+- **Tipologia:** `cardType` in `readability.ts`, funzione pura sui dati del wire.
+- **Token:** riconosciuto dal prefisso `com.tokens.` di `bindingName`, dato stabile del wire ma **non un campo dedicato**.
+- **Ripiego neutro:** carta senza `bindingName` o con indicatori contraddittori. **Una classe nuova senza indicatori conta come regolare**, come la gioca il server: il Set Base non la farà risultare neutra.
+- **Disegno:** `frames.ts`, sul modello di `symbols.ts`: dati e due conduttori, Pixi e SVG. Solo grafica vettoriale: nessuna texture e nessun asset nuovi.
+- **Segno del ruolo:** linguetta che esce dalla cornice, con il simbolo di C4-3. Una carta senza ruolo, o con un ruolo ignoto, ha la linguetta vuota e senza parola. Sulle carte piccole resta il cerchio.
+- **Dove:** mano, primi piani, carte del round, oggetti, personaggi, dorso, scarti, catalogo, editor, ispezione.
+- **Catalogo ed editor:** la miniatura da 56×56 diventa una mini-carta da 66×90 (54×74 sotto i 550 px di altezza), quindi si vedono meno carte per schermata.
+- **Ispezione:** il bordo color petrolio uguale per tutte lascia il posto alla cornice della tipologia.
+
+**Un difetto che c'era già, corretto:** a 1366×768 la scritta del tipo cadeva per metà sull'illustrazione. Ora finisce dove l'illustrazione comincia. A 844×390 non si muove nulla.
+
+### Controlli aggiunti
+
+- **Test in unità, `tests/frames.test.ts`:** ogni classe dell'allegato ha la cornice del suo tipo (26, 4, 2, 1, 4); il token ha la sua; ripiego neutro su carta senza binding e con indicatori contraddittori.
+- **Regola 11, sempre in unità:** tolto il colore, tutte le tipologie restano geometricamente diverse a 36, 45,6, 60, 120 e 214 px; ogni segno ha contrasto almeno 2:1 con la carta; i vuoti dei tratteggi a 36 px restano di almeno 2,8 px.
+- **Area del volto:** a tutte le misure la cornice sta tra 1 e 6 px dal bordo, fuori da titolo e illustrazione.
+- **Partita reale, `VerifyLayout`:** mano, oggetti, le 37 facce e la cornice dell'ispezione confrontate con l'allegato. **`VerifyDecks`:** le 39 cornici del catalogo pubblicato dal server reale.
+
+La cattura ha trovato ciò che i controlli verdi non vedevano: la cornice dell'ispezione non si disegnava, perché veniva misurata prima dell'apertura della finestra. Corretta, con il suo controllo; i giri sotto sono stati rifatti tutti sul client finale.
+
+### Verifiche
+
+Client finale `dist` `559e1ef260a4f12e`, jar `07fa99f4457cf36e`. Con `-Only` il lancio non è equivalente al consolidamento.
+
+| Giro | Cosa | Esito |
+|---|---|---|
+| [A](client-c4/c4-4/giro-A/) | Test, Build, Size, Verify, VerifyDecks, VerifyLayout, alle due misure | **9 su 9 verdi** |
+| [B](client-c4/c4-4/giro-B/) | Test, Build, Size, VerifyResolution (`quick`, `ffa`), alle due misure | **5 su 5 verdi** |
+| [Base](client-c4/c4-4/base-750x292/) | 750×292, non equivalente | non peggiora: sotto |
+| Repository | `./scripts/build.ps1 -Task Test -Offline`, `python scripts/check-rules.py` | **verdi** |
+
+**Peso (`Size`):**
+
+| | C4-2 | C4-4 | Limite |
+|---|---|---|---|
+| JS gzip | 332 664 B | 334 343 B | 524 288 B |
+| Totale gzip | 1 116 229 B | 1 117 978 B | 4 194 304 B |
+| Texture decodificate | 18 876 320 B | 18 876 320 B | tetto di 32 MiB (33 554 432 B) |
+
+**Tempi in FFA, massimi di `VerifyLayout` (giro A):** 149 e 88,7 ms a 1366×768, 84,6 e 64 ms a 844×390. Nel giro A di C4-2 erano 183,5 e 122,8, poi 108,4 e 88,9: il costo del ridisegno non si vede. Un solo giro su PC: non è la misura dell'iPhone.
+
+**Base a 750×292 (regola 18):**
+
+| Controllo | C4-2 | C4-4 |
+|---|---|---|
+| `layoutProblems`, duello e FFA | 6, 6, 6 e 11, 11, 11 | **6, 6, 6 e 11, 11, 11** |
+| `BASE_750` nei test | | invariato |
+| `Verify` | verde | verde |
+| `VerifyFfa` | rosso | rosso, per la stessa causa |
+| `VerifyAim` | 10 messaggi | 13 |
+| `VerifyLayout` | 48 messaggi | 48 |
+
+**`VerifyAim` non è un peggioramento, ma il 10 di C4-2 non è il riferimento giusto:** un giro con le cornici ne aveva dati 16. Ho rifatto la prova tre volte per parte: C4-4 ne dà 15, 17 e 14, **il commit di base senza C4-4 ne dà 14, 14 e 14**. I messaggi sono gli stessi: freccia sui comandi, testo della mossa su un posto, tocco, partita non finita. La freccia sui comandi, 4 messaggi in ogni giro, c'è anche sulla base e non era nel conto di C4-2: viene dalle partite più che dalle cornici, ma non ne ho cercato la causa.
+
+### Giudizio del proprietario
+
+Catture del client finale in [catture](client-c4/c4-4/catture/):
+
+- [duello a 1366×768](client-c4/c4-4/catture/duello-1366x768.jpg) e [in grigi](client-c4/c4-4/catture/duello-grigi-1366x768.jpg);
+- [FFA a 844×390](client-c4/c4-4/catture/ffa-844x390.jpg) e [in grigi](client-c4/c4-4/catture/ffa-grigi-844x390.jpg);
+- [catalogo a 1366×768](client-c4/c4-4/catture/catalogo-1366x768.jpg), [editor a 844×390](client-c4/c4-4/catture/editor-844x390.jpg), [ispezione](client-c4/c4-4/catture/ispezione-1366x768.jpg).
+
+Da giudicare: lo spessore sul tavolo, la distinzione in grigi, soprattutto tra oggetto, token e legata a 36 px, dove le scritte non si leggono, e la minore densità del catalogo.
+
+### Non verificato
+
+- iPhone e Safari: cornici, linguette e fascia a 750×292 reali. L'SVG del catalogo gira solo su Edge.
+- Il ripiego neutro in partita reale: oggi nessuna carta del catalogo ci arriva, quindi è provato in unità e nel [foglio delle proposte](client-c4/c4-4/proposte/fogli-mano-v1-medio-1366x768.jpg).
+- Il token: oltre ai test, visto in cattura reale quando la partita lo produce, non in un controllo di partita sicuro di incontrarlo.
+- Il segno vuoto con un ruolo davvero ignoto servito dal server: provato solo sul prototipo.

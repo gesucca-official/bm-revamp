@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-04T17:46:31.539Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "test",
+    "build",
+    "size",
+    "resolution"
+  ],
+  "build": {
+    "head": "aa33b795c1070d5002a44b3a5ab4f75e40eee854",
+    "dirtyPaths": [
+      "M client-web/src/collection.tsx",
+      " M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/style.css",
+      " M client-web/src/table.tsx",
+      " M client-web/src/ui.tsx",
+      " M client-web/tools/verify-decks.mjs",
+      " M client-web/tools/verify-layout.mjs",
+      "?? client-web/src/frames.ts"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-04T16:31:03.572Z",
+      "bytes": 50693917,
+      "sha256_16": "07fa99f4457cf36e",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 18,
+      "sha256_16": "559e1ef260a4f12e"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 574,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 454,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/collection.tsx;  M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/style.css;  M client-web/src/table.tsx;  M client-web/src/ui.tsx"
+  ]
+}

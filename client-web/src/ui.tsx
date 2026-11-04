@@ -1,7 +1,8 @@
-import React,{useRef} from 'react';
+import React,{useLayoutEffect,useRef,useState} from 'react';
 import type {Card,Resource} from './contracts.ts';
 import {RESOURCE_NAMES} from './resolution.ts';
 import {DAMAGE_ACCENT,DAMAGE_COLOR,DAMAGE_NAMES,RES_COLOR,gainsOf,damageOf,damageText,leftV,type DamageType} from './readability.ts';
+import {frameSvg,type FrameKind} from './frames.ts';
 import {MARK_LAYERS,SYMBOL_LAYERS,svgParts,symbolColors,type Layer,type MarkKind,type SymbolKind} from './symbols.ts';
 
 export const resourceNames:Record<string,string>=RESOURCE_NAMES;
@@ -12,6 +13,14 @@ const hex=(n:number)=>`#${n.toString(16).padStart(6,'0')}`;
 /** C4-3: a symbol of symbols.ts in HTML: the same layers the table draws with Pixi, as SVG (catalog, editor, inspection, help). */
 const SvgMark=({layers,colors,className,px=14,data}:{layers:Layer[];colors:{main:string;accent?:string};className?:string;px?:number;data?:Record<string,string>})=>
  <svg className={className} viewBox="-1 -1 2 2" aria-hidden="true" {...data}>{svgParts(layers,colors,px).map((p,i)=>React.createElement(p.tag,{key:i,...p.attrs}))}</svg>;
+/** C4-4: the frame of a card as the table draws it, behind what the shell puts on it. Size in px of the viewBox; the CSS may scale it (the compact miniature). */
+export const CardFrame=({kind,w,h}:{kind:FrameKind;w:number;h:number})=>
+ <svg className="card-frame" viewBox={`${-w/2-1} ${-h/2-1} ${w+2} ${h+2}`} aria-hidden="true">{frameSvg(kind,w,h).map((p,i)=>React.createElement(p.tag,{key:i,...p.attrs}))}</svg>;
+/** The same frame at the size its parent has on screen (the inspection). */
+export function MeasuredFrame({kind}:{kind:FrameKind}){const holder=useRef<HTMLSpanElement>(null),[size,setSize]=useState<{w:number;h:number}|null>(null);
+ // The dialog opens after its content is mounted, so the size comes when the box gets one.
+ useLayoutEffect(()=>{const box=holder.current?.parentElement;if(!box)return;const measure=()=>setSize({w:box.offsetWidth,h:box.offsetHeight}),seen=new ResizeObserver(measure);measure();seen.observe(box);return()=>seen.disconnect();},[kind]);
+ return <span ref={holder}>{size&&size.w>0&&<CardFrame kind={kind} w={size.w} h={size.h}/>}</span>;}
 export const SymbolMark=({kind,className,colors,px}:{kind:SymbolKind;className?:string;colors?:{main:string;accent?:string};px?:number})=>
  <SvgMark layers={SYMBOL_LAYERS[kind]} colors={colors??symbolColors(kind)} className={className} px={px}/>;
 /** ✓ and ✕ as shapes in the colour of the text, in place of the glyphs Impact and Arial lack. */

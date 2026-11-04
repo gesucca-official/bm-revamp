@@ -7,7 +7,7 @@
 **D3, D4, D6, D9, D11, D13 e D14 sono confermate dal proprietario il 3 novembre 2026; D7 e D10 non servono più dopo la revisione di D6; le altre decisioni non sono prese.** Le voci restanti di D1–D14 sono proposte con una raccomandazione: decide il
 proprietario. Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato di C4-1, C4-1b, C4-3 e C4-2.** C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto il 4 novembre 2026 e **in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **in attesa del giudizio del proprietario** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
+**Stato di C4-1, C4-1b, C4-3, C4-2 e C4-4.** C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto il 4 novembre 2026 e **in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto il 4 novembre 2026 e **in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **in attesa del giudizio del proprietario** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
 [rapporto](reports/client-c4-report.md#c4-1b--misura-di-partenza). I criteri di [C4-1](#c4-1--strumenti-di-verifica-o23) restano quelli con cui
 si è giudicato lo strumento.
@@ -323,6 +323,8 @@ ogni misura nuova: non deve scattare a ogni barra di Safari che appare.
 `VerifyLifecycle` a una misura per il pannello d'esito.
 
 ### C4-4 — Cornici per tipologia e segno del ruolo (O8 con O14)
+
+**Stato: fatto il 4 novembre 2026, in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). Il proprietario ha scelto la V1, filetto, nello spessore medio.
 
 **Perimetro.** Cornice o fregio diverso per personaggio, azione regolare, base, legata, ultima risorsa, oggetto e token, **mantenendo la
 scritta**. Segno del ruolo definitivo integrato nella stessa grafica, con il simbolo di C4-3. Stesse cornici in mano, nei primi piani, nel

@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-04T17:54:38.361Z",
+  "quick": false,
+  "nonStandardMeasures": [
+    "750x292"
+  ],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "750x292"
+  ],
+  "only": [
+    "verify",
+    "ffa",
+    "aim",
+    "layout"
+  ],
+  "build": {
+    "head": "3069fc238054ee9c6ded921cdb93f02888b01baf",
+    "dirtyPaths": [
+      "M client-web/src/collection.tsx",
+      " M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/style.css",
+      " M client-web/src/table.tsx",
+      " M client-web/src/ui.tsx",
+      " M client-web/tools/verify-decks.mjs",
+      " M client-web/tools/verify-layout.mjs",
+      "?? client-web/src/frames.ts"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-04T16:31:03.572Z",
+      "bytes": 50693917,
+      "sha256_16": "07fa99f4457cf36e",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 18,
+      "sha256_16": "559e1ef260a4f12e"
+    }
+  },
+  "results": [
+    {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 160,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 10,
+      "exit": 1,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 121,
+      "exit": 1,
+      "problems": 13
+    },
+    {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 188,
+      "exit": 1,
+      "problems": 48
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/collection.tsx;  M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/style.css;  M client-web/src/table.tsx;  M client-web/src/ui.tsx",
+    "ffa-750x292.json: evidence says ok=false",
+    "aim-750x292.json: evidence says ok=false",
+    "layout-750x292.json: evidence says ok=false"
+  ]
+}

@@ -4,16 +4,18 @@ import type {Card,CharacterCard,UserGuiDeck} from './contracts.ts';
 import {artCss,artIndex,loadAtlas} from './art.ts';
 import {subtype} from './scene.ts';
 import {ROLES,roleOf} from './readability.ts';
-import {Cost,DamagePills,Gains,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
+import {frameOf,type FrameKind} from './frames.ts';
+import {CardFrame,Cost,DamagePills,Gains,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
 import {MAX_BOUND,MAX_INITIAL,addBound,addRegular,basics,bounds,catalogOrder,clearBound,copies,editCopy,emptyDraft,initialCards,lastResorts,
  payload,problems,removeRegular,setBasic,setCharacter,setLastResort,setName,shown,type Draft,type Pool} from './deck.ts';
 
-const Art=({binding}:{binding:string})=><div className="thumb" aria-hidden="true" style={artCss(artIndex(binding))}/>;
+// C4-4: the miniature is a small card with the frame of the table around the art.
+const Art=({binding,kind}:{binding:string;kind:FrameKind})=><div className="mini-card" aria-hidden="true"><CardFrame kind={kind} w={66} h={90}/><div className="thumb" style={artCss(artIndex(binding))}/></div>;
 
 /** One catalog card as published by the server: name, kind, cost, nominal damage as symbols, role, gains, targets and text. The priority is in the inspection at the table (C3-5). */
 function CardFace({card,full=false,count}:{card:Card;full?:boolean;count?:number}){
  const role=roleOf(card);
- return <div className="cc" data-testid="card-face" data-binding={card.bindingName}><Art binding={card.bindingName}/>
+ return <div className="cc" data-testid="card-face" data-binding={card.bindingName} data-frame={frameOf(card)}><Art binding={card.bindingName} kind={frameOf(card)}/>
   <div className="cc-text"><strong>{card.name}{count!==undefined&&<span className="copies"> ×{count}</span>}</strong>
    <small>{subtype(card).toLocaleLowerCase('it')}{!card.item&&<> · costo <Cost card={card}/></>}{!card.item&&<DamagePills card={card}/>}</small>
    {(role||(card.gains&&card.gains!=='—'))&&<small>{role&&`${ROLES[role].label.toLowerCase()}`}{card.gains&&card.gains!=='—'&&<>{role&&' · '}ti dà <Gains card={card}/></>}</small>}
@@ -21,7 +23,7 @@ function CardFace({card,full=false,count}:{card:Card;full?:boolean;count?:number
    <p>{effect(card)}</p></div></div>;
 }
 function CharacterFace({character}:{character:CharacterCard}){
- return <div className="cc" data-testid="character-face" data-binding={character.bindingName}><Art binding={character.bindingName}/>
+ return <div className="cc" data-testid="character-face" data-binding={character.bindingName} data-frame="character"><Art binding={character.bindingName} kind="character"/>
   <div className="cc-text"><strong>{character.name}</strong><small>personaggio · {character.itemsSize} oggetti al massimo</small>
    <p>{Object.entries(character.resources).map(([k,v])=>`${resourceNames[k]} ${v}`).join(' · ')}</p></div></div>;
 }
