@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**4 novembre 2026 — versione 41. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; C4-5a fatto, in attesa del giudizio del proprietario, O2 aperta; prossimo C4-5b).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**5 novembre 2026 — versione 42. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; C4-5a approvato il 5 novembre 2026, O2 chiusa; in corso C4-5a-bis (O26 e O27), poi C4-5b).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -579,7 +579,7 @@ schermate e controlli utilizzabili anche senza hover.
 
 **Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
 decisioni D1–D14, in parte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
-**Stato (4 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **fatto, in attesa del giudizio del proprietario**, O2 aperta ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); prossimo C4-5b.
+**Stato (5 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **approvato dal proprietario il 5 novembre 2026, O2 chiusa** ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); in corso C4-5a-bis (O26 e O27), poi C4-5b.
 
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder
@@ -650,7 +650,7 @@ indicato come decisione aperta.
 | ID | Osservazione | Tappa | Note e vincoli |
 |---|---|---|---|
 | O1 | Il pulsante «Riordina» non serve: il riordino si fa trascinando. | C1, **fatto** | Decisione del proprietario: aggiornato il gesto 1. Resta l'alternativa da tastiera; su touch il riordino resta solo trascinando, accettabile perché non è un'azione di gioco. |
-| O2 | Le sedie dello sfondo sono troppo eleganti per un bar marcio. | C4-5a: **fatto, in attesa del giudizio del proprietario** | 4 novembre 2026: piano 2 stirato e tre sprite uniformi, modalità S scelta dal proprietario. [Registri](design/client-c4/background/layers/NOTA.md), [rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). O2 resta aperta fino al giudizio sul tavolo vero alle tre misure. |
+| O2 | Le sedie dello sfondo sono troppo eleganti per un bar marcio. | C4-5a: **approvato il 5 novembre 2026, chiusa** | 4 novembre 2026: piano 2 stirato e tre sprite uniformi, modalità S scelta dal proprietario. [Registri](design/client-c4/background/layers/NOTA.md), [rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). Giudizio del 5 novembre 2026 riportato letteralmente nel rapporto; O2 chiusa. O26 e O27 passano a C4-5a-bis. |
 | O3 | Allerta, tossicità, violenza e alcol sono poco visibili rispetto alla salute. | C2a con O13, **implementata** | Integrarle nel segnapunti della salute con simboli e colori propri, sempre con il numero. Nessuna informazione affidata solo al colore. |
 | O4 | Oltre al numero serve una barra o una torta per capire se una risorsa è tanta o poca. | C2a con O13, **implementata** | Indicatore rispetto al valore iniziale del personaggio: salute piena all'inizio, le altre risorse a metà barra (decisione del proprietario in C2a). R01 non ha tetti né pavimenti: mostrare eccesso oltre l'iniziale e valori negativi, senza saturare l'indicatore o nascondere il numero. |
 | O5 | «Dettagli carta» è scomodo: meglio un pulsantino (i) sulla carta. | C1, **fatto** | (i) in alto a sinistra su hover e sulla carta selezionata o con focus. Su touch non c'è hover: il pulsante compare sulla carta selezionata. Tastiera invariata (I). |
@@ -699,6 +699,15 @@ modifica a regole, server o catalogo è già decisa.
 |---|---|---|---|
 | O24 | **Easter egg**: cliccando gli oggetti aggiunti sopra il tavolo (sottobicchiere sul bordo, Negroni, posacenere, ed eventuali altri) deve partire una breve **animazione buffa**. | Dopo C4-5a; probabile C5 o un blocco C4 facoltativo (come C4-6/C4-7) | Gli oggetti sono sprite separati dal piano (C4-5a-layers), quindi cliccabili. Vincoli: nessuna azione di gioco dipende da essi (regola 12: mai azione essenziale solo con tocco su elemento decorativo); non devono coprire né intercettare i tocchi su posti, mano, pile e comandi (zone sicure di `specifica-ritaglio.md`); movimento ridotto = niente animazione o una versione statica (regola 11 e D5); nessun suono obbligatorio (regola 13); costo in frame da guardare in FFA; ogni asset o animazione nuova con provenienza (regola 10). |
 | O25 | **Varianti dello sfondo** per cambiare l'atmosfera di gioco (diverse versioni del piano e degli sprite generati). | Dopo C4-5a, anche dopo C4 | La qualità del piano e degli sprite di C4-5a è provvisoria e da rivedere. Ogni variante ha prompt committato prima, registro e voce di inventario (D11). Se vengono scelte in partita, l'atlante delle texture resta sotto il tetto di 32 MiB (D9). |
+
+## Osservazioni della prova di C4-5a
+
+5 novembre 2026. O2 chiusa con l’approvazione riportata nel [rapporto C4-5a](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). Correzioni assegnate al blocco C4-5a-bis; nessun cambiamento a regole, server, protocollo o catalogo.
+
+| ID | Osservazione | Tappa | Note e vincoli |
+|---|---|---|---|
+| O26 | Nella scelta dello scarto la carta legata resta ingrandita e copre le candidate. | C4-5a-bis, in corso | Carta legata a riposo; non scartabili attenuate e indicate in testo solo nella fase di scelta dello scarto; stessi tocchi e conferma C4-2. |
+| O27 | In duello gli oggetti propri coprono il posacenere anche con spazio a destra del personaggio. | C4-5a-bis, fase A | Tre proposte sulla scena reale, scelta del proprietario prima del codice finale; FFA invariata, nessun peggioramento di C3-L o 750×292. |
 
 ## Verifiche proporzionate
 
@@ -756,6 +765,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 42 — 5 novembre 2026:** registrata l’approvazione letterale di C4-5a, O2 chiusa; O26 e O27 assegnate a C4-5a-bis, con arresto alla proposta per O27 prima della scelta del proprietario. [Rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2).
 - **Versione 41 — 4 novembre 2026, C4-5a:** integrato piano 2 in modalità S, con tre sprite uniformi non interattivi e ombre dal codice; scelta esplicita del proprietario al posto del cover senza deformazione. Registri e inventario aggiornati; giro ufficiale 7/7 verde, Size entro limiti rigidi e 32 MiB di texture; rossi 750 preesistenti e conteggi invariati documentati; rossi separati Spring/manifest registrati senza cambiare attesi. O2 **fatto, in attesa del giudizio del proprietario** sul tavolo vero. Nessuna regola, API, protocollo o catalogo cambiati. [Rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2).
 
 - **Versione 40 — 4 novembre 2026, C4-3, C4-2 e C4-4 approvati:** il proprietario approva i tre blocchi. C4-4 dà a ogni tipologia di carta il proprio filetto nel margine, nello spessore medio scelto dal proprietario, e un segno del ruolo che esce dalla cornice. Nessuna regola, API o protocollo cambiati. [Rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14).

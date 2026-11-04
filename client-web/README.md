@@ -667,7 +667,7 @@ non sostituisce il dispositivo fisico né la prova umana.
 
 ## Risorse grafiche
 
-`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: fatto, in attesa del giudizio del proprietario** sul tavolo vero. `atlas.webp` è
+`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: chiusa, approvata dal proprietario il 5 novembre 2026** sul tavolo vero; giudizio letterale nel rapporto. O26 e O27 sono assegnate a C4-5a-bis. `atlas.webp` è
 l'atlante O9: 2048×1536, 8×6 riquadri da 256 px con le 40 illustrazioni
 provvisorie, più un segnaposto neutro. `manifest.json` dice quale riquadro spetta
 a ogni `bindingName` (`src/art.ts`); un nome sconosciuto usa il segnaposto.

@@ -541,7 +541,7 @@ Sottoposti al giudizio: lo spessore sul tavolo, la distinzione in grigi, sopratt
 
 ## C4-5a — Integrazione dello sfondo del tavolo (O2)
 
-4 novembre 2026. **Fatto, in attesa del giudizio del proprietario. O2 resta aperta.** La scelta della simulazione precede questa integrazione; il proprietario deve ancora giudicare il tavolo vero alle tre misure. Nessun push.
+4 novembre 2026; **approvato dal proprietario il 5 novembre 2026, O2 chiusa**. Giudizio letterale: «sottobicchiere sul bordo va bene, gli oggetti sullo sfondo si vedono bene, le carte attenuate lasciano trasparire il sotto ma i testi si leggono lo stesso». Dalla stessa prova nascono O26 (scarto della carta legata) e O27 (oggetti propri sul posacenere), assegnate a C4-5a-bis nella [roadmap](../client-roadmap.md#osservazioni-della-prova-di-c4-5a). Nessun push.
 
 ### Decisione, provenienza e conversione
 
@@ -621,8 +621,8 @@ Otto JPEG, **1 534 685 B in tutto**, in [catture](client-c4/c4-5a/catture/). Due
 
 Gli sprite **non coprono materialmente** posti, pile o comandi perché sono sotto tutto il gioco e senza eventi. Però il posacenere si trova dietro le pile/oggetti a sinistra del duello e dietro una plancia in FFA; il sottobicchiere sotto il proprio posto; il Negroni vicino al margine destro e ai dorsi/comandi compatti. La loro ricchezza visiva può competere con pile e oggetti: non dichiaro assenza di confusione percettiva. Il vetro resta coprente e il raccordo sottobicchiere/bordo è approssimativo con piano stirato e oggetto uniforme, compromesso già descritto in NOTA.md. La scritta conserva il suo posto: nessun nuovo spostamento del layout; i riquadri conservativi di `.brand` restano tra i contatti già noti a 750.
 
-**Al proprietario:** giudicare **il tavolo vero alle tre misure**, in duello e FFA: identità delle sedute, legno e luce; forma e scala degli oggetti, ombre e appoggio sul bordo; leggibilità di carte attenuate, posti e testi; eventuale confusione fra decorazioni, oggetti di gioco, pile e comandi. Questa richiesta non aggiunge giudizi non forniti alle schede. **O2: fatto, in attesa del giudizio del proprietario.**
+La richiesta di giudizio sul tavolo vero è stata soddisfatta dall’approvazione del 5 novembre 2026 riportata all’inizio di questa sezione: **O2 chiusa**. Le due correzioni emerse dalla prova sono O26 e O27, in C4-5a-bis.
 
 ### Non verificato
 
-**iPhone fisico, Safari e contrasto formale** sul disegno composto (C4-8a). Non misurata la memoria GPU reale. Non rifatto il consolidamento completo delle regole 1–9 con VerifyResolution o l’intero giro a 750×292. Termini specifici e validità crittografica C2PA restano non verificati come sopra. Nessun giudizio del proprietario ancora ricevuto sul tavolo finale.
+**iPhone fisico, Safari e contrasto formale** sul disegno composto (C4-8a). Non misurata la memoria GPU reale. Non rifatto il consolidamento completo delle regole 1–9 con VerifyResolution o l’intero giro a 750×292. Termini specifici e validità crittografica C2PA restano non verificati come sopra. Approvazione del tavolo finale ricevuta il 5 novembre 2026.
