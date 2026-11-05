@@ -706,7 +706,7 @@ modifica a regole, server o catalogo è già decisa.
 
 | ID | Osservazione | Tappa | Note e vincoli |
 |---|---|---|---|
-| O26 | Nella scelta dello scarto la carta legata resta ingrandita e copre le candidate. | C4-5a-bis, in corso | Carta legata a riposo; non scartabili attenuate e indicate in testo solo nella fase di scelta dello scarto; stessi tocchi e conferma C4-2. |
+| O26 | Nella scelta dello scarto la carta legata resta ingrandita e copre le candidate. | C4-5a-bis, fatta, in attesa del giudizio del proprietario | Decisione successiva del proprietario: tutte le carte in anteprima lasciano vuoto il proprio posto nella mano e vi tornano con ×. Prima del bersaglio legata a riposo; non scartabili attenuate e indicate in testo solo mentre manca lo scarto. Stessi tocchi, server giudice e conferma C4-2. [Rapporto](reports/client-c4-report.md#c4-5a-bis); verifiche riprese dopo il via libera e concluse; risultati nel rapporto. |
 | O27 | In duello gli oggetti propri coprono il posacenere anche con spazio a destra del personaggio. | C4-5a-bis, fase A | Tre proposte sulla scena reale, scelta del proprietario prima del codice finale; FFA invariata, nessun peggioramento di C3-L o 750×292. |
 
 ## Verifiche proporzionate

@@ -25,6 +25,9 @@ export class Model {
   get selectedCard(){return this.hand.find(x=>x.key===this.selected)?.card;}
   get eliminated(){return !!this.view.forfeits[this.me]||!!this.view.players[this.me]?.character.dead;}
   get locked(){return this.phase!=='choose'||this.view.over||this.eliminated;}
+  // O26: a bound still needs its extra discard, before or after aiming. This is
+  // choice state, independent of the preview, focus, hover and message wording.
+  get choosingDiscard(){return !this.locked&&!!this.selectedCard?.characterBound&&!this.hand.some(c=>c.key===this.discard&&regular(c.card));}
   clear(){this.selected=null;this.target=null;this.discard=null;}
   cancel(){if(this.phase==='choose'){this.clear();this.message='Scegli una carta';this.emit();}}
   select(key:string){if(this.locked)return; const local=this.hand.find(x=>x.key===key); if(!local)return;

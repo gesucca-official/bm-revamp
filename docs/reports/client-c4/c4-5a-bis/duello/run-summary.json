@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-05T11:41:27.949Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "layout"
+  ],
+  "build": {
+    "head": "be258142ac4b2a570df5a4fe2cbe009f4e1041fe",
+    "dirtyPaths": [
+      "M client-web/src/model.ts",
+      " M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/verify-layout.mjs",
+      "?? client-web/tools/discard-checks.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-05T11:39:54.875Z",
+      "bytes": 50693917,
+      "sha256_16": "2bd7d7341e84b1da",
+      "rebuilt": true
+    },
+    "dist": {
+      "files": 21,
+      "sha256_16": "eeeceb8aa87b1770"
+    }
+  },
+  "results": [
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 48,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 44,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/model.ts;  M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/table.tsx;  M client-web/tools/verify-layout.mjs; ?? client-web/tools/discard-checks.mjs"
+  ]
+}

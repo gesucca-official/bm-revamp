@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-05T11:38:31.051Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "test",
+    "build",
+    "size",
+    "verify",
+    "layout",
+    "resolution"
+  ],
+  "build": {
+    "head": "be258142ac4b2a570df5a4fe2cbe009f4e1041fe",
+    "dirtyPaths": [
+      "M client-web/src/model.ts",
+      " M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/verify-layout.mjs",
+      "?? client-web/tools/discard-checks.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-05T11:18:22.410Z",
+      "bytes": 50693917,
+      "sha256_16": "7f97dbc6290f116c",
+      "rebuilt": true
+    },
+    "dist": {
+      "files": 21,
+      "sha256_16": "eeeceb8aa87b1770"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 22,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 1,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 61,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 57,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 326,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 72,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 586,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 74,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/model.ts;  M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/table.tsx;  M client-web/tools/verify-layout.mjs; ?? client-web/tools/discard-checks.mjs"
+  ]
+}

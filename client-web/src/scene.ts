@@ -1,6 +1,7 @@
 import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
 import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
+import {handCardState} from './readability.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
@@ -9,7 +10,7 @@ import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
-export type Hit={id:string;kind:'hand'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
+export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
 // Times in ms from the start of the sequence. A move card flies from its author, hits (`fly`, fraction of the flight) and then
@@ -41,7 +42,7 @@ export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number}
  /** C3-L: what the own piles show: cards left in the deck and the card on top of the discard pile. */
  piles:{deck:number;discard:string|null}|null;
  /** C3-L: the round's cards drawn in the middle, bottom first (during a sequence only those already landed). */
- played:{name:string;author:string;void:boolean}[]|null;items:{name:string;frame:FrameKind}[];hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number;face:FaceInfo|null}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
+ played:{name:string;author:string;void:boolean}[]|null;items:{name:string;frame:FrameKind}[];hand:{key:string;name:string;role:Role|null;gains:string[];payable:boolean;alpha:number;inPreview:boolean;face:FaceInfo|null}[];board:{values:Partial<Record<Resource,number>>;reference:Partial<Record<Resource,number>>;rows:string[]}|null;
  summary:{key:string;seats:Record<string,{texts:string[];box:Box|null;fs:number|null;drawn:boolean}>}|null;
  /** C3-4: resource values each board shows (the view, or the step reached during a sequence). */
  boards:Record<string,Partial<Record<Resource,number>>>};
@@ -338,23 +339,25 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.model.hand.forEach((local,i)=>{const k=i-(n-1)/2,a=k*.05,x=H.center+k*H.step,y=H.y+Math.abs(k)*3;
    // O11: a light visual hint only. The card stays selectable, inspectable and sendable; the server judges.
    const short=shortfall(local.card,res),payable=!short.length,role=roleOf(local.card),gains=gainsOf(local.card).map(gainText);
-   const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);if(!payable)c.alpha=.66;
+   const state=handCardState(local,this.model,{focused:local.key===this.focused,hovered:local.key===hover,payable,dragged:!!this.drag?.moved&&this.drag.key===local.key});
+   // Owner, 5 November 2026: every card placed in the preview leaves its hand
+   // slot empty until cancelled. Never remove/reorder it in the authoritative hand.
+   if(state.inPreview){hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:state.alpha,inPreview:true,face:null});return;}
+   const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);c.alpha=state.alpha;
    // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
    const coming=this.arriving.has(local.key);if(coming)c.visible=false;
-   if(this.drag?.moved&&this.drag.key===local.key)c.alpha=.22;
    const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${damageLabel(local.card,leftV(local.card,res))?`, danno ${damageLabel(local.card,leftV(local.card,res))}`:''}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
    // O12: hover (mouse), tap (selection) or focus lifts the whole card; its hit keeps the old slot too, so it does not flicker.
-   // Once a target is chosen the card is shown in the centre preview: in the hand it rests, so a bound
-   // card does not cover the neighbour to discard.
-   const chosen=local.key===this.model.selected&&!this.model.target;
-   if(chosen||local.key===this.focused||(local.key===hover&&local.key!==this.model.selected)){c.y-=H.lift;c.scale.set(H.zoom);c.rotation=a*.4;hit.angle=c.rotation;hit.h=H.h+H.lift;hit.y=y-H.lift/2;
+   // O26: the bound's hand copy rests while its discard is still to be chosen,
+   // including keyboard/pointer focus. The target preview and its controls stay.
+   if(state.nonDiscardable)hit.label+=', non scartabile';
+   if(state.raised){c.y-=H.lift;c.scale.set(H.zoom);c.rotation=a*.4;hit.angle=c.rotation;hit.h=H.h+H.lift;hit.y=y-H.lift/2;
     // A card raised only by the mouse keeps its resting width, so sliding left still reaches the previous card.
-    if(chosen||local.key===this.focused){hit.w=H.w*H.zoom;hit.h=H.h*H.zoom+H.lift;}
-    if(chosen)lifted=c;else raised.push(c);}
+    if(state.wideHit){hit.w=H.w*H.zoom;hit.h=H.h*H.zoom+H.lift;}
+    if(state.chosen)lifted=c;else raised.push(c);}
    if(local.key===this.model.selected||local.key===this.focused)this.halo(c,H.w,H.h);
    if(local.key===this.model.discard){this.halo(c,H.w,H.h,0xdc9699);this.text(c,'SCARTO',0,0,compact?14:22,H.w,WINE);}
-   if(this.model.selectedCard?.characterBound&&this.model.target&&local.key!==this.model.selected&&(local.card.basicAction||local.card.characterBound||local.card.lastResort))c.alpha=Math.min(c.alpha,.55);
-   hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:c.alpha,face:this.faces.get(c)??null});
+   hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:c.alpha,inPreview:false,face:this.faces.get(c)??null});
   });
   // Raised cards on top, the selected one last.
   if(lifted)raised.push(lifted);raised.forEach(c=>this.world.setChildIndex(c,this.world.children.length-1));
@@ -365,6 +368,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // The card is placed from the target at rest: a hover lifts the target, and the card must not move under a pointer on its way to ✓ or ×.
   if(dest){const seat=L.seats.find(s=>s.id===dest.target!.owner),index=dest.target!.itemIndex,rest:Box=(index!=null?seat?.items[index]:seat?.person)??{x:dest.x,y:dest.y,w:dest.w,h:dest.h},key=`${dest.id}:${w}x${h}:${rest.x},${rest.y}:${this.dropPoint?.x},${this.dropPoint?.y}`;if(this.placed?.key!==key)this.placed={key,spot:previewSpot(L,w,h,rest,this.dropPoint??rest)};this.preview=this.placed.spot;}
   if(this.model.selectedCard&&this.model.target){const pc=this.card(this.model.selectedCard,L.preview.w,L.preview.h,false,shortfall(this.model.selectedCard,res),leftV(this.model.selectedCard,res));pc.position.set(this.preview.x,this.preview.y);pc.rotation=-.10;this.halo(pc,L.preview.w,L.preview.h);this.world.addChild(pc);this.pendingGhost=pc;
+   // Keep the same semantic key for keyboard focus and I/Enter inspection, now
+   // at the visible card. No invisible hit remains over discard candidates.
+   this.hits.push({id:this.model.selected!,kind:'preview',key:this.model.selected!,x:pc.x,y:pc.y,w:L.preview.w,h:L.preview.h,angle:pc.rotation,label:`${this.model.selectedCard.name}, carta giocata in anteprima: dettagli`,node:pc});
   }
   const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,items:drawnItems,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
@@ -400,7 +406,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   for(const s of shapes){g.poly(s.outline).fill(PETROL).stroke({color:INK,width:line,join:'miter',miterLimit:8});
    g.moveTo(s.shine[0].x,s.shine[0].y).lineTo(s.shine[1].x,s.shine[1].y).stroke({color:0xe6fbfb,width:C?2.5:3.5,cap:'round',alpha:.9});}
   this.aimLayer.filters=drawn.length?[this.aimAlpha]:null;}
- hit(x:number,y:number,targetsOnly=false){return [...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).find(r=>{if(targetsOnly&&r.kind==='hand')return false;const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}
+ hit(x:number,y:number,targetsOnly=false){return [...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).find(r=>{if(targetsOnly&&(r.kind==='hand'||r.kind==='preview'))return false;const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);
   // A tap or click anywhere else lowers raised cards and drops the choice (like Escape).
@@ -435,12 +441,13 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  // `pointer`: the sequence was already handled on pointerdown. Keyboard and the semantic layer: a hand card ends it, the rest advances.
  activate(id:string,pointer=false){if(this.blocked||this.contextLost||this.height>this.width)return;this.inputStart=performance.now();const hit=this.hits.find(h=>h.id===id);if(!hit)return;
   if(!pointer){if(hit.kind==='hand')this.finish('input');else this.advance();}
+  if(hit.kind==='preview'){this.inspect(id);return;}
   if(hit.kind==='hand'){if(this.model.locked){this.inspect(id);return;}this.model.select(hit.key!);}
   // A table element that is not an admitted target also counts as "elsewhere".
   else if(this.model.selected&&!this.model.locked){this.dropPoint=null;if(!this.model.aim(hit.target!))this.model.cancel();}
   else if(hit.kind==='status'){this.openStatus=this.openStatus===id?null:id;this.draw();this.onState();}else this.inspect(id);
  }
- inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'){const card=this.model.hand.find(x=>x.key===hit.key)!.card;this.onInspect({title:card.name,card});}
+ inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'||hit.kind==='preview'){const card=this.model.hand.find(x=>x.key===hit.key)!.card;this.onInspect({title:card.name,card});}
   else if(hit.kind==='item'){const card=this.model.view.players[hit.target!.owner].character.items[hit.target!.itemIndex!];this.onInspect({title:card.name,card,owner:hit.target!.owner});}
   else this.onInspect({title:this.model.view.players[hit.target!.owner].character.name,owner:hit.target!.owner});}
  /** The status summary to show: hovered, focused or opened by a tap. */

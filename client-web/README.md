@@ -443,6 +443,8 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 
 ## Scala e spazio del tavolo (C3-L)
 
+**C4-5a-bis in corso (5 novembre 2026):** O26 separa lo stato di scelta dello scarto nel modello e la presentazione pura. Per decisione del proprietario, ogni carta già posata in anteprima lascia vuoto il suo posto nella mano e vi torna con ×; ordine e vista restano integri. Le non scartabili sono attenuate e indicate in testo solo finché manca lo scarto. Ispezione della carta posata con I/Invio o menu → «Dettagli carta giocata»; conferma C4-2 invariata. 234 test e percorso reale aggiunto a VerifyLayout verdi in duello e FFA, anche a 750×292. O27 è alla proposta, prima della scelta e del codice finale. [Rapporto](../docs/reports/client-c4-report.md#c4-5a-bis).
+
 Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
 ([rapporto C3](../docs/reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)). Solo geometria: sfondo,
 cornici, simboli e texture restano a C4.

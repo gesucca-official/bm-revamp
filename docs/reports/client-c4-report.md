@@ -626,3 +626,51 @@ La richiesta di giudizio sul tavolo vero è stata soddisfatta dall’approvazion
 ### Non verificato
 
 **iPhone fisico, Safari e contrasto formale** sul disegno composto (C4-8a). Non misurata la memoria GPU reale. Non rifatto il consolidamento completo delle regole 1–9 con VerifyResolution o l’intero giro a 750×292. Termini specifici e validità crittografica C2PA restano non verificati come sopra. Approvazione del tavolo finale ricevuta il 5 novembre 2026.
+
+## C4-5a-bis
+
+5 novembre 2026, base `a9921d1`. **O26: fatto, in attesa del giudizio del proprietario. O27: fase A, nessun codice finale.** Verifiche sospese durante l’occupazione delle porte e riprese dopo il via libera del proprietario. Nessun push. Il blocco potrà dichiararsi «fatto, in attesa del giudizio del proprietario» dopo la scelta e l’implementazione di O27 e le verifiche richieste. L’approvazione di C4-5a, con chiusura di O2, è registrata nel commit documentale `be25814`, prima di queste correzioni.
+
+### O26 — Riproduzione e decisione aggiornata
+
+Riprodotto sul client precedente alla correzione (`dist 56c79f79ca274f09`), in **duello e FFA reali**, a 1366×768 e 844×390, con database temporaneo e jar ricostruito offline. [JSON e riepilogo prima](client-c4/c4-5a-bis/prima/). Catture prima: [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-prima-1366x768.jpg), [FFA desktop](client-c4/c4-5a-bis/catture/o26-ffa-prima-1366x768.jpg), [duello compatto](client-c4/c4-5a-bis/catture/o26-duel-prima-844x390.jpg), [FFA compatta](client-c4/c4-5a-bis/catture/o26-ffa-prima-844x390.jpg).
+
+Il focus mantiene ingrandita la copia in mano dopo la scelta del bersaglio: a 1366×768 l’hit della legata arriva a **239,68×360,7584 px**, contro **214×295,32 px** a riposo. Prima del bersaglio si somma anche `chosen`. I tentativi reali di raggiungere tutte le candidate riescono **10/12 in duello e 6/12 in FFA** sul desktop; **10/12 in entrambi** sul compatto. L’attenuazione precedente dipende dal bersaglio, esclude la legata selezionata, resta dopo la scelta dello scarto e non ha «non scartabile» nell’etichetta accessibile. Il controllo aggiunto a VerifyLayout rende rossi entrambi i giri prima della correzione (56 rilievi O26 per scenario, comprendenti controlli ripetuti).
+
+**Precisazione del proprietario sulla mano:** «no, non ho mai ottenuto una mano di sette carte. durante la scelta dello scarto, la carta legata che si intende giocare rimane vicina la suo bersaglio, ma una sua copia permane comunque nella mano». La riproduzione reale è quindi a **sei carte**; sette resta un caso sintetico nei test. R02, `Player.CARDS_IN_HAND=6`, preparazione e pesca condizionata sotto sei non forniscono un percorso corrente a sette. Le quattro legate di R07 richiedono tutte un bersaglio, anche quando è sé stessi: «senza bersaglio» qui significa **prima della scelta del bersaglio**, non una nuova categoria di legata.
+
+**Decisione successiva del proprietario:** alla proposta di nascondere la copia dopo la scelta del bersaglio ha scelto **«Sì, per tutte le carte in anteprima»**. Questa decisione sostituisce il solo riposo della copia dopo il bersaglio: nessuna copia della carta posata rimane disegnata o toccabile in mano. Il suo spazio e l’ordine locale restano conservati; annullando ricompare nella stessa posizione. La mano del modello e la vista del server restano integre.
+
+### O26 — Modifiche preparate e copertura scritta
+
+`Model.choosingDiscard` deriva dalla scelta corrente: client sbloccato, legata selezionata, scarto regolare ancora da scegliere. Non legge testo, hover, focus o anteprima. Vale prima e dopo il bersaglio; termina quando c’è uno scarto valido, all’annullamento o al blocco della scelta. La funzione pura `handCardState` decide riposo, area ingrandita, presenza in anteprima e alfa. La legata prima del bersaglio resta a riposo anche con focus; dopo il bersaglio tutte le carte selezionate lasciano la mano per la sola anteprima. Solo durante la scelta dello scarto le non scartabili hanno alfa 0,55 e l’etichetta «non scartabile». Le attenuazioni preesistenti di risorse insufficienti e trascinamento mantengono il loro significato.
+
+I gesti di `Model.select`, `aim`, `confirm` e il comando non cambiano. Il server resta il giudice. L’anteprima conserva la stessa geometria, freccia e ✓/×; l’hit semantico della carta si sposta sull’anteprima per l’ispezione con I/Invio. Per il tocco, senza la copia in mano, il menu offre «Dettagli carta giocata». Nessun hit invisibile rimane sopra le candidate.
+
+Test scritti in `hand-choice.test.ts`: tutte le categorie (regolare, base, legata, ultima risorsa, oggetto, token, regolare sconosciuta), con/senza bersaglio, stato attivo e concluso, combinazioni di focus/hover/pagabilità/drag; fasi choose/sending/pending/uncertain, esito, eliminazione, forfait, annullamento e scarto non più presente; tocchi invariati e ripristino dell’ordine anche con sette carte sintetiche. **Eseguiti: 234/234 test del client verdi.** Nessun atteso preesistente o soglia cambiati; BASE_750 invariato.
+
+`VerifyLayout` ora esercita anche O26 sulla partita reale: hit e trasformazioni effettive, alfa ed etichette confrontati con categorie dell’allegato; ogni candidata raggiunta con mouse prima del bersaglio e tocco emulato dopo; nessuna presa della candidata coperta dall’anteprima; nessuna attenuazione di scarto dopo la scelta o annullamento. Controlla inoltre tutte le carte posabili in anteprima, l’ispezione e il ripristino della posizione con ×, senza inviare mosse. **Verde in duello e FFA alle due misure ufficiali e a 750×292: 12/12 candidate raggiunte per scenario, nessun errore O26, ripristino e ispezione verificati.**
+
+### O27 — Fase A da completare
+
+La riga propria del duello parte da sinistra sopra il personaggio per lasciare il centro alle carte del round (C3-L); la FFA usa già il lato destro. Le posizioni decorative sono proporzionali e indipendenti in `background.ts`.
+
+Le tre alternative da confrontare sulla stessa partita reale con 1, 2 e 3 oggetti, a 1366×768, 844×390 e 1920×1080, sono: **A**, lato destro solo se la riga completa entra nello spazio fra personaggio/plancia e mano, senza collisioni, altrimenti sopra; **B**, riga sopra che inizia oltre il bordo destro proporzionale del posacenere; **C**, geometria di gioco invariata e solo posacenere decorativo ricollocato in uno spazio libero, altrimenti posizione attuale. La condizione di A sarà misurata sui box, senza soglia arbitraria di larghezza. C va dichiarata come spostamento dello sprite, non degli oggetti di gioco.
+
+**Catture comparative, layoutProblems, fitScale, effetti su carte del round/pile e raccomandazione ancora da produrre**, dopo il via libera alle prove. Nessuna alternativa è implementata nel prodotto; la scelta del proprietario precederà la fase B.
+
+### Verifiche O26 concluse
+
+[Primo giro ufficiale](client-c4/c4-5a-bis/ufficiale/run-summary.json): **9/9 verdi**, Test (234), Build, Size, Verify e VerifyResolution alle due misure, layout FFA. BM_SCENARIOS=quick,ffa seleziona quick/FFA nella risoluzione e solo FFA nel layout; perciò [secondo giro](client-c4/c4-5a-bis/duello/run-summary.json) aggiunge esplicitamente **duello: 2/2 verdi**. Nessun -Quick, nessun riuso del jar: ricostruito offline prima dei giri, Node 24.13.0 isolato, una verifica per volta, porte libere all’avvio e processi propri chiusi dagli strumenti. Build client **eeeceb8aa87b1770**; impronte dei jar e dei percorsi modificati nei riepiloghi. Non è il consolidamento completo C4-9 (selezione -Only e risoluzione limitata a quick/FFA).
+
+Le catture dopo sono [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-dopo-1366x768.jpg), [FFA desktop](client-c4/c4-5a-bis/catture/o26-ffa-dopo-1366x768.jpg), [duello compatto](client-c4/c4-5a-bis/catture/o26-duel-dopo-844x390.jpg), [FFA compatta](client-c4/c4-5a-bis/catture/o26-ffa-dopo-844x390.jpg). Prima/dopo sono partite distinte della stessa modalità, non un confronto pixel sulla stessa vista. Osservo la copia in mano assente e le candidate leggibili; testo della mossa, freccia e ✓/× conservano la presentazione di C4-2. L’approvazione percettiva resta al proprietario.
+
+**Size:** JS gzip **337.726 B**, totale **1.668.701 B** (+482 B ciascuno rispetto a C4-5a), texture **27.729.048 B**, margine C4 **5.825.384 B**, atlante 2048×1536. Tutti i limiti passano; nessuna soglia rilassata. [Size](client-c4/c4-5a-bis/ufficiale/size.json).
+
+**Frame FFA osservati anche nelle catture dei primi piani:** desktop p95 **11,6/12,8 ms**, massimi **185,1/131,2 ms**, frazione entro 20 ms **0,991/0,991**, input massimo **35,3 ms**. Compatto p95 **10,4/14,3 ms**, massimi **107,8/89,3 ms**, frazione entro 33 ms **0,999/0,999**, input massimo **35,7 ms**. Criterio verde; i picchi isolati restano espliciti. Non sono misure su iPhone.
+
+**750×292:** [giro](client-c4/c4-5a-bis/base-750x292/run-summary.json), **Verify verde** in questa esecuzione; il gettone coperto preesistente non è per questo dichiarato risolto. **VerifyLayout rosso, 47 messaggi e nessun errore di pagina**, contro 48 della prova C4-5a: sovrapposizioni, assenza delle carte del round/collegamento, primi piani e rapporto fra personaggi. Numero di messaggi dipendente dalle partite, nessun miglioramento del formato rivendicato: geometria e BASE_750 invariati; layoutProblems reali **6/6/6 duello e 11/11/11 FFA**, identici alla base. I nuovi controlli O26 passano anche qui, come chips e resize. Frame FFA p95 **10,2/11,6 ms**, massimi **76,6/49,6 ms**, input massimo **23,7 ms**: criterio verde.
+
+[Verifiche repository separate](client-c4/c4-5a-bis/repository.json): **Test offline verde** (anche 36 test client-debug), **check-rules.py verde**, **TestServerContext offline verde, 373/373**. **verify-match-manifests.py rosso**: riga 53 richiede ancora rulesVersion 1.6, mentre gli export correnti usano 1.10; già registrato in C4-5a. Non modificati audit, regole, server, protocollo, catalogo o manifest tracciati per ottenere il verde.
+
+**Non verificato:** iPhone fisico e Safari; nessuna prova su PC li sostituisce. Il giudizio visivo finale di O26 e la scelta tra le proposte O27 restano al proprietario.

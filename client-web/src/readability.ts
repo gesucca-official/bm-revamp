@@ -1,4 +1,5 @@
 import type {Card,Character,Resource} from './contracts.ts';
+import {regular,type LocalCard,type Model} from './model.ts';
 // C2a readability helpers. Pure functions over the authoritative view: they only decide how
 // things look. Costs are never subtracted here and the server stays the judge of legality.
 
@@ -11,6 +12,19 @@ const BY_LETTER=Object.fromEntries(Object.entries(LETTER).map(([k,v])=>[v,k])) a
 export const shortfall=(card:Card,resources:Partial<Record<Resource,number>>)=>
  Object.entries(card.cost).filter(([k,v])=>(resources[k as Resource]??0)<(v??0)).map(([k])=>k as Resource);
 export const affordable=(card:Card,resources:Partial<Record<Resource,number>>)=>shortfall(card,resources).length===0;
+
+/** O26: presentation only. A bound waiting for its discard rests even with focus
+ * or hover. The existing model still owns what every tap does and the server
+ * judges the move. Resource and drag attenuation retain their own meanings. */
+export function handCardState(local:LocalCard,choice:Pick<Model,'choosingDiscard'|'selected'|'target'>,
+ interaction:{focused:boolean;hovered:boolean;payable:boolean;dragged:boolean}){
+ const selected=local.key===choice.selected,inPreview=selected&&!!choice.target,resting=selected&&choice.choosingDiscard;
+ const chosen=selected&&!choice.target&&!resting;
+ const raised=!resting&&(chosen||interaction.focused||(interaction.hovered&&!selected));
+ const nonDiscardable=choice.choosingDiscard&&!regular(local.card);
+ return {inPreview,chosen,raised:raised&&!inPreview,wideHit:raised&&!inPreview&&(chosen||interaction.focused),nonDiscardable,
+  alpha:Math.min(interaction.payable?1:.66,interaction.dragged?.22:1,nonDiscardable?.55:1)};
+}
 
 /** O14: descriptive role from the catalog (regulation 1.7 R07a). Unknown or missing values show no mark. */
 export const ROLES={

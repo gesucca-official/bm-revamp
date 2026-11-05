@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-05T11:46:26.322Z",
+  "quick": false,
+  "nonStandardMeasures": [
+    "750x292"
+  ],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "750x292"
+  ],
+  "only": [
+    "verify",
+    "layout"
+  ],
+  "build": {
+    "head": "be258142ac4b2a570df5a4fe2cbe009f4e1041fe",
+    "dirtyPaths": [
+      "M client-web/src/model.ts",
+      " M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/verify-layout.mjs",
+      "?? client-web/tools/discard-checks.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-05T11:41:38.128Z",
+      "bytes": 50693917,
+      "sha256_16": "ca30729b78e3ed53",
+      "rebuilt": true
+    },
+    "dist": {
+      "files": 21,
+      "sha256_16": "eeeceb8aa87b1770"
+    }
+  },
+  "results": [
+    {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 124,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 156,
+      "exit": 1,
+      "problems": 47
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/model.ts;  M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/table.tsx;  M client-web/tools/verify-layout.mjs; ?? client-web/tools/discard-checks.mjs",
+    "layout-750x292.json: evidence says ok=false"
+  ]
+}

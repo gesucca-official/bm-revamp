@@ -18,6 +18,7 @@ import {createWriteStream} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
+import {discardPass} from './discard-checks.mjs';
 import {fan,overlap,inside,seatBoxes,layoutProblems,tableLayout} from '../src/readability.ts';
 // The grid on which the scene looks for the place of a close-up (`closeUp`, 8 px): at 24 px the check missed places the scene finds (1366×768 FFA, 144 object distributions out of 1024).
 const CLOSE_UP_STEP=8;
@@ -256,7 +257,7 @@ async function scenarioResize(name,ffa){const scope=`${name}${tag}`,A=await open
   await leave(A);
  }catch(e){evidence.errors.push(`${name}: ${e?.stack??e}`);await A.shot(`failure-${name}`).catch(()=>{});}finally{await A.context.close().catch(()=>{});}}
 async function scenario(name,{ffa=false,turns=2}){
- const A=await open('A');await login(A);const rec={ffa,turns:[],closeUps:[]};evidence.scenarios[name]=rec;let closeUpsSeen=0;
+ const A=await open('A',{hasTouch:true});await login(A);const rec={ffa,turns:[],closeUps:[]};evidence.scenarios[name]=rec;let closeUpsSeen=0;
  try{
   if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
   else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
@@ -293,7 +294,10 @@ async function scenario(name,{ffa=false,turns=2}){
      if(sp.missing.length&&!(now.layout.compact&&now.layout.seats.length>2))bad(`${name}${tag} T${now.turn}`,`no strip for ${sp.missing}`);
      if(sp.seats!==now.layout.seats.length)bad(`${name}${tag} T${now.turn}`,`summary of ${sp.seats} seats on a table of ${now.layout.seats.length}`);}}
    await A.shot(`${name}-T${now.turn}`);
-   if(!old&&t===0){rec.controls=await controlPass(A,`${name}${tag}`);step(`${name}${tag} controls`,rec.controls);}
+   if(!old&&t===0){rec.controls=await controlPass(A,`${name}${tag}`);step(`${name}${tag} controls`,rec.controls);
+    rec.discard=await discardPass(A,n=>A.shot(`${name}-discard-${n}`));for(const e of rec.discard.errors)bad(`${name}${tag} O26`,e);
+    if(rec.discard.commandsAfter!==rec.discard.commandsBefore)bad(`${name}${tag} O26`,'discard probes sent a move');
+    step(`${name}${tag} discard`,{bounds:rec.discard.bounds,candidates:rec.discard.candidates,probes:rec.discard.probes,errors:rec.discard.errors.length});}
    if(!old&&!rec.roundLink?.gain){const r=await roundLinkPass(A,`${name}${tag}`);if(r){rec.roundLink=r;step(`${name}${tag} round link`,r);}}
    if(t<turns){await A.page.evaluate(()=>window.__bm.measureStart());await playOne(A);await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,40000,'resolved');
     // C3-6: the short summary line, as the round arrives: where the scene put it, clear of everything, 16 px (desktop) or 13 px (compact).

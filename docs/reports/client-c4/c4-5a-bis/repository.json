@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-05T11:57:06.295585+00:00",
+  "checks": [
+    {
+      "code": 0,
+      "name": "Test"
+    },
+    {
+      "code": 0,
+      "name": "TestServerContext"
+    },
+    {
+      "code": 0,
+      "name": "rules"
+    },
+    {
+      "code": 1,
+      "name": "manifests"
+    }
+  ],
+  "serverContext": {
+    "tests": 373,
+    "failures": 0,
+    "errors": 0
+  },
+  "manifestFailure": "verify-match-manifests.py:53 expects rulesVersion == 1.6; current rules/export are 1.10. No expectation or tracked manifest changed.",
+  "logsSha256": {
+    "manifests.log": "c90acadc71c03454777c755c172266afcd28e1db551b505f85616f3e0717c1ee",
+    "rules.log": "49d6e6962bee02a82ec7156e2c55fff1718c9288d2d9edcc1d223e7e2e38843c",
+    "Test.log": "e2cb2dc92fecf43c20de3a9c75707a375104384ef14e9b49e2b8ccee7cb4231b",
+    "TestServerContext.log": "f952d439238d3aa3d5447126cb4e433397319e7cbaeb50059e8789b49713c04c"
+  }
+}
