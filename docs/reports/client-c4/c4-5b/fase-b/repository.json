@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-05",
+  "server": {
+    "tests": 339,
+    "skipped": 3,
+    "failures": 0,
+    "errors": 0
+  },
+  "clientDebug": {
+    "tests": 36,
+    "passed": 36
+  },
+  "checkRules": "green",
+  "springContext": "not run; separate TestServerContext check"
+}

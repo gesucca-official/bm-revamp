@@ -144,10 +144,9 @@
     "distributed": [],
     "system": [
       "Impact",
-      "Arial",
-      "Arial Narrow (ripiego di Impact)"
+      "Arial"
     ],
-    "note": "Nessun font è distribuito né richiesto in rete (D4 del piano C4). Il tavolo usa Impact con ripiego Arial Narrow e poi il sans-serif del dispositivo; la shell usa Arial. Impact può mancare su iOS: non verificato."
+    "note": "Nessun font è distribuito né richiesto in rete (D4 del piano C4). Il tavolo usa Impact con ripiego Arial e poi il sans-serif del dispositivo; la shell usa Arial. Impact può mancare su iOS: non verificato."
   },
   "symbols": {
     "origin": "Disegnati dal progetto come dati geometrici in client-web/src/symbols.ts e client-web/src/readability.ts (DAMAGE_SHAPES): 5 risorse, 7 ruoli, 3 tipi di danno e i segni ✓ e ✕; nessun file, nessuna icona di terzi (D3 (c) del piano C4: Game-icons solo per lacune reali, nessuna è emersa).",

@@ -26,8 +26,8 @@ function cssProblems(css:string){const out:string[]=[],root=postcss.parse(css),t
  });return out;}
 function tsProblems(file:string,source:string){const out:string[]=[],tree=ts.createSourceFile(file,source,ts.ScriptTarget.Latest,true,file.endsWith('x')?ts.ScriptKind.TSX:ts.ScriptKind.TS);
  const visit=(node:ts.Node)=>{
-  if((ts.isStringLiteralLike(node)&&rawColour.test(node.text)||ts.isNumericLiteral(node)&&/^0x[\da-f]{6,8}$/i.test(node.getText(tree)))&&!colourExceptions.has(file))out.push(`colour in ${file}`);
-  if(ts.isPropertyAssignment(node)&&node.name.getText(tree)==='fontFamily'&&ts.isStringLiteralLike(node.initializer))for(const f of fontProblems(node.initializer.text))out.push(`font ${f}`);
+  if((ts.isStringLiteralLike(node)&&rawColour.test(node.text)||ts.isNumericLiteral(node)&&/^0x[\da-f]+$/i.test(node.getText(tree)))&&!colourExceptions.has(file))out.push(`colour in ${file}`);
+  if(ts.isPropertyAssignment(node)&&(ts.isIdentifier(node.name)||ts.isStringLiteralLike(node.name))&&node.name.text==='fontFamily'){if(ts.isStringLiteralLike(node.initializer)){for(const f of fontProblems(node.initializer.text))out.push(`font ${f}`);}else out.push('dynamic fontFamily: declare the allowed family explicitly');}
   ts.forEachChild(node,visit);
  };visit(tree);return out;}
 const walk=(dir:string,prefix=''):string[]=>readdirSync(dir).flatMap(n=>statSync(dir+n).isDirectory()?walk(dir+n+'/',prefix+n+'/'):[prefix+n]);
@@ -42,6 +42,19 @@ test('C4-5b: source guard rejects raw colour inside media, unknown tokens, new T
  assert.ok(cssProblems(':root{font-family:Verdana,Arial}').length);
  assert.ok(tsProblems('ui.tsx','const el=<div style={{color:"rgb(1,2,3)"}}/>;').length);
  assert.ok(tsProblems('new.ts','const c=0x123456;').length);
+ assert.ok(tsProblems('ui.tsx',"const s={'fontFamily':unknownFont};").length);
  assert.ok(tsProblems('scene.ts',"const s={fontFamily:'Georgia,Arial'};").length);
  assert.deepEqual(tsProblems('ui.tsx',"const c='currentColor';"),[]);
+});
+
+test('C4-5b: browser theme-color metadata is the sole HTML colour exception and matches --bg-page',()=>{
+ const html=readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ const matches=[...html.matchAll(/<meta name="theme-color" content="(#[a-f0-9]+)">/gi)];
+ assert.equal(matches.length,1);
+ let pageColour='';postcss.parse(readFileSync(src+'style.css','utf8')).walkDecls('--bg-page',(d:any)=>pageColour=d.value);
+ const fonts=JSON.parse(readFileSync(new URL('../../docs/design/client-c4/assets/inventory.json',import.meta.url),'utf8')).fonts;
+ assert.deepEqual(fonts.system,['Impact','Arial'],'font inventory follows D4');
+ assert.equal(matches[0][1],pageColour,'metadata must follow the existing warm page token');
+ assert.doesNotMatch(html.replace(matches[0][0],''),rawColour);
+ assert.doesNotMatch(html,/<style|\sstyle=/i,'inline CSS must live in the tokenised stylesheet');
 });

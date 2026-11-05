@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-05",
+  "method": "same final stylesheet and Lightning CSS 1.33.0, minify + gzip level 9; only root colour tokens expanded/removed in comparison, component --focus retained; analysis only, not a shipped variant",
+  "tokens": 63,
+  "tokenised": {
+    "bytes": 24510,
+    "gzip": 5814
+  },
+  "expanded": {
+    "bytes": 21367,
+    "gzip": 5194
+  },
+  "tokenCostGzip": 620
+}

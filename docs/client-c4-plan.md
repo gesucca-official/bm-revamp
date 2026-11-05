@@ -376,7 +376,7 @@ come in C3-5. Cattura in scala di grigi: le tipologie restano distinguibili. Giu
 
 ### C4-5b — Coerenza di tutte le schermate
 
-**Stato (5 novembre 2026): Fase A pronta, in attesa della scelta prima di Fase B.** Riformattazione equivalente conclusa in `11bc95e`; [inventario](design/client-c4/screens/inventario.md), [censimento](design/client-c4/screens/censimento.md), [proposta A/B](design/client-c4/screens/proposta.md), [rapporto](reports/client-c4-report.md#c4-5b). Nessun token definitivo o ritocco di produzione prima della scelta.
+**Stato (5 novembre 2026): fatto, in attesa del giudizio del proprietario.** A generale/editor/admin; B di calata, con invito singolo allo scarto e nessuna ripetizione a sinistra. [Scelta](design/client-c4/screens/scelte.md), [dopo](reports/client-c4/c4-5b/dopo/README.md), [esiti finali](reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). Riformattazione equivalente conclusa in `11bc95e`; [inventario](design/client-c4/screens/inventario.md), [censimento](design/client-c4/screens/censimento.md), [proposta A/B](design/client-c4/screens/proposta.md), [rapporto](reports/client-c4-report.md#c4-5b). Scelta ricevuta; token e finitura applicati nei sei gruppi di commit. Giro ufficiale 19/19 verde, unità finali 240/240; 750 rosso dichiarato con BASE_750 invariato.
 
 **Perimetro.** Un inventario e una finitura delle schermate:
 

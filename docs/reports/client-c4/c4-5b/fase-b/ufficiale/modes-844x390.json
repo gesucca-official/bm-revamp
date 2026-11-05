@@ -1,0 +1,435 @@
+{
+ "date": "2026-11-05T17:48:29.166Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts) against the local server; not a physical device",
+ "checks": {
+  "presenceAppears": {
+   "before": 1,
+   "after": 2
+  },
+  "presenceSort": "descending by name after a second click on the active column",
+  "queueExitA": {
+   "ack": true,
+   "hubButtonsEnabled": true
+  },
+  "queueExitB": {
+   "aloneWaitedWithoutGame": true,
+   "ack": true
+  },
+  "sameGame": true,
+  "game1": {
+   "a": "Hai vinto",
+   "b": "Hai perso",
+   "turnsA": 12,
+   "turnsB": 12,
+   "gameId": "eea164ffc06353ab7070900f79d4c4dfae2179195540febb8a7a0a104e65d11e"
+  },
+  "privacy": {
+   "A": {
+    "views": 37,
+    "ownHandArray": true,
+    "otherHandNumber": true,
+    "otherOnlyNames": 12,
+    "leaks": 0
+   },
+   "B": {
+    "views": 37,
+    "ownHandArray": true,
+    "otherHandNumber": true,
+    "otherOnlyNames": 11,
+    "leaks": 0
+   }
+  },
+  "newGameRepeatsMode": {
+   "firstGame": "eea164ffc06353ab7070900f79d4c4dfae2179195540febb8a7a0a104e65d11e",
+   "secondGame": "581a315c8a04707ee9937bcf3404ef122737b26a2e934cc04ea8b500db351dc6",
+   "queue": "quick/1v1"
+  },
+  "joinRefusedWhileResumable": {
+   "channel": "/user/queue/game/error",
+   "message": "Leave or resume the current game first",
+   "note": "raw STOMP client of the same account while its client is dropped; the hub handling of this message is covered by the session unit test"
+  },
+  "forfeit": {
+   "winner": "devBob"
+  },
+  "presenceDisappears": {
+   "count": 1
+  }
+ },
+ "errors": [],
+ "touchControls": [
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode on",
+     "label": "Contro il computer",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Uno contro uno",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Tutti contro tutti",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Con un tuo mazzo",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "quick",
+     "label": "Gioca",
+     "width": 291,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Esci",
+     "width": 55,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▼",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "01-hub"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "leave-queue",
+     "label": "Esci dalla coda",
+     "width": 354,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▼",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "02-waiting"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Peroni da 66, calda, oggetto di te, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Negroni Trovato per Terra, oggetto di devBob, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Metabolismo Corrotto, AZIONE REGOLARE, ruolo risorse, costo —, dà +x H, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, priorità 0, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Dose di Eroina da Cavalli, AZIONE REGOLARE, ruolo risorse, costo —, dà +x T, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "03-table"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 6; risorse H 6, A -23, V 0, T 0, L 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute -1, eliminato; risorse H -1, A 17, V 60, T 55, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, risorse insufficienti, priorità 0, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-10",
+     "label": "Rabbia Psicotica da Meth, AZIONE REGOLARE, ruolo danno, costo 5 T, danno colpo 15, risorse insuffici",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-12",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, risorse insufficienti,",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "04-outcome"
+  }
+ ]
+}

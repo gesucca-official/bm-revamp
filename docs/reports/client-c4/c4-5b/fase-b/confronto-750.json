@@ -1,0 +1,275 @@
+{
+  "date": "2026-11-05",
+  "baseCommit": "9df4bd5",
+  "sourceUnchanged": true,
+  "normalizedReadabilitySha256": "f2a7931faa98e65a319bb5389113e6f3b502db6f8f10301930c245ce72f90455",
+  "BASE_750_unmodified": true,
+  "matrix": [
+    {
+      "seats": 2,
+      "itemsPerSeat": 0,
+      "before": 6,
+      "after": 6,
+      "identical": true
+    },
+    {
+      "seats": 2,
+      "itemsPerSeat": 1,
+      "before": 6,
+      "after": 6,
+      "identical": true
+    },
+    {
+      "seats": 2,
+      "itemsPerSeat": 2,
+      "before": 6,
+      "after": 6,
+      "identical": true
+    },
+    {
+      "seats": 2,
+      "itemsPerSeat": 3,
+      "before": 5,
+      "after": 5,
+      "identical": true
+    },
+    {
+      "seats": 5,
+      "itemsPerSeat": 0,
+      "before": 11,
+      "after": 11,
+      "identical": true
+    },
+    {
+      "seats": 5,
+      "itemsPerSeat": 1,
+      "before": 11,
+      "after": 11,
+      "identical": true
+    },
+    {
+      "seats": 5,
+      "itemsPerSeat": 2,
+      "before": 12,
+      "after": 12,
+      "identical": true
+    },
+    {
+      "seats": 5,
+      "itemsPerSeat": 3,
+      "before": 14,
+      "after": 14,
+      "identical": true
+    }
+  ],
+  "realFfa": {
+    "observedCountsPerTurn": [
+      12,
+      12,
+      14
+    ],
+    "rawMessages": 64,
+    "pageErrors": [],
+    "compatibleInputs": [
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 1,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 1,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 2,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 1,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 3,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 1,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 1,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 2,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 2,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 2,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 3,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 2,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 1,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 3,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 2,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 3,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 3,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 3,
+          "ComPlayer_9438": 1
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 1,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 1,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 2,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 1,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 3,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 1,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 1,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 2,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 2,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 2,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 3,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 2,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 1,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 3,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 2,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 3,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      },
+      {
+        "counts": {
+          "devAlice": 1,
+          "ComPlayer_6317": 3,
+          "ComPlayer_5281": 2,
+          "ComPlayer_420": 3,
+          "ComPlayer_9438": 2
+        },
+        "problems": 12,
+        "beforeAndAfterIdentical": true
+      }
+    ],
+    "note": "The verifier omits full item counts from turn records; compatible counts are inferred, not a recorded authoritative view. The observed first-turn problem list and rounded hand step are reproduced by the unchanged baseline geometry. 11 was the live reference at one item per seat, not every combination."
+  }
+}

@@ -1,0 +1,1831 @@
+{
+ "date": "2026-11-05T18:11:18.430Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "checks": {
+  "catalogFrames": {
+   "cards": 39
+  },
+  "catalogDamage": {
+   "faces": 37,
+   "withDamage": 12,
+   "characters": 2,
+   "faceTotal": 39
+  },
+  "catalog": {
+   "cards": 37,
+   "characters": 2,
+   "total": 39,
+   "annexVersion": "1.10",
+   "withIllustration": 39,
+   "noHorizontalScroll": true,
+   "sheetScrolls": true
+  },
+  "invalidNotSendable": {
+   "emptyDraft": [
+    "Dai un nome al mazzo.",
+    "Scegli il personaggio.",
+    "Scegli l’azione base.",
+    "Scegli l’ultima risorsa.",
+    "Metti almeno una carta regolare nel mazzo."
+   ],
+   "withoutRegular": [
+    "Dai un nome al mazzo.",
+    "Metti almeno una carta regolare nel mazzo."
+   ],
+   "slashName": [
+    "Il nome non può contenere «/»."
+   ],
+   "saveEnabledWithSlash": false,
+   "deckSends": 0
+  },
+  "editorFaces": {
+   "faces": 30,
+   "withDamage": 9
+  },
+  "createAndSave": {
+   "threeBound": "SVEGLIAMOCI MA TU NO ×3",
+   "afterClear": "nessuna",
+   "searchShuffle": 1,
+   "deckViewAfterSearch": [
+    "Scatto Repentino ×2"
+   ],
+   "deckView": [
+    "PAZIENZA: FINITA ×4",
+    "Scatto Repentino ×2"
+   ],
+   "counts": "Carte iniziali 3 / 6 (base + legate) · regolari 6 (almeno 1). Nessun limite di copie.",
+   "sends": [
+    "/app/user/devAlice/deck"
+   ],
+   "saved": {
+    "character": "bruiser.character.BigBadBruiser",
+    "basic": "com.basic.BruiserGrab",
+    "last": "com.last.Struggle",
+    "bound": [
+     "bruiser.character.LittleSmack",
+     "junkie.character.PatheticBlade"
+    ],
+    "regular": [
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "com.ShuffleFeet",
+     "com.ShuffleFeet"
+    ]
+   },
+   "listed": [
+    "Strano"
+   ]
+  },
+  "cancelKeepsSaved": {
+   "nameReadOnly": true,
+   "sends": [],
+   "reopened": {
+    "counts": "Carte iniziali 3 / 6 (base + legate) · regolari 6 (almeno 1). Nessun limite di copie. Il nome di un mazzo salvato non si cambia.",
+    "bound": "SVEGLIAMOCI MA TU NO, Ago Marcio e Spezzato"
+   },
+   "profileUnchanged": true
+  },
+  "overwrite": {
+   "button": "Sovrascrivi",
+   "sends": [
+    "/app/user/devAlice/deck"
+   ],
+   "decks": [
+    "Strano"
+   ],
+   "bound": [
+    "bruiser.character.LittleSmack",
+    "junkie.character.PatheticBlade",
+    "bruiser.character.LittleRage"
+   ],
+   "regular": 8
+  },
+  "openGame": {
+   "sceneReadyMs": 436,
+   "game": "13c70f9d95f23b0565546785e9676aafa8fa58e9fb243e46199bfd5c0d3e0475",
+   "listed": [
+    "Strano"
+   ],
+   "join": [
+    "/app/game/open/1vCom/join/devAlice/Strano"
+   ],
+   "character": "bruiser.character.BigBadBruiser",
+   "hand": [
+    "com.basic.BruiserGrab",
+    "bruiser.character.LittleSmack",
+    "junkie.character.PatheticBlade",
+    "bruiser.character.LittleRage",
+    "com.ShuffleFeet",
+    "bruiser.Glare"
+   ],
+   "deck": 6,
+   "opponent": "ComPlayer_4505",
+   "turnsPlayed": 15,
+   "over": true,
+   "winner": "ComPlayer_4505",
+   "outcome": "Hai perso Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "handFromDeck": {
+    "views": 31,
+    "foreign": []
+   }
+  },
+  "newGameRepeatsOpen": {
+   "join": [
+    "/app/game/open/1vCom/join/devAlice/Strano"
+   ]
+  },
+  "sixInitialPlayed": {
+   "counts": "Carte iniziali 6 / 6 (base + legate) · regolari 12 (almeno 1). Nessun limite di copie.",
+   "listed": [
+    "Sei iniziali",
+    "Strano"
+   ],
+   "bound": [
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack"
+   ],
+   "regular": 12,
+   "character": "junkie.character.ToxicJunkie",
+   "hand": [
+    "com.basic.ToxicGrab",
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack",
+    "junkie.character.RottenSmile",
+    "bruiser.character.LittleSmack"
+   ],
+   "deck": 12,
+   "handFromDeck": {
+    "views": 1,
+    "foreign": []
+   },
+   "note": "basic + five bound fill the hand: no draw, and with no regular card in hand neither the bound (discard) nor ToxicGrab (no item) can be played; R03 known limit, the game is then abandoned",
+   "menuExplainsR03": true
+  },
+  "deckUnavailableProvoked": {
+   "rewrittenFrames": 1,
+   "shown": "Mazzo non disponibile sul server: scegli un mazzo salvato e riprova.",
+   "serverError": [
+    "Deck unavailable. Choose a saved deck from your account and retry."
+   ],
+   "ready": 3,
+   "playEnabled": true,
+   "sentDestination": [
+    "/app/game/open/1vCom/join/devAlice/Assente"
+   ],
+   "alertsAfterTabSwitch": 0
+  },
+  "delete": {
+   "sendsAfterCancel": 0,
+   "deletes": [
+    "/app/user/devAlice/deck/delete",
+    "/app/user/devAlice/deck/delete"
+   ],
+   "decks": 0,
+   "dialog": "no saved decks, link to the collection"
+  }
+ },
+ "errors": [],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it."
+ ],
+ "touchControls": [
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "new-deck",
+     "label": "Nuovo mazzo",
+     "width": 634,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "show-catalog",
+     "label": "Torna ai mazzi",
+     "width": 126,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "01-catalog"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "deck-name",
+     "label": "",
+     "width": 603,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "save-deck",
+     "label": "Salva",
+     "width": 68,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "cancel-edit",
+     "label": "Annulla",
+     "width": 79,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "PersonaggioSpazienzio de la Ucciso",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Personaggio Tossico del Serraglio",
+     "width": 244,
+     "height": 97,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Personaggio Spazienzio de la Ucciso",
+     "width": 244,
+     "height": 97,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Azione baseADOPERIAMOTI",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Azione base ADOPERIAMOTI",
+     "width": 244,
+     "height": 130,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Azione base Desiderio Incontrollabile",
+     "width": 244,
+     "height": 130,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultima risorsaLast Resort: Banzai!!!",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Ultima risorsa Last Resort: Banzai!!!",
+     "width": 244,
+     "height": 117,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Azioni legate0 / 5",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata Ago Marcio e Spezzato",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata Ghigno co' i' Denti Marci",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata LIEVE FASTIDIO",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata SVEGLIAMOCI MA TU NO",
+     "width": 244,
+     "height": 122,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Mazzo regolare1 carte",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "card-search",
+     "label": "",
+     "width": 550,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "on",
+     "label": "Collezione",
+     "width": 107,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pool-deck",
+     "label": "Mazzo",
+     "width": 77,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di AMMALIAMOTI DI BOTTE",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di BELLO IL TUO GIOCATTOLO SI",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di C'è del sangue nella mia droga",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Ce l'hai due spiccioli per il biglietto?",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di COSA FAI NON É UNA DOMANDA",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Dose di Eroina da Cavalli",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Estasi da Coca Etilene",
+     "width": 244,
+     "height": 135,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di FAI BASTA",
+     "width": 244,
+     "height": 135,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di GABBIANO DUNQUE VOLIAMOTI",
+     "width": 244,
+     "height": 135,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di GARGANTUESCO IMPATTO SUL TU",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di GENTILE IL TUO CAREZZO",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Grab",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Metabolismo Corrotto",
+     "width": 244,
+     "height": 119,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di NON GIOCARE COL COLTELLO NO",
+     "width": 244,
+     "height": 119,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di ORMALE GUARIAMOTI",
+     "width": 244,
+     "height": 119,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di PAZIENZA: FINITA",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di PERMESSO SCUSA ORA SMETTI",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Presa Male di Brutto",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Rabbia Psicotica da Meth",
+     "width": 244,
+     "height": 151,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Riflessi Aumentati dalla Speed",
+     "width": 244,
+     "height": 151,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Scatto Repentino",
+     "width": 244,
+     "height": 151,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di SPEDIAMOTI DUNQUE IN O-AHIO",
+     "width": 244,
+     "height": 120,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Steal",
+     "width": 244,
+     "height": 120,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di STORDIAMOTI HO DETTO",
+     "width": 244,
+     "height": 120,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Tossicone Scatarrante",
+     "width": 244,
+     "height": 148,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Tutto è Droga",
+     "width": 244,
+     "height": 148,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Mescolone Micidiale",
+     "width": 244,
+     "height": 148,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Negroni Trovato per Terra",
+     "width": 244,
+     "height": 134,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Peroni da 66, calda",
+     "width": 244,
+     "height": 134,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Tennents Super",
+     "width": 244,
+     "height": 134,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "02-invalid"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "deck-name",
+     "label": "",
+     "width": 603,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "save-deck",
+     "label": "Salva",
+     "width": 68,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "cancel-edit",
+     "label": "Annulla",
+     "width": 79,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "PersonaggioSpazienzio de la Ucciso",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Personaggio Tossico del Serraglio",
+     "width": 244,
+     "height": 97,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Personaggio Spazienzio de la Ucciso",
+     "width": 244,
+     "height": 97,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Azione baseADOPERIAMOTI",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Azione base ADOPERIAMOTI",
+     "width": 244,
+     "height": 130,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Azione base Desiderio Incontrollabile",
+     "width": 244,
+     "height": 130,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultima risorsaLast Resort: Banzai!!!",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Ultima risorsa Last Resort: Banzai!!!",
+     "width": 244,
+     "height": 117,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Azioni legate2 / 5",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "clear-bound",
+     "label": "Svuota",
+     "width": 82,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata Ago Marcio e Spezzato",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata Ghigno co' i' Denti Marci",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata LIEVE FASTIDIO",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata SVEGLIAMOCI MA TU NO",
+     "width": 244,
+     "height": 122,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Mazzo regolare6 carte",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "card-search",
+     "label": "",
+     "width": 550,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Collezione",
+     "width": 107,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pool-deck",
+     "label": "Mazzo",
+     "width": 77,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Togli una copia di PAZIENZA: FINITA",
+     "width": 244,
+     "height": 115,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Togli una copia di Scatto Repentino",
+     "width": 244,
+     "height": 115,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "03-editor"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4505",
+     "label": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Scatto Repentino, AZIONE REGOLARE, ruolo oggetti, costo —, priorità -1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_4505-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "04-open-table"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 25, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4505",
+     "label": "Computer, Tossico del Serraglio, salute 90; risorse H 90, A 40, V 0, T 20, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-7",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "toast",
+     "label": "Turno 3: Computer → Riflessi Aumentati dalla Speed · tu → SVEGLIAMOCI MA TU NO (annullata)",
+     "width": 280,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_4505-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "05-open-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute -10, eliminato; risorse H -10, A 40, V 25, T 25, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4505",
+     "label": "Computer, Tossico del Serraglio, salute 5; risorse H 5, A 15, V 0, T 0, L 24",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_4505-0",
+     "label": "Peroni da 66, calda, oggetto di Computer, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_4505-1",
+     "label": "Broken Beer Bottle, oggetto di Computer, ruolo altro, copia 2",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_4505-2",
+     "label": "Tennents Super, oggetto di Computer, ruolo risorse, dà +10 L, copia 3",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-9",
+     "label": "Last Resort: Banzai!!!, ULTIMA RISORSA, ruolo danno, costo —, danno colpo 10, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_4505-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 24,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_4505-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 24,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_4505-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 24,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "06-open-outcome"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "deck-name",
+     "label": "",
+     "width": 603,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "save-deck",
+     "label": "Salva",
+     "width": 68,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "cancel-edit",
+     "label": "Annulla",
+     "width": 79,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "PersonaggioTossico del Serraglio",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Personaggio Tossico del Serraglio",
+     "width": 244,
+     "height": 97,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Personaggio Spazienzio de la Ucciso",
+     "width": 244,
+     "height": 97,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Azione baseDesiderio Incontrollabile",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Azione base ADOPERIAMOTI",
+     "width": 244,
+     "height": 130,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Azione base Desiderio Incontrollabile",
+     "width": 244,
+     "height": 130,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultima risorsaLast Resort: Banzai!!!",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick on",
+     "label": "Ultima risorsa Last Resort: Banzai!!!",
+     "width": 244,
+     "height": 117,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Azioni legate5 / 5",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "clear-bound",
+     "label": "Svuota",
+     "width": 82,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata Ago Marcio e Spezzato",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata Ghigno co' i' Denti Marci",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata LIEVE FASTIDIO",
+     "width": 244,
+     "height": 121,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi l’azione legata SVEGLIAMOCI MA TU NO",
+     "width": 244,
+     "height": 122,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Mazzo regolare12 carte",
+     "width": 748,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "card-search",
+     "label": "",
+     "width": 550,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "on",
+     "label": "Collezione",
+     "width": 107,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pool-deck",
+     "label": "Mazzo",
+     "width": 77,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di AMMALIAMOTI DI BOTTE",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di BELLO IL TUO GIOCATTOLO SI",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di C'è del sangue nella mia droga",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Ce l'hai due spiccioli per il biglietto?",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di COSA FAI NON É UNA DOMANDA",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Dose di Eroina da Cavalli",
+     "width": 244,
+     "height": 182,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Estasi da Coca Etilene",
+     "width": 244,
+     "height": 135,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di FAI BASTA",
+     "width": 244,
+     "height": 135,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di GABBIANO DUNQUE VOLIAMOTI",
+     "width": 244,
+     "height": 135,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di GARGANTUESCO IMPATTO SUL TU",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di GENTILE IL TUO CAREZZO",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Grab",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Metabolismo Corrotto",
+     "width": 244,
+     "height": 119,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di NON GIOCARE COL COLTELLO NO",
+     "width": 244,
+     "height": 119,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di ORMALE GUARIAMOTI",
+     "width": 244,
+     "height": 119,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di PAZIENZA: FINITA",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di PERMESSO SCUSA ORA SMETTI",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Presa Male di Brutto",
+     "width": 244,
+     "height": 139,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Rabbia Psicotica da Meth",
+     "width": 244,
+     "height": 151,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Riflessi Aumentati dalla Speed",
+     "width": 244,
+     "height": 151,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Scatto Repentino",
+     "width": 244,
+     "height": 151,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di SPEDIAMOTI DUNQUE IN O-AHIO",
+     "width": 244,
+     "height": 120,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Steal",
+     "width": 244,
+     "height": 120,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di STORDIAMOTI HO DETTO",
+     "width": 244,
+     "height": 120,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Tossicone Scatarrante",
+     "width": 244,
+     "height": 148,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Tutto è Droga",
+     "width": 244,
+     "height": 148,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Mescolone Micidiale",
+     "width": 244,
+     "height": 148,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Negroni Trovato per Terra",
+     "width": 244,
+     "height": 134,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Peroni da 66, calda",
+     "width": 244,
+     "height": 134,
+     "disabled": false
+    },
+    {
+     "selector": "pick",
+     "label": "Aggiungi una copia di Tennents Super",
+     "width": 244,
+     "height": 134,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "07-six-initial"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_8218",
+     "label": "Computer, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_8218-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "08-six-initial-table"
+  },
+  {
+   "controls": [
+    {
+     "selector": "close round",
+     "label": "Chiudi",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Salta effetti",
+     "width": 113,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Strumenti",
+     "width": 102,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Abbandona la partita",
+     "width": 181,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Esci dall’account",
+     "width": 155,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "08b-six-initial-menu"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Contro il computer",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Uno contro uno",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Tutti contro tutti",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode on",
+     "label": "Con un tuo mazzo",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "quick",
+     "label": "Gioca",
+     "width": 291,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Esci",
+     "width": 55,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▲",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "09-deck-unavailable"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "new-deck",
+     "label": "Nuovo mazzo",
+     "width": 672,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "show-catalog",
+     "label": "Catalogo",
+     "width": 88,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "edit-deck",
+     "label": "Modifica",
+     "width": 85,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "delete-deck",
+     "label": "Cancella",
+     "width": 86,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "confirm-delete",
+     "label": "Cancella",
+     "width": 86,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Annulla",
+     "width": 79,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "10-delete-confirm"
+  },
+  {
+   "controls": [
+    {
+     "selector": "primary",
+     "label": "Vai alla collezione",
+     "width": 664,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "cancel-open",
+     "label": "Annulla",
+     "width": 79,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "11-no-decks-dialog"
+  }
+ ],
+ "ok": true
+}

@@ -17,7 +17,7 @@ Ruolo e guadagni vengono dal catalogo (regolamento 1.7, R07a); nessuna regola
 è calcolata qui. O9 aggiunge le illustrazioni provvisorie delle 40 classi
 ([rapporto C2](../docs/reports/client-c2-report.md)).
 
-**C4-5b, 5 novembre 2026 — Fase A pronta, scelta del proprietario pendente.** Solo riformattazione CSS equivalente; nessuna finitura applicata. [Inventario e controlli](../docs/design/client-c4/screens/inventario.md), [censimento](../docs/design/client-c4/screens/censimento.md), [prima odierno](../docs/reports/client-c4/c4-5b/prima/README.md), [varianti A/B](../docs/design/client-c4/screens/proposte/README.md), [verifiche e limite 750](../docs/reports/client-c4-report.md#c4-5b). Nessun verificatore/atteso cambiato.
+**C4-5b, 5 novembre 2026 — fatto, in attesa del giudizio del proprietario.** A comune/editor/admin, B per Conferma/Annulla; un solo invito di scarto sulla riga dei costi, senza etichette per carta o richiesta duplicata a sinistra. [Inventario](../docs/design/client-c4/screens/inventario.md), [scelte](../docs/design/client-c4/screens/scelte.md), [dopo](../docs/reports/client-c4/c4-5b/dopo/README.md), [confronti](../docs/reports/client-c4/c4-5b/confronti/README.md), [verifiche e limiti](../docs/reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). 19/19 ufficiali verdi; 240 unità finali; controlli ordinari 44×44 a 844×390, soli chip D8 esentati. Verificatori estesi senza cambiare selettori/attesi/soglie precedenti; BASE_750 invariato, rossi a 750 dichiarati.
 
 ## Avvio locale
 

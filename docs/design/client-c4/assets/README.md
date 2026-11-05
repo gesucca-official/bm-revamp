@@ -33,7 +33,7 @@ clone pulito. Il modello di O9 è registrato dal C2PA come «ChatGPT gpt-image»
 
 ## Font
 
-**Nessun font è distribuito** e nessuna richiesta di rete li carica (D4). Il tavolo usa **Impact** (ripiego *Arial Narrow*, poi il sans-serif del
+**Nessun font è distribuito** e nessuna richiesta di rete li carica (D4). Il tavolo usa **Impact** (ripiego *Arial*, poi il sans-serif del
 dispositivo); la shell usa **Arial**. Sono caratteri di sistema: non sono un file del repository né della build. Il test controlla che non esistano file di
 font, `@font-face` o `@import`, né origini remote negli stili, e che le famiglie nominate siano solo queste. **Impact su iOS: non verificato**; se manca si
 accetta il ripiego (D4, D6).

@@ -720,7 +720,7 @@ Le catture dopo sono [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-dopo-
 
 ## C4-5b
 
-5 novembre 2026. **Fase 0 conclusa; Fase A pronta, in attesa della scelta del proprietario. Fase B non iniziata.** Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
+5 novembre 2026. **Fatto, in attesa del giudizio del proprietario. Fase B completata secondo le scelte A/B del 5 novembre 2026.** Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
 
 ### Fase 0 — Riformattazione del CSS
 
@@ -738,7 +738,7 @@ Verifiche obbligatorie di Fase 0: `./scripts/build.ps1 -Task Test -Offline` verd
 
 ### Fase A — Inventario, prima odierno e proposta
 
-**Arresto alla scelta, come richiesto.** C4-5b non è dichiarato fatto: resta da scegliere e implementare la Fase B, poi giudicare le sue catture dopo. In questa fase la sola modifica a produzione è la riformattazione equivalente già committata in `11bc95e`; niente token applicati, TSX, scene, geometria, sfondo, regole, server, protocollo, catalogo o nuovi asset. Nessun push. Script, calcoli e prototipi eseguibili in TEMP, fuori repository.
+**Stato alla consegna della Fase A (storico):** lavoro fermato alla proposta; la scelta è poi arrivata ed è registrata in Fase B. In questa fase la sola modifica a produzione è la riformattazione equivalente già committata in `11bc95e`; niente token applicati, TSX, scene, geometria, sfondo, regole, server, protocollo, catalogo o nuovi asset. Nessun push. Script, calcoli e prototipi eseguibili in TEMP, fuori repository.
 
 - [Inventario](../design/client-c4/screens/inventario.md): tutte le schermate elencate nel piano, più linea caduta, scelta mazzo vuota/piena, conferme inline, ispezioni carta/personaggio, preparazione ed errore grafico; file, selettori, colori/font, controlli, dimensioni e stati. L’editor mantiene struttura e azioni; O15/O16 restano fuori. O26/O27 approvate non vengono riaperte.
 - [Censimento](../design/client-c4/screens/censimento.md), con [ogni occorrenza in JSON](../design/client-c4/screens/censimento.json): **67 valori CSS** (comprese trasparenze), **158 occorrenze**, **18 dichiarazioni font**. Nei TSX nessun esadecimale/rgb/hsl letterale o font inline; 29 definizioni di **25 tinte condivise** per simboli/cornici, censite separatamente. Ripiego Arial Narrow ancora presente nel CSS: proposta di sostituirlo con Arial, secondo D4; non ancora applicata.
@@ -771,14 +771,13 @@ Giro separato `VerifyAll -Only 'build,verify,layout' -Measures 750x292`, jar e c
 
 I JSON del giro non conservano tutti i conteggi degli oggetti della vista autorevole: non li invento. La ricerca diagnostica su conteggi misti 1–3 trova input compatibili con **lo stesso insieme dei 14 problemi** e il passo della mano misurato (51 px); con quegli stessi input la geometria precedente e quella attuale coincidono. Sono input compatibili **inferiti**, non una registrazione completa della vista né una nuova partita di confronto. Il risultato non consente di chiamare verde il giro reale o di sostituire 11 con 14 negli attesi; dimostra che il numero maggiore è riproducibile dalla geometria già esistente. La Fase B dovrà continuare a confrontare gli stessi casi di BASE_750 e dichiarare separatamente gli esiti reali, senza normalizzare questo rosso.
 
-**Non verificato:** iPhone fisico, Safari, font su iOS; contrasto formale (C4-8a), giudizio umano in scala di grigi, contesto Spring completo. I prototipi non certificano la raggiungibilità o le prestazioni della futura implementazione. Nessuna cattura “dopo” di Fase B prodotta: manca ancora la scelta. Il proprietario deve scegliere il sistema generale A/B (editor/admin, stati/focus/disabilitati) e A/B per ✓/×/scarto; può combinarli. Dopo l’implementazione si sottoporranno le catture dopo schermata per schermata e solo allora il blocco sarà «fatto, in attesa del giudizio del proprietario».
-
+**Non verificato:** iPhone fisico, Safari, font su iOS; contrasto formale (C4-8a), giudizio umano in scala di grigi, contesto Spring completo. I prototipi non certificano la raggiungibilità o le prestazioni della futura implementazione. Alla consegna della Fase A mancavano ancora scelta e catture dopo; la Fase B è documentata di seguito.
 
 ### Fase B — Scelta e implementazione
 
-5 novembre 2026. **In corso dopo la scelta del proprietario:** [decisione letterale](../design/client-c4/screens/scelte.md). A per editor incompleto/completo e amministrazione, come sistema comune; B per conferma/annullamento. Nello scarto un solo invito in basso sulla riga dei costi, senza etichette per carta e senza ripetizione nel fumetto sinistro. Nessuna riapertura di O26/O27.
+5 novembre 2026. **Fatto, in attesa del giudizio del proprietario. Scelte applicate:** [decisione letterale](../design/client-c4/screens/scelte.md). A per editor incompleto/completo e amministrazione, come sistema comune; B per conferma/annullamento. Nello scarto un solo invito in basso sulla riga dei costi, senza etichette per carta e senza ripetizione nel fumetto sinistro. Nessuna riapertura di O26/O27.
 
-Commit per gruppi: token/componenti comuni; accesso/home/regole/rotazione; hub/code/FFA/Al bar; catalogo/mazzi/editor; profilo/admin; dialoghi/menu/strumenti/Ultimo turno/esito. La sola modifica Pixi ammessa in questa implementazione è il ripiego del font Impact da Arial Narrow ad Arial (D4), a parità di ogni istruzione geometrica. Il controllo sorgente consente colori numerici solo nei quattro file di disegno già condivisi (`scene.ts`, `readability.ts`, `symbols.ts`, `frames.ts`); i TSX non ricevono una deroga generale. Verifiche e giudizio finale ancora da completare.
+Commit per gruppi: token/componenti comuni; accesso/home/regole/rotazione; hub/code/FFA/Al bar; catalogo/mazzi/editor; profilo/admin; dialoghi/menu/strumenti/Ultimo turno/esito. La sola modifica Pixi ammessa in questa implementazione è il ripiego del font Impact da Arial Narrow ad Arial (D4), a parità di ogni istruzione geometrica. Il controllo sorgente consente colori numerici solo nei quattro file di disegno già condivisi (`scene.ts`, `readability.ts`, `symbols.ts`, `frames.ts`); i TSX non ricevono una deroga generale. Verifiche concluse e riportate sotto; giudizio finale del proprietario ancora pendente.
 
 **Gruppo pubblico:** Home, Regole, Accesso, Registrazione: link e Home portati a 44×44 minimi; testo, percorsi e selettori invariati. Verifica touch aggiunta ai checkpoint fotografici esistenti di VerifyPublic: misura il box CSS senza il falso ingrandimento del foglio ruotato; nessun vecchio controllo sostituito. La rotazione conserva i suoi box e la tinta calda, ora da token.
 
@@ -789,3 +788,64 @@ Commit per gruppi: token/componenti comuni; accesso/home/regole/rotazione; hub/c
 **Gruppo profilo/admin:** A, stessi pannelli chiari e bordi dell’editor, azioni distruttive rosa con verbo e conferma. Dati e autorizzazione Basic invariati; nessuna azione tolta. VerifyProfile aggiunge solo i bersagli touch ai checkpoint esistenti (inclusi errori e conferme).
 
 **Gruppo dialoghi/menu/strumenti/Ultimo turno/esito e calata:** stesse superfici e focus comuni; B con Conferma/Annulla visibili, ✓ in riquadro arrotondato e × in disco. Box delle metà invariati, label compatta con line-height controllata per restare nei 97 px esistenti. Singolo invito non interattivo alla quota della riga dei costi, soltanto dopo il bersaglio mentre manca lo scarto; il secondo rigo del fumetto sinistro è nascosto in quella fase. Carta/bersaglio, scarto scelto, errori e istruzione prima del bersaglio conservati. VerifyLayout/discard-checks mantiene ogni controllo O26 e aggiunge presenza/unicità/quota/pointer-events dell’invito e sua scomparsa dopo scelta/annullamento; aggiunta scansione touch ai checkpoint. Nessun selettore precedente cambiato.
+
+**Eccezione metadata HTML:** il solo `meta name="theme-color"` di index.html richiede un valore letterale per il browser e resta al marrone esistente. Un test ne impone unicità e uguaglianza a `--bg-page`; vieta altre tinte HTML o CSS inline. I font dinamici non dichiarati e i colori esadecimali numerici brevi sono rifiutati dal nuovo guard, senza una deroga generale ai TSX.
+
+
+### Fase B — Esiti finali e cosa giudicare
+
+**Applicato:** A per sistema comune, editor incompleto/completo e amministrazione; B per ✓/×, Conferma/Annulla visibili; nello scarto **un solo invito sulla riga dei costi**, non interattivo, senza targhette sulle candidate e senza ripetizione dell’istruzione nel fumetto sinistro. Dopo lo scarto l’invito sparisce e la carta conserva il segno «SCARTO» già esistente. Carta/bersaglio, istruzioni prima del bersaglio, errori e riepilogo della scelta restano disponibili.
+
+**Giro ufficiale: 19/19 verdi, 28 min 59 s.** [Riepilogo](client-c4/c4-5b/fase-b/ufficiale/run-summary.json): Test/Build/Size; Verify, Modes, Lifecycle, Ffa, Decks, Public, Profile e Layout completi a **1366×768 e 844×390**, su jar ricostruito e distribuzione **21 file, `d913cfcec0c3b05f`**. Il giro registra 239 unità; il guard dei metadati/font è stato poi aggiunto e la suite **finale 240/240** è verde nel [giro 750](client-c4/c4-5b/fase-b/base-750x292/run-summary.json), insieme a Build e Size, sulla stessa identica distribuzione. Nessun sorgente di prodotto cambiato dopo il giro ufficiale.
+
+[Verifiche obbligatorie](client-c4/c4-5b/fase-b/repository.json): `./scripts/build.ps1 -Task Test -Offline` verde, **339 test server, 3 saltati**, zero errori/fallimenti; **36/36 client-debug**. `python scripts/check-rules.py` verde: regole, copia client e catalogo/SQLite allineati. L’avvio locale nelle partite è effettivo, ma **TestServerContext resta una verifica separata non eseguita**. Nessun processo Java/Maven esterno o porta 8080/4320 occupata ai controlli preventivi; mai fermati processi altrui, un giro alla volta.
+
+**Sorgente:** quattro nuovi test di guardia, con casi negativi: colori CSS solo nei token di `:root`, riferimenti definiti; nessuna palette privata nei TS/TSX; solo Impact/Arial e ripiego generico sans-serif, rifiutando famiglie dinamiche non dichiarate. Eccezioni esplicite: disegno Pixi di scene.ts; costanti condivise di readability.ts, symbols.ts e frames.ts; solo meta theme-color in index.html, vincolato a `--bg-page`. Il convertitore numerico dei TSX usa quelle costanti, senza una deroga ai colori letterali nei TSX. Inventario font aggiornato a Impact/Arial, senza cambi a file pubblici o impronte.
+
+**Verificatori:** nessun testo identificativo, selettore, atteso, soglia o BASE_750 precedente cambiato. Ai checkpoint fotografici esistenti di Public/Modes/Lifecycle/Ffa/Decks/Profile/Layout è stata aggiunta la scansione dei bersagli; nessuna vecchia asserzione è stata sostituita. In discard-checks sono aggiunte le asserzioni del solo invito (unico, quota dei costi, nessuna intercettazione del tocco, nessuna duplicazione nel fumetto, assenza dopo scelta/annullamento). I controlli O26 originari restano tutti presenti e verdi alle misure ufficiali.
+
+### Fase B — 44 px ed eccezioni D8
+
+[Misure touch](client-c4/c4-5b/fase-b/touch.json): **1412 controlli ordinari** nei checkpoint ufficiali a 844×390, inclusi disabilitati e controlli sotto scorrimento; minimo **44×44 px**. Misura CSS del controllo senza l’ingrandimento apparente del foglio ruotato. (i) e riga breve comprendono la loro area pseudo-elemento, non sono deroghe. Anche la raccolta delle schermate extra ripete la scansione, senza rilievi. Il nuovo invito è testo non interattivo, non un controllo esentato.
+
+Le sole eccezioni rilevate sono chip della scena, elencati qui uno per caso misurato. **Percorso alternativo comune:** tocco sul personaggio → Stati, immunità e timer (`inspect-chip`); il renderer della ricevuta usa le stesse descrizioni di `chipsOf`. VerifyLayout prova direttamente quel percorso sui chip incontrati nel suo scenario dedicato. Non si attribuisce una prova individuale del percorso a ogni durata/timer di ogni checkpoint: i campioni diretti sono nei JSON layout; tutti i casi sotto restano della sola categoria D8 già approvata. Nessuna deroga per link, select, summary o pulsanti piccoli.
+
+| Chip / descrizione osservata | Box CSS px |
+|---|---|
+| Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso | 26×18 |
+| Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso | 31×18 |
+| Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso | 41×27 |
+| Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso | 46×27 |
+| Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 17×18 |
+| Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 24×18 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 17×18 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 24×18 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 26×18 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 31×18 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 37×22 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 41×27 |
+| Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. | 46×27 |
+| Stato positivo: MADE OF STONE. Tagli (CUT) ricevuti ×0,5. dura ancora 2 turni dopo questo. | 31×18 |
+| Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità. | 31×18 |
+| Timer: Bad Trip. Scatta tra 2 fine turno: ridà l’immunità alla tossicità. | 31×18 |
+| Timer: Marvelous Cocktail. Scatta a fine turno: toglie immunità e stati, poi 20 danni da veleno. | 17×18 |
+| Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno. | 17×18 |
+| Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno. | 24×18 |
+
+### Fase B — Peso e 750×292
+
+[Size finale](client-c4/c4-5b/fase-b/ufficiale/size.json): JS gzip **338.060 B**, totale gzip **1.669.984 B**, texture **27.729.048 B** e margine sul tetto 32 MiB **5.825.384 B**; tutti i limiti rigidi e il tetto texture verdi. CSS distribuito **24.562 B / 5.837 B gzip**, contro **19.411 / 4.889 B** prima: **+948 B gzip** per tutta la finitura, totale distribuito **+1.069 B (0,064%)**. [Analisi isolata](client-c4/c4-5b/fase-b/costo-token.json): espandendo solo i 63 token nella stessa CSS finale e applicando identica minificazione/gzip, il costo dei token è **620 B gzip**; il resto della crescita è delle nuove regole di stato, target e invito. Nessuna texture o asset aggiunto.
+
+**750×292 non è dichiarato verde.** [Giro](client-c4/c4-5b/fase-b/base-750x292/run-summary.json): Test/Build/Size verdi; Verify rosso sullo stesso timeout `status-tip` del gettone coperto, 3 s. VerifyLayout rosso con **64 messaggi, nessun errore di pagina**, contro i **74** della partita di Fase A (i **48** citati all’inizio del compito erano di un diverso giro storico). Problemi reali per turno **6/5/5 in duello e 12/12/14 in FFA**. Non si rivendica un miglioramento da numeri di partite diverse.
+
+[Confronto sugli stessi input](client-c4/c4-5b/fase-b/confronto-750.json): readability.ts identico alla base precedente al lavoro, come BASE_750; matrice prima/dopo **[6,6,6,5] duello, [11,11,12,14] FFA** per 0–3 oggetti per posto. Il caso di riferimento a un oggetto resta **6/11**, nessun aumento. Per il primo turno reale del giro finale, gli input misti compatibili con i dati conservati riproducono lo stesso insieme dei 12 problemi e lo stesso passo della mano nella geometria precedente e in quella attuale; sono inferiti, non una registrazione completa della vista autorevole. Fonte e attesi invariati, niente rilanci per cercare il verde. Geometria di scene.ts invariata: il suo unico diff è il ripiego del font. background.ts, regole, server, protocollo e catalogo intatti.
+
+### Fase B — Catture finali e giudizio richiesto
+
+[Dopo, schermata per schermata](client-c4/c4-5b/dopo/README.md), [galleria](client-c4/c4-5b/dopo/galleria.html): **104 JPEG normali, 5.826.039 B (5,56 MiB)**, le stesse 38 schermate/stati e misure del prima, controllate automaticamente per corrispondenza. 1366×768, 844×390 e 390×844 dove ammesso. Stessi percorsi e mazzo di prova, server reale su SQLite temporaneo; partite/avversari possono variare. Nessuna tinta o etichetta di prototipo iniettata nelle catture normali. Tre campioni aggiuntivi (due grigi e uno focus) **112.770 B**. [Cinque confronti leggeri](client-c4/c4-5b/confronti/README.md), **563.833 B**, per hub, editor incompleto, admin, scarto richiesto e conferma pronta.
+
+**Mie osservazioni visive, non misure né approvazione:** il testo singolo resta sulla riga bassa senza intercettare le carte; il fumetto sinistro mantiene il contesto e non ripete la richiesta. I due verbi entrano nelle metà compatte senza alterare i box; il bordo tratteggiato distingue i disabilitati, e il focus è visibile sul foglio. Le schede lunghe continuano a scorrere; l’editor mantiene gli stessi slot e le stesse azioni. Le differenze di partite/oggetti nelle coppie non sono modifiche di questa finitura.
+
+**Da giudicare al proprietario:** tutte le schermate della galleria dopo; in particolare editor incompleto/completo e admin (A, disabilitati/focus), hub/Al bar e link/form da 44 px, scarto richiesto (singolo invito e fumetto non ridondante), conferma pronta (B). [Focus da tastiera](client-c4/c4-5b/dopo/focus/editor-844x390.jpg); grigi dell’[editor](client-c4/c4-5b/dopo/grigi/editor-incompleto-844x390.jpg) e della [conferma](client-c4/c4-5b/dopo/grigi/conferma-pronta-844x390.jpg) per la regola 11, ottenuti con il solo filtro temporaneo grayscale del browser. Il giudizio umano in grigio resta pendente.
+
+**Non verificato:** iPhone fisico e Safari, Impact su iOS, contrasto formale (C4-8a), partita interamente da tastiera e intero zoom del testo (C4-8a), prompt Basic nativo, TestServerContext. Le verifiche sono Edge su Windows; non sostituiscono questi controlli. **Fatto, in attesa del giudizio del proprietario. Nessun push.**

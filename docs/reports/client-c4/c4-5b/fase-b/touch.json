@@ -1,0 +1,1805 @@
+{
+  "date": "2026-11-05",
+  "measure": "844x390",
+  "controlsChecked": 1412,
+  "minimumWidth": 44,
+  "minimumHeight": 44,
+  "exceptions": [
+    {
+      "selector": "status-ComPlayer_4505-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "decks-844x390.json",
+      "screen": "04-open-table"
+    },
+    {
+      "selector": "status-ComPlayer_4505-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "decks-844x390.json",
+      "screen": "05-open-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_4505-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 24,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "decks-844x390.json",
+      "screen": "06-open-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_4505-imm-ALCOHOL",
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 24,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "decks-844x390.json",
+      "screen": "06-open-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_4505-tm-0",
+      "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 24,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "decks-844x390.json",
+      "screen": "06-open-outcome"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "decks-844x390.json",
+      "screen": "08-six-initial-table"
+    },
+    {
+      "selector": "status-ComPlayer_5571-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-turn0"
+    },
+    {
+      "selector": "status-ComPlayer_8549-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-turn0"
+    },
+    {
+      "selector": "status-ComPlayer_5571-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "k7-touch-raised"
+    },
+    {
+      "selector": "status-ComPlayer_8549-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "k7-touch-raised"
+    },
+    {
+      "selector": "status-ComPlayer_5571-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "k7-mouse-raised"
+    },
+    {
+      "selector": "status-ComPlayer_8549-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "k7-mouse-raised"
+    },
+    {
+      "selector": "status-ComPlayer_3004-st-0",
+      "label": "Stato positivo: MADE OF STONE. Tagli (CUT) ricevuti ×0,5. dura ancora 2 turni dopo questo.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_5571-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_8549-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_5571-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_8549-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_8549-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "five-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_7769-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn0"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn0"
+    },
+    {
+      "selector": "status-ComPlayer_2449-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn0"
+    },
+    {
+      "selector": "status-ComPlayer_7812-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn0"
+    },
+    {
+      "selector": "status-ComPlayer_7769-imm-ALCOHOL",
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_7769-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_7769-tm-0",
+      "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn3"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_2449-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_7812-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-A-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_7769-tm-0",
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-devAlice-imm-ALCOHOL",
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-devAlice-tm-0",
+      "label": "Timer: Marvelous Cocktail. Scatta a fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-ComPlayer_2449-imm-ALCOHOL",
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-ComPlayer_2449-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-ComPlayer_2449-tm-0",
+      "label": "Timer: Marvelous Cocktail. Scatta a fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-ComPlayer_7812-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-out"
+    },
+    {
+      "selector": "status-ComPlayer_7769-tm-0",
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-devAlice-imm-ALCOHOL",
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-devAlice-tm-0",
+      "label": "Timer: Marvelous Cocktail. Scatta a fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-ComPlayer_2449-imm-ALCOHOL",
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-ComPlayer_2449-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-ComPlayer_2449-tm-0",
+      "label": "Timer: Marvelous Cocktail. Scatta a fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-ComPlayer_7812-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-B-watching"
+    },
+    {
+      "selector": "status-ComPlayer_7769-tm-0",
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-A"
+    },
+    {
+      "selector": "status-devAlice-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-A"
+    },
+    {
+      "selector": "status-ComPlayer_7812-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-A"
+    },
+    {
+      "selector": "status-ComPlayer_7812-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-A"
+    },
+    {
+      "selector": "status-ComPlayer_7769-tm-0",
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-B"
+    },
+    {
+      "selector": "status-devAlice-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-B"
+    },
+    {
+      "selector": "status-ComPlayer_7812-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-B"
+    },
+    {
+      "selector": "status-ComPlayer_7812-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "two-outcome-B"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "start-A-turn0"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "start-A-turn3"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-forfeit"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-forfeit"
+    },
+    {
+      "selector": "status-ComPlayer_577-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-forfeit"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn0"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn0"
+    },
+    {
+      "selector": "status-ComPlayer_577-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn0"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 41,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn3"
+    },
+    {
+      "selector": "status-devAlice-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 41,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn3"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_577-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-turn3"
+    },
+    {
+      "selector": "status-devAlice-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-outcome"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "leave-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_1837-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-B"
+    },
+    {
+      "selector": "status-ComPlayer_6121-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-B"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-B"
+    },
+    {
+      "selector": "status-ComPlayer_1837-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_6121-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-turn3"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_1837-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_1837-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 26,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_6121-tm-0",
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-outcome"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "timeout-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_1770-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-away"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-away"
+    },
+    {
+      "selector": "status-ComPlayer_1770-tm-0",
+      "label": "Timer: Bad Trip. Scatta tra 2 fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-late-rejoin"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-late-rejoin"
+    },
+    {
+      "selector": "status-ComPlayer_1770-tm-0",
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-turn3"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 41,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-turn3"
+    },
+    {
+      "selector": "status-devAlice-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 41,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-turn3"
+    },
+    {
+      "selector": "status-ComPlayer_1770-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-outcome"
+    },
+    {
+      "selector": "status-devAlice-st-0",
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "ffa-844x390.json",
+      "screen": "drop-outcome"
+    },
+    {
+      "selector": "status-ComPlayer_6588-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-1366x768.json",
+      "screen": "resize-duel-other"
+    },
+    {
+      "selector": "status-ComPlayer_8033-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-1366x768.json",
+      "screen": "resize-ffa-other"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-1366x768.json",
+      "screen": "resize-ffa-other"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-844x390-confirmation"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-844x390-confirmation"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-844x390-confirmation"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-844x390-confirmation"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-844x390-confirmation"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-before-target"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-2-after-target"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-before-target"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-before-target"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-after-target"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-discard-card-3-after-target"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-summary"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-summary"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-summary"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-summary"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-summary"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T0-closeup"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2-summary"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2-summary"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2-summary"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2-summary"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2-summary"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-closeup"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T1-closeup"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2"
+    },
+    {
+      "selector": "status-ComPlayer_7396-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2"
+    },
+    {
+      "selector": "status-ComPlayer_6023-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2"
+    },
+    {
+      "selector": "status-ComPlayer_9417-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2"
+    },
+    {
+      "selector": "status-ComPlayer_6556-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "ffa-T2"
+    },
+    {
+      "selector": "status-ComPlayer_6615-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "resize-duel-back"
+    },
+    {
+      "selector": "status-ComPlayer_5559-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "resize-ffa-back"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "layout-844x390.json",
+      "screen": "resize-ffa-back"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "01-clock"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "01-clock"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "02-timeout-win"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "02-timeout-win"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "03-timeout-loss"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "03-timeout-loss"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "05-away"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "06-late-rejoin"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "07-leave"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "07-leave"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "13-vscom-late"
+    },
+    {
+      "selector": "status-ComPlayer_9473-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "lifecycle-844x390.json",
+      "screen": "13-vscom-late"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "modes-844x390.json",
+      "screen": "03-table"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "modes-844x390.json",
+      "screen": "04-outcome"
+    },
+    {
+      "selector": "status-devAlice-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "profile-844x390.json",
+      "screen": "03-tools-1v1"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "profile-844x390.json",
+      "screen": "03-tools-1v1"
+    },
+    {
+      "selector": "status-devBob-imm-TOXICITY",
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 37,
+      "height": 22,
+      "disabled": false,
+      "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route",
+      "source": "profile-844x390.json",
+      "screen": "04-tools-ffa"
+    }
+  ],
+  "exceptionCases": [
+    {
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 26,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 31,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 41,
+      "height": 27,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+      "width": 46,
+      "height": 27,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 24,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 17,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 24,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 26,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 31,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 37,
+      "height": 22,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 41,
+      "height": 27,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+      "width": 46,
+      "height": 27,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Stato positivo: MADE OF STONE. Tagli (CUT) ricevuti ×0,5. dura ancora 2 turni dopo questo.",
+      "width": 31,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Timer: Bad Trip. Scatta a fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Timer: Bad Trip. Scatta tra 2 fine turno: ridà l’immunità alla tossicità.",
+      "width": 31,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Timer: Marvelous Cocktail. Scatta a fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 17,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    },
+    {
+      "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+      "width": 24,
+      "height": 18,
+      "route": "character inspection, inspect-chip; VerifyLayout checks the route"
+    }
+  ]
+}
