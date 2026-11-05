@@ -137,17 +137,18 @@ lunghe. Il ragionamento va provato: SB-7 misura come invariante **zero turni sen
 ## Personaggi
 
 Concept approvati in linea di massima. Mara, Pino e Gigi vengono dalla [bozza esterna](#bozza-esterna-di-carte), al posto dei segnaposto il Lesto,
-Sor Boccione e Zi' Arraffa, che restano nomi di riserva; il Malalingua e Sant'Incasso sono ancora segnaposto. **I ruoli sono fermi, il resto si rifinisce in SB-9.**
+Sor Boccione e Zi' Arraffa, che restano nomi di riserva. **Schede approvate in SB-9** il 6 novembre 2026, con nomi provvisori, valori iniziali da misurare
+in SB-10 e triangolo di ciascuno: [schede dei personaggi](design/set-base/schede-personaggi.md).
 
 | Slot | Personaggio | Stile di gioco | Rischio |
 |---|---|---|---|
 | Base | **Spazienzio** (esiste) | Accumula V e tira colpi enormi | Lento, pochi oggetti |
 | Base | **Mara Contromano** | Rider: A, priorità alta, tanti piccoli CUT, consuma gli oggetti prima che glieli tolgano | Poca salute; pagare A le toglie la precedenza |
 | Avanzato | **Tossico del Serraglio** (esiste; lascia gli starter base) | T come carburante e veleno | Gestione complessa delle immunità |
-| Avanzato | **Pino l'Ultimo Giro** | Frequentatore del bancone: L da spendere, bottiglie, equip | Basso A; se L gli resta periodica ([Q10](#decisioni-ancora-aperte)) perde A a ogni fine turno |
+| Avanzato | **Pino l'Ultimo Giro** | Frequentatore del bancone: L da spendere, bottiglie, equip | Basso A; senza immunità a L ([D28](#decisioni-del-proprietario)) perde A a ogni fine turno |
 | Avanzato | **Gigi del Carro Attrezzi** | Meccanico: tanti oggetti ed equip, ruba e smonta quelli altrui, costruisce V con piccoli colpi | Debole se il tavolo è vuoto; distruzione da tenere a bada |
-| Booster | **Il Malalingua** | Contromosse e letture dell'avversario | Se legge male, spreca il turno |
-| Booster | **Sant'Incasso** | **Usa la salute come risorsa:** paga le mosse con la propria HEALTH, più riduzioni del danno e contrattacchi | Muore se esagera; lento a chiudere la partita se si limita a incassare |
+| Booster | **Cesira la Malalingua** (provvisorio) | La portinaia che sa tutto: contromosse e letture dell'avversario, pagate in A | Se legge male, spreca il turno |
+| Booster | **Rocco «Sant'Incasso»** (provvisorio) | Ex pugile delle sagre. **Usa la salute come risorsa:** paga le mosse con la propria HEALTH, più riduzioni del danno e contrattacchi | Muore se esagera; lento a chiudere la partita se si limita a incassare |
 
 Gli starter base devono mostrare le meccaniche di base con contrasto: Spazienzio con V e HIT, Mara con A e CUT.
 Il Tossico passa agli avanzati perché immunità, BadTrip, ToxicBloodDrain e LethalHeroinDose non insegnano le basi.
@@ -206,7 +207,7 @@ Copre circa 31 degli slot nuovi. **Copertura massima**, sommando carte attuali e
 
 - **70 carte, cinque personaggi, nessun limite di copie, nessuna esclusività delle bound, starter di Bruiser e Junkie invariati, regolamento 1.5:** superati da D1, D2, D6, D7 e D14.
 - **«Smontiamo tutto» come bound:** bersaglia un oggetto e viola il [vincolo sulle bound](#nessun-giocatore-senza-mosse). L'idea può vivere come azione regolare.
-- **Immunità di Pino all'effetto periodico di L:** contrasta con l'identità di L che decade. Resta aperta in Q10.
+- **Immunità di Pino all'effetto periodico di L:** contrasta con l'identità di L che decade. Esclusa da D28; la variante si prova solo nel playground (SB-14).
 
 ## Struttura per set ed espansioni
 
@@ -409,6 +410,10 @@ illustrazione**. Serve a tutte le prove umane, con un controllo end-to-end via C
 **Rischi.** Il client presume dati del catalogo come ruolo, danno e immagini: i campi mancanti devono avere un ripiego.
 
 ### SB-9 — Schede dei personaggi
+
+**Chiuso il 6 novembre 2026** con l'approvazione del proprietario a tutte le raccomandazioni: [schede dei personaggi](design/set-base/schede-personaggi.md).
+Nomi provvisori Cesira la Malalingua e Rocco «Sant'Incasso»; Spazienzio invariato, Tossico con capacità 2, Mara e Pino con V 0; Q10 e Q6 decise (D28, D29).
+Valori iniziali e indicazioni sulle bound sono ipotesi da misurare in SB-10. [Rapporto](reports/set-base/sb-9-report.md).
 
 **Perimetro.** Scheda di ciascuno dei sette, attingendo alla [bozza esterna](#bozza-esterna-di-carte): nome, chi è, come picchia, risorsa, rischio, valori iniziali (salute e capacità comprese), versione propria del triangolo
 attacco-difesa-contromossa. Revisione dei concept col proprietario, **senza consumare le cartucce creative**: quanto eccede il perimetro va all'elenco per le
@@ -619,7 +624,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Tutte del 2 novembre 2026.
+D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 
 | ID | Domanda | Decisione |
 |---|---|---|
@@ -650,6 +655,8 @@ Tutte del 2 novembre 2026.
 | D25 | Interpretazioni del piano | **Confermate:** due bound diverse, nessun doppione; lavori a client web completato; segnaposto per le carte nuove fino alle illustrazioni |
 | D26 | Bozza esterna | **Conservata come serbatoio di idee**, da raccordare col piano. Mara, Pino e Gigi prendono il posto dei segnaposto |
 | D27 | Personaggio che usa la salute | **Nel Set Base:** Sant'Incasso paga con la propria HEALTH. Non è una meccanica nuova: `Resource.HEALTH` esiste, `Move` controlla e paga i costi per qualsiasi risorsa, e danni a sé e perdite di salute ci sono già. Da aggiungere alle convenzioni dei costi di scheda e controlli |
+| D28 | Pino immune all'effetto periodico di L (era Q10) | 6 novembre 2026, SB-9: **no.** L resta una risorsa da spendere subito, diversa da V; la variante immune si prova solo nel playground in SB-14 |
+| D29 | Last resort proprie (era Q6) | 6 novembre 2026, SB-9: **Pino, Tossico e Sant'Incasso**; Struggle per gli altri quattro. Gratuite, sempre giocabili e fatte per chiudere la partita; SB-10 le colloca nella griglia |
 
 ## Decisioni ancora aperte
 
@@ -662,10 +669,8 @@ Con la proposta; nessuna blocca i primi blocchi.
 | Q3 | Anticipare il bot sulle carte attuali | Sì, se si dimostra utile dopo SB-4. Dato di SB-4: con le carte attuali il Junkie euristico schiaccia Bruiser, da decidere prima di anticipare | Dopo SB-4 |
 | Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 115 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
-| Q6 | Quali personaggi hanno una last resort propria | I tre più adatti, scelti dalle schede | SB-10 |
 | Q7 | Formato definitivo | 20 carte e 2 copie, salvo dati contrari | SB-23 |
 | Q8 | Report del server in «Ultimo turno» | Resta com'è: i fatti in italiano vengono prima, il testo inglese è secondario (D7 del piano C3). Da riconsiderare se la prova umana lo chiede | SB-25 |
-| Q10 | Pino immune all'effetto periodico di L, come nella bozza? | **No come base di partenza:** senza immunità L resta una risorsa da spendere subito, con un'identità diversa da V. Si provano entrambe nel playground | SB-9, SB-14 |
 
 ## Cosa non è in questo piano
 
@@ -681,6 +686,16 @@ Con la proposta; nessuna blocca i primi blocchi.
 Si conservano qui le idee che escono dal perimetro del Set Base.
 
 - Bound aggiuntive per i personaggi del Set Base.
+- Da SB-9 ([schede dei personaggi](design/set-base/schede-personaggi.md#idee-fuori-perimetro-per-le-espansioni)):
+  - **Più ferito, più forte:** danni che crescono con la salute persa (Sant'Incasso).
+  - **Restituire il danno** all'autore, in parte (Sant'Incasso).
+  - **Vedere la mano o il mazzo dell'avversario,** anche una sola carta: cambia R08 (Malalingua).
+  - **Scarto forzato** di una carta dell'avversario, o una sua carta bloccata (Malalingua).
+  - **Scommesse:** indovinare in anticipo la mossa dell'avversario (Malalingua).
+  - **Schivata vera:** annullare il danno ricevuto invece di ridurlo (Mara).
+  - **Astinenza:** penalità se il Tossico resta senza T.
+  - **Riparare o costruire oggetti** dagli scarti, slot di equip (Gigi).
+  - **Il giro offerto in FFA:** alcol a tutti gli avversari insieme (Pino).
 
 ## Registro degli accordi
 
@@ -699,7 +714,7 @@ Dove finisce ogni idea concordata, per controllo.
 | Niente cartucce sprecate; elenco per le espansioni | [Perimetro creativo](#perimetro-creativo), [Idee per le espansioni](#idee-per-le-espansioni) |
 | Personaggio che usa la salute come risorsa, nel Set Base | [Personaggi](#personaggi), SB-9, SB-18, D27 |
 | Bozza esterna: nomi, starter con nome, valori diversi, candidate, rischi | [Bozza esterna](#bozza-esterna-di-carte), SB-9, SB-10, SB-19, D26 |
-| Immunità di Pino | Q10, SB-14 |
+| Immunità di Pino | D28, SB-14 |
 | Non creare tutto e poi provare: strati | [Bilanciamento](#bilanciamento-metodo-e-criteri), fasi Carte e Set intero |
 | Giri espliciti, anche sull'intero set | SB-12–SB-23, D21 |
 | 20 carte esatte, 2 copie; 25 e 3 da valutare | [Regole dei mazzi](#regole-dei-mazzi-concordate), SB-1, SB-23 |
