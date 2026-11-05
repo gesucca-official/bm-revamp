@@ -3,6 +3,7 @@
 // touched) and stops it at the end. Waits of 30 s are real. At every turn of a five-seat game the scene
 // is read back and checked with the same geometry functions as the unit tests, on the real views.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
+import {checkTouchControls,requireTouchControls} from './controls-checks.mjs';
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
@@ -59,7 +60,7 @@ async function open(name,touch=false){
  page.on('websocket',ws=>{ws.on('framesent',f=>p.sent.push(...stompFrames(f.payload)));ws.on('framereceived',f=>p.received.push(...stompFrames(f.payload)));});
  p.state=()=>page.evaluate(()=>window.__bm?.state??null);
  p.wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await p.state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`${name}: timeout ${what}`);};
- p.shot=async n=>page.screenshot({path:`${out}/screens/ffa-${n}${tag}.jpg`,type:'jpeg',quality:70});
+ p.shot=async n=>{const c=await checkTouchControls(page,n);if(c)(evidence.touchControls??=[]).push(c);requireTouchControls(c);return page.screenshot({path:`${out}/screens/ffa-${n}${tag}.jpg`,type:'jpeg',quality:70});};
  p.views=(game)=>p.received.filter(f=>f.command==='MESSAGE'&&/\/user\/queue\/game\/[^/]+\/view$/.test(f.headers.destination)).map(f=>JSON.parse(f.body)).filter(v=>!game||v.gameId===game);
  p.lastResume=()=>JSON.parse(p.received.filter(f=>f.command==='MESSAGE'&&f.headers.destination==='/user/queue/session/resume').at(-1).body);
  p.sends=(from=0)=>p.sent.slice(from).filter(f=>f.command==='SEND').map(f=>f.headers.destination);

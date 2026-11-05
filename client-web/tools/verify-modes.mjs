@@ -2,6 +2,7 @@
 // devAlice and devBob in two isolated Edge contexts: presence, leaving the queue, a full 1v1 game,
 // private views, "new game" repeating the mode, and a refused join while a game is resumable.
 // Prerequisites: ./scripts/dev.ps1 -Task Server -SeedAccounts and ./client-web/run.ps1 -Task Serve.
+import {checkTouchControls,requireTouchControls} from './controls-checks.mjs';
 import {chromium} from '@playwright/test';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -25,7 +26,7 @@ async function join(name){
  page.on('websocket',ws=>{ws.on('framesent',f=>{const s=String(f.payload);p.sent.push(s);if(/destination:\/app\/game\/[^/\\\n]+\/move/.test(s))p.moves++;});ws.on('framereceived',f=>p.received.push(...stompFrames(f.payload)));});
  p.state=()=>page.evaluate(()=>window.__bm?.state??null);
  p.wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await p.state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`${name}: timeout ${what}`);};
- p.shot=async n=>page.screenshot({path:`${out}/screens/modes-${n}${tag}.jpg`,type:'jpeg',quality:70});
+ p.shot=async n=>{const c=await checkTouchControls(page,n);if(c)(evidence.touchControls??=[]).push(c);requireTouchControls(c);return page.screenshot({path:`${out}/screens/modes-${n}${tag}.jpg`,type:'jpeg',quality:70});};
  p.ack=dest=>p.received.some(f=>f.command==='MESSAGE'&&f.headers.destination===dest);
  p.count=async()=>Number(await page.getByTestId('presence-count').innerText());
  p.rows=async()=>page.locator('.presence tbody tr td:first-child').allInnerTexts();

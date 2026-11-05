@@ -788,7 +788,7 @@ button.info:hover {
   border: 0;
   box-shadow: none;
   padding: 2px 0;
-  min-height: 32px;
+  min-height: 44px;
   font: bold 14px Arial,sans-serif;
   color: var(--text);
 }
@@ -832,7 +832,7 @@ button.info:hover {
     padding: 4px 12px;
   }
   .presence th button.link {
-    min-height: 36px;
+    min-height: 44px;
   }
 }
 .ffa-queue {
@@ -1554,3 +1554,5 @@ button[aria-selected=true] { box-shadow: inset 0 -3px 0 var(--accent-strong); }
 
 /* C4-5b: public links are controls, not D8 status-chip exceptions. */
 .links a { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; }
+
+.pager select { min-width: 44px; min-height: 44px; font: 14px Arial,sans-serif; color: var(--text); background: var(--bg-panel); border: 2px solid var(--border-panel); border-radius: 4px; }
