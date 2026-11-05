@@ -24,7 +24,13 @@ export async function discardPass(p,shot){
    if(selected.drawn&&(selected.drawn.scale!==1||Math.abs(selected.drawn.y-(H.y+Math.abs(s.order.findIndex(c=>c.key===s.selected)-(s.order.length-1)/2)*3))>1e-6))errors.push(`${label}: bound drawing raised`);}
   samples.push({label,selected:s.selected,target:s.target,discard:s.discard,hand:s.cards.length,hits:s.hits.filter(h=>h.kind==='hand'),handReadout:s.readout.hand.map(({face,...h})=>h)});
  };
- await escape();let start=await p.state();check(start,false,'outside-before');
+ const prompt=async expected=>{
+  const data=await page.evaluate(()=>{const all=[...document.querySelectorAll('[data-testid=discard-invitation]')],e=all[0],r=e?.getBoundingClientRect(),h=document.querySelector('.hint.confirming span[hidden]');return {count:all.length,text:e?.textContent??'',pointerEvents:e?getComputedStyle(e).pointerEvents:null,cy:r?r.top+r.height/2:null,duplicate:!!h&&getComputedStyle(h).display!=='none'};});
+  if(data.count!==Number(expected))errors.push(`discard prompt count ${data.count}, expected ${Number(expected)}`);
+  if(expected){const s=await p.state(),costY=s.layout.hand.y+s.layout.hand.h*.41-1;
+   if(data.pointerEvents!=='none'||Math.abs(data.cy-costY)>1.5||data.duplicate||!data.text.includes('scartare'))errors.push('discard prompt blocks a card, misses the cost row or duplicates the left hint');}
+ };
+ await escape();let start=await p.state();check(start,false,'outside-before');await prompt(false);
  const bounds=start.cards.filter(bound),candidates=start.cards.filter(regular);
  if(!bounds.length||!candidates.length)throw new Error('O26: no bound or discard candidate in real hand');
  let probes=0,nonDiscardableTaps=0;
@@ -39,7 +45,7 @@ export async function discardPass(p,shot){
     await page.locator(`[data-hit="${t.id}"]`).focus();await page.keyboard.press('Enter');await page.waitForTimeout(80);
     // Reproduce the persistent hand focus which caused the owner's failure.
     await page.locator(`[data-hit="${b.key}"]`).focus();await page.waitForTimeout(80);
-    s=await p.state();check(s,true,`${b.name}-after-target`);if(c===candidates[0])await shot(`${b.key}-after-target`);
+    s=await p.state();check(s,true,`${b.name}-after-target`);await prompt(true);if(c===candidates[0])await shot(`${b.key}-after-target`);
    }
    s=await p.state();const h=s.hits.find(h=>h.id===c.key),pt={x:h.x-h.w*.32,y:h.y+h.h*.28};
    // A normal fan overlaps; test its exposed grip, not the hidden right half.
@@ -50,7 +56,7 @@ export async function discardPass(p,shot){
    await page.mouse.move(2,2);await page.waitForTimeout(100);const after=await p.state();
    if(aimed?after.discard!==c.key||after.selected!==b.key:after.selected!==c.key)errors.push(`${b.name}: candidate ${c.key} covered/unreachable (${aimed?'with':'without'} target)`);
    else probes++;
-   check(after,false,`${b.name}-${c.key}-choice-ended`);
+   check(after,false,`${b.name}-${c.key}-choice-ended`);await prompt(false);
   }
   for(const no of start.cards.filter(c=>!regular(c)&&c.key!==b.key)){
    await escape();await choose(b.key);s=await p.state();const self=catalog.get(b.name).class.endsWith('.LittleRage');
@@ -84,6 +90,6 @@ export async function discardPass(p,shot){
   if(rest?.kind!=='hand'||Math.abs(rest.x-x)>1e-6||JSON.stringify(after.order.map(c=>c.key))!==JSON.stringify(order))errors.push(`${c.name}: cancellation did not restore slot/order`);
   check(after,false,`${c.name}-cancelled`);previews.push({name:c.name,keyboardInspection:receipt===c.name,menuInspection:touchReceipt===c.name,restored:rest?.kind==='hand'});
  }
- await escape();check(await p.state(),false,'outside-after-cancel');
+ await escape();check(await p.state(),false,'outside-after-cancel');await prompt(false);
  return {bounds:bounds.map(c=>c.name),candidates:candidates.length,probes,nonDiscardableTaps,previews,samples,errors,commandsBefore:start.commands,commandsAfter:(await p.state()).commands};
 }

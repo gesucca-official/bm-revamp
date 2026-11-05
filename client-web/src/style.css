@@ -1562,3 +1562,51 @@ button[aria-selected=true] { box-shadow: inset 0 -3px 0 var(--accent-strong); }
 
 /* A: same panel fillet as catalog/editor; existing inline confirmations retained. */
 .admin-log { border-color: var(--border-panel); }
+
+/* C4-5b, chosen B: same two target boxes, shared symbols, distinct check/cross shapes. */
+.confirmation button {
+  flex-direction: column;
+  gap: 3px;
+  background: var(--confirm-divider);
+  color: var(--text);
+}
+.confirmation button+button { background: var(--confirm-divider); border-top-color: var(--border-control); }
+.confirmation button:hover:not(:disabled) { background: var(--bg-panel); }
+.confirmation .mark {
+  border: 2px solid var(--bg-panel);
+  border-radius: 6px;
+  color: var(--text-on-dark);
+}
+.confirmation button+button .mark { border-radius: 50%; }
+.confirmation .action-label { font: 700 14px/1 Arial,sans-serif; }
+.confirmation button:disabled:not(.semantic):not(.info):not(.round-link) {
+  background: var(--confirm-divider);
+  color: var(--text);
+  border-style: solid;
+}
+.confirmation button:disabled .mark {
+  border-style: dashed;
+  background: var(--confirm-disabled);
+  color: var(--text-on-dark);
+}
+.hint.confirming span[hidden] { display: none; }
+.discard-invitation {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  margin: 0;
+  padding: 4px 10px;
+  border: 2px solid var(--border-control);
+  border-radius: 6px;
+  background: var(--bg-panel);
+  color: var(--text);
+  font: 700 14px/1.2 Arial,sans-serif;
+  text-align: center;
+  pointer-events: none;
+  z-index: 3;
+}
+@media(max-height:550px) {
+  .confirmation button { gap: 1px; }
+  .confirmation .action-label { font-size: 12px; }
+  .discard-invitation { font-size: 12px; padding: 2px 8px; }
+}
+@media(orientation:portrait) { .discard-invitation { visibility: hidden; } }

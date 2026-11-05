@@ -11,6 +11,7 @@
 // C3-5: the face of every card of the catalog as the table draws it (hand size and the small cards of the round): the nominal damage of the catalog (type and amount, symbols and numbers, no letters), nothing
 // for a card without damage, the priority nowhere on the face (the inspection still gives it), no overlap with the cost chips; the faces of the hand at every turn with the amount resolved on the own V.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
+import {checkTouchControls,requireTouchControls} from './controls-checks.mjs';
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
@@ -68,7 +69,7 @@ async function open(name,opts={}){
  page.on('pageerror',e=>evidence.errors.push(`${name}: ${e}`));
  p.state=()=>page.evaluate(()=>window.__bm?.state??null);
  p.wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await p.state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`${name}: timeout ${what}`);};
- p.shot=async n=>page.screenshot({path:`${out}/screens/layout-${n}${tag}.jpg`,type:'jpeg',quality:70});
+ p.shot=async n=>{const c=await checkTouchControls(page,n);if(c)(evidence.touchControls??=[]).push(c);requireTouchControls(c);return page.screenshot({path:`${out}/screens/layout-${n}${tag}.jpg`,type:'jpeg',quality:70});};
  return p;
 }
 async function login(p){
