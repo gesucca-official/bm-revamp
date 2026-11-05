@@ -37,6 +37,7 @@ Documenti da seguire per lavorare sul progetto nello stato attuale.
 |---|---|
 | [README del monorepo](../README.md) | Struttura, avvio rapido, conservazione delle cronologie |
 | [AGENTS.md](../AGENTS.md), [CONTRIBUTING.md](../CONTRIBUTING.md) | Regole di modifica e **verifiche obbligatorie** (fonte unica dei comandi di verifica) |
+| [Orchestrazione del lavoro](orchestrazione-lavoro.md) | Metodo, non stato: ruoli, prompt per gli esecutori, proposta di modello e sforzo, revisione delle relazioni, insidie delle verifiche, coordinamento |
 | [Guida locale](setup.md) | Installazione, avvio, dati locali, verifiche e candidato I22 |
 | [CLI](cli.md) | Client testuale per scenari applicativi |
 | [Regolamento 1.10](game-rules.md) | Fonte normativa; la copia client è controllata da `scripts/check-rules.py` |

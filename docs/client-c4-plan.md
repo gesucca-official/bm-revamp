@@ -152,6 +152,8 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
 | C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
 
+La colonna «Modello, sforzo» è indicativa: per i blocchi ancora da eseguire la proposta accompagna il prompt e l'esecutore lo sceglie il proprietario ([metodo](orchestrazione-lavoro.md#proposta-di-modello-e-sforzo)).
+
 **Correzioni alla bozza** (confermate dal proprietario, [D14](#decisioni-del-proprietario)):
 
 1. **C4-3 prima di C4-2.** Il font cambia le larghezze su cui si basano `stripPlan`, riga breve e volti: fare la geometria minima
@@ -492,6 +494,8 @@ Regole 1–9 verdi; a sequenza finita ogni plancia e ogni oggetto coincidono con
 **Perimetro.** Nessuna funzione nuova salvo correzioni di blocchi emersi. Giro completo sulla stessa build; regole 1–18 dichiarate una per una; righe P
 aggiornate; inventario riconciliato coi file distribuiti; budget e soglie riassunti; scheda di prova per il proprietario su desktop, con una parte facoltativa su iPhone, sul modello
 della [scheda di C3-7](reports/client-c3/c3-7/prova-scheda.md). Roadmap con «C4 chiusa» solo dopo il suo giudizio. La prova umana C e O19 restano a C5.
+Residui da chiudere qui: il giro grafico sul jar corrente, non rifatto dopo i commit SB-3/SB-4 ([limite accettato a C4-5a-bis](reports/client-c4-report.md#c4-5a-bis)), e la verifica dei termini d'uso
+reali dello strumento di generazione delle immagini, che nell'[inventario](design/client-c4/assets/README.md) risultano non verificati.
 
 **Dipendenze.** Tutti.
 

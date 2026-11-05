@@ -9,3 +9,6 @@ Non aggiornare gli attesi dei test per accettare regressioni non deliberate.
 Verifiche: `./scripts/build.ps1 -Task Test -Offline` e
 `python scripts/check-rules.py`. Il contesto Spring completo ha una verifica
 separata: non confondere test unitari verdi con avvio applicativo riuscito.
+
+Metodo di lavoro fra proprietario, chat di regia ed esecutori:
+`docs/orchestrazione-lavoro.md`. Lo stato del progetto è in `docs/README.md`.
