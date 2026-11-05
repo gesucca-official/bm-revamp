@@ -7,6 +7,7 @@ import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.Timer;
+import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.model.game.status.Status;
 
 import java.nio.charset.StandardCharsets;
@@ -45,15 +46,33 @@ final class SimulationRunner {
 
     private static final class TurnLimit extends RuntimeException { }
 
+    /** Un personaggio e chi lo gioca: senza policy, l'attuale ComPlayer casuale. */
+    static final class Contender {
+        final String character;
+        final BotPolicy policy;
+
+        Contender(String character, BotPolicy policy) {
+            this.character = character;
+            this.policy = policy;
+        }
+    }
+
     SimulationRunner(SimulationCatalog catalog) { this.catalog = catalog; }
 
     Game newGame(long seed, boolean bruiserFirst) throws Exception {
+        return newGame(seed, new Contender(bruiserFirst ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, null),
+                new Contender(bruiserFirst ? SimulationCatalog.JUNKIE : SimulationCatalog.BRUISER, null));
+    }
+
+    Game newGame(long seed, Contender first, Contender second) throws Exception {
         Random source = new Random(seed);
-        Player a = catalog.player(bruiserFirst ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE,
-                "seat-1", new Random(source.nextLong()));
-        Player b = catalog.player(bruiserFirst ? SimulationCatalog.JUNKIE : SimulationCatalog.BRUISER,
-                "seat-2", new Random(source.nextLong()));
+        Player a = catalog.player(first.character, "seat-1", new Random(source.nextLong()), first.policy);
+        Player b = catalog.player(second.character, "seat-2", new Random(source.nextLong()), second.policy);
         return new Game(List.of(a, b), "sim", false);
+    }
+
+    Result run(long seed, Contender first, Contender second) throws Exception {
+        return continueGame(newGame(seed, first, second), seed, false, game -> {});
     }
 
     Result run(long seed, boolean bruiserFirst, boolean trace) throws Exception {

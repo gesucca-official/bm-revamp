@@ -4,6 +4,8 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.LoadableCard;
 import com.gsc.bm.model.game.ComPlayer;
+import com.gsc.bm.model.game.bot.BotPlayer;
+import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.service.factories.CardFactoryService;
 
 import java.io.InputStream;
@@ -99,12 +101,20 @@ final class SimulationCatalog {
     }
 
     ComPlayer player(String binding, String id, Random random) throws Exception {
+        return player(binding, id, random, null);
+    }
+
+    /** Senza policy gioca l'attuale ComPlayer casuale, il metro di SB-4. */
+    ComPlayer player(String binding, String id, Random random, BotPolicy policy) throws Exception {
         String[] fields = special.get(binding);
         if (fields == null || !decks.containsKey(binding))
             throw new IllegalArgumentException("Starter assente: " + binding);
         List<Card> deck = new ArrayList<>();
         for (String name : decks.get(binding)) deck.add(card(name));
-        return new ComPlayer(id, (Character) instantiate(binding), card(fields[0]),
-                List.of(card(fields[1]), card(fields[2])), card(fields[3]), deck, random);
+        Character character = (Character) instantiate(binding);
+        List<Card> bound = List.of(card(fields[1]), card(fields[2]));
+        if (policy != null)
+            return new BotPlayer(id, character, card(fields[0]), bound, card(fields[3]), deck, random, policy);
+        return new ComPlayer(id, character, card(fields[0]), bound, card(fields[3]), deck, random);
     }
 }
