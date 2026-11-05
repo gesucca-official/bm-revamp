@@ -23,7 +23,7 @@ public class BeggingMoney extends AbstractCard {
     @Override
     public void applyOtherUnfathomableLogic(Game g, Move m) {
         List<Card> items = new ArrayList<>(g.getTarget(m).getCharacter().getItems());
-        Collections.shuffle(items);
+        Collections.shuffle(items, g.getSelf(m).random());
         if (!items.isEmpty()) {
             g.getSelf(m).getCharacter().getItems().add(items.get(0));
             message = "You begged and received " + items.get(0);

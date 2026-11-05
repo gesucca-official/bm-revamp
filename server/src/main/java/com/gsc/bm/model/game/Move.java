@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class Move implements Serializable {
     @Setter
     private boolean isVoid;
 
-    private final Map<Card.CardTarget, List<String>> moveReport = new HashMap<>();
+    private final Map<Card.CardTarget, List<String>> moveReport = new EnumMap<>(Card.CardTarget.class);
 
     @JsonCreator
     public Move(String playedCardName,

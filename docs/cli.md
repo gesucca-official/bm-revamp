@@ -60,6 +60,10 @@ Per salvare stdout usare una destinazione nuova, per esempio `... scripts/bm-cli
 
 Prove I19a: `MatchArchiveCliTest.cliQuickOutcomeExportAndPostCommitWriteFailure` invoca `scripts/cli-match-export-test.cjs` su server reale e SQLite temporaneo, una volta con storage sano e una con errore di scrittura controllato dopo commit. Verifica hash/ordine, esito, report, export dopo leave e accesso estraneo negato. Il comando è `./scripts/build.ps1 -Task TestServerContext -Offline`. Contratto, schema e limiti: [match-archive.md](match-archive.md).
 
+## Controllo del runner (SB-3)
+
+`scripts/cli-sim-control.cjs PARTITE CARTELLA` gioca partite `quick/1vCom` con scelte casuali legali e ne salva gli export, che `SimulationControlTest` rigioca nel motore. Comandi ed esiti nel [rapporto SB-3](reports/set-base/sb-3-report.md#confronto-col-server-reale).
+
 ## Open 1vCom (I16)
 
 Dopo `save` e la conferma in `profile`, `{"command":"join","mode":"open/1vCom","deckId":"ID"}` seleziona il mazzo del solo account connesso. Attendere `/user/queue/game/open/1vCom/ready` per il gameId; poi `watch`, `view`, `move`, `export` dopo l'esito e `leave` usano gli stessi comandi della quick. Il runtime usa una copia indipendente del record salvato all'avvio.

@@ -14,9 +14,14 @@ public class ComPlayer extends Player {
         super("ComPlayer_" + (int) (Math.random() * 10000), character, basicActionCard, characterBoundCards, lastResortCard, deck);
     }
 
+    public ComPlayer(String id, Character character, Card basicActionCard, List<Card> characterBoundCards,
+                     Card lastResortCard, List<Card> deck, Random rng) {
+        super(id, character, basicActionCard, characterBoundCards, lastResortCard, deck, rng);
+    }
+
     public Move chooseMove(Game game) {
         List<Card> availableCards = new ArrayList<>(getCardsInHand());
-        Collections.shuffle(availableCards);
+        Collections.shuffle(availableCards, random());
         game.getLoggedTurnEvents().add(this.getPlayerId() + " is choosing a move among these cards: "
                 + availableCards.stream().map(Card::getName).collect(Collectors.joining(",")));
 
@@ -49,12 +54,12 @@ public class ComPlayer extends Player {
                 .map(Player::getPlayerId)
                 .collect(Collectors.toList());
 
-        Collections.shuffle(availableTargets);
+        Collections.shuffle(availableTargets, random());
         return availableTargets.size() > 0 ? availableTargets.get(0) : "INVALID_TARGET_TEST_ANOTHER_ONE";
     }
 
     private Move craftMoveByIndex(Game game, List<Card> cards, int index, String target, String gameId) {
-        Map<Move.AdditionalAction, String> choices = new HashMap<>();
+        Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
         if (cards.get(index).isCharacterBound())
             choices.put(Move.AdditionalAction.DISCARD_ONE, chooseDiscard(new ArrayList<>(cards)));
         if (cards.get(index).getCanTarget().contains(Card.CardTarget.NEAR_ITEM))
@@ -78,18 +83,18 @@ public class ComPlayer extends Player {
                 .flatMap(player -> player.getCharacter().getItems().stream())
                 .map(Card::getName)
                 .collect(Collectors.toList());
-        Collections.shuffle(items);
+        Collections.shuffle(items, random());
         return items.size() > 0 ? items.get(0) : null;
     }
 
     private String choseNearItem() {
         List<Card> items = new ArrayList<>(getCharacter().getItems());
-        Collections.shuffle(items);
+        Collections.shuffle(items, random());
         return items.size() > 0 ? items.get(0).getName() : null;
     }
 
     private String chooseDiscard(List<Card> cards) {
-        Collections.shuffle(cards); // this was shuffling the original card list on which I was iterating on lol
+        Collections.shuffle(cards, random()); // this was shuffling the original card list on which I was iterating on lol
         for (Card c : cards)
             if (!c.isCharacterBound() && !c.isBasicAction() && !c.isLastResort())
                 return c.getName();

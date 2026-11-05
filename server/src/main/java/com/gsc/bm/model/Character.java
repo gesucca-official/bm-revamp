@@ -24,7 +24,7 @@ public abstract class Character implements Serializable {
     private final Map<Resource, Integer> resources = new EnumMap<>(Resource.class);
     private final List<Status> statuses = new ArrayList<>();
     private final Set<Resource> immunities = new HashSet<>();
-    private final Set<Timer> timers = new HashSet<>();
+    private final Set<Timer> timers = new LinkedHashSet<>();
 
     public Character(int hp, int speed, int itemsSize) {
         this.bindingName = this.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");

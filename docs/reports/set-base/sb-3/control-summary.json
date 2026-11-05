@@ -1,0 +1,12 @@
+{
+  "games" : 200,
+  "roundsCompared" : 2695,
+  "beggingAmbiguousGames" : 0,
+  "divergences" : 0,
+  "mirrorGames" : 98,
+  "mixedGames" : 102,
+  "mixedBruiserWins" : 30,
+  "mixedJunkieWins" : 64,
+  "mixedDraws" : 8,
+  "mixedTurnsMean" : 13.058823529411764
+}

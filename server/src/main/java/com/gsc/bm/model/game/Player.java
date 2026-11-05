@@ -6,6 +6,7 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import lombok.Getter;
+import lombok.AccessLevel;
 
 import java.io.Serializable;
 import java.util.*;
@@ -18,6 +19,10 @@ public class Player implements Serializable {
     private final String playerId;
     private final Character character;
 
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private final Random rng;
+
     private final List<Card> cardsInHand = new ArrayList<>();
     private final Stack<Card> deck = new Stack<>();
 
@@ -29,6 +34,13 @@ public class Player implements Serializable {
     public Player(String id, Character character,
                   Card basicActionCard, List<Card> characterBoundCards, Card lastResortCard,
                   List<Card> deck) {
+        this(id, character, basicActionCard, characterBoundCards, lastResortCard, deck, new Random());
+    }
+
+    public Player(String id, Character character,
+                  Card basicActionCard, List<Card> characterBoundCards, Card lastResortCard,
+                  List<Card> deck, Random rng) {
+        this.rng = Objects.requireNonNull(rng);
         this.playerId = id;
         this.character = character;
 
@@ -39,11 +51,16 @@ public class Player implements Serializable {
                 this.cardsInHand.stream().map(Card::getBindingName).collect(java.util.stream.Collectors.toList())));
 
         this.deck.addAll(deck);
-        Collections.shuffle(this.deck);
+        Collections.shuffle(this.deck, rng);
         List<String> drawOrder = this.deck.stream().map(Card::getBindingName).collect(java.util.stream.Collectors.toList());
         Collections.reverse(drawOrder);
         this.initialDeckDrawOrder = Collections.unmodifiableList(drawOrder);
         drawCards(CARDS_IN_HAND - cardsInHand.size());
+    }
+
+    @JsonIgnore
+    public Random random() {
+        return rng;
     }
 
     @JsonProperty
