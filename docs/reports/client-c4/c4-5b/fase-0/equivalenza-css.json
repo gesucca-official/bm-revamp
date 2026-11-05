@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-05",
+  "parser": "postcss 8.5.32",
+  "minifier": "lightningcss 1.33.0",
+  "astEqual": true,
+  "minifiedEqual": true,
+  "counts": {
+    "rule": 273,
+    "decl": 886,
+    "atrule": 14,
+    "comment": 9
+  },
+  "beforeBytes": 20842,
+  "afterBytes": 25768,
+  "minifiedBytes": 19359,
+  "minifiedSha256": "b5f70d822f325eea1998c9668984c34128b1235f06cc8e2424bb73734aa3b81d",
+  "scope": "Only whitespace stored in PostCSS raws; selectors, at-rule parameters, declaration values, importance, comments and node order identical."
+}

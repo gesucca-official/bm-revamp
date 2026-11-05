@@ -716,3 +716,21 @@ Le catture dopo sono [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-dopo-
 [Verifiche repository separate](client-c4/c4-5a-bis/repository.json): **Test offline verde** (anche 36 test client-debug), **check-rules.py verde**, **TestServerContext offline verde, 373/373**. **verify-match-manifests.py rosso**: riga 53 richiede ancora rulesVersion 1.6, mentre gli export correnti usano 1.10; già registrato in C4-5a. Non modificati audit, regole, server, protocollo, catalogo o manifest tracciati per ottenere il verde.
 
 **Non verificato:** iPhone fisico e Safari; nessuna prova su PC li sostituisce. Il giudizio visivo finale su O26 e O27 è stato espresso dal proprietario il 5 novembre 2026 dopo una partita vera: «ho giocato una partita vera e approvo quanto abbiamo fatto»; blocco approvato. Il nuovo giro grafico sul jar SB-3/SB-4 corrente non è stato svolto, come esplicitamente accettato alla chiusura.
+
+
+## C4-5b
+
+5 novembre 2026. **Fase 0 conclusa; Fase A in preparazione. Fase B non autorizzata prima della scelta visiva.** Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
+
+### Fase 0 — Riformattazione del CSS
+
+Preliminare: stato Git pulito in `client-web/` e `docs/reports/`; approvazione C4-5a-bis registrata separatamente in `9df4bd5`.
+`style.css` passa da 156 a 1460 righe: cambiano solo gli spazi conservati nei campi `raws` del parser PostCSS 8.5.32. Script e copia precedente fuori dal repository, in TEMP.
+
+[Prova meccanica](client-c4/c4-5b/fase-0/equivalenza-css.json): alberi analizzati identici dopo aver escluso soltanto posizione e spazi di formattazione; **273 regole, 886 dichiarazioni, 14 direttive, 9 commenti**, stesso ordine, selettori, parametri, valori e `!important`. Anche la minificazione con Lightning CSS 1.33.0 è identica byte per byte: 19.359 B, SHA-256 `b5f70d822f325eea1998c9668984c34128b1235f06cc8e2424bb73734aa3b81d`.
+
+`VerifyAll -Only 'test,build,size'`, prima e dopo, ricostruisce il jar; **236/236 unità verdi**, Build e Size verdi. [Prima](client-c4/c4-5b/fase-0/prima-run-summary.json), [dopo](client-c4/c4-5b/fase-0/dopo-run-summary.json): gli stessi **21 file distribuiti**, impronta `6fd49130507af819`. [Size prima](client-c4/c4-5b/fase-0/prima-size.json) e [dopo](client-c4/c4-5b/fase-0/dopo-size.json): CSS 19.411 B / 4.889 B gzip; JS gzip 337.939 B; totale gzip 1.668.915 B; texture 27.729.048 B, sotto 32 MiB. Nessuna crescita del CSS distribuito.
+
+Un primo tentativo si era fermato prima dei test perché Windows PowerShell ereditava un percorso moduli incompatibile con `Get-FileHash`; ripetuto con `PSModulePath` di Windows PowerShell. Nessun verificatore modificato, nessuna soglia o atteso cambiati. Il contesto Spring completo resta una verifica separata.
+
+Verifiche obbligatorie di Fase 0: `./scripts/build.ps1 -Task Test -Offline` verde (339 test server, 3 saltati, nessun errore; 36/36 client-debug); `python scripts/check-rules.py` verde. Non è una prova di avvio del contesto Spring completo.
