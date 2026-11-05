@@ -2,10 +2,11 @@
 
 2 novembre 2026. Regolamento **1.10**. **Solo piano:** nessuna modifica a regole, carte,
 server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
-documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro parte **dopo il
-completamento del client web** ([C3-7, C4 e C5](client-roadmap.md)), su istruzione del
-proprietario, **un blocco alla volta**. Stato corrente nell'[indice della
-documentazione](README.md#stato-corrente).
+documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
+proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
+nell'ordine SB-9 → SB-6a → SB-7 → SB-10 ([D30](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
+completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
+nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
 [allegato](rules-catalog.json), [appunti sul set](../IDEAS.md), [CLI](cli.md),
@@ -271,9 +272,10 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | Strumenti | SB-3 | Runner senza server e seme | — |
 | | SB-4 | Vista limitata e bot euristici | SB-3 |
 | | SB-5 | Prova del formato dati | SB-3 |
-| | SB-6 | Playground e mini-espansione di prova | SB-2, SB-5 |
-| | SB-7 | Banco di misura e invarianti | SB-4, SB-6 |
-| | SB-8 | Bozza giocabile da umani | SB-6 |
+| | SB-6a | Nucleo del playground | SB-5 |
+| | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a |
+| | SB-7 | Banco di misura e invarianti | SB-4, SB-6a |
+| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b |
 | Progetto | SB-9 | Schede dei personaggi | — |
 | | SB-10 | Griglia degli slot e listino di potenza | SB-7, SB-9 |
 | Carte | SB-11 | Bozza degli starter base | SB-10 |
@@ -300,7 +302,9 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-32 | Illustrazioni del set | SB-28, SB-31 |
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |
 
-SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. SB-30 può essere anticipato per le carte attuali, se il bot si
+SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
+corrente è SB-9 → SB-6a → SB-7 → SB-10, senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
+prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
 dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -377,6 +381,11 @@ parametri. Si convertono in prova alcune carte per tipo.
 **Rischi.** Un linguaggio per gli effetti troppo ricco: deve coprire le meccaniche di base, non anticipare le espansioni.
 
 ### SB-6 — Playground e mini-espansione di prova
+
+Diviso da [D30](#decisioni-del-proprietario) in due blocchi. **SB-6a, nucleo del playground,** anticipato e senza SB-2: bozza in file con carte a
+dati, carte Java parametriche, personaggi, mazzi e parametri del formato, validazione al caricamento, identità con il set di oggi.
+**SB-6b, più set e mini-espansione,** dopo SB-2 e SB-6a: caricamento da più set contemporaneamente, campi set e rarità, mini-espansione di prova.
+Il perimetro che segue vale per i due blocchi insieme.
 
 **Perimetro.** Una **bozza di set** in file, caricata dal runner, in cui si cambia ciò che si vuole: numeri, carte, personaggi, starter e **parametri del
 formato** (20 o 25 carte, 2 o 3 copie). Da più set contemporaneamente. Nessun legame col regolamento. Una **mini-espansione fittizia di poche carte**,
@@ -657,6 +666,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D27 | Personaggio che usa la salute | **Nel Set Base:** Sant'Incasso paga con la propria HEALTH. Non è una meccanica nuova: `Resource.HEALTH` esiste, `Move` controlla e paga i costi per qualsiasi risorsa, e danni a sé e perdite di salute ci sono già. Da aggiungere alle convenzioni dei costi di scheda e controlli |
 | D28 | Pino immune all'effetto periodico di L (era Q10) | 6 novembre 2026, SB-9: **no.** L resta una risorsa da spendere subito, diversa da V; la variante immune si prova solo nel playground in SB-14 |
 | D29 | Last resort proprie (era Q6) | 6 novembre 2026, SB-9: **Pino, Tossico e Sant'Incasso**; Struggle per gli altri quattro. Gratuite, sempre giocabili e fatte per chiudere la partita; SB-10 le colloca nella griglia |
+| D30 | Ordine dei blocchi senza aspettare il client | 6 novembre 2026, con le parole del proprietario: «sono d'accordo con la tua idea per arrivare a progettare le carte il prima possibile senza aspettare la fine del lavoro sul client». **SB-6 si divide** in SB-6a (nucleo, anticipato, senza dipendere da SB-2) e SB-6b (più set e mini-espansione, dipende da SB-2 e SB-6a). **Ordine: SB-9 → SB-6a → SB-7 → SB-10.** SB-7 dipende da SB-4 e SB-6a; SB-8 da SB-6a e SB-6b. SB-1, SB-2 e SB-6b restano legati al client (l'editor), ma vanno chiusi prima di SB-8. Precisa D22 |
 
 ## Decisioni ancora aperte
 
@@ -726,9 +736,9 @@ Dove finisce ogni idea concordata, per controllo.
 | Triangolo attacco, difesa, contromossa | [Letture del regolamento](#letture-del-regolamento-che-guidano-il-progetto), SB-9 |
 | Bot che sa giocare, condiviso; casuale come metro e livello facile; più stili; solo informazioni lecite | SB-4, SB-30 |
 | Runner diretto, seme, CLI per il controllo, client per le persone | [Strumenti](#bilanciamento-metodo-e-criteri), SB-3, SB-8 |
-| Playground in cui cambiare tutto | SB-5, SB-6, D12 |
+| Playground in cui cambiare tutto | SB-5, SB-6a, SB-6b, D12 |
 | Regole generali e documenti per set; precedenza; fonte unica | [Struttura](#struttura-per-set-ed-espansioni), SB-2, SB-26 |
-| Espansioni predisposte; mini-espansione di prova | [Struttura](#struttura-per-set-ed-espansioni), SB-6 |
+| Espansioni predisposte; mini-espansione di prova | [Struttura](#struttura-per-set-ed-espansioni), SB-6b |
 | 1v1 di riferimento, FFA come controllo | D13, SB-20, SB-22 |
 | Matchup degli starter; strategia da scoprire più forte; nessun dominio | [Criteri](#bilanciamento-metodo-e-criteri), SB-20, SB-21 |
 | Carte attuali riprogettabili, flavour conservato | [Perimetro creativo](#perimetro-creativo), SB-10, SB-24 |
@@ -739,4 +749,4 @@ Dove finisce ogni idea concordata, per controllo.
 | Economia fuori dal piano | [Cosa non è in questo piano](#cosa-non-è-in-questo-piano), D10 |
 | Testi senza formule e simboli letterali, due testi per carta | [Struttura](#struttura-per-set-ed-espansioni), SB-25, D23 |
 | Illustrazioni generate a carte finalizzate, con stile, campione e provenienza | SB-32, D24 |
-| Inizio a client web completato | Testa del piano, D22 |
+| Inizio a client web completato; strumenti e progetto anticipati | Testa del piano, D22, D30 |
