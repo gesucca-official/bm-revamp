@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-05T16:16:33.412991+00:00",
+  "initialProblems": [
+    "duel-1366x768 O26: PERMESSO SCUSA ORA SMETTI : preview keyboard inspection missing",
+    "duel-1366x768 O26: PERMESSO SCUSA ORA SMETTI : preview menu inspection missing"
+  ],
+  "initialPageErrors": [],
+  "cause": "BadEducation GUI name ends with a space; innerText on the receipt trims it.",
+  "fix": "Read h2.textContent and compare the full unmodified GUI name exactly; no name, threshold or expected value changed.",
+  "verifierSha256": "b1599f5758a90cc49ef2a0659862590e4d04df4079671060e3ade792cfa0d6fb",
+  "deterministicRealCase": [
+    {
+      "name": "PERMESSO SCUSA ORA SMETTI ",
+      "keyboardInspection": true,
+      "menuInspection": true,
+      "restored": true
+    }
+  ],
+  "clientDistBeforeAndAfterFix": "6fd49130507af819",
+  "finalLayoutEvidence": "ufficiale/run-summary.json",
+  "newServerLimit": {
+    "ownerDecision": "Chiudi con le verifiche raccolte e dichiara il limite",
+    "graphicalBase": "f6e69fd + O27 client changes",
+    "currentContextBase": "af6e8b2",
+    "newJarGraphicalRun": "Not performed: owner explicitly accepted this limit after repeated external Maven activity."
+  }
+}

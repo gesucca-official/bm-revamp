@@ -443,7 +443,7 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 
 ## Scala e spazio del tavolo (C3-L)
 
-**C4-5a-bis in corso (5 novembre 2026):** O26 separa lo stato di scelta dello scarto nel modello e la presentazione pura. Per decisione del proprietario, ogni carta già posata in anteprima lascia vuoto il suo posto nella mano e vi torna con ×; ordine e vista restano integri. Le non scartabili sono attenuate e indicate in testo solo finché manca lo scarto. Ispezione della carta posata con I/Invio o menu → «Dettagli carta giocata»; conferma C4-2 invariata. 234 test e percorso reale aggiunto a VerifyLayout verdi in duello e FFA, anche a 750×292. O27 è alla proposta, prima della scelta e del codice finale. [Rapporto](../docs/reports/client-c4-report.md#c4-5a-bis).
+**C4-5a-bis fatto, in attesa del giudizio del proprietario (5 novembre 2026):** O26 separa lo stato di scelta dello scarto nel modello e la presentazione pura. Per decisione del proprietario, ogni carta già posata in anteprima lascia vuoto il suo posto nella mano e vi torna con ×; ordine e vista restano integri. Le non scartabili sono attenuate e indicate in testo solo finché manca lo scarto. Ispezione della carta posata con I/Invio o menu → «Dettagli carta giocata»; conferma C4-2 invariata. 234 test e percorso reale aggiunto a VerifyLayout verdi in duello e FFA, anche a 750×292. O27: scelta A implementata nella funzione pura ownItemRow, passo pieno prima, ripiego 0,75 poi riga sopra; nessuno spostamento del posacenere. 236 test verdi sulla matrice completa; verifiche ufficiali verdi sul jar pre-SB-3/SB-4, 750×292 con rossi preesistenti invariati. Contesto corrente verde (402 test, 3 skip); il proprietario ha accettato di chiudere senza un nuovo giro grafico sul jar corrente SB-3/SB-4. Il passo pieno non richiede K7; il ripiego sovrapposto conserva il primo tocco per alzare l’oggetto. Il [confronto precedente](../docs/reports/client-c4/c4-5a-bis/proposta-o27/README.md) non è una cattura della build finale. [Rapporto](../docs/reports/client-c4-report.md#c4-5a-bis).
 
 Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
 ([rapporto C3](../docs/reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)). Solo geometria: sfondo,
@@ -473,7 +473,7 @@ cornici, simboli e texture restano a C4.
 - **Mazzo e scarti propri (`piles`), piccoli accanto al tuo posto:** il mazzo con il conteggio della vista, la
   pila degli scarti con l'illustrazione dell'ultima carta che vi è andata (`discardTop`, R02: regolare o ultima
   risorsa dopo l'uso anche se annullata, la carta scartata da una bound non annullata; basic e bound restano in
-  mano). Nella FFA uno sopra l'altro a destra del personaggio, prima degli oggetti (stretti, perché la mano tenga il passo); nel duello nella riga degli oggetti sopra il posto.
+  mano). Nella FFA uno sopra l'altro a destra del personaggio, prima degli oggetti (stretti, perché la mano tenga il passo); nel duello alla quota della riga superiore originale, anche se gli oggetti passano a destra (O27).
   Pescate e scarti delle bound partono e arrivano lì; quelli degli avversari restano accanto al loro posto.
 - **Duello:** gli oggetti propri stanno in una riga sopra il proprio posto, per lasciare il centro alle carte del
   round; l'avversario sta più a destra su desktop.

@@ -72,14 +72,17 @@ export async function discardPass(p,shot){
   const order=s.order.map(c=>c.key),h=s.hits.find(h=>h.id===c.key);
   if(h?.kind!=='preview'||s.hits.some(h=>h.kind==='hand'&&h.id===c.key))errors.push(`${c.name}: preview copy still in hand`);
   await page.locator(`[data-hit="${c.key}"]`).focus();await page.keyboard.press('i');
-  const receipt=await page.locator('dialog[open] .receipt').innerText().catch(()=>'');if(!receipt.includes(c.name))errors.push(`${c.name}: preview keyboard inspection missing`);
+  // GUI names are wire values, including trailing spaces (BadEducation).
+  // innerText trims that whitespace; read the title's actual text node and
+  // compare the whole name exactly, for both inspection paths.
+  const receipt=await page.locator('dialog[open] .receipt h2').textContent().catch(()=>null);if(receipt!==c.name)errors.push(`${c.name}: preview keyboard inspection missing`);
   await page.getByRole('button',{name:'Torna al tavolo',exact:true}).click();await page.waitForTimeout(80);
   await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Dettagli carta giocata',exact:true}).click();
-  const touchReceipt=await page.locator('dialog[open] .receipt').innerText().catch(()=>'');if(!touchReceipt.includes(c.name))errors.push(`${c.name}: preview menu inspection missing`);
+  const touchReceipt=await page.locator('dialog[open] .receipt h2').textContent().catch(()=>null);if(touchReceipt!==c.name)errors.push(`${c.name}: preview menu inspection missing`);
   await page.getByRole('button',{name:'Torna al tavolo',exact:true}).click();await page.getByLabel('Annulla calata',{exact:true}).click();await page.waitForTimeout(80);
   const after=await p.state(),rest=after.hits.find(h=>h.id===c.key),index=start.order.findIndex(x=>x.key===c.key),x=after.layout.hand.center+(index-(start.order.length-1)/2)*after.layout.hand.step;
   if(rest?.kind!=='hand'||Math.abs(rest.x-x)>1e-6||JSON.stringify(after.order.map(c=>c.key))!==JSON.stringify(order))errors.push(`${c.name}: cancellation did not restore slot/order`);
-  check(after,false,`${c.name}-cancelled`);previews.push({name:c.name,keyboardInspection:receipt.includes(c.name),menuInspection:touchReceipt.includes(c.name),restored:rest?.kind==='hand'});
+  check(after,false,`${c.name}-cancelled`);previews.push({name:c.name,keyboardInspection:receipt===c.name,menuInspection:touchReceipt===c.name,restored:rest?.kind==='hand'});
  }
  await escape();check(await p.state(),false,'outside-after-cancel');
  return {bounds:bounds.map(c=>c.name),candidates:candidates.length,probes,nonDiscardableTaps,previews,samples,errors,commandsBefore:start.commands,commandsAfter:(await p.state()).commands};

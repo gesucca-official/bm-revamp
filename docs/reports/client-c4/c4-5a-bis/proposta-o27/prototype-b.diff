@@ -1,0 +1,39 @@
+--- product/readability.ts
++++ proposal-b/readability.ts
+@@ -1,3 +1,4 @@
++import {PROPS,BACKGROUND} from './background.ts';
+ import type {Card,Character,Resource} from './contracts.ts';
+ import {regular,type LocalCard,type Model} from './model.ts';
+ // C2a readability helpers. Pure functions over the authoritative view: they only decide how
+@@ -151,6 +152,13 @@
+   // starts after them. Opponents' objects follow their character; in FFA they overlap a little.
+   const gap=ffa?iw*.75:iw+6,above=!ffa&&own;
+   const items=Array.from({length:n},(_,i)=>above?{x:6+(compact?0:kspan)+iw/2+i*gap,y:Math.min(y-ph/2,y-bh/2-mh-3)-ih/2-8,w:iw,h:ih}:{x:x+pw*.5+iw*.5+8+(own&&ffa?kffa:0)+i*gap,y:y+ph*.06,w:iw,h:ih});
++
++  // PROPOSAL B: start after the full ashtray sprite's proportional right edge.
++  // Its texture is 973x844; reference centre/height are from background.ts.
++  if(above){const p=PROPS.find(p=>p.id==='posacenere')!;
++   const edge=p.x*w/BACKGROUND.w+p.height*(973/844)*Math.sqrt(w/BACKGROUND.w*h/BACKGROUND.h)/2;
++   const dx=Math.max(0,edge+8-(items[0].x-iw/2));items.forEach(b=>b.x+=dx);
++  }
+   const side=ffa&&!own&&k>=2,left=side&&x<w/2;
+   const board={x:x-pw*.5-8-bwid*.5,y:own?y:y-ph*.12,w:bwid,h:bh};
+   // Statuses: a chip row on the lower art of the character card, so no seat needs more room; it grows with the character.
+--- product/scene.ts
++++ proposal-b/scene.ts
+@@ -91,6 +91,7 @@
+  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
+  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
+  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
++ proposalBackground:unknown=null;
+  layout:TableLayout|null=null;
+  /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
+  brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
+@@ -297,6 +298,7 @@
+  resize(w:number,h:number){this.width=w;this.height=h;this.app.renderer.resize(w,h);// Use texture.orig, never Sprite.width/height (already scaled by the preceding resize).
+   const size=(s:Sprite)=>({w:s.texture.orig.width,h:s.texture.orig.height});
+   const g=backgroundGeometry(w,h,{table:size(this.background),sottobicchiere:size(this.props.sottobicchiere),negroni:size(this.props.negroni),posacenere:size(this.props.posacenere)});
++  this.proposalBackground=g;
+   placeBackground(this.background,this.props,g);
+   for(const p of g.props){const {node,blur}=this.shadows[p.id],s=p.shadow;node.clear().ellipse(0,0,s.w/2,s.h/2).fill({color:0x100905,alpha:s.alpha});node.position.set(s.x,s.y);blur.strength=s.sigma;}
+   this.draw();}

@@ -1,0 +1,2169 @@
+[
+ {
+  "variant": "a",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": false,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": false,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": false,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1366,
+  "h": 768,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1366,
+  "h": 768,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": false,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [
+   "me over hand, shell, round cards or piles"
+  ],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": false,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles"
+  ],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": false,
+  "playedIdentical": false,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 844,
+  "h": 390,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.1
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 844,
+  "h": 390,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1,
+   "items": 1,
+   "resources": 1.05
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "arrow to item-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "me/b",
+   "b over hand, shell, round cards or piles",
+   "b/me",
+   "arrow to person-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 750,
+  "h": 292,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "b close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me over hand, shell, round cards or piles",
+   "b over hand, shell, round cards or piles",
+   "arrow to person-b",
+   "b close-up"
+  ],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c over hand, shell, round cards or piles",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "me close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c over hand, shell, round cards or piles",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "me close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c over hand, shell, round cards or piles",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "me close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c over hand, shell, round cards or piles",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "me close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 750,
+  "h": 292,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "baseScale": {
+   "me": 1,
+   "others": 1,
+   "items": 1,
+   "resources": 1
+  },
+  "problems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c over hand, shell, round cards or piles",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "me close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "baseProblems": [
+   "no round cards",
+   "me/d",
+   "me/backs of d",
+   "c over hand, shell, round cards or piles",
+   "c/backs of e",
+   "d over hand, shell, round cards or piles",
+   "d/me",
+   "e over hand, shell, round cards or piles",
+   "me target close-up",
+   "d target close-up",
+   "me close-up",
+   "c close-up",
+   "d close-up",
+   "e close-up"
+  ],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1920,
+  "h": 1080,
+  "seats": 2,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": null,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 1,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 2,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "a",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "b",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ },
+ {
+  "variant": "c",
+  "w": 1920,
+  "h": 1080,
+  "seats": 5,
+  "n": 3,
+  "scale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "baseScale": {
+   "me": 1.5,
+   "others": 1.2,
+   "items": 1,
+   "resources": 1.25
+  },
+  "problems": [],
+  "baseProblems": [],
+  "ffaIdentical": true,
+  "pilesIdentical": true,
+  "playedIdentical": true,
+  "handIdentical": true
+ }
+]

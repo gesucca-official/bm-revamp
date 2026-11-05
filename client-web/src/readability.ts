@@ -122,6 +122,20 @@ export const brandBox=(compact:boolean):Box=>compact?{x:10+48,y:8+24,w:96,h:48}:
 export const closeUpRange=(own:boolean)=>own?{min:1,max:1.3}:{};
 /** D13 target close-up: smaller for the own character, already large. */
 export const targetScale=(own:boolean)=>own?1.1:1.25;
+/** O27, owner choice: keep the whole own row beside the character only when
+ * clear of a conservative seven-card hand, including lift and zoom. Prefer
+ * the duel's full step; try FFA overlap second; otherwise keep the upper row.
+ * No decoration, hand, pile or scale is moved by this presentation choice. */
+export function ownItemRow(items:Box[],person:Box,hand:TableLayout['hand'],screen:{w:number;h:number}):{items:Box[];placement:'above'|'full'|'overlap'}{
+ if(!items.length)return {items,placement:'above'};
+ const top=hand.y-hand.lift-hand.h*hand.zoom/2,bottom=hand.y+hand.h/2;
+ const held={x:hand.center,y:(top+bottom)/2,w:hand.w*hand.zoom+6*hand.step,h:bottom-top};
+ for(const [placement,step] of [['full',items[0].w+6],['overlap',items[0].w*.75]] as const){
+  const row=items.map((b,i)=>({...b,x:person.x+person.w/2+8+b.w/2+i*step,y:person.y+person.h*.06}));
+  if(row.every(b=>inside(b,screen.w,screen.h)&&overlap({...b,w:b.w+16,h:b.h+16},held)===0))return {items:row,placement};
+ }
+ return {items,placement:'above'};
+}
 export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>,s:Scale):TableLayout{
  const compact=h<550,ffa=ids.length>2,shell=shellBoxes(w,h,compact);
  const hw=compact?120:Math.min(214,h*.28),hh=hw*1.38;
@@ -168,6 +182,9 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
  const pv=compact?{w:70,h:97}:{w:120,h:166};
  const L:TableLayout={compact,scale:s,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats,played:null,piles:null};
  if(mine){const row=mine.items[0],x=ffa?mine.person.x+mine.person.w/2+8+kw/2:compact?6+3*(iw+6)+kw/2:6+kw/2,y=ffa?mine.person.y+mine.person.h/2-kh/2:row.y+row.h/2-kh/2;L.piles=ffa?{deck:{x,y:y-kh-kg,w:kw,h:kh},discard:{x,y,w:kw,h:kh}}:{deck:{x,y,w:kw,h:kh},discard:{x:x+kw+kg,y,w:kw,h:kh}};}
+ // Build the piles from the original upper row first (C3-L). FFA takes its
+ // existing path verbatim; an empty placeholder is not a real own object.
+ if(mine&&!ffa&&(itemCounts[me]??0)>0)mine.items=ownItemRow(mine.items,mine.person,hand,{w,h}).items;
  // A raised hand card (hover, focus) does not reach the round's cards.
  const raised={x:hand.center,y:hand.y-hand.lift/2,w:hw+6*hand.step,h:hh+hand.lift},avoid=[...tableBoxes(L,w,h),raised,...(L.piles?[L.piles.deck,L.piles.discard]:[])];
  // The round's cards: the largest card (from the size of a character down to half of it) whose cascade of one card per seat, with the

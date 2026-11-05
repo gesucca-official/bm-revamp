@@ -1,0 +1,1598 @@
+{
+  "date": "2026-11-05T12:30:59.773Z",
+  "url": "http://127.0.0.1:4320",
+  "user": "devAlice",
+  "kind": "automated browser run on PC (Edge via Playwright) against the local server; not a physical device",
+  "games": [
+    {
+      "index": 1,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "STORDIAMOTI HO DETTO",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "drag"
+        },
+        {
+          "turn": 1,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "BELLO IL TUO GIOCATTOLO SI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "PAZIENZA: FINITA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5828",
+          "choices": {
+            "DISCARD_ONE": "GABBIANO DUNQUE VOLIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5828",
+          "choices": {
+            "DISCARD_ONE": "GENTILE IL TUO CAREZZO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "NON GIOCARE COL COLTELLO NO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "ORMALE GUARIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "PERMESSO SCUSA ORA SMETTI "
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 17,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 18,
+          "card": "COSA FAI NON É UNA DOMANDA",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 19,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 20,
+          "card": "Last Resort: Banzai!!!",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 21,
+          "card": "Last Resort: Banzai!!!",
+          "target": "ComPlayer_5828",
+          "choices": null,
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:31:01.641Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "outcome": {
+        "winner": "devAlice",
+        "me": "devAlice",
+        "message": "Hai vinto"
+      },
+      "outcomeText": "Hai vinto\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:31:40.168Z"
+    },
+    {
+      "index": 2,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_7284",
+          "choices": {
+            "DISCARD_ONE": "COSA FAI NON É UNA DOMANDA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "PERMESSO SCUSA ORA SMETTI ",
+          "target": "ComPlayer_7284",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "AMMALIAMOTI DI BOTTE",
+          "target": "ComPlayer_7284",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+          "target": "ComPlayer_7284",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_7284",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_7284",
+          "choices": {
+            "DISCARD_ONE": "GABBIANO DUNQUE VOLIAMOTI"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:31:40.622Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "devAlice",
+        "me": "devAlice",
+        "message": "Hai vinto"
+      },
+      "outcomeText": "Hai vinto\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:31:53.111Z"
+    },
+    {
+      "index": 3,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "GABBIANO DUNQUE VOLIAMOTI",
+          "target": "ComPlayer_2275",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "COSA FAI NON É UNA DOMANDA",
+          "target": "ComPlayer_2275",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "BELLO IL TUO GIOCATTOLO SI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GENTILE IL TUO CAREZZO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "NON GIOCARE COL COLTELLO NO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_2275",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "PERMESSO SCUSA ORA SMETTI ",
+          "target": "ComPlayer_2275",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "PAZIENZA: FINITA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "STORDIAMOTI HO DETTO",
+          "target": "ComPlayer_2275",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 17,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_2275",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:31:53.442Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "outcome": {
+        "winner": "NONE",
+        "me": "devAlice",
+        "message": "Pareggio"
+      },
+      "outcomeText": "Pareggio\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:32:20.395Z"
+    },
+    {
+      "index": 4,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "GARGANTUESCO IMPATTO SUL TU",
+          "target": "ComPlayer_27",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "COSA FAI NON É UNA DOMANDA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "PERMESSO SCUSA ORA SMETTI "
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "PAZIENZA: FINITA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "PAZIENZA: FINITA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "ORMALE GUARIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "NON GIOCARE COL COLTELLO NO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "GABBIANO DUNQUE VOLIAMOTI",
+          "target": "ComPlayer_27",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "BELLO IL TUO GIOCATTOLO SI",
+          "target": "ComPlayer_27",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_27",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:32:20.724Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "NONE",
+        "me": "devAlice",
+        "message": "Pareggio"
+      },
+      "outcomeText": "Pareggio\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:32:51.600Z"
+    },
+    {
+      "index": 5,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "STORDIAMOTI HO DETTO",
+          "target": "ComPlayer_3730",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "GABBIANO DUNQUE VOLIAMOTI",
+          "target": "ComPlayer_3730",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_3730",
+          "choices": {
+            "DISCARD_ONE": "COSA FAI NON É UNA DOMANDA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GENTILE IL TUO CAREZZO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "BELLO IL TUO GIOCATTOLO SI",
+          "target": "ComPlayer_3730",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_3730",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "ORMALE GUARIAMOTI",
+          "target": "ComPlayer_3730",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "PERMESSO SCUSA ORA SMETTI "
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_3730",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "NON GIOCARE COL COLTELLO NO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 17,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:32:51.957Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "ComPlayer_3730",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:33:25.016Z"
+    },
+    {
+      "index": 6,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "ORMALE GUARIAMOTI",
+          "target": "ComPlayer_5532",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5532",
+          "choices": {
+            "DISCARD_ONE": "BELLO IL TUO GIOCATTOLO SI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5532",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5532",
+          "choices": {
+            "DISCARD_ONE": "PERMESSO SCUSA ORA SMETTI "
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "GARGANTUESCO IMPATTO SUL TU"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_5532",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_5532",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Negroni Trovato per Terra"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "COSA FAI NON É UNA DOMANDA"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "GENTILE IL TUO CAREZZO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "NON GIOCARE COL COLTELLO NO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "STORDIAMOTI HO DETTO",
+          "target": "ComPlayer_5532",
+          "choices": null,
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:33:25.412Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "outcome": {
+        "winner": "ComPlayer_5532",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:33:40.906Z"
+    },
+    {
+      "index": 7,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "PAZIENZA: FINITA",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "COSA FAI NON É UNA DOMANDA",
+          "target": "ComPlayer_6699",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "ADOPERIAMOTI",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "PERMESSO SCUSA ORA SMETTI ",
+          "target": "ComPlayer_6699",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+          "target": "ComPlayer_6699",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "FAI BASTA",
+          "target": "ComPlayer_6699",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "LIEVE FASTIDIO",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "AMMALIAMOTI DI BOTTE"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "DISCARD_ONE": "SPEDIAMOTI DUNQUE IN O-AHIO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "BELLO IL TUO GIOCATTOLO SI",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "NON GIOCARE COL COLTELLO NO",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "DISCARD_ONE": "STORDIAMOTI HO DETTO"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "DISCARD_ONE": "GABBIANO DUNQUE VOLIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "DISCARD_ONE": "ORMALE GUARIAMOTI"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "SVEGLIAMOCI MA TU NO",
+          "target": "ComPlayer_6699",
+          "choices": {
+            "DISCARD_ONE": "FAI BASTA"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:33:41.233Z",
+      "character": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "opponent": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "outcome": {
+        "winner": "ComPlayer_6699",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:34:07.635Z"
+    },
+    {
+      "index": 8,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "Riflessi Aumentati dalla Speed",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "DISCARD_ONE": "Presa Male di Brutto"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "DISCARD_ONE": "Dose di Eroina da Cavalli"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "DISCARD_ONE": "Metabolismo Corrotto"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "Steal",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "Ghigno co' i' Denti Marci",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "DISCARD_ONE": "Rabbia Psicotica da Meth"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "Ago Marcio e Spezzato",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "DISCARD_ONE": "Riflessi Aumentati dalla Speed"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "Scatto Repentino",
+          "target": "ComPlayer_9871",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "Desiderio Incontrollabile",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "Steal",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "TARGET_ITEM": "Broken Beer Bottle"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 12,
+          "card": "Tossicone Scatarrante",
+          "target": "ComPlayer_9871",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 13,
+          "card": "Tutto è Droga",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Broken Beer Bottle"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 14,
+          "card": "Desiderio Incontrollabile",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Tennents Super"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 15,
+          "card": "Last Resort: Banzai!!!",
+          "target": "ComPlayer_9871",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 16,
+          "card": "Last Resort: Banzai!!!",
+          "target": "ComPlayer_9871",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 17,
+          "card": "Ago Marcio e Spezzato",
+          "target": "ComPlayer_9871",
+          "choices": {
+            "DISCARD_ONE": "Estasi da Coca Etilene"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-05T12:34:07.970Z",
+      "character": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+      "opponent": "Computer, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+      "outcome": {
+        "winner": "devAlice",
+        "me": "devAlice",
+        "message": "Hai vinto"
+      },
+      "outcomeText": "Hai vinto\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-05T12:34:31.240Z"
+    }
+  ],
+  "checks": {
+    "resumedAtStart": false,
+    "login": "hub reached after REST validate, STOMP CONNECT, resume and profile",
+    "noScroll": {
+      "overflowingHit": "card-1",
+      "scrollTop": 0,
+      "scrollHeight": 768,
+      "innerHeight": 768
+    },
+    "reorder": {
+      "before": 6,
+      "firstMovedTo": 5,
+      "sendsDuring": 0,
+      "dragMoved": true
+    },
+    "rejoin": {
+      "sameTurn": true,
+      "handOrderKept": true,
+      "sendsDuringRejoin": 0
+    },
+    "o1o5": {
+      "oldButtons": 0,
+      "infoOnHover": true,
+      "infoOnSelected": true,
+      "keyboardReorder": true,
+      "sendsDuring": 0
+    },
+    "dragFollow": {
+      "ghostOverTargetDuringDrag": true,
+      "dragMoved": true
+    },
+    "bound": {
+      "playedCardName": "Ago Marcio e Spezzato",
+      "playerId": "devAlice",
+      "targetId": "ComPlayer_9871",
+      "gameId": "41860375e991fd3c07ee2e576cd063d6014532471f727cffca638db6099f4c1f",
+      "choices": {
+        "DISCARD_ONE": "Estasi da Coca Etilene"
+      }
+    },
+    "item": {
+      "playedCardName": "Desiderio Incontrollabile",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "41860375e991fd3c07ee2e576cd063d6014532471f727cffca638db6099f4c1f",
+      "choices": {
+        "TARGET_ITEM": "Tennents Super"
+      }
+    },
+    "c2a": {
+      "outsideDeselect": {
+        "selectedBefore": true,
+        "selectedAfter": false,
+        "raisedH": 361,
+        "restH": 295
+      },
+      "status": {
+        "chip": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+        "hoverText": "Stato negativo: NO PATIENCE - Damage Intake Boost\nColpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+        "tapOpens": true,
+        "closedElsewhere": true
+      },
+      "turnsChecked": 133,
+      "cardsChecked": 793,
+      "rolesSeen": {
+        "ITEMS": 171,
+        "DAMAGE": 332,
+        "DEFENSE": 145,
+        "OTHER": 59,
+        "COUNTER": 56,
+        "DISRUPT": 24,
+        "RESOURCES": 6
+      },
+      "unpayableSeen": 150,
+      "unpayableDimmed": 150,
+      "boardChecks": 133,
+      "hover": {
+        "restingH": 295,
+        "hoverH": 325,
+        "raised": true
+      },
+      "unpayableSend": {
+        "card": "STORDIAMOTI HO DETTO",
+        "sent": true,
+        "serverAnswer": "Rifiutata: cant be cast with current resources",
+        "choiceKept": true
+      },
+      "layout": {
+        "hand": {
+          "w": 214,
+          "h": 295.32
+        },
+        "person": {
+          "w": 224.64,
+          "h": 310.00319999999994
+        },
+        "item": {
+          "w": 113.8176,
+          "h": 157.068288
+        }
+      },
+      "boardDuringSequence": 125
+    },
+    "hubReturn": "hub visible after leave acknowledgement"
+  },
+  "rejections": [
+    {
+      "turn": 1,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 5,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 7,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 6,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 6,
+      "card": "GABBIANO DUNQUE VOLIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 7,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 1,
+      "card": "GENTILE IL TUO CAREZZO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 2,
+      "card": "AMMALIAMOTI DI BOTTE",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 2,
+      "card": "GENTILE IL TUO CAREZZO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "AMMALIAMOTI DI BOTTE",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 5,
+      "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 5,
+      "card": "AMMALIAMOTI DI BOTTE",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 14,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 17,
+      "card": "ORMALE GUARIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 1,
+      "card": "COSA FAI NON É UNA DOMANDA",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "PERMESSO SCUSA ORA SMETTI ",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "ORMALE GUARIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 7,
+      "card": "ORMALE GUARIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 8,
+      "card": "ORMALE GUARIAMOTI",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 14,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 15,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 3,
+      "card": "GENTILE IL TUO CAREZZO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 3,
+      "card": "STORDIAMOTI HO DETTO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "AMMALIAMOTI DI BOTTE",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "GENTILE IL TUO CAREZZO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 9,
+      "card": "AMMALIAMOTI DI BOTTE",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "PERMESSO SCUSA ORA SMETTI ",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 2,
+      "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 6,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 8,
+      "card": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 11,
+      "card": "GARGANTUESCO IMPATTO SUL TU",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "Estasi da Coca Etilene",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 12,
+      "card": "Estasi da Coca Etilene",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 14,
+      "card": "Estasi da Coca Etilene",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    }
+  ],
+  "periodic": [
+    {
+      "game": 1,
+      "text": "Fine turno\n\nEffetti di fine turno su: Computer. Cosa hanno fatto lo dice solo il testo del server, più sotto.\n\nTesto del server (in inglese, invariato)"
+    }
+  ],
+  "noValidMove": [],
+  "errors": [],
+  "viewport": {
+    "width": 1366,
+    "height": 768
+  },
+  "want": {
+    "characters": [
+      "Spazienzio de la Ucciso",
+      "Tossico del Serraglio"
+    ],
+    "bound": true,
+    "item": true,
+    "drag": true,
+    "tap": true,
+    "reorder": true,
+    "rejection": true,
+    "periodic": true
+  },
+  "inputMs": {
+    "note": "PC headless/headed Edge, input to next frame; not the iPhone measure",
+    "samples": 1294,
+    "p50": 11.800000011920929,
+    "p95": 24.69999998807907,
+    "max": 40.19999998807907
+  }
+}

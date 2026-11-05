@@ -1,0 +1,46 @@
+--- product/readability.ts
++++ proposal-a/readability.ts
+@@ -151,6 +151,16 @@
+   // starts after them. Opponents' objects follow their character; in FFA they overlap a little.
+   const gap=ffa?iw*.75:iw+6,above=!ffa&&own;
+   const items=Array.from({length:n},(_,i)=>above?{x:6+(compact?0:kspan)+iw/2+i*gap,y:Math.min(y-ph/2,y-bh/2-mh-3)-ih/2-8,w:iw,h:ih}:{x:x+pw*.5+iw*.5+8+(own&&ffa?kffa:0)+i*gap,y:y+ph*.06,w:iw,h:ih});
++
++  // PROPOSAL A: the full row to the right, only if clear of the unchanged,
++  // conservatively seven-card hand including its raised extent, and on screen.
++  if(above){const nextHand={...hand},from=Math.max(x+pw/2,6+bwid)+10;
++   if(nextHand.center-(hw+5*nextHand.step)/2<from){const room=w-8-from;nextHand.step=Math.min(nextHand.step,(room-hw)/6);nextHand.center=from+room/2;}
++   const top=nextHand.y-nextHand.lift-nextHand.h*nextHand.zoom/2,bottom=nextHand.y+nextHand.h/2;
++   const held={x:nextHand.center,y:(top+bottom)/2,w:hw*nextHand.zoom+6*nextHand.step,h:bottom-top};
++   const right=items.map((b,i)=>({...b,x:x+pw/2+8+iw/2+i*iw*.75,y:y+ph*.06}));
++   if(right.every(b=>inside(b,w,h)&&overlap({...b,w:b.w+16,h:b.h+16},held)===0))items.splice(0,items.length,...right);
++  }
+   const side=ffa&&!own&&k>=2,left=side&&x<w/2;
+   const board={x:x-pw*.5-8-bwid*.5,y:own?y:y-ph*.12,w:bwid,h:bh};
+   // Statuses: a chip row on the lower art of the character card, so no seat needs more room; it grows with the character.
+@@ -167,7 +177,7 @@
+   if(hand.center-(hw+5*hand.step)/2<from){const room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}}
+  const pv=compact?{w:70,h:97}:{w:120,h:166};
+  const L:TableLayout={compact,scale:s,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats,played:null,piles:null};
+- if(mine){const row=mine.items[0],x=ffa?mine.person.x+mine.person.w/2+8+kw/2:compact?6+3*(iw+6)+kw/2:6+kw/2,y=ffa?mine.person.y+mine.person.h/2-kh/2:row.y+row.h/2-kh/2;L.piles=ffa?{deck:{x,y:y-kh-kg,w:kw,h:kh},discard:{x,y,w:kw,h:kh}}:{deck:{x,y,w:kw,h:kh},discard:{x:x+kw+kg,y,w:kw,h:kh}};}
++ if(mine){const row=ffa?mine.items[0]:{...mine.items[0],y:Math.min(mine.person.y-mine.person.h/2,mine.person.y-mine.board.h/2-mh-3)-ih/2-8},x=ffa?mine.person.x+mine.person.w/2+8+kw/2:compact?6+3*(iw+6)+kw/2:6+kw/2,y=ffa?mine.person.y+mine.person.h/2-kh/2:row.y+row.h/2-kh/2;L.piles=ffa?{deck:{x,y:y-kh-kg,w:kw,h:kh},discard:{x,y,w:kw,h:kh}}:{deck:{x,y,w:kw,h:kh},discard:{x:x+kw+kg,y,w:kw,h:kh}};}
+  // A raised hand card (hover, focus) does not reach the round's cards.
+  const raised={x:hand.center,y:hand.y-hand.lift/2,w:hw+6*hand.step,h:hh+hand.lift},avoid=[...tableBoxes(L,w,h),raised,...(L.piles?[L.piles.deck,L.piles.discard]:[])];
+  // The round's cards: the largest card (from the size of a character down to half of it) whose cascade of one card per seat, with the
+--- product/scene.ts
++++ proposal-a/scene.ts
+@@ -91,6 +91,7 @@
+  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
+  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
+  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
++ proposalBackground:unknown=null;
+  layout:TableLayout|null=null;
+  /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
+  brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
+@@ -297,6 +298,7 @@
+  resize(w:number,h:number){this.width=w;this.height=h;this.app.renderer.resize(w,h);// Use texture.orig, never Sprite.width/height (already scaled by the preceding resize).
+   const size=(s:Sprite)=>({w:s.texture.orig.width,h:s.texture.orig.height});
+   const g=backgroundGeometry(w,h,{table:size(this.background),sottobicchiere:size(this.props.sottobicchiere),negroni:size(this.props.negroni),posacenere:size(this.props.posacenere)});
++  this.proposalBackground=g;
+   placeBackground(this.background,this.props,g);
+   for(const p of g.props){const {node,blur}=this.shadows[p.id],s=p.shadow;node.clear().ellipse(0,0,s.w/2,s.h/2).fill({color:0x100905,alpha:s.alpha});node.position.set(s.x,s.y);blur.strength=s.sigma;}
+   this.draw();}

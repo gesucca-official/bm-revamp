@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-05T16:13:51.914765+00:00",
+  "checks": [
+    {
+      "code": 0,
+      "name": "Test",
+      "note": "completed before owner pause; 36 debug tests passed"
+    },
+    {
+      "code": 0,
+      "name": "TestServerContext"
+    },
+    {
+      "code": 0,
+      "name": "rules"
+    },
+    {
+      "code": 1,
+      "name": "manifests"
+    }
+  ],
+  "serverContext": {
+    "tests": 402,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 3
+  },
+  "logSha256": {
+    "manifests.log": "c90acadc71c03454777c755c172266afcd28e1db551b505f85616f3e0717c1ee",
+    "rules.log": "49d6e6962bee02a82ec7156e2c55fff1718c9288d2d9edcc1d223e7e2e38843c",
+    "Test.log": "0e6aaddfbfb2c44083530ef67752b1d9d0c09addf622d12f9d3afb1c49a3241d",
+    "TestServerContext-interrupted.log": "9200fe4169399a1a66653033ef31d5d006d19780f14c30a6ad380a7921ca387b",
+    "TestServerContext.log": "c362f0709db45ea2873d8c01c30b9d18be1cb78915e82241b0e7ae0e38289a2a"
+  },
+  "interruptedRun": "Test completed before user pause; interrupted TestServerContext was not counted and was rerun after resume.",
+  "head": "af6e8b2",
+  "note": "SB-3/SB-4 commits entered during owner pause; graphical verification is repeated on a rebuilt current jar."
+}

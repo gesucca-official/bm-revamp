@@ -1,0 +1,34 @@
+--- product/scene.ts
++++ proposal-c/scene.ts
+@@ -1,3 +1,4 @@
++import {tableBoxes,brandBox,freeSpot} from './readability.ts';
+ import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
+ import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
+ import {Model,clone,type Target} from './model.ts';
+@@ -91,6 +92,7 @@
+  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
+  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
+  display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
++ proposalBackground:unknown=null;
+  layout:TableLayout|null=null;
+  /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
+  brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
+@@ -297,6 +299,18 @@
+  resize(w:number,h:number){this.width=w;this.height=h;this.app.renderer.resize(w,h);// Use texture.orig, never Sprite.width/height (already scaled by the preceding resize).
+   const size=(s:Sprite)=>({w:s.texture.orig.width,h:s.texture.orig.height});
+   const g=backgroundGeometry(w,h,{table:size(this.background),sottobicchiere:size(this.props.sottobicchiere),negroni:size(this.props.negroni),posacenere:size(this.props.posacenere)});
++
++  // PROPOSAL C: only the decorative ashtray moves, at its current scale. Find
++  // the closest full-sprite box clear of all game boxes/brand/other props;
++  // leave the original position if none fits. Gameplay geometry is untouched.
++  if(Object.keys(this.model.view.players).length===2){
++   const ids=Object.keys(this.model.view.players),L=tableLayout(w,h,ids,this.model.me,Object.fromEntries(ids.map(id=>[id,this.model.view.players[id].character.items.length])));
++   const ash=g.props.find(p=>p.id==='posacenere')!;
++   const avoid=[...tableBoxes(L,w,h),brandBox(L.compact),...(L.piles?[L.piles.deck,L.piles.discard]:[]),...(L.played?[L.played.box]:[]),...g.props.filter(p=>p.id!=='posacenere').map(p=>({x:p.x,y:p.y,w:p.w,h:p.h}))];
++   const spot=freeSpot({w:ash.w,h:ash.h},{w,h},avoid,{x:ash.x,y:ash.y},8);
++   if(spot){const dx=spot.x-ash.x,dy=spot.y-ash.y;ash.x=spot.x;ash.y=spot.y;ash.shadow.x+=dx;ash.shadow.y+=dy;}
++  }
++  this.proposalBackground=g;
+   placeBackground(this.background,this.props,g);
+   for(const p of g.props){const {node,blur}=this.shadows[p.id],s=p.shadow;node.clear().ellipse(0,0,s.w/2,s.h/2).fill({color:0x100905,alpha:s.alpha});node.position.set(s.x,s.y);blur.strength=s.sigma;}
+   this.draw();}
