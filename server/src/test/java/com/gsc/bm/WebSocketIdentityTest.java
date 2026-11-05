@@ -154,7 +154,9 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             org.mockito.Mockito.doThrow(new org.springframework.dao.DataAccessResourceFailureException("private database details"))
                     .when(users).findById("profileFailure");
             BlockingQueue<byte[]> errors = new LinkedBlockingQueue<>();
-            session.subscribe("/user/queue/account/error", new StompFrameHandler() {
+            // SUBSCRIBE and SEND are handled on different inbound threads: wait for the server's receipt (sent once the
+            // subscription is registered), otherwise the private reply can race ahead of it and be dropped.
+            subscribeConfirmed(session, "/user/queue/account/error", new StompFrameHandler() {
                 public Type getPayloadType(StompHeaders h) { return byte[].class; }
                 public void handleFrame(StompHeaders h, Object payload) { errors.add((byte[]) payload); }
             });
@@ -189,7 +191,17 @@ class WebSocketIdentityTest extends SqliteContextSupport {
     private WebSocketStompClient newClient() {
         var container = javax.websocket.ContainerProvider.getWebSocketContainer();
         container.setDefaultMaxTextMessageBufferSize(1024 * 1024);
-        return new WebSocketStompClient(new StandardWebSocketClient(container));
+        var client = new WebSocketStompClient(new StandardWebSocketClient(container));
+        var scheduler = new org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler(); // needed to track receipts
+        scheduler.setDaemon(true); scheduler.initialize(); client.setTaskScheduler(scheduler);
+        return client;
+    }
+    private void subscribeConfirmed(StompSession session, String destination, StompFrameHandler handler) throws Exception {
+        StompHeaders headers = new StompHeaders(); headers.setDestination(destination);
+        headers.setReceipt("subscribed-" + java.util.UUID.randomUUID());
+        var confirmed = new CountDownLatch(1);
+        session.subscribe(headers, handler).addReceiptTask(confirmed::countDown);
+        assertTrue(confirmed.await(4, TimeUnit.SECONDS), "Subscription not confirmed: " + destination);
     }
     private void close(StompSession session) {
         try { if (session != null && session.isConnected()) { session.disconnect(); } }
