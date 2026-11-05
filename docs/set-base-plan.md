@@ -362,6 +362,10 @@ mazzo altrui. Con Bruiser e Junkie gli stili producono risultati dichiarati e co
 
 ### SB-5 — Prova del formato dati
 
+**Chiuso il 5 novembre 2026**, anticipato rispetto a D22 su istruzione del proprietario: la prova sta nei test, partita e regole non cambiano.
+Decisione: JSON con sei passi per le carte semplici, Java per le altre. 20 carte su 37 a dati, identiche alle classi Java in 16.000 partite.
+I numeri delle 17 carte in Java restano nel codice: da risolvere in SB-6. [Rapporto](reports/set-base/sb-5-report.md).
+
 **Perimetro.** Secondo controllo aperto. Esprimere carte come dati: costo, priorità, bersaglio, effetti su sé e sul bersaglio, a partire da primitive
 già esistenti. **Soluzione ibrida:** le carte semplici sono dati, quelle davvero strane (come `WhatchaDoin`) restano in Java con i numeri esposti come
 parametri. Si convertono in prova alcune carte per tipo.

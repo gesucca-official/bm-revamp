@@ -29,8 +29,15 @@ final class SimulationCatalog {
     private final Map<String, String[]> gui = new LinkedHashMap<>();
     private final Map<String, String[]> special = new LinkedHashMap<>();
     private final Map<String, List<String>> decks = new LinkedHashMap<>();
+    private final DataCards dataCards;
 
     SimulationCatalog() throws Exception {
+        this(null);
+    }
+
+    /** Con carte a dati (SB-5), quelle carte sostituiscono le classi Java omonime. */
+    SimulationCatalog(DataCards dataCards) throws Exception {
+        this.dataCards = dataCards;
         Path database = Files.createTempFile(outputDirectory(), "catalog-", ".sqlite");
         try {
             try (InputStream input = SimulationCatalog.class.getResourceAsStream("/cards.sqlite")) {
@@ -81,9 +88,16 @@ final class SimulationCatalog {
     }
 
     Card card(String binding) throws Exception {
+        return dress(binding, dataCards != null && dataCards.bindings().contains(binding)
+                ? dataCards.create(binding) : (LoadableCard) instantiate(binding));
+    }
+
+    java.util.Set<String> bindings() { return gui.keySet(); }
+
+    /** Aggiunge alla carta i testi del catalogo. */
+    LoadableCard dress(String binding, LoadableCard card) {
         String[] fields = gui.get(binding);
         if (fields == null) throw new IllegalArgumentException("Carta fuori catalogo: " + binding);
-        LoadableCard card = (LoadableCard) instantiate(binding);
         card.setGuiName(fields[0]);
         card.setGuiEffectDescription(fields[1]);
         card.setGuiImage(fields[2]);

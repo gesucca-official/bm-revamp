@@ -1,0 +1,475 @@
+[
+  {
+    "binding": "bruiser.SuperImpact",
+    "kind": "ACTION",
+    "priority": 0,
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "VIOLENCE": 25
+    },
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 40
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.ExtremelyViolentBlow",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "VIOLENCE": 20
+    },
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": {
+          "base": 20,
+          "of": "VIOLENCE",
+          "divide": 2
+        }
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.SeagullFly",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "VIOLENCE": 10
+    },
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 15,
+        "applying": [
+          "GOOD"
+        ]
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.character.LittleRage",
+    "kind": "BOUND",
+    "boundTo": "bruiser.character.BigBadBruiser",
+    "priority": 2,
+    "targets": [
+      "SELF"
+    ],
+    "self": [
+      {
+        "op": "status",
+        "name": "ONLY A LITTLE DISCOMFORT",
+        "description": "Hit Damage taken: x0.75",
+        "statusType": "GOOD",
+        "flow": "INPUT",
+        "property": "HIT",
+        "factor": 0.75,
+        "turns": 0
+      },
+      {
+        "op": "say",
+        "text": "Gained status: ONLY DISCOMFORT"
+      },
+      {
+        "op": "gain",
+        "resource": "VIOLENCE",
+        "amount": 5
+      }
+    ]
+  },
+  {
+    "binding": "com.last.Struggle",
+    "kind": "ACTION",
+    "lastResort": true,
+    "targets": [
+      "OPPONENT"
+    ],
+    "self": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 5
+      }
+    ],
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 10
+      }
+    ]
+  },
+  {
+    "binding": "com.items.CocktailOnTheGround",
+    "kind": "ITEM",
+    "self": [
+      {
+        "op": "gain",
+        "resource": "VIOLENCE",
+        "amount": 20
+      },
+      {
+        "op": "gain",
+        "resource": "ALCOHOL",
+        "amount": 15
+      },
+      {
+        "op": "gain",
+        "resource": "TOXICITY",
+        "amount": 5
+      }
+    ]
+  },
+  {
+    "binding": "com.items.RottenBeer",
+    "kind": "ITEM",
+    "self": [
+      {
+        "op": "say",
+        "text": "Consumed Rotten Beer (no equip through Grab)"
+      },
+      {
+        "op": "gain",
+        "resource": "ALCOHOL",
+        "amount": 5
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.CantFeelAnything",
+    "kind": "ACTION",
+    "targets": [
+      "SELF"
+    ],
+    "cost": {
+      "VIOLENCE": 20
+    },
+    "self": [
+      {
+        "op": "status",
+        "name": "YOU CARESS ME",
+        "description": "Hit Damage Taken: x0.35",
+        "statusType": "GOOD",
+        "flow": "INPUT",
+        "property": "HIT",
+        "factor": 0.35,
+        "turns": 0
+      },
+      {
+        "op": "say",
+        "text": "Gained status: YOU CARESS ME"
+      },
+      {
+        "op": "gain",
+        "resource": "ALERTNESS",
+        "amount": 10
+      }
+    ],
+    "priority": 2
+  },
+  {
+    "binding": "bruiser.Glare",
+    "kind": "ACTION",
+    "targets": [
+      "SELF"
+    ],
+    "self": [
+      {
+        "op": "status",
+        "name": "NO PATIENCE - Damage Intake Boost",
+        "description": "Hit Damage taken: x1.5",
+        "statusType": "BAD",
+        "flow": "INPUT",
+        "property": "HIT",
+        "factor": 1.5,
+        "turns": 1
+      },
+      {
+        "op": "say",
+        "text": "Gained statuses: NO PATIENCE"
+      },
+      {
+        "op": "gain",
+        "resource": "VIOLENCE",
+        "amount": 15
+      },
+      {
+        "op": "gain",
+        "resource": "ALERTNESS",
+        "amount": 15
+      }
+    ],
+    "priority": 0
+  },
+  {
+    "binding": "bruiser.MadeOfStone",
+    "kind": "ACTION",
+    "targets": [
+      "SELF"
+    ],
+    "self": [
+      {
+        "op": "status",
+        "name": "MADE OF STONE",
+        "description": "Cut Damage Taken: x0.5",
+        "statusType": "GOOD",
+        "flow": "INPUT",
+        "property": "CUT",
+        "factor": 0.5,
+        "turns": 3
+      },
+      {
+        "op": "say",
+        "text": "Gained Status: MADE OF STONE"
+      },
+      {
+        "op": "gain",
+        "resource": "VIOLENCE",
+        "amount": 10
+      }
+    ],
+    "priority": 0
+  },
+  {
+    "binding": "bruiser.HealingBlow",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "VIOLENCE": 20
+    },
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 30
+      },
+      {
+        "op": "empty",
+        "resource": "TOXICITY"
+      },
+      {
+        "op": "empty",
+        "resource": "ALCOHOL"
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.SickeningBlow",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "VIOLENCE": 15
+    },
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 10
+      },
+      {
+        "op": "gain",
+        "resource": "TOXICITY",
+        "amount": 10
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.StunningBlow",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "VIOLENCE": 15
+    },
+    "target": [
+      {
+        "op": "lose",
+        "resource": "ALERTNESS",
+        "amount": 10
+      },
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 10
+      }
+    ]
+  },
+  {
+    "binding": "bruiser.character.LittleSmack",
+    "kind": "BOUND",
+    "targets": [
+      "OPPONENT"
+    ],
+    "self": [
+      {
+        "op": "gain",
+        "resource": "ALERTNESS",
+        "amount": 5
+      }
+    ],
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 5
+      }
+    ],
+    "boundTo": "bruiser.character.BigBadBruiser"
+  },
+  {
+    "binding": "junkie.Cough",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "TOXICITY": 10
+    },
+    "target": [
+      {
+        "op": "gain",
+        "resource": "TOXICITY",
+        "amount": 5
+      },
+      {
+        "op": "lose",
+        "resource": "ALERTNESS",
+        "amount": 5
+      }
+    ]
+  },
+  {
+    "binding": "junkie.GoingBerserk",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "ALCOHOL": 10
+    },
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 30
+      }
+    ]
+  },
+  {
+    "binding": "junkie.MethDrivenRage",
+    "kind": "ACTION",
+    "targets": [
+      "OPPONENT"
+    ],
+    "cost": {
+      "TOXICITY": 5
+    },
+    "self": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 5
+      }
+    ],
+    "target": [
+      {
+        "op": "damage",
+        "type": "HIT",
+        "amount": 15
+      }
+    ]
+  },
+  {
+    "binding": "junkie.PervertedMetabolism",
+    "kind": "ACTION",
+    "targets": [
+      "SELF"
+    ],
+    "self": [
+      {
+        "op": "gain",
+        "resource": "HEALTH",
+        "amount": {
+          "base": 0,
+          "of": "TOXICITY",
+          "divide": 2
+        }
+      },
+      {
+        "op": "lose",
+        "resource": "TOXICITY",
+        "amount": {
+          "base": 0,
+          "of": "TOXICITY",
+          "divide": 1
+        }
+      }
+    ]
+  },
+  {
+    "binding": "junkie.character.PatheticBlade",
+    "kind": "BOUND",
+    "targets": [
+      "OPPONENT"
+    ],
+    "self": [
+      {
+        "op": "gain",
+        "resource": "TOXICITY",
+        "amount": 5
+      }
+    ],
+    "target": [
+      {
+        "op": "damage",
+        "type": "CUT",
+        "amount": 5
+      },
+      {
+        "op": "gain",
+        "resource": "TOXICITY",
+        "amount": 5
+      }
+    ],
+    "boundTo": "junkie.character.ToxicJunkie"
+  },
+  {
+    "binding": "junkie.character.RottenSmile",
+    "kind": "BOUND",
+    "targets": [
+      "OPPONENT"
+    ],
+    "self": [
+      {
+        "op": "gain",
+        "resource": "ALERTNESS",
+        "amount": 5
+      }
+    ],
+    "target": [
+      {
+        "op": "lose",
+        "resource": "ALERTNESS",
+        "amount": 5
+      }
+    ],
+    "priority": 2,
+    "boundTo": "junkie.character.ToxicJunkie"
+  }
+]

@@ -1,0 +1,18 @@
+binding	motivo	numeri
+bruiser.BadEducation	Rimozione condizionale degli stati equipaggiamento	costo V 10; 10 HIT
+bruiser.BreakYourToy	Memoria del bersaglio fra metodi e distruzione condizionale di oggetti	costo V 10
+bruiser.WhatchaDoin	Memoria della carta e annullamento/riflessione condizionale della mossa	costo V 10 e ALERTNESS 10; priority 2
+bruiser.YouStop	Memoria fra metodi e annullamento condizionale della mossa	costo V 5; priority 2; ALERTNESS bersaglio +10
+com.Grab	Selezione, memoria e consumo condizionale di oggetti	costo 0; priority 1
+com.ShuffleFeet	Scambio degli oggetti dei personaggi	costo 0; priority -1
+com.Steal	Memoria fra metodi e trasferimento condizionale di oggetti	costo ALERTNESS 10; priority 0
+com.basic.BruiserGrab	Eredita gli effetti di Grab e azione base non esprimibile	costo 0; priority -1
+com.basic.ToxicGrab	Eredita gli effetti di Grab e azione base non esprimibile	costo 0; priority 1; perde ALERTNESS / 2
+com.items.AnotherRottenBeer	Eredita RottenBeer e crea un oggetto	ALCOHOL +10
+com.items.MarvelousCocktail	Immunita e timer con cancellazione stati e danno diretto	ALCOHOL +20; TOXICITY +20; timer 5; 20 POISON
+junkie.AmphetamineReflexes	Memoria fra metodi e annullamento condizionale delle mosse	costo TOXICITY 10; priority 2
+junkie.BadTrip	Rimozione immunita e timer di ripristino	costo ALERTNESS 10; priority 2; timer 3; TOXICITY +TOXICITY
+junkie.BeggingMoney	Memoria e copia casuale condizionale di oggetti	costo TOXICITY 25; priority 0; ALERTNESS bersaglio -10
+junkie.EverythingIsDrug	Eredita la logica di selezione e rimozione oggetti di Grab	costo 0; priority 1; TOXICITY +20
+junkie.LethalHeroinDose	Condizione sulla tossicita per la perdita di salute	costo 0; soglia TOXICITY 30; HEALTH -TOXICITY se >=30; TOXICITY +(TOXICITY-30)
+junkie.ToxicBloodDrain	Memoria della tossicita fra metodi, immunita e timer	costo TOXICITY 10; trasferisce TOXICITY memorizzata; timer 1
