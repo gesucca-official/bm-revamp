@@ -4,6 +4,7 @@
 // (href only, never opened). The local profile has no SMTP (app.mail.enabled false): the code cannot be sent, and the
 // script checks the explicit "not available" message and that no account is created.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
+import {checkTouchControls,requireTouchControls} from './controls-checks.mjs';
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
@@ -66,7 +67,7 @@ const rest=[],entries=new Map();
 page.on('request',r=>{const u=new URL(r.url());if(!u.pathname.startsWith('/rest/'))return;const e={path:decodeURIComponent(u.pathname),method:r.method(),status:null};entries.set(r,e);rest.push(e);});
 page.on('response',r=>{const e=entries.get(r.request());if(e)e.status=r.status();});
 page.on('requestfailed',r=>{const e=entries.get(r);if(e)e.failure=r.failure()?.errorText;});
-const shot=async(n,p=page,t=tag)=>p.screenshot({path:`${out}/screens/public-${n}${t}.jpg`,type:'jpeg',quality:70});
+const shot=async(n,p=page,t=tag)=>{const c=await checkTouchControls(p,n);if(c)(evidence.touchControls??=[]).push(c);requireTouchControls(c);return p.screenshot({path:`${out}/screens/public-${n}${t}.jpg`,type:'jpeg',quality:70});};
 const hash=()=>page.evaluate(()=>location.hash);
 // No horizontal scroll of the page; the sheet scrolls only vertically. Rule tables may scroll inside their own box.
 const layout=(p=page)=>p.evaluate(()=>{const s=document.querySelector('.sheet');const r=s?.getBoundingClientRect();
