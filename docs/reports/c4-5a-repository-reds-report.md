@@ -55,9 +55,9 @@ Il primo giro di `a807aa0` e di `c2fd60f` non è valido: lanciato con Maven dire
 
 [`WebSocketIdentityTest`](../../server/src/test/java/com/gsc/bm/WebSocketIdentityTest.java): `subscribeConfirmed` sottoscrive con header `receipt` e attende il RECEIPT (il server lo invia dopo la registrazione, via `SubscriptionReceiptInterceptor`, già coperto da `SubscriptionReceiptTest`) prima del `send`. Il client di test riceve un `TaskScheduler` daemon, necessario per seguire le ricevute. **Non indebolisce il test**: le asserzioni (errore privato non nullo, testo `Account data unavailable`, nessun dettaglio del database) sono invariate; si aggiunge solo l'attesa della sottoscrizione, che è la precondizione che il test dava per scontata.
 
-### Non corretto, da sapere
+### Estensione agli altri test della classe
 
-Gli altri test della classe (`quickJoinReadyAndFirstRoundAgainstRealBot`, `privateGameViewValidMoveAndRejectedCommandsPreserveState`, `directConnectPrivateReplyDuplicateRejectionAndReconnect`) usano lo stesso schema «subscribe poi send» e hanno la stessa gara latente, con tasso verosimilmente simile. Non cambiati per restare nella correzione minima; `subscribeConfirmed` è pronto per estenderli. Proposta: estenderla a quei siti in un intervento dedicato.
+Gli altri tre test con lo schema «subscribe poi send» (`quickJoinReadyAndFirstRoundAgainstRealBot`, `privateGameViewValidMoveAndRejectedCommandsPreserveState`, `directConnectPrivateReplyDuplicateRejectionAndReconnect`) avevano la stessa gara latente. Le loro sottoscrizioni che precedono un invio usano ora `subscribeConfirmed`. Restano volutamente senza ricevuta le due sottoscrizioni che il test si aspetta **negate** (`stranger` sulla vista altrui, `bob` sul canale privato di `socketAlice`): una sottoscrizione negata non riceve ricevuta. Il tasso di gara di questi tre test non è stato misurato prima della modifica.
 
 ## 2. `verify-match-manifests.py` e `rulesVersion`
 
@@ -88,14 +88,14 @@ Eseguite sul worktree con le modifiche di questo rapporto (test corretto, audit 
 |---|---|
 | `./scripts/build.ps1 -Task Test -Offline` (include `check-rules.py` e i test client-debug) | verde, 266 test server ordinari, exit 0 |
 | `python scripts/check-rules.py` | verde |
-| `./scripts/build.ps1 -Task TestServerContext -Offline`, tre giri | **3 verdi su 3**, 373 test, 0 fallimenti |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` | **verde**: tre giri sul solo test corretto, poi due giri dopo l'estensione agli altri tre test (373 test, 0 fallimenti) |
 | `python scripts/verify-match-manifests.py` sulle evidenze del giro precedente | verde: 12 casi / 169 eventi, 12 / 36, 7 / 563 |
 
-Tre giri verdi non provano l'assenza della gara in sé (tasso originale circa 1-2% per esecuzione): la prova è nella sonda (0 / 1500 con ricevuta contro 27-122 / 1500 senza).
+Qualche giro verde non prova l'assenza della gara in sé (tasso originale circa 1-2% per esecuzione): la prova è nella sonda (0 / 1500 con ricevuta contro 27-122 / 1500 senza).
 
 ## Non verificato
 
 - Il tasso reale del test sul giro completo: i campioni sono troppo piccoli per un confronto statistico fra commit; la prova della causa poggia sulla sonda (1500 iterazioni) e sulla traccia, non sui giri completi.
 - La sonda usa un singolo utente con stub di `findById` e un interceptor che altera la temporizzazione: i tassi assoluti non sono trasferibili al test reale, solo l'ordinamento e l'effetto della ricevuta.
-- Gli altri siti «subscribe poi send» della classe: gara latente non misurata.
+- Il tasso della gara negli altri tre test della classe, prima dell'estensione: non misurato.
 - L'audit controlla la coerenza con il repository corrente: non può dire se le evidenze siano state generate da una build sporca (cfr. `codeSha256`).

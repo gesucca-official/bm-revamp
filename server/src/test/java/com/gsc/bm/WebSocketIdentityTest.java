@@ -59,8 +59,8 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             session = connect(client,"roundHuman","synthetic",new StompSessionHandlerAdapter() {});
             observer = connect(client,"roundObserver","synthetic",new StompSessionHandlerAdapter() {});
             var ready = new LinkedBlockingQueue<byte[]>(); var others = new LinkedBlockingQueue<byte[]>();
-            session.subscribe("/user/queue/game/quick/1vCom/ready",collect(ready));
-            observer.subscribe("/user/queue/game/quick/1vCom/ready",collect(others));
+            subscribeConfirmed(session,"/user/queue/game/quick/1vCom/ready",collect(ready));
+            subscribeConfirmed(observer,"/user/queue/game/quick/1vCom/ready",collect(others));
             session.send("/app/game/quick/1vCom/join","roundHuman".getBytes(java.nio.charset.StandardCharsets.UTF_8));
             var reply = ready.poll(4,TimeUnit.SECONDS); assertNotNull(reply); joined = true;
             String id = new String(reply,java.nio.charset.StandardCharsets.UTF_8);
@@ -68,9 +68,9 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             assertNull(others.poll(200,TimeUnit.MILLISECONDS));
             org.mockito.Mockito.verify(gameFactory,org.mockito.Mockito.times(1)).craftQuick1vComGame("roundHuman");
             var updates = new LinkedBlockingQueue<byte[]>(); var privateViews = new LinkedBlockingQueue<byte[]>(); var errors = new LinkedBlockingQueue<byte[]>();
-            session.subscribe("/topic/game/"+id+"/update",collect(updates));
-            session.subscribe("/user/queue/game/"+id+"/view",collect(privateViews));
-            session.subscribe("/user/queue/illegalMove",collect(errors));
+            subscribeConfirmed(session,"/topic/game/"+id+"/update",collect(updates));
+            subscribeConfirmed(session,"/user/queue/game/"+id+"/view",collect(privateViews));
+            subscribeConfirmed(session,"/user/queue/illegalMove",collect(errors));
             var command = mapper.createObjectNode().put("playedCardName",human.getCardsInHand().get(0).getName())
                     .put("playerId","roundHuman").put("targetId",bot.getPlayerId()).put("gameId",id);
             session.send("/app/game/"+id+"/move",mapper.writeValueAsBytes(command.deepCopy().putNull("targetId")));
@@ -109,9 +109,9 @@ class WebSocketIdentityTest extends SqliteContextSupport {
                 public void handleTransportError(StompSession s,Throwable error) { transportErrors.add(new byte[0]); }
             });
             var replies = new LinkedBlockingQueue<byte[]>(); var errors = new LinkedBlockingQueue<byte[]>(); var accepted = new LinkedBlockingQueue<byte[]>();
-            session.subscribe("/user/queue/game/"+id+"/view",collect(replies));
-            session.subscribe("/user/queue/illegalMove",collect(errors));
-            session.subscribe("/topic/game/"+id+"/move",collect(accepted));
+            subscribeConfirmed(session,"/user/queue/game/"+id+"/view",collect(replies));
+            subscribeConfirmed(session,"/user/queue/illegalMove",collect(errors));
+            subscribeConfirmed(session,"/topic/game/"+id+"/move",collect(accepted));
             session.send("/app/game/"+id+"/wireAlice/view",new byte[0]);
             var raw = replies.poll(4,TimeUnit.SECONDS); assertNotNull(raw);
             var view = mapper.readTree(raw); var players = view.path("players");
@@ -221,7 +221,7 @@ class WebSocketIdentityTest extends SqliteContextSupport {
             assertThrows(Exception.class, () -> connect(client, "socketAlice", "synthetic", new StompSessionHandlerAdapter() {}));
             assertThrows(Exception.class, () -> connect(client, "socketBob", "wrong", new StompSessionHandlerAdapter() {}));
             BlockingQueue<byte[]> privateReply = new LinkedBlockingQueue<>();
-            alice.subscribe("/user/queue/account/data", new StompFrameHandler() {
+            subscribeConfirmed(alice,"/user/queue/account/data", new StompFrameHandler() {
                 public Type getPayloadType(StompHeaders headers) { return byte[].class; }
                 public void handleFrame(StompHeaders headers, Object payload) { privateReply.add((byte[]) payload); }
             });
