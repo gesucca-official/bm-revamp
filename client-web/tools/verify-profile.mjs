@@ -7,6 +7,7 @@
 // the browser context answers the 401 challenge (Playwright httpCredentials), as the native prompt does for a person.
 // BM_NATIVE_PROMPT=1 also opens a headed Edge without credentials to capture the native prompt and answer it.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
+import {checkTouchControls,requireTouchControls} from './controls-checks.mjs';
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
@@ -81,7 +82,7 @@ async function open(name,options={}){
  page.on('requestfailed',r=>{if(r._e)r._e.failure=r.failure()?.errorText;});
  p.state=()=>page.evaluate(()=>window.__bm?.state??null);
  p.wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await p.state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`${name}: timeout ${what}`);};
- p.shot=async n=>page.screenshot({path:`${out}/screens/profile-${n}${tag}.jpg`,type:'jpeg',quality:70});
+ p.shot=async n=>{const c=await checkTouchControls(page,n);if(c)(evidence.touchControls??=[]).push(c);requireTouchControls(c);return page.screenshot({path:`${out}/screens/profile-${n}${tag}.jpg`,type:'jpeg',quality:70});};
  return p;
 }
 async function login(p,user,password){

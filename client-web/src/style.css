@@ -1559,3 +1559,6 @@ button[aria-selected=true] { box-shadow: inset 0 -3px 0 var(--accent-strong); }
 
 /* A: card content keeps the existing light panels; selection has a visible outline. */
 .cc, .decks li { border-color: var(--border-panel); }
+
+/* A: same panel fillet as catalog/editor; existing inline confirmations retained. */
+.admin-log { border-color: var(--border-panel); }
