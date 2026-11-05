@@ -4,6 +4,7 @@
 // "Deck unavailable" cannot be reached from the UI with one account (the dialog lists only saved decks): it is
 // provoked by rewriting the deckId of the outgoing join frame (Playwright routeWebSocket), and declared as such.
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
+import {checkTouchControls,requireTouchControls} from './controls-checks.mjs';
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
 import {mkdir,mkdtemp,readFile,rm,writeFile} from 'node:fs/promises';
@@ -62,7 +63,7 @@ evidence.console=[];page.on('console',m=>{if(m.type()==='error'||m.type()==='war
 page.on('websocket',ws=>{ws.on('framesent',f=>A.sent.push(...stompFrames(f.payload)));ws.on('framereceived',f=>A.received.push(...stompFrames(f.payload)));});
 A.state=()=>page.evaluate(()=>window.__bm?.state??null);
 A.wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await A.state();if(await pred(s))return s;await page.waitForTimeout(100);}throw new Error(`A: timeout ${what}`);};
-A.shot=async n=>page.screenshot({path:`${out}/screens/decks-${n}${tag}.jpg`,type:'jpeg',quality:70});
+A.shot=async n=>{const c=await checkTouchControls(page,n);if(c)(evidence.touchControls??=[]).push(c);requireTouchControls(c);return page.screenshot({path:`${out}/screens/decks-${n}${tag}.jpg`,type:'jpeg',quality:70});};
 A.sends=(from=0)=>A.sent.slice(from).filter(f=>f.command==='SEND');
 A.messages=dest=>A.received.filter(f=>f.command==='MESSAGE'&&(typeof dest==='string'?f.headers.destination===dest:dest.test(f.headers.destination)));
 A.account=()=>JSON.parse(A.messages('/user/queue/account/data').at(-1).body);

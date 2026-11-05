@@ -783,3 +783,5 @@ Commit per gruppi: token/componenti comuni; accesso/home/regole/rotazione; hub/c
 **Gruppo pubblico:** Home, Regole, Accesso, Registrazione: link e Home portati a 44×44 minimi; testo, percorsi e selettori invariati. Verifica touch aggiunta ai checkpoint fotografici esistenti di VerifyPublic: misura il box CSS senza il falso ingrandimento del foglio ruotato; nessun vecchio controllo sostituito. La rotazione conserva i suoi box e la tinta calda, ora da token.
 
 **Gruppo hub/code/FFA/Al bar:** ordinamenti e select Righe almeno 44×44; stati condivisi A, scelte ancora riconoscibili da filetto/outline oltre alla tinta. VerifyModes/Ffa/Lifecycle aggiungono la scansione touch agli stessi checkpoint esistenti, senza cambiare attese, scenari o azioni.
+
+**Gruppo catalogo/mazzi/editor:** pannelli A e filetto coerente; summary degli slot 44 px anche compatti. Nessun TSX o struttura dell’editor cambiati: filtri, nomi, liste, salvataggio, annullamento, duplicati e cancellazione restano gli stessi. VerifyDecks conserva tutti gli attesi e aggiunge i bersagli touch agli stessi checkpoint.
