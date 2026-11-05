@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**5 novembre 2026 — versione 43. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; C4-5a approvato il 5 novembre 2026, O2 chiusa; C4-5a-bis fatto, in attesa del giudizio del proprietario (O26 e O27), poi C4-5b).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**5 novembre 2026 — versione 44. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; C4-5a approvato il 5 novembre 2026, O2 chiusa; C4-5a-bis approvato dal proprietario il 5 novembre 2026 dopo una partita vera (O26 e O27 chiuse), poi C4-5b).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -579,7 +579,7 @@ schermate e controlli utilizzabili anche senza hover.
 
 **Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
 decisioni D1–D14, in parte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
-**Stato (5 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **approvato dal proprietario il 5 novembre 2026, O2 chiusa** ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); C4-5a-bis fatto, in attesa del giudizio del proprietario (O26 e O27), poi C4-5b.
+**Stato (5 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **approvato dal proprietario il 5 novembre 2026, O2 chiusa** ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); C4-5a-bis approvato dal proprietario il 5 novembre 2026 dopo una partita vera (O26 e O27 chiuse), poi C4-5b.
 
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder
@@ -706,8 +706,8 @@ modifica a regole, server o catalogo è già decisa.
 
 | ID | Osservazione | Tappa | Note e vincoli |
 |---|---|---|---|
-| O26 | Nella scelta dello scarto la carta legata resta ingrandita e copre le candidate. | C4-5a-bis, fatta, in attesa del giudizio del proprietario | Decisione successiva del proprietario: tutte le carte in anteprima lasciano vuoto il proprio posto nella mano e vi tornano con ×. Prima del bersaglio legata a riposo; non scartabili attenuate e indicate in testo solo mentre manca lo scarto. Stessi tocchi, server giudice e conferma C4-2. [Rapporto](reports/client-c4-report.md#c4-5a-bis); verifiche riprese dopo il via libera e concluse; risultati nel rapporto. |
-| O27 | In duello gli oggetti propri coprono il posacenere anche con spazio a destra del personaggio. | C4-5a-bis, fatto, in attesa del giudizio del proprietario | Scelta del proprietario: A con passo pieno, ripiego 0,75, poi sopra; C esclusa, posacenere fermo. 236 unità verdi, FFA identica e nessun peggioramento dei fattori o di 750×292; giri ufficiali verdi sul jar pre-SB-3/SB-4 e limite del nuovo jar accettato dal proprietario; contesto corrente verde. [Stato e verifiche](reports/client-c4-report.md#c4-5a-bis). |
+| O26 | Nella scelta dello scarto la carta legata resta ingrandita e copre le candidate. | C4-5a-bis, approvata il 5 novembre 2026 | Decisione successiva del proprietario: tutte le carte in anteprima lasciano vuoto il proprio posto nella mano e vi tornano con ×. Prima del bersaglio legata a riposo; non scartabili attenuate e indicate in testo solo mentre manca lo scarto. Stessi tocchi, server giudice e conferma C4-2. [Rapporto](reports/client-c4-report.md#c4-5a-bis); verifiche riprese dopo il via libera e concluse; risultati nel rapporto. |
+| O27 | In duello gli oggetti propri coprono il posacenere anche con spazio a destra del personaggio. | C4-5a-bis, approvato il 5 novembre 2026 | Scelta del proprietario: A con passo pieno, ripiego 0,75, poi sopra; C esclusa, posacenere fermo. 236 unità verdi, FFA identica e nessun peggioramento dei fattori o di 750×292; giri ufficiali verdi sul jar pre-SB-3/SB-4 e limite del nuovo jar accettato dal proprietario; contesto corrente verde. [Stato e verifiche](reports/client-c4-report.md#c4-5a-bis). |
 
 ## Verifiche proporzionate
 
@@ -765,6 +765,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 44 — 5 novembre 2026:** C4-5a-bis approvato dal proprietario dopo una partita vera: «ho giocato una partita vera e approvo quanto abbiamo fatto». O26 e O27 chiuse; [giudizio e limite delle verifiche](reports/client-c4-report.md#c4-5a-bis).
 - **Versione 43 — 5 novembre 2026:** O27 scelta A con passo pieno prima del ripiego 0,75, poi riga superiore; nessuna C. Blocco fatto in attesa del giudizio: 236 unità e giri ufficiali verdi, 750 con conteggi invariati e rossi dichiarati. Contesto corrente verde, audit manifest rosso noto; il proprietario accetta la chiusura senza un ulteriore giro grafico sul jar SB-3/SB-4 entrato durante la pausa.
 - **Versione 42 — 5 novembre 2026:** registrata l’approvazione letterale di C4-5a, O2 chiusa; O26 e O27 assegnate a C4-5a-bis, con arresto alla proposta per O27 prima della scelta del proprietario. [Rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2).
 - **Versione 41 — 4 novembre 2026, C4-5a:** integrato piano 2 in modalità S, con tre sprite uniformi non interattivi e ombre dal codice; scelta esplicita del proprietario al posto del cover senza deformazione. Registri e inventario aggiornati; giro ufficiale 7/7 verde, Size entro limiti rigidi e 32 MiB di texture; rossi 750 preesistenti e conteggi invariati documentati; rossi separati Spring/manifest registrati senza cambiare attesi. O2 **fatto, in attesa del giudizio del proprietario** sul tavolo vero. Nessuna regola, API, protocollo o catalogo cambiati. [Rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2).

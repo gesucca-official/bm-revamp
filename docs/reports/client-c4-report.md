@@ -629,7 +629,7 @@ La richiesta di giudizio sul tavolo vero è stata soddisfatta dall’approvazion
 
 ## C4-5a-bis
 
-5 novembre 2026, base `a9921d1`. **Stato del blocco: fatto, in attesa del giudizio del proprietario. O26 e O27 risolte.** Nessun push. Giudizio C4-5a/O2 nel commit documentale `be25814`; O26 in `f6e69fd`; punto 2 e chiusura documentale nella modifica successiva. Le sospensioni per processi esterni e la pausa richiesta dal proprietario sono terminate; nessun processo altrui è stato fermato.
+5 novembre 2026, base `a9921d1`. **Stato del blocco: approvato dal proprietario il 5 novembre 2026. O26 e O27 chiuse.** Giudizio dopo una partita vera: «ho giocato una partita vera e approvo quanto abbiamo fatto». Nessun push. Giudizio C4-5a/O2 nel commit documentale `be25814`; O26 in `f6e69fd`; punto 2 e chiusura documentale nella modifica successiva. Le sospensioni per processi esterni e la pausa richiesta dal proprietario sono terminate; nessun processo altrui è stato fermato.
 
 **Limite accettato esplicitamente dal proprietario alla chiusura:** «Chiudi con le verifiche raccolte e dichiara il limite». I giri grafici usano il jar ricostruito su **f6e69fd**, con il client O27 finale **6fd49130507af819**. Durante la pausa sono entrati i commit SB-3/SB-4 `1ab6464` e `af6e8b2`: il contesto Spring è verde su questa versione corrente, ma **non è stato effettuato un nuovo giro grafico sul suo jar**. I tentativi di lanciarlo sono stati bloccati dai controlli preventivi per nuovi processi Maven/Java esterni. Le modifiche server di quei commit non appartengono a C4-5a-bis. Il consolidamento dell’integrazione corrente resta distinto dalla verifica del blocco client qui riportata.
 
@@ -715,4 +715,4 @@ Le catture dopo sono [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-dopo-
 
 [Verifiche repository separate](client-c4/c4-5a-bis/repository.json): **Test offline verde** (anche 36 test client-debug), **check-rules.py verde**, **TestServerContext offline verde, 373/373**. **verify-match-manifests.py rosso**: riga 53 richiede ancora rulesVersion 1.6, mentre gli export correnti usano 1.10; già registrato in C4-5a. Non modificati audit, regole, server, protocollo, catalogo o manifest tracciati per ottenere il verde.
 
-**Non verificato:** iPhone fisico e Safari; nessuna prova su PC li sostituisce. Il giudizio visivo finale su O26 e O27 resta al proprietario. Il nuovo giro grafico sul jar SB-3/SB-4 corrente non è stato svolto, come esplicitamente accettato alla chiusura.
+**Non verificato:** iPhone fisico e Safari; nessuna prova su PC li sostituisce. Il giudizio visivo finale su O26 e O27 è stato espresso dal proprietario il 5 novembre 2026 dopo una partita vera: «ho giocato una partita vera e approvo quanto abbiamo fatto»; blocco approvato. Il nuovo giro grafico sul jar SB-3/SB-4 corrente non è stato svolto, come esplicitamente accettato alla chiusura.
