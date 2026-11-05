@@ -4,7 +4,8 @@
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
-[O15–O18](#osservazioni-della-prova-umana-b-c2b-7), [O19–O22](#osservazioni-registrate-durante-c3) e decisioni aperte; le revisioni
+[O15–O18](#osservazioni-della-prova-umana-b-c2b-7), [O19–O23](#osservazioni-registrate-durante-c3),
+[O24–O25](#osservazioni-registrate-durante-c4), [O26–O27](#osservazioni-della-prova-di-c4-5a) e decisioni aperte; le revisioni
 1–20 sono [archiviate](history/client-roadmap-revisions.md). Obiettivo: permettere a giocatori umani di
 provare Botte Micidiali attraverso un client leggibile, rapido e piacevole,
 con tavolo e carte animati. Le funzionalità finali saranno le stesse del
@@ -28,9 +29,10 @@ landscape forzato: [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti),
 La [checklist P01–P44](client-c0-parity.md) e il [contratto delle interazioni](design/client-c0/interaction-contract.md)
 sono state le basi di C1–C2. Il [primo rapporto](reports/client-c0-report.md)
 e il laboratorio Angular sono evidenze storiche della scena respinta.
-Il [regolamento 1.8](game-rules.md) rimane la fonte normativa (1.8, C2b-4: nessun «/» nell'identificativo dei mazzi). Il rifacimento
+Il [regolamento 1.10](game-rules.md) rimane la fonte normativa (1.8, C2b-4: nessun «/» nell'identificativo dei mazzi). Il rifacimento
 non cambia regole né effetti; per decisione del proprietario su O14 il catalogo
-ha due campi descrittivi (ruolo e guadagni, R07a), esposti dal server e copiati
+ha due campi descrittivi (ruolo e guadagni, R07a, 1.7), a cui A1 e A3 del piano C3 aggiungono
+tipo e importo nominale del danno (1.9 e 1.10), esposti dal server e copiati
 nelle regole del debug. La base I22
 resta [approvata e archiviata](roadmap.md); C0–C5 non riaprono gli incrementi storici differiti.
 
