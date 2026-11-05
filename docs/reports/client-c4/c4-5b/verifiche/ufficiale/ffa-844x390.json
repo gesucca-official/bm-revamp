@@ -1,0 +1,271 @@
+{
+ "date": "2026-11-05T16:54:02.041Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts, A with touch emulation) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "queueExit": {
+   "alone": {
+    "list": [
+     "devAlice (tu)"
+    ],
+    "startEnabled": false,
+    "addEnabled": true
+   },
+   "withBots": [
+    "devAlice (tu)",
+    "Computer 1",
+    "Computer 2"
+   ],
+   "sendsOnExit": [
+    "/app/session/queue/leave"
+   ],
+   "lastListSeenByA": [],
+   "listSeenByBAfterwards": [
+    "devBob (tu)"
+   ]
+  },
+  "fiveWithComputers": {
+   "gameId": "f5eec7a5970b8535fb46fd06d864544505bc684f2c8b974722306c498d8ac705",
+   "players": [
+    "ComPlayer_7051",
+    "devAlice",
+    "ComPlayer_694",
+    "ComPlayer_1422",
+    "ComPlayer_8845"
+   ],
+   "characters": {
+    "ComPlayer_7051": "Spazienzio de la Ucciso",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_694": "Spazienzio de la Ucciso",
+    "ComPlayer_1422": "Spazienzio de la Ucciso",
+    "ComPlayer_8845": "Spazienzio de la Ucciso"
+   },
+   "seatNames": [
+    "Computer 1",
+    "Tu",
+    "Computer 2",
+    "Computer 3",
+    "Computer 4"
+   ],
+   "turnsChecked": 5,
+   "maxHand": 6,
+   "maxObjects": 1,
+   "fansSeen": [
+    6
+   ],
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_7051",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devAlice",
+     "ComPlayer_694",
+     "ComPlayer_1422",
+     "ComPlayer_8845"
+    ],
+    "turns": 20
+   },
+   "text": "Hai perso Rissa conclusa al tavolo Vince Computer 1 Risolti 16 turni fino al turno 20: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "newGameRepeatsFfa": {
+   "list": [
+    "devAlice (tu)"
+   ]
+  },
+  "twoHumansThreeComputers": {
+   "gameId": "0ba92e76228aa57c87760a89056687c05de557f514f5b8ea04389ac2bd94ded4",
+   "characters": {
+    "ComPlayer_2245": "Tossico del Serraglio",
+    "ComPlayer_1860": "Spazienzio de la Ucciso",
+    "ComPlayer_4048": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso"
+   },
+   "inspectedComputer": {
+    "owner": "ComPlayer_2245",
+    "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+    "text": "Tossico del Serraglio Computer 1 · ID ComPlayer_2245 Salute 100 Allerta 35 Tossicità 10 Oggetti 1 / 3 Mazzo 16 carte Stati, immunità e timer Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. Torna al tavolo"
+   },
+   "turnsCheckedA": 15,
+   "turnsCheckedB": 16,
+   "watchedA": {
+    "turn": 15,
+    "panel": "Sei fuori dalla partita Eliminato: puoi guardare fino all’esito Resta a guardare Nuova partita Torna all’hub Ultimo turno",
+    "hint": "Sei fuori: guardi fino all’esito",
+    "outcomeTurn": 16
+   },
+   "watchedB": null,
+   "privacyA": {
+    "views": 44,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 1,
+    "leaks": 0
+   },
+   "privacyB": {
+    "views": 44,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 1,
+    "leaks": 0
+   },
+   "outcome": {
+    "winner": "devBob",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_2245",
+     "ComPlayer_1860",
+     "ComPlayer_4048",
+     "devAlice"
+    ],
+    "turns": 16
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince devBob Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno"
+  },
+  "startNowWithTwo": {
+   "gameId": "15891b1a247059c37f9eb0f92136e936c67cb5a602ed2d77b52540fe67e70984",
+   "startDisabledAlone": true,
+   "players": [
+    "devAlice",
+    "devBob"
+   ],
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio"
+   },
+   "outcome": {
+    "winner": "devAlice",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devBob"
+    ],
+    "turns": 11
+   },
+   "textA": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLeaves": {
+   "gameId": "67e2d73539f10e99e8169ddbee300d781534553ab895bd3168493d62ece20830",
+   "characters": {
+    "ComPlayer_8718": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_7155": "Tossico del Serraglio",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_8823": "Tossico del Serraglio"
+   },
+   "forfeitSeenAtTurn": 0,
+   "turnsAfter": 14,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_7155",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "leave"
+    },
+    "dead": [
+     "ComPlayer_8718",
+     "devAlice",
+     "ComPlayer_8823"
+    ],
+    "turns": 14
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 2 devBob ha abbandonato Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherMoveTimeout": {
+   "gameId": "2e45fb68d08f1d508d54d67342166d8c57200da7fae4b15bf70a8880e329b05c",
+   "characters": {
+    "ComPlayer_3741": "Spazienzio de la Ucciso",
+    "ComPlayer_7939": "Tossico del Serraglio",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_1194": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso"
+   },
+   "clockB": [
+    "◷ 30 s"
+   ],
+   "secondsToForfeit": 30,
+   "bOver": false,
+   "panelB": "Sei fuori dalla partita Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "turnsAfter": 10,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_1194",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "move timeout"
+    },
+    "dead": [
+     "ComPlayer_3741",
+     "ComPlayer_7939",
+     "devAlice"
+    ],
+    "turns": 21
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 devBob non ha mosso entro 30 secondi Risolti 11 turni fino al turno 21: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLateRejoin": {
+   "gameId": "d07a227a194676a0983472e70726117489f2b7b077fc4965cd36fea8795581ec",
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_8851": "Tossico del Serraglio",
+    "devBob": "Spazienzio de la Ucciso",
+    "ComPlayer_6399": "Spazienzio de la Ucciso",
+    "ComPlayer_4290": "Tossico del Serraglio"
+   },
+   "awayShownToA": [
+    "devBob fuori linea · 30 s"
+   ],
+   "resumeStatus": "finished",
+   "resumeTurn": 2,
+   "turnSeenByB": 2,
+   "turnOfA": 2,
+   "forfeits": {
+    "devBob": "reconnect timeout"
+   },
+   "panelB": "Sei fuori dalla partita Non sei rientrato entro 30 secondi Risolti 2 turni fino al turno 2: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno",
+   "framesB": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devBob/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "turnsAfter": 19,
+   "watched": null,
+   "outcome": {
+    "winner": "devAlice",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "reconnect timeout"
+    },
+    "dead": [
+     "ComPlayer_8851",
+     "ComPlayer_6399",
+     "ComPlayer_4290"
+    ],
+    "turns": 21
+   },
+   "textA": "Hai vinto Rissa conclusa al tavolo devBob non è rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "k7": {
+   "mouse": null,
+   "touch": null,
+   "raiseOnly": null
+  }
+ },
+ "errors": [],
+ "ok": true
+}

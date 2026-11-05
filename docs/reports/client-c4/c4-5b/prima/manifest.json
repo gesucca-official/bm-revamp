@@ -1,0 +1,526 @@
+{
+  "date": "2026-11-05",
+  "images": [
+    {
+      "file": "accesso-1366x768.jpg",
+      "bytes": 104032,
+      "sha256": "6f838108f1f3da622d5e8949be03a9093328142534efa6d7af396111cfafa5f5"
+    },
+    {
+      "file": "accesso-390x844.jpg",
+      "bytes": 27461,
+      "sha256": "806ec20a272e842b0c37e7103023fef68d06b1c6189eecf4c4a10c7c1afc284a"
+    },
+    {
+      "file": "accesso-844x390.jpg",
+      "bytes": 35291,
+      "sha256": "b65fa442ffbfa55fdf38d2150d7d509ddee2c5fb84d8ea85bb27a1540ae070c8"
+    },
+    {
+      "file": "amministrazione-azioni-1366x768.jpg",
+      "bytes": 105548,
+      "sha256": "bee30204261541d05b620d0e67ae0b733440034d2a332c0bda7a79505ce424a2"
+    },
+    {
+      "file": "amministrazione-azioni-390x844.jpg",
+      "bytes": 34885,
+      "sha256": "eb12344e088501d99a0f6b337b4fc86686bc0a98071a0aa3d1834fb22aec55d0"
+    },
+    {
+      "file": "amministrazione-azioni-844x390.jpg",
+      "bytes": 33880,
+      "sha256": "32f31752af920c28c99ec0f4718762c325d5ce8a1f06c5b044e5c190f8dd7a40"
+    },
+    {
+      "file": "amministrazione-conferma-1366x768.jpg",
+      "bytes": 109918,
+      "sha256": "917f6e1c93c98a2bbce6e5c6f9a269c74aa8fefc9db6c4801bf746f7c7475209"
+    },
+    {
+      "file": "amministrazione-conferma-390x844.jpg",
+      "bytes": 38876,
+      "sha256": "5884dea64debcd8f593b0d61fe5c70f0c295bd435903c2ec2bafef0e26ed9e5b"
+    },
+    {
+      "file": "amministrazione-conferma-844x390.jpg",
+      "bytes": 34484,
+      "sha256": "ddc48bcbcff3bc811ffd970ff1f6ef51a34b84ac37695d361366806dc3936eb2"
+    },
+    {
+      "file": "amministrazione-errore-1366x768.jpg",
+      "bytes": 106042,
+      "sha256": "e8ea3b514a86e3454c5ec66b7a73f73466ee9d545cbdfb8686525acb09874d39"
+    },
+    {
+      "file": "amministrazione-errore-390x844.jpg",
+      "bytes": 36573,
+      "sha256": "f2ed77c2908006409507f899d0fead2d69819143d319ae4e44de3602934ec644"
+    },
+    {
+      "file": "amministrazione-errore-844x390.jpg",
+      "bytes": 33209,
+      "sha256": "e5a285747e1437dc2fe2dbf44584dca2ea9b70bbd56d2ca4a6eb3b63cdf15f54"
+    },
+    {
+      "file": "amministrazione-partite-1366x768.jpg",
+      "bytes": 107464,
+      "sha256": "188741577e2135cd80c5b5f23771180bccf342fc26800545018837466a41be72"
+    },
+    {
+      "file": "amministrazione-partite-390x844.jpg",
+      "bytes": 38701,
+      "sha256": "b55d97013dd761c7affee7056f303e9c194a20eddc264af2e09c1aa1b7a49623"
+    },
+    {
+      "file": "amministrazione-partite-844x390.jpg",
+      "bytes": 33268,
+      "sha256": "3871b783b6909701124490bb4e3e4e2f6d6a2ecf432caa64bcb60cdaa72eac23"
+    },
+    {
+      "file": "cancellazione-mazzo-1366x768.jpg",
+      "bytes": 106617,
+      "sha256": "20d4c697a47b3461cea058ceed5be304b795a6a5ed2dbf542e2f8cf21ef9f57f"
+    },
+    {
+      "file": "cancellazione-mazzo-390x844.jpg",
+      "bytes": 33130,
+      "sha256": "b8f3a6324267959313bb8a20ef623bfabb81eacaa952b95ea67bbc4723635140"
+    },
+    {
+      "file": "cancellazione-mazzo-844x390.jpg",
+      "bytes": 36219,
+      "sha256": "67024c597d50a686549373b98e7d96114558e513bb71d7baa49f56fe9ce752d8"
+    },
+    {
+      "file": "catalogo-1366x768.jpg",
+      "bytes": 127102,
+      "sha256": "cbecfa1d5739a999b965de763ec9828a574870ef04db167dc387864d1451efed"
+    },
+    {
+      "file": "catalogo-390x844.jpg",
+      "bytes": 43195,
+      "sha256": "4a2df1765a9665a4f2f33e05fe1fc9b3524ab4f3c95b050b36ce40aa6971aee4"
+    },
+    {
+      "file": "catalogo-844x390.jpg",
+      "bytes": 38309,
+      "sha256": "164608feb1cef24bc329b9c97949f9b6e0f973613344fecb822a7f2e4d3c6163"
+    },
+    {
+      "file": "coda-duello-1366x768.jpg",
+      "bytes": 100890,
+      "sha256": "e18f1f6f04549ddf3de48aff3e9fa05de91f5ab77f2a8bc85e76889b483df506"
+    },
+    {
+      "file": "coda-duello-390x844.jpg",
+      "bytes": 29222,
+      "sha256": "45aaee41107c3a80e897311e4e72330bfcc8ff61964daf6921c470e7f2f182d9"
+    },
+    {
+      "file": "coda-duello-844x390.jpg",
+      "bytes": 33902,
+      "sha256": "657f332a28501dd40e9829efadfa168931b1a96b9d2867383da1d1a48c476b44"
+    },
+    {
+      "file": "coda-ffa-lista-1366x768.jpg",
+      "bytes": 98324,
+      "sha256": "56b017bad36b612c6db0acad104b0456d2cb81789af4ac72c7414bdeec32e9e6"
+    },
+    {
+      "file": "coda-ffa-lista-390x844.jpg",
+      "bytes": 30304,
+      "sha256": "3f0b7121100ae77b1a9dffa9735fcfc659cd68afe636ce75c31f97c8079747ae"
+    },
+    {
+      "file": "coda-ffa-lista-844x390.jpg",
+      "bytes": 34244,
+      "sha256": "c8ef0c3a632d2c4ec7f857dbda951b5006a1f06f615d833c8a74a2ddf5f25d03"
+    },
+    {
+      "file": "conferma-abbandono-1366x768.jpg",
+      "bytes": 71253,
+      "sha256": "a16f17252170792d8919f2731f3bff15d09a41c9f5950480c10bf93c917643df"
+    },
+    {
+      "file": "conferma-abbandono-390x844.jpg",
+      "bytes": 12545,
+      "sha256": "d9b5b4e1e055343a28ce0c696e5f6c58a797da5f6458c5501cb9608726551c11"
+    },
+    {
+      "file": "conferma-abbandono-844x390.jpg",
+      "bytes": 20895,
+      "sha256": "de2150d73ea6ccde879ddd4c19bd40f50c6826fa0ec8176e3668eb3ecce74899"
+    },
+    {
+      "file": "conferma-pronta-1366x768.jpg",
+      "bytes": 151203,
+      "sha256": "1dc69f40efb131ae8b5f1336d0e7d04df445a0c47ecfd25da0e310af01309a36"
+    },
+    {
+      "file": "conferma-pronta-844x390.jpg",
+      "bytes": 60801,
+      "sha256": "8690a66ead918e38a6ffdf20e6dc666eaff88ab7bb3c7e09e0488938e45d02c1"
+    },
+    {
+      "file": "conferma-uscita-1366x768.jpg",
+      "bytes": 71937,
+      "sha256": "38779eb7e9c49b40a3bc8d79595d5e4d2dc3c3f0513bdea7430f375b3224b173"
+    },
+    {
+      "file": "conferma-uscita-390x844.jpg",
+      "bytes": 13124,
+      "sha256": "6cf81d74845b955d7ddd9e8432bbcbaeebe6bb55c46b74d23da6c740aa14c886"
+    },
+    {
+      "file": "conferma-uscita-844x390.jpg",
+      "bytes": 21741,
+      "sha256": "94987b0d9823d68e6fb13fc796ba0a9eeec68409bc0a78342a8b112ef4a7ede5"
+    },
+    {
+      "file": "editor-1366x768.jpg",
+      "bytes": 87268,
+      "sha256": "a896b1063c35e4253834c4b44ff22dc9efcbb51dff25c128592d71d6b020f6c1"
+    },
+    {
+      "file": "editor-390x844.jpg",
+      "bytes": 40965,
+      "sha256": "190dc52af839cdeeabd0c3f495674377445ff2ec88e45988e866ab7037ca2cf4"
+    },
+    {
+      "file": "editor-844x390.jpg",
+      "bytes": 34454,
+      "sha256": "9f0e3767de927ed18473da1ccbd224450cb4b1ccaebde06f304d81fd6ae54f1a"
+    },
+    {
+      "file": "editor-incompleto-1366x768.jpg",
+      "bytes": 88261,
+      "sha256": "4d937016937e68a0f58fb5d9d6f33db49f140339b004cc67cca12c51f0d93369"
+    },
+    {
+      "file": "editor-incompleto-390x844.jpg",
+      "bytes": 34070,
+      "sha256": "e1415ff250953c60e64bba5297bfe2a2842358af503c2c4421c33aa1db242ea6"
+    },
+    {
+      "file": "editor-incompleto-844x390.jpg",
+      "bytes": 28549,
+      "sha256": "bbd48766beec2c4a4226dba8cc3bb819aece725a0db0641b8c2577f2903f3194"
+    },
+    {
+      "file": "errore-grafico-1366x768.jpg",
+      "bytes": 19557,
+      "sha256": "50b68953527adb2a7fb76d0ba161a7e2f7660d51f7dbf196530a2fa25ca3fb74"
+    },
+    {
+      "file": "errore-grafico-844x390.jpg",
+      "bytes": 14007,
+      "sha256": "cc9600b5b4a4a24a968d5efe606d4b3fff5a83e3e31732654fb47027d12aa746"
+    },
+    {
+      "file": "esito-1366x768.jpg",
+      "bytes": 147348,
+      "sha256": "8e985d45f7a690e86a1e29dc5c64a44a920683b1339da1b9f81fc562149c4e76"
+    },
+    {
+      "file": "esito-844x390.jpg",
+      "bytes": 55233,
+      "sha256": "6bc5922fe2ac3144614ff40d0b8ab1762b3f9475b3feeb6d1dbb8988414faddb"
+    },
+    {
+      "file": "home-1366x768.jpg",
+      "bytes": 116912,
+      "sha256": "fbefc5628c69a1a8d6e3ef93850ecd473ccca536e3daf562c755b15eff3a666f"
+    },
+    {
+      "file": "home-390x844.jpg",
+      "bytes": 40505,
+      "sha256": "4d2d3eb3a8556277e64ce2aee852ce89d147ecf6a025f64add8db1f3aba143fd"
+    },
+    {
+      "file": "home-844x390.jpg",
+      "bytes": 43533,
+      "sha256": "b8ba21fb37e37b722b3323fb8cf4388a2722ac6954916b35358e2d87de93673c"
+    },
+    {
+      "file": "home-collegamenti-1366x768.jpg",
+      "bytes": 117766,
+      "sha256": "3fcb93d703623ed30f9835378b62c237b2a1f1ed14702a120fb802123d634c42"
+    },
+    {
+      "file": "home-collegamenti-390x844.jpg",
+      "bytes": 40646,
+      "sha256": "feaa530182eee36f86884b16c2926253c2a08ad501f8b98f0be04ad97e8151fd"
+    },
+    {
+      "file": "home-collegamenti-844x390.jpg",
+      "bytes": 42825,
+      "sha256": "a5382aa52aea0316c1bb55cdd45000b63ad3a7b9f12d1dceef7aa4931b7d4f44"
+    },
+    {
+      "file": "hub-al-bar-1366x768.jpg",
+      "bytes": 104033,
+      "sha256": "506f503d9f3f75e1d8495c1b166b8033e3f7a395c3bf6eac903ded5b830f4818"
+    },
+    {
+      "file": "hub-al-bar-390x844.jpg",
+      "bytes": 31044,
+      "sha256": "373cb291cfc96b8da0fd63ac5f97173e99f89e781cf17d98e0ded44bb467e683"
+    },
+    {
+      "file": "hub-al-bar-844x390.jpg",
+      "bytes": 36671,
+      "sha256": "27cfceaad829b50a087f0148e15cfb9a2c54286a3bd818a3944bbaca417fcb8a"
+    },
+    {
+      "file": "ispezione-carta-1366x768.jpg",
+      "bytes": 83252,
+      "sha256": "4f1c8d3ddd1fb6668203152b995e1f2fe2ec32d5a300d66fbd09864c6c6240c9"
+    },
+    {
+      "file": "ispezione-carta-390x844.jpg",
+      "bytes": 17632,
+      "sha256": "be767eedb169ee20579287a81a83e5043287df4cf5ee3aba41e820e0b5de5656"
+    },
+    {
+      "file": "ispezione-carta-844x390.jpg",
+      "bytes": 30117,
+      "sha256": "cb340d7ebb10be561f0b1d686c0138f3fca71066b906ba42e423507dd7753df3"
+    },
+    {
+      "file": "ispezione-personaggio-1366x768.jpg",
+      "bytes": 76551,
+      "sha256": "b73ace4c2bc3525e3fd605b765648a5e8811c92837a5a8fac5c45a0d09aa3411"
+    },
+    {
+      "file": "ispezione-personaggio-390x844.jpg",
+      "bytes": 14279,
+      "sha256": "b0708a9ea288b0f47dff954c67f5b08c9f8d25475e2b5a2a0815b568277c146b"
+    },
+    {
+      "file": "ispezione-personaggio-844x390.jpg",
+      "bytes": 24780,
+      "sha256": "40447876bb91e2d70d21170eb7adb9a37db63057fd67400c3c1a7629ef5b1e22"
+    },
+    {
+      "file": "linea-caduta-1366x768.jpg",
+      "bytes": 72735,
+      "sha256": "0c0e75a6833cecfd00f76bb7540ef9c7ef62735e0f55ec37f33e2d2ab4e37cb2"
+    },
+    {
+      "file": "linea-caduta-390x844.jpg",
+      "bytes": 15336,
+      "sha256": "c5f785a74611c69cb7077ace01bc3feb05f186a25b2162df08625d14ed562744"
+    },
+    {
+      "file": "linea-caduta-844x390.jpg",
+      "bytes": 30949,
+      "sha256": "5a4820b9d1242956663b3c6975f95f7179a058c9a2f11e0aa12781a9886891db"
+    },
+    {
+      "file": "mazzi-1366x768.jpg",
+      "bytes": 101161,
+      "sha256": "35baec58d9b5eb7669c3e7f19d2fc2fd588726d3b95806c8605fbab407463ac1"
+    },
+    {
+      "file": "mazzi-390x844.jpg",
+      "bytes": 33397,
+      "sha256": "2105fbb17e24bb7762450703305b21b0db8c93b72932d3dbb13fb8e5aac71554"
+    },
+    {
+      "file": "mazzi-844x390.jpg",
+      "bytes": 35642,
+      "sha256": "815ed346486a9c87f4110e65e2569a667318a3f21bf830fe9c32b3735c9fa028"
+    },
+    {
+      "file": "mazzi-vuoti-1366x768.jpg",
+      "bytes": 105135,
+      "sha256": "24da50496089bf1c1093ae221404b551541e2f30fb15d2041d78922257796213"
+    },
+    {
+      "file": "mazzi-vuoti-390x844.jpg",
+      "bytes": 32804,
+      "sha256": "45da0d44a99c45def71f5eddc439a7af73a938e870a089a1540ec1ff22d114a0"
+    },
+    {
+      "file": "mazzi-vuoti-844x390.jpg",
+      "bytes": 38797,
+      "sha256": "acdc322d921d582e848d273aefd17a83660238abafa55f5155c2df16b381066b"
+    },
+    {
+      "file": "menu-1366x768.jpg",
+      "bytes": 103936,
+      "sha256": "617856485db3b84b69c37a219cba42f6d1888f15ae2db5cebb8392adb99467f6"
+    },
+    {
+      "file": "menu-390x844.jpg",
+      "bytes": 34123,
+      "sha256": "e1774efa971747ee0c9922a05b12ba9f4faca4daa131a90e5f24f71ff9437e54"
+    },
+    {
+      "file": "menu-844x390.jpg",
+      "bytes": 45476,
+      "sha256": "45410c86031fd305fc9a336c912e5aa6a5eb5fbfb7975b1d73769e2d5246e30f"
+    },
+    {
+      "file": "preparazione-tavolo-1366x768.jpg",
+      "bytes": 13397,
+      "sha256": "a1487c5c5ca7e7de995e7e409fdd958d1653f53221acfd9edf8ebb5b3f3b8ea2"
+    },
+    {
+      "file": "preparazione-tavolo-844x390.jpg",
+      "bytes": 7077,
+      "sha256": "68e73541f50c4f223554584d8d2344e6d1d02dbaabf54ea29f693c6a63713aa6"
+    },
+    {
+      "file": "profilo-1366x768.jpg",
+      "bytes": 104640,
+      "sha256": "cfe21035178d3b34839c89ca9aceaf05e58c14f9e7fc2cb1be5a9c3c0d2012a3"
+    },
+    {
+      "file": "profilo-390x844.jpg",
+      "bytes": 30482,
+      "sha256": "03a9ed1ac2c4d497a985bdb2700388864206e80f1582a31d921805fd42657a37"
+    },
+    {
+      "file": "profilo-844x390.jpg",
+      "bytes": 35534,
+      "sha256": "be22d9abc2b556a6b9338736ffc54e1b046d59ccc67efdd4daf3065e9d42f66a"
+    },
+    {
+      "file": "registrazione-errori-1366x768.jpg",
+      "bytes": 102045,
+      "sha256": "fee15edc2e978da3d62c256f70f6d0e72b20d16c3fd1734e45fc598665965090"
+    },
+    {
+      "file": "registrazione-errori-390x844.jpg",
+      "bytes": 26218,
+      "sha256": "1db140df264d7173663a7ee822077cc7f288616adb023222558e6703399faca7"
+    },
+    {
+      "file": "registrazione-errori-844x390.jpg",
+      "bytes": 35550,
+      "sha256": "6d3d5f84d0bb1e4308cc2841096da80f56ab1788bf80728ff7911dd80b7fd2c9"
+    },
+    {
+      "file": "regole-1366x768.jpg",
+      "bytes": 123311,
+      "sha256": "ad14bed567540c43637ccd46e2c963c5e612d08a4f47e1ff62c56713bf69eecc"
+    },
+    {
+      "file": "regole-390x844.jpg",
+      "bytes": 46169,
+      "sha256": "3fab34c691884415192bae36738c981ea2cd26263f8b5358cb263b0833e7448e"
+    },
+    {
+      "file": "regole-844x390.jpg",
+      "bytes": 42158,
+      "sha256": "0a9108248f90062272a135bc1d48137d2f7936c5ac499f5e4f3e8b2c2718cbe3"
+    },
+    {
+      "file": "rotazione-390x844.jpg",
+      "bytes": 12539,
+      "sha256": "7e9f4e154b98e909cf53e600eec43ca74e42386a2b995d9a50048fd70a72d278"
+    },
+    {
+      "file": "scarto-bound-1366x768.jpg",
+      "bytes": 148005,
+      "sha256": "26cc830775e4bb6e4594d3d184613f72cad2bfa39eb0d6ec240321ed44514cbd"
+    },
+    {
+      "file": "scarto-bound-844x390.jpg",
+      "bytes": 59104,
+      "sha256": "22490537d5213fd3c5bd7543c7e55298e7546c20d02b538f8ead4320863e41a8"
+    },
+    {
+      "file": "scelta-mazzo-1366x768.jpg",
+      "bytes": 56412,
+      "sha256": "13d129ad0c02ed414368eff8673fd1d9e3860697d0d213db0e7b41ee8a7b7ca4"
+    },
+    {
+      "file": "scelta-mazzo-390x844.jpg",
+      "bytes": 19940,
+      "sha256": "68bc563f435ca4d1cb78c331a0154629fdec6c192f7a3843d88ff27a527f3462"
+    },
+    {
+      "file": "scelta-mazzo-844x390.jpg",
+      "bytes": 22853,
+      "sha256": "070a19025b466ffdabfeac1f309b4709a7245d1beef986c9a9881fb7b1b596ad"
+    },
+    {
+      "file": "scelta-mazzo-vuota-1366x768.jpg",
+      "bytes": 55219,
+      "sha256": "648ab2410f97b021c36b3479aa2e1436232e96ec86adb05838ddfe0e6293e442"
+    },
+    {
+      "file": "scelta-mazzo-vuota-390x844.jpg",
+      "bytes": 20608,
+      "sha256": "df68a945b95381e04ca54bf4c703ca8a5ea2369defef61a40dcfbe63d63eaae4"
+    },
+    {
+      "file": "scelta-mazzo-vuota-844x390.jpg",
+      "bytes": 21541,
+      "sha256": "c4fa25861c59fd9251da45b9a9aab9b304e2f497496a2ee0de539585fc59776c"
+    },
+    {
+      "file": "strumenti-dati-1366x768.jpg",
+      "bytes": 66869,
+      "sha256": "3e2f68450358db7237174fe8a13e365253930dac6209206829be666e7f4c9b7f"
+    },
+    {
+      "file": "strumenti-dati-390x844.jpg",
+      "bytes": 24995,
+      "sha256": "4d395f870c2966071ded741615c3ca3b6cf0c0bf16a09f209d63a2e9c38cfea1"
+    },
+    {
+      "file": "strumenti-dati-844x390.jpg",
+      "bytes": 23750,
+      "sha256": "bd145a711c395241f91f321dea116e0e344a0e0f0cc1c5127a99687a7a2cdc4d"
+    },
+    {
+      "file": "tavolo-1366x768.jpg",
+      "bytes": 148647,
+      "sha256": "3531c3bb789c350c30a69c4d73550b897dab524146c6935eba4ad9c7fffa0412"
+    },
+    {
+      "file": "tavolo-844x390.jpg",
+      "bytes": 59741,
+      "sha256": "4da13f48a48865cbd33152f21d082b0b5ae6b5da7b6b4e814da4c97cb7edf2e5"
+    },
+    {
+      "file": "tavolo-ffa-1366x768.jpg",
+      "bytes": 132354,
+      "sha256": "2874263bd5a3705b6fdfdeb1dadae150ba8b827796e17568513c95f0f3f22cca"
+    },
+    {
+      "file": "tavolo-ffa-844x390.jpg",
+      "bytes": 49080,
+      "sha256": "b871e590d92ca4ef7be5c77561f8e2127a5b9f58794c0e26abe3442034b21ff8"
+    },
+    {
+      "file": "tooltip-stato-1366x768.jpg",
+      "bytes": 124150,
+      "sha256": "1ea3f2e58204ecd5dfcc3a96b7c0a2fdbd65c6bf339ddc7973010ee64559dbb7"
+    },
+    {
+      "file": "tooltip-stato-844x390.jpg",
+      "bytes": 47534,
+      "sha256": "5c007382617b24bbf49d5c1a2bac85a69e57cde5083ac42d850d224b87b8a918"
+    },
+    {
+      "file": "ultimo-turno-1366x768.jpg",
+      "bytes": 74926,
+      "sha256": "dec0adb15bdb6c0df6b27e674891eef6436bdaea134aa9278c73a89f968d2fd9"
+    },
+    {
+      "file": "ultimo-turno-390x844.jpg",
+      "bytes": 32035,
+      "sha256": "488e178b6e97a921216df7bd7b8a9950f414ff17a3aa8bad93dfca2138ee0ab2"
+    },
+    {
+      "file": "ultimo-turno-844x390.jpg",
+      "bytes": 28699,
+      "sha256": "968b148ed484e24a547022e68296a6101617577de5f4e940cbbdab4b9abddbf6"
+    }
+  ],
+  "totalBytes": 5829920
+}

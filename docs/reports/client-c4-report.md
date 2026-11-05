@@ -720,7 +720,7 @@ Le catture dopo sono [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-dopo-
 
 ## C4-5b
 
-5 novembre 2026. **Fase 0 conclusa; Fase A in preparazione. Fase B non autorizzata prima della scelta visiva.** Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
+5 novembre 2026. **Fase 0 conclusa; Fase A pronta, in attesa della scelta del proprietario. Fase B non iniziata.** Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
 
 ### Fase 0 — Riformattazione del CSS
 
@@ -734,3 +734,41 @@ Preliminare: stato Git pulito in `client-web/` e `docs/reports/`; approvazione C
 Un primo tentativo si era fermato prima dei test perché Windows PowerShell ereditava un percorso moduli incompatibile con `Get-FileHash`; ripetuto con `PSModulePath` di Windows PowerShell. Nessun verificatore modificato, nessuna soglia o atteso cambiati. Il contesto Spring completo resta una verifica separata.
 
 Verifiche obbligatorie di Fase 0: `./scripts/build.ps1 -Task Test -Offline` verde (339 test server, 3 saltati, nessun errore; 36/36 client-debug); `python scripts/check-rules.py` verde. Non è una prova di avvio del contesto Spring completo.
+
+
+### Fase A — Inventario, prima odierno e proposta
+
+**Arresto alla scelta, come richiesto.** C4-5b non è dichiarato fatto: resta da scegliere e implementare la Fase B, poi giudicare le sue catture dopo. In questa fase la sola modifica a produzione è la riformattazione equivalente già committata in `11bc95e`; niente token applicati, TSX, scene, geometria, sfondo, regole, server, protocollo, catalogo o nuovi asset. Nessun push. Script, calcoli e prototipi eseguibili in TEMP, fuori repository.
+
+- [Inventario](../design/client-c4/screens/inventario.md): tutte le schermate elencate nel piano, più linea caduta, scelta mazzo vuota/piena, conferme inline, ispezioni carta/personaggio, preparazione ed errore grafico; file, selettori, colori/font, controlli, dimensioni e stati. L’editor mantiene struttura e azioni; O15/O16 restano fuori. O26/O27 approvate non vengono riaperte.
+- [Censimento](../design/client-c4/screens/censimento.md), con [ogni occorrenza in JSON](../design/client-c4/screens/censimento.json): **67 valori CSS** (comprese trasparenze), **158 occorrenze**, **18 dichiarazioni font**. Nei TSX nessun esadecimale/rgb/hsl letterale o font inline; 29 definizioni di **25 tinte condivise** per simboli/cornici, censite separatamente. Ripiego Arial Narrow ancora presente nel CSS: proposta di sostituirlo con Arial, secondo D4; non ancora applicata.
+- [Prima del 5 novembre 2026](client-c4/c4-5b/prima/README.md), con [galleria](client-c4/c4-5b/prima/galleria.html), [misure DOM](client-c4/c4-5b/prima/catture.json) e [manifest](client-c4/c4-5b/prima/manifest.json): **104 JPEG, 5.829.920 B (5,56 MiB), 38 schermate/stati**, a 1366×768, 844×390 e 390×844 dove ammesso. La rotazione esiste solo in portrait; al tavolo portrait copre la scena. I dialoghi si leggono in portrait senza l’illustrazione grande. Selezionati 100 scatti dedicati su 115, omettendo 15 duplicati di stato; conservate le loro misure nel JSON. Aggiunti solo quattro scatti odierni del giro ufficiale (tooltip e FFA), ricompressi. Nessuna vecchia cattura usata come “prima”.
+- [Proposta e mappa di token da approvare](../design/client-c4/screens/proposta.md), [varianti A/B affiancate](../design/client-c4/screens/proposte/README.md): 20 campioni originali e cinque confronti, **2.488.097 B**. Pulsanti/stati mostrati su editor incompleto/completo e amministrazione; ✓/× e scarto mostrati nella stessa partita open reale, incompleta e pronta. Nessun asset nuovo: segni di `symbols.ts`, cornici C4-4. Le due fusioni proposte sono quantificate (ΔE76 0,77 e 1,44); gli altri quasi duplicati sono motivatamente conservati. La prima prova della targhetta B era troppo lunga: accorciata a «Scarta» nel solo prototipo. Nessuna scelta attribuita al proprietario.
+
+Le catture dedicate usano server locale e SQLite temporaneo; account ADMIN e tre righe del log sono sintetici e dichiarati, come in VerifyProfile. Il tavolo e i turni sono reali. Preparazione/errore sono stati reali del client provocati ritardando/bloccando le immagini nel solo browser. Le schede lunghe sono scorrevoli: una cattura non equivale a mostrarne tutto il contenuto contemporaneamente; i controlli sotto scorrimento sono censiti nei dati DOM.
+
+**Raccomandazione e mie osservazioni, distinte dalle misure:** A generale e A di calata/scarto conservano meglio la carta calda già approvata. I verbi chiariscono ✓/× e le targhette distinguono le candidate senza il solo colore. B rende i comandi più netti e distingue anche la sagoma dei due segni, ma copre maggiormente l’illustrazione della carta in anteprima. Catalogo/editor/admin possono condividere i pannelli esistenti senza riprogettazione. Sono giudizi visivi miei, non esiti automatici né approvazioni del proprietario.
+
+### Controlli, sorgente e limiti prima della Fase B
+
+**Nessun verificatore, selettore, atteso o soglia cambiato.** Il confronto di produzione resta identico byte per byte, quindi nessuna azione è stata tolta per questa proposta (regola 16). Il censimento è un’analisi del sorgente, **non** il futuro test unitario che imporrà i token: quel controllo e le verifiche touch sulla nuova implementazione si scriveranno dopo la scelta.
+
+Sotto 44 px fuori tavolo restano link pubblici/indice (32), Home (40), ordinamenti presenza (32/36), select nativo e summary dell’editor (40/36). Non sono deroghe D8: vanno corretti in Fase B. [Eccezioni D8 voce per voce](../design/client-c4/screens/inventario.md#d8-eccezioni-proposte-voce-per-voce): soli chip della scena, con contenuto nell’ispezione. Nel giro odierno i chip d’immunità alla tossicità sono letti lì a entrambe le misure; gli altri casi sono censiti, non dichiarati tutti osservati. Dischi ✓/×, miniature e bollini informativi non sono aree touch autonome; (i) e riga breve hanno già area invisibile almeno 44. Nessuna nuova eccezione proposta per le schermate.
+
+### Verifiche della base di Fase A
+
+`VerifyAll -Only 'test,build,size,verify,modes,lifecycle,ffa,decks,public,profile,layout'`, Node isolato **24.13.0**, jar ricostruito, un solo giro/processo di verifica alla volta, porte libere prima del lancio. **19/19 verdi, 29 min 10 s**: 236 unità, Build, Size; Verify, Modes, Lifecycle, Ffa, Decks, Public, Profile e Layout completi a **1366×768 e 844×390**. [Riepilogo e impronte](client-c4/c4-5b/verifiche/ufficiale/run-summary.json), [tutti i JSON](client-c4/c4-5b/verifiche/ufficiale/). È il giro della matrice C4-5b, non il consolidamento completo C4-9 (Resolution/Aim non rilanciate qui).
+
+Distribuzione sempre **21 file, `6fd49130507af819`**, identica a prima della riformattazione. Test obbligatori del repository e check-rules verdi, come registrato in Fase 0; il contesto Spring completo non è stato eseguito. Durante il lavoro è entrato `7ef27db`, soltanto `docs/orchestrazione-lavoro.md`: nessun sorgente verificato è cambiato e quel documento non è stato toccato da questa attività.
+
+**Size prima/dopo riformattazione e al giro ufficiale:** CSS **19.411 B / 4.889 B gzip**, incremento **0 B**; JS gzip **337.939 B**; totale gzip **1.668.915 B**; texture **27.729.048 B**, sotto **32 MiB** con margine **5.825.384 B**, atlante 2048×1536. [Size ufficiale](client-c4/c4-5b/verifiche/ufficiale/size.json); limiti rigidi e tetto texture verdi. Le catture e i documenti di proposta non entrano nella distribuzione.
+
+### 750×292 — Rosso dichiarato e confronto sugli stessi input
+
+Giro separato `VerifyAll -Only 'build,verify,layout' -Measures 750x292`, jar e client ricostruiti, stessa distribuzione. [Riepilogo](client-c4/c4-5b/verifiche/base-750x292/run-summary.json). **Build verde; Verify rosso** sul timeout del tooltip del gettone coperto dalla mano (`status-tip`, 3 s), limite già dichiarato. **VerifyLayout rosso: 74 messaggi, nessun errore di pagina**, contro i 48 del giro storico citato; non si dichiarano uguali questi due conteggi. Problemi per turno reali: **6/6/6 duello e 14/14/14 FFA**, non 11 in questa partita. Nessun rilancio per cercare un verde.
+
+[Diagnosi senza modifiche](client-c4/c4-5b/verifiche/confronto-750.json): `readability.ts` è identico al commit precedente al lavoro `9df4bd5` (SHA normalizzata `f2a7931faa98e65a319bb5389113e6f3b502db6f8f10301930c245ce72f90455`); anche scene/background, verificatori e **BASE_750 sono invariati**. Confrontate le funzioni prima/dopo sugli stessi input: in duello **[6,6,6,5]**, in FFA **[11,11,12,14]** per 0–3 oggetti per posto, esattamente la matrice esistente. Il caso di riferimento con un oggetto resta **6/11**.
+
+I JSON del giro non conservano tutti i conteggi degli oggetti della vista autorevole: non li invento. La ricerca diagnostica su conteggi misti 1–3 trova input compatibili con **lo stesso insieme dei 14 problemi** e il passo della mano misurato (51 px); con quegli stessi input la geometria precedente e quella attuale coincidono. Sono input compatibili **inferiti**, non una registrazione completa della vista né una nuova partita di confronto. Il risultato non consente di chiamare verde il giro reale o di sostituire 11 con 14 negli attesi; dimostra che il numero maggiore è riproducibile dalla geometria già esistente. La Fase B dovrà continuare a confrontare gli stessi casi di BASE_750 e dichiarare separatamente gli esiti reali, senza normalizzare questo rosso.
+
+**Non verificato:** iPhone fisico, Safari, font su iOS; contrasto formale (C4-8a), giudizio umano in scala di grigi, contesto Spring completo. I prototipi non certificano la raggiungibilità o le prestazioni della futura implementazione. Nessuna cattura “dopo” di Fase B prodotta: manca ancora la scelta. Il proprietario deve scegliere il sistema generale A/B (editor/admin, stati/focus/disabilitati) e A/B per ✓/×/scarto; può combinarli. Dopo l’implementazione si sottoporranno le catture dopo schermata per schermata e solo allora il blocco sarà «fatto, in attesa del giudizio del proprietario».

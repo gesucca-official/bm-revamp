@@ -374,6 +374,8 @@ come in C3-5. Cattura in scala di grigi: le tipologie restano distinguibili. Giu
 
 ### C4-5b — Coerenza di tutte le schermate
 
+**Stato (5 novembre 2026): Fase A pronta, in attesa della scelta prima di Fase B.** Riformattazione equivalente conclusa in `11bc95e`; [inventario](design/client-c4/screens/inventario.md), [censimento](design/client-c4/screens/censimento.md), [proposta A/B](design/client-c4/screens/proposta.md), [rapporto](reports/client-c4-report.md#c4-5b). Nessun token definitivo o ritocco di produzione prima della scelta.
+
 **Perimetro.** Un inventario e una finitura delle schermate:
 
 - home, regole, accesso, registrazione, richiesta di rotazione;
@@ -398,7 +400,7 @@ regole. Le verifiche leggono testi e selettori: non devono perdere presa. Tentaz
 nessuna tinta fuori dai token (controllo sul sorgente); nessun controllo sotto 44 px sulle schermate touch, salvo D8; nessuna funzione persa
 (regola 16); giudizio del proprietario.
 
-**Verifiche.** `VerifyPublic`, `VerifyModes`, `VerifyDecks`, `VerifyProfile`, `VerifyLifecycle`, `VerifyFfa`, alle misure ufficiali.
+**Verifiche.** `Test`, `Build`, `Size`, `Verify`, `VerifyPublic`, `VerifyModes`, `VerifyDecks`, `VerifyProfile`, `VerifyLifecycle`, `VerifyFfa`, `VerifyLayout`, alle misure ufficiali; `Verify` e `VerifyLayout` anche a 750×292, con BASE_750 invariato e rossi preesistenti dichiarati. `VerifyAll -Only 'test,build,size,verify,modes,lifecycle,ffa,decks,public,profile,layout'`; giro 750 separato `-Only 'build,verify,layout' -Measures 750x292`. Le verifiche sempre obbligatorie del repository restano quelle della matrice.
 
 ### C4-6* — Illustrazioni delle carte (opzionale)
 
@@ -517,7 +519,7 @@ non è provato.
 | C4-2 | ● 750 | | ○ | ● 750 | | | | ○ | ● 750 | ● 750 |
 | C4-4 | ● | | | | ● | | | ○ | | ● |
 | C4-5a | ● 750 | | | | | | | | | ● 750 |
-| C4-5b | | ● | ● | ● | ● | ● | ● | | | |
+| C4-5b | ● 750 | ● | ● | ● | ● | ● | ● | | | ● 750 |
 | C4-6* | | | | | ● | | | | | ● |
 | C4-7* | ● | | | | | | | ○ | | |
 | C4-8a | ● | | | | ● | ● | | ○ | ○ | |

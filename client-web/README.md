@@ -17,6 +17,8 @@ Ruolo e guadagni vengono dal catalogo (regolamento 1.7, R07a); nessuna regola
 è calcolata qui. O9 aggiunge le illustrazioni provvisorie delle 40 classi
 ([rapporto C2](../docs/reports/client-c2-report.md)).
 
+**C4-5b, 5 novembre 2026 — Fase A pronta, scelta del proprietario pendente.** Solo riformattazione CSS equivalente; nessuna finitura applicata. [Inventario e controlli](../docs/design/client-c4/screens/inventario.md), [censimento](../docs/design/client-c4/screens/censimento.md), [prima odierno](../docs/reports/client-c4/c4-5b/prima/README.md), [varianti A/B](../docs/design/client-c4/screens/proposte/README.md), [verifiche e limite 750](../docs/reports/client-c4-report.md#c4-5b). Nessun verificatore/atteso cambiato.
+
 ## Avvio locale
 
 Dalla radice del repository, Windows / PowerShell, in due terminali:
