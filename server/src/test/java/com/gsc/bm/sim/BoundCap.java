@@ -42,20 +42,25 @@ final class BoundCap {
     private static final List<Resource> GAINS = List.of(Resource.VIOLENCE, Resource.TOXICITY, Resource.ALCOHOL, Resource.ALERTNESS);
 
     /**
-     * Tetto per uso, tolleranza e pesi dei guadagni. Il peso di T vale solo per chi è immune a T: per gli altri è 0. I predefiniti sono
-     * quelli di D33 (SB-10a, adottati in SB-10b); SB7 conserva i parametri di SB-7 per le prove che controllano la stessa cosa di prima.
+     * Tetto per uso, tolleranza, pesi dei guadagni e peso del danno inflitto. Il peso di T vale solo per chi è immune a T: per gli altri
+     * è 0. I predefiniti sono quelli di D33 (SB-10a) con il danno a 4/3 di D36 (SB-10b): 4 unità per le bound di risorsa, cioè 3 HIT per
+     * quelle di danno. SB7 conserva i parametri di SB-7 per le prove che controllano la stessa cosa di prima.
      */
     static final class Params {
         static final Params SB7 = new Params(5, 0.2, weights(1, 1, 1, 0.5));
-        static final Params DEFAULT = new Params(4, 0, weights(0.75, 0.5, 0.15, 0.35));
-        final double cap, tolerance;
+        static final Params DEFAULT = new Params(4, 0, weights(0.75, 0.5, 0.15, 0.35), 4.0 / 3);
+        final double cap, tolerance, damage;
         final Map<Resource, Double> weights;
 
-        Params(double cap, double tolerance, Map<Resource, Double> weights) {
+        Params(double cap, double tolerance, Map<Resource, Double> weights) { this(cap, tolerance, weights, 1); }
+
+        Params(double cap, double tolerance, Map<Resource, Double> weights, double damage) {
             if (cap <= 0 || tolerance < 0) throw new IllegalArgumentException("tetto positivo e tolleranza non negativa");
+            if (damage <= 0) throw new IllegalArgumentException("peso del danno positivo");
             this.cap = cap;
             this.tolerance = tolerance;
             this.weights = weights;
+            this.damage = damage;
         }
 
         static Map<Resource, Double> weights(double v, double a, double t, double l) {
@@ -67,7 +72,10 @@ final class BoundCap {
             return weights;
         }
 
-        /** -Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35 (predefiniti di D33). */
+        /**
+         * -Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35 -Dsim.boundDamageWeight=1.3333
+         * (predefiniti di D33 e D36).
+         */
         static Params fromSystem() {
             double cap = Double.parseDouble(System.getProperty("sim.boundCap", Double.toString(DEFAULT.cap)));
             double tolerance = Double.parseDouble(System.getProperty("sim.boundTolerance", Double.toString(DEFAULT.tolerance)));
@@ -78,7 +86,8 @@ final class BoundCap {
                 if (pair.length != 2) throw new IllegalArgumentException("sim.boundWeights: atteso V:1,A:1,T:1,L:0.5, trovato " + entry);
                 weights.put(letter(pair[0].trim()), Double.parseDouble(pair[1].trim()));
             }
-            return new Params(cap, tolerance, weights);
+            double damage = Double.parseDouble(System.getProperty("sim.boundDamageWeight", Double.toString(DEFAULT.damage)));
+            return new Params(cap, tolerance, weights, damage);
         }
 
         private static Resource letter(String letter) {
@@ -97,7 +106,8 @@ final class BoundCap {
             return String.format(Locale.ROOT, "%s unità ±%s%%; pesi V %s · A %s · T %s se immune, 0 se no · L %s · HEALTH 1",
                     Bench.plain(cap), Bench.plain(tolerance * 100), Bench.plain(weights.get(Resource.VIOLENCE)),
                     Bench.plain(weights.get(Resource.ALERTNESS)), Bench.plain(weights.get(Resource.TOXICITY)),
-                    Bench.plain(weights.get(Resource.ALCOHOL))).replace('.', ',');
+                    Bench.plain(weights.get(Resource.ALCOHOL))).replace('.', ',')
+                    + (damage == 1 ? "" : "; danno inflitto " + Bench.decimal(damage, 2));
         }
     }
 
@@ -186,7 +196,7 @@ final class BoundCap {
             result.ownHealth[k] = own;
             result.prevented[k] = shielded;
             result.gainValue[k] = gained;
-            result.value[k] = dealt + shielded + own + gained;
+            result.value[k] = params.damage * dealt + shielded + own + gained;
         }
         result.overCap = uses > 0 && result.max() > params.limit() + 1e-9;
         result.accumulates = uses > 1 && result.damage[uses - 1] > result.damage[0] + 0.5;

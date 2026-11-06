@@ -223,33 +223,47 @@ class BenchTest {
             if (r.bound.equals("prova.Mazzata")) assertFalse(r.overCap, "il tetto è un parametro");
     }
 
-    /** SB-10b: i predefiniti sono quelli di D33. 4 HIT sta nel tetto, 5 HIT no (con SB-7 sì); +5 V vale 3,75 unità. */
+    /**
+     * SB-10b: i predefiniti sono quelli di D33 con il danno a 4/3 (D36). 3 HIT sta nel tetto, 4 HIT no (con SB-7 sì, e anche 5); +5 V
+     * vale 3,75 unità e +8 A 4, perché il peso del danno non tocca le risorse.
+     */
     @Test
-    void defaultsAreTheD33Cap() throws Exception {
-        BoundCap.Params d33 = BoundCap.Params.DEFAULT;
-        assertEquals(4, d33.cap, 1e-9);
-        assertEquals(0, d33.tolerance, 1e-9);
-        assertEquals(0.75, d33.weights.get(com.gsc.bm.model.Resource.VIOLENCE), 1e-9);
-        assertEquals(0.5, d33.weights.get(com.gsc.bm.model.Resource.ALERTNESS), 1e-9);
-        assertEquals(0.15, d33.weights.get(com.gsc.bm.model.Resource.TOXICITY), 1e-9);
-        assertEquals(0.35, d33.weights.get(com.gsc.bm.model.Resource.ALCOHOL), 1e-9);
+    void defaultsAreTheD33AndD36Cap() throws Exception {
+        BoundCap.Params d = BoundCap.Params.DEFAULT;
+        assertEquals(4, d.cap, 1e-9);
+        assertEquals(0, d.tolerance, 1e-9);
+        assertEquals(4.0 / 3, d.damage, 1e-9);
+        assertEquals(1, BoundCap.Params.SB7.damage, 1e-9);
+        assertEquals(0.75, d.weights.get(com.gsc.bm.model.Resource.VIOLENCE), 1e-9);
+        assertEquals(0.5, d.weights.get(com.gsc.bm.model.Resource.ALERTNESS), 1e-9);
+        assertEquals(0.15, d.weights.get(com.gsc.bm.model.Resource.TOXICITY), 1e-9);
+        assertEquals(0.35, d.weights.get(com.gsc.bm.model.Resource.ALCOHOL), 1e-9);
         ObjectNode root = current();
         String hit = "\"kind\":\"BOUND\",\"boundTo\":\"" + BRUISER + "\",\"targets\":[\"OPPONENT\"],\"target\":";
-        addCard(root, dataCard("prova.Quattro", hit + "[{\"op\":\"damage\",\"type\":\"HIT\",\"amount\":4}]", "PROVA QUATTRO", "DAMAGE", "HIT", "HIT 4"));
-        addCard(root, dataCard("prova.Cinque", hit + "[{\"op\":\"damage\",\"type\":\"HIT\",\"amount\":5}]", "PROVA CINQUE", "DAMAGE", "HIT", "HIT 5"));
-        addCard(root, dataCard("prova.Carica", "\"kind\":\"BOUND\",\"boundTo\":\"" + BRUISER + "\",\"targets\":[\"SELF\"],\"self\":"
-                + "[{\"op\":\"gain\",\"resource\":\"VIOLENCE\",\"amount\":5}]", "PROVA CARICA", "RESOURCES", "—", "—"));
-        Draft draft = Draft.parse("prova-tetto-d33.json", root);
-        Map<String, BoundCap.Result> d33Results = new LinkedHashMap<>(), sb7Results = new LinkedHashMap<>();
-        for (BoundCap.Result r : BoundCap.run(draft, d33)) d33Results.put(r.bound, r);
-        for (BoundCap.Result r : BoundCap.run(draft, BoundCap.Params.SB7)) sb7Results.put(r.bound, r);
+        String self = "\"kind\":\"BOUND\",\"boundTo\":\"" + BRUISER + "\",\"targets\":[\"SELF\"],\"self\":";
+        for (int x : new int[]{3, 4, 5})
+            addCard(root, dataCard("prova.Danno" + x, hit + "[{\"op\":\"damage\",\"type\":\"HIT\",\"amount\":" + x + "}]", "PROVA DANNO " + x,
+                    "DAMAGE", "HIT", "HIT " + x));
+        addCard(root, dataCard("prova.Carica", self + "[{\"op\":\"gain\",\"resource\":\"VIOLENCE\",\"amount\":5}]", "PROVA CARICA",
+                "RESOURCES", "—", "—"));
+        addCard(root, dataCard("prova.Allerta", self + "[{\"op\":\"gain\",\"resource\":\"ALERTNESS\",\"amount\":8}]", "PROVA ALLERTA",
+                "RESOURCES", "—", "—"));
+        Draft draft = Draft.parse("prova-tetto-d36.json", root);
+        Map<String, BoundCap.Result> now = new LinkedHashMap<>(), sb7 = new LinkedHashMap<>();
+        for (BoundCap.Result r : BoundCap.run(draft, d)) now.put(r.bound, r);
+        for (BoundCap.Result r : BoundCap.run(draft, BoundCap.Params.SB7)) sb7.put(r.bound, r);
 
-        assertFalse(d33Results.get("prova.Quattro").violates(), d33Results.get("prova.Quattro").reasons(d33));
-        assertTrue(d33Results.get("prova.Cinque").overCap, "5 HIT supera il tetto di D33");
-        assertFalse(sb7Results.get("prova.Cinque").violates(), "con i parametri di SB-7 5 HIT stava nel tetto");
-        BoundCap.Result charge = d33Results.get("prova.Carica");
-        assertFalse(charge.violates(), charge.reasons(d33));
-        assertEquals(3.75, charge.max(), 1e-9);
+        assertFalse(now.get("prova.Danno3").violates(), now.get("prova.Danno3").reasons(d));
+        assertEquals(4, now.get("prova.Danno3").max(), 1e-9);
+        assertTrue(now.get("prova.Danno4").overCap, "4 HIT supera il tetto di D36");
+        assertTrue(now.get("prova.Danno5").overCap, "5 HIT supera il tetto di D36");
+        assertFalse(sb7.get("prova.Danno4").violates(), "con i parametri di SB-7 4 HIT stava nel tetto");
+        assertFalse(sb7.get("prova.Danno5").violates(), "con i parametri di SB-7 5 HIT stava nel tetto");
+        assertEquals(3, now.get("prova.Danno3").damage[0], 1e-9);
+        assertEquals(3.75, now.get("prova.Carica").max(), 1e-9);
+        assertFalse(now.get("prova.Carica").violates(), now.get("prova.Carica").reasons(d));
+        assertEquals(4, now.get("prova.Allerta").max(), 1e-9);
+        assertFalse(now.get("prova.Allerta").violates(), now.get("prova.Allerta").reasons(d));
     }
 
     @Test

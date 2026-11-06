@@ -1,8 +1,9 @@
 # Griglia degli slot del Set Base
 
 > **Stato: approvata dal proprietario il 6 novembre 2026** (SB-10b). Principi della fase A e griglia della fase B, ciascuno con le
-> parole «Approvo tutte»: vedi [Decisioni del proprietario](#decisioni-del-proprietario). Resta aperta una sola scelta, nata dalla
-> misura del tetto in partita: [tetto delle bound di danno](#tetto-in-partita). **Non normativo:** il regolamento vigente è
+> parole «Approvo tutte»: vedi [Decisioni del proprietario](#decisioni-del-proprietario). Dopo la misura del tetto in partita il
+> proprietario ha scelto il tetto 3 per le bound di danno («Sì, danno a 3», D36): vedi [Tetto in partita](#tetto-in-partita).
+> **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
 
@@ -49,8 +50,8 @@ Il proprietario ha approvato tutte e otto le raccomandazioni con «Approvo tutte
   Prezzi del listino: 1 V ≈ 1,1 HIT fino a 20 V, poi di più; 1 A ≈ 0,6; 1 HEALTH ≈ 1,15; T del Tossico 0,3–0,5 (decisione 4, da misurare);
   L come costo non misurata per Pino. CUT, HIT e POISON valgono uguale, la priorità non si paga. **Le linee a unità 7 sono stimate** togliendo
   circa 3 HIT a quelle misurate con l'àncora da 10: SB-11 le rimisura.
-- **Bound:** al posto della fascia, le **unità per uso** col banco di SB-7 e i pesi di D33 (danno 1, V 0,75, A 0,5, T 0,15 per chi è
-  immune, L 0,35, HEALTH 1). Tetto 4, tolleranza 0.
+- **Bound:** al posto della fascia, le **unità per uso** col banco di SB-7, i pesi di D33 (V 0,75, A 0,5, T 0,15 per chi è immune,
+  L 0,35, HEALTH 1) e il danno inflitto a 4/3 (D36). Tetto 4, tolleranza 0: al massimo 3 di danno o 4 unità di risorsa.
 - **Numeri «indicativi»:** danni, costi e durate sono il punto di partenza per i blocchi delle carte, non valori decisi.
 - **Starter:** copie nello starter; «—» vuol dire che la carta si trova solo nella collezione.
 - **Candidata:** carta attuale (identificatore di R07), carta della bozza esterna («bozza»), carta della bozza di prova di SB-6a
@@ -95,31 +96,31 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 
 ### Bound (21)
 
-Tutte con una sola funzione, entro 4 unità per uso, senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
+Tutte con una sola funzione, entro 4 unità per uso col danno pesato 4/3 (D36: al massimo 3 di danno), senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
 token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter sono nello starter (comuni), la terza nella collezione.
 
 | ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Unità per uso | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---:|---|---|---|---|---|
 | SPA-BO1 | Spazienzio | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Spazienzio | `LittleRage`, riprogettata: tolta la parata | Generatrice; due funzioni oggi, 6,75 unità | dati |
-| SPA-BO2 | Spazienzio | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | C | Spazienzio | `LittleSmack`, riprogettata: tolti +5 A | Colpetto; oggi 7,5 unità e +0,1 HEALTH per uso | dati |
+| SPA-BO2 | Spazienzio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Spazienzio | `LittleSmack`, riprogettata: tolti +5 A | Colpetto; oggi 7,5 unità e +0,1 HEALTH per uso | dati |
 | SPA-BO3 | Spazienzio | Azione, bound | RESOURCES | 0 | 3 HIT a sé, +8 V a sé | 3 (6 − 3) | NC | — | da inventare («Testa al muro») | Variante: carica più forte, pagata con la salute | dati |
-| MAR-BO1 | Mara | Azione, bound | DAMAGE | 1 | 4 CUT | 4 | C | Mara | bozza «Passo stretto», senza +5 A | Colpetto | dati |
+| MAR-BO1 | Mara | Azione, bound | DAMAGE | 1 | 3 CUT | 4 | C | Mara | bozza «Passo stretto», senza +5 A | Colpetto | dati |
 | MAR-BO2 | Mara | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | C | Mara | da inventare («Cambio marcia») | Generatrice: Mara paga tutto in A (decisione B2) | dati |
-| MAR-BO3 | Mara | Azione, bound | DAMAGE | 2 | 3 CUT | 3 | NC | — | prova «Colpo di striscio», 5 → 3 CUT | Variante veloce | dati |
-| TOS-BO1 | Tossico | Azione, bound | DAMAGE | 1 | 4 CUT | 4 | C | Tossico | `PatheticBlade`, riprogettata: niente T a sé né al bersaglio | Colpetto; oggi si accumula e lascia T +40 | dati |
+| MAR-BO3 | Mara | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | prova «Colpo di striscio», 5 → 2 CUT | Variante veloce | dati |
+| TOS-BO1 | Tossico | Azione, bound | DAMAGE | 1 | 3 CUT | 4 | C | Tossico | `PatheticBlade`, riprogettata: niente T a sé né al bersaglio | Colpetto; oggi si accumula e lascia T +40 | dati |
 | TOS-BO2 | Tossico | Azione, bound | RESOURCES | 0 | +10 T a sé | 1,5 | C | Tossico | da inventare («Raschiare il fondo») | Generatrice di carburante; +10 per la decisione 4, anche se il tetto ammetterebbe +26 | dati |
-| TOS-BO3 | Tossico | Azione, bound | DAMAGE | 2 | 3 POISON | 3 | NC | — | `RottenSmile`, riprogettata («alito marcio») | Variante: POISON diretto. Oggi lascia A −40 e vale −1,1 HEALTH per uso | dati |
+| TOS-BO3 | Tossico | Azione, bound | DAMAGE | 2 | 2 POISON | 2,67 | NC | — | `RottenSmile`, riprogettata («alito marcio») | Variante: POISON diretto. Oggi lascia A −40 e vale −1,1 HEALTH per uso | dati |
 | PIN-BO1 | Pino | Azione, bound | RESOURCES | 0 | +10 L a sé | 3,5 | C | Pino | bozza «Cinque minuti e vado», senza i 5 HIT | Generatrice: +10 L diventano 4 il turno dopo (vedi [L e Pino](#l-e-pino)) | dati |
-| PIN-BO2 | Pino | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | C | Pino | da inventare («Spallata al bancone») | Colpetto | dati |
-| PIN-BO3 | Pino | Azione, bound | DAMAGE | 1 | 3 CUT | 3 | NC | — | da inventare («Coccio») | Variante: il vetro taglia | dati |
+| PIN-BO2 | Pino | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Pino | da inventare («Spallata al bancone») | Colpetto | dati |
+| PIN-BO3 | Pino | Azione, bound | DAMAGE | 1 | 2 CUT | 2,67 | NC | — | da inventare («Coccio») | Variante: il vetro taglia | dati |
 | GIG-BO1 | Gigi | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Gigi | bozza «Una stretta e passa», senza i 3 HIT | Generatrice della moneta degli attrezzi | dati |
-| GIG-BO2 | Gigi | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | C | Gigi | da inventare («Colpo di cacciavite») | Colpetto, amplificato dai guanti | dati |
-| GIG-BO3 | Gigi | Azione, bound | DAMAGE | 2 | 3 CUT | 3 | NC | — | da inventare («Lima») | Variante veloce | dati |
+| GIG-BO2 | Gigi | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Gigi | da inventare («Colpo di cacciavite») | Colpetto, amplificato dai guanti | dati |
+| GIG-BO3 | Gigi | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | da inventare («Lima») | Variante veloce | dati |
 | CES-BO1 | Cesira | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Affacciarsi») | Generatrice: le letture costano A | dati |
-| CES-BO2 | Cesira | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | NC | — | da inventare («Battuta») | Colpetto | dati |
-| CES-BO3 | Cesira | Azione, bound | DAMAGE | 2 | 3 HIT | 3 | NC | — | da inventare («Frecciatina al volo») | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
-| ROC-BO1 | Rocco | Azione, bound | DAMAGE | 0 | 4 HIT | 4 | NC | — | prova «Colpetto», 5 → 4 HIT | Colpetto | dati |
-| ROC-BO2 | Rocco | Azione, bound | DAMAGE | 2 | 3 HIT | 3 | NC | — | da inventare («Diretto») | Variante veloce | dati |
+| CES-BO2 | Cesira | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | da inventare («Battuta») | Colpetto | dati |
+| CES-BO3 | Cesira | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Frecciatina al volo») | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
+| ROC-BO1 | Rocco | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
+| ROC-BO2 | Rocco | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
 | ROC-BO3 | Rocco | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Rocco ha la A più bassa | dati |
 
 ### Last resort (4)
@@ -317,10 +318,10 @@ scendono di circa 3 HIT (stima). «Peggio di morta»: una gemella mai giocata la
 |---|---|---|---|---|---|
 | `BigBadBruiser` | conservata | PG-SPA | invariato | — | Metro del set (SB-9) |
 | `ToxicJunkie` | riprogettata (capacità 3 → 2) | PG-TOS | invariato | — | Gli oggetti diventano di Gigi (SB-9) |
-| `LittleSmack` | riprogettata | SPA-BO2 | nome e tono | oltre il tetto (7,5) | Una funzione: 4 HIT |
+| `LittleSmack` | riprogettata | SPA-BO2 | nome e tono | oltre il tetto (7,5) | Una funzione: 3 HIT |
 | `LittleRage` | riprogettata | SPA-BO1 | nome e tono | oltre il tetto (6,75) | Una funzione: +5 V; niente parata |
-| `PatheticBlade` | riprogettata | TOS-BO1 | nome e tono | oltre il tetto per struttura | 4 CUT, niente T che resta |
-| `RottenSmile` | riprogettata | TOS-BO3 | nome; il sorriso diventa alito | oltre il tetto per struttura; dannosa (−1,1 per uso) | 3 POISON, niente −A che resta |
+| `PatheticBlade` | riprogettata | TOS-BO1 | nome e tono | oltre il tetto per struttura | 3 CUT, niente T che resta |
+| `RottenSmile` | riprogettata | TOS-BO3 | nome; il sorriso diventa alito | oltre il tetto per struttura; dannosa (−1,1 per uso) | 2 POISON, niente −A che resta |
 | `BruiserGrab` | conservata | SPA-BA | invariato | non quotabile | Il tratto è la lentezza |
 | `ToxicGrab` | riprogettata | TOS-BA | nome; assorbe «tutto è droga» | non quotabile | +5 T invece di perdere metà della A |
 | `Struggle` | conservata | LR-STR | invariato | in linea col ruolo | Last resort generica |
@@ -372,7 +373,7 @@ Le 31 carte nuove della [proposta](bozza-esterna-proposta-70-carte.md). Tutte as
 | Questo torna utile | GIG-BA | +4 V, senza −5 A, priorità 0 |
 | Cinque minuti e vado | PIN-BO1 | solo +10 L: due funzioni sopra il tetto |
 | Il bancone regge, io pure | PIN-AR3 | da bound ad azione regolare: niente parate fra le bound |
-| Passo stretto | MAR-BO1 | solo 4 CUT |
+| Passo stretto | MAR-BO1 | solo 3 CUT |
 | Tra due paraurti | MAR-AR4 | da bound ad azione pagata |
 | Una stretta e passa | GIG-BO1 | solo +5 V |
 | Smontiamo tutto | GIG-AR1 | da bound (bersaglia un oggetto) ad azione pagata, unita a `BreakYourToy` |
@@ -590,9 +591,9 @@ della sonda entro +10 punti (0,60).
 con Spazienzio; 3 HIT reggono anche col Tossico; Rocco e Mara di prova superano il criterio fino a 3 e 2 HIT, perché le loro carte regolari
 di prova sono deboli (SB-10a) e un danno gratuito ripetuto pesa molto. Il neutro amplifica, come in SB-10a, e non decide.
 
-**Proposta, da decidere dal proprietario:** tetto di **4 unità per le bound di risorsa** e di **3 per quelle di danno** (danno con peso
-4/3 nel banco), da riconfermare in SB-11 sullo starter vero di Mara e in SB-18 su Rocco; se lì 3 supera ancora i +10 punti, si scende
-a 2. Finché il proprietario non decide, la griglia resta con i 4 HIT approvati e il banco con i predefiniti di D33.
+**Decisione del proprietario (D36, 6 novembre 2026, «Sì, danno a 3»):** tetto di **4 unità per le bound di risorsa** e di **3 per quelle
+di danno**; nel banco il danno inflitto pesa 4/3. Le bound di danno della griglia passano da 4 a 3 e le varianti da 3 a 2. Da riconfermare
+in SB-11 sullo starter vero di Mara e in SB-18 su Rocco; se lì 3 supera ancora i +10 punti, si scende a 2.
 
 ## Decisioni del proprietario
 
@@ -602,10 +603,11 @@ griglia, con le cinque domande sotto): «Approvo tutte». Valgono quindi tutte l
 | Decisione | Contenuto | Dove |
 |---|---|---|
 | B1 | PIN-AR2 e LR-PIN spendono tutta la L con **una classe Java** che memorizza, azzera e colpisce, come `ToxicBloodDrain` | Griglia, SB-14 |
-| B2 | **MAR-BO2 (+8 A) nello starter di Mara**, misurata in SB-11; 3 CUT a priorità 2 come alternativa pronta | Griglia, SB-11 |
+| B2 | **MAR-BO2 (+8 A) nello starter di Mara**, misurata in SB-11; la variante veloce di danno (oggi 2 CUT a priorità 2, D36) come alternativa pronta | Griglia, SB-11 |
 | B3 | Rarità dell'archetipo **20, 10, 7**; totali 54, 41, 20 | Griglia |
 | B4 | **Giubbotto e Posacenere negli starter base:** il passo `equip` serve da SB-11 | Griglia, SB-11 |
 | B5 | **Una classe Java nuova per GIG-AR5** («Lavoro fatto bene») | Griglia, SB-15 |
+| D36 | Dopo la misura in partita, con «Sì, danno a 3»: **tetto 4 unità per le bound di risorsa, 3 per quelle di danno** (danno pesato 4/3 nel banco) | Griglia, banco, SB-11, SB-18 |
 
 ### Domande poste
 

@@ -99,7 +99,7 @@ proprietario preferisce il criterio più severo, il tetto è 3.
 | L | 0,5 | **0,35** | 1 L = 0,49 V × 0,75 |
 | HEALTH | 1 | 1 | HEALTH pagata 1,06–1,24: confermato |
 
-Comando: `-Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35`. Da SB-10b sono i predefiniti del banco; la misura in partita è nel [rapporto SB-10b](../../reports/set-base/sb-10b-report.md#tetto-in-partita). Esito con questi parametri nel
+Comando: `-Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35`. Da SB-10b sono i predefiniti del banco, col danno inflitto pesato 4/3 (D36: al massimo 3 di danno per uso); la misura in partita è nel [rapporto SB-10b](../../reports/set-base/sb-10b-report.md#tetto-in-partita). Esito con questi parametri nel
 [rapporto](../../reports/set-base/sb-10a-report.md#tetto-delle-bound).
 
 ## Le 37 carte attuali

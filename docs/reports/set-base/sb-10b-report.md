@@ -5,7 +5,8 @@ di costo, rarità, starter e motivo. Mappa anche le 39 carte di oggi e le 31 del
 (fase A) e la griglia (fase B), ogni volta con «Approvo tutte».
 
 Il banco ha ora i predefiniti di D33. La misura di controllo del tetto in partita **non conferma il tetto di 4 unità per le bound di
-danno**: propongo 3, da decidere dal proprietario (Q9 del piano).
+danno**. Il proprietario ha scelto il tetto 3 per il danno, con le parole «Sì, danno a 3» ([D36](../../set-base-plan.md#decisioni-del-proprietario)):
+il banco pesa ora il danno inflitto 4/3, e nella griglia le bound di danno sono scese di un punto.
 
 Regolamento, catalogo SQLite, allegato, client, protocollo, classi di produzione, bot e file del filone C4 non cambiano. Nessuna carta è
 scritta come dato giocabile. Il codice cambia solo in `server/src/test`.
@@ -58,7 +59,7 @@ Fra le 15 azioni d'archetipo «da inventare», 8 prendono il nome da una carta d
 - Le distinte sono 11–13 per starter. Le rare sono 1 per starter, 2 per il Tossico.
 - Le generiche negli starter sono 11 distinte su 20 usi. Spazienzio e Mara ne condividono una sola.
 - Restano nella collezione 12 generiche e 4 oggetti.
-- **Bound:** tutte con una sola funzione e fra 1,5 e 4 unità per uso. Nessuna bersaglia oggetti, lascia qualcosa sull'avversario, cura o annulla.
+- **Bound:** tutte con una sola funzione e fra 1,5 e 4 unità per uso (al massimo 3 di danno, D36). Nessuna bersaglia oggetti, lascia qualcosa sull'avversario, cura o annulla.
 
 **Forma:**
 
@@ -111,11 +112,12 @@ I parametri di SB-7 restano disponibili come `BoundCap.Params.SB7`.
   - Le altre prove del banco costruivano le impostazioni con `DEFAULT`.
 - **Cosa ho cambiato:** in `BenchTest` ogni `BoundCap.Params.DEFAULT` è diventato `BoundCap.Params.SB7`, senza toccare un atteso. Le prove
   controllano esattamente ciò che controllavano prima, con gli stessi parametri.
-- **Prova nuova:** `defaultsAreTheD33Cap` controlla i predefiniti.
-  - 4 HIT sta nel tetto; 5 HIT lo supera, mentre con i parametri di SB-7 ci stava.
-  - +5 V vale 3,75 unità.
-  - Sa fallire: con i predefiniti di SB-7 rimessi per prova in `DEFAULT`, la prova fallisce («expected: <4.0> but was: <5.0>»).
-    Poi ho ripristinato i valori di D33.
+- **Prova nuova:** `defaultsAreTheD33AndD36Cap` controlla i predefiniti (D33 e il peso del danno di D36, sotto).
+  - 3 HIT vale 4 unità e sta nel tetto; 4 e 5 HIT lo superano, mentre con i parametri di SB-7 ci stavano.
+  - +5 V vale 3,75 unità e +8 A 4: il peso del danno non tocca le risorse.
+  - Sa fallire. Nella prima versione, prima di D36, i predefiniti di SB-7 rimessi per prova in `DEFAULT` la facevano fallire
+    («expected: <4.0> but was: <5.0>»). Nella versione finale fallisce col danno a peso 1 («expected: <1.3333333333333333> but was: <1.0>»).
+    Ogni volta ho poi ripristinato i valori giusti.
 - **Il resto:** `Listino` usa `DEFAULT` solo per giocare le celle, dove il tetto non entra. Le misure a richiesta (`BenchMeasureTest`,
   `ListinoMeasureTest`) partono ora dai predefiniti di D33.
 
@@ -167,14 +169,16 @@ Contro il manichino, con i predefiniti di D33, tutte le sonde rispettano il tett
 - **Il danno pesa più della risorsa.** A parità di unità, una bound di danno sposta la quota più di una di risorsa in ogni contesto
   tranne Spazienzio, dove le due restano vicine.
 
-**Proposta, per il proprietario:**
+**Proposta e decisione.** Ho proposto un tetto di 4 unità per le bound di risorsa e di 3 per quelle di danno, da riconfermare sugli
+starter veri (Mara in SB-11, Rocco in SB-18), scendendo a 2 se 3 HIT supera ancora i +10 punti. Il proprietario l'ha accolta: «Sì,
+danno a 3» (D36, era Q9).
 
-- **tetto di 4 unità per le bound di risorsa e di 3 per quelle di danno.** Nel banco questo vuol dire dare al danno un peso di 4/3;
-- da riconfermare sugli starter veri: Mara in SB-11, Rocco in SB-18;
-- se lì 3 HIT supera ancora i +10 punti, si scende a 2.
-
-Se il proprietario la accoglie, nella griglia le bound di danno passano da 4 a 3 e le varianti da 3 a 2. Sono 13 slot su 21 e nessun
-totale cambia. Finché non decide, griglia e banco restano come approvati.
+- **Banco:** `BoundCap.Params` ha un peso del danno inflitto. Vale 4/3 nei predefiniti e 1 in `SB7`; da riga di comando si passa
+  `-Dsim.boundDamageWeight`. Il valore per uso è peso × danno + danno parato + salute propria + guadagni pesati. Il rapporto del banco
+  scrive il peso, nel testo e nei dati (`pesoDanno`), solo quando non è 1: i rapporti con i parametri di SB-7 restano identici.
+- **Griglia:** le 13 bound di danno passano da 4 a 3 (4 unità) e le varianti da 3 a 2 (2,67 unità). Nessun totale cambia.
+- **La misura in partita non si rifà:** misura la quota, che non dipende dai pesi del banco. Le sonde da 3 HIT valgono ora 4 unità
+  contro il manichino.
 
 **Riproducibilità.** Due controlli sui dati:
 
@@ -189,14 +193,15 @@ alle due esecuzioni sono identiche.
 
 | File | Cosa cambia |
 |---|---|
-| `server/src/test/java/.../sim/BoundCap.java` | `DEFAULT` con i valori di D33, `SB7` coi valori di prima, `fromSystem()` legge i predefiniti |
-| `server/src/test/java/.../sim/BenchTest.java` | Parametri di SB-7 passati esplicitamente; prova nuova `defaultsAreTheD33Cap` |
+| `server/src/test/java/.../sim/BoundCap.java` | `DEFAULT` con i valori di D33 e il danno a 4/3 (D36), `SB7` coi valori di prima, `fromSystem()` legge i predefiniti e `sim.boundDamageWeight` |
+| `server/src/test/java/.../sim/BenchTest.java` | Parametri di SB-7 passati esplicitamente; prova nuova `defaultsAreTheD33AndD36Cap` |
+| `server/src/test/java/.../sim/BenchReport.java` | Peso del danno nei dati del rapporto, quando non è 1 |
 | `server/src/test/java/.../sim/Listino.java` | Gruppo `tettopartita` fuori da `all`: famiglie di sonde, curve, bozza per il manichino |
 | `server/src/test/java/.../sim/ListinoMeasureTest.java` | Accetta il gruppo nuovo e controlla le sue sonde contro il manichino |
 | `server/src/test/java/.../sim/ListinoReport.java` | Titolo del gruppo e valore per uso anche per il tetto in partita |
 | `docs/design/set-base/griglia.md` | Nuovo: la griglia |
 | `docs/design/set-base/listino.md` | Stato approvato (D33), calo di L corretto, predefiniti nel banco |
-| `docs/set-base-plan.md` | Budget, stato di SB-10b, D34, D35, Q9, idee per le espansioni, calo di L corretto |
+| `docs/set-base-plan.md` | Budget, stato di SB-10b, D34, D35, D36, idee per le espansioni, calo di L corretto |
 | `docs/README.md` | Riga «Set Base» |
 | `docs/reports/set-base/sb-10b/` | Evidenze della misura |
 
@@ -220,7 +225,7 @@ alle due esecuzioni sono identiche.
 
 ## Cosa serve a SB-11
 
-1. **Decidere Q9,** il tetto delle bound di danno (proposta 3), prima di scrivere le bound di Spazienzio e Mara.
+1. **Riconfermare D36** sullo starter vero di Mara: bound di danno da 3 contro bound nulle, entro +10 punti; altrimenti 2.
 2. **Passi nuovi del formato:** `consume` per le basic e Grab, `equip` (con uso singolo e conversione) per Giubbotto e Posacenere, con
    test che sappiano fallire come quelli di SB-5.
 3. **Rimisurare il listino sugli starter nuovi:** voci di V, A e HEALTH e linea dell'unità gratuita a 7 HIT. Basta
@@ -234,7 +239,7 @@ Eseguite una alla volta, dopo aver controllato che non girassero processi Maven 
 
 - `./scripts/build.ps1 -Task Test -Offline`: **verde.**
   - Maven: 507 test, 0 falliti, 7 saltati. I saltati sono le misure a richiesta, come in SB-10a.
-  - Uno in più di SB-10a: `defaultsAreTheD33Cap`.
+  - Uno in più di SB-10a: `defaultsAreTheD33AndD36Cap`.
   - `BenchTest`, `ListinoTest`, `PlaygroundTest`, `SearchMarginTest` e `SimulationRunnerTest` passano. Nessun atteso è cambiato.
   - Client: 36 test su 36.
 - `python scripts/check-rules.py`: regolamento e copia client allineati; 39 carte e 1 token; SQLite integro.

@@ -324,6 +324,7 @@ final class BenchReport {
         Map<String, Object> weights = new LinkedHashMap<>();
         s.cap.weights.forEach((res, w) -> weights.put(BoundCap.letter(res), Bench.round(w)));
         cap.put("pesi", weights);
+        if (s.cap.damage != 1) cap.put("pesoDanno", Bench.round(s.cap.damage));
         cap.put("usi", BoundCap.USES);
         cap.put("colpoDiProva", BoundCap.HIT);
         head.put("tettoBound", cap);
