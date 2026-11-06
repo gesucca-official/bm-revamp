@@ -4,7 +4,7 @@
 server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
 documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
 proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
-nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10 ([D30, D31](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
+nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b ([D30, D31, D32](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
 completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
@@ -278,8 +278,9 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-7b | Bot e costo in HEALTH | SB-7 |
 | | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b |
 | Progetto | SB-9 | Schede dei personaggi | — |
-| | SB-10 | Griglia degli slot e listino di potenza | SB-7b, SB-9 |
-| Carte | SB-11 | Bozza degli starter base | SB-10 |
+| | SB-10a | Listino di potenza e tetto delle bound (misure) | SB-7b, SB-9 |
+| | SB-10b | Griglia degli slot (progetto) | SB-10a |
+| Carte | SB-11 | Bozza degli starter base | SB-10b |
 | | SB-12 | Giro sugli starter base e prova umana | SB-8, SB-11 |
 | | SB-13 | Tossico: bozza e giro | SB-12 |
 | | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 |
@@ -304,7 +305,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |
 
 SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
-corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10 ([D31](#decisioni-del-proprietario)), senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
+corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b ([D31, D32](#decisioni-del-proprietario)), senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
 prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
 dimostra utile prima: è una scelta del proprietario.
 
@@ -468,6 +469,10 @@ espansioni. Bozza di tono coerente con Spazienzio de la Ucciso e il Tossico del 
 strategia e devono comunque pagare con le risorse di base.
 
 ### SB-10 — Griglia degli slot e listino di potenza
+
+Diviso da [D32](#decisioni-del-proprietario) in due blocchi. **SB-10a, listino di potenza e tetto delle bound,** è di sole misure: danno per
+risorsa, valore della priorità, valore di L che decade, tetto delle bound e suoi pesi, posizione delle carte attuali rispetto al listino.
+**SB-10b, griglia degli slot,** è di progetto e usa il listino. Il perimetro che segue vale per i due blocchi insieme.
 
 **Perimetro.** Griglia delle circa 115 carte: slot per archetipo, ruolo, costo e rarità, secondo il [budget](#il-set-in-numeri), con le candidate della [bozza esterna](#bozza-esterna-di-carte) assegnate agli slot; numero di carte distinte per starter (10–15); quali generiche compaiono in quali
 starter; curva dei costi rispetto ai 3 slot regolari in mano. **Listino di potenza** ricavato dalle carte attuali e misurato: danno per risorsa, valore della priorità,
@@ -702,6 +707,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D29 | Last resort proprie (era Q6) | 6 novembre 2026, SB-9: **Pino, Tossico e Sant'Incasso**; Struggle per gli altri quattro. Gratuite, sempre giocabili e fatte per chiudere la partita; SB-10 le colloca nella griglia |
 | D30 | Ordine dei blocchi senza aspettare il client | 6 novembre 2026, con le parole del proprietario: «sono d'accordo con la tua idea per arrivare a progettare le carte il prima possibile senza aspettare la fine del lavoro sul client». **SB-6 si divide** in SB-6a (nucleo, anticipato, senza dipendere da SB-2) e SB-6b (più set e mini-espansione, dipende da SB-2 e SB-6a). **Ordine: SB-9 → SB-6a → SB-7 → SB-10.** SB-7 dipende da SB-4 e SB-6a; SB-8 da SB-6a e SB-6b. SB-1, SB-2 e SB-6b restano legati al client (l'editor), ma vanno chiusi prima di SB-8. Precisa D22 |
 | D31 | Correzione dei bot sul costo in HEALTH | 6 novembre 2026, SB-7, con le parole del proprietario: «Prima di SB-10». **Mini-blocco SB-7b** dopo SB-7 e prima di SB-10: gli stili euristici smettono di suicidarsi pagando in HEALTH. Le contromosse sottostimate restano a SB-17. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10** |
+| D32 | Divisione di SB-10 | 6 novembre 2026, con le parole del proprietario: «Sì, dividi e scrivi». **SB-10 si divide** in SB-10a (listino di potenza e tetto delle bound, misure) e SB-10b (griglia degli slot, progetto). SB-10a dipende da SB-7b e SB-9; SB-10b da SB-10a; SB-11 da SB-10b. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b** |
 
 ## Decisioni ancora aperte
 
