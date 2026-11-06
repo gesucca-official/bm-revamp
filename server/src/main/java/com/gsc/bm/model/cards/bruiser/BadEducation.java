@@ -7,6 +7,7 @@ import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.status.Status;
+import com.gsc.bm.model.cards.Tunable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class BadEducation extends AbstractCard {
+
+    @Tunable
+    private int hitDamage = 10;
 
     public BadEducation() {
         super();
@@ -42,7 +46,7 @@ public class BadEducation extends AbstractCard {
         return mergeList(
                 destroyedEquips.stream().map(s -> "Removed " + s.getName() + " status!").collect(Collectors.toList()),
                 List.of(
-                        self.inflictDamage(target, new Damage(Damage.DamageType.HIT, 10))
+                        self.inflictDamage(target, new Damage(Damage.DamageType.HIT, hitDamage))
                 )
         );
     }

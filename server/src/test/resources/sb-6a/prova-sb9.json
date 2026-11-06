@@ -1,0 +1,663 @@
+{
+  "format": "sb-6a/1",
+  "rules": {
+    "deckSize": 20,
+    "maxCopies": 2,
+    "basicFixedPerCharacter": true,
+    "boundChoices": 2,
+    "lastResortRequired": true
+  },
+  "characters": [
+    {
+      "id": "prova.mara",
+      "name": "Mara Contromano (prova SB-6a)",
+      "resources": {
+        "HEALTH": 85,
+        "ALERTNESS": 40,
+        "VIOLENCE": 0,
+        "TOXICITY": 0,
+        "ALCOHOL": 0
+      },
+      "items": 2,
+      "immunities": [],
+      "basic": "com.basic.BruiserGrab"
+    },
+    {
+      "id": "prova.rocco",
+      "name": "Rocco «Sant'Incasso» (prova SB-6a)",
+      "resources": {
+        "HEALTH": 130,
+        "ALERTNESS": 15,
+        "VIOLENCE": 0,
+        "TOXICITY": 0,
+        "ALCOHOL": 0
+      },
+      "items": 2,
+      "immunities": [],
+      "basic": "com.basic.BruiserGrab"
+    }
+  ],
+  "cards": [
+    {
+      "binding": "bruiser.Glare",
+      "kind": "ACTION",
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "status",
+          "name": "NO PATIENCE - Damage Intake Boost",
+          "description": "Hit Damage taken: x1.5",
+          "statusType": "BAD",
+          "flow": "INPUT",
+          "property": "HIT",
+          "factor": 1.5,
+          "turns": 1
+        },
+        {
+          "op": "say",
+          "text": "Gained statuses: NO PATIENCE"
+        },
+        {
+          "op": "gain",
+          "resource": "VIOLENCE",
+          "amount": 15
+        },
+        {
+          "op": "gain",
+          "resource": "ALERTNESS",
+          "amount": 15
+        }
+      ],
+      "priority": 0,
+      "gui": {
+        "name": "PAZIENZA: FINITA",
+        "description": "HIT ricevuto ×1,5, durata 1; +15 V e +15 A. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "OTHER",
+        "gains": "+15 V, +15 A",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "bruiser.MadeOfStone",
+      "kind": "ACTION",
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "status",
+          "name": "MADE OF STONE",
+          "description": "Cut Damage Taken: x0.5",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "CUT",
+          "factor": 0.5,
+          "turns": 3
+        },
+        {
+          "op": "say",
+          "text": "Gained Status: MADE OF STONE"
+        },
+        {
+          "op": "gain",
+          "resource": "VIOLENCE",
+          "amount": 10
+        }
+      ],
+      "priority": 0,
+      "gui": {
+        "name": "NON GIOCARE COL COLTELLO NO",
+        "description": "CUT ricevuto ×0,5, stato indipendente R05; +10 V. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "DEFENSE",
+        "gains": "+10 V",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.Grab",
+      "java": true,
+      "cost": {},
+      "priority": 1,
+      "params": {},
+      "gui": {
+        "name": "Grab",
+        "description": "Rimuove l'oggetto, applica solo effetti self/target, non logica speciale. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "grab.png",
+        "role": "ITEMS",
+        "gains": "—",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.ShuffleFeet",
+      "java": true,
+      "cost": {},
+      "priority": -1,
+      "params": {},
+      "gui": {
+        "name": "Scatto Repentino",
+        "description": "Scambia tutti gli oggetti rispettando le capacità dei destinatari. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "ITEMS",
+        "gains": "—",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.Steal",
+      "java": true,
+      "cost": {
+        "ALERTNESS": 10
+      },
+      "priority": 0,
+      "params": {},
+      "gui": {
+        "name": "Steal",
+        "description": "Trasferisce l'oggetto vicino a sé senza consumarlo. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "ITEMS",
+        "gains": "—",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.basic.BruiserGrab",
+      "java": true,
+      "cost": {},
+      "priority": -1,
+      "params": {},
+      "gui": {
+        "name": "ADOPERIAMOTI",
+        "description": "Basic: consuma come Grab. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "ITEMS",
+        "gains": "—",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.items.CocktailOnTheGround",
+      "kind": "ITEM",
+      "self": [
+        {
+          "op": "gain",
+          "resource": "VIOLENCE",
+          "amount": 20
+        },
+        {
+          "op": "gain",
+          "resource": "ALCOHOL",
+          "amount": 15
+        },
+        {
+          "op": "gain",
+          "resource": "TOXICITY",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "Negroni Trovato per Terra",
+        "description": "+20 V, +15 L, +5 T. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "negroni.png",
+        "sprite": "item-sprite.png",
+        "role": "RESOURCES",
+        "gains": "+20 V, +15 L, +5 T",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.items.MarvelousCocktail",
+      "java": true,
+      "params": {
+        "alcohol": 20,
+        "toxicity": 20,
+        "turns": 5,
+        "poison": 20
+      },
+      "gui": {
+        "name": "Mescolone Micidiale",
+        "description": "Immunità T e L; +20 L e +20 T; timer 5 cancella tutte le immunità e gli stati, poi 20 POISON. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "RESOURCES",
+        "gains": "+20 L, +20 T",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.items.RottenBeer",
+      "kind": "ITEM",
+      "self": [
+        {
+          "op": "say",
+          "text": "Consumed Rotten Beer (no equip through Grab)"
+        },
+        {
+          "op": "gain",
+          "resource": "ALCOHOL",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "Peroni da 66, calda",
+        "description": "+5 L. Non equipaggia: Grab non chiama il suo hook speciale, anche se il vecchio report afferma il contrario. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "sprite": "item-sprite.png",
+        "role": "RESOURCES",
+        "gains": "+5 L",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "com.last.Struggle",
+      "kind": "ACTION",
+      "lastResort": true,
+      "targets": [
+        "OPPONENT"
+      ],
+      "self": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 5
+        }
+      ],
+      "target": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 10
+        }
+      ],
+      "gui": {
+        "name": "Last Resort: Banzai!!!",
+        "description": "Last resort: 5 HIT a sé; 10 HIT al bersaglio. Riferimento: Regolamento 1.10, R02-R07.",
+        "image": "no-img.png",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "HIT",
+        "damageAmount": "HIT 10"
+      }
+    },
+    {
+      "binding": "prova.mara.ColpoDiStriscio",
+      "kind": "BOUND",
+      "boundTo": "prova.mara",
+      "priority": 2,
+      "targets": [
+        "OPPONENT"
+      ],
+      "target": [
+        {
+          "op": "damage",
+          "type": "CUT",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "COLPO DI STRISCIO",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "CUT",
+        "damageAmount": "CUT 5"
+      }
+    },
+    {
+      "binding": "prova.mara.Contromano",
+      "kind": "ACTION",
+      "priority": 0,
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "gain",
+          "resource": "ALERTNESS",
+          "amount": 10
+        }
+      ],
+      "gui": {
+        "name": "IN CONTROMANO",
+        "role": "RESOURCES",
+        "gains": "+10 A",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "prova.mara.Scarto",
+      "kind": "BOUND",
+      "boundTo": "prova.mara",
+      "priority": 2,
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "status",
+          "name": "SCARTO",
+          "description": "Hit Damage taken: x0.75",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "HIT",
+          "factor": 0.75,
+          "turns": 0
+        },
+        {
+          "op": "say",
+          "text": "Gained status: SCARTO"
+        }
+      ],
+      "gui": {
+        "name": "SCARTO FRA DUE PARAURTI",
+        "role": "DEFENSE",
+        "gains": "—",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "prova.mara.Sgommata",
+      "kind": "ACTION",
+      "targets": [
+        "OPPONENT"
+      ],
+      "cost": {
+        "ALERTNESS": 15
+      },
+      "target": [
+        {
+          "op": "damage",
+          "type": "CUT",
+          "amount": 20
+        }
+      ],
+      "gui": {
+        "name": "SGOMMATA",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "CUT",
+        "damageAmount": "CUT 20"
+      }
+    },
+    {
+      "binding": "prova.mara.Sorpasso",
+      "kind": "ACTION",
+      "targets": [
+        "OPPONENT"
+      ],
+      "cost": {
+        "ALERTNESS": 5
+      },
+      "target": [
+        {
+          "op": "lose",
+          "resource": "ALERTNESS",
+          "amount": 10
+        },
+        {
+          "op": "damage",
+          "type": "CUT",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "SORPASSO IN CURVA",
+        "role": "DISRUPT",
+        "gains": "—",
+        "damage": "CUT",
+        "damageAmount": "CUT 5"
+      }
+    },
+    {
+      "binding": "prova.mara.TaglioRapido",
+      "kind": "ACTION",
+      "priority": 2,
+      "targets": [
+        "OPPONENT"
+      ],
+      "cost": {
+        "ALERTNESS": 10
+      },
+      "target": [
+        {
+          "op": "damage",
+          "type": "CUT",
+          "amount": 12
+        }
+      ],
+      "gui": {
+        "name": "TAGLIO RAPIDO",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "CUT",
+        "damageAmount": "CUT 12"
+      }
+    },
+    {
+      "binding": "prova.rocco.Colpetto",
+      "kind": "BOUND",
+      "boundTo": "prova.rocco",
+      "targets": [
+        "OPPONENT"
+      ],
+      "target": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "COLPETTO",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "HIT",
+        "damageAmount": "HIT 5"
+      }
+    },
+    {
+      "binding": "prova.rocco.ColpoPagato",
+      "kind": "ACTION",
+      "priority": 0,
+      "targets": [
+        "OPPONENT"
+      ],
+      "cost": {
+        "HEALTH": 15
+      },
+      "target": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 35
+        }
+      ],
+      "gui": {
+        "name": "COLPO PAGATO COL SANGUE",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "HIT",
+        "damageAmount": "HIT 35"
+      }
+    },
+    {
+      "binding": "prova.rocco.Contrattacco",
+      "kind": "ACTION",
+      "priority": 2,
+      "targets": [
+        "OPPONENT"
+      ],
+      "cost": {
+        "HEALTH": 10
+      },
+      "self": [
+        {
+          "op": "status",
+          "name": "GUARDIA ALTA",
+          "description": "Hit Damage taken: x0.5",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "HIT",
+          "factor": 0.5,
+          "turns": 0
+        }
+      ],
+      "target": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 10
+        }
+      ],
+      "gui": {
+        "name": "CONTRATTACCO",
+        "role": "DEFENSE",
+        "gains": "—",
+        "damage": "HIT",
+        "damageAmount": "HIT 10"
+      }
+    },
+    {
+      "binding": "prova.rocco.Fiato",
+      "kind": "BOUND",
+      "boundTo": "prova.rocco",
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "gain",
+          "resource": "HEALTH",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "RIPRENDERE FIATO",
+        "role": "RESOURCES",
+        "gains": "+5 H",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "prova.rocco.Incassare",
+      "kind": "ACTION",
+      "priority": 2,
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "status",
+          "name": "INCASSARE",
+          "description": "Hit Damage taken: x0.5",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "HIT",
+          "factor": 0.5,
+          "turns": 0
+        },
+        {
+          "op": "say",
+          "text": "Gained status: INCASSARE"
+        }
+      ],
+      "gui": {
+        "name": "INCASSARE",
+        "role": "DEFENSE",
+        "gains": "—",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "prova.rocco.PorgiLAltraGuancia",
+      "kind": "ACTION",
+      "lastResort": true,
+      "exclusiveTo": "prova.rocco",
+      "targets": [
+        "OPPONENT"
+      ],
+      "self": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 5
+        }
+      ],
+      "target": [
+        {
+          "op": "damage",
+          "type": "HIT",
+          "amount": 12
+        }
+      ],
+      "gui": {
+        "name": "PORGI L'ALTRA GUANCIA",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "HIT",
+        "damageAmount": "HIT 12"
+      }
+    }
+  ],
+  "decks": [
+    {
+      "id": "prova-mara",
+      "character": "prova.mara",
+      "bound": [
+        "prova.mara.ColpoDiStriscio",
+        "prova.mara.Scarto"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "prova.mara.TaglioRapido": 2,
+        "prova.mara.Sorpasso": 2,
+        "prova.mara.Sgommata": 2,
+        "prova.mara.Contromano": 2,
+        "com.Grab": 2,
+        "com.Steal": 2,
+        "com.ShuffleFeet": 1,
+        "bruiser.Glare": 1,
+        "bruiser.MadeOfStone": 2,
+        "com.items.CocktailOnTheGround": 2,
+        "com.items.RottenBeer": 2
+      }
+    },
+    {
+      "id": "prova-rocco",
+      "character": "prova.rocco",
+      "bound": [
+        "prova.rocco.Colpetto",
+        "prova.rocco.Fiato"
+      ],
+      "lastResort": "prova.rocco.PorgiLAltraGuancia",
+      "cards": {
+        "prova.rocco.ColpoPagato": 2,
+        "prova.rocco.Contrattacco": 2,
+        "prova.rocco.Incassare": 2,
+        "com.Grab": 2,
+        "com.Steal": 1,
+        "com.ShuffleFeet": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "com.items.CocktailOnTheGround": 2,
+        "com.items.RottenBeer": 2,
+        "com.items.MarvelousCocktail": 2
+      }
+    }
+  ]
+}

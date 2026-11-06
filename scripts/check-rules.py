@@ -99,7 +99,13 @@ def code_damages(entry):
         else:
             assert re.search(r'\.takeDamage\(\s*$', before), entry['class'] + ': Damage built outside inflictDamage/takeDamage'
             who = 'timer'
-        found.append((kind.rsplit('.', 1)[1], re.sub(r'\s+', '', amount), who,
+        amount = re.sub(r'\s+', '', amount)
+        if re.fullmatch(r'[A-Za-z_]\w*', amount):
+            # SB-6a: a @Tunable field holds the number; its initializer is the value of the live game.
+            tunable = re.findall(r'@Tunable\s+private\s+int\s+' + amount + r'\s*=\s*(\d+)\s*;', code)
+            assert len(tunable) == 1, entry['class'] + ': damage amount ' + amount + ' is neither a number nor a @Tunable int field'
+            amount = tunable[0]
+        found.append((kind.rsplit('.', 1)[1], amount, who,
                       path.relative_to(root).as_posix() + ':' + str(code.count('\n', 0, m.start()) + 1)))
     return found
 

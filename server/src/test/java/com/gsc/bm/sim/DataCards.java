@@ -19,7 +19,6 @@ import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusAmountFunction;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
-import com.gsc.bm.service.factories.CardFactoryService;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -49,12 +48,18 @@ final class DataCards {
     static DataCards parse(JsonNode cards) throws Exception {
         DataCards result = new DataCards();
         for (JsonNode card : cards) {
-            Definition definition = JSON.treeToValue(card, Definition.class);
-            definition.check();
+            Definition definition = definition(card);
             if (result.definitions.put(definition.binding, definition) != null)
                 throw new IllegalArgumentException("Carta ripetuta: " + definition.binding);
         }
         return result;
+    }
+
+    /** Una voce letta e controllata: campi sconosciuti, mancanti o incoerenti, anche dentro i passi, fanno fallire la lettura. */
+    static Definition definition(JsonNode card) throws Exception {
+        Definition definition = JSON.treeToValue(card, Definition.class);
+        definition.check();
+        return definition;
     }
 
     Set<String> bindings() { return definitions.keySet(); }
@@ -62,6 +67,10 @@ final class DataCards {
     LoadableCard create(String binding) {
         Definition definition = definitions.get(binding);
         if (definition == null) throw new IllegalArgumentException("Carta non a dati: " + binding);
+        return instantiate(definition);
+    }
+
+    static LoadableCard instantiate(Definition definition) {
         switch (definition.kind) {
             case ITEM: return new ItemCard(definition);
             case BOUND: return new BoundCard(definition);
@@ -91,6 +100,22 @@ final class DataCards {
                 if (priority != null || targets != null || !cost.isEmpty() || !target.isEmpty())
                     throw invalid("un oggetto ha solo effetti su di sé: priorità, bersaglio e costo sono fissi");
             } else if (targets == null || targets.isEmpty()) throw invalid("targets è obbligatorio");
+            if (cost == null) throw invalid("cost non può essere null");
+            for (Map.Entry<Resource, Integer> entry : cost.entrySet())
+                if (entry.getKey() == null || entry.getValue() == null || entry.getValue() < 0)
+                    throw invalid("cost: " + entry.getKey() + " deve avere un valore intero non negativo");
+            checkSteps("self", self);
+            checkSteps("target", target);
+        }
+
+        private void checkSteps(String list, List<Step> steps) {
+            if (steps == null) throw invalid(list + " non può essere null");
+            for (int i = 0; i < steps.size(); i++) {
+                Step step = steps.get(i);
+                if (step == null) throw invalid(list + "[" + i + "] è null");
+                String missing = step.missing();
+                if (missing != null) throw invalid(list + "[" + i + "]: " + missing);
+            }
         }
 
         private IllegalArgumentException invalid(String message) {
@@ -102,7 +127,7 @@ final class DataCards {
 
     /** Un numero fisso, o base + risorsa dell'autore / divide (divisione intera), letta quando l'effetto si applica. */
     public static final class Amount implements Serializable {
-        public int base;
+        public Integer base;
         public Resource of;
         public int divide = 1;
 
@@ -112,6 +137,24 @@ final class DataCards {
         public Amount(int fixed) { base = fixed; }
 
         int value(Character author) { return of == null ? base : base + author.getResources().get(of) / divide; }
+
+        /** Il campo mancante o non valido, o null. */
+        String missing(String field) {
+            if (base == null) return "campo " + field + ".base mancante";
+            if (divide <= 0) return "campo " + field + ".divide deve essere positivo";
+            return null;
+        }
+    }
+
+    private static String required(Object value, String field) { return value == null ? "campo " + field + " mancante" : null; }
+
+    private static String amount(Amount amount) {
+        return amount == null ? "campo amount mancante" : amount.missing("amount");
+    }
+
+    private static String first(String... problems) {
+        for (String problem : problems) if (problem != null) return problem;
+        return null;
     }
 
     /**
@@ -129,6 +172,9 @@ final class DataCards {
     })
     public interface Step extends Serializable {
         String apply(Character author, Character subject);
+
+        /** Il primo campo obbligatorio mancante o non valido, o null: un passo incompleto si rifiuta alla lettura. */
+        String missing();
     }
 
     public static final class DamageStep implements Step {
@@ -141,6 +187,8 @@ final class DataCards {
             Damage damage = new Damage(type, amount.value(author));
             return applying == null ? author.inflictDamage(subject, damage) : author.inflictDamage(subject, damage, applying);
         }
+
+        @Override public String missing() { return first(required(type, "type"), amount(amount)); }
     }
 
     public static final class GainStep implements Step {
@@ -150,6 +198,8 @@ final class DataCards {
         @Override public String apply(Character author, Character subject) {
             return subject.gainResource(resource, amount.value(author));
         }
+
+        @Override public String missing() { return first(required(resource, "resource"), amount(amount)); }
     }
 
     public static final class LoseStep implements Step {
@@ -159,12 +209,16 @@ final class DataCards {
         @Override public String apply(Character author, Character subject) {
             return subject.loseResource(resource, amount.value(author));
         }
+
+        @Override public String missing() { return first(required(resource, "resource"), amount(amount)); }
     }
 
     public static final class EmptyStep implements Step {
         public Resource resource;
 
         @Override public String apply(Character author, Character subject) { return subject.emptyResource(resource); }
+
+        @Override public String missing() { return required(resource, "resource"); }
     }
 
     /** Aggiunge uno stato che moltiplica un tipo di danno. Non produce righe: la riga, se c'è, è un passo say. */
@@ -174,7 +228,7 @@ final class DataCards {
         public StatusType statusType;
         public StatusFlow flow;
         public Damage.DamageType property;
-        public float factor;
+        public Float factor;
         public Integer turns;
 
         @Override public String apply(Character author, Character subject) {
@@ -184,12 +238,19 @@ final class DataCards {
                     .lastsForTurns(turns).build());
             return null;
         }
+
+        @Override public String missing() {
+            return first(required(name, "name"), required(description, "description"), required(statusType, "statusType"),
+                    required(flow, "flow"), required(property, "property"), required(factor, "factor"), required(turns, "turns"));
+        }
     }
 
     public static final class SayStep implements Step {
         public String text;
 
         @Override public String apply(Character author, Character subject) { return text; }
+
+        @Override public String missing() { return required(text, "text"); }
     }
 
     /** Come le carte Java: niente effetti significa null, non una lista vuota. */
@@ -236,19 +297,12 @@ final class DataCards {
         private final Definition definition;
 
         BoundCard(Definition definition) {
-            super(characterClass(definition.boundTo));
+            super(Character.class); // Il legame vero è l'id, anche di un personaggio che esiste solo in una bozza (SB-6a).
+            setBoundToCharacter(definition.boundTo);
             this.definition = definition;
             setPriority(definition.priorityOrDefault());
             setCanTarget(Set.copyOf(definition.targets));
             setCost(Map.copyOf(definition.cost));
-        }
-
-        private static Class<? extends Character> characterClass(String binding) {
-            try {
-                return Class.forName(CardFactoryService.BASE_CARDS_PKG + binding).asSubclass(Character.class);
-            } catch (ClassNotFoundException | ClassCastException e) {
-                throw new IllegalArgumentException("Personaggio sconosciuto: " + binding, e);
-            }
         }
 
         @Override public String getBindingName() { return definition.binding; }

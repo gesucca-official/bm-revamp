@@ -5,11 +5,15 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
+import com.gsc.bm.model.cards.Tunable;
 
 import java.util.List;
 import java.util.Set;
 
 public class LethalHeroinDose extends AbstractCard {
+
+    @Tunable
+    private int threshold = 30;
 
     public LethalHeroinDose() {
         super();
@@ -23,10 +27,10 @@ public class LethalHeroinDose extends AbstractCard {
     @Override
     public List<String> applyEffectOnSelf(Character self) {
         return List.of(
-                self.getResources().get(Resource.TOXICITY) >= 30
+                self.getResources().get(Resource.TOXICITY) >= threshold
                         ? self.loseResource(Resource.HEALTH, self.getResources().get(Resource.TOXICITY))
                         : "You didn't die from OverDose",
-                self.gainResource(Resource.TOXICITY, self.getResources().get(Resource.TOXICITY) - 30)
+                self.gainResource(Resource.TOXICITY, self.getResources().get(Resource.TOXICITY) - threshold)
         );
     }
 

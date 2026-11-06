@@ -6,12 +6,16 @@ import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Timer;
+import com.gsc.bm.model.cards.Tunable;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class BadTrip extends AbstractCard {
+
+    @Tunable
+    private int turns = 3;
 
     public BadTrip() {
         super();
@@ -27,10 +31,10 @@ public class BadTrip extends AbstractCard {
     @Override
     public List<String> applyEffectOnSelf(Character self) {
         self.getImmunities().remove(Resource.TOXICITY);
-        self.getTimers().add(new Timer("Bad Trip", c -> c.getImmunities().add(Resource.TOXICITY), 3));
+        self.getTimers().add(new Timer("Bad Trip", c -> c.getImmunities().add(Resource.TOXICITY), turns));
 
         return List.of(
-                "Lost Immunity to Toxicity for 3 Turns",
+                "Lost Immunity to Toxicity for " + turns + " Turns",
                 self.gainResource(Resource.TOXICITY, self.getResources().get(Resource.TOXICITY))
         );
     }

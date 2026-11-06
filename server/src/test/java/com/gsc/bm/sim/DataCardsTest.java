@@ -4,21 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
-import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.cards.LoadableCard;
-import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Game;
-import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.bot.AggressivePolicy;
 import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.model.game.bot.PrudentPolicy;
 import com.gsc.bm.model.game.bot.ResourceAwarePolicy;
-import com.gsc.bm.model.game.status.Status;
-import com.gsc.bm.model.game.status.StatusAmountFunction;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 import org.junit.jupiter.api.BeforeAll;
@@ -39,11 +32,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,18 +44,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /** Ogni carta a dati deve comportarsi come la carta Java che sostituisce: stessi campi, stessi effetti, stesse partite. */
 class DataCardsTest {
-    private static final int SCENARIOS = 200;
     /** Partite per abbinamento; una misura più ampia si chiede con -Dsim.dataGames e -Dsim.firstSeed. */
     private static final int GAMES = Integer.getInteger("sim.dataGames", 25);
     private static final long FIRST_SEED = Long.getLong("sim.firstSeed", 0L);
     private static final ObjectMapper JSON = new ObjectMapper();
     private static SimulationCatalog java;
+    private static CardScenarios scenarios;
     private static SimulationCatalog withData;
     private static DataCards data;
     private static JsonNode raw;
 
     @BeforeAll static void load() throws Exception {
         java = new SimulationCatalog();
+        scenarios = new CardScenarios(java);
         data = DataCards.load();
         withData = new SimulationCatalog(data);
         try (InputStream input = DataCards.class.getResourceAsStream(DataCards.RESOURCE)) { raw = JSON.readTree(input); }
@@ -176,91 +167,7 @@ class DataCardsTest {
 
     /** La prima differenza fra la carta Java e quella a dati, o null. */
     private static String difference(String binding, DataCards source) throws Exception {
-        LoadableCard dataCard = java.dress(binding, source.create(binding));
-        Card javaCard = java.card(binding);
-        String expected = shape(javaCard), actual = shape(dataCard);
-        if (!expected.equals(actual)) return "Campi: " + expected + " invece di " + actual;
-        for (long seed = 0; seed < SCENARIOS; seed++) {
-            expected = outcome(java.card(binding), seed);
-            actual = outcome(java.dress(binding, source.create(binding)), seed);
-            if (!expected.equals(actual)) return "Scenario " + seed + ": " + expected + " invece di " + actual;
-        }
-        return null;
-    }
-
-    private static String shape(Card card) {
-        return card.getBindingName() + "|" + card.isItem() + "|" + card.isBasicAction() + "|" + card.isLastResort()
-                + "|" + card.getBoundToCharacter() + "|" + card.getPriority() + "|" + new TreeSet<>(card.getCanTarget())
-                + "|" + new TreeMap<>(card.getCost());
-    }
-
-    /** Applica la carta a uno stato ricavato dal seme e descrive tutto ciò che ne risulta. */
-    private static String outcome(Card card, long seed) throws Exception {
-        Random random = new Random(seed);
-        ComPlayer a = java.player(random.nextBoolean() ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, "seat-1", new Random(seed));
-        ComPlayer b = java.player(random.nextBoolean() ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, "seat-2", new Random(seed + 1));
-        Game game = new Game(List.of(a, b), "sim", false);
-        arrange(a.getCharacter(), random);
-        arrange(b.getCharacter(), random);
-        String report;
-        try {
-            report = card.isItem() ? consume((AbstractCard) card, a.getCharacter(), b.getCharacter()) : play(card, game, a);
-        } catch (RuntimeException failure) {
-            report = failure.getClass().getSimpleName();
-        }
-        return report + " " + describe(a) + " " + describe(b);
-    }
-
-    /** Gli oggetti non stanno mai in mano: nel gioco li consuma solo Grab, che ne chiama gli effetti direttamente. */
-    private static String consume(AbstractCard item, Character self, Character other) {
-        return item.applyEffectOnSelf(self) + "/" + item.applyEffectOnTarget(self, other);
-    }
-
-    private static String play(Card card, Game game, ComPlayer player) {
-        player.getCardsInHand().add(card);
-        String target = card.getCanTarget().contains(Card.CardTarget.OPPONENT) ? "seat-2" : "SELF";
-        Map<Move.AdditionalAction, String> choices = new HashMap<>();
-        if (card.isCharacterBound()) {
-            String discard = player.getCardsInHand().stream().map(Card::getName)
-                    .filter(name -> !name.equals(card.getName())).findFirst().orElseThrow();
-            choices.put(Move.AdditionalAction.DISCARD_ONE, discard);
-        }
-        Move move = new Move(card.getName(), player.getPlayerId(), target, game.getGameId(), choices);
-        return new TreeMap<>(card.resolve(game, move)).toString();
-    }
-
-    private static void arrange(Character character, Random random) {
-        Map<Resource, Integer> resources = character.getResources();
-        for (Resource resource : List.of(Resource.VIOLENCE, Resource.ALERTNESS, Resource.TOXICITY, Resource.ALCOHOL)) {
-            if (random.nextInt(8) == 0) resources.remove(resource);
-            else resources.put(resource, random.nextInt(60));
-        }
-        resources.put(Resource.HEALTH, 1 + random.nextInt(100));
-        for (Resource immunity : List.of(Resource.TOXICITY, Resource.ALCOHOL))
-            if (random.nextInt(4) == 0) character.getImmunities().add(immunity);
-        int statuses = random.nextInt(4);
-        for (int i = 0; i < statuses; i++) {
-            final float factor = new float[] {0.5f, 1.5f, 2f}[random.nextInt(3)];
-            character.getStatuses().add(Status.builder().name("arranged " + i)
-                    .type(random.nextBoolean() ? StatusType.GOOD : StatusType.BAD)
-                    .flow(random.nextBoolean() ? StatusFlow.INPUT : StatusFlow.OUTPUT)
-                    .impactedProperty(Damage.DamageType.values()[random.nextInt(3)])
-                    .amountFunction((StatusAmountFunction) n -> n * factor)
-                    .singleUse(random.nextBoolean()).lastsForTurns(random.nextInt(3)).build());
-        }
-    }
-
-    private static String describe(ComPlayer player) {
-        Character character = player.getCharacter();
-        List<String> statuses = character.getStatuses().stream().map(status -> status.getName() + "," + status.getDescription()
-                + "," + status.getType() + "," + status.getFlow() + "," + status.getImpactedProperty() + "," + status.isSingleUse()
-                + "," + status.isEquip() + "," + status.getLastsForTurns() + "," + status.getAmountFunction().apply(100f)
-                + "," + status.getTypeFunction().apply(Damage.DamageType.HIT)).collect(Collectors.toList());
-        return new TreeMap<>(character.getResources()) + " " + new TreeSet<>(character.getImmunities()) + " " + statuses
-                + " " + character.getTimers().stream().map(t -> t.getName() + t.getTimer()).collect(Collectors.toList())
-                + " " + character.getItems().stream().map(Card::getBindingName).collect(Collectors.toList())
-                + " " + player.getCardsInHand().stream().map(Card::getBindingName).collect(Collectors.toList())
-                + " " + player.getDeckSize();
+        return scenarios.difference(() -> java.card(binding), () -> java.dress(binding, source.create(binding)));
     }
 
     /** Ogni alterazione di un campo della carta, tranne quelli che la identificano, più togliere o scambiare passi. */

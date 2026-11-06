@@ -369,7 +369,7 @@ mazzo altrui. Con Bruiser e Junkie gli stili producono risultati dichiarati e co
 
 **Chiuso il 5 novembre 2026**, anticipato rispetto a D22 su istruzione del proprietario: la prova sta nei test, partita e regole non cambiano.
 Decisione: JSON con sei passi per le carte semplici, Java per le altre. 20 carte su 37 a dati, identiche alle classi Java in 16.000 partite.
-I numeri delle 17 carte in Java restano nel codice: da risolvere in SB-6. [Rapporto](reports/set-base/sb-5-report.md).
+I numeri delle 17 carte in Java restano nel codice: da risolvere in SB-6 (fatto in SB-6a). [Rapporto](reports/set-base/sb-5-report.md).
 
 **Perimetro.** Secondo controllo aperto. Esprimere carte come dati: costo, priorità, bersaglio, effetti su sé e sul bersaglio, a partire da primitive
 già esistenti. **Soluzione ibrida:** le carte semplici sono dati, quelle davvero strane (come `WhatchaDoin`) restano in Java con i numeri esposti come
@@ -386,6 +386,11 @@ Diviso da [D30](#decisioni-del-proprietario) in due blocchi. **SB-6a, nucleo del
 dati, carte Java parametriche, personaggi, mazzi e parametri del formato, validazione al caricamento, identità con il set di oggi.
 **SB-6b, più set e mini-espansione,** dopo SB-2 e SB-6a: caricamento da più set contemporaneamente, campi set e rarità, mini-espansione di prova.
 Il perimetro che segue vale per i due blocchi insieme.
+
+**SB-6a fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Bozza in JSON con carte a dati, carte Java coi numeri
+come parametri (`@Tunable`, valori di oggi come predefiniti), personaggi, mazzi e parametri del formato, rifiutata alla lettura se
+errata. La bozza «attuale» gioca come il catalogo in 400 partite a ogni esecuzione e in 10.000 una tantum; una bozza di prova con
+Mara e Rocco di SB-9 gira senza modifiche al motore. [Rapporto](reports/set-base/sb-6a-report.md).
 
 **Perimetro.** Una **bozza di set** in file, caricata dal runner, in cui si cambia ciò che si vuole: numeri, carte, personaggi, starter e **parametri del
 formato** (20 o 25 carte, 2 o 3 copie). Da più set contemporaneamente. Nessun legame col regolamento. Una **mini-espansione fittizia di poche carte**,

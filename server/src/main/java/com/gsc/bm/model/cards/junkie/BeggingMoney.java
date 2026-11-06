@@ -6,12 +6,15 @@ import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
+import com.gsc.bm.model.cards.Tunable;
 
 import java.util.*;
 
 public class BeggingMoney extends AbstractCard {
 
     String message;
+    @Tunable
+    private int alertnessFromTarget = 10;
 
     public BeggingMoney() {
         super();
@@ -38,7 +41,7 @@ public class BeggingMoney extends AbstractCard {
     @Override
     public List<String> applyEffectOnTarget(Character self, Character target) {
         return List.of(
-                target.loseResource(Resource.ALERTNESS, 10)
+                target.loseResource(Resource.ALERTNESS, alertnessFromTarget)
         );
     }
 }

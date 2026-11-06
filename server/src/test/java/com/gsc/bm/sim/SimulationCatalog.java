@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Random;
 
 /** Catalogo JDBC indipendente dai servizi e dai repository Spring. */
-final class SimulationCatalog {
+final class SimulationCatalog implements PlayerSource {
     static final String BRUISER = "bruiser.character.BigBadBruiser";
     static final String JUNKIE = "junkie.character.ToxicJunkie";
     private final Map<String, String[]> gui = new LinkedHashMap<>();
@@ -118,8 +118,9 @@ final class SimulationCatalog {
         return player(binding, id, random, null);
     }
 
-    /** Senza policy gioca l'attuale ComPlayer casuale, il metro di SB-4. */
-    ComPlayer player(String binding, String id, Random random, BotPolicy policy) throws Exception {
+    /** Senza policy gioca l'attuale ComPlayer casuale, il metro di SB-4. Il mazzo è lo starter del personaggio. */
+    @Override
+    public ComPlayer player(String binding, String id, Random random, BotPolicy policy) throws Exception {
         String[] fields = special.get(binding);
         if (fields == null || !decks.containsKey(binding))
             throw new IllegalArgumentException("Starter assente: " + binding);

@@ -27,7 +27,13 @@ public abstract class Character implements Serializable {
     private final Set<Timer> timers = new LinkedHashSet<>();
 
     public Character(int hp, int speed, int itemsSize) {
-        this.bindingName = this.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");
+        this(null, hp, speed, itemsSize);
+    }
+
+    /** With an explicit binding name, for characters described as data (set-base plan SB-6a, test sources only). */
+    protected Character(String bindingName, int hp, int speed, int itemsSize) {
+        this.bindingName = bindingName != null ? bindingName
+                : this.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");
         this.itemsSize = itemsSize;
         this.items = new CircularFifoQueue<>(itemsSize);
         this.resources.put(Resource.HEALTH, hp);

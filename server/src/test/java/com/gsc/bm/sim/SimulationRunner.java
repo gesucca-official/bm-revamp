@@ -26,7 +26,7 @@ final class SimulationRunner {
     enum Outcome { FIRST_WIN, SECOND_WIN, DRAW, TURN_LIMIT }
     static final int MAX_TURNS = 200;
     private static final ObjectMapper JSON = new ObjectMapper();
-    private final SimulationCatalog catalog;
+    private final PlayerSource catalog;
 
     static final class Result {
         final Outcome outcome;
@@ -46,7 +46,7 @@ final class SimulationRunner {
 
     private static final class TurnLimit extends RuntimeException { }
 
-    /** Un personaggio e chi lo gioca: senza policy, l'attuale ComPlayer casuale. */
+    /** Un mazzo e chi lo gioca: senza policy, l'attuale ComPlayer casuale. Nel catalogo il mazzo è lo starter del personaggio. */
     static final class Contender {
         final String character;
         final BotPolicy policy;
@@ -57,7 +57,7 @@ final class SimulationRunner {
         }
     }
 
-    SimulationRunner(SimulationCatalog catalog) { this.catalog = catalog; }
+    SimulationRunner(PlayerSource catalog) { this.catalog = catalog; }
 
     Game newGame(long seed, boolean bruiserFirst) throws Exception {
         return newGame(seed, new Contender(bruiserFirst ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, null),
