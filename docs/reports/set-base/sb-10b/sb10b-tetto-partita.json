@@ -1,0 +1,3012 @@
+{
+  "intestazione" : {
+    "banco" : "sb-10a/1",
+    "bozza" : "classpath:/sb-10a/listino-base.json",
+    "sha256" : "87fa95f18772385258c51c05de784487beb4fa0dc9a67062d6783fff35b7b1b1",
+    "misure" : "tettopartita+salute",
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse"
+    ],
+    "partiteBisezione" : 400,
+    "partiteGriglia" : 2000,
+    "partiteCurve" : 2000,
+    "semeBisezione" : 8000000,
+    "semeGriglia" : 8500000,
+    "semeCurve" : 8200000,
+    "nota" : "SB-10b: tetto in partita con i predefiniti di D33"
+  },
+  "bisezioni" : [ ],
+  "pendenzaSalute" : {
+    "ctx-neutro" : [
+      0.0477,
+      0.0004
+    ],
+    "ctx-spazienzio" : [
+      0.0258,
+      0.0005
+    ],
+    "ctx-mara" : [
+      0.0343,
+      0.0004
+    ],
+    "ctx-rocco" : [
+      0.0248,
+      0.0005
+    ],
+    "ctx-tossico" : [
+      0.036,
+      0.0005
+    ]
+  },
+  "curve" : [
+    {
+      "id" : "tettopartita-danno-4HIT-neutro",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-neutro",
+      "variante" : "danno-4HIT",
+      "valore" : 4,
+      "sha256Bozza" : "62576207c00ef2a564cd8a50ee0e0e1ae9f30c113c082315ed132f424453813e",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 4920,
+        "sconfitte" : 10,
+        "patte" : 1070,
+        "partite" : 6000,
+        "quota" : 0.998,
+        "ic" : [
+          0.9963,
+          0.9989
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 36552,
+        "giocateTotali" : 108000,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1795,
+            0
+          ],
+          "prudente" : [
+            1874,
+            0
+          ],
+          "risorse" : [
+            1251,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-3HIT-neutro",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-neutro",
+      "variante" : "danno-3HIT",
+      "valore" : 4,
+      "sha256Bozza" : "a72b6f1cf7d295e59bb6fe147b09e019870c717e190e84a42ed7de262e3257c9",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 3916,
+        "sconfitte" : 127,
+        "patte" : 1957,
+        "partite" : 6000,
+        "quota" : 0.9686,
+        "ic" : [
+          0.9628,
+          0.9735
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 36559,
+        "giocateTotali" : 111426,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1245,
+            6
+          ],
+          "prudente" : [
+            1776,
+            4
+          ],
+          "risorse" : [
+            895,
+            117
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-2HIT-neutro",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-neutro",
+      "variante" : "danno-2HIT",
+      "valore" : 4,
+      "sha256Bozza" : "343d3180fa9a7fca15b8d969b5b61030e2dea5b90011ad30d602d97e8dfe3428",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2773,
+        "sconfitte" : 515,
+        "patte" : 2712,
+        "partite" : 6000,
+        "quota" : 0.8434,
+        "ic" : [
+          0.8305,
+          0.8554
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 33643,
+        "giocateTotali" : 113916,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            756,
+            234
+          ],
+          "prudente" : [
+            960,
+            176
+          ],
+          "risorse" : [
+            1057,
+            105
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-risorsa-5V-neutro",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-neutro",
+      "variante" : "risorsa-5V",
+      "valore" : 4,
+      "sha256Bozza" : "38ad1b58017e1bb256c0992c06cbd75d53b46a19188036a4a6d49b5bede7ad36",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 1957,
+        "sconfitte" : 511,
+        "patte" : 3532,
+        "partite" : 6000,
+        "quota" : 0.7929,
+        "ic" : [
+          0.7765,
+          0.8085
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 16202,
+        "giocateTotali" : 115455,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            424,
+            70
+          ],
+          "prudente" : [
+            1139,
+            197
+          ],
+          "risorse" : [
+            394,
+            244
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-4HIT-spazienzio",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "danno-4HIT",
+      "valore" : 4,
+      "sha256Bozza" : "0f1be93d3f4877b2eaea306317c3158f9d8945b69d828c18b49e2ddf0c71a25f",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2355,
+        "sconfitte" : 2608,
+        "patte" : 1037,
+        "partite" : 6000,
+        "quota" : 0.4745,
+        "ic" : [
+          0.4606,
+          0.4884
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 22632,
+        "giocateTotali" : 63386,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            684,
+            966
+          ],
+          "prudente" : [
+            814,
+            869
+          ],
+          "risorse" : [
+            857,
+            773
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-3HIT-spazienzio",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "danno-3HIT",
+      "valore" : 4,
+      "sha256Bozza" : "64ce93b1a619324be4b44d47019bc3978fa44663b97de58007bacedf228d9cfd",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2255,
+        "sconfitte" : 2810,
+        "patte" : 935,
+        "partite" : 6000,
+        "quota" : 0.4452,
+        "ic" : [
+          0.4316,
+          0.4589
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 20602,
+        "giocateTotali" : 64218,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            694,
+            999
+          ],
+          "prudente" : [
+            717,
+            1009
+          ],
+          "risorse" : [
+            844,
+            802
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-2HIT-spazienzio",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "danno-2HIT",
+      "valore" : 4,
+      "sha256Bozza" : "6e6d6f81a73354700a43df5af4c513b1513b6c5ee141652c4ca7e4481d3a95a7",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2403,
+        "sconfitte" : 2644,
+        "patte" : 953,
+        "partite" : 6000,
+        "quota" : 0.4761,
+        "ic" : [
+          0.4624,
+          0.4899
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 15497,
+        "giocateTotali" : 63918,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            740,
+            947
+          ],
+          "prudente" : [
+            864,
+            828
+          ],
+          "risorse" : [
+            799,
+            869
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-risorsa-5V-spazienzio",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "risorsa-5V",
+      "valore" : 4,
+      "sha256Bozza" : "059d98113b25986300cbabe221f295d99ddad921e372095a5ca3e70a11fc3531",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2830,
+        "sconfitte" : 2233,
+        "patte" : 937,
+        "partite" : 6000,
+        "quota" : 0.559,
+        "ic" : [
+          0.5452,
+          0.5726
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 6681,
+        "giocateTotali" : 63083,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            926,
+            753
+          ],
+          "prudente" : [
+            1003,
+            722
+          ],
+          "risorse" : [
+            901,
+            758
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-4HIT-mara",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-mara",
+      "variante" : "danno-4HIT",
+      "valore" : 4,
+      "sha256Bozza" : "874ec752a81255e72f568054650f1bbe6655fa1e31a5b1d2f71e5095649d8b71",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 4241,
+        "sconfitte" : 977,
+        "patte" : 782,
+        "partite" : 6000,
+        "quota" : 0.8128,
+        "ic" : [
+          0.802,
+          0.8231
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 18767,
+        "giocateTotali" : 60913,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1501,
+            257
+          ],
+          "prudente" : [
+            1420,
+            316
+          ],
+          "risorse" : [
+            1320,
+            404
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-3HIT-mara",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-mara",
+      "variante" : "danno-3HIT",
+      "valore" : 4,
+      "sha256Bozza" : "0900b182a0b00ff2539d61f0a0dd65f998a69799f3f7ec9d4e3093f207290ee2",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 3678,
+        "sconfitte" : 1395,
+        "patte" : 927,
+        "partite" : 6000,
+        "quota" : 0.725,
+        "ic" : [
+          0.7126,
+          0.7371
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 19350,
+        "giocateTotali" : 63065,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1293,
+            420
+          ],
+          "prudente" : [
+            1225,
+            473
+          ],
+          "risorse" : [
+            1160,
+            502
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-2HIT-mara",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-mara",
+      "variante" : "danno-2HIT",
+      "valore" : 4,
+      "sha256Bozza" : "115a9b89e21083a051a630254d0e57c64ebcd9bfc00e2f279ed305a9cba2abe4",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 3054,
+        "sconfitte" : 1902,
+        "patte" : 1044,
+        "partite" : 6000,
+        "quota" : 0.6162,
+        "ic" : [
+          0.6026,
+          0.6297
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 16507,
+        "giocateTotali" : 64773,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1054,
+            608
+          ],
+          "prudente" : [
+            1044,
+            590
+          ],
+          "risorse" : [
+            956,
+            704
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-risorsa-8A-mara",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-mara",
+      "variante" : "risorsa-8A",
+      "valore" : 4,
+      "sha256Bozza" : "3ea2425d8df5a58dca1a57d54a1ea873859bc0550da424843d55225ca84a05be",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2349,
+        "sconfitte" : 2615,
+        "patte" : 1036,
+        "partite" : 6000,
+        "quota" : 0.4732,
+        "ic" : [
+          0.4593,
+          0.4871
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 5469,
+        "giocateTotali" : 68377,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            840,
+            804
+          ],
+          "prudente" : [
+            822,
+            811
+          ],
+          "risorse" : [
+            687,
+            1000
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-4HIT-rocco",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-rocco",
+      "variante" : "danno-4HIT",
+      "valore" : 4,
+      "sha256Bozza" : "453c5be7adc3e6ee5a62039d088e86f10362c65f8bccd8bd9379710b062c8da2",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 3688,
+        "sconfitte" : 1467,
+        "patte" : 845,
+        "partite" : 6000,
+        "quota" : 0.7154,
+        "ic" : [
+          0.7029,
+          0.7276
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 15137,
+        "giocateTotali" : 57145,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1395,
+            354
+          ],
+          "prudente" : [
+            1187,
+            499
+          ],
+          "risorse" : [
+            1106,
+            614
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-3HIT-rocco",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-rocco",
+      "variante" : "danno-3HIT",
+      "valore" : 4,
+      "sha256Bozza" : "bb9c532a7348f3d70b59608aa59628f65ecc08935389c11ad339e3e5da4ae42a",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 3392,
+        "sconfitte" : 1766,
+        "patte" : 842,
+        "partite" : 6000,
+        "quota" : 0.6576,
+        "ic" : [
+          0.6446,
+          0.6704
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 15078,
+        "giocateTotali" : 58239,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1243,
+            488
+          ],
+          "prudente" : [
+            1125,
+            566
+          ],
+          "risorse" : [
+            1024,
+            712
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-2HIT-rocco",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-rocco",
+      "variante" : "danno-2HIT",
+      "valore" : 4,
+      "sha256Bozza" : "f64e025987bbc0a2d08939f678a83ba9e344757c082e71c8dc69ed9341fc5f90",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2820,
+        "sconfitte" : 2338,
+        "patte" : 842,
+        "partite" : 6000,
+        "quota" : 0.5467,
+        "ic" : [
+          0.5331,
+          0.5603
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 11491,
+        "giocateTotali" : 58682,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            971,
+            756
+          ],
+          "prudente" : [
+            926,
+            767
+          ],
+          "risorse" : [
+            923,
+            815
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-risorsa-8A-rocco",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-rocco",
+      "variante" : "risorsa-8A",
+      "valore" : 4,
+      "sha256Bozza" : "9a0d81469779e95260db19741ef53b02e7a93491802b1a0a1941df92b5cbf4d7",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2501,
+        "sconfitte" : 2651,
+        "patte" : 848,
+        "partite" : 6000,
+        "quota" : 0.4854,
+        "ic" : [
+          0.4718,
+          0.4991
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 3702,
+        "giocateTotali" : 60153,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            874,
+            850
+          ],
+          "prudente" : [
+            839,
+            833
+          ],
+          "risorse" : [
+            788,
+            968
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-4HIT-tossico",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-tossico",
+      "variante" : "danno-4HIT",
+      "valore" : 4,
+      "sha256Bozza" : "6630a45d3ef7e3c7396c624af76c59603c78bb0e39d1fc8811365af399c11731",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 3186,
+        "sconfitte" : 1667,
+        "patte" : 1147,
+        "partite" : 6000,
+        "quota" : 0.6565,
+        "ic" : [
+          0.643,
+          0.6697
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 37416,
+        "giocateTotali" : 86145,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1128,
+            526
+          ],
+          "prudente" : [
+            1317,
+            224
+          ],
+          "risorse" : [
+            741,
+            917
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-3HIT-tossico",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-tossico",
+      "variante" : "danno-3HIT",
+      "valore" : 4,
+      "sha256Bozza" : "edb0e434f4d7d4581e7e665583d2b7c9e50dcd44a171cd8afe375be2db8f39fa",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2782,
+        "sconfitte" : 1990,
+        "patte" : 1228,
+        "partite" : 6000,
+        "quota" : 0.583,
+        "ic" : [
+          0.5689,
+          0.5969
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 35595,
+        "giocateTotali" : 90956,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1031,
+            586
+          ],
+          "prudente" : [
+            976,
+            570
+          ],
+          "risorse" : [
+            775,
+            834
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-danno-2HIT-tossico",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-tossico",
+      "variante" : "danno-2HIT",
+      "valore" : 4,
+      "sha256Bozza" : "79eb39de902dc5ad4e4ddb96b893256a8f6665b1b973ce9c1a69fdb93f4706e7",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2164,
+        "sconfitte" : 2619,
+        "patte" : 1217,
+        "partite" : 6000,
+        "quota" : 0.4524,
+        "ic" : [
+          0.4384,
+          0.4666
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 33988,
+        "giocateTotali" : 95241,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            968,
+            646
+          ],
+          "prudente" : [
+            562,
+            1016
+          ],
+          "risorse" : [
+            634,
+            957
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-risorsa-26T-tossico",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-tossico",
+      "variante" : "risorsa-26T",
+      "valore" : 4,
+      "sha256Bozza" : "02f3b1dd891ca2a163850f91fcf8b5763428a3f1b83b771d730cc8bead7f21e2",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2981,
+        "sconfitte" : 2080,
+        "patte" : 939,
+        "partite" : 6000,
+        "quota" : 0.589,
+        "ic" : [
+          0.5754,
+          0.6025
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 11690,
+        "giocateTotali" : 91078,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            913,
+            728
+          ],
+          "prudente" : [
+            1144,
+            515
+          ],
+          "risorse" : [
+            924,
+            837
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettopartita-risorsa-10T-tossico",
+      "gruppo" : "tettopartita",
+      "contesto" : "ctx-tossico",
+      "variante" : "risorsa-10T",
+      "valore" : 4,
+      "sha256Bozza" : "9d4aa4b7f9a0c2b12fa866d837531388068206a5a16f0c8db9c161ff2c22ed40",
+      "punto" : {
+        "x" : 4,
+        "vittorie" : 2688,
+        "sconfitte" : 2229,
+        "patte" : 1083,
+        "partite" : 6000,
+        "quota" : 0.5467,
+        "ic" : [
+          0.5327,
+          0.5605
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 11395,
+        "giocateTotali" : 93296,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            887,
+            743
+          ],
+          "prudente" : [
+            933,
+            681
+          ],
+          "risorse" : [
+            868,
+            805
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-neutro",
+      "gruppo" : "salute",
+      "contesto" : "ctx-neutro",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "02f8a0e616bb34e8c1cc98b31ef141ee924ced2019e464d76989a9c34556496a",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 288,
+        "sconfitte" : 5124,
+        "patte" : 588,
+        "partite" : 6000,
+        "quota" : 0.0532,
+        "ic" : [
+          0.0475,
+          0.0595
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 98365,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            136,
+            1570
+          ],
+          "prudente" : [
+            34,
+            1966
+          ],
+          "risorse" : [
+            118,
+            1588
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-neutro",
+      "gruppo" : "salute",
+      "contesto" : "ctx-neutro",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "1bee8cef8bd9fbab3b23ebea6bf7ba471b8f8da1c3d02923a4cc1fdc53a898a4",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 1035,
+        "sconfitte" : 3984,
+        "patte" : 981,
+        "partite" : 6000,
+        "quota" : 0.2062,
+        "ic" : [
+          0.1952,
+          0.2176
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 102372,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            353,
+            1183
+          ],
+          "prudente" : [
+            357,
+            1623
+          ],
+          "risorse" : [
+            325,
+            1178
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-neutro",
+      "gruppo" : "salute",
+      "contesto" : "ctx-neutro",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "2d29b9270d7a84163f51fac3987f07662abb922294133b62264b3ebed24b0356",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 3987,
+        "sconfitte" : 1059,
+        "patte" : 954,
+        "partite" : 6000,
+        "quota" : 0.7901,
+        "ic" : [
+          0.7787,
+          0.8011
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 106372,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1188,
+            369
+          ],
+          "prudente" : [
+            1623,
+            341
+          ],
+          "risorse" : [
+            1176,
+            349
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-neutro",
+      "gruppo" : "salute",
+      "contesto" : "ctx-neutro",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "5cb4004e713db86c5aef93788992b1cdf5cef178c71be6b27976cadbbd81d227",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 5152,
+        "sconfitte" : 232,
+        "patte" : 616,
+        "partite" : 6000,
+        "quota" : 0.9569,
+        "ic" : [
+          0.9512,
+          0.962
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 106264,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1584,
+            108
+          ],
+          "prudente" : [
+            1966,
+            30
+          ],
+          "risorse" : [
+            1602,
+            94
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "522429af10ed292dd0dc26ed896813f96e32239684f1e618b879db4273dd738b",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 1142,
+        "sconfitte" : 3591,
+        "patte" : 1267,
+        "partite" : 6000,
+        "quota" : 0.2413,
+        "ic" : [
+          0.2293,
+          0.2537
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 58548,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            366,
+            1202
+          ],
+          "prudente" : [
+            384,
+            1174
+          ],
+          "risorse" : [
+            392,
+            1215
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "3e4df16a9d5de00e90d49324b709a729d619f08a4440babc3f46a0a09d8f218f",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 1669,
+        "sconfitte" : 2904,
+        "patte" : 1427,
+        "partite" : 6000,
+        "quota" : 0.365,
+        "ic" : [
+          0.3511,
+          0.379
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 60948,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            555,
+            982
+          ],
+          "prudente" : [
+            542,
+            930
+          ],
+          "risorse" : [
+            572,
+            992
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "17e99027d9c642381d21def452142fb3e7525dbad8aa56eefa9f4699158cc049",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 2882,
+        "sconfitte" : 1634,
+        "patte" : 1484,
+        "partite" : 6000,
+        "quota" : 0.6382,
+        "ic" : [
+          0.624,
+          0.6521
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 64623,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1020,
+            535
+          ],
+          "prudente" : [
+            887,
+            515
+          ],
+          "risorse" : [
+            975,
+            584
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "10282b9c74b079b4048a67b9e7da17d49ca34f6e8fa987158a25b0d6434a3960",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 3498,
+        "sconfitte" : 1167,
+        "patte" : 1335,
+        "partite" : 6000,
+        "quota" : 0.7498,
+        "ic" : [
+          0.7372,
+          0.7621
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 65584,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1237,
+            378
+          ],
+          "prudente" : [
+            1076,
+            356
+          ],
+          "risorse" : [
+            1185,
+            433
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "0d21fa252ca881cf75bae8cc804d6f2ef13c179e845e59ffaf913c60d87eacfe",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 907,
+        "sconfitte" : 4324,
+        "patte" : 769,
+        "partite" : 6000,
+        "quota" : 0.1734,
+        "ic" : [
+          0.1634,
+          0.1839
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 52955,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            259,
+            1344
+          ],
+          "prudente" : [
+            316,
+            1666
+          ],
+          "risorse" : [
+            332,
+            1314
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "88ac0512c88b8e5b5007444e592135b6a2a62a1e5ecef774d2a5e091ce5044ce",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 1609,
+        "sconfitte" : 3458,
+        "patte" : 933,
+        "partite" : 6000,
+        "quota" : 0.3175,
+        "ic" : [
+          0.3049,
+          0.3305
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 56595,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            462,
+            1061
+          ],
+          "prudente" : [
+            629,
+            1355
+          ],
+          "risorse" : [
+            518,
+            1042
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "7ef7952027026f6ab5169b61f155df0280dd0df14132dc1322d1db29df7d7f18",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 3432,
+        "sconfitte" : 1606,
+        "patte" : 962,
+        "partite" : 6000,
+        "quota" : 0.6812,
+        "ic" : [
+          0.6682,
+          0.6939
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 61253,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1011,
+            472
+          ],
+          "prudente" : [
+            1387,
+            603
+          ],
+          "risorse" : [
+            1034,
+            531
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "709cac493ff02da2f399370e1be036e1b2539145248f9d146b3e065e8bb91edc",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 4384,
+        "sconfitte" : 774,
+        "patte" : 842,
+        "partite" : 6000,
+        "quota" : 0.8499,
+        "ic" : [
+          0.8399,
+          0.8594
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 61793,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1372,
+            210
+          ],
+          "prudente" : [
+            1700,
+            290
+          ],
+          "risorse" : [
+            1312,
+            274
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-rocco",
+      "gruppo" : "salute",
+      "contesto" : "ctx-rocco",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "2348ddb33fd18b472339c4b74221af7eb99401b7a5691f824d1192a7b3614e73",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 1220,
+        "sconfitte" : 3663,
+        "patte" : 1117,
+        "partite" : 6000,
+        "quota" : 0.2498,
+        "ic" : [
+          0.2379,
+          0.2622
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 52724,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            325,
+            1257
+          ],
+          "prudente" : [
+            412,
+            1218
+          ],
+          "risorse" : [
+            483,
+            1188
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-rocco",
+      "gruppo" : "salute",
+      "contesto" : "ctx-rocco",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "3bdf11531d48d88f98dffc682d2f7543ad2e946905c78c6a9d3020c36fc7783b",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 1743,
+        "sconfitte" : 3040,
+        "patte" : 1217,
+        "partite" : 6000,
+        "quota" : 0.3644,
+        "ic" : [
+          0.3509,
+          0.3782
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 54326,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            515,
+            1018
+          ],
+          "prudente" : [
+            587,
+            1007
+          ],
+          "risorse" : [
+            641,
+            1015
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-rocco",
+      "gruppo" : "salute",
+      "contesto" : "ctx-rocco",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "804c23f6f2849f50300cdc0201239a63ae9b703ef404639c12d76c0072aeac39",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 3017,
+        "sconfitte" : 1748,
+        "patte" : 1235,
+        "partite" : 6000,
+        "quota" : 0.6332,
+        "ic" : [
+          0.6194,
+          0.6467
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 56725,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            984,
+            545
+          ],
+          "prudente" : [
+            1053,
+            558
+          ],
+          "risorse" : [
+            980,
+            645
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-rocco",
+      "gruppo" : "salute",
+      "contesto" : "ctx-rocco",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "7cd23e8af4e62c5c2ba0a9029ca0ab07b3c962d8b18640cfec83e42e87425972",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 3646,
+        "sconfitte" : 1302,
+        "patte" : 1052,
+        "partite" : 6000,
+        "quota" : 0.7369,
+        "ic" : [
+          0.7244,
+          0.7489
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 57488,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1230,
+            386
+          ],
+          "prudente" : [
+            1244,
+            404
+          ],
+          "risorse" : [
+            1172,
+            512
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-tossico",
+      "gruppo" : "salute",
+      "contesto" : "ctx-tossico",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "68b0ad6d1ce39874373239b93588954dd291b096cba6a5e659f70787fad240e0",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 636,
+        "sconfitte" : 4493,
+        "patte" : 871,
+        "partite" : 6000,
+        "quota" : 0.124,
+        "ic" : [
+          0.1153,
+          0.1333
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 74315,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            450,
+            1189
+          ],
+          "prudente" : [
+            0,
+            1764
+          ],
+          "risorse" : [
+            186,
+            1540
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-tossico",
+      "gruppo" : "salute",
+      "contesto" : "ctx-tossico",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "49b7410885ab0f14f1ba4b63d342ab6fb790b178856658ed6fde0818a4ff1ef2",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 953,
+        "sconfitte" : 2973,
+        "patte" : 2074,
+        "partite" : 6000,
+        "quota" : 0.2427,
+        "ic" : [
+          0.2296,
+          0.2564
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 77170,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            616,
+            1013
+          ],
+          "prudente" : [
+            31,
+            722
+          ],
+          "risorse" : [
+            306,
+            1238
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-tossico",
+      "gruppo" : "salute",
+      "contesto" : "ctx-tossico",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "0e046a40f243d28277d0aad583395ee2252b339201aa864f8f46a91c52489071",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 2022,
+        "sconfitte" : 1033,
+        "patte" : 2945,
+        "partite" : 6000,
+        "quota" : 0.6619,
+        "ic" : [
+          0.6449,
+          0.6784
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 80189,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            983,
+            636
+          ],
+          "prudente" : [
+            209,
+            1
+          ],
+          "risorse" : [
+            830,
+            396
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-tossico",
+      "gruppo" : "salute",
+      "contesto" : "ctx-tossico",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "2a977807f4293e5636e50bdf1cb2070c417d38b1ccb1ab23f323a97510a15598",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 3445,
+        "sconfitte" : 795,
+        "patte" : 1760,
+        "partite" : 6000,
+        "quota" : 0.8125,
+        "ic" : [
+          0.8005,
+          0.824
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 80695,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1116,
+            533
+          ],
+          "prudente" : [
+            1172,
+            2
+          ],
+          "risorse" : [
+            1157,
+            260
+          ]
+        }
+      }
+    }
+  ],
+  "tetto" : [
+    {
+      "bound" : "listino.tetto.danno-2HIT-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-2HIT-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-2HIT-rocco",
+      "personaggio" : "prova.rocco",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-2HIT-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-2HIT-tossico",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-3HIT-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-3HIT-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-3HIT-rocco",
+      "personaggio" : "prova.rocco",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-3HIT-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-3HIT-tossico",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-4HIT-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-4HIT-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-4HIT-rocco",
+      "personaggio" : "prova.rocco",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-4HIT-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.danno-4HIT-tossico",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.risorsa-10T-tossico",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 8E+1,
+        "L" : 0
+      },
+      "massimo" : 1.5,
+      "medio" : 1.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.risorsa-26T-tossico",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9,
+        3.9
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 208,
+        "L" : 0
+      },
+      "massimo" : 3.9,
+      "medio" : 3.9,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.risorsa-5V-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 4E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3.75,
+      "medio" : 3.75,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.risorsa-5V-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 4E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3.75,
+      "medio" : 3.75,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.risorsa-8A-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "guadagni" : {
+        "A" : 64,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.tetto.risorsa-8A-rocco",
+      "personaggio" : "prova.rocco",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "guadagni" : {
+        "A" : 64,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Listino di potenza del Set Base
 
-> **Stato: misurato in SB-10a il 6 novembre 2026, in attesa del giudizio del proprietario.** **Non normativo:** il regolamento vigente
+> **Stato: misurato in SB-10a il 6 novembre 2026 e approvato dal proprietario lo stesso giorno (D33).** **Non normativo:** il regolamento vigente
 > è [game-rules.md](../../game-rules.md) e la partita viva non cambia. Il listino è uno strumento di progetto per SB-10b (griglia degli
 > slot) e per i blocchi delle carte, come le [schede dei personaggi](schede-personaggi.md). Metodo, semi e verifiche sono nel
 > [rapporto SB-10a](../../reports/set-base/sb-10a-report.md); i numeri completi in [`sb-10a/`](../../reports/set-base/sb-10a/).
@@ -33,7 +33,7 @@ per uso, e dove stanno le carte di oggi.
 | **V pagata** | 1,07 danni per V a 10 V · 1,15 a 20 V · 1,44 a 30 V (Spazienzio); 0,93–1,05 nel non specchio contro Mara | **Convesso:** le carte care chiedono un premio, perché si pagano tardi e intasano la mano. A 30 V gli stili vanno da 1,27 a 1,78. Nel neutro, con due sole generatrici, una carta da 20–30 V non si paga quasi mai: la sua quota resta piatta per qualsiasi danno |
 | **A pagata** | 0,55 danni per A a 10 A · 0,80 a 20 A (Mara); 0,22–0,41 (neutro); 0,03 (Spazienzio, 10 A) | A costa poco perché quasi tutti ne hanno tanta. Comprende anche la precedenza persa (R04), che vale poco (sotto) |
 | **T pagata dal Tossico immune** | 0,05 danni per T a 10 T · 0,13 a 20 T | Con lo starter di oggi il Tossico nuota nella T: come costo è quasi gratis. In uno starter con meno T il prezzo salirà |
-| **L pagata** | Una carta da 5 L vale l'àncora solo con circa 40 HIT (Spazienzio, 0,47 giocate per partita). Nel neutro, a 5 o 10 L, non si paga mai | **L come costo è quasi inutilizzabile:** +10 L diventano 6 a fine turno (R06), quindi una carta da 10 L chiede due generatrici in fila. GoingBerserk (10 L) con il solo Cocktail (+15 L → 8) non si paga |
+| **L pagata** | Una carta da 5 L vale l'àncora solo con circa 40 HIT (Spazienzio, 0,47 giocate per partita). Nel neutro, a 5 o 10 L, non si paga mai | **L come costo è quasi inutilizzabile:** a fine turno +10 L ne perdono 6 e ne restano 4 (R06; testo corretto in SB-10b), quindi una carta da 10 L chiede due generatrici in fila. GoingBerserk (10 L) con il solo Cocktail (+15 L → 7) non si paga |
 | **HEALTH pagata** | 1,06–1,24 danni per HEALTH (Rocco 1,23–1,24; neutro 1,06–1,12) | Stabile fra contesti e stili: pagare salute costa come subire danno, più il 6–24% |
 | **CUT e POISON** | 1 CUT = 0,98–1,01 HIT; 1 POISON = 1,01–1,06 HIT; nel non specchio 0,98–0,99 | Uguali all'HIT anche contro le difese di Spazienzio: con questi bot le difese per tipo pesano poco. POISON leggermente sopra perché nessuno lo para |
 | **Priorità** | Da 0 a 2: entro ±0,5 HIT in tutti i contesti | Vale quasi niente: il morto agisce comunque (R04), quindi arrivare prima conta solo per contromosse, oggetti e stati del turno |
@@ -99,7 +99,7 @@ proprietario preferisce il criterio più severo, il tetto è 3.
 | L | 0,5 | **0,35** | 1 L = 0,49 V × 0,75 |
 | HEALTH | 1 | 1 | HEALTH pagata 1,06–1,24: confermato |
 
-Comando: `-Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35`. Esito con questi parametri nel
+Comando: `-Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35`. Da SB-10b sono i predefiniti del banco; la misura in partita è nel [rapporto SB-10b](../../reports/set-base/sb-10b-report.md#tetto-in-partita). Esito con questi parametri nel
 [rapporto](../../reports/set-base/sb-10a-report.md#tetto-delle-bound).
 
 ## Le 37 carte attuali
@@ -186,8 +186,10 @@ lo scarto di SB-7 non è causale, e i bot le giocano solo in casi rari.
 
 ## L e gli effetti poco evidenti
 
-- **L non si accumula per pagare.** Con R06 una presa di L si dimezza e scende di uno a fine turno: +10 diventa 6, +15 diventa 8, +20
-  diventa 11. Una carta che costa 10 L chiede una presa da almeno 18 o due prese in fila. Il Cocktail (+15 L) non basta per GoingBerserk.
+- **L non si accumula per pagare.** Con R06 a fine turno si perde L/2 + 1 (divisione intera): +10 diventa 4, +15 diventa 7, +20
+  diventa 9, e 1 o 2 vanno a zero. Una carta che costa 10 L chiede una presa da almeno 21 o due prese in fila; per 5 L basta una presa
+  da 11. Il Cocktail (+15 L) non basta per GoingBerserk. *Corretto in SB-10b: la prima versione scriveva la quantità persa (6, 8, 11) al
+  posto di quella che resta; le conclusioni non cambiano.*
 - **L guadagnata vale circa metà di V,** e meno ancora se c'è una spesa in L da servire: la stessa coppia generatrice + spesa in V batte
   sempre quella in L, a qualsiasi quantità di L.
 - **L toglie A a chi la prende** (R06), ma la precedenza vale poco: il danno vero è che L non diventa mai una riserva.

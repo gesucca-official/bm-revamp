@@ -1,0 +1,623 @@
+# Griglia degli slot del Set Base
+
+> **Stato: approvata dal proprietario il 6 novembre 2026** (SB-10b). Principi della fase A e griglia della fase B, ciascuno con le
+> parole «Approvo tutte»: vedi [Decisioni del proprietario](#decisioni-del-proprietario). Resta aperta una sola scelta, nata dalla
+> misura del tetto in partita: [tetto delle bound di danno](#tetto-in-partita). **Non normativo:** il regolamento vigente è
+> [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
+> SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
+
+**Perché esiste.** Il [piano](../../set-base-plan.md#il-set-in-numeri) fissa circa 115 carte, ma senza una griglia ogni blocco
+progetterebbe le sue carte da solo, e alla fine il set avrebbe buchi (meccaniche mai usate) e doppioni (tre parate uguali). La griglia dà
+a ogni carta del set un posto, un ruolo, una fascia di costo, una rarità e un motivo prima di scriverla. Usa i prezzi misurati del
+[listino](listino.md), i triangoli delle [schede dei personaggi](schede-personaggi.md) e le idee della
+[bozza esterna](bozza-esterna-proposta-70-carte.md).
+
+Fonti: [piano](../../set-base-plan.md) (D1–D33), [listino](listino.md) e [rapporto SB-10a](../../reports/set-base/sb-10a-report.md),
+[schede](schede-personaggi.md) e [rapporto SB-9](../../reports/set-base/sb-9-report.md), [regolamento 1.11](../../game-rules.md) (R01a,
+R02, R04–R07a), [formato dati di SB-5](../../reports/set-base/sb-5-report.md#decisione-sul-formato), bozze `attuale.json` e
+`prova-sb9.json` di SB-6a.
+
+## Principi approvati nella fase A
+
+Il proprietario ha approvato tutte e otto le raccomandazioni con «Approvo tutte» (6 novembre 2026):
+
+1. **Budget 115:** 37 azioni d'archetipo (6 per Cesira e Rocco, 5 per gli altri) e 23 generiche; il resto come da piano.
+2. **Starter da 12 carte distinte** (5 d'archetipo, 4 generiche, 3 oggetti), con varianti per Gigi (più oggetti) e Spazienzio (meno).
+3. **Bound senza parate:** generatrice, colpetto e una variante a una sola funzione.
+4. **T del Tossico più scarsa,** carte prezzate a circa 0,3–0,5 danni per T, bound di T al massimo +10 fino a SB-13.
+5. **Costi in HEALTH solo nell'archetipo di Rocco;** salute di Mara e Rocco invariata, prima leva nei giri di SB-12 e SB-18.
+6. **Tre rarità,** circa 54 comuni, 41 non comuni e 20 rare, con la regola «picco condizionato, media in linea».
+7. **Pino:** costi di 5 L o meno, carte che spendono la L residua, bound di L fino a +10, GoingBerserk riprogettata; testo del listino
+   sul calo di L corretto (fatto: vedi [L e Pino](#l-e-pino)).
+8. **Formato dati:** due passi nuovi (equip dentro `status`, `consume`), il resto in Java con i numeri come parametri.
+
+## Come si legge
+
+- **ID dello slot:** stabile per tutto il piano, anche se la carta cambia nome. Prefissi: `PG` personaggi, `XXX-BA` basic, `XXX-BO`
+  bound, `LR` last resort, `XXX-AR` archetipo, `GEN` generiche, `OGG` oggetti; `SPA` Spazienzio, `MAR` Mara, `TOS` Tossico, `PIN` Pino,
+  `GIG` Gigi, `CES` Cesira, `ROC` Rocco.
+- **Unità U:** il valore di una carta gratuita in linea, circa **7 HIT** (D33). **Fasce di costo** delle azioni:
+
+  | Fascia | Costo tipico | Valore atteso (HIT equivalenti) |
+  |---|---|---|
+  | F0 | gratuita | ≈ 7 (1 U) |
+  | F1 | 5 V · 5–10 A · 10 T · ≤ 5 L · 5–8 HEALTH | ≈ 12–13 (1,8 U) |
+  | F2 | 10 V · 15–20 A · 10–12 HEALTH | ≈ 18–20 (2,7 U) |
+  | F3 | 15–20 V · 20 HEALTH | ≈ 24–29 (3,7 U) |
+  | F4 | 25 V o più | ≈ 38–40 (5,5 U); intasa la mano |
+
+  Prezzi del listino: 1 V ≈ 1,1 HIT fino a 20 V, poi di più; 1 A ≈ 0,6; 1 HEALTH ≈ 1,15; T del Tossico 0,3–0,5 (decisione 4, da misurare);
+  L come costo non misurata per Pino. CUT, HIT e POISON valgono uguale, la priorità non si paga. **Le linee a unità 7 sono stimate** togliendo
+  circa 3 HIT a quelle misurate con l'àncora da 10: SB-11 le rimisura.
+- **Bound:** al posto della fascia, le **unità per uso** col banco di SB-7 e i pesi di D33 (danno 1, V 0,75, A 0,5, T 0,15 per chi è
+  immune, L 0,35, HEALTH 1). Tetto 4, tolleranza 0.
+- **Numeri «indicativi»:** danni, costi e durate sono il punto di partenza per i blocchi delle carte, non valori decisi.
+- **Starter:** copie nello starter; «—» vuol dire che la carta si trova solo nella collezione.
+- **Candidata:** carta attuale (identificatore di R07), carta della bozza esterna («bozza»), carta della bozza di prova di SB-6a
+  («prova»), oppure «da inventare» (con un nome di lavoro).
+- **Forma:** `dati` = esprimibile con i sei passi di oggi; `consume` o `equip` = serve quel passo nuovo; `Java` = classe esistente con i
+  numeri come parametri; `Java nuova` = classe da scrivere.
+
+## La griglia
+
+### Personaggi (7)
+
+Valori approvati in SB-9; non cambiano qui.
+
+| ID | Personaggio | Tipo | Valori iniziali | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---|---|---|---|---|
+| PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H 100, A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9) | dati |
+| PG-MAR | Mara Contromano | Personaggio, base | H 85, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
+| PG-TOS | Tossico del Serraglio | Personaggio, avanzato | H 100, A 35, T 10, capacità 2, immune all'effetto periodico di T | NC | Tossico | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
+| PG-PIN | Pino l'Ultimo Giro | Personaggio, avanzato | H 110, A 15, L 10, capacità 2 | NC | Pino | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
+| PG-GIG | Gigi del Carro Attrezzi | Personaggio, avanzato | H 100, A 25, V 15, capacità 3 | NC | Gigi | bozza | Oggetti ed equip | dati |
+| PG-CES | Cesira la Malalingua | Personaggio, booster | H 90, A 30, V 10, capacità 2 | R | — | da inventare (concept SB-9) | Contromosse e letture | dati |
+| PG-ROC | Rocco «Sant'Incasso» | Personaggio, booster | H 130, A 15, capacità 2 | R | — | da inventare (concept SB-9; personaggio di prova SB-6a) | La salute come risorsa (D27) | dati |
+
+**Salute iniziale (cautela di SB-10a).** A 2,5–4,8 punti di quota per 1 HEALTH, Mara a −15 vale sulla carta da −37 a −72 punti e Rocco
+a +30 da +75 a +144. La griglia le compensa con le carte, senza cambiare i valori (decisione 5): Mara ha costi in A bassi, una bound di A e
+due difese pagate in A; Rocco spende circa 30–40 di salute a partita. Se in SB-12 Mara resta sotto il 45%, la prima leva è la salute
+(85 → 90–95), prima delle carte; per Rocco la stessa domanda va in SB-18.
+
+### Basic (7)
+
+Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il passo prima della presa.
+
+| ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| SPA-BA | Spazienzio | Azione, basic | ITEMS | −1 | Consuma come Grab | C | Spazienzio | `BruiserGrab`, conservata | Il tratto è la lentezza; con capacità 1 gli oggetti sono pochi | consume |
+| MAR-BA | Mara | Azione, basic | ITEMS | 2 | −5 A a sé, poi consuma | C | Mara | bozza «Preso al volo», −10 → −5 A | Consuma prima che le rubino l'oggetto, pagando precedenza | consume |
+| TOS-BA | Tossico | Azione, basic | ITEMS | 1 | +5 T a sé, poi consuma | NC | Tossico | `ToxicGrab`, riprogettata (assorbe il flavour di `EverythingIsDrug`) | «Tutto è droga»: oggi perde metà della A, che è un tratto solo punitivo | consume |
+| PIN-BA | Pino | Azione, basic | ITEMS | 0 | +5 L a sé, poi consuma | NC | Pino | bozza «Questo lo finisco io» | Beve quello che trova | consume |
+| GIG-BA | Gigi | Azione, basic | ITEMS | 0 | +4 V a sé, poi consuma | NC | Gigi | bozza «Questo torna utile», senza −5 A, priorità −1 → 0 | Ogni oggetto gli dà moneta per gli attrezzi; diversa da quella di Spazienzio | consume |
+| CES-BA | Cesira | Azione, basic | ITEMS | 1 | +5 A a sé, poi consuma | R | — | da inventare («Me lo tengo io») | Raccoglie e tiene da parte | consume |
+| ROC-BA | Rocco | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | da inventare («La mancia») | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
+
+### Bound (21)
+
+Tutte con una sola funzione, entro 4 unità per uso, senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
+token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter sono nello starter (comuni), la terza nella collezione.
+
+| ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Unità per uso | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---:|---|---|---|---|---|
+| SPA-BO1 | Spazienzio | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Spazienzio | `LittleRage`, riprogettata: tolta la parata | Generatrice; due funzioni oggi, 6,75 unità | dati |
+| SPA-BO2 | Spazienzio | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | C | Spazienzio | `LittleSmack`, riprogettata: tolti +5 A | Colpetto; oggi 7,5 unità e +0,1 HEALTH per uso | dati |
+| SPA-BO3 | Spazienzio | Azione, bound | RESOURCES | 0 | 3 HIT a sé, +8 V a sé | 3 (6 − 3) | NC | — | da inventare («Testa al muro») | Variante: carica più forte, pagata con la salute | dati |
+| MAR-BO1 | Mara | Azione, bound | DAMAGE | 1 | 4 CUT | 4 | C | Mara | bozza «Passo stretto», senza +5 A | Colpetto | dati |
+| MAR-BO2 | Mara | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | C | Mara | da inventare («Cambio marcia») | Generatrice: Mara paga tutto in A (decisione B2) | dati |
+| MAR-BO3 | Mara | Azione, bound | DAMAGE | 2 | 3 CUT | 3 | NC | — | prova «Colpo di striscio», 5 → 3 CUT | Variante veloce | dati |
+| TOS-BO1 | Tossico | Azione, bound | DAMAGE | 1 | 4 CUT | 4 | C | Tossico | `PatheticBlade`, riprogettata: niente T a sé né al bersaglio | Colpetto; oggi si accumula e lascia T +40 | dati |
+| TOS-BO2 | Tossico | Azione, bound | RESOURCES | 0 | +10 T a sé | 1,5 | C | Tossico | da inventare («Raschiare il fondo») | Generatrice di carburante; +10 per la decisione 4, anche se il tetto ammetterebbe +26 | dati |
+| TOS-BO3 | Tossico | Azione, bound | DAMAGE | 2 | 3 POISON | 3 | NC | — | `RottenSmile`, riprogettata («alito marcio») | Variante: POISON diretto. Oggi lascia A −40 e vale −1,1 HEALTH per uso | dati |
+| PIN-BO1 | Pino | Azione, bound | RESOURCES | 0 | +10 L a sé | 3,5 | C | Pino | bozza «Cinque minuti e vado», senza i 5 HIT | Generatrice: +10 L diventano 4 il turno dopo (vedi [L e Pino](#l-e-pino)) | dati |
+| PIN-BO2 | Pino | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | C | Pino | da inventare («Spallata al bancone») | Colpetto | dati |
+| PIN-BO3 | Pino | Azione, bound | DAMAGE | 1 | 3 CUT | 3 | NC | — | da inventare («Coccio») | Variante: il vetro taglia | dati |
+| GIG-BO1 | Gigi | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Gigi | bozza «Una stretta e passa», senza i 3 HIT | Generatrice della moneta degli attrezzi | dati |
+| GIG-BO2 | Gigi | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | C | Gigi | da inventare («Colpo di cacciavite») | Colpetto, amplificato dai guanti | dati |
+| GIG-BO3 | Gigi | Azione, bound | DAMAGE | 2 | 3 CUT | 3 | NC | — | da inventare («Lima») | Variante veloce | dati |
+| CES-BO1 | Cesira | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Affacciarsi») | Generatrice: le letture costano A | dati |
+| CES-BO2 | Cesira | Azione, bound | DAMAGE | 1 | 4 HIT | 4 | NC | — | da inventare («Battuta») | Colpetto | dati |
+| CES-BO3 | Cesira | Azione, bound | DAMAGE | 2 | 3 HIT | 3 | NC | — | da inventare («Frecciatina al volo») | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
+| ROC-BO1 | Rocco | Azione, bound | DAMAGE | 0 | 4 HIT | 4 | NC | — | prova «Colpetto», 5 → 4 HIT | Colpetto | dati |
+| ROC-BO2 | Rocco | Azione, bound | DAMAGE | 2 | 3 HIT | 3 | NC | — | da inventare («Diretto») | Variante veloce | dati |
+| ROC-BO3 | Rocco | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Rocco ha la A più bassa | dati |
+
+### Last resort (4)
+
+Gratuite, sempre giocabili, senza bersaglio oggetto né condizioni, nessun annullamento; netto vicino a Struggle e almeno 5 di danno a sé,
+così chiudono la partita (D29).
+
+| ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Rarità | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|
+| LR-STR | generica | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 10 HIT | C | `Struggle`, conservata | Spazienzio, Mara, Gigi, Cesira | dati |
+| LR-TOS | Tossico | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 7 POISON e +4 T al bersaglio | NC | `LethalHeroinDose`, riprogettata («L'ultima dose») | Oggi costa salute solo con T alta e il bot non la gioca; qui chiude col veleno | dati |
+| LR-PIN | Pino | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, HIT pari a 6 + L residua, poi azzera L | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
+| LR-ROC | Rocco | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT | R | prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati |
+
+### Azioni d'archetipo (37)
+
+Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Fra i cinque personaggi con starter: 3 comuni, 1 non comune,
+1 rara. Cesira: 2, 3, 1. Rocco: 3, 2, 1.
+
+**Spazienzio (5)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | 40 HIT | C | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
+| SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 2 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
+| SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | HIT ricevuto ×1,5 per 2 turni; +15 V e +15 A | C | 2 | `Glare`, conservata | Carica rischiosa; 6,6 HIT equivalenti, in linea | dati |
+| SPA-AR4 | Azione, regolare | DEFENSE | F0 | 0 | CUT ricevuto ×0,5 per 4 turni; +10 V | C | 2 | `MadeOfStone`, conservata | Difesa che carica, contro chi lo taglia (Mara) | dati |
+| SPA-AR5 | Azione, regolare | COUNTER | F1 (5 V) | 2 | Annulla la mossa successiva dell'avversario | NC | 2 | `YouStop`, riprogettata: tolti i +10 A regalati all'avversario | Contromossa «Fermati!»; sotto il listino anche per i bot (SB-17) | Java |
+
+**Mara (5)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| MAR-AR1 | Azione, regolare | DAMAGE | F1 (10 A) | 1 | 12 CUT | C | 2 | bozza «Cinghiata di traverso» | Attacco base | dati |
+| MAR-AR2 | Azione, regolare | DAMAGE | F2 (20 A) | 1 | 22 CUT | C | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
+| MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
+| MAR-AR4 | Azione, regolare | DEFENSE | F1 (10 A) | 2 | HIT e CUT ricevuti ×0,4, solo nel turno | NC | 2 | bozza «Tra due paraurti» (era una bound) | Difesa forte e pagata, più dura di GEN-13 | dati |
+| MAR-AR5 | Azione, regolare | DAMAGE | F2 (15 A) | 2 | CUT pari a 5 + A residua / 2 | R | 1 | da inventare («Slalom») | Picco se ha ancora molta A; costa precedenza | dati |
+
+**Tossico (5)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| TOS-AR1 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 5 HIT a sé; 15 HIT | C | 2 | `MethDrivenRage`, costo 5 → 10 T | Attacco; oggi l'unica carta sopra la linea | dati |
+| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 5 POISON e +5 T al bersaglio | C | 2 | `Cough`, riprogettata con l'idea di bozza «Sputo da posacenere» | Intossicare; POISON diretto. Oggi vale 3,9 HIT | dati |
+| TOS-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Guadagna T/2 HEALTH; perde T | C | 2 | `PervertedMetabolism`, conservata | Difesa: curarsi col veleno; 8,3 HIT, in linea | dati |
+| TOS-AR4 | Azione, regolare | COUNTER | F1 (10 T) | 2 | Annulla le mosse successive dirette a lui | NC | 2 | `AmphetamineReflexes`, conservata | Contromossa; sotto il listino anche per i bot | Java |
+| TOS-AR5 | Azione, regolare | DISRUPT | F1 (10 T) | 1 | Travasa tutta la sua T sul bersaglio e gli toglie l'immunità; timer 1 che gliela rende | R | 1 | `ToxicBloodDrain`, conservata | Combo con TOS-BO2: accettata perché costa una carta pagata (SB-9), da misurare in SB-13 | Java |
+
+**Pino (5)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 20 HIT | C | 2 | bozza «Testata da ultimo giro», 10 → 5 L, 25 → 20 HIT | Attacco: costo basso (D33) | dati |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a 3 + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
+| PIN-AR4 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | +20 L al bersaglio | NC | 2 | da inventare («Offro io») | Contromossa: rovina l'economia di A dell'avversario (circa −16 A in quattro turni) | dati |
+| PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Pino; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
+
+**Gigi (5)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| GIG-AR1 | Azione, regolare | ITEMS | F1 (5 V) | 1 | Distrugge un oggetto lontano | NC | 2 | `BreakYourToy` riprogettata come bozza «Smontiamo tutto» (era una bound) | Contromossa; distruzione pagata e scartata, non ripetibile | Java |
+| GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | 10 CUT | C | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
+| GIG-AR3 | Azione, regolare | DAMAGE | F0 | 1 | 6 HIT | C | 1 | da inventare («Colpo di chiave inglese») | Colpo piccolo che i guanti rendono medio | dati |
+| GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno | C | 1 | da inventare («Sotto il cofano») | Difesa del turno; quella lunga viene dagli equip | dati |
+| GIG-AR5 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | 6 HIT più 4 per ogni proprio oggetto sul campo | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova |
+
+**Cesira (6)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| CES-AR1 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | −10 A al bersaglio; 4 HIT | C | — | bozza «Oh, guarda là», più 4 HIT | Attacco: la frecciatina | dati |
+| CES-AR2 | Azione, regolare | COUNTER | F2 (15 A) | 2 | Annulla la mossa successiva e ne esegue l'effetto sul bersaglio come autrice | NC | — | `WhatchaDoin`, riprogettata: 10 V + 10 A → 15 A | Il suo cuore; oggi non si gioca mai per i costi doppi | Java |
+| CES-AR3 | Azione, regolare | COUNTER | F1 (10 A) | 2 | Annulla le mosse successive dirette a lei | NC | — | da inventare («Lo sapevo») | Seconda lettura | Java (classe di `AmphetamineReflexes`) |
+| CES-AR4 | Azione, regolare | DISRUPT | F1 (5 V + 5 A) | 2 | 5 HIT; −5 A al bersaglio | NC | — | bozza «Parli troppo vicino» | Usa la V come seconda risorsa | dati |
+| CES-AR5 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | CUT ricevuto ×0,5 e HIT ×0,75 nel turno | C | — | da inventare («Fare la vaga») | Difesa | dati |
+| CES-AR6 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde A pari a metà della A residua di Cesira; 5 HIT | R | — | da inventare («Malelingue») | Picco con A alta | dati |
+
+**Rocco (6)**
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| ROC-AR1 | Azione, regolare | DAMAGE | F2 (12 HEALTH) | 0 | 22 HIT | C | — | prova «Colpo pagato col sangue», 15 → 12 HEALTH, 35 → 22 HIT | Attacco; la prova stava 11 HIT sopra la linea | dati |
+| ROC-AR2 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno | C | — | prova «Incassare» | Difesa; nulla contro CUT e POISON | dati |
+| ROC-AR3 | Azione, regolare | DEFENSE | F1 (8 HEALTH) | 2 | HIT ricevuto ×0,5 nel turno; 8 HIT | NC | — | prova «Contrattacco» | Contromossa: para e risponde; sprecata se l'avversario non attacca | dati |
+| ROC-AR4 | Azione, regolare | DAMAGE | F3 (20 HEALTH) | 0 | 30 HIT | NC | — | da inventare («Uppercut della sagra») | Il colpo grosso, che lo avvicina allo zero | dati |
+| ROC-AR5 | Azione, regolare | DAMAGE | F0 | 1 | 6 HIT | C | — | da inventare («Tre schiaffi, un euro») | Il colpo gratuito per i turni senza salute da spendere | dati |
+| ROC-AR6 | Azione, regolare | RESOURCES | F0 | 0 | +15 HEALTH; HIT ricevuto ×1,25 per 2 turni | R | — | da inventare («Secondo fiato») | Picco: la cura vale doppio per lui (SB-9); rischio di partite lunghe da misurare in SB-18 | dati |
+
+### Azioni generiche (23)
+
+Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa HEALTH (decisione 5).
+
+| ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---:|---|---|---|---|---|---|
+| GEN-01 | Azione, regolare | ITEMS | F0 | 1 | Consuma un proprio oggetto | C | Tossico 2, Pino 2 | `Grab`, conservata | Presa più rapida di molte basic | consume |
+| GEN-02 | Azione, regolare | ITEMS | F1 (10 A) | 0 | Ruba un oggetto lontano | C | Mara 1, Tossico 1, Gigi 2 | `Steal`, conservata | Furto; oggi mai giocata, da rimisurare con avversari ricchi di oggetti | Java |
+| GEN-03 | Azione, regolare | ITEMS | F0 | −1 | Scambia tutti gli oggetti | NC | — | `ShuffleFeet`, conservata | Scambio; tecnica contro Gigi | Java |
+| GEN-04 | Azione, regolare | ITEMS | F1 (10 A) | 0 | Copia vicino a sé un oggetto casuale del bersaglio | R | — | `BeggingMoney`, riprogettata: 25 T → 10 A, niente −10 A | Copia; aperta a tutti | Java |
+| GEN-05 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | 18 HIT (solo stati GOOD dell'autore) | C | Spazienzio 2, Gigi 1 | `SeagullFly`, 15 → 18 HIT | Colpo medio a V; oggi sotto la linea | dati |
+| GEN-06 | Azione, regolare | DAMAGE | F3 (15 V) | 0 | 24 HIT | C | Spazienzio 1, Gigi 2 | bozza «Mattone del cantiere», 10 V/18 → 15 V/24 | Colpo grosso generico, diverso da GEN-05 | dati |
+| GEN-07 | Azione, regolare | DAMAGE | F3 (20 V) | 1 | 30 HIT; azzera T e L del bersaglio | NC | Spazienzio 1 | `HealingBlow`, conservata | Tecnica contro Tossico e Pino; in linea | dati |
+| GEN-08 | Azione, regolare | DAMAGE | F3 (15 V) | 1 | 10 HIT; +10 T al bersaglio | C | — | `SickeningBlow`, conservata | Veleno per chi non è il Tossico; in linea con l'unità a 7 | dati |
+| GEN-09 | Azione, regolare | DISRUPT | F2 (10 V) | 1 | −10 A al bersaglio; 12 HIT | NC | — | `StunningBlow`, 15 → 10 V, 10 → 12 HIT | Oggi peggio di una carta morta: la precedenza è ordinale | dati |
+| GEN-10 | Azione, regolare | OTHER | F1 (5 V) | 1 | Toglie gli equip al bersaglio; 8 HIT | NC | — | `BadEducation`, 10 → 5 V | Tecnica contro Gigi, ora che gli equip esistono | Java |
+| GEN-11 | Azione, regolare | DEFENSE | F2 (10 V) | 2 | HIT ricevuto ×0,35 nel turno | NC | — | `CantFeelAnything`, 20 → 10 V, tolti +10 A | Parata forte; oggi quasi mai giocata | dati |
+| GEN-12 | Azione, regolare | DAMAGE | F1 (10 A) | 0 | +5 V a sé; 12 HIT | C | Tossico 2 | bozza «Rincorsa dal marciapiede», +10 → +5 V, 15 → 12 HIT | Colpo a costo A aperto a tutti | dati |
+| GEN-13 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,6 nel turno | C | Spazienzio 2, Mara 1 | bozza «Tartaruga sul marciapiede» | Difesa generica a costo A; l'unica condivisa fra le due base | dati |
+| GEN-14 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +10 V | C | Spazienzio 1 | bozza «Denti stretti» | Carica per chi usa V | dati |
+| GEN-15 | Azione, regolare | OTHER | F0 | 1 | 5 HIT a sé; azzera la propria T e la propria L | NC | — | bozza «Due dita in gola» | Pulizia propria; costa salute, così non annulla gratis il Tossico | dati |
+| GEN-16 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +8 HEALTH | C | Tossico 1, Pino 2 | bozza «Fasciatura col fazzolettaccio», resa gratuita | Cura generica; la perdita di A è un effetto, quindi è giocabile anche da Pino | dati |
+| GEN-17 | Azione, regolare | DAMAGE | F1 (10 A) | 1 | 12 POISON | C | Mara 2 | bozza «Sputo da posacenere», 5 T → 10 A | POISON diretto per tutti: aggira le parate contro HIT e CUT | dati |
+| GEN-18 | Azione, regolare | DAMAGE | F0 | 1 | 7 HIT | C | Mara 2, Pino 2, Gigi 1 | da inventare («Spintone») | La carta da un'unità: riempitivo onesto, mai morto | dati |
+| GEN-19 | Azione, regolare | DAMAGE | F2 (10 V + 5 L) | 1 | 25 HIT | R | — | da inventare («Bottigliata») | Picco condizionato: serve sia V sia L (Cocktail, Grappa) | dati |
+| GEN-20 | Azione, regolare | DAMAGE | F3 (20 V) | 0 | 30 HIT; HIT ricevuto ×1,25 per 2 turni | R | — | da inventare («Sedia in testa») | Picco più alto, con un rischio | dati |
+| GEN-21 | Azione, regolare | OTHER | F1 (5 V) | 1 | Equip: il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo | R | — | da inventare («Coccio di bottiglia»), effetto del token `BrokenBeerBottle` | Prepara il colpo e aggira le parate contro HIT | equip |
+| GEN-22 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | Azzera la L del bersaglio; 3 HIT | NC | — | da inventare («Acqua in faccia») | Tecnica economica contro Pino | dati |
+| GEN-23 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde 10 V; 5 HIT | R | — | da inventare («Sgambetto») | Picco contro chi accumula V (Spazienzio, Gigi) | dati |
+
+### Oggetti (16) e token
+
+Si consumano con una presa; il loro valore è quello di una presa, non di uno slot in mano (listino).
+
+| ID | Tipo | Ruolo | Effetto del consumo, indicativo | Valore stimato | Rarità | Starter | Candidata | Motivo | Forma |
+|---|---|---|---|---|---|---|---|---|---|
+| OGG-01 | Oggetto | RESOURCES | +12 V, +10 L, +3 T | ≈ 12,5 unità | C | Spazienzio 2 | `CocktailOnTheGround`, +20/+15/+5 → +12/+10/+3 | Il più ricco del set di oggi (20–21 unità) | dati |
+| OGG-02 | Oggetto | RESOURCES | +10 L | 3,5 | C | Pino 2 | `RottenBeer`, +5 → +10 L | +5 L diventano 2 a fine turno: oggi è quasi vuota | dati |
+| OGG-03 | Oggetto | RESOURCES | +10 L; crea `BrokenBeerBottle` vicino a sé | ≈ 8,5 | NC | Pino 1 | `AnotherRottenBeer`, conservata | Token | Java |
+| OGG-04 | Oggetto | RESOURCES | Immunità a T e L; +20 L, +20 T; timer 5 che toglie immunità e stati e fa 20 POISON | non quotabile | R | Tossico 1 | `MarvelousCocktail`, conservata | Timer e immunità | Java |
+| OGG-05 | Oggetto | RESOURCES | +20 L; −5 A | ≈ 4,5 | C | Pino 2 | bozza «Amaro nel bicchiere di plastica» | La presa grande di Pino: 20 → 9 L il turno dopo | dati |
+| OGG-06 | Oggetto | RESOURCES | +15 A | 7,5 | C | Mara 2, Gigi 1 | bozza «Espresso del distributore», senza +5 T | La T avvelenava chi non è immune | dati |
+| OGG-07 | Oggetto | RESOURCES | +12 HEALTH; +3 T | ≈ 12 | C | Mara 2, Tossico 2 | bozza «Panino del kebab dimenticato», +10/+5 → +12/+3 | Cura; la T è carburante per il Tossico e un piccolo veleno per gli altri | dati |
+| OGG-08 | Oggetto | OTHER | Azzera la propria L | secondo il contesto | NC | — | bozza «Mezza minerale sgasata» | Risposta a «Offro io» | dati |
+| OGG-09 | Oggetto | OTHER | Equip: HIT inflitto ×1,25 per 3 turni | ≈ 5–8 | NC | Gigi 2 | bozza «Guanti da officina» | Equip d'attacco | equip |
+| OGG-10 | Oggetto | OTHER | Equip: CUT ricevuto ×0,75 per 3 turni | ≈ 3–8 | C | Mara 1, Gigi 2 | bozza «Giubbotto di finta pelle» | Equip di difesa contro CUT | equip |
+| OGG-11 | Oggetto | OTHER | Equip: HIT ricevuto ×0,8 per 3 turni | ≈ 4–8 | C | Gigi 2 | da inventare («Casco da lavoro») | Equip di difesa contro HIT | equip |
+| OGG-12 | Oggetto | RESOURCES | +12 T | 1,8 per chi è immune | C | Tossico 2 | da inventare («Pasticca trovata sul bancone») | Carburante; veleno per gli altri | dati |
+| OGG-13 | Oggetto | OTHER | Equip: il prossimo HIT inflitto ×1,5, uso singolo | picco con SuperImpact | NC | Spazienzio 1 | da inventare («Posacenere di vetro») | L'oggetto di chi tira colpi grossi; capacità 1 | equip |
+| OGG-14 | Oggetto | RESOURCES | +10 HEALTH; azzera la propria T | ≈ 10 | NC | — | da inventare («Ghiaccio nel tovagliolo») | Cura e pulizia per i mazzi costruiti | dati |
+| OGG-15 | Oggetto | OTHER | Immunità all'effetto periodico di L; timer 3 che la toglie | secondo il contesto | R | — | da inventare («Santino della portinaia») | Tecnica contro l'alcol altrui | Java (classe di `MarvelousCocktail`) |
+| OGG-16 | Oggetto | RESOURCES | +25 L; −5 A | ≈ 6,3 | R | — | da inventare («Grappa della casa») | Picco per chi spende L; con GEN-19 | dati |
+| token | Token (non contato) | OTHER | Equip: HIT inflitto ×1,5 convertito in CUT, uso singolo | — | — | da OGG-03 | `BrokenBeerBottle`, conservato | Unico token del set | equip |
+
+## Starter
+
+Basic, due bound comuni e last resort a parte (R01a). «Archetipo · generiche · oggetti» in copie; il nome proprio viene dalla bozza dove
+c'è.
+
+| Starter | Basic, bound, last resort | Archetipo | Generiche | Oggetti | Distinte | Rare |
+|---|---|---|---|---|---:|---:|
+| Spazienzio (nome da inventare) | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | SuperImpact 2, ExtremelyViolentBlow 2, Glare 2, MadeOfStone 2, YouStop 2 (10) | SeagullFly 2, Tartaruga 2, Mattone 1, HealingBlow 1, Denti stretti 1 (7) | Cocktail 2, Posacenere 1 (3) | 12 | 1 |
+| Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata 2, Sgommata 2, Sorpasso 2, Paraurti 2, Slalom 1 (9) | Spintone 2, Sputo 2, Tartaruga 1, Steal 1 (6) | Espresso 2, Kebab 2, Giubbotto 1 (5) | 12 | 1 |
+| Tossico (nome da inventare) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | MethDrivenRage 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
+| Pino «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Offro io 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
+| Gigi «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Colpo di chiave 1, Sotto il cofano 1, Lavoro fatto bene 1 (7) | Mattone 2, Steal 2, SeagullFly 1, Spintone 1 (6) | Guanti 2, Giubbotto 2, Casco 2, Espresso 1 (7) | 13 | 1 |
+
+Varianti rispetto alla forma approvata (5 + 4 + 3): Spazienzio ha 10 carte d'archetipo e 2 oggetti, perché ha capacità 1; Gigi ha 7 carte
+d'archetipo e 4 oggetti; **Pino ha 3 generiche** invece di 4, perché la sua A scende sotto zero in due o tre turni (vedi [L e Pino](#l-e-pino))
+e le generiche a costo A gli resterebbero morte in mano.
+
+**Generiche condivise:** 11 distinte su 20 usi. Ogni starter ne condivide almeno 2, nessuna è in più di 3 starter, e le due base
+condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16).
+
+**Mazzi di prova dei personaggi da booster** (SB-17, SB-18; forma, non composizione fissata):
+
+| Mazzo | Archetipo | Generiche, di preferenza fuori dagli starter | Oggetti |
+|---|---|---|---|
+| Cesira | 6 distinte, 11 carte | StunningBlow, Sgambetto, ShuffleFeet, Acqua in faccia, Tartaruga (6 carte) | Santino 1, Espresso 2 |
+| Rocco | 6 distinte, 11 carte | Spintone, Fasciatura, Sputo, Grab (5 carte) | Ghiaccio 2, Kebab 2 |
+
+La ricerca per mutazione di SB-7 dà poi il mazzo più forte di ciascuno come limite superiore: contro gli starter può arrivare al 65–70%.
+
+## Triangoli
+
+| Personaggio | Attacco | Difesa | Contromossa |
+|---|---|---|---|
+| Spazienzio | SPA-AR1, SPA-AR2 | SPA-AR4 | SPA-AR5 (annulla) |
+| Mara | MAR-AR1, MAR-AR2, MAR-AR5 | MAR-AR4 | MAR-AR3 e la basic (−A e anticipo, **senza annullare**) |
+| Tossico | TOS-AR1, TOS-AR2 | TOS-AR3 | TOS-AR4 (annulla) |
+| Pino | PIN-AR1, PIN-AR2 | PIN-AR3 | PIN-AR4, PIN-AR5 (alcol e −A) |
+| Gigi | GIG-AR2, GIG-AR3, GIG-AR5, OGG-09 | GIG-AR4, OGG-10, OGG-11 | GIG-AR1 (distrugge); GEN-02 |
+| Cesira | CES-AR1, CES-AR6 | CES-AR5 | CES-AR2, CES-AR3 (annullano) |
+| Rocco | ROC-AR1, ROC-AR4 | ROC-AR2 | ROC-AR3 (para e risponde) |
+
+Coppie da tenere distinte (SB-9): Mara non annulla, Cesira sì; Gigi non ha colpi oltre F2, salvo GEN-06 in prestito.
+
+## Mappa delle carte attuali
+
+Le 37 carte e i 2 personaggi di R07. Posizione rispetto al listino misurata in SB-10a con l'àncora da 10 HIT; con l'unità a 7 le linee
+scendono di circa 3 HIT (stima). «Peggio di morta»: una gemella mai giocata la batte.
+
+| Carta | Esito | Slot | Flavour | Listino | Motivo |
+|---|---|---|---|---|---|
+| `BigBadBruiser` | conservata | PG-SPA | invariato | — | Metro del set (SB-9) |
+| `ToxicJunkie` | riprogettata (capacità 3 → 2) | PG-TOS | invariato | — | Gli oggetti diventano di Gigi (SB-9) |
+| `LittleSmack` | riprogettata | SPA-BO2 | nome e tono | oltre il tetto (7,5) | Una funzione: 4 HIT |
+| `LittleRage` | riprogettata | SPA-BO1 | nome e tono | oltre il tetto (6,75) | Una funzione: +5 V; niente parata |
+| `PatheticBlade` | riprogettata | TOS-BO1 | nome e tono | oltre il tetto per struttura | 4 CUT, niente T che resta |
+| `RottenSmile` | riprogettata | TOS-BO3 | nome; il sorriso diventa alito | oltre il tetto per struttura; dannosa (−1,1 per uso) | 3 POISON, niente −A che resta |
+| `BruiserGrab` | conservata | SPA-BA | invariato | non quotabile | Il tratto è la lentezza |
+| `ToxicGrab` | riprogettata | TOS-BA | nome; assorbe «tutto è droga» | non quotabile | +5 T invece di perdere metà della A |
+| `Struggle` | conservata | LR-STR | invariato | in linea col ruolo | Last resort generica |
+| `Grab` | conservata | GEN-01 | invariato | non quotabile | Presa generica |
+| `Steal` | conservata | GEN-02 | invariato | non quotabile; mai giocata (SB-7) | Furto |
+| `ShuffleFeet` | conservata | GEN-03 | invariato | non quotabile; mai giocata | Scambio |
+| `BadEducation` | riprogettata (10 → 5 V, 10 → 8 HIT) | GEN-10 | invariato | sotto; peggio di morta | Ora che gli equip ci sono, serve come tecnica |
+| `BreakYourToy` | riprogettata, passa a Gigi | GIG-AR1 | prende il nome di bozza «Smontiamo tutto» | sotto; peggio di morta (il bot non la sceglie) | La distruzione è la contromossa di Gigi |
+| `CantFeelAnything` | riprogettata (20 → 10 V, senza +10 A) | GEN-11 | invariato | sotto; peggio di morta | Parata forte a un costo pagabile |
+| `ExtremelyViolentBlow` | riprogettata (10 V, 6 + V/2) | SPA-AR2 | invariato | molto sotto; peggio di morta | Il bot legge «20+x»; ora picco solo con molta V |
+| `Glare` | conservata | SPA-AR3 | invariato | in linea (6,6) | Carica rischiosa |
+| `HealingBlow` | conservata | GEN-07 | invariato | in linea | Tecnica contro T e L |
+| `MadeOfStone` | conservata | SPA-AR4 | invariato | in linea (6,5) | Difesa che carica |
+| `SeagullFly` | riprogettata (15 → 18 HIT) | GEN-05 | invariato | sotto | Colpo medio in linea |
+| `SickeningBlow` | conservata | GEN-08 | invariato | in linea | Veleno generico |
+| `StunningBlow` | riprogettata (10 V, 12 HIT) | GEN-09 | invariato | sotto; peggio di morta | −10 A vale poco: costo più basso |
+| `SuperImpact` | conservata | SPA-AR1 | invariato | in linea | Il colpo grosso |
+| `YouStop` | riprogettata (senza +10 A all'avversario) | SPA-AR5 | invariato | sotto; peggio di morta (bot) | Contromossa di Spazienzio; non si elimina (SB-17) |
+| `WhatchaDoin` | riprogettata (15 A), passa a Cesira | CES-AR2 | invariato | sotto; peggio di morta (costi doppi) | Il cuore di Cesira (SB-9) |
+| `AmphetamineReflexes` | conservata | TOS-AR4 | invariato | sotto (bot) | Contromossa del Tossico |
+| `BadTrip` | **sostituita** | — | idea conservata in TOS-AR5 | sotto | Timer e immunità li copre ToxicBloodDrain; raddoppiare T contrasta la decisione 4 |
+| `BeggingMoney` | riprogettata (10 A, niente −10 A), generica | GEN-04 | invariato | sotto | La copia di oggetti resta nel set, aperta a tutti |
+| `Cough` | riprogettata (5 POISON e +5 T) | TOS-AR2 | invariato | sotto (3,9) | Intossicare: POISON diretto |
+| `EverythingIsDrug` | **sostituita** | TOS-BA | nella basic | sotto; peggio di morta | Consumare un oggetto senza effetti per T non serve |
+| `GoingBerserk` | riprogettata (gratuita, L residua) | PIN-AR2 | invariato; passa a Pino | vale il suo danno, ma spesso impagabile | D33: niente costi in L oltre 5 |
+| `LethalHeroinDose` | riprogettata, last resort | LR-TOS | invariato | sotto; il bot non la gioca | D29: l'ultima dose |
+| `MethDrivenRage` | riprogettata (5 → 10 T) | TOS-AR1 | invariato | **sopra** (11,4 contro 10,2) | T più cara (decisione 4) |
+| `PervertedMetabolism` | conservata | TOS-AR3 | invariato | in linea (8,3) | Difesa del Tossico |
+| `ToxicBloodDrain` | conservata | TOS-AR5 | invariato | sotto | Rara del Tossico |
+| `CocktailOnTheGround` | riprogettata (+12 V, +10 L, +3 T) | OGG-01 | invariato | stima 20–21 unità | Troppo ricco |
+| `RottenBeer` | riprogettata (+10 L) | OGG-02 | invariato | stima 1,75 | Quasi vuota |
+| `AnotherRottenBeer` | conservata | OGG-03 | invariato | stima 3,5 più il token | Token |
+| `MarvelousCocktail` | conservata | OGG-04 | invariato | non quotabile | Rara del Tossico |
+
+Conteggio sulle 39: 16 conservate (`BigBadBruiser` compreso), 21 riprogettate (`ToxicJunkie` compreso), 2 sostituite; nessun flavour
+scartato senza un posto.
+
+## Mappa della bozza esterna
+
+Le 31 carte nuove della [proposta](bozza-esterna-proposta-70-carte.md). Tutte assegnate; nessuna scartata.
+
+| Carta della bozza | Slot | Cambiamento |
+|---|---|---|
+| Pino l'Ultimo Giro | PG-PIN | V 10 → 0, nessuna immunità (D28) |
+| Mara Contromano | PG-MAR | V 10 → 0 |
+| Gigi del Carro Attrezzi | PG-GIG | invariato |
+| Questo lo finisco io | PIN-BA | invariata |
+| Preso al volo | MAR-BA | −10 → −5 A |
+| Questo torna utile | GIG-BA | +4 V, senza −5 A, priorità 0 |
+| Cinque minuti e vado | PIN-BO1 | solo +10 L: due funzioni sopra il tetto |
+| Il bancone regge, io pure | PIN-AR3 | da bound ad azione regolare: niente parate fra le bound |
+| Passo stretto | MAR-BO1 | solo 4 CUT |
+| Tra due paraurti | MAR-AR4 | da bound ad azione pagata |
+| Una stretta e passa | GIG-BO1 | solo +5 V |
+| Smontiamo tutto | GIG-AR1 | da bound (bersaglia un oggetto) ad azione pagata, unita a `BreakYourToy` |
+| Mattone del cantiere | GEN-06 | 15 V, 24 HIT, per non doppiare SeagullFly |
+| Chiave da tredici | GIG-AR2 | 10 CUT |
+| Cinghiata di traverso | MAR-AR1 | invariata |
+| Rincorsa dal marciapiede | GEN-12 | +5 V, 12 HIT |
+| Testata da ultimo giro | PIN-AR1 | 5 L, 20 HIT (D33) |
+| Rutto a distanza sociale | PIN-AR5 | −A pari alla L residua |
+| Oh, guarda là | CES-AR1 | più 4 HIT; passa a Cesira, perché Mara ha già Sorpasso |
+| Denti stretti | GEN-14 | invariata |
+| Tartaruga sul marciapiede | GEN-13 | invariata |
+| Due dita in gola | GEN-15 | invariata |
+| Fasciatura col fazzolettaccio | GEN-16 | gratuita, −5 A, +8 HEALTH |
+| Sputo da posacenere | GEN-17 (e l'idea in TOS-AR2) | 10 A, 12 POISON: generica vera |
+| Parli troppo vicino | CES-AR4 | passa a Cesira |
+| Amaro nel bicchiere di plastica | OGG-05 | invariato |
+| Espresso del distributore | OGG-06 | senza +5 T |
+| Panino del kebab dimenticato | OGG-07 | +12 HEALTH, +3 T |
+| Mezza minerale sgasata | OGG-08 | invariata |
+| Guanti da officina | OGG-09 | invariati |
+| Giubbotto di finta pelle | OGG-10 | invariato |
+
+Dalla bozza si tengono anche i nomi propri di tre starter. **Non** si tengono: l'immunità di Pino (D28), le bound a due funzioni, le
+bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il regolamento 1.5 (piano, «Ciò che non vale più»).
+
+## Tabelle di controllo
+
+**Per blocco**
+
+| Blocco | Piano | Griglia |
+|---|---:|---:|
+| Personaggi | 7 | 7 |
+| Basic | 7 | 7 |
+| Bound | 21 | 21 |
+| Last resort | 4 | 4 |
+| Azioni d'archetipo | 35 → 37 (decisione 1) | 37 |
+| Azioni generiche | 25 → 23 (decisione 1) | 23 |
+| Oggetti | 16 | 16 |
+| **Totale** | **115** | **115** |
+
+**Per personaggio** (carte legate: basic, bound, archetipo, last resort propria)
+
+| Personaggio | Basic | Bound | Archetipo | Last resort | Totale |
+|---|---:|---:|---:|---|---:|
+| Spazienzio | 1 | 3 | 5 | Struggle | 9 |
+| Mara | 1 | 3 | 5 | Struggle | 9 |
+| Tossico | 1 | 3 | 5 | propria | 10 |
+| Pino | 1 | 3 | 5 | propria | 10 |
+| Gigi | 1 | 3 | 5 | Struggle | 9 |
+| Cesira | 1 | 3 | 6 | Struggle | 10 |
+| Rocco | 1 | 3 | 6 | propria | 11 |
+| **Totale** | 7 | 21 | 37 | 3 | **68** |
+
+Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 115.
+
+**Per rarità**
+
+| Blocco | C | NC | R |
+|---|---:|---:|---:|
+| Personaggi | 2 | 3 | 2 |
+| Basic | 2 | 3 | 2 |
+| Bound | 10 | 11 | 0 |
+| Last resort | 1 | 2 | 1 |
+| Archetipo | 20 | 10 | 7 |
+| Generiche | 11 | 7 | 5 |
+| Oggetti | 8 | 5 | 3 |
+| **Totale** | **54** | **41** | **20** |
+
+La tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
+Rare negli starter: 1 o 2 ciascuno.
+
+**Per ruolo** (le 108 carte giocabili; ruoli di R07a)
+
+| Ruolo | Basic | Bound | Last resort | Archetipo | Generiche | Oggetti | Totale |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| DAMAGE | | 13 | 4 | 15 | 9 | | 41 |
+| DEFENSE | | | | 7 | 2 | | 9 |
+| RESOURCES | | 8 | | 3 | 2 | 10 | 23 |
+| COUNTER | | | | 4 | | | 4 |
+| DISRUPT | | | | 7 | 3 | | 10 |
+| ITEMS | 7 | | | 1 | 4 | | 12 |
+| OTHER | | | | | 3 | 6 | 9 |
+
+**Curva dei costi per starter** (azioni regolari, in copie)
+
+| Starter | F0 | F1 | F2 | F3 | F4 | Azioni |
+|---|---:|---:|---:|---:|---:|---:|
+| Obiettivo della fase A (su 14–15) | 5–6 | 4–5 | 3 | 1–2 | ≤ 2 | |
+| Spazienzio | 5 | 4 | 4 | 2 | 2 | 17 |
+| Mara | 4 | 8 | 3 | 0 | 0 | 15 |
+| Tossico | 5 | 10 | 0 | 0 | 0 | 15 |
+| Pino | 10 | 5 | 0 | 0 | 0 | 15 |
+| Gigi | 2 | 7 | 2 | 2 | 0 | 13 |
+
+L'obiettivo era tagliato su Spazienzio, che è l'unico con costi alti per natura. Mara, Tossico e Pino pagano con risorse economiche o
+limitate (A, T, L fino a 5): la loro curva si appiattisce su F0 e F1, e la scelta diventa *quando* pagare, non *se*. Da guardare in
+SB-11–SB-15 con il banco: nessuna carta ferma in mano più di circa 1,5 turni a partita nel proprio starter, e risorse generate entro ±20%
+di quelle spese.
+
+**Copertura delle meccaniche di base**
+
+| Meccanica | Slot | In uno starter base |
+|---|---|---|
+| HIT | SPA-AR1, GEN-05, GEN-18, ROC-AR1… | Spazienzio |
+| CUT | MAR-AR1/2/5, GIG-AR2, bound | Mara |
+| POISON diretto | GEN-17, TOS-AR2, TOS-BO3, LR-TOS | Mara (GEN-17) |
+| Veleno da T sul bersaglio | GEN-08, TOS-AR2, TOS-AR5, LR-TOS | — (Tossico) |
+| −A sul bersaglio | MAR-AR3, GEN-09, CES-AR1/4/6, PIN-AR5 | Mara |
+| L sul bersaglio | PIN-AR4 | — (Pino) |
+| Svuotare il bersaglio | GEN-07, GEN-22 | Spazienzio (GEN-07) |
+| −V sul bersaglio | GEN-23 | — |
+| Cure | OGG-07, GEN-16, TOS-AR3, ROC-AR6, OGG-14, ROC-BA | Mara (OGG-07) |
+| Pulizia propria | GEN-15, OGG-08, OGG-14 | — |
+| Stati INPUT, durata 0 e oltre | SPA-AR3/4, MAR-AR4, GEN-13, GEN-11… | entrambi |
+| Stati OUTPUT ed equip da oggetti | OGG-09/10/11/13, GEN-21, token | entrambi (OGG-10, OGG-13) |
+| Conversione di tipo, uso singolo | token, GEN-21; OGG-13 (uso singolo) | Spazienzio (OGG-13) |
+| Timer e immunità | OGG-04, TOS-AR5, OGG-15 | — (Tossico) |
+| Token | OGG-03 → `BrokenBeerBottle` | — (Pino) |
+| Annullamenti | SPA-AR5, TOS-AR4, CES-AR2/3 | Spazienzio |
+| Prendere, rubare, scambiare, distruggere, copiare | basic, GEN-01/02/03/04, GIG-AR1 | entrambi (basic, GEN-02) |
+| Quantità variabile | SPA-AR2, MAR-AR5, PIN-AR2/5, CES-AR6, LR-PIN | entrambi |
+| Danno a sé | Struggle, TOS-AR1, PIN-AR1, GEN-15, SPA-BO3, last resort | entrambi (Struggle) |
+| Costo in HEALTH | ROC-AR1/3/4 | — (Rocco) |
+| Costi in V, A, T, L | ovunque | V e A |
+| Priorità da −1 a 2 | ovunque | entrambi |
+| Capacità degli oggetti | PG-*, GIG-AR5 | entrambi (1 e 2) |
+
+SB-11 chiede che ogni meccanica di base compaia in uno dei due mazzi base: mancano T sul bersaglio, alcol, timer, token e costo in
+HEALTH, che sono l'identità degli avanzati e dei booster, come vuole il piano.
+
+**Forma** (dove serve lavoro sul formato)
+
+| Forma | Slot | Quante |
+|---|---|---:|
+| `consume` (passo nuovo) | 7 basic, GEN-01 | 8 |
+| `equip` (passo nuovo dentro `status`) | OGG-09/10/11/13, GEN-21, token | 5 + token |
+| Java esistente, numeri come parametri | SPA-AR5, TOS-AR4/5, CES-AR2, GIG-AR1, GEN-02/03/04/10, OGG-03/04 | 11 |
+| Java esistente usata da una seconda carta | CES-AR3 (`AmphetamineReflexes`), OGG-15 (`MarvelousCocktail`) | 2 |
+| Java nuova | GIG-AR5 (conta gli oggetti); PIN-AR2 e LR-PIN (una classe sola che memorizza e azzera L) | 2 classi, 3 carte |
+| dati di oggi | il resto | ≈ 85 |
+
+Il passo `equip` serve già in SB-11 (Giubbotto nello starter di Mara, Posacenere in quello di Spazienzio), non solo in SB-15. Il caso
+«due carte sulla stessa classe Java» va provato nella bozza di SB-6a, che oggi lega una carta Java al nome della sua classe.
+
+## L e Pino
+
+**La formula.** A fine turno, con L > 0 e senza immunità, si perde A pari a L/2 e poi L pari a L/2 + 1, a divisione intera (R06;
+`Character.java`, righe 54–58).
+
+| L a fine turno | A persa | L il turno dopo |
+|---:|---:|---:|
+| 1–2 | 0–1 | 0 |
+| 5 | 2 | 2 |
+| 10 | 5 | 4 |
+| 11 | 5 | 5 |
+| 15 | 7 | 7 |
+| 20 | 10 | 9 |
+| 21 | 10 | 10 |
+
+Due frasi dei documenti erano sbagliate. Il [listino](listino.md#l-e-gli-effetti-poco-evidenti) scriveva la quantità persa (6, 8, 11) al
+posto di quella che resta, e una presa da 18 al posto di 21 per pagare 10 L il turno dopo: **corretto in questa fase**. Il piano
+([letture del regolamento](../../set-base-plan.md#letture-del-regolamento-che-guidano-il-progetto)) dice che L «si ferma a 1 o 2 senza
+azzerarsi mai»: invece 1 e 2 vanno a zero. Le conclusioni non cambiano: L non è una riserva.
+
+**Effetti poco evidenti e come li usa Pino:**
+
+- **Spendere il turno dopo.** La L presa durante la risoluzione non paga la mossa già presentata. Con un costo di 5 L serve una presa di
+  almeno 11 il turno prima: PIN-BO1 (+10, più quanto resta), OGG-05 (+20) e OGG-02 (+10). Il valore iniziale L 10 paga una carta da 5
+  subito, al primo turno.
+- **Regime con la bound.** Giocando PIN-BO1 ogni turno, Pino si stabilizza a 8–9 L all'inizio del turno: paga sempre una carta da 5 L.
+- **A sotto zero.** Nello stesso regime Pino perde circa 9–10 A a fine turno: da 15 scende a 5, poi a −4, poi a −13. R01 lo ammette.
+  Conseguenza: nessuna carta a costo A nel suo starter, e GEN-16 (la perdita di A è un effetto, non un costo) è l'unica cura che può
+  usare. La precedenza persa vale poco (è ordinale), e Pino arriva comunque ultimo: è il suo rischio.
+- **L sull'avversario.** PIN-AR4 dà +20 L: a fine turno l'avversario perde 10 A, poi 4, poi 2, cioè circa 16 A in quattro turni. Per
+  la precedenza conta poco, perché Pino è già il più lento. Il valore vero è un altro: **toglie moneta a chi paga in A** (Mara, Cesira,
+  il Tossico con le generiche). Contro Spazienzio vale poco: va bene, è una contromossa che si sbaglia.
+- **Spendere tutto.** PIN-AR2 e LR-PIN fanno danno pari alla L residua e poi la azzerano, come approvato. Il regolamento però applica gli
+  effetti su sé *prima* di quelli sul bersaglio (R04): con i passi di oggi l'azzeramento arriverebbe prima del danno. Serve una classe
+  Java che memorizzi la L, la azzeri e poi colpisca, come già fa `ToxicBloodDrain` con la T (decisione B1).
+- **Rutto (PIN-AR5)** legge la L residua senza consumarla: è a dati.
+- **I bot.** Leggono solo i propri guadagni e il danno nominale. «HIT 3 + x» rischia di essere sopravvalutato come «20+x» di
+  `ExtremelyViolentBlow`: da guardare in SB-14.
+- **L agli altri come costo nascosto.** Il Cocktail (OGG-01) dà +10 L anche a Spazienzio, che perde così 5 A a fine turno. La Bottigliata
+  (GEN-19) è l'unica carta che premia la L presa da chi non è Pino.
+- **La variante con immunità** (D28) si prova solo nel playground in SB-14.
+
+## Idee fuori perimetro, per le espansioni
+
+Da riportare nell'elenco [«Idee per le espansioni»](../../set-base-plan.md#idee-per-le-espansioni) del piano:
+
+- **Danno moltiplicato per una risorsa** (per esempio due HIT per ogni L): il formato sa solo dividere, e il campo nuovo servirebbe a
+  una carta sola.
+- **Contromosse generiche,** aperte a tutti (un «Ma che fai?»): fuori dal Set Base perché darebbero annullamenti a Mara.
+- **Bound di parata** che valgono solo contro il colpo successivo, oltre il tetto per una parata forte: richiedono una regola di consumo.
+- **«Tavolo ribaltato»:** distruggere tutti gli oggetti sul campo, propri e altrui.
+- **Cassetta degli attrezzi:** un oggetto che crea un token attrezzo (Gigi); vicino all'idea già in elenco di costruire oggetti.
+- **Equip permanenti,** senza durata: oggi il passo `status` chiede sempre i turni.
+
+## Tetto in partita
+
+Misura di controllo chiesta da D33 (dettagli, semi e SHA-256 nel [rapporto SB-10b](../../reports/set-base/sb-10b-report.md#tetto-in-partita)):
+una bound sonda e una nulla contro due nulle, negli stessi contesti di SB-10a, 2000 partite per stile e cella, tre stili. Criterio: quota
+della sonda entro +10 punti (0,60).
+
+| Bound | Spazienzio | Tossico | Rocco (prova) | Mara (prova) | Neutro |
+|---|---:|---:|---:|---:|---:|
+| 4 HIT | 0,475 ✓ | 0,657 ✗ | 0,715 ✗ | 0,813 ✗ | 0,998 ✗ |
+| 3 HIT | 0,445 ✓ | 0,583 ✓ | 0,658 ✗ | 0,725 ✗ | 0,969 ✗ |
+| 2 HIT | 0,476 ✓ | 0,452 ✓ | 0,547 ✓ | 0,616 ✗ | 0,843 ✗ |
+| Risorsa propria da 4 unità (+5 V, +8 A, +26 T) | 0,559 ✓ | 0,589 ✓ | 0,485 ✓ | 0,473 ✓ | 0,793 ✗ |
+| +10 T (griglia, decisione 4) | — | 0,547 ✓ | — | — | — |
+
+**Esito: il tetto di 4 unità regge per le bound di risorsa, non per quelle di danno.** Una bound di danno da 4 resta entro +10 punti solo
+con Spazienzio; 3 HIT reggono anche col Tossico; Rocco e Mara di prova superano il criterio fino a 3 e 2 HIT, perché le loro carte regolari
+di prova sono deboli (SB-10a) e un danno gratuito ripetuto pesa molto. Il neutro amplifica, come in SB-10a, e non decide.
+
+**Proposta, da decidere dal proprietario:** tetto di **4 unità per le bound di risorsa** e di **3 per quelle di danno** (danno con peso
+4/3 nel banco), da riconfermare in SB-11 sullo starter vero di Mara e in SB-18 su Rocco; se lì 3 supera ancora i +10 punti, si scende
+a 2. Finché il proprietario non decide, la griglia resta con i 4 HIT approvati e il banco con i predefiniti di D33.
+
+## Decisioni del proprietario
+
+6 novembre 2026. Fase A (principi): «Approvo tutte», vedi [Principi approvati](#principi-approvati-nella-fase-a). Fase B (questa
+griglia, con le cinque domande sotto): «Approvo tutte». Valgono quindi tutte le raccomandazioni:
+
+| Decisione | Contenuto | Dove |
+|---|---|---|
+| B1 | PIN-AR2 e LR-PIN spendono tutta la L con **una classe Java** che memorizza, azzera e colpisce, come `ToxicBloodDrain` | Griglia, SB-14 |
+| B2 | **MAR-BO2 (+8 A) nello starter di Mara**, misurata in SB-11; 3 CUT a priorità 2 come alternativa pronta | Griglia, SB-11 |
+| B3 | Rarità dell'archetipo **20, 10, 7**; totali 54, 41, 20 | Griglia |
+| B4 | **Giubbotto e Posacenere negli starter base:** il passo `equip` serve da SB-11 | Griglia, SB-11 |
+| B5 | **Una classe Java nuova per GIG-AR5** («Lavoro fatto bene») | Griglia, SB-15 |
+
+### Domande poste
+
+1. **Spendere tutta la L** (PIN-AR2 e LR-PIN): una classe Java che memorizzi, azzeri e colpisca, come `ToxicBloodDrain`, oppure carte a
+   dati che leggono la L senza azzerarla, con danno più basso (per esempio 3 + L/2)? *Raccomando la classe Java: serve a due carte e
+   mantiene l'identità di L.*
+2. **La bound di A di Mara nello starter** (MAR-BO2): SB-10a ha misurato che +A ripetuta non aiuta la Mara di prova, ma con costi in A veri
+   il suo starter spenderebbe più A di quanta ne genera. *Raccomando di tenerla nello starter e di misurarla in SB-11, con 3 CUT a
+   priorità 2 come alternativa pronta.*
+3. **Rarità dell'archetipo:** 20 comuni, 10 non comuni e 7 rare, invece dei 19, 9 e 9 della tabella della fase A, che non tornavano con i
+   totali approvati. *Raccomando 20, 10, 7.*
+4. **Equip già in SB-11:** Giubbotto e Posacenere negli starter base richiedono il passo `equip` da SB-11. *Raccomando di tenerli: mostrano
+   gli equip da oggetti nel set base. L'alternativa è spostarli negli avanzati e anticipare meno lavoro.*
+5. **Una classe Java nuova per Gigi** (GIG-AR5, colpo che cresce con gli oggetti sul campo). *Raccomando di sì: è la sua rara e rende
+   visibile il «debole a tavolo vuoto».*

@@ -1,0 +1,6 @@
+banco sb-10a/1
+misure tettopartita+salute
+thread 8
+partite 246000
+secondi 175.8
+millisecondi per partita (tempo reale) 0.7146

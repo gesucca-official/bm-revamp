@@ -70,8 +70,9 @@ Verificato nei sorgenti il 2 novembre 2026.
   scala nel tempo; **L** si dimezza a ogni fine turno e va spesa subito; **A** è costo e precedenza
   insieme, perché l'ordine si calcola dopo i costi (R04). Generiche vere sono le carte gratuite o a
   costo A.
-- **L è poco sfruttata e ha effetti poco evidenti.** Con la formula di R06 si ferma a 1 o 2 senza
-  azzerarsi mai. GoingBerserk costa 10 L, ma i +15 L del Cocktail a fine turno sono già 8.
+- **L è poco sfruttata e ha effetti poco evidenti.** Con la formula di R06 a fine turno si perde L/2 + 1: 10 diventa 4, e 1 o 2 vanno
+  a zero. GoingBerserk costa 10 L, ma i +15 L del Cocktail a fine turno sono già 7. *Corretto in SB-10b: la prima versione diceva che L
+  si ferma a 1 o 2 senza azzerarsi mai, e che 15 diventa 8.*
 - **La scelta reale è stretta.** Con 6 carte in mano e 3 fisse restano circa 3 slot regolari: le
   carte costose intasano in fretta.
 - **Listino di partenza.** A occhio circa 1,5 danni per V: SuperImpact (25 V → 40), SeagullFly
@@ -89,8 +90,8 @@ Intervallo ammesso 110–120 carte, obiettivo 115. Ogni carta ha una rarità.
 | Basic | 7 | Una per personaggio |
 | Bound | 21 | Almeno 3 per personaggio; se ne scelgono 2 |
 | Last resort | 4 | Struggle generica più 3 legate a un personaggio, dove flavour e meccanica si sposano |
-| Azioni d'archetipo | 35 | 5 per personaggio: si sposano con la strategia senza esservi vincolate |
-| Azioni generiche | 25 | Giocabili da tutti; compaiono in più starter |
+| Azioni d'archetipo | 37 | 5 per personaggio, 6 per Cesira e Rocco ([D34](#decisioni-del-proprietario)): si sposano con la strategia senza esservi vincolate |
+| Azioni generiche | 23 | Giocabili da tutti; compaiono in più starter (erano 25, D34) |
 | Oggetti | 16 | I token non contano, come oggi |
 | **Totale** | **115** | |
 
@@ -486,6 +487,14 @@ carta sonda e àncora (gratuita, 10 HIT), su cinque contesti e tre stili di bot.
 Proposti tetto delle bound a 4 unità e nuovi pesi. Nella ricerca dei mazzi un mutante sostituisce il migliore solo oltre un errore
 standard. [Rapporto](reports/set-base/sb-10a-report.md).
 
+**SB-10b fatto il 6 novembre 2026.** Principi e griglia approvati dal proprietario lo stesso giorno, con le sue parole: «Approvo tutte»
+(fase A, [D34](#decisioni-del-proprietario); fase B, [D35](#decisioni-del-proprietario)); la misura del tetto in partita attende il
+suo giudizio. La
+[griglia](design/set-base/griglia.md) dà un posto a tutte le 115 carte, con ruolo, fascia di costo, rarità, starter e motivo; mappa le 39 carte di
+oggi e le 31 della bozza esterna. I predefiniti del banco sono quelli di D33. La misura in partita conferma il tetto di 4 unità per le
+bound di risorsa ma non per quelle di danno: proposta di tetto 3 per il danno ([Q9](#decisioni-ancora-aperte)).
+[Rapporto](reports/set-base/sb-10b-report.md).
+
 **Perimetro.** Griglia delle circa 115 carte: slot per archetipo, ruolo, costo e rarità, secondo il [budget](#il-set-in-numeri), con le candidate della [bozza esterna](#bozza-esterna-di-carte) assegnate agli slot; numero di carte distinte per starter (10–15); quali generiche compaiono in quali
 starter; curva dei costi rispetto ai 3 slot regolari in mano. **Listino di potenza** ricavato dalle carte attuali e misurato: danno per risorsa, valore della priorità,
 valore di L che decade. Distribuzione delle rarità con il [paletto](#rarità). Verifica del tetto delle bound. Revisione degli effetti poco evidenti di L.
@@ -721,6 +730,8 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D31 | Correzione dei bot sul costo in HEALTH | 6 novembre 2026, SB-7, con le parole del proprietario: «Prima di SB-10». **Mini-blocco SB-7b** dopo SB-7 e prima di SB-10: gli stili euristici smettono di suicidarsi pagando in HEALTH. Le contromosse sottostimate restano a SB-17. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10** |
 | D32 | Divisione di SB-10 | 6 novembre 2026, con le parole del proprietario: «Sì, dividi e scrivi». **SB-10 si divide** in SB-10a (listino di potenza e tetto delle bound, misure) e SB-10b (griglia degli slot, progetto). SB-10a dipende da SB-7b e SB-9; SB-10b da SB-10a; SB-11 da SB-10b. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b** |
 | D33 | Listino e tetto delle bound (SB-10a) | 6 novembre 2026, con le parole del proprietario: «Approvo, scrivi». Accolte le quattro raccomandazioni di SB-10a: **(1)** tetto delle bound a **4 unità per uso, tolleranza 0**, da confermare in partita in SB-10b (una bound da 4 contro bound nulle entro +10 punti di quota); **(2)** pesi **V 0,75, A 0,5, T 0,15 per chi è immune, L 0,35, HEALTH 1** come predefiniti del banco, da rimisurare sugli starter nuovi; **(3)** carte prezzate rispetto a un'**unità gratuita da circa 6–8 HIT** invece che 10; **(4)** **L come costo: costi bassi, 5 o meno**, senza toccare le regole. Cautele per SB-10b: le contromosse risultano sotto il listino anche perché i bot le sottostimano (SB-17); la salute iniziale vale 2,5–4,8 punti di quota per 1 HEALTH |
+| D34 | Principi della griglia (SB-10b, fase A) | 6 novembre 2026, con le parole del proprietario: «Approvo tutte». **(1)** Budget 115 con 37 azioni d'archetipo (6 per Cesira e Rocco) e 23 generiche; **(2)** starter da 12 carte distinte (5 d'archetipo, 4 generiche, 3 oggetti), con varianti per capacità; **(3)** bound senza parate: generatrice, colpetto e una variante a una sola funzione; **(4)** T del Tossico più scarsa, carte prezzate a circa 0,3–0,5 danni per T, bound di T al massimo +10 fino a SB-13; **(5)** costi in HEALTH solo nell'archetipo di Rocco, salute di Mara e Rocco invariata e prima leva nei giri; **(6)** tre rarità, circa 54, 41 e 20, «picco condizionato, media in linea»; **(7)** Pino con costi di 5 L o meno e carte che spendono la L residua; **(8)** passi nuovi `equip` e `consume`, il resto in Java coi parametri |
+| D35 | Griglia degli slot (SB-10b, fase B) | 6 novembre 2026, con le parole del proprietario: «Approvo tutte». [Griglia](design/set-base/griglia.md) approvata con cinque scelte: spendere tutta la L con una classe Java (come `ToxicBloodDrain`); bound +8 A nello starter di Mara, da misurare in SB-11; rarità dell'archetipo 20, 10, 7; Giubbotto e Posacenere negli starter base, quindi passo `equip` da SB-11; una classe Java nuova per la rara di Gigi |
 
 ## Decisioni ancora aperte
 
@@ -734,6 +745,7 @@ Con la proposta; nessuna blocca i primi blocchi.
 | Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 115 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
 | Q7 | Formato definitivo | 20 carte e 2 copie, salvo dati contrari | SB-23 |
+| Q9 | Tetto delle bound di danno | 4 unità per le bound di risorsa e 3 per quelle di danno (peso del danno 4/3 nel banco), da riconfermare sugli starter veri di Mara (SB-11) e Rocco (SB-18): la misura di SB-10b mostra 4 HIT oltre i +10 punti con Tossico, Rocco e Mara | Prima di SB-11 |
 | Q8 | Report del server in «Ultimo turno» | Resta com'è: i fatti in italiano vengono prima, il testo inglese è secondario (D7 del piano C3). Da riconsiderare se la prova umana lo chiede | SB-25 |
 
 ## Cosa non è in questo piano
@@ -760,6 +772,13 @@ Si conservano qui le idee che escono dal perimetro del Set Base.
   - **Astinenza:** penalità se il Tossico resta senza T.
   - **Riparare o costruire oggetti** dagli scarti, slot di equip (Gigi).
   - **Il giro offerto in FFA:** alcol a tutti gli avversari insieme (Pino).
+- Da SB-10b ([griglia](design/set-base/griglia.md#idee-fuori-perimetro-per-le-espansioni)):
+  - **Danno moltiplicato per una risorsa** (due HIT per ogni L): il formato sa solo dividere.
+  - **Contromosse generiche** aperte a tutti: darebbero annullamenti a Mara.
+  - **Bound di parata** valide solo contro il colpo successivo: richiedono una regola di consumo.
+  - **«Tavolo ribaltato»:** distruggere tutti gli oggetti sul campo.
+  - **Cassetta degli attrezzi:** un oggetto che crea un token attrezzo (Gigi).
+  - **Equip permanenti,** senza durata.
 
 ## Registro degli accordi
 

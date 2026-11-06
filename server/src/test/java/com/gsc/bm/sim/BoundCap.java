@@ -41,9 +41,13 @@ final class BoundCap {
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final List<Resource> GAINS = List.of(Resource.VIOLENCE, Resource.TOXICITY, Resource.ALCOHOL, Resource.ALERTNESS);
 
-    /** Tetto per uso, tolleranza e pesi dei guadagni. Il peso di T vale solo per chi è immune a T: per gli altri è 0. */
+    /**
+     * Tetto per uso, tolleranza e pesi dei guadagni. Il peso di T vale solo per chi è immune a T: per gli altri è 0. I predefiniti sono
+     * quelli di D33 (SB-10a, adottati in SB-10b); SB7 conserva i parametri di SB-7 per le prove che controllano la stessa cosa di prima.
+     */
     static final class Params {
-        static final Params DEFAULT = new Params(5, 0.2, weights(1, 1, 1, 0.5));
+        static final Params SB7 = new Params(5, 0.2, weights(1, 1, 1, 0.5));
+        static final Params DEFAULT = new Params(4, 0, weights(0.75, 0.5, 0.15, 0.35));
         final double cap, tolerance;
         final Map<Resource, Double> weights;
 
@@ -63,10 +67,10 @@ final class BoundCap {
             return weights;
         }
 
-        /** -Dsim.boundCap=5 -Dsim.boundTolerance=0.2 -Dsim.boundWeights=V:1,A:1,T:1,L:0.5 */
+        /** -Dsim.boundCap=4 -Dsim.boundTolerance=0 -Dsim.boundWeights=V:0.75,A:0.5,T:0.15,L:0.35 (predefiniti di D33). */
         static Params fromSystem() {
-            double cap = Double.parseDouble(System.getProperty("sim.boundCap", "5"));
-            double tolerance = Double.parseDouble(System.getProperty("sim.boundTolerance", "0.2"));
+            double cap = Double.parseDouble(System.getProperty("sim.boundCap", Double.toString(DEFAULT.cap)));
+            double tolerance = Double.parseDouble(System.getProperty("sim.boundTolerance", Double.toString(DEFAULT.tolerance)));
             Map<Resource, Double> weights = new EnumMap<>(DEFAULT.weights);
             String raw = System.getProperty("sim.boundWeights");
             if (raw != null && !raw.isBlank()) for (String entry : raw.split("\\s*,\\s*")) {

@@ -14,8 +14,8 @@ import java.util.Map;
 
 /**
  * SB-10a, misure a richiesta: -Dsim.listino=all oppure un elenco di gruppi (costo, tipo, priorita, veleno, decadimento, nonspecchio,
- * carte, salute, allerta, bound, slot, tetto). Partite per stile: -Dsim.listinoBisect (400), -Dsim.listinoGrid (2000),
- * -Dsim.listinoCurve (2000). Tetto delle bound: -Dsim.boundCap, -Dsim.boundTolerance, -Dsim.boundWeights come in SB-7. Thread:
+ * carte, salute, allerta, bound, slot, tetto). Fuori da «all»: tettopartita (SB-10b), con la verifica contro il manichino. Partite per stile: -Dsim.listinoBisect (400), -Dsim.listinoGrid (2000),
+ * -Dsim.listinoCurve (2000). Tetto delle bound: -Dsim.boundCap, -Dsim.boundTolerance, -Dsim.boundWeights, predefiniti di D33. Thread:
  * -Dsim.threads. Il rapporto va in tmp/sim/sb10a-listino-*.md e .json, i tempi in un file a parte.
  */
 class ListinoMeasureTest {
@@ -27,8 +27,8 @@ class ListinoMeasureTest {
         List<String> groups = "all".equals(raw) ? new ArrayList<>(Listino.GROUPS) : Arrays.asList(raw.split("\\s*,\\s*"));
         boolean cap = "all".equals(raw) || groups.contains("tetto");
         for (String g : groups)
-            if (!Listino.GROUPS.contains(g) && !"tetto".equals(g))
-                throw new IllegalArgumentException("Gruppo sconosciuto: " + g + " (noti: " + Listino.GROUPS + ", tetto)");
+            if (!Listino.GROUPS.contains(g) && !Listino.EXTRA_GROUPS.contains(g) && !"tetto".equals(g))
+                throw new IllegalArgumentException("Gruppo sconosciuto: " + g + " (noti: " + Listino.GROUPS + ", " + Listino.EXTRA_GROUPS + ", tetto)");
         Draft base = Listino.baseDraft();
         Listino.Params params = Listino.Params.fromSystem(BenchMeasureTest.threads());
         Map<String, com.gsc.bm.model.game.bot.BotPolicy> styles = BenchMeasureTest.styles();
@@ -48,6 +48,11 @@ class ListinoMeasureTest {
         BoundCap.Params capParams = BoundCap.Params.fromSystem();
         List<BoundCap.Result> capResults = null;
         if (cap) capResults = BoundCap.run(base.derive(base.source + " (bound sonda)", listino.capDraft()), capParams);
+        if (groups.contains("tettopartita")) {
+            List<BoundCap.Result> inGame = BoundCap.run(base.derive(base.source + " (tetto in partita)", listino.capDraftInGame()), capParams);
+            if (capResults == null) capResults = new ArrayList<>();
+            for (BoundCap.Result r : inGame) if (r.bound.startsWith("listino.tetto.")) capResults.add(r);
+        }
         double seconds = (System.nanoTime() - start) / 1e9;
         String selection = "all".equals(raw) ? "all" : String.join("+", groups);
         ListinoReport.Head head = new ListinoReport.Head(Bench.shownSource(base), Bench.sha256(base), selection, params,

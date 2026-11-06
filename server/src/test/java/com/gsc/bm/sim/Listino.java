@@ -41,6 +41,8 @@ final class Listino {
     static final String NEUTRO = "ctx-neutro", SPAZIENZIO = "ctx-spazienzio", TOSSICO = "ctx-tossico", MARA = "ctx-mara", ROCCO = "ctx-rocco";
     static final List<String> GROUPS = List.of("costo", "tipo", "priorita", "veleno", "decadimento", "nonspecchio", "carte",
             "salute", "allerta", "bound", "slot", "handicap");
+    /** Gruppi aggiunti dopo SB-10a: si chiedono per nome e non entrano in «all», così la misura di SB-10a resta la stessa. */
+    static final List<String> EXTRA_GROUPS = List.of("tettopartita");
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final double Z = 1.959963984540054;
     /** Lo stesso quantile, per il rapporto. */
@@ -729,8 +731,50 @@ final class Listino {
         return f;
     }
 
+    /**
+     * SB-10b, tetto in partita: bound di una sola funzione da 4 unità con i pesi di D33, in tutti e cinque i contesti. Il danno è 4 HIT,
+     * con 3 e 2 HIT per trovare il tetto se 4 supera il criterio dei +10 punti; la
+     * risorsa è quella propria del contesto alla quantità più alta entro 4 unità (+5 V, +8 A, +26 T per il Tossico immune). Per il
+     * Tossico anche +10 T, il limite scelto nella griglia.
+     */
+    static Map<String, java.util.function.Function<String, ObjectNode>> capFamilies(String context) {
+        Map<String, java.util.function.Function<String, ObjectNode>> f = new LinkedHashMap<>();
+        for (int x : new int[]{4, 3, 2})
+            f.put("danno-" + x + "HIT", ch -> boundCard(ch, "LISTINO TETTO DANNO", "DAMAGE", "—", "HIT", x, "OPPONENT", 1, List.of(),
+                    List.of(damage("HIT", x))));
+        Resource own = context.equals(MARA) || context.equals(ROCCO) ? Resource.ALERTNESS
+                : context.equals(TOSSICO) ? Resource.TOXICITY : Resource.VIOLENCE;
+        List<Integer> amounts = own == Resource.ALERTNESS ? List.of(8) : own == Resource.TOXICITY ? List.of(26, 10) : List.of(5);
+        for (int x : amounts)
+            f.put("risorsa-" + x + letter(own), ch -> boundCard(ch, "LISTINO TETTO RISORSA", "RESOURCES", "+" + x + " " + letter(own), null, 0,
+                    "SELF", 0, List.of(gain(own, x)), List.of()));
+        return f;
+    }
+
+    static final List<String> CAP_CONTEXTS = List.of(NEUTRO, SPAZIENZIO, MARA, ROCCO, TOSSICO);
+
+    /** Una bozza con le bound del tetto in partita, per controllarle anche contro il manichino con i parametri scelti. */
+    JsonNode capDraftInGame() {
+        ObjectNode root = root(base);
+        for (String ctx : CAP_CONTEXTS) {
+            String character = deck(root, ctx).get("character").asText();
+            for (Map.Entry<String, java.util.function.Function<String, ObjectNode>> e : capFamilies(ctx).entrySet()) {
+                ObjectNode card = e.getValue().apply(character);
+                String suffix = e.getKey() + "-" + ctx.substring(4);
+                card.put("binding", "listino.tetto." + suffix);
+                ((ObjectNode) card.get("gui")).put("name", "LISTINO TETTO " + suffix.toUpperCase(java.util.Locale.ROOT));
+                add(root, card);
+            }
+        }
+        return root;
+    }
+
     List<Curve> curves() throws Exception {
         List<Curve> list = new ArrayList<>();
+        for (String ctx : CAP_CONTEXTS)
+            for (Map.Entry<String, java.util.function.Function<String, ObjectNode>> e : capFamilies(ctx).entrySet())
+                list.add(new Curve("tettopartita-" + e.getKey() + "-" + ctx.substring(4), "tettopartita", ctx, e.getKey(), 4,
+                        x -> bound(ctx, e.getValue(), null)));
         for (String ctx : List.of(NEUTRO, SPAZIENZIO, MARA, ROCCO, TOSSICO))
             for (int d : new int[]{-10, -5, 5, 10})
                 list.add(new Curve("salute" + (d > 0 ? "+" : "") + d + "-" + ctx.substring(4), "salute", ctx, "HEALTH iniziale " + (d > 0 ? "+" : "") + d,

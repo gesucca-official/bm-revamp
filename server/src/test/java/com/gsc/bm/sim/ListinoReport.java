@@ -156,7 +156,7 @@ final class ListinoReport {
                     .append(r.def.group.equals("salute") || r.def.group.equals("allerta") ? "—" : d(perGame, 2)).append(" | ")
                     .append(r.def.group.equals("salute") || r.def.group.equals("allerta") ? "—" : d(moveShare * 100, 1) + "%").append(" | ")
                     .append(r.def.group.equals("salute") ? "—" : saturated ? "saturato" : d(heq, 1)).append(" | ")
-                    .append(r.def.group.equals("bound") && perGame > 0 ? d(heq / perGame, 2) : "—").append(" |\n");
+                    .append((r.def.group.equals("bound") || r.def.group.equals("tettopartita")) && perGame > 0 ? d(heq / perGame, 2) : "—").append(" |\n");
         }
         if (cap != null && !cap.isEmpty()) {
             o.append("\n## Tetto delle bound contro il manichino\n\nParametri: ").append(head.cap.describe()).append(".\n\n");
@@ -190,6 +190,7 @@ final class ListinoReport {
             case "bound": return "Bound: una sonda e una nulla contro due nulle";
             case "slot": return "Slot della mano";
             case "handicap": return "Handicap per il non specchio";
+            case "tettopartita": return "Tetto in partita (SB-10b): bound da 4 unità e una nulla contro due nulle";
             default: return group;
         }
     }
