@@ -6,7 +6,7 @@
 
 **Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato al 6 novembre 2026.** C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). C4-7: **fatto, in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-7--fase-b)); Fase 0 misurata e approvata, Fase A scelta dal proprietario. Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
+**Stato al 6 novembre 2026.** C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). C4-7: **correzione in corso (C4-7-bis), Fase A pronta, in attesa della scelta** ([diagnosi e proposta](design/client-c4/audio/proposta-esito.md), [rapporto](reports/client-c4-report.md#c4-7-bis--fase-a)): dopo la prova del proprietario del 6 novembre 2026 l'esito non si sente o arriva in ritardo; Fase 0, A e B di C4-7 restano come registrate. Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
 
 **Stato di C4-1, C4-1b, C4-3, C4-2, C4-4 e C4-5a.** C4-5a è **approvato dal proprietario il 5 novembre 2026; O2 chiusa**. Le osservazioni O26 e O27 della prova sono assegnate a C4-5a-bis ([stato del blocco](reports/client-c4-report.md#c4-5a-bis): O26 e O27 approvate dal proprietario il 5 novembre 2026 dopo una partita vera; scelta A pieno/0,75/sopra, 236 unità e giri ufficiali verdi sul jar pre-SB-3/SB-4, contesto corrente verde, nuovo giro grafico sul jar corrente non svolto con accettazione esplicita del proprietario) ([rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)). C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
@@ -427,7 +427,9 @@ volto, nell'ispezione e nei primi piani; giudizio del proprietario.
 
 ### C4-7* — Suoni (opzionale)
 
-**Stato: fatto, in attesa del giudizio del proprietario.** [Proposta](design/client-c4/audio/proposta.md), [scelta](design/client-c4/audio/scelte.md) e [Fase B](reports/client-c4-report.md#c4-7--fase-b). Cinque suoni Kenney CC0, volume iniziale 20%, muto e volume nel menu. Fase 0 misurata su 1.11 e approvata dal proprietario.
+**Stato: correzione in corso (C4-7-bis), Fase A pronta, in attesa della scelta.** [Proposta](design/client-c4/audio/proposta.md), [scelta](design/client-c4/audio/scelte.md) e [Fase B](reports/client-c4-report.md#c4-7--fase-b) di C4-7: cinque suoni Kenney CC0, volume iniziale 20%, muto e volume nel menu. Fase 0 misurata su 1.11 e approvata dal proprietario.
+
+**C4-7-bis.** Prova del proprietario del 6 novembre 2026: esito non udito (o molto in ritardo) su PC e iPhone; tocco di selezione intermittente e con ritardo su iPhone. Decisione: suono di vittoria e suono di sconfitta distinti («Due distinti»). [Diagnosi e proposta della Fase A](design/client-c4/audio/proposta-esito.md); Fase B (correzione, esito distinto, Web Audio) dopo la scelta di file, download e momento.
 
 **Perimetro.** Secondo D2: pochi suoni per selezione, invio, rifiuto, impatto ed esito, da fonte registrata. Volume e muto nel menu, ricordati nel
 browser; un suono non porta mai un'informazione che manca a schermo; rispetta salto, interruzione e fine sequenza. Nessuna musica.
@@ -480,6 +482,8 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
   riduzione delle decorazioni **prima** di rivalutare il renderer, come da roadmap. Distinguere il ritardo di rete.
 - Caricamento mirato e, dove rende, compressione degli asset.
 - Picchi isolati fino a 115 ms in FFA misurati in C3-L.
+
+**Condizione attivata (6 novembre 2026).** Nella prova di C4-7 il proprietario ha segnalato su iPhone: «le animazioni su safari non sono proprio fluidissime». È la segnalazione da iPhone prevista sopra: C4-8b la tratta come disagio da misurare e affrontare con lo stesso ordine (ridisegno incrementale e decorazioni prima del renderer), distinguendo il ritardo di rete; quanto sia grave va chiarito col proprietario, e le misure in Edge non lo dimostrano. Allo stesso blocco è assegnata O28 (spazio tolto da Safari in orizzontale); O29 a C4-8a o C4-8b ([roadmap](client-roadmap.md#osservazioni-registrate-durante-c4)).
 
 **Dipendenze.** Tutti i blocchi visivi; D9.
 

@@ -1,0 +1,3688 @@
+{
+ "date": "2026-11-06T16:15:19.137Z",
+ "viewport": "1366x768",
+ "jar": "server/target/bm-server-0.0.1-SNAPSHOT.jar (built 2026-11-06 11:35, rules 1.11)",
+ "games": [
+  {
+   "mode": "wait",
+   "startAt": 1069,
+   "turn": 19,
+   "winner": "ComPlayer_9818",
+   "me": "devAlice",
+   "result": "loss",
+   "panelAt": 195692,
+   "detectedAt": 195863,
+   "runningAtDetection": true,
+   "plan": {
+    "key": "977ec514b33b4b4132da1870d59c7a7e0b331315b25d5e4e71114528f8f4e0a7/19",
+    "total": 9150,
+    "tail": {
+     "at": 7550,
+     "dur": 1600
+    },
+    "moves": [
+     {
+      "at": 500,
+      "flight": {
+       "at": 2100,
+       "dur": 650
+      },
+      "target": {
+       "at": 2750,
+       "dur": 500
+      },
+      "changes": {
+       "at": 3250,
+       "dur": 600
+      }
+     },
+     {
+      "at": 3850,
+      "flight": {
+       "at": 5050,
+       "dur": 650
+      },
+      "target": {
+       "at": 5700,
+       "dur": 500
+      },
+      "changes": {
+       "at": 6200,
+       "dur": 600
+      }
+     }
+    ]
+   },
+   "emphasis": [
+    {
+     "key": "977ec514b33b4b4132da1870d59c7a7e0b331315b25d5e4e71114528f8f4e0a7/19",
+     "kind": "died",
+     "seat": "devAlice"
+    },
+    {
+     "key": "977ec514b33b4b4132da1870d59c7a7e0b331315b25d5e4e71114528f8f4e0a7/19",
+     "kind": "outcome",
+     "text": "SCONFITTA"
+    }
+   ],
+   "actions": [],
+   "sequenceEnd": [
+    {
+     "key": "977ec514b33b4b4132da1870d59c7a7e0b331315b25d5e4e71114528f8f4e0a7/19",
+     "reason": "complete",
+     "ms": 9157
+    }
+   ],
+   "plays": [
+    {
+     "t": 1589,
+     "file": "click_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 1589,
+     "file": "confirmation_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 1590,
+     "file": "error_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 1590,
+     "file": "drop_004.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 1590,
+     "file": "confirmation_002.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 1597,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 1780,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 1950,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 2127,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 2313,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 2813,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 4980,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 11403,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 11605,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 11787,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 14405,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 21174,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 21393,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 21565,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 21755,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 21973,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 22512,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 25130,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 32291,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 32511,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 32715,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 32898,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 33117,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 33653,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 36263,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 43449,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 43683,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 43885,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 44065,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 44305,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 44870,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 47480,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 53925,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 54173,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 54396,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 54600,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 54852,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 55436,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 58055,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 64850,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 65112,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 65317,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 65953,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 68564,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 75392,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 75686,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 75918,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 76131,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 76407,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 77020,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 79630,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 85620,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 85915,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 86118,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 86794,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 89405,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 96198,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 96548,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 96783,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 97486,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 100089,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 107361,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 107690,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 107919,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 108603,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 111214,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 118431,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 118774,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 119023,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 119771,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 122381,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 129578,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 129929,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 130182,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 130945,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 133547,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 140837,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 141213,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 141459,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 142253,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 144856,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 152125,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 152500,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 152752,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 153537,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 156139,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 163059,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 163450,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 163706,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 164536,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 167148,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 173450,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 173867,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 174131,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 174970,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 177581,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 184917,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 185312,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 187914,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 194058,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 194489,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 194789,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 195629,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 204140,
+     "file": "confirmation_002.ogg",
+     "muted": false,
+     "running": true
+    }
+   ],
+   "finalRound": [
+    {
+     "t": 204140,
+     "file": "confirmation_002.ogg",
+     "muted": false,
+     "running": true
+    }
+   ],
+   "outcomePlays": [
+    {
+     "t": 204140,
+     "file": "confirmation_002.ogg",
+     "muted": false,
+     "running": true,
+     "afterPanelMs": 8448
+    }
+   ],
+   "impactPlaysFinal": 0
+  },
+  {
+   "mode": "tapAll",
+   "startAt": 220936,
+   "turn": 10,
+   "winner": "ComPlayer_3895",
+   "me": "devAlice",
+   "result": "loss",
+   "panelAt": 315356,
+   "detectedAt": 315477,
+   "runningAtDetection": true,
+   "plan": {
+    "key": "524a6b6041c3a8335cb7fd1e072e34725762fcb748aac560b562cbcb3ec0e82c/10",
+    "total": 9950,
+    "tail": {
+     "at": 8350,
+     "dur": 1600
+    },
+    "moves": [
+     {
+      "at": 500,
+      "flight": {
+       "at": 2100,
+       "dur": 650
+      },
+      "target": {
+       "at": 2750,
+       "dur": 500
+      },
+      "changes": {
+       "at": 3250,
+       "dur": 600
+      }
+     },
+     {
+      "at": 3850,
+      "flight": {
+       "at": 5050,
+       "dur": 650
+      },
+      "target": {
+       "at": 5700,
+       "dur": 500
+      },
+      "changes": {
+       "at": 6200,
+       "dur": 600
+      }
+     }
+    ]
+   },
+   "emphasis": [
+    {
+     "key": "524a6b6041c3a8335cb7fd1e072e34725762fcb748aac560b562cbcb3ec0e82c/10",
+     "kind": "died",
+     "seat": "devAlice"
+    },
+    {
+     "key": "524a6b6041c3a8335cb7fd1e072e34725762fcb748aac560b562cbcb3ec0e82c/10",
+     "kind": "outcome",
+     "text": "SCONFITTA"
+    }
+   ],
+   "actions": [
+    {
+     "tap": 315538
+    },
+    {
+     "tap": 315671
+    },
+    {
+     "tap": 315806
+    },
+    {
+     "tap": 315936
+    },
+    {
+     "tap": 316056
+    },
+    {
+     "tap": 316181
+    },
+    {
+     "tap": 316306
+    },
+    {
+     "tap": 316431
+    },
+    {
+     "tap": 316556
+    },
+    {
+     "tap": 316689
+    },
+    {
+     "tap": 316822
+    },
+    {
+     "tap": 316940
+    },
+    {
+     "tap": 317072
+    },
+    {
+     "tap": 317194
+    },
+    {
+     "tap": 317325
+    }
+   ],
+   "sequenceEnd": [
+    {
+     "key": "524a6b6041c3a8335cb7fd1e072e34725762fcb748aac560b562cbcb3ec0e82c/10",
+     "reason": "input",
+     "ms": 8473
+    }
+   ],
+   "plays": [
+    {
+     "t": 221284,
+     "file": "click_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 221284,
+     "file": "confirmation_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 221284,
+     "file": "error_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 221284,
+     "file": "drop_004.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 221284,
+     "file": "confirmation_002.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 221290,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 221465,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 221640,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 222137,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 224239,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 231439,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 231624,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 231796,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 231969,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 232167,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 232662,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 235265,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 242042,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 242258,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 242430,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 242987,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 245590,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 252799,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 253031,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 253228,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 253796,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 256398,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 263581,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 263846,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 266448,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 273232,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 273511,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 273717,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 274346,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 276948,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 283138,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 283399,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 283602,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 284254,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 286856,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 293061,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 293355,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 293572,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 294229,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 296832,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 304036,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 304334,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 304551,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 305221,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 307823,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 315008,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 315304,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    }
+   ],
+   "finalRound": [],
+   "outcomePlays": [],
+   "impactPlaysFinal": 0
+  },
+  {
+   "mode": "tapTail",
+   "startAt": 320485,
+   "turn": 18,
+   "winner": "ComPlayer_2503",
+   "me": "devAlice",
+   "result": "loss",
+   "panelAt": 504463,
+   "detectedAt": 504636,
+   "runningAtDetection": true,
+   "plan": {
+    "key": "c4fe208ac3d7ee3da9c3bbbccedff49cce279c0b92390f767af690057be80cd0/18",
+    "total": 9950,
+    "tail": {
+     "at": 8350,
+     "dur": 1600
+    },
+    "moves": [
+     {
+      "at": 500,
+      "flight": {
+       "at": 1700,
+       "dur": 650
+      },
+      "target": {
+       "at": 2350,
+       "dur": 500
+      },
+      "changes": {
+       "at": 2850,
+       "dur": 600
+      }
+     },
+     {
+      "at": 3450,
+      "flight": {
+       "at": 5050,
+       "dur": 650
+      },
+      "target": {
+       "at": 5700,
+       "dur": 500
+      },
+      "changes": {
+       "at": 6200,
+       "dur": 600
+      }
+     }
+    ]
+   },
+   "emphasis": [
+    {
+     "key": "c4fe208ac3d7ee3da9c3bbbccedff49cce279c0b92390f767af690057be80cd0/18",
+     "kind": "died",
+     "seat": "devAlice"
+    },
+    {
+     "key": "c4fe208ac3d7ee3da9c3bbbccedff49cce279c0b92390f767af690057be80cd0/18",
+     "kind": "outcome",
+     "text": "SCONFITTA"
+    }
+   ],
+   "actions": [
+    {
+     "tap": 513026
+    }
+   ],
+   "sequenceEnd": [
+    {
+     "key": "c4fe208ac3d7ee3da9c3bbbccedff49cce279c0b92390f767af690057be80cd0/18",
+     "reason": "input",
+     "ms": 8558
+    }
+   ],
+   "plays": [
+    {
+     "t": 320848,
+     "file": "click_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 320848,
+     "file": "confirmation_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 320849,
+     "file": "error_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 320849,
+     "file": "drop_004.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 320849,
+     "file": "confirmation_002.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 320852,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 321029,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 321199,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 321376,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 321561,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 321730,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 322212,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 324315,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 331473,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 331681,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 334282,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 341064,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 341294,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 343899,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 350725,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 350963,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 353165,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 359993,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 360226,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 360427,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 360623,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 360867,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 361083,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 361647,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 364249,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 371426,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 371672,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 371888,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 372105,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 372355,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 372558,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 373155,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 375757,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 381176,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 381446,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 381664,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 381884,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 382147,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 382369,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 382957,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 385565,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 392732,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 393006,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 393231,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 393464,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 393739,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 393956,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 394538,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 397141,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 403913,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 404220,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 404432,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 404719,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 405313,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 407916,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 414152,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 414462,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 414715,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 415033,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 415639,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 418244,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 425532,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 425871,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 426118,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 426365,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 426687,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 426948,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 427598,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 430227,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 437445,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 437789,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 438052,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 438295,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 438655,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 438921,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 439572,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 442182,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 449498,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 449847,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 452060,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 458879,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 459263,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 459543,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 459810,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 460206,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 460492,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 461189,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 463808,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 471061,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 471480,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 471771,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 472057,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 472479,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 472771,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 473472,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 476089,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 483314,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 483738,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 484071,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 484325,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 484735,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 485039,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 485739,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 488363,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 495271,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 495680,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 498291,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 503967,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 504397,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    }
+   ],
+   "finalRound": [],
+   "outcomePlays": [],
+   "impactPlaysFinal": 0
+  },
+  {
+   "mode": "resize",
+   "startAt": 516121,
+   "turn": 11,
+   "winner": "ComPlayer_5874",
+   "me": "devAlice",
+   "result": "loss",
+   "panelAt": 625513,
+   "detectedAt": 625637,
+   "runningAtDetection": true,
+   "plan": {
+    "key": "4901dd955bdda97479843888708a3046a59c864395c673356ef70039cba9f045/11",
+    "total": 10350,
+    "tail": {
+     "at": 8750,
+     "dur": 1600
+    },
+    "moves": [
+     {
+      "at": 500,
+      "flight": {
+       "at": 2100,
+       "dur": 650
+      },
+      "target": {
+       "at": 2750,
+       "dur": 500
+      },
+      "changes": {
+       "at": 3250,
+       "dur": 600
+      }
+     },
+     {
+      "at": 3850,
+      "flight": {
+       "at": 5450,
+       "dur": 650
+      },
+      "target": {
+       "at": 6100,
+       "dur": 500
+      },
+      "changes": {
+       "at": 6600,
+       "dur": 600
+      }
+     }
+    ]
+   },
+   "emphasis": [
+    {
+     "key": "4901dd955bdda97479843888708a3046a59c864395c673356ef70039cba9f045/11",
+     "kind": "died",
+     "seat": "devAlice"
+    },
+    {
+     "key": "4901dd955bdda97479843888708a3046a59c864395c673356ef70039cba9f045/11",
+     "kind": "outcome",
+     "text": "SCONFITTA"
+    }
+   ],
+   "actions": [
+    {
+     "resize": 627027
+    }
+   ],
+   "sequenceEnd": [
+    {
+     "key": "4901dd955bdda97479843888708a3046a59c864395c673356ef70039cba9f045/11",
+     "reason": "resize",
+     "ms": 1532
+    }
+   ],
+   "plays": [
+    {
+     "t": 516502,
+     "file": "click_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 516502,
+     "file": "confirmation_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 516503,
+     "file": "error_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 516503,
+     "file": "drop_004.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 516503,
+     "file": "confirmation_002.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 516511,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 516741,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 518452,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 525645,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 525862,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 528466,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 535261,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 535477,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 535664,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 535848,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 536056,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 536240,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 536781,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 539383,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 546153,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 546389,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 549000,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 554423,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 554667,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 554871,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 555074,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 555270,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 555509,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 555725,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 555929,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 556540,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 559150,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 565573,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 565836,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 566052,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 566270,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 566482,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 566751,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 566968,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 567188,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 567781,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 570383,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 577230,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 577494,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 577709,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 577917,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 578183,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 578398,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 579006,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 581617,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 588822,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 589118,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 589348,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 589561,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 589850,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 590081,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 590689,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 593292,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 599685,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 599978,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 600215,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 600442,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 600761,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 600995,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 601623,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 604225,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 611509,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 611858,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 612105,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 612343,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 612680,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 612925,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 613540,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 616144,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 623348,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 623689,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 623954,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 624198,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 624539,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 624829,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 625456,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    }
+   ],
+   "finalRound": [],
+   "outcomePlays": [],
+   "impactPlaysFinal": 0
+  },
+  {
+   "mode": "blur",
+   "startAt": 652121,
+   "turn": 13,
+   "winner": "ComPlayer_2400",
+   "me": "devAlice",
+   "result": "loss",
+   "panelAt": 780335,
+   "detectedAt": 780473,
+   "runningAtDetection": true,
+   "plan": {
+    "key": "4268815cdd61ca6d22fa7755efe8d7bc9444e4b7d226c9167af9f5811f0d7aea/13",
+    "total": 10350,
+    "tail": {
+     "at": 8750,
+     "dur": 1600
+    },
+    "moves": [
+     {
+      "at": 500,
+      "flight": {
+       "at": 2100,
+       "dur": 650
+      },
+      "target": {
+       "at": 2750,
+       "dur": 500
+      },
+      "changes": {
+       "at": 3250,
+       "dur": 600
+      }
+     },
+     {
+      "at": 3850,
+      "flight": {
+       "at": 5450,
+       "dur": 650
+      },
+      "target": {
+       "at": 6100,
+       "dur": 500
+      },
+      "changes": {
+       "at": 6600,
+       "dur": 600
+      }
+     }
+    ]
+   },
+   "emphasis": [
+    {
+     "key": "4268815cdd61ca6d22fa7755efe8d7bc9444e4b7d226c9167af9f5811f0d7aea/13",
+     "kind": "died",
+     "seat": "devAlice"
+    },
+    {
+     "key": "4268815cdd61ca6d22fa7755efe8d7bc9444e4b7d226c9167af9f5811f0d7aea/13",
+     "kind": "outcome",
+     "text": "SCONFITTA"
+    }
+   ],
+   "actions": [
+    {
+     "blur": 781854
+    }
+   ],
+   "sequenceEnd": [
+    {
+     "key": "4268815cdd61ca6d22fa7755efe8d7bc9444e4b7d226c9167af9f5811f0d7aea/13",
+     "reason": "complete",
+     "ms": 10353
+    }
+   ],
+   "plays": [
+    {
+     "t": 652500,
+     "file": "click_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 652501,
+     "file": "confirmation_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 652501,
+     "file": "error_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 652501,
+     "file": "drop_004.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 652501,
+     "file": "confirmation_002.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 652507,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 652686,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 652856,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 653028,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 653207,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 653387,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 653555,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 654048,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 656167,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 663317,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 663516,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 663687,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 663863,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 664031,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 664233,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 664400,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 664898,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 667517,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 673065,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 673287,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 673471,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 673659,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 673851,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 674061,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 674247,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 674773,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 676976,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 684172,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 684402,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 684607,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 686809,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 693608,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 693849,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 694060,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 694261,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 694496,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 695055,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 697676,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 703271,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 703521,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 703737,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 703955,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 704220,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 704815,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 707426,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 714596,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 714890,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 715107,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 717717,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 724587,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 724879,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 725110,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 725339,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 725625,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 726224,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 728434,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 735654,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 735950,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 736169,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 736857,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 739459,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 746648,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 746972,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 747212,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 747898,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 750501,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 757740,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 758083,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 760693,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 767596,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 767960,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 768215,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 768982,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 771593,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 778824,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 779192,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 779461,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 780274,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 789976,
+     "file": "confirmation_002.ogg",
+     "muted": false,
+     "running": true
+    }
+   ],
+   "finalRound": [
+    {
+     "t": 789976,
+     "file": "confirmation_002.ogg",
+     "muted": false,
+     "running": true
+    }
+   ],
+   "outcomePlays": [
+    {
+     "t": 789976,
+     "file": "confirmation_002.ogg",
+     "muted": false,
+     "running": true,
+     "afterPanelMs": 9641
+    }
+   ],
+   "impactPlaysFinal": 0
+  },
+  {
+   "mode": "again",
+   "startAt": 806922,
+   "turn": 16,
+   "winner": "ComPlayer_9289",
+   "me": "devAlice",
+   "result": "loss",
+   "panelAt": 962903,
+   "detectedAt": 963065,
+   "runningAtDetection": true,
+   "plan": {
+    "key": "8fc2a8b8924ef233d37dee9365886aede3747ebd5081f64e9fc10e7d9434b691/16",
+    "total": 10350,
+    "tail": {
+     "at": 8750,
+     "dur": 1600
+    },
+    "moves": [
+     {
+      "at": 500,
+      "flight": {
+       "at": 2100,
+       "dur": 650
+      },
+      "target": {
+       "at": 2750,
+       "dur": 500
+      },
+      "changes": {
+       "at": 3250,
+       "dur": 600
+      }
+     },
+     {
+      "at": 3850,
+      "flight": {
+       "at": 5450,
+       "dur": 650
+      },
+      "target": {
+       "at": 6100,
+       "dur": 500
+      },
+      "changes": {
+       "at": 6600,
+       "dur": 600
+      }
+     }
+    ]
+   },
+   "emphasis": [
+    {
+     "key": "8fc2a8b8924ef233d37dee9365886aede3747ebd5081f64e9fc10e7d9434b691/16",
+     "kind": "died",
+     "seat": "devAlice"
+    },
+    {
+     "key": "8fc2a8b8924ef233d37dee9365886aede3747ebd5081f64e9fc10e7d9434b691/16",
+     "kind": "outcome",
+     "text": "SCONFITTA"
+    }
+   ],
+   "actions": [
+    {
+     "again": 964431
+    }
+   ],
+   "sequenceEnd": [],
+   "plays": [
+    {
+     "t": 807219,
+     "file": "click_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 807219,
+     "file": "confirmation_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 807219,
+     "file": "error_001.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 807219,
+     "file": "drop_004.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 807220,
+     "file": "confirmation_002.ogg",
+     "muted": true,
+     "running": false
+    },
+    {
+     "t": 807224,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 807433,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 809135,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 816327,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 816538,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 819143,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 825960,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 826199,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 828402,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 835195,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 835419,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 835624,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 836216,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 838818,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 845588,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 845826,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 846038,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 846619,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 849227,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 856389,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 856636,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 856829,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 857432,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 860035,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 866444,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 866699,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 869302,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 876068,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 876341,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 878960,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 885822,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 886110,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 886343,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 886569,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 886861,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 887457,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 890060,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 897303,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 897600,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 897845,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 898062,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 898373,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 898991,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 901594,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 908853,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 909171,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 909407,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 912010,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 917570,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 917923,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 918181,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 918425,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 918758,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 919441,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 922044,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 928087,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 928455,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 928718,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 928967,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 929312,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 929974,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 932584,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 939133,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 939517,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 939800,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 940059,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 940441,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 941143,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 943744,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 950635,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 951011,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 951272,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 952083,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 954685,
+     "file": "drop_004.ogg",
+     "muted": false,
+     "running": true
+    },
+    {
+     "t": 961375,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 961777,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 962041,
+     "file": "click_001.ogg",
+     "muted": false,
+     "running": false
+    },
+    {
+     "t": 962849,
+     "file": "confirmation_001.ogg",
+     "muted": false,
+     "running": false
+    }
+   ],
+   "finalRound": [],
+   "outcomePlays": [],
+   "impactPlaysFinal": 0
+  }
+ ],
+ "errors": []
+}

@@ -881,3 +881,32 @@ Ripetuti `Verify` con `HTMLMediaElement.play` che respinge con `NotAllowedError`
 `VerifyLayout` aggiuntivo: dapprima rosso su entrambe le misure perché il nuovo cursore era alto 16 px ([prima](client-c4/c4-7/fase-b/layout-prima-correzione/)); corretto a minimo 160×44 px, poi **7/7 verde** includendo Verify e Layout ([dopo](client-c4/c4-7/fase-b/ufficiale-finale/run-summary.json)). Input massimo per i quattro campioni duello/FFA: Fase 0 **17,8 / 15,8 / 21,9 / 29,0 ms** desktop e **12,3 / 13,1 / 22,7 / 27,2 ms** compatto; Fase B **13,6 / 15,6 / 21,3 / 29,9 ms** desktop e **13,9 / 18,9 / 18,4 / 20,8 ms** compatto. Tutti sotto 100 ms; il massimo desktop è aumentato di 0,9 ms, mentre quello compatto è diminuito. Partite e campioni diversi non dimostrano identità di latenza. Il primo gesto che tenta lo sblocco non è compreso in questi campioni, né è misurata la latenza percepita. Nessun atteso, selettore, soglia o `BASE_750` cambiato; nessuna geometria del tavolo cambiata.
 
 `./scripts/build.ps1 -Task Test -Offline`: **500 server, 0 errori, 6 saltati; client-debug 36/36**. `python scripts/check-rules.py`: PASS. `TestServerContext` non eseguito. Non verificati iPhone, Safari, interruttore silenzioso, riproduzione reale e latenza percepita. Il proprietario deve ascoltare in una partita vera, giudicare volume iniziale e possibile fastidio nelle sequenze FFA lunghe, incluso il suono unico di esito anche in sconfitta.
+
+## C4-7-bis — Fase A
+
+6 novembre 2026, base `ffb9c2d`. **C4-7: correzione in corso (C4-7-bis), Fase A pronta, in attesa della scelta.** Nessun codice di prodotto cambiato, nessun file audio scaricato. [Diagnosi e proposta](../design/client-c4/audio/proposta-esito.md).
+
+### Prova del proprietario
+
+Su iPhone: «non si sente fanfara di vittoria ne suono di sconfitta»; «il "tap" di quando si seleziona una carta si sente a volte si e a volte no, e sembra avere un po' di lag»; «le animazioni su safari non sono proprio fluidissime»; «safari in lanscape taglia un sacco di spazio, laterale per l'isola con le fotocamere, in alto per le schede e la barra degli indirizzi»; «quel tooltip giallo in alto che riassume il turno da un po' fastidio visto lo schermo piccolo»; «in generale cmq il gioco mi sta piacendo molto!».
+
+Da PC: «suoni ok da pc, ma non si sentono suoni di vittoria o sconfitta, o se si sentono sono in molto ritardo rispetto all'evento».
+
+Decisione del proprietario sull'esito: «Due distinti» (suono di vittoria e suono di sconfitta distinti, al posto dell'unico `confirmation_002.ogg`).
+
+Nota della regia: nelle sonde di C4-7 il suono di esito compare solo 2 volte (`resolution-finale`) e mai nel giro ufficiale; le verifiche di C4-7 non hanno coperto l'esito. Destinazioni: fluidità su Safari a C4-8b (condizione già prevista, ora attivata), O28 a C4-8b, O29 a C4-8a o C4-8b ([roadmap](../client-roadmap.md#osservazioni-registrate-durante-c4)).
+
+### Diagnosi
+
+Cause provate su sei partite 1vCom vere (Edge headless 1366×768, `dist` di `ffb9c2d`, jar 1.11 delle 11:35, server temporaneo), una azione nel round finale di ciascuna, con una sonda che registra ogni `play` ([script](client-c4/c4-7-bis/fase-a/outcome-probe.mjs), [risultati](client-c4/c4-7-bis/fase-a/outcome-probe-1366x768.json)); dettagli, file e righe nella [proposta](../design/client-c4/audio/proposta-esito.md#cause).
+
+- **(a) confermata, più larga dell'ipotesi:** `advance()` scarta ogni evento audio scavalcato da un tocco; l'esito sta a `total − 700` ms, dopo l'ultima fermata intermedia (`tail.at`), quindi qualsiasi tocco nella coda lo scarta e chiude la sequenza. Tocchi fino alla fine: 0 suoni d'esito; un tocco a 8 563 ms (esito previsto a 9 250): 0.
+- **(b) confermata:** lasciando scorrere l'esito suona a 8 448 ms dall'arrivo della vista (9 641 in un'altra partita), 2,9 s dopo l'ultimo impatto; nel round finale l'impatto tace per scelta.
+- **(c) ridimensionamento confermato come meccanismo, `blur` smentito:** 60 px di ridimensionamento a 1,5 s chiudono la sequenza (`resize`) e l'esito non suona; un `blur` non la chiude e l'esito suona. Che la barra di Safari produca davvero quel `resize` su iPhone non è verificabile da Edge.
+- **(d) confermata:** il pannello d'esito compare subito, con la sequenza appena partita; «Nuova partita» a 1,5 s smonta il tavolo e l'esito non suona. È il motivo per cui il giro ufficiale di C4-7 (4 partite fino all'esito) non ha mai suonato l'esito: `Verify` lascia il tavolo appena vede il pannello.
+
+Il computer ha vinto tutte e sei le partite: la vittoria non è stata provata, il percorso è lo stesso. Proposte (suoni distinti con pareggio come sconfitta, due strade per la fonte, momento con due opzioni, Web Audio) nella [proposta](../design/client-c4/audio/proposta-esito.md).
+
+### Verifiche della Fase A
+
+Nessuna verifica di prodotto: il codice non è cambiato. `dist` ricostruito da `ffb9c2d` per la sonda; porte 8080 e 4320 libere e nessun Java/Maven esterno prima del lancio, liberate alla fine. `python scripts/check-rules.py`: PASS. `./scripts/build.ps1 -Task Test -Offline`: **571 server, 0 errori, 7 saltati; client-debug 36/36** (cifre del server cresciute con i commit del Set Base dopo C4-7). `TestServerContext` non eseguito. Non verificati iPhone, Safari, interruttore silenzioso, latenza percepita e vittoria.
