@@ -1,0 +1,5112 @@
+{
+  "intestazione" : {
+    "banco" : "sb-10a/1",
+    "bozza" : "server/derivata dalla bozza bozza.json, contesti del listino, ancora 7 HIT",
+    "sha256" : "b9b21a32246d3f71b83c264e533515efb5f07c7776ce986e41f6cdb3e1a06673",
+    "ancora" : 7,
+    "misure" : "costo+tipo+salute+tettostarter",
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse"
+    ],
+    "partiteBisezione" : 400,
+    "partiteGriglia" : 2000,
+    "partiteCurve" : 2000,
+    "semeBisezione" : 8000000,
+    "semeGriglia" : 8500000,
+    "semeCurve" : 8200000,
+    "nota" : "SB-11b fase A: listino con l'àncora a 7 HIT sui contesti degli starter nuovi (bozza set-base/bozza.json, SHA-256 7d3fe0cd…2b42b8c); tetto sugli starter veri"
+  },
+  "bisezioni" : [
+    {
+      "id" : "costo-V10-spazienzio",
+      "gruppo" : "costo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: costo 10 V, priorità 1, x HIT",
+      "sha256Bozza" : "d312b66fc08467a0557b56b8bd3694ec3451a4f66d154a252104e56a186b5894",
+      "tuttiGliAbbinamenti" : false,
+      "risorsa" : "V",
+      "costo" : 10,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 18.4319,
+        "basso" : 18.2891,
+        "alto" : 18.5747,
+        "pendenza" : 0.0437,
+        "zPendenza" : 39.3503,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 15.321,
+          "basso" : 14.881,
+          "alto" : 15.761,
+          "pendenza" : 0.032,
+          "zPendenza" : 17.3929,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 21.681,
+          "basso" : 21.3488,
+          "alto" : 22.0131,
+          "pendenza" : 0.0505,
+          "zPendenza" : 27.4034,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 17.4497,
+          "basso" : 17.2305,
+          "alto" : 17.6688,
+          "pendenza" : 0.0499,
+          "zPendenza" : 25.8496,
+          "piatta" : false
+        }
+      },
+      "lettura" : "1,14 [1,13–1,16] danni per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 238,
+          "sconfitte" : 791,
+          "patte" : 171,
+          "partite" : 1200,
+          "quota" : 0.2313,
+          "ic" : [
+            0.2066,
+            0.258
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 15629,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              64,
+              254
+            ],
+            "risorse" : [
+              100,
+              250
+            ]
+          }
+        },
+        {
+          "x" : 57,
+          "vittorie" : 1147,
+          "sconfitte" : 24,
+          "patte" : 29,
+          "partite" : 1200,
+          "quota" : 0.9795,
+          "ic" : [
+            0.9697,
+            0.9862
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 1865,
+          "giocateTotali" : 7017,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              382,
+              10
+            ],
+            "prudente" : [
+              383,
+              5
+            ],
+            "risorse" : [
+              382,
+              9
+            ]
+          }
+        },
+        {
+          "x" : 28,
+          "vittorie" : 914,
+          "sconfitte" : 174,
+          "patte" : 112,
+          "partite" : 1200,
+          "quota" : 0.8401,
+          "ic" : [
+            0.8171,
+            0.8607
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2421,
+          "giocateTotali" : 11876,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              317,
+              62
+            ],
+            "prudente" : [
+              291,
+              59
+            ],
+            "risorse" : [
+              306,
+              53
+            ]
+          }
+        },
+        {
+          "x" : 14,
+          "vittorie" : 316,
+          "sconfitte" : 710,
+          "patte" : 174,
+          "partite" : 1200,
+          "quota" : 0.308,
+          "ic" : [
+            0.2805,
+            0.3369
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2242,
+          "giocateTotali" : 14909,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              159,
+              204
+            ],
+            "prudente" : [
+              47,
+              273
+            ],
+            "risorse" : [
+              110,
+              233
+            ]
+          }
+        },
+        {
+          "x" : 2E+1,
+          "vittorie" : 581,
+          "sconfitte" : 438,
+          "patte" : 181,
+          "partite" : 1200,
+          "quota" : 0.5702,
+          "ic" : [
+            0.5396,
+            0.6002
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2447,
+          "giocateTotali" : 13803,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              232,
+              132
+            ],
+            "prudente" : [
+              145,
+              175
+            ],
+            "risorse" : [
+              204,
+              131
+            ]
+          }
+        },
+        {
+          "x" : 16,
+          "vittorie" : 379,
+          "sconfitte" : 634,
+          "patte" : 187,
+          "partite" : 1200,
+          "quota" : 0.3741,
+          "ic" : [
+            0.3449,
+            0.4044
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2377,
+          "giocateTotali" : 14563,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              188,
+              170
+            ],
+            "prudente" : [
+              61,
+              255
+            ],
+            "risorse" : [
+              130,
+              209
+            ]
+          }
+        },
+        {
+          "x" : 18,
+          "vittorie" : 495,
+          "sconfitte" : 532,
+          "patte" : 173,
+          "partite" : 1200,
+          "quota" : 0.482,
+          "ic" : [
+            0.4516,
+            0.5126
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2448,
+          "giocateTotali" : 14127,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              214,
+              155
+            ],
+            "prudente" : [
+              114,
+              214
+            ],
+            "risorse" : [
+              167,
+              163
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 14,
+          "vittorie" : 1582,
+          "sconfitte" : 3471,
+          "patte" : 947,
+          "partite" : 6000,
+          "quota" : 0.3131,
+          "ic" : [
+            0.3004,
+            0.326
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 11262,
+          "giocateTotali" : 74766,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              829,
+              965
+            ],
+            "prudente" : [
+              218,
+              1369
+            ],
+            "risorse" : [
+              535,
+              1137
+            ]
+          }
+        },
+        {
+          "x" : 16,
+          "vittorie" : 1920,
+          "sconfitte" : 3090,
+          "patte" : 990,
+          "partite" : 6000,
+          "quota" : 0.3832,
+          "ic" : [
+            0.3699,
+            0.3968
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 11951,
+          "giocateTotali" : 73187,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              915,
+              858
+            ],
+            "prudente" : [
+              287,
+              1280
+            ],
+            "risorse" : [
+              718,
+              952
+            ]
+          }
+        },
+        {
+          "x" : 18,
+          "vittorie" : 2397,
+          "sconfitte" : 2592,
+          "patte" : 1011,
+          "partite" : 6000,
+          "quota" : 0.4805,
+          "ic" : [
+            0.4666,
+            0.4943
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12315,
+          "giocateTotali" : 71099,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1040,
+              736
+            ],
+            "prudente" : [
+              477,
+              1095
+            ],
+            "risorse" : [
+              880,
+              761
+            ]
+          }
+        },
+        {
+          "x" : 2E+1,
+          "vittorie" : 2873,
+          "sconfitte" : 2142,
+          "patte" : 985,
+          "partite" : 6000,
+          "quota" : 0.5729,
+          "ic" : [
+            0.5591,
+            0.5865
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12290,
+          "giocateTotali" : 69295,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1164,
+              629
+            ],
+            "prudente" : [
+              666,
+              913
+            ],
+            "risorse" : [
+              1043,
+              600
+            ]
+          }
+        },
+        {
+          "x" : 22,
+          "vittorie" : 3321,
+          "sconfitte" : 1743,
+          "patte" : 936,
+          "partite" : 6000,
+          "quota" : 0.6558,
+          "ic" : [
+            0.6426,
+            0.6688
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12141,
+          "giocateTotali" : 67348,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1287,
+              512
+            ],
+            "prudente" : [
+              830,
+              755
+            ],
+            "risorse" : [
+              1204,
+              476
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    },
+    {
+      "id" : "costo-V20-spazienzio",
+      "gruppo" : "costo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: costo 20 V, priorità 1, x HIT",
+      "sha256Bozza" : "2862c95de86aacd2272cb63e12b02f9e318f451875157be35b2c17afee31f04b",
+      "tuttiGliAbbinamenti" : true,
+      "risorsa" : "V",
+      "costo" : 20,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 38.9462,
+        "basso" : 38.8016,
+        "alto" : 39.0909,
+        "pendenza" : 0.0241,
+        "zPendenza" : 57.6364,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 38.123,
+          "basso" : 37.7091,
+          "alto" : 38.5369,
+          "pendenza" : 0.0257,
+          "zPendenza" : 20.5757,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 43.9704,
+          "basso" : 43.3843,
+          "alto" : 44.5565,
+          "pendenza" : 0.0271,
+          "zPendenza" : 21.7831,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 34.4413,
+          "basso" : 33.8503,
+          "alto" : 35.0322,
+          "pendenza" : 0.0258,
+          "zPendenza" : 20.8341,
+          "piatta" : false
+        }
+      },
+      "lettura" : "1,60 [1,59–1,60] danni per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 872,
+          "sconfitte" : 2245,
+          "patte" : 483,
+          "partite" : 3600,
+          "quota" : 0.2798,
+          "ic" : [
+            0.2643,
+            0.2958
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 46666,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              62,
+              253
+            ],
+            "risorse" : [
+              104,
+              242
+            ]
+          }
+        },
+        {
+          "x" : 107,
+          "vittorie" : 3049,
+          "sconfitte" : 449,
+          "patte" : 102,
+          "partite" : 3600,
+          "quota" : 0.8716,
+          "ic" : [
+            0.8601,
+            0.8823
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3204,
+          "giocateTotali" : 15875,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              333,
+              58
+            ],
+            "prudente" : [
+              322,
+              62
+            ],
+            "risorse" : [
+              354,
+              38
+            ]
+          }
+        },
+        {
+          "x" : 51,
+          "vittorie" : 2306,
+          "sconfitte" : 969,
+          "patte" : 325,
+          "partite" : 3600,
+          "quota" : 0.7041,
+          "ic" : [
+            0.6883,
+            0.7195
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4677,
+          "giocateTotali" : 35186,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              272,
+              100
+            ],
+            "prudente" : [
+              201,
+              139
+            ],
+            "risorse" : [
+              299,
+              70
+            ]
+          }
+        },
+        {
+          "x" : 24,
+          "vittorie" : 826,
+          "sconfitte" : 2407,
+          "patte" : 367,
+          "partite" : 3600,
+          "quota" : 0.2555,
+          "ic" : [
+            0.2408,
+            0.2708
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2671,
+          "giocateTotali" : 44763,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              88,
+              278
+            ],
+            "prudente" : [
+              35,
+              322
+            ],
+            "risorse" : [
+              107,
+              229
+            ]
+          }
+        },
+        {
+          "x" : 36,
+          "vittorie" : 1404,
+          "sconfitte" : 1791,
+          "patte" : 405,
+          "partite" : 3600,
+          "quota" : 0.4394,
+          "ic" : [
+            0.4223,
+            0.4567
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3779,
+          "giocateTotali" : 42246,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              161,
+              206
+            ],
+            "prudente" : [
+              100,
+              234
+            ],
+            "risorse" : [
+              191,
+              149
+            ]
+          }
+        },
+        {
+          "x" : 42,
+          "vittorie" : 1938,
+          "sconfitte" : 1283,
+          "patte" : 379,
+          "partite" : 3600,
+          "quota" : 0.6017,
+          "ic" : [
+            0.5847,
+            0.6185
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4892,
+          "giocateTotali" : 39552,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              227,
+              139
+            ],
+            "prudente" : [
+              159,
+              183
+            ],
+            "risorse" : [
+              249,
+              103
+            ]
+          }
+        },
+        {
+          "x" : 39,
+          "vittorie" : 1610,
+          "sconfitte" : 1563,
+          "patte" : 427,
+          "partite" : 3600,
+          "quota" : 0.5074,
+          "ic" : [
+            0.49,
+            0.5248
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3869,
+          "giocateTotali" : 41335,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              179,
+              179
+            ],
+            "prudente" : [
+              136,
+              193
+            ],
+            "risorse" : [
+              218,
+              132
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 33,
+          "vittorie" : 5713,
+          "sconfitte" : 10054,
+          "patte" : 2233,
+          "partite" : 18000,
+          "quota" : 0.3623,
+          "ic" : [
+            0.3549,
+            0.3699
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18344,
+          "giocateTotali" : 216883,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              651,
+              1107
+            ],
+            "prudente" : [
+              328,
+              1321
+            ],
+            "risorse" : [
+              802,
+              878
+            ]
+          }
+        },
+        {
+          "x" : 36,
+          "vittorie" : 6671,
+          "sconfitte" : 9073,
+          "patte" : 2256,
+          "partite" : 18000,
+          "quota" : 0.4237,
+          "ic" : [
+            0.416,
+            0.4315
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18454,
+          "giocateTotali" : 212813,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              788,
+              973
+            ],
+            "prudente" : [
+              445,
+              1193
+            ],
+            "risorse" : [
+              893,
+              782
+            ]
+          }
+        },
+        {
+          "x" : 39,
+          "vittorie" : 7699,
+          "sconfitte" : 8028,
+          "patte" : 2273,
+          "partite" : 18000,
+          "quota" : 0.4895,
+          "ic" : [
+            0.4817,
+            0.4974
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18878,
+          "giocateTotali" : 208061,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              894,
+              875
+            ],
+            "prudente" : [
+              623,
+              1010
+            ],
+            "risorse" : [
+              1005,
+              695
+            ]
+          }
+        },
+        {
+          "x" : 42,
+          "vittorie" : 9335,
+          "sconfitte" : 6468,
+          "patte" : 2197,
+          "partite" : 18000,
+          "quota" : 0.5907,
+          "ic" : [
+            0.583,
+            0.5984
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 24126,
+          "giocateTotali" : 199825,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              1099,
+              673
+            ],
+            "prudente" : [
+              775,
+              887
+            ],
+            "risorse" : [
+              1214,
+              494
+            ]
+          }
+        },
+        {
+          "x" : 45,
+          "vittorie" : 10319,
+          "sconfitte" : 5799,
+          "patte" : 1882,
+          "partite" : 18000,
+          "quota" : 0.6402,
+          "ic" : [
+            0.6328,
+            0.6476
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 23647,
+          "giocateTotali" : 191788,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              1207,
+              596
+            ],
+            "prudente" : [
+              861,
+              832
+            ],
+            "risorse" : [
+              1360,
+              395
+            ]
+          }
+        }
+      ],
+      "partite" : 115200
+    },
+    {
+      "id" : "costo-V30-spazienzio",
+      "gruppo" : "costo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: costo 30 V, priorità 1, x HIT",
+      "sha256Bozza" : "5adc46dd90a92c7736dea68d60e47a0a494c7a2dd887570a6a16163623aaedaf",
+      "tuttiGliAbbinamenti" : false,
+      "risorsa" : "V",
+      "costo" : 30,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 75.7345,
+        "basso" : 75.0341,
+        "alto" : 76.435,
+        "pendenza" : 0.0086,
+        "zPendenza" : 12.0315,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 72.959,
+          "basso" : 72.2918,
+          "alto" : 73.6262,
+          "pendenza" : 0.0169,
+          "zPendenza" : 13.8791,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 107.721,
+          "basso" : 94.6157,
+          "alto" : 120.8264,
+          "pendenza" : 0.0057,
+          "zPendenza" : 4.9283,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 31.1476,
+          "basso" : -3.899,
+          "alto" : 66.1942,
+          "pendenza" : 0.003,
+          "zPendenza" : 2.4652,
+          "piatta" : false
+        }
+      },
+      "lettura" : "2,29 [2,27–2,31] danni per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 244,
+          "sconfitte" : 770,
+          "patte" : 186,
+          "partite" : 1200,
+          "quota" : 0.2406,
+          "ic" : [
+            0.2153,
+            0.2679
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 15619,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              61,
+              247
+            ],
+            "risorse" : [
+              109,
+              236
+            ]
+          }
+        },
+        {
+          "x" : 157,
+          "vittorie" : 659,
+          "sconfitte" : 469,
+          "patte" : 72,
+          "partite" : 1200,
+          "quota" : 0.5842,
+          "ic" : [
+            0.5552,
+            0.6126
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 635,
+          "giocateTotali" : 10314,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              272,
+              120
+            ],
+            "prudente" : [
+              139,
+              221
+            ],
+            "risorse" : [
+              248,
+              128
+            ]
+          }
+        },
+        {
+          "x" : 78,
+          "vittorie" : 592,
+          "sconfitte" : 513,
+          "patte" : 95,
+          "partite" : 1200,
+          "quota" : 0.5357,
+          "ic" : [
+            0.5063,
+            0.565
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 638,
+          "giocateTotali" : 12912,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              228,
+              149
+            ],
+            "prudente" : [
+              126,
+              230
+            ],
+            "risorse" : [
+              238,
+              134
+            ]
+          }
+        },
+        {
+          "x" : 39,
+          "vittorie" : 224,
+          "sconfitte" : 830,
+          "patte" : 146,
+          "partite" : 1200,
+          "quota" : 0.2125,
+          "ic" : [
+            0.1889,
+            0.2382
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 379,
+          "giocateTotali" : 15174,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              65,
+              295
+            ],
+            "prudente" : [
+              34,
+              309
+            ],
+            "risorse" : [
+              125,
+              226
+            ]
+          }
+        },
+        {
+          "x" : 57,
+          "vittorie" : 373,
+          "sconfitte" : 689,
+          "patte" : 138,
+          "partite" : 1200,
+          "quota" : 0.3512,
+          "ic" : [
+            0.3231,
+            0.3804
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 601,
+          "giocateTotali" : 14525,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              104,
+              258
+            ],
+            "prudente" : [
+              72,
+              264
+            ],
+            "risorse" : [
+              197,
+              167
+            ]
+          }
+        },
+        {
+          "x" : 66,
+          "vittorie" : 464,
+          "sconfitte" : 619,
+          "patte" : 117,
+          "partite" : 1200,
+          "quota" : 0.4284,
+          "ic" : [
+            0.3993,
+            0.4581
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 610,
+          "giocateTotali" : 13948,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              146,
+              221
+            ],
+            "prudente" : [
+              101,
+              248
+            ],
+            "risorse" : [
+              217,
+              150
+            ]
+          }
+        },
+        {
+          "x" : 72,
+          "vittorie" : 520,
+          "sconfitte" : 566,
+          "patte" : 114,
+          "partite" : 1200,
+          "quota" : 0.4788,
+          "ic" : [
+            0.4492,
+            0.5086
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 610,
+          "giocateTotali" : 13530,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              175,
+              192
+            ],
+            "prudente" : [
+              120,
+              229
+            ],
+            "risorse" : [
+              225,
+              145
+            ]
+          }
+        },
+        {
+          "x" : 75,
+          "vittorie" : 560,
+          "sconfitte" : 533,
+          "patte" : 107,
+          "partite" : 1200,
+          "quota" : 0.5124,
+          "ic" : [
+            0.4827,
+            0.5419
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 629,
+          "giocateTotali" : 13206,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              207,
+              164
+            ],
+            "prudente" : [
+              123,
+              231
+            ],
+            "risorse" : [
+              230,
+              138
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 69,
+          "vittorie" : 2362,
+          "sconfitte" : 2993,
+          "patte" : 645,
+          "partite" : 6000,
+          "quota" : 0.4411,
+          "ic" : [
+            0.4278,
+            0.4544
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2961,
+          "giocateTotali" : 69168,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              795,
+              1042
+            ],
+            "prudente" : [
+              483,
+              1258
+            ],
+            "risorse" : [
+              1084,
+              693
+            ]
+          }
+        },
+        {
+          "x" : 72,
+          "vittorie" : 2502,
+          "sconfitte" : 2875,
+          "patte" : 623,
+          "partite" : 6000,
+          "quota" : 0.4653,
+          "ic" : [
+            0.452,
+            0.4787
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2975,
+          "giocateTotali" : 68118,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              879,
+              970
+            ],
+            "prudente" : [
+              517,
+              1236
+            ],
+            "risorse" : [
+              1106,
+              669
+            ]
+          }
+        },
+        {
+          "x" : 75,
+          "vittorie" : 2689,
+          "sconfitte" : 2728,
+          "patte" : 583,
+          "partite" : 6000,
+          "quota" : 0.4964,
+          "ic" : [
+            0.4831,
+            0.5097
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3063,
+          "giocateTotali" : 66757,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1013,
+              859
+            ],
+            "prudente" : [
+              551,
+              1213
+            ],
+            "risorse" : [
+              1125,
+              656
+            ]
+          }
+        },
+        {
+          "x" : 78,
+          "vittorie" : 2862,
+          "sconfitte" : 2589,
+          "patte" : 549,
+          "partite" : 6000,
+          "quota" : 0.525,
+          "ic" : [
+            0.5118,
+            0.5383
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3125,
+          "giocateTotali" : 65401,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1123,
+              755
+            ],
+            "prudente" : [
+              593,
+              1187
+            ],
+            "risorse" : [
+              1146,
+              647
+            ]
+          }
+        },
+        {
+          "x" : 81,
+          "vittorie" : 2962,
+          "sconfitte" : 2518,
+          "patte" : 520,
+          "partite" : 6000,
+          "quota" : 0.5405,
+          "ic" : [
+            0.5273,
+            0.5537
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3102,
+          "giocateTotali" : 64165,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1181,
+              708
+            ],
+            "prudente" : [
+              616,
+              1173
+            ],
+            "risorse" : [
+              1165,
+              637
+            ]
+          }
+        }
+      ],
+      "partite" : 39600
+    },
+    {
+      "id" : "costo-A10-mara",
+      "gruppo" : "costo",
+      "contesto" : "ctx-mara",
+      "sonda" : "Sonda: costo 10 A, priorità 1, x HIT",
+      "sha256Bozza" : "b505bd361195de0ee693fe8505796b9389601ce68e8e7bdf0e69444cf129a1e3",
+      "tuttiGliAbbinamenti" : false,
+      "risorsa" : "A",
+      "costo" : 10,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 16.7346,
+        "basso" : 16.6406,
+        "alto" : 16.8286,
+        "pendenza" : 0.0692,
+        "zPendenza" : 61.2073,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 16.609,
+          "basso" : 16.4676,
+          "alto" : 16.7505,
+          "pendenza" : 0.078,
+          "zPendenza" : 40.4411,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 19.1337,
+          "basso" : 18.8134,
+          "alto" : 19.4539,
+          "pendenza" : 0.0508,
+          "zPendenza" : 26.1001,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 15.4862,
+          "basso" : 15.3405,
+          "alto" : 15.6319,
+          "pendenza" : 0.0748,
+          "zPendenza" : 39.1575,
+          "piatta" : false
+        }
+      },
+      "lettura" : "0,97 [0,96–0,98] danni per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 72,
+          "sconfitte" : 925,
+          "patte" : 203,
+          "partite" : 1200,
+          "quota" : 0.0722,
+          "ic" : [
+            0.0577,
+            0.09
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 18967,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              26,
+              314
+            ],
+            "prudente" : [
+              16,
+              302
+            ],
+            "risorse" : [
+              30,
+              309
+            ]
+          }
+        },
+        {
+          "x" : 57,
+          "vittorie" : 1124,
+          "sconfitte" : 57,
+          "patte" : 19,
+          "partite" : 1200,
+          "quota" : 0.9517,
+          "ic" : [
+            0.938,
+            0.9626
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 1804,
+          "giocateTotali" : 6773,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              382,
+              16
+            ],
+            "prudente" : [
+              354,
+              32
+            ],
+            "risorse" : [
+              388,
+              9
+            ]
+          }
+        },
+        {
+          "x" : 28,
+          "vittorie" : 959,
+          "sconfitte" : 134,
+          "patte" : 107,
+          "partite" : 1200,
+          "quota" : 0.8774,
+          "ic" : [
+            0.8566,
+            0.8955
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2304,
+          "giocateTotali" : 13470,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              343,
+              38
+            ],
+            "prudente" : [
+              261,
+              74
+            ],
+            "risorse" : [
+              355,
+              22
+            ]
+          }
+        },
+        {
+          "x" : 14,
+          "vittorie" : 267,
+          "sconfitte" : 654,
+          "patte" : 279,
+          "partite" : 1200,
+          "quota" : 0.2899,
+          "ic" : [
+            0.2615,
+            0.32
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2404,
+          "giocateTotali" : 19086,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              82,
+              224
+            ],
+            "prudente" : [
+              61,
+              238
+            ],
+            "risorse" : [
+              124,
+              192
+            ]
+          }
+        },
+        {
+          "x" : 2E+1,
+          "vittorie" : 674,
+          "sconfitte" : 315,
+          "patte" : 211,
+          "partite" : 1200,
+          "quota" : 0.6815,
+          "ic" : [
+            0.6518,
+            0.7098
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2418,
+          "giocateTotali" : 17225,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              245,
+              96
+            ],
+            "prudente" : [
+              151,
+              146
+            ],
+            "risorse" : [
+              278,
+              73
+            ]
+          }
+        },
+        {
+          "x" : 16,
+          "vittorie" : 401,
+          "sconfitte" : 517,
+          "patte" : 282,
+          "partite" : 1200,
+          "quota" : 0.4368,
+          "ic" : [
+            0.4051,
+            0.4691
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2417,
+          "giocateTotali" : 18682,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              137,
+              175
+            ],
+            "prudente" : [
+              80,
+              192
+            ],
+            "risorse" : [
+              184,
+              150
+            ]
+          }
+        },
+        {
+          "x" : 18,
+          "vittorie" : 539,
+          "sconfitte" : 398,
+          "patte" : 263,
+          "partite" : 1200,
+          "quota" : 0.5752,
+          "ic" : [
+            0.5433,
+            0.6065
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2423,
+          "giocateTotali" : 18011,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              198,
+              124
+            ],
+            "prudente" : [
+              114,
+              166
+            ],
+            "risorse" : [
+              227,
+              108
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 12,
+          "vittorie" : 794,
+          "sconfitte" : 3993,
+          "patte" : 1213,
+          "partite" : 6000,
+          "quota" : 0.1659,
+          "ic" : [
+            0.1556,
+            0.1767
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 10939,
+          "giocateTotali" : 96383,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              227,
+              1421
+            ],
+            "prudente" : [
+              222,
+              1294
+            ],
+            "risorse" : [
+              345,
+              1278
+            ]
+          }
+        },
+        {
+          "x" : 14,
+          "vittorie" : 1412,
+          "sconfitte" : 3230,
+          "patte" : 1358,
+          "partite" : 6000,
+          "quota" : 0.3042,
+          "ic" : [
+            0.2911,
+            0.3176
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12248,
+          "giocateTotali" : 95325,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              439,
+              1117
+            ],
+            "prudente" : [
+              335,
+              1131
+            ],
+            "risorse" : [
+              638,
+              982
+            ]
+          }
+        },
+        {
+          "x" : 16,
+          "vittorie" : 2153,
+          "sconfitte" : 2500,
+          "patte" : 1347,
+          "partite" : 6000,
+          "quota" : 0.4627,
+          "ic" : [
+            0.4484,
+            0.4771
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12379,
+          "giocateTotali" : 93214,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              731,
+              836
+            ],
+            "prudente" : [
+              483,
+              957
+            ],
+            "risorse" : [
+              939,
+              707
+            ]
+          }
+        },
+        {
+          "x" : 18,
+          "vittorie" : 2898,
+          "sconfitte" : 1879,
+          "patte" : 1223,
+          "partite" : 6000,
+          "quota" : 0.6067,
+          "ic" : [
+            0.5927,
+            0.6204
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12402,
+          "giocateTotali" : 89634,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1030,
+              594
+            ],
+            "prudente" : [
+              641,
+              793
+            ],
+            "risorse" : [
+              1227,
+              492
+            ]
+          }
+        },
+        {
+          "x" : 2E+1,
+          "vittorie" : 3520,
+          "sconfitte" : 1456,
+          "patte" : 1024,
+          "partite" : 6000,
+          "quota" : 0.7074,
+          "ic" : [
+            0.6946,
+            0.7199
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12382,
+          "giocateTotali" : 85158,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1285,
+              444
+            ],
+            "prudente" : [
+              791,
+              658
+            ],
+            "risorse" : [
+              1444,
+              354
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    },
+    {
+      "id" : "costo-A20-mara",
+      "gruppo" : "costo",
+      "contesto" : "ctx-mara",
+      "sonda" : "Sonda: costo 20 A, priorità 1, x HIT",
+      "sha256Bozza" : "fb37240a90d04a7da89595ed9dcc6759f7ae6a74e0070272cf3663f6337834a1",
+      "tuttiGliAbbinamenti" : true,
+      "risorsa" : "A",
+      "costo" : 20,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 30.0224,
+        "basso" : 29.92,
+        "alto" : 30.1248,
+        "pendenza" : 0.0355,
+        "zPendenza" : 81.66,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 29.5432,
+          "basso" : 29.2992,
+          "alto" : 29.7871,
+          "pendenza" : 0.0447,
+          "zPendenza" : 34.6692,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 32.2376,
+          "basso" : 31.8247,
+          "alto" : 32.6505,
+          "pendenza" : 0.0309,
+          "zPendenza" : 22.697,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 29.2152,
+          "basso" : 28.9188,
+          "alto" : 29.5117,
+          "pendenza" : 0.0366,
+          "zPendenza" : 28.7691,
+          "piatta" : false
+        }
+      },
+      "lettura" : "1,15 [1,15–1,16] danni per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 390,
+          "sconfitte" : 2610,
+          "patte" : 600,
+          "partite" : 3600,
+          "quota" : 0.13,
+          "ic" : [
+            0.1184,
+            0.1425
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 56697,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              26,
+              314
+            ],
+            "prudente" : [
+              18,
+              291
+            ],
+            "risorse" : [
+              34,
+              306
+            ]
+          }
+        },
+        {
+          "x" : 107,
+          "vittorie" : 3097,
+          "sconfitte" : 417,
+          "patte" : 86,
+          "partite" : 3600,
+          "quota" : 0.8813,
+          "ic" : [
+            0.8702,
+            0.8916
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3195,
+          "giocateTotali" : 15641,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              358,
+              37
+            ],
+            "prudente" : [
+              320,
+              59
+            ],
+            "risorse" : [
+              351,
+              39
+            ]
+          }
+        },
+        {
+          "x" : 51,
+          "vittorie" : 2873,
+          "sconfitte" : 506,
+          "patte" : 221,
+          "partite" : 3600,
+          "quota" : 0.8503,
+          "ic" : [
+            0.8378,
+            0.8619
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4328,
+          "giocateTotali" : 35365,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              349,
+              43
+            ],
+            "prudente" : [
+              286,
+              70
+            ],
+            "risorse" : [
+              324,
+              49
+            ]
+          }
+        },
+        {
+          "x" : 24,
+          "vittorie" : 709,
+          "sconfitte" : 2153,
+          "patte" : 738,
+          "partite" : 3600,
+          "quota" : 0.2477,
+          "ic" : [
+            0.2323,
+            0.2639
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4287,
+          "giocateTotali" : 57772,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              61,
+              266
+            ],
+            "prudente" : [
+              74,
+              223
+            ],
+            "risorse" : [
+              76,
+              239
+            ]
+          }
+        },
+        {
+          "x" : 36,
+          "vittorie" : 2103,
+          "sconfitte" : 928,
+          "patte" : 569,
+          "partite" : 3600,
+          "quota" : 0.6938,
+          "ic" : [
+            0.6772,
+            0.71
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4362,
+          "giocateTotali" : 49634,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              265,
+              89
+            ],
+            "prudente" : [
+              197,
+              108
+            ],
+            "risorse" : [
+              249,
+              102
+            ]
+          }
+        },
+        {
+          "x" : 3E+1,
+          "vittorie" : 1417,
+          "sconfitte" : 1432,
+          "patte" : 751,
+          "partite" : 3600,
+          "quota" : 0.4974,
+          "ic" : [
+            0.479,
+            0.5157
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4323,
+          "giocateTotali" : 55491,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              158,
+              153
+            ],
+            "prudente" : [
+              132,
+              162
+            ],
+            "risorse" : [
+              165,
+              155
+            ]
+          }
+        },
+        {
+          "x" : 33,
+          "vittorie" : 1762,
+          "sconfitte" : 1160,
+          "patte" : 678,
+          "partite" : 3600,
+          "quota" : 0.603,
+          "ic" : [
+            0.5851,
+            0.6206
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4330,
+          "giocateTotali" : 53065,
+          "partiteSonda" : 3600,
+          "perStile" : {
+            "aggressivo" : [
+              205,
+              119
+            ],
+            "prudente" : [
+              168,
+              125
+            ],
+            "risorse" : [
+              208,
+              129
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 24,
+          "vittorie" : 3887,
+          "sconfitte" : 10289,
+          "patte" : 3824,
+          "partite" : 18000,
+          "quota" : 0.2742,
+          "ic" : [
+            0.2669,
+            0.2816
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22148,
+          "giocateTotali" : 288382,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              363,
+              1213
+            ],
+            "prudente" : [
+              349,
+              1097
+            ],
+            "risorse" : [
+              486,
+              1162
+            ]
+          }
+        },
+        {
+          "x" : 27,
+          "vittorie" : 5527,
+          "sconfitte" : 8521,
+          "patte" : 3952,
+          "partite" : 18000,
+          "quota" : 0.3934,
+          "ic" : [
+            0.3854,
+            0.4015
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22227,
+          "giocateTotali" : 283821,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              602,
+              950
+            ],
+            "prudente" : [
+              479,
+              951
+            ],
+            "risorse" : [
+              698,
+              957
+            ]
+          }
+        },
+        {
+          "x" : 3E+1,
+          "vittorie" : 7380,
+          "sconfitte" : 6974,
+          "patte" : 3646,
+          "partite" : 18000,
+          "quota" : 0.5141,
+          "ic" : [
+            0.506,
+            0.5223
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22299,
+          "giocateTotali" : 275687,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              896,
+              732
+            ],
+            "prudente" : [
+              635,
+              811
+            ],
+            "risorse" : [
+              914,
+              773
+            ]
+          }
+        },
+        {
+          "x" : 33,
+          "vittorie" : 9248,
+          "sconfitte" : 5630,
+          "patte" : 3122,
+          "partite" : 18000,
+          "quota" : 0.6216,
+          "ic" : [
+            0.6138,
+            0.6293
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22326,
+          "giocateTotali" : 263403,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              1150,
+              556
+            ],
+            "prudente" : [
+              780,
+              683
+            ],
+            "risorse" : [
+              1128,
+              583
+            ]
+          }
+        },
+        {
+          "x" : 36,
+          "vittorie" : 10711,
+          "sconfitte" : 4737,
+          "patte" : 2552,
+          "partite" : 18000,
+          "quota" : 0.6934,
+          "ic" : [
+            0.686,
+            0.7006
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22403,
+          "giocateTotali" : 246945,
+          "partiteSonda" : 18000,
+          "perStile" : {
+            "aggressivo" : [
+              1356,
+              427
+            ],
+            "prudente" : [
+              917,
+              596
+            ],
+            "risorse" : [
+              1297,
+              488
+            ]
+          }
+        }
+      ],
+      "partite" : 115200
+    },
+    {
+      "id" : "costo-A10-spazienzio",
+      "gruppo" : "costo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: costo 10 A, priorità 1, x HIT",
+      "sha256Bozza" : "c51be973f195e1f35b702787b057a9b995e12dabb7da74f68b106737a6173661",
+      "tuttiGliAbbinamenti" : false,
+      "risorsa" : "A",
+      "costo" : 10,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 8.8163,
+        "basso" : 8.6495,
+        "alto" : 8.9831,
+        "pendenza" : 0.0387,
+        "zPendenza" : 34.6483,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 7.8884,
+          "basso" : 7.6207,
+          "alto" : 8.156,
+          "pendenza" : 0.0387,
+          "zPendenza" : 20.7666,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 13.4833,
+          "basso" : 12.659,
+          "alto" : 14.3076,
+          "pendenza" : 0.0283,
+          "zPendenza" : 14.6734,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 7.1328,
+          "basso" : 6.9014,
+          "alto" : 7.3641,
+          "pendenza" : 0.0481,
+          "zPendenza" : 25.0464,
+          "piatta" : false
+        }
+      },
+      "lettura" : "0,18 [0,16–0,20] danni per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 237,
+          "sconfitte" : 790,
+          "patte" : 173,
+          "partite" : 1200,
+          "quota" : 0.2308,
+          "ic" : [
+            0.206,
+            0.2575
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 15643,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              64,
+              254
+            ],
+            "risorse" : [
+              99,
+              249
+            ]
+          }
+        },
+        {
+          "x" : 57,
+          "vittorie" : 1177,
+          "sconfitte" : 13,
+          "patte" : 10,
+          "partite" : 1200,
+          "quota" : 0.9891,
+          "ic" : [
+            0.9814,
+            0.9936
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 1778,
+          "giocateTotali" : 5281,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              394,
+              2
+            ],
+            "prudente" : [
+              394,
+              4
+            ],
+            "risorse" : [
+              389,
+              7
+            ]
+          }
+        },
+        {
+          "x" : 28,
+          "vittorie" : 1072,
+          "sconfitte" : 65,
+          "patte" : 63,
+          "partite" : 1200,
+          "quota" : 0.9428,
+          "ic" : [
+            0.9278,
+            0.9549
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2193,
+          "giocateTotali" : 9561,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              365,
+              18
+            ],
+            "prudente" : [
+              345,
+              30
+            ],
+            "risorse" : [
+              362,
+              17
+            ]
+          }
+        },
+        {
+          "x" : 14,
+          "vittorie" : 714,
+          "sconfitte" : 313,
+          "patte" : 173,
+          "partite" : 1200,
+          "quota" : 0.6952,
+          "ic" : [
+            0.6664,
+            0.7226
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2383,
+          "giocateTotali" : 13698,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              256,
+              109
+            ],
+            "prudente" : [
+              187,
+              124
+            ],
+            "risorse" : [
+              271,
+              80
+            ]
+          }
+        },
+        {
+          "x" : 6,
+          "vittorie" : 399,
+          "sconfitte" : 603,
+          "patte" : 198,
+          "partite" : 1200,
+          "quota" : 0.3982,
+          "ic" : [
+            0.3683,
+            0.4288
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2468,
+          "giocateTotali" : 15220,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              152,
+              204
+            ],
+            "prudente" : [
+              88,
+              220
+            ],
+            "risorse" : [
+              159,
+              179
+            ]
+          }
+        },
+        {
+          "x" : 1E+1,
+          "vittorie" : 539,
+          "sconfitte" : 454,
+          "patte" : 207,
+          "partite" : 1200,
+          "quota" : 0.5428,
+          "ic" : [
+            0.5117,
+            0.5736
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2445,
+          "giocateTotali" : 14588,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              208,
+              156
+            ],
+            "prudente" : [
+              119,
+              172
+            ],
+            "risorse" : [
+              212,
+              126
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 462,
+          "sconfitte" : 524,
+          "patte" : 214,
+          "partite" : 1200,
+          "quota" : 0.4686,
+          "ic" : [
+            0.4376,
+            0.4998
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2476,
+          "giocateTotali" : 14932,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              178,
+              174
+            ],
+            "prudente" : [
+              102,
+              195
+            ],
+            "risorse" : [
+              182,
+              155
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 4,
+          "vittorie" : 1535,
+          "sconfitte" : 3483,
+          "patte" : 982,
+          "partite" : 6000,
+          "quota" : 0.3059,
+          "ic" : [
+            0.2933,
+            0.3188
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 11657,
+          "giocateTotali" : 77143,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              613,
+              1193
+            ],
+            "prudente" : [
+              355,
+              1168
+            ],
+            "risorse" : [
+              567,
+              1122
+            ]
+          }
+        },
+        {
+          "x" : 6,
+          "vittorie" : 1966,
+          "sconfitte" : 2992,
+          "patte" : 1042,
+          "partite" : 6000,
+          "quota" : 0.3965,
+          "ic" : [
+            0.383,
+            0.4102
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12624,
+          "giocateTotali" : 75864,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              763,
+              996
+            ],
+            "prudente" : [
+              435,
+              1070
+            ],
+            "risorse" : [
+              768,
+              926
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 2379,
+          "sconfitte" : 2603,
+          "patte" : 1018,
+          "partite" : 6000,
+          "quota" : 0.4775,
+          "ic" : [
+            0.4637,
+            0.4914
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12565,
+          "giocateTotali" : 74273,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              921,
+              866
+            ],
+            "prudente" : [
+              532,
+              988
+            ],
+            "risorse" : [
+              926,
+              749
+            ]
+          }
+        },
+        {
+          "x" : 1E+1,
+          "vittorie" : 2689,
+          "sconfitte" : 2261,
+          "patte" : 1050,
+          "partite" : 6000,
+          "quota" : 0.5432,
+          "ic" : [
+            0.5293,
+            0.5571
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12425,
+          "giocateTotali" : 72677,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1043,
+              757
+            ],
+            "prudente" : [
+              574,
+              918
+            ],
+            "risorse" : [
+              1072,
+              586
+            ]
+          }
+        },
+        {
+          "x" : 12,
+          "vittorie" : 3098,
+          "sconfitte" : 1906,
+          "patte" : 996,
+          "partite" : 6000,
+          "quota" : 0.6191,
+          "ic" : [
+            0.6056,
+            0.6325
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 12298,
+          "giocateTotali" : 70567,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1173,
+              621
+            ],
+            "prudente" : [
+              717,
+              816
+            ],
+            "risorse" : [
+              1208,
+              469
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    },
+    {
+      "id" : "costo-L5-spazienzio",
+      "gruppo" : "costo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: costo 5 L, priorità 1, x HIT",
+      "sha256Bozza" : "e53202bb56e7089350c14109c8a62e2f9039a744ea6e80fc97a9bc541ef745aa",
+      "tuttiGliAbbinamenti" : false,
+      "risorsa" : "L",
+      "costo" : 5,
+      "stato" : "oltre l'intervallo: anche a x = 57 la sonda vale meno del riferimento",
+      "radice" : {
+        "x" : 1339.8259,
+        "basso" : -5300.8266,
+        "alto" : 7980.4784,
+        "pendenza" : 0.0003,
+        "zPendenza" : 0.3798,
+        "piatta" : true
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 674.8701,
+          "basso" : -1667.4203,
+          "alto" : 3017.1605,
+          "pendenza" : 0.0006,
+          "zPendenza" : 0.5204,
+          "piatta" : true
+        },
+        "prudente" : {
+          "x" : 2368.4761,
+          "basso" : -32788.6143,
+          "alto" : 37525.5665,
+          "pendenza" : 0.0002,
+          "zPendenza" : 0.1291,
+          "piatta" : true
+        },
+        "risorse" : {
+          "x" : 5567.6102,
+          "basso" : -247793.6131,
+          "alto" : 258928.8334,
+          "pendenza" : 0.0001,
+          "zPendenza" : 0.0427,
+          "piatta" : true
+        }
+      },
+      "lettura" : null,
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 233,
+          "sconfitte" : 798,
+          "patte" : 169,
+          "partite" : 1200,
+          "quota" : 0.226,
+          "ic" : [
+            0.2015,
+            0.2525
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 15571,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              63,
+              254
+            ],
+            "risorse" : [
+              96,
+              257
+            ]
+          }
+        },
+        {
+          "x" : 57,
+          "vittorie" : 139,
+          "sconfitte" : 959,
+          "patte" : 102,
+          "partite" : 1200,
+          "quota" : 0.1266,
+          "ic" : [
+            0.1082,
+            0.1476
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 32,
+          "giocateTotali" : 15358,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              40,
+              350
+            ],
+            "prudente" : [
+              39,
+              312
+            ],
+            "risorse" : [
+              60,
+              297
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 49,
+          "vittorie" : 750,
+          "sconfitte" : 4702,
+          "patte" : 548,
+          "partite" : 6000,
+          "quota" : 0.1376,
+          "ic" : [
+            0.1287,
+            0.147
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 198,
+          "giocateTotali" : 76907,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              222,
+              1671
+            ],
+            "prudente" : [
+              216,
+              1520
+            ],
+            "risorse" : [
+              312,
+              1511
+            ]
+          }
+        },
+        {
+          "x" : 51,
+          "vittorie" : 752,
+          "sconfitte" : 4700,
+          "patte" : 548,
+          "partite" : 6000,
+          "quota" : 0.1379,
+          "ic" : [
+            0.129,
+            0.1473
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 198,
+          "giocateTotali" : 76895,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              223,
+              1669
+            ],
+            "prudente" : [
+              216,
+              1520
+            ],
+            "risorse" : [
+              313,
+              1511
+            ]
+          }
+        },
+        {
+          "x" : 53,
+          "vittorie" : 753,
+          "sconfitte" : 4698,
+          "patte" : 549,
+          "partite" : 6000,
+          "quota" : 0.1381,
+          "ic" : [
+            0.1292,
+            0.1476
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 198,
+          "giocateTotali" : 76882,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              223,
+              1669
+            ],
+            "prudente" : [
+              217,
+              1519
+            ],
+            "risorse" : [
+              313,
+              1510
+            ]
+          }
+        },
+        {
+          "x" : 55,
+          "vittorie" : 761,
+          "sconfitte" : 4696,
+          "patte" : 543,
+          "partite" : 6000,
+          "quota" : 0.1395,
+          "ic" : [
+            0.1305,
+            0.1489
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 198,
+          "giocateTotali" : 76857,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              230,
+              1667
+            ],
+            "prudente" : [
+              218,
+              1519
+            ],
+            "risorse" : [
+              313,
+              1510
+            ]
+          }
+        },
+        {
+          "x" : 57,
+          "vittorie" : 762,
+          "sconfitte" : 4696,
+          "patte" : 542,
+          "partite" : 6000,
+          "quota" : 0.1396,
+          "ic" : [
+            0.1307,
+            0.1491
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 198,
+          "giocateTotali" : 76841,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              231,
+              1667
+            ],
+            "prudente" : [
+              218,
+              1519
+            ],
+            "risorse" : [
+              313,
+              1510
+            ]
+          }
+        }
+      ],
+      "partite" : 32400
+    },
+    {
+      "id" : "tipo-CUT-spazienzio",
+      "gruppo" : "tipo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: gratuita, priorità 1, x CUT",
+      "sha256Bozza" : "c1647b9bc76ff081e68c00903a59aaefd53f810a33c285f85951ffe4e7bdfd01",
+      "tuttiGliAbbinamenti" : false,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 8.1945,
+        "basso" : 8.0828,
+        "alto" : 8.3062,
+        "pendenza" : 0.0562,
+        "zPendenza" : 25.041,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 7.6774,
+          "basso" : 7.4963,
+          "alto" : 7.8585,
+          "pendenza" : 0.0589,
+          "zPendenza" : 15.6928,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 8.7976,
+          "basso" : 8.5802,
+          "alto" : 9.015,
+          "pendenza" : 0.0589,
+          "zPendenza" : 14.5902,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 8.1965,
+          "basso" : 7.9836,
+          "alto" : 8.4094,
+          "pendenza" : 0.0509,
+          "zPendenza" : 13.1705,
+          "piatta" : false
+        }
+      },
+      "lettura" : "0,85 [0,84–0,87] HIT per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 242,
+          "sconfitte" : 788,
+          "patte" : 170,
+          "partite" : 1200,
+          "quota" : 0.235,
+          "ic" : [
+            0.2101,
+            0.2618
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 15624,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              69,
+              252
+            ],
+            "risorse" : [
+              99,
+              249
+            ]
+          }
+        },
+        {
+          "x" : 3E+1,
+          "vittorie" : 1129,
+          "sconfitte" : 29,
+          "patte" : 42,
+          "partite" : 1200,
+          "quota" : 0.975,
+          "ic" : [
+            0.9643,
+            0.9825
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2571,
+          "giocateTotali" : 8416,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              376,
+              9
+            ],
+            "prudente" : [
+              391,
+              2
+            ],
+            "risorse" : [
+              362,
+              18
+            ]
+          }
+        },
+        {
+          "x" : 15,
+          "vittorie" : 887,
+          "sconfitte" : 191,
+          "patte" : 122,
+          "partite" : 1200,
+          "quota" : 0.8228,
+          "ic" : [
+            0.7989,
+            0.8445
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3346,
+          "giocateTotali" : 12635,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              307,
+              67
+            ],
+            "prudente" : [
+              311,
+              48
+            ],
+            "risorse" : [
+              269,
+              76
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 428,
+          "sconfitte" : 559,
+          "patte" : 213,
+          "partite" : 1200,
+          "quota" : 0.4336,
+          "ic" : [
+            0.403,
+            0.4648
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3702,
+          "giocateTotali" : 15050,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              162,
+              183
+            ],
+            "prudente" : [
+              112,
+              189
+            ],
+            "risorse" : [
+              154,
+              187
+            ]
+          }
+        },
+        {
+          "x" : 11,
+          "vittorie" : 689,
+          "sconfitte" : 334,
+          "patte" : 177,
+          "partite" : 1200,
+          "quota" : 0.6735,
+          "ic" : [
+            0.6442,
+            0.7015
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3552,
+          "giocateTotali" : 13957,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              248,
+              110
+            ],
+            "prudente" : [
+              223,
+              96
+            ],
+            "risorse" : [
+              218,
+              128
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 544,
+          "sconfitte" : 441,
+          "patte" : 215,
+          "partite" : 1200,
+          "quota" : 0.5523,
+          "ic" : [
+            0.5211,
+            0.5831
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3630,
+          "giocateTotali" : 14619,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              208,
+              145
+            ],
+            "prudente" : [
+              150,
+              142
+            ],
+            "risorse" : [
+              186,
+              154
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 498,
+          "sconfitte" : 485,
+          "patte" : 217,
+          "partite" : 1200,
+          "quota" : 0.5066,
+          "ic" : [
+            0.4754,
+            0.5378
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3663,
+          "giocateTotali" : 14823,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              188,
+              158
+            ],
+            "prudente" : [
+              139,
+              159
+            ],
+            "risorse" : [
+              171,
+              168
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 6,
+          "vittorie" : 1869,
+          "sconfitte" : 3094,
+          "patte" : 1037,
+          "partite" : 6000,
+          "quota" : 0.3766,
+          "ic" : [
+            0.3632,
+            0.3902
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18852,
+          "giocateTotali" : 76328,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              701,
+              1060
+            ],
+            "prudente" : [
+              510,
+              994
+            ],
+            "risorse" : [
+              658,
+              1040
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 2158,
+          "sconfitte" : 2824,
+          "patte" : 1018,
+          "partite" : 6000,
+          "quota" : 0.4332,
+          "ic" : [
+            0.4195,
+            0.447
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18706,
+          "giocateTotali" : 75424,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              818,
+              955
+            ],
+            "prudente" : [
+              600,
+              915
+            ],
+            "risorse" : [
+              740,
+              954
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 2441,
+          "sconfitte" : 2524,
+          "patte" : 1035,
+          "partite" : 6000,
+          "quota" : 0.4916,
+          "ic" : [
+            0.4777,
+            0.5055
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18553,
+          "giocateTotali" : 74189,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              930,
+              849
+            ],
+            "prudente" : [
+              686,
+              837
+            ],
+            "risorse" : [
+              825,
+              838
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 2684,
+          "sconfitte" : 2287,
+          "patte" : 1029,
+          "partite" : 6000,
+          "quota" : 0.5399,
+          "ic" : [
+            0.5261,
+            0.5538
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18404,
+          "giocateTotali" : 73107,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1032,
+              751
+            ],
+            "prudente" : [
+              757,
+              770
+            ],
+            "risorse" : [
+              895,
+              766
+            ]
+          }
+        },
+        {
+          "x" : 1E+1,
+          "vittorie" : 2998,
+          "sconfitte" : 1965,
+          "patte" : 1037,
+          "partite" : 6000,
+          "quota" : 0.6041,
+          "ic" : [
+            0.5904,
+            0.6176
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18284,
+          "giocateTotali" : 71795,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1126,
+              650
+            ],
+            "prudente" : [
+              896,
+              639
+            ],
+            "risorse" : [
+              976,
+              676
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    },
+    {
+      "id" : "tipo-POISON-spazienzio",
+      "gruppo" : "tipo",
+      "contesto" : "ctx-spazienzio",
+      "sonda" : "Sonda: gratuita, priorità 1, x POISON",
+      "sha256Bozza" : "7efa63187d30eb913ebb6cb9a30e7e92aa8c630ef7cf7e69e01737304273d13b",
+      "tuttiGliAbbinamenti" : false,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 7.3314,
+        "basso" : 7.2309,
+        "alto" : 7.432,
+        "pendenza" : 0.0637,
+        "zPendenza" : 28.3027,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 7.3394,
+          "basso" : 7.169,
+          "alto" : 7.5097,
+          "pendenza" : 0.0628,
+          "zPendenza" : 16.7118,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 7.3499,
+          "basso" : 7.1836,
+          "alto" : 7.5163,
+          "pendenza" : 0.0699,
+          "zPendenza" : 17.1579,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 7.3031,
+          "basso" : 7.1165,
+          "alto" : 7.4897,
+          "pendenza" : 0.059,
+          "zPendenza" : 15.2114,
+          "piatta" : false
+        }
+      },
+      "lettura" : "0,95 [0,94–0,97] HIT per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 242,
+          "sconfitte" : 788,
+          "patte" : 170,
+          "partite" : 1200,
+          "quota" : 0.235,
+          "ic" : [
+            0.2101,
+            0.2618
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 15624,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              74,
+              287
+            ],
+            "prudente" : [
+              69,
+              252
+            ],
+            "risorse" : [
+              99,
+              249
+            ]
+          }
+        },
+        {
+          "x" : 3E+1,
+          "vittorie" : 1145,
+          "sconfitte" : 23,
+          "patte" : 32,
+          "partite" : 1200,
+          "quota" : 0.9803,
+          "ic" : [
+            0.9706,
+            0.9868
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2471,
+          "giocateTotali" : 7939,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              381,
+              8
+            ],
+            "prudente" : [
+              394,
+              4
+            ],
+            "risorse" : [
+              370,
+              11
+            ]
+          }
+        },
+        {
+          "x" : 15,
+          "vittorie" : 952,
+          "sconfitte" : 139,
+          "patte" : 109,
+          "partite" : 1200,
+          "quota" : 0.8726,
+          "ic" : [
+            0.8515,
+            0.8911
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3285,
+          "giocateTotali" : 12108,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              316,
+              55
+            ],
+            "prudente" : [
+              352,
+              22
+            ],
+            "risorse" : [
+              284,
+              62
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 486,
+          "sconfitte" : 510,
+          "patte" : 204,
+          "partite" : 1200,
+          "quota" : 0.488,
+          "ic" : [
+            0.457,
+            0.519
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3682,
+          "giocateTotali" : 14921,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              171,
+              178
+            ],
+            "prudente" : [
+              150,
+              155
+            ],
+            "risorse" : [
+              165,
+              177
+            ]
+          }
+        },
+        {
+          "x" : 11,
+          "vittorie" : 748,
+          "sconfitte" : 280,
+          "patte" : 172,
+          "partite" : 1200,
+          "quota" : 0.7276,
+          "ic" : [
+            0.6996,
+            0.754
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3513,
+          "giocateTotali" : 13683,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              253,
+              99
+            ],
+            "prudente" : [
+              263,
+              64
+            ],
+            "risorse" : [
+              232,
+              117
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 620,
+          "sconfitte" : 386,
+          "patte" : 194,
+          "partite" : 1200,
+          "quota" : 0.6163,
+          "ic" : [
+            0.5859,
+            0.6459
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3605,
+          "giocateTotali" : 14397,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              216,
+              142
+            ],
+            "prudente" : [
+              205,
+              98
+            ],
+            "risorse" : [
+              199,
+              146
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 549,
+          "sconfitte" : 440,
+          "patte" : 211,
+          "partite" : 1200,
+          "quota" : 0.5551,
+          "ic" : [
+            0.524,
+            0.5858
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3647,
+          "giocateTotali" : 14677,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              192,
+              154
+            ],
+            "prudente" : [
+              176,
+              126
+            ],
+            "risorse" : [
+              181,
+              160
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 5,
+          "vittorie" : 1726,
+          "sconfitte" : 3209,
+          "patte" : 1065,
+          "partite" : 6000,
+          "quota" : 0.3497,
+          "ic" : [
+            0.3366,
+            0.3632
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18953,
+          "giocateTotali" : 76877,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              621,
+              1140
+            ],
+            "prudente" : [
+              503,
+              999
+            ],
+            "risorse" : [
+              602,
+              1070
+            ]
+          }
+        },
+        {
+          "x" : 6,
+          "vittorie" : 2039,
+          "sconfitte" : 2881,
+          "patte" : 1080,
+          "partite" : 6000,
+          "quota" : 0.4144,
+          "ic" : [
+            0.4007,
+            0.4283
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18785,
+          "giocateTotali" : 75896,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              727,
+              1027
+            ],
+            "prudente" : [
+              606,
+              894
+            ],
+            "risorse" : [
+              706,
+              960
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 2387,
+          "sconfitte" : 2552,
+          "patte" : 1061,
+          "partite" : 6000,
+          "quota" : 0.4833,
+          "ic" : [
+            0.4694,
+            0.4972
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18618,
+          "giocateTotali" : 74790,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              854,
+              920
+            ],
+            "prudente" : [
+              726,
+              780
+            ],
+            "risorse" : [
+              807,
+              852
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 2681,
+          "sconfitte" : 2255,
+          "patte" : 1064,
+          "partite" : 6000,
+          "quota" : 0.5432,
+          "ic" : [
+            0.5292,
+            0.557
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18458,
+          "giocateTotali" : 73477,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              963,
+              813
+            ],
+            "prudente" : [
+              815,
+              693
+            ],
+            "risorse" : [
+              903,
+              749
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 2972,
+          "sconfitte" : 1950,
+          "patte" : 1078,
+          "partite" : 6000,
+          "quota" : 0.6038,
+          "ic" : [
+            0.5901,
+            0.6174
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 18261,
+          "giocateTotali" : 72098,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1071,
+              706
+            ],
+            "prudente" : [
+              925,
+              576
+            ],
+            "risorse" : [
+              976,
+              668
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    },
+    {
+      "id" : "tipo-CUT-mara",
+      "gruppo" : "tipo",
+      "contesto" : "ctx-mara",
+      "sonda" : "Sonda: gratuita, priorità 1, x CUT",
+      "sha256Bozza" : "dfa5ea5b381cf04aaf5400a479aa99de3a5fe506bf0e33396d1b49cfe9bfba86",
+      "tuttiGliAbbinamenti" : false,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 7.0475,
+        "basso" : 7.0007,
+        "alto" : 7.0943,
+        "pendenza" : 0.139,
+        "zPendenza" : 59.8306,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 7.0284,
+          "basso" : 6.9538,
+          "alto" : 7.1031,
+          "pendenza" : 0.1482,
+          "zPendenza" : 37.5459,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 7.1495,
+          "basso" : 7.0656,
+          "alto" : 7.2333,
+          "pendenza" : 0.1445,
+          "zPendenza" : 33.7543,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 6.9709,
+          "basso" : 6.8845,
+          "alto" : 7.0573,
+          "pendenza" : 0.1252,
+          "zPendenza" : 32.3429,
+          "piatta" : false
+        }
+      },
+      "lettura" : "0,99 [0,99–1,00] HIT per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 75,
+          "sconfitte" : 928,
+          "patte" : 197,
+          "partite" : 1200,
+          "quota" : 0.0748,
+          "ic" : [
+            0.0601,
+            0.0927
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 18980,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              26,
+              314
+            ],
+            "prudente" : [
+              18,
+              305
+            ],
+            "risorse" : [
+              31,
+              309
+            ]
+          }
+        },
+        {
+          "x" : 3E+1,
+          "vittorie" : 1200,
+          "sconfitte" : 0,
+          "patte" : 0,
+          "partite" : 1200,
+          "quota" : 1,
+          "ic" : [
+            0.9968,
+            1
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2760,
+          "giocateTotali" : 7901,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              400,
+              0
+            ],
+            "prudente" : [
+              400,
+              0
+            ],
+            "risorse" : [
+              400,
+              0
+            ]
+          }
+        },
+        {
+          "x" : 15,
+          "vittorie" : 1162,
+          "sconfitte" : 8,
+          "patte" : 30,
+          "partite" : 1200,
+          "quota" : 0.9932,
+          "ic" : [
+            0.9866,
+            0.9965
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3962,
+          "giocateTotali" : 13350,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              387,
+              2
+            ],
+            "prudente" : [
+              387,
+              3
+            ],
+            "risorse" : [
+              388,
+              3
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 420,
+          "sconfitte" : 454,
+          "patte" : 326,
+          "partite" : 1200,
+          "quota" : 0.4805,
+          "ic" : [
+            0.4476,
+            0.5137
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4558,
+          "giocateTotali" : 18297,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              158,
+              145
+            ],
+            "prudente" : [
+              107,
+              143
+            ],
+            "risorse" : [
+              155,
+              166
+            ]
+          }
+        },
+        {
+          "x" : 11,
+          "vittorie" : 957,
+          "sconfitte" : 75,
+          "patte" : 168,
+          "partite" : 1200,
+          "quota" : 0.9273,
+          "ic" : [
+            0.9099,
+            0.9416
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4372,
+          "giocateTotali" : 16151,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              329,
+              27
+            ],
+            "prudente" : [
+              292,
+              22
+            ],
+            "risorse" : [
+              336,
+              26
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 725,
+          "sconfitte" : 208,
+          "patte" : 267,
+          "partite" : 1200,
+          "quota" : 0.7771,
+          "ic" : [
+            0.7493,
+            0.8026
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4494,
+          "giocateTotali" : 17333,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              258,
+              72
+            ],
+            "prudente" : [
+              194,
+              61
+            ],
+            "risorse" : [
+              273,
+              75
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 559,
+          "sconfitte" : 310,
+          "patte" : 331,
+          "partite" : 1200,
+          "quota" : 0.6433,
+          "ic" : [
+            0.6109,
+            0.6744
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4542,
+          "giocateTotali" : 17908,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              201,
+              106
+            ],
+            "prudente" : [
+              150,
+              91
+            ],
+            "risorse" : [
+              208,
+              113
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 5,
+          "vittorie" : 1069,
+          "sconfitte" : 3617,
+          "patte" : 1314,
+          "partite" : 6000,
+          "quota" : 0.2281,
+          "ic" : [
+            0.2163,
+            0.2404
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22522,
+          "giocateTotali" : 93926,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              338,
+              1275
+            ],
+            "prudente" : [
+              294,
+              1134
+            ],
+            "risorse" : [
+              437,
+              1208
+            ]
+          }
+        },
+        {
+          "x" : 6,
+          "vittorie" : 1494,
+          "sconfitte" : 2982,
+          "patte" : 1524,
+          "partite" : 6000,
+          "quota" : 0.3338,
+          "ic" : [
+            0.3201,
+            0.3477
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22576,
+          "giocateTotali" : 92947,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              498,
+              1046
+            ],
+            "prudente" : [
+              414,
+              906
+            ],
+            "risorse" : [
+              582,
+              1030
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 2178,
+          "sconfitte" : 2235,
+          "patte" : 1587,
+          "partite" : 6000,
+          "quota" : 0.4935,
+          "ic" : [
+            0.4788,
+            0.5083
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22625,
+          "giocateTotali" : 91545,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              768,
+              765
+            ],
+            "prudente" : [
+              603,
+              686
+            ],
+            "risorse" : [
+              807,
+              784
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 2864,
+          "sconfitte" : 1604,
+          "patte" : 1532,
+          "partite" : 6000,
+          "quota" : 0.641,
+          "ic" : [
+            0.6268,
+            0.6549
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22517,
+          "giocateTotali" : 89481,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1024,
+              513
+            ],
+            "prudente" : [
+              803,
+              464
+            ],
+            "risorse" : [
+              1037,
+              627
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 3589,
+          "sconfitte" : 1072,
+          "patte" : 1339,
+          "partite" : 6000,
+          "quota" : 0.77,
+          "ic" : [
+            0.7577,
+            0.7819
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22350,
+          "giocateTotali" : 86816,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1269,
+              358
+            ],
+            "prudente" : [
+              1023,
+              306
+            ],
+            "risorse" : [
+              1297,
+              408
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    },
+    {
+      "id" : "tipo-POISON-mara",
+      "gruppo" : "tipo",
+      "contesto" : "ctx-mara",
+      "sonda" : "Sonda: gratuita, priorità 1, x POISON",
+      "sha256Bozza" : "9441283ea99dcb9023734ed44d453e33df1f55c1dd66075a574c674b9fdecff6",
+      "tuttiGliAbbinamenti" : false,
+      "stato" : "dentro l'intervallo",
+      "radice" : {
+        "x" : 6.8951,
+        "basso" : 6.8486,
+        "alto" : 6.9417,
+        "pendenza" : 0.1395,
+        "zPendenza" : 60.3846,
+        "piatta" : false
+      },
+      "perStile" : {
+        "aggressivo" : {
+          "x" : 7.0115,
+          "basso" : 6.9368,
+          "alto" : 7.0862,
+          "pendenza" : 0.1479,
+          "zPendenza" : 37.5006,
+          "piatta" : false
+        },
+        "prudente" : {
+          "x" : 6.6868,
+          "basso" : 6.6043,
+          "alto" : 6.7693,
+          "pendenza" : 0.1468,
+          "zPendenza" : 34.99,
+          "piatta" : false
+        },
+        "risorse" : {
+          "x" : 6.9643,
+          "basso" : 6.8779,
+          "alto" : 7.0507,
+          "pendenza" : 0.1252,
+          "zPendenza" : 32.3254,
+          "piatta" : false
+        }
+      },
+      "lettura" : "1,02 [1,01–1,02] HIT per unità",
+      "ricerca" : [
+        {
+          "x" : 0,
+          "vittorie" : 75,
+          "sconfitte" : 928,
+          "patte" : 197,
+          "partite" : 1200,
+          "quota" : 0.0748,
+          "ic" : [
+            0.0601,
+            0.0927
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 0,
+          "giocateTotali" : 18980,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              26,
+              314
+            ],
+            "prudente" : [
+              18,
+              305
+            ],
+            "risorse" : [
+              31,
+              309
+            ]
+          }
+        },
+        {
+          "x" : 3E+1,
+          "vittorie" : 1200,
+          "sconfitte" : 0,
+          "patte" : 0,
+          "partite" : 1200,
+          "quota" : 1,
+          "ic" : [
+            0.9968,
+            1
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 2690,
+          "giocateTotali" : 7581,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              400,
+              0
+            ],
+            "prudente" : [
+              400,
+              0
+            ],
+            "risorse" : [
+              400,
+              0
+            ]
+          }
+        },
+        {
+          "x" : 15,
+          "vittorie" : 1169,
+          "sconfitte" : 6,
+          "patte" : 25,
+          "partite" : 1200,
+          "quota" : 0.9949,
+          "ic" : [
+            0.9889,
+            0.9977
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 3922,
+          "giocateTotali" : 13001,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              387,
+              2
+            ],
+            "prudente" : [
+              394,
+              1
+            ],
+            "risorse" : [
+              388,
+              3
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 447,
+          "sconfitte" : 435,
+          "patte" : 318,
+          "partite" : 1200,
+          "quota" : 0.5068,
+          "ic" : [
+            0.4739,
+            0.5397
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4558,
+          "giocateTotali" : 18236,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              158,
+              144
+            ],
+            "prudente" : [
+              133,
+              125
+            ],
+            "risorse" : [
+              156,
+              166
+            ]
+          }
+        },
+        {
+          "x" : 3,
+          "vittorie" : 78,
+          "sconfitte" : 924,
+          "patte" : 198,
+          "partite" : 1200,
+          "quota" : 0.0778,
+          "ic" : [
+            0.0628,
+            0.0961
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4312,
+          "giocateTotali" : 18995,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              28,
+              313
+            ],
+            "prudente" : [
+              23,
+              301
+            ],
+            "risorse" : [
+              27,
+              310
+            ]
+          }
+        },
+        {
+          "x" : 5,
+          "vittorie" : 224,
+          "sconfitte" : 702,
+          "patte" : 274,
+          "partite" : 1200,
+          "quota" : 0.2419,
+          "ic" : [
+            0.2154,
+            0.2705
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4544,
+          "giocateTotali" : 18790,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              71,
+              244
+            ],
+            "prudente" : [
+              66,
+              212
+            ],
+            "risorse" : [
+              87,
+              246
+            ]
+          }
+        },
+        {
+          "x" : 6,
+          "vittorie" : 314,
+          "sconfitte" : 580,
+          "patte" : 306,
+          "partite" : 1200,
+          "quota" : 0.3512,
+          "ic" : [
+            0.3206,
+            0.3831
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 4550,
+          "giocateTotali" : 18540,
+          "partiteSonda" : 1200,
+          "perStile" : {
+            "aggressivo" : [
+              111,
+              209
+            ],
+            "prudente" : [
+              93,
+              159
+            ],
+            "risorse" : [
+              110,
+              212
+            ]
+          }
+        }
+      ],
+      "griglia" : [
+        {
+          "x" : 5,
+          "vittorie" : 1141,
+          "sconfitte" : 3536,
+          "patte" : 1323,
+          "partite" : 6000,
+          "quota" : 0.244,
+          "ic" : [
+            0.2319,
+            0.2565
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22521,
+          "giocateTotali" : 93826,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              341,
+              1270
+            ],
+            "prudente" : [
+              362,
+              1060
+            ],
+            "risorse" : [
+              438,
+              1206
+            ]
+          }
+        },
+        {
+          "x" : 6,
+          "vittorie" : 1594,
+          "sconfitte" : 2867,
+          "patte" : 1539,
+          "partite" : 6000,
+          "quota" : 0.3573,
+          "ic" : [
+            0.3434,
+            0.3715
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22577,
+          "giocateTotali" : 92811,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              504,
+              1040
+            ],
+            "prudente" : [
+              506,
+              800
+            ],
+            "risorse" : [
+              584,
+              1027
+            ]
+          }
+        },
+        {
+          "x" : 7,
+          "vittorie" : 2303,
+          "sconfitte" : 2132,
+          "patte" : 1565,
+          "partite" : 6000,
+          "quota" : 0.5193,
+          "ic" : [
+            0.5046,
+            0.534
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22623,
+          "giocateTotali" : 91304,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              772,
+              762
+            ],
+            "prudente" : [
+              723,
+              586
+            ],
+            "risorse" : [
+              808,
+              784
+            ]
+          }
+        },
+        {
+          "x" : 8,
+          "vittorie" : 3016,
+          "sconfitte" : 1530,
+          "patte" : 1454,
+          "partite" : 6000,
+          "quota" : 0.6634,
+          "ic" : [
+            0.6496,
+            0.677
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22506,
+          "giocateTotali" : 89115,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1032,
+              509
+            ],
+            "prudente" : [
+              945,
+              395
+            ],
+            "risorse" : [
+              1039,
+              626
+            ]
+          }
+        },
+        {
+          "x" : 9,
+          "vittorie" : 3767,
+          "sconfitte" : 1008,
+          "patte" : 1225,
+          "partite" : 6000,
+          "quota" : 0.7889,
+          "ic" : [
+            0.7771,
+            0.8002
+          ],
+          "bersaglio" : 0.5,
+          "giocateOsservate" : 22328,
+          "giocateTotali" : 86162,
+          "partiteSonda" : 6000,
+          "perStile" : {
+            "aggressivo" : [
+              1276,
+              358
+            ],
+            "prudente" : [
+              1192,
+              243
+            ],
+            "risorse" : [
+              1299,
+              407
+            ]
+          }
+        }
+      ],
+      "partite" : 38400
+    }
+  ],
+  "pendenzaSalute" : {
+    "ctx-spazienzio" : [
+      0.0183,
+      0.0004
+    ],
+    "ctx-mara" : [
+      0.0406,
+      0.0005
+    ]
+  },
+  "curve" : [
+    {
+      "id" : "tettostarter-LittleRage-spazienzio",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-spazienzio",
+      "variante" : "bruiser.character.LittleRage",
+      "valore" : 0,
+      "sha256Bozza" : "26bb4e53f43488aadd6c243e3769681519a484362cba5d546b149730fceb97d3",
+      "punto" : {
+        "x" : 0,
+        "vittorie" : 2996,
+        "sconfitte" : 2026,
+        "patte" : 978,
+        "partite" : 6000,
+        "quota" : 0.5966,
+        "ic" : [
+          0.5829,
+          0.6101
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 8232,
+        "giocateTotali" : 71321,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1029,
+            667
+          ],
+          "prudente" : [
+            973,
+            622
+          ],
+          "risorse" : [
+            994,
+            737
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-LittleSmack-spazienzio",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-spazienzio",
+      "variante" : "bruiser.character.LittleSmack",
+      "valore" : 0,
+      "sha256Bozza" : "0df83b6247b96dec04228ba713702a171ac979514d073bbfc9a97c61928a9e93",
+      "punto" : {
+        "x" : 0,
+        "vittorie" : 1461,
+        "sconfitte" : 3736,
+        "patte" : 803,
+        "partite" : 6000,
+        "quota" : 0.2811,
+        "ic" : [
+          0.2691,
+          0.2935
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 30170,
+        "giocateTotali" : 74992,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            326,
+            1460
+          ],
+          "prudente" : [
+            354,
+            1304
+          ],
+          "risorse" : [
+            781,
+            972
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-TestaAlMuro-spazienzio",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-spazienzio",
+      "variante" : "base.spazienzio.bound.TestaAlMuro",
+      "valore" : 0,
+      "sha256Bozza" : "f240d1be29d5fa123ce7d8243cca6d665f3eade1fef22cf4c8c56c4d860923f6",
+      "punto" : {
+        "x" : 0,
+        "vittorie" : 2860,
+        "sconfitte" : 2192,
+        "patte" : 948,
+        "partite" : 6000,
+        "quota" : 0.5661,
+        "ic" : [
+          0.5524,
+          0.5797
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 8319,
+        "giocateTotali" : 69011,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            998,
+            692
+          ],
+          "prudente" : [
+            918,
+            704
+          ],
+          "risorse" : [
+            944,
+            796
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-danno-3HIT-spazienzio",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-spazienzio",
+      "variante" : "sonda 3 HIT, priorità 1",
+      "valore" : 3,
+      "sha256Bozza" : "3d49ee0a6df664cdc2dc20129c058561ed4b35f9ae49845f14980409b0e18d38",
+      "punto" : {
+        "x" : 3,
+        "vittorie" : 1461,
+        "sconfitte" : 3736,
+        "patte" : 803,
+        "partite" : 6000,
+        "quota" : 0.2811,
+        "ic" : [
+          0.2691,
+          0.2935
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 30170,
+        "giocateTotali" : 74992,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            326,
+            1460
+          ],
+          "prudente" : [
+            354,
+            1304
+          ],
+          "risorse" : [
+            781,
+            972
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-danno-2HIT-spazienzio",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-spazienzio",
+      "variante" : "sonda 2 HIT, priorità 1",
+      "valore" : 2,
+      "sha256Bozza" : "46178550bbee3b403248a6a091b4500778d0cad0a693c7552992e3750fa578ef",
+      "punto" : {
+        "x" : 2,
+        "vittorie" : 1793,
+        "sconfitte" : 3353,
+        "patte" : 854,
+        "partite" : 6000,
+        "quota" : 0.3484,
+        "ic" : [
+          0.3355,
+          0.3616
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 22977,
+        "giocateTotali" : 74047,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            406,
+            1406
+          ],
+          "prudente" : [
+            689,
+            915
+          ],
+          "risorse" : [
+            698,
+            1032
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-PassoStretto-mara",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-mara",
+      "variante" : "base.mara.bound.PassoStretto",
+      "valore" : 0,
+      "sha256Bozza" : "eef43ebeb7e403861d4b078a76ec6f13f8b10ed57af88c18104ff6cf300fd0e2",
+      "punto" : {
+        "x" : 0,
+        "vittorie" : 4148,
+        "sconfitte" : 603,
+        "patte" : 1249,
+        "partite" : 6000,
+        "quota" : 0.8731,
+        "ic" : [
+          0.8633,
+          0.8822
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 34424,
+        "giocateTotali" : 104786,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1423,
+            199
+          ],
+          "prudente" : [
+            1299,
+            202
+          ],
+          "risorse" : [
+            1426,
+            202
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-CambioMarcia-mara",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-mara",
+      "variante" : "base.mara.bound.CambioMarcia",
+      "valore" : 0,
+      "sha256Bozza" : "a9435f049dac96654bce28038a3eb81cf0aea363733d7ba9206a2f4e4ace6c7e",
+      "punto" : {
+        "x" : 0,
+        "vittorie" : 4212,
+        "sconfitte" : 672,
+        "patte" : 1116,
+        "partite" : 6000,
+        "quota" : 0.8624,
+        "ic" : [
+          0.8525,
+          0.8718
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 21760,
+        "giocateTotali" : 102823,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1421,
+            229
+          ],
+          "prudente" : [
+            1150,
+            320
+          ],
+          "risorse" : [
+            1641,
+            123
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-ColpoDiStriscio-mara",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-mara",
+      "variante" : "base.mara.bound.ColpoDiStriscio",
+      "valore" : 0,
+      "sha256Bozza" : "4c993a3bd65a5efe012d1ca9f489c4b46388daf478a8859939e8472dbc3e2df3",
+      "punto" : {
+        "x" : 0,
+        "vittorie" : 3451,
+        "sconfitte" : 1018,
+        "patte" : 1531,
+        "partite" : 6000,
+        "quota" : 0.7722,
+        "ic" : [
+          0.7597,
+          0.7843
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 34781,
+        "giocateTotali" : 107268,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1177,
+            320
+          ],
+          "prudente" : [
+            1067,
+            361
+          ],
+          "risorse" : [
+            1207,
+            337
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-danno-3HIT-mara",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-mara",
+      "variante" : "sonda 3 HIT, priorità 1",
+      "valore" : 3,
+      "sha256Bozza" : "eaf83e454093fbacd9e5eebc0233e39dcdca234b29a8a3a8d095cb14e18f62ef",
+      "punto" : {
+        "x" : 3,
+        "vittorie" : 4244,
+        "sconfitte" : 553,
+        "patte" : 1203,
+        "partite" : 6000,
+        "quota" : 0.8847,
+        "ic" : [
+          0.8754,
+          0.8935
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 34344,
+        "giocateTotali" : 104323,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1455,
+            183
+          ],
+          "prudente" : [
+            1329,
+            186
+          ],
+          "risorse" : [
+            1460,
+            184
+          ]
+        }
+      }
+    },
+    {
+      "id" : "tettostarter-danno-2HIT-mara",
+      "gruppo" : "tettostarter",
+      "contesto" : "starter-mara",
+      "variante" : "sonda 2 HIT, priorità 1",
+      "valore" : 2,
+      "sha256Bozza" : "456d060c6970658e9f483edb78888e858f2849a542cb91847f17a2ea6be3c052",
+      "punto" : {
+        "x" : 2,
+        "vittorie" : 3543,
+        "sconfitte" : 956,
+        "patte" : 1501,
+        "partite" : 6000,
+        "quota" : 0.7875,
+        "ic" : [
+          0.7753,
+          0.7992
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 34735,
+        "giocateTotali" : 106933,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1202,
+            304
+          ],
+          "prudente" : [
+            1105,
+            338
+          ],
+          "risorse" : [
+            1236,
+            314
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "009eb305242727dcaf7bb6a59a9fee7424e5e1537563896e40ff282991267a88",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 1528,
+        "sconfitte" : 3493,
+        "patte" : 979,
+        "partite" : 6000,
+        "quota" : 0.3043,
+        "ic" : [
+          0.2917,
+          0.3172
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 69350,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            497,
+            1280
+          ],
+          "prudente" : [
+            534,
+            1018
+          ],
+          "risorse" : [
+            497,
+            1195
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "6471df24b608b13b659e662b1c27a3f9ee582a54fe36cbd4a82bce8101e5c77a",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 1972,
+        "sconfitte" : 3000,
+        "patte" : 1028,
+        "partite" : 6000,
+        "quota" : 0.3966,
+        "ic" : [
+          0.3831,
+          0.4103
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 72133,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            681,
+            1099
+          ],
+          "prudente" : [
+            636,
+            890
+          ],
+          "risorse" : [
+            655,
+            1011
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "34896609a5a04779e7b519c43b11df76fc73e21d8066591016792b94bdacf7c2",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 2831,
+        "sconfitte" : 2037,
+        "patte" : 1132,
+        "partite" : 6000,
+        "quota" : 0.5816,
+        "ic" : [
+          0.5676,
+          0.5953
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 76275,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1006,
+            750
+          ],
+          "prudente" : [
+            826,
+            619
+          ],
+          "risorse" : [
+            999,
+            668
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-spazienzio",
+      "gruppo" : "salute",
+      "contesto" : "ctx-spazienzio",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "198ad7d30b8e886a680d3c645b917c6a791e03447fb92ff5db5a1523799bdcb7",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 3275,
+        "sconfitte" : 1612,
+        "patte" : 1113,
+        "partite" : 6000,
+        "quota" : 0.6701,
+        "ic" : [
+          0.6568,
+          0.6832
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 77839,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1159,
+            602
+          ],
+          "prudente" : [
+            935,
+            500
+          ],
+          "risorse" : [
+            1181,
+            510
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-10-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale -10",
+      "valore" : -1E+1,
+      "sha256Bozza" : "bf6d2e443ada0caec0e49b7c26b9b8048d19076917608524ba239f45cfedf67e",
+      "punto" : {
+        "x" : -1E+1,
+        "vittorie" : 583,
+        "sconfitte" : 4443,
+        "patte" : 974,
+        "partite" : 6000,
+        "quota" : 0.116,
+        "ic" : [
+          0.1074,
+          0.1251
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 83343,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            219,
+            1518
+          ],
+          "prudente" : [
+            135,
+            1368
+          ],
+          "risorse" : [
+            229,
+            1557
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute-5-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale -5",
+      "valore" : -5,
+      "sha256Bozza" : "27459e59e72c6fbbf69bcfd1bea33fc9061a2f3946f693b17926c19e5a79a309",
+      "punto" : {
+        "x" : -5,
+        "vittorie" : 1238,
+        "sconfitte" : 3316,
+        "patte" : 1446,
+        "partite" : 6000,
+        "quota" : 0.2718,
+        "ic" : [
+          0.2591,
+          0.285
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 88357,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            460,
+            1143
+          ],
+          "prudente" : [
+            318,
+            961
+          ],
+          "risorse" : [
+            460,
+            1212
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+5-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale +5",
+      "valore" : 5,
+      "sha256Bozza" : "8d862d4414809c967625be557a2f7172977251715f792cf9b6d0c19bb4382108",
+      "punto" : {
+        "x" : 5,
+        "vittorie" : 3299,
+        "sconfitte" : 1119,
+        "patte" : 1582,
+        "partite" : 6000,
+        "quota" : 0.7467,
+        "ic" : [
+          0.7337,
+          0.7593
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 92939,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1173,
+            380
+          ],
+          "prudente" : [
+            922,
+            333
+          ],
+          "risorse" : [
+            1204,
+            406
+          ]
+        }
+      }
+    },
+    {
+      "id" : "salute+10-mara",
+      "gruppo" : "salute",
+      "contesto" : "ctx-mara",
+      "variante" : "HEALTH iniziale +10",
+      "valore" : 1E+1,
+      "sha256Bozza" : "ad81da85af3627cbee7c4fc53674f63ab0d53851bc684be6118479defe79f8ba",
+      "punto" : {
+        "x" : 1E+1,
+        "vittorie" : 4323,
+        "sconfitte" : 494,
+        "patte" : 1183,
+        "partite" : 6000,
+        "quota" : 0.8974,
+        "ic" : [
+          0.8886,
+          0.9057
+        ],
+        "bersaglio" : 0.5,
+        "giocateOsservate" : 0,
+        "giocateTotali" : 93090,
+        "partiteSonda" : 6000,
+        "perStile" : {
+          "aggressivo" : [
+            1475,
+            165
+          ],
+          "prudente" : [
+            1342,
+            133
+          ],
+          "risorse" : [
+            1506,
+            196
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -103,7 +103,7 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 |---|---|---|---|---:|---|---:|---|---|---|---|---|
 | SPA-BO1 | Spazienzio | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Spazienzio | `LittleRage`, riprogettata: tolta la parata | Generatrice; due funzioni oggi, 6,75 unità | dati |
 | SPA-BO2 | Spazienzio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Spazienzio | `LittleSmack`, riprogettata: tolti +5 A | Colpetto; oggi 7,5 unità e +0,1 HEALTH per uso | dati |
-| SPA-BO3 | Spazienzio | Azione, bound | RESOURCES | 0 | 3 HIT a sé, +8 V a sé | 3 (6 − 3) | NC | — | da inventare («Testa al muro») | Variante: carica più forte, pagata con la salute | dati |
+| SPA-BO3 | Spazienzio | Azione, bound | RESOURCES | 0 | 3 HIT a sé, +8 V a sé | 3 (6 − 3) | NC | — | da inventare («TESTA AL MURO», SB-11b) | Variante: carica più forte, pagata con la salute | dati |
 | MAR-BO1 | Mara | Azione, bound | DAMAGE | 1 | 3 CUT | 4 | C | Mara | bozza «Passo stretto», senza +5 A | Colpetto | dati |
 | MAR-BO2 | Mara | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | C | Mara | da inventare («Cambio marcia») | Generatrice: Mara paga tutto in A (decisione B2) | dati |
 | MAR-BO3 | Mara | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | prova «Colpo di striscio», 5 → 2 CUT | Variante veloce | dati |
@@ -273,7 +273,7 @@ c'è.
 
 | Starter | Basic, bound, last resort | Archetipo | Generiche | Oggetti | Distinte | Rare |
 |---|---|---|---|---|---:|---:|
-| Spazienzio (nome da inventare) | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | SuperImpact 2, ExtremelyViolentBlow 2, Glare 2, MadeOfStone 2, YouStop 2 (10) | SeagullFly 2, Tartaruga 2, Mattone 1, HealingBlow 1, Denti stretti 1 (7) | Cocktail 2, Posacenere 1 (3) | 12 | 1 |
+| Spazienzio «Pazienza finita» (SB-11b) | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | SuperImpact 2, ExtremelyViolentBlow 2, Glare 2, MadeOfStone 2, YouStop 2 (10) | SeagullFly 2, Tartaruga 2, Mattone 1, HealingBlow 1, Denti stretti 1 (7) | Cocktail 2, Posacenere 1 (3) | 12 | 1 |
 | Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata 2, Sgommata 2, Sorpasso 2, Paraurti 2, Slalom 1 (9) | Spintone 2, Sputo 2, Tartaruga 1, Steal 1 (6) | Espresso 2, Kebab 2, Giubbotto 1 (5) | 12 | 1 |
 | Tossico (nome da inventare) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | MethDrivenRage 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
 | Pino «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Offro io 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
@@ -282,6 +282,12 @@ c'è.
 Varianti rispetto alla forma approvata (5 + 4 + 3): Spazienzio ha 10 carte d'archetipo e 2 oggetti, perché ha capacità 1; Gigi ha 7 carte
 d'archetipo e 4 oggetti; **Pino ha 3 generiche** invece di 4, perché la sua A scende sotto zero in due o tre turni (vedi [L e Pino](#l-e-pino))
 e le generiche a costo A gli resterebbero morte in mano.
+
+**Nota di SB-11b** ([rapporto](../../reports/set-base/sb-11b-report.md)): i due starter base sono scritti nella bozza
+`server/src/test/resources/set-base/bozza.json` come in questa tabella, senza scostamenti. Il proprietario ha scelto il nome dello starter
+di Spazienzio, **«Pazienza finita»**, e ha deciso che i nomi visualizzati delle sue carte (slot `SPA-*`) restino tutti in maiuscolo, perché
+«ha perso la pazienza e urla»: SPA-BO3 si chiama quindi «TESTA AL MURO». Le durate «per N turni» valgono `turns: N − 1` (R05): il
+Giubbotto ha `turns: 2`, come MadeOfStone ha `turns: 3` per 4 turni.
 
 **Generiche condivise:** 11 distinte su 20 usi. Ogni starter ne condivide almeno 2, nessuna è in più di 3 starter, e le due base
 condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16).

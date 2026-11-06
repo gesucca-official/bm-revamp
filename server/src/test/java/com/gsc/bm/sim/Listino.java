@@ -48,7 +48,17 @@ final class Listino {
     static final List<String> GROUPS = List.of("costo", "tipo", "priorita", "veleno", "decadimento", "nonspecchio", "carte",
             "salute", "allerta", "bound", "slot", "handicap");
     /** Gruppi aggiunti dopo SB-10a: si chiedono per nome e non entrano in «all», così la misura di SB-10a resta la stessa. */
-    static final List<String> EXTRA_GROUPS = List.of("tettopartita");
+    static final List<String> EXTRA_GROUPS = List.of("tettopartita", "tettostarter");
+    /**
+     * SB-11b: la bozza del Set Base. Con -Dsim.listinoBase=set-base (o il percorso di una bozza) il listino usa quella al posto della base
+     * di SB-10a: i contesti di Spazienzio e Mara diventano gli starter nuovi con due coppie di generiche al posto delle àncore
+     * ({@link #SET_BASE_CONTEXTS}). Gli altri contesti non esistono, e le misure che li usano non si lanciano (ListinoMeasureTest).
+     */
+    static final String SET_BASE = "/set-base/bozza.json";
+    /** Contesto, starter da cui nasce e le due generiche (due copie ciascuna) che lasciano il posto alle àncore. */
+    static final Map<String, List<String>> SET_BASE_CONTEXTS = Map.of(
+            SPAZIENZIO, List.of("starter-spazienzio", "bruiser.SeagullFly", "base.com.TartarugaSulMarciapiede"),
+            MARA, List.of("starter-mara", "base.com.Spintone", "base.com.SputoDaPosacenere"));
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final double Z = 1.959963984540054;
     /** Lo stesso quantile, per il rapporto. */
@@ -243,8 +253,36 @@ final class Listino {
 
     /** La bozza base di SB-10a; con un'àncora diversa dal difetto, la stessa con le due carte àncora a quel danno. */
     static Draft baseDraft() throws Exception {
+        String chosen = System.getProperty("sim.listinoBase");
+        if (chosen != null && !chosen.isBlank())
+            return setBaseContexts("set-base".equals(chosen) ? Draft.fromClasspath(SET_BASE) : Draft.fromFile(java.nio.file.Path.of(chosen)), ANCHOR);
         Draft base = Draft.fromClasspath(BASE);
         return ANCHOR == DEFAULT_ANCHOR ? base : withAnchor(base, ANCHOR);
+    }
+
+    /**
+     * SB-11b: la bozza del Set Base con le due carte àncora (gratuite, priorità 1, {@code hit} HIT, come in SB-10a) e i contesti di
+     * {@link #SET_BASE_CONTEXTS}: lo starter con le due generiche indicate sostituite dalle àncore, due copie ciascuna. Il resto della
+     * bozza, starter compresi, resta com'è.
+     */
+    static Draft setBaseContexts(Draft bozza, int hit) {
+        ObjectNode root = (ObjectNode) bozza.json();
+        for (String[] anchor : new String[][]{{SLOT1, "LISTINO ANCORA 1"}, {SLOT2, "LISTINO ANCORA 2"}})
+            add(root, hitter(anchor, Map.of(), 1, "HIT", hit));
+        for (String ctx : List.of(SPAZIENZIO, MARA)) {
+            List<String> spec = SET_BASE_CONTEXTS.get(ctx);
+            ObjectNode context = copyDeck(root, spec.get(0), ctx);
+            ObjectNode cards = (ObjectNode) context.get("cards");
+            for (int i = 1; i <= 2; i++) {
+                String removed = spec.get(i);
+                if (!cards.has(removed) || cards.get(removed).asInt() != 2)
+                    throw new IllegalArgumentException(bozza.source + ": " + spec.get(0) + " non ha due copie di " + removed);
+                cards.remove(removed);
+                cards.put(i == 1 ? SLOT1 : SLOT2, 2);
+            }
+        }
+        // Il nome non comincia con «classpath:» e non ha due punti: Bench.sha256 calcola l'impronta dell'albero derivato.
+        return bozza.derive("derivata dalla bozza " + Bench.draftName(bozza) + ", contesti del listino, ancora " + hit + " HIT", root);
     }
 
     /** Le carte àncora (danno e testo nominale) a {@code hit} HIT, il resto della bozza com'è. */
@@ -599,6 +637,7 @@ final class Listino {
         for (String[] group : new String[][]{spazienzio, tossico}) {
             String ctx = group == spazienzio ? SPAZIENZIO : TOSSICO;
             for (String binding : group) {
+                if (!base.cardBindings().contains(binding)) continue; // Base del Set Base (SB-11b): carte assenti.
                 Card card = base.card(binding);
                 Map<Resource, Integer> cost = new TreeMap<>(card.getCost());
                 int priority = card.getPriority();
@@ -797,8 +836,26 @@ final class Listino {
         return root;
     }
 
+    /** Gli starter su cui SB-11b misura le bound vere: si usano solo se la base li contiene. */
+    static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara");
+
     List<Curve> curves() throws Exception {
         List<Curve> list = new ArrayList<>();
+        // SB-11b, tetto sugli starter veri: ogni bound del personaggio, e due sonde di danno, con una nulla contro due nulle (D36, B2).
+        for (String starter : STARTERS) {
+            if (!base.deckIds().contains(starter)) continue;
+            String character = base.characterOf(starter), shortName = starter.substring(starter.indexOf('-') + 1);
+            for (String binding : base.cardBindings()) {
+                Card card = base.card(binding);
+                if (!card.isCharacterBound() || !character.equals(card.getBoundToCharacter())) continue;
+                list.add(new Curve("tettostarter-" + binding.substring(binding.lastIndexOf('.') + 1) + "-" + shortName, "tettostarter", starter,
+                        binding, 0, x -> bound(starter, null, binding)));
+            }
+            for (int hit : new int[]{3, 2})
+                list.add(new Curve("tettostarter-danno-" + hit + "HIT-" + shortName, "tettostarter", starter, "sonda " + hit + " HIT, priorità 1", hit,
+                        x -> bound(starter, ch -> boundCard(ch, "LISTINO TETTO DANNO", "DAMAGE", "—", "HIT", hit, "OPPONENT", 1, List.of(),
+                                List.of(damage("HIT", hit))), null)));
+        }
         for (String ctx : CAP_CONTEXTS)
             for (Map.Entry<String, java.util.function.Function<String, ObjectNode>> e : capFamilies(ctx).entrySet())
                 list.add(new Curve("tettopartita-" + e.getKey() + "-" + ctx.substring(4), "tettopartita", ctx, e.getKey(), 4,
