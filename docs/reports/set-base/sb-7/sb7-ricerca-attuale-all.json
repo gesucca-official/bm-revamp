@@ -1,0 +1,901 @@
+{
+  "intestazione" : {
+    "banco" : "sb-7/1",
+    "bozza" : "server/src/test/resources/sb-6a/attuale.json",
+    "sha256" : "123c880d37792fd28ec6b6b5f615b48928b499e174107673304954ef491ab293",
+    "avversari" : [
+      "starter-bruiser",
+      "starter-junkie"
+    ],
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse"
+    ],
+    "lambda" : 12,
+    "partitePerCombinazione" : 16,
+    "generazioniMassime" : 40,
+    "pazienza" : 10,
+    "semeRicerca" : 7100000,
+    "semeConvalida" : 7900000,
+    "partiteConvalida" : 300,
+    "semeMutazioni" : 7000007,
+    "nota" : "Prima ricerca SB-7: dati di prova, non di bilanciamento."
+  },
+  "ricerche" : [
+    {
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "partenza" : "starter",
+      "generazioni" : 40,
+      "arresto" : "numero massimo di generazioni (40)",
+      "storia" : [
+        0.2743,
+        0.3385,
+        0.3906,
+        0.4097,
+        0.4201,
+        0.4375,
+        0.4635,
+        0.5503,
+        0.5226,
+        0.6163,
+        0.5903,
+        0.6372,
+        0.5938,
+        0.5434,
+        0.6962,
+        0.5573,
+        0.5938,
+        0.5521,
+        0.5417,
+        0.599,
+        0.6372,
+        0.6476,
+        0.6493,
+        0.5799,
+        0.5451,
+        0.5573,
+        0.5417,
+        0.4774,
+        0.5469,
+        0.3993,
+        0.4201,
+        0.5208,
+        0.5069,
+        0.5156,
+        0.5139,
+        0.5694,
+        0.5851,
+        0.5868,
+        0.5851,
+        0.559,
+        0.566
+      ],
+      "mazzi" : [
+        {
+          "etichetta" : "ultimo",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BadEducation" : 1,
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.Glare" : 1,
+            "bruiser.HealingBlow" : 1,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.SickeningBlow" : 1,
+            "bruiser.SuperImpact" : 2,
+            "com.ShuffleFeet" : 1,
+            "com.items.CocktailOnTheGround" : 1,
+            "com.items.MarvelousCocktail" : 2,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.Cough" : 1,
+            "junkie.GoingBerserk" : 2,
+            "junkie.MethDrivenRage" : 2,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.566,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1879,
+              "sconfitte" : 412,
+              "patte" : 409,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 650,
+              "sconfitte" : 1734,
+              "patte" : 316,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 2,
+            "bruiser.SeagullFly" : 2,
+            "bruiser.SuperImpact" : 2,
+            "com.Grab" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.MarvelousCocktail" : 2,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.MethDrivenRage" : 2
+          },
+          "punteggioRicerca" : 0.6163,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1948,
+              "sconfitte" : 348,
+              "patte" : 404,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 884,
+              "sconfitte" : 1252,
+              "patte" : 564,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.SickeningBlow" : 1,
+            "bruiser.SuperImpact" : 2,
+            "bruiser.YouStop" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.MarvelousCocktail" : 1,
+            "com.items.RottenBeer" : 1,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.MethDrivenRage" : 2,
+            "junkie.PervertedMetabolism" : 1,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.5885,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1932,
+              "sconfitte" : 362,
+              "patte" : 406,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 615,
+              "sconfitte" : 1591,
+              "patte" : 494,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "starter",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BadEducation" : 1,
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.CantFeelAnything" : 1,
+            "bruiser.ExtremelyViolentBlow" : 2,
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 1,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.SickeningBlow" : 1,
+            "bruiser.StunningBlow" : 2,
+            "bruiser.SuperImpact" : 1,
+            "bruiser.WhatchaDoin" : 1,
+            "bruiser.YouStop" : 2,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.RottenBeer" : 1
+          },
+          "punteggioRicerca" : null,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1019,
+              "sconfitte" : 1138,
+              "patte" : 543,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 51,
+              "sconfitte" : 2580,
+              "patte" : 69,
+              "limite" : 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "partenza" : "casuale",
+      "generazioni" : 40,
+      "arresto" : "numero massimo di generazioni (40)",
+      "storia" : [
+        0.3403,
+        0.4097,
+        0.3854,
+        0.4132,
+        0.3924,
+        0.441,
+        0.4531,
+        0.4653,
+        0.533,
+        0.5226,
+        0.5156,
+        0.5955,
+        0.5191,
+        0.4878,
+        0.5469,
+        0.4861,
+        0.5434,
+        0.4809,
+        0.5035,
+        0.5087,
+        0.5347,
+        0.5955,
+        0.5799,
+        0.6024,
+        0.6163,
+        0.6007,
+        0.5347,
+        0.5451,
+        0.6024,
+        0.5938,
+        0.5556,
+        0.5694,
+        0.5087,
+        0.5972,
+        0.6076,
+        0.5938,
+        0.592,
+        0.441,
+        0.5556,
+        0.5747,
+        0.5538
+      ],
+      "mazzi" : [
+        {
+          "etichetta" : "ultimo",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.Glare" : 1,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 2,
+            "bruiser.SuperImpact" : 2,
+            "bruiser.YouStop" : 1,
+            "com.ShuffleFeet" : 1,
+            "com.items.CocktailOnTheGround" : 1,
+            "com.items.MarvelousCocktail" : 2,
+            "com.items.RottenBeer" : 1,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.BadTrip" : 1,
+            "junkie.BeggingMoney" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.MethDrivenRage" : 2,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.5538,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1635,
+              "sconfitte" : 632,
+              "patte" : 433,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 611,
+              "sconfitte" : 1624,
+              "patte" : 465,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.CantFeelAnything" : 1,
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.SickeningBlow" : 2,
+            "bruiser.SuperImpact" : 2,
+            "com.Steal" : 1,
+            "com.items.AnotherRottenBeer" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.MarvelousCocktail" : 1,
+            "com.items.RottenBeer" : 1,
+            "junkie.BeggingMoney" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.MethDrivenRage" : 2,
+            "junkie.PervertedMetabolism" : 1
+          },
+          "punteggioRicerca" : 0.5903,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1905,
+              "sconfitte" : 429,
+              "patte" : 366,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 376,
+              "sconfitte" : 1982,
+              "patte" : 342,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 1,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SickeningBlow" : 1,
+            "bruiser.SuperImpact" : 2,
+            "bruiser.YouStop" : 1,
+            "com.ShuffleFeet" : 1,
+            "com.items.AnotherRottenBeer" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.MarvelousCocktail" : 2,
+            "com.items.RottenBeer" : 1,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.BeggingMoney" : 1,
+            "junkie.LethalHeroinDose" : 1,
+            "junkie.MethDrivenRage" : 2
+          },
+          "punteggioRicerca" : 0.5816,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1979,
+              "sconfitte" : 362,
+              "patte" : 359,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 580,
+              "sconfitte" : 1582,
+              "patte" : 538,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "starter",
+          "bound" : [
+            "bruiser.character.LittleRage",
+            "bruiser.character.LittleSmack"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BadEducation" : 1,
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.CantFeelAnything" : 1,
+            "bruiser.ExtremelyViolentBlow" : 2,
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 1,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.SickeningBlow" : 1,
+            "bruiser.StunningBlow" : 2,
+            "bruiser.SuperImpact" : 1,
+            "bruiser.WhatchaDoin" : 1,
+            "bruiser.YouStop" : 2,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.RottenBeer" : 1
+          },
+          "punteggioRicerca" : null,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 1019,
+              "sconfitte" : 1138,
+              "patte" : 543,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 51,
+              "sconfitte" : 2580,
+              "patte" : 69,
+              "limite" : 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "partenza" : "starter",
+      "generazioni" : 40,
+      "arresto" : "numero massimo di generazioni (40)",
+      "storia" : [
+        0.7361,
+        0.7847,
+        0.8229,
+        0.8281,
+        0.8385,
+        0.842,
+        0.8785,
+        0.908,
+        0.9392,
+        0.934,
+        0.9514,
+        0.9531,
+        0.9549,
+        0.9236,
+        0.9531,
+        0.9705,
+        0.9601,
+        0.9583,
+        0.9653,
+        0.9757,
+        0.9618,
+        0.941,
+        0.9705,
+        0.9809,
+        0.9878,
+        0.9479,
+        0.9688,
+        0.9705,
+        0.9809,
+        0.974,
+        0.9757,
+        0.9826,
+        0.9809,
+        0.9826,
+        0.9705,
+        0.9896,
+        0.9965,
+        0.9826,
+        0.9965,
+        0.9722,
+        0.9844
+      ],
+      "mazzi" : [
+        {
+          "etichetta" : "ultimo",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BadEducation" : 1,
+            "bruiser.ExtremelyViolentBlow" : 1,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SeagullFly" : 2,
+            "com.Grab" : 1,
+            "com.ShuffleFeet" : 1,
+            "com.Steal" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.BadTrip" : 1,
+            "junkie.BeggingMoney" : 2,
+            "junkie.Cough" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.PervertedMetabolism" : 1,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.9844,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2631,
+              "sconfitte" : 20,
+              "patte" : 49,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 2523,
+              "sconfitte" : 47,
+              "patte" : 130,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.ExtremelyViolentBlow" : 1,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 2,
+            "bruiser.SeagullFly" : 2,
+            "bruiser.WhatchaDoin" : 2,
+            "com.Grab" : 1,
+            "com.ShuffleFeet" : 1,
+            "com.Steal" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.BadTrip" : 1,
+            "junkie.BeggingMoney" : 2,
+            "junkie.GoingBerserk" : 1,
+            "junkie.PervertedMetabolism" : 1,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.9878,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2616,
+              "sconfitte" : 28,
+              "patte" : 56,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 2568,
+              "sconfitte" : 38,
+              "patte" : 94,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BadEducation" : 1,
+            "bruiser.ExtremelyViolentBlow" : 1,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.WhatchaDoin" : 2,
+            "com.Grab" : 2,
+            "com.ShuffleFeet" : 2,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.RottenBeer" : 1,
+            "junkie.BadTrip" : 1,
+            "junkie.BeggingMoney" : 1,
+            "junkie.PervertedMetabolism" : 2,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.9826,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2633,
+              "sconfitte" : 20,
+              "patte" : 47,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 2465,
+              "sconfitte" : 87,
+              "patte" : 148,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "starter",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "com.Grab" : 2,
+            "com.ShuffleFeet" : 1,
+            "com.Steal" : 2,
+            "com.items.AnotherRottenBeer" : 2,
+            "com.items.MarvelousCocktail" : 1,
+            "com.items.RottenBeer" : 2,
+            "junkie.AmphetamineReflexes" : 2,
+            "junkie.BadTrip" : 1,
+            "junkie.Cough" : 1,
+            "junkie.EverythingIsDrug" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.LethalHeroinDose" : 1,
+            "junkie.MethDrivenRage" : 1,
+            "junkie.PervertedMetabolism" : 1,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : null,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2573,
+              "sconfitte" : 43,
+              "patte" : 84,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 910,
+              "sconfitte" : 928,
+              "patte" : 862,
+              "limite" : 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "partenza" : "casuale",
+      "generazioni" : 40,
+      "arresto" : "numero massimo di generazioni (40)",
+      "storia" : [
+        0.5,
+        0.7014,
+        0.9392,
+        0.9288,
+        0.9531,
+        0.9705,
+        0.9392,
+        0.9601,
+        0.9653,
+        0.9757,
+        0.9531,
+        0.967,
+        0.9826,
+        0.9497,
+        0.9809,
+        0.9757,
+        0.9688,
+        0.974,
+        0.9844,
+        0.9826,
+        0.967,
+        0.9427,
+        0.9583,
+        0.974,
+        0.9861,
+        0.9635,
+        0.9757,
+        0.9722,
+        0.9826,
+        0.9861,
+        0.9705,
+        0.9757,
+        0.974,
+        0.9705,
+        0.9635,
+        0.974,
+        0.967,
+        0.9635,
+        0.9844,
+        0.9688,
+        0.9792
+      ],
+      "mazzi" : [
+        {
+          "etichetta" : "ultimo",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.ExtremelyViolentBlow" : 2,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 2,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.SickeningBlow" : 1,
+            "bruiser.WhatchaDoin" : 1,
+            "bruiser.YouStop" : 1,
+            "com.Grab" : 1,
+            "com.Steal" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.BadTrip" : 1,
+            "junkie.Cough" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.LethalHeroinDose" : 1,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.9792,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2613,
+              "sconfitte" : 24,
+              "patte" : 63,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 2478,
+              "sconfitte" : 58,
+              "patte" : 164,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BadEducation" : 1,
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.ExtremelyViolentBlow" : 1,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 1,
+            "bruiser.WhatchaDoin" : 1,
+            "bruiser.YouStop" : 1,
+            "com.Steal" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.BadTrip" : 2,
+            "junkie.BeggingMoney" : 1,
+            "junkie.GoingBerserk" : 2,
+            "junkie.PervertedMetabolism" : 1,
+            "junkie.ToxicBloodDrain" : 2
+          },
+          "punteggioRicerca" : 0.9844,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2618,
+              "sconfitte" : 21,
+              "patte" : 61,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 2409,
+              "sconfitte" : 107,
+              "patte" : 184,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "bruiser.BreakYourToy" : 1,
+            "bruiser.ExtremelyViolentBlow" : 1,
+            "bruiser.Glare" : 2,
+            "bruiser.HealingBlow" : 2,
+            "bruiser.MadeOfStone" : 2,
+            "bruiser.SuperImpact" : 1,
+            "bruiser.WhatchaDoin" : 1,
+            "bruiser.YouStop" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "com.items.RottenBeer" : 1,
+            "junkie.AmphetamineReflexes" : 1,
+            "junkie.BadTrip" : 1,
+            "junkie.BeggingMoney" : 1,
+            "junkie.Cough" : 1,
+            "junkie.GoingBerserk" : 2
+          },
+          "punteggioRicerca" : 0.974,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2533,
+              "sconfitte" : 87,
+              "patte" : 80,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 2392,
+              "sconfitte" : 101,
+              "patte" : 207,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "starter",
+          "bound" : [
+            "junkie.character.PatheticBlade",
+            "junkie.character.RottenSmile"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "com.Grab" : 2,
+            "com.ShuffleFeet" : 1,
+            "com.Steal" : 2,
+            "com.items.AnotherRottenBeer" : 2,
+            "com.items.MarvelousCocktail" : 1,
+            "com.items.RottenBeer" : 2,
+            "junkie.AmphetamineReflexes" : 2,
+            "junkie.BadTrip" : 1,
+            "junkie.Cough" : 1,
+            "junkie.EverythingIsDrug" : 1,
+            "junkie.GoingBerserk" : 1,
+            "junkie.LethalHeroinDose" : 1,
+            "junkie.MethDrivenRage" : 1,
+            "junkie.PervertedMetabolism" : 1,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : null,
+          "convalida" : {
+            "starter-bruiser" : {
+              "partite" : 2700,
+              "vittorie" : 2573,
+              "sconfitte" : 43,
+              "patte" : 84,
+              "limite" : 0
+            },
+            "starter-junkie" : {
+              "partite" : 2700,
+              "vittorie" : 910,
+              "sconfitte" : 928,
+              "patte" : 862,
+              "limite" : 0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

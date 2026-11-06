@@ -1,0 +1,2598 @@
+{
+  "intestazione" : {
+    "banco" : "sb-7/1",
+    "bozza" : "server/src/test/resources/sb-6a/attuale.json",
+    "sha256" : "123c880d37792fd28ec6b6b5f615b48928b499e174107673304954ef491ab293",
+    "formato" : "sb-6a/1",
+    "mazzi" : [
+      "starter-bruiser",
+      "starter-junkie"
+    ],
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse"
+    ],
+    "primoSeme" : 7000000,
+    "partitePerCella" : 1000,
+    "celle" : 27,
+    "partite" : 27000,
+    "postiAlternati" : "semi pari: A gioca per primo",
+    "tettoBound" : {
+      "tetto" : 5,
+      "tolleranza" : 0.2,
+      "pesi" : {
+        "A" : 1,
+        "V" : 1,
+        "T" : 1,
+        "L" : 0.5
+      },
+      "usi" : 8,
+      "colpoDiProva" : 10
+    },
+    "nota" : "Prima fotografia SB-7: dati di prova, non di bilanciamento. Carte e bot di oggi, nessuna correzione."
+  },
+  "invarianti" : {
+    "partite" : 27000,
+    "turniDiGiocatore" : 610628,
+    "violazioni" : {
+      "senza-mosse" : 0,
+      "mossa-vuota" : 0,
+      "bound-gratuite" : 0,
+      "basic-bound-in-mano" : 0,
+      "last-resort-in-mano" : 0,
+      "last-resort-giocabile" : 0,
+      "bound-giocabile" : 0,
+      "limite-turni" : 0
+    },
+    "esempi" : [ ]
+  },
+  "coppie" : [
+    {
+      "A" : "starter-bruiser",
+      "B" : "starter-bruiser",
+      "partite" : 9000,
+      "vittorieA" : 3605,
+      "vittorieB" : 3589,
+      "patte" : 1806,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 3532,
+      "quotaA" : 0.5011,
+      "quotaAIC95" : [
+        0.4896,
+        0.5127
+      ],
+      "turniTotali" : 106678,
+      "turniMediana" : 11,
+      "turniP10" : 8,
+      "turniP90" : 17,
+      "turniMin" : 5,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-bruiser",
+      "B" : "starter-junkie",
+      "partite" : 9000,
+      "vittorieA" : 117,
+      "vittorieB" : 8659,
+      "patte" : 224,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 4414,
+      "quotaA" : 0.0133,
+      "quotaAIC95" : [
+        0.0111,
+        0.016
+      ],
+      "turniTotali" : 70382,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 6,
+      "turniMax" : 14
+    },
+    {
+      "A" : "starter-junkie",
+      "B" : "starter-junkie",
+      "partite" : 9000,
+      "vittorieA" : 3067,
+      "vittorieB" : 3033,
+      "patte" : 2900,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 3035,
+      "quotaA" : 0.5028,
+      "quotaAIC95" : [
+        0.4902,
+        0.5153
+      ],
+      "turniTotali" : 128254,
+      "turniMediana" : 15,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 6,
+      "turniMax" : 19
+    }
+  ],
+  "celle" : [
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "aggressivo",
+      "B" : "starter-bruiser",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 400,
+      "vittorieB" : 412,
+      "patte" : 188,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 392,
+      "quotaA" : 0.4926,
+      "quotaAIC95" : [
+        0.4583,
+        0.527
+      ],
+      "turniTotali" : 9522,
+      "turniMediana" : 9,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "aggressivo",
+      "B" : "starter-bruiser",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 280,
+      "vittorieB" : 544,
+      "patte" : 176,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 425,
+      "quotaA" : 0.3398,
+      "quotaAIC95" : [
+        0.3083,
+        0.3728
+      ],
+      "turniTotali" : 12763,
+      "turniMediana" : 13,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 6,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "aggressivo",
+      "B" : "starter-bruiser",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 413,
+      "vittorieB" : 412,
+      "patte" : 175,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 384,
+      "quotaA" : 0.5006,
+      "quotaAIC95" : [
+        0.4666,
+        0.5346
+      ],
+      "turniTotali" : 9555,
+      "turniMediana" : 9,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "prudente",
+      "B" : "starter-bruiser",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 568,
+      "vittorieB" : 281,
+      "patte" : 151,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 425,
+      "quotaA" : 0.669,
+      "quotaAIC95" : [
+        0.6367,
+        0.6999
+      ],
+      "turniTotali" : 12749,
+      "turniMediana" : 13,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 7,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "prudente",
+      "B" : "starter-bruiser",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 289,
+      "vittorieB" : 302,
+      "patte" : 409,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 280,
+      "quotaA" : 0.489,
+      "quotaAIC95" : [
+        0.4489,
+        0.5292
+      ],
+      "turniTotali" : 17055,
+      "turniMediana" : 17,
+      "turniP10" : 15,
+      "turniP90" : 19,
+      "turniMin" : 10,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "prudente",
+      "B" : "starter-bruiser",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 510,
+      "vittorieB" : 313,
+      "patte" : 177,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 398,
+      "quotaA" : 0.6197,
+      "quotaAIC95" : [
+        0.586,
+        0.6522
+      ],
+      "turniTotali" : 12914,
+      "turniMediana" : 13,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 7,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "risorse",
+      "B" : "starter-bruiser",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 416,
+      "vittorieB" : 430,
+      "patte" : 154,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 414,
+      "quotaA" : 0.4917,
+      "quotaAIC95" : [
+        0.4582,
+        0.5254
+      ],
+      "turniTotali" : 9557,
+      "turniMediana" : 9,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "risorse",
+      "B" : "starter-bruiser",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 320,
+      "vittorieB" : 466,
+      "patte" : 214,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 405,
+      "quotaA" : 0.4071,
+      "quotaAIC95" : [
+        0.3733,
+        0.4418
+      ],
+      "turniTotali" : 12937,
+      "turniMediana" : 13,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 6,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "risorse",
+      "B" : "starter-bruiser",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 409,
+      "vittorieB" : 429,
+      "patte" : 162,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 409,
+      "quotaA" : 0.4881,
+      "quotaAIC95" : [
+        0.4544,
+        0.5219
+      ],
+      "turniTotali" : 9626,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "aggressivo",
+      "B" : "starter-junkie",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 35,
+      "vittorieB" : 916,
+      "patte" : 49,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 479,
+      "quotaA" : 0.0368,
+      "quotaAIC95" : [
+        0.0266,
+        0.0508
+      ],
+      "turniTotali" : 7528,
+      "turniMediana" : 7,
+      "turniP10" : 7,
+      "turniP90" : 8,
+      "turniMin" : 6,
+      "turniMax" : 11
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "aggressivo",
+      "B" : "starter-junkie",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 4,
+      "vittorieB" : 979,
+      "patte" : 17,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 494,
+      "quotaA" : 0.0041,
+      "quotaAIC95" : [
+        0.0016,
+        0.0104
+      ],
+      "turniTotali" : 7875,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 7,
+      "turniMax" : 10
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "aggressivo",
+      "B" : "starter-junkie",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 4,
+      "vittorieB" : 962,
+      "patte" : 34,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 491,
+      "quotaA" : 0.0041,
+      "quotaAIC95" : [
+        0.0016,
+        0.0106
+      ],
+      "turniTotali" : 7503,
+      "turniMediana" : 7,
+      "turniP10" : 7,
+      "turniP90" : 8,
+      "turniMin" : 6,
+      "turniMax" : 10
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "prudente",
+      "B" : "starter-junkie",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 25,
+      "vittorieB" : 949,
+      "patte" : 26,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 486,
+      "quotaA" : 0.0257,
+      "quotaAIC95" : [
+        0.0174,
+        0.0376
+      ],
+      "turniTotali" : 8115,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 7,
+      "turniMax" : 14
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "prudente",
+      "B" : "starter-junkie",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 0,
+      "vittorieB" : 1000,
+      "patte" : 0,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 500,
+      "quotaA" : 0,
+      "quotaAIC95" : [
+        0,
+        0.0038
+      ],
+      "turniTotali" : 8249,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 7,
+      "turniMax" : 10
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "prudente",
+      "B" : "starter-junkie",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 2,
+      "vittorieB" : 995,
+      "patte" : 3,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 500,
+      "quotaA" : 0.002,
+      "quotaAIC95" : [
+        0.0006,
+        0.0073
+      ],
+      "turniTotali" : 7993,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 7,
+      "turniMax" : 11
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "risorse",
+      "B" : "starter-junkie",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 40,
+      "vittorieB" : 910,
+      "patte" : 50,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 476,
+      "quotaA" : 0.0421,
+      "quotaAIC95" : [
+        0.0311,
+        0.0568
+      ],
+      "turniTotali" : 7598,
+      "turniMediana" : 7,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 6,
+      "turniMax" : 12
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "risorse",
+      "B" : "starter-junkie",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 3,
+      "vittorieB" : 984,
+      "patte" : 13,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 498,
+      "quotaA" : 0.003,
+      "quotaAIC95" : [
+        0.001,
+        0.0089
+      ],
+      "turniTotali" : 7952,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 9,
+      "turniMin" : 7,
+      "turniMax" : 10
+    },
+    {
+      "A" : "starter-bruiser",
+      "stileA" : "risorse",
+      "B" : "starter-junkie",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 4,
+      "vittorieB" : 964,
+      "patte" : 32,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 490,
+      "quotaA" : 0.0041,
+      "quotaAIC95" : [
+        0.0016,
+        0.0106
+      ],
+      "turniTotali" : 7569,
+      "turniMediana" : 8,
+      "turniP10" : 7,
+      "turniP90" : 8,
+      "turniMin" : 6,
+      "turniMax" : 10
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "aggressivo",
+      "B" : "starter-junkie",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 437,
+      "vittorieB" : 407,
+      "patte" : 156,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 422,
+      "quotaA" : 0.5178,
+      "quotaAIC95" : [
+        0.4841,
+        0.5513
+      ],
+      "turniTotali" : 12077,
+      "turniMediana" : 13,
+      "turniP10" : 8,
+      "turniP90" : 15,
+      "turniMin" : 6,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "aggressivo",
+      "B" : "starter-junkie",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 214,
+      "vittorieB" : 569,
+      "patte" : 217,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 383,
+      "quotaA" : 0.2733,
+      "quotaAIC95" : [
+        0.2433,
+        0.3056
+      ],
+      "turniTotali" : 14197,
+      "turniMediana" : 15,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 7,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "aggressivo",
+      "B" : "starter-junkie",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 388,
+      "vittorieB" : 398,
+      "patte" : 214,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 387,
+      "quotaA" : 0.4936,
+      "quotaAIC95" : [
+        0.4588,
+        0.5285
+      ],
+      "turniTotali" : 13045,
+      "turniMediana" : 14,
+      "turniP10" : 9,
+      "turniP90" : 16,
+      "turniMin" : 6,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "prudente",
+      "B" : "starter-junkie",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 588,
+      "vittorieB" : 212,
+      "patte" : 200,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 414,
+      "quotaA" : 0.735,
+      "quotaAIC95" : [
+        0.7033,
+        0.7644
+      ],
+      "turniTotali" : 14196,
+      "turniMediana" : 15,
+      "turniP10" : 10,
+      "turniP90" : 16,
+      "turniMin" : 7,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "prudente",
+      "B" : "starter-junkie",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 108,
+      "vittorieB" : 95,
+      "patte" : 797,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 96,
+      "quotaA" : 0.532,
+      "quotaAIC95" : [
+        0.4634,
+        0.5994
+      ],
+      "turniTotali" : 16610,
+      "turniMediana" : 17,
+      "turniP10" : 16,
+      "turniP90" : 17,
+      "turniMin" : 15,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "prudente",
+      "B" : "starter-junkie",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 491,
+      "vittorieB" : 143,
+      "patte" : 366,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 315,
+      "quotaA" : 0.7744,
+      "quotaAIC95" : [
+        0.7403,
+        0.8053
+      ],
+      "turniTotali" : 15422,
+      "turniMediana" : 16,
+      "turniP10" : 14,
+      "turniP90" : 16,
+      "turniMin" : 8,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "risorse",
+      "B" : "starter-junkie",
+      "stileB" : "aggressivo",
+      "partite" : 1000,
+      "vittorieA" : 409,
+      "vittorieB" : 385,
+      "patte" : 206,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 414,
+      "quotaA" : 0.5151,
+      "quotaAIC95" : [
+        0.4804,
+        0.5497
+      ],
+      "turniTotali" : 13062,
+      "turniMediana" : 14,
+      "turniP10" : 9,
+      "turniP90" : 16,
+      "turniMin" : 6,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "risorse",
+      "B" : "starter-junkie",
+      "stileB" : "prudente",
+      "partite" : 1000,
+      "vittorieA" : 129,
+      "vittorieB" : 482,
+      "patte" : 389,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 300,
+      "quotaA" : 0.2111,
+      "quotaAIC95" : [
+        0.1806,
+        0.2452
+      ],
+      "turniTotali" : 15393,
+      "turniMediana" : 16,
+      "turniP10" : 14,
+      "turniP90" : 16,
+      "turniMin" : 7,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-junkie",
+      "stileA" : "risorse",
+      "B" : "starter-junkie",
+      "stileB" : "risorse",
+      "partite" : 1000,
+      "vittorieA" : 303,
+      "vittorieB" : 342,
+      "patte" : 355,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 304,
+      "quotaA" : 0.4698,
+      "quotaAIC95" : [
+        0.4315,
+        0.5083
+      ],
+      "turniTotali" : 14252,
+      "turniMediana" : 15,
+      "turniP10" : 12,
+      "turniP90" : 16,
+      "turniMin" : 8,
+      "turniMax" : 17
+    }
+  ],
+  "mazzi" : {
+    "starter-bruiser" : {
+      "partite" : 27000,
+      "vittorie" : 7311,
+      "sconfitte" : 15853,
+      "patte" : 3836,
+      "limite" : 0,
+      "mazzoEsaurito" : 3099,
+      "lastResortArrivata" : 2467,
+      "lastResortTurniTotali" : 39954,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 7311,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 16350,
+        "T" : 21185,
+        "L" : 4040,
+        "A" : 266676
+      },
+      "partitePerseConRisorse" : 15853,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 169120,
+        "T" : 316575,
+        "L" : 19494,
+        "A" : 639504
+      },
+      "carte" : {
+        "bruiser.BadEducation" : {
+          "giocate" : 9200,
+          "partiteGiocata" : 9200,
+          "vinteGiocata" : 2528,
+          "perseGiocata" : 5190,
+          "partiteInMano" : 18522,
+          "turniInMano" : 48550,
+          "turniMorta" : 20837,
+          "turniFerma" : 18513
+        },
+        "bruiser.BreakYourToy" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 18674,
+          "turniInMano" : 31007,
+          "turniMorta" : 21428,
+          "turniFerma" : 9579
+        },
+        "bruiser.CantFeelAnything" : {
+          "giocate" : 612,
+          "partiteGiocata" : 612,
+          "vinteGiocata" : 135,
+          "perseGiocata" : 352,
+          "partiteInMano" : 18239,
+          "turniInMano" : 45972,
+          "turniMorta" : 32189,
+          "turniFerma" : 13171
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 20978,
+          "partiteGiocata" : 16866,
+          "vinteGiocata" : 4647,
+          "perseGiocata" : 9394,
+          "partiteInMano" : 24182,
+          "turniInMano" : 115305,
+          "turniMorta" : 83888,
+          "turniFerma" : 10439
+        },
+        "bruiser.Glare" : {
+          "giocate" : 18056,
+          "partiteGiocata" : 13075,
+          "vinteGiocata" : 3484,
+          "perseGiocata" : 7766,
+          "partiteInMano" : 23931,
+          "turniInMano" : 54723,
+          "turniMorta" : 0,
+          "turniFerma" : 36667
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 13253,
+          "partiteGiocata" : 13253,
+          "vinteGiocata" : 4238,
+          "perseGiocata" : 6451,
+          "partiteInMano" : 18723,
+          "turniInMano" : 54112,
+          "turniMorta" : 38399,
+          "turniFerma" : 2460
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 11387,
+          "partiteGiocata" : 11387,
+          "vinteGiocata" : 3580,
+          "perseGiocata" : 5632,
+          "partiteInMano" : 18398,
+          "turniInMano" : 38082,
+          "turniMorta" : 0,
+          "turniFerma" : 26695
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 13795,
+          "partiteGiocata" : 13795,
+          "vinteGiocata" : 4265,
+          "perseGiocata" : 7034,
+          "partiteInMano" : 18876,
+          "turniInMano" : 46245,
+          "turniMorta" : 22332,
+          "turniFerma" : 10118
+        },
+        "bruiser.SickeningBlow" : {
+          "giocate" : 4437,
+          "partiteGiocata" : 4437,
+          "vinteGiocata" : 2168,
+          "perseGiocata" : 1783,
+          "partiteInMano" : 18609,
+          "turniInMano" : 50713,
+          "turniMorta" : 31655,
+          "turniFerma" : 14621
+        },
+        "bruiser.StunningBlow" : {
+          "giocate" : 8590,
+          "partiteGiocata" : 7577,
+          "vinteGiocata" : 1567,
+          "perseGiocata" : 5022,
+          "partiteInMano" : 23662,
+          "turniInMano" : 91973,
+          "turniMorta" : 57308,
+          "turniFerma" : 26075
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 11156,
+          "partiteGiocata" : 11156,
+          "vinteGiocata" : 4182,
+          "perseGiocata" : 4921,
+          "partiteInMano" : 19098,
+          "turniInMano" : 64979,
+          "turniMorta" : 53572,
+          "turniFerma" : 251
+        },
+        "bruiser.WhatchaDoin" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 18545,
+          "turniInMano" : 47244,
+          "turniMorta" : 22006,
+          "turniFerma" : 25238
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 3776,
+          "partiteGiocata" : 2996,
+          "vinteGiocata" : 1250,
+          "perseGiocata" : 860,
+          "partiteInMano" : 23873,
+          "turniInMano" : 113482,
+          "turniMorta" : 26364,
+          "turniFerma" : 83342
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 66695,
+          "partiteGiocata" : 12706,
+          "vinteGiocata" : 3605,
+          "perseGiocata" : 7033,
+          "partiteInMano" : 27000,
+          "turniInMano" : 283738,
+          "turniMorta" : 82,
+          "turniFerma" : 216961
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 82594,
+          "partiteGiocata" : 20160,
+          "vinteGiocata" : 5735,
+          "perseGiocata" : 11717,
+          "partiteInMano" : 27000,
+          "turniInMano" : 283738,
+          "turniMorta" : 82,
+          "turniFerma" : 201062
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 15288,
+          "partiteGiocata" : 12690,
+          "vinteGiocata" : 3457,
+          "perseGiocata" : 7344,
+          "partiteInMano" : 27000,
+          "turniInMano" : 283738,
+          "turniMorta" : 107513,
+          "turniFerma" : 160937
+        },
+        "com.last.Struggle" : {
+          "giocate" : 3921,
+          "partiteGiocata" : 2175,
+          "vinteGiocata" : 694,
+          "perseGiocata" : 478,
+          "partiteInMano" : 2467,
+          "turniInMano" : 5107,
+          "turniMorta" : 0,
+          "turniFerma" : 1186
+        }
+      }
+    },
+    "starter-junkie" : {
+      "partite" : 27000,
+      "vittorie" : 14759,
+      "sconfitte" : 6217,
+      "patte" : 6024,
+      "limite" : 0,
+      "mazzoEsaurito" : 10100,
+      "lastResortArrivata" : 8156,
+      "lastResortTurniTotali" : 120054,
+      "lastResortMediana" : 14,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 14759,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 893130,
+        "L" : 39181,
+        "A" : 360919
+      },
+      "partitePerseConRisorse" : 6217,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 652280,
+        "L" : 24009,
+        "A" : 82910
+      },
+      "carte" : {
+        "com.Grab" : {
+          "giocate" : 1727,
+          "partiteGiocata" : 1683,
+          "vinteGiocata" : 690,
+          "perseGiocata" : 667,
+          "partiteInMano" : 25570,
+          "turniInMano" : 90206,
+          "turniMorta" : 12554,
+          "turniFerma" : 75925
+        },
+        "com.ShuffleFeet" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 22235,
+          "turniInMano" : 49366,
+          "turniMorta" : 0,
+          "turniFerma" : 49366
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 25770,
+          "turniInMano" : 71085,
+          "turniMorta" : 19293,
+          "turniFerma" : 51792
+        },
+        "com.basic.ToxicGrab" : {
+          "giocate" : 19580,
+          "partiteGiocata" : 12078,
+          "vinteGiocata" : 5101,
+          "perseGiocata" : 4697,
+          "partiteInMano" : 27000,
+          "turniInMano" : 326890,
+          "turniMorta" : 35305,
+          "turniFerma" : 272005
+        },
+        "com.last.Struggle" : {
+          "giocate" : 17160,
+          "partiteGiocata" : 8027,
+          "vinteGiocata" : 2027,
+          "perseGiocata" : 1751,
+          "partiteInMano" : 8156,
+          "turniInMano" : 17405,
+          "turniMorta" : 0,
+          "turniFerma" : 245
+        },
+        "junkie.AmphetamineReflexes" : {
+          "giocate" : 16113,
+          "partiteGiocata" : 9688,
+          "vinteGiocata" : 4495,
+          "perseGiocata" : 2349,
+          "partiteInMano" : 25548,
+          "turniInMano" : 123007,
+          "turniMorta" : 4704,
+          "turniFerma" : 102190
+        },
+        "junkie.BadTrip" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 22132,
+          "turniInMano" : 61524,
+          "turniMorta" : 5331,
+          "turniFerma" : 56193
+        },
+        "junkie.Cough" : {
+          "giocate" : 182,
+          "partiteGiocata" : 182,
+          "vinteGiocata" : 7,
+          "perseGiocata" : 164,
+          "partiteInMano" : 22184,
+          "turniInMano" : 35962,
+          "turniMorta" : 1642,
+          "turniFerma" : 34138
+        },
+        "junkie.EverythingIsDrug" : {
+          "giocate" : 6200,
+          "partiteGiocata" : 6200,
+          "vinteGiocata" : 2336,
+          "perseGiocata" : 2068,
+          "partiteInMano" : 22163,
+          "turniInMano" : 66458,
+          "turniMorta" : 7923,
+          "turniFerma" : 52335
+        },
+        "junkie.GoingBerserk" : {
+          "giocate" : 7549,
+          "partiteGiocata" : 7549,
+          "vinteGiocata" : 3347,
+          "perseGiocata" : 2664,
+          "partiteInMano" : 23508,
+          "turniInMano" : 171493,
+          "turniMorta" : 163944,
+          "turniFerma" : 0
+        },
+        "junkie.LethalHeroinDose" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 22346,
+          "turniInMano" : 76670,
+          "turniMorta" : 0,
+          "turniFerma" : 76670
+        },
+        "junkie.MethDrivenRage" : {
+          "giocate" : 22365,
+          "partiteGiocata" : 22365,
+          "vinteGiocata" : 10954,
+          "perseGiocata" : 5516,
+          "partiteInMano" : 22422,
+          "turniInMano" : 23349,
+          "turniMorta" : 240,
+          "turniFerma" : 744
+        },
+        "junkie.PervertedMetabolism" : {
+          "giocate" : 421,
+          "partiteGiocata" : 421,
+          "vinteGiocata" : 307,
+          "perseGiocata" : 86,
+          "partiteInMano" : 22091,
+          "turniInMano" : 121907,
+          "turniMorta" : 0,
+          "turniFerma" : 121486
+        },
+        "junkie.ToxicBloodDrain" : {
+          "giocate" : 193,
+          "partiteGiocata" : 193,
+          "vinteGiocata" : 141,
+          "perseGiocata" : 17,
+          "partiteInMano" : 22630,
+          "turniInMano" : 37793,
+          "turniMorta" : 1738,
+          "turniFerma" : 35862
+        },
+        "junkie.character.PatheticBlade" : {
+          "giocate" : 234418,
+          "partiteGiocata" : 27000,
+          "vinteGiocata" : 14759,
+          "perseGiocata" : 6217,
+          "partiteInMano" : 27000,
+          "turniInMano" : 326890,
+          "turniMorta" : 0,
+          "turniFerma" : 92472
+        },
+        "junkie.character.RottenSmile" : {
+          "giocate" : 982,
+          "partiteGiocata" : 656,
+          "vinteGiocata" : 36,
+          "perseGiocata" : 588,
+          "partiteInMano" : 27000,
+          "turniInMano" : 326890,
+          "turniMorta" : 0,
+          "turniFerma" : 325908
+        }
+      }
+    }
+  },
+  "mazziPerStile" : {
+    "starter-bruiser / aggressivo" : {
+      "partite" : 9000,
+      "vittorie" : 2259,
+      "sconfitte" : 5609,
+      "patte" : 1132,
+      "limite" : 0,
+      "mazzoEsaurito" : 89,
+      "lastResortArrivata" : 26,
+      "lastResortTurniTotali" : 450,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 2259,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 2820,
+        "T" : 10760,
+        "L" : 2094,
+        "A" : 84599
+      },
+      "partitePerseConRisorse" : 5609,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 32025,
+        "T" : 111075,
+        "L" : 10821,
+        "A" : 233045
+      },
+      "carte" : {
+        "bruiser.BadEducation" : {
+          "giocate" : 3557,
+          "partiteGiocata" : 3557,
+          "vinteGiocata" : 799,
+          "perseGiocata" : 2282,
+          "partiteInMano" : 5589,
+          "turniInMano" : 13301,
+          "turniMorta" : 6739,
+          "turniFerma" : 3005
+        },
+        "bruiser.BreakYourToy" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 5616,
+          "turniInMano" : 11495,
+          "turniMorta" : 8390,
+          "turniFerma" : 3105
+        },
+        "bruiser.CantFeelAnything" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 5489,
+          "turniInMano" : 11321,
+          "turniMorta" : 8241,
+          "turniFerma" : 3080
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 7114,
+          "partiteGiocata" : 5798,
+          "vinteGiocata" : 1462,
+          "perseGiocata" : 3515,
+          "partiteInMano" : 7786,
+          "turniInMano" : 30912,
+          "turniMorta" : 22050,
+          "turniFerma" : 1748
+        },
+        "bruiser.Glare" : {
+          "giocate" : 6658,
+          "partiteGiocata" : 5339,
+          "vinteGiocata" : 1400,
+          "perseGiocata" : 3158,
+          "partiteInMano" : 7697,
+          "turniInMano" : 18201,
+          "turniMorta" : 0,
+          "turniFerma" : 11543
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 4079,
+          "partiteGiocata" : 4079,
+          "vinteGiocata" : 1154,
+          "perseGiocata" : 2218,
+          "partiteInMano" : 5676,
+          "turniInMano" : 14925,
+          "turniMorta" : 10529,
+          "turniFerma" : 317
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 2017,
+          "partiteGiocata" : 2017,
+          "vinteGiocata" : 554,
+          "perseGiocata" : 1155,
+          "partiteInMano" : 5456,
+          "turniInMano" : 10410,
+          "turniMorta" : 0,
+          "turniFerma" : 8393
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 4241,
+          "partiteGiocata" : 4241,
+          "vinteGiocata" : 1109,
+          "perseGiocata" : 2543,
+          "partiteInMano" : 5647,
+          "turniInMano" : 12531,
+          "turniMorta" : 6595,
+          "turniFerma" : 1695
+        },
+        "bruiser.SickeningBlow" : {
+          "giocate" : 1996,
+          "partiteGiocata" : 1996,
+          "vinteGiocata" : 943,
+          "perseGiocata" : 848,
+          "partiteInMano" : 5614,
+          "turniInMano" : 19552,
+          "turniMorta" : 12707,
+          "turniFerma" : 4849
+        },
+        "bruiser.StunningBlow" : {
+          "giocate" : 3958,
+          "partiteGiocata" : 3534,
+          "vinteGiocata" : 614,
+          "perseGiocata" : 2507,
+          "partiteInMano" : 7529,
+          "turniInMano" : 34298,
+          "turniMorta" : 22214,
+          "turniFerma" : 8126
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 3304,
+          "partiteGiocata" : 3304,
+          "vinteGiocata" : 1166,
+          "perseGiocata" : 1564,
+          "partiteInMano" : 5818,
+          "turniInMano" : 17914,
+          "turniMorta" : 14610,
+          "turniFerma" : 0
+        },
+        "bruiser.WhatchaDoin" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 5568,
+          "turniInMano" : 18581,
+          "turniMorta" : 10828,
+          "turniFerma" : 7753
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7656,
+          "turniInMano" : 34241,
+          "turniMorta" : 12551,
+          "turniFerma" : 21690
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 4451,
+          "partiteGiocata" : 3719,
+          "vinteGiocata" : 907,
+          "perseGiocata" : 2306,
+          "partiteInMano" : 9000,
+          "turniInMano" : 86574,
+          "turniMorta" : 0,
+          "turniFerma" : 82123
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 35939,
+          "partiteGiocata" : 8604,
+          "vinteGiocata" : 2156,
+          "perseGiocata" : 5352,
+          "partiteInMano" : 9000,
+          "turniInMano" : 86574,
+          "turniMorta" : 0,
+          "turniFerma" : 50635
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 9233,
+          "partiteGiocata" : 7369,
+          "vinteGiocata" : 1930,
+          "perseGiocata" : 4417,
+          "partiteInMano" : 9000,
+          "turniInMano" : 86574,
+          "turniMorta" : 48030,
+          "turniFerma" : 29311
+        },
+        "com.last.Struggle" : {
+          "giocate" : 27,
+          "partiteGiocata" : 24,
+          "vinteGiocata" : 2,
+          "perseGiocata" : 5,
+          "partiteInMano" : 26,
+          "turniInMano" : 32,
+          "turniMorta" : 0,
+          "turniFerma" : 5
+        }
+      }
+    },
+    "starter-bruiser / prudente" : {
+      "partite" : 9000,
+      "vittorie" : 2706,
+      "sconfitte" : 4729,
+      "patte" : 1565,
+      "limite" : 0,
+      "mazzoEsaurito" : 2835,
+      "lastResortArrivata" : 2382,
+      "lastResortTurniTotali" : 38486,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 2706,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 7760,
+        "T" : 1840,
+        "L" : 2,
+        "A" : 59374
+      },
+      "partitePerseConRisorse" : 4729,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 93495,
+        "T" : 101480,
+        "L" : 0,
+        "A" : 105218
+      },
+      "carte" : {
+        "bruiser.BadEducation" : {
+          "giocate" : 2142,
+          "partiteGiocata" : 2142,
+          "vinteGiocata" : 837,
+          "perseGiocata" : 805,
+          "partiteInMano" : 7140,
+          "turniInMano" : 21170,
+          "turniMorta" : 6020,
+          "turniFerma" : 13008
+        },
+        "bruiser.BreakYourToy" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7252,
+          "turniInMano" : 8591,
+          "turniMorta" : 5390,
+          "turniFerma" : 3201
+        },
+        "bruiser.CantFeelAnything" : {
+          "giocate" : 612,
+          "partiteGiocata" : 612,
+          "vinteGiocata" : 135,
+          "perseGiocata" : 352,
+          "partiteInMano" : 7085,
+          "turniInMano" : 16638,
+          "turniMorta" : 10323,
+          "turniFerma" : 5703
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 7744,
+          "partiteGiocata" : 6042,
+          "vinteGiocata" : 1968,
+          "perseGiocata" : 2807,
+          "partiteInMano" : 8417,
+          "turniInMano" : 48143,
+          "turniMorta" : 34251,
+          "turniFerma" : 6148
+        },
+        "bruiser.Glare" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 8442,
+          "turniInMano" : 18167,
+          "turniMorta" : 0,
+          "turniFerma" : 18167
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 5349,
+          "partiteGiocata" : 5349,
+          "vinteGiocata" : 1943,
+          "perseGiocata" : 2213,
+          "partiteInMano" : 7168,
+          "turniInMano" : 21479,
+          "turniMorta" : 14530,
+          "turniFerma" : 1600
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 7141,
+          "partiteGiocata" : 7141,
+          "vinteGiocata" : 2406,
+          "perseGiocata" : 3252,
+          "partiteInMano" : 7295,
+          "turniInMano" : 11048,
+          "turniMorta" : 0,
+          "turniFerma" : 3907
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 5510,
+          "partiteGiocata" : 5510,
+          "vinteGiocata" : 1997,
+          "perseGiocata" : 2206,
+          "partiteInMano" : 7280,
+          "turniInMano" : 17337,
+          "turniMorta" : 5397,
+          "turniFerma" : 6430
+        },
+        "bruiser.SickeningBlow" : {
+          "giocate" : 252,
+          "partiteGiocata" : 252,
+          "vinteGiocata" : 185,
+          "perseGiocata" : 40,
+          "partiteInMano" : 7147,
+          "turniInMano" : 12559,
+          "turniMorta" : 6426,
+          "turniFerma" : 5881
+        },
+        "bruiser.StunningBlow" : {
+          "giocate" : 497,
+          "partiteGiocata" : 492,
+          "vinteGiocata" : 198,
+          "perseGiocata" : 157,
+          "partiteInMano" : 8393,
+          "turniInMano" : 24094,
+          "turniMorta" : 12464,
+          "turniFerma" : 11133
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 4555,
+          "partiteGiocata" : 4555,
+          "vinteGiocata" : 1747,
+          "perseGiocata" : 1916,
+          "partiteInMano" : 7285,
+          "turniInMano" : 26755,
+          "turniMorta" : 21949,
+          "turniFerma" : 251
+        },
+        "bruiser.WhatchaDoin" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7198,
+          "turniInMano" : 18100,
+          "turniMorta" : 5901,
+          "turniFerma" : 12199
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 3776,
+          "partiteGiocata" : 2996,
+          "vinteGiocata" : 1250,
+          "perseGiocata" : 860,
+          "partiteInMano" : 8442,
+          "turniInMano" : 58906,
+          "turniMorta" : 8632,
+          "turniFerma" : 46498
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 62244,
+          "partiteGiocata" : 8987,
+          "vinteGiocata" : 2698,
+          "perseGiocata" : 4727,
+          "partiteInMano" : 9000,
+          "turniInMano" : 109830,
+          "turniMorta" : 82,
+          "turniFerma" : 47504
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 6114,
+          "partiteGiocata" : 2576,
+          "vinteGiocata" : 1240,
+          "perseGiocata" : 862,
+          "partiteInMano" : 9000,
+          "turniInMano" : 109830,
+          "turniMorta" : 82,
+          "turniFerma" : 103634
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 58,
+          "partiteGiocata" : 58,
+          "vinteGiocata" : 30,
+          "perseGiocata" : 13,
+          "partiteInMano" : 9000,
+          "turniInMano" : 109830,
+          "turniMorta" : 22955,
+          "turniFerma" : 86817
+        },
+        "com.last.Struggle" : {
+          "giocate" : 3836,
+          "partiteGiocata" : 2096,
+          "vinteGiocata" : 688,
+          "perseGiocata" : 452,
+          "partiteInMano" : 2382,
+          "turniInMano" : 5013,
+          "turniMorta" : 0,
+          "turniFerma" : 1177
+        }
+      }
+    },
+    "starter-bruiser / risorse" : {
+      "partite" : 9000,
+      "vittorie" : 2346,
+      "sconfitte" : 5515,
+      "patte" : 1139,
+      "limite" : 0,
+      "mazzoEsaurito" : 175,
+      "lastResortArrivata" : 59,
+      "lastResortTurniTotali" : 1018,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 2346,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 5770,
+        "T" : 8585,
+        "L" : 1944,
+        "A" : 122703
+      },
+      "partitePerseConRisorse" : 5515,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 43600,
+        "T" : 104020,
+        "L" : 8673,
+        "A" : 301241
+      },
+      "carte" : {
+        "bruiser.BadEducation" : {
+          "giocate" : 3501,
+          "partiteGiocata" : 3501,
+          "vinteGiocata" : 892,
+          "perseGiocata" : 2103,
+          "partiteInMano" : 5793,
+          "turniInMano" : 14079,
+          "turniMorta" : 8078,
+          "turniFerma" : 2500
+        },
+        "bruiser.BreakYourToy" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 5806,
+          "turniInMano" : 10921,
+          "turniMorta" : 7648,
+          "turniFerma" : 3273
+        },
+        "bruiser.CantFeelAnything" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 5665,
+          "turniInMano" : 18013,
+          "turniMorta" : 13625,
+          "turniFerma" : 4388
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 6120,
+          "partiteGiocata" : 5026,
+          "vinteGiocata" : 1217,
+          "perseGiocata" : 3072,
+          "partiteInMano" : 7979,
+          "turniInMano" : 36250,
+          "turniMorta" : 27587,
+          "turniFerma" : 2543
+        },
+        "bruiser.Glare" : {
+          "giocate" : 11398,
+          "partiteGiocata" : 7736,
+          "vinteGiocata" : 2084,
+          "perseGiocata" : 4608,
+          "partiteInMano" : 7792,
+          "turniInMano" : 18355,
+          "turniMorta" : 0,
+          "turniFerma" : 6957
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 3825,
+          "partiteGiocata" : 3825,
+          "vinteGiocata" : 1141,
+          "perseGiocata" : 2020,
+          "partiteInMano" : 5879,
+          "turniInMano" : 17708,
+          "turniMorta" : 13340,
+          "turniFerma" : 543
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 2229,
+          "partiteGiocata" : 2229,
+          "vinteGiocata" : 620,
+          "perseGiocata" : 1225,
+          "partiteInMano" : 5647,
+          "turniInMano" : 16624,
+          "turniMorta" : 0,
+          "turniFerma" : 14395
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 4044,
+          "partiteGiocata" : 4044,
+          "vinteGiocata" : 1159,
+          "perseGiocata" : 2285,
+          "partiteInMano" : 5949,
+          "turniInMano" : 16377,
+          "turniMorta" : 10340,
+          "turniFerma" : 1993
+        },
+        "bruiser.SickeningBlow" : {
+          "giocate" : 2189,
+          "partiteGiocata" : 2189,
+          "vinteGiocata" : 1040,
+          "perseGiocata" : 895,
+          "partiteInMano" : 5848,
+          "turniInMano" : 18602,
+          "turniMorta" : 12522,
+          "turniFerma" : 3891
+        },
+        "bruiser.StunningBlow" : {
+          "giocate" : 4135,
+          "partiteGiocata" : 3551,
+          "vinteGiocata" : 755,
+          "perseGiocata" : 2358,
+          "partiteInMano" : 7740,
+          "turniInMano" : 33581,
+          "turniMorta" : 22630,
+          "turniFerma" : 6816
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 3297,
+          "partiteGiocata" : 3297,
+          "vinteGiocata" : 1269,
+          "perseGiocata" : 1441,
+          "partiteInMano" : 5995,
+          "turniInMano" : 20310,
+          "turniMorta" : 17013,
+          "turniFerma" : 0
+        },
+        "bruiser.WhatchaDoin" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 5779,
+          "turniInMano" : 10563,
+          "turniMorta" : 5277,
+          "turniFerma" : 5286
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7775,
+          "turniInMano" : 20335,
+          "turniMorta" : 5181,
+          "turniFerma" : 15154
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 9000,
+          "turniInMano" : 87334,
+          "turniMorta" : 0,
+          "turniFerma" : 87334
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 40541,
+          "partiteGiocata" : 8980,
+          "vinteGiocata" : 2339,
+          "perseGiocata" : 5503,
+          "partiteInMano" : 9000,
+          "turniInMano" : 87334,
+          "turniMorta" : 0,
+          "turniFerma" : 46793
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 5997,
+          "partiteGiocata" : 5263,
+          "vinteGiocata" : 1497,
+          "perseGiocata" : 2914,
+          "partiteInMano" : 9000,
+          "turniInMano" : 87334,
+          "turniMorta" : 36528,
+          "turniFerma" : 44809
+        },
+        "com.last.Struggle" : {
+          "giocate" : 58,
+          "partiteGiocata" : 55,
+          "vinteGiocata" : 4,
+          "perseGiocata" : 21,
+          "partiteInMano" : 59,
+          "turniInMano" : 62,
+          "turniMorta" : 0,
+          "turniFerma" : 4
+        }
+      }
+    },
+    "starter-junkie / aggressivo" : {
+      "partite" : 9000,
+      "vittorie" : 4818,
+      "sconfitte" : 2908,
+      "patte" : 1274,
+      "limite" : 0,
+      "mazzoEsaurito" : 1235,
+      "lastResortArrivata" : 470,
+      "lastResortTurniTotali" : 7378,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 4818,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 322715,
+        "L" : 26128,
+        "A" : 77769
+      },
+      "partitePerseConRisorse" : 2908,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 276525,
+        "L" : 15571,
+        "A" : 21386
+      },
+      "carte" : {
+        "com.Grab" : {
+          "giocate" : 975,
+          "partiteGiocata" : 949,
+          "vinteGiocata" : 402,
+          "perseGiocata" : 388,
+          "partiteInMano" : 8310,
+          "turniInMano" : 25931,
+          "turniMorta" : 4145,
+          "turniFerma" : 20811
+        },
+        "com.ShuffleFeet" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 6868,
+          "turniInMano" : 15052,
+          "turniMorta" : 0,
+          "turniFerma" : 15052
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 8414,
+          "turniInMano" : 28174,
+          "turniMorta" : 8724,
+          "turniFerma" : 19450
+        },
+        "com.basic.ToxicGrab" : {
+          "giocate" : 12361,
+          "partiteGiocata" : 7208,
+          "vinteGiocata" : 3230,
+          "perseGiocata" : 2759,
+          "partiteInMano" : 9000,
+          "turniInMano" : 101895,
+          "turniMorta" : 12433,
+          "turniFerma" : 77101
+        },
+        "com.last.Struggle" : {
+          "giocate" : 461,
+          "partiteGiocata" : 357,
+          "vinteGiocata" : 29,
+          "perseGiocata" : 120,
+          "partiteInMano" : 470,
+          "turniInMano" : 669,
+          "turniMorta" : 0,
+          "turniFerma" : 208
+        },
+        "junkie.AmphetamineReflexes" : {
+          "giocate" : 1697,
+          "partiteGiocata" : 1493,
+          "vinteGiocata" : 85,
+          "perseGiocata" : 1352,
+          "partiteInMano" : 8381,
+          "turniInMano" : 74078,
+          "turniMorta" : 1761,
+          "turniFerma" : 70620
+        },
+        "junkie.BadTrip" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 6788,
+          "turniInMano" : 13987,
+          "turniMorta" : 1550,
+          "turniFerma" : 12437
+        },
+        "junkie.Cough" : {
+          "giocate" : 133,
+          "partiteGiocata" : 133,
+          "vinteGiocata" : 7,
+          "perseGiocata" : 116,
+          "partiteInMano" : 6889,
+          "turniInMano" : 14486,
+          "turniMorta" : 522,
+          "turniFerma" : 13831
+        },
+        "junkie.EverythingIsDrug" : {
+          "giocate" : 403,
+          "partiteGiocata" : 403,
+          "vinteGiocata" : 174,
+          "perseGiocata" : 167,
+          "partiteInMano" : 6907,
+          "turniInMano" : 13318,
+          "turniMorta" : 2054,
+          "turniFerma" : 10861
+        },
+        "junkie.GoingBerserk" : {
+          "giocate" : 5186,
+          "partiteGiocata" : 5186,
+          "vinteGiocata" : 2254,
+          "perseGiocata" : 1946,
+          "partiteInMano" : 7788,
+          "turniInMano" : 42776,
+          "turniMorta" : 37590,
+          "turniFerma" : 0
+        },
+        "junkie.LethalHeroinDose" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 6930,
+          "turniInMano" : 14903,
+          "turniMorta" : 0,
+          "turniFerma" : 14903
+        },
+        "junkie.MethDrivenRage" : {
+          "giocate" : 6939,
+          "partiteGiocata" : 6939,
+          "vinteGiocata" : 3402,
+          "perseGiocata" : 2356,
+          "partiteInMano" : 6982,
+          "turniInMano" : 7743,
+          "turniMorta" : 74,
+          "turniFerma" : 730
+        },
+        "junkie.PervertedMetabolism" : {
+          "giocate" : 99,
+          "partiteGiocata" : 99,
+          "vinteGiocata" : 21,
+          "perseGiocata" : 71,
+          "partiteInMano" : 6809,
+          "turniInMano" : 14225,
+          "turniMorta" : 0,
+          "turniFerma" : 14126
+        },
+        "junkie.ToxicBloodDrain" : {
+          "giocate" : 142,
+          "partiteGiocata" : 142,
+          "vinteGiocata" : 103,
+          "perseGiocata" : 15,
+          "partiteInMano" : 7046,
+          "turniInMano" : 15431,
+          "turniMorta" : 612,
+          "turniFerma" : 14677
+        },
+        "junkie.character.PatheticBlade" : {
+          "giocate" : 72831,
+          "partiteGiocata" : 9000,
+          "vinteGiocata" : 4818,
+          "perseGiocata" : 2908,
+          "partiteInMano" : 9000,
+          "turniInMano" : 101895,
+          "turniMorta" : 0,
+          "turniFerma" : 29064
+        },
+        "junkie.character.RottenSmile" : {
+          "giocate" : 668,
+          "partiteGiocata" : 343,
+          "vinteGiocata" : 33,
+          "perseGiocata" : 284,
+          "partiteInMano" : 9000,
+          "turniInMano" : 101895,
+          "turniMorta" : 0,
+          "turniFerma" : 101227
+        }
+      }
+    },
+    "starter-junkie / prudente" : {
+      "partite" : 9000,
+      "vittorie" : 5296,
+      "sconfitte" : 908,
+      "patte" : 2796,
+      "limite" : 0,
+      "mazzoEsaurito" : 5461,
+      "lastResortArrivata" : 5353,
+      "lastResortTurniTotali" : 77645,
+      "lastResortMediana" : 14,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 5296,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 253535,
+        "L" : 0,
+        "A" : 176685
+      },
+      "partitePerseConRisorse" : 908,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 75390,
+        "L" : 0,
+        "A" : 31795
+      },
+      "carte" : {
+        "com.Grab" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 8695,
+          "turniInMano" : 41532,
+          "turniMorta" : 4757,
+          "turniFerma" : 36775
+        },
+        "com.ShuffleFeet" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7891,
+          "turniInMano" : 21966,
+          "turniMorta" : 0,
+          "turniFerma" : 21966
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 8726,
+          "turniInMano" : 19392,
+          "turniMorta" : 4389,
+          "turniFerma" : 15003
+        },
+        "com.basic.ToxicGrab" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 9000,
+          "turniInMano" : 116504,
+          "turniMorta" : 10953,
+          "turniFerma" : 105551
+        },
+        "com.last.Struggle" : {
+          "giocate" : 13108,
+          "partiteGiocata" : 5353,
+          "vinteGiocata" : 1745,
+          "perseGiocata" : 854,
+          "partiteInMano" : 5353,
+          "turniInMano" : 13128,
+          "turniMorta" : 0,
+          "turniFerma" : 20
+        },
+        "junkie.AmphetamineReflexes" : {
+          "giocate" : 14318,
+          "partiteGiocata" : 8097,
+          "vinteGiocata" : 4408,
+          "perseGiocata" : 903,
+          "partiteInMano" : 8593,
+          "turniInMano" : 25756,
+          "turniMorta" : 2154,
+          "turniFerma" : 9284
+        },
+        "junkie.BadTrip" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7873,
+          "turniInMano" : 9773,
+          "turniMorta" : 0,
+          "turniFerma" : 9773
+        },
+        "junkie.Cough" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7851,
+          "turniInMano" : 9705,
+          "turniMorta" : 686,
+          "turniFerma" : 9019
+        },
+        "junkie.EverythingIsDrug" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7949,
+          "turniInMano" : 22091,
+          "turniMorta" : 2454,
+          "turniFerma" : 19637
+        },
+        "junkie.GoingBerserk" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7932,
+          "turniInMano" : 70746,
+          "turniMorta" : 70746,
+          "turniFerma" : 0
+        },
+        "junkie.LethalHeroinDose" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7900,
+          "turniInMano" : 22406,
+          "turniMorta" : 0,
+          "turniFerma" : 22406
+        },
+        "junkie.MethDrivenRage" : {
+          "giocate" : 7912,
+          "partiteGiocata" : 7912,
+          "vinteGiocata" : 4223,
+          "perseGiocata" : 900,
+          "partiteInMano" : 7918,
+          "turniInMano" : 8032,
+          "turniMorta" : 120,
+          "turniFerma" : 0
+        },
+        "junkie.PervertedMetabolism" : {
+          "giocate" : 318,
+          "partiteGiocata" : 318,
+          "vinteGiocata" : 282,
+          "perseGiocata" : 15,
+          "partiteInMano" : 7821,
+          "turniInMano" : 68518,
+          "turniMorta" : 0,
+          "turniFerma" : 68200
+        },
+        "junkie.ToxicBloodDrain" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7989,
+          "turniInMano" : 10060,
+          "turniMorta" : 710,
+          "turniFerma" : 9350
+        },
+        "junkie.character.PatheticBlade" : {
+          "giocate" : 80841,
+          "partiteGiocata" : 9000,
+          "vinteGiocata" : 5296,
+          "perseGiocata" : 908,
+          "partiteInMano" : 9000,
+          "turniInMano" : 116504,
+          "turniMorta" : 0,
+          "turniFerma" : 35663
+        },
+        "junkie.character.RottenSmile" : {
+          "giocate" : 7,
+          "partiteGiocata" : 6,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 6,
+          "partiteInMano" : 9000,
+          "turniInMano" : 116504,
+          "turniMorta" : 0,
+          "turniFerma" : 116497
+        }
+      }
+    },
+    "starter-junkie / risorse" : {
+      "partite" : 9000,
+      "vittorie" : 4645,
+      "sconfitte" : 2401,
+      "patte" : 1954,
+      "limite" : 0,
+      "mazzoEsaurito" : 3404,
+      "lastResortArrivata" : 2333,
+      "lastResortTurniTotali" : 35031,
+      "lastResortMediana" : 15,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 4645,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 316880,
+        "L" : 13053,
+        "A" : 106465
+      },
+      "partitePerseConRisorse" : 2401,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 300365,
+        "L" : 8438,
+        "A" : 29729
+      },
+      "carte" : {
+        "com.Grab" : {
+          "giocate" : 752,
+          "partiteGiocata" : 734,
+          "vinteGiocata" : 288,
+          "perseGiocata" : 279,
+          "partiteInMano" : 8565,
+          "turniInMano" : 22743,
+          "turniMorta" : 3652,
+          "turniFerma" : 18339
+        },
+        "com.ShuffleFeet" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7476,
+          "turniInMano" : 12348,
+          "turniMorta" : 0,
+          "turniFerma" : 12348
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 8630,
+          "turniInMano" : 23519,
+          "turniMorta" : 6180,
+          "turniFerma" : 17339
+        },
+        "com.basic.ToxicGrab" : {
+          "giocate" : 7219,
+          "partiteGiocata" : 4870,
+          "vinteGiocata" : 1871,
+          "perseGiocata" : 1938,
+          "partiteInMano" : 9000,
+          "turniInMano" : 108491,
+          "turniMorta" : 11919,
+          "turniFerma" : 89353
+        },
+        "com.last.Struggle" : {
+          "giocate" : 3591,
+          "partiteGiocata" : 2317,
+          "vinteGiocata" : 253,
+          "perseGiocata" : 777,
+          "partiteInMano" : 2333,
+          "turniInMano" : 3608,
+          "turniMorta" : 0,
+          "turniFerma" : 17
+        },
+        "junkie.AmphetamineReflexes" : {
+          "giocate" : 98,
+          "partiteGiocata" : 98,
+          "vinteGiocata" : 2,
+          "perseGiocata" : 94,
+          "partiteInMano" : 8574,
+          "turniInMano" : 23173,
+          "turniMorta" : 789,
+          "turniFerma" : 22286
+        },
+        "junkie.BadTrip" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7471,
+          "turniInMano" : 37764,
+          "turniMorta" : 3781,
+          "turniFerma" : 33983
+        },
+        "junkie.Cough" : {
+          "giocate" : 49,
+          "partiteGiocata" : 49,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 48,
+          "partiteInMano" : 7444,
+          "turniInMano" : 11771,
+          "turniMorta" : 434,
+          "turniFerma" : 11288
+        },
+        "junkie.EverythingIsDrug" : {
+          "giocate" : 5797,
+          "partiteGiocata" : 5797,
+          "vinteGiocata" : 2162,
+          "perseGiocata" : 1901,
+          "partiteInMano" : 7307,
+          "turniInMano" : 31049,
+          "turniMorta" : 3415,
+          "turniFerma" : 21837
+        },
+        "junkie.GoingBerserk" : {
+          "giocate" : 2363,
+          "partiteGiocata" : 2363,
+          "vinteGiocata" : 1093,
+          "perseGiocata" : 718,
+          "partiteInMano" : 7788,
+          "turniInMano" : 57971,
+          "turniMorta" : 55608,
+          "turniFerma" : 0
+        },
+        "junkie.LethalHeroinDose" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7516,
+          "turniInMano" : 39361,
+          "turniMorta" : 0,
+          "turniFerma" : 39361
+        },
+        "junkie.MethDrivenRage" : {
+          "giocate" : 7514,
+          "partiteGiocata" : 7514,
+          "vinteGiocata" : 3329,
+          "perseGiocata" : 2260,
+          "partiteInMano" : 7522,
+          "turniInMano" : 7574,
+          "turniMorta" : 46,
+          "turniFerma" : 14
+        },
+        "junkie.PervertedMetabolism" : {
+          "giocate" : 4,
+          "partiteGiocata" : 4,
+          "vinteGiocata" : 4,
+          "perseGiocata" : 0,
+          "partiteInMano" : 7461,
+          "turniInMano" : 39164,
+          "turniMorta" : 0,
+          "turniFerma" : 39160
+        },
+        "junkie.ToxicBloodDrain" : {
+          "giocate" : 51,
+          "partiteGiocata" : 51,
+          "vinteGiocata" : 38,
+          "perseGiocata" : 2,
+          "partiteInMano" : 7595,
+          "turniInMano" : 12302,
+          "turniMorta" : 416,
+          "turniFerma" : 11835
+        },
+        "junkie.character.PatheticBlade" : {
+          "giocate" : 80746,
+          "partiteGiocata" : 9000,
+          "vinteGiocata" : 4645,
+          "perseGiocata" : 2401,
+          "partiteInMano" : 9000,
+          "turniInMano" : 108491,
+          "turniMorta" : 0,
+          "turniFerma" : 27745
+        },
+        "junkie.character.RottenSmile" : {
+          "giocate" : 307,
+          "partiteGiocata" : 307,
+          "vinteGiocata" : 3,
+          "perseGiocata" : 298,
+          "partiteInMano" : 9000,
+          "turniInMano" : 108491,
+          "turniMorta" : 0,
+          "turniFerma" : 108184
+        }
+      }
+    }
+  },
+  "tettoBound" : [
+    {
+      "bound" : "bruiser.character.LittleRage",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 4E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [
+        "più di una funzione"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 6,00"
+    },
+    {
+      "bound" : "bruiser.character.LittleSmack",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "danno" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "guadagni" : {
+        "A" : 4E+1,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1E+1,
+      "medio" : 1E+1,
+      "restaSullAvversario" : [ ],
+      "note" : [
+        "più di una funzione"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 10,00 oltre il tetto 6,00"
+    },
+    {
+      "bound" : "junkie.character.PatheticBlade",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        12,
+        15,
+        17,
+        2E+1,
+        22,
+        25,
+        27,
+        3E+1
+      ],
+      "danno" : [
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1,
+        22,
+        25
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 4E+1,
+        "L" : 0
+      },
+      "massimo" : 3E+1,
+      "medio" : 21,
+      "restaSullAvversario" : [
+        "T +40"
+      ],
+      "note" : [
+        "più di una funzione"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 30,00 oltre il tetto 6,00; si accumula: danno 7,00 al primo uso, 25,00 all'uso 8; resta sull'avversario: T +40"
+    },
+    {
+      "bound" : "junkie.character.RottenSmile",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "guadagni" : {
+        "A" : 4E+1,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [
+        "A -40"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "resta sull'avversario: A -40"
+    }
+  ]
+}

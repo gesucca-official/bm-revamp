@@ -1,0 +1,8 @@
+banco sb-7/1
+bozza server/src/test/resources/sb-6a/prova-sb9.json
+partite 27000
+celle 27
+thread 1
+secondi 38.731
+partite al secondo 697.1
+millisecondi per partita (tempo reale diviso partite) 1.4345

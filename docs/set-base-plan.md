@@ -404,6 +404,13 @@ mini-espansione **non tocca motore né regole generali**; se li tocca, si correg
 
 ### SB-7 — Banco di misura e invarianti
 
+**SB-7 fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Un comando a richiesta produce la matrice dei matchup per coppia
+di mazzi e di stili, con intervalli di Wilson, e un rapporto in testo e in dati, identico byte per byte a parità di seme e bozza. Lo stesso
+comando controlla otto invarianti in partita e il tetto delle bound sulla ripetizione, con tetto e pesi come parametri. Una ricerca per
+mutazione, convalidata su semi disgiunti, ritrova una carta volutamente superiore. Ogni controllo è provato su una bozza costruita per
+violarlo. Prima fotografia sulla bozza «attuale» e su quella di prova: nessun invariante violato, tutte e quattro le bound attuali oltre il
+tetto. Una matrice da 7 personaggi costa circa 7 minuti su un thread. [Rapporto](reports/set-base/sb-7-report.md).
+
 **Perimetro.** Un comando che produce la **matrice dei matchup** per stile di bot e un rapporto: esiti con intervallo di confidenza, durata, patte, mazzi
 esauriti, tempo fino alla last resort, risorse inutilizzate, carte per giocata e per vittoria quando giocate, carte morte in mano. Controlli automatici
 sulla bozza: **zero turni senza mosse legali**, [vincoli delle bound e delle last resort](#nessun-giocatore-senza-mosse), tetto di debolezza sulla

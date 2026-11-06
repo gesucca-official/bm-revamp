@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -75,11 +76,20 @@ final class SimulationRunner {
         return continueGame(newGame(seed, first, second), seed, false, game -> {});
     }
 
+    /** Come run, con un osservatore dei momenti ROUND_READY e ROUND_COMMITTED (SB-7). Non cambia decisioni né ordine. */
+    Result run(long seed, Contender first, Contender second, BiConsumer<String, Game> observer) throws Exception {
+        return continueGame(newGame(seed, first, second), seed, false, game -> {}, observer);
+    }
+
     Result run(long seed, boolean bruiserFirst, boolean trace) throws Exception {
         return continueGame(newGame(seed, bruiserFirst), seed, trace, game -> {});
     }
 
     Result continueGame(Game game, long seed, boolean trace, Consumer<Game> committed) {
+        return continueGame(game, seed, trace, committed, (stage, state) -> {});
+    }
+
+    Result continueGame(Game game, long seed, boolean trace, Consumer<Game> committed, BiConsumer<String, Game> observer) {
         List<String> lines = new ArrayList<>();
         List<String> turnEvents = new ArrayList<>();
         int[] emptyMoves = {0};
@@ -91,12 +101,14 @@ final class SimulationRunner {
             }, (stage, state) -> {
                 if ("ROUND_READY".equals(stage)) {
                     for (Move move : state.getPendingMoves()) if (move.isVoid()) emptyMoves[0]++;
+                    observer.accept(stage, state);
                 } else if ("ROUND_COMMITTED".equals(stage)) {
                     if (trace) {
                         lines.add(line(state, seed, "TURN", null, turnEvents));
                         turnEvents.clear();
                     }
                     committed.accept(state);
+                    observer.accept(stage, state);
                     // Il turno 200 può finire normalmente; interrompi prima della ricorsione al 202.
                     if (state.getTurn() > MAX_TURNS) throw new TurnLimit();
                 }

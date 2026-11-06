@@ -148,6 +148,9 @@ final class Draft implements PlayerSource {
 
     final String source;
     final Rules rules;
+    /** Solo per le prove degli invarianti di SB-7: salta i vincoli di bound e last resort controllati alla lettura. */
+    private final boolean lenient;
+    private final JsonNode json;
     private final Map<String, CharacterSpec> characters = new LinkedHashMap<>();
     private final Map<String, CardSpec> cards = new LinkedHashMap<>();
     private final Map<String, DeckSpec> decks = new LinkedHashMap<>();
@@ -179,11 +182,21 @@ final class Draft implements PlayerSource {
     }
 
     static Draft parse(String source, JsonNode root) {
-        return new Draft(source, root);
+        return new Draft(source, root, false);
     }
 
-    private Draft(String source, JsonNode root) {
+    /**
+     * Lettura che salta i vincoli di bound e last resort (bersagli sugli oggetti, last resort a costo). Esiste solo perché le prove
+     * di SB-7 dimostrino che i controlli in partita trovano ciò che il caricatore lascerebbe passare: non serve alle misure.
+     */
+    static Draft parseLenient(String source, JsonNode root) {
+        return new Draft(source, root, true);
+    }
+
+    private Draft(String source, JsonNode root, boolean lenient) {
         this.source = source;
+        this.lenient = lenient;
+        this.json = root.deepCopy();
         ObjectNode top = object(root, "bozza");
         fields(top, "bozza", Set.of("format", "rules", "characters", "cards", "decks"), Set.of());
         String format = text(top, "format", "bozza");
@@ -212,6 +225,37 @@ final class Draft implements PlayerSource {
     Set<String> cardBindings() { return Collections.unmodifiableSet(cards.keySet()); }
 
     String characterOf(String deck) { return decks.get(deck).character; }
+
+    /** Una copia del JSON letto: la ricerca dei mazzi di SB-7 ne deriva bozze con altri mazzi. */
+    JsonNode json() { return json.deepCopy(); }
+
+    boolean isLenient() { return lenient; }
+
+    /** Una bozza derivata da questa, letta allo stesso modo (stretto o indulgente). */
+    Draft derive(String source, JsonNode root) { return new Draft(source, root, lenient); }
+
+    Set<String> characterIds() { return Collections.unmodifiableSet(characters.keySet()); }
+
+    String characterBasic(String character) { return characters.get(character).basic; }
+
+    String basicOf(String deck) { return decks.get(deck).basic; }
+
+    List<String> boundOf(String deck) { return decks.get(deck).bound; }
+
+    String lastResortOf(String deck) { return decks.get(deck).lastResort; }
+
+    /** Le carte regolari del mazzo, per binding, con le copie. */
+    Map<String, Integer> cardsOf(String deck) { return decks.get(deck).cards; }
+
+    /** Il personaggio a cui è riservata la last resort, o null. */
+    String exclusiveTo(String binding) { return cards.get(binding).exclusiveTo; }
+
+    /** Un nuovo personaggio come lo crea un mazzo: risorse, capacità e immunità della bozza. */
+    Character character(String id) {
+        CharacterSpec spec = characters.get(id);
+        if (spec == null) throw new IllegalArgumentException(source + ": personaggio assente: " + id);
+        return new DraftCharacter(spec.id, spec.resources, spec.items, spec.immunities);
+    }
 
     /** Le carte che almeno un mazzo usa: basic, bound, last resort e regolari. */
     Set<String> deckCards() {
@@ -451,10 +495,10 @@ final class Draft implements PlayerSource {
             if (card.isCharacterBound()) {
                 if (!characters.containsKey(card.getBoundToCharacter()))
                     throw invalid(where, "boundTo " + card.getBoundToCharacter() + " non è un personaggio della bozza");
-                if (!Collections.disjoint(card.getCanTarget(), ITEM_TARGETS))
+                if (!lenient && !Collections.disjoint(card.getCanTarget(), ITEM_TARGETS))
                     throw invalid(where, "una bound non può bersagliare oggetti: deve avere sempre un bersaglio valido");
             }
-            if (card.isLastResort()) {
+            if (card.isLastResort() && !lenient) {
                 if (!card.getCost().isEmpty()) throw invalid(where, "una last resort non può avere un costo: deve essere sempre giocabile");
                 if (!Collections.disjoint(card.getCanTarget(), ITEM_TARGETS))
                     throw invalid(where, "una last resort non può bersagliare oggetti: deve essere sempre giocabile");

@@ -1,0 +1,8 @@
+banco sb-7/1
+bozza server/src/test/resources/sb-6a/attuale.json
+partite 27000
+celle 27
+thread 8
+secondi 17.172
+partite al secondo 1572.4
+millisecondi per partita (tempo reale diviso partite) 0.6360
