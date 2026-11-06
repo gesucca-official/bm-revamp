@@ -387,7 +387,8 @@ dati, carte Java parametriche, personaggi, mazzi e parametri del formato, valida
 **SB-6b, più set e mini-espansione,** dopo SB-2 e SB-6a: caricamento da più set contemporaneamente, campi set e rarità, mini-espansione di prova.
 Il perimetro che segue vale per i due blocchi insieme.
 
-**SB-6a fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Bozza in JSON con carte a dati, carte Java coi numeri
+**SB-6a fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «sb6a dovrebbe aver fatto,
+procediamo?». Bozza in JSON con carte a dati, carte Java coi numeri
 come parametri (`@Tunable`, valori di oggi come predefiniti), personaggi, mazzi e parametri del formato, rifiutata alla lettura se
 errata. La bozza «attuale» gioca come il catalogo in 400 partite a ogni esecuzione e in 10.000 una tantum; una bozza di prova con
 Mara e Rocco di SB-9 gira senza modifiche al motore. [Rapporto](reports/set-base/sb-6a-report.md).
