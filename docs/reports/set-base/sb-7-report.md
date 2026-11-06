@@ -342,7 +342,8 @@ Eseguite una alla volta, dopo aver controllato che non girassero processi Maven 
 
 ## Decisioni prima di SB-10
 
-1. **Mini-blocco sui bot per il costo in HEALTH**, raccomandato in fase A: quando farlo.
+1. **Mini-blocco sui bot per il costo in HEALTH**, raccomandato in fase A. **Deciso** il 6 novembre 2026 (D31): «Prima di SB-10». Diventa
+   SB-7b nel piano.
 2. **Regola di sostituzione nella ricerca:** tenerla com'è e scegliere per convalida, oppure sostituire solo con un margine. Raccomando il
    margine: è una costante del banco, non tocca la partita.
 3. **Tetto delle bound**: confermare che le quattro violazioni della bozza «attuale» sono attese (le bound attuali vanno riviste, come dice

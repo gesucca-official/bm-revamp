@@ -4,7 +4,7 @@
 server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
 documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
 proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
-nell'ordine SB-9 → SB-6a → SB-7 → SB-10 ([D30](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
+nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10 ([D30, D31](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
 completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
@@ -275,9 +275,10 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-6a | Nucleo del playground | SB-5 |
 | | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a |
 | | SB-7 | Banco di misura e invarianti | SB-4, SB-6a |
+| | SB-7b | Bot e costo in HEALTH | SB-7 |
 | | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b |
 | Progetto | SB-9 | Schede dei personaggi | — |
-| | SB-10 | Griglia degli slot e listino di potenza | SB-7, SB-9 |
+| | SB-10 | Griglia degli slot e listino di potenza | SB-7b, SB-9 |
 | Carte | SB-11 | Bozza degli starter base | SB-10 |
 | | SB-12 | Giro sugli starter base e prova umana | SB-8, SB-11 |
 | | SB-13 | Tossico: bozza e giro | SB-12 |
@@ -303,7 +304,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |
 
 SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
-corrente è SB-9 → SB-6a → SB-7 → SB-10, senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
+corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10 ([D31](#decisioni-del-proprietario)), senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
 prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
 dimostra utile prima: è una scelta del proprietario.
 
@@ -420,6 +421,21 @@ ripetizione. Ricerca automatica di mazzi forti (per mutazione) con limiti di cop
 mazzo volutamente superiore inserito come prova.
 
 **Rischi.** Falsa precisione: un intervallo di confidenza non corregge i limiti del bot.
+
+### SB-7b — Bot e costo in HEALTH
+
+Aggiunto da [D31](#decisioni-del-proprietario): mini-blocco prima di SB-10, perché la prima fotografia di SB-7 mostra Rocco che muore pagando in
+HEALTH fino a 180 volte su 9000 partite con lo stile aggressivo, e le misure di SB-10 su Sant'Incasso ne sarebbero falsate.
+
+**Perimetro.** Gli stili euristici di `model/game/bot` tengono conto del costo in HEALTH: nessuna mossa che costa almeno la salute rimasta,
+salvo che uccida l'avversario; la salute spesa pesa come danno subito. Nessuna regola o carta cambia; il server non usa ancora i bot (SB-30).
+Le contromosse sottostimate restano fuori, a SB-17.
+
+**Completamento verificabile.** Sulla bozza di prova di SB-9 le morti pagando misurate dal banco di SB-7 scendono a zero, salvo le mosse
+che uccidono l'avversario. Gli stili battono ancora il casuale come in SB-4; `BotStylesTest` verde senza toccare gli attesi. Matrice di SB-7
+rilanciata e confrontata con la prima fotografia.
+
+**Rischi.** Uno stile troppo cauto con la salute che non paga mai: il banco lo mostra nella HEALTH spesa per partita.
 
 ### SB-8 — Bozza giocabile da umani
 
@@ -680,6 +696,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D28 | Pino immune all'effetto periodico di L (era Q10) | 6 novembre 2026, SB-9: **no.** L resta una risorsa da spendere subito, diversa da V; la variante immune si prova solo nel playground in SB-14 |
 | D29 | Last resort proprie (era Q6) | 6 novembre 2026, SB-9: **Pino, Tossico e Sant'Incasso**; Struggle per gli altri quattro. Gratuite, sempre giocabili e fatte per chiudere la partita; SB-10 le colloca nella griglia |
 | D30 | Ordine dei blocchi senza aspettare il client | 6 novembre 2026, con le parole del proprietario: «sono d'accordo con la tua idea per arrivare a progettare le carte il prima possibile senza aspettare la fine del lavoro sul client». **SB-6 si divide** in SB-6a (nucleo, anticipato, senza dipendere da SB-2) e SB-6b (più set e mini-espansione, dipende da SB-2 e SB-6a). **Ordine: SB-9 → SB-6a → SB-7 → SB-10.** SB-7 dipende da SB-4 e SB-6a; SB-8 da SB-6a e SB-6b. SB-1, SB-2 e SB-6b restano legati al client (l'editor), ma vanno chiusi prima di SB-8. Precisa D22 |
+| D31 | Correzione dei bot sul costo in HEALTH | 6 novembre 2026, SB-7, con le parole del proprietario: «Prima di SB-10». **Mini-blocco SB-7b** dopo SB-7 e prima di SB-10: gli stili euristici smettono di suicidarsi pagando in HEALTH. Le contromosse sottostimate restano a SB-17. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10** |
 
 ## Decisioni ancora aperte
 
