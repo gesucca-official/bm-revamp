@@ -28,8 +28,14 @@ final class Listino {
     static final String BASE = "/sb-10a/listino-base.json";
     static final List<String> STYLES = List.of("aggressivo", "prudente", "risorse");
     static final long BISECT_SEED = 8_000_000L, GRID_SEED = 8_500_000L, CURVE_SEED = 8_200_000L;
-    /** L'àncora: gratuita, priorità 1, 10 HIT. Occupa i quattro slot sonda dei contesti (due carte, due copie ciascuna). */
-    static final int ANCHOR = 10;
+    /** Il valore di SB-10a e SB-10b dell'àncora, in HIT. */
+    static final int DEFAULT_ANCHOR = 10;
+    /**
+     * L'àncora: gratuita, priorità 1, 10 HIT (SB-11a: parametro, -Dsim.listinoAnchor; D33 prezza le carte rispetto a una gratuita da circa
+     * 6–8 HIT, quindi 7 per misurare con quell'unità). Occupa i quattro slot sonda dei contesti (due carte, due copie ciascuna). Con
+     * il valore di difetto la bozza base è il file di SB-10a, byte per byte, e i rapporti non cambiano.
+     */
+    static final int ANCHOR = checkedAnchor(Integer.getInteger("sim.listinoAnchor", DEFAULT_ANCHOR));
     /**
      * Se a x = 0 la gemella vince senza essere mai giocata, fa da carta morta e la curva è a U (sale di nuovo solo quando la gemella
      * spreca risorse): la ricerca riparte da qui, un danno che i bot giocano.
@@ -230,7 +236,29 @@ final class Listino {
         this.styles = styles;
     }
 
-    static Draft baseDraft() throws Exception { return Draft.fromClasspath(BASE); }
+    static int checkedAnchor(int value) {
+        if (value < 1 || value > 100) throw new IllegalArgumentException("sim.listinoAnchor vale " + value + ": atteso un intero da 1 a 100 (HIT)");
+        return value;
+    }
+
+    /** La bozza base di SB-10a; con un'àncora diversa dal difetto, la stessa con le due carte àncora a quel danno. */
+    static Draft baseDraft() throws Exception {
+        Draft base = Draft.fromClasspath(BASE);
+        return ANCHOR == DEFAULT_ANCHOR ? base : withAnchor(base, ANCHOR);
+    }
+
+    /** Le carte àncora (danno e testo nominale) a {@code hit} HIT, il resto della bozza com'è. */
+    static Draft withAnchor(Draft base, int hit) {
+        ObjectNode root = (ObjectNode) base.json();
+        for (String binding : List.of(SLOT1, SLOT2)) {
+            ObjectNode card = null;
+            for (JsonNode candidate : root.get("cards")) if (candidate.get("binding").asText().equals(binding)) card = (ObjectNode) candidate;
+            if (card == null) throw new IllegalStateException(BASE + ": carta àncora assente: " + binding);
+            ((ObjectNode) card.get("target").get(0)).put("amount", hit);
+            ((ObjectNode) card.get("gui")).put("damageAmount", "HIT " + hit);
+        }
+        return base.derive("derivata ancora " + hit + " HIT", root);
+    }
 
     // ---- esecuzione ----
 
@@ -497,7 +525,7 @@ final class Listino {
 
     List<Bisection> bisections() throws Exception {
         List<Bisection> list = new ArrayList<>();
-        // Costo: c della risorsa per x HIT, contro l'àncora gratuita da 10 HIT.
+        // Costo: c della risorsa per x HIT, contro l'àncora gratuita (10 HIT di difetto).
         Object[][] costs = {
                 {Resource.VIOLENCE, SPAZIENZIO, new int[]{10, 20, 30}}, {Resource.VIOLENCE, NEUTRO, new int[]{10, 20, 30}},
                 {Resource.ALERTNESS, MARA, new int[]{10, 20}}, {Resource.ALERTNESS, NEUTRO, new int[]{10, 20}},
@@ -512,25 +540,25 @@ final class Listino {
                 boolean pairs = c == 20 && (r == Resource.VIOLENCE && ctx.equals(SPAZIENZIO) || r == Resource.ALERTNESS && ctx.equals(MARA)
                         || r == Resource.HEALTH && ctx.equals(ROCCO));
                 Bisection b = new Bisection("costo-" + letter(r) + c + "-" + ctx.substring(4), "costo", ctx,
-                        "Sonda: costo " + c + " " + letter(r) + ", priorità 1, x HIT", "danni per unità = (x − 10) / " + c,
-                        0, 10 + 5 * Math.max(c, 10), c >= 20 ? 3 : 2, pairs,
+                        "Sonda: costo " + c + " " + letter(r) + ", priorità 1, x HIT", "danni per unità = (x − " + ANCHOR + ") / " + c,
+                        0, ANCHOR + 5 * Math.max(c, 10), c >= 20 ? 3 : 2, pairs,
                         x -> slotProbe(ctx, null, id -> hitter(id, Map.of(r, c), 1, "HIT", x)));
                 b.resource = r;
                 b.cost = c;
                 list.add(b);
             }
         }
-        // Tipo di danno: x CUT o x POISON gratuiti contro 10 HIT gratuiti.
+        // Tipo di danno: x CUT o x POISON gratuiti contro l'àncora gratuita.
         for (String ctx : List.of(SPAZIENZIO, MARA, ROCCO, NEUTRO))
             for (String type : List.of("CUT", "POISON"))
                 list.add(new Bisection("tipo-" + type + "-" + ctx.substring(4), "tipo", ctx, "Sonda: gratuita, priorità 1, x " + type,
-                        "1 " + type + " vale 10 / x HIT", 0, 30, 1, false,
+                        "1 " + type + " vale " + ANCHOR + " / x HIT", 0, 30, 1, false,
                         x -> slotProbe(ctx, null, id -> hitter(id, Map.of(), 1, type, x))));
         // Priorità: x HIT gratuiti a priorità 0 o 2 contro l'àncora a priorità 1.
         for (String ctx : List.of(SPAZIENZIO, MARA, NEUTRO))
             for (int p : new int[]{0, 2})
                 list.add(new Bisection("priorita-" + p + "-" + ctx.substring(4), "priorita", ctx, "Sonda: gratuita, priorità " + p + ", x HIT",
-                        "un punto di priorità vale ±(x − 10) HIT", 0, 30, 1, false,
+                        "un punto di priorità vale ±(x − " + ANCHOR + ") HIT", 0, 30, 1, false,
                         x -> slotProbe(ctx, null, id -> hitter(id, Map.of(), p, "HIT", x))));
         // Veleno: 5 HIT e x T al bersaglio, gratuita, contro l'àncora. I 5 HIT fanno giocare la sonda: i bot non leggono T sul bersaglio.
         for (String ctx : List.of(SPAZIENZIO, MARA, NEUTRO, TOSSICO))
@@ -549,18 +577,18 @@ final class Listino {
         String handicap = " (Spazienzio con " + HANDICAP + " HEALTH in meno)";
         for (int c : new int[]{10, 20}) {
             Bisection ns = new Bisection("nonspecchio-V" + c + "-spazienzio-mara", "nonspecchio", SPAZIENZIO,
-                    "Sonda: costo " + c + " V, priorità 1, x HIT; Spazienzio contro Mara" + handicap, "danni per unità = (x − 10) / " + c,
-                    0, 10 + 5 * c, c >= 20 ? 3 : 2, false,
+                    "Sonda: costo " + c + " V, priorità 1, x HIT; Spazienzio contro Mara" + handicap, "danni per unità = (x − " + ANCHOR + ") / " + c,
+                    0, ANCHOR + 5 * c, c >= 20 ? 3 : 2, false,
                     x -> handicapProbe(id -> hitter(id, Map.of(Resource.VIOLENCE, c), 1, "HIT", x)));
             ns.resource = Resource.VIOLENCE;
             ns.cost = c;
             list.add(ns);
         }
         list.add(new Bisection("nonspecchio-CUT-spazienzio-mara", "nonspecchio", SPAZIENZIO, "Sonda: gratuita, priorità 1, x CUT; Spazienzio contro Mara" + handicap,
-                "1 CUT vale 10 / x HIT", 0, 30, 1, false,
+                "1 CUT vale " + ANCHOR + " / x HIT", 0, 30, 1, false,
                 x -> handicapProbe(id -> hitter(id, Map.of(), 1, "CUT", x))));
         list.add(new Bisection("nonspecchio-CUT-mara-spazienzio", "nonspecchio", MARA, "Sonda: gratuita, priorità 1, x CUT; Mara contro Spazienzio" + handicap,
-                "1 CUT vale 10 / x HIT", 0, 30, 1, false,
+                "1 CUT vale " + ANCHOR + " / x HIT", 0, 30, 1, false,
                 x -> handicapProbeMara(id -> hitter(id, Map.of(), 1, "CUT", x))));
         // Carte attuali: la gemella con lo stesso costo e la stessa priorità e x HIT, contro la carta.
         String[] spazienzio = {"bruiser.Glare", "bruiser.MadeOfStone", "bruiser.CantFeelAnything", "bruiser.HealingBlow", "bruiser.SickeningBlow",

@@ -516,7 +516,10 @@ HEALTH, che sono l'identità degli avanzati e dei booster, come vuole il piano.
 | Java nuova | GIG-AR5 (conta gli oggetti); PIN-AR2 e LR-PIN (una classe sola che memorizza e azzera L) | 2 classi, 3 carte |
 | dati di oggi | il resto | ≈ 85 |
 
-Il passo `equip` serve già in SB-11 (Giubbotto nello starter di Mara, Posacenere in quello di Spazienzio), non solo in SB-15. Il caso
+Il passo `equip` serve già in SB-11 (Giubbotto nello starter di Mara, Posacenere in quello di Spazienzio), non solo in SB-15.
+**Nota di SB-11a:** i passi `consume` ed `equip` esistono nei sorgenti di test, provati sulle classi Java che sostituiscono
+([rapporto](../../reports/set-base/sb-11a-report.md)); le forme `consume` ed `equip` di questa tabella sono quindi esprimibili, e restano
+da scrivere solo le carte (SB-11b). Il caso
 «due carte sulla stessa classe Java» va provato nella bozza di SB-6a, che oggi lega una carta Java al nome della sua classe.
 
 ## L e Pino

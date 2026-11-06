@@ -5,6 +5,7 @@ import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.cards.com.tokens.BrokenBeerBottle;
 import com.gsc.bm.model.game.ComPlayer;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
@@ -16,6 +17,7 @@ import com.gsc.bm.model.game.status.StatusType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -28,13 +30,27 @@ import java.util.stream.Collectors;
 final class CardScenarios {
     static final int SCENARIOS = 200;
     private final SimulationCatalog java;
+    /** SB-11a: nelle carte che bersagliano un oggetto vicino, il giocatore ha oggetti sul campo e ne sceglie uno. */
+    private final boolean withItems;
 
     /** Crea una nuova istanza della carta a ogni chiamata. */
     interface Maker {
         Card make() throws Exception;
     }
 
-    CardScenarios(SimulationCatalog java) { this.java = java; }
+    CardScenarios(SimulationCatalog java) { this(java, false); }
+
+    private CardScenarios(SimulationCatalog java, boolean withItems) {
+        this.java = java;
+        this.withItems = withItems;
+    }
+
+    /**
+     * Gli stessi 200 scenari, ma le carte che bersagliano un oggetto vicino trovano oggetti sul campo (RottenBeer, CocktailOnTheGround,
+     * MarvelousCocktail, AnotherRottenBeer e il token BrokenBeerBottle, tutte classi Java). Per seme: oggetto presente da solo, scelto
+     * ma assente dal campo, sparito fra la scelta e la risoluzione, presente accanto a un altro. Le altre carte restano come prima.
+     */
+    CardScenarios withItems() { return new CardScenarios(java, true); }
 
     /** La prima differenza fra le carte create dai due costruttori, o null. */
     String difference(Maker expectedCard, Maker actualCard) throws Exception {
@@ -55,7 +71,7 @@ final class CardScenarios {
     }
 
     /** Applica la carta a uno stato ricavato dal seme e descrive tutto ciò che ne risulta. */
-    private String outcome(Card card, long seed) throws Exception {
+    String outcome(Card card, long seed) throws Exception {
         Random random = new Random(seed);
         ComPlayer a = java.player(random.nextBoolean() ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, "seat-1", new Random(seed));
         ComPlayer b = java.player(random.nextBoolean() ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, "seat-2", new Random(seed + 1));
@@ -64,7 +80,8 @@ final class CardScenarios {
         arrange(b.getCharacter(), random);
         String report;
         try {
-            report = card.isItem() ? consume((AbstractCard) card, a.getCharacter(), b.getCharacter()) : play(card, game, a);
+            report = card.isItem() ? consume((AbstractCard) card, a.getCharacter(), b.getCharacter())
+                    : withItems && card.getCanTarget().contains(Card.CardTarget.NEAR_ITEM) ? grab(card, game, a, seed) : play(card, game, a);
         } catch (RuntimeException failure) {
             report = failure.getClass().getSimpleName();
         }
@@ -86,6 +103,25 @@ final class CardScenarios {
             choices.put(Move.AdditionalAction.DISCARD_ONE, discard);
         }
         Move move = new Move(card.getName(), player.getPlayerId(), target, game.getGameId(), choices);
+        return new TreeMap<>(card.resolve(game, move)).toString();
+    }
+
+    /** La carta sceglie un oggetto vicino. Il modo dipende dal seme: 0 presente, 1 assente, 2 sparito alla risoluzione, 3 presente con un altro. */
+    private String grab(Card card, Game game, ComPlayer player, long seed) throws Exception {
+        List<Card> pool = List.of(java.card("com.items.RottenBeer"), java.card("com.items.CocktailOnTheGround"),
+                java.card("com.items.MarvelousCocktail"), java.card("com.items.AnotherRottenBeer"), new BrokenBeerBottle());
+        Random random = new Random(seed * 31 + 7);
+        Card item = pool.get(random.nextInt(pool.size()));
+        Card other = pool.get((pool.indexOf(item) + 1 + random.nextInt(pool.size() - 1)) % pool.size());
+        int mode = (int) (seed % 4);
+        Queue<Card> items = player.getCharacter().getItems();
+        if (mode == 1 || mode == 3) items.add(other);
+        if (mode != 1) items.add(item);
+        player.getCardsInHand().add(card);
+        Map<Move.AdditionalAction, String> choices = new HashMap<>();
+        choices.put(Move.AdditionalAction.TARGET_ITEM, item.getName());
+        Move move = new Move(card.getName(), player.getPlayerId(), "SELF", game.getGameId(), choices);
+        if (mode == 2) items.remove(item);
         return new TreeMap<>(card.resolve(game, move)).toString();
     }
 

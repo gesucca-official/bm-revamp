@@ -104,6 +104,7 @@ final class ListinoReport {
         o.append("| Banco | ").append(Listino.VERSION).append(" su ").append(Bench.VERSION).append(" |\n");
         o.append("| Bozza base | `").append(head.draft).append("` |\n");
         o.append("| SHA-256 | `").append(head.sha256).append("` |\n");
+        if (Listino.ANCHOR != Listino.DEFAULT_ANCHOR) o.append("| Àncora | ").append(Listino.ANCHOR).append(" HIT (SB-11a, -Dsim.listinoAnchor; SB-10a e SB-10b: ").append(Listino.DEFAULT_ANCHOR).append(") |\n");
         o.append("| Misure | ").append(head.selection).append(" |\n");
         o.append("| Stili | ").append(String.join(", ", head.styles)).append(", stesso stile sui due lati salvo dove indicato |\n");
         o.append("| Bisezione | ").append(head.params.bisectGames).append(" partite per stile e punto, semi da ").append(Listino.BISECT_SEED).append(" |\n");
@@ -202,6 +203,7 @@ final class ListinoReport {
         h.put("banco", Listino.VERSION);
         h.put("bozza", head.draft);
         h.put("sha256", head.sha256);
+        if (Listino.ANCHOR != Listino.DEFAULT_ANCHOR) h.put("ancora", Listino.ANCHOR);
         h.put("misure", head.selection);
         h.put("stili", head.styles);
         h.put("partiteBisezione", head.params.bisectGames);

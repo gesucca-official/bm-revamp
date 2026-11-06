@@ -1,0 +1,126 @@
+[
+  {
+    "binding": "prova.basicMara",
+    "kind": "ACTION",
+    "basic": true,
+    "priority": 2,
+    "targets": ["NEAR_ITEM"],
+    "self": [
+      {"op": "lose", "resource": "ALERTNESS", "amount": 5},
+      {"op": "consume"}
+    ]
+  },
+  {
+    "binding": "prova.basicRocco",
+    "kind": "ACTION",
+    "basic": true,
+    "priority": 0,
+    "targets": ["NEAR_ITEM"],
+    "self": [
+      {"op": "consume"},
+      {"op": "gain", "resource": "HEALTH", "amount": 3}
+    ]
+  },
+  {
+    "binding": "prova.basicTraDue",
+    "kind": "ACTION",
+    "basic": true,
+    "priority": 0,
+    "targets": ["NEAR_ITEM"],
+    "self": [
+      {"op": "lose", "resource": "ALERTNESS", "amount": 2},
+      {"op": "consume"},
+      {"op": "gain", "resource": "VIOLENCE", "amount": 4}
+    ]
+  },
+  {
+    "binding": "prova.giubbotto",
+    "kind": "ITEM",
+    "self": [
+      {
+        "op": "status",
+        "name": "FINTA PELLE",
+        "description": "Cut Damage taken: x0.75",
+        "statusType": "GOOD",
+        "flow": "INPUT",
+        "property": "CUT",
+        "factor": 0.75,
+        "equip": true,
+        "turns": 2
+      }
+    ]
+  },
+  {
+    "binding": "prova.guanti",
+    "kind": "ITEM",
+    "self": [
+      {
+        "op": "status",
+        "name": "GUANTI DA OFFICINA",
+        "description": "Hit Damage dealt: x1.25",
+        "statusType": "GOOD",
+        "flow": "OUTPUT",
+        "property": "HIT",
+        "factor": 1.25,
+        "equip": true,
+        "turns": 2
+      }
+    ]
+  },
+  {
+    "binding": "prova.posacenere",
+    "kind": "ITEM",
+    "self": [
+      {
+        "op": "status",
+        "name": "POSACENERE",
+        "description": "Next Hit Damage dealt: x1.5",
+        "statusType": "GOOD",
+        "flow": "OUTPUT",
+        "property": "HIT",
+        "factor": 1.5,
+        "equip": true,
+        "singleUse": true
+      }
+    ]
+  },
+  {
+    "binding": "prova.coccio",
+    "kind": "ACTION",
+    "priority": 1,
+    "targets": ["SELF"],
+    "cost": {"VIOLENCE": 5},
+    "self": [
+      {
+        "op": "status",
+        "name": "COCCIO",
+        "description": "Hit Damage dealt x1.5 and turned to Cut Damage",
+        "statusType": "GOOD",
+        "flow": "OUTPUT",
+        "property": "HIT",
+        "factor": 1.5,
+        "equip": true,
+        "singleUse": true,
+        "convertTo": "CUT"
+      }
+    ]
+  },
+  {
+    "binding": "prova.pelle",
+    "kind": "ACTION",
+    "priority": 1,
+    "targets": ["SELF"],
+    "self": [
+      {
+        "op": "status",
+        "name": "PELLE DURA",
+        "description": "Hit Damage taken: x0.5",
+        "statusType": "GOOD",
+        "flow": "INPUT",
+        "property": "HIT",
+        "factor": 0.5,
+        "turns": 3
+      }
+    ]
+  }
+]

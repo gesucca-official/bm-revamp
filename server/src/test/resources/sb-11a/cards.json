@@ -1,0 +1,49 @@
+[
+  {
+    "binding": "com.Grab",
+    "kind": "ACTION",
+    "targets": ["NEAR_ITEM"],
+    "self": [
+      {"op": "consume"}
+    ]
+  },
+  {
+    "binding": "com.basic.BruiserGrab",
+    "kind": "ACTION",
+    "basic": true,
+    "priority": -1,
+    "targets": ["NEAR_ITEM"],
+    "self": [
+      {"op": "consume"}
+    ]
+  },
+  {
+    "binding": "com.basic.ToxicGrab",
+    "kind": "ACTION",
+    "basic": true,
+    "targets": ["NEAR_ITEM"],
+    "self": [
+      {"op": "lose", "resource": "ALERTNESS", "amount": {"base": 0, "of": "ALERTNESS", "divide": 2}},
+      {"op": "consume"}
+    ]
+  },
+  {
+    "binding": "com.tokens.BrokenBeerBottle",
+    "kind": "ITEM",
+    "self": [
+      {
+        "op": "status",
+        "name": "BROKEN BEER",
+        "description": "Hit Damage dealt x1.5 and turned to Cut Damage",
+        "statusType": "GOOD",
+        "flow": "OUTPUT",
+        "property": "HIT",
+        "factor": 1.5,
+        "equip": true,
+        "singleUse": true,
+        "convertTo": "CUT"
+      },
+      {"op": "say", "text": "Equipped status: BROKEN BEER"}
+    ]
+  }
+]

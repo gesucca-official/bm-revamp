@@ -14,9 +14,11 @@ import com.gsc.bm.model.cards.AbstractItemCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.LoadableCard;
 import com.gsc.bm.model.game.Game;
+import com.gsc.bm.model.game.IllegalMoveException;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusAmountFunction;
+import com.gsc.bm.model.game.status.StatusAmountTypeFunction;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 
@@ -31,6 +33,7 @@ import java.util.Set;
 
 /**
  * Prova SB-5: carte descritte come dati ed eseguite dalle stesse classi base delle carte Java.
+ * SB-11a aggiunge il passo {@code consume}, il campo {@code basic} e, dentro {@code status}, l'equip (uso singolo, conversione del tipo).
  * Vive nei sorgenti di test: la partita viva non la conosce.
  */
 final class DataCards {
@@ -86,6 +89,8 @@ final class DataCards {
         public Kind kind;
         public String boundTo;
         public boolean lastResort;
+        /** Azione base del personaggio (come BruiserGrab): persiste in mano e non si scarta. Solo per ACTION. */
+        public boolean basic;
         public Integer priority;
         public Set<Card.CardTarget> targets;
         public Map<Resource, Integer> cost = Map.of();
@@ -96,6 +101,8 @@ final class DataCards {
             if (binding == null || kind == null) throw invalid("binding e kind sono obbligatori");
             if ((kind == Kind.BOUND) != (boundTo != null)) throw invalid("boundTo vale per le carte BOUND, e solo per quelle");
             if (lastResort && kind != Kind.ACTION) throw invalid("lastResort vale solo per ACTION");
+            if (basic && kind != Kind.ACTION) throw invalid("basic vale solo per ACTION");
+            if (basic && lastResort) throw invalid("basic e lastResort si escludono");
             if (kind == Kind.ITEM) {
                 if (priority != null || targets != null || !cost.isEmpty() || !target.isEmpty())
                     throw invalid("un oggetto ha solo effetti su di sé: priorità, bersaglio e costo sono fissi");
@@ -106,7 +113,28 @@ final class DataCards {
                     throw invalid("cost: " + entry.getKey() + " deve avere un valore intero non negativo");
             checkSteps("self", self);
             checkSteps("target", target);
+            checkConsume();
         }
+
+        /** Dove sta il passo consume: solo in self, una volta, in un'azione regolare o basic che bersaglia un oggetto vicino. */
+        private void checkConsume() {
+            for (int i = 0; i < target.size(); i++)
+                if (target.get(i) instanceof ConsumeStep)
+                    throw invalid("target[" + i + "]: consume vale solo in self: consuma l'oggetto per chi gioca la carta");
+            int seen = 0;
+            for (int i = 0; i < self.size(); i++) {
+                if (!(self.get(i) instanceof ConsumeStep)) continue;
+                String where = "self[" + i + "]: consume ";
+                if (kind == Kind.ITEM) throw invalid(where + "non è ammesso in un oggetto");
+                if (kind == Kind.BOUND) throw invalid(where + "non è ammesso in una bound: una bound non può bersagliare oggetti");
+                if (lastResort) throw invalid(where + "non è ammesso in una last resort: deve essere sempre giocabile");
+                if (!targets.contains(Card.CardTarget.NEAR_ITEM))
+                    throw invalid(where + "richiede targets NEAR_ITEM: il giocatore sceglie l'oggetto da consumare");
+                if (++seen > 1) throw invalid(where + "ripetuto: un solo passo consume per carta");
+            }
+        }
+
+        boolean consumes() { return self.stream().anyMatch(step -> step instanceof ConsumeStep); }
 
         private void checkSteps(String list, List<Step> steps) {
             if (steps == null) throw invalid(list + " non può essere null");
@@ -168,10 +196,20 @@ final class DataCards {
             @JsonSubTypes.Type(value = LoseStep.class, name = "lose"),
             @JsonSubTypes.Type(value = EmptyStep.class, name = "empty"),
             @JsonSubTypes.Type(value = StatusStep.class, name = "status"),
-            @JsonSubTypes.Type(value = SayStep.class, name = "say")
+            @JsonSubTypes.Type(value = SayStep.class, name = "say"),
+            @JsonSubTypes.Type(value = ConsumeStep.class, name = "consume")
     })
     public interface Step extends Serializable {
         String apply(Character author, Character subject);
+
+        /**
+         * Le righe del passo. Quasi tutti i passi ne scrivono al più una e ignorano l'oggetto; consume (SB-11a) ne scrive di più e
+         * ha bisogno dell'oggetto che la carta ha preso dal campo, che qui è null se non l'ha preso.
+         */
+        default List<String> lines(Card consumed, Character author, Character subject) {
+            String line = apply(author, subject);
+            return line == null ? List.of() : List.of(line);
+        }
 
         /** Il primo campo obbligatorio mancante o non valido, o null: un passo incompleto si rifiuta alla lettura. */
         String missing();
@@ -221,7 +259,12 @@ final class DataCards {
         @Override public String missing() { return required(resource, "resource"); }
     }
 
-    /** Aggiunge uno stato che moltiplica un tipo di danno. Non produce righe: la riga, se c'è, è un passo say. */
+    /**
+     * Aggiunge uno stato che moltiplica un tipo di danno. Non produce righe: la riga, se c'è, è un passo say.
+     * Con {@code equip: true} (SB-11a) è un equipaggiamento: lo stato che BadEducation sa togliere. Un equip ha sempre una durata
+     * ({@code turns}) o l'uso singolo ({@code singleUse}, durata zero dopo l'uso, R05), e può convertire il tipo di danno
+     * ({@code convertTo}). {@code singleUse} e {@code convertTo} valgono solo per gli equip.
+     */
     public static final class StatusStep implements Step {
         public String name;
         public String description;
@@ -230,19 +273,59 @@ final class DataCards {
         public Damage.DamageType property;
         public Float factor;
         public Integer turns;
+        public boolean equip;
+        public boolean singleUse;
+        public Damage.DamageType convertTo;
 
         @Override public String apply(Character author, Character subject) {
             final float multiplier = factor;
-            subject.getStatuses().add(Status.builder().name(name).description(description).type(statusType).flow(flow)
+            Status.StatusBuilder status = Status.builder().name(name).description(description).type(statusType).flow(flow)
                     .impactedProperty(property).amountFunction((StatusAmountFunction) n -> n * multiplier)
-                    .lastsForTurns(turns).build());
+                    .lastsForTurns(turns);
+            if (equip) status.equip(true);
+            if (singleUse) status.singleUse(true);
+            if (convertTo != null) {
+                final Damage.DamageType from = property, to = convertTo;
+                status.typeFunction((StatusAmountTypeFunction) type -> type == from ? to : type);
+            }
+            subject.getStatuses().add(status.build());
             return null;
         }
 
         @Override public String missing() {
-            return first(required(name, "name"), required(description, "description"), required(statusType, "statusType"),
-                    required(flow, "flow"), required(property, "property"), required(factor, "factor"), required(turns, "turns"));
+            String problem = first(required(name, "name"), required(description, "description"), required(statusType, "statusType"),
+                    required(flow, "flow"), required(property, "property"), required(factor, "factor"));
+            if (problem != null) return problem;
+            if (!(factor > 0)) return "campo factor deve essere positivo, trovato " + factor;
+            if (!equip && singleUse) return "campo singleUse vale solo con equip: true";
+            if (!equip && convertTo != null) return "campo convertTo vale solo con equip: true";
+            if (convertTo == property) return "campo convertTo converte " + property + " in se stesso";
+            if (turns == null && !singleUse)
+                return equip ? "equip senza durata né uso singolo: serve turns oppure singleUse" : "campo turns mancante";
+            return null;
         }
+    }
+
+    /**
+     * Consuma l'oggetto vicino scelto dal giocatore, come Grab (SB-11a): applica gli effetti dell'oggetto a chi lo consuma, con la riga
+     * «Grabbed and consumed Item …», oppure scrive «Couldn't Grab that Item!» se l'oggetto è sparito prima della risoluzione. I passi
+     * scritti prima e dopo valgono comunque. Solo in self, solo nelle azioni che bersagliano un oggetto vicino.
+     */
+    public static final class ConsumeStep implements Step {
+        @Override public String apply(Character author, Character subject) {
+            throw new IllegalStateException("consume ha bisogno dell'oggetto scelto: si esegue con lines()");
+        }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject) {
+            if (consumed == null) return List.of("Couldn't Grab that Item!");
+            List<String> report = new ArrayList<>();
+            report.add("Grabbed and consumed Item " + consumed.getName());
+            List<String> effects = ((AbstractItemCard) consumed).applyEffectOnSelf(author);
+            if (effects != null) report.addAll(effects);
+            return report;
+        }
+
+        @Override public String missing() { return null; }
     }
 
     public static final class SayStep implements Step {
@@ -254,31 +337,53 @@ final class DataCards {
     }
 
     /** Come le carte Java: niente effetti significa null, non una lista vuota. */
-    private static List<String> run(List<Step> steps, Character author, Character subject) {
+    private static List<String> run(List<Step> steps, Card consumed, Character author, Character subject) {
         if (steps.isEmpty()) return null;
         List<String> report = new ArrayList<>();
-        for (Step step : steps) {
-            String line = step.apply(author, subject);
-            if (line != null) report.add(line);
-        }
+        for (Step step : steps) report.addAll(step.lines(consumed, author, subject));
         return report;
     }
 
     private static final class ActionCard extends AbstractCard {
         private final Definition definition;
+        /** L'oggetto preso dal campo in questa risoluzione (come Grab.targetItem), o null se non c'era più. Solo con consume. */
+        private Card consumed;
 
         ActionCard(Definition definition) {
             this.definition = definition;
             setLastResort(definition.lastResort);
+            setBasicAction(definition.basic);
             setPriority(definition.priorityOrDefault());
             setCanTarget(Set.copyOf(definition.targets));
             setCost(Map.copyOf(definition.cost));
         }
 
         @Override public String getBindingName() { return definition.binding; }
-        @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
-        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, self, self); }
-        @Override public List<String> applyEffectOnTarget(Character self, Character target) { return run(definition.target, self, target); }
+
+        /** Come Grab: l'oggetto si ricontrolla alla risoluzione e, se c'è ancora, esce dal campo. */
+        @Override public void applyOtherUnfathomableLogic(Game g, Move m) {
+            if (!definition.consumes()) return;
+            try {
+                consumed = g.getItem(m.getPlayerId(), m.getChoices().get(Move.AdditionalAction.TARGET_ITEM));
+            } catch (IllegalMoveException e) {
+                consumed = null;
+                return;
+            }
+            g.getSelf(m).getCharacter().getItems().remove(consumed);
+        }
+
+        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, consumed, self, self); }
+
+        /** Gli effetti sul bersaglio dell'oggetto consumato seguono quelli della carta, come in Grab. */
+        @Override public List<String> applyEffectOnTarget(Character self, Character target) {
+            List<String> own = run(definition.target, consumed, self, target);
+            List<String> fromItem = consumed == null ? null : ((AbstractItemCard) consumed).applyEffectOnTarget(self, target);
+            if (fromItem == null) return own;
+            if (own == null) return fromItem;
+            List<String> both = new ArrayList<>(own);
+            both.addAll(fromItem);
+            return both;
+        }
     }
 
     /** Priorità, bersaglio e costo arrivano da AbstractItemCard. Grab fa il cast a questa classe base. */
@@ -289,7 +394,7 @@ final class DataCards {
 
         @Override public String getBindingName() { return definition.binding; }
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
-        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, self, self); }
+        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self); }
     }
 
     /** Lo scarto obbligatorio arriva da AbstractCharacterBoundCard. */
@@ -307,7 +412,7 @@ final class DataCards {
 
         @Override public String getBindingName() { return definition.binding; }
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
-        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, self, self); }
-        @Override public List<String> applyEffectOnTarget(Character self, Character target) { return run(definition.target, self, target); }
+        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self); }
+        @Override public List<String> applyEffectOnTarget(Character self, Character target) { return run(definition.target, null, self, target); }
     }
 }
