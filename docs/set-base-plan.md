@@ -4,7 +4,7 @@
 server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
 documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
 proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
-nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b ([D30, D31, D32](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
+nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b ([D30, D31, D32, D37](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
 completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
@@ -281,8 +281,9 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | Progetto | SB-9 | Schede dei personaggi | — |
 | | SB-10a | Listino di potenza e tetto delle bound (misure) | SB-7b, SB-9 |
 | | SB-10b | Griglia degli slot (progetto) | SB-10a |
-| Carte | SB-11 | Bozza degli starter base | SB-10b |
-| | SB-12 | Giro sugli starter base e prova umana | SB-8, SB-11 |
+| Carte | SB-11a | Passi `consume` ed `equip` del formato dati | SB-10b |
+| | SB-11b | Bozza degli starter base | SB-11a |
+| | SB-12 | Giro sugli starter base e prova umana | SB-8, SB-11b |
 | | SB-13 | Tossico: bozza e giro | SB-12 |
 | | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 |
 | | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 |
@@ -306,7 +307,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |
 
 SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
-corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b ([D31, D32](#decisioni-del-proprietario)), senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
+corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b ([D31, D32, D37](#decisioni-del-proprietario)), senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
 prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
 dimostra utile prima: è una scelta del proprietario.
 
@@ -504,6 +505,11 @@ Listino e tetto delle bound confermati da misure.
 **Rischi.** Una griglia troppo rigida frena le idee: gli slot si possono scambiare, purché il totale tenga.
 
 ### SB-11 — Bozza degli starter base
+
+Diviso da [D37](#decisioni-del-proprietario) in due blocchi. **SB-11a, passi `consume` ed `equip` del formato dati,** prepara ciò che gli
+starter base richiedono secondo la [griglia](design/set-base/griglia.md): la presa di oggetti delle basic e di Grab, gli equip da oggetti
+con uso singolo e conversione del danno (Giubbotto e Posacenere, decisione B4 di D35), l'àncora del listino come parametro. **SB-11b, bozza
+degli starter base,** scrive gli starter di Spazienzio e Mara con quei passi. Il perimetro che segue vale per SB-11b.
 
 **Perimetro.** Spazienzio riprogettato e Mara: personaggio, basic, tre bound, last resort, azioni d'archetipo e generiche per due mazzi da 20. Nomi provvisori. Le carte
 devono mostrare danno, difesa, priorità, oggetti e almeno una contromossa.
@@ -732,6 +738,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D34 | Principi della griglia (SB-10b, fase A) | 6 novembre 2026, con le parole del proprietario: «Approvo tutte». **(1)** Budget 115 con 37 azioni d'archetipo (6 per Cesira e Rocco) e 23 generiche; **(2)** starter da 12 carte distinte (5 d'archetipo, 4 generiche, 3 oggetti), con varianti per capacità; **(3)** bound senza parate: generatrice, colpetto e una variante a una sola funzione; **(4)** T del Tossico più scarsa, carte prezzate a circa 0,3–0,5 danni per T, bound di T al massimo +10 fino a SB-13; **(5)** costi in HEALTH solo nell'archetipo di Rocco, salute di Mara e Rocco invariata e prima leva nei giri; **(6)** tre rarità, circa 54, 41 e 20, «picco condizionato, media in linea»; **(7)** Pino con costi di 5 L o meno e carte che spendono la L residua; **(8)** passi nuovi `equip` e `consume`, il resto in Java coi parametri |
 | D35 | Griglia degli slot (SB-10b, fase B) | 6 novembre 2026, con le parole del proprietario: «Approvo tutte». [Griglia](design/set-base/griglia.md) approvata con cinque scelte: spendere tutta la L con una classe Java (come `ToxicBloodDrain`); bound +8 A nello starter di Mara, da misurare in SB-11; rarità dell'archetipo 20, 10, 7; Giubbotto e Posacenere negli starter base, quindi passo `equip` da SB-11; una classe Java nuova per la rara di Gigi |
 | D36 | Tetto delle bound di danno (SB-10b, era Q9) | 6 novembre 2026, con le parole del proprietario: «Sì, danno a 3». La misura in partita conferma 4 unità per le bound di risorsa ma non per quelle di danno (4 HIT oltre i +10 punti con Tossico, Rocco e Mara di prova). **Tetto: 4 unità per le bound di risorsa, 3 per quelle di danno**; nel banco il danno inflitto pesa 4/3 (`BoundCap.Params.DEFAULT`). Nella griglia le bound di danno passano da 4 a 3 e le varianti da 3 a 2. Da riconfermare sugli starter veri di Mara (SB-11) e Rocco (SB-18); se 3 supera ancora i +10 punti, si scende a 2 |
+| D37 | Divisione di SB-11 | 6 novembre 2026, con le parole del proprietario: «Sì, dividi e scrivi». **SB-11 si divide** in SB-11a (passi `consume` ed `equip` del formato dati e àncora del listino come parametro, dipende da SB-10b) e SB-11b (bozza degli starter base, dipende da SB-11a). SB-12 dipende da SB-8 e SB-11b. **Ordine: SB-10b → SB-11a → SB-11b** |
 
 ## Decisioni ancora aperte
 
