@@ -405,7 +405,7 @@ mini-espansione **non tocca motore né regole generali**; se li tocca, si correg
 
 ### SB-7 — Banco di misura e invarianti
 
-**SB-7 fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Un comando a richiesta produce la matrice dei matchup per coppia
+**SB-7 fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» (SB-7 e SB-7b). Un comando a richiesta produce la matrice dei matchup per coppia
 di mazzi e di stili, con intervalli di Wilson, e un rapporto in testo e in dati, identico byte per byte a parità di seme e bozza. Lo stesso
 comando controlla otto invarianti in partita e il tetto delle bound sulla ripetizione, con tetto e pesi come parametri. Una ricerca per
 mutazione, convalidata su semi disgiunti, ritrova una carta volutamente superiore. Ogni controllo è provato su una bozza costruita per
@@ -427,7 +427,7 @@ mazzo volutamente superiore inserito come prova.
 Aggiunto da [D31](#decisioni-del-proprietario): mini-blocco prima di SB-10, perché la prima fotografia di SB-7 mostra Rocco che muore pagando in
 HEALTH fino a 180 volte su 9000 partite con lo stile aggressivo, e le misure di SB-10 su Sant'Incasso ne sarebbero falsate.
 
-**SB-7b fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Sulla bozza di prova le morti pagando scendono da 310 a 0
+**SB-7b fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno** («Approvo entrambi»). Sulla bozza di prova le morti pagando scendono da 310 a 0
 su 27.000 partite di Rocco, con la stessa HEALTH spesa per partita. Sulla bozza «attuale» il rapporto del banco resta identico byte per
 byte. [Rapporto](reports/set-base/sb-7b-report.md).
 
