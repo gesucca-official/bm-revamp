@@ -853,3 +853,11 @@ Le sole eccezioni rilevate sono chip della scena, elencati qui uno per caso misu
 ### Approvazione di C4-5b
 
 6 novembre 2026, sulle catture dopo. Parole del proprietario: «giudizio su c4-5b positivo». Il blocco è chiuso. La revisione della regia sul repository non ha trovato attesi, soglie, selettori o `BASE_750` cambiati; ha ripetuto le unità su `8a7ef18`: 240/240 verdi. Le verifiche del blocco usano il regolamento 1.10: il regolamento 1.11 (R01, risorse a 0), entrato dopo dal filone Set Base, porta cinque risorse per posto nelle viste e non è ancora stato provato sul tavolo.
+
+## C4-7 — Fase 0
+
+6 novembre 2026, base `dbdd20e`, regolamento 1.11. Misura senza modifiche al client. Il jar è stato ricostruito con `./scripts/build.ps1 -Task Server -Offline`; `VerifyAll` ha usato `-ReuseJar` sul jar appena ricostruito (SHA-256 iniziale `d87271aa76a07c8d`), dopo che la ricostruzione annidata si era fermata perché `Get-FileHash` non era disponibile nel processo figlio. Porte libere e nessun processo Java/Maven esterno prima di ogni giro; `BM_OUT` impostato per Size.
+
+Giro ufficiale `test,build,size,verify,ffa,layout`: **9/9 verdi**, entrambe le misure. [JSON e catture](client-c4/c4-7/fase-0/). Le catture T1 di duello e FFA alle due misure mostrano cinque risorse per posto; nel campione esaminato risorse, gettoni e oggetti sono visibili senza nuove coperture o troncamenti imputabili alle risorse aggiunte. Non è una prova su dispositivo fisico.
+
+Giro separato `build,verify,layout` a 750×292: build verde, Verify e layout rossi. Verify scade attendendo `status-tip`; layout segnala i problemi di spazio già noti e una verifica del testo di un gettone. I conteggi reali di `layoutProblems` sono **6/6/5 duello, 11/11/11 FFA**, contro 6/5/5 e 12/12/14 nella partita C4-5b. Le partite hanno oggetti diversi e il JSON non conserva tutti i conteggi della vista autorevole: non si attribuisce una causa puntuale alle differenze. [Confronto](client-c4/c4-7/fase-0/confronto-750.json): geometria e test `BASE_750` identici a `9df4bd5`; matrice calcolata sugli stessi input **6/6/6/5 e 11/11/12/14**, invariata. Non sono stati cambiati attesi o soglie, né ripetuto il giro per cercare il verde. La 1.11 aggiunge gli zeri alle viste dal primo turno; non è dimostrato che spieghi le differenze dei conteggi fra partite.

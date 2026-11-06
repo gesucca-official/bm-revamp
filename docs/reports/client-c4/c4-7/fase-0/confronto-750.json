@@ -1,0 +1,38 @@
+{
+  "currentCommit": "dbdd20e",
+  "observed": {
+    "duel": [
+      6,
+      6,
+      5
+    ],
+    "ffa": [
+      11,
+      11,
+      11
+    ]
+  },
+  "matrix": [
+    {
+      "counts": [
+        6,
+        6,
+        6,
+        5
+      ],
+      "seats": 2
+    },
+    {
+      "counts": [
+        11,
+        11,
+        12,
+        14
+      ],
+      "seats": 5
+    }
+  ],
+  "baseCommit": "9df4bd5",
+  "sourceAndTestUnchanged": true,
+  "note": "La vista autorevole non conserva tutti i conteggi degli oggetti; non si deduce la causa puntuale delle differenze fra partite."
+}

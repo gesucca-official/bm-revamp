@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-06T10:56:37.550Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "test",
+    "build",
+    "size",
+    "verify",
+    "ffa",
+    "layout"
+  ],
+  "build": {
+    "head": "dbdd20ea0fac6ce4278ad6a6aa447681abf9480e",
+    "dirtyPaths": [],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-06T10:35:27.782Z",
+      "bytes": 50742155,
+      "sha256_16": "d87271aa76a07c8d",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 21,
+      "sha256_16": "7db34e170e3eb2d9"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 18,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 69,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 37,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 449,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 160,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 332,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 156,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": []
+}
