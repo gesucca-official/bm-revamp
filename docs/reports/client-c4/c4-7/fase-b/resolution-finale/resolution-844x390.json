@@ -1,0 +1,2388 @@
+{
+ "date": "2026-11-06T13:13:28.659Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "games": {
+  "quick": {
+   "timerOrderOnly": [],
+   "noValidMove": null,
+   "gameId": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731",
+   "turnsSeen": 13,
+   "views": 27,
+   "rows": [
+    {
+     "turn": 1,
+     "from": 0,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ghigno co' i' Denti Marci",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {},
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [],
+     "sum": "ok"
+    },
+    {
+     "turn": 2,
+     "from": 1,
+     "relation": "next",
+     "views": 4,
+     "moves": [
+      "ComPlayer_39:Ago Marcio e Spezzato",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -7,
+       "ALERTNESS": 5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 3,
+     "from": 2,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Tossicone Scatarrante",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "TOXICITY": 5
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "TOXICITY": -10
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 4,
+     "from": 3,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ghigno co' i' Denti Marci",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 5,
+     "from": 4,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ghigno co' i' Denti Marci",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 6,
+     "from": 5,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Rabbia Psicotica da Meth",
+      "devAlice:ADOPERIAMOTI [Peroni da 66, calda gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -20,
+       "ALERTNESS": -2,
+       "ALCOHOL": 2
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "TOXICITY": -5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 7,
+     "from": 6,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ghigno co' i' Denti Marci",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": -1,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 8,
+     "from": 7,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Tutto è Droga [Tennents Super gone]",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5,
+       "ALERTNESS": 5
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "TOXICITY": 20
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 9,
+     "from": 8,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ghigno co' i' Denti Marci",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -5
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "ALERTNESS": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 10,
+     "from": 9,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ago Marcio e Spezzato",
+      "devAlice:ADOPERIAMOTI [Negroni Trovato per Terra gone]"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -15,
+       "ALERTNESS": -7,
+       "VIOLENCE": 20,
+       "TOXICITY": 10,
+       "ALCOHOL": 7
+      },
+      "ComPlayer_39": {
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 11,
+     "from": 10,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "ComPlayer_39:Ago Marcio e Spezzato",
+      "devAlice:SVEGLIAMOCI MA TU NO"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -17,
+       "ALERTNESS": 2,
+       "TOXICITY": 5,
+       "ALCOHOL": -4
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5,
+       "TOXICITY": 5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    },
+    {
+     "turn": 12,
+     "from": 11,
+     "relation": "next",
+     "views": 2,
+     "moves": [
+      "devAlice:SVEGLIAMOCI MA TU NO",
+      "ComPlayer_39:Scatto Repentino"
+     ],
+     "deltas": {
+      "devAlice": {
+       "HEALTH": -12,
+       "ALERTNESS": 4,
+       "ALCOHOL": -2
+      },
+      "ComPlayer_39": {
+       "HEALTH": -5
+      }
+     },
+     "endOfTurn": [
+      "devAlice"
+     ],
+     "sum": "ok"
+    }
+   ],
+   "client": [
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 4
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 6
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 7
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 4
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 9
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 8
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "relation": "next",
+     "sequenceStarted": 1,
+     "cancels": [],
+     "deltas": 5
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "relation": "same",
+     "sequenceStarted": 0,
+     "cancels": [],
+     "deltas": 0
+    }
+   ],
+   "watched": false,
+   "outcome": {
+    "over": true,
+    "winner": "ComPlayer_39",
+    "eliminated": true
+   }
+  }
+ },
+ "cases": {
+  "rejoinSame": [
+   "quick T2"
+  ],
+  "boundDiscard": [
+   "quick T1",
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T7",
+   "quick T8",
+   "quick T9",
+   "quick T10",
+   "quick T11",
+   "quick T12"
+  ],
+  "barsPerCard": [
+   "quick T1",
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T6",
+   "quick T7",
+   "quick T8",
+   "quick T9",
+   "quick T10",
+   "quick T11",
+   "quick T12"
+  ],
+  "endOfTurn": [
+   "quick T2",
+   "quick T3",
+   "quick T4",
+   "quick T5",
+   "quick T6",
+   "quick T7",
+   "quick T8",
+   "quick T9",
+   "quick T10",
+   "quick T11",
+   "quick T12"
+  ],
+  "drawnToTable": [
+   "quick T5",
+   "quick T9"
+  ],
+  "itemConsumed": [
+   "quick T6",
+   "quick T8",
+   "quick T10"
+  ],
+  "death": [
+   "quick T12"
+  ],
+  "over": [
+   "quick T12"
+  ],
+  "deathWithMove": [
+   "quick T12"
+  ],
+  "lethalEndOfTurn": [
+   "quick T12"
+  ],
+  "impactRole": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12#1"
+  ],
+  "shockWave": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12#0"
+  ],
+  "darkened": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1#1 min 117",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2#0 min 117",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2#1 min 117",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3#1 min 116",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4#1 min 117",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5#1 min 117",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6#0 min 115",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7#1 min 116",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8#1 min 117",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9#1 min 118",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10#0 min 116",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11#0 min 116",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11#1 min 116",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12#0 min 116"
+  ],
+  "impactHIT": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11#1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12#0"
+  ],
+  "boundDiscardFlown": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12"
+  ],
+  "impactCUT": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10#0",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11#0"
+  ],
+  "clearToHand": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12"
+  ],
+  "outcomeBanner": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12"
+  ],
+  "objectVanished": [
+   "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12"
+  ]
+ },
+ "scene": {
+  "quick": {
+   "rules": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    },
+    "d13": {
+     "ok": true,
+     "violations": []
+    },
+    "c4s": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": {
+    "sequences": 12,
+    "cancelledByView": 0,
+    "sequenceMs": [
+     8403.100000023842,
+     9652.399999976158,
+     9650.800000071526,
+     9654.200000047684,
+     9652.100000023842,
+     9255.700000047684,
+     9650.800000071526,
+     9258.300000071526,
+     9654,
+     9263.600000023842,
+     9650.099999904633,
+     9358.100000023842
+    ],
+    "cancels": []
+   },
+   "sequenceEnds": [
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "reason": "complete",
+     "ms": 8403
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "reason": "complete",
+     "ms": 9652
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "reason": "complete",
+     "ms": 9651
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "reason": "complete",
+     "ms": 9654
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "reason": "complete",
+     "ms": 9652
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "reason": "complete",
+     "ms": 9256
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "reason": "complete",
+     "ms": 9651
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "reason": "complete",
+     "ms": 9258
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "reason": "complete",
+     "ms": 9654
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "reason": "complete",
+     "ms": 9264
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "reason": "complete",
+     "ms": 9650
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "reason": "complete",
+     "ms": 9358
+    }
+   ],
+   "summariesAtChoice": [
+    {
+     "turn": 0,
+     "summary": null
+    },
+    {
+     "turn": 1,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+      "seats": 2,
+      "texts": [
+       "invariato",
+       "−5 +5"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+      "seats": 2,
+      "texts": [
+       "−7 +5 +5",
+       "−5 +5 +1"
+      ]
+     }
+    },
+    {
+     "turn": 2,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+      "seats": 2,
+      "texts": [
+       "−7 +5 +5",
+       "−5 +5 +1"
+      ]
+     }
+    },
+    {
+     "turn": 3,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+      "seats": 2,
+      "texts": [
+       "−5 +5",
+       "−5 −10"
+      ]
+     }
+    },
+    {
+     "turn": 4,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+      "seats": 2,
+      "texts": [
+       "−5",
+       "−5 +5"
+      ]
+     }
+    },
+    {
+     "turn": 5,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+      "seats": 2,
+      "texts": [
+       "−5 +1",
+       "−5 +5"
+      ]
+     }
+    },
+    {
+     "turn": 6,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+      "seats": 2,
+      "texts": [
+       "−20 −2 +2 −1",
+       "−5 −5 +1"
+      ]
+     }
+    },
+    {
+     "turn": 7,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+      "seats": 2,
+      "texts": [
+       "−5 −1 −2",
+       "−5 +5"
+      ]
+     }
+    },
+    {
+     "turn": 8,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+      "seats": 2,
+      "texts": [
+       "−5 +5",
+       "−5 +20 −1"
+      ]
+     }
+    },
+    {
+     "turn": 9,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+      "seats": 2,
+      "texts": [
+       "−5 +1",
+       "−5 +5"
+      ]
+     }
+    },
+    {
+     "turn": 10,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+      "seats": 2,
+      "texts": [
+       "−15 −7 +20 +10 +7 −1",
+       "+5"
+      ]
+     }
+    },
+    {
+     "turn": 11,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+      "seats": 2,
+      "texts": [
+       "−17 +2 +5 −4",
+       "−5 +5 +1"
+      ]
+     }
+    },
+    {
+     "turn": 12,
+     "summary": {
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+      "seats": 2,
+      "texts": [
+       "−12 +4 −2 +1",
+       "−5 −2"
+      ]
+     }
+    }
+   ],
+   "jumps": [],
+   "notes": [],
+   "k2": [],
+   "k6": {
+    "modelRounds": {
+     "rounds": 12,
+     "health": 12,
+     "otherResources": 12,
+     "objects": 8,
+     "voided": 0,
+     "endOfTurn": 11,
+     "draws": 12
+    },
+    "sceneHealthDeltas": 71,
+    "sceneTransfers": 0,
+    "note": "the scene shows only HEALTH totals and one-to-one transfers; costs, other resources, draws, voids and end of turn are not in the scene"
+   },
+   "flights": 24,
+   "transfers": 0,
+   "aggregateDeltas": 71,
+   "rounds": [
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 8400,
+     "ms": 8403,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "drops": 2,
+      "discards": 2,
+      "draws": 2,
+      "steps": 4,
+      "pops": 4,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9652,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "objects": 1,
+      "discards": 2,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9651,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "tokens": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 6,
+      "pops": 6,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9654,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "discards": 2,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9652,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "objects": 1,
+      "discards": 2,
+      "draws": 3,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9250,
+     "ms": 9256,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "tokens": 1,
+      "objects": 2,
+      "consumed": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 7,
+      "pops": 7,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9651,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "discards": 2,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 7,
+      "pops": 7,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9250,
+     "ms": 9258,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 2,
+      "endOfTurn": 1,
+      "steps": 4,
+      "pops": 4,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9654,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "objects": 1,
+      "discards": 2,
+      "draws": 3,
+      "endOfTurn": 1,
+      "steps": 5,
+      "pops": 5,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9250,
+     "ms": 9264,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "objects": 1,
+      "consumed": 1,
+      "discards": 1,
+      "draws": 1,
+      "endOfTurn": 1,
+      "steps": 9,
+      "pops": 9,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9650,
+     "ms": 9650,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "drops": 2,
+      "objects": 1,
+      "discards": 2,
+      "draws": 3,
+      "endOfTurn": 1,
+      "steps": 8,
+      "pops": 8,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "moves": 2,
+     "bars": "per-card",
+     "reason": null,
+     "drift": 0,
+     "planned": 9350,
+     "ms": 9358,
+     "end": "complete",
+     "beats": {
+      "played": 2,
+      "cleared": 2,
+      "vanished": 2,
+      "drops": 2,
+      "objects": 1,
+      "discards": 1,
+      "draws": 3,
+      "endOfTurn": 1,
+      "emphasis": 1,
+      "steps": 5,
+      "pops": 5,
+      "closeUps": 2,
+      "targetUps": 2
+     }
+    }
+   ],
+   "closeUps": [
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "move": 0,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "move": 1,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "move": 0,
+     "author": "devAlice",
+     "scale": 1,
+     "placed": "middle",
+     "box": {
+      "x": 192,
+      "y": 137,
+      "w": 228,
+      "h": 166
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "move": 1,
+     "author": "ComPlayer_39",
+     "scale": 1.6,
+     "placed": "middle",
+     "box": {
+      "x": 424,
+      "y": 118,
+      "w": 243,
+      "h": 177
+     },
+     "covers": 0,
+     "targetCovers": 0,
+     "inside": true
+    }
+   ],
+   "flown": [
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/1",
+     "end": "complete",
+     "impacts": [
+      "DISRUPT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 0,
+     "toPile": 0,
+     "toHand": 0,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 0,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 4,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "end": "complete",
+     "impacts": [
+      "CUT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 1,
+     "drawHand": 0,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 6,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/3",
+     "end": "complete",
+     "impacts": [
+      "DISRUPT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 1,
+     "itemOut": 0,
+     "itemIn": 0,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 6,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/4",
+     "end": "complete",
+     "impacts": [
+      "DISRUPT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 1,
+     "toHand": 1,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 0,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 5,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/5",
+     "end": "complete",
+     "impacts": [
+      "DISRUPT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 1,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 5,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/6",
+     "end": "complete",
+     "impacts": [
+      "HIT",
+      "ITEMS"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 0,
+     "itemOut": 1,
+     "itemIn": 1,
+     "drawHand": 0,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 7,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/7",
+     "end": "complete",
+     "impacts": [
+      "DISRUPT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 1,
+     "toHand": 1,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 0,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 7,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/8",
+     "end": "complete",
+     "impacts": [
+      "OTHER",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 1,
+     "itemOut": 1,
+     "itemIn": 0,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 4,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/9",
+     "end": "complete",
+     "impacts": [
+      "DISRUPT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 1,
+     "toHand": 1,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 1,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 5,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/10",
+     "end": "complete",
+     "impacts": [
+      "CUT",
+      "ITEMS"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 1,
+     "itemOut": 1,
+     "itemIn": 0,
+     "drawHand": 0,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 9,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/11",
+     "end": "complete",
+     "impacts": [
+      "CUT",
+      "HIT"
+     ],
+     "emphasis": [],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 2,
+     "itemOut": 0,
+     "itemIn": 1,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 0,
+     "appeared": 0,
+     "labels": 8,
+     "minReadable": 1200
+    },
+    {
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/12",
+     "end": "complete",
+     "impacts": [
+      "HIT",
+      "ITEMS"
+     ],
+     "emphasis": [
+      "died",
+      "outcome"
+     ],
+     "advanced": false,
+     "clear": 2,
+     "toPile": 0,
+     "toHand": 2,
+     "discard": 1,
+     "itemOut": 2,
+     "itemIn": 1,
+     "drawHand": 1,
+     "drawBack": 1,
+     "vanished": 2,
+     "appeared": 0,
+     "labels": 5,
+     "minReadable": 1200
+    }
+   ],
+   "labelReadable": {
+    "labels": 71,
+    "min": 1200,
+    "max": 1208
+   },
+   "shortLabels": [],
+   "rejoin": {
+    "turn": 2,
+    "entries": [
+     {
+      "why": "view",
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+      "relation": "same",
+      "seats": false
+     },
+     {
+      "why": "view",
+      "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+      "relation": "same",
+      "seats": false
+     }
+    ],
+    "sequencesBefore": 2,
+    "sequencesAfter": 2,
+    "moveSends": 0,
+    "resumeTurn": 2,
+    "reanimated": false
+   }
+  },
+  "interrupt": {
+   "gameId": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca",
+   "skip": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/1",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/1",
+     "reason": "skip",
+     "ms": 166
+    },
+    "summaryKey": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/1",
+    "selected": null,
+    "final": []
+   },
+   "tapCount": 15,
+   "tapPlan": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+    "moves": 2,
+    "total": 9250,
+    "expected": {
+     "drops": 2,
+     "stamps": 0,
+     "tokens": 0,
+     "objects": 1,
+     "consumed": 1,
+     "passed": 0,
+     "broken": 0,
+     "discards": 1,
+     "cleared": 2,
+     "clearedToPile": 0,
+     "vanished": 0,
+     "appeared": 0,
+     "itemsOut": 1,
+     "itemsIn": 0,
+     "draws": 1,
+     "endOfTurn": 2,
+     "emphasis": 0,
+     "steps": 11
+    },
+    "pace": {
+     "clear": {
+      "at": 0,
+      "dur": 500
+     },
+     "moves": [
+      {
+       "cost": {
+        "at": 500,
+        "dur": 400
+       },
+       "author": {
+        "at": 900,
+        "dur": 900
+       },
+       "back": {
+        "at": 1800,
+        "dur": 300
+       },
+       "flight": {
+        "at": 2100,
+        "dur": 650
+       },
+       "target": {
+        "at": 2750,
+        "dur": 500
+       },
+       "changes": {
+        "at": 3250,
+        "dur": 600
+       },
+       "at": 500,
+       "dur": 3350
+      },
+      {
+       "cost": {
+        "at": 3850,
+        "dur": 0
+       },
+       "author": {
+        "at": 3850,
+        "dur": 900
+       },
+       "back": {
+        "at": 4750,
+        "dur": 300
+       },
+       "flight": {
+        "at": 5050,
+        "dur": 650
+       },
+       "target": {
+        "at": 5700,
+        "dur": 500
+       },
+       "changes": {
+        "at": 6200,
+        "dur": 600
+       },
+       "at": 3850,
+       "dur": 2950
+      }
+     ],
+     "draws": {
+      "at": 6800,
+      "dur": 800
+     },
+     "endOfTurn": {
+      "at": 7600,
+      "dur": 750
+     },
+     "tail": {
+      "at": 8350,
+      "dur": 900
+     },
+     "total": 9250
+    }
+   },
+   "tap": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+     "reason": "input",
+     "ms": 8443
+    },
+    "summaryKey": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+    "selected": null,
+    "final": []
+   },
+   "cardKey": "card-1",
+   "cardDuringSequence": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/3",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/3",
+     "reason": "input",
+     "ms": 137
+    },
+    "summaryKey": null,
+    "selected": "card-1",
+    "final": []
+   },
+   "hidden": {
+    "mode": "emulated",
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/4",
+    "sequencesBefore": 3,
+    "sequencesAfter": 3,
+    "summaryKey": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/4",
+    "toastAfter7s": "Turno 4: Computer → SVEGLIAMOCI MA TU NO · tu → SVEGLIAMOCI MA TU NO · fine turno: 2 giocatori",
+    "toastWhileHidden": 1
+   }
+  }
+ },
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "quickRejoin": {
+   "turn": 2,
+   "entries": [
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "relation": "same",
+     "seats": false
+    },
+    {
+     "why": "view",
+     "key": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731/2",
+     "relation": "same",
+     "seats": false
+    }
+   ],
+   "sequencesBefore": 2,
+   "sequencesAfter": 2,
+   "moveSends": 0,
+   "resumeTurn": 2
+  },
+  "quick": {
+   "gameId": "9cb539815057bc57c8b85f021bd09c1c64ee44b70c2e6c61df252684e2f36731",
+   "turns": 13,
+   "views": 27,
+   "modelProblems": [],
+   "repeatedViewDiffs": [],
+   "timerOrderOnly": [],
+   "scene": {
+    "1": {
+     "ok": true,
+     "violations": []
+    },
+    "2": {
+     "ok": true,
+     "violations": []
+    },
+    "3": {
+     "ok": true,
+     "violations": []
+    },
+    "6": {
+     "ok": true,
+     "violations": []
+    },
+    "c32": {
+     "ok": true,
+     "violations": []
+    },
+    "c34": {
+     "ok": true,
+     "violations": []
+    },
+    "d13": {
+     "ok": true,
+     "violations": []
+    },
+    "c4s": {
+     "ok": true,
+     "violations": []
+    }
+   },
+   "k1": "0 of 12 sequences cancelled by view",
+   "ends": "complete 12",
+   "msComplete": [
+    8403,
+    9652,
+    9651,
+    9654,
+    9652,
+    9256,
+    9651,
+    9258,
+    9654,
+    9264,
+    9650,
+    9358
+   ],
+   "bars": "12 per card, 0 total",
+   "cards": 24,
+   "closeUps": "24 middle, 0 in the seat",
+   "drift": 0,
+   "flown": {
+    "clear": 22,
+    "toPile": 3,
+    "toHand": 19,
+    "discard": 18,
+    "itemOut": 5,
+    "itemIn": 6,
+    "drawHand": 9,
+    "drawBack": 12,
+    "vanished": 2,
+    "appeared": 0
+   },
+   "labelReadable": {
+    "labels": 71,
+    "min": 1200,
+    "max": 1208
+   },
+   "notes": []
+  },
+  "interruptions": {
+   "skip": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/1",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/1",
+     "reason": "skip",
+     "ms": 166
+    },
+    "summaryKey": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/1",
+    "selected": null,
+    "final": []
+   },
+   "tapCount": 15,
+   "tapPlan": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+    "moves": 2,
+    "total": 9250,
+    "expected": {
+     "drops": 2,
+     "stamps": 0,
+     "tokens": 0,
+     "objects": 1,
+     "consumed": 1,
+     "passed": 0,
+     "broken": 0,
+     "discards": 1,
+     "cleared": 2,
+     "clearedToPile": 0,
+     "vanished": 0,
+     "appeared": 0,
+     "itemsOut": 1,
+     "itemsIn": 0,
+     "draws": 1,
+     "endOfTurn": 2,
+     "emphasis": 0,
+     "steps": 11
+    },
+    "pace": {
+     "clear": {
+      "at": 0,
+      "dur": 500
+     },
+     "moves": [
+      {
+       "cost": {
+        "at": 500,
+        "dur": 400
+       },
+       "author": {
+        "at": 900,
+        "dur": 900
+       },
+       "back": {
+        "at": 1800,
+        "dur": 300
+       },
+       "flight": {
+        "at": 2100,
+        "dur": 650
+       },
+       "target": {
+        "at": 2750,
+        "dur": 500
+       },
+       "changes": {
+        "at": 3250,
+        "dur": 600
+       },
+       "at": 500,
+       "dur": 3350
+      },
+      {
+       "cost": {
+        "at": 3850,
+        "dur": 0
+       },
+       "author": {
+        "at": 3850,
+        "dur": 900
+       },
+       "back": {
+        "at": 4750,
+        "dur": 300
+       },
+       "flight": {
+        "at": 5050,
+        "dur": 650
+       },
+       "target": {
+        "at": 5700,
+        "dur": 500
+       },
+       "changes": {
+        "at": 6200,
+        "dur": 600
+       },
+       "at": 3850,
+       "dur": 2950
+      }
+     ],
+     "draws": {
+      "at": 6800,
+      "dur": 800
+     },
+     "endOfTurn": {
+      "at": 7600,
+      "dur": 750
+     },
+     "tail": {
+      "at": 8350,
+      "dur": 900
+     },
+     "total": 9250
+    }
+   },
+   "tap": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+     "reason": "input",
+     "ms": 8443
+    },
+    "summaryKey": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/2",
+    "selected": null,
+    "final": []
+   },
+   "cardKey": "card-1",
+   "cardDuringSequence": {
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/3",
+    "runningBefore": true,
+    "running": false,
+    "end": {
+     "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/3",
+     "reason": "input",
+     "ms": 137
+    },
+    "summaryKey": null,
+    "selected": "card-1",
+    "final": []
+   },
+   "hidden": {
+    "mode": "emulated",
+    "key": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/4",
+    "sequencesBefore": 3,
+    "sequencesAfter": 3,
+    "summaryKey": "be0b0c1a27701b85b782dbe3307b43b3a38a5474076f65850af3ec45ac6e13ca/4",
+    "toastAfter7s": "Turno 4: Computer → SVEGLIAMOCI MA TU NO · tu → SVEGLIAMOCI MA TU NO · fine turno: 2 giocatori",
+    "toastWhileHidden": 1
+   }
+  },
+  "reportConsistency": {
+   "rounds": 12,
+   "sumOk": 12,
+   "chainOk": 12
+  },
+  "casesOnRealServer": {
+   "seen": {
+    "rejoinSame": 1,
+    "boundDiscard": 11,
+    "barsPerCard": 12,
+    "endOfTurn": 11,
+    "drawnToTable": 2,
+    "itemConsumed": 3,
+    "death": 1,
+    "over": 1,
+    "deathWithMove": 1,
+    "lethalEndOfTurn": 1,
+    "impactRole": 10,
+    "shockWave": 11,
+    "darkened": 14,
+    "impactHIT": 11,
+    "boundDiscardFlown": 11,
+    "impactCUT": 3,
+    "clearToHand": 11,
+    "outcomeBanner": 1,
+    "objectVanished": 1
+   },
+   "missing": [
+    "impactVoid",
+    "void",
+    "itemFromOther",
+    "jump"
+   ]
+  }
+ },
+ "errors": [],
+ "reportConsistency": {
+  "rounds": 12,
+  "sumOk": 12,
+  "chainOk": 12,
+  "unknownCost": 0,
+  "failures": []
+ },
+ "ok": true
+}

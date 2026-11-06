@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-06T12:00:45.537Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "test",
+    "build",
+    "size",
+    "layout"
+  ],
+  "build": {
+    "head": "59f3850946137fc7da0b91e63fd6c67b645541eb",
+    "dirtyPaths": [
+      "M client-web/src/public.tsx",
+      " M client-web/src/scene.ts",
+      " M client-web/src/table.tsx",
+      "?? client-web/src/sound.ts",
+      "?? client-web/tools/verify-audio-probe.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-06T10:35:27.782Z",
+      "bytes": 50742155,
+      "sha256_16": "d87271aa76a07c8d",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 26,
+      "sha256_16": "6b220d42b595a4b1"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 1,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": false,
+      "seconds": 158,
+      "exit": 1,
+      "problems": 2
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 155,
+      "exit": 1,
+      "problems": 2
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/public.tsx;  M client-web/src/scene.ts;  M client-web/src/table.tsx; ?? client-web/src/sound.ts; ?? client-web/tools/verify-audio-probe.mjs",
+    "layout-1366x768.json: evidence says ok=false",
+    "layout-844x390.json: evidence says ok=false"
+  ]
+}

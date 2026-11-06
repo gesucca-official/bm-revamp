@@ -1,0 +1,11 @@
+{
+  "withoutGuardExit": 1,
+  "failuresWithoutGuard": [
+    "una sola emissione per risoluzione",
+    "muto e volume persistono",
+    "salto e interruzione chiudono la sequenza"
+  ],
+  "restoredExit": 0,
+  "note": "Solo la guardia seen rimossa temporaneamente; file originale ripristinato prima del test verde.",
+  "guard": "activeRound and seen"
+}

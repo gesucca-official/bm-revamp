@@ -19,6 +19,8 @@ Ruolo e guadagni vengono dal catalogo (regolamento 1.7, R07a); nessuna regola
 
 **C4-5b, 5 novembre 2026 — fatto, in attesa del giudizio del proprietario.** A comune/editor/admin, B per Conferma/Annulla; un solo invito di scarto sulla riga dei costi, senza etichette per carta o richiesta duplicata a sinistra. [Inventario](../docs/design/client-c4/screens/inventario.md), [scelte](../docs/design/client-c4/screens/scelte.md), [dopo](../docs/reports/client-c4/c4-5b/dopo/README.md), [confronti](../docs/reports/client-c4/c4-5b/confronti/README.md), [verifiche e limiti](../docs/reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). 19/19 ufficiali verdi; 240 unità finali; controlli ordinari 44×44 a 844×390, soli chip D8 esentati. Verificatori estesi senza cambiare selettori/attesi/soglie precedenti; BASE_750 invariato, rossi a 750 dichiarati.
 
+**C4-7 — fatto, in attesa del giudizio del proprietario.** Cinque suoni locali Kenney Interface Sounds (CC0 1.0), volume iniziale 20% e muto nel menu «Al tavolo», con preferenze nel browser. Nessuna informazione di gioco dipende dall’audio. [Scelta](../docs/design/client-c4/audio/scelte.md), [inventario](../docs/design/client-c4/assets/inventory.json) e [verifiche e limiti](../docs/reports/client-c4-report.md#c4-7--fase-b).
+
 ## Avvio locale
 
 Dalla radice del repository, Windows / PowerShell, in due terminali:

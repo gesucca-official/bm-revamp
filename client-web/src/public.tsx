@@ -42,7 +42,7 @@ export function Home(){
     <li><External id="mail" href={links.mail}>Scrivi un’email</External></li>
     <li><External id="paypal" href={links.paypal}>Sostieni con PayPal</External></li>
    </ul>
-   <p className="small rights" data-testid="rights">Tutti i diritti riservati. Non è concessa alcuna licenza open source: codice, illustrazioni e materiali di gioco non ricevono permessi di utilizzo. Prima di contribuire con codice o materiali, accordati con il proprietario.</p>
+   <p className="small rights" data-testid="rights">Tutti i diritti riservati. Non è concessa alcuna licenza open source: codice, illustrazioni e materiali di gioco del progetto non ricevono permessi di utilizzo. Prima di contribuire con codice o materiali, accordati con il proprietario. I suoni Interface Sounds di Kenney sono distribuiti con licenza CC0 1.0.</p>
   </section>
  </section>;
 }
