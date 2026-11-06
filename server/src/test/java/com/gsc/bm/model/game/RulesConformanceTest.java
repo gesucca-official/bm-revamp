@@ -40,8 +40,9 @@ class RulesConformanceTest {
     }
     @Test void r01_initialCharacters() {
         Character b = new BigBadBruiser(), j = new ToxicJunkie();
-        assertEquals(Map.of(Resource.HEALTH,100,Resource.ALERTNESS,20,Resource.VIOLENCE,25), b.getResources());
-        assertEquals(Map.of(Resource.HEALTH,100,Resource.ALERTNESS,35,Resource.TOXICITY,10), j.getResources());
+        // 1.11 R01: the resources a sheet does not state start at 0 (they used to be absent).
+        assertEquals(Map.of(Resource.HEALTH,100,Resource.ALERTNESS,20,Resource.VIOLENCE,25,Resource.TOXICITY,0,Resource.ALCOHOL,0), b.getResources());
+        assertEquals(Map.of(Resource.HEALTH,100,Resource.ALERTNESS,35,Resource.VIOLENCE,0,Resource.TOXICITY,10,Resource.ALCOHOL,0), j.getResources());
         assertEquals(1,b.getItemsSize()); assertEquals(3,j.getItemsSize());
         assertTrue(b.getImmunities().isEmpty()); assertEquals(Set.of(Resource.TOXICITY),j.getImmunities());
     }

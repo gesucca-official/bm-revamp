@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.10 — 2 novembre 2026**. Fonte normativa del gioco.
+Versione **1.11 — 6 novembre 2026**. Fonte normativa del gioco.
 
 ## R00 — Autorità
 
@@ -17,6 +17,8 @@ Modalità: quick contro computer, quick 1v1, quick FFA (tutti contro tutti), ope
 Ogni giocatore è rappresentato da una carta personaggio. Le schede complete di tutte le carte del set, comprese quelle personaggio, sono raccolte in R07.
 
 HEALTH è la salute; ALERTNESS determina la precedenza a pari priorità; VIOLENCE è una risorsa di costo; TOXICITY e ALCOHOL sono risorse di costo con effetti periodici. Non esistono tetti o pavimenti generali: le risorse possono essere negative o superare i valori iniziali. L'immunità a una risorsa blocca il suo effetto periodico, non costi, variazioni o qualsiasi danno POISON.
+
+**Risorse di partenza (1.11).** Ogni personaggio ha tutte e cinque le risorse fin dalla preparazione: quelle che la sua scheda in R07 non indica partono da 0. La risorsa speciale della scheda è quella che parte da un valore diverso da zero. Una risorsa a 0 si legge, si paga, si guadagna e si perde come le altre, e gli effetti periodici di R06 non scattano finché non supera 0. Per esempio, Spazienzio che gioca BadTrip senza aver mai ricevuto TOXICITY aggiunge abs(0) = 0 alla propria T; con LethalHeroinDose non perde HEALTH (t = 0) e aggiunge abs(0 − 30) = 30 a T; con PervertedMetabolism guadagna e perde 0.
 
 ## R01a — Tipologie di carte
 
@@ -133,6 +135,8 @@ Identificatori stabili delle classi; i nomi visualizzati sono nell'allegato. V=V
 |---|---|---|---:|---:|---|---:|---|
 | BigBadBruiser | Personaggio | Spazienzio de la Ucciso | 100 | 20 | VIOLENCE 25 | 1 | Nessuna |
 | ToxicJunkie | Personaggio | Tossico del Serraglio | 100 | 35 | TOXICITY 10 | 3 | Effetto periodico di TOXICITY |
+
+Le risorse che la scheda non indica partono da 0 (R01, 1.11): Spazienzio ha anche TOXICITY 0 e ALCOHOL 0, il Tossico VIOLENCE 0 e ALCOHOL 0.
 
 ### Carte azione
 
@@ -322,6 +326,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.11 — 6 novembre 2026, risorse assenti:** aggiunta a R01 la regola delle risorse di partenza: ogni personaggio ha tutte e cinque le risorse, a 0 quelle che la scheda R07 non indica; nota corrispondente sotto le carte personaggio. Decisione del proprietario (6 novembre 2026, opzione «tutte a 0»). Motivazione: il regolamento non diceva quanto vale una risorsa che il personaggio non ha, e il motore la lasciava assente. Le carte che leggono la propria TOXICITY senza costo in T (BadTrip, LethalHeroinDose, PervertedMetabolism), giocate da Spazienzio con un mazzo personalizzato prima di aver mai ricevuto T, facevano fallire la risoluzione del round: il servizio ripristinava lo stato (R08) e la carta restava in mano, inutilizzabile. Ora si risolvono con T = 0. Nelle partite che prima non fallivano nessun numero cambia, perché costi, variazioni ed effetti periodici trattavano già l'assenza come 0; cambia ciò che si vede: le viste, il profilo, la collezione e l'archivio mostrano le cinque risorse di ogni personaggio dal primo turno. Nessuna modifica a carte, costi, starter o bilanciamento.
 
 - **1.10 — 2 novembre 2026, A3 (C3-5, O7):** aggiunto a R07a l'importo nominale del danno di ogni carta e del token, accanto al tipo (1.9): `HIT 15`, `HIT 20+x` per ExtremelyViolentBlow (x = metà della V residua di chi gioca), — se nessun danno, conservato nel catalogo SQLite e nell'allegato. Decisione del proprietario (2 novembre 2026): contano solo gli importi inflitti al bersaglio alla risoluzione, prima di stati e conversioni; il danno a sé di Struggle e MethDrivenRage non entra; i casi esclusi dal tipo in 1.9 restano —. Motivazione: mostrare l'importo del danno sul volto della carta nel client web, accanto a costo e variazioni. Campo descrittivo: nessun effetto, costo, bersaglio, priorità, starter o bilanciamento cambia.
 

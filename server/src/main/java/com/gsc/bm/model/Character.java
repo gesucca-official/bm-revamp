@@ -36,6 +36,9 @@ public abstract class Character implements Serializable {
                 : this.getClass().getName().replace(CardFactoryService.BASE_CARDS_PKG, "");
         this.itemsSize = itemsSize;
         this.items = new CircularFifoQueue<>(itemsSize);
+        // Regulation 1.11 R01: every character has all five resources; those its sheet does not state start at 0.
+        for (Resource resource : Resource.values())
+            this.resources.put(resource, 0);
         this.resources.put(Resource.HEALTH, hp);
         this.resources.put(Resource.ALERTNESS, speed);
     }
