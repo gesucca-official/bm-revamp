@@ -37,6 +37,8 @@ public class AggressivePolicy implements BotPolicy, StyleSupport.Scorer {
         if (!s.me.getImmunities().contains(Resource.TOXICITY)) score -= p.gain(Resource.TOXICITY) * 2;
         if (s.poisoned()) score += Math.min(p.spent(Resource.TOXICITY), s.me.resource(Resource.TOXICITY)) * 0.8;
         score -= p.costTotal * 0.1;
+        // Health paid is damage taken: it trades it for damage dealt (worth 3 a point), so a strong hit is still worth paying.
+        score -= p.healthCost * 1.0;
         return score;
     }
 

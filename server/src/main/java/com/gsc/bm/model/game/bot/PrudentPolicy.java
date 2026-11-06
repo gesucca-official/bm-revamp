@@ -45,6 +45,8 @@ public class PrudentPolicy implements BotPolicy, StyleSupport.Scorer {
         if (p.card.isLastResort()) score -= 8;
         if (StyleSupport.Situation.soonestTimer(s.me) <= 2) score += ("DEFENSE".equals(role) ? 5 : 0);
         score -= p.costTotal * 0.2;
+        // Health paid is damage taken, weighed like the heals it wants: more the worse it stands.
+        score -= p.healthCost * 2 * need;
         if (s.wouldLose("DEFENSE", p.cost)) score -= 10;
         if (s.wouldLose("COUNTER", p.cost)) score -= 5;
         return score;

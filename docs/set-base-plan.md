@@ -427,8 +427,13 @@ mazzo volutamente superiore inserito come prova.
 Aggiunto da [D31](#decisioni-del-proprietario): mini-blocco prima di SB-10, perché la prima fotografia di SB-7 mostra Rocco che muore pagando in
 HEALTH fino a 180 volte su 9000 partite con lo stile aggressivo, e le misure di SB-10 su Sant'Incasso ne sarebbero falsate.
 
-**Perimetro.** Gli stili euristici di `model/game/bot` tengono conto del costo in HEALTH: nessuna mossa che costa almeno la salute rimasta,
-salvo che uccida l'avversario; la salute spesa pesa come danno subito. Nessuna regola o carta cambia; il server non usa ancora i bot (SB-30).
+**SB-7b fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Sulla bozza di prova le morti pagando scendono da 310 a 0
+su 27.000 partite di Rocco, con la stessa HEALTH spesa per partita. Sulla bozza «attuale» il rapporto del banco resta identico byte per
+byte. [Rapporto](reports/set-base/sb-7b-report.md).
+
+**Perimetro.** Gli stili euristici di `model/game/bot` tengono conto del costo in HEALTH. Una mossa che costa almeno la salute rimasta non
+si gioca mai, nemmeno se ucciderebbe l'avversario: pagando si muore prima degli effetti (R04), quindi si arriva al massimo a una patta, e
+una contromossa può lasciare solo la morte (fase A approvata). La salute spesa pesa come danno subito. Nessuna regola o carta cambia; il server non usa ancora i bot (SB-30).
 Le contromosse sottostimate restano fuori, a SB-17.
 
 **Completamento verificabile.** Sulla bozza di prova di SB-9 le morti pagando misurate dal banco di SB-7 scendono a zero, salvo le mosse

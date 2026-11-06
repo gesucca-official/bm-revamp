@@ -116,7 +116,12 @@ final class StyleSupport {
         final Map<Resource, Double> fixedGains;
         final boolean repeated;
         final Map<Resource, Integer> cost;
+        /** Resources spent, HEALTH excluded: health paid is weighed apart, as damage taken. */
         final int costTotal;
+        /** HEALTH paid to play the move (R04: costs are paid before any effect). */
+        final int healthCost;
+        /** The move costs at least the health left: paying it kills its player, whatever the move then does. */
+        final boolean suicidal;
         final boolean usesItem;
         final boolean takesFarItem;
 
@@ -127,7 +132,9 @@ final class StyleSupport {
             this.hostile = target != situation.me;
             this.damage = hostile ? damageOf(card) : 0;
             this.cost = card.getCost();
-            this.costTotal = cost.values().stream().mapToInt(Integer::intValue).sum();
+            this.healthCost = cost.getOrDefault(Resource.HEALTH, 0);
+            this.costTotal = cost.values().stream().mapToInt(Integer::intValue).sum() - healthCost;
+            this.suicidal = healthCost > 0 && healthCost >= situation.myHealth();
             this.usesItem = move.getItem() != null && card.getCanTarget().contains(Card.CardTarget.NEAR_ITEM);
             this.takesFarItem = move.getItem() != null && !usesItem;
             Map<Resource, Double> total = parseGains(card.getGains(), VARIABLE);
@@ -178,13 +185,21 @@ final class StyleSupport {
         }
     }
 
-    /** Best score wins; moves within a hair of it are tied and the given Random breaks the tie. */
+    /**
+     * Best score wins; moves within a hair of it are tied and the given Random breaks the tie. A move that costs at least the
+     * health left is never chosen while another legal move exists: paying it kills the player, so at best it trades a kill for
+     * a draw, and a counter can leave only the death.
+     */
     static LegalMove choose(Scorer scorer, BotView view, List<LegalMove> legalMoves, Random random) {
         Situation situation = new Situation(view);
+        List<Plan> plans = new ArrayList<>();
+        for (LegalMove move : legalMoves) plans.add(new Plan(situation, move));
+        if (plans.stream().anyMatch(p -> !p.suicidal)) plans.removeIf(p -> p.suicidal);
         List<LegalMove> best = new ArrayList<>();
         double top = Double.NEGATIVE_INFINITY;
-        for (LegalMove move : legalMoves) {
-            double score = scorer.score(situation, new Plan(situation, move));
+        for (Plan plan : plans) {
+            LegalMove move = plan.move;
+            double score = scorer.score(situation, plan);
             if (move.getDiscard() != null) score -= keepValue(scorer, situation, move.getDiscard());
             if (score > top + 1e-9) {
                 top = score;

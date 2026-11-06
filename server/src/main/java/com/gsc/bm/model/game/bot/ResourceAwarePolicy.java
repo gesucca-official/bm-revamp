@@ -55,7 +55,10 @@ public class ResourceAwarePolicy implements BotPolicy, StyleSupport.Scorer {
                     score -= spend * 0.25;
             }
         }
-        score += p.gain(Resource.HEALTH) * (s.myHealth() < s.foeHealth() ? 1.5 : 0.6);
+        double healthWorth = s.myHealth() < s.foeHealth() ? 1.5 : 0.6;
+        score += p.gain(Resource.HEALTH) * healthWorth;
+        // Health paid is spent like any resource, at the price it puts on health gained.
+        score -= p.healthCost * healthWorth;
         if (p.usesItem && s.me.getItems().size() >= s.me.getItemCapacity()) score += 5;
         if (p.takesFarItem) score += 3 + s.foe.getItems().size();
         if ("DISRUPT".equals(p.card.getRole()))
