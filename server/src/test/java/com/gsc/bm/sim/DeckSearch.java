@@ -30,11 +30,23 @@ final class DeckSearch {
 
     /** Parametri fissati prima di cercare, e dichiarati nel rapporto. */
     static final class Params {
+        /** SB-10a: un mutante prende il posto del mazzo in carica solo se lo supera di più di un errore standard. */
+        static final double MARGIN = 1.0;
         final int lambda, gamesPerCombo, maxGenerations, patience, validationGames, finalists, threads;
         final long searchSeed, validationSeed, mutationSeed;
+        /** Margine di sostituzione, in errori standard del punteggio del mazzo in carica. 0 è la regola di SB-7. */
+        final double margin;
 
         Params(int lambda, int gamesPerCombo, int maxGenerations, int patience, int validationGames, int finalists, int threads,
                long searchSeed, long validationSeed, long mutationSeed) {
+            this(lambda, gamesPerCombo, maxGenerations, patience, validationGames, finalists, threads, searchSeed, validationSeed,
+                    mutationSeed, MARGIN);
+        }
+
+        Params(int lambda, int gamesPerCombo, int maxGenerations, int patience, int validationGames, int finalists, int threads,
+               long searchSeed, long validationSeed, long mutationSeed, double margin) {
+            if (margin < 0) throw new IllegalArgumentException("il margine di sostituzione non può essere negativo");
+            this.margin = margin;
             this.lambda = lambda;
             this.gamesPerCombo = gamesPerCombo;
             this.maxGenerations = maxGenerations;
@@ -51,6 +63,14 @@ final class DeckSearch {
 
         static Params standard(int threads) {
             return new Params(12, 16, 40, 10, 300, 3, threads, 7_100_000L, 7_900_000L, 7_000_007L);
+        }
+
+        /** Errore standard del punteggio p su n partite. */
+        static double standardError(double p, int games) { return Math.sqrt(Math.max(p * (1 - p), 1e-9) / games); }
+
+        /** La regola di sostituzione: lo sfidante prende il posto del mazzo in carica? Con margine 0 basta superarlo. */
+        boolean replaces(double incumbent, double challenger, int games) {
+            return challenger - incumbent > margin * standardError(incumbent, games);
         }
     }
 
@@ -135,6 +155,8 @@ final class DeckSearch {
         final String character, start;
         final Deck origin, starter;
         final List<Double> history = new ArrayList<>();
+        /** Per ogni sostituzione: generazione, guadagno sul mazzo in carica, errore standard di quel momento. */
+        final List<double[]> replacements = new ArrayList<>();
         final List<Finalist> finalists = new ArrayList<>();
         Finalist baseline;
         int generations;
@@ -212,9 +234,10 @@ final class DeckSearch {
             int best = 0;
             for (int i = 1; i < batch.size(); i++) if (scores.get(i).points() > scores.get(best).points()) best = i;
             outcome.generations = gen;
-            if (best > 0) {
-                double gain = scores.get(best).points() - current;
-                double se = Math.sqrt(Math.max(current * (1 - current), 1e-9) / games);
+            double gain = scores.get(best).points() - current;
+            double se = Params.standardError(current, games);
+            if (best > 0 && params.replaces(current, scores.get(best).points(), games)) {
+                outcome.replacements.add(new double[]{gen, gain, se});
                 incumbent = batch.get(best);
                 accepted.put(incumbent.key(), scores.get(best).points());
                 decks.put(incumbent.key(), incumbent);
@@ -408,6 +431,8 @@ final class DeckSearch {
         o.append("| Ricerca | (1+").append(params.lambda).append("), ").append(params.gamesPerCombo)
                 .append(" partite per avversario e coppia di stili, al massimo ").append(params.maxGenerations).append(" generazioni, pazienza ")
                 .append(params.patience).append(", semi da ").append(params.searchSeed).append(" (un blocco nuovo a generazione) |\n");
+        o.append("| Sostituzione | ").append(params.margin == 0 ? "basta superare il mazzo in carica (regola di SB-7)"
+                : "solo oltre " + Bench.decimal(params.margin, 1) + " errori standard del mazzo in carica (SB-10a)").append(" |\n");
         o.append("| Convalida | ").append(params.finalists).append(" finalisti e lo starter, ").append(params.validationGames)
                 .append(" partite per avversario e coppia di stili, semi ").append(params.validationSeed).append("–")
                 .append(params.validationSeed + params.validationGames - 1).append(" |\n");
@@ -456,6 +481,7 @@ final class DeckSearch {
         head.put("partitePerCombinazione", params.gamesPerCombo);
         head.put("generazioniMassime", params.maxGenerations);
         head.put("pazienza", params.patience);
+        head.put("margineSostituzione", Bench.round(params.margin));
         head.put("semeRicerca", params.searchSeed);
         head.put("semeConvalida", params.validationSeed);
         head.put("partiteConvalida", params.validationGames);

@@ -273,6 +273,18 @@ final class Bench {
         for (int i = 0; i < settings.decks.size(); i++) for (int j = i; j < settings.decks.size(); j++)
             for (String sa : settings.styles.keySet()) for (String sb : settings.styles.keySet())
                 cells.add(new Cell(settings.decks.get(i), sa, settings.decks.get(j), sb));
+        playCells(draft, settings, cells, players);
+        Report report = new Report(draft, sha256(draft), settings, cells, BoundCap.run(draft, settings.cap));
+        staticChecks(draft, report.checks);
+        for (Cell cell : cells) report.checks.merge(cell.checks); // In ordine di cella: gli esempi non dipendono dai thread.
+        return report;
+    }
+
+    /**
+     * Gioca le celle date, senza matrice né tetto delle bound: ogni cella con i semi e le partite delle impostazioni. Serve anche al
+     * listino di SB-10a, che sceglie da sé quali incontri giocare.
+     */
+    static void playCells(Draft draft, Settings settings, List<Cell> cells, PlayerSource players) throws Exception {
         SimulationRunner runner = new SimulationRunner(players);
         if (settings.threads == 1) {
             for (Cell cell : cells) play(draft, runner, settings, cell);
@@ -286,10 +298,6 @@ final class Bench {
                 pool.shutdownNow();
             }
         }
-        Report report = new Report(draft, sha256(draft), settings, cells, BoundCap.run(draft, settings.cap));
-        staticChecks(draft, report.checks);
-        for (Cell cell : cells) report.checks.merge(cell.checks); // In ordine di cella: gli esempi non dipendono dai thread.
-        return report;
     }
 
     /** Controlli sulla bozza, senza giocare. */

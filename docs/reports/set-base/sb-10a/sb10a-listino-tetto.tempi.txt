@@ -1,0 +1,6 @@
+banco sb-10a/1
+misure tetto
+thread 8
+partite 0
+secondi 3.2
+millisecondi per partita (tempo reale) 0.0000

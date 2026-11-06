@@ -1,0 +1,6 @@
+banco sb-10a/1
+misure all
+thread 8
+partite 3541200
+secondi 1769.9
+millisecondi per partita (tempo reale) 0.4998

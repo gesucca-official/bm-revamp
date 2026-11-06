@@ -474,6 +474,17 @@ Diviso da [D32](#decisioni-del-proprietario) in due blocchi. **SB-10a, listino d
 risorsa, valore della priorità, valore di L che decade, tetto delle bound e suoi pesi, posizione delle carte attuali rispetto al listino.
 **SB-10b, griglia degli slot,** è di progetto e usa il listino. Il perimetro che segue vale per i due blocchi insieme.
 
+**SB-10a fatto il 6 novembre 2026, in attesa del giudizio del proprietario.** Il [listino](design/set-base/listino.md) è misurato con duelli fra
+carta sonda e àncora (gratuita, 10 HIT), su cinque contesti e tre stili di bot. In sintesi:
+- V costa circa 1,1 danni per unità fino a 20 V e di più oltre;
+- A e la T del Tossico costano poco, HEALTH circa 1,1–1,2;
+- CUT, POISON e HIT si equivalgono e la priorità vale quasi niente;
+- la precedenza è ordinale;
+- L guadagnata vale circa metà di V e, come costo, è quasi sempre impagabile.
+
+Proposti tetto delle bound a 4 unità e nuovi pesi. Nella ricerca dei mazzi un mutante sostituisce il migliore solo oltre un errore
+standard. [Rapporto](reports/set-base/sb-10a-report.md).
+
 **Perimetro.** Griglia delle circa 115 carte: slot per archetipo, ruolo, costo e rarità, secondo il [budget](#il-set-in-numeri), con le candidate della [bozza esterna](#bozza-esterna-di-carte) assegnate agli slot; numero di carte distinte per starter (10–15); quali generiche compaiono in quali
 starter; curva dei costi rispetto ai 3 slot regolari in mano. **Listino di potenza** ricavato dalle carte attuali e misurato: danno per risorsa, valore della priorità,
 valore di L che decade. Distribuzione delle rarità con il [paletto](#rarità). Verifica del tetto delle bound. Revisione degli effetti poco evidenti di L.

@@ -1,0 +1,3934 @@
+{
+  "intestazione" : {
+    "banco" : "sb-10a/1",
+    "bozza" : "classpath:/sb-10a/listino-base.json",
+    "sha256" : "87fa95f18772385258c51c05de784487beb4fa0dc9a67062d6783fff35b7b1b1",
+    "misure" : "tetto",
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse"
+    ],
+    "partiteBisezione" : 400,
+    "partiteGriglia" : 2000,
+    "partiteCurve" : 2000,
+    "semeBisezione" : 8000000,
+    "semeGriglia" : 8500000,
+    "semeCurve" : 8200000
+  },
+  "bisezioni" : [ ],
+  "pendenzaSalute" : { },
+  "curve" : [ ],
+  "tetto" : [
+    {
+      "bound" : "bruiser.character.LittleRage",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        6.75,
+        6.75,
+        6.75,
+        6.75,
+        6.75,
+        6.75,
+        6.75,
+        6.75
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 4E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 6.75,
+      "medio" : 6.75,
+      "restaSullAvversario" : [ ],
+      "note" : [
+        "più di una funzione"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 6,75 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "bruiser.character.LittleSmack",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5
+      ],
+      "danno" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5
+      ],
+      "guadagni" : {
+        "A" : 4E+1,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 7.5,
+      "medio" : 7.5,
+      "restaSullAvversario" : [ ],
+      "note" : [
+        "più di una funzione"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 7,50 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "junkie.character.PatheticBlade",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        7.75,
+        10.75,
+        12.75,
+        15.75,
+        17.75,
+        20.75,
+        22.75,
+        25.75
+      ],
+      "danno" : [
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1,
+        22,
+        25
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 4E+1,
+        "L" : 0
+      },
+      "massimo" : 25.75,
+      "medio" : 16.75,
+      "restaSullAvversario" : [
+        "T +40"
+      ],
+      "note" : [
+        "più di una funzione"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 25,75 oltre il tetto 4,00; si accumula: danno 7,00 al primo uso, 25,00 all'uso 8; resta sull'avversario: T +40"
+    },
+    {
+      "bound" : "junkie.character.RottenSmile",
+      "personaggio" : "junkie.character.ToxicJunkie",
+      "usi" : 8,
+      "valore" : [
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5,
+        2.5
+      ],
+      "guadagni" : {
+        "A" : 4E+1,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2.5,
+      "medio" : 2.5,
+      "restaSullAvversario" : [
+        "A -40"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "resta sull'avversario: A -40"
+    },
+    {
+      "bound" : "listino.bound.danno-10-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "danno" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1E+1,
+      "medio" : 1E+1,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 10,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-10-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "danno" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1E+1,
+      "medio" : 1E+1,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 10,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-10-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "danno" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1E+1,
+      "medio" : 1E+1,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 10,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-2-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.danno-2-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.danno-2-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.danno-4-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.danno-4-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.danno-4-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.danno-6-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "danno" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 6,
+      "medio" : 6,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 6,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-6-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "danno" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 6,
+      "medio" : 6,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 6,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-6-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "danno" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 6,
+      "medio" : 6,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 6,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-8-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-8-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.danno-8-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.25-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.25-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.25-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 8,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.5-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.5-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.5-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.parata-0.75-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.parata-0.75-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.parata-0.75-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-10-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "guadagni" : {
+        "A" : 8E+1,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.risorsa-10-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 8E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 7.5,
+      "medio" : 7.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 7,50 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.risorsa-10-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 8E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 7.5,
+      "medio" : 7.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 7,50 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.risorsa-2-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "guadagni" : {
+        "A" : 16,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1,
+      "medio" : 1,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-2-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 16,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1.5,
+      "medio" : 1.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-2-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5,
+        1.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 16,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 1.5,
+      "medio" : 1.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-4-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "guadagni" : {
+        "A" : 32,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2,
+      "medio" : 2,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-4-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 32,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-4-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 32,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-6-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "guadagni" : {
+        "A" : 48,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-6-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 48,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4.5,
+      "medio" : 4.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 4,50 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.risorsa-6-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5,
+        4.5
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 48,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4.5,
+      "medio" : 4.5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 4,50 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.risorsa-8-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "guadagni" : {
+        "A" : 64,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "listino.bound.risorsa-8-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 64,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 6,
+      "medio" : 6,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 6,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.risorsa-8-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 64,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 6,
+      "medio" : 6,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 6,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.struggle-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.struggle-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.struggle-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1,
+        1E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5,
+        -5
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "listino.bound.veleno-2-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "danno" : [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 4.5,
+      "restaSullAvversario" : [
+        "T +16"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00; si accumula: danno 1,00 al primo uso, 8,00 all'uso 8; resta sull'avversario: T +16"
+    },
+    {
+      "bound" : "listino.bound.veleno-2-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "danno" : [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 4.5,
+      "restaSullAvversario" : [
+        "T +16"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00; si accumula: danno 1,00 al primo uso, 8,00 all'uso 8; resta sull'avversario: T +16"
+    },
+    {
+      "bound" : "listino.bound.veleno-2-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "danno" : [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 8,
+      "medio" : 4.5,
+      "restaSullAvversario" : [
+        "T +16"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 8,00 oltre il tetto 4,00; si accumula: danno 1,00 al primo uso, 8,00 all'uso 8; resta sull'avversario: T +16"
+    },
+    {
+      "bound" : "listino.bound.veleno-5-mara",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        2,
+        5,
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1
+      ],
+      "danno" : [
+        2,
+        5,
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2E+1,
+      "medio" : 11,
+      "restaSullAvversario" : [
+        "T +40"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 20,00 oltre il tetto 4,00; si accumula: danno 2,00 al primo uso, 20,00 all'uso 8; resta sull'avversario: T +40"
+    },
+    {
+      "bound" : "listino.bound.veleno-5-neutro",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        2,
+        5,
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1
+      ],
+      "danno" : [
+        2,
+        5,
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2E+1,
+      "medio" : 11,
+      "restaSullAvversario" : [
+        "T +40"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 20,00 oltre il tetto 4,00; si accumula: danno 2,00 al primo uso, 20,00 all'uso 8; resta sull'avversario: T +40"
+    },
+    {
+      "bound" : "listino.bound.veleno-5-spazienzio",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        2,
+        5,
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1
+      ],
+      "danno" : [
+        2,
+        5,
+        7,
+        1E+1,
+        12,
+        15,
+        17,
+        2E+1
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2E+1,
+      "medio" : 11,
+      "restaSullAvversario" : [
+        "T +40"
+      ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 20,00 oltre il tetto 4,00; si accumula: danno 2,00 al primo uso, 20,00 all'uso 8; resta sull'avversario: T +40"
+    },
+    {
+      "bound" : "prova.mara.ColpoDiStriscio",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "prova.mara.Scarto",
+      "personaggio" : "prova.mara",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "prova.rocco.Colpetto",
+      "personaggio" : "prova.rocco",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "prova.rocco.Fiato",
+      "personaggio" : "prova.rocco",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [
+        "cura"
+      ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "sonda.neutro.Colpetto",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "danno" : [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 5,
+      "medio" : 5,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : true,
+      "motivi" : "valore per uso 5,00 oltre il tetto 4,00"
+    },
+    {
+      "bound" : "sonda.neutro.Riparo",
+      "personaggio" : "sonda.neutro",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    }
+  ]
+}
