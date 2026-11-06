@@ -720,7 +720,7 @@ Le catture dopo sono [duello desktop](client-c4/c4-5a-bis/catture/o26-duel-dopo-
 
 ## C4-5b
 
-5 novembre 2026. **Fatto, in attesa del giudizio del proprietario. Fase B completata secondo le scelte A/B del 5 novembre 2026.** Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
+5 novembre 2026. **Approvato dal proprietario il 6 novembre 2026** ([approvazione](#approvazione-di-c4-5b)). Fase B completata secondo le scelte A/B del 5 novembre 2026. Nessun cambiamento a regole, server, protocollo, catalogo, asset o geometria.
 
 ### Fase 0 — Riformattazione del CSS
 
@@ -849,3 +849,7 @@ Le sole eccezioni rilevate sono chip della scena, elencati qui uno per caso misu
 **Da giudicare al proprietario:** tutte le schermate della galleria dopo; in particolare editor incompleto/completo e admin (A, disabilitati/focus), hub/Al bar e link/form da 44 px, scarto richiesto (singolo invito e fumetto non ridondante), conferma pronta (B). [Focus da tastiera](client-c4/c4-5b/dopo/focus/editor-844x390.jpg); grigi dell’[editor](client-c4/c4-5b/dopo/grigi/editor-incompleto-844x390.jpg) e della [conferma](client-c4/c4-5b/dopo/grigi/conferma-pronta-844x390.jpg) per la regola 11, ottenuti con il solo filtro temporaneo grayscale del browser. Il giudizio umano in grigio resta pendente.
 
 **Non verificato:** iPhone fisico e Safari, Impact su iOS, contrasto formale (C4-8a), partita interamente da tastiera e intero zoom del testo (C4-8a), prompt Basic nativo, TestServerContext. Le verifiche sono Edge su Windows; non sostituiscono questi controlli. **Fatto, in attesa del giudizio del proprietario. Nessun push.**
+
+### Approvazione di C4-5b
+
+6 novembre 2026, sulle catture dopo. Parole del proprietario: «giudizio su c4-5b positivo». Il blocco è chiuso. La revisione della regia sul repository non ha trovato attesi, soglie, selettori o `BASE_750` cambiati; ha ripetuto le unità su `8a7ef18`: 240/240 verdi. Le verifiche del blocco usano il regolamento 1.10: il regolamento 1.11 (R01, risorse a 0), entrato dopo dal filone Set Base, porta cinque risorse per posto nelle viste e non è ancora stato provato sul tavolo.

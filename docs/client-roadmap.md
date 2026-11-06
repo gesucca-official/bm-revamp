@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**5 novembre 2026 — versione 46. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1, C4-1b, C4-3, C4-2 e C4-4 fatti, gli ultimi tre approvati dal proprietario; C4-5a approvato il 5 novembre 2026, O2 chiusa; C4-5a-bis approvato dal proprietario il 5 novembre 2026 dopo una partita vera (O26 e O27 chiuse); C4-5b fatto, in attesa del giudizio del proprietario ([dopo](reports/client-c4/c4-5b/dopo/README.md), A comune e B di calata con invito singolo)).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**6 novembre 2026 — versione 47. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1 e C4-1b fatti; C4-3, C4-2, C4-4, C4-5a, C4-5a-bis e C4-5b approvati dal proprietario, l'ultimo il 6 novembre 2026; C4-6* saltato (D1); prossimo C4-7*).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -29,7 +29,7 @@ landscape forzato: [esiti C0-R5](reports/client-c0-r5-procedure.md#esiti),
 La [checklist P01–P44](client-c0-parity.md) e il [contratto delle interazioni](design/client-c0/interaction-contract.md)
 sono state le basi di C1–C2. Il [primo rapporto](reports/client-c0-report.md)
 e il laboratorio Angular sono evidenze storiche della scena respinta.
-Il [regolamento 1.10](game-rules.md) rimane la fonte normativa (1.8, C2b-4: nessun «/» nell'identificativo dei mazzi). Il rifacimento
+Il [regolamento 1.11](game-rules.md) rimane la fonte normativa (1.8, C2b-4: nessun «/» nell'identificativo dei mazzi; 1.11, R01: le risorse che la scheda non indica partono da 0). Il rifacimento
 non cambia regole né effetti; per decisione del proprietario su O14 il catalogo
 ha due campi descrittivi (ruolo e guadagni, R07a, 1.7), a cui A1 e A3 del piano C3 aggiungono
 tipo e importo nominale del danno (1.9 e 1.10), esposti dal server e copiati
@@ -580,8 +580,8 @@ anticipate in C2 con O13.
 schermate e controlli utilizzabili anche senza hover.
 
 **Piano (3 novembre 2026):** stato misurato, blocchi C4-1…C4-9, regole di non regressione e
-decisioni D1–D14, in parte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
-**Stato (5 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **approvato dal proprietario il 5 novembre 2026, O2 chiusa** ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); C4-5a-bis approvato dal proprietario il 5 novembre 2026 dopo una partita vera (O26 e O27 chiuse); C4-5b fatto, in attesa del giudizio del proprietario ([dopo](reports/client-c4/c4-5b/dopo/README.md), A comune e B di calata con invito singolo).
+decisioni D1–D14, tutte prese, nel [piano C4](client-c4-plan.md). O19 non è in C4: resta a C5.
+**Stato (6 novembre 2026):** C4-1 (strumenti), C4-1b (misura di partenza), C4-3 (simboli, font, inventario), C4-2 (dimensioni, 44 px, conferma sulla carta, tutela di 750×292) e C4-4 (cornici per tipologia e segno del ruolo) fatti, gli ultimi tre approvati dal proprietario, [rapporto C4](reports/client-c4-report.md); C4-5a **approvato dal proprietario il 5 novembre 2026, O2 chiusa** ([rapporto e catture](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)); C4-5a-bis approvato dal proprietario il 5 novembre 2026 dopo una partita vera (O26 e O27 chiuse); C4-5b **approvato dal proprietario il 6 novembre 2026** ([dopo](reports/client-c4/c4-5b/dopo/README.md), A comune e B di calata con invito singolo). C4-6* saltato per D1 (a); prossimo C4-7* (suoni, D2 (b)).
 
 **Attività:** rifinire l'identità del bar e i gesti già accettati in C0/C1,
 uniformare tavolo/carte/form, sostituire tutti i placeholder
@@ -767,6 +767,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 47 — 6 novembre 2026:** C4-5b approvato dal proprietario: «giudizio su c4-5b positivo». Decisioni del 6 novembre 2026 nel [piano C4](client-c4-plan.md#decisioni-del-proprietario): D1 (a), nessuna illustrazione nuova, C4-6* saltato perché il Set Base è in corso e le illustrazioni andranno rifatte per le carte definitive; D2 (b), 4–6 suoni senza musica; D5 (b); D12 (a) e (d). Il regolamento 1.11 (R01, risorse a 0), entrato dal filone Set Base, non cambia effetti di carta; le viste mostrano cinque risorse per posto dal primo turno. Nessuna regola, API o protocollo cambiati da C4.
 - **Versione 46 — 5 novembre 2026:** C4-5b fatto, in attesa del giudizio del proprietario. A comune/editor/admin, B di calata senza targhette per candidata e con un solo invito sulla riga dei costi; 19/19 verifiche ufficiali, 240 unità finali, sorgente vincolato ai token e controlli touch ordinari almeno 44×44. 750 resta rosso dichiarato, BASE_750 e geometria invariati. [Rapporto](reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare), [dopo](reports/client-c4/c4-5b/dopo/README.md).
 - **Versione 45 — 5 novembre 2026:** C4-5b, sola Fase A: riformattazione CSS equivalente in `11bc95e`, inventario, censimento, prima odierno e proposta A/B; 19/19 verifiche ufficiali verdi, rossi 750 dichiarati e confronto sugli stessi input invariato. [Rapporto](reports/client-c4-report.md#c4-5b). Arresto prima dei token e della finitura, in attesa della scelta.
 - **Versione 44 — 5 novembre 2026:** C4-5a-bis approvato dal proprietario dopo una partita vera: «ho giocato una partita vera e approvo quanto abbiamo fatto». O26 e O27 chiuse; [giudizio e limite delle verifiche](reports/client-c4-report.md#c4-5a-bis).
