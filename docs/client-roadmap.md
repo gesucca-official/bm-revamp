@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**7 novembre 2026 — versione 52. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1 e C4-1b fatti; C4-3, C4-2, C4-4, C4-5a, C4-5a-bis e C4-5b approvati dal proprietario, l'ultimo il 6 novembre 2026; C4-6* saltato (D1); C4-7 non approvato dopo la prova del 7 novembre 2026, correzione C4-7-ter da fare; poi i blocchi nuovi C4-10 e C4-11, D15).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**7 novembre 2026 — versione 53. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1 e C4-1b fatti; C4-3, C4-2, C4-4, C4-5a, C4-5a-bis e C4-5b approvati dal proprietario, l'ultimo il 6 novembre 2026; C4-6* saltato (D1); C4-7 non approvato dopo la prova del 7 novembre 2026, C4-7-ter Fase A pronta, in attesa della scelta; poi i blocchi nuovi C4-10 e C4-11, D15).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -769,6 +769,8 @@ Manifest e approvazione I22 non vanno rigenerati per adeguarli al nuovo client.
 Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
+
+- **Versione 53 — 7 novembre 2026:** C4-7-ter, [Fase A](design/client-c4/audio/proposta-colpi.md) pronta: diagnosi del click, candidati Kenney CC0 e ascolto solo LAN, regole e controlli proposti. Nessun codice di prodotto modificato; in attesa della scelta. C4-7 resta non approvato.
 
 - **Versione 52 — 7 novembre 2026:** prova del proprietario di C4-7 dopo C4-7-bis su desktop e iPhone: C4-7 non approvato. Nuovo C4-7-ter (un suono per colpo, diverso per tipo di danno, esito col pannello, click della conferma su iPhone). Due blocchi nuovi prima di C4-8a, per il gioco che resta «meccanico, non ancora tanto da videogioco»: C4-10 guida visiva (con O29) e C4-11 spazio e profondità (con O28), D15. Nuova O30 (conferma dello scarto sulla carta, C4-10). [Prova](reports/client-c4-report.md#c4-7--prova-del-proprietario-del-7-novembre-2026), [piano](client-c4-plan.md#c4-10--guida-visiva).
 - **Versione 51 — 7 novembre 2026:** C4-7 fatto dopo la correzione C4-7-bis, in attesa del giudizio del proprietario: suoni d'esito distinti (Kenney Music Jingles SAX10 vittoria, SAX07 sconfitta e pareggio, CC0), esito sul colpo decisivo o all'inizio della coda e anche toccando, riproduzione con Web Audio; `confirmation_002.ogg` tolto. Da provare su iPhone. [Rapporto](reports/client-c4-report.md#c4-7-bis--fase-b).

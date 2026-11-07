@@ -1053,3 +1053,30 @@ Considerazioni:
 - **Attenzione, riepilogo giallo, conferma dello scarto sulla carta** → C4-10 (O29, O30); **affollamento, schermi grandi spogli, tridimensionalità** → C4-11 (con O28). Approvato dal proprietario: «mi sembra un buon piano» (D15).
 
 Nessun codice cambiato, nessuna verifica eseguita per questa registrazione.
+
+## C4-7-ter — Fase A
+
+7 novembre 2026, base `e283f522311633fac5a09efa194949b2f2919cc5` su main, checkout pulito alla partenza e commit richiesto presente. **Fase A pronta, in attesa della scelta del proprietario. C4-7 resta non approvato; Fase B non avviata.** [Proposta completa, misure, regole, controlli e istruzioni di ascolto](../design/client-c4/audio/proposta-colpi.md).
+
+**Solo documenti.** Regolamento, server, protocollo, catalogo, client-debug, file del Set Base, codice e test del client, asset e inventario distribuiti invariati. Nessun atteso, soglia o BASE_750 cambiato.
+
+**Click:** nel file decodificato il picco nei primi 5 ms è 0,898749 (Edge) e 0,898729 (FFmpeg). Il render Web Audio dell'avvio coincide coi campioni decodificati (differenza 0); sblocco muto con picco 0; doppia decodifica identica. Provato il contenuto dell'attacco forte, non la causa hardware del click su iPhone. Rampa proposta di 5 ms sul guadagno della sola sorgente send, senza ritardare l'invio: campione iniziale a zero e salto massimo nei primi 5 ms ridotto del 16,8%. Pagina A/B con originale, 5 ms e alternativa 8 ms. Nessun audio convertito o modificato.
+
+**Candidati:** Kenney Impact Sounds 1.0 e RPG Audio 1.0, CC0 esplicita sulle pagine ufficiali e nelle licenze incluse; download dal normale flusso delle pagine con Edge/Playwright in cartella nuova fuori repository. Un tentativo diretto proposto è stato respinto dal controllo automatico e non eseguito; nessun aggiramento, nessun mirror. ZIP 800850 + 964837 = **1.765.687 byte**, sotto 5 MB. Proposte HIT `impactPunch_heavy_000.ogg` (11617 B, 0,649025 s) e CUT `knifeSlice.ogg` (15532 B, 0,599542 s); tre candidati per gruppo. POISON raccomandato silenzioso, alternative come HIT o `impactSoft_medium_000.ogg` (5351 B, 0,118005 s). SHA-256 individuali e dei pacchetti nella proposta.
+
+**Ascolto:** [pagina solo LAN](http://192.168.1.79:8767/), PC/iPhone sulla stessa rete; su iPhone disattivare il silenzioso. Server legato a IP privato, senza tunnel o pubblicazione, file solo in `%TEMP%\bm-c4-7-ter-20261107-listen`. HTTP 200, avvio dei candidati e della variante conferma verificati con Edge/Playwright, viewport 390×844: nessun errore JS e nessuno scorrimento orizzontale. Pagina lasciata attiva per la scelta; istruzioni di arresto/riavvio nella proposta. Nessun ascolto umano né raggiungibilità dall'iPhone provati dall'esecutore.
+
+**Regole da scegliere:** tipo nominale coerente col segno visivo; una emissione per carta, priorità CUT > HIT > POISON per multi-tipo; nessun colpo sonoro per carte senza danno o annullate; colpi vicini con sorgenti indipendenti; tutti i colpi scavalcati dal tocco al tocco, con guadagno 1/N per emissioni simultanee. Esito indipendente al pannello, una volta per risultato personale live anche senza sequenza; viste storiche/riconnessione mute, nessun doppio esito dopo «Resta a guardare». Navigazione, skip e interruzioni fermano i suoni, niente recuperi. Tabella completa, alternative e motivi nella proposta: sono raccomandazioni, non decisioni già approvate.
+
+**Sonde:** proposto il passaggio dalla guardia unica per round a identità per colpo e per esito personale, conteggio esatto dei punti raggiunti, confronto coi segni visivi e col pannello DOM; conservati errori/origini, divieto HTMLMediaElement, audio bloccato, mancanza file e copertura win/loss/input. Proposti test per ogni regola e mutazioni fuori repository della semantica c197517, senza usare import falliti come prova. Nessuna modifica alle sonde in Fase A.
+
+**Verifiche eseguite:**
+
+- `./scripts/build.ps1 -Task Test -Offline`: **579 server, zero fallimenti/errori, 7 saltati; client-debug 36/36**. Porte 8080 e 4320 libere e nessun Java/Maven esterno prima del lancio; nessun avvio del server per la diagnosi.
+- `python scripts/check-rules.py`: **PASS**. `git diff --check`: PASS.
+- Client `run.ps1 -Task Test`: **255/255**; `Build`: PASS (avviso Vite di chunk oltre 500 kB non compressi, soglie immutate); `Size`: PASS, JS gzip **340716 / 512000 B**, totale **1733198 / 4194304 B**, texture **27729048 / 33554432 B** per C4. Risultati uguali a C4-7-bis.
+- Tentativo aggiuntivo `VerifyAll -Only 'test,build,size'`: **non completato**, exit 2 prima dei test: il lanciatore tenta di ricostruire il jar con Windows PowerShell e non trova `Get-FileHash`. I tre controlli sopra sono stati eseguiti singolarmente con successo; non si dichiara VerifyAll verde e non si cambia il lanciatore in questo blocco. Log in cartella temporanea.
+
+**Non verificato:** nuovo comportamento di prodotto (non implementato), partite vere di C4-7-ter, iPhone/Safari, decodifica e interruttore fisico, suono effettivamente udito, distinguibilità e latenza percepita. `TestServerContext` e `verify-match-manifests.py` non eseguiti: nessuna attestazione di avvio Spring. Verifiche grafiche/750×292 e giri audio di Fase B non eseguiti. Nessuna nuova evidenza grafica da 5–10 MB necessaria in Fase A: misure numeriche nel documento, materiali di ascolto e script temporanei fuori git (D13).
+
+**Al proprietario:** su PC e iPhone ascoltare HIT/CUT e confronto conferma; scegliere POISON e approvare/correggere la tabella delle regole. L'esito col pannello e un suono per colpo sono già decisi. Dopo la scelta si implementa e si esegue la matrice B, affrontando prima il problema del lanciatore; nessun codice di prodotto in questa fase.
