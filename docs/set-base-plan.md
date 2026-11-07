@@ -4,8 +4,8 @@
 server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
 documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
 proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
-nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b ([D30, D31, D32, D37](#decisioni-del-proprietario)); SB-1, SB-2 e SB-6b restano legati al
-completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
+nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a ([D30, D31, D32, D37, D40](#decisioni-del-proprietario)); SB-1 è
+anticipato in parallelo a C4 ([D40](#decisioni-del-proprietario)); SB-2 e SB-6b restano legati al completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -268,7 +268,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
 | Fase | Blocco | Contenuto | Dipende da |
 |---|---|---|---|
-| Fondamenta | SB-1 | Regole dei mazzi | client web |
+| Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40) |
 | | SB-2 | Separazione fra regolamento e set | SB-1 |
 | Strumenti | SB-3 | Runner senza server e seme | — |
 | | SB-4 | Vista limitata e bot euristici | SB-3 |
@@ -283,7 +283,8 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-10b | Griglia degli slot (progetto) | SB-10a |
 | Carte | SB-11a | Passi `consume` ed `equip` del formato dati | SB-10b |
 | | SB-11b | Bozza degli starter base | SB-11a |
-| | SB-12 | Giro sugli starter base e prova umana | SB-8, SB-11b |
+| | SB-12a | Giro coi bot sugli starter base | SB-11b |
+| | SB-12b | Prova umana degli starter base | SB-8, SB-12a |
 | | SB-13 | Tossico: bozza e giro | SB-12 |
 | | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 |
 | | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 |
@@ -307,11 +308,16 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |
 
 SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
-corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b ([D31, D32, D37](#decisioni-del-proprietario)), senza aspettare il client; SB-1, SB-2 e SB-6b restano legati al client (l'editor) e vanno chiusi
-prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
+corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), senza aspettare il client; SB-1 è anticipato in parallelo a C4 (D40);
+SB-2 e SB-6b restano legati al client e vanno chiusi, con SB-1, prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
 dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
+
+**Anticipato da [D40](#decisioni-del-proprietario)**, in parallelo a C4: i blocchi C4 rimasti (C4-10, C4-11, C4-8a, C4-8b, C4-9) non toccano
+l'editor dei mazzi (`deck.ts`, `collection.tsx`). Paletti: niente modifiche a `client-web/src/style.css`, su cui lavorano C4-10, C4-11 e C4-8a;
+`verify-decks.mjs` riscritto e pushato prima che parta C4-8a, che usa `VerifyDecks`; dopo il pull l'altra macchina rifà il jar, perché cambiano
+regolamento e validazione del server.
 
 **Perimetro.** Prossima versione del regolamento: R02 con le [regole dei mazzi concordate](#regole-dei-mazzi-concordate), R03 senza la lacuna
 del giocatore senza mosse, R01a e il conteggio delle carte iniziali coerenti. Poi validazione in `UserAccountServiceImpl`, editor di
@@ -540,6 +546,9 @@ devono mostrare danno, difesa, priorità, oggetti e almeno una contromossa.
 **Rischi.** Semplicità contro interesse: il mazzo base deve insegnare senza annoiare.
 
 ### SB-12 — Giro sugli starter base e prova umana
+
+Diviso da [D40](#decisioni-del-proprietario) in due blocchi. **SB-12a, giro coi bot,** porta gli starter base ai criteri con il banco e
+non aspetta il client. **SB-12b, prova umana,** sono le partite del proprietario e richiede SB-8. Il perimetro che segue vale per i due insieme.
 
 **Perimetro.** Giro di bilanciamento fino ai criteri, poi partite del proprietario. Il risultato è la **base stabile** per i blocchi successivi.
 
@@ -770,6 +779,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D37 | Divisione di SB-11 | 6 novembre 2026, con le parole del proprietario: «Sì, dividi e scrivi». **SB-11 si divide** in SB-11a (passi `consume` ed `equip` del formato dati e àncora del listino come parametro, dipende da SB-10b) e SB-11b (bozza degli starter base, dipende da SB-11a). SB-12 dipende da SB-8 e SB-11b. **Ordine: SB-10b → SB-11a → SB-11b** |
 | D38 | Bozza degli starter base (SB-11b, fase A) | 6 novembre 2026, con le parole del proprietario: «approvo le raccomandazioni su queste e anche delle prossime (a questo livello di dettaglio mi fido di te)». **(1)** Bozza in un file unico, `set-base/bozza.json`; carte di oggi col binding della classe, nuove col prefisso del set `base.`, slot nella descrizione; **(2)** durate: «per N turni» = `turns: N − 1` (R05), l'incoerenza dei testi di oggi va a SB-25; **(3)** D36: tetto del danno a 3, non a 2, che sullo starter di Mara non risolve; in SB-12 le bound si valutano anche come salute equivalente per uso, al massimo 4; **(4)** B2: la bound +8 A resta nello starter di Mara; **(5)** SB-12 parte da costi di Mara −5 A su cinque carte e HEALTH 95; **(6)** prezzi del listino a 7 HIT (A di Mara circa 1 HIT, V oltre 20 più cara) registrati qui e usati in SB-12, senza riscrivere ora la griglia; **(7)** limiti dei bot da guardare in SB-12 prima di tagliare carte |
 | D39 | Nome e voce di Spazienzio (SB-11b) | 6 novembre 2026, con le parole del proprietario: «su spazienzio il mazzo lo chiamiamo "pazienza finita" e i nomi delle sue carte li teniamo tutti in maiuscolo (sull'interfaccia, non nei dati o nel codice), perché lui ha perso la pazienza e urla». Lo starter di Spazienzio si chiama **«Pazienza finita»**; i **nomi visualizzati** delle sue carte (slot `SPA-*`) sono **in maiuscolo**, mentre binding, id e codice restano come sono. Precisato dal proprietario all'approvazione di SB-11b: «maiuscolo nei dati», cioè il maiuscolo sta nel nome visualizzato scritto nella bozza (`gui.name`), non è l'interfaccia a trasformarlo. Vale anche per la passata finale (SB-24) e per i testi per i giocatori (SB-25) |
+| D40 | Divisione di SB-12 e anticipo di SB-1 | 7 novembre 2026, con le parole del proprietario: «Sì, entrambi». **SB-12 si divide** in SB-12a (giro coi bot sugli starter base, dipende da SB-11b) e SB-12b (prova umana, dipende da SB-8 e SB-12a). **SB-1 è anticipato** in parallelo a C4, che si è allungato con C4-10 e C4-11, perché è il primo anello verso SB-8 e la prova umana; paletti: niente `style.css`, `verify-decks.mjs` pushato prima di C4-8a, jar rifatto sull'altra macchina dopo il pull. SB-13 resta dopo SB-12 intero; se la prova umana tarda, il proprietario può decidere di anticiparlo dopo SB-12a. Precisa D22 e D30 |
 
 ## Decisioni ancora aperte
 
