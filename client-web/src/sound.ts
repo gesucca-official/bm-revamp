@@ -40,7 +40,7 @@ export class Sounds {
  play(kind:SoundEvent,scale=1):SourceLike|null{if(!this.unlocked||this.muted||this.volume===0)return null;const c=this.ctx,master=this.master,buffer=this.buffers[kind];
   if(!c||!master||!buffer||c.state!=='running')return null;
   let s:SourceLike|null=null,g:GainLike|null=null;
-  try{s=c.createBufferSource();s.buffer=buffer;g=c.createGain();g.gain.value=scale;s.connect(g);g.connect(master);const t=c.currentTime;
+  try{s=c.createBufferSource();s.buffer=buffer;g=c.createGain();g.gain.value=scale*(kind==='cut'?0.61:1);s.connect(g);g.connect(master);const t=c.currentTime;
    if(kind==='send'){g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(scale,t+.005);}
    const source=s,gain=g;s.onended=()=>{this.active.delete(source);this.roundSources.delete(source);try{gain.disconnect?.();}catch{}};
    this.active.add(s);s.start(t);this.counts[kind]++;return s;

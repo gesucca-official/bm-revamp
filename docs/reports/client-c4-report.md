@@ -1147,3 +1147,26 @@ Parole del proprietario dopo una prova della Fase B: «l'unico feedbackc he ho p
 Lettura della regia: rilievo sul livello di `knifeSlice.ogg`, non sulla scelta del file o sulle regole. La correzione è la Fase 0 di [C4-10](../client-c4-plan.md#c4-10--guida-visiva), in un commit a sé; il giudizio su C4-7 si dà dopo di essa. Per decisione del proprietario si parte con C4-10.
 
 Nessun codice cambiato, nessuna verifica eseguita per questa registrazione.
+
+
+### C4-10 — Fase 0
+
+7 novembre 2026. **Fase 0 fatta, in attesa dell’ascolto del proprietario.** Solo volume CUT; Fase A non eseguita. Misure su file distribuiti con FFmpeg `volumedetect`, RMS medio e picco in dBFS (stesso strumento):
+
+| File | RMS | Picco |
+|---|---:|---:|
+| click_001.ogg | -26,4 | -1,4 |
+| confirmation_001.ogg | -11,3 | -0,9 |
+| error_001.ogg | -19,0 | -0,8 |
+| impactPunch_heavy_001.ogg | -17,5 | -1,2 |
+| jingles_SAX07.ogg | -20,0 | -10,5 |
+| jingles_SAX10.ogg | -19,7 | -9,8 |
+| knifeSlice.ogg | -21,5 | -1,3 |
+
+Il filtro FFmpeg `ebur128` misura loudness integrata -13,7 LUFS per CUT e -18,0 LUFS per HIT, differenza 4,3 LU; gli effetti sono brevi, quindi la misura non sostituisce l’ascolto. Guadagno della sola sorgente CUT **0,61** (circa -4,3 dB), moltiplicato per 1/N; master, altri suoni e file invariati. Nessuna conversione, inventario invariato.
+
+Test su copia fuori repository: rimossa la sola moltiplicazione CUT, 2 test audio falliti su 15, 13 verdi; il test nuovo controlla anche HIT, esiti, interfaccia, master e attacco send. Aggiornato soltanto l’atteso CUT del test simultaneo, autorizzato dal proprietario; altre soglie, attesi e BASE_750 invariati.
+
+Verifiche in sequenza, porte 8080 e 4320 libere e nessun Java/Maven esterno prima di ciascuna: jar ricostruito offline con successo; `VerifyAll -Only test,build,size -ReuseJar` 3/3 verdi, 266 test client passati, JS gzip 341.759 B, totale gzip 1.751.630 B, texture 27.729.048 B su 33.554.432 B. Il primo tentativo senza `-ReuseJar` si è fermato prima dei test: PowerShell avviato dal runner non trovava `Get-FileHash`; usato il jar appena ricostruito. `VerifyAll -Quick -Only resolution -Measures 1366x768,844x390 -ReuseJar`: 2/2 verdi (136 e 120 secondi), scenari ridotti, non giro completo. `build.ps1 -Task Test -Offline`: 579 test server, 0 errori, 7 saltati; client-debug 36/36. `python scripts/check-rules.py`: verde, 39 carte e 1 token, SQLite integro. Test unitari non attestano l’avvio del contesto Spring completo.
+
+Non verificati iPhone, Safari e suono effettivamente udito; il proprietario giudica il bilanciamento all’ascolto.
