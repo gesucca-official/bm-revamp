@@ -4,9 +4,9 @@
 `a807aa0`. **Solo piano:** nessun codice client, nessuna modifica a regole, server, protocollo, catalogo o
 `client-debug`. C0, C1, C2 e C3 sono chiuse. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
-**Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
+**Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato al 6 novembre 2026.** C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). C4-7: **fatto, in attesa del giudizio del proprietario** dopo la correzione C4-7-bis ([rapporto](reports/client-c4-report.md#c4-7-bis--fase-b)): esito di vittoria e di sconfitta distinti, sul colpo decisivo o all'inizio della coda e anche toccando, riproduzione con Web Audio; Fase 0, A e B di C4-7 restano come registrate. Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
+**Stato al 7 novembre 2026.** C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). C4-7: **non approvato dopo la prova del proprietario del 7 novembre 2026** ([prova](reports/client-c4-report.md#c4-7--prova-del-proprietario-del-7-novembre-2026)); la correzione **C4-7-ter** è il prossimo blocco. C4-7-bis (esito distinto, Web Audio) e le fasi di C4-7 restano come registrate. Dalla stessa prova, con [D15](#decisioni-del-proprietario), due blocchi nuovi prima di C4-8a: **C4-10** (guida visiva) e **C4-11** (spazio e profondità). Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
 
 **Stato di C4-1, C4-1b, C4-3, C4-2, C4-4 e C4-5a.** C4-5a è **approvato dal proprietario il 5 novembre 2026; O2 chiusa**. Le osservazioni O26 e O27 della prova sono assegnate a C4-5a-bis ([stato del blocco](reports/client-c4-report.md#c4-5a-bis): O26 e O27 approvate dal proprietario il 5 novembre 2026 dopo una partita vera; scelta A pieno/0,75/sopra, 236 unità e giri ufficiali verdi sul jar pre-SB-3/SB-4, contesto corrente verde, nuovo giro grafico sul jar corrente non svolto con accettazione esplicita del proprietario) ([rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)). C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
@@ -61,7 +61,9 @@ Valgono per **ogni** blocco, come in C3:
 | [O2](client-roadmap.md#osservazioni-del-proprietario-dopo-c1) | Sfondo con sedute da bar marcio | C4-5a |
 | Coerenza delle schermate | Hub, form, editor, catalogo, profilo e dialoghi con l'identità del tavolo; riserve C0 B3 e B6 su bound, ✓ e × | C4-5b |
 | [O9](client-roadmap.md#osservazioni-del-proprietario-dopo-c1), sostituzioni | **Opzionale**, D1: solo dove un'illustrazione non regge | C4-6 |
-| Suoni | **Opzionale**, D2: con volume e muto, mai necessari al gioco | C4-7 |
+| Suoni | **Opzionale**, D2: con volume e muto, mai necessari al gioco | C4-7, C4-7-ter |
+| Guida visiva | Far intuire senza testo cosa succede e cosa fare (D15); riepilogo giallo del turno ([O29](client-roadmap.md#osservazioni-registrate-durante-c4)); conferma dello scarto sulla carta (O30) | C4-10 |
+| Spazio e profondità | Schermi piccoli affollati, grandi spogli, tavolo senza profondità (D15); spazio tolto da Safari ([O28](client-roadmap.md#osservazioni-registrate-durante-c4)) | C4-11 |
 | Accessibilità | Focus visibile, contrasto, movimento ridotto, tastiera, zoom del testo | C4-8a |
 | [O21](client-roadmap.md#osservazioni-registrate-durante-c3) | Residui di C3-5 e C3-6 (tabella sotto) | C4-2, C4-8a, D5 |
 | Prestazioni | 60 fps come obiettivo su desktop, budget di download, ridisegno incrementale (riserva C0) solo se serve | C4-1b, C4-8b |
@@ -87,7 +89,8 @@ Valgono per **ogni** blocco, come in C3:
   lo riprogetta.
 - **Illustrazioni finali del set:** [SB-32](set-base-plan.md#sb-32--illustrazioni-del-set) (decisione D24 del piano Set Base).
 - **Adattamento completo a 750×292 (O22) e cattura fisica su iPhone:** all'app futura, secondo D6.
-- **Prova umana C, `window.__bm`, guida di avvio:** C5. Nessun deploy, PWA, app nativa, 3D o sfondo video.
+- **Prova umana C, `window.__bm`, guida di avvio:** C5. Nessun deploy, PWA, app nativa, renderer 3D o sfondo video. La profondità visiva
+  disegnata (ombre, piani, luce, rilievo) è invece di [C4-11](#c4-11--spazio-e-profondità).
 - **Regole, server, protocollo, catalogo, `client-debug`:** nessuna modifica. Se un blocco scopre di averne bisogno si ferma e
   si riparte dal regolamento, come prescrive AGENTS.
 
@@ -149,6 +152,9 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-5b | Coerenza di hub, form, editor, catalogo | C4-3, C4-4 | Sonnet, medio | CSS esteso e ripetitivo, con verifiche già esistenti |
 | C4-6* | Illustrazioni delle carte | C4-4, D1, D11 | Sonnet, medio | Lista corta e processo noto |
 | C4-7* | Suoni | D2 | Sonnet, medio | Piccolo; l'attenzione va alla regola 13 |
+| C4-7-ter | Suoni dei colpi per tipo di danno, esito col pannello, click della conferma | C4-7-bis | Opus, alto | Tempi della sequenza e audio su iOS, già corretti due volte |
+| C4-10 | Guida visiva | C4-7-ter, D15 | Opus, alto | Giudizio visivo e animazioni dentro la sequenza: regole 1–9 a rischio |
+| C4-11 | Spazio e profondità | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
 | C4-8a | Accessibilità e residui O21 | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
 | C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
 | C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
@@ -171,8 +177,8 @@ configurazioni diverse). Il criterio giusto è **un solo punto che avvia i serve
 
 ### Ordine e parallelo
 
-**Ordine (D14):** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-8a → C4-8b → C4-9 (C4-6* saltato per D1 (a), 6 novembre 2026). C4-8b viene dopo
-tutti gli asset, perché il peso e la cadenza vanno misurati su quelli veri.
+**Ordine (D14, D15):** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-7-ter → C4-10 → C4-11 → C4-8a → C4-8b → C4-9 (C4-6* saltato per D1 (a), 6 novembre 2026; C4-7-ter, C4-10 e C4-11 aggiunti con D15 il 7 novembre 2026). I numeri 10 e 11 non indicano l'ordine: i due blocchi vengono **prima** di C4-8a. C4-8a e C4-8b vengono dopo
+tutti gli asset e tutte le animazioni, perché movimento ridotto, peso e cadenza vanno misurati su quelli veri.
 
 | Blocco | `scene.ts` | `readability.ts` | `style.css` | Shell (`ui`, `table`, `collection`, `hub`, `public`, `profile`) | Strumenti | Asset e inventario |
 |---|---|---|---|---|---|---|
@@ -185,10 +191,13 @@ tutti gli asset, perché il peso e la cadenza vanno misurati su quelli veri.
 | C4-5b | | | ● | ● | ● | |
 | C4-6* | | | | | | ● |
 | C4-7* | ● (agganci) | | | ● (menu) | ● | ● |
+| C4-7-ter | ● (agganci) | | | ● | ● | ● |
+| C4-10 | ● | ● | ● | ● | ● | |
+| C4-11 | ● | ● | ● | ● | ● | ● se servono immagini |
 | C4-8a | ● | ● | ● | ● | ● | |
 | C4-8b | ● | ● | | | ● | |
 
-**Non possono andare in parallelo:** C4-3, C4-2, C4-4, C4-8a, C4-8b fra loro; C4-5b con C4-3, C4-2, C4-4 e C4-8a (`style.css` e
+**Non possono andare in parallelo:** C4-3, C4-2, C4-4, C4-7-ter, C4-10, C4-11, C4-8a, C4-8b fra loro; C4-5b con C4-3, C4-2, C4-4 e C4-8a (`style.css` e
 shell); C4-9 con qualunque altro. **Possono andare in parallelo solo le parti senza codice:** selezione di simboli e font e bozza
 dell'inventario (C4-3), generazione della texture (C4-5a), generazione delle illustrazioni (C4-6), scelta dei suoni (C4-7), mentre
 un altro blocco lavora sul client. Quelle parti producono file e registro; l'integrazione rientra in fila.
@@ -427,12 +436,22 @@ volto, nell'ispezione e nei primi piani; giudizio del proprietario.
 
 ### C4-7* — Suoni (opzionale)
 
-**Stato: fatto, in attesa del giudizio del proprietario** (dopo C4-7-bis, [rapporto](reports/client-c4-report.md#c4-7-bis--fase-b)). [Proposta](design/client-c4/audio/proposta.md), [scelta](design/client-c4/audio/scelte.md) e [Fase B](reports/client-c4-report.md#c4-7--fase-b) di C4-7: cinque suoni Kenney CC0, volume iniziale 20%, muto e volume nel menu. Fase 0 misurata su 1.11 e approvata dal proprietario.
+**Stato: non approvato dopo la prova del 7 novembre 2026; correzione C4-7-ter da fare** ([prova](reports/client-c4-report.md#c4-7--prova-del-proprietario-del-7-novembre-2026)). [Proposta](design/client-c4/audio/proposta.md), [scelta](design/client-c4/audio/scelte.md) e [Fase B](reports/client-c4-report.md#c4-7--fase-b) di C4-7: cinque suoni Kenney CC0, volume iniziale 20%, muto e volume nel menu. Fase 0 misurata su 1.11 e approvata dal proprietario.
 
-**C4-7-bis.** Prova del proprietario del 6 novembre 2026: esito non udito (o molto in ritardo) su PC e iPhone; tocco di selezione intermittente e con ritardo su iPhone. Decisione: suono di vittoria e suono di sconfitta distinti («Due distinti»). [Diagnosi e proposta della Fase A](design/client-c4/audio/proposta-esito.md); [scelte](design/client-c4/audio/scelte.md): Kenney Music Jingles, «sconfitta SAX07 vittoria SAX10», pareggio come sconfitta, esito sul colpo decisivo, Web Audio. Fase B fatta il 7 novembre 2026: [rapporto](reports/client-c4-report.md#c4-7-bis--fase-b). Da provare su iPhone (modalità silenziosa, Safari, latenza percepita del tocco).
+**C4-7-bis.** Prova del proprietario del 6 novembre 2026: esito non udito (o molto in ritardo) su PC e iPhone; tocco di selezione intermittente e con ritardo su iPhone. Decisione: suono di vittoria e suono di sconfitta distinti («Due distinti»). [Diagnosi e proposta della Fase A](design/client-c4/audio/proposta-esito.md); [scelte](design/client-c4/audio/scelte.md): Kenney Music Jingles, «sconfitta SAX07 vittoria SAX10», pareggio come sconfitta, esito sul colpo decisivo, Web Audio. Fase B fatta il 7 novembre 2026: [rapporto](reports/client-c4-report.md#c4-7-bis--fase-b). Provata dal proprietario il 7 novembre 2026: tocco di selezione ora pronto su iPhone; restano i punti di C4-7-ter.
 
-**Perimetro.** Secondo D2: pochi suoni per selezione, invio, rifiuto, impatto ed esito, da fonte registrata. Volume e muto nel menu, ricordati nel
-browser; un suono non porta mai un'informazione che manca a schermo; rispetta salto, interruzione e fine sequenza. Nessuna musica.
+**C4-7-ter.** Dalla [prova del 7 novembre 2026](reports/client-c4-report.md#c4-7--prova-del-proprietario-del-7-novembre-2026), decisioni del proprietario:
+
+- **Esito col pannello.** Il suono di vittoria o sconfitta parte quando compare il pannello d'esito, cioè quando la partita è finita, non alla fine della sequenza; il pannello non si sposta più tardi. Parole del proprietario: «il suono di vittoria e sconfitta non deve arrivare 8-9secondi dopo il pannello che dice che la partita è finita, ma contestualmente ad esso. e non deve comparire più tardi, ma quando la partita è finita».
+- **Un suono per ogni colpo**, non uno per round: oggi suona solo l'impatto della prima carta del round, per cui in 1v1 il colpo dell'avversario che gioca dopo non si sente.
+- **Suoni per tipo di danno:** un tonfo per HIT («servirebbe un bel tonfo per far capire che uno è stato menato»), un suono di lama per CUT; POISON da proporre (suono proprio, come HIT, o nessuno).
+- **Click iniziale della conferma su iPhone** da eliminare, distinguendo fra file e riproduzione.
+- Invariati: muto e volume nel menu, Web Audio, interruttore silenzioso che prevale (l'iPhone 15 della prova lo aveva attivo: silenzio atteso, non un difetto).
+
+Prima proposta (candidati da ascoltare, regole per carte con più tipi di danno, colpi ravvicinati, tocchi che ne scavalcano più d'uno, esito e colpi nello stesso round finale, pannello senza sequenza), poi codice. Le regole del perimetro sotto cambiano come indicato.
+
+**Perimetro.** Secondo D2: pochi suoni per selezione, invio, rifiuto, colpi ed esito, da fonte registrata. Volume e muto nel menu, ricordati nel
+browser; un suono non porta mai un'informazione che manca a schermo; rispetta salto, interruzione e fine sequenza. Nessuna musica. **Da C4-7-ter (D15):** i colpi suonano uno per uno, col suono del loro tipo di danno, e l'esito suona col pannello; cadono «al massimo un suono di sequenza per risoluzione» e «l'esito sostituisce l'impatto» di C4-7 e C4-7-bis.
 
 **Dipendenze.** D2; dopo C4-5b per il menu. Scelta dei suoni in parallelo.
 
@@ -441,10 +460,52 @@ browser; un suono non porta mai un'informazione che manca a schermo; rispetta sa
 **Rischi.** Su iOS l'audio parte solo dopo un gesto e l'interruttore silenzioso prevale. Latenza che degrada l'input. Suono su eventi
 interrotti, o doppio su una vista ripetuta (regola 1). Fastidio in sequenze da 20 s con cinque carte.
 
-**Completamento verificabile.** Partita completa con audio assente, bloccato e file mancanti: stesso esito, nessun errore (regola 13). Un suono per evento, mai
-due per la stessa risoluzione. Muto ricordato. Input non peggiorato alle misure ufficiali. `Size` verde. Giudizio del proprietario.
+**Completamento verificabile.** Partita completa con audio assente, bloccato e file mancanti: stesso esito, nessun errore (regola 13). Un suono per evento e
+nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suono per colpo e l'esito col pannello. Muto ricordato. Input non peggiorato alle misure ufficiali. `Size` verde. Giudizio del proprietario.
 
-**Verifiche.** `Verify` (con audio bloccato), `VerifyResolution` (`quick`, `interrupt`).
+**Verifiche.** `Verify` (con audio bloccato), `VerifyResolution` (`quick`, `interrupt`); da C4-7-bis anche `VerifyOutcomeAudio`.
+
+### C4-10 — Guida visiva
+
+**Perché (D15).** Prova del proprietario del 7 novembre 2026: «ho notato che giocandoci l'attenzione non si sa mai dove debba andare, gli occhi vagano da un punto all'altro: valuetrei di aggiungere delle animazioni, dei resize, o delle altre strategie per guidare l'attenzione del giocatore verso cosa sta succedeno in quel momento e verso cosa deve fare»; «non aggiungerei elenchi o altre cose, ma valuterei strategie visive per far intuire cosa bisogna fare. un giocatore che vuole giocare, beh, vuole giocare, non leggere»; il gioco «ha un feel meccanico, non ancora tanto da videogioco».
+
+**Perimetro.**
+
+- Strategie **visive** per portare lo sguardo su ciò che succede e su ciò che il giocatore deve fare: movimento, ingrandimento, luce e oscuramento, pulsazione, colpi che «si sentono» a schermo (con i suoni di C4-7-ter). **Nessun testo nuovo sullo schermo** e nessun elenco.
+- Il riepilogo giallo del turno in alto ([O29](client-roadmap.md#osservazioni-registrate-durante-c4)): da rivedere o sostituire con un segno visivo.
+- La conferma dello scarto sulla carta scelta, almeno sugli schermi grandi (O30), per non spostare lo sguardo da una parte all'altra.
+- Prima proposta (prototipi sul tavolo vero, con catture o brevi registrazioni da giudicare a occhio), poi codice.
+
+**Dipendenze.** C4-7-ter (i colpi sonori e visivi vanno insieme), D15.
+
+**File toccati.** `scene.ts`, `table.tsx`, `readability.ts`, `style.css`, test, verifiche, documenti comuni.
+
+**Rischi.** Animazioni dentro la sequenza: regole 1–9, in particolare durate e tetto di 20 s invariati (O19 resta a C5) e nessuna attesa sul percorso di input. Togliere il riepilogo giallo non deve togliere informazioni (regola 16): «Ultimo turno» resta il percorso completo. Peso sulla fluidità di Safari, già segnalata (C4-8b). Le strategie vanno legate agli elementi del tavolo, non a posizioni fisse, perché C4-11 cambia la geometria.
+
+**Completamento verificabile.** Regole 1–9 verdi; nessuna informazione tolta; movimento ridotto con lo stesso contenuto senza animazione (rifinito in C4-8a); input non peggiorato alle misure ufficiali; giudizio del proprietario.
+
+**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyResolution` completa, `VerifyLayout`; 750×292 secondo la regola 18.
+
+### C4-11 — Spazio e profondità
+
+**Perché (D15).** Prova del proprietario del 7 novembre 2026: «il gioco sugli schermi piccoli è affollato, mentre sugli schermi grandi è un po' spoglio»; «il gioco manca di tridimensionalità».
+
+**Perimetro.**
+
+- **Schermi piccoli:** meno affollamento, con il secondario compresso o raggiungibile su richiesta; lo spazio tolto da Safari in orizzontale ([O28](client-roadmap.md#osservazioni-registrate-durante-c4): aree sicure, `viewport-fit=cover`, se economici).
+- **Schermi grandi:** usare lo spazio (carte e postazioni più generose, decorazione del bar, respiro).
+- **Profondità disegnata:** ombre, piani sovrapposti, luce, rilievo delle carte e del tavolo, in Pixi 2D; nessun renderer 3D.
+- Prima proposta (catture alle misure ufficiali, con le opzioni), poi codice.
+
+**Dipendenze.** C4-10, D15; D11 se servono immagini nuove.
+
+**File toccati.** `scene.ts`, `readability.ts`, `style.css`, `index.html` per O28, asset e inventario se servono, test, verifiche, documenti comuni.
+
+**Rischi.** Regole 16, 17 e 18: nessuna funzione tolta per fare spazio, fattori alle misure ufficiali che non scendono salvo decisione, 750×292 che non peggiora. Il tetto delle texture è quasi pieno (27 729 048 byte su 33 554 432, cioè 32 MiB, dopo C4-7-bis): ombre e luci vanno disegnate in codice o con texture piccole. Peso sulla fluidità di Safari (C4-8b). O28 non è verificabile da Edge.
+
+**Completamento verificabile.** `VerifyLayout` verde alle misure ufficiali con fattori non peggiorati; regola 18; `Size` entro il tetto delle texture; catture prima e dopo; giudizio del proprietario, anche su iPhone per O28 se lo prova.
+
+**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` ridotta; 750×292 secondo la regola 18.
 
 ### C4-8a — Accessibilità e residui O21
 
@@ -454,7 +515,7 @@ due per la stessa risoluzione. Muto ricordato. Input non peggiorato alle misure 
 - Contrasto misurato sul disegno reale secondo D12.
 - Partita da sola tastiera (scelta, bersaglio, scarto, conferma, annullamento).
 - Zoom e testo ampliato nelle schermate HTML.
-- Movimento ridotto riprovato su tutte le animazioni nuove.
+- Movimento ridotto riprovato su tutte le animazioni nuove, comprese quelle di C4-10 e C4-11.
 - Simboli oltre al colore (regola 11).
 - O21: `ExtremelyViolentBlow` con V reale; D5.
 - Le etichette accessibili seguono volti e cornici nuove.
@@ -483,7 +544,7 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 - Caricamento mirato e, dove rende, compressione degli asset.
 - Picchi isolati fino a 115 ms in FFA misurati in C3-L.
 
-**Condizione attivata (6 novembre 2026).** Nella prova di C4-7 il proprietario ha segnalato su iPhone: «le animazioni su safari non sono proprio fluidissime». È la segnalazione da iPhone prevista sopra: C4-8b la tratta come disagio da misurare e affrontare con lo stesso ordine (ridisegno incrementale e decorazioni prima del renderer), distinguendo il ritardo di rete; quanto sia grave va chiarito col proprietario, e le misure in Edge non lo dimostrano. Allo stesso blocco è assegnata O28 (spazio tolto da Safari in orizzontale); O29 a C4-8a o C4-8b ([roadmap](client-roadmap.md#osservazioni-registrate-durante-c4)).
+**Condizione attivata (6 novembre 2026).** Nella prova di C4-7 il proprietario ha segnalato su iPhone: «le animazioni su safari non sono proprio fluidissime». È la segnalazione da iPhone prevista sopra: C4-8b la tratta come disagio da misurare e affrontare con lo stesso ordine (ridisegno incrementale e decorazioni prima del renderer), distinguendo il ritardo di rete; quanto sia grave va chiarito col proprietario, e le misure in Edge non lo dimostrano. Dal 7 novembre 2026 (D15) O28 (spazio tolto da Safari in orizzontale) passa a C4-11 e O29 (riepilogo giallo) a C4-10 ([roadmap](client-roadmap.md#osservazioni-registrate-durante-c4)); C4-8b misura anche le animazioni e la profondità aggiunte da quei blocchi.
 
 **Dipendenze.** Tutti i blocchi visivi; D9.
 
@@ -535,13 +596,16 @@ non è provato.
 | C4-5b | ● 750 | ● | ● | ● | ● | ● | ● | | | ● 750 |
 | C4-6* | | | | | ● | | | | | ● |
 | C4-7* | ● | | | | | | | ○ | | |
+| C4-7-ter | ● | | | | | | | ○ | | |
+| C4-10 | ● 750 | | | ● | | | | ● | ● | ● 750 |
+| C4-11 | ● 750 | | | ● 750 | | | | ○ | ● 750 | ● 750 |
 | C4-8a | ● | | | | ● | ● | | ○ | ○ | |
 | C4-8b | ● | | | ● | | | | ● | ● | ● |
 | C4-9 | ● 750 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 |
 
 ## Decisioni del proprietario
 
-**Tutte prese: D3, D4, D6, D8, D9, D11, D13 e D14 il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D7 e D10 non servono più.** Le raccomandazioni restano come motivazione. Ordine di urgenza in [fondo](#ordine-di-urgenza).
+**Tutte prese: D3, D4, D6, D8, D9, D11, D13 e D14 il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D7 e D10 non servono più.** Le raccomandazioni restano come motivazione. Ordine di urgenza in [fondo](#ordine-di-urgenza).
 
 | ID | Domanda | Opzioni | Raccomandazione e motivo | Cosa blocca | Se si rimanda |
 |---|---|---|---|---|---|
@@ -559,6 +623,7 @@ non è provato.
 | D12 | Riferimento di accessibilità e lettore di schermo | Contrasto: (a) WCAG 2.2 AA come obiettivo (4,5:1 testo, 3:1 testo grande e simboli), senza dichiarare conformità; (b) nessuna soglia. Lettore: (c) una breve prova del proprietario con VoiceOver; (d) dichiarato non provato | **(a) e (d); (c) se il proprietario ha dieci minuti.** La soglia rende il controllo ripetibile; le eccezioni si elencano. Il lettore non è automatizzabile qui e in C5 non è un criterio: meglio un limite onesto che una promessa. **Confermata dal proprietario il 6 novembre 2026: (a) e (d).** | C4-8a | Decisa. |
 | D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b), confermata dal proprietario il 3 novembre 2026.** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | Decisa e applicata: C4-1 è committato (`a6f6b1a`) e C4-1b ha pubblicato 12 MB. |
 | D14 | Ordine e divisione dei blocchi | (a) la bozza: C4-2 prima di C4-3, nessun C4-1b, C4-5 e C4-8 interi; (b) [correzioni proposte](#blocchi) | **(b), confermata dal proprietario il 3 novembre 2026.** Il font condiziona la geometria; lo stato su iPhone è ignoto; sfondo e shell, accessibilità e prestazioni hanno rischi diversi. Costa due commit in più. | Ordine dopo C4-1 | Non si può partire dopo C4-1 senza. |
+| D15 | Cosa fare della prova del 7 novembre 2026 | Proposta della regia: C4-7-ter per i suoni; due blocchi nuovi, C4-10 (guida visiva, con O29 e O30) e C4-11 (spazio e profondità, con O28), prima di C4-8a | **Approvata dal proprietario il 7 novembre 2026** («mi sembra un buon piano»). Guida solo visiva, senza testi né elenchi a schermo, su sua indicazione. | C4-7-ter, C4-10, C4-11 | Decisa. |
 
 ### Ordine di urgenza
 
@@ -570,6 +635,7 @@ non è provato.
 6. **D9:** confermata il 3 novembre 2026, opzione (b); rivista lo stesso giorno: tetto solo sulle texture (32 MiB), tetti di JS e totale tolti.
 7. **D1, D2:** confermate il 6 novembre 2026, D1 (a) e D2 (b).
 8. **D12, D5:** confermate il 6 novembre 2026, D12 (a) e (d), D5 (b).
+9. **D15:** approvata il 7 novembre 2026.
 
 ## Cosa questo piano ha e non ha verificato
 

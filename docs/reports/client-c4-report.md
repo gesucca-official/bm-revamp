@@ -1015,3 +1015,41 @@ Da riprovare, per il proprietario:
 - **PC:** una partita lasciata scorrere fino alla fine, e una toccando il tavolo dopo l'ultima carta. L'esito si sente una volta, vittoria o sconfitta secondo il risultato. Se la morte arriva a fine turno, lasciando scorrere arriva ancora circa 8 s dopo il pannello; toccando arriva subito.
 - **iPhone 16 Pro:** gli stessi due casi; il tocco di selezione dovrebbe suonare ogni volta e senza ritardo, perché non passa più da `<audio>`; volume e muto dal menu.
 - **iPhone 15:** prima con la modalità silenziosa disattivata, poi attivata; nel secondo caso il silenzio è atteso con 'ambient'.
+
+## C4-7 — prova del proprietario del 7 novembre 2026
+
+7 novembre 2026, su `c197517` (C4-7-bis Fase B), server e client avviati dalla regia in rete locale; desktop e iPhone. **C4-7 non approvato:** correzione C4-7-ter ([piano](../client-c4-plan.md#c4-7--suoni-opzionale)) e due blocchi nuovi, C4-10 e C4-11, con D15 ([piano](../client-c4-plan.md#decisioni-del-proprietario)).
+
+### Parole del proprietario
+
+Impressioni generali:
+
+- «sugli schermi grandi, la conferma dello scarto può essere direttamente sulla carta che si sceglie da scartare, se no tocca spostare l'attenzione da una parte all'altra dello schermo varie volte»
+- «il suono dei danni da impatto si sente solo una volta in un turno, non per ogni colpo (in 1v1, se il giocatore gioca per primo, quello dell'avversario non si sente. altri casi non provati)»
+- «il suono dei danni da impatto è poco "impattante", servirebbe un bel tonfo per far capire che uno è stato menato»
+- «anche il suono dei danni da taglio non comunica la sensazione del taglio»
+
+iPhone:
+
+- «i suoni ora sono belli responsive col tocco delle carte»
+- «il suono della conferma ha un fastidioso click iniziale quando viene riprodotto»
+- «su iphone15 ancora non sento nessun suono, ma forse è un problema dell'iphone di mia moglie»; poi: «iphone 15 aveva l'interruttore del silenzioso...»
+
+Considerazioni:
+
+- «il suono di vittoria e sconfitta non deve arrivare 8-9secondi dopo il pannello che dice che la partita è finita, ma contestualmente ad esso. e non deve comparire più tardi, ma quando la partita è finita»
+- «ho notato che giocandoci l'attenzione non si sa mai dove debba andare, gli occhi vagano da un punto all'altro: valuetrei di aggiungere delle animazioni, dei resize, o delle altre strategie per guidare l'attenzione del giocatore verso cosa sta succedeno in quel momento e verso cosa deve fare»
+- «inoltre, il gioco sugli schermi piccoli è affollato, mentre sugli schermi grandi è un po' spoglio. ha un feel meccanico, non ancora tanto da videogioco»
+- «il gioco manca di tridimensionalità»
+- sulla guida dell'attenzione: «non aggiungerei elenchi o altre cose, ma valuterei strategie visive per far intuire cosa bisogna fare. un giocatore che vuole giocare, beh, vuole giocare, non leggere»; «anzi, rivedrei il tooltip giallo in alto che a volte da fastidio»
+
+### Lettura della regia e destinazioni
+
+- **Un solo impatto per round:** è il comportamento previsto da C4-7 e C4-7-bis (suona l'impatto della prima carta), non un difetto; il proprietario vuole un suono per colpo → C4-7-ter.
+- **Tonfo e taglio:** oggi un solo suono d'impatto (`drop_004.ogg`) per tutti i tipi di danno → C4-7-ter, con suoni per HIT e CUT e una proposta per POISON.
+- **Click della conferma (`confirmation_001.ogg`) su iPhone:** causa da accertare (file o riproduzione) → C4-7-ter.
+- **iPhone 15:** interruttore silenzioso attivo; con la sessione audio 'ambient' il silenzio è atteso e coerente col piano («l'interruttore silenzioso prevale»). Nessun lavoro.
+- **Esito col pannello** → C4-7-ter; il pannello resta dov'è.
+- **Attenzione, riepilogo giallo, conferma dello scarto sulla carta** → C4-10 (O29, O30); **affollamento, schermi grandi spogli, tridimensionalità** → C4-11 (con O28). Approvato dal proprietario: «mi sembra un buon piano» (D15).
+
+Nessun codice cambiato, nessuna verifica eseguita per questa registrazione.
