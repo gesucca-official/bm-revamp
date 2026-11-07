@@ -4,8 +4,8 @@
 server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
 documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
 proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
-nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a ([D30, D31, D32, D37, D40](#decisioni-del-proprietario)); SB-1 è
-anticipato in parallelo a C4 ([D40](#decisioni-del-proprietario)); SB-2 e SB-6b restano legati al completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
+nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a → SB-13 ([D30, D31, D32, D37, D40, D42](#decisioni-del-proprietario)); SB-1 e SB-2 sono
+anticipati in parallelo a C4 ([D40, D42](#decisioni-del-proprietario)); SB-6b resta legato al completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -268,8 +268,8 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
 | Fase | Blocco | Contenuto | Dipende da |
 |---|---|---|---|
-| Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40; fatto, in attesa del giudizio) |
-| | SB-2 | Separazione fra regolamento e set | SB-1 |
+| Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40; fatto e approvato) |
+| | SB-2 | Separazione fra regolamento e set | SB-1 (anticipato da D42) |
 | Strumenti | SB-3 | Runner senza server e seme | — |
 | | SB-4 | Vista limitata e bot euristici | SB-3 |
 | | SB-5 | Prova del formato dati | SB-3 |
@@ -285,7 +285,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-11b | Bozza degli starter base | SB-11a |
 | | SB-12a | Giro coi bot sugli starter base | SB-11b |
 | | SB-12b | Prova umana degli starter base | SB-8, SB-12a |
-| | SB-13 | Tossico: bozza e giro | SB-12 |
+| | SB-13 | Tossico: bozza e giro | SB-12a (anticipato da D42; prima SB-12) |
 | | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 |
 | | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 |
 | | SB-16 | Prova umana degli avanzati | SB-15 |
@@ -308,8 +308,8 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |
 
 SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
-corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), senza aspettare il client; SB-1 è anticipato in parallelo a C4 (D40);
-SB-2 e SB-6b restano legati al client e vanno chiusi, con SB-1, prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
+corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a → SB-13 ([D31, D32, D37, D40, D42](#decisioni-del-proprietario)), senza aspettare il client; SB-1 e SB-2 sono anticipati in parallelo a C4 (D40, D42);
+SB-6b resta legato al client e va chiuso, con SB-1 e SB-2, prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
 dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -319,7 +319,7 @@ l'editor dei mazzi (`deck.ts`, `collection.tsx`). Paletti: niente modifiche a `c
 `verify-decks.mjs` riscritto e pushato prima che parta C4-8a, che usa `VerifyDecks`; dopo il pull l'altra macchina rifà il jar, perché cambiano
 regolamento e validazione del server.
 
-**SB-1 fatto il 7 novembre 2026, in attesa del giudizio del proprietario.** Regolamento **1.12**: R02 con le regole dei mazzi concordate per
+**SB-1 fatto il 7 novembre 2026 e approvato dal proprietario l'8 novembre**, con le sue parole: «Sì, entrambi» ([D42](#decisioni-del-proprietario)), dopo la revisione della regia. Regolamento **1.12**: R02 con le regole dei mazzi concordate per
 starter e mazzi personalizzati, R03 senza la lacuna del giocatore vivo senza mosse, tre carte iniziali. `DeckRules` le applica al salvataggio e
 all'avvio open; basic e last resort riservate con la colonna `C_EXCLUSIVE_TO` (carta `exclusiveToCharacter`, Q1), bound con
 `boundToCharacter`. I mazzi salvati prima restano nel profilo ma non si giocano (Q2). Editor di client-web e client-debug che prevengono e
@@ -340,6 +340,11 @@ riscritti e continuano a provare gli stessi casi; `TestServerContext` e `VerifyD
 perdere copertura è la parte più delicata. Oggi Bruiser e Junkie hanno solo due bound, quindi la scelta esiste solo dal Set Base in poi.
 
 ### SB-2 — Separazione fra regolamento e set
+
+**Anticipato da [D42](#decisioni-del-proprietario)**, in parallelo a C4 e con una fase A che si ferma. A differenza di SB-1 tocca il client: la pagina
+pubblica del regolamento (`public.tsx`, `rules.ts`) mostra R07 e R07a, e `verify-public.mjs`, che le controlla, è usato anche da C4-8a. Paletti:
+niente modifiche a `client-web/src/style.css`, `readability.ts`, `scene.ts`, `table.tsx` (C4-10, C4-11, C4-8a; i commenti che citano R07 restano);
+`verify-public.mjs` e ogni altro strumento di verifica toccato pushati prima che parta C4-8a; dopo il pull l'altra macchina rifà il jar.
 
 **Perimetro.** Nuova versione del regolamento secondo la [struttura concordata](#struttura-per-set-ed-espansioni): R07 e R07a passano a un
 documento per il set attuale; R04 e R05 si ripuliscono dalle citazioni di carte senza cambiarne il senso. `check-rules.py`, allegato,
@@ -557,6 +562,7 @@ devono mostrare danno, difesa, priorità, oggetti e almeno una contromossa.
 
 Diviso da [D40](#decisioni-del-proprietario) in due blocchi. **SB-12a, giro coi bot,** porta gli starter base ai criteri con il banco e
 non aspetta il client. **SB-12b, prova umana,** sono le partite del proprietario e richiede SB-8. Il perimetro che segue vale per i due insieme.
+Con [D42](#decisioni-del-proprietario) SB-13 parte dopo SB-12a, senza aspettare SB-12b.
 
 **SB-12a fatto il 7 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo, anche +6 A» ([D41](#decisioni-del-proprietario)).
 Tre giri coi bot (il massimo di Q5), circa 40 minuti di calcolo su un tetto di 2 ore; correzioni decise con la delega di D38.
@@ -589,6 +595,10 @@ nel [rapporto](reports/set-base/sb-12a-report.md).
 ### SB-13, SB-14, SB-15 — Starter avanzati
 
 Un blocco per personaggio, nell'ordine **Tossico del Serraglio, Pino l'Ultimo Giro, Gigi del Carro Attrezzi**.
+
+**SB-13 anticipato da [D42](#decisioni-del-proprietario)** dopo SB-12a, perché la prova umana (SB-12b) aspetta SB-2, SB-6b e SB-8. Gli starter
+base stabili sono quelli della bozza approvata in SB-12a (D41). Se SB-12b cambierà gli starter base, il giro del Tossico si rilancia contro i nuovi.
+SB-14 resta dopo SB-13; se e quando anticiparlo prima di SB-12b lo decide il proprietario.
 
 **Perimetro.** Bozza dello starter (Junkie riprogettato sul primo blocco, conservandone il flavour), poi giro contro tutti gli starter già stabili, **senza toccarli se non
 serve**; se serve, lo si dichiara e si rilancia la matrice.
@@ -803,6 +813,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D39 | Nome e voce di Spazienzio (SB-11b) | 6 novembre 2026, con le parole del proprietario: «su spazienzio il mazzo lo chiamiamo "pazienza finita" e i nomi delle sue carte li teniamo tutti in maiuscolo (sull'interfaccia, non nei dati o nel codice), perché lui ha perso la pazienza e urla». Lo starter di Spazienzio si chiama **«Pazienza finita»**; i **nomi visualizzati** delle sue carte (slot `SPA-*`) sono **in maiuscolo**, mentre binding, id e codice restano come sono. Precisato dal proprietario all'approvazione di SB-11b: «maiuscolo nei dati», cioè il maiuscolo sta nel nome visualizzato scritto nella bozza (`gui.name`), non è l'interfaccia a trasformarlo. Vale anche per la passata finale (SB-24) e per i testi per i giocatori (SB-25) |
 | D40 | Divisione di SB-12 e anticipo di SB-1 | 7 novembre 2026, con le parole del proprietario: «Sì, entrambi». **SB-12 si divide** in SB-12a (giro coi bot sugli starter base, dipende da SB-11b) e SB-12b (prova umana, dipende da SB-8 e SB-12a). **SB-1 è anticipato** in parallelo a C4, che si è allungato con C4-10 e C4-11, perché è il primo anello verso SB-8 e la prova umana; paletti: niente `style.css`, `verify-decks.mjs` pushato prima di C4-8a, jar rifatto sull'altra macchina dopo il pull. SB-13 resta dopo SB-12 intero; se la prova umana tarda, il proprietario può decidere di anticiparlo dopo SB-12a. Precisa D22 e D30 |
 | D41 | Correzioni degli starter base (SB-12a) | 7 novembre 2026, con le parole del proprietario: «Approvo, anche +6 A». Correzioni decise nei tre giri (Q5) con la delega di D38 e approvate: salute iniziale di **Spazienzio 85** e di **Mara 80**; costi di Mara −5 A su Cinghiata, Sgommata, Slalom, Paraurti e Sputo (D38); **Sgommata 25 CUT**. In più, **MAR-BO2 da +8 a +6 A**: la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 (precisa B2). Steal, parate e contromosse restano negli starter: le varianti mostrano che sono i bot a giocarle male. Restano raccomandazioni: scala della salute degli altri personaggi in SB-13, patte e Steal da guardare in SB-12b. Precisa D34(5), D36, D38 e B2 |
+| D42 | Approvazione di SB-1, anticipo di SB-13 e SB-2 | 8 novembre 2026, con le parole del proprietario: «Sì, entrambi», alla domanda «Approvi SB-1 e anticipiamo SB-13 insieme a SB-2?». **SB-1 approvato** (regolamento 1.12, Q1–Q6). **SB-13 anticipato** dopo SB-12a: la prova umana degli starter base aspetta SB-2, SB-6b e SB-8, e gli starter della bozza approvata (D41) sono la base stabile; se SB-12b li cambierà, il giro del Tossico si rilancia. **SB-2 anticipato** in parallelo a C4, con fase A che si ferma sull'inventario di ciò che tocca nel client; paletti: niente `style.css`, `readability.ts`, `scene.ts`, `table.tsx`; strumenti di verifica toccati pushati prima di C4-8a; jar rifatto sull'altra macchina dopo il pull. Precisa D30 e D40 |
 
 ## Decisioni ancora aperte
 

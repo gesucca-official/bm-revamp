@@ -1,6 +1,6 @@
 # SB-1 — Regole dei mazzi: rapporto
 
-**Fatto il 7 novembre 2026, in attesa del giudizio del proprietario.** Il regolamento passa alla **1.12**: un mazzo, starter o
+**Fatto il 7 novembre 2026 e approvato dal proprietario l'8 novembre**, con le sue parole: «Sì, entrambi» ([D42](../../set-base-plan.md#decisioni-del-proprietario)). Il regolamento passa alla **1.12**: un mazzo, starter o
 personalizzato, ha esattamente 20 carte regolari con al massimo 2 copie per carta, la basic fissa del personaggio, due bound diverse del
 personaggio e una last resort generica o propria. Un giocatore vivo con un mazzo conforme ha sempre una mossa. Server ed editor dei due
 client rifiutano i mazzi fuori regola; i mazzi sintetici di verifiche e CLI sono riscritti in regola.
