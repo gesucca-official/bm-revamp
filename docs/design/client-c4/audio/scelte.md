@@ -23,3 +23,9 @@ La scelta dei due file (vittoria; sconfitta e pareggio) segue l'ascolto e sarà 
 Scelti: `jingles_SAX10.ogg` per la vittoria; `jingles_SAX07.ogg` per la sconfitta e, come deciso, per il pareggio. `confirmation_002.ogg` esce da `public/audio` e dall'inventario.
 
 Osservazione del proprietario sulla stessa pagina: «su un iphone 15 (mia moglie) dice riprodotto, ma non si sente niente anche alzando il volume. su un iphone 16 pro (mio) si sentono tutti». La pagina suona con Web Audio, come il gioco dopo C4-7-bis. Ipotesi non verificata: l'iPhone 15 era in modalità silenziosa, che Web Audio rispetta (`audioSession` 'ambient', scelto dal proprietario), mentre un elemento `<audio>` può suonare comunque. Da riprovare sul dispositivo con la modalità silenziosa disattivata.
+
+## C4-7-ter — Scelta sulla Fase A
+
+7 novembre 2026, proposta `0e26924`. Parole del proprietario: «Approvo HIT impactPunch_heavy_001.ogg e CUT knifeSlice.ogg, POISON per ora senza suono e attacco di 5 ms per la conferma. Approvo anche le regole della proposta: procedi con la Fase B e pusha come da istruzioni.»
+
+Approvata integralmente la tabella di [proposta-colpi.md](proposta-colpi.md): tipo nominale, priorità CUT > HIT > POISON, un evento per carta, sovrapposizioni e tocchi con gain 1/N, esito personale live col pannello anche senza sequenza, niente recuperi storici, arresto su navigazione/salto/interruzione. File originali senza conversioni; sette suoni distribuiti, rimosso drop_004.ogg. Autorizzati implementazione e push con fetch/rebase, mai merge o force push.
