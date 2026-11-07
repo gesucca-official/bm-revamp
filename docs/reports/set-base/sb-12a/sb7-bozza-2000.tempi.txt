@@ -3,6 +3,6 @@ bozza server/src/test/resources/set-base/bozza.json
 partite 96000
 celle 48
 thread 8
-secondi 53.650
-partite al secondo 1789.4
-millisecondi per partita (tempo reale diviso partite) 0.5589
+secondi 36.536
+partite al secondo 2627.5
+millisecondi per partita (tempo reale diviso partite) 0.3806

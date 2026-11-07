@@ -1,9 +1,10 @@
 # SB-12a — Giro coi bot sugli starter base: rapporto
 
-**Fatto il 7 novembre 2026, in attesa del giudizio del proprietario.** In tre giri, coi bot e col banco di SB-7, gli starter base di
-Spazienzio «Pazienza finita» e Mara «Consegna sul muso» passano da **0,937 a 0,520** per Spazienzio, e le partite da 13,5–16,5 a
-**11,1–11,3 turni**. Invarianti a zero in modo stretto dopo ogni giro. Cambiano solo numeri: la salute dei due personaggi, cinque costi in A
-di Mara (D38) e il danno di Sgommata. Nessuna carta tagliata, ridisegnata o tolta da uno starter.
+**Fatto il 7 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo, anche +6 A». In tre giri, coi bot e
+col banco di SB-7, gli starter base di Spazienzio «Pazienza finita» e Mara «Consegna sul muso» passano da **0,937 a 0,520** per Spazienzio,
+e le partite da 13,5–16,5 a **11,1–11,3 turni**. Con la bound di Mara a +6 A, approvata dopo il terzo giro, la bozza finale sta a **0,525**
+e 11,3 turni. Invarianti a zero in modo stretto dopo ogni giro. Cambiano solo numeri: la salute dei due personaggi, cinque costi in A di Mara
+(D38), il danno di Sgommata e il guadagno di Cambio marcia. Nessuna carta tagliata, ridisegnata o tolta da uno starter.
 
 È la prima metà di SB-12 ([D40](../../set-base-plan.md#decisioni-del-proprietario)); la prova umana è SB-12b e richiede SB-8. Il codice
 cambia solo in `server/src/test`. Non sono toccati:
@@ -16,8 +17,8 @@ Nulla della bozza raggiunge la partita viva (SB-28).
 ## Tetti fissati prima di partire
 
 - **Giri: 3 al massimo**, come propone Q5. Usati tutti e tre.
-- **Calcolo: 2 ore** di tempo reale per banco e listino. Usati circa 35 minuti, su 8 thread con Java 11; altri 25 minuti circa sono passati
-  ad aspettare che finissero le verifiche di SB-1, come chiede D40 (una verifica alla volta).
+- **Calcolo: 2 ore** di tempo reale per banco e listino. Usati circa 40 minuti, su 8 thread con Java 11, compresa la rimisura della bozza
+  approvata; altri 25 minuti circa sono passati ad aspettare che finissero le verifiche di SB-1, come chiede D40 (una verifica alla volta).
 
 **Ordine delle correzioni**, secondo il piano: prima i numeri, poi costo e priorità, infine il ridisegno. Il punto di partenza di D38 è un
 costo; gli altri passi sono numeri. Il ridisegno non è servito.
@@ -107,10 +108,11 @@ l'oggetto. **Nessuna di queste carte è tagliata o indebolita.**
 più piccolo che mette dentro il 45–55% con margine sia la somma dei quattro stili sia quella dei tre euristici. Il punto medio fra le due
 letture torna a circa 0,50; la durata non cambia.
 
-**Misure, sulla bozza vera.** [Matrice](sb-12a/sb7-bozza-2000.md) ([dati](sb-12a/sb7-bozza-2000.json),
-[tempi](sb-12a/sb7-bozza-2000.tempi.txt)) di `server/src/test/resources/set-base/bozza.json`, SHA-256
-**`441b1ecd63042165d30804143a50628bc495fe17a2859906b5fcf18ef4841cf4`**, con lo stesso contenuto della variante scelta; 2000 partite per
-cella, stili aggressivo, prudente, risorse e `com` (16 coppie), semi 7.000.000–7.001.999, posti alternati.
+**Misure, sulla bozza vera.** [Matrice](sb-12a/sb7-giro3-2000.md) ([dati](sb-12a/sb7-giro3-2000.json),
+[tempi](sb-12a/sb7-giro3-2000.tempi.txt)) della bozza `server/src/test/resources/set-base/bozza.json` di quel momento, copiata in
+[`bozze/giro3.json`](sb-12a/bozze/giro3.json), SHA-256 **`441b1ecd63042165d30804143a50628bc495fe17a2859906b5fcf18ef4841cf4`**, con lo stesso
+contenuto della variante scelta; 2000 partite per cella, stili aggressivo, prudente, risorse e `com` (16 coppie), semi 7.000.000–7.001.999,
+posti alternati. Il file della matrice si chiamava `sb7-bozza-2000`: l'ho rinominato per far posto a quello della bozza approvata.
 
 | Incontro | Quota di A [IC 95%] | Turni medi [IC 95%] | Mediana (10°–90°) | Patte |
 |---|---|---|---|---:|
@@ -154,14 +156,41 @@ sotto zero). La A di Spazienzio (16–23) resta quasi intera: la spende solo la 
 **Lettura.** «Quasi sempre» lo sono la bound di danno (sempre in mano, e i bot la giocano troppo: vedi D36) e Spintone, la carta gratuita da
 un'unità: nessuna carta regolare a costo lo è. «Quasi mai» resta solo Steal, per i limiti dei bot dichiarati sopra.
 
+## Dopo il giro 3 — Cambio marcia +6 A, decisione del proprietario
+
+La misura di D36 e B2 sulla bozza del giro 3 (più sotto) ha trovato la bound +8 A di Mara a circa 4,5 HEALTH equivalenti per uso, sopra il
+tetto di 4. Il tetto dei giri era raggiunto, quindi l'ho proposta al proprietario invece di applicarla. **Il proprietario ha approvato:
+«Approvo, anche +6 A».** MAR-BO2 passa da +8 a +6 A, testi compresi (`gains`, `description`).
+
+**Misure sulla bozza approvata.** [Matrice](sb-12a/sb7-bozza-2000.md) ([dati](sb-12a/sb7-bozza-2000.json),
+[tempi](sb-12a/sb7-bozza-2000.tempi.txt)) di `server/src/test/resources/set-base/bozza.json`, SHA-256
+**`bf7b97ce2b6f1ea039ff706d4d916ebe83a78d6e7972dd68fbe15d0fd8db0c39`**, con lo stesso contenuto della variante diagnostica `q-cambio6`;
+stesse impostazioni del giro 3.
+
+| Incontro | Quota di A [IC 95%] | Turni medi | Mediana (10°–90°) | Patte |
+|---|---|---|---|---:|
+| Spazienzio contro Spazienzio | 0,497 [0,491–0,503] | 11,33 | 11 (7–16) | 12,6% |
+| **Spazienzio contro Mara** | **0,525 [0,520–0,531]** | 11,26 | 11 (7–16) | 10,4% |
+| Mara contro Mara | 0,499 [0,493–0,505] | 11,28 | 11 (7–16) | 9,5% |
+
+- **Invarianti:** zero su 96.000 partite e 2.167.492 turni di giocatore; sei bound su sei entro il tetto.
+- **Dispersione:** 0,479 coi tre stili euristici; stessi stili aggressivo 0,314, prudente 0,483, risorse 0,710, `com` 0,716; coppie
+  estreme 0,149 e 0,980.
+- **Durata per stile:** aggressivo 8,6–9,6, risorse 7,9–10,0, prudente 14,2–15,3, `com` 13,4–16,3.
+- **Mazzi esauriti e last resort:** Spazienzio 10,5% e 6,5%, Mara 16,3% e 11,6%.
+- **Carte:** come al giro 3. Cambio marcia si gioca nel 31,7% delle partite (0,71 a partita) invece del 40,5%; Steal nel 7,4%.
+- **Risorse a fine partita:** a Mara restano 0,3 A se vince e 9,2 se perde.
+
 ## Stato finale contro i criteri
+
+Bozza approvata, SHA-256 `bf7b97ce…8db0c39`:
 
 | Criterio | Obiettivo | Esito | |
 |---|---|---|---|
-| Matchup fra starter base | 45–55% | 0,520 [0,514–0,526]; 0,476 coi soli euristici; stessi stili 0,31–0,71 | ✓, con la dispersione dichiarata |
-| Durata | circa 6–12 turni | 11,1–11,3 di media, mediana 11, 10°–90° 7–16; 8–10 coi bot forti, 13–16 coi deboli | ✓ |
-| Patte | poche | 10,0–12,6% | da giudicare (sotto) |
-| Mazzi esauriti | pochi | 10,4% e 15,3% | ✓ |
+| Matchup fra starter base | 45–55% | 0,525 [0,520–0,531]; 0,479 coi soli euristici; stessi stili 0,31–0,72 | ✓, con la dispersione dichiarata |
+| Durata | circa 6–12 turni | 11,3 di media, mediana 11, 10°–90° 7–16; 8–10 coi bot forti, 13–16 coi deboli | ✓ |
+| Patte | poche | 9,5–12,6% | da giudicare (sotto) |
+| Mazzi esauriti | pochi | 10,5% e 16,3% | ✓ |
 | Turni senza mosse | zero | zero su 96.000 partite | ✓ |
 | Carte quasi sempre o quasi mai | nessuna | Steal quasi mai; per il resto nessuna, coi limiti dei bot dichiarati | ✓ coi limiti |
 
@@ -173,10 +202,14 @@ salute 90, 85 o 80). Se una partita su dieci è troppo, la leva è il regolament
 ## D36, B2 e listino sugli starter corretti
 
 `ListinoMeasureTest`, `-Dsim.listinoBase=set-base -Dsim.listinoAnchor=7`, gruppi `costo`, `tipo`, `salute` e `tettostarter`, tre stili
-euristici. Bisezione 400, griglia 2000 e curve 2000 partite per stile e punto; base derivata SHA-256 `5be5c747…a78c1e8f`. 679.200 partite in
-340 secondi. [Testo](sb-12a/sb12a-listino-costo+tipo+salute+tettostarter.md),
-[dati](sb-12a/sb12a-listino-costo+tipo+salute+tettostarter.json). Il listino scrive i file col nome `sb11b-listino-*`: li ho copiati
-come `sb12a-listino-*`.
+euristici. Bisezione 400, griglia 2000 e curve 2000 partite per stile e punto. Lanciato due volte, 679.200 partite ciascuna:
+- **sulla bozza del giro 3** (base derivata SHA-256 `5be5c747…a78c1e8f`, 340 secondi): [testo](sb-12a/sb12a-listino-giro3-costo+tipo+salute+tettostarter.md),
+  [dati](sb-12a/sb12a-listino-giro3-costo+tipo+salute+tettostarter.json);
+- **sulla bozza approvata** (base derivata SHA-256 `1375ff68…457d6823`, 279 secondi): [testo](sb-12a/sb12a-listino-costo+tipo+salute+tettostarter.md),
+  [dati](sb-12a/sb12a-listino-costo+tipo+salute+tettostarter.json).
+
+Il listino scrive i file col nome `sb11b-listino-*`: li ho copiati come `sb12a-listino-*`. Le tabelle sotto sono del giro 3, con i valori
+della bozza approvata dove cambiano.
 
 ### D36 e B2
 
@@ -194,6 +227,9 @@ massimo 4, stimata come in SB-11b con la pendenza della salute dei contesti del 
 | MAR-BO3 2 CUT | Mara | 0,640 [0,627–0,653] | 2,40 | ✗ | 1,7 | ✓ |
 | sonda 3 HIT | Mara | 0,702 [0,689–0,714] | 2,30 | ✗ | 2,6 | ✓ |
 | sonda 2 HIT | Mara | 0,647 [0,634–0,660] | 2,39 | ✗ | 1,8 | ✓ |
+| **MAR-BO2 +6 A, bozza approvata** | Mara | **0,679 [0,666–0,691]** | 1,64 | ✗ | **3,3** | **✓** |
+
+Sulla bozza approvata la pendenza della salute di Mara è 3,36 ± 0,09 e le altre bound danno le stesse quote al terzo decimale.
 
 **Lettura:**
 - **Spazienzio** sta nei due criteri. La bound di danno vale meno di una nulla perché i bot la giocano quattro volte a partita scartando
@@ -203,9 +239,10 @@ massimo 4, stimata come in SB-11b con la pendenza della salute dei contesti del 
   sotto 4** (3 CUT a 2,5).
 - **B2, la bound +8 A, è l'unica sopra 4: circa 4,5** (4,1–4,9 con gli intervalli). In SB-11b valeva 2,5: ora che le carte di Mara costano
   meno, la A in più rende di più, e la bound si gioca meno spesso ma vale di più a ogni uso.
-- **Variante diagnostica, non applicata:** +6 A invece di +8 (SHA-256 `f7dd999d…7c99efee`). Quota 0,679 [0,666–0,691], 1,64 giocate:
-  **circa 3,3 per uso**, dentro il tetto. Il matchup quasi non si muove: 0,528 [0,520–0,536] a 1000 partite per cella (0,522 la bozza),
-  0,487 senza `com`, durata uguale. È una correzione di numero, ma il tetto dei giri è raggiunto: **la propongo al proprietario**.
+- **Variante diagnostica:** +6 A invece di +8 (SHA-256 `f7dd999d…7c99efee`). Quota 0,679 [0,666–0,691], 1,64 giocate: **circa 3,3 per
+  uso**, dentro il tetto. Il matchup quasi non si muove: 0,528 [0,520–0,536] a 1000 partite per cella (0,522 la bozza), 0,487 senza `com`,
+  durata uguale. Il tetto dei giri era raggiunto, quindi l'ho proposta al proprietario, che l'ha **approvata**; rimisurata sulla bozza
+  approvata, resta a circa 3,3.
 
 ### Listino con l'àncora a 7 HIT
 
@@ -214,13 +251,13 @@ massimo 4, stimata come in SB-11b con la pendenza della salute dei contesti del 
 | 10 V | Spazienzio | 17,9 HIT [17,7–18,0], 1,09 per V | 18,4 |
 | 20 V | Spazienzio | 37,3 HIT [37,2–37,5], 1,52 per V | 38,9 |
 | 30 V | Spazienzio | 72,9 HIT [72,1–73,7], 2,20 per V | 75,7 |
-| 10 A | Mara | 16,6 HIT [16,5–16,7], 0,96 per A | 16,7 |
-| 20 A | Mara | 29,5 HIT [29,4–29,6], 1,13 per A | 30,0 |
+| 10 A | Mara | 16,6 HIT [16,5–16,7], 0,96 per A; con +6 A 17,4, 1,04 per A | 16,7 |
+| 20 A | Mara | 29,5 HIT [29,4–29,6], 1,13 per A; con +6 A 30,3, 1,16 per A | 30,0 |
 | 10 A | Spazienzio | 8,8 HIT, 0,18 per A | 8,8 |
 | 5 L | Spazienzio | impagabile: piatta fino a 57 HIT | uguale |
 | CUT, POISON | Spazienzio | 0,87 e 0,96 HIT per unità | 0,85 e 0,95 |
 | CUT, POISON | Mara | 0,99 e 1,02 HIT per unità | 0,99 e 1,02 |
-| Salute iniziale | Spazienzio, Mara | 2,01 ± 0,09 e 3,33 ± 0,09 punti per HEALTH | 1,83 e 4,06 |
+| Salute iniziale | Spazienzio, Mara | 2,01 ± 0,09 e 3,33 ± 0,09 punti per HEALTH (Mara 3,36 con +6 A) | 1,83 e 4,06 |
 
 **Lettura:**
 - I prezzi delle risorse quasi non cambiano: **la A di Mara vale sempre circa 1 HIT** e la V oltre 20 resta molto più cara. Con questi
@@ -237,16 +274,16 @@ Tutto in `server/src/test`.
 
 | File | Cosa cambia |
 |---|---|
-| `resources/set-base/bozza.json` | Salute di Spazienzio 85 e di Mara 80; costi in A di Cinghiata 5, Sgommata 15, Paraurti 5, Slalom 10, Sputo 5; Sgommata 25 CUT. Testi (`description`, `damageAmount`) allineati. SHA-256 da `74540167…fe02ee94` a `441b1ecd…ef4841cf4` |
-| `java/.../sim/SetBaseDraftTest.java` | Una prova nuova, `theStartersCarryTheSb12aCorrections`: salute, cinque costi in A e Sgommata, compresi i testi che i bot leggono. Le otto prove di SB-11b restano com'erano |
+| `resources/set-base/bozza.json` | Salute di Spazienzio 85 e di Mara 80; costi in A di Cinghiata 5, Sgommata 15, Paraurti 5, Slalom 10, Sputo 5; Sgommata 25 CUT; Cambio marcia +6 A. Testi (`description`, `damageAmount`, `gains`) allineati. SHA-256 da `74540167…fe02ee94` a `441b1ecd…ef4841cf4` (giro 3), poi a `bf7b97ce…8db0c39` (approvata) |
+| `java/.../sim/SetBaseDraftTest.java` | Una prova nuova, `theStartersCarryTheSb12aCorrections`: salute, cinque costi in A, Sgommata e Cambio marcia, compresi i testi che i bot leggono. Le otto prove di SB-11b restano com'erano |
 
 Nessun test esistente indebolito, nessun atteso cambiato. La prova nuova sa fallire: è scritta sui valori nuovi, quindi la bozza di SB-11b
 la fa fallire alla prima asserzione (salute 100 e 85 invece di 85 e 80).
 
 ## Documenti di progetto
 
-- [Griglia](../../design/set-base/griglia.md): una nota per ogni numero cambiato (righe di PG-SPA, PG-MAR, MAR-AR1, AR2, AR4, AR5 e GEN-17,
-  col valore vecchio barrato) e la sezione [Correzioni di SB-12a](../../design/set-base/griglia.md#correzioni-di-sb-12a) con giro e motivo.
+- [Griglia](../../design/set-base/griglia.md): una nota per ogni numero cambiato (righe di PG-SPA, PG-MAR, MAR-BO2, MAR-AR1, AR2, AR4, AR5 e
+  GEN-17, col valore vecchio barrato; B2 precisata fra le decisioni) e la sezione [Correzioni di SB-12a](../../design/set-base/griglia.md#correzioni-di-sb-12a) con giro e motivo.
   Slalom passa da F2 a F1. Il resto della griglia non cambia.
 - [Schede](../../design/set-base/schede-personaggi.md): HEALTH di Spazienzio e Mara con una nota e il riferimento a D38 e D41; tabella dei
   valori iniziali aggiornata. Il resto delle schede non cambia.
@@ -272,33 +309,34 @@ la fa fallire alla prima asserzione (salute 100 e 85 invece di 85 e 80).
 
 Eseguite una alla volta, dopo aver aspettato che finissero le verifiche di SB-1 (Maven, Java e `verify-all` del client).
 
-- `./scripts/build.ps1 -Task Test -Offline`: **verde**, in 89 secondi.
-  - Maven: 588 test, 0 falliti, 7 saltati (le misure a richiesta). `SetBaseDraftTest` 9 su 9, compresa la prova nuova.
-  - Client: 37 test su 37.
-  - **Attenzione:** il working tree conteneva il lavoro non ancora committato di SB-1 (regole dei mazzi R02 1.12, server, client,
-    regolamento), compilato e provato insieme al mio. Il totale di Maven (579 in SB-11b, più la mia prova) comprende quindi anche test di SB-1.
+**Prima del giudizio**, sulla bozza del giro 3, col lavoro di SB-1 ancora da committare nel working tree:
+- `./scripts/build.ps1 -Task Test -Offline`: **verde**, in 89 secondi. Maven 588 test, 0 falliti, 7 saltati (le misure a richiesta);
+  `SetBaseDraftTest` 9 su 9; client 37 su 37. Il totale di Maven (579 in SB-11b, più la mia prova) comprende anche test di SB-1.
+- `python scripts/check-rules.py`: allineato; anche questo leggeva i file di SB-1 in corso.
+
+**Dopo l'approvazione**, sulla bozza approvata e su SB-1 ormai committato (`32cea0e`), col working tree che contiene solo questo blocco:
+- `./scripts/build.ps1 -Task Test -Offline`: **verde**, in 76 secondi. Maven 588 test, 0 falliti, 7 saltati; `SetBaseDraftTest` 9 su 9,
+  compreso il controllo su Cambio marcia +6 A; client 37 su 37.
 - `python scripts/check-rules.py`: regolamento e copia client allineati; 39 carte e 1 token; starter conformi a R02 1.12; SQLite integro.
-  Anche questo legge i file di SB-1 in corso.
 - **La prova nuova sa fallire:** con la bozza di SB-11b al posto di quella corretta, `theStartersCarryTheSb12aCorrections` fallisce con
   `expected: <{…BigBadBruiser=85, …Mara=80}> but was: <{…BigBadBruiser=100, …Mara=85}>`. Poi ho rimesso la bozza corretta e ricontrollato
   lo SHA-256.
 - `TestServerContext`: non lanciato, per il motivo detto sopra.
 
-## Decisioni nuove
+## Decisioni del proprietario
 
-Prese con la delega del proprietario sui numeri (D38: «a questo livello di dettaglio mi fido di te») e registrate nel piano come **D41**,
-in attesa del suo giudizio: salute 85 e 80, costi di D38, Sgommata 25, Steal e le contromosse tenute. Restano al proprietario:
+Le correzioni dei giri le ho prese con la delega del proprietario sui numeri (D38: «a questo livello di dettaglio mi fido di te»): salute
+85 e 80, costi di D38, Sgommata 25, Steal e le contromosse tenute. Al rapporto il proprietario ha risposto **«Approvo, anche +6 A»**,
+registrato nel piano come **D41**: approvate le correzioni dei tre giri e, in più, Cambio marcia da +8 a +6 A, applicata e misurata sopra.
 
-1. **B2: Cambio marcia +8 → +6 A?** Raccomando di sì: torna sotto 4 unità per uso e non sposta il matchup. Serve una sua decisione perché
-   il tetto dei giri è raggiunto e perché B2 è sua.
-2. **La scala della salute** degli altri personaggi: raccomando che SB-13 parta dalla salute di SB-9 meno 15 come ipotesi per gli avanzati,
-   e la misuri.
-3. **Le patte** al 10%: tenerle (raccomandato fino alla prova umana) o aprire una domanda sul regolamento.
-4. **Steal nello starter di Mara:** tenerla per la prova umana (raccomandato) o sostituirla con una seconda Slalom (+2 punti per Mara).
+La domanda posta riguardava solo questi due punti. Restano quindi raccomandazioni, da riprendere nei blocchi che le toccano:
+1. **La scala della salute** degli altri personaggi: SB-13 parte dalla salute di SB-9 meno 15 come ipotesi per gli avanzati, e la misura.
+2. **Le patte** al 10%: tenerle fino alla prova umana; poi, se devono scendere, una domanda sul regolamento.
+3. **Steal nello starter di Mara:** tenerla per la prova umana invece di sostituirla con una seconda Slalom (+2 punti per Mara).
 
 ## Cosa serve a SB-12b
 
-1. SB-8, la bozza giocabile da umani, con i valori di questa bozza (SHA-256 `441b1ecd…ef4841cf4`, o la successiva se si accoglie +6 A).
+1. SB-8, la bozza giocabile da umani, con i valori della bozza approvata (SHA-256 `bf7b97ce…8db0c39`).
 2. Guardare soprattutto parate e contromosse: se un umano le gioca bene, il matchup si sposta verso Spazienzio (vedi sopra). Una manciata
    di partite non lo misura, ma lo fa vedere.
 3. Durata percepita: 11 turni di media sono pochi o tanti per una partita umana?
@@ -306,8 +344,8 @@ in attesa del suo giudizio: salute 85 e 80, costi di D38, Sgommata 25, Steal e l
 
 ## Cosa serve a SB-13
 
-- **Base stabile:** gli starter base sono pronti come base per i bot: matchup, durata, mazzi esauriti e invarianti nei criteri. Resta
-  aperta la piccola correzione B2 (+6 A), che non sposta il matchup.
+- **Base stabile:** gli starter base sono pronti come base per i bot: matchup, durata, mazzi esauriti e invarianti nei criteri, e tutte le
+  bound entro il tetto di D38. La bozza di riferimento è quella approvata (SHA-256 `bf7b97ce…8db0c39`).
 - **Scala:** salute di Spazienzio 85 e Mara 80; le schede degli avanzati sono ancora sulla scala di SB-9.
 - **Prezzi:** A di Mara circa 1 HIT, V oltre 20 molto più cara, CUT contro Spazienzio 0,87.
 - **Metodo:** testi delle carte sempre allineati ai numeri nelle varianti, perché i bot li leggono; tre letture del matchup (quattro stili,

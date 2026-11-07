@@ -1,0 +1,3301 @@
+{
+  "intestazione" : {
+    "banco" : "sb-7/1",
+    "bozza" : "server/src/test/resources/set-base/bozza.json",
+    "sha256" : "441b1ecd63042165d30804143a50628bc495fe17a2859906b5fcf18ef4841cf4",
+    "formato" : "sb-6a/1",
+    "mazzi" : [
+      "starter-spazienzio",
+      "starter-mara"
+    ],
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse",
+      "com"
+    ],
+    "primoSeme" : 7000000,
+    "partitePerCella" : 2000,
+    "celle" : 48,
+    "partite" : 96000,
+    "postiAlternati" : "semi pari: A gioca per primo",
+    "tettoBound" : {
+      "tetto" : 4,
+      "tolleranza" : 0,
+      "pesi" : {
+        "A" : 0.5,
+        "V" : 0.75,
+        "T" : 0.15,
+        "L" : 0.35
+      },
+      "pesoDanno" : 1.3333,
+      "usi" : 8,
+      "colpoDiProva" : 10
+    },
+    "nota" : "SB-12a, giro 3 (finale): giro 2 e Sgommata 25 CUT"
+  },
+  "invarianti" : {
+    "partite" : 96000,
+    "turniDiGiocatore" : 2155712,
+    "violazioni" : {
+      "senza-mosse" : 0,
+      "mossa-vuota" : 0,
+      "bound-gratuite" : 0,
+      "basic-bound-in-mano" : 0,
+      "last-resort-in-mano" : 0,
+      "last-resort-giocabile" : 0,
+      "bound-giocabile" : 0,
+      "limite-turni" : 0
+    },
+    "esempi" : [ ]
+  },
+  "coppie" : [
+    {
+      "A" : "starter-spazienzio",
+      "B" : "starter-spazienzio",
+      "partite" : 32000,
+      "vittorieA" : 13894,
+      "vittorieB" : 14063,
+      "patte" : 4043,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 14006,
+      "quotaA" : 0.497,
+      "quotaAIC95" : [
+        0.4911,
+        0.5028
+      ],
+      "turniTotali" : 362464,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 16,
+      "turniMin" : 3,
+      "turniMax" : 22
+    },
+    {
+      "A" : "starter-spazienzio",
+      "B" : "starter-mara",
+      "partite" : 32000,
+      "vittorieA" : 14904,
+      "vittorieB" : 13771,
+      "patte" : 3325,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 14628,
+      "quotaA" : 0.5198,
+      "quotaAIC95" : [
+        0.514,
+        0.5255
+      ],
+      "turniTotali" : 359997,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 16,
+      "turniMin" : 4,
+      "turniMax" : 22
+    },
+    {
+      "A" : "starter-mara",
+      "B" : "starter-mara",
+      "partite" : 32000,
+      "vittorieA" : 14389,
+      "vittorieB" : 14424,
+      "patte" : 3187,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 14434,
+      "quotaA" : 0.4994,
+      "quotaAIC95" : [
+        0.4936,
+        0.5052
+      ],
+      "turniTotali" : 355395,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 16,
+      "turniMin" : 5,
+      "turniMax" : 22
+    }
+  ],
+  "celle" : [
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-spazienzio",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 859,
+      "vittorieB" : 900,
+      "patte" : 241,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 902,
+      "quotaA" : 0.4883,
+      "quotaAIC95" : [
+        0.465,
+        0.5117
+      ],
+      "turniTotali" : 19281,
+      "turniMediana" : 9,
+      "turniP10" : 6,
+      "turniP90" : 13,
+      "turniMin" : 4,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-spazienzio",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 900,
+      "vittorieB" : 831,
+      "patte" : 269,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 888,
+      "quotaA" : 0.5199,
+      "quotaAIC95" : [
+        0.4964,
+        0.5434
+      ],
+      "turniTotali" : 24882,
+      "turniMediana" : 13,
+      "turniP10" : 8,
+      "turniP90" : 17,
+      "turniMin" : 3,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-spazienzio",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 602,
+      "vittorieB" : 1164,
+      "patte" : 234,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 884,
+      "quotaA" : 0.3409,
+      "quotaAIC95" : [
+        0.3191,
+        0.3633
+      ],
+      "turniTotali" : 17058,
+      "turniMediana" : 8,
+      "turniP10" : 6,
+      "turniP90" : 11,
+      "turniMin" : 3,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-spazienzio",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1157,
+      "vittorieB" : 644,
+      "patte" : 199,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 907,
+      "quotaA" : 0.6424,
+      "quotaAIC95" : [
+        0.62,
+        0.6642
+      ],
+      "turniTotali" : 22866,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 16,
+      "turniMin" : 4,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-spazienzio",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 798,
+      "vittorieB" : 908,
+      "patte" : 294,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 904,
+      "quotaA" : 0.4678,
+      "quotaAIC95" : [
+        0.4442,
+        0.4915
+      ],
+      "turniTotali" : 24948,
+      "turniMediana" : 13,
+      "turniP10" : 8,
+      "turniP90" : 17,
+      "turniMin" : 5,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-spazienzio",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 749,
+      "vittorieB" : 764,
+      "patte" : 487,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 772,
+      "quotaA" : 0.495,
+      "quotaAIC95" : [
+        0.4699,
+        0.5202
+      ],
+      "turniTotali" : 30602,
+      "turniMediana" : 16,
+      "turniP10" : 12,
+      "turniP90" : 18,
+      "turniMin" : 7,
+      "turniMax" : 21
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-spazienzio",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 342,
+      "vittorieB" : 1441,
+      "patte" : 217,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 864,
+      "quotaA" : 0.1918,
+      "quotaAIC95" : [
+        0.1742,
+        0.2107
+      ],
+      "turniTotali" : 21858,
+      "turniMediana" : 11,
+      "turniP10" : 8,
+      "turniP90" : 14,
+      "turniMin" : 3,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-spazienzio",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 988,
+      "vittorieB" : 754,
+      "patte" : 258,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 873,
+      "quotaA" : 0.5672,
+      "quotaAIC95" : [
+        0.5438,
+        0.5903
+      ],
+      "turniTotali" : 28052,
+      "turniMediana" : 14,
+      "turniP10" : 10,
+      "turniP90" : 18,
+      "turniMin" : 3,
+      "turniMax" : 21
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-spazienzio",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 1164,
+      "vittorieB" : 566,
+      "patte" : 270,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 846,
+      "quotaA" : 0.6728,
+      "quotaAIC95" : [
+        0.6504,
+        0.6945
+      ],
+      "turniTotali" : 17116,
+      "turniMediana" : 9,
+      "turniP10" : 6,
+      "turniP90" : 11,
+      "turniMin" : 3,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-spazienzio",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 1434,
+      "vittorieB" : 349,
+      "patte" : 217,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 863,
+      "quotaA" : 0.8043,
+      "quotaAIC95" : [
+        0.7852,
+        0.822
+      ],
+      "turniTotali" : 22051,
+      "turniMediana" : 11,
+      "turniP10" : 8,
+      "turniP90" : 15,
+      "turniMin" : 3,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-spazienzio",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 834,
+      "vittorieB" : 836,
+      "patte" : 330,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 816,
+      "quotaA" : 0.4994,
+      "quotaAIC95" : [
+        0.4754,
+        0.5234
+      ],
+      "turniTotali" : 15717,
+      "turniMediana" : 8,
+      "turniP10" : 6,
+      "turniP90" : 10,
+      "turniMin" : 3,
+      "turniMax" : 13
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-spazienzio",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1510,
+      "vittorieB" : 305,
+      "patte" : 185,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 918,
+      "quotaA" : 0.832,
+      "quotaAIC95" : [
+        0.8141,
+        0.8485
+      ],
+      "turniTotali" : 20082,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 13,
+      "turniMin" : 3,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-spazienzio",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 620,
+      "vittorieB" : 1176,
+      "patte" : 204,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 877,
+      "quotaA" : 0.3452,
+      "quotaAIC95" : [
+        0.3236,
+        0.3675
+      ],
+      "turniTotali" : 22928,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 16,
+      "turniMin" : 4,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-spazienzio",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 746,
+      "vittorieB" : 1002,
+      "patte" : 252,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 889,
+      "quotaA" : 0.4268,
+      "quotaAIC95" : [
+        0.4038,
+        0.4501
+      ],
+      "turniTotali" : 28232,
+      "turniMediana" : 14,
+      "turniP10" : 10,
+      "turniP90" : 18,
+      "turniMin" : 4,
+      "turniMax" : 21
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-spazienzio",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 316,
+      "vittorieB" : 1511,
+      "patte" : 173,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 899,
+      "quotaA" : 0.173,
+      "quotaAIC95" : [
+        0.1563,
+        0.191
+      ],
+      "turniTotali" : 20050,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 13,
+      "turniMin" : 3,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-spazienzio",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 875,
+      "vittorieB" : 912,
+      "patte" : 213,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 904,
+      "quotaA" : 0.4896,
+      "quotaAIC95" : [
+        0.4665,
+        0.5128
+      ],
+      "turniTotali" : 26741,
+      "turniMediana" : 13,
+      "turniP10" : 9,
+      "turniP90" : 18,
+      "turniMin" : 4,
+      "turniMax" : 22
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 561,
+      "vittorieB" : 1228,
+      "patte" : 211,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 907,
+      "quotaA" : 0.3136,
+      "quotaAIC95" : [
+        0.2925,
+        0.3355
+      ],
+      "turniTotali" : 17222,
+      "turniMediana" : 8,
+      "turniP10" : 6,
+      "turniP90" : 11,
+      "turniMin" : 4,
+      "turniMax" : 15
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 801,
+      "vittorieB" : 1015,
+      "patte" : 184,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 920,
+      "quotaA" : 0.4411,
+      "quotaAIC95" : [
+        0.4184,
+        0.464
+      ],
+      "turniTotali" : 22587,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 15,
+      "turniMin" : 4,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 681,
+      "vittorieB" : 1108,
+      "patte" : 211,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 922,
+      "quotaA" : 0.3807,
+      "quotaAIC95" : [
+        0.3584,
+        0.4034
+      ],
+      "turniTotali" : 18624,
+      "turniMediana" : 9,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 4,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1492,
+      "vittorieB" : 346,
+      "patte" : 162,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 984,
+      "quotaA" : 0.8118,
+      "quotaAIC95" : [
+        0.7932,
+        0.829
+      ],
+      "turniTotali" : 23707,
+      "turniMediana" : 12,
+      "turniP10" : 7,
+      "turniP90" : 17,
+      "turniMin" : 4,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 395,
+      "vittorieB" : 1376,
+      "patte" : 229,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 918,
+      "quotaA" : 0.223,
+      "quotaAIC95" : [
+        0.2043,
+        0.243
+      ],
+      "turniTotali" : 23021,
+      "turniMediana" : 11,
+      "turniP10" : 8,
+      "turniP90" : 15,
+      "turniMin" : 6,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 752,
+      "vittorieB" : 806,
+      "patte" : 442,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 811,
+      "quotaA" : 0.4827,
+      "quotaAIC95" : [
+        0.4579,
+        0.5075
+      ],
+      "turniTotali" : 29404,
+      "turniMediana" : 15,
+      "turniP10" : 11,
+      "turniP90" : 17,
+      "turniMin" : 6,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 535,
+      "vittorieB" : 1239,
+      "patte" : 226,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 923,
+      "quotaA" : 0.3016,
+      "quotaAIC95" : [
+        0.2807,
+        0.3233
+      ],
+      "turniTotali" : 24555,
+      "turniMediana" : 12,
+      "turniP10" : 9,
+      "turniP90" : 16,
+      "turniMin" : 6,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1494,
+      "vittorieB" : 289,
+      "patte" : 217,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 913,
+      "quotaA" : 0.8379,
+      "quotaAIC95" : [
+        0.8201,
+        0.8543
+      ],
+      "turniTotali" : 30087,
+      "turniMediana" : 15,
+      "turniP10" : 11,
+      "turniP90" : 18,
+      "turniMin" : 7,
+      "turniMax" : 21
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 1045,
+      "vittorieB" : 665,
+      "patte" : 290,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 858,
+      "quotaA" : 0.6111,
+      "quotaAIC95" : [
+        0.5878,
+        0.6339
+      ],
+      "turniTotali" : 16677,
+      "turniMediana" : 8,
+      "turniP10" : 6,
+      "turniP90" : 11,
+      "turniMin" : 4,
+      "turniMax" : 14
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 1515,
+      "vittorieB" : 335,
+      "patte" : 150,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 909,
+      "quotaA" : 0.8189,
+      "quotaAIC95" : [
+        0.8007,
+        0.8358
+      ],
+      "turniTotali" : 20910,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 14,
+      "turniMin" : 4,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 1249,
+      "vittorieB" : 513,
+      "patte" : 238,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 910,
+      "quotaA" : 0.7089,
+      "quotaAIC95" : [
+        0.6872,
+        0.7296
+      ],
+      "turniTotali" : 17716,
+      "turniMediana" : 9,
+      "turniP10" : 7,
+      "turniP90" : 11,
+      "turniMin" : 4,
+      "turniMax" : 15
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1925,
+      "vittorieB" : 46,
+      "patte" : 29,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 988,
+      "quotaA" : 0.9767,
+      "quotaAIC95" : [
+        0.969,
+        0.9825
+      ],
+      "turniTotali" : 19853,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 13,
+      "turniMin" : 4,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 269,
+      "vittorieB" : 1566,
+      "patte" : 165,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 917,
+      "quotaA" : 0.1466,
+      "quotaAIC95" : [
+        0.1311,
+        0.1635
+      ],
+      "turniTotali" : 20056,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 13,
+      "turniMin" : 4,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 578,
+      "vittorieB" : 1217,
+      "patte" : 205,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 918,
+      "quotaA" : 0.322,
+      "quotaAIC95" : [
+        0.3008,
+        0.344
+      ],
+      "turniTotali" : 25179,
+      "turniMediana" : 13,
+      "turniP10" : 8,
+      "turniP90" : 17,
+      "turniMin" : 4,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 355,
+      "vittorieB" : 1479,
+      "patte" : 166,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 926,
+      "quotaA" : 0.1936,
+      "quotaAIC95" : [
+        0.1761,
+        0.2123
+      ],
+      "turniTotali" : 21534,
+      "turniMediana" : 11,
+      "turniP10" : 8,
+      "turniP90" : 14,
+      "turniMin" : 4,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-spazienzio",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1257,
+      "vittorieB" : 543,
+      "patte" : 200,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 904,
+      "quotaA" : 0.6983,
+      "quotaAIC95" : [
+        0.6767,
+        0.7191
+      ],
+      "turniTotali" : 28865,
+      "turniMediana" : 15,
+      "turniP10" : 10,
+      "turniP90" : 19,
+      "turniMin" : 4,
+      "turniMax" : 22
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 798,
+      "vittorieB" : 858,
+      "patte" : 344,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 827,
+      "quotaA" : 0.4819,
+      "quotaAIC95" : [
+        0.4579,
+        0.506
+      ],
+      "turniTotali" : 17067,
+      "turniMediana" : 8,
+      "turniP10" : 6,
+      "turniP90" : 11,
+      "turniMin" : 5,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 1529,
+      "vittorieB" : 305,
+      "patte" : 166,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 930,
+      "quotaA" : 0.8337,
+      "quotaAIC95" : [
+        0.816,
+        0.85
+      ],
+      "turniTotali" : 21285,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 14,
+      "turniMin" : 5,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 1114,
+      "vittorieB" : 577,
+      "patte" : 309,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 836,
+      "quotaA" : 0.6588,
+      "quotaAIC95" : [
+        0.6358,
+        0.681
+      ],
+      "turniTotali" : 18290,
+      "turniMediana" : 9,
+      "turniP10" : 6,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "aggressivo",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1942,
+      "vittorieB" : 27,
+      "patte" : 31,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 985,
+      "quotaA" : 0.9863,
+      "quotaAIC95" : [
+        0.9801,
+        0.9906
+      ],
+      "turniTotali" : 19316,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 321,
+      "vittorieB" : 1514,
+      "patte" : 165,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 903,
+      "quotaA" : 0.1749,
+      "quotaAIC95" : [
+        0.1582,
+        0.193
+      ],
+      "turniTotali" : 21104,
+      "turniMediana" : 11,
+      "turniP10" : 7,
+      "turniP90" : 14,
+      "turniMin" : 5,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 784,
+      "vittorieB" : 789,
+      "patte" : 427,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 777,
+      "quotaA" : 0.4984,
+      "quotaAIC95" : [
+        0.4737,
+        0.5231
+      ],
+      "turniTotali" : 28428,
+      "turniMediana" : 15,
+      "turniP10" : 9,
+      "turniP90" : 17,
+      "turniMin" : 5,
+      "turniMax" : 19
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 472,
+      "vittorieB" : 1337,
+      "patte" : 191,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 902,
+      "quotaA" : 0.2609,
+      "quotaAIC95" : [
+        0.2412,
+        0.2816
+      ],
+      "turniTotali" : 22935,
+      "turniMediana" : 12,
+      "turniP10" : 7,
+      "turniP90" : 15,
+      "turniMin" : 5,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "prudente",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1601,
+      "vittorieB" : 213,
+      "patte" : 186,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 922,
+      "quotaA" : 0.8826,
+      "quotaAIC95" : [
+        0.867,
+        0.8966
+      ],
+      "turniTotali" : 26400,
+      "turniMediana" : 14,
+      "turniP10" : 8,
+      "turniP90" : 17,
+      "turniMin" : 5,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 580,
+      "vittorieB" : 1146,
+      "patte" : 274,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 870,
+      "quotaA" : 0.336,
+      "quotaAIC95" : [
+        0.3141,
+        0.3587
+      ],
+      "turniTotali" : 18105,
+      "turniMediana" : 9,
+      "turniP10" : 6,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 1344,
+      "vittorieB" : 468,
+      "patte" : 188,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 925,
+      "quotaA" : 0.7417,
+      "quotaAIC95" : [
+        0.7211,
+        0.7613
+      ],
+      "turniTotali" : 23029,
+      "turniMediana" : 12,
+      "turniP10" : 7,
+      "turniP90" : 15,
+      "turniMin" : 5,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 833,
+      "vittorieB" : 846,
+      "patte" : 321,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 826,
+      "quotaA" : 0.4961,
+      "quotaAIC95" : [
+        0.4722,
+        0.52
+      ],
+      "turniTotali" : 19580,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 13,
+      "turniMin" : 5,
+      "turniMax" : 16
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "risorse",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 1901,
+      "vittorieB" : 59,
+      "patte" : 40,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 983,
+      "quotaA" : 0.9699,
+      "quotaAIC95" : [
+        0.9614,
+        0.9766
+      ],
+      "turniTotali" : 21003,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 14,
+      "turniMin" : 5,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "aggressivo",
+      "partite" : 2000,
+      "vittorieA" : 29,
+      "vittorieB" : 1941,
+      "patte" : 30,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 976,
+      "quotaA" : 0.0147,
+      "quotaAIC95" : [
+        0.0103,
+        0.0211
+      ],
+      "turniTotali" : 19370,
+      "turniMediana" : 10,
+      "turniP10" : 7,
+      "turniP90" : 12,
+      "turniMin" : 5,
+      "turniMax" : 17
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "prudente",
+      "partite" : 2000,
+      "vittorieA" : 228,
+      "vittorieB" : 1588,
+      "patte" : 184,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 903,
+      "quotaA" : 0.1256,
+      "quotaAIC95" : [
+        0.1111,
+        0.1416
+      ],
+      "turniTotali" : 26580,
+      "turniMediana" : 14,
+      "turniP10" : 9,
+      "turniP90" : 17,
+      "turniMin" : 5,
+      "turniMax" : 20
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "risorse",
+      "partite" : 2000,
+      "vittorieA" : 55,
+      "vittorieB" : 1900,
+      "patte" : 45,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 979,
+      "quotaA" : 0.0281,
+      "quotaAIC95" : [
+        0.0217,
+        0.0364
+      ],
+      "turniTotali" : 21120,
+      "turniMediana" : 10,
+      "turniP10" : 8,
+      "turniP90" : 14,
+      "turniMin" : 5,
+      "turniMax" : 18
+    },
+    {
+      "A" : "starter-mara",
+      "stileA" : "com",
+      "B" : "starter-mara",
+      "stileB" : "com",
+      "partite" : 2000,
+      "vittorieA" : 858,
+      "vittorieB" : 856,
+      "patte" : 286,
+      "limite" : 0,
+      "vittoriePrimoPosto" : 890,
+      "quotaA" : 0.5006,
+      "quotaAIC95" : [
+        0.4769,
+        0.5242
+      ],
+      "turniTotali" : 31783,
+      "turniMediana" : 16,
+      "turniP10" : 12,
+      "turniP90" : 19,
+      "turniMin" : 6,
+      "turniMax" : 22
+    }
+  ],
+  "mazzi" : {
+    "starter-spazienzio" : {
+      "partite" : 96000,
+      "vittorie" : 42861,
+      "sconfitte" : 41728,
+      "patte" : 11411,
+      "limite" : 0,
+      "mazzoEsaurito" : 9973,
+      "lastResortArrivata" : 6213,
+      "lastResortTurniTotali" : 107366,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 42861,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 200018,
+        "T" : 51453,
+        "L" : 5352,
+        "A" : 971020
+      },
+      "partitePerseConRisorse" : 41728,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 666311,
+        "T" : 67200,
+        "L" : 43677,
+        "A" : 677001
+      },
+      "carte" : {
+        "base.com.DentiStretti" : {
+          "giocate" : 25934,
+          "partiteGiocata" : 25934,
+          "vinteGiocata" : 14050,
+          "perseGiocata" : 8840,
+          "partiteInMano" : 69339,
+          "turniInMano" : 177416,
+          "turniMorta" : 0,
+          "turniFerma" : 151482
+        },
+        "base.com.MattoneDelCantiere" : {
+          "giocate" : 39816,
+          "partiteGiocata" : 39816,
+          "vinteGiocata" : 20580,
+          "perseGiocata" : 14020,
+          "partiteInMano" : 71550,
+          "turniInMano" : 212393,
+          "turniMorta" : 130296,
+          "turniFerma" : 42281
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 53459,
+          "partiteGiocata" : 36081,
+          "vinteGiocata" : 12666,
+          "perseGiocata" : 18449,
+          "partiteInMano" : 85117,
+          "turniInMano" : 273772,
+          "turniMorta" : 8531,
+          "turniFerma" : 211782
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 75504,
+          "partiteGiocata" : 58618,
+          "vinteGiocata" : 24864,
+          "perseGiocata" : 26183,
+          "partiteInMano" : 86269,
+          "turniInMano" : 323933,
+          "turniMorta" : 131850,
+          "turniFerma" : 116579
+        },
+        "bruiser.Glare" : {
+          "giocate" : 64726,
+          "partiteGiocata" : 49990,
+          "vinteGiocata" : 27550,
+          "perseGiocata" : 16536,
+          "partiteInMano" : 88202,
+          "turniInMano" : 278635,
+          "turniMorta" : 0,
+          "turniFerma" : 213909
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 29110,
+          "partiteGiocata" : 29110,
+          "vinteGiocata" : 15370,
+          "perseGiocata" : 9777,
+          "partiteInMano" : 70556,
+          "turniInMano" : 272388,
+          "turniMorta" : 206160,
+          "turniFerma" : 37118
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 90784,
+          "partiteGiocata" : 64288,
+          "vinteGiocata" : 31638,
+          "perseGiocata" : 24390,
+          "partiteInMano" : 86372,
+          "turniInMano" : 286247,
+          "turniMorta" : 0,
+          "turniFerma" : 195463
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 96968,
+          "partiteGiocata" : 72446,
+          "vinteGiocata" : 34801,
+          "perseGiocata" : 28201,
+          "partiteInMano" : 88654,
+          "turniInMano" : 316123,
+          "turniMorta" : 132288,
+          "turniFerma" : 86867
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 53668,
+          "partiteGiocata" : 50397,
+          "vinteGiocata" : 29652,
+          "perseGiocata" : 14402,
+          "partiteInMano" : 89601,
+          "turniInMano" : 500856,
+          "turniMorta" : 395312,
+          "turniFerma" : 51876
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 40411,
+          "partiteGiocata" : 30251,
+          "vinteGiocata" : 9984,
+          "perseGiocata" : 15968,
+          "partiteInMano" : 84596,
+          "turniInMano" : 365209,
+          "turniMorta" : 114571,
+          "turniFerma" : 210227
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 68013,
+          "partiteGiocata" : 29062,
+          "vinteGiocata" : 10201,
+          "perseGiocata" : 15706,
+          "partiteInMano" : 96000,
+          "turniInMano" : 1084925,
+          "turniMorta" : 555,
+          "turniFerma" : 1016357
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 363525,
+          "partiteGiocata" : 90671,
+          "vinteGiocata" : 39520,
+          "perseGiocata" : 40171,
+          "partiteInMano" : 96000,
+          "turniInMano" : 1084925,
+          "turniMorta" : 555,
+          "turniFerma" : 720845
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 76306,
+          "partiteGiocata" : 60381,
+          "vinteGiocata" : 22527,
+          "perseGiocata" : 29724,
+          "partiteInMano" : 96000,
+          "turniInMano" : 1084925,
+          "turniMorta" : 491231,
+          "turniFerma" : 517388
+        },
+        "com.last.Struggle" : {
+          "giocate" : 6701,
+          "partiteGiocata" : 4999,
+          "vinteGiocata" : 1835,
+          "perseGiocata" : 1117,
+          "partiteInMano" : 6213,
+          "turniInMano" : 9779,
+          "turniMorta" : 0,
+          "turniFerma" : 3078
+        }
+      }
+    },
+    "starter-mara" : {
+      "partite" : 96000,
+      "vittorie" : 42584,
+      "sconfitte" : 43717,
+      "patte" : 9699,
+      "limite" : 0,
+      "mazzoEsaurito" : 14643,
+      "lastResortArrivata" : 10302,
+      "lastResortTurniTotali" : 165289,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 42584,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 108,
+        "T" : 46863,
+        "L" : 2,
+        "A" : 54231
+      },
+      "partitePerseConRisorse" : 43717,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 4968,
+        "T" : 99537,
+        "L" : 731,
+        "A" : 496174
+      },
+      "carte" : {
+        "base.com.Spintone" : {
+          "giocate" : 128609,
+          "partiteGiocata" : 82917,
+          "vinteGiocata" : 39382,
+          "perseGiocata" : 34511,
+          "partiteInMano" : 90428,
+          "turniInMano" : 320494,
+          "turniMorta" : 0,
+          "turniFerma" : 191885
+        },
+        "base.com.SputoDaPosacenere" : {
+          "giocate" : 112635,
+          "partiteGiocata" : 78261,
+          "vinteGiocata" : 38384,
+          "perseGiocata" : 31404,
+          "partiteInMano" : 90383,
+          "turniInMano" : 290659,
+          "turniMorta" : 70476,
+          "turniFerma" : 107548
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 22091,
+          "partiteGiocata" : 22091,
+          "vinteGiocata" : 5411,
+          "perseGiocata" : 14148,
+          "partiteInMano" : 73035,
+          "turniInMano" : 286792,
+          "turniMorta" : 60787,
+          "turniFerma" : 203914
+        },
+        "base.mara.CinghiataDiTraverso" : {
+          "giocate" : 112751,
+          "partiteGiocata" : 78488,
+          "vinteGiocata" : 38242,
+          "perseGiocata" : 31703,
+          "partiteInMano" : 90477,
+          "turniInMano" : 285998,
+          "turniMorta" : 68856,
+          "turniFerma" : 104391
+        },
+        "base.mara.PresoAlVolo" : {
+          "giocate" : 136078,
+          "partiteGiocata" : 70829,
+          "vinteGiocata" : 27498,
+          "perseGiocata" : 35450,
+          "partiteInMano" : 96000,
+          "turniInMano" : 1070787,
+          "turniMorta" : 230391,
+          "turniFerma" : 704318
+        },
+        "base.mara.Sgommata" : {
+          "giocate" : 101147,
+          "partiteGiocata" : 78207,
+          "vinteGiocata" : 40617,
+          "perseGiocata" : 28935,
+          "partiteInMano" : 92310,
+          "turniInMano" : 334373,
+          "turniMorta" : 158155,
+          "turniFerma" : 75071
+        },
+        "base.mara.Slalom" : {
+          "giocate" : 47943,
+          "partiteGiocata" : 47943,
+          "vinteGiocata" : 22783,
+          "perseGiocata" : 19862,
+          "partiteInMano" : 74135,
+          "turniInMano" : 193948,
+          "turniMorta" : 66573,
+          "turniFerma" : 79432
+        },
+        "base.mara.SorpassoInCurva" : {
+          "giocate" : 117194,
+          "partiteGiocata" : 76412,
+          "vinteGiocata" : 35734,
+          "perseGiocata" : 32086,
+          "partiteInMano" : 88387,
+          "turniInMano" : 420181,
+          "turniMorta" : 0,
+          "turniFerma" : 302987
+        },
+        "base.mara.TraDueParaurti" : {
+          "giocate" : 43926,
+          "partiteGiocata" : 32666,
+          "vinteGiocata" : 8302,
+          "perseGiocata" : 20778,
+          "partiteInMano" : 87624,
+          "turniInMano" : 500437,
+          "turniMorta" : 104719,
+          "turniFerma" : 351792
+        },
+        "base.mara.bound.CambioMarcia" : {
+          "giocate" : 77521,
+          "partiteGiocata" : 38885,
+          "vinteGiocata" : 13748,
+          "perseGiocata" : 21292,
+          "partiteInMano" : 96000,
+          "turniInMano" : 1070787,
+          "turniMorta" : 2544,
+          "turniFerma" : 990722
+        },
+        "base.mara.bound.PassoStretto" : {
+          "giocate" : 153753,
+          "partiteGiocata" : 73920,
+          "vinteGiocata" : 30275,
+          "perseGiocata" : 35579,
+          "partiteInMano" : 96000,
+          "turniInMano" : 1070787,
+          "turniMorta" : 2544,
+          "turniFerma" : 914490
+        },
+        "com.Steal" : {
+          "giocate" : 7227,
+          "partiteGiocata" : 7227,
+          "vinteGiocata" : 726,
+          "perseGiocata" : 5988,
+          "partiteInMano" : 73814,
+          "turniInMano" : 316826,
+          "turniMorta" : 155583,
+          "turniFerma" : 154016
+        },
+        "com.last.Struggle" : {
+          "giocate" : 9912,
+          "partiteGiocata" : 7646,
+          "vinteGiocata" : 2980,
+          "perseGiocata" : 1924,
+          "partiteInMano" : 10302,
+          "turniInMano" : 19894,
+          "turniMorta" : 0,
+          "turniFerma" : 9982
+        }
+      }
+    }
+  },
+  "mazziPerStile" : {
+    "starter-spazienzio / aggressivo" : {
+      "partite" : 24000,
+      "vittorie" : 10603,
+      "sconfitte" : 10677,
+      "patte" : 2720,
+      "limite" : 0,
+      "mazzoEsaurito" : 1088,
+      "lastResortArrivata" : 551,
+      "lastResortTurniTotali" : 9571,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 10603,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 19334,
+        "T" : 15219,
+        "L" : 1623,
+        "A" : 269375
+      },
+      "partitePerseConRisorse" : 10677,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 51478,
+        "T" : 18942,
+        "L" : 13405,
+        "A" : 184848
+      },
+      "carte" : {
+        "base.com.DentiStretti" : {
+          "giocate" : 4671,
+          "partiteGiocata" : 4671,
+          "vinteGiocata" : 2651,
+          "perseGiocata" : 1443,
+          "partiteInMano" : 16054,
+          "turniInMano" : 31829,
+          "turniMorta" : 0,
+          "turniFerma" : 27158
+        },
+        "base.com.MattoneDelCantiere" : {
+          "giocate" : 10874,
+          "partiteGiocata" : 10874,
+          "vinteGiocata" : 5446,
+          "perseGiocata" : 4059,
+          "partiteInMano" : 16897,
+          "turniInMano" : 43391,
+          "turniMorta" : 30559,
+          "turniFerma" : 1958
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 20672,
+          "turniInMano" : 67439,
+          "turniMorta" : 916,
+          "turniFerma" : 66523
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 20378,
+          "partiteGiocata" : 15546,
+          "vinteGiocata" : 5729,
+          "perseGiocata" : 7946,
+          "partiteInMano" : 21178,
+          "turniInMano" : 77707,
+          "turniMorta" : 38058,
+          "turniFerma" : 19271
+        },
+        "bruiser.Glare" : {
+          "giocate" : 14760,
+          "partiteGiocata" : 12637,
+          "vinteGiocata" : 7711,
+          "perseGiocata" : 3296,
+          "partiteInMano" : 21488,
+          "turniInMano" : 53543,
+          "turniMorta" : 0,
+          "turniFerma" : 38783
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 6523,
+          "partiteGiocata" : 6523,
+          "vinteGiocata" : 3498,
+          "perseGiocata" : 2184,
+          "partiteInMano" : 16403,
+          "turniInMano" : 65656,
+          "turniMorta" : 57350,
+          "turniFerma" : 1783
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 10481,
+          "partiteGiocata" : 9302,
+          "vinteGiocata" : 5391,
+          "perseGiocata" : 2789,
+          "partiteInMano" : 20882,
+          "turniInMano" : 56904,
+          "turniMorta" : 0,
+          "turniFerma" : 46423
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 25408,
+          "partiteGiocata" : 19041,
+          "vinteGiocata" : 8957,
+          "perseGiocata" : 7734,
+          "partiteInMano" : 21875,
+          "turniInMano" : 64991,
+          "turniMorta" : 32593,
+          "turniFerma" : 6990
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 12924,
+          "partiteGiocata" : 12348,
+          "vinteGiocata" : 7341,
+          "perseGiocata" : 3575,
+          "partiteInMano" : 21957,
+          "turniInMano" : 116791,
+          "turniMorta" : 103867,
+          "turniFerma" : 0
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 3057,
+          "partiteGiocata" : 2891,
+          "vinteGiocata" : 754,
+          "perseGiocata" : 1773,
+          "partiteInMano" : 20520,
+          "turniInMano" : 112360,
+          "turniMorta" : 49373,
+          "turniFerma" : 59930
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 8088,
+          "partiteGiocata" : 6959,
+          "vinteGiocata" : 3310,
+          "perseGiocata" : 2794,
+          "partiteInMano" : 24000,
+          "turniInMano" : 250500,
+          "turniMorta" : 0,
+          "turniFerma" : 242412
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 113716,
+          "partiteGiocata" : 22494,
+          "vinteGiocata" : 9432,
+          "perseGiocata" : 10457,
+          "partiteInMano" : 24000,
+          "turniInMano" : 250500,
+          "turniMorta" : 0,
+          "turniFerma" : 136784
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 18935,
+          "partiteGiocata" : 15322,
+          "vinteGiocata" : 5762,
+          "perseGiocata" : 7610,
+          "partiteInMano" : 24000,
+          "turniInMano" : 250500,
+          "turniMorta" : 115881,
+          "turniFerma" : 115684
+        },
+        "com.last.Struggle" : {
+          "giocate" : 685,
+          "partiteGiocata" : 540,
+          "vinteGiocata" : 175,
+          "perseGiocata" : 107,
+          "partiteInMano" : 551,
+          "turniInMano" : 697,
+          "turniMorta" : 0,
+          "turniFerma" : 12
+        }
+      }
+    },
+    "starter-spazienzio / prudente" : {
+      "partite" : 24000,
+      "vittorie" : 8999,
+      "sconfitte" : 11406,
+      "patte" : 3595,
+      "limite" : 0,
+      "mazzoEsaurito" : 5254,
+      "lastResortArrivata" : 3419,
+      "lastResortTurniTotali" : 59411,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 8999,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 22235,
+        "T" : 15909,
+        "L" : 1941,
+        "A" : 44984
+      },
+      "partitePerseConRisorse" : 11406,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 74130,
+        "T" : 17097,
+        "L" : 13973,
+        "A" : 79935
+      },
+      "carte" : {
+        "base.com.DentiStretti" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 19547,
+          "turniInMano" : 48862,
+          "turniMorta" : 0,
+          "turniFerma" : 48862
+        },
+        "base.com.MattoneDelCantiere" : {
+          "giocate" : 8465,
+          "partiteGiocata" : 8465,
+          "vinteGiocata" : 3331,
+          "perseGiocata" : 3724,
+          "partiteInMano" : 20287,
+          "turniInMano" : 77255,
+          "turniMorta" : 66562,
+          "turniFerma" : 2228
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 35635,
+          "partiteGiocata" : 21751,
+          "vinteGiocata" : 8057,
+          "perseGiocata" : 10304,
+          "partiteInMano" : 22358,
+          "turniInMano" : 47368,
+          "turniMorta" : 2878,
+          "turniFerma" : 8855
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 14648,
+          "partiteGiocata" : 12049,
+          "vinteGiocata" : 3934,
+          "perseGiocata" : 6102,
+          "partiteInMano" : 22732,
+          "turniInMano" : 84303,
+          "turniMorta" : 52924,
+          "turniFerma" : 16731
+        },
+        "bruiser.Glare" : {
+          "giocate" : 1096,
+          "partiteGiocata" : 1066,
+          "vinteGiocata" : 236,
+          "perseGiocata" : 666,
+          "partiteInMano" : 22701,
+          "turniInMano" : 87471,
+          "turniMorta" : 0,
+          "turniFerma" : 86375
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 6592,
+          "partiteGiocata" : 6592,
+          "vinteGiocata" : 2890,
+          "perseGiocata" : 2604,
+          "partiteInMano" : 20107,
+          "turniInMano" : 97591,
+          "turniMorta" : 89505,
+          "turniFerma" : 1494
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 38673,
+          "partiteGiocata" : 22613,
+          "vinteGiocata" : 8880,
+          "perseGiocata" : 10193,
+          "partiteInMano" : 22652,
+          "turniInMano" : 52960,
+          "turniMorta" : 0,
+          "turniFerma" : 14287
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 28160,
+          "partiteGiocata" : 19933,
+          "vinteGiocata" : 7903,
+          "perseGiocata" : 8862,
+          "partiteInMano" : 23293,
+          "turniInMano" : 97348,
+          "turniMorta" : 63533,
+          "turniFerma" : 5655
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 10549,
+          "partiteGiocata" : 10517,
+          "vinteGiocata" : 4826,
+          "perseGiocata" : 4182,
+          "partiteInMano" : 23433,
+          "turniInMano" : 179213,
+          "turniMorta" : 168654,
+          "turniFerma" : 10
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 19929,
+          "partiteGiocata" : 13665,
+          "vinteGiocata" : 4522,
+          "perseGiocata" : 6806,
+          "partiteInMano" : 22243,
+          "turniInMano" : 92303,
+          "turniMorta" : 44722,
+          "turniFerma" : 27652
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 24000,
+          "turniInMano" : 318294,
+          "turniMorta" : 0,
+          "turniFerma" : 318294
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 124654,
+          "partiteGiocata" : 23854,
+          "vinteGiocata" : 8927,
+          "perseGiocata" : 11341,
+          "partiteInMano" : 24000,
+          "turniInMano" : 318294,
+          "turniMorta" : 0,
+          "turniFerma" : 193640
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 25156,
+          "partiteGiocata" : 19794,
+          "vinteGiocata" : 7302,
+          "perseGiocata" : 9235,
+          "partiteInMano" : 24000,
+          "turniInMano" : 318294,
+          "turniMorta" : 140911,
+          "turniFerma" : 152227
+        },
+        "com.last.Struggle" : {
+          "giocate" : 4737,
+          "partiteGiocata" : 3387,
+          "vinteGiocata" : 1295,
+          "perseGiocata" : 695,
+          "partiteInMano" : 3419,
+          "turniInMano" : 4775,
+          "turniMorta" : 0,
+          "turniFerma" : 38
+        }
+      }
+    },
+    "starter-spazienzio / risorse" : {
+      "partite" : 24000,
+      "vittorie" : 15628,
+      "sconfitte" : 5709,
+      "patte" : 2663,
+      "limite" : 0,
+      "mazzoEsaurito" : 316,
+      "lastResortArrivata" : 123,
+      "lastResortTurniTotali" : 2057,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 15628,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 44886,
+        "T" : 7221,
+        "L" : 888,
+        "A" : 506720
+      },
+      "partitePerseConRisorse" : 5709,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 72829,
+        "T" : 3132,
+        "L" : 2363,
+        "A" : 175397
+      },
+      "carte" : {
+        "base.com.DentiStretti" : {
+          "giocate" : 11740,
+          "partiteGiocata" : 11740,
+          "vinteGiocata" : 7958,
+          "perseGiocata" : 2404,
+          "partiteInMano" : 15537,
+          "turniInMano" : 48307,
+          "turniMorta" : 0,
+          "turniFerma" : 36567
+        },
+        "base.com.MattoneDelCantiere" : {
+          "giocate" : 12466,
+          "partiteGiocata" : 12466,
+          "vinteGiocata" : 8603,
+          "perseGiocata" : 2421,
+          "partiteInMano" : 15995,
+          "turniInMano" : 37180,
+          "turniMorta" : 21733,
+          "turniFerma" : 2981
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 20283,
+          "turniInMano" : 69364,
+          "turniMorta" : 296,
+          "turniFerma" : 69068
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 22837,
+          "partiteGiocata" : 16672,
+          "vinteGiocata" : 10296,
+          "perseGiocata" : 4383,
+          "partiteInMano" : 20227,
+          "turniInMano" : 66359,
+          "turniMorta" : 29022,
+          "turniFerma" : 14500
+        },
+        "bruiser.Glare" : {
+          "giocate" : 30144,
+          "partiteGiocata" : 21195,
+          "vinteGiocata" : 14173,
+          "perseGiocata" : 4619,
+          "partiteInMano" : 21620,
+          "turniInMano" : 47195,
+          "turniMorta" : 0,
+          "turniFerma" : 17051
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 8641,
+          "partiteGiocata" : 8641,
+          "vinteGiocata" : 5982,
+          "perseGiocata" : 1622,
+          "partiteInMano" : 15674,
+          "turniInMano" : 53619,
+          "turniMorta" : 41452,
+          "turniFerma" : 3526
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 22549,
+          "partiteGiocata" : 17324,
+          "vinteGiocata" : 11970,
+          "perseGiocata" : 3449,
+          "partiteInMano" : 20713,
+          "turniInMano" : 86182,
+          "turniMorta" : 0,
+          "turniFerma" : 63633
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 26429,
+          "partiteGiocata" : 19395,
+          "vinteGiocata" : 12854,
+          "perseGiocata" : 4307,
+          "partiteInMano" : 21157,
+          "turniInMano" : 57399,
+          "turniMorta" : 24250,
+          "turniFerma" : 6720
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 17736,
+          "partiteGiocata" : 15910,
+          "vinteGiocata" : 11894,
+          "perseGiocata" : 2165,
+          "partiteInMano" : 21670,
+          "turniInMano" : 93411,
+          "turniMorta" : 75675,
+          "turniFerma" : 0
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 20348,
+          "turniInMano" : 70164,
+          "turniMorta" : 15382,
+          "turniFerma" : 54782
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 24000,
+          "turniInMano" : 224805,
+          "turniMorta" : 0,
+          "turniFerma" : 224805
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 65267,
+          "partiteGiocata" : 22507,
+          "vinteGiocata" : 14503,
+          "perseGiocata" : 5464,
+          "partiteInMano" : 24000,
+          "turniInMano" : 224805,
+          "turniMorta" : 0,
+          "turniFerma" : 159538
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 6887,
+          "partiteGiocata" : 6184,
+          "vinteGiocata" : 3532,
+          "perseGiocata" : 1811,
+          "partiteInMano" : 24000,
+          "turniInMano" : 224805,
+          "turniMorta" : 81415,
+          "turniFerma" : 136503
+        },
+        "com.last.Struggle" : {
+          "giocate" : 109,
+          "partiteGiocata" : 92,
+          "vinteGiocata" : 44,
+          "perseGiocata" : 6,
+          "partiteInMano" : 123,
+          "turniInMano" : 141,
+          "turniMorta" : 0,
+          "turniFerma" : 32
+        }
+      }
+    },
+    "starter-spazienzio / com" : {
+      "partite" : 24000,
+      "vittorie" : 7631,
+      "sconfitte" : 13936,
+      "patte" : 2433,
+      "limite" : 0,
+      "mazzoEsaurito" : 3315,
+      "lastResortArrivata" : 2120,
+      "lastResortTurniTotali" : 36327,
+      "lastResortMediana" : 17,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 7631,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 113563,
+        "T" : 13104,
+        "L" : 900,
+        "A" : 149941
+      },
+      "partitePerseConRisorse" : 13936,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 467874,
+        "T" : 28029,
+        "L" : 13936,
+        "A" : 236821
+      },
+      "carte" : {
+        "base.com.DentiStretti" : {
+          "giocate" : 9523,
+          "partiteGiocata" : 9523,
+          "vinteGiocata" : 3441,
+          "perseGiocata" : 4993,
+          "partiteInMano" : 18201,
+          "turniInMano" : 48418,
+          "turniMorta" : 0,
+          "turniFerma" : 38895
+        },
+        "base.com.MattoneDelCantiere" : {
+          "giocate" : 8011,
+          "partiteGiocata" : 8011,
+          "vinteGiocata" : 3200,
+          "perseGiocata" : 3816,
+          "partiteInMano" : 18371,
+          "turniInMano" : 54567,
+          "turniMorta" : 11442,
+          "turniFerma" : 35114
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 17824,
+          "partiteGiocata" : 14330,
+          "vinteGiocata" : 4609,
+          "perseGiocata" : 8145,
+          "partiteInMano" : 21804,
+          "turniInMano" : 89601,
+          "turniMorta" : 4441,
+          "turniFerma" : 67336
+        },
+        "bruiser.ExtremelyViolentBlow" : {
+          "giocate" : 17641,
+          "partiteGiocata" : 14351,
+          "vinteGiocata" : 4905,
+          "perseGiocata" : 7752,
+          "partiteInMano" : 22132,
+          "turniInMano" : 95564,
+          "turniMorta" : 11846,
+          "turniFerma" : 66077
+        },
+        "bruiser.Glare" : {
+          "giocate" : 18726,
+          "partiteGiocata" : 15092,
+          "vinteGiocata" : 5430,
+          "perseGiocata" : 7955,
+          "partiteInMano" : 22393,
+          "turniInMano" : 90426,
+          "turniMorta" : 0,
+          "turniFerma" : 71700
+        },
+        "bruiser.HealingBlow" : {
+          "giocate" : 7354,
+          "partiteGiocata" : 7354,
+          "vinteGiocata" : 3000,
+          "perseGiocata" : 3367,
+          "partiteInMano" : 18372,
+          "turniInMano" : 55522,
+          "turniMorta" : 17853,
+          "turniFerma" : 30315
+        },
+        "bruiser.MadeOfStone" : {
+          "giocate" : 19081,
+          "partiteGiocata" : 15049,
+          "vinteGiocata" : 5397,
+          "perseGiocata" : 7959,
+          "partiteInMano" : 22125,
+          "turniInMano" : 90201,
+          "turniMorta" : 0,
+          "turniFerma" : 71120
+        },
+        "bruiser.SeagullFly" : {
+          "giocate" : 16971,
+          "partiteGiocata" : 14077,
+          "vinteGiocata" : 5087,
+          "perseGiocata" : 7298,
+          "partiteInMano" : 22329,
+          "turniInMano" : 96385,
+          "turniMorta" : 11912,
+          "turniFerma" : 67502
+        },
+        "bruiser.SuperImpact" : {
+          "giocate" : 12459,
+          "partiteGiocata" : 11622,
+          "vinteGiocata" : 5591,
+          "perseGiocata" : 4480,
+          "partiteInMano" : 22541,
+          "turniInMano" : 111441,
+          "turniMorta" : 47116,
+          "turniFerma" : 51866
+        },
+        "bruiser.YouStop" : {
+          "giocate" : 17425,
+          "partiteGiocata" : 13695,
+          "vinteGiocata" : 4708,
+          "perseGiocata" : 7389,
+          "partiteInMano" : 21485,
+          "turniInMano" : 90382,
+          "turniMorta" : 5094,
+          "turniFerma" : 67863
+        },
+        "bruiser.character.LittleRage" : {
+          "giocate" : 59925,
+          "partiteGiocata" : 22103,
+          "vinteGiocata" : 6891,
+          "perseGiocata" : 12912,
+          "partiteInMano" : 24000,
+          "turniInMano" : 291326,
+          "turniMorta" : 555,
+          "turniFerma" : 230846
+        },
+        "bruiser.character.LittleSmack" : {
+          "giocate" : 59888,
+          "partiteGiocata" : 21816,
+          "vinteGiocata" : 6658,
+          "perseGiocata" : 12909,
+          "partiteInMano" : 24000,
+          "turniInMano" : 291326,
+          "turniMorta" : 555,
+          "turniFerma" : 230883
+        },
+        "com.basic.BruiserGrab" : {
+          "giocate" : 25328,
+          "partiteGiocata" : 19081,
+          "vinteGiocata" : 5931,
+          "perseGiocata" : 11068,
+          "partiteInMano" : 24000,
+          "turniInMano" : 291326,
+          "turniMorta" : 153024,
+          "turniFerma" : 112974
+        },
+        "com.last.Struggle" : {
+          "giocate" : 1170,
+          "partiteGiocata" : 980,
+          "vinteGiocata" : 321,
+          "perseGiocata" : 309,
+          "partiteInMano" : 2120,
+          "turniInMano" : 4166,
+          "turniMorta" : 0,
+          "turniFerma" : 2996
+        }
+      }
+    },
+    "starter-mara / aggressivo" : {
+      "partite" : 24000,
+      "vittorie" : 15677,
+      "sconfitte" : 5765,
+      "patte" : 2558,
+      "limite" : 0,
+      "mazzoEsaurito" : 1061,
+      "lastResortArrivata" : 500,
+      "lastResortTurniTotali" : 7601,
+      "lastResortMediana" : 15,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 15677,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 5259,
+        "L" : 0,
+        "A" : 733
+      },
+      "partitePerseConRisorse" : 5765,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 8382,
+        "L" : 0,
+        "A" : 32488
+      },
+      "carte" : {
+        "base.com.Spintone" : {
+          "giocate" : 34181,
+          "partiteGiocata" : 21908,
+          "vinteGiocata" : 14447,
+          "perseGiocata" : 5066,
+          "partiteInMano" : 22249,
+          "turniInMano" : 59169,
+          "turniMorta" : 0,
+          "turniFerma" : 24988
+        },
+        "base.com.SputoDaPosacenere" : {
+          "giocate" : 31982,
+          "partiteGiocata" : 21427,
+          "vinteGiocata" : 14224,
+          "perseGiocata" : 4882,
+          "partiteInMano" : 22305,
+          "turniInMano" : 49037,
+          "turniMorta" : 10211,
+          "turniFerma" : 6844
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 17200,
+          "turniInMano" : 84923,
+          "turniMorta" : 16994,
+          "turniFerma" : 67929
+        },
+        "base.mara.CinghiataDiTraverso" : {
+          "giocate" : 31860,
+          "partiteGiocata" : 21505,
+          "vinteGiocata" : 14210,
+          "perseGiocata" : 4939,
+          "partiteInMano" : 22354,
+          "turniInMano" : 48400,
+          "turniMorta" : 9687,
+          "turniFerma" : 6853
+        },
+        "base.mara.PresoAlVolo" : {
+          "giocate" : 13542,
+          "partiteGiocata" : 10023,
+          "vinteGiocata" : 5718,
+          "perseGiocata" : 3011,
+          "partiteInMano" : 24000,
+          "turniInMano" : 228580,
+          "turniMorta" : 35617,
+          "turniFerma" : 179421
+        },
+        "base.mara.Sgommata" : {
+          "giocate" : 31499,
+          "partiteGiocata" : 22430,
+          "vinteGiocata" : 15400,
+          "perseGiocata" : 4556,
+          "partiteInMano" : 23101,
+          "turniInMano" : 53337,
+          "turniMorta" : 21838,
+          "turniFerma" : 0
+        },
+        "base.mara.Slalom" : {
+          "giocate" : 14078,
+          "partiteGiocata" : 14078,
+          "vinteGiocata" : 8847,
+          "perseGiocata" : 3668,
+          "partiteInMano" : 17443,
+          "turniInMano" : 33434,
+          "turniMorta" : 10405,
+          "turniFerma" : 8951
+        },
+        "base.mara.SorpassoInCurva" : {
+          "giocate" : 31040,
+          "partiteGiocata" : 20059,
+          "vinteGiocata" : 13130,
+          "perseGiocata" : 4701,
+          "partiteInMano" : 21549,
+          "turniInMano" : 77657,
+          "turniMorta" : 0,
+          "turniFerma" : 46617
+        },
+        "base.mara.TraDueParaurti" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 21499,
+          "turniInMano" : 145258,
+          "turniMorta" : 29299,
+          "turniFerma" : 115959
+        },
+        "base.mara.bound.CambioMarcia" : {
+          "giocate" : 11306,
+          "partiteGiocata" : 9265,
+          "vinteGiocata" : 6361,
+          "perseGiocata" : 1739,
+          "partiteInMano" : 24000,
+          "turniInMano" : 228580,
+          "turniMorta" : 0,
+          "turniFerma" : 217274
+        },
+        "base.mara.bound.PassoStretto" : {
+          "giocate" : 28616,
+          "partiteGiocata" : 15892,
+          "vinteGiocata" : 10176,
+          "perseGiocata" : 3853,
+          "partiteInMano" : 24000,
+          "turniInMano" : 228580,
+          "turniMorta" : 0,
+          "turniFerma" : 199964
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 17207,
+          "turniInMano" : 85361,
+          "turniMorta" : 44683,
+          "turniFerma" : 40678
+        },
+        "com.last.Struggle" : {
+          "giocate" : 476,
+          "partiteGiocata" : 410,
+          "vinteGiocata" : 231,
+          "perseGiocata" : 29,
+          "partiteInMano" : 500,
+          "turniInMano" : 591,
+          "turniMorta" : 0,
+          "turniFerma" : 115
+        }
+      }
+    },
+    "starter-mara / prudente" : {
+      "partite" : 24000,
+      "vittorie" : 9701,
+      "sconfitte" : 11384,
+      "patte" : 2915,
+      "limite" : 0,
+      "mazzoEsaurito" : 5661,
+      "lastResortArrivata" : 3839,
+      "lastResortTurniTotali" : 63359,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 9701,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 16887,
+        "L" : 0,
+        "A" : -41377
+      },
+      "partitePerseConRisorse" : 11384,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 34881,
+        "L" : 0,
+        "A" : -46705
+      },
+      "carte" : {
+        "base.com.Spintone" : {
+          "giocate" : 39935,
+          "partiteGiocata" : 23080,
+          "vinteGiocata" : 9464,
+          "perseGiocata" : 10726,
+          "partiteInMano" : 23140,
+          "turniInMano" : 88448,
+          "turniMorta" : 0,
+          "turniFerma" : 48513
+        },
+        "base.com.SputoDaPosacenere" : {
+          "giocate" : 29185,
+          "partiteGiocata" : 20131,
+          "vinteGiocata" : 8710,
+          "perseGiocata" : 8933,
+          "partiteInMano" : 23139,
+          "turniInMano" : 86275,
+          "turniMorta" : 43676,
+          "turniFerma" : 13414
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 12551,
+          "partiteGiocata" : 12551,
+          "vinteGiocata" : 3942,
+          "perseGiocata" : 6905,
+          "partiteInMano" : 19356,
+          "turniInMano" : 51725,
+          "turniMorta" : 26150,
+          "turniFerma" : 13024
+        },
+        "base.mara.CinghiataDiTraverso" : {
+          "giocate" : 29222,
+          "partiteGiocata" : 20112,
+          "vinteGiocata" : 8665,
+          "perseGiocata" : 8953,
+          "partiteInMano" : 23180,
+          "turniInMano" : 84879,
+          "turniMorta" : 43325,
+          "turniFerma" : 12332
+        },
+        "base.mara.PresoAlVolo" : {
+          "giocate" : 43121,
+          "partiteGiocata" : 19350,
+          "vinteGiocata" : 6945,
+          "perseGiocata" : 9749,
+          "partiteInMano" : 24000,
+          "turniInMano" : 296269,
+          "turniMorta" : 69703,
+          "turniFerma" : 183445
+        },
+        "base.mara.Sgommata" : {
+          "giocate" : 22610,
+          "partiteGiocata" : 19023,
+          "vinteGiocata" : 8677,
+          "perseGiocata" : 7989,
+          "partiteInMano" : 23481,
+          "turniInMano" : 113146,
+          "turniMorta" : 90519,
+          "turniFerma" : 17
+        },
+        "base.mara.Slalom" : {
+          "giocate" : 10171,
+          "partiteGiocata" : 10171,
+          "vinteGiocata" : 3765,
+          "perseGiocata" : 5142,
+          "partiteInMano" : 19882,
+          "turniInMano" : 66169,
+          "turniMorta" : 38845,
+          "turniFerma" : 17153
+        },
+        "base.mara.SorpassoInCurva" : {
+          "giocate" : 35108,
+          "partiteGiocata" : 20686,
+          "vinteGiocata" : 8469,
+          "perseGiocata" : 9429,
+          "partiteInMano" : 22739,
+          "turniInMano" : 151228,
+          "turniMorta" : 0,
+          "turniFerma" : 116120
+        },
+        "base.mara.TraDueParaurti" : {
+          "giocate" : 25022,
+          "partiteGiocata" : 17727,
+          "vinteGiocata" : 5953,
+          "perseGiocata" : 9466,
+          "partiteInMano" : 22250,
+          "turniInMano" : 91169,
+          "turniMorta" : 44417,
+          "turniFerma" : 21730
+        },
+        "base.mara.bound.CambioMarcia" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 24000,
+          "turniInMano" : 296269,
+          "turniMorta" : 0,
+          "turniFerma" : 296269
+        },
+        "base.mara.bound.PassoStretto" : {
+          "giocate" : 44258,
+          "partiteGiocata" : 20871,
+          "vinteGiocata" : 8267,
+          "perseGiocata" : 9819,
+          "partiteInMano" : 24000,
+          "turniInMano" : 296269,
+          "turniMorta" : 0,
+          "turniFerma" : 252011
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 19767,
+          "turniInMano" : 69251,
+          "turniMorta" : 39209,
+          "turniFerma" : 30042
+        },
+        "com.last.Struggle" : {
+          "giocate" : 5086,
+          "partiteGiocata" : 3825,
+          "vinteGiocata" : 1689,
+          "perseGiocata" : 617,
+          "partiteInMano" : 3839,
+          "turniInMano" : 5164,
+          "turniMorta" : 0,
+          "turniFerma" : 78
+        }
+      }
+    },
+    "starter-mara / risorse" : {
+      "partite" : 24000,
+      "vittorie" : 13657,
+      "sconfitte" : 7813,
+      "patte" : 2530,
+      "limite" : 0,
+      "mazzoEsaurito" : 774,
+      "lastResortArrivata" : 331,
+      "lastResortTurniTotali" : 5384,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 13657,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 0,
+        "T" : 17505,
+        "L" : 0,
+        "A" : 48815
+      },
+      "partitePerseConRisorse" : 7813,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 0,
+        "T" : 20772,
+        "L" : 0,
+        "A" : 79514
+      },
+      "carte" : {
+        "base.com.Spintone" : {
+          "giocate" : 33801,
+          "partiteGiocata" : 21869,
+          "vinteGiocata" : 12624,
+          "perseGiocata" : 6870,
+          "partiteInMano" : 22100,
+          "turniInMano" : 65757,
+          "turniMorta" : 0,
+          "turniFerma" : 31956
+        },
+        "base.com.SputoDaPosacenere" : {
+          "giocate" : 32501,
+          "partiteGiocata" : 21521,
+          "vinteGiocata" : 12564,
+          "perseGiocata" : 6618,
+          "partiteInMano" : 22040,
+          "turniInMano" : 46447,
+          "turniMorta" : 8040,
+          "turniFerma" : 5906
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 16877,
+          "turniInMano" : 93642,
+          "turniMorta" : 13689,
+          "turniFerma" : 79953
+        },
+        "base.mara.CinghiataDiTraverso" : {
+          "giocate" : 32267,
+          "partiteGiocata" : 21482,
+          "vinteGiocata" : 12525,
+          "perseGiocata" : 6602,
+          "partiteInMano" : 21996,
+          "turniInMano" : 46063,
+          "turniMorta" : 8003,
+          "turniFerma" : 5793
+        },
+        "base.mara.PresoAlVolo" : {
+          "giocate" : 38797,
+          "partiteGiocata" : 21356,
+          "vinteGiocata" : 11740,
+          "perseGiocata" : 7261,
+          "partiteInMano" : 24000,
+          "turniInMano" : 246071,
+          "turniMorta" : 50398,
+          "turniFerma" : 156876
+        },
+        "base.mara.Sgommata" : {
+          "giocate" : 29298,
+          "partiteGiocata" : 21725,
+          "vinteGiocata" : 13333,
+          "perseGiocata" : 5978,
+          "partiteInMano" : 22705,
+          "turniInMano" : 54101,
+          "turniMorta" : 24803,
+          "turniFerma" : 0
+        },
+        "base.mara.Slalom" : {
+          "giocate" : 14537,
+          "partiteGiocata" : 14537,
+          "vinteGiocata" : 8196,
+          "perseGiocata" : 4754,
+          "partiteInMano" : 16938,
+          "turniInMano" : 33365,
+          "turniMorta" : 9558,
+          "turniFerma" : 9270
+        },
+        "base.mara.SorpassoInCurva" : {
+          "giocate" : 30602,
+          "partiteGiocata" : 19897,
+          "vinteGiocata" : 11422,
+          "perseGiocata" : 6309,
+          "partiteInMano" : 21370,
+          "turniInMano" : 88813,
+          "turniMorta" : 0,
+          "turniFerma" : 58211
+        },
+        "base.mara.TraDueParaurti" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 21353,
+          "turniInMano" : 159557,
+          "turniMorta" : 23532,
+          "turniFerma" : 136025
+        },
+        "base.mara.bound.CambioMarcia" : {
+          "giocate" : 9516,
+          "partiteGiocata" : 7399,
+          "vinteGiocata" : 4026,
+          "perseGiocata" : 2366,
+          "partiteInMano" : 24000,
+          "turniInMano" : 246071,
+          "turniMorta" : 0,
+          "turniFerma" : 236555
+        },
+        "base.mara.bound.PassoStretto" : {
+          "giocate" : 24412,
+          "partiteGiocata" : 15335,
+          "vinteGiocata" : 8592,
+          "perseGiocata" : 4931,
+          "partiteInMano" : 24000,
+          "turniInMano" : 246071,
+          "turniMorta" : 0,
+          "turniFerma" : 221659
+        },
+        "com.Steal" : {
+          "giocate" : 0,
+          "partiteGiocata" : 0,
+          "vinteGiocata" : 0,
+          "perseGiocata" : 0,
+          "partiteInMano" : 16902,
+          "turniInMano" : 94322,
+          "turniMorta" : 44464,
+          "turniFerma" : 49858
+        },
+        "com.last.Struggle" : {
+          "giocate" : 340,
+          "partiteGiocata" : 297,
+          "vinteGiocata" : 154,
+          "perseGiocata" : 17,
+          "partiteInMano" : 331,
+          "turniInMano" : 378,
+          "turniMorta" : 0,
+          "turniFerma" : 38
+        }
+      }
+    },
+    "starter-mara / com" : {
+      "partite" : 24000,
+      "vittorie" : 3549,
+      "sconfitte" : 18755,
+      "patte" : 1696,
+      "limite" : 0,
+      "mazzoEsaurito" : 7147,
+      "lastResortArrivata" : 5632,
+      "lastResortTurniTotali" : 88945,
+      "lastResortMediana" : 16,
+      "healthSpesa" : 0,
+      "mortiPagando" : 0,
+      "mortiPagandoSenzaUccidere" : 0,
+      "mortiPagandoSconfitte" : 0,
+      "mortiPagandoPatte" : 0,
+      "partiteVinteConRisorse" : 3549,
+      "risorseFinaliVincitoreTotali" : {
+        "V" : 108,
+        "T" : 7212,
+        "L" : 2,
+        "A" : 46060
+      },
+      "partitePerseConRisorse" : 18755,
+      "risorseFinaliPerdenteTotali" : {
+        "V" : 4968,
+        "T" : 35502,
+        "L" : 731,
+        "A" : 430877
+      },
+      "carte" : {
+        "base.com.Spintone" : {
+          "giocate" : 20692,
+          "partiteGiocata" : 16060,
+          "vinteGiocata" : 2847,
+          "perseGiocata" : 11849,
+          "partiteInMano" : 22939,
+          "turniInMano" : 107120,
+          "turniMorta" : 0,
+          "turniFerma" : 86428
+        },
+        "base.com.SputoDaPosacenere" : {
+          "giocate" : 18967,
+          "partiteGiocata" : 15182,
+          "vinteGiocata" : 2886,
+          "perseGiocata" : 10971,
+          "partiteInMano" : 22899,
+          "turniInMano" : 108900,
+          "turniMorta" : 8549,
+          "turniFerma" : 81384
+        },
+        "base.com.TartarugaSulMarciapiede" : {
+          "giocate" : 9540,
+          "partiteGiocata" : 9540,
+          "vinteGiocata" : 1469,
+          "perseGiocata" : 7243,
+          "partiteInMano" : 19602,
+          "turniInMano" : 56502,
+          "turniMorta" : 3954,
+          "turniFerma" : 43008
+        },
+        "base.mara.CinghiataDiTraverso" : {
+          "giocate" : 19402,
+          "partiteGiocata" : 15389,
+          "vinteGiocata" : 2842,
+          "perseGiocata" : 11209,
+          "partiteInMano" : 22947,
+          "turniInMano" : 106656,
+          "turniMorta" : 7841,
+          "turniFerma" : 79413
+        },
+        "base.mara.PresoAlVolo" : {
+          "giocate" : 40618,
+          "partiteGiocata" : 20100,
+          "vinteGiocata" : 3095,
+          "perseGiocata" : 15429,
+          "partiteInMano" : 24000,
+          "turniInMano" : 299867,
+          "turniMorta" : 74673,
+          "turniFerma" : 184576
+        },
+        "base.mara.Sgommata" : {
+          "giocate" : 17740,
+          "partiteGiocata" : 15029,
+          "vinteGiocata" : 3207,
+          "perseGiocata" : 10412,
+          "partiteInMano" : 23023,
+          "turniInMano" : 113789,
+          "turniMorta" : 20995,
+          "turniFerma" : 75054
+        },
+        "base.mara.Slalom" : {
+          "giocate" : 9157,
+          "partiteGiocata" : 9157,
+          "vinteGiocata" : 1975,
+          "perseGiocata" : 6298,
+          "partiteInMano" : 19872,
+          "turniInMano" : 60980,
+          "turniMorta" : 7765,
+          "turniFerma" : 44058
+        },
+        "base.mara.SorpassoInCurva" : {
+          "giocate" : 20444,
+          "partiteGiocata" : 15770,
+          "vinteGiocata" : 2713,
+          "perseGiocata" : 11647,
+          "partiteInMano" : 22729,
+          "turniInMano" : 102483,
+          "turniMorta" : 0,
+          "turniFerma" : 82039
+        },
+        "base.mara.TraDueParaurti" : {
+          "giocate" : 18904,
+          "partiteGiocata" : 14939,
+          "vinteGiocata" : 2349,
+          "perseGiocata" : 11312,
+          "partiteInMano" : 22522,
+          "turniInMano" : 104453,
+          "turniMorta" : 7471,
+          "turniFerma" : 78078
+        },
+        "base.mara.bound.CambioMarcia" : {
+          "giocate" : 56699,
+          "partiteGiocata" : 22221,
+          "vinteGiocata" : 3361,
+          "perseGiocata" : 17187,
+          "partiteInMano" : 24000,
+          "turniInMano" : 299867,
+          "turniMorta" : 2544,
+          "turniFerma" : 240624
+        },
+        "base.mara.bound.PassoStretto" : {
+          "giocate" : 56467,
+          "partiteGiocata" : 21822,
+          "vinteGiocata" : 3240,
+          "perseGiocata" : 16976,
+          "partiteInMano" : 24000,
+          "turniInMano" : 299867,
+          "turniMorta" : 2544,
+          "turniFerma" : 240856
+        },
+        "com.Steal" : {
+          "giocate" : 7227,
+          "partiteGiocata" : 7227,
+          "vinteGiocata" : 726,
+          "perseGiocata" : 5988,
+          "partiteInMano" : 19938,
+          "turniInMano" : 67892,
+          "turniMorta" : 27227,
+          "turniFerma" : 33438
+        },
+        "com.last.Struggle" : {
+          "giocate" : 4010,
+          "partiteGiocata" : 3114,
+          "vinteGiocata" : 906,
+          "perseGiocata" : 1261,
+          "partiteInMano" : 5632,
+          "turniInMano" : 13761,
+          "turniMorta" : 0,
+          "turniFerma" : 9751
+        }
+      }
+    }
+  },
+  "tettoBound" : [
+    {
+      "bound" : "base.mara.bound.CambioMarcia",
+      "personaggio" : "base.character.Mara",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "guadagni" : {
+        "A" : 64,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "base.mara.bound.ColpoDiStriscio",
+      "personaggio" : "base.character.Mara",
+      "usi" : 8,
+      "valore" : [
+        2.6667,
+        2.6667,
+        2.6667,
+        2.6667,
+        2.6667,
+        2.6667,
+        2.6667,
+        2.6667
+      ],
+      "danno" : [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 2.6667,
+      "medio" : 2.6667,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "base.mara.bound.PassoStretto",
+      "personaggio" : "base.character.Mara",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "base.spazienzio.bound.TestaAlMuro",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        -3,
+        -3,
+        -3,
+        -3,
+        -3,
+        -3,
+        -3,
+        -3
+      ],
+      "guadagniPesati" : [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 64,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3,
+      "medio" : 3,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "bruiser.character.LittleRage",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "danno" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75,
+        3.75
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 4E+1,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 3.75,
+      "medio" : 3.75,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    },
+    {
+      "bound" : "bruiser.character.LittleSmack",
+      "personaggio" : "bruiser.character.BigBadBruiser",
+      "usi" : 8,
+      "valore" : [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "danno" : [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parato" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "saluteSua" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagniPesati" : [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "guadagni" : {
+        "A" : 0,
+        "V" : 0,
+        "T" : 0,
+        "L" : 0
+      },
+      "massimo" : 4,
+      "medio" : 4,
+      "restaSullAvversario" : [ ],
+      "note" : [ ],
+      "viola" : false,
+      "motivi" : ""
+    }
+  ]
+}

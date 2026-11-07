@@ -2,5 +2,5 @@ banco sb-10a/1
 misure costo+tipo+salute+tettostarter
 thread 8
 partite 679200
-secondi 339.7
-millisecondi per partita (tempo reale) 0.5002
+secondi 279.1
+millisecondi per partita (tempo reale) 0.4109

@@ -185,7 +185,8 @@ class SetBaseDraftTest {
     }
 
     /**
-     * SB-12a, tre giri coi bot: salute iniziale di Spazienzio 85 e di Mara 80, costi di Mara −5 A su cinque carte (D38), Sgommata 25 CUT.
+     * SB-12a, tre giri coi bot: salute iniziale di Spazienzio 85 e di Mara 80, costi di Mara −5 A su cinque carte (D38), Sgommata 25 CUT;
+     * poi, con l'approvazione del proprietario, Cambio marcia +6 A.
      * I numeri dei giri stanno nel rapporto; qui si controlla che la bozza porti i valori scelti, testi compresi, perché i bot leggono il
      * danno nominale da gui.damageAmount.
      */
@@ -205,6 +206,11 @@ class SetBaseDraftTest {
         assertEquals(25, sgommata.get("target").get(0).get("amount").asInt());
         assertEquals("CUT 25", sgommata.get("gui").get("damageAmount").asText());
         assertTrue(sgommata.get("gui").get("description").asText().contains("25 CUT"));
+        // B2 approvata dal proprietario dopo SB-12a: Cambio marcia +6 A (circa 3,3 HEALTH equivalenti per uso invece di 4,5).
+        JsonNode cambio = card("base.mara.bound.CambioMarcia");
+        assertEquals(6, cambio.get("self").get(0).get("amount").asInt());
+        assertEquals("+6 A", cambio.get("gui").get("gains").asText());
+        assertTrue(cambio.get("gui").get("description").asText().contains("+6 A"));
     }
 
     /** La base del listino ricavata dalla bozza: contesti con le àncore al posto di due coppie di generiche, starter intatti. */

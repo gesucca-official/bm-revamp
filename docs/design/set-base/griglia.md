@@ -3,7 +3,7 @@
 > **Stato: approvata dal proprietario il 6 novembre 2026** (SB-10b). Principi della fase A e griglia della fase B, ciascuno con le
 > parole «Approvo tutte»: vedi [Decisioni del proprietario](#decisioni-del-proprietario). Dopo la misura del tetto in partita il
 > proprietario ha scelto il tetto 3 per le bound di danno («Sì, danno a 3», D36): vedi [Tetto in partita](#tetto-in-partita).
-> SB-12a ha corretto coi bot alcuni numeri degli starter base: vedi [Correzioni di SB-12a](#correzioni-di-sb-12a).
+> SB-12a ha corretto coi bot alcuni numeri degli starter base, approvati dal proprietario: vedi [Correzioni di SB-12a](#correzioni-di-sb-12a).
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -112,7 +112,7 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | SPA-BO2 | Spazienzio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Spazienzio | `LittleSmack`, riprogettata: tolti +5 A | Colpetto; oggi 7,5 unità e +0,1 HEALTH per uso | dati |
 | SPA-BO3 | Spazienzio | Azione, bound | RESOURCES | 0 | 3 HIT a sé, +8 V a sé | 3 (6 − 3) | NC | — | da inventare («TESTA AL MURO», SB-11b) | Variante: carica più forte, pagata con la salute | dati |
 | MAR-BO1 | Mara | Azione, bound | DAMAGE | 1 | 3 CUT | 4 | C | Mara | bozza «Passo stretto», senza +5 A | Colpetto | dati |
-| MAR-BO2 | Mara | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | C | Mara | da inventare («Cambio marcia») | Generatrice: Mara paga tutto in A (decisione B2) | dati |
+| MAR-BO2 | Mara | Azione, bound | RESOURCES | 0 | ~~+8~~ +6 A a sé⁴ | ~~4~~ 3 | C | Mara | da inventare («Cambio marcia») | Generatrice: Mara paga tutto in A (decisione B2) | dati |
 | MAR-BO3 | Mara | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | prova «Colpo di striscio», 5 → 2 CUT | Variante veloce | dati |
 | TOS-BO1 | Tossico | Azione, bound | DAMAGE | 1 | 3 CUT | 4 | C | Tossico | `PatheticBlade`, riprogettata: niente T a sé né al bersaglio | Colpetto; oggi si accumula e lascia T +40 | dati |
 | TOS-BO2 | Tossico | Azione, bound | RESOURCES | 0 | +10 T a sé | 1,5 | C | Tossico | da inventare («Raschiare il fondo») | Generatrice di carburante; +10 per la decisione 4, anche se il tetto ammetterebbe +26 | dati |
@@ -129,6 +129,10 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | ROC-BO1 | Rocco | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
 | ROC-BO2 | Rocco | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
 | ROC-BO3 | Rocco | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Rocco ha la A più bassa | dati |
+
+⁴ **SB-12a, dopo il giro 3, decisione del proprietario** ([correzioni](#correzioni-di-sb-12a), D41): MAR-BO2 da +8 a +6 A. Sugli
+starter corretti la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 scelto da D38 per Mara; la +6 A circa 3,3, col
+matchup quasi fermo.
 
 ### Last resort (4)
 
@@ -612,9 +616,11 @@ numeri). Ogni numero cambiato, col giro e il motivo; il resto della griglia non 
 | MAR-AR4 Paraurti | costo | 10 A | 5 A | 1 | D38 |
 | MAR-AR5 Slalom | costo | 15 A | 10 A | 1 | D38 |
 | GEN-17 Sputo | costo | 10 A | 5 A | 1 | D38 |
+| MAR-BO2 Cambio marcia | guadagno | +8 A | +6 A | dopo il giro 3, decisione del proprietario | B2 valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4; con +6 A circa 3,3 |
 
-Esito sui bot: Spazienzio contro Mara **0,520** [0,514–0,525] (0,476 senza il bot attuale), partite di 11,1–11,3 turni, mazzi esauriti
-10–15%, invarianti a zero. Steal, le difese e le contromosse restano come sono: le varianti mostrano che sono i bot a giocarle male.
+Esito sui bot, con Cambio marcia a +6 A: Spazienzio contro Mara **0,525** [0,520–0,531] (0,479 senza il bot attuale), partite di 11,3
+turni, mazzi esauriti 10–16%, invarianti a zero, tutte le bound entro 4 HEALTH equivalenti per uso. Steal, le difese e le contromosse
+restano come sono: le varianti mostrano che sono i bot a giocarle male. Correzioni approvate dal proprietario («Approvo, anche +6 A», D41).
 
 ## Tetto in partita
 
@@ -646,7 +652,7 @@ griglia, con le cinque domande sotto): «Approvo tutte». Valgono quindi tutte l
 | Decisione | Contenuto | Dove |
 |---|---|---|
 | B1 | PIN-AR2 e LR-PIN spendono tutta la L con **una classe Java** che memorizza, azzera e colpisce, come `ToxicBloodDrain` | Griglia, SB-14 |
-| B2 | **MAR-BO2 (+8 A) nello starter di Mara**, misurata in SB-11; la variante veloce di danno (oggi 2 CUT a priorità 2, D36) come alternativa pronta | Griglia, SB-11 |
+| B2 | **MAR-BO2 (+8 A) nello starter di Mara**, misurata in SB-11; la variante veloce di danno (oggi 2 CUT a priorità 2, D36) come alternativa pronta. **Precisata dopo SB-12a** («Approvo, anche +6 A», D41): resta nello starter a **+6 A** | Griglia, SB-11, SB-12a |
 | B3 | Rarità dell'archetipo **20, 10, 7**; totali 54, 41, 20 | Griglia |
 | B4 | **Giubbotto e Posacenere negli starter base:** il passo `equip` serve da SB-11 | Griglia, SB-11 |
 | B5 | **Una classe Java nuova per GIG-AR5** («Lavoro fatto bene») | Griglia, SB-15 |

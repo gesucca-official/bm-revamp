@@ -88,3 +88,16 @@ Base: il giro 2 col testo coerente (`giro2t`, 0,500 a 2000 per cella, ma 0,450 s
 
 Scelta: **Sgommata 25** (giro 3). Il punto medio fra le due letture va a circa 0,50, la durata non cambia; è il ritocco più piccolo sulla
 carta che il giro 1 aveva già spostato.
+
+## Dopo il giro 3: Cambio marcia +6 A
+
+Base: la bozza del giro 3 (`441b1ecd…ef4841cf4`). La misura di D36 e B2 trova MAR-BO2 (+8 A) a circa 4,5 HEALTH equivalenti per uso, sopra
+il tetto di 4. Variante proposta al proprietario e **approvata** («Approvo, anche +6 A»): è il contenuto della bozza finale.
+
+| Variante | Modifica | SHA-256 | Quattro stili | Senza com | Turni S–S / S–M / M–M |
+|---|---|---|---:|---:|---|
+| r3c-sgom25 (= giro 3) | — | `fef7e190…afe8dd8e` | 0,522 | 0,484 | 11,4 / 11,3 / 11,2 |
+| **q-cambio6** | **Cambio marcia +8 → +6 A**, con `gains` e `description` | `f7dd999d…7c99efee` | **0,528** [0,520–0,536] | **0,487** | 11,4 / 11,3 / 11,3 |
+
+Tetto sugli starter veri (`tettostarter`, 2000 partite per stile, tre stili): +6 A a 0,679 [0,666–0,691] con 1,64 giocate a partita,
+circa 3,3 HEALTH equivalenti per uso.
