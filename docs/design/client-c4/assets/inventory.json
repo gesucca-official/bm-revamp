@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "date": "2026-11-04",
-  "block": "C4-5a",
+  "version": 3,
+  "date": "2026-11-06",
+  "block": "C4-7-bis",
   "rule": "Regola 10 del piano C4: nessun asset senza provenienza e licenza. Ogni file di client-web/public/ ha una voce qui con la stessa impronta SHA-256; tests/assets.test.ts fallisce per un file non registrato o con impronta diversa.",
   "thirdParty": true,
   "files": [
@@ -164,18 +164,6 @@
       "bytes": 8968
     },
     {
-      "file": "audio/confirmation_002.ogg",
-      "kind": "audio",
-      "author": "Kenney",
-      "url": "https://kenney.nl/assets/interface-sounds",
-      "version": "1.0 (2020)",
-      "license": "CC0 1.0",
-      "modifications": "Nessuna: file OGG originale dal pacchetto ufficiale",
-      "destination": "Suoni locali del tavolo",
-      "sha256": "33b17a9a9a2397c62b285c52c33a907fdffb476909c99e42dde603f6a7a8b12c",
-      "bytes": 14169
-    },
-    {
       "file": "audio/drop_004.ogg",
       "kind": "audio",
       "author": "Kenney",
@@ -198,6 +186,30 @@
       "destination": "Suoni locali del tavolo",
       "sha256": "46e67425d16339772e8d328fb36a49426c9467418686e11beeb71ff84b0f6433",
       "bytes": 7373
+    },
+    {
+      "file": "audio/jingles_SAX10.ogg",
+      "kind": "audio",
+      "author": "Kenney (Kenney Vleugels)",
+      "url": "https://kenney.nl/assets/music-jingles",
+      "version": "Music Jingles 1.0 (2014); pacchetto scaricato il 6 novembre 2026, 1.239.525 byte, SHA-256 b729ba57959bd58793d2c5cafa348aaf2655d354f3da35ec4729e03ec77197b8",
+      "license": "CC0 1.0 (License.txt incluso nel pacchetto)",
+      "modifications": "Nessuna: file OGG originale dal pacchetto ufficiale (cartella Audio/Sax jingles)",
+      "destination": "Suono d'esito del tavolo: vittoria (C4-7-bis)",
+      "sha256": "ee9092e858526e3638f7a639f25c2218f14432466c3e4dd7e1e84073925390ae",
+      "bytes": 13565
+    },
+    {
+      "file": "audio/jingles_SAX07.ogg",
+      "kind": "audio",
+      "author": "Kenney (Kenney Vleugels)",
+      "url": "https://kenney.nl/assets/music-jingles",
+      "version": "Music Jingles 1.0 (2014); pacchetto scaricato il 6 novembre 2026, 1.239.525 byte, SHA-256 b729ba57959bd58793d2c5cafa348aaf2655d354f3da35ec4729e03ec77197b8",
+      "license": "CC0 1.0 (License.txt incluso nel pacchetto)",
+      "modifications": "Nessuna: file OGG originale dal pacchetto ufficiale (cartella Audio/Sax jingles)",
+      "destination": "Suono d'esito del tavolo: sconfitta e pareggio (C4-7-bis)",
+      "sha256": "241c8570fbded819ee0205e4be3efa80aeb834a70df89318da88f9e219798b11",
+      "bytes": 30900
     }
   ],
   "fonts": {

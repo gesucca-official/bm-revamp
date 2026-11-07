@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-07T12:32:00.998Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "test",
+    "build",
+    "size",
+    "resolution"
+  ],
+  "build": {
+    "head": "5184838c74174f283ab50314ea730e647afd119f",
+    "dirtyPaths": [
+      "M client-web/package.json",
+      " M client-web/src/public.tsx",
+      " M client-web/src/resolution.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/sound.ts",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/check-audio-probe.mjs",
+      " M client-web/tools/verify-audio-probe.mjs",
+      "?? client-web/tools/verify-outcome-audio.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-06T10:35:27.782Z",
+      "bytes": 50742155,
+      "sha256_16": "d87271aa76a07c8d",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 27,
+      "sha256_16": "6e2118f9db75c721"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 7,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 1,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 137,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 191,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "STALE JAR: server/src has files newer than the jar (2026-11-06T16:36:13.565Z > 2026-11-06T10:35:27.782Z); face-of-card checks may pass on nothing.",
+    "Working tree has uncommitted changes in verified paths: M client-web/package.json;  M client-web/src/public.tsx;  M client-web/src/resolution.ts;  M client-web/src/scene.ts;  M client-web/src/sound.ts;  M client-web/src/table.tsx"
+  ]
+}

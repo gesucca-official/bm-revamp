@@ -1,0 +1,24 @@
+{
+ "date": "2026-11-06",
+ "what": "tests/outcome-sound.test.ts run on copies of src outside the repository with one change each, then the copies discarded; the repository was not modified",
+ "base": {"pass": 4, "fail": 0},
+ "mutations": [
+  {
+   "name": "tap-drop (cause a, ffb9c2d semantics: a tap that reaches or jumps over the cue drops it)",
+   "file": "src/sound.ts",
+   "from": "advance(next:number,total:number){if(this.cue&&(this.cue.at<=next||next>=total))this.fire();}",
+   "to": "advance(next:number,total:number){if(this.cue&&(this.cue.at<=next||next>=total))this.cue=null;}",
+   "pass": 2, "fail": 2,
+   "failed": ["avanzando col tocco fino alla fine, l'esito suona una volta, da qualunque punto si cominci", "salto, interruzione e fine dopo una scelta di carta"]
+  },
+  {
+   "name": "tail-end (cause b, ffb9c2d timing: outcome at total - 700 ms)",
+   "file": "src/resolution.ts",
+   "from": "return {at: m ? hitAt(m) : t.pace.tail.at, kind: ...}",
+   "to": "return {at: t.pace.total - 700, kind: ...}",
+   "pass": 3, "fail": 1,
+   "failed": ["l'esito sul colpo decisivo, altrimenti all'inizio della coda"]
+  }
+ ],
+ "note": "On ffb9c2d itself the new tests do not load: decisiveMove, roundCue and RoundCue do not exist there. The mutations reproduce its two semantics on the new code."
+}

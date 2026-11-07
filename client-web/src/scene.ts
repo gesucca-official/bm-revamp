@@ -1,4 +1,4 @@
-import type {Sounds} from './sound.ts';
+import {RoundCue,type Sounds} from './sound.ts';
 import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
 import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
@@ -6,7 +6,7 @@ import {handCardState} from './readability.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,roundCue,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
@@ -69,7 +69,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
   // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
   sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0,
   // C3-2 revision (D12): planned length of each sequence and taps that moved it to the next card.
-  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>;pace?:Pace}[],advances:0,
+  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>;pace?:Pace;cue?:{at:number;kind:string}|null;started?:number}[],advances:0,
   // C3-4: what each sequence animated (counted on the nodes built), the bar mode and, for the totals, why.
   beats:[] as {key:string;bars:'per-card'|'total';reason:string|null;drift:number;played:number;drops:number;stamps:number;tokens:number;objects:number;consumed:number;passed:number;broken:number;discards:number;draws:number;endOfTurn:number;emphasis:number;steps:number;pops:number;closeUps:number;targetUps:number}[],
   // C3-4 revision (D13): when each beat of each card starts as the scene scheduled it, and where each close-up went.
@@ -91,7 +91,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
  private advancesAtStart=0;private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private shakes:Shake[]=[];private pace:Pace|null=null;
  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
- display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void;audio?:boolean}[]=[];private plan:Timeline|null=null;
+ display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
  layout:TableLayout|null=null;
  /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
  brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
@@ -545,7 +545,6 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    this.flights.push({node:fly,from:{x:from.x,y:from.y-(C?20:34)},to,start:P.flight.at,end,appear:0,fly:(hit-P.flight.at)/(end-P.flight.at),after:slot??discard(m.author)??undefined,land:slot?slot.w/mw:undefined});this.stats.flights++;count.drops++;
    if(slot){count.played++;this.events.push({at:end,run:()=>{this.landed=Math.max(this.landed,i+1);}});}
    const after=end-hit;
-   if(!T.outcome&&i===0)this.events.push({at:hit,audio:true,run:()=>{if(this.seqStarted&&this.seqKey===k)this.sounds?.round(k,'impact');}});
    // C3-5: a card that resolves makes the impact of its type of damage (A1) or, where none applies, of its role (D2): the nature of the card, not the
    // damage dealt (a conversion is not visible). A voided one gets a cross and the stamp.
    if(m.void){const cross=add(this.impactMark('VOID',C));cross.position.set(to.x,to.y);this.accents.push({node:cross,at:hit,dur:after,kind:'impact',impact:'VOID',y:to.y});
@@ -590,15 +589,18 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:tailEnd-p.tail.at,kind:'stamp'});count.emphasis++;
    if(e.kind==='died'){const ring=add(new Graphics().roundRect(-s.w*.6,-s.h*.6,s.w*1.2,s.h*1.2,10).stroke({color:WINE,width:5}));ring.position.set(s.x,s.y);this.accents.push({node:ring,at:p.tail.at,dur:Math.min(600,tailEnd-p.tail.at)});this.shakes.push({id:e.seat,at:p.tail.at,dur:420,amp:C?3:5});}
    this.stats.emphasis.push({key:k,kind:e.kind,seat:e.seat});}
-  if(T.outcome){this.events.push({at:tailEnd,audio:true,run:()=>{if(this.seqStarted&&this.seqKey===k)this.sounds?.round(k,'outcome');}});const me=this.model.me,w=T.outcome.winner,text=w==='NONE'?'PAREGGIO':w===me?'VITTORIA':'SCONFITTA',banner=add(this.stamp(text,C,2));banner.position.set(this.width/2,this.height*.42);
+  if(T.outcome){const me=this.model.me,w=T.outcome.winner,text=w==='NONE'?'PAREGGIO':w===me?'VITTORIA':'SCONFITTA',banner=add(this.stamp(text,C,2));banner.position.set(this.width/2,this.height*.42);
    this.accents.push({node:banner,at:tailEnd,dur:PACE.outcome,kind:'stamp'});this.stats.emphasis.push({key:k,kind:'outcome',text});}
   this.events.sort((a,b)=>a.at-b.at);
   // The labels stay over the close-ups they may outlive.
   for(const a of this.accents)if(a.kind==='pop')this.fx.addChild(a.node);
   this.stats.beats.push({key:k,bars:T.bars,reason:T.reason,drift:T.drift,...count});
-  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p});
+
   this.stats.flown.push(flown);this.advancesAtStart=this.stats.advances;
-  this.staged=shown;this.sounds?.beginRound(k);this.seqStarted=performance.now();this.stats.sequences++;this.draw();
+  // C4-7-bis: one sound per round, on the sequence clock (impact, or the outcome on the decisive card).
+  const cue=roundCue(T,this.model.me);
+  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p,cue,started:Math.round(performance.now())});
+  this.staged=shown;this.sounds?.beginRound(k);this.cue.arm(k,cue);this.trace({type:'begin',key:k,cue:cue?.kind??null,at:cue?Math.round(cue.at):null});this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
 /** C3-5: the mark of one impact, vector only (D9): a burst for a blow, a slash for a cut, a drop for poison, the symbol of its role in a ring where the type does not apply, a cross for a voided move. */
  // The blow's shock wave: a ring with a soft disc that grows and fades like an explosion, under the burst (owner trial, C3-7).
@@ -631,14 +633,19 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   c.position.set(box.x,box.y);c.visible=false;this.fx.addChild(c);const entry:Label={seat:s.seat,resource:s.resource,box,from:Math.round(at),to:Math.round(at+dur),first:0,last:0,end:0,gap:0};this.labels.push(entry);
   this.accents.push({node:c,at,dur,kind:'pop',label:entry});this.stats.aggregateDeltas++;return true;}
  get sequenceRunning(){return !!this.seqStarted;}
+ private readonly cue=new RoundCue({round:(key,kind)=>this.sounds?.round(key,kind)??false});
+ /** Verification only (C4-7-bis): a probe may set `window.__bmAudioTrace` to follow the sequences; absent, nothing happens. */
+ private trace(e:Record<string,unknown>){try{(window as unknown as {__bmAudioTrace?:(e:Record<string,unknown>)=>void}).__bmAudioTrace?.(e);}catch{}}
  /** D12: a tap on the table during the sequence moves it to the next card; past the last one it ends. */
  advance(){if(!this.seqStarted||!this.pace)return false;const elapsed=performance.now()-this.seqStarted,next=nextStop(this.pace,elapsed);
-  this.stats.advances++;this.events=this.events.filter(e=>!e.audio||e.at<=elapsed||e.at>next);if(next>=this.pace.total){this.finish('input');return true;}this.seqStarted-=next-elapsed;return true;}
+  this.stats.advances++;this.cue.advance(next,this.pace.total);if(next>=this.pace.total){this.finish('input');return true;}this.seqStarted-=next-elapsed;return true;}
  /** Brings a running sequence to the final state (the view is already drawn); the static summary stays. */
- finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.stopEffects();if(redraw){this.draw();this.onState();}}
+ finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.cue.end(reason);this.trace({type:'end',key:this.seqKey,reason});
+  // A sound started by the end itself or just before it plays on; a jump or an interruption silences it.
+  this.stopEffects(reason==='complete'||reason==='input');if(redraw){this.draw();this.onState();}}
  /** «Salta effetti». */
  skip(){this.finish('skip');}
- stopEffects(){this.sounds?.endRound();if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
+ stopEffects(keepSound=false){this.cue.end('stop');this.sounds?.endRound(!keepSound);if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
   this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private lastTick=0;
@@ -651,6 +658,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   if(this.seqStarted&&this.pace){const t=now-this.seqStarted,P=this.pace;if(t>=P.total)this.finish('complete');else{
    // Board steps reached (also several at once after a tap): applied, then one redraw.
    let due=0;while(due<this.events.length&&this.events[due].at<=t)due++;if(due){this.events.splice(0,due).forEach(e=>e.run());this.draw();}
+   this.cue.tick(t);
    this.flights.forEach(f=>{const d=f.end-f.start,p=(t-f.start)/d;f.node.visible=p>=0&&p<=1;if(!f.node.visible)return;
     if(f.tag&&!f.seen){f.seen=true;const n=this.stats.flown.at(-1);if(n){n.seen[f.tag]++;if(f.also)n.seen[f.also]++;}}
     if(f.appear!==undefined){const a=f.appear,fly=f.fly??.72;
@@ -685,5 +693,5 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  }
  startMeasure(){this.stats.frames=[];this.stats.inputMs=[];this.tickPrev=0;this.measure=true;}
  endMeasure(){this.measure=false;return this.stats;}
- destroy(){clearTimeout(this.resizeTimer);this.disposeFns.forEach(fn=>fn());[...this.retired,...this.retiring].forEach(c=>c.destroy({children:true}));this.retired=[];this.retiring=[];this.app.destroy(true,{children:true});}
+ destroy(){if(this.seqStarted)this.trace({type:'end',key:this.seqKey,reason:'destroy'});clearTimeout(this.resizeTimer);this.disposeFns.forEach(fn=>fn());[...this.retired,...this.retiring].forEach(c=>c.destroy({children:true}));this.retired=[];this.retiring=[];this.app.destroy(true,{children:true});}
 }

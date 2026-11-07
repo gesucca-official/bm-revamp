@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','VerifyLayout','VerifyAll','Size','Atlas')][string]$Task='Build',[switch]$Offline,[switch]$Quick,[switch]$ReuseJar,[switch]$ReuseClient,[string]$Measures,[string]$Only,[string]$Publish)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','VerifyLayout','VerifyOutcomeAudio','VerifyAll','Size','Atlas')][string]$Task='Build',[switch]$Offline,[switch]$Quick,[switch]$ReuseJar,[switch]$ReuseClient,[string]$Measures,[string]$Only,[string]$Publish)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -35,6 +35,8 @@ try {
     'VerifyAim' {& npm run verify:aim}
     # C3-L: table geometry (own character larger, own piles in the middle, sizes, overlaps, close-ups) in the duel and the five-seat FFA on its own temporary server (port 8080 free, Serve running).
     'VerifyLayout' {& npm run verify:layout}
+    # C4-7-bis: outcome sound on quick 1v1 games (devAlice and devBob, a win and a loss per game) on its own temporary server (port 8080 free, Serve running); sounds counted only with the audio probe (README).
+    'VerifyOutcomeAudio' {& npm run verify:outcome-audio}
     # C4-1 (O23): whole verification in one launch, in series, on a rebuilt jar; see README «Lancio unico».
     # -Quick: reduced scenarios, one measure, NOT equivalent to the consolidation. -ReuseJar / -ReuseClient: declared, not rebuilt/not mine.
     # -Measures 1366x768,844x390  -Only verify,modes,...  -Publish docs/reports/<dir> (copies evidence only after a complete green run).

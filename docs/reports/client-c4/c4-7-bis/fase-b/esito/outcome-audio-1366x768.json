@@ -1,0 +1,173 @@
+{
+ "date": "2026-11-07T12:36:56.670Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": "1366x768",
+ "kind": "automated browser run on PC (Edge via Playwright), quick 1v1 between two accounts on a temporary database; not a physical device",
+ "games": [
+  {
+   "game": 1,
+   "turns": 17,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "wait",
+     "key": "f8a8149b203cf97d73df6d95e2c01532d32cb62cdf1847fb0b644a4aaf75131a/17",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "win"
+     },
+     "total": 10350,
+     "end": {
+      "key": "f8a8149b203cf97d73df6d95e2c01532d32cb62cdf1847fb0b644a4aaf75131a/17",
+      "reason": "complete",
+      "ms": 10358
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "tapAll",
+     "key": "f8a8149b203cf97d73df6d95e2c01532d32cb62cdf1847fb0b644a4aaf75131a/17",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "taps": 16,
+     "end": {
+      "key": "f8a8149b203cf97d73df6d95e2c01532d32cb62cdf1847fb0b644a4aaf75131a/17",
+      "reason": "input",
+      "ms": 8957
+     }
+    }
+   ]
+  },
+  {
+   "game": 2,
+   "turns": 14,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "tapAll",
+     "key": "e7ad687f7215eb5bc036a29ccf1c85e72a5db5c3560eb3f0cf8ea24a45d690e5/14",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "taps": 16,
+     "end": {
+      "key": "e7ad687f7215eb5bc036a29ccf1c85e72a5db5c3560eb3f0cf8ea24a45d690e5/14",
+      "reason": "input",
+      "ms": 8950
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "wait",
+     "key": "e7ad687f7215eb5bc036a29ccf1c85e72a5db5c3560eb3f0cf8ea24a45d690e5/14",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "win"
+     },
+     "total": 10350,
+     "end": {
+      "key": "e7ad687f7215eb5bc036a29ccf1c85e72a5db5c3560eb3f0cf8ea24a45d690e5/14",
+      "reason": "complete",
+      "ms": 10354
+     }
+    }
+   ]
+  },
+  {
+   "game": 3,
+   "turns": 12,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "tapCross",
+     "key": "49c125c4e470d48f6562711b0fd7d7aa2664b9c53e7b18da61597fca73c46426/12",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "tapAt": 8659,
+     "end": {
+      "key": "49c125c4e470d48f6562711b0fd7d7aa2664b9c53e7b18da61597fca73c46426/12",
+      "reason": "complete",
+      "ms": 10354
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "skip",
+     "key": "49c125c4e470d48f6562711b0fd7d7aa2664b9c53e7b18da61597fca73c46426/12",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "win"
+     },
+     "total": 10350,
+     "end": {
+      "key": "49c125c4e470d48f6562711b0fd7d7aa2664b9c53e7b18da61597fca73c46426/12",
+      "reason": "skip",
+      "ms": 370
+     }
+    }
+   ]
+  },
+  {
+   "game": 4,
+   "turns": 16,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "resize",
+     "key": "91bd2e6a47de5effaee19c45ef38341963db57c36d20f2af0e14473804e8c041/16",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 2555,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "end": {
+      "key": "91bd2e6a47de5effaee19c45ef38341963db57c36d20f2af0e14473804e8c041/16",
+      "reason": "resize",
+      "ms": 333
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "tapCross",
+     "key": "91bd2e6a47de5effaee19c45ef38341963db57c36d20f2af0e14473804e8c041/16",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 2555,
+      "kind": "win"
+     },
+     "total": 10350,
+     "tapAt": 2466,
+     "end": {
+      "key": "91bd2e6a47de5effaee19c45ef38341963db57c36d20f2af0e14473804e8c041/16",
+      "reason": "complete",
+      "ms": 10357
+     }
+    }
+   ]
+  }
+ ],
+ "errors": []
+}

@@ -1,0 +1,173 @@
+{
+ "date": "2026-11-07T12:47:56.540Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": "844x390",
+ "kind": "automated browser run on PC (Edge via Playwright), quick 1v1 between two accounts on a temporary database; not a physical device",
+ "games": [
+  {
+   "game": 1,
+   "turns": 13,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "wait",
+     "key": "2d6c4e2fdc41542c4259f2e27c9d71dd13335d780b60a718659928239d3eaf84/13",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8350,
+      "kind": "loss"
+     },
+     "total": 9950,
+     "end": {
+      "key": "2d6c4e2fdc41542c4259f2e27c9d71dd13335d780b60a718659928239d3eaf84/13",
+      "reason": "complete",
+      "ms": 9958
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "tapAll",
+     "key": "2d6c4e2fdc41542c4259f2e27c9d71dd13335d780b60a718659928239d3eaf84/13",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8350,
+      "kind": "win"
+     },
+     "total": 9950,
+     "taps": 15,
+     "end": {
+      "key": "2d6c4e2fdc41542c4259f2e27c9d71dd13335d780b60a718659928239d3eaf84/13",
+      "reason": "input",
+      "ms": 8551
+     }
+    }
+   ]
+  },
+  {
+   "game": 2,
+   "turns": 8,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "tapAll",
+     "key": "d2cce4ad3727a9b2a1b0c2df828bac96f992268ff1aec6e98c6dfe3de0ab7d54/8",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "win"
+     },
+     "total": 10350,
+     "taps": 16,
+     "end": {
+      "key": "d2cce4ad3727a9b2a1b0c2df828bac96f992268ff1aec6e98c6dfe3de0ab7d54/8",
+      "reason": "input",
+      "ms": 8920
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "wait",
+     "key": "d2cce4ad3727a9b2a1b0c2df828bac96f992268ff1aec6e98c6dfe3de0ab7d54/8",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "end": {
+      "key": "d2cce4ad3727a9b2a1b0c2df828bac96f992268ff1aec6e98c6dfe3de0ab7d54/8",
+      "reason": "complete",
+      "ms": 10350
+     }
+    }
+   ]
+  },
+  {
+   "game": 3,
+   "turns": 8,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "tapCross",
+     "key": "0faa3ae59af56aeb46c91bd9a2993415981f1d58fe92b7803c97dd36902febfa/8",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "win"
+     },
+     "total": 10350,
+     "tapAt": 8630,
+     "end": {
+      "key": "0faa3ae59af56aeb46c91bd9a2993415981f1d58fe92b7803c97dd36902febfa/8",
+      "reason": "complete",
+      "ms": 10358
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "skip",
+     "key": "0faa3ae59af56aeb46c91bd9a2993415981f1d58fe92b7803c97dd36902febfa/8",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "end": {
+      "key": "0faa3ae59af56aeb46c91bd9a2993415981f1d58fe92b7803c97dd36902febfa/8",
+      "reason": "skip",
+      "ms": 360
+     }
+    }
+   ]
+  },
+  {
+   "game": 4,
+   "turns": 11,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "resize",
+     "key": "503597798943f486090181fb5671295f6842f7f4cf17ca9fc274ae3552ab88b0/11",
+     "result": "loss",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "loss"
+     },
+     "total": 10350,
+     "end": {
+      "key": "503597798943f486090181fb5671295f6842f7f4cf17ca9fc274ae3552ab88b0/11",
+      "reason": "resize",
+      "ms": 307
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "tapCross",
+     "key": "503597798943f486090181fb5671295f6842f7f4cf17ca9fc274ae3552ab88b0/11",
+     "result": "win",
+     "running": true,
+     "cue": {
+      "at": 8750,
+      "kind": "win"
+     },
+     "total": 10350,
+     "tapAt": 8655,
+     "end": {
+      "key": "503597798943f486090181fb5671295f6842f7f4cf17ca9fc274ae3552ab88b0/11",
+      "reason": "complete",
+      "ms": 10356
+     }
+    }
+   ]
+  }
+ ],
+ "errors": []
+}

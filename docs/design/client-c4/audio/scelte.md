@@ -15,3 +15,11 @@ Autorizzato il download del solo pacchetto [Kenney Interface Sounds](https://ken
 3. «Web Audio: sì, come nella proposta (contesto unico, buffer decodificati una volta, GainNode per volume e muto, ripiego silenzioso, audioSession 'ambient' dove esiste).»
 
 La scelta dei due file (vittoria; sconfitta e pareggio) segue l'ascolto e sarà registrata qui.
+
+### Scelta dei file dopo l'ascolto
+
+6 novembre 2026, sulla pagina d'ascolto in LAN (8 candidati per esito, Kenney «Music Jingles» 1.0, CC0). Parole del proprietario: «sconfitta SAX07 vittoria SAX10».
+
+Scelti: `jingles_SAX10.ogg` per la vittoria; `jingles_SAX07.ogg` per la sconfitta e, come deciso, per il pareggio. `confirmation_002.ogg` esce da `public/audio` e dall'inventario.
+
+Osservazione del proprietario sulla stessa pagina: «su un iphone 15 (mia moglie) dice riprodotto, ma non si sente niente anche alzando il volume. su un iphone 16 pro (mio) si sentono tutti». La pagina suona con Web Audio, come il gioco dopo C4-7-bis. Ipotesi non verificata: l'iPhone 15 era in modalità silenziosa, che Web Audio rispetta (`audioSession` 'ambient', scelto dal proprietario), mentre un elemento `<audio>` può suonare comunque. Da riprovare sul dispositivo con la modalità silenziosa disattivata.

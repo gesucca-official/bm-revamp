@@ -597,3 +597,36 @@ export function labelTimes(t: Timeline): number[] {
   if (t.bars === 'total') for (const _ of t.totals) at.push(p.tail.at);
   return at;
 }
+
+/**
+ * C4-7-bis: the card that ends the game in a final round, or null when the end does not come from a card (death at the end of
+ * the turn, forfeit, time) or cannot be told (bars from the totals). A death is HEALTH reaching 0 or less (rules, R06); with
+ * several deaths the game ends at the last of them.
+ */
+export function decisiveMove(t: Timeline): number | null {
+  if (!t.outcome || t.bars !== 'per-card' || t.emphasis.some(e => e.kind === 'forfeit')) return null;
+  const died = t.emphasis.filter(e => e.kind === 'died').map(e => e.seat);
+  if (!died.length) return null;
+  let last = -1;
+  for (const seat of died) {
+    const i = t.moves.findIndex(m => m.steps.some(s => s.seat === seat && s.resource === 'HEALTH' && s.from > 0 && s.to <= 0));
+    if (i < 0) return null;
+    last = Math.max(last, i);
+  }
+  return last;
+}
+/** The moment a card hits its target (the impact marks of the scene start there). */
+export const hitAt = (m: CardPace) => m.flight.at + m.flight.dur * BEAT_PHASE.fly;
+export type RoundSound = 'impact' | 'win' | 'loss';
+/**
+ * C4-7-bis: the one sequence sound of a round. A final round: the outcome (win, or loss for a defeat and a draw) on the decisive
+ * card, else at the start of the tail. Any other round: the impact of its first card. None without cards and without an outcome.
+ */
+export function roundCue(t: Timeline, me: string): {at: number; kind: RoundSound} | null {
+  if (t.outcome) {
+    const d = decisiveMove(t), m = d === null ? null : t.pace.moves[d];
+    return {at: m ? hitAt(m) : t.pace.tail.at, kind: t.outcome.winner === me ? 'win' : 'loss'};
+  }
+  const first = t.pace.moves[0];
+  return first ? {at: hitAt(first), kind: 'impact'} : null;
+}

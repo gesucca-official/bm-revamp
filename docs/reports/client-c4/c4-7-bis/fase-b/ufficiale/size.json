@@ -1,0 +1,254 @@
+{
+  "date": "2026-11-07T12:18:07.448Z",
+  "method": "gzip level 9 per actual file; conservative total includes every production file, even optional chunks and asset manifest; review PNGs excluded because not shipped; textures: raster header size (WebP, PNG, JPEG, GIF, AVIF) x 4 bytes (RGBA), no mipmaps counted; an unreadable raster file fails the run",
+  "jsGzip": 340716,
+  "totalGzip": 1733198,
+  "textureDecodedBytes": 27729048,
+  "textures": [
+    {
+      "file": "art/atlas.webp",
+      "width": 2048,
+      "height": 1536,
+      "decodedBytes": 12582912
+    },
+    {
+      "file": "art/negroni.webp",
+      "width": 834,
+      "height": 962,
+      "decodedBytes": 3209232
+    },
+    {
+      "file": "art/posacenere.webp",
+      "width": 973,
+      "height": 844,
+      "decodedBytes": 3284848
+    },
+    {
+      "file": "art/sottobicchiere.webp",
+      "width": 937,
+      "height": 630,
+      "decodedBytes": 2361240
+    },
+    {
+      "file": "art/table.webp",
+      "width": 2006,
+      "height": 784,
+      "decodedBytes": 6290816
+    }
+  ],
+  "byType": {
+    "css": {
+      "files": 1,
+      "bytes": 24637,
+      "gzip": 5858
+    },
+    "html": {
+      "files": 1,
+      "bytes": 1183,
+      "gzip": 498
+    },
+    "js": {
+      "files": 13,
+      "bytes": 1108676,
+      "gzip": 340716
+    },
+    "json": {
+      "files": 1,
+      "bytes": 3212,
+      "gzip": 1204
+    },
+    "ogg": {
+      "files": 6,
+      "bytes": 72912,
+      "gzip": 60522
+    },
+    "webp": {
+      "files": 5,
+      "bytes": 1325750,
+      "gzip": 1324400
+    }
+  },
+  "budgets": {
+    "js": 512000,
+    "total": 4194304,
+    "atlasSide": 2048,
+    "textureBytes": 67108864
+  },
+  "ceilingsC4": {
+    "source": "D9 of the C4 plan, revised by the owner on 3 November 2026: only the decoded-texture ceiling (MiB); JS and total have the hard limits only",
+    "textureBytes": {
+      "ceiling": 33554432,
+      "used": 27729048,
+      "margin": 5825384,
+      "usedPercent": 82.6,
+      "pass": true
+    },
+    "pass": true
+  },
+  "limitsPass": true,
+  "pass": true,
+  "files": [
+    {
+      "file": "art/atlas.webp",
+      "bytes": 566518,
+      "gzip": 564873,
+      "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956"
+    },
+    {
+      "file": "art/manifest.json",
+      "bytes": 3212,
+      "gzip": 1204,
+      "sha256": "912e81baff65e6600a48f2e08950cdaf1392033f743987af6570c29057cbf27c"
+    },
+    {
+      "file": "art/negroni.webp",
+      "bytes": 126188,
+      "gzip": 126240,
+      "sha256": "f718a05da027b7b059ff8e51ad2946ae50d07aca759da18b235bc48b91031fc0"
+    },
+    {
+      "file": "art/posacenere.webp",
+      "bytes": 134242,
+      "gzip": 134303,
+      "sha256": "de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7"
+    },
+    {
+      "file": "art/sottobicchiere.webp",
+      "bytes": 80982,
+      "gzip": 81016,
+      "sha256": "c2927c9515a7bb6301efe3f108f384ed3bdaee9bbf6cae955e71bae88fd2a700"
+    },
+    {
+      "file": "art/table.webp",
+      "bytes": 417820,
+      "gzip": 417968,
+      "sha256": "87ee30faf1190af1759533f8c9640b98d3da9377f2d5ce98609129a4fac92d3e"
+    },
+    {
+      "file": "assets/browserAll-fhN_2ISg.js",
+      "bytes": 43507,
+      "gzip": 11135,
+      "sha256": "37ca297fa18980bbdf2f74126e3de4a714f8e796c53d664600d2ecdb37aa99e5"
+    },
+    {
+      "file": "assets/Cache-fEtFvAzf.js",
+      "bytes": 1100,
+      "gzip": 556,
+      "sha256": "e7e2ce32bbc0d5153c8a36b2bfe1fc748c7f825608266659d52079b26ac458a9"
+    },
+    {
+      "file": "assets/CanvasPool-BZ0sA3Gt.js",
+      "bytes": 71204,
+      "gzip": 23075,
+      "sha256": "e2ccf0eaa2158cc152819a493c056cd66579de2cf2f1aea781cea6acfc14191c"
+    },
+    {
+      "file": "assets/canvasUtils-BlnLdLY1.js",
+      "bytes": 6011,
+      "gzip": 2035,
+      "sha256": "1a9ff1194ab02084137984cd2a2adb2e8c8fa78b073606c1dd564500e48da2bd"
+    },
+    {
+      "file": "assets/Filter-B0XMl_yL.js",
+      "bytes": 41958,
+      "gzip": 11902,
+      "sha256": "5913961319d4cb4a786b7feec6c1cff98b46ae2148570a6089c00772f8b4a12d"
+    },
+    {
+      "file": "assets/GCManagedHash-DAvwKUzM.js",
+      "bytes": 19313,
+      "gzip": 6245,
+      "sha256": "8bf5dc944cafe2a3a9efb3a61a3e5bbcbfeb45d768f1d1ffb688905b254cbb6f"
+    },
+    {
+      "file": "assets/getTexelRangeRects-Bt1M-OmZ.js",
+      "bytes": 11358,
+      "gzip": 2982,
+      "sha256": "221f12045d9e278d2174d6c7b6977169eb7784eae7eb9eb9bd65020007f7250b"
+    },
+    {
+      "file": "assets/getTextureBatchBindGroup-CckcnH94.js",
+      "bytes": 344,
+      "gzip": 269,
+      "sha256": "00cbd0cc9465d16ca748a4205d08ab418c472892e38f6cc38791e5dc5d77720e"
+    },
+    {
+      "file": "assets/GraphicsContext-DJRE2111.js",
+      "bytes": 61680,
+      "gzip": 20468,
+      "sha256": "040036b2b3f95fadee76dcf89de80dd72f3dc23173ff7dbf9b341d399fe3f698"
+    },
+    {
+      "file": "assets/index-C0FqdnGr.js",
+      "bytes": 779123,
+      "gzip": 241221,
+      "sha256": "79c26952e9b86979995baa55cf25ed76ee86da7253a2735dff9cee47fb7cf808"
+    },
+    {
+      "file": "assets/index-DmlT0COt.css",
+      "bytes": 24637,
+      "gzip": 5858,
+      "sha256": "31a47302bb95b3db6ef23269ae3172156c2d46b506024d7b7227283cf8dddc8b"
+    },
+    {
+      "file": "assets/init-DM9zIFLf.js",
+      "bytes": 14216,
+      "gzip": 4452,
+      "sha256": "53b1d178ef73090a72cd4f34916f3193fb27cdadaf73527fee914e998748d29b"
+    },
+    {
+      "file": "assets/RenderTargetSystem-9obqq6wg.js",
+      "bytes": 58807,
+      "gzip": 16313,
+      "sha256": "31c8dbee037b10110791ecdc96860e0c52ff6ed29c902985a1312066a4f235d5"
+    },
+    {
+      "file": "assets/webworkerAll-EUoG2xh0.js",
+      "bytes": 55,
+      "gzip": 63,
+      "sha256": "27b505243ea0856b4bfc639889fed7fbadf09496c298ec98e7802663ff13ddf4"
+    },
+    {
+      "file": "audio/click_001.ogg",
+      "bytes": 4876,
+      "gzip": 4135,
+      "sha256": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9"
+    },
+    {
+      "file": "audio/confirmation_001.ogg",
+      "bytes": 8968,
+      "gzip": 8019,
+      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
+    },
+    {
+      "file": "audio/drop_004.ogg",
+      "bytes": 7230,
+      "gzip": 5509,
+      "sha256": "10738707f9300f9b963ceba46d5da2ed4a221faf7d39484a643c2d3bc151c5f2"
+    },
+    {
+      "file": "audio/error_001.ogg",
+      "bytes": 7373,
+      "gzip": 5596,
+      "sha256": "46e67425d16339772e8d328fb36a49426c9467418686e11beeb71ff84b0f6433"
+    },
+    {
+      "file": "audio/jingles_SAX07.ogg",
+      "bytes": 30900,
+      "gzip": 26349,
+      "sha256": "241c8570fbded819ee0205e4be3efa80aeb834a70df89318da88f9e219798b11"
+    },
+    {
+      "file": "audio/jingles_SAX10.ogg",
+      "bytes": 13565,
+      "gzip": 10914,
+      "sha256": "ee9092e858526e3638f7a639f25c2218f14432466c3e4dd7e1e84073925390ae"
+    },
+    {
+      "file": "index.html",
+      "bytes": 1183,
+      "gzip": 498,
+      "sha256": "6a8e90562311abbc0f922edfd2f042e163a60edc83f37910e3b2663188d2ea7d"
+    }
+  ]
+}

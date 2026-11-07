@@ -56,7 +56,7 @@ nessuna (costi, guadagni e immunità si coprono con i simboli delle risorse). Lo
 
 ## Materiali di terzi e crediti
 
-**In C4-3 non erano entrati asset di terzi.** In C4-7 entrano cinque suoni Kenney CC0 1.0: la home esistente ne indica autore e licenza, senza nuova schermata come richiesto dal proprietario. La licenza è descritta anche qui e nel registro; CC0 1.0 dedica l’opera al pubblico dominio nei limiti di legge. La [licenza completa](https://creativecommons.org/publicdomain/zero/1.0/) e la [fonte Kenney](https://kenney.nl/assets/interface-sounds) sono consultabili online.
+**In C4-3 non erano entrati asset di terzi.** In C4-7 entrano cinque suoni Kenney CC0 1.0 (in C4-7-bis l'esito unico è sostituito da due jingle Kenney CC0, sei suoni in tutto): la home esistente ne indica autore e licenza, senza nuova schermata come richiesto dal proprietario. La licenza è descritta anche qui e nel registro; CC0 1.0 dedica l’opera al pubblico dominio nei limiti di legge. La [licenza completa](https://creativecommons.org/publicdomain/zero/1.0/) e la [fonte Kenney](https://kenney.nl/assets/interface-sounds) sono consultabili online.
 
 **Fuori inventario, per chiarezza.** Le librerie npm incluse nel pacchetto JavaScript (pixi.js 8.22.0, react e react-dom 19.3.1, sockjs-client 1.6.1: MIT; @stomp/stompjs 7.1.1:
 Apache-2.0) sono codice, non asset: la regola 10 non le copre. Le loro condizioni di licenza (avviso di copyright da riportare) non sono distribuite con la build:
@@ -72,3 +72,5 @@ Apache-2.0) sono codice, non asset: la regola 10 non le copre. Le loro condizion
 ## Audio C4-7
 
 Cinque file OGG originali di [Kenney Interface Sounds 1.0](https://kenney.nl/assets/interface-sounds), CC0 1.0; nessuna modifica. Dimensioni e SHA-256 per file in [inventory.json](inventory.json); [scelta e consenso](../audio/scelte.md). Il pacchetto ufficiale pesava 834.536 byte e la licenza inclusa dichiara CC0 1.0.
+
+**C4-7-bis.** `confirmation_002.ogg` (esito unico) è tolto. Entrano due file OGG originali di [Kenney Music Jingles 1.0](https://kenney.nl/assets/music-jingles), CC0 1.0, senza modifiche: `jingles_SAX10.ogg` (vittoria, 13.565 byte) e `jingles_SAX07.ogg` (sconfitta e pareggio, 30.900 byte), scelti dal proprietario all'ascolto ([scelta](../audio/scelte.md#scelta-dei-file-dopo-lascolto)). Il pacchetto ufficiale pesava 1.239.525 byte (SHA-256 `b729ba57…77197b8`) e la licenza inclusa (`License.txt`) dichiara CC0. In tutto sei suoni, 72.912 byte.
