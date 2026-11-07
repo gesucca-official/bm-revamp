@@ -1139,3 +1139,11 @@ Evidenze finali circa **7.68 MB**, JSON e registri più sole catture finali sele
 Non verificati **iPhone, Safari, interruttore fisico, suono realmente udito e latenza percepita**; l'efficacia dell'attacco di 5 ms sul click segnalato richiede la prova fisica. Pannelli da forfait/tempo, storia finale recuperata e secondo esito FFA dopo «Resta a guardare» sono coperti dal contratto unitario del controller; non esiste un giro audio dedicato sul server vero per ognuno di questi casi. Il giro reale senza sequenza copre movimento ridotto. Il tipo sonoro è nominale come quello visivo: non certifica danno effettivo o conversioni. Non si dichiara verificato ciò che non è stato provato.
 
 Al proprietario: **PC** — lasciare scorrere un round con due colpi e distinguere tonfo/lama, provare tocchi rapidi, vittoria/sconfitta al pannello, uscita immediata, skip e volume/muto; **iPhone** — stessi casi, soprattutto conferma senza click fastidioso e reattività, prima con silenzioso disattivato poi attivato (deve prevalere). In FFA verificare la sconfitta personale e «Resta a guardare» senza secondo jingle alla fine. La scelta dei file e delle regole è già approvata; resta il giudizio sul risultato implementato.
+
+## C4-7-ter — prova del proprietario del 7 novembre 2026
+
+Parole del proprietario dopo una prova della Fase B: «l'unico feedbackc he ho per ora è che il volume del sound effect del taglio è troppo alto rispetto agli altri effetti»; «mettiamo questo fix da fare da qualche parte e poi partiamo con la prossima attività».
+
+Lettura della regia: rilievo sul livello di `knifeSlice.ogg`, non sulla scelta del file o sulle regole. La correzione è la Fase 0 di [C4-10](../client-c4-plan.md#c4-10--guida-visiva), in un commit a sé; il giudizio su C4-7 si dà dopo di essa. Per decisione del proprietario si parte con C4-10.
+
+Nessun codice cambiato, nessuna verifica eseguita per questa registrazione.
