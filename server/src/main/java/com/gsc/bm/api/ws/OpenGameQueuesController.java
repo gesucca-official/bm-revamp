@@ -25,7 +25,10 @@ public class OpenGameQueuesController {
             com.gsc.bm.service.factories.ValueNotFoundException.class, IllegalArgumentException.class,
             org.springframework.dao.DataAccessException.class})
     @SendToUser("/queue/game/open/1vCom/error")
-    public String deckUnavailable(Exception ignored) {
+    public String deckUnavailable(Exception error) {
+        // R02 1.12: a deck saved under older rules is kept but refused here, with the broken rule.
+        if (error instanceof com.gsc.bm.service.account.InvalidDeckException)
+            return "Invalid deck: " + error.getMessage() + ". Edit or delete it in your collection.";
         return "Deck unavailable. Choose a saved deck from your account and retry.";
     }
 

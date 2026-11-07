@@ -167,10 +167,42 @@ assert '\n'.join(roles_contract) + '\n' == (root / 'server/src/test/resources/ru
 types = ['\t'.join([entry['class'], entry['type'], entry.get('subtype', '—')]) for entry in entries]
 assert '\n'.join(types) + '\n' == (root / 'server/src/test/resources/rules-card-types.tsv').read_text(encoding='utf-8'), 'Type test contract differs'
 assert len(expected['cards']) == 37 and len(expected['characters']) == 2 and len(expected['tokens']) == 1, 'Set inventory differs'
+# R02 1.12: deck rules. A basic or a last resort may be reserved to one character (`exclusiveTo`, absent = generic); every
+# character has exactly one basic, reserved to it; a bound belongs to the character named in its class constructor. Both
+# starters must satisfy the deck rules: 20 regular cards, at most 2 copies, own basic, two different own bound cards.
+by_class = {card['class']: card for card in expected['cards']}
+character_classes = {c['class'] for c in expected['characters']}
+def bound_owner(binding):
+    code = (root / 'server/src/main/java/com/gsc/bm/model/cards' / (binding.replace('.', '/') + '.java')).read_text(encoding='utf-8')
+    found = re.search(r'super\((\w+)\.class\)', code)
+    owners = [c for c in character_classes if found and c.split('.')[-1] == found.group(1)]
+    assert len(owners) == 1, binding + ': bound without a catalog character in its constructor'
+    return owners[0]
+for card in expected['cards']:
+    if 'exclusiveTo' in card:
+        assert card['subtype'] in ('Base', 'Ultima risorsa'), card['class'] + ': only a basic or a last resort is reserved to a character'
+        assert card['exclusiveTo'] in character_classes, card['class'] + ': reserved to an unknown character'
+    if card.get('subtype') == 'Base':
+        assert 'exclusiveTo' in card, card['class'] + ': a basic is the fixed basic of one character'
+for character in sorted(character_classes):
+    assert len([c for c in expected['cards'] if c.get('subtype') == 'Base' and c.get('exclusiveTo') == character]) == 1, character + ': exactly one basic'
+assert sorted(row[0] for row in expected['initialCards']) == sorted(character_classes), 'One starter per character'
+for character, basic, bound1, bound2, last in expected['initialCards']:
+    regular = [(binding, qty) for owner, binding, qty in expected['starters'] if owner == character]
+    assert sum(qty for _, qty in regular) == 20, character + ': the starter must have exactly 20 regular cards'
+    assert all(1 <= qty <= 2 for _, qty in regular), character + ': at most 2 copies per card'
+    assert all(by_class[b]['subtype'] in ('Regolare', '—') for b, _ in regular), character + ': only regular cards and items in the deck'
+    assert by_class[basic]['subtype'] == 'Base' and by_class[basic].get('exclusiveTo') == character, character + ': basic of another character'
+    assert bound1 != bound2, character + ': the two bound cards must differ'
+    for bound in (bound1, bound2):
+        assert by_class[bound]['subtype'] == 'Legata al personaggio' and bound_owner(bound) == character, character + ': bound of another character ' + bound
+    assert by_class[last]['subtype'] == 'Ultima risorsa' and by_class[last].get('exclusiveTo', character) == character, character + ': last resort reserved to another character'
 with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() + '?mode=ro', uri=True) as db:
     actual = [{'class': r[0], 'name': r[1], 'description': r[2], 'role': r[3], 'gains': r[4], 'damage': r[5], 'damageAmount': r[6]} for r in db.execute(
         'select C_REF_CLASS,T_GUI_NAME,T_GUI_DESCRIPTION,T_GUI_ROLE,T_GUI_GAINS,T_GUI_DAMAGE,T_GUI_DAMAGE_AMOUNT from CRD001_GUI order by C_REF_CLASS')]
     assert actual == [{key: card[key] for key in ('class', 'name', 'description', 'role', 'gains', 'damage', 'damageAmount')} for card in expected['cards']], 'Card catalog differs from regulation annex'
+    reserved = [list(r) for r in db.execute('select C_REF_CLASS,C_EXCLUSIVE_TO from CRD001_GUI order by C_REF_CLASS')]
+    assert reserved == [[card['class'], card.get('exclusiveTo')] for card in expected['cards']], 'Reserved cards (R02 1.12) differ from regulation annex'
     characters = [{'class': r[0], 'name': r[1], 'type': 'Personaggio'} for r in db.execute(
         'select C_REF_CLASS,T_GUI_NAME from CRD003_CHARACTERS order by C_REF_CLASS')]
     assert characters == expected['characters'], 'Character catalog differs from regulation annex'
@@ -179,4 +211,4 @@ with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() 
         assert actual == expected[key], table + ' differs from regulation annex'
     assert db.execute('pragma integrity_check').fetchone()[0] == 'ok'
     assert not db.execute('pragma foreign_key_check').fetchall()
-print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; SQLite integro.')
+print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; starter conformi alle regole dei mazzi R02 1.12; SQLite integro.')

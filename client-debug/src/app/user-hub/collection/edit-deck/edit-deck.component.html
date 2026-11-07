@@ -16,7 +16,10 @@
   </div>
 </mat-card>
 
-<p>Required: name, character, basic, last resort, at least one regular card; maximum six initial cards (basic + bound). No copy limits.</p>
+<p>Rules 1.12 R02: the character's own basic (set with the character), two different bound cards of the character, a generic or own last resort, exactly 20 regular cards with at most 2 copies each.</p>
+<ul *ngIf="deckProblems().length > 0">
+  <li *ngFor="let problem of deckProblems()">{{problem}}</li>
+</ul>
 <mat-accordion>
   <mat-expansion-panel class="selection-panel mat-elevation-z4">
     <mat-expansion-panel-header>
@@ -30,7 +33,7 @@
     <div fxLayout="row wrap" fxLayoutGap="10px grid" fxFlexAlign="stretch">
       <div fxFlex="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%"
            *ngFor="let character of collection.characters">
-        <app-collection-character-card [character]="character" (click)="deck.character = character">
+        <app-collection-character-card [character]="character" (click)="selectCharacter(character)">
         </app-collection-character-card>
       </div>
     </div>
@@ -88,7 +91,7 @@
         Character Bound Cards
       </mat-panel-title>
       <mat-panel-description class="right-aligned">
-        {{(deck.basicActionCard ? 1 : 0) + deck.characterBoundCards.length}}/6 initial cards (basic + bound)
+        {{deck.characterBoundCards.length}}/2 bound cards
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>
@@ -111,7 +114,7 @@
         Regular Deck
       </mat-panel-title>
       <mat-panel-description class="right-aligned">
-        {{deck.regularCards.length}} cards (minimum 1)
+        {{deck.regularCards.length}}/20 cards
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-form-field>
@@ -124,7 +127,7 @@
     <mat-slide-toggle [(ngModel)]="showDeckToggle" (ngModelChange)="changeCardShownByToggle()" style="float: right">
       {{showDeckToggle ? 'Deck' : 'Collection'}}
     </mat-slide-toggle>
-    <p>Click on the cards to add or remove them.</p>
+    <p>Click on the cards to add or remove them: at most 2 copies per card, 20 cards in all.</p>
     <div fxLayout="row wrap" fxLayoutGap="10px grid" fxFlexAlign="stretch">
       <div fxFlex="20%" fxFlex.md="25%" fxFlex.sm="33%" fxFlex.xs="50%"
            *ngFor="let card of collectionCardsShown">

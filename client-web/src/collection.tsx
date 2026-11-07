@@ -6,8 +6,8 @@ import {subtype} from './scene.ts';
 import {ROLES,roleOf} from './readability.ts';
 import {frameOf,type FrameKind} from './frames.ts';
 import {CardFrame,Cost,DamagePills,Gains,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
-import {MAX_BOUND,MAX_INITIAL,addBound,addRegular,basics,bounds,catalogOrder,clearBound,copies,editCopy,emptyDraft,initialCards,lastResorts,
- payload,problems,removeRegular,setBasic,setCharacter,setLastResort,setName,shown,type Draft,type Pool} from './deck.ts';
+import {BOUND_CARDS,INITIAL_CARDS,MAX_COPIES,REGULAR_CARDS,addRegular,allowedLastResorts,canAdd,catalogOrder,copies,copiesOf,editCopy,emptyDraft,initialCards,
+ ownBasics,ownBounds,payload,problems,removeRegular,setBasic,setCharacter,setLastResort,setName,shown,toggleBound,type Draft,type Pool} from './deck.ts';
 
 // C4-4: the miniature is a small card with the frame of the table around the art.
 const Art=({binding,kind}:{binding:string;kind:FrameKind})=><div className="mini-card" aria-hidden="true"><CardFrame kind={kind} w={66} h={90}/><div className="thumb" style={artCss(artIndex(binding))}/></div>;
@@ -58,19 +58,21 @@ function Editor({session,start,existing,onDone}:{session:Session;start:Draft;exi
     <PressButton data-testid="cancel-edit" disabled={busy} onClick={()=>onDone('')}>Annulla</PressButton>
    </div>
   </div>
-  <p className="small" data-testid="deck-counts">Carte iniziali {initialCards(d)} / {MAX_INITIAL} (base + legate) · regolari {d.regularCards.length} (almeno 1). Nessun limite di copie.{existing?' Il nome di un mazzo salvato non si cambia.':''}</p>
+  <p className="small" data-testid="deck-counts">Regolari {d.regularCards.length} / {REGULAR_CARDS}, al massimo {MAX_COPIES} copie per carta · carte iniziali {initialCards(d)} / {INITIAL_CARDS} (base + {BOUND_CARDS} legate).{existing?' Il nome di un mazzo salvato non si cambia.':''}</p>
   {missing.length>0&&<ul className="missing" role="status" data-testid="deck-problems">{missing.map(m=><li key={m}>{m}</li>)}</ul>}
   {error&&<p className="problem" role="alert" data-testid="deck-error">{error}</p>}
   <Slot title="Personaggio" summary={d.character?.name??'da scegliere'}>
-   <ul className="cards">{session.characters.map(c=>pick(d.character?.bindingName===c.bindingName,`Personaggio ${c.name}`,<CharacterFace character={c}/>,()=>setD(setCharacter(d,c)),c.bindingName))}</ul></Slot>
+   <ul className="cards">{session.characters.map(c=>pick(d.character?.bindingName===c.bindingName,`Personaggio ${c.name}`,<CharacterFace character={c}/>,()=>setD(setCharacter(d,c,catalog)),c.bindingName))}</ul></Slot>
+  {/* R02 1.12: the basic is fixed, the character's own; it is set with the character. */}
   <Slot title="Azione base" summary={d.basicActionCard?.name??'da scegliere'}>
-   <ul className="cards">{basics(catalog).map(c=>pick(d.basicActionCard?.bindingName===c.bindingName,`Azione base ${c.name}`,<CardFace card={c}/>,()=>setD(setBasic(d,c)),c.bindingName))}</ul></Slot>
+   <p className="small">È fissa: quella del personaggio.{d.character?'':' Scegli prima il personaggio.'}</p>
+   <ul className="cards">{ownBasics(catalog,d.character).map(c=>pick(d.basicActionCard?.bindingName===c.bindingName,`Azione base ${c.name}`,<CardFace card={c}/>,()=>setD(setBasic(d,c)),c.bindingName))}</ul></Slot>
   <Slot title="Ultima risorsa" summary={d.lastResortCard?.name??'da scegliere'}>
-   <ul className="cards">{lastResorts(catalog).map(c=>pick(d.lastResortCard?.bindingName===c.bindingName,`Ultima risorsa ${c.name}`,<CardFace card={c}/>,()=>setD(setLastResort(d,c)),c.bindingName))}</ul></Slot>
-  <Slot title="Azioni legate" summary={`${d.characterBoundCards.length} / ${MAX_BOUND}`}>
-   <p className="small">Scelte: <span data-testid="bound-list">{copies(d.characterBoundCards).map(e=>`${e.card.name}${e.n>1?` ×${e.n}`:''}`).join(', ')||'nessuna'}</span>. Si possono ripetere; ognuna conta fra le carte iniziali. <PressButton data-testid="clear-bound" disabled={!d.characterBoundCards.length} onClick={()=>setD(clearBound(d))}>Svuota</PressButton></p>
-   <ul className="cards">{bounds(catalog).map(c=>pick(false,`Aggiungi l’azione legata ${c.name}`,<CardFace card={c}/>,()=>setD(addBound(d,c)),c.bindingName))}</ul></Slot>
-  <Slot title="Mazzo regolare" summary={`${d.regularCards.length} carte`} open>
+   <ul className="cards">{allowedLastResorts(catalog,d.character).map(c=>pick(d.lastResortCard?.bindingName===c.bindingName,`Ultima risorsa ${c.name}`,<CardFace card={c}/>,()=>setD(setLastResort(d,c)),c.bindingName))}</ul></Slot>
+  <Slot title="Azioni legate" summary={`${d.characterBoundCards.length} / ${BOUND_CARDS}`}>
+   <p className="small">Scelte: <span data-testid="bound-list">{d.characterBoundCards.map(c=>c.name).join(', ')||'nessuna'}</span>. Due diverse, del personaggio: tocca una carta per prenderla o lasciarla.{d.character?'':' Scegli prima il personaggio.'}</p>
+   <ul className="cards">{ownBounds(catalog,d.character).map(c=>pick(d.characterBoundCards.some(x=>x.bindingName===c.bindingName),`Azione legata ${c.name}`,<CardFace card={c}/>,()=>setD(toggleBound(d,c)),c.bindingName))}</ul></Slot>
+  <Slot title="Mazzo regolare" summary={`${d.regularCards.length} / ${REGULAR_CARDS} carte`} open>
    <div className="regular-bar">
     <label>Cerca<input data-testid="card-search" type="search" value={term} onChange={e=>setTerm(e.target.value)} placeholder="nome o testo"/></label>
     <div role="radiogroup" aria-label="Mostra" className="pool">
@@ -78,10 +80,10 @@ function Editor({session,start,existing,onDone}:{session:Session;start:Draft;exi
      <PressButton role="radio" data-testid="pool-deck" aria-checked={pool==='deck'} className={pool==='deck'?'on':undefined} onClick={()=>setPool('deck')}>Mazzo</PressButton>
     </div>
    </div>
-   <p className="small">{pool==='collection'?'Tocca una carta per aggiungerne una copia.':'Tocca una carta per toglierne una copia.'}</p>
+   <p className="small">{pool==='collection'?`Tocca una carta per aggiungerne una copia: al massimo ${MAX_COPIES} per carta e ${REGULAR_CARDS} in tutto.`:'Tocca una carta per toglierne una copia.'}</p>
    <ul className="cards" data-testid="regular-pool">{(pool==='deck'?copies(listed).map(e=>({card:e.card,n:e.n})):listed.map(card=>({card,n:undefined}))).map(({card,n})=>
-    <li key={card.bindingName}><PressButton className="pick" aria-label={`${pool==='collection'?'Aggiungi':'Togli'} una copia di ${card.name}`} onClick={()=>setD(pool==='collection'?addRegular(d,card):removeRegular(d,card.name))}>
-     <CardFace card={card} count={pool==='collection'?d.regularCards.filter(x=>x.name===card.name).length||undefined:n}/></PressButton></li>)}</ul>
+    <li key={card.bindingName}><PressButton className="pick" disabled={pool==='collection'&&!canAdd(d,card)} aria-label={`${pool==='collection'?'Aggiungi':'Togli'} una copia di ${card.name}`} onClick={()=>setD(pool==='collection'?addRegular(d,card):removeRegular(d,card.name))}>
+     <CardFace card={card} count={pool==='collection'?copiesOf(d,card)||undefined:n}/></PressButton></li>)}</ul>
    {!listed.length&&<p className="small">{pool==='deck'&&!d.regularCards.length?'Il mazzo è ancora vuoto.':'Nessuna carta corrisponde alla ricerca.'}</p>}
   </Slot>
  </section>;
@@ -105,9 +107,11 @@ export function Collection({session}:{session:Session}){
   {notice&&<p className="notice" role="status" data-testid="deck-notice">{notice}</p>}
   {error&&<p className="problem" role="alert">{error}</p>}
   {screen.kind==='catalog'?<Catalog session={session}/>:<>
-   {!decks.length&&<p className="small" data-testid="no-decks">Nessun mazzo salvato. Crea il primo: servono nome, personaggio, azione base, ultima risorsa e almeno una carta regolare.</p>}
+   {!decks.length&&<p className="small" data-testid="no-decks">Nessun mazzo salvato. Crea il primo: servono nome, personaggio, ultima risorsa, due azioni legate e {REGULAR_CARDS} carte regolari.</p>}
    <ul className="decks" data-testid="deck-list">{decks.map(deck=><li key={deck.deckId} data-deck={deck.deckId}>
-    <div><strong>{deck.deckId}</strong><small>{deck.character.name} · {1+deck.characterBoundCards.length} iniziali · {deck.regularCards.length} regolari</small></div>
+    <div><strong>{deck.deckId}</strong><small>{deck.character.name} · {deck.regularCards.length} regolari</small>
+     {/* R02 1.12 (D20): a deck saved under older rules stays here but cannot be played until it is fixed. */}
+     {problems(editCopy(deck)).length>0&&<small data-testid="deck-invalid">Non rispetta le regole attuali: modificalo o cancellalo.</small>}</div>
     {confirm===deck.deckId?<div className="actions confirm" role="group" aria-label={`Conferma cancellazione di ${deck.deckId}`}><span>Cancellare «{deck.deckId}»? Non si può annullare.</span>
       <PressButton data-testid="confirm-delete" className="danger" disabled={session.deckBusy} onClick={()=>void remove(deck)}>{session.deckBusy?'Cancello…':'Cancella'}</PressButton>
       <PressButton disabled={session.deckBusy} onClick={()=>setConfirm(null)}>Annulla</PressButton></div>

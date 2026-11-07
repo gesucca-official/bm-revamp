@@ -35,31 +35,56 @@ function client(user, password = 'synthetic') {
   const profile = (await a.command({command:'profile'})).data;
   assert.strictEqual(profile.collection.cards.length, 37);
   const card = binding => {const c = profile.collection.cards.find(c => c.bindingName === binding); assert(c, binding); return c;};
-  const deck = {deckId:'cli-fixture', character:profile.collection.characters.find(c => c.bindingName === 'bruiser.character.BigBadBruiser'),
-    basicActionCard:card('com.basic.BruiserGrab'), lastResortCard:card('com.last.Struggle'), characterBoundCards:[],
-    regularCards:Array(12).fill(card('bruiser.SuperImpact'))};
+  // R02 1.12: own basic, two different own bound cards, Struggle, 20 regular cards with at most 2 copies each.
+  const twice = bindings => [].concat(...bindings.map(b => [card(b), card(b)]));
+  const bruiser = profile.collection.characters.find(c => c.bindingName === 'bruiser.character.BigBadBruiser');
+  const ten = ['bruiser.SuperImpact','bruiser.Glare','bruiser.StunningBlow','bruiser.YouStop','bruiser.MadeOfStone',
+    'bruiser.SeagullFly','com.ShuffleFeet','com.Steal','com.items.RottenBeer','com.items.CocktailOnTheGround'];
+  const deck = {deckId:'cli-fixture', character:bruiser,
+    basicActionCard:card('com.basic.BruiserGrab'), lastResortCard:card('com.last.Struggle'),
+    characterBoundCards:[card('bruiser.character.LittleSmack'), card('bruiser.character.LittleRage')], regularCards:twice(ten)};
   assert(deck.character);
   assert((await a.command({command:'save',deck})).data.decks.some(d => d.deckId === deck.deckId));
   assert(!(await b.command({command:'profile'})).data.decks.some(d => d.deckId === deck.deckId));
-  // I15: canonical catalog validation, variable sizes and copies, atomic rejection.
-  const bound = card('junkie.character.RottenSmile');
-  const modified = Object.assign({}, deck, {regularCards:[card('com.Grab')], characterBoundCards:Array(5).fill(bound)});
-  assert.strictEqual((await a.command({command:'save',deck:modified})).data.decks.find(d => d.deckId === deck.deckId).characterBoundCards.length,5);
+  // I15 / R02 1.12: canonical catalog validation and atomic rejection; the overwrite changes bound order and regular cards.
+  const otherTen = ten.map(x => x === 'bruiser.SuperImpact' ? 'com.Grab' : x);
+  const modified = Object.assign({}, deck, {regularCards:twice(otherTen), characterBoundCards:deck.characterBoundCards.slice().reverse()});
+  const overwritten = (await a.command({command:'save',deck:modified})).data.decks.find(d => d.deckId === deck.deckId);
+  assert.deepStrictEqual(overwritten.characterBoundCards.map(c => c.bindingName), ['bruiser.character.LittleRage','bruiser.character.LittleSmack']);
+  assert.strictEqual(overwritten.regularCards.filter(c => c.bindingName === 'com.Grab').length, 2);
+  const smack = card('bruiser.character.LittleSmack'), rage = card('bruiser.character.LittleRage');
+  const regular = modified.regularCards;
   const invalid = [
+    // Requirements kept from I15 and 1.8.
     {basicActionCard:null}, {lastResortCard:null}, {character:null}, {regularCards:[]},
-    {characterBoundCards:Array(6).fill(bound)}, {regularCards:[null]}, {regularCards:[bound]},
-    {characterBoundCards:[card('com.Grab')]}, {basicActionCard:card('com.Grab')},
-    {regularCards:[{bindingName:'missing.Card'}]}, {deckId:'   '}, {deckId:'a/b'}, {characterBoundCards:null}
+    {regularCards:[null].concat(regular.slice(1))}, {regularCards:[smack].concat(regular.slice(1))},
+    {characterBoundCards:[smack, card('com.Grab')]}, {basicActionCard:card('com.Grab')},
+    {regularCards:[{bindingName:'missing.Card'}].concat(regular.slice(1))}, {deckId:'   '}, {deckId:'a/b'}, {characterBoundCards:null},
+    // R02 1.12: 19 and 21 regular cards, a third copy (action and item), bound of another character, equal bound cards,
+    // one or three bound cards, basic of another character, last resort in the wrong slot.
+    {regularCards:regular.slice(1)}, {regularCards:regular.concat([card('junkie.Cough')])},
+    {regularCards:[card('bruiser.Glare')].concat(regular.slice(1))}, {regularCards:[card('com.items.RottenBeer')].concat(regular.slice(1))},
+    {characterBoundCards:[smack, card('junkie.character.PatheticBlade')]}, {characterBoundCards:[smack, smack]},
+    {characterBoundCards:[smack]}, {characterBoundCards:[smack, rage, card('junkie.character.RottenSmile')]},
+    {basicActionCard:card('com.basic.ToxicGrab')}, {lastResortCard:card('com.Grab')}
   ];
+  const reasons = [];
   for (const patch of invalid) {
     const mark = a.events.length;
     a.send('/app/user/cliModesA/deck', Object.assign({},modified,patch));
     const error = await a.wait('/user/queue/account/error',mark);
     assert(String(error.data).includes('Invalid deck'));
+    reasons.push(String(error.data));
     const stored = (await a.command({command:'profile'})).data.decks.find(d => d.deckId === deck.deckId);
-    assert.strictEqual(stored.regularCards.length,1);
-    assert.strictEqual(stored.characterBoundCards.length,5);
+    assert.deepStrictEqual(stored.regularCards.map(c => c.bindingName), modified.regularCards.map(c => c.bindingName));
+    assert.deepStrictEqual(stored.characterBoundCards.map(c => c.bindingName), ['bruiser.character.LittleRage','bruiser.character.LittleSmack']);
   }
+  for (const reason of ['Exactly 20 regular cards required, found 19', 'Exactly 20 regular cards required, found 21',
+    'At most 2 copies per card: bruiser.Glare has 3', 'At most 2 copies per card: com.items.RottenBeer has 3',
+    'Bound card of another character: junkie.character.PatheticBlade', 'Bound cards must be different: bruiser.character.LittleSmack',
+    'Two different bound cards of the character required, found 1', 'Two different bound cards of the character required, found 3',
+    'Basic of another character: com.basic.ToxicGrab'])
+    assert(reasons.includes('Invalid deck: ' + reason), reason);
   await b.command({command:'delete',deck});
   assert((await a.command({command:'profile'})).data.decks.some(d => d.deckId === deck.deckId));
   await a.command({command:'save',deck});

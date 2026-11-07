@@ -33,6 +33,9 @@ public interface Card {
 
     String getBoundToCharacter();
 
+    // Regulation 1.12 R02: the character a basic or last resort is reserved to (null = generic); read only by deck validation.
+    String getExclusiveToCharacter();
+
     int getPriority();  // higher priority resolved first (2 before 1)
 
     Set<CardTarget> getCanTarget();
@@ -51,6 +54,7 @@ public interface Card {
         boolean lastResort;
         boolean characterBound;
         String boundToCharacter;
+        String exclusiveToCharacter;
         int priority;
         Set<CardTarget> canTarget;
         Map<Resource, Integer> cost;

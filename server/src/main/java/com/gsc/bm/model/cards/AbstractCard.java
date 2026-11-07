@@ -80,6 +80,10 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     // Nominal damage amount to the target (regulation 1.10 R07a), e.g. "HIT 15", "HIT 20+x" or "—".
     @Setter(AccessLevel.NONE)
     private String damageAmount;
+    // Catalog field (regulation 1.12 R02): the character a basic or last resort is reserved to, null when generic.
+    // Only deck validation reads it; no effect depends on it. Bound ownership stays in boundToCharacter.
+    @Setter(AccessLevel.NONE)
+    private String exclusiveToCharacter;
 
     @Override
     public void setGuiName(String name) {
@@ -115,6 +119,11 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     @Override
     public void setGuiDamageAmount(String damageAmount) {
         this.damageAmount = damageAmount;
+    }
+
+    @Override
+    public void setGuiExclusiveTo(String character) {
+        this.exclusiveToCharacter = character;
     }
 
     @Override

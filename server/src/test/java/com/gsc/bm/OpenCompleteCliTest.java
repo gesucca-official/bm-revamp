@@ -45,6 +45,10 @@ class OpenCompleteCliTest extends SqliteContextSupport {
         String user = "i16Human";
         for (String name : List.of(user,"i16Other"))
             users.createIfAbsent(new UserCredentialsRecord(name,null,encoder.encode("synthetic"),"USER"));
+        // R02 1.12 (D20): a deck saved under 1.11, written straight to the repository: listed, refused at the open start.
+        savedDecks.save(new UserDecksRecord(user,"i16-old-rules",new UserDecksRecord.UserStoredDeck("bruiser.character.BigBadBruiser",
+                "com.basic.BruiserGrab","com.last.Struggle",List.of("bruiser.character.LittleSmack","bruiser.character.LittleRage"),
+                List.of("com.ShuffleFeet"))));
         // Only the opponent is fixed. Saved human decks, factories, shuffle and dealing stay real.
         doAnswer(call -> {
             Character bc = new BigBadBruiser();
@@ -76,6 +80,7 @@ class OpenCompleteCliTest extends SqliteContextSupport {
             verify(factory,times(2)).craftRandomComPlayer();
             verify(factory).craftOpenPlayer(user,"i16-bruiser");
             verify(factory).craftOpenPlayer(user,"i16-junkie");
+            verify(factory).craftOpenPlayer(user,"i16-old-rules");
             assertFalse(Files.readString(output).contains("synthetic"));
             Files.copy(output,root.resolve(".build-logs/i16-exports.json"),StandardCopyOption.REPLACE_EXISTING);
         } finally { process.destroyForcibly(); reset(factory); }

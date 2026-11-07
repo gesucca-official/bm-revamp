@@ -12,12 +12,23 @@ async function main() {
     const profile=(await c.command({command:'profile'})).data;
     const card=b=>{const found=profile.collection.cards.find(c=>c.bindingName===b); assert(found,b); return found;};
     const character=b=>profile.collection.characters.find(c=>c.bindingName===b);
+    // R02 1.12: two valid decks, 20 regular actions (no items, so no draw chain) with two copies each. Every turn the human
+    // plays the bound without damage (`quiet`) discarding a regular card; with no regular card left in hand, Struggle.
+    // The bot (fixed by OpenCompleteCliTest) has no move, so HEALTH and deck counts are exact.
+    const n=20;
     const configs=[
-      {id:'i16-bruiser',character:'bruiser.character.BigBadBruiser',basic:'com.basic.BruiserGrab',bound:[],n:1},
-      {id:'i16-junkie',character:'junkie.character.ToxicJunkie',basic:'com.basic.ToxicGrab',bound:['junkie.character.RottenSmile','junkie.character.RottenSmile'],n:8}
+      {id:'i16-bruiser',character:'bruiser.character.BigBadBruiser',basic:'com.basic.BruiserGrab',
+        bound:['bruiser.character.LittleSmack','bruiser.character.LittleRage'],quiet:'bruiser.character.LittleRage',quietSelf:true,
+        regular:['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone',
+          'bruiser.SeagullFly','bruiser.HealingBlow','com.ShuffleFeet','com.Grab','com.Steal']},
+      {id:'i16-junkie',character:'junkie.character.ToxicJunkie',basic:'com.basic.ToxicGrab',
+        bound:['junkie.character.RottenSmile','junkie.character.PatheticBlade'],quiet:'junkie.character.RottenSmile',quietSelf:false,
+        regular:['junkie.Cough','junkie.BadTrip','junkie.GoingBerserk','junkie.MethDrivenRage','junkie.AmphetamineReflexes',
+          'junkie.PervertedMetabolism','junkie.ToxicBloodDrain','com.ShuffleFeet','com.Grab','com.Steal']}
     ];
+    const twice=bindings=>[].concat(...bindings.map(b=>[b,b]));
     function deck(cfg) { return {deckId:cfg.id,character:character(cfg.character),basicActionCard:card(cfg.basic),
-      characterBoundCards:cfg.bound.map(card),lastResortCard:card('com.last.Struggle'),regularCards:Array(cfg.n).fill(card('com.ShuffleFeet'))}; }
+      characterBoundCards:cfg.bound.map(card),lastResortCard:card('com.last.Struggle'),regularCards:twice(cfg.regular).map(card)}; }
     const foreign=Object.assign({},deck(configs[0]),{deckId:'i16-only-other'});
     await other.command({command:'save',deck:foreign});
     for (const id of ['i16-missing',foreign.deckId]) {
@@ -26,6 +37,16 @@ async function main() {
       const error=await c.wait('/user/queue/game/open/1vCom/error',mark);
       assert.strictEqual(error.data,'Deck unavailable. Choose a saved deck from your account and retry.');
       await c.command({command:'profile'}); // same connection remains usable, no private ready
+      assert(!c.events.slice(mark).some(e=>e.destination==='/user/queue/game/open/1vCom/ready'));
+    }
+    {
+      // R02 1.12 (D20): a deck saved under 1.11 (stored by OpenCompleteCliTest, one regular card) stays listed but is refused.
+      assert((await c.command({command:'profile'})).data.decks.some(d=>d.deckId==='i16-old-rules'));
+      const mark=c.events.length;
+      await c.command({command:'join',mode:'open/1vCom',deckId:'i16-old-rules'});
+      const error=await c.wait('/user/queue/game/open/1vCom/error',mark);
+      assert.strictEqual(error.data,'Invalid deck: Exactly 20 regular cards required, found 1. Edit or delete it in your collection.');
+      await c.command({command:'profile'});
       assert(!c.events.slice(mark).some(e=>e.destination==='/user/queue/game/open/1vCom/ready'));
     }
     for (const cfg of configs) {
@@ -38,7 +59,7 @@ async function main() {
       let view=(await c.command({command:'view',gameId:id})).data;
       const bot=Object.keys(view.players).find(p=>p!==user);
       assert.strictEqual(view.players[user].character.bindingName,cfg.character);
-      assert.strictEqual(view.players[user].deck,Math.max(0,cfg.n-(5-cfg.bound.length)));
+      assert.strictEqual(view.players[user].deck,Math.max(0,n-(5-cfg.bound.length)));
       assert.strictEqual(view.players[user].cardsInHand.filter(c=>c.characterBound).length,cfg.bound.length);
       // Replace the character, basic, bound and regular configuration, then delete the live record.
       const replacement=deck(configs.find(x=>x!==cfg)); replacement.deckId=cfg.id;
@@ -49,22 +70,27 @@ async function main() {
       assert.deepStrictEqual((await c.command({command:'view',gameId:id})).data,view);
       let turns=0,lastMove;
       while(!view.over) {
-        assert(turns<30,'Runner stall bound; no game timeout');
+        assert(turns<40,'Runner stall bound; no game timeout');
         const hand=view.players[user].cardsInHand;
-        const action=hand.find(c=>c.bindingName==='com.ShuffleFeet') || hand.find(c=>c.lastResort);
-        assert(action);
-        lastMove={gameId:id,playerId:user,playedCardName:action.name,targetId:bot,choices:null};
+        const discard=hand.find(c=>!c.basicAction&&!c.characterBound&&!c.lastResort);
+        if (discard) {
+          const quiet=hand.find(c=>c.bindingName===cfg.quiet); assert(quiet);
+          lastMove={gameId:id,playerId:user,playedCardName:quiet.name,targetId:cfg.quietSelf?'SELF':bot,choices:{DISCARD_ONE:discard.name}};
+        } else {
+          const struggle=hand.find(c=>c.lastResort); assert(struggle);
+          lastMove={gameId:id,playerId:user,playedCardName:struggle.name,targetId:bot,choices:null};
+        }
         mark=c.events.length;
         await c.command({command:'move',move:lastMove});
         await c.wait('/topic/game/'+id+'/update',mark);
         view=(await c.command({command:'view',gameId:id})).data;
         turns++;
-        const damage=Math.max(0,turns-cfg.n);
+        const damage=Math.max(0,turns-n);
         assert.strictEqual(view.players[user].character.resources.HEALTH,100-5*damage);
         assert.strictEqual(view.players[bot].character.resources.HEALTH,100-10*damage);
-        assert.strictEqual(view.players[user].deck,Math.max(0,cfg.n-(5-cfg.bound.length)-turns));
+        assert.strictEqual(view.players[user].deck,Math.max(0,n-(5-cfg.bound.length)-turns));
       }
-      assert.strictEqual(turns,cfg.n+10);
+      assert.strictEqual(turns,n+10);
       const exported=(await c.command({command:'export',gameId:id})).data;
       assert.deepStrictEqual(exported.unpersistedEvents,[]);
       assert.strictEqual(exported.recording.complete,true); assert.strictEqual(exported.recording.status,'OK');
@@ -85,7 +111,7 @@ async function main() {
       assert.strictEqual(initial.state.mode,'open1vCom');
       assert.strictEqual(human.character,cfg.character);
       assert.deepStrictEqual(human.specialCards,[cfg.basic,...cfg.bound]);
-      assert.deepStrictEqual(human.initialDeckDrawOrder,Array(cfg.n).fill('com.ShuffleFeet'));
+      assert.deepStrictEqual(human.initialDeckDrawOrder.slice().sort(),twice(cfg.regular).sort());
       assert.strictEqual(human.lastResort,'com.last.Struggle');
       events.filter(e=>e.kind==='ROUND_READY').forEach(e=>assert.strictEqual(e.data.pendingMoves.find(m=>m.playerId===bot).void,true));
       const final=events[events.length-1].data;

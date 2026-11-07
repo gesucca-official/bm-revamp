@@ -7,6 +7,7 @@ import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.repo.external.UserDeckRecordKey;
 import com.gsc.bm.repo.external.UserDecksRepository;
+import com.gsc.bm.service.account.DeckRules;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,12 +55,14 @@ public class PlayerFactoryServiceImpl implements PlayerFactoryService {
         // One persisted snapshot; all runtime objects are newly crafted from its bindings.
         var deck = userDecksRepo.findById(new UserDeckRecordKey(username, deckId))
                 .orElseThrow(() -> new ValueNotFoundException("Deck unavailable")).getDeck();
-        return new Player(username,
-                characterFactoryService.craftCharacter(deck.getCharacterClazz()),
-                cards.craftCard(deck.getBasicActionCardClazz()),
-                deck.getCharacterBoundCardsClazz().stream().map(cards::craftCard).collect(Collectors.toList()),
-                cards.craftCard(deck.getLastResortCardClazz()),
-                deck.getRegularCardsClazz().stream().map(cards::craftCard).collect(Collectors.toList()));
+        var basic = cards.craftCard(deck.getBasicActionCardClazz());
+        var bound = deck.getCharacterBoundCardsClazz().stream().map(cards::craftCard).collect(Collectors.toList());
+        var lastResort = cards.craftCard(deck.getLastResortCardClazz());
+        var regular = deck.getRegularCardsClazz().stream().map(cards::craftCard).collect(Collectors.toList());
+        // R02 1.12: a deck saved under older rules stays in the account but is not used to play (D20).
+        DeckRules.check(deck.getCharacterClazz(), basic, bound, lastResort, regular);
+        return new Player(username, characterFactoryService.craftCharacter(deck.getCharacterClazz()),
+                basic, bound, lastResort, regular);
     }
 
     private Character randomPlayer() {

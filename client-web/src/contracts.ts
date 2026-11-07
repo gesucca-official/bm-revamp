@@ -10,6 +10,8 @@ export interface Card {
   // Descriptive catalog fields (regulation 1.7 R07a, 1.9 and 1.10); absent on older servers.
   // `damage`: "HIT", "CUT", "POISON", several as "HIT, CUT" or "—"; `damageAmount`: "HIT 15", "HIT 20+x", "—".
   role?: string | null; gains?: string | null; damage?: string | null; damageAmount?: string | null;
+  // Regulation 1.12 R02: the character a basic or last resort is reserved to (null = generic); read by the deck editor.
+  exclusiveToCharacter?: string | null;
 }
 export interface Status {
   name: string; description: string; type: string; flow: string;

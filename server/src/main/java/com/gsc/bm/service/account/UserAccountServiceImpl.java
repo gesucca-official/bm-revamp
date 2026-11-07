@@ -83,19 +83,14 @@ public class UserAccountServiceImpl implements UserAccountService {
         // R02 1.8: the identifier is a path segment of the open join destination.
         if (deck.getDeckId().contains("/"))
             throw new IllegalArgumentException("Deck identifier cannot contain /");
-        if (!catalogCard(deck.getBasicActionCard()).isBasicAction()
-                || !catalogCard(deck.getLastResortCard()).isLastResort())
-            throw new IllegalArgumentException("Basic and last resort required");
-        if (deck.getCharacterBoundCards() == null || deck.getRegularCards() == null
-                || deck.getRegularCards().isEmpty() || deck.getCharacterBoundCards().size() > 5)
-            throw new IllegalArgumentException("Nonempty regular deck and at most six initial cards required");
-        for (Card input : deck.getCharacterBoundCards())
-            if (!catalogCard(input).isCharacterBound()) throw new IllegalArgumentException("Bound card required");
-        for (Card input : deck.getRegularCards()) {
-            Card card = catalogCard(input);
-            if (card.isBasicAction() || card.isLastResort() || card.isCharacterBound())
-                throw new IllegalArgumentException("Regular card required");
-        }
+        // R02 1.12: every reference is resolved in the catalog; subtypes and ownership come from there, not from the client.
+        DeckRules.check(deck.getCharacter().getBindingName(),
+                catalogCard(deck.getBasicActionCard()),
+                deck.getCharacterBoundCards() == null ? null
+                        : deck.getCharacterBoundCards().stream().map(this::catalogCard).collect(Collectors.toList()),
+                catalogCard(deck.getLastResortCard()),
+                deck.getRegularCards() == null ? null
+                        : deck.getRegularCards().stream().map(this::catalogCard).collect(Collectors.toList()));
     }
 
     // for now everyone has all the cards

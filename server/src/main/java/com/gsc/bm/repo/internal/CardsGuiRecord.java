@@ -49,4 +49,8 @@ public class CardsGuiRecord implements Serializable {
     @Column(name = "T_GUI_DAMAGE_AMOUNT")
     private String guiDamageAmount;
 
+    // Regulation 1.12 R02: character a basic or last resort is reserved to; null = generic. Read by deck validation.
+    @Column(name = "C_EXCLUSIVE_TO")
+    private String exclusiveTo;
+
 }

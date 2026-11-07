@@ -167,78 +167,116 @@ try{
  assert.equal(shownCards.length+shownChars.length,39);assert.equal(art,39);assert.ok(scroll.page);
  await page.getByTestId('show-catalog').click();
 
- // P19/P21: invalid drafts are not sendable; "/" is refused (R02 1.8).
+ // R02 1.12 (SB-1): the regular cards of the decks of this run, ten actions twice and no item, so hand plus deck stays countable.
+ const TEN_B=['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone','bruiser.SeagullFly','bruiser.HealingBlow','com.ShuffleFeet','com.Grab','com.Steal'];
+ const TEN_J=['junkie.Cough','junkie.BadTrip','junkie.GoingBerserk','junkie.MethDrivenRage','junkie.AmphetamineReflexes','junkie.PervertedMetabolism','junkie.ToxicBloodDrain','com.ShuffleFeet','com.Grab','com.Steal'];
+ const twice=list=>list.flatMap(b=>[b,b]);
+ const problemsNow=()=>page.locator('[data-testid=deck-problems] li').allInnerTexts();
+ const offered=async title=>(await slot(title)).locator('button.pick').evaluateAll(n=>n.map(e=>e.getAttribute('aria-label')));
+ const pickCharacter=async b=>(await slot('Personaggio')).getByRole('button',{name:`Personaggio ${characters[b]}`,exact:true}).click();
+ const pickBound=async b=>(await slot('Azioni legate')).getByRole('button',{name:`Azione legata ${card(b)}`,exact:true}).click();
+ const pickStruggle=async()=>(await slot('Ultima risorsa')).getByRole('button',{name:`Ultima risorsa ${card('com.last.Struggle')}`,exact:true}).click();
+ const canAddCopy=async binding=>{await page.getByTestId('card-search').fill(binding);const on=await page.getByRole('button',{name:`Aggiungi una copia di ${card(binding)}`,exact:true}).isEnabled();await page.getByTestId('card-search').fill('');return on;};
+ const removeCopy=async binding=>{await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card(binding)}`);await page.getByRole('radio',{name:'Collezione'}).click();};
+ const summary=async title=>(await page.locator('details.slot summary',{hasText:title}).locator('b').innerText()).trim();
+
+ // P19/P21 and R02 1.12: invalid drafts are not sendable; the editor offers only what the rules allow and ignores the rest.
  const markInvalid=A.sent.length;
  await page.getByTestId('new-deck').click();
- const empty=await page.locator('[data-testid=deck-problems] li').allInnerTexts();
+ const empty=await problemsNow();
  assert.equal(await page.getByTestId('save-deck').isEnabled(),false);
- await (await slot('Personaggio')).getByRole('button',{name:`Personaggio ${characters['bruiser.character.BigBadBruiser']}`,exact:true}).click();
- await (await slot('Azione base')).getByRole('button',{name:`Azione base ${card('com.basic.BruiserGrab')}`,exact:true}).click();
- await (await slot('Ultima risorsa')).getByRole('button',{name:`Ultima risorsa ${card('com.last.Struggle')}`,exact:true}).click();
- const noRegular=await page.locator('[data-testid=deck-problems] li').allInnerTexts();
- await slot('Mazzo regolare');await addRegular('bruiser.Glare',1);
+ const beforeCharacter={basic:await offered('Azione base'),bound:await offered('Azioni legate')};
+ await pickCharacter('bruiser.character.BigBadBruiser');
+ const bruiserOffer={basicSummary:await summary('Azione base'),basic:await offered('Azione base'),bound:await offered('Azioni legate'),last:await offered('Ultima risorsa')};
+ await pickStruggle();
+ await pickBound('bruiser.character.LittleSmack');await pickBound('bruiser.character.LittleRage');
+ await pickBound('bruiser.character.LittleSmack');const afterToggle=await text('[data-testid=bound-list]');
+ await pickBound('bruiser.character.LittleSmack');
+ await slot('Mazzo regolare');
+ await addRegular('bruiser.Glare',2);const thirdCopy=await canAddCopy('bruiser.Glare');
+ for(const b of TEN_B.slice(1))await addRegular(b,2);
+ const full={counts:await text('[data-testid=deck-counts]'),problems:await problemsNow(),another:await canAddCopy('junkie.Cough')};
+ await removeCopy('bruiser.Glare');
+ const nineteen={problems:await problemsNow(),save:await page.getByTestId('save-deck').isEnabled()};
+ await addRegular('bruiser.Glare',1);
  await page.getByTestId('deck-name').fill('a/b');
- const slash=await page.locator('[data-testid=deck-problems] li').allInnerTexts(),slashSave=await page.getByTestId('save-deck').isEnabled();
+ const slash=await problemsNow(),slashSave=await page.getByTestId('save-deck').isEnabled();
  await A.shot('02-invalid');
+ // Changing character: its fixed basic comes in, the other character's bound cards leave, regular cards stay.
+ await pickCharacter('junkie.character.ToxicJunkie');
+ const switched={basicSummary:await summary('Azione base'),bound:await text('[data-testid=bound-list]'),boundOffer:await offered('Azioni legate'),problems:await problemsNow()};
  await page.getByTestId('cancel-edit').click();
- step('invalidNotSendable',{emptyDraft:empty,withoutRegular:noRegular,slashName:slash,saveEnabledWithSlash:slashSave,deckSends:A.sends(markInvalid).filter(f=>f.headers.destination.includes('/deck')).length});
- assert.equal(empty.length,5);assert.deepEqual(noRegular,['Dai un nome al mazzo.','Metti almeno una carta regolare nel mazzo.']);assert.deepEqual(slash,['Il nome non può contenere «/».']);assert.equal(slashSave,false);
+ step('rulesInEditor',{emptyDraft:empty,beforeCharacter,bruiserOffer,afterToggle,thirdCopyEnabled:thirdCopy,full,nineteen,slashName:slash,saveEnabledWithSlash:slashSave,switched,
+  deckSends:A.sends(markInvalid).filter(f=>f.headers.destination.includes('/deck')).length});
+ assert.deepEqual(empty,['Dai un nome al mazzo.','Scegli il personaggio.','Scegli l’azione base.','Scegli l’ultima risorsa.','Scegli 2 azioni legate diverse (ne hai 0).','Servono esattamente 20 carte regolari: ne hai 0.']);
+ assert.deepEqual(beforeCharacter,{basic:[],bound:[]});
+ assert.equal(bruiserOffer.basicSummary,card('com.basic.BruiserGrab'),'the basic comes with the character');
+ assert.deepEqual(bruiserOffer.basic,[`Azione base ${card('com.basic.BruiserGrab')}`]);
+ assert.deepEqual([...bruiserOffer.bound].sort(),[`Azione legata ${card('bruiser.character.LittleRage')}`,`Azione legata ${card('bruiser.character.LittleSmack')}`].sort());
+ assert.deepEqual(bruiserOffer.last,[`Ultima risorsa ${card('com.last.Struggle')}`]);
+ assert.equal(afterToggle,card('bruiser.character.LittleRage'),'a second click leaves the bound');
+ assert.equal(thirdCopy,false,'no third copy');
+ assert.match(full.counts,/Regolari 20 \/ 20/);assert.deepEqual(full.problems,['Dai un nome al mazzo.']);assert.equal(full.another,false,'no 21st card');
+ assert.deepEqual(nineteen,{problems:['Dai un nome al mazzo.','Servono esattamente 20 carte regolari: ne hai 19.'],save:false});
+ assert.deepEqual(slash,['Il nome non può contenere «/».']);assert.equal(slashSave,false);
+ assert.equal(switched.basicSummary,card('com.basic.ToxicGrab'));assert.equal(switched.bound,'nessuna');
+ assert.deepEqual([...switched.boundOffer].sort(),[`Azione legata ${card('junkie.character.PatheticBlade')}`,`Azione legata ${card('junkie.character.RottenSmile')}`].sort());
+ assert.ok(switched.problems.includes('Scegli 2 azioni legate diverse (ne hai 0).'));
  assert.equal(A.sends(markInvalid).filter(f=>f.headers.destination.includes('/deck')).length,0);
 
- // P19/P21/P22/P23: create "Strano" with two bound copies and a few repeated regular cards, then save.
+ // P19/P21/P22/P23: create "Strano" (Bruiser, both bound cards, ten actions twice), search, remove and put back a copy, save.
  const markSave=A.sent.length;
  await page.getByTestId('new-deck').click();
  await page.getByTestId('deck-name').fill('Strano');
- await (await slot('Personaggio')).getByRole('button',{name:`Personaggio ${characters['bruiser.character.BigBadBruiser']}`,exact:true}).click();
- await (await slot('Azione base')).getByRole('button',{name:`Azione base ${card('com.basic.BruiserGrab')}`,exact:true}).click();
- await (await slot('Ultima risorsa')).getByRole('button',{name:`Ultima risorsa ${card('com.last.Struggle')}`,exact:true}).click();
- const bound=await slot('Azioni legate');
- for(let i=0;i<3;i++)await bound.getByRole('button',{name:`Aggiungi l’azione legata ${card('bruiser.character.LittleSmack')}`,exact:true}).click();
- const threeBound=await text('[data-testid=bound-list]');
- await page.getByTestId('clear-bound').click();const cleared=await text('[data-testid=bound-list]');
- // No compatibility filter: a Junkie bound goes into a Bruiser deck.
- await bound.getByRole('button',{name:`Aggiungi l’azione legata ${card('bruiser.character.LittleSmack')}`,exact:true}).click();
- await bound.getByRole('button',{name:`Aggiungi l’azione legata ${card('junkie.character.PatheticBlade')}`,exact:true}).click();
+ await pickCharacter('bruiser.character.BigBadBruiser');await pickStruggle();
+ await pickBound('bruiser.character.LittleSmack');await pickBound('bruiser.character.LittleRage');
  await slot('Mazzo regolare');
- await addRegular('bruiser.Glare',4);await addRegular('com.ShuffleFeet',3);
- // Search on the card text, then the deck view: remove one copy with the same name.
+ for(const b of TEN_B)await addRegular(b,2);
  {const pool=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>({text:e.innerText,pills:e.querySelectorAll('.dmg-pill').length})));
   assert.ok(pool.length>0&&pool.every(f=>!/priorit/i.test(f.text)),'editor faces: no priority');assert.ok(pool.some(f=>f.pills>0),'editor faces: damage pills present');step('editorFaces',{faces:pool.length,withDamage:pool.filter(f=>f.pills).length});}
+ // Search on the card text, then the deck view: remove one copy with the same name, then put it back.
  await page.getByTestId('card-search').fill('ShuffleFeet');const searched=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').count();
  await page.getByTestId('pool-deck').click();await press(`Togli una copia di ${card('com.ShuffleFeet')}`);
  const deckView=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();await page.getByTestId('card-search').fill('');
  const deckViewAll=await page.locator('[data-testid=regular-pool] strong').allInnerTexts();
+ const removedSave=await page.getByTestId('save-deck').isEnabled();
+ await page.getByRole('radio',{name:'Collezione'}).click();await addRegular('com.ShuffleFeet',1);
  const counts=await text('[data-testid=deck-counts]');await A.shot('03-editor');
  await page.getByTestId('save-deck').click();
  const saved=await deckSaved(markSave,'Strano');
  const deckSends=A.sends(markSave).filter(f=>f.headers.destination.startsWith('/app/user/devAlice/deck'));
- step('createAndSave',{threeBound,afterClear:cleared,searchShuffle:searched,deckViewAfterSearch:deckView,deckView:deckViewAll,counts,sends:deckSends.map(f=>f.headers.destination),
+ step('createAndSave',{searchShuffle:searched,deckViewAfterSearch:deckView,deckView:deckViewAll,saveEnabledAt19:removedSave,counts,sends:deckSends.map(f=>f.headers.destination),
   saved:{character:saved.character.bindingName,basic:saved.basicActionCard.bindingName,last:saved.lastResortCard.bindingName,bound:saved.characterBoundCards.map(c=>c.bindingName),regular:saved.regularCards.map(c=>c.bindingName)},listed:await page.locator('[data-testid=deck-list] li strong').allInnerTexts()});
- assert.equal(deckSends.length,1);assert.equal(saved.characterBoundCards.length,2);
- assert.deepEqual(saved.regularCards.map(c=>c.bindingName).sort(),['bruiser.Glare','bruiser.Glare','bruiser.Glare','bruiser.Glare','com.ShuffleFeet','com.ShuffleFeet']);
+ assert.equal(deckSends.length,1);assert.equal(removedSave,false);
+ assert.deepEqual(saved.characterBoundCards.map(c=>c.bindingName),['bruiser.character.LittleSmack','bruiser.character.LittleRage']);
+ assert.equal(saved.basicActionCard.bindingName,'com.basic.BruiserGrab');
+ assert.deepEqual(saved.regularCards.map(c=>c.bindingName).sort(),twice(TEN_B).sort());
  assert.deepEqual(await page.locator('[data-testid=deck-list] li strong').allInnerTexts(),['Strano']);
+ assert.equal(await page.locator('[data-deck="Strano"] [data-testid=deck-invalid]').count(),0);
 
  // P20: reopen, change, cancel: nothing is sent and the saved deck is unchanged.
  const markCancel=A.sent.length,before=JSON.stringify(A.account().decks);
  await page.locator('[data-deck="Strano"]').getByTestId('edit-deck').click();
  const readOnly=await page.getByTestId('deck-name').evaluate(e=>e.readOnly);
- await slot('Mazzo regolare');await addRegular('bruiser.SuperImpact',2);
- await (await slot('Azioni legate')).getByTestId('clear-bound').click();
+ await slot('Mazzo regolare');await removeCopy('bruiser.Glare');await removeCopy('bruiser.Glare');
+ await pickBound('bruiser.character.LittleSmack');
  await page.getByTestId('cancel-edit').click();
  await page.locator('[data-deck="Strano"]').getByTestId('edit-deck').click();
  const reopened={counts:await text('[data-testid=deck-counts]'),bound:await page.getByTestId('bound-list').textContent()};
  step('cancelKeepsSaved',{nameReadOnly:readOnly,sends:A.sends(markCancel).map(f=>f.headers.destination),reopened,profileUnchanged:JSON.stringify(A.account().decks)===before});
- assert.ok(readOnly);assert.equal(A.sends(markCancel).length,0);assert.match(reopened.counts,/regolari 6 /);assert.equal(reopened.bound,`${card('bruiser.character.LittleSmack')}, ${card('junkie.character.PatheticBlade')}`);
+ assert.ok(readOnly);assert.equal(A.sends(markCancel).length,0);assert.match(reopened.counts,/Regolari 20 \/ 20/);
+ assert.equal(reopened.bound,`${card('bruiser.character.LittleSmack')}, ${card('bruiser.character.LittleRage')}`);
 
- // P23: modify and overwrite the same deckId.
+ // P23: modify (SuperImpact out, ExtremelyViolentBlow in) and overwrite the same deckId.
  const markOver=A.sent.length;
- await (await slot('Azioni legate')).getByRole('button',{name:`Aggiungi l’azione legata ${card('bruiser.character.LittleRage')}`,exact:true}).click();
- await slot('Mazzo regolare');await addRegular('bruiser.Glare',2);
+ await slot('Mazzo regolare');await removeCopy('bruiser.SuperImpact');await removeCopy('bruiser.SuperImpact');
+ await addRegular('bruiser.ExtremelyViolentBlow',2);
  const label=await page.getByTestId('save-deck').innerText();
  await page.getByTestId('save-deck').click();
  const over=await deckSaved(markOver,'Strano');
- step('overwrite',{button:label,sends:A.sends(markOver).map(f=>f.headers.destination),decks:A.account().decks.map(d=>d.deckId),bound:over.characterBoundCards.map(c=>c.bindingName),regular:over.regularCards.length});
- assert.equal(label,'Sovrascrivi');assert.equal(A.account().decks.length,1);assert.equal(over.characterBoundCards.length,3);assert.equal(over.regularCards.length,8);
+ step('overwrite',{button:label,sends:A.sends(markOver).map(f=>f.headers.destination),decks:A.account().decks.map(d=>d.deckId),bound:over.characterBoundCards.map(c=>c.bindingName),regular:over.regularCards.map(c=>c.bindingName)});
+ assert.equal(label,'Sovrascrivi');assert.equal(A.account().decks.length,1);assert.equal(over.regularCards.length,20);
+ assert.equal(over.regularCards.filter(c=>c.bindingName==='bruiser.ExtremelyViolentBlow').length,2);assert.ok(!over.regularCards.some(c=>c.bindingName==='bruiser.SuperImpact'));
 
  // P16: open 1vCom with "Strano": cancel first, then start and play to the outcome through the UI.
  const opened=await startOpen('Strano',{cancelFirst:true});
@@ -251,7 +289,7 @@ try{
   hand:me.cardsInHand.map(c=>c.bindingName),deck:me.deck,opponent:Object.keys(first.players).find(id=>id!=='devAlice')};
  assert.deepEqual(opening.join,['/app/game/open/1vCom/join/devAlice/Strano']);
  assert.equal(opening.character,'bruiser.character.BigBadBruiser');assert.ok(opening.opponent.startsWith('ComPlayer_'));
- assert.equal(opening.hand.length+opening.deck,1+3+8,'hand plus deck = basic + bound + regular');
+ assert.equal(opening.hand.length+opening.deck,1+2+20,'hand plus deck = basic + two bound + 20 regular');
  let turns=0;
  while(true){
   const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),150000,'next turn');
@@ -275,33 +313,29 @@ try{
  step('newGameRepeatsOpen',{join:again});
  assert.deepEqual(again,['/app/game/open/1vCom/join/devAlice/Strano']);
 
- // Valid per R02 but strange: six initial cards (basic + five bound) and every regular card the same.
- const markSix=A.sent.length;
+ // R02 1.12: always three initial cards. A Junkie deck: at the start the hand holds ToxicGrab, the two bound cards and three
+ // regular cards, the deck the other 17. (Before SB-1 this step played a six-initial-card deck into the R03 no-move state:
+ // with the deck rules that state cannot be reached any more.)
+ const markJ=A.sent.length;
  await page.getByTestId('tab-collection').click();await page.getByTestId('new-deck').click();
- await page.getByTestId('deck-name').fill('Sei iniziali');
- await (await slot('Personaggio')).getByRole('button',{name:`Personaggio ${characters['junkie.character.ToxicJunkie']}`,exact:true}).click();
- await (await slot('Azione base')).getByRole('button',{name:`Azione base ${card('com.basic.ToxicGrab')}`,exact:true}).click();
- await (await slot('Ultima risorsa')).getByRole('button',{name:`Ultima risorsa ${card('com.last.Struggle')}`,exact:true}).click();
- const six=await slot('Azioni legate');
- for(let i=0;i<7;i++)await six.getByRole('button',{name:`Aggiungi l’azione legata ${card(i%2?'junkie.character.RottenSmile':'bruiser.character.LittleSmack')}`,exact:true}).click();
- await slot('Mazzo regolare');await addRegular('junkie.Cough',12);
- const sixCounts=await text('[data-testid=deck-counts]');await A.shot('07-six-initial');
+ await page.getByTestId('deck-name').fill('Tossico');
+ await pickCharacter('junkie.character.ToxicJunkie');await pickStruggle();
+ await pickBound('junkie.character.RottenSmile');await pickBound('junkie.character.PatheticBlade');
+ await slot('Mazzo regolare');for(const b of TEN_J)await addRegular(b,2);
+ const jCounts=await text('[data-testid=deck-counts]');await A.shot('07-junkie-deck');
  await page.getByTestId('save-deck').click();
- const sixSaved=await deckSaved(markSix,'Sei iniziali');
- assert.equal(sixSaved.characterBoundCards.length,5);assert.equal(new Set(sixSaved.regularCards.map(c=>c.bindingName)).size,1);
- const sixOpen=await startOpen('Sei iniziali');
- await A.wait(s=>s&&s.phase==='choose'&&s.hits.some(h=>h.kind==='hand'),30000,'six-initial table');
- const sixGame=A.messages('/user/queue/game/open/1vCom/ready').at(-1).body,sixView=A.views(sixGame)[0].players.devAlice;
- await A.shot('08-six-initial-table');
- const sixFrom=fromDeck(sixGame,sixSaved);
- step('sixInitialPlayed',{counts:sixCounts,listed:sixOpen.listed,bound:sixSaved.characterBoundCards.map(c=>c.bindingName),regular:sixSaved.regularCards.length,character:sixView.character.bindingName,
-  hand:sixView.cardsInHand.map(c=>c.bindingName),deck:sixView.deck,handFromDeck:sixFrom,
-  note:'basic + five bound fill the hand: no draw, and with no regular card in hand neither the bound (discard) nor ToxicGrab (no item) can be played; R03 known limit, the game is then abandoned'});
- assert.equal(sixView.cardsInHand.length,6);assert.equal(sixView.deck,12);assert.deepEqual(sixFrom.foreign,[]);assert.equal(sixView.character.bindingName,'junkie.character.ToxicJunkie');
+ const jSaved=await deckSaved(markJ,'Tossico');
+ assert.equal(jSaved.basicActionCard.bindingName,'com.basic.ToxicGrab');assert.equal(jSaved.regularCards.length,20);
+ const jOpen=await startOpen('Tossico');
+ await A.wait(s=>s&&s.phase==='choose'&&s.hits.some(h=>h.kind==='hand'),30000,'junkie table');
+ const jGame=A.messages('/user/queue/game/open/1vCom/ready').at(-1).body,jView=A.views(jGame)[0].players.devAlice;
+ await A.shot('08-junkie-table');
+ const jFrom=fromDeck(jGame,jSaved),jHand=jView.cardsInHand;
+ step('threeInitialCards',{counts:jCounts,listed:jOpen.listed,bound:jSaved.characterBoundCards.map(c=>c.bindingName),character:jView.character.bindingName,
+  hand:jHand.map(c=>c.bindingName),deck:jView.deck,handFromDeck:jFrom});
+ assert.equal(jHand.length,6);assert.equal(jView.deck,17);assert.deepEqual(jFrom.foreign,[]);assert.equal(jView.character.bindingName,'junkie.character.ToxicJunkie');
+ assert.equal(jHand.filter(c=>c.basicAction).length,1);assert.equal(jHand.filter(c=>c.characterBound).length,2);assert.equal(jHand.filter(c=>!c.basicAction&&!c.characterBound&&!c.lastResort).length,3);
  await page.getByLabel('Apri menu').click();
- // C2b-7, P37: in this real no-move state the menu explains the R03 limit and offers the leave.
- const menuText=await page.locator('section.menu').first().innerText();await A.shot('08b-six-initial-menu');
- assert.ok(menuText.includes('il gioco non prevede di passare'),'R03 explanation in the table menu');evidence.checks.sixInitialPlayed.menuExplainsR03=true;
  await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();
  await page.getByTestId('quick').waitFor({timeout:15000});
 
@@ -326,7 +360,7 @@ try{
  await A.shot('10-delete-confirm');
  await page.locator('[data-deck="Strano"]').getByRole('button',{name:'Annulla'}).click();
  const afterCancel=A.sends(markDel).length;
- for(const id of ['Strano','Sei iniziali']){await page.locator(`[data-deck="${id}"]`).getByTestId('delete-deck').click();await page.getByTestId('confirm-delete').click();
+ for(const id of ['Strano','Tossico']){await page.locator(`[data-deck="${id}"]`).getByTestId('delete-deck').click();await page.getByTestId('confirm-delete').click();
   await page.locator(`[data-deck="${id}"]`).waitFor({state:'detached',timeout:10000});}
  await page.getByTestId('no-decks').waitFor();
  await page.getByTestId('tab-play').click();await page.getByTestId('quick').click();await page.getByTestId('no-saved-decks').waitFor();

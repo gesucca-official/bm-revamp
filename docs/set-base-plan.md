@@ -268,7 +268,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
 | Fase | Blocco | Contenuto | Dipende da |
 |---|---|---|---|
-| Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40) |
+| Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40; fatto, in attesa del giudizio) |
 | | SB-2 | Separazione fra regolamento e set | SB-1 |
 | Strumenti | SB-3 | Runner senza server e seme | — |
 | | SB-4 | Vista limitata e bot euristici | SB-3 |
@@ -318,6 +318,14 @@ dimostra utile prima: è una scelta del proprietario.
 l'editor dei mazzi (`deck.ts`, `collection.tsx`). Paletti: niente modifiche a `client-web/src/style.css`, su cui lavorano C4-10, C4-11 e C4-8a;
 `verify-decks.mjs` riscritto e pushato prima che parta C4-8a, che usa `VerifyDecks`; dopo il pull l'altra macchina rifà il jar, perché cambiano
 regolamento e validazione del server.
+
+**SB-1 fatto il 7 novembre 2026, in attesa del giudizio del proprietario.** Regolamento **1.12**: R02 con le regole dei mazzi concordate per
+starter e mazzi personalizzati, R03 senza la lacuna del giocatore vivo senza mosse, tre carte iniziali. `DeckRules` le applica al salvataggio e
+all'avvio open; basic e last resort riservate con la colonna `C_EXCLUSIVE_TO` (carta `exclusiveToCharacter`, Q1), bound con
+`boundToCharacter`. I mazzi salvati prima restano nel profilo ma non si giocano (Q2). Editor di client-web e client-debug che prevengono e
+segnalano (Q3). Mazzi sintetici di `verify-decks.mjs`, `verify-resolution.mjs` e delle tre CLI riscritti in regola: nessun caso raro perso
+nello scenario open misurato prima e dopo (Q4); lo stato «vivo senza mosse» non si provoca più. Da fare in C4: la frase del menu al tavolo
+su R03 (Q5). [Rapporto SB-1](reports/set-base/sb-1-report.md).
 
 **Perimetro.** Prossima versione del regolamento: R02 con le [regole dei mazzi concordate](#regole-dei-mazzi-concordate), R03 senza la lacuna
 del giocatore senza mosse, R01a e il conteggio delle carte iniziali coerenti. Poi validazione in `UserAccountServiceImpl`, editor di

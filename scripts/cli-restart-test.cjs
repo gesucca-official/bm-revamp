@@ -18,9 +18,14 @@ function inspect(id,x) {
     const q=await connect('restartQuick'), o=await connect('restartOpen');
     const profile=(await o.command({command:'profile'})).data;
     const card=b=>profile.collection.cards.find(c=>c.bindingName===b);
-    await o.command({command:'save',deck:{deckId:'restart-deck',
+    // R02 1.12: a valid deck (own basic, two own bound cards, 20 regular cards, two copies each); only an active open match is needed.
+    const regular=['bruiser.Glare','bruiser.StunningBlow','bruiser.SuperImpact','bruiser.YouStop','bruiser.MadeOfStone',
+      'bruiser.SeagullFly','bruiser.HealingBlow','com.ShuffleFeet','com.Grab','com.Steal'];
+    const saved=(await o.command({command:'save',deck:{deckId:'restart-deck',
       character:profile.collection.characters.find(c=>c.bindingName==='bruiser.character.BigBadBruiser'),
-      basicActionCard:card('com.basic.BruiserGrab'),characterBoundCards:[],lastResortCard:card('com.last.Struggle'),regularCards:[card('com.ShuffleFeet')]}});
+      basicActionCard:card('com.basic.BruiserGrab'),characterBoundCards:[card('bruiser.character.LittleSmack'),card('bruiser.character.LittleRage')],
+      lastResortCard:card('com.last.Struggle'),regularCards:[].concat(...regular.map(b=>[card(b),card(b)]))}})).data;
+    assert(saved.decks.some(d=>d.deckId==='restart-deck'),'restart deck saved');
     result.active.push({id:await join(q,'quick/1vCom'),users:[q.user],mode:'quick1vCom'});
     result.active.push({id:await join(o,'open/1vCom','restart-deck'),users:[o.user],mode:'open1vCom'});
     const a=await connect('restartDuelA'), b=await connect('restartDuelB');

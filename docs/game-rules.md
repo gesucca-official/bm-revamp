@@ -1,6 +1,6 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.11 — 6 novembre 2026**. Fonte normativa del gioco.
+Versione **1.12 — 7 novembre 2026**. Fonte normativa del gioco.
 
 ## R00 — Autorità
 
@@ -12,7 +12,7 @@ Per modificare il gioco: aggiornare prima versione e regole di questo documento,
 
 Botte Micidiali simula una rissa con carte: vince l'ultimo personaggio vivo; se muoiono tutti si pareggia. Le mosse si scelgono simultaneamente e si risolvono in sequenza.
 
-Modalità: quick contro computer, quick 1v1, quick FFA (tutti contro tutti), open contro computer. Quick assegna casualmente Bruiser o Junkie con il suo starter; open usa il mazzo salvato dell'umano e un bot casuale. Open PvP non è disponibile. La coda 1v1 parte a due iscritti, FFA a cinque; l'avvio anticipato richiede almeno due iscritti. Le code possono includere bot.
+Modalità: quick contro computer, quick 1v1, quick FFA (tutti contro tutti), open contro computer. Quick assegna casualmente Bruiser o Junkie con il suo starter; open usa un mazzo salvato dell'umano, conforme a R02, e un bot casuale. Open PvP non è disponibile. La coda 1v1 parte a due iscritti, FFA a cinque; l'avvio anticipato richiede almeno due iscritti. Le code possono includere bot.
 
 Ogni giocatore è rappresentato da una carta personaggio. Le schede complete di tutte le carte del set, comprese quelle personaggio, sono raccolte in R07.
 
@@ -35,11 +35,11 @@ Il gioco distingue **carte personaggio, carte azione e carte oggetto**. Questa d
 | Sottotipo | Come entra in mano | Uso e scarto |
 |---|---|---|
 | **Azione regolare** | Si pesca dal mazzo regolare | Può avere un costo in risorse oppure essere gratuita. Dopo l'uso viene scartata. |
-| **Azione base (basic)** | Entra in mano alla preparazione; gli starter ne hanno una | Non costa risorse e non richiede uno scarto aggiuntivo. Resta in mano dopo l'uso, ma deve comunque soddisfare i requisiti del bersaglio: per esempio, avere un oggetto vicino. |
-| **Azione legata al personaggio (character-bound, o bound)** | Entra in mano alla preparazione; gli starter ne hanno due | È associata a uno specifico personaggio. Non costa risorse, ma richiede lo scarto di un'altra carta ammessa da R02. La bound resta in mano dopo l'uso. |
-| **Azione di ultima risorsa (last resort)** | Sostituisce una pesca quando il mazzo è vuoto, se non è già in mano | Non costa risorse; si scarta dopo l'uso e può tornare con una nuova pesca a mazzo vuoto. Non può essere lo scarto richiesto da una bound. |
+| **Azione base (basic)** | Entra in mano alla preparazione; ogni mazzo ha la basic del proprio personaggio, una sola e fissa | Non costa risorse e non richiede uno scarto aggiuntivo. Resta in mano dopo l'uso, ma deve comunque soddisfare i requisiti del bersaglio: per esempio, avere un oggetto vicino. |
+| **Azione legata al personaggio (character-bound, o bound)** | Entra in mano alla preparazione; ogni mazzo ne ha due, diverse e legate al proprio personaggio | È associata a uno specifico personaggio. Non costa risorse, ma richiede lo scarto di un'altra carta ammessa da R02. La bound resta in mano dopo l'uso. |
+| **Azione di ultima risorsa (last resort)** | Sostituisce una pesca quando il mazzo è vuoto, se non è già in mano; ogni mazzo ne ha una, generica o riservata al proprio personaggio | Non costa risorse; si scarta dopo l'uso e può tornare con una nuova pesca a mazzo vuoto. Non può essere lo scarto richiesto da una bound. |
 
-L'espressione **carte regolari del mazzo** comprende azioni regolari e carte oggetto: non indica soltanto le azioni regolari. Carta personaggio, basic, bound e last resort sono predisposte separatamente dal mazzo regolare degli starter.
+L'espressione **carte regolari del mazzo** comprende azioni regolari e carte oggetto: non indica soltanto le azioni regolari. Carta personaggio, basic, bound e last resort sono predisposte separatamente dal mazzo regolare di ogni mazzo.
 
 ### Token oggetto ed equipaggiamenti
 
@@ -57,9 +57,17 @@ Le azioni regolari possono essere gratuite e vengono scartate dopo l'uso. Basic 
 
 Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano è sotto sei, si effettua **una sola pesca**, con eventuale catena di oggetti. Non si riempie tutta la mano. Struggle si scarta e può essere ripescata immediatamente.
 
-I mazzi personalizzati richiedono identificativo non vuoto e senza il carattere «/», personaggio del catalogo, una basic, una last resort e almeno una carta regolare (azione o oggetto). Non sono imposti 20 regolari, due bound, limiti di copie o compatibilità di personaggio delle bound. I riferimenti devono appartenere al catalogo e i sottotipi devono corrispondere ai rispettivi slot.
+**Costruzione del mazzo (1.12).** Ogni mazzo, starter o personalizzato, è formato da:
 
-Le **carte iniziali** si contano prima delle pescate: una basic più il numero di bound, contando ogni copia. Sono al massimo sei (quindi da zero a cinque bound). Personaggio, last resort e mazzo regolare non entrano in questo conteggio. La last resort entra solo con la pesca a mazzo vuoto. Le pescate di preparazione completano la mano fino a sei secondo le regole sopra. Questo conteggio deriva dai campi separati e dalla preparazione del modello Player.
+- un personaggio del catalogo;
+- la **basic del personaggio**: ogni personaggio ne ha una sola, fissa;
+- **due bound diverse legate al proprio personaggio**, scelte fra quelle disponibili;
+- **una last resort**, generica o riservata al proprio personaggio;
+- **esattamente 20 carte regolari** (azioni regolari e oggetti), con **al massimo 2 copie** della stessa carta.
+
+Basic e bound di ciascun personaggio sono quelle indicate sopra per gli starter; Struggle è generica. Il mazzo personalizzato ha inoltre un identificativo non vuoto e senza il carattere «/» (1.8). I riferimenti devono appartenere al catalogo e i sottotipi devono corrispondere ai rispettivi posti. Un mazzo che non rispetta queste regole non si salva e non si usa per giocare.
+
+Le **carte iniziali** sono sempre tre: la basic e le due bound. Personaggio, last resort e mazzo regolare non entrano in questo conteggio. La last resort entra solo con la pesca a mazzo vuoto. Le pescate di preparazione completano la mano fino a sei secondo le regole sopra.
 
 ## R03 — Scelta della mossa
 
@@ -67,7 +75,7 @@ Si sceglie una carta in mano, il bersaglio previsto e le eventuali scelte aggiun
 
 Una mossa ordinaria richiede carta in mano, costi disponibili, nessuna mossa già presentata da quel giocatore e scarto/oggetto richiesti presenti. L'invio non paga i costi. Un secondo invio non sostituisce la prima scelta.
 
-I morti senza mossa ricevono una mossa vuota. Il bot prova carte e bersagli casuali e, se non trova mosse valide, passa con mossa vuota. Non esiste una procedura equivalente affidabile per un umano senza mosse: è un limite della versione, non una sconfitta automatica.
+I morti senza mossa ricevono una mossa vuota. **Un giocatore vivo con un mazzo conforme a R02 ha sempre una mossa (1.12).** Finché il mazzo regolare ha carte, dopo ogni mossa presentata, anche annullata, si ripesca: la mano resta piena e contiene, oltre a basic e bound, tre carte regolari, quindi una bound si gioca scartandone una. A mazzo vuoto entra la last resort, gratuita e sempre giocabile. Nessuna bound e nessuna last resort del set bersaglia oggetti. Non esiste il «passo». Il bot prova carte e bersagli casuali e, se non trovasse mosse valide, passerebbe con mossa vuota: con mazzi conformi il caso non si presenta.
 
 Le lacune del server nel controllo di identità, bersagli ordinari, compatibilità bound o invii dopo la fine non autorizzano mosse fuori dalle categorie descritte. I comandi malformati sono fuori dal regolamento.
 
@@ -326,6 +334,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.12 — 7 novembre 2026, SB-1 (regole dei mazzi):** R02 sostituisce i requisiti minimi dei mazzi personalizzati (1.4) con una regola unica per starter e mazzi personalizzati: esattamente 20 carte regolari con al massimo 2 copie per carta, oggetti compresi; la basic fissa del personaggio; due bound diverse legate al proprio personaggio; una last resort generica o riservata al proprio personaggio. Le carte iniziali sono sempre tre. R01a dice che cosa ha ogni mazzo anziché ogni starter. R03 chiude la lacuna del giocatore vivo senza mosse: con un mazzo conforme una bound o la last resort è sempre giocabile, e il «passo» non si aggiunge. Decisioni del proprietario D1–D5, D25 e D29 del piano Set Base, anticipate da D40. Motivazione: la dimensione esatta conserva la pressione del mazzo che finisce, perché gli scarti non si rimescolano; basic, bound e last resort obbligatorie danno a ogni personaggio la sua firma e garantiscono una mossa a ogni turno. I due starter erano già conformi: nessuna carta, effetto, starter o partita cambia. I mazzi salvati che non rispettano le nuove regole restano visibili ma non si usano per giocare, finché non vengono corretti o cancellati (D20).
 
 - **1.11 — 6 novembre 2026, risorse assenti:** aggiunta a R01 la regola delle risorse di partenza: ogni personaggio ha tutte e cinque le risorse, a 0 quelle che la scheda R07 non indica; nota corrispondente sotto le carte personaggio. Decisione del proprietario (6 novembre 2026, opzione «tutte a 0»). Motivazione: il regolamento non diceva quanto vale una risorsa che il personaggio non ha, e il motore la lasciava assente. Le carte che leggono la propria TOXICITY senza costo in T (BadTrip, LethalHeroinDose, PervertedMetabolism), giocate da Spazienzio con un mazzo personalizzato prima di aver mai ricevuto T, facevano fallire la risoluzione del round: il servizio ripristinava lo stato (R08) e la carta restava in mano, inutilizzabile. Ora si risolvono con T = 0. Nelle partite che prima non fallivano nessun numero cambia, perché costi, variazioni ed effetti periodici trattavano già l'assenza come 0; cambia ciò che si vede: le viste, il profilo, la collezione e l'archivio mostrano le cinque risorse di ogni personaggio dal primo turno. Nessuna modifica a carte, costi, starter o bilanciamento.
 
