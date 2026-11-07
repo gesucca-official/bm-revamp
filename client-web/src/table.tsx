@@ -1,5 +1,5 @@
-import {browserSounds,ChoiceSounds} from './sound.ts';
-import React,{useEffect,useRef,useState} from 'react';
+import {browserSounds,ChoiceSounds,OutcomeSounds} from './sound.ts';
+import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
 import type {Session} from './session.ts';
 import type {Model} from './model.ts';
 import {artCss,artIndex} from './art.ts';
@@ -19,6 +19,8 @@ export function Table({session,model}:{session:Session;model:Model}){
  const [,refresh]=useState(0),[hits,setHits]=useState<Hit[]>([]),[ready,setReady]=useState(false),[error,setError]=useState(''),[modal,setModal]=useState<Modal|null>(null),[inspection,setInspection]=useState<Inspection|null>(null),[clock,setClock]=useState<number|null>(null),[away,setAway]=useState<{id:string;seconds:number}[]>([]),[toast,setToast]=useState(''),[watching,setWatching]=useState(false);
  const [sounds]=useState(browserSounds),[volume,setVolume]=useState(sounds.volume),[muted,setMuted]=useState(sounds.muted);
  const [tool,setTool]=useState<{title:string;data:unknown}|null>(null),[hover,setHover]=useState<string|null>(null),[overInfo,setOverInfo]=useState<string|null>(null);
+ const outcomeState=()=>({gameId:model.view.gameId,me:model.me,finished:model.view.over||model.eliminated,winner:model.view.winner,generation:model.generation});
+ const [audioOutcome]=useState(()=>new OutcomeSounds(sounds,outcomeState()));
  const update=()=>refresh(x=>x+1);
  const me=model.me,view=model.view,ids=Object.keys(view.players),name=(id:string)=>playerName(id,ids);
  const close=()=>{setModal(null);setTimeout(()=>{if(returnFocus.current?.isConnected)returnFocus.current.focus();else document.querySelector<HTMLButtonElement>('.menu-button')?.focus();},0);};
@@ -37,10 +39,12 @@ export function Table({session,model}:{session:Session;model:Model}){
   const audioChoices=new ChoiceSounds(sounds,model);const unlock=()=>sounds.unlock(),gestures=['pointerdown','touchend','click','keydown'];for(const g of gestures)document.addEventListener(g,unlock,true);
   const hide=()=>{clearTimeout(toastTimer);toastTimer=0;left=0;since=0;note=false;setToast('');};
   const arm=()=>{clearTimeout(toastTimer);toastTimer=0;since=0;if(left>0&&!document.hidden){since=Date.now();toastTimer=window.setTimeout(hide,left);}};
-  const visibility=()=>{if(document.hidden){if(since)left=Math.max(0,left-(Date.now()-since));clearTimeout(toastTimer);toastTimer=0;since=0;}else arm();};
+  const visibility=()=>{if(document.hidden){audioOutcome.cancel();sounds.stopAll();if(since)left=Math.max(0,left-(Date.now()-since));clearTimeout(toastTimer);toastTimer=0;since=0;}else arm();};
   document.addEventListener('visibilitychange',visibility);
   const unsubscribe=model.subscribe(why=>{update();
    audioChoices.change(why,model);
+   audioOutcome.change(why,outcomeState(),!document.hidden&&session.connected);
+   if(why==='disconnect'||why==='reset'){audioOutcome.cancel();sounds.stopAll();}
    if((why==='view'||why==='reset')&&model.round!==seen){seen=model.round;const v=model.view,line=roundNote(model.round);
     if(line){clearTimeout(toastTimer);toastTimer=0;left=0;note=true;setToast(line);}
     else if(why==='view'&&model.round&&v.resolvedMoves.length){note=false;setToast(briefLine(model.round.facts,me,id=>playerName(id,Object.keys(v.players))));left=6000;arm();}}
@@ -62,6 +66,7 @@ export function Table({session,model}:{session:Session;model:Model}){
  const finished=view.over||model.eliminated;
  // D11: after the own death (not a forfeit) the FFA goes on and can be watched until the outcome.
  const dead=!view.over&&!!view.players[me]?.character.dead&&!view.forfeits[me],panel=finished&&!(dead&&watching);
+ useLayoutEffect(()=>{audioOutcome.commit(panel);});
  // (i) on the hovered card (mouse), else on the selected or focused hand card (touch, keyboard).
  // Top-left corner: in the fan each card covers the right side of the previous one.
  const infoId=table?.drag||modal?null:overInfo??[hover,model.selected,table?.focused].find(x=>x&&!x.startsWith('status-'))??null,infoHit=hits.find(h=>h.id===infoId&&!h.hidden);

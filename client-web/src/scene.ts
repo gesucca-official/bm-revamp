@@ -6,7 +6,7 @@ import {handCardState} from './readability.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,roundCue,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
@@ -69,7 +69,7 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
   // C3-2: every sequence with its key, how it ended and how long it ran; static summaries drawn per round.
   sequenceEnds:[] as {key:string;reason:string;ms:number}[],summaries:0,
   // C3-2 revision (D12): planned length of each sequence and taps that moved it to the next card.
-  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>;pace?:Pace;cue?:{at:number;kind:string}|null;started?:number}[],advances:0,
+  sequencePlans:[] as {key:string;moves:number;total:number;expected?:ReturnType<typeof beats>;pace?:Pace;cue?:{at:number;kind:string}|null;cues?:ReturnType<typeof hitCues>;started?:number}[],advances:0,
   // C3-4: what each sequence animated (counted on the nodes built), the bar mode and, for the totals, why.
   beats:[] as {key:string;bars:'per-card'|'total';reason:string|null;drift:number;played:number;drops:number;stamps:number;tokens:number;objects:number;consumed:number;passed:number;broken:number;discards:number;draws:number;endOfTurn:number;emphasis:number;steps:number;pops:number;closeUps:number;targetUps:number}[],
   // C3-4 revision (D13): when each beat of each card starts as the scene scheduled it, and where each close-up went.
@@ -459,7 +459,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
  focus(id:string|null){this.focused=id;this.draw();}
  // `sequence` false: only the gesture is cancelled (same-turn view, window blur), the sequence goes on.
- interrupt(reason:string,redraw=true,sequence=true){if(this.drag||(sequence&&this.seqStarted))this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();if(sequence)this.finish(reason,false);
+ interrupt(reason:string,redraw=true,sequence=true){if(this.drag||(sequence&&this.seqStarted))this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();if(sequence){this.sounds?.stopAll();this.finish(reason,false);}
   if(d)this.model.cancel();this.setHover(null);if(redraw)this.draw();this.onState();}
  // Esc drops a focus left by a press too (the card would stay raised over its neighbours); the keyboard's stays.
  escape(){this.openStatus=null;if(this.focused&&document.activeElement?.getAttribute('data-hit')!==this.focused)this.focused=null;this.interrupt('escape');this.model.cancel();}
@@ -597,10 +597,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.stats.beats.push({key:k,bars:T.bars,reason:T.reason,drift:T.drift,...count});
 
   this.stats.flown.push(flown);this.advancesAtStart=this.stats.advances;
-  // C4-7-bis: one sound per round, on the sequence clock (impact, or the outcome on the decisive card).
-  const cue=roundCue(T,this.model.me);
-  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p,cue,started:Math.round(performance.now())});
-  this.staged=shown;this.sounds?.beginRound(k);this.cue.arm(k,cue);this.trace({type:'begin',key:k,cue:cue?.kind??null,at:cue?Math.round(cue.at):null});this.seqStarted=performance.now();this.stats.sequences++;this.draw();
+  // C4-7-ter: every nominal hit uses its own cue; outcome belongs to the HTML panel.
+  const cues=hitCues(T,registry),cue=null;
+  this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p,cue,cues,started:Math.round(performance.now())});
+  this.staged=shown;this.sounds?.beginRound(k);this.cue.arm(k,cues);this.trace({type:'begin',key:k,cues,impacts:this.stats.impacts.filter(x=>x.key===k)});this.seqStarted=performance.now();this.stats.sequences++;this.draw();
  }
 /** C3-5: the mark of one impact, vector only (D9): a burst for a blow, a slash for a cut, a drop for poison, the symbol of its role in a ring where the type does not apply, a cross for a voided move. */
  // The blow's shock wave: a ring with a soft disc that grows and fades like an explosion, under the burst (owner trial, C3-7).
@@ -633,7 +633,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   c.position.set(box.x,box.y);c.visible=false;this.fx.addChild(c);const entry:Label={seat:s.seat,resource:s.resource,box,from:Math.round(at),to:Math.round(at+dur),first:0,last:0,end:0,gap:0};this.labels.push(entry);
   this.accents.push({node:c,at,dur,kind:'pop',label:entry});this.stats.aggregateDeltas++;return true;}
  get sequenceRunning(){return !!this.seqStarted;}
- private readonly cue=new RoundCue({round:(key,kind)=>this.sounds?.round(key,kind)??false});
+ private readonly cue=new RoundCue({round:(key,kind,id,scale)=>this.sounds?.round(key,kind,id,scale)??false});
  /** Verification only (C4-7-bis): a probe may set `window.__bmAudioTrace` to follow the sequences; absent, nothing happens. */
  private trace(e:Record<string,unknown>){try{(window as unknown as {__bmAudioTrace?:(e:Record<string,unknown>)=>void}).__bmAudioTrace?.(e);}catch{}}
  /** D12: a tap on the table during the sequence moves it to the next card; past the last one it ends. */
@@ -644,7 +644,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // A sound started by the end itself or just before it plays on; a jump or an interruption silences it.
   this.stopEffects(reason==='complete'||reason==='input');if(redraw){this.draw();this.onState();}}
  /** «Salta effetti». */
- skip(){this.finish('skip');}
+ skip(){this.sounds?.stopAll();this.finish('skip');}
  stopEffects(keepSound=false){this.cue.end('stop');this.sounds?.endRound(!keepSound);if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
   this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
@@ -655,7 +655,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // Quiet pulse while arrows are shown; reduced motion keeps them static.
   if(this.arrows.length||this.confirmArrow)this.aimLayer.alpha=this.reduced?1:.88+.12*Math.sin(now/280);
   if(this.inputStart){const start=this.inputStart;this.inputStart=0;requestAnimationFrame(()=>this.stats.inputMs.push(performance.now()-start));}
-  if(this.seqStarted&&this.pace){const t=now-this.seqStarted,P=this.pace;if(t>=P.total)this.finish('complete');else{
+  if(this.seqStarted&&this.pace){const t=now-this.seqStarted,P=this.pace;if(t>=P.total){this.cue.tick(t);this.finish('complete');}else{
    // Board steps reached (also several at once after a tap): applied, then one redraw.
    let due=0;while(due<this.events.length&&this.events[due].at<=t)due++;if(due){this.events.splice(0,due).forEach(e=>e.run());this.draw();}
    this.cue.tick(t);

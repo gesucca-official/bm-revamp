@@ -1,5 +1,5 @@
 import type {Card, Move, Resource, View} from './contracts.ts';
-import type {Gain} from './readability.ts';
+import {impactOf,type Gain} from './readability.ts';
 
 // Certain facts of one resolved round (C3-1, plan D1). Built only from structured fields of two views and the
 // catalog: the server's sentences (moveReport, timeBasedEffects lines) are never read, no card effect is computed
@@ -617,16 +617,13 @@ export function decisiveMove(t: Timeline): number | null {
 }
 /** The moment a card hits its target (the impact marks of the scene start there). */
 export const hitAt = (m: CardPace) => m.flight.at + m.flight.dur * BEAT_PHASE.fly;
-export type RoundSound = 'impact' | 'win' | 'loss';
-/**
- * C4-7-bis: the one sequence sound of a round. A final round: the outcome (win, or loss for a defeat and a draw) on the decisive
- * card, else at the start of the tail. Any other round: the impact of its first card. None without cards and without an outcome.
- */
-export function roundCue(t: Timeline, me: string): {at: number; kind: RoundSound} | null {
-  if (t.outcome) {
-    const d = decisiveMove(t), m = d === null ? null : t.pace.moves[d];
-    return {at: m ? hitAt(m) : t.pace.tail.at, kind: t.outcome.winner === me ? 'win' : 'loss'};
-  }
-  const first = t.pace.moves[0];
-  return first ? {at: hitAt(first), kind: 'impact'} : null;
+export type RoundSound = 'hit' | 'cut';
+export type HitCue = {at:number;kind:RoundSound;move:number};
+/** C4-7-ter: exactly the nominal kinds drawn at impact; never infer actual damage from health deltas. */
+export function hitKind(kinds:readonly string[]):RoundSound|null {
+ return kinds.includes('CUT')?'cut':kinds.includes('HIT')?'hit':null;
+}
+export function hitCues(t:Timeline,catalog:Card[]):HitCue[] {
+ return t.moves.flatMap((m,i)=>{const card=catalog.find(c=>c.name===m.card),kind=card&&!m.void?hitKind(impactOf(card).kinds):null;
+  return kind?[{at:hitAt(t.pace.moves[i]),kind,move:i}]:[];});
 }

@@ -1,0 +1,216 @@
+{
+  "method": "JPEG recompression ffmpeg -q:v 6, original kept if smaller; original dimensions; selected final screenshots only",
+  "bytes": 5487061,
+  "kept": [
+    {
+      "file": "resolution\\screens\\resolution-quick-outcome-1366x768.jpg",
+      "bytes": 188093,
+      "sourceBytes": 211950
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-outcome-844x390.jpg",
+      "bytes": 69253,
+      "sourceBytes": 75428
+    },
+    {
+      "file": "ufficiale\\screens\\06-outcome-1-1366x768.jpg",
+      "bytes": 186410,
+      "sourceBytes": 209963
+    },
+    {
+      "file": "ufficiale\\screens\\06-outcome-1-844x390.jpg",
+      "bytes": 66962,
+      "sourceBytes": 73301
+    },
+    {
+      "file": "ufficiale\\screens\\06-outcome-2-1366x768.jpg",
+      "bytes": 180184,
+      "sourceBytes": 204329
+    },
+    {
+      "file": "ufficiale\\screens\\06-outcome-2-844x390.jpg",
+      "bytes": 68945,
+      "sourceBytes": 75182
+    },
+    {
+      "file": "ufficiale\\screens\\layout-duel-T1-1366x768.jpg",
+      "bytes": 196533,
+      "sourceBytes": 221268
+    },
+    {
+      "file": "ufficiale\\screens\\layout-duel-T1-844x390.jpg",
+      "bytes": 81208,
+      "sourceBytes": 88450
+    },
+    {
+      "file": "ufficiale\\screens\\layout-duel-T1-closeup-1366x768.jpg",
+      "bytes": 192428,
+      "sourceBytes": 216444
+    },
+    {
+      "file": "ufficiale\\screens\\layout-duel-T1-closeup-844x390.jpg",
+      "bytes": 80182,
+      "sourceBytes": 87531
+    },
+    {
+      "file": "ufficiale\\screens\\layout-duel-T1-summary-1366x768.jpg",
+      "bytes": 189091,
+      "sourceBytes": 213727
+    },
+    {
+      "file": "ufficiale\\screens\\layout-duel-T1-summary-844x390.jpg",
+      "bytes": 79530,
+      "sourceBytes": 86961
+    },
+    {
+      "file": "ufficiale\\screens\\layout-ffa-T1-1366x768.jpg",
+      "bytes": 206459,
+      "sourceBytes": 231379
+    },
+    {
+      "file": "ufficiale\\screens\\layout-ffa-T1-844x390.jpg",
+      "bytes": 83592,
+      "sourceBytes": 91021
+    },
+    {
+      "file": "ufficiale\\screens\\layout-ffa-T1-closeup-1366x768.jpg",
+      "bytes": 202043,
+      "sourceBytes": 226763
+    },
+    {
+      "file": "ufficiale\\screens\\layout-ffa-T1-closeup-844x390.jpg",
+      "bytes": 81496,
+      "sourceBytes": 88917
+    },
+    {
+      "file": "ufficiale\\screens\\layout-ffa-T1-summary-1366x768.jpg",
+      "bytes": 197461,
+      "sourceBytes": 222354
+    },
+    {
+      "file": "ufficiale\\screens\\layout-ffa-T1-summary-844x390.jpg",
+      "bytes": 81889,
+      "sourceBytes": 89314
+    },
+    {
+      "file": "resolution\\screens\\resolution-interrupt-after-hidden-1366x768.jpg",
+      "bytes": 194987,
+      "sourceBytes": 219007
+    },
+    {
+      "file": "resolution\\screens\\resolution-interrupt-after-hidden-844x390.jpg",
+      "bytes": 80622,
+      "sourceBytes": 87908
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-author-1366x768.jpg",
+      "bytes": 193642,
+      "sourceBytes": 217421
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-author-844x390.jpg",
+      "bytes": 82121,
+      "sourceBytes": 89394
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-changes-1366x768.jpg",
+      "bytes": 192705,
+      "sourceBytes": 217006
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-changes-844x390.jpg",
+      "bytes": 81400,
+      "sourceBytes": 88798
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-clear-1366x768.jpg",
+      "bytes": 185271,
+      "sourceBytes": 209852
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-clear-844x390.jpg",
+      "bytes": 78244,
+      "sourceBytes": 85804
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-cost-1366x768.jpg",
+      "bytes": 189415,
+      "sourceBytes": 213945
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-cost-844x390.jpg",
+      "bytes": 80267,
+      "sourceBytes": 87687
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-draws-1366x768.jpg",
+      "bytes": 193889,
+      "sourceBytes": 218424
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-draws-844x390.jpg",
+      "bytes": 81023,
+      "sourceBytes": 88351
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-flight-1366x768.jpg",
+      "bytes": 190501,
+      "sourceBytes": 214805
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-flight-844x390.jpg",
+      "bytes": 80680,
+      "sourceBytes": 88097
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-tail-1366x768.jpg",
+      "bytes": 193765,
+      "sourceBytes": 218165
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-tail-844x390.jpg",
+      "bytes": 81130,
+      "sourceBytes": 88449
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-target-1366x768.jpg",
+      "bytes": 187751,
+      "sourceBytes": 211903
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-sequence-target-844x390.jpg",
+      "bytes": 79745,
+      "sourceBytes": 87166
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-turn2-1366x768.jpg",
+      "bytes": 196587,
+      "sourceBytes": 220910
+    },
+    {
+      "file": "resolution\\screens\\resolution-quick-turn2-844x390.jpg",
+      "bytes": 80130,
+      "sourceBytes": 87510
+    },
+    {
+      "file": "ufficiale\\screens\\01-hub-1366x768.jpg",
+      "bytes": 127497,
+      "sourceBytes": 150679
+    },
+    {
+      "file": "ufficiale\\screens\\01-hub-844x390.jpg",
+      "bytes": 47431,
+      "sourceBytes": 52831
+    },
+    {
+      "file": "ufficiale\\screens\\02-after-reorder-844x390.jpg",
+      "bytes": 78210,
+      "sourceBytes": 85437
+    },
+    {
+      "file": "ufficiale\\screens\\02-info-hover-844x390.jpg",
+      "bytes": 78289,
+      "sourceBytes": 85572
+    }
+  ]
+}

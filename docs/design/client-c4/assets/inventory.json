@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "date": "2026-11-06",
-  "block": "C4-7-bis",
+  "version": 4,
+  "date": "2026-11-07",
+  "block": "C4-7-ter",
   "rule": "Regola 10 del piano C4: nessun asset senza provenienza e licenza. Ogni file di client-web/public/ ha una voce qui con la stessa impronta SHA-256; tests/assets.test.ts fallisce per un file non registrato o con impronta diversa.",
   "thirdParty": true,
   "files": [
@@ -11,8 +11,8 @@
       "author": "image_gen.imagegen integrato; nel PNG osservata stringa softwareAgent ChatGPT / gpt-image; versione numerica non esposta dallo strumento",
       "url": "nessun URL di download: generazione con strumento integrato, URL della funzione non esposto",
       "version": "2026-11-04; orari della generazione e identificativo nelle schede",
-      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini d’uso «quelli delle immagini generate da te», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusività dell’output dichiarata.",
-      "modifications": "Piano originale invariato; compressione WebP lossy qualità 90, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
+      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini dâ€™uso Â«quelli delle immagini generate da teÂ», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusivitÃ  dellâ€™output dichiarata.",
+      "modifications": "Piano originale invariato; compressione WebP lossy qualitÃ  90, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
       "destination": "Piano stirato del tavolo (client-web/src/scene.ts), servito come /art/table.webp",
       "sha256": "87ee30faf1190af1759533f8c9640b98d3da9377f2d5ce98609129a4fac92d3e",
       "bytes": 417820,
@@ -34,8 +34,8 @@
       "author": "Progetto Botte Micidiali: 40 illustrazioni generate ex novo con imagegen integrato (O9), una per classe dell'allegato rules-catalog.json; nessuna immagine da Internet, nessun asset di C0 o del debug, nessun pixel riusato",
       "url": "nessuno: non scaricata",
       "version": "2026-10-27",
-      "license": "Diritti riservati del progetto; nessuna licenza concessa, nessuna dichiarazione di esclusività dell'output",
-      "modifications": "Ogni PNG (1254x1254) ridotto a 252 px (Lanczos3) con 2 px di bordo copiato, composto in 8x6 riquadri da 256 px e compresso in WebP qualità 76 con sharp 0.35.5; il riquadro 40 è un segnaposto tinta unita #30231e; nessun ritocco",
+      "license": "Diritti riservati del progetto; nessuna licenza concessa, nessuna dichiarazione di esclusivitÃ  dell'output",
+      "modifications": "Ogni PNG (1254x1254) ridotto a 252 px (Lanczos3) con 2 px di bordo copiato, composto in 8x6 riquadri da 256 px e compresso in WebP qualitÃ  76 con sharp 0.35.5; il riquadro 40 Ã¨ un segnaposto tinta unita #30231e; nessun ritocco",
       "destination": "Illustrazioni delle carte (client-web/src/art.ts, scene.ts e HTML), servito come /art/atlas.webp",
       "sha256": "839cffc948c6eb7310be00acf3b737c5c52ee0e185000105da81cd5ff79ef956",
       "bytes": 566518,
@@ -48,7 +48,7 @@
         "docs/design/client-c2/o9-art/README.md",
         "docs/design/client-c2/o9-art/assets.json"
       ],
-      "gap": "I 40 PNG sorgente e i prompt letterali sono solo su questo PC (fuori da git, decisione del proprietario): atlas.webp è verificabile con le impronte, `Atlas` non si riesegue da un clone pulito; modello registrato dal C2PA come «ChatGPT gpt-image», versione esatta non esposta"
+      "gap": "I 40 PNG sorgente e i prompt letterali sono solo su questo PC (fuori da git, decisione del proprietario): atlas.webp Ã¨ verificabile con le impronte, `Atlas` non si riesegue da un clone pulito; modello registrato dal C2PA come Â«ChatGPT gpt-imageÂ», versione esatta non esposta"
     },
     {
       "file": "art/manifest.json",
@@ -57,7 +57,7 @@
       "url": "nessuno",
       "version": "2026-11-04",
       "license": "Diritti riservati del progetto; nessuna licenza concessa",
-      "modifications": "C4-5a: metadati del piano e dei tre sprite aggiornati; mappa dei riquadri dell’atlante invariata",
+      "modifications": "C4-5a: metadati del piano e dei tre sprite aggiornati; mappa dei riquadri dellâ€™atlante invariata",
       "destination": "Mappa bindingName -> riquadro letta a runtime (client-web/src/art.ts), servita come /art/manifest.json",
       "sha256": "912e81baff65e6600a48f2e08950cdaf1392033f743987af6570c29057cbf27c",
       "bytes": 3212,
@@ -76,8 +76,8 @@
       "author": "image_gen.imagegen integrato; nel PNG osservata stringa softwareAgent ChatGPT / gpt-image; versione numerica non esposta dallo strumento",
       "url": "nessun URL di download: generazione con strumento integrato, URL della funzione non esposto",
       "version": "2026-11-04; orari della generazione e identificativo nelle schede",
-      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini d’uso «quelli delle immagini generate da te», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusività dell’output dichiarata.",
-      "modifications": "Estrazione alfa deterministica e ritaglio già registrati in docs/design/client-c4/background/layers/registro-sprite-sottobicchiere.md; compressione WebP lossy qualità 80, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
+      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini dâ€™uso Â«quelli delle immagini generate da teÂ», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusivitÃ  dellâ€™output dichiarata.",
+      "modifications": "Estrazione alfa deterministica e ritaglio giÃ  registrati in docs/design/client-c4/background/layers/registro-sprite-sottobicchiere.md; compressione WebP lossy qualitÃ  80, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
       "destination": "Decorazione non interattiva del tavolo a scala uniforme (client-web/src/scene.ts), servito come /art/sottobicchiere.webp",
       "sha256": "c2927c9515a7bb6301efe3f108f384ed3bdaee9bbf6cae955e71bae88fd2a700",
       "bytes": 80982,
@@ -99,8 +99,8 @@
       "author": "image_gen.imagegen integrato; nel PNG osservata stringa softwareAgent ChatGPT / gpt-image; versione numerica non esposta dallo strumento",
       "url": "nessun URL di download: generazione con strumento integrato, URL della funzione non esposto",
       "version": "2026-11-04; orari della generazione e identificativo nelle schede",
-      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini d’uso «quelli delle immagini generate da te», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusività dell’output dichiarata.",
-      "modifications": "Estrazione alfa deterministica e ritaglio già registrati in docs/design/client-c4/background/layers/registro-sprite-negroni.md; compressione WebP lossy qualità 80, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
+      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini dâ€™uso Â«quelli delle immagini generate da teÂ», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusivitÃ  dellâ€™output dichiarata.",
+      "modifications": "Estrazione alfa deterministica e ritaglio giÃ  registrati in docs/design/client-c4/background/layers/registro-sprite-negroni.md; compressione WebP lossy qualitÃ  80, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
       "destination": "Decorazione non interattiva del tavolo a scala uniforme (client-web/src/scene.ts), servito come /art/negroni.webp",
       "sha256": "f718a05da027b7b059ff8e51ad2946ae50d07aca759da18b235bc48b91031fc0",
       "bytes": 126188,
@@ -122,8 +122,8 @@
       "author": "image_gen.imagegen integrato; nel PNG osservata stringa softwareAgent ChatGPT / gpt-image; versione numerica non esposta dallo strumento",
       "url": "nessun URL di download: generazione con strumento integrato, URL della funzione non esposto",
       "version": "2026-11-04; orari della generazione e identificativo nelle schede",
-      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini d’uso «quelli delle immagini generate da te», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusività dell’output dichiarata.",
-      "modifications": "Estrazione alfa deterministica e ritaglio già registrati in docs/design/client-c4/background/layers/registro-sprite-posacenere.md; compressione WebP lossy qualità 80, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
+      "license": "Diritti riservati del progetto (CONTRIBUTING.md); termini dâ€™uso Â«quelli delle immagini generate da teÂ», forniti dal proprietario il 4 novembre 2026 (background/layers/decisione-proprietario.md e registro). Titolo, URL, versione, restrizioni e attribuzioni specifiche non verificati; nessuna esclusivitÃ  dellâ€™output dichiarata.",
+      "modifications": "Estrazione alfa deterministica e ritaglio giÃ  registrati in docs/design/client-c4/background/layers/registro-sprite-posacenere.md; compressione WebP lossy qualitÃ  80, alphaQuality 100, effort 6, smartSubsample true, preset default, sharp 0.35.5/libvips 8.18.7/libwebp 1.6.0, Node 24.13.0; nessun ulteriore ridimensionamento o ritaglio (filtro nessuno), metadati rimossi, originale conservato; ombre separate dal codice",
       "destination": "Decorazione non interattiva del tavolo a scala uniforme (client-web/src/scene.ts), servito come /art/posacenere.webp",
       "sha256": "de821ed96f5a4842a1b54b0f1ddf7af4766a3f440bf6ce365c413040e9c771b7",
       "bytes": 134242,
@@ -164,18 +164,6 @@
       "bytes": 8968
     },
     {
-      "file": "audio/drop_004.ogg",
-      "kind": "audio",
-      "author": "Kenney",
-      "url": "https://kenney.nl/assets/interface-sounds",
-      "version": "1.0 (2020)",
-      "license": "CC0 1.0",
-      "modifications": "Nessuna: file OGG originale dal pacchetto ufficiale",
-      "destination": "Suoni locali del tavolo",
-      "sha256": "10738707f9300f9b963ceba46d5da2ed4a221faf7d39484a643c2d3bc151c5f2",
-      "bytes": 7230
-    },
-    {
       "file": "audio/error_001.ogg",
       "kind": "audio",
       "author": "Kenney",
@@ -210,6 +198,30 @@
       "destination": "Suono d'esito del tavolo: sconfitta e pareggio (C4-7-bis)",
       "sha256": "241c8570fbded819ee0205e4be3efa80aeb834a70df89318da88f9e219798b11",
       "bytes": 30900
+    },
+    {
+      "file": "audio/impactPunch_heavy_001.ogg",
+      "kind": "audio",
+      "author": "Kenney",
+      "url": "https://kenney.nl/assets/impact-sounds",
+      "version": "1.0 (2019)",
+      "license": "CC0 1.0 (License.txt incluso)",
+      "modifications": "Nessuna: OGG originale dal pacchetto ufficiale",
+      "destination": "Colpi nominali HIT/CUT, scelta C4-7-ter",
+      "sha256": "f92f5cb6ba4ff2766497292ffd90865654317eeca976f5652e0708dbdcdc0dd9",
+      "bytes": 10861
+    },
+    {
+      "file": "audio/knifeSlice.ogg",
+      "kind": "audio",
+      "author": "Kenney Vleugels",
+      "url": "https://kenney.nl/assets/rpg-audio",
+      "version": "1.0 (2014)",
+      "license": "CC0 1.0 (License.txt incluso)",
+      "modifications": "Nessuna: OGG originale dal pacchetto ufficiale",
+      "destination": "Colpi nominali HIT/CUT, scelta C4-7-ter",
+      "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f",
+      "bytes": 15532
     }
   ],
   "fonts": {
@@ -218,10 +230,10 @@
       "Impact",
       "Arial"
     ],
-    "note": "Nessun font è distribuito né richiesto in rete (D4 del piano C4). Il tavolo usa Impact con ripiego Arial e poi il sans-serif del dispositivo; la shell usa Arial. Impact può mancare su iOS: non verificato."
+    "note": "Nessun font Ã¨ distribuito nÃ© richiesto in rete (D4 del piano C4). Il tavolo usa Impact con ripiego Arial e poi il sans-serif del dispositivo; la shell usa Arial. Impact puÃ² mancare su iOS: non verificato."
   },
   "symbols": {
-    "origin": "Disegnati dal progetto come dati geometrici in client-web/src/symbols.ts e client-web/src/readability.ts (DAMAGE_SHAPES): 5 risorse, 7 ruoli, 3 tipi di danno e i segni ✓ e ✕; nessun file, nessuna icona di terzi (D3 (c) del piano C4: Game-icons solo per lacune reali, nessuna è emersa).",
+    "origin": "Disegnati dal progetto come dati geometrici in client-web/src/symbols.ts e client-web/src/readability.ts (DAMAGE_SHAPES): 5 risorse, 7 ruoli, 3 tipi di danno e i segni âœ“ e âœ•; nessun file, nessuna icona di terzi (D3 (c) del piano C4: Game-icons solo per lacune reali, nessuna Ã¨ emersa).",
     "license": "Diritti riservati del progetto; nessuna licenza concessa"
   }
 }

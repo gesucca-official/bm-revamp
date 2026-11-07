@@ -1,0 +1,30 @@
+[
+  {
+    "case": "baseline",
+    "exit": 0
+  },
+  {
+    "case": "duplicate-event",
+    "exit": 1
+  },
+  {
+    "case": "missing-outcome-start",
+    "exit": 1
+  },
+  {
+    "case": "lost-hit-start",
+    "exit": 1
+  },
+  {
+    "case": "wrong-hit-file",
+    "exit": 1
+  },
+  {
+    "case": "delayed-outcome-task",
+    "exit": 1
+  },
+  {
+    "case": "media-element",
+    "exit": 1
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-07T16:00:45.560Z",
+  "quick": false,
+  "nonStandardMeasures": [
+    "750x292"
+  ],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "750x292"
+  ],
+  "only": [
+    "build",
+    "verify",
+    "layout"
+  ],
+  "build": {
+    "head": "7b93b192781040312a36633cb78ec5992a50030b",
+    "dirtyPaths": [
+      "M client-web/src/public.tsx",
+      " M client-web/src/resolution.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/sound.ts",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/check-audio-probe.mjs",
+      " M client-web/tools/verify-audio-probe.mjs",
+      " M client-web/tools/verify-outcome-audio.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-07T15:14:40.421Z",
+      "bytes": 50742155,
+      "sha256_16": "09966f18e97e23ae",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "b54a1228128dd03e"
+    }
+  },
+  "results": [
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 82,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 150,
+      "exit": 1,
+      "problems": 47
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/public.tsx;  M client-web/src/resolution.ts;  M client-web/src/scene.ts;  M client-web/src/sound.ts;  M client-web/src/table.tsx;  M client-web/tools/check-audio-probe.mjs",
+    "layout-750x292.json: evidence says ok=false"
+  ]
+}

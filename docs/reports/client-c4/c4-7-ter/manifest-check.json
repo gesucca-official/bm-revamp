@@ -1,0 +1,34 @@
+{
+  "increment": "I19c",
+  "rulesVersion": "1.11",
+  "rulesSha256": "be7e3e4c618d301aa601612776c297388a825cf6fdc4603200997ec2dc5f7003",
+  "lifecycleMatches": 12,
+  "lifecycleEvents": 169,
+  "restartActiveMatches": 12,
+  "restartEvents": 36,
+  "ordinaryMatches": 7,
+  "ordinaryEvents": 563,
+  "ordinaryByMode": [
+    {
+      "mode": "quick1vCom",
+      "matches": 2,
+      "source": "i13-i13Bruiser-exports.json"
+    },
+    {
+      "mode": "open1vCom",
+      "matches": 2,
+      "source": "i16-exports.json"
+    },
+    {
+      "mode": "quick1v1",
+      "matches": 2,
+      "source": "i17a-complete-exports.json"
+    },
+    {
+      "mode": "quickFFA",
+      "matches": 1,
+      "source": "i17b-full-exports.json"
+    }
+  ],
+  "allChecks": "PASS"
+}

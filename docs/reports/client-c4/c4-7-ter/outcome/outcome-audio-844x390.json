@@ -1,0 +1,135 @@
+{
+ "date": "2026-11-07T15:49:08.956Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": "844x390",
+ "kind": "automated browser run on PC (Edge via Playwright), quick 1v1 between two accounts on a temporary database; not a physical device",
+ "games": [
+  {
+   "game": 1,
+   "turns": 12,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "wait",
+     "key": "a9e8cb85a8c4dd00a3f22975330b42ddf8e5402f62272e3f25921cc591a839da/12",
+     "result": "loss",
+     "running": true,
+     "cue": null,
+     "total": 10350,
+     "end": {
+      "key": "a9e8cb85a8c4dd00a3f22975330b42ddf8e5402f62272e3f25921cc591a839da/12",
+      "reason": "complete",
+      "ms": 10355
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "tapAll",
+     "key": "a9e8cb85a8c4dd00a3f22975330b42ddf8e5402f62272e3f25921cc591a839da/12",
+     "result": "win",
+     "running": true,
+     "cue": null,
+     "total": 10350,
+     "taps": 16,
+     "end": {
+      "key": "a9e8cb85a8c4dd00a3f22975330b42ddf8e5402f62272e3f25921cc591a839da/12",
+      "reason": "input",
+      "ms": 8943
+     }
+    }
+   ]
+  },
+  {
+   "game": 2,
+   "turns": 12,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "tapCross",
+     "key": "4725c5fb5f8afeb3b31105e3361abb4da847297e03a9b77d8961421faf533953/12",
+     "result": "loss",
+     "running": true,
+     "cue": null,
+     "total": 9950,
+     "tapAt": 308,
+     "end": {
+      "key": "4725c5fb5f8afeb3b31105e3361abb4da847297e03a9b77d8961421faf533953/12",
+      "reason": "complete",
+      "ms": 9957
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "skip",
+     "key": "4725c5fb5f8afeb3b31105e3361abb4da847297e03a9b77d8961421faf533953/12",
+     "result": "win",
+     "running": true,
+     "cue": null,
+     "total": 9950,
+     "end": {
+      "key": "4725c5fb5f8afeb3b31105e3361abb4da847297e03a9b77d8961421faf533953/12",
+      "reason": "skip",
+      "ms": 350
+     }
+    }
+   ]
+  },
+  {
+   "game": 3,
+   "turns": 15,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "resize",
+     "key": "670504920a0e20783dcfb44a3236214e47ca98cd9bd120f648d81d9e069d8672/15",
+     "result": "win",
+     "running": true,
+     "cue": null,
+     "total": 10350,
+     "end": {
+      "key": "670504920a0e20783dcfb44a3236214e47ca98cd9bd120f648d81d9e069d8672/15",
+      "reason": "resize",
+      "ms": 342
+     }
+    },
+    {
+     "user": "devBob",
+     "mode": "exit",
+     "key": "670504920a0e20783dcfb44a3236214e47ca98cd9bd120f648d81d9e069d8672/15",
+     "result": "loss",
+     "running": true,
+     "cue": null,
+     "total": 10350,
+     "note": "left immediately after panel"
+    }
+   ]
+  },
+  {
+   "game": 4,
+   "turns": 21,
+   "rows": [
+    {
+     "user": "devAlice",
+     "mode": "reduced",
+     "key": null,
+     "result": "win",
+     "running": false,
+     "cue": null,
+     "total": null,
+     "note": "live panel without sequence"
+    },
+    {
+     "user": "devBob",
+     "mode": "reduced",
+     "key": null,
+     "result": "loss",
+     "running": false,
+     "cue": null,
+     "total": null,
+     "note": "live panel without sequence"
+    }
+   ]
+  }
+ ],
+ "errors": []
+}

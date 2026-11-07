@@ -1,35 +1,28 @@
-// Check the optional audio-probe log without changing the existing verifiers.
-// C4-7-bis: sequences are followed through the scene's trace (begin with the round's cue, end with its reason) and the sounds
-// through AudioBufferSourceNode.start. Rules: one sequence sound at most per round, only while its sequence is open and of the
-// kind of its cue; a round with an outcome whose sequence ends complete or by input (taps, a chosen card) has exactly one
-// outcome sound (win or loss); a round with an impact cue that completes has exactly one impact. No HTMLMediaElement playback.
-// Each record carries the page that wrote it (`page`), so two players of the same game are told apart.
-// Options: --blocked (audio denied: nothing audible at all); --require win,loss,input (coverage the log must contain).
+// C4-7-ter: exact identity per reached nominal hit and per live personal outcome, independently of the sequence.
 import {readFileSync} from 'node:fs';import assert from 'node:assert/strict';
 const args=process.argv.slice(2),path=args.find(a=>!a.startsWith('--'));if(!path)throw Error('Indicare il registro JSONL');
-const blocked=args.includes('--blocked'),require=(args.find(a=>a.startsWith('--require='))?.slice(10)??'').split(',').filter(Boolean);
-const rows=readFileSync(path,'utf8').trim().split('\n').filter(Boolean).map(line=>JSON.parse(line));
-const FILE={impact:'drop_004.ogg',win:'jingles_SAX10.ogg',loss:'jingles_SAX07.ogg'},SEQ=new Set(Object.values(FILE)),KIND=Object.fromEntries(Object.entries(FILE).map(([k,f])=>[f,k]));
-assert.deepEqual(rows.filter(x=>!['play','begin','end'].includes(x.type)),[],'errori pagina/console, risposte HTTP o origini esterne');
+const blocked=args.includes('--blocked'),required=(args.find(a=>a.startsWith('--require='))?.slice(10)??'').split(',').filter(Boolean);
+const rows=readFileSync(path,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
+const allowed=['play','begin','end','event','reach','panel-plan','panel','panel-dom','stop-all','source-stop'];
+assert.deepEqual(rows.filter(x=>!allowed.includes(x.type)),[],'errori pagina/console, HTTP o origini esterne');
 assert.ok(rows.some(x=>x.type==='play'),'nessun tentativo audio osservato');
-assert.deepEqual(rows.filter(x=>x.type==='play'&&x.api==='media'),[],'riproduzione con HTMLMediaElement: il client usa solo Web Audio');
-const audible=rows.filter(x=>x.type==='play'&&!x.muted);
-if(blocked)assert.deepEqual(audible,[],'audio negato: nessun suono deve partire');
-const seq=audible.filter(x=>SEQ.has(x.file));
-assert.deepEqual(seq.filter(x=>!x.running),[],'suono della sequenza fuori da una sequenza aperta');
-// Two players of one game share the round key and often the viewport: rounds are counted per page.
-const rounds=new Map(),at=(v,k)=>{const id=`${v}/${k}`;if(!rounds.has(id))rounds.set(id,{id,cue:null,end:null,plays:[]});return rounds.get(id);};
-for(const r of rows){if(r.type==='begin')Object.assign(at(r.page??r.viewport,r.key),{cue:r.cue});if(r.type==='end')at(r.page??r.viewport,r.key).end=r.reason;}
-for(const r of seq)at(r.page??r.viewport,r.round).plays.push(KIND[r.file]);
-const problems=[];const seen={win:0,loss:0,impact:0,input:0,complete:0,silentAfterStop:0};
-for(const r of rounds.values()){
- if(r.plays.length>1)problems.push(`${r.id}: ${r.plays.length} suoni nella stessa risoluzione`);
- if(r.plays.some(k=>k!==r.cue))problems.push(`${r.id}: suono ${r.plays} per un segnale ${r.cue}`);
- const ends=r.end==='complete'||r.end==='input';
- if(!blocked&&ends&&(r.cue==='win'||r.cue==='loss')&&r.plays.length!==1)problems.push(`${r.id}: esito ${r.cue} senza suono (fine ${r.end})`);
- if(!blocked&&r.end==='complete'&&r.cue==='impact'&&r.plays.length!==1)problems.push(`${r.id}: impatto senza suono a sequenza completa`);
- for(const k of r.plays)seen[k]++;if(r.plays.length&&(r.cue==='win'||r.cue==='loss'))seen[r.end==='input'?'input':'complete']++;
- if(!r.plays.length&&r.end&&!ends)seen.silentAfterStop++;}
-assert.deepEqual(problems,[],problems.join('\n'));
-for(const need of require)assert.ok(seen[need]>0,`copertura mancante: ${need} (${JSON.stringify(seen)})`);
-console.log(JSON.stringify({plays:rows.filter(x=>x.type==='play').length,audible:audible.length,rounds:rounds.size,outcomes:{win:seen.win,loss:seen.loss,byInput:seen.input,complete:seen.complete},impacts:seen.impact,silentAfterStop:seen.silentAfterStop,maxPerRound:Math.max(0,...[...rounds.values()].map(r=>r.plays.length))}));
+assert.deepEqual(rows.filter(x=>x.type==='play'&&x.api==='media'),[],'vietato HTMLMediaElement');
+const audible=rows.filter(x=>x.type==='play'&&!x.muted);if(blocked)assert.deepEqual(audible,[],'audio negato');
+const FILE={hit:'impactPunch_heavy_001.ogg',cut:'knifeSlice.ogg',win:'jingles_SAX10.ogg',loss:'jingles_SAX07.ogg'};
+const id=r=>`${r.page}/${r.id}`,round=r=>`${r.page}/${r.key}`,plays=audible.filter(x=>Object.values(FILE).includes(x.file)),events=rows.filter(x=>x.type==='event');
+const seen=new Set();for(const e of events){assert.ok(!seen.has(id(e)),`evento duplicato ${id(e)}`);seen.add(id(e));
+ const pp=plays.filter(p=>p.page===e.page&&p.event?.id===e.id);assert.equal(pp.length,!blocked&&e.available?1:0,`conteggio evento ${id(e)}`);
+ for(const p of pp){assert.equal(p.file,FILE[e.kind]);if(e.scope==='hit')assert.ok(p.running,'colpo fuori sequenza');else{assert.ok(p.panelVisible,'esito senza pannello DOM');const panel=rows.find(r=>r.type==='panel'&&id(r)===id(e));assert.ok(panel);assert.equal(p.panelTask,e.id,'esito non avviato nello stesso turno sincrono del pannello');}}}
+for(const p of plays)assert.ok(events.some(e=>e.page===p.page&&e.id===p.event?.id),'suono senza evento');
+const begins=rows.filter(x=>x.type==='begin');let maxPerRound=0;
+for(const b of begins){const reaches=rows.filter(r=>r.type==='reach'&&round(r)===round(b)),end=rows.find(r=>r.type==='end'&&round(r)===round(b));
+ const expected=b.impacts.filter(i=>!i.void).flatMap(i=>{const kind=i.kinds.includes('CUT')?'cut':i.kinds.includes('HIT')?'hit':null;return kind?[{move:i.move,kind}]:[]});
+ assert.deepEqual(b.cues.map(c=>({move:c.move,kind:c.kind})),expected,'piano audio diverso dai segni disegnati');
+ if(end?.reason==='complete')assert.deepEqual(reaches.map(r=>r.move),b.cues.map(c=>c.move),'colpi persi a sequenza completa');
+ for(const reach of reaches){assert.ok(b.cues.some(c=>c.move===reach.move&&c.kind===reach.kind&&c.at<=reach.at),'colpo non raggiunto o tipo errato');assert.ok(!end||reach.t<=end.t,'recupero dopo chiusura');assert.equal(events.filter(e=>e.page===b.page&&e.scope==='hit'&&e.id===`${b.key}/${reach.move}`).length,1,'colpo raggiunto senza evento');}
+ maxPerRound=Math.max(maxPerRound,reaches.length);}
+for(const panel of rows.filter(x=>x.type==='panel-plan'))assert.equal(events.filter(e=>e.page===panel.page&&e.scope==='outcome'&&e.id===panel.id).length,panel.live?1:0,'esito live perso o recupero storico');
+const seenKinds={win:plays.filter(p=>p.file===FILE.win).length,loss:plays.filter(p=>p.file===FILE.loss).length,input:0};
+for(const p of plays.filter(p=>p.event?.scope==='outcome'))if(rows.some(r=>r.page===p.page&&r.type==='end'&&r.reason==='input'&&r.key?.startsWith(p.event.id.slice(0,p.event.id.lastIndexOf('/'))+'/')&&r.t>=p.t))seenKinds.input++;
+for(const need of required)assert.ok(seenKinds[need]>0,`copertura mancante: ${need}`);
+console.log(JSON.stringify({audible:audible.length,events:events.length,rounds:begins.length,maxPerRound,outcomes:seenKinds,panelDom:rows.filter(r=>r.type==='panel-dom').length,sourceStops:rows.filter(r=>r.type==='source-stop').length}));

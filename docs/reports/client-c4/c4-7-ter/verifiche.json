@@ -1,0 +1,138 @@
+{
+  "clientTests": {
+    "tests": 265,
+    "pass": 265,
+    "fail": 0
+  },
+  "projectTest": {
+    "serverTests": 579,
+    "fail": 0,
+    "errors": 0,
+    "skipped": 7,
+    "clientDebugTests": 36,
+    "clientDebugPass": 36
+  },
+  "springContext": {
+    "tests": 686,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 7
+  },
+  "audioChecks": {
+    "official-final": {
+      "audible": 585,
+      "events": 20,
+      "rounds": 76,
+      "maxPerRound": 2,
+      "outcomes": {
+        "win": 3,
+        "loss": 1,
+        "input": 0
+      },
+      "panelDom": 4,
+      "sourceStops": 124
+    },
+    "resolution": {
+      "audible": 215,
+      "events": 25,
+      "rounds": 34,
+      "maxPerRound": 2,
+      "outcomes": {
+        "win": 0,
+        "loss": 2,
+        "input": 0
+      },
+      "panelDom": 2,
+      "sourceStops": 36
+    },
+    "outcome-1366x768": {
+      "audible": 527,
+      "events": 41,
+      "rounds": 78,
+      "maxPerRound": 1,
+      "outcomes": {
+        "win": 4,
+        "loss": 4,
+        "input": 1
+      },
+      "panelDom": 8,
+      "sourceStops": 73
+    },
+    "outcome-844x390": {
+      "audible": 564,
+      "events": 42,
+      "rounds": 78,
+      "maxPerRound": 2,
+      "outcomes": {
+        "win": 4,
+        "loss": 4,
+        "input": 1
+      },
+      "panelDom": 8,
+      "sourceStops": 75
+    },
+    "blocked-1366x768": {
+      "audible": 0,
+      "events": 2,
+      "rounds": 28,
+      "maxPerRound": 0,
+      "outcomes": {
+        "win": 0,
+        "loss": 0,
+        "input": 0
+      },
+      "panelDom": 2,
+      "sourceStops": 0
+    },
+    "blocked-844x390": {
+      "audible": 0,
+      "events": 4,
+      "rounds": 47,
+      "maxPerRound": 0,
+      "outcomes": {
+        "win": 0,
+        "loss": 0,
+        "input": 0
+      },
+      "panelDom": 4,
+      "sourceStops": 0
+    },
+    "missing-1366x768": {
+      "audible": 0,
+      "events": 3,
+      "rounds": 48,
+      "maxPerRound": 0,
+      "outcomes": {
+        "win": 0,
+        "loss": 0,
+        "input": 0
+      },
+      "panelDom": 3,
+      "sourceStops": 0
+    },
+    "missing-844x390": {
+      "audible": 0,
+      "events": 2,
+      "rounds": 27,
+      "maxPerRound": 0,
+      "outcomes": {
+        "win": 0,
+        "loss": 0,
+        "input": 0
+      },
+      "panelDom": 2,
+      "sourceStops": 0
+    }
+  },
+  "evidenceBytes": 7683995,
+  "size": {
+    "jsGzip": 341745,
+    "totalGzip": 1751615,
+    "textureDecodedBytes": 27729048
+  },
+  "jarSha256_16": "09966f18e97e23ae",
+  "distSha256_16": "b54a1228128dd03e",
+  "rules": "PASS",
+  "matchManifests": "PASS",
+  "checkerNegativeCases": "6/6 rejected; valid baseline accepted"
+}

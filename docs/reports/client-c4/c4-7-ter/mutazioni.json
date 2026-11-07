@@ -1,0 +1,89 @@
+[
+  {
+    "variant": "baseline",
+    "exit": 0,
+    "summary": [
+      "# tests 25",
+      "# pass 25",
+      "# fail 0"
+    ],
+    "mutation": null
+  },
+  {
+    "variant": "first-hit-only",
+    "exit": 1,
+    "summary": [
+      "not ok 6 - un colpo su seconda e quinta carta, anche nel round finale; nessun esito nella sequenza",
+      "# tests 25",
+      "# pass 24",
+      "# fail 1"
+    ],
+    "mutation": [
+      "src/resolution.ts",
+      "return kind?[{at:hitAt(t.pace.moves[i]),kind,move:i}]:[];});",
+      "return kind?[{at:hitAt(t.pace.moves[i]),kind,move:i}]:[];}).slice(0,1);"
+    ]
+  },
+  {
+    "variant": "same-impact-file",
+    "exit": 1,
+    "summary": [
+      "not ok 13 - un evento per colpo, anche con viste ripetute; colpi vicini non si fermano",
+      "# tests 25",
+      "# pass 24",
+      "# fail 1"
+    ],
+    "mutation": [
+      "src/sound.ts",
+      "cut:'knifeSlice.ogg'",
+      "cut:'impactPunch_heavy_001.ogg'"
+    ]
+  },
+  {
+    "variant": "outcome-waits-for-sequence",
+    "exit": 1,
+    "summary": [
+      "not ok 1 - esito live: parte al commit del pannello prima di ogni colpo, vittoria/sconfitta/pareggio",
+      "not ok 2 - pannelli live senza sequenza: movimento ridotto, forfait e tempo suonano",
+      "not ok 4 - FFA: morte personale suona loss; Resta a guardare e fine globale non ripetono",
+      "# tests 25",
+      "# pass 22",
+      "# fail 3"
+    ],
+    "mutation": [
+      "src/sound.ts",
+      "this.sounds.event({scope:'outcome',...cue},cue.kind);",
+      "/* c197517: panel itself never emits, waits for sequence cue */"
+    ]
+  },
+  {
+    "variant": "outcome-replaces-hits",
+    "exit": 1,
+    "summary": [
+      "not ok 6 - un colpo su seconda e quinta carta, anche nel round finale; nessun esito nella sequenza",
+      "# tests 25",
+      "# pass 24",
+      "# fail 1"
+    ],
+    "mutation": [
+      "src/resolution.ts",
+      "return t.moves.flatMap",
+      "if(t.outcome)return [];return t.moves.flatMap"
+    ]
+  },
+  {
+    "variant": "no-send-attack",
+    "exit": 1,
+    "summary": [
+      "not ok 23 - conferma: solo la sorgente send ha attacco 5 ms, senza ritardare start o modificare master",
+      "# tests 25",
+      "# pass 24",
+      "# fail 1"
+    ],
+    "mutation": [
+      "src/sound.ts",
+      "if(kind==='send'){g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(scale,t+.005);}",
+      ""
+    ]
+  }
+]

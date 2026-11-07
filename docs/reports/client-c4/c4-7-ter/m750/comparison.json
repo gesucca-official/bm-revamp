@@ -1,0 +1,33 @@
+{
+  "baselineProblems": 48,
+  "currentProblems": 47,
+  "baselineByTurn": {
+    "duel": [
+      6,
+      6,
+      6
+    ],
+    "ffa": [
+      11,
+      11,
+      11
+    ]
+  },
+  "currentByTurn": {
+    "duel": [
+      6,
+      6,
+      6
+    ],
+    "ffa": [
+      11,
+      11,
+      11
+    ]
+  },
+  "normalization": "computer IDs replaced; order of overlap pairs sorted; no test, threshold or BASE_750 changed",
+  "added": [],
+  "removed": [
+    "chips-750x292: status-ComPlayer-imm-TOXICITY: «Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.» not in the inspection: "
+  ]
+}

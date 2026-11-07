@@ -1,3 +1,5 @@
+// C4-7-ter: outcome at panel, including immediate exit and reduced-motion panels without a sequence.
+// The prior wait/tapAll/tapCross/skip/resize paths remain covered. The outcome no longer waits for a cue.
 // C4-7-bis: the outcome sound on real games. Quick 1v1 between devAlice and devBob on its own temporary server (port 8080 free,
 // Serve running on 4320), so that every game gives a win and a loss. In the final round each side does one thing: lets the
 // sequence run (wait), taps the empty table until the end (tapAll), taps once just before the cue (tapCross), presses «Salta
@@ -15,7 +17,7 @@ import assert from 'node:assert/strict';
 const repo=resolvePath(import.meta.dirname,'../..');
 const url=process.env.BM_CLIENT??'http://127.0.0.1:4320',out=process.env.BM_OUT??'../docs/reports/client-c4/c4-7-bis/fase-b/esito';
 const [vw,vh]=(process.env.BM_VIEWPORT??'1366x768').split('x').map(Number),tag=`${vw}x${vh}`;
-const plan=(process.env.BM_OUTCOME_MODES??'wait/tapAll,tapAll/wait,tapCross/skip,resize/tapCross').split(',').map(x=>x.split('/'));
+const plan=(process.env.BM_OUTCOME_MODES??'wait/tapAll,tapCross/skip,resize/exit,reduced/reduced').split(',').map(x=>x.split('/'));
 await mkdir(out,{recursive:true});
 const evidence={date:new Date().toISOString(),url,viewport:tag,kind:'automated browser run on PC (Edge via Playwright), quick 1v1 between two accounts on a temporary database; not a physical device',games:[],errors:[]};
 const toolchain=JSON.parse(await readFile(join(repo,'scripts/toolchain.json'),'utf8'));
@@ -59,8 +61,11 @@ try{
  // Waits until `ms` of the final sequence have passed on the page clock.
  const until=async(p,ms)=>{const d=await p.page.evaluate(ms=>{const plan=window.__bm.state.stats.sequencePlans.at(-1);return plan.started+ms-performance.now();},ms);if(d>0)await p.page.waitForTimeout(d);};
  async function final(p,mode){const s=await p.state(),last=s.stats.sequencePlans.at(-1),key=last?.key??null,row={user:p.user,mode,key,result:s.winner==='NONE'?'draw':s.winner===p.user?'win':'loss',running:s.sequence.running,cue:last?.cue??null,total:last?.total??null};
+  assert.ok(await p.page.locator('.outcome').isVisible(),'outcome panel visible');
+  if(mode==='exit'){await p.page.getByTestId('again').click();row.note='left immediately after panel';return row;}
+  if(mode==='reduced'){assert.equal(s.sequence.running,false,'reduced motion: outcome without sequence');row.note='live panel without sequence';return row;}
   if(!s.sequence.running){row.note='sequence already over';return row;}
-  const cueAt=last.cue?.at??0;
+  const cueAt=last.cues?.[0]?.at??0;
   if(mode==='wait')await p.page.waitForTimeout(last.total+1500);
   if(mode==='tapAll'){let taps=0;for(;taps<40;taps++){if(!(await p.state()).sequence.running)break;const e=await empty(p);if(!e)break;await p.page.mouse.click(e.x,e.y);await p.page.waitForTimeout(120);}row.taps=taps;await p.page.waitForTimeout(2500);}
   if(mode==='tapCross'){await until(p,Math.max(0,cueAt-150));const e=await empty(p);await p.page.mouse.click(e.x,e.y);row.tapAt=await p.page.evaluate(()=>{const plan=window.__bm.state.stats.sequencePlans.at(-1);return Math.round(performance.now()-plan.started);});await p.page.waitForTimeout(last.total+1500);}
@@ -71,6 +76,7 @@ try{
   if(want)assert.equal(end?.reason,want,`${p.user} ${mode}: end ${JSON.stringify(end)}`);
   return row;}
  for(const [i,[ma,mb]] of plan.entries()){
+  for(const [p,mode] of [[A,ma],[B,mb]])await p.page.emulateMedia({reducedMotion:mode==='reduced'?'reduce':'no-preference'});
   for(const p of [A,B]){if(i===0){await p.page.getByRole('radio',{name:'Uno contro uno'}).click();await p.page.getByTestId('quick').click();}}
   await Promise.all([A,B].map(p=>p.wait(x=>x&&!x.over&&x.hits.some(h=>h.kind==='hand'),60000,'table')));
   let turns=0;
@@ -80,7 +86,7 @@ try{
    const turn=ss[0].turn;await Promise.all([A,B].map(p=>p.wait(x=>!x||x.over||x.turn!==turn,60000,'resolved')));turns++;}
   const rows=await Promise.all([final(A,ma),final(B,mb)]);evidence.games.push({game:i+1,turns,rows});console.log(JSON.stringify({game:i+1,turns,rows:rows.map(r=>({user:r.user,mode:r.mode,result:r.result,cue:r.cue?.kind,end:r.end?.reason}))}));
   await writeFile(`${out}/outcome-audio-${tag}.json`,JSON.stringify(evidence,null,1));
-  if(i<plan.length-1){for(const p of [A,B])await p.page.getByTestId('again').click();}}
+  if(i<plan.length-1){for(const [p,mode] of [[A,ma],[B,mb]])if(mode!=='exit')await p.page.getByTestId('again').click();}}
  assert.deepEqual(evidence.errors,[],'page errors');
  assert.ok(evidence.games.some(g=>g.rows.some(r=>r.result==='win'&&r.running)),'at least one win with its sequence');
  await stop(0);
