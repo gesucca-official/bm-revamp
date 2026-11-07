@@ -1,0 +1,986 @@
+{
+ "format": "sb-6a/1",
+ "rules": {
+  "deckSize": 20,
+  "maxCopies": 2,
+  "basicFixedPerCharacter": true,
+  "boundChoices": 2,
+  "lastResortRequired": true
+ },
+ "characters": [
+  {
+   "id": "bruiser.character.BigBadBruiser",
+   "name": "Spazienzio de la Ucciso",
+   "resources": {
+    "HEALTH": 85,
+    "ALERTNESS": 20,
+    "VIOLENCE": 25,
+    "TOXICITY": 0,
+    "ALCOHOL": 0
+   },
+   "items": 1,
+   "immunities": [],
+   "basic": "com.basic.BruiserGrab"
+  },
+  {
+   "id": "base.character.Mara",
+   "name": "Mara Contromano",
+   "resources": {
+    "HEALTH": 80,
+    "ALERTNESS": 40,
+    "VIOLENCE": 0,
+    "TOXICITY": 0,
+    "ALCOHOL": 0
+   },
+   "items": 2,
+   "immunities": [],
+   "basic": "base.mara.PresoAlVolo"
+  }
+ ],
+ "cards": [
+  {
+   "binding": "com.basic.BruiserGrab",
+   "kind": "ACTION",
+   "basic": true,
+   "priority": -1,
+   "targets": [
+    "NEAR_ITEM"
+   ],
+   "self": [
+    {
+     "op": "consume"
+    }
+   ],
+   "gui": {
+    "name": "ADOPERIAMOTI",
+    "description": "SPA-BA · Basic: consuma un proprio oggetto, come Grab.",
+    "role": "ITEMS",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.mara.PresoAlVolo",
+   "kind": "ACTION",
+   "basic": true,
+   "priority": 2,
+   "targets": [
+    "NEAR_ITEM"
+   ],
+   "self": [
+    {
+     "op": "lose",
+     "resource": "ALERTNESS",
+     "amount": 5
+    },
+    {
+     "op": "consume"
+    }
+   ],
+   "gui": {
+    "name": "Preso al volo",
+    "description": "MAR-BA · Basic: −5 A a sé, poi consuma un proprio oggetto.",
+    "role": "ITEMS",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "bruiser.character.LittleRage",
+   "kind": "BOUND",
+   "boundTo": "bruiser.character.BigBadBruiser",
+   "priority": 0,
+   "targets": [
+    "SELF"
+   ],
+   "self": [
+    {
+     "op": "gain",
+     "resource": "VIOLENCE",
+     "amount": 5
+    }
+   ],
+   "gui": {
+    "name": "LIEVE FASTIDIO",
+    "description": "SPA-BO1 · Bound: +5 V a sé.",
+    "role": "RESOURCES",
+    "gains": "+5 V",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "bruiser.character.LittleSmack",
+   "kind": "BOUND",
+   "boundTo": "bruiser.character.BigBadBruiser",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 3
+    }
+   ],
+   "gui": {
+    "name": "SVEGLIAMOCI MA TU NO",
+    "description": "SPA-BO2 · Bound: 3 HIT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 3"
+   }
+  },
+  {
+   "binding": "base.spazienzio.bound.TestaAlMuro",
+   "kind": "BOUND",
+   "boundTo": "bruiser.character.BigBadBruiser",
+   "priority": 0,
+   "targets": [
+    "SELF"
+   ],
+   "self": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 3
+    },
+    {
+     "op": "gain",
+     "resource": "VIOLENCE",
+     "amount": 8
+    }
+   ],
+   "gui": {
+    "name": "TESTA AL MURO",
+    "description": "SPA-BO3 · Bound: 3 HIT a sé, poi +8 V a sé.",
+    "role": "RESOURCES",
+    "gains": "+8 V",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.mara.bound.PassoStretto",
+   "kind": "BOUND",
+   "boundTo": "base.character.Mara",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "target": [
+    {
+     "op": "damage",
+     "type": "CUT",
+     "amount": 3
+    }
+   ],
+   "gui": {
+    "name": "Passo stretto",
+    "description": "MAR-BO1 · Bound: 3 CUT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "CUT",
+    "damageAmount": "CUT 3"
+   }
+  },
+  {
+   "binding": "base.mara.bound.CambioMarcia",
+   "kind": "BOUND",
+   "boundTo": "base.character.Mara",
+   "priority": 0,
+   "targets": [
+    "SELF"
+   ],
+   "self": [
+    {
+     "op": "gain",
+     "resource": "ALERTNESS",
+     "amount": 8
+    }
+   ],
+   "gui": {
+    "name": "Cambio marcia",
+    "description": "MAR-BO2 · Bound: +8 A a sé.",
+    "role": "RESOURCES",
+    "gains": "+8 A",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.mara.bound.ColpoDiStriscio",
+   "kind": "BOUND",
+   "boundTo": "base.character.Mara",
+   "priority": 2,
+   "targets": [
+    "OPPONENT"
+   ],
+   "target": [
+    {
+     "op": "damage",
+     "type": "CUT",
+     "amount": 2
+    }
+   ],
+   "gui": {
+    "name": "Colpo di striscio",
+    "description": "MAR-BO3 · Bound: 2 CUT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "CUT",
+    "damageAmount": "CUT 2"
+   }
+  },
+  {
+   "binding": "com.last.Struggle",
+   "kind": "ACTION",
+   "lastResort": true,
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "self": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 5
+    }
+   ],
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 10
+    }
+   ],
+   "gui": {
+    "name": "Last Resort: Banzai!!!",
+    "description": "LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 10"
+   }
+  },
+  {
+   "binding": "bruiser.SuperImpact",
+   "kind": "ACTION",
+   "priority": 0,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 25
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 40
+    }
+   ],
+   "gui": {
+    "name": "GARGANTUESCO IMPATTO SUL TU",
+    "description": "SPA-AR1 · 25 V: 40 HIT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 40"
+   }
+  },
+  {
+   "binding": "bruiser.ExtremelyViolentBlow",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 10
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": {
+      "base": 6,
+      "of": "VIOLENCE",
+      "divide": 2
+     }
+    }
+   ],
+   "gui": {
+    "name": "SPEDIAMOTI DUNQUE IN O-AHIO",
+    "description": "SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 6+x"
+   }
+  },
+  {
+   "binding": "bruiser.Glare",
+   "kind": "ACTION",
+   "priority": 0,
+   "targets": [
+    "SELF"
+   ],
+   "self": [
+    {
+     "op": "status",
+     "name": "NO PATIENCE - Damage Intake Boost",
+     "description": "Hit Damage taken: x1.5",
+     "statusType": "BAD",
+     "flow": "INPUT",
+     "property": "HIT",
+     "factor": 1.5,
+     "turns": 1
+    },
+    {
+     "op": "say",
+     "text": "Gained statuses: NO PATIENCE"
+    },
+    {
+     "op": "gain",
+     "resource": "VIOLENCE",
+     "amount": 15
+    },
+    {
+     "op": "gain",
+     "resource": "ALERTNESS",
+     "amount": 15
+    }
+   ],
+   "gui": {
+    "name": "PAZIENZA: FINITA",
+    "description": "SPA-AR3 · HIT ricevuto ×1,5 per 2 turni (questo e il successivo); +15 V e +15 A.",
+    "role": "RESOURCES",
+    "gains": "+15 V, +15 A",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "bruiser.MadeOfStone",
+   "kind": "ACTION",
+   "priority": 0,
+   "targets": [
+    "SELF"
+   ],
+   "self": [
+    {
+     "op": "status",
+     "name": "MADE OF STONE",
+     "description": "Cut Damage Taken: x0.5",
+     "statusType": "GOOD",
+     "flow": "INPUT",
+     "property": "CUT",
+     "factor": 0.5,
+     "turns": 3
+    },
+    {
+     "op": "say",
+     "text": "Gained Status: MADE OF STONE"
+    },
+    {
+     "op": "gain",
+     "resource": "VIOLENCE",
+     "amount": 10
+    }
+   ],
+   "gui": {
+    "name": "NON GIOCARE COL COLTELLO NO",
+    "description": "SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V.",
+    "role": "DEFENSE",
+    "gains": "+10 V",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "bruiser.YouStop",
+   "java": true,
+   "cost": {
+    "VIOLENCE": 5
+   },
+   "priority": 2,
+   "params": {
+    "alertnessToTarget": 0
+   },
+   "gui": {
+    "name": "FAI BASTA",
+    "description": "SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio.",
+    "role": "COUNTER",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.mara.CinghiataDiTraverso",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "ALERTNESS": 5
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "CUT",
+     "amount": 12
+    }
+   ],
+   "gui": {
+    "name": "Cinghiata di traverso",
+    "description": "MAR-AR1 · 5 A: 12 CUT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "CUT",
+    "damageAmount": "CUT 12"
+   }
+  },
+  {
+   "binding": "base.mara.Sgommata",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "ALERTNESS": 15
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "CUT",
+     "amount": 26
+    }
+   ],
+   "gui": {
+    "name": "Sgommata",
+    "description": "MAR-AR2 · 15 A: 26 CUT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "CUT",
+    "damageAmount": "CUT 26"
+   }
+  },
+  {
+   "binding": "base.mara.SorpassoInCurva",
+   "kind": "ACTION",
+   "priority": 2,
+   "targets": [
+    "OPPONENT"
+   ],
+   "target": [
+    {
+     "op": "lose",
+     "resource": "ALERTNESS",
+     "amount": 8
+    },
+    {
+     "op": "damage",
+     "type": "CUT",
+     "amount": 3
+    }
+   ],
+   "gui": {
+    "name": "Sorpasso in curva",
+    "description": "MAR-AR3 · −8 A al bersaglio; 3 CUT al bersaglio.",
+    "role": "DISRUPT",
+    "gains": "—",
+    "damage": "CUT",
+    "damageAmount": "CUT 3"
+   }
+  },
+  {
+   "binding": "base.mara.TraDueParaurti",
+   "kind": "ACTION",
+   "priority": 2,
+   "targets": [
+    "SELF"
+   ],
+   "cost": {
+    "ALERTNESS": 5
+   },
+   "self": [
+    {
+     "op": "status",
+     "name": "TRA DUE PARAURTI - HIT",
+     "description": "Hit Damage taken: x0.4",
+     "statusType": "GOOD",
+     "flow": "INPUT",
+     "property": "HIT",
+     "factor": 0.4,
+     "turns": 0
+    },
+    {
+     "op": "status",
+     "name": "TRA DUE PARAURTI - CUT",
+     "description": "Cut Damage taken: x0.4",
+     "statusType": "GOOD",
+     "flow": "INPUT",
+     "property": "CUT",
+     "factor": 0.4,
+     "turns": 0
+    },
+    {
+     "op": "say",
+     "text": "Gained status: TRA DUE PARAURTI"
+    }
+   ],
+   "gui": {
+    "name": "Tra due paraurti",
+    "description": "MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,4 in questo turno.",
+    "role": "DEFENSE",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.mara.Slalom",
+   "kind": "ACTION",
+   "priority": 2,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "ALERTNESS": 10
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "CUT",
+     "amount": {
+      "base": 5,
+      "of": "ALERTNESS",
+      "divide": 2
+     }
+    }
+   ],
+   "gui": {
+    "name": "Slalom",
+    "description": "MAR-AR5 · 10 A: CUT pari a 5 + A residua / 2.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "CUT",
+    "damageAmount": "CUT 5+x"
+   }
+  },
+  {
+   "binding": "com.Steal",
+   "java": true,
+   "cost": {
+    "ALERTNESS": 10
+   },
+   "priority": 0,
+   "params": {},
+   "gui": {
+    "name": "Steal",
+    "description": "GEN-02 · 10 A: ruba un oggetto lontano e lo mette vicino a sé.",
+    "role": "ITEMS",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "bruiser.SeagullFly",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 10
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 18,
+     "applying": [
+      "GOOD"
+     ]
+    }
+   ],
+   "gui": {
+    "name": "GABBIANO DUNQUE VOLIAMOTI",
+    "description": "GEN-05 · 10 V: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 18"
+   }
+  },
+  {
+   "binding": "base.com.MattoneDelCantiere",
+   "kind": "ACTION",
+   "priority": 0,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 15
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 24
+    }
+   ],
+   "gui": {
+    "name": "Mattone del cantiere",
+    "description": "GEN-06 · 15 V: 24 HIT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 24"
+   }
+  },
+  {
+   "binding": "bruiser.HealingBlow",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "VIOLENCE": 20
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 30
+    },
+    {
+     "op": "empty",
+     "resource": "TOXICITY"
+    },
+    {
+     "op": "empty",
+     "resource": "ALCOHOL"
+    }
+   ],
+   "gui": {
+    "name": "ORMALE GUARIAMOTI",
+    "description": "GEN-07 · 20 V: 30 HIT al bersaglio; azzera T e L del bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 30"
+   }
+  },
+  {
+   "binding": "base.com.TartarugaSulMarciapiede",
+   "kind": "ACTION",
+   "priority": 2,
+   "targets": [
+    "SELF"
+   ],
+   "cost": {
+    "ALERTNESS": 5
+   },
+   "self": [
+    {
+     "op": "status",
+     "name": "TARTARUGA - HIT",
+     "description": "Hit Damage taken: x0.6",
+     "statusType": "GOOD",
+     "flow": "INPUT",
+     "property": "HIT",
+     "factor": 0.6,
+     "turns": 0
+    },
+    {
+     "op": "status",
+     "name": "TARTARUGA - CUT",
+     "description": "Cut Damage taken: x0.6",
+     "statusType": "GOOD",
+     "flow": "INPUT",
+     "property": "CUT",
+     "factor": 0.6,
+     "turns": 0
+    },
+    {
+     "op": "say",
+     "text": "Gained status: TARTARUGA"
+    }
+   ],
+   "gui": {
+    "name": "Tartaruga sul marciapiede",
+    "description": "GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno.",
+    "role": "DEFENSE",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.com.DentiStretti",
+   "kind": "ACTION",
+   "priority": 0,
+   "targets": [
+    "SELF"
+   ],
+   "self": [
+    {
+     "op": "lose",
+     "resource": "ALERTNESS",
+     "amount": 5
+    },
+    {
+     "op": "gain",
+     "resource": "VIOLENCE",
+     "amount": 10
+    }
+   ],
+   "gui": {
+    "name": "Denti stretti",
+    "description": "GEN-14 · −5 A a sé; +10 V a sé.",
+    "role": "RESOURCES",
+    "gains": "+10 V",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.com.SputoDaPosacenere",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "cost": {
+    "ALERTNESS": 5
+   },
+   "target": [
+    {
+     "op": "damage",
+     "type": "POISON",
+     "amount": 12
+    }
+   ],
+   "gui": {
+    "name": "Sputo da posacenere",
+    "description": "GEN-17 · 5 A: 12 POISON al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "POISON",
+    "damageAmount": "POISON 12"
+   }
+  },
+  {
+   "binding": "base.com.Spintone",
+   "kind": "ACTION",
+   "priority": 1,
+   "targets": [
+    "OPPONENT"
+   ],
+   "target": [
+    {
+     "op": "damage",
+     "type": "HIT",
+     "amount": 7
+    }
+   ],
+   "gui": {
+    "name": "Spintone",
+    "description": "GEN-18 · 7 HIT al bersaglio.",
+    "role": "DAMAGE",
+    "gains": "—",
+    "damage": "HIT",
+    "damageAmount": "HIT 7"
+   }
+  },
+  {
+   "binding": "com.items.CocktailOnTheGround",
+   "kind": "ITEM",
+   "self": [
+    {
+     "op": "gain",
+     "resource": "VIOLENCE",
+     "amount": 12
+    },
+    {
+     "op": "gain",
+     "resource": "ALCOHOL",
+     "amount": 10
+    },
+    {
+     "op": "gain",
+     "resource": "TOXICITY",
+     "amount": 3
+    }
+   ],
+   "gui": {
+    "name": "Negroni Trovato per Terra",
+    "description": "OGG-01 · Consumato: +12 V, +10 L, +3 T.",
+    "role": "RESOURCES",
+    "gains": "+12 V, +10 L, +3 T",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.items.PosacenereDiVetro",
+   "kind": "ITEM",
+   "self": [
+    {
+     "op": "status",
+     "name": "POSACENERE",
+     "description": "Next Hit Damage dealt: x1.5",
+     "statusType": "GOOD",
+     "flow": "OUTPUT",
+     "property": "HIT",
+     "factor": 1.5,
+     "equip": true,
+     "singleUse": true
+    },
+    {
+     "op": "say",
+     "text": "Equipped status: POSACENERE"
+    }
+   ],
+   "gui": {
+    "name": "Posacenere di vetro",
+    "description": "OGG-13 · Consumato: equip, il prossimo HIT inflitto ×1,5, uso singolo.",
+    "role": "OTHER",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.items.EspressoDelDistributore",
+   "kind": "ITEM",
+   "self": [
+    {
+     "op": "gain",
+     "resource": "ALERTNESS",
+     "amount": 15
+    }
+   ],
+   "gui": {
+    "name": "Espresso del distributore",
+    "description": "OGG-06 · Consumato: +15 A.",
+    "role": "RESOURCES",
+    "gains": "+15 A",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.items.PaninoDelKebab",
+   "kind": "ITEM",
+   "self": [
+    {
+     "op": "gain",
+     "resource": "HEALTH",
+     "amount": 12
+    },
+    {
+     "op": "gain",
+     "resource": "TOXICITY",
+     "amount": 3
+    }
+   ],
+   "gui": {
+    "name": "Panino del kebab dimenticato",
+    "description": "OGG-07 · Consumato: +12 HEALTH, +3 T.",
+    "role": "RESOURCES",
+    "gains": "+12 H, +3 T",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  },
+  {
+   "binding": "base.items.GiubbottoDiFintaPelle",
+   "kind": "ITEM",
+   "self": [
+    {
+     "op": "status",
+     "name": "FINTA PELLE",
+     "description": "Cut Damage taken: x0.75",
+     "statusType": "GOOD",
+     "flow": "INPUT",
+     "property": "CUT",
+     "factor": 0.75,
+     "equip": true,
+     "turns": 2
+    },
+    {
+     "op": "say",
+     "text": "Equipped status: FINTA PELLE"
+    }
+   ],
+   "gui": {
+    "name": "Giubbotto di finta pelle",
+    "description": "OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni (questo e i due successivi).",
+    "role": "OTHER",
+    "gains": "—",
+    "damage": "—",
+    "damageAmount": "—"
+   }
+  }
+ ],
+ "decks": [
+  {
+   "id": "starter-spazienzio",
+   "character": "bruiser.character.BigBadBruiser",
+   "bound": [
+    "bruiser.character.LittleRage",
+    "bruiser.character.LittleSmack"
+   ],
+   "lastResort": "com.last.Struggle",
+   "cards": {
+    "bruiser.SuperImpact": 2,
+    "bruiser.ExtremelyViolentBlow": 2,
+    "bruiser.Glare": 2,
+    "bruiser.MadeOfStone": 2,
+    "bruiser.YouStop": 2,
+    "bruiser.SeagullFly": 2,
+    "base.com.TartarugaSulMarciapiede": 2,
+    "base.com.MattoneDelCantiere": 1,
+    "bruiser.HealingBlow": 1,
+    "base.com.DentiStretti": 1,
+    "com.items.CocktailOnTheGround": 2,
+    "base.items.PosacenereDiVetro": 1
+   }
+  },
+  {
+   "id": "starter-mara",
+   "character": "base.character.Mara",
+   "bound": [
+    "base.mara.bound.PassoStretto",
+    "base.mara.bound.CambioMarcia"
+   ],
+   "lastResort": "com.last.Struggle",
+   "cards": {
+    "base.mara.CinghiataDiTraverso": 2,
+    "base.mara.Sgommata": 2,
+    "base.mara.SorpassoInCurva": 2,
+    "base.mara.TraDueParaurti": 2,
+    "base.mara.Slalom": 1,
+    "base.com.Spintone": 2,
+    "base.com.SputoDaPosacenere": 2,
+    "base.com.TartarugaSulMarciapiede": 1,
+    "com.Steal": 1,
+    "base.items.EspressoDelDistributore": 2,
+    "base.items.PaninoDelKebab": 2,
+    "base.items.GiubbottoDiFintaPelle": 1
+   }
+  }
+ ]
+}

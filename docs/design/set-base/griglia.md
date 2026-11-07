@@ -3,6 +3,7 @@
 > **Stato: approvata dal proprietario il 6 novembre 2026** (SB-10b). Principi della fase A e griglia della fase B, ciascuno con le
 > parole «Approvo tutte»: vedi [Decisioni del proprietario](#decisioni-del-proprietario). Dopo la misura del tetto in partita il
 > proprietario ha scelto il tetto 3 per le bound di danno («Sì, danno a 3», D36): vedi [Tetto in partita](#tetto-in-partita).
+> SB-12a ha corretto coi bot alcuni numeri degli starter base: vedi [Correzioni di SB-12a](#correzioni-di-sb-12a).
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -63,12 +64,13 @@ Il proprietario ha approvato tutte e otto le raccomandazioni con «Approvo tutte
 
 ### Personaggi (7)
 
-Valori approvati in SB-9; non cambiano qui.
+Valori approvati in SB-9; non cambiano qui, salvo la salute dei due personaggi base, corretta nei giri di SB-12a (nota ¹ e
+[correzioni di SB-12a](#correzioni-di-sb-12a)).
 
 | ID | Personaggio | Tipo | Valori iniziali | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---|---|---|---|---|
-| PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H 100, A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9) | dati |
-| PG-MAR | Mara Contromano | Personaggio, base | H 85, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
+| PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H ~~100~~ 85¹, A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9) | dati |
+| PG-MAR | Mara Contromano | Personaggio, base | H ~~85~~ 80¹, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
 | PG-TOS | Tossico del Serraglio | Personaggio, avanzato | H 100, A 35, T 10, capacità 2, immune all'effetto periodico di T | NC | Tossico | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
 | PG-PIN | Pino l'Ultimo Giro | Personaggio, avanzato | H 110, A 15, L 10, capacità 2 | NC | Pino | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
 | PG-GIG | Gigi del Carro Attrezzi | Personaggio, avanzato | H 100, A 25, V 15, capacità 3 | NC | Gigi | bozza | Oggetti ed equip | dati |
@@ -79,6 +81,11 @@ Valori approvati in SB-9; non cambiano qui.
 a +30 da +75 a +144. La griglia le compensa con le carte, senza cambiare i valori (decisione 5): Mara ha costi in A bassi, una bound di A e
 due difese pagate in A; Rocco spende circa 30–40 di salute a partita. Se in SB-12 Mara resta sotto il 45%, la prima leva è la salute
 (85 → 90–95), prima delle carte; per Rocco la stessa domanda va in SB-18.
+
+¹ **SB-12a, giri 1 e 2** ([correzioni](#correzioni-di-sb-12a)). Giro 1: Mara 85 → 95, il punto di partenza di D38. Giro 2: salute tolta a
+tutti e due, Spazienzio 100 → 85 e Mara 95 → 80, con la stessa distanza; motivo: la durata (13,5–13,8 turni, ora 11,1–11,3) e i mazzi
+esauriti (fino al 36%, ora 10–15%), con il matchup che non si sposta. La salute degli avanzati e dei booster non cambia qui: SB-13 deve
+decidere se seguire la stessa scala (vedi il [rapporto](../../reports/set-base/sb-12a-report.md)).
 
 ### Basic (7)
 
@@ -154,11 +161,16 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Fr
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| MAR-AR1 | Azione, regolare | DAMAGE | F1 (10 A) | 1 | 12 CUT | C | 2 | bozza «Cinghiata di traverso» | Attacco base | dati |
-| MAR-AR2 | Azione, regolare | DAMAGE | F2 (20 A) | 1 | 22 CUT | C | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
+| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ 5 A²) | 1 | 12 CUT | C | 2 | bozza «Cinghiata di traverso» | Attacco base | dati |
+| MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³ | C | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
 | MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
-| MAR-AR4 | Azione, regolare | DEFENSE | F1 (10 A) | 2 | HIT e CUT ricevuti ×0,4, solo nel turno | NC | 2 | bozza «Tra due paraurti» (era una bound) | Difesa forte e pagata, più dura di GEN-13 | dati |
-| MAR-AR5 | Azione, regolare | DAMAGE | F2 (15 A) | 2 | CUT pari a 5 + A residua / 2 | R | 1 | da inventare («Slalom») | Picco se ha ancora molta A; costa precedenza | dati |
+| MAR-AR4 | Azione, regolare | DEFENSE | F1 (~~10~~ 5 A²) | 2 | HIT e CUT ricevuti ×0,4, solo nel turno | NC | 2 | bozza «Tra due paraurti» (era una bound) | Difesa forte e pagata, più dura di GEN-13 | dati |
+| MAR-AR5 | Azione, regolare | DAMAGE | F1 (~~15~~ 10 A²) | 2 | CUT pari a 5 + A residua / 2 | R | 1 | da inventare («Slalom») | Picco se ha ancora molta A; costa precedenza | dati |
+
+² **SB-12a, giro 1** ([correzioni](#correzioni-di-sb-12a)): costi in A −5 su Cinghiata, Sgommata, Paraurti e Slalom (e su GEN-17), il punto di
+partenza di D38. Motivo: il listino a 7 HIT di SB-11b dà alla A di Mara circa 1 HIT, non 0,6; con Spazienzio a 0,937 le sue carte stavano
+sotto la linea. Slalom scende in F1. ³ **Giri 1 e 3:** Sgommata 22 → 26 CUT nel giro 1 (dopo D38 Spazienzio vinceva ancora 0,593), 26 → 25
+nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici (0,484).
 
 **Tossico (5)**
 
@@ -234,13 +246,16 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 | GEN-14 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +10 V | C | Spazienzio 1 | bozza «Denti stretti» | Carica per chi usa V | dati |
 | GEN-15 | Azione, regolare | OTHER | F0 | 1 | 5 HIT a sé; azzera la propria T e la propria L | NC | — | bozza «Due dita in gola» | Pulizia propria; costa salute, così non annulla gratis il Tossico | dati |
 | GEN-16 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +8 HEALTH | C | Tossico 1, Pino 2 | bozza «Fasciatura col fazzolettaccio», resa gratuita | Cura generica; la perdita di A è un effetto, quindi è giocabile anche da Pino | dati |
-| GEN-17 | Azione, regolare | DAMAGE | F1 (10 A) | 1 | 12 POISON | C | Mara 2 | bozza «Sputo da posacenere», 5 T → 10 A | POISON diretto per tutti: aggira le parate contro HIT e CUT | dati |
+| GEN-17 | Azione, regolare | DAMAGE | F1 (~~10~~ 5 A²) | 1 | 12 POISON | C | Mara 2 | bozza «Sputo da posacenere», 5 T → 10 A | POISON diretto per tutti: aggira le parate contro HIT e CUT | dati |
 | GEN-18 | Azione, regolare | DAMAGE | F0 | 1 | 7 HIT | C | Mara 2, Pino 2, Gigi 1 | da inventare («Spintone») | La carta da un'unità: riempitivo onesto, mai morto | dati |
 | GEN-19 | Azione, regolare | DAMAGE | F2 (10 V + 5 L) | 1 | 25 HIT | R | — | da inventare («Bottigliata») | Picco condizionato: serve sia V sia L (Cocktail, Grappa) | dati |
 | GEN-20 | Azione, regolare | DAMAGE | F3 (20 V) | 0 | 30 HIT; HIT ricevuto ×1,25 per 2 turni | R | — | da inventare («Sedia in testa») | Picco più alto, con un rischio | dati |
 | GEN-21 | Azione, regolare | OTHER | F1 (5 V) | 1 | Equip: il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo | R | — | da inventare («Coccio di bottiglia»), effetto del token `BrokenBeerBottle` | Prepara il colpo e aggira le parate contro HIT | equip |
 | GEN-22 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | Azzera la L del bersaglio; 3 HIT | NC | — | da inventare («Acqua in faccia») | Tecnica economica contro Pino | dati |
 | GEN-23 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde 10 V; 5 HIT | R | — | da inventare («Sgambetto») | Picco contro chi accumula V (Spazienzio, Gigi) | dati |
+
+² **SB-12a, giro 1:** GEN-17 da 10 a 5 A con le carte di Mara (D38), perché nello starter base la usa solo lei. È una generica: chi la
+mette in un altro starter (Rocco, SB-18) la prende a 5 A, e il suo prezzo va riguardato lì.
 
 ### Oggetti (16) e token
 
@@ -581,6 +596,25 @@ Da riportare nell'elenco [«Idee per le espansioni»](../../set-base-plan.md#ide
 - **«Tavolo ribaltato»:** distruggere tutti gli oggetti sul campo, propri e altrui.
 - **Cassetta degli attrezzi:** un oggetto che crea un token attrezzo (Gigi); vicino all'idea già in elenco di costruire oggetti.
 - **Equip permanenti,** senza durata: oggi il passo `status` chiede sempre i turni.
+
+## Correzioni di SB-12a
+
+Giro coi bot sugli starter base, al massimo tre giri ([rapporto](../../reports/set-base/sb-12a-report.md), D38 e la delega del proprietario sui
+numeri). Ogni numero cambiato, col giro e il motivo; il resto della griglia non cambia.
+
+| Slot | Numero | Prima | Dopo | Giro | Motivo |
+|---|---|---|---|---|---|
+| PG-MAR | HEALTH | 85 | 95, poi 80 | 1, 2 | D38; poi la durata, insieme a Spazienzio |
+| PG-SPA | HEALTH | 100 | 85 | 2 | La durata e i mazzi esauriti, a matchup fermo |
+| MAR-AR1 Cinghiata | costo | 10 A | 5 A | 1 | D38: la A di Mara vale circa 1 HIT (listino a 7 HIT) |
+| MAR-AR2 Sgommata | costo | 20 A | 15 A | 1 | D38 |
+| MAR-AR2 Sgommata | danno | 22 CUT | 26, poi 25 CUT | 1, 3 | Secondo passo dopo D38 (0,593 → 0,525); poi centratura fra gli stili |
+| MAR-AR4 Paraurti | costo | 10 A | 5 A | 1 | D38 |
+| MAR-AR5 Slalom | costo | 15 A | 10 A | 1 | D38 |
+| GEN-17 Sputo | costo | 10 A | 5 A | 1 | D38 |
+
+Esito sui bot: Spazienzio contro Mara **0,520** [0,514–0,525] (0,476 senza il bot attuale), partite di 11,1–11,3 turni, mazzi esauriti
+10–15%, invarianti a zero. Steal, le difese e le contromosse restano come sono: le varianti mostrano che sono i bot a giocarle male.
 
 ## Tetto in partita
 

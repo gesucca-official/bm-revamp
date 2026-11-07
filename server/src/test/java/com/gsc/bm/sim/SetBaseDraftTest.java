@@ -24,7 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * SB-11b: la bozza del Set Base (set-base/bozza.json) con gli starter di Spazienzio («Pazienza finita») e Mara («Consegna sul muso»).
  * Prove brevi della suite: la bozza si carica e passa gli invarianti in modo stretto, gli starter rispettano il formato, poche partite
  * per ogni coppia di stili finiscono senza errori, ogni meccanica di base compare in uno dei due mazzi, le durate seguono R05 e i nomi
- * delle carte di Spazienzio sono in maiuscolo. Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
+ * delle carte di Spazienzio sono in maiuscolo. SB-12a: la bozza porta i valori scelti nei giri coi bot. Le misure lunghe restano a
+ * richiesta (BenchMeasureTest, ListinoMeasureTest).
  */
 class SetBaseDraftTest {
     static final String RESOURCE = "/set-base/bozza.json";
@@ -181,6 +182,29 @@ class SetBaseDraftTest {
             shouting++;
         }
         assertEquals(9, shouting, "basic, tre bound e cinque carte d'archetipo");
+    }
+
+    /**
+     * SB-12a, tre giri coi bot: salute iniziale di Spazienzio 85 e di Mara 80, costi di Mara −5 A su cinque carte (D38), Sgommata 25 CUT.
+     * I numeri dei giri stanno nel rapporto; qui si controlla che la bozza porti i valori scelti, testi compresi, perché i bot leggono il
+     * danno nominale da gui.damageAmount.
+     */
+    @Test
+    void theStartersCarryTheSb12aCorrections() {
+        Map<String, Integer> health = new LinkedHashMap<>();
+        for (JsonNode c : json.get("characters")) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
+        assertEquals(Map.of(SPAZIENZIO, 85, MARA, 80), health);
+        Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 5, "base.mara.Sgommata", 15, "base.mara.Slalom", 10,
+                "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
+        alertnessCosts.forEach((binding, cost) -> {
+            JsonNode c = card(binding);
+            assertEquals(cost, c.get("cost").get("ALERTNESS").asInt(), binding);
+            assertTrue(c.get("gui").get("description").asText().contains("· " + cost + " A:"), binding + ": costo nel testo");
+        });
+        JsonNode sgommata = card("base.mara.Sgommata");
+        assertEquals(25, sgommata.get("target").get(0).get("amount").asInt());
+        assertEquals("CUT 25", sgommata.get("gui").get("damageAmount").asText());
+        assertTrue(sgommata.get("gui").get("description").asText().contains("25 CUT"));
     }
 
     /** La base del listino ricavata dalla bozza: contesti con le àncore al posto di due coppie di generiche, starter intatti. */

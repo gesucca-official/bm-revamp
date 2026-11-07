@@ -1,0 +1,8 @@
+banco sb-7/1
+bozza tmp/sim/sb12a/giro1t.json
+partite 96000
+celle 48
+thread 8
+secondi 60.349
+partite al secondo 1590.7
+millisecondi per partita (tempo reale diviso partite) 0.6286

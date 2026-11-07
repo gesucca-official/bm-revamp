@@ -54,10 +54,14 @@ riducono l'HIT ricevuto e gli danno V. Mostra nello starter base V, HIT e la dif
 **Rischio, cioè come perde.** È lento: chi taglia (CUT) o avvelena (POISON) aggira le sue difese contro l'HIT e lo logora mentre carica.
 Un annullamento dopo che ha pagato 25 V gli brucia un turno e una carica. Ha un solo posto per gli oggetti, quindi ne perde molti.
 
-**Valori iniziali proposti:** HEALTH 100, A 20, V 25, capacità oggetti 1, nessuna immunità. **Rispetto a R07: nessun cambio.**
+**Valori iniziali proposti:** HEALTH ~~100~~ **85**, A 20, V 25, capacità oggetti 1, nessuna immunità. **Rispetto a R07: nessun cambio.**
 Motivo: è il personaggio più semplice e quello su cui SB-12 costruisce la base stabile; conviene che sia il metro e che cambi
 solo per una misura. Due valori da guardare in SB-10: con V 25 può giocare la carta più cara (oggi SuperImpact) già al primo
 turno, il che smentisce un po' «accumula»; e la capacità 1 regge solo con pochi oggetti nello starter.
+
+> **Nota di SB-12a** (giro 2; [D41](../../set-base-plan.md#decisioni-del-proprietario), sotto la delega di D38): HEALTH 100 → **85**, insieme a
+> Mara, per portare la durata da 13,5 a circa 11 turni senza spostare il matchup. È la misura che la scheda chiedeva per cambiare il metro;
+> V 25 resta. [Rapporto](../../reports/set-base/sb-12a-report.md).
 
 **Il suo triangolo.**
 
@@ -92,9 +96,13 @@ rubino o distruggano. Nello starter base è il contrasto di Spazienzio: A e CUT 
 attacca e meno arriva prima. L'alcol che le arriva addosso le toglie A a ogni fine turno; i colpi che tolgono A la rallentano;
 il POISON ignora le sue difese.
 
-**Valori iniziali proposti:** HEALTH 85, A 40, **V 0**, capacità 2, nessuna immunità. **Rispetto alla bozza:** V da 10 a 0. Motivo:
+**Valori iniziali proposti:** HEALTH ~~85~~ **80**, A 40, **V 0**, capacità 2, nessuna immunità. **Rispetto alla bozza:** V da 10 a 0. Motivo:
 il primo mazzo base deve mostrare due colori puri; con V 0 le carte generiche a costo V (YouStop compresa) le restano chiuse finché non
 guadagna V, il che attenua il rischio, già segnalato dalla bozza, di contromosse troppo affidabili con A 40.
+
+> **Nota di SB-12a** (giri 1 e 2; [D38 e D41](../../set-base-plan.md#decisioni-del-proprietario)): HEALTH 85 → 95 nel giro 1 (punto di
+> partenza di D38), poi 95 → **80** nel giro 2 insieme a Spazienzio, per la durata. Resta 5 sotto di lui, come in D38: «due colpi seri e non
+> si rialza» vale ancora (SuperImpact fa 40, metà della sua salute). [Rapporto](../../reports/set-base/sb-12a-report.md).
 
 **Il suo triangolo.**
 
@@ -320,15 +328,15 @@ salute uccide e la mossa prosegue (R04); il bot non si suicida per caso. In più
 
 | Personaggio | Slot | HEALTH | A | Risorsa speciale | Capacità | Immunità | Fonte e differenze |
 |---|---|---:|---:|---|---:|---|---|
-| Spazienzio de la Ucciso | Base | 100 | 20 | V 25 | 1 | — | R07, invariato |
-| Mara Contromano | Base | 85 | 40 | — | 2 | — | Bozza; V 10 → 0 |
+| Spazienzio de la Ucciso | Base | 85 | 20 | V 25 | 1 | — | R07; HEALTH 100 → 85 (SB-12a) |
+| Mara Contromano | Base | 80 | 40 | — | 2 | — | Bozza; V 10 → 0; HEALTH 85 → 80 (SB-12a) |
 | Tossico del Serraglio | Avanzato | 100 | 35 | T 10 | 2 | Periodico di T | R07; capacità 3 → 2 |
 | Pino l'Ultimo Giro | Avanzato | 110 | 15 | L 10 | 2 | — | Bozza; V 10 → 0, niente immunità a L |
 | Gigi del Carro Attrezzi | Avanzato | 100 | 25 | V 15 | 3 | — | Bozza, invariato |
 | Cesira la Malalingua | Booster | 90 | 30 | V 10 | 2 | — | Nuovo |
 | Rocco «Sant'Incasso» | Booster | 130 | 15 | — (paga in HEALTH) | 2 | — | Nuovo |
 
-Salute da 85 a 130, A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
+Salute da 80 a 130 (le base corrette in SB-12a, gli altri ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
 priorità: Mara, Tossico, Malalingua, Gigi, Spazienzio, Pino e Sant'Incasso, prima dei costi.
 
 ### Risorsa × strategia

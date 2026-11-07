@@ -550,6 +550,20 @@ devono mostrare danno, difesa, priorità, oggetti e almeno una contromossa.
 Diviso da [D40](#decisioni-del-proprietario) in due blocchi. **SB-12a, giro coi bot,** porta gli starter base ai criteri con il banco e
 non aspetta il client. **SB-12b, prova umana,** sono le partite del proprietario e richiede SB-8. Il perimetro che segue vale per i due insieme.
 
+**SB-12a fatto il 7 novembre 2026, in attesa del giudizio del proprietario.** Tre giri coi bot (il massimo di Q5), circa 35 minuti di calcolo
+su un tetto di 2 ore; correzioni decise con la delega di D38 e registrate in [D41](#decisioni-del-proprietario).
+- **Giri.** 1: punto di partenza di D38 e Sgommata 22 → 26 CUT (0,525). 2: salute di Spazienzio 100 → 85 e di Mara 95 → 80, per la durata
+  (0,500, 11 turni). 3: Sgommata 26 → 25, per centrare il matchup anche senza il bot attuale.
+- **Esito.** Spazienzio contro Mara **0,520** [0,514–0,526] (0,476 coi soli stili euristici), partite di **11,1–11,3 turni**, mazzi esauriti
+  10–15%, patte 10–13%, invarianti a zero su 96.000 partite. Bozza SHA-256 `441b1ecd…ef4841cf4`.
+- **Bot.** Parate del turno, contromosse e Steal valgono meno di un colpo semplice in mano ai bot, per tutti e due: tenute, non tagliate.
+- **D36 e B2.** Le bound stanno sotto 4 HEALTH equivalenti per uso, salvo la +8 A di Mara (circa 4,5): +6 A la riporta a 3,3 senza
+  spostare il matchup, proposta al proprietario.
+- **Listino a 7 HIT.** Prezzi quasi invariati: A di Mara circa 1 HIT, V oltre 20 molto più cara.
+
+Il giudizio e le quattro domande aperte (B2 a +6 A, scala della salute degli altri personaggi, patte, Steal) sono nel
+[rapporto](reports/set-base/sb-12a-report.md).
+
 **Perimetro.** Giro di bilanciamento fino ai criteri, poi partite del proprietario. Il risultato è la **base stabile** per i blocchi successivi.
 
 **Punto di partenza da SB-11b** ([D38](#decisioni-del-proprietario)):
@@ -780,6 +794,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D38 | Bozza degli starter base (SB-11b, fase A) | 6 novembre 2026, con le parole del proprietario: «approvo le raccomandazioni su queste e anche delle prossime (a questo livello di dettaglio mi fido di te)». **(1)** Bozza in un file unico, `set-base/bozza.json`; carte di oggi col binding della classe, nuove col prefisso del set `base.`, slot nella descrizione; **(2)** durate: «per N turni» = `turns: N − 1` (R05), l'incoerenza dei testi di oggi va a SB-25; **(3)** D36: tetto del danno a 3, non a 2, che sullo starter di Mara non risolve; in SB-12 le bound si valutano anche come salute equivalente per uso, al massimo 4; **(4)** B2: la bound +8 A resta nello starter di Mara; **(5)** SB-12 parte da costi di Mara −5 A su cinque carte e HEALTH 95; **(6)** prezzi del listino a 7 HIT (A di Mara circa 1 HIT, V oltre 20 più cara) registrati qui e usati in SB-12, senza riscrivere ora la griglia; **(7)** limiti dei bot da guardare in SB-12 prima di tagliare carte |
 | D39 | Nome e voce di Spazienzio (SB-11b) | 6 novembre 2026, con le parole del proprietario: «su spazienzio il mazzo lo chiamiamo "pazienza finita" e i nomi delle sue carte li teniamo tutti in maiuscolo (sull'interfaccia, non nei dati o nel codice), perché lui ha perso la pazienza e urla». Lo starter di Spazienzio si chiama **«Pazienza finita»**; i **nomi visualizzati** delle sue carte (slot `SPA-*`) sono **in maiuscolo**, mentre binding, id e codice restano come sono. Precisato dal proprietario all'approvazione di SB-11b: «maiuscolo nei dati», cioè il maiuscolo sta nel nome visualizzato scritto nella bozza (`gui.name`), non è l'interfaccia a trasformarlo. Vale anche per la passata finale (SB-24) e per i testi per i giocatori (SB-25) |
 | D40 | Divisione di SB-12 e anticipo di SB-1 | 7 novembre 2026, con le parole del proprietario: «Sì, entrambi». **SB-12 si divide** in SB-12a (giro coi bot sugli starter base, dipende da SB-11b) e SB-12b (prova umana, dipende da SB-8 e SB-12a). **SB-1 è anticipato** in parallelo a C4, che si è allungato con C4-10 e C4-11, perché è il primo anello verso SB-8 e la prova umana; paletti: niente `style.css`, `verify-decks.mjs` pushato prima di C4-8a, jar rifatto sull'altra macchina dopo il pull. SB-13 resta dopo SB-12 intero; se la prova umana tarda, il proprietario può decidere di anticiparlo dopo SB-12a. Precisa D22 e D30 |
+| D41 | Correzioni degli starter base (SB-12a) | 7 novembre 2026, **decise dall'esecutore con la delega di D38** («a questo livello di dettaglio mi fido di te»), **in attesa del giudizio del proprietario**. Tre giri al massimo (Q5). Salute iniziale di **Spazienzio 85** e di **Mara 80**; costi di Mara −5 A su Cinghiata, Sgommata, Slalom, Paraurti e Sputo (D38); **Sgommata 25 CUT**. Steal, parate e contromosse restano negli starter: le varianti mostrano che sono i bot a giocarle male. Proposte al proprietario, non applicate: MAR-BO2 da +8 a +6 A (B2 sopra 4 unità per uso), scala della salute per SB-13. Precisa D34(5), D36 e D38 |
 
 ## Decisioni ancora aperte
 
