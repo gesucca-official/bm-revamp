@@ -471,6 +471,8 @@ nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suo
 
 **Fase 0 — volume del taglio (dalla prova di C4-7-ter): fatta, in attesa dell’ascolto del proprietario.** Il proprietario, il 7 novembre 2026: «il volume del sound effect del taglio è troppo alto rispetto agli altri effetti». Prima della guida visiva, in un commit a sé: misurare il volume dei sette file distribuiti, allineare `knifeSlice.ogg` al tonfo di HIT con un guadagno proprio della sorgente (moltiplicato per l'1/N dei colpi simultanei), senza toccare il master, senza convertire il file e senza cambiare gli altri suoni; un test che fallisce senza il guadagno. Giudizio del proprietario all'ascolto, insieme alla prova di C4-10.
 
+**Fase A — proposta: pronta, in attesa della scelta del proprietario** (7 novembre 2026). [Proposta](design/client-c4/guida/proposta.md) con diagnosi sul tavolo vero, tre strategie prototipate (A «Riflettore», raccomandata; B «Richiamo»; C «Contrasto»), O29 (bagliore sulle carte del round al posto del riquadro giallo) e O30 (✓ e × sulla carta scartata); [rapporto](reports/client-c4-report.md#c4-10--fase-a). Prototipi fuori dal commit; Fase B non avviata.
+
 **Perimetro.**
 
 - Strategie **visive** per portare lo sguardo su ciò che succede e su ciò che il giocatore deve fare: movimento, ingrandimento, luce e oscuramento, pulsazione, colpi che «si sentono» a schermo (con i suoni di C4-7-ter). **Nessun testo nuovo sullo schermo** e nessun elenco.

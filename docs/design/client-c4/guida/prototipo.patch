@@ -1,0 +1,141 @@
+diff --git a/client-web/src/scene.ts b/client-web/src/scene.ts
+index bd2c678..a2c24cc 100644
+--- a/client-web/src/scene.ts
++++ b/client-web/src/scene.ts
+@@ -117,7 +117,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+   // All soft ellipses before all props, behind every gameplay node. O24 has no interaction here.
+   PROPS.forEach(p=>{const node=new Graphics(),blur=new BlurFilter({strength:3,quality:4,resolution:1});node.eventMode='none';node.filters=[blur];this.shadows[p.id]={node,blur};this.decor.addChild(node);});
+   PROPS.forEach((p,i)=>{const sprite=new Sprite(props[i]);sprite.anchor.set(.5);sprite.eventMode='none';this.props[p.id]=sprite;this.decor.addChild(sprite);});
+-  this.app.stage.addChild(this.background,this.decor,this.world,this.aimLayer,this.fx);this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
++  this.guideG.eventMode='none';this.app.stage.addChild(this.background,this.decor,this.world,this.guideG,this.aimLayer,this.fx);document.body.dataset.guide=this.guide;this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
+   const canvas=this.app.canvas;
+   const bind=(target:EventTarget,event:string,fn:EventListener)=>{target.addEventListener(event,fn);this.disposeFns.push(()=>target.removeEventListener(event,fn));};
+   bind(host.parentElement!,'pointerup',((e:PointerEvent)=>{if((e.target as HTMLElement)?.closest('button'))this.inputStart=performance.now();}) as EventListener);
+@@ -521,6 +521,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+    const c=closeUp(s.person,{w:this.width,h:this.height},[...avoid,...pileBoxes],range),o=closeUp(s.person,{w:this.width,h:this.height},avoid,range);
+    const far=(x:CloseUp)=>Math.hypot(x.box.x-this.width/2,x.box.y-this.height*.42);ups.set(id,c.placed==='middle'&&(c.scale>o.scale||(c.scale===o.scale&&far(c)<=far(o)))?c:o);}return ups.get(id)!;};
+   const character=(id:string,w:number,h:number)=>{const p=v.players[id]?.character??previous.players[id]?.character;return this.face(p?.name??'',artIndex(p?.bindingName??''),w,h,'PERSONAGGIO',true,'','character');};
++  this.guideBeats=[];
+   T.moves.forEach((m,i)=>{const from=seat(m.author),to=seat(m.target),P=p.moves[i],home=place(m.author)?.person,aim=place(m.target)?.person;if(!from||!to||!home||!aim)return;
+    const at={cost:P.cost.at,author:P.author.at,back:P.back.at,flight:P.flight.at,target:P.target.at,changes:P.changes.at};
+    // 1. Cost: this card's tokens leave its author; the bound's extra card leaves the hand for the discard.
+@@ -564,6 +565,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+     else{node.addChild(new Graphics().moveTo(-bw*.1,-bh*.5).lineTo(bw*.08,-bh*.1).lineTo(-bw*.12,bh*.15).lineTo(bw*.05,bh*.5).stroke({color:INK,width:3}));flight({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:s,end:e,mode:'break',tag:'itemOut'});}}
+    // 6. The card's changes.
+    change(P.changes.at,m.steps);
++   this.guideBeats.push({from:P.cost.at,to:end,hit,author:m.author,target:m.target});
+    this.stats.schedule.push({key:k,move:i,...at,hit:Math.round(hit),tokens:m.tokens.length?P.cost.at:null,closeUp:P.author.at,goesBack:P.back.at,flies:P.flight.at,targetUp:P.target.at,pops:m.steps.length?P.changes.at:null,costPops:m.costSteps.length?Math.round(P.cost.at+P.cost.dur*.3):null});});
+   // 3. Draws: cards leave each deck as the counts say; own new cards face up, opponents' as backs, deck objects to the table.
+   // C3-4s: what leaves a deck is on the table only when it lands. An object whose change no move explains vanishes from or appears at its seat (D1).
+@@ -649,9 +651,65 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
+   this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+  private lastTick=0;
++ // C4-10 Phase A PROTOTYPE (not product code): visual guidance behind localStorage 'bm.guide' = A | B | C.
++ guide=(()=>{try{const g=localStorage.getItem('bm.guide');return g==='A'||g==='B'||g==='C'?g:'';}catch{return '';}})();
++ private guideG=new Graphics();private guideTouched=new Set<Container&{gs?:number;gy?:number}>();private guideBeats:{from:number;to:number;hit:number;author:string;target:string}[]=[];private guideAlpha=0;private guideKind='';private guideSince=0;
++ guideFocus:{kind:string;ids:string[]}={kind:'none',ids:[]};
++ private focusNow(t:number|null):{kind:string;ids:string[];boxes:Box[];hit?:{box:Box;age:number}}{
++  const m=this.model,L=this.layout;if(!L)return {kind:'none',ids:[],boxes:[]};
++  const hit=(id:string)=>this.hits.find(h=>h.id===id),box=(h:Hit|undefined)=>h?[{x:h.x,y:h.y,w:h.w,h:h.h}]:[];
++  const seatBoxesOf=(id:string)=>{const s=L.seats.find(x=>x.id===id);return s?[s.person,s.board]:[];};
++  const v=m.view,over=v.over||m.eliminated;
++  if(over)return {kind:'none',ids:[],boxes:[]};
++  if(m.selected&&m.target&&m.selectedCard){
++   if(m.choosingDiscard){const ids=m.hand.filter(c=>!c.card.item&&!c.card.basicAction&&!c.card.characterBound&&!c.card.lastResort).map(c=>c.key);return {kind:'discard',ids:[...ids,m.selected],boxes:[...ids.flatMap(id=>box(hit(id))),...box(this.hits.find(h=>h.kind==='preview'))]};}
++   const dest=this.hits.find(z=>(z.kind==='person'||z.kind==='item')&&z.target?.owner===m.target!.owner&&z.target?.itemIndex===m.target!.itemIndex);
++   const ids=[m.selected,...(dest?[dest.id]:[]),...(m.discard?[m.discard]:[])];
++   return {kind:'confirm',ids,boxes:[...box(this.hits.find(h=>h.kind==='preview')),...box(dest),...(m.discard?box(hit(m.discard)):[])]};}
++  if(m.selected&&!m.locked){const allowed=this.hits.filter(h=>(h.kind==='person'||h.kind==='item')&&h.target&&m.allows(h.target));
++   return {kind:'aim',ids:[m.selected,...allowed.map(h=>h.id)],boxes:[...box(hit(m.selected)),...allowed.flatMap(h=>box(h))]};}
++  if(this.seqStarted&&t!==null){const b=this.guideBeats.find(x=>t>=x.from&&t<x.to);if(!b)return {kind:'sequence',ids:[],boxes:[]};
++   const ids=[...new Set([b.author,b.target])];return {kind:'sequence',ids:ids.map(id=>`person-${id}`),boxes:ids.flatMap(seatBoxesOf),hit:t>=b.hit?{box:seatBoxesOf(b.target)[0],age:t-b.hit}:undefined};}
++  if(m.phase==='pending'||m.phase==='sending'||m.phase==='uncertain'){const ids=Object.keys(v.players).filter(id=>id!==m.me&&!v.players[id].character.dead);return {kind:'wait',ids:ids.map(id=>`person-${id}`),boxes:ids.flatMap(seatBoxesOf)};}
++  if(m.phase==='choose'){const ids=this.hits.filter(h=>h.kind==='hand').map(h=>h.id);return {kind:'choose',ids,boxes:ids.flatMap(id=>box(hit(id)))};}
++  return {kind:'none',ids:[],boxes:[]};}
++ private guideTick(now:number){
++  const t=this.seqStarted?now-this.seqStarted:null,f=this.focusNow(t),g=this.guideG,mode=this.guide,reduced=this.reduced;
++  if(f.kind!==this.guideKind){this.guideKind=f.kind;this.guideSince=now;}const since=now-this.guideSince;this.guideFocus={kind:f.kind,ids:f.ids};
++  for(const n of this.guideTouched){if(n.destroyed)continue;if(n.gs!==undefined)n.scale.set(n.gs);if(n.gy!==undefined)n.y=n.gy;}this.guideTouched.clear();
++  const focus=new Set(f.ids),nodes=this.hits.filter(h=>focus.has(h.id)).map(h=>h.node);
++  const touch=(n:Container)=>{const c=n as Container&{gs?:number;gy?:number};c.gs??=c.scale.x;c.gy??=c.y;this.guideTouched.add(c);return c;};
++  g.clear();
++  if(mode==='A'){
++   const want={none:0,choose:.22,aim:.42,confirm:.42,discard:.42,wait:.2,sequence:.5}[f.kind as 'none']??0;
++   this.guideAlpha=reduced?want:this.guideAlpha+(want-this.guideAlpha)*.18;
++   if(this.guideAlpha>.01){g.rect(0,0,this.width,this.height).fill({color:0x0b0604,alpha:this.guideAlpha});
++    const pad=f.kind==='sequence'?10:7;for(const b of f.boxes)g.roundRect(b.x-b.w/2-pad,b.y-b.h/2-pad,b.w+pad*2,b.h+pad*2,10).cut();}
++   if(f.hit&&!reduced&&f.hit.age<220){const b=f.hit.box,a=.6*(1-f.hit.age/220);g.roundRect(b.x-b.w/2,b.y-b.h/2,b.w,b.h,8).fill({color:0xfff4dc,alpha:a});}
++  }
++  if(mode==='B'&&!reduced){
++   const wave=(i:number,period:number)=>{const q=((since-i*110)%period)/600;return q>=0&&q<1?Math.sin(q*Math.PI):0;};
++   if(f.kind==='choose'||f.kind==='discard'){const hand=this.hits.filter(h=>h.kind==='hand'&&focus.has(h.id)&&h.id!==this.model.selected);
++    hand.forEach((h,i)=>{const n=touch(h.node);n.y=n.gy!-wave(i,f.kind==='choose'?3600:2400)*(this.layout!.compact?8:14);});}
++   if(f.kind==='aim'||f.kind==='confirm'||f.kind==='wait'){for(const h of this.hits)if(focus.has(h.id)&&(h.kind==='person'||h.kind==='item'||h.kind==='preview')){const n=touch(h.node);n.scale.set(n.gs!*(1+(f.kind==='wait'?.015:.035)*(.5+.5*Math.sin(now/230))));}}
++   if(f.kind==='sequence'){for(const n of nodes){const c=touch(n);c.scale.set(c.gs!*1.07);}
++    if(f.hit&&f.hit.age<180){const q=f.hit.age/180;this.world.x=Math.sin(q*Math.PI*5)*(this.layout!.compact?3:6)*(1-q);this.fx.x=this.world.x;}else{this.world.x=0;this.fx.x=0;}}
++   else{this.world.x=0;this.fx.x=0;}
++  }
++  if(mode==='C'){
++   const active=f.kind!=='none',grey=f.kind==='choose'||f.kind==='wait'?0xa8a8a8:0x8a8a8a;
++   for(const c of this.world.children){if(!active){if(!this.shakes.length)c.tint=0xffffff;continue;}
++    const on=nodes.includes(c);if(on){if(!this.shakes.some(s=>this.hits.find(h=>h.id===`person-${s.id}`)?.node===c))c.tint=0xffffff;}else c.tint=grey;}
++   this.decor.tint=active?grey:0xffffff;this.background.tint=active?(f.kind==='sequence'?0x9a9a9a:0xc8c8c8):0xffffff;
++   if(!reduced){for(const c of nodes){const n=touch(c);let k=f.kind==='sequence'?1.06:f.kind==='choose'?1:1.04;
++     if(f.hit&&f.hit.age<240&&this.hits.find(h=>h.node===c)?.id===`person-${this.guideBeats.find(b=>t!==null&&t>=b.from&&t<b.to)?.target}`)k+=.12*(1-f.hit.age/240);n.scale.set(n.gs!*k);}}
++   if(f.hit&&!reduced&&f.hit.age<160){const b=f.hit.box;g.roundRect(b.x-b.w/2,b.y-b.h/2,b.w,b.h,8).fill({color:0xffffff,alpha:.5*(1-f.hit.age/160)});}
++  }
++ }
+  private tick(){const now=performance.now(),lastTick=this.lastTick;this.lastTick=now;
+    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
+   if(this.aimDirty)this.drawAim();
++  if(this.guide)this.guideTick(now);
+   // Quiet pulse while arrows are shown; reduced motion keeps them static.
+   if(this.arrows.length||this.confirmArrow)this.aimLayer.alpha=this.reduced?1:.88+.12*Math.sin(now/280);
+   if(this.inputStart){const start=this.inputStart;this.inputStart=0;requestAnimationFrame(()=>this.stats.inputMs.push(performance.now()-start));}
+diff --git a/client-web/src/style.css b/client-web/src/style.css
+index 0d19383..b7a2fd2 100644
+--- a/client-web/src/style.css
++++ b/client-web/src/style.css
+@@ -1613,3 +1613,12 @@ button[aria-selected=true] { box-shadow: inset 0 -3px 0 var(--accent-strong); }
+ 
+ /* C4-7: a full touch target for the volume control. */
+ .menu .volume-slider { min-width: 160px; min-height: 44px; vertical-align: middle; }
++
++/* C4-10 Phase A PROTOTYPE: guidance styles, active only with localStorage 'bm.guide'. */
++.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
++.round-link.guide-glow { border-radius:8px; animation: guide-glow 1.1s ease-in-out 3; }
++@keyframes guide-glow { 0%,100% { box-shadow:0 0 0 2px rgba(241,228,196,.5), 0 0 8px 2px rgba(241,228,196,.3); } 50% { box-shadow:0 0 0 4px #f1e4c4, 0 0 26px 8px rgba(241,228,196,.85); } }
++body[data-guide=B] .confirmation [data-testid=confirm]:not(:disabled) .mark { animation: guide-pulse 1s ease-in-out infinite; }
++@keyframes guide-pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.14); } }
++@keyframes guide-still { 0%,99% { box-shadow:0 0 0 3px #f1e4c4, 0 0 18px 4px rgba(241,228,196,.7); } 100% { box-shadow:none; } }
++@media (prefers-reduced-motion: reduce) { .round-link.guide-glow { animation: guide-still 3.3s steps(1,end) 1; } body[data-guide=B] .confirmation [data-testid=confirm] .mark { animation:none; } }
+diff --git a/client-web/src/table.tsx b/client-web/src/table.tsx
+index 21ee7d1..725263f 100644
+--- a/client-web/src/table.tsx
++++ b/client-web/src/table.tsx
+@@ -73,7 +73,9 @@ export function Table({session,model}:{session:Session;model:Model}){
+  // Status summary on hover, tap or focus: a short card above the chip, inside the viewport.
+  const tip=modal||table?.drag?null:table?.statusShown??null;
+  // C4-2: ✓ and × are the two halves of the chosen card, wherever the card lies, until the move is sent; its text stays at the foot of the table. They win over a nearby (i).
+- const chosen=!!choice&&!!model.target&&!finished,card=table?.layout?.preview,confirmAt=chosen&&model.phase!=='pending'&&table&&card?{left:table.preview.x-card.w/2,top:table.preview.y-card.h/2,width:card.w,height:card.h}:null;
++ const chosen=!!choice&&!!model.target&&!finished,card=table?.layout?.preview,confirmAt0=chosen&&model.phase!=='pending'&&table&&card?{left:table.preview.x-card.w/2,top:table.preview.y-card.h/2,width:card.w,height:card.h}:null;
++ // C4-10 Phase A PROTOTYPE (O30): with a guide set, ✓ and × lie on the chosen discard card.
++ const discardHit=table?.guide&&chosen&&model.discard?hits.find(h=>h.id===model.discard):undefined,confirmAt=discardHit&&confirmAt0?{left:discardHit.x-discardHit.w/2,top:discardHit.y-discardHit.h/2,width:discardHit.w,height:discardHit.h}:confirmAt0;
+  const covers=(x:number,y:number)=>!!confirmAt&&x>confirmAt.left-20&&x<confirmAt.left+confirmAt.width+20&&y>confirmAt.top-20&&y<confirmAt.top+confirmAt.height+20;
+  // O12: the round's small cards are too small to read cost and gain: a press on them opens «Ultimo turno».
+  const roundBox=table?.layout?.played&&table.readout.played?.length&&!model.selected&&!table.sequenceRunning&&!panel&&!modal?table.layout.played.box:null;
+@@ -102,10 +104,11 @@ export function Table({session,model}:{session:Session;model:Model}){
+   {!panel&&!chosen&&<p className={`hint ${model.phase}${model.phase==='choose'&&!dead&&/^Scegli /.test(model.message)?' ask':''}`} role="status" aria-live="polite">{dead?'Sei fuori: guardi fino all’esito':model.message}</p>}
+   {discardRow&&<p className="discard-invitation" data-testid="discard-invitation" role="status" aria-live="polite" style={{left:discardRow.center,top:discardRow.y+discardRow.h*.41-1,maxWidth:Math.min(discardRow.w+6*discardRow.step,innerWidth-20)}}>{discardable.length?'Seleziona una carta regolare da scartare':'Nessuna carta regolare da scartare'}</p>}
+   {/* C3-6: the short summary lies in the place the layout keeps for it (clear of every seat), clamped to its lines; the full report is one tap away. */}
+-  {toast&&!panel&&brief&&<PressButton className="toast" data-testid="toast" style={{left:brief.box.x-brief.box.w/2,top:brief.box.y-brief.box.h/2,width:brief.box.w,height:brief.box.h,fontSize:brief.font}} onClick={()=>open('report')}><span style={{WebkitLineClamp:brief.lines}}>{toast}</span></PressButton>}
++  {toast&&!panel&&table?.guide&&!roundNote(model.round)&&<p className="sr-only" role="status">{toast}</p>}
++  {toast&&!panel&&brief&&!(table?.guide&&!roundNote(model.round))&&<PressButton className="toast" data-testid="toast" style={{left:brief.box.x-brief.box.w/2,top:brief.box.y-brief.box.h/2,width:brief.box.w,height:brief.box.h,fontSize:brief.font}} onClick={()=>open('report')}><span style={{WebkitLineClamp:brief.lines}}>{toast}</span></PressButton>}
+   {tip&&<div className={`status-tip ${tip.kind}`} role="tooltip" data-testid="status-tip" style={{left:Math.max(8,Math.min(tip.x-120,innerWidth-248)),top:tip.y>150?undefined:tip.y+30,bottom:tip.y>150?innerHeight-tip.y+6:undefined}}><strong>{tip.title}</strong><span>{tip.text}</span></div>}
+   {info&&<PressButton key={info.id} className="info" data-testid="info" aria-label={`Dettagli: ${info.label}`} style={{left:info.cx,top:info.cy}} onPointerEnter={()=>setOverInfo(info.id)} onPointerLeave={()=>setOverInfo(null)} onClick={()=>{setOverInfo(null);table?.inspect(info.id);}}>i</PressButton>}
+-  {roundBox&&<PressButton className="round-link" data-testid="round-link" aria-label="Carte del round: apri Ultimo turno" style={{left:roundBox.x-roundBox.w/2,top:roundBox.y-roundBox.h/2,width:roundBox.w,height:roundBox.h}} onClick={()=>open('report')}/>}
++  {roundBox&&<PressButton key={model.round?.facts.key??'none'} className={`round-link${table?.guide?' guide-glow':''}`} data-testid="round-link" aria-label="Carte del round: apri Ultimo turno" style={{left:roundBox.x-roundBox.w/2,top:roundBox.y-roundBox.h/2,width:roundBox.w,height:roundBox.h}} onClick={()=>open('report')}/>}
+   {confirmAt&&<div className="confirmation" style={confirmAt}>
+    <div><PressButton data-testid="confirm" disabled={!model.ready||!!error||!session.connected} aria-label="Conferma calata" onClick={()=>session.submit()}><Mark kind="check"/><span className="action-label">Conferma</span></PressButton><PressButton aria-label="Annulla calata" disabled={model.phase!=='choose'} onClick={()=>model.cancel()}><Mark kind="cross"/><span className="action-label">Annulla</span></PressButton></div></div>}
+   {panel&&<section className="outcome" aria-label="Esito"><h2>{end.title}</h2><p>{end.reason}</p>{end.lines.map(line=><p key={line} className="why">{line}</p>)}{jumpNote&&<p className="why" data-testid="round-note">{jumpNote}</p>}

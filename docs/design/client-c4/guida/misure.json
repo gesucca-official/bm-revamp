@@ -1,0 +1,751 @@
+{
+ "note": "C4-10 Fase A: distanze in px CSS fra elementi del tavolo, da window.__bm.state e dal DOM, partite reali su Edge/PC (guide-captures.mjs). Oggi = client c09b946 senza prototipi.",
+ "runs": [
+  {
+   "mode": "duel",
+   "size": "844x390",
+   "discardToConfirm": [
+    220
+   ],
+   "previewToHint": [
+    294,
+    247,
+    570
+   ],
+   "selectedToTargets": [
+    [
+     260
+    ],
+    [
+     152
+    ],
+    [
+     319
+    ]
+   ],
+   "toastDuringSequence": [
+    true,
+    true,
+    true
+   ],
+   "toastAfterSequence": [
+    false,
+    false,
+    false
+   ],
+   "toastBox": {
+    "x": 694,
+    "y": 176,
+    "w": 280,
+    "h": 44
+   },
+   "hint": {
+    "x": 66,
+    "y": 369,
+    "w": 112,
+    "h": 27
+   },
+   "handCenter": null
+  },
+  {
+   "mode": "ffa",
+   "size": "844x390",
+   "discardToConfirm": [
+    422
+   ],
+   "previewToHint": [
+    315,
+    325,
+    351
+   ],
+   "selectedToTargets": [
+    [
+     315,
+     189,
+     335,
+     142
+    ]
+   ],
+   "toastDuringSequence": [
+    true,
+    true,
+    true
+   ],
+   "toastAfterSequence": [
+    false,
+    false,
+    false
+   ],
+   "toastBox": {
+    "x": 768,
+    "y": 160,
+    "w": 140,
+    "h": 27
+   },
+   "hint": {
+    "x": 66,
+    "y": 369,
+    "w": 112,
+    "h": 27
+   },
+   "handCenter": null
+  },
+  {
+   "mode": "duel",
+   "size": "1366x768",
+   "discardToConfirm": [
+    523
+   ],
+   "previewToHint": [
+    664,
+    627,
+    684
+   ],
+   "selectedToTargets": [
+    [
+     304
+    ],
+    [
+     481
+    ]
+   ],
+   "toastDuringSequence": [
+    true,
+    true,
+    true
+   ],
+   "toastAfterSequence": [
+    false,
+    false,
+    false
+   ],
+   "toastBox": {
+    "x": 462,
+    "y": 30,
+    "w": 520,
+    "h": 56
+   },
+   "hint": {
+    "x": 84,
+    "y": 739,
+    "w": 140,
+    "h": 35
+   },
+   "handCenter": null
+  },
+  {
+   "mode": "ffa",
+   "size": "1366x768",
+   "discardToConfirm": [
+    708,
+    708
+   ],
+   "previewToHint": [
+    517,
+    522,
+    518,
+    439,
+    533,
+    533
+   ],
+   "selectedToTargets": [
+    [
+     590,
+     389,
+     586,
+     236
+    ]
+   ],
+   "toastDuringSequence": [
+    true,
+    true,
+    true
+   ],
+   "toastAfterSequence": [
+    false,
+    false,
+    false
+   ],
+   "toastBox": {
+    "x": 1180,
+    "y": 105,
+    "w": 340,
+    "h": 77
+   },
+   "hint": {
+    "x": 84,
+    "y": 739,
+    "w": 140,
+    "h": 35
+   },
+   "handCenter": null
+  }
+ ],
+ "luma": {
+  "note": "YAVG medio (0-255) da ffmpeg signalstats su catture JPEG: mano propria (1366: 700x280 da 600,480; 844: 420x175 da 420,215) e fascia alta (avversari e centro: 1366x300 / 844x150). Misura grezza di dove sta la luce, non di leggibilità. sequenza-1300 = secondo turno, 1,3 s dopo l inizio della sequenza; A-ridotto = movimento ridotto emulato, senza sequenza.",
+  "rows": [
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 120.8,
+    "top": 59.5
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 119.3,
+    "top": 63.6
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 113.8,
+    "top": 83.4
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 122.5,
+    "top": 65.4
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 108.6,
+    "top": 69.4
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 108.6,
+    "top": 76.2
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 99,
+    "top": 73.8
+   },
+   {
+    "dir": "oggi",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 108.6,
+    "top": 65.1
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 124.2,
+    "top": 67
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 123.7,
+    "top": 71.4
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 127.6,
+    "top": 80.3
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 127.6,
+    "top": 70.5
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 115.8,
+    "top": 68.4
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 115.7,
+    "top": 73.7
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 105.1,
+    "top": 77.4
+   },
+   {
+    "dir": "oggi",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 115.9,
+    "top": 71.6
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 112.5,
+    "top": 51.1
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 72,
+    "top": 49.3
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 61,
+    "top": 59.5
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 115.2,
+    "top": 56.9
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 97.1,
+    "top": 57.6
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 61.7,
+    "top": 53.1
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 52.4,
+    "top": 61.2
+   },
+   {
+    "dir": "A",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 100.2,
+    "top": 61.5
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 99.4,
+    "top": 54.2
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 63.3,
+    "top": 43.4
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 56.4,
+    "top": 48.3
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 99.2,
+    "top": 58.8
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 108.8,
+    "top": 54.6
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 72.2,
+    "top": 45.5
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 58.9,
+    "top": 52.5
+   },
+   {
+    "dir": "A",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 108.5,
+    "top": 60.8
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 121.6,
+    "top": 59.5
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 122.4,
+    "top": 62.1
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 110.9,
+    "top": 74.6
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 120,
+    "top": 69.9
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 108.8,
+    "top": 65.1
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 103.3,
+    "top": 72.5
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 100.2,
+    "top": 73.2
+   },
+   {
+    "dir": "B",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 110.3,
+    "top": 66.8
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 119.8,
+    "top": 69.9
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 120.3,
+    "top": 74.1
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 109.4,
+    "top": 67.4
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 114.1,
+    "top": 71.3
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 115.8,
+    "top": 69.1
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 115.5,
+    "top": 70.7
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 115.6,
+    "top": 81.2
+   },
+   {
+    "dir": "B",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 115.7,
+    "top": 73.6
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 120.7,
+    "top": 45.6
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 65.4,
+    "top": 53.3
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 65,
+    "top": 58.6
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 122.8,
+    "top": 49
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 107.8,
+    "top": 48.6
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 57.9,
+    "top": 52.5
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 55.7,
+    "top": 56.2
+   },
+   {
+    "dir": "C",
+    "mode": "duel",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 107.4,
+    "top": 49.5
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 120.4,
+    "top": 49.9
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 64.9,
+    "top": 52.9
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "sequenza-1300",
+    "hand": 66.1,
+    "top": 52.5
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 122.2,
+    "top": 52.6
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "scelta",
+    "hand": 112.7,
+    "top": 51.1
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "conferma",
+    "hand": 63,
+    "top": 59.7
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "sequenza-1300",
+    "hand": 57.9,
+    "top": 44.6
+   },
+   {
+    "dir": "C",
+    "mode": "ffa",
+    "size": "844x390",
+    "moment": "dopo",
+    "hand": 112.9,
+    "top": 52.8
+   },
+   {
+    "dir": "A-ridotto",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 109.7,
+    "top": 56.4
+   },
+   {
+    "dir": "A-ridotto",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 69.9,
+    "top": 52.9
+   },
+   {
+    "dir": "A-ridotto",
+    "mode": "duel",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 109.7,
+    "top": 61
+   },
+   {
+    "dir": "A-ridotto",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "scelta",
+    "hand": 103.7,
+    "top": 55.5
+   },
+   {
+    "dir": "A-ridotto",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "conferma",
+    "hand": 72.4,
+    "top": 52.2
+   },
+   {
+    "dir": "A-ridotto",
+    "mode": "ffa",
+    "size": "1366x768",
+    "moment": "dopo",
+    "hand": 104.9,
+    "top": 58.5
+   }
+  ]
+ },
+ "jar": "aa312de0c47327e7 (server/target, ricostruito offline il 7 novembre 2026)",
+ "base": "c09b946"
+}
