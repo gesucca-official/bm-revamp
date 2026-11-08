@@ -1,11 +1,13 @@
 # Piano Set Base — Dal set provvisorio al primo set bilanciato
 
-2 novembre 2026. Regolamento **1.10**. **Solo piano:** nessuna modifica a regole, carte,
-server, catalogo o client. La partita viva resta quella del regolamento vigente; questo
-documento, come ogni roadmap (R00), non introduce regole attive. Il lavoro procede su istruzione del
-proprietario, **un blocco alla volta**. Gli strumenti e i blocchi che non toccano il client partono subito,
-nell'ordine SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a → SB-13 ([D30, D31, D32, D37, D40, D42](#decisioni-del-proprietario)); SB-1 e SB-2 sono
-anticipati in parallelo a C4 ([D40, D42](#decisioni-del-proprietario)); SB-6b resta legato al completamento del client web ([C3-7, C4 e C5](client-roadmap.md)) e vanno chiusi prima di SB-8. Stato corrente
+Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 (regolamento **1.13** e Set Base 0.1, da SB-1 e SB-2).
+**Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
+aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
+Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parallelo con file separati
+([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
+([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
+nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e quattro starter chiusi
+e approvati (tabella dei [blocchi](#blocchi)); prossimi SB-15, le rarità della griglia nella bozza e SB-8. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -45,16 +47,16 @@ Valgono per **ogni** blocco:
 
 ## Cosa c'è oggi
 
-Verificato nei sorgenti il 2 novembre 2026.
+Verificato nei sorgenti il 2 novembre 2026: è la fotografia di partenza. Dove un blocco chiuso l'ha superata, lo dice la colonna di destra.
 
 | Ambito | Stato | Conseguenza per il piano |
 |---|---|---|
 | Set | 39 carte: 2 personaggi, 2 basic, 4 bound, 1 last resort, 26 azioni regolari, 4 oggetti; più 1 token. `SoberUp` è fuori catalogo | Ne servono **fino a 76 nuove** |
 | Carte | Una classe Java per carta con i valori scritti nel costruttore e negli effetti, per esempio `SuperImpact` (25 V, 40 HIT). `CardFactoryServiceImpl` le carica con `Class.forName` | Cambiare un numero richiede una ricompilazione: serve il playground (SB-5, SB-6) |
-| Catalogo | `cards.sqlite`: `CRD001_GUI`, `CRD002_KEYWORDS`, `CRD003_CHARACTERS`, `DCK001_STARTERS`, `DCK002_STARTERS_CH` con due colonne bound. Nessun campo set o rarità | Da estendere (SB-2, SB-28) |
-| Regole ↔ carte | R07 e R07a elencano ogni carta; R04 e R05 citano carte specifiche (Grab, Steal, SeagullFly, MadeOfStone…). `check-rules.py` legge le tabelle di R07; `rules-v1-cards.tsv` è il contratto dei test; `MatchVersions` legge la versione delle regole | La separazione regole/set deve adeguare tutto questo (SB-2) |
-| Mazzi | Il server chiede solo regolare non vuoto e massimo sei carte iniziali (`UserAccountServiceImpl`); `client-web/src/deck.ts` ammette fino a 5 bound, senza limiti di copie | Da sostituire (SB-1) |
-| Mazzi sintetici | `verify-decks.mjs` (4 Glare), `cli-open-complete-test.cjs`, `cli-restart-test.cjs` (una carta), `cli-security-test.cjs` (12 SuperImpact) e le verifiche che si basano sulla D8 del piano C3 violano le nuove regole | Vanno riscritti in SB-1, senza indebolire ciò che provano |
+| Catalogo | `cards.sqlite`: `CRD001_GUI`, `CRD002_KEYWORDS`, `CRD003_CHARACTERS`, `DCK001_STARTERS`, `DCK002_STARTERS_CH` con due colonne bound. Nessun campo set o rarità | Da estendere (SB-2, SB-28). **Fatto in SB-2:** colonne `C_SET` e `C_RARITY`, rarità vuote fino a SB-28 |
+| Regole ↔ carte | R07 e R07a elencano ogni carta; R04 e R05 citano carte specifiche (Grab, Steal, SeagullFly, MadeOfStone…). `check-rules.py` legge le tabelle di R07; `rules-v1-cards.tsv` è il contratto dei test; `MatchVersions` legge la versione delle regole | La separazione regole/set deve adeguare tutto questo (SB-2). **Fatto in SB-2:** regolamento 1.13 senza carte, schede in [Set Base 0.1](sets/base.md) |
+| Mazzi | Il server chiede solo regolare non vuoto e massimo sei carte iniziali (`UserAccountServiceImpl`); `client-web/src/deck.ts` ammette fino a 5 bound, senza limiti di copie | Da sostituire (SB-1). **Fatto in SB-1:** regole dei mazzi di R02 1.12 su server ed editor |
+| Mazzi sintetici | `verify-decks.mjs` (4 Glare), `cli-open-complete-test.cjs`, `cli-restart-test.cjs` (una carta), `cli-security-test.cjs` (12 SuperImpact) e le verifiche che si basano sulla D8 del piano C3 violano le nuove regole | Vanno riscritti in SB-1, senza indebolire ciò che provano. **Fatto in SB-1** |
 | Quick | `PlayerFactoryServiceImpl.randomPlayer` sceglie fra due personaggi scritti nel codice | Da riscrivere (SB-29) |
 | Bot | `ComPlayer` è casuale: mescola la mano e gioca la prima mossa valida per `isValidFor`. Riceve l'intero `Game` | Vista limitata a R08 e stili fatti in SB-4, non usati dal server fino a SB-30 |
 | Motore | Nessun import di Spring sotto `model`; i test creano `new Game(players, mode, false)` (`GameFixtures`). Le factory invece sono servizi Spring | Runner diretto **provato** in SB-3, con un caricatore proprio |
@@ -266,51 +268,52 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
 ## Blocchi
 
-| Fase | Blocco | Contenuto | Dipende da |
-|---|---|---|---|
-| Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40; fatto e approvato) |
-| | SB-2 | Separazione fra regolamento e set | SB-1 (anticipato da D42; fatto e approvato) |
-| Strumenti | SB-3 | Runner senza server e seme | — |
-| | SB-4 | Vista limitata e bot euristici | SB-3 |
-| | SB-5 | Prova del formato dati | SB-3 |
-| | SB-6a | Nucleo del playground | SB-5 |
-| | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a (fatto e approvato) |
-| | SB-7 | Banco di misura e invarianti | SB-4, SB-6a |
-| | SB-7b | Bot e costo in HEALTH | SB-7 |
-| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b |
-| Progetto | SB-9 | Schede dei personaggi | — |
-| | SB-10a | Listino di potenza e tetto delle bound (misure) | SB-7b, SB-9 |
-| | SB-10b | Griglia degli slot (progetto) | SB-10a |
-| Carte | SB-11a | Passi `consume` ed `equip` del formato dati | SB-10b |
-| | SB-11b | Bozza degli starter base | SB-11a |
-| | SB-12a | Giro coi bot sugli starter base | SB-11b |
-| | SB-12b | Prova umana degli starter base | SB-8, SB-12a |
-| | SB-13 | Tossico: bozza e giro | SB-12a (anticipato da D42; fatto e approvato) |
-| | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 (fatto e approvato) |
-| | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 |
-| | SB-16 | Prova umana degli avanzati | SB-15 |
-| | SB-17 | Il Malalingua: bozza e giro | SB-16 |
-| | SB-18 | Sant'Incasso: bozza e giro | SB-17 |
-| | SB-19 | Resto del pool e giro di blocco | SB-18 |
-| Set intero | SB-20 | Prima misura dell'intero set | SB-19 |
-| | SB-21 | Giri di correzione | SB-20 |
-| | SB-22 | Prova umana con mazzi costruiti | SB-21 |
-| | SB-23 | Valutazione delle varianti del formato | SB-21 |
-| Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 |
-| | SB-25 | Testi delle carte per i giocatori | SB-24 |
-| | SB-26 | Generazione del catalogo dal set | SB-25 |
-| | SB-27 | Carte d'effetto speciale in forma definitiva | SB-26 |
-| | SB-28 | Trasferimento nella partita viva | SB-26, SB-27 |
-| Prodotto | SB-29 | Quick con categorie base e avanzata | SB-28 |
-| | SB-30 | Bot nelle partite contro computer | SB-4, SB-28 |
-| | SB-31 | Adeguamento del client | SB-28 |
-| | SB-32 | Illustrazioni del set | SB-28, SB-31 |
-| | SB-33 | Consolidamento e giudizio del proprietario | tutti |
+| Fase | Blocco | Contenuto | Dipende da | Stato |
+|---|---|---|---|---|
+| Fondamenta | SB-1 | Regole dei mazzi | — | chiuso (anticipato, D40) |
+| | SB-2 | Separazione fra regolamento e set | SB-1 | chiuso (anticipato, D42) |
+| Strumenti | SB-3 | Runner senza server e seme | — | chiuso |
+| | SB-4 | Vista limitata e bot euristici | SB-3 | chiuso |
+| | SB-5 | Prova del formato dati | SB-3 | chiuso |
+| | SB-6a | Nucleo del playground | SB-5 | chiuso |
+| | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a | chiuso |
+| | SB-7 | Banco di misura e invarianti | SB-4, SB-6a | chiuso |
+| | SB-7b | Bot e costo in HEALTH | SB-7 | chiuso |
+| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b | prossimo |
+| Progetto | SB-9 | Schede dei personaggi | — | chiuso |
+| | SB-10a | Listino di potenza e tetto delle bound (misure) | SB-7b, SB-9 | chiuso |
+| | SB-10b | Griglia degli slot (progetto) | SB-10a | chiuso |
+| Carte | SB-11a | Passi `consume` ed `equip` del formato dati | SB-10b | chiuso |
+| | SB-11b | Bozza degli starter base | SB-11a | chiuso |
+| | SB-12a | Giro coi bot sugli starter base | SB-11b | chiuso |
+| | SB-12b | Prova umana degli starter base | SB-8, SB-12a |  |
+| | SB-13 | Tossico: bozza e giro | SB-12a (D42; prima SB-12) | chiuso (anticipato, D42) |
+| | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 | chiuso |
+| | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 | prossimo |
+| | SB-16 | Prova umana degli avanzati | SB-15 |  |
+| | SB-17 | Il Malalingua: bozza e giro | SB-16 |  |
+| | SB-18 | Sant'Incasso: bozza e giro | SB-17 |  |
+| | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
+| Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
+| | SB-21 | Giri di correzione | SB-20 |  |
+| | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
+| | SB-23 | Valutazione delle varianti del formato | SB-21 |  |
+| Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 |  |
+| | SB-25 | Testi delle carte per i giocatori | SB-24 |  |
+| | SB-26 | Generazione del catalogo dal set | SB-25 |  |
+| | SB-27 | Carte d'effetto speciale in forma definitiva | SB-26 |  |
+| | SB-28 | Trasferimento nella partita viva | SB-26, SB-27 |  |
+| Prodotto | SB-29 | Quick con categorie base e avanzata | SB-28 |  |
+| | SB-30 | Bot nelle partite contro computer | SB-4, SB-28 |  |
+| | SB-31 | Adeguamento del client | SB-28 |  |
+| | SB-32 | Illustrazioni del set | SB-28, SB-31 |  |
+| | SB-33 | Consolidamento e giudizio del proprietario | tutti |  |
 
-SB-3 e SB-9 non dipendono dalle fondamenta: a lavoro avviato possono precedere SB-1. Con [D30](#decisioni-del-proprietario) l'ordine
-corrente è SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a → SB-13 ([D31, D32, D37, D40, D42](#decisioni-del-proprietario)), senza aspettare il client; SB-1 e SB-2 sono anticipati in parallelo a C4 (D40, D42);
-SB-6b resta legato al client e va chiuso, con SB-1 e SB-2, prima di SB-8. SB-30 può essere anticipato per le carte attuali, se il bot si
-dimostra utile prima: è una scelta del proprietario.
+**Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
+SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
+SB-6b e SB-14 (D43, D44). **Prossimi:** SB-15; le rarità della griglia nella bozza, in un passaggio a sé che non cambia le partite (D44,
+punto 6); SB-8, che apre le prove umane SB-12b e SB-16 e tocca server e client, quindi va preparato con i paletti verso C4. SB-30 può
+essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
 

@@ -1,7 +1,8 @@
-# Come si orchestra il lavoro sul client (e sul resto)
+# Come si orchestra il lavoro
 
-Metodo, **non stato**. Lo stato del progetto è in [docs/README.md](README.md) e nel piano in corso
-([C4](client-c4-plan.md)); non va ripetuto qui. Scritto il 5 novembre 2026 per una chat di regia che riparte dal repository.
+Metodo, **non stato**. Lo stato del progetto è in [docs/README.md](README.md) e nei piani in corso, uno per filone:
+[C4](client-c4-plan.md) per il client e [Set Base](set-base-plan.md) per il primo set di carte. Non va ripetuto qui. Scritto il 5 novembre
+2026 per una chat di regia che riparte dal repository, esteso l'8 novembre al Set Base e alle due macchine.
 
 ## Ruoli
 
@@ -64,11 +65,14 @@ Criteri per la proposta:
 
 1. Percorso, «leggi AGENTS.md», blocco e riferimenti da leggere (sezione del piano, regole di non regressione, decisioni già prese).
 2. Cosa NON toccare (regole di gioco, server, protocollo, catalogo; file di altre sessioni). Non fare push.
-3. PRELIMINARE: working tree pulito; registrare l'approvazione del blocco precedente con le parole del proprietario, in un commit a sé.
+3. PRELIMINARE: working tree pulito; l'approvazione del blocco precedente registrata con le parole del proprietario, in un commit a sé
+   (dall'esecutore, se la regia non l'ha già fatto).
 4. Fasi. Per i blocchi visivi: **proposta con catture e raccomandazione, poi FERMATI**; il codice definitivo solo dopo la scelta del proprietario.
+   Per i blocchi che cambiano regolamento, formato o strumenti condivisi: fase A con domande numerate e raccomandazioni, poi FERMATI. Per i
+   giri di bilanciamento del Set Base: passo 0 di fattibilità, tetto di giri fissato prima, numeri decisi con la delega di D38, ridisegni al proprietario.
 5. Verifiche obbligatorie ([CONTRIBUTING.md](../CONTRIBUTING.md), fonte unica dei comandi) e insidie (sotto), con la matrice del blocco dal piano.
 6. Documenti e commit: sezione nel report, stato nel piano/indice/roadmap solo nelle righe pertinenti, link funzionanti; «fatto, in attesa del
-   giudizio del proprietario»; `git add` su percorsi precisi; commit in inglese «C4-x: ...»; nessun push.
+   giudizio del proprietario»; `git add` su percorsi precisi; commit in inglese «C4-x: ...» o «SB-x: ...»; nessun push.
 7. Chiusura: cosa è verde e cosa no, cosa non verificato (iPhone, Safari, contrasto formale), cosa giudica il proprietario.
 
 ## Come si rivede una relazione
