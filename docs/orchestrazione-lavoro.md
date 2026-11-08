@@ -75,11 +75,17 @@ Controllare nel repository, non fidarsi del riassunto:
 - Nel tool Bash gli heredoc con apostrofi si rompono senza che nulla parta: scrivere file e script con lo strumento di scrittura. Uno script
   Playwright che fallisce resta appeso se il browser non si chiude: `process.exit` nel `finally` e un limite di tempo. Su Windows `nohup`/`setsid` non servono.
 - Il contesto Spring completo (`TestServerContext`) è una verifica separata dai test unitari: non confonderli.
+- **Niente worktree con collegamenti a `.tools` o `node_modules`.** L'8 novembre 2026 un `git worktree remove --force` su un worktree temporaneo
+  in cui `.tools` era un collegamento al checkout ha seguito il collegamento e cancellato Maven e parte di Node 24: build ferme per tutte le sessioni.
+  Per una build pulita usare una copia esportata (`git archive` o copia dei file in una cartella temporanea) con i propri strumenti, oppure il
+  checkout. Se `.tools` è danneggiato: `python scripts/bootstrap.py` (versioni e checksum fissati in `scripts/toolchain.json`; reinstalla solo ciò
+  che manca); Node 24 del client si riestrae dallo zip in `.tools/client-c0`, verificato con `SHASUMS256.txt`. Lo ripristina una sola sessione.
 
 ## Regole di coordinamento
 
 - Un checkout condiviso: due sessioni non modificano gli stessi file. Chi lavora ai documenti comuni (piano, report, indice) lo fa
   quando nessun esecutore li sta modificando; altrimenti rischia di essere sovrascritto.
 - Una sola «fonte» per lo stato: docs/README.md e il piano. Gli esecutori aggiornano le righe pertinenti; la chat di regia non crea altre tabelle di stato.
-- Il Set Base (docs/set-base-plan.md) ha il suo filone. Accoppiamento da tenere d'occhio: SB-1 e SB-2 toccano l'editor del client, quindi aspettano la fine dei
-  blocchi C4 che lo toccano.
+- Il Set Base (docs/set-base-plan.md) ha il suo filone. Accoppiamento da tenere d'occhio: i blocchi del Set Base che toccano il client (SB-1, SB-2, poi
+  SB-8) sono anticipati in parallelo a C4 solo con paletti scritti nel piano (D40, D42): niente file di C4, strumenti di verifica pushati prima del
+  blocco C4 che li usa, jar rifatto sull'altra macchina dopo il pull.
