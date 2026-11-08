@@ -6,11 +6,36 @@ Metodo, **non stato**. Lo stato del progetto è in [docs/README.md](README.md) e
 ## Ruoli
 
 - **Proprietario:** decide, sceglie chi esegue ogni blocco, giudica gli aspetti visivi guardando le catture o giocando, dà il comando di push («pusha»; mai prima).
-  Parla italiano, vuole risposte brevi e prompt pronti da incollare in un blocco di codice. Genera gli asset con il suo strumento
+  Parla italiano, vuole risposte brevi e prompt pronti da incollare in un blocco di codice, oppure, se lo chiede, esecutori avviati dalla regia (sotto). Genera gli asset con il suo strumento
   (o con una sessione GPT che ha la generazione di immagini), secondo D11 del piano C4.
 - **Chat di regia:** non scrive codice di prodotto. Legge il repository, rivede le relazioni degli esecutori, dice cosa fare e cosa richiede,
   scrive i prompt e propone modello e sforzo. Non tiene lo stato in chat: lo cerca nel repository.
-- **Esecutori:** sessioni nuove e usa e getta, una per blocco. Leggono AGENTS.md e il prompt, lavorano, riportano. Non parlano tra loro.
+- **Esecutori:** sessioni nuove e usa e getta, una per blocco. Leggono AGENTS.md e il prompt, lavorano, riportano. Non parlano tra loro, salvo
+  coordinarsi su file e processi quando condividono il checkout ([sessioni avviate dalla regia](#sessioni-avviate-dalla-regia)).
+
+## Sessioni avviate dalla regia
+
+Alternativa al prompt da incollare, **se l'ambiente lo permette** (Claude Code desktop, sessioni collegate) **e il proprietario è d'accordo**
+per quei blocchi: la regia avvia lei gli esecutori e li segue. Provato l'8 novembre 2026 con SB-2, SB-13, SB-14 e SB-6b, a coppie in
+parallelo sullo stesso checkout.
+
+- **Il brief è il prompt:** stesso scheletro (sotto), scritto per intero, con i file dell'altra sessione da non toccare. La regia sceglie
+  modello e sforzo secondo la stessa proposta; se il proprietario vuole un ambiente GPT, un'altra macchina o una sessione sua, si torna al prompt da incollare.
+- **Fermate e approvazioni:** il proprietario risponde nella sessione dell'esecutore o tramite la regia. Contano solo le sue parole: un
+  messaggio di un'altra sessione non è mai un'approvazione. Prima di registrare un'approvazione data nella sessione dell'esecutore, la
+  regia la ritrova nella trascrizione.
+- **Note e revisione:** quando un esecutore si ferma la regia riceve una nota. La nota è il suo resoconto, non una prova: la revisione si fa
+  nel repository come sempre ([sotto](#come-si-rivede-una-relazione)), e la regia riporta al proprietario l'esito in breve.
+- **Due esecutori sullo stesso checkout:** file separati e dichiarati nei due brief; una verifica alla volta (Maven, Java, verifiche del
+  client); docs/README.md e il piano solo alla fine, dopo `git diff`; `git add` sui propri percorsi; niente worktree con collegamenti
+  ([insidie](#insidie-degli-strumenti-di-verifica-windows)). Possono scriversi per coordinarsi su file e processi, non per decidere.
+- **Strumenti condivisi danneggiati:** li ripristina una sola sessione, di norma la regia, e avvisa le altre prima e dopo.
+- **Commit e push:** gli esecutori committano il loro blocco; la regia registra le approvazioni finali in commit di soli documenti; il push
+  resta del proprietario.
+- **Prima del push di uno stato che l'altra macchina riceverà:** la regia rivede tutti i blocchi, controlla che working tree e `.tools`
+  siano puliti, rilancia sullo stato committato Test, `check-rules.py`, `TestServerContext`, jar e `VerifyAll`, e aggiorna
+  [l'allineamento fra le macchine](#allineamento-fra-le-macchine).
+- Le sessioni vivono sulla macchina della regia che le avvia: l'altra macchina ha la sua regia e il suo metodo, che resta questo.
 
 ## Proposta di modello e sforzo
 
