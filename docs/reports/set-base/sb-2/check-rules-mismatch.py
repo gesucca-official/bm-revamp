@@ -9,7 +9,8 @@ repo = Path(sys.argv[1]).resolve()
 PARTS = ['docs/game-rules.md', 'docs/sets', 'docs/rules-catalog.json', 'client-debug/src/assets/docs/rules.md',
          'client-debug/src/assets/docs/sets', 'server/src/test/resources/rules-v1-cards.tsv',
          'server/src/test/resources/rules-card-roles.tsv', 'server/src/test/resources/rules-card-types.tsv',
-         'server/src/main/resources/cards.sqlite', 'server/src/main/java/com/gsc/bm/model/cards']
+         'server/src/main/resources/cards.sqlite', 'server/src/main/java/com/gsc/bm/model/cards',
+         'server/src/test/java/com/gsc/bm/sim/Draft.java']  # SB-6b: check-rules.py reads the loader's rarities
 
 
 def copy():

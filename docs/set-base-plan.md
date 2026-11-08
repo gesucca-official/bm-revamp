@@ -418,6 +418,16 @@ come parametri (`@Tunable`, valori di oggi come predefiniti), personaggi, mazzi 
 errata. La bozza «attuale» gioca come il catalogo in 400 partite a ogni esecuzione e in 10.000 una tantum; una bozza di prova con
 Mara e Rocco di SB-9 gira senza modifiche al motore. [Rapporto](reports/set-base/sb-6a-report.md).
 
+**SB-6b fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Fase A approvata con «Approvo tutte». Formato `sb-6b/1`:
+un file per set, con testata (id, nome, versione) e `requires`; i file `sb-6a/1` si leggono come prima e sono il set `base`. Più set
+si caricano insieme (`Draft.load`, `-Dsim.draft` con più fonti separate da `;`), con id unici e prefisso del set, visibilità limitata
+ai set richiesti e rifiuto chiaro di set mancanti, id ripetuti, carte di set non caricati, rarità fuori vocabolario e mazzi misti
+contro R02. Rarità facoltativa su carte e personaggi, col vocabolario di R07 controllato da `check-rules.py`; le carte di oggi restano
+senza rarità fino a SB-28, e quelle della bozza del Set Base le scrive il prossimo blocco che la tocca (Q5, script pronto). Una
+mini-espansione di prova di cinque carte, con una terza bound di Spazienzio e una carta Java parametrica nei sorgenti di test, si
+carica con la bozza «attuale» e con quella del Set Base, gioca partite intere e una matrice col banco senza violazioni, e non cambia
+nessuna partita fra mazzi di base. Motore, regolamento, set e catalogo non cambiano. [Rapporto](reports/set-base/sb-6b-report.md).
+
 **Perimetro.** Una **bozza di set** in file, caricata dal runner, in cui si cambia ciò che si vuole: numeri, carte, personaggi, starter e **parametri del
 formato** (20 o 25 carte, 2 o 3 copie). Da più set contemporaneamente. Nessun legame col regolamento. Una **mini-espansione fittizia di poche carte**,
 solo di prova, verifica la struttura multi-set, comprese bound aggiuntive di un personaggio esistente.

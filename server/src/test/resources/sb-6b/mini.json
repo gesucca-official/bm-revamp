@@ -1,0 +1,40 @@
+{
+  "format": "sb-6b/1",
+  "set": {"id": "mini", "name": "Mini-espansione di prova", "version": "0.1"},
+  "requires": [{"set": "base"}],
+  "characters": [],
+  "cards": [
+    {"binding": "mini.spazienzio.bound.Sbuffata", "rarity": "COMMON", "kind": "BOUND", "boundTo": "bruiser.character.BigBadBruiser",
+     "priority": 1, "targets": ["SELF"], "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 4}],
+     "gui": {"name": "Sbuffata", "description": "Solo prova di SB-6b. Bound: +4 V a sé.", "role": "RESOURCES", "gains": "+4 V",
+             "damage": "—", "damageAmount": "—"}},
+    {"binding": "mini.CalcioAlBidone", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"],
+     "cost": {"VIOLENCE": 10}, "target": [{"op": "damage", "type": "HIT", "amount": 12}],
+     "gui": {"name": "Calcio al bidone", "description": "Solo prova di SB-6b. 12 HIT al bersaglio.", "role": "DAMAGE", "gains": "—",
+             "damage": "HIT", "damageAmount": "HIT 12"}},
+    {"binding": "mini.RintoccoDiCampana", "rarity": "UNCOMMON", "java": true, "cost": {"ALERTNESS": 5}, "priority": 0,
+     "params": {"base": 4, "perItem": 3},
+     "gui": {"name": "Rintocco di campana", "description": "Solo prova di SB-6b. HIT pari a 4 più 3 per oggetto vicino al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 4+x"}},
+    {"binding": "mini.items.LattinaSchiacciata", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 8}],
+     "gui": {"name": "Lattina schiacciata", "description": "Solo prova di SB-6b. Consumata: +8 A.", "role": "RESOURCES", "gains": "+8 A",
+             "damage": "—", "damageAmount": "—"}},
+    {"binding": "mini.Spallucce", "kind": "ACTION", "priority": 2, "targets": ["SELF"],
+     "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 6}],
+     "gui": {"name": "Spallucce", "description": "Solo prova di SB-6b, senza rarità. +6 A a sé.", "role": "RESOURCES", "gains": "+6 A",
+             "damage": "—", "damageAmount": "—"}}
+  ],
+  "decks": [
+    {"id": "mini.spazienzio", "character": "bruiser.character.BigBadBruiser",
+     "bound": ["bruiser.character.LittleSmack", "mini.spazienzio.bound.Sbuffata"], "lastResort": "com.last.Struggle",
+     "cards": {"mini.CalcioAlBidone": 2, "mini.RintoccoDiCampana": 2, "mini.items.LattinaSchiacciata": 2, "mini.Spallucce": 2,
+               "bruiser.SuperImpact": 2, "bruiser.Glare": 2, "bruiser.MadeOfStone": 2, "bruiser.YouStop": 2,
+               "bruiser.ExtremelyViolentBlow": 2, "com.items.CocktailOnTheGround": 2}},
+    {"id": "mini.tossico", "character": "junkie.character.ToxicJunkie",
+     "bound": ["junkie.character.RottenSmile", "junkie.character.PatheticBlade"], "lastResort": "com.last.Struggle",
+     "cards": {"mini.RintoccoDiCampana": 2, "mini.items.LattinaSchiacciata": 2, "mini.Spallucce": 2, "junkie.Cough": 2,
+               "junkie.MethDrivenRage": 2, "com.Steal": 2, "junkie.PervertedMetabolism": 2,
+               "junkie.AmphetamineReflexes": 2, "junkie.ToxicBloodDrain": 1, "com.Grab": 2, "com.items.MarvelousCocktail": 1}}
+  ]
+}

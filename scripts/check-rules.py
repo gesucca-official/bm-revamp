@@ -16,7 +16,8 @@ canonical = root / 'docs/game-rules.md'
 rules_text = canonical.read_text(encoding='utf-8-sig')
 assert rules_text == (root / 'client-debug/src/assets/docs/rules.md').read_text(encoding='utf-8-sig'), 'Client rules differ'
 assert re.search(r'^Versione \*\*[0-9.]+ —', rules_text, re.M), 'Missing regulation version'
-# Set documents (R00, R07): one per set, identical client copies. Until SB-6b there is exactly one set.
+# Set documents (R00, R07): one per set, identical client copies. There is exactly one set until a second set document is
+# published (SB-26, SB-28): the SB-6b mini-expansion is a test resource without a document.
 set_docs = sorted((root / 'docs/sets').glob('*.md'))
 assert [p.name for p in set_docs] == ['base.md'], 'Expected exactly one set document, docs/sets/base.md'
 client_sets = root / 'client-debug/src/assets/docs/sets'
@@ -37,6 +38,17 @@ general = rules_text.split('\n## Revisioni\n', 1)[0]
 for entry in expected['cards'] + expected['characters'] + expected['tokens'] + [{'class': 'bitch.SoberUp'}]:
     name = entry['class'].split('.')[-1]
     assert not re.search(r'\b' + name + r'\b', general), 'The regulation cites the card ' + name + ': it belongs to the set document'
+# R07 1.13: the rarity vocabulary is read from the regulation; the playground loader (SB-6b) must use the same values.
+rarity_rule = re.search(r'\*\*Rarità \(1\.13\)\.\*\*([^\n]+)', rules_text)
+assert rarity_rule, 'R07: missing the rarity paragraph'
+rarity_values = re.search(r'una rarità, ((?:[A-Z]+, )*[A-Z]+) o ([A-Z]+), oppure nessuna', rarity_rule.group(1))
+assert rarity_values, 'R07: rarity vocabulary not found'
+rarity_vocabulary = rarity_values.group(1).split(', ') + [rarity_values.group(2)]
+loader = (root / 'server/src/test/java/com/gsc/bm/sim/Draft.java').read_text(encoding='utf-8')
+loader_rarities = re.search(r'static final List<String> RARITIES = List\.of\(([^)]*)\);', loader)
+assert loader_rarities, 'Draft.java: RARITIES not found'
+assert re.findall(r'"([A-Z]+)"', loader_rarities.group(1)) == rarity_vocabulary, \
+    'Draft.java RARITIES differ from R07: ' + loader_rarities.group(1) + ' vs ' + ', '.join(rarity_vocabulary)
 rows = {}
 section = set_text.split('\n## S2 — ', 1)[1].split('\n## S5 — ', 1)[0]
 role_section = set_text.split('\n## S5 — ', 1)[1].split('\n## Revisioni', 1)[0]
@@ -244,7 +256,7 @@ with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() 
         wrong = [r[0] for r in db.execute('select C_REF_CLASS,C_SET from ' + table + ' order by C_REF_CLASS') if r[1] != set_id]
         assert not wrong, table + ': cards outside the set ' + set_id + ' of the set document: ' + ', '.join(wrong)
     rarities = [list(r) for r in db.execute('select C_REF_CLASS,C_RARITY from CRD001_GUI order by C_REF_CLASS')]
-    assert all(r[1] in (None, 'COMMON', 'UNCOMMON', 'RARE') for r in rarities), 'Unknown rarity (R07 1.13)'
+    assert all(r[1] is None or r[1] in rarity_vocabulary for r in rarities), 'Unknown rarity (R07 1.13)'
     assert rarities == [[card['class'], card.get('rarity')] for card in expected['cards']], 'Rarities differ from the set annex'
     for table, key in [('DCK001_STARTERS', 'starters'), ('DCK002_STARTERS_CH', 'initialCards')]:
         actual = [list(row) for row in db.execute('select * from ' + table + ' order by 1,2')]
@@ -254,4 +266,4 @@ with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() 
 print('Regolamento ' + re.search(r'^Versione \*\*([0-9.]+) —', rules_text, re.M).group(1) + ' e ' + set_title + ' ' + set_version
       + ' allineati alle copie client; regolamento senza carte citate; 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token del set;'
       + ' tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; allegato e SQLite nel set ' + set_id
-      + ', rarità ammesse; starter conformi alle regole dei mazzi R02 1.12; SQLite integro.')
+      + ', rarità ammesse (' + ', '.join(rarity_vocabulary) + ', anche nel caricatore delle bozze); starter conformi alle regole dei mazzi R02 1.12; SQLite integro.')

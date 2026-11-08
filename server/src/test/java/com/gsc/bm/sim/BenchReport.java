@@ -87,7 +87,7 @@ final class BenchReport {
         o.append("| Voce | Valore |\n|---|---|\n");
         o.append("| Bozza | `").append(Bench.shownSource(r.draft)).append("` |\n");
         o.append("| SHA-256 | `").append(r.sha256).append("` |\n");
-        o.append("| Formato | ").append(Draft.FORMAT).append(": ").append(r.draft.rules.deckSize).append(" carte, al massimo ")
+        o.append("| Formato | ").append(r.draft.format).append(": ").append(r.draft.rules.deckSize).append(" carte, al massimo ")
                 .append(r.draft.rules.maxCopies).append(" copie, ").append(r.draft.rules.boundChoices).append(" bound |\n");
         o.append("| Banco | ").append(Bench.VERSION).append(" |\n");
         o.append("| Mazzi | ").append(String.join(", ", s.decks)).append(" |\n");
@@ -310,7 +310,7 @@ final class BenchReport {
         head.put("banco", Bench.VERSION);
         head.put("bozza", Bench.shownSource(r.draft));
         head.put("sha256", r.sha256);
-        head.put("formato", Draft.FORMAT);
+        head.put("formato", r.draft.format);
         head.put("mazzi", s.decks);
         head.put("stili", new ArrayList<>(s.styles.keySet()));
         head.put("primoSeme", s.firstSeed);
