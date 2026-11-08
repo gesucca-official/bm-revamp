@@ -8,6 +8,16 @@ const readline = require('readline');
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+// Same deck as sent: identifier, character and the cards of each slot (order of the lists not significant).
+function sameDeck(stored, sent) {
+  if (!stored || !sent) return false;
+  const name = x => (x && typeof x === 'object' ? x.bindingName : x);
+  const names = list => (Array.isArray(list) ? list.map(name).sort() : []);
+  return stored.deckId === sent.deckId && name(stored.character) === name(sent.character)
+    && name(stored.basicActionCard) === name(sent.basicActionCard) && name(stored.lastResortCard) === name(sent.lastResortCard)
+    && JSON.stringify(names(stored.characterBoundCards)) === JSON.stringify(names(sent.characterBoundCards))
+    && JSON.stringify(names(stored.regularCards)) === JSON.stringify(names(sent.regularCards));
+}
 class Client {
   constructor(url, user, password, timeout = 10000) {
     if (!Number.isFinite(timeout) || timeout <= 0) throw new Error('Invalid timeout');
@@ -84,6 +94,23 @@ class Client {
       });
     }
   }
+  async account(after, shows) {
+    // First account event after the request that is either its error or an account showing the change.
+    const until = Date.now() + this.timeout;
+    while (true) {
+      if (this.closed || this.failure) throw new Error('Connection closed');
+      const found = this.events.slice(after).find(e => e.destination === '/user/queue/account/error'
+        || (e.destination === '/user/queue/account/data' && shows(e.data)));
+      if (found && found.destination === '/user/queue/account/error') throw new Error(String(found.data));
+      if (found) return found;
+      const remaining = until - Date.now(); if (remaining <= 0) throw new Error('Event timeout');
+      await new Promise(resolve => {
+        const wake = () => {clearTimeout(timer); resolve();};
+        const timer = setTimeout(() => {this.waiters = this.waiters.filter(w => w !== wake); resolve();}, remaining);
+        this.waiters.push(wake);
+      });
+    }
+  }
   async read(destination, request, mark) {
     // Read requests are idempotent: recover one lost reply within the deadline.
     const until = Date.now() + this.timeout;
@@ -110,9 +137,15 @@ class Client {
         this.send('/app/session/' + action); return this.wait(d, mark);
       }
       case 'profile': return this.read('/user/queue/account/data', '/app/user/' + u + '/account', mark);
-      case 'save': case 'delete':
+      case 'save': case 'delete': {
+        // The reply is the account after the change. read() resends a request whose reply is late, so a duplicate of an
+        // earlier profile reply can arrive after this request: wait for the account that shows the change, or its error.
+        const id = c.deck && c.deck.deckId, decks = data => (data && Array.isArray(data.decks) ? data.decks : []);
+        const shows = c.command === 'delete' ? data => !decks(data).some(d => d.deckId === id)
+          : data => sameDeck(decks(data).find(d => d.deckId === id), c.deck);
         this.send('/app/user/' + u + '/deck' + (c.command === 'delete' ? '/delete' : ''), c.deck);
-        return this.wait('/user/queue/account/data', mark);
+        return this.account(mark, shows);
+      }
       case 'join': {
         if (!['quick/1vCom', 'quick/1v1', 'quick/ffa', 'open/1vCom'].includes(c.mode)) throw new Error('Unknown mode');
         const d = (c.mode.includes('Com') || c.mode === 'quick/1v1' || c.mode === 'quick/ffa' ? '/user/queue' : '/topic') + '/game/' + c.mode + '/ready';

@@ -27,7 +27,7 @@ Quick 1v1 (I17a): ciascuno dei due account distinti invia `join` con `mode=quick
 
 Comandi JSON:
 
-- `profile`; `save`/`delete` con `deck` nel formato UserGuiDeck esistente.
+- `profile`; `save`/`delete` con `deck` nel formato UserGuiDeck esistente. `save` e `delete` restituiscono il profilo che mostra la modifica (il mazzo con le stesse carte, o il mazzo assente): `profile` rimanda la richiesta se la risposta tarda oltre 1 s, e la risposta doppia che arriva dopo non va presa per l'esito del salvataggio. Un rifiuto del server (`/user/queue/account/error`, per esempio «Invalid deck: …») diventa un errore del comando con quel messaggio.
 - `join` con `mode`: quick/1vCom, quick/1v1, quick/ffa, open/1vCom (anche deckId).
 - `start`, `add-bot` per FFA; `watch`, `view`, `leave` con gameId.
 - `export` con gameId: JSON completo del proprio match quick concluso, anche dopo leave. Eventi persistiti e non persistiti sono distinti; controllare `recording.complete`.

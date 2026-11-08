@@ -141,6 +141,3 @@ fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare
    rispettare R02 1.12: 20 carte regolari, al massimo 2 copie, basic e due bound del personaggio, last resort; il server rifiuta gli altri.
 3. **`client-web/tests/readability.test.ts`:** una riga cambiata da SB-2 (Q8), perché i moltiplicatori degli stati ora stanno in
    `docs/sets/base.md`. Se C4 tocca lo stesso test, al pull può esserci un conflitto di una riga.
-4. **`RestartCliTest` instabile sotto carico** nel contesto Spring completo (scenari `crash` e `interrupted`, la CLI di preparazione
-   esce prima della fixture): da solo passa. Se cade, rilanciarlo da solo prima di considerarlo una regressione. Indagine in corso
-   sulla macchina del Set Base.
