@@ -89,3 +89,33 @@ Controllare nel repository, non fidarsi del riassunto:
 - Il Set Base (docs/set-base-plan.md) ha il suo filone. Accoppiamento da tenere d'occhio: i blocchi del Set Base che toccano il client (SB-1, SB-2, poi
   SB-8) sono anticipati in parallelo a C4 solo con paletti scritti nel piano (D40, D42): niente file di C4, strumenti di verifica pushati prima del
   blocco C4 che li usa, jar rifatto sull'altra macchina dopo il pull.
+
+## Allineamento fra le macchine
+
+Il lavoro procede su due macchine: una porta avanti il Set Base, l'altra C4. Ogni macchina pusha solo i propri blocchi; il proprietario
+fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare dopo aver ricevuto il lavoro dell'altra.
+
+**Dopo ogni pull, prima di lavorare:**
+
+1. `git log --oneline ORIG_HEAD..HEAD` e le righe di stato in docs/README.md: cosa è arrivato.
+2. Se sono cambiati server, catalogo, regolamento o documento del set, **rifare il jar** prima di qualsiasi verifica del client:
+   `git diff --stat ORIG_HEAD HEAD -- server docs/game-rules.md docs/sets` non vuoto → `./scripts/build.ps1 -Task Server -Offline`.
+3. `python scripts/check-rules.py` verde.
+4. Se sono cambiati strumenti di verifica, leggere la sezione per l'altra macchina del rapporto che li ha cambiati prima di usarli.
+5. Conflitti tipici al pull: le righe di stato dell'indice (C4 e Set Base). Si tengono entrambe: ogni filone aggiorna solo la propria.
+
+**Consegne aperte dal Set Base a C4** (8 novembre 2026). Chi chiude una consegna la toglie da qui nel commit che la chiude.
+
+1. **Frase del menu al tavolo su R03** (`client-web/src/table.tsx`): spiega il «giocatore vivo senza mosse», che col regolamento 1.12
+   non si presenta più. Va tolta o riscritta dal primo blocco C4 che tocca `table.tsx` (C4-10 fase B, altrimenti C4-8a). Origine: SB-1, Q5
+   ([rapporto](reports/set-base/sb-1-report.md)).
+2. **Strumenti di verifica cambiati dal Set Base**, base di C4-8a: `verify-decks.mjs` e `verify-resolution.mjs` (mazzi sintetici entro
+   le regole dei mazzi, SB-1); `verify-public.mjs` (pagina pubblica con regolamento 1.13 e Set Base 0.1), `check-rules.py`,
+   `verify-match-manifests.py` e le CLI `cli-match-export-test`, `cli-open-complete-test`, `cli-quick-complete-test` (SB-2,
+   [rapporto](reports/set-base/sb-2-report.md)). Un mazzo sintetico nuovo di C4-8a (per esempio per ExtremelyViolentBlow) deve
+   rispettare R02 1.12: 20 carte regolari, al massimo 2 copie, basic e due bound del personaggio, last resort; il server rifiuta gli altri.
+3. **`client-web/tests/readability.test.ts`:** una riga cambiata da SB-2 (Q8), perché i moltiplicatori degli stati ora stanno in
+   `docs/sets/base.md`. Se C4 tocca lo stesso test, al pull può esserci un conflitto di una riga.
+4. **`RestartCliTest` instabile sotto carico** nel contesto Spring completo (scenari `crash` e `interrupted`, la CLI di preparazione
+   esce prima della fixture): da solo passa. Se cade, rilanciarlo da solo prima di considerarlo una regressione. Indagine in corso
+   sulla macchina del Set Base.

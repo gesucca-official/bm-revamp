@@ -520,6 +520,7 @@ nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suo
 - Partita da sola tastiera (scelta, bersaglio, scarto, conferma, annullamento).
 - Zoom e testo ampliato nelle schermate HTML.
 - Movimento ridotto riprovato su tutte le animazioni nuove, comprese quelle di C4-10 e C4-11.
+- Consegne dal filone Set Base (frase del menu su R03 in `table.tsx` se C4-10 non l'ha già tolta, strumenti di verifica cambiati, mazzi sintetici entro R02 1.12): elenco in [orchestrazione, «Allineamento fra le macchine»](orchestrazione-lavoro.md#allineamento-fra-le-macchine).
 - Simboli oltre al colore (regola 11).
 - O21: `ExtremelyViolentBlow` con V reale; D5.
 - Le etichette accessibili seguono volti e cornici nuove.
