@@ -5,6 +5,13 @@
 > è [game-rules.md](../../game-rules.md) e la partita viva non cambia. Le carte non sono progettate qui: basic, bound e azioni
 > sono compito di SB-10 e SB-11–SB-18; qui c'è solo la direzione.
 
+> **Nomi e flavour dell'8 novembre 2026**, dai concept del proprietario raccolti nel [serbatoio di flavour](flavour.md) e portati qui
+> dopo l'approvazione di SB-15. Cinque personaggi cambiano nome: Pino diventa **Piera Ultimo Giro**, Gigi **Beppe Bulletta**, il Tossico
+> **Celestina Bucatina**, Cesira la Malalingua **Sergio Sommerso**, Rocco «Sant'Incasso» **Duccio Braccio Teso**. Il vecchio nome resta
+> tra parentesi come nome di lavoro; gli ID degli slot (`PIN`, `GIG`, `TOS`, `CES`, `ROC`) non cambiano. **Numeri e meccaniche non
+> cambiano.** Ogni scheda ha una sezione «Flavour» accanto alla meccanica; le note dei blocchi e le decisioni restano con le parole del loro
+> momento. Il Tossico resta «Tossico del Serraglio» nella partita viva (vedi la sua scheda).
+
 **Perché esiste.** Il [piano del Set Base](../../set-base-plan.md#flavour) chiede di fissare subito i personaggi, perché un concept
 genera meccaniche: chi è, come picchia, con quale risorsa, come perde, con quali valori parte. Queste schede sono la base di SB-10
 (griglia degli slot e listino) e dei blocchi di ogni personaggio. **Tutti i valori iniziali sono ipotesi finché SB-10 non li misura.**
@@ -45,6 +52,9 @@ Il conto da tenere: una bound giocata in otto turni su dieci vale circa 40 danni
 
 **Chi è.** Il bullo del quartiere, che ha finito la pazienza prima di entrare nel bar. Non scappa e non schiva: sbuffa, carica e
 quando arriva, arriva. Esiste già (`BigBadBruiser`) e il suo flavour resta.
+
+**Flavour** ([serbatoio](flavour.md#personaggi)). Confermato dal proprietario com'è, nome compreso. Urla: i nomi delle sue carte sono
+tutti in maiuscolo (SB-11b).
 
 **Come picchia.** Accumula **V** e la spende in colpi enormi, lenti e a priorità bassa. Incassare per lui è caricare: le sue difese
 riducono l'HIT ricevuto e gli danno V. Mostra nello starter base V, HIT e la differenza fra colpo grosso e colpo rapido.
@@ -87,6 +97,11 @@ che carica, da dividere o da misurare. LittleSmack (+5 A e 5 HIT) supera il tett
 va; se ti fermi a pensare ti ha già preso quello che avevi sul tavolo. Ma è leggera: due colpi seri e non si rialza. Viene dalla
 bozza esterna (D26).
 
+**Flavour** ([serbatoio](flavour.md#personaggi)). Psicotica, imbottita di psicofarmaci, d'umore instabile e complottista al massimo. A
+volte attacca pipponi allucinanti con le sue teorie da pazza; più spesso dice due o tre cose senza senso e se ne va a continuare il suo
+lavoro, lasciando tutti basiti. Le sostanze sono un tratto di flavour, non la sua meccanica. Arriva in bici, e Beppe si spaccia anche per
+meccanico di biciclette: un aggancio fra i due, da sviluppare.
+
 **Come picchia.** **Precedenza e tanti piccoli CUT.** Paga con A, gioca a priorità alta e consuma i propri oggetti prima che glieli
 rubino o distruggano. Nello starter base è il contrasto di Spazienzio: A e CUT contro V e HIT.
 
@@ -121,10 +136,19 @@ perdita di A sul bersaglio (in azioni pagate). Niente di nuovo.
 
 ---
 
-## 3. Tossico del Serraglio — avanzato
+<a id="3-tossico-del-serraglio--avanzato"></a>
+## 3. Celestina Bucatina (Tossico del Serraglio) — avanzato
 
-**Chi è.** Vive di quello che trova per terra e se lo mette in corpo. Il veleno non lo ammazza più: ci si è abituato. Agli altri,
+**Chi è.** Vive di quello che trova per terra e se lo mette in corpo. Il veleno non la ammazza più: ci si è abituata. Agli altri,
 invece, fa effetto. Esiste già (`ToxicJunkie`) e passa dagli starter base agli avanzati (D6).
+
+**Nome nella partita viva.** Celestina Bucatina è il nome nei documenti di progetto e nella bozza di prova. Nella partita viva, nel
+documento del set ([base.md](../../sets/base.md)), nel catalogo e nei test del client resta **«Tossico del Serraglio»**: lì il nome cambia
+solo con una modifica deliberata del documento del set, con versione e motivazione (AGENTS.md), in SB-24 o al trasferimento di SB-28.
+«Tossico» resta la parola per il suo archetipo e il prefisso `TOS` degli slot.
+
+**Flavour** ([serbatoio](flavour.md#personaggi)). Il proprietario conferma il personaggio com'è e ne fa una donna, per il cast: con Mara e
+Piera le donne sono tre su sette. Starter «Tutto è droga».
 
 **Come picchia.** **T come carburante e come veleno.** Immune all'effetto periodico di T, accumula tossicità senza danni, la spende per
 le sue mosse e la scarica sull'avversario con azioni pagate. Picchia piano e a lungo: vince col tempo.
@@ -132,10 +156,10 @@ le sue mosse e la scarica sull'avversario con azioni pagate. Picchia piano e a l
 **Risorsa principale:** T. **Priorità tipica:** 1, con riflessi a 2.
 
 **Rischio.** Gestione dell'immunità: se la perde (carte che la tolgono, timer che la rimettono in ritardo) la sua T alta diventa
-veleno per lui. Chi azzera la T (HealingBlow) gli svuota il serbatoio. Le dosi che costano salute lo espongono ai colpi grossi.
+veleno per lei. Chi azzera la T (HealingBlow) le svuota il serbatoio. Le dosi che costano salute la espongono ai colpi grossi.
 
 **Valori iniziali proposti:** HEALTH 100, A 35, T 10, **capacità 2**, immunità all'effetto periodico di T. **Rispetto a R07:** solo la
-capacità, da 3 a 2. Motivo: lo specialista degli oggetti diventa Gigi, che parte con 3; il Tossico usa gli oggetti come droga, non
+capacità, da 3 a 2. Motivo: lo specialista degli oggetti diventa Beppe, che parte con 3; Celestina usa gli oggetti come droga, non
 come attrezzi. Il resto non cambia: la causa del dominio misurato in SB-4 è la bound, non i valori del personaggio, e va corretta lì.
 
 > **Nota di SB-13** (giri 1 e 2, sotto la delega di [D38](../../set-base-plan.md#decisioni-del-proprietario), in attesa del giudizio del
@@ -148,13 +172,13 @@ come attrezzi. Il resto non cambia: la causa del dominio misurato in SB-4 è la 
 
 | Attacco | Difesa | Contromossa |
 |---|---|---|
-| Intossicare: T sul bersaglio e POISON, con azioni pagate | Curarsi col veleno: salute ricavata dalla propria T | Riflessi da anfetamina: annulla le mosse successive dirette a lui |
-| Lento a chiudere; perde contro chi azzera la T o lo uccide prima | Gli costa il carburante | Sprecata se l'avversario gioca su sé stesso |
+| Intossicare: T sul bersaglio e POISON, con azioni pagate | Curarsi col veleno: salute ricavata dalla propria T | Riflessi da anfetamina: annulla le mosse successive dirette a lei |
+| Lenta a chiudere; perde contro chi azzera la T o la uccide prima | Le costa il carburante | Sprecata se l'avversario gioca su sé stesso |
 
 **Meccaniche di base usate:** T come costo, immunità all'effetto periodico, POISON di fine turno (R06), aggiunta di T al bersaglio,
 timer, annullamento, perdita di HEALTH. Niente di nuovo.
 
-**Bound, direzione.** Una generatrice di circa +5 T a sé (per lui è carburante puro, quindi vale più di 5); un colpetto di circa 5 CUT
+**Bound, direzione.** Una generatrice di circa +5 T a sé (per lei è carburante puro, quindi vale più di 5); un colpetto di circa 5 CUT
 **senza** T al bersaglio; una terza su A o su una parata del turno. **PatheticBlade va riprogettata** (SB-4) e **RottenSmile** toglie A
 che resta: entrambe escono dal tetto. Da tenere d'occhio in SB-13: la generatrice ripetuta più un'azione che travasa tutta la T sul
 bersaglio (oggi ToxicBloodDrain) diventa una combo; è accettabile solo se costa una carta pagata e si misura.
@@ -164,10 +188,16 @@ gratuita e sempre giocabile e chiudere la partita, non allungarla.
 
 ---
 
-## 4. Pino l'Ultimo Giro — avanzato
+<a id="4-pino-lultimo-giro--avanzato"></a>
+## 4. Piera Ultimo Giro (Pino l'Ultimo Giro) — avanzato
 
-**Chi è.** Frequentatore del bancone, entra nella rissa già alticcio e ordina «l'ultimo giro» da quattro ore. Grosso, lento, regge
-tutto; ma il vino gli scende nelle gambe. Viene dalla bozza esterna (D26).
+**Chi è.** Frequentatrice del bancone, entra nella rissa già alticcia e ordina «l'ultimo giro» da quattro ore. Grassa, lenta, regge
+tutto; ma il vino le scende nelle gambe. Viene dalla bozza esterna (D26), dove era Pino.
+
+**Flavour** ([serbatoio](flavour.md#personaggi)). Parla molto lentamente una lingua tutta sua, la lingua della grappa (aggancio: l'oggetto
+`OGG-16`, «Grappa della casa»). Ha sempre con sé un cane che disturba tutti, e nessuno ha il coraggio di dirglielo: un meticcio piccolo, a
+pelo corto, bianco a macchie marroni, malandato e mal tenuto. Il cane è solo flavour; può comparire nelle illustrazioni e nei nomi di
+alcune sue carte (SB-24, SB-32). Donna per il cast, su scelta del proprietario.
 
 **Come picchia.** **L da spendere subito.** Beve, e nel turno dopo spende l'alcol in colpi pesanti prima che cali. Bottiglie e
 cocktail sono la sua dispensa; una bottiglia rotta diventa un equip (il token BrokenBeerBottle esiste già). Dà il senso a L, che oggi
@@ -175,8 +205,8 @@ cocktail sono la sua dispensa; una bottiglia rotta diventa un equip (il token Br
 
 **Risorsa principale:** L. **Priorità tipica:** 0–1.
 
-**Rischio.** Lentissimo: A bassa e, senza immunità, A che cala a ogni fine turno, quindi perde tutte le parità. L in eccesso è
-sprecata, perché cala da sola. Chi azzera L (HealingBlow, un'acqua minerale) gli toglie il colpo del turno. CUT e POISON aggirano le
+**Rischio.** Lentissima: A bassa e, senza immunità, A che cala a ogni fine turno, quindi perde tutte le parità. L in eccesso è
+sprecata, perché cala da sola. Chi azzera L (HealingBlow, un'acqua minerale) le toglie il colpo del turno. CUT e POISON aggirano le
 sue difese contro l'HIT.
 
 **Valori iniziali proposti:** HEALTH 110, A 15, L 10, **V 0**, capacità 2, **nessuna immunità** (vedi [Q10](#q10-pino-e-limmunità-allalcol)).
@@ -195,7 +225,7 @@ e scende a L 6: impara subito che l'alcol va speso.
 | Attacco | Difesa | Contromossa |
 |---|---|---|
 | Testata dell'ultimo giro: HIT pesante pagato con L, prima che cali | Il bancone regge: tanta salute e HIT ridotto per il turno | «Offro io»: L all'avversario, che perde A a ogni fine turno (solo in azioni pagate) |
-| Perde contro chi gli azzera L o lo anticipa | Inutile contro CUT e POISON | Lenta: rende solo nei turni dopo, e poco contro chi non usa A |
+| Perde contro chi le azzera L o la anticipa | Inutile contro CUT e POISON | Lenta: rende solo nei turni dopo, e poco contro chi non usa A |
 
 **Meccaniche di base usate:** L come costo ed effetto periodico (R06), aggiunta di L al bersaglio, HIT, stati INPUT, oggetti che danno
 risorse, token ed equip da oggetti. Niente di nuovo.
@@ -208,10 +238,17 @@ Gratuita, sempre giocabile, che chiude.
 
 ---
 
-## 5. Gigi del Carro Attrezzi — avanzato
+<a id="5-gigi-del-carro-attrezzi--avanzato"></a>
+## 5. Beppe Bulletta (Gigi del Carro Attrezzi) — avanzato
 
-**Chi è.** Meccanico chiamato per la macchina sbagliata, col carro attrezzi in doppia fila davanti al bar. Ha sempre l'attrezzo
-giusto in tasca, e quello degli altri lo smonta. Viene dalla bozza esterna (D26).
+**Chi è.** Esperto tornitore, metalmeccanico alle macchine utensili; nel tempo libero fa il meccanico di auto in nero. Al bar ci va per
+bere, come gli altri. Ha sempre l'attrezzo giusto in tasca, e quello degli altri lo smonta. Viene dalla bozza esterna (D26), dove era
+Gigi del Carro Attrezzi: cadono il carro attrezzi e la macchina sbagliata.
+
+**Flavour** ([serbatoio](flavour.md#personaggi)). Gli piacciono i soldi contanti e fare lavori a chicchessia, spacciandosi per meccanico
+di auto, moto, biciclette eccetera; Mara arriva in bici, ed è un aggancio fra i due da sviluppare. Il nero da colletto blu, contro quello
+da colletto bianco di Sergio. Lo starter «Intervento sul posto» e il nome di lavoro «Sotto il cofano» (`GIG-AR4`) reggono: sono i suoi
+lavoretti in nero.
 
 **Come picchia.** **Gli oggetti sono la sua risorsa.** Tiene più oggetti degli altri, li trasforma in equip (guanti, giubbotti,
 bottiglie rotte) e con quelli i colpi piccoli diventano medi. Ruba e smonta gli oggetti altrui. La V che accumula con piccoli colpi
@@ -248,24 +285,32 @@ oggetti** (vincolo del piano: «Smontiamo tutto» diventa un'azione regolare pag
 
 ---
 
-## 6. Il Malalingua — booster (concept nuovo)
+<a id="6-il-malalingua--booster-concept-nuovo"></a>
+## 6. Sergio Sommerso (Cesira la Malalingua) — booster (concept nuovo)
 
-**Nome provvisorio: Cesira la Malalingua** (scelto il 6 novembre 2026; l'alternativa al maschile, Nando Malalingua, resta di riserva).
+**Nome: Sergio Sommerso**, scelto dal proprietario l'8 novembre 2026 al posto di Cesira la Malalingua, la portinaia (nome provvisorio del
+6 novembre, ora nome di lavoro). Il ruolo di gioco non cambia.
 
-**Chi è.** La portinaia del palazzo di fronte al bar: sta alla finestra dalle sette di mattina, sa chi deve soldi a chi e chi ha
-litigato con chi. Non tira il primo colpo: aspetta che lo tiri tu, e ti ha già detto dove andrà. Una parola sua e perdi la calma.
-(Con Cesira il cast avrebbe due donne su sette.)
+**Chi è.** Un tizio strano, alto e secco. Tutti pensano che sia pieno di soldi, ma nessuno sa come li faccia né capisce che lavoro faccia,
+e soprattutto nessuno capisce perché vada a bere proprio in quel bar di marcioni. Si pensa che sia dentro a giri strani: frodi fiscali,
+società apri e chiudi, speculazioni finanziarie, ogni nefandezza da colletto bianco. Prende sempre in giro gli altri avventori, e molto
+spesso ne provoca la reazione violenta; allora si difende in modi non convenzionali: ricattandoli, o banalmente con armi improprie.
+
+**Flavour** ([serbatoio](flavour.md#personaggi)). Il concept si sposa con la meccanica: provoca, aspetta la mossa altrui e risponde con
+una contromossa; il ricatto è la sua lettura (annullare la mossa dell'avversario e usarne l'effetto). Il nero da colletto bianco, contro
+quello da colletto blu di Beppe. **Nomi di lavoro da rifare in SB-17 o SB-24**, perché legati alla portinaia: «Me lo tengo io» (`CES-BA`),
+«Affacciarsi» (`CES-BO1`), «Fare la vaga» (`CES-AR5`, anche nel triangolo sotto), «Malelingue» (`CES-AR6`); `CES-AR2` dice «come autrice».
 
 **Come picchia.** **Contromosse e letture.** Spende A per annullare la mossa successiva dell'avversario o per rubargliene l'effetto
 (come WhatchaDoin, che oggi è generica e diventerebbe il suo cuore). Fra una lettura e l'altra punzecchia con colpi piccoli che
 tolgono A, così l'avversario perde la parità proprio quando servirebbe.
 
 **Risorsa principale:** A, con V come seconda (le letture più forti costano entrambe). Condivide A con Mara ma non la strategia: Mara
-spende A per arrivare prima e colpire, la Malalingua per arrivare prima e annullare.
+spende A per arrivare prima e colpire, Sergio per arrivare prima e annullare.
 
 **Rischio.** Se legge male spreca il turno e la risorsa: una contromossa contro una mossa su sé stessi o più rapida non fa nulla, e
 oggi YouStop regala pure +10 A all'avversario se lo trova. Danno proprio scarso: contro chi si limita a difendersi la partita si
-allunga. Mara, con A più alta, la batte sulla parità a priorità 2.
+allunga. Mara, con A più alta, lo batte sulla parità a priorità 2.
 
 **Valori iniziali proposti:** HEALTH 90, A 30, V 10, capacità 2, nessuna immunità.
 
@@ -286,17 +331,25 @@ e nessuna toglie A all'avversario: un annullamento gratuito e ripetibile è prop
 
 **Rischi da SB-17.** Contromosse che rendono frustrante la partita: si tengono pagate, limitate alla mossa successiva (come oggi) e con
 un costo vero quando falliscono. I bot euristici leggono male per costruzione (SB-4: euristiche su costi e danno, non sull'avversario),
-quindi il simulatore la sottostimerà: la prova umana conta più che per gli altri. Le contromosse sono le carte che restano in Java
+quindi il simulatore lo sottostimerà: la prova umana conta più che per gli altri. Le contromosse sono le carte che restano in Java
 (rapporto SB-5): più lavoro in SB-27. Contro Mara, A 40 contro 30: il matchup va misurato apposta.
 
 ---
 
-## 7. Sant'Incasso — booster (concept nuovo)
+<a id="7-santincasso--booster-concept-nuovo"></a>
+## 7. Duccio Braccio Teso (Rocco «Sant'Incasso») — booster (concept nuovo)
 
-**Nome provvisorio: Rocco «Sant'Incasso»** (scelto il 6 novembre 2026). Il soprannome resta: incassare vuol dire prendere colpi e prendere soldi.
+**Nome: Duccio Braccio Teso**, scelto dal proprietario l'8 novembre 2026 al posto di Rocco «Sant'Incasso», l'ex pugile delle sagre (nome
+provvisorio del 6 novembre, ora nome di lavoro). Il ruolo di gioco non cambia; resta la [domanda sotto](#domanda-per-sb-18-il-costo-in-salute-con-duccio).
 
-**Chi è.** Ex pugile delle sagre di paese: un euro, tre schiaffi, e lui non va mai giù. Porge l'altra guancia, conta i colpi e te li
-restituisce con gli interessi. Il guaio è che i colpi li paga lui.
+**Chi è.** Militante di estrema destra. Non perde occasione per ammorbare il prossimo dicendogli che è di destra: sempre pronto a
+discutere, si infila nelle conversazioni altrui e le porta dove vuole lui. Quando inevitabilmente si arriva alla rissa, finisce sempre per
+prenderle, o per farsi male dandole.
+
+**Flavour** ([serbatoio](flavour.md#personaggi)). Nelle illustrazioni, stile estremamente ridicolo e satirico, senza simboli troppo
+espliciti (SB-32). **Nomi di lavoro da rifare in SB-18 o SB-24**, perché legati al pugile, alla sagra o ai soldi: «La mancia» (`ROC-BA`),
+«Diretto» (`ROC-BO2`), «Saltellare» (`ROC-BO3`), «Uppercut della sagra» (`ROC-AR4`), «Tre schiaffi, un euro» (`ROC-AR5`) e la last resort
+«Porgi l'altra guancia» (`LR-ROC`). Il tema dei soldi passa a Beppe e Sergio.
 
 **Come picchia.** **La salute come risorsa (D27).** Parte con più salute di tutti e la spende come gli altri spendono V o A: le sue
 mosse migliori costano HEALTH. In cambio riduce il danno ricevuto e contrattacca: una stessa mossa può ridurre l'HIT del turno a sé e
@@ -339,6 +392,23 @@ salute uccide e la mossa prosegue (R04); il bot non si suicida per caso. In più
 - **Leggibilità e convenzioni:** il costo in HEALTH non è danno, quindi non passa dagli stati di R05. Va scritto nelle convenzioni
   delle schede e riconosciuto da `check-rules.py` (SB-26), e il giocatore deve vederlo sulla carta (SB-25, SB-31).
 
+### Domanda per SB-18: il costo in salute con Duccio
+
+Il prezzo in HEALTH (D27, D34 punto 5) si raccontava con il soprannome: «incassare» vuol dire prendere colpi e prendere soldi. Con Duccio
+il gioco di parole sui soldi cade. **Il costo in salute regge ancora come sua identità?** Raccomandazione: sì, e regge meglio di prima,
+perché il concept del proprietario lo dice in chiaro («finisce sempre per prenderle, o per farsi male dandole»). Tre letture di flavour
+che lo tengono, nessuna cambia la meccanica:
+
+1. **Si fa male dandole.** Ogni colpo serio gli costa: si sbuccia le nocche, si sloga il polso, dà la testata e vede le stelle. Il costo
+   in HEALTH delle carte d'attacco è il suo modo goffo di picchiare.
+2. **Non arretra per principio.** Prenderle è una questione d'orgoglio: non si sposta, non scappa, e dopo ogni botta torna sotto. Spiega
+   la salute alta (130), le parate e il contrattacco pagato in salute.
+3. **Il martire della causa.** Sanguinare è il suo comizio: ogni ferita è una medaglia da raccontare al bar. Spiega la last resort
+   (colpisce facendosi male) e le carte pagate «col sangue».
+
+Si perde solo il «restituire con gli interessi» del pugile, che per il contrattacco si può riprendere con la seconda lettura. La decisione
+è del proprietario, prima di SB-18.
+
 ---
 
 ## Confronto
@@ -349,41 +419,41 @@ salute uccide e la mossa prosegue (R04); il bot non si suicida per caso. In più
 |---|---|---:|---:|---|---:|---|---|
 | Spazienzio de la Ucciso | Base | 85 | 20 | V 25 | 1 | — | R07; HEALTH 100 → 85 (SB-12a) |
 | Mara Contromano | Base | 80 | 40 | — | 2 | — | Bozza; V 10 → 0; HEALTH 85 → 80 (SB-12a) |
-| Tossico del Serraglio | Avanzato | 80 | 35 | T 20 | 2 | Periodico di T | R07; capacità 3 → 2; HEALTH 100 → 80, T 10 → 20 (SB-13) |
-| Pino l'Ultimo Giro | Avanzato | 100 | 15 | L 20 | 2 | — | Bozza; V 10 → 0, niente immunità a L; HEALTH 110 → 100, L 10 → 20 (SB-14) |
-| Gigi del Carro Attrezzi | Avanzato | 95 | 25 | V 25 | 3 | — | Bozza; HEALTH 100 → 95, V 15 → 25 (SB-15) |
-| Cesira la Malalingua | Booster | 90 | 30 | V 10 | 2 | — | Nuovo |
-| Rocco «Sant'Incasso» | Booster | 130 | 15 | — (paga in HEALTH) | 2 | — | Nuovo |
+| Celestina Bucatina | Avanzato | 80 | 35 | T 20 | 2 | Periodico di T | R07; capacità 3 → 2; HEALTH 100 → 80, T 10 → 20 (SB-13) |
+| Piera Ultimo Giro | Avanzato | 100 | 15 | L 20 | 2 | — | Bozza; V 10 → 0, niente immunità a L; HEALTH 110 → 100, L 10 → 20 (SB-14) |
+| Beppe Bulletta | Avanzato | 95 | 25 | V 25 | 3 | — | Bozza; HEALTH 100 → 95, V 15 → 25 (SB-15) |
+| Sergio Sommerso | Booster | 90 | 30 | V 10 | 2 | — | Nuovo |
+| Duccio Braccio Teso | Booster | 130 | 15 | — (paga in HEALTH) | 2 | — | Nuovo |
 
-Salute da 80 a 130 (le base corrette in SB-12a, il Tossico in SB-13, Pino in SB-14 e Gigi in SB-15, i booster ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
-priorità: Mara, Tossico, Malalingua, Gigi, Spazienzio, Pino e Sant'Incasso, prima dei costi.
+Salute da 80 a 130 (le base corrette in SB-12a, Celestina in SB-13, Piera in SB-14 e Beppe in SB-15, i booster ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
+priorità: Mara, Celestina, Sergio, Beppe, Spazienzio, Piera e Duccio, prima dei costi.
 
 ### Risorsa × strategia
 
-Il rischio indicato da SB-9 è che V, T, L e A coprano solo quattro identità su sette. Con la salute di Sant'Incasso e gli oggetti di
-Gigi le risorse diventano sei; dove due personaggi condividono una risorsa, la strategia è diversa.
+Il rischio indicato da SB-9 è che V, T, L e A coprano solo quattro identità su sette. Con la salute di Duccio e gli oggetti di
+Beppe le risorse diventano sei; dove due personaggi condividono una risorsa, la strategia è diversa.
 
 | Risorsa \ strategia | Esplosione | Precedenza | Logoramento | Spendi subito | Campo | Controllo | Incasso |
 |---|---|---|---|---|---|---|---|
-| **V** | Spazienzio | | | | (Gigi: V come moneta) | | |
-| **A** | | Mara | | | | Malalingua | |
-| **T** | | | Tossico | | | | |
-| **L** | | | | Pino | | | |
-| **Oggetti** | | | | | Gigi | | |
-| **HEALTH** | | | | | | | Sant'Incasso |
+| **V** | Spazienzio | | | | (Beppe: V come moneta) | | |
+| **A** | | Mara | | | | Sergio | |
+| **T** | | | Celestina | | | | |
+| **L** | | | | Piera | | | |
+| **Oggetti** | | | | | Beppe | | |
+| **HEALTH** | | | | | | | Duccio |
 
 | Personaggio | Vince… | Partita che preferisce | Chi lo mette in difficoltà |
 |---|---|---|---|
-| Spazienzio | con due o tre colpi grossi | media, con tempo per caricare | Mara (taglia prima), Tossico (veleno sotto le difese) |
-| Mara | con tanti tagli prima degli altri | corta | Spazienzio se un colpo arriva, Pino (alcol che le toglie A) |
-| Tossico | col veleno nel tempo | lunga | chi azzera la T, Spazienzio se chiude prima |
-| Pino | con pochi colpi pesanti a ritmo di bicchieri | media | Mara (CUT), chi gli azzera L |
-| Gigi | con colpi medi grazie agli equip | media | Mara (consuma prima), chi toglie gli equip |
-| Malalingua | annullando i turni chiave | media | chi gioca su sé stesso, Mara (più rapida) |
-| Sant'Incasso | resistendo e contrattaccando | lunga | Tossico (POISON), chi non attacca |
+| Spazienzio | con due o tre colpi grossi | media, con tempo per caricare | Mara (taglia prima), Celestina (veleno sotto le difese) |
+| Mara | con tanti tagli prima degli altri | corta | Spazienzio se un colpo arriva, Piera (alcol che le toglie A) |
+| Celestina | col veleno nel tempo | lunga | chi azzera la T, Spazienzio se chiude prima |
+| Piera | con pochi colpi pesanti a ritmo di bicchieri | media | Mara (CUT), chi le azzera L |
+| Beppe | con colpi medi grazie agli equip | media | Mara (consuma prima), chi toglie gli equip |
+| Sergio | annullando i turni chiave | media | chi gioca su sé stesso, Mara (più rapida) |
+| Duccio | resistendo e contrattaccando | lunga | Celestina (POISON), chi non attacca |
 
-Le coppie a rischio di somiglianza sono **Mara e Malalingua** (A) e **Spazienzio e Gigi** (V): restano distinte se Mara non ha
-contromosse d'archetipo e Gigi non ha colpi grossi. È un paletto per SB-10.
+Le coppie a rischio di somiglianza sono **Mara e Sergio** (A) e **Spazienzio e Beppe** (V): restano distinte se Mara non ha
+contromosse d'archetipo e Beppe non ha colpi grossi. È un paletto per SB-10.
 
 ## Q10: Pino e l'immunità all'alcol
 
@@ -408,18 +478,18 @@ il motivo 2: con L stabile Pino vince l'83–91% contro tutti e tre gli starter,
 
 Riportate nell'elenco [«Idee per le espansioni»](../../set-base-plan.md#idee-per-le-espansioni) del piano:
 
-- **Più ferito, più forte:** danni che crescono con la salute persa (Sant'Incasso).
-- **Restituire il danno:** rimandare all'autore una parte del danno ricevuto (Sant'Incasso).
-- **Vedere la mano o il mazzo dell'avversario,** anche una sola carta: cambia R08 (Malalingua, «sa tutto»).
-- **Scarto forzato** di una carta dell'avversario, o pettegolezzo che gli blocca una carta (Malalingua).
-- **Scommesse:** dichiarare in anticipo la mossa dell'avversario e guadagnare se si indovina (Malalingua).
+- **Più ferito, più forte:** danni che crescono con la salute persa (Duccio).
+- **Restituire il danno:** rimandare all'autore una parte del danno ricevuto (Duccio).
+- **Vedere la mano o il mazzo dell'avversario,** anche una sola carta: cambia R08 (Sergio, «sa tutto»).
+- **Scarto forzato** di una carta dell'avversario, o pettegolezzo che gli blocca una carta (Sergio).
+- **Scommesse:** dichiarare in anticipo la mossa dell'avversario e guadagnare se si indovina (Sergio).
 - **Schivata vera:** annullare il danno ricevuto invece di ridurlo (Mara e la bici).
-- **Astinenza:** penalità se il Tossico resta senza T per un turno.
-- **Riparare o costruire oggetti** dagli scarti, slot di equip (Gigi).
-- **Il giro offerto in FFA:** alcol a tutti gli avversari insieme (Pino).
+- **Astinenza:** penalità se Celestina resta senza T per un turno.
+- **Riparare o costruire oggetti** dagli scarti, slot di equip (Beppe).
+- **Il giro offerto in FFA:** alcol a tutti gli avversari insieme (Piera).
 
-Restano **dentro** il perimetro, perché usano meccaniche esistenti: dare L all'avversario con un'azione pagata (Pino), annullare ed
-eseguire l'effetto altrui (Malalingua), costi in HEALTH (Sant'Incasso, D27), equip da oggetti (Gigi).
+Restano **dentro** il perimetro, perché usano meccaniche esistenti: dare L all'avversario con un'azione pagata (Piera), annullare ed
+eseguire l'effetto altrui (Sergio), costi in HEALTH (Duccio, D27), equip da oggetti (Beppe).
 
 ## Decisioni del proprietario
 

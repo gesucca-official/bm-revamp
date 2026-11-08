@@ -406,7 +406,7 @@ class SetBaseDraftTest {
         assertEquals(Map.of("HEALTH", PINO_HEALTH, "ALERTNESS", 15, "VIOLENCE", 0, "TOXICITY", 0, "ALCOHOL", PINO_ALCOHOL), resources);
         assertEquals(2, pino.get("items").asInt(), "capacità 2 (SB-9)");
         assertTrue(draft.character(PINO).getImmunities().isEmpty(), "nessuna immunità a L (D28)");
-        assertEquals("Pino l'Ultimo Giro", pino.get("name").asText());
+        assertEquals("Piera Ultimo Giro", pino.get("name").asText());
 
         String deck = "starter-pino";
         assertEquals(PINO, draft.characterOf(deck));
@@ -668,7 +668,7 @@ class SetBaseDraftTest {
         assertEquals(Map.of("HEALTH", GIGI_HEALTH, "ALERTNESS", 25, "VIOLENCE", GIGI_VIOLENCE, "TOXICITY", 0, "ALCOHOL", 0), resources);
         assertEquals(3, gigi.get("items").asInt(), "capacità 3, l'unico (SB-9)");
         assertTrue(draft.character(GIGI).getImmunities().isEmpty());
-        assertEquals("Gigi del Carro Attrezzi", gigi.get("name").asText());
+        assertEquals("Beppe Bulletta", gigi.get("name").asText());
 
         String deck = "starter-gigi";
         assertEquals(GIGI, draft.characterOf(deck));

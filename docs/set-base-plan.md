@@ -92,7 +92,7 @@ Intervallo ammesso 110–120 carte, obiettivo 115. Ogni carta ha una rarità.
 | Basic | 7 | Una per personaggio |
 | Bound | 21 | Almeno 3 per personaggio; se ne scelgono 2 |
 | Last resort | 4 | Struggle generica più 3 legate a un personaggio, dove flavour e meccanica si sposano |
-| Azioni d'archetipo | 37 | 5 per personaggio, 6 per Cesira e Rocco ([D34](#decisioni-del-proprietario)): si sposano con la strategia senza esservi vincolate |
+| Azioni d'archetipo | 37 | 5 per personaggio, 6 per Sergio e Duccio ([D34](#decisioni-del-proprietario)): si sposano con la strategia senza esservi vincolate |
 | Azioni generiche | 23 | Giocabili da tutti; compaiono in più starter (erano 25, D34) |
 | Oggetti | 16 | I token non contano, come oggi |
 | **Totale** | **115** | |
@@ -144,18 +144,25 @@ Concept approvati in linea di massima. Mara, Pino e Gigi vengono dalla [bozza es
 Sor Boccione e Zi' Arraffa, che restano nomi di riserva. **Schede approvate in SB-9** il 6 novembre 2026, con nomi provvisori, valori iniziali da misurare
 in SB-10 e triangolo di ciascuno: [schede dei personaggi](design/set-base/schede-personaggi.md).
 
+**Nomi e flavour dell'8 novembre 2026**, dai concept del proprietario ([serbatoio di flavour](design/set-base/flavour.md)), portati nelle schede dopo
+l'approvazione di SB-15: Pino diventa **Piera Ultimo Giro**, Gigi **Beppe Bulletta**, il Tossico **Celestina Bucatina**, Cesira la Malalingua
+**Sergio Sommerso**, Rocco «Sant'Incasso» **Duccio Braccio Teso**. Meccaniche e numeri non cambiano; ID degli slot, decisioni e rapporti dei
+blocchi passati restano con i nomi del loro momento. Il Tossico resta «Tossico del Serraglio» nella partita viva e nel [documento del set](sets/base.md)
+finché un cambio deliberato del set, con versione e motivazione, non lo rinomina (SB-24 o SB-28). Prima di SB-18 il proprietario decide se il costo
+in salute regge come identità di Duccio ([domanda nella scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)).
+
 | Slot | Personaggio | Stile di gioco | Rischio |
 |---|---|---|---|
 | Base | **Spazienzio** (esiste) | Accumula V e tira colpi enormi | Lento, pochi oggetti |
 | Base | **Mara Contromano** | Rider: A, priorità alta, tanti piccoli CUT, consuma gli oggetti prima che glieli tolgano | Poca salute; pagare A le toglie la precedenza |
-| Avanzato | **Tossico del Serraglio** (esiste; lascia gli starter base) | T come carburante e veleno | Gestione complessa delle immunità |
-| Avanzato | **Pino l'Ultimo Giro** | Frequentatore del bancone: L da spendere, bottiglie, equip | Basso A; senza immunità a L ([D28](#decisioni-del-proprietario)) perde A a ogni fine turno |
-| Avanzato | **Gigi del Carro Attrezzi** | Meccanico: tanti oggetti ed equip, ruba e smonta quelli altrui, costruisce V con piccoli colpi | Debole se il tavolo è vuoto; distruzione da tenere a bada |
-| Booster | **Cesira la Malalingua** (provvisorio) | La portinaia che sa tutto: contromosse e letture dell'avversario, pagate in A | Se legge male, spreca il turno |
-| Booster | **Rocco «Sant'Incasso»** (provvisorio) | Ex pugile delle sagre. **Usa la salute come risorsa:** paga le mosse con la propria HEALTH, più riduzioni del danno e contrattacchi | Muore se esagera; lento a chiudere la partita se si limita a incassare |
+| Avanzato | **Celestina Bucatina** (il Tossico, esiste; lascia gli starter base) | T come carburante e veleno | Gestione complessa delle immunità |
+| Avanzato | **Piera Ultimo Giro** (era Pino) | Frequentatrice del bancone: L da spendere, bottiglie, equip | Basso A; senza immunità a L ([D28](#decisioni-del-proprietario)) perde A a ogni fine turno |
+| Avanzato | **Beppe Bulletta** (era Gigi) | Tornitore e meccanico in nero: tanti oggetti ed equip, ruba e smonta quelli altrui, costruisce V con piccoli colpi | Debole se il tavolo è vuoto; distruzione da tenere a bada |
+| Booster | **Sergio Sommerso** (era Cesira) | Ricco e losco, provoca e ricatta: contromosse e letture dell'avversario, pagate in A | Se legge male, spreca il turno |
+| Booster | **Duccio Braccio Teso** (era Rocco) | Militante di destra che finisce sempre per prenderle. **Usa la salute come risorsa:** paga le mosse con la propria HEALTH, più riduzioni del danno e contrattacchi | Muore se esagera; lento a chiudere la partita se si limita a incassare |
 
 Gli starter base devono mostrare le meccaniche di base con contrasto: Spazienzio con V e HIT, Mara con A e CUT.
-Il Tossico passa agli avanzati perché immunità, BadTrip, ToxicBloodDrain e LethalHeroinDose non insegnano le basi.
+Celestina passa agli avanzati perché immunità, BadTrip, ToxicBloodDrain e LethalHeroinDose non insegnano le basi.
 
 ### Perimetro creativo
 
@@ -187,7 +194,7 @@ Copre circa 31 degli slot nuovi. **Copertura massima**, sommando carte attuali e
 
 | Blocco | Nel set | Attuali + bozza | Da inventare |
 |---|---:|---:|---:|
-| Personaggi | 7 | 5 | 2 (il Malalingua, Sant'Incasso) |
+| Personaggi | 7 | 5 | 2 (Sergio, Duccio) |
 | Basic | 7 | 5 | 2 |
 | Bound | 21 | 10 | 11 (la bozza ne ha due per personaggio) |
 | Last resort | 4 | 1 | 3 |
@@ -204,7 +211,7 @@ Copre circa 31 degli slot nuovi. **Copertura massima**, sommando carte attuali e
 - **Bound che generano la risorsa del personaggio:** il ripiego è anche il modo per restare in gioco quando la risorsa manca. Di solito uniscono una risorsa e un piccolo danno, e superano il tetto ipotizzato: SB-10 misura se va cambiato il tetto o la carta.
 - **Forma degli starter:** 14 azioni e 6 oggetti, 10 carte distinte in doppia copia, molte generiche condivise. Alleggerisce il budget rispetto alle 15 distinte di oggi, a scapito della varietà: SB-10 sceglie fra 10 e 15.
 - **Meccaniche di base oggi poco esplorate:** POISON diretto («Sputo da posacenere», oggi nessuna carta lo infligge), cure e pulizia («Fasciatura col fazzolettaccio», «Due dita in gola», «Panino del kebab dimenticato», «Mezza minerale sgasata»), equip da oggetti («Guanti da officina», «Giubbotto di finta pelle»), CUT a costo A o V, contrasto all'alcol. Sono tutti candidati per SB-10 e SB-19.
-- **Rischi già individuati**, da verificare nei rispettivi blocchi: A alta di Mara che rende troppo affidabili YouStop e WhatchaDoin; distruzione ripetibile di Gigi; pulizia gratuita che indebolisce la tossicità; accumulo di equip con molte copie.
+- **Rischi già individuati**, da verificare nei rispettivi blocchi: A alta di Mara che rende troppo affidabili YouStop e WhatchaDoin; distruzione ripetibile di Beppe; pulizia gratuita che indebolisce la tossicità; accumulo di equip con molte copie.
 - **Leggibilità:** distinguere immunità periodica e POISON, costi e perdite di A, oggetti sul campo ed equip attivi, durate (durata 2 significa tre turni). Va in SB-25 e SB-31.
 
 **Ciò che non vale più:**
@@ -287,12 +294,12 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-11b | Bozza degli starter base | SB-11a | chiuso |
 | | SB-12a | Giro coi bot sugli starter base | SB-11b | chiuso |
 | | SB-12b | Prova umana degli starter base | SB-8, SB-12a |  |
-| | SB-13 | Tossico: bozza e giro | SB-12a (D42; prima SB-12) | chiuso (anticipato, D42) |
-| | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 | chiuso |
-| | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 | chiuso |
+| | SB-13 | Celestina Bucatina: bozza e giro | SB-12a (D42; prima SB-12) | chiuso (anticipato, D42) |
+| | SB-14 | Piera Ultimo Giro: bozza e giro | SB-13 | chiuso |
+| | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
 | | SB-16 | Prova umana degli avanzati | SB-15 |  |
-| | SB-17 | Il Malalingua: bozza e giro | SB-16 |  |
-| | SB-18 | Sant'Incasso: bozza e giro | SB-17 |  |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16 |  |
+| | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
 | | SB-21 | Giri di correzione | SB-20 |  |
@@ -608,10 +615,10 @@ nel [rapporto](reports/set-base/sb-12a-report.md).
 
 ### SB-13, SB-14, SB-15 — Starter avanzati
 
-Un blocco per personaggio, nell'ordine **Tossico del Serraglio, Pino l'Ultimo Giro, Gigi del Carro Attrezzi**.
+Un blocco per personaggio, nell'ordine **Celestina Bucatina, Piera Ultimo Giro, Beppe Bulletta**.
 
 **SB-13 anticipato da [D42](#decisioni-del-proprietario)** dopo SB-12a, perché la prova umana (SB-12b) aspetta SB-2, SB-6b e SB-8. Gli starter
-base stabili sono quelli della bozza approvata in SB-12a (D41). Se SB-12b cambierà gli starter base, il giro del Tossico si rilancia contro i nuovi.
+base stabili sono quelli della bozza approvata in SB-12a (D41). Se SB-12b cambierà gli starter base, il giro di Celestina si rilancia contro i nuovi.
 SB-14 resta dopo SB-13; se e quando anticiparlo prima di SB-12b lo decide il proprietario.
 
 **SB-13 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](#decisioni-del-proprietario)): numeri e nome dello starter approvati; specchio lungo e Mescolone che toglie l'immunità propria restano fino alla prova umana degli avanzati (SB-16). Lo starter del Tossico, **«Tutto è droga»**, è nella bozza come
@@ -677,7 +684,7 @@ serve**; se serve, lo si dichiara e si rilancia la matrice.
 
 **Completamento verificabile.** Matchup 40–60% con gli starter stabili, compresi quelli base. Invarianti verdi. Carte d'archetipo davvero giocate dal mazzo.
 
-**Rischi.** Bot che gioca male i mazzi complessi: si aggiunge uno stile prima di correggere le carte. Pino: uso di L che decade o, con l'immunità, GoingBerserk troppo affidabile. Gigi: tavoli vuoti e distruzione ripetibile. Tossico: pulizie gratuite delle altre carte.
+**Rischi.** Bot che gioca male i mazzi complessi: si aggiunge uno stile prima di correggere le carte. Piera: uso di L che decade o, con l'immunità, GoingBerserk troppo affidabile. Beppe: tavoli vuoti e distruzione ripetibile. Celestina: pulizie gratuite delle altre carte.
 
 ### SB-16 — Prova umana degli avanzati
 
@@ -689,13 +696,13 @@ serve**; se serve, lo si dichiara e si rilancia la matrice.
 
 ### SB-17, SB-18 — Personaggi da booster
 
-Un blocco per personaggio: **Il Malalingua**, poi **Sant'Incasso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
+Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
 
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 
-**Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Sant'Incasso, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; pagare tutta la salute uccide e la mossa prosegue secondo R04; il bot non si suicida per caso.
+**Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Duccio, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; pagare tutta la salute uccide e la mossa prosegue secondo R04; il bot non si suicida per caso.
 
-**Rischi.** Contromosse che rendono frustrante la partita (Malalingua); partite infinite o, col prezzo in salute, suicidi facili (Sant'Incasso): durata sotto controllo.
+**Rischi.** Contromosse che rendono frustrante la partita (Sergio); partite infinite o, col prezzo in salute, suicidi facili (Duccio): durata sotto controllo.
 
 ### SB-19 — Resto del pool e giro di blocco
 
@@ -919,21 +926,21 @@ Si conservano qui le idee che escono dal perimetro del Set Base.
 
 - Bound aggiuntive per i personaggi del Set Base.
 - Da SB-9 ([schede dei personaggi](design/set-base/schede-personaggi.md#idee-fuori-perimetro-per-le-espansioni)):
-  - **Più ferito, più forte:** danni che crescono con la salute persa (Sant'Incasso).
-  - **Restituire il danno** all'autore, in parte (Sant'Incasso).
-  - **Vedere la mano o il mazzo dell'avversario,** anche una sola carta: cambia R08 (Malalingua).
-  - **Scarto forzato** di una carta dell'avversario, o una sua carta bloccata (Malalingua).
-  - **Scommesse:** indovinare in anticipo la mossa dell'avversario (Malalingua).
+  - **Più ferito, più forte:** danni che crescono con la salute persa (Duccio).
+  - **Restituire il danno** all'autore, in parte (Duccio).
+  - **Vedere la mano o il mazzo dell'avversario,** anche una sola carta: cambia R08 (Sergio).
+  - **Scarto forzato** di una carta dell'avversario, o una sua carta bloccata (Sergio).
+  - **Scommesse:** indovinare in anticipo la mossa dell'avversario (Sergio).
   - **Schivata vera:** annullare il danno ricevuto invece di ridurlo (Mara).
-  - **Astinenza:** penalità se il Tossico resta senza T.
-  - **Riparare o costruire oggetti** dagli scarti, slot di equip (Gigi).
-  - **Il giro offerto in FFA:** alcol a tutti gli avversari insieme (Pino).
+  - **Astinenza:** penalità se Celestina resta senza T.
+  - **Riparare o costruire oggetti** dagli scarti, slot di equip (Beppe).
+  - **Il giro offerto in FFA:** alcol a tutti gli avversari insieme (Piera).
 - Da SB-10b ([griglia](design/set-base/griglia.md#idee-fuori-perimetro-per-le-espansioni)):
   - **Danno moltiplicato per una risorsa** (due HIT per ogni L): il formato sa solo dividere.
   - **Contromosse generiche** aperte a tutti: darebbero annullamenti a Mara.
   - **Bound di parata** valide solo contro il colpo successivo: richiedono una regola di consumo.
   - **«Tavolo ribaltato»:** distruggere tutti gli oggetti sul campo.
-  - **Cassetta degli attrezzi:** un oggetto che crea un token attrezzo (Gigi).
+  - **Cassetta degli attrezzi:** un oggetto che crea un token attrezzo (Beppe).
   - **Equip permanenti,** senza durata.
 
 ## Registro degli accordi
