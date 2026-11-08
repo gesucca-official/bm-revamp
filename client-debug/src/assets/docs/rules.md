@@ -1,34 +1,36 @@
 # Botte Micidiali — Regolamento ufficiale
 
-Versione **1.12 — 7 novembre 2026**. Fonte normativa del gioco.
+Versione **1.13 — 8 novembre 2026**. Fonte normativa del gioco, insieme ai documenti di set (R00).
 
 ## R00 — Autorità
 
-Questa prima versione deriva da codice server/client, catalogo SQLite e documentazione esistente. Nei conflitti iniziali prevale il codice. Da questa versione prevale **questo regolamento** su codice, test, catalogo e altri documenti. I test devono verificarlo, non modificarlo implicitamente.
+Questa prima versione deriva da codice server/client, catalogo SQLite e documentazione esistente. Nei conflitti iniziali prevale il codice. Da questa versione prevalgono **questo regolamento e i documenti di set** su codice, test, catalogo e altri documenti. I test devono verificarli, non modificarli implicitamente.
 
-Per modificare il gioco: aggiornare prima versione e regole di questo documento, motivando la modifica; poi adeguare test, codice, catalogo e documentazione nella stessa modifica. Non cambiare un atteso soltanto per accettare una regressione. La copia pubblicata in `client-debug/src/assets/docs/rules.md` deve essere identica; `scripts/check-rules.py` controlla l'allineamento. Gli audit precedenti sono storici subordinati. La roadmap non introduce automaticamente regole attive.
+**Regolamento e set (1.13).** Il regolamento governa il sistema: preparazione, tipologie, mazzi, scelta e risoluzione delle mosse, danni, stati, fine turno e informazioni. Ogni set ha un proprio documento in `docs/sets/`, con versione e revisioni proprie, e le sue schede governano le carte del set (R07). Una scheda deroga a una regola di questo regolamento solo se lo dice esplicitamente; in ogni altro caso, e nel dubbio, prevale il regolamento. Il set in vigore è il Set Base, `docs/sets/base.md`.
+
+Per modificare il gioco: aggiornare prima versione e testo del documento interessato, motivando la modifica: questo regolamento per il sistema, il documento del set per le sue carte; poi adeguare test, codice, catalogo e documentazione nella stessa modifica. Non cambiare un atteso soltanto per accettare una regressione. Le copie pubblicate in `client-debug/src/assets/docs/` devono essere identiche: `rules.md` per questo regolamento, `sets/` per i documenti di set; `scripts/check-rules.py` controlla l'allineamento. Gli audit precedenti sono storici subordinati. La roadmap non introduce automaticamente regole attive.
 
 ## R01 — Obiettivo e preparazione
 
 Botte Micidiali simula una rissa con carte: vince l'ultimo personaggio vivo; se muoiono tutti si pareggia. Le mosse si scelgono simultaneamente e si risolvono in sequenza.
 
-Modalità: quick contro computer, quick 1v1, quick FFA (tutti contro tutti), open contro computer. Quick assegna casualmente Bruiser o Junkie con il suo starter; open usa un mazzo salvato dell'umano, conforme a R02, e un bot casuale. Open PvP non è disponibile. La coda 1v1 parte a due iscritti, FFA a cinque; l'avvio anticipato richiede almeno due iscritti. Le code possono includere bot.
+Modalità: quick contro computer, quick 1v1, quick FFA (tutti contro tutti), open contro computer. Quick assegna casualmente un personaggio con il suo starter, fra quelli indicati dal documento del set; open usa un mazzo salvato dell'umano, conforme a R02, e un bot casuale. Open PvP non è disponibile. La coda 1v1 parte a due iscritti, FFA a cinque; l'avvio anticipato richiede almeno due iscritti. Le code possono includere bot.
 
-Ogni giocatore è rappresentato da una carta personaggio. Le schede complete di tutte le carte del set, comprese quelle personaggio, sono raccolte in R07.
+Ogni giocatore è rappresentato da una carta personaggio. Le schede complete di tutte le carte del set, comprese quelle personaggio, sono raccolte nel documento del set (R07).
 
 HEALTH è la salute; ALERTNESS determina la precedenza a pari priorità; VIOLENCE è una risorsa di costo; TOXICITY e ALCOHOL sono risorse di costo con effetti periodici. Non esistono tetti o pavimenti generali: le risorse possono essere negative o superare i valori iniziali. L'immunità a una risorsa blocca il suo effetto periodico, non costi, variazioni o qualsiasi danno POISON.
 
-**Risorse di partenza (1.11).** Ogni personaggio ha tutte e cinque le risorse fin dalla preparazione: quelle che la sua scheda in R07 non indica partono da 0. La risorsa speciale della scheda è quella che parte da un valore diverso da zero. Una risorsa a 0 si legge, si paga, si guadagna e si perde come le altre, e gli effetti periodici di R06 non scattano finché non supera 0. Per esempio, Spazienzio che gioca BadTrip senza aver mai ricevuto TOXICITY aggiunge abs(0) = 0 alla propria T; con LethalHeroinDose non perde HEALTH (t = 0) e aggiunge abs(0 − 30) = 30 a T; con PervertedMetabolism guadagna e perde 0.
+**Risorse di partenza (1.11).** Ogni personaggio ha tutte e cinque le risorse fin dalla preparazione: quelle che la sua scheda non indica partono da 0. La risorsa speciale della scheda è quella che parte da un valore diverso da zero. Una risorsa a 0 si legge, si paga, si guadagna e si perde come le altre, e gli effetti periodici di R06 non scattano finché non supera 0: per esempio, una carta che aggiunge alla propria TOXICITY il suo valore assoluto, giocata da chi non ha mai ricevuto TOXICITY, aggiunge abs(0) = 0. Gli esempi con le carte del set sono nel documento del set.
 
 ## R01a — Tipologie di carte
 
-Il gioco distingue **carte personaggio, carte azione e carte oggetto**. Questa distinzione descrive il ruolo delle carte; le schede di tutte le carte, comprese quelle personaggio, sono in R07.
+Il gioco distingue **carte personaggio, carte azione e carte oggetto**. Questa distinzione descrive il ruolo delle carte; le schede di tutte le carte, comprese quelle personaggio, sono nel documento del set (R07).
 
 | Tipologia | Cosa rappresenta | Dove si trova e come si usa |
 |---|---|---|
-| **Carta personaggio** | Il combattente controllato dal giocatore, con risorse iniziali, capacità di oggetti e immunità | È assegnata o scelta nella preparazione e rappresenta il personaggio per tutta la partita. Non fa parte del mazzo di pesca, non occupa la mano e non si gioca come mossa. Le carte personaggio disponibili sono elencate in R07. |
+| **Carta personaggio** | Il combattente controllato dal giocatore, con risorse iniziali, capacità di oggetti e immunità | È assegnata o scelta nella preparazione e rappresenta il personaggio per tutta la partita. Non fa parte del mazzo di pesca, non occupa la mano e non si gioca come mossa. Le carte personaggio disponibili sono elencate nel documento del set. |
 | **Carta azione** | Una mossa del personaggio, con bersaglio, priorità, eventuali costi ed effetti | Si trova in mano e si sceglie per presentare una mossa secondo R03. Il sottotipo stabilisce come entra in mano e se viene scartata dopo l'uso. |
-| **Carta oggetto** | Un oggetto disponibile sul campo, vicino a un personaggio | Fa parte del mazzo regolare. Quando viene pescata va subito sul campo e si pesca ancora; non rimane in mano. Per consumarla o interagire con essa occorre un'azione appropriata, come Grab o Steal. La pesca da sola non ne attiva l'effetto. |
+| **Carta oggetto** | Un oggetto disponibile sul campo, vicino a un personaggio | Fa parte del mazzo regolare. Quando viene pescata va subito sul campo e si pesca ancora; non rimane in mano. Per consumarla o interagire con essa occorre un'azione che bersaglia oggetti, come una presa o un furto. La pesca da sola non ne attiva l'effetto. |
 
 ### Sottotipi delle carte azione
 
@@ -43,19 +45,19 @@ L'espressione **carte regolari del mazzo** comprende azioni regolari e carte ogg
 
 ### Token oggetto ed equipaggiamenti
 
-Un **token oggetto** è un oggetto creato da un effetto, anziché pescato dal mazzo iniziale. Sul campo segue le stesse regole degli oggetti, compreso il limite di capacità; non costituisce una quarta tipologia principale di carta. BrokenBeerBottle è il token del set attuale.
+Un **token oggetto** è un oggetto creato da un effetto, anziché pescato dal mazzo iniziale. Sul campo segue le stesse regole degli oggetti, compreso il limite di capacità; non costituisce una quarta tipologia principale di carta. I token di un set sono elencati nel suo documento.
 
-Un **equipaggiamento (equip)** è invece uno stato del personaggio, regolato da R05. Un oggetto o un token può produrlo quando viene consumato: l'oggetto sul campo e lo stato equipaggiato sono due elementi distinti. Per esempio, consumare BrokenBeerBottle rimuove il token dal campo e aggiunge il relativo stato.
+Un **equipaggiamento (equip)** è invece uno stato del personaggio, regolato da R05. Un oggetto o un token può produrlo quando viene consumato: l'oggetto sul campo e lo stato equipaggiato sono due elementi distinti. Per esempio, consumare un token che equipaggia rimuove il token dal campo e aggiunge il relativo stato.
 
 ## R02 — Mazzo, mano e oggetti
 
-Ogni starter contiene 20 carte regolari (azioni e oggetti), oltre a una basic, due character-bound e una last resort. Bruiser ha BruiserGrab, LittleSmack e LittleRage; Junkie ha ToxicGrab, RottenSmile e PatheticBlade; entrambi hanno Struggle. Le composizioni esatte sono nell'allegato `rules-catalog.json`.
+Ogni starter contiene 20 carte regolari (azioni e oggetti), oltre a una basic, due character-bound e una last resort. Basic, bound e last resort di ogni starter sono indicate nel documento del set; le composizioni esatte sono nel suo allegato, `rules-catalog.json`.
 
 Si mescola il mazzo regolare, si mettono basic e bound in mano e si tentano le pescate mancanti a sei. Un oggetto pescato va automaticamente vicino al personaggio e provoca un'altra pesca. Superata la capacità degli oggetti scompare il più vecchio, anche per furti, scambi e token. A mazzo vuoto si aggiunge la last resort solo se non è già in mano: la mano può restare sotto sei. Non si rimescolano gli scarti.
 
 Le azioni regolari possono essere gratuite e vengono scartate dopo l'uso. Basic e bound persistono. Una bound richiede lo scarto di un'altra carta in mano che non sia basic, bound o last resort; lo scarto avviene all'inizio del suo effetto. Una basic non richiede scarto, ma può richiedere un oggetto: non garantisce una mossa sempre giocabile.
 
-Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano è sotto sei, si effettua **una sola pesca**, con eventuale catena di oggetti. Non si riempie tutta la mano. Struggle si scarta e può essere ripescata immediatamente.
+Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano è sotto sei, si effettua **una sola pesca**, con eventuale catena di oggetti. Non si riempie tutta la mano. La last resort si scarta e può essere ripescata immediatamente.
 
 **Costruzione del mazzo (1.12).** Ogni mazzo, starter o personalizzato, è formato da:
 
@@ -65,7 +67,7 @@ Dopo ogni mossa risolta si scarta la carta giocata quando previsto e, se la mano
 - **una last resort**, generica o riservata al proprio personaggio;
 - **esattamente 20 carte regolari** (azioni regolari e oggetti), con **al massimo 2 copie** della stessa carta.
 
-Basic e bound di ciascun personaggio sono quelle indicate sopra per gli starter; Struggle è generica. Il mazzo personalizzato ha inoltre un identificativo non vuoto e senza il carattere «/» (1.8). I riferimenti devono appartenere al catalogo e i sottotipi devono corrispondere ai rispettivi posti. Un mazzo che non rispetta queste regole non si salva e non si usa per giocare.
+Basic e bound di ciascun personaggio, e se una last resort è generica o riservata, sono indicati nel documento del set. Il mazzo personalizzato ha inoltre un identificativo non vuoto e senza il carattere «/» (1.8). I riferimenti devono appartenere al catalogo e i sottotipi devono corrispondere ai rispettivi posti. Un mazzo che non rispetta queste regole non si salva e non si usa per giocare.
 
 Le **carte iniziali** sono sempre tre: la basic e le due bound. Personaggio, last resort e mazzo regolare non entrano in questo conteggio. La last resort entra solo con la pesca a mazzo vuoto. Le pescate di preparazione completano la mano fino a sei secondo le regole sopra.
 
@@ -75,7 +77,7 @@ Si sceglie una carta in mano, il bersaglio previsto e le eventuali scelte aggiun
 
 Una mossa ordinaria richiede carta in mano, costi disponibili, nessuna mossa già presentata da quel giocatore e scarto/oggetto richiesti presenti. L'invio non paga i costi. Un secondo invio non sostituisce la prima scelta.
 
-I morti senza mossa ricevono una mossa vuota. **Un giocatore vivo con un mazzo conforme a R02 ha sempre una mossa (1.12).** Finché il mazzo regolare ha carte, dopo ogni mossa presentata, anche annullata, si ripesca: la mano resta piena e contiene, oltre a basic e bound, tre carte regolari, quindi una bound si gioca scartandone una. A mazzo vuoto entra la last resort, gratuita e sempre giocabile. Nessuna bound e nessuna last resort del set bersaglia oggetti. Non esiste il «passo». Il bot prova carte e bersagli casuali e, se non trovasse mosse valide, passerebbe con mossa vuota: con mazzi conformi il caso non si presenta.
+I morti senza mossa ricevono una mossa vuota. **Un giocatore vivo con un mazzo conforme a R02 ha sempre una mossa (1.12).** Finché il mazzo regolare ha carte, dopo ogni mossa presentata, anche annullata, si ripesca: la mano resta piena e contiene, oltre a basic e bound, tre carte regolari, quindi una bound si gioca scartandone una. A mazzo vuoto entra la last resort, gratuita e sempre giocabile. Per questo ogni set rispetta due vincoli (1.13): nessuna bound e nessuna last resort bersaglia oggetti, e ogni last resort è gratuita. Non esiste il «passo». Il bot prova carte e bersagli casuali e, se non trovasse mosse valide, passerebbe con mossa vuota: con mazzi conformi il caso non si presenta.
 
 Le lacune del server nel controllo di identità, bersagli ordinari, compatibilità bound o invii dopo la fine non autorizzano mosse fuori dalle categorie descritte. I comandi malformati sono fuori dal regolamento.
 
@@ -92,7 +94,7 @@ Una mossa già presentata continua anche se l'autore muore prima di agire o dura
 
 Una mossa annullata durante la risoluzione non produce effetti, ma ha già pagato e procede con scarto/pesca. Una bound annullata non scarta la carta aggiuntiva. Una mossa già vuota rimossa prima dei costi non pesca.
 
-Grab, Steal e BreakYourToy ricontrollano l'oggetto alla risoluzione: se scomparso non lo consumano, rubano o distruggono; restano costi/scarto/pesca. EverythingIsDrug mantiene +20 TOXICITY anche se l'oggetto è scomparso nel frattempo.
+Una carta che bersaglia un oggetto lo ricontrolla alla risoluzione: se l'oggetto è scomparso non lo consuma, non lo ruba e non lo distrugge, ma applica gli altri suoi effetti; restano costi, scarto e pesca.
 
 ## R05 — Danni e stati
 
@@ -100,11 +102,11 @@ Danni: HIT, CUT, POISON. Si applicano stati OUTPUT dell'autore, INPUT del destin
 
 Gli stati di danno compatibili si applicano cumulativamente nell'ordine di aggiunta. Una conversione di tipo modifica quali stati successivi sono compatibili. Ogni trasformazione numerica tronca verso zero. Per variazioni di risorsa si applica **solo il primo stato compatibile**, senza composizione o controllo INPUT/OUTPUT.
 
-Guadagnare n aggiunge abs(n); perdere n sottrae abs(n), prima degli stati. Svuotare porta a zero senza modificatori. Il filtro inviato al destinatario da inflictDamage include GOOD e BAD per ogni sottoinsieme ordinario, anche vuoto: SeagullFly usa solo GOOD sull'autore ma tutti gli stati sul bersaglio.
+Guadagnare n aggiunge abs(n); perdere n sottrae abs(n), prima degli stati. Svuotare porta a zero senza modificatori. Il filtro inviato al destinatario da inflictDamage include GOOD e BAD per ogni sottoinsieme ordinario, anche vuoto: una carta che limita gli stati dell'autore, per esempio ai soli GOOD, non limita quelli del bersaglio.
 
-Uno stato senza durata persiste. Una durata d diminuisce a fine turno; lo stato scompare solo sotto zero: d=0 copre il turno corrente, d=1 anche il successivo. SingleUse imposta durata zero dopo l'uso: può applicarsi ancora nello stesso turno. Gli equip sono stati rimovibili da BadEducation.
+Uno stato senza durata persiste. Una durata d diminuisce a fine turno; lo stato scompare solo sotto zero: d=0 copre il turno corrente, d=1 anche il successivo. SingleUse imposta durata zero dopo l'uso: può applicarsi ancora nello stesso turno. Gli equip sono stati che un effetto può rimuovere, se la sua scheda lo prevede.
 
-**Isolamento degli stati (1.1):** ogni applicazione di MadeOfStone e BrokenBeerBottle crea uno stato distinto. Durata e consumo non sono condivisi fra applicazioni, personaggi o partite. MadeOfStone parte sempre da durata 3. BrokenBeerBottle mantiene singleUse e puo applicarsi ancora nello stesso turno secondo la regola precedente.
+**Isolamento degli stati (1.1):** ogni applicazione di uno stato crea uno stato distinto. Durata e consumo non sono condivisi fra applicazioni, personaggi o partite: ogni stato parte dalla durata della sua scheda, e uno stato singleUse segue la regola precedente.
 
 ## R06 — Fine turno e partita
 
@@ -131,77 +133,17 @@ Al riavvio tutte le partite ancora attive nel registro persistente terminano in 
 
 Non si ripristinano partite giocabili, mosse o clock; gli ultimi dati osservati restano dati di analisi, non uno stato eseguibile. Il draw tecnico non dipende da HEALTH, forfait o mosse pendenti e non modifica quei dati storici. Nessun premio o aggiornamento Elo. Il recupero delle scritture già durevoli precede la chiusura: un esito già registrato nel journal locale viene conservato, non sostituito da un draw.
 
-## R07 — Carte del set
+## R07 — Carte e documenti di set
 
-Il set comprende **39 carte: 2 personaggio, 33 azione e 4 oggetto**, oltre a un token oggetto generato durante il gioco. Le carte personaggio appartengono al set a tutti gli effetti; hanno una scheda propria e vengono predisposte alla preparazione secondo R01a. Ogni riga indica tipologia e, dove previsto, sottotipo.
+Le carte stanno nei documenti di set (R00), uno per set, in `docs/sets/`; il set in vigore è il Set Base, `docs/sets/base.md`. Un documento di set contiene l'inventario delle sue carte e dei suoi token, gli starter, una **scheda normativa** per ogni carta, compresi i personaggi, e i campi descrittivi di R07a. Ha una versione propria, con revisioni motivate, e un allegato con nomi visualizzati e composizioni degli starter, a cui il catalogo SQLite deve corrispondere. Le carte personaggio appartengono al set a tutti gli effetti; hanno una scheda propria e vengono predisposte alla preparazione secondo R01a.
 
-Identificatori stabili delle classi; i nomi visualizzati sono nell'allegato. V=VIOLENCE, A=ALERTNESS, T=TOXICITY, L=ALCOHOL; —=nessun costo risorse. Effetti prima dei modificatori R05; t è il valore al momento dell'effetto, dopo i costi. Le quattro bound richiedono lo scarto R02.
+Convenzioni delle schede: identificatori stabili delle classi; i nomi visualizzati sono nell'allegato. Ogni riga indica tipologia e, dove previsto, sottotipo. V=VIOLENCE, A=ALERTNESS, T=TOXICITY, L=ALCOHOL; —=nessun costo risorse. Effetti prima dei modificatori R05; t è il valore al momento dell'effetto, dopo i costi. Una bound richiede lo scarto R02 anche se la scheda non lo ripete; le durate seguono R05. La scheda di un personaggio indica HEALTH, ALERTNESS, risorsa speciale, capacità di oggetti e immunità iniziale; le altre risorse partono da 0 (R01).
 
-### Carte personaggio
-
-| Carta | Tipologia | Nome visualizzato | HEALTH | ALERTNESS | Risorsa speciale | Capacità oggetti | Immunità iniziale |
-|---|---|---|---:|---:|---|---:|---|
-| BigBadBruiser | Personaggio | Spazienzio de la Ucciso | 100 | 20 | VIOLENCE 25 | 1 | Nessuna |
-| ToxicJunkie | Personaggio | Tossico del Serraglio | 100 | 35 | TOXICITY 10 | 3 | Effetto periodico di TOXICITY |
-
-Le risorse che la scheda non indica partono da 0 (R01, 1.11): Spazienzio ha anche TOXICITY 0 e ALCOHOL 0, il Tossico VIOLENCE 0 e ALCOHOL 0.
-
-### Carte azione
-
-| Carta | Tipologia | Sottotipo | Costo | Priorità | Bersaglio | Effetto in ordine |
-|---|---|---|---|---:|---|---|
-| LittleSmack | Azione | Legata al personaggio | — | 1 | Avversario | +5 A a sé; 5 HIT al bersaglio |
-| LittleRage | Azione | Legata al personaggio | — | 2 | Sé | HIT ricevuto ×0,75, durata 0; +5 V |
-| PatheticBlade | Azione | Legata al personaggio | — | 1 | Avversario | +5 T a sé; 5 CUT e +5 T al bersaglio |
-| RottenSmile | Azione | Legata al personaggio | — | 2 | Avversario | +5 A a sé; −5 A al bersaglio |
-| BruiserGrab | Azione | Base | — | −1 | Oggetto vicino | Basic: consuma come Grab |
-| ToxicGrab | Azione | Base | — | 1 | Oggetto vicino | Basic: perde abs(A/2), poi consuma come Grab; perde A anche se l'oggetto è scomparso |
-| Struggle | Azione | Ultima risorsa | — | 1 | Avversario | Last resort: 5 HIT a sé; 10 HIT al bersaglio |
-| Grab | Azione | Regolare | — | 1 | Oggetto vicino | Rimuove l'oggetto, applica solo effetti self/target, non logica speciale |
-| Steal | Azione | Regolare | 10 A | 0 | Oggetto lontano | Trasferisce l'oggetto vicino a sé senza consumarlo |
-| ShuffleFeet | Azione | Regolare | — | −1 | Avversario | Scambia tutti gli oggetti rispettando le capacità dei destinatari |
-| BadEducation | Azione | Regolare | 10 V | 1 | Avversario | Rimuove equip del bersaglio; 10 HIT |
-| BreakYourToy | Azione | Regolare | 10 V | 1 | Oggetto lontano | Distrugge l'oggetto |
-| CantFeelAnything | Azione | Regolare | 20 V | 2 | Sé | HIT ricevuto ×0,35, durata 0; +10 A |
-| ExtremelyViolentBlow | Azione | Regolare | 20 V | 1 | Avversario | HIT pari a 20 + V residua/2 |
-| Glare | Azione | Regolare | — | 0 | Sé | HIT ricevuto ×1,5, durata 1; +15 V e +15 A |
-| HealingBlow | Azione | Regolare | 20 V | 1 | Avversario | 30 HIT; azzera T e L del bersaglio |
-| MadeOfStone | Azione | Regolare | — | 0 | Sé | CUT ricevuto ×0,5, stato indipendente R05; +10 V |
-| SeagullFly | Azione | Regolare | 10 V | 1 | Avversario | 15 HIT: solo GOOD dell'autore, tutti gli stati del bersaglio |
-| SickeningBlow | Azione | Regolare | 15 V | 1 | Avversario | 10 HIT; +10 T al bersaglio |
-| StunningBlow | Azione | Regolare | 15 V | 1 | Avversario | −10 A; 10 HIT al bersaglio |
-| SuperImpact | Azione | Regolare | 25 V | 0 | Avversario | 40 HIT |
-| YouStop | Azione | Regolare | 5 V | 2 | Avversario | Annulla mossa del bersaglio solo se successiva; se trovata +10 A al bersaglio |
-| WhatchaDoin | Azione | Regolare | 10 V + 10 A | 2 | Avversario | Annulla mossa successiva e ne esegue solo l'effetto target usando sé come autore; non replica self, costi, logica speciale |
-| AmphetamineReflexes | Azione | Regolare | 10 T | 2 | Sé | Annulla mosse successive di avversari vivi con target pari al proprio ID; nessun +A |
-| BadTrip | Azione | Regolare | 10 A | 2 | Sé | Toglie immunità T; timer 3 la aggiunge a sé; aggiunge abs(T) alla propria T |
-| BeggingMoney | Azione | Regolare | 25 T | 0 | Avversario | Aggiunge un oggetto casuale del bersaglio vicino a sé senza rimuoverlo da lui; −10 A al bersaglio. Nessun recupero da alcol |
-| Cough | Azione | Regolare | 10 T | 1 | Avversario | +5 T; −5 A al bersaglio |
-| EverythingIsDrug | Azione | Regolare | — | 1 | Oggetto vicino | Consuma senza effetti dell'oggetto; +20 T a sé |
-| GoingBerserk | Azione | Regolare | 10 L | 1 | Avversario | 30 HIT; nessun costo T |
-| LethalHeroinDose | Azione | Regolare | — | 1 | Sé | Se t>=30 perde t HEALTH; aggiunge abs(t−30) a T. Esempio: 40→50, perdendo 40 HEALTH |
-| MethDrivenRage | Azione | Regolare | 5 T | 1 | Avversario | 5 HIT a sé; 15 HIT al bersaglio |
-| PervertedMetabolism | Azione | Regolare | — | 1 | Sé | Guadagna abs(T/2) HEALTH; perde abs(T) TOXICITY |
-| ToxicBloodDrain | Azione | Regolare | 10 T | 1 | Avversario | Memorizza T residua, la perde e la aggiunge al bersaglio; rimuove immunità T al bersaglio; timer 1 aggiunge immunità T all'autore |
-
-### Carte oggetto e token
-
-Gli oggetti si attivano tramite Grab/derivate, non alla pesca. Nessun costo proprio; conta la priorità dell'azione che li consuma.
-
-| Carta / token | Tipologia | Sottotipo | Effetto del consumo |
-|---|---|---|---|
-| CocktailOnTheGround | Oggetto | — | +20 V, +15 L, +5 T |
-| RottenBeer | Oggetto | — | +5 L. Non equipaggia: Grab non chiama il suo hook speciale, anche se il vecchio report afferma il contrario |
-| AnotherRottenBeer | Oggetto | — | Crea BrokenBeerBottle vicino a sé; +10 L |
-| MarvelousCocktail | Oggetto | — | Immunità T e L; +20 L e +20 T; timer 5 cancella tutte le immunità e gli stati, poi 20 POISON |
-| BrokenBeerBottle | Oggetto | Token | Equip GOOD OUTPUT: HIT ×1,5 convertito in CUT; singleUse e stato indipendente secondo R05 |
-
-SoberUp è una classe incompleta fuori dal catalogo (bersaglio non definito), non una carta giocabile o un terzo personaggio.
-
+**Rarità (1.13).** Ogni carta può avere una rarità, COMMON, UNCOMMON o RARE, oppure nessuna. È un dato del catalogo indicato dal documento del set: non è un effetto, non cambia costi, bersagli, priorità o risoluzione e non limita la costruzione dei mazzi.
 
 ## R07a — Ruoli descrittivi delle carte (1.7)
 
-Ogni carta ha un **ruolo** e l'elenco dei **guadagni di risorse a sé**. Sono campi descrittivi del catalogo per aiutare a riconoscere le carte: non sono effetti, non modificano costi, bersagli, priorità o risoluzione e non autorizzano mosse. In caso di dubbio prevale l'effetto di R07. I personaggi non si giocano e non hanno ruolo.
+Ogni carta ha un **ruolo** e l'elenco dei **guadagni di risorse a sé**. Sono campi descrittivi del catalogo per aiutare a riconoscere le carte: non sono effetti, non modificano costi, bersagli, priorità o risoluzione e non autorizzano mosse. In caso di dubbio prevale la scheda. I personaggi non si giocano e non hanno ruolo. I valori di ogni carta sono nel documento del suo set.
 
 | Ruolo | Significato |
 |---|---|
@@ -213,111 +155,25 @@ Ogni carta ha un **ruolo** e l'elenco dei **guadagni di risorse a sé**. Sono ca
 | ITEMS | Oggetti: prende, ruba, scambia o distrugge oggetti |
 | OTHER | Altro: ruolo ambiguo, da rivedere con il bilanciamento |
 
-I guadagni elencano solo le risorse aggiunte a chi gioca o consuma la carta, con le lettere di R07 e H=HEALTH; x indica una quantità variabile. Non includono costi, perdite, effetti sul bersaglio o quelli dell'oggetto consumato da una Grab.
+I guadagni elencano solo le risorse aggiunte a chi gioca o consuma la carta, con le lettere di R07 e H=HEALTH; x indica una quantità variabile. Non includono costi, perdite, effetti sul bersaglio o quelli dell'oggetto consumato da una presa.
 
-| Carta | Ruolo | Guadagni a sé |
-|---|---|---|
-| BigBadBruiser | — | — |
-| ToxicJunkie | — | — |
-| LittleSmack | DAMAGE | +5 A |
-| LittleRage | DEFENSE | +5 V |
-| PatheticBlade | DAMAGE | +5 T |
-| RottenSmile | DISRUPT | +5 A |
-| BruiserGrab | ITEMS | — |
-| ToxicGrab | ITEMS | — |
-| Struggle | DAMAGE | — |
-| Grab | ITEMS | — |
-| Steal | ITEMS | — |
-| ShuffleFeet | ITEMS | — |
-| BadEducation | OTHER | — |
-| BreakYourToy | ITEMS | — |
-| CantFeelAnything | DEFENSE | +10 A |
-| ExtremelyViolentBlow | DAMAGE | — |
-| Glare | OTHER | +15 V, +15 A |
-| HealingBlow | DAMAGE | — |
-| MadeOfStone | DEFENSE | +10 V |
-| SeagullFly | DAMAGE | — |
-| SickeningBlow | DAMAGE | — |
-| StunningBlow | DAMAGE | — |
-| SuperImpact | DAMAGE | — |
-| YouStop | COUNTER | — |
-| WhatchaDoin | COUNTER | — |
-| AmphetamineReflexes | COUNTER | — |
-| BadTrip | RESOURCES | +x T |
-| BeggingMoney | ITEMS | — |
-| Cough | DISRUPT | — |
-| EverythingIsDrug | OTHER | +20 T |
-| GoingBerserk | DAMAGE | — |
-| LethalHeroinDose | RESOURCES | +x T |
-| MethDrivenRage | DAMAGE | — |
-| PervertedMetabolism | RESOURCES | +x H |
-| ToxicBloodDrain | DISRUPT | — |
-| CocktailOnTheGround | RESOURCES | +20 V, +15 L, +5 T |
-| RottenBeer | RESOURCES | +5 L |
-| AnotherRottenBeer | RESOURCES | +10 L |
-| MarvelousCocktail | RESOURCES | +20 L, +20 T |
-| BrokenBeerBottle | OTHER | — |
-
-Le carte azione e oggetto portano ruolo e guadagni nel catalogo SQLite; il token, che non è nel catalogo, li dichiara nella propria classe come il nome visualizzato.
+Le carte azione e oggetto portano ruolo e guadagni nel catalogo SQLite; un token, che non è nel catalogo, li dichiara nella propria classe come il nome visualizzato.
 
 ### Danno nominale (1.9)
 
-Ogni carta ha anche un **danno nominale**: i tipi di danno di R05 (HIT, CUT, POISON) che la carta stessa infligge quando si risolve, a chi la gioca o al bersaglio, separati da virgola se sono più di uno; — se nessuno. Come ruolo e guadagni è un campo descrittivo: non è un effetto e non cambia la risoluzione. Il danno effettivo può avere un altro tipo per una conversione R05 o non avvenire, per esempio se la mossa è annullata. In caso di dubbio prevale l'effetto di R07. I personaggi non si giocano e non hanno danno nominale.
+Ogni carta ha anche un **danno nominale**: i tipi di danno di R05 (HIT, CUT, POISON) che la carta stessa infligge quando si risolve, a chi la gioca o al bersaglio, separati da virgola se sono più di uno; — se nessuno. Come ruolo e guadagni è un campo descrittivo: non è un effetto e non cambia la risoluzione. Il danno effettivo può avere un altro tipo per una conversione R05 o non avvenire, per esempio se la mossa è annullata. In caso di dubbio prevale la scheda. I personaggi non si giocano e non hanno danno nominale.
 
 Non entrano nel danno nominale:
 
 - il veleno di fine turno da TOXICITY (R06), quindi nemmeno le carte che aggiungono TOXICITY;
-- i danni dei timer, che arrivano dopo la risoluzione: MarvelousCocktail ha — anche se il suo timer infligge 20 POISON;
-- le perdite di HEALTH che non sono danni R05: LethalHeroinDose ha —;
-- gli stati che modificano il danno inflitto o ricevuto: LittleRage, CantFeelAnything, Glare e MadeOfStone hanno —; BrokenBeerBottle ha —, perché converte i colpi di chi lo porta ma di suo non infligge danno;
-- gli effetti presi da altre carte: quello replicato da WhatchaDoin e quello dell'oggetto consumato da una Grab.
+- i danni dei timer, che arrivano dopo la risoluzione;
+- le perdite di HEALTH che non sono danni R05;
+- gli stati che modificano il danno inflitto o ricevuto, compreso un equip che converte i colpi di chi lo porta ma di suo non infligge danno;
+- gli effetti presi da altre carte: quello di una carta che esegue l'effetto di un'altra e quello dell'oggetto consumato da una presa.
 
-**Importo nominale (1.10).** Ogni carta con danno nominale ha anche l'**importo** che infligge al bersaglio quando si risolve, scritto come tipo e numero, per esempio `HIT 15`; con più tipi, uno per tipo nell'ordine HIT, CUT, POISON, separati da virgola (somma degli importi dello stesso tipo); — se nessun danno. Un importo che dipende da una risorsa di chi gioca usa x per la quantità variabile, come i guadagni: ExtremelyViolentBlow è `HIT 20+x`, dove x è metà della V residua di chi gioca. L'importo è quello della carta prima di qualsiasi stato o conversione di R05: il danno effettivo può essere diverso, o non avvenire. Il danno che la carta infligge a sé non entra: Struggle e MethDrivenRage infliggono 5 HIT a sé e mostrano solo l'importo al bersaglio (10 e 15). Le carte con — nel tipo hanno — anche nell'importo. È descrittivo come il tipo: nessun effetto cambia, e in caso di dubbio prevale R07.
+**Importo nominale (1.10).** Ogni carta con danno nominale ha anche l'**importo** che infligge al bersaglio quando si risolve, scritto come tipo e numero, per esempio `HIT 15`; con più tipi, uno per tipo nell'ordine HIT, CUT, POISON, separati da virgola (somma degli importi dello stesso tipo); — se nessun danno. Un importo che dipende da una risorsa di chi gioca usa x per la quantità variabile, come i guadagni, per esempio `HIT 20+x`; la scheda dice quanto vale x. L'importo è quello della carta prima di qualsiasi stato o conversione di R05: il danno effettivo può essere diverso, o non avvenire. Il danno che la carta infligge a sé non entra: si mostra solo l'importo al bersaglio. Le carte con — nel tipo hanno — anche nell'importo. È descrittivo come il tipo: nessun effetto cambia, e in caso di dubbio prevale la scheda.
 
-| Carta | Danno nominale | Importo nominale |
-|---|---|---|
-| BigBadBruiser | — | — |
-| ToxicJunkie | — | — |
-| LittleSmack | HIT | HIT 5 |
-| LittleRage | — | — |
-| PatheticBlade | CUT | CUT 5 |
-| RottenSmile | — | — |
-| BruiserGrab | — | — |
-| ToxicGrab | — | — |
-| Struggle | HIT | HIT 10 |
-| Grab | — | — |
-| Steal | — | — |
-| ShuffleFeet | — | — |
-| BadEducation | HIT | HIT 10 |
-| BreakYourToy | — | — |
-| CantFeelAnything | — | — |
-| ExtremelyViolentBlow | HIT | HIT 20+x |
-| Glare | — | — |
-| HealingBlow | HIT | HIT 30 |
-| MadeOfStone | — | — |
-| SeagullFly | HIT | HIT 15 |
-| SickeningBlow | HIT | HIT 10 |
-| StunningBlow | HIT | HIT 10 |
-| SuperImpact | HIT | HIT 40 |
-| YouStop | — | — |
-| WhatchaDoin | — | — |
-| AmphetamineReflexes | — | — |
-| BadTrip | — | — |
-| BeggingMoney | — | — |
-| Cough | — | — |
-| EverythingIsDrug | — | — |
-| GoingBerserk | HIT | HIT 30 |
-| LethalHeroinDose | — | — |
-| MethDrivenRage | HIT | HIT 15 |
-| PervertedMetabolism | — | — |
-| ToxicBloodDrain | — | — |
-| CocktailOnTheGround | — | — |
-| RottenBeer | — | — |
-| AnotherRottenBeer | — | — |
-| MarvelousCocktail | — | — |
-| BrokenBeerBottle | — | — |
-
-Il danno nominale e il suo importo stanno nel catalogo SQLite accanto a ruolo e guadagni; il token lo dichiara nella propria classe.
+Il danno nominale e il suo importo stanno nel catalogo SQLite accanto a ruolo e guadagni; un token lo dichiara nella propria classe.
 
 ## R08 — Informazioni e confini
 
@@ -334,6 +190,8 @@ Fonti iniziali: Game, Move, Player, ComPlayer, Character, Status, tutte le class
 Mappa test e risultati: `docs/rules-conformance.md`. Verifica dal workspace: `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`. La copertura è dichiarata per casi, non come prova esaustiva di tutte le combinazioni.
 
 ## Revisioni
+
+- **1.13 — 8 novembre 2026, SB-2 (regolamento e set):** il regolamento contiene le regole generali e le carte passano ai documenti di set in `docs/sets/`, con versione propria; il primo è il Set Base 0.1, con le 39 carte e il token di prima. R00: fonte normativa sono regolamento e documenti di set; il regolamento governa il sistema, la scheda governa la carta e deroga solo se lo dice esplicitamente. R07 diventa «Carte e documenti di set», con le convenzioni delle schede e la rarità come dato descrittivo del catalogo (COMMON, UNCOMMON, RARE o nessuna; nel Set Base 0.1 nessuna); R07a conserva le definizioni e lascia al set le tabelle per carta. Le frasi che citavano carte specifiche diventano regole generali con lo stesso esito sulle carte di oggi: R04, una carta che bersaglia un oggetto scomparso non lo consuma, ruba o distrugge ma applica gli altri suoi effetti (prima Grab, Steal, BreakYourToy ed EverythingIsDrug); R05, un filtro sugli stati dell'autore non limita quelli del bersaglio (prima SeagullFly), gli equip si rimuovono con gli effetti che lo prevedono (prima BadEducation), ogni applicazione di uno stato è uno stato distinto (prima MadeOfStone e BrokenBeerBottle; la durata 3 di MadeOfStone passa alla sua scheda); R03, nessuna bound o last resort bersaglia oggetti e ogni last resort è gratuita, ora vincoli per ogni set; R01, R01a e R02 rimandano al documento del set per personaggi, starter, token ed esempi. Decisioni del proprietario D11 e D42 del piano Set Base e raccomandazioni della fase A di SB-2, approvate l'8 novembre 2026 («vanno bene tutte le raccomandazioni»). Motivazione: con 115 carte le tabelle di R07 diventerebbero ingestibili e ogni ritocco di una carta cambierebbe la versione delle regole; ora cambia quella del set. Nessun effetto, costo, priorità, bersaglio, starter o bilanciamento cambia; le descrizioni SQLite citano il set («Riferimento: Set Base 0.1.») invece del regolamento.
 
 - **1.12 — 7 novembre 2026, SB-1 (regole dei mazzi):** R02 sostituisce i requisiti minimi dei mazzi personalizzati (1.4) con una regola unica per starter e mazzi personalizzati: esattamente 20 carte regolari con al massimo 2 copie per carta, oggetti compresi; la basic fissa del personaggio; due bound diverse legate al proprio personaggio; una last resort generica o riservata al proprio personaggio. Le carte iniziali sono sempre tre. R01a dice che cosa ha ogni mazzo anziché ogni starter. R03 chiude la lacuna del giocatore vivo senza mosse: con un mazzo conforme una bound o la last resort è sempre giocabile, e il «passo» non si aggiunge. Decisioni del proprietario D1–D5, D25 e D29 del piano Set Base, anticipate da D40. Motivazione: la dimensione esatta conserva la pressione del mazzo che finisce, perché gli scarti non si rimescolano; basic, bound e last resort obbligatorie danno a ogni personaggio la sua firma e garantiscono una mossa a ogni turno. I due starter erano già conformi: nessuna carta, effetto, starter o partita cambia. I mazzi salvati che non rispettano le nuove regole restano visibili ma non si usano per giocare, finché non vengono corretti o cancellati (D20).
 

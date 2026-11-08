@@ -125,7 +125,7 @@
             <resource><directory>src/main/resources</directory></resource>
             <resource>
                 <directory>../docs</directory><targetPath>analysis</targetPath>
-                <includes><include>game-rules.md</include><include>rules-catalog.json</include></includes>
+                <includes><include>game-rules.md</include><include>rules-catalog.json</include><include>sets/*.md</include></includes>
             </resource>
         </resources>
         <plugins>

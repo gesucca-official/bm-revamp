@@ -65,6 +65,7 @@ class QuickCompleteCliTest extends SqliteContextSupport {
         ProcessBuilder pb=new ProcessBuilder(root.resolve(".tools/node-v12.22.12-win-x64/node.exe").toString(),root.resolve("scripts/cli-quick-complete-test.cjs").toString());
         pb.environment().put("BM_URL","http://127.0.0.1:"+port+"/api");
         pb.environment().put("BM_RULES_VERSION",versions.get().get("rulesVersion").toString());
+        pb.environment().put("BM_SETS",mapper.writeValueAsString(versions.get().get("sets")));
         pb.environment().put("BM_USER",user); pb.environment().put("BM_PASSWORD","synthetic");
         pb.environment().put("BM_IDS",mapper.writeValueAsString(List.of(win.getGameId(),draw.getGameId())));
         Process process=pb.redirectErrorStream(true).redirectOutput(output.toFile()).start();

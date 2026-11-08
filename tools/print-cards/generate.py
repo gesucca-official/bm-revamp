@@ -1,4 +1,4 @@
-"""Print the current SQLite catalog, with authoritative R07 data. Python + ReportLab."""
+"""Print the current SQLite catalog, with the authoritative sheets of the set document (regulation 1.13, R07). Python + ReportLab."""
 from pathlib import Path
 import argparse
 import hashlib
@@ -27,13 +27,19 @@ COLORS = {'Personaggio': '#344d70', 'Regolare': '#b65332', 'Base': '#257a84',
 RESOURCE = [('H', 'HEALTH'), ('A', 'ALERTNESS'), ('V', 'VIOLENCE'), ('T', 'TOXICITY'), ('L', 'ALCOHOL')]
 
 
-def load_catalog(database, rules_path, annex_path):
+def load_catalog(database, rules_path, annex_path, set_path=None):
     rules = rules_path.read_text(encoding='utf-8-sig')
-    version = re.search(r'Versione \*\*(.*?) —', rules).group(1)
+    rules_version = re.search(r'Versione \*\*(.*?) —', rules).group(1)
+    # Regulation 1.13: the card sheets live in the set document; the annex is the set's.
+    set_path = set_path or ROOT/'docs/sets/base.md'
+    set_text = set_path.read_text(encoding='utf-8-sig')
+    set_title = re.match(r'# Botte Micidiali — (.+)\n', set_text).group(1)
+    set_version = re.search(r'Versione \*\*(.*?) —', set_text).group(1)
     annex = json.loads(annex_path.read_text(encoding='utf-8'))
-    if annex['version'] != version:
-        raise ValueError('Versione allegato diversa dal regolamento')
-    section = rules.split('## R07', 1)[1].split('## R08', 1)[0]
+    if annex.get('set') != set_path.stem or annex['version'] != set_version:
+        raise ValueError('Allegato diverso dal documento del set')
+    version = f'{rules_version} · {set_title} {set_version}'
+    section = set_text.split('\n## S2 — ', 1)[1].split('\n## S5 — ', 1)[0]
     rows = {}
     for line in section.splitlines():
         if line.startswith('| '):
@@ -58,18 +64,18 @@ def load_catalog(database, rules_path, annex_path):
     if set(expected) != {c['id'] for c in cards}:
         raise ValueError('Inventario database/allegato diverso: aggiornare le fonti normative')
     if {k for k, r in rows.items() if r[1] in ('Azione', 'Oggetto', 'Personaggio')} != {c['id'].split('.')[-1] for c in cards}:
-        raise ValueError('Inventario R07 diverso da database e token')
+        raise ValueError('Inventario del set diverso da database e token')
     for card in cards:
         key = card['id'].split('.')[-1]
         if key not in rows:
-            raise ValueError(f'{key}: scheda R07 mancante; nessun effetto verrà inventato')
+            raise ValueError(f'{key}: scheda del set mancante; nessun effetto verrà inventato')
         row = rows[key]
         card.update(key=key, type=row[1], subtype='')
         if card['name'] != expected[card['id']]['name'].strip():
             raise ValueError(f'{key}: nome database/allegato non allineato')
         if card['character']:
             if len(row) != 8 or row[2] != card['name']:
-                raise ValueError(f'{key}: scheda personaggio R07 non valida')
+                raise ValueError(f'{key}: scheda personaggio del set non valida')
             card['effect'] = '<br/>'.join(escape(f'{label}: {value}') for label, value in zip(
                 ['H / HEALTH', 'A / ALERTNESS', 'Risorsa speciale', 'Capacità oggetti', 'Immunità iniziale'], row[3:]))
         else:
@@ -77,15 +83,13 @@ def load_catalog(database, rules_path, annex_path):
             if [row[1], row[2]] != [expected[card['id']]['type'], expected[card['id']]['subtype']]:
                 raise ValueError(f'{key}: tipologia non allineata')
             card['effect'] = escape(row[-1])
-            if 'description' in card and card['description'] != row[-1] + f'. Riferimento: Regolamento {version}, R02-R07.':
-                raise ValueError(f'{key}: descrizione SQLite diversa da R07')
+            if 'description' in card and card['description'] != row[-1] + f'. Riferimento: {set_title} {set_version}.':
+                raise ValueError(f'{key}: descrizione SQLite diversa dalla scheda del set')
             if card['type'] == 'Azione':
                 if len(row) != 7:
-                    raise ValueError(f'{key}: formato azione R07 inatteso')
+                    raise ValueError(f'{key}: formato azione del set inatteso')
                 card.update(cost=row[3], priority=row[4], target=row[5])
-        # R07 explicitly delegates these details to R05; copy from the source.
-        if key == 'MadeOfStone':
-            card['effect'] += '<br/>' + escape(re.search(r'MadeOfStone parte sempre da durata \d+\.', rules).group())
+        # The sheet delegates singleUse to R05; copy from the source. (MadeOfStone's duration is in its sheet since 1.13.)
         if key == 'BrokenBeerBottle':
             card['effect'] += '<br/>' + escape(re.search(r'SingleUse imposta durata zero.*?stesso turno\.', rules).group())
     # No fixed inventory count: additions are discovered at each run.
@@ -223,6 +227,7 @@ def main():
     parser.add_argument('--database', type=Path, default=ROOT/'server/src/main/resources/cards.sqlite')
     parser.add_argument('--rules', type=Path, default=ROOT/'docs/game-rules.md')
     parser.add_argument('--annex', type=Path, default=ROOT/'docs/rules-catalog.json')
+    parser.add_argument('--set', type=Path, default=ROOT/'docs/sets/base.md', help='Documento del set con le schede')
     parser.add_argument('--output', type=Path, default=ROOT/'output/pdf/botte-micidiali-carte.pdf')
     parser.add_argument('--width-mm', type=float, default=62)
     parser.add_argument('--height-mm', type=float, default=87)
@@ -240,7 +245,7 @@ def main():
         parser.error('Dimensioni non finite')
     if min(args.width_mm, args.height_mm) <= 0 or args.margin_mm < 5 or args.gap_mm < 3 or args.copies < 0:
         parser.error('Dimensioni positive; margini >=5 mm; spazio >=3 mm; copie >=0')
-    cards, rules, version, starters, initial = load_catalog(args.database, args.rules, args.annex)
+    cards, rules, version, starters, initial = load_catalog(args.database, args.rules, args.annex, args.set)
     decks = starter_decks(cards, starters, initial)
     by_id = {c['id']: c for c in cards}
     if args.list_starters:
@@ -357,13 +362,13 @@ def main():
         block(text, 11 if heading else 9, heading)
     pdf.save()
     temporary.replace(args.output)
-    manifest = dict(rules_version=version, catalog_count=len(cards), printed_count=len(instances),
+    manifest = dict(rules_version=version.split(' · ', 1)[0], set=version.split(' · ', 1)[1], catalog_count=len(cards), printed_count=len(instances),
                     selection=dict(mode='starters' if selected else 'catalog', starters=selected,
                                    multiplier=args.copies, overrides=overrides),
                     card_pages=sheet_count, total_pages=page_count, grid=[cols,rows],
                     trim_mm=[args.width_mm,args.height_mm], minimum_body_pt=9,
                     sources={str(p.relative_to(ROOT) if p.is_relative_to(ROOT) else p): hashlib.sha256(p.read_bytes()).hexdigest()
-                             for p in (args.database,args.rules,args.annex)},
+                             for p in (args.database,args.rules,args.annex,args.set)},
                     inventory=[dict(id=c['id'],name=c['name'],type=c['type'],subtype=c['subtype'],copies=quantities[c['id']]) for c in cards],
                     placements=positions)
     args.output.with_suffix('.manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')

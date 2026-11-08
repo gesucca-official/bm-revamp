@@ -65,9 +65,9 @@ Fonte primaria: [cards.sqlite](../server/src/main/resources/cards.sqlite), inter
 
 | Tabella | Colonne e vincoli osservati | Righe |
 |---|---|---:|
-| CRD001_GUI | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_DESCRIPTION **int**; T_GUI_IMAGE varchar2; T_GUI_SPRITE varchar2; T_GUI_ROLE varchar2; T_GUI_GAINS varchar2; T_GUI_DAMAGE varchar2; T_GUI_DAMAGE_AMOUNT varchar2 (descrittivi, regolamento R07a: 1.7 ruolo e guadagni, 1.9 danno nominale, 1.10 importo; esposti come `role`, `gains`, `damage` e `damageAmount` della carta) | 37 |
+| CRD001_GUI | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_DESCRIPTION **int**; T_GUI_IMAGE varchar2; T_GUI_SPRITE varchar2; T_GUI_ROLE varchar2; T_GUI_GAINS varchar2; T_GUI_DAMAGE varchar2; T_GUI_DAMAGE_AMOUNT varchar2 (descrittivi, regolamento R07a: 1.7 ruolo e guadagni, 1.9 danno nominale, 1.10 importo; esposti come `role`, `gains`, `damage` e `damageAmount` della carta); C_EXCLUSIVE_TO varchar2 (R02 1.12, basic e last resort riservate); C_SET varchar2 (1.13, set del documento, `base`); C_RARITY varchar2 (1.13, COMMON, UNCOMMON, RARE o vuota; vuota per tutte nel Set Base 0.1; non esposte ai client) | 37 |
 | CRD002_KEYWORDS | C_KEYWORD varchar2 PK; T_HTML **int** | 4 |
-| CRD003_CHARACTERS | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_SPRITE varchar2 | 2 |
+| CRD003_CHARACTERS | C_REF_CLASS varchar2 PK; T_GUI_NAME varchar2; T_GUI_SPRITE varchar2; C_SET varchar2 (1.13, `base`) | 2 |
 | DCK001_STARTERS | C_PG_REF_CLASS varchar2; C_CRD_REF_CLASS varchar2 FK→CRD001_GUI; N_QTY int; PK composta (C_PG_REF_CLASS,C_CRD_REF_CLASS) | 30 |
 | DCK002_STARTERS_CH | C_PG_REF_CLASS varchar2 PK; T_BASIC_REF_CLASS, T_CH_BOUND_1_REF_CLASS, T_CH_BOUND_2_REF_CLASS, T_LAST_RESORT_REF_CLASS varchar2 | 2 |
 

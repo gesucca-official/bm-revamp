@@ -74,13 +74,14 @@ class GeneratorIntegrationTest(unittest.TestCase):
             annex['cards'].append(n)
             annex['characters'].append({'class':'fixture.NewHero','name':'Nuovo eroe fixture','type':'Personaggio'})
             ap = d/'annex.json'; ap.write_text(json.dumps(annex),encoding='utf-8')
-            rules = (ROOT/'docs/game-rules.md').read_text(encoding='utf-8-sig')
+            # Regulation 1.13: the sheets are in the set document, named like the set of the annex.
+            rules = (ROOT/'docs/sets/base.md').read_text(encoding='utf-8-sig')
             line = next(line for line in rules.splitlines() if line.startswith('| Grab |'))
             hero = next(line for line in rules.splitlines() if line.startswith('| BigBadBruiser |'))
             extended = rules.replace(line,line+'\n'+line.replace('| Grab |','| NewGrab |')).replace(hero,hero+'\n'+hero.replace('BigBadBruiser','NewHero').replace('Spazienzio de la Ucciso','Nuovo eroe fixture'))
-            rp = d/'rules.md'; rp.write_text(extended,encoding='utf-8')
+            rp = d/'base.md'; rp.write_text(extended,encoding='utf-8')
             output = d/'result.pdf'
-            command = [sys.executable,str(Path(__file__).with_name('generate.py')),'--database',str(db),'--annex',str(ap),'--rules',str(rp),'--output',str(output)]
+            command = [sys.executable,str(Path(__file__).with_name('generate.py')),'--database',str(db),'--annex',str(ap),'--set',str(rp),'--output',str(output)]
             result = subprocess.run(command,capture_output=True,text=True)
             self.assertEqual(result.returncode,0,result.stderr)
             m = json.loads(output.with_suffix('.manifest.json').read_text(encoding='utf-8'))
@@ -99,7 +100,7 @@ class GeneratorIntegrationTest(unittest.TestCase):
             rp.write_text(rules,encoding='utf-8')
             result = subprocess.run(command,capture_output=True,text=True)
             self.assertNotEqual(result.returncode,0)
-            self.assertIn('Inventario R07 diverso',result.stderr)
+            self.assertIn('Inventario del set diverso',result.stderr)
 
     def test_overflow_and_copy_selection(self):
         with tempfile.TemporaryDirectory() as directory:

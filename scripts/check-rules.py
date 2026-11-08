@@ -1,18 +1,46 @@
-"""Read-only checks: published rules and catalog must match the reviewed baseline."""
+"""Read-only checks: published rules, set documents and catalog must match the reviewed baseline.
+
+Regulation 1.13 (SB-2): the regulation (docs/game-rules.md) holds the general rules and the cards live in the set
+documents (docs/sets/<id>.md), with their own version. The set annex (docs/rules-catalog.json) and the SQLite catalog
+must agree with the set document. `--root DIR` checks another copy of the repository, so a mismatch can be tried on a
+temporary copy without touching the tracked files.
+"""
 from pathlib import Path
 import json
 import re
 import sqlite3
 import sys
 
-root = Path(__file__).resolve().parent.parent
+root = Path(sys.argv[sys.argv.index('--root') + 1]).resolve() if '--root' in sys.argv else Path(__file__).resolve().parent.parent
 canonical = root / 'docs/game-rules.md'
-assert canonical.read_text(encoding='utf-8-sig') == (root / 'client-debug/src/assets/docs/rules.md').read_text(encoding='utf-8-sig'), 'Client rules differ'
+rules_text = canonical.read_text(encoding='utf-8-sig')
+assert rules_text == (root / 'client-debug/src/assets/docs/rules.md').read_text(encoding='utf-8-sig'), 'Client rules differ'
+assert re.search(r'^Versione \*\*[0-9.]+ —', rules_text, re.M), 'Missing regulation version'
+# Set documents (R00, R07): one per set, identical client copies. Until SB-6b there is exactly one set.
+set_docs = sorted((root / 'docs/sets').glob('*.md'))
+assert [p.name for p in set_docs] == ['base.md'], 'Expected exactly one set document, docs/sets/base.md'
+client_sets = root / 'client-debug/src/assets/docs/sets'
+assert sorted(p.name for p in client_sets.glob('*.md')) == [p.name for p in set_docs], 'Client set documents differ'
+set_doc = set_docs[0]
+set_id = set_doc.stem
+set_text = set_doc.read_text(encoding='utf-8-sig')
+assert set_text == (client_sets / set_doc.name).read_text(encoding='utf-8-sig'), 'Client set document differs'
+set_title = re.match(r'# Botte Micidiali — (.+)\n', set_text)
+set_version = re.search(r'^Versione \*\*([0-9.]+) —', set_text, re.M)
+assert set_title and set_version, 'Set document without title or version'
+set_title, set_version = set_title.group(1), set_version.group(1)
 expected = json.loads((root / 'docs/rules-catalog.json').read_text(encoding='utf-8'))
-assert 'Versione **' + expected['version'] + ' —' in canonical.read_text(encoding='utf-8-sig'), 'Annex version differs'
+assert expected.get('set') == set_id, 'Annex set ' + str(expected.get('set')) + ' differs from the set document ' + set_id
+assert expected['version'] == set_version, 'Annex version ' + expected['version'] + ' differs from the set document ' + set_version
+# The regulation cites no card before its revision history (SB-2): card-specific text belongs to the set document.
+general = rules_text.split('\n## Revisioni\n', 1)[0]
+for entry in expected['cards'] + expected['characters'] + expected['tokens'] + [{'class': 'bitch.SoberUp'}]:
+    name = entry['class'].split('.')[-1]
+    assert not re.search(r'\b' + name + r'\b', general), 'The regulation cites the card ' + name + ': it belongs to the set document'
 rows = {}
-section = canonical.read_text(encoding='utf-8-sig').split('## R07 — Carte del set\n', 1)[1].split('## R07a', 1)[0]
-role_section = canonical.read_text(encoding='utf-8-sig').split('## R07a — ', 1)[1].split('## R08', 1)[0]
+section = set_text.split('\n## S2 — ', 1)[1].split('\n## S5 — ', 1)[0]
+role_section = set_text.split('\n## S5 — ', 1)[1].split('\n## Revisioni', 1)[0]
+reference = '. Riferimento: ' + set_title + ' ' + set_version + '.'
 table_width = None
 for line in section.splitlines():
     if line.startswith('|'):
@@ -27,10 +55,12 @@ for line in section.splitlines():
 cost_names = {'V': 'VIOLENCE', 'A': 'ALERTNESS', 'T': 'TOXICITY', 'L': 'ALCOHOL'}
 target_names = {'Sé': 'SELF', 'Avversario': 'OPPONENT', 'Oggetto vicino': 'NEAR_ITEM', 'Oggetto lontano': 'FAR_ITEM'}
 contracts = []
+missing = [e['class'] for e in expected['cards'] + expected['characters'] + expected['tokens'] if e['class'].split('.')[-1] not in rows]
+assert not missing, 'Cards of the annex without a sheet in the set document: ' + ', '.join(missing)
 for card in expected['cards']:
     row = rows[card['class'].split('.')[-1]]
     assert row[1:3] == [card['type'], card['subtype']], card['class'] + ': classification differs from R07'
-    assert card['description'] == row[-1] + '. Riferimento: Regolamento ' + expected['version'] + ', R02-R07.', card['class'] + ': text differs from R07'
+    assert card['description'] == row[-1] + reference, card['class'] + ': text differs from the set document'
     if card['type'] == 'Azione':
         assert len(row) == 7
         costs = '' if row[3] == '—' else ','.join(cost_names[v.split()[1]] + '=' + v.split()[0] for v in row[3].split(' + '))
@@ -44,6 +74,8 @@ for token in expected['tokens']:
 entries = expected['cards'] + expected['characters'] + expected['tokens']
 # R07a: descriptive role and self gains, one row per set entry; no effect depends on them.
 role_names = {'DAMAGE', 'DEFENSE', 'RESOURCES', 'COUNTER', 'DISRUPT', 'ITEMS', 'OTHER'}
+regulation_roles = rules_text.split('## R07a — ', 1)[1].split('### Danno nominale', 1)[0]
+assert {m.group(1) for m in re.finditer(r'^\| ([A-Z]+) \| ', regulation_roles, re.M)} == role_names, 'R07a role definitions differ'
 roles = {}
 for line in role_section.split('### Danno nominale', 1)[0].splitlines():
     fields = [part.strip() for part in line.strip('|').split('|')]
@@ -206,9 +238,20 @@ with sqlite3.connect((root / 'server/src/main/resources/cards.sqlite').as_uri() 
     characters = [{'class': r[0], 'name': r[1], 'type': 'Personaggio'} for r in db.execute(
         'select C_REF_CLASS,T_GUI_NAME from CRD003_CHARACTERS order by C_REF_CLASS')]
     assert characters == expected['characters'], 'Character catalog differs from regulation annex'
+    # R07 1.13 (SB-2): every catalog card and character declares the set of its document; the rarity is descriptive,
+    # one of the regulation values or none, and equal to the annex (`rarity`, absent = none).
+    for table in ('CRD001_GUI', 'CRD003_CHARACTERS'):
+        wrong = [r[0] for r in db.execute('select C_REF_CLASS,C_SET from ' + table + ' order by C_REF_CLASS') if r[1] != set_id]
+        assert not wrong, table + ': cards outside the set ' + set_id + ' of the set document: ' + ', '.join(wrong)
+    rarities = [list(r) for r in db.execute('select C_REF_CLASS,C_RARITY from CRD001_GUI order by C_REF_CLASS')]
+    assert all(r[1] in (None, 'COMMON', 'UNCOMMON', 'RARE') for r in rarities), 'Unknown rarity (R07 1.13)'
+    assert rarities == [[card['class'], card.get('rarity')] for card in expected['cards']], 'Rarities differ from the set annex'
     for table, key in [('DCK001_STARTERS', 'starters'), ('DCK002_STARTERS_CH', 'initialCards')]:
         actual = [list(row) for row in db.execute('select * from ' + table + ' order by 1,2')]
         assert actual == expected[key], table + ' differs from regulation annex'
     assert db.execute('pragma integrity_check').fetchone()[0] == 'ok'
     assert not db.execute('pragma foreign_key_check').fetchall()
-print('Regolamento e copia client allineati: 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token; tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; starter conformi alle regole dei mazzi R02 1.12; SQLite integro.')
+print('Regolamento ' + re.search(r'^Versione \*\*([0-9.]+) —', rules_text, re.M).group(1) + ' e ' + set_title + ' ' + set_version
+      + ' allineati alle copie client; regolamento senza carte citate; 39 carte (2 personaggio, 33 azione, 4 oggetto) e 1 token del set;'
+      + ' tipologie, ruoli, danno nominale e importo R07a, testi e starter coerenti; allegato e SQLite nel set ' + set_id
+      + ', rarità ammesse; starter conformi alle regole dei mazzi R02 1.12; SQLite integro.')

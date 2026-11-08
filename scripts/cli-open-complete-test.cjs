@@ -106,6 +106,9 @@ async function main() {
       kinds.push('OUTCOME'); assert.deepStrictEqual(events.map(e=>e.kind),kinds);
       const initial=events[0].data;
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
+      // Regulation 1.13 (SB-2): the set documents loaded by the server, with version and hash.
+      assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
+      assert.strictEqual(initial.versions.sets.base.version,'0.1');
       assert.strictEqual(initial.configuration.botPolicy,'random');
       const human=initial.state.players.find(p=>p.playerId===user);
       assert.strictEqual(initial.state.mode,'open1vCom');

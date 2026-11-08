@@ -1,5 +1,6 @@
 import React,{useEffect,useMemo,useRef,useState} from 'react';
 import source from '../../docs/game-rules.md?raw';
+import setSource from '../../docs/sets/base.md?raw';
 import {PressButton} from './ui.tsx';
 import {parseRules,plain,rulesVersion,type Block,type Inline} from './rules.ts';
 import {canRegister,canSendCode,fieldErrors,hashOf,register,sendCode,type Field,type Route,type SignUpForm} from './signup.ts';
@@ -54,23 +55,37 @@ function Text({inlines}:{inlines:Inline[]}){
 
 const blocks:Block[]=parseRules(source);
 const version=rulesVersion(blocks);
+// Regulation 1.13 (SB-2): the cards are in the set document, shown after the regulation on the same page.
+const setBlocks:Block[]=parseRules(setSource);
+const setVersion=rulesVersion(setBlocks);
+const setHeading=setBlocks.findIndex(b=>b.kind==='heading'&&b.level===1);
+const setName=(()=>{const h=setBlocks[setHeading];return h?.kind==='heading'?h.text.split(' — ').slice(1).join(' — ')||h.text:'Set';})();
 
-/** The rules in force, read from docs/game-rules.md at build time (D10). Headings carry no anchors: the index scrolls. */
+/** Markdown blocks as React; headings register for the index. */
+function Doc({blocks,mark}:{blocks:Block[];mark:(n:number,e:HTMLHeadingElement|null)=>void}){
+ return <>{blocks.map((b,n)=>{
+  if(b.kind==='heading'){const H=`h${Math.min(b.level,4)}` as 'h1';return <H key={n} ref={(e:HTMLHeadingElement|null)=>mark(n,e)}>{b.text}</H>;}
+  if(b.kind==='paragraph')return <p key={n}><Text inlines={b.inlines}/></p>;
+  if(b.kind==='list'){const L=b.ordered?'ol':'ul';return <L key={n}>{b.items.map((it,k)=><li key={k}><Text inlines={it}/></li>)}</L>;}
+  return <div key={n} className="table-scroll" role="region" aria-label={`Tabella: ${b.head.map(plain).join(', ')}`} tabIndex={0}><table>
+   <thead><tr>{b.head.map((c,k)=><th key={k} scope="col" style={{textAlign:b.align[k]}}><Text inlines={c}/></th>)}</tr></thead>
+   <tbody>{b.rows.map((r,k)=><tr key={k}>{r.map((c,j)=><td key={j} style={{textAlign:b.align[j]}}><Text inlines={c}/></td>)}</tr>)}</tbody>
+  </table></div>;
+ })}</>;
+}
+
+/** The rules in force, read at build time (D10): docs/game-rules.md, then the set document docs/sets/base.md.
+ *  Headings carry no anchors: the index scrolls. */
 export function Rules(){
- const refs=useRef(new Map<number,HTMLHeadingElement>());
- const index=useMemo(()=>blocks.flatMap((b,n)=>b.kind==='heading'&&b.level===2?[{n,text:b.text}]:[]),[]);
+ const refs=useRef(new Map<string,HTMLHeadingElement>());
+ const mark=(doc:string)=>(n:number,e:HTMLHeadingElement|null)=>{if(e)refs.current.set(doc+n,e);else refs.current.delete(doc+n);};
+ const index=useMemo(()=>[...blocks.flatMap((b,n)=>b.kind==='heading'&&b.level===2?[{key:'r'+n,text:b.text.split(' — ')[0]}]:[]),
+  ...(setHeading>=0?[{key:'s'+setHeading,text:setName}]:[])],[]);
  return <section className="sheet public rules" aria-label="Regolamento" data-testid="rules">
-  <div className="public-head"><Back/><span className="small">Regolamento {version}</span></div>
-  <nav aria-label="Indice del regolamento" className="rules-index">{index.map(h=><PressButton key={h.n} className="link" onClick={()=>refs.current.get(h.n)?.scrollIntoView({block:'start'})}>{h.text.split(' — ')[0]}</PressButton>)}</nav>
-  <article className="rules-text" data-testid="rules-text">{blocks.map((b,n)=>{
-   if(b.kind==='heading'){const H=`h${Math.min(b.level,4)}` as 'h1';return <H key={n} ref={(e:HTMLHeadingElement|null)=>{if(e)refs.current.set(n,e);else refs.current.delete(n);}}>{b.text}</H>;}
-   if(b.kind==='paragraph')return <p key={n}><Text inlines={b.inlines}/></p>;
-   if(b.kind==='list'){const L=b.ordered?'ol':'ul';return <L key={n}>{b.items.map((it,k)=><li key={k}><Text inlines={it}/></li>)}</L>;}
-   return <div key={n} className="table-scroll" role="region" aria-label={`Tabella: ${b.head.map(plain).join(', ')}`} tabIndex={0}><table>
-    <thead><tr>{b.head.map((c,k)=><th key={k} scope="col" style={{textAlign:b.align[k]}}><Text inlines={c}/></th>)}</tr></thead>
-    <tbody>{b.rows.map((r,k)=><tr key={k}>{r.map((c,j)=><td key={j} style={{textAlign:b.align[j]}}><Text inlines={c}/></td>)}</tr>)}</tbody>
-   </table></div>;
-  })}</article>
+  <div className="public-head"><Back/><span className="small">Regolamento {version} · {setName} {setVersion}</span></div>
+  <nav aria-label="Indice del regolamento" className="rules-index">{index.map(h=><PressButton key={h.key} className="link" onClick={()=>refs.current.get(h.key)?.scrollIntoView({block:'start'})}>{h.text}</PressButton>)}</nav>
+  <article className="rules-text" data-testid="rules-text"><Doc blocks={blocks} mark={mark('r')}/></article>
+  <article className="rules-text" data-testid="set-text" aria-label={setName}><Doc blocks={setBlocks} mark={mark('s')}/></article>
   <Back/>
  </section>;
 }

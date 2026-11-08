@@ -83,7 +83,8 @@ in verticale, mai la pagina in orizzontale.
   Instagram, YouTube, GitHub profilo e due repository, email, PayPal). Testo dei diritti
   come README e CONTRIBUTING: tutti i diritti riservati, nessuna licenza open source.
   Nessuna immagine sponsor.
-- **Regole**: `docs/game-rules.md` importato al build (`?raw`, D10), nessuna terza copia.
+- **Regole**: `docs/game-rules.md` e, dal regolamento 1.13, il documento del set `docs/sets/base.md`
+  importati al build (`?raw`, D10) e mostrati sulla stessa pagina, nessuna terza copia.
   `src/rules.ts` legge solo il sottoinsieme usato (titoli, paragrafi, elenchi, tabelle,
   grassetto, corsivo, codice) e produce dati resi come testo React: HTML grezzo resta
   testo, collegamenti e ancore diventano la sola etichetta, i titoli non hanno `id`.
@@ -600,8 +601,8 @@ iniziali e provoca «Deck unavailable» riscrivendo il deckId del frame in uscit
 (non raggiungibile dalla UI con un solo account); in quella partita senza mosse controlla
 che il menu spieghi il limite R03 (C2b-7).
 `VerifyPublic` (database temporaneo) confronta gli `href` della home con il sorgente del
-debug senza aprirli, il testo delle regole con `docs/game-rules.md` (titoli, revisioni,
-ogni cella delle tabelle, tutte le parole), prova home → regole → home (anche con
+debug senza aprirli, il testo delle regole con `docs/game-rules.md` e quello del set con
+`docs/sets/base.md` (titoli, revisioni, ogni cella delle tabelle, tutte le parole), prova home → regole → home (anche con
 indietro del browser) → accesso → hub → esci → home, la registrazione (devAlice occupato,
 nome nuovo libero, «Invia codice» indisponibile, codice errato, nessun account creato) e,
 a server fermo, errore di rete su registrazione e login; in più home, regole,

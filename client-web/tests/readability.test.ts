@@ -57,7 +57,7 @@ test('statuses, equipment, immunities and timers become chips with a short summa
  assert.equal(new Set(chips.map(x=>x.id)).size,chips.length);
 });
 test('status summaries agree with the multipliers of R07',()=>{
- const r07=readFileSync(new URL('../../docs/game-rules.md',import.meta.url),'utf8').split(/\r?\n/);
+ const r07=readFileSync(new URL('../../docs/sets/base.md',import.meta.url),'utf8').split(/\r?\n/); // card sheets: set document (regulation 1.13)
  for(const [name,card] of [['YOU CARESS ME','CantFeelAnything'],['ONLY A LITTLE DISCOMFORT','LittleRage'],['NO PATIENCE - Damage Intake Boost','Glare'],['MADE OF STONE','MadeOfStone'],['BROKEN BEER','BrokenBeerBottle']]){
   const factor=statusText(name,'').match(/×[\d,]+/)![0],row=r07.find(l=>l.startsWith(`| ${card} |`)&&l.includes('×'))!;assert.ok(row.includes(factor),`${name} ${factor} in R07 ${card}`);}
 });

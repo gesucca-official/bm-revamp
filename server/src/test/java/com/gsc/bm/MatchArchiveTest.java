@@ -140,7 +140,13 @@ class MatchArchiveTest {
         assertThrows(AccessDeniedException.class, () -> reread.export(game.getGameId(), "stranger"));
         assertThrows(AccessDeniedException.class, () -> reread.export("missing", "a"));
         var initialTree = mapper.readTree(initial).path("data");
-        assertEquals("1.12", initialTree.path("versions").path("rulesVersion").asText());
+        assertEquals("1.13", initialTree.path("versions").path("rulesVersion").asText());
+        // Regulation 1.13 (SB-2): the archive also records the version and hash of every set document.
+        var sets = initialTree.path("versions").path("sets");
+        var ids = new java.util.ArrayList<String>(); sets.fieldNames().forEachRemaining(ids::add);
+        assertEquals(List.of("base"), ids);
+        assertEquals("0.1", sets.path("base").path("version").asText());
+        assertTrue(sets.path("base").path("sha256").asText().matches("[0-9a-f]{64}"));
         for (String hash : List.of("codeSha256","rulesSha256","catalogSha256","rulesCatalogSha256")) {
             assertTrue(initialTree.path("versions").path(hash).asText().matches("[0-9a-f]{64}"));
         }

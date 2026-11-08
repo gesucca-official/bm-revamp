@@ -47,14 +47,19 @@ async function stopServer(){
 }
 if(await fetch(`${api}/sign-in/validate`,{method:'POST'}).then(()=>true,()=>false))throw new Error('port 8080 is in use: stop the other server first');
 
-// --- Expected values from the sources: debug home links and docs/game-rules.md ---
+// --- Expected values from the sources: debug home links, docs/game-rules.md and (regulation 1.13) the set document ---
 const debugHome=(await readFile(join(repo,'client-debug/src/app/home/home.component.ts'),'utf8'))+(await readFile(join(repo,'client-debug/src/app/home/home.component.html'),'utf8'));
 const debugLinks=[...new Set([...debugHome.matchAll(/'((?:https:\/\/|mailto:)[^']+)'/g)].map(m=>m[1]))].sort();
-const rules=(await readFile(join(repo,'docs/game-rules.md'),'utf8')).replace(/^﻿/,'').replace(/\r\n?/g,'\n');
 const strip=s=>s.replace(/\*\*|\*|`/g,'').replace(/\[([^\]]*)\]\([^)]*\)/g,'$1').trim();
-const sourceHeadings=[...rules.matchAll(/^(#{1,6}) (.*)$/gm)].map(m=>`${m[1].length} ${m[2].trim()}`);
-const sourceRevisions=[...rules.matchAll(/^- \*\*(\d+\.\d+) —/gm)].map(m=>m[1]);
-const sourceTables=[];{let t=null;for(const l of rules.split('\n')){if(l.startsWith('|')){if(/^\|[-:| ]+\|$/.test(l))continue;const cells=l.trim().replace(/^\||\|$/g,'').split('|').map(c=>strip(c));if(!t){t=[];sourceTables.push(t);}t.push(cells);}else t=null;}}
+const source=async path=>{
+ const text=(await readFile(join(repo,path),'utf8')).replace(/^﻿/,'').replace(/\r\n?/g,'\n');
+ const tables=[];{let t=null;for(const l of text.split('\n')){if(l.startsWith('|')){if(/^\|[-:| ]+\|$/.test(l))continue;const cells=l.trim().replace(/^\||\|$/g,'').split('|').map(c=>strip(c));if(!t){t=[];tables.push(t);}t.push(cells);}else t=null;}}
+ return {text,headings:[...text.matchAll(/^(#{1,6}) (.*)$/gm)].map(m=>`${m[1].length} ${m[2].trim()}`),revisions:[...text.matchAll(/^- \*\*(\d+\.\d+) —/gm)].map(m=>m[1]),
+  version:/Versione \*\*(\S+) —/.exec(text)[1],tables};
+};
+const ruleSource=await source('docs/game-rules.md'),setSource=await source('docs/sets/base.md');
+const rules=ruleSource.text,sourceHeadings=ruleSource.headings,sourceRevisions=ruleSource.revisions,sourceTables=ruleSource.tables;
+const setName=/^# Botte Micidiali — (.+)$/m.exec(setSource.text)[1];
 const words=s=>s.replace(/\*\*|\*|`/g,'').replace(/[#|]|^- |^\d+\. /gm,' ').split(/\s+/).filter(w=>w&&!/^:?-+:?$/.test(w));
 
 // --- Browser ---
@@ -104,35 +109,54 @@ try{
  // --- P03: rules from docs/game-rules.md ---
  await page.getByTestId('go-rules').click();await page.getByTestId('rules-text').waitFor();
  assert.equal(await hash(),'#/regole');
- const dom=await page.evaluate(()=>{const r=document.querySelector('[data-testid=rules-text]');
+ const readDoc=id=>page.evaluate(id=>{const r=document.querySelector(`[data-testid=${id}]`);
   return {headings:[...r.querySelectorAll('h1,h2,h3,h4')].map(h=>`${h.tagName[1]} ${h.textContent.trim()}`),
    tables:[...r.querySelectorAll('table')].map(t=>[...t.rows].map(row=>[...row.cells].map(c=>c.textContent.trim()))),
    revisions:[...r.querySelectorAll(':scope > ul')].at(-1)?.children.length??0,
    revisionVersions:[...([...r.querySelectorAll(':scope > ul')].at(-1)?.children??[])].map(li=>/^(\d+\.\d+) —/.exec(li.textContent)?.[1]??null),
    anchors:r.querySelectorAll('a').length,ids:r.querySelectorAll('[id]').length,html:[...r.querySelectorAll('script,iframe,img')].length,
-   text:r.innerText,head:document.querySelector('.rules .public-head').innerText,index:[...document.querySelectorAll('.rules-index button')].map(b=>b.textContent)};});
- const r07=dom.tables.findIndex(t=>t[0].join('|')==='Carta|Tipologia|Sottotipo|Costo|Priorità|Bersaglio|Effetto in ordine');
- const r07a=dom.tables.findIndex(t=>t[0].join('|')==='Carta|Ruolo|Guadagni a sé');
+   text:r.innerText,head:document.querySelector('.rules .public-head').innerText,index:[...document.querySelectorAll('.rules-index button')].map(b=>b.textContent)};},id);
+ const dom=await readDoc('rules-text'),setDom=await readDoc('set-text');
+ // Regulation 1.13: the card sheets (formerly the R07 and R07a tables) are in the set document.
+ const r07=setDom.tables.findIndex(t=>t[0].join('|')==='Carta|Tipologia|Sottotipo|Costo|Priorità|Bersaglio|Effetto in ordine');
+ const r07a=setDom.tables.findIndex(t=>t[0].join('|')==='Carta|Ruolo|Guadagni a sé');
  const rulesCheck={version:/Regolamento (\S+)/.exec(dom.head)?.[1],headings:dom.headings.length,headingsEqual:JSON.stringify(dom.headings)===JSON.stringify(sourceHeadings),
   index:dom.index,revisions:dom.revisionVersions,tables:dom.tables.map(t=>t.length),tablesEqual:JSON.stringify(dom.tables)===JSON.stringify(sourceTables),
-  r07Rows:dom.tables[r07]?.length-1,r07aRows:dom.tables[r07a]?.length-1,anchors:dom.anchors,ids:dom.ids,rawHtml:dom.html,
+  r07Rows:setDom.tables[r07]?.length-1,r07aRows:setDom.tables[r07a]?.length-1,anchors:dom.anchors,ids:dom.ids,rawHtml:dom.html,
   textWords:words(dom.text).length,sourceWords:words(rules.replace(/^\|[-:| ]+\|$/gm,'')).length,layout:await layout()};
  step('rules',rulesCheck);
  assert.equal(rulesCheck.version,/Versione \*\*(\S+) —/.exec(rules)[1]);
  assert.ok(rulesCheck.headingsEqual,'headings equal to docs/game-rules.md');
- assert.deepEqual(dom.index,['R00','R01','R01a','R02','R03','R04','R05','R06','R07','R07a','R08','R09','Revisioni']);
+ assert.deepEqual(dom.index,['R00','R01','R01a','R02','R03','R04','R05','R06','R07','R07a','R08','R09','Revisioni',setName]);
  assert.deepEqual(rulesCheck.revisions,sourceRevisions);
  assert.ok(rulesCheck.tablesEqual,'every table cell equal to the source');
- assert.ok(r07>=0&&r07a>=0,'R07 and R07a tables present');
+ assert.ok(r07>=0&&r07a>=0,'card sheets and R07a values present in the set document');
+ assert.ok(!dom.tables.some(t=>t[0][0]==='Carta'),'no card table left in the regulation');
  assert.equal(rulesCheck.anchors,0);assert.equal(rulesCheck.ids,0);assert.equal(rulesCheck.rawHtml,0);
  assert.deepEqual(words(dom.text),words(rules.replace(/^\|[-:| ]+\|$/gm,'')),'full text equal to the source, markup aside');
  okLayout(rulesCheck.layout);
+ // The set document, after the regulation, with the same checks (SB-2).
+ const setCheck={version:new RegExp(`${setName} (\\S+)`).exec(dom.head)?.[1],headings:setDom.headings.length,headingsEqual:JSON.stringify(setDom.headings)===JSON.stringify(setSource.headings),
+  revisions:setDom.revisionVersions,tables:setDom.tables.map(t=>t.length),tablesEqual:JSON.stringify(setDom.tables)===JSON.stringify(setSource.tables),
+  anchors:setDom.anchors,ids:setDom.ids,rawHtml:setDom.html,textWords:words(setDom.text).length,sourceWords:words(setSource.text.replace(/^\|[-:| ]+\|$/gm,'')).length};
+ step('setDocument',setCheck);
+ assert.equal(setCheck.version,setSource.version);
+ assert.ok(setCheck.headingsEqual,'headings equal to docs/sets/base.md');
+ assert.deepEqual(setCheck.revisions,setSource.revisions);
+ assert.ok(setCheck.tablesEqual,'every set table cell equal to the source');
+ assert.equal(setCheck.anchors,0);assert.equal(setCheck.ids,0);assert.equal(setCheck.rawHtml,0);
+ assert.deepEqual(words(setDom.text),words(setSource.text.replace(/^\|[-:| ]+\|$/gm,'')),'full set text equal to the source, markup aside');
  await shot('02-rules');
  // The index scrolls to the section without changing the hash; the R07a table is readable there.
  await page.locator('.rules-index button',{hasText:/^R07a$/}).click();await page.waitForTimeout(200);
  const r07aView=await page.evaluate(()=>{const h=[...document.querySelectorAll('.rules-text h2')].find(x=>x.textContent.startsWith('R07a'));const s=document.querySelector('.sheet').getBoundingClientRect();const b=h.getBoundingClientRect();return {top:Math.round(b.top-s.top),visible:b.top>=s.top-1&&b.bottom<=s.bottom+1,hash:location.hash};});
  step('rulesIndex',r07aView);assert.ok(r07aView.visible);assert.equal(r07aView.hash,'#/regole');
  await shot('03-rules-r07a');
+ // The last index entry scrolls to the set document, still without changing the hash.
+ await page.locator('.rules-index button',{hasText:setName}).click();await page.waitForTimeout(200);
+ const setView=await page.evaluate(()=>{const h=document.querySelector('[data-testid=set-text] h1');const s=document.querySelector('.sheet').getBoundingClientRect();const b=h.getBoundingClientRect();return {top:Math.round(b.top-s.top),visible:b.top>=s.top-1&&b.bottom<=s.bottom+1,hash:location.hash};});
+ step('rulesIndexSet',setView);assert.ok(setView.visible);assert.equal(setView.hash,'#/regole');
+ await shot('03b-rules-set');
  // Browser back returns to the home; forward to the rules; the in-page button goes home too.
  await page.goBack();await page.getByTestId('home').waitFor();const back=await hash();
  await page.goForward();await page.getByTestId('rules-text').waitFor();

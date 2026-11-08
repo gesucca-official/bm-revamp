@@ -53,6 +53,8 @@ async function main() {
       const initial=events[0].data;
       assert.strictEqual(initial.configuration.botPolicy,'random');
       assert.strictEqual(initial.versions.rulesVersion,process.env.BM_RULES_VERSION);
+      assert.deepStrictEqual(initial.versions.sets,JSON.parse(process.env.BM_SETS));
+      assert.strictEqual(initial.versions.sets.base.version,'0.1');
       assert.strictEqual(initial.state.players[0].initialDeckDrawOrder.length,match===0?20:0);
       for(const key of ['codeSha256','rulesSha256','catalogSha256','rulesCatalogSha256']) assert(/^[a-f0-9]{64}$/.test(initial.versions[key]),key);
       assert.strictEqual(initial.state.players[0].character,user==='i13Junkie'?'junkie.character.ToxicJunkie':'bruiser.character.BigBadBruiser');

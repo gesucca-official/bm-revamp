@@ -1,10 +1,11 @@
 # Contribuire a Botte Micidiali
 
 Prima di lavorare leggere [AGENTS.md](AGENTS.md), la [guida locale](docs/setup.md)
-e il [regolamento](docs/game-rules.md), fonte normativa del gioco.
+e il [regolamento](docs/game-rules.md) con i documenti di set ([Set Base](docs/sets/base.md)),
+fonte normativa del gioco.
 
 Ogni cambiamento deliberato al comportamento richiede prima una versione e una
-motivazione nel regolamento, poi test, codice, descrizioni SQLite e copia client
+motivazione nel regolamento (sistema) o nel documento del set (carte), poi test, codice, descrizioni SQLite e copia client
 nella stessa modifica. Non aggiornare gli attesi per accettare regressioni.
 
 Prima di proporre una modifica eseguire dalla radice:

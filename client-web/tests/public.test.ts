@@ -8,6 +8,11 @@ import {RestError, signUpApi} from '../src/net/rest.ts';
 const source = readFileSync(new URL('../../docs/game-rules.md', import.meta.url), 'utf8');
 const blocks = parseRules(source);
 const headings = (level: number) => blocks.flatMap(b => b.kind === 'heading' && b.level === level ? [b.text] : []);
+// Regulation 1.13 (SB-2): the cards are in the set document, shown on the same page after the regulation.
+const setSource = readFileSync(new URL('../../docs/sets/base.md', import.meta.url), 'utf8');
+const setBlocks = parseRules(setSource);
+type Table = Extract<Block, {kind: 'table'}>;
+const tablesOf = (all: Block[]) => all.filter((b): b is Table => b.kind === 'table');
 
 test('rules: every heading, the version and the revisions of docs/game-rules.md', () => {
   const expected = [...source.matchAll(/^(#{1,6}) (.*)$/gm)].map(m => `${m[1].length} ${m[2]}`);
@@ -19,17 +24,33 @@ test('rules: every heading, the version and the revisions of docs/game-rules.md'
   assert.deepEqual(revisions.items.map(i => /^(\d+\.\d+) —/.exec(plain(i))?.[1]), [...source.matchAll(/^- \*\*(\d+\.\d+) —/gm)].map(m => m[1]));
 });
 
-test('rules: tables keep every row and cell (R07, R07a), with the alignment of the separator', () => {
-  const tables = blocks.filter((b): b is Extract<Block, {kind: 'table'}> => b.kind === 'table');
-  assert.equal(tables.length, source.split('\n').filter(l => /^\|-/.test(l)).length);
-  const rows = source.split('\n').filter(l => l.startsWith('|') && !/^\|-/.test(l)).length;
-  assert.equal(tables.reduce((n, t) => n + 1 + t.rows.length, 0), rows);
-  for (const t of tables) for (const r of t.rows) assert.equal(r.length, t.head.length);
-  const characters = tables.find(t => t.head.length > 3 && plain(t.head[3]) === 'HEALTH')!;
+test('set document: every heading, the version and the revisions of docs/sets/base.md', () => {
+  const expected = [...setSource.matchAll(/^(#{1,6}) (.*)$/gm)].map(m => `${m[1].length} ${m[2]}`);
+  assert.deepEqual(setBlocks.flatMap(b => b.kind === 'heading' ? [`${b.level} ${b.text}`] : []), expected);
+  assert.deepEqual(setBlocks.flatMap(b => b.kind === 'heading' && b.level === 2 ? [b.text.split(' — ')[0]] : []), ['S1', 'S2', 'S3', 'S4', 'S5', 'Revisioni']);
+  assert.equal(rulesVersion(setBlocks), /Versione \*\*(\S+) —/.exec(setSource)![1]);
+  const revisions = setBlocks.at(-1) as Extract<Block, {kind: 'list'}>;
+  assert.equal(revisions.kind, 'list');
+  assert.deepEqual(revisions.items.map(i => /^(\d+\.\d+) —/.exec(plain(i))?.[1]), [...setSource.matchAll(/^- \*\*(\d+\.\d+) —/gm)].map(m => m[1]));
+});
+
+test('rules and set document: tables keep every row and cell (cards in the set, R07a definitions in the rules), with the alignment', () => {
+  for (const [all, text] of [[blocks, source], [setBlocks, setSource]] as const) {
+    const tables = tablesOf(all);
+    assert.equal(tables.length, text.split('\n').filter(l => /^\|-/.test(l)).length);
+    const rows = text.split('\n').filter(l => l.startsWith('|') && !/^\|-/.test(l)).length;
+    assert.equal(tables.reduce((n, t) => n + 1 + t.rows.length, 0), rows);
+    for (const t of tables) for (const r of t.rows) assert.equal(r.length, t.head.length);
+  }
+  const characters = tablesOf(setBlocks).find(t => t.head.length > 3 && plain(t.head[3]) === 'HEALTH')!;
   assert.deepEqual(characters.rows.map(r => plain(r[2])), ['Spazienzio de la Ucciso', 'Tossico del Serraglio']);
   assert.equal(characters.align[3], 'right');
-  const roles = tables.find(t => t.head.length === 3 && plain(t.head[1]) === 'Ruolo' && plain(t.head[2]) === 'Guadagni a sé')!;
+  const roles = tablesOf(setBlocks).find(t => t.head.length === 3 && plain(t.head[1]) === 'Ruolo' && plain(t.head[2]) === 'Guadagni a sé')!;
   assert.ok(roles.rows.some(r => plain(r[0]) === 'BigBadBruiser'));
+  assert.ok(tablesOf(setBlocks).some(t => plain(t.head[6] ?? []) === 'Effetto in ordine'), 'R07 action sheets in the set document');
+  const definitions = tablesOf(blocks).find(t => plain(t.head[0]) === 'Ruolo' && plain(t.head[1]) === 'Significato')!;
+  assert.equal(definitions.rows.length, 7);
+  assert.ok(!tablesOf(blocks).some(t => plain(t.head[0]) === 'Carta'), 'no card table left in the regulation');
 });
 
 test('rules: the full text survives (paragraphs, lists, cells), markup aside', () => {
@@ -37,6 +58,7 @@ test('rules: the full text survives (paragraphs, lists, cells), markup aside', (
     : b.kind === 'list' ? b.items.map(plain).join(' ') : [...b.head, ...b.rows.flat()].map(plain).join(' ');
   const words = (s: string) => s.replace(/[*`]/g, '').replace(/[#|]|^- |^\d+\. /gm, ' ').split(/\s+/).filter(w => w && !/^-+:?$/.test(w) && !/^:?-+:?$/.test(w));
   assert.deepEqual(words(blocks.map(text).join(' ')), words(source.replace(/^\|[-:| ]+\|$/gm, '')));
+  assert.deepEqual(words(setBlocks.map(text).join(' ')), words(setSource.replace(/^\|[-:| ]+\|$/gm, '')));
 });
 
 test('inline: bold, italic and code; links keep the label; raw HTML stays text', () => {

@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import static com.gsc.bm.repo.external.MatchEventRepository.sha256;
 
-/** Identifies the actual loaded artifact/classes, rules and catalog, including dirty builds. */
+/** Identifies the actual loaded artifact/classes, rules, set documents (regulation 1.13) and catalog, including dirty builds. */
 @Component
 public class MatchVersions {
     private final Map<String, Object> versions;
@@ -37,9 +37,27 @@ public class MatchVersions {
                 code = org.apache.commons.codec.binary.Hex.encodeHexString(digest.digest());
             } else { code = sha256(Files.readAllBytes(location)); }
             versions = Collections.unmodifiableMap(MatchSnapshot.fields("codeSha256", code, "codeFormat", Files.isDirectory(location) ? "sorted-class-files" : "jar",
-                    "rulesVersion", version.group(1), "rulesSha256", sha256(rulesText.getBytes(StandardCharsets.UTF_8)),
+                    "rulesVersion", version.group(1), "rulesSha256", sha256(rulesText.getBytes(StandardCharsets.UTF_8)), "sets", sets(),
                     "catalogSha256", sha256(resource("cards.sqlite")), "rulesCatalogSha256", sha256(resource("analysis/rules-catalog.json"))));
         } catch (Exception e) { throw new IllegalStateException("Cannot identify match versions", e); }
+    }
+    /** R00/R07 1.13: id (file name) to version and SHA-256 (UTF-8, CRLF folded to LF) of every packaged set document. */
+    private static Map<String, Object> sets() throws java.io.IOException {
+        var found = new org.springframework.core.io.support.PathMatchingResourcePatternResolver(MatchVersions.class.getClassLoader())
+                .getResources("classpath:analysis/sets/*.md");
+        Map<String, Object> sets = new TreeMap<>();
+        for (var document : found) {
+            String name = Objects.requireNonNull(document.getFilename());
+            String text;
+            try (var in = document.getInputStream()) { text = new String(in.readAllBytes(), StandardCharsets.UTF_8).replace("\r\n", "\n"); }
+            var version = java.util.regex.Pattern.compile("(?m)^Versione \\*\\*([0-9.]+) —").matcher(text);
+            if (!version.find()) { throw new IllegalStateException("Missing version in set document " + name); }
+            String id = name.substring(0, name.length() - ".md".length());
+            if (sets.put(id, Collections.unmodifiableMap(MatchSnapshot.fields("version", version.group(1),
+                    "sha256", sha256(text.getBytes(StandardCharsets.UTF_8))))) != null) { throw new IllegalStateException("Duplicate set document " + id); }
+        }
+        if (sets.isEmpty()) { throw new IllegalStateException("Missing set documents"); }
+        return Collections.unmodifiableMap(sets);
     }
     private byte[] resource(String name) throws java.io.IOException {
         try (var in = new ClassPathResource(name).getInputStream()) { return in.readAllBytes(); }
