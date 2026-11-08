@@ -1,6 +1,6 @@
 # SB-13 — Tossico del Serraglio: bozza dello starter e giro coi bot: rapporto
 
-**Fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Lo starter del Tossico, **«Tutto è droga»**, è nella bozza del Set
+**Fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](../../set-base-plan.md#decisioni-del-proprietario)). Lo starter del Tossico, **«Tutto è droga»**, è nella bozza del Set
 Base come nella [griglia](../../design/set-base/griglia.md), senza scostamenti nella composizione. In tre giri coi bot passa da 0,483 contro
 Spazienzio e **0,403 contro Mara** a **0,529 e 0,479**, con lo specchio a 0,507. Invarianti a zero in modo stretto dopo ogni giro.
 

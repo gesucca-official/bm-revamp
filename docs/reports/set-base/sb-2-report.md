@@ -1,6 +1,6 @@
 # SB-2 — Separazione fra regolamento e set: rapporto
 
-**Fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Il regolamento passa alla **1.13** e contiene solo le regole
+**Fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](../../set-base-plan.md#decisioni-del-proprietario)). Il regolamento passa alla **1.13** e contiene solo le regole
 generali; le carte passano al primo documento di set, [`docs/sets/base.md`](../../sets/base.md), **Set Base 0.1**, con versione e
 revisioni proprie. Il regolamento governa il sistema, la scheda governa la carta e deroga solo se lo dice esplicitamente (R00).
 

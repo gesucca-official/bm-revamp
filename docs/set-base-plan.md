@@ -269,7 +269,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | Fase | Blocco | Contenuto | Dipende da |
 |---|---|---|---|
 | Fondamenta | SB-1 | Regole dei mazzi | — (anticipato da D40; fatto e approvato) |
-| | SB-2 | Separazione fra regolamento e set | SB-1 (anticipato da D42) |
+| | SB-2 | Separazione fra regolamento e set | SB-1 (anticipato da D42; fatto e approvato) |
 | Strumenti | SB-3 | Runner senza server e seme | — |
 | | SB-4 | Vista limitata e bot euristici | SB-3 |
 | | SB-5 | Prova del formato dati | SB-3 |
@@ -285,7 +285,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-11b | Bozza degli starter base | SB-11a |
 | | SB-12a | Giro coi bot sugli starter base | SB-11b |
 | | SB-12b | Prova umana degli starter base | SB-8, SB-12a |
-| | SB-13 | Tossico: bozza e giro | SB-12a (anticipato da D42; prima SB-12) |
+| | SB-13 | Tossico: bozza e giro | SB-12a (anticipato da D42; fatto e approvato) |
 | | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 |
 | | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 |
 | | SB-16 | Prova umana degli avanzati | SB-15 |
@@ -346,7 +346,7 @@ pubblica del regolamento (`public.tsx`, `rules.ts`) mostra R07 e R07a, e `verify
 niente modifiche a `client-web/src/style.css`, `readability.ts`, `scene.ts`, `table.tsx` (C4-10, C4-11, C4-8a; i commenti che citano R07 restano);
 `verify-public.mjs` e ogni altro strumento di verifica toccato pushati prima che parta C4-8a; dopo il pull l'altra macchina rifà il jar.
 
-**SB-2 fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Fase A approvata con «vanno bene tutte le raccomandazioni». Regolamento **1.13**: R00 con la precedenza fra regolamento e documenti di set, R07 «Carte e documenti di set» con convenzioni e rarità, R07a con le sole definizioni; R04 e R05 senza citazioni di carte, con lo stesso esito sulle carte di oggi (la durata 3 di MadeOfStone passa alla scheda). Documento del set [`docs/sets/base.md`](sets/base.md), **Set Base 0.1**, con le 39 carte e il token di prima; colonne `C_SET` e `C_RARITY` (vuota) nel catalogo, allegato del set, descrizioni «Riferimento: Set Base 0.1.»; archivio con `versions.sets`; `check-rules.py` rifiuta i disallineamenti fra documento, allegato e catalogo; pagina pubblica e `VerifyPublic` col set. [Rapporto SB-2](reports/set-base/sb-2-report.md).
+**SB-2 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](#decisioni-del-proprietario)). Fase A approvata con «vanno bene tutte le raccomandazioni». Regolamento **1.13**: R00 con la precedenza fra regolamento e documenti di set, R07 «Carte e documenti di set» con convenzioni e rarità, R07a con le sole definizioni; R04 e R05 senza citazioni di carte, con lo stesso esito sulle carte di oggi (la durata 3 di MadeOfStone passa alla scheda). Documento del set [`docs/sets/base.md`](sets/base.md), **Set Base 0.1**, con le 39 carte e il token di prima; colonne `C_SET` e `C_RARITY` (vuota) nel catalogo, allegato del set, descrizioni «Riferimento: Set Base 0.1.»; archivio con `versions.sets`; `check-rules.py` rifiuta i disallineamenti fra documento, allegato e catalogo; pagina pubblica e `VerifyPublic` col set. [Rapporto SB-2](reports/set-base/sb-2-report.md).
 
 **Perimetro.** Nuova versione del regolamento secondo la [struttura concordata](#struttura-per-set-ed-espansioni): R07 e R07a passano a un
 documento per il set attuale; R04 e R05 si ripuliscono dalle citazioni di carte senza cambiarne il senso. `check-rules.py`, allegato,
@@ -602,7 +602,7 @@ Un blocco per personaggio, nell'ordine **Tossico del Serraglio, Pino l'Ultimo Gi
 base stabili sono quelli della bozza approvata in SB-12a (D41). Se SB-12b cambierà gli starter base, il giro del Tossico si rilancia contro i nuovi.
 SB-14 resta dopo SB-13; se e quando anticiparlo prima di SB-12b lo decide il proprietario.
 
-**SB-13 fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Lo starter del Tossico, **«Tutto è droga»**, è nella bozza come
+**SB-13 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](#decisioni-del-proprietario)): numeri e nome dello starter approvati; specchio lungo e Mescolone che toglie l'immunità propria restano fino alla prova umana degli avanzati (SB-16). Lo starter del Tossico, **«Tutto è droga»**, è nella bozza come
 nella griglia, senza blocchi da dividere: ogni carta si scrive coi passi di oggi o con le classi Java esistenti. Tre giri coi bot (il massimo
 di Q5), circa 75 minuti di calcolo su un tetto di 2 ore; correzioni decise con la delega di D38, solo numeri del Tossico.
 - **Giri.** 1: la griglia con la salute di SB-9 meno 15 (85): 0,483 contro Spazienzio, **0,403 contro Mara**, carte da 10 T morte in mano per
@@ -833,6 +833,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D40 | Divisione di SB-12 e anticipo di SB-1 | 7 novembre 2026, con le parole del proprietario: «Sì, entrambi». **SB-12 si divide** in SB-12a (giro coi bot sugli starter base, dipende da SB-11b) e SB-12b (prova umana, dipende da SB-8 e SB-12a). **SB-1 è anticipato** in parallelo a C4, che si è allungato con C4-10 e C4-11, perché è il primo anello verso SB-8 e la prova umana; paletti: niente `style.css`, `verify-decks.mjs` pushato prima di C4-8a, jar rifatto sull'altra macchina dopo il pull. SB-13 resta dopo SB-12 intero; se la prova umana tarda, il proprietario può decidere di anticiparlo dopo SB-12a. Precisa D22 e D30 |
 | D41 | Correzioni degli starter base (SB-12a) | 7 novembre 2026, con le parole del proprietario: «Approvo, anche +6 A». Correzioni decise nei tre giri (Q5) con la delega di D38 e approvate: salute iniziale di **Spazienzio 85** e di **Mara 80**; costi di Mara −5 A su Cinghiata, Sgommata, Slalom, Paraurti e Sputo (D38); **Sgommata 25 CUT**. In più, **MAR-BO2 da +8 a +6 A**: la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 (precisa B2). Steal, parate e contromosse restano negli starter: le varianti mostrano che sono i bot a giocarle male. Restano raccomandazioni: scala della salute degli altri personaggi in SB-13, patte e Steal da guardare in SB-12b. Precisa D34(5), D36, D38 e B2 |
 | D42 | Approvazione di SB-1, anticipo di SB-13 e SB-2 | 8 novembre 2026, con le parole del proprietario: «Sì, entrambi», alla domanda «Approvi SB-1 e anticipiamo SB-13 insieme a SB-2?». **SB-1 approvato** (regolamento 1.12, Q1–Q6). **SB-13 anticipato** dopo SB-12a: la prova umana degli starter base aspetta SB-2, SB-6b e SB-8, e gli starter della bozza approvata (D41) sono la base stabile; se SB-12b li cambierà, il giro del Tossico si rilancia. **SB-2 anticipato** in parallelo a C4, con fase A che si ferma sull'inventario di ciò che tocca nel client; paletti: niente `style.css`, `readability.ts`, `scene.ts`, `table.tsx`; strumenti di verifica toccati pushati prima di C4-8a; jar rifatto sull'altra macchina dopo il pull. Precisa D30 e D40 |
+| D43 | Approvazione di SB-2 e SB-13 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-2 e SB-13 con le mie raccomandazioni?». **SB-2 approvato:** regolamento 1.13 con le sole regole generali e Set Base 0.1 in `docs/sets/base.md` (Q1–Q9 della fase A). **SB-13 approvato** con le raccomandazioni della regia: (1) correzioni del Tossico salute 80, T iniziale 20, Tossicone Scatarrante 8 POISON, Raschiare il fondo +7 T; (2) nome dello starter «Tutto è droga»; (3) specchio lungo (16,6 turni, 22% di patte) e mazzo che si esaurisce spesso tenuti senza ridisegno fino alla prova umana degli avanzati (SB-16), perché i bot non giocano il travaso; (4) il Mescolone che toglie anche l'immunità propria resta per la prova umana, come le contromosse in SB-12a. Se la prova umana trova il Tossico forte, la prima leva è la T iniziale. Precisa D38 e D41 |
 
 ## Decisioni ancora aperte
 
