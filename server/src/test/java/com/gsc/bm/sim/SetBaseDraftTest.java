@@ -37,16 +37,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * per ogni coppia di stili finiscono senza errori, ogni meccanica di base compare in uno dei due mazzi, le durate seguono R05 e i nomi
  * delle carte di Spazienzio sono in maiuscolo. SB-12a: la bozza porta i valori scelti nei giri coi bot. SB-13: lo starter del Tossico
  * «Tutto è droga», con le correzioni dei suoi giri. SB-14: lo starter di Pino «Chiude quando dico io», con la classe che spende tutta la
- * L (B1). SB-15: la bozza nel formato sb-6b/1 con le rarità della griglia. Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
+ * L (B1). SB-15: la bozza nel formato sb-6b/1 con le rarità della griglia, e lo starter di Gigi «Intervento sul posto», con la classe
+ * che conta gli oggetti (D35). Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
  * La bozza cresce blocco dopo blocco: i controlli sull'insieme (personaggi, mazzi, bound, partite del banco) contano tutti gli starter;
  * quelli che riguardano i soli starter base (copertura delle meccaniche, correzioni di SB-12a) usano {@link #BASE_STARTERS}.
  */
 class SetBaseDraftTest {
     static final String RESOURCE = "/set-base/bozza.json";
     static final String SPAZIENZIO = "bruiser.character.BigBadBruiser", MARA = "base.character.Mara", TOSSICO = "junkie.character.ToxicJunkie",
-            PINO = "base.character.Pino";
+            PINO = "base.character.Pino", GIGI = "base.character.Gigi";
     static final List<String> BASE_STARTERS = List.of("starter-spazienzio", "starter-mara");
-    static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino");
+    static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi");
 
     private static Draft draft;
     private static JsonNode json;
@@ -71,12 +72,13 @@ class SetBaseDraftTest {
 
     @Test
     void theDraftLoadsWithTheTwoStartersAndAllTheirCards() {
-        // SB-13 aggiunge il Tossico e SB-14 Pino: quattro personaggi e quattro starter, ciascuno con la sua terza bound fuori dallo starter.
-        assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO, PINO), draft.characterIds());
+        // SB-13 aggiunge il Tossico, SB-14 Pino e SB-15 Gigi: cinque personaggi e cinque starter, ciascuno con la sua terza bound fuori dallo
+        // starter.
+        assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO, PINO, GIGI), draft.characterIds());
         assertEquals(new TreeSet<>(STARTERS), new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
         for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
-                "base.pino.bound.Coccio")) {
+                "base.pino.bound.Coccio", "base.gigi.bound.Lima")) {
             assertTrue(draft.cardBindings().contains(third), third);
             assertFalse(draft.deckCards().contains(third), third + " non va negli starter");
         }
@@ -119,8 +121,8 @@ class SetBaseDraftTest {
                 BoundCap.Params.DEFAULT, null));
         assertEquals(0L, report.checks.total(), report.failures());
         assertEquals(0L, report.boundViolations(), report.failures());
-        assertEquals(12, report.bounds.size(), "le dodici bound della bozza, comprese le terze (tre per personaggio)");
-        assertEquals(10L * 9 * 12, report.games(), "dieci coppie di mazzi fra quattro starter");
+        assertEquals(15, report.bounds.size(), "le quindici bound della bozza, comprese le terze (tre per personaggio)");
+        assertEquals(15L * 9 * 12, report.games(), "quindici coppie di mazzi fra cinque starter");
         assertTrue(report.checks.seatTurns > report.games() * 2, "i turni sono controllati");
     }
 
@@ -130,7 +132,7 @@ class SetBaseDraftTest {
         Map<String, BotPolicy> styles = PlaygroundTest.styles();
         Bench.Report report = Bench.run(draft, new Bench.Settings(2, 7_300_000L, new ArrayList<>(draft.deckIds()), styles, 2,
                 BoundCap.Params.DEFAULT, null));
-        assertEquals(10L * styles.size() * styles.size() * 2, report.games(), "dieci coppie di mazzi fra quattro starter");
+        assertEquals(15L * styles.size() * styles.size() * 2, report.games(), "quindici coppie di mazzi fra cinque starter");
         assertEquals(0L, report.checks.total(), report.failures());
         for (Bench.Cell cell : report.cells) assertEquals(0L, cell.tally.limits, cell.deckA + " contro " + cell.deckB);
     }
@@ -183,7 +185,10 @@ class SetBaseDraftTest {
                     checked++;
                 }
         }
-        assertEquals(8, checked, "Glare, MadeOfStone, Giubbotto, le due parate da due stati e il Bancone di Pino (SB-14)");
+        assertEquals(12, checked, "Glare, MadeOfStone, Giubbotto, le due parate da due stati, il Bancone di Pino (SB-14); Sotto il cofano "
+                + "(due stati), Guanti e Casco di Gigi (SB-15)");
+        assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
+        assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
         assertEquals(3, card("bruiser.MadeOfStone").get("self").get(0).get("turns").asInt());
     }
@@ -212,8 +217,8 @@ class SetBaseDraftTest {
     void theStartersCarryTheSb12aCorrections() {
         Map<String, Integer> health = new LinkedHashMap<>();
         for (JsonNode c : json.get("characters"))
-            if (!Set.of(TOSSICO, PINO).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
-        assertEquals(Map.of(SPAZIENZIO, 85, MARA, 80), health, "i due personaggi base; Tossico e Pino hanno il loro test");
+            if (!Set.of(TOSSICO, PINO, GIGI).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
+        assertEquals(Map.of(SPAZIENZIO, 85, MARA, 80), health, "i due personaggi base; Tossico, Pino e Gigi hanno il loro test");
         Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 5, "base.mara.Sgommata", 15, "base.mara.Slalom", 10,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
         alertnessCosts.forEach((binding, cost) -> {
@@ -553,7 +558,8 @@ class SetBaseDraftTest {
         assertEquals(20, cards.values().stream().mapToInt(Integer::intValue).sum());
         assertEquals(starter, base.cardsOf(spec.get(0)), "lo starter resta com'è");
         Listino listino = new Listino(base, new Listino.Params(1, 1, 1, 1), heuristic());
-        assertEquals(10, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati")).count(), "tre bound e due sonde, Tossico e Pino");
+        assertEquals(15, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati")).count(),
+                "tre bound e due sonde per Tossico, Pino e Gigi (SB-15)");
         assertEquals(5, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati") && c.context.equals("starter-pino")).count());
         assertTrue(listino.bisections().stream().anyMatch(b -> b.context.equals(Listino.PINO) && b.group.equals("costo")), "il prezzo della L di Pino");
         // Ogni bozza derivata per Pino è valida: anche le curve «salute», che clonano il personaggio con la sua last resort Java.
@@ -580,7 +586,8 @@ class SetBaseDraftTest {
     // ---- SB-15, parte 1: le rarità della griglia nella bozza (D44, punto 6; Q5 di SB-6b) ----
 
     /** Lo slot della griglia di ogni personaggio della bozza. */
-    static final Map<String, String> CHARACTER_SLOTS = Map.of(SPAZIENZIO, "PG-SPA", MARA, "PG-MAR", TOSSICO, "PG-TOS", PINO, "PG-PIN");
+    static final Map<String, String> CHARACTER_SLOTS = Map.of(SPAZIENZIO, "PG-SPA", MARA, "PG-MAR", TOSSICO, "PG-TOS", PINO, "PG-PIN",
+            GIGI, "PG-GIG");
     /**
      * Le rarità della griglia (colonna «Rarità»: C, NC, R) per ogni slot che la bozza contiene, elencate qui perché la prova non legga i
      * documenti. Le stesse le scrive e le confronta col file della griglia docs/reports/set-base/sb-6b/rarita-bozza.py (--check).
@@ -589,13 +596,13 @@ class SetBaseDraftTest {
             "COMMON", Set.of("PG-SPA", "PG-MAR",
                     "SPA-BA", "MAR-BA", "SPA-BO1", "SPA-BO2", "MAR-BO1", "MAR-BO2", "TOS-BO1", "TOS-BO2", "PIN-BO1", "PIN-BO2", "LR-STR",
                     "SPA-AR1", "SPA-AR3", "SPA-AR4", "MAR-AR1", "MAR-AR2", "MAR-AR3", "TOS-AR1", "TOS-AR2", "TOS-AR3",
-                    "PIN-AR1", "PIN-AR2", "PIN-AR3",
+                    "PIN-AR1", "PIN-AR2", "PIN-AR3", "GIG-BO1", "GIG-BO2", "GIG-AR2", "GIG-AR3", "GIG-AR4",
                     "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18",
-                    "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-12"),
-            "UNCOMMON", Set.of("PG-TOS", "PG-PIN",
-                    "TOS-BA", "PIN-BA", "SPA-BO3", "MAR-BO3", "TOS-BO3", "PIN-BO3", "LR-TOS", "LR-PIN",
-                    "SPA-AR5", "MAR-AR4", "TOS-AR4", "PIN-AR4", "GEN-07", "OGG-03", "OGG-13"),
-            "RARE", Set.of("SPA-AR2", "MAR-AR5", "TOS-AR5", "PIN-AR5", "OGG-04"));
+                    "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12"),
+            "UNCOMMON", Set.of("PG-TOS", "PG-PIN", "PG-GIG",
+                    "TOS-BA", "PIN-BA", "GIG-BA", "SPA-BO3", "MAR-BO3", "TOS-BO3", "PIN-BO3", "GIG-BO3", "LR-TOS", "LR-PIN",
+                    "SPA-AR5", "MAR-AR4", "TOS-AR4", "PIN-AR4", "GIG-AR1", "GEN-07", "OGG-03", "OGG-09", "OGG-13"),
+            "RARE", Set.of("SPA-AR2", "MAR-AR5", "TOS-AR5", "PIN-AR5", "GIG-AR5", "OGG-04"));
 
     private static String gridRarity(String slot) {
         List<String> found = new ArrayList<>();
@@ -634,10 +641,246 @@ class SetBaseDraftTest {
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
         }
-        assertEquals(Map.of("COMMON", 40, "RARE", 5, "UNCOMMON", 15), counts, "le sessanta carte della bozza");
+        assertEquals(Map.of("COMMON", 46, "RARE", 6, "UNCOMMON", 19), counts, "le settantuno carte della bozza, undici di Gigi (SB-15)");
         for (String deck : STARTERS) {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");
         }
+    }
+
+    // ---- SB-15, parte 2: lo starter di Gigi «Intervento sul posto» ----
+
+    /** La salute iniziale di Gigi: 100 nella scheda, 85 nel giro 1 di SB-15 (SB-9 meno 15, la scala di D41), 95 dal giro 2. */
+    static final int GIGI_HEALTH = 95;
+    /** La V iniziale di Gigi: 15 nella scheda, 25 dal giro 2 di SB-15 (le carte pagate in V restavano morte in mano). */
+    static final int GIGI_VIOLENCE = 25;
+
+    /**
+     * SB-15: lo starter di Gigi come nella griglia (basic, due bound comuni, Struggle, 7 carte d'archetipo, 6 generiche, 7 oggetti), capacità
+     * 3, costi in V. Testi compresi, perché i bot leggono costi, guadagni e danno nominale. Giro 2: salute 95, V iniziale 25, «Lavoro fatto
+     * bene» a 5 V invece di 10, Chiave da tredici a 12 CUT invece di 10 (la linea della fascia F1).
+     */
+    @Test
+    void theGigiStarterFollowsTheGrid() {
+        JsonNode gigi = character(GIGI);
+        Map<String, Integer> resources = new TreeMap<>();
+        gigi.get("resources").fields().forEachRemaining(e -> resources.put(e.getKey(), e.getValue().asInt()));
+        assertEquals(Map.of("HEALTH", GIGI_HEALTH, "ALERTNESS", 25, "VIOLENCE", GIGI_VIOLENCE, "TOXICITY", 0, "ALCOHOL", 0), resources);
+        assertEquals(3, gigi.get("items").asInt(), "capacità 3, l'unico (SB-9)");
+        assertTrue(draft.character(GIGI).getImmunities().isEmpty());
+        assertEquals("Gigi del Carro Attrezzi", gigi.get("name").asText());
+
+        String deck = "starter-gigi";
+        assertEquals(GIGI, draft.characterOf(deck));
+        assertEquals("base.gigi.QuestoTornaUtile", draft.basicOf(deck));
+        assertEquals(List.of("base.gigi.bound.UnaStrettaEPassa", "base.gigi.bound.ColpoDiCacciavite"), draft.boundOf(deck));
+        assertEquals("com.last.Struggle", draft.lastResortOf(deck), "nessuna last resort propria (scheda di Gigi)");
+        Map<String, Integer> expected = new TreeMap<>();
+        expected.put("bruiser.BreakYourToy", 2);
+        expected.put("base.gigi.ChiaveDaTredici", 2);
+        expected.put("base.gigi.ColpoDiChiaveInglese", 1);
+        expected.put("base.gigi.SottoIlCofano", 1);
+        expected.put("base.gigi.LavoroFattoBene", 1);
+        expected.put("base.com.MattoneDelCantiere", 2);
+        expected.put("com.Steal", 2);
+        expected.put("bruiser.SeagullFly", 1);
+        expected.put("base.com.Spintone", 1);
+        expected.put("base.items.GuantiDaOfficina", 2);
+        expected.put("base.items.GiubbottoDiFintaPelle", 2);
+        expected.put("base.items.CascoDaLavoro", 2);
+        expected.put("base.items.EspressoDelDistributore", 1);
+        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 7, generiche 6, oggetti 7, come nella griglia");
+        assertEquals(7, draft.cardsOf(deck).entrySet().stream().filter(e -> draft.card(e.getKey()).isItem()).mapToInt(Map.Entry::getValue).sum());
+
+        // Costi in V delle carte d'archetipo, testi compresi; Smontiamo tutto è la classe di oggi con costo e priorità della bozza.
+        Map<String, Integer> violence = Map.of("bruiser.BreakYourToy", 5, "base.gigi.ChiaveDaTredici", 5, "base.gigi.SottoIlCofano", 5,
+                "base.gigi.LavoroFattoBene", 5);
+        violence.forEach((binding, cost) -> {
+            assertEquals(Map.of(Resource.VIOLENCE, cost), draft.card(binding).getCost(), binding);
+            assertTrue(card(binding).get("gui").get("description").asText().contains("· " + cost + " V:"), binding + ": costo nel testo");
+        });
+        assertTrue(draft.card("base.gigi.ColpoDiChiaveInglese").getCost().isEmpty());
+        assertEquals(1, draft.card("bruiser.BreakYourToy").getPriority());
+        assertEquals(Set.of(Card.CardTarget.FAR_ITEM), draft.card("bruiser.BreakYourToy").getCanTarget(), "distrugge un oggetto lontano");
+        // I numeri d'attacco, testi compresi: i bot leggono il danno nominale.
+        JsonNode chiave = card("base.gigi.ChiaveDaTredici"), colpo = card("base.gigi.ColpoDiChiaveInglese"), lavoro = card("base.gigi.LavoroFattoBene");
+        assertEquals(12, chiave.get("target").get(0).get("amount").asInt());
+        assertEquals("CUT 12", chiave.get("gui").get("damageAmount").asText());
+        assertTrue(chiave.get("gui").get("description").asText().contains("12 CUT"));
+        assertEquals(6, colpo.get("target").get(0).get("amount").asInt());
+        assertEquals("HIT 6", colpo.get("gui").get("damageAmount").asText());
+        int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
+        assertEquals(6, base);
+        assertEquals(4, perItem);
+        assertEquals("HIT " + base + "+x", lavoro.get("gui").get("damageAmount").asText());
+        assertTrue(lavoro.get("gui").get("description").asText().contains("HIT pari a " + base + " più " + perItem + " per ogni proprio oggetto"));
+        // Le bound: +5 V e 3 HIT nello starter (D33, D36), 2 CUT veloce nella collezione; nessuna tocca gli oggetti.
+        assertEquals(5, card("base.gigi.bound.UnaStrettaEPassa").get("self").get(0).get("amount").asInt());
+        assertEquals("+5 V", card("base.gigi.bound.UnaStrettaEPassa").get("gui").get("gains").asText());
+        assertEquals(3, card("base.gigi.bound.ColpoDiCacciavite").get("target").get(0).get("amount").asInt());
+        assertEquals(2, card("base.gigi.bound.Lima").get("target").get(0).get("amount").asInt());
+        assertEquals(2, draft.card("base.gigi.bound.Lima").getPriority());
+        for (String b : List.of("base.gigi.bound.UnaStrettaEPassa", "base.gigi.bound.ColpoDiCacciavite", "base.gigi.bound.Lima"))
+            for (Card.CardTarget target : draft.card(b).getCanTarget())
+                assertFalse(target == Card.CardTarget.NEAR_ITEM || target == Card.CardTarget.FAR_ITEM, b + ": nessuna bound tocca gli oggetti");
+        // Gli equip di Gigi: Guanti HIT inflitto ×1,25, Casco HIT ricevuto ×0,8, per 3 turni.
+        JsonNode guanti = card("base.items.GuantiDaOfficina").get("self").get(0), casco = card("base.items.CascoDaLavoro").get("self").get(0);
+        assertTrue(guanti.get("equip").asBoolean() && casco.get("equip").asBoolean());
+        assertEquals("OUTPUT", guanti.get("flow").asText());
+        assertEquals(1.25, guanti.get("factor").asDouble());
+        assertEquals("INPUT", casco.get("flow").asText());
+        assertEquals(0.8, casco.get("factor").asDouble());
+        // Lo slot apre la descrizione delle nove carte di Gigi (Struggle è generica).
+        Pattern slot = Pattern.compile("^GIG-(BA|BO\\d|AR\\d) · .*");
+        int slots = 0;
+        for (JsonNode c : json.get("cards"))
+            if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
+        assertEquals(9, slots, "basic, tre bound e cinque carte d'archetipo");
+    }
+
+    /** Una partita fra Gigi e Spazienzio, coi tavoli svuotati: gli oggetti si mettono a mano. */
+    private static Game gigiAgainstSpazienzio() {
+        Player a = draft.player("starter-gigi", "seat-1", new Random(1), null);
+        Player b = draft.player("starter-spazienzio", "seat-2", new Random(2), null);
+        Game game = new Game(List.of(a, b), "sim", false);
+        a.getCharacter().getItems().clear();
+        b.getCharacter().getItems().clear();
+        return game;
+    }
+
+    private static void resolveOnOpponentItem(Game game, String binding, String item) {
+        Card card = draft.card(binding);
+        game.getPlayers().get("seat-1").getCardsInHand().add(card);
+        Map<Move.AdditionalAction, String> choices = new java.util.HashMap<>();
+        choices.put(Move.AdditionalAction.TARGET_ITEM, item);
+        card.resolve(game, new Move(card.getName(), "seat-1", "seat-2", game.getGameId(), choices));
+    }
+
+    /**
+     * Le meccaniche di Gigi su stati costruiti a mano: «Lavoro fatto bene» con 0, 1 e 3 oggetti sul campo (la classe nuova, D35), la capacità
+     * 3 che scaccia l'oggetto più vecchio, Smontiamo tutto che distrugge un oggetto lontano e non fa nulla a tavolo vuoto, i Guanti che
+     * moltiplicano l'HIT inflitto, Sotto il cofano e il Casco.
+     */
+    @Test
+    void theGigiMechanicsWorkOnHandBuiltStates() {
+        Game game = gigiAgainstSpazienzio();
+        Character me = game.getPlayers().get("seat-1").getCharacter(), spazienzio = game.getPlayers().get("seat-2").getCharacter();
+        JsonNode lavoro = card("base.gigi.LavoroFattoBene");
+        int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
+        int health = spazienzio.getResources().get(Resource.HEALTH);
+        // Tavolo vuoto: il solo danno fisso.
+        resolveOnOpponent(game, "base.gigi.LavoroFattoBene");
+        health -= base;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH), "0 oggetti");
+        // Un oggetto.
+        me.getItems().add(draft.card("base.items.CascoDaLavoro"));
+        resolveOnOpponent(game, "base.gigi.LavoroFattoBene");
+        health -= base + perItem;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH), "1 oggetto");
+        // Tre oggetti, la capacità; il quarto scaccia il più vecchio e il conto resta 3.
+        me.getItems().add(draft.card("base.items.GiubbottoDiFintaPelle"));
+        me.getItems().add(draft.card("base.items.EspressoDelDistributore"));
+        resolveOnOpponent(game, "base.gigi.LavoroFattoBene");
+        health -= base + 3 * perItem;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH), "3 oggetti");
+        me.getItems().add(draft.card("base.items.GuantiDaOfficina"));
+        assertEquals(3, me.getItems().size(), "capacità 3");
+        assertFalse(me.getItems().stream().anyMatch(i -> i.getName().equals("Casco da lavoro")), "il più vecchio esce");
+        // Gli equip non contano: consumati i Guanti (equip, HIT inflitto ×1,25), restano 2 oggetti; il danno sale di un quarto.
+        Card guanti = me.getItems().stream().filter(i -> i.getName().equals("Guanti da officina")).findFirst().orElseThrow();
+        me.getItems().remove(guanti);
+        ((AbstractCard) guanti).applyEffectOnSelf(me);
+        assertTrue(me.getStatuses().stream().anyMatch(s -> s.isEquip()), "i Guanti sono un equip");
+        Character reference = draft.character(SPAZIENZIO);
+        me.inflictDamage(reference, new Damage(Damage.DamageType.HIT, base + 2 * perItem));
+        int gloved = 85 - reference.getResources().get(Resource.HEALTH);
+        assertTrue(gloved > base + 2 * perItem, "i Guanti moltiplicano l'HIT inflitto: " + gloved);
+        resolveOnOpponent(game, "base.gigi.LavoroFattoBene");
+        health -= gloved;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH), "2 oggetti e i Guanti");
+
+        // Smontiamo tutto: a tavolo vuoto non fa nulla; con un oggetto lontano lo distrugge.
+        resolveOnOpponentItem(game, "bruiser.BreakYourToy", "Negroni Trovato per Terra");
+        assertTrue(spazienzio.getItems().isEmpty());
+        Card cocktail = draft.card("com.items.CocktailOnTheGround");
+        spazienzio.getItems().add(cocktail);
+        resolveOnOpponentItem(game, "bruiser.BreakYourToy", cocktail.getName());
+        assertTrue(spazienzio.getItems().isEmpty(), "l'oggetto è distrutto");
+        assertEquals(2, me.getItems().size(), "gli oggetti di Gigi restano");
+
+        // Sotto il cofano: HIT ricevuto ×0,5 e CUT ×0,75 in questo turno; il Casco HIT ×0,8.
+        Character standing = draft.character(GIGI), hitter = draft.character(SPAZIENZIO);
+        ((AbstractCard) draft.card("base.gigi.SottoIlCofano")).applyEffectOnSelf(standing);
+        hitter.inflictDamage(standing, new Damage(Damage.DamageType.HIT, 20));
+        hitter.inflictDamage(standing, new Damage(Damage.DamageType.CUT, 20));
+        assertEquals(GIGI_HEALTH - 10 - 15, standing.getResources().get(Resource.HEALTH));
+        Character helmeted = draft.character(GIGI);
+        ((AbstractCard) draft.card("base.items.CascoDaLavoro")).applyEffectOnSelf(helmeted);
+        hitter.inflictDamage(helmeted, new Damage(Damage.DamageType.HIT, 20));
+        assertEquals(GIGI_HEALTH - 16, helmeted.getResources().get(Resource.HEALTH));
+    }
+
+    /** SB-15: la classe di «Lavoro fatto bene» si carica dalla bozza solo coi suoi due parametri, e costo e priorità vengono dal file. */
+    @Test
+    void lavoroFattoBeneLoadsFromTheDraftWithItsParameters() {
+        Card lavoro = draft.card("base.gigi.LavoroFattoBene");
+        assertEquals("Lavoro fatto bene", lavoro.getName());
+        assertEquals(Map.of(Resource.VIOLENCE, 5), lavoro.getCost());
+        assertEquals(1, lavoro.getPriority());
+        assertEquals(Set.of(Card.CardTarget.OPPONENT), lavoro.getCanTarget());
+        for (String missing : List.of("base", "perItem")) {
+            ObjectNode root = json.deepCopy();
+            for (JsonNode c : root.get("cards"))
+                if (c.get("binding").asText().equals("base.gigi.LavoroFattoBene")) ((ObjectNode) c.get("params")).remove(missing);
+            IllegalArgumentException e = org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
+                    () -> Draft.parse("bozza senza " + missing, root));
+            assertTrue(e.getMessage().contains("parametro mancante params." + missing), e.getMessage());
+        }
+        ObjectNode root = json.deepCopy();
+        for (JsonNode c : root.get("cards"))
+            if (c.get("binding").asText().equals("base.gigi.LavoroFattoBene")) ((ObjectNode) c.get("params")).put("perOggetto", 4);
+        IllegalArgumentException e = org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
+                () -> Draft.parse("bozza con un parametro sconosciuto", root));
+        assertTrue(e.getMessage().contains("parametro sconosciuto params.perOggetto"), e.getMessage());
+    }
+
+    /** SB-15: la base del listino ha anche il contesto di Gigi, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
+    @Test
+    void theListinoBaseHasTheGigiContextAndItsBoundCurves() throws Exception {
+        Draft base = Listino.setBaseContexts(draft, 7);
+        List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.GIGI);
+        Map<String, Integer> cards = base.cardsOf(Listino.GIGI), starter = draft.cardsOf(spec.get(0));
+        assertEquals(2, cards.get(Listino.SLOT1));
+        assertEquals(2, cards.get(Listino.SLOT2));
+        assertFalse(cards.containsKey(spec.get(1)) || cards.containsKey(spec.get(2)));
+        assertTrue(cards.containsKey("base.items.GuantiDaOfficina") && cards.containsKey("bruiser.BreakYourToy"), "oggetti e archetipo restano");
+        assertEquals(20, cards.values().stream().mapToInt(Integer::intValue).sum());
+        assertEquals(starter, base.cardsOf(spec.get(0)), "lo starter resta com'è");
+        Listino listino = new Listino(base, new Listino.Params(1, 1, 1, 1), heuristic());
+        assertEquals(5, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati") && c.context.equals("starter-gigi")).count());
+        assertEquals(2, listino.bisections().stream().filter(b -> b.context.equals(Listino.GIGI) && b.group.equals("costo")).count(),
+                "il prezzo di 5 e 10 V di Gigi");
+        int derived = 0;
+        for (Listino.Curve c : listino.curves())
+            if (c.context.equals(Listino.GIGI) || c.context.equals("starter-gigi")) {
+                base.derive(c.id, c.builder.build(0).root);
+                derived++;
+            }
+        for (Listino.Bisection b : listino.bisections())
+            if (b.context.equals(Listino.GIGI)) {
+                base.derive(b.id, b.builder.build(b.lo).root);
+                derived++;
+            }
+        assertEquals(11, derived, "quattro curve di salute, cinque di tetto e i due prezzi della V");
+        // Senza lo starter di Gigi il contesto non nasce, e nemmeno le sue misure.
+        ObjectNode root = json.deepCopy();
+        ArrayNode decks = (ArrayNode) root.get("decks");
+        for (int i = decks.size() - 1; i >= 0; i--) if (decks.get(i).get("id").asText().equals("starter-gigi")) decks.remove(i);
+        Draft withoutGigi = Draft.parse("bozza senza lo starter di Gigi", root);
+        Draft baseWithout = Listino.setBaseContexts(withoutGigi, 7);
+        assertFalse(baseWithout.deckIds().contains(Listino.GIGI));
+        Listino without = new Listino(baseWithout, new Listino.Params(1, 1, 1, 1), heuristic());
+        assertTrue(without.bisections().stream().noneMatch(b -> b.context.equals(Listino.GIGI)));
+        assertTrue(without.curves().stream().noneMatch(c -> c.context.equals(Listino.GIGI) || c.context.equals("starter-gigi")));
     }
 }

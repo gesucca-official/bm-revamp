@@ -225,6 +225,12 @@ troppo comoda, renderebbe la partita frustrante per chi gioca con gli oggetti.
 
 **Valori iniziali proposti:** HEALTH 100, A 25, V 15, **capacità 3** (unico con 3), nessuna immunità. **Come la bozza.**
 
+> **Nota di SB-15** (giri 1 e 2, sotto la delega di [D38](../../set-base-plan.md#decisioni-del-proprietario), in attesa del giudizio del
+> proprietario): HEALTH 100 → 85 nel giro 1, l'ipotesi della scala dei base (SB-9 meno 15); **HEALTH 95 e V 15 → 25** nel giro 2, perché le
+> carte pagate in V restavano morte in mano e Gigi vinceva il 12–15%. Cambiano anche due carte: Chiave da tredici 12 CUT, «Lavoro fatto
+> bene» a 5 V. A 25, capacità 3 e nessuna immunità non cambiano; la capacità 3 vale circa 4 punti di matchup (variante a capacità 2). Il nome
+> dello starter resta «Intervento sul posto». [Rapporto](../../reports/set-base/sb-15-report.md).
+
 **Il suo triangolo.**
 
 | Attacco | Difesa | Contromossa |
@@ -345,11 +351,11 @@ salute uccide e la mossa prosegue (R04); il bot non si suicida per caso. In più
 | Mara Contromano | Base | 80 | 40 | — | 2 | — | Bozza; V 10 → 0; HEALTH 85 → 80 (SB-12a) |
 | Tossico del Serraglio | Avanzato | 80 | 35 | T 20 | 2 | Periodico di T | R07; capacità 3 → 2; HEALTH 100 → 80, T 10 → 20 (SB-13) |
 | Pino l'Ultimo Giro | Avanzato | 100 | 15 | L 20 | 2 | — | Bozza; V 10 → 0, niente immunità a L; HEALTH 110 → 100, L 10 → 20 (SB-14) |
-| Gigi del Carro Attrezzi | Avanzato | 100 | 25 | V 15 | 3 | — | Bozza, invariato |
+| Gigi del Carro Attrezzi | Avanzato | 95 | 25 | V 25 | 3 | — | Bozza; HEALTH 100 → 95, V 15 → 25 (SB-15) |
 | Cesira la Malalingua | Booster | 90 | 30 | V 10 | 2 | — | Nuovo |
 | Rocco «Sant'Incasso» | Booster | 130 | 15 | — (paga in HEALTH) | 2 | — | Nuovo |
 
-Salute da 80 a 130 (le base corrette in SB-12a, il Tossico in SB-13 e Pino in SB-14, gli altri ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
+Salute da 80 a 130 (le base corrette in SB-12a, il Tossico in SB-13, Pino in SB-14 e Gigi in SB-15, i booster ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
 priorità: Mara, Tossico, Malalingua, Gigi, Spazienzio, Pino e Sant'Incasso, prima dei costi.
 
 ### Risorsa × strategia

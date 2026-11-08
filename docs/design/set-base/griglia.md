@@ -73,7 +73,7 @@ Valori approvati in SB-9; non cambiano qui, salvo la salute dei due personaggi b
 | PG-MAR | Mara Contromano | Personaggio, base | H ~~85~~ 80¹, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
 | PG-TOS | Tossico del Serraglio | Personaggio, avanzato | H ~~100~~ 80⁵, A 35, T ~~10~~ 20⁵, capacità 2, immune all'effetto periodico di T | NC | Tossico | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
 | PG-PIN | Pino l'Ultimo Giro | Personaggio, avanzato | H ~~110~~ 100⁶, A 15, L ~~10~~ 20⁶, capacità 2 | NC | Pino | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
-| PG-GIG | Gigi del Carro Attrezzi | Personaggio, avanzato | H 100, A 25, V 15, capacità 3 | NC | Gigi | bozza | Oggetti ed equip | dati |
+| PG-GIG | Gigi del Carro Attrezzi | Personaggio, avanzato | H ~~100~~ 95⁷, A 25, V ~~15~~ 25⁷, capacità 3 | NC | Gigi | bozza | Oggetti ed equip | dati |
 | PG-CES | Cesira la Malalingua | Personaggio, booster | H 90, A 30, V 10, capacità 2 | R | — | da inventare (concept SB-9) | Contromosse e letture | dati |
 | PG-ROC | Rocco «Sant'Incasso» | Personaggio, booster | H 130, A 15, capacità 2 | R | — | da inventare (concept SB-9; personaggio di prova SB-6a) | La salute come risorsa (D27) | dati |
 
@@ -96,6 +96,11 @@ di 4 HEALTH equivalenti per uso. In attesa del giudizio del proprietario.
 Giro 2: L iniziale 10 → 20, PIN-AR2 da 3 a 10 + L, LR-PIN da 6 a 12 + L, perché le carte da 5 L restavano morte in mano per l'80–88% dei
 turni e Pino vinceva il 10–12%; Testata 20 → 25. Giro 3: Testata di nuovo a 20, perché a 25 stava sopra il prezzo misurato della L, e salute
 95 → 100. In attesa del giudizio del proprietario.
+
+⁷ **SB-15, giri 1 e 2** ([correzioni](#correzioni-di-sb-15)). Giro 1: salute di Gigi 100 → 85, l'ipotesi della scala dei base (SB-9 meno 15).
+Giro 2: salute 85 → 95 e V iniziale 15 → 25, perché le carte pagate in V restavano morte in mano (Mattone 88%, «Lavoro fatto bene» 78% dei
+turni in mano) e Gigi vinceva il 12–15%; GIG-AR2 10 → 12 CUT e GIG-AR5 da 10 a 5 V, sulla linea della fascia F1. In attesa del giudizio
+del proprietario.
 
 ### Basic (7)
 
@@ -211,10 +216,10 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | GIG-AR1 | Azione, regolare | ITEMS | F1 (5 V) | 1 | Distrugge un oggetto lontano | NC | 2 | `BreakYourToy` riprogettata come bozza «Smontiamo tutto» (era una bound) | Contromossa; distruzione pagata e scartata, non ripetibile | Java |
-| GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | 10 CUT | C | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
+| GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | ~~10~~ 12 CUT⁷ | C | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
 | GIG-AR3 | Azione, regolare | DAMAGE | F0 | 1 | 6 HIT | C | 1 | da inventare («Colpo di chiave inglese») | Colpo piccolo che i guanti rendono medio | dati |
 | GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno | C | 1 | da inventare («Sotto il cofano») | Difesa del turno; quella lunga viene dagli equip | dati |
-| GIG-AR5 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | 6 HIT più 4 per ogni proprio oggetto sul campo | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova |
+| GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ F1 (5 V)⁷ | 1 | 6 HIT più 4 per ogni proprio oggetto sul campo | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
 
 **Cesira (6)**
 
@@ -306,7 +311,7 @@ c'è.
 | Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata 2, Sgommata 2, Sorpasso 2, Paraurti 2, Slalom 1 (9) | Spintone 2, Sputo 2, Tartaruga 1, Steal 1 (6) | Espresso 2, Kebab 2, Giubbotto 1 (5) | 12 | 1 |
 | Tossico «Tutto è droga» (SB-13) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | MethDrivenRage 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
 | Pino «Chiude quando dico io» (SB-14) | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Offro io 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
-| Gigi «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Colpo di chiave 1, Sotto il cofano 1, Lavoro fatto bene 1 (7) | Mattone 2, Steal 2, SeagullFly 1, Spintone 1 (6) | Guanti 2, Giubbotto 2, Casco 2, Espresso 1 (7) | 13 | 1 |
+| Gigi «Intervento sul posto» (SB-15) | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Colpo di chiave 1, Sotto il cofano 1, Lavoro fatto bene 1 (7) | Mattone 2, Steal 2, SeagullFly 1, Spintone 1 (6) | Guanti 2, Giubbotto 2, Casco 2, Espresso 1 (7) | 13 | 1 |
 
 Varianti rispetto alla forma approvata (5 + 4 + 3): Spazienzio ha 10 carte d'archetipo e 2 oggetti, perché ha capacità 1; Gigi ha 7 carte
 d'archetipo e 4 oggetti; **Pino ha 3 generiche** invece di 4, perché la sua A scende sotto zero in due o tre turni (vedi [L e Pino](#l-e-pino))
@@ -331,6 +336,14 @@ tabella, senza scostamenti nella composizione; il nome proprio resta quello dell
 cambiati sono in [Correzioni di SB-14](#correzioni-di-sb-14). PIN-AR2 e LR-PIN usano la classe di B1, scritta nei sorgenti di test
 (`base.pino.GoingBerserk` e la sottoclasse `base.pino.UltimoGiro`, che è last resort). PIN-AR2 tiene il nome del catalogo di
 `GoingBerserk`, «Estasi da Coca Etilene»; OGG-02 e OGG-03 tengono «Peroni da 66, calda» e «Tennents Super»; le nuove usano il nome di lavoro.
+
+**Nota di SB-15** ([rapporto](../../reports/set-base/sb-15-report.md)): lo starter di Gigi è scritto nella stessa bozza come in questa
+tabella, senza scostamenti nella composizione; il nome proprio resta quello della bozza esterna, **«Intervento sul posto»**, e i numeri
+cambiati sono in [Correzioni di SB-15](#correzioni-di-sb-15). GIG-AR5 usa la classe Java di D35, scritta nei sorgenti di test
+(`base.gigi.LavoroFattoBene`): conta gli oggetti propri sul campo dopo i costi (gli equip non contano: sono oggetti già consumati) e poi
+colpisce. GIG-AR1 è la classe di oggi `BreakYourToy` col nome di bozza «Smontiamo tutto», e costo e priorità scritti nella bozza (5 V, 1);
+le nuove usano il nome di lavoro. La stessa modifica porta la bozza al formato `sb-6b/1` con le rarità di questa griglia su ogni carta e
+personaggio (D44, punto 6), senza cambiare le partite.
 
 **Generiche condivise:** 11 distinte su 20 usi. Ogni starter ne condivide almeno 2, nessuna è in più di 3 starter, e le due base
 condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16).
@@ -516,7 +529,7 @@ Rare negli starter: 1 o 2 ciascuno.
 | Mara | 4 | 8 | 3 | 0 | 0 | 15 |
 | Tossico | 5 | 10 | 0 | 0 | 0 | 15 |
 | Pino | 10 | 5 | 0 | 0 | 0 | 15 |
-| Gigi | 2 | 7 | 2 | 2 | 0 | 13 |
+| Gigi | 2 | ~~7~~ 8⁷ | ~~2~~ 1⁷ | 2 | 0 | 13 |
 
 L'obiettivo era tagliato su Spazienzio, che è l'unico con costi alti per natura. Mara, Tossico e Pino pagano con risorse economiche o
 limitate (A, T, L fino a 5): la loro curva si appiattisce su F0 e F1, e la scelta diventa *quando* pagare, non *se*. Da guardare in
@@ -681,6 +694,25 @@ numero cambiato, col giro e il motivo; il resto della griglia e gli starter già
   sembra sulla carta.
 - **I bot non bevono.** Lo stile prudente toglie 0,4 punti per ogni L guadagnata, lo stile risorse penalizza la L in eccesso: senza
   immunità nessuno dei due gioca la bound di L. Lo stile `com` la gioca di continuo e vince il 10–21%.
+
+## Correzioni di SB-15
+
+Giro coi bot sullo starter di Gigi, due giri su un massimo di tre ([rapporto](../../reports/set-base/sb-15-report.md), delega di D38 sui
+numeri). Ogni numero cambiato, col giro e il motivo; il resto della griglia e gli starter già approvati non cambiano.
+
+| Slot | Numero | Prima | Dopo | Giro | Motivo |
+|---|---|---|---|---|---|
+| PG-GIG | HEALTH | 100 | 85, poi 95 | 1, 2 | Giro 1: la scala dei base, SB-9 meno 15. Giro 2: con 85 Gigi vinceva il 12–15%; insieme alla V iniziale riporta i matchup nel 40–60% |
+| PG-GIG | V iniziale | 15 | 25 | 2 | Le carte pagate in V restavano morte in mano (Mattone 88%, SeagullFly 77%, «Lavoro fatto bene» 78% dei turni in mano); come la T del Tossico e la L di Pino, il carburante iniziale sale di 10 |
+| GIG-AR2 Chiave da tredici | danno | 10 CUT | 12 CUT | 2 | La linea della fascia F1 a 5 V (circa 12–13 HIT equivalenti, come Cinghiata di Mara); il listino nel contesto di Gigi dà 14,5 HIT per 5 V: resta un poco sotto |
+| GIG-AR5 Lavoro fatto bene | costo | 10 V | 5 V | 2 | A 10 V (F2, circa 18–20 HIT) i 6 + 4 per oggetto stavano sotto la linea con meno di tre oggetti e la carta restava morta in mano; a 5 V con due o tre oggetti vale 14–18, «picco condizionato, media in linea» (D34, punto 6). Riportata a 10 V Gigi perde 7–9 punti |
+
+**Due letture per i blocchi successivi.**
+- **La V di Gigi è cara.** Nel suo contesto 5 V valgono 14,5 HIT e 10 V 24,6 HIT, contro i 17,9 di 10 V per Spazienzio: Gigi spende la V su
+  carte da 5 e non arriva quasi mai a 15. Mattone (15 V) e SeagullFly (10 V), generiche condivise con Spazienzio, restano morte in mano per
+  il 70–78% dei turni: è un tema di composizione dello starter, non di numeri, da guardare alla prova umana.
+- **Furto e distruzione coi bot.** Steal e Smontiamo tutto valgono meno di un colpo semplice in mano ai bot (sostituiti, Gigi sale di
+  11–15 e di 3–4 punti), come le contromosse degli altri starter.
 
 ## Tetto in partita
 
