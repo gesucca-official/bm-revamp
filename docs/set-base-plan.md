@@ -629,6 +629,26 @@ di Q5), circa 75 minuti di calcolo su un tetto di 2 ore; correzioni decise con l
 Da giudicare: le quattro correzioni, il nome dello starter, lo specchio lungo e il mazzo che si esaurisce spesso, il Mescolone. Dettagli
 nel [rapporto](reports/set-base/sb-13-report.md).
 
+**SB-14 fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Lo starter di Pino, **«Chiude quando dico io»**, è nella bozza come
+nella griglia. Il passo 0 ha trovato che GoingBerserk riprogettata e «L'ultimo giro» chiedono la classe Java di B1, e il proprietario ha
+deciso di farla nello stesso blocco («Tutto in SB-14»): vive nei sorgenti di test (`base.pino.GoingBerserk` e la sottoclasse last resort
+`base.pino.UltimoGiro`) e non tocca il caricatore. Tre giri coi bot (il massimo di Q5), circa 105 minuti di calcolo su un tetto di 2 ore;
+correzioni decise con la delega di D38, solo numeri di Pino.
+- **Giri.** 1: la griglia con la salute di SB-9 meno 15 (95): **0,122 contro Spazienzio, 0,099 contro Mara e Tossico**; carte da 5 L morte in
+  mano per l'80–88% dei turni, e due stili su tre che non bevono. 2: **L iniziale 10 → 20, Estasi da Coca Etilene da 3 a 10 + L, L'ultimo giro
+  da 6 a 12 + L**, Testata 20 → 25. 3: **Testata di nuovo 20**, perché a 25 stava sopra il prezzo della L, e **salute 95 → 100**.
+- **Esito.** Pino contro Spazienzio **0,591**, contro Mara **0,559**, contro il Tossico **0,431** (0,692, 0,549 e 0,451 coi soli euristici),
+  specchio 0,503. Partite di 14,2–15,1 turni; specchio di 16,1 turni con il 35% di patte; mazzo esaurito nel 77% delle partite. Invarianti a
+  zero su 320.000 partite. Bozza SHA-256 `36788562…182cd2f27d5`.
+- **Starter approvati invariati:** le 96 celle fra Spazienzio, Mara e Tossico coincidono una per una con SB-13.
+- **Listino a 7 HIT.** 5 L valgono 14,5 HIT nel contesto di Pino, e Testata (15 netti) è in linea. Le tre bound stanno sotto 4 HEALTH
+  equivalenti per uso (2,5, 2,0, 1,5).
+- **Bot e immunità.** Offro io e il Bancone valgono meno di un colpo semplice in mano ai bot: tenuti. Con l'immunità a L (D28, solo
+  confronto) Pino vince l'83–91%: il rischio di Q10 è misurato e la scelta di D28 resta.
+
+Da giudicare: le correzioni, il giro 3 contro il giro 2, il nome dello starter, le partite lunghe col mazzo che si esaurisce, Offro io e il
+Bancone, le rarità della bozza proposte da SB-6b (Q5). Dettagli nel [rapporto](reports/set-base/sb-14-report.md).
+
 **Perimetro.** Bozza dello starter (Junkie riprogettato sul primo blocco, conservandone il flavour), poi giro contro tutti gli starter già stabili, **senza toccarli se non
 serve**; se serve, lo si dichiara e si rilancia la matrice.
 

@@ -183,6 +183,13 @@ sue difese contro l'HIT.
 **Rispetto alla bozza:** V da 10 a 0 (colore puro, come Mara) e niente immunità a L. Con L 10 senza spenderla, a fine turno perde 5 A
 e scende a L 6: impara subito che l'alcol va speso.
 
+> **Nota di SB-14** (giri 1–3, sotto la delega di [D38](../../set-base-plan.md#decisioni-del-proprietario), in attesa del giudizio del
+> proprietario): HEALTH 110 → 95 nel giro 1, l'ipotesi della scala dei base (SB-9 meno 15); **L 10 → 20** nel giro 2, perché le carte da 5 L
+> restavano morte in mano per l'80–88% dei turni e Pino vinceva il 10–12%; **HEALTH 100** nel giro 3, quando Testata è tornata a 20 HIT.
+> Cambiano anche due carte: GoingBerserk riprogettata e «L'ultimo giro» partono da 10 e 12 HIT più la L residua. A 15, V 0, capacità 2 e
+> nessuna immunità non cambiano; con l'immunità a L (variante di D28, solo confronto) Pino vince l'83–91%, il rischio di Q10 misurato. Il
+> nome dello starter resta «Chiude quando dico io». [Rapporto](../../reports/set-base/sb-14-report.md).
+
 **Il suo triangolo.**
 
 | Attacco | Difesa | Contromossa |
@@ -337,12 +344,12 @@ salute uccide e la mossa prosegue (R04); il bot non si suicida per caso. In più
 | Spazienzio de la Ucciso | Base | 85 | 20 | V 25 | 1 | — | R07; HEALTH 100 → 85 (SB-12a) |
 | Mara Contromano | Base | 80 | 40 | — | 2 | — | Bozza; V 10 → 0; HEALTH 85 → 80 (SB-12a) |
 | Tossico del Serraglio | Avanzato | 80 | 35 | T 20 | 2 | Periodico di T | R07; capacità 3 → 2; HEALTH 100 → 80, T 10 → 20 (SB-13) |
-| Pino l'Ultimo Giro | Avanzato | 110 | 15 | L 10 | 2 | — | Bozza; V 10 → 0, niente immunità a L |
+| Pino l'Ultimo Giro | Avanzato | 100 | 15 | L 20 | 2 | — | Bozza; V 10 → 0, niente immunità a L; HEALTH 110 → 100, L 10 → 20 (SB-14) |
 | Gigi del Carro Attrezzi | Avanzato | 100 | 25 | V 15 | 3 | — | Bozza, invariato |
 | Cesira la Malalingua | Booster | 90 | 30 | V 10 | 2 | — | Nuovo |
 | Rocco «Sant'Incasso» | Booster | 130 | 15 | — (paga in HEALTH) | 2 | — | Nuovo |
 
-Salute da 80 a 130 (le base corrette in SB-12a e il Tossico in SB-13, gli altri ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
+Salute da 80 a 130 (le base corrette in SB-12a, il Tossico in SB-13 e Pino in SB-14, gli altri ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
 priorità: Mara, Tossico, Malalingua, Gigi, Spazienzio, Pino e Sant'Incasso, prima dei costi.
 
 ### Risorsa × strategia
@@ -386,6 +393,10 @@ la variante con immunità si prova nel playground in SB-14, come confronto. I mo
 5. **Flavour:** chi beve rallenta.
 
 Da verificare in SB-14: A che va sotto zero (R01 lo ammette) non rompe nessuna carta, per esempio le perdite «abs(A/2)».
+
+**Verificato in SB-14** ([rapporto](../../reports/set-base/sb-14-report.md)): Pino finisce le partite con A fra −20 e −43 e nessuna carta si
+rompe (una prova su stati costruiti a mano porta la A sotto zero; invarianti a zero). La variante con immunità, provata come confronto, conferma
+il motivo 2: con L stabile Pino vince l'83–91% contro tutti e tre gli starter, e la scelta di D28 resta.
 
 ## Idee fuori perimetro, per le espansioni
 

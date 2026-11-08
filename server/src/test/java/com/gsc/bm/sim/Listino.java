@@ -44,7 +44,8 @@ final class Listino {
     /** Salute tolta a Spazienzio nei non specchi contro Mara, scelta con la curva «handicap». */
     static final int HANDICAP = Integer.getInteger("sim.listinoHandicap", 25);
     static final String SLOT1 = "listino.Ancora1", SLOT2 = "listino.Ancora2";
-    static final String NEUTRO = "ctx-neutro", SPAZIENZIO = "ctx-spazienzio", TOSSICO = "ctx-tossico", MARA = "ctx-mara", ROCCO = "ctx-rocco";
+    static final String NEUTRO = "ctx-neutro", SPAZIENZIO = "ctx-spazienzio", TOSSICO = "ctx-tossico", MARA = "ctx-mara", ROCCO = "ctx-rocco",
+            PINO = "ctx-pino";
     static final List<String> GROUPS = List.of("costo", "tipo", "priorita", "veleno", "decadimento", "nonspecchio", "carte",
             "salute", "allerta", "bound", "slot", "handicap");
     /** Gruppi aggiunti dopo SB-10a: si chiedono per nome e non entrano in «all», così la misura di SB-10a resta la stessa. */
@@ -53,16 +54,18 @@ final class Listino {
      * SB-11b: la bozza del Set Base. Con -Dsim.listinoBase=set-base (o il percorso di una bozza) il listino usa quella al posto della base
      * di SB-10a: i contesti di Spazienzio e Mara diventano gli starter nuovi con due coppie di generiche al posto delle àncore
      * ({@link #SET_BASE_CONTEXTS}). Gli altri contesti non esistono, e le misure che li usano non si lanciano (ListinoMeasureTest).
-     * SB-13: se la bozza ha lo starter del Tossico, nasce anche il contesto del Tossico, con la stessa regola.
+     * SB-13: se la bozza ha lo starter del Tossico, nasce anche il contesto del Tossico, con la stessa regola. SB-14: lo stesso per Pino.
      */
     static final String SET_BASE = "/set-base/bozza.json";
     /** Contesto, starter da cui nasce e le due generiche (due copie ciascuna) che lasciano il posto alle àncore. */
     static final Map<String, List<String>> SET_BASE_CONTEXTS = Map.of(
             SPAZIENZIO, List.of("starter-spazienzio", "bruiser.SeagullFly", "base.com.TartarugaSulMarciapiede"),
             MARA, List.of("starter-mara", "base.com.Spintone", "base.com.SputoDaPosacenere"),
-            TOSSICO, List.of("starter-tossico", "com.Grab", "base.com.RincorsaDalMarciapiede"));
-    /** I contesti del Set Base che esistono solo se la bozza ha il loro starter (SB-13); Spazienzio e Mara sono obbligatori. */
-    static final List<String> OPTIONAL_SET_BASE_CONTEXTS = List.of(TOSSICO);
+            TOSSICO, List.of("starter-tossico", "com.Grab", "base.com.RincorsaDalMarciapiede"),
+            // SB-14: Spintone e Fasciatura, così Grab e gli oggetti (l'economia della L) restano come nello starter.
+            PINO, List.of("starter-pino", "base.com.Spintone", "base.com.FasciaturaColFazzolettaccio"));
+    /** I contesti del Set Base che esistono solo se la bozza ha il loro starter (SB-13, SB-14); Spazienzio e Mara sono obbligatori. */
+    static final List<String> OPTIONAL_SET_BASE_CONTEXTS = List.of(TOSSICO, PINO);
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final double Z = 1.959963984540054;
     /** Lo stesso quantile, per il rapporto. */
@@ -273,7 +276,7 @@ final class Listino {
         ObjectNode root = (ObjectNode) bozza.json();
         for (String[] anchor : new String[][]{{SLOT1, "LISTINO ANCORA 1"}, {SLOT2, "LISTINO ANCORA 2"}})
             add(root, hitter(anchor, Map.of(), 1, "HIT", hit));
-        for (String ctx : List.of(SPAZIENZIO, MARA, TOSSICO)) {
+        for (String ctx : List.of(SPAZIENZIO, MARA, TOSSICO, PINO)) {
             List<String> spec = SET_BASE_CONTEXTS.get(ctx);
             if (OPTIONAL_SET_BASE_CONTEXTS.contains(ctx) && !bozza.deckIds().contains(spec.get(0))) continue;
             ObjectNode context = copyDeck(root, spec.get(0), ctx);
@@ -574,11 +577,12 @@ final class Listino {
                 {Resource.ALERTNESS, MARA, new int[]{10, 20}}, {Resource.ALERTNESS, NEUTRO, new int[]{10, 20}},
                 {Resource.ALERTNESS, SPAZIENZIO, new int[]{10}},
                 {Resource.TOXICITY, TOSSICO, new int[]{10, 20}}, {Resource.ALCOHOL, NEUTRO, new int[]{5, 10}},
-                {Resource.ALCOHOL, SPAZIENZIO, new int[]{5}},
+                {Resource.ALCOHOL, SPAZIENZIO, new int[]{5}}, {Resource.ALCOHOL, PINO, new int[]{5}},
                 {Resource.HEALTH, ROCCO, new int[]{10, 20}}, {Resource.HEALTH, NEUTRO, new int[]{10, 20}}};
         for (Object[] row : costs) {
             Resource r = (Resource) row[0];
             String ctx = (String) row[1];
+            if (ctx.equals(PINO) && !base.deckIds().contains(PINO)) continue; // SB-14: solo con la bozza che ha lo starter di Pino.
             for (int c : (int[]) row[2]) {
                 boolean pairs = c == 20 && (r == Resource.VIOLENCE && ctx.equals(SPAZIENZIO) || r == Resource.ALERTNESS && ctx.equals(MARA)
                         || r == Resource.HEALTH && ctx.equals(ROCCO));
@@ -738,7 +742,11 @@ final class Listino {
             bound.add(b.asText() + "~" + deckId);
         }
         ObjectNode last = cardNode(root, deck.get("lastResort").asText());
-        if (last.has("exclusiveTo") && character.equals(last.get("exclusiveTo").asText())) { // Last resort riservata: si clona anche lei.
+        if (last.has("exclusiveTo") && character.equals(last.get("exclusiveTo").asText()) && last.path("java").asBoolean()) {
+            // SB-14: una carta Java non si rinomina (il binding è la sua classe). Nell'albero derivato la sua riserva cade, così la usano
+            // sia il personaggio sia il clone; la carta gioca uguale, perché exclusiveTo è solo una regola di composizione del mazzo.
+            last.remove("exclusiveTo");
+        } else if (last.has("exclusiveTo") && character.equals(last.get("exclusiveTo").asText())) { // Last resort riservata: si clona anche lei.
             ObjectNode card = last.deepCopy();
             card.put("binding", last.get("binding").asText() + "~" + deckId).put("exclusiveTo", id);
             ((ObjectNode) card.get("gui")).put("name", card.get("gui").get("name").asText() + " ~" + deckId);
@@ -845,9 +853,9 @@ final class Listino {
     static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara");
     /**
      * SB-13: gli starter avanzati, misurati allo stesso modo ma nel gruppo «tettoavanzati», così il gruppo «tettostarter» e le sue misure
-     * di SB-11b e SB-12a restano quelle di prima.
+     * di SB-11b e SB-12a restano quelle di prima. SB-14 aggiunge Pino.
      */
-    static final List<String> ADVANCED_STARTERS = List.of("starter-tossico");
+    static final List<String> ADVANCED_STARTERS = List.of("starter-tossico", "starter-pino");
 
     private static List<String> concat(List<String> a, List<String> b) {
         List<String> all = new ArrayList<>(a);
@@ -877,10 +885,12 @@ final class Listino {
             for (Map.Entry<String, java.util.function.Function<String, ObjectNode>> e : capFamilies(ctx).entrySet())
                 list.add(new Curve("tettopartita-" + e.getKey() + "-" + ctx.substring(4), "tettopartita", ctx, e.getKey(), 4,
                         x -> bound(ctx, e.getValue(), null)));
-        for (String ctx : List.of(NEUTRO, SPAZIENZIO, MARA, ROCCO, TOSSICO))
+        for (String ctx : List.of(NEUTRO, SPAZIENZIO, MARA, ROCCO, TOSSICO, PINO)) {
+            if (ctx.equals(PINO) && !base.deckIds().contains(PINO)) continue; // SB-14: come sopra, la base di SB-10a resta com'era.
             for (int d : new int[]{-10, -5, 5, 10})
                 list.add(new Curve("salute" + (d > 0 ? "+" : "") + d + "-" + ctx.substring(4), "salute", ctx, "HEALTH iniziale " + (d > 0 ? "+" : "") + d,
                         d, x -> shift(ctx, Resource.HEALTH, d)));
+        }
         for (String ctx : List.of(NEUTRO, SPAZIENZIO, MARA))
             for (int d : new int[]{-10, -3, -1, 1, 3, 10})
                 list.add(new Curve("allerta" + (d > 0 ? "+" : "") + d + "-" + ctx.substring(4), "allerta", ctx, "A iniziale " + (d > 0 ? "+" : "") + d,

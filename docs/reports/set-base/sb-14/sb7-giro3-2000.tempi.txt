@@ -1,0 +1,8 @@
+banco sb-7/1
+bozza C:/_simone/claude/bm-revamp-on-laptop/tmp/sim/sb14/giro3.json
+partite 320000
+celle 160
+thread 8
+secondi 191.113
+partite al secondo 1674.4
+millisecondi per partita (tempo reale diviso partite) 0.5972

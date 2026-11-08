@@ -72,7 +72,7 @@ Valori approvati in SB-9; non cambiano qui, salvo la salute dei due personaggi b
 | PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H ~~100~~ 85¹, A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9) | dati |
 | PG-MAR | Mara Contromano | Personaggio, base | H ~~85~~ 80¹, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
 | PG-TOS | Tossico del Serraglio | Personaggio, avanzato | H ~~100~~ 80⁵, A 35, T ~~10~~ 20⁵, capacità 2, immune all'effetto periodico di T | NC | Tossico | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
-| PG-PIN | Pino l'Ultimo Giro | Personaggio, avanzato | H 110, A 15, L 10, capacità 2 | NC | Pino | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
+| PG-PIN | Pino l'Ultimo Giro | Personaggio, avanzato | H ~~110~~ 100⁶, A 15, L ~~10~~ 20⁶, capacità 2 | NC | Pino | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
 | PG-GIG | Gigi del Carro Attrezzi | Personaggio, avanzato | H 100, A 25, V 15, capacità 3 | NC | Gigi | bozza | Oggetti ed equip | dati |
 | PG-CES | Cesira la Malalingua | Personaggio, booster | H 90, A 30, V 10, capacità 2 | R | — | da inventare (concept SB-9) | Contromosse e letture | dati |
 | PG-ROC | Rocco «Sant'Incasso» | Personaggio, booster | H 130, A 15, capacità 2 | R | — | da inventare (concept SB-9; personaggio di prova SB-6a) | La salute come risorsa (D27) | dati |
@@ -91,6 +91,11 @@ decidere se seguire la stessa scala (vedi il [rapporto](../../reports/set-base/s
 raccomandazione 1 di D41). Giro 2: salute 85 → 80 e T iniziale 10 → 20, perché con 10 T le carte pagate in T restavano morte in mano per metà
 dei turni e il Tossico perdeva contro Mara (0,403); Tossicone Scatarrante 5 → 8 POISON. Giro 3: Raschiare il fondo +10 → +7 T, per il tetto
 di 4 HEALTH equivalenti per uso. In attesa del giudizio del proprietario.
+
+⁶ **SB-14, giri 1–3** ([correzioni](#correzioni-di-sb-14)). Giro 1: salute di Pino 110 → 95, l'ipotesi della scala dei base (SB-9 meno 15).
+Giro 2: L iniziale 10 → 20, PIN-AR2 da 3 a 10 + L, LR-PIN da 6 a 12 + L, perché le carte da 5 L restavano morte in mano per l'80–88% dei
+turni e Pino vinceva il 10–12%; Testata 20 → 25. Giro 3: Testata di nuovo a 20, perché a 25 stava sopra il prezzo misurato della L, e salute
+95 → 100. In attesa del giudizio del proprietario.
 
 ### Basic (7)
 
@@ -148,7 +153,7 @@ così chiudono la partita (D29).
 |---|---|---|---|---:|---|---|---|---|---|
 | LR-STR | generica | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 10 HIT | C | `Struggle`, conservata | Spazienzio, Mara, Gigi, Cesira | dati |
 | LR-TOS | Tossico | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 7 POISON e +4 T al bersaglio | NC | `LethalHeroinDose`, riprogettata («L'ultima dose») | Oggi costa salute solo con T alta e il bot non la gioca; qui chiude col veleno | dati |
-| LR-PIN | Pino | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, HIT pari a 6 + L residua, poi azzera L | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
+| LR-PIN | Pino | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, HIT pari a ~~6~~ 12⁶ + L residua, poi azzera L | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
 | LR-ROC | Rocco | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT | R | prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati |
 
 ### Azioni d'archetipo (37)
@@ -196,7 +201,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 20 HIT | C | 2 | bozza «Testata da ultimo giro», 10 → 5 L, 25 → 20 HIT | Attacco: costo basso (D33) | dati |
-| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a 3 + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
 | PIN-AR4 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | +20 L al bersaglio | NC | 2 | da inventare («Offro io») | Contromossa: rovina l'economia di A dell'avversario (circa −16 A in quattro turni) | dati |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Pino; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
@@ -300,7 +305,7 @@ c'è.
 | Spazienzio «Pazienza finita» (SB-11b) | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | SuperImpact 2, ExtremelyViolentBlow 2, Glare 2, MadeOfStone 2, YouStop 2 (10) | SeagullFly 2, Tartaruga 2, Mattone 1, HealingBlow 1, Denti stretti 1 (7) | Cocktail 2, Posacenere 1 (3) | 12 | 1 |
 | Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata 2, Sgommata 2, Sorpasso 2, Paraurti 2, Slalom 1 (9) | Spintone 2, Sputo 2, Tartaruga 1, Steal 1 (6) | Espresso 2, Kebab 2, Giubbotto 1 (5) | 12 | 1 |
 | Tossico «Tutto è droga» (SB-13) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | MethDrivenRage 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
-| Pino «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Offro io 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
+| Pino «Chiude quando dico io» (SB-14) | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Offro io 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
 | Gigi «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Colpo di chiave 1, Sotto il cofano 1, Lavoro fatto bene 1 (7) | Mattone 2, Steal 2, SeagullFly 1, Spintone 1 (6) | Guanti 2, Giubbotto 2, Casco 2, Espresso 1 (7) | 13 | 1 |
 
 Varianti rispetto alla forma approvata (5 + 4 + 3): Spazienzio ha 10 carte d'archetipo e 2 oggetti, perché ha capacità 1; Gigi ha 7 carte
@@ -320,6 +325,12 @@ tabella, senza scostamenti nella composizione; i numeri cambiati sono in [Correz
 («Raschiare il fondo», «L'ultima dose», «Pasticca trovata sul bancone»). Due letture del codice, da tenere per SB-25: il timer di
 TOS-AR5 rende l'immunità a T **all'autore**, non al bersaglio (serve al Tossico che l'ha persa); il timer di OGG-04 toglie **tutte** le
 immunità, compresa quella propria del Tossico, che resta senza finché non gioca TOS-AR5.
+
+**Nota di SB-14** ([rapporto](../../reports/set-base/sb-14-report.md)): lo starter di Pino è scritto nella stessa bozza come in questa
+tabella, senza scostamenti nella composizione; il nome proprio resta quello della bozza esterna, **«Chiude quando dico io»**, e i numeri
+cambiati sono in [Correzioni di SB-14](#correzioni-di-sb-14). PIN-AR2 e LR-PIN usano la classe di B1, scritta nei sorgenti di test
+(`base.pino.GoingBerserk` e la sottoclasse `base.pino.UltimoGiro`, che è last resort). PIN-AR2 tiene il nome del catalogo di
+`GoingBerserk`, «Estasi da Coca Etilene»; OGG-02 e OGG-03 tengono «Peroni da 66, calda» e «Tennents Super»; le nuove usano il nome di lavoro.
 
 **Generiche condivise:** 11 distinte su 20 usi. Ogni starter ne condivide almeno 2, nessuna è in più di 3 starter, e le due base
 condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16).
@@ -650,6 +661,26 @@ numeri). Ogni numero cambiato, col giro e il motivo; il resto della griglia e gl
 Esito sui bot, bozza finale: Tossico contro Spazienzio **0,529**, contro Mara **0,479**, specchio 0,507; partite di 12,8, 12,2 e 16,6 turni.
 Le carte complesse (contromossa, cura col veleno, travaso, Mescolone, Steal, Grab) restano: le varianti mostrano che sono i bot a giocarle
 male. In attesa del giudizio del proprietario.
+
+## Correzioni di SB-14
+
+Giro coi bot sullo starter di Pino, al massimo tre giri ([rapporto](../../reports/set-base/sb-14-report.md), delega di D38 sui numeri). Ogni
+numero cambiato, col giro e il motivo; il resto della griglia e gli starter già approvati non cambiano.
+
+| Slot | Numero | Prima | Dopo | Giro | Motivo |
+|---|---|---|---|---|---|
+| PG-PIN | HEALTH | 110 | 95, poi 100 | 1, 3 | Giro 1: la scala dei base, SB-9 meno 15. Giro 3: compensa Testata riportata a 20 |
+| PG-PIN | L iniziale | 10 | 20 | 2 | Le carte da 5 L restavano morte in mano per l'80–88% dei turni; Pino vinceva il 10–12% |
+| PIN-AR2 Estasi da Coca Etilene | danno fisso | 3 + L | 10 + L | 2 | Con la L dei bot (0–5) valeva meno di uno Spintone; ora è la carta che regge Pino (vale 13–17 punti più di uno Spintone) |
+| LR-PIN L'ultimo giro | danno fisso | 6 + L | 12 + L | 2 | A L zero faceva 6 HIT contro i 10 di Struggle, mentre le last resort devono stare vicino a Struggle e chiudere (D29); Pino ci arriva in più di metà delle partite |
+| PIN-AR1 Testata da ultimo giro | danno | 20 HIT | 25, poi 20 HIT | 2, 3 | A 25 (20 netti) stava sopra il prezzo misurato della L, 13,4 HIT per 5 L: una comune deve stare in linea (D34, punto 6) |
+
+**Due letture per i blocchi successivi.**
+- **Una mossa per turno.** La sezione «L e Pino» dice che, giocando PIN-BO1 ogni turno, Pino paga sempre una carta da 5 L: ma il turno
+  della bound è un turno senza la carta pagata. Bere e colpire costano due turni, quindi una carta pagata in L rende la metà di quanto
+  sembra sulla carta.
+- **I bot non bevono.** Lo stile prudente toglie 0,4 punti per ogni L guadagnata, lo stile risorse penalizza la L in eccesso: senza
+  immunità nessuno dei due gioca la bound di L. Lo stile `com` la gioca di continuo e vince il 10–21%.
 
 ## Tetto in partita
 

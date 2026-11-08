@@ -4,9 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.gsc.bm.model.Character;
+import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.game.Game;
+import com.gsc.bm.model.game.Move;
+import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.bot.BotPolicy;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -31,15 +36,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Prove brevi della suite: la bozza si carica e passa gli invarianti in modo stretto, gli starter rispettano il formato, poche partite
  * per ogni coppia di stili finiscono senza errori, ogni meccanica di base compare in uno dei due mazzi, le durate seguono R05 e i nomi
  * delle carte di Spazienzio sono in maiuscolo. SB-12a: la bozza porta i valori scelti nei giri coi bot. SB-13: lo starter del Tossico
- * «Tutto è droga», con le correzioni dei suoi giri. Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
+ * «Tutto è droga», con le correzioni dei suoi giri. SB-14: lo starter di Pino «Chiude quando dico io», con la classe che spende tutta la
+ * L (B1). Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
  * La bozza cresce blocco dopo blocco: i controlli sull'insieme (personaggi, mazzi, bound, partite del banco) contano tutti gli starter;
  * quelli che riguardano i soli starter base (copertura delle meccaniche, correzioni di SB-12a) usano {@link #BASE_STARTERS}.
  */
 class SetBaseDraftTest {
     static final String RESOURCE = "/set-base/bozza.json";
-    static final String SPAZIENZIO = "bruiser.character.BigBadBruiser", MARA = "base.character.Mara", TOSSICO = "junkie.character.ToxicJunkie";
+    static final String SPAZIENZIO = "bruiser.character.BigBadBruiser", MARA = "base.character.Mara", TOSSICO = "junkie.character.ToxicJunkie",
+            PINO = "base.character.Pino";
     static final List<String> BASE_STARTERS = List.of("starter-spazienzio", "starter-mara");
-    static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara", "starter-tossico");
+    static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino");
 
     private static Draft draft;
     private static JsonNode json;
@@ -64,11 +71,12 @@ class SetBaseDraftTest {
 
     @Test
     void theDraftLoadsWithTheTwoStartersAndAllTheirCards() {
-        // SB-13 aggiunge il Tossico: tre personaggi e tre starter, ciascuno con la sua terza bound fuori dallo starter.
-        assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO), draft.characterIds());
+        // SB-13 aggiunge il Tossico e SB-14 Pino: quattro personaggi e quattro starter, ciascuno con la sua terza bound fuori dallo starter.
+        assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO, PINO), draft.characterIds());
         assertEquals(new TreeSet<>(STARTERS), new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
-        for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile")) {
+        for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
+                "base.pino.bound.Coccio")) {
             assertTrue(draft.cardBindings().contains(third), third);
             assertFalse(draft.deckCards().contains(third), third + " non va negli starter");
         }
@@ -111,8 +119,8 @@ class SetBaseDraftTest {
                 BoundCap.Params.DEFAULT, null));
         assertEquals(0L, report.checks.total(), report.failures());
         assertEquals(0L, report.boundViolations(), report.failures());
-        assertEquals(9, report.bounds.size(), "le nove bound della bozza, comprese le terze (tre per personaggio)");
-        assertEquals(6L * 9 * 12, report.games(), "sei coppie di mazzi fra tre starter");
+        assertEquals(12, report.bounds.size(), "le dodici bound della bozza, comprese le terze (tre per personaggio)");
+        assertEquals(10L * 9 * 12, report.games(), "dieci coppie di mazzi fra quattro starter");
         assertTrue(report.checks.seatTurns > report.games() * 2, "i turni sono controllati");
     }
 
@@ -122,7 +130,7 @@ class SetBaseDraftTest {
         Map<String, BotPolicy> styles = PlaygroundTest.styles();
         Bench.Report report = Bench.run(draft, new Bench.Settings(2, 7_300_000L, new ArrayList<>(draft.deckIds()), styles, 2,
                 BoundCap.Params.DEFAULT, null));
-        assertEquals(6L * styles.size() * styles.size() * 2, report.games(), "sei coppie di mazzi fra tre starter");
+        assertEquals(10L * styles.size() * styles.size() * 2, report.games(), "dieci coppie di mazzi fra quattro starter");
         assertEquals(0L, report.checks.total(), report.failures());
         for (Bench.Cell cell : report.cells) assertEquals(0L, cell.tally.limits, cell.deckA + " contro " + cell.deckB);
     }
@@ -175,7 +183,7 @@ class SetBaseDraftTest {
                     checked++;
                 }
         }
-        assertEquals(7, checked, "Glare, MadeOfStone, Giubbotto e le due parate da due stati");
+        assertEquals(8, checked, "Glare, MadeOfStone, Giubbotto, le due parate da due stati e il Bancone di Pino (SB-14)");
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
         assertEquals(3, card("bruiser.MadeOfStone").get("self").get(0).get("turns").asInt());
     }
@@ -204,8 +212,8 @@ class SetBaseDraftTest {
     void theStartersCarryTheSb12aCorrections() {
         Map<String, Integer> health = new LinkedHashMap<>();
         for (JsonNode c : json.get("characters"))
-            if (!c.get("id").asText().equals(TOSSICO)) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
-        assertEquals(Map.of(SPAZIENZIO, 85, MARA, 80), health, "i due personaggi base; il Tossico ha il suo test");
+            if (!Set.of(TOSSICO, PINO).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
+        assertEquals(Map.of(SPAZIENZIO, 85, MARA, 80), health, "i due personaggi base; Tossico e Pino hanno il loro test");
         Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 5, "base.mara.Sgommata", 15, "base.mara.Slalom", 10,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
         alertnessCosts.forEach((binding, cost) -> {
@@ -363,12 +371,209 @@ class SetBaseDraftTest {
         assertEquals(20, cards.values().stream().mapToInt(Integer::intValue).sum());
         assertEquals(starter, base.cardsOf(spec.get(0)), "lo starter resta com'è");
         Listino listino = new Listino(base, new Listino.Params(1, 1, 1, 1), heuristic());
-        assertEquals(5, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati")).count(), "tre bound e due sonde");
+        assertEquals(5, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati") && c.context.equals("starter-tossico")).count(),
+                "tre bound e due sonde (SB-14 aggiunge le cinque di Pino, che hanno la loro prova)");
         // Senza lo starter del Tossico il contesto non nasce.
         ObjectNode root = json.deepCopy();
         ArrayNode decks = (ArrayNode) root.get("decks");
         for (int i = decks.size() - 1; i >= 0; i--) if (decks.get(i).get("id").asText().equals("starter-tossico")) decks.remove(i);
         Draft withoutToxic = Draft.parse("bozza senza lo starter del Tossico", root);
         assertFalse(Listino.setBaseContexts(withoutToxic, 7).deckIds().contains(Listino.TOSSICO));
+    }
+
+    // ---- SB-14: lo starter di Pino «Chiude quando dico io» ----
+
+    /** La salute iniziale di Pino (SB-9 meno 15, ipotesi della scala di D41, poi i giri coi bot di SB-14). */
+    static final int PINO_HEALTH = 100;
+    /** La L iniziale di Pino: 10 nella scheda, 20 dal giro 2 di SB-14 (le carte da 5 L restavano morte in mano). */
+    static final int PINO_ALCOHOL = 20;
+
+    /**
+     * SB-14: lo starter di Pino come nella griglia (basic, due bound comuni, last resort propria, 9 carte d'archetipo, 6 generiche, 5 oggetti).
+     * D34, punto 7: costi di 5 L o meno e bound di L entro +10; nessuna carta a costo A nello starter, perché la sua A scende sotto zero
+     * (griglia, «L e Pino»). Testi compresi, perché i bot leggono costi, guadagni e danno nominale.
+     */
+    @Test
+    void thePinoStarterFollowsTheGrid() {
+        JsonNode pino = character(PINO);
+        Map<String, Integer> resources = new TreeMap<>();
+        pino.get("resources").fields().forEachRemaining(e -> resources.put(e.getKey(), e.getValue().asInt()));
+        assertEquals(Map.of("HEALTH", PINO_HEALTH, "ALERTNESS", 15, "VIOLENCE", 0, "TOXICITY", 0, "ALCOHOL", PINO_ALCOHOL), resources);
+        assertEquals(2, pino.get("items").asInt(), "capacità 2 (SB-9)");
+        assertTrue(draft.character(PINO).getImmunities().isEmpty(), "nessuna immunità a L (D28)");
+        assertEquals("Pino l'Ultimo Giro", pino.get("name").asText());
+
+        String deck = "starter-pino";
+        assertEquals(PINO, draft.characterOf(deck));
+        assertEquals("base.pino.QuestoLoFiniscoIo", draft.basicOf(deck));
+        assertEquals(List.of("base.pino.bound.CinqueMinutiEVado", "base.pino.bound.SpallataAlBancone"), draft.boundOf(deck));
+        assertEquals("base.pino.UltimoGiro", draft.lastResortOf(deck));
+        assertEquals(PINO, card("base.pino.UltimoGiro").get("exclusiveTo").asText(), "last resort propria (D29)");
+        Map<String, Integer> expected = new TreeMap<>();
+        expected.put("base.pino.TestataDaUltimoGiro", 2);
+        expected.put("base.pino.GoingBerserk", 2);
+        expected.put("base.pino.IlBanconeRegge", 2);
+        expected.put("base.pino.OffroIo", 2);
+        expected.put("base.pino.RuttoADistanzaSociale", 1);
+        expected.put("com.Grab", 2);
+        expected.put("base.com.Spintone", 2);
+        expected.put("base.com.FasciaturaColFazzolettaccio", 2);
+        expected.put("base.items.AmaroNelBicchiereDiPlastica", 2);
+        expected.put("com.items.RottenBeer", 2);
+        expected.put("com.items.AnotherRottenBeer", 1);
+        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 9, generiche 6, oggetti 5, come nella griglia");
+
+        // D34, punto 7 (e D33): ogni carta di Pino costa al massimo 5 L e nessuna carta dello starter costa A.
+        for (String binding : draft.cardsOf(deck).keySet()) {
+            Map<Resource, Integer> cost = draft.card(binding).getCost();
+            assertFalse(cost.containsKey(Resource.ALERTNESS), binding + ": niente costi in A nello starter di Pino");
+            assertTrue(cost.getOrDefault(Resource.ALCOHOL, 0) <= 5, binding + ": costo in L entro 5");
+        }
+        for (String binding : List.of("base.pino.TestataDaUltimoGiro", "base.pino.OffroIo", "base.pino.RuttoADistanzaSociale")) {
+            assertEquals(Map.of(Resource.ALCOHOL, 5), draft.card(binding).getCost(), binding);
+            assertTrue(card(binding).get("gui").get("description").asText().contains("· 5 L:"), binding + ": costo nel testo");
+        }
+        // Le due carte che spendono tutta la L sono gratuite (B1, D33).
+        assertTrue(draft.card("base.pino.GoingBerserk").getCost().isEmpty());
+        assertTrue(draft.card("base.pino.UltimoGiro").getCost().isEmpty());
+        // Giro 2 di SB-14: le due carte che spendono tutta la L partono da 10 e da 12 (erano 3 e 6), testi compresi, perché i bot leggono
+        // il numero del danno nominale; la last resort tiene i 5 HIT a sé (D29). Giro 3: Testata di nuovo a 20 HIT, in linea col prezzo della L.
+        JsonNode berserk = card("base.pino.GoingBerserk"), last = card("base.pino.UltimoGiro"), testata = card("base.pino.TestataDaUltimoGiro");
+        assertEquals(10, berserk.get("params").get("base").asInt());
+        assertEquals(0, berserk.get("params").get("selfHit").asInt());
+        assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText());
+        assertTrue(berserk.get("gui").get("description").asText().contains("HIT pari a 10 più la propria L residua"));
+        assertEquals(12, last.get("params").get("base").asInt());
+        assertEquals(5, last.get("params").get("selfHit").asInt());
+        assertEquals("HIT 12+x", last.get("gui").get("damageAmount").asText());
+        assertTrue(last.get("gui").get("description").asText().contains("5 HIT a sé; HIT pari a 12 più la propria L residua"));
+        assertEquals(20, testata.get("target").get(0).get("amount").asInt());
+        assertEquals("HIT 20", testata.get("gui").get("damageAmount").asText());
+        assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 20 HIT al bersaglio"));
+        // D34, punto 7: la bound di L dà al massimo +10, testi compresi.
+        JsonNode cinque = card("base.pino.bound.CinqueMinutiEVado");
+        int alcohol = cinque.get("self").get(0).get("amount").asInt();
+        assertTrue(alcohol <= 10);
+        assertEquals("+" + alcohol + " L", cinque.get("gui").get("gains").asText());
+        assertTrue(cinque.get("gui").get("description").asText().contains("+" + alcohol + " L a sé"));
+        // Lo slot apre la descrizione delle dieci carte di Pino.
+        Pattern slot = Pattern.compile("^(PIN-(BA|BO\\d|AR\\d)|LR-PIN) · .*");
+        int slots = 0;
+        for (JsonNode c : json.get("cards"))
+            if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
+        assertEquals(10, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
+    }
+
+    /** Una partita fra Pino e Spazienzio, per giocare una carta di Pino con la sua logica speciale (la L memorizzata). */
+    private static Game pinoAgainstSpazienzio() {
+        Player a = draft.player("starter-pino", "seat-1", new Random(1), null);
+        Player b = draft.player("starter-spazienzio", "seat-2", new Random(2), null);
+        return new Game(List.of(a, b), "sim", false);
+    }
+
+    private static void resolveOnOpponent(Game game, String binding) {
+        Card card = draft.card(binding);
+        game.getPlayers().get("seat-1").getCardsInHand().add(card);
+        card.resolve(game, new Move(card.getName(), "seat-1", "seat-2", game.getGameId(), new java.util.HashMap<>()));
+    }
+
+    /**
+     * Le meccaniche di Pino su stati costruiti a mano: la L che cala (R06) e la A che va sotto zero (R01, Q10 della scheda); le due carte che
+     * spendono tutta la L con la classe di B1, che memorizza, azzera e colpisce (R04 applica gli effetti su sé prima di quelli sul bersaglio);
+     * il Rutto che legge la L senza consumarla, «Offro io» e il Bancone.
+     */
+    @Test
+    void thePinoMechanicsWorkOnHandBuiltStates() {
+        // R06: con L 10 a fine turno Pino perde 5 A e resta con 4 L.
+        Character pino = draft.character(PINO);
+        pino.getResources().put(Resource.ALCOHOL, 10);
+        pino.resolveTimeBasedEffects();
+        assertEquals(10, pino.getResources().get(Resource.ALERTNESS));
+        assertEquals(4, pino.getResources().get(Resource.ALCOHOL));
+        // A sotto zero (R01): con 20 L perde 10 A, poi Fasciatura ne toglie altri 5; nessuna carta si rompe.
+        pino.getResources().put(Resource.ALCOHOL, 20);
+        pino.resolveTimeBasedEffects();
+        assertEquals(0, pino.getResources().get(Resource.ALERTNESS));
+        ((AbstractCard) draft.card("base.com.FasciaturaColFazzolettaccio")).applyEffectOnSelf(pino);
+        assertEquals(-5, pino.getResources().get(Resource.ALERTNESS));
+
+        // Estasi da Coca Etilene: HIT pari a 3 più la L residua, poi la L a zero; nessun danno a sé.
+        Game game = pinoAgainstSpazienzio();
+        Character me = game.getPlayers().get("seat-1").getCharacter(), spazienzio = game.getPlayers().get("seat-2").getCharacter();
+        me.getResources().put(Resource.ALCOHOL, 12);
+        int berserk = card("base.pino.GoingBerserk").get("params").get("base").asInt(),
+                last = card("base.pino.UltimoGiro").get("params").get("base").asInt();
+        int health = 85 - berserk - 12;
+        resolveOnOpponent(game, "base.pino.GoingBerserk");
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(0, me.getResources().get(Resource.ALCOHOL));
+        assertEquals(PINO_HEALTH, me.getResources().get(Resource.HEALTH));
+        // Con L a zero resta il danno fisso.
+        resolveOnOpponent(game, "base.pino.GoingBerserk");
+        health -= berserk;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
+        // L'ultimo giro: 5 HIT a sé, HIT pari a 6 più la L residua, poi la L a zero; è una last resort.
+        me.getResources().put(Resource.ALCOHOL, 9);
+        resolveOnOpponent(game, "base.pino.UltimoGiro");
+        health -= last + 9;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(PINO_HEALTH - 5, me.getResources().get(Resource.HEALTH));
+        assertEquals(0, me.getResources().get(Resource.ALCOHOL));
+        assertTrue(draft.card("base.pino.UltimoGiro").isLastResort());
+        assertFalse(draft.card("base.pino.GoingBerserk").isLastResort());
+        // Rutto: il bersaglio perde A pari alla L residua di Pino, che non si consuma; poi 5 HIT.
+        me.getResources().put(Resource.ALCOHOL, 6);
+        resolveOnOpponent(game, "base.pino.RuttoADistanzaSociale");
+        assertEquals(20 - 6, spazienzio.getResources().get(Resource.ALERTNESS));
+        assertEquals(health - 5, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(6, me.getResources().get(Resource.ALCOHOL));
+        // Offro io: +20 L al bersaglio, che a fine turno perde 10 A.
+        resolveOnOpponent(game, "base.pino.OffroIo");
+        assertEquals(20, spazienzio.getResources().get(Resource.ALCOHOL));
+        spazienzio.resolveTimeBasedEffects();
+        assertEquals(14 - 10, spazienzio.getResources().get(Resource.ALERTNESS));
+        // Il bancone regge: HIT ricevuto a metà in questo turno, +5 L.
+        Character standing = draft.character(PINO), hitter = draft.character(SPAZIENZIO);
+        ((AbstractCard) draft.card("base.pino.IlBanconeRegge")).applyEffectOnSelf(standing);
+        assertEquals(PINO_ALCOHOL + 5, standing.getResources().get(Resource.ALCOHOL));
+        hitter.inflictDamage(standing, new Damage(Damage.DamageType.HIT, 20));
+        assertEquals(PINO_HEALTH - 10, standing.getResources().get(Resource.HEALTH));
+    }
+
+    /** SB-14: la base del listino ha anche il contesto di Pino, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
+    @Test
+    void theListinoBaseHasThePinoContextAndItsBoundCurves() throws Exception {
+        Draft base = Listino.setBaseContexts(draft, 7);
+        List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.PINO);
+        Map<String, Integer> cards = base.cardsOf(Listino.PINO), starter = draft.cardsOf(spec.get(0));
+        assertEquals(2, cards.get(Listino.SLOT1));
+        assertEquals(2, cards.get(Listino.SLOT2));
+        assertFalse(cards.containsKey(spec.get(1)) || cards.containsKey(spec.get(2)));
+        assertTrue(cards.containsKey("com.Grab"), "Grab resta: la L arriva dagli oggetti");
+        assertEquals(20, cards.values().stream().mapToInt(Integer::intValue).sum());
+        assertEquals(starter, base.cardsOf(spec.get(0)), "lo starter resta com'è");
+        Listino listino = new Listino(base, new Listino.Params(1, 1, 1, 1), heuristic());
+        assertEquals(10, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati")).count(), "tre bound e due sonde, Tossico e Pino");
+        assertEquals(5, listino.curves().stream().filter(c -> c.group.equals("tettoavanzati") && c.context.equals("starter-pino")).count());
+        assertTrue(listino.bisections().stream().anyMatch(b -> b.context.equals(Listino.PINO) && b.group.equals("costo")), "il prezzo della L di Pino");
+        // Ogni bozza derivata per Pino è valida: anche le curve «salute», che clonano il personaggio con la sua last resort Java.
+        int derived = 0;
+        for (Listino.Curve c : listino.curves())
+            if (c.context.equals(Listino.PINO) || c.context.equals("starter-pino")) {
+                base.derive(c.id, c.builder.build(0).root);
+                derived++;
+            }
+        for (Listino.Bisection b : listino.bisections())
+            if (b.context.equals(Listino.PINO)) {
+                base.derive(b.id, b.builder.build(b.lo).root);
+                derived++;
+            }
+        assertEquals(10, derived, "quattro curve di salute, cinque di tetto e il prezzo della L");
+        // Senza lo starter di Pino il contesto non nasce.
+        ObjectNode root = json.deepCopy();
+        ArrayNode decks = (ArrayNode) root.get("decks");
+        for (int i = decks.size() - 1; i >= 0; i--) if (decks.get(i).get("id").asText().equals("starter-pino")) decks.remove(i);
+        Draft withoutPino = Draft.parse("bozza senza lo starter di Pino", root);
+        assertFalse(Listino.setBaseContexts(withoutPino, 7).deckIds().contains(Listino.PINO));
     }
 }
