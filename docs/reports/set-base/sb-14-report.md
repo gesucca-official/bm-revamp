@@ -1,6 +1,6 @@
 # SB-14 — Pino l'Ultimo Giro: bozza dello starter e giro coi bot: rapporto
 
-**Fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Lo starter di Pino, **«Chiude quando dico io»**, è nella bozza del Set
+**Fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D44](../../set-base-plan.md#decisioni-del-proprietario)). Lo starter di Pino, **«Chiude quando dico io»**, è nella bozza del Set
 Base come nella [griglia](../../design/set-base/griglia.md), senza scostamenti nella composizione. GoingBerserk riprogettata e «L'ultimo
 giro» usano la classe Java di B1, scritta nei sorgenti di test: il passo 0 l'ha segnalata e il proprietario ha deciso «Tutto in SB-14».
 

@@ -1,6 +1,6 @@
 # SB-6b — Più set e mini-espansione di prova: rapporto
 
-**Fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Il playground carica più set insieme. Un file di bozza
+**Fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D44](../../set-base-plan.md#decisioni-del-proprietario)). Il playground carica più set insieme. Un file di bozza
 dichiara il proprio set e la versione, le carte e i personaggi possono avere una rarità del vocabolario di R07, un mazzo mescola
 carte di set diversi secondo le regole dei mazzi del regolamento 1.12. Una mini-espansione di prova di cinque carte si carica
 sia col set di oggi sia con la bozza del Set Base, gioca partite intere e una piccola matrice col banco, e non cambia nessuna

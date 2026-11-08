@@ -274,7 +274,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-4 | Vista limitata e bot euristici | SB-3 |
 | | SB-5 | Prova del formato dati | SB-3 |
 | | SB-6a | Nucleo del playground | SB-5 |
-| | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a |
+| | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a (fatto e approvato) |
 | | SB-7 | Banco di misura e invarianti | SB-4, SB-6a |
 | | SB-7b | Bot e costo in HEALTH | SB-7 |
 | | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b |
@@ -286,7 +286,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-12a | Giro coi bot sugli starter base | SB-11b |
 | | SB-12b | Prova umana degli starter base | SB-8, SB-12a |
 | | SB-13 | Tossico: bozza e giro | SB-12a (anticipato da D42; fatto e approvato) |
-| | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 |
+| | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 (fatto e approvato) |
 | | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 |
 | | SB-16 | Prova umana degli avanzati | SB-15 |
 | | SB-17 | Il Malalingua: bozza e giro | SB-16 |
@@ -418,7 +418,7 @@ come parametri (`@Tunable`, valori di oggi come predefiniti), personaggi, mazzi 
 errata. La bozza «attuale» gioca come il catalogo in 400 partite a ogni esecuzione e in 10.000 una tantum; una bozza di prova con
 Mara e Rocco di SB-9 gira senza modifiche al motore. [Rapporto](reports/set-base/sb-6a-report.md).
 
-**SB-6b fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Fase A approvata con «Approvo tutte». Formato `sb-6b/1`:
+**SB-6b fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D44](#decisioni-del-proprietario)). Fase A approvata con «Approvo tutte». Formato `sb-6b/1`:
 un file per set, con testata (id, nome, versione) e `requires`; i file `sb-6a/1` si leggono come prima e sono il set `base`. Più set
 si caricano insieme (`Draft.load`, `-Dsim.draft` con più fonti separate da `;`), con id unici e prefisso del set, visibilità limitata
 ai set richiesti e rifiuto chiaro di set mancanti, id ripetuti, carte di set non caricati, rarità fuori vocabolario e mazzi misti
@@ -629,7 +629,7 @@ di Q5), circa 75 minuti di calcolo su un tetto di 2 ore; correzioni decise con l
 Da giudicare: le quattro correzioni, il nome dello starter, lo specchio lungo e il mazzo che si esaurisce spesso, il Mescolone. Dettagli
 nel [rapporto](reports/set-base/sb-13-report.md).
 
-**SB-14 fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Lo starter di Pino, **«Chiude quando dico io»**, è nella bozza come
+**SB-14 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D44](#decisioni-del-proprietario)): numeri del giro 3 e nome dello starter approvati; partite lunghe, Offro io e il Bancone restano fino alla prova umana degli avanzati (SB-16). Lo starter di Pino, **«Chiude quando dico io»**, è nella bozza come
 nella griglia. Il passo 0 ha trovato che GoingBerserk riprogettata e «L'ultimo giro» chiedono la classe Java di B1, e il proprietario ha
 deciso di farla nello stesso blocco («Tutto in SB-14»): vive nei sorgenti di test (`base.pino.GoingBerserk` e la sottoclasse last resort
 `base.pino.UltimoGiro`) e non tocca il caricatore. Tre giri coi bot (il massimo di Q5), circa 105 minuti di calcolo su un tetto di 2 ore;
@@ -864,6 +864,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D41 | Correzioni degli starter base (SB-12a) | 7 novembre 2026, con le parole del proprietario: «Approvo, anche +6 A». Correzioni decise nei tre giri (Q5) con la delega di D38 e approvate: salute iniziale di **Spazienzio 85** e di **Mara 80**; costi di Mara −5 A su Cinghiata, Sgommata, Slalom, Paraurti e Sputo (D38); **Sgommata 25 CUT**. In più, **MAR-BO2 da +8 a +6 A**: la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 (precisa B2). Steal, parate e contromosse restano negli starter: le varianti mostrano che sono i bot a giocarle male. Restano raccomandazioni: scala della salute degli altri personaggi in SB-13, patte e Steal da guardare in SB-12b. Precisa D34(5), D36, D38 e B2 |
 | D42 | Approvazione di SB-1, anticipo di SB-13 e SB-2 | 8 novembre 2026, con le parole del proprietario: «Sì, entrambi», alla domanda «Approvi SB-1 e anticipiamo SB-13 insieme a SB-2?». **SB-1 approvato** (regolamento 1.12, Q1–Q6). **SB-13 anticipato** dopo SB-12a: la prova umana degli starter base aspetta SB-2, SB-6b e SB-8, e gli starter della bozza approvata (D41) sono la base stabile; se SB-12b li cambierà, il giro del Tossico si rilancia. **SB-2 anticipato** in parallelo a C4, con fase A che si ferma sull'inventario di ciò che tocca nel client; paletti: niente `style.css`, `readability.ts`, `scene.ts`, `table.tsx`; strumenti di verifica toccati pushati prima di C4-8a; jar rifatto sull'altra macchina dopo il pull. Precisa D30 e D40 |
 | D43 | Approvazione di SB-2 e SB-13 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-2 e SB-13 con le mie raccomandazioni?». **SB-2 approvato:** regolamento 1.13 con le sole regole generali e Set Base 0.1 in `docs/sets/base.md` (Q1–Q9 della fase A). **SB-13 approvato** con le raccomandazioni della regia: (1) correzioni del Tossico salute 80, T iniziale 20, Tossicone Scatarrante 8 POISON, Raschiare il fondo +7 T; (2) nome dello starter «Tutto è droga»; (3) specchio lungo (16,6 turni, 22% di patte) e mazzo che si esaurisce spesso tenuti senza ridisegno fino alla prova umana degli avanzati (SB-16), perché i bot non giocano il travaso; (4) il Mescolone che toglie anche l'immunità propria resta per la prova umana, come le contromosse in SB-12a. Se la prova umana trova il Tossico forte, la prima leva è la T iniziale. Precisa D38 e D41 |
+| D44 | Approvazione di SB-6b e SB-14 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-6b e SB-14 con le mie raccomandazioni?». **SB-6b approvato:** formato `sb-6b/1` con più set, rarità del vocabolario di R07, mazzi misti e mini-espansione di prova nei soli test (Q1–Q9 della fase A). **SB-14 approvato** con le raccomandazioni del rapporto: (1) correzioni di Pino salute 100, L iniziale 20, Estasi 10 + L, L'ultimo giro 12 + L, Testata 20; (2) il giro 3 invece del giro 2, perché un umano gioca Testata più dei bot; (3) nome dello starter «Chiude quando dico io»; (4) partite lunghe, specchio con una patta su tre e mazzo esaurito tenuti senza ridisegno fino a SB-16, come per il Tossico (D43); (5) Offro io e il Bancone tenuti per la prova umana; (6) le rarità della griglia nella bozza in un passaggio a sé, che porta la bozza a `sb-6b/1` senza cambiare le partite. Se la prova umana trova Pino forte, la prima leva è la L iniziale, poi Estasi. Precisa D38 e D43 |
 
 ## Decisioni ancora aperte
 
