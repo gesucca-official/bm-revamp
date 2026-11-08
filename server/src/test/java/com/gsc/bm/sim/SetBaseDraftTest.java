@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * per ogni coppia di stili finiscono senza errori, ogni meccanica di base compare in uno dei due mazzi, le durate seguono R05 e i nomi
  * delle carte di Spazienzio sono in maiuscolo. SB-12a: la bozza porta i valori scelti nei giri coi bot. SB-13: lo starter del Tossico
  * «Tutto è droga», con le correzioni dei suoi giri. SB-14: lo starter di Pino «Chiude quando dico io», con la classe che spende tutta la
- * L (B1). Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
+ * L (B1). SB-15: la bozza nel formato sb-6b/1 con le rarità della griglia. Le misure lunghe restano a richiesta (BenchMeasureTest, ListinoMeasureTest).
  * La bozza cresce blocco dopo blocco: i controlli sull'insieme (personaggi, mazzi, bound, partite del banco) contano tutti gli starter;
  * quelli che riguardano i soli starter base (copertura delle meccaniche, correzioni di SB-12a) usano {@link #BASE_STARTERS}.
  */
@@ -575,5 +575,69 @@ class SetBaseDraftTest {
         for (int i = decks.size() - 1; i >= 0; i--) if (decks.get(i).get("id").asText().equals("starter-pino")) decks.remove(i);
         Draft withoutPino = Draft.parse("bozza senza lo starter di Pino", root);
         assertFalse(Listino.setBaseContexts(withoutPino, 7).deckIds().contains(Listino.PINO));
+    }
+
+    // ---- SB-15, parte 1: le rarità della griglia nella bozza (D44, punto 6; Q5 di SB-6b) ----
+
+    /** Lo slot della griglia di ogni personaggio della bozza. */
+    static final Map<String, String> CHARACTER_SLOTS = Map.of(SPAZIENZIO, "PG-SPA", MARA, "PG-MAR", TOSSICO, "PG-TOS", PINO, "PG-PIN");
+    /**
+     * Le rarità della griglia (colonna «Rarità»: C, NC, R) per ogni slot che la bozza contiene, elencate qui perché la prova non legga i
+     * documenti. Le stesse le scrive e le confronta col file della griglia docs/reports/set-base/sb-6b/rarita-bozza.py (--check).
+     */
+    static final Map<String, Set<String>> GRID_RARITIES = Map.of(
+            "COMMON", Set.of("PG-SPA", "PG-MAR",
+                    "SPA-BA", "MAR-BA", "SPA-BO1", "SPA-BO2", "MAR-BO1", "MAR-BO2", "TOS-BO1", "TOS-BO2", "PIN-BO1", "PIN-BO2", "LR-STR",
+                    "SPA-AR1", "SPA-AR3", "SPA-AR4", "MAR-AR1", "MAR-AR2", "MAR-AR3", "TOS-AR1", "TOS-AR2", "TOS-AR3",
+                    "PIN-AR1", "PIN-AR2", "PIN-AR3",
+                    "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18",
+                    "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-12"),
+            "UNCOMMON", Set.of("PG-TOS", "PG-PIN",
+                    "TOS-BA", "PIN-BA", "SPA-BO3", "MAR-BO3", "TOS-BO3", "PIN-BO3", "LR-TOS", "LR-PIN",
+                    "SPA-AR5", "MAR-AR4", "TOS-AR4", "PIN-AR4", "GEN-07", "OGG-03", "OGG-13"),
+            "RARE", Set.of("SPA-AR2", "MAR-AR5", "TOS-AR5", "PIN-AR5", "OGG-04"));
+
+    private static String gridRarity(String slot) {
+        List<String> found = new ArrayList<>();
+        GRID_RARITIES.forEach((rarity, slots) -> { if (slots.contains(slot)) found.add(rarity); });
+        assertEquals(1, found.size(), slot + ": una e una sola rarità nell'elenco della griglia");
+        return found.get(0);
+    }
+
+    /**
+     * SB-15, parte 1: la bozza è nel formato sb-6b/1, set «base» in versione «bozza», e ogni carta e personaggio ha la rarità della griglia,
+     * nel vocabolario di R07. Lo slot si legge all'inizio della descrizione delle carte. Le rare negli starter sono 1 o 2 (griglia, «Per rarità»).
+     */
+    @Test
+    void everyCardAndCharacterHasTheGridRarity() {
+        assertEquals(Draft.FORMAT_SETS, draft.format);
+        assertEquals(List.of("base"), new ArrayList<>(draft.sets().keySet()));
+        Draft.SetInfo base = draft.sets().get("base");
+        assertEquals("Set Base", base.name);
+        assertEquals("bozza", base.version, "una bozza in lavorazione, non il Set Base 0.1 del documento di set");
+        assertTrue(base.requires.isEmpty());
+
+        Pattern slot = Pattern.compile("^([A-Z]{2,3}-[A-Z0-9]+) · .*");
+        Map<String, Integer> counts = new TreeMap<>();
+        for (String binding : draft.cardBindings()) {
+            Matcher m = slot.matcher(card(binding).get("gui").path("description").asText(""));
+            assertTrue(m.matches(), binding + ": lo slot apre la descrizione");
+            String rarity = draft.rarityOf(binding);
+            assertTrue(Draft.RARITIES.contains(rarity), binding + ": rarità " + rarity + " fuori dal vocabolario di R07");
+            assertEquals(gridRarity(m.group(1)), rarity, binding + " (" + m.group(1) + ")");
+            assertEquals("base", draft.setOfCard(binding));
+            counts.merge(rarity, 1, Integer::sum);
+        }
+        assertEquals(new TreeSet<>(CHARACTER_SLOTS.keySet()), new TreeSet<>(draft.characterIds()), "ogni personaggio ha il suo slot");
+        for (String id : draft.characterIds()) {
+            String rarity = draft.characterRarity(id);
+            assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
+            assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
+        }
+        assertEquals(Map.of("COMMON", 40, "RARE", 5, "UNCOMMON", 15), counts, "le sessanta carte della bozza");
+        for (String deck : STARTERS) {
+            long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
+            assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");
+        }
     }
 }

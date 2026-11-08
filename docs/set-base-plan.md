@@ -289,7 +289,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-12b | Prova umana degli starter base | SB-8, SB-12a |  |
 | | SB-13 | Tossico: bozza e giro | SB-12a (D42; prima SB-12) | chiuso (anticipato, D42) |
 | | SB-14 | Pino l'Ultimo Giro: bozza e giro | SB-13 | chiuso |
-| | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 | prossimo |
+| | SB-15 | Gigi del Carro Attrezzi: bozza e giro | SB-14 | in corso: rarità nella bozza fatte, passo 0 in attesa del proprietario |
 | | SB-16 | Prova umana degli avanzati | SB-15 |  |
 | | SB-17 | Il Malalingua: bozza e giro | SB-16 |  |
 | | SB-18 | Sant'Incasso: bozza e giro | SB-17 |  |
@@ -311,8 +311,8 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
-SB-6b e SB-14 (D43, D44). **Prossimi:** SB-15; le rarità della griglia nella bozza, in un passaggio a sé che non cambia le partite (D44,
-punto 6); SB-8, che apre le prove umane SB-12b e SB-16 e tocca server e client, quindi va preparato con i paletti verso C4. SB-30 può
+SB-6b e SB-14 (D43, D44). **Prossimi:** SB-15, che ha già scritto le rarità della griglia nella bozza (D44, punto 6) e
+aspetta il proprietario sul passo 0; SB-8, che apre le prove umane SB-12b e SB-16 e tocca server e client, quindi va preparato con i paletti verso C4. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -651,6 +651,12 @@ correzioni decise con la delega di D38, solo numeri di Pino.
 
 Da giudicare: le correzioni, il giro 3 contro il giro 2, il nome dello starter, le partite lunghe col mazzo che si esaurisce, Offro io e il
 Bancone, le rarità della bozza proposte da SB-6b (Q5). Dettagli nel [rapporto](reports/set-base/sb-14-report.md).
+
+**SB-15, parte 1 fatta l'8 novembre 2026** (D44, punto 6): la bozza è nel formato `sb-6b/1`, set `base` in versione «bozza», e ogni
+carta e personaggio ha la rarità della griglia (40 comuni, 15 non comuni, 5 rare; Tossico e Pino non comuni). La matrice dei quattro
+starter approvati coincide con quella finale di SB-14 in 160 celle su 160. **Passo 0 fermo:** la rara di Gigi, «Lavoro fatto bene»
+(GIG-AR5), chiede la classe Java nuova prevista dalla griglia; il resto si scrive coi passi di oggi o con `BreakYourToy`. Proposta: tutto
+in SB-15, come per Pino, oppure dividere. Dettagli nel [rapporto](reports/set-base/sb-15-report.md).
 
 **Perimetro.** Bozza dello starter (Junkie riprogettato sul primo blocco, conservandone il flavour), poi giro contro tutti gli starter già stabili, **senza toccarli se non
 serve**; se serve, lo si dichiara e si rilancia la matrice.

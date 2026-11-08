@@ -1,0 +1,320 @@
+# Banco SB-7 — rarita.json
+
+> SB-15 parte 1: rarità della griglia nella bozza (sb-6b/1), partite invariate
+
+| Voce | Valore |
+|---|---|
+| Bozza | `tmp/sim/sb15/rarita.json` |
+| SHA-256 | `d645a97f946d9cfd8c70f35363d8306d752c18cc14cc7759f3cdf2d5626a68eb` |
+| Formato | sb-6b/1: 20 carte, al massimo 2 copie, 2 bound |
+| Banco | sb-7/1 |
+| Mazzi | starter-pino, starter-tossico, starter-spazienzio, starter-mara |
+| Stili | aggressivo, prudente, risorse, com: 16 coppie |
+| Semi | 7000000–7001999, posti alternati (semi pari: A gioca per primo) |
+| Partite | 2000 per cella, 160 celle, 320000 in tutto |
+| Tetto delle bound | 4 unità ±0%; pesi V 0,75 · A 0,5 · T 0,15 se immune, 0 se no · L 0,35 · HEALTH 1; danno inflitto 1,33; 8 usi contro un manichino |
+| Tempi | non qui: nel file `.tempi.txt` accanto, perché questo testo resti uguale a ogni esecuzione |
+
+Quota = vittorie / (vittorie + sconfitte), patte e limite esclusi. Intervalli di Wilson al 95%: coprono solo l'errore di campionamento, **non i limiti dei bot**. Con molte celle, circa una su venti cade fuori per caso.
+
+## Invarianti
+
+320000 partite, 8651998 turni di giocatore controllati.
+
+| Invariante | Cosa controlla | Violazioni |
+|---|---|---:|
+| senza-mosse | ogni giocatore vivo ha almeno una mossa legale | 0 |
+| mossa-vuota | nessun giocatore vivo invia una mossa vuota | 0 |
+| bound-gratuite | ogni bound della bozza è gratuita (D2) | 0 |
+| basic-bound-in-mano | basic e bound del mazzo sono sempre in mano | 0 |
+| last-resort-in-mano | a mazzo vuoto e mano incompleta la last resort è in mano | 0 |
+| last-resort-giocabile | la last resort in mano è sempre una mossa legale | 0 |
+| bound-giocabile | con una carta regolare da scartare ogni bound in mano è legale | 0 |
+| limite-turni | nessuna partita arriva al limite di 200 turni | 0 |
+| tetto-bound | valore per uso entro il tetto, nessun accumulo, nulla che resti sull'avversario | 0 bound su 12 |
+
+## Matrice dei mazzi
+
+Somma delle 16 coppie di stili, a pari peso.
+
+| A | B | partite | vittorie A | vittorie B | patte | limite | quota A [IC 95%] | quota del primo posto |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| starter-pino | starter-pino | 32000 | 10502 | 10368 | 11130 | 0 | 0,503 [0,496–0,510] | 0,501 [0,494–0,508] |
+| starter-pino | starter-tossico | 32000 | 11354 | 15007 | 5639 | 0 | 0,431 [0,425–0,437] | 0,503 [0,497–0,509] |
+| starter-pino | starter-spazienzio | 32000 | 16228 | 11228 | 4544 | 0 | 0,591 [0,585–0,597] | 0,511 [0,505–0,516] |
+| starter-pino | starter-mara | 32000 | 14998 | 11830 | 5172 | 0 | 0,559 [0,553–0,565] | 0,506 [0,500–0,512] |
+| starter-tossico | starter-tossico | 32000 | 12583 | 12249 | 7168 | 0 | 0,507 [0,501–0,513] | 0,492 [0,486–0,498] |
+| starter-tossico | starter-spazienzio | 32000 | 15106 | 13446 | 3448 | 0 | 0,529 [0,523–0,535] | 0,503 [0,498–0,509] |
+| starter-tossico | starter-mara | 32000 | 13680 | 14854 | 3466 | 0 | 0,479 [0,474–0,485] | 0,505 [0,499–0,511] |
+| starter-spazienzio | starter-spazienzio | 32000 | 13894 | 14063 | 4043 | 0 | 0,497 [0,491–0,503] | 0,501 [0,495–0,507] |
+| starter-spazienzio | starter-mara | 32000 | 15071 | 13615 | 3314 | 0 | 0,525 [0,520–0,531] | 0,510 [0,504–0,515] |
+| starter-mara | starter-mara | 32000 | 14449 | 14496 | 3055 | 0 | 0,499 [0,493–0,505] | 0,500 [0,495–0,506] |
+
+### Per coppia di stili
+
+Quota di A, con lo stile di A in riga e quello di B in colonna.
+
+**starter-pino contro starter-pino**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,487 [0,453–0,521] | 0,577 [0,540–0,613] | 0,734 [0,703–0,762] | 0,997 [0,993–0,999] |
+| prudente | 0,447 [0,411–0,484] | 0,519 [0,485–0,553] | 0,682 [0,652–0,711] | 0,998 [0,995–0,999] |
+| risorse | 0,275 [0,246–0,306] | 0,336 [0,307–0,367] | 0,510 [0,478–0,541] | 0,996 [0,993–0,998] |
+| com | 0,001 [0,000–0,003] | 0,001 [0,000–0,004] | 0,002 [0,001–0,005] | 0,514 [0,489–0,540] |
+
+**starter-pino contro starter-tossico**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,437 [0,412–0,462] | 0,701 [0,677–0,724] | 0,410 [0,385–0,435] | 0,821 [0,803–0,838] |
+| prudente | 0,351 [0,327–0,376] | 0,656 [0,632–0,680] | 0,288 [0,266–0,312] | 0,787 [0,767–0,805] |
+| risorse | 0,330 [0,307–0,354] | 0,623 [0,598–0,647] | 0,273 [0,252–0,296] | 0,794 [0,774–0,812] |
+| com | 0,037 [0,029–0,047] | 0,024 [0,018–0,032] | 0,006 [0,004–0,011] | 0,450 [0,427–0,473] |
+
+**starter-pino contro starter-spazienzio**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,753 [0,732–0,772] | 0,957 [0,946–0,965] | 0,363 [0,340–0,387] | 0,859 [0,842–0,874] |
+| prudente | 0,806 [0,787–0,824] | 0,985 [0,978–0,990] | 0,293 [0,271–0,317] | 0,884 [0,868–0,898] |
+| risorse | 0,747 [0,726–0,767] | 0,966 [0,956–0,973] | 0,252 [0,231–0,274] | 0,863 [0,847–0,879] |
+| com | 0,169 [0,152–0,188] | 0,167 [0,149–0,186] | 0,006 [0,003–0,011] | 0,310 [0,288–0,332] |
+
+**starter-pino contro starter-mara**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,360 [0,337–0,384] | 0,878 [0,861–0,892] | 0,520 [0,495–0,545] | 0,983 [0,976–0,988] |
+| prudente | 0,214 [0,194–0,236] | 0,873 [0,855–0,888] | 0,409 [0,384–0,434] | 0,982 [0,975–0,987] |
+| risorse | 0,256 [0,234–0,278] | 0,889 [0,872–0,903] | 0,468 [0,443–0,493] | 0,986 [0,980–0,991] |
+| com | 0,015 [0,011–0,022] | 0,214 [0,195–0,234] | 0,066 [0,056–0,079] | 0,707 [0,684–0,728] |
+
+**starter-tossico contro starter-tossico**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,529 [0,503–0,555] | 0,340 [0,316–0,366] | 0,089 [0,075–0,105] | 0,655 [0,633–0,677] |
+| prudente | 0,676 [0,651–0,700] | 0,497 [0,469–0,526] | 0,118 [0,101–0,136] | 0,816 [0,798–0,834] |
+| risorse | 0,913 [0,898–0,926] | 0,895 [0,878–0,910] | 0,500 [0,470–0,529] | 0,811 [0,792–0,828] |
+| com | 0,352 [0,330–0,375] | 0,189 [0,171–0,208] | 0,199 [0,182–0,218] | 0,506 [0,484–0,529] |
+
+**starter-tossico contro starter-spazienzio**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,598 [0,575–0,621] | 0,825 [0,807–0,842] | 0,251 [0,231–0,273] | 0,767 [0,747–0,786] |
+| prudente | 0,613 [0,590–0,636] | 0,791 [0,770–0,810] | 0,180 [0,163–0,198] | 0,704 [0,682–0,725] |
+| risorse | 0,662 [0,640–0,684] | 0,899 [0,885–0,912] | 0,212 [0,193–0,231] | 0,821 [0,803–0,838] |
+| com | 0,296 [0,276–0,318] | 0,408 [0,386–0,431] | 0,073 [0,062–0,086] | 0,403 [0,381–0,426] |
+
+**starter-tossico contro starter-mara**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,216 [0,197–0,237] | 0,648 [0,625–0,670] | 0,341 [0,319–0,364] | 0,927 [0,914–0,938] |
+| prudente | 0,200 [0,182–0,219] | 0,651 [0,628–0,674] | 0,315 [0,294–0,338] | 0,943 [0,932–0,953] |
+| risorse | 0,234 [0,215–0,255] | 0,738 [0,717–0,758] | 0,359 [0,337–0,382] | 0,975 [0,967–0,981] |
+| com | 0,067 [0,057–0,080] | 0,257 [0,238–0,278] | 0,116 [0,102–0,131] | 0,610 [0,588–0,633] |
+
+**starter-spazienzio contro starter-spazienzio**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,488 [0,465–0,512] | 0,520 [0,496–0,543] | 0,341 [0,319–0,363] | 0,642 [0,620–0,664] |
+| prudente | 0,468 [0,444–0,491] | 0,495 [0,470–0,520] | 0,192 [0,174–0,211] | 0,567 [0,544–0,590] |
+| risorse | 0,673 [0,650–0,695] | 0,804 [0,785–0,822] | 0,499 [0,475–0,523] | 0,832 [0,814–0,848] |
+| com | 0,345 [0,324–0,368] | 0,427 [0,404–0,450] | 0,173 [0,156–0,191] | 0,490 [0,467–0,513] |
+
+**starter-spazienzio contro starter-mara**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,314 [0,293–0,336] | 0,441 [0,418–0,464] | 0,382 [0,360–0,405] | 0,825 [0,807–0,842] |
+| prudente | 0,231 [0,212–0,251] | 0,483 [0,458–0,507] | 0,317 [0,295–0,339] | 0,853 [0,836–0,868] |
+| risorse | 0,611 [0,588–0,634] | 0,819 [0,801–0,836] | 0,710 [0,689–0,731] | 0,980 [0,973–0,985] |
+| com | 0,148 [0,133–0,165] | 0,322 [0,301–0,344] | 0,200 [0,182–0,219] | 0,716 [0,695–0,737] |
+
+**starter-mara contro starter-mara**
+
+| A \ B | aggressivo | prudente | risorse | com |
+|---|---|---|---|---|
+| aggressivo | 0,486 [0,462–0,510] | 0,819 [0,801–0,836] | 0,663 [0,640–0,685] | 0,988 [0,983–0,992] |
+| prudente | 0,188 [0,170–0,206] | 0,498 [0,474–0,523] | 0,288 [0,268–0,310] | 0,903 [0,889–0,916] |
+| risorse | 0,339 [0,317–0,362] | 0,704 [0,682–0,724] | 0,492 [0,469–0,516] | 0,970 [0,961–0,976] |
+| com | 0,014 [0,010–0,020] | 0,097 [0,084–0,111] | 0,030 [0,023–0,038] | 0,499 [0,475–0,522] |
+
+## Durata, patte e limite
+
+Turni risolti fino alla fine della partita.
+
+| A | B | turni medi [IC 95%] | mediana | 10°–90° percentile | minimo–massimo | patte [IC 95%] | limite |
+|---|---|---|---:|---|---|---|---:|
+| starter-pino | starter-pino | 16,10 [16,08–16,12] | 16 | 15–18 | 7–24 | 0,348 [0,343–0,353] | 0 |
+| starter-pino | starter-tossico | 15,14 [15,11–15,17] | 16 | 11–18 | 6–25 | 0,176 [0,172–0,180] | 0 |
+| starter-pino | starter-spazienzio | 14,26 [14,23–14,29] | 14 | 10–18 | 6–23 | 0,142 [0,138–0,146] | 0 |
+| starter-pino | starter-mara | 14,20 [14,18–14,23] | 14 | 11–17 | 6–23 | 0,162 [0,158–0,166] | 0 |
+| starter-tossico | starter-tossico | 16,60 [16,56–16,64] | 17 | 11–20 | 3–28 | 0,224 [0,219–0,229] | 0 |
+| starter-tossico | starter-spazienzio | 12,82 [12,79–12,86] | 13 | 9–17 | 4–24 | 0,108 [0,104–0,111] | 0 |
+| starter-tossico | starter-mara | 12,20 [12,16–12,23] | 12 | 8–17 | 4–24 | 0,108 [0,105–0,112] | 0 |
+| starter-spazienzio | starter-spazienzio | 11,33 [11,29–11,37] | 11 | 7–16 | 3–22 | 0,126 [0,123–0,130] | 0 |
+| starter-spazienzio | starter-mara | 11,26 [11,23–11,30] | 11 | 7–16 | 4–22 | 0,104 [0,100–0,107] | 0 |
+| starter-mara | starter-mara | 11,28 [11,24–11,31] | 11 | 7–16 | 5–22 | 0,095 [0,092–0,099] | 0 |
+
+## Mazzi esauriti e last resort
+
+Per mazzo, su tutte le sue partite. Turno di arrivo: il primo in cui la last resort è in mano.
+
+| mazzo | partite | quota | mazzo esaurito | last resort arrivata | turno medio di arrivo | mediana |
+|---|---:|---|---:|---:|---:|---:|
+| starter-pino | 160000 | 0,518 [0,516–0,521] | 77,0% | 70,2% | 14,73 | 14 |
+| starter-tossico | 160000 | 0,516 [0,513–0,518] | 51,6% | 44,3% | 16,09 | 16 |
+| starter-spazienzio | 160000 | 0,481 [0,479–0,484] | 15,9% | 10,2% | 17,23 | 17 |
+| starter-mara | 160000 | 0,488 [0,485–0,490] | 22,6% | 15,7% | 15,95 | 16 |
+
+## Risorse inutilizzate a fine partita
+
+Media a fine partita, per chi vince e per chi perde (patte e limite esclusi). Il costo più alto nel mazzo serve da riferimento.
+
+| mazzo | risorsa | vincitore | perdente | costo più alto nel mazzo |
+|---|---|---:|---:|---:|
+| starter-pino | V | 0,0 | 0,0 | 0 |
+| starter-pino | T | 1,2 | 3,1 | 0 |
+| starter-pino | L | 0,2 | 4,5 | 5 |
+| starter-pino | A | -20,5 | -46,4 | 0 |
+| starter-tossico | V | 8,1 | 6,5 | 0 |
+| starter-tossico | T | 10,7 | 19,0 | 10 |
+| starter-tossico | L | 1,8 | 4,6 | 0 |
+| starter-tossico | A | 11,2 | 11,9 | 10 |
+| starter-spazienzio | V | 4,8 | 15,9 | 25 |
+| starter-spazienzio | T | 2,1 | 3,7 | 0 |
+| starter-spazienzio | L | 0,2 | 1,0 | 0 |
+| starter-spazienzio | A | 24,5 | 16,7 | 5 |
+| starter-mara | V | 0,0 | 0,1 | 0 |
+| starter-mara | T | 2,1 | 4,5 | 0 |
+| starter-mara | L | 0,0 | 0,1 | 0 |
+| starter-mara | A | 0,9 | 9,4 | 15 |
+
+## Costo pagato in HEALTH
+
+Morte pagando: il costo in HEALTH della mossa scelta è almeno pari alla salute del giocatore (R04: muore, e la mossa prosegue). «Senza uccidere»: l'avversario è ancora vivo a fine turno.
+
+| mazzo | stile | partite | HEALTH spesa per partita | morti pagando | senza uccidere | sconfitte | patte |
+|---|---|---:|---:|---:|---:|---:|---:|
+| starter-pino | aggressivo | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-pino | prudente | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-pino | risorse | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-pino | com | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-tossico | aggressivo | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-tossico | prudente | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-tossico | risorse | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-tossico | com | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-spazienzio | aggressivo | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-spazienzio | prudente | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-spazienzio | risorse | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-spazienzio | com | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-mara | aggressivo | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-mara | prudente | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-mara | risorse | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+| starter-mara | com | 40000 | 0,00 | 0 | 0 | 0 | 0 |
+
+## Carte
+
+Per mazzo, su tutti gli stili. *Giocate*: scelte e pagate, anche se poi annullate. *Quota se giocata*: nelle partite in cui il mazzo la gioca almeno una volta, con lo scarto dalla quota del mazzo. *Morta*: turni in mano senza essere una mossa legale; *ferma*: turni in mano, legale ma non scelta; entrambe per partita in cui la carta è stata in mano.
+
+**starter-pino**
+
+| carta | giocate per partita | partite in cui è giocata | quota se giocata (scarto) | morta | ferma |
+|---|---:|---:|---|---:|---:|
+| base.com.FasciaturaColFazzolettaccio | 1,30 | 77,9% | 0,496 (−0,022) | 0,00 | 4,34 |
+| base.com.Spintone | 1,71 | 93,8% | 0,550 (+0,032) | 0,00 | 1,46 |
+| base.pino.GoingBerserk | 1,73 | 94,3% | 0,553 (+0,035) | 0,00 | 1,11 |
+| base.pino.IlBanconeRegge | 1,25 | 80,2% | 0,518 (+0,000) | 0,00 | 3,21 |
+| base.pino.OffroIo | 0,14 | 12,4% | 0,139 (−0,380) | 3,63 | 1,31 |
+| base.pino.QuestoLoFiniscoIo | 0,95 | 51,7% | 0,414 (−0,104) | 2,12 | 12,09 |
+| base.pino.RuttoADistanzaSociale | 0,20 | 20,0% | 0,430 (−0,088) | 4,67 | 0,72 |
+| base.pino.TestataDaUltimoGiro | 0,94 | 68,4% | 0,592 (+0,074) | 5,91 | 0,62 |
+| base.pino.UltimoGiro | 1,45 | 64,8% | 0,664 (+0,146) | 0,00 | 0,46 |
+| base.pino.bound.CinqueMinutiEVado | 1,02 | 37,3% | 0,308 (−0,211) | 0,13 | 14,01 |
+| base.pino.bound.SpallataAlBancone | 4,04 | 98,9% | 0,522 (+0,003) | 0,13 | 10,99 |
+| com.Grab | 0,44 | 37,4% | 0,391 (−0,127) | 0,82 | 3,98 |
+
+**starter-tossico**
+
+| carta | giocate per partita | partite in cui è giocata | quota se giocata (scarto) | morta | ferma |
+|---|---:|---:|---|---:|---:|
+| base.com.FasciaturaColFazzolettaccio | 0,63 | 62,8% | 0,520 (+0,004) | 0,00 | 2,09 |
+| base.com.RincorsaDalMarciapiede | 1,54 | 90,9% | 0,548 (+0,032) | 0,26 | 1,04 |
+| base.tossico.bound.RaschiareIlFondo | 0,83 | 32,0% | 0,365 (−0,151) | 0,12 | 13,72 |
+| com.Grab | 0,37 | 32,2% | 0,416 (−0,100) | 1,37 | 3,60 |
+| com.Steal | 0,09 | 9,1% | 0,275 (−0,241) | 0,95 | 2,19 |
+| com.basic.ToxicGrab | 2,03 | 94,0% | 0,529 (+0,014) | 3,56 | 9,08 |
+| junkie.AmphetamineReflexes | 0,50 | 39,7% | 0,414 (−0,102) | 3,96 | 2,91 |
+| junkie.Cough | 1,15 | 76,9% | 0,595 (+0,079) | 2,63 | 1,34 |
+| junkie.LethalHeroinDose | 0,92 | 40,0% | 0,507 (−0,008) | 0,00 | 0,77 |
+| junkie.MethDrivenRage | 1,38 | 85,7% | 0,539 (+0,023) | 2,56 | 0,73 |
+| junkie.PervertedMetabolism | 1,12 | 71,4% | 0,473 (−0,043) | 0,00 | 4,58 |
+| junkie.ToxicBloodDrain | 0,10 | 9,8% | 0,573 (+0,057) | 1,46 | 1,71 |
+| junkie.character.PatheticBlade | 4,02 | 97,6% | 0,522 (+0,007) | 0,12 | 10,53 |
+
+**starter-spazienzio**
+
+| carta | giocate per partita | partite in cui è giocata | quota se giocata (scarto) | morta | ferma |
+|---|---:|---:|---|---:|---:|
+| base.com.DentiStretti | 0,30 | 29,7% | 0,606 (+0,125) | 0,00 | 2,15 |
+| base.com.MattoneDelCantiere | 0,44 | 43,6% | 0,562 (+0,080) | 1,87 | 0,60 |
+| base.com.TartarugaSulMarciapiede | 0,59 | 38,8% | 0,342 (−0,140) | 0,11 | 2,56 |
+| bruiser.ExtremelyViolentBlow | 0,84 | 63,6% | 0,464 (−0,017) | 1,60 | 1,40 |
+| bruiser.Glare | 0,73 | 54,5% | 0,608 (+0,127) | 0,00 | 2,49 |
+| bruiser.HealingBlow | 0,32 | 32,0% | 0,602 (+0,121) | 3,06 | 0,53 |
+| bruiser.MadeOfStone | 1,02 | 70,1% | 0,526 (+0,045) | 0,00 | 2,33 |
+| bruiser.SeagullFly | 1,07 | 77,7% | 0,516 (+0,035) | 1,58 | 1,03 |
+| bruiser.SuperImpact | 0,59 | 54,5% | 0,635 (+0,154) | 4,92 | 0,60 |
+| bruiser.YouStop | 0,44 | 33,0% | 0,323 (−0,158) | 1,43 | 2,51 |
+| bruiser.character.LittleRage | 0,75 | 31,0% | 0,372 (−0,109) | 0,01 | 11,43 |
+| bruiser.character.LittleSmack | 4,11 | 95,5% | 0,470 (−0,011) | 0,01 | 8,08 |
+| com.basic.BruiserGrab | 0,87 | 67,3% | 0,385 (−0,097) | 5,56 | 5,77 |
+| com.last.Struggle | 0,13 | 8,4% | 0,518 (+0,036) | 0,00 | 0,49 |
+
+**starter-mara**
+
+| carta | giocate per partita | partite in cui è giocata | quota se giocata (scarto) | morta | ferma |
+|---|---:|---:|---|---:|---:|
+| base.com.Spintone | 1,42 | 88,4% | 0,521 (+0,034) | 0,00 | 2,15 |
+| base.com.SputoDaPosacenere | 1,23 | 83,3% | 0,538 (+0,050) | 0,90 | 1,22 |
+| base.com.TartarugaSulMarciapiede | 0,24 | 24,5% | 0,234 (−0,254) | 0,92 | 2,80 |
+| base.mara.CinghiataDiTraverso | 1,23 | 83,4% | 0,537 (+0,049) | 0,89 | 1,18 |
+| base.mara.PresoAlVolo | 1,58 | 78,5% | 0,431 (−0,056) | 2,53 | 7,93 |
+| base.mara.Sgommata | 1,09 | 82,5% | 0,572 (+0,084) | 2,06 | 0,82 |
+| base.mara.Slalom | 0,52 | 52,0% | 0,529 (+0,041) | 1,03 | 1,03 |
+| base.mara.SorpassoInCurva | 1,32 | 83,2% | 0,511 (+0,023) | 0,00 | 3,47 |
+| base.mara.TraDueParaurti | 0,49 | 35,4% | 0,246 (−0,242) | 1,38 | 4,18 |
+| base.mara.bound.CambioMarcia | 0,77 | 34,0% | 0,328 (−0,159) | 0,04 | 11,23 |
+| base.mara.bound.PassoStretto | 1,90 | 82,7% | 0,451 (−0,037) | 0,04 | 10,11 |
+| com.Steal | 0,08 | 8,2% | 0,079 (−0,409) | 2,07 | 2,17 |
+| com.last.Struggle | 0,18 | 12,4% | 0,560 (+0,072) | 0,00 | 0,87 |
+
+## Tetto delle bound
+
+8 usi di fila contro un manichino da 1000 HEALTH; salute di tutti alzata a 1000. Valore per uso = danno inflitto (anche periodico) + danno parato su un colpo di prova da 10 HIT + salute propria + guadagni immediati pesati. Tetto: 4 unità ±0%; pesi V 0,75 · A 0,5 · T 0,15 se immune, 0 se no · L 0,35 · HEALTH 1; danno inflitto 1,33.
+
+| bound | personaggio | valore massimo | valore medio | danno 1° → ultimo uso | parato massimo | guadagni (somma) | esito | note |
+|---|---|---:|---:|---|---:|---|---|---|
+| base.mara.bound.CambioMarcia | base.character.Mara | 3,00 | 3,00 | 0,00 → 0,00 | 0,00 | A +48 | entro il tetto | — |
+| base.mara.bound.ColpoDiStriscio | base.character.Mara | 2,67 | 2,67 | 2,00 → 2,00 | 0,00 | — | entro il tetto | — |
+| base.mara.bound.PassoStretto | base.character.Mara | 4,00 | 4,00 | 3,00 → 3,00 | 0,00 | — | entro il tetto | — |
+| base.pino.bound.CinqueMinutiEVado | base.character.Pino | 3,50 | 3,50 | 0,00 → 0,00 | 0,00 | L +80 | entro il tetto | — |
+| base.pino.bound.Coccio | base.character.Pino | 2,67 | 2,67 | 2,00 → 2,00 | 0,00 | — | entro il tetto | — |
+| base.pino.bound.SpallataAlBancone | base.character.Pino | 4,00 | 4,00 | 3,00 → 3,00 | 0,00 | — | entro il tetto | — |
+| base.spazienzio.bound.TestaAlMuro | bruiser.character.BigBadBruiser | 3,00 | 3,00 | 0,00 → 0,00 | 0,00 | V +64 | entro il tetto | — |
+| base.tossico.bound.RaschiareIlFondo | junkie.character.ToxicJunkie | 1,05 | 1,05 | 0,00 → 0,00 | 0,00 | T +56 | entro il tetto | — |
+| bruiser.character.LittleRage | bruiser.character.BigBadBruiser | 3,75 | 3,75 | 0,00 → 0,00 | 0,00 | V +40 | entro il tetto | — |
+| bruiser.character.LittleSmack | bruiser.character.BigBadBruiser | 4,00 | 4,00 | 3,00 → 3,00 | 0,00 | — | entro il tetto | — |
+| junkie.character.PatheticBlade | junkie.character.ToxicJunkie | 4,00 | 4,00 | 3,00 → 3,00 | 0,00 | — | entro il tetto | — |
+| junkie.character.RottenSmile | junkie.character.ToxicJunkie | 2,67 | 2,67 | 2,00 → 2,00 | 0,00 | — | entro il tetto | — |
+
+## Limiti
+
+- I numeri dicono come giocano **questi bot**: un intervallo di confidenza non corregge un bot che gioca male.
+- Nessuno stile tiene conto del costo in HEALTH; le contromosse hanno un valore fisso o legato alla propria salute.
+- Il «+x» del catalogo è stimato 5 dai bot.

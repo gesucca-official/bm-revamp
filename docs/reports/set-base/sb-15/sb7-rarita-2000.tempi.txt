@@ -1,0 +1,8 @@
+banco sb-7/1
+bozza tmp/sim/sb15/rarita.json
+partite 320000
+celle 160
+thread 8
+secondi 155.492
+partite al secondo 2058.0
+millisecondi per partita (tempo reale diviso partite) 0.4859
