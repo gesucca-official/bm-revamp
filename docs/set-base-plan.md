@@ -600,6 +600,23 @@ Un blocco per personaggio, nell'ordine **Tossico del Serraglio, Pino l'Ultimo Gi
 base stabili sono quelli della bozza approvata in SB-12a (D41). Se SB-12b cambierà gli starter base, il giro del Tossico si rilancia contro i nuovi.
 SB-14 resta dopo SB-13; se e quando anticiparlo prima di SB-12b lo decide il proprietario.
 
+**SB-13 fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Lo starter del Tossico, **«Tutto è droga»**, è nella bozza come
+nella griglia, senza blocchi da dividere: ogni carta si scrive coi passi di oggi o con le classi Java esistenti. Tre giri coi bot (il massimo
+di Q5), circa 75 minuti di calcolo su un tetto di 2 ore; correzioni decise con la delega di D38, solo numeri del Tossico.
+- **Giri.** 1: la griglia con la salute di SB-9 meno 15 (85): 0,483 contro Spazienzio, **0,403 contro Mara**, carte da 10 T morte in mano per
+  metà dei turni. 2: **T iniziale 10 → 20, salute 80, Tossicone Scatarrante 8 POISON**. 3: **Raschiare il fondo +10 → +7 T**, perché valeva
+  circa 4,6 HEALTH equivalenti per uso.
+- **Esito.** Tossico contro Spazienzio **0,529**, contro Mara **0,479** (0,558 e 0,412 coi soli euristici), specchio 0,507. Partite di 12,8
+  e 12,2 turni; specchio 16,6 turni con il 22% di patte. Invarianti a zero su 192.000 partite. Bozza SHA-256 `1c1d4a62…254bcc1e`.
+- **Starter base invariati:** le 48 celle dei loro incontri coincidono una per una con SB-12a.
+- **Listino a 7 HIT.** La T vale 0,39 danni per T a 10 T. Le tre bound stanno sotto 4 HEALTH equivalenti per uso (2,1, 3,6, 1,7); il peso
+  di D33 per la T (0,15) le sottostima.
+- **Bot.** Contromossa, cura col veleno, travaso, Grab, Steal e Mescolone valgono meno di un colpo semplice in mano ai bot: tenute, non
+  tagliate. Il Mescolone costa circa 8 punti perché il suo timer toglie anche l'immunità del Tossico.
+
+Da giudicare: le quattro correzioni, il nome dello starter, lo specchio lungo e il mazzo che si esaurisce spesso, il Mescolone. Dettagli
+nel [rapporto](reports/set-base/sb-13-report.md).
+
 **Perimetro.** Bozza dello starter (Junkie riprogettato sul primo blocco, conservandone il flavour), poi giro contro tutti gli starter già stabili, **senza toccarli se non
 serve**; se serve, lo si dichiara e si rilancia la matrice.
 

@@ -157,7 +157,8 @@ final class ListinoReport {
                     .append(r.def.group.equals("salute") || r.def.group.equals("allerta") ? "—" : d(perGame, 2)).append(" | ")
                     .append(r.def.group.equals("salute") || r.def.group.equals("allerta") ? "—" : d(moveShare * 100, 1) + "%").append(" | ")
                     .append(r.def.group.equals("salute") ? "—" : saturated ? "saturato" : d(heq, 1)).append(" | ")
-                    .append((r.def.group.equals("bound") || r.def.group.equals("tettopartita") || r.def.group.equals("tettostarter")) && perGame > 0
+                    .append((r.def.group.equals("bound") || r.def.group.equals("tettopartita") || r.def.group.equals("tettostarter")
+                            || r.def.group.equals("tettoavanzati")) && perGame > 0
                             ? d(heq / perGame, 2) : "—").append(" |\n");
         }
         if (cap != null && !cap.isEmpty()) {
@@ -194,6 +195,7 @@ final class ListinoReport {
             case "handicap": return "Handicap per il non specchio";
             case "tettopartita": return "Tetto in partita (SB-10b): bound da 4 unità e una nulla contro due nulle";
             case "tettostarter": return "Tetto sugli starter veri (SB-11b): ogni bound, o una sonda, e una nulla contro due nulle";
+            case "tettoavanzati": return "Tetto sugli starter avanzati (SB-13): ogni bound, o una sonda, e una nulla contro due nulle";
             default: return group;
         }
     }

@@ -1,0 +1,6 @@
+banco sb-10a/1
+misure costo+tipo+salute+veleno+tettostarter+tettoavanzati
+thread 8
+partite 916800
+secondi 604.8
+millisecondi per partita (tempo reale) 0.6597

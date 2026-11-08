@@ -1,0 +1,8 @@
+banco sb-7/1
+bozza server/src/test/resources/set-base/bozza.json
+partite 192000
+celle 96
+thread 8
+secondi 71.144
+partite al secondo 2698.8
+millisecondi per partita (tempo reale diviso partite) 0.3705

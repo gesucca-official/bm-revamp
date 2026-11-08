@@ -15,8 +15,8 @@ import java.util.Map;
 /**
  * SB-10a, misure a richiesta: -Dsim.listino=all oppure un elenco di gruppi (costo, tipo, priorita, veleno, decadimento, nonspecchio,
  * carte, salute, allerta, bound, slot, tetto). Fuori da «all»: tettopartita (SB-10b), con la verifica contro il manichino, e tettostarter
- * (SB-11b, bound vere degli starter). Base: -Dsim.listinoBase=set-base (o un percorso) per la bozza del Set Base, con i soli contesti di
- * Spazienzio e Mara; senza, la base di SB-10a. Partite per stile: -Dsim.listinoBisect (400), -Dsim.listinoGrid (2000),
+ * (SB-11b, bound vere degli starter) e tettoavanzati (SB-13, bound vere degli starter avanzati). Base: -Dsim.listinoBase=set-base (o un
+ * percorso) per la bozza del Set Base, con i contesti di Spazienzio, Mara e, se c'è il suo starter, Tossico (SB-13); senza, la base di SB-10a. Partite per stile: -Dsim.listinoBisect (400), -Dsim.listinoGrid (2000),
  * -Dsim.listinoCurve (2000). Tetto delle bound: -Dsim.boundCap, -Dsim.boundTolerance, -Dsim.boundWeights, predefiniti di D33. Thread:
  * -Dsim.threads. Il rapporto va in tmp/sim/sb10a-listino-*.md e .json, i tempi in un file a parte.
  */
@@ -35,7 +35,7 @@ class ListinoMeasureTest {
         Listino.Params params = Listino.Params.fromSystem(BenchMeasureTest.threads());
         Map<String, com.gsc.bm.model.game.bot.BotPolicy> styles = BenchMeasureTest.styles();
         Listino listino = new Listino(base, params, styles);
-        // Con la base del Set Base (SB-11b) esistono solo i contesti di Spazienzio e Mara: le misure sugli altri non si lanciano.
+        // Con la base del Set Base (SB-11b) esistono solo i contesti di Spazienzio, Mara e Tossico (SB-13): le misure sugli altri non si lanciano.
         List<Listino.Bisection> bisections = new ArrayList<>();
         for (Listino.Bisection b : listino.bisections())
             if (groups.contains(b.group) && base.deckIds().contains(b.context)) bisections.add(b);

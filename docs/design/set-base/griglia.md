@@ -71,7 +71,7 @@ Valori approvati in SB-9; non cambiano qui, salvo la salute dei due personaggi b
 |---|---|---|---|---|---|---|---|---|
 | PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H ~~100~~ 85¹, A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9) | dati |
 | PG-MAR | Mara Contromano | Personaggio, base | H ~~85~~ 80¹, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
-| PG-TOS | Tossico del Serraglio | Personaggio, avanzato | H 100, A 35, T 10, capacità 2, immune all'effetto periodico di T | NC | Tossico | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
+| PG-TOS | Tossico del Serraglio | Personaggio, avanzato | H ~~100~~ 80⁵, A 35, T ~~10~~ 20⁵, capacità 2, immune all'effetto periodico di T | NC | Tossico | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
 | PG-PIN | Pino l'Ultimo Giro | Personaggio, avanzato | H 110, A 15, L 10, capacità 2 | NC | Pino | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
 | PG-GIG | Gigi del Carro Attrezzi | Personaggio, avanzato | H 100, A 25, V 15, capacità 3 | NC | Gigi | bozza | Oggetti ed equip | dati |
 | PG-CES | Cesira la Malalingua | Personaggio, booster | H 90, A 30, V 10, capacità 2 | R | — | da inventare (concept SB-9) | Contromosse e letture | dati |
@@ -86,6 +86,11 @@ due difese pagate in A; Rocco spende circa 30–40 di salute a partita. Se in SB
 tutti e due, Spazienzio 100 → 85 e Mara 95 → 80, con la stessa distanza; motivo: la durata (13,5–13,8 turni, ora 11,1–11,3) e i mazzi
 esauriti (fino al 36%, ora 10–15%), con il matchup che non si sposta. La salute degli avanzati e dei booster non cambia qui: SB-13 deve
 decidere se seguire la stessa scala (vedi il [rapporto](../../reports/set-base/sb-12a-report.md)).
+
+⁵ **SB-13, giri 1–3** ([correzioni](#correzioni-di-sb-13)). Giro 1: salute del Tossico 100 → 85, l'ipotesi della scala dei base (SB-9 meno 15,
+raccomandazione 1 di D41). Giro 2: salute 85 → 80 e T iniziale 10 → 20, perché con 10 T le carte pagate in T restavano morte in mano per metà
+dei turni e il Tossico perdeva contro Mara (0,403); Tossicone Scatarrante 5 → 8 POISON. Giro 3: Raschiare il fondo +10 → +7 T, per il tetto
+di 4 HEALTH equivalenti per uso. In attesa del giudizio del proprietario.
 
 ### Basic (7)
 
@@ -115,7 +120,7 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | MAR-BO2 | Mara | Azione, bound | RESOURCES | 0 | ~~+8~~ +6 A a sé⁴ | ~~4~~ 3 | C | Mara | da inventare («Cambio marcia») | Generatrice: Mara paga tutto in A (decisione B2) | dati |
 | MAR-BO3 | Mara | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | prova «Colpo di striscio», 5 → 2 CUT | Variante veloce | dati |
 | TOS-BO1 | Tossico | Azione, bound | DAMAGE | 1 | 3 CUT | 4 | C | Tossico | `PatheticBlade`, riprogettata: niente T a sé né al bersaglio | Colpetto; oggi si accumula e lascia T +40 | dati |
-| TOS-BO2 | Tossico | Azione, bound | RESOURCES | 0 | +10 T a sé | 1,5 | C | Tossico | da inventare («Raschiare il fondo») | Generatrice di carburante; +10 per la decisione 4, anche se il tetto ammetterebbe +26 | dati |
+| TOS-BO2 | Tossico | Azione, bound | RESOURCES | 0 | +~~10~~ 7 T a sé⁵ | ~~1,5~~ 1,05 | C | Tossico | da inventare («Raschiare il fondo») | Generatrice di carburante; +10 per la decisione 4, anche se il tetto ammetterebbe +26 | dati |
 | TOS-BO3 | Tossico | Azione, bound | DAMAGE | 2 | 2 POISON | 2,67 | NC | — | `RottenSmile`, riprogettata («alito marcio») | Variante: POISON diretto. Oggi lascia A −40 e vale −1,1 HEALTH per uso | dati |
 | PIN-BO1 | Pino | Azione, bound | RESOURCES | 0 | +10 L a sé | 3,5 | C | Pino | bozza «Cinque minuti e vado», senza i 5 HIT | Generatrice: +10 L diventano 4 il turno dopo (vedi [L e Pino](#l-e-pino)) | dati |
 | PIN-BO2 | Pino | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Pino | da inventare («Spallata al bancone») | Colpetto | dati |
@@ -181,7 +186,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | TOS-AR1 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 5 HIT a sé; 15 HIT | C | 2 | `MethDrivenRage`, costo 5 → 10 T | Attacco; oggi l'unica carta sopra la linea | dati |
-| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 5 POISON e +5 T al bersaglio | C | 2 | `Cough`, riprogettata con l'idea di bozza «Sputo da posacenere» | Intossicare; POISON diretto. Oggi vale 3,9 HIT | dati |
+| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | ~~5~~ 8 POISON⁵ e +5 T al bersaglio | C | 2 | `Cough`, riprogettata con l'idea di bozza «Sputo da posacenere» | Intossicare; POISON diretto. Oggi vale 3,9 HIT | dati |
 | TOS-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Guadagna T/2 HEALTH; perde T | C | 2 | `PervertedMetabolism`, conservata | Difesa: curarsi col veleno; 8,3 HIT, in linea | dati |
 | TOS-AR4 | Azione, regolare | COUNTER | F1 (10 T) | 2 | Annulla le mosse successive dirette a lui | NC | 2 | `AmphetamineReflexes`, conservata | Contromossa; sotto il listino anche per i bot | Java |
 | TOS-AR5 | Azione, regolare | DISRUPT | F1 (10 T) | 1 | Travasa tutta la sua T sul bersaglio e gli toglie l'immunità; timer 1 che gliela rende | R | 1 | `ToxicBloodDrain`, conservata | Combo con TOS-BO2: accettata perché costa una carta pagata (SB-9), da misurare in SB-13 | Java |
@@ -294,7 +299,7 @@ c'è.
 |---|---|---|---|---|---:|---:|
 | Spazienzio «Pazienza finita» (SB-11b) | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | SuperImpact 2, ExtremelyViolentBlow 2, Glare 2, MadeOfStone 2, YouStop 2 (10) | SeagullFly 2, Tartaruga 2, Mattone 1, HealingBlow 1, Denti stretti 1 (7) | Cocktail 2, Posacenere 1 (3) | 12 | 1 |
 | Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata 2, Sgommata 2, Sorpasso 2, Paraurti 2, Slalom 1 (9) | Spintone 2, Sputo 2, Tartaruga 1, Steal 1 (6) | Espresso 2, Kebab 2, Giubbotto 1 (5) | 12 | 1 |
-| Tossico (nome da inventare) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | MethDrivenRage 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
+| Tossico «Tutto è droga» (SB-13) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | MethDrivenRage 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
 | Pino «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Offro io 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
 | Gigi «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Colpo di chiave 1, Sotto il cofano 1, Lavoro fatto bene 1 (7) | Mattone 2, Steal 2, SeagullFly 1, Spintone 1 (6) | Guanti 2, Giubbotto 2, Casco 2, Espresso 1 (7) | 13 | 1 |
 
@@ -307,6 +312,14 @@ e le generiche a costo A gli resterebbero morte in mano.
 di Spazienzio, **«Pazienza finita»**, e ha deciso che i nomi visualizzati delle sue carte (slot `SPA-*`) restino tutti in maiuscolo, perché
 «ha perso la pazienza e urla»: SPA-BO3 si chiama quindi «TESTA AL MURO». Le durate «per N turni» valgono `turns: N − 1` (R05): il
 Giubbotto ha `turns: 2`, come MadeOfStone ha `turns: 3` per 4 turni.
+
+**Nota di SB-13** ([rapporto](../../reports/set-base/sb-13-report.md)): lo starter del Tossico è scritto nella stessa bozza come in questa
+tabella, senza scostamenti nella composizione; i numeri cambiati sono in [Correzioni di SB-13](#correzioni-di-sb-13). Il nome proprio è
+**«Tutto è droga»**, il flavour di `EverythingIsDrug` che la basic assorbe. Le carte di oggi tengono il loro nome italiano del catalogo
+(«Desiderio Incontrollabile», «Ago Marcio e Spezzato», «Rabbia Psicotica da Meth»…); le nuove usano il nome di lavoro della griglia
+(«Raschiare il fondo», «L'ultima dose», «Pasticca trovata sul bancone»). Due letture del codice, da tenere per SB-25: il timer di
+TOS-AR5 rende l'immunità a T **all'autore**, non al bersaglio (serve al Tossico che l'ha persa); il timer di OGG-04 toglie **tutte** le
+immunità, compresa quella propria del Tossico, che resta senza finché non gioca TOS-AR5.
 
 **Generiche condivise:** 11 distinte su 20 usi. Ogni starter ne condivide almeno 2, nessuna è in più di 3 starter, e le due base
 condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16).
@@ -621,6 +634,22 @@ numeri). Ogni numero cambiato, col giro e il motivo; il resto della griglia non 
 Esito sui bot, con Cambio marcia a +6 A: Spazienzio contro Mara **0,525** [0,520–0,531] (0,479 senza il bot attuale), partite di 11,3
 turni, mazzi esauriti 10–16%, invarianti a zero, tutte le bound entro 4 HEALTH equivalenti per uso. Steal, le difese e le contromosse
 restano come sono: le varianti mostrano che sono i bot a giocarle male. Correzioni approvate dal proprietario («Approvo, anche +6 A», D41).
+
+## Correzioni di SB-13
+
+Giro coi bot sullo starter del Tossico, al massimo tre giri ([rapporto](../../reports/set-base/sb-13-report.md), delega di D38 sui
+numeri). Ogni numero cambiato, col giro e il motivo; il resto della griglia e gli starter base non cambiano.
+
+| Slot | Numero | Prima | Dopo | Giro | Motivo |
+|---|---|---|---|---|---|
+| PG-TOS | HEALTH | 100 | 85, poi 80 | 1, 2 | Giro 1: la scala dei base, SB-9 meno 15 (D41). Giro 2: ricentrare dopo T 20 (0,569 → 0,561 contro Spazienzio) e accorciare |
+| PG-TOS | T iniziale | 10 | 20 | 2 | Le carte da 10 T restavano morte in mano per il 45–80% dei turni con gli stili euristici; contro Mara 0,403 (0,299 senza `com`) |
+| TOS-AR2 Tossicone Scatarrante | danno | 5 POISON | 8 POISON | 2 | La carta più debole dell'archetipo (3,9 HIT in SB-10a); resta nella forchetta di D34 per la T |
+| TOS-BO2 Raschiare il fondo | guadagno | +10 T | +7 T | 3 | Con T 20 la bound valeva circa 4,6 HEALTH equivalenti per uso, sopra il tetto di 4; con +7 circa 3,6 |
+
+Esito sui bot, bozza finale: Tossico contro Spazienzio **0,529**, contro Mara **0,479**, specchio 0,507; partite di 12,8, 12,2 e 16,6 turni.
+Le carte complesse (contromossa, cura col veleno, travaso, Mescolone, Steal, Grab) restano: le varianti mostrano che sono i bot a giocarle
+male. In attesa del giudizio del proprietario.
 
 ## Tetto in partita
 

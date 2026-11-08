@@ -138,6 +138,12 @@ veleno per lui. Chi azzera la T (HealingBlow) gli svuota il serbatoio. Le dosi c
 capacità, da 3 a 2. Motivo: lo specialista degli oggetti diventa Gigi, che parte con 3; il Tossico usa gli oggetti come droga, non
 come attrezzi. Il resto non cambia: la causa del dominio misurato in SB-4 è la bound, non i valori del personaggio, e va corretta lì.
 
+> **Nota di SB-13** (giri 1 e 2, sotto la delega di [D38](../../set-base-plan.md#decisioni-del-proprietario), in attesa del giudizio del
+> proprietario): HEALTH 100 → 85 nel giro 1, l'ipotesi della scala dei base (SB-9 meno 15, raccomandazione 1 di D41); poi **HEALTH 80** e
+> **T 10 → 20** nel giro 2. Con 10 T le carte pagate in T restavano morte in mano per metà dei turni e il Tossico perdeva contro Mara (0,403);
+> con T 20 e salute 80, e dopo le correzioni delle carte (Tossicone 8 POISON, bound di T a +7), sta a 0,529 contro Spazienzio e 0,479 contro
+> Mara. A 35, capacità 2 e immunità non cambiano. Il nome dello starter è «Tutto è droga». [Rapporto](../../reports/set-base/sb-13-report.md).
+
 **Il suo triangolo.**
 
 | Attacco | Difesa | Contromossa |
@@ -330,13 +336,13 @@ salute uccide e la mossa prosegue (R04); il bot non si suicida per caso. In più
 |---|---|---:|---:|---|---:|---|---|
 | Spazienzio de la Ucciso | Base | 85 | 20 | V 25 | 1 | — | R07; HEALTH 100 → 85 (SB-12a) |
 | Mara Contromano | Base | 80 | 40 | — | 2 | — | Bozza; V 10 → 0; HEALTH 85 → 80 (SB-12a) |
-| Tossico del Serraglio | Avanzato | 100 | 35 | T 10 | 2 | Periodico di T | R07; capacità 3 → 2 |
+| Tossico del Serraglio | Avanzato | 80 | 35 | T 20 | 2 | Periodico di T | R07; capacità 3 → 2; HEALTH 100 → 80, T 10 → 20 (SB-13) |
 | Pino l'Ultimo Giro | Avanzato | 110 | 15 | L 10 | 2 | — | Bozza; V 10 → 0, niente immunità a L |
 | Gigi del Carro Attrezzi | Avanzato | 100 | 25 | V 15 | 3 | — | Bozza, invariato |
 | Cesira la Malalingua | Booster | 90 | 30 | V 10 | 2 | — | Nuovo |
 | Rocco «Sant'Incasso» | Booster | 130 | 15 | — (paga in HEALTH) | 2 | — | Nuovo |
 
-Salute da 80 a 130 (le base corrette in SB-12a, gli altri ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
+Salute da 80 a 130 (le base corrette in SB-12a e il Tossico in SB-13, gli altri ancora sulla scala di SB-9), A da 15 a 40, capacità da 1 a 3: sono leve di differenziazione senza meccaniche nuove. Ordine a parità di
 priorità: Mara, Tossico, Malalingua, Gigi, Spazienzio, Pino e Sant'Incasso, prima dei costi.
 
 ### Risorsa × strategia
