@@ -1,6 +1,6 @@
 # SB-15 — Gigi del Carro Attrezzi: rarità nella bozza, bozza dello starter e giro coi bot: rapporto
 
-**Fatto l'8 novembre 2026, in attesa del giudizio del proprietario.** Due parti, in due commit.
+**Fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo SB-15» ([D45](../../set-base-plan.md#decisioni-del-proprietario)). Due parti, in due commit.
 
 **Parte 1 (commit `71a263a`).** La bozza del Set Base è nel formato `sb-6b/1` e ogni carta e personaggio ha la rarità della
 [griglia](../../design/set-base/griglia.md), come ha deciso il proprietario con D44, punto 6. Le partite non cambiano: la matrice dei
