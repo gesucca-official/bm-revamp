@@ -1291,3 +1291,19 @@ iPhone e Safari (fluidità delle scale su molti nodi a ogni frame: rischio già 
 #### Al proprietario, dal vivo
 
 Ampiezza e velocità dell'onda sulla mano (valori sopra, si cambiano in un punto), centraggio e trasparenza di ✓ e × sulla carta scartata, assenza del riquadro giallo (le note dopo un salto restano), e il volume del taglio della Fase 0.
+
+## C4-10 — prova del proprietario del 9 novembre 2026
+
+Prova dal vivo della Fase B (`c98b13d`), server locale e anteprima in rete locale preparati dalla regia. Parole del proprietario: «mi sembra tutto adatto a quello che abbiamo corretto»; «le uniche considerazioni che mi vengono verranno già affrontate nei prossimi punti, quindi direi che approvo. andiamo avanti».
+
+**Esito.** C4-10 approvato (Fase 0, Fase B, O29 e O30), e con esso C4-7 dopo C4-7-ter e la correzione del volume del taglio: era il giudizio rimandato alla prova di C4-10. Valori dell'onda in `GUIDE` confermati come sono. Prossimo blocco: C4-11.
+
+Revisione della regia sul repository prima della prova: commit coerente con la scelta del 9 novembre; attesi cambiati solo per O29; `BASE_750` invariato; rilanciati qui i test del client (289, 0 falliti), `tsc` e `check-rules.py` (PASS). Gli altri giri sono quelli della relazione della Fase B, non ripetuti.
+
+### C4-10 — destinazioni della regia
+
+- **`VerifyAim` a 844×390, rosso preesistente.** In FFA e in attesa una freccia verso un computer passa sopra ✓/× quando la carta scelta è una legata al personaggio (Ghigno co' i' Denti Marci, Ago Marcio e Spezzato); rosso anche sulla base `d70be28` ([evidenze](client-c4/c4-10/base-aim844/)). L'ultima evidenza committata di `VerifyAim` a 844 prima di C4-10 è verde, nel giro dopo il giudizio di C4-2; il caso è probabilmente comparso con i mazzi di R02 1.12 (base e due legate al personaggio), non dimostrato. È geometria del tavolo: va a **C4-11**, che lo chiude o lo dichiara.
+- **Jingle d'esito tagliato da un ridimensionamento.** `scene.interrupt` con `sequence` (il valore predefinito) chiama `stopAll` anche quando nessuna sequenza è in corso; lo chiamano `resize`, `resize` di `visualViewport`, `pointercancel`, Esc e il cambio del movimento ridotto. Il jingle d'esito, che parte col pannello a sequenza finita, e i suoni dell'interfaccia possono quindi essere troncati; su iPhone basta la barra di Safari che compare o sparisce. È conforme alla regola approvata ([proposta dei colpi](../design/client-c4/audio/proposta-colpi.md), «Interruzione, resize, background, disconnessione») e alla conseguenza già dichiarata per `visualViewport` nella [proposta dell'esito](../design/client-c4/audio/proposta-esito.md), che lo rimandava a O28: O28 ora è in **C4-11**, che lo riprova su iPhone; cambiare la regola resta una decisione del proprietario.
+- La consegna 1 del Set Base (frase del menu su R03) è chiusa dalla Fase B: tolta anche dal perimetro di C4-8a.
+
+Nessun codice cambiato, nessuna verifica grafica eseguita per questa registrazione.
