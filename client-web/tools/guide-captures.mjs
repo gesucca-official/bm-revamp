@@ -2,6 +2,8 @@
 // Not a verification: no check fails. It records, per moment, a screenshot and where the elements that should draw the eye are
 // (chosen card, admitted targets, preview with ✓/×, discard card, hint, short summary, round cards), with the distances the eye travels.
 // BM_GUIDE=A|B|C sets localStorage 'bm.guide' before the page loads: only a build with a prototype patch reads it (the product does not).
+// C4-11: BM_SPACE=<flags> sets localStorage 'bm.space' the same way (C4-11 prototype patch only), BM_SAFE=l,t,r,b 'bm.safe' (emulated safe areas); BM_LAYOUT=1 adds to every moment the table
+// layout of the scene, the hits and the boxes of the HTML shell (brand, top actions, hint), for the measure of the space (spazio/proposta.md).
 // Prerequisites: port 8080 free (the script starts its own server on a temporary database), preview of the build on 4320, server jar built.
 import {chromium} from '@playwright/test';
 import {spawn,execFileSync} from 'node:child_process';
@@ -18,9 +20,10 @@ const sizes=(process.env.BM_SIZES??'1366x768,844x390').split(',');
 const modes=(process.env.BM_MODES??'duel,ffa').split(',');
 const turns=Number(process.env.BM_TURNS??3),toEnd=process.env.BM_TO_END==='1';
 const reduced=process.env.BM_REDUCED==='1';
-const tagG=guide?`-${guide}`:'-oggi';
+const space=process.env.BM_SPACE??'',safe=process.env.BM_SAFE??'',withLayout=process.env.BM_LAYOUT==='1';
+const tagG=guide?`-${guide}`:space?`-s${space.replace(/[^a-z0-9]+/gi,'_')}`:'-oggi';
 await mkdir(out,{recursive:true});
-const evidence={date:new Date().toISOString(),url,guide:guide||null,reduced,kind:'Edge via Playwright on PC against a local server on a temporary database; not a physical device',runs:[],errors:[]};
+const evidence={date:new Date().toISOString(),url,guide:guide||null,space:space||null,safe:safe||null,reduced,kind:'Edge via Playwright on PC against a local server on a temporary database; not a physical device',runs:[],errors:[]};
 const log=(...a)=>console.log(new Date().toISOString().slice(11,19),...a);
 
 const toolchain=JSON.parse(await readFile(join(repo,'scripts/toolchain.json'),'utf8'));
@@ -45,14 +48,14 @@ const catalog=JSON.parse(await readFile(join(repo,'docs/rules-catalog.json'),'ut
 const subtypeOf=new Map(catalog.cards.map(c=>[c.name.trim(),c.subtype]));
 
 async function run(mode,size){
- const [vw,vh]=size.split('x').map(Number),tag=`${mode}-${size}${tagG}`,rec={mode,size,guide:guide||null,moments:[]};evidence.runs.push(rec);
+ const [vw,vh]=size.split('x').map(Number),tag=`${mode}-${size}${tagG}`,rec={mode,size,guide:guide||null,space:space||null,moments:[]};evidence.runs.push(rec);
  const context=await browser.newContext({viewport:{width:vw,height:vh},reducedMotion:reduced?'reduce':'no-preference'}),page=await context.newPage();
  page.on('pageerror',e=>evidence.errors.push(`${tag}: ${e}`));
- await context.addInitScript(g=>{try{if(g)localStorage.setItem('bm.guide',g);else localStorage.removeItem('bm.guide');}catch{}},guide);
+ await context.addInitScript(([g,sp,sf])=>{try{if(g)localStorage.setItem('bm.guide',g);else localStorage.removeItem('bm.guide');if(sp)localStorage.setItem('bm.space',sp);else localStorage.removeItem('bm.space');if(sf)localStorage.setItem('bm.safe',sf);else localStorage.removeItem('bm.safe');}catch{}},[guide,space,safe]);
  const state=()=>page.evaluate(()=>window.__bm?.state??null);
  const wait=async(pred,ms=20000,what='condition')=>{const end=Date.now()+ms;while(Date.now()<end){const s=await state();if(s&&await pred(s))return s;await page.waitForTimeout(40);}throw new Error(`${tag}: timeout ${what}`);};
  const dom=()=>page.evaluate(()=>{const box=s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return r.width&&r.height?{x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height}:null;};
-  return {hint:box('.hint'),toast:box('.toast'),confirm:box('[data-testid=confirm]'),cancel:box('[aria-label="Annulla calata"]'),invitation:box('[data-testid=discard-invitation]'),outcome:box('.outcome'),top:box('.top-actions'),toastText:document.querySelector('.toast')?.textContent??null,hintText:document.querySelector('.hint')?.textContent??null};});
+  return {brand:box('.brand'),top:box('.top-actions'),roundLink:box('[data-testid=round-link]'),hint:box('.hint'),toast:box('.toast'),confirm:box('[data-testid=confirm]'),cancel:box('[aria-label="Annulla calata"]'),invitation:box('[data-testid=discard-invitation]'),outcome:box('.outcome'),top:box('.top-actions'),toastText:document.querySelector('.toast')?.textContent??null,hintText:document.querySelector('.hint')?.textContent??null};});
  let n=0;
  const shot=async(name,extra={})=>{const s=await state(),d=await dom(),file=`${tag}-${String(++n).padStart(2,'0')}-${name}.jpg`;
   await page.screenshot({path:join(out,file),type:'jpeg',quality:72});
@@ -61,7 +64,8 @@ async function run(mode,size){
   rec.moments.push({name,file,turn:s?.turn,phase:s?.phase,sequence:s?.sequence?.running??false,
    boxes:{selected:C(sel),preview:C(prev),discard:C(disc),hint:C(d.hint),toast:C(d.toast),confirm:C(d.confirm),invitation:C(d.invitation),played:C(played),outcome:C(d.outcome)},
    arrows:(s?.arrows??[]).length,toastText:d.toastText,hintText:d.hintText,
-   travel:{selectedToTargets:targets.map(t=>dist(sel,t)),discardToConfirm:dist(disc,d.confirm),previewToHint:dist(prev,d.hint),playedToToast:dist(played,d.toast)},...extra});
+   travel:{selectedToTargets:targets.map(t=>dist(sel,t)),discardToConfirm:dist(disc,d.confirm),previewToHint:dist(prev,d.hint),playedToToast:dist(played,d.toast)},
+   ...(withLayout?{layout:s?.layout??null,shell:{brand:C(d.brand),top:C(d.top),hint:C(d.hint),roundLink:C(d.roundLink)},hits:(s?.hits??[]).map(h=>({id:h.id,kind:h.kind,x:Math.round(h.x),y:Math.round(h.y),w:Math.round(h.w),h:Math.round(h.h),hidden:!!h.hidden})),hand:(s?.order??[]).length}:{}),...extra});
   log(tag,name);return s;};
  const tap=async h=>{const c=h.kind==='hand'?{x:h.x-h.w*.22,y:h.y}:h.kind==='person'?{x:h.x,y:h.y+h.h*.15}:{x:h.x-h.w*.2,y:h.y};await page.mouse.click(c.x,c.y);await page.waitForTimeout(70);
   if(await page.evaluate(()=>!!document.querySelector('dialog[open]'))){await page.keyboard.press('Escape');await page.waitForTimeout(60);}};

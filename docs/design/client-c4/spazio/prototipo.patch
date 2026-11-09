@@ -1,0 +1,305 @@
+diff --git a/client-web/src/main.tsx b/client-web/src/main.tsx
+index d3b1f1a..3b47cea 100644
+--- a/client-web/src/main.tsx
++++ b/client-web/src/main.tsx
+@@ -9,6 +9,13 @@ import {Home,Rules,SignUp,go} from './public.tsx';
+ import {routeOf,type Route} from './signup.ts';
+ import {errorReporter,installReporter} from './report.ts';
+ import './style.css';
++import {space,spaceFlags,safeInsets} from './space.ts';
++// C4-11 Phase A prototype: the options switched on by localStorage 'bm.space' are visible to the CSS; O28 (d) asks Safari to lay the page under the
++// safe areas (viewport-fit=cover) and gives the CSS the insets, real (iOS) or emulated ('bm.safe', Edge).
++document.documentElement.dataset.space=spaceFlags.join(' ');
++if(space('d')){const meta=document.querySelector('meta[name=viewport]');meta?.setAttribute('content','width=device-width,initial-scale=1,viewport-fit=cover');
++ const insets=()=>{const i=safeInsets(),r=document.documentElement.style;r.setProperty('--safe-l',`${i.l}px`);r.setProperty('--safe-r',`${i.r}px`);};
++ insets();addEventListener('resize',insets);}
+
+ const session=new Session(stompConnector);
+ // Unhandled errors go to the server log (P44): one at a time, 5 s, never the credentials or game data.
+diff --git a/client-web/src/readability.ts b/client-web/src/readability.ts
+index cc5cf10..84a7942 100644
+--- a/client-web/src/readability.ts
++++ b/client-web/src/readability.ts
+@@ -1,5 +1,6 @@
+ import type {Card,Character,Resource} from './contracts.ts';
+ import {regular,type LocalCard,type Model} from './model.ts';
++import {space} from './space.ts';
+ // C2a readability helpers. Pure functions over the authoritative view: they only decide how
+ // things look. Costs are never subtracted here and the server stays the judge of legality.
+
+@@ -140,15 +141,17 @@ export function ownItemRow(items:Box[],person:Box,hand:TableLayout['hand'],scree
+ }
+ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>,s:Scale):TableLayout{
+  const compact=h<550,ffa=ids.length>2,shell=shellBoxes(w,h,compact);
+- const hw=compact?120:Math.min(214,h*.28),hh=hw*1.38;
+- const hand={w:hw,h:hh,step:hw*(compact?.6:.62),center:w*.63,y:h-hh*.5-6,lift:compact?18:30,zoom:compact?1.2:1.12};
+- const base=compact?(ffa?60:80):Math.min(150,h*.195)*(ffa?.78:1),iw=base*.76*s.items,ih=iw*1.38;
++ // C4-11 prototype b1: above 800 px of height the caps of C3-L grow with the height (identical at 768 and below).
++ const big=space('b1')&&!compact?Math.max(1,h/800):1;
++ const hw=compact?120:Math.min(214*big,h*.28),hh=hw*1.38;
++ const hand={w:hw,h:hh,step:hw*(compact?.6:.62),center:w*.63,y:h-hh*.5-6,lift:compact?18:30*big,zoom:compact?1.2:1.12};
++ const base=compact?(ffa?60:80):Math.min(150*big,h*.195)*(ffa?.78:1),iw=base*.76*s.items,ih=iw*1.38;
+  const others=ids.filter(id=>id!==me),mh=compact?14:20;
+  // Own deck and discard pile: two small cards. FFA: one above the other right of the own character, at its foot, the own objects after
+  // them (narrow, so the hand keeps its step).
+  // Duel: in the row of own objects above the seat, before them (desktop) or after room for three (compact: the middle stays to the
+  // round's cards and the own character keeps its size); the hand does not move.
+- const kw=compact?26:40,kh=kw*1.38,kg=compact?6:8,kspan=2*kw+kg+8,kffa=kw+8;
++ const kw=compact?26:40*big,kh=kw*1.38,kg=compact?6:8,kspan=2*kw+kg+8,kffa=kw+8;
+  const seats=ids.map(id=>{
+   const own=id===me,k=others.indexOf(id),f=own?s.me:s.others,pw=base*f,ph=pw*1.38,n=Math.max(1,itemCounts[id]??1);
+   const bwid=(own?(compact?110:170):(compact?(ffa?84:100):(ffa?120:150)))*s.resources,bh=(own?(compact?92:150):(compact?40:58))*s.resources;
+@@ -181,7 +184,7 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
+  if(mine&&ffa){const from=Math.max(...mine.items.map(b=>b.x+b.w/2))+10,room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}
+  else if(mine){const from=Math.max(mine.person.x+mine.person.w/2,mine.board.x+mine.board.w/2)+10;
+   if(hand.center-(hw+5*hand.step)/2<from){const room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}}
+- const pv=compact?{w:70,h:97}:{w:120,h:166};
++ const pv=compact?{w:70,h:97}:{w:120*big,h:166*big};
+  const L:TableLayout={compact,scale:s,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats,played:null,piles:null};
+  if(mine){const row=mine.items[0],x=ffa?mine.person.x+mine.person.w/2+8+kw/2:compact?6+3*(iw+6)+kw/2:6+kw/2,y=ffa?mine.person.y+mine.person.h/2-kh/2:row.y+row.h/2-kh/2;L.piles=ffa?{deck:{x,y:y-kh-kg,w:kw,h:kh},discard:{x,y,w:kw,h:kh}}:{deck:{x,y,w:kw,h:kh},discard:{x:x+kw+kg,y,w:kw,h:kh}};}
+  // Build the piles from the original upper row first (C3-L). FFA takes its
+@@ -192,10 +195,15 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
+  // The round's cards: the largest card (from the size of a character down to half of it) whose cascade of one card per seat, with the
+  // column of authors on its right, finds a
+  // free place near the middle of the table; each next card a title strip (20% of the card) lower and a little to the right.
+- for(const k of [1,.9,.8,.7,.6,.5]){const cw=base*k,ch=cw*1.38,dy=ch*.2,dx=cw*.06,n=ids.length,tw=compact?42:78,th=Math.min(dy-2,compact?14:20),size={w:cw+(n-1)*dx+4+tw,h:ch+(n-1)*dy};
++ // C4-11 prototype b2: on a tall screen the round's cards may grow past the size of a character, up to 1.4 times.
++ const ks=space('b2')&&h>=900?[1.4,1.3,1.2,1.1,1,.9,.8,.7,.6,.5]:[1,.9,.8,.7,.6,.5];
++ // C4-11 prototype a2: on a compact table the cascade becomes one pile (every slot in the same place, one author tag above it).
++ const pile=space('a2')&&compact;
++ for(const k of ks){const cw=base*k,ch=cw*1.38,dy=pile?0:ch*.2,dx=pile?0:cw*.06,n=ids.length,tw=compact?42:78,th=pile?14:Math.min(dy-2,compact?14:20),size=pile?{w:Math.max(cw,tw)+4,h:ch+th+3}:{w:cw+(n-1)*dx+4+tw,h:ch+(n-1)*dy};
+   const spot=freeSpot(size,{w,h},avoid,{x:w*.5,y:h*.42},compact?8:12);
+   if(spot&&Math.hypot(spot.x-w*.5,spot.y-h*.42)<=Math.min(w,h)*.4){const left=spot.x-size.w/2,top=spot.y-size.h/2;
+-   L.played={box:spot,slots:Array.from({length:n},(_,i)=>({x:left+cw/2+i*dx,y:top+ch/2+i*dy,w:cw,h:ch})),tags:Array.from({length:n},(_,i)=>({x:left+size.w-tw/2,y:top+i*dy+dy/2,w:tw,h:th}))};break;}}
++   L.played=pile?{box:spot,slots:Array.from({length:n},()=>({x:spot.x,y:top+th+3+ch/2,w:cw,h:ch})),tags:Array.from({length:n},()=>({x:spot.x,y:top+th/2,w:tw,h:th}))}
++    :{box:spot,slots:Array.from({length:n},(_,i)=>({x:left+cw/2+i*dx,y:top+ch/2+i*dy,w:cw,h:ch})),tags:Array.from({length:n},(_,i)=>({x:left+size.w-tw/2,y:top+i*dy+dy/2,w:tw,h:th}))};break;}}
+  return L;
+ }
+ /** Boxes of the short summary to try: from two lines of 520 px (desktop) or 360 px (compact) to a narrow column of eight, with room for about
+@@ -313,21 +321,24 @@ export function aimArrows(source:Box,targets:AimTarget[],view:{w:number;h:number
+  const avoid=opts.avoid??[],s=opts.head??10,gap=opts.gap??4,m=4,clampPt=(p:Pt):Pt=>({x:Math.max(m,Math.min(view.w-m,p.x)),y:Math.max(m,Math.min(view.h-m,p.y))});
+  const grown={...source,w:source.w+6,h:source.h+6},crossings=(a:Pt,c:Pt,b:Pt)=>{let n=0;for(let i=1;i<24;i++){const p=bezier(a,c,b,i/24);if(!within(p,grown)&&avoid.some(x=>within(p,x,8)))n++;}return n;};
+  return targets.map(t=>{
+-  const tail0=edgePoint(source,{x:t.box.x,y:t.box.y},2),to=edgePoint(t.box,{x:source.x,y:source.y},gap);
++  const tail0=edgePoint(source,{x:t.box.x,y:t.box.y},2),to0=edgePoint(t.box,{x:source.x,y:source.y},gap);let to=to0;
+   // The card already rests on (or over) the target: its tail is inside it, or the arrow would be a stub.
+-  const len0=Math.hypot(to.x-tail0.x,to.y-tail0.y),lap=overlap(source,t.box),reached=within(tail0,{...t.box,w:t.box.w+4,h:t.box.h+4})||len0<12||lap>.35*Math.min(source.w*source.h,t.box.w*t.box.h);
++  const len0=Math.hypot(to0.x-tail0.x,to0.y-tail0.y),lap=overlap(source,t.box),reached=within(tail0,{...t.box,w:t.box.w+4,h:t.box.h+4})||len0<12||lap>.35*Math.min(source.w*source.h,t.box.w*t.box.h);
+   // Tails to try: the one towards the target, then points along the top edge and the sides of the card, nearest to the target first.
+   const edge=(source.w+4)/2,top=source.y-source.h/2-2,near=(p:Pt)=>Math.hypot(p.x-t.box.x,p.y-t.box.y);
+   const spots:Pt[]=[...[-.42,-.3,-.15,.15,.3,.42].map(f=>({x:source.x+f*source.w,y:top})),...[-.3,0,.3].flatMap(f=>[{x:source.x-edge,y:source.y+f*source.h},{x:source.x+edge,y:source.y+f*source.h}])];
+   const tails=[tail0,...spots.sort((p,q)=>near(p)-near(q))];
+   let from=tail0,control=tail0,worst=Infinity;
+-  search:for(const tail of tails){const dx=to.x-tail.x,dy=to.y-tail.y,len=Math.hypot(dx,dy)||1,mid={x:(tail.x+to.x)/2,y:(tail.y+to.y)/2},nx=-dy/len,ny=dx/len;
++  // C4-11 prototype v1 (VerifyAim at 844×390): when every route to the tip facing the card crosses the region to keep clear, the tip may land on
++  // another side of the target (the middle of each side, the nearest to the card first), tried only after the facing tip.
++  const B=t.box,alt:Pt[]=space('v1')&&avoid.length?[{x:B.x-B.w/2-gap,y:B.y},{x:B.x+B.w/2+gap,y:B.y},{x:B.x,y:B.y-B.h/2-gap},{x:B.x,y:B.y+B.h/2+gap}].sort((p,q)=>Math.hypot(p.x-source.x,p.y-source.y)-Math.hypot(q.x-source.x,q.y-source.y)):[];
++  search:for(const tip of [to0,...alt])for(const tail of tails){const dx=tip.x-tail.x,dy=tip.y-tail.y,len=Math.hypot(dx,dy)||1,mid={x:(tail.x+tip.x)/2,y:(tail.y+tip.y)/2},nx=-dy/len,ny=dx/len;
+    // The bend goes towards the middle of the viewport first (arrows from one card fan out without leaving the table); when it
+    // crosses a region to keep clear, larger bends on either side and the straight line follow, then the next tail.
+    const side=((view.w/2-mid.x)*nx+(view.h/2-mid.y)*ny)>=0?1:-1;
+-   for(const k of [1,-1,1.8,-1.8,2.8,-2.8,0]){const c=clampPt({x:mid.x+nx*len*.2*side*k,y:mid.y+ny*len*.2*side*k}),n=avoid.length?crossings(tail,c,to):0;
+-    if(n<worst){worst=n;from=tail;control=c;}if(!worst)break search;}
+-   if(!avoid.length)break;}
++   for(const k of [1,-1,1.8,-1.8,2.8,-2.8,0]){const c=clampPt({x:mid.x+nx*len*.2*side*k,y:mid.y+ny*len*.2*side*k}),n=avoid.length?crossings(tail,c,tip):0;
++    if(n<worst){worst=n;from=tail;control=c;to=tip;}if(!worst)break search;}
++   if(!avoid.length)break search;}
+   const crosses=worst>0;
+   const tx=to.x-control.x,ty=to.y-control.y,tl=Math.hypot(tx,ty)||1,ux=tx/tl,uy=ty/tl,base={x:to.x-ux*s*1.4,y:to.y-uy*s*1.4};
+   const head:[Pt,Pt,Pt]=[to,{x:base.x-uy*s*.6,y:base.y+ux*s*.6},{x:base.x+uy*s*.6,y:base.y-ux*s*.6}];
+diff --git a/client-web/src/scene.ts b/client-web/src/scene.ts
+index 5eb9c7b..7d95acb 100644
+--- a/client-web/src/scene.ts
++++ b/client-web/src/scene.ts
+@@ -1,5 +1,6 @@
+ import {RoundCue,type Sounds} from './sound.ts';
+-import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
++import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,NineSliceSprite,Rectangle,Sprite,Text,Texture} from 'pixi.js';
++import {space,safeInsets} from './space.ts';
+ import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
+ import {Model,clone,type Target} from './model.ts';
+ import {handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard,confirmCard,regularCard,type GuideBeat,type GuideFocus,type Posable} from './readability.ts';
+@@ -59,6 +60,10 @@ export class TableScene {
+  // C3-3 (O6): arrows from the chosen or dragged card to the admitted targets; redrawn at most once per frame while dragging.
+  arrows:Arrow[]=[];confirmArrow:Arrow|null=null;private confirmTo:Box|null=null;private aimDirty=false;
+ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInfo>();
++ // C4-11 prototype (c1, c2): one soft shadow texture for every card and board (64x64), a warm light and a vignette (128x128 each), made in code.
++ private soft:Texture|null=null;private light=new Container();private lamp:Sprite|null=null;private vignette:Sprite|null=null;
++ /** C4-11 prototype d (O28): left and right safe-area insets; the table is laid out in between, the background covers the whole screen. */
++ safe={l:0,r:0};
+  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
+  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
+  peek:string|null=null;
+@@ -117,7 +122,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+   // All soft ellipses before all props, behind every gameplay node. O24 has no interaction here.
+   PROPS.forEach(p=>{const node=new Graphics(),blur=new BlurFilter({strength:3,quality:4,resolution:1});node.eventMode='none';node.filters=[blur];this.shadows[p.id]={node,blur};this.decor.addChild(node);});
+   PROPS.forEach((p,i)=>{const sprite=new Sprite(props[i]);sprite.anchor.set(.5);sprite.eventMode='none';this.props[p.id]=sprite;this.decor.addChild(sprite);});
+-  this.app.stage.addChild(this.background,this.decor,this.world,this.aimLayer,this.fx);this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
++  this.app.stage.addChild(this.background,this.decor,this.light,this.world,this.aimLayer,this.fx);this.light.eventMode='none';
++  if(space('c1')||space('c2'))this.soft=softTexture(64,'shadow');
++  if(space('c2')){this.lamp=new Sprite(softTexture(128,'glow'));this.lamp.anchor.set(.5);this.lamp.tint=0xffc98a;this.lamp.alpha=.22;this.lamp.blendMode='add';
++   this.vignette=new Sprite(softTexture(128,'vignette'));this.vignette.alpha=.6;this.light.addChild(this.lamp,this.vignette);}this.fx.eventMode='none';this.aimLayer.eventMode='none';this.aimLayer.addChild(this.aimG);
+   const canvas=this.app.canvas;
+   const bind=(target:EventTarget,event:string,fn:EventListener)=>{target.addEventListener(event,fn);this.disposeFns.push(()=>target.removeEventListener(event,fn));};
+   bind(host.parentElement!,'pointerup',((e:PointerEvent)=>{if((e.target as HTMLElement)?.closest('button'))this.inputStart=performance.now();}) as EventListener);
+@@ -154,8 +162,13 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+   this.app.ticker.add(()=>this.tick());this.resize(host.clientWidth,host.clientHeight);
+  }
+  private text(parent:Container,value:string,x:number,y:number,size:number,width?:number,color=INK){const t=new Text({text:value,style:{fontFamily:'Impact, Arial, sans-serif',fontSize:size,fill:color,wordWrap:!!width,wordWrapWidth:width,align:'center',lineHeight:size*1.05}});t.anchor.set(.5,0);t.position.set(x,y);parent.addChild(t);return t;}
+- private frame(w:number,h:number,kind:FrameKind='regular'){const c=new Container();c.addChild(new Graphics().roundRect(-w/2+4,-h/2+6,w,h,5).fill({color:0x160e09,alpha:.6}));
++ private frame(w:number,h:number,kind:FrameKind='regular'){const c=new Container();
++  if(this.soft){const pad=Math.max(8,Math.min(w,h)*.16),sh=new NineSliceSprite({texture:this.soft,leftWidth:24,topHeight:24,rightWidth:24,bottomHeight:24,width:w+2*pad,height:h+2*pad});sh.label='shadow';sh.position.set(-w/2-pad+3,-h/2-pad+5);sh.alpha=.7;sh.tint=0x160e09;c.addChild(sh);}
++  else c.addChild(new Graphics().roundRect(-w/2+4,-h/2+6,w,h,5).fill({color:0x160e09,alpha:.6}));
+   const paper=new Graphics().roundRect(-w/2,-h/2,w,h,5).fill(PAPER).stroke({color:INK,width:2});drawFrame(paper as unknown as Pen,kind,w,h);c.addChild(paper);
++  // C4-11 prototype c2: relief, a light edge along the top and the left of the paper, a dark one along the bottom and the right.
++  if(space('c2')&&w>=30){const r=new Graphics();r.moveTo(-w/2+2.5,h/2-6).lineTo(-w/2+2.5,-h/2+6).quadraticCurveTo(-w/2+2.5,-h/2+2.5,-w/2+6,-h/2+2.5).lineTo(w/2-6,-h/2+2.5).stroke({color:0xfff8e6,width:1.5,alpha:.6});
++   r.moveTo(w/2-2.5,-h/2+6).lineTo(w/2-2.5,h/2-6).quadraticCurveTo(w/2-2.5,h/2-2.5,w/2-6,h/2-2.5).lineTo(-w/2+6,h/2-2.5).stroke({color:0x3a2416,width:1.5,alpha:.5});c.addChild(r);}
+   const flecks=new Graphics();for(let i=0;i<12;i++)flecks.circle(-w/2+5+(i*23%(w-10)),-h/2+4+(i%2? h-8:0),1+i%2).fill({color:0x795034,alpha:.25});c.addChild(flecks);return c;}
+  private face(name:string,art:number,w:number,h:number,footer:string,small=false,sub='',kind:FrameKind='regular'){const c=this.frame(w,h,kind);const titleH=small?h*.27:h*.24, footH=small?h*.17:h*.18;
+   // The written type ends where the art begins, however large the card: at 1366x768 it used to fall half on the art.
+@@ -217,7 +230,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+  /** Values drawn on a board: the view, or during a sequence the step reached (C3-4). */
+  private shown(id:string,p:Player){return this.display?.[id]??p.character.resources;}
+  // O3/O4/O13: resources as glyph, letter, number and a bar against the start (no cap or floor).
+- private board(b:Box,p:Player,id:string,own:boolean,compact:boolean){const c=new Container(),g=new Graphics();c.addChild(g);c.position.set(b.x-b.w/2,b.y-b.h/2);
++ private board(b:Box,p:Player,id:string,own:boolean,compact:boolean){const c=new Container(),g=new Graphics();
++  if(this.soft){const pad=10,sh=new NineSliceSprite({texture:this.soft,leftWidth:24,topHeight:24,rightWidth:24,bottomHeight:24,width:b.w+2*pad,height:b.h+2*pad});sh.position.set(-pad+3,-pad+5);sh.alpha=.6;sh.tint=0x100905;c.addChild(sh);}
++  c.addChild(g);c.position.set(b.x-b.w/2,b.y-b.h/2);
+   g.roundRect(0,0,b.w,b.h,8).fill({color:0x1d140f,alpha:.84}).stroke({color:0xb18c60,width:1.5});
+   const r=this.shown(id,p),start=this.start(id,p),rows:string[]=[];
+   const bar=(x:number,y:number,bw:number,th:number,kind:Resource)=>{const v=r[kind]??0,m=meter(v,start[kind],kind==='HEALTH'),neg=bw*.18,zero=x+neg,pos=bw-neg;
+@@ -279,17 +294,22 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+   // The discard pile is too small for a readable face: frame and art of the top card, its name in «Ultimo turno» and the inspection.
+   const s=P.discard,name=this.staged?this.staged.discard:this.pile.top;
+   if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h,frameOf(c)),art=new Sprite(this.art[artIndex(c.bindingName)]);art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
+-  else empty(s);
++  else if(!(space('a1')&&compact))empty(s);
+   return {deck:count,discard:name};}
+  // C3-L: the cards of the last resolved round in the middle, in resolution order (the first at the bottom), each with its author;
+  // voided ones with a wine tag and a line across their visible strip. During a sequence only the cards already landed (rule 2: then the view).
+  private roundCards(L:TableLayout,compact:boolean):Readout['played']{const P=L.played,v=this.model.view;if(!P)return null;
+   const known=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(v.players).flatMap(p=>p.character.items)];
++  // C4-11 prototype b2: on a tall screen the round's cards land on a coaster (the texture of the background's own coaster, no new image).
++  if(space('b2')&&this.height>=900&&P.slots.length){const tex=this.props.sottobicchiere.texture,first=P.slots[0],last=P.slots[P.slots.length-1],d=Math.max(first.w,first.h)*1.3,cs=new Sprite(tex);cs.anchor.set(.5);cs.scale.set(d/Math.max(tex.width,tex.height));cs.position.set((first.x+last.x)/2,(first.y+last.y)/2+first.h*.1);cs.rotation=-.18;cs.eventMode='none';this.world.addChild(cs);}
++  const pile=space('a2')&&L.compact;
+   const moves=v.resolvedMoves.slice(0,P.slots.length),shown=this.seqStarted?Math.min(this.landed,moves.length):moves.length,strip=P.slots.length>1?P.slots[1].y-P.slots[0].y:P.slots[0].h*.2;
+   return moves.slice(0,shown).map((m,i)=>{const b=P.slots[i],f=this.card(known.find(x=>x.name===m.playedCardName)??plain(m.playedCardName),b.w,b.h,true);f.position.set(b.x,b.y);f.rotation=i%2?.025:-.025;this.world.addChild(f);
+    // Author in the column beside the cascade, level with the title strip; a voided move has a wine tag and a line across its strip.
+    // A voided move has the cross of symbols.ts after the name (never the ✕ of a font: Impact and Arial lack it).
+-   const t=P.tags[i],tag=new Container(),x=m.void?t.h*.55:0,who=this.text(tag,m.playerId===this.model.me?'TU':this.name(m.playerId).toUpperCase(),0,0,t.h*.62,undefined,0xfff6e2);who.anchor.set(.5);
++   // C4-11 prototype a2: on a compact table the round's cards are one pile; only the top card's author is written, with the count of the pile.
++   if(pile&&i<shown-1)return {name:m.playedCardName,author:m.playerId,void:!!m.void};
++   const t=P.tags[i],tag=new Container(),x=m.void?t.h*.55:0,who=this.text(tag,m.playerId===this.model.me?'TU':this.name(m.playerId).toUpperCase()+(pile&&shown>1?` · ${shown}`:''),0,0,t.h*.62,undefined,0xfff6e2);who.anchor.set(.5);
+    if(who.width>t.w-6-x)who.scale.set((t.w-6-x)/who.width);who.position.x=-x/2;tag.addChildAt(new Graphics().roundRect(-t.w/2,-t.h/2,t.w,t.h,t.h*.35).fill({color:m.void?WINE:INK,alpha:.92}).stroke({color:PAPER,width:1}),0);if(m.void){const cg=new Graphics();drawMark(cg as unknown as Pen,'cross',who.x+who.width/2+t.h*.4,0,t.h*.5,0xfff6e2);tag.addChild(cg);}tag.position.set(t.x,t.y);this.world.addChild(tag);
+    if(m.void){const y=b.y-b.h/2+strip*.5;this.world.addChild(new Graphics().moveTo(b.x-b.w/2+3,y+strip*.25).lineTo(b.x+b.w/2-3,y-strip*.25).stroke({color:WINE,width:compact?2:3}));}
+    return {name:m.playedCardName,author:m.playerId,void:!!m.void};});}
+@@ -303,12 +323,17 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+   const g=backgroundGeometry(w,h,{table:size(this.background),sottobicchiere:size(this.props.sottobicchiere),negroni:size(this.props.negroni),posacenere:size(this.props.posacenere)});
+   placeBackground(this.background,this.props,g);
+   for(const p of g.props){const {node,blur}=this.shadows[p.id],s=p.shadow;node.clear().ellipse(0,0,s.w/2,s.h/2).fill({color:0x100905,alpha:s.alpha});node.position.set(s.x,s.y);blur.strength=s.sigma;}
++  // C4-11 prototype a1: on a compact table the bar's props step back (fainter), so the small cards stand out.
++  this.decor.alpha=space('a1')&&h<550?.55:1;
++  if(this.lamp&&this.vignette){this.lamp.position.set(w*.52,h*.44);this.lamp.width=w*.95;this.lamp.height=h*.9;this.vignette.position.set(0,0);this.vignette.width=w;this.vignette.height=h;}
++  if(space('d')){const ins=safeInsets();this.safe={l:ins.l,r:ins.r};}
+   this.draw();}
+  draw(){if(!this.art.length)return;
+   // Old nodes survive one render, so Pixi's ref-counted text textures are reused instead of re-rasterized on every tap.
+   this.retiring.push(...this.world.removeChildren());this.hits=[];this.backs={};this.chips={};this.pendingGhost=null;
+   const w=this.width,h=this.height,view=this.model.view,me=this.model.me,ids=Object.keys(view.players);
+-  const L=tableLayout(w,h,ids,me,Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])));this.layout=L;const compact=L.compact,H=L.hand;
++  const counts=Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length]));
++  const L=this.safe.l||this.safe.r?shiftLayout(tableLayout(w-this.safe.l-this.safe.r,h,ids,me,counts),this.safe.l):tableLayout(w,h,ids,me,counts);this.layout=L;const compact=L.compact,H=L.hand;
+   const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null,roundSummary:Readout['summary']=null;
+   // C3-6: the strips of the round's summary are placed first, for all seats, clear of everything the layout holds.
+   // The short summary line (toast of table.tsx) takes the place the strips leave; kept for the round and the size, so it does not move when the strips go.
+@@ -355,7 +380,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+    // O26: the bound's hand copy rests while its discard is still to be chosen,
+    // including keyboard/pointer focus. The target preview and its controls stay.
+    if(state.nonDiscardable)hit.label+=', non scartabile';
+-   if(state.raised){const r=raisedCard(H,i,n);c.y=r.y;c.scale.set(H.zoom);c.rotation=r.angle;hit.angle=c.rotation;hit.h=H.h+H.lift;hit.y=y-H.lift/2;
++   if(state.raised){const r=raisedCard(H,i,n);c.y=r.y;c.scale.set(H.zoom);c.rotation=r.angle;
++    // C4-11 prototype c1, c2: a raised card casts its shadow further and lighter, as if it left the table.
++    const sh=c.getChildByLabel('shadow');if(sh){sh.x+=6;sh.y+=H.lift*.4;sh.alpha=.45;}hit.angle=c.rotation;hit.h=H.h+H.lift;hit.y=y-H.lift/2;
+     // A card raised only by the mouse keeps its resting width, so sliding left still reaches the previous card.
+     if(state.wideHit){hit.w=H.w*H.zoom;hit.h=H.h*H.zoom+H.lift;}
+     if(state.chosen)lifted=c;else raised.push(c);}
+@@ -728,3 +755,17 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
+  endMeasure(){this.measure=false;return this.stats;}
+  destroy(){if(this.seqStarted)this.trace({type:'end',key:this.seqKey,reason:'destroy'});clearTimeout(this.resizeTimer);this.disposeFns.forEach(fn=>fn());[...this.retired,...this.retiring].forEach(c=>c.destroy({children:true}));this.retired=[];this.retiring=[];this.app.destroy(true,{children:true});}
+ }
++// ---- C4-11 Phase A prototype helpers (not product) ----
++/** A soft texture drawn once on a canvas: a blurred rounded square for shadows (nine-slice), a radial light, or a vignette dark at the edges. */
++function softTexture(size:number,kind:'shadow'|'glow'|'vignette'):Texture{const c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d')!;
++ if(kind==='shadow'){// shadowBlur, not ctx.filter: Safari before 18 lacks the filter. The shape is drawn off the canvas, only its blurred shadow falls inside.
++  g.shadowColor='rgba(255,255,255,1)';g.shadowBlur=size*.16;g.shadowOffsetX=size*4;g.fillStyle='#fff';g.beginPath();g.roundRect(size*.25-size*4,size*.25,size*.5,size*.5,size*.08);g.fill();}
++ else{const r=g.createRadialGradient(size/2,size/2,0,size/2,size/2,size/2*(kind==='vignette'?1.42:1));
++  if(kind==='glow'){r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(.55,'rgba(255,255,255,.35)');r.addColorStop(1,'rgba(255,255,255,0)');}
++  else{r.addColorStop(0,'rgba(8,4,2,0)');r.addColorStop(.6,'rgba(8,4,2,0)');r.addColorStop(1,'rgba(8,4,2,1)');}
++  g.fillStyle=r;g.fillRect(0,0,size,size);}
++ return Texture.from(c);}
++/** O28 prototype: a layout made for the safe width, moved right by the left inset (every box the scene and the checks read). */
++function shiftLayout(L:TableLayout,dx:number):TableLayout{if(!dx)return L;const m=(b:Box)=>({...b,x:b.x+dx});
++ return {...L,hand:{...L.hand,center:L.hand.center+dx},preview:{...L.preview,x:L.preview.x+dx},seats:L.seats.map(s=>({...s,person:m(s.person),items:s.items.map(m),backs:m(s.backs),board:m(s.board),status:m(s.status)})),
++  played:L.played&&{box:m(L.played.box),slots:L.played.slots.map(m),tags:L.played.tags.map(m)},piles:L.piles&&{deck:m(L.piles.deck),discard:m(L.piles.discard)}};}
+diff --git a/client-web/src/space.ts b/client-web/src/space.ts
+new file mode 100644
+index 0000000..354d91b
+--- /dev/null
++++ b/client-web/src/space.ts
+@@ -0,0 +1,16 @@
++// C4-11 Phase A PROTOTYPE, not product: it lives only in docs/design/client-c4/spazio/prototipo.patch.
++// Options are switched on by localStorage 'bm.space', a list such as "a1,b1,c2,d" (see spazio/proposta.md); without the key the
++// client behaves exactly as the product. Read once per page load, so fitScale's cache stays valid.
++// On a phone without a console: ?space=c2,d (and ?safe=l,t,r,b) in the address stores the choice; ?space= with nothing clears it.
++try{const q=new URLSearchParams(globalThis.location?.search??'');for(const [p,k] of [['space','bm.space'],['safe','bm.safe']] as const){const v=q.get(p);if(v!==null){if(v)globalThis.localStorage?.setItem(k,v);else globalThis.localStorage?.removeItem(k);}}}catch{}
++const raw=(()=>{try{return globalThis.localStorage?.getItem('bm.space')??'';}catch{return '';}})();
++const flags=new Set(raw.split(/[\s,;]+/).map(s=>s.trim().toLowerCase()).filter(Boolean));
++export const space=(f:string)=>flags.has(f);
++export const spaceFlags=[...flags];
++/** O28 emulation for Edge: localStorage 'bm.safe' = "left,top,right,bottom" in px stands for env(safe-area-inset-*), which only iOS gives. */
++export function safeInsets():{l:number;t:number;r:number;b:number}{
++ if(!space('d')&&!space('d2'))return {l:0,t:0,r:0,b:0};
++ try{const fake=globalThis.localStorage?.getItem('bm.safe');if(fake){const [l,t,r,b]=fake.split(',').map(Number);return {l:l||0,t:t||0,r:r||0,b:b||0};}}catch{}
++ if(typeof document==='undefined')return {l:0,t:0,r:0,b:0};
++ const probe=document.createElement('div');probe.style.cssText='position:fixed;visibility:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
++ document.body.appendChild(probe);const s=getComputedStyle(probe),px=(v:string)=>parseFloat(v)||0,out={l:px(s.paddingLeft),t:px(s.paddingTop),r:px(s.paddingRight),b:px(s.paddingBottom)};probe.remove();return out;}
+diff --git a/client-web/src/style.css b/client-web/src/style.css
+index 792ecc3..9a6759b 100644
+--- a/client-web/src/style.css
++++ b/client-web/src/style.css
+@@ -1627,3 +1627,35 @@ button[aria-selected=true] { box-shadow: inset 0 -3px 0 var(--accent-strong); }
+ .confirmation [data-testid=confirm]:not(:disabled) .mark { animation: guide-pulse 1s ease-in-out infinite; }
+ @keyframes guide-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+ @media (prefers-reduced-motion: reduce) { .confirmation [data-testid=confirm] .mark { animation: none; } }
++/* ---- C4-11 Phase A prototype (not product): options of localStorage 'bm.space' ---- */
++@media(max-height:550px) {
++  /* a1: the decorative title leaves the compact table; the empty discard slot is not drawn by the canvas either (scene). */
++  [data-space~="a1"] .brand {
++    display: none;
++  }
++}
++/* d (O28): the shell keeps out of the safe areas; the canvas covers the whole screen. */
++:root {
++  --safe-l: 0px;
++  --safe-r: 0px;
++}
++[data-space~="d"] .top-actions {
++  right: calc(16px + var(--safe-r));
++}
++[data-space~="d"] .hint {
++  left: calc(14px + var(--safe-l));
++}
++[data-space~="d"] .brand {
++  left: calc(20px + var(--safe-l));
++}
++@media(max-height:550px) {
++  [data-space~="d"] .top-actions {
++    right: calc(8px + var(--safe-r));
++  }
++  [data-space~="d"] .hint {
++    left: calc(10px + var(--safe-l));
++  }
++  [data-space~="d"] .brand {
++    left: calc(10px + var(--safe-l));
++  }
++}
