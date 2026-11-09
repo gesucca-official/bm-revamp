@@ -473,6 +473,8 @@ nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suo
 
 **Fase A — proposta: pronta, in attesa della scelta del proprietario** (7 novembre 2026). [Proposta](design/client-c4/guida/proposta.md) con diagnosi sul tavolo vero, tre strategie prototipate (A «Riflettore», raccomandata; B «Richiamo»; C «Contrasto»), O29 (bagliore sulle carte del round al posto del riquadro giallo) e O30 (✓ e × sulla carta scartata); [rapporto](reports/client-c4-report.md#c4-10--fase-a). Prototipi fuori dal commit; Fase B non avviata.
 
+**Scelta del proprietario (9 novembre 2026), dopo la prova dal vivo:** strategia **B «Richiamo»**, con l'onda sulla mano più veloce e meno ampia; **O29:** riquadro giallo tolto e nessun bagliore sulle carte del round (testo solo per il lettore di schermo, note dopo un salto come oggi); **O30 (a)** con ✓ e × centrati sulla carta scartata e riquadro più trasparente. A e C scartate («troppo buie»). [Parole e dettagli](design/client-c4/guida/proposta.md#scelta-del-proprietario). Fase B da avviare.
+
 **Perimetro.**
 
 - Strategie **visive** per portare lo sguardo su ciò che succede e su ciò che il giocatore deve fare: movimento, ingrandimento, luce e oscuramento, pulsazione, colpi che «si sentono» a schermo (con i suoni di C4-7-ter). **Nessun testo nuovo sullo schermo** e nessun elenco.

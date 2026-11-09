@@ -1,7 +1,7 @@
 # C4-10 — Guida visiva: Fase A (proposta)
 
 7 novembre 2026. Base `c09b946` su main («C4-10: lower the cut sound to the level of the hit», Fase 0), checkout pulito alla partenza.
-**Fase A pronta, in attesa della scelta del proprietario. Fase B non avviata.** Nessun codice di prodotto cambiato: i
+**Fase A pronta; il proprietario ha scelto B con ritocchi il 9 novembre 2026 ([scelta](#scelta-del-proprietario)). Fase B non avviata.** Nessun codice di prodotto cambiato: i
 prototipi sono una patch fuori dal prodotto ([`prototipo.patch`](prototipo.patch), vedi [sotto](#prototipi-come-sono-stati-provati)).
 
 Fonti: [piano, C4-10](../../../client-c4-plan.md#c4-10--guida-visiva), regole di non regressione 1–18, riga C4-10 della matrice,
@@ -11,6 +11,44 @@ Fonti: [piano, C4-10](../../../client-c4-plan.md#c4-10--guida-visiva), regole di
 
 **Obiettivo (D15).** Lo sguardo deve andare da solo su ciò che succede e su ciò che il giocatore deve fare, senza leggere:
 «un giocatore che vuole giocare, beh, vuole giocare, non leggere». Nessun testo nuovo sullo schermo, nessun elenco.
+
+## Scelta del proprietario
+
+9 novembre 2026, prova dal vivo dei tre prototipi sul tavolo vero (patch [`prototipo.patch`](prototipo.patch) più la
+scelta da indirizzo `?guida=`), base `7ef7e00`. Parole del proprietario:
+
+> guida A non mi piace, le ombre sulle carte in mano hanno dei bug strani generando dei coni. in generale fa l'ambiente
+> troppo buio. il glow sulle pila delle carte giocate il turno precedente è fastidioso
+>
+> guida B è la strada giusta, le animazioni sono perfette. il balletto che fanno le carte in mano può essere più veloce e
+> meno intensa, basta poco per richiamare l'attenzione sulla mano di carte. il glow sulla pila delle carte giocate c'è
+> anche in questa versione, va tolto, non mi piace
+>
+> guida C è troppo buia, non mi piace
+>
+> direi che la scelta ricade su B, con quegli accorgimenti che ho detto
+
+Su O29 e O30, alle domande della sessione: O29 «Niente, solo tolto»; O30 «andrebbe bene se il riquadro da cliccare o
+toccare fosse perfettamente centrato sulla carta, adesso è storto. poi farei trasparire leggermente di più la carta
+sotto».
+
+**Quindi, per la Fase B:**
+
+1. **Strategia B «Richiamo»**, con le animazioni del prototipo (pulsazione di bersagli, carta posata e ✓, pulsazione
+   leggera degli avversari in attesa, autore e bersaglio che crescono in sequenza, tremito al colpo). **Ritocco:** l'onda
+   sulla mano nella scelta e nello scarto più veloce e meno ampia; basta poco per richiamare lo sguardo. Valori da
+   proporre nella Fase B, da far confermare dal vivo.
+2. **O29:** il riquadro giallo non si disegna e **nessun bagliore** sulle carte del round (né quello di O29 (a) né altri).
+   Il testo resta nel `role="status"` nascosto per il lettore di schermo; le note dopo un salto di turni (D4,
+   `roundNote`) restano visibili come oggi; «Ultimo turno» resta il percorso completo.
+3. **O30 (a)**, a tutte le misure ufficiali, con due correzioni: ✓ e × **centrati esattamente sulla carta scartata**
+   (nel prototipo erano spostati), e il riquadro **più trasparente**, così la carta sotto si vede di più.
+4. Scartate A e C: «troppo buie»; in A anche ombre a cono sulle carte in mano (difetto del prototipo, non indagato).
+
+Le [istruzioni per la Fase B](#istruzioni-per-la-fase-b-strategia-a-o29-a-o30-a) sono state scritte per A: per B valgono
+struttura, file e verifiche, con i costi e i rischi della [sezione B](#b--richiamo-movimento-e-pulsazione) (onda e
+scale rispetto agli `hits`, tremito rispetto allo strato HTML, misure di `VerifyLayout` con l'onda ferma, Safari).
+Non detti nella prova: dispositivo usato, movimento ridotto, volume del taglio della Fase 0.
 
 ## Scelte richieste al proprietario
 

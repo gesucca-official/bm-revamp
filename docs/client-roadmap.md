@@ -1,6 +1,6 @@
 # Roadmap del client web animato
 
-**7 novembre 2026 — versione 55. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1 e C4-1b fatti; C4-3, C4-2, C4-4, C4-5a, C4-5a-bis e C4-5b approvati dal proprietario, l'ultimo il 6 novembre 2026; C4-6* saltato (D1); C4-7 fatto dopo C4-7-ter, in attesa del giudizio del proprietario; poi i blocchi nuovi C4-10 e C4-11, D15; C4-10: Fase A pronta, in attesa della scelta del proprietario).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
+**9 novembre 2026 — versione 56. C0, C1, C2 e C3 sono chiuse; la tappa in corso è C4 ([piano C4](client-c4-plan.md); C4-1 e C4-1b fatti; C4-3, C4-2, C4-4, C4-5a, C4-5a-bis e C4-5b approvati dal proprietario, l'ultimo il 6 novembre 2026; C4-6* saltato (D1); C4-7 fatto dopo C4-7-ter, in attesa del giudizio del proprietario; poi i blocchi nuovi C4-10 e C4-11, D15; C4-10: scelta la strategia B con ritocchi, Fase B da avviare).** C3 è stata chiusa dal proprietario il 3 novembre 2026 dopo la prova su desktop e iPhone ([piano C3](client-c3-plan.md), [rapporto C3](reports/client-c3-report.md)). Stato corrente in sintesi nell'[indice della documentazione](README.md#stato-corrente);
 esiti nei rapporti [C0](reports/client-c0-r2-report.md), [C1](reports/client-c1-report.md)
 e [C2](reports/client-c2-report.md). Questa pagina tiene criteri e attività delle
 tappe, osservazioni [O1–O14](#osservazioni-del-proprietario-dopo-c1) e
@@ -770,6 +770,7 @@ Nessuna prova sintetica vale come parità funzionale o partita reale.
 
 ## Revisioni
 
+- **Versione 56 — 9 novembre 2026:** C4-10, [scelta del proprietario](design/client-c4/guida/proposta.md#scelta-del-proprietario) dopo la prova dal vivo: strategia B «Richiamo» con l'onda sulla mano più veloce e meno ampia; O29 riquadro giallo tolto, senza bagliore; O30 (a) con ✓ e × centrati sulla carta scartata e più trasparenti. Fase B da avviare.
 - **Versione 55 — 7 novembre 2026:** C4-10, [Fase A](design/client-c4/guida/proposta.md) pronta, in attesa della scelta del proprietario: diagnosi dell'attenzione sul tavolo vero, tre strategie prototipate (A «Riflettore» raccomandata, B «Richiamo», C «Contrasto»), proposte per O29 (bagliore sulle carte del round) e O30 (✓ e × sulla carta scartata). Nessun codice di prodotto cambiato. [Rapporto](reports/client-c4-report.md#c4-10--fase-a).
 - **Versione 54 — 7 novembre 2026:** C4-7-ter implementato e verificato: un suono per colpo nominale HIT/CUT, POISON muto, esito personale col pannello e attacco di 5 ms sulla conferma; file Kenney CC0 originali e inventario aggiornato. C4-7 fatto dopo C4-7-ter, in attesa del giudizio del proprietario. [Rapporto e limiti](reports/client-c4-report.md#c4-7-ter--fase-b).
 
