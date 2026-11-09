@@ -1,0 +1,35 @@
+{
+ "baseline": "C4-7-ter m750 (docs/reports/client-c4/c4-7-ter/m750)",
+ "baselineProblems": 47,
+ "currentProblems": 48,
+ "baselineByTurn": {
+  "duel": [
+   6,
+   6,
+   6
+  ],
+  "ffa": [
+   11,
+   11,
+   11
+  ]
+ },
+ "currentByTurn": {
+  "duel": [
+   6,
+   6,
+   6
+  ],
+  "ffa": [
+   11,
+   11,
+   11
+  ]
+ },
+ "normalization": "computer IDs replaced; set comparison; no test, threshold or BASE_750 changed",
+ "added": [
+  "chips-750x292: status-ComPlayer-imm-TOXICITY: «Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.» not in the inspection: "
+ ],
+ "removed": [],
+ "note": "the added line is the token inspection already seen in C4-7-bis and absent in C4-7-ter (variable: token covered by the hand)"
+}

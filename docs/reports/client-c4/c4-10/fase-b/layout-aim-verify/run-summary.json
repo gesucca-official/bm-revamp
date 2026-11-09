@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-09T14:46:35.886Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [
+    "layout",
+    "aim",
+    "verify"
+  ],
+  "build": {
+    "head": "d70be288cd291b1f5464934893e615b44d0787f6",
+    "dirtyPaths": [
+      "M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/style.css",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/discard-checks.mjs",
+      " M client-web/tools/verify-layout.mjs",
+      " M client-web/tools/verify-resolution.mjs",
+      " M client-web/tools/verify.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-09T12:36:06.500Z",
+      "bytes": 50749923,
+      "sha256_16": "7e6045b4e53b0395",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "aa25c0d2c45904da"
+    }
+  },
+  "results": [
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 95,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 131,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 105,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 157,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 118,
+      "exit": 1,
+      "problems": 2
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 153,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/style.css;  M client-web/src/table.tsx;  M client-web/tools/discard-checks.mjs;  M client-web/tools/verify-layout.mjs",
+    "aim-844x390.json: evidence says ok=false"
+  ]
+}

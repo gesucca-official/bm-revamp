@@ -2,7 +2,7 @@ import {RoundCue,type Sounds} from './sound.ts';
 import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
 import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
-import {handCardState} from './readability.ts';
+import {handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard,confirmCard,regularCard,type GuideBeat,type GuideFocus,type Posable} from './readability.ts';
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
@@ -126,6 +126,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   bind(canvas,'pointermove',((e:PointerEvent)=>this.move(e)) as EventListener);
   bind(canvas,'pointerup',((e:PointerEvent)=>this.up(e)) as EventListener);
   bind(canvas,'pointercancel',(()=>this.interrupt('pointercancel')) as EventListener);
+  // C4-10 O30: a tap is handled on pointerup; the click the browser synthesizes after touchend would land on what that tap
+  // just drew under the finger (✓ and × over the chosen discard) and cancel it. The canvas never needs that click.
+  bind(canvas,'touchend',((e:TouchEvent)=>{if(e.cancelable)e.preventDefault();}) as EventListener);
   // Moving onto the (i) button keeps the card raised so the button stays under the pointer.
   bind(canvas,'pointerleave',((e:PointerEvent)=>{if(!this.drag&&!(e.relatedTarget as HTMLElement|null)?.closest?.('.info'))this.setHover(null);}) as EventListener);
   bind(canvas,'lostpointercapture',(()=>{if(this.drag)this.interrupt('lost capture');}) as EventListener);
@@ -337,10 +340,10 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   }
   const played=this.roundCards(L,compact),piles=this.piles(L,compact);
   const n=this.model.hand.length,res=view.players[me]?.character.resources??{},hand:Readout['hand']=[];let lifted:Container|null=null;
-  this.model.hand.forEach((local,i)=>{const k=i-(n-1)/2,a=k*.05,x=H.center+k*H.step,y=H.y+Math.abs(k)*3;
+  this.model.hand.forEach((local,i)=>{const {x,y,angle:a}=handSlot(H,i,n);
    // O11: a light visual hint only. The card stays selectable, inspectable and sendable; the server judges.
    const short=shortfall(local.card,res),payable=!short.length,role=roleOf(local.card),gains=gainsOf(local.card).map(gainText);
-   const state=handCardState(local,this.model,{focused:local.key===this.focused,hovered:local.key===hover,payable,dragged:!!this.drag?.moved&&this.drag.key===local.key});
+   const state=handCardState(local,{choosingDiscard:this.model.choosingDiscard,selected:this.model.selected,target:this.model.target,discard:this.model.discard},{focused:local.key===this.focused,hovered:local.key===hover,payable,dragged:!!this.drag?.moved&&this.drag.key===local.key});
    // Owner, 5 November 2026: every card placed in the preview leaves its hand
    // slot empty until cancelled. Never remove/reorder it in the authoritative hand.
    if(state.inPreview){hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:state.alpha,inPreview:true,face:null});return;}
@@ -352,7 +355,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    // O26: the bound's hand copy rests while its discard is still to be chosen,
    // including keyboard/pointer focus. The target preview and its controls stay.
    if(state.nonDiscardable)hit.label+=', non scartabile';
-   if(state.raised){c.y-=H.lift;c.scale.set(H.zoom);c.rotation=a*.4;hit.angle=c.rotation;hit.h=H.h+H.lift;hit.y=y-H.lift/2;
+   if(state.raised){const r=raisedCard(H,i,n);c.y=r.y;c.scale.set(H.zoom);c.rotation=r.angle;hit.angle=c.rotation;hit.h=H.h+H.lift;hit.y=y-H.lift/2;
     // A card raised only by the mouse keeps its resting width, so sliding left still reaches the previous card.
     if(state.wideHit){hit.w=H.w*H.zoom;hit.h=H.h*H.zoom+H.lift;}
     if(state.chosen)lifted=c;else raised.push(c);}
@@ -373,6 +376,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    // at the visible card. No invisible hit remains over discard candidates.
    this.hits.push({id:this.model.selected!,kind:'preview',key:this.model.selected!,x:pc.x,y:pc.y,w:L.preview.w,h:L.preview.h,angle:pc.rotation,label:`${this.model.selectedCard.name}, carta giocata in anteprima: dettagli`,node:pc});
   }
+  // C4-10 O30: ✓ and × on the chosen discard as drawn, else on the placed card.
+  const di=this.model.target&&this.model.discard?this.model.hand.findIndex(c=>c.key===this.model.discard&&c.key!==this.model.selected&&regularCard(c.card)):-1;
+  this.confirmCard=this.model.selectedCard&&this.model.target?confirmCard(H,{x:this.preview.x,y:this.preview.y,w:L.preview.w,h:L.preview.h},di>=0?{index:di,n}:null):null;
   const mine=L.seats.find(s=>s.me);this.readout={layout:{hand:{w:H.w,h:H.h},person:{w:mine?.person.w??0,h:mine?.person.h??0},item:{w:mine?.items[0].w??0,h:mine?.items[0].h??0}},piles,played,items:drawnItems,hand,board,summary:roundSummary,boards:Object.fromEntries(ids.map(id=>[id,{...this.shown(id,view.players[id])}]))};
   if(this.model.phase==='sending'||this.model.phase==='uncertain')this.world.alpha=.86;else this.world.alpha=1;
   this.drawAim();this.onLayout();
@@ -407,7 +413,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   for(const s of shapes){g.poly(s.outline).fill(PETROL).stroke({color:INK,width:line,join:'miter',miterLimit:8});
    g.moveTo(s.shine[0].x,s.shine[0].y).lineTo(s.shine[1].x,s.shine[1].y).stroke({color:0xe6fbfb,width:C?2.5:3.5,cap:'round',alpha:.9});}
   this.aimLayer.filters=drawn.length?[this.aimAlpha]:null;}
- hit(x:number,y:number,targetsOnly=false){return [...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).find(r=>{if(targetsOnly&&(r.kind==='hand'||r.kind==='preview'))return false;const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}
+ // C4-10: the guide never reads or writes the hits, so a press lands where it lands without it (hitAt, readability.ts).
+ hit(x:number,y:number,targetsOnly=false){return hitAt([...this.hits].sort((a,b)=>this.world.getChildIndex(b.node)-this.world.getChildIndex(a.node)).filter(r=>!(targetsOnly&&(r.kind==='hand'||r.kind==='preview'))),x,y);}
  point(e:PointerEvent){const r=this.app.canvas.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
  down(e:PointerEvent){if(this.blocked||this.contextLost||e.button!==0)return;this.inputStart=performance.now();const p=this.point(e),hit=this.hit(p.x,p.y);
   // A tap or click anywhere else lowers raised cards and drops the choice (like Escape).
@@ -520,6 +527,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const ups=new Map<string,CloseUp>();const upOf=(id:string)=>{if(!ups.has(id)){const s=place(id)!,avoid=[...(L?.seats??[]).filter(x=>x.id!==id).flatMap(seatBoxes),...hand],range=closeUpRange(id===this.model.me);
    const c=closeUp(s.person,{w:this.width,h:this.height},[...avoid,...pileBoxes],range),o=closeUp(s.person,{w:this.width,h:this.height},avoid,range);
    const far=(x:CloseUp)=>Math.hypot(x.box.x-this.width/2,x.box.y-this.height*.42);ups.set(id,c.placed==='middle'&&(c.scale>o.scale||(c.scale===o.scale&&far(c)<=far(o)))?c:o);}return ups.get(id)!;};
+  this.guideBeats=[];
   const character=(id:string,w:number,h:number)=>{const p=v.players[id]?.character??previous.players[id]?.character;return this.face(p?.name??'',artIndex(p?.bindingName??''),w,h,'PERSONAGGIO',true,'','character');};
   T.moves.forEach((m,i)=>{const from=seat(m.author),to=seat(m.target),P=p.moves[i],home=place(m.author)?.person,aim=place(m.target)?.person;if(!from||!to||!home||!aim)return;
    const at={cost:P.cost.at,author:P.author.at,back:P.back.at,flight:P.flight.at,target:P.target.at,changes:P.changes.at};
@@ -564,6 +572,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     else{node.addChild(new Graphics().moveTo(-bw*.1,-bh*.5).lineTo(bw*.08,-bh*.1).lineTo(-bw*.12,bh*.15).lineTo(bw*.05,bh*.5).stroke({color:INK,width:3}));flight({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:s,end:e,mode:'break',tag:'itemOut'});}}
    // 6. The card's changes.
    change(P.changes.at,m.steps);
+   // C4-10: the guide follows author and target of the card in course, on the times already planned (none new).
+   this.guideBeats.push({from:P.cost.at,to:end,hit,author:m.author,target:m.target});
    this.stats.schedule.push({key:k,move:i,...at,hit:Math.round(hit),tokens:m.tokens.length?P.cost.at:null,closeUp:P.author.at,goesBack:P.back.at,flies:P.flight.at,targetUp:P.target.at,pops:m.steps.length?P.changes.at:null,costPops:m.costSteps.length?Math.round(P.cost.at+P.cost.dur*.3):null});});
   // 3. Draws: cards leave each deck as the counts say; own new cards face up, opponents' as backs, deck objects to the table.
   // C3-4s: what leaves a deck is on the table only when it lands. An object whose change no move explains vanishes from or appears at its seat (D1).
@@ -647,8 +657,29 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  skip(){this.sounds?.stopAll();this.finish('skip');}
  stopEffects(keepSound=false){this.cue.end('stop');this.sounds?.endRound(!keepSound);if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
-  this.staged=null;this.arriving.clear();this.labels=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+  this.staged=null;this.arriving.clear();this.labels=[];this.guideBeats=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private lastTick=0;
+ // ---- C4-10: visual guide, strategy B «Richiamo». Focus and motion are pure (readability.ts); here they are only applied, over nodes that
+ // draw() recreates: every node moved goes back to rest at the next frame, and the hits are never touched. `still` stops it for the measures.
+ private guideBeats:GuideBeat[]=[];private guideRest=new GuideRest();private guideSince=0;
+ guide:{kind:GuideFocus['kind'];ids:string[];wave:string[];pulse:string[];grow:string[];hit:GuideFocus['hit']|null;shake:number;moved:number;still:boolean}={kind:'none',ids:[],wave:[],pulse:[],grow:[],hit:null,shake:0,moved:0,still:false};
+ /** C4-2, C4-10 O30: where ✓ and × lie (the chosen discard as drawn, else the placed card); null with no move to confirm. */
+ confirmCard:ReturnType<typeof confirmCard>|null=null;
+ private guideTick(now:number){const m=this.model,L=this.layout;
+  if(!L){this.guideRest.restore();return;}
+  const hand=this.hits.filter(h=>h.kind==='hand'),allowed=m.locked?[]:this.hits.filter(h=>(h.kind==='person'||h.kind==='item')&&h.target&&m.allows(h.target)).map(h=>h.id);
+  const dest=m.target?this.hits.find(z=>(z.kind==='person'||z.kind==='item')&&z.target?.owner===m.target!.owner&&z.target?.itemIndex===m.target!.itemIndex)?.id??null:null;
+  const v=m.view,f=guideFocus({over:v.over||m.eliminated,phase:m.phase,selected:m.selected,target:!!m.target,choosingDiscard:m.choosingDiscard,discard:m.discard,
+   hand:hand.map(h=>({key:h.id,regular:regularCard(m.hand.find(c=>c.key===h.key)?.card)})),allowed,dest,preview:this.hits.find(h=>h.kind==='preview')?.id??null,
+   waiting:Object.keys(v.players).filter(id=>id!==m.me&&!v.players[id].character.dead&&!v.forfeits[id]),sequence:this.seqStarted?{t:now-this.seqStarted,beats:this.guideBeats}:null});
+  if(f.kind!==this.guide.kind)this.guideSince=now;
+  const motion=guideMotion(f,{now,since:now-this.guideSince,compact:L.compact,reduced:this.reduced||this.guide.still});
+  // The preview shares its id with the hand card it came from: the hit's kind picks the node.
+  const nodes=new Map<string,Posable>();for(const h of this.hits)if(!nodes.has(h.id)||h.kind==='preview')nodes.set(h.id,h.node as unknown as Posable);
+  this.guideRest.apply(nodes,motion.pose);this.world.x=motion.shake;this.fx.x=motion.shake;
+  this.guide={kind:f.kind,ids:f.ids,wave:f.wave,pulse:f.pulse,grow:f.grow,hit:f.hit??null,shake:motion.shake,moved:this.guideRest.moved,still:this.guide.still};}
+ /** Verification only: stops (true) or lets go (false) every movement of the guide; the nodes are back at rest at once. */
+ guideStill(on:boolean){this.guide.still=on;if(on){this.guideRest.restore();this.world.x=0;this.fx.x=0;this.guide.moved=0;this.guide.shake=0;}}
  private tick(){const now=performance.now(),lastTick=this.lastTick;this.lastTick=now;
    if(this.retired.length)this.retired.splice(0).forEach(c=>c.destroy({children:true}));if(this.retiring.length)[this.retired,this.retiring]=[this.retiring,[]];if(this.measure&&this.tickPrev)this.stats.frames.push(now-this.tickPrev);this.tickPrev=now;
   if(this.aimDirty)this.drawAim();
@@ -690,6 +721,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(!h)continue;const q=(t-sh.at)/sh.dur,on=!this.reduced&&q>=0&&q<=1;h.node.x=h.x+(on?Math.sin(q*Math.PI*8)*sh.amp*(1-q):0);
     if(sh.dark){const k=on?(q<.2?q/.2:1-(q-.2)/.8)*.55:0,v=Math.round(255*(1-k));h.node.tint=(v<<16)|(v<<8)|v;if(on)sh.dark.min=Math.min(sh.dark.min,v);}}
   }}
+  // C4-10: last, over the nodes as this frame left them (a redraw above recreates them at rest).
+  this.guideTick(now);
  }
  startMeasure(){this.stats.frames=[];this.stats.inputMs=[];this.tickPrev=0;this.measure=true;}
  endMeasure(){this.measure=false;return this.stats;}

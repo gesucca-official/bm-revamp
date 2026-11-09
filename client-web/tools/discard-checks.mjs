@@ -24,6 +24,21 @@ export async function discardPass(p,shot){
    if(selected.drawn&&(selected.drawn.scale!==1||Math.abs(selected.drawn.y-(H.y+Math.abs(s.order.findIndex(c=>c.key===s.selected)-(s.order.length-1)/2)*3))>1e-6))errors.push(`${label}: bound drawing raised`);}
   samples.push({label,selected:s.selected,target:s.target,discard:s.discard,hand:s.cards.length,hits:s.hits.filter(h=>h.kind==='hand'),handReadout:s.readout.hand.map(({face,...h})=>h)});
  };
+ // C4-10 O30: with the discard chosen, ✓ and × lie on it as the scene draws it (centre, size, turn), lighter, each half reachable and >= 44 px.
+ const o30=[];
+ const onDiscard=async(s,label)=>{const h=s.hits.find(x=>x.id===s.discard&&x.kind==='hand'),H=s.layout.hand;
+  const d=await page.evaluate(()=>{const c=document.querySelector('[data-testid=confirmation]');if(!c)return null;const r=c.getBoundingClientRect(),m=new DOMMatrix(getComputedStyle(c).transform);
+   return {cx:r.x+r.width/2,cy:r.y+r.height/2,w:c.offsetWidth,h:c.offsetHeight,angle:Math.atan2(m.b,m.a),onDiscard:c.classList.contains('on-discard'),
+    buttons:[...c.querySelectorAll('button')].map(b=>{const q=b.getBoundingClientRect(),x=q.x+q.width/2,y=q.y+q.height/2,top=document.elementFromPoint(x,y);return {w:b.offsetWidth,h:b.offsetHeight,reach:!!top&&(top===b||b.contains(top))};})};});
+  const row={label,discard:s.discard,drawn:h?.drawn??null,confirmation:d};o30.push(row);
+  if(!d||!h){errors.push(`${label}: O30 no confirmation or no discard card`);return;}
+  const off=Math.max(Math.abs(d.cx-h.drawn.x),Math.abs(d.cy-h.drawn.y));row.offset=off;
+  if(off>1)errors.push(`${label}: O30 ✓/× off the discard by ${off.toFixed(1)} px`);
+  if(Math.abs(d.w-H.w*H.zoom)>1||Math.abs(d.h-H.h*H.zoom)>1)errors.push(`${label}: O30 ✓/× ${d.w}x${d.h}, the card ${H.w*H.zoom}x${H.h*H.zoom}`);
+  if(Math.abs(d.angle-h.drawn.angle)>.002||Math.abs(h.angle-h.drawn.angle)>.002)errors.push(`${label}: O30 turned ${d.angle}, the card ${h.drawn.angle}, its button ${h.angle}`);
+  if(!d.onDiscard)errors.push(`${label}: O30 box not the lighter one`);
+  if(d.buttons.length!==2||d.buttons.some(b=>b.w<44||b.h<44||!b.reach))errors.push(`${label}: O30 buttons ${JSON.stringify(d.buttons)}`);
+ };
  const prompt=async expected=>{
   const data=await page.evaluate(()=>{const all=[...document.querySelectorAll('[data-testid=discard-invitation]')],e=all[0],r=e?.getBoundingClientRect(),h=document.querySelector('.hint.confirming span[hidden]');return {count:all.length,text:e?.textContent??'',pointerEvents:e?getComputedStyle(e).pointerEvents:null,cy:r?r.top+r.height/2:null,duplicate:!!h&&getComputedStyle(h).display!=='none'};});
   if(data.count!==Number(expected))errors.push(`discard prompt count ${data.count}, expected ${Number(expected)}`);
@@ -56,6 +71,7 @@ export async function discardPass(p,shot){
    await page.mouse.move(2,2);await page.waitForTimeout(100);const after=await p.state();
    if(aimed?after.discard!==c.key||after.selected!==b.key:after.selected!==c.key)errors.push(`${b.name}: candidate ${c.key} covered/unreachable (${aimed?'with':'without'} target)`);
    else probes++;
+   if(aimed&&after.discard===c.key)await onDiscard(after,`${b.name}-${c.key}`);
    check(after,false,`${b.name}-${c.key}-choice-ended`);await prompt(false);
   }
   for(const no of start.cards.filter(c=>!regular(c)&&c.key!==b.key)){
@@ -91,5 +107,8 @@ export async function discardPass(p,shot){
   check(after,false,`${c.name}-cancelled`);previews.push({name:c.name,keyboardInspection:receipt===c.name,menuInspection:touchReceipt===c.name,restored:rest?.kind==='hand'});
  }
  await escape();check(await p.state(),false,'outside-after-cancel');await prompt(false);
- return {bounds:bounds.map(c=>c.name),candidates:candidates.length,probes,nonDiscardableTaps,previews,samples,errors,commandsBefore:start.commands,commandsAfter:(await p.state()).commands};
+ // The confirmation follows the discard: one place per card chosen.
+ const places=new Map();for(const r of o30)if(r.confirmation)places.set(r.discard,`${Math.round(r.confirmation.cx)},${Math.round(r.confirmation.cy)}`);
+ if(places.size>1&&new Set(places.values()).size!==places.size)errors.push(`O30: two discards share one place ${JSON.stringify([...places])}`);
+ return {bounds:bounds.map(c=>c.name),candidates:candidates.length,probes,o30,nonDiscardableTaps,previews,samples,errors,commandsBefore:start.commands,commandsAfter:(await p.state()).commands};
 }

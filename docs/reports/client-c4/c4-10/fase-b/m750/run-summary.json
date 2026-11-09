@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-09T14:52:12.463Z",
+  "quick": false,
+  "nonStandardMeasures": [
+    "750x292"
+  ],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "750x292"
+  ],
+  "only": [
+    "verify",
+    "layout"
+  ],
+  "build": {
+    "head": "d70be288cd291b1f5464934893e615b44d0787f6",
+    "dirtyPaths": [
+      "M client-web/src/readability.ts",
+      " M client-web/src/scene.ts",
+      " M client-web/src/style.css",
+      " M client-web/src/table.tsx",
+      " M client-web/tools/discard-checks.mjs",
+      " M client-web/tools/verify-layout.mjs",
+      " M client-web/tools/verify-resolution.mjs",
+      " M client-web/tools/verify.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-09T12:36:06.500Z",
+      "bytes": 50749923,
+      "sha256_16": "7e6045b4e53b0395",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "aa25c0d2c45904da"
+    }
+  },
+  "results": [
+    {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 92,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 220,
+      "exit": 1,
+      "problems": 48
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/src/readability.ts;  M client-web/src/scene.ts;  M client-web/src/style.css;  M client-web/src/table.tsx;  M client-web/tools/discard-checks.mjs;  M client-web/tools/verify-layout.mjs",
+    "layout-750x292.json: evidence says ok=false"
+  ]
+}

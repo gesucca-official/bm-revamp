@@ -9,6 +9,9 @@
   --confirm-no: #742e331f;
   --confirm-yes: #2c62621f;
   --confirm-bg: #1d140f26;
+  --confirm-discard-bg: #1d140f14;
+  --confirm-discard-face: #f6ecd859;
+  --confirm-discard-hover: #f6ecd88c;
   --bg-slot: #efe0c2;
   --bg-readonly: #e3d3b2;
   --danger-bg: #d9a3a0;
@@ -1613,3 +1616,14 @@ button[aria-selected=true] { box-shadow: inset 0 -3px 0 var(--accent-strong); }
 
 /* C4-7: a full touch target for the volume control. */
 .menu .volume-slider { min-width: 160px; min-height: 44px; vertical-align: middle; }
+
+/* C4-10 O29: text kept for the screen reader only (the short summary of a round is no longer drawn). */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+/* C4-10 O30 (owner: «farei trasparire leggermente di più la carta sotto»): on the chosen discard the two halves are lighter, so the card shows through. Turn and place come from the scene. */
+.confirmation.on-discard { background: var(--confirm-discard-bg); }
+.confirmation.on-discard button, .confirmation.on-discard button+button, .confirmation.on-discard button:disabled:not(.semantic):not(.info):not(.round-link) { background: var(--confirm-discard-face); }
+.confirmation.on-discard button:hover:not(:disabled) { background: var(--confirm-discard-hover); }
+/* C4-10, strategy B: ✓ pulses while the move can be confirmed; never with reduced motion (the outline of today stays). */
+.confirmation [data-testid=confirm]:not(:disabled) .mark { animation: guide-pulse 1s ease-in-out infinite; }
+@keyframes guide-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+@media (prefers-reduced-motion: reduce) { .confirmation [data-testid=confirm] .mark { animation: none; } }

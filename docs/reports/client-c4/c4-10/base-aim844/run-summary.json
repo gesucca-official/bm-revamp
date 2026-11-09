@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-09T14:33:17.290Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "844x390"
+  ],
+  "only": [
+    "aim"
+  ],
+  "build": {
+    "head": "d70be288cd291b1f5464934893e615b44d0787f6",
+    "dirtyPaths": [],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-09T12:36:06.500Z",
+      "bytes": 50749923,
+      "sha256_16": "7e6045b4e53b0395",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "aa25c0d2c45904da"
+    }
+  },
+  "results": [
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 110,
+      "exit": 1,
+      "problems": 8
+    }
+  ],
+  "warnings": [
+    "aim-844x390.json: evidence says ok=false"
+  ]
+}

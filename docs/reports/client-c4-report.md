@@ -1188,3 +1188,106 @@ Non verificati iPhone, Safari e suono effettivamente udito; il proprietario giud
 **Non verificato:** iPhone, Safari, fluidità percepita (le catture sono fotogrammi fermi; il movimento di B si giudica dal vivo), lettore di schermo, partite fra due umani (attesa lunga), pannello d'esito con le strategie. Nessuna verifica di Fase B sui prototipi.
 
 **Al proprietario:** scegliere la strategia (A, B, C o ibrido), O29 (a/b/c) e O30 (a/b/c); per provarle dal vivo, applicare la patch come descritto nella proposta.
+
+### C4-10 — Fase B
+
+9 novembre 2026, base `d70be28` («C4-10: record the owner's choice of strategy B») su main, checkout pulito. **C4-10: fatto, in attesa del giudizio del proprietario.** [Scelta](../design/client-c4/guida/proposta.md#scelta-del-proprietario): B «Richiamo» con l'onda più veloce e meno ampia; O29 riquadro giallo tolto, nessun bagliore; O30 (a) con ✓ e × centrati sulla carta scartata e più trasparenti. Evidenze: [cartella](client-c4/c4-10/README.md).
+
+Non toccati regolamento, `docs/sets`, server, protocollo, catalogo, client-debug, file del Set Base, audio, editor dei mazzi. Durate e calendario della sequenza invariati (gli intervalli della guida sono quelli già calcolati dalla scena); nessuna attesa né timer sul percorso di input (la guida si ricalcola nel `tick` esistente); nessun testo nuovo sullo schermo; nessun bagliore; «Ultimo turno» invariato (carte del round, menu, pannello d'esito). Soglie e `BASE_750` invariati.
+
+#### Base di partenza
+
+Prima del codice: porte 8080 e 4320 libere, nessun Java/Maven esterno; jar ricostruito qui con `./scripts/build.ps1 -Task Server -Offline` (**`7e6045b4e53b0395`**, BUILD SUCCESS), poi riusato dichiaratamente in tutti i giri. VerifyAll `-Only 'test,build,size,verify,layout'` alle misure ufficiali: **7/7 verde**; client **271** test; size JS gzip **344 784**, totale **1 754 655**, texture **27 729 048** B; input massimi di `VerifyLayout` duello/FFA, due campioni ciascuno: 1366×768 **14,4/17,7** e **16,2/25,0** ms, 844×390 **13,8/13,7** e **15,0/20,1** ms ([evidenze](client-c4/c4-10/base/)). La build della base è stata fatta prima di ogni modifica (dist della base); mentre il giro proseguiva ho cominciato a scrivere il codice, e il layout a 844 importa da `src/readability.ts` alcune funzioni pure che sono rimaste invariate: lo dichiaro, il risultato vale per la base.
+
+#### Cosa fa
+
+- **Fuoco** (`guideFocus`, `readability.ts`, puro): scelta → carte della mano; mira → bersagli ammessi da `Model.allows` (e la carta scelta); conferma → carta posata e bersaglio (la carta scartata è a fuoco ma ferma, perché ci stanno sopra ✓ e ×); scarto → sole regolari della mano e carta posata; attesa (invio, mossa ricevuta, connessione incerta) → avversari ancora in gioco; sequenza → autore e bersaglio della carta in corso, sugli intervalli costo→atterraggio già pianificati, con il colpo all'istante `hit`; esito, eliminato o forfait → nessuno. Una scelta fatta durante la sequenza vince (regola 4).
+- **Movimento** (`guideMotion`, puro): onda sulla mano in scelta e scarto; pulsazione dei bersagli e della carta posata ±3,5%, degli avversari in attesa ±1,5%; autore e bersaglio +7% in sequenza; tremito del tavolo al colpo (180 ms). ✓ pulsa in CSS (scala 1,14, 1 s) finché la mossa si può confermare.
+- **Applicazione** (`GuideRest` in `readability.ts`, chiamata alla fine di `tick` in `scene.ts`): a ogni frame ogni nodo mosso torna prima a riposo e poi riceve la posa; la guida tocca solo altezza e scala (mai la x, che appartiene allo scossone di C3-5 e al trascinamento); `draw()` ricrea i nodi a riposo. Il tremito sposta `world` e `fx`, mai lo strato semantico HTML.
+- **Stato per le verifiche:** `window.__bm.state.guide` (`kind`, `ids`, `wave`, `pulse`, `grow`, `hit`, `shake`, `moved`, `still`), `confirmCard`, `shortSummary`, `players`; `window.__bm.guideStill(on)` ferma la guida per le misure.
+
+#### Valori dell'onda (costanti `GUIDE`, un solo punto, da confermare dal vivo)
+
+| | Prototipo (Fase A) | Fase B |
+|---|---:|---:|
+| Altezza, desktop / compatto | 14 / 8 px | **8 / 5 px** |
+| Salita e discesa di una carta | 600 ms | **360 ms** |
+| Ritardo fra una carta e la successiva | 110 ms | **60 ms** |
+| Ripetizione in scelta / in scarto | 3,6 / 2,4 s | 3,6 / 2,4 s (invariata) |
+
+Un passaggio su una mano di otto carte dura 780 ms invece di 1370 ms, poi la mano resta ferma fino alla ripetizione. Pulsazioni (±3,5%, ±1,5%, periodo 2π·230 ms), crescita (+7%) e tremito (6 / 3 px, 5 mezze oscillazioni in 180 ms) come nel prototipo: il proprietario le ha dette «perfette».
+
+#### Tocchi e strato semantico
+
+Gli `hits` non sono né letti né scritti dalla guida: sono gli stessi di oggi a ogni istante, e la prova di un tocco (`hitAt`, estratta da `scene.hit` senza cambiarne la logica) dà gli stessi risultati. Un tocco sul bordo visivo di una carta sollevata dall'onda o di un bersaglio ingrandito cade quindi dove cade oggi, anche se la carta disegnata è spostata di qualche pixel; il test `C4-10 touch` lo prova su 50 punti di bordo (dentro e appena fuori di ciascun `hit`, più i bordi visivi spostati) durante scelta, mira e colpo. Il tremito non sposta lo strato semantico (posizionato dagli `hits`) né i tocchi sul canvas (provati sugli `hits`).
+
+**Il click dopo il tocco.** Il primo giro della matrice (`VerifyLayout` rosso a entrambe le misure, O26 «candidate … covered/unreachable (with target)») ha trovato un difetto vero portato da O30: con il bersaglio scelto, il tocco su una regolare la sceglie come scarto al `pointerup`, React disegna ✓ e × sulla carta scartata, cioè sotto il dito, e il click che il browser sintetizza dopo `touchend` cade su × e annulla la mossa. Col mouse non succede (il click va al canvas). Correzione in `scene.ts`: il canvas annulla l'azione predefinita di `touchend`, così il click sintetico non parte; il canvas lavora solo con gli eventi pointer e non ha mai usato quel click. Riprodotto prima e dopo con uno script Playwright a tocco (tre regolari: prima scelta annullata, dopo scarto scelto); test di sorgente in `guide.test.ts` e il controllo O26/O30 di `VerifyLayout`.
+
+#### Movimento ridotto
+
+Con `prefers-reduced-motion` (e con `guideStill`) `guideMotion` non restituisce nulla: nessuna onda, pulsazione, crescita o tremito; ✓ non pulsa (`animation: none`). Resta ciò che c'è oggi: contorni petrolio dei bersagli, frecce ferme, alone sulla carta scelta. È la stessa informazione di oggi, senza la guida; la rifinitura resta a C4-8a.
+
+#### O29 e O30
+
+**O29.** Il riepilogo breve non si disegna più quando non è una nota dopo un salto: il testo va in un `<p class="sr-only" role="status" data-testid="brief">`; le note di `roundNote` (D4) restano nel riquadro visibile, nel posto del layout, e si aprono su «Ultimo turno». Nessun bagliore sulle carte del round. La decisione è nella funzione pura `shortSummary`.
+
+**O30.** Con lo scarto scelto, ✓ e × stanno sulla carta scartata **come è disegnata**: sollevata (la carta scartata ora resta sollevata qualunque cosa faccia il puntatore, così il riquadro non salta), centrata sul centro disegnato, larga e alta quanto la carta ingrandita (`H.w·zoom × H.h·zoom`), ruotata come la carta e il suo pulsante semantico. Il riquadro è più trasparente (fondo 8% invece di 15%, metà 35% invece di 70%). Stessa semantica di C4-2: metà alta conferma, metà bassa annulla, stessi pulsanti HTML. Ogni metà ≥ 44 px a 1366×768 e 844×390 (test e `VerifyLayout`). Nel prototipo il riquadro era l'`hit` sollevato, più alto della carta e spostato in basso di metà sollevamento: era «storto».
+
+**Consegna 1 del Set Base.** Regolamento 1.13, R03: «Un giocatore vivo con un mazzo conforme a R02 ha sempre una mossa (1.12)», e i mazzi non conformi non si usano per giocare (1.12, D20): il caso del menu non si presenta più. Tolta la frase «Se nessuna carta è giocabile il gioco non prevede di passare…» da `table.tsx` e la consegna da `docs/orchestrazione-lavoro.md`.
+
+#### Attesi cambiati (O29, decisione del proprietario del 9 novembre 2026)
+
+- `VerifyLayout` (`briefProblems`): senza nota, il controllo diventa «nessun `.toast` disegnato; uno stato nascosto presente, non visibile, con lo stesso testo della riga del modello e della riga ricalcolata da `briefLine` sui fatti della vista». Con una nota restano tutti i controlli di C3-6 (posto, sovrapposizioni, corpo 16/13 px). Misure e catture di ogni turno con `guideStill(true)`.
+- `VerifyResolution` (K5 a scheda nascosta): il riepilogo che non scade si legge nello stato nascosto, con lo stesso testo di `shortSummary`; in più nessun `.toast` disegnato né durante né dopo. Le righe guardando da eliminati registrano anche lo stato nascosto (`status: …`), separato dalle note.
+- `Verify` (fine turno): il resoconto si apre dal menu, «Ultimo turno», invece che toccando il riquadro.
+- Aggiunto in `discard-checks.mjs` (usato da `VerifyLayout`) il controllo O30: centro entro 1 px dal centro disegnato della carta scartata, dimensioni della carta ingrandita, rotazione uguale a carta e pulsante, classe più trasparente, due metà raggiungibili e ≥ 44 px, un posto diverso per ogni scarto.
+
+Nessun'altra soglia o atteso toccato; `BASE_750` invariato.
+
+#### Test e mutazioni
+
+Client: **289 test** (271 della base + 18 nuovi in `tests/guide.test.ts`), `tsc` verde. I nuovi coprono ogni momento sul modello vero e sulla funzione pura: scelta, mira con 1 e 4 bersagli, conferma con e senza scarto, scarto, attesa (invio, mossa ricevuta, connessione incerta), sequenza a metà di ogni carta e al colpo, esito; ritorno a riposo; movimento ridotto fermo; O30 che segue lo scarto e cambia con lui, centrato a 1366×768 e 844×390 in duello e FFA; O29 con e senza nota; tocchi invariati; nessun bagliore né frase R03; il click sintetico fermato.
+
+[Mutazioni](client-c4/c4-10/mutazioni.json) su copie di `src` e `tests` fuori dal repository (`%TEMP%`), `guide.test.ts` + `hand-choice.test.ts`, base 22/22:
+
+| Mutazione | Test falliti |
+|---|---:|
+| tolto il ritorno a riposo | 1 |
+| tolto il cambio della conferma (sempre sulla carta posata) | 2 |
+| ridato il riquadro giallo senza nota | 1 |
+| tolto il centraggio (riquadro dell'`hit` sollevato, come il prototipo) | 1 |
+| tolta la precedenza della scelta sulla sequenza | 2 |
+| tolto l'arresto del click dopo il tocco | 1 |
+| ignorato il movimento ridotto | 1 |
+
+#### Verifiche, una alla volta
+
+Prima di ogni giro porte 8080 e 4320 libere e nessun Java/Maven esterno; mai fermati processi altrui (fermate solo due mie anteprime Vite rimaste sulla 4320); mai due verifiche insieme. Jar `7e6045b4e53b0395` riusato.
+
+| Giro | Esito |
+|---|---|
+| Primo giro della matrice: `test,build,size,verify,ffa,aim,resolution,layout`, misure ufficiali ([evidenze](client-c4/c4-10/fase-b/primo-giro/)) | **10/13**: rossi layout 1366 e 844 (difetto nuovo, corretto: vedi «Il click dopo il tocco») e aim 844 |
+| Dopo la correzione: `layout,aim,verify`, misure ufficiali ([evidenze](client-c4/c4-10/fase-b/layout-aim-verify/)) | **5/6**: verify 1366 (1 min 35 s) e 844 (2 min 11 s), aim 1366, layout 1366 e 844 **verdi**; aim 844 **rosso preesistente** |
+| aim 844 sulla base `d70be28` (stash delle modifiche, ripristino verificato byte per byte) ([evidenze](client-c4/c4-10/base-aim844/)) | **rosso**, stesso tipo: freccia verso un computer «flagged as crossing the buttons» e sopra ✓/× in FFA e in attesa, con le legate al personaggio. Il calcolo delle frecce non è toccato dalla Fase B |
+| Sul codice finale: `test,build,size,ffa,resolution`, misure ufficiali ([evidenze](client-c4/c4-10/fase-b/ffa-resolution/)) | **7/7**: ffa 8 min 53 s / 6 min 01 s; resolution completa 31 min 20 s / 30 min 57 s, 21 controlli per misura (quick, interruzioni, movimento ridotto, salto, umani, rientro, riepiloghi), 0 errori |
+| 750×292 `verify,layout` ([evidenze e confronto](client-c4/c4-10/fase-b/m750/)) | verify **verde**; layout **rosso preesistente**: conteggi per turno duello **6/6/6**, FFA **11/11/11** come C4-7-ter; problemi 47 → 48, l'unico in più è l'ispezione del gettone già vista in C4-7-bis (variabile: gettone coperto dalla mano). `BASE_750` invariato |
+| `./scripts/build.ps1 -Task Test -Offline` | **647 server, 0 fallimenti/errori, 7 saltati; client-debug 37/37** |
+| `python scripts/check-rules.py` | **PASS** |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` | **757 test, 0 fallimenti/errori, 7 saltati**, BUILD SUCCESS (verifica separata del contesto Spring) |
+| Catture finali `guide-captures.mjs`, normale e `BM_REDUCED=1` ([evidenze](client-c4/c4-10/catture/)) | 0 errori di pagina; nessun `.toast` in nessun momento; ✓ e × sulla carta scartata a entrambe le misure |
+
+**O30 misurato da `VerifyLayout`:** a ogni scarto il centro del riquadro dista meno di 0,02 px dal centro disegnato della carta scartata; riquadro 240×331 a 1366×768 e 144×199 a 844×390; rotazione uguale a carta e pulsante.
+
+**Size:** JS gzip **346 449 / 512 000** B (+1 665 sulla base), totale **1 756 480 / 4 194 304**, texture **27 729 048** invariate.
+
+**Input** (`VerifyLayout`, duello due campioni / FFA due campioni, con la guida in funzione fra le misure): desktop **16,6 / 16,0 / 18,4 / 33,9** ms, compatto **14,5 / 15,7 / 24,3 / 24,0** ms; base 14,4/17,7/16,2/25,0 e 13,8/13,7/15,0/20,1; C4-7-ter 16,1/50,7/19,6/24,5 e 13,5/19,4/18,5/20,0. Tutti sotto 100 ms; il picco 33,9 (FFA desktop) è nell'intervallo già visto in C4-7-ter, partite diverse.
+
+**Rossi:** già presenti aim 844 (provato sulla base) e layout 750×292 (stessi conteggi di C4-7-ter). Nuovo e corretto: il tocco sullo scarto. Nessun rosso nuovo rimasto.
+
+#### Non verificato
+
+iPhone e Safari (fluidità delle scale su molti nodi a ogni frame: rischio già noto, C4-8b), fluidità percepita in generale, lettore di schermo reale sullo stato nascosto, partite fra due umani (attesa lunga con la pulsazione degli avversari). Le catture sono fotogrammi fermi: l'onda e il tremito si giudicano dal vivo.
+
+#### Al proprietario, dal vivo
+
+Ampiezza e velocità dell'onda sulla mano (valori sopra, si cambiano in un punto), centraggio e trasparenza di ✓ e × sulla carta scartata, assenza del riquadro giallo (le note dopo un salto restano), e il volume del taglio della Fase 0.

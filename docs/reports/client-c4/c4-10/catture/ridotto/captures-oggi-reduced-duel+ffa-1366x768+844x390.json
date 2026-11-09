@@ -1,0 +1,2843 @@
+{
+ "date": "2026-11-09T16:14:02.326Z",
+ "url": "http://127.0.0.1:4320",
+ "guide": null,
+ "reduced": true,
+ "kind": "Edge via Playwright on PC against a local server on a temporary database; not a physical device",
+ "runs": [
+  {
+   "mode": "duel",
+   "size": "1366x768",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "duel-1366x768-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-1366x768-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 625,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       481
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-1366x768-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 263,
+       "y": 112,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 195,
+       "y": 735,
+       "w": 362,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 259,
+       "y": 70,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Peroni da 66, caldaControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 626,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-1366x768-oggi-04-attesa.jpg",
+     "turn": 0,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 263,
+       "y": 112,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 195,
+       "y": 735,
+       "w": 362,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 259,
+       "y": 70,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Peroni da 66, caldaInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 626,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-1366x768-oggi-05-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-1366x768-oggi-06-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-1366x768-oggi-07-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 739,
+       "y": 619,
+       "w": 214,
+       "h": 295
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       304
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "duel-1366x768-oggi-08-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 689,
+       "y": 304,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 153,
+       "y": 743,
+       "w": 278,
+       "h": 30
+      },
+      "toast": null,
+      "confirm": {
+       "x": 685,
+       "y": 262,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": {
+       "x": 910,
+       "y": 734,
+       "w": 292,
+       "h": 29
+      },
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Ghigno co' i' Denti Marci → ComputerScegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 693,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "duel-1366x768-oggi-09-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 689,
+       "y": 304,
+       "w": 120,
+       "h": 166
+      },
+      "discard": {
+       "x": 1080,
+       "y": 604,
+       "w": 240,
+       "h": 361
+      },
+      "hint": {
+       "x": 153,
+       "y": 735,
+       "w": 278,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 1083,
+       "y": 506,
+       "w": 244,
+       "h": 171
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Ghigno co' i' Denti Marci → ComputerScarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 98,
+      "previewToHint": 687,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-1366x768-oggi-10-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-1366x768-oggi-11-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-1366x768-oggi-12-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-1366x768-oggi-13-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 625,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-1366x768-oggi-14-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 647,
+       "y": 322,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 735,
+       "w": 218,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 643,
+       "y": 280,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Presa Male di Brutto → teControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 667,
+      "playedToToast": null
+     },
+     "card": "Presa Male di Brutto"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-1366x768-oggi-15-attesa.jpg",
+     "turn": 2,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 647,
+       "y": 322,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 114,
+       "y": 735,
+       "w": 201,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 643,
+       "y": 280,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Presa Male di Brutto → teInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 674,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-1366x768-oggi-16-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  },
+  {
+   "mode": "ffa",
+   "size": "1366x768",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "ffa-1366x768-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-1366x768-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 773,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       160
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-1366x768-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 388,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 184,
+       "y": 735,
+       "w": 339,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 481,
+       "y": 346,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Tennents SuperControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 459,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-1366x768-oggi-04-attesa.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-1366x768-oggi-05-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-1366x768-oggi-06-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-1366x768-oggi-07-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 860,
+       "y": 619,
+       "w": 214,
+       "h": 295
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 4,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       630,
+       388,
+       632,
+       221
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "ffa-1366x768-oggi-08-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 310,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 159,
+       "y": 743,
+       "w": 290,
+       "h": 30
+      },
+      "toast": null,
+      "confirm": {
+       "x": 481,
+       "y": 268,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": {
+       "x": 991,
+       "y": 734,
+       "w": 292,
+       "h": 29
+      },
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Ghigno co' i' Denti Marci → Computer 1Scegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 542,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "ffa-1366x768-oggi-09-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 310,
+       "w": 120,
+       "h": 166
+      },
+      "discard": {
+       "x": 1121,
+       "y": 604,
+       "w": 240,
+       "h": 361
+      },
+      "hint": {
+       "x": 159,
+       "y": 735,
+       "w": 290,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 1123,
+       "y": 506,
+       "w": 244,
+       "h": 171
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Ghigno co' i' Denti Marci → Computer 1Scarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 98,
+      "previewToHint": 535,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-1366x768-oggi-10-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-1366x768-oggi-11-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-1366x768-oggi-12-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-1366x768-oggi-13-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 835,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       155
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-1366x768-oggi-14-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 388,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 198,
+       "y": 735,
+       "w": 367,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 481,
+       "y": 346,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Mescolone MicidialeControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 450,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-1366x768-oggi-15-attesa.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-1366x768-oggi-16-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  },
+  {
+   "mode": "duel",
+   "size": "844x390",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "duel-844x390-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-844x390-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 352,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-844x390-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 160,
+       "y": 108,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 115,
+       "y": 366,
+       "w": 210,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 158,
+       "y": 83,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "GENTILE IL TUO CAREZZO → teControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 262,
+      "playedToToast": null
+     },
+     "card": "GENTILE IL TUO CAREZZO"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-04-attesa.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-844x390-oggi-05-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-844x390-oggi-06-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-844x390-oggi-07-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 424,
+       "y": 306,
+       "w": 120,
+       "h": 166
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       152
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "duel-844x390-oggi-08-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 374,
+       "w": 226,
+       "h": 23
+      },
+      "toast": null,
+      "confirm": {
+       "x": 626,
+       "y": 77,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": {
+       "x": 532,
+       "y": 368,
+       "w": 250,
+       "h": 22
+      },
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerScegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 574,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "duel-844x390-oggi-09-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": {
+       "x": 640,
+       "y": 297,
+       "w": 144,
+       "h": 217
+      },
+      "hint": {
+       "x": 123,
+       "y": 366,
+       "w": 226,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 641,
+       "y": 238,
+       "w": 147,
+       "h": 103
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerScarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 59,
+      "previewToHint": 570,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-10-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-844x390-oggi-11-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-844x390-oggi-12-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-844x390-oggi-13-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 352,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-844x390-oggi-14-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 366,
+       "w": 226,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 626,
+       "y": 77,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SPEDIAMOTI DUNQUE IN O-AHIO → ComputerControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 570,
+      "playedToToast": null
+     },
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-15-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 366,
+       "w": 226,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 626,
+       "y": 77,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SPEDIAMOTI DUNQUE IN O-AHIO → ComputerRifiutata: cant be cast with current resources",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 570,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "conferma",
+     "file": "duel-844x390-oggi-16-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 160,
+       "y": 108,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 366,
+       "w": 226,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 158,
+       "y": 83,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "NON GIOCARE COL COLTELLO NO → teControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 261,
+      "playedToToast": null
+     },
+     "card": "NON GIOCARE COL COLTELLO NO"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-17-attesa.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-844x390-oggi-18-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  },
+  {
+   "mode": "ffa",
+   "size": "844x390",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "ffa-844x390-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-844x390-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 442,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       97
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-844x390-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 382,
+       "y": 126,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 155,
+       "y": 366,
+       "w": 289,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 380,
+       "y": 101,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Tennents SuperControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 331,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-844x390-oggi-04-attesa.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-844x390-oggi-05-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-844x390-oggi-06-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-844x390-oggi-07-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 502,
+       "y": 306,
+       "w": 120,
+       "h": 166
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 4,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       336,
+       186,
+       359,
+       120
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "ffa-844x390-oggi-08-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 364,
+       "y": 72,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 134,
+       "y": 374,
+       "w": 247,
+       "h": 23
+      },
+      "toast": null,
+      "confirm": {
+       "x": 362,
+       "y": 47,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": {
+       "x": 594,
+       "y": 368,
+       "w": 250,
+       "h": 22
+      },
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Ghigno co' i' Denti Marci → Computer 1Scegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 380,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "ffa-844x390-oggi-09-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 364,
+       "y": 72,
+       "w": 70,
+       "h": 97
+      },
+      "discard": {
+       "x": 685,
+       "y": 297,
+       "w": 144,
+       "h": 217
+      },
+      "hint": {
+       "x": 134,
+       "y": 366,
+       "w": 247,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 686,
+       "y": 238,
+       "w": 147,
+       "h": 103
+      },
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Ghigno co' i' Denti Marci → Computer 1Scarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 59,
+      "previewToHint": 374,
+      "playedToToast": null
+     },
+     "card": "Ghigno co' i' Denti Marci"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-844x390-oggi-10-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-844x390-oggi-11-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-844x390-oggi-12-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-844x390-oggi-13-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 442,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       97
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-844x390-oggi-14-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 382,
+       "y": 126,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 164,
+       "y": 366,
+       "w": 309,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 380,
+       "y": 101,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Peroni da 66, caldaControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 324,
+      "playedToToast": null
+     },
+     "card": "Desiderio Incontrollabile"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-844x390-oggi-15-attesa.jpg",
+     "turn": 2,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 382,
+       "y": 126,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 164,
+       "y": 366,
+       "w": 309,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 380,
+       "y": 101,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 285,
+       "y": 188,
+       "w": 106,
+       "h": 119
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Desiderio Incontrollabile → te · Peroni da 66, caldaInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 324,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-844x390-oggi-16-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  }
+ ],
+ "errors": []
+}

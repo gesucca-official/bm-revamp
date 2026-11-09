@@ -16,11 +16,13 @@ export const affordable=(card:Card,resources:Partial<Record<Resource,number>>)=>
 /** O26: presentation only. A bound waiting for its discard rests even with focus
  * or hover. The existing model still owns what every tap does and the server
  * judges the move. Resource and drag attenuation retain their own meanings. */
-export function handCardState(local:LocalCard,choice:Pick<Model,'choosingDiscard'|'selected'|'target'>,
+export function handCardState(local:LocalCard,choice:Pick<Model,'choosingDiscard'|'selected'|'target'>&{discard?:string|null},
  interaction:{focused:boolean;hovered:boolean;payable:boolean;dragged:boolean}){
  const selected=local.key===choice.selected,inPreview=selected&&!!choice.target,resting=selected&&choice.choosingDiscard;
  const chosen=selected&&!choice.target&&!resting;
- const raised=!resting&&(chosen||interaction.focused||(interaction.hovered&&!selected));
+ // C4-10 O30: the chosen discard stays raised, whatever the pointer does, because ✓ and × lie on it as it is drawn.
+ const discard=!!choice.target&&!selected&&local.key===choice.discard;
+ const raised=!resting&&(chosen||discard||interaction.focused||(interaction.hovered&&!selected));
  const nonDiscardable=choice.choosingDiscard&&!regular(local.card);
  return {inPreview,chosen,raised:raised&&!inPreview,wideHit:raised&&!inPreview&&(chosen||interaction.focused),nonDiscardable,
   alpha:Math.min(interaction.payable?1:.66,interaction.dragged?.22:1,nonDiscardable?.55:1)};
@@ -531,3 +533,83 @@ export function impactMotion(kind:ImpactKind|'VOID',p:number,reduced=false):Moti
   default:return {scale:.6+.8*e,alpha:1-q,dy:0,rot:0};
  }
 }
+
+// ---- C4-10: visual guide, strategy B «Richiamo» (owner's choice of 9 November 2026) ----
+/** Every value of the guide, in this one place, to be confirmed in the owner's live trial. Phase A prototype, for comparison: wave 14 px (8 px
+ * compact), each card up for 600 ms, 110 ms after the previous one, again every 3.6 s (2.4 s in the discard). Owner: the wave on the hand
+ * «può essere più veloce e meno intensa, basta poco»: lower, quicker and closer together, same rhythm. Pulses, growth and shake as the prototype. */
+/** A regular card of the hand (the only ones a bound can discard), for the guide; an unknown card is not. */
+export const regularCard=(c?:Card)=>!!c&&regular(c);
+export const GUIDE={
+ wave:{lift:8,liftCompact:5,up:360,stagger:60,period:{choose:3600,discard:2400}},
+ pulse:{target:.035,wait:.015,ms:230},
+ grow:.07,
+ shake:{ms:180,amp:6,ampCompact:3,swings:5},
+} as const;
+export type GuideKind='none'|'choose'|'aim'|'confirm'|'discard'|'wait'|'sequence';
+/** One card of a running sequence, with the times the scene already planned for it (from its cost to its landing; `hit` when it strikes). */
+export type GuideBeat={from:number;to:number;hit:number;author:string;target:string};
+/** What the scene knows at one instant: the model's choice, the hit ids drawn on the table and, during a sequence, its time and beats. */
+export type GuideInput={over:boolean;phase:'choose'|'sending'|'pending'|'uncertain';selected:string|null;target:boolean;choosingDiscard:boolean;discard:string|null;
+ /** Hand cards drawn in the fan (never the one placed on the table), in hand order. */
+ hand:{key:string;regular:boolean}[];
+ /** Hit ids of the characters and objects `Model.allows`; the hit id of the chosen target; the hit id of the card placed on the table. */
+ allowed:string[];dest:string|null;preview:string|null;
+ /** Seats of the opponents still in the game. */
+ waiting:string[];
+ sequence:{t:number;beats:GuideBeat[]}|null};
+/** Where the eye should go: `ids` are all the hit ids in focus; `wave`, `pulse` and `grow` say how each moves; `hit` a strike of the card in course. */
+export type GuideFocus={kind:GuideKind;ids:string[];wave:string[];pulse:string[];grow:string[];hit?:{seat:string;age:number}};
+const focus=(kind:GuideKind,o:Partial<Omit<GuideFocus,'kind'>>={}):GuideFocus=>{const wave=o.wave??[],pulse=o.pulse??[],grow=o.grow??[];return {kind,ids:o.ids??[...new Set([...wave,...pulse,...grow])],wave,pulse,grow,...(o.hit?{hit:o.hit}:{})};};
+/** The focus for one phase and instant. A choice made during a sequence wins over it (rule 4); a locked choice (sending, pending) waits for the others. */
+export function guideFocus(s:GuideInput):GuideFocus{
+ if(s.over)return focus('none');
+ if(s.phase==='choose'&&s.selected){
+  if(!s.target)return focus('aim',{pulse:s.allowed,ids:[s.selected,...s.allowed]});
+  if(s.choosingDiscard){const wave=s.hand.filter(c=>c.regular&&c.key!==s.selected).map(c=>c.key);return focus('discard',{wave,ids:[...wave,...(s.preview?[s.preview]:[])]});}
+  const pulse=[s.preview,s.dest].filter((x):x is string=>!!x);return focus('confirm',{pulse,ids:[...pulse,...(s.discard?[s.discard]:[])]});}
+ if(s.sequence){const {t,beats}=s.sequence,b=beats.find(x=>t>=x.from&&t<x.to);if(!b)return focus('sequence');
+  return focus('sequence',{grow:[...new Set([b.author,b.target])].map(id=>`person-${id}`),...(t>=b.hit?{hit:{seat:b.target,age:t-b.hit}}:{})});}
+ if(s.phase!=='choose')return focus('wait',{pulse:s.waiting.map(id=>`person-${id}`)});
+ return focus('choose',{wave:s.hand.map(c=>c.key)});
+}
+/** How each node in focus moves at `now` (ms), `since` ms after the focus began: a lift `dy` (px, up is negative) and a factor on its scale;
+ * `shake` moves the whole table sideways. Reduced motion (or a still guide, for the measures) moves nothing: the outlines of today stay. */
+export type GuidePose={pose:Record<string,{dy:number;scale:number}>;shake:number};
+export function guideMotion(f:GuideFocus,o:{now:number;since:number;compact:boolean;reduced:boolean}):GuidePose{
+ const out:GuidePose={pose:{},shake:0};if(o.reduced||f.kind==='none')return out;const W=GUIDE.wave;
+ const lift=o.compact?W.liftCompact:W.lift,period=f.kind==='discard'?W.period.discard:W.period.choose;
+ f.wave.forEach((id,i)=>{const q=((o.since-i*W.stagger)%period)/W.up,up=q>=0&&q<1?Math.sin(q*Math.PI):0;if(up>0)out.pose[id]={dy:-up*lift,scale:1};});
+ const amp=f.kind==='wait'?GUIDE.pulse.wait:GUIDE.pulse.target;
+ for(const id of f.pulse)out.pose[id]={dy:0,scale:1+amp*(.5+.5*Math.sin(o.now/GUIDE.pulse.ms))};
+ for(const id of f.grow)out.pose[id]={dy:0,scale:1+GUIDE.grow};
+ if(f.hit&&f.hit.age>=0&&f.hit.age<GUIDE.shake.ms){const q=f.hit.age/GUIDE.shake.ms;out.shake=Math.sin(q*Math.PI*GUIDE.shake.swings)*(o.compact?GUIDE.shake.ampCompact:GUIDE.shake.amp)*(1-q);}
+ return out;
+}
+/** A node the guide may move: only its height and its scale, never its x (the knock of C3-5 and the drag own it) nor its hit. */
+export type Posable={y:number;scale:{x:number;set(v:number):void};destroyed?:boolean};
+/** Applies a pose over the rest of each node and puts every node it moved back to rest first, so a node left out of the focus (or a
+ * reduced motion turned on) is always at rest. The hits are never read nor written: a touch lands where it lands without the guide. */
+export class GuideRest{
+ private rest=new Map<Posable,{y:number;s:number}>();
+ get moved(){return this.rest.size;}
+ restore(){for(const [n,r] of this.rest)if(!n.destroyed){n.y=r.y;n.scale.set(r.s);}this.rest.clear();}
+ apply(nodes:ReadonlyMap<string,Posable>,pose:GuidePose['pose']){this.restore();
+  for(const [id,p] of Object.entries(pose)){const n=nodes.get(id);if(!n||n.destroyed||this.rest.has(n))continue;this.rest.set(n,{y:n.y,s:n.scale.x});n.y+=p.dy;n.scale.set(n.scale.x*p.scale);}}
+}
+/** The same test the scene makes for a press: the topmost hit (first in `ordered`) whose turned box holds the point. */
+export function hitAt<T extends Box&{angle:number}>(ordered:readonly T[],x:number,y:number):T|undefined{
+ return ordered.find(r=>{const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.angle),s=Math.sin(-r.angle);return Math.abs(dx*c-dy*s)<=r.w/2&&Math.abs(dx*s+dy*c)<=r.h/2;});}
+/** Slot `i` of `n` in the fan of the own hand, at rest; and the same card raised (hover, tap, focus, the chosen discard) as the scene draws it. */
+export function handSlot(H:TableLayout['hand'],i:number,n:number){const k=i-(n-1)/2;return {x:H.center+k*H.step,y:H.y+Math.abs(k)*3,angle:k*.05};}
+export function raisedCard(H:TableLayout['hand'],i:number,n:number):Box&{angle:number}{const s=handSlot(H,i,n);return {x:s.x,y:s.y-H.lift,w:H.w*H.zoom,h:H.h*H.zoom,angle:s.angle*.4};}
+/** C4-2, C4-10 O30: the card that carries ✓ (upper half) and × (lower half), centred on it and turned like it: the chosen discard as drawn
+ * (raised) when there is one, else the chosen card placed on the table. */
+export function confirmCard(H:TableLayout['hand'],preview:{x:number;y:number;w:number;h:number},discard:{index:number;n:number}|null):Box&{angle:number;onDiscard:boolean}{
+ if(discard&&discard.index>=0)return {...raisedCard(H,discard.index,discard.n),onDiscard:true};
+ return {x:preview.x,y:preview.y,w:preview.w,h:preview.h,angle:-.1,onDiscard:false};}
+/** C4-10 O29 (owner, 9 November 2026: «Niente, solo tolto»): the short summary of a round is not drawn, its text goes to a hidden status for the
+ * screen reader; a note after a jump (D4) stays visible, because nothing else on the table says it. Nothing under the outcome panel. */
+export function shortSummary(s:{text:string;note:boolean},panel:boolean):{visible:string|null;hidden:string|null}{
+ if(!s.text||panel)return {visible:null,hidden:null};
+ return s.note?{visible:s.text,hidden:null}:{visible:null,hidden:s.text};}

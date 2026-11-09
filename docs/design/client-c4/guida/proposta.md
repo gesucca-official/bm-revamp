@@ -1,7 +1,7 @@
 # C4-10 — Guida visiva: Fase A (proposta)
 
 7 novembre 2026. Base `c09b946` su main («C4-10: lower the cut sound to the level of the hit», Fase 0), checkout pulito alla partenza.
-**Fase A pronta; il proprietario ha scelto B con ritocchi il 9 novembre 2026 ([scelta](#scelta-del-proprietario)). Fase B non avviata.** Nessun codice di prodotto cambiato: i
+**Fase A pronta; il proprietario ha scelto B con ritocchi il 9 novembre 2026 ([scelta](#scelta-del-proprietario)). Fase B fatta il 9 novembre 2026, in attesa del giudizio del proprietario ([rapporto](../../../reports/client-c4-report.md#c4-10--fase-b)).** Nessun codice di prodotto cambiato: i
 prototipi sono una patch fuori dal prodotto ([`prototipo.patch`](prototipo.patch), vedi [sotto](#prototipi-come-sono-stati-provati)).
 
 Fonti: [piano, C4-10](../../../client-c4-plan.md#c4-10--guida-visiva), regole di non regressione 1–18, riga C4-10 della matrice,

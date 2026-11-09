@@ -286,7 +286,9 @@ async function playToEnd(p,{prefer,shots='game',maxTurns=200,watch=true,onTurn}=
   if(s.eliminated){
    if(watch&&await p.page.getByTestId('watch').count()){await p.page.getByTestId('watch').click();watched=true;await p.shot(`${shots}-watching`);
     // Watching: the line of the resolved turns (D4) in the short summary or, at the outcome, on the panel.
-    const end=Date.now()+600000;while(Date.now()<end){const t=await p.page.locator('.toast').count()?await p.page.locator('.toast').first().innerText().catch(()=>''):'';if(t)notes.add(t.replace(/\s+/g,' '));if((await p.state()).over)break;await p.page.waitForTimeout(250);}
+    const end=Date.now()+600000;while(Date.now()<end){const t=await p.page.locator('.toast').count()?await p.page.locator('.toast').first().innerText().catch(()=>''):'';if(t)notes.add(t.replace(/\s+/g,' '));
+     // C4-10 O29: the short summary without a note is a hidden status; recorded apart, it is not a note.
+     const h=await p.page.locator('[data-testid=brief]').count()?await p.page.locator('[data-testid=brief]').first().textContent().catch(()=>''):'';if(h)notes.add(`status: ${h.replace(/\s+/g,' ')}`);if((await p.state()).over)break;await p.page.waitForTimeout(250);}
     const panel=await p.page.locator('[data-testid=round-note]').first().innerText().catch(()=>'');if(panel)notes.add(`panel: ${panel}`);}
    break;}
   finals.push({turn:s.turn,problems:finalState(s,lastView(p,s.turn)),summary:s.summary?{key:s.summary.key,seats:Object.keys(s.summary.seats).length,texts:Object.values(s.summary.seats).map(x=>x.texts.join(' '))}:null,running:s.sequence.running});
@@ -550,7 +552,7 @@ try{
   const game=readyId(A,/quick\/1vCom\/ready$/),rounds=[];
   for(let i=0;i<3;i++){const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');if(s.over||s.eliminated)break;
    await playOne(A);const t=await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,60000,'resolved');await A.page.waitForTimeout(300);
-   const st=await A.state(),toast=await A.page.locator('.toast').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,impacts:st.stats.impacts.length+st.stats.emphasis.length,faces:st.readout.hand.map(h=>h.face?.damage.length??-1),sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast,flown:st.stats.flown.length,flights:st.stats.flights,labels:st.stats.labels.length,marks:(()=>{const mk=f?seatMarks({facts:f,crossed:false}):null;return mk?Object.values(mk).map(l=>l.map(m=>m.text).join(' ')||'invariato'):null;})()});void t;}
+   const st=await A.state(),toast=await A.page.locator('.toast').count(),brief=await A.page.locator('[data-testid=brief]').count(),f=(await A.log()).filter(e=>e.facts.relation==='next'&&e.facts.turn===st.turn).at(-1)?.facts;rounds.push({turn:st.turn,impacts:st.stats.impacts.length+st.stats.emphasis.length,faces:st.readout.hand.map(h=>h.face?.damage.length??-1),sequences:st.stats.sequences,aggregateDeltas:st.stats.aggregateDeltas,modelSeats:!!f?.seats,modelChanges:f?.seats?Object.values(f.seats).reduce((n,x)=>n+Object.values(x.resources).filter(c=>c.delta).length,0):0,summaryKey:st.summary?.key??null,summary:st.summary?Object.values(st.summary.seats).map(x=>x.texts.join(' ')):null,expectedKey:`${game}/${st.turn}`,toast,brief,shortSummary:st.shortSummary??null,flown:st.stats.flown.length,flights:st.stats.flights,labels:st.stats.labels.length,marks:(()=>{const mk=f?seatMarks({facts:f,crossed:false}):null;return mk?Object.values(mk).map(l=>l.map(m=>m.text).join(' ')||'invariato'):null;})()});void t;}
   await A.shot('reduced-motion');
   const st=await A.state();
   if(!st.over&&!st.eliminated){await A.page.keyboard.press('Escape');await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}
@@ -597,9 +599,12 @@ try{
   if(!s.over&&!s.eliminated){
    const mode=await setHidden(A,true);const before=(await A.state()).stats.sequences;await playOne(A);await resolved(s);
    await A.page.waitForTimeout(7000);const toastHidden=await A.page.locator('.toast').count();
-   await setHidden(A,false);await A.page.waitForTimeout(400);const st=await A.state(),toast=await A.page.locator('.toast').count()?await A.text('.toast'):null;
-   out.hidden={mode,key:`${game}/${st.turn}`,sequencesBefore:before,sequencesAfter:st.stats.sequences,summaryKey:st.summary?.key??null,toastAfter7s:toast,toastWhileHidden:toastHidden};
-   assert.equal(st.stats.sequences,before,'hidden: no sequence on return');assert.equal(st.summary?.key,out.hidden.key,'hidden: summary present');assert.ok(toast&&toast.startsWith(`Turno ${st.turn}`),'K5: the short summary did not expire while hidden');
+   // C4-10 O29 (owner's decision, an expectation changed on purpose): the short summary is a hidden status; K5 is checked on it, and nothing is drawn without a note.
+   await setHidden(A,false);await A.page.waitForTimeout(400);const st=await A.state(),toast=await A.page.locator('.toast').count()?await A.text('.toast'):null,brief=await A.page.locator('[data-testid=brief]').count()?await A.page.locator('[data-testid=brief]').first().textContent():null;
+   out.hidden={mode,key:`${game}/${st.turn}`,sequencesBefore:before,sequencesAfter:st.stats.sequences,summaryKey:st.summary?.key??null,toastAfter7s:toast,briefAfter7s:brief,toastWhileHidden:toastHidden,shortSummary:st.shortSummary??null};
+   assert.equal(st.stats.sequences,before,'hidden: no sequence on return');assert.equal(st.summary?.key,out.hidden.key,'hidden: summary present');
+   assert.ok(brief&&brief.startsWith(`Turno ${st.turn}`)&&brief===st.shortSummary?.text,'K5: the short summary (hidden status, same line) did not expire while hidden');
+   assert.equal(toast,null,'O29: no short summary drawn without a note');assert.equal(toastHidden,0,'O29: none drawn while hidden either');
    await A.shot('interrupt-after-hidden');
    const left=await A.state();if(!left.over&&!left.eliminated){await A.page.getByLabel('Apri menu').click();await A.page.getByRole('button',{name:'Abbandona la partita'}).click();await A.page.getByRole('button',{name:'Sì, abbandona'}).click();await A.page.getByTestId('quick').waitFor({timeout:15000});}else await toHub(A);
   }else await toHub(A);

@@ -135,13 +135,10 @@ fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare
 
 **Consegne aperte dal Set Base a C4** (8 novembre 2026). Chi chiude una consegna la toglie da qui nel commit che la chiude.
 
-1. **Frase del menu al tavolo su R03** (`client-web/src/table.tsx`): spiega il «giocatore vivo senza mosse», che col regolamento 1.12
-   non si presenta più. Va tolta o riscritta dal primo blocco C4 che tocca `table.tsx` (C4-10 fase B, altrimenti C4-8a). Origine: SB-1, Q5
-   ([rapporto](reports/set-base/sb-1-report.md)).
-2. **Strumenti di verifica cambiati dal Set Base**, base di C4-8a: `verify-decks.mjs` e `verify-resolution.mjs` (mazzi sintetici entro
+1. **Strumenti di verifica cambiati dal Set Base**, base di C4-8a: `verify-decks.mjs` e `verify-resolution.mjs` (mazzi sintetici entro
    le regole dei mazzi, SB-1); `verify-public.mjs` (pagina pubblica con regolamento 1.13 e Set Base 0.1), `check-rules.py`,
    `verify-match-manifests.py` e le CLI `cli-match-export-test`, `cli-open-complete-test`, `cli-quick-complete-test` (SB-2,
    [rapporto](reports/set-base/sb-2-report.md)). Un mazzo sintetico nuovo di C4-8a (per esempio per ExtremelyViolentBlow) deve
    rispettare R02 1.12: 20 carte regolari, al massimo 2 copie, basic e due bound del personaggio, last resort; il server rifiuta gli altri.
-3. **`client-web/tests/readability.test.ts`:** una riga cambiata da SB-2 (Q8), perché i moltiplicatori degli stati ora stanno in
+2. **`client-web/tests/readability.test.ts`:** una riga cambiata da SB-2 (Q8), perché i moltiplicatori degli stati ora stanno in
    `docs/sets/base.md`. Se C4 tocca lo stesso test, al pull può esserci un conflitto di una riga.

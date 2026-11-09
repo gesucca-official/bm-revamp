@@ -1,0 +1,78 @@
+{
+ "date": "2026-11-09",
+ "where": "copies of client-web/src and tests outside the repository (%TEMP%), node --test tests/guide.test.ts tests/hand-choice.test.ts",
+ "rows": [
+  {
+   "mutation": "baseline",
+   "tests": 22,
+   "pass": 22,
+   "fail": 0,
+   "failed": []
+  },
+  {
+   "mutation": "no rest restore",
+   "tests": 22,
+   "pass": 21,
+   "fail": 1,
+   "failed": [
+    "C4-10 rest: every node moved is back at rest at the next frame, and a node left out of the focus is never left moved"
+   ]
+  },
+  {
+   "mutation": "no change of the confirmation (always the placed card)",
+   "tests": 22,
+   "pass": 20,
+   "fail": 2,
+   "failed": [
+    "C4-10 O30: the confirmation follows the discard and changes when the discard changes; without one it stays on the placed card",
+    "C4-10 O30: ✓ and × lie on the chosen discard as the scene draws it (raised, centred, turned), at every official measure, duel and FFA"
+   ]
+  },
+  {
+   "mutation": "yellow box back (short summary visible without a note)",
+   "tests": 22,
+   "pass": 21,
+   "fail": 1,
+   "failed": [
+    "C4-10 O29: without a note the short summary is only a hidden status with the same text; a note after a jump stays visible; nothing under the panel"
+   ]
+  },
+  {
+   "mutation": "no centring (box of the raised hit, as the prototype)",
+   "tests": 22,
+   "pass": 21,
+   "fail": 1,
+   "failed": [
+    "C4-10 O30: ✓ and × lie on the chosen discard as the scene draws it (raised, centred, turned), at every official measure, duel and FFA"
+   ]
+  },
+  {
+   "mutation": "no priority of the choice over the sequence",
+   "tests": 22,
+   "pass": 20,
+   "fail": 2,
+   "failed": [
+    "C4-10 focus: a choice during the sequence wins over it (rule 4); the outcome and an eliminated seat have no focus",
+    "C4-10 focus: sequence, halfway through each card its author and target grow; the strike shakes the table"
+   ]
+  },
+  {
+   "mutation": "click after the tap not stopped (lands on x under the finger)",
+   "tests": 22,
+   "pass": 21,
+   "fail": 1,
+   "failed": [
+    "C4-10 O30: a canvas tap never sends the click the browser synthesizes after touchend (it would land on × drawn under the finger)"
+   ]
+  },
+  {
+   "mutation": "reduced motion ignored",
+   "tests": 22,
+   "pass": 21,
+   "fail": 1,
+   "failed": [
+    "C4-10 reduced motion (and the still guide of the measures): no wave, pulse, growth or shake at any moment"
+   ]
+  }
+ ]
+}

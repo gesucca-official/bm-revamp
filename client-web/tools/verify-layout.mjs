@@ -21,6 +21,8 @@ import {join,resolve as resolvePath} from 'node:path';
 import assert from 'node:assert/strict';
 import {discardPass} from './discard-checks.mjs';
 import {fan,overlap,inside,seatBoxes,layoutProblems,tableLayout} from '../src/readability.ts';
+import {briefLine} from '../src/resolution.ts';
+import {playerName} from '../src/presence.ts';
 // The grid on which the scene looks for the place of a close-up (`closeUp`, 8 px): at 24 px the check missed places the scene finds (1366×768 FFA, 144 object distributions out of 1024).
 const CLOSE_UP_STEP=8;
 
@@ -118,6 +120,10 @@ const R=b=>({x:Math.round(b.x),y:Math.round(b.y),w:Math.round(b.w),h:Math.round(
 const shell=p=>p.page.evaluate(()=>{const box=el=>{if(!el)return null;const r=el.getBoundingClientRect();return r.width&&r.height?{x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height}:null;};
  return {top:box(document.querySelector('.top-actions')),brand:box(document.querySelector('.brand')),hint:box(document.querySelector('.hint')),toast:box(document.querySelector('.toast'))};});
 const toastFont=p=>p.page.evaluate(()=>{const e=document.querySelector('.toast');return e?parseFloat(getComputedStyle(e).fontSize):null;});
+// C4-10 O29: the hidden status of the short summary: its text and whether anything of it shows (more than the 1 px of .sr-only).
+const hiddenBrief=p=>p.page.evaluate(()=>{const e=document.querySelector('[data-testid=brief]');if(!e)return null;const r=e.getBoundingClientRect();return {text:e.textContent,role:e.getAttribute('role'),visible:r.width>1||r.height>1};});
+// C4-10: the measures are taken with the guide still (no wave, pulse or shake), then it moves again.
+const still=(p,on)=>p.page.evaluate(on=>window.__bm?.guideStill?.(on),on);
 // Largest free rectangle (several aspect ratios, grown around a grid of centres) clear of everything drawn and of the shell.
 function freeSpace(occupied,w,h){let best=null,area=0;
  for(let cy=12;cy<h-12;cy+=6)for(let cx=12;cx<w-12;cx+=6)for(const asp of [.6,.8,1,1.3,1.8,2.5]){let lo=0,hi=Math.max(w,h);
@@ -163,7 +169,15 @@ function stripProblems(s,dom){const out=[],L=s.layout,sum=s.summary,seats=Object
   for(const [oid,y] of drawn)if(oid!==id&&overlap(x.box,y.box)>0)out.push(`${at} over strip ${oid}`);
   if(dom.toast&&overlap(x.box,dom.toast)>0)out.push(`${at} over the short summary`);}
  return {out,seats:seats.length,drawn:drawn.length,missing:seats.filter(([,x])=>!x.drawn).map(([id])=>id),fonts:drawn.map(([,x])=>x.fs),texts:Object.fromEntries(seats.map(([id,x])=>[id,x.texts.join(' ')]))};}
-function briefProblems(s,dom){const out=[],L=s.layout,t=dom.toast,obs=obstacles(s,dom);
+// C4-10 O29 (owner's decision of 9 November 2026, an expectation changed on purpose): without a note after a jump the short summary is no longer drawn;
+// its text, the same line as before, is a hidden status. A note (D4) keeps every check of C3-6 below.
+function briefProblems(s,dom,hidden){const out=[],L=s.layout,t=dom.toast,obs=obstacles(s,dom),sum=s.shortSummary;
+ if(sum&&!sum.note){const want=s.resolution?briefLine(s.resolution,s.me,id=>playerName(id,s.players)):null;
+  if(t)out.push('O29: a short summary drawn without a note');if(!hidden)out.push('O29: no hidden status with the short summary');
+  else if(hidden.visible)out.push('O29: the status of the short summary is visible');
+  if(hidden&&hidden.text!==sum.text)out.push(`O29: hidden status ${JSON.stringify(hidden.text)}, the line ${JSON.stringify(sum.text)}`);
+  if(want&&sum.text!==want)out.push(`O29: line ${JSON.stringify(sum.text)}, expected ${JSON.stringify(want)}`);
+  return {out,shown:false,hidden:hidden?.text??null,expected:want,note:false};}
  if(!t)return {out:['short summary not on the page'],shown:false};
  if(!s.brief)out.push('short summary without a place in the scene');
  if(!inside(t,vw,vh))out.push('short summary off screen');for(const o of obs)if(overlap(t,o.b)>0)out.push(`short summary over ${o.n}`);
@@ -266,7 +280,7 @@ async function scenario(name,{ffa=false,turns=2}){
   for(let t=0;t<=turns;t++){
    const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand')&&!x.sequence.running)),60000,'turn');
    if(s.over||s.eliminated)break;
-   await A.page.waitForTimeout(300);const now=await A.state(),m=measure(now,await shell(A));rec.turns.push({turn:now.turn,...m});step(`${name}${tag} T${now.turn}`,m);
+   await still(A,true);await A.page.waitForTimeout(300);const now=await A.state(),m=measure(now,await shell(A));rec.turns.push({turn:now.turn,...m});step(`${name}${tag} T${now.turn}`,m);
    if(!old){const scope=`${name}${tag} T${now.turn}`,me=m.me.person;
     if(m.clash.filter(c=>!c.endsWith('/brand')).length)bad(scope,`overlaps ${m.clash}`);if(m.problems.length)bad(scope,`layout ${m.problems}`);
     for(const o of m.others)if(!(me.w>o.person.w*1.2))bad(scope,`own ${me.w} not larger than ${o.id} ${o.person.w}`);
@@ -294,15 +308,15 @@ async function scenario(name,{ffa=false,turns=2}){
      // The compact FFA may lack the room for a strip when a round changes many entries; everywhere else every seat has its strip.
      if(sp.missing.length&&!(now.layout.compact&&now.layout.seats.length>2))bad(`${name}${tag} T${now.turn}`,`no strip for ${sp.missing}`);
      if(sp.seats!==now.layout.seats.length)bad(`${name}${tag} T${now.turn}`,`summary of ${sp.seats} seats on a table of ${now.layout.seats.length}`);}}
-   await A.shot(`${name}-T${now.turn}`);
+   await A.shot(`${name}-T${now.turn}`);await still(A,false);
    if(!old&&t===0){rec.controls=await controlPass(A,`${name}${tag}`);step(`${name}${tag} controls`,rec.controls);
     rec.discard=await discardPass(A,n=>A.shot(`${name}-discard-${n}`));for(const e of rec.discard.errors)bad(`${name}${tag} O26`,e);
     if(rec.discard.commandsAfter!==rec.discard.commandsBefore)bad(`${name}${tag} O26`,'discard probes sent a move');
-    step(`${name}${tag} discard`,{bounds:rec.discard.bounds,candidates:rec.discard.candidates,probes:rec.discard.probes,errors:rec.discard.errors.length});}
+    step(`${name}${tag} discard`,{o30:rec.discard.o30?.length??0,o30MaxOffset:Math.max(0,...(rec.discard.o30??[]).map(r=>r.offset??0)),bounds:rec.discard.bounds,candidates:rec.discard.candidates,probes:rec.discard.probes,errors:rec.discard.errors.length});}
    if(!old&&!rec.roundLink?.gain){const r=await roundLinkPass(A,`${name}${tag}`);if(r){rec.roundLink=r;step(`${name}${tag} round link`,r);}}
    if(t<turns){await A.page.evaluate(()=>window.__bm.measureStart());await playOne(A);await A.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,40000,'resolved');
     // C3-6: the short summary line, as the round arrives: where the scene put it, clear of everything, 16 px (desktop) or 13 px (compact).
-    {const arrival=await A.state();if(arrival&&!arrival.over&&!arrival.eliminated){const dom=await shell(A),bp=briefProblems(arrival,dom),font=await toastFont(A);rec.briefs=(rec.briefs??[]).concat({turn:arrival.turn,...bp,fontPx:font});step(`${name}${tag} T${arrival.turn} short summary`,rec.briefs.at(-1));
+    {const arrival=await A.state();if(arrival&&!arrival.over&&!arrival.eliminated){const dom=await shell(A),bp=briefProblems(arrival,dom,await hiddenBrief(A)),font=await toastFont(A);rec.briefs=(rec.briefs??[]).concat({turn:arrival.turn,...bp,fontPx:font});step(`${name}${tag} T${arrival.turn} short summary`,rec.briefs.at(-1));
      if(!old){for(const m of bp.out)bad(`${name}${tag} T${arrival.turn}`,m);if(bp.shown&&font<FONT.brief(arrival.layout.compact))bad(`${name}${tag} T${arrival.turn}`,`short summary type ${font}`);
       for(const c of await smallControls(A))if(!(c.hit&&c.hit.startsWith('status-')))bad(`${name}${tag} T${arrival.turn}`,`with the short summary: control under 44 px ${JSON.stringify(c)}`);}
      await A.shot(`${name}-T${arrival.turn}-summary`);}}

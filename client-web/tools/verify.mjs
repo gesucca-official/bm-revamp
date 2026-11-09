@@ -187,8 +187,9 @@ for(let g=0;g<8&&(want.characters.size<2||!want.bound||!want.item||!want.periodi
  for(let t=0;t<80;t++){
   const r=await playTurn(game);
   // Periodic effects: read them from the non-blocking report when the server published any.
-  const eot=await page.evaluate(()=>{const b=document.querySelector('.toast');return b?.textContent||'';});
-  if(eot.includes('fine turno')&&!want.periodic){await page.locator('.toast').click();await page.getByRole('heading',{name:'Fine turno'}).waitFor({timeout:3000});
+  // C4-10 O29: the short summary is a hidden status (a note after a jump stays drawn); the report opens from the menu, «Ultimo turno».
+  const eot=await page.evaluate(()=>{const b=document.querySelector('[data-testid=brief]')??document.querySelector('.toast');return b?.textContent||'';});
+  if(eot.includes('fine turno')&&!want.periodic){await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Ultimo turno',exact:true}).click();await page.getByRole('heading',{name:'Fine turno'}).waitFor({timeout:3000});
    const text=await page.locator('dialog').innerText();evidence.periodic.push({game:g+1,text:text.slice(text.indexOf('Fine turno'),text.indexOf('Fine turno')+300)});want.periodic=true;await shot('05-periodic-report');await page.keyboard.press('Escape');}
   if(r==='stuck'){game.stuck=true;await page.getByLabel('Apri menu').click();await page.getByRole('button',{name:'Abbandona la partita'}).click();await page.getByRole('button',{name:'Sì, abbandona'}).click();break;}
   const s=await state();if(!s||s.over)break;

@@ -1,0 +1,5014 @@
+{
+ "date": "2026-11-09T16:15:25.560Z",
+ "url": "http://127.0.0.1:4320",
+ "guide": null,
+ "reduced": false,
+ "kind": "Edge via Playwright on PC against a local server on a temporary database; not a physical device",
+ "runs": [
+  {
+   "mode": "duel",
+   "size": "1366x768",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "duel-1366x768-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-1366x768-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 625,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-1366x768-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 647,
+       "y": 322,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 735,
+       "w": 218,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 643,
+       "y": 280,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "PAZIENZA: FINITA → teControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 667,
+      "playedToToast": null
+     },
+     "card": "PAZIENZA: FINITA"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-1366x768-oggi-04-attesa.jpg",
+     "turn": 0,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 647,
+       "y": 322,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 108,
+       "y": 735,
+       "w": 187,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 643,
+       "y": 280,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "PAZIENZA: FINITA → teInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 679,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "duel-1366x768-oggi-05-sequenza-350.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "duel-1366x768-oggi-06-sequenza-1300.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "duel-1366x768-oggi-07-sequenza-2600.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "duel-1366x768-oggi-08-sequenza-4200.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "duel-1366x768-oggi-09-sequenza-6500.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-1366x768-oggi-10-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-1366x768-oggi-11-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-1366x768-oggi-12-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 739,
+       "y": 619,
+       "w": 214,
+       "h": 295
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       304
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "duel-1366x768-oggi-13-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 689,
+       "y": 304,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 157,
+       "y": 743,
+       "w": 286,
+       "h": 30
+      },
+      "toast": null,
+      "confirm": {
+       "x": 685,
+       "y": 262,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": {
+       "x": 910,
+       "y": 734,
+       "w": 292,
+       "h": 29
+      },
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerScegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 690,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "duel-1366x768-oggi-14-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 689,
+       "y": 304,
+       "w": 120,
+       "h": 166
+      },
+      "discard": {
+       "x": 1080,
+       "y": 604,
+       "w": 240,
+       "h": 361
+      },
+      "hint": {
+       "x": 157,
+       "y": 735,
+       "w": 286,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 1083,
+       "y": 506,
+       "w": 244,
+       "h": 171
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerScarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 98,
+      "previewToHint": 684,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-1366x768-oggi-15-attesa.jpg",
+     "turn": 1,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 689,
+       "y": 304,
+       "w": 120,
+       "h": 166
+      },
+      "discard": {
+       "x": 1080,
+       "y": 604,
+       "w": 240,
+       "h": 361
+      },
+      "hint": {
+       "x": 157,
+       "y": 735,
+       "w": 286,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 1083,
+       "y": 506,
+       "w": 244,
+       "h": 171
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 98,
+      "previewToHint": 684,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "duel-1366x768-oggi-16-sequenza-350.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "duel-1366x768-oggi-17-sequenza-1300.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "duel-1366x768-oggi-18-sequenza-2600.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "duel-1366x768-oggi-19-sequenza-4200.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "duel-1366x768-oggi-20-sequenza-6500.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-1366x768-oggi-21-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-1366x768-oggi-22-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-1366x768-oggi-23-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 625,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       481
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-1366x768-oggi-24-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 263,
+       "y": 112,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 168,
+       "y": 735,
+       "w": 307,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 259,
+       "y": 70,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "ADOPERIAMOTI → te · Peroni da 66, caldaControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 630,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-1366x768-oggi-25-attesa.jpg",
+     "turn": 2,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 263,
+       "y": 112,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 168,
+       "y": 735,
+       "w": 307,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 259,
+       "y": 70,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "ADOPERIAMOTI → te · Peroni da 66, caldaInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 630,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "duel-1366x768-oggi-26-sequenza-350.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "duel-1366x768-oggi-27-sequenza-1300.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "duel-1366x768-oggi-28-sequenza-2600.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "duel-1366x768-oggi-29-sequenza-4200.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "duel-1366x768-oggi-30-sequenza-6500.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-1366x768-oggi-31-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 452,
+       "y": 256,
+       "w": 241,
+       "h": 248
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  },
+  {
+   "mode": "ffa",
+   "size": "1366x768",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "ffa-1366x768-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-1366x768-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 712,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       165
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-1366x768-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 473,
+       "y": 388,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 187,
+       "y": 735,
+       "w": 346,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 469,
+       "y": 346,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "ADOPERIAMOTI → te · Negroni Trovato per TerraControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 449,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-1366x768-oggi-04-attesa.jpg",
+     "turn": 0,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 473,
+       "y": 388,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 187,
+       "y": 735,
+       "w": 346,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 469,
+       "y": 346,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "ADOPERIAMOTI → te · Negroni Trovato per TerraInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 449,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "ffa-1366x768-oggi-05-sequenza-350.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "ffa-1366x768-oggi-06-sequenza-1300.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "ffa-1366x768-oggi-07-sequenza-2600.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "ffa-1366x768-oggi-08-sequenza-4200.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "ffa-1366x768-oggi-09-sequenza-6500.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-1366x768-oggi-10-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-1366x768-oggi-11-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-1366x768-oggi-12-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 810,
+       "y": 619,
+       "w": 214,
+       "h": 295
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 4,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       590,
+       389,
+       586,
+       236
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "ffa-1366x768-oggi-13-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 310,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 163,
+       "y": 743,
+       "w": 298,
+       "h": 30
+      },
+      "toast": null,
+      "confirm": {
+       "x": 481,
+       "y": 268,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": {
+       "x": 957,
+       "y": 734,
+       "w": 292,
+       "h": 29
+      },
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → Computer 1Scegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 540,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "ffa-1366x768-oggi-14-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 310,
+       "w": 120,
+       "h": 166
+      },
+      "discard": {
+       "x": 1104,
+       "y": 604,
+       "w": 240,
+       "h": 361
+      },
+      "hint": {
+       "x": 163,
+       "y": 735,
+       "w": 298,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 1107,
+       "y": 506,
+       "w": 244,
+       "h": 171
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → Computer 1Scarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 98,
+      "previewToHint": 533,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-1366x768-oggi-15-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "ffa-1366x768-oggi-16-sequenza-350.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "ffa-1366x768-oggi-17-sequenza-1300.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "ffa-1366x768-oggi-18-sequenza-2600.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "ffa-1366x768-oggi-19-sequenza-4200.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "ffa-1366x768-oggi-20-sequenza-6500.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-1366x768-oggi-21-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-1366x768-oggi-22-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-1366x768-oggi-23-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 712,
+       "y": 607,
+       "w": 240,
+       "h": 361
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 122,
+       "y": 739,
+       "w": 216,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-1366x768-oggi-24-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 310,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 189,
+       "y": 735,
+       "w": 351,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 481,
+       "y": 268,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SPEDIAMOTI DUNQUE IN O-AHIO → Computer 1Controlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 517,
+      "playedToToast": null
+     },
+     "card": "SPEDIAMOTI DUNQUE IN O-AHIO"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-1366x768-oggi-25-attesa.jpg",
+     "turn": 2,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 485,
+       "y": 310,
+       "w": 120,
+       "h": 166
+      },
+      "discard": null,
+      "hint": {
+       "x": 189,
+       "y": 735,
+       "w": 351,
+       "h": 47
+      },
+      "toast": null,
+      "confirm": {
+       "x": 481,
+       "y": 268,
+       "w": 128,
+       "h": 94
+      },
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SPEDIAMOTI DUNQUE IN O-AHIO → Computer 1Invio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 517,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "ffa-1366x768-oggi-26-sequenza-350.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "ffa-1366x768-oggi-27-sequenza-1300.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "ffa-1366x768-oggi-28-sequenza-2600.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "ffa-1366x768-oggi-29-sequenza-4200.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "ffa-1366x768-oggi-30-sequenza-6500.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-1366x768-oggi-31-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 84,
+       "y": 739,
+       "w": 140,
+       "h": 35
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 655,
+       "y": 304,
+       "w": 198,
+       "h": 232
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  },
+  {
+   "mode": "duel",
+   "size": "844x390",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "duel-844x390-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-844x390-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 352,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-844x390-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 103,
+       "y": 366,
+       "w": 185,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 626,
+       "y": 77,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "FAI BASTA → ComputerControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 588,
+      "playedToToast": null
+     },
+     "card": "FAI BASTA"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-04-attesa.jpg",
+     "turn": 0,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 90,
+       "y": 366,
+       "w": 160,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 626,
+       "y": 77,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "FAI BASTA → ComputerInvio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 600,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "duel-844x390-oggi-05-sequenza-350.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "duel-844x390-oggi-06-sequenza-1300.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "duel-844x390-oggi-07-sequenza-2600.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "duel-844x390-oggi-08-sequenza-4200.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "duel-844x390-oggi-09-sequenza-6500.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-844x390-oggi-10-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-844x390-oggi-11-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-844x390-oggi-12-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 424,
+       "y": 306,
+       "w": 120,
+       "h": 166
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       152
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "duel-844x390-oggi-13-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 374,
+       "w": 226,
+       "h": 23
+      },
+      "toast": null,
+      "confirm": {
+       "x": 626,
+       "y": 77,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": {
+       "x": 532,
+       "y": 368,
+       "w": 250,
+       "h": 22
+      },
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerScegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 574,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "duel-844x390-oggi-14-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 628,
+       "y": 102,
+       "w": 70,
+       "h": 97
+      },
+      "discard": {
+       "x": 640,
+       "y": 297,
+       "w": 144,
+       "h": 217
+      },
+      "hint": {
+       "x": 123,
+       "y": 366,
+       "w": 226,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 641,
+       "y": 238,
+       "w": 147,
+       "h": 103
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → ComputerScarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 59,
+      "previewToHint": 570,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-15-attesa.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "duel-844x390-oggi-16-sequenza-350.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "duel-844x390-oggi-17-sequenza-1300.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "duel-844x390-oggi-18-sequenza-2600.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "duel-844x390-oggi-19-sequenza-4200.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "duel-844x390-oggi-20-sequenza-6500.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-844x390-oggi-21-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "duel-844x390-oggi-22-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "duel-844x390-oggi-23-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 352,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "duel-844x390-oggi-24-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 646,
+       "y": 114,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 123,
+       "y": 366,
+       "w": 226,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 644,
+       "y": 89,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "BELLO IL TUO GIOCATTOLO SI → Computer · Peroni da 66, caldaControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 581,
+      "playedToToast": null
+     },
+     "card": "BELLO IL TUO GIOCATTOLO SI"
+    },
+    {
+     "name": "attesa",
+     "file": "duel-844x390-oggi-25-attesa.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "duel-844x390-oggi-26-sequenza-350.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "duel-844x390-oggi-27-sequenza-1300.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "duel-844x390-oggi-28-sequenza-2600.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "duel-844x390-oggi-29-sequenza-4200.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "duel-844x390-oggi-30-sequenza-6500.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "duel-844x390-oggi-31-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 380,
+       "y": 153,
+       "w": 88,
+       "h": 66
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  },
+  {
+   "mode": "ffa",
+   "size": "844x390",
+   "guide": null,
+   "moments": [
+    {
+     "name": "scelta",
+     "file": "ffa-844x390-oggi-01-scelta.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-844x390-oggi-02-mira.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 410,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 1,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       100
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-844x390-oggi-03-conferma.jpg",
+     "turn": 0,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 262,
+       "y": 180,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 154,
+       "y": 366,
+       "w": 287,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 260,
+       "y": 155,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "ADOPERIAMOTI → te · Negroni Trovato per TerraControlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 216,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-844x390-oggi-04-attesa.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "ffa-844x390-oggi-05-sequenza-350.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "ffa-844x390-oggi-06-sequenza-1300.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "ffa-844x390-oggi-07-sequenza-2600.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "ffa-844x390-oggi-08-sequenza-4200.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "ffa-844x390-oggi-09-sequenza-6500.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-844x390-oggi-10-dopo.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-844x390-oggi-11-scelta.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-844x390-oggi-12-mira.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 477,
+       "y": 306,
+       "w": 120,
+       "h": 166
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 4,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [
+       315,
+       189,
+       335,
+       142
+      ],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-invito",
+     "file": "ffa-844x390-oggi-13-scarto-invito.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 334,
+       "y": 78,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 137,
+       "y": 374,
+       "w": 254,
+       "h": 23
+      },
+      "toast": null,
+      "confirm": {
+       "x": 332,
+       "y": 53,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": {
+       "x": 577,
+       "y": 368,
+       "w": 250,
+       "h": 22
+      },
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → Computer 1Scegli dalla mano una regolare da scartare",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 356,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "scarto-scelto",
+     "file": "ffa-844x390-oggi-14-scarto-scelto.jpg",
+     "turn": 1,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 334,
+       "y": 78,
+       "w": 70,
+       "h": 97
+      },
+      "discard": {
+       "x": 676,
+       "y": 297,
+       "w": 144,
+       "h": 217
+      },
+      "hint": {
+       "x": 137,
+       "y": 366,
+       "w": 254,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 678,
+       "y": 238,
+       "w": 147,
+       "h": 103
+      },
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → Computer 1Scarto scelto. Conferma la calata",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 59,
+      "previewToHint": 349,
+      "playedToToast": null
+     },
+     "card": "SVEGLIAMOCI MA TU NO"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-844x390-oggi-15-attesa.jpg",
+     "turn": 1,
+     "phase": "sending",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 334,
+       "y": 78,
+       "w": 70,
+       "h": 97
+      },
+      "discard": {
+       "x": 676,
+       "y": 297,
+       "w": 144,
+       "h": 217
+      },
+      "hint": {
+       "x": 137,
+       "y": 366,
+       "w": 254,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 678,
+       "y": 238,
+       "w": 147,
+       "h": 103
+      },
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "SVEGLIAMOCI MA TU NO → Computer 1Invio in corso",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": 59,
+      "previewToHint": 349,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "ffa-844x390-oggi-16-sequenza-350.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "ffa-844x390-oggi-17-sequenza-1300.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "ffa-844x390-oggi-18-sequenza-2600.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "ffa-844x390-oggi-19-sequenza-4200.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "ffa-844x390-oggi-20-sequenza-6500.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-844x390-oggi-21-dopo.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "scelta",
+     "file": "ffa-844x390-oggi-22-scelta.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "mira",
+     "file": "ffa-844x390-oggi-23-mira.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": {
+       "x": 410,
+       "y": 300,
+       "w": 144,
+       "h": 217
+      },
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 97,
+       "y": 369,
+       "w": 173,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli il bersaglio sul tavolo",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     },
+     "card": "ADOPERIAMOTI"
+    },
+    {
+     "name": "conferma",
+     "file": "ffa-844x390-oggi-24-conferma.jpg",
+     "turn": 2,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": {
+       "x": 334,
+       "y": 78,
+       "w": 70,
+       "h": 97
+      },
+      "discard": null,
+      "hint": {
+       "x": 154,
+       "y": 366,
+       "w": 287,
+       "h": 38
+      },
+      "toast": null,
+      "confirm": {
+       "x": 332,
+       "y": 53,
+       "w": 74,
+       "h": 54
+      },
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "GARGANTUESCO IMPATTO SUL TU → Computer 1Controlla la calata e conferma",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": 340,
+      "playedToToast": null
+     },
+     "card": "GARGANTUESCO IMPATTO SUL TU"
+    },
+    {
+     "name": "attesa",
+     "file": "ffa-844x390-oggi-25-attesa.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-350",
+     "file": "ffa-844x390-oggi-26-sequenza-350.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-1300",
+     "file": "ffa-844x390-oggi-27-sequenza-1300.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-2600",
+     "file": "ffa-844x390-oggi-28-sequenza-2600.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-4200",
+     "file": "ffa-844x390-oggi-29-sequenza-4200.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "sequenza-6500",
+     "file": "ffa-844x390-oggi-30-sequenza-6500.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": true,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    },
+    {
+     "name": "dopo",
+     "file": "ffa-844x390-oggi-31-dopo.jpg",
+     "turn": 3,
+     "phase": "choose",
+     "sequence": false,
+     "boxes": {
+      "selected": null,
+      "preview": null,
+      "discard": null,
+      "hint": {
+       "x": 66,
+       "y": 369,
+       "w": 112,
+       "h": 27
+      },
+      "toast": null,
+      "confirm": null,
+      "invitation": null,
+      "played": {
+       "x": 421,
+       "y": 141,
+       "w": 91,
+       "h": 89
+      },
+      "outcome": null
+     },
+     "arrows": 0,
+     "toastText": null,
+     "hintText": "Scegli una carta",
+     "travel": {
+      "selectedToTargets": [],
+      "discardToConfirm": null,
+      "previewToHint": null,
+      "playedToToast": null
+     }
+    }
+   ]
+  }
+ ],
+ "errors": []
+}
