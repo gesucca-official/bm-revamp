@@ -204,6 +204,8 @@ public class GameSessionServiceImpl implements GameSessionService {
     }
 
     private void advanceAfterForfeit(Game game, String reason) {
+        // O20: the forfeit reason holds only if the forfeits themselves ended the match, before any resolution.
+        if (!game.isOver()) { reason = "combat"; }
         Game beforeResolution = copy(game);
         java.util.List<ActionLog> eventsToRecord = new java.util.ArrayList<>();
         try {
