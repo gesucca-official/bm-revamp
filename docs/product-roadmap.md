@@ -1,6 +1,6 @@
 # Roadmap del prodotto — dopo C5 e il Set Base
 
-Scritta il 10 novembre 2026 (versione 4, stesso giorno: come si racconta la carriera, rami, achievement e tutorial), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
+Scritta il 10 novembre 2026 (versione 5, stesso giorno: come si racconta la carriera, rami, achievement e tutorial), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
 **Solo roadmap:** come ogni roadmap (R00 del [regolamento](game-rules.md)), non introduce regole attive; le tappe che cambiano il
 gioco aggiornano prima il regolamento o il documento interessato. Lo stato del progetto resta nell'[indice](README.md#stato-corrente);
 qui ci sono l'ordine delle tappe, le decisioni prese e i punti critici. I piani di dettaglio, con blocchi e verifiche, si scrivono
@@ -225,7 +225,8 @@ tutti con te» è una variante dichiarata.
 
 **CA-1 Tutorial:** tre partite guidate, scriptate col runner con seme: duello con Mara contro Spazienzio, duello con Spazienzio contro
 Piera, FFA a tre col personaggio scelto in silenzio fra i due. Insegnano costi e precedenza, bound, V e annullamento, FFA e last resort, e
-sbloccano i due starter base. Scaletta in [carriere/tutorial.md](design/carriere/tutorial.md), dentro il
+sbloccano i due starter base; il tutorial si chiude con la risposta del giocatore ai messaggi della combriccola, che lo completa o lo fa
+fallire. Scaletta e dialoghi in [carriere/tutorial.md](design/carriere/tutorial.md), dentro il
 [serbatoio delle carriere](design/carriere/README.md).
 
 **CA-2 Campagna principale, primo terzo:** fino allo sblocco del PvP, con i primi starter avanzati. Per gli amici invitati serve un modo
@@ -307,6 +308,7 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
 | D18 | Lo starter avanzato di un personaggio arriva come ricompensa la prima volta che prende le parti del giocatore; Sergio e Duccio, solo da booster, nella principale non si giocano. |
 | D19 | Un sistema di achievement fa sapere al giocatore quali rami della carriera gli mancano da scoprire e gli dà indizi su come arrivarci. |
 | D20 | Direzione per trovare Sergio e Duccio in un tempo ragionevole (esempio del proprietario, da dettagliare in EC-0): buste speciali in cui la rara è sicuramente un personaggio non ancora in collezione, che non vengono più offerte quando non restano personaggi di quel set da trovare. |
+| D21 | Le battute delle carriere che si rivolgono al giocatore o parlano di lui sono neutre rispetto al genere. |
 
 ## Domande aperte
 
@@ -331,3 +333,5 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
   e sostituite.
 - **Versione 4 — 10 novembre 2026:** CA-1 descritto con le tre partite della scaletta del tutorial; aperto il
   [serbatoio delle carriere](design/carriere/README.md).
+- **Versione 5 — 10 novembre 2026:** battute neutre sul giocatore (D21); CA-1 con la scelta finale del tutorial, dialoghi scritti dal
+  proprietario.

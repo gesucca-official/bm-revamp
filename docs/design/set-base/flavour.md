@@ -34,7 +34,12 @@ Quello che le schede danno già per scontato: una rissa in un bar di quartiere e
 bici, la doppia fila del carro attrezzi, il palazzo di fronte da cui guarda la portinaia). Tono di strada e di bar, come «Mattone del
 cantiere» o «Rutto a distanza sociale».
 
-*Idee del proprietario:* —
+*Idee del proprietario* (10 novembre 2026, dal [tutorial](../carriere/tutorial-dialoghi.md#scena-0--davanti-al-bar)):
+
+- **Il bar** ha un nome ancora da inventare, `[BAR]` nei testi, che potrebbe diventare anche il titolo del gioco. Sull'insegna c'è scritto
+  BAR; gli shottini costano due euro, e c'è chi ha paura di prendersi il tetano.
+- **Il Dimmi Di Sì** è il bar caro e alla moda dove va di solito la combriccola del giocatore: Virgin Cuba Libre a sedici euro, un posto
+  da fighetti («pottini», a Prato: figli di papà).
 
 ## Personaggi
 
@@ -50,11 +55,18 @@ arriva, arriva. Esiste già (`BigBadBruiser`) e il suo flavour resta. Urla: le s
 **Il proprietario lo conferma com'è** (8 novembre 2026), nome compreso.
 
 - **Carattere:** —
-- **Voce:** —
+- **Voce:** *Variante della regia (10 novembre 2026, per i dialoghi del [tutorial](../carriere/tutorial-dialoghi.md)), da confermare:*
+  sempre in MAIUSCOLO, come i nomi delle sue carte; frasi corte che si spezzano per la rabbia; minacce e sbuffi. Ogni tanto un lampo di
+  gentilezza involontaria, che lo rende comico: non vede l'ora di perdere di nuovo la pazienza, anche per difendere uno appena conosciuto
+  (idea del proprietario, tutorial). **Dal proprietario, nella scena 1 del tutorial (10 novembre 2026):** maiuscolo confermato; coniuga i
+  verbi in imperativi impossibili («UCCIDIAMOTI», «UCCIDIAMOVI ORDUNQUE», «ANNICHILIAMOVI»), con qualche parola aulica fuori posto e minacce
+  di strada («LASCIATEVI CAROTARE»).
 - **Storia:** —
 - **Aspetto:** —
 - **Battute:** —
-- **Rapporti con gli altri:** —
+- **Rapporti con gli altri:** odia il cane di Piera, che gli ha leccato la mano: lui ha sentito bagnato e d'istinto ha provato a berlo, e
+  faceva schifo. Non sopporta come parla Piera e la interrompe sempre (proprietario, scena 2 del tutorial, 10 novembre 2026). Apprezza
+  chi «sa far smettere la gente»: chiama il giocatore «faccia nuova» e lo vuole a bere con sé, altrimenti «DOVRÒ SBRONZARTI DI BOTTE».
 
 ### Mara Contromano — base
 
@@ -63,9 +75,14 @@ va; leggera, due colpi seri e non si rialza.
 
 - **Carattere:** psicotica, imbottita di psicofarmaci, d'umore instabile. Complottista al massimo.
 - **Voce:** attacca pipponi allucinanti con le sue teorie da pazza. Non sempre: a volte dice solo due o tre cose senza senso e se ne va
-  a continuare il suo lavoro, lasciando tutti basiti (così resta rapida, come vuole la scheda).
+  a continuare il suo lavoro, lasciando tutti basiti (così resta rapida, come vuole la scheda). **Dai dialoghi del tutorial (proprietario,
+  10 novembre 2026):** si sente spiata e seguita («ce l'hanno sempre con me»), crede che gli altri sentano i suoi pensieri alla radio, vede
+  Navaho dappertutto, e scopre complotti dove capita, come il cane di Piera addestrato per somministrare qualcosa a Spazienzio. Usa la
+  stagnola dell'incarto del kebab perché smettano di leggerle i pensieri.
 - **Sostanze:** caratteristica di flavour, non meccanica. Idee per gli oggetti in [Idee che toccano una meccanica](#idee-che-toccano-una-meccanica).
-- **Storia:** —
+- **Storia:** fa le consegne in bici; nel [tutorial](../carriere/tutorial.md) è convinta di dover consegnare al giocatore un kebab tripla
+  cipolla triplo piccante, lo punzecchia perché crede che non le voglia dare la mancia; vede Navaho dappertutto, ma del giocatore decide
+  che è un Sioux, e i Sioux la mancia la lasciano sempre (idee del proprietario, 10 novembre 2026).
 - **Aspetto:** —
 - **Battute:** —
 - **Rapporti con gli altri:** arriva in bici, e Beppe si spaccia anche per meccanico di biciclette: aggancio confermato dal proprietario, da sviluppare.
@@ -93,11 +110,14 @@ tutto, ma il vino gli scende nelle gambe.
 - **Nome:** il proprietario la chiama **Piera Ultimo Giro**, senza «l'»: diventa una donna; prima era Piero, il cambio serve al cast (vedi [Incoerenze segnalate](#incoerenze-segnalate) per dove si applica).
 - **Carattere:** —
 - **Voce:** parla molto lentamente una lingua tutta sua, la lingua della grappa. (Aggancio esistente: l'oggetto `OGG-16`, nome di lavoro
-  «Grappa della casa».)
+  «Grappa della casa».) **Precisato il 10 novembre 2026:** parla tutta sgrammaticata e lentamente; mentre le sue parole compaiono sullo
+  schermo si vedono gli altri personaggi della conversazione super annoiati o super impazienti, e alla fine viene sempre interrotta.
 - **Storia:** —
 - **Aspetto:** grassa.
 - **Il cane:** ha sempre un cane con sé, che disturba tutti quanti; nessuno ha il coraggio di dirglielo. Solo flavour; per eventuali
-  carte col cane vedi [Idee che toccano una meccanica](#idee-che-toccano-una-meccanica).
+  carte col cane vedi [Idee che toccano una meccanica](#idee-che-toccano-una-meccanica). **Si chiama Grappino** (proposta della regia,
+  adottata dal proprietario nel tutorial, 10 novembre 2026): quando Piera ordina «un altro... grappino», lui abbaia. Lecca le mani alla
+  gente.
 - **Battute:** —
 - **Rapporti con gli altri:** —
 
