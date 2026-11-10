@@ -1,0 +1,25 @@
+--- client-web/tools/verify.mjs	2026-11-09 18:22:34.056138200 +0100
++++ C:/Users/PEDM17/AppData/Local/Temp/claude/8b6bb96ba741a14e/81c1f5f8-0dc7-4702-95da-19a1799ccc86/scratchpad/verify-bozza.mjs	2026-11-10 17:07:08.594450900 +0100
+@@ -2,7 +2,7 @@
+ // login → quick 1vCom → full games until the outcome → new game, for both characters.
+ // Prerequisites: ./scripts/dev.ps1 -Task Server -SeedAccounts and ./client-web/run.ps1 -Task Serve.
+ // Moves are chosen by trying cards and targets through the UI; the server decides legality.
+-import {chromium} from '@playwright/test';
++import {chromium} from 'file:///C:/_simone/claude/bm-revamp-on-laptop/client-web/node_modules/@playwright/test/index.mjs';
+ import {mkdir,writeFile} from 'node:fs/promises';
+ import assert from 'node:assert/strict';
+ 
+@@ -10,9 +10,10 @@
+ const user=process.env.BM_USER??'devAlice',password=process.env.BM_PASSWORD??'local-alice';
+ const out=process.env.BM_OUT??'../docs/reports/client-c2';
+ await mkdir(`${out}/screens`,{recursive:true});
+-// C2a: the regulation annex is the reference for roles and gains (R07a), compared by display name.
+-const annex=JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../docs/rules-catalog.json',import.meta.url),'utf8'));
+-const catalogByName=new Map(annex.cards.map(c=>[c.name,c]));
++// SB-8 (copy outside the repository): the set draft played by the server (profile bozza) is the reference for roles and gains,
++// compared by display name, instead of the regulation annex of the live catalog. Nothing else differs from tools/verify.mjs.
++const draft=JSON.parse(await (await import('node:fs/promises')).readFile(new URL('file:///C:/_simone/claude/bm-revamp-on-laptop/server/src/test/resources/set-base/bozza.json'),'utf8'));
++const catalogByName=new Map(draft.cards.map(c=>[c.gui.name,{name:c.gui.name,role:c.gui.role,gains:c.gui.gains}]));
+ const c2a={outsideDeselect:null,status:null,turnsChecked:0,cardsChecked:0,rolesSeen:{},unpayableSeen:0,unpayableDimmed:0,boardChecks:0,hover:null,unpayableSend:null,layout:null};
+ const evidence={date:new Date().toISOString(),url,user,kind:'automated browser run on PC (Edge via Playwright) against the local server; not a physical device',games:[],checks:{},rejections:[],periodic:[],noValidMove:[],errors:[]};
+ const browser=await chromium.launch({channel:'msedge',headless:process.env.BM_HEADED!=='1'});

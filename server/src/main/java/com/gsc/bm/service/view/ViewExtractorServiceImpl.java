@@ -6,8 +6,7 @@ import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.status.Status;
-import com.gsc.bm.repo.internal.CharactersGuiRecord;
-import com.gsc.bm.repo.internal.CharactersGuiRepository;
+import com.gsc.bm.service.catalog.CatalogSource;
 import com.gsc.bm.service.view.model.client.*;
 import com.gsc.bm.service.view.model.deck.CharacterCardView;
 import com.gsc.bm.service.view.model.logging.SlimCharacterView;
@@ -21,16 +20,22 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.gsc.bm.service.factories.CardFactoryService.BASE_CARDS_PKG;
-
 @Service
 public class ViewExtractorServiceImpl implements ViewExtractorService {
 
-    private final CharactersGuiRepository charactersRepo;
+    // SB-8: names and sprites by binding from the catalog source. For the live classes the binding is the class name without
+    // the cards package, the key used before; a character described as data (profile bozza) has no class of its own.
+    private final CatalogSource catalog;
 
     @Autowired
-    public ViewExtractorServiceImpl(CharactersGuiRepository charactersRepo) {
-        this.charactersRepo = charactersRepo;
+    public ViewExtractorServiceImpl(CatalogSource catalog) {
+        this.catalog = catalog;
+    }
+
+    private CatalogSource.CharacterGui gui(Character character) {
+        String binding = character.getBindingName();
+        return catalog.characterGui(binding)
+                .orElseThrow(() -> new RuntimeException("Couldn't load Character from internal DB! " + binding));
     }
 
     @Override
@@ -69,11 +74,9 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
     }
 
     private SlimCharacterView toSlimView(Character character) {
-        String clazz = character.getClass().getName().replace(BASE_CARDS_PKG, "");
-        CharactersGuiRecord record = charactersRepo.findById(clazz)
-                .orElseThrow(() -> new RuntimeException("Couldn't load Character from internal DB! " + clazz));
+        CatalogSource.CharacterGui record = gui(character);
         return SlimCharacterView.builder()
-                .name(record.getGuiName())
+                .name(record.getName())
                 .items(character.getItems().stream()
                         .map(Card::getName)
                         .collect(Collectors.toList()))
@@ -147,11 +150,9 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
         Character c = (Character) SerializationUtils.deserialize(bytes);
         assert c != null;
 
-        String clazz = character.getClass().getName().replace(BASE_CARDS_PKG, "");
-        CharactersGuiRecord record = charactersRepo.findById(clazz)
-                .orElseThrow(() -> new RuntimeException("Couldn't load Character from internal DB! " + clazz));
+        CatalogSource.CharacterGui record = gui(character);
         return ClientCharacterView.builder()
-                .name(record.getGuiName())
+                .name(record.getName())
                 .bindingName(c.getBindingName())
                 .dead(c.isDead())
                 .itemsSize(c.getItemsSize())
@@ -160,7 +161,7 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
                 .statuses(c.getStatuses())
                 .immunities(c.getImmunities())
                 .timers(c.getTimers())
-                .sprite(record.getGuiImage()) // TODO load this at once in a character factory??
+                .sprite(record.getSprite()) // TODO load this at once in a character factory??
                 .build();
     }
 
@@ -170,13 +171,11 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
         Character c = (Character) SerializationUtils.deserialize(bytes);
         assert c != null;
 
-        String clazz = character.getClass().getName().replace(BASE_CARDS_PKG, "");
-        CharactersGuiRecord record = charactersRepo.findById(clazz)
-                .orElseThrow(() -> new RuntimeException("Couldn't load Character from internal DB! " + clazz));
+        CatalogSource.CharacterGui record = gui(character);
         return CharacterCardView.builder()
-                .name(record.getGuiName())
+                .name(record.getName())
                 .bindingName(character.getBindingName())
-                .sprite(record.getGuiImage())
+                .sprite(record.getSprite())
                 .itemsSize(c.getItemsSize())
                 .resources(c.getResources())
                 .immunities(c.getImmunities())

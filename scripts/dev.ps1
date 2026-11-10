@@ -1,4 +1,7 @@
-param([ValidateSet('Server', 'Client')][string]$Task = 'Client', [switch]$SeedAccounts)
+# SB-8: -Bozza starts the server with the set draft (profile bozza, database data/bm-bozza.sqlite); -Pool, -Com, -Bot and
+# -Draft set app.bozza.pool, app.bozza.com, app.bozza.bot and app.bozza.sources (docs/setup.md).
+param([ValidateSet('Server', 'Client')][string]$Task = 'Client', [switch]$SeedAccounts, [switch]$Bozza,
+    [string]$Pool, [string]$Com, [string]$Bot, [string]$Draft)
 $ErrorActionPreference = 'Stop'
 $workspace = Split-Path $PSScriptRoot -Parent
 $manifest = Get-Content "$PSScriptRoot/toolchain.json" -Raw | ConvertFrom-Json
@@ -11,6 +14,13 @@ try {
         Push-Location "$workspace/server"
         try {
             $serverArgs = @('--spring.profiles.active=local')
+            if ($Bozza) {
+                $serverArgs = @('--spring.profiles.active=local,bozza')
+                if ($Pool) { $serverArgs += "--app.bozza.pool=$Pool" }
+                if ($Com) { $serverArgs += "--app.bozza.com=$Com" }
+                if ($Bot) { $serverArgs += "--app.bozza.bot=$Bot" }
+                if ($Draft) { $serverArgs += "--app.bozza.sources=$Draft" }
+            } elseif ($Pool -or $Com -or $Bot -or $Draft) { throw '-Pool, -Com, -Bot and -Draft need -Bozza' }
             if ($SeedAccounts) { $serverArgs += '--app.dev.seed-accounts=true' }
             & "$workspace/.tools/$($java.directory)/bin/java.exe" -jar target/bm-server-0.0.1-SNAPSHOT.jar @serverArgs
         } finally { Pop-Location }

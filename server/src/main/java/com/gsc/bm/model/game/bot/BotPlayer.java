@@ -21,6 +21,11 @@ public class BotPlayer extends ComPlayer {
         this.policy = Objects.requireNonNull(policy);
     }
 
+    /** The policy's class name, for the match archive (SB-8). Not a bean property: views never carry it. */
+    public String policyName() {
+        return policy.getClass().getSimpleName();
+    }
+
     @Override
     public Move chooseMove(Game game) {
         BotView view = BotView.of(game, getPlayerId());

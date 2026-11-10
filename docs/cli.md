@@ -60,6 +60,10 @@ Per salvare stdout usare una destinazione nuova, per esempio `... scripts/bm-cli
 
 Prove I19a: `MatchArchiveCliTest.cliQuickOutcomeExportAndPostCommitWriteFailure` invoca `scripts/cli-match-export-test.cjs` su server reale e SQLite temporaneo, una volta con storage sano e una con errore di scrittura controllato dopo commit. Verifica hash/ordine, esito, report, export dopo leave e accesso estraneo negato. Il comando è `./scripts/build.ps1 -Task TestServerContext -Offline`. Contratto, schema e limiti: [match-archive.md](match-archive.md).
 
+## Bozza del Set Base (SB-8)
+
+`BozzaCliTest` avvia Spring coi profili `test` e `bozza` su SQLite temporaneo e invoca `scripts/cli-draft-complete-test.cjs`: collezione e mazzi pronti della bozza, mazzo pronto non modificabile, salvataggio di un mazzo con le carte della bozza, poi partite intere fino all'esito in open 1vCom con `starter-pino` e `starter-gigi` (carte Java della bozza), in quick 1vCom e in quick 1v1 fra due account. Le mosse si tentano in un ordine fisso, carte della bozza prima; il server rifiuta quelle illegali. Ogni export ha `versions.draft`. Si esegue con `./scripts/build.ps1 -Task TestServerContext -Offline`; avvio manuale col profilo in [setup](setup.md#avvio-con-la-bozza-del-set-base-sb-8).
+
 ## Controllo del runner (SB-3)
 
 `scripts/cli-sim-control.cjs PARTITE CARTELLA` gioca partite `quick/1vCom` con scelte casuali legali e ne salva gli export, che `SimulationControlTest` rigioca nel motore. Comandi ed esiti nel [rapporto SB-3](reports/set-base/sb-3-report.md#confronto-col-server-reale).

@@ -7,11 +7,14 @@ import com.gsc.bm.repo.internal.CharactersGuiRepository;
 import com.gsc.bm.service.account.model.UserAccountInfo;
 import com.gsc.bm.service.account.model.UserCollection;
 import com.gsc.bm.service.account.model.UserGuiDeck;
+import com.gsc.bm.service.catalog.CatalogSource;
+import com.gsc.bm.service.catalog.SqliteCatalogSource;
 import com.gsc.bm.service.factories.CardFactoryService;
 import com.gsc.bm.service.factories.CharacterFactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,22 +24,30 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     private final UserCredentialsRepository userCredentialsRepo;
     private final UserDecksRepository userDecksRepo;
-    private final CardsGuiRepository cardsGuiRepo;
-    private final CharactersGuiRepository charactersGuiRepo;
+    // SB-8: collection and deck checks read the catalog source (SQLite, or the set draft with the development profile).
+    private final CatalogSource catalog;
     private final CardFactoryService cardFactoryService;
     private final CharacterFactoryService characterFactoryService;
 
-    @Autowired
     public UserAccountServiceImpl(UserCredentialsRepository userCredentialsRepo,
                                   UserDecksRepository userDecksRepo,
                                   CardsGuiRepository cardsGuiRepo,
                                   CharactersGuiRepository charactersGuiRepo,
                                   CardFactoryService cardFactoryService,
                                   CharacterFactoryService characterFactoryService) {
+        this(userCredentialsRepo, userDecksRepo, new SqliteCatalogSource(cardsGuiRepo, charactersGuiRepo),
+                cardFactoryService, characterFactoryService);
+    }
+
+    @Autowired
+    public UserAccountServiceImpl(UserCredentialsRepository userCredentialsRepo,
+                                  UserDecksRepository userDecksRepo,
+                                  CatalogSource catalog,
+                                  CardFactoryService cardFactoryService,
+                                  CharacterFactoryService characterFactoryService) {
         this.userCredentialsRepo = userCredentialsRepo;
         this.userDecksRepo = userDecksRepo;
-        this.cardsGuiRepo = cardsGuiRepo;
-        this.charactersGuiRepo = charactersGuiRepo;
+        this.catalog = catalog;
         this.cardFactoryService = cardFactoryService;
         this.characterFactoryService = characterFactoryService;
     }
@@ -57,6 +68,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public void addUserDeck(String username, UserGuiDeck deck) {
         validateDeck(deck);
+        requireOwnDeckId(deck);
         userDecksRepo.save(
                 new UserDecksRecord(username, deck.getDeckId(), fromGuiToStoredDeck(deck))
         );
@@ -66,11 +78,18 @@ public class UserAccountServiceImpl implements UserAccountService {
     public void deleteUserDeck(String username, UserGuiDeck deck) {
         if (deck == null || deck.getDeckId() == null || deck.getDeckId().isBlank())
             throw new IllegalArgumentException("Deck identifier required");
+        requireOwnDeckId(deck);
         userDecksRepo.deleteById(new UserDeckRecordKey(username, deck.getDeckId()));
     }
 
+    /** SB-8: a ready deck of the catalog is read-only; never true in the live catalog, which has none. */
+    private void requireOwnDeckId(UserGuiDeck deck) {
+        if (catalog.readyDecks().containsKey(deck.getDeckId()))
+            throw new IllegalArgumentException("Deck identifier reserved for a ready deck");
+    }
+
     private Card catalogCard(Card input) {
-        if (input == null || input.getBindingName() == null || !cardsGuiRepo.existsById(input.getBindingName()))
+        if (input == null || input.getBindingName() == null || !catalog.hasCard(input.getBindingName()))
             throw new IllegalArgumentException("Unknown or missing card");
         return cardFactoryService.craftCard(input.getBindingName());
     }
@@ -78,7 +97,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     private void validateDeck(UserGuiDeck deck) {
         if (deck == null || deck.getDeckId() == null || deck.getDeckId().isBlank()
                 || deck.getCharacter() == null || deck.getCharacter().getBindingName() == null
-                || !charactersGuiRepo.existsById(deck.getCharacter().getBindingName()))
+                || !catalog.hasCharacter(deck.getCharacter().getBindingName()))
             throw new IllegalArgumentException("Deck identifier and catalog character required");
         // R02 1.8: the identifier is a path segment of the open join destination.
         if (deck.getDeckId().contains("/"))
@@ -96,22 +115,31 @@ public class UserAccountServiceImpl implements UserAccountService {
     // for now everyone has all the cards
     private UserCollection getUserCardCollection() {
         return new UserCollection(
-                charactersGuiRepo.findAll()
+                catalog.characterBindings()
                         .stream()
-                        .map(r -> characterFactoryService.craftCharacterView(r.getClazz()))
+                        .map(characterFactoryService::craftCharacterView)
                         .collect(Collectors.toSet()),
-                cardsGuiRepo.findAll()
+                catalog.cardBindings()
                         .stream()
-                        .map(cardsGuiRecord -> cardFactoryService.craftCard(cardsGuiRecord.getClazz()))
+                        .map(cardFactoryService::craftCard)
                         .collect(Collectors.toSet())
         );
     }
 
     private Set<UserGuiDeck> getUserDecks(String username) {
-        return userDecksRepo.findAllByUsername(username)
+        if (catalog.readyDecks().isEmpty())
+            return userDecksRepo.findAllByUsername(username)
+                    .stream()
+                    .map(d -> fromStoredToGuiDeck(d.getDeck(), d.getDeckId()))
+                    .collect(Collectors.toSet());
+        // SB-8, profile bozza only: the ready decks first, then the saved ones.
+        Set<UserGuiDeck> decks = new LinkedHashSet<>();
+        catalog.readyDecks().forEach((id, deck) -> decks.add(fromStoredToGuiDeck(deck, id)));
+        userDecksRepo.findAllByUsername(username)
                 .stream()
                 .map(d -> fromStoredToGuiDeck(d.getDeck(), d.getDeckId()))
-                .collect(Collectors.toSet());
+                .forEach(decks::add);
+        return decks;
     }
 
     private UserGuiDeck fromStoredToGuiDeck(UserDecksRecord.UserStoredDeck deck, String deckId) {

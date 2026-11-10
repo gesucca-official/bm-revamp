@@ -142,3 +142,8 @@ fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare
    rispettare R02 1.12: 20 carte regolari, al massimo 2 copie, basic e due bound del personaggio, last resort; il server rifiuta gli altri.
 2. **`client-web/tests/readability.test.ts`:** una riga cambiata da SB-2 (Q8), perché i moltiplicatori degli stati ora stanno in
    `docs/sets/base.md`. Se C4 tocca lo stesso test, al pull può esserci un conflitto di una riga.
+3. **SB-8, bozza giocabile da umani** (10 novembre 2026, [rapporto](reports/set-base/sb-8-report.md#per-laltra-macchina)): cambia il
+   server, quindi **rifare il jar dopo il pull** prima di qualsiasi verifica del client. Nessun file del client e nessuno strumento di
+   verifica del client toccati; il profilo normale (`local`, usato da tutte le verifiche) si comporta come prima. C'è un profilo nuovo,
+   `bozza`, solo per lo sviluppo e le prove umane del Set Base: non serve a C4 e nessuna verifica di C4 lo attiva. `check-rules.py`
+   cambia una riga (percorso di `Draft.java`, ora in `server/src/main`).

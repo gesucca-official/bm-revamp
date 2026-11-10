@@ -85,6 +85,11 @@ public class MatchArchiveService {
                     "outcome", fields("over", true, "result", "draw", "winner", null, "reason", "riavvio server"));
         } catch (java.io.IOException e) { throw new IllegalStateException("Invalid restart outcome", e); }
     }
+    /** «random» for the live ComPlayer; SB-8: the heuristic policy of a BotPlayer, only with the development profile. */
+    static String botPolicy(Game game) {
+        return game.getPlayers().values().stream().filter(p -> p instanceof com.gsc.bm.model.game.bot.BotPlayer)
+                .map(p -> ((com.gsc.bm.model.game.bot.BotPlayer) p).policyName()).findFirst().orElse("random");
+    }
     public synchronized void record(Game game, List<ActionLog> events) {
         Stream stream = streams.get(game.getGameId());
         if (stream == null) { throw new IllegalStateException("Missing match recording"); }
@@ -98,7 +103,7 @@ public class MatchArchiveService {
                 else if (data instanceof Move) { data = MatchSnapshot.move((Move) data); }
                 if (event.getWhat().equals("INITIAL")) {
                     data = fields("versions", versions.get(), "configuration", fields("handSize", Player.CARDS_IN_HAND,
-                            "deckOrder", "next draw first", "playerOrder", "insertion", "botPolicy", "random",
+                            "deckOrder", "next draw first", "playerOrder", "insertion", "botPolicy", botPolicy(game),
                             "scope", "quick1vCom/quick1v1/quickFFA/open1vCom engine events; no UI telemetry"), "state", data);
                 }
                 int sequence = stream.entries.size();

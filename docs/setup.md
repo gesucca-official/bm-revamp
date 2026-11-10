@@ -55,6 +55,36 @@ separato dal catalogo. Conservare insieme SQLite e `<database>.match-recovery`.
 Non occorrono PostgreSQL, SMTP o credenziali reali. La configurazione condivisa
 `application-local.yml` è versionata; i segreti restano fuori dal repository.
 
+## Avvio con la bozza del Set Base (SB-8)
+
+Per le prove umane del Set Base (SB-12b, SB-16) il server può giocare la bozza del set invece del catalogo. Il
+client web non cambia: il server gli manda le carte e la collezione della bozza.
+
+```powershell
+./scripts/build.ps1 -Task Server -Offline          # jar aggiornato, una volta dopo ogni pull
+./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts
+# In un secondo terminale, dalla radice:
+./client-web/run.ps1 -Task Serve                   # http://127.0.0.1:4320
+```
+
+- **Profilo:** `--spring.profiles.active=local,bozza`. Il profilo `bozza` parte solo insieme a `local` (o `test`) e mai con
+  `heroku`; una bozza non valida ferma l'avvio col messaggio del caricatore.
+- **Dati separati:** `server/data/bm-bozza.sqlite` (o `BM_DATABASE_PATH`); account, mazzi salvati e partite della bozza non si
+  mescolano con quelli del profilo normale. Gli account sintetici si creano anche qui con `-SeedAccounts`.
+- **Bozza:** `server/src/test/resources/set-base/bozza.json`, letta da file e non dal jar: per cambiare un numero basta
+  riavviare il server. `-Draft <percorsi>` ne sceglie un'altra (più set separati da `;`, come `-Dsim.draft`).
+- **Il proprio starter:** in «Con un tuo mazzo» (open 1vCom) compaiono i cinque starter della bozza come mazzi pronti, in sola lettura
+  (`starter-spazienzio`, `starter-mara`, `starter-tossico`, `starter-pino`, `starter-gigi`). La collezione e l'editor mostrano
+  le carte della bozza; i mazzi costruiti con quelle carte si salvano nel database della bozza.
+- **Quick 1vCom, quick 1v1 e FFA:** starter a caso dalla riserva `-Pool` (predefinita: i cinque), per esempio
+  `-Pool 'starter-spazienzio,starter-mara'` per giocare solo quel matchup.
+- **Computer:** `-Com` sceglie il suo mazzo (`pool` = a caso dalla riserva, predefinito, oppure uno starter) e `-Bot` il suo
+  stile: `risorse` (predefinito), `aggressivo`, `prudente` (i bot euristici di SB-4) o `casuale` (il computer della partita viva).
+  Esempio: `./scripts/dev.ps1 -Task Server -Bozza -Com starter-spazienzio -Bot prudente`.
+- **Partite:** l'archivio le marca con `versions.draft` (fonti con SHA-256, set e versione «bozza», riserva, computer e stile),
+  oltre al database separato.
+- Senza `-Bozza` il server è quello di sempre: nessuna carta, personaggio o mazzo della bozza è raggiungibile.
+
 ## Verifiche
 
 ```powershell

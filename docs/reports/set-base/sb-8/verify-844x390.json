@@ -1,0 +1,361 @@
+{
+  "date": "2026-11-10T16:08:58.483Z",
+  "url": "http://127.0.0.1:4320",
+  "user": "devAlice",
+  "kind": "automated browser run on PC (Edge via Playwright) against the local server; not a physical device",
+  "games": [
+    {
+      "index": 1,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "Questo lo finisco io",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Amaro nel bicchiere di plastica"
+          },
+          "how": "drag"
+        },
+        {
+          "turn": 1,
+          "card": "Spallata al bancone",
+          "target": "ComPlayer_9044",
+          "choices": {
+            "DISCARD_ONE": "Fasciatura col fazzolettaccio"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "Spallata al bancone",
+          "target": "ComPlayer_9044",
+          "choices": {
+            "DISCARD_ONE": "Spintone"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "Il bancone regge, io pure",
+          "target": "SELF",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "Cinque minuti e vado",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "Testata da ultimo giro"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "Grab",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Peroni da 66, calda"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 6,
+          "card": "Spallata al bancone",
+          "target": "ComPlayer_9044",
+          "choices": {
+            "DISCARD_ONE": "Il bancone regge, io pure"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 7,
+          "card": "Spallata al bancone",
+          "target": "ComPlayer_9044",
+          "choices": {
+            "DISCARD_ONE": "Offro io"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 8,
+          "card": "Spintone",
+          "target": "ComPlayer_9044",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 9,
+          "card": "Cinque minuti e vado",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "Rutto a distanza sociale"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 10,
+          "card": "Cinque minuti e vado",
+          "target": "SELF",
+          "choices": {
+            "DISCARD_ONE": "Estasi da Coca Etilene"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 11,
+          "card": "Questo lo finisco io",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Amaro nel bicchiere di plastica"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-10T16:09:01.377Z",
+      "character": "Tu, Piera Ultimo Giro, salute 100; risorse H 100, A 15, V 0, T 0, L 20",
+      "opponent": "Computer, Celestina Bucatina, salute 80; risorse H 80, A 35, V 0, T 20, L 0",
+      "outcome": {
+        "winner": "ComPlayer_9044",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-10T16:09:29.092Z"
+    },
+    {
+      "index": 2,
+      "me": "devAlice",
+      "moves": [
+        {
+          "turn": 0,
+          "card": "Preso al volo",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Espresso del distributore"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 1,
+          "card": "Steal",
+          "target": "ComPlayer_4316",
+          "choices": {
+            "TARGET_ITEM": "Espresso del distributore"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 2,
+          "card": "Preso al volo",
+          "target": "SELF",
+          "choices": {
+            "TARGET_ITEM": "Espresso del distributore"
+          },
+          "how": "tap"
+        },
+        {
+          "turn": 3,
+          "card": "Sgommata",
+          "target": "ComPlayer_4316",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 4,
+          "card": "Sputo da posacenere",
+          "target": "ComPlayer_4316",
+          "choices": null,
+          "how": "tap"
+        },
+        {
+          "turn": 5,
+          "card": "Passo stretto",
+          "target": "ComPlayer_4316",
+          "choices": {
+            "DISCARD_ONE": "Spintone"
+          },
+          "how": "tap"
+        }
+      ],
+      "started": "2026-11-10T16:09:29.790Z",
+      "character": "Tu, Mara Contromano, salute 80; risorse H 80, A 40, V 0, T 0, L 0",
+      "opponent": "Computer, Mara Contromano, salute 80; risorse H 80, A 40, V 0, T 0, L 0",
+      "outcome": {
+        "winner": "ComPlayer_4316",
+        "me": "devAlice",
+        "message": "Hai perso"
+      },
+      "outcomeText": "Hai perso\n\nRissa conclusa al tavolo\n\nNuova partita\nTorna all’hub\nUltimo turno",
+      "ended": "2026-11-10T16:09:38.322Z"
+    }
+  ],
+  "checks": {
+    "resumedAtStart": false,
+    "login": "hub reached after REST validate, STOMP CONNECT, resume and profile",
+    "noScroll": {
+      "overflowingHit": "card-1",
+      "scrollTop": 0,
+      "scrollHeight": 390,
+      "innerHeight": 390
+    },
+    "reorder": {
+      "before": 6,
+      "firstMovedTo": 5,
+      "sendsDuring": 0,
+      "dragMoved": true
+    },
+    "rejoin": {
+      "sameTurn": true,
+      "handOrderKept": true,
+      "sendsDuringRejoin": 0
+    },
+    "o1o5": {
+      "oldButtons": 0,
+      "infoOnHover": true,
+      "infoOnSelected": true,
+      "keyboardReorder": true,
+      "sendsDuring": 0
+    },
+    "dragFollow": {
+      "ghostOverTargetDuringDrag": true,
+      "dragMoved": true
+    },
+    "item": {
+      "playedCardName": "Preso al volo",
+      "playerId": "devAlice",
+      "targetId": "SELF",
+      "gameId": "f15a8392516eebf4ef6dc695760a30c51c4740dcd0af7cbff2638313715e9460",
+      "choices": {
+        "TARGET_ITEM": "Espresso del distributore"
+      }
+    },
+    "bound": {
+      "playedCardName": "Passo stretto",
+      "playerId": "devAlice",
+      "targetId": "ComPlayer_4316",
+      "gameId": "f15a8392516eebf4ef6dc695760a30c51c4740dcd0af7cbff2638313715e9460",
+      "choices": {
+        "DISCARD_ONE": "Spintone"
+      }
+    },
+    "c2a": {
+      "outsideDeselect": {
+        "selectedBefore": true,
+        "selectedAfter": false,
+        "raisedH": 217,
+        "restH": 166
+      },
+      "status": {
+        "chip": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+        "hoverText": "Immune a tossicità\nBlocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+        "tapOpens": true,
+        "closedElsewhere": true
+      },
+      "turnsChecked": 18,
+      "cardsChecked": 108,
+      "rolesSeen": {
+        "ITEMS": 21,
+        "RESOURCES": 20,
+        "DAMAGE": 49,
+        "DEFENSE": 6,
+        "DISRUPT": 12
+      },
+      "unpayableSeen": 11,
+      "unpayableDimmed": 11,
+      "boardChecks": 18,
+      "hover": {
+        "restingH": 166,
+        "hoverH": 184,
+        "raised": true
+      },
+      "unpayableSend": {
+        "card": "Testata da ultimo giro",
+        "sent": true,
+        "serverAnswer": "Rifiutata: cant be cast with current resources",
+        "choiceKept": true
+      },
+      "layout": {
+        "hand": {
+          "w": 120,
+          "h": 165.6
+        },
+        "person": {
+          "w": 120,
+          "h": 165.6
+        },
+        "item": {
+          "w": 60.8,
+          "h": 83.904
+        }
+      },
+      "boardDuringSequence": 16
+    },
+    "hubReturn": "hub visible after leave acknowledgement"
+  },
+  "rejections": [
+    {
+      "turn": 3,
+      "card": "Testata da ultimo giro",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 4,
+      "card": "Testata da ultimo giro",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 9,
+      "card": "Offro io",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "Testata da ultimo giro",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    },
+    {
+      "turn": 10,
+      "card": "Offro io",
+      "message": "Rifiutata: cant be cast with current resources",
+      "choiceKept": true
+    }
+  ],
+  "periodic": [
+    {
+      "game": 1,
+      "text": "Fine turno\n\nEffetti di fine turno su: Tu. Cosa hanno fatto lo dice solo il testo del server, più sotto.\n\nTesto del server (in inglese, invariato)"
+    }
+  ],
+  "noValidMove": [],
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "want": {
+    "characters": [
+      "Piera Ultimo Giro",
+      "Mara Contromano"
+    ],
+    "bound": true,
+    "item": true,
+    "drag": true,
+    "tap": true,
+    "reorder": true,
+    "rejection": true,
+    "periodic": true
+  },
+  "inputMs": {
+    "note": "PC headless/headed Edge, input to next frame; not the iPhone measure",
+    "samples": 163,
+    "p50": 23.5,
+    "p95": 37.60000002384186,
+    "max": 57.5
+  }
+}

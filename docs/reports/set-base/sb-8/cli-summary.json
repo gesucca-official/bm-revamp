@@ -1,0 +1,152 @@
+{
+ "source": "BozzaCliTest in TestServerContext, 10 novembre 2026",
+ "summary": [
+  {
+   "mode": "open1vCom",
+   "gameId": "7157deabcd4ee47e324af113c67fe27b513badbc2feb07398d7d936234b3f83d",
+   "turns": 18,
+   "outcome": {
+    "over": true,
+    "result": "win",
+    "winner": "ComPlayer_2429"
+   },
+   "played": 18,
+   "draftPlayed": [
+    "base.com.FasciaturaColFazzolettaccio",
+    "base.com.Spintone",
+    "base.pino.GoingBerserk",
+    "base.pino.IlBanconeRegge",
+    "base.pino.OffroIo",
+    "base.pino.QuestoLoFiniscoIo",
+    "base.pino.TestataDaUltimoGiro",
+    "base.pino.bound.CinqueMinutiEVado"
+   ]
+  },
+  {
+   "mode": "open1vCom",
+   "gameId": "84c199e0400f098d3838024a2544082b413b4763f71cc00e838e4a0ba535aa03",
+   "turns": 10,
+   "outcome": {
+    "over": true,
+    "result": "win",
+    "winner": "ComPlayer_9995"
+   },
+   "played": 10,
+   "draftPlayed": [
+    "base.com.MattoneDelCantiere",
+    "base.com.Spintone",
+    "base.gigi.ChiaveDaTredici",
+    "base.gigi.ColpoDiChiaveInglese",
+    "base.gigi.SottoIlCofano",
+    "base.gigi.bound.UnaStrettaEPassa"
+   ]
+  },
+  {
+   "mode": "quick1vCom",
+   "gameId": "baf796d0fcdc02e39e527a4a67f58c17409112a78ecc69e80a3717b4fcdd096e",
+   "turns": 16,
+   "outcome": {
+    "over": true,
+    "result": "win",
+    "winner": "ComPlayer_5475"
+   },
+   "played": 16,
+   "draftPlayed": [
+    "base.com.FasciaturaColFazzolettaccio",
+    "base.com.Spintone",
+    "base.pino.GoingBerserk",
+    "base.pino.IlBanconeRegge",
+    "base.pino.OffroIo",
+    "base.pino.QuestoLoFiniscoIo",
+    "base.pino.RuttoADistanzaSociale",
+    "base.pino.TestataDaUltimoGiro",
+    "base.pino.bound.CinqueMinutiEVado"
+   ]
+  },
+  {
+   "mode": "quick1v1",
+   "gameId": "4edc17909b572bd8943c139b41fcacea014d6c1b986cf0d3682ce6544fec3c0b",
+   "turns": 15,
+   "outcome": {
+    "over": true,
+    "result": "win",
+    "winner": "sb8Human"
+   },
+   "played": 15,
+   "draftPlayed": [
+    "base.com.Spintone",
+    "base.mara.Sgommata",
+    "base.mara.Slalom",
+    "base.mara.SorpassoInCurva",
+    "base.mara.TraDueParaurti",
+    "base.mara.bound.PassoStretto"
+   ]
+  }
+ ],
+ "initialVersionsOfFirstMatch": {
+  "codeSha256": "a9d4347861d98f4d5bcc925d52535a6ca74a19fcfe9e5dd15d528e7c8b005214",
+  "codeFormat": "sorted-class-files",
+  "rulesVersion": "1.13",
+  "rulesSha256": "82658531d92e38a5e8916c8990f3e93417656cf3d390b51692dec123c0b036bb",
+  "sets": {
+   "base": {
+    "version": "0.1",
+    "sha256": "db42568c1ca206931df3cab0e4d3c0b5c002bb7ffb42526bfef1f07cb173dc0c"
+   }
+  },
+  "catalogSha256": "6d8b921d0042d5b062215031135fcffe7e8128673857454425eb5fd47821d745",
+  "rulesCatalogSha256": "583b5dfa739661cef90d8e02f9ed70a88c6cd365763abb9020363aafe9d0b282",
+  "draft": {
+   "sources": [
+    {
+     "source": "src/test/resources/set-base/bozza.json",
+     "sha256": "c43b37a5385a9b786c00a8c6254cbfaa125a6efba6d3cb782ecd9408de842cda"
+    }
+   ],
+   "sets": {
+    "base": {
+     "name": "Set Base",
+     "version": "bozza"
+    }
+   },
+   "pool": [
+    "starter-spazienzio",
+    "starter-mara",
+    "starter-tossico",
+    "starter-pino",
+    "starter-gigi"
+   ],
+   "com": "pool",
+   "bot": "risorse"
+  }
+ },
+ "configuration": {
+  "handSize": 6,
+  "deckOrder": "next draw first",
+  "playerOrder": "insertion",
+  "botPolicy": "ResourceAwarePolicy",
+  "scope": "quick1vCom/quick1v1/quickFFA/open1vCom engine events; no UI telemetry"
+ },
+ "players": [
+  {
+   "playerId": "sb8Human",
+   "character": "base.character.Pino",
+   "specialCards": [
+    "base.pino.QuestoLoFiniscoIo",
+    "base.pino.bound.CinqueMinutiEVado",
+    "base.pino.bound.SpallataAlBancone"
+   ],
+   "lastResort": "base.pino.UltimoGiro"
+  },
+  {
+   "playerId": "ComPlayer_2429",
+   "character": "base.character.Pino",
+   "specialCards": [
+    "base.pino.QuestoLoFiniscoIo",
+    "base.pino.bound.CinqueMinutiEVado",
+    "base.pino.bound.SpallataAlBancone"
+   ],
+   "lastResort": "base.pino.UltimoGiro"
+  }
+ ]
+}

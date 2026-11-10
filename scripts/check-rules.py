@@ -44,7 +44,8 @@ assert rarity_rule, 'R07: missing the rarity paragraph'
 rarity_values = re.search(r'una rarità, ((?:[A-Z]+, )*[A-Z]+) o ([A-Z]+), oppure nessuna', rarity_rule.group(1))
 assert rarity_values, 'R07: rarity vocabulary not found'
 rarity_vocabulary = rarity_values.group(1).split(', ') + [rarity_values.group(2)]
-loader = (root / 'server/src/test/java/com/gsc/bm/sim/Draft.java').read_text(encoding='utf-8')
+# SB-8: the draft loader moved to the production sources (profile bozza); same file, same constant.
+loader = (root / 'server/src/main/java/com/gsc/bm/sim/Draft.java').read_text(encoding='utf-8')
 loader_rarities = re.search(r'static final List<String> RARITIES = List\.of\(([^)]*)\);', loader)
 assert loader_rarities, 'Draft.java: RARITIES not found'
 assert re.findall(r'"([A-Z]+)"', loader_rarities.group(1)) == rarity_vocabulary, \

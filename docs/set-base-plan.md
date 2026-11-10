@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); prossimo SB-8, che apre le prove umane SB-12b e SB-16. Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); SB-8, la bozza giocabile da umani per le prove SB-12b e SB-16, è fatto e in attesa del giudizio del proprietario. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -273,6 +273,14 @@ la matrice. I giri hanno un **numero massimo fissato in anticipo**.
 **Limite noto:** un bot può far sembrare debole un personaggio soltanto perché lo gioca male, e la ricerca automatica trova solo ciò che
 i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
+**Prova che un giro non tocca il motore** (precisata da SB-8, 10 novembre 2026). Finora un blocco di bilanciamento lo provava con un diff
+senza file di `server/src/main`. Da SB-8 il caricatore della bozza (`com.gsc.bm.sim`: `Draft`, `DataCards`, `PlayerSource`,
+`DraftSource`) e le classi Java delle carte di bozza (`com.gsc.bm.model.cards.base`) stanno in `server/src/main`, perché il server di
+sviluppo (profilo `bozza`) deve giocarle; senza il profilo non sono raggiungibili. La regola diventa: **nessun file di `server/src/main`
+cambiato fuori da `com/gsc/bm/sim` e `com/gsc/bm/model/cards/base`**, più nessun cambiamento a `cards.sqlite`, regolamento, documento
+del set, allegato e client. Un cambiamento a quei due package resta un cambiamento della bozza, non della partita viva; uno a
+`com/gsc/bm/bozza` (le fabbriche del profilo) è uno strumento, da dichiarare.
+
 ## Blocchi
 
 | Fase | Blocco | Contenuto | Dipende da | Stato |
@@ -286,7 +294,7 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 | | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a | chiuso |
 | | SB-7 | Banco di misura e invarianti | SB-4, SB-6a | chiuso |
 | | SB-7b | Bot e costo in HEALTH | SB-7 | chiuso |
-| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b | prossimo |
+| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b | fatto, in attesa del giudizio del proprietario |
 | Progetto | SB-9 | Schede dei personaggi | — | chiuso |
 | | SB-10a | Listino di potenza e tetto delle bound (misure) | SB-7b, SB-9 | chiuso |
 | | SB-10b | Griglia degli slot (progetto) | SB-10a | chiuso |
@@ -318,7 +326,8 @@ i bot sanno giocare. Per questo ci sono più stili di bot e le prove umane.
 
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
-SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45). **Prossimo:** SB-8, che apre le prove umane SB-12b e SB-16 e tocca server e client, quindi va preparato con i paletti verso C4. SB-30 può
+SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
+e senza file del client. **Prossimo:** le prove umane SB-12b e SB-16, dopo il giudizio su SB-8. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -486,6 +495,18 @@ rilanciata e confrontata con la prima fotografia.
 **Rischi.** Uno stile troppo cauto con la salute che non paga mai: il banco lo mostra nella HEALTH spesa per partita.
 
 ### SB-8 — Bozza giocabile da umani
+
+**SB-8 fatto il 10 novembre 2026, in attesa del giudizio del proprietario.** Fase A approvata dal proprietario con «Approvo tutto»
+(undici domande con le raccomandazioni, un blocco solo, solo server). Profilo di sviluppo `bozza`, solo con `local` (o `test`) e mai
+con `heroku`: la bozza si legge da file (`set-base/bozza.json`, fuori dal jar), su un database separato `bm-bozza.sqlite`. La
+collezione è la bozza, i cinque starter sono mazzi pronti in open 1vCom, quick 1vCom, 1v1 e FFA pescano da una riserva, il computer
+gioca uno stile euristico di SB-4 (predefinito `risorse`) o il casuale di oggi. Caricatore (`Draft`, `DataCards`, `PlayerSource`) e
+classi Java di bozza spostati in `server/src/main` con `git mv`; una piccola cucitura del catalogo (`CatalogSource`) fa leggere a
+collezione, convalida dei mazzi e viste dei personaggi la stessa SQLite di prima, o la bozza col profilo. Nessun file del client:
+client-web gioca la bozza con i ripieghi che ha già. L'archivio marca le partite con `versions.draft`. Col profilo normale nessuna
+carta, personaggio o mazzo della bozza è raggiungibile (`BozzaProfileOffContextTest`); partite reali con carte di bozza via CLI
+(`BozzaCliTest`) e nel browser. Avvio in [setup](setup.md#avvio-con-la-bozza-del-set-base-sb-8); regola del diff dei giri precisata in
+[metodo e criteri](#bilanciamento-metodo-e-criteri). [Rapporto](reports/set-base/sb-8-report.md).
 
 **Perimetro.** Il server di sviluppo avvia partite con la bozza, senza toccare il catalogo di produzione; `client-web` le mostra, anche per carte **senza
 illustrazione**. Serve a tutte le prove umane, con un controllo end-to-end via CLI.

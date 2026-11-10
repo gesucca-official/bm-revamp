@@ -1,0 +1,11 @@
+# SB-8, development only: matches with the set draft (docs/set-base-plan.md, SB-8; docs/setup.md).
+# Active only together with local (or test), never with heroku: BozzaDraft refuses the start otherwise.
+# The draft is read from file, outside the jar: change a number, restart, no rebuild. Paths are relative to server/.
+app:
+  database:
+    path: ${BM_DATABASE_PATH:./data/bm-bozza.sqlite}
+  bozza:
+    sources: src/test/resources/set-base/bozza.json
+    pool: ""
+    com: pool
+    bot: risorse

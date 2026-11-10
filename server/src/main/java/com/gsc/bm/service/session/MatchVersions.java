@@ -1,5 +1,7 @@
 package com.gsc.bm.service.session;
 
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import java.nio.file.*;
@@ -11,8 +13,14 @@ import static com.gsc.bm.repo.external.MatchEventRepository.sha256;
 /** Identifies the actual loaded artifact/classes, rules, set documents (regulation 1.13) and catalog, including dirty builds. */
 @Component
 public class MatchVersions {
+    /** SB-8: what identifies a set draft played by the development server (profile {@code bozza}); absent in live matches. */
+    public interface DraftIdentity { Map<String, Object> describe(); }
+
     private final Map<String, Object> versions;
-    public MatchVersions() {
+    public MatchVersions() { this((DraftIdentity) null); }
+    @Autowired
+    public MatchVersions(ObjectProvider<DraftIdentity> draft) { this(draft.getIfAvailable()); }
+    private MatchVersions(DraftIdentity draft) {
         try {
             byte[] rules = resource("analysis/game-rules.md");
             String rulesText = new String(rules, StandardCharsets.UTF_8).replace("\r\n", "\n");
@@ -36,9 +44,12 @@ public class MatchVersions {
                 }
                 code = org.apache.commons.codec.binary.Hex.encodeHexString(digest.digest());
             } else { code = sha256(Files.readAllBytes(location)); }
-            versions = Collections.unmodifiableMap(MatchSnapshot.fields("codeSha256", code, "codeFormat", Files.isDirectory(location) ? "sorted-class-files" : "jar",
+            Map<String, Object> found = MatchSnapshot.fields("codeSha256", code, "codeFormat", Files.isDirectory(location) ? "sorted-class-files" : "jar",
                     "rulesVersion", version.group(1), "rulesSha256", sha256(rulesText.getBytes(StandardCharsets.UTF_8)), "sets", sets(),
-                    "catalogSha256", sha256(resource("cards.sqlite")), "rulesCatalogSha256", sha256(resource("analysis/rules-catalog.json"))));
+                    "catalogSha256", sha256(resource("cards.sqlite")), "rulesCatalogSha256", sha256(resource("analysis/rules-catalog.json")));
+            // SB-8: a draft match says which draft it played; the catalog fields stay those of the packaged SQLite.
+            if (draft != null) { found.put("draft", draft.describe()); }
+            versions = Collections.unmodifiableMap(found);
         } catch (Exception e) { throw new IllegalStateException("Cannot identify match versions", e); }
     }
     /** R00/R07 1.13: id (file name) to version and SHA-256 (UTF-8, CRLF folded to LF) of every packaged set document. */
