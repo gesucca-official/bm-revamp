@@ -106,3 +106,11 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 | Mara | B | [Anteprima](identikit/prove/mara-B-1.webp) | [Scheda](identikit/registro.md#mara-b-1) | **Scelta** (11 novembre 2026), ma con i capelli più lunghi e senza kebab in mano |
 | Piera | A | [Anteprima](identikit/prove/piera-A-1.webp) | [Scheda](identikit/registro.md#piera-a-1) | Scartata, ma se ne prende la faccia serena per la B |
 | Piera | B | [Anteprima](identikit/prove/piera-B-1.webp) | [Scheda](identikit/registro.md#piera-b-1) | **Scelta** (11 novembre 2026), ma con la faccia serena della variante A |
+
+### Secondo giro
+
+| Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
+|---|---|---|---|
+| Spazienzio | [Anteprima](identikit/prove/spazienzio-2-1.webp) | [Scheda](identikit/registro.md#spazienzio-2-1) | |
+| Mara | [Anteprima](identikit/prove/mara-2-1.webp) | [Scheda](identikit/registro.md#mara-2-1) | |
+| Piera | [Anteprima](identikit/prove/piera-2-2.webp) | [Scheda](identikit/registro.md#piera-2-2) | |

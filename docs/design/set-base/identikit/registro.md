@@ -223,3 +223,178 @@ The character: a short, very fat woman in her late fifties, a regular at the bar
 
 Avoid: any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions, the humour is in her attitude; gold trim, neon, dominant yellow-and-black colours; other characters besides the dog; background scenery; game interface, cards or frames.
 ~~~
+
+## spazienzio-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL della funzione non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora (ricezione del file) | 11/11/2026 00:18:09 UTC+0100 |
+| ID job | non esposto dallo strumento |
+| Commit preventivo dei prompt | `16669d4` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro), spazienzio, secondo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio, secondo le istruzioni |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2866955 byte, modalità RGB |
+| Parametri | un risultato; qualità, forza del riferimento e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/spazienzio-A-1.png` SHA-256 `c527513e1339737b69e15175866187bd39630d2299aff290e87bfef06302d834`; impronte corrispondenti, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-189c049d-0f3a-452b-abff-b092d23dfa01.png`, copiato senza modifiche in `prove/spazienzio-2-1.png` (ignorato da git); SHA-256 `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3` |
+| Anteprima | [WebP](prove/spazienzio-2-1.webp), 683×1024 px, 127788 byte; SHA-256 `f8781e4756e0722f7481ab36c343e6587facf5f6a6fec660a69a624a30cf44fc` |
+| Conversione | Pillow 13.0.0, ridimensionamento Lanczos a lato lungo 1024 px, WebP qualità 80, metodo 4; nessun ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Scartato per il secondo tentativo: le strisce dei pantaloni sono state rimosse. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same man, face, beard, body, tattoos, oxblood tracksuit trousers, socks and slippers, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this, in both views: remove the white lines, steam or drips coming out of his nose. His face stays red with anger and his jaw pushed forward, but nothing comes out of his nose.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+## spazienzio-2-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora | 11/11/2026, circa 00:19 UTC+0100; ora esatta non esposta dallo strumento |
+| ID job | `fc8d361e-b9ea-4ef9-b923-31763a86b60f` (richiesta rifiutata) |
+| Commit preventivo dei prompt | `16669d4` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro), Spazienzio, secondo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | nessun file restituito |
+| Parametri | un risultato richiesto; qualità e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegato effettivo | `docs/design/set-base/identikit/prove/spazienzio-A-1.png`, SHA-256 `c527513e1339737b69e15175866187bd39630d2299aff290e87bfef06302d834`; impronta corrispondente, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; nessun file restituito |
+| Originale restituito | nessun file restituito; SHA-256 non applicabile |
+| Anteprima | nessun file restituito; SHA-256 non applicabile |
+| Conversione | nessun file restituito |
+| Esito del tentativo | bloccato dal sistema di sicurezza dello strumento in fase di output, categoria dichiarata `sexual`; nessuna immagine restituita |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same man, face, beard, body, tattoos, oxblood tracksuit trousers, socks and slippers, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this, in both views: remove the white lines, steam or drips coming out of his nose. His face stays red with anger and his jaw pushed forward, but nothing comes out of his nose.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+## mara-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL della funzione non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora (ricezione del file) | 11/11/2026 00:18:57 UTC+0100 |
+| ID job | non esposto dallo strumento |
+| Commit preventivo dei prompt | `16669d4` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro), mara, secondo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio, secondo le istruzioni |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2996241 byte, modalità RGB |
+| Parametri | un risultato; qualità, forza del riferimento e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/mara-B-1.png` SHA-256 `435ee12b23849ce4143afffd391776c30594f41403100e92452eb1af0014dc5f`; impronte corrispondenti, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-f4bef72c-6f61-4c63-bd0a-2c5206709b20.png`, copiato senza modifiche in `prove/mara-2-1.png` (ignorato da git); SHA-256 `25c22009502959689609eed87e6fabcc7971f483a66662b587f7d0f6dd6f2e61` |
+| Anteprima | [WebP](prove/mara-2-1.webp), 683×1024 px, 136486 byte; SHA-256 `336b808f74f56e53687076c9fefd5888f6aedd132dbfce54e0a5b0c01f9822f4` |
+| Conversione | Pillow 13.0.0, ridimensionamento Lanczos a lato lungo 1024 px, WebP qualità 80, metodo 4; nessun ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same woman, gaunt face, staring eyes and dark circles, over-ear headphones, teal reflective vest over the dark hoodie, cube-shaped teal insulated delivery backpack, dark cycling trousers and worn-out sneakers, the foil-covered bicycle helmet in her hand, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only two things, consistently in both views: first, her black hair is longer, falling messy and uneven just past her shoulders, still with the badly self-cut uneven fringe; second, she no longer holds the kebab, and that hand is empty, with tense, restless fingers.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+## piera-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL della funzione non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora (ricezione del file) | 11/11/2026 00:19:41 UTC+0100 |
+| ID job | non esposto dallo strumento |
+| Commit preventivo dei prompt | `16669d4` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro), piera, secondo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio, secondo le istruzioni |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2722747 byte, modalità RGB |
+| Parametri | un risultato; qualità, forza del riferimento e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/piera-B-1.png` SHA-256 `6a8d19c8faae21fd395739aa5c2755a40e14d38fd451ab4b801185291031b5e2`<br>2. `docs/design/set-base/identikit/prove/piera-A-1.png` SHA-256 `f50cf52de15533e94b39324a75cc1997babdb6f39a35810a0c62249d841184a0`; impronte corrispondenti, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-21bedf30-54f4-4b33-82f8-20a5182ac811.png`, copiato senza modifiche in `prove/piera-2-1.png` (ignorato da git); SHA-256 `0dad729ed9e0da5ecfe1af8ec7879fa0c06931b652f9c6cc6d047e6bf5ceadec` |
+| Anteprima | [WebP](prove/piera-2-1.webp), 683×1024 px, 99624 byte; SHA-256 `97c0799a31fdaba8ad32d0f778bb8b05a6fecfbd36b88e41ce41cf206659de6d` |
+| Conversione | Pillow 13.0.0, ridimensionamento Lanczos a lato lungo 1024 px, WebP qualità 80, metodo 4; nessun ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Scartato per il secondo tentativo: la forma del volto è stata alterata verso il riferimento A. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for her facial expression. Keep everything else in image 1 exactly the same: the same woman and face shape, curly black hair in a messy bun with the pencil stuck in it, enormous black sweatshirt, black leggings, fluffy black slippers, the small glass of grappa, the dog at her feet, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only her facial expression, in both views: give her the serene, contented expression of image 2, with heavy half-closed eyelids, a slow content smile and cheeks and nose flushed red from wine. She must remain the woman of image 1, not become the woman of image 2.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions.
+~~~
+
+## piera-2-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL della funzione non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora (ricezione del file) | 11/11/2026 00:20:35 UTC+0100 |
+| ID job | non esposto dallo strumento |
+| Commit preventivo dei prompt | `16669d4` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro), piera, secondo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio, secondo le istruzioni |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2735948 byte, modalità RGB |
+| Parametri | un risultato; qualità, forza del riferimento e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/piera-B-1.png` SHA-256 `6a8d19c8faae21fd395739aa5c2755a40e14d38fd451ab4b801185291031b5e2`<br>2. `docs/design/set-base/identikit/prove/piera-A-1.png` SHA-256 `f50cf52de15533e94b39324a75cc1997babdb6f39a35810a0c62249d841184a0`; impronte corrispondenti, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-c35ff654-c32a-4aa7-9273-61c740dbfba8.png`, copiato senza modifiche in `prove/piera-2-2.png` (ignorato da git); SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c` |
+| Anteprima | [WebP](prove/piera-2-2.webp), 683×1024 px, 100156 byte; SHA-256 `f1cf0638818112a94a5157258927fee1ae6a6da49571a8d569ba8330b8ec09db` |
+| Conversione | Pillow 13.0.0, ridimensionamento Lanczos a lato lungo 1024 px, WebP qualità 80, metodo 4; nessun ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario; anche qui la forma del volto appare avvicinata al riferimento A. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for her facial expression. Keep everything else in image 1 exactly the same: the same woman and face shape, curly black hair in a messy bun with the pencil stuck in it, enormous black sweatshirt, black leggings, fluffy black slippers, the small glass of grappa, the dog at her feet, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only her facial expression, in both views: give her the serene, contented expression of image 2, with heavy half-closed eyelids, a slow content smile and cheeks and nose flushed red from wine. She must remain the woman of image 1, not become the woman of image 2.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions.
+~~~
