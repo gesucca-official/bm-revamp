@@ -25,9 +25,9 @@
 
 | Personaggio | Sagoma | Altezza | Colore proprio | Oggetto iconico | Stato |
 |---|---|---|---|---|---|
-| Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | Proprietario + varianti |
-| Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | Proprietario + varianti |
-| Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | Proprietario + varianti |
+| Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | Variante A scelta, ritocco in corso |
+| Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | Variante B scelta, ritocco in corso |
+| Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | Variante B scelta, ritocco in corso |
 | Celestina | *Proposta:* curva e storta, tutta angoli | Bassa | *Proposta:* verde bottiglia malaticcio | *Da decidere* | Da scrivere |
 | Beppe | *Proposta:* robusto e piantato, tuta da lavoro | Media | *Proposta:* blu petrolio da tuta da officina | Attrezzi che spuntano dalle tasche | Da scrivere |
 | Sergio | Alto e secco, stona con gli altri ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | *Proposta:* grigio e beige da ufficio | *Da decidere* | Da scrivere |
@@ -38,6 +38,10 @@ Le proposte per gli ultimi quattro servono solo a non far collidere sagome e col
 ## Spazienzio de la Ucciso
 
 **Idee del proprietario (10 novembre 2026):** calvo, enorme, perennemente a torso nudo, come lo immaginava già nel client debug.
+
+**Scelta del proprietario (11 novembre 2026):** variante A, «ma senza quelle cose che gli escono dal naso». Restano barba corta e ispida,
+pantaloni della tuta bordeaux sformati, calzini e ciabatte, tatuaggi venuti male (l'aquila che sembra un pollo). Ritocco nel
+[secondo giro](identikit-prompt.md#secondo-giro).
 
 *Varianti della regia, da provare:*
 
@@ -55,6 +59,10 @@ Le proposte per gli ultimi quattro servono solo a non far collidere sagome e col
 nomi né loghi); il casco da bici ricoperto di stagnola, sempre in mano e mai in testa, perché porta cuffie wireless che tiene sempre
 spente; mora, magra, dal volto scavato.
 
+**Scelta del proprietario (11 novembre 2026):** variante B, «ma con i capelli più lunghi e senza kebab in mano». Restano gilet
+catarifrangente verde acqua su felpa scura, zaino cubico, cuffie e casco di stagnola in mano. Ritocco nel
+[secondo giro](identikit-prompt.md#secondo-giro).
+
 *Varianti della regia, da provare:*
 
 - **Età apparente:** sui trent'anni.
@@ -69,6 +77,10 @@ spente; mora, magra, dal volto scavato.
 ## Piera Ultimo Giro
 
 **Idee del proprietario (10 novembre 2026):** molto grassa, sempre tutta vestita di nero, capelli corvini e ricci raccolti male in uno chignon.
+
+**Scelta del proprietario (11 novembre 2026):** variante B, «ma con la faccia serena della variante A». Restano felpa nera enorme,
+leggings e ciabatte nere col pelo, chignon con la matita, bicchierino e Grappino; il viso diventa quello sereno e contento di A. Ritocco
+nel [secondo giro](identikit-prompt.md#secondo-giro).
 
 *Varianti della regia, da provare:*
 
@@ -88,9 +100,9 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 
 | Personaggio | Variante | Anteprima | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|---|
-| Spazienzio | A | [Anteprima](identikit/prove/spazienzio-A-1.webp) | [Scheda](identikit/registro.md#spazienzio-a-1) | |
-| Spazienzio | B | [Anteprima](identikit/prove/spazienzio-B-1.webp) | [Scheda](identikit/registro.md#spazienzio-b-1) | |
-| Mara | A | [Anteprima](identikit/prove/mara-A-1.webp) | [Scheda](identikit/registro.md#mara-a-1) | |
-| Mara | B | [Anteprima](identikit/prove/mara-B-1.webp) | [Scheda](identikit/registro.md#mara-b-1) | |
-| Piera | A | [Anteprima](identikit/prove/piera-A-1.webp) | [Scheda](identikit/registro.md#piera-a-1) | |
-| Piera | B | [Anteprima](identikit/prove/piera-B-1.webp) | [Scheda](identikit/registro.md#piera-b-1) | |
+| Spazienzio | A | [Anteprima](identikit/prove/spazienzio-A-1.webp) | [Scheda](identikit/registro.md#spazienzio-a-1) | **Scelta** (11 novembre 2026), ma senza le cose che gli escono dal naso |
+| Spazienzio | B | [Anteprima](identikit/prove/spazienzio-B-1.webp) | [Scheda](identikit/registro.md#spazienzio-b-1) | Scartata |
+| Mara | A | [Anteprima](identikit/prove/mara-A-1.webp) | [Scheda](identikit/registro.md#mara-a-1) | Scartata |
+| Mara | B | [Anteprima](identikit/prove/mara-B-1.webp) | [Scheda](identikit/registro.md#mara-b-1) | **Scelta** (11 novembre 2026), ma con i capelli più lunghi e senza kebab in mano |
+| Piera | A | [Anteprima](identikit/prove/piera-A-1.webp) | [Scheda](identikit/registro.md#piera-a-1) | Scartata, ma se ne prende la faccia serena per la B |
+| Piera | B | [Anteprima](identikit/prove/piera-B-1.webp) | [Scheda](identikit/registro.md#piera-b-1) | **Scelta** (11 novembre 2026), ma con la faccia serena della variante A |

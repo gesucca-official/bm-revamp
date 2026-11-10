@@ -96,3 +96,50 @@ The character: a short, very fat woman in her late fifties, a regular at the bar
 
 Avoid: any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions, the humour is in her attitude; gold trim, neon, dominant yellow-and-black colours; other characters besides the dog; background scenery; game interface, cards or frames.
 ~~~
+
+## Secondo giro
+
+11 novembre 2026. Ritocchi delle varianti scelte dal proprietario ([esiti](identikit.md#esiti-delle-prove)), con le sue parole:
+Spazienzio A «ma senza quelle cose che gli escono dal naso»; Mara B «ma con i capelli più lunghi e senza kebab in mano»; Piera B «ma con la
+faccia serena della variante A».
+
+### Istruzioni
+
+- **Modifica guidata, non nuova generazione:** si allega l'originale PNG della variante scelta e si chiede di cambiare solo ciò che il
+  proprietario ha indicato, così volto e figura restano gli stessi. Gli originali sono in `docs/design/set-base/identikit/prove/`,
+  ignorati da git; prima di allegarli si controlla l'impronta.
+- **Generare solo dopo il commit di questo testo;** vale il resto delle [istruzioni del primo giro](#istruzioni-al-proprietario).
+- **Nomi:** `<personaggio>-2-<n>.png` per gli originali e `.webp` per le anteprime, nella stessa cartella; una scheda per tentativo nel
+  [registro](identikit/registro.md), con modalità «modifica guidata dal riferimento».
+- **Nuovo tentativo:** uno solo, con lo stesso prompt, se il risultato cambia altro oltre a quanto richiesto o non applica la modifica.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| Spazienzio | `prove/spazienzio-A-1.png` | c527513e1339737b69e15175866187bd39630d2299aff290e87bfef06302d834 |
+| Mara | `prove/mara-B-1.png` | 435ee12b23849ce4143afffd391776c30594f41403100e92452eb1af0014dc5f |
+| Piera, immagine 1 | `prove/piera-B-1.png` | 6a8d19c8faae21fd395739aa5c2755a40e14d38fd451ab4b801185291031b5e2 |
+| Piera, immagine 2 | `prove/piera-A-1.png` | f50cf52de15533e94b39324a75cc1997babdb6f39a35810a0c62249d841184a0 |
+
+### Spazienzio — variante A senza niente dal naso
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same man, face, beard, body, tattoos, oxblood tracksuit trousers, socks and slippers, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this, in both views: remove the white lines, steam or drips coming out of his nose. His face stays red with anger and his jaw pushed forward, but nothing comes out of his nose.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Mara — variante B con i capelli più lunghi e senza kebab
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same woman, gaunt face, staring eyes and dark circles, over-ear headphones, teal reflective vest over the dark hoodie, cube-shaped teal insulated delivery backpack, dark cycling trousers and worn-out sneakers, the foil-covered bicycle helmet in her hand, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only two things, consistently in both views: first, her black hair is longer, falling messy and uneven just past her shoulders, still with the badly self-cut uneven fringe; second, she no longer holds the kebab, and that hand is empty, with tense, restless fingers.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Piera — variante B con la faccia serena della A
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for her facial expression. Keep everything else in image 1 exactly the same: the same woman and face shape, curly black hair in a messy bun with the pencil stuck in it, enormous black sweatshirt, black leggings, fluffy black slippers, the small glass of grappa, the dog at her feet, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only her facial expression, in both views: give her the serene, contented expression of image 2, with heavy half-closed eyelids, a slow content smile and cheeks and nose flushed red from wine. She must remain the woman of image 1, not become the woman of image 2.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions.
+~~~
