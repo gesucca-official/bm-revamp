@@ -82,5 +82,7 @@ spente; mora, magra, dal volto scavato.
 
 ## Esiti delle prove
 
+Il 10 novembre 2026 il proprietario ha chiesto alla regia «un prompt da dare a un'esecutore per fargli generare tutte le prove di immagine e salvarle dove devono stare, collegate agli identikit». Per queste prove vale l'opzione (b) di D11: generazione da una sessione con uno strumento integrato, invece della (a) usata per lo sfondo. Restano il prompt letterale committato prima di generare, il registro completo e il divieto di riferimenti esterni al progetto.
+
 Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, quale variante si tiene. Le immagini di prova restano fuori
 da git finché non se ne sceglie una; nel registro vanno strumento, modello, data e prompt usato, come per lo sfondo (D11 del piano C4).
