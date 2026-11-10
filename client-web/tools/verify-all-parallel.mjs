@@ -1,4 +1,4 @@
-// C4-1c (phase A prototype): parallel mode of verify-all.mjs, only with --parallel=N. Tooling only: no game effect, no check changed.
+// C4-1c: parallel mode of verify-all.mjs, only with --parallel=N. Tooling only: no game effect, no check changed.
 // Every job runs on its own slot: its own temporary server on its own port (BM_SERVER_PORT), its own preview of the same
 // dist on its own port (BM_PORT, proxying to that server through BM_SERVER), its own evidence folder (BM_OUT). Every script is
 // launched unchanged; only ports and folders differ. Verifications that measure frames or input (--solo, by default aim and
@@ -21,7 +21,10 @@ const ESTIMATE={'verify+modes':205,lifecycle:165,decks:40,public:11,profile:48,f
 
 export async function scenariosOf(web,name){
   const src=await readFile(join(web,'tools',SCRIPTS[name]),'utf8');
-  return [...new Set([...src.matchAll(/\brun\('([A-Za-z]+)'\)/g)].map(m=>m[1]))];
+  const calls=[...src.matchAll(/\brun\(\s*(['"])([^'"]+)\1\s*\)/g)].map(m=>m[2]);
+  if(!calls.length||new Set(calls).size!==calls.length||calls.some(n=>!/^[A-Za-z0-9_-]+$/.test(n)))throw new Error(`${name}: missing, duplicate or invalid scenario names`);
+  if([...src.matchAll(/\brun\s*\(/g)].length!==calls.length)throw new Error(`${name}: scenario calls must have literal names; refusing incomplete discovery`);
+  return calls;
 }
 
 // Merge of the parts of one split verification at one measure, in the shape of a whole run: objects of the evidence are joined
@@ -60,7 +63,7 @@ export function mergeParts(name,parts){
 }
 
 export async function runParallel(ctx){
-  const {N,solo,split,measures,quick,want,QUICK_SCENARIOS,evidence,logs,web,node,say,run,results,warnings,scanVacuous,serverUp,serverDown,children,killTree,portBusy,waitFree,sleep}=ctx;
+  const {N,solo,split,measures,measuresFor,allMeasures,partTimeoutMin,quick,want,QUICK_SCENARIOS,evidence,logs,web,node,say,run,results,warnings,scanVacuous,serverUp,serverDown,children,killTree,portBusy,waitFree,sleep}=ctx;
   const SERVER_BASE=Number(process.env.BM_PARALLEL_SERVER_BASE??18080),CLIENT_BASE=Number(process.env.BM_PARALLEL_CLIENT_BASE??14320);
   const slots=[...Array(N).keys()].map(i=>({i,server:SERVER_BASE+i,client:CLIENT_BASE+i,preview:null}));
   for(const s of slots)for(const p of [s.server,s.client])if(await portBusy(p))throw new Error(`port ${p} (slot ${s.i}) is in use (not mine, not stopping it)`);
@@ -77,8 +80,8 @@ export async function runParallel(ctx){
     // ---- jobs ----
     const jobs=[];
     if(want('verify')||want('modes'))jobs.push({key:'verify+modes',kind:'shared'});
-    for(const m of measures)for(const n of ['lifecycle','ffa','decks','public','profile','resolution','aim','layout']){
-      if(!want(n)||solo.includes(n))continue;
+    for(const m of allMeasures)for(const n of ['lifecycle','ffa','decks','public','profile','resolution','aim','layout']){
+      if(!want(n)||solo.includes(n)||!measuresFor(n).includes(m))continue;
       const quickSet=quick&&QUICK_SCENARIOS[n]?QUICK_SCENARIOS[n].split(','):null;
       if(split.includes(n)){for(const sc of quickSet??await scenariosOf(web,n))jobs.push({key:`${n}:${sc}`,name:n,measure:m,scenario:sc,kind:'part'});}
       else jobs.push({key:n,name:n,measure:m,kind:'own',scenarios:quickSet?.join(',')});
@@ -93,8 +96,8 @@ export async function runParallel(ctx){
       if(!await waitFree(s.server,30000)){say(`✘ ${tag}: port ${s.server} not free`);results.push({name:job.name??'verify',measure:job.measure??'—',ok:false,seconds:0,exit:-1,problems:0,slot:s.i});return;}
       if(job.kind==='shared'){
         const srv=await serverUp(s.server);say(`slot ${s.i}: shared server up on ${s.server}`);
-        try{for(const m of measures)for(const [n,f] of [['verify','verify.mjs'],['modes','verify-modes.mjs']]){
-          if(!want(n))continue;const st=Date.now();say(`▶ ${n}-${m} (slot ${s.i})`);
+        try{for(const m of allMeasures)for(const [n,f] of [['verify','verify.mjs'],['modes','verify-modes.mjs']]){
+          if(!want(n)||!measuresFor(n).includes(m))continue;const st=Date.now();say(`▶ ${n}-${m} (slot ${s.i})`);
           const r=await run(node,[`tools/${f}`],{env:{...env,BM_VIEWPORT:m},log:`${n}-${m}.log`});
           const row={name:n,measure:m,ok:r.code===0,seconds:Math.round((Date.now()-st)/1000),exit:r.code,problems:(r.out.match(/^PROBLEM /gm)||[]).length,slot:s.i,startedAt:Math.round((st-t0)/1000)};
           results.push(row);say(`${row.ok?'✔':'✘'} ${n}-${m} (${row.seconds} s, slot ${s.i})`);}}
@@ -103,14 +106,15 @@ export async function runParallel(ctx){
       }
       const e={...env,BM_VIEWPORT:job.measure};if(job.scenario)e.BM_SCENARIOS=job.scenario;else if(job.scenarios)e.BM_SCENARIOS=job.scenarios;
       const st=Date.now();say(`▶ ${tag} (slot ${s.i})`);
-      const r=await run(node,[`tools/${SCRIPTS[job.name]}`],{env:e,log:`${tag}.log`});
+      const r=await run(node,[`tools/${SCRIPTS[job.name]}`],{env:e,log:`${tag}.log`,...(job.kind==='part'?{timeoutMin:partTimeoutMin,serverPort:s.server}:{})});
       const secs=Math.round((Date.now()-st)/1000);
-      if(job.kind==='part'){(partsDone[`${job.name}@${job.measure}`]??=[]).push({scenario:job.scenario,out,code:r.code,seconds:secs,problems:(r.out.match(/^PROBLEM /gm)||[]).length,slot:s.i,startedAt:Math.round((st-t0)/1000)});say(`${r.code===0?'✔':'✘'} ${tag} (${secs} s, slot ${s.i})`);return;}
+      if(job.kind==='part'){(partsDone[`${job.name}@${job.measure}`]??=[]).push({scenario:job.scenario,out,code:r.code,timedOut:r.timedOut,cleanupError:r.cleanupError,seconds:secs,problems:(r.out.match(/^PROBLEM /gm)||[]).length,slot:s.i,startedAt:Math.round((st-t0)/1000)});say(`${r.code===0?'✔':'✘'} ${tag} (${secs} s, slot ${s.i})`);return;}
       const row={name:job.name,measure:job.measure,ok:r.code===0,seconds:secs,exit:r.code,problems:(r.out.match(/^PROBLEM /gm)||[]).length,slot:s.i,startedAt:Math.round((st-t0)/1000)};
       results.push(row);say(`${row.ok?'✔':'✘'} ${tag} (${secs} s, slot ${s.i})`);
     };
     const queue=[...jobs];
-    await Promise.all(slots.map(async s=>{while(queue.length){const job=queue.shift();await runOn(job,s);}}));
+    const workers=await Promise.allSettled(slots.map(async s=>{while(queue.length){const job=queue.shift();await runOn(job,s);}}));
+    for(const r of workers)if(r.status==='rejected')throw r.reason;
     const poolSeconds=Math.round((Date.now()-t0)/1000);say(`pool done in ${poolSeconds} s`);
 
     // ---- solo phase: nothing else runs (frames and input are measured): the other slots' previews are stopped and the machine
@@ -118,7 +122,7 @@ export async function runParallel(ctx){
     for(const s of slots.slice(1))killTree(s.preview);
     await sleep(Number(process.env.BM_SOLO_SETTLE_S??15)*1000);
     const t1=Date.now();
-    for(const m of measures)for(const n of solo){if(!want(n))continue;const e=quick&&QUICK_SCENARIOS[n]?{scenarios:QUICK_SCENARIOS[n]}:{};await runOn({key:n,name:n,measure:m,kind:'own',...e},slots[0]);}
+    for(const m of allMeasures)for(const n of solo){if(!want(n)||!measuresFor(n).includes(m))continue;const e=quick&&QUICK_SCENARIOS[n]?{scenarios:QUICK_SCENARIOS[n]}:{};await runOn({key:n,name:n,measure:m,kind:'own',...e},slots[0]);}
     const soloSeconds=Math.round((Date.now()-t1)/1000);
 
     // ---- collect: whole jobs copied as they are, split jobs merged; screens into one folder ----
@@ -139,11 +143,14 @@ export async function runParallel(ctx){
         loaded.push({scenario:p.scenario,json,seconds:p.seconds});
         await mkdir(join(evidence,'parts'),{recursive:true});await writeFile(join(evidence,'parts',`${EVIDENCE_NAME[name]}-${measure}.${p.scenario}.json`),JSON.stringify(json,null,1));}
       const merged=mergeParts(name,loaded);
+      const expected=jobs.filter(j=>j.kind==='part'&&j.name===name&&j.measure===measure).map(j=>j.scenario);
+      const missing=expected.filter(sc=>!parts.some(p=>p.scenario===sc));
+      if(missing.length){merged.ok=false;merged.failure=`missing parts: ${missing.join(', ')}\n${merged.failure??''}`;}
       await writeFile(join(evidence,file),JSON.stringify(merged,null,1));
       const start=Math.min(...parts.map(p=>p.startedAt)),end=Math.max(...parts.map(p=>p.startedAt+p.seconds));
-      results.push({name,measure,ok:merged.ok,seconds:parts.reduce((s,p)=>s+p.seconds,0),exit:merged.ok?0:1,problems:parts.reduce((s,p)=>s+p.problems,0),split:parts.map(p=>({scenario:p.scenario,ok:p.code===0,seconds:p.seconds,slot:p.slot,startedAt:p.startedAt})),spanSeconds:end-start});
+      results.push({name,measure,ok:merged.ok,seconds:parts.reduce((s,p)=>s+p.seconds,0),exit:merged.ok?0:1,problems:parts.reduce((s,p)=>s+p.problems,0),split:parts.map(p=>({scenario:p.scenario,ok:p.code===0,exit:p.code,timedOut:p.timedOut,cleanupError:p.cleanupError,seconds:p.seconds,slot:p.slot,startedAt:p.startedAt})),spanSeconds:end-start});
     }
     for(const r of results)if(r.measure!=='—')await scanVacuous(r.name,r.measure);
-    return {slots:N,solo,split,poolSeconds,soloSeconds,ports:slots.map(s=>({server:s.server,client:s.client}))};
+    return {slots:N,solo,split,partTimeoutMin,poolSeconds,soloSeconds,ports:slots.map(s=>({server:s.server,client:s.client}))};
   }finally{for(const p of previews)killTree(p);}
 }

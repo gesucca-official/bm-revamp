@@ -1,0 +1,11 @@
+fixture server PID 45936
+
+[verify-all] timeout after 0.5 min; no retry
+
+[verify-all] verified server PID 45936, created 2026-11-10T15:09:49.0105470Z, command: E:\bm\.tools\zulu11.84.17-ca-jdk11.0.29-win_x64\bin\java.exe -jar target/bm-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=local --app.dev.seed-accounts=true --server.port=18080
+
+[verify-all] stopping owned PID 45936: E:\bm\.tools\zulu11.84.17-ca-jdk11.0.29-win_x64\bin\java.exe -jar target/bm-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=local --app.dev.seed-accounts=true --server.port=18080
+
+[verify-all] stopping owned PID 692: E:\bm\.tools\client-c0\node-v24.13.0-win-x64\node.exe tools/verify-ffa.mjs
+
+[verify-all] all recorded owned processes stopped

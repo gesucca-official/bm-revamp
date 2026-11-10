@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "ok": true,
+      "log": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-1c-b/client-test.log",
+      "seconds": 5,
+      "name": "client-test"
+    },
+    {
+      "ok": true,
+      "log": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-1c-b/repository-test.log",
+      "seconds": 92,
+      "name": "repository-test"
+    },
+    {
+      "ok": true,
+      "log": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-1c-b/rules.log",
+      "seconds": 0,
+      "name": "rules"
+    },
+    {
+      "ok": true,
+      "log": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-1c-b/server-context.log",
+      "seconds": 471,
+      "name": "server-context"
+    },
+    {
+      "ok": true,
+      "log": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-1c-b/match-manifests.log",
+      "seconds": 0,
+      "name": "match-manifests"
+    }
+  ],
+  "counts": {
+    "client": {
+      "tests": 307,
+      "pass": 307,
+      "fail": 0
+    },
+    "serverUnit": {
+      "tests": 655,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 7
+    },
+    "clientDebug": {
+      "tests": 37,
+      "pass": 37
+    },
+    "serverContextSeparate": {
+      "tests": 765,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 7
+    }
+  },
+  "diffCheck": "PASS",
+  "scopeCheck": "only authorized tooling and documents",
+  "portsAfter": "8080,4320,18080-18087,14320-14327 free; no Java process",
+  "alignment": {
+    "fetched": "6482e27",
+    "rebase": "completed without conflicts; upstream documentation preserved",
+    "choiceCommit": "e96d166"
+  },
+  "notVerified": [
+    "second full N4 and variability, explicitly skipped by owner",
+    "other machine and N=2",
+    "real N=6 (optional)",
+    "066aa07 reruns on this machine: no cadence red, conditional not triggered",
+    "iPhone/Safari"
+  ]
+}

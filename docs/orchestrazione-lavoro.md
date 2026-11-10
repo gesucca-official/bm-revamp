@@ -96,8 +96,12 @@ Controllare nel repository, non fidarsi del riassunto:
   ricostruisce); tra apici in PowerShell, altrimenti 0/0 verde. Da bash: `powershell -NoProfile -File client-web/run.ps1 ...`.
   Opzioni: `-Quick` (scenari ridotti, non equivale al consolidamento), `-Measures 750x292`, `-ReuseJar`, `-Publish <dir>`. `BM_SCENARIOS` filtra anche layout e aim: usarlo solo per `resolution`.
 - Node di client-web: `.tools/client-c0/node-v24.13.0-win-x64/node.exe`; il vecchio node 12 fallisce con errori di sintassi.
-- **Mai due verifiche insieme** (porte 8080 e 4320, account già collegato altrove). Prima di ogni lancio: nessun processo Maven/Java esterno e porte
-  libere. Le sessioni del Set Base lanciano Maven sulla stessa macchina: una finestra di verifica alla volta, le altre in pausa. Non fermare processi altrui.
+- **Una sola `VerifyAll` per macchina** (blocco in `%TEMP%`), con al più `-Parallel 4` per il consolidamento: ogni esecuzione ha
+  server, database, anteprima e cartella propri (porte 18080+i e 14320+i). `VerifyAim` e `VerifyLayout` misurano frame e input:
+  girano da sole, alla fine, dopo 15 s di quiete. Fuori da `VerifyAll`, mai due verifiche insieme (porte 8080 e 4320, account).
+  Un rosso del parallelo si rilancia da solo prima di attribuirlo; nessun rilancio automatico. Maven e `VerifyAll` non insieme
+  sulla stessa macchina (anche fra sessioni Set Base e C4: il carico falsa i tempi). N>4 è dichiarato non equivalente e non pubblica.
+  Sull'altra macchina le opzioni restano facoltative; prima del parallelo un giro di prova a N=2. Non fermare processi altrui.
 - Rifare il jar prima (`./scripts/build.ps1 -Task Server -Offline`). `Size` scrive nel file tracciato `docs/reports/client-c2/size.json`:
   usare `BM_OUT`. Le verifiche scrivono in `%TEMP%\bm-verify-all-*`: copiare le evidenze prima del giro successivo. Se `run.ps1` esce con 1, leggere `run-summary.json`.
 - 750×292 è variabile: confrontare sempre con il commit di base prima di dire che qualcosa è peggiorato.

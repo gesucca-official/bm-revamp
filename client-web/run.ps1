@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','VerifyLayout','VerifyOutcomeAudio','VerifyAll','Size','Atlas')][string]$Task='Build',[switch]$Offline,[switch]$Quick,[switch]$ReuseJar,[switch]$ReuseClient,[string]$Measures,[string]$Only,[string]$Publish,[int]$Parallel=0,[string]$Split,[string]$Solo)
+param([ValidateSet('Install','Test','Build','Dev','Serve','Physical','Verify','VerifyModes','VerifyLifecycle','VerifyFfa','VerifyDecks','VerifyPublic','VerifyProfile','VerifyResolution','VerifyAim','VerifyLayout','VerifyOutcomeAudio','VerifyAll','Size','Atlas')][string]$Task='Build',[switch]$Offline,[switch]$Quick,[switch]$ReuseJar,[switch]$ReuseClient,[string]$Measures,[string]$Only,[string]$Publish,[ValidateRange(0,8)][int]$Parallel=0,[string]$Split,[string]$Solo)
 $ErrorActionPreference='Stop'
 $repo=Split-Path $PSScriptRoot -Parent
 # Same isolated Node runtime as C0 (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
@@ -40,7 +40,8 @@ try {
     # C4-1 (O23): whole verification in one launch, in series, on a rebuilt jar; see README «Lancio unico».
     # -Quick: reduced scenarios, one measure, NOT equivalent to the consolidation. -ReuseJar / -ReuseClient: declared, not rebuilt/not mine.
     # -Measures 1366x768,844x390  -Only verify,modes,...  -Publish docs/reports/<dir> (copies evidence only after a complete green run).
-    # C4-1c (phase A prototype): -Parallel N [-Split resolution,ffa] [-Solo aim,layout]; without -Parallel nothing changes.
+    # C4-1c: -Parallel 4 -Split 'resolution,ffa' [-Solo 'aim,layout']; N>4 is declared, never published.
+    # Default includes 1920x1080 for Verify and VerifyLayout only. Split parts time out after 15 min (BM_PART_TIMEOUT_MIN).
     'VerifyAll' {$a=@();if($Quick){$a+='--quick'};if($ReuseJar){$a+='--reuse-jar'};if($ReuseClient){$a+='--reuse-client'};if($Measures){$a+="--measures=$Measures"};if($Only){$a+="--only=$Only"};if($Publish){$a+="--publish=$Publish"};if($Parallel -gt 0){$a+="--parallel=$Parallel"};if($Split){$a+="--split=$Split"};if($Solo){$a+="--solo=$Solo"};& npm run verify:all -- @a}
     'Size' {& npm run size}
     'Atlas' {& npm run atlas}

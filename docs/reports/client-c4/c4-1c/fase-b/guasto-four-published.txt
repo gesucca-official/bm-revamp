@@ -1,0 +1,92 @@
+[15:11:06] jar: rebuilding from source (scripts/build.ps1 -Task Server -Offline) …
+[15:11:06] build verified: HEAD , jar 2026-11-10T14:13:11.218Z (2a689da0b1e783b4) rebuilt
+[15:11:06] ▶ test
+[15:11:07] ✔ test (0 s)
+[15:11:07] ▶ build
+[15:11:07] ✔ build (0 s)
+[15:11:07] ▶ size
+[15:11:07] ✔ size (0 s)
+[15:11:07] dist verified: 1 files, sha256 abdc5df618e4350a
+[15:11:07] parallel: 4 slots, servers 18080,18081,18082,18083, previews 14320,14321,14322,14323 (same dist)
+[15:11:07] ▶ lifecycle-1366x768 (slot 1)
+[15:11:07] ▶ lifecycle-844x390 (slot 2)
+[15:11:07] ▶ ffa-1366x768.one (slot 3)
+[15:11:07] ✔ lifecycle-1366x768 (0 s, slot 1)
+[15:11:07] ▶ resolution-1366x768.one (slot 1)
+[15:11:07] ✔ lifecycle-844x390 (0 s, slot 2)
+[15:11:07] ▶ ffa-844x390.one (slot 2)
+[15:11:09] ✔ ffa-1366x768.one (1 s, slot 3)
+[15:11:09] ▶ resolution-844x390.one (slot 3)
+[15:11:09] ✔ ffa-844x390.one (1 s, slot 2)
+[15:11:09] ✔ resolution-1366x768.one (1 s, slot 1)
+[15:11:09] ▶ profile-1366x768 (slot 2)
+[15:11:09] ▶ profile-844x390 (slot 1)
+[15:11:09] ✔ profile-1366x768 (0 s, slot 2)
+[15:11:09] ✔ profile-844x390 (0 s, slot 1)
+[15:11:09] ▶ decks-1366x768 (slot 2)
+[15:11:09] ▶ decks-844x390 (slot 1)
+[15:11:09] ✔ decks-1366x768 (0 s, slot 2)
+[15:11:09] ▶ public-1366x768 (slot 2)
+[15:11:09] ✔ decks-844x390 (0 s, slot 1)
+[15:11:09] ▶ public-844x390 (slot 1)
+[15:11:09] ✔ public-1366x768 (0 s, slot 2)
+[15:11:09] ✔ public-844x390 (0 s, slot 1)
+[15:11:10] ✔ resolution-844x390.one (1 s, slot 3)
+[15:11:15] slot 0: shared server up on 18080
+[15:11:15] ▶ verify-1366x768 (slot 0)
+[15:11:15] ✔ verify-1366x768 (0 s, slot 0)
+[15:11:15] ▶ modes-1366x768 (slot 0)
+[15:11:15] ✔ modes-1366x768 (0 s, slot 0)
+[15:11:15] ▶ verify-844x390 (slot 0)
+[15:11:15] ✔ verify-844x390 (0 s, slot 0)
+[15:11:15] ▶ modes-844x390 (slot 0)
+[15:11:16] ✔ modes-844x390 (0 s, slot 0)
+[15:11:16] ▶ verify-1920x1080 (slot 0)
+[15:11:16] ✔ verify-1920x1080 (0 s, slot 0)
+[15:11:16] pool done in 9 s
+[15:11:32] ▶ aim-1366x768 (slot 0)
+[15:11:32] ✔ aim-1366x768 (0 s, slot 0)
+[15:11:32] ▶ layout-1366x768 (slot 0)
+[15:11:32] ✔ layout-1366x768 (0 s, slot 0)
+[15:11:32] ▶ aim-844x390 (slot 0)
+[15:11:32] ✔ aim-844x390 (0 s, slot 0)
+[15:11:32] ▶ layout-844x390 (slot 0)
+[15:11:32] ✔ layout-844x390 (0 s, slot 0)
+[15:11:32] ▶ layout-1920x1080 (slot 0)
+[15:11:32] ✔ layout-1920x1080 (0 s, slot 0)
+
+build: HEAD  · jar 2026-11-10T14:13:11.218Z 2a689da0b1e783b4 (rebuilt)
+
+verification  measure    result  duration
+test          —          OK      0 s
+build         —          OK      0 s
+size          —          OK      0 s
+lifecycle     1366x768   OK      0 s
+lifecycle     844x390    OK      0 s
+profile       1366x768   OK      0 s
+profile       844x390    OK      0 s
+decks         1366x768   OK      0 s
+decks         844x390    OK      0 s
+public        1366x768   OK      0 s
+public        844x390    OK      0 s
+verify        1366x768   OK      0 s
+modes         1366x768   OK      0 s
+verify        844x390    OK      0 s
+modes         844x390    OK      0 s
+verify        1920x1080  OK      0 s
+aim           1366x768   OK      0 s
+layout        1366x768   OK      0 s
+aim           844x390    OK      0 s
+layout        844x390    OK      0 s
+layout        1920x1080  OK      0 s
+ffa           1366x768   OK      1 s
+ffa           844x390    OK      1 s
+resolution    1366x768   OK      1 s
+resolution    844x390    OK      1 s
+
+PARALLEL (4 slots; solo: aim,layout; split: resolution,ffa): wall clock 27 s, pool 9 s, solo phase 0 s; durations below are per job (split: sum of the parts), not wall clock
+
+total 4 s · 25/25 green
+[15:11:32] capture recompression unavailable (Cannot find package '@playwright/test' imported from C:\Users\gesucca\AppData\Local\Temp\bm-c4-1c-faults-MG1S2Q\client-web\tools\verify-all.mjs); copying originals within the budget
+[15:11:32] captures: 0 of 0 kept (0.0 MB, budget about 10 MB); the rest stays in C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-11-06-186Z-fTUUMk\evidence\screens
+[15:11:32] evidence published to C:\Users\gesucca\AppData\Local\Temp\bm-c4-1c-faults-MG1S2Q\published

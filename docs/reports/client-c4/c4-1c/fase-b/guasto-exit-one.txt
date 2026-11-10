@@ -1,0 +1,23 @@
+[15:09:30] jar: REUSED, not rebuilt (declared)
+[15:09:30] build verified: HEAD , jar 2026-11-10T14:13:11.218Z (2a689da0b1e783b4) REUSED
+[15:09:30] *** DECLARED MEASURES (1366x768): override for the selected verifications, NOT equivalent to the consolidation; nothing is published. ***
+[15:09:30] dist verified: 1 files, sha256 abdc5df618e4350a
+[15:09:31] parallel: 1 slots, servers 18080, previews 14320 (same dist)
+[15:09:31] ▶ ffa-1366x768.one (slot 0)
+[15:09:32] ✘ ffa-1366x768.one (1 s, slot 0)
+[15:09:32] pool done in 1 s
+
+build: HEAD  · jar 2026-11-10T14:13:11.218Z 2a689da0b1e783b4 (REUSED)
+
+verification  measure    result  duration
+ffa           1366x768   FAIL    1 s
+
+PARALLEL (1 slots; solo: aim,layout; split: ffa): wall clock 18 s, pool 1 s, solo phase 0 s; durations below are per job (split: sum of the parts), not wall clock
+
+total 1 s · 0/1 green · FAILED: ffa 1366x768
+
+WARNINGS (no threshold or expectation was changed):
+ - ffa-1366x768.json: evidence says ok=false
+
+evidence (temporary, not tracked): C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-09-30-499Z-QjeyuM\evidence
+logs: C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-09-30-499Z-QjeyuM\logs

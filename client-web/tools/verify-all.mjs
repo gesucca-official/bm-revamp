@@ -10,6 +10,7 @@ import {createConnection} from 'node:net';
 import {tmpdir} from 'node:os';
 import {dirname,join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {stopJob} from './verify-processes.mjs';
 
 const here=dirname(fileURLToPath(import.meta.url)),web=resolve(here,'..'),repo=resolve(web,'..');
 const args=process.argv.slice(2);
@@ -18,9 +19,18 @@ const opt=(n,d)=>{const a=args.find(x=>x.startsWith(`--${n}=`));return a?a.slice
 const quick=flag('quick'),reuseJar=flag('reuse-jar'),reuseClient=flag('reuse-client');
 const measures=(opt('measures',quick?'1366x768':'1366x768,844x390')).split(',').filter(Boolean);
 const only=opt('only','')?.split(',').filter(Boolean);
+const explicitMeasures=args.some(a=>a.startsWith('--measures='));
+const measuresFor=n=>!quick&&!explicitMeasures&&['verify','layout'].includes(n)?[...measures,'1920x1080']:measures;
+const allMeasures=[...new Set([...measures,...measuresFor('verify')])];
 const publish=opt('publish','');
-// C4-1c (phase A prototype, verify-all-parallel.mjs): only with --parallel=N; without it nothing below changes.
-const parallel=Number(opt('parallel','0'))||0,solo=opt('solo','aim,layout').split(',').filter(Boolean),split=opt('split','').split(',').filter(Boolean);
+// C4-1c: serial by default; isolated parallel jobs only with --parallel=N.
+const parallel=Number(opt('parallel','0')),solo=opt('solo','aim,layout').split(',').filter(Boolean),split=opt('split','').split(',').filter(Boolean);
+if(!Number.isInteger(parallel)||parallel<0||parallel>8){console.error('ERROR: --parallel must be an integer from 1 to 8 (official: at most 4).');process.exit(2);}
+if(solo.some(n=>!['aim','layout','ffa','resolution','lifecycle','decks','public','profile'].includes(n))||split.some(n=>!['resolution','ffa'].includes(n))){console.error('ERROR: unknown --solo or --split verification.');process.exit(2);}
+const partTimeoutMin=Number(process.env.BM_PART_TIMEOUT_MIN??15);
+if(!Number.isFinite(partTimeoutMin)||partTimeoutMin<=0)throw new Error('BM_PART_TIMEOUT_MIN must be positive');
+const names=['test','build','size','verify','modes','lifecycle','ffa','decks','public','profile','resolution','aim','layout'];
+if(only.some(n=>!names.includes(n))||!measures.length||measures.some(m=>!/^\d+x\d+$/.test(m))||new Set(measures).size!==measures.length){console.error('ERROR: unknown verification, invalid or duplicate measure.');process.exit(2);}
 if(!parallel&&args.some(a=>a.startsWith('--solo=')||a.startsWith('--split='))){console.log('ERROR: --solo and --split need --parallel=N.');process.exit(2);}
 const stepTimeoutMin=Number(process.env.BM_STEP_TIMEOUT_MIN??120);
 const SERVER_PORT=8080,CLIENT_PORT=4320;
@@ -45,13 +55,19 @@ async function waitFree(port,ms=30000){const end=Date.now()+ms;while(Date.now()<
 process.on('SIGINT',()=>{for(const c of children)killTree(c);process.exit(130);});
 
 // Runs a command with output to a log file; resolves {code,out}. Never throws on a non-zero exit.
-function run(cmd,cmdArgs,{cwd=web,env={},log,shell=false,timeoutMin=stepTimeoutMin}={}){
+function run(cmd,cmdArgs,{cwd=web,env={},log,shell=false,timeoutMin=stepTimeoutMin,serverPort}={}){
   return new Promise(res=>{
-    const file=createWriteStream(join(logs,log),{flags:'a'});let out='';
+    const file=createWriteStream(join(logs,log),{flags:'a'});let out='',timedOut=false,cleanup=null;const launchedAt=Date.now();
     const p=spawn(cmd,cmdArgs,{cwd,env:{...process.env,...env},shell,stdio:['ignore','pipe','pipe']});children.add(p);
     const grab=d=>{file.write(d);out=(out+d).slice(-200000);};p.stdout.on('data',grab);p.stderr.on('data',grab);
-    const t=setTimeout(()=>{file.write(`\n[verify-all] timeout after ${timeoutMin} min\n`);killTree(p);},timeoutMin*60000);
-    p.on('exit',code=>{clearTimeout(t);children.delete(p);file.end();res({code:code??1,out});});
+    const clean=()=>cleanup??=(async()=>{
+      if(serverPort)await stopJob(p.pid,serverPort,launchedAt,[cmd,...cmdArgs],m=>grab(`\n[verify-all] ${m}\n`));
+      else killTree(p);
+    })();
+    const t=setTimeout(()=>{timedOut=true;grab(`\n[verify-all] timeout after ${timeoutMin} min; no retry\n`);clean().catch(e=>{grab(`\n[verify-all] cleanup failed: ${e.message}\n`);killTree(p);});},timeoutMin*60000);
+    p.on('close',async code=>{if(!p.pid)return;clearTimeout(t);let cleanupError=null;
+      if(serverPort)try{await clean();if(!await waitFree(serverPort,10000))throw new Error(`port ${serverPort} still occupied after job cleanup`);}catch(e){cleanupError=e.message;grab(`\n[verify-all] cleanup failed: ${cleanupError}\n`);}
+      children.delete(p);file.end();res({code:timedOut?124:cleanupError?1:code??1,out,timedOut,cleanupError});});
     p.on('error',e=>{clearTimeout(t);children.delete(p);file.end();res({code:1,out:String(e)});});
   });
 }
@@ -59,14 +75,26 @@ function run(cmd,cmdArgs,{cwd=web,env={},log,shell=false,timeoutMin=stepTimeoutM
 // Self-test of the publication rules only (no verification is run): BM_PUBLISH_SELFTEST=<evidence folder> with --publish=<dir>.
 if(process.env.BM_PUBLISH_SELFTEST&&publish){await publishEvidence(resolve(repo,publish),process.env.BM_PUBLISH_SELFTEST);process.exit(0);}
 // ---- preconditions ----
-// One run at a time: a lock file naming the pid; a lock whose process is gone is stale and replaced.
+// One run at a time. FileShare.None serializes check + write, including stale
+// locks: simultaneous starters cannot mistake a partially written PID for stale.
 const lockPath=join(tmpdir(),'bm-verify-all.lock');
-if(existsSync(lockPath)){
-  const other=Number((await readFile(lockPath,'utf8').catch(()=>''))||0);
-  let alive=false;if(other){try{process.kill(other,0);alive=true;}catch{}}
-  if(alive){say(`ERROR: another VerifyAll is running (pid ${other}). Not starting a second one.`);process.exit(2);}
-}
-await writeFile(lockPath,String(process.pid));
+try{execFileSync('powershell',['-NoProfile','-Command',`
+$ErrorActionPreference='Stop'
+try { $stream=[IO.File]::Open($env:BM_VERIFY_LOCK_PATH,'OpenOrCreate','ReadWrite','None') }
+catch [IO.IOException] { Write-Output 'another VerifyAll is acquiring its lock'; exit 2 }
+try {
+  $reader=[IO.StreamReader]::new($stream,[Text.Encoding]::UTF8,$true,1024,$true)
+  $ownerText=$reader.ReadToEnd(); $reader.Dispose(); $other=0
+  if ([int]::TryParse($ownerText,[ref]$other) -and $other -gt 0) {
+    $alive=$false
+    try { $owner=[Diagnostics.Process]::GetProcessById($other); $alive=!$owner.HasExited; $owner.Dispose() } catch [ArgumentException] {}
+    if ($alive) { Write-Output "another VerifyAll is running (pid $other)"; exit 2 }
+  }
+  $bytes=[Text.Encoding]::UTF8.GetBytes($env:BM_VERIFY_OWNER_PID)
+  $stream.SetLength(0); $stream.Write($bytes,0,$bytes.Length); $stream.Flush()
+} finally { $stream.Dispose() }
+`],{env:{...process.env,BM_VERIFY_LOCK_PATH:lockPath,BM_VERIFY_OWNER_PID:String(process.pid)},encoding:'utf8',windowsHide:true,stdio:['ignore','pipe','pipe']});}
+catch(e){say(`ERROR: cannot acquire VerifyAll lock: ${String(e.stdout||e.stderr||e.message).trim()}. Not starting a second run.`);process.exit(2);}
 process.on('exit',()=>{try{if(existsSync(lockPath)&&Number(readFileSync(lockPath,'utf8'))===process.pid)unlinkSync(lockPath);}catch{}});
 if(!parallel&&await portBusy(SERVER_PORT)){say(`ERROR: port ${SERVER_PORT} is in use (not mine, not stopping it). Free it and retry.`);process.exit(2);}
 if(!parallel&&!reuseClient&&await portBusy(CLIENT_PORT)){say(`ERROR: port ${CLIENT_PORT} is in use (not mine, not stopping it). Free it, or pass --reuse-client to use that preview as it is.`);process.exit(2);}
@@ -95,7 +123,9 @@ if(srcNewest>jarStat.mtimeMs)warnings.push(`STALE JAR: server/src has files newe
 const build={head,dirtyPaths:dirty,jar:{path:'server/target/bm-server-0.0.1-SNAPSHOT.jar',modified:jarStat.mtime.toISOString(),bytes:jarStat.size,sha256_16:jarSha,rebuilt:!reuseJar}};
 if(dirty.length)warnings.push(`Working tree has uncommitted changes in verified paths: ${dirty.slice(0,6).join('; ')}`);
 say(`build verified: HEAD ${head.slice(0,7)}${dirty.length?' + uncommitted changes':''}, jar ${build.jar.modified} (${jarSha}) ${reuseJar?'REUSED':'rebuilt'}`);
-const STANDARD=['1366x768','844x390'],extra=measures.filter(m=>!STANDARD.includes(m));
+const STANDARD=['1366x768','844x390'],extra=measures.filter(m=>![...STANDARD,'1920x1080'].includes(m));
+if(parallel>4)say('*** N>4: declared run, NOT equivalent to the consolidation; nothing is published. ***');
+if(explicitMeasures)say(`*** DECLARED MEASURES (${measures.join(', ')}): override for the selected verifications, NOT equivalent to the consolidation; nothing is published. ***`);
 if(extra.length)say(`*** NON-STANDARD MEASURE (${extra.join(', ')}): declared run, NOT equivalent to the consolidation; nothing is published. ***`);
 if(quick)say('*** QUICK MODE: reduced scenarios and one measure. NOT equivalent to the consolidation; nothing is published. ***');
 
@@ -154,7 +184,7 @@ if(parallel){
     await step('test',null,...npmRun('test'));await step('build',null,...npmRun('build'));await step('size',null,...npmRun('size',sizeEnv));
     build.dist=await hashDir(join(web,'dist')).catch(()=>null);if(build.dist)say(`dist verified: ${build.dist.files} files, sha256 ${build.dist.sha256_16}`);
     const {runParallel}=await import('./verify-all-parallel.mjs');
-    parallelRun=await runParallel({N:parallel,solo,split,measures,quick,want,QUICK_SCENARIOS,evidence,logs,web,node,npmCli,say,run,results,warnings,scanVacuous,serverUp,serverDown,children,killTree,portBusy,waitFree,sleep});
+    parallelRun=await runParallel({N:parallel,solo,split,measures,measuresFor,allMeasures,partTimeoutMin,quick,want,QUICK_SCENARIOS,evidence,logs,web,node,npmCli,say,run,results,warnings,scanVacuous,serverUp,serverDown,children,killTree,portBusy,waitFree,sleep});
   }catch(e){say(`ABORT: ${e.message}`);results.push({name:'orchestrator',measure:'—',ok:false,seconds:0,exit:1,problems:0});}
   finally{for(const c of children)killTree(c);}
 }else try{
@@ -177,14 +207,14 @@ if(parallel){
   if(want('verify')||want('modes')){
     if(!await waitFree(SERVER_PORT,5000))throw new Error('port 8080 is not free');
     const s=await serverUp();say('shared server up (temporary database, seed accounts)');
-    try{for(const m of measures){await step('verify',m,node,['tools/verify.mjs'],env(m));await step('modes',m,node,['tools/verify-modes.mjs'],env(m));}}
+    try{for(const m of allMeasures){if(measuresFor('verify').includes(m))await step('verify',m,node,['tools/verify.mjs'],env(m));if(measuresFor('modes').includes(m))await step('modes',m,node,['tools/verify-modes.mjs'],env(m));}}
     finally{await serverDown(s);say('shared server stopped');}
   }
 
   // 4. verifications that start their own server (8080 free between them); per measure
   const own=[['lifecycle','verify-lifecycle.mjs'],['ffa','verify-ffa.mjs'],['decks','verify-decks.mjs'],['public','verify-public.mjs'],['profile','verify-profile.mjs'],['resolution','verify-resolution.mjs'],['aim','verify-aim.mjs'],['layout','verify-layout.mjs']];
-  for(const m of measures)for(const[n,f]of own){
-    if(!want(n))continue;
+  for(const m of allMeasures)for(const[n,f]of own){
+    if(!want(n)||!measuresFor(n).includes(m))continue;
     if(!await waitFree(SERVER_PORT,30000)){results.push({name:n,measure:m,ok:false,seconds:0,exit:-1,problems:0});say(`✘ ${n}-${m}: port 8080 not free, skipped`);continue;}
     const e=env(m);if(quick&&QUICK_SCENARIOS[n])e.BM_SCENARIOS=QUICK_SCENARIOS[n];
     await step(n,m,node,[`tools/${f}`],e);
@@ -199,12 +229,13 @@ console.log(`\n${quick?'*** QUICK MODE — NOT equivalent to the consolidation (
 console.log(`${pad('verification',14)}${pad('measure',11)}${pad('result',8)}duration`);
 for(const r of results)console.log(`${pad(r.name,14)}${pad(r.measure,11)}${pad(r.ok?'OK':'FAIL',8)}${fmt(r.seconds)}`);
 const total=results.reduce((s,r)=>s+r.seconds,0),failed=results.filter(r=>!r.ok);
-if(parallel)console.log(`\nPARALLEL (C4-1c prototype, ${parallel} slots; solo: ${solo.join(',')||'none'}; split: ${split.join(',')||'none'}): wall clock ${fmt(Math.round((Date.now()-startedAt)/1000))}${parallelRun?`, pool ${fmt(parallelRun.poolSeconds)}, solo phase ${fmt(parallelRun.soloSeconds)}`:''}; durations below are per job (split: sum of the parts), not wall clock`);
+if(parallel)console.log(`\nPARALLEL (${parallel} slots; solo: ${solo.join(',')||'none'}; split: ${split.join(',')||'none'}): wall clock ${fmt(Math.round((Date.now()-startedAt)/1000))}${parallelRun?`, pool ${fmt(parallelRun.poolSeconds)}, solo phase ${fmt(parallelRun.soloSeconds)}`:''}; durations below are per job (split: sum of the parts), not wall clock`);
 console.log(`\ntotal ${fmt(total)} · ${results.length-failed.length}/${results.length} green${failed.length?` · FAILED: ${failed.map(r=>`${r.name} ${r.measure}`).join(', ')}`:''}`);
 if(warnings.length){console.log('\nWARNINGS (no threshold or expectation was changed):');for(const w of warnings)console.log(' - '+w);}
 
-const complete=!parallel&&!quick&&!only?.length&&!extra.length&&STANDARD.every(m=>measures.includes(m))&&!reuseClient;
-const summary={date:new Date().toISOString(),quick,nonStandardMeasures:extra,equivalentToConsolidation:complete&&!reuseJar,measures,only:only??null,build,results,warnings,...(parallel?{parallel:{...parallelRun,wallSeconds:Math.round((Date.now()-startedAt)/1000),note:'C4-1c prototype: not equivalent to the consolidation until the owner decides; never published'}}:{})};
+const required=['test','build','size'].map(n=>`${n}@—`).concat(['verify','modes','lifecycle','ffa','decks','public','profile','resolution','aim','layout'].flatMap(n=>(['verify','layout'].includes(n)?[...STANDARD,'1920x1080']:STANDARD).map(m=>`${n}@${m}`)));
+const complete=!quick&&!only?.length&&!explicitMeasures&&!reuseClient&&!process.env.BM_SCENARIOS&&parallel<=4&&(!parallel||(['aim','layout'].every(n=>solo.includes(n))&&Number(process.env.BM_SOLO_SETTLE_S??15)>=15))&&required.every(k=>results.some(r=>`${r.name}@${r.measure}`===k));
+const summary={date:new Date().toISOString(),quick,complete,nonStandardMeasures:extra,equivalentToConsolidation:complete&&!reuseJar,measures:allMeasures,measuresByVerification:Object.fromEntries(['verify','modes','lifecycle','ffa','decks','public','profile','resolution','aim','layout'].map(n=>[n,measuresFor(n)])),only:only??null,build,results,warnings,...(parallel?{parallel:{...parallelRun,wallSeconds:Math.round((Date.now()-startedAt)/1000),note:parallel>4?'N>4: declared run, not equivalent to consolidation; never published':'C4-1c: official up to 4 slots, aim and layout alone after 15 s quiet'}}:{})};
 await writeFile(join(evidence,'run-summary.json'),JSON.stringify(summary,null,2));
 // D13 (C4 plan): final JSON always; only final captures, recompressed, up to about 10 MB per block (an indication, not a threshold); the rest stays in the temporary folder.
 async function publishEvidence(dest,evidence=evidenceDir){

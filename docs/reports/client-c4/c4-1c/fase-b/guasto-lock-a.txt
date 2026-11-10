@@ -1,0 +1,22 @@
+[15:11:59] jar: REUSED, not rebuilt (declared)
+[15:11:59] build verified: HEAD , jar 2026-11-10T14:13:11.218Z (2a689da0b1e783b4) REUSED
+[15:11:59] dist verified: 1 files, sha256 abdc5df618e4350a
+[15:12:00] parallel: 1 slots, servers 18080, previews 14320 (same dist)
+[15:12:00] ▶ ffa-1366x768 (slot 0)
+[15:12:00] ✔ ffa-1366x768 (0 s, slot 0)
+[15:12:00] ▶ ffa-844x390 (slot 0)
+[15:12:00] ✔ ffa-844x390 (0 s, slot 0)
+[15:12:00] pool done in 0 s
+
+build: HEAD  · jar 2026-11-10T14:13:11.218Z 2a689da0b1e783b4 (REUSED)
+
+verification  measure    result  duration
+ffa           1366x768   OK      0 s
+ffa           844x390    OK      0 s
+
+PARALLEL (1 slots; solo: aim,layout; split: none): wall clock 16 s, pool 0 s, solo phase 0 s; durations below are per job (split: sum of the parts), not wall clock
+
+total 0 s · 2/2 green
+
+evidence (temporary, not tracked): C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-11-59-607Z-blFZAq\evidence
+logs: C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-11-59-607Z-blFZAq\logs

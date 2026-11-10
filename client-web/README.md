@@ -541,43 +541,54 @@ fisso con movimento ridotto).
 ## Lancio unico (C4-1, O23)
 
 ```powershell
-./client-web/run.ps1 -Task VerifyAll                 # giro completo, due misure, nessuna evidenza copiata
-./client-web/run.ps1 -Task VerifyAll -Publish docs/reports/client-c4/<blocco>   # a fine giro verde e completo copia le evidenze
-./client-web/run.ps1 -Task VerifyAll -Quick          # controllo di sviluppo: NON equivalente al consolidamento
+./client-web/run.ps1 -Task VerifyAll -Parallel 4 -Split 'resolution,ffa'  # consolidamento, matrice completa di fine C4
+./client-web/run.ps1 -Task VerifyAll -Parallel 4 -Split 'resolution,ffa' -Publish docs/reports/client-c4/<blocco>
+./client-web/run.ps1 -Task VerifyAll                 # stesso giro in serie, 8080/4320
+./client-web/run.ps1 -Task VerifyAll -Quick          # sviluppo: NON equivalente al consolidamento
 ```
 
-Un solo comando, in serie: controlla che 8080 (e 4320) siano libere e si ferma se non lo sono, **ricostruisce il jar**
-(`build.ps1 -Task Server -Offline`; `-ReuseJar` lo riusa e lo dichiara), esegue `Test`, `Build`, `Size`, avvia da sé
-l'anteprima della build appena fatta, poi `Verify` e `VerifyModes` su **un solo** server temporaneo con gli account di
-prova e infine, per ogni misura, le verifiche che avviano il server da sole (Lifecycle, Ffa, Decks, Public, Profile,
-Resolution, Aim, Layout; per loro il server resta uno per verifica, perché alcune lo fermano o lo riavviano di proposito).
-Ferma solo i processi che ha avviato. Se una verifica fallisce prosegue e restituisce errore alla fine. In coda stampa
-HEAD e data del jar verificati, la tabella (verifica, misura, esito, durata), gli avvisi e le cartelle di evidenze e log.
+Un solo comando: **ricostruisce il jar** (`build.ps1 -Task Server -Offline`; `-ReuseJar` lo riusa e lo dichiara), esegue
+`Test`, `Build`, `Size` e avvia l'anteprima della build. Senza `-Parallel` esegue una verifica alla volta su 8080/4320 come prima;
+`Verify` e `VerifyModes` condividono un server temporaneo, le altre lo avviano da sé (alcune lo fermano o lo riavviano di proposito).
+Con `-Parallel N` ogni posto ha server, database, anteprima della stessa `dist` e cartella propri: porte 18080+i e 14320+i.
+Rifiuta porte occupate e ferma solo processi propri. Una sola VerifyAll per macchina (blocco in `%TEMP%/bm-verify-all.lock`);
+Maven e VerifyAll non insieme sulla stessa macchina. Fuori dal lancio unico, una sola verifica per volta.
 
-- **Misure:** `-Measures 1366x768,844x390`; qualunque altra (per esempio `750x292`, base di C4-1b) è un'esecuzione dichiarata **non equivalente** al consolidamento e non si pubblica (predefinite le due; in `-Quick` solo la prima). **1920×1080** è misura ufficiale per `Verify` e `VerifyLayout` dal 10 novembre 2026 (C4-11): finché lo strumento non la include si lancia a parte, `-Measures 1920x1080 -Only verify,layout`, segnalata come non standard, e si dichiara nel rapporto. **Selezione:** `-Only verify,modes,resolution,…`
-  (nomi: `test build size verify modes lifecycle ffa decks public profile resolution aim layout`); un giro parziale non si pubblica.
-- **Evidenze (D13 del [piano C4](../docs/client-c4-plan.md)):** sempre in una cartella temporanea (`%TEMP%\bm-verify-all-…\evidence`, con `logs`), mai nel
-  repository finché non si chiede `-Publish <cartella>`. La pubblicazione avviene solo se tutto è verde e il giro è completo (due misure,
-  nessun `-Only`, non rapido) e copia: **i JSON finali sempre** (con `run-summary.json`), **le catture solo finali e ricompresse**
-  (JPEG, qualità 0,55) fino a circa 10 MB (`BM_CAPTURE_BUDGET_MB`, un'indicazione e non una soglia: quante ne restano fuori è
-  dichiarato), il resto resta nella cartella temporanea. `Size` scrive nella stessa cartella: `docs/reports/client-c2/size.json` non cambia.
-  `run-summary.json` registra HEAD, jar (data, hash), `dist` (file e hash), modifiche non committate nei percorsi verificati,
-  risultati e avvisi. Un solo giro alla volta: un secondo lancio è rifiutato (blocco in `%TEMP%\bm-verify-all.lock`).
-- **Avvisi (mai soglie):** un contatore di controllo a zero (`turnsChecked`, `cardsChecked`, `boardChecks`, `unpayableSeen`,
-  `arrowsDrawn`, `turnsSeen`) è segnalato come «VACUOUS?»; un jar più vecchio del sorgente del server come «STALE JAR». Soglie e attesi delle
-  verifiche non sono toccati.
-- **`-Quick`:** scenari ridotti dove lo script ha già `BM_SCENARIOS` (ffa `queue,five`; aim `duel,ffa`; layout `duel,ffa`;
-  resolution `quick,reduced`) e una sola misura. Intestazione e riepilogo dicono che **non è equivalente** al consolidamento, non pubblica,
-  e non va citato come verifica di blocco.
-- **Durata:** il giro completo a due misure costa circa due ore e mezza (`Resolution` circa 35 minuti per misura); `-Quick` qualche decina di minuti.
-- `-ReuseClient` usa l'anteprima già attiva su 4320 (non è un processo suo, la sua build non è dichiarata).
-- **Prototipo C4-1c, Fase A (non ancora metodo):** `-Parallel N` esegue le verifiche su N posti, ognuno con server temporaneo
-  sulla propria porta (18080+i), anteprima della stessa `dist` sulla propria porta (14320+i) e cartella di evidenze propria;
-  `-Solo aim,layout` (predefinito) le esegue dopo, da sole, perché misurano frame e input; `-Split resolution,ffa` lancia uno
-  scenario per esecuzione (nomi letti dallo script) e riunisce le parti nello stesso JSON. Il giro parallelo non si pubblica e
-  non equivale al consolidamento finché il proprietario non decide ([proposta](../docs/design/client-c4/verifiche/proposta.md)).
-  Senza `-Parallel` nulla cambia. Le verifiche Lifecycle, Ffa, Decks, Public e Profile accettano ora `BM_SERVER_PORT` come le altre.
-  `node tools/compare-runs.mjs a=<evidenze> b=<evidenze>` confronta esiti, controlli, casi e tempi misurati di due giri.
+- **Percorso ufficiale C4-1c:** N≤4, raccomandato **4**, `-Split 'resolution,ffa'`; coda dal più lungo al più breve.
+  `-Solo 'aim,layout'` è predefinito: le due verifiche misurano frame e input e girano alla fine, da sole, dopo la chiusura delle
+  altre anteprime e **15 s di quiete**. Togliere aim o layout dalla fase da sole, o ridurre la quiete, rende il giro non completo.
+  N>4 (fino a 8) è un giro dichiarato non equivalente, non pubblicabile. Nessun rilancio automatico dei rossi.
+- **Divisione:** uno scenario per esecuzione, con nomi letti dallo script (anche uno nuovo entra nella coda); parti riunite nello
+  stesso JSON, originali in `evidence/parts`. Ogni parte ha un massimo di **15 min** (`BM_PART_TIMEOUT_MIN` per prove dichiarate):
+  allo scadere esito rosso con log, chiusura dei processi propri, server verificato per PID, ascendenza, creazione e comando;
+  porta non libera o pulizia fallita restano rosse. Il limite generale delle altre esecuzioni resta 120 min.
+- **Misure ufficiali:** 1366×768 e 844×390 per tutte; **1920×1080 solo per `Verify` e `VerifyLayout`** (C4-11).
+  Il giro predefinito le include automaticamente: **25 esiti**, compresi Test, Build e Size. Nessun controllo spostato a una sola misura.
+  `-Measures` sostituisce le misure per tutte le verifiche selezionate e dichiara sempre un giro non equivalente, non pubblicabile;
+  per esempio `-Measures 1920x1080 -Only 'test,build,size,verify,layout'` o la base `-Measures 750x292`.
+- **Selezione:** `-Only 'test,build,size,verify,modes,lifecycle,ffa,decks,public,profile,resolution,aim,layout'`;
+  includere sempre `test,build,size` quando si selezionano verifiche. Un giro parziale non si pubblica.
+- **Evidenze (D13 del [piano C4](../docs/client-c4-plan.md)):** cartella temporanea `%TEMP%/bm-verify-all-…/evidence`, con `logs`.
+  `-Publish <cartella>` copia soltanto dopo un giro completo e verde: JSON finali sempre (con `run-summary.json`), catture finali
+  ricompresse (JPEG qualità 0,55) fino a circa 10 MB (`BM_CAPTURE_BUDGET_MB`, indicazione, non soglia); il resto resta in TEMP.
+  `Size` scrive nella stessa cartella, senza cambiare il file tracciato. Il riepilogo registra HEAD, modifiche non committate,
+  data e hash del jar, file e hash di `dist`, misure per verifica, completezza, risultati e avvisi. Il riuso del jar è dichiarato e
+  lascia `equivalentToConsolidation=false`, come prima; un consolidamento senza riusi ricostruisce il jar.
+- **Avvisi (mai soglie):** contatori a zero (`turnsChecked`, `cardsChecked`, `boardChecks`, `unpayableSeen`, `arrowsDrawn`, `turnsSeen`)
+  segnalati come «VACUOUS?»; jar più vecchio del sorgente come «STALE JAR». Nessuna soglia o atteso cambiato.
+- **`-Quick`:** scenari ridotti già previsti dagli script (ffa `queue,five`; aim `duel,ffa`; layout `duel,ffa`;
+  resolution `quick,reduced`) e solo 1366×768. Non equivalente e non pubblicabile, non vale come verifica di blocco.
+- **Riuso:** `-ReuseClient` usa l'anteprima già attiva su 4320 e ne dichiara la build non propria; incompatibile col parallelo.
+  `-ReuseJar` usa solo un jar ricostruito prima e dichiarato. `BM_SCENARIOS` ereditato rende il giro non completo.
+- **Altra macchina:** stesse opzioni, nessun obbligo. Prima di usare il parallelo là, un giro di prova con `-Parallel 2 -Split 'resolution,ffa'`.
+- **Attribuzione di un rosso:** rilanciarlo da solo a macchina ferma, sulla stessa build e allo stesso scenario/misura, prima di attribuirlo.
+  Esempio per Ffa a 844: `-Task VerifyAll -ReuseJar -Only 'test,build,size,ffa' -Measures 844x390`.
+  Per una sola parte, impostare nel solo processo `BM_SCENARIOS=<scenario>` e rimuoverlo dopo; non usarlo per il consolidamento.
+- **Confronti:** da client-web, `node tools/compare-runs.mjs a=<evidenze> b=<evidenze> --json=<file>` confronta esiti, controlli,
+  scene, casi e tempi misurati. `node tools/verify-all-faults.mjs` prova guasti su copie in TEMP, a verifiche reali ferme:
+  esito 1, parte appesa con server reale, scenario nuovo, porta occupata e matrice sintetica; non sono prove di prodotto.
+- **D16:** ogni blocco esegue le verifiche mirate; la matrice completa di fine C4 usa il primo comando sopra, più la regola 18 a 750×292.
+  Durate misurate di serie e N=4 nel [rapporto C4-1c](../docs/reports/client-c4-report.md#c4-1c--fase-b).
 
 ## Verifiche
 

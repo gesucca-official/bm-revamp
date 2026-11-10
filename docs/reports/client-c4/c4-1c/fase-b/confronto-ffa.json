@@ -1,0 +1,204 @@
+{
+ "runs": {
+  "prima": {
+   "dir": "C:\\Users\\gesucca\\AppData\\Local\\Temp/bm-c4-1c-b/confronto-ffa-prima",
+   "wallSeconds": null,
+   "summedSeconds": 881,
+   "dist": {
+    "files": 28,
+    "sha256_16": "9aec2510555a2827"
+   },
+   "jar": "2a689da0b1e783b4",
+   "results": {
+    "test@—": {
+     "ok": true,
+     "seconds": 4,
+     "span": null
+    },
+    "build@—": {
+     "ok": true,
+     "seconds": 11,
+     "span": null
+    },
+    "size@—": {
+     "ok": true,
+     "seconds": 1,
+     "span": null
+    },
+    "ffa@1366x768": {
+     "ok": true,
+     "seconds": 512,
+     "span": null
+    },
+    "ffa@844x390": {
+     "ok": true,
+     "seconds": 353,
+     "span": null
+    }
+   },
+   "files": {
+    "ffa-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7RaiseOnly",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 9
+     },
+     "failure": null
+    },
+    "ffa-844x390.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7Mouse",
+      "k7RaiseOnly",
+      "k7Touch",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 13
+     },
+     "failure": null
+    }
+   }
+  },
+  "dopo": {
+   "dir": "C:\\Users\\gesucca\\AppData\\Local\\Temp/bm-c4-1c-b/confronto-ffa-dopo",
+   "wallSeconds": null,
+   "summedSeconds": 1492,
+   "dist": {
+    "files": 28,
+    "sha256_16": "9aec2510555a2827"
+   },
+   "jar": "2a689da0b1e783b4",
+   "results": {
+    "test@—": {
+     "ok": true,
+     "seconds": 3,
+     "span": null
+    },
+    "build@—": {
+     "ok": true,
+     "seconds": 3,
+     "span": null
+    },
+    "size@—": {
+     "ok": true,
+     "seconds": 0,
+     "span": null
+    },
+    "verify@1366x768": {
+     "ok": true,
+     "seconds": 78,
+     "span": null
+    },
+    "verify@844x390": {
+     "ok": true,
+     "seconds": 73,
+     "span": null
+    },
+    "verify@1920x1080": {
+     "ok": true,
+     "seconds": 76,
+     "span": null
+    },
+    "ffa@1366x768": {
+     "ok": true,
+     "seconds": 431,
+     "span": null
+    },
+    "layout@1366x768": {
+     "ok": true,
+     "seconds": 161,
+     "span": null
+    },
+    "ffa@844x390": {
+     "ok": true,
+     "seconds": 357,
+     "span": null
+    },
+    "layout@844x390": {
+     "ok": true,
+     "seconds": 153,
+     "span": null
+    },
+    "layout@1920x1080": {
+     "ok": true,
+     "seconds": 157,
+     "span": null
+    }
+   },
+   "files": {
+    "ffa-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7Mouse",
+      "k7RaiseOnly",
+      "k7Touch",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 15
+     },
+     "failure": null
+    },
+    "ffa-844x390.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7RaiseOnly",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 14
+     },
+     "failure": null
+    }
+   }
+  }
+ },
+ "differences": [
+  "dopo ffa-1366x768.json: checks only in prima: [] only in dopo: [k7Mouse, k7Touch]",
+  "dopo ffa-844x390.json: checks only in prima: [k7Mouse, k7Touch] only in dopo: []"
+ ]
+}

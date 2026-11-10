@@ -1,0 +1,90 @@
+[15:10:55] jar: REUSED, not rebuilt (declared)
+[15:10:55] build verified: HEAD , jar 2026-11-10T14:13:11.218Z (2a689da0b1e783b4) REUSED
+[15:10:55] ▶ test
+[15:10:55] ✔ test (0 s)
+[15:10:55] ▶ build
+[15:10:56] ✔ build (0 s)
+[15:10:56] ▶ size
+[15:10:56] ✔ size (0 s)
+[15:10:56] dist verified: 1 files, sha256 abdc5df618e4350a
+[15:10:56] starting preview of the production build on 4320
+[15:11:04] shared server up (temporary database, seed accounts)
+[15:11:04] ▶ verify-1366x768
+[15:11:04] ✔ verify-1366x768 (0 s)
+[15:11:04] ▶ modes-1366x768
+[15:11:04] ✔ modes-1366x768 (0 s)
+[15:11:04] ▶ verify-844x390
+[15:11:04] ✔ verify-844x390 (0 s)
+[15:11:04] ▶ modes-844x390
+[15:11:04] ✔ modes-844x390 (0 s)
+[15:11:04] ▶ verify-1920x1080
+[15:11:04] ✔ verify-1920x1080 (0 s)
+[15:11:05] shared server stopped
+[15:11:05] ▶ lifecycle-1366x768
+[15:11:05] ✔ lifecycle-1366x768 (0 s)
+[15:11:05] ▶ ffa-1366x768
+[15:11:05] ✔ ffa-1366x768 (0 s)
+[15:11:05] ▶ decks-1366x768
+[15:11:05] ✔ decks-1366x768 (0 s)
+[15:11:05] ▶ public-1366x768
+[15:11:05] ✔ public-1366x768 (0 s)
+[15:11:05] ▶ profile-1366x768
+[15:11:05] ✔ profile-1366x768 (0 s)
+[15:11:05] ▶ resolution-1366x768
+[15:11:05] ✔ resolution-1366x768 (0 s)
+[15:11:05] ▶ aim-1366x768
+[15:11:05] ✔ aim-1366x768 (0 s)
+[15:11:05] ▶ layout-1366x768
+[15:11:05] ✔ layout-1366x768 (0 s)
+[15:11:05] ▶ lifecycle-844x390
+[15:11:05] ✔ lifecycle-844x390 (0 s)
+[15:11:05] ▶ ffa-844x390
+[15:11:05] ✔ ffa-844x390 (0 s)
+[15:11:05] ▶ decks-844x390
+[15:11:05] ✔ decks-844x390 (0 s)
+[15:11:05] ▶ public-844x390
+[15:11:05] ✔ public-844x390 (0 s)
+[15:11:05] ▶ profile-844x390
+[15:11:05] ✔ profile-844x390 (0 s)
+[15:11:05] ▶ resolution-844x390
+[15:11:05] ✔ resolution-844x390 (0 s)
+[15:11:05] ▶ aim-844x390
+[15:11:05] ✔ aim-844x390 (0 s)
+[15:11:05] ▶ layout-844x390
+[15:11:05] ✔ layout-844x390 (0 s)
+[15:11:05] ▶ layout-1920x1080
+[15:11:05] ✔ layout-1920x1080 (0 s)
+
+build: HEAD  · jar 2026-11-10T14:13:11.218Z 2a689da0b1e783b4 (REUSED)
+
+verification  measure    result  duration
+test          —          OK      0 s
+build         —          OK      0 s
+size          —          OK      0 s
+verify        1366x768   OK      0 s
+modes         1366x768   OK      0 s
+verify        844x390    OK      0 s
+modes         844x390    OK      0 s
+verify        1920x1080  OK      0 s
+lifecycle     1366x768   OK      0 s
+ffa           1366x768   OK      0 s
+decks         1366x768   OK      0 s
+public        1366x768   OK      0 s
+profile       1366x768   OK      0 s
+resolution    1366x768   OK      0 s
+aim           1366x768   OK      0 s
+layout        1366x768   OK      0 s
+lifecycle     844x390    OK      0 s
+ffa           844x390    OK      0 s
+decks         844x390    OK      0 s
+public        844x390    OK      0 s
+profile       844x390    OK      0 s
+resolution    844x390    OK      0 s
+aim           844x390    OK      0 s
+layout        844x390    OK      0 s
+layout        1920x1080  OK      0 s
+
+total 0 s · 25/25 green
+
+evidence (temporary, not tracked): C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-10-55-280Z-UetEdq\evidence
+logs: C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-10-55-280Z-UetEdq\logs

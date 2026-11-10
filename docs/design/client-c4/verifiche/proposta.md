@@ -1,6 +1,6 @@
 # C4-1c — Verifiche più veloci: proposta (Fase A)
 
-10 novembre 2026. **Scelta del proprietario registrata; Fase B autorizzata.** Nessuna soglia, nessun atteso, nessuno scenario,
+10 novembre 2026. **Fase B attuata, in attesa del giudizio del proprietario.** Nessuna soglia, nessun atteso, nessuno scenario,
 nessun `BASE_750` toccato; nessun orologio finto; server, protocollo, regolamento e `client-web/src` invariati. Evidenze in
 [docs/reports/client-c4/c4-1c](../../../reports/client-c4/c4-1c/), [rapporto](../../../reports/client-c4-report.md#c4-1c--fase-a).
 
@@ -158,3 +158,7 @@ E in C4-1 («al più un server per volta»): «al più un server per esecuzione,
 Scelta del proprietario del 10 novembre 2026: «Sì, tutte». Fase B autorizzata: N=4 (`-Parallel 4`), `-Split resolution,ffa`, aim e layout da sole dopo 15 s di quiete; attese sulla condizione in Ffa e tempo massimo per parte; leva e) esclusa; parallelo pubblicabile come consolidamento dopo la Fase B con un giro verde a N=4; altra macchina senza obbligo, prova a N=2 prima del parallelo.
 
 1920×1080 resta ufficiale solo per Verify e VerifyLayout (C4-11); D16 resta in vigore.
+
+## Esecuzione della Fase B
+
+Proposta e misure qui sopra restano la Fase A storica. Assetto attuale, prove di guasto, giro N=4 25/25 verde in 41:43, confronti e limiti nel [rapporto Fase B](../../../reports/client-c4-report.md#c4-1c--fase-b). 1920×1080 è inclusa automaticamente solo per Verify e VerifyLayout. Per accorciare l’ETA il proprietario ha poi scelto «Sì, salta il secondo giro»: variabilità fra due giri completi non verificata.

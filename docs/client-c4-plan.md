@@ -6,7 +6,7 @@
 
 **Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D16 il 10 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato al 10 novembre 2026.** **C4-11 (spazio e profondità) fatto, in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-11--fase-b)); dal 10 novembre 2026 vale la [decisione di metodo D16](#decisioni-del-proprietario) (verifiche mirate per blocco, matrice completa a fine C4). C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). **C4-7 e C4-10 approvati dal proprietario il 9 novembre 2026** ([prova](reports/client-c4-report.md#c4-10--prova-del-proprietario-del-9-novembre-2026)); poi **C4-11** ([proposta e scelta](design/client-c4/spazio/proposta.md), [Fase A](reports/client-c4-report.md#c4-11--fase-a), [Fase B](reports/client-c4-report.md#c4-11--fase-b)). Dal 10 novembre 2026 [C4-1c](#c4-1c--verifiche-più-veloci) (verifiche più veloci): **Scelta del 10 novembre 2026: «Sì, tutte»; Fase B autorizzata** ([proposta](design/client-c4/verifiche/proposta.md)). C4-7: scelte della Fase A approvate, HIT/CUT per colpo, POISON muto, esito col pannello e attacco send di 5 ms. C4-7-bis (esito distinto, Web Audio) e le fasi di C4-7 restano come registrate. Dalla stessa prova, con [D15](#decisioni-del-proprietario), due blocchi nuovi prima di C4-8a: **C4-10** (guida visiva) e **C4-11** (spazio e profondità). Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
+**Stato al 10 novembre 2026.** **C4-11 (spazio e profondità) fatto, in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-11--fase-b)); dal 10 novembre 2026 vale la [decisione di metodo D16](#decisioni-del-proprietario) (verifiche mirate per blocco, matrice completa a fine C4). C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). **C4-7 e C4-10 approvati dal proprietario il 9 novembre 2026** ([prova](reports/client-c4-report.md#c4-10--prova-del-proprietario-del-9-novembre-2026)); poi **C4-11** ([proposta e scelta](design/client-c4/spazio/proposta.md), [Fase A](reports/client-c4-report.md#c4-11--fase-a), [Fase B](reports/client-c4-report.md#c4-11--fase-b)). Dal 10 novembre 2026 [C4-1c](#c4-1c--verifiche-più-veloci) (verifiche più veloci): **fatto, in attesa del giudizio del proprietario; scelta «Sì, tutte» del 10 novembre 2026** ([proposta](design/client-c4/verifiche/proposta.md)). C4-7: scelte della Fase A approvate, HIT/CUT per colpo, POISON muto, esito col pannello e attacco send di 5 ms. C4-7-bis (esito distinto, Web Audio) e le fasi di C4-7 restano come registrate. Dalla stessa prova, con [D15](#decisioni-del-proprietario), due blocchi nuovi prima di C4-8a: **C4-10** (guida visiva) e **C4-11** (spazio e profondità). Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
 
 **Stato di C4-1, C4-1b, C4-3, C4-2, C4-4 e C4-5a.** C4-5a è **approvato dal proprietario il 5 novembre 2026; O2 chiusa**. Le osservazioni O26 e O27 della prova sono assegnate a C4-5a-bis ([stato del blocco](reports/client-c4-report.md#c4-5a-bis): O26 e O27 approvate dal proprietario il 5 novembre 2026 dopo una partita vera; scelta A pieno/0,75/sopra, 236 unità e giri ufficiali verdi sul jar pre-SB-3/SB-4, contesto corrente verde, nuovo giro grafico sul jar corrente non svolto con accettazione esplicita del proprietario) ([rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)). C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
@@ -35,9 +35,7 @@ Valgono per **ogni** blocco, come in C3:
   tutti i blocchi visibili (C3-2, C3-4, C3-L, C3-7): è previsto che accada anche qui, e una revisione è un commit proprio.
 - **Partite reali** sul server locale, su database temporaneo, guidate da Edge/Playwright. Misure ufficiali: **1366×768 e
   844×390**; per `Verify` e `VerifyLayout` anche **1920×1080** dal 10 novembre 2026 (scelta del proprietario in C4-11,
-  [domanda 7](design/client-c4/spazio/proposta.md#scelta-del-proprietario)). Finché lo strumento non la include fra le sue
-  misure (integrazione affidata a C4-1c) si lancia esplicitamente con `-Measures 1920x1080`, e `VerifyAll` la segnala come
-  non standard: va dichiarato. Scene sintetiche e fixture valgono per i test unitari, non come partita reale.
+  [domanda 7](design/client-c4/spazio/proposta.md#scelta-del-proprietario)). Da C4-1c `VerifyAll` la include automaticamente per quelle due verifiche; `-Measures` resta per i giri dichiarati, non equivalenti al consolidamento. Scene sintetiche e fixture valgono per i test unitari, non come partita reale.
 - **iPhone e 750×292: bene se funziona, senza diventare un obiettivo** ([D6](#decisioni-del-proprietario)). Il client web serve soprattutto a provare il gioco;
   il supporto vero al telefono arriverà con l'app ([Q16](open-questions.md)). Il lavoro già fatto non si perde: 750×292 è protetta dalla regola 18 e un
   miglioramento economico si fa, ma nessun blocco si apre o si allunga per quella misura. Edge sul PC non sostituisce l'iPhone: ciò che non è provato si dichiara.
@@ -162,7 +160,7 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-7* | Suoni | D2 | Sonnet, medio | Piccolo; l'attenzione va alla regola 13 |
 | C4-7-ter | Suoni dei colpi per tipo di danno, esito col pannello, click della conferma | C4-7-bis | Opus, alto | Tempi della sequenza e audio su iOS, già corretti due volte |
 | C4-10 | Guida visiva | C4-7-ter, D15 | Opus, alto | Giudizio visivo e animazioni dentro la sequenza: regole 1–9 a rischio |
-| C4-1c | Verifiche più veloci (parallelo, divisione per scenari): **Scelta del 10 novembre 2026: «Sì, tutte»; Fase B autorizzata** | C4-1 | Opus, alto | Strumenti condivisi con il Set Base; un controllo indebolito o un tempo falsato dal carico passerebbero inosservati |
+| C4-1c | Verifiche più veloci (parallelo, divisione per scenari): **fatto, in attesa del giudizio del proprietario; scelta «Sì, tutte» del 10 novembre 2026** | C4-1 | Opus, alto | Strumenti condivisi con il Set Base; un controllo indebolito o un tempo falsato dal carico passerebbero inosservati |
 | C4-11 | Spazio e profondità | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
 | C4-8a | Accessibilità e residui O21 | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
 | C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
@@ -182,7 +180,7 @@ La colonna «Modello, sforzo» è indicativa: per i blocchi ancora da eseguire l
 
 **Una correzione anche a C4-1:** «avvia il server una volta» vale per `Verify` e `VerifyModes`, che oggi non lo avviano. Non può
 valere per `VerifyLifecycle` (riavvio), `VerifyPublic` (lo ferma per l'ultimo scenario) e `VerifyProfile` (due avvii con
-configurazioni diverse). Il criterio giusto è **un solo punto che avvia i server, e al più uno per volta**.
+configurazioni diverse). Il criterio giusto è **un solo punto che avvia i server, al più un server per esecuzione, e al più N esecuzioni per volta**.
 
 ### Ordine e parallelo
 
@@ -212,16 +210,15 @@ shell); C4-9 con qualunque altro. **Possono andare in parallelo solo le parti se
 dell'inventario (C4-3), generazione della texture (C4-5a), generazione delle illustrazioni (C4-6), scelta dei suoni (C4-7), mentre
 un altro blocco lavora sul client. Quelle parti producono file e registro; l'integrazione rientra in fila.
 
-**Tre limiti pratici.** (1) Le verifiche non vanno in parallelo su una stessa macchina: usano porte e account comuni, e le misure di
-frame si disturbano. (2) `run.ps1` cerca Node in `.tools/` della radice, ignorato da git, e così `node_modules`: un worktree non è
+**Tre limiti pratici.** (1) Una sola VerifyAll per macchina; il pool isolato arriva a N=4 per il consolidamento, aim e layout da sole dopo 15 s di quiete. Fuori dal lancio unico le verifiche usano porte e account comuni e vanno in serie. (2) `run.ps1` cerca Node in `.tools/` della radice, ignorato da git, e così `node_modules`: un worktree non è
 pronto senza preparazione. (3) C4-1 è committato (`a6f6b1a`): nessuna sessione lavora più su `client-web/` fuori dal blocco in corso.
 
 ### C4-1 — Strumenti di verifica (O23)
 
 **Perimetro.** Solo strumenti, nessun effetto sul gioco. Un lancio unico che:
 
-- serializza le verifiche e impedisce due giri insieme;
-- ha un solo punto che avvia i server, al più uno per volta: uno condiviso per `Verify` e `VerifyModes`, propri per chi li ferma o
+- serializza le verifiche per default e impedisce due giri insieme; con `-Parallel N` isola fino a N esecuzioni (ufficiale N≤4);
+- ha un solo punto che avvia i server, al più un server per esecuzione, e al più N esecuzioni per volta: uno condiviso per `Verify` e `VerifyModes`, propri per chi li ferma o
   riavvia di proposito;
 - sceglie la build e la dichiara: ricostruisce il jar dal sorgente, riuso solo esplicito; registra HEAD, modifiche non committate,
   hash di jar e `dist`;
@@ -243,7 +240,7 @@ in C3. Una rifattorizzazione degli script dei server che cambia ciò che provano
 
 **Completamento verificabile.**
 
-- Un giro completo a 1366×768 e 844×390 dà gli stessi esiti delle singole verifiche, con i contatori di casi visti confrontabili con
+- Un giro completo a 1366×768 e 844×390, più Verify e VerifyLayout a 1920×1080 da C4-1c, dà gli stessi esiti delle singole verifiche, con i contatori di casi visti confrontabili con
   le evidenze di C3-7.
 - Diff di soglie e attesi vuoto, dichiarato.
 - Prove negative: jar vecchio, porta occupata, secondo lancio, verifica che fallisce: ognuna produce il segnale previsto e nessuna
@@ -506,15 +503,15 @@ nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suo
 
 ### C4-1c — Verifiche più veloci
 
-**Stato: Scelta del 10 novembre 2026: «Sì, tutte»; Fase B autorizzata** (10 novembre 2026; [proposta](design/client-c4/verifiche/proposta.md), [rapporto](reports/client-c4-report.md#c4-1c--fase-a)). Previsto prima della Fase B di C4-11; per decisione del proprietario ([D16](#decisioni-del-proprietario)) i due si sono sovrapposti.
+**Stato: fatto, in attesa del giudizio del proprietario; scelta «Sì, tutte» del 10 novembre 2026** (10 novembre 2026; [proposta](design/client-c4/verifiche/proposta.md), [rapporto Fase B](reports/client-c4-report.md#c4-1c--fase-b)). Previsto prima della Fase B di C4-11; per decisione del proprietario ([D16](#decisioni-del-proprietario)) i due si sono sovrapposti.
 
 Scelta del proprietario del 10 novembre 2026: «Sì, tutte». Fase B autorizzata: N=4 (`-Parallel 4`), `-Split resolution,ffa`, aim e layout da sole dopo 15 s di quiete; attese sulla condizione in Ffa e tempo massimo per parte; leva e) esclusa; parallelo pubblicabile come consolidamento dopo la Fase B con un giro verde a N=4; altra macchina senza obbligo, prova a N=2 prima del parallelo.
 
 **Perché.** Il giro completo in serie dura circa 100 minuti, due terzi dei quali sono di `VerifyResolution`, e le verifiche sono il collo di bottiglia dello sviluppo.
 
-**Perimetro.** Solo strumenti: esecuzioni in parallelo, ognuna con server, database temporaneo, anteprima e cartella proprie, e divisione per scenari di `VerifyResolution` e `VerifyFfa`. Nessuna soglia, nessun atteso, nessuno scenario tolto, nessun orologio finto. Le verifiche che misurano fotogrammi e input restano da sole. Il criterio di C4-1 «al più un server per volta» e la regola del metodo «mai due verifiche insieme» cambiano solo dopo la scelta del proprietario.
+**Perimetro.** Solo strumenti: esecuzioni in parallelo, ognuna con server, database temporaneo, anteprima e cartella proprie, e divisione per scenari di `VerifyResolution` e `VerifyFfa`. Nessuna soglia, nessun atteso, nessuno scenario tolto, nessun orologio finto. Le verifiche che misurano fotogrammi e input restano da sole. Il criterio è «al più un server per esecuzione, e al più N esecuzioni per volta»; il metodo impone una sola VerifyAll per macchina. Limite per parte 15 min, chiusura verificata per PID e comando; nessun rilancio automatico. 1920×1080 inclusa solo per Verify e VerifyLayout.
 
-**Completamento verificabile.** Stessi esiti, stessi controlli e stessi casi attesi in serie e in parallelo sulla stessa build; tempi misurati entro la variabilità della serie; il comportamento senza le opzioni nuove resta identico.
+**Esito Fase B.** Giro N=4 **25/25 verde in 41:43**, prove di guasto passate; Ffa prima/dopo e percorso seriale verificati. Il proprietario ha poi scelto «Sì, salta il secondo giro» per accorciare l’ETA: variabilità fra due giri completi non verificata. Confronti e limiti nel [rapporto](reports/client-c4-report.md#c4-1c--fase-b). Nessuna soglia, atteso o codice di prodotto cambiato.
 
 ### C4-11 — Spazio e profondità
 
@@ -618,6 +615,14 @@ non è provato.
 
 ### Matrice completa di fine C4
 
+Comando del giro ufficiale (25 esiti, 1920×1080 solo per Verify e VerifyLayout):
+
+```powershell
+./client-web/run.ps1 -Task VerifyAll -Parallel 4 -Split 'resolution,ffa'
+```
+
+A parte, regola 18: `-Measures 750x292 -Only 'test,build,size,verify,ffa,aim,layout'` (giro dichiarato).
+
 **Perché ([D16](#decisioni-del-proprietario), 10 novembre 2026).** Dal 10 novembre ogni blocco esegue solo le verifiche economiche e le Playwright legate a ciò che tocca. Prima di C5 si esegue **tutta** la [matrice](#verifiche-da-rieseguire-per-blocco) sulla stessa build: tutte le verifiche a 1366×768 e 844×390, `Verify` e `VerifyLayout` anche a 1920×1080, la regola 18 a 750×292; i giri rimandati dai blocchi (per C4-11: `VerifyFfa`, `VerifyResolution`, `VerifyLifecycle`, `VerifyDecks`, `VerifyPublic`, `VerifyProfile`, `VerifyModes`) vi rientrano. Un rosso trovato allora si prova sulla base del blocco che lo ha portato e si corregge con test; le approvazioni dei blocchi restano soggette a questa matrice. Può coincidere con il giro completo di C4-9, se nessun codice cambia dopo.
 
 ## Verifiche da rieseguire per blocco
@@ -638,6 +643,7 @@ non è provato.
 | C4-7* | ● | | | | | | | ○ | | |
 | C4-7-ter | ● 750 | | | | | | | ○ | | ● 750 |
 | C4-10 | ● 750 | | | ● | | | | ● | ● | ● 750 |
+| C4-1c | ● 1920 | ● | ● | ● | ● | ● | ● | ● | ● | ● 1920 |
 | C4-11 | ● 750 · 1920 | | | ● 750 | | | | ○ | ● 750 | ● 750 · 1920 |
 | C4-8a | ● | | | | ● | ● | | ○ | ○ | |
 | C4-8b | ● | | | ● | | | | ● | ● | ● |

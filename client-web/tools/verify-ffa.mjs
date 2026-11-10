@@ -117,7 +117,22 @@ function sceneCheck(p,s,game,seats){
 // One move through the UI (card, target, discard if bound, ✓); the server decides legality.
 async function playOne(p){
  const {page}=p,esc=()=>page.keyboard.press('Escape');
- const tap=async h=>{const c=h.kind==='hand'?{x:h.x-h.w*.22,y:h.y}:h.kind==='person'?{x:h.x,y:h.y+h.h*.15}:{x:h.x-h.w*.2,y:h.y};await page.mouse.click(c.x,c.y);await page.waitForTimeout(60);if(await dialogOpen(p)){await esc();await page.waitForTimeout(60);}};
+ // Search only: wait for the input to be processed and the following scene state,
+ // including a refused target (unchanged state). No clock or measured animation is
+ // changed. At most 2 s per input; the normal path takes the next rendered frame.
+ const inputTimeoutMs=2000;
+ const afterInput=async(action,event)=>{
+  await page.evaluate(event=>{
+   window.__bmFfaInput={done:false};
+   document.addEventListener(event,()=>requestAnimationFrame(()=>{
+    const s=window.__bm?.state;
+    window.__bmFfaInput={done:true,state:s?{selected:s.selected,target:s.target,discard:s.discard,phase:s.phase,turn:s.turn}:null,dialog:!!document.querySelector('dialog[open]')};
+   }),{once:true});
+  },event);
+  try{await action();await page.waitForFunction(()=>window.__bmFfaInput?.done&&(window.__bmFfaInput.state||window.__bmFfaInput.dialog),null,{timeout:inputTimeoutMs});}
+  finally{await page.evaluate(()=>delete window.__bmFfaInput);}
+ };
+ const tap=async h=>{const c=h.kind==='hand'?{x:h.x-h.w*.22,y:h.y}:h.kind==='person'?{x:h.x,y:h.y+h.h*.15}:{x:h.x-h.w*.2,y:h.y};await afterInput(()=>page.mouse.click(c.x,c.y),'pointerup');if(await dialogOpen(p)){await afterInput(esc,'keyup');await page.waitForFunction(()=>!document.querySelector('dialog[open]'),null,{timeout:inputTimeoutMs});}};
  const moves=()=>p.sends().filter(d=>/\/app\/game\/[^/]+\/move$/.test(d)).length;
  for(const card of (await p.state()).order){
   const own=(await p.state()).hits.find(h=>h.id===card.key);if(!own)continue;await tap(own);if((await p.state()).selected!==card.key)continue;

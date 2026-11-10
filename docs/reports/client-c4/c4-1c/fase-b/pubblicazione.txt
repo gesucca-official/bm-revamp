@@ -1,0 +1,1 @@
+[15:55:31] captures: 16 of 422 kept (2.0 MB, budget about 2 MB); the rest stays in C:\Users\gesucca\AppData\Local\Temp\bm-verify-all-2026-11-10T15-12-42-060Z-4szGiG\evidence\screens

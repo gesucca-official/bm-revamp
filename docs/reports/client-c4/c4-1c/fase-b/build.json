@@ -1,0 +1,32 @@
+{
+  "productCommit": "ac1e88554086c2385468ed7b583faec33ff6b260",
+  "export": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-c4-1c-b\\build",
+  "jarSha256": "2a689da0b1e783b4d102e0bbbb97e8045b78639ed424c6728a38eb453f125ba3",
+  "dist": {
+    "files": 28,
+    "sha256_16": "9aec2510555a2827"
+  },
+  "toolSha256": {
+    "verify-all.mjs": "714e449dd5ea6894180e02e25a225517e65a3ae391211dfe3329a6517351f79d",
+    "verify-all-parallel.mjs": "154012ddcf37c9dd2ee6893af14e65c675312a8b6f858d4f60a4eedc69f12e03",
+    "verify-ffa.mjs": "be97423e297bfd034d1b5971815b0e79ceebb81d75cedceb1770e5fc541214ff",
+    "verify-processes.mjs": "ac451a6bfbbf6f1a3ea6155cb7d708bb1492b36a61f6014d146641efd0ab6467",
+    "verify-all-faults.mjs": "2c4f6235dee4a8c51204555034eeeec17c82c16d0e5a9b109312a83654213e24",
+    "compare-runs.mjs": "53596da75c788fcc15a101ad73e2afc30ec8cfc58176fe394e8e5db5a79b835f"
+  },
+  "notes": [
+    "Product exported with git archive; dependencies and JDK copied, no links.",
+    "All phase B real runs reuse the same jar intentionally, to hold its bytes fixed.",
+    "An archive has no Git HEAD; productCommit above is the provenance; tool changes are this block.",
+    "Synthetic fault probes are not product verification results.",
+    "The final atomic lock acquisition was strengthened after the serial after-run started; it is checked by the final fault probes and both parallel runs. Product and Ffa code stay identical."
+  ],
+  "serialAfterToolSha256": {
+    "verify-all.mjs": "d1e1f4026ce6458d19703975f6cf7ca0bdcd1b4da777e2c322459a604aa0b522",
+    "verify-all-parallel.mjs": "154012ddcf37c9dd2ee6893af14e65c675312a8b6f858d4f60a4eedc69f12e03",
+    "verify-ffa.mjs": "be97423e297bfd034d1b5971815b0e79ceebb81d75cedceb1770e5fc541214ff",
+    "verify-processes.mjs": "ac451a6bfbbf6f1a3ea6155cb7d708bb1492b36a61f6014d146641efd0ab6467",
+    "verify-all-faults.mjs": "fa24c61a7891d23f7bcfaf675b139cd853309901b7eada569dc5f57327b0c9ff",
+    "compare-runs.mjs": "53596da75c788fcc15a101ad73e2afc30ec8cfc58176fe394e8e5db5a79b835f"
+  }
+}
