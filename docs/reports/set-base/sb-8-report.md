@@ -1,6 +1,6 @@
 # SB-8 — Bozza giocabile da umani: rapporto
 
-**Fatto il 10 novembre 2026, in attesa del giudizio del proprietario.** Il server di sviluppo gioca la bozza del Set Base con un
+**Fatto il 10 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo SB-8» ([D46](../../set-base-plan.md#decisioni-del-proprietario)). Il server di sviluppo gioca la bozza del Set Base con un
 profilo Spring nuovo, `bozza`, e client-web la mostra **senza nessuna modifica**: il server gli manda carte, personaggi e collezione
 della bozza nella stessa forma del catalogo. Col profilo normale nessuna carta, personaggio o mazzo della bozza è raggiungibile.
 Partita viva, regolamento, documento del set, allegato, `cards.sqlite`, client-web, client-debug e strumenti di verifica del client

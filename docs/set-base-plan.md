@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); SB-8, la bozza giocabile da umani per le prove SB-12b e SB-16, è fatto e in attesa del giudizio del proprietario. Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46); prossime le prove umane SB-12b e SB-16. Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -294,18 +294,18 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-6b | Più set e mini-espansione di prova | SB-2, SB-6a | chiuso |
 | | SB-7 | Banco di misura e invarianti | SB-4, SB-6a | chiuso |
 | | SB-7b | Bot e costo in HEALTH | SB-7 | chiuso |
-| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b | fatto, in attesa del giudizio del proprietario |
+| | SB-8 | Bozza giocabile da umani | SB-6a, SB-6b | chiuso |
 | Progetto | SB-9 | Schede dei personaggi | — | chiuso |
 | | SB-10a | Listino di potenza e tetto delle bound (misure) | SB-7b, SB-9 | chiuso |
 | | SB-10b | Griglia degli slot (progetto) | SB-10a | chiuso |
 | Carte | SB-11a | Passi `consume` ed `equip` del formato dati | SB-10b | chiuso |
 | | SB-11b | Bozza degli starter base | SB-11a | chiuso |
 | | SB-12a | Giro coi bot sugli starter base | SB-11b | chiuso |
-| | SB-12b | Prova umana degli starter base | SB-8, SB-12a |  |
+| | SB-12b | Prova umana degli starter base | SB-8, SB-12a | prossimo |
 | | SB-13 | Celestina Bucatina: bozza e giro | SB-12a (D42; prima SB-12) | chiuso (anticipato, D42) |
 | | SB-14 | Piera Ultimo Giro: bozza e giro | SB-13 | chiuso |
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
-| | SB-16 | Prova umana degli avanzati | SB-15 |  |
+| | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | prossimo |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16 |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -327,7 +327,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. **Prossimo:** le prove umane SB-12b e SB-16, dopo il giudizio su SB-8. SB-30 può
+e senza file del client. SB-8 approvato (D46). **Prossimo:** le prove umane SB-12b e SB-16. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -496,7 +496,7 @@ rilanciata e confrontata con la prima fotografia.
 
 ### SB-8 — Bozza giocabile da umani
 
-**SB-8 fatto il 10 novembre 2026, in attesa del giudizio del proprietario.** Fase A approvata dal proprietario con «Approvo tutto»
+**SB-8 fatto il 10 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo SB-8» ([D46](#decisioni-del-proprietario)). Fase A approvata dal proprietario con «Approvo tutto»
 (undici domande con le raccomandazioni, un blocco solo, solo server). Profilo di sviluppo `bozza`, solo con `local` (o `test`) e mai
 con `heroku`: la bozza si legge da file (`set-base/bozza.json`, fuori dal jar), su un database separato `bm-bozza.sqlite`. La
 collezione è la bozza, i cinque starter sono mazzi pronti in open 1vCom, quick 1vCom, 1v1 e FFA pescano da una riserva, il computer
@@ -917,6 +917,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D43 | Approvazione di SB-2 e SB-13 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-2 e SB-13 con le mie raccomandazioni?». **SB-2 approvato:** regolamento 1.13 con le sole regole generali e Set Base 0.1 in `docs/sets/base.md` (Q1–Q9 della fase A). **SB-13 approvato** con le raccomandazioni della regia: (1) correzioni del Tossico salute 80, T iniziale 20, Tossicone Scatarrante 8 POISON, Raschiare il fondo +7 T; (2) nome dello starter «Tutto è droga»; (3) specchio lungo (16,6 turni, 22% di patte) e mazzo che si esaurisce spesso tenuti senza ridisegno fino alla prova umana degli avanzati (SB-16), perché i bot non giocano il travaso; (4) il Mescolone che toglie anche l'immunità propria resta per la prova umana, come le contromosse in SB-12a. Se la prova umana trova il Tossico forte, la prima leva è la T iniziale. Precisa D38 e D41 |
 | D44 | Approvazione di SB-6b e SB-14 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-6b e SB-14 con le mie raccomandazioni?». **SB-6b approvato:** formato `sb-6b/1` con più set, rarità del vocabolario di R07, mazzi misti e mini-espansione di prova nei soli test (Q1–Q9 della fase A). **SB-14 approvato** con le raccomandazioni del rapporto: (1) correzioni di Pino salute 100, L iniziale 20, Estasi 10 + L, L'ultimo giro 12 + L, Testata 20; (2) il giro 3 invece del giro 2, perché un umano gioca Testata più dei bot; (3) nome dello starter «Chiude quando dico io»; (4) partite lunghe, specchio con una patta su tre e mazzo esaurito tenuti senza ridisegno fino a SB-16, come per il Tossico (D43); (5) Offro io e il Bancone tenuti per la prova umana; (6) le rarità della griglia nella bozza in un passaggio a sé, che porta la bozza a `sb-6b/1` senza cambiare le partite. Se la prova umana trova Pino forte, la prima leva è la L iniziale, poi Estasi. Precisa D38 e D43 |
 | D45 | Approvazione di SB-15 | 8 novembre 2026, con le parole del proprietario: «Approvo SB-15», alla domanda «Approvi SB-15 con le mie raccomandazioni?»; al passo 0 aveva deciso «Sì, tutto in SB-15» per la classe di «Lavoro fatto bene» nei sorgenti di test. Approvati: (1) le rarità della griglia nella bozza, formato `sb-6b/1`, partite invariate (chiude D44 punto 6); (2) le correzioni di Gigi salute 95, V iniziale 25, Chiave da tredici 12 CUT, «Lavoro fatto bene» a 5 V; (3) due giri invece di tre; (4) nome dello starter «Intervento sul posto»; (5) mazzo esaurito spesso e patte contro Pino tenuti fino a SB-16, come per Tossico e Pino; (6) Steal e Smontiamo tutto tenuti per la prova umana; (7) Mattone e SeagullFly ferme in mano da guardare alla prova umana: un cambio di composizione dello starter è un cambio della griglia e lo decide il proprietario. Se la prova umana trova Gigi forte, la prima leva è la V iniziale, poi la salute. Precisa D35, D38 e D44 |
+| D46 | Approvazione di SB-8 | 10 novembre 2026, con le parole del proprietario: «Approvo SB-8», alla domanda «Approvi SB-8?»; la fase A era approvata con «Approvo tutto» (le undici domande con le raccomandazioni, un blocco solo, solo server, prima di ogni fase B di C4 su questa macchina). Approvati: profilo di sviluppo `bozza` solo con `local` o `test` e mai con `heroku`, database separato, bozza letta da file; caricatore e carte Java di bozza in `server/src/main` dietro un'interfaccia di catalogo che lascia identico il percorso del gioco vivo; starter come mazzi pronti in open e riserva per quick, 1v1 e FFA; computer con uno stile euristico (predefinito `risorse`); nessun file del client. Per i giri di bilanciamento la regola «nessun diff in `server/src/main`» esclude ora `com.gsc.bm.sim` e `model/cards/base`. Sblocca le prove umane SB-12b e SB-16. Precisa D30 e D40 |
 
 ## Decisioni ancora aperte
 
