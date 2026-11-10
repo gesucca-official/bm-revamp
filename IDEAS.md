@@ -18,13 +18,9 @@ Per ogni personaggio, il Set deve contenere almeno tre carte legate a loro e alt
 
 Provare a creare tutte le carte e poi playtestare estensivamente per rendere il gioco il quanto più possibile bilanciato?
 
-### App:
-
-- creare client desktop (wrappare client web?)
-- creare client mobile (wrappare client web?)
-
 ## Idee già recepite nella base o nella roadmap
 
+- Client desktop e mobile wrappando il client web, deploy, tavolo in verticale, economia, carriera e classifiche: [roadmap del prodotto](docs/product-roadmap.md) del 10 novembre 2026, dopo C5 e il Set Base.
 - CLI testuale per scenari automatici applicativi: I26 completato.
 - Rework del client web come base per futuri client desktop e mobile: [roadmap del client web animato](docs/client-roadmap.md), C0 chiusa e C1 non iniziata.
 - Tipologie delle carte: definite nel [regolamento vigente](docs/game-rules.md).

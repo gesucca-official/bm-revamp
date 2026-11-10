@@ -1,22 +1,29 @@
 # Roadmap — indice
 
-Aggiornamento del **29 ottobre 2026**. Stato complessivo nell'[indice della
+Aggiornamento del **10 novembre 2026**. Stato complessivo nell'[indice della
 documentazione](README.md#stato-corrente).
 
 ## Roadmap attiva: client web animato
 
 La [roadmap del client web animato](client-roadmap.md) definisce le tappe
 C0–C5 verso la parità funzionale con il client debug e oltre. C0, C1, C2 e C3
-sono chiuse; la prossima tappa è C4. Le decisioni ancora aperte sono elencate nel
+sono chiuse; la tappa in corso è C4. Le decisioni ancora aperte sono elencate nel
 piano; gli asset del debug sono esclusi dal nuovo client.
 
 I18/I20/I21/I25 e le feature differite della base conservano il significato
 storico; non sono automaticamente trasferiti nel nuovo percorso. La parità
 comprende le funzioni amministrative già presenti, senza estenderle alla console I20.
 
-## Piano successivo: Set Base
+## Piano in corso: Set Base
 
-Il [piano del Set Base](set-base-plan.md) porta il set provvisorio a circa 115 carte bilanciate. Parte a client web completato e non introduce regole attive finché i suoi blocchi non passano dal regolamento.
+Il [piano del Set Base](set-base-plan.md) porta il set provvisorio a circa 115 carte bilanciate. Procede in parallelo a C4 e non introduce regole attive finché i suoi blocchi non passano dal regolamento.
+
+## Dopo C5 e il Set Base: roadmap del prodotto
+
+La [roadmap del prodotto](product-roadmap.md), scritta il 10 novembre 2026, ordina ciò che viene dopo il client e il primo set:
+verifiche a livelli, deploy per giocare con amici su invito, app e desktop dal client web, tavolo in verticale, economia,
+carriera single player, PvP con classifica del duello e, su decisione del proprietario, apertura al pubblico. Parte dopo C5
+e non tocca i piani in corso.
 
 ## Roadmap archiviata: versione base I22
 
