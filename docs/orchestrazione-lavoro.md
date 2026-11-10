@@ -145,6 +145,8 @@ chiusura del rapporto. L'uscita segnala dove guardare, non giudica. Il rapporto 
 - `./client-web/run.ps1 -Task VerifyAll -Only 'test,build,size,...'`: con `-Only` includere sempre `test,build,size` (senza `build` il `dist` non si
   ricostruisce); tra apici in PowerShell, altrimenti 0/0 verde. Da bash: `powershell -NoProfile -File client-web/run.ps1 ...`.
   Opzioni: `-Quick` (scenari ridotti, non equivale al consolidamento), `-Measures 750x292`, `-ReuseJar`, `-Publish <dir>`. `BM_SCENARIOS` filtra anche layout e aim: usarlo solo per `resolution`.
+  Con `-Split` è ignorato: `resolution` gira tutti i suoi scenari ([C4-8a](reports/client-c4/c4-8a.md#non-verificato-e-limiti-dichiarati)); per un giro ridotto
+  di `resolution`, niente `-Split`.
 - Node di client-web: `.tools/client-c0/node-v24.13.0-win-x64/node.exe`; il vecchio node 12 fallisce con errori di sintassi.
 - **Una sola `VerifyAll` per macchina** (blocco in `%TEMP%`), con al più `-Parallel 4` per il consolidamento: ogni esecuzione ha
   server, database, anteprima e cartella propri (porte 18080+i e 14320+i). `VerifyAim` e `VerifyLayout` misurano frame e input:
