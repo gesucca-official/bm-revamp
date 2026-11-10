@@ -32,14 +32,16 @@ const toolchain=JSON.parse(await readFile(join(repo,'scripts/toolchain.json'),'u
 const jdk=join(repo,'.tools',toolchain.tools.find(t=>t.name==='java').directory,'bin');
 const java=process.env.BM_JAVA??join(jdk,'java.exe');
 const jar=process.env.BM_JAR??'target/bm-server-0.0.1-SNAPSHOT.jar';
+// C4-1c: BM_SERVER_PORT runs the temporary server on another port (with a preview on BM_PORT proxying to it via BM_SERVER); unset, 8080 as before.
+const serverPort=process.env.BM_SERVER_PORT??'8080',portArg=process.env.BM_SERVER_PORT?[`--server.port=${serverPort}`]:[];
 const data=await mkdtemp(join(tmpdir(),'bm-profile-'));
-const dbPath=join(data,'bm.sqlite'),api='http://127.0.0.1:8080/api/rest/v1';
+const dbPath=join(data,'bm.sqlite'),api=`http://127.0.0.1:${serverPort}/api/rest/v1`;
 const admin={user:'c2b6Admin',email:'c2b6-admin@example.invalid'};
 const basic={username:'c2b6basic',password:randomBytes(12).toString('hex')};
 let server=null;
 async function startServer(env={}){
  const log=createWriteStream(join(data,'server.log'),{flags:'a'});
- server=spawn(java,['-jar',jar,'--spring.profiles.active=local','--app.dev.seed-accounts=true'],{cwd:join(repo,'server'),env:{...process.env,BM_DATABASE_PATH:dbPath,...env},stdio:['ignore','pipe','pipe']});
+ server=spawn(java,['-jar',jar,'--spring.profiles.active=local','--app.dev.seed-accounts=true',...portArg],{cwd:join(repo,'server'),env:{...process.env,BM_DATABASE_PATH:dbPath,...env},stdio:['ignore','pipe','pipe']});
  server.stdout.pipe(log);server.stderr.pipe(log);
  const end=Date.now()+90000;
  while(Date.now()<end){
@@ -54,7 +56,7 @@ async function stopServer(){
  try{execFileSync('taskkill',['/PID',String(server.pid),'/T','/F'],{stdio:'ignore'});}catch{server.kill('SIGKILL');}
  await gone;server=null;
 }
-if(await fetch(`${api}/sign-in/validate`,{method:'POST'}).then(()=>true,()=>false))throw new Error('port 8080 is in use: stop the other server first');
+if(await fetch(`${api}/sign-in/validate`,{method:'POST'}).then(()=>true,()=>false))throw new Error(`port ${serverPort} is in use: stop the other server first`);
 // BCrypt hash of the run's Basic password with the server's own encoder (spring-security-core inside the jar).
 async function bcrypt(password){
  const lib=join(data,'crypto');

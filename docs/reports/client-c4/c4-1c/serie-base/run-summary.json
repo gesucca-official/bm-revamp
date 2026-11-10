@@ -1,0 +1,216 @@
+{
+  "date": "2026-11-10T11:59:36.643Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [],
+  "build": {
+    "head": "",
+    "dirtyPaths": [],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-10T10:17:20.428Z",
+      "bytes": 50749932,
+      "sha256_16": "dbfc5ded848bcfb2",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "aa25c0d2c45904da"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 4,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 61,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "modes",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 34,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 65,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "modes",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 25,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "lifecycle",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 163,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 371,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "decks",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 42,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "public",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 11,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "profile",
+      "measure": "1366x768",
+      "ok": false,
+      "seconds": 17,
+      "exit": 1,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 1963,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 119,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 151,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "lifecycle",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 164,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "ffa",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 408,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "decks",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 29,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "public",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 11,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "profile",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 48,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 2072,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 199,
+      "exit": 1,
+      "problems": 4
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 159,
+      "exit": 0,
+      "problems": 0
+    }
+  ],
+  "warnings": [
+    "profile-1366x768.json: evidence says ok=false",
+    "aim-844x390.json: evidence says ok=false"
+  ]
+}

@@ -1,0 +1,556 @@
+{
+  "date": "2026-11-10T13:03:23.157Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [],
+  "build": {
+    "head": "ed909f3b3ec1d9225f1e0d531d6dd248e1f9ece5",
+    "dirtyPaths": [
+      "M client-web/tools/verify-all.mjs",
+      " M client-web/tools/verify-decks.mjs",
+      " M client-web/tools/verify-ffa.mjs",
+      " M client-web/tools/verify-lifecycle.mjs",
+      " M client-web/tools/verify-profile.mjs",
+      " M client-web/tools/verify-public.mjs",
+      "?? client-web/tools/compare-runs.mjs",
+      "?? client-web/tools/verify-all-parallel.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-10T10:15:41.886Z",
+      "bytes": 50749932,
+      "sha256_16": "dbfc5ded848bcfb2",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "aa25c0d2c45904da"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "lifecycle",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 169,
+      "exit": 0,
+      "problems": 0,
+      "slot": 3,
+      "startedAt": 852
+    },
+    {
+      "name": "lifecycle",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 169,
+      "exit": 0,
+      "problems": 0,
+      "slot": 0,
+      "startedAt": 855
+    },
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 226,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 834
+    },
+    {
+      "name": "modes",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 40,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 1059
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 114,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 1099
+    },
+    {
+      "name": "modes",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 31,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 1213
+    },
+    {
+      "name": "profile",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 63,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 1467
+    },
+    {
+      "name": "decks",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 46,
+      "exit": 0,
+      "problems": 0,
+      "slot": 1,
+      "startedAt": 1511
+    },
+    {
+      "name": "decks",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 33,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 1530
+    },
+    {
+      "name": "profile",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 100,
+      "exit": 0,
+      "problems": 0,
+      "slot": 3,
+      "startedAt": 1483
+    },
+    {
+      "name": "public",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 14,
+      "exit": 0,
+      "problems": 0,
+      "slot": 1,
+      "startedAt": 1605
+    },
+    {
+      "name": "public",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 13,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 1609
+    },
+    {
+      "name": "aim",
+      "measure": "1366x768",
+      "ok": false,
+      "seconds": 148,
+      "exit": 1,
+      "problems": 1,
+      "slot": 0,
+      "startedAt": 1677
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 175,
+      "exit": 0,
+      "problems": 0,
+      "slot": 0,
+      "startedAt": 1826
+    },
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 117,
+      "exit": 1,
+      "problems": 4,
+      "slot": 0,
+      "startedAt": 2001
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 157,
+      "exit": 0,
+      "problems": 0,
+      "slot": 0,
+      "startedAt": 2118
+    },
+    {
+      "name": "resolution",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 1868,
+      "exit": 0,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "quick",
+          "ok": true,
+          "seconds": 120,
+          "slot": 0,
+          "startedAt": 734
+        },
+        {
+          "scenario": "report",
+          "ok": true,
+          "seconds": 153,
+          "slot": 1,
+          "startedAt": 918
+        },
+        {
+          "scenario": "reduced",
+          "ok": true,
+          "seconds": 19,
+          "slot": 1,
+          "startedAt": 1586
+        },
+        {
+          "scenario": "interrupt",
+          "ok": true,
+          "seconds": 29,
+          "slot": 1,
+          "startedAt": 1557
+        },
+        {
+          "scenario": "info",
+          "ok": true,
+          "seconds": 257,
+          "slot": 2,
+          "startedAt": 0
+        },
+        {
+          "scenario": "infoFfa",
+          "ok": true,
+          "seconds": 188,
+          "slot": 0,
+          "startedAt": 343
+        },
+        {
+          "scenario": "infoTouch",
+          "ok": true,
+          "seconds": 275,
+          "slot": 1,
+          "startedAt": 441
+        },
+        {
+          "scenario": "ffa",
+          "ok": true,
+          "seconds": 343,
+          "slot": 0,
+          "startedAt": 0
+        },
+        {
+          "scenario": "jump",
+          "ok": true,
+          "seconds": 54,
+          "slot": 1,
+          "startedAt": 1354
+        },
+        {
+          "scenario": "humans",
+          "ok": true,
+          "seconds": 203,
+          "slot": 0,
+          "startedAt": 531
+        },
+        {
+          "scenario": "open",
+          "ok": true,
+          "seconds": 227,
+          "slot": 2,
+          "startedAt": 257
+        }
+      ],
+      "spanSeconds": 1605
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 2112,
+      "exit": 0,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "quick",
+          "ok": true,
+          "seconds": 84,
+          "slot": 3,
+          "startedAt": 769
+        },
+        {
+          "scenario": "report",
+          "ok": true,
+          "seconds": 169,
+          "slot": 3,
+          "startedAt": 1021
+        },
+        {
+          "scenario": "reduced",
+          "ok": true,
+          "seconds": 18,
+          "slot": 3,
+          "startedAt": 1597
+        },
+        {
+          "scenario": "interrupt",
+          "ok": true,
+          "seconds": 32,
+          "slot": 2,
+          "startedAt": 1563
+        },
+        {
+          "scenario": "info",
+          "ok": true,
+          "seconds": 275,
+          "slot": 3,
+          "startedAt": 0
+        },
+        {
+          "scenario": "infoFfa",
+          "ok": true,
+          "seconds": 343,
+          "slot": 2,
+          "startedAt": 484
+        },
+        {
+          "scenario": "infoTouch",
+          "ok": true,
+          "seconds": 284,
+          "slot": 3,
+          "startedAt": 485
+        },
+        {
+          "scenario": "ffa",
+          "ok": true,
+          "seconds": 441,
+          "slot": 1,
+          "startedAt": 0
+        },
+        {
+          "scenario": "jump",
+          "ok": true,
+          "seconds": 54,
+          "slot": 1,
+          "startedAt": 1409
+        },
+        {
+          "scenario": "humans",
+          "ok": true,
+          "seconds": 203,
+          "slot": 1,
+          "startedAt": 716
+        },
+        {
+          "scenario": "open",
+          "ok": true,
+          "seconds": 209,
+          "slot": 3,
+          "startedAt": 275
+        }
+      ],
+      "spanSeconds": 1615
+    },
+    {
+      "name": "ffa",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 592,
+      "exit": 0,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "queue",
+          "ok": true,
+          "seconds": 13,
+          "slot": 3,
+          "startedAt": 1583
+        },
+        {
+          "scenario": "five",
+          "ok": true,
+          "seconds": 102,
+          "slot": 0,
+          "startedAt": 1097
+        },
+        {
+          "scenario": "two",
+          "ok": true,
+          "seconds": 110,
+          "slot": 2,
+          "startedAt": 1245
+        },
+        {
+          "scenario": "start",
+          "ok": true,
+          "seconds": 41,
+          "slot": 3,
+          "startedAt": 1442
+        },
+        {
+          "scenario": "leave",
+          "ok": true,
+          "seconds": 103,
+          "slot": 3,
+          "startedAt": 1339
+        },
+        {
+          "scenario": "timeout",
+          "ok": true,
+          "seconds": 74,
+          "slot": 0,
+          "startedAt": 1023
+        },
+        {
+          "scenario": "drop",
+          "ok": true,
+          "seconds": 149,
+          "slot": 3,
+          "startedAt": 1190
+        }
+      ],
+      "spanSeconds": 573
+    },
+    {
+      "name": "ffa",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 936,
+      "exit": 1,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "queue",
+          "ok": true,
+          "seconds": 14,
+          "slot": 2,
+          "startedAt": 1595
+        },
+        {
+          "scenario": "five",
+          "ok": true,
+          "seconds": 98,
+          "slot": 0,
+          "startedAt": 1200
+        },
+        {
+          "scenario": "two",
+          "ok": false,
+          "seconds": 380,
+          "slot": 0,
+          "startedAt": 1297
+        },
+        {
+          "scenario": "start",
+          "ok": true,
+          "seconds": 49,
+          "slot": 1,
+          "startedAt": 1462
+        },
+        {
+          "scenario": "leave",
+          "ok": true,
+          "seconds": 112,
+          "slot": 2,
+          "startedAt": 1355
+        },
+        {
+          "scenario": "timeout",
+          "ok": true,
+          "seconds": 131,
+          "slot": 1,
+          "startedAt": 1071
+        },
+        {
+          "scenario": "drop",
+          "ok": true,
+          "seconds": 152,
+          "slot": 1,
+          "startedAt": 1202
+        }
+      ],
+      "spanSeconds": 606
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/tools/verify-all.mjs;  M client-web/tools/verify-decks.mjs;  M client-web/tools/verify-ffa.mjs;  M client-web/tools/verify-lifecycle.mjs;  M client-web/tools/verify-profile.mjs;  M client-web/tools/verify-public.mjs",
+    "aim-1366x768.json: evidence says ok=false",
+    "aim-844x390.json: evidence says ok=false",
+    "ffa-844x390.json: evidence says ok=false"
+  ],
+  "parallel": {
+    "slots": 4,
+    "solo": [
+      "aim",
+      "layout"
+    ],
+    "split": [
+      "resolution",
+      "ffa"
+    ],
+    "poolSeconds": 1677,
+    "soloSeconds": 598,
+    "ports": [
+      {
+        "server": 18080,
+        "client": 14320
+      },
+      {
+        "server": 18081,
+        "client": 14321
+      },
+      {
+        "server": 18082,
+        "client": 14322
+      },
+      {
+        "server": 18083,
+        "client": 14323
+      }
+    ],
+    "wallSeconds": 2283,
+    "note": "C4-1c prototype: not equivalent to the consolidation until the owner decides; never published"
+  }
+}

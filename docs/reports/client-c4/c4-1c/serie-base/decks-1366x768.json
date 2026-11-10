@@ -1,0 +1,285 @@
+{
+ "date": "2026-11-10T10:29:44.574Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; not a physical device",
+ "checks": {
+  "catalogFrames": {
+   "cards": 39
+  },
+  "catalogDamage": {
+   "faces": 37,
+   "withDamage": 12,
+   "characters": 2,
+   "faceTotal": 39
+  },
+  "catalog": {
+   "cards": 37,
+   "characters": 2,
+   "total": 39,
+   "annexVersion": "0.1",
+   "withIllustration": 39,
+   "noHorizontalScroll": true,
+   "sheetScrolls": true
+  },
+  "rulesInEditor": {
+   "emptyDraft": [
+    "Dai un nome al mazzo.",
+    "Scegli il personaggio.",
+    "Scegli l’azione base.",
+    "Scegli l’ultima risorsa.",
+    "Scegli 2 azioni legate diverse (ne hai 0).",
+    "Servono esattamente 20 carte regolari: ne hai 0."
+   ],
+   "beforeCharacter": {
+    "basic": [],
+    "bound": []
+   },
+   "bruiserOffer": {
+    "basicSummary": "ADOPERIAMOTI",
+    "basic": [
+     "Azione base ADOPERIAMOTI"
+    ],
+    "bound": [
+     "Azione legata LIEVE FASTIDIO",
+     "Azione legata SVEGLIAMOCI MA TU NO"
+    ],
+    "last": [
+     "Ultima risorsa Last Resort: Banzai!!!"
+    ]
+   },
+   "afterToggle": "LIEVE FASTIDIO",
+   "thirdCopyEnabled": false,
+   "full": {
+    "counts": "Regolari 20 / 20, al massimo 2 copie per carta · carte iniziali 3 / 3 (base + 2 legate).",
+    "problems": [
+     "Dai un nome al mazzo."
+    ],
+    "another": false
+   },
+   "nineteen": {
+    "problems": [
+     "Dai un nome al mazzo.",
+     "Servono esattamente 20 carte regolari: ne hai 19."
+    ],
+    "save": false
+   },
+   "slashName": [
+    "Il nome non può contenere «/»."
+   ],
+   "saveEnabledWithSlash": false,
+   "switched": {
+    "basicSummary": "Desiderio Incontrollabile",
+    "bound": "nessuna",
+    "boundOffer": [
+     "Azione legata Ago Marcio e Spezzato",
+     "Azione legata Ghigno co' i' Denti Marci"
+    ],
+    "problems": [
+     "Il nome non può contenere «/».",
+     "Scegli 2 azioni legate diverse (ne hai 0)."
+    ]
+   },
+   "deckSends": 0
+  },
+  "editorFaces": {
+   "faces": 30,
+   "withDamage": 9
+  },
+  "createAndSave": {
+   "searchShuffle": 1,
+   "deckViewAfterSearch": [
+    "Scatto Repentino ×1"
+   ],
+   "deckView": [
+    "PAZIENZA: FINITA ×2",
+    "STORDIAMOTI HO DETTO ×2",
+    "GARGANTUESCO IMPATTO SUL TU ×2",
+    "FAI BASTA ×2",
+    "NON GIOCARE COL COLTELLO NO ×2",
+    "GABBIANO DUNQUE VOLIAMOTI ×2",
+    "ORMALE GUARIAMOTI ×2",
+    "Scatto Repentino ×1",
+    "Grab ×2",
+    "Steal ×2"
+   ],
+   "saveEnabledAt19": false,
+   "counts": "Regolari 20 / 20, al massimo 2 copie per carta · carte iniziali 3 / 3 (base + 2 legate).",
+   "sends": [
+    "/app/user/devAlice/deck"
+   ],
+   "saved": {
+    "character": "bruiser.character.BigBadBruiser",
+    "basic": "com.basic.BruiserGrab",
+    "last": "com.last.Struggle",
+    "bound": [
+     "bruiser.character.LittleSmack",
+     "bruiser.character.LittleRage"
+    ],
+    "regular": [
+     "bruiser.Glare",
+     "bruiser.Glare",
+     "bruiser.StunningBlow",
+     "bruiser.StunningBlow",
+     "bruiser.SuperImpact",
+     "bruiser.SuperImpact",
+     "bruiser.YouStop",
+     "bruiser.YouStop",
+     "bruiser.MadeOfStone",
+     "bruiser.MadeOfStone",
+     "bruiser.SeagullFly",
+     "bruiser.SeagullFly",
+     "bruiser.HealingBlow",
+     "bruiser.HealingBlow",
+     "com.ShuffleFeet",
+     "com.Grab",
+     "com.Grab",
+     "com.Steal",
+     "com.Steal",
+     "com.ShuffleFeet"
+    ]
+   },
+   "listed": [
+    "Strano"
+   ]
+  },
+  "cancelKeepsSaved": {
+   "nameReadOnly": true,
+   "sends": [],
+   "reopened": {
+    "counts": "Regolari 20 / 20, al massimo 2 copie per carta · carte iniziali 3 / 3 (base + 2 legate). Il nome di un mazzo salvato non si cambia.",
+    "bound": "SVEGLIAMOCI MA TU NO, LIEVE FASTIDIO"
+   },
+   "profileUnchanged": true
+  },
+  "overwrite": {
+   "button": "Sovrascrivi",
+   "sends": [
+    "/app/user/devAlice/deck"
+   ],
+   "decks": [
+    "Strano"
+   ],
+   "bound": [
+    "bruiser.character.LittleSmack",
+    "bruiser.character.LittleRage"
+   ],
+   "regular": [
+    "bruiser.Glare",
+    "bruiser.Glare",
+    "bruiser.StunningBlow",
+    "bruiser.StunningBlow",
+    "bruiser.YouStop",
+    "bruiser.YouStop",
+    "bruiser.MadeOfStone",
+    "bruiser.MadeOfStone",
+    "bruiser.SeagullFly",
+    "bruiser.SeagullFly",
+    "bruiser.HealingBlow",
+    "bruiser.HealingBlow",
+    "com.ShuffleFeet",
+    "com.Grab",
+    "com.Grab",
+    "com.Steal",
+    "com.Steal",
+    "com.ShuffleFeet",
+    "bruiser.ExtremelyViolentBlow",
+    "bruiser.ExtremelyViolentBlow"
+   ]
+  },
+  "openGame": {
+   "sceneReadyMs": 522,
+   "game": "da8cc69cc9a0b016f65fd50117e8144cb32e89e848df32911edbb38f9c4d00cd",
+   "listed": [
+    "Strano"
+   ],
+   "join": [
+    "/app/game/open/1vCom/join/devAlice/Strano"
+   ],
+   "character": "bruiser.character.BigBadBruiser",
+   "hand": [
+    "com.basic.BruiserGrab",
+    "bruiser.character.LittleSmack",
+    "bruiser.character.LittleRage",
+    "bruiser.YouStop",
+    "bruiser.SeagullFly",
+    "bruiser.Glare"
+   ],
+   "deck": 17,
+   "opponent": "ComPlayer_7105",
+   "turnsPlayed": 14,
+   "over": true,
+   "winner": "devAlice",
+   "outcome": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "handFromDeck": {
+    "views": 29,
+    "foreign": []
+   }
+  },
+  "newGameRepeatsOpen": {
+   "join": [
+    "/app/game/open/1vCom/join/devAlice/Strano"
+   ]
+  },
+  "threeInitialCards": {
+   "counts": "Regolari 20 / 20, al massimo 2 copie per carta · carte iniziali 3 / 3 (base + 2 legate).",
+   "listed": [
+    "Strano",
+    "Tossico"
+   ],
+   "bound": [
+    "junkie.character.RottenSmile",
+    "junkie.character.PatheticBlade"
+   ],
+   "character": "junkie.character.ToxicJunkie",
+   "hand": [
+    "com.basic.ToxicGrab",
+    "junkie.character.RottenSmile",
+    "junkie.character.PatheticBlade",
+    "junkie.AmphetamineReflexes",
+    "junkie.GoingBerserk",
+    "junkie.PervertedMetabolism"
+   ],
+   "deck": 17,
+   "handFromDeck": {
+    "views": 1,
+    "foreign": []
+   }
+  },
+  "deckUnavailableProvoked": {
+   "rewrittenFrames": 1,
+   "shown": "Mazzo non disponibile sul server: scegli un mazzo salvato e riprova.",
+   "serverError": [
+    "Deck unavailable. Choose a saved deck from your account and retry."
+   ],
+   "ready": 3,
+   "playEnabled": true,
+   "sentDestination": [
+    "/app/game/open/1vCom/join/devAlice/Assente"
+   ],
+   "alertsAfterTabSwitch": 0
+  },
+  "delete": {
+   "sendsAfterCancel": 0,
+   "deletes": [
+    "/app/user/devAlice/deck/delete",
+    "/app/user/devAlice/deck/delete"
+   ],
+   "decks": 0,
+   "dialog": "no saved decks, link to the collection"
+  }
+ },
+ "errors": [],
+ "console": [
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSource' was destroyed while still bound to a shader. Remove it from the shader before destroying it.",
+  "warning: PixiJS Warning:  [BindGroup] a 'textureSampler' was destroyed while still bound to a shader. Remove it from the shader before destroying it."
+ ],
+ "ok": true
+}

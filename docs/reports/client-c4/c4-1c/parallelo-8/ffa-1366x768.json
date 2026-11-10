@@ -1,0 +1,339 @@
+{
+ "date": "2026-11-10T13:25:22.936Z",
+ "url": "http://127.0.0.1:14326",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts, A with touch emulation) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "queueExit": {
+   "alone": {
+    "list": [
+     "devAlice (tu)"
+    ],
+    "startEnabled": false,
+    "addEnabled": true
+   },
+   "withBots": [
+    "devAlice (tu)",
+    "Computer 1",
+    "Computer 2"
+   ],
+   "sendsOnExit": [
+    "/app/session/queue/leave"
+   ],
+   "lastListSeenByA": [],
+   "listSeenByBAfterwards": [
+    "devBob (tu)"
+   ]
+  },
+  "k7": {
+   "mouse": null,
+   "touch": null,
+   "raiseOnly": null
+  },
+  "k7RaiseOnly": {
+   "item": "item-ComPlayer_5137-0",
+   "restingW": 88.777728,
+   "peekAfterFirstTouch": "item-ComPlayer_5137-0",
+   "widthAfterFirstTouch": 102.09438719999999,
+   "secondTouchInspects": true,
+   "inspectionTitle": "Mescolone Micidiale",
+   "widthOnHover": 102.09438719999999
+  },
+  "k7Mouse": {
+   "card": "Steal",
+   "owner": "ComPlayer_5137",
+   "index": 0,
+   "raisedOnHover": true,
+   "target": {
+    "owner": "ComPlayer_5137",
+    "itemIndex": 0
+   }
+  },
+  "k7Touch": {
+   "card": "Steal",
+   "owner": "ComPlayer_5137",
+   "index": 0,
+   "afterFirst": {
+    "peek": "item-ComPlayer_5137-0",
+    "target": null,
+    "selected": true
+   },
+   "afterSecond": {
+    "target": {
+     "owner": "ComPlayer_5137",
+     "itemIndex": 0
+    }
+   }
+  },
+  "fiveWithComputers": {
+   "gameId": "890284e06ea1de71c940134b6bdf2eaa65e7c0f0cbec4d7432c9405e62faead8",
+   "players": [
+    "ComPlayer_2232",
+    "devAlice",
+    "ComPlayer_9314",
+    "ComPlayer_2601",
+    "ComPlayer_5137"
+   ],
+   "characters": {
+    "ComPlayer_2232": "Spazienzio de la Ucciso",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_9314": "Spazienzio de la Ucciso",
+    "ComPlayer_2601": "Spazienzio de la Ucciso",
+    "ComPlayer_5137": "Tossico del Serraglio"
+   },
+   "seatNames": [
+    "Computer 1",
+    "Tu",
+    "Computer 2",
+    "Computer 3",
+    "Computer 4"
+   ],
+   "turnsChecked": 12,
+   "maxHand": 6,
+   "maxObjects": 2,
+   "fansSeen": [
+    6
+   ],
+   "watched": null,
+   "outcome": {
+    "winner": "NONE",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_2232",
+     "devAlice",
+     "ComPlayer_9314",
+     "ComPlayer_2601",
+     "ComPlayer_5137"
+    ],
+    "turns": 24
+   },
+   "text": "Pareggio Rissa conclusa al tavolo Risolti 13 turni fino al turno 24: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "newGameRepeatsFfa": {
+   "list": [
+    "devAlice (tu)"
+   ]
+  },
+  "startNowWithTwo": {
+   "gameId": "3b13bd4d42a9db973cdf29561bae7b40873f5dc9dcb7e1ecc7730700037e781a",
+   "startDisabledAlone": true,
+   "players": [
+    "devAlice",
+    "devBob"
+   ],
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio"
+   },
+   "outcome": {
+    "winner": "devAlice",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devBob"
+    ],
+    "turns": 20
+   },
+   "textA": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherMoveTimeout": {
+   "gameId": "f084a3b0699cdefdbc684202a898bef33f0af992d9222cec8eca962bda2edbce",
+   "characters": {
+    "ComPlayer_5638": "Spazienzio de la Ucciso",
+    "ComPlayer_7828": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso",
+    "ComPlayer_8438": "Spazienzio de la Ucciso"
+   },
+   "clockB": [
+    "◷ 29 s"
+   ],
+   "secondsToForfeit": 29,
+   "bOver": false,
+   "panelB": "Sei fuori dalla partita Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "turnsAfter": 15,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_8438",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "move timeout"
+    },
+    "dead": [
+     "ComPlayer_5638",
+     "ComPlayer_7828",
+     "devAlice"
+    ],
+    "turns": 16
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 devBob non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  }
+ },
+ "errors": [],
+ "ok": false,
+ "failure": "[two] Error: B: no playable card\n    at playOne (file:///E:/bm/client-web/tools/verify-ffa.mjs:136:8)\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at process.processImmediate (node:internal/timers:472:9)\n    at async playToEnd (file:///E:/bm/client-web/tools/verify-ffa.mjs:198:3)\n    at async Promise.all (index 1)\n    at async file:///E:/bm/client-web/tools/verify-ffa.mjs:272:17\n[leave] Error: A: no playable card\n    at playOne (file:///E:/bm/client-web/tools/verify-ffa.mjs:136:8)\n    at async playToEnd (file:///E:/bm/client-web/tools/verify-ffa.mjs:198:3)\n    at async file:///E:/bm/client-web/tools/verify-ffa.mjs:300:11\n[drop] no evidence written (exit 1)",
+ "split": {
+  "scenarios": [
+   "queue",
+   "five",
+   "two",
+   "start",
+   "leave",
+   "timeout",
+   "drop"
+  ],
+  "parts": [
+   {
+    "scenario": "queue",
+    "ok": true,
+    "seconds": 15
+   },
+   {
+    "scenario": "five",
+    "ok": true,
+    "seconds": 80
+   },
+   {
+    "scenario": "two",
+    "ok": false,
+    "seconds": 95
+   },
+   {
+    "scenario": "start",
+    "ok": true,
+    "seconds": 98
+   },
+   {
+    "scenario": "leave",
+    "ok": false,
+    "seconds": 58
+   },
+   {
+    "scenario": "timeout",
+    "ok": true,
+    "seconds": 145
+   },
+   {
+    "scenario": "drop",
+    "ok": false,
+    "seconds": 1258
+   }
+  ],
+  "duplicates": [
+   "viewport.width (five)",
+   "viewport.height (five)",
+   "checks.server (five)",
+   "checks.k7 (five)",
+   "viewport.width (two)",
+   "viewport.height (two)",
+   "checks.server (two)",
+   "viewport.width (start)",
+   "viewport.height (start)",
+   "checks.server (start)",
+   "checks.k7 (start)",
+   "viewport.width (leave)",
+   "viewport.height (leave)",
+   "checks.server (leave)",
+   "viewport.width (timeout)",
+   "viewport.height (timeout)",
+   "checks.server (timeout)",
+   "checks.k7 (timeout)"
+  ],
+  "duplicateValues": {
+   "viewport.width": {
+    "five": 1366,
+    "two": 1366,
+    "start": 1366,
+    "leave": 1366,
+    "timeout": 1366
+   },
+   "viewport.height": {
+    "five": 768,
+    "two": 768,
+    "start": 768,
+    "leave": 768,
+    "timeout": 768
+   },
+   "checks.server": {
+    "five": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "two": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "start": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "leave": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "timeout": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    }
+   },
+   "checks.k7": {
+    "five": {
+     "mouse": {
+      "card": "Steal",
+      "owner": "ComPlayer_5137",
+      "index": 0,
+      "raisedOnHover": true,
+      "target": {
+       "owner": "ComPlayer_5137",
+       "itemIndex": 0
+      }
+     },
+     "touch": {
+      "card": "Steal",
+      "owner": "ComPlayer_5137",
+      "index": 0,
+      "afterFirst": {
+       "peek": "item-ComPlayer_5137-0",
+       "target": null,
+       "selected": true
+      },
+      "afterSecond": {
+       "target": {
+        "owner": "ComPlayer_5137",
+        "itemIndex": 0
+       }
+      }
+     },
+     "raiseOnly": {
+      "item": "item-ComPlayer_5137-0",
+      "restingW": 88.777728,
+      "peekAfterFirstTouch": "item-ComPlayer_5137-0",
+      "widthAfterFirstTouch": 102.09438719999999,
+      "secondTouchInspects": true,
+      "inspectionTitle": "Mescolone Micidiale",
+      "widthOnHover": 102.09438719999999
+     }
+    },
+    "start": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    },
+    "timeout": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    }
+   }
+  }
+ }
+}

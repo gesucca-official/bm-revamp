@@ -1,0 +1,572 @@
+{
+  "date": "2026-11-10T13:52:12.755Z",
+  "quick": false,
+  "nonStandardMeasures": [],
+  "equivalentToConsolidation": false,
+  "measures": [
+    "1366x768",
+    "844x390"
+  ],
+  "only": [],
+  "build": {
+    "head": "ed909f3b3ec1d9225f1e0d531d6dd248e1f9ece5",
+    "dirtyPaths": [
+      "M client-web/tools/verify-all.mjs",
+      " M client-web/tools/verify-decks.mjs",
+      " M client-web/tools/verify-ffa.mjs",
+      " M client-web/tools/verify-lifecycle.mjs",
+      " M client-web/tools/verify-profile.mjs",
+      " M client-web/tools/verify-public.mjs",
+      "?? client-web/tools/compare-runs.mjs",
+      "?? client-web/tools/verify-all-parallel.mjs"
+    ],
+    "jar": {
+      "path": "server/target/bm-server-0.0.1-SNAPSHOT.jar",
+      "modified": "2026-11-10T10:15:41.886Z",
+      "bytes": 50749932,
+      "sha256_16": "dbfc5ded848bcfb2",
+      "rebuilt": false
+    },
+    "dist": {
+      "files": 28,
+      "sha256_16": "aa25c0d2c45904da"
+    }
+  },
+  "results": [
+    {
+      "name": "test",
+      "measure": "—",
+      "ok": true,
+      "seconds": 2,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 3,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "size",
+      "measure": "—",
+      "ok": true,
+      "seconds": 0,
+      "exit": 0,
+      "problems": 0
+    },
+    {
+      "name": "verify",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 89,
+      "exit": 0,
+      "problems": 0,
+      "slot": 7,
+      "startedAt": 398
+    },
+    {
+      "name": "modes",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 87,
+      "exit": 0,
+      "problems": 0,
+      "slot": 7,
+      "startedAt": 487
+    },
+    {
+      "name": "lifecycle",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 185,
+      "exit": 0,
+      "problems": 0,
+      "slot": 4,
+      "startedAt": 410
+    },
+    {
+      "name": "lifecycle",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 188,
+      "exit": 0,
+      "problems": 0,
+      "slot": 2,
+      "startedAt": 455
+    },
+    {
+      "name": "verify",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 105,
+      "exit": 0,
+      "problems": 0,
+      "slot": 7,
+      "startedAt": 574
+    },
+    {
+      "name": "modes",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 40,
+      "exit": 0,
+      "problems": 0,
+      "slot": 7,
+      "startedAt": 679
+    },
+    {
+      "name": "profile",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 76,
+      "exit": 0,
+      "problems": 0,
+      "slot": 5,
+      "startedAt": 799
+    },
+    {
+      "name": "profile",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 66,
+      "exit": 0,
+      "problems": 0,
+      "slot": 6,
+      "startedAt": 838
+    },
+    {
+      "name": "decks",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 60,
+      "exit": 0,
+      "problems": 0,
+      "slot": 1,
+      "startedAt": 855
+    },
+    {
+      "name": "public",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 18,
+      "exit": 0,
+      "problems": 0,
+      "slot": 7,
+      "startedAt": 921
+    },
+    {
+      "name": "public",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 16,
+      "exit": 0,
+      "problems": 0,
+      "slot": 3,
+      "startedAt": 927
+    },
+    {
+      "name": "decks",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 74,
+      "exit": 0,
+      "problems": 0,
+      "slot": 5,
+      "startedAt": 875
+    },
+    {
+      "name": "aim",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 147,
+      "exit": 0,
+      "problems": 0,
+      "slot": 0,
+      "startedAt": 1918
+    },
+    {
+      "name": "layout",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 163,
+      "exit": 0,
+      "problems": 0,
+      "slot": 0,
+      "startedAt": 2065
+    },
+    {
+      "name": "aim",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 133,
+      "exit": 1,
+      "problems": 3,
+      "slot": 0,
+      "startedAt": 2227
+    },
+    {
+      "name": "layout",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 152,
+      "exit": 0,
+      "problems": 0,
+      "slot": 0,
+      "startedAt": 2360
+    },
+    {
+      "name": "resolution",
+      "measure": "1366x768",
+      "ok": true,
+      "seconds": 2159,
+      "exit": 0,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "quick",
+          "ok": true,
+          "seconds": 146,
+          "slot": 0,
+          "startedAt": 334
+        },
+        {
+          "scenario": "report",
+          "ok": true,
+          "seconds": 189,
+          "slot": 0,
+          "startedAt": 481
+        },
+        {
+          "scenario": "reduced",
+          "ok": true,
+          "seconds": 18,
+          "slot": 1,
+          "startedAt": 914
+        },
+        {
+          "scenario": "interrupt",
+          "ok": true,
+          "seconds": 33,
+          "slot": 7,
+          "startedAt": 888
+        },
+        {
+          "scenario": "info",
+          "ok": true,
+          "seconds": 335,
+          "slot": 2,
+          "startedAt": 0
+        },
+        {
+          "scenario": "infoFfa",
+          "ok": true,
+          "seconds": 235,
+          "slot": 6,
+          "startedAt": 0
+        },
+        {
+          "scenario": "infoTouch",
+          "ok": true,
+          "seconds": 275,
+          "slot": 7,
+          "startedAt": 0
+        },
+        {
+          "scenario": "ffa",
+          "ok": true,
+          "seconds": 334,
+          "slot": 0,
+          "startedAt": 0
+        },
+        {
+          "scenario": "jump",
+          "ok": true,
+          "seconds": 70,
+          "slot": 7,
+          "startedAt": 721
+        },
+        {
+          "scenario": "humans",
+          "ok": true,
+          "seconds": 114,
+          "slot": 7,
+          "startedAt": 275
+        },
+        {
+          "scenario": "open",
+          "ok": true,
+          "seconds": 410,
+          "slot": 4,
+          "startedAt": 0
+        }
+      ],
+      "spanSeconds": 932
+    },
+    {
+      "name": "resolution",
+      "measure": "844x390",
+      "ok": true,
+      "seconds": 2508,
+      "exit": 0,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "quick",
+          "ok": true,
+          "seconds": 120,
+          "slot": 2,
+          "startedAt": 335
+        },
+        {
+          "scenario": "report",
+          "ok": true,
+          "seconds": 170,
+          "slot": 3,
+          "startedAt": 504
+        },
+        {
+          "scenario": "reduced",
+          "ok": true,
+          "seconds": 22,
+          "slot": 4,
+          "startedAt": 921
+        },
+        {
+          "scenario": "interrupt",
+          "ok": true,
+          "seconds": 30,
+          "slot": 3,
+          "startedAt": 898
+        },
+        {
+          "scenario": "info",
+          "ok": true,
+          "seconds": 293,
+          "slot": 3,
+          "startedAt": 0
+        },
+        {
+          "scenario": "infoFfa",
+          "ok": true,
+          "seconds": 477,
+          "slot": 6,
+          "startedAt": 236
+        },
+        {
+          "scenario": "infoTouch",
+          "ok": true,
+          "seconds": 285,
+          "slot": 5,
+          "startedAt": 246
+        },
+        {
+          "scenario": "ffa",
+          "ok": true,
+          "seconds": 587,
+          "slot": 1,
+          "startedAt": 0
+        },
+        {
+          "scenario": "jump",
+          "ok": true,
+          "seconds": 67,
+          "slot": 6,
+          "startedAt": 771
+        },
+        {
+          "scenario": "humans",
+          "ok": true,
+          "seconds": 211,
+          "slot": 3,
+          "startedAt": 293
+        },
+        {
+          "scenario": "open",
+          "ok": true,
+          "seconds": 246,
+          "slot": 5,
+          "startedAt": 0
+        }
+      ],
+      "spanSeconds": 943
+    },
+    {
+      "name": "ffa",
+      "measure": "1366x768",
+      "ok": false,
+      "seconds": 1749,
+      "exit": 1,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "queue",
+          "ok": true,
+          "seconds": 15,
+          "slot": 6,
+          "startedAt": 904
+        },
+        {
+          "scenario": "five",
+          "ok": true,
+          "seconds": 80,
+          "slot": 4,
+          "startedAt": 594
+        },
+        {
+          "scenario": "two",
+          "ok": false,
+          "seconds": 95,
+          "slot": 3,
+          "startedAt": 675
+        },
+        {
+          "scenario": "start",
+          "ok": true,
+          "seconds": 98,
+          "slot": 7,
+          "startedAt": 791
+        },
+        {
+          "scenario": "leave",
+          "ok": false,
+          "seconds": 58,
+          "slot": 6,
+          "startedAt": 712
+        },
+        {
+          "scenario": "timeout",
+          "ok": true,
+          "seconds": 145,
+          "slot": 5,
+          "startedAt": 531
+        },
+        {
+          "scenario": "drop",
+          "ok": false,
+          "seconds": 1258,
+          "slot": 2,
+          "startedAt": 643
+        }
+      ],
+      "spanSeconds": 1370
+    },
+    {
+      "name": "ffa",
+      "measure": "844x390",
+      "ok": false,
+      "seconds": 2016,
+      "exit": 1,
+      "problems": 0,
+      "split": [
+        {
+          "scenario": "queue",
+          "ok": true,
+          "seconds": 17,
+          "slot": 6,
+          "startedAt": 919
+        },
+        {
+          "scenario": "five",
+          "ok": false,
+          "seconds": 1232,
+          "slot": 0,
+          "startedAt": 669
+        },
+        {
+          "scenario": "two",
+          "ok": false,
+          "seconds": 124,
+          "slot": 5,
+          "startedAt": 676
+        },
+        {
+          "scenario": "start",
+          "ok": true,
+          "seconds": 60,
+          "slot": 1,
+          "startedAt": 795
+        },
+        {
+          "scenario": "leave",
+          "ok": true,
+          "seconds": 128,
+          "slot": 3,
+          "startedAt": 770
+        },
+        {
+          "scenario": "timeout",
+          "ok": true,
+          "seconds": 208,
+          "slot": 1,
+          "startedAt": 587
+        },
+        {
+          "scenario": "drop",
+          "ok": true,
+          "seconds": 247,
+          "slot": 4,
+          "startedAt": 674
+        }
+      ],
+      "spanSeconds": 1314
+    }
+  ],
+  "warnings": [
+    "Working tree has uncommitted changes in verified paths: M client-web/tools/verify-all.mjs;  M client-web/tools/verify-decks.mjs;  M client-web/tools/verify-ffa.mjs;  M client-web/tools/verify-lifecycle.mjs;  M client-web/tools/verify-profile.mjs;  M client-web/tools/verify-public.mjs",
+    "aim-844x390.json: evidence says ok=false",
+    "ffa-1366x768.json: evidence says ok=false",
+    "ffa-844x390.json: evidence says ok=false"
+  ],
+  "parallel": {
+    "slots": 8,
+    "solo": [
+      "aim",
+      "layout"
+    ],
+    "split": [
+      "resolution",
+      "ffa"
+    ],
+    "poolSeconds": 1901,
+    "soloSeconds": 595,
+    "ports": [
+      {
+        "server": 18080,
+        "client": 14320
+      },
+      {
+        "server": 18081,
+        "client": 14321
+      },
+      {
+        "server": 18082,
+        "client": 14322
+      },
+      {
+        "server": 18083,
+        "client": 14323
+      },
+      {
+        "server": 18084,
+        "client": 14324
+      },
+      {
+        "server": 18085,
+        "client": 14325
+      },
+      {
+        "server": 18086,
+        "client": 14326
+      },
+      {
+        "server": 18087,
+        "client": 14327
+      }
+    ],
+    "wallSeconds": 2520,
+    "note": "C4-1c prototype: not equivalent to the consolidation until the owner decides; never published"
+  }
+}

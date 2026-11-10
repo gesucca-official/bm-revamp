@@ -1,0 +1,4071 @@
+{
+ "date": "2026-11-10T11:10:51.142Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts, A with touch emulation) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "queueExit": {
+   "alone": {
+    "list": [
+     "devAlice (tu)"
+    ],
+    "startEnabled": false,
+    "addEnabled": true
+   },
+   "withBots": [
+    "devAlice (tu)",
+    "Computer 1",
+    "Computer 2"
+   ],
+   "sendsOnExit": [
+    "/app/session/queue/leave"
+   ],
+   "lastListSeenByA": [],
+   "listSeenByBAfterwards": [
+    "devBob (tu)"
+   ]
+  },
+  "k7RaiseOnly": {
+   "item": "item-ComPlayer_7150-0",
+   "restingW": 45.6,
+   "peekAfterFirstTouch": "item-ComPlayer_7150-0",
+   "widthAfterFirstTouch": 52.44,
+   "secondTouchInspects": true,
+   "inspectionTitle": "Tennents Super",
+   "widthOnHover": 52.44
+  },
+  "fiveWithComputers": {
+   "gameId": "9796c2a20d2b85ebaf469141a82852927afd9c1178ed5aaa130b231bf59ed12b",
+   "players": [
+    "ComPlayer_7150",
+    "devAlice",
+    "ComPlayer_4615",
+    "ComPlayer_5886",
+    "ComPlayer_1742"
+   ],
+   "characters": {
+    "ComPlayer_7150": "Tossico del Serraglio",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_4615": "Spazienzio de la Ucciso",
+    "ComPlayer_5886": "Tossico del Serraglio",
+    "ComPlayer_1742": "Spazienzio de la Ucciso"
+   },
+   "seatNames": [
+    "Computer 1",
+    "Tu",
+    "Computer 2",
+    "Computer 3",
+    "Computer 4"
+   ],
+   "turnsChecked": 19,
+   "maxHand": 6,
+   "maxObjects": 3,
+   "fansSeen": [
+    4,
+    5,
+    6
+   ],
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_4615",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_7150",
+     "devAlice",
+     "ComPlayer_5886",
+     "ComPlayer_1742"
+    ],
+    "turns": 20
+   },
+   "text": "Hai perso Rissa conclusa al tavolo Vince Computer 2 Risolti 2 turni fino al turno 20: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "newGameRepeatsFfa": {
+   "list": [
+    "devAlice (tu)"
+   ]
+  },
+  "twoHumansThreeComputers": {
+   "gameId": "4667835f1f7505d99e880af9b62a4845a4d127aac041685859886c695c45929b",
+   "characters": {
+    "ComPlayer_6382": "Spazienzio de la Ucciso",
+    "ComPlayer_4342": "Spazienzio de la Ucciso",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_9853": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso"
+   },
+   "inspectedComputer": {
+    "owner": "ComPlayer_6382",
+    "label": "Computer 1, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+    "text": "Spazienzio de la Ucciso Computer 1 · ID ComPlayer_6382 Salute 100 Allerta 20 Violenza 25 Tossicità 0 Alcol 0 Oggetti 0 / 1 Mazzo 17 carte Stati, immunità e timer Nessuno. Torna al tavolo"
+   },
+   "turnsCheckedA": 10,
+   "turnsCheckedB": 14,
+   "watchedA": {
+    "turn": 10,
+    "panel": "Sei fuori dalla partita Eliminato: puoi guardare fino all’esito Resta a guardare Nuova partita Torna all’hub Ultimo turno",
+    "hint": "Sei fuori: guardi fino all’esito",
+    "outcomeTurn": 24
+   },
+   "watchedB": null,
+   "privacyA": {
+    "views": 38,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 15,
+    "leaks": 0
+   },
+   "privacyB": {
+    "views": 38,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 8,
+    "leaks": 0
+   },
+   "outcome": {
+    "winner": "NONE",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_6382",
+     "ComPlayer_4342",
+     "devAlice",
+     "ComPlayer_9853",
+     "devBob"
+    ],
+    "turns": 24
+   },
+   "textA": "Pareggio Rissa conclusa al tavolo Risolti 11 turni fino al turno 24: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Pareggio Rissa conclusa al tavolo Risolti 11 turni fino al turno 24: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "startNowWithTwo": {
+   "gameId": "4d88683a11a39a316a9d14928e8f52ae51962a5a1a91acfebeb0e5d14fd2d934",
+   "startDisabledAlone": true,
+   "players": [
+    "devAlice",
+    "devBob"
+   ],
+   "characters": {
+    "devAlice": "Tossico del Serraglio",
+    "devBob": "Tossico del Serraglio"
+   },
+   "outcome": {
+    "winner": "devBob",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devAlice"
+    ],
+    "turns": 13
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLeaves": {
+   "gameId": "f48f239eb39dea6b525ede1fa6651a9e8c42083a2127081a610c4bf654329bdd",
+   "characters": {
+    "ComPlayer_1552": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_222": "Tossico del Serraglio",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_3092": "Spazienzio de la Ucciso"
+   },
+   "forfeitSeenAtTurn": 0,
+   "turnsAfter": 13,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_222",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "leave"
+    },
+    "dead": [
+     "ComPlayer_1552",
+     "devAlice",
+     "ComPlayer_3092"
+    ],
+    "turns": 18
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 2 devBob ha abbandonato Risolti 6 turni fino al turno 18: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherMoveTimeout": {
+   "gameId": "dc3e2351dfe784c616dea80ee7fe35c30d4d8c65921fd6bc1a0ddd9a64ee6d09",
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_3969": "Tossico del Serraglio",
+    "ComPlayer_1061": "Spazienzio de la Ucciso",
+    "devBob": "Spazienzio de la Ucciso",
+    "ComPlayer_5840": "Spazienzio de la Ucciso"
+   },
+   "clockB": [
+    "◷ 30 s"
+   ],
+   "secondsToForfeit": 30,
+   "bOver": false,
+   "panelB": "Sei fuori dalla partita Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "turnsAfter": 19,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_1061",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "move timeout"
+    },
+    "dead": [
+     "devAlice",
+     "ComPlayer_3969",
+     "devBob",
+     "ComPlayer_5840"
+    ],
+    "turns": 21
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 2 devBob non ha mosso entro 30 secondi Risolti 2 turni fino al turno 21: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLateRejoin": {
+   "gameId": "8b0048952a3b173c4fed0c36ee03339977f5bc2be63f5d77a80f05694be77ff7",
+   "characters": {
+    "ComPlayer_827": "Spazienzio de la Ucciso",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_799": "Tossico del Serraglio",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_6267": "Tossico del Serraglio"
+   },
+   "awayShownToA": [
+    "devBob fuori linea · 28 s"
+   ],
+   "resumeStatus": "finished",
+   "resumeTurn": 2,
+   "turnSeenByB": 2,
+   "turnOfA": 2,
+   "forfeits": {
+    "devBob": "reconnect timeout"
+   },
+   "panelB": "Sei fuori dalla partita Non sei rientrato entro 30 secondi Risolti 2 turni fino al turno 2: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno",
+   "framesB": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devBob/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "turnsAfter": 18,
+   "watched": null,
+   "outcome": {
+    "winner": "NONE",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "reconnect timeout"
+    },
+    "dead": [
+     "ComPlayer_827",
+     "devAlice",
+     "ComPlayer_799",
+     "ComPlayer_6267"
+    ],
+    "turns": 23
+   },
+   "textA": "Pareggio Rissa conclusa al tavolo devBob non è rientrato entro 30 secondi Risolti 4 turni fino al turno 23: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "k7": {
+   "mouse": null,
+   "touch": null,
+   "raiseOnly": {
+    "item": "item-ComPlayer_7150-0",
+    "restingW": 45.6,
+    "peekAfterFirstTouch": "item-ComPlayer_7150-0",
+    "widthAfterFirstTouch": 52.44,
+    "secondTouchInspects": true,
+    "inspectionTitle": "Tennents Super",
+    "widthOnHover": 52.44
+   }
+  }
+ },
+ "errors": [],
+ "touchControls": [
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "add-computer",
+     "label": "Aggiungi computer",
+     "width": 162,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "start-now",
+     "label": "Inizia ora",
+     "width": 89,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "leave-queue",
+     "label": "Esci dalla coda",
+     "width": 354,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▲",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "01-queue"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "add-computer",
+     "label": "Aggiungi computer",
+     "width": 162,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "start-now",
+     "label": "Inizia ora",
+     "width": 89,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "leave-queue",
+     "label": "Esci dalla coda",
+     "width": 354,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▲",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "02-queue-after-exit"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_7150",
+     "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-1",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4615",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5886",
+     "label": "Computer 3, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-0",
+     "label": "Mescolone Micidiale, oggetto di Computer 3, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 3, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-2",
+     "label": "Peroni da 66, calda, oggetto di Computer 3, ruolo risorse, dà +5 L, copia 3",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1742",
+     "label": "Computer 4, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1742-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 4, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "C'è del sangue nella mia droga, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Metabolismo Corrotto, AZIONE REGOLARE, ruolo risorse, costo —, dà +x H, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Rabbia Psicotica da Meth, AZIONE REGOLARE, ruolo danno, costo 5 T, danno colpo 15, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_7150-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_5886-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "five-turn0"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_7150",
+     "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 52,
+     "height": 72,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-1",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4615",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5886",
+     "label": "Computer 3, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-0",
+     "label": "Mescolone Micidiale, oggetto di Computer 3, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 3, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-2",
+     "label": "Peroni da 66, calda, oggetto di Computer 3, ruolo risorse, dà +5 L, copia 3",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1742",
+     "label": "Computer 4, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1742-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 4, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "C'è del sangue nella mia droga, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Metabolismo Corrotto, AZIONE REGOLARE, ruolo risorse, costo —, dà +x H, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Rabbia Psicotica da Meth, AZIONE REGOLARE, ruolo danno, costo 5 T, danno colpo 15, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_7150-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_5886-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "k7-touch-raised"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_7150",
+     "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 52,
+     "height": 72,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-1",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4615",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5886",
+     "label": "Computer 3, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-0",
+     "label": "Mescolone Micidiale, oggetto di Computer 3, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 3, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-2",
+     "label": "Peroni da 66, calda, oggetto di Computer 3, ruolo risorse, dà +5 L, copia 3",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1742",
+     "label": "Computer 4, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1742-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 4, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "C'è del sangue nella mia droga, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Metabolismo Corrotto, AZIONE REGOLARE, ruolo risorse, costo —, dà +x H, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Rabbia Psicotica da Meth, AZIONE REGOLARE, ruolo danno, costo 5 T, danno colpo 15, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "info",
+     "label": "Dettagli: Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_7150-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_5886-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "k7-mouse-raised"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_7150",
+     "label": "Computer 1, Tossico del Serraglio, salute 85; risorse H 85, A 8, V 0, T 40, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 95; risorse H 95, A 50, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4615",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 15, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_4615-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 2, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5886",
+     "label": "Computer 3, Tossico del Serraglio, salute 70; risorse H 70, A 30, V 0, T 20, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_5886-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 3, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1742",
+     "label": "Computer 4, Spazienzio de la Ucciso, salute 95; risorse H 95, A 40, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1742-0",
+     "label": "Peroni da 66, calda, oggetto di Computer 4, ruolo risorse, dà +5 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "C'è del sangue nella mia droga, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-8",
+     "label": "Tossicone Scatarrante, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-9",
+     "label": "Tutto è Droga, AZIONE REGOLARE, ruolo altro, costo —, dà +20 T, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_7150-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 26,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_7150-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 26,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_5886-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_1742-st-0",
+     "label": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "five-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_7150",
+     "label": "Computer 1, Tossico del Serraglio, salute 0, eliminato; risorse H 0, A -30, V 0, T 0, L 4",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_7150-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 1, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute -4, eliminato; risorse H -4, A -5, V 0, T 45, L 10",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Broken Beer Bottle, oggetto di te, ruolo altro, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4615",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 8; risorse H 8, A 16, V 0, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5886",
+     "label": "Computer 3, Tossico del Serraglio, salute -15, eliminato; risorse H -15, A 50, V 0, T 40, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1742",
+     "label": "Computer 4, Spazienzio de la Ucciso, salute -14, eliminato; risorse H -14, A 27, V 0, T 30, L 3",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "C'è del sangue nella mia droga, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-16",
+     "label": "Estasi da Coca Etilene, AZIONE REGOLARE, ruolo danno, costo 10 L, danno colpo 30, priorità 1, copia ",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-17",
+     "label": "Last Resort: Banzai!!!, ULTIMA RISORSA, ruolo danno, costo —, danno colpo 10, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_7150-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 26,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_7150-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 26,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_5886-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "five-outcome"
+  },
+  {
+   "controls": [
+    {
+     "selector": "close round",
+     "label": "Chiudi",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna al tavolo",
+     "width": 138,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "inspect-bot"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_6382",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4342",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Mescolone Micidiale, oggetto di te, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-1",
+     "label": "Tennents Super, oggetto di te, ruolo risorse, dà +10 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_9853",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Peroni da 66, calda, oggetto di devBob, ruolo risorse, dà +5 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Presa Male di Brutto, AZIONE REGOLARE, ruolo risorse, costo 10 A, dà +x T, priorità 2, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "info",
+     "label": "Dettagli: Computer 1, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "two-A-turn0"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_6382",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 90; risorse H 90, A 15, V 10, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4342",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 97; risorse H 97, A 20, V 10, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 5, V 0, T 30, L 30",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_9853",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 90; risorse H 90, A 25, V 5, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 38; risorse H 38, A 27, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Presa Male di Brutto, AZIONE REGOLARE, ruolo risorse, costo 10 A, risorse insufficienti, dà +x T, pr",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 21,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 21,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 21,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 21,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "two-A-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_6382",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 50; risorse H 50, A 0, V 5, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_6382-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 1, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4342",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 97; risorse H 97, A 27, V 10, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_4342-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 2, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute -10, eliminato; risorse H -10, A -43, V 0, T 30, L 2",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_9853",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 87; risorse H 87, A 25, V 10, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 11; risorse H 11, A 46, V 45, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-8",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-9",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, risorse insufficienti, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "watch",
+     "label": "Resta a guardare",
+     "width": 154,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "two-A-out"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_6382",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 50; risorse H 50, A 0, V 5, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_6382-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 1, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4342",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 97; risorse H 97, A 27, V 10, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_4342-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 2, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute -10, eliminato; risorse H -10, A -43, V 0, T 30, L 2",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_9853",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 87; risorse H 87, A 25, V 10, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 11; risorse H 11, A 46, V 45, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-8",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-9",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, risorse insufficienti, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "two-A-watching"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_6382",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute -13, eliminato; risorse H -13, A 16, V 25, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4342",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 0, eliminato; risorse H 0, A 30, V 25, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute -10, eliminato; risorse H -10, A -43, V 0, T 30, L 2",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_9853",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute -10, eliminato; risorse H -10, A 44, V 35, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute -18, eliminato; risorse H -18, A 34, V 65, T 10, L 7",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-8",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-9",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, risorse insufficienti, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "two-outcome-A"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_6382",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute -13, eliminato; risorse H -13, A 16, V 25, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_4342",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 0, eliminato; risorse H 0, A 30, V 25, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Tossico del Serraglio, salute -10, eliminato; risorse H -10, A -43, V 0, T 30, L 2",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_9853",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute -10, eliminato; risorse H -10, A 44, V 35, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute -18, eliminato; risorse H -18, A 34, V 65, T 10, L 7",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-16",
+     "label": "GARGANTUESCO IMPATTO SUL TU, AZIONE REGOLARE, ruolo danno, costo 25 V, danno colpo 40, priorità 0, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-17",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-st-0",
+     "label": "Equipaggiamento: BROKEN BEER. I tuoi colpi (HIT) ×1,5 e diventano tagli (CUT); si consuma dopo l’uso",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "two-outcome-B"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "add-computer",
+     "label": "Aggiungi computer",
+     "width": 162,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "start-now",
+     "label": "Inizia ora",
+     "width": 89,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "leave-queue",
+     "label": "Esci dalla coda",
+     "width": 354,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▲",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "start-two-queue"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Tennents Super, oggetto di te, ruolo risorse, dà +10 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-1",
+     "label": "Peroni da 66, calda, oggetto di te, ruolo risorse, dà +5 L, copia 2",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-2",
+     "label": "Mescolone Micidiale, oggetto di te, ruolo risorse, dà +20 L, +20 T, copia 3",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Presa Male di Brutto, AZIONE REGOLARE, ruolo risorse, costo 10 A, dà +x T, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "start-A-turn0"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A -9, V 0, T 30, L 24",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Broken Beer Bottle, oggetto di te, ruolo altro, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100; risorse H 100, A 50, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Presa Male di Brutto, AZIONE REGOLARE, ruolo risorse, costo 10 A, risorse insufficienti, dà +x T, pr",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 37,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 37,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 4 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 37,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "start-A-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute -10, eliminato; risorse H -10, A -116, V 0, T 30, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 20; risorse H 20, A -18, V 0, T 30, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Peroni da 66, calda, oggetto di devBob, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-11",
+     "label": "Rabbia Psicotica da Meth, AZIONE REGOLARE, ruolo danno, costo 5 T, danno colpo 15, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-12",
+     "label": "C'è del sangue nella mia droga, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "start-outcome"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_1552",
+     "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 1, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_222",
+     "label": "Computer 2, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100, forfait; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Mescolone Micidiale, oggetto di devBob, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-1",
+     "label": "Peroni da 66, calda, oggetto di devBob, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3092",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_3092-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 3, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "GENTILE IL TUO CAREZZO, AZIONE REGOLARE, ruolo difesa, costo 20 V, dà +10 A, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruolo danno, costo 20 V, danno colpo 22, priorità 1, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_1552-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_222-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "leave-forfeit"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_1552",
+     "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 1, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_222",
+     "label": "Computer 2, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100, forfait; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Mescolone Micidiale, oggetto di devBob, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-1",
+     "label": "Peroni da 66, calda, oggetto di devBob, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3092",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_3092-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 3, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "GENTILE IL TUO CAREZZO, AZIONE REGOLARE, ruolo difesa, costo 20 V, dà +10 A, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruolo danno, costo 20 V, danno colpo 22, priorità 1, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_1552-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_222-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "leave-turn0"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_1552",
+     "label": "Computer 1, Tossico del Serraglio, salute 90; risorse H 90, A 15, V 0, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 95; risorse H 95, A 30, V 25, T 0, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_222",
+     "label": "Computer 2, Tossico del Serraglio, salute 100; risorse H 100, A 33, V 0, T 20, L 2",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_222-0",
+     "label": "Tennents Super, oggetto di Computer 2, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100, forfait; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Mescolone Micidiale, oggetto di devBob, ruolo risorse, dà +20 L, +20 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-1",
+     "label": "Peroni da 66, calda, oggetto di devBob, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3092",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 89; risorse H 89, A 23, V 30, T 5, L 2",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "GENTILE IL TUO CAREZZO, AZIONE REGOLARE, ruolo difesa, costo 20 V, dà +10 A, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruolo danno, costo 20 V, danno colpo 22, priorità 1, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-7",
+     "label": "GARGANTUESCO IMPATTO SUL TU, AZIONE REGOLARE, ruolo danno, costo 25 V, danno colpo 40, priorità 0, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_1552-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_222-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "leave-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_1552",
+     "label": "Computer 1, Tossico del Serraglio, salute -10, eliminato; risorse H -10, A 3, V 0, T 95, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-0",
+     "label": "Broken Beer Bottle, oggetto di Computer 1, ruolo altro, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1552-1",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute -13, eliminato; risorse H -13, A 51, V 45, T 30, L 1",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_222",
+     "label": "Computer 2, Tossico del Serraglio, salute 64; risorse H 64, A -3, V 0, T 5, L 2",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_222-0",
+     "label": "Peroni da 66, calda, oggetto di Computer 2, ruolo risorse, dà +5 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 60, forfait; risorse H 60, A 25, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3092",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute -6, eliminato; risorse H -6, A 87, V 25, T 20, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "GENTILE IL TUO CAREZZO, AZIONE REGOLARE, ruolo difesa, costo 20 V, dà +10 A, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-14",
+     "label": "ORMALE GUARIAMOTI, AZIONE REGOLARE, ruolo danno, costo 20 V, danno colpo 30, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-15",
+     "label": "COSA FAI NON É UNA DOMANDA, AZIONE REGOLARE, ruolo contrasto, costo 10 A + 10 V, priorità 2, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_3092-st-0",
+     "label": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "leave-outcome"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Spazienzio de la Ucciso, salute 100; risorse H 100, A 30, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Negroni Trovato per Terra, oggetto di devAlice, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3969",
+     "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 40, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_3969-0",
+     "label": "Tennents Super, oggetto di Computer 1, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_3969-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 1, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1061",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 20, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100, forfait; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5840",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 100; risorse H 100, A 15, V 20, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "GARGANTUESCO IMPATTO SUL TU, AZIONE REGOLARE, ruolo danno, costo 25 V, danno colpo 40, priorità 0, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "GENTILE IL TUO CAREZZO, AZIONE REGOLARE, ruolo difesa, costo 20 V, dà +10 A, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "PERMESSO SCUSA ORA SMETTI , AZIONE REGOLARE, ruolo altro, costo 10 V, danno colpo 10, priorità 1, co",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_3969-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "timeout-B"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 96; risorse H 96, A 25, V 45, T 5, L 3",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3969",
+     "label": "Computer 1, Tossico del Serraglio, salute 95; risorse H 95, A 40, V 0, T 30, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1061",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 100; risorse H 100, A 35, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_1061-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 2, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 90, forfait; risorse H 90, A 20, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Peroni da 66, calda, oggetto di devBob, ruolo risorse, dà +5 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5840",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute 85; risorse H 85, A 30, V 25, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "BELLO IL TUO GIOCATTOLO SI, AZIONE REGOLARE, ruolo oggetti, costo 10 V, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "FAI BASTA, AZIONE REGOLARE, ruolo contrasto, costo 5 V, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-7",
+     "label": "GARGANTUESCO IMPATTO SUL TU, AZIONE REGOLARE, ruolo danno, costo 25 V, danno colpo 40, priorità 0, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_3969-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_1061-st-0",
+     "label": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_5840-st-0",
+     "label": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "timeout-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute -3, eliminato; risorse H -3, A 88, V 70, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_3969",
+     "label": "Computer 1, Tossico del Serraglio, salute -18, eliminato; risorse H -18, A 7, V 0, T 30, L 20",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_1061",
+     "label": "Computer 2, Spazienzio de la Ucciso, salute 10; risorse H 10, A 59, V 5, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 0, eliminato; risorse H 0, A 15, V 25, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_5840",
+     "label": "Computer 3, Spazienzio de la Ucciso, salute -3, eliminato; risorse H -3, A 59, V 5, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-21",
+     "label": "Last Resort: Banzai!!!, ULTIMA RISORSA, ruolo danno, costo —, danno colpo 10, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_3969-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_3969-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_3969-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "timeout-outcome"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_827",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 100; risorse H 100, A 5, V 5, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_827-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 1, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 78; risorse H 78, A 40, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_799",
+     "label": "Computer 2, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 30, L 20",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-0",
+     "label": "Tennents Super, oggetto di Computer 2, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 2, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100; risorse H 100, A 40, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_6267",
+     "label": "Computer 3, Tossico del Serraglio, salute 100; risorse H 100, A 40, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_6267-0",
+     "label": "Tennents Super, oggetto di Computer 3, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Estasi da Coca Etilene, AZIONE REGOLARE, ruolo danno, costo 10 L, danno colpo 30, risorse insufficie",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Tossicone Scatarrante, AZIONE REGOLARE, ruolo disturbo, costo 10 T, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-7",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 4 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_6267-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "drop-away"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_827",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 100; risorse H 100, A 15, V 20, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Tossico del Serraglio, salute 78; risorse H 78, A 45, V 0, T 10, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_799",
+     "label": "Computer 2, Tossico del Serraglio, salute 100; risorse H 100, A 25, V 0, T 30, L 20",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-0",
+     "label": "Tennents Super, oggetto di Computer 2, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-1",
+     "label": "Peroni da 66, calda, oggetto di Computer 2, ruolo risorse, dà +5 L, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-2",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 2, ruolo risorse, dà +20 V, +15 L, +5 T, copia 3",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Tossico del Serraglio, salute 100, forfait; risorse H 100, A 40, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_6267",
+     "label": "Computer 3, Tossico del Serraglio, salute 105; risorse H 105, A 40, V 0, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_6267-0",
+     "label": "Tennents Super, oggetto di Computer 3, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Riflessi Aumentati dalla Speed, AZIONE REGOLARE, ruolo contrasto, costo 10 T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, priorità 0, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-7",
+     "label": "Grab, AZIONE REGOLARE, ruolo oggetti, costo —, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_827-st-0",
+     "label": "Stato negativo: NO PATIENCE - Damage Intake Boost. Colpi (HIT) ricevuti ×1,5. finisce a fine turno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 3 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_6267-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "drop-late-rejoin"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_827",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute 100; risorse H 100, A 15, V 20, T 0, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 73; risorse H 73, A 50, V 0, T 10, L 0",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_799",
+     "label": "Computer 2, Tossico del Serraglio, salute 100; risorse H 100, A 25, V 0, T 30, L 30",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-0",
+     "label": "Negroni Trovato per Terra, oggetto di Computer 2, ruolo risorse, dà +20 V, +15 L, +5 T, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-1",
+     "label": "Broken Beer Bottle, oggetto di Computer 2, ruolo altro, copia 2",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-2",
+     "label": "Peroni da 66, calda, oggetto di Computer 2, ruolo risorse, dà +5 L, copia 3",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 95, forfait; risorse H 95, A 40, V 0, T 15, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_6267",
+     "label": "Computer 3, Tossico del Serraglio, salute 105; risorse H 105, A 40, V 0, T 5, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_6267-0",
+     "label": "Tennents Super, oggetto di Computer 3, ruolo risorse, dà +10 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Estasi da Coca Etilene, AZIONE REGOLARE, ruolo danno, costo 10 L, danno colpo 30, risorse insufficie",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-8",
+     "label": "Dose di Eroina da Cavalli, AZIONE REGOLARE, ruolo risorse, costo —, dà +x T, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-9",
+     "label": "Rabbia Psicotica da Meth, AZIONE REGOLARE, ruolo danno, costo 5 T, danno colpo 15, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-imm-ALCOHOL",
+     "label": "Immune a alcol. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_799-tm-0",
+     "label": "Timer: Marvelous Cocktail. Scatta tra 2 fine turno: toglie immunità e stati, poi 20 danni da veleno.",
+     "width": 17,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    },
+    {
+     "selector": "status-ComPlayer_6267-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "drop-turn3"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_827",
+     "label": "Computer 1, Spazienzio de la Ucciso, salute -5, eliminato; risorse H -5, A -20, V 10, T 15, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute -7, eliminato; risorse H -7, A -6, V 0, T 30, L 8",
+     "width": 90,
+     "height": 124,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_799",
+     "label": "Computer 2, Tossico del Serraglio, salute -9, eliminato; risorse H -9, A -23, V 20, T 55, L 6",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "item-ComPlayer_799-0",
+     "label": "Peroni da 66, calda, oggetto di Computer 2, ruolo risorse, dà +5 L, copia 1",
+     "width": 46,
+     "height": 63,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 20, forfait; risorse H 20, A 15, V 0, T 30, L 0",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "person-ComPlayer_6267",
+     "label": "Computer 3, Tossico del Serraglio, salute -1, eliminato; risorse H -1, A -36, V 20, T 20, L 3",
+     "width": 60,
+     "height": 83,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Estasi da Coca Etilene, AZIONE REGOLARE, ruolo danno, costo 10 L, danno colpo 30, risorse insufficie",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-18",
+     "label": "Tutto è Droga, AZIONE REGOLARE, ruolo altro, costo —, dà +20 T, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-19",
+     "label": "Last Resort: Banzai!!!, ULTIMA RISORSA, ruolo danno, costo —, danno colpo 10, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "drop-outcome"
+  }
+ ],
+ "ok": true
+}

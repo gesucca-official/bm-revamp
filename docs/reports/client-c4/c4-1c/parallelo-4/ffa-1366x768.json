@@ -1,0 +1,489 @@
+{
+ "date": "2026-11-10T12:51:50.854Z",
+ "url": "http://127.0.0.1:14323",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts, A with touch emulation) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "queueExit": {
+   "alone": {
+    "list": [
+     "devAlice (tu)"
+    ],
+    "startEnabled": false,
+    "addEnabled": true
+   },
+   "withBots": [
+    "devAlice (tu)",
+    "Computer 1",
+    "Computer 2"
+   ],
+   "sendsOnExit": [
+    "/app/session/queue/leave"
+   ],
+   "lastListSeenByA": [],
+   "listSeenByBAfterwards": [
+    "devBob (tu)"
+   ]
+  },
+  "k7": {
+   "mouse": null,
+   "touch": null,
+   "raiseOnly": null
+  },
+  "k7RaiseOnly": {
+   "item": "item-ComPlayer_5662-0",
+   "restingW": 88.777728,
+   "peekAfterFirstTouch": "item-ComPlayer_5662-0",
+   "widthAfterFirstTouch": 102.09438719999999,
+   "secondTouchInspects": true,
+   "inspectionTitle": "Negroni Trovato per Terra",
+   "widthOnHover": 102.09438719999999
+  },
+  "k7Mouse": {
+   "card": "BELLO IL TUO GIOCATTOLO SI",
+   "owner": "ComPlayer_5662",
+   "index": 0,
+   "raisedOnHover": true,
+   "target": {
+    "owner": "ComPlayer_5662",
+    "itemIndex": 0
+   }
+  },
+  "k7Touch": {
+   "card": "BELLO IL TUO GIOCATTOLO SI",
+   "owner": "ComPlayer_5662",
+   "index": 0,
+   "afterFirst": {
+    "peek": "item-ComPlayer_5662-0",
+    "target": null,
+    "selected": true
+   },
+   "afterSecond": {
+    "target": {
+     "owner": "ComPlayer_5662",
+     "itemIndex": 0
+    }
+   }
+  },
+  "fiveWithComputers": {
+   "gameId": "2ce7980cd041812179153035e4a67f73998a7ddab28b91c5fe4e560381a919de",
+   "players": [
+    "ComPlayer_3411",
+    "devAlice",
+    "ComPlayer_3518",
+    "ComPlayer_5662",
+    "ComPlayer_4866"
+   ],
+   "characters": {
+    "ComPlayer_3411": "Spazienzio de la Ucciso",
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_3518": "Spazienzio de la Ucciso",
+    "ComPlayer_5662": "Tossico del Serraglio",
+    "ComPlayer_4866": "Tossico del Serraglio"
+   },
+   "seatNames": [
+    "Computer 1",
+    "Tu",
+    "Computer 2",
+    "Computer 3",
+    "Computer 4"
+   ],
+   "turnsChecked": 14,
+   "maxHand": 6,
+   "maxObjects": 3,
+   "fansSeen": [
+    6
+   ],
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_5662",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_3411",
+     "devAlice",
+     "ComPlayer_3518",
+     "ComPlayer_4866"
+    ],
+    "turns": 15
+   },
+   "text": "Hai perso Rissa conclusa al tavolo Vince Computer 3 Risolti 2 turni fino al turno 15: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "newGameRepeatsFfa": {
+   "list": [
+    "devAlice (tu)"
+   ]
+  },
+  "twoHumansThreeComputers": {
+   "gameId": "37a968119e0af315eed459672a693c42bd13a922f83dc9b9ec0513ae8d608856",
+   "characters": {
+    "ComPlayer_3632": "Tossico del Serraglio",
+    "ComPlayer_3258": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_831": "Spazienzio de la Ucciso"
+   },
+   "inspectedComputer": {
+    "owner": "ComPlayer_3632",
+    "label": "Computer 1, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+    "text": "Tossico del Serraglio Computer 1 · ID ComPlayer_3632 Salute 100 Allerta 35 Violenza 0 Tossicità 10 Alcol 0 Oggetti 0 / 3 Mazzo 17 carte Stati, immunità e timer Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno. Torna al tavolo"
+   },
+   "turnsCheckedA": 15,
+   "turnsCheckedB": 11,
+   "watchedA": null,
+   "watchedB": {
+    "turn": 11,
+    "panel": "Sei fuori dalla partita Eliminato: puoi guardare fino all’esito Resta a guardare Nuova partita Torna all’hub Ultimo turno",
+    "hint": "Sei fuori: guardi fino all’esito",
+    "outcomeTurn": 15
+   },
+   "privacyA": {
+    "views": 37,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 11,
+    "leaks": 0
+   },
+   "privacyB": {
+    "views": 37,
+    "otherHandsNumbers": true,
+    "otherOnlyNames": 14,
+    "leaks": 0
+   },
+   "outcome": {
+    "winner": "ComPlayer_831",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "ComPlayer_3632",
+     "ComPlayer_3258",
+     "devAlice",
+     "devBob"
+    ],
+    "turns": 15
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Rissa conclusa al tavolo Vince Computer 3 Nuova partita Torna all’hub Ultimo turno"
+  },
+  "startNowWithTwo": {
+   "gameId": "9bd2de951d71af5010e09c6ceca227d45d8ba1c51942a37771f92542d1d21043",
+   "startDisabledAlone": true,
+   "players": [
+    "devAlice",
+    "devBob"
+   ],
+   "characters": {
+    "devAlice": "Tossico del Serraglio",
+    "devBob": "Spazienzio de la Ucciso"
+   },
+   "outcome": {
+    "winner": "devBob",
+    "outcomeReason": "combat",
+    "forfeits": {},
+    "dead": [
+     "devAlice"
+    ],
+    "turns": 9
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai vinto Rissa conclusa al tavolo Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLeaves": {
+   "gameId": "8f0f6ace1ce9fe9e2933fa3f52a60f6eb33dfee2dd6a9700991e9fa81785b597",
+   "characters": {
+    "ComPlayer_3520": "Tossico del Serraglio",
+    "devAlice": "Tossico del Serraglio",
+    "ComPlayer_2804": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_5567": "Spazienzio de la Ucciso"
+   },
+   "forfeitSeenAtTurn": 0,
+   "turnsAfter": 14,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_3520",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "leave"
+    },
+    "dead": [
+     "devAlice",
+     "ComPlayer_2804",
+     "ComPlayer_5567"
+    ],
+    "turns": 18
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 1 devBob ha abbandonato Risolti 5 turni fino al turno 18: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherMoveTimeout": {
+   "gameId": "9750a0baeb4e359623015cb6e9e6bde6b40fa28fde1ff3269a80366f226e8eee",
+   "characters": {
+    "devAlice": "Spazienzio de la Ucciso",
+    "ComPlayer_304": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio",
+    "ComPlayer_923": "Tossico del Serraglio",
+    "ComPlayer_7328": "Tossico del Serraglio"
+   },
+   "clockB": [
+    "◷ 29 s"
+   ],
+   "secondsToForfeit": 29,
+   "bOver": false,
+   "panelB": "Sei fuori dalla partita Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "turnsAfter": 9,
+   "watched": null,
+   "outcome": {
+    "winner": "ComPlayer_7328",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "move timeout"
+    },
+    "dead": [
+     "devAlice",
+     "ComPlayer_304",
+     "devBob",
+     "ComPlayer_923"
+    ],
+    "turns": 24
+   },
+   "textA": "Hai perso Rissa conclusa al tavolo Vince Computer 3 devBob non ha mosso entro 30 secondi Risolti 15 turni fino al turno 24: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno"
+  },
+  "otherLateRejoin": {
+   "gameId": "84f1b724fedaa61ff13fa8b745d27aabc6c540e54110672f8e3579a32576f0ab",
+   "characters": {
+    "ComPlayer_6283": "Tossico del Serraglio",
+    "ComPlayer_8143": "Tossico del Serraglio",
+    "ComPlayer_9245": "Tossico del Serraglio",
+    "devAlice": "Spazienzio de la Ucciso",
+    "devBob": "Tossico del Serraglio"
+   },
+   "awayShownToA": [
+    "devBob fuori linea · 27 s"
+   ],
+   "resumeStatus": "finished",
+   "resumeTurn": 2,
+   "turnSeenByB": 2,
+   "turnOfA": 2,
+   "forfeits": {
+    "devBob": "reconnect timeout"
+   },
+   "panelB": "Sei fuori dalla partita Non sei rientrato entro 30 secondi Risolti 2 turni fino al turno 2: valori finali della vista. L’ultimo turno è in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno",
+   "framesB": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devBob/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "turnsAfter": 14,
+   "watched": null,
+   "outcome": {
+    "winner": "devAlice",
+    "outcomeReason": "combat",
+    "forfeits": {
+     "devBob": "reconnect timeout"
+    },
+    "dead": [
+     "ComPlayer_6283",
+     "ComPlayer_8143",
+     "ComPlayer_9245"
+    ],
+    "turns": 16
+   },
+   "textA": "Hai vinto Rissa conclusa al tavolo devBob non è rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "split": {
+  "scenarios": [
+   "queue",
+   "five",
+   "two",
+   "start",
+   "leave",
+   "timeout",
+   "drop"
+  ],
+  "parts": [
+   {
+    "scenario": "queue",
+    "ok": true,
+    "seconds": 13
+   },
+   {
+    "scenario": "five",
+    "ok": true,
+    "seconds": 102
+   },
+   {
+    "scenario": "two",
+    "ok": true,
+    "seconds": 110
+   },
+   {
+    "scenario": "start",
+    "ok": true,
+    "seconds": 41
+   },
+   {
+    "scenario": "leave",
+    "ok": true,
+    "seconds": 103
+   },
+   {
+    "scenario": "timeout",
+    "ok": true,
+    "seconds": 74
+   },
+   {
+    "scenario": "drop",
+    "ok": true,
+    "seconds": 149
+   }
+  ],
+  "duplicates": [
+   "viewport.width (five)",
+   "viewport.height (five)",
+   "checks.server (five)",
+   "checks.k7 (five)",
+   "viewport.width (two)",
+   "viewport.height (two)",
+   "checks.server (two)",
+   "checks.k7 (two)",
+   "viewport.width (start)",
+   "viewport.height (start)",
+   "checks.server (start)",
+   "checks.k7 (start)",
+   "viewport.width (leave)",
+   "viewport.height (leave)",
+   "checks.server (leave)",
+   "checks.k7 (leave)",
+   "viewport.width (timeout)",
+   "viewport.height (timeout)",
+   "checks.server (timeout)",
+   "checks.k7 (timeout)",
+   "viewport.width (drop)",
+   "viewport.height (drop)",
+   "checks.server (drop)",
+   "checks.k7 (drop)"
+  ],
+  "duplicateValues": {
+   "viewport.width": {
+    "five": 1366,
+    "two": 1366,
+    "start": 1366,
+    "leave": 1366,
+    "timeout": 1366,
+    "drop": 1366
+   },
+   "viewport.height": {
+    "five": 768,
+    "two": 768,
+    "start": 768,
+    "leave": 768,
+    "timeout": 768,
+    "drop": 768
+   },
+   "checks.server": {
+    "five": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "two": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "start": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "leave": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "timeout": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    },
+    "drop": {
+     "database": "temporary",
+     "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+    }
+   },
+   "checks.k7": {
+    "five": {
+     "mouse": {
+      "card": "BELLO IL TUO GIOCATTOLO SI",
+      "owner": "ComPlayer_5662",
+      "index": 0,
+      "raisedOnHover": true,
+      "target": {
+       "owner": "ComPlayer_5662",
+       "itemIndex": 0
+      }
+     },
+     "touch": {
+      "card": "BELLO IL TUO GIOCATTOLO SI",
+      "owner": "ComPlayer_5662",
+      "index": 0,
+      "afterFirst": {
+       "peek": "item-ComPlayer_5662-0",
+       "target": null,
+       "selected": true
+      },
+      "afterSecond": {
+       "target": {
+        "owner": "ComPlayer_5662",
+        "itemIndex": 0
+       }
+      }
+     },
+     "raiseOnly": {
+      "item": "item-ComPlayer_5662-0",
+      "restingW": 88.777728,
+      "peekAfterFirstTouch": "item-ComPlayer_5662-0",
+      "widthAfterFirstTouch": 102.09438719999999,
+      "secondTouchInspects": true,
+      "inspectionTitle": "Negroni Trovato per Terra",
+      "widthOnHover": 102.09438719999999
+     }
+    },
+    "two": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    },
+    "start": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    },
+    "leave": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    },
+    "timeout": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    },
+    "drop": {
+     "mouse": null,
+     "touch": null,
+     "raiseOnly": null
+    }
+   }
+  }
+ }
+}

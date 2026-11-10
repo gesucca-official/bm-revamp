@@ -1,0 +1,1347 @@
+{
+ "date": "2026-11-10T12:39:41.115Z",
+ "url": "http://127.0.0.1:14320",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "kind": "automated browser run on PC (Edge via Playwright, two contexts) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "moveTimeout": {
+   "gameId": "971eaa72213e7c0283496dafc44615428514056a82ab171db0fd4992e2e2efad",
+   "cardA": "Desiderio Incontrollabile",
+   "clockAAfterSend": "◷ —",
+   "clockB": [
+    "◷ 30 s",
+    "◷ 17 s"
+   ],
+   "secondsToOutcome": 30,
+   "outcomeReason": "timeout",
+   "forfeits": {
+    "devBob": "move timeout"
+   },
+   "winner": "devAlice",
+   "health": {
+    "devAlice": 100,
+    "devBob": 100
+   },
+   "textA": "Hai vinto Tempo scaduto devBob non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai perso Tempo scaduto Non hai mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "simultaneousDeadlines": {
+   "gameId": "6985d674cff73b7f10f165f6d440a3a33f684b9c4ac66a39a81aa4aedcfb7feb",
+   "winner": "NONE",
+   "outcomeReason": "timeout",
+   "forfeits": {
+    "devAlice": "move timeout",
+    "devBob": "move timeout"
+   },
+   "textA": "Pareggio Tempo scaduto per tutti Non hai mosso entro 30 secondi devBob non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Pareggio Tempo scaduto per tutti Non hai mosso entro 30 secondi devAlice non ha mosso entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  },
+  "rejoinInTime": {
+   "gameId": "9d96bbe4de8b95f5c69f7d5cdc31ef523f72094c193d8515d531632ebd83e6f1",
+   "pending": "SVEGLIAMOCI MA TU NO",
+   "phase": "pending",
+   "sendsAfterRejoin": [
+    "/app/session/resume",
+    "/app/user/devAlice/account",
+    "/app/connections/users/tell/me",
+    "/app/game/9d96bbe4de8b95f5c69f7d5cdc31ef523f72094c193d8515d531632ebd83e6f1/devAlice/view"
+   ],
+   "awayShownToB": [
+    "devAlice fuori linea · 28 s"
+   ]
+  },
+  "rejoinLate": {
+   "gameId": "9d96bbe4de8b95f5c69f7d5cdc31ef523f72094c193d8515d531632ebd83e6f1",
+   "secondsOut": 31,
+   "awayShownToB": [],
+   "winner": "devBob",
+   "forfeits": {
+    "devAlice": "reconnect timeout"
+   },
+   "outcomeReason": "timeout",
+   "resumeStatus": "finished",
+   "textA": "Hai perso Tempo scaduto Non sei rientrato entro 30 secondi Turno 2 risolto mentre eri fuori linea: valori finali della vista. Dettagli in «Ultimo turno». Nuova partita Torna all’hub Ultimo turno",
+   "textB": "Hai vinto Tempo scaduto devAlice non è rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno",
+   "framesAfterRejoin": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devAlice/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "hubNotices": []
+  },
+  "leave": {
+   "gameId": "f64daf9bcfb2143a7835a10ab481b4e3bbc76d91267eecceec66ca63b03d5a16",
+   "ack": true,
+   "leaveSends": 1,
+   "winner": "devBob",
+   "forfeits": {
+    "devAlice": "leave"
+   },
+   "outcomeReason": "leave",
+   "textB": "Hai vinto Abbandono devAlice ha abbandonato Nuova partita Torna all’hub Ultimo turno",
+   "secondLeaveRawSocket": {
+    "got": [
+     "MESSAGE\ndestination:/user/queue/game/f64daf9bcfb2143a7835a10ab481b4e3bbc76d91267eecceec66ca63b03d5a16/leave\ncontent-type:application/json\nsubscription:l\nmessage-id:f6924831-9d78-16cd-edc2-d9b1e462acd4-143\ncontent-length:4 | true",
+     "MESSAGE\ndestination:/user/queue/session/resume\ncontent-type:application/json\nsubscription:r\nmessage-id:f6924831-9d78-16cd-edc2-d9b1e462acd4-144\ncontent-length:17 | {\"status\":\"none\"}"
+    ],
+    "why": "done"
+   },
+   "overViewsSeenByB": 1,
+   "outcomesSeenByB": [
+    "devBob {\"devAlice\":\"leave\"}"
+   ]
+  },
+  "secondSession": {
+   "message": "Credenziali errate, oppure l’account è già collegato altrove.",
+   "firstStillPlaying": true
+  },
+  "logoutInGame": {
+   "gameId": "21788d7635c0cab43f637794079c95b8c15602a8cf5e40ed7dcbfcf541d5656d",
+   "confirmation": "Uscire dall’account? Uscire durante la partita è un forfait: la partita è persa e torni all’accesso. Sì, esci No, resto al tavolo",
+   "sendsAfterConfirm": [
+    "/app/session/logout"
+   ],
+   "winner": "devBob",
+   "forfeits": {
+    "devAlice": "leave"
+   },
+   "outcomeReason": "leave",
+   "textB": "Hai vinto Abbandono devAlice ha abbandonato Nuova partita Torna all’hub Ultimo turno"
+  },
+  "afterLogoutLogin": {
+   "resume": "none"
+  },
+  "restart": {
+   "gameId": "70436276b6c03ed8fd5033da546dce53ec98a35e563c2742804b91b428cc7be0",
+   "resumeA": {
+    "status": "finished",
+    "gameId": "70436276b6c03ed8fd5033da546dce53ec98a35e563c2742804b91b428cc7be0",
+    "archived": true,
+    "outcome": {
+     "over": true,
+     "result": "draw",
+     "winner": null,
+     "reason": "riavvio server"
+    }
+   },
+   "resumeB": {
+    "status": "finished",
+    "gameId": "70436276b6c03ed8fd5033da546dce53ec98a35e563c2742804b91b428cc7be0",
+    "archived": true,
+    "outcome": {
+     "over": true,
+     "result": "draw",
+     "winner": null,
+     "reason": "riavvio server"
+    }
+   },
+   "hubA": [
+    "Pareggio — riavvio server. La partita precedente è chiusa: puoi iniziarne un’altra."
+   ],
+   "hubB": [
+    "Pareggio — riavvio server. La partita precedente è chiusa: puoi iniziarne un’altra."
+   ],
+   "framesA": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devAlice/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "framesB": [
+    "SUBSCRIBE /user/queue/session/resume",
+    "SUBSCRIBE /user/queue/game/error",
+    "SUBSCRIBE /user/queue/account/error",
+    "SUBSCRIBE /user/queue/account/data",
+    "SUBSCRIBE /topic/connections/users",
+    "SEND /app/session/resume",
+    "SEND /app/user/devBob/account",
+    "SEND /app/connections/users/tell/me"
+   ],
+   "rejoinA": "Rientra",
+   "reloginB": "Esci + login"
+  },
+  "vsComLateRejoin": {
+   "gameId": "03646c4ab24b7b018b2e1a9481949084b1d112f16027c1d66e1a5202c5ed0d4c",
+   "status": "finished",
+   "winner": "ComPlayer_2363",
+   "forfeits": {
+    "devAlice": "reconnect timeout"
+   },
+   "outcomeReason": "timeout",
+   "text": "Hai perso Tempo scaduto Non sei rientrato entro 30 secondi Nuova partita Torna all’hub Ultimo turno"
+  }
+ },
+ "errors": [],
+ "touchControls": [
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Peroni da 66, calda, oggetto di devAlice, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "01-clock"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Peroni da 66, calda, oggetto di te, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 100, forfait; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 144,
+     "height": 217,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "Ghigno co' i' Denti Marci, AZIONE LEGATA, ruolo disturbo, costo —, dà +5 A, priorità 2, copia 2",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "Ago Marcio e Spezzato, AZIONE LEGATA, ruolo danno, costo —, danno taglio 5, dà +5 T, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "Presa Male di Brutto, AZIONE REGOLARE, ruolo risorse, costo 10 A, dà +x T, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "Metabolismo Corrotto, AZIONE REGOLARE, ruolo risorse, costo —, dà +x H, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "Steal, AZIONE REGOLARE, ruolo oggetti, costo 10 A, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "info",
+     "label": "Dettagli: Desiderio Incontrollabile, AZIONE BASE, ruolo oggetti, costo —, priorità 1, copia 1",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 46,
+     "height": 27,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "02-timeout-win"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Peroni da 66, calda, oggetto di devAlice, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100, forfait; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "PAZIENZA: FINITA, AZIONE REGOLARE, ruolo altro, costo —, dà +15 V +15 A, priorità 0, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "03-timeout-loss"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100, forfait; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "item-devAlice-0",
+     "label": "Peroni da 66, calda, oggetto di te, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Tossico del Serraglio, salute 100, forfait; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Tennents Super, oggetto di devBob, ruolo risorse, dà +10 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-1",
+     "label": "Mescolone Micidiale, oggetto di devBob, ruolo risorse, dà +20 L, +20 T, copia 2",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-2",
+     "label": "Tennents Super, oggetto di devBob, ruolo risorse, dà +10 L, copia 3",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruolo danno, costo 20 V, danno colpo 22, priorità 1, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "GARGANTUESCO IMPATTO SUL TU, AZIONE REGOLARE, ruolo danno, costo 25 V, danno colpo 40, priorità 0, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devBob-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "04-draw"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "GABBIANO DUNQUE VOLIAMOTI, AZIONE REGOLARE, ruolo danno, costo 10 V, danno colpo 15, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "SPEDIAMOTI DUNQUE IN O-AHIO, AZIONE REGOLARE, ruolo danno, costo 20 V, danno colpo 22, priorità 1, c",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "PERMESSO SCUSA ORA SMETTI , AZIONE REGOLARE, ruolo altro, costo 10 V, danno colpo 10, priorità 1, co",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "05-away"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 95, forfait; risorse H 95, A 30, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "devBob, Spazienzio de la Ucciso, salute 90; risorse H 90, A 23, V 25, T 0, L 2",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-7",
+     "label": "COSA FAI NON É UNA DOMANDA, AZIONE REGOLARE, ruolo contrasto, costo 10 V + 10 A, priorità 2, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-8",
+     "label": "STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "06-late-rejoin"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Tossico del Serraglio, salute 100, forfait; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "item-devBob-0",
+     "label": "Peroni da 66, calda, oggetto di te, ruolo risorse, dà +5 L, copia 1",
+     "width": 61,
+     "height": 84,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "STORDIAMOTI HO DETTO, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "GABBIANO DUNQUE VOLIAMOTI, AZIONE REGOLARE, ruolo danno, costo 10 V, danno colpo 15, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "BELLO IL TUO GIOCATTOLO SI, AZIONE REGOLARE, ruolo oggetti, costo 10 V, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-devAlice-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "07-leave"
+  },
+  {
+   "controls": [
+    {
+     "selector": "close round",
+     "label": "Chiudi",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Sì, esci",
+     "width": 84,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "No, resto al tavolo",
+     "width": 162,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "09-logout-confirm"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-devAlice",
+     "label": "devAlice, Spazienzio de la Ucciso, salute 100, forfait; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "person-devBob",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "COSA FAI NON É UNA DOMANDA, AZIONE REGOLARE, ruolo contrasto, costo 10 V + 10 A, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "GABBIANO DUNQUE VOLIAMOTI, AZIONE REGOLARE, ruolo danno, costo 10 V, danno colpo 15, priorità 1, cop",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "FAI BASTA, AZIONE REGOLARE, ruolo contrasto, costo 5 V, priorità 2, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "10-logout-forfeit"
+  },
+  {
+   "controls": [
+    {
+     "selector": "primary",
+     "label": "Rientra",
+     "width": 378,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Esci",
+     "width": 378,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "11-server-down"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Contro il computer",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode on",
+     "label": "Uno contro uno",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Tutti contro tutti",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Con un tuo mazzo",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "quick",
+     "label": "Gioca",
+     "width": 291,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Esci",
+     "width": 55,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▲",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "12-restart-receipt"
+  },
+  {
+   "controls": [
+    {
+     "selector": "tab-play",
+     "label": "Gioca",
+     "width": 67,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-collection",
+     "label": "Collezione",
+     "width": 98,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "tab-profile",
+     "label": "Profilo",
+     "width": 72,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode on",
+     "label": "Contro il computer",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Uno contro uno",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Tutti contro tutti",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "mode",
+     "label": "Con un tuo mazzo",
+     "width": 175,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "quick",
+     "label": "Gioca",
+     "width": 291,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Esci",
+     "width": 55,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Giocatore ▲",
+     "width": 83,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "link",
+     "label": "Attività",
+     "width": 47,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Pagina precedente",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "Pagina successiva",
+     "width": 44,
+     "height": 44,
+     "disabled": true
+    },
+    {
+     "selector": "",
+     "label": "51020",
+     "width": 44,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [],
+   "problems": [],
+   "screen": "12-restart-receipt-B"
+  },
+  {
+   "controls": [
+    {
+     "selector": "person-ComPlayer_2363",
+     "label": "Computer, Tossico del Serraglio, salute 100; risorse H 100, A 35, V 0, T 10, L 0",
+     "width": 80,
+     "height": 110,
+     "disabled": false
+    },
+    {
+     "selector": "person-devAlice",
+     "label": "Tu, Spazienzio de la Ucciso, salute 100, forfait; risorse H 100, A 20, V 25, T 0, L 0",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-1",
+     "label": "ADOPERIAMOTI, AZIONE BASE, ruolo oggetti, costo —, priorità -1, copia 1",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-2",
+     "label": "SVEGLIAMOCI MA TU NO, AZIONE LEGATA, ruolo danno, costo —, danno colpo 5, dà +5 A, priorità 1, copia",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-3",
+     "label": "LIEVE FASTIDIO, AZIONE LEGATA, ruolo difesa, costo —, dà +5 V, priorità 2, copia 3",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-4",
+     "label": "COSA FAI NON É UNA DOMANDA, AZIONE REGOLARE, ruolo contrasto, costo 10 A + 10 V, priorità 2, copia 4",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-5",
+     "label": "BELLO IL TUO GIOCATTOLO SI, AZIONE REGOLARE, ruolo oggetti, costo 10 V, priorità 1, copia 5",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "card-6",
+     "label": "AMMALIAMOTI DI BOTTE, AZIONE REGOLARE, ruolo danno, costo 15 V, danno colpo 10, priorità 1, copia 6",
+     "width": 120,
+     "height": 166,
+     "disabled": false
+    },
+    {
+     "selector": "menu-button round",
+     "label": "Apri menu",
+     "width": 46,
+     "height": 46,
+     "disabled": false
+    },
+    {
+     "selector": "again",
+     "label": "Nuova partita",
+     "width": 128,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Torna all’hub",
+     "width": 125,
+     "height": 44,
+     "disabled": false
+    },
+    {
+     "selector": "",
+     "label": "Ultimo turno",
+     "width": 121,
+     "height": 44,
+     "disabled": false
+    }
+   ],
+   "exceptions": [
+    {
+     "selector": "status-ComPlayer_2363-imm-TOXICITY",
+     "label": "Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.",
+     "width": 31,
+     "height": 18,
+     "disabled": false,
+     "reason": "D8: same full content in character inspection [data-testid=inspect-chip]; VerifyLayout exercises that route"
+    }
+   ],
+   "problems": [],
+   "screen": "13-vscom-late"
+  }
+ ],
+ "ok": true
+}

@@ -19,6 +19,9 @@ const quick=flag('quick'),reuseJar=flag('reuse-jar'),reuseClient=flag('reuse-cli
 const measures=(opt('measures',quick?'1366x768':'1366x768,844x390')).split(',').filter(Boolean);
 const only=opt('only','')?.split(',').filter(Boolean);
 const publish=opt('publish','');
+// C4-1c (phase A prototype, verify-all-parallel.mjs): only with --parallel=N; without it nothing below changes.
+const parallel=Number(opt('parallel','0'))||0,solo=opt('solo','aim,layout').split(',').filter(Boolean),split=opt('split','').split(',').filter(Boolean);
+if(!parallel&&args.some(a=>a.startsWith('--solo=')||a.startsWith('--split='))){console.log('ERROR: --solo and --split need --parallel=N.');process.exit(2);}
 const stepTimeoutMin=Number(process.env.BM_STEP_TIMEOUT_MIN??120);
 const SERVER_PORT=8080,CLIENT_PORT=4320;
 const CAPTURE_BUDGET=Number(process.env.BM_CAPTURE_BUDGET_MB??10)*1024*1024;
@@ -28,7 +31,7 @@ const QUICK_SCENARIOS={ffa:'queue,five',aim:'duel,ffa',layout:'duel,ffa',resolut
 // Counters that must be above zero when the evidence has them: a zero means the check ran on nothing. Only warns, never changes a verdict.
 const MUST_BE_POSITIVE=['turnsChecked','cardsChecked','boardChecks','unpayableSeen','arrowsDrawn','turnsSeen'];
 
-const stamp=new Date().toISOString().replace(/[:.]/g,'-');
+const startedAt=Date.now(),stamp=new Date().toISOString().replace(/[:.]/g,'-');
 const work=await mkdtemp(join(tmpdir(),`bm-verify-all-${stamp}-`));
 const evidence=join(work,'evidence'),logs=join(work,'logs'),evidenceDir=evidence;
 await mkdir(evidence,{recursive:true});await mkdir(logs,{recursive:true});
@@ -65,8 +68,8 @@ if(existsSync(lockPath)){
 }
 await writeFile(lockPath,String(process.pid));
 process.on('exit',()=>{try{if(existsSync(lockPath)&&Number(readFileSync(lockPath,'utf8'))===process.pid)unlinkSync(lockPath);}catch{}});
-if(await portBusy(SERVER_PORT)){say(`ERROR: port ${SERVER_PORT} is in use (not mine, not stopping it). Free it and retry.`);process.exit(2);}
-if(!reuseClient&&await portBusy(CLIENT_PORT)){say(`ERROR: port ${CLIENT_PORT} is in use (not mine, not stopping it). Free it, or pass --reuse-client to use that preview as it is.`);process.exit(2);}
+if(!parallel&&await portBusy(SERVER_PORT)){say(`ERROR: port ${SERVER_PORT} is in use (not mine, not stopping it). Free it and retry.`);process.exit(2);}
+if(!parallel&&!reuseClient&&await portBusy(CLIENT_PORT)){say(`ERROR: port ${CLIENT_PORT} is in use (not mine, not stopping it). Free it, or pass --reuse-client to use that preview as it is.`);process.exit(2);}
 const toolchain=JSON.parse(await readFile(join(repo,'scripts/toolchain.json'),'utf8'));
 const java=process.env.BM_JAVA??join(repo,'.tools',toolchain.tools.find(t=>t.name==='java').directory,'bin','java.exe');
 const jarPath=join(repo,'server','target','bm-server-0.0.1-SNAPSHOT.jar');
@@ -129,23 +132,32 @@ async function scanVacuous(name,measure){
 
 const sizeEnv={BM_OUT:evidence};
 const env=m=>({BM_OUT:evidence,BM_VIEWPORT:m});
-async function serverUp(){
+async function serverUp(port=SERVER_PORT){
   const data=await mkdtemp(join(tmpdir(),'bm-verify-all-db-'));
-  const log=createWriteStream(join(logs,'shared-server.log'));
-  const p=spawn(java,['-jar',jarPath,'--spring.profiles.active=local','--app.dev.seed-accounts=true'],{cwd:join(repo,'server'),env:{...process.env,BM_DATABASE_PATH:join(data,'bm.sqlite')},stdio:['ignore','pipe','pipe']});
+  const log=createWriteStream(join(logs,port===SERVER_PORT?'shared-server.log':`shared-server-${port}.log`));
+  const p=spawn(java,['-jar',jarPath,'--spring.profiles.active=local','--app.dev.seed-accounts=true',...(port===SERVER_PORT?[]:[`--server.port=${port}`])],{cwd:join(repo,'server'),env:{...process.env,BM_DATABASE_PATH:join(data,'bm.sqlite')},stdio:['ignore','pipe','pipe']});
   children.add(p);p.stdout.pipe(log);p.stderr.pipe(log);
   const end=Date.now()+90000;
   while(Date.now()<end){
     if(p.exitCode!==null)throw new Error(`shared server exited (${p.exitCode})`);
-    try{const r=await fetch(`http://127.0.0.1:${SERVER_PORT}/api/rest/v1/sign-in/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'devAlice',password:'local-alice'})});if(r.ok)return {p,data};}catch{}
+    try{const r=await fetch(`http://127.0.0.1:${port}/api/rest/v1/sign-in/validate`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'devAlice',password:'local-alice'})});if(r.ok)return {p,data};}catch{}
     await sleep(500);
   }
   killTree(p);throw new Error('shared server did not start in 90 s');
 }
 async function serverDown(s){killTree(s.p);children.delete(s.p);await sleep(500);await rm(s.data,{recursive:true,force:true}).catch(()=>{});}
 
-let preview=null;
-try{
+let preview=null,parallelRun=null;
+if(parallel){
+  if(reuseClient){say('ERROR: --parallel starts its own previews; --reuse-client is not allowed.');process.exit(2);}
+  try{
+    await step('test',null,...npmRun('test'));await step('build',null,...npmRun('build'));await step('size',null,...npmRun('size',sizeEnv));
+    build.dist=await hashDir(join(web,'dist')).catch(()=>null);if(build.dist)say(`dist verified: ${build.dist.files} files, sha256 ${build.dist.sha256_16}`);
+    const {runParallel}=await import('./verify-all-parallel.mjs');
+    parallelRun=await runParallel({N:parallel,solo,split,measures,quick,want,QUICK_SCENARIOS,evidence,logs,web,node,npmCli,say,run,results,warnings,scanVacuous,serverUp,serverDown,children,killTree,portBusy,waitFree,sleep});
+  }catch(e){say(`ABORT: ${e.message}`);results.push({name:'orchestrator',measure:'—',ok:false,seconds:0,exit:1,problems:0});}
+  finally{for(const c of children)killTree(c);}
+}else try{
   // 1. Test, Build, Size (Size on a copy: BM_OUT, the tracked size.json is left alone)
   await step('test',null,...npmRun('test'));
   await step('build',null,...npmRun('build'));
@@ -187,11 +199,12 @@ console.log(`\n${quick?'*** QUICK MODE — NOT equivalent to the consolidation (
 console.log(`${pad('verification',14)}${pad('measure',11)}${pad('result',8)}duration`);
 for(const r of results)console.log(`${pad(r.name,14)}${pad(r.measure,11)}${pad(r.ok?'OK':'FAIL',8)}${fmt(r.seconds)}`);
 const total=results.reduce((s,r)=>s+r.seconds,0),failed=results.filter(r=>!r.ok);
+if(parallel)console.log(`\nPARALLEL (C4-1c prototype, ${parallel} slots; solo: ${solo.join(',')||'none'}; split: ${split.join(',')||'none'}): wall clock ${fmt(Math.round((Date.now()-startedAt)/1000))}${parallelRun?`, pool ${fmt(parallelRun.poolSeconds)}, solo phase ${fmt(parallelRun.soloSeconds)}`:''}; durations below are per job (split: sum of the parts), not wall clock`);
 console.log(`\ntotal ${fmt(total)} · ${results.length-failed.length}/${results.length} green${failed.length?` · FAILED: ${failed.map(r=>`${r.name} ${r.measure}`).join(', ')}`:''}`);
 if(warnings.length){console.log('\nWARNINGS (no threshold or expectation was changed):');for(const w of warnings)console.log(' - '+w);}
 
-const complete=!quick&&!only?.length&&!extra.length&&STANDARD.every(m=>measures.includes(m))&&!reuseClient;
-const summary={date:new Date().toISOString(),quick,nonStandardMeasures:extra,equivalentToConsolidation:complete&&!reuseJar,measures,only:only??null,build,results,warnings};
+const complete=!parallel&&!quick&&!only?.length&&!extra.length&&STANDARD.every(m=>measures.includes(m))&&!reuseClient;
+const summary={date:new Date().toISOString(),quick,nonStandardMeasures:extra,equivalentToConsolidation:complete&&!reuseJar,measures,only:only??null,build,results,warnings,...(parallel?{parallel:{...parallelRun,wallSeconds:Math.round((Date.now()-startedAt)/1000),note:'C4-1c prototype: not equivalent to the consolidation until the owner decides; never published'}}:{})};
 await writeFile(join(evidence,'run-summary.json'),JSON.stringify(summary,null,2));
 // D13 (C4 plan): final JSON always; only final captures, recompressed, up to about 10 MB per block (an indication, not a threshold); the rest stays in the temporary folder.
 async function publishEvidence(dest,evidence=evidenceDir){

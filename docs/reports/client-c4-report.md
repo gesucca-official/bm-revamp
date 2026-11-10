@@ -1432,3 +1432,37 @@ A 844×390 e 750×292 (limite 33 ms) tutto entro: 0,958–0,994. Costo del ridis
 - **PC (1920×1080 o più):** quanto crescono mano, personaggi e carte del round; la fila degli oggetti propri del duello sopra il personaggio; se l'ombra si nota abbastanza (i valori sono in un punto solo, `CARD_SHADOW`).
 - **PC con la finestra bassa, o 844×390:** la pila delle carte del round (autore in cima, conteggio, segno vinaccia se c'è un'annullata sotto), il titolo nascosto, gli oggetti di scena attenuati.
 - **iPhone in orizzontale:** O28 (tavolo nella larghezza sicura, menu e orologio fuori dall'isola delle fotocamere), la fluidità, e il jingle di sconfitta quando la barra di Safari compare o sparisce.
+
+## C4-1c — Fase A
+
+10 novembre 2026. **Fase A pronta, in attesa della scelta del proprietario** ([proposta](../design/client-c4/verifiche/proposta.md), evidenze in
+[client-c4/c4-1c](client-c4/c4-1c/), circa 4,7 MB). Solo strumenti; nessuna soglia, nessun atteso, nessuno scenario, `BASE_750` invariato.
+
+**Misura.** Giro di base in serie su una copia esportata di HEAD `ed909f3` con gli strumenti di oggi, jar `dbfc5ded848bcfb2`, `dist`
+`aa25c0d2c45904da`: **101 min 59 s**, 21/23 verdi. `VerifyAim` 844×390 è il rosso noto di C4-11; `VerifyProfile` 1366×768 è rosso per la
+copia esportata (mancava `jar.exe` in `.tools`), verde al rilancio (55 s). `VerifyResolution` è il 66% del giro (67 min alle due misure),
+`VerifyFfa` il 13%; dentro `VerifyResolution` lo scenario più lungo dura circa 6 min; 11–14 min per misura sono animazioni reali misurate.
+
+**Prototipo** (dietro opzioni): `BM_SERVER_PORT` anche in Lifecycle, Ffa, Decks, Public e Profile; `-Parallel N`, `-Split`, `-Solo` in
+`VerifyAll` (`verify-all-parallel.mjs`); `compare-runs.mjs`. Senza `-Parallel` nulla cambia: con il comando di oggi sulle cinque verifiche
+toccate, alle due misure, **13/13 verdi** in 24 min 01 s su 8080 e 4320.
+
+| Giro | Durata | Esiti |
+|---|---:|---|
+| Serie | 101 min 59 s | 21/23 (rossi sopra) |
+| N=4, split resolution e ffa, aim e layout da sole | **38 min 03 s** | 20/23: aim 844 noto; aim 1366 sui frame subito dopo il pool (verde da sola, verde in N=8 con 15 s di quiete); ffa 844 `two`, 30 s scaduti nella ricerca della carta (verde da sola) |
+| N=8, idem | 42 min 00 s | 20/23: aim 844 noto; ffa alle due misure (tre rossi come sopra, due parti appese e fermate a mano, circa 15 min persi) |
+
+**Equivalenza.** Stessi controlli e scene in tutte le verifiche; `VerifyResolution` 21 controlli e 11 scene in tutti i giri, casi richiesti
+tutti visti in parallelo; i casi opportunistici cambiano come fra i giri in serie storici. Tempi misurati: scarto delle sequenze dal piano
+p95 8 ms in serie, 14–18 ms con N=4, 24–30 ms con N=8, massimo 68 ms contro 250 di tolleranza; etichette 1200 ms e clock minimo 11 s identici;
+`VerifyLayout` frame entro il limite al 100% in tutti i giri, p95 massimo 11,8 → 14 ms, input massimo 31,7 ms.
+
+**Non provato:** N=2 e N=3 (prova accorciata dal proprietario), la variabilità fra due giri completi in serie (presa dai run-summary di
+C4-1b e C4-10: `VerifyResolution` 30–35 min per misura, `VerifyFfa` 6–9 min), l'altra macchina, il giro a 750×292, un giro parallelo
+tutto verde (i rossi di `VerifyFfa` restano il punto aperto della Fase B). Il metodo e CONTRIBUTING.md non sono cambiati: il testo
+proposto è nella proposta.
+
+**Domande al proprietario:** nella [proposta](../design/client-c4/verifiche/proposta.md#5-domande-al-proprietario): N (raccomandato 4),
+verifiche da sole (aim e layout), correzione di `VerifyFfa` in Fase B (sì), leva e) (no per ora), parallelo come consolidamento (dopo la
+Fase B), altra macchina (stesse opzioni, nessun obbligo).

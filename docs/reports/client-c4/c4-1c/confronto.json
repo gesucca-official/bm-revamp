@@ -1,0 +1,2419 @@
+{
+ "runs": {
+  "serial": {
+   "dir": "%TEMP%/run-serial-base/evidence",
+   "wallSeconds": null,
+   "summedSeconds": 6119,
+   "dist": {
+    "files": 28,
+    "sha256_16": "aa25c0d2c45904da"
+   },
+   "jar": "dbfc5ded848bcfb2",
+   "results": {
+    "test@—": {
+     "ok": true,
+     "seconds": 4,
+     "span": null
+    },
+    "build@—": {
+     "ok": true,
+     "seconds": 3,
+     "span": null
+    },
+    "size@—": {
+     "ok": true,
+     "seconds": 0,
+     "span": null
+    },
+    "verify@1366x768": {
+     "ok": true,
+     "seconds": 61,
+     "span": null
+    },
+    "modes@1366x768": {
+     "ok": true,
+     "seconds": 34,
+     "span": null
+    },
+    "verify@844x390": {
+     "ok": true,
+     "seconds": 65,
+     "span": null
+    },
+    "modes@844x390": {
+     "ok": true,
+     "seconds": 25,
+     "span": null
+    },
+    "lifecycle@1366x768": {
+     "ok": true,
+     "seconds": 163,
+     "span": null
+    },
+    "ffa@1366x768": {
+     "ok": true,
+     "seconds": 371,
+     "span": null
+    },
+    "decks@1366x768": {
+     "ok": true,
+     "seconds": 42,
+     "span": null
+    },
+    "public@1366x768": {
+     "ok": true,
+     "seconds": 11,
+     "span": null
+    },
+    "profile@1366x768": {
+     "ok": false,
+     "seconds": 17,
+     "span": null
+    },
+    "resolution@1366x768": {
+     "ok": true,
+     "seconds": 1963,
+     "span": null
+    },
+    "aim@1366x768": {
+     "ok": true,
+     "seconds": 119,
+     "span": null
+    },
+    "layout@1366x768": {
+     "ok": true,
+     "seconds": 151,
+     "span": null
+    },
+    "lifecycle@844x390": {
+     "ok": true,
+     "seconds": 164,
+     "span": null
+    },
+    "ffa@844x390": {
+     "ok": true,
+     "seconds": 408,
+     "span": null
+    },
+    "decks@844x390": {
+     "ok": true,
+     "seconds": 29,
+     "span": null
+    },
+    "public@844x390": {
+     "ok": true,
+     "seconds": 11,
+     "span": null
+    },
+    "profile@844x390": {
+     "ok": true,
+     "seconds": 48,
+     "span": null
+    },
+    "resolution@844x390": {
+     "ok": true,
+     "seconds": 2072,
+     "span": null
+    },
+    "aim@844x390": {
+     "ok": false,
+     "seconds": 199,
+     "span": null
+    },
+    "layout@844x390": {
+     "ok": true,
+     "seconds": 159,
+     "span": null
+    }
+   },
+   "files": {
+    "aim-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "duel-1366x768",
+      "ffa-1366x768",
+      "pending-1366x768",
+      "reduced-1366x768",
+      "server",
+      "touch-1366x768"
+     ],
+     "scenes": [
+      "duel",
+      "ffa",
+      "pending",
+      "reduced",
+      "touch"
+     ],
+     "counters": {
+      "cardsChecked": 216,
+      "arrowsDrawn": 309
+     },
+     "failure": null,
+     "timing": {
+      "samples": 2,
+      "withinMin": 1,
+      "p95Max": 8.6,
+      "frameMax": 17.4,
+      "inputMax": 16.7,
+      "per": [
+       {
+        "where": ".scenarios.duel",
+        "within": 1,
+        "p95": 8.6,
+        "max": 10.4,
+        "inputMax": 12
+       },
+       {
+        "where": ".scenarios.ffa",
+        "within": 1,
+        "p95": 8.6,
+        "max": 17.4,
+        "inputMax": 16.7
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "aim-844x390.json": {
+     "ok": false,
+     "checks": [
+      "duel-844x390",
+      "ffa-844x390",
+      "pending-844x390",
+      "reduced-844x390",
+      "server",
+      "touch-844x390"
+     ],
+     "scenes": [
+      "duel",
+      "ffa",
+      "pending",
+      "reduced",
+      "touch"
+     ],
+     "counters": {
+      "cardsChecked": 216,
+      "arrowsDrawn": 261
+     },
+     "failure": "AssertionError [ERR_ASSERTION]: aim problems\n+ actual - expected\n\n+ [\n+   \"ffa-844x390: Ghigno co' i' Denti Marci: arrow person-ComPlayer_2080 flagged as crossing the buttons\",\n+   'ffa-844x390: Ago Marcio e Spezzato: arrow person-ComPlayer_2080 flagged as crossing the buttons',\n+   'ffa-844x390: Ag",
+     "timing": {
+      "samples": 2,
+      "withinMin": 1,
+      "p95Max": 10.2,
+      "frameMax": 19.6,
+      "inputMax": 18,
+      "per": [
+       {
+        "where": ".scenarios.duel",
+        "within": 1,
+        "p95": 8.7,
+        "max": 11.7,
+        "inputMax": 11.9
+       },
+       {
+        "where": ".scenarios.ffa",
+        "within": 1,
+        "p95": 10.2,
+        "max": 19.6,
+        "inputMax": 18
+       }
+      ]
+     },
+     "problems": 4
+    },
+    "decks-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "cancelKeepsSaved",
+      "catalog",
+      "catalogDamage",
+      "catalogFrames",
+      "createAndSave",
+      "deckUnavailableProvoked",
+      "delete",
+      "editorFaces",
+      "newGameRepeatsOpen",
+      "openGame",
+      "overwrite",
+      "rulesInEditor",
+      "threeInitialCards"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "decks-844x390.json": {
+     "ok": true,
+     "checks": [
+      "cancelKeepsSaved",
+      "catalog",
+      "catalogDamage",
+      "catalogFrames",
+      "createAndSave",
+      "deckUnavailableProvoked",
+      "delete",
+      "editorFaces",
+      "newGameRepeatsOpen",
+      "openGame",
+      "overwrite",
+      "rulesInEditor",
+      "threeInitialCards"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "ffa-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 21
+     },
+     "failure": null
+    },
+    "ffa-844x390.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7RaiseOnly",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 19
+     },
+     "failure": null
+    },
+    "layout-1366x768.json": {
+     "ok": true,
+     "checks": [],
+     "scenes": [
+      "chips",
+      "duel",
+      "ffa",
+      "resize-duel",
+      "resize-ffa"
+     ],
+     "counters": {},
+     "failure": null,
+     "timing": {
+      "samples": 4,
+      "withinMin": 0.997,
+      "p95Max": 10.6,
+      "frameMax": 128,
+      "inputMax": 28.9,
+      "per": [
+       {
+        "where": ".scenarios.duel T0",
+        "within": 0.998,
+        "p95": 8.5,
+        "max": 32.9,
+        "inputMax": 14.6
+       },
+       {
+        "where": ".scenarios.duel T1",
+        "within": 0.999,
+        "p95": 8.6,
+        "max": 23.4,
+        "inputMax": 14.9
+       },
+       {
+        "where": ".scenarios.ffa T0",
+        "within": 0.997,
+        "p95": 9,
+        "max": 128,
+        "inputMax": 18.6
+       },
+       {
+        "where": ".scenarios.ffa T1",
+        "within": 0.997,
+        "p95": 10.6,
+        "max": 82.5,
+        "inputMax": 28.9
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "layout-844x390.json": {
+     "ok": true,
+     "checks": [],
+     "scenes": [
+      "chips",
+      "duel",
+      "ffa",
+      "resize-duel",
+      "resize-ffa"
+     ],
+     "counters": {},
+     "failure": null,
+     "timing": {
+      "samples": 4,
+      "withinMin": 0.999,
+      "p95Max": 11.8,
+      "frameMax": 103.6,
+      "inputMax": 31.4,
+      "per": [
+       {
+        "where": ".scenarios.duel T0",
+        "within": 0.999,
+        "p95": 8.6,
+        "max": 35.1,
+        "inputMax": 12.5
+       },
+       {
+        "where": ".scenarios.duel T1",
+        "within": 1,
+        "p95": 10,
+        "max": 28.9,
+        "inputMax": 18.2
+       },
+       {
+        "where": ".scenarios.ffa T0",
+        "within": 0.999,
+        "p95": 8.9,
+        "max": 103.6,
+        "inputMax": 20.2
+       },
+       {
+        "where": ".scenarios.ffa T1",
+        "within": 0.999,
+        "p95": 11.8,
+        "max": 69.7,
+        "inputMax": 31.4
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "lifecycle-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "afterLogoutLogin",
+      "leave",
+      "logoutInGame",
+      "moveTimeout",
+      "rejoinInTime",
+      "rejoinLate",
+      "restart",
+      "secondSession",
+      "server",
+      "simultaneousDeadlines",
+      "vsComLateRejoin"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "lifecycle-844x390.json": {
+     "ok": true,
+     "checks": [
+      "afterLogoutLogin",
+      "leave",
+      "logoutInGame",
+      "moveTimeout",
+      "rejoinInTime",
+      "rejoinLate",
+      "restart",
+      "secondSession",
+      "server",
+      "simultaneousDeadlines",
+      "vsComLateRejoin"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "modes-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "forfeit",
+      "game1",
+      "joinRefusedWhileResumable",
+      "newGameRepeatsMode",
+      "presenceAppears",
+      "presenceDisappears",
+      "presenceSort",
+      "privacy",
+      "queueExitA",
+      "queueExitB",
+      "sameGame"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "modes-844x390.json": {
+     "ok": true,
+     "checks": [
+      "forfeit",
+      "game1",
+      "joinRefusedWhileResumable",
+      "newGameRepeatsMode",
+      "presenceAppears",
+      "presenceDisappears",
+      "presenceSort",
+      "privacy",
+      "queueExitA",
+      "queueExitB",
+      "sameGame"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "profile-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "adminBasicNotConfigured",
+      "adminCounts",
+      "adminDelete",
+      "adminDownloads",
+      "adminOpenGames",
+      "adminWrongCredentials",
+      "clientErrorReports",
+      "diagnostics1v1",
+      "diagnosticsFfa",
+      "environment",
+      "gameLogAfterGames",
+      "ingestionUnreachable",
+      "userProfile"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "profile-844x390.json": {
+     "ok": true,
+     "checks": [
+      "adminBasicNotConfigured",
+      "adminCounts",
+      "adminDelete",
+      "adminDownloads",
+      "adminOpenGames",
+      "adminWrongCredentials",
+      "clientErrorReports",
+      "diagnostics1v1",
+      "diagnosticsFfa",
+      "environment",
+      "gameLogAfterGames",
+      "ingestionUnreachable",
+      "userProfile"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "public-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "home",
+      "loginPath",
+      "portrait",
+      "rules",
+      "rulesBack",
+      "rulesIndex",
+      "rulesIndexSet",
+      "serverDown",
+      "setDocument",
+      "signupInvalid",
+      "signupTaken",
+      "signupUnavailable",
+      "signupWrongCode"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "public-844x390.json": {
+     "ok": true,
+     "checks": [
+      "home",
+      "loginPath",
+      "portrait",
+      "rules",
+      "rulesBack",
+      "rulesIndex",
+      "rulesIndexSet",
+      "serverDown",
+      "setDocument",
+      "signupInvalid",
+      "signupTaken",
+      "signupUnavailable",
+      "signupWrongCode"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "resolution-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "casesOnRealServer",
+      "ffa",
+      "humans",
+      "humansClock",
+      "infoDuel",
+      "infoFfa",
+      "infoTouch",
+      "interruptions",
+      "jump",
+      "jumpDialog",
+      "jumpObserved",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "quickRejoin",
+      "reducedMotion",
+      "report-duel",
+      "report-ffa",
+      "reportConsistency",
+      "rule4WithClock",
+      "server"
+     ],
+     "scenes": [
+      "ffa",
+      "humans",
+      "info",
+      "infoFfa",
+      "infoTouch",
+      "interrupt",
+      "jump",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "reduced"
+     ],
+     "counters": {
+      "turnsSeen": 63
+     },
+     "failure": null,
+     "cases": {
+      "barsPerCard": 53,
+      "barsTotal": 2,
+      "boundDiscard": 48,
+      "boundDiscardFlown": 45,
+      "clearToHand": 46,
+      "darkened": 65,
+      "death": 5,
+      "deathWithMove": 5,
+      "drawnToTable": 8,
+      "endOfTurn": 52,
+      "impactCUT": 17,
+      "impactHIT": 51,
+      "impactRole": 87,
+      "impactVoid": 8,
+      "itemConsumed": 23,
+      "itemFromOther": 1,
+      "itemGoneBefore": 2,
+      "itemNamedNotGone": 3,
+      "jump": 2,
+      "lethalEndOfTurn": 3,
+      "objectAppeared": 6,
+      "objectVanished": 4,
+      "outcomeBanner": 3,
+      "over": 3,
+      "rejoinSame": 1,
+      "shockWave": 51,
+      "void": 8
+     },
+     "missingCases": [],
+     "timing": {
+      "rounds": 58,
+      "completeSequences": 54,
+      "driftMsP50": 5,
+      "driftMsP95": 8,
+      "driftMsMax": 12,
+      "over250": 0,
+      "labelReadableMin": 1200,
+      "clockAtEndMin": 11,
+      "ruleViolations": {
+       "1": 0,
+       "2": 0,
+       "3": 0,
+       "6": 0,
+       "c32": 0,
+       "c34": 0,
+       "d13": 0,
+       "c4s": 0
+      }
+     }
+    },
+    "resolution-844x390.json": {
+     "ok": true,
+     "checks": [
+      "casesOnRealServer",
+      "ffa",
+      "humans",
+      "humansClock",
+      "infoDuel",
+      "infoFfa",
+      "infoTouch",
+      "interruptions",
+      "jump",
+      "jumpDialog",
+      "jumpObserved",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "quickRejoin",
+      "reducedMotion",
+      "report-duel",
+      "report-ffa",
+      "reportConsistency",
+      "rule4WithClock",
+      "server"
+     ],
+     "scenes": [
+      "ffa",
+      "humans",
+      "info",
+      "infoFfa",
+      "infoTouch",
+      "interrupt",
+      "jump",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "reduced"
+     ],
+     "counters": {
+      "turnsSeen": 83
+     },
+     "failure": null,
+     "cases": {
+      "barsPerCard": 70,
+      "barsTotal": 5,
+      "boundDiscard": 60,
+      "boundDiscardFlown": 57,
+      "clearToHand": 64,
+      "darkened": 74,
+      "death": 4,
+      "deathWithMove": 4,
+      "drawnToTable": 14,
+      "endOfTurn": 60,
+      "impactCUT": 14,
+      "impactHIT": 63,
+      "impactRole": 130,
+      "impactVoid": 10,
+      "itemConsumed": 33,
+      "itemFromOther": 3,
+      "itemGoneBefore": 2,
+      "itemNamedNotGone": 3,
+      "jump": 2,
+      "objectAppeared": 9,
+      "objectVanished": 9,
+      "outcomeBanner": 3,
+      "over": 3,
+      "rejoinSame": 1,
+      "shockWave": 63,
+      "void": 10
+     },
+     "missingCases": [
+      "lethalEndOfTurn"
+     ],
+     "timing": {
+      "rounds": 78,
+      "completeSequences": 74,
+      "driftMsP50": 3,
+      "driftMsP95": 8,
+      "driftMsMax": 40,
+      "over250": 0,
+      "labelReadableMin": 1200,
+      "clockAtEndMin": 11,
+      "ruleViolations": {
+       "1": 0,
+       "2": 0,
+       "3": 0,
+       "6": 0,
+       "c32": 0,
+       "c34": 0,
+       "d13": 0,
+       "c4s": 0
+      }
+     }
+    },
+    "verify-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "bound",
+      "c2a",
+      "dragFollow",
+      "hubReturn",
+      "item",
+      "login",
+      "noScroll",
+      "o1o5",
+      "rejoin",
+      "reorder",
+      "resumedAtStart"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 34,
+      "cardsChecked": 203,
+      "unpayableSeen": 41,
+      "boardChecks": 34
+     },
+     "failure": null
+    },
+    "verify-844x390.json": {
+     "ok": true,
+     "checks": [
+      "bound",
+      "c2a",
+      "dragFollow",
+      "hubReturn",
+      "item",
+      "login",
+      "noScroll",
+      "o1o5",
+      "rejoin",
+      "reorder",
+      "resumedAtStart"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 37,
+      "cardsChecked": 221,
+      "unpayableSeen": 39,
+      "boardChecks": 37
+     },
+     "failure": null
+    }
+   }
+  },
+  "par4": {
+   "dir": "%TEMP%/run-par4/evidence",
+   "wallSeconds": 2283,
+   "summedSeconds": 7128,
+   "dist": {
+    "files": 28,
+    "sha256_16": "aa25c0d2c45904da"
+   },
+   "jar": "dbfc5ded848bcfb2",
+   "results": {
+    "test@—": {
+     "ok": true,
+     "seconds": 2,
+     "span": null
+    },
+    "build@—": {
+     "ok": true,
+     "seconds": 3,
+     "span": null
+    },
+    "size@—": {
+     "ok": true,
+     "seconds": 0,
+     "span": null
+    },
+    "lifecycle@1366x768": {
+     "ok": true,
+     "seconds": 169,
+     "span": null
+    },
+    "lifecycle@844x390": {
+     "ok": true,
+     "seconds": 169,
+     "span": null
+    },
+    "verify@1366x768": {
+     "ok": true,
+     "seconds": 226,
+     "span": null
+    },
+    "modes@1366x768": {
+     "ok": true,
+     "seconds": 40,
+     "span": null
+    },
+    "verify@844x390": {
+     "ok": true,
+     "seconds": 114,
+     "span": null
+    },
+    "modes@844x390": {
+     "ok": true,
+     "seconds": 31,
+     "span": null
+    },
+    "profile@1366x768": {
+     "ok": true,
+     "seconds": 63,
+     "span": null
+    },
+    "decks@1366x768": {
+     "ok": true,
+     "seconds": 46,
+     "span": null
+    },
+    "decks@844x390": {
+     "ok": true,
+     "seconds": 33,
+     "span": null
+    },
+    "profile@844x390": {
+     "ok": true,
+     "seconds": 100,
+     "span": null
+    },
+    "public@1366x768": {
+     "ok": true,
+     "seconds": 14,
+     "span": null
+    },
+    "public@844x390": {
+     "ok": true,
+     "seconds": 13,
+     "span": null
+    },
+    "aim@1366x768": {
+     "ok": false,
+     "seconds": 148,
+     "span": null
+    },
+    "layout@1366x768": {
+     "ok": true,
+     "seconds": 175,
+     "span": null
+    },
+    "aim@844x390": {
+     "ok": false,
+     "seconds": 117,
+     "span": null
+    },
+    "layout@844x390": {
+     "ok": true,
+     "seconds": 157,
+     "span": null
+    },
+    "resolution@1366x768": {
+     "ok": true,
+     "seconds": 1868,
+     "span": 1605
+    },
+    "resolution@844x390": {
+     "ok": true,
+     "seconds": 2112,
+     "span": 1615
+    },
+    "ffa@1366x768": {
+     "ok": true,
+     "seconds": 592,
+     "span": 573
+    },
+    "ffa@844x390": {
+     "ok": false,
+     "seconds": 936,
+     "span": 606
+    }
+   },
+   "files": {
+    "aim-1366x768.json": {
+     "ok": false,
+     "checks": [
+      "duel-1366x768",
+      "ffa-1366x768",
+      "pending-1366x768",
+      "reduced-1366x768",
+      "server",
+      "touch-1366x768"
+     ],
+     "scenes": [
+      "duel",
+      "ffa",
+      "pending",
+      "reduced",
+      "touch"
+     ],
+     "counters": {
+      "cardsChecked": 216,
+      "arrowsDrawn": 273
+     },
+     "failure": "AssertionError [ERR_ASSERTION]: aim problems\n+ actual - expected\n\n+ [\n+   'ffa-1366x768: only 85.433% of the intervals within 20 ms'\n+ ]\n- []\n\n    at file:///E:/bm/client-web/tools/verify-aim.mjs:442:9",
+     "timing": {
+      "samples": 2,
+      "withinMin": 0.85433,
+      "p95Max": 55.9,
+      "frameMax": 100.6,
+      "inputMax": 53.4,
+      "per": [
+       {
+        "where": ".scenarios.duel",
+        "within": 1,
+        "p95": 8.5,
+        "max": 10.4,
+        "inputMax": 12.1
+       },
+       {
+        "where": ".scenarios.ffa",
+        "within": 0.85433,
+        "p95": 55.9,
+        "max": 100.6,
+        "inputMax": 53.4
+       }
+      ]
+     },
+     "problems": 1
+    },
+    "aim-844x390.json": {
+     "ok": false,
+     "checks": [
+      "duel-844x390",
+      "ffa-844x390",
+      "pending-844x390",
+      "reduced-844x390",
+      "server",
+      "touch-844x390"
+     ],
+     "scenes": [
+      "duel",
+      "ffa",
+      "pending",
+      "reduced",
+      "touch"
+     ],
+     "counters": {
+      "cardsChecked": 216,
+      "arrowsDrawn": 327
+     },
+     "failure": "AssertionError [ERR_ASSERTION]: aim problems\n+ actual - expected\n\n+ [\n+   \"ffa-844x390: Ghigno co' i' Denti Marci: arrow person-ComPlayer_7767 flagged as crossing the buttons\",\n+   'ffa-844x390: Ago Marcio e Spezzato: arrow person-ComPlayer_7767 flagged as crossing the buttons',\n+   'ffa-844x390: Ag",
+     "timing": {
+      "samples": 2,
+      "withinMin": 1,
+      "p95Max": 9.3,
+      "frameMax": 18.3,
+      "inputMax": 18.4,
+      "per": [
+       {
+        "where": ".scenarios.duel",
+        "within": 1,
+        "p95": 8.5,
+        "max": 12.6,
+        "inputMax": 12.8
+       },
+       {
+        "where": ".scenarios.ffa",
+        "within": 1,
+        "p95": 9.3,
+        "max": 18.3,
+        "inputMax": 18.4
+       }
+      ]
+     },
+     "problems": 4
+    },
+    "decks-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "cancelKeepsSaved",
+      "catalog",
+      "catalogDamage",
+      "catalogFrames",
+      "createAndSave",
+      "deckUnavailableProvoked",
+      "delete",
+      "editorFaces",
+      "newGameRepeatsOpen",
+      "openGame",
+      "overwrite",
+      "rulesInEditor",
+      "threeInitialCards"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "decks-844x390.json": {
+     "ok": true,
+     "checks": [
+      "cancelKeepsSaved",
+      "catalog",
+      "catalogDamage",
+      "catalogFrames",
+      "createAndSave",
+      "deckUnavailableProvoked",
+      "delete",
+      "editorFaces",
+      "newGameRepeatsOpen",
+      "openGame",
+      "overwrite",
+      "rulesInEditor",
+      "threeInitialCards"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "ffa-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7Mouse",
+      "k7RaiseOnly",
+      "k7Touch",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo",
+      "twoHumansThreeComputers"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 14
+     },
+     "failure": null
+    },
+    "ffa-844x390.json": {
+     "ok": false,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7Mouse",
+      "k7RaiseOnly",
+      "k7Touch",
+      "newGameRepeatsFfa",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 14
+     },
+     "failure": "[two] Error: A: no playable card\n    at playOne (file:///E:/bm/client-web/tools/verify-ffa.mjs:136:8)\n    at async playToEnd (file:///E:/bm/client-web/tools/verify-ffa.mjs:198:3)\n    at async Promise.all (index 0)\n    at async file:///E:/bm/client-web/tools/verify-ffa.mjs:272:17"
+    },
+    "layout-1366x768.json": {
+     "ok": true,
+     "checks": [],
+     "scenes": [
+      "chips",
+      "duel",
+      "ffa",
+      "resize-duel",
+      "resize-ffa"
+     ],
+     "counters": {},
+     "failure": null,
+     "timing": {
+      "samples": 4,
+      "withinMin": 0.984,
+      "p95Max": 13.9,
+      "frameMax": 174.1,
+      "inputMax": 31.2,
+      "per": [
+       {
+        "where": ".scenarios.duel T0",
+        "within": 0.996,
+        "p95": 8.6,
+        "max": 48.6,
+        "inputMax": 16.4
+       },
+       {
+        "where": ".scenarios.duel T1",
+        "within": 0.999,
+        "p95": 9.1,
+        "max": 35.6,
+        "inputMax": 18
+       },
+       {
+        "where": ".scenarios.ffa T0",
+        "within": 0.989,
+        "p95": 9.9,
+        "max": 174.1,
+        "inputMax": 25.2
+       },
+       {
+        "where": ".scenarios.ffa T1",
+        "within": 0.984,
+        "p95": 13.9,
+        "max": 125.3,
+        "inputMax": 31.2
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "layout-844x390.json": {
+     "ok": true,
+     "checks": [],
+     "scenes": [
+      "chips",
+      "duel",
+      "ffa",
+      "resize-duel",
+      "resize-ffa"
+     ],
+     "counters": {},
+     "failure": null,
+     "timing": {
+      "samples": 4,
+      "withinMin": 0.999,
+      "p95Max": 12.1,
+      "frameMax": 98.4,
+      "inputMax": 28.8,
+      "per": [
+       {
+        "where": ".scenarios.duel T0",
+        "within": 1,
+        "p95": 8.9,
+        "max": 31.3,
+        "inputMax": 17.5
+       },
+       {
+        "where": ".scenarios.duel T1",
+        "within": 1,
+        "p95": 9.8,
+        "max": 28.1,
+        "inputMax": 16.5
+       },
+       {
+        "where": ".scenarios.ffa T0",
+        "within": 0.999,
+        "p95": 8.6,
+        "max": 90.9,
+        "inputMax": 18.5
+       },
+       {
+        "where": ".scenarios.ffa T1",
+        "within": 1,
+        "p95": 12.1,
+        "max": 98.4,
+        "inputMax": 28.8
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "lifecycle-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "afterLogoutLogin",
+      "leave",
+      "logoutInGame",
+      "moveTimeout",
+      "rejoinInTime",
+      "rejoinLate",
+      "restart",
+      "secondSession",
+      "server",
+      "simultaneousDeadlines",
+      "vsComLateRejoin"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "lifecycle-844x390.json": {
+     "ok": true,
+     "checks": [
+      "afterLogoutLogin",
+      "leave",
+      "logoutInGame",
+      "moveTimeout",
+      "rejoinInTime",
+      "rejoinLate",
+      "restart",
+      "secondSession",
+      "server",
+      "simultaneousDeadlines",
+      "vsComLateRejoin"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "modes-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "forfeit",
+      "game1",
+      "joinRefusedWhileResumable",
+      "newGameRepeatsMode",
+      "presenceAppears",
+      "presenceDisappears",
+      "presenceSort",
+      "privacy",
+      "queueExitA",
+      "queueExitB",
+      "sameGame"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "modes-844x390.json": {
+     "ok": true,
+     "checks": [
+      "forfeit",
+      "game1",
+      "joinRefusedWhileResumable",
+      "newGameRepeatsMode",
+      "presenceAppears",
+      "presenceDisappears",
+      "presenceSort",
+      "privacy",
+      "queueExitA",
+      "queueExitB",
+      "sameGame"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "profile-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "adminBasicNotConfigured",
+      "adminCounts",
+      "adminDelete",
+      "adminDownloads",
+      "adminOpenGames",
+      "adminWrongCredentials",
+      "clientErrorReports",
+      "diagnostics1v1",
+      "diagnosticsFfa",
+      "environment",
+      "gameLogAfterGames",
+      "ingestionUnreachable",
+      "userProfile"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "profile-844x390.json": {
+     "ok": true,
+     "checks": [
+      "adminBasicNotConfigured",
+      "adminCounts",
+      "adminDelete",
+      "adminDownloads",
+      "adminOpenGames",
+      "adminWrongCredentials",
+      "clientErrorReports",
+      "diagnostics1v1",
+      "diagnosticsFfa",
+      "environment",
+      "gameLogAfterGames",
+      "ingestionUnreachable",
+      "userProfile"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "public-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "home",
+      "loginPath",
+      "portrait",
+      "rules",
+      "rulesBack",
+      "rulesIndex",
+      "rulesIndexSet",
+      "serverDown",
+      "setDocument",
+      "signupInvalid",
+      "signupTaken",
+      "signupUnavailable",
+      "signupWrongCode"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "public-844x390.json": {
+     "ok": true,
+     "checks": [
+      "home",
+      "loginPath",
+      "portrait",
+      "rules",
+      "rulesBack",
+      "rulesIndex",
+      "rulesIndexSet",
+      "serverDown",
+      "setDocument",
+      "signupInvalid",
+      "signupTaken",
+      "signupUnavailable",
+      "signupWrongCode"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "resolution-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "casesOnRealServer",
+      "ffa",
+      "humans",
+      "humansClock",
+      "infoDuel",
+      "infoFfa",
+      "infoTouch",
+      "interruptions",
+      "jump",
+      "jumpDialog",
+      "jumpObserved",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "quickRejoin",
+      "reducedMotion",
+      "report-duel",
+      "report-ffa",
+      "reportConsistency",
+      "rule4WithClock",
+      "server"
+     ],
+     "scenes": [
+      "ffa",
+      "humans",
+      "info",
+      "infoFfa",
+      "infoTouch",
+      "interrupt",
+      "jump",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "reduced"
+     ],
+     "counters": {
+      "turnsSeen": 59
+     },
+     "failure": null,
+     "cases": {
+      "barsPerCard": 46,
+      "barsTotal": 5,
+      "boundDiscard": 39,
+      "boundDiscardFlown": 38,
+      "clearToHand": 40,
+      "darkened": 56,
+      "death": 3,
+      "deathWithMove": 3,
+      "drawnToTable": 10,
+      "endOfTurn": 42,
+      "impactCUT": 20,
+      "impactHIT": 36,
+      "impactRole": 100,
+      "impactVoid": 9,
+      "itemConsumed": 23,
+      "itemFromOther": 8,
+      "jump": 2,
+      "lethalEndOfTurn": 1,
+      "objectAppeared": 9,
+      "objectVanished": 7,
+      "outcomeBanner": 3,
+      "over": 3,
+      "rejoinSame": 1,
+      "shockWave": 36,
+      "void": 7
+     },
+     "missingCases": [],
+     "timing": {
+      "rounds": 54,
+      "completeSequences": 50,
+      "driftMsP50": 4,
+      "driftMsP95": 14,
+      "driftMsMax": 17,
+      "over250": 0,
+      "labelReadableMin": 1200,
+      "clockAtEndMin": 11,
+      "ruleViolations": {
+       "1": 0,
+       "2": 0,
+       "3": 0,
+       "6": 0,
+       "c32": 0,
+       "c34": 0,
+       "d13": 0,
+       "c4s": 0
+      }
+     }
+    },
+    "resolution-844x390.json": {
+     "ok": true,
+     "checks": [
+      "casesOnRealServer",
+      "ffa",
+      "humans",
+      "humansClock",
+      "infoDuel",
+      "infoFfa",
+      "infoTouch",
+      "interruptions",
+      "jump",
+      "jumpDialog",
+      "jumpObserved",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "quickRejoin",
+      "reducedMotion",
+      "report-duel",
+      "report-ffa",
+      "reportConsistency",
+      "rule4WithClock",
+      "server"
+     ],
+     "scenes": [
+      "ffa",
+      "humans",
+      "info",
+      "infoFfa",
+      "infoTouch",
+      "interrupt",
+      "jump",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "reduced"
+     ],
+     "counters": {
+      "turnsSeen": 58
+     },
+     "failure": null,
+     "cases": {
+      "barsPerCard": 45,
+      "barsTotal": 5,
+      "boundDiscard": 38,
+      "boundDiscardFlown": 37,
+      "clearToHand": 38,
+      "darkened": 65,
+      "death": 3,
+      "deathWithMove": 3,
+      "drawnToTable": 6,
+      "endOfTurn": 45,
+      "impactCUT": 17,
+      "impactHIT": 48,
+      "impactRole": 101,
+      "impactVoid": 6,
+      "itemConsumed": 28,
+      "itemFromOther": 1,
+      "jump": 2,
+      "lethalEndOfTurn": 1,
+      "objectAppeared": 7,
+      "objectVanished": 4,
+      "outcomeBanner": 3,
+      "over": 3,
+      "rejoinSame": 1,
+      "shockWave": 48,
+      "void": 5
+     },
+     "missingCases": [],
+     "timing": {
+      "rounds": 53,
+      "completeSequences": 49,
+      "driftMsP50": 5,
+      "driftMsP95": 18,
+      "driftMsMax": 27,
+      "over250": 0,
+      "labelReadableMin": 1200,
+      "clockAtEndMin": 11,
+      "ruleViolations": {
+       "1": 0,
+       "2": 0,
+       "3": 0,
+       "6": 0,
+       "c32": 0,
+       "c34": 0,
+       "d13": 0,
+       "c4s": 0
+      }
+     }
+    },
+    "verify-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "bound",
+      "c2a",
+      "dragFollow",
+      "hubReturn",
+      "item",
+      "login",
+      "noScroll",
+      "o1o5",
+      "rejoin",
+      "reorder",
+      "resumedAtStart"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 113,
+      "cardsChecked": 671,
+      "unpayableSeen": 78,
+      "boardChecks": 113
+     },
+     "failure": null
+    },
+    "verify-844x390.json": {
+     "ok": true,
+     "checks": [
+      "bound",
+      "c2a",
+      "dragFollow",
+      "hubReturn",
+      "item",
+      "login",
+      "noScroll",
+      "o1o5",
+      "rejoin",
+      "reorder",
+      "resumedAtStart"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 63,
+      "cardsChecked": 377,
+      "unpayableSeen": 37,
+      "boardChecks": 63
+     },
+     "failure": null
+    }
+   }
+  },
+  "par8": {
+   "dir": "%TEMP%/run-par8/evidence",
+   "wallSeconds": 2520,
+   "summedSeconds": 10036,
+   "dist": {
+    "files": 28,
+    "sha256_16": "aa25c0d2c45904da"
+   },
+   "jar": "dbfc5ded848bcfb2",
+   "results": {
+    "test@—": {
+     "ok": true,
+     "seconds": 2,
+     "span": null
+    },
+    "build@—": {
+     "ok": true,
+     "seconds": 3,
+     "span": null
+    },
+    "size@—": {
+     "ok": true,
+     "seconds": 0,
+     "span": null
+    },
+    "verify@1366x768": {
+     "ok": true,
+     "seconds": 89,
+     "span": null
+    },
+    "modes@1366x768": {
+     "ok": true,
+     "seconds": 87,
+     "span": null
+    },
+    "lifecycle@1366x768": {
+     "ok": true,
+     "seconds": 185,
+     "span": null
+    },
+    "lifecycle@844x390": {
+     "ok": true,
+     "seconds": 188,
+     "span": null
+    },
+    "verify@844x390": {
+     "ok": true,
+     "seconds": 105,
+     "span": null
+    },
+    "modes@844x390": {
+     "ok": true,
+     "seconds": 40,
+     "span": null
+    },
+    "profile@1366x768": {
+     "ok": true,
+     "seconds": 76,
+     "span": null
+    },
+    "profile@844x390": {
+     "ok": true,
+     "seconds": 66,
+     "span": null
+    },
+    "decks@1366x768": {
+     "ok": true,
+     "seconds": 60,
+     "span": null
+    },
+    "public@1366x768": {
+     "ok": true,
+     "seconds": 18,
+     "span": null
+    },
+    "public@844x390": {
+     "ok": true,
+     "seconds": 16,
+     "span": null
+    },
+    "decks@844x390": {
+     "ok": true,
+     "seconds": 74,
+     "span": null
+    },
+    "aim@1366x768": {
+     "ok": true,
+     "seconds": 147,
+     "span": null
+    },
+    "layout@1366x768": {
+     "ok": true,
+     "seconds": 163,
+     "span": null
+    },
+    "aim@844x390": {
+     "ok": false,
+     "seconds": 133,
+     "span": null
+    },
+    "layout@844x390": {
+     "ok": true,
+     "seconds": 152,
+     "span": null
+    },
+    "resolution@1366x768": {
+     "ok": true,
+     "seconds": 2159,
+     "span": 932
+    },
+    "resolution@844x390": {
+     "ok": true,
+     "seconds": 2508,
+     "span": 943
+    },
+    "ffa@1366x768": {
+     "ok": false,
+     "seconds": 1749,
+     "span": 1370
+    },
+    "ffa@844x390": {
+     "ok": false,
+     "seconds": 2016,
+     "span": 1314
+    }
+   },
+   "files": {
+    "aim-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "duel-1366x768",
+      "ffa-1366x768",
+      "pending-1366x768",
+      "reduced-1366x768",
+      "server",
+      "touch-1366x768"
+     ],
+     "scenes": [
+      "duel",
+      "ffa",
+      "pending",
+      "reduced",
+      "touch"
+     ],
+     "counters": {
+      "cardsChecked": 216,
+      "arrowsDrawn": 264
+     },
+     "failure": null,
+     "timing": {
+      "samples": 2,
+      "withinMin": 0.9980800000000001,
+      "p95Max": 9.8,
+      "frameMax": 22.3,
+      "inputMax": 23.4,
+      "per": [
+       {
+        "where": ".scenarios.duel",
+        "within": 1,
+        "p95": 8.8,
+        "max": 13.3,
+        "inputMax": 16.4
+       },
+       {
+        "where": ".scenarios.ffa",
+        "within": 0.9980800000000001,
+        "p95": 9.8,
+        "max": 22.3,
+        "inputMax": 23.4
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "aim-844x390.json": {
+     "ok": false,
+     "checks": [
+      "duel-844x390",
+      "ffa-844x390",
+      "pending-844x390",
+      "reduced-844x390",
+      "server",
+      "touch-844x390"
+     ],
+     "scenes": [
+      "duel",
+      "ffa",
+      "pending",
+      "reduced",
+      "touch"
+     ],
+     "counters": {
+      "cardsChecked": 216,
+      "arrowsDrawn": 285
+     },
+     "failure": "AssertionError [ERR_ASSERTION]: aim problems\n+ actual - expected\n\n+ [\n+   'ffa-844x390: SVEGLIAMOCI MA TU NO: arrow person-ComPlayer_4976 flagged as crossing the buttons',\n+   \"pending-844x390: Ghigno co' i' Denti Marci: arrow person-ComPlayer_4416 flagged as crossing the buttons\",\n+   `pending-844x",
+     "timing": {
+      "samples": 2,
+      "withinMin": 1,
+      "p95Max": 8.8,
+      "frameMax": 18.3,
+      "inputMax": 19.1,
+      "per": [
+       {
+        "where": ".scenarios.duel",
+        "within": 1,
+        "p95": 8.7,
+        "max": 11.3,
+        "inputMax": 12
+       },
+       {
+        "where": ".scenarios.ffa",
+        "within": 1,
+        "p95": 8.8,
+        "max": 18.3,
+        "inputMax": 19.1
+       }
+      ]
+     },
+     "problems": 3
+    },
+    "decks-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "cancelKeepsSaved",
+      "catalog",
+      "catalogDamage",
+      "catalogFrames",
+      "createAndSave",
+      "deckUnavailableProvoked",
+      "delete",
+      "editorFaces",
+      "newGameRepeatsOpen",
+      "openGame",
+      "overwrite",
+      "rulesInEditor",
+      "threeInitialCards"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "decks-844x390.json": {
+     "ok": true,
+     "checks": [
+      "cancelKeepsSaved",
+      "catalog",
+      "catalogDamage",
+      "catalogFrames",
+      "createAndSave",
+      "deckUnavailableProvoked",
+      "delete",
+      "editorFaces",
+      "newGameRepeatsOpen",
+      "openGame",
+      "overwrite",
+      "rulesInEditor",
+      "threeInitialCards"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "ffa-1366x768.json": {
+     "ok": false,
+     "checks": [
+      "fiveWithComputers",
+      "k7",
+      "k7Mouse",
+      "k7RaiseOnly",
+      "k7Touch",
+      "newGameRepeatsFfa",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 12
+     },
+     "failure": "[two] Error: B: no playable card\n    at playOne (file:///E:/bm/client-web/tools/verify-ffa.mjs:136:8)\n    at runNextTicks (node:internal/process/task_queues:64:5)\n    at process.processImmediate (node:internal/timers:472:9)\n    at async playToEnd (file:///E:/bm/client-web/tools/verify-ffa.mjs:198:3)"
+    },
+    "ffa-844x390.json": {
+     "ok": false,
+     "checks": [
+      "k7",
+      "otherLateRejoin",
+      "otherLeaves",
+      "otherMoveTimeout",
+      "queueExit",
+      "server",
+      "startNowWithTwo"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": "[five] no evidence written (exit 1)\n[two] Error: B: no playable card\n    at playOne (file:///E:/bm/client-web/tools/verify-ffa.mjs:136:8)\n    at async playToEnd (file:///E:/bm/client-web/tools/verify-ffa.mjs:198:3)\n    at async Promise.all (index 1)\n    at async file:///E:/bm/client-web/tools/verify"
+    },
+    "layout-1366x768.json": {
+     "ok": true,
+     "checks": [],
+     "scenes": [
+      "chips",
+      "duel",
+      "ffa",
+      "resize-duel",
+      "resize-ffa"
+     ],
+     "counters": {},
+     "failure": null,
+     "timing": {
+      "samples": 4,
+      "withinMin": 0.984,
+      "p95Max": 13.4,
+      "frameMax": 171,
+      "inputMax": 31.7,
+      "per": [
+       {
+        "where": ".scenarios.duel T0",
+        "within": 0.998,
+        "p95": 9.7,
+        "max": 53.3,
+        "inputMax": 18.9
+       },
+       {
+        "where": ".scenarios.duel T1",
+        "within": 0.999,
+        "p95": 10.6,
+        "max": 29.1,
+        "inputMax": 17.8
+       },
+       {
+        "where": ".scenarios.ffa T0",
+        "within": 0.99,
+        "p95": 11.8,
+        "max": 171,
+        "inputMax": 31.7
+       },
+       {
+        "where": ".scenarios.ffa T1",
+        "within": 0.984,
+        "p95": 13.4,
+        "max": 122.2,
+        "inputMax": 30.4
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "layout-844x390.json": {
+     "ok": true,
+     "checks": [],
+     "scenes": [
+      "chips",
+      "duel",
+      "ffa",
+      "resize-duel",
+      "resize-ffa"
+     ],
+     "counters": {},
+     "failure": null,
+     "timing": {
+      "samples": 4,
+      "withinMin": 0.999,
+      "p95Max": 11.9,
+      "frameMax": 83.8,
+      "inputMax": 29.9,
+      "per": [
+       {
+        "where": ".scenarios.duel T0",
+        "within": 0.999,
+        "p95": 8.6,
+        "max": 35.3,
+        "inputMax": 12.2
+       },
+       {
+        "where": ".scenarios.duel T1",
+        "within": 1,
+        "p95": 8.6,
+        "max": 17.1,
+        "inputMax": 12.3
+       },
+       {
+        "where": ".scenarios.ffa T0",
+        "within": 1,
+        "p95": 9.1,
+        "max": 82,
+        "inputMax": 19.9
+       },
+       {
+        "where": ".scenarios.ffa T1",
+        "within": 1,
+        "p95": 11.9,
+        "max": 83.8,
+        "inputMax": 29.9
+       }
+      ]
+     },
+     "problems": 0
+    },
+    "lifecycle-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "afterLogoutLogin",
+      "leave",
+      "logoutInGame",
+      "moveTimeout",
+      "rejoinInTime",
+      "rejoinLate",
+      "restart",
+      "secondSession",
+      "server",
+      "simultaneousDeadlines",
+      "vsComLateRejoin"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "lifecycle-844x390.json": {
+     "ok": true,
+     "checks": [
+      "afterLogoutLogin",
+      "leave",
+      "logoutInGame",
+      "moveTimeout",
+      "rejoinInTime",
+      "rejoinLate",
+      "restart",
+      "secondSession",
+      "server",
+      "simultaneousDeadlines",
+      "vsComLateRejoin"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "modes-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "forfeit",
+      "game1",
+      "joinRefusedWhileResumable",
+      "newGameRepeatsMode",
+      "presenceAppears",
+      "presenceDisappears",
+      "presenceSort",
+      "privacy",
+      "queueExitA",
+      "queueExitB",
+      "sameGame"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "modes-844x390.json": {
+     "ok": true,
+     "checks": [
+      "forfeit",
+      "game1",
+      "joinRefusedWhileResumable",
+      "newGameRepeatsMode",
+      "presenceAppears",
+      "presenceDisappears",
+      "presenceSort",
+      "privacy",
+      "queueExitA",
+      "queueExitB",
+      "sameGame"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "profile-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "adminBasicNotConfigured",
+      "adminCounts",
+      "adminDelete",
+      "adminDownloads",
+      "adminOpenGames",
+      "adminWrongCredentials",
+      "clientErrorReports",
+      "diagnostics1v1",
+      "diagnosticsFfa",
+      "environment",
+      "gameLogAfterGames",
+      "ingestionUnreachable",
+      "userProfile"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "profile-844x390.json": {
+     "ok": true,
+     "checks": [
+      "adminBasicNotConfigured",
+      "adminCounts",
+      "adminDelete",
+      "adminDownloads",
+      "adminOpenGames",
+      "adminWrongCredentials",
+      "clientErrorReports",
+      "diagnostics1v1",
+      "diagnosticsFfa",
+      "environment",
+      "gameLogAfterGames",
+      "ingestionUnreachable",
+      "userProfile"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "public-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "home",
+      "loginPath",
+      "portrait",
+      "rules",
+      "rulesBack",
+      "rulesIndex",
+      "rulesIndexSet",
+      "serverDown",
+      "setDocument",
+      "signupInvalid",
+      "signupTaken",
+      "signupUnavailable",
+      "signupWrongCode"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "public-844x390.json": {
+     "ok": true,
+     "checks": [
+      "home",
+      "loginPath",
+      "portrait",
+      "rules",
+      "rulesBack",
+      "rulesIndex",
+      "rulesIndexSet",
+      "serverDown",
+      "setDocument",
+      "signupInvalid",
+      "signupTaken",
+      "signupUnavailable",
+      "signupWrongCode"
+     ],
+     "scenes": [],
+     "counters": {},
+     "failure": null
+    },
+    "resolution-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "casesOnRealServer",
+      "ffa",
+      "humans",
+      "humansClock",
+      "infoDuel",
+      "infoFfa",
+      "infoTouch",
+      "interruptions",
+      "jump",
+      "jumpDialog",
+      "jumpObserved",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "quickRejoin",
+      "reducedMotion",
+      "report-duel",
+      "report-ffa",
+      "reportConsistency",
+      "rule4WithClock",
+      "server"
+     ],
+     "scenes": [
+      "ffa",
+      "humans",
+      "info",
+      "infoFfa",
+      "infoTouch",
+      "interrupt",
+      "jump",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "reduced"
+     ],
+     "counters": {
+      "turnsSeen": 66
+     },
+     "failure": null,
+     "cases": {
+      "barsPerCard": 57,
+      "boundDiscard": 42,
+      "boundDiscardFlown": 40,
+      "clearToHand": 46,
+      "darkened": 45,
+      "death": 5,
+      "deathWithMove": 5,
+      "drawnToTable": 10,
+      "endOfTurn": 48,
+      "impactCUT": 14,
+      "impactHIT": 31,
+      "impactRole": 99,
+      "impactVoid": 8,
+      "itemConsumed": 25,
+      "itemFromOther": 1,
+      "itemGoneBefore": 1,
+      "itemNamedNotGone": 3,
+      "jump": 3,
+      "lethalEndOfTurn": 3,
+      "objectAppeared": 7,
+      "objectVanished": 7,
+      "outcomeBanner": 3,
+      "over": 3,
+      "rejoinSame": 1,
+      "shockWave": 31,
+      "void": 6
+     },
+     "missingCases": [],
+     "timing": {
+      "rounds": 60,
+      "completeSequences": 56,
+      "driftMsP50": 3,
+      "driftMsP95": 24,
+      "driftMsMax": 63,
+      "over250": 0,
+      "labelReadableMin": 1200,
+      "clockAtEndMin": 11,
+      "ruleViolations": {
+       "1": 0,
+       "2": 0,
+       "3": 0,
+       "6": 0,
+       "c32": 0,
+       "c34": 0,
+       "d13": 0,
+       "c4s": 0
+      }
+     }
+    },
+    "resolution-844x390.json": {
+     "ok": true,
+     "checks": [
+      "casesOnRealServer",
+      "ffa",
+      "humans",
+      "humansClock",
+      "infoDuel",
+      "infoFfa",
+      "infoTouch",
+      "interruptions",
+      "jump",
+      "jumpDialog",
+      "jumpObserved",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "quickRejoin",
+      "reducedMotion",
+      "report-duel",
+      "report-ffa",
+      "reportConsistency",
+      "rule4WithClock",
+      "server"
+     ],
+     "scenes": [
+      "ffa",
+      "humans",
+      "info",
+      "infoFfa",
+      "infoTouch",
+      "interrupt",
+      "jump",
+      "open C3 contrasti",
+      "open C3 furti",
+      "quick",
+      "reduced"
+     ],
+     "counters": {
+      "turnsSeen": 65
+     },
+     "failure": null,
+     "cases": {
+      "barsPerCard": 50,
+      "barsTotal": 6,
+      "boundDiscard": 47,
+      "boundDiscardFlown": 44,
+      "clearToHand": 46,
+      "darkened": 58,
+      "death": 5,
+      "deathWithMove": 5,
+      "drawnToTable": 9,
+      "endOfTurn": 45,
+      "impactCUT": 9,
+      "impactHIT": 50,
+      "impactRole": 106,
+      "impactVoid": 9,
+      "itemConsumed": 25,
+      "itemFromOther": 3,
+      "itemGoneBefore": 1,
+      "itemNamedNotGone": 1,
+      "jump": 3,
+      "lethalEndOfTurn": 3,
+      "objectAppeared": 6,
+      "objectVanished": 5,
+      "outcomeBanner": 3,
+      "over": 3,
+      "rejoinSame": 1,
+      "shockWave": 50,
+      "void": 9
+     },
+     "missingCases": [],
+     "timing": {
+      "rounds": 59,
+      "completeSequences": 55,
+      "driftMsP50": 4,
+      "driftMsP95": 30,
+      "driftMsMax": 68,
+      "over250": 0,
+      "labelReadableMin": 1200,
+      "clockAtEndMin": 11,
+      "ruleViolations": {
+       "1": 0,
+       "2": 0,
+       "3": 0,
+       "6": 0,
+       "c32": 0,
+       "c34": 0,
+       "d13": 0,
+       "c4s": 0
+      }
+     }
+    },
+    "verify-1366x768.json": {
+     "ok": true,
+     "checks": [
+      "bound",
+      "c2a",
+      "dragFollow",
+      "hubReturn",
+      "item",
+      "login",
+      "noScroll",
+      "o1o5",
+      "rejoin",
+      "reorder",
+      "resumedAtStart"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 31,
+      "cardsChecked": 186,
+      "unpayableSeen": 22,
+      "boardChecks": 31
+     },
+     "failure": null
+    },
+    "verify-844x390.json": {
+     "ok": true,
+     "checks": [
+      "bound",
+      "c2a",
+      "dragFollow",
+      "hubReturn",
+      "item",
+      "login",
+      "noScroll",
+      "o1o5",
+      "rejoin",
+      "reorder",
+      "resumedAtStart"
+     ],
+     "scenes": [],
+     "counters": {
+      "turnsChecked": 39,
+      "cardsChecked": 234,
+      "unpayableSeen": 33,
+      "boardChecks": 39
+     },
+     "failure": null
+    }
+   }
+  }
+ },
+ "differences": [
+  "par4 aim-1366x768.json: ok true vs false",
+  "par4 ffa-1366x768.json: checks only in serial: [] only in par4: [k7Mouse, k7RaiseOnly, k7Touch]",
+  "par4 ffa-844x390.json: ok true vs false",
+  "par4 ffa-844x390.json: checks only in serial: [twoHumansThreeComputers] only in par4: [k7Mouse, k7Touch]",
+  "par4 resolution-1366x768.json: cases only in serial: [itemGoneBefore, itemNamedNotGone] only in par4: []",
+  "par4 resolution-844x390.json: cases only in serial: [itemGoneBefore, itemNamedNotGone] only in par4: [lethalEndOfTurn]",
+  "par8 ffa-1366x768.json: ok true vs false",
+  "par8 ffa-1366x768.json: checks only in serial: [otherLateRejoin, otherLeaves, twoHumansThreeComputers] only in par8: [k7Mouse, k7RaiseOnly, k7Touch]",
+  "par8 ffa-844x390.json: ok true vs false",
+  "par8 ffa-844x390.json: checks only in serial: [fiveWithComputers, k7RaiseOnly, newGameRepeatsFfa, twoHumansThreeComputers] only in par8: []",
+  "par8 ffa-844x390.json: counter turnsChecked 19 vs —",
+  "par8 resolution-1366x768.json: cases only in serial: [barsTotal] only in par8: []",
+  "par8 resolution-844x390.json: cases only in serial: [] only in par8: [lethalEndOfTurn]"
+ ]
+}

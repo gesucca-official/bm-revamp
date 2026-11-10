@@ -571,6 +571,13 @@ HEAD e data del jar verificati, la tabella (verifica, misura, esito, durata), gl
   e non va citato come verifica di blocco.
 - **Durata:** il giro completo a due misure costa circa due ore e mezza (`Resolution` circa 35 minuti per misura); `-Quick` qualche decina di minuti.
 - `-ReuseClient` usa l'anteprima già attiva su 4320 (non è un processo suo, la sua build non è dichiarata).
+- **Prototipo C4-1c, Fase A (non ancora metodo):** `-Parallel N` esegue le verifiche su N posti, ognuno con server temporaneo
+  sulla propria porta (18080+i), anteprima della stessa `dist` sulla propria porta (14320+i) e cartella di evidenze propria;
+  `-Solo aim,layout` (predefinito) le esegue dopo, da sole, perché misurano frame e input; `-Split resolution,ffa` lancia uno
+  scenario per esecuzione (nomi letti dallo script) e riunisce le parti nello stesso JSON. Il giro parallelo non si pubblica e
+  non equivale al consolidamento finché il proprietario non decide ([proposta](../docs/design/client-c4/verifiche/proposta.md)).
+  Senza `-Parallel` nulla cambia. Le verifiche Lifecycle, Ffa, Decks, Public e Profile accettano ora `BM_SERVER_PORT` come le altre.
+  `node tools/compare-runs.mjs a=<evidenze> b=<evidenze>` confronta esiti, controlli, casi e tempi misurati di due giri.
 
 ## Verifiche
 
