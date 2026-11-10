@@ -33,3 +33,4 @@ Thumbs.db
 # O9: provisional art sources and prompts stay local; atlas, manifest and inventory are tracked.
 docs/design/client-c2/o9-art/*.png
 docs/design/client-c2/o9-art/prompts.json
+docs/design/set-base/identikit/prove/*.png
