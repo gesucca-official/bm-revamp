@@ -9,6 +9,10 @@ import {Home,Rules,SignUp,go} from './public.tsx';
 import {routeOf,type Route} from './signup.ts';
 import {errorReporter,installReporter} from './report.ts';
 import './style.css';
+import {applySafeInsets} from './safe.ts';
+
+// C4-11 d (O28): the shell keeps inside the safe areas that viewport-fit=cover (index.html) opens to the page.
+applySafeInsets(document.documentElement);addEventListener('resize',()=>applySafeInsets(document.documentElement));
 
 const session=new Session(stompConnector);
 // Unhandled errors go to the server log (P44): one at a time, 5 s, never the credentials or game data.

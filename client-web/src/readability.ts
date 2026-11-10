@@ -105,9 +105,14 @@ export type Piles={deck:Box;discard:Box};
 /** C3-L: the cards of the last resolved round in the middle of the table, a light cascade in resolution order: slot 0 (the first
  * resolved) at the bottom of the pile and highest, each next one a title strip lower and drawn over it. One slot per seat. */
 export type Played={box:Box;slots:Box[];
- /** The author of each slot, in a column right of the cascade, level with that card's title strip. */
- tags:Box[]};
-export type TableLayout={compact:boolean;scale:Scale;hand:{w:number;h:number;step:number;center:number;y:number;lift:number;zoom:number};preview:{x:number;y:number;w:number;h:number};seats:SeatLayout[];played:Played|null;piles:Piles|null};
+ /** The author of each slot, in a column right of the cascade, level with that card's title strip. C4-11 a2: on a compact table every
+  * slot is in the same place (one pile) and every tag is the one tag above it, as wide as the card. */
+ tags:Box[];
+ /** C4-11 a2: the slots are one pile (compact table), drawn with one tag for the top card and the count. */
+ pile?:true};
+export type TableLayout={compact:boolean;scale:Scale;hand:{w:number;h:number;step:number;center:number;y:number;lift:number;zoom:number};preview:{x:number;y:number;w:number;h:number};seats:SeatLayout[];played:Played|null;piles:Piles|null;
+ /** C4-11 d (O28): the left safe-area inset the layout was moved by (shiftLayout); absent, 0. */
+ inset?:number};
 /** C3-L (owner, 30 October 2026): the own character larger than the others, resources larger, the middle of the table used for
  * the cards of the last round. Factors on the C2 sizes; when the table has no room they give way in `YIELD` order (objects first,
  * then the others, then the resources, the own character last), 0.05 at a time down to 1. */
@@ -138,17 +143,28 @@ export function ownItemRow(items:Box[],person:Box,hand:TableLayout['hand'],scree
  }
  return {items,placement:'above'};
 }
+/** C4-11 b1, softened (owner, 10 November 2026: «diciamo di farle crescere un 10% in meno»): on a large screen the caps of C3-L (hand 214 px,
+ * base 150 px, placed card 120×166, piles 40 px, lift 30 px) grow by 90% of how much the screen exceeds a 16:9 screen 800 px high (1422×800),
+ * the smaller of height and width: ×1.215 at 1920×1080, ×1.62 at 2560×1440; a 4:3 screen grows with its width only, so the table still fits.
+ * Never under 1: up to 889 px of height or 1580 px of width (and on every compact table) the sizes are today's. */
+/** C4-11 a2: the round's cards of each compact table already arranged (screen, seats, objects, factors), so a redraw does not place the strips again. */
+const piled=new Map<string,Played|null>();
+/** C4-11 a2: the entries of the rounds of the C3-6 test (typical, no change, all five resources and objects) for which the pile leaves every
+ * seat the room of its summary strip. */
+const PILE_ROOM=[['−7','−10','+1'],['invariato'],['−10','+20','−7','+10','+7','−1']];
+export const GROW={height:800,width:800*16/9,damp:.9};
+export const growth=(w:number,h:number,compact:boolean)=>compact?1:Math.max(1,GROW.damp*Math.min(h/GROW.height,w/GROW.width));
 export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>,s:Scale):TableLayout{
- const compact=h<550,ffa=ids.length>2,shell=shellBoxes(w,h,compact);
- const hw=compact?120:Math.min(214,h*.28),hh=hw*1.38;
- const hand={w:hw,h:hh,step:hw*(compact?.6:.62),center:w*.63,y:h-hh*.5-6,lift:compact?18:30,zoom:compact?1.2:1.12};
- const base=compact?(ffa?60:80):Math.min(150,h*.195)*(ffa?.78:1),iw=base*.76*s.items,ih=iw*1.38;
+ const compact=h<550,ffa=ids.length>2,shell=shellBoxes(w,h,compact),big=growth(w,h,compact);
+ const hw=compact?120:Math.min(214*big,h*.28),hh=hw*1.38;
+ const hand={w:hw,h:hh,step:hw*(compact?.6:.62),center:w*.63,y:h-hh*.5-6,lift:compact?18:30*big,zoom:compact?1.2:1.12};
+ const base=compact?(ffa?60:80):Math.min(150*big,h*.195)*(ffa?.78:1),iw=base*.76*s.items,ih=iw*1.38;
  const others=ids.filter(id=>id!==me),mh=compact?14:20;
  // Own deck and discard pile: two small cards. FFA: one above the other right of the own character, at its foot, the own objects after
  // them (narrow, so the hand keeps its step).
  // Duel: in the row of own objects above the seat, before them (desktop) or after room for three (compact: the middle stays to the
  // round's cards and the own character keeps its size); the hand does not move.
- const kw=compact?26:40,kh=kw*1.38,kg=compact?6:8,kspan=2*kw+kg+8,kffa=kw+8;
+ const kw=compact?26:40*big,kh=kw*1.38,kg=compact?6:8,kspan=2*kw+kg+8,kffa=kw+8;
  const seats=ids.map(id=>{
   const own=id===me,k=others.indexOf(id),f=own?s.me:s.others,pw=base*f,ph=pw*1.38,n=Math.max(1,itemCounts[id]??1);
   const bwid=(own?(compact?110:170):(compact?(ffa?84:100):(ffa?120:150)))*s.resources,bh=(own?(compact?92:150):(compact?40:58))*s.resources;
@@ -181,7 +197,7 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
  if(mine&&ffa){const from=Math.max(...mine.items.map(b=>b.x+b.w/2))+10,room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}
  else if(mine){const from=Math.max(mine.person.x+mine.person.w/2,mine.board.x+mine.board.w/2)+10;
   if(hand.center-(hw+5*hand.step)/2<from){const room=w-8-from;hand.step=Math.min(hand.step,(room-hw)/6);hand.center=from+room/2;}}
- const pv=compact?{w:70,h:97}:{w:120,h:166};
+ const pv=compact?{w:70,h:97}:{w:120*big,h:166*big};
  const L:TableLayout={compact,scale:s,hand,preview:{x:w*(compact?.5:.6),y:h*(compact?.45:.5),...pv},seats,played:null,piles:null};
  if(mine){const row=mine.items[0],x=ffa?mine.person.x+mine.person.w/2+8+kw/2:compact?6+3*(iw+6)+kw/2:6+kw/2,y=ffa?mine.person.y+mine.person.h/2-kh/2:row.y+row.h/2-kh/2;L.piles=ffa?{deck:{x,y:y-kh-kg,w:kw,h:kh},discard:{x,y,w:kw,h:kh}}:{deck:{x,y,w:kw,h:kh},discard:{x:x+kw+kg,y,w:kw,h:kh}};}
  // Build the piles from the original upper row first (C3-L). FFA takes its
@@ -192,10 +208,26 @@ export function arrange(w:number,h:number,ids:string[],me:string,itemCounts:Reco
  // The round's cards: the largest card (from the size of a character down to half of it) whose cascade of one card per seat, with the
  // column of authors on its right, finds a
  // free place near the middle of the table; each next card a title strip (20% of the card) lower and a little to the right.
- for(const k of [1,.9,.8,.7,.6,.5]){const cw=base*k,ch=cw*1.38,dy=ch*.2,dx=cw*.06,n=ids.length,tw=compact?42:78,th=Math.min(dy-2,compact?14:20),size={w:cw+(n-1)*dx+4+tw,h:ch+(n-1)*dy};
+ // C4-11 a2 (owner, 10 November 2026): on a compact table the cascade becomes one pile, every slot in the same place under one tag as wide as
+ // the card (author of the top card and count, see pileTag); it takes less room, so a larger card finds a place. The pile never costs a seat
+ // the summary strip (C3-6) that today's cascade left it: it takes the largest card whose pile leaves, for each round of PILE_ROOM, at least
+ // as many strips as the cascade, with a card never smaller than the cascade's; when none does, the cascade stays. Pure and costly (strips are placed for each try): kept per table.
+ const cascade=():Played|null=>{for(const k of [1,.9,.8,.7,.6,.5]){const cw=base*k,ch=cw*1.38,dy=ch*.2,dx=cw*.06,n=ids.length,tw=compact?42:78,th=Math.min(dy-2,compact?14:20),size={w:cw+(n-1)*dx+4+tw,h:ch+(n-1)*dy};
   const spot=freeSpot(size,{w,h},avoid,{x:w*.5,y:h*.42},compact?8:12);
   if(spot&&Math.hypot(spot.x-w*.5,spot.y-h*.42)<=Math.min(w,h)*.4){const left=spot.x-size.w/2,top=spot.y-size.h/2;
-   L.played={box:spot,slots:Array.from({length:n},(_,i)=>({x:left+cw/2+i*dx,y:top+ch/2+i*dy,w:cw,h:ch})),tags:Array.from({length:n},(_,i)=>({x:left+size.w-tw/2,y:top+i*dy+dy/2,w:tw,h:th}))};break;}}
+   return {box:spot,slots:Array.from({length:n},(_,i)=>({x:left+cw/2+i*dx,y:top+ch/2+i*dy,w:cw,h:ch})),tags:Array.from({length:n},(_,i)=>({x:left+size.w-tw/2,y:top+i*dy+dy/2,w:tw,h:th}))};}}
+  return null;};
+ if(!compact){L.played=cascade();return L;}
+ const key=JSON.stringify([w,h,ids.indexOf(me),ids.map(id=>itemCounts[id]??0),s]),known=piled.get(key);
+ if(known!==undefined){L.played=known&&structuredClone(known);return L;}
+ const strips=(P:Played|null)=>PILE_ROOM.map(t=>{const plan=stripPlan({...L,played:P},w,h,Object.fromEntries(ids.map(id=>[id,t])));return ids.filter(id=>plan[id]).length;});
+ const today=cascade(),room=strips(today);L.played=today;
+ for(const k of [1,.9,.8,.7,.6,.5]){const cw=base*k,ch=cw*1.38,n=ids.length,tw=Math.max(cw,42),th=14,size={w:tw+4,h:ch+th+3};if(today&&cw<today.slots[0].w-.01)break;
+  const spot=freeSpot(size,{w,h},avoid,{x:w*.5,y:h*.42},8);
+  if(spot&&Math.hypot(spot.x-w*.5,spot.y-h*.42)<=Math.min(w,h)*.4){const top=spot.y-size.h/2;
+   const P:Played={box:spot,slots:Array.from({length:n},()=>({x:spot.x,y:top+th+3+ch/2,w:cw,h:ch})),tags:Array.from({length:n},()=>({x:spot.x,y:top+th/2,w:tw,h:th})),pile:true};
+   if(strips(P).every((c,i)=>c>=room[i])){L.played=P;break;}}}
+ if(piled.size>64)piled.clear();piled.set(key,L.played&&structuredClone(L.played));
  return L;
 }
 /** Boxes of the short summary to try: from two lines of 520 px (desktop) or 360 px (compact) to a narrow column of eight, with room for about
@@ -250,6 +282,23 @@ export function fitScale(w:number,h:number,seats:number):Scale{const key=`${w}x$
  fitted.set(key,s);return s;}
 export function tableLayout(w:number,h:number,ids:string[],me:string,itemCounts:Record<string,number>={}):TableLayout{
  return arrange(w,h,ids,me,itemCounts,fitScale(w,h,ids.length));}
+/** C4-11 d (O28, owner, 10 November 2026): with `viewport-fit=cover` the page reaches under the safe areas of an iPhone in landscape. The table is
+ * laid out in the safe width and moved right by the left inset (every box the scene, the hits and the checks read); the background covers the
+ * whole screen. No inset, the same layout. */
+export function shiftLayout(L:TableLayout,dx:number):TableLayout{if(!dx)return L;const m=(b:Box)=>({...b,x:b.x+dx});
+ return {...L,inset:(L.inset??0)+dx,hand:{...L.hand,center:L.hand.center+dx},preview:{...L.preview,x:L.preview.x+dx},seats:L.seats.map(s=>({...s,person:m(s.person),items:s.items.map(m),backs:m(s.backs),board:m(s.board),status:m(s.status)})),
+  played:L.played&&{box:m(L.played.box),slots:L.played.slots.map(m),tags:L.played.tags.map(m)},piles:L.piles&&{deck:m(L.piles.deck),discard:m(L.piles.discard)}};}
+/** C4-11 a1 «Cornice leggera» (owner, 10 November 2026), on a compact table only: the bar's props step back to 55% (the small cards stand out),
+ * the empty place of the own discard pile is not drawn (the pile appears with the first discarded card) and the decorative title leaves the
+ * table (style.css). No geometry changes. */
+export const LIGHT_FRAME={props:.55} as const;
+export const tableFrame=(h:number)=>h<550?{props:LIGHT_FRAME.props,emptyDiscard:false}:{props:1,emptyDiscard:true};
+/** C4-11 a2 (owner, 10 November 2026): the tag of the pile of the round's cards on a compact table. It names the author of the top card (wine,
+ * with the cross, when that move was voided) and the count of the cards shown; `voidBelow` puts the wine mark on the count when a voided card
+ * lies under the top («Sì, segno sul conteggio»). «Ultimo turno» keeps order, authors and voided moves. */
+export function pileTag(moves:readonly {playerId:string;void?:boolean}[],shown:number):{top:number;author:string;count:number;topVoid:boolean;voidBelow:boolean}|null{
+ const n=Math.min(shown,moves.length);if(n<1)return null;const top=n-1;
+ return {top,author:moves[top].playerId,count:n,topVoid:!!moves[top].void,voidBelow:moves.slice(0,top).some(m=>!!m.void)};}
 /** K7: in the FFA each object of a seat is partly covered by the next one; only the last is whole. */
 export const coveredItems=(items:Box[])=>items.map((a,i)=>items.slice(i+1).some(b=>overlap(a,b)>0));
 /** K7: a touch has no hover, so its first tap only raises a covered object; the next tap acts on it. */
@@ -290,7 +339,7 @@ export const confirmBox=(preview:{x:number;y:number},w:number,compact:boolean):B
  * from below the first lines of the confirmation down well past the buttons. */
 export const confirmButtons=(preview:{x:number;y:number},w:number,compact:boolean):Box=>{const c=confirmBox(preview,w,compact),left=c.x-c.w/2,top=c.y-c.h/2,from=top+(compact?54:76),to=top+(compact?150:190),bw=compact?112:116;return {x:left+bw/2,y:(from+to)/2,w:bw,h:to-from};};
 /** C4-2: the strip of the text of a chosen move, at the foot of the table left of the hand (the place of the hint, under the own seat): two lines, as wide as the hand leaves. */
-export function confirmTextBox(l:TableLayout,h:number):Box{const H=l.hand,left=l.compact?10:14,right=H.center-(H.w*H.zoom+6*H.step)/2-8,bh=l.compact?38:47,bottom=l.compact?5:10;
+export function confirmTextBox(l:TableLayout,h:number):Box{const H=l.hand,left=(l.inset??0)+(l.compact?10:14),right=H.center-(H.w*H.zoom+6*H.step)/2-8,bh=l.compact?38:47,bottom=l.compact?5:10;
  return {x:(left+right)/2,y:h-bottom-bh/2,w:right-left,h:bh};}
 /** What the chosen card should not cover: every seat, the piles, the round's cards, the shell, the text of the move and the hand with a card raised. */
 export function previewAvoid(l:TableLayout,w:number,h:number):Box[]{const H=l.hand,shell=shellBoxes(w,h,l.compact),top=H.y-H.lift-H.h*H.zoom/2,bottom=H.y+H.h/2;
@@ -313,21 +362,25 @@ export function aimArrows(source:Box,targets:AimTarget[],view:{w:number;h:number
  const avoid=opts.avoid??[],s=opts.head??10,gap=opts.gap??4,m=4,clampPt=(p:Pt):Pt=>({x:Math.max(m,Math.min(view.w-m,p.x)),y:Math.max(m,Math.min(view.h-m,p.y))});
  const grown={...source,w:source.w+6,h:source.h+6},crossings=(a:Pt,c:Pt,b:Pt)=>{let n=0;for(let i=1;i<24;i++){const p=bezier(a,c,b,i/24);if(!within(p,grown)&&avoid.some(x=>within(p,x,8)))n++;}return n;};
  return targets.map(t=>{
-  const tail0=edgePoint(source,{x:t.box.x,y:t.box.y},2),to=edgePoint(t.box,{x:source.x,y:source.y},gap);
+  const tail0=edgePoint(source,{x:t.box.x,y:t.box.y},2),to0=edgePoint(t.box,{x:source.x,y:source.y},gap);let to=to0;
   // The card already rests on (or over) the target: its tail is inside it, or the arrow would be a stub.
-  const len0=Math.hypot(to.x-tail0.x,to.y-tail0.y),lap=overlap(source,t.box),reached=within(tail0,{...t.box,w:t.box.w+4,h:t.box.h+4})||len0<12||lap>.35*Math.min(source.w*source.h,t.box.w*t.box.h);
+  const len0=Math.hypot(to0.x-tail0.x,to0.y-tail0.y),lap=overlap(source,t.box),reached=within(tail0,{...t.box,w:t.box.w+4,h:t.box.h+4})||len0<12||lap>.35*Math.min(source.w*source.h,t.box.w*t.box.h);
   // Tails to try: the one towards the target, then points along the top edge and the sides of the card, nearest to the target first.
   const edge=(source.w+4)/2,top=source.y-source.h/2-2,near=(p:Pt)=>Math.hypot(p.x-t.box.x,p.y-t.box.y);
   const spots:Pt[]=[...[-.42,-.3,-.15,.15,.3,.42].map(f=>({x:source.x+f*source.w,y:top})),...[-.3,0,.3].flatMap(f=>[{x:source.x-edge,y:source.y+f*source.h},{x:source.x+edge,y:source.y+f*source.h}])];
   const tails=[tail0,...spots.sort((p,q)=>near(p)-near(q))];
   let from=tail0,control=tail0,worst=Infinity;
-  search:for(const tail of tails){const dx=to.x-tail.x,dy=to.y-tail.y,len=Math.hypot(dx,dy)||1,mid={x:(tail.x+to.x)/2,y:(tail.y+to.y)/2},nx=-dy/len,ny=dx/len;
+  // C4-11 v1 (owner, 10 November 2026; VerifyAim at 844×390): when every route to the tip facing the card crosses a region to keep clear (a bound
+  // card resting low in the hand, a target whose corner lies in the margin of ✓ and ×), the tip may land on the middle of another side of the
+  // target, the nearest to the card first; always after the facing tip, so an arrow that was clear does not change.
+  const B=t.box,tips:Pt[]=[to0,...(avoid.length?[{x:B.x-B.w/2-gap,y:B.y},{x:B.x+B.w/2+gap,y:B.y},{x:B.x,y:B.y-B.h/2-gap},{x:B.x,y:B.y+B.h/2+gap}].sort((p,q)=>Math.hypot(p.x-source.x,p.y-source.y)-Math.hypot(q.x-source.x,q.y-source.y)):[])];
+  search:for(const tip of tips)for(const tail of tails){const dx=tip.x-tail.x,dy=tip.y-tail.y,len=Math.hypot(dx,dy)||1,mid={x:(tail.x+tip.x)/2,y:(tail.y+tip.y)/2},nx=-dy/len,ny=dx/len;
    // The bend goes towards the middle of the viewport first (arrows from one card fan out without leaving the table); when it
    // crosses a region to keep clear, larger bends on either side and the straight line follow, then the next tail.
    const side=((view.w/2-mid.x)*nx+(view.h/2-mid.y)*ny)>=0?1:-1;
-   for(const k of [1,-1,1.8,-1.8,2.8,-2.8,0]){const c=clampPt({x:mid.x+nx*len*.2*side*k,y:mid.y+ny*len*.2*side*k}),n=avoid.length?crossings(tail,c,to):0;
-    if(n<worst){worst=n;from=tail;control=c;}if(!worst)break search;}
-   if(!avoid.length)break;}
+   for(const k of [1,-1,1.8,-1.8,2.8,-2.8,0]){const c=clampPt({x:mid.x+nx*len*.2*side*k,y:mid.y+ny*len*.2*side*k}),n=avoid.length?crossings(tail,c,tip):0;
+    if(n<worst){worst=n;from=tail;control=c;to=tip;}if(!worst)break search;}
+   if(!avoid.length)break search;}
   const crosses=worst>0;
   const tx=to.x-control.x,ty=to.y-control.y,tl=Math.hypot(tx,ty)||1,ux=tx/tl,uy=ty/tl,base={x:to.x-ux*s*1.4,y:to.y-uy*s*1.4};
   const head:[Pt,Pt,Pt]=[to,{x:base.x-uy*s*.6,y:base.y+ux*s*.6},{x:base.x+uy*s*.6,y:base.y-ux*s*.6}];

@@ -1,5 +1,6 @@
-import {RoundCue,type Sounds} from './sound.ts';
+import {RoundCue,endSound,type EndSound,type Sounds} from './sound.ts';
 import {AlphaFilter,Application,Assets,BlurFilter,Container,Graphics,Rectangle,Sprite,Text,Texture} from 'pixi.js';
+import {safeInsets,type Insets} from './safe.ts';
 import {PROPS,backgroundGeometry,placeBackground,type PropId} from './background.ts';
 import {Model,clone,type Target} from './model.ts';
 import {handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard,confirmCard,regularCard,type GuideBeat,type GuideFocus,type Posable} from './readability.ts';
@@ -8,8 +9,8 @@ import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
-import {drawFrame,frameOf,FRAME_GREY,type FrameKind} from './frames.ts';
-import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 export type Inspection={title:string;card?:Card;owner?:string};
@@ -58,6 +59,8 @@ export class TableScene {
  app=new Application();world=new Container();fx=new Container();aimLayer=new Container();private aimG=new Graphics();private aimAlpha=new AlphaFilter({alpha:.82});
  // C3-3 (O6): arrows from the chosen or dragged card to the admitted targets; redrawn at most once per frame while dragging.
  arrows:Arrow[]=[];confirmArrow:Arrow|null=null;private confirmTo:Box|null=null;private aimDirty=false;
+ /** C4-11 d (O28): left and right safe-area insets, read at each resize; the table is laid out in between, the background covers the screen. */
+ safe:Insets={l:0,r:0};
 hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInfo>();
  drag:Drag|null=null;focused:string|null=null;hovered:string|null=null;
  // K7: a covered object raised by a first touch (touch has no hover); the next touch acts on it.
@@ -154,7 +157,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.app.ticker.add(()=>this.tick());this.resize(host.clientWidth,host.clientHeight);
  }
  private text(parent:Container,value:string,x:number,y:number,size:number,width?:number,color=INK){const t=new Text({text:value,style:{fontFamily:'Impact, Arial, sans-serif',fontSize:size,fill:color,wordWrap:!!width,wordWrapWidth:width,align:'center',lineHeight:size*1.05}});t.anchor.set(.5,0);t.position.set(x,y);parent.addChild(t);return t;}
- private frame(w:number,h:number,kind:FrameKind='regular'){const c=new Container();c.addChild(new Graphics().roundRect(-w/2+4,-h/2+6,w,h,5).fill({color:0x160e09,alpha:.6}));
+ private frame(w:number,h:number,kind:FrameKind='regular'){const c=new Container(),shadow=new Graphics();for(const l of cardShadow(w,h))shadow.roundRect(l.x,l.y,l.w,l.h,l.r).fill({color:CARD_SHADOW.color,alpha:l.alpha});c.addChild(shadow);
   const paper=new Graphics().roundRect(-w/2,-h/2,w,h,5).fill(PAPER).stroke({color:INK,width:2});drawFrame(paper as unknown as Pen,kind,w,h);c.addChild(paper);
   const flecks=new Graphics();for(let i=0;i<12;i++)flecks.circle(-w/2+5+(i*23%(w-10)),-h/2+4+(i%2? h-8:0),1+i%2).fill({color:0x795034,alpha:.25});c.addChild(flecks);return c;}
  private face(name:string,art:number,w:number,h:number,footer:string,small=false,sub='',kind:FrameKind='regular'){const c=this.frame(w,h,kind);const titleH=small?h*.27:h*.24, footH=small?h*.17:h*.18;
@@ -279,20 +282,35 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // The discard pile is too small for a readable face: frame and art of the top card, its name in «Ultimo turno» and the inspection.
   const s=P.discard,name=this.staged?this.staged.discard:this.pile.top;
   if(name){const c=cards.find(x=>x.name===name)??plain(name),f=this.frame(s.w,s.h,frameOf(c)),art=new Sprite(this.art[artIndex(c.bindingName)]);art.position.set(-s.w/2+3,-s.w/2+3);art.width=art.height=s.w-6;f.addChild(art);f.position.set(s.x,s.y);f.rotation=.05;this.world.addChild(f);}
-  else empty(s);
+  else if(tableFrame(this.height).emptyDiscard)empty(s);
   return {deck:count,discard:name};}
  // C3-L: the cards of the last resolved round in the middle, in resolution order (the first at the bottom), each with its author;
  // voided ones with a wine tag and a line across their visible strip. During a sequence only the cards already landed (rule 2: then the view).
  private roundCards(L:TableLayout,compact:boolean):Readout['played']{const P=L.played,v=this.model.view;if(!P)return null;
   const known=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(v.players).flatMap(p=>p.character.items)];
-  const moves=v.resolvedMoves.slice(0,P.slots.length),shown=this.seqStarted?Math.min(this.landed,moves.length):moves.length,strip=P.slots.length>1?P.slots[1].y-P.slots[0].y:P.slots[0].h*.2;
+  const moves=v.resolvedMoves.slice(0,P.slots.length),shown=this.seqStarted?Math.min(this.landed,moves.length):moves.length,strip=P.slots.length>1&&!P.pile?P.slots[1].y-P.slots[0].y:P.slots[0].h*.2;
+  // C4-11 a2: on a compact table the cards land one on the other; one tag names the top card's author and counts the pile.
+  const pile=P.pile?pileTag(moves,shown):null;if(pile)this.pileLabel(P.tags[pile.top],pile);
   return moves.slice(0,shown).map((m,i)=>{const b=P.slots[i],f=this.card(known.find(x=>x.name===m.playedCardName)??plain(m.playedCardName),b.w,b.h,true);f.position.set(b.x,b.y);f.rotation=i%2?.025:-.025;this.world.addChild(f);
+   if(pile){if(m.void&&i===pile.top){const y=b.y-b.h/2+strip*.5;this.world.addChild(new Graphics().moveTo(b.x-b.w/2+3,y+strip*.25).lineTo(b.x+b.w/2-3,y-strip*.25).stroke({color:WINE,width:2}));}
+    return {name:m.playedCardName,author:m.playerId,void:!!m.void};}
    // Author in the column beside the cascade, level with the title strip; a voided move has a wine tag and a line across its strip.
    // A voided move has the cross of symbols.ts after the name (never the ✕ of a font: Impact and Arial lack it).
    const t=P.tags[i],tag=new Container(),x=m.void?t.h*.55:0,who=this.text(tag,m.playerId===this.model.me?'TU':this.name(m.playerId).toUpperCase(),0,0,t.h*.62,undefined,0xfff6e2);who.anchor.set(.5);
    if(who.width>t.w-6-x)who.scale.set((t.w-6-x)/who.width);who.position.x=-x/2;tag.addChildAt(new Graphics().roundRect(-t.w/2,-t.h/2,t.w,t.h,t.h*.35).fill({color:m.void?WINE:INK,alpha:.92}).stroke({color:PAPER,width:1}),0);if(m.void){const cg=new Graphics();drawMark(cg as unknown as Pen,'cross',who.x+who.width/2+t.h*.4,0,t.h*.5,0xfff6e2);tag.addChild(cg);}tag.position.set(t.x,t.y);this.world.addChild(tag);
    if(m.void){const y=b.y-b.h/2+strip*.5;this.world.addChild(new Graphics().moveTo(b.x-b.w/2+3,y+strip*.25).lineTo(b.x+b.w/2-3,y-strip*.25).stroke({color:WINE,width:compact?2:3}));}
    return {name:m.playedCardName,author:m.playerId,void:!!m.void};});}
+ /** C4-11 a2: the one tag of the pile, as wide as the card: the top card's author (wine with the cross when voided) and, at its right end, the
+  * count of the pile, wine with the cross when a voided card lies under the top (owner: «Sì, segno sul conteggio»). Above the pile. */
+ private pileLabel(t:Box,p:NonNullable<ReturnType<typeof pileTag>>){const tag=new Container(),fs=t.h*.62,mark=t.h*.5,cw=t.h*1.1+(p.voidBelow?mark:0);
+  tag.addChild(new Graphics().roundRect(-t.w/2,-t.h/2,t.w,t.h,t.h*.35).fill({color:p.topVoid?WINE:INK,alpha:.92}).stroke({color:PAPER,width:1}));
+  tag.addChild(new Graphics().roundRect(t.w/2-cw,-t.h/2,cw,t.h,t.h*.35).fill({color:p.voidBelow?WINE:INK}).stroke({color:PAPER,width:1}));
+  const count=this.text(tag,String(p.count),0,0,fs,undefined,0xfff6e2);count.anchor.set(.5);count.position.x=t.w/2-cw/2-(p.voidBelow?mark*.5:0);
+  if(p.voidBelow){const g=new Graphics();drawMark(g as unknown as Pen,'cross',count.x+count.width/2+mark*.6,0,mark,0xfff6e2);tag.addChild(g);}
+  const room=t.w-cw-(p.topVoid?mark*1.4:0)-6,who=this.text(tag,p.author===this.model.me?'TU':this.name(p.author).toUpperCase(),0,0,fs,undefined,0xfff6e2);who.anchor.set(.5);
+  if(who.width>room)who.scale.set(room/who.width);who.position.x=-t.w/2+3+who.width/2;
+  if(p.topVoid){const g=new Graphics();drawMark(g as unknown as Pen,'cross',who.x+who.width/2+mark*.8,0,mark,0xfff6e2);tag.addChild(g);}
+  tag.position.set(t.x,t.y);this.world.addChild(tag);}
  private back(w:number,h:number){const c=this.frame(w,h,'back');c.addChild(new Graphics().roundRect(-w/2+4,-h/2+4,w-8,h-8,2).fill(WINE).stroke({color:0xa47763,width:1}));
   const g=new Graphics().circle(0,0,w*.2).fill(0xcab184).stroke({color:INK,width:1});g.moveTo(-w*.27,-h*.25).lineTo(w*.27,h*.25).moveTo(w*.27,-h*.25).lineTo(-w*.27,h*.25).stroke({color:0xcab184,width:2});c.addChild(g);return c;}
  private halo(c:Container,w:number,h:number,color=PETROL){c.addChild(new Graphics().roundRect(-w/2-3,-h/2-3,w+6,h+6,6).stroke({color,width:3}));}
@@ -303,12 +321,14 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const g=backgroundGeometry(w,h,{table:size(this.background),sottobicchiere:size(this.props.sottobicchiere),negroni:size(this.props.negroni),posacenere:size(this.props.posacenere)});
   placeBackground(this.background,this.props,g);
   for(const p of g.props){const {node,blur}=this.shadows[p.id],s=p.shadow;node.clear().ellipse(0,0,s.w/2,s.h/2).fill({color:0x100905,alpha:s.alpha});node.position.set(s.x,s.y);blur.strength=s.sigma;}
+  this.decor.alpha=tableFrame(h).props;this.safe=safeInsets();
   this.draw();}
  draw(){if(!this.art.length)return;
   // Old nodes survive one render, so Pixi's ref-counted text textures are reused instead of re-rasterized on every tap.
   this.retiring.push(...this.world.removeChildren());this.hits=[];this.backs={};this.chips={};this.pendingGhost=null;
   const w=this.width,h=this.height,view=this.model.view,me=this.model.me,ids=Object.keys(view.players);
-  const L=tableLayout(w,h,ids,me,Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])));this.layout=L;const compact=L.compact,H=L.hand;
+  const counts=Object.fromEntries(ids.map(id=>[id,view.players[id].character.items.length])),{l:sl,r:sr}=this.safe;
+  const L=sl||sr?shiftLayout(tableLayout(w-sl-sr,h,ids,me,counts),sl):tableLayout(w,h,ids,me,counts);this.layout=L;const compact=L.compact,H=L.hand;
   const hover=this.drag?null:this.hovered,raised:Container[]=[];let board:Readout['board']=null,roundSummary:Readout['summary']=null;
   // C3-6: the strips of the round's summary are placed first, for all seats, clear of everything the layout holds.
   // The short summary line (toast of table.tsx) takes the place the strips leave; kept for the round and the size, so it does not move when the strips go.
@@ -466,7 +486,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
  focus(id:string|null){this.focused=id;this.draw();}
  // `sequence` false: only the gesture is cancelled (same-turn view, window blur), the sequence goes on.
- interrupt(reason:string,redraw=true,sequence=true){if(this.drag||(sequence&&this.seqStarted))this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();if(sequence){this.sounds?.stopAll();this.finish(reason,false);}
+ interrupt(reason:string,redraw=true,sequence=true){if(this.drag||(sequence&&this.seqStarted))this.stats.cancels.push(reason);this.peek=null;const d=this.drag;this.drag=null;if(d&&this.app.canvas.hasPointerCapture(d.id))this.app.canvas.releasePointerCapture(d.id);this.clearGhost();if(sequence){this.sounds?.interruptRound();this.finish(reason,false);}
   if(d)this.model.cancel();this.setHover(null);if(redraw)this.draw();this.onState();}
  // Esc drops a focus left by a press too (the card would stay raised over its neighbours); the keyboard's stays.
  escape(){this.openStatus=null;if(this.focused&&document.activeElement?.getAttribute('data-hit')!==this.focused)this.focused=null;this.interrupt('escape');this.model.cancel();}
@@ -651,11 +671,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.stats.advances++;this.cue.advance(next,this.pace.total);if(next>=this.pace.total){this.finish('input');return true;}this.seqStarted-=next-elapsed;return true;}
  /** Brings a running sequence to the final state (the view is already drawn); the static summary stays. */
  finish(reason:string,redraw=true){if(!this.seqStarted)return;this.stats.sequenceEnds.push({key:this.seqKey,reason,ms:Math.round(performance.now()-this.seqStarted)});this.cue.end(reason);this.trace({type:'end',key:this.seqKey,reason});
-  // A sound started by the end itself or just before it plays on; a jump or an interruption silences it.
-  this.stopEffects(reason==='complete'||reason==='input');if(redraw){this.draw();this.onState();}}
+  // A sound started by the end itself or just before it plays on; a jump silences everything, an interruption the round's hits only (C4-11 J2).
+  this.stopEffects(endSound(reason));if(redraw){this.draw();this.onState();}}
  /** «Salta effetti». */
  skip(){this.sounds?.stopAll();this.finish('skip');}
- stopEffects(keepSound=false){this.cue.end('stop');this.sounds?.endRound(!keepSound);if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
+ stopEffects(sound:EndSound='all'){this.cue.end('stop');if(sound==='round')this.sounds?.interruptRound();else this.sounds?.endRound(sound==='all');if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
   this.staged=null;this.arriving.clear();this.labels=[];this.guideBeats=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private lastTick=0;

@@ -36,3 +36,20 @@ test('colpi simultanei: gain 1/N e sorgenti indipendenti',async()=>{const {s,gai
 test('volume zero, audio non pronto e file mancanti consumano i colpi senza recuperi',async()=>{for(const opts of [{state:'suspended'},{failLoad:true},{failDecode:true},{}]){const {s,calls}=await setup(opts);if(!opts.state)s.unlock();if(!Object.keys(opts).length)s.setVolume(0);s.beginRound('a');s.round('a','hit','0');s.unlock();s.setVolume(.2);s.round('a','hit','0');assert.deepEqual(calls,[]);}});
 
 test('C4-10: solo CUT ha guadagno ridotto, anche con colpi simultanei',async()=>{const {s,gains,gain,ramps}=await setup();s.unlock();for(const kind of ['cut','hit','win','loss','select','send','reject'] as const)s.play(kind,.5);assert.deepEqual(gains.slice(1).map(g=>g.value),[.305,.5,.5,.5,.5,.5,.5]);assert.equal(gain.value,.2);assert.deepEqual(ramps,[{v:0,t:7},{v:.5,t:7.005}]);});
+
+// C4-11 J2 (owner, 10 November 2026: «va bene la correzione j2»): an interruption stops and consumes the round's hits only.
+import {endSound} from '../src/sound.ts';
+import {readFileSync} from 'node:fs';
+test('J2: un\'interruzione ferma e consuma i colpi del round; il jingle d\'esito prosegue',async()=>{const {s,stops}=await setup();s.unlock();s.beginRound('g:1');s.round('g:1','hit','0');s.event({id:'outcome'},'win');
+ s.interruptRound();assert.deepEqual(stops,['impactPunch_heavy_001.ogg']);assert.equal(s.round('g:1','cut','1'),false,'pending hit consumed');s.beginRound('g:1');assert.equal(s.round('g:1','cut','2'),false,'no replay of the round');});
+test('J2: un\'interruzione non annulla i suoni d\'interfaccia rimandati',async()=>{const {s,calls}=await setup();s.unlock();const c=new ChoiceSounds(s,{selected:null,commandCount:0});c.change('choice',{selected:'a',commandCount:0});c.change('feedback',{selected:'a',commandCount:0});
+ s.interruptRound();await Promise.resolve();assert.deepEqual(calls,['click_001.ogg','error_001.ogg']);});
+test('J2: salto, muto e uscita fermano ancora tutto',async()=>{for(const stop of [(s:Sounds)=>s.stopAll(),(s:Sounds)=>s.setMuted(true)]){const {s,stops,calls}=await setup();s.unlock();s.beginRound('k');s.round('k','hit');s.event({id:'o'},'loss');s.defer('select');
+ stop(s);await Promise.resolve();assert.deepEqual(stops,['impactPunch_heavy_001.ogg','jingles_SAX07.ogg']);assert.deepEqual(calls,['impactPunch_heavy_001.ogg','jingles_SAX07.ogg'],'deferred cancelled');}});
+test('J2: la fine di una sequenza decide il suono dal motivo',()=>{
+ assert.equal(endSound('complete'),'keep');assert.equal(endSound('input'),'keep');assert.equal(endSound('skip'),'all');
+ for(const r of ['resize','visual viewport / zoom','pointercancel','escape','view','reset','disconnect','reduced motion','context lost','lost capture','background'])assert.equal(endSound(r),'round',r);});
+test('J2: la scena interrompe con interruptRound e chiude la sequenza con endSound',()=>{const scene=readFileSync(new URL('../src/scene.ts',import.meta.url),'utf8');
+ const interrupt=/ interrupt\(reason:string[^\n]*/.exec(scene)![0];assert.match(interrupt,/this\.sounds\?\.interruptRound\(\);this\.finish\(reason,false\)/);assert.doesNotMatch(interrupt,/stopAll/);
+ assert.match(scene,/this\.stopEffects\(endSound\(reason\)\)/);assert.match(scene,/if\(sound==='round'\)this\.sounds\?\.interruptRound\(\);else this\.sounds\?\.endRound\(sound==='all'\)/);
+ assert.match(scene,/ skip\(\)\{this\.sounds\?\.stopAll\(\);this\.finish\('skip'\);\}/);});

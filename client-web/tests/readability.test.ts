@@ -240,7 +240,9 @@ for(const [w,h] of VIEWPORTS)for(const n of [2,5])test(`C3-L at ${w}×${h} with 
   const P=l.played!;assert.ok(P,'round cards placed');assert.equal(P.slots.length,n);assert.ok(inside(P.box,w,h));
   for(const o of tableBoxes(l,w,h))assert.equal(overlap(P.box,o),0,`round cards over ${JSON.stringify(o)}`);
   assert.ok(Math.abs(P.box.x-w/2)<=w*.25&&P.box.y-P.box.h/2>=h*.1,`round cards in the middle ${Math.round(P.box.x)},${Math.round(P.box.y)}`);
-  P.slots.forEach((b,i)=>{assert.ok(Math.abs(b.x-P.box.x)<=(P.box.w-b.w)/2+.01&&Math.abs(b.y-P.box.y)<=(P.box.h-b.h)/2+.01,'slot inside the area');const q=P.slots[i+1];if(q)assert.ok(q.y-b.y>=b.h*.19,'title strip visible');});
+  // C4-11 a2 (owner, 10 November 2026): on the compact table the cascade became one pile, every slot in the same place.
+  P.slots.forEach((b,i)=>{assert.ok(Math.abs(b.x-P.box.x)<=(P.box.w-b.w)/2+.01&&Math.abs(b.y-P.box.y)<=(P.box.h-b.h)/2+.01,'slot inside the area');const q=P.slots[i+1];if(q&&P.pile)assert.deepEqual(q,b,'one pile');else if(q)assert.ok(q.y-b.y>=b.h*.19,'title strip visible');});
+  assert.equal(!!P.pile,l.compact,'a pile on the compact table only');
   // Own deck and discard pile: small, by the own seat (beside the character in the FFA, in the row of objects above it in the duel),
   // clear of everything else and of the round's cards.
   const me2=l.seats.find(s=>s.me)!,K=l.piles!;assert.ok(K,'piles placed');for(const b of [K.deck,K.discard]){assert.ok(inside(b,w,h));for(const o of [...tableBoxes(l,w,h),P.box])assert.equal(overlap(b,o),0,`pile over ${JSON.stringify(o)}`);

@@ -1,0 +1,274 @@
+{
+ "date": "2026-11-10",
+ "where": "copies of client-web/src, tests and index.html outside the repository (%TEMP%), node --test tests/space.test.ts tests/sound.test.ts tests/readability.test.ts tests/own-items.test.ts",
+ "rows": [
+  {
+   "mutation": "baseline",
+   "file": null,
+   "tests": 94,
+   "pass": 94,
+   "fail": 0,
+   "failed": []
+  },
+  {
+   "mutation": "b1 off: no growth on large screens",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 92,
+   "fail": 2,
+   "failed": [
+    "b1: growth is 90% of the prototype, from a 16:9 screen 800 px high, the smaller of height and width, never under 1",
+    "b1: measures at 1920×1080 and 2560×1440 (hand 260 and 347 px), factors of C3-L kept, nothing in the way"
+   ]
+  },
+  {
+   "mutation": "b1 not softened (prototype x1.35)",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 90,
+   "fail": 4,
+   "failed": [
+    "O27: whole screen/count matrix preserves FFA exactly, scales, piles, round and 750 baseline",
+    "b1: growth is 90% of the prototype, from a 16:9 screen 800 px high, the smaller of height and width, never under 1",
+    "b1: measures at 1920×1080 and 2560×1440 (hand 260 and 347 px), factors of C3-L kept, nothing in the way",
+    "b1: nothing smaller than today at large and 4:3 screens; identical at the official measures"
+   ]
+  },
+  {
+   "mutation": "b1 height only (prototype formula)",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 92,
+   "fail": 2,
+   "failed": [
+    "b1: growth is 90% of the prototype, from a 16:9 screen 800 px high, the smaller of height and width, never under 1",
+    "b1: nothing smaller than today at large and 4:3 screens; identical at the official measures"
+   ]
+  },
+  {
+   "mutation": "b1 hand cap not grown",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 92,
+   "fail": 2,
+   "failed": [
+    "O27: whole screen/count matrix preserves FFA exactly, scales, piles, round and 750 baseline",
+    "b1: measures at 1920×1080 and 2560×1440 (hand 260 and 347 px), factors of C3-L kept, nothing in the way"
+   ]
+  },
+  {
+   "mutation": "a1 props not faded",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "a1: on the compact table the props step back to 55%, the empty discard place is not drawn, the title leaves; elsewhere as today"
+   ]
+  },
+  {
+   "mutation": "a1 empty discard drawn again",
+   "file": "src/scene.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "a1: on the compact table the props step back to 55%, the empty discard place is not drawn, the title leaves; elsewhere as today"
+   ]
+  },
+  {
+   "mutation": "a1 title back on the compact table",
+   "file": "src/style.css",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "a1: on the compact table the props step back to 55%, the empty discard place is not drawn, the title leaves; elsewhere as today"
+   ]
+  },
+  {
+   "mutation": "a2 off: cascade on the compact table",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 91,
+   "fail": 3,
+   "failed": [
+    "C3-L at 844×390 with 2 seats: own character larger, everything fits, round cards in the middle",
+    "C3-L at 844×390 with 5 seats: own character larger, everything fits, round cards in the middle",
+    "a2: at 844×390 one pile, larger in the FFA"
+   ]
+  },
+  {
+   "mutation": "a2 pile ignores the summary strips (prototype)",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 92,
+   "fail": 2,
+   "failed": [
+    "a2: the pile leaves every seat its summary strip at 844×390, as the cascade did",
+    "summary strips at 844×390 with 5 seats"
+   ]
+  },
+  {
+   "mutation": "a2 no mark on the count",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "a2: the tag of the pile names the top card, counts the pile and marks a voided card under the top"
+   ]
+  },
+  {
+   "mutation": "a2 count counts every move, not the cards shown",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "a2: the tag of the pile names the top card, counts the pile and marks a voided card under the top"
+   ]
+  },
+  {
+   "mutation": "a2 scene count always ink",
+   "file": "src/scene.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "a2: the scene draws the pile from the layout, with the count marked in wine and the cross"
+   ]
+  },
+  {
+   "mutation": "shadow as today (4x6, 60%, hard edge)",
+   "file": "src/frames.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "shadow: same direction and drawing as today (down and right), a little deeper, a soft edge, no shadow towards the top or the left"
+   ]
+  },
+  {
+   "mutation": "shadow as c1 (halo in four directions)",
+   "file": "src/frames.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "shadow: same direction and drawing as today (down and right), a little deeper, a soft edge, no shadow towards the top or the left"
+   ]
+  },
+  {
+   "mutation": "shadow not used by the scene",
+   "file": "src/scene.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "shadow: same direction and drawing as today (down and right), a little deeper, a soft edge, no shadow towards the top or the left"
+   ]
+  },
+  {
+   "mutation": "d: table not moved into the safe width",
+   "file": "src/scene.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "d: insets from env() or the verification stand-in, written for the shell; viewport-fit=cover in index.html; shell inside the safe area"
+   ]
+  },
+  {
+   "mutation": "d: no viewport-fit=cover",
+   "file": "index.html",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "d: insets from env() or the verification stand-in, written for the shell; viewport-fit=cover in index.html; shell inside the safe area"
+   ]
+  },
+  {
+   "mutation": "d: hint outside the safe area",
+   "file": "src/style.css",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "d: insets from env() or the verification stand-in, written for the shell; viewport-fit=cover in index.html; shell inside the safe area"
+   ]
+  },
+  {
+   "mutation": "d: shift forgets the text of the move",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "d: the table is laid out in the safe width and moved by the left inset; no inset, the same layout"
+   ]
+  },
+  {
+   "mutation": "v1 off: only the tip facing the card",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "v1: from every slot, the card raised and at rest (a bound waiting for its discard), no arrow crosses the old place of ✓ and ×"
+   ]
+  },
+  {
+   "mutation": "v1 other sides tried before the facing tip",
+   "file": "src/readability.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "v1: an arrow already clear keeps the tip facing the card"
+   ]
+  },
+  {
+   "mutation": "J2 off in the scene: interrupt stops everything",
+   "file": "src/scene.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "J2: la scena interrompe con interruptRound e chiude la sequenza con endSound"
+   ]
+  },
+  {
+   "mutation": "J2 off in sound: interruptRound stops everything",
+   "file": "src/sound.ts",
+   "tests": 94,
+   "pass": 92,
+   "fail": 2,
+   "failed": [
+    "J2: un'interruzione ferma e consuma i colpi del round; il jingle d'esito prosegue",
+    "J2: un'interruzione non annulla i suoni d'interfaccia rimandati"
+   ]
+  },
+  {
+   "mutation": "J2 hits not consumed",
+   "file": "src/sound.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "J2: un'interruzione ferma e consuma i colpi del round; il jingle d'esito prosegue"
+   ]
+  },
+  {
+   "mutation": "J2 end of an interrupted sequence stops everything",
+   "file": "src/sound.ts",
+   "tests": 94,
+   "pass": 93,
+   "fail": 1,
+   "failed": [
+    "J2: la fine di una sequenza decide il suono dal motivo"
+   ]
+  }
+ ]
+}

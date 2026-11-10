@@ -1,4 +1,7 @@
 :root {
+  /* C4-11 d (O28): left and right safe-area insets, written by safe.ts; 0 outside an iPhone in landscape. */
+  --safe-l: 0px;
+  --safe-r: 0px;
   --round-hover: #f6ecd814;
   --confirm-disc-no: #742e33e6;
   --confirm-disc-yes: #2c6262e6;
@@ -149,7 +152,7 @@ main,.table-host {
 }
 .brand {
   position: absolute;
-  left: 20px;
+  left: calc(20px + var(--safe-l));
   top: 15px;
   font-family: Impact,Arial,sans-serif;
   font-size: 30px;
@@ -161,7 +164,7 @@ main,.table-host {
 }
 .top-actions {
   position: absolute;
-  right: 16px;
+  right: calc(16px + var(--safe-r));
   top: 12px;
   display: flex;
   gap: 16px;
@@ -175,7 +178,7 @@ main,.table-host {
 }
 .hint {
   position: absolute;
-  left: 14px;
+  left: calc(14px + var(--safe-l));
   bottom: 12px;
   max-width: min(380px,30vw);
   margin: 0;
@@ -334,14 +337,13 @@ dialog p,dialog dd,dialog dt {
   margin: 10px 0;
 }
 @media(max-height:550px) {
+  /* C4-11 a1 «Cornice leggera»: the decorative title leaves the compact table (the other screens have their own title). */
   .brand {
-    font-size: 19px;
-    left: 10px;
-    top: 8px;
+    display: none;
   }
   .top-actions {
     top: 6px;
-    right: 8px;
+    right: calc(8px + var(--safe-r));
     gap: 10px;
   }
   .clock {
@@ -349,7 +351,7 @@ dialog p,dialog dd,dialog dt {
   }
   .hint {
     font-size: 12px;
-    left: 10px;
+    left: calc(10px + var(--safe-l));
     bottom: 8px;
     padding: 4px 11px;
     max-width: min(250px,30vw);

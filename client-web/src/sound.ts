@@ -56,6 +56,10 @@ export class Sounds {
  event(meta:Record<string,unknown>,kind:SoundEvent,scale=1){audioTrace({type:'event',...meta,available:this.ready&&!this.muted&&this.volume>0&&!!this.buffers[kind]});
   const w=globalThis as unknown as {__bmAudioEvent?:Record<string,unknown>};w.__bmAudioEvent=meta;try{return this.play(kind,scale);}finally{delete w.__bmAudioEvent;}}
  stopRound(){for(const s of this.roundSources)try{s.stop();}catch{}this.roundSources.clear();}
+ /** C4-11 J2 (owner, 10 November 2026: «va bene la correzione j2»): an interruption (resize, Safari's bar, pointercancel, Esc, a new view) stops
+  * and consumes the round's hits only, sounding or still to come; the outcome jingle and the interface sounds play on, and the deferred ones
+  * (select, send, reject) are not cancelled. «Salta effetti», leaving the table, background, disconnection, reset and mute still stop everything. */
+ interruptRound(){if(this.activeRound)this.seen.add(this.activeRound);this.activeRound=null;this.stopRound();}
  stopAll(){this.generation++;audioTrace({type:'stop-all'});for(const s of this.active)try{s.stop();}catch{}this.active.clear();this.roundSources.clear();}
 
 }
@@ -80,6 +84,10 @@ export class RoundCue {
  private fire(at:number,reason:string){const due=this.cues.filter(c=>c.at<=at);this.cues=this.cues.filter(c=>c.at>at);
   for(const c of due){audioTrace({type:'reach',key:this.key,move:c.move,kind:c.kind,reason,at,scale:1/due.length});this.sounds.round(this.key,c.kind,String(c.move),1/due.length);}}
 }
+/** C4-11 J2: what the end of a sequence does to the sound, by the reason it ended. A natural end or the player's own input lets a sound already
+ * started play on; «Salta effetti» stops everything; any other reason is an interruption and stops the round's hits only. */
+export type EndSound='keep'|'round'|'all';
+export const endSound=(reason:string):EndSound=>reason==='complete'||reason==='input'?'keep':reason==='skip'?'all':'round';
 export type OutcomeState={gameId:string;me:string;finished:boolean;winner:string|null;generation:number};
 /** Personal outcome survives watch/repeated views. Initial/recovered/hidden outcomes are consumed silently. */
 export class OutcomeSounds {
