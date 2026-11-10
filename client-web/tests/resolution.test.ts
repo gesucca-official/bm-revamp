@@ -372,8 +372,9 @@ test('C3-4s: a label is readable for its whole time inside the round, in every r
 
 // C3-6: the dialog «Ultimo turno»: every sentence from the facts (D1, D7).
 import {roundReport,reportNote,briefLine,NO_CHANGE,RESOURCE_NAMES,type ReportContext} from '../src/resolution.ts';
+import {damageOf,damageLabel,damageReport} from '../src/readability.ts';
 const names:Record<string,string>={};
-const ctxFor=(me:string):ReportContext=>({me,name:id=>names[id]??id,forfeit:(id,code)=>`${id} forfeit ${code}`,costOf:card=>{const c=catalog.find(x=>x.name===card);return c?{...c.cost}:null;}});
+const ctxFor=(me:string):ReportContext=>({me,name:id=>names[id]??id,forfeit:(id,code)=>`${id} forfeit ${code}`,costOf:card=>{const c=catalog.find(x=>x.name===card);return c?{...c.cost}:null;},damageOf:card=>{const c=catalog.find(x=>x.name===card);return c?damageReport(c):null;}});
 const reportOf=(name:string,crossed=false)=>{const c=pair(name),f=resolve(c.previous,c.next,c.me,catalog);return {c,f,r:roundReport(f,crossed,ctxFor(c.me))};};
 const signedText=(n:number)=>`${n>0?'+':'−'}${Math.abs(n)}`;
 
@@ -459,4 +460,34 @@ test('C4-2 (O12): the report says the nominal gain of a move when the context kn
  const plain=roundReport(f,false,ctxFor(c.me)),said=roundReport(f,false,{...ctxFor(c.me),gainsOf:n=>n===card?[{resource:'VIOLENCE',amount:15},{resource:'ALERTNESS',amount:null}]:[]});
  assert.ok(!plain.moves[0].lines.some(l=>l.startsWith('Guadagno nominale')));
  assert.ok(said.moves[0].lines.includes(`Guadagno nominale: +15 ${RESOURCE_NAMES.VIOLENCE}, +x ${RESOURCE_NAMES.ALERTNESS}.`),said.moves[0].lines.join(' | '));
+});
+
+// C4-8a, D5 (b) (owner, 6 November 2026; format 10 November 2026): «Ultimo turno» says the type of damage of each move, since with reduced motion the sequence does not play it.
+// The expectation that changes: a move's lines now include «Danno nominale: …» for a card with damage (and only then), after the cost and the gain.
+test('C4-8a D5 (b): every move with a card of damage has the line «Danno nominale», equal to the label of the catalog; none without damage',()=>{
+ // The recordings predate the damage fields of the catalog (A1, A3): the published annex gives them, by card name.
+ const annex=JSON.parse(readFileSync(new URL('../../docs/rules-catalog.json',import.meta.url),'utf8')).cards as Card[];
+ const withAnnex:Card[]=catalog.map(c=>{const a=annex.find(x=>x.name===c.name);return a?{...c,damage:a.damage,damageAmount:a.damageAmount}:c;});
+ const ctx=(me:string):ReportContext=>({...ctxFor(me),damageOf:card=>{const c=withAnnex.find(x=>x.name===card);return c?damageReport(c):null;}});
+ let withDamage=0,without=0;
+ for(const name of Object.keys(recorded.cases)){const c=pair(name),f=resolve(c.previous,c.next,c.me,catalog),r=roundReport(f,false,ctx(c.me));
+  f.moves.forEach((m,i)=>{const card=withAnnex.find(x=>x.name===m.card),lines=r.moves[i].lines.filter(l=>l.startsWith('Danno nominale'));
+   if(card&&damageOf(card).length){withDamage++;assert.deepEqual(lines,[`Danno nominale: ${damageReport(card)}.`],`${name} ${m.card}`);
+    assert.ok(lines[0].includes(damageLabel(card,null)),`${m.card} label`);
+    const order=r.moves[i].lines,at=order.indexOf(lines[0]);assert.ok(order.findIndex(l=>/^(Costo|Nessun costo)/.test(l))<at,'after the cost');
+    const gain=order.findIndex(l=>l.startsWith('Guadagno'));if(gain>=0)assert.ok(gain<at,'after the gain');
+    const item=order.findIndex(l=>l.startsWith('Oggetto scelto'));if(item>=0)assert.ok(at<item,'before the object');}
+   else{without++;assert.deepEqual(lines,[],`${name} ${m.card}`);}});}
+ assert.ok(withDamage>0&&without>0,`recordings cover both: ${withDamage} with damage, ${without} without`);
+});
+
+test('C4-8a D5 (b): the format of the line — «colpo 15», «colpo 20+ (più metà della V residua di chi gioca)», two types, no hook no line',()=>{
+ const card=(damage:string,damageAmount?:string)=>({name:'X',damage,damageAmount,cost:{}} as unknown as Card);
+ assert.equal(damageReport(card('HIT','HIT 15')),'colpo 15');
+ assert.equal(damageReport(card('HIT','HIT 20+x')),'colpo 20+ (più metà della V residua di chi gioca)');
+ assert.equal(damageReport(card('HIT,CUT','HIT 10, CUT 15')),'colpo 10 e taglio 15');
+ assert.equal(damageReport(card('CUT')),'taglio','type alone when the catalog gives no amount');
+ assert.equal(damageReport(card('')),null);assert.equal(damageReport(card('—')),null);
+ const c=pair('void'),f=resolve(c.previous,c.next,c.me,catalog),r=roundReport(f,false,{...ctxFor(c.me),damageOf:undefined});
+ assert.ok(r.moves.every(m=>!m.lines.some(l=>l.startsWith('Danno nominale'))),'without the hook the report says nothing about damage');
 });

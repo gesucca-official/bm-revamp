@@ -327,6 +327,11 @@ const RES_IT={HEALTH:'Salute',ALERTNESS:'Allerta',VIOLENCE:'Violenza',TOXICITY:'
 const sgn=n=>`${n>0?'+':'−'}${Math.abs(n)}`;
 const label=(p,id,ids)=>{if(id===p.user)return 'Tu';if(!id.startsWith('ComPlayer_'))return id;const bots=ids.filter(x=>x.startsWith('ComPlayer_'));return bots.length>1?`Computer ${bots.indexOf(id)+1}`:'Computer';};
 const names=cards=>m=>{const c=cards.find(x=>x.name===m);return c?c.cost:null;};
+// C4-8a, D5 (b): the line «Danno nominale» a move must have, from the card of the account catalog as the wire gives it (damage, damageAmount), not from the client's functions.
+const DMG_IT={HIT:'colpo',CUT:'taglio',POISON:'veleno'};
+const dmgLine=c=>{if(!c)return null;const am=(c.damageAmount??'').split(',').map(x=>/^\s*(HIT|CUT|POISON)\s+(\d+)(\+x)?\s*$/.exec(x)).filter(Boolean);
+ const parts=am.length?am.map(m=>({t:m[1],n:m[2],x:!!m[3]})):(c.damage??'').split(',').map(x=>x.trim()).filter(x=>DMG_IT[x]).map(t=>({t,n:null,x:false}));
+ return parts.length?`Danno nominale: ${parts.map(q=>`${DMG_IT[q.t]}${q.n===null?'':` ${q.n}${q.x?'+':''}`}`).join(' e ')}${parts.some(q=>q.x)?' (più metà della V residua di chi gioca)':''}.`:null;};
 async function reportDialog(p,game,{via='menu',scope}){
  const views=p.views(game),next=views.at(-1),before=[...views].reverse().find(v=>v.turn<next.turn)??null,ids=Object.keys(next.players),L=id=>label(p,id,ids),cards=catalogOf(p),problems=[];
  if(via==='menu'){await p.page.getByLabel('Apri menu').click();await p.page.getByRole('button',{name:'Ultimo turno'}).click();}else await p.page.getByRole('button',{name:'Ultimo turno'}).first().click();
@@ -341,7 +346,7 @@ async function reportDialog(p,game,{via='menu',scope}){
    type:{move:fs(q('[data-testid=report-facts] li strong')),line:fs(q('[data-testid=report-facts] li span')),change:fs(q('[data-testid=report-changes] li')),note:fs(q('[data-testid=report-note]')),h3:fs(q('.report h3')),serverLine:fs(q('.server-text p'))},
    box:{x:r.x,y:r.y,w:r.width,h:r.height,scrollH:dlg.scrollHeight,clientH:dlg.clientHeight,scrollW:dlg.scrollWidth,clientW:dlg.clientWidth,vw:innerWidth,vh:innerHeight}};});
  // 1. The moves: the view's resolvedMoves in order, with who, what, on whom, void, nominal cost, chosen object and discard.
- const cost=names(cards);
+ const cost=names(cards);let withDamage=0,withoutDamage=0;
  if(dom.moves.length!==next.resolvedMoves.length)problems.push(`moves ${dom.moves.length} vs view ${next.resolvedMoves.length}`);
  next.resolvedMoves.forEach((m,i)=>{const d=dom.moves[i];if(!d){return;}const self=m.targetId==='SELF'||m.targetId===m.playerId,target=self?m.playerId:m.targetId;
   const who=L(m.playerId),on=self?(m.playerId===p.user?'te stesso':'se stesso'):target===p.user?'di te':L(target),verb=m.playerId===p.user?'giochi':'gioca';
@@ -350,6 +355,9 @@ async function reportDialog(p,game,{via='menu',scope}){
   const c=cost(m.playedCardName),costLine=d.lines.find(l=>/^(Costo nominale|Nessun costo|Costo nominale non noto)/.test(l));
   if(c===null){if(costLine!=='Costo nominale non noto al client.')problems.push(`move ${i} unknown cost: ${costLine}`);}
   else{const parts=Object.entries(c).filter(([,v])=>v).map(([k,v])=>`${v} ${RES_IT[k]}`);const exp=parts.length?`Costo nominale: ${['HEALTH','ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'].filter(k=>c[k]).map(k=>`${c[k]} ${RES_IT[k]}`).join(' + ')}.`:'Nessun costo nominale in risorse.';if(costLine!==exp)problems.push(`move ${i} cost «${costLine}» vs «${exp}»`);}
+  // C4-8a, D5 (b): the type of damage in words, after the cost (and the gain), for every move whose card has damage, and for no other.
+  const dl=d.lines.find(l=>l.startsWith('Danno nominale')),de=dmgLine(cards.find(x=>x.name===m.playedCardName));if((de??null)!==(dl??null))problems.push(`move ${i} damage «${dl}» vs «${de}»`);
+  if(dl){withDamage++;if(d.lines.indexOf(dl)<=d.lines.findIndex(l=>/^(Costo nominale|Nessun costo)/.test(l)))problems.push(`move ${i} damage before the cost`);}else withoutDamage++;
   const item=m.choices?.TARGET_ITEM,itemLine=d.lines.find(l=>l.startsWith('Oggetto scelto'));if(!!item!==!!itemLine||(item&&!itemLine.includes(`«${item}»`)))problems.push(`move ${i} object`);
   const disc=m.choices?.DISCARD_ONE,discLine=d.lines.find(l=>l.startsWith('Carta da scartare'));if(!!disc!==!!discLine||(disc&&!discLine.includes(`«${disc}»`)))problems.push(`move ${i} discard`);
   for(const l of d.lines)if(/rubat|consumat|distrutt|spezzat|annullata da|contrastat/i.test(l))problems.push(`move ${i} claims a cause: ${l}`);});
@@ -385,7 +393,7 @@ async function reportDialog(p,game,{via='menu',scope}){
  if(dom.box.scrollW>dom.box.clientW+1)problems.push('dialog scrolls sideways');
  const firstFact=await p.page.evaluate(()=>{const dlg=document.querySelector('dialog[open]'),li=document.querySelector('[data-testid=report-facts] li'),d=dlg.getBoundingClientRect(),r=li?.getBoundingClientRect();return r?{top:r.top-d.top,bottom:r.bottom-d.top,dialogH:d.height}:null;});
  if(firstFact&&firstFact.bottom>firstFact.dialogH+1)problems.push('the first move is not visible when the dialog opens');
- return {scope,turn:next.turn,advanced:adv,moves:dom.moves.length,type:dom.type,box:dom.box,firstFact,note:dom.note,problems,close:async()=>{await p.page.keyboard.press('Escape');await p.page.waitForTimeout(120);}};
+ return {scope,turn:next.turn,advanced:adv,moves:dom.moves.length,damage:{withDamage,withoutDamage},type:dom.type,box:dom.box,firstFact,note:dom.note,problems,close:async()=>{await p.page.keyboard.press('Escape');await p.page.waitForTimeout(120);}};
 }
 function summarise(label,p,game,r,{expectSequences=true,quiet=new Set()}={}){
  const a=analyse(label,p,game,r.log,catalogOf(p),{expectSequences,quiet});
@@ -531,7 +539,7 @@ try{
    for(let t=0;t<6&&checked<4;t++){
     const s=await A.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand')&&!x.sequence.running)),90000,'turn');
     if(s.over||s.eliminated)break;
-    if(s.turn>=1){const res=await reportDialog(A,game,{scope:`${mode} T${s.turn}`});rows.push({mode,turn:res.turn,advanced:res.advanced,moves:res.moves,type:res.type,box:res.box,firstFact:res.firstFact,problems:res.problems});
+    if(s.turn>=1){const res=await reportDialog(A,game,{scope:`${mode} T${s.turn}`});rows.push({mode,turn:res.turn,advanced:res.advanced,moves:res.moves,damage:res.damage,type:res.type,box:res.box,firstFact:res.firstFact,problems:res.problems});
      if(checked===1)await A.shot(`report-${mode}-dialog`);
      await A.page.evaluate(()=>document.querySelector('dialog[open]')?.scrollTo(0,1e6));await A.page.waitForTimeout(100);if(checked===1)await A.shot(`report-${mode}-dialog-end`);
      await res.close();checked++;}
@@ -543,6 +551,8 @@ try{
   assert.ok(rows.filter(r=>r.mode==='duel').length>=2&&rows.filter(r=>r.mode==='ffa').length>=2,'dialogs checked in both modes');
   assert.deepEqual(rows.flatMap(r=>r.problems.map(x=>`${r.mode} T${r.turn}: ${x}`)),[],'report dialog');
   assert.ok(rows.filter(r=>r.mode==='ffa').some(r=>r.moves>=4),'an FFA round with several moves was read');
+  // C4-8a, D5 (b): the line «Danno nominale» was met on real moves (and its absence on moves without damage).
+  assert.ok(rows.reduce((n,r)=>n+(r.damage?.withDamage??0),0)>0,'a move with a card of damage was read in the report');
  }
 
  // K3: reduced motion emulated, three rounds of quick 1vCom, then abandon. No sequence; the static summary is there.
@@ -830,16 +840,28 @@ try{
   const preferBy=list=>s=>{const own=s.hits.some(h=>h.kind==='item'&&h.target.owner===s.me),far=s.hits.some(h=>h.kind==='item'&&h.target.owner!==s.me);
    return name=>{const b=Object.entries(names).find(([,n])=>n===name)?.[0]??'';const i=list.indexOf(b);if(i<0)return 0;
     if(/Grab|EverythingIsDrug/.test(b)&&!own)return -1;if(/Steal|BeggingMoney/.test(b)&&!far)return -1;return list.length-i;};};
+  evidence.blow=[];evidence.blowProblems=[];
   for(const [id,list] of [['C3 contrasti',counters],['C3 furti',theft]]){
    await page.getByTestId('tab-play').click();await page.getByRole('radio',{name:'Con un tuo mazzo'}).click();
    await page.getByTestId('quick').click();await page.getByTestId('deck-dialog').waitFor();
    await page.getByRole('radio',{name:new RegExp(`^${id} `)}).click();await page.getByTestId('start-open').click();
    await table(A);const game=readyId(A,/open\/1vCom\/ready$/);
-   const label=`open ${id}`;const r=await playToEnd(A,{prefer:preferBy(list),shots:id.replace(/\W+/g,'-').toLowerCase()});
+   const label=`open ${id}`;
+   // C4-8a (O21): the pill of ExtremelyViolentBlow in the hand, with the real V of the turn: 20 + trunc((V - cost)/2), the amount of the catalog («HIT 20+x»), on the face and in the label of the card.
+   const blowName=names['bruiser.ExtremelyViolentBlow'],blowHook=async(p,s)=>{const e=s.readout.hand.find(c=>c.name===blowName);if(!e)return false;
+    const c=s.cards.find(x=>x.key===e.key),m=/HIT\s+(\d+)\+x/.exec(c?.damageAmount??''),V=s.resources.VIOLENCE;if(!m||V===undefined)return false;
+    const want=Number(m[1])+Math.trunc((V-(c.cost?.VIOLENCE??0))/2),pill=e.face?.damage?.find(d=>d.type==='HIT')?.text??null,hit=s.hits.find(h=>h.key===e.key),said=hit?.label.includes(`danno colpo ${want}`)??false;
+    evidence.blow.push({deck:id,turn:s.turn,V,cost:c.cost?.VIOLENCE??0,want:String(want),pill,label:said});
+    if(pill!==String(want)||!said)evidence.blowProblems.push(`${id} T${s.turn}: V ${V}, expected ${want}, pill «${pill}», label ${said}`);return false;};
+   const r=await playToEnd(A,{prefer:preferBy(list),shots:id.replace(/\W+/g,'-').toLowerCase(),onTurn:id==='C3 contrasti'?blowHook:undefined});
    await A.shot(`${id.replace(/\W+/g,'-').toLowerCase()}-outcome`);
    summarise(label,A,game,r);
    if(!r.left)await toHub(A);
   }
+  step('blowPill',{turnsWithBlowInHand:evidence.blow.length,sample:evidence.blow.slice(0,3),problems:evidence.blowProblems.length});
+  assert.deepEqual(evidence.blowProblems,[],'the pill of ExtremelyViolentBlow is 20 + trunc((V - cost)/2) with the real V');
+  // Seen at least once in the usual run; a game that never draws the card is declared, not failed (the formula is also a unit test).
+  if(!evidence.blow.length)evidence.blowNotExercised=true;
  }
 
  evidence.reportConsistency={rounds:reports.length,sumOk:reports.filter(x=>x.sumOk).length,chainOk:reports.filter(x=>x.chainOk).length,unknownCost:reports.filter(x=>x.unknownCost).length,failures:reports.filter(x=>!x.chainOk)};

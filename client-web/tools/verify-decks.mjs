@@ -76,6 +76,24 @@ const dialogOpen=()=>page.evaluate(()=>!!document.querySelector('dialog[open]'))
 // --- Editor helpers (through the UI only) ---
 const slot=async title=>{const s=page.locator('details.slot',{has:page.locator('summary',{hasText:title})});if(!(await s.evaluate(d=>d.open)))await s.locator('summary').click();return s;};
 const press=async name=>page.getByRole('button',{name,exact:true}).click();
+// C4-8a (P8, owner's choice of 10 November 2026): the arrows of a radio group or a tab list, as the ARIA pattern has them: Tab enters the group once (one button with tabindex 0, the checked one),
+// the arrows move the focus AND the selection and wrap around, Home and End reach the ends, Tab leaves the group and Shift+Tab comes back to the checked button. Restores the selection at the end.
+async function radioArrows(group,role,scope){
+ const attr=role==='tab'?'aria-selected':'aria-checked',items=group.locator(`[role=${role}]`),n=await items.count();assert.ok(n>=2,`${scope}: at least two`);
+ const read=async()=>items.evaluateAll((els,a)=>({checked:els.findIndex(e=>e.getAttribute(a)==='true'),focused:els.indexOf(document.activeElement),stops:els.filter(e=>e.getAttribute('tabindex')==='0').length,stopAt:els.findIndex(e=>e.getAttribute('tabindex')==='0')}),attr);
+ const start=(await read()).checked;assert.ok(start>=0,`${scope}: one is checked`);
+ const out={n,start,steps:[]},key=async(k,want)=>{await page.keyboard.press(k);await page.waitForTimeout(120);const r=await read();out.steps.push({k,...r});
+  assert.equal(r.checked,want,`${scope}: ${k} selects ${want}, got ${r.checked}`);assert.equal(r.focused,want,`${scope}: ${k} moves the focus to ${want}, got ${r.focused}`);assert.equal(r.stops,1,`${scope}: one tab stop after ${k}`);assert.equal(r.stopAt,want,`${scope}: the tab stop follows the selection after ${k}`);};
+ await items.nth(start).focus();let r=await read();assert.equal(r.focused,start);assert.equal(r.stops,1,`${scope}: Tab enters the group once`);assert.equal(r.stopAt,start);
+ await key('ArrowRight',(start+1)%n);await key('ArrowLeft',start);await key('ArrowLeft',(start-1+n)%n);await key('ArrowRight',start);
+ if(role==='radio'){await key('ArrowDown',(start+1)%n);await key('ArrowUp',start);}
+ await key('End',n-1);await key('Home',0);await key('End',n-1);
+ // Tab leaves the group, Shift+Tab comes back to the checked button (the tab stop).
+ await page.keyboard.press('Tab');await page.waitForTimeout(80);r=await read();assert.equal(r.focused,-1,`${scope}: Tab leaves the group`);
+ await page.keyboard.press('Shift+Tab');await page.waitForTimeout(80);r=await read();assert.equal(r.focused,r.checked,`${scope}: Shift+Tab returns to the checked button`);
+ await items.nth(start).click();await page.waitForTimeout(150);r=await read();assert.equal(r.checked,start,`${scope}: restored`);
+ return out;
+}
 const deckSaved=async(from,id)=>{await page.getByTestId('deck-notice').waitFor({timeout:10000});return A.account().decks.find(d=>d.deckId===id);};
 let names={},characters={};
 const card=binding=>{const n=names[binding];assert.ok(n,`catalog has ${binding}`);return n;};
@@ -124,6 +142,8 @@ const startOpen=async(id,{cancelFirst=false}={})=>{
   assert.equal(await dialogOpen(),false);assert.ok(!A.sends(mark).some(f=>f.headers.destination.includes('/open/')),'cancel sends nothing');}
  await page.getByTestId('quick').click();await page.getByTestId('deck-dialog').waitFor();
  const listed=await page.locator('[data-testid=deck-dialog] [role=radio] strong').allInnerTexts();
+ // C4-8a (P8): the saved decks of the dialog, once, when there are two or more.
+ if(listed.length>=2&&!evidence.checks.deckDialogArrows)step('deckDialogArrows',await radioArrows(page.getByTestId('deck-dialog').getByRole('radiogroup'),'radio','decks'));
  await page.getByRole('radio',{name:new RegExp(`^${id} `)}).click();await page.getByTestId('start-open').click();
  return {mark,listed};
 };
@@ -138,6 +158,8 @@ try{
  for(const c of account.collection.cards)names[c.bindingName]=c.name;
  for(const c of account.collection.characters)characters[c.bindingName]=c.name;
 
+ // C4-8a (P8): the tabs and the modes of the hub with the arrows, before anything else changes them.
+ step('hubArrows',{tabs:await radioArrows(page.getByRole('tablist'),'tab','tabs'),modes:await radioArrows(page.getByRole('radiogroup',{name:'Modalità'}),'radio','modes')});
  // P18: the catalog lists every card and character of the regulation annex.
  await page.getByTestId('tab-collection').click();
  await page.getByTestId('no-decks').waitFor();
@@ -233,6 +255,8 @@ try{
  await pickCharacter('bruiser.character.BigBadBruiser');await pickStruggle();
  await pickBound('bruiser.character.LittleSmack');await pickBound('bruiser.character.LittleRage');
  await slot('Mazzo regolare');
+ // C4-8a (P8): «Collezione» and «Mazzo» of the editor.
+ step('poolArrows',await radioArrows(page.getByRole('radiogroup',{name:'Mostra'}),'radio','pool'));
  for(const b of TEN_B)await addRegular(b,2);
  {const pool=await page.locator('[data-testid=regular-pool] [data-testid=card-face]').evaluateAll(n=>n.map(e=>({text:e.innerText,pills:e.querySelectorAll('.dmg-pill').length})));
   assert.ok(pool.length>0&&pool.every(f=>!/priorit/i.test(f.text)),'editor faces: no priority');assert.ok(pool.some(f=>f.pills>0),'editor faces: damage pills present');step('editorFaces',{faces:pool.length,withDamage:pool.filter(f=>f.pills).length});}

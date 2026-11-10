@@ -3,7 +3,7 @@ import type {Card,Resource} from './contracts.ts';
 import {RESOURCE_NAMES} from './resolution.ts';
 import {DAMAGE_ACCENT,DAMAGE_COLOR,DAMAGE_NAMES,RES_COLOR,gainsOf,damageOf,damageText,leftV,type DamageType} from './readability.ts';
 import {frameSvg,type FrameKind} from './frames.ts';
-import {MARK_LAYERS,SYMBOL_LAYERS,svgParts,symbolColors,type Layer,type MarkKind,type SymbolKind} from './symbols.ts';
+import {MARK_LAYERS,SYMBOL_LAYERS,edgeFor,svgParts,symbolColors,type Ground,type Layer,type MarkKind,type SymbolKind} from './symbols.ts';
 
 export const resourceNames:Record<string,string>=RESOURCE_NAMES;
 export const targetNames:Record<string,string>={SELF:'Te stesso',OPPONENT:'Un avversario',NEAR_ITEM:'Un tuo oggetto',FAR_ITEM:'Un oggetto avversario'};
@@ -11,8 +11,8 @@ export const effect=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effec
 
 const hex=(n:number)=>`#${n.toString(16).padStart(6,'0')}`;
 /** C4-3: a symbol of symbols.ts in HTML: the same layers the table draws with Pixi, as SVG (catalog, editor, inspection, help). */
-const SvgMark=({layers,colors,className,px=14,data}:{layers:Layer[];colors:{main:string;accent?:string};className?:string;px?:number;data?:Record<string,string>})=>
- <svg className={className} viewBox="-1 -1 2 2" aria-hidden="true" {...data}>{svgParts(layers,colors,px).map((p,i)=>React.createElement(p.tag,{key:i,...p.attrs}))}</svg>;
+const SvgMark=({layers,colors,className,px=14,data}:{layers:Layer[];colors:{main:string;accent?:string;edge?:string};className?:string;px?:number;data?:Record<string,string>})=>
+ <svg className={className} viewBox="-1 -1 2 2" aria-hidden="true" style={colors.edge?{overflow:'visible'}:undefined} {...data}>{svgParts(layers,colors,px).map((p,i)=>React.createElement(p.tag,{key:i,...p.attrs}))}</svg>;
 /** C4-4: the frame of a card as the table draws it, behind what the shell puts on it. Size in px of the viewBox; the CSS may scale it (the compact miniature). */
 export const CardFrame=({kind,w,h}:{kind:FrameKind;w:number;h:number})=>
  <svg className="card-frame" viewBox={`${-w/2-1} ${-h/2-1} ${w+2} ${h+2}`} aria-hidden="true">{frameSvg(kind,w,h).map((p,i)=>React.createElement(p.tag,{key:i,...p.attrs}))}</svg>;
@@ -21,8 +21,9 @@ export function MeasuredFrame({kind}:{kind:FrameKind}){const holder=useRef<HTMLS
  // The dialog opens after its content is mounted, so the size comes when the box gets one.
  useLayoutEffect(()=>{const box=holder.current?.parentElement;if(!box)return;const measure=()=>setSize({w:box.offsetWidth,h:box.offsetHeight}),seen=new ResizeObserver(measure);measure();seen.observe(box);return()=>seen.disconnect();},[kind]);
  return <span ref={holder}>{size&&size.w>0&&<CardFrame kind={kind} w={size.w} h={size.h}/>}</span>;}
-export const SymbolMark=({kind,className,colors,px}:{kind:SymbolKind;className?:string;colors?:{main:string;accent?:string};px?:number})=>
- <SvgMark layers={SYMBOL_LAYERS[kind]} colors={colors??symbolColors(kind)} className={className} px={px}/>;
+/** `ground`: C4-8a 3b, the ground it lies on (the coins and pills of the shell are light): the three symbols that need it get an outline there. */
+export const SymbolMark=({kind,className,colors,px,ground}:{kind:SymbolKind;className?:string;colors?:{main:string;accent?:string};px?:number;ground?:Ground})=>{const edge=edgeFor(kind,ground);
+ return <SvgMark layers={SYMBOL_LAYERS[kind]} colors={{...(colors??symbolColors(kind)),...(edge!==undefined?{edge:hex(edge)}:{})}} className={className} px={px}/>;};
 /** ✓ and ✕ as shapes in the colour of the text, in place of the glyphs Impact and Arial lack. */
 export const Mark=({kind,className}:{kind:MarkKind;className?:string})=><SvgMark layers={MARK_LAYERS[kind]} colors={{main:'currentColor'}} className={`mark${className?` ${className}`:''}`} px={20}/>;
 /** C3-5: the symbol of a type of damage in HTML (catalog, editor, inspection). */
@@ -31,13 +32,13 @@ export const DamageMark=({type}:{type:DamageType})=><SvgMark layers={SYMBOL_LAYE
 export function Cost({card}:{card:Card}){
  const entries=Object.entries(card.cost) as [Resource,number][];
  if(!entries.length)return <>—</>;
- return <span className="coins" data-testid="cost">{entries.map(([k,v])=><span key={k} className="coin" data-resource={k} role="img" aria-label={`${v} ${resourceNames[k].toLowerCase()}`}>{v}<span className="disc"><SymbolMark kind={k} className="res-mark"/></span></span>)}</span>;
+ return <span className="coins" data-testid="cost">{entries.map(([k,v])=><span key={k} className="coin" data-resource={k} role="img" aria-label={`${v} ${resourceNames[k].toLowerCase()}`}>{v}<span className="disc"><SymbolMark kind={k} className="res-mark" ground="light"/></span></span>)}</span>;
 }
 /** C4-3: what a card gives (`+15`, `+x`) with the symbol of each resource; a string the client cannot read is shown as the catalog gives it. */
 export function Gains({card}:{card:Card}){
  const gains=gainsOf(card),raw=card.gains??'';
  if(!gains.length||gains.length!==raw.split(',').length)return <>{raw}</>;
- return <span className="gains" data-testid="gains">{gains.map(g=><span key={g.resource} className="gain" role="img" aria-label={`+${g.amount??'x'} ${resourceNames[g.resource].toLowerCase()}`} style={{borderColor:hex(RES_COLOR[g.resource])}}>+{g.amount??'x'}<SymbolMark kind={g.resource} className="res-mark"/></span>)}</span>;
+ return <span className="gains" data-testid="gains">{gains.map(g=><span key={g.resource} className="gain" role="img" aria-label={`+${g.amount??'x'} ${resourceNames[g.resource].toLowerCase()}`} style={{borderColor:hex(RES_COLOR[g.resource])}}>+{g.amount??'x'}<SymbolMark kind={g.resource} className="res-mark" ground="light"/></span>)}</span>;
 }
 /** The nominal damage of a card as symbols with the amount of the catalog (1.10); `resources` of the player resolves the `x`, else «20+». Nothing for a card without damage. */
 export function DamagePills({card,resources}:{card:Card;resources?:Partial<Record<string,number>>|null}){

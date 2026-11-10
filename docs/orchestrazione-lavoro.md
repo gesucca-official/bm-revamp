@@ -192,21 +192,13 @@ fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare
 
 **Consegne aperte dal Set Base a C4** (aggiornate al 10 novembre 2026, al passaggio del Set Base alla regia unica). Chi chiude una consegna la toglie da qui nel commit che la chiude.
 
-1. **Strumenti di verifica cambiati dal Set Base**, base di C4-8a: `verify-decks.mjs` e `verify-resolution.mjs` (mazzi sintetici entro
-   le regole dei mazzi, SB-1); `verify-public.mjs` (pagina pubblica con regolamento 1.13 e Set Base 0.1), `check-rules.py`,
-   `verify-match-manifests.py` e le CLI `cli-match-export-test`, `cli-open-complete-test`, `cli-quick-complete-test` (SB-2,
-   [rapporto](reports/set-base/sb-2-report.md)). Un mazzo sintetico nuovo di C4-8a (per esempio per ExtremelyViolentBlow) deve
-   rispettare R02 1.12: 20 carte regolari, al massimo 2 copie, basic e due bound del personaggio, last resort; il server rifiuta gli altri.
-2. **`client-web/tests/readability.test.ts`:** una riga cambiata da SB-2 (Q8), perché i moltiplicatori degli stati ora stanno in
-   `docs/sets/base.md`. Se C4 tocca lo stesso test, al pull può esserci un conflitto di una riga.
-3. **SB-8, bozza giocabile da umani** (10 novembre 2026, [rapporto](reports/set-base/sb-8-report.md#per-laltra-macchina)): cambia il
-   server, quindi **rifare il jar dopo il pull** prima di qualsiasi verifica del client. Nessun file del client e nessuno strumento di
-   verifica del client toccati; il profilo normale (`local`, usato da tutte le verifiche) si comporta come prima. C'è un profilo nuovo,
-   `bozza`, solo per lo sviluppo e le prove umane del Set Base: non serve a C4 e nessuna verifica di C4 lo attiva. `check-rules.py`
-   cambia una riga (percorso di `Draft.java`, ora in `server/src/main`).
-4. **Prove umane del Set Base con la bozza** (SB-12b, SB-16): il server col profilo `bozza` e `client-web/run.ps1 -Task Serve` usano le
+Chiuse da C4-8a (10 novembre 2026, [rapporto](reports/client-c4/c4-8a.md#fase-b)): gli strumenti cambiati dal Set Base (`verify-decks`, `verify-resolution`,
+`verify-public`, `check-rules.py`) hanno girato sul codice finale e il blocco non ha avuto bisogno di mazzi sintetici nuovi (quello di ExtremelyViolentBlow è il
+«C3 contrasti» già entro R02 1.12); `readability.test.ts` non è stato toccato; il jar è stato rifatto dopo SB-8 prima di ogni verifica.
+
+1. **Prove umane del Set Base con la bozza** (SB-12b, SB-16): il server col profilo `bozza` e `client-web/run.ps1 -Task Serve` usano le
    porte 8080 e 4320, come le verifiche del client. Sulla stessa macchina non vanno insieme a una verifica di C4.
-5. **`Verify` sulla bozza** (proposta di SB-8, non decisa): oggi lo strumento confronta le carte con l'allegato del catalogo vivo e si
+2. **`Verify` sulla bozza** (proposta di SB-8, non decisa): oggi lo strumento confronta le carte con l'allegato del catalogo vivo e si
    ferma alla prima carta della bozza; SB-8 l'ha provato da una copia fuori dal repository
    ([diff](reports/set-base/sb-8/verify-bozza.diff)). Un'opzione che scelga il riferimento è un cambiamento a `client-web/tools/verify.mjs`,
    da valutare dopo C4 o dentro un blocco C4 che tocca lo strumento.

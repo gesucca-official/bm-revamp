@@ -1,6 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
 import type {Session,Mode} from './session.ts';
 import {PressButton} from './ui.tsx';
+import {groupKeyDown,tabStop} from './a11y.ts';
 import {Collection} from './collection.tsx';
 import {Profile} from './profile.tsx';
 import {PAGE_SIZES,activityLabel,presencePage,queueNames,type PresenceSort} from './presence.ts';
@@ -45,7 +46,7 @@ function DeckDialog({session,onClose,onCollection}:{session:Session;onClose:()=>
  return <dialog ref={ref} aria-label="Scegli il mazzo" data-testid="deck-dialog" onCancel={e=>{e.preventDefault();onClose();}}>
   <h2>Scegli il mazzo</h2>
   {!decks.length?<p data-testid="no-saved-decks">Nessun mazzo salvato. Creane uno nella collezione, poi torna qui.</p>
-  :<div role="radiogroup" aria-label="Mazzi salvati" className="deck-choice">{decks.map(d=><PressButton key={d.deckId} role="radio" aria-checked={chosen===d.deckId} className={chosen===d.deckId?'on':undefined} onClick={()=>setChosen(d.deckId)}>
+  :<div role="radiogroup" aria-label="Mazzi salvati" className="deck-choice" onKeyDown={e=>groupKeyDown(e,'radio')}>{decks.map((d,i)=><PressButton key={d.deckId} role="radio" aria-checked={chosen===d.deckId} tabIndex={i===tabStop(decks.map(x=>x.deckId===chosen),decks.map(()=>true))?0:-1} className={chosen===d.deckId?'on':undefined} onClick={()=>setChosen(d.deckId)}>
     <strong>{d.deckId}</strong> <small>{d.character.name} · {d.regularCards.length} regolari</small></PressButton>)}</div>}
   <div className="actions">
    {decks.length?<PressButton data-testid="start-open" className="primary" disabled={!chosen} onClick={()=>{onClose();if(chosen)session.join('open/1vCom',chosen);}}>Inizia</PressButton>
@@ -62,16 +63,18 @@ export function Hub({session}:{session:Session}){
  const [choice,setChoice]=useState<Mode>(session.mode??'quick/1vCom'),[tab,setTab]=useState<Tab>('play'),[picking,setPicking]=useState(false);
  const receipt=session.receipt,waiting=session.phase==='queue',queued=session.queued!==null,entering=waiting&&!queued;
  const picked=modes.find(m=>m.id===choice)!;
- const tabButton=(id:Tab,label:string)=><button role="tab" aria-selected={tab===id} data-testid={`tab-${id}`} className={`tab${tab===id?' on':''}`} disabled={waiting&&id!==tab} onClick={()=>{if(id!==tab){session.clearMessages();setTab(id);}}}>{label}</button>;
+ // C4-8a (P8): the arrows move along the tabs and the modes, and Tab enters each group once (roving tabindex, ARIA).
+ const tabIds:Tab[]=['play','collection','profile'],tabStopAt=tabStop(tabIds.map(t=>t===tab),tabIds.map(t=>!waiting||t===tab));
+ const tabButton=(id:Tab,label:string)=><button role="tab" aria-selected={tab===id} tabIndex={tabIds.indexOf(id)===tabStopAt?0:-1} data-testid={`tab-${id}`} className={`tab${tab===id?' on':''}`} disabled={waiting&&id!==tab} onClick={()=>{if(id!==tab){session.clearMessages();setTab(id);}}}>{label}</button>;
  return <section className={`sheet hub${tab==='collection'?' wide':''}`} aria-label="Hub">
   <div className="hub-head"><h1>Ciao, {session.user}</h1>
-   <div role="tablist" aria-label="Sezioni" className="tabs">{tabButton('play','Gioca')}{tabButton('collection','Collezione')}{tabButton('profile','Profilo')}</div></div>
+   <div role="tablist" aria-label="Sezioni" className="tabs" onKeyDown={e=>groupKeyDown(e,'tab')}>{tabButton('play','Gioca')}{tabButton('collection','Collezione')}{tabButton('profile','Profilo')}</div></div>
   {receipt?.outcome&&<p className="notice" role="status">Pareggio — {receipt.outcome.reason}. La partita precedente è chiusa: puoi iniziarne un’altra.</p>}
   {session.notice&&<p className="notice" role="status">{session.notice}</p>}
   {session.error&&<p className="problem" role="alert">{session.error}</p>}
   {tab==='collection'?<Collection session={session}/>:tab==='profile'?<Profile session={session}/>:<div className="hub-grid">
    <div className={`play${waiting?' waiting':''}`}>
-    <div role="radiogroup" aria-label="Modalità" className="modes">{modes.map(m=><PressButton key={m.label} role="radio" aria-checked={m.id===choice} disabled={waiting} className={`mode${m.id===choice?' on':''}`} onClick={()=>setChoice(m.id)}>{m.label}</PressButton>)}</div>
+    <div role="radiogroup" aria-label="Modalità" className="modes" onKeyDown={e=>groupKeyDown(e,'radio')}>{modes.map((m,i)=><PressButton key={m.label} role="radio" aria-checked={m.id===choice} tabIndex={i===tabStop(modes.map(x=>x.id===choice),modes.map(()=>!waiting))?0:-1} disabled={waiting} className={`mode${m.id===choice?' on':''}`} onClick={()=>setChoice(m.id)}>{m.label}</PressButton>)}</div>
     {!waiting&&<p className="small">{picked.hint}{choice==='open/1vCom'?'':' Personaggio assegnato a caso.'}</p>}
     {waiting&&<p className="notice" role="status" data-testid="waiting">{entering?'Entro nella partita…':session.queued==='quick/1v1'?'In attesa di un altro giocatore…':session.queued==='quick/ffa'?(session.starting?'Si parte…':`Al tavolo ${session.ffaQueue.length} su 5: si parte da soli a cinque.`):session.queued==='open/1vCom'?`Preparo il tavolo con «${session.openDeck}»…`:'Cerco un posto al tavolo…'}</p>}
     {session.queued==='quick/ffa'&&<FfaQueue session={session}/>}

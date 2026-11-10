@@ -3,6 +3,7 @@ import type {Session} from './session.ts';
 import type {Card,CharacterCard,UserGuiDeck} from './contracts.ts';
 import {artCss,artIndex,loadAtlas} from './art.ts';
 import {subtype} from './scene.ts';
+import {groupKeyDown} from './a11y.ts';
 import {ROLES,roleOf} from './readability.ts';
 import {frameOf,type FrameKind} from './frames.ts';
 import {CardFrame,Cost,DamagePills,Gains,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
@@ -75,9 +76,9 @@ function Editor({session,start,existing,onDone}:{session:Session;start:Draft;exi
   <Slot title="Mazzo regolare" summary={`${d.regularCards.length} / ${REGULAR_CARDS} carte`} open>
    <div className="regular-bar">
     <label>Cerca<input data-testid="card-search" type="search" value={term} onChange={e=>setTerm(e.target.value)} placeholder="nome o testo"/></label>
-    <div role="radiogroup" aria-label="Mostra" className="pool">
-     <PressButton role="radio" aria-checked={pool==='collection'} className={pool==='collection'?'on':undefined} onClick={()=>setPool('collection')}>Collezione</PressButton>
-     <PressButton role="radio" data-testid="pool-deck" aria-checked={pool==='deck'} className={pool==='deck'?'on':undefined} onClick={()=>setPool('deck')}>Mazzo</PressButton>
+    <div role="radiogroup" aria-label="Mostra" className="pool" onKeyDown={e=>groupKeyDown(e,'radio')}>
+     <PressButton role="radio" aria-checked={pool==='collection'} tabIndex={pool==='collection'?0:-1} className={pool==='collection'?'on':undefined} onClick={()=>setPool('collection')}>Collezione</PressButton>
+     <PressButton role="radio" data-testid="pool-deck" aria-checked={pool==='deck'} tabIndex={pool==='deck'?0:-1} className={pool==='deck'?'on':undefined} onClick={()=>setPool('deck')}>Mazzo</PressButton>
     </div>
    </div>
    <p className="small">{pool==='collection'?`Tocca una carta per aggiungerne una copia: al massimo ${MAX_COPIES} per carta e ${REGULAR_CARDS} in tutto.`:'Tocca una carta per toglierne una copia.'}</p>

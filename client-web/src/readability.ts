@@ -538,6 +538,12 @@ export const leftV=(card:Card,resources?:Partial<Record<Resource,number>>|null)=
 /** «15», «31» for 20+x with V known, «20+» when it is not (the catalog, a card of another round), «» for the type alone. */
 export const damageText=(e:DamageEntry,left:number|null)=>e.base===null?'':e.x?(left===null?`${e.base}+`:String(e.base+Math.trunc(left/2))):String(e.base);
 export const damageLabel=(card:Card,left:number|null)=>damageOf(card).map(e=>`${DAMAGE_NAMES[e.type]}${damageText(e,left)?` ${damageText(e,left)}`:''}`).join(' e ');
+/**
+ * C4-8a, D5 (b): the nominal damage of a card as «Ultimo turno» says it, without the V of the viewer (the round's author may be another player): «colpo 15», «colpo 20+ (più metà della V residua di chi gioca)»;
+ * null for a card without damage. The amount is the catalog's, never the one inflicted (D1 of C3).
+ */
+export function damageReport(card:Card):string|null{const entries=damageOf(card);if(!entries.length)return null;
+ return `${damageLabel(card,null)}${entries.some(e=>e.x)?' (più metà della V residua di chi gioca)':''}`;}
 /** Polygons (in -1..1) of the symbols of the three types, drawn alike by the table (Pixi) and by the catalog (SVG): a burst, a knife, a drop. Every polygon of a type takes the same fill; the slits between them draw the guard of the knife. */
 const turn=(poly:number[],deg:number)=>{const t=deg*Math.PI/180,c=Math.cos(t),s=Math.sin(t);return poly.map((v,i,a)=>i%2?a[i-1]*s+v*c:v*c-a[i+1]*s);};
 const star=(r:number)=>Array.from({length:16},(_,i)=>{const a=Math.PI*i/8,k=(i%2?.52:1)*r;return [Math.cos(a)*k,Math.sin(a)*k];}).flat();

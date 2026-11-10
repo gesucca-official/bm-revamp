@@ -236,6 +236,8 @@ export type ReportContext = {
   costOf: (card: string) => MoveFact['cost'];
   /** Nominal gains of a card (C4-2, O12): the round's small cards are too small for them, so the dialog says them. */
   gainsOf?: (card: string) => Gain[];
+  /** Nominal damage of a card as text («colpo 15»), C4-8a D5 (b): the type of damage a reader cannot see when the sequence does not play; null without damage or unknown. */
+  damageOf?: (card: string) => string | null;
 };
 export type ReportMove = {title: string; lines: string[]};
 export type RoundReport = {
@@ -284,6 +286,8 @@ export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportConte
     }
     const gains = c.gainsOf?.(m.card) ?? [];
     if (gains.length) lines.push(`Guadagno nominale: ${gains.map(g => `+${g.amount ?? 'x'} ${RESOURCE_NAMES[g.resource]}`).join(', ')}.`);
+    const damage = c.damageOf?.(m.card);
+    if (damage) lines.push(`Danno nominale: ${damage}.`);
     if (m.item) {
       const what = `«${m.item.name}» ${of(m.item.owner)}`;
       if (!f.seats) lines.push(`Oggetto scelto: ${what}.`);

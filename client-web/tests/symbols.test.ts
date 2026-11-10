@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {MARK_LAYERS,SYMBOL_LAYERS,drawMark,drawSymbol,svgParts,symbolColors,type Pen,type SymbolKind} from '../src/symbols.ts';
+import {EDGE_INK,EDGE_WIDTH,LIGHT,MARK_LAYERS,SYMBOL_LAYERS,drawMark,drawSymbol,edgeFor,svgParts,symbolColors,type Pen,type SymbolKind} from '../src/symbols.ts';
 import {DAMAGE_ACCENT_SHAPES,DAMAGE_SHAPES,RESOURCES,ROLES} from '../src/readability.ts';
 
 // C4-3: one family of symbols for the table (Pixi) and the HTML shell (SVG). The 15 approved symbols keep their shapes.
@@ -44,4 +44,28 @@ test('the SVG of the HTML shell has one element per primitive of the table, with
 test('every symbol has its colours in CSS: the resource, the role or the damage, and the accent only for a damage',()=>{
  for(const k of KINDS){const c=symbolColors(k);assert.match(c.main,/^#[0-9a-f]{6}$/,k);assert.equal(c.accent!==undefined,['HIT','CUT','POISON'].includes(k),k);}
  assert.equal(symbolColors('HEALTH').main,'#a3313d');assert.equal(symbolColors('HIT').accent,'#f2c84b');
+});
+
+// C4-8a 3b (owner, 10 November 2026): a 1 px outline for the heart on the dark board and for alcohol and toxicity on the light coin; the same in Pixi and in SVG.
+test('3b: only the heart on dark and alcohol or toxicity on light have an outline; the colours are the ink and the light of the eye',()=>{
+ const withEdge=KINDS.flatMap(k=>(['dark','light'] as const).map(g=>[k,g,edgeFor(k,g)] as const)).filter(([,,e])=>e!==undefined).map(([k,g,e])=>`${k}/${g}/${e}`);
+ assert.deepEqual(withEdge.sort(),[`ALCOHOL/light/${EDGE_INK}`,`HEALTH/dark/${LIGHT}`,`TOXICITY/light/${EDGE_INK}`]);
+ assert.equal(edgeFor('HEALTH'),undefined,'no ground, no outline');assert.equal(edgeFor('HEALTH','light'),undefined);
+});
+test('3b, Pixi: the outline is drawn first, under every fill, 2 px wide centred on the contour (1 px shows); the symbol itself is as before',()=>{
+ const plain=recorder(),edged=recorder();drawSymbol(plain.g,'HEALTH',10,10,20,{main:0xa3313d});drawSymbol(edged.g,'HEALTH',10,10,20,{main:0xa3313d,edge:0xf3ead2});
+ assert.deepEqual(edged.calls.slice(-plain.calls.length),plain.calls,'the symbol itself is unchanged and last');
+ const outline=edged.calls.slice(0,edged.calls.length-plain.calls.length),strokes=outline.filter(c=>c.startsWith('stroke('));
+ assert.equal(strokes.length,2,'one outline per layer of the heart (the lobes, the point)');
+ assert.ok(outline.every(c=>!c.startsWith('fill(')),'the outline does not fill');
+ assert.ok(strokes.every(c=>c.includes(`"width":${EDGE_WIDTH}`)&&c.includes(`"color":${0xf3ead2}`)&&c.includes('"join":"round"')));
+ // Layers that are strokes (the eye) are not outlined: only the fills of the main colour.
+ const eyePlain=recorder(),eye=recorder();drawSymbol(eyePlain.g,'ALERTNESS',0,0,20,{main:1});drawSymbol(eye.g,'ALERTNESS',0,0,20,{main:1,edge:2});
+ assert.equal(eye.calls.length-eyePlain.calls.length,2,'one outline for the pupil, none for the stroked eye: a primitive and its stroke');
+});
+test('3b, SVG: the outline elements come first (fill and stroke of the edge colour, 2 px wide), the symbol after them unchanged',()=>{
+ const plain=svgParts(SYMBOL_LAYERS.ALCOHOL,{main:'#c98d1f'},12),edged=svgParts(SYMBOL_LAYERS.ALCOHOL,{main:'#c98d1f',edge:'#30231e'},12);
+ assert.deepEqual(edged.slice(-plain.length),plain);const outline=edged.slice(0,edged.length-plain.length);assert.equal(outline.length,2,'a body and a neck');
+ for(const p of outline){assert.equal(p.attrs.fill,'#30231e');assert.equal(p.attrs.stroke,'#30231e');assert.equal(p.attrs['stroke-width'],+(EDGE_WIDTH/6).toFixed(4));}
+ assert.equal(svgParts(SYMBOL_LAYERS.ALCOHOL,{main:'#c98d1f'},12).length,plain.length,'without the edge colour, nothing is added');
 });

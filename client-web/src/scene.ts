@@ -8,7 +8,8 @@ import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
-import {drawSymbol,drawMark,type Pen,type SymbolKind} from './symbols.ts';
+import {deckLabel,handNeighbour} from './a11y.ts';
+import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
@@ -39,7 +40,8 @@ type DrawnDamage={type:DamageType;text:string;box:Box};
 export type FaceInfo={w:number;h:number;frame:FrameKind;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean;marks:{cost:Resource[];gains:Resource[]}};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 // Plain vector marks (symbols.ts, shared with the HTML shell): the shape carries the meaning, the colour only reinforces it (O3, O14).
-export function glyph(g:Graphics,kind:SymbolKind,x:number,y:number,s:number,color:number,accent?:number){drawSymbol(g as unknown as Pen,kind,x,y,s,{main:color,accent});return g;}
+// C4-8a 3b: `ground` is the ground the symbol lies on; the heart on dark and alcohol or toxicity on light get a 1 px outline (symbols.ts, `edgeFor`).
+export function glyph(g:Graphics,kind:SymbolKind,x:number,y:number,s:number,color:number,accent?:number,ground?:Ground){drawSymbol(g as unknown as Pen,kind,x,y,s,{main:color,accent,edge:edgeFor(kind,ground)});return g;}
 export type Readout={layout:{hand:{w:number;h:number};person:{w:number;h:number};item:{w:number;h:number}};
  /** C3-L: what the own piles show: cards left in the deck and the card on top of the discard pile. */
  piles:{deck:number;discard:string|null}|null;
@@ -187,13 +189,13 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   if(!role&&!small){const th=Math.max(14,h*.082);this.roleTab(g,null,-w/2+6,-h/2+titleH+2+th/2,th*1.3,th,w);}
   const gains=gainsOf(c);if(gains.length){const fs=small?Math.max(8,w*.12):Math.max(10,w*.075),ch=fs*1.45;let gx=-w/2+7;const gy=h/2-footH-5-ch/2;
    for(const gain of gains){const label=this.text(f,`+${gain.amount??'x'}`,0,0,fs,undefined,INK);label.anchor.set(0,.5);const gd=ch*.78,cw=label.width+gd+9;if(gx+cw>w/2-4){label.destroy();break;}
-    g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});label.position.set(gx+4,gy);f.addChild(label);glyph(g,gain.resource,gx+4+label.width+2+gd/2,gy,gd,RES_COLOR[gain.resource]);gainMarks.push(gain.resource);gx+=cw+3;}}
+    g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});label.position.set(gx+4,gy);f.addChild(label);glyph(g,gain.resource,gx+4+label.width+2+gd/2,gy,gd,RES_COLOR[gain.resource],undefined,'light');gainMarks.push(gain.resource);gx+=cw+3;}}
   if(!c.item){const fs=small?Math.max(7,w*.085,Math.min(10,w*.11)):Math.max(11,w*.088),fy=h/2-footH/2-1,ch=fs*1.4;let cx=-w/2+8;
    const costs=Object.entries(c.cost) as [Resource,number][];
    if(!costs.length){const dash=this.text(f,'—',cx+4,fy,fs,undefined,INK);dash.anchor.set(0,.5);}
    for(const [k,v] of costs){const unpaid=short.includes(k),label=this.text(f,`${unpaid?'! ':''}${v}`,0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const dd=ch*.8,cw=label.width+dd+10,dx=cx+5+label.width+2+dd/2;
     costBoxes.push({x:cx+cw/2,y:fy,w:cw,h:ch});g.roundRect(cx,fy-ch/2,cw,ch,ch*.45).fill(unpaid?WINE:INK);label.position.set(cx+5,fy);f.addChild(label);
-    g.circle(dx,fy,dd/2).fill(0xf6efd9);glyph(g,k,dx,fy,dd*.78,RES_COLOR[k]);costMarks.push(k);
+    g.circle(dx,fy,dd/2).fill(0xf6efd9);glyph(g,k,dx,fy,dd*.78,RES_COLOR[k],undefined,'light');costMarks.push(k);
     if(unpaid)g.moveTo(cx+3,fy+ch*.3).lineTo(cx+cw-3,fy-ch*.3).stroke({color:0xffd9d9,width:1.5});cx+=cw+3;}
    if(small)this.damageMarks(f,c,w,h,footH,drawnDamage);else this.damageBadges(f,c,w,fy,fs,cx,left,drawnDamage);}
   this.faces.set(f,{w,h,frame:kind,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text),marks:{cost:costMarks,gains:gainMarks}});
@@ -234,15 +236,15 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    if(m.start>0&&m.start<1)g.poly([zero+pos*m.start-3,y-th*.5-4,zero+pos*m.start+3,y-th*.5-4,zero+pos*m.start,y-th*.5]).fill(0xf6efd9);};
   // C3-L: type and columns follow the size of the board (C2 values at scale 1).
   if(own){const rh=b.h/RESOURCES.length,fs=rh*(compact?.71:.63),gs=rh*.62,bx=fs*3.75,bw=b.w-bx-12;
-   RESOURCES.forEach((k,i)=>{const y=rh*(i+.5),v=r[k]??0;glyph(g,k,8+gs/2,y,gs,RES_COLOR[k]);
+   RESOURCES.forEach((k,i)=>{const y=rh*(i+.5),v=r[k]??0;glyph(g,k,8+gs/2,y,gs,RES_COLOR[k],undefined,'dark');
     const t=this.text(c,`${v}`,0,0,fs,undefined,v<0?0xffb7bd:0xfff6e2);t.anchor.set(0,.5);t.position.set(12+gs,y);
     bar(bx,y,bw,Math.max(5,rh*.3),k);rows.push(`${LETTER[k]} ${v}`);});}
   // C3-L: name alone on the first row, fitted to the board; health number beside its bar; the other four below.
   else{const fs=b.h*(compact?.25:.24),name=this.text(c,this.name(id).toUpperCase().slice(0,10),0,0,fs,undefined,0xe9dcc2);name.anchor.set(0,.5);name.position.set(6,b.h*.24);
    if(name.width>b.w-12)name.scale.set((b.w-12)/name.width);
    const hp=r.HEALTH??0,mid=b.h*.52,ht=this.text(c,`${hp}`,0,0,fs*1.2,undefined,hp<0?0xffb7bd:0xfff6e2);ht.anchor.set(1,.5);ht.position.set(b.w-6,mid);
-   const hx=b.w-6-ht.width-fs*.65;glyph(g,'HEALTH',hx,mid,fs*.95,RES_COLOR.HEALTH);
-   const slot=(b.w-8)/4;(['ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'] as Resource[]).forEach((k,i)=>{const x=6+i*slot,y=b.h*.8;glyph(g,k,x+fs*.5,y,fs*.9,RES_COLOR[k]);const t=this.text(c,`${r[k]??0}`,0,0,fs,undefined,0xfff6e2);t.anchor.set(0,.5);t.position.set(x+fs*1.1,y);});
+   const hx=b.w-6-ht.width-fs*.65;glyph(g,'HEALTH',hx,mid,fs*.95,RES_COLOR.HEALTH,undefined,'dark');
+   const slot=(b.w-8)/4;(['ALERTNESS','VIOLENCE','TOXICITY','ALCOHOL'] as Resource[]).forEach((k,i)=>{const x=6+i*slot,y=b.h*.8;glyph(g,k,x+fs*.5,y,fs*.9,RES_COLOR[k],undefined,'dark');const t=this.text(c,`${r[k]??0}`,0,0,fs,undefined,0xfff6e2);t.anchor.set(0,.5);t.position.set(x+fs*1.1,y);});
    bar(6,mid,hx-fs*.6-14,Math.max(3,b.h*.08),'HEALTH');}
   this.world.addChild(c);return own?{values:{...r},reference:Object.fromEntries(RESOURCES.map(k=>[k,meter(0,start[k],k==='HEALTH').reference])),rows}:null;}
  // Statuses, equipment, immunities and timers as chips on the lower art of the character card.
@@ -253,7 +255,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   chips.forEach((chip,i)=>{const x=b.x-b.w/2+cw/2+i*step,y=b.y,c=new Container(),g=new Graphics();c.addChild(g);c.position.set(x,y);
    g.roundRect(-cw/2,-ch/2,cw,ch,ch*.35).fill(fill[chip.kind]).stroke({color:PAPER,width:1.2});const gx=-cw/2+ch*.45,s=ch*.6;
    if(chip.kind==='good')glyph(g,'RESOURCES',gx,0,s,PAPER);else if(chip.kind==='bad')glyph(g,'DISRUPT',gx,0,s,PAPER);else if(chip.kind==='equip')glyph(g,'DAMAGE',gx,0,s,PAPER);
-   else if(chip.kind==='immunity'&&chip.resource){const d=Math.min(ch*.92,cw*.62);g.circle(0,0,d/2).fill(0xf6efd9);glyph(g,chip.resource,0,0,d*.68,RES_COLOR[chip.resource]);g.moveTo(-d*.4,d*.4).lineTo(d*.4,-d*.4).stroke({color:WINE,width:Math.max(1.5,d*.13)});}
+   else if(chip.kind==='immunity'&&chip.resource){const d=Math.min(ch*.92,cw*.62);g.circle(0,0,d/2).fill(0xf6efd9);glyph(g,chip.resource,0,0,d*.68,RES_COLOR[chip.resource],undefined,'light');g.moveTo(-d*.4,d*.4).lineTo(d*.4,-d*.4).stroke({color:WINE,width:Math.max(1.5,d*.13)});}
    else g.circle(gx,0,s/2).stroke({color:PAPER,width:1.5}).moveTo(gx,0).lineTo(gx,-s*.32).moveTo(gx,0).lineTo(gx+s*.25,0).stroke({color:PAPER,width:1.3});
    if(chip.kind!=='immunity'){const tx=this.text(c,chip.short,0,0,fs,undefined,0xfff6e2);tx.anchor.set(0,.5);tx.position.set(gx+s*.6,0);}
    if(this.openStatus===chip.id||this.hovered===chip.id||this.focused===chip.id)g.roundRect(-cw/2-2,-ch/2-2,cw+4,ch+4,ch*.4).stroke({color:0xf1e4c4,width:2});
@@ -265,7 +267,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  private seatSummary(plan:StripPlan,marks:SeatMark[]){const {box:b,size}=plan,c=new Container(),g=new Graphics(),row=new Container();c.addChild(g,row);c.position.set(b.x-b.w/2,b.y-b.h/2);
   g.roundRect(0,0,b.w,b.h,Math.min(b.h*.3,10)).fill({color:0x120c08,alpha:.9}).stroke({color:0xd9b98a,width:1.2});
   marks.forEach((m,i)=>{const cell=size.cells[i],y=cell.y+size.fs*.72,color=m.delta<0?0xffb7bd:0xc9f0b0;
-   if(m.key!=='NONE')glyph(g,m.key==='ITEMS'?'ITEMS':m.key,cell.x+size.glyph/2,y,size.glyph,m.key==='ITEMS'?PAPER:RES_COLOR[m.key]);
+   if(m.key!=='NONE')glyph(g,m.key==='ITEMS'?'ITEMS':m.key,cell.x+size.glyph/2,y,size.glyph,m.key==='ITEMS'?PAPER:RES_COLOR[m.key],undefined,'dark');
    const tx=this.text(row,m.text,0,0,size.fs,undefined,m.key==='NONE'?0xcbbca2:color);tx.anchor.set(0,.5);tx.position.set(cell.x+(m.key==='NONE'?0:size.glyph+size.fs*.25),y);});
   this.world.addChild(c);return marks.map(m=>m.text);}
  // C3-L: own deck (backs, with the count of the view) and discard pile (the last card that went there, R02), small, beside the own character.
@@ -342,7 +344,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true,'','character');person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
    const dead=p.character.dead,forfeit=view.forfeits[id];if(dead||forfeit){person.alpha=.55;this.text(person,dead?'ELIMINATO':'FORFAIT',0,0,compact?11:16,cw,0xffffff);}
    const r=p.character.resources,summary=RESOURCES.map(k=>`${LETTER[k]} ${r[k]??0}`).join(', ');
-   const charHit:Hit={id:`person-${id}`,kind:'person',x,y,w:cw,h:ch,angle:person.rotation,target:{owner:id},label:`${id===me?'Tu':this.name(id)}, ${p.character.name}, salute ${r.HEALTH}${dead?', eliminato':forfeit?', forfait':''}; risorse ${summary}`,node:person};this.hits.push(charHit);
+   const charHit:Hit={id:`person-${id}`,kind:'person',x,y,w:cw,h:ch,angle:person.rotation,target:{owner:id},label:`${id===me?'Tu':this.name(id)}, ${p.character.name}, salute ${r.HEALTH}${dead?', eliminato':forfeit?', forfait':''}; risorse ${summary}${deckLabel(p.deck)?`; ${deckLabel(p.deck)}`:''}`,node:person};this.hits.push(charHit);
    if(this.model.allows({owner:id})&&!this.model.locked)this.halo(person,cw,ch,this.model.target?.owner===id&&this.model.target.itemIndex===undefined?0xf1e4c4:PETROL);
    const read=this.board(seat.board,p,id,id===me,compact);if(read)board=read;
    this.statusChips(seat.status,id,p);
@@ -482,6 +484,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  get statusShown(){const id=[this.hovered,this.focused,this.openStatus].find(x=>x?.startsWith('status-'));return id?this.chips[id]??null:null;}
  // Keyboard: I inspects; Shift+arrows move the focused hand card one slot (local order only, no SEND).
  key(id:string,e:KeyboardEvent){this.advance();if(e.key==='i'||e.key==='I'){e.preventDefault();this.inspect(id);return;}
+  // C4-8a (2c): the arrows walk along the hand (Shift+arrows still reorder it).
+  if(!e.shiftKey){const next=handNeighbour(this.hits,id,e.key);if(next){e.preventDefault();document.querySelector<HTMLElement>(`[data-hit="${next}"]`)?.focus();return;}}
   if(e.shiftKey&&['ArrowLeft','ArrowRight'].includes(e.key)&&!this.model.locked){const keys=this.model.hand.map(c=>c.key),i=keys.indexOf(id);if(i<0)return;e.preventDefault();
    const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
  focus(id:string|null){this.focused=id;this.draw();}
@@ -654,7 +658,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const C=this.height<550,own=s.seat===this.model.me,fs=C?12:17,c=new Container(),g=new Graphics();c.addChild(g);
   const d=s.to-s.from,label=this.text(c,`${s.from} → ${s.to}`,0,0,fs,undefined,d<0?0xffb7bd:0xc9f0b0);label.anchor.set(0,.5);
   const gs=fs*1.3,bw=C?54:84,w=gs+8+label.width+10+bw+12,h=fs*2;label.position.set(-w/2+gs+12,0);
-  g.roundRect(-w/2,-h/2,w,h,h*.35).fill({color:0x120c08,alpha:.92}).stroke({color:RES_COLOR[s.resource],width:2});glyph(g,s.resource,-w/2+6+gs/2,0,gs,RES_COLOR[s.resource]);
+  g.roundRect(-w/2,-h/2,w,h,h*.35).fill({color:0x120c08,alpha:.92}).stroke({color:RES_COLOR[s.resource],width:2});glyph(g,s.resource,-w/2+6+gs/2,0,gs,RES_COLOR[s.resource],undefined,'dark');
   const m=meter(s.to,this.start(s.seat,p)[s.resource],s.resource==='HEALTH'),x=w/2-bw-8,th=fs*.6;
   g.rect(x,-th/2,bw,th).fill({color:0x000000,alpha:.5});if(m.fill)g.rect(x,-th/2,bw*m.fill,th).fill(RES_COLOR[s.resource]);if(m.negative)g.rect(x,-th/2,2,th).fill(0xe0707a);
   const row=own?RESOURCES.indexOf(s.resource):-1,y=own?b.y-b.h/2+b.h/RESOURCES.length*(row+.5):b.y-b.h/2-h*.6,dur=LABEL.in+LABEL.read+LABEL.out;

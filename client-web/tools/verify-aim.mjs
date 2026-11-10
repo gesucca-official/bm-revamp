@@ -12,6 +12,7 @@
 //  - aiming with the mouse (drag, tap) and with emulated touch (tap, CDP touch drag) as before; reordering and cancelling send nothing;
 //  - D12: choosing a card while the sequence of the round runs closes it and leaves the card chosen, with its arrows;
 //  - performance of a mouse drag with arrows (frame intervals and input-to-frame from the scene, cost of each redraw).
+//  - C4-8a, rule 12 (keyboard, keyboard-motion, keyboard-ffa): a whole game from the keyboard only, the focus never lost while a choice can be made, the hand first in the order of Tab;
 // Prerequisites: port 8080 free (no other server), ./client-web/run.ps1 -Task Serve running, server jar built.
 // BM_SERVER_PORT runs the temporary server on another port (with a preview on BM_PORT proxying to it via BM_SERVER).
 import {chromium} from '@playwright/test';
@@ -430,6 +431,135 @@ async function scenarioPending(){
  finally{await A.context.close().catch(()=>{});await B.context.close().catch(()=>{});}
 }
 
+// --- C4-8a (rule 12): a whole game from the keyboard only: Tab, Shift+Tab, Enter, Space, Escape, arrows. Nothing is clicked or focused by the script. ---
+// Per turn: the hand first in the order of Tab, the arrows along the hand, the choice, the target, the discard when the card asks for one, ✓ with the focus,
+// one SEND for one Enter, Esc and × cancelling (the focus back on the hand), and the focus never lost while a choice can be made (a sampler in the page).
+const HALO='rgb(20, 12, 8)';
+const active=p=>p.page.evaluate(()=>{const e=document.activeElement;if(!e||e===document.body)return null;const c=getComputedStyle(e);
+ return {hit:e.getAttribute('data-hit'),test:e.getAttribute('data-testid'),role:e.getAttribute('role'),checked:e.getAttribute('aria-checked'),selected:e.getAttribute('aria-selected'),label:(e.getAttribute('aria-label')||e.textContent||'').trim().slice(0,48),tag:e.tagName,shadow:c.boxShadow,outline:`${c.outlineStyle} ${c.outlineWidth}`};});
+const press=async(p,k,n=1)=>{for(let i=0;i<n;i++){await p.page.keyboard.press(k);await p.page.waitForTimeout(45);}};
+const isCard=a=>!!a?.hit&&!a.hit.startsWith('person-')&&!a.hit.startsWith('item-')&&!a.hit.startsWith('status-');
+async function watchFocus(p){await p.page.evaluate(()=>{const w=window.__kw={lost:[],since:null,armed:false,samples:0};
+ w.timer=setInterval(()=>{const s=window.__bm?.state,e=document.activeElement;w.samples++;
+  const can=w.armed&&s&&s.phase==='choose'&&!s.over&&!s.eliminated&&s.hits.some(h=>h.kind==='hand'||h.kind==='preview')&&!document.querySelector('dialog[open]'),lost=!e||e===document.body;
+  if(can&&lost){if(w.since===null)w.since=performance.now();}else if(w.since!==null){w.lost.push(Math.round(performance.now()-w.since));w.since=null;}},50);});}
+const focusReport=p=>p.page.evaluate(()=>{const w=window.__kw;return {samples:w.samples,lost:[...w.lost,...(w.since!==null?[Math.round(performance.now()-w.since)]:[])]};});
+// The cards of the hand that a card can be thrown away for (rule R03): regular ones, as the wire view says.
+const regularNames=(s,v)=>new Set(v.players[s.me].cardsInHand.filter(c=>!c.item&&!c.basicAction&&!c.characterBound&&!c.lastResort).map(c=>c.name));
+async function tabTo(p,pred,cap=30,key='Tab'){for(let i=0;i<cap;i++){const a=await active(p);if(a&&pred(a))return a;await press(p,key);}const a=await active(p);return a&&pred(a)?a:null;}
+// One move chosen from the keyboard to the point where ✓ has the focus. Returns the card and the target, or null when no card of this hand can go (no target, no discard).
+async function kbdChoose(p,scope,rec,skip=0){
+ let s=await p.state();const v=view(p,s);if(!v){bad(scope,'no wire view');return null;}
+ const regs=regularNames(s,v),order=s.order,first=await tabTo(p,isCard,40);if(!first){bad(scope,'Tab never reaches a card of the hand');return null;}
+ let at=order.findIndex(c=>c.key===first.hit);
+ const goTo=async i=>{while(at<i){await press(p,'ArrowRight');at++;}while(at>i){await press(p,'ArrowLeft');at--;}const a=await active(p);if(a?.hit!==order[i].key)bad(scope,`arrows did not reach card ${i}: ${JSON.stringify(a)}`);};
+ let tried=0;
+ for(let i=0;i<order.length;i++){
+  const name=order[i].name,targets=expected(s,v,name);if(!targets.length)continue;if(tried++<skip)continue;
+  const bound=v.players[s.me].cardsInHand.find(c=>c.name===name)?.characterBound,spare=order.map((c,j)=>({c,j})).filter(x=>x.j!==i&&regs.has(x.c.name));
+  if(bound&&!spare.length)continue;
+  await goTo(i);await press(p,'Enter');let t=await settle(p,120);
+  if(t.selected!==order[i].key){await press(p,'Escape');continue;}
+  // The arrows draw the admitted targets; pick the first one Tab reaches (the opponents come before the objects).
+  const want=t.arrows.map(a=>a.id);let tg=null;
+  for(let n=0;n<40&&!tg;n++){await press(p,'Tab');const a=await active(p);if(a?.hit&&want.includes(a.hit))tg=a.hit;}
+  if(!tg){bad(scope,`${name}: Tab never reaches a target of ${JSON.stringify(want)}`);await press(p,'Escape');continue;}
+  await press(p,'Enter');t=await settle(p,140);
+  if(!t.target){bad(scope,`${name}: Enter on ${tg} did not aim`);await press(p,'Escape');continue;}
+  if(t.message.includes('scartare')&&!t.discard){
+   // The hand comes first in the order, so Shift+Tab from the target walks back to it.
+   const back=await tabTo(p,a=>isCard(a)&&a.hit!==order[i].key,40,'Shift+Tab');// the chosen card (in preview) is not a card of the hand: the arrows do not start from itif(!back){bad(scope,`${name}: no way back to the hand for the discard`);await press(p,'Escape');continue;}
+   let done=false;at=order.findIndex(c=>c.key===back.hit);
+   for(const {c,j} of spare){if(at<0)break;await goTo(j);await press(p,'Enter');const d=await settle(p,140);if(d.discard){done=true;break;}}
+   if(!done){bad(scope,`${name}: no discard accepted`);await press(p,'Escape');continue;}}
+  const a=await active(p);
+  if(a?.test!=='confirm'){bad(scope,`${name}: after the target the focus is ${JSON.stringify(a)}, not ✓`);}
+  else{rec.confirmFocus=(rec.confirmFocus??0)+1;if(rec.confirmFocus===1)await p.shot(`${scope}-focus-confirm`);if(!a.shadow.includes(HALO)||!a.outline.startsWith('solid'))bad(scope,`✓ focus without the two-tone ring: ${a.shadow} / ${a.outline}`);}
+  return {card:name,target:tg,key:order[i].key};}
+ return null;}
+async function kbdGame(p,scope,rec,{maxTurns,reduced}){
+ await watchFocus(p);let n=0,canceled=0;
+ const wait=()=>p.wait(x=>x&&(x.over||x.eliminated||(x.phase==='choose'&&x.hits.some(h=>h.kind==='hand'))),60000,'turn');
+ while(n<maxTurns){
+  let s=await wait();if(s.over||s.eliminated)break;
+  // A sequence in normal motion ends with any key: wait for it to be over, then check it did not end because of the focus (reason input).
+  await p.wait(x=>x&&!x.sequence.running,30000,'sequence over');s=await p.state();if(s.over||s.eliminated)break;
+  const row={turn:s.turn};rec.turns.push(row);
+  const a0=await active(p);
+  if(n===0){
+   // First Tab: the hand comes first; then the whole round of Tab, in the order the page gives, up to the first card again.
+   await press(p,'Tab');const f=await active(p);row.first=f?.label;if(!isCard(f))bad(scope,`the first Tab reaches ${JSON.stringify(f)}, not a card of the hand`);
+   await page_arm(p);
+   const seq=[f];for(let i=0;i<40;i++){await press(p,'Tab');const a=await active(p);if(!a||a.hit===f.hit)break;seq.push(a);}
+   const kinds=seq.map(a=>isCard(a)?'hand':a.hit?.startsWith('person-')?'person':a.hit?.startsWith('item-')?'item':a.hit?.startsWith('status-')?'status':a.test??a.tag);
+   row.tabOrder=kinds;const lastHand=kinds.lastIndexOf('hand'),firstOther=kinds.findIndex(k=>k!=='hand');
+   if(firstOther>=0&&lastHand>firstOther)bad(scope,`the hand is not first in the order of Tab: ${kinds.join(',')}`);
+   if(kinds.filter(k=>k==='hand').length!==s.hits.filter(h=>h.kind==='hand'||h.kind==='preview').length)bad(scope,`Tab does not reach every card of the hand: ${kinds.join(',')}`);
+   // Arrows: along the hand, stopping at the ends.
+   await tabTo(p,isCard,40);const hand=s.order.map(c=>c.key);
+   await press(p,'ArrowRight');let a=await active(p);if(a?.hit!==hand[1])bad(scope,`ArrowRight from the first card reaches ${a?.hit}, not ${hand[1]}`);
+   await press(p,'ArrowLeft');a=await active(p);if(a?.hit!==hand[0])bad(scope,`ArrowLeft back reaches ${a?.hit}, not ${hand[0]}`);
+   await press(p,'ArrowLeft');a=await active(p);if(a?.hit!==hand[0])bad(scope,'ArrowLeft at the first card moves the focus');
+   await press(p,'ArrowRight',hand.length+2);a=await active(p);if(a?.hit!==hand.at(-1))bad(scope,`the arrows stop at ${a?.hit}, not at the last card`);
+   row.ring=a&&{shadow:a.shadow,outline:a.outline};if(!a?.shadow.includes(HALO))bad(scope,`a card with the focus has no dark band: ${a?.shadow}`);
+   await p.shot(`${scope}-focus-card`);
+  }else if(!isCard(a0)||!(a0.hit))bad(scope,`turn ${s.turn}: a choice is open and the focus is ${JSON.stringify(a0)}, not on a card`);
+  else row.focusAtStart=a0.label;
+  // Cancelling: Esc once, × once; each leaves the focus on the hand (2b), then the move is chosen again.
+  if(n===1||n===2){const c=await kbdChoose(p,scope,rec);if(!c){rec.noValidMove=`turn ${s.turn}: no card to cancel`;break;}
+   if(n===1){await press(p,'Escape');const t=await settle(p,150),f=await active(p);row.escape={selected:t.selected,target:t.target,focus:f?.label};
+    if(t.selected||t.target)bad(scope,'Esc left a choice');if(!isCard(f))bad(scope,`after Esc the focus is ${JSON.stringify(f)}, not on the hand`);}
+   else{await press(p,'Tab');const x=await active(p);if(!/Annulla/.test(x?.label??''))bad(scope,`Tab from ✓ reaches ${JSON.stringify(x)}, not Annulla`);
+    await press(p,'Enter');const t=await settle(p,150),f=await active(p);row.cancelButton={selected:t.selected,target:t.target,focus:f?.label};
+    if(t.selected||t.target)bad(scope,'Annulla left a choice');if(!isCard(f))bad(scope,`after Annulla the focus is ${JSON.stringify(f)}, not on the hand`);}
+   canceled++;}
+  // The playable cards in turn, so that the arrows, the discard and the objects are all met; the first one when the turn has fewer. The server may refuse a card
+  // the resources do not pay (it decides, rule 1.9): Esc and the next card, up to four times.
+  let c=null,sent=0;
+  for(let attempt=0;attempt<4&&!c;attempt++){
+   const pick=(await kbdChoose(p,scope,rec,(n+attempt)%3))??(await kbdChoose(p,scope,rec,0));if(!pick){rec.noValidMove=`turn ${s.turn}: no card can be chosen`;break;}
+   const before=movesSent(p);
+   // Space also activates (checked once); Enter the other turns.
+   await press(p,n===3&&attempt===0?' ':'Enter');
+   await p.wait(x=>!x||x.phase==='pending'||x.turn!==s.turn||x.over||x.eliminated||(x.phase==='choose'&&x.message.startsWith('Rifiutata')),15000,'server answer');
+   sent=movesSent(p)-before;if(sent!==1)bad(scope,`turn ${s.turn}: ${sent} SEND for one ${n===3&&attempt===0?'Space':'Enter'}`);
+   const r=await p.state();if(r&&r.phase==='choose'&&r.turn===s.turn&&r.message.startsWith('Rifiutata')){rec.refused=(rec.refused??0)+1;await press(p,'Escape');await settle(p,150);continue;}
+   c=pick;}
+  if(!c){if(!rec.noValidMove)rec.noValidMove=`turn ${s.turn}: every card tried was refused`;break;}
+  row.played=c;
+  await p.wait(x=>!x||x.over||x.eliminated||x.turn!==s.turn,40000,'round resolved');
+  n++;}
+ const e=await p.state();rec.end={over:e?.over,eliminated:e?.eliminated,winner:e?.winner,turns:n,canceled};
+ const fr=await focusReport(p);rec.focus=fr;if(fr.lost.some(ms=>ms>250))bad(scope,`the focus was lost while a choice could be made: ${JSON.stringify(fr.lost)} ms`);
+ rec.sequenceEnds=(await p.state())?.sequence.ends.map(x=>x.reason)??[];
+ if(!reduced&&rec.sequenceEnds.includes('input'))bad(scope,`a sequence ended for input without a key of the script: ${JSON.stringify(rec.sequenceEnds)}`);
+}
+const page_arm=p=>p.page.evaluate(()=>{window.__kw.armed=true;});
+// Out of the game from the keyboard: the outcome panel (Tab reaches «Nuova partita» first) or the menu and the farewell dialog.
+async function kbdLeave(p,scope,rec,over){
+ if(over){const a=await tabTo(p,x=>x.test==='again',10);rec.outcomeFocus=a?.label??null;if(!a)bad(scope,'Tab never reaches «Nuova partita» on the outcome panel');
+  else{await press(p,'Enter');await p.page.waitForTimeout(400);const s=await p.wait(x=>x&&x.hits.some(h=>h.kind==='hand'),30000,'new game').catch(()=>null);rec.newGame=!!s;if(!s)bad(scope,'«Nuova partita» from the keyboard did not start a game');}}
+ await p.page.keyboard.press('Escape');await p.page.waitForTimeout(100);
+ const m=await tabTo(p,a=>a.label==='Apri menu',60);if(!m){bad(scope,'Tab never reaches the menu');return;}
+ await press(p,'Enter');const l=await tabTo(p,a=>/Abbandona/.test(a.label),40);if(!l){bad(scope,'the menu has no way out by Tab');return;}
+ await press(p,'Enter');const y=await tabTo(p,a=>/Sì, abbandona/.test(a.label),10);if(!y){bad(scope,'no «Sì, abbandona» by Tab');return;}
+ await press(p,'Enter');await p.page.getByTestId('quick').waitFor({timeout:15000});rec.left='keyboard';}
+async function scenarioKeyboard(name,{ffa=false,reduced=true,turns=60}){
+ const scope=`${name}${tag}`,A=await open('A',reduced?{reducedMotion:'reduce'}:{});await login(A);
+ const rec={ffa,reduced,turns:[]};evidence.scenarios[name]=rec;
+ try{
+  if(ffa){await joinFfa(A);await waitList(A,1);await addComputers(A,4);}
+  else{await A.page.getByRole('radio',{name:'Contro il computer'}).click();await A.page.getByTestId('quick').click();}
+  await table(A);
+  await kbdGame(A,scope,rec,{maxTurns:turns,reduced});
+  step(scope,{turns:rec.turns.length,end:rec.end,focus:rec.focus,confirmFocus:rec.confirmFocus,tabOrder:rec.turns[0]?.tabOrder,noValidMove:rec.noValidMove,sequenceEnds:rec.sequenceEnds});
+  rec.summary={turns:rec.turns.length,confirmFocus:rec.confirmFocus??0,canceled:rec.end?.canceled,lostMax:Math.max(0,...(rec.focus?.lost??[]))};
+  await A.shot(`${name}-end`);
+  await kbdLeave(A,scope,rec,!!(rec.end?.over||rec.end?.eliminated));
+ }catch(e){bad(scope,`exception ${e?.stack??e}`);await A.shot(`failure-${name}`).catch(()=>{});}
+ finally{await A.context.close().catch(()=>{});}
+}
+
 try{
  await startServer();step('server',{database:'temporary',jar});
  if(run('duel'))await scenario('duel',{turns:3,toEnd:true});
@@ -437,6 +567,10 @@ try{
  if(run('reduced'))await scenario('reduced',{reduced:true,turns:2,drags:false});
  if(run('ffa'))await scenario('ffa',{ffa:true,turns:3});
  if(run('pending'))await scenarioPending();
+ // C4-8a: the whole game from the keyboard only (rule 12): duel with reduced motion to the end, duel with motion for four turns, five-seat FFA for six turns.
+ if(run('keyboard'))await scenarioKeyboard('keyboard',{reduced:true});
+ if(run('keyboard-motion'))await scenarioKeyboard('keyboard-motion',{reduced:false,turns:4});
+ if(run('keyboard-ffa'))await scenarioKeyboard('keyboard-ffa',{ffa:true,reduced:true,turns:6});
  evidence.scenarioSummary=Object.fromEntries(Object.entries(evidence.scenarios).map(([k,v])=>[k,v.summary]));
  assert.deepEqual(evidence.errors,[],'no page errors');
  assert.deepEqual(problems,[],'aim problems');

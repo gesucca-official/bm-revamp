@@ -521,6 +521,38 @@ cornici, simboli e texture restano a C4.
   movimento ridotto) ferma e consuma solo i colpi del round; «Salta effetti», muto, uscita dal tavolo, background, disconnessione
   e reset fermano tutto come prima.
 
+## Accessibilità e residui O21 (C4-8a)
+
+**Fase B fatta, in attesa del giudizio del proprietario (10 novembre 2026).** Scelta del proprietario nella
+[proposta](../docs/design/client-c4/accessibilita/proposta.md#scelta-del-proprietario); [rapporto](../docs/reports/client-c4/c4-8a.md#fase-b).
+
+- **Anello a due toni (1a):** `--focus-halo` (`#140c08`) come fascia attorno all'anello azzurro su `.semantic`, sui pulsanti HTML del
+  tavolo (non nelle finestre) e su ✓ e × (anello a −6 px con fascia interna).
+- **Tastiera (2a, 2b, 2c, `src/a11y.ts`):** `InputMode` sa se l'ultimo input era la tastiera (Tab, Invio, Spazio, Esc, frecce, I);
+  solo allora ✓ prende il focus dopo il bersaglio (e lo scarto) e la prima carta della mano lo riprende quando si apre una scelta
+  e il focus è perso (turno nuovo, annullamento). `semanticOrder`: la mano (e l'anteprima) per prima nell'ordine di Tab; le
+  frecce percorrono la mano (`handNeighbour`), Maiusc con le frecce la riordina come prima.
+- **Contorno ai tre simboli (3b, `edgeFor` in `src/symbols.ts`):** 1 px (tratto di 2 px sotto il riempimento) di luce attorno al cuore
+  sulla plancia scura, d'inchiostro attorno ad alcol e tossicità su moneta chiara; stesso disegno in Pixi (`drawLayers`) e in SVG
+  (`svgParts`, `SymbolMark ground`). I colori non cambiano.
+- **Shell (3a):** `--border-panel`, `--empty-text`, `--placeholder`.
+- **«Danno nominale» in «Ultimo turno» (D5 b):** `damageReport` (`readability.ts`) e il gancio `damageOf` del contesto di
+  `roundReport`; riga dopo costo e guadagno, «colpo 15.» o «colpo 20+ (più metà della V residua di chi gioca).».
+- **Frecce su radio e schede (P8, `groupKeyDown`, `tabStop`):** hub (schede e modalità), mazzi salvati, «Mostra» della collezione;
+  Tab entra una volta nel gruppo (`tabindex` mobile), le frecce muovono fuoco e selezione e girano, Home/Fine. Non c'è `tabpanel`.
+- **Etichette (7a):** il riquadro delle carte del round dice quante sono e, sulla pila compatta, la carta in cima e il suo autore;
+  il personaggio dice «mazzo N carte».
+- **Test:** `tests/a11y.test.ts`; `tests/contrast.test.ts` calcola le coppie di colori del disegno dalle costanti e dai token (56 coppie,
+  nove eccezioni dichiarate, tre delle quali coperte dal contorno).
+- **Verifiche nuove:** `VerifyAim` scenari `keyboard` (duello, movimento ridotto, fino all'esito, poi «Nuova partita» e uscita da
+  tastiera), `keyboard-motion` (quattro turni con movimento) e `keyboard-ffa` (cinque posti, sei turni): nessun clic, il focus
+  mai perso mentre si può scegliere, mano prima nell'ordine, frecce, annullamento con Esc e con ×, un SEND per un Invio o uno
+  Spazio. `VerifyResolution report` controlla la riga «Danno nominale» di ogni mossa dalle carte del catalogo ricevuto;
+  `open` la pillola di ExtremelyViolentBlow (20 + trunc((V−costo)/2)); `VerifyDecks` le frecce di schede, modalità, «Mostra» e
+  mazzi salvati.
+- **Limiti dichiarati:** testo ampliato di sistema (67 `font-size` in px; lo zoom di pagina funziona), movimento ridotto senza
+  riepilogo breve (5a), freccia di mira sul titolo del bersaglio e testo da 7–9 px sul compatto (P11), lettore di schermo non provato.
+
 ## Frecce verso i bersagli (C3-3, O6)
 
 Con una carta scelta o trascinata, una freccia parte dal bordo della carta e arriva al
@@ -670,7 +702,8 @@ movimento ridotto e FFA a cinque, confronta le frecce della scena con i bersagli
 vista ricevuta ammette (numero, destinazione, dentro lo schermo, fuori dal vecchio posto
 di ✓ e ×; da C4-2 ✓ e × sulla carta: almeno 44 px, raggiungibili, carta fuori dal bersaglio, testo fuori da posti e mano), nessuna freccia a scelta bloccata (pending fra due umani, esito), mira con mouse
 e tocco senza comandi, riordino, annullamento, interruzione del trascinamento, D12 e
-prestazioni del trascinamento. `BM_SCENARIOS` sceglie `duel,touch,reduced,ffa,pending`.
+prestazioni del trascinamento. `BM_SCENARIOS` sceglie `duel,touch,reduced,ffa,pending,keyboard,keyboard-motion,keyboard-ffa`
+(gli ultimi tre: partita da sola tastiera, C4-8a).
 `VerifyLayout` (C3-L, database temporaneo) gioca tre turni di quick 1vCom e di FFA con quattro computer e a ogni
 turno legge la scena e la shell HTML: misure in CSS px, spazio libero al centro, sovrapposizioni. Controlla il
 personaggio proprio più grande degli altri, le carte del round uguali per nome e ordine a `resolvedMoves`, il mazzo

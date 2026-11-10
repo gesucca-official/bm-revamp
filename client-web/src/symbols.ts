@@ -63,21 +63,32 @@ export interface Pen{
  moveTo(x:number,y:number):Pen;lineTo(x:number,y:number):Pen;
  fill(color:number):Pen;stroke(style:{color:number;width:number;cap?:'round';join?:'round'}):Pen;
 }
-export type Colors={main:number;accent?:number};
+/** `edge`: C4-8a (3b), an outline of 1 px outside the fill of the main layers, for the symbols that fall under 3:1 on their ground (see `edgeFor`). */
+export type Colors={main:number;accent?:number;edge?:number};
+/** C4-8a 3b (owner, 10 November 2026): the ground a symbol is drawn on, and the three that need an outline there: the heart on the dark board (2.3:1), alcohol and toxicity
+ * on the light coin (2.5:1 and 2.95:1). Form before colour (rule 11): the colours of the three do not change. The rest of the pairs pass 3:1 without it. */
+export type Ground='dark'|'light';
+export const EDGE_INK=0x30231e;
+export const edgeFor=(kind:SymbolKind,ground?:Ground):number|undefined=>ground==='dark'&&kind==='HEALTH'?LIGHT:ground==='light'&&(kind==='ALCOHOL'||kind==='TOXICITY')?EDGE_INK:undefined;
+/** Width of the outline drawn centred on the contour: 2 px, of which 1 px shows outside the fill. */
+export const EDGE_WIDTH=2;
 const toneColor=(t:Tone,c:Colors)=>t==='main'?c.main:t==='accent'?c.accent:LIGHT;
 /** Draws `layers` centred on (x, y) in a box of side `s` (the radius is s/2); a layer whose accent colour is not given is skipped. */
 export function drawLayers(g:Pen,layers:Layer[],x:number,y:number,s:number,c:Colors){const r=s/2,pt=(a:number[])=>a.map((v,i)=>i%2?y+v*r:x+v*r);
- for(const l of layers){
-  if(l.fill==='accent'&&c.accent===undefined)continue;
-  const open=l.prims.some(p=>p.t==='path');
-  for(const p of l.prims)switch(p.t){
+ const prims=(l:Layer)=>{for(const p of l.prims)switch(p.t){
    case 'poly':g.poly(pt(p.p));break;
    case 'circle':g.circle(x+p.x*r,y+p.y*r,p.r*r);break;
    case 'ellipse':g.ellipse(x+p.x*r,y+p.y*r,p.rx*r,p.ry*r);break;
    case 'rect':g.rect(x+p.x*r,y+p.y*r,p.w*r,p.h*r);break;
    case 'rrect':g.roundRect(x+p.x*r,y+p.y*r,p.w*r,p.h*r,p.r*r);break;
    case 'path':{const q=pt(p.p);g.moveTo(q[0],q[1]);for(let i=2;i<q.length;i+=2)g.lineTo(q[i],q[i+1]);break;}
-  }
+  }};
+ // The outline first, under every fill, so that the fills of the parts (the two lobes and the point of the heart) hide the inner half of it.
+ if(c.edge!==undefined)for(const l of layers)if(l.fill==='main'&&!l.stroke){prims(l);g.stroke({color:c.edge,width:EDGE_WIDTH,join:'round'});}
+ for(const l of layers){
+  if(l.fill==='accent'&&c.accent===undefined)continue;
+  const open=l.prims.some(p=>p.t==='path');
+  prims(l);
   if(l.fill)g.fill(toneColor(l.fill,c)!);
   if(l.stroke)g.stroke({color:toneColor(l.stroke.tone,c)!,width:Math.max(l.stroke.min,s*l.stroke.w),...(open?{cap:'round' as const,join:'round' as const}:{})});
  }
@@ -88,19 +99,22 @@ export const drawMark=(g:Pen,kind:MarkKind,x:number,y:number,s:number,color:numb
 /** The same layers as the elements of an SVG with viewBox -1 -1 2 2 (the catalog, the editor, the inspection and the shell): the tag and the attributes of each. `px` is the size
  * the SVG is shown at, which gives the minimum width of a stroke. */
 export type SvgPart={tag:'polygon'|'circle'|'ellipse'|'rect'|'polyline';attrs:Record<string,string|number>};
-export function svgParts(layers:Layer[],c:{main:string;accent?:string;light?:string},px=14):SvgPart[]{
+export function svgParts(layers:Layer[],c:{main:string;accent?:string;light?:string;edge?:string},px=14):SvgPart[]{
  const out:SvgPart[]=[],css=(t:Tone)=>t==='main'?c.main:t==='accent'?c.accent!:c.light??`#${LIGHT.toString(16)}`;
- for(const l of layers){
-  if(l.fill==='accent'&&c.accent===undefined)continue;
-  const style:Record<string,string|number>={fill:l.fill?css(l.fill):'none'};
-  if(l.stroke){Object.assign(style,{stroke:css(l.stroke.tone),'stroke-width':+Math.max(2*l.stroke.w,l.stroke.min/(px/2)).toFixed(4)});}
-  for(const p of l.prims){const open=p.t==='path',s=open?{...style,'stroke-linecap':'round','stroke-linejoin':'round'}:style;
-   switch(p.t){
+ const shape=(p:Prim,s:Record<string,string|number>)=>{switch(p.t){
     case 'poly':out.push({tag:'polygon',attrs:{points:p.p.map((v,i)=>i%2?`,${v} `:String(v)).join('').trim(),...s}});break;
     case 'circle':out.push({tag:'circle',attrs:{cx:p.x,cy:p.y,r:p.r,...s}});break;
     case 'ellipse':out.push({tag:'ellipse',attrs:{cx:p.x,cy:p.y,rx:p.rx,ry:p.ry,...s}});break;
     case 'rect':out.push({tag:'rect',attrs:{x:p.x,y:p.y,width:p.w,height:p.h,...s}});break;
     case 'rrect':out.push({tag:'rect',attrs:{x:p.x,y:p.y,width:p.w,height:p.h,rx:p.r,ry:p.r,...s}});break;
     case 'path':out.push({tag:'polyline',attrs:{points:p.p.map((v,i)=>i%2?`,${v} `:String(v)).join('').trim(),...s}});break;
-   }}}
+   }};
+ // C4-8a 3b: the outline first (an element per primitive, 2 px wide, 1 px of it outside), then the symbol over it.
+ if(c.edge)for(const l of layers)if(l.fill==='main'&&!l.stroke)for(const p of l.prims)shape(p,{fill:c.edge,stroke:c.edge,'stroke-width':+(EDGE_WIDTH/(px/2)).toFixed(4),'stroke-linejoin':'round'});
+ for(const l of layers){
+  if(l.fill==='accent'&&c.accent===undefined)continue;
+  const style:Record<string,string|number>={fill:l.fill?css(l.fill):'none'};
+  if(l.stroke){Object.assign(style,{stroke:css(l.stroke.tone),'stroke-width':+Math.max(2*l.stroke.w,l.stroke.min/(px/2)).toFixed(4)});}
+  for(const p of l.prims){const open=p.t==='path',s=open?{...style,'stroke-linecap':'round','stroke-linejoin':'round'}:style;
+   shape(p,s);}}
  return out;}

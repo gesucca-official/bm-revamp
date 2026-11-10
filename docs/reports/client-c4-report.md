@@ -21,3 +21,4 @@ Un file per blocco, nell'ordine in cui sono stati scritti. Le sottosezioni (fasi
 - [C4-10 — Guida dell'attenzione sul tavolo (O29, O30)](client-c4/c4-10.md)
 - [C4-11 — Spazio sul tavolo](client-c4/c4-11.md)
 - [C4-1c — Verifiche in parallelo e misure ufficiali](client-c4/c4-1c.md)
+- [C4-8a — Accessibilità e residui O21](client-c4/c4-8a.md)
