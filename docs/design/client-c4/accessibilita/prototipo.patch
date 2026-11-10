@@ -1,0 +1,93 @@
+--- a/client-web/src/style.css
++++ b/client-web/src/style.css
+@@ -25,7 +25,7 @@
+   --symbol-paper: #f6efd9;
+   --art-placeholder: #c9b48c;
+   --border-soft: #9b765288;
+-  --empty-text: #8a6f58;
++  --empty-text: #6f5744;
+   --border-faint: #9b765255;
+   --accent-hover: #4d7d86;
+   --text-detail: #3e2e24;
+@@ -36,7 +36,7 @@
+   --accent: #9ec5bd;
+   --accent-strong: #38616a;
+   --bg-panel: #f6ecd8;
+-  --border-panel: #9b7652;
++  --border-panel: #936f4d;
+   --text-muted: #5a4232;
+   --sheet-inset: #e8d7b440;
+   --bg-portrait: #38271ff5;
+@@ -62,6 +62,8 @@
+   --shadow-brand: #2e1e14;
+   --focus-veil: #7dbaba22;
+   --focus-table: #8cdbdd;
++  --focus-halo: #140c08;
++  --placeholder: #6b5443;
+   --bg-hover: #f4e7cd;
+   --shadow-control: #20160c66;
+   --bg-sheet: #e8d7b4;
+@@ -149,6 +151,8 @@
+ .semantic:focus-visible {
+   outline: 3px solid var(--focus-table);
+   background: var(--focus-veil)!important;
++  /* C4-8a (prototype): a dark band flanks the ring (0 to 3 px inside it, 6 to 9 px outside), so it reads on paper as on wood. */
++  box-shadow: 0 0 0 9px var(--focus-halo);
+ }
+ .brand {
+   position: absolute;
+@@ -1478,7 +1482,8 @@
+   background: var(--confirm-no-hover);
+ }
+ .confirmation button:focus-visible {
+-  outline-offset: -5px;
++  outline-offset: -6px;
++  box-shadow: inset 0 0 0 9px var(--focus-halo);
+ }
+ .confirmation button:disabled {
+   opacity: 1;
+@@ -1629,3 +1634,7 @@
+ .confirmation [data-testid=confirm]:not(:disabled) .mark { animation: guide-pulse 1s ease-in-out infinite; }
+ @keyframes guide-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+ @media (prefers-reduced-motion: reduce) { .confirmation [data-testid=confirm] .mark { animation: none; } }
++
++/* C4-8a (prototype): focus ring flanked by a dark band on the HTML controls of the table; placeholder of the fields at 4.5:1. */
++main button:not(.semantic):not(.confirmation button):focus-visible { box-shadow: 0 0 0 9px var(--focus-halo); }
++::placeholder { color: var(--placeholder); opacity: 1; }
+--- a/client-web/src/table.tsx
++++ b/client-web/src/table.tsx
+@@ -22,6 +22,8 @@
+  const outcomeState=()=>({gameId:model.view.gameId,me:model.me,finished:model.view.over||model.eliminated,winner:model.view.winner,generation:model.generation});
+  const [audioOutcome]=useState(()=>new OutcomeSounds(sounds,outcomeState()));
+  const update=()=>refresh(x=>x+1);
++ const kbd=useRef(false);
++ useEffect(()=>{const k=(e:KeyboardEvent)=>{if(['Tab','Enter',' ','ArrowLeft','ArrowRight','i','I'].includes(e.key))kbd.current=true;},p=()=>{kbd.current=false;};addEventListener('keydown',k,true);addEventListener('pointerdown',p,true);return()=>{removeEventListener('keydown',k,true);removeEventListener('pointerdown',p,true);};},[]);
+  const me=model.me,view=model.view,ids=Object.keys(view.players),name=(id:string)=>playerName(id,ids);
+  const close=()=>{setModal(null);setTimeout(()=>{if(returnFocus.current?.isConnected)returnFocus.current.focus();else document.querySelector<HTMLButtonElement>('.menu-button')?.focus();},0);};
+  const open=(kind:Modal,inspect?:Inspection)=>{returnFocus.current=document.activeElement as HTMLElement;if(inspect)setInspection(inspect);setModal(kind);};
+@@ -93,10 +95,13 @@
+  // C4-5b, owner's B revision: one prompt on the cost row, never one badge per card.
+  const needsDiscard=chosen&&model.choosingDiscard&&!error&&session.connected;
+  const discardRow=needsDiscard&&table?.layout?table.layout.hand:null;
++ // C4-8a (prototype): from the keyboard, ✓ takes the focus when the move can be confirmed (Enter confirms, Esc cancels), and the first hand card does when a new choice opens and the focus was lost with the turn.
++ useEffect(()=>{if(kbd.current&&confirmAt&&!needsDiscard)document.querySelector<HTMLButtonElement>('[data-testid=confirm]')?.focus();},[!!confirmAt,!!needsDiscard,model.discard]);
++ useEffect(()=>{if(kbd.current&&model.phase==='choose'&&!finished&&!modal&&(!document.activeElement||document.activeElement===document.body))document.querySelector<HTMLButtonElement>('[data-hit^=card-]')?.focus();},[model.phase,model.view.turn,chosen]);
+  const showTool=(title:string,data:unknown)=>{setTool({title,data});console.info(`[${title}]`,data);};
+  return <main aria-label="Tavolo di Botte Micidiali">
+   <div ref={host} className="table-host"/>
+-  <div className="semantic-layer" aria-label="Carte e bersagli">{hits.map(hit=><PressButton key={hit.id} data-hit={hit.id} className="semantic" aria-label={hit.label} aria-pressed={hit.kind==='hand'||hit.kind==='preview'?model.selected===hit.key:undefined} style={{left:hit.x-hit.w/2,top:hit.y-hit.h/2,width:hit.w,height:hit.h,transform:`rotate(${hit.angle}rad)`}} onClick={()=>table?.activate(hit.id)} onFocus={()=>table?.focus(hit.id)} onBlur={()=>table?.focus(null)} onKeyDown={e=>table?.key(hit.id,e.nativeEvent)}><span>{hit.label}</span></PressButton>)}</div>
++  <div className="semantic-layer" aria-label="Carte e bersagli">{[...hits].sort((a,b)=>Number(a.kind!=='hand'&&a.kind!=='preview')-Number(b.kind!=='hand'&&b.kind!=='preview')).map(hit=><PressButton key={hit.id} data-hit={hit.id} className="semantic" aria-label={hit.label} aria-pressed={hit.kind==='hand'||hit.kind==='preview'?model.selected===hit.key:undefined} style={{left:hit.x-hit.w/2,top:hit.y-hit.h/2,width:hit.w,height:hit.h,transform:`rotate(${hit.angle}rad)`}} onClick={()=>table?.activate(hit.id)} onFocus={()=>table?.focus(hit.id)} onBlur={()=>table?.focus(null)} onKeyDown={e=>table?.key(hit.id,e.nativeEvent)}><span>{hit.label}</span></PressButton>)}</div>
+   <div className="brand" aria-hidden="true">BOTTE<br/>MICIDIALI</div>
+   <div className="top-actions">{!panel&&away.map(a=><span key={a.id} className="clock away" role="status" aria-label={`${name(a.id)} è fuori linea: rientro entro ${a.seconds} secondi`}>{name(a.id)} fuori linea · {a.seconds} s</span>)}{clock!==null&&!finished&&<span className="clock" aria-label="Tempo indicativo per la mossa">◷ {model.phase==='pending'?'—':`${clock} s`}</span>}<span className="turn" aria-label={`Turno ${view.turn+1}`}>T{view.turn+1}</span><PressButton className="menu-button round" aria-label="Apri menu" onClick={()=>open('menu')}>•••</PressButton></div>
+   {!panel&&chosen&&table?.layout&&<p className={`hint confirming ${model.phase}`} role="status" aria-live="polite" style={{maxWidth:confirmTextBox(table.layout,innerHeight).w}}><span><b>{choice!.name}</b> → {targetLabel}</span><span hidden={!!needsDiscard}><em>{choice!.characterBound&&!discardable.length?'Nessuna regolare da scartare':model.message}</em></span></p>}
+--- a/client-web/src/scene.ts
++++ b/client-web/src/scene.ts
+@@ -482,6 +482,8 @@
+  get statusShown(){const id=[this.hovered,this.focused,this.openStatus].find(x=>x?.startsWith('status-'));return id?this.chips[id]??null:null;}
+  // Keyboard: I inspects; Shift+arrows move the focused hand card one slot (local order only, no SEND).
+  key(id:string,e:KeyboardEvent){this.advance();if(e.key==='i'||e.key==='I'){e.preventDefault();this.inspect(id);return;}
++  // C4-8a (prototype): the arrows walk along the hand (Shift+arrows still reorder it).
++  if(!e.shiftKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){const hand=this.hits.filter(h=>h.kind==='hand'),i=hand.findIndex(h=>h.id===id);if(i>=0){e.preventDefault();const next=hand[Math.max(0,Math.min(hand.length-1,i+(e.key==='ArrowRight'?1:-1)))];document.querySelector<HTMLElement>(`[data-hit="${next.id}"]`)?.focus();return;}}
+   if(e.shiftKey&&['ArrowLeft','ArrowRight'].includes(e.key)&&!this.model.locked){const keys=this.model.hand.map(c=>c.key),i=keys.indexOf(id);if(i<0)return;e.preventDefault();
+    const j=Math.max(0,Math.min(keys.length-1,i+(e.key==='ArrowRight'?1:-1)));if(i===j)return;[keys[i],keys[j]]=[keys[j],keys[i]];this.model.reorder(keys);}}
+  focus(id:string|null){this.focused=id;this.draw();}
