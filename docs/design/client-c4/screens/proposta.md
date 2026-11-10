@@ -1,6 +1,6 @@
 # C4-5b — Proposta storica della Fase A
 
-**Aggiornamento dopo la scelta:** A comune/editor/admin e B di calata, con invito unico senza targhette. [Scelte](scelte.md), [implementazione e verifiche](../../../reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). Questo documento conserva la base/proposta di Fase A.
+**Aggiornamento dopo la scelta:** A comune/editor/admin e B di calata, con invito unico senza targhette. [Scelte](scelte.md), [implementazione e verifiche](../../../reports/client-c4/c4-5b.md#fase-b--esiti-finali-e-cosa-giudicare). Questo documento conserva la base/proposta di Fase A.
 5 novembre 2026. **Solo Fase A. Nessun token definitivo, nessuna modifica funzionale o visiva di produzione.** [Inventario](inventario.md), [censimento integrale](censimento.md), [prima odierno](../../../reports/client-c4/c4-5b/prima/README.md). [Riserve umane C0 B3 e B6](../../../reports/client-c0-r5-procedure.md#esiti): lettura/dettaglio e aspetto di bound, check e annulla da rifinire. [Parità da conservare](../../../client-c0-parity.md). Font soltanto Impact/Arial; forme dei segni da `symbols.ts`, cornici da `frames.ts`; nessun asset nuovo, dipendenza remota o download.
 
 ## Scelte visive

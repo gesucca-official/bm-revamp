@@ -4,7 +4,7 @@
 
 ## Decisioni acquisite e perimetro
 
-[D15 e prova](../../../reports/client-c4-report.md#c4-7--prova-del-proprietario-del-7-novembre-2026) prevalgono sulle proposte storiche di C4-7 e C4-7-bis: esito quando compare il pannello, senza spostare il pannello; un suono per colpo, HIT tonfo e CUT lama; eliminare il click iniziale dell'invio su iPhone. Restano `jingles_SAX10.ogg` per vittoria e `jingles_SAX07.ogg` per sconfitta/pareggio, Web Audio, sessione ambient, silenzioso prevalente, volume/muto nel menu, selezione/invio/rifiuto e nessuna attesa sull'input. Nessun recupero dopo salto, interruzione, background o riconnessione. Nessuna informazione affidata solo al suono (regola 13). Nessuna modifica di gioco: regolamento, server, protocollo, catalogo, debug e Set Base esclusi.
+[D15 e prova](../../../reports/client-c4/c4-7.md#c4-7--prova-del-proprietario-del-7-novembre-2026) prevalgono sulle proposte storiche di C4-7 e C4-7-bis: esito quando compare il pannello, senza spostare il pannello; un suono per colpo, HIT tonfo e CUT lama; eliminare il click iniziale dell'invio su iPhone. Restano `jingles_SAX10.ogg` per vittoria e `jingles_SAX07.ogg` per sconfitta/pareggio, Web Audio, sessione ambient, silenzioso prevalente, volume/muto nel menu, selezione/invio/rifiuto e nessuna attesa sull'input. Nessun recupero dopo salto, interruzione, background o riconnessione. Nessuna informazione affidata solo al suono (regola 13). Nessuna modifica di gioco: regolamento, server, protocollo, catalogo, debug e Set Base esclusi.
 
 ## Diagnosi del click di confirmation_001.ogg
 

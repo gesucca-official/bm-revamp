@@ -1,6 +1,6 @@
 # C4-5a — Checklist per il blocco d'integrazione successivo
 
-**Aggiornamento d’integrazione, 4 novembre 2026:** la decisione del proprietario in [layers/decisione-proprietario.md](layers/decisione-proprietario.md) prevale sulla proposta cover di questa checklist: **piano 2 stirato, tre sprite uniformi, modalità S**. Formule e massimi di deformazione ammessi nel [piano aggiornato](../../../client-c4-plan.md#c4-5a--sfondo-e-identità-del-bar-o2). Il registro delle prove è nel [rapporto C4-5a](../../../reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). Giudizio sul tavolo vero ancora richiesto; O2 non si chiude.
+**Aggiornamento d’integrazione, 4 novembre 2026:** la decisione del proprietario in [layers/decisione-proprietario.md](layers/decisione-proprietario.md) prevale sulla proposta cover di questa checklist: **piano 2 stirato, tre sprite uniformi, modalità S**. Formule e massimi di deformazione ammessi nel [piano aggiornato](../../../client-c4-plan.md#c4-5a--sfondo-e-identità-del-bar-o2). Il registro delle prove è nel [rapporto C4-5a](../../../reports/client-c4/c4-5a.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). Giudizio sul tavolo vero ancora richiesto; O2 non si chiude.
 
 
 4 novembre 2026. **Checklist originata nella preparazione; stato aggiornato dall’integrazione C4-5a.** La preparazione iniziale non aveva eseguito questi passi. Questa preparazione produce soltanto quattro documenti nuovi nella cartella background; non chiude C4-5a né O2 e non aggiorna l'inventario.

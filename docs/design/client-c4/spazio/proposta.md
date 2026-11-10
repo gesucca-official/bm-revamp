@@ -6,7 +6,7 @@ prototipi sono una patch fuori dal prodotto ([`prototipo.patch`](prototipo.patch
 
 Fonti: [piano, C4-11](../../../client-c4-plan.md#c4-11--spazio-e-profondità), regole di non regressione 1–9, 16, 17, 18, riga C4-11 della
 matrice, D6, D9, D11, D13, D15 del [piano](../../../client-c4-plan.md#decisioni-del-proprietario); [O28](../../../client-roadmap.md#osservazioni-registrate-durante-c4);
-[C4-10 Fase A, Fase B, prova e destinazioni](../../../reports/client-c4-report.md#c4-10--fase-a); [proposta di C4-10](../guida/proposta.md) come
+[C4-10 Fase A, Fase B, prova e destinazioni](../../../reports/client-c4/c4-10.md#c4-10--fase-a); [proposta di C4-10](../guida/proposta.md) come
 modello; regole audio approvate in [proposta-colpi.md](../audio/proposta-colpi.md) e [proposta-esito.md](../audio/proposta-esito.md).
 
 **Obiettivo (D15).** Prova del proprietario del 7 novembre 2026: «il gioco sugli schermi piccoli è affollato, mentre sugli schermi grandi è
@@ -381,7 +381,7 @@ Il jingle (J0/J1/J2) **non è nella patch**: è una regola da scegliere, non un 
 (a 844×390, b a 1920×1080, c alle tre, v1 a 844×390 FFA, d emulata a 874×292, oggi anche a 750×292); 0 errori di pagina in tutte le
 catture; misure dell'occupazione sui layout registrati; sonda delle funzioni pure a 1366×768, 844×390, 1920×1080, 750×292 e 874×292 con
 1 e 3 oggetti; `VerifyAim` 844 riprodotto sulla sonda e sul tavolo vero; prodotto ripristinato dopo le catture (verifiche nel
-[rapporto](../../../reports/client-c4-report.md#c4-11--fase-a)).
+[rapporto](../../../reports/client-c4/c4-11.md#c4-11--fase-a)).
 
 **Non verificato:** iPhone e Safari (O28, `env()`, `viewport-fit` cambiato dopo il caricamento, costo per frame di c1 e c2, jingle sul
 ridimensionamento della barra); fluidità percepita (catture ferme); lettore di schermo (a2 cambia l'etichetta visibile delle carte del

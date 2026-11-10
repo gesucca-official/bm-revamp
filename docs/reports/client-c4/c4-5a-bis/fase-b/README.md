@@ -16,4 +16,4 @@ Il passo pieno non sovrappone gli oggetti: il primo tocco K7 non interviene. Il 
 
 Sono catture su Edge/PC con tocco emulato, non prove su iPhone fisico o Safari. A 1920×1080 si controllano disposizione e gesti; non è una nuova misura ufficiale di prestazioni.
 
-[Rapporto e verifiche complete](../../../client-c4-report.md#c4-5a-bis). Il giudizio visivo sulla build finale resta al proprietario.
+[Rapporto e verifiche complete](../../c4-5a-bis.md#c4-5a-bis). Il giudizio visivo sulla build finale resta al proprietario.

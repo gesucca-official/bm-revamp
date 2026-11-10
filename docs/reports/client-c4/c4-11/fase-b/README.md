@@ -1,6 +1,6 @@
 # C4-11 — evidenze della Fase B
 
-10 novembre 2026. Rapporto: [C4-11 — Fase B](../../../client-c4-report.md#c4-11--fase-b). Scelta: [proposta](../../../../design/client-c4/spazio/proposta.md#scelta-del-proprietario).
+10 novembre 2026. Rapporto: [C4-11 — Fase B](../../c4-11.md#c4-11--fase-b). Scelta: [proposta](../../../../design/client-c4/spazio/proposta.md#scelta-del-proprietario).
 
 **B1** (codice e test unitari, `681bc20`, base `066aa07`): nessun browser. **B2** (verifiche mirate secondo D16 del [piano](../../../../client-c4-plan.md#decisioni-del-proprietario)): sul codice di `681bc20`, jar `d28ccf21415efc7e` ricostruito con `./scripts/build.ps1 -Task Server -Offline` e riusato dichiaratamente; Edge via Playwright su PC, server locale su database temporaneo, non un dispositivo fisico.
 

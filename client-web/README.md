@@ -17,11 +17,11 @@ Ruolo e guadagni vengono dal catalogo (regolamento 1.7, R07a); nessuna regola
 è calcolata qui. O9 aggiunge le illustrazioni provvisorie delle 40 classi
 ([rapporto C2](../docs/reports/client-c2-report.md)).
 
-**C4-5b, 5 novembre 2026 — fatto, in attesa del giudizio del proprietario.** A comune/editor/admin, B per Conferma/Annulla; un solo invito di scarto sulla riga dei costi, senza etichette per carta o richiesta duplicata a sinistra. [Inventario](../docs/design/client-c4/screens/inventario.md), [scelte](../docs/design/client-c4/screens/scelte.md), [dopo](../docs/reports/client-c4/c4-5b/dopo/README.md), [confronti](../docs/reports/client-c4/c4-5b/confronti/README.md), [verifiche e limiti](../docs/reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). 19/19 ufficiali verdi; 240 unità finali; controlli ordinari 44×44 a 844×390, soli chip D8 esentati. Verificatori estesi senza cambiare selettori/attesi/soglie precedenti; BASE_750 invariato, rossi a 750 dichiarati.
+**C4-5b, 5 novembre 2026 — fatto, in attesa del giudizio del proprietario.** A comune/editor/admin, B per Conferma/Annulla; un solo invito di scarto sulla riga dei costi, senza etichette per carta o richiesta duplicata a sinistra. [Inventario](../docs/design/client-c4/screens/inventario.md), [scelte](../docs/design/client-c4/screens/scelte.md), [dopo](../docs/reports/client-c4/c4-5b/dopo/README.md), [confronti](../docs/reports/client-c4/c4-5b/confronti/README.md), [verifiche e limiti](../docs/reports/client-c4/c4-5b.md#fase-b--esiti-finali-e-cosa-giudicare). 19/19 ufficiali verdi; 240 unità finali; controlli ordinari 44×44 a 844×390, soli chip D8 esentati. Verificatori estesi senza cambiare selettori/attesi/soglie precedenti; BASE_750 invariato, rossi a 750 dichiarati.
 
 **C4-7: fatto dopo C4-7-ter, in attesa del giudizio del proprietario.** Sette suoni locali Kenney CC0: selezione, invio e rifiuto da Interface Sounds; HIT `impactPunch_heavy_001.ogg` (Impact Sounds), CUT `knifeSlice.ogg` (RPG Audio); vittoria SAX10 e sconfitta/pareggio SAX07 (Music Jingles). POISON senza suono. Un colpo per carta risolta con danno nominale: multi-tipo CUT > HIT > POISON, carte annullate/senza danno mute. Tutti i colpi raggiunti dal tempo o attraversati da un tocco suonano una volta, contemporanei con guadagno 1/N, senza coda. Il tipo segue il simbolo nominale, non il danno effettivo/conversioni.
 
-Esito personale al pannello, indipendente dalla sequenza, anche con movimento ridotto o fine per forfait/tempo; FFA: una sola sconfitta personale, nessun doppione dopo «Resta a guardare». Prima vista già finale, riconnessione e background non recuperano audio. Navigazione, «Salta effetti» e interruzioni fermano le sorgenti; scegliere una carta scarta i colpi pendenti. Web Audio, contesto unico, file decodificati una volta, volume iniziale 20%/muto persistiti nel menu e sessione ambient invariati. L'invio applica un attacco di 5 ms al solo guadagno della sorgente, senza modificare il file né attendere sul percorso del comando. Errori audio silenziosi, nessuna informazione solo sonora. [Scelte](../docs/design/client-c4/audio/scelte.md), [regole approvate](../docs/design/client-c4/audio/proposta-colpi.md), [inventario](../docs/design/client-c4/assets/inventory.json), [rapporto](../docs/reports/client-c4-report.md#c4-7-ter--fase-b). iPhone/Safari e latenza percepita richiedono la prova del proprietario.
+Esito personale al pannello, indipendente dalla sequenza, anche con movimento ridotto o fine per forfait/tempo; FFA: una sola sconfitta personale, nessun doppione dopo «Resta a guardare». Prima vista già finale, riconnessione e background non recuperano audio. Navigazione, «Salta effetti» e interruzioni fermano le sorgenti; scegliere una carta scarta i colpi pendenti. Web Audio, contesto unico, file decodificati una volta, volume iniziale 20%/muto persistiti nel menu e sessione ambient invariati. L'invio applica un attacco di 5 ms al solo guadagno della sorgente, senza modificare il file né attendere sul percorso del comando. Errori audio silenziosi, nessuna informazione solo sonora. [Scelte](../docs/design/client-c4/audio/scelte.md), [regole approvate](../docs/design/client-c4/audio/proposta-colpi.md), [inventario](../docs/design/client-c4/assets/inventory.json), [rapporto](../docs/reports/client-c4/c4-7-ter.md#c4-7-ter--fase-b). iPhone/Safari e latenza percepita richiedono la prova del proprietario.
 
 ## Avvio locale
 
@@ -440,7 +440,7 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 - **Freccia della conferma:** dalla carta al bersaglio, la stessa freccia cartoon della scelta del bersaglio (`confirmArrow`, stesso disegno di `drawAim`).
 - **`resize`:** la scena attende 120 ms che la misura si fermi e ridisegna solo se è cambiata, così le barre di Safari non fanno scattare `fitScale` a ogni passo.
 - **44 px:** al tavolo sotto 44 px restano solo i gettoni di stato (D8), il cui testo compare toccando il personaggio. Le carte del round aprono «Ultimo turno», che dice costo e guadagno.
-- **`viewport-fit=cover` resta fuori:** Safari già rientra dalle aree sicure e qui non si può provare; passa all'app futura con il resto di 750×292 ([rapporto](../docs/reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)).
+- **`viewport-fit=cover` resta fuori:** Safari già rientra dalle aree sicure e qui non si può provare; passa all'app futura con il resto di 750×292 ([rapporto](../docs/reports/client-c4/c4-2.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)).
 
 ## Sfondo del tavolo (C4-5a, O2)
 
@@ -450,7 +450,7 @@ Un solo sistema di simboli per il tavolo (Pixi) e la shell (HTML), sul modello d
 
 ## Scala e spazio del tavolo (C3-L)
 
-**C4-5a-bis fatto, in attesa del giudizio del proprietario (5 novembre 2026):** O26 separa lo stato di scelta dello scarto nel modello e la presentazione pura. Per decisione del proprietario, ogni carta già posata in anteprima lascia vuoto il suo posto nella mano e vi torna con ×; ordine e vista restano integri. Le non scartabili sono attenuate e indicate in testo solo finché manca lo scarto. Ispezione della carta posata con I/Invio o menu → «Dettagli carta giocata»; conferma C4-2 invariata. 234 test e percorso reale aggiunto a VerifyLayout verdi in duello e FFA, anche a 750×292. O27: scelta A implementata nella funzione pura ownItemRow, passo pieno prima, ripiego 0,75 poi riga sopra; nessuno spostamento del posacenere. 236 test verdi sulla matrice completa; verifiche ufficiali verdi sul jar pre-SB-3/SB-4, 750×292 con rossi preesistenti invariati. Contesto corrente verde (402 test, 3 skip); il proprietario ha accettato di chiudere senza un nuovo giro grafico sul jar corrente SB-3/SB-4. Il passo pieno non richiede K7; il ripiego sovrapposto conserva il primo tocco per alzare l’oggetto. Il [confronto precedente](../docs/reports/client-c4/c4-5a-bis/proposta-o27/README.md) non è una cattura della build finale. [Rapporto](../docs/reports/client-c4-report.md#c4-5a-bis).
+**C4-5a-bis fatto, in attesa del giudizio del proprietario (5 novembre 2026):** O26 separa lo stato di scelta dello scarto nel modello e la presentazione pura. Per decisione del proprietario, ogni carta già posata in anteprima lascia vuoto il suo posto nella mano e vi torna con ×; ordine e vista restano integri. Le non scartabili sono attenuate e indicate in testo solo finché manca lo scarto. Ispezione della carta posata con I/Invio o menu → «Dettagli carta giocata»; conferma C4-2 invariata. 234 test e percorso reale aggiunto a VerifyLayout verdi in duello e FFA, anche a 750×292. O27: scelta A implementata nella funzione pura ownItemRow, passo pieno prima, ripiego 0,75 poi riga sopra; nessuno spostamento del posacenere. 236 test verdi sulla matrice completa; verifiche ufficiali verdi sul jar pre-SB-3/SB-4, 750×292 con rossi preesistenti invariati. Contesto corrente verde (402 test, 3 skip); il proprietario ha accettato di chiudere senza un nuovo giro grafico sul jar corrente SB-3/SB-4. Il passo pieno non richiede K7; il ripiego sovrapposto conserva il primo tocco per alzare l’oggetto. Il [confronto precedente](../docs/reports/client-c4/c4-5a-bis/proposta-o27/README.md) non è una cattura della build finale. [Rapporto](../docs/reports/client-c4/c4-5a-bis.md#c4-5a-bis).
 
 Scelte del proprietario del 30 ottobre 2026, dopo le misure del blocco
 ([rapporto C3](../docs/reports/client-c3-report.md#c3-l--scala-e-uso-dello-spazio-del-tavolo)). Solo geometria: sfondo,
@@ -497,7 +497,7 @@ cornici, simboli e texture restano a C4.
 ## Spazio e profondità (C4-11)
 
 **Fatto, in attesa del giudizio del proprietario (10 novembre 2026).** Scelta del proprietario nella
-[proposta](../docs/design/client-c4/spazio/proposta.md#scelta-del-proprietario); [rapporto](../docs/reports/client-c4-report.md#c4-11--fase-b).
+[proposta](../docs/design/client-c4/spazio/proposta.md#scelta-del-proprietario); [rapporto](../docs/reports/client-c4/c4-11.md#c4-11--fase-b).
 
 - **Schermi grandi (b1, `GROW` e `growth` in `src/readability.ts`):** `fattore = max(1; 0,9 × min(altezza/800; larghezza/1422))`,
   sempre 1 sul tavolo compatto. Moltiplica il tetto della mano (214 px), il sollevamento (30), il tetto della base (150), le pile
@@ -588,7 +588,7 @@ Maven e VerifyAll non insieme sulla stessa macchina. Fuori dal lancio unico, una
   scene, casi e tempi misurati. `node tools/verify-all-faults.mjs` prova guasti su copie in TEMP, a verifiche reali ferme:
   esito 1, parte appesa con server reale, scenario nuovo, porta occupata e matrice sintetica; non sono prove di prodotto.
 - **D16:** ogni blocco esegue le verifiche mirate; la matrice completa di fine C4 usa il primo comando sopra, più la regola 18 a 750×292.
-  Durate misurate di serie e N=4 nel [rapporto C4-1c](../docs/reports/client-c4-report.md#c4-1c--fase-b).
+  Durate misurate di serie e N=4 nel [rapporto C4-1c](../docs/reports/client-c4/c4-1c.md#c4-1c--fase-b).
 
 ## Verifiche
 
@@ -726,7 +726,7 @@ non sostituisce il dispositivo fisico né la prova umana.
 
 ## Risorse grafiche
 
-`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: chiusa, approvata dal proprietario il 5 novembre 2026** sul tavolo vero; giudizio letterale nel rapporto. O26 e O27 sono assegnate a C4-5a-bis. `atlas.webp` è
+`public/art/table.webp` è il piano 2 scelto dal proprietario il 4 novembre 2026: 2006×784, stirato a riempire la scena. `sottobicchiere.webp`, `negroni.webp` e `posacenere.webp` sono sprite con alfa, a scala uniforme e centri proporzionali (modalità S). [Registri e decisione](../docs/design/client-c4/background/layers/NOTA.md), [rapporto C4-5a](../docs/reports/client-c4/c4-5a.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2). **O2: chiusa, approvata dal proprietario il 5 novembre 2026** sul tavolo vero; giudizio letterale nel rapporto. O26 e O27 sono assegnate a C4-5a-bis. `atlas.webp` è
 l'atlante O9: 2048×1536, 8×6 riquadri da 256 px con le 40 illustrazioni
 provvisorie, più un segnaposto neutro. `manifest.json` dice quale riquadro spetta
 a ogni `bindingName` (`src/art.ts`); un nome sconosciuto usa il segnaposto.

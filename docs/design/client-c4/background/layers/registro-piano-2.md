@@ -117,7 +117,7 @@ Registrare separatamente: eventuale ritaglio permanente con rettangolo x/y/largh
 | Parametri del ritaglio dinamico del renderer / collegamento alla specifica adottata | [Modalità S](NOTA.md#formule-proposte-e-simulazioni), scelta il 4 novembre 2026: piano W×H; centri proporzionali; sprite uniformi; taglio solo ai bordi della scena |
 | Risultati del calcolo alle tre misure con le dimensioni finali | [Piano e limiti](../../../../client-c4-plan.md#c4-5a--sfondo-e-identità-del-bar-o2); test background.test.ts; geometria finale nel rapporto |
 | Voce dell'inventario aggiornata / commit d'integrazione | [inventory.json](../../assets/inventory.json), C4-5a (stesso commit di questa scheda) |
-| Collegamento alle evidenze e ai risultati delle verifiche successive | [Rapporto C4-5a](../../../../reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2); [conversione e hash](../../../../reports/client-c4/c4-5a/conversione.json) |
+| Collegamento alle evidenze e ai risultati delle verifiche successive | [Rapporto C4-5a](../../../../reports/client-c4/c4-5a.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2); [conversione e hash](../../../../reports/client-c4/c4-5a/conversione.json) |
 
 Il cover dinamico non modifica i byte della WebP e non va confuso con un ritaglio eseguito sul file.
 

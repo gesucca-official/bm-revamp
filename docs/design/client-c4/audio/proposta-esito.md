@@ -4,7 +4,7 @@
 
 ## Prova del proprietario
 
-Registrata con le sue parole nel [rapporto C4](../../../reports/client-c4-report.md#c4-7-bis--fase-a). In breve: su iPhone e su PC l'esito non si sente o arriva molto dopo l'evento; su iPhone il tocco di selezione è intermittente e in ritardo. Decisione già presa: **«Due distinti»** (vittoria e sconfitta separate, al posto dell'unico `confirmation_002.ogg`).
+Registrata con le sue parole nel [rapporto C4](../../../reports/client-c4/c4-7-bis.md#c4-7-bis--fase-a). In breve: su iPhone e su PC l'esito non si sente o arriva molto dopo l'evento; su iPhone il tocco di selezione è intermittente e in ritardo. Decisione già presa: **«Due distinti»** (vittoria e sconfitta separate, al posto dell'unico `confirmation_002.ogg`).
 
 ## Come è stato provato
 

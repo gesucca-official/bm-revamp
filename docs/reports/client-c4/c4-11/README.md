@@ -1,7 +1,7 @@
 # C4-11 — evidenze della Fase A
 
 9 novembre 2026, base `f706a4e`, jar locale `5684bffda536ac67` (ricostruito qui con `./scripts/build.ps1 -Task Server -Offline`).
-Rapporto: [C4-11 — Fase A](../../client-c4-report.md#c4-11--fase-a). Proposta: [spazio/proposta.md](../../../design/client-c4/spazio/proposta.md).
+Rapporto: [C4-11 — Fase A](../c4-11.md#c4-11--fase-a). Proposta: [spazio/proposta.md](../../../design/client-c4/spazio/proposta.md).
 
 | Cartella o file | Cosa contiene |
 |---|---|

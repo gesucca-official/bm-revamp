@@ -1,13 +1,13 @@
 # C4-10 — Guida visiva: Fase A (proposta)
 
 7 novembre 2026. Base `c09b946` su main («C4-10: lower the cut sound to the level of the hit», Fase 0), checkout pulito alla partenza.
-**Fase A pronta; il proprietario ha scelto B con ritocchi il 9 novembre 2026 ([scelta](#scelta-del-proprietario)). Fase B fatta e approvata dal proprietario il 9 novembre 2026 ([rapporto](../../../reports/client-c4-report.md#c4-10--fase-b), [prova](../../../reports/client-c4-report.md#c4-10--prova-del-proprietario-del-9-novembre-2026)).** Nessun codice di prodotto cambiato: i
+**Fase A pronta; il proprietario ha scelto B con ritocchi il 9 novembre 2026 ([scelta](#scelta-del-proprietario)). Fase B fatta e approvata dal proprietario il 9 novembre 2026 ([rapporto](../../../reports/client-c4/c4-10.md#c4-10--fase-b), [prova](../../../reports/client-c4/c4-10.md#c4-10--prova-del-proprietario-del-9-novembre-2026)).** Nessun codice di prodotto cambiato: i
 prototipi sono una patch fuori dal prodotto ([`prototipo.patch`](prototipo.patch), vedi [sotto](#prototipi-come-sono-stati-provati)).
 
 Fonti: [piano, C4-10](../../../client-c4-plan.md#c4-10--guida-visiva), regole di non regressione 1–18, riga C4-10 della matrice,
 [D15](../../../client-c4-plan.md#decisioni-del-proprietario); [O29 e O30](../../../client-roadmap.md#osservazioni-registrate-durante-c4);
-[prova di C4-7 del 7 novembre 2026](../../../reports/client-c4-report.md#c4-7--prova-del-proprietario-del-7-novembre-2026),
-[C4-7-ter Fase B](../../../reports/client-c4-report.md#c4-7-ter--fase-b), [C4-10 Fase 0](../../../reports/client-c4-report.md#c4-10--fase-0).
+[prova di C4-7 del 7 novembre 2026](../../../reports/client-c4/c4-7.md#c4-7--prova-del-proprietario-del-7-novembre-2026),
+[C4-7-ter Fase B](../../../reports/client-c4/c4-7-ter.md#c4-7-ter--fase-b), [C4-10 Fase 0](../../../reports/client-c4/c4-10.md#c4-10--fase-0).
 
 **Obiettivo (D15).** Lo sguardo deve andare da solo su ciò che succede e su ciò che il giocatore deve fare, senza leggere:
 «un giocatore che vuole giocare, beh, vuole giocare, non leggere». Nessun testo nuovo sullo schermo, nessun elenco.

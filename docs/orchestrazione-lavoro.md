@@ -122,14 +122,18 @@ delega di D38 e i ridisegni al proprietario.
 ## Come si rivede una relazione
 
 Controllare nel repository, non fidarsi del riassunto. Si parte dall'uscita dello script di revisione
-(`python scripts/review-block.py <base>..<testa>`, quando c'è: file toccati per categoria e fuori perimetro, test e attesi cambiati,
-soglie, peso delle evidenze, esiti dei riepiloghi) e si leggono per intero solo i punti dubbi e la chiusura del rapporto.
+(`python scripts/review-block.py <base>..<testa> [--scope glob,...]`: file toccati per categoria e fuori perimetro, test e attesi
+cambiati, soglie, peso delle evidenze, esiti dei riepiloghi, messaggi dei commit) e si leggono per intero solo i punti dubbi e la
+chiusura del rapporto. L'uscita segnala dove guardare, non giudica. Il rapporto di un blocco sta nel suo file
+(`docs/reports/client-c4/<blocco>.md`), non nell'indice [client-c4-report.md](reports/client-c4-report.md).
+- Documenti: `python scripts/check-links.py` (link relativi e ancore dei `.md`; esce con 1 se ce ne sono di rotti). Un rotto nuovo
+  rispetto al commit di base è un rosso della revisione; quelli già presenti si elencano, non si attribuiscono al blocco.
 - Quali test sono cambiati e perché (`git show <commit> -- client-web/tests client-web/tools`). Un atteso o una soglia cambiati per tornare al
   verde sono un rosso della revisione, anche se tutto è verde. Una correzione a un verificatore va bene solo se spiegata e se controlla la
   stessa cosa di prima.
 - Non regressione a 750×292 (regola 18): `BASE_750` invariato in `client-web/tests/readability.test.ts`, che fissa i `layoutProblems` per numero di oggetti.
   I rossi già noti a 750×292 (gettone coperto dalla mano in `Verify`, messaggi di `VerifyLayout`) non sono un peggioramento se i conteggi restano
-  uguali a quelli del commit di base; gli ultimi valori sono nel [rapporto C4](reports/client-c4-report.md).
+  uguali a quelli del commit di base; gli ultimi valori sono nel [rapporto C4-11, Fase B](reports/client-c4/c4-11.md#c4-11--fase-b).
 - `Size`: limiti rigidi (JS 500 KiB, totale 4 MiB, atlanti 2048, texture 64 MiB) e tetto C4 di **32 MiB** di texture decodificate.
   Nessun ripristino dei vecchi tetti JS/totale (D9 rivista).
 - Percorsi del commit precisi e solo quelli del blocco; evidenze entro l'indicazione del contratto; stato del blocco scritto come tale.

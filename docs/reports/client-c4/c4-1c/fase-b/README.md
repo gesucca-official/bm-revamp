@@ -11,6 +11,6 @@ Prodotto esportato di ac1e885, jar e dist fissi: [provenienza](build.json). Ness
 - [Confronto completo](confronto-completo.json), rispetto alla serie di Fase A e alla serie attuale mirata.
 - [Pubblicazione dei dati reali](pubblicazione.txt): 16 catture finali, circa 2 MB; le altre restano in TEMP.
 
-Il secondo giro N=4 è stato saltato per scelta esplicita del proprietario: variabilità non verificata. Il [rapporto](../../../client-c4-report.md#c4-1c--fase-b) distingue i dati reali dalle prove sintetiche.
+Il secondo giro N=4 è stato saltato per scelta esplicita del proprietario: variabilità non verificata. Il [rapporto](../../c4-1c.md#c4-1c--fase-b) distingue i dati reali dalle prove sintetiche.
 
 - [Controlli finali](controlli.json): client, repository, regole, contesto Spring separato, manifest e pulizia.

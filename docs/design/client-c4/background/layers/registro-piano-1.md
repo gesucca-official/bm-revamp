@@ -140,4 +140,4 @@ Il cover dinamico non modifica i byte della WebP e non va confuso con un ritagli
 | Motivazione e correzioni richieste | |
 | Riferimento al messaggio o evidenza del giudizio | |
 
-L'approvazione della sola immagine non chiude l'integrazione né sostituisce il giudizio sul tavolo vero. Il registro completo accompagna inventario ed evidenze, secondo la [checklist](checklist-integrazione.md).
+L'approvazione della sola immagine non chiude l'integrazione né sostituisce il giudizio sul tavolo vero. Il registro completo accompagna inventario ed evidenze, secondo la [checklist](../checklist-integrazione.md).

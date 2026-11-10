@@ -1,6 +1,6 @@
 # C4-5b — Varianti della Fase A, scelte registrate
 
-**Aggiornamento dopo la scelta:** A comune/editor/admin e B di calata, con invito unico senza targhette. [Scelte](../scelte.md), [implementazione e verifiche](../../../../reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). Questo documento conserva la base/proposta di Fase A.
+**Aggiornamento dopo la scelta:** A comune/editor/admin e B di calata, con invito unico senza targhette. [Scelte](../scelte.md), [implementazione e verifiche](../../../../reports/client-c4/c4-5b.md#fase-b--esiti-finali-e-cosa-giudicare). Questo documento conserva la base/proposta di Fase A.
 5 novembre 2026. **Prototipi temporanei su schermate reali, nessuna finitura di produzione applicata.** [Proposta motivata e token da approvare](../proposta.md), [prima](../../../../reports/client-c4/c4-5b/prima/README.md).
 
 **Raccomandazione: A generale e A per calata/scarto.** È possibile combinare il sistema generale A/B e quello di ✓/×/scarto A/B. Giudicare anche la lettura dei nomi, dei costi e della richiesta di scarto. Le targhette delle candidate sono solo del prototipo; non sono nuove azioni né nuovi bersagli. Le forme ✓ e × sono quelle SVG di symbols.ts già caricate dal client.

@@ -1,7 +1,7 @@
 # C4-5b — Inventario delle schermate
 
-**Aggiornamento dopo la scelta:** A comune/editor/admin e B di calata, con invito unico senza targhette. [Scelte](scelte.md), [implementazione e verifiche](../../../reports/client-c4-report.md#fase-b--esiti-finali-e-cosa-giudicare). Questo documento conserva la base/proposta di Fase A.
-5 novembre 2026. **Fase A: inventario e proposta, nessuna finitura di produzione.** Base `11bc95e`, distribuito `6fd49130507af819`, dopo la sola riformattazione equivalente del CSS. [Censimento completo delle tinte e dei font](censimento.md), [proposta da scegliere](proposta.md), [rapporto](../../../reports/client-c4-report.md#c4-5b).
+**Aggiornamento dopo la scelta:** A comune/editor/admin e B di calata, con invito unico senza targhette. [Scelte](scelte.md), [implementazione e verifiche](../../../reports/client-c4/c4-5b.md#fase-b--esiti-finali-e-cosa-giudicare). Questo documento conserva la base/proposta di Fase A.
+5 novembre 2026. **Fase A: inventario e proposta, nessuna finitura di produzione.** Base `11bc95e`, distribuito `6fd49130507af819`, dopo la sola riformattazione equivalente del CSS. [Censimento completo delle tinte e dei font](censimento.md), [proposta da scegliere](proposta.md), [rapporto](../../../reports/client-c4/c4-5b.md#c4-5b).
 
 ## Lettura dell’inventario
 

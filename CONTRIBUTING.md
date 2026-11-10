@@ -44,6 +44,15 @@ Un rosso del pool si rilancia da solo a macchina ferma, prima di attribuirlo; pe
 `test,build,size`. `-Measures 1920x1080 -Only 'test,build,size,verify,layout'` resta disponibile come giro dichiarato, non pubblicabile.
 Per blocco valgono le verifiche mirate D16; la matrice completa si esegue alla fine di C4.
 
+Documenti e revisione. Il controllo dei link (relativi e ancore dei `.md` in `docs/`, `CONTRIBUTING.md`, `AGENTS.md`,
+`client-web/README.md`; esce con 1 se ce ne sono di rotti) e il riepilogo di un blocco per chi lo rivede (file per categoria e fuori
+`--scope`, righe di test con attesi e di strumenti con numeri, peso delle evidenze, esiti dei `run-summary.json`, messaggi dei commit):
+
+```powershell
+python scripts/check-links.py
+python scripts/review-block.py <base>..<testa> --scope 'client-web/src/*,client-web/tests/*'
+```
+
 Non includere database applicativi, journal di recupero, credenziali, cache o
 log locali. Il catalogo `server/src/main/resources/cards.sqlite` e i PDF di
 stampa già prodotti sono invece parte del repository. Non rigenerare i manifest

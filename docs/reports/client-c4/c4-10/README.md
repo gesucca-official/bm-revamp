@@ -1,6 +1,6 @@
 # C4-10 — evidenze della Fase B
 
-9 novembre 2026, base `d70be28`, jar locale `7e6045b4e53b0395`. Rapporto: [C4-10 — Fase B](../../client-c4-report.md#c4-10--fase-b).
+9 novembre 2026, base `d70be28`, jar locale `7e6045b4e53b0395`. Rapporto: [C4-10 — Fase B](../c4-10.md#c4-10--fase-b).
 
 | Cartella | Cosa contiene |
 |---|---|

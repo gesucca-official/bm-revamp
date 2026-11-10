@@ -1,6 +1,6 @@
 # O27 — Confronto delle alternative
 
-**Documento della fase A, precedente alla scelta.** Il proprietario ha poi scelto A con passo pieno prima del ripiego 0,75; ha escluso C e ogni combinazione con C, segnalando la copertura della scritta nella cattura grande. [Decisione e fase B](../../../client-c4-report.md#c4-5a-bis). Queste catture non rappresentano la build definitiva della fase B.
+**Documento della fase A, precedente alla scelta.** Il proprietario ha poi scelto A con passo pieno prima del ripiego 0,75; ha escluso C e ogni combinazione con C, segnalando la copertura della scritta nella cattura grande. [Decisione e fase B](../../c4-5a-bis.md#c4-5a-bis). Queste catture non rappresentano la build definitiva della fase B.
 
 5 novembre 2026. Solo proposta: **nessuna modifica definitiva al layout**. Tre partite open 1vCom reali sul database temporaneo, mazzi salvati tramite editor con Junkie, due legate, Glare, Struggle e 1–3 Tennent’s Super. Due mosse reali (Glare e Struggle), poi confronto di tutte le alternative sulla stessa vista al turno 2, con il numero di oggetti controllato. 1920×1080 serve solo al confronto visivo.
 
