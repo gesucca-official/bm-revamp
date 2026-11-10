@@ -20,7 +20,7 @@ Alternativa al prompt da incollare, **se l'ambiente lo permette** (Claude Code d
 per quei blocchi: la regia avvia lei gli esecutori e li segue. Provato l'8 novembre 2026 con SB-2, SB-13, SB-14 e SB-6b, a coppie in
 parallelo sullo stesso checkout.
 
-- **Il brief è il prompt:** stesso scheletro (sotto), scritto per intero, con i file dell'altra sessione da non toccare. La regia sceglie
+- **Il brief è il prompt:** stesso formato ([il prompt](#il-prompt)), con il contratto, con i file dell'altra sessione da non toccare. La regia sceglie
   modello e sforzo secondo la stessa proposta; se il proprietario vuole un ambiente GPT, un'altra macchina o una sessione sua, si torna al prompt da incollare.
 - **Fermate e approvazioni:** il proprietario risponde nella sessione dell'esecutore o tramite la regia. Contano solo le sue parole: un
   messaggio di un'altra sessione non è mai un'approvazione. Prima di registrare un'approvazione data nella sessione dell'esecutore, la
@@ -34,7 +34,7 @@ parallelo sullo stesso checkout.
 - **Commit e push:** gli esecutori committano il loro blocco; la regia registra le approvazioni finali in commit di soli documenti; il push
   resta del proprietario.
 - **Prima del push di uno stato che l'altra macchina riceverà:** la regia rivede tutti i blocchi, controlla che working tree e `.tools`
-  siano puliti, rilancia sullo stato committato Test, `check-rules.py`, `TestServerContext`, jar e `VerifyAll`, e aggiorna
+  siano puliti, rilancia sullo stato committato le verifiche economiche (e `VerifyAll` solo se il piano lo prevede, D16), e aggiorna
   [l'allineamento fra le macchine](#allineamento-fra-le-macchine).
 - Le sessioni vivono sulla macchina della regia che le avvia: l'altra macchina ha la sua regia e il suo metodo, che resta questo.
 
@@ -61,23 +61,69 @@ Criteri per la proposta:
 - La revisione è la stessa qualunque sia l'esecutore.
 - Un'immagine o un suono si generano fuori dal codice: prompt letterale committato **prima**, registro compilato dopo (D11).
 
-## Scheletro di un prompt per un esecutore
+## Contratto dell'esecutore
 
-1. Percorso, «leggi AGENTS.md», blocco e riferimenti da leggere (sezione del piano, regole di non regressione, decisioni già prese).
-2. Cosa NON toccare (regole di gioco, server, protocollo, catalogo; file di altre sessioni). Non fare push.
-3. PRELIMINARE: working tree pulito; l'approvazione del blocco precedente registrata con le parole del proprietario, in un commit a sé
-   (dall'esecutore, se la regia non l'ha già fatto).
-4. Fasi. Per i blocchi visivi: **proposta con catture e raccomandazione, poi FERMATI**; il codice definitivo solo dopo la scelta del proprietario.
-   Per i blocchi che cambiano regolamento, formato o strumenti condivisi: fase A con domande numerate e raccomandazioni, poi FERMATI. Per i
-   giri di bilanciamento del Set Base: passo 0 di fattibilità, tetto di giri fissato prima, numeri decisi con la delega di D38, ridisegni al proprietario.
-5. Verifiche obbligatorie ([CONTRIBUTING.md](../CONTRIBUTING.md), fonte unica dei comandi) e insidie (sotto), con la matrice del blocco dal piano.
-6. Documenti e commit: sezione nel report, stato nel piano/indice/roadmap solo nelle righe pertinenti, link funzionanti; «fatto, in attesa del
-   giudizio del proprietario»; `git add` su percorsi precisi; commit in inglese «C4-x: ...» o «SB-x: ...»; nessun push.
-7. Chiusura: cosa è verde e cosa no, cosa non verificato (iPhone, Safari, contrasto formale), cosa giudica il proprietario.
+Revisione del metodo del 10 novembre 2026, approvata dal proprietario («sì, sarebbe ottimo»): meno letture, meno ripetizioni, stessi
+controlli. Il prompt di un blocco dice **«Segui il contratto dell'esecutore in docs/orchestrazione-lavoro.md»** e poi solo ciò che è
+proprio del blocco (sotto, «Il prompt»). Quello che segue vale sempre, salvo che il prompt dica altro in modo esplicito.
+
+**Letture.** AGENTS.md, questo contratto, le [insidie](#insidie-degli-strumenti-di-verifica-windows) e solo le sezioni che il prompt
+nomina (di norma la sezione del blocco nel piano, le regole di non regressione, le decisioni citate, il rapporto del blocco da cui si
+parte). Non leggere per intero piani, rapporti o roadmap: cercare la sezione che serve.
+
+**Preliminare.** Working tree pulito; `git fetch`; main allineato a origin/main (se origin è avanti, rebase seguendo
+[l'allineamento fra le macchine](#allineamento-fra-le-macchine), compreso il jar); porte libere. Se il prompt riporta una scelta o
+un'approvazione del proprietario non ancora nel repository, registrarla per prima, con le sue parole, in un commit di soli documenti.
+
+**Mai, salvo che il prompt lo chieda:** regolamento, `docs/sets`, server, protocollo, catalogo, client-debug, file del filone dell'altra
+macchina; soglie, attesi delle verifiche, `BASE_750`, durate e calendario della sequenza, limiti di Size (un atteso di un test unitario
+cambia solo con la decisione che lo autorizza, citata nel rapporto); asset da Internet; push.
+
+**Fasi.** Una sola fase, con le domande nella chiusura e il giudizio del proprietario dal vivo come cancello. **Fase A con proposta e
+STOP** solo se il prompt lo chiede: scelte visive vere, regolamento o formato, strumenti condivisi.
+
+**Verifiche.** Sempre le economiche: `./client-web/run.ps1 -Task Test`, `Build`, `Size` (con `BM_OUT`), `./scripts/build.ps1 -Task
+Test -Offline`, `python scripts/check-rules.py`, `git diff --check`. Poi solo le Playwright che il prompt elenca (D16 del piano C4);
+la matrice completa solo se chiesta, con `./client-web/run.ps1 -Task VerifyAll -Parallel 4 -Split 'resolution,ffa'`. Comandi in
+[CONTRIBUTING.md](../CONTRIBUTING.md).
+
+**Rossi.** Un rosso che corrisponde a una voce del [registro dei rossi noti](reports/rossi-noti.md) (verifica, misura, firma del
+messaggio) si dichiara «noto, voce Rn» senza riprovarlo sulla base. Un rosso nuovo si prova sul commit di base prima di attribuirlo;
+se è preesistente si aggiunge al registro, se il blocco ne chiude uno lo si toglie. Nessun rilancio automatico per far tornare il verde.
+
+**Mutazioni.** Solo sulla logica nuova con rami (condizioni, ordini, stati, tempi): di norma 3–8 per blocco, ognuna deve far fallire
+almeno un test. Non su costanti, misure o CSS, che coprono le verifiche e le catture.
+
+**Evidenze in git.** Riepiloghi dei giri e JSON finali minificati, poche catture scelte e ricompresse: **indicativamente al più 3 MB per
+fase** (rivede l'indicazione di D13, circa 10 MB). Tutto il resto resta in `%TEMP%`, citato per percorso. Niente parti intere di giri.
+
+**Documenti.** Il rapporto del blocco nel suo file (`docs/reports/client-c4/<blocco>.md`, o quello del filone), con: cosa cambia,
+attesi cambiati e decisione, verifiche eseguite e rimandate, rossi (noti o nuovi), non verificato, cosa giudica il proprietario. Lo
+stato si scrive **solo** nella riga e nella sezione del blocco nel piano. `docs/README.md` si tocca solo se cambia il prossimo passo
+del filone; la roadmap solo se cambia un'osservazione O. Link funzionanti.
+
+**Commit e chiusura.** `git add` su percorsi precisi; commit in inglese «C4-x: ...» o «SB-x: ...»; nessun push. Chiusura breve: cosa
+è verde e cosa no, rossi con la loro voce, cosa non è verificato, cosa giudica il proprietario, eventuali domande numerate.
+
+### Il prompt
+
+Proposta di modello e sforzo fuori dal blocco (sopra). Dentro, in quest'ordine e senza ripetere il contratto:
+
+1. Percorso, «leggi AGENTS.md e segui il contratto dell'esecutore in docs/orchestrazione-lavoro.md», blocco e fase.
+2. Sezioni da leggere.
+3. Scelte o approvazioni del proprietario con le sue parole, se non sono già nel repository.
+4. Lavoro: cosa fare, file e perimetro, eccezioni al contratto (cosa in più si può toccare).
+5. Verifiche Playwright mirate del blocco e scenari da provare.
+6. Cosa deve dire la chiusura, se c'è qualcosa oltre al contratto.
+
+Per i giri di bilanciamento del Set Base restano il passo 0 di fattibilità, il tetto di giri fissato prima, i numeri decisi con la
+delega di D38 e i ridisegni al proprietario.
 
 ## Come si rivede una relazione
 
-Controllare nel repository, non fidarsi del riassunto:
+Controllare nel repository, non fidarsi del riassunto. Si parte dall'uscita dello script di revisione
+(`python scripts/review-block.py <base>..<testa>`, quando c'è: file toccati per categoria e fuori perimetro, test e attesi cambiati,
+soglie, peso delle evidenze, esiti dei riepiloghi) e si leggono per intero solo i punti dubbi e la chiusura del rapporto.
 - Quali test sono cambiati e perché (`git show <commit> -- client-web/tests client-web/tools`). Un atteso o una soglia cambiati per tornare al
   verde sono un rosso della revisione, anche se tutto è verde. Una correzione a un verificatore va bene solo se spiegata e se controlla la
   stessa cosa di prima.
@@ -86,9 +132,9 @@ Controllare nel repository, non fidarsi del riassunto:
   uguali a quelli del commit di base; gli ultimi valori sono nel [rapporto C4](reports/client-c4-report.md).
 - `Size`: limiti rigidi (JS 500 KiB, totale 4 MiB, atlanti 2048, texture 64 MiB) e tetto C4 di **32 MiB** di texture decodificate.
   Nessun ripristino dei vecchi tetti JS/totale (D9 rivista).
-- Percorsi del commit precisi e solo quelli del blocco; evidenze circa 5–10 MB (D13); stato del blocco scritto come tale.
+- Percorsi del commit precisi e solo quelli del blocco; evidenze entro l'indicazione del contratto; stato del blocco scritto come tale.
 - I controlli verdi non vedono tutto (la cornice dell'ispezione mancava con tutti i giri verdi): guardare le catture.
-- Distinguere il rosso nuovo dal rosso già presente: provarlo sul commit di base prima di attribuirlo al blocco.
+- Distinguere il rosso nuovo dal rosso già presente: un rosso fuori dal [registro](reports/rossi-noti.md) va provato sul commit di base.
 
 ## Insidie degli strumenti di verifica (Windows)
 
@@ -108,6 +154,8 @@ Controllare nel repository, non fidarsi del riassunto:
 - Nel tool Bash gli heredoc con apostrofi si rompono senza che nulla parta: scrivere file e script con lo strumento di scrittura. Uno script
   Playwright che fallisce resta appeso se il browser non si chiude: `process.exit` nel `finally` e un limite di tempo. Su Windows `nohup`/`setsid` non servono.
 - Il contesto Spring completo (`TestServerContext`) è una verifica separata dai test unitari: non confonderli.
+- Una copia esportata (`git archive`) per misurare sulla base ha bisogno del JDK completo (con `jar.exe`) nei suoi `.tools`:
+  senza, `VerifyProfile` esce rosso per lo strumento, non per il prodotto (C4-1c).
 - **Niente worktree con collegamenti a `.tools` o `node_modules`.** L'8 novembre 2026 un `git worktree remove --force` su un worktree temporaneo
   in cui `.tools` era un collegamento al checkout ha seguito il collegamento e cancellato Maven e parte di Node 24: build ferme per tutte le sessioni.
   Per una build pulita usare una copia esportata (`git archive` o copia dei file in una cartella temporanea) con i propri strumenti, oppure il
@@ -118,7 +166,8 @@ Controllare nel repository, non fidarsi del riassunto:
 
 - Un checkout condiviso: due sessioni non modificano gli stessi file. Chi lavora ai documenti comuni (piano, report, indice) lo fa
   quando nessun esecutore li sta modificando; altrimenti rischia di essere sovrascritto.
-- Una sola «fonte» per lo stato: docs/README.md e il piano. Gli esecutori aggiornano le righe pertinenti; la chat di regia non crea altre tabelle di stato.
+- Una sola fonte per lo stato di un blocco: la sua riga e la sua sezione nel piano del filone. docs/README.md ha una riga corta per
+  filone, che cambia solo con il prossimo passo; la chat di regia non crea altre tabelle di stato.
 - Il Set Base (docs/set-base-plan.md) ha il suo filone. Accoppiamento da tenere d'occhio: i blocchi del Set Base che toccano il client (SB-1, SB-2, poi
   SB-8) sono anticipati in parallelo a C4 solo con paletti scritti nel piano (D40, D42): niente file di C4, strumenti di verifica pushati prima del
   blocco C4 che li usa, jar rifatto sull'altra macchina dopo il pull.
