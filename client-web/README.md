@@ -494,6 +494,33 @@ cornici, simboli e texture restano a C4.
 - **750×292 (minimo iPhone):** non entra ancora, come già prima di C3-L. Registrato per C4 e controllato da un
   test che avvisa quando cambia.
 
+## Spazio e profondità (C4-11)
+
+**Fatto, in attesa del giudizio del proprietario (10 novembre 2026).** Scelta del proprietario nella
+[proposta](../docs/design/client-c4/spazio/proposta.md#scelta-del-proprietario); [rapporto](../docs/reports/client-c4-report.md#c4-11--fase-b).
+
+- **Schermi grandi (b1, `GROW` e `growth` in `src/readability.ts`):** `fattore = max(1; 0,9 × min(altezza/800; larghezza/1422))`,
+  sempre 1 sul tavolo compatto. Moltiplica il tetto della mano (214 px), il sollevamento (30), il tetto della base (150), le pile
+  e l'anteprima. Fino a 889 px di altezza nulla cambia; a 1920×1080 ×1,215 (mano 260 px), a 2560×1440 ×1,62 (mano 347 px). Il
+  limite in larghezza tiene i 4:3 (1920×1440) a ×1,215. Plance e dorsi non crescono.
+- **Tavolo compatto (a1, a2):** sotto i 550 px di altezza il titolo non si mostra, gli oggetti di scena sono al 55%
+  (`LIGHT_FRAME`, `tableFrame`) e il posto vuoto degli scarti non si disegna. Le carte del round stanno in **pila**: una carta sola
+  visibile con un'etichetta (autore della carta in cima, color vino con ✕ se annullata; conteggio, color vino con ✕ se sotto
+  la cima c'è un'annullata; `pileTag`). La pila prende la carta più grande che lascia a ogni posto le strisce del riepilogo che
+  lasciava la cascata, mai più piccola della cascata; se nessuna misura ci riesce resta la cascata. Su desktop la cascata
+  resta com'è.
+- **Ombra delle carte (`CARD_SHADOW` e `cardShadow` in `src/frames.ts`, un solo punto):** stessa direzione, spostamento 5×7,5 px
+  (era 4×6), quattro rettangoli arrotondati sovrapposti nello stesso `Graphics`, opacità complessiva 66% al centro (era 60%),
+  bordo sfumato di 3 px. Nessun filtro né texture: 0 byte di texture in più.
+- **Aree sicure (d, O28):** `viewport-fit=cover` in `index.html`; `src/safe.ts` legge `env(safe-area-inset-*)` e imposta
+  `--safe-l`/`--safe-r`; il tavolo si dispone nella larghezza sicura (`shiftLayout`) e titolo, menu, orologio e suggerimento
+  restano dentro. Per provarle su PC: `window.__bmSafe={l,t,r,b}` prima del caricamento. Non verificato su iPhone.
+- **Frecce (v1, `aimArrows`):** se ogni percorso verso il lato del bersaglio che guarda la carta passa sul vecchio posto di ✓ e ×,
+  la punta prova gli altri lati, dal più vicino. `VerifyAim` invariato.
+- **Jingle (J2, `Sounds.interruptRound`, `endSound`):** un'interruzione (ridimensionamento, `visualViewport`, Esc, cambio del
+  movimento ridotto) ferma e consuma solo i colpi del round; «Salta effetti», muto, uscita dal tavolo, background, disconnessione
+  e reset fermano tutto come prima.
+
 ## Frecce verso i bersagli (C3-3, O6)
 
 Con una carta scelta o trascinata, una freccia parte dal bordo della carta e arriva al
@@ -527,7 +554,7 @@ Resolution, Aim, Layout; per loro il server resta uno per verifica, perché alcu
 Ferma solo i processi che ha avviato. Se una verifica fallisce prosegue e restituisce errore alla fine. In coda stampa
 HEAD e data del jar verificati, la tabella (verifica, misura, esito, durata), gli avvisi e le cartelle di evidenze e log.
 
-- **Misure:** `-Measures 1366x768,844x390`; qualunque altra (per esempio `750x292`, base di C4-1b) è un'esecuzione dichiarata **non equivalente** al consolidamento e non si pubblica (predefinite le due; in `-Quick` solo la prima). **Selezione:** `-Only verify,modes,resolution,…`
+- **Misure:** `-Measures 1366x768,844x390`; qualunque altra (per esempio `750x292`, base di C4-1b) è un'esecuzione dichiarata **non equivalente** al consolidamento e non si pubblica (predefinite le due; in `-Quick` solo la prima). **1920×1080** è misura ufficiale per `Verify` e `VerifyLayout` dal 10 novembre 2026 (C4-11): finché lo strumento non la include si lancia a parte, `-Measures 1920x1080 -Only verify,layout`, segnalata come non standard, e si dichiara nel rapporto. **Selezione:** `-Only verify,modes,resolution,…`
   (nomi: `test build size verify modes lifecycle ffa decks public profile resolution aim layout`); un giro parziale non si pubblica.
 - **Evidenze (D13 del [piano C4](../docs/client-c4-plan.md)):** sempre in una cartella temporanea (`%TEMP%\bm-verify-all-…\evidence`, con `logs`), mai nel
   repository finché non si chiede `-Publish <cartella>`. La pubblicazione avviene solo se tutto è verde e il giro è completo (due misure,

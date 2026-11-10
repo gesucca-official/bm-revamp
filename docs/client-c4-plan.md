@@ -4,9 +4,9 @@
 `a807aa0`. **Solo piano:** nessun codice client, nessuna modifica a regole, server, protocollo, catalogo o
 `client-debug`. C0, C1, C2 e C3 sono chiuse. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
-**Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
+**Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D16 il 10 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato al 9 novembre 2026.** C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). **C4-7 e C4-10 approvati dal proprietario il 9 novembre 2026** ([prova](reports/client-c4-report.md#c4-10--prova-del-proprietario-del-9-novembre-2026)); prossimo **C4-11**: **Fase A pronta, in attesa della scelta del proprietario** ([proposta](design/client-c4/spazio/proposta.md), [rapporto](reports/client-c4-report.md#c4-11--fase-a)). C4-7: scelte della Fase A approvate, HIT/CUT per colpo, POISON muto, esito col pannello e attacco send di 5 ms. C4-7-bis (esito distinto, Web Audio) e le fasi di C4-7 restano come registrate. Dalla stessa prova, con [D15](#decisioni-del-proprietario), due blocchi nuovi prima di C4-8a: **C4-10** (guida visiva) e **C4-11** (spazio e profondità). Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
+**Stato al 10 novembre 2026.** **C4-11 (spazio e profondità) fatto, in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-11--fase-b)); dal 10 novembre 2026 vale la [decisione di metodo D16](#decisioni-del-proprietario) (verifiche mirate per blocco, matrice completa a fine C4). C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). **C4-7 e C4-10 approvati dal proprietario il 9 novembre 2026** ([prova](reports/client-c4-report.md#c4-10--prova-del-proprietario-del-9-novembre-2026)); poi **C4-11** ([proposta e scelta](design/client-c4/spazio/proposta.md), [Fase A](reports/client-c4-report.md#c4-11--fase-a), [Fase B](reports/client-c4-report.md#c4-11--fase-b)). C4-7: scelte della Fase A approvate, HIT/CUT per colpo, POISON muto, esito col pannello e attacco send di 5 ms. C4-7-bis (esito distinto, Web Audio) e le fasi di C4-7 restano come registrate. Dalla stessa prova, con [D15](#decisioni-del-proprietario), due blocchi nuovi prima di C4-8a: **C4-10** (guida visiva) e **C4-11** (spazio e profondità). Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
 
 **Stato di C4-1, C4-1b, C4-3, C4-2, C4-4 e C4-5a.** C4-5a è **approvato dal proprietario il 5 novembre 2026; O2 chiusa**. Le osservazioni O26 e O27 della prova sono assegnate a C4-5a-bis ([stato del blocco](reports/client-c4-report.md#c4-5a-bis): O26 e O27 approvate dal proprietario il 5 novembre 2026 dopo una partita vera; scelta A pieno/0,75/sopra, 236 unità e giri ufficiali verdi sul jar pre-SB-3/SB-4, contesto corrente verde, nuovo giro grafico sul jar corrente non svolto con accettazione esplicita del proprietario) ([rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)). C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
@@ -34,13 +34,21 @@ Valgono per **ogni** blocco, come in C3:
   opzioni, scelta del proprietario, implementazione, come ha funzionato C3-L. Le prove di C3 hanno portato revisioni in quasi
   tutti i blocchi visibili (C3-2, C3-4, C3-L, C3-7): è previsto che accada anche qui, e una revisione è un commit proprio.
 - **Partite reali** sul server locale, su database temporaneo, guidate da Edge/Playwright. Misure ufficiali: **1366×768 e
-  844×390**. Scene sintetiche e fixture valgono per i test unitari, non come partita reale.
+  844×390**; per `Verify` e `VerifyLayout` anche **1920×1080** dal 10 novembre 2026 (scelta del proprietario in C4-11,
+  [domanda 7](design/client-c4/spazio/proposta.md#scelta-del-proprietario)). Finché lo strumento non la include fra le sue
+  misure (integrazione affidata a C4-1c) si lancia esplicitamente con `-Measures 1920x1080`, e `VerifyAll` la segnala come
+  non standard: va dichiarato. Scene sintetiche e fixture valgono per i test unitari, non come partita reale.
 - **iPhone e 750×292: bene se funziona, senza diventare un obiettivo** ([D6](#decisioni-del-proprietario)). Il client web serve soprattutto a provare il gioco;
   il supporto vero al telefono arriverà con l'app ([Q16](open-questions.md)). Il lavoro già fatto non si perde: 750×292 è protetta dalla regola 18 e un
   miglioramento economico si fa, ma nessun blocco si apre o si allunga per quella misura. Edge sul PC non sostituisce l'iPhone: ciò che non è provato si dichiara.
 - Verifiche: `./client-web/run.ps1 -Task Test`, `Build`, `Size`, quelle del blocco
   ([matrice](#verifiche-da-rieseguire-per-blocco)) e quelle di AGENTS: `./scripts/build.ps1 -Task Test -Offline` e
   `python scripts/check-rules.py`. Il contesto Spring ha una verifica separata, eseguita in C4-9.
+- **Decisione di metodo ([D16](#decisioni-del-proprietario), 10 novembre 2026).** Il proprietario: «mi piace il compromesso».
+  A ogni blocco di C4 le verifiche economiche (test, build, size, test del server, `check-rules.py`) più **solo** le verifiche
+  Playwright legate a ciò che il blocco tocca; la [matrice completa a fine C4](#matrice-completa-di-fine-c4), prima di C5, con le
+  correzioni allora. Le approvazioni dei blocchi restano soggette a quella matrice. In più C4-11 è stato sovrapposto a C4-1c,
+  in deroga all'ordine in serie dei blocchi.
 - Documenti nello stesso commit: `client-web/README.md`, una sezione «C4-n» in `docs/reports/client-c4-report.md` (creato al
   primo blocco), la revisione della roadmap, le righe P toccate della [checklist](client-c0-parity.md). Evidenze in
   `docs/reports/client-c4/c4-n/`, secondo [D13](#decisioni-del-proprietario).
@@ -134,7 +142,7 @@ stesso turno non tocca la sequenza; la sequenza non si ferma alla prima eliminaz
 | 14 | **Nessun asset dai quattro giochi di riferimento né da Internet con diritti incerti.** | Fonte ammessa nell'inventario (generato ex novo con registro, oppure licenza esplicita sulla pagina del file); controllo umano a ogni inclusione. |
 | 15 | **Nessuna dipendenza remota in partita:** niente CDN, font remoti o tracciamenti. | Durante le verifiche, nessuna richiesta verso un'origine diversa dalla pagina. |
 | 16 | **Nessuna funzione tolta per fare spazio o per la grafica:** righe P01–P44 invariate; nessuna soglia rilassata e nessun atteso cambiato per accettare una regressione (AGENTS). Un atteso cambia solo per una decisione registrata del proprietario. | Diff degli attesi citato nel rapporto; giro completo in C4-9. |
-| 17 | **Le misure già valide non peggiorano:** a 1366×768 e 844×390 i fattori e le dimensioni di C3-L restano o crescono, salvo decisione. | Test sui fattori ottenuti; `VerifyLayout`. |
+| 17 | **Le misure già valide non peggiorano:** a 1366×768 e 844×390 i fattori e le dimensioni di C3-L restano o crescono, salvo decisione. Dal 10 novembre 2026 anche a 1920×1080, con base i giri `Verify` e `VerifyLayout` della [Fase B di C4-11](reports/client-c4-report.md#c4-11--fase-b). | Test sui fattori ottenuti; `VerifyLayout`. |
 | 18 | **750×292 non peggiora:** ciò che a quella misura funziona alla base di C4-1b continua a funzionare, e il codice compatto non si toglie. | Test che fissa il numero di `layoutProblems` della base, che può solo scendere; a C4-2 e C4-9, `Verify`, `VerifyFfa`, `VerifyAim` e `VerifyLayout` a 750×292: passa ciò che passava alla base. Non è un obiettivo di adattamento e non chiede prove su iPhone. |
 
 ## Blocchi
@@ -179,6 +187,7 @@ configurazioni diverse). Il criterio giusto è **un solo punto che avvia i serve
 
 **Ordine (D14, D15):** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-7-ter → C4-10 → C4-11 → C4-8a → C4-8b → C4-9 (C4-6* saltato per D1 (a), 6 novembre 2026; C4-7-ter, C4-10 e C4-11 aggiunti con D15 il 7 novembre 2026). I numeri 10 e 11 non indicano l'ordine: i due blocchi vengono **prima** di C4-8a. C4-8a e C4-8b vengono dopo
 tutti gli asset e tutte le animazioni, perché movimento ridotto, peso e cadenza vanno misurati su quelli veri.
+**Deroga del 10 novembre 2026 ([D16](#decisioni-del-proprietario)):** la Fase B di C4-11 è stata svolta mentre C4-1c (strumenti, su un'altra macchina) era in corso; C4-11 non tocca gli strumenti e i cambi di C4-1c ai documenti comuni si uniscono al rebase. Dopo C4-9, prima di C5, la [matrice completa di fine C4](#matrice-completa-di-fine-c4).
 
 | Blocco | `scene.ts` | `readability.ts` | `style.css` | Shell (`ui`, `table`, `collection`, `hub`, `public`, `profile`) | Strumenti | Asset e inventario |
 |---|---|---|---|---|---|---|
@@ -498,7 +507,9 @@ nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suo
 
 **Perché (D15).** Prova del proprietario del 7 novembre 2026: «il gioco sugli schermi piccoli è affollato, mentre sugli schermi grandi è un po' spoglio»; «il gioco manca di tridimensionalità».
 
-**Fase A — proposta** (9 novembre 2026): **pronta, in attesa della scelta del proprietario.** [Proposta](design/client-c4/spazio/proposta.md) con diagnosi sul tavolo vero (1366×768, 844×390 e 1920×1080 diagnostica), opzioni prototipate per schermi piccoli (a1, a2), grandi (b1, b2), profondità (c1, c2) e O28 (d), causa e correzione del rosso di `VerifyAim` a 844×390 (v1), opzioni per il jingle d'esito (J0, J1, J2) e sette domande numerate; [rapporto](reports/client-c4-report.md#c4-11--fase-a). Prototipi fuori dal commit.
+**Fase B** (10 novembre 2026): **fatta, in attesa del giudizio del proprietario.** Scelta del proprietario del 10 novembre ([proposta](design/client-c4/spazio/proposta.md#scelta-del-proprietario)): a1 + a2 con il segno vinaccia sul conteggio della pila, b1 attenuato (circa ×1,215 a 1920×1080), ombra un po' più profonda e morbida senza c1 né c2, d (O28), v1 in `aimArrows`, J2 per il jingle, 1920×1080 misura ufficiale per `Verify` e `VerifyLayout`. Codice e verifiche in due tempi (B1 codice e test unitari, B2 verifiche mirate secondo D16); [rapporto](reports/client-c4-report.md#c4-11--fase-b). **a3** (cornice degli avversari ridotta sul compatto) non è implementata: resta una **riserva** per prove future su mobile.
+
+**Fase A — proposta** (9 novembre 2026): pronta, poi scelta dal proprietario. [Proposta](design/client-c4/spazio/proposta.md) con diagnosi sul tavolo vero (1366×768, 844×390 e 1920×1080 diagnostica), opzioni prototipate per schermi piccoli (a1, a2), grandi (b1, b2), profondità (c1, c2) e O28 (d), causa e correzione del rosso di `VerifyAim` a 844×390 (v1), opzioni per il jingle d'esito (J0, J1, J2) e sette domande numerate; [rapporto](reports/client-c4-report.md#c4-11--fase-a). Prototipi fuori dal commit.
 
 **Perimetro.**
 
@@ -516,7 +527,7 @@ nessun doppione sulla stessa risoluzione ripetuta (regola 1); da C4-7-ter un suo
 
 **Completamento verificabile.** `VerifyLayout` verde alle misure ufficiali con fattori non peggiorati; regola 18; `Size` entro il tetto delle texture; catture prima e dopo; giudizio del proprietario, anche su iPhone per O28 se lo prova.
 
-**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` ridotta; 750×292 secondo la regola 18.
+**Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` ridotta; 750×292 secondo la regola 18. **Con D16 (10 novembre 2026)** eseguite solo quelle legate a ciò che il blocco tocca: `Verify` e `VerifyLayout` a 1366×768, 844×390 e 1920×1080, `VerifyLayout` e `Verify` a 750×292, `VerifyAim` a 1366×768 e 844×390, `VerifyOutcomeAudio` per J2; `VerifyFfa` e `VerifyResolution` rimandati alla [matrice completa di fine C4](#matrice-completa-di-fine-c4) ([rapporto](reports/client-c4-report.md#c4-11--fase-b)).
 
 ### C4-8a — Accessibilità e residui O21
 
@@ -592,6 +603,10 @@ non è provato.
 
 **Verifiche.** Tutte.
 
+### Matrice completa di fine C4
+
+**Perché ([D16](#decisioni-del-proprietario), 10 novembre 2026).** Dal 10 novembre ogni blocco esegue solo le verifiche economiche e le Playwright legate a ciò che tocca. Prima di C5 si esegue **tutta** la [matrice](#verifiche-da-rieseguire-per-blocco) sulla stessa build: tutte le verifiche a 1366×768 e 844×390, `Verify` e `VerifyLayout` anche a 1920×1080, la regola 18 a 750×292; i giri rimandati dai blocchi (per C4-11: `VerifyFfa`, `VerifyResolution`, `VerifyLifecycle`, `VerifyDecks`, `VerifyPublic`, `VerifyProfile`, `VerifyModes`) vi rientrano. Un rosso trovato allora si prova sulla base del blocco che lo ha portato e si corregge con test; le approvazioni dei blocchi restano soggette a questa matrice. Può coincidere con il giro completo di C4-9, se nessun codice cambia dopo.
+
 ## Verifiche da rieseguire per blocco
 
 ● completa alle misure ufficiali · ○ scenari ridotti o una misura, dichiarati · vuoto: non serve, il blocco non tocca quel percorso. `Test`, `Build`, `Size`,
@@ -610,14 +625,17 @@ non è provato.
 | C4-7* | ● | | | | | | | ○ | | |
 | C4-7-ter | ● 750 | | | | | | | ○ | | ● 750 |
 | C4-10 | ● 750 | | | ● | | | | ● | ● | ● 750 |
-| C4-11 | ● 750 | | | ● 750 | | | | ○ | ● 750 | ● 750 |
+| C4-11 | ● 750 · 1920 | | | ● 750 | | | | ○ | ● 750 | ● 750 · 1920 |
 | C4-8a | ● | | | | ● | ● | | ○ | ○ | |
 | C4-8b | ● | | | ● | | | | ● | ● | ● |
-| C4-9 | ● 750 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 |
+| C4-9 | ● 750 · 1920 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 · 1920 |
+| Fine C4 | ● 750 · 1920 | ● | ● | ● 750 | ● | ● | ● | ● | ● 750 | ● 750 · 1920 |
+
+**Dal 10 novembre 2026 ([D16](#decisioni-del-proprietario))** la riga di un blocco indica il massimo; il blocco esegue le Playwright legate a ciò che tocca e dichiara le altre come rimandate alla riga «Fine C4». «1920» indica 1920×1080 per `Verify` e `VerifyLayout`. Per C4-11 eseguiti: `Verify` e `VerifyLayout` a 1366×768, 844×390, 1920×1080 e 750×292; `VerifyAim` a 1366×768 e 844×390; `VerifyOutcomeAudio` (J2); rimandati `VerifyFfa`, `VerifyResolution` e gli altri ([rapporto](reports/client-c4-report.md#c4-11--fase-b)).
 
 ## Decisioni del proprietario
 
-**Tutte prese: D3, D4, D6, D8, D9, D11, D13 e D14 il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D7 e D10 non servono più.** Le raccomandazioni restano come motivazione. Ordine di urgenza in [fondo](#ordine-di-urgenza).
+**Tutte prese: D3, D4, D6, D8, D9, D11, D13 e D14 il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D16 il 10 novembre 2026; D7 e D10 non servono più.** Le raccomandazioni restano come motivazione. Ordine di urgenza in [fondo](#ordine-di-urgenza).
 
 | ID | Domanda | Opzioni | Raccomandazione e motivo | Cosa blocca | Se si rimanda |
 |---|---|---|---|---|---|
@@ -635,6 +653,7 @@ non è provato.
 | D12 | Riferimento di accessibilità e lettore di schermo | Contrasto: (a) WCAG 2.2 AA come obiettivo (4,5:1 testo, 3:1 testo grande e simboli), senza dichiarare conformità; (b) nessuna soglia. Lettore: (c) una breve prova del proprietario con VoiceOver; (d) dichiarato non provato | **(a) e (d); (c) se il proprietario ha dieci minuti.** La soglia rende il controllo ripetibile; le eccezioni si elencano. Il lettore non è automatizzabile qui e in C5 non è un criterio: meglio un limite onesto che una promessa. **Confermata dal proprietario il 6 novembre 2026: (a) e (d).** | C4-8a | Decisa. |
 | D13 | Evidenze nel repository | (a) come C3; (b) JSON finali sempre; catture solo finali, compresse, circa 10 MB per blocco, il resto in cartella temporanea; (c) nessuna cattura | **(b), confermata dal proprietario il 3 novembre 2026.** C3 traccia 223 MB in 1880 file: resta per sempre nella cronologia. Le catture servono al giudizio, non vanno tenute tutte. Il tetto è un'indicazione, non una soglia di verifica. | C4-1 (cosa si pubblica) | Decisa e applicata: C4-1 è committato (`a6f6b1a`) e C4-1b ha pubblicato 12 MB. |
 | D14 | Ordine e divisione dei blocchi | (a) la bozza: C4-2 prima di C4-3, nessun C4-1b, C4-5 e C4-8 interi; (b) [correzioni proposte](#blocchi) | **(b), confermata dal proprietario il 3 novembre 2026.** Il font condiziona la geometria; lo stato su iPhone è ignoto; sfondo e shell, accessibilità e prestazioni hanno rischi diversi. Costa due commit in più. | Ordine dopo C4-1 | Non si può partire dopo C4-1 senza. |
+| D16 | Quante verifiche Playwright per blocco | (a) la matrice per ogni blocco, in serie; (b) il compromesso: per blocco verifiche economiche e solo le Playwright legate a ciò che tocca, matrice completa alla fine di C4, prima di C5 | **(b), decisa dal proprietario il 10 novembre 2026: «mi piace il compromesso».** Le approvazioni dei blocchi restano soggette alla matrice finale; le correzioni si fanno allora. Con la stessa decisione C4-11 è stato sovrapposto a C4-1c, in deroga all'ordine in serie. | Tutti i blocchi dopo C4-11; [matrice completa di fine C4](#matrice-completa-di-fine-c4) | Decisa. |
 | D15 | Cosa fare della prova del 7 novembre 2026 | Proposta della regia: C4-7-ter per i suoni; due blocchi nuovi, C4-10 (guida visiva, con O29 e O30) e C4-11 (spazio e profondità, con O28), prima di C4-8a | **Approvata dal proprietario il 7 novembre 2026** («mi sembra un buon piano»). Guida solo visiva, senza testi né elenchi a schermo, su sua indicazione. | C4-7-ter, C4-10, C4-11 | Decisa. |
 
 ### Ordine di urgenza
@@ -648,6 +667,7 @@ non è provato.
 7. **D1, D2:** confermate il 6 novembre 2026, D1 (a) e D2 (b).
 8. **D12, D5:** confermate il 6 novembre 2026, D12 (a) e (d), D5 (b).
 9. **D15:** approvata il 7 novembre 2026.
+10. **D16:** decisa il 10 novembre 2026 (metodo di verifica).
 
 ## Cosa questo piano ha e non ha verificato
 
