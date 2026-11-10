@@ -1,6 +1,6 @@
 # Roadmap del prodotto — dopo C5 e il Set Base
 
-Scritta il 10 novembre 2026 (versione 3, stesso giorno: come si racconta la carriera, rami e achievement), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
+Scritta il 10 novembre 2026 (versione 4, stesso giorno: come si racconta la carriera, rami, achievement e tutorial), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
 **Solo roadmap:** come ogni roadmap (R00 del [regolamento](game-rules.md)), non introduce regole attive; le tappe che cambiano il
 gioco aggiornano prima il regolamento o il documento interessato. Lo stato del progetto resta nell'[indice](README.md#stato-corrente);
 qui ci sono l'ordine delle tappe, le decisioni prese e i punti critici. I piani di dettaglio, con blocchi e verifiche, si scrivono
@@ -223,8 +223,10 @@ documento della carriera elenca quelli concreti, con la stessa precedenza fra re
 regole con cui i bot della FFA scelgono i bersagli. Di norma non si accaniscono tutti sul giocatore né si ignorano fra loro; «ce l'hanno
 tutti con te» è una variante dichiarata.
 
-**CA-1 Tutorial:** tre o quattro partite guidate brevi con i due starter base, scriptate col runner con seme, che insegnano risorse,
-bound, last resort e risoluzione del round.
+**CA-1 Tutorial:** tre partite guidate, scriptate col runner con seme: duello con Mara contro Spazienzio, duello con Spazienzio contro
+Piera, FFA a tre col personaggio scelto in silenzio fra i due. Insegnano costi e precedenza, bound, V e annullamento, FFA e last resort, e
+sbloccano i due starter base. Scaletta in [carriere/tutorial.md](design/carriere/tutorial.md), dentro il
+[serbatoio delle carriere](design/carriere/README.md).
 
 **CA-2 Campagna principale, primo terzo:** fino allo sblocco del PvP, con i primi starter avanzati. Per gli amici invitati serve un modo
 per saltarla.
@@ -327,3 +329,5 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
 - **Versione 3 — 10 novembre 2026:** rami e rigiocabilità, quattro carriere, starter come ricompensa, achievement (D16–D19), buste speciali per Sergio e Duccio (D20); carriere
   secondarie di Sergio e Duccio come CA-5; formato delle carriere come grafo con controllo automatico; domande 8–10 della versione 2 decise
   e sostituite.
+- **Versione 4 — 10 novembre 2026:** CA-1 descritto con le tre partite della scaletta del tutorial; aperto il
+  [serbatoio delle carriere](design/carriere/README.md).
