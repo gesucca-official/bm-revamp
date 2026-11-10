@@ -143,3 +143,37 @@ Edit the first attached character concept sheet (image 1). Use the second attach
 
 Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions.
 ~~~
+
+## Terzo giro
+
+11 novembre 2026. Ritocchi dopo il secondo giro ([esiti](identikit.md#secondo-giro)), con le parole del proprietario: Spazienzio «mi
+piacevano di più i pantaloni della tuta con le strisce ai lati, il resto è perfetto»; Mara «la mano dove prima aveva il kebab sta lì a non
+fare niente, e la farei un po' meno emaciata, giusto un po'». Piera è approvata e non rientra.
+
+Stesse [istruzioni del secondo giro](#istruzioni) (modifica guidata, commit prima di generare, un solo nuovo tentativo), con nomi
+`<personaggio>-3-<n>`. *Scelte della regia, da confermare guardando il risultato:* la mano libera di Mara indica qualcosa che vede solo lei,
+come dice l'[identikit](identikit.md#mara-contromano); i capelli tornano neri, perché nel secondo giro sono diventati castani e il
+proprietario la vuole mora. **Se lo strumento blocca di nuovo Spazienzio** per il torso nudo, come nel secondo giro, non si insiste: si
+annota e le strisce si recuperano più avanti, nelle illustrazioni vere.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| Spazienzio, immagine 1 | `prove/spazienzio-2-1.png` | c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3 |
+| Spazienzio, immagine 2 | `prove/spazienzio-A-1.png` | c527513e1339737b69e15175866187bd39630d2299aff290e87bfef06302d834 |
+| Mara | `prove/mara-2-1.png` | 25c22009502959689609eed87e6fabcc7971f483a66662b587f7d0f6dd6f2e61 |
+
+### Spazienzio — strisce sui pantaloni
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for the trousers. Keep everything else in image 1 exactly the same: the same man, face, expression, beard, body, tattoos, socks and slippers, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this: his baggy oxblood tracksuit trousers get the plain off-white stripes running down the outer side of each leg, as in image 2. The stripes are plain, with no logo or recognizable sportswear branding.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Mara — la mano che indica, un po' meno emaciata
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same woman, longer messy hair with the badly self-cut uneven fringe, staring eyes and dark circles, over-ear headphones, teal reflective vest over the dark hoodie, cube-shaped teal insulated delivery backpack, dark cycling trousers and worn-out sneakers, the foil-covered bicycle helmet in her other hand, the layout of the full-body view and the close-up, art style and plain background. Change only three things, consistently in both views: first, her free hand, the one that is now doing nothing, points with one crooked finger at something only she can see, as if she has just spotted a conspiracy; second, she is slightly less emaciated: a little more flesh on her face and limbs, still thin, angular and tired, only a small change; third, her hair is jet black, not brown.
+
+Avoid: any other change to the image; making her healthy, glamorous or curvy; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~

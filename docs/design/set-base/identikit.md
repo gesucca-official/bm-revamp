@@ -27,7 +27,7 @@
 |---|---|---|---|---|---|
 | Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | Variante A scelta, ritocco in corso |
 | Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | Variante B scelta, ritocco in corso |
-| Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | Variante B scelta, ritocco in corso |
+| Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | **Approvata**: [riferimento](identikit/riferimenti/piera.png) |
 | Celestina | *Proposta:* curva e storta, tutta angoli | Bassa | *Proposta:* verde bottiglia malaticcio | *Da decidere* | Da scrivere |
 | Beppe | *Proposta:* robusto e piantato, tuta da lavoro | Media | *Proposta:* blu petrolio da tuta da officina | Attrezzi che spuntano dalle tasche | Da scrivere |
 | Sergio | Alto e secco, stona con gli altri ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | *Proposta:* grigio e beige da ufficio | *Da decidere* | Da scrivere |
@@ -40,8 +40,8 @@ Le proposte per gli ultimi quattro servono solo a non far collidere sagome e col
 **Idee del proprietario (10 novembre 2026):** calvo, enorme, perennemente a torso nudo, come lo immaginava già nel client debug.
 
 **Scelta del proprietario (11 novembre 2026):** variante A, «ma senza quelle cose che gli escono dal naso». Restano barba corta e ispida,
-pantaloni della tuta bordeaux sformati, calzini e ciabatte, tatuaggi venuti male (l'aquila che sembra un pollo). Ritocco nel
-[secondo giro](identikit-prompt.md#secondo-giro).
+pantaloni della tuta bordeaux sformati con le strisce ai lati, calzini e ciabatte, tatuaggi venuti male (l'aquila che sembra un
+pollo). Ritocchi nel [secondo](identikit-prompt.md#secondo-giro) e nel [terzo giro](identikit-prompt.md#terzo-giro).
 
 *Varianti della regia, da provare:*
 
@@ -60,8 +60,9 @@ nomi né loghi); il casco da bici ricoperto di stagnola, sempre in mano e mai in
 spente; mora, magra, dal volto scavato.
 
 **Scelta del proprietario (11 novembre 2026):** variante B, «ma con i capelli più lunghi e senza kebab in mano». Restano gilet
-catarifrangente verde acqua su felpa scura, zaino cubico, cuffie e casco di stagnola in mano. Ritocco nel
-[secondo giro](identikit-prompt.md#secondo-giro).
+catarifrangente verde acqua su felpa scura, zaino cubico, cuffie e casco di stagnola in mano. Dopo il secondo giro: la mano libera non
+deve restare lì a non fare niente, e un po' meno emaciata. Ritocchi nel [secondo](identikit-prompt.md#secondo-giro) e nel
+[terzo giro](identikit-prompt.md#terzo-giro).
 
 *Varianti della regia, da provare:*
 
@@ -79,7 +80,8 @@ catarifrangente verde acqua su felpa scura, zaino cubico, cuffie e casco di stag
 **Idee del proprietario (10 novembre 2026):** molto grassa, sempre tutta vestita di nero, capelli corvini e ricci raccolti male in uno chignon.
 
 **Scelta del proprietario (11 novembre 2026):** variante B, «ma con la faccia serena della variante A». Restano felpa nera enorme,
-leggings e ciabatte nere col pelo, chignon con la matita, bicchierino e Grappino; il viso diventa quello sereno e contento di A. Ritocco
+leggings e ciabatte nere col pelo, chignon con la matita, bicchierino e Grappino; il viso diventa quello sereno e contento di A. **Approvata
+l'11 novembre 2026** dopo il secondo giro: l'immagine di riferimento è [riferimenti/piera.png](identikit/riferimenti/piera.png). Ritocco
 nel [secondo giro](identikit-prompt.md#secondo-giro).
 
 *Varianti della regia, da provare:*
@@ -96,7 +98,7 @@ nel [secondo giro](identikit-prompt.md#secondo-giro).
 
 Il 10 novembre 2026 il proprietario ha chiesto alla regia «un prompt da dare a un'esecutore per fargli generare tutte le prove di immagine e salvarle dove devono stare, collegate agli identikit». Per queste prove vale l'opzione (b) di D11: generazione da una sessione con uno strumento integrato, invece della (a) usata per lo sfondo. Restano il prompt letterale committato prima di generare, il registro completo e il divieto di riferimenti esterni al progetto.
 
-Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, quale variante si tiene. Gli originali PNG sono ignorati da git; le anteprime WebP sono tracciate e collegate qui. Il [registro](identikit/registro.md) documenta ogni tentativo.
+Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, quale variante si tiene. Gli originali PNG delle prove sono ignorati da git; le anteprime WebP sono tracciate e collegate qui. **L'originale di un personaggio approvato si conserva in git** in `identikit/riferimenti/`, perché è l'allegato delle generazioni successive (carte, ritratti, espressioni) e deve esistere su entrambe le macchine (regia, 11 novembre 2026). Il [registro](identikit/registro.md) documenta ogni tentativo.
 
 | Personaggio | Variante | Anteprima | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|---|
@@ -111,6 +113,6 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 
 | Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| Spazienzio | [Anteprima](identikit/prove/spazienzio-2-1.webp) | [Scheda](identikit/registro.md#spazienzio-2-1) | |
-| Mara | [Anteprima](identikit/prove/mara-2-1.webp) | [Scheda](identikit/registro.md#mara-2-1) | |
-| Piera | [Anteprima](identikit/prove/piera-2-2.webp) | [Scheda](identikit/registro.md#piera-2-2) | |
+| Spazienzio | [Anteprima](identikit/prove/spazienzio-2-1.webp) | [Scheda](identikit/registro.md#spazienzio-2-1) | (11 novembre 2026) «mi piacevano di più i pantaloni della tuta con le strisce ai lati, il resto è perfetto». Unico risultato: l'esecutore l'aveva scartato proprio per le strisce sparite, e il secondo tentativo è stato [bloccato dallo strumento](identikit/registro.md#spazienzio-2-2). Terzo giro |
+| Mara | [Anteprima](identikit/prove/mara-2-1.webp) | [Scheda](identikit/registro.md#mara-2-1) | (11 novembre 2026) «la mano dove prima aveva il kebab sta lì a non fare niente, e la farei un po' meno emaciata, giusto un po'». Terzo giro |
+| Piera | [Anteprima](identikit/prove/piera-2-2.webp) | [Scheda](identikit/registro.md#piera-2-2) | **Approvata** (11 novembre 2026): «va bene così». Originale conservato come [riferimento](identikit/riferimenti/piera.png) |
