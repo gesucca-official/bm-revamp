@@ -406,8 +406,11 @@ che lo tengono, nessuna cambia la meccanica:
 3. **Il martire della causa.** Sanguinare è il suo comizio: ogni ferita è una medaglia da raccontare al bar. Spiega la last resort
    (colpisce facendosi male) e le carte pagate «col sangue».
 
-Si perde solo il «restituire con gli interessi» del pugile, che per il contrattacco si può riprendere con la seconda lettura. La decisione
-è del proprietario, prima di SB-18.
+Si perde solo il «restituire con gli interessi» del pugile, che per il contrattacco si può riprendere con la seconda lettura.
+
+**Decisione del proprietario, 10 novembre 2026** ([D47](../../set-base-plan.md#decisioni-del-proprietario)): «per duccio braccio teso
+va bene la raccomandazione della precedente regia». Il costo in salute resta; si preferiscono le letture 1 e 2; la 3 si usa con
+cautela, perché per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola.
 
 ---
 

@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Aspetta il proprietario:** le prove umane SB-12b e SB-16 (sue partite con la bozza, [avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)); la domanda sul costo in salute di Duccio, prima di SB-18 ([SB-17, SB-18](#sb-17-sb-18--personaggi-da-booster)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Aspetta il proprietario:** le prove umane SB-12b e SB-16 (sue partite con la bozza, [avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)), senza scheda di prova. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -631,7 +631,9 @@ nel [rapporto](reports/set-base/sb-12a-report.md).
 `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e `./client-web/run.ps1 -Task Serve` ([avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)).
 Da guardare, dal [rapporto SB-12a](reports/set-base/sb-12a-report.md#cosa-serve-a-sb-12b): parate e contromosse giocate da un umano (il
 matchup potrebbe spostarsi verso Spazienzio), durata percepita (11 turni di media), patte, Steal, i nomi dei due starter. La regia ha
-proposto una scheda di prova sul modello di quella di C3-7; non è stata scritta né decisa. La bozza giocata è quella di oggi, con le
+proposto una scheda di prova sul modello di quella di C3-7; il 10 novembre 2026 il proprietario ha deciso di non usarla, anche per
+SB-16: «la scheda di prova non importa, segnalerò le impressioni della prova umana così come mi vengono». La regia le registra nelle
+sezioni dei blocchi interessati. La bozza giocata è quella di oggi, con le
 correzioni di D41–D45 e i nomi del flavour; le prove umane occupano le porte 8080 e 4320 come le verifiche del client.
 
 **Perimetro.** Giro di bilanciamento fino ai criteri, poi partite del proprietario. Il risultato è la **base stabile** per i blocchi successivi.
@@ -747,11 +749,12 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Rischi.** Contromosse che rendono frustrante la partita (Sergio); partite infinite o, col prezzo in salute, suicidi facili (Duccio): durata sotto controllo.
 
-**Aperto al 10 novembre 2026, prima di SB-18: il costo in salute di Duccio.** Col concept nuovo il gioco di parole «incassare = prendere
-soldi» cade. La sessione di flavour propone di tenerlo, con tre letture ([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)):
-si fa male dandole; non arretra per principio; il martire della causa. La regia ha raccomandato di tenerlo e di preferire le prime
-due, con cautela sulla terza (per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola). Il
-proprietario non ha ancora deciso. I nomi di lavoro delle carte legati ai concept vecchi (`CES-*`, `ROC-*`) si rifanno in SB-17, SB-18 o SB-24.
+**Deciso il 10 novembre 2026 ([D47](#decisioni-del-proprietario)): il costo in salute di Duccio resta.** Col concept nuovo il gioco
+di parole «incassare = prendere soldi» cade. La sessione di flavour ha proposto di tenerlo, con tre letture
+([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)): si fa male dandole; non arretra per
+principio; il martire della causa. Il proprietario ha accolto la raccomandazione della regia: tenerlo, preferire le prime due letture,
+cautela sulla terza (per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola). SB-18 parte da
+qui; la meccanica non cambia. I nomi di lavoro delle carte legati ai concept vecchi (`CES-*`, `ROC-*`) si rifanno in SB-17, SB-18 o SB-24.
 
 ### SB-19 — Resto del pool e giro di blocco
 
@@ -946,6 +949,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D44 | Approvazione di SB-6b e SB-14 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-6b e SB-14 con le mie raccomandazioni?». **SB-6b approvato:** formato `sb-6b/1` con più set, rarità del vocabolario di R07, mazzi misti e mini-espansione di prova nei soli test (Q1–Q9 della fase A). **SB-14 approvato** con le raccomandazioni del rapporto: (1) correzioni di Pino salute 100, L iniziale 20, Estasi 10 + L, L'ultimo giro 12 + L, Testata 20; (2) il giro 3 invece del giro 2, perché un umano gioca Testata più dei bot; (3) nome dello starter «Chiude quando dico io»; (4) partite lunghe, specchio con una patta su tre e mazzo esaurito tenuti senza ridisegno fino a SB-16, come per il Tossico (D43); (5) Offro io e il Bancone tenuti per la prova umana; (6) le rarità della griglia nella bozza in un passaggio a sé, che porta la bozza a `sb-6b/1` senza cambiare le partite. Se la prova umana trova Pino forte, la prima leva è la L iniziale, poi Estasi. Precisa D38 e D43 |
 | D45 | Approvazione di SB-15 | 8 novembre 2026, con le parole del proprietario: «Approvo SB-15», alla domanda «Approvi SB-15 con le mie raccomandazioni?»; al passo 0 aveva deciso «Sì, tutto in SB-15» per la classe di «Lavoro fatto bene» nei sorgenti di test. Approvati: (1) le rarità della griglia nella bozza, formato `sb-6b/1`, partite invariate (chiude D44 punto 6); (2) le correzioni di Gigi salute 95, V iniziale 25, Chiave da tredici 12 CUT, «Lavoro fatto bene» a 5 V; (3) due giri invece di tre; (4) nome dello starter «Intervento sul posto»; (5) mazzo esaurito spesso e patte contro Pino tenuti fino a SB-16, come per Tossico e Pino; (6) Steal e Smontiamo tutto tenuti per la prova umana; (7) Mattone e SeagullFly ferme in mano da guardare alla prova umana: un cambio di composizione dello starter è un cambio della griglia e lo decide il proprietario. Se la prova umana trova Gigi forte, la prima leva è la V iniziale, poi la salute. Precisa D35, D38 e D44 |
 | D46 | Approvazione di SB-8 | 10 novembre 2026, con le parole del proprietario: «Approvo SB-8», alla domanda «Approvi SB-8?»; la fase A era approvata con «Approvo tutto» (le undici domande con le raccomandazioni, un blocco solo, solo server, prima di ogni fase B di C4 su questa macchina). Approvati: profilo di sviluppo `bozza` solo con `local` o `test` e mai con `heroku`, database separato, bozza letta da file; caricatore e carte Java di bozza in `server/src/main` dietro un'interfaccia di catalogo che lascia identico il percorso del gioco vivo; starter come mazzi pronti in open e riserva per quick, 1v1 e FFA; computer con uno stile euristico (predefinito `risorse`); nessun file del client. Per i giri di bilanciamento la regola «nessun diff in `server/src/main`» esclude ora `com.gsc.bm.sim` e `model/cards/base`. Sblocca le prove umane SB-12b e SB-16. Precisa D30 e D40 |
+| D47 | Costo in salute di Duccio (prima di SB-18) | 10 novembre 2026, con le parole del proprietario: «per duccio braccio teso va bene la raccomandazione della precedente regia». **Il costo in HEALTH resta** l'identità di Duccio Braccio Teso, come per Sant'Incasso (D27, D34 punto 5): meccanica invariata. Flavour: si preferiscono le letture «si fa male dandole» e «non arretra per principio»; «il martire della causa» si usa con cautela, perché per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola ([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)). Precisa D27 |
 
 ## Decisioni ancora aperte
 
