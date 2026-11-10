@@ -186,7 +186,7 @@ fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare
 4. Se sono cambiati strumenti di verifica, leggere la sezione per l'altra macchina del rapporto che li ha cambiati prima di usarli.
 5. Conflitti tipici al pull: le righe di stato dell'indice (C4 e Set Base). Si tengono entrambe: ogni filone aggiorna solo la propria.
 
-**Consegne aperte dal Set Base a C4** (8 novembre 2026). Chi chiude una consegna la toglie da qui nel commit che la chiude.
+**Consegne aperte dal Set Base a C4** (aggiornate al 10 novembre 2026, al passaggio del Set Base alla regia unica). Chi chiude una consegna la toglie da qui nel commit che la chiude.
 
 1. **Strumenti di verifica cambiati dal Set Base**, base di C4-8a: `verify-decks.mjs` e `verify-resolution.mjs` (mazzi sintetici entro
    le regole dei mazzi, SB-1); `verify-public.mjs` (pagina pubblica con regolamento 1.13 e Set Base 0.1), `check-rules.py`,
@@ -200,3 +200,9 @@ fa il push. Questa sezione è il punto unico per ciò che una macchina deve fare
    verifica del client toccati; il profilo normale (`local`, usato da tutte le verifiche) si comporta come prima. C'è un profilo nuovo,
    `bozza`, solo per lo sviluppo e le prove umane del Set Base: non serve a C4 e nessuna verifica di C4 lo attiva. `check-rules.py`
    cambia una riga (percorso di `Draft.java`, ora in `server/src/main`).
+4. **Prove umane del Set Base con la bozza** (SB-12b, SB-16): il server col profilo `bozza` e `client-web/run.ps1 -Task Serve` usano le
+   porte 8080 e 4320, come le verifiche del client. Sulla stessa macchina non vanno insieme a una verifica di C4.
+5. **`Verify` sulla bozza** (proposta di SB-8, non decisa): oggi lo strumento confronta le carte con l'allegato del catalogo vivo e si
+   ferma alla prima carta della bozza; SB-8 l'ha provato da una copia fuori dal repository
+   ([diff](reports/set-base/sb-8/verify-bozza.diff)). Un'opzione che scelga il riferimento è un cambiamento a `client-web/tools/verify.mjs`,
+   da valutare dopo C4 o dentro un blocco C4 che tocca lo strumento.

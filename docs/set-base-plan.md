@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46); prossime le prove umane SB-12b e SB-16. Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Aspetta il proprietario:** le prove umane SB-12b e SB-16 (sue partite con la bozza, [avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)); la domanda sul costo in salute di Duccio, prima di SB-18 ([SB-17, SB-18](#sb-17-sb-18--personaggi-da-booster)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -178,6 +178,13 @@ conservano di default, le meccaniche possono cambiare.
 - **Carte con nome provvisorio** fino al congelamento: molte cambieranno o spariranno. Se una battuta viene spontanea si
   tiene, altrimenti basta un nome descrittivo.
 - **Passata finale** (SB-24) a meccaniche congelate; se una carta non si lega al personaggio si può ritoccarne l'effetto.
+- **Serbatoio di flavour** (8 novembre 2026): i concept del proprietario per personaggi, carte e illustrazioni stanno in
+  [flavour.md](design/set-base/flavour.md), senza valore normativo, raccolti in una sessione a sé su sua scelta («sarà meglio se lo
+  facciamo in una sessione pulita»). Portati nei documenti vivi (schede, griglia, piano, indice) e nei nomi della bozza con «Sì,
+  affidalo»: Piera Ultimo Giro (Pino), Beppe Bulletta (Gigi), Celestina Bucatina (Tossico), Sergio Sommerso (Cesira), Duccio Braccio
+  Teso (Rocco); ID degli slot, rapporti e decisioni invariati. **Celestina non è ancora nella partita viva:** documento del set,
+  catalogo e test del client dicono «Tossico del Serraglio» fino a un cambio deliberato del documento del set (SB-24 o SB-28). Le idee
+  che toccano una meccanica (cane di Piera, oggetti di Mara) restano annotate in flavour.md per SB-24 o per le espansioni.
 
 ### Rarità
 
@@ -620,6 +627,13 @@ Tre giri coi bot (il massimo di Q5), circa 40 minuti di calcolo su un tetto di 2
 Restano raccomandazioni per i blocchi che le toccano: scala della salute degli altri personaggi (SB-13), patte e Steal (SB-12b). Dettagli
 nel [rapporto](reports/set-base/sb-12a-report.md).
 
+**SB-12b, stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario.** SB-8 è chiuso (D46): la bozza si gioca con
+`./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e `./client-web/run.ps1 -Task Serve` ([avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)).
+Da guardare, dal [rapporto SB-12a](reports/set-base/sb-12a-report.md#cosa-serve-a-sb-12b): parate e contromosse giocate da un umano (il
+matchup potrebbe spostarsi verso Spazienzio), durata percepita (11 turni di media), patte, Steal, i nomi dei due starter. La regia ha
+proposto una scheda di prova sul modello di quella di C3-7; non è stata scritta né decisa. La bozza giocata è quella di oggi, con le
+correzioni di D41–D45 e i nomi del flavour; le prove umane occupano le porte 8080 e 4320 come le verifiche del client.
+
 **Perimetro.** Giro di bilanciamento fino ai criteri, poi partite del proprietario. Il risultato è la **base stabile** per i blocchi successivi.
 
 **Punto di partenza da SB-11b** ([D38](#decisioni-del-proprietario)):
@@ -715,6 +729,14 @@ serve**; se serve, lo si dichiara e si rilancia la matrice.
 
 **Rischi.** Complessità poco leggibile sul tavolo: va annotata per SB-31.
 
+**Stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario** (richiede SB-8, chiuso con D46). Da guardare, dai rapporti
+[SB-13](reports/set-base/sb-13-report.md), [SB-14](reports/set-base/sb-14-report.md) e [SB-15](reports/set-base/sb-15-report.md): le carte
+che i bot giocano peggio (Celestina: Riflessi, Metabolismo, travaso e Mescolone che toglie l'immunità propria; Piera: «bevi poi
+spendi», Testata, Offro io, il Bancone; Beppe: Steal, Smontiamo tutto, oggetti sul tavolo per «Lavoro fatto bene», Mattone e SeagullFly
+ferme in mano); specchi lunghi e patte (Celestina 22%, Piera 35%, Beppe contro Piera 28%); mazzi esauriti spesso. Prime leve se un
+avanzato risulta forte: T iniziale di Celestina (D43); L iniziale di Piera, poi Estasi (D44); V iniziale di Beppe, poi la salute (D45).
+Un cambio di composizione di uno starter è un cambio della griglia e lo decide il proprietario.
+
 ### SB-17, SB-18 — Personaggi da booster
 
 Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
@@ -724,6 +746,12 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 **Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Duccio, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; pagare tutta la salute uccide e la mossa prosegue secondo R04; il bot non si suicida per caso.
 
 **Rischi.** Contromosse che rendono frustrante la partita (Sergio); partite infinite o, col prezzo in salute, suicidi facili (Duccio): durata sotto controllo.
+
+**Aperto al 10 novembre 2026, prima di SB-18: il costo in salute di Duccio.** Col concept nuovo il gioco di parole «incassare = prendere
+soldi» cade. La sessione di flavour propone di tenerlo, con tre letture ([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)):
+si fa male dandole; non arretra per principio; il martire della causa. La regia ha raccomandato di tenerlo e di preferire le prime
+due, con cautela sulla terza (per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola). Il
+proprietario non ha ancora deciso. I nomi di lavoro delle carte legati ai concept vecchi (`CES-*`, `ROC-*`) si rifanno in SB-17, SB-18 o SB-24.
 
 ### SB-19 — Resto del pool e giro di blocco
 
