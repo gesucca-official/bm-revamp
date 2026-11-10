@@ -62,7 +62,7 @@ arriva, arriva. Esiste già (`BigBadBruiser`) e il suo flavour resta. Urla: le s
   verbi in imperativi impossibili («UCCIDIAMOTI», «UCCIDIAMOVI ORDUNQUE», «ANNICHILIAMOVI»), con qualche parola aulica fuori posto e minacce
   di strada («LASCIATEVI CAROTARE»).
 - **Storia:** —
-- **Aspetto:** —
+- **Aspetto:** calvo, enorme, perennemente a torso nudo (proprietario, 10 novembre 2026); dettagli e varianti nell'[identikit](identikit.md#spazienzio-de-la-ucciso).
 - **Battute:** —
 - **Rapporti con gli altri:** odia il cane di Piera, che gli ha leccato la mano: lui ha sentito bagnato e d'istinto ha provato a berlo, e
   faceva schifo. Non sopporta come parla Piera e la interrompe sempre (proprietario, scena 2 del tutorial, 10 novembre 2026). Apprezza
@@ -83,7 +83,8 @@ va; leggera, due colpi seri e non si rialza.
 - **Storia:** fa le consegne in bici; nel [tutorial](../carriere/tutorial.md) è convinta di dover consegnare al giocatore un kebab tripla
   cipolla triplo piccante, lo punzecchia perché crede che non le voglia dare la mancia; vede Navaho dappertutto, ma del giocatore decide
   che è un Sioux, e i Sioux la mancia la lasciano sempre (idee del proprietario, 10 novembre 2026).
-- **Aspetto:** —
+- **Aspetto:** vestita di verde acqua da rider, casco coperto di stagnola sempre in mano e mai in testa, cuffie wireless sempre spente;
+  mora, magra, volto scavato (proprietario, 10 novembre 2026); dettagli nell'[identikit](identikit.md#mara-contromano).
 - **Battute:** —
 - **Rapporti con gli altri:** arriva in bici, e Beppe si spaccia anche per meccanico di biciclette: aggancio confermato dal proprietario, da sviluppare.
 
@@ -113,7 +114,8 @@ tutto, ma il vino gli scende nelle gambe.
   «Grappa della casa».) **Precisato il 10 novembre 2026:** parla tutta sgrammaticata e lentamente; mentre le sue parole compaiono sullo
   schermo si vedono gli altri personaggi della conversazione super annoiati o super impazienti, e alla fine viene sempre interrotta.
 - **Storia:** —
-- **Aspetto:** grassa.
+- **Aspetto:** grassa; **molto grassa, sempre vestita di nero, capelli corvini ricci raccolti male in uno chignon** (proprietario,
+  10 novembre 2026); dettagli nell'[identikit](identikit.md#piera-ultimo-giro).
 - **Il cane:** ha sempre un cane con sé, che disturba tutti quanti; nessuno ha il coraggio di dirglielo. Solo flavour; per eventuali
   carte col cane vedi [Idee che toccano una meccanica](#idee-che-toccano-una-meccanica). **Si chiama Grappino** (proposta della regia,
   adottata dal proprietario nel tutorial, 10 novembre 2026): quando Piera ordina «un altro... grappino», lui abbaia. Lecca le mani alla
@@ -183,7 +185,8 @@ SB-24 (nome) e per SB-25 (testo di colore, separato dal testo dell'effetto). Si 
 
 ## Concept visivi per SB-32
 
-Materiale per la guida di stile: tavolozza, luce, ambienti, inquadrature, riferimenti, cosa evitare; poi per personaggio. Le illustrazioni
+Materiale per la guida di stile: tavolozza, luce, ambienti, inquadrature, riferimenti, cosa evitare; poi per personaggio. **L'aspetto dei personaggi** è descritto
+una volta sola nell'[identikit](identikit.md), con le regole del cast e i prompt delle immagini di prova. Le illustrazioni
 si generano ex novo (O9), con prompt e provenienza registrati, a carte finalizzate.
 
 - **Stile generale:** —

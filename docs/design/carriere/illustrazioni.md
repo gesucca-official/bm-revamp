@@ -17,9 +17,9 @@
   inquadratura per tutti, rivolti verso il centro dello schermo.
 - **Sfondi per due orientamenti.** Un'immagine larga con la parte importante al centro, così regge il ritaglio orizzontale e quello verticale
   (VE). Gli elementi che cambiano fra una scena e l'altra (la bici, il disordine dopo la rissa) sono strati separati, non sfondi nuovi.
-- **Servono ancora le idee del proprietario sull'aspetto:** nel [serbatoio del flavour](../set-base/flavour.md#personaggi) c'è solo «grassa»
-  per Piera e la descrizione del cane; Mara e Spazienzio non hanno un aspetto scritto. Spazienzio ha un'illustrazione provvisoria di carta
-  (O9), che non è un riferimento approvato.
+- **L'aspetto dei personaggi** è nell'[identikit](../set-base/identikit.md), il riferimento comune a carte e ritratti, aperto il 10 novembre
+  2026 con Spazienzio, Mara e Piera: idee del proprietario, varianti della regia e prompt delle immagini di prova. Né l'illustrazione
+  provvisoria di carta di Spazienzio (O9) né la sua immagine del client debug sono riferimenti approvati.
 
 ## Tutorial
 
