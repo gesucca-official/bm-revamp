@@ -23,6 +23,10 @@ Playwright. Nessun push.
 
 ## Link: elenco iniziale e finale
 
+Aggiornamento: l'altra macchina era ferma, quindi i 4 rotti dei rapporti Set Base sono stati corretti in un secondo commit
+(`../README.md` → `../../README.md` in `sb-13`, `sb-14`, `sb-15`; `LavoroFattoBene.java` ora sta in `server/src/main`, spostato da
+SB-8). Ora **0 link rotti**. Il testo qui sotto è lo stato al primo commit.
+
 Lanciato prima di ogni modifica (206 file):
 
 ```

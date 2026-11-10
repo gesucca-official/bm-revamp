@@ -157,7 +157,7 @@ Eseguite nel checkout, una alla volta, dopo aver controllato che non girassero M
 
 ### La classe di «Lavoro fatto bene»
 
-[`base/gigi/LavoroFattoBene.java`](../../../server/src/test/java/com/gsc/bm/model/cards/base/gigi/LavoroFattoBene.java), nei sorgenti
+[`base/gigi/LavoroFattoBene.java`](../../../server/src/main/java/com/gsc/bm/model/cards/base/gigi/LavoroFattoBene.java), nei sorgenti
 di test, ha due parametri `@Tunable`: `base` (6) e `perItem` (4).
 - Nella logica speciale, dopo i costi e prima degli effetti (R04), conta gli oggetti dell'autore ancora sul campo, token compresi.
 - Poi infligge al bersaglio HIT pari a `base` più `perItem` per oggetto.
@@ -515,7 +515,7 @@ una correzione dei giri li fissa.
     Gigi è cara; furto e distruzione coi bot.
 - **[Scheda di Gigi](../../design/set-base/schede-personaggi.md#5-gigi-del-carro-attrezzi--avanzato).** Nota di SB-15 sui valori iniziali
   (HEALTH 95, V 25) e tabella dei valori iniziali aggiornata.
-- [Piano](../../set-base-plan.md) e [indice](../README.md): stato di SB-15.
+- [Piano](../../set-base-plan.md) e [indice](../../README.md): stato di SB-15.
 - Evidenze in [`sb-15/`](sb-15/): le matrici della parte 1 e dei due giri, le bozze dei giri, le [varianti](sb-15/varianti-diagnostiche.md)
   e i due listini.
 

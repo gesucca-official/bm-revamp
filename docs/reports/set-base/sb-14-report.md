@@ -418,7 +418,7 @@ meccanica legge i numeri dalla bozza; dove riguarda una correzione dei giri li f
     turno, i bot che non bevono.
 - **[Scheda di Pino](../../design/set-base/schede-personaggi.md#4-pino-lultimo-giro--avanzato).** Nota di SB-14 sui valori iniziali
   (HEALTH 100, L 20), tabella dei valori iniziali aggiornata, verifica di Q10 (A sotto zero, variante con immunità).
-- [Piano](../../set-base-plan.md) e [indice](../README.md): stato di SB-14.
+- [Piano](../../set-base-plan.md) e [indice](../../README.md): stato di SB-14.
 
 ## Cosa non è provato
 

@@ -377,7 +377,7 @@ per tornare al verde: ogni numero nuovo viene dal contenuto aggiunto alla bozza.
   - la sezione [Correzioni di SB-13](../../design/set-base/griglia.md#correzioni-di-sb-13), con giro e motivo.
 - **[Scheda del Tossico](../../design/set-base/schede-personaggi.md#3-tossico-del-serraglio--avanzato).** Nota di SB-13 sui valori iniziali
   (HEALTH 80, T 20), tabella dei valori iniziali aggiornata.
-- [Piano](../../set-base-plan.md) e [indice](../README.md): stato di SB-13.
+- [Piano](../../set-base-plan.md) e [indice](../../README.md): stato di SB-13.
 
 ## Cosa non è provato
 
