@@ -1,6 +1,6 @@
 # Roadmap del prodotto — dopo C5 e il Set Base
 
-Scritta il 10 novembre 2026 (versione 1), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
+Scritta il 10 novembre 2026 (versione 3, stesso giorno: come si racconta la carriera, rami e achievement), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
 **Solo roadmap:** come ogni roadmap (R00 del [regolamento](game-rules.md)), non introduce regole attive; le tappe che cambiano il
 gioco aggiornano prima il regolamento o il documento interessato. Lo stato del progetto resta nell'[indice](README.md#stato-corrente);
 qui ci sono l'ordine delle tappe, le decisioni prese e i punti critici. I piani di dettaglio, con blocchi e verifiche, si scrivono
@@ -35,7 +35,7 @@ un picco più alto, ma non può essere una comune migliore allo stesso costo.
 | [App](#ap--app-e-client-desktop) | AP-1…AP-3 | DE-1 | Il client web nei contenitori: prova con soglie, pacchetti per gli amici, store solo con l'apertura |
 | [Verticale](#ve--tavolo-in-verticale) | VE-1…VE-3 | ST-1 | Duello e FFA col telefono in verticale |
 | [Economia](#ec--economia) | EC-0…EC-2 | C5, SB-28 | Due valute, collezione posseduta, jolly, buste e negozio con le sole valute di gioco |
-| [Carriera](#ca--carriera-single-player) | CA-0…CA-4 | SB-30, EC-0 | Tutorial, campagna principale, completamento al 100%, endgame infinito, più carriere |
+| [Carriera](#ca--carriera-single-player) | CA-0…CA-5 | SB-30, EC-0 | Tutorial, campagna principale a rami con achievement, completamento al 100%, endgame infinito, carriere di Sergio e Duccio |
 | [PvP](#pv--pvp-e-classifica) | PV-1, PV-2 | EC-1, CA-2 | Mazzi costruiti contro persone, poi classifica del solo duello |
 | [Apertura al pubblico](#pu--apertura-al-pubblico) | PU | decisione del proprietario | Registrazione aperta, parere legale e fiscale, acquisti con soldi veri, cosmetici, store |
 
@@ -44,7 +44,7 @@ un picco più alto, ma non può essere una comune migliore allo stesso costo.
 1. **Subito dopo C5:** ST-1 e DE-1.
 2. **Poi:** AP-1, DE-2 e DE-3, VE-1 → VE-2 → VE-3; in parallelo, come soli documenti, EC-0 e CA-0.
 3. **A Set Base trasferito nella partita viva (SB-28) e bot in partita (SB-30):** EC-1, CA-1, CA-2, EC-2, PV-1.
-4. **Poi:** CA-3, CA-4, AP-2 e le carriere successive.
+4. **Poi:** CA-3, CA-4, CA-5, AP-2 e le carriere successive.
 5. **Quando ci sono abbastanza giocatori:** PV-2.
 6. **Su decisione del proprietario:** PU, con AP-3.
 
@@ -167,13 +167,58 @@ un'attività con aspetti fiscali e legali (sotto, [PU](#pu--apertura-al-pubblico
   al PvP ([D5](#decisioni-del-proprietario)).
 - **Avvincente da sola,** perché chi non vuole il PvP possa giocare solo quella; completarla al 100% richiede grind o acquisti ([D6](#decisioni-del-proprietario)).
 - **Endgame infinito** per guadagnare valuta.
-- **Più storie e più carriere** nel tempo ([D7](#decisioni-del-proprietario)).
+- **Più storie e più carriere** nel tempo ([D7](#decisioni-del-proprietario)): per il Set Base tutorial lineare, principale a rami e due
+  secondarie, di Sergio e di Duccio ([D16, D17](#decisioni-del-proprietario)).
 - **La FFA ha molto spazio nella carriera** ([D4](#decisioni-del-proprietario)), anche con varianti narrative come «ce l'hanno tutti con te» ([D11](#decisioni-del-proprietario)).
+- **Una storia comica fa da filo conduttore,** con liti fra i personaggi, non una lista di partite ([D13](#decisioni-del-proprietario)).
+- **Il giocatore è sé stesso e non parla mai** ([D14](#decisioni-del-proprietario)): a ogni incontro un frequentatore del bar prende le sue
+  parti, ed è il personaggio che gioca, con un mazzo salvato di quel personaggio.
+- **Racconto in stile visual novel,** con più testo ma senza esagerare, e dialoghi sempre saltabili, soprattutto quando si ritenta
+  ([D15](#decisioni-del-proprietario)).
+
+**Come si racconta: conseguenze di D13–D15** (ragionamento della regia, 10 novembre 2026).
+
+- **Il personaggio lo sceglie la storia, il mazzo il giocatore.** Ogni incontro fissa l'alleato e l'avversario; il giocatore sceglie uno dei
+  suoi mazzi salvati per quell'alleato, o lo starter se non ne ha. È la modalità open contro computer, con personaggi e avversario decisi
+  dalla carriera.
+- **Gli sblocchi diventano racconto.** La prima volta che un personaggio prende le parti del giocatore può consegnargli il suo starter: lo
+  sblocco degli avanzati lungo il percorso ([D5](#decisioni-del-proprietario)) diventa una scena. Resta possibile comprarli prima con la valuta.
+- **Alleati e avversari si scambiano i ruoli.** Chi ti difende in un capitolo può attaccare briga nel successivo: è il motore delle liti fra
+  personaggi. Lo stesso personaggio dalle due parti del tavolo va evitato o giustificato con una battuta.
+- **Le scelte restano mute.** Un protagonista muto non ha risposte da scegliere: la scelta è *con chi* andare, quando due personaggi si
+  offrono, ed è quella che ramifica il percorso ([D16](#decisioni-del-proprietario)). Niente dialoghi a rami.
+- **Coerente con il 100% ([D6](#decisioni-del-proprietario)).** Il percorso principale si completa con lo starter di ogni alleato; le sfide del
+  100% chiedono mazzi migliori per ciascun personaggio, quindi collezione, tempo o valuta forte.
+- **La scena di dialogo è un pezzo nuovo del client:** ritratti con espressioni, nome di chi parla, avanzamento, salto delle scene già viste e
+  di tutte al ritentare, magari la cronologia delle battute. Va nella shell React/HTML, non nel tavolo Pixi, che costa meno anche nelle
+  verifiche, e regge bene anche in verticale (VE). I testi stanno nei dati della carriera, non nel codice, anche in vista di traduzioni.
+- **Costo:** i ritratti con più espressioni per personaggio sono illustrazioni in più rispetto a quelle delle carte (SB-32); la scrittura è
+  tempo del proprietario, con stesure e varianti della regia segnate come tali.
+
+**Rami, rigiocabilità e achievement: conseguenze di D16–D19** (ragionamento della regia, 10 novembre 2026).
+
+- **Rami che si riuniscono.** La mappa è a rombi: i rami si dividono e si ritrovano nei capitoli chiave. Le scelte lasciano *segni* (chi ti è
+  amico, chi ce l'ha con te) che cambiano battute e incontri successivi senza duplicare la storia; i contenuti crescono in modo lineare, non
+  esponenziale. Alcune scelte chiudono altri rami: per vederli tutti si rigioca la carriera.
+- **Sblocchi garantiti su ogni percorso.** Lo sblocco del PvP e i tre starter avanzati stanno su tutti i percorsi, nei capitoli dove i rami si
+  riuniscono o con incontri garantiti. Solo su certi percorsi: boss segreti, superboss, ricompense extra.
+- **Sconfitte.** Di norma si ritenta lo stesso incontro, coi dialoghi saltabili; ogni tanto una sconfitta apre un altro ramo invece di fermare.
+- **Rigiocare senza rompere l'economia.** Ricompense piene solo alla prima vittoria di ogni incontro, ridotte dopo. Un nuovo giro azzera solo
+  la storia: collezione, sblocchi e rami già esplorati restano sull'account.
+- **Achievement come guida alla scoperta.** Dicono quali rami, boss segreti e obiettivi mancano, con indizi su come arrivarci, scritti nel
+  tono del gioco e progressivi (prima vago, poi più chiaro). Si calcolano dagli stessi dati della carriera (nodi, segni, condizioni) e dagli
+  esiti delle partite in archivio, lato server. Ricompense una tantum, quindi niente farming. Gli achievement nascosti restano «???» finché
+  non arriva un indizio. Possono coprire anche collezione, FFA e, più avanti, PvP; un giorno si possono rispecchiare in quelli degli store.
+- **Ordine di grandezza di partenza,** da correggere scrivendo le storie: principale con 15–20 incontri per giro e 30–40 nodi in tutto;
+  secondarie con 8–12 nodi.
 
 **CA-0 Motore e formato delle carriere.** Ogni carriera è un pacchetto di dati con un documento e una versione, come
-[`docs/sets/base.md`](sets/base.md) per le carte. Contiene capitoli e incontri: avversario con nome, personaggio e mazzo (i frequentatori del
-bar), duello o FFA, modificatori, condizioni di sblocco, ricompense, testi e dialoghi. Una nuova storia è contenuto, non codice, e può
-uscire con un'espansione. I **modificatori di incontro** sono deroghe alle regole: il regolamento li definisce come sistema, e il
+[`docs/sets/base.md`](sets/base.md) per le carte. È un grafo: incontri come nodi (alleato e avversario, personaggi e mazzi, duello o FFA,
+modificatori, testi e dialoghi, ricompense), scelte come archi, segni lasciati dalle scelte e condizioni sui nodi (rami presi, segni,
+obiettivi secondari come «vinci con Mara in meno di N round»), più gli achievement con i loro indizi. Niente linguaggio di scripting: bastano
+segni e condizioni. Un controllo automatico, come `check-rules.py` per le carte, verifica che ogni nodo sia raggiungibile, che non ci siano
+vicoli ciechi, che PvP e starter avanzati stiano su ogni percorso e che ogni boss segreto e ogni achievement abbiano almeno un percorso; il
+banco dei bot misura la difficoltà dei singoli incontri. Una nuova storia è contenuto, non codice, e può uscire con un'espansione. I **modificatori di incontro** sono deroghe alle regole: il regolamento li definisce come sistema, e il
 documento della carriera elenca quelli concreti, con la stessa precedenza fra regolamento e set di R00. Fra i modificatori ci sono le
 regole con cui i bot della FFA scelgono i bersagli. Di norma non si accaniscono tutti sul giocatore né si ignorano fra loro; «ce l'hanno
 tutti con te» è una variante dichiarata.
@@ -193,6 +238,12 @@ non un inganno.
 
 **CA-4 Endgame infinito:** corsa a tappe con modificatori e una sconfitta che la chiude; sfide giornaliere e settimanali; scala contro bot
 sempre più forti. Ricompense con i tetti di EC-0.
+
+**CA-5 Carriere secondarie di Sergio e Duccio** ([D17](#decisioni-del-proprietario)). Nella principale i due personaggi da booster si fanno
+«annusare», come avversari o comparse, ma non si giocano. Chi trova il personaggio in una busta sblocca la sua mini-carriera: è anche
+l'incentivo a comprare buste. Dipende da EC-2 (buste) e da CA-0. Per trovarli in un tempo ragionevole, buste speciali con un personaggio
+non ancora posseduto come rara, offerte finché ne restano ([D20](#decisioni-del-proprietario)). Da decidere in EC-0: che cosa si ottiene col personaggio per avere subito un mazzo conforme a R02 (basic e bound, mazzo iniziale della
+mini-carriera).
 
 **Punti critici.** Tutta la carriera dipende dalla qualità dei bot, quindi da SB-30 e probabilmente da più livelli di difficoltà. Il costo vero
 è il contenuto: scrittura, illustrazioni degli avversari, bilanciamento degli incontri. La CLI permette di giocare in automatico, quindi le
@@ -246,6 +297,14 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
 | D10 | Due valute, una scarsa guadagnabile giocando e una forte comprabile o vincibile in modi più ostici, con nomi a tema (esempi: tappi di bottiglia, denti rotti). |
 | D11 | Varianti narrative nella FFA della carriera, come «ce l'hanno tutti con te»; per il 100% un superboss finale che può anche barare. |
 | D12 | Nella FFA in verticale gli avversari scorrono. |
+| D13 | Le carriere hanno una storia che fa da filo conduttore, con liti fra personaggi in chiave comica come tutto il tono del gioco: tutorial, carriera principale del Set Base e una carriera secondaria sbloccabile con un obiettivo secondario della principale. Le storie le inventa il proprietario («sono un vulcano di idee bislacche»). |
+| D14 | Il giocatore è sé stesso, non uno dei personaggi, e non parla mai direttamente. La gente del bar prende di volta in volta le sue parti, e chi lo fa è il personaggio che gioca, con la scelta di un suo mazzo salvato per quel personaggio. Esempio del proprietario: qualcuno attacca briga col giocatore, Spazienzio dice «oh, non preoccuparti, so esattamente cosa fare con quelli come lui», poi scelta del mazzo e duello. |
+| D15 | Più testo, senza esagerare coi dialoghi, in uno stile da visual novel; dialoghi sempre saltabili, importante quando si ritenta. |
+| D16 | Il giocatore sceglie con chi andare e il percorso si ramifica, come una mappa a rami: alcune scelte ne precludono altre, per esplorare tutti i rami si rigioca la carriera, e boss segreti e superboss si raggiungono prendendo determinati percorsi. Sblocco del PvP e starter avanzati su ogni percorso. Ogni tanto una sconfitta apre un altro ramo. Ricompense piene alla prima vittoria di un incontro e ridotte dopo; un nuovo giro azzera solo la storia. |
+| D17 | Carriere previste: tutorial (lineare), principale del Set Base e due secondarie, una di Sergio e una di Duccio. Nella principale si fanno «annusare»; la loro mini-carriera si sblocca trovandoli nelle buste, come incentivo a comprarle. Supera, per le secondarie, lo sblocco con un obiettivo secondario della principale detto in D13. |
+| D18 | Lo starter avanzato di un personaggio arriva come ricompensa la prima volta che prende le parti del giocatore; Sergio e Duccio, solo da booster, nella principale non si giocano. |
+| D19 | Un sistema di achievement fa sapere al giocatore quali rami della carriera gli mancano da scoprire e gli dà indizi su come arrivarci. |
+| D20 | Direzione per trovare Sergio e Duccio in un tempo ragionevole (esempio del proprietario, da dettagliare in EC-0): buste speciali in cui la rara è sicuramente un personaggio non ancora in collezione, che non vengono più offerte quando non restano personaggi di quel set da trovare. |
 
 ## Domande aperte
 
@@ -257,7 +316,14 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
 5. **Superboss:** bara apertamente, come raccomanda la regia, o in modo nascosto?
 6. **Soglia di giocatori** per aprire la classifica (PV-2).
 7. **Hosting di DE-1,** scelto all'avvio dopo aver riverificato le offerte gratuite.
+8. **Sergio e Duccio nelle buste:** la direzione per la garanzia è data ([D20](#decisioni-del-proprietario)); resta da decidere in EC-0
+   cosa si riceve col personaggio per giocare subito la sua mini-carriera (CA-5), e il prezzo di quelle buste in ciascuna valuta.
+9. **Achievement:** quali ricompense (valuta una tantum, cosmetici come titoli o dorsi) e se gli indizi sono tutti gratuiti.
 
 ## Revisioni
 
 - **Versione 1 — 10 novembre 2026:** prima stesura dalle idee del proprietario; filoni ST, DE, AP, VE, EC, CA, PV, PU; decisioni D1–D12.
+- **Versione 2 — 10 novembre 2026:** come si racconta la carriera (D13–D15), con le conseguenze ragionate e le domande 8–10.
+- **Versione 3 — 10 novembre 2026:** rami e rigiocabilità, quattro carriere, starter come ricompensa, achievement (D16–D19), buste speciali per Sergio e Duccio (D20); carriere
+  secondarie di Sergio e Duccio come CA-5; formato delle carriere come grafo con controllo automatico; domande 8–10 della versione 2 decise
+  e sostituite.
