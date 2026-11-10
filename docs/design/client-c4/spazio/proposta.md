@@ -1,7 +1,7 @@
 # C4-11 — Spazio e profondità: Fase A (proposta)
 
 9 novembre 2026. Base `f706a4e` su main («C4: record the owner's approval of C4-10 and C4-7»), checkout pulito alla partenza, dopo il
-pull dal remoto. **Fase A pronta, in attesa della scelta del proprietario. Fase B non avviata.** Nessun codice di prodotto cambiato: i
+pull dal remoto. **Fase A pronta; il proprietario ha scelto il 10 novembre 2026 ([scelta](#scelta-del-proprietario)). Fase B in corso.** Nessun codice di prodotto cambiato: i
 prototipi sono una patch fuori dal prodotto ([`prototipo.patch`](prototipo.patch), vedi [come provarli](#come-provare-i-prototipi-dal-vivo)).
 
 Fonti: [piano, C4-11](../../../client-c4-plan.md#c4-11--spazio-e-profondità), regole di non regressione 1–9, 16, 17, 18, riga C4-11 della
@@ -25,6 +25,42 @@ jingle d'esito troncato da un ridimensionamento.
 | Jingle | **J2**: l'interruzione ferma solo i colpi del round; esito e suoni dell'interfaccia proseguono | J1 non basterebbe: l'esito parte col pannello, cioè proprio mentre gira la sequenza finale |
 
 Le [domande numerate](#domande-al-proprietario) sono in fondo.
+
+## Scelta del proprietario
+
+10 novembre 2026, dopo la prova dal vivo dei prototipi su PC e iPhone. Parole del proprietario:
+
+> confermo a1+a2, ma teniamoci come jolly a3 nel caso in seguito a prove future più estese su mobile si rivelasse necessaria
+>
+> confermo b1, ma carte troppo grandi! va bene ingrandirle, ma così è leggermente troppo, diciamo di farle crescere un 10% in meno
+>
+> non mi piacciono né c1 né c2. la cosa che mi piace meno è che l'ombra va in tutte e 4 le direzioni ed è enorme. le carte senza
+> queste due modifiche hanno già una sorta di ombra, al massimo migliorerei quella rendendola LEGGERMENTE più profonda e sfumata,
+> senza sovrapporcene un'altra versione come ha fatto c1
+>
+> d non fa molto, ma non rompe niente quindi teniamolo. per iphone prima o poi faremo un'app vera e propria, se su safari si vede
+> male, pazienza
+>
+> va bene correggere le frecce con v1 e va bene la correzione j2
+
+Risposte alle domande rimaste: 1920×1080 diventa misura ufficiale («Sì, ufficiale»); con a2, segno vinaccia sul conteggio quando
+nella pila c'è una carta annullata non in cima («Sì, segno sul conteggio»). Sul metodo, il proprietario ha scelto di sovrapporre la
+Fase B a C4-1c (strumenti di verifica in parallelo, su un'altra macchina): il codice ora (B1), le verifiche di partita reale e la
+chiusura dopo, con gli strumenti nuovi (B2), in deroga al «tutto in serie» di C4.
+
+**Quindi, per la Fase B:**
+
+1. **a1 + a2** come proposti, più il **segno vinaccia sul conteggio** della pila quando sotto la cima c'è una carta annullata.
+   **a3 non si implementa:** resta una riserva per prove future più estese su mobile.
+2. **b1 attenuato:** a 1920×1080 misure circa il 10% più piccole del prototipo (mano circa 260 px invece di 289, fattore circa
+   ×1,215 invece di ×1,35); crescita continua, identica a oggi a 800 px di altezza e sotto, mai sotto le misure di oggi. b2 no.
+3. **Profondità:** né c1 né c2; nessuna seconda ombra, nessun alone nelle quattro direzioni. Solo l'ombra che le carte hanno già
+   (spostata di 4×6 px, opaca al 60%) diventa **leggermente** più profonda e sfumata, con la stessa direzione e lo stesso disegno.
+4. **d (O28) tenuto:** `viewport-fit=cover` in `index.html`, tavolo nella larghezza sicura, sfondo a tutta larghezza, comandi
+   dentro l'area sicura. Su Safari un difetto residuo si accetta (app futura).
+5. **v1:** frecce corrette in `aimArrows`, `VerifyAim` invariato, test unitario su tutti gli slot con la carta sollevata e a riposo.
+6. **J2:** l'interruzione ferma e consuma solo i colpi del round; esito e suoni dell'interfaccia proseguono.
+7. **1920×1080 misura ufficiale** degli strumenti di verifica (in B2, dopo C4-1c).
 
 ## Diagnosi sul tavolo vero
 
