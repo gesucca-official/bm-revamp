@@ -313,6 +313,26 @@ Raccomandazioni in grassetto. Una domanda senza risposta non viene eseguita in F
 10. **Freccia di mira sopra il titolo del bersaglio a 844×390 (P11) e testo da 7–9 px sul compatto: eccezione dichiarata?** **Sì**, dichiarata: sono un effetto di D6 (844×390 come minimo) e di a2/a3 di C4-11; cambiarli significa toccare geometria (regole 17 e 18).
 11. **VoiceOver:** hai dieci minuti per la [scheda](#scheda-di-prova-con-voiceover-dieci-minuti)? **Se sì, prima della Fase B**, così le correzioni vedono i risultati; **altrimenti D12 (d): dichiarato non provato**. (E O21: **chiudere il punto di ExtremelyViolentBlow**, lasciare POISON dichiarato.)
 
+## Scelta del proprietario
+
+10 novembre 2026, alla regia, parole del proprietario: **«Tutte raccomandate»**. Valgono quindi le raccomandazioni in grassetto delle
+undici domande:
+
+1. Anello di focus a due toni (1a), come nella patch.
+2. 2a, 2b e 2c sì (✓ a fuoco dopo il bersaglio, mano a fuoco dopo il turno o l'annullamento, mano prima nell'ordine e frecce lungo
+   la mano), solo se l'ultimo input era la tastiera; 2d no (resta il tasto I).
+3. 3b: contorno di 1 px su cuore, alcol e tossicità.
+4. 3a: i tre token della shell (segnaposto, bordo dei controlli, testo vuoto).
+5. 5a: movimento ridotto com'è, con il tipo di danno nel report.
+6. D5 (b) nel formato «Danno nominale: colpo 15.» e, per le carte con x, «Danno nominale: colpo 20+ (più metà della V residua di chi
+   gioca).»; l'atteso del test del report cambia per D5 (b).
+7. 4a: il testo ampliato di sistema si dichiara come limite (lo zoom di pagina funziona).
+8. Frecce sulle radio e sulle schede dell'hub (P8).
+9. 7a: etichette del lettore con il numero di carte del round e del mazzo.
+10. P11 e testo da 7–9 px sul compatto: eccezione dichiarata.
+11. VoiceOver: D12 (d), dichiarato non provato, salvo una prova del proprietario con la scheda; O21: chiuso il punto di
+    ExtremelyViolentBlow, POISON resta dichiarato.
+
 ## Relazione della Fase A
 
 **Cosa ho fatto.** Preliminare: albero pulito, `git fetch`, `main` indietro di due commit (C4-1c Fase A, rapporto O20): pull con fast-forward; poiché sono cambiati `server/` (e un test) ho rifatto il jar (`BUILD SUCCESS`), `check-rules.py` verde, porte 8080 e 4320 libere (c'era un processo `node.exe` preesistente che non ascoltava su quelle porte, non toccato). Lette: orchestrazione (insidie, allineamento, consegne), piano C4 (regole 1–18, D5, D12, D16, C4-8a, matrice, C4-10, C4-11), roadmap (O21), rapporto (C4-10 e C4-11), `game-rules.md` (partita da tastiera), `CONTRIBUTING.md`, README del client, `table.tsx`, `ui.tsx`, parti di `scene.ts` e `readability.ts`, `style.css` (token, focus, animazioni), `hub.tsx`, `collection.tsx`, `resolution.ts` (`roundReport`).

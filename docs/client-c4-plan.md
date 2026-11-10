@@ -6,7 +6,7 @@
 
 **Tutte le decisioni sono prese: D3, D4, D6, D8, D9, D11, D13 e D14 dal proprietario il 3 novembre 2026; D1, D2, D5 e D12 il 6 novembre 2026; D15 il 7 novembre 2026; D16 il 10 novembre 2026; D7 e D10 non servono più dopo la revisione di D6.** Le decisioni già prese altrove sono citate con la loro fonte e non si riaprono qui.
 
-**Stato al 10 novembre 2026.** **C4-11 (spazio e profondità) fatto, in attesa del giudizio del proprietario** ([rapporto](reports/client-c4-report.md#c4-11--fase-b)); dal 10 novembre 2026 vale la [decisione di metodo D16](#decisioni-del-proprietario) (verifiche mirate per blocco, matrice completa a fine C4). C4-5b è **approvato dal proprietario il 6 novembre 2026** («giudizio su c4-5b positivo»; [rapporto](reports/client-c4-report.md#c4-5b)). C4-6* è **saltato** per D1 (a). **C4-7 e C4-10 approvati dal proprietario il 9 novembre 2026** ([prova](reports/client-c4-report.md#c4-10--prova-del-proprietario-del-9-novembre-2026)); poi **C4-11** ([proposta e scelta](design/client-c4/spazio/proposta.md), [Fase A](reports/client-c4-report.md#c4-11--fase-a), [Fase B](reports/client-c4-report.md#c4-11--fase-b)). Dal 10 novembre 2026 [C4-1c](#c4-1c--verifiche-più-veloci) (verifiche più veloci): **fatto, in attesa del giudizio del proprietario; scelta «Sì, tutte» del 10 novembre 2026** ([proposta](design/client-c4/verifiche/proposta.md)). C4-7: scelte della Fase A approvate, HIT/CUT per colpo, POISON muto, esito col pannello e attacco send di 5 ms. C4-7-bis (esito distinto, Web Audio) e le fasi di C4-7 restano come registrate. Dalla stessa prova, con [D15](#decisioni-del-proprietario), due blocchi nuovi prima di C4-8a: **C4-10** (guida visiva) e **C4-11** (spazio e profondità). Il regolamento è passato alla 1.11 (R01, risorse a 0, dal filone Set Base): le viste mostrano cinque risorse per posto dal primo turno, e le verifiche grafiche di C4 fino a C4-5b sono anteriori a questo cambiamento.
+**Stato al 10 novembre 2026.** Approvati dal proprietario tutti i blocchi fino a C4-10 (C4-6* saltato). **Fatti, in attesa del giudizio del proprietario:** [C4-11](#c4-11--spazio-e-profondità) (spazio e profondità) e [C4-1c](#c4-1c--verifiche-più-veloci) (verifiche in parallelo: giro completo 25/25 verde in 41:43 con `-Parallel 4`). [C4-8a](#c4-8a--accessibilità-e-residui-o21): **Fase A fatta, scelte del proprietario registrate; prossimo: Fase B.** Poi C4-8b, C4-9, la [matrice completa di fine C4](#matrice-completa-di-fine-c4) e C5. Metodo di verifica: [D16](#decisioni-del-proprietario). Lo stato di ogni blocco è nella sua riga della [tabella dei blocchi](#blocchi) e nella sua sezione; i rapporti sono elencati lì. Il regolamento è alla 1.11 o successiva (cinque risorse per posto): le verifiche grafiche fino a C4-5b sono anteriori.
 
 **Stato di C4-1, C4-1b, C4-3, C4-2, C4-4 e C4-5a.** C4-5a è **approvato dal proprietario il 5 novembre 2026; O2 chiusa**. Le osservazioni O26 e O27 della prova sono assegnate a C4-5a-bis ([stato del blocco](reports/client-c4-report.md#c4-5a-bis): O26 e O27 approvate dal proprietario il 5 novembre 2026 dopo una partita vera; scelta A pieno/0,75/sopra, 236 unità e giri ufficiali verdi sul jar pre-SB-3/SB-4, contesto corrente verde, nuovo giro grafico sul jar corrente non svolto con accettazione esplicita del proprietario) ([rapporto](reports/client-c4-report.md#c4-5a--integrazione-dello-sfondo-del-tavolo-o2)). C4-4 (cornici per tipologia e segno del ruolo: filetto medio) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-4--cornici-per-tipologia-e-segno-del-ruolo-o8-con-o14)). C4-2 (dimensioni, bersagli da 44 px, conferma sulla carta, tutela di 750×292) è fatto e **approvato dal proprietario** il 4 novembre 2026 ([rapporto](reports/client-c4-report.md#c4-2--finitura-delle-dimensioni-e-tutela-di-750292)). C4-3 (simboli, font, inventario) è fatto il 3 novembre 2026 e **approvato dal proprietario il 4 novembre 2026** sul campione ([rapporto](reports/client-c4-report.md#c4-3--simboli-font-e-inventario-degli-asset)). C4-1 (strumenti, `VerifyAll`) è committato in `a6f6b1a`. C4-1b (misura di partenza) è eseguita il
 3 novembre 2026 sulla stessa build: giro ufficiale 23 su 23 verde, base a 750×292 registrata; numeri nel
@@ -88,8 +88,8 @@ Valgono per **ogni** blocco, come in C3:
 
 - **O19 (sequenza velocizzata) resta a C5:** si decide dopo la prova umana del ritmo. C4 non cambia le durate della sequenza
   né il tetto di 20 s.
-- **O20 (FFA a timeout con vincitore computer) resta al proprietario**, da valutare a parte. Non riguarda il client e nessun
-  blocco di C4 ne dipende.
+- **O20 (FFA a timeout con vincitore computer) chiusa il 10 novembre 2026** fuori da C4: solo il motivo dell'esito, corretto nel server
+  ([rapporto](reports/o20-report.md)). Nessun blocco di C4 ne dipende; lo scenario `ffaForfeit` rientra nella matrice di fine C4.
 - **A2 (clock più lungo):** nessun segnale dai dati di C3, non proposto.
 - **O15, O16 (deckbuilder)** nell'attività successiva dedicata; **O17, O18** dal regolamento. C4-5b rende l'editor coerente, non
   lo riprogetta.
@@ -161,8 +161,8 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-7-ter | Suoni dei colpi per tipo di danno, esito col pannello, click della conferma | C4-7-bis | Opus, alto | Tempi della sequenza e audio su iOS, già corretti due volte |
 | C4-10 | Guida visiva | C4-7-ter, D15 | Opus, alto | Giudizio visivo e animazioni dentro la sequenza: regole 1–9 a rischio |
 | C4-1c | Verifiche più veloci (parallelo, divisione per scenari): **fatto, in attesa del giudizio del proprietario; scelta «Sì, tutte» del 10 novembre 2026** | C4-1 | Opus, alto | Strumenti condivisi con il Set Base; un controllo indebolito o un tempo falsato dal carico passerebbero inosservati |
-| C4-11 | Spazio e profondità | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
-| C4-8a | Accessibilità e residui O21 | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
+| C4-11 | Spazio e profondità: **fatto, in attesa del giudizio del proprietario** | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
+| C4-8a | Accessibilità e residui O21: **Fase A fatta, scelte registrate; prossimo: Fase B** | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
 | C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
 | C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
 
@@ -540,6 +540,11 @@ Scelta del proprietario del 10 novembre 2026: «Sì, tutte». Fase B autorizzata
 **Verifiche.** `Verify`, `VerifyFfa`, `VerifyAim`, `VerifyLayout`, `VerifyResolution` ridotta; 750×292 secondo la regola 18. **Con D16 (10 novembre 2026)** eseguite solo quelle legate a ciò che il blocco tocca: `Verify` e `VerifyLayout` a 1366×768, 844×390 e 1920×1080, `VerifyLayout` e `Verify` a 750×292, `VerifyAim` a 1366×768 e 844×390, `VerifyOutcomeAudio` per J2; `VerifyFfa` e `VerifyResolution` rimandati alla [matrice completa di fine C4](#matrice-completa-di-fine-c4) ([rapporto](reports/client-c4-report.md#c4-11--fase-b)).
 
 ### C4-8a — Accessibilità e residui O21
+
+**Stato: Fase A fatta; scelte del proprietario del 10 novembre 2026 registrate («Tutte raccomandate»); prossimo: Fase B**
+([proposta e scelta](design/client-c4/accessibilita/proposta.md#scelta-del-proprietario)). Dalla Fase A: la partita si completa già
+da sola tastiera; i difetti sono di visibilità e continuità del focus e di contrasto di alcuni simboli e controlli della shell.
+ExtremelyViolentBlow osservata con la V reale in partita (O21: resta solo POISON, che nessuna carta usa).
 
 **Perimetro.**
 
