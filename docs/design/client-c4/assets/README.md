@@ -95,4 +95,10 @@ carte di O9) sono generate con lo strumento di immagini di ChatGPT (fonte: il pr
   chiede di dichiararlo in modo chiaro. La pagina pubblica oggi non lo dice (`client-web/src/public.tsx`): da aggiungere in **C4-9**,
   insieme a una frase sui diritti coerente con il punto sulla proprietà.
 
-Le stringhe `license` di `inventory.json` per le immagini dicono ancora «non verificati»: si allineano in C4-9 con la frase della pagina pubblica.
+Le stringhe `license` di `inventory.json` per le immagini dicono ancora «non verificati»: si allineano con la frase della pagina pubblica.
+
+**Riconciliazione di C4-9 (11 novembre 2026).** I 13 file di `client-web/public/` (6 immagini e dati in `art/`, 7 suoni in `audio/`) sono
+tutti in `inventory.json` con SHA-256 uguale; il `dist` della build `433dccadf326d201` ha 28 file, gli stessi 13 più codice, stile e
+pagina, nessun font. Nessun asset senza registro. Restano **aperte, in attesa del proprietario** ([domande di C4-9](../../../reports/client-c4/c4-9.md#domande-al-proprietario)):
+la conferma dei termini d'uso dello strumento di immagini (non verificabili dal repository), la dichiarazione dell'IA nella pagina pubblica
+e l'allineamento delle quattro stringhe `license`.

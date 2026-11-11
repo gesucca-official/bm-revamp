@@ -164,7 +164,7 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-11 | Spazio e profondità: **fatto, approvato dal proprietario l'11 novembre 2026** | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
 | C4-8a | Accessibilità e residui O21: **Fase B fatta, approvata dal proprietario l'11 novembre 2026** ([rapporto](reports/client-c4/c4-8a.md#fase-b)) | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
 | C4-8b | Prestazioni e budget: **fatto, approvato dal proprietario l'11 novembre 2026 («Sì, chiudi»)** (STOP del punto 3, strumento di misura nuovo, ricerca dei primi piani più veloce a risultato identico; picchi FFA al livello di C4-1b, input FFA un poco sopra; [rapporto](reports/client-c4/c4-8b.md)) | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
-| C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
+| C4-9 | Consolidamento e giudizio del proprietario: **Fase A fatta, STOP per il giudizio del proprietario (11 novembre 2026)** (matrice completa 25/25 verde sulla build di `61ff59f`, 750×292 con i soli rossi R1 e R4 della base; [rapporto](reports/client-c4/c4-9.md), [scheda di prova](reports/client-c4/c4-9/prova-scheda.md)) | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
 
 La colonna «Modello, sforzo» è indicativa: per i blocchi ancora da eseguire la proposta accompagna il prompt e l'esecutore lo sceglie il proprietario ([metodo](orchestrazione-lavoro.md#proposta-di-modello-e-sforzo)).
 
@@ -632,6 +632,8 @@ lasciare debiti. Osservazioni di ritmo: vanno a C5.
 non è provato.
 
 **Verifiche.** Tutte.
+
+**Stato (11 novembre 2026): Fase A fatta, STOP per il giudizio del proprietario.** Nessun codice cambiato. Sulla stessa build (commit `091b1f1`, ultimo di codice `61ff59f`, `dist` `433dccadf326d201`, jar rifatto dal sorgente attuale, che chiude il residuo di C4-5a-bis): `VerifyAll -Parallel 4 -Split 'resolution,ffa'` **25/25 verde**, nessun controllo perso rispetto a C4-1c Fase B; regola 18 a 750×292 con `Verify` e `VerifyAim` verdi, `VerifyLayout` rosso noto R1, `VerifyFfa` rosso come alla base di C4-1b (registrato come R4); test del client 328/328, `build.ps1 -Task Test` verde, `check-rules.py` e `verify-match-manifests.py` PASS, contesto Spring 775 test e 0 falliti; `Verify` con audio negato 3/3 senza avvii udibili né origini esterne. Regole 1–18 dichiarate una per una, righe P, inventario riconciliato, budget contro D9 rivista (texture 82,6% del tetto) nel [rapporto](reports/client-c4/c4-9.md). Rimandati: il punto 2 di C4-8b (finché il client non sarà servito fuori dal locale); a C5 la prova umana C, O19 e le osservazioni di ritmo. Aperte per il proprietario: i termini d'uso dello strumento di immagini, la dichiarazione dell'IA nella pagina pubblica, la [prova della scheda](reports/client-c4/c4-9/prova-scheda.md). **C4 non è chiusa** finché il proprietario non giudica.
 
 ### Matrice completa di fine C4
 
