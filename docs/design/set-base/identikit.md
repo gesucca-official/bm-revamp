@@ -25,8 +25,8 @@
 
 | Personaggio | Sagoma | Altezza | Colore proprio | Oggetto iconico | Stato |
 |---|---|---|---|---|---|
-| Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | Variante A scelta, ritocco in corso |
-| Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | Variante B scelta, ritocco in corso |
+| Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | **Approvato**: [riferimento](identikit/riferimenti/spazienzio.png), più le strisce ai pantaloni |
+| Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | **Approvata**: [riferimento](identikit/riferimenti/mara.png) |
 | Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | **Approvata**: [riferimento](identikit/riferimenti/piera.png) |
 | Celestina | *Proposta:* curva e storta, tutta angoli | Bassa | *Proposta:* verde bottiglia malaticcio | *Da decidere* | Da scrivere |
 | Beppe | *Proposta:* robusto e piantato, tuta da lavoro | Media | *Proposta:* blu petrolio da tuta da officina | Attrezzi che spuntano dalle tasche | Da scrivere |
@@ -42,6 +42,12 @@ Le proposte per gli ultimi quattro servono solo a non far collidere sagome e col
 **Scelta del proprietario (11 novembre 2026):** variante A, «ma senza quelle cose che gli escono dal naso». Restano barba corta e ispida,
 pantaloni della tuta bordeaux sformati con le strisce ai lati, calzini e ciabatte, tatuaggi venuti male (l'aquila che sembra un
 pollo). Ritocchi nel [secondo](identikit-prompt.md#secondo-giro) e nel [terzo giro](identikit-prompt.md#terzo-giro).
+
+**Approvato l'11 novembre 2026** con l'immagine del secondo giro, conservata come [riferimenti/spazienzio.png](identikit/riferimenti/spazienzio.png).
+In quell'immagine le strisce ai lati dei pantaloni sono sparite: il proprietario le vuole, e si aggiungono nelle illustrazioni vere di
+carte e ritratti, perché nel terzo giro lo strumento ha bloccato la modifica. **Attenzione per le generazioni future:** il filtro dello
+strumento integrato ha bloccato due volte Spazienzio a torso nudo (categoria dichiarata «sexual»); il blocco può ripetersi, e l'opzione
+(a) di D11, con lo strumento del proprietario, resta la via di riserva.
 
 *Varianti della regia, da provare:*
 
@@ -63,6 +69,9 @@ spente; mora, magra, dal volto scavato.
 catarifrangente verde acqua su felpa scura, zaino cubico, cuffie e casco di stagnola in mano. Dopo il secondo giro: la mano libera non
 deve restare lì a non fare niente, e un po' meno emaciata. Ritocchi nel [secondo](identikit-prompt.md#secondo-giro) e nel
 [terzo giro](identikit-prompt.md#terzo-giro).
+
+**Approvata l'11 novembre 2026** con l'immagine del terzo giro, conservata come [riferimenti/mara.png](identikit/riferimenti/mara.png):
+capelli neri lunghi oltre le spalle, la mano libera che indica un complotto che vede solo lei, un po' meno emaciata.
 
 *Varianti della regia, da provare:*
 
@@ -121,5 +130,5 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 
 | Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| Spazienzio | Nessuna: generazione bloccata | [Scheda](identikit/registro.md#spazienzio-3-1) | |
-| Mara | [Anteprima](identikit/prove/mara-3-1.webp) | [Scheda](identikit/registro.md#mara-3-1) | |
+| Spazienzio | Nessuna: generazione bloccata | [Scheda](identikit/registro.md#spazienzio-3-1) | (11 novembre 2026) Si approva l'immagine del secondo giro così com'è; le strisce ai lati dei pantaloni si recuperano nelle illustrazioni vere |
+| Mara | [Anteprima](identikit/prove/mara-3-1.webp) | [Scheda](identikit/registro.md#mara-3-1) | **Approvata** (11 novembre 2026). Originale conservato come [riferimento](identikit/riferimenti/mara.png) |
