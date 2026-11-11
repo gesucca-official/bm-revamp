@@ -120,3 +120,10 @@ Avoid: any text, letters, numbers, logos, brands, signatures or watermarks; a bo
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| cornice | [cornice.webp](asset/bacheca/cornice.webp) | [cornice-1](asset/bacheca/registro.md#cornice-1) | |
+| tonda-rossa | [puntine/tonda-rossa.webp](asset/bacheca/puntine/tonda-rossa.webp) | [tonda-rossa-1](asset/bacheca/registro.md#tonda-rossa-1) | |
+| cilindro | [puntine/cilindro.webp](asset/bacheca/puntine/cilindro.webp) | [cilindro-1](asset/bacheca/registro.md#cilindro-1) | |
+| ottone | [puntine/ottone.webp](asset/bacheca/puntine/ottone.webp) | [ottone-1](asset/bacheca/registro.md#ottone-1) | |
+| spillo | [puntine/spillo.webp](asset/bacheca/puntine/spillo.webp) | [spillo-1](asset/bacheca/registro.md#spillo-1) | |
+| chiodino | [puntine/chiodino.webp](asset/bacheca/puntine/chiodino.webp) | [chiodino-1](asset/bacheca/registro.md#chiodino-1) | |
+| ombrello | [puntine/ombrello.webp](asset/bacheca/puntine/ombrello.webp) | [ombrello-1](asset/bacheca/registro.md#ombrello-1) | |
