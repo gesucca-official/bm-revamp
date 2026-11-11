@@ -252,7 +252,7 @@ errori sono le informazioni che il testo oggi non dice:
 | L'epilogo non ha uscita, quindi non si raggiunge nessuna fine: vicoli ciechi a catena e epilogo irraggiungibile | 19–172 |
 
 Più gli avvisi: nessun `[Carriera: …]` e due paragrafi liberi nell'epilogo («da scrivere»). Con le **19 integrazioni** di
-[`tests/integrazioni-tutorial.ts`](../../../prototipi/carriere/tests/integrazioni-tutorial.ts), applicate in memoria, il risultato è 6
+`tests/integrazioni-tutorial.ts` (file dell'abbozzo, superato dopo la risposta P1: le integrazioni entrano nel testo del tutorial), applicate in memoria, il risultato è 6
 nodi, 44 battute, 6 di ritento, 3 partite, 2 scelte, 1 achievement, **0 errori** e i 2 avvisi dei paragrafi «da scrivere». Le integrazioni:
 
 | Cosa | Quante | Esempio |
@@ -468,5 +468,15 @@ integrazioni senza errori, con i due avvisi attesi dell'epilogo «da scrivere».
 | T8 | Sì, non pertinenti: il blocco non tocca client-web né il server. |
 | T9 | Fuori dal prototipo e fuori dal formato 1; i segni fra carriere si fissano in CA-0. |
 
-**Domande P1–P8:** portate al proprietario. Finché non risponde, la Fase B usa le proposte come valori iniziali e **non modifica
-tutorial-dialoghi.md** (P1): le integrazioni restano nel loro file e si applicano in memoria.
+**Domande P1–P8:** portate al proprietario, che ha risposto lo stesso giorno:
+
+| Domanda | Risposta del proprietario |
+|---|---|
+| P1 | «sì»: le integrazioni entrano in tutorial-dialoghi.md e il file delle integrazioni si cancella |
+| P2 | «alternandole»: a ogni ritento una sola battuta, a turno |
+| P3 | «parte da sola»: la sconfitta che apre un ramo porta direttamente all'altra strada, senza «Ritenta» |
+| P4 | «sulla scena»: la scelta con chi andare si fa nella scena, con i ritratti di chi si offre |
+| P5 | «sì»: «???» per i nodi mai visti, segreti invisibili finché non li trovi |
+| P6 | «vanno bene i tuoi per il prototipo» |
+| P7 | Il proprietario ha chiesto una spiegazione; in attesa |
+| P8 | «serviranno sicuramente espressioni esasperate»: per chi ascolta Piera servono ritratti apposta; nel prototipo restano «neutra» e «quasi calmo» finché non ci sono |

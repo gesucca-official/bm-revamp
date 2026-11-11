@@ -45,7 +45,8 @@
 | Grappino, il cane di Piera | seduto, ringhia, russa | Meticcio piccolo, pelo corto, bianco a macchie marroni, malandato e mal tenuto ([flavour](../set-base/flavour.md#concept-visivi-per-sb-32)) |
 | La combriccola | davanti alla porta, in fuga | Gruppo generico di amici del giocatore come **figure in ombra**, la regola per chi non è un personaggio del gioco: torna allo sblocco del PvP |
 
-Per la [regia di Piera](tutorial-dialoghi.md#scena-2--il-cane-di-piera) servono anche le espressioni di chi ascolta: annoiata e impaziente
-per Mara e Spazienzio. «Neutra» e «quasi calmo» possono bastare, oppure si aggiungono: da decidere con la scena di dialogo vera.
+Per la [regia di Piera](tutorial-dialoghi.md#scena-2--il-cane-di-piera) servono anche le espressioni di chi ascolta. **Deciso dal proprietario
+l'11 novembre 2026:** «serviranno sicuramente espressioni esasperate». **Da generare:** Mara esasperata e Spazienzio esasperato, con lo stesso
+metodo del giro A (modifica dei ritratti approvati); fino ad allora il prototipo usa «neutra» e «quasi calmo».
 
 **Totale del tutorial:** 3 sfondi (S1, S2, S3) con 2 varianti (insegna spenta, disordine) e lo sprite della bici; 15 ritratti, più 3 pose del cane e 2 della combriccola; eventuali 2 espressioni d'ascolto.
