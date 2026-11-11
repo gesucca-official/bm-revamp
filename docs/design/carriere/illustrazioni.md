@@ -4,7 +4,8 @@
 > **Aggiornato l'11 novembre 2026:** con l'aspetto approvato nell'[identikit](../set-base/identikit.md), il proprietario ha dato il via
 > al materiale vero del tutorial, prima della scena di dialogo nel client. Si parte dalla [specifica degli asset](specifica-asset.md) e da
 > una [fetta verticale](prompt-fetta.md) sulla scena 1, chiusa l'11 novembre 2026 con sfondo S2 e quattro ritratti approvati; il resto si
-> genera con la stessa specifica, in tre giri ([prompt](prompt-tutorial-resto.md)). La guida di stile delle carte
+> genera con la stessa specifica, in tre giri ([prompt](prompt-tutorial-resto.md)). **Materiale visivo del tutorial completo e approvato
+> l'11 novembre 2026.** La guida di stile delle carte
 > ([SB-32](../../set-base-plan.md#sb-32--illustrazioni-del-set)) dovrà partire dagli stessi riferimenti.
 
 ## Come si faranno

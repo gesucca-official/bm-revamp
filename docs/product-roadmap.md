@@ -235,7 +235,9 @@ tutti con te» è una variante dichiarata.
 Piera, FFA a tre col personaggio scelto in silenzio fra i due. Insegnano costi e precedenza, bound, V e annullamento, FFA e last resort, e
 sbloccano i due starter base; il tutorial si chiude con la risposta del giocatore ai messaggi della combriccola, che lo completa o lo fa
 fallire. Scaletta e dialoghi in [carriere/tutorial.md](design/carriere/tutorial.md), dentro il
-[serbatoio delle carriere](design/carriere/README.md).
+[serbatoio delle carriere](design/carriere/README.md). **Già pronto, in anticipo sulla tappa:** il materiale visivo del tutorial (sfondi,
+ritratti, sprite), approvato l'11 novembre 2026 secondo la [specifica degli asset](design/carriere/specifica-asset.md); resta da costruire
+la scena di dialogo nel client, con CA-0.
 
 **CA-2 Campagna principale, primo terzo:** fino allo sblocco del PvP, con i primi starter avanzati. Per gli amici invitati serve un modo
 per saltarla.

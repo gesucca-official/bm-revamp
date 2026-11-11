@@ -53,7 +53,10 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
 ## Figure in ombra
 
 Chi non è un personaggio del gioco (la combriccola) è una sagoma scura uniforme, senza volto né dettagli interni, su fondo trasparente o
-magenta. Per un gruppo la tela è quella degli sfondi, 1536×1024, così il client lo posa davanti allo sfondo alla stessa scala.
+magenta. Per un gruppo la tela è quella degli sfondi, 1536×1024. **Scala:** le sagome della combriccola generate nel giro C sono più
+grandi del previsto (più alte della porta di S1, larghe metà della tela); il client le posa a circa due terzi della dimensione della
+tela, con i piedi sul marciapiede, invece di rigenerarle (decisione del proprietario, 11 novembre 2026). Lo stesso vale per ogni sprite: la
+scala finale la decide il client.
 
 ## File e registro
 

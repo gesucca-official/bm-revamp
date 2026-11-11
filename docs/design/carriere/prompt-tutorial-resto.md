@@ -1,5 +1,9 @@
 # Tutorial — prompt del resto del materiale
 
+> **Chiuso l'11 novembre 2026:** i tre giri sono approvati dal proprietario e il materiale visivo del tutorial è completo (3 sfondi con
+> 2 varianti, 15 ritratti, 3 pose di Grappino, la bici di Mara, 2 sagome della combriccola). Le imperfezioni accettate sono annotate
+> negli esiti di ciascun giro.
+
 11 novembre 2026. Tutto il materiale del [tutorial](tutorial.md) che manca dopo la [fetta verticale](prompt-fetta.md), diviso in tre giri
 perché il giudizio non diventi un muro di immagini: **A** le espressioni rimaste di Mara e Spazienzio, **B** Piera e Grappino, **C** sfondi,
 varianti, la bici e la combriccola. Si segue la [specifica degli asset](specifica-asset.md), confermata dalla fetta. Processo come per la
@@ -304,10 +308,10 @@ Avoid: faces, eyes, features, inner lines, colours, gradients or highlights insi
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| s1-esterno | [WebP](asset/tutorial/sfondi/s1-esterno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-1) |  |
-| s1-esterno-insegna-spenta | [WebP](asset/tutorial/sfondi/s1-esterno-insegna-spenta.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-insegna-spenta-1) |  |
-| s2-interno-disordine | [WebP](asset/tutorial/sfondi/s2-interno-disordine.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-disordine-1) |  |
-| s3-dimmi-di-si | [WebP](asset/tutorial/sfondi/s3-dimmi-di-si.webp) | [Scheda](asset/tutorial/registro.md#s3-dimmi-di-si-1) |  |
-| bici-mara | [WebP](asset/tutorial/sprite/bici-mara.webp) | [Scheda](asset/tutorial/registro.md#bici-mara-1) |  |
-| combriccola-davanti-alla-porta | [WebP](asset/tutorial/sprite/combriccola-davanti-alla-porta.webp) (non conforme: inquadratura) | [Scheda](asset/tutorial/registro.md#combriccola-davanti-alla-porta-2) |  |
-| combriccola-in-fuga | [WebP](asset/tutorial/sprite/combriccola-in-fuga.webp) (non conforme: inquadratura) | [Scheda](asset/tutorial/registro.md#combriccola-in-fuga-2) |  |
+| s1-esterno | [WebP](asset/tutorial/sfondi/s1-esterno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-1) | **Approvato** (11 novembre 2026): «approvo» |
+| s1-esterno-insegna-spenta | [WebP](asset/tutorial/sfondi/s1-esterno-insegna-spenta.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-insegna-spenta-1) | **Approvato** (11 novembre 2026): «approvo» |
+| s2-interno-disordine | [WebP](asset/tutorial/sfondi/s2-interno-disordine.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-disordine-1) | **Approvato** (11 novembre 2026): «approvo» |
+| s3-dimmi-di-si | [WebP](asset/tutorial/sfondi/s3-dimmi-di-si.webp) | [Scheda](asset/tutorial/registro.md#s3-dimmi-di-si-1) | **Approvato** (11 novembre 2026): «approvo» |
+| bici-mara | [WebP](asset/tutorial/sprite/bici-mara.webp) | [Scheda](asset/tutorial/registro.md#bici-mara-1) | **Approvato** (11 novembre 2026): «approvo» |
+| combriccola-davanti-alla-porta | [WebP](asset/tutorial/sprite/combriccola-davanti-alla-porta.webp) (non conforme: inquadratura) | [Scheda](asset/tutorial/registro.md#combriccola-davanti-alla-porta-2) | **Approvato** (11 novembre 2026): «approvo», «ma sono d'accordo con quello che hai notato»: il gruppo è troppo grande rispetto alla porta; non si rigenera, il client lo posa più piccolo ([specifica](specifica-asset.md#figure-in-ombra)) |
+| combriccola-in-fuga | [WebP](asset/tutorial/sprite/combriccola-in-fuga.webp) (non conforme: inquadratura) | [Scheda](asset/tutorial/registro.md#combriccola-in-fuga-2) | **Approvato** (11 novembre 2026): «approvo», «ma sono d'accordo con quello che hai notato»: il gruppo è troppo grande rispetto alla porta; non si rigenera, il client lo posa più piccolo ([specifica](specifica-asset.md#figure-in-ombra)) |
