@@ -4,14 +4,15 @@ import type {Carriera} from '../formato.ts';
 import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
 import {cast, nomeDi, nomeSblocco, ritratto, sfondo, sprite} from './dati.ts';
 import {useTesto} from './testo.ts';
+import {corpo, type Carattere} from './font.ts';
 
 type Azione = (f: (c: Carriera, s: Stato) => {stato: Stato; eventi: Evento[]}) => void;
 type Props = {c: Carriera; s: Stato; nome: string; eventi: {id: number; e: Evento}[]; azione: Azione;
-  onMappa: () => void; onStato: () => void; onElenco: () => void; onNuovoGiro: () => void; onAchievement: () => void};
+  carattere: Carattere; onCarattere: () => void; onMappa: () => void; onStato: () => void; onElenco: () => void; onNuovoGiro: () => void; onAchievement: () => void};
 
 const LARGHEZZA_SFONDO = 1536, ALTEZZA_SFONDO = 1024;
 
-export function Gioco({c, s, nome, eventi, azione, onMappa, onStato, onElenco, onNuovoGiro, onAchievement}: Props) {
+export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, onMappa, onStato, onElenco, onNuovoGiro, onAchievement}: Props) {
   const v = vista(c, s);
   const g = s.giro;
   const scena = useRef<HTMLDivElement>(null);
@@ -70,8 +71,8 @@ export function Gioco({c, s, nome, eventi, azione, onMappa, onStato, onElenco, o
   const leggibile = v.tipo === 'battuta' || v.tipo === 'ritento' || v.tipo === 'narrazione' || v.tipo === 'messaggio';
   const tocca = () => {
     if (!leggibile) return;
-    if (v.tipo !== 'messaggio' && !t.completo) t.completa();
-    else azione(avanti);
+    if (v.tipo !== 'messaggio' && t.tocca()) return;
+    azione(avanti);
   };
 
   // Chi si vede: chi parla, o chi ascolta durante uno stacco. Nessun ritratto per le figure in ombra e il fuori campo.
@@ -79,6 +80,15 @@ export function Gioco({c, s, nome, eventi, azione, onMappa, onStato, onElenco, o
   const volto = inQuadro ? ritratto(inQuadro.chi, inQuadro.espressione) : null;
   const n = g.nodo ? nodo(c, g.nodo) : null;
   const messaggioPrima = n ? [...n.passi.slice(0, g.passo)].reverse().find(p => p.tipo === 'messaggio') : undefined;
+
+  // Finestra di dialogo (Fase C): 20% dell'altezza in orizzontale, 22% in verticale, al più tre righe; il corpo si adatta alla battuta.
+  const verticale = misura.h > misura.w;
+  const areaL = verticale ? misura.w - 32 : misura.w * 0.84;
+  const areaA = misura.h * (verticale ? 0.22 : 0.2) - (verticale ? 30 : 34);
+  // Le frasi di Piera (con gli stacchi) sono gag lunghe apposta: corpo più grande del minimo, e la finestra mostra le ultime righe.
+  const px = corpo(testoPieno, areaL, areaA, carattere, battuta?.stacchi ? (verticale ? 18 : 24) : 15, verticale ? 26 : 36);
+  const finestra = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => { const el = finestra.current; if (el) el.scrollTop = el.scrollHeight; });
 
   return (
     <div className={`gioco${scossa ? ' scossa' : ''}`} ref={scena} onClick={tocca} data-testid="scena">
@@ -92,18 +102,20 @@ export function Gioco({c, s, nome, eventi, azione, onMappa, onStato, onElenco, o
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
       {volto && <img className={`ritratto${t.ascolta ? ' ascolta' : ''}`} src={volto} alt={nomeDi(inQuadro!.chi)} />}
 
+      <span className="dove">{c.titolo}{n ? ` · ${n.titolo || n.etichetta}` : ''}</span>
+      {/* Azioni: in alto a destra in orizzontale, in basso e grandi in verticale (Fase C, impressione 6). */}
       <div className="barra" onClick={e => e.stopPropagation()}>
-        <span className="dove">{c.titolo}{n ? ` · ${n.titolo || n.etichetta}` : ''}</span>
-        {leggibile && <button data-testid="salta" onClick={() => azione(salta)}>{v.tipo === 'ritento' ? 'Salta il ritento' : 'Salta'}</button>}
-        <button data-testid="apri-mappa" onClick={onMappa}>Mappa</button>
+        <button className="carattere" data-testid="carattere" title={`Carattere: ${carattere.nome}`} onClick={onCarattere}>Aa <small>{carattere.nome}</small></button>
         <button onClick={onStato}>Stato</button>
+        <button data-testid="apri-mappa" onClick={onMappa}>Mappa</button>
+        {leggibile && <button className="primario" data-testid="salta" onClick={() => azione(salta)}>{v.tipo === 'ritento' ? 'Salta il ritento' : 'Salta'}</button>}
       </div>
 
       {(battuta || v.tipo === 'narrazione') && (
         <div className="dialogo" data-testid="dialogo">
           {battuta && <div className="nome">{battuta.nome ?? nomeDi(battuta.chi)}{battuta.fuoriCampo ? ' (fuori campo)' : ''}</div>}
-          <div className={v.tipo === 'narrazione' ? 'testo narrazione' : 'testo'}>{t.visibile}</div>
-          {t.completo && <div className="avanti">▼</div>}
+          <div ref={finestra} className={v.tipo === 'narrazione' ? 'testo narrazione' : 'testo'} style={{fontSize: px}}>{t.visibile}</div>
+          {(t.completo || t.inStacco) && <div className={`avanti${t.inStacco ? ' stacco' : ''}`}>▼</div>}
         </div>
       )}
 

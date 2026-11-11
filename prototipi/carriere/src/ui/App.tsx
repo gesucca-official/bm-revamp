@@ -4,6 +4,8 @@ import type {Carriera} from '../formato.ts';
 import {nuovoAccount, nuovoGiro, vista, type Evento, type Stato} from '../motore.ts';
 import {carriere, nomeSblocco} from './dati.ts';
 import {Gioco} from './Gioco.tsx';
+import {Bacheca} from './Bacheca.tsx';
+import {useCarattere} from './font.ts';
 import {Mappa} from './Mappa.tsx';
 import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
@@ -14,6 +16,8 @@ export function App() {
   const [nome, setNome] = useState(caricaNome);
   const [stati, setStati] = useState<Record<string, Stato>>(() => Object.fromEntries(carriere.map(c => [c.id, carica(c)])));
   const [aperta, setAperta] = useState<string | null>(null);
+  const [bacheca, setBacheca] = useState(false);
+  const [carattere, prossimoCarattere, scegliCarattere] = useCarattere();
   const [pannello, setPannello] = useState<'gioco' | 'mappa' | 'achievement'>('gioco');
   const [statoAperto, setStatoAperto] = useState(false);
   const [eventi, setEventi] = useState<{id: number; e: Evento}[]>([]);
@@ -39,9 +43,11 @@ export function App() {
   const c = carriere.find(x => x.id === aperta);
   const avvisiDom = <div className="avvisi">{avvisi.map(a => <div key={a.id} className="avviso" data-testid="avviso">{a.testo}</div>)}</div>;
 
+  if (bacheca) return <Bacheca c={carriere.find(x => x.id === 'prova')!} onChiudi={() => setBacheca(false)} />;
   if (!c) {
     return <>
       <Elenco carriere={carriere} stati={stati} nome={nome} onNome={n => { setNome(n); salvaNome(n); }}
+        carattere={carattere.id} onCarattere={scegliCarattere} onBacheca={() => setBacheca(true)}
         onApri={id => { setAperta(id); setPannello('gioco'); }}
         onNuovoGiro={id => { const cc = carriere.find(x => x.id === id)!; imposta(cc, nuovoGiro(cc, stati[id].account, stati[id].giro)); setAperta(id); setPannello('mappa'); }}
         onAchievement={id => { setAperta(id); setPannello('achievement'); }}
@@ -66,7 +72,7 @@ export function App() {
     schermo = <Mappa c={c} s={s} azione={azione} onRiprendi={() => setPannello('gioco')} onAchievement={() => setPannello('achievement')}
       onNuovoGiro={nuovo} onElenco={() => setAperta(null)} onStato={() => setStatoAperto(x => !x)} />;
   } else {
-    schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} onMappa={() => setPannello('mappa')}
+    schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} carattere={carattere} onCarattere={prossimoCarattere} onMappa={() => setPannello('mappa')}
       onStato={() => setStatoAperto(x => !x)} onElenco={() => setAperta(null)} onNuovoGiro={nuovo} onAchievement={() => setPannello('achievement')} />;
   }
   return <>{schermo}{stato}{avvisiDom}</>;

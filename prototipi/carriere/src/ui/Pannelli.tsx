@@ -2,13 +2,18 @@
 import type {Carriera} from '../formato.ts';
 import {finali, indizio, vista, type Stato} from '../motore.ts';
 import {nomeSblocco} from './dati.ts';
+import {CARATTERI} from './font.ts';
 
-export function Elenco({carriere, stati, nome, onNome, onApri, onNuovoGiro, onAchievement, onAzzera}: {carriere: Carriera[]; stati: Record<string, Stato>;
-  nome: string; onNome: (n: string) => void; onApri: (id: string) => void; onNuovoGiro: (id: string) => void; onAchievement: (id: string) => void; onAzzera: () => void}) {
+export function Elenco({carriere, stati, nome, onNome, carattere, onCarattere, onBacheca, onApri, onNuovoGiro, onAchievement, onAzzera}: {carriere: Carriera[]; stati: Record<string, Stato>;
+  nome: string; onNome: (n: string) => void; carattere: string; onCarattere: (id: string) => void; onBacheca: () => void; onApri: (id: string) => void; onNuovoGiro: (id: string) => void; onAchievement: (id: string) => void; onAzzera: () => void}) {
   return (
     <div className="elenco" data-testid="elenco">
       <h1>Carriere <small>prototipo CA-0a</small></h1>
       <label className="nome-giocatore">Il tuo nome nelle battute <input value={nome} onChange={e => onNome(e.target.value)} maxLength={24} /></label>
+      <div className="selettore-carattere">Carattere dei dialoghi:
+        {CARATTERI.map(f => <button key={f.id} className={f.id === carattere ? 'scelto' : ''} style={{fontFamily: f.famiglia}} data-testid={`carattere-${f.id}`}
+          onClick={() => onCarattere(f.id)}>{f.nome}</button>)}
+      </div>
       <div className="schede">
         {carriere.map(c => {
           const s = stati[c.id];
@@ -31,6 +36,8 @@ export function Elenco({carriere, stati, nome, onNome, onApri, onNuovoGiro, onAc
           );
         })}
       </div>
+      <p><button className="primario" data-testid="apri-bacheca" onClick={onBacheca}>Bozzetto bacheca</button>
+        <span className="nota"> la mappa come bacheca a lettere, a metà giro della prova (Fase C)</span></p>
       <p className="nota">Prototipo usa e getta: partite simulate, progresso salvato solo in questo browser. <button onClick={onAzzera} data-testid="azzera">Azzera tutto</button></p>
     </div>
   );

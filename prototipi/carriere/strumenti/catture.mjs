@@ -68,6 +68,9 @@ async function giro(nome, viewport) {
   for (let i = 0; i < 4; i++) await avanzaUna();
   await immagini();
   await foto('04-scena0-mara', 2600);
+  // I tre caratteri da confrontare (Fase C): si passa dall'uno all'altro con «Aa», poi si torna al primo.
+  for (const n of ['04b-font-patrick-hand', '04c-font-comic-neue']) { await tid('carattere').click(); await foto(n, 400); }
+  await tid('carattere').click();
   await salta();
   await continua();
   await salta();
@@ -80,6 +83,9 @@ async function giro(nome, viewport) {
   for (let i = 0; i < 12 && (await page.locator('.dialogo .nome').textContent()) !== 'Piera'; i++) await avanzaUna();
   atteso((await page.locator('.dialogo .nome').textContent()) === 'Piera', 'la battuta di Piera');
   await page.locator('.ritratto.ascolta').waitFor({timeout: 15_000});
+  // Lo stacco resta fino al tocco (Fase C, impressione 4): dopo due secondi chi ascolta è ancora lì.
+  await page.waitForTimeout(2000);
+  atteso(await page.locator('.ritratto.ascolta').count() === 1, 'lo stacco su chi ascolta che resta fino al tocco');
   await foto('07-stacco-piera', 150);
   await salta();
   await tid('perdi').click();
@@ -170,6 +176,14 @@ async function giro(nome, viewport) {
   await foto('23-mappa-due-finali', 300);
   await tid('apri-achievement').click();
   await foto('21-achievement', 200);
+
+  // Bozzetto della bacheca a lettere (Fase C, parte 2).
+  await page.getByRole('button', {name: 'Chiudi'}).click();
+  await page.getByRole('button', {name: 'Elenco'}).click();
+  await tid('apri-bacheca').click();
+  await tid('bacheca').waitFor();
+  await foto('24-bozzetto-bacheca', 800);
+  await tid('chiudi-bacheca').click();
 
   await ctx.close();
   if (errori.length) throw new Error(`${nome}: errori nella pagina:\n${errori.join('\n')}`);

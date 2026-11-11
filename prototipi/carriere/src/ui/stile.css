@@ -1,5 +1,12 @@
 /* CA-0a: grafica minima, senza rifinitura (prototipo.md, «Fuori»). Misure della scena dalla specifica degli asset. */
+/* Fase C: font SIL OFL salvati in locale (prototipi/carriere/font, licenze accanto). */
+@font-face { font-family: 'Shantell Sans'; src: url('../../font/shantellsans/ShantellSans-Variabile.ttf') format('truetype'); font-weight: 300 800; font-display: swap; }
+@font-face { font-family: 'Patrick Hand'; src: url('../../font/patrickhand/PatrickHand-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Comic Neue'; src: url('../../font/comicneue/ComicNeue-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Comic Neue'; src: url('../../font/comicneue/ComicNeue-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'League Gothic'; src: url('../../font/leaguegothic/LeagueGothic-Variabile.ttf') format('truetype'); font-stretch: 75% 100%; font-display: swap; }
 :root {
+  --font-dialogo: 'Shantell Sans', system-ui, sans-serif;
   --fondo: #1b1410; --carta: #2a1f18; --bordo: #5a4330; --testo: #f3e7d3; --tenue: #b8a48a;
   --accento: #e0a43a; --verde: #7dbb6a; --rosso: #c8553d; --blu: #6aa3c8;
   font-family: system-ui, "Segoe UI", sans-serif; color: var(--testo); background: var(--fondo);
@@ -23,7 +30,7 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .scheda h2 { margin: 0 0 8px; }
 .scheda p { margin: 4px 0; }
 
-/* Scena: sfondo «cover», ritratto e finestra come nella specifica (orizzontale 28% e 85%, verticale 30% e 60%) */
+/* Scena: sfondo «cover», ritratto e finestra come nella specifica (Fase C: orizzontale 20% e 85%, verticale 22% e 75%) */
 .gioco { position: fixed; inset: 0; overflow: hidden; background: #000; user-select: none; }
 .gioco .sfondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .gioco .insegna { position: absolute; transform: translate(-50%, -50%); text-align: center; font-weight: 900; letter-spacing: .08em; white-space: nowrap;
@@ -36,15 +43,21 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .gioco .ritratto.ascolta { filter: brightness(0.92); }
 .gioco.scossa { animation: scossa 0.45s; }
 @keyframes scossa { 0%,100% { transform: none; } 20% { transform: translate(-12px, 4px); } 40% { transform: translate(10px, -6px); } 60% { transform: translate(-8px, 2px); } 80% { transform: translate(6px, 0); } }
-.barra { position: absolute; top: 8px; left: 8px; right: 8px; display: flex; gap: 8px; align-items: center; z-index: 5; }
-.barra .dove { margin-right: auto; background: rgba(0,0,0,.55); padding: 4px 10px; border-radius: 8px; font-size: 0.9em; }
+.gioco .dove { position: absolute; top: 8px; left: 8px; z-index: 5; background: rgba(0,0,0,.55); padding: 4px 10px; border-radius: 8px; font-size: 0.9em; }
+.barra { position: absolute; top: 8px; right: 8px; display: flex; gap: 8px; align-items: center; z-index: 5; }
 .barra button { background: rgba(20,14,10,.75); }
-.dialogo { position: absolute; left: 0; right: 0; bottom: 0; height: 28%; background: rgba(16,11,8,.88); border-top: 2px solid var(--bordo);
-  padding: 18px 8% 12px; z-index: 3; cursor: pointer; }
-.dialogo .nome { position: absolute; top: -18px; left: 7%; background: var(--accento); color: #20160e; font-weight: 700; padding: 4px 14px; border-radius: 8px; }
-.dialogo .testo { font-size: clamp(16px, 2.3vh, 24px); line-height: 1.45; max-width: 70em; }
+.barra button.primario { background: var(--accento); }
+.barra .carattere small { font-size: .7em; opacity: .8; }
+/* Al più tre righe; il corpo lo calcola Gioco.tsx. Le frasi lunghe di Piera mostrano le ultime righe. */
+.dialogo { position: absolute; left: 0; right: 0; bottom: 0; height: 20%; background: rgba(16,11,8,.9); border-top: 2px solid var(--bordo);
+  padding: 20px 8% 12px; z-index: 3; cursor: pointer; }
+.dialogo .nome { position: absolute; top: -22px; left: 7%; background: var(--accento); color: #20160e; font-family: var(--font-dialogo); font-weight: 700;
+  font-size: 22px; padding: 2px 16px; border-radius: 10px; font-variation-settings: 'INFM' 60, 'BNCE' 40; }
+.dialogo .testo { height: 100%; overflow: hidden; line-height: 1.3;
+  font-family: var(--font-dialogo); font-weight: 500; font-variation-settings: 'INFM' 40, 'BNCE' 30; max-width: 70em; }
 .dialogo .narrazione { font-style: italic; color: var(--tenue); }
-.dialogo .avanti { position: absolute; right: 4%; bottom: 10px; color: var(--accento); animation: lampeggia 1s infinite; }
+.dialogo .avanti { position: absolute; right: 3%; bottom: 8px; color: var(--accento); font-size: 20px; animation: lampeggia 1s infinite; }
+.dialogo .avanti.stacco { color: var(--testo); }
 @keyframes lampeggia { 50% { opacity: .2; } }
 .notifica { position: absolute; top: 56px; right: 16px; width: min(380px, 92vw); background: #f4f1ea; color: #1b1410; border-radius: 14px; padding: 12px 14px;
   box-shadow: 0 8px 24px rgba(0,0,0,.5); z-index: 4; animation: scende .3s; }
@@ -117,15 +130,25 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .avvisi { position: fixed; top: 52px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
 .avviso { background: var(--verde); color: #10200c; padding: 8px 16px; border-radius: 10px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,.4); animation: scende .3s; }
 
-/* Verticale (390×844): finestra al 30%, ritratto centrato al 60%, sfondo ritagliato sulla striscia centrale */
+/* Telefono (Fase C, impressione 6): pulsanti di almeno 48 px. */
+@media (pointer: coarse), (orientation: portrait) {
+  button { min-height: 48px; min-width: 48px; padding: 8px 14px; font-size: 1rem; }
+}
+
+/* Verticale (390×844): finestra al 22% sopra la fila delle azioni, ritratto centrato al 75%, sfondo ritagliato sulla striscia centrale */
 @media (orientation: portrait) {
-  .gioco .ritratto { left: 50%; height: 60%; }
-  .dialogo { height: 30%; padding: 22px 16px 12px; }
-  .dialogo .nome { left: 16px; }
-  .dialogo .testo { font-size: 16px; }
-  .barra .dove { font-size: .75em; }
-  .barra button { padding: 4px 8px; font-size: .85em; }
+  .gioco .ritratto { left: 50%; height: 75%; }
+  .barra { top: auto; bottom: 0; left: 0; right: 0; padding: 8px; gap: 6px; background: rgba(16,11,8,.95); }
+  .barra button { flex: 1; padding: 8px 6px; }
+  .barra .carattere small { display: none; }
+  .dialogo { bottom: 64px; height: 22%; padding: 22px 16px 8px; border-bottom: 1px solid var(--bordo); }
+  .dialogo .nome { left: 16px; font-size: 19px; }
+  .gioco .dove { font-size: .75em; }
   .notifica { left: 12px; right: 12px; width: auto; top: 52px; }
+  /* Riquadri come fogli dal basso: le azioni stanno sotto il pollice. */
+  .riquadro { top: auto; bottom: 0; left: 0; right: 0; transform: none; max-width: none; border-radius: 18px 18px 0 0; max-height: 82%; }
+  .riquadro .pulsanti button { flex: 1 1 100%; }
+  .riquadro.fine { min-width: 0; }
   .scelta-muta .opzioni { flex-direction: column; }
   .offerta { width: 100%; flex-direction: row; }
   .offerta img { height: 90px; width: 70px; }
@@ -136,10 +159,21 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
   .schede, .achievement ul { grid-template-columns: 1fr; }
   .mappa header { padding: 8px 12px; gap: 4px 10px; }
   .mappa header nav { margin-left: 0; }
-  .mappa header nav button { padding: 3px 8px; font-size: .8em; }
+  .mappa header nav button { padding: 4px 8px; font-size: .85em; }
+  .pannello-nodo .primario { align-self: stretch; }
   .avvisi { top: auto; bottom: 34%; width: 90vw; align-items: center; }
   .mappa .tela { padding: 16px 8px; }
   .casella { width: 132px; }
   .pannello-stato { width: 100vw; top: auto; height: 50%; border-left: none; border-top: 1px solid var(--bordo); }
 }
 .riquadro.fine { min-width: min(360px, 90vw); }
+
+/* Fase C: bozzetto della bacheca a lettere (bacheca.md) */
+.bacheca { position: fixed; inset: 0; background: #2a1c10; }
+.bacheca svg { display: block; }
+.bacheca .lettere { font-family: 'League Gothic', 'Arial Narrow', sans-serif; letter-spacing: .06em; }
+.bacheca .penna { font-family: 'Patrick Hand', cursive; fill: #233a8f; }
+.chiudi-bacheca { position: fixed; top: 6px; right: 6px; min-height: 48px; background: #f6df6e; color: #233a8f; border: none; border-radius: 2px;
+  font-family: 'Patrick Hand', cursive; font-size: 20px; transform: rotate(3deg); box-shadow: 2px 4px 8px rgba(0,0,0,.5); }
+.selettore-carattere { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.selettore-carattere button.scelto { border-color: var(--accento); background: #3a2c20; }

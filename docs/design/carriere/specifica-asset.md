@@ -14,8 +14,12 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
 | Misura di prova | Orizzontale | Verticale |
 |---|---|---|
 | Schermo | 1366×768 | 390×844 |
-| Finestra di dialogo | fascia in basso, circa il 28% dell'altezza | fascia in basso, circa il 30% dell'altezza |
-| Ritratto | a sinistra del centro, alto circa l'85% dello schermo, con la parte bassa dietro la finestra | centrato, alto circa il 60% dello schermo, con la parte bassa dietro la finestra |
+| Finestra di dialogo | fascia in basso, circa il 20% dell'altezza, al più tre righe | fascia circa al 22% dell'altezza, al più tre righe, sopra una fila di pulsanti di almeno 48 px |
+| Ritratto | a sinistra del centro, alto circa l'85% dello schermo, con la parte bassa dietro la finestra | centrato, alto circa il 75% dello schermo, con la parte bassa dietro la finestra |
+
+Misure corrette l'11 novembre 2026 nella Fase C del [prototipo](prototipo.md#fase-c-ritocchi-dopo-la-prova), dopo la
+[prova del proprietario](prototipo-fase-b.md#prova-del-proprietario): prima la finestra era al 28% e al 30% e il ritratto verticale al 60%. Il
+corpo del testo si adatta perché una battuta stia in tre righe; le frasi di Piera, più lunghe apposta, mostrano le ultime righe.
 
 ## Ritratti
 

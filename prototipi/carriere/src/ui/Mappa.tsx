@@ -58,9 +58,13 @@ export function Mappa({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, onE
               // Un arco che salta una colonna sulla stessa riga passerebbe sotto la casella di mezzo: si incurva.
               const salto = Math.abs(posizione[a.a].colonna - posizione[a.da].colonna) > 1 && posizione[a.a].riga === posizione[a.da].riga;
               const mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2;
+              const verso = posizione[a.da].riga === 0 ? -1 : 1;
               const percorso = a.indietro
                 ? `M${p.x},${p.y} C${p.x + (verticale ? 90 : 0)},${p.y + (verticale ? 0 : 80)} ${q.x + (verticale ? 90 : 0)},${q.y + (verticale ? 0 : 80)} ${q.x},${q.y}`
-                : salto ? `M${p.x},${p.y} Q${mx + (verticale ? 110 : 0)},${my - (verticale ? 0 : 110)} ${q.x},${q.y}` : `M${p.x},${p.y} L${q.x},${q.y}`;
+                // Un salto di colonna si incurva verso l'esterno: in su o a sinistra dalla prima riga, in giù o a destra dalle altre.
+                : salto ? `M${p.x},${p.y} Q${mx + (verticale ? verso * 100 : 0)},${my + (verticale ? 0 : verso * 110)} ${q.x},${q.y}`
+                // Fase C (impressione 7): curve a «S» con le tangenti nel verso della lettura, al posto delle diagonali che si incrociavano.
+                : verticale ? `M${p.x},${p.y} C${p.x},${my} ${q.x},${my} ${q.x},${q.y}` : `M${p.x},${p.y} C${mx},${p.y} ${mx},${q.y} ${q.x},${q.y}`;
               return <path key={i} d={percorso} className={`arco ${a.tipo}${a.indietro ? ' indietro' : ''}`} />;
             })}
           </svg>
