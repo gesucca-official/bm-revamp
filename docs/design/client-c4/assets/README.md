@@ -102,3 +102,4 @@ tutti in `inventory.json` con SHA-256 uguale; il `dist` della build `433dccadf32
 pagina, nessun font. Nessun asset senza registro. Restano **aperte, in attesa del proprietario** ([domande di C4-9](../../../reports/client-c4/c4-9.md#domande-al-proprietario)):
 la conferma dei termini d'uso dello strumento di immagini (non verificabili dal repository), la dichiarazione dell'IA nella pagina pubblica
 e l'allineamento delle quattro stringhe `license`.
+Dichiarazione e stringhe: rimandate dal proprietario l'11 novembre 2026 («Rimanda (b)») a quando il client sarà servito fuori dal locale.
