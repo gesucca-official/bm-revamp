@@ -587,6 +587,8 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 
 **Condizione attivata (6 novembre 2026).** Nella prova di C4-7 il proprietario ha segnalato su iPhone: «le animazioni su safari non sono proprio fluidissime». È la segnalazione da iPhone prevista sopra: C4-8b la tratta come disagio da misurare e affrontare con lo stesso ordine (ridisegno incrementale e decorazioni prima del renderer), distinguendo il ritardo di rete; quanto sia grave va chiarito col proprietario, e le misure in Edge non lo dimostrano. Dal 7 novembre 2026 (D15) O28 (spazio tolto da Safari in orizzontale) passa a C4-11 e O29 (riepilogo giallo) a C4-10 ([roadmap](client-roadmap.md#osservazioni-registrate-durante-c4)); C4-8b misura anche le animazioni e la profondità aggiunte da quei blocchi.
 
+**Condizione rientrata (11 novembre 2026).** Alla domanda della regia «Nell'ultima prova su iPhone, dopo C4-10 e C4-11, com'era la fluidità?» il proprietario ha risposto «Accettabile ora». La segnalazione del 6 novembre non attiva più il ridisegno incrementale: C4-8b lo fa solo se la misura su desktop esce dal criterio di C3-L o l'input peggiora rispetto a C4-1b, e in quel caso si ferma con numeri, diagnosi e opzioni prima di scrivere codice.
+
 **Dipendenze.** Tutti i blocchi visivi; D9.
 
 **File toccati.** `scene.ts`, `readability.ts`, eventualmente `art.ts`, documenti comuni.
