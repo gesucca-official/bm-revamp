@@ -1,0 +1,1 @@
+{"audible":642,"events":42,"rounds":98,"maxPerRound":2,"outcomes":{"win":3,"loss":5,"input":0},"panelDom":8,"sourceStops":2}

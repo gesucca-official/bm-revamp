@@ -1,0 +1,1 @@
+{"date":"2026-11-11T14:40:49.734Z","viewport":{"width":1366,"height":768},"scenarios":"quick,reduced,interrupt,ffa","errors":[],"checks":["server","quickRejoin","quick","reducedMotion","interruptions","ffa","reportConsistency","casesOnRealServer"],"reportConsistency":{"rounds":37,"sumOk":37,"chainOk":37,"unknownCost":0,"failures":[]}}
