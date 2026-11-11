@@ -54,6 +54,10 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, onMap
   const ox = (misura.w - bw) / 2, oy = (misura.h - bh) / 2;
   const posa = (id: string) => {
     const sp = cast.sprite[id];
+    if (misura.h > misura.w && sp.verticale) {
+      const h = sp.verticale.altezza * misura.h;
+      return {left: ox + sp.x * bw, top: sp.verticale.piedi * misura.h - h, height: h};
+    }
     const h = sp.altezza * bh;
     return {left: ox + sp.x * bw, top: oy + sp.piedi * bh - h, height: h};
   };

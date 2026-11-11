@@ -4,6 +4,11 @@
 @font-face { font-family: 'Patrick Hand'; src: url('../../font/patrickhand/PatrickHand-Regular.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'Comic Neue'; src: url('../../font/comicneue/ComicNeue-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Comic Neue'; src: url('../../font/comicneue/ComicNeue-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Grandstander'; src: url('../../font/grandstander/Grandstander-Variabile.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'Short Stack'; src: url('../../font/shortstack/ShortStack-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Gochi Hand'; src: url('../../font/gochihand/GochiHand-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Kalam'; src: url('../../font/kalam/Kalam-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Mali'; src: url('../../font/mali/Mali-Regular.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'League Gothic'; src: url('../../font/leaguegothic/LeagueGothic-Variabile.ttf') format('truetype'); font-stretch: 75% 100%; font-display: swap; }
 :root {
   --font-dialogo: 'Shantell Sans', system-ui, sans-serif;
@@ -175,5 +180,9 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .bacheca .penna { font-family: 'Patrick Hand', cursive; fill: #233a8f; }
 .chiudi-bacheca { position: fixed; top: 6px; right: 6px; min-height: 48px; background: #f6df6e; color: #233a8f; border: none; border-radius: 2px;
   font-family: 'Patrick Hand', cursive; font-size: 20px; transform: rotate(3deg); box-shadow: 2px 4px 8px rgba(0,0,0,.5); }
-.selettore-carattere { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
-.selettore-carattere button.scelto { border-color: var(--accento); background: #3a2c20; }
+.titoletto { font-size: 1.05em; margin: 8px 0; }
+.selettore-carattere { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-bottom: 16px; }
+.campione { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 8px 12px; }
+.campione small { color: var(--tenue); font-size: .75em; }
+.campione span { font-size: 19px; line-height: 1.3; }
+.campione.scelto { border-color: var(--accento); background: #3a2c20; box-shadow: 0 0 0 2px rgba(224,164,58,.35); }

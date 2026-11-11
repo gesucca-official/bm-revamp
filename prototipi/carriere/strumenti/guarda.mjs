@@ -2,14 +2,15 @@
 // node strumenti/guarda.mjs <uscita.png> <larghezza> <altezza> [bacheca|elenco]
 import {chromium} from '@playwright/test';
 
-const [out, w, h, cosa = 'bacheca'] = process.argv.slice(2);
+const [out, w, h, cosa = 'bacheca', ritaglio] = process.argv.slice(2);  // ritaglio: x,y,larghezza,altezza, ingrandito due volte
 const browser = await chromium.launch({channel: 'msedge'});
 try {
-  const page = await browser.newPage({viewport: {width: Number(w), height: Number(h)}});
+  const page = await browser.newPage({viewport: {width: Number(w), height: Number(h)}, deviceScaleFactor: ritaglio ? 2 : 1});
   await page.goto('http://127.0.0.1:4330/');
   if (cosa === 'bacheca') await page.getByTestId('apri-bacheca').click();
   await page.waitForTimeout(800);
-  await page.screenshot({path: out});
+  const [x, y, width, height] = (ritaglio ?? '').split(',').map(Number);
+  await page.screenshot({path: out, ...(ritaglio ? {clip: {x, y, width, height}} : {})});
 } finally {
   await browser.close();
 }

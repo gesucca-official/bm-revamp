@@ -1,7 +1,7 @@
 // Fase C: composizione della bacheca a lettere (bacheca.md) e misure del testo dei dialoghi.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {aCapo, caso, componi, lettere, STILI, statoBozzetto} from '../src/bacheca.ts';
+import {aCapo, caso, componi, lettere, ROSSO_SEI_QUI, spilloDi, STILI, statoBozzetto} from '../src/bacheca.ts';
 import {corpo, CARATTERI} from '../src/ui/font.ts';
 import {prova} from './aiuto.ts';
 
@@ -59,4 +59,14 @@ test('il corpo dei dialoghi: al più tre righe, fra il minimo e il massimo', () 
   const pp = corpo(lunga, 358, 155, patrick, 15, 26);
   assert.ok(Math.ceil(lunga.length * pp * patrick.larghezza / 358) <= 3, 'con Patrick Hand sta in tre righe');
   assert.equal(corpo('x'.repeat(600), 358, 155, shantell), 15, 'le frasi di Piera scendono al minimo');
+});
+
+test('puntine e spilli tutti diversi, scelti dai dati; «sei qui» è una puntina tonda rossa', () => {
+  const comp = bozzetto();
+  const spilli = comp.punti.map(x => x.spillo);
+  assert.ok(new Set(spilli.map(s => s.forma)).size >= 3, `forme diverse: ${spilli.map(s => s.forma).join(', ')}`);
+  assert.ok(new Set(spilli.map(s => s.colore)).size >= 3, 'colori diversi');
+  assert.deepEqual(comp.punti.find(x => x.corrente)!.spillo, {forma: 'tonda', colore: ROSSO_SEI_QUI, inclinazione: 0});
+  assert.deepEqual(spilloDi('nodo-a', false), spilloDi('nodo-a', false), 'lo stesso punto ha sempre lo stesso spillo');
+  assert.ok(!comp.punti.some(x => x.titolo.some(r => r.some(l => l.c === '★' || l.c === '→'))), 'stella e freccia sono pezzi a parte, non lettere');
 });

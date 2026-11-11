@@ -38,6 +38,7 @@
   "sprite": {
     "bici-mara": {"pose": {"ferma": "sprite/bici-mara.webp"}, "x": 0.6, "piedi": 0.74, "altezza": 0.3},
     "grappino": {"pose": {"seduto": "sprite/grappino-seduto.webp", "ringhia": "sprite/grappino-ringhia.webp", "russa": "sprite/grappino-russa.webp"}, "x": 0.56, "piedi": 0.74, "altezza": 0.17},
-    "combriccola": {"pose": {"davanti-alla-porta": "sprite/combriccola-davanti-alla-porta.webp", "in-fuga": "sprite/combriccola-in-fuga.webp"}, "x": 0.5, "piedi": 0.74, "altezza": 0.55}
+    "combriccola": {"pose": {"davanti-alla-porta": "sprite/combriccola-davanti-alla-porta.webp", "in-fuga": "sprite/combriccola-in-fuga.webp"}, "x": 0.5, "piedi": 0.77, "altezza": 0.55,
+      "verticale": {"piedi": 0.8, "altezza": 0.5}}
   }
 }

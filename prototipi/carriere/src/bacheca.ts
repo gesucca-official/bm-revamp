@@ -20,7 +20,22 @@ export type Punto = {
   corrente: boolean;            // l'ultimo nodo in cui si è stati: puntina colorata, «sei qui»
   caduta?: Lettera;             // la lettera che manca, caduta in fondo alla cornice
   inclinazione: number;         // del post-it, in gradi
+  spillo: Spillo;               // quello che il barista ha trovato nel cassetto
 };
+/** Puntine e spilli tutti diversi (secondo giro della Fase C: «è un bar marcio, usano quello che trovano»), scelti dai dati. */
+export type Spillo = {forma: 'tonda' | 'piatta' | 'sarta' | 'chiodino' | 'ombrello'; colore: string; inclinazione: number};
+const FORME: Spillo['forma'][] = ['tonda', 'piatta', 'sarta', 'chiodino', 'ombrello', 'tonda', 'piatta'];
+const COLORI = ['#2f6fb5', '#2e8b57', '#e0b320', '#f2efe6', '#7a3fa0', '#d9792b', '#3a3a3a'];
+export const ROSSO_SEI_QUI = '#d7322a';
+
+/** Lo spillo di un punto: forma, colore e inclinazione dal suo id; quello dove si è adesso è una puntina tonda rossa. */
+export function spilloDi(id: string, corrente: boolean): Spillo {
+  const r = caso(`spillo:${id}`);
+  const forma = FORME[Math.floor(r() * FORME.length)];
+  const colore = COLORI[Math.floor(r() * COLORI.length)];
+  const inclinazione = (r() * 2 - 1) * (forma === 'chiodino' ? 25 : 12);
+  return corrente ? {forma: 'tonda', colore: ROSSO_SEI_QUI, inclinazione: 0} : {forma, colore, inclinazione};
+}
 /** Cordicella fra due spilli: tesa per un percorso fatto, lenta per uno da fare, arrotolata intorno allo spillo se esclusa in questo giro. */
 export type Filo = {da: string; a: string; tipo: 'tesa' | 'lenta' | 'arrotolata'; sconfitta: boolean};
 export type Composizione = {testata: Lettera[]; sottotitolo: Lettera[]; titoloFinali: Lettera[]; punti: Punto[]; fili: Filo[]; colonne: number; righe: number};
@@ -105,7 +120,8 @@ export function componi(c: Carriera, s: Stato, ultimo: string | null, intestazio
   for (const x of tutte) {
     if (!visibili.has(x.id)) continue;
     const {stato, noto} = stati[x.id];
-    const testo = x.fine ? `★ ${x.titolo.toUpperCase()}` : x.titolo.toUpperCase();
+    // La stella dei finali e la freccia del disponibile sono pezzi di plastica a parte (League Gothic non li ha).
+    const testo = x.titolo.toUpperCase();
     let caduta: Lettera | undefined;
     const titolo = aCapo(testo, massimo).map((t, i) => {
       const r = lettere(t, STILI[stileDi(stato)], `${c.id}:${x.id}:${i}`);
@@ -118,7 +134,7 @@ export function componi(c: Carriera, s: Stato, ultimo: string | null, intestazio
       colonna: fine ?? posizione[x.id].colonna, riga: fine === undefined ? posizione[x.id].riga : 0,
       codice: x.fine ? '★' : codice(x.etichetta), titolo,
       postit: !noto && stato !== 'corrente', freccia: stato === 'disponibile', corrente: x.id === ultimo,
-      ...(caduta && noto ? {caduta} : {}), inclinazione: (caso(`postit:${x.id}`)() * 2 - 1) * 5,
+      ...(caduta && noto ? {caduta} : {}), inclinazione: (caso(`postit:${x.id}`)() * 2 - 1) * 5, spillo: spilloDi(x.id, x.id === ultimo),
     });
   }
   const g = s.giro;

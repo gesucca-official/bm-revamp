@@ -130,7 +130,9 @@ export type Cast = {
   sfondi: Record<string, {file: string; varianti?: Record<string, string>;
     insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;
   // Dove il lettore posa lo sprite, in frazioni della scena: x del centro, y dei piedi, altezza (la specifica lascia la scala al client).
-  sprite: Record<string, {pose: Record<string, string>; x: number; piedi: number; altezza: number}>;
+  // verticale: in verticale, piedi e altezza in frazioni dello schermo, per ancorare la figura come i ritratti, con la parte bassa
+  // dietro la finestra (secondo giro della Fase C: la combriccola sembrava volare).
+  sprite: Record<string, {pose: Record<string, string>; x: number; piedi: number; altezza: number; verticale?: {piedi: number; altezza: number}}>;
 };
 
 export type Problema = {riga: number; livello: 'errore' | 'avviso'; messaggio: string};

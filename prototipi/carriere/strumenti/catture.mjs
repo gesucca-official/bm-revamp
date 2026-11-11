@@ -58,6 +58,12 @@ async function giro(nome, viewport) {
   await page.goto(url);
   await tid('elenco').waitFor();
   await foto('01-elenco', 200);
+  // Campionario degli otto caratteri (secondo giro della Fase C): la stessa battuta in ogni font.
+  // L'elenco scorre dentro sé stesso: per fotografare il campionario intero si allunga la finestra, poi si torna alla misura di prova.
+  await page.setViewportSize({width: viewport.width, height: 2200});
+  await page.waitForTimeout(400);
+  await tid('campionario').screenshot({path: path.join(out, `${nome}-01b-campionario.jpg`), type: 'jpeg', quality: 72});
+  await page.setViewportSize(viewport);
 
   // Tutorial, giro intero: perde la partita 2 e ritenta, sceglie Mara, risponde agli amici (epilogo e achievement), poi resta.
   await tid('apri-tutorial').click();

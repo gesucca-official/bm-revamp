@@ -138,3 +138,87 @@ ancora la finestra e i pulsanti di prima.
   - «in verticale la parte destra è quasi tutta vuota, possiamo centrare un po' meglio».
 
 Prossimo passo: un secondo giro della Fase C con questi punti.
+
+## Secondo giro
+
+11 novembre 2026, sul [giudizio del proprietario](#giudizio-del-proprietario) e sul paragrafo «Dopo il primo bozzetto» di
+[bacheca.md](bacheca.md#come-si-realizza). I ritocchi della prima parte erano approvati e non sono cambiati.
+
+### Più font
+
+Cinque font in più, dallo stesso repository e dallo stesso commit fissato (`c30b221beb0c1da59d563feb91ec8656a1fa972a`, URL
+`https://raw.githubusercontent.com/google/fonts/c30b221beb0c1da59d563feb91ec8656a1fa972a/ofl/<cartella>/<file>`), ciascuno con il suo
+`OFL.txt` (SIL Open Font License 1.1). Ora sono otto; scelto il font, gli altri si tolgono.
+
+| Font | Carattere | File (nome originale) | KB | SHA-256 del font | SHA-256 di `OFL.txt` |
+|---|---|---|---|---|---|
+| **Grandstander** | da fumetto, tondo e allegro | `grandstander/Grandstander-Variabile.ttf` (`Grandstander[wght].ttf`) | 179 | `fbc7d1d934e6aa7842f7e8420cd833eca9eb123d61880075eec68751369e2f13` | `c98642ce049ee94f1868c47db44dbdc69e1800e2cf3edb539f030ac4abc22ceb` |
+| **Short Stack** | stampatello a mano largo, da quaderno | `shortstack/ShortStack-Regular.ttf` | 67 | `9f0e16e8683b2dce66edd7c3340362b554326739fbac594cabc1e9442cf5e8cc` | `fe079cdbbad0f6520eb0a8235bce65b21596dd0c4c5a2694b3325cc87313b618` |
+| **Gochi Hand** | scrittura a mano stretta e sporca, da pennarello | `gochihand/GochiHand-Regular.ttf` | 36 | `c46b029ab4846b2935e301af0b2cf85a1d74d2858e6a33636a3e64cf3cc4696b` | `b36cb03d6ddc163452d9935ce6f325741434272d3889acf42cc23584f31a85bf` |
+| **Kalam** | corsivo a mano, inclinato | `kalam/Kalam-Regular.ttf` | 417 | `57cecb63d4608019371954274ae1d8c397764debd5b19d4a33c1efa4dc923c0b` | `f62ef357d3a1c3d27edd35a6e1ba350e8a8d13499797964eeadefbf0b3b15d1f` |
+| **Mali** | tondo e morbido, da libro illustrato | `mali/Mali-Regular.ttf` | 110 | `e3212f0f9be130743d32a4f174b7d79628daa5db0d72ca4c63c799ae465597bb` | `bc1175730d609233043cde47e48f69831f012e85537c5ec1a2cf4836757c1540` |
+
+**Accentate verificate, non supposte:** una prova legge la tabella dei caratteri (`cmap`) di ogni file e controlla che abbia tutti i
+caratteri che il lettore mostra nelle due storie (battute, nomi, narrazioni, messaggi, opzioni), più `àèéìòùÀÈÉÌÒÙ«»’…`; tutti e otto passano.
+La stessa prova controlla League Gothic sulle lettere della bacheca: non ha «★» né «→», che ora sono pezzi di plastica disegnati a parte.
+
+**Campionario:** nell'elenco, al posto dei pulsanti, la stessa battuta del tutorial («Lui è Spazienzio. Ha finito la pazienza nel 2019…
+«È FREDDO, FA SCHIFO.»») scritta in ognuno degli otto font; si tocca per sceglierlo. «Aa» nella scena li fa scorrere tutti.
+
+![Campionario in verticale](../../../prototipi/carriere/catture/v-01b-campionario.jpg)
+
+### La combriccola in verticale
+
+Le sagome stavano a metà della porta, con i piedi a mezz'aria sopra la finestra di dialogo. Ora in verticale sono ancorate come i ritratti:
+nel cast la combriccola ha una misura per il verticale, in frazioni dello schermo (piedi all'80%, altezza al 50%), così la parte bassa sta
+dietro la finestra. In orizzontale i piedi scendono dal 74% al 77% dello sfondo, sul gradino della porta. Nessuna immagine nuova.
+
+| Orizzontale | Verticale |
+|---|---|
+| ![Combriccola in orizzontale](../../../prototipi/carriere/catture/o-03-scena0-combriccola.jpg) | ![Combriccola in verticale](../../../prototipi/carriere/catture/v-03-scena0-combriccola.jpg) |
+
+### Il bozzetto, seconda versione
+
+- **Lettere di plastica tonde e lucide:** un filtro SVG arrotonda gli spigoli (alfa sfocata e ritagliata), poi dà rilievo con una luce
+  diffusa e un riflesso speculare da sinistra in alto, sopra la stessa ombra netta. Le lettere sembrano pezzi stampati, con il bordo
+  smussato; le imperfezioni restano quelle decise dai dati.
+- **Puntine diverse, «quello che trovano»:** cinque forme, scelte per ogni punto da un generatore ripetibile con il suo id: puntina a testa
+  tonda di plastica (con riflesso), puntina d'ottone piatta, spillo da sarta con la capocchia e l'ago in diagonale, chiodino storto con un
+  punto di ruggine, puntina a ombrello; sette colori. «Sei qui» resta una puntina tonda rossa, più grande. Il post-it è fissato dalla sua
+  puntina, in alto al centro, e le cordicelle partono da lì.
+- **Bacheca sporca:** in posizioni fisse decise dai dati, tre aloni di bicchiere di vino (anelli irregolari e rotti, con l'interno appena
+  velato), due schizzi con le goccioline, un alone chiaro di caffè o di birra, due ditate unte e una colatura; tutto sotto le lettere, come
+  se le lettere fossero state infilate dopo.
+- **Verticale centrata:** ogni profondità è una fila; un nodo solo sta al centro, due si dividono la larghezza; il blocco spillo più titolo
+  è centrato nel suo spazio. I finali si dividono la larghezza allo stesso modo.
+- **Stella e freccia** dei finali e del disponibile sono pezzi di plastica a parte, con lo stesso filtro delle lettere.
+
+| Orizzontale | Verticale |
+|---|---|
+| ![Bozzetto in orizzontale](../../../prototipi/carriere/catture/o-24-bozzetto-bacheca.jpg) | ![Bozzetto in verticale](../../../prototipi/carriere/catture/v-24-bozzetto-bacheca.jpg) |
+
+**Un'immagine generata servirebbe?** Per le puntine no: a quella dimensione bastano forme e gradienti, e la varietà si ottiene meglio dai
+dati. Per le macchie basta il codice. Resta valido quello che il rapporto diceva sulla **cornice**: è il pezzo che più si riconosce come
+disegnato al computer, e quattro listelli di legno vecchio e scrostato generati nello stile degli sfondi (ripetibili, senza scritte)
+darebbero il «malandato» meglio del rumore. Se la bacheca va avanti, è la prima immagine da chiedere.
+
+### Verifiche del secondo giro
+
+| Verifica | Esito |
+|---|---|
+| `run.ps1 -Task Test` | verde: 38 prove (nuove: copertura dei caratteri degli otto font e di League Gothic, puntine diverse e ripetibili) |
+| `run.ps1 -Task Check`, `Build` | verdi |
+| `run.ps1 -Task Shots` | verde: 52 catture, con il campionario e la combriccola in verticale |
+| Mutazioni | 17 su 17 prese (nuove: «sei qui» senza puntina rossa, puntine tutte uguali) |
+| `python scripts/check-links.py`, `python scripts/check-rules.py`, `git diff --check` | verdi |
+
+**Catture in git:** 6 nuove o sostituite, 0,6 MB: campionario (`01b`), combriccola (`03`) e bozzetto (`24`), nei due orientamenti.
+**Rossi:** nessuno. **Non verificato:** sempre il telefono vero, ora con otto font, la combriccola e il bozzetto; il filtro di plastica
+usa luci SVG che sul telefono potrebbero essere lente (è un'immagine ferma, quindi conta solo l'apertura).
+
+### Cosa giudica il proprietario, secondo giro
+
+1. Il font dei dialoghi fra gli otto del campionario, sul telefono.
+2. La combriccola in verticale: se adesso poggia.
+3. Il bozzetto: le lettere sono abbastanza «plasticose»; le puntine abbastanza raccattate; lo sporco abbastanza sporco (o troppo); la
+   verticale abbastanza piena; e se si passa alla mappa vera, con la cornice generata.
