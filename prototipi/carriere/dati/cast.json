@@ -1,0 +1,40 @@
+{
+  "radiceAsset": "docs/design/carriere/asset/tutorial",
+  "personaggi": {
+    "mara": {
+      "nome": "Mara",
+      "espressioni": ["neutra", "agitata", "sospettosa", "illuminata", "pensierosa", "contenta"],
+      "velocita": 1.2,
+      "ritratto": "ritratti/mara-{espressione}.webp"
+    },
+    "spazienzio": {
+      "nome": "Spazienzio",
+      "espressioni": ["furioso", "fumante", "quasi-calmo", "soddisfatto", "serio"],
+      "velocita": 1,
+      "ritratto": "ritratti/spazienzio-{espressione}.webp"
+    },
+    "piera": {
+      "nome": "Piera",
+      "espressioni": ["brilla", "offesa", "assonnata", "contenta"],
+      "velocita": 0.3,
+      "ritratto": "ritratti/piera-{espressione}.webp"
+    },
+    "combriccola": {
+      "nome": "La combriccola",
+      "alias": ["Un amico", "Un altro amico"],
+      "ombra": true,
+      "velocita": 1,
+      "sprite": "combriccola"
+    }
+  },
+  "sfondi": {
+    "S1": {"file": "sfondi/s1-esterno.webp", "varianti": {"insegna-spenta": "sfondi/s1-esterno-insegna-spenta.webp"}},
+    "S2": {"file": "sfondi/s2-interno.webp", "varianti": {"disordine": "sfondi/s2-interno-disordine.webp"}},
+    "S3": {"file": "sfondi/s3-dimmi-di-si.webp"}
+  },
+  "sprite": {
+    "bici-mara": {"pose": {"ferma": "sprite/bici-mara.webp"}},
+    "grappino": {"pose": {"seduto": "sprite/grappino-seduto.webp", "ringhia": "sprite/grappino-ringhia.webp", "russa": "sprite/grappino-russa.webp"}},
+    "combriccola": {"pose": {"davanti-alla-porta": "sprite/combriccola-davanti-alla-porta.webp", "in-fuga": "sprite/combriccola-in-fuga.webp"}, "scala": 0.67}
+  }
+}
