@@ -272,3 +272,12 @@ Show it alone, seen from the front and slightly from above, as it looks when pus
 
 Avoid: any text, letters, numbers, logos, brands, signatures or watermarks; a board, felt, paper or any surface; other objects; cast shadows; photographic or 3D-rendered style.
 ~~~
+
+## Composizioni di prova
+
+Aggiunte dalla regia il 12 novembre 2026: l'esecutore le ha consegnate senza registrarne le impronte. Fatte con uno script, non con lo strumento di generazione.
+
+| File | SHA-256 |
+|---|---|
+| `composizioni/cornice-nove-fette.webp` | 820ab3747b6950e8ef18186cbd8e1f1569891a350e7ff9073be9c715bb380905 |
+| `composizioni/puntine-feltro.webp` | db0c9e9fe560009510132c092ea4f4b348d194949361bcb74d5b8585a3ad7a5b |
