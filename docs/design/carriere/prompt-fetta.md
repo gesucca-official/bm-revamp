@@ -129,3 +129,11 @@ Edit the attached approved character sheet into a single half-body portrait of t
 
 Avoid: any other change to the character; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, vapour, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
 ~~~
+
+### Esiti del secondo giro
+
+| Asset | File | Scheda del registro | Giudizio del proprietario |
+|---|---|---|---|
+| s2-interno | [WebP](asset/tutorial/sfondi/s2-interno.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-2) |  |
+| spazienzio-furioso | [WebP](asset/tutorial/ritratti/spazienzio-furioso.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-furioso-2) |  |
+| spazienzio-fumante | [WebP](asset/tutorial/ritratti/spazienzio-fumante.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-fumante-2) |  |

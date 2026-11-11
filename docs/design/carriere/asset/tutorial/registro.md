@@ -187,3 +187,120 @@ Scontorni: non necessari; i quattro originali hanno canale alfa nativo. Composiz
 - [fetta-orizzontale-spazienzio.webp](composizioni/fetta-orizzontale-spazienzio.webp): 1366×768 px, WEBP, RGB, 309404 byte; SHA-256 `64e3fa11d15f91a551bc960543e4177499ef2705e0bc4cab4436d9be345c3c5c`
 - [fetta-verticale-mara.webp](composizioni/fetta-verticale-mara.webp): 390×844 px, WEBP, RGB, 99978 byte; SHA-256 `a93ee38de2e5f69b99771252f57f53eec505a550958c2e2e056ea3cc61a0dda0`
 - [fetta-verticale-spazienzio.webp](composizioni/fetta-verticale-spazienzio.webp): 390×844 px, WEBP, RGB, 105994 byte; SHA-256 `eb2cb948b897287b4d24b7a9eae1a00874c94f1d25a25d07e2834b7a180cea52`
+
+## Secondo giro
+
+I file del primo giro sono conservati nella storia Git; le relative impronte restano nelle schede precedenti.
+
+### s2-interno-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 18:54:53 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `7fb4f2f` |
+| Prompt | [prompt-fetta.md](../../prompt-fetta.md#secondo-giro); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1536×1024 px, come originale |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2865571 byte; SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; sfondo opaco |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/s2-interno-1.png` SHA-256 `73a6fa8aa34d7c87e19c643fec1270b4e4dacf842d1fe9d4e8d7125e96ea66b5`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-f017ce00-3382-44c5-b481-bf754da108d9.png`, copia `originali/s2-interno-2.png`; SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a` |
+| Anteprima / consegna | [s2-interno.webp](sfondi/s2-interno.webp); 1536×1024 px, WEBP, RGB, 491684 byte; SHA-256 `00c36da84d6927842194e488ef1b9892cf4d8f1abdb3229a0b0600b1bb7e50a0` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; sfondo opaco |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the room, the counter, the stools, the bottles, the espresso machine, the tables and chairs, the walls, the wall lamps, the colours, the hand-inked European comic style and the composition. Change only this: remove the large hanging lamp above the centre of the counter, together with its cord and its bright pool of light, and fill that area naturally with the same ceiling beams, shelves and wall behind it. The room stays lit by the wall lamps at the sides, with the same warm, dim, dirty mood.
+
+Avoid: any other change to the image; any text, letters, numbers, signs, labels, logos, brands, signatures or watermarks; neon signs; people, faces, hands, silhouettes; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-furioso-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 18:55:48 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `7fb4f2f` |
+| Prompt | [prompt-fetta.md](../../prompt-fetta.md#secondo-giro); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2758391 byte; SHA-256 `07d791e1d6470ccaf97e43786a55a76404652f495afc333e33b6a4c7648cd9c3` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/spazienzio.png` SHA-256 `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-eb97c19e-e9dc-4f10-8b1c-3053814eec7d.png`, copia `originali/spazienzio-furioso-2.png`; SHA-256 `07d791e1d6470ccaf97e43786a55a76404652f495afc333e33b6a4c7648cd9c3` |
+| Anteprima / consegna | [spazienzio-furioso.webp](ritratti/spazienzio-furioso.webp); 1024×1536 px, WEBP, RGBA, 508608 byte; SHA-256 `f56575e3c57387857322b889d893f953e74e5693019c57a0ad262a6d1d11dabe` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: he is very broad, so frame him from a little further away than a normal half-body portrait: his whole shoulders and both arms, fists included, fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: explosive rage at its absolute peak, completely out of control: bellowing at the top of his lungs with his mouth wide open, eyes bulging, every vein on his head and neck swollen, face purple-red, leaning forward aggressively, both fists raised and shaking. Nothing comes out of his nose.
+
+Avoid: any other change to the character; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-fumante-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 18:56:35 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `7fb4f2f` |
+| Prompt | [prompt-fetta.md](../../prompt-fetta.md#secondo-giro); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2921226 byte; SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/spazienzio.png` SHA-256 `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ef3f5453-76ee-4c94-82a1-69f5b341e7df.png`, copia `originali/spazienzio-fumante-2.png`; SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23` |
+| Anteprima / consegna | [spazienzio-fumante.webp](ritratti/spazienzio-fumante.webp); 1024×1536 px, WEBP, RGBA, 517142 byte; SHA-256 `57b3967a46ac55eccf47446c804bc5763a169eda1d4fab79711ce31f89869d43` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: he is very broad, so frame him from a little further away than a normal half-body portrait: his whole shoulders and both arms, fists included, fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: seething, barely contained rage, about to explode but still holding it in: teeth grinding, jaw clenched so hard his cheeks bulge, eyes narrowed to slits, face flushed deep red, the vein on his temple throbbing, shoulders tense and fists clenched at his sides, trembling with the effort. This is figurative fuming: no steam, smoke or vapour anywhere.
+
+Avoid: any other change to the character; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, vapour, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Composizioni del secondo giro
+
+Nessuno scontorno: alfa nativo. Composizioni con Pillow, script `%TEMP%\bm-fetta-secondo.py`; WebP qualità 90, sfondo ritagliato al centro, ritratti non specchiati.
+
+- [fetta-orizzontale-spazienzio.webp](composizioni/fetta-orizzontale-spazienzio.webp): 1366×768 px, WEBP, RGB, 270806 byte; SHA-256 `43fd4003c5989117534c712bb6b7fe406cb3867bd7ccc3938a5b04ae5cb4fd21`
+- [fetta-verticale-mara.webp](composizioni/fetta-verticale-mara.webp): 390×844 px, WEBP, RGB, 92824 byte; SHA-256 `d72dd17b02297c178c0872f7569865c93e01551696020f6e5e3e8bddd568a3c7`
+- [fetta-verticale-spazienzio.webp](composizioni/fetta-verticale-spazienzio.webp): 390×844 px, WEBP, RGB, 97742 byte; SHA-256 `9fbe4b3828e47d399d5ae8a8ecebd4a87900ee9c1b162a7003328b4b9602ffc7`
