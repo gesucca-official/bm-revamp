@@ -92,37 +92,6 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .partita .contro { color: var(--tenue); font-weight: 700; }
 .fine p { margin: 6px 0; }
 
-/* Mappa */
-.mappa { position: fixed; inset: 0; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 40%, #2c2119, #140e0a); }
-.mappa header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--bordo); }
-.mappa header nav { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
-.mappa .conti { color: var(--tenue); font-size: .9em; }
-.mappa .tela { flex: 1; overflow: auto; display: flex; padding: 24px; }
-.grafo { position: relative; margin: auto; flex: none; }
-.grafo svg { position: absolute; inset: 0; overflow: visible; }
-.arco { fill: none; stroke: var(--bordo); stroke-width: 3; }
-.arco.sconfitta { stroke: var(--rosso); stroke-dasharray: 8 6; }
-.arco.indietro { stroke-dasharray: 3 5; }
-.casella { position: absolute; transform: translate(-50%, -50%); width: 150px; min-height: 64px; display: flex; flex-direction: column; justify-content: center;
-  gap: 2px; text-align: center; padding: 6px; border-width: 2px; }
-.casella small { color: var(--tenue); font-size: .75em; }
-.casella.corrente { border-color: var(--accento); box-shadow: 0 0 0 3px rgba(224,164,58,.35); }
-.casella.disponibile { border-color: var(--verde); box-shadow: 0 0 14px rgba(125,187,106,.6); animation: respira 1.6s infinite; }
-@keyframes respira { 50% { box-shadow: 0 0 2px rgba(125,187,106,.3); } }
-.casella.fatto { background: #3a2c20; }
-.casella.aperto { opacity: .85; border-style: dashed; }
-.casella.escluso { opacity: .4; text-decoration: line-through; }
-.casella.bloccato { opacity: .6; border-color: var(--rosso); }
-.casella.scelta { outline: 2px solid var(--blu); }
-.casella.finale { border-radius: 32px; background: #241a12; }
-.casella.finale.fatto { border-color: var(--accento); background: #4a3418; }
-.pannello-nodo { border-top: 1px solid var(--bordo); padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-.dettaglio { display: flex; flex-direction: column; gap: 4px; }
-.legenda { margin: 0; color: var(--tenue); font-size: .8em; display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
-.legenda .l { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 2px solid var(--bordo); margin-left: 6px; }
-.legenda .l.corrente { border-color: var(--accento); } .legenda .l.disponibile { border-color: var(--verde); }
-.legenda .l.fatto { background: #3a2c20; } .legenda .l.aperto { border-style: dashed; } .legenda .l.escluso { opacity: .4; }
-
 /* Achievement, stato, avvisi */
 .achievement { position: fixed; inset: 0; overflow: auto; padding: 16px; background: var(--fondo); }
 .achievement header, .pannello-stato header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -162,25 +131,41 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
   .riquadro { padding: 14px; }
   .telefono { padding: 6px; }
   .schede, .achievement ul { grid-template-columns: 1fr; }
-  .mappa header { padding: 8px 12px; gap: 4px 10px; }
-  .mappa header nav { margin-left: 0; }
-  .mappa header nav button { padding: 4px 8px; font-size: .85em; }
-  .pannello-nodo .primario { align-self: stretch; }
   .avvisi { top: auto; bottom: 34%; width: 90vw; align-items: center; }
-  .mappa .tela { padding: 16px 8px; }
-  .casella { width: 132px; }
   .pannello-stato { width: 100vw; top: auto; height: 50%; border-left: none; border-top: 1px solid var(--bordo); }
 }
 .riquadro.fine { min-width: min(360px, 90vw); }
 
-/* Fase C: bozzetto della bacheca a lettere (bacheca.md) */
-.bacheca { position: fixed; inset: 0; background: #2a1c10; }
-.bacheca svg { display: block; }
+/* Fase D: la mappa come bacheca a lettere (bacheca.md) */
+.bacheca { position: fixed; inset: 0; background: #2a1c10; overflow: hidden; }
+.bacheca svg { display: block; position: absolute; inset: 0; }
 .bacheca .lettere { font-family: 'League Gothic', 'Arial Narrow', sans-serif; letter-spacing: .06em; }
 .bacheca .penna { font-family: 'Patrick Hand', cursive; fill: #233a8f; }
-.chiudi-bacheca { position: fixed; top: 6px; right: 6px; min-height: 48px; background: #f6df6e; color: #233a8f; border: none; border-radius: 2px;
-  font-family: 'Patrick Hand', cursive; font-size: 20px; transform: rotate(3deg); box-shadow: 2px 4px 8px rgba(0,0,0,.5); }
-.titoletto { font-size: 1.05em; margin: 8px 0; }
+.bacheca .area { cursor: pointer; }
+.bacheca .area.disponibile:hover, .bacheca .area.disponibile:focus { fill: rgba(255,255,255,.04); }
+.bacheca .cornice { position: absolute; inset: 0; border-style: solid; pointer-events: none; }
+.comandi-bacheca { position: absolute; display: flex; gap: 6px; }
+.azione-bacheca { position: absolute; display: flex; gap: 8px; }
+.comandi-bacheca button, .azione-bacheca button { box-shadow: 2px 3px 6px rgba(0,0,0,.5); }
+.comandi-bacheca button { background: #efe8d6; color: #233a8f; border: none; border-radius: 2px; font-family: 'Patrick Hand', cursive; font-size: 17px; }
+.azione-bacheca button.primario { background: #f6df6e; color: #233a8f; border: none; border-radius: 2px; font-family: 'Patrick Hand', cursive; font-size: 20px; }
+.cartoncino { position: absolute; left: 50%; bottom: 80px; transform: translateX(-50%) rotate(-1deg); background: #efe8d6; color: #233a8f; z-index: 8;
+  font-family: 'Patrick Hand', cursive; font-size: 19px; padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; max-width: min(520px, 92vw);
+  box-shadow: 3px 6px 14px rgba(0,0,0,.6); }
+.cartoncino button { background: #fff8e2; color: #233a8f; border-color: #c9bfa5; font-family: inherit; }
+.cartoncino button.primario { background: #f6df6e; }
+@media (orientation: landscape) {
+  .comandi-bacheca { right: 34px; bottom: 32px; }
+  .azione-bacheca { left: 50%; bottom: 30px; transform: translateX(-50%); }
+}
+@media (orientation: portrait) {
+  .comandi-bacheca { top: 18px; left: 18px; right: 18px; }
+  .comandi-bacheca { gap: 4px; }
+  .comandi-bacheca button { flex: 1 1 0; min-width: 0; padding: 4px 1px; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .azione-bacheca { left: 18px; right: 18px; bottom: 18px; }
+  .azione-bacheca button { flex: 1; }
+  .cartoncino { bottom: 84px; }
+}
 .selettore-carattere { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-bottom: 16px; }
 .campione { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 8px 12px; }
 .campione small { color: var(--tenue); font-size: .75em; }

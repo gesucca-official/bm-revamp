@@ -6,7 +6,6 @@ import {carriere, nomeSblocco} from './dati.ts';
 import {Gioco} from './Gioco.tsx';
 import {Bacheca} from './Bacheca.tsx';
 import {useCarattere} from './font.ts';
-import {Mappa} from './Mappa.tsx';
 import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
 
@@ -16,7 +15,6 @@ export function App() {
   const [nome, setNome] = useState(caricaNome);
   const [stati, setStati] = useState<Record<string, Stato>>(() => Object.fromEntries(carriere.map(c => [c.id, carica(c)])));
   const [aperta, setAperta] = useState<string | null>(null);
-  const [bacheca, setBacheca] = useState(false);
   const [carattere, prossimoCarattere, scegliCarattere] = useCarattere();
   const [pannello, setPannello] = useState<'gioco' | 'mappa' | 'achievement'>('gioco');
   const [statoAperto, setStatoAperto] = useState(false);
@@ -43,11 +41,10 @@ export function App() {
   const c = carriere.find(x => x.id === aperta);
   const avvisiDom = <div className="avvisi">{avvisi.map(a => <div key={a.id} className="avviso" data-testid="avviso">{a.testo}</div>)}</div>;
 
-  if (bacheca) return <Bacheca c={carriere.find(x => x.id === 'prova')!} onChiudi={() => setBacheca(false)} />;
   if (!c) {
     return <>
       <Elenco carriere={carriere} stati={stati} nome={nome} onNome={n => { setNome(n); salvaNome(n); }}
-        carattere={carattere.id} onCarattere={scegliCarattere} onBacheca={() => setBacheca(true)}
+        carattere={carattere.id} onCarattere={scegliCarattere}
         onApri={id => { setAperta(id); setPannello('gioco'); }}
         onNuovoGiro={id => { const cc = carriere.find(x => x.id === id)!; imposta(cc, nuovoGiro(cc, stati[id].account, stati[id].giro)); setAperta(id); setPannello('mappa'); }}
         onAchievement={id => { setAperta(id); setPannello('achievement'); }}
@@ -69,7 +66,7 @@ export function App() {
   let schermo;
   if (pannello === 'achievement') schermo = <Achievement c={c} s={s} onChiudi={() => setPannello(v.tipo === 'mappa' ? 'mappa' : 'gioco')} />;
   else if (pannello === 'mappa' || v.tipo === 'mappa') {
-    schermo = <Mappa c={c} s={s} azione={azione} onRiprendi={() => setPannello('gioco')} onAchievement={() => setPannello('achievement')}
+    schermo = <Bacheca c={c} s={s} azione={azione} onRiprendi={() => setPannello('gioco')} onAchievement={() => setPannello('achievement')}
       onNuovoGiro={nuovo} onElenco={() => setAperta(null)} onStato={() => setStatoAperto(x => !x)} />;
   } else {
     schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} carattere={carattere} onCarattere={prossimoCarattere} onMappa={() => setPannello('mappa')}

@@ -161,6 +161,11 @@ async function giro(nome, viewport) {
   await tid('mappa-nuovo-giro').click();
   atteso(await statoNodo('nodo-f') === 'aperto', 'il vicolo visibile al nuovo giro');
   await foto('20-mappa-nuovo-giro', 300);
+  // Un cartoncino: si tocca un punto che non è disponibile.
+  await tid('nodo-nodo-g').click();
+  await tid('dettaglio').waitFor();
+  await foto('20b-cartoncino', 200);
+  await tid('dettaglio').getByRole('button', {name: 'Chiudi'}).click();
   // Secondo giro: con Mara, poi in D con Mara verso la porta aperta, il secondo finale.
   await continua();
   await salta();
@@ -183,13 +188,6 @@ async function giro(nome, viewport) {
   await tid('apri-achievement').click();
   await foto('21-achievement', 200);
 
-  // Bozzetto della bacheca a lettere (Fase C, parte 2).
-  await page.getByRole('button', {name: 'Chiudi'}).click();
-  await page.getByRole('button', {name: 'Elenco'}).click();
-  await tid('apri-bacheca').click();
-  await tid('bacheca').waitFor();
-  await foto('24-bozzetto-bacheca', 800);
-  await tid('chiudi-bacheca').click();
 
   await ctx.close();
   if (errori.length) throw new Error(`${nome}: errori nella pagina:\n${errori.join('\n')}`);

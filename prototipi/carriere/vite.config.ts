@@ -16,7 +16,7 @@ if (lanHost) console.log(`\n  Dal telefono, sulla stessa rete: http://${lanHost}
 
 export default defineConfig({
   base: './',
-  // The assets are read in place (docs/design/carriere/asset/tutorial), never copied (prototipo.md, «Come»).
-  server: {host: lanHost ?? '127.0.0.1', port, strictPort: true, fs: {allow: ['.', '../../docs/design/carriere/asset/tutorial']}},
+  // The assets are read in place (docs/design/carriere/asset/tutorial and, when generated, asset/bacheca), never copied (prototipo.md, «Come»).
+  server: {host: lanHost ?? '127.0.0.1', port, strictPort: true, fs: {allow: ['.', '../../docs/design/carriere/asset/tutorial', '../../docs/design/carriere/asset/bacheca']}},
   preview: {host: '127.0.0.1', port: Number(process.env.BM_PREVIEW_PORT ?? 4331), strictPort: true}
 });

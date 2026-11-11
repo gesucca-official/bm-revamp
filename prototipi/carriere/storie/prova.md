@@ -1,4 +1,4 @@
-# Prova — Dov'è Grappino?
+# Dov'è Grappino? — mini-carriera di prova
 
 > Mini-carriera di prova del prototipo CA-0a, scritta dalla regia l'11 novembre 2026 con battute segnaposto: **non è una storia del
 > gioco** e non va nel serbatoio. Serve a mostrare rami, segni, condizioni, sconfitte che aprono un ramo, un nodo segreto, uno sblocco su

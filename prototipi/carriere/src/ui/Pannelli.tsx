@@ -7,8 +7,8 @@ import {CARATTERI} from './font.ts';
 /** Battute vere del tutorial, con accenti e maiuscole. */
 const CAMPIONE = 'Lui è Spazienzio. Ha finito la pazienza nel 2019, e da allora non gli è più tornata. «È FREDDO, FA SCHIFO.»';
 
-export function Elenco({carriere, stati, nome, onNome, carattere, onCarattere, onBacheca, onApri, onNuovoGiro, onAchievement, onAzzera}: {carriere: Carriera[]; stati: Record<string, Stato>;
-  nome: string; onNome: (n: string) => void; carattere: string; onCarattere: (id: string) => void; onBacheca: () => void; onApri: (id: string) => void; onNuovoGiro: (id: string) => void; onAchievement: (id: string) => void; onAzzera: () => void}) {
+export function Elenco({carriere, stati, nome, onNome, carattere, onCarattere, onApri, onNuovoGiro, onAchievement, onAzzera}: {carriere: Carriera[]; stati: Record<string, Stato>;
+  nome: string; onNome: (n: string) => void; carattere: string; onCarattere: (id: string) => void; onApri: (id: string) => void; onNuovoGiro: (id: string) => void; onAchievement: (id: string) => void; onAzzera: () => void}) {
   return (
     <div className="elenco" data-testid="elenco">
       <h1>Carriere <small>prototipo CA-0a</small></h1>
@@ -45,8 +45,6 @@ export function Elenco({carriere, stati, nome, onNome, carattere, onCarattere, o
           );
         })}
       </div>
-      <p><button className="primario" data-testid="apri-bacheca" onClick={onBacheca}>Bozzetto bacheca</button>
-        <span className="nota"> la mappa come bacheca a lettere, a metà giro della prova (Fase C)</span></p>
       <p className="nota">Prototipo usa e getta: partite simulate, progresso salvato solo in questo browser. <button onClick={onAzzera} data-testid="azzera">Azzera tutto</button></p>
     </div>
   );
