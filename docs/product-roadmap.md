@@ -73,6 +73,14 @@ Prima di esporre il servizio, un ricontrollo di sicurezza mirato: l'autorizzazio
 ([debito tecnico](technical-debt.md)), restano da guardare codici di verifica, limiti ai tentativi di accesso, credenziali di
 amministrazione e log.
 
+**Rimandati da C4 al primo client servito in rete,** quindi da fare in DE-1 (decisioni del proprietario dell'11 novembre 2026):
+
+- **Peso e caricamento degli asset:** compressione e caricamento mirato, il punto 2 di [C4-8b](client-c4-plan.md#c4-8b--prestazioni-e-budget)
+  («rimandiamolo a quando il client vivrà da qualche parte che non sia il locale»); per un client online il peso torna da valutare (D9
+  rivista). Vale anche per gli asset delle carriere, che oggi pesano 0,5–0,6 MB a ritratto.
+- **Dichiarazione sulle immagini generate e relative stringhe** nel client, rimandate in [C4-9](client-c4-plan.md#c4-9--consolidamento-e-giudizio-del-proprietario)
+  («Rimanda (b)»).
+
 Hosting, da riverificare all'avvio perché le offerte gratuite cambiano:
 
 - **Strada principale:** una VM gratuita sempre accesa (per esempio Oracle Cloud «Always Free», ARM), con un sottodominio gratuito
