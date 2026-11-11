@@ -595,6 +595,8 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 
 **Opzione 0 fatta (11 novembre 2026).** Lo strumento nuovo `client-web/tools/draw-probe.mjs` localizza i picchi FFA all'arrivo della vista, in `beginSequence`, soprattutto nella ricerca del posto dei primi piani (`closeUp`, 30–85 ms); le sfocature dello sfondo costano in CPU 0,02–0,18 ms per frame e non sono nei picchi ([rapporto](reports/client-c4/c4-8b.md#opzione-0-la-misura-scelta-del-proprietario-misura-poi-sfocature)). L'opzione 1(a) **non è fatta**: la misura ne smentisce la premessa; si attende la scelta del proprietario.
 
+**Scelta del proprietario (11 novembre 2026)** dopo la misura, alla domanda «Cosa faccio al posto delle sfocature?»: «Velocizza closeUp». Si rende più veloce la ricerca del posto dei primi piani (`closeUp` in `readability.ts`) **con lo stesso risultato**, provato da un test di uguaglianza contro la funzione attuale; le sfocature restano come sono.
+
 **Dipendenze.** Tutti i blocchi visivi; D9.
 
 **File toccati.** `scene.ts`, `readability.ts`, eventualmente `art.ts`, documenti comuni.
