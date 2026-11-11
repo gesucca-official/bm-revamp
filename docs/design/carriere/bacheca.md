@@ -34,9 +34,11 @@ La bacheca non può disegnare linee oblique, quindi la struttura a rombi va **co
 
 - **Ogni nodo è una riga di lettere** con il suo titolo («IL BANCONE VUOTO»), allineata alle scanalature. Le colonne di profondità diventano
   sezioni del listino, una accanto all'altra o una sotto l'altra, secondo l'orientamento.
-- **I collegamenti** si fanno con i simboli che le bacheche hanno davvero: frecce e trattini di plastica nelle stesse scanalature
-  (`IL BANCONE VUOTO → IN CUCINA`), oppure, dove serve un salto in verticale, con un filo o un'etichetta. La regola è: niente che una
-  bacheca vera non potrebbe avere.
+- **I collegamenti fra i nodi sono spilli e cordicelle** (proprietario, 11 novembre 2026: «si possono fare inserendo degli spilli e
+  legando fra loro delle cordicelle»): uno spillo piantato nel feltro accanto a ogni riga, una cordicella tesa da spillo a spillo. Le
+  cordicelle vanno anche in obliquo, quindi il rombo si vede davvero, mentre le lettere restano nelle scanalature. Lo stato del
+  collegamento sta nella cordicella: tesa per un percorso fatto, allentata o arrotolata intorno allo spillo per uno ancora da fare,
+  assente se porta a un segreto non trovato. Frecce e trattini di plastica restano possibili dentro le righe.
 - **Gli stati dei nodi** diventano stati delle lettere:
   - **corrente:** una puntina colorata o una freccia di plastica accanto alla riga;
   - **disponibile:** lettere dritte e bianche, con la freccia che indica dove andare;
