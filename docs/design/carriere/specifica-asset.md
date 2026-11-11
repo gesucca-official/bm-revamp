@@ -2,8 +2,8 @@
 
 > Specifica di progetto, senza valore normativo, scritta l'11 novembre 2026 e corretta lo stesso giorno dopo la fetta verticale (composizione
 > generale approvata dal proprietario) per produrre il materiale vero del [tutorial](tutorial.md)
-> prima che la scena di dialogo esista nel client (CA-0, dopo C5). **Va confermata dalla [fetta verticale](prompt-fetta.md):** se la
-> composizione di prova mostra che una misura non regge, si corregge qui prima di generare il resto. Cosa serve, scena per scena, è in
+> prima che la scena di dialogo esista nel client (CA-0, dopo C5). **Confermata dalla [fetta verticale](prompt-fetta.md)**, chiusa dal
+> proprietario l'11 novembre 2026: vale per il resto delle scene; se una misura non regge, si corregge qui prima di generare. Cosa serve, scena per scena, è in
 > [illustrazioni](illustrazioni.md#tutorial); l'aspetto dei personaggi nell'[identikit](../set-base/identikit.md).
 
 ## Come appare la scena

@@ -3,7 +3,8 @@
 > Elenco delle illustrazioni che le scene chiedono, con le indicazioni da cui nasceranno i prompt. Aperto il 10 novembre 2026.
 > **Aggiornato l'11 novembre 2026:** con l'aspetto approvato nell'[identikit](../set-base/identikit.md), il proprietario ha dato il via
 > al materiale vero del tutorial, prima della scena di dialogo nel client. Si parte dalla [specifica degli asset](specifica-asset.md) e da
-> una [fetta verticale](prompt-fetta.md) sulla scena 1; il resto si genera dopo il giudizio sulla fetta. La guida di stile delle carte
+> una [fetta verticale](prompt-fetta.md) sulla scena 1, chiusa l'11 novembre 2026 con sfondo S2 e quattro ritratti approvati; il resto si
+> genera con la stessa specifica. La guida di stile delle carte
 > ([SB-32](../../set-base-plan.md#sb-32--illustrazioni-del-set)) dovrà partire dagli stessi riferimenti.
 
 ## Come si faranno

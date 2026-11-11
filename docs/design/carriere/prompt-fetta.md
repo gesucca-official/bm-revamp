@@ -1,5 +1,9 @@
 # Tutorial — prompt della fetta verticale
 
+> **Chiusa l'11 novembre 2026** dal proprietario («chiudiamo la fetta») dopo il secondo giro: sfondo S2 e quattro ritratti approvati,
+> [specifica](specifica-asset.md) confermata. I link della tabella del primo giro aprono i file attuali, che il secondo giro ha sostituito; le
+> versioni precedenti restano nella storia di git e nel [registro](asset/tutorial/registro.md).
+
 11 novembre 2026. Prima produzione di materiale vero per il [tutorial](tutorial.md), limitata alla **scena 1** ([dialoghi](tutorial-dialoghi.md#scena-1--il-trambusto)):
 lo sfondo S2 e due espressioni per Mara e due per Spazienzio, più quattro composizioni di prova con la finestra di dialogo. Serve a
 verificare la [specifica degli asset](specifica-asset.md) prima di generare il resto. Processo come per gli identikit: prompt letterali
@@ -134,6 +138,6 @@ Avoid: any other change to the character; mirroring; arms or fists cut off by th
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| s2-interno | [WebP](asset/tutorial/sfondi/s2-interno.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-2) |  |
-| spazienzio-furioso | [WebP](asset/tutorial/ritratti/spazienzio-furioso.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-furioso-2) |  |
-| spazienzio-fumante | [WebP](asset/tutorial/ritratti/spazienzio-fumante.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-fumante-2) |  |
+| s2-interno | [WebP](asset/tutorial/sfondi/s2-interno.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-2) | **Approvato** (11 novembre 2026): «per ora diciamo che vanno bene tutti e tre» |
+| spazienzio-furioso | [WebP](asset/tutorial/ritratti/spazienzio-furioso.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-furioso-2) | **Approvato** (11 novembre 2026): «per ora diciamo che vanno bene tutti e tre» |
+| spazienzio-fumante | [WebP](asset/tutorial/ritratti/spazienzio-fumante.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-fumante-2) | **Approvato** (11 novembre 2026): «per ora diciamo che vanno bene tutti e tre» |
