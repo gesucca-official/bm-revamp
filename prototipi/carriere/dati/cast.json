@@ -28,13 +28,14 @@
     }
   },
   "sfondi": {
-    "S1": {"file": "sfondi/s1-esterno.webp", "varianti": {"insegna-spenta": "sfondi/s1-esterno-insegna-spenta.webp"}},
+    "S1": {"file": "sfondi/s1-esterno.webp", "varianti": {"insegna-spenta": "sfondi/s1-esterno-insegna-spenta.webp"},
+      "insegna": {"testo": "BAR IL SERRAGLIO", "x": 0.516, "y": 0.228, "larghezza": 0.3, "spentaIn": ["insegna-spenta"]}},
     "S2": {"file": "sfondi/s2-interno.webp", "varianti": {"disordine": "sfondi/s2-interno-disordine.webp"}},
     "S3": {"file": "sfondi/s3-dimmi-di-si.webp"}
   },
   "sprite": {
-    "bici-mara": {"pose": {"ferma": "sprite/bici-mara.webp"}},
-    "grappino": {"pose": {"seduto": "sprite/grappino-seduto.webp", "ringhia": "sprite/grappino-ringhia.webp", "russa": "sprite/grappino-russa.webp"}},
-    "combriccola": {"pose": {"davanti-alla-porta": "sprite/combriccola-davanti-alla-porta.webp", "in-fuga": "sprite/combriccola-in-fuga.webp"}, "scala": 0.67}
+    "bici-mara": {"pose": {"ferma": "sprite/bici-mara.webp"}, "x": 0.6, "piedi": 0.74, "altezza": 0.3},
+    "grappino": {"pose": {"seduto": "sprite/grappino-seduto.webp", "ringhia": "sprite/grappino-ringhia.webp", "russa": "sprite/grappino-russa.webp"}, "x": 0.56, "piedi": 0.74, "altezza": 0.17},
+    "combriccola": {"pose": {"davanti-alla-porta": "sprite/combriccola-davanti-alla-porta.webp", "in-fuga": "sprite/combriccola-in-fuga.webp"}, "x": 0.5, "piedi": 0.74, "altezza": 0.55}
   }
 }

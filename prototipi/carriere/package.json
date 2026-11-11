@@ -1,0 +1,31 @@
+{
+  "name": "bm-prototipo-carriere",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.13.0",
+    "npm": "11.6.2"
+  },
+  "scripts": {
+    "convert": "node --experimental-strip-types strumenti/converti.ts --tutti",
+    "check": "node --experimental-strip-types strumenti/controlla.ts",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "build": "tsc --noEmit && vite build",
+    "start": "vite",
+    "serve": "vite preview",
+    "shots": "node strumenti/catture.mjs",
+    "lock": "node strumenti/deriva-lock.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3",
+    "vite": "8.3.5"
+  }
+}

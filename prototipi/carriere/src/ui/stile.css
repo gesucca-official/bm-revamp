@@ -1,0 +1,142 @@
+/* CA-0a: grafica minima, senza rifinitura (prototipo.md, «Fuori»). Misure della scena dalla specifica degli asset. */
+:root {
+  --fondo: #1b1410; --carta: #2a1f18; --bordo: #5a4330; --testo: #f3e7d3; --tenue: #b8a48a;
+  --accento: #e0a43a; --verde: #7dbb6a; --rosso: #c8553d; --blu: #6aa3c8;
+  font-family: system-ui, "Segoe UI", sans-serif; color: var(--testo); background: var(--fondo);
+}
+* { box-sizing: border-box; }
+html, body, #app { margin: 0; height: 100%; }
+body { overflow: hidden; background: var(--fondo); }
+button { font: inherit; color: var(--testo); background: var(--carta); border: 1px solid var(--bordo); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+button:hover { border-color: var(--accento); }
+button.primario { background: var(--accento); color: #20160e; border-color: var(--accento); font-weight: 600; }
+.nota { color: var(--tenue); font-size: 0.9em; }
+.pulsanti { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Elenco */
+.elenco { padding: 24px 16px; max-width: 980px; margin: 0 auto; height: 100%; overflow: auto; }
+.elenco h1 small { font-size: 0.5em; color: var(--tenue); font-weight: 400; }
+.nome-giocatore { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; }
+.nome-giocatore input { font: inherit; background: var(--carta); color: var(--testo); border: 1px solid var(--bordo); border-radius: 6px; padding: 4px 8px; }
+.schede { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.scheda { background: var(--carta); border: 1px solid var(--bordo); border-radius: 12px; padding: 16px; }
+.scheda h2 { margin: 0 0 8px; }
+.scheda p { margin: 4px 0; }
+
+/* Scena: sfondo «cover», ritratto e finestra come nella specifica (orizzontale 28% e 85%, verticale 30% e 60%) */
+.gioco { position: fixed; inset: 0; overflow: hidden; background: #000; user-select: none; }
+.gioco .sfondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.gioco .insegna { position: absolute; transform: translate(-50%, -50%); text-align: center; font-weight: 900; letter-spacing: .08em; white-space: nowrap;
+  color: #ffd27a; text-shadow: 0 0 6px #ff9a2a, 0 0 18px #ff7a00; font-family: Impact, "Arial Narrow", sans-serif; pointer-events: none; }
+.gioco .insegna.spenta { color: #5a4630; text-shadow: none; }
+.gioco .sprite { position: absolute; transform: translateX(-50%); pointer-events: none; }
+.gioco .sprite.esce { animation: esce 1.1s ease-in forwards; }
+@keyframes esce { to { transform: translateX(60vw); opacity: 0; } }
+.gioco .ritratto { position: absolute; bottom: 0; left: 38%; height: 85%; transform: translateX(-50%); pointer-events: none; }
+.gioco .ritratto.ascolta { filter: brightness(0.92); }
+.gioco.scossa { animation: scossa 0.45s; }
+@keyframes scossa { 0%,100% { transform: none; } 20% { transform: translate(-12px, 4px); } 40% { transform: translate(10px, -6px); } 60% { transform: translate(-8px, 2px); } 80% { transform: translate(6px, 0); } }
+.barra { position: absolute; top: 8px; left: 8px; right: 8px; display: flex; gap: 8px; align-items: center; z-index: 5; }
+.barra .dove { margin-right: auto; background: rgba(0,0,0,.55); padding: 4px 10px; border-radius: 8px; font-size: 0.9em; }
+.barra button { background: rgba(20,14,10,.75); }
+.dialogo { position: absolute; left: 0; right: 0; bottom: 0; height: 28%; background: rgba(16,11,8,.88); border-top: 2px solid var(--bordo);
+  padding: 18px 8% 12px; z-index: 3; cursor: pointer; }
+.dialogo .nome { position: absolute; top: -18px; left: 7%; background: var(--accento); color: #20160e; font-weight: 700; padding: 4px 14px; border-radius: 8px; }
+.dialogo .testo { font-size: clamp(16px, 2.3vh, 24px); line-height: 1.45; max-width: 70em; }
+.dialogo .narrazione { font-style: italic; color: var(--tenue); }
+.dialogo .avanti { position: absolute; right: 4%; bottom: 10px; color: var(--accento); animation: lampeggia 1s infinite; }
+@keyframes lampeggia { 50% { opacity: .2; } }
+.notifica { position: absolute; top: 56px; right: 16px; width: min(380px, 92vw); background: #f4f1ea; color: #1b1410; border-radius: 14px; padding: 12px 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5); z-index: 4; animation: scende .3s; }
+.notifica .mittente { font-weight: 700; font-size: .85em; margin-bottom: 4px; }
+.notifica .suggerimento { color: #786a58; font-size: .8em; margin-top: 6px; }
+@keyframes scende { from { transform: translateY(-30px); opacity: 0; } }
+
+/* Riquadri sopra la scena */
+.riquadro { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: rgba(27,20,16,.95); border: 1px solid var(--bordo);
+  border-radius: 14px; padding: 18px 22px; z-index: 6; max-width: min(900px, 94vw); max-height: 90%; overflow: auto; cursor: default; }
+.riquadro h2 { margin: 0 0 12px; }
+.scelta-muta .opzioni { display: flex; gap: 16px; }
+.offerta { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px; width: 200px; }
+.offerta img { height: 220px; width: 100%; object-fit: cover; object-position: top; border-radius: 8px; }
+.telefono .schermo { width: min(340px, 86vw); background: #f4f1ea; color: #1b1410; border-radius: 24px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.telefono .intestazione { font-weight: 700; text-align: center; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+.fumetto { border-radius: 14px; padding: 8px 12px; max-width: 85%; text-align: left; }
+.fumetto.ricevuto { background: #ddd6c8; align-self: flex-start; }
+.fumetto.risposta { background: #3d7bd9; color: white; border: none; align-self: flex-end; }
+.telefono .rispondi { font-size: .8em; color: #786a58; margin-top: 8px; }
+.partita .tavolo { display: flex; align-items: center; gap: 16px; }
+.partita figure { margin: 0; text-align: center; }
+.partita figure img { height: 180px; width: 140px; object-fit: cover; object-position: top; border-radius: 8px; border: 2px solid var(--bordo); }
+.partita .per-te img { border-color: var(--verde); }
+.partita figcaption small { display: block; color: var(--verde); }
+.partita .avversari { display: flex; gap: 10px; }
+.partita .contro { color: var(--tenue); font-weight: 700; }
+.fine p { margin: 6px 0; }
+
+/* Mappa */
+.mappa { position: fixed; inset: 0; display: flex; flex-direction: column; background: radial-gradient(circle at 50% 40%, #2c2119, #140e0a); }
+.mappa header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--bordo); }
+.mappa header nav { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+.mappa .conti { color: var(--tenue); font-size: .9em; }
+.mappa .tela { flex: 1; overflow: auto; display: flex; padding: 24px; }
+.grafo { position: relative; margin: auto; flex: none; }
+.grafo svg { position: absolute; inset: 0; overflow: visible; }
+.arco { fill: none; stroke: var(--bordo); stroke-width: 3; }
+.arco.sconfitta { stroke: var(--rosso); stroke-dasharray: 8 6; }
+.arco.indietro { stroke-dasharray: 3 5; }
+.casella { position: absolute; transform: translate(-50%, -50%); width: 150px; min-height: 64px; display: flex; flex-direction: column; justify-content: center;
+  gap: 2px; text-align: center; padding: 6px; border-width: 2px; }
+.casella small { color: var(--tenue); font-size: .75em; }
+.casella.corrente { border-color: var(--accento); box-shadow: 0 0 0 3px rgba(224,164,58,.35); }
+.casella.disponibile { border-color: var(--verde); box-shadow: 0 0 14px rgba(125,187,106,.6); animation: respira 1.6s infinite; }
+@keyframes respira { 50% { box-shadow: 0 0 2px rgba(125,187,106,.3); } }
+.casella.fatto { background: #3a2c20; }
+.casella.aperto { opacity: .85; border-style: dashed; }
+.casella.escluso { opacity: .4; text-decoration: line-through; }
+.casella.bloccato { opacity: .6; border-color: var(--rosso); }
+.casella.scelta { outline: 2px solid var(--blu); }
+.pannello-nodo { border-top: 1px solid var(--bordo); padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.dettaglio { display: flex; flex-direction: column; gap: 4px; }
+.legenda { margin: 0; color: var(--tenue); font-size: .8em; display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+.legenda .l { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 2px solid var(--bordo); margin-left: 6px; }
+.legenda .l.corrente { border-color: var(--accento); } .legenda .l.disponibile { border-color: var(--verde); }
+.legenda .l.fatto { background: #3a2c20; } .legenda .l.aperto { border-style: dashed; } .legenda .l.escluso { opacity: .4; }
+
+/* Achievement, stato, avvisi */
+.achievement { position: fixed; inset: 0; overflow: auto; padding: 16px; background: var(--fondo); }
+.achievement header, .pannello-stato header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.achievement ul { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.achievement li { background: var(--carta); border: 1px solid var(--bordo); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.achievement li.preso { border-color: var(--verde); }
+.achievement .indizio { color: var(--tenue); font-style: italic; }
+.pannello-stato { position: fixed; top: 0; right: 0; bottom: 0; width: min(360px, 100vw); background: rgba(16,11,8,.96); border-left: 1px solid var(--bordo);
+  padding: 12px; z-index: 20; overflow: auto; font-size: .85em; display: flex; flex-direction: column; gap: 6px; }
+.avvisi { position: fixed; top: 52px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
+.avviso { background: var(--verde); color: #10200c; padding: 8px 16px; border-radius: 10px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,.4); animation: scende .3s; }
+
+/* Verticale (390×844): finestra al 30%, ritratto centrato al 60%, sfondo ritagliato sulla striscia centrale */
+@media (orientation: portrait) {
+  .gioco .ritratto { left: 50%; height: 60%; }
+  .dialogo { height: 30%; padding: 22px 16px 12px; }
+  .dialogo .nome { left: 16px; }
+  .dialogo .testo { font-size: 16px; }
+  .barra .dove { font-size: .75em; }
+  .barra button { padding: 4px 8px; font-size: .85em; }
+  .notifica { left: 12px; right: 12px; width: auto; top: 52px; }
+  .scelta-muta .opzioni { flex-direction: column; }
+  .offerta { width: 100%; flex-direction: row; }
+  .offerta img { height: 90px; width: 70px; }
+  .partita .tavolo { flex-direction: column; }
+  .partita figure img { height: 120px; width: 96px; }
+  .riquadro { padding: 14px; }
+  .telefono { padding: 6px; }
+  .schede, .achievement ul { grid-template-columns: 1fr; }
+  .mappa header { padding: 8px 12px; gap: 4px 10px; }
+  .mappa header nav { margin-left: 0; }
+  .mappa header nav button { padding: 3px 8px; font-size: .8em; }
+  .avvisi { top: auto; bottom: 34%; width: 90vw; align-items: center; }
+  .mappa .tela { padding: 16px 8px; }
+  .casella { width: 132px; }
+  .pannello-stato { width: 100vw; top: auto; height: 50%; border-left: none; border-top: 1px solid var(--bordo); }
+}

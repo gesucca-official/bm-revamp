@@ -62,7 +62,7 @@ stato:** si aggiorna a ogni passo, l'[indice](README.md#stato-corrente) ne ripor
 | Specifica degli asset del dialogo | CA-0 | **Confermata** dalla fetta verticale (11 novembre 2026) | [specifica](design/carriere/specifica-asset.md) |
 | Materiale visivo del tutorial | CA-1 | **Completo e approvato** (11 novembre 2026): 3 sfondi con 2 varianti, 15 ritratti, 3 pose di Grappino, la bici, 2 sagome. **Da aggiungere:** Mara e Spazienzio esasperati, per chi ascolta Piera (P8 del prototipo) | [fetta](design/carriere/prompt-fetta.md), [tre giri](design/carriere/prompt-tutorial-resto.md) |
 | Nome del bar | CA | **Deciso** (11 novembre 2026): Il Serraglio, insegna «BAR IL SERRAGLIO»; resta se farne il titolo del gioco | [flavour](design/set-base/flavour.md#il-mondo) |
-| **CA-0a** Prototipo delle carriere | CA-0 | **Fase A fatta e rivista; Fase B avviata** (11 novembre 2026) nella stessa sessione, per delega del proprietario; domande P1–P8 al proprietario | [prototipo](design/carriere/prototipo.md), [proposta della Fase A](design/carriere/prototipo-fase-a.md) |
+| **CA-0a** Prototipo delle carriere | CA-0 | **Fase B fatta** (11 novembre 2026), in attesa del giudizio del proprietario; domande P1–P8 al proprietario | [prototipo](design/carriere/prototipo.md), [proposta della Fase A](design/carriere/prototipo-fase-a.md), [rapporto della Fase B](design/carriere/prototipo-fase-b.md) |
 | Epilogo del tutorial | CA-1 | Da scrivere: battute al Dimmi Di Sì per chi raggiunge gli amici | [dialoghi](design/carriere/tutorial-dialoghi.md#epilogo-del-fallimento--da-scrivere) |
 
 **CA-0a, il prototipo.** È il primo pezzo di [CA-0](#ca--carriera-single-player) anticipato, usa e getta, in una cartella sua fuori da

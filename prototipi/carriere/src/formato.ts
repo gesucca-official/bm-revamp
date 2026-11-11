@@ -124,8 +124,11 @@ export type Cast = {
   radiceAsset: string;
   personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[];
     velocita?: number; ritratto?: string; sprite?: string}>;
-  sfondi: Record<string, {file: string; varianti?: Record<string, string>}>;
-  sprite: Record<string, {pose: Record<string, string>; scala?: number}>;
+  // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
+  sfondi: Record<string, {file: string; varianti?: Record<string, string>;
+    insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;
+  // Dove il lettore posa lo sprite, in frazioni della scena: x del centro, y dei piedi, altezza (la specifica lascia la scala al client).
+  sprite: Record<string, {pose: Record<string, string>; x: number; piedi: number; altezza: number}>;
 };
 
 export type Problema = {riga: number; livello: 'errore' | 'avviso'; messaggio: string};

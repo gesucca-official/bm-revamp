@@ -1,0 +1,26 @@
+param([ValidateSet('Install','Lock','Test','Convert','Check','Build','Dev','Phone','Shots')][string]$Task='Build',[switch]$Offline,[string]$Out)
+# CA-0a, prototipo delle carriere: usa e getta, fuori da client-web (docs/design/carriere/prototipo.md).
+$ErrorActionPreference='Stop'
+$repo=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+# Same isolated Node runtime and npm cache as client-web (./client-c0/run.ps1 -Task Bootstrap); separate dependencies.
+$runtime=Join-Path $repo '.tools/client-c0/node-v24.13.0-win-x64'
+$cache=Join-Path $repo '.tools/client-c0/npm-cache'
+if(!(Test-Path -LiteralPath "$runtime/node.exe")){throw 'Prima predisporre Node: ./client-c0/run.ps1 -Task Bootstrap'}
+$savedPath=$env:Path
+$env:Path="$runtime;$savedPath"
+Push-Location $PSScriptRoot
+try {
+  switch($Task){
+    'Install' {$a=@('ci','--cache',$cache,'--no-audit','--no-fund');if($Offline){$a+='--offline'};& npm @a}
+    'Lock' {& npm run lock}
+    'Test' {& npm run test}
+    'Convert' {& npm run convert}
+    'Check' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run check}}
+    'Build' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build}}
+    'Dev' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run start}}
+    # Phone: only on request (T5). Serves the prototype and the repository assets on one private LAN address, no access code.
+    'Phone' {& npm run convert;if($LASTEXITCODE -eq 0){$saved=$env:BM_LAN;if(!$env:BM_LAN){$env:BM_LAN='lan'};try{& npm run start}finally{$env:BM_LAN=$saved}}}
+    'Shots' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){$saved=$env:BM_OUT;if($Out){$env:BM_OUT=$Out};try{& npm run shots}finally{$env:BM_OUT=$saved}}}
+  }
+  if($LASTEXITCODE -ne 0){throw "prototipo carriere $Task exited with code $LASTEXITCODE"}
+} finally {Pop-Location;$env:Path=$savedPath}

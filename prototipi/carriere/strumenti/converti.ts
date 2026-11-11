@@ -1,28 +1,48 @@
-// Uso (dalla radice del repository, Node di client-web):
-//   node --experimental-strip-types prototipi/carriere/strumenti/converti.ts <storia.md> [--integrazioni] [--json <uscita.json>]
-// --integrazioni applica in memoria le righe proposte per tutorial-dialoghi.md (tests/integrazioni-tutorial.ts).
-// Esce con 1 se ci sono errori.
+// Convertitore da riga di comando (CA-0a). Dalla cartella del prototipo, con il Node di client-web:
+//   node --experimental-strip-types strumenti/converti.ts --tutti
+//       converte le carriere del prototipo (sotto, CARRIERE) in dati/generati/<id>.json, con il controllo di validità
+//   node --experimental-strip-types strumenti/converti.ts <storia.md> [--integrazioni] [--json <uscita.json>]
+//       converte un solo file; --integrazioni applica in memoria le righe proposte per tutorial-dialoghi.md
+// Esce con 1 se ci sono errori di conversione o di validità.
 import fs from 'node:fs';
-import path from 'node:path';
+import {CARRIERE, leggiCast, convertiCarriera, qui} from './carriere.ts';
 import {converti} from '../src/converti.ts';
 import {applicaIntegrazioni} from '../tests/integrazioni-tutorial.ts';
-import type {Cast} from '../src/formato.ts';
+import {valida} from '../src/valida.ts';
+import type {Carriera, Problema} from '../src/formato.ts';
 
 const args = process.argv.slice(2);
-const file = args.find(a => !a.startsWith('--'));
-if (!file) { console.error('manca il file markdown'); process.exit(2); }
-const jsonOut = args.includes('--json') ? args[args.indexOf('--json') + 1] : undefined;
-const cast = JSON.parse(fs.readFileSync(new URL('../dati/cast.json', import.meta.url), 'utf8')) as Cast;
-let md = fs.readFileSync(file, 'utf8');
-if (args.includes('--integrazioni')) md = applicaIntegrazioni(md);
-const {carriera, problemi} = converti(md, cast, path.relative(process.cwd(), file).replaceAll('\\', '/'));
+const cast = leggiCast();
+let rosso = false;
 
-for (const p of problemi) console.log(`${p.livello === 'errore' ? 'ERRORE' : 'avviso'} riga ${p.riga}: ${p.messaggio}`);
-const passi = carriera.nodi.flatMap(n => n.passi);
-const conta = (t: string) => passi.filter(p => p.tipo === t).length;
-const ritento = passi.reduce((s, p) => s + (p.tipo === 'partita' ? p.ritento?.length ?? 0 : 0), 0);
-console.log(`\n${carriera.id}: ${carriera.nodi.length} nodi, ${conta('battuta')} battute, ${ritento} di ritento, ${conta('partita')} partite, ` +
-  `${conta('scelta')} scelte, ${conta('regia')} note di regia, ${carriera.achievement.length} achievement; ` +
-  `${problemi.filter(p => p.livello === 'errore').length} errori, ${problemi.filter(p => p.livello === 'avviso').length} avvisi`);
-if (jsonOut) fs.writeFileSync(jsonOut, JSON.stringify(carriera, null, 2) + '\n');
-process.exit(problemi.some(p => p.livello === 'errore') ? 1 : 0);
+const riepilogo = (c: Carriera, problemi: Problema[], validita: string[]) => {
+  for (const p of problemi) console.log(`  ${p.livello === 'errore' ? 'ERRORE' : 'avviso'} riga ${p.riga}: ${p.messaggio}`);
+  for (const e of validita) console.log(`  ERRORE validità ${e}`);
+  const passi = c.nodi.flatMap(n => n.passi);
+  const conta = (t: string) => passi.filter(p => p.tipo === t).length;
+  const ritento = passi.reduce((s, p) => s + (p.tipo === 'partita' ? p.ritento?.length ?? 0 : 0), 0);
+  const errori = problemi.filter(p => p.livello === 'errore').length + validita.length;
+  console.log(`${c.id}: ${c.nodi.length} nodi, ${conta('battuta')} battute, ${ritento} di ritento, ${conta('partita')} partite, ` +
+    `${conta('scelta')} scelte, ${conta('regia')} note di regia, ${c.achievement.length} achievement; ` +
+    `${errori} errori, ${problemi.filter(p => p.livello === 'avviso').length} avvisi`);
+  if (errori) rosso = true;
+};
+
+if (args.includes('--tutti')) {
+  const dir = new URL('dati/generati/', qui);
+  fs.mkdirSync(dir, {recursive: true});
+  for (const voce of CARRIERE) {
+    const {carriera, problemi, validita} = convertiCarriera(voce, cast);
+    riepilogo(carriera, problemi, validita);
+    fs.writeFileSync(new URL(`${carriera.id}.json`, dir), JSON.stringify(carriera, null, 2) + '\n');
+  }
+} else {
+  const file = args.find(a => !a.startsWith('--') && a !== args[args.indexOf('--json') + 1]);
+  if (!file) { console.error('uso: converti.ts --tutti | <storia.md> [--integrazioni] [--json <uscita.json>]'); process.exit(2); }
+  let md = fs.readFileSync(file, 'utf8');
+  if (args.includes('--integrazioni')) md = applicaIntegrazioni(md);
+  const {carriera, problemi} = converti(md, cast, file.replaceAll('\\', '/'));
+  riepilogo(carriera, problemi, problemi.some(p => p.livello === 'errore') ? [] : valida(carriera, cast));
+  if (args.includes('--json')) fs.writeFileSync(args[args.indexOf('--json') + 1], JSON.stringify(carriera, null, 2) + '\n');
+}
+process.exit(rosso ? 1 : 0);
