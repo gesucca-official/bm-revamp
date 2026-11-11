@@ -523,7 +523,7 @@ cornici, simboli e texture restano a C4.
 
 ## Accessibilità e residui O21 (C4-8a)
 
-**Fase B fatta, in attesa del giudizio del proprietario (10 novembre 2026).** Scelta del proprietario nella
+**Fase B fatta il 10 novembre 2026, approvata dal proprietario l'11 novembre 2026.** Scelta del proprietario nella
 [proposta](../docs/design/client-c4/accessibilita/proposta.md#scelta-del-proprietario); [rapporto](../docs/reports/client-c4/c4-8a.md#fase-b).
 
 - **Anello a due toni (1a):** `--focus-halo` (`#140c08`) come fascia attorno all'anello azzurro su `.semantic`, sui pulsanti HTML del
