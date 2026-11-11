@@ -116,3 +116,10 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 | Spazienzio | [Anteprima](identikit/prove/spazienzio-2-1.webp) | [Scheda](identikit/registro.md#spazienzio-2-1) | (11 novembre 2026) «mi piacevano di più i pantaloni della tuta con le strisce ai lati, il resto è perfetto». Unico risultato: l'esecutore l'aveva scartato proprio per le strisce sparite, e il secondo tentativo è stato [bloccato dallo strumento](identikit/registro.md#spazienzio-2-2). Terzo giro |
 | Mara | [Anteprima](identikit/prove/mara-2-1.webp) | [Scheda](identikit/registro.md#mara-2-1) | (11 novembre 2026) «la mano dove prima aveva il kebab sta lì a non fare niente, e la farei un po' meno emaciata, giusto un po'». Terzo giro |
 | Piera | [Anteprima](identikit/prove/piera-2-2.webp) | [Scheda](identikit/registro.md#piera-2-2) | **Approvata** (11 novembre 2026): «va bene così». Originale conservato come [riferimento](identikit/riferimenti/piera.png) |
+
+### Terzo giro
+
+| Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
+|---|---|---|---|
+| Spazienzio | Nessuna: generazione bloccata | [Scheda](identikit/registro.md#spazienzio-3-1) | |
+| Mara | [Anteprima](identikit/prove/mara-3-1.webp) | [Scheda](identikit/registro.md#mara-3-1) | |

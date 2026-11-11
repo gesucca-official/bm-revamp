@@ -398,3 +398,73 @@ Edit the first attached character concept sheet (image 1). Use the second attach
 
 Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; mocking body-shaming distortions.
 ~~~
+
+## spazienzio-3-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora | 11/11/2026 01:03:41 UTC+0100 (risposta dello strumento) |
+| ID job | `cfdd58e1-a704-42a4-8b57-0b01b90dc396` (richiesta rifiutata) |
+| Commit preventivo dei prompt | `ba482df` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#terzo-giro), Spazienzio, terzo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | nessun file restituito |
+| Parametri | un risultato richiesto; qualità e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/spazienzio-2-1.png` SHA-256 `c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3`<br>2. `docs/design/set-base/identikit/prove/spazienzio-A-1.png` SHA-256 `c527513e1339737b69e15175866187bd39630d2299aff290e87bfef06302d834`; impronte corrispondenti, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; nessun file restituito |
+| Originale restituito | nessun file restituito; SHA-256 non applicabile |
+| Anteprima | nessun file restituito; SHA-256 non applicabile |
+| Conversione | nessun file restituito |
+| Esito del tentativo | bloccato dal sistema di sicurezza dello strumento in fase di output, categoria dichiarata `sexual`; nessuna immagine restituita; nessun nuovo tentativo secondo le istruzioni del terzo giro |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for the trousers. Keep everything else in image 1 exactly the same: the same man, face, expression, beard, body, tattoos, socks and slippers, pose, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this: his baggy oxblood tracksuit trousers get the plain off-white stripes running down the outer side of each leg, as in image 2. The stripes are plain, with no logo or recognizable sportswear branding.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+## mara-3-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto dallo strumento |
+| Modello / versione | non esposto dallo strumento |
+| Data e ora (ricezione del file) | 11/11/2026 01:04:27 UTC+0100 |
+| ID job | non esposto dallo strumento |
+| Commit preventivo dei prompt | `ba482df` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#terzo-giro), Mara, terzo giro; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2829313 byte, modalità RGB |
+| Parametri | un risultato; qualità, forza del riferimento e altri parametri non esposti dallo strumento |
+| Seed | non esposto dallo strumento |
+| Prompt riscritto | non esposto dallo strumento |
+| Campo negativo | paragrafo Avoid nello stesso campo principale; nessun campo negativo separato |
+| Allegato effettivo | `docs/design/set-base/identikit/prove/mara-2-1.png` SHA-256 `25c22009502959689609eed87e6fabcc7971f483a66662b587f7d0f6dd6f2e61`; impronta corrispondente, nessuna trasformazione prima dell'invio |
+| Altri allegati | nessuno |
+| Termini d'uso, condizioni e attribuzioni | non verificato |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-64181b0a-9b1a-43e5-beef-c3db334b19b9.png`, copiato senza modifiche in `prove/mara-3-1.png` (ignorato da git); SHA-256 `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d` |
+| Anteprima | [WebP](prove/mara-3-1.webp), 683×1024 px, 130362 byte; SHA-256 `e2ffb53159558dde2740140e0fa7cfa5868e36e52c73278b876d3a1d34b8c059` |
+| Conversione | Pillow 13.0.0, ridimensionamento Lanczos a lato lungo 1024 px, WebP qualità 80, metodo 4; nessun ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | conservato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same woman, longer messy hair with the badly self-cut uneven fringe, staring eyes and dark circles, over-ear headphones, teal reflective vest over the dark hoodie, cube-shaped teal insulated delivery backpack, dark cycling trousers and worn-out sneakers, the foil-covered bicycle helmet in her other hand, the layout of the full-body view and the close-up, art style and plain background. Change only three things, consistently in both views: first, her free hand, the one that is now doing nothing, points with one crooked finger at something only she can see, as if she has just spotted a conspiracy; second, she is slightly less emaciated: a little more flesh on her face and limbs, still thin, angular and tired, only a small change; third, her hair is jet black, not brown.
+
+Avoid: any other change to the image; making her healthy, glamorous or curvy; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
