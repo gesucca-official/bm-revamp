@@ -1,6 +1,7 @@
 // CA-0a: controllo di validità dei dati di una carriera, scritto a mano (decisione T1 della regia; il JSON Schema arriva in CA-0).
 // Controlla forma e riferimenti del JSON, anche se non viene dal convertitore: ogni errore dice il percorso del campo.
 import type {Carriera, Cast} from './formato.ts';
+import {slug} from './converti.ts';
 
 type Oggetto = Record<string, unknown>;
 const ID = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
@@ -38,6 +39,12 @@ export function valida(dati: unknown, cast: Cast): string[] {
     ids.add(id);
   }
   const achievementIds = new Set(Array.isArray(c.achievement) ? c.achievement.map(a => (a as Oggetto)?.id as string) : []);
+  // Finali (P7): ogni destinazione «fine», con il titolo in minuscolo con trattini o l'esito come id.
+  const finali = new Set<string>();
+  JSON.stringify(c, (k, v: unknown) => {
+    if (v && typeof v === 'object' && 'fine' in v) { const d = v as Oggetto; finali.add(typeof d.finale === 'string' ? slug(d.finale) : String(d.fine)); }
+    return v;
+  });
   const rifNodo = (v: unknown, dove: string) => { testo(v, dove); if (typeof v === 'string' && !ids.has(v)) err(dove, `nodo sconosciuto: ${v}`); };
   if (typeof c.inizio === 'string') rifNodo(c.inizio, 'carriera.inizio'); else testo(c.inizio, 'carriera.inizio');
   if (lista(c.obbligatori, 'carriera.obbligatori')) c.obbligatori.forEach((x, i) => testo(x, `carriera.obbligatori[${i}]`, ID));
@@ -61,6 +68,7 @@ export function valida(dati: unknown, cast: Cast): string[] {
       case 'visto': case 'vinto': case 'perso': case 'esplorato': return rifNodo(x, `${dove}.${chiave}`);
       case 'achievement': testo(x, `${dove}.achievement`); if (typeof x === 'string' && !achievementIds.has(x)) err(`${dove}.achievement`, `achievement sconosciuto: ${x}`); return;
       case 'giri': return intero(x, `${dove}.giri`);
+      case 'finale': testo(x, `${dove}.finale`, ID); if (typeof x === 'string' && !finali.has(x)) err(`${dove}.finale`, `finale sconosciuto: ${x}`); return;
       case 'non': return condizione(x, `${dove}.non`);
       case 'tutti': case 'uno': if (lista(x, `${dove}.${chiave}`)) { if (x.length < 2) err(`${dove}.${chiave}`, 'attese almeno due condizioni'); x.forEach((y, i) => condizione(y, `${dove}.${chiave}[${i}]`)); } return;
       default: err(dove, `condizione sconosciuta: ${chiave}`);
@@ -68,7 +76,7 @@ export function valida(dati: unknown, cast: Cast): string[] {
   };
   const destinazione = (v: unknown, dove: string) => {
     if (!ogg(v, dove)) return;
-    if ('fine' in v) { campi(v, dove, ['fine'], []); uno(v.fine, `${dove}.fine`, ['completata', 'fallita']); return; }
+    if ('fine' in v) { campi(v, dove, ['fine'], ['finale']); uno(v.fine, `${dove}.fine`, ['completata', 'fallita']); if ('finale' in v) testo(v.finale, `${dove}.finale`); return; }
     campi(v, dove, ['nodo'], ['da']); rifNodo(v.nodo, `${dove}.nodo`);
     if ('da' in v) uno(v.da, `${dove}.da`, ['scelta']);
   };

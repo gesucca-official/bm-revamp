@@ -1,8 +1,9 @@
 // CA-0a: controllo del grafo di una carriera, come check-rules.py per le carte (punto 7 del perimetro).
 // Esplora gli stati raggiungibili di un giro (nodo, segni, nodi visti, partite vinte e perse, sblocchi presi) con le condizioni valutate
-// davvero. Gli atomi dell'account (esplorato, achievement, giri) dipendono da altri giri: valgono «forse», cioè tutte e due le
+// davvero. Gli atomi dell'account (esplorato, achievement, finale, giri) dipendono da altri giri: valgono «forse», cioè tutte e due le
 // possibilità (decisione T6 della regia), con un tetto di 200 000 stati.
 import type {Carriera, Condizione, Destinazione, Esito, Passo} from './formato.ts';
+import {idFinale} from './motore.ts';
 
 export const TETTO_STATI = 200_000;
 
@@ -15,6 +16,7 @@ export type Esito3 = {
   avvisi: string[];
   stati: number;
   fini: Record<Esito, number>;     // stati di fine distinti per esito
+  finali: Record<string, number>;  // stati di fine distinti per finale (P7)
   raggiunti: string[];             // nodi
   segreti: Record<string, string[]>;  // nodo segreto -> nodi da cui ci si arriva
 };
@@ -27,12 +29,12 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const battuteViste = new Set<string>();        // `${nodo}:${riga}` delle battute con condizione mostrate almeno una volta
   const achievementDati = new Set<string>();
   const istantanee: Locale[] = [];               // stato a fine nodo e a fine giro, per achievement e indizi
-  const fini: {esito: Esito; l: Locale}[] = [];
+  const fini: {esito: Esito; finale: string; l: Locale}[] = [];
   const archiStato = new Map<string, Set<string>>();
   const verso = new Map<string, Set<string>>();  // nodo -> nodi da cui si entra (per i segreti)
   const chiave = (i: Ingresso) => JSON.stringify([i.nodo, i.daScelta, Object.entries(i.l.segni).sort(), [...i.l.visti].sort(),
     [...i.l.vinti].sort(), [...i.l.persi].sort(), [...i.l.sblocchi].sort(), [...i.l.achievement].sort()]);
-  const chiaveFine = (e: Esito, l: Locale) => 'fine:' + e + JSON.stringify([[...l.sblocchi].sort(), Object.entries(l.segni).sort()]);
+  const chiaveFine = (e: Esito, finale: string, l: Locale) => `fine:${e}:${finale}` + JSON.stringify([[...l.sblocchi].sort(), Object.entries(l.segni).sort()]);
   const fineVista = new Set<string>();
 
   // Logica a tre valori: gli atomi dell'account sono «forse», salvo giri 0 che vale sempre.
@@ -47,7 +49,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
     if ('vinto' in cond) return b(l.vinti.includes(cond.vinto));
     if ('perso' in cond) return b(l.persi.includes(cond.perso));
     if ('giri' in cond) return cond.giri <= 0 ? 'v' : '?';
-    return '?';  // esplorato, achievement
+    return '?';  // esplorato, achievement, finale
   };
 
   const coda: Ingresso[] = [];
@@ -79,9 +81,10 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
     const successore = (d: Destinazione, l: Locale) => {
       istantanee.push(l);
       if ('fine' in d) {
-        const k = chiaveFine(d.fine, l);
+        const finale = idFinale(d);
+        const k = chiaveFine(d.fine, finale, l);
         (archiStato.get(da) ?? archiStato.set(da, new Set()).get(da)!).add(k);
-        if (!fineVista.has(k)) { fineVista.add(k); fini.push({esito: d.fine, l}); }
+        if (!fineVista.has(k)) { fineVista.add(k); fini.push({esito: d.fine, finale, l}); }
         return;
       }
       (verso.get(d.nodo) ?? verso.set(d.nodo, new Set()).get(d.nodo)!).add(n.id);
@@ -108,11 +111,14 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
           case 'partita': {
             if (daScelta) break;  // ritorno alla scelta: la partita è già stata giocata
             segnoAssegnato(p, l);
-            // Dopo una sconfitta che apre un ramo il giocatore può prenderlo o ritentare (P3, proposta).
-            if (p.sconfitta) { const lp = copia(l); metti(lp.persi, n.id); successore(p.sconfitta, lp); }
-            // Vittoria dopo una sconfitta e un ritento: «perso» cambia, quindi è un altro stato.
-            const dopoRitento = copia(l); metti(dopoRitento.persi, n.id); metti(dopoRitento.vinti, n.id);
-            cammina(i + 1, dopoRitento, false);
+            if (p.sconfitta) {
+              // Una sconfitta che apre un ramo porta lì da sola, senza ritento (P3).
+              const lp = copia(l); metti(lp.persi, n.id); successore(p.sconfitta, lp);
+            } else {
+              // Vittoria dopo una sconfitta e un ritento: «perso» cambia, quindi è un altro stato.
+              const dopoRitento = copia(l); metti(dopoRitento.persi, n.id); metti(dopoRitento.vinti, n.id);
+              cammina(i + 1, dopoRitento, false);
+            }
             metti(l.vinti, n.id);  // vittoria al primo colpo
             break;
           }
@@ -153,6 +159,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
     if (!cond) return 'v';
     if ('esplorato' in cond) return raggiunti.has(cond.esplorato) ? '?' : 'f';
     if ('giri' in cond) return cond.giri <= 0 ? 'v' : fini.length ? '?' : 'f';
+    if ('finale' in cond) return fini.some(f => f.finale === cond.finale) ? '?' : 'f';
     if ('non' in cond) { const x = valA(cond.non, l); return x === '?' ? '?' : x === 'v' ? 'f' : 'v'; }
     if ('tutti' in cond) { const xs = cond.tutti.map(y => valA(y, l)); return xs.includes('f') ? 'f' : xs.every(y => y === 'v') ? 'v' : '?'; }
     if ('uno' in cond) { const xs = cond.uno.map(y => valA(y, l)); return xs.includes('v') ? 'v' : xs.every(y => y === 'f') ? 'f' : '?'; }
@@ -171,5 +178,8 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const segreti: Record<string, string[]> = {};
   for (const n of c.nodi) if (n.segreto) segreti[n.id] = [...(verso.get(n.id) ?? [])];
   const conta = (e: Esito) => fini.filter(f => f.esito === e).length;
-  return {errori: [...errori], avvisi: [...avvisi], stati: visti.size, fini: {completata: conta('completata'), fallita: conta('fallita')}, raggiunti: [...raggiunti], segreti};
+  const perFinale: Record<string, number> = {};
+  for (const f of fini) perFinale[f.finale] = (perFinale[f.finale] ?? 0) + 1;
+  return {errori: [...errori], avvisi: [...avvisi], stati: visti.size, fini: {completata: conta('completata'), fallita: conta('fallita')}, finali: perFinale,
+    raggiunti: [...raggiunti], segreti};
 }

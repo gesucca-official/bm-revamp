@@ -4,12 +4,14 @@
     "mara": {
       "nome": "Mara",
       "espressioni": ["neutra", "agitata", "sospettosa", "illuminata", "pensierosa", "contenta"],
+      "espressioniFuture": ["esasperata"],
       "velocita": 1.2,
       "ritratto": "ritratti/mara-{espressione}.webp"
     },
     "spazienzio": {
       "nome": "Spazienzio",
       "espressioni": ["furioso", "fumante", "quasi-calmo", "soddisfatto", "serio"],
+      "espressioniFuture": ["esasperato"],
       "velocita": 1,
       "ritratto": "ritratti/spazienzio-{espressione}.webp"
     },

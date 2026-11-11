@@ -1,7 +1,7 @@
 // Il lettore di scene: sfondo, sprite, un personaggio alla volta, finestra di dialogo, e sopra le scelte, la partita simulata e la fine.
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import type {Carriera} from '../formato.ts';
-import {avanti, conNome, nodo, perdi, prendiRamo, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
+import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
 import {cast, nomeDi, nomeSblocco, ritratto, sfondo, sprite} from './dati.ts';
 import {useTesto} from './testo.ts';
 
@@ -168,19 +168,14 @@ export function Gioco({c, s, nome, eventi, azione, onMappa, onStato, onElenco, o
           <h2>Hai perso</h2>
           <div className="pulsanti">
             <button className="primario" data-testid="ritenta" onClick={() => azione(ritenta)}>Ritenta</button>
-            {v.ramo && 'nodo' in v.ramo && (
-              <button data-testid="ramo" onClick={() => azione(prendiRamo)}>
-                Prendi l'altra strada: {s.account.esplorati.includes(v.ramo.nodo) ? nodo(c, v.ramo.nodo).titolo : '???'}
-              </button>
-            )}
           </div>
-          {v.ramo && <p className="nota">Questa sconfitta apre un ramo nuovo.</p>}
         </div>
       )}
 
       {v.tipo === 'fine' && (
         <div className="riquadro fine" onClick={e => e.stopPropagation()} data-testid="fine">
           <h2>{v.esito === 'completata' ? `${c.titolo}: completata` : `${c.titolo}: fallita`}</h2>
+          {finali(c).length > 1 && <p className="finale-titolo" data-testid="finale">Finale: «{v.finale.titolo}» · finali visti {s.account.finali.length} su {finali(c).length}</p>}
           <p>Giro {g.numero}. Nodi esplorati: {s.account.esplorati.length} su {c.nodi.filter(x => !x.segreto || s.account.esplorati.includes(x.id)).length}{c.nodi.some(x => x.segreto && !s.account.esplorati.includes(x.id)) ? ' (e forse altri)' : ''}.</p>
           {g.nuovi.sblocchi.length > 0 && <p>Sbloccati: {g.nuovi.sblocchi.map(nomeSblocco).join(', ')}</p>}
           {g.nuovi.achievement.length > 0 && <p>Achievement: {g.nuovi.achievement.map(id => c.achievement.find(a => a.id === id)?.titolo ?? id).join(', ')}</p>}

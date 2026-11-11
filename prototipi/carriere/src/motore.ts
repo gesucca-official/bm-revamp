@@ -1,6 +1,8 @@
 // CA-0a: stato del giro e dell'account, condizioni e avanzamento dentro i nodi. Funzioni pure, senza React né browser:
-// le stesse le usano l'interfaccia e le prove. Le regole sono quelle della proposta (prototipo-fase-a.md, «Il formato dei dati»).
+// le stesse le usano l'interfaccia e le prove. Le regole sono quelle della proposta (prototipo-fase-a.md, «Il formato dei dati»),
+// con le risposte del proprietario P2 (battute di ritento a turno), P3 (la sconfitta che apre un ramo porta lì da sola) e P7 (finali).
 import type {Achievement, Battuta, Carriera, Condizione, Destinazione, Esito, Nodo, Opzione, Partita, Passo, Rif, Scelta} from './formato.ts';
+import {slug} from './converti.ts';
 
 export type Scena = {sfondo?: string; variante?: string; sprite: Record<string, string>};  // sprite: id -> posa ('' = la prima)
 
@@ -9,41 +11,73 @@ export type Giro = {
   numero: number;
   nodo: string | null;          // null: sulla mappa, o a fine giro
   passo: number;
-  ritento: number | null;       // battuta di ritento in corso, prima di rigiocare la partita
+  ritento: number | null;       // battuta di ritento mostrata prima di rigiocare la partita
   sconfitta: boolean;           // schermata dopo la sconfitta
+  tentativi: Record<string, number>;  // sconfitte per nodo in questo giro: scelgono la battuta di ritento (P2)
   segni: Record<string, string>;
   visti: string[];
   vinti: string[];
   persi: string[];
   prossimi: Destinazione[];     // cosa offre la mappa
   fine: Esito | null;
+  finale: string | null;        // id del finale raggiunto (P7)
   scena: Scena;
   nuovi: {sblocchi: string[]; achievement: string[]};  // presi in questo giro, per il riepilogo
 };
 
-/** Ciò che resta sull'account fra un giro e l'altro (D16). */
-export type Account = {esplorati: string[]; sblocchi: string[]; achievement: string[]; giri: number};
+/** Ciò che resta sull'account fra un giro e l'altro (D16), compresi i finali visti (P7). */
+export type Account = {esplorati: string[]; sblocchi: string[]; achievement: string[]; finali: string[]; giri: number};
 export type Stato = {giro: Giro; account: Account};
 
 export type Evento = {tipo: 'scossa'} | {tipo: 'sfarfallio'; variante?: string} | {tipo: 'suono'; suono: string}
-  | {tipo: 'esce'; sprite: string; posa?: string} | {tipo: 'sblocco'; sblocco: string} | {tipo: 'achievement'; achievement: string};
+  | {tipo: 'esce'; sprite: string; posa?: string} | {tipo: 'sblocco'; sblocco: string} | {tipo: 'achievement'; achievement: string}
+  | {tipo: 'ramo'};  // una sconfitta ha aperto un'altra strada
+
+export type Finale = {id: string; titolo: string; esito: Esito};
 
 export type Vista =
   | {tipo: 'mappa'}
-  | {tipo: 'fine'; esito: Esito}
+  | {tipo: 'fine'; esito: Esito; finale: Finale}
   | {tipo: 'battuta'; battuta: Battuta}
   | {tipo: 'narrazione'; testo: string}
   | {tipo: 'messaggio'; da?: string; testo: string}
   | {tipo: 'scelta'; scelta: Scelta; opzioni: {indice: number; opzione: Opzione}[]}
   | {tipo: 'partita'; partita: Partita; giocatore: string; avversari: string[]; sblocchi: string[]}
-  | {tipo: 'sconfitta'; partita: Partita; ramo?: Destinazione}
+  | {tipo: 'sconfitta'; partita: Partita}
   | {tipo: 'ritento'; battuta: Battuta};
 
-export const nuovoAccount = (): Account => ({esplorati: [], sblocchi: [], achievement: [], giri: 0});
+export const nuovoAccount = (): Account => ({esplorati: [], sblocchi: [], achievement: [], finali: [], giri: 0});
 
 export function nuovoGiro(c: Carriera, account: Account, precedente?: Giro): Stato {
-  return {account, giro: {numero: (precedente?.numero ?? 0) + 1, nodo: null, passo: 0, ritento: null, sconfitta: false, segni: {},
-    visti: [], vinti: [], persi: [], prossimi: [{nodo: c.inizio}], fine: null, scena: {sprite: {}}, nuovi: {sblocchi: [], achievement: []}}};
+  return {account, giro: {numero: (precedente?.numero ?? 0) + 1, nodo: null, passo: 0, ritento: null, sconfitta: false, tentativi: {}, segni: {},
+    visti: [], vinti: [], persi: [], prossimi: [{nodo: c.inizio}], fine: null, finale: null, scena: {sprite: {}}, nuovi: {sblocchi: [], achievement: []}}};
+}
+
+/** Un salvataggio di prima delle risposte P2 e P7 non ha alcuni campi: si completano. */
+export function completa(s: Stato): Stato {
+  s.giro.tentativi ??= {};
+  s.giro.finale ??= s.giro.fine ? s.giro.fine : null;
+  s.account.finali ??= [];
+  return s;
+}
+
+/** Id di un finale: il suo titolo, o l'esito per una fine senza nome. */
+export const idFinale = (d: {fine: Esito; finale?: string}) => d.finale ? slug(d.finale) : d.fine;
+
+/** I finali della carriera, dalle destinazioni (P7). */
+export function finali(c: Carriera): Finale[] {
+  const out = new Map<string, Finale>();
+  const vedi = (d: Destinazione | undefined) => {
+    if (d && 'fine' in d) out.set(idFinale(d), {id: idFinale(d), titolo: d.finale ?? (d.fine === 'completata' ? 'Completata' : 'Fallita'), esito: d.fine});
+  };
+  for (const n of c.nodi) {
+    for (const p of n.passi) {
+      if (p.tipo === 'partita') vedi(p.sconfitta);
+      if (p.tipo === 'scelta') p.opzioni.forEach(o => vedi(o.verso));
+    }
+    if ('verso' in n.uscita) vedi(n.uscita.verso);
+  }
+  return [...out.values()];
 }
 
 export const nodo = (c: Carriera, id: string): Nodo => {
@@ -63,6 +97,7 @@ export function valuta(cond: Condizione | undefined, s: Stato): boolean {
   if ('perso' in cond) return s.giro.persi.includes(cond.perso);
   if ('esplorato' in cond) return s.account.esplorati.includes(cond.esplorato);
   if ('achievement' in cond) return s.account.achievement.includes(cond.achievement);
+  if ('finale' in cond) return s.account.finali.includes(cond.finale);
   return s.account.giri >= cond.giri;
 }
 
@@ -80,12 +115,15 @@ const visibile = (p: Passo, s: Stato) => !('se' in p) || valuta(p.se, s);
 /** La schermata che lo stato chiede di mostrare. */
 export function vista(c: Carriera, s: Stato): Vista {
   const g = s.giro;
-  if (g.fine) return {tipo: 'fine', esito: g.fine};
+  if (g.fine) {
+    const id = g.finale ?? g.fine;
+    return {tipo: 'fine', esito: g.fine, finale: finali(c).find(f => f.id === id) ?? {id, titolo: id, esito: g.fine}};
+  }
   if (!g.nodo) return {tipo: 'mappa'};
   const p = nodo(c, g.nodo).passi[g.passo];
   if (!p) return {tipo: 'mappa'};
   if (p.tipo === 'partita') {
-    if (g.sconfitta) return {tipo: 'sconfitta', partita: p, ...(p.sconfitta ? {ramo: p.sconfitta} : {})};
+    if (g.sconfitta) return {tipo: 'sconfitta', partita: p};
     if (g.ritento !== null && p.ritento?.[g.ritento]) return {tipo: 'ritento', battuta: p.ritento[g.ritento]};
     return {tipo: 'partita', partita: p, giocatore: risolvi(p.giocatore, s), avversari: avversari(p, s), sblocchi: sblocchiDopo(c, g.nodo, g.passo)};
   }
@@ -111,7 +149,7 @@ const copia = (s: Stato): Stato => structuredClone(s);
 const aggiungi = (l: string[], x: string) => { if (!l.includes(x)) l.push(x); };
 
 /** Applica un passo che non si mostra. */
-function applica(c: Carriera, s: Stato, p: Passo, eventi: Evento[], silenzioso: boolean) {
+function applica(s: Stato, p: Passo, eventi: Evento[], silenzioso: boolean) {
   const g = s.giro;
   switch (p.tipo) {
     case 'sfondo':
@@ -132,7 +170,6 @@ function applica(c: Carriera, s: Stato, p: Passo, eventi: Evento[], silenzioso: 
     case 'achievement': ottieni(s, p.achievement, eventi); break;
     default: break;
   }
-  void c;
 }
 
 function sblocca(s: Stato, id: string, eventi: Evento[]) {
@@ -165,24 +202,23 @@ function assesta(c: Carriera, s: Stato, eventi: Evento[], modo: 'normale' | 'sal
     const n = nodo(c, g.nodo);
     const p = n.passi[g.passo];
     if (!p) {
-      if ('verso' in n.uscita) esci(c, s, n.uscita.verso, eventi);
+      if ('verso' in n.uscita) esci(s, n.uscita.verso);
       else throw new Error(`il nodo ${n.id} è finito senza uscita`);
       return;
     }
     if (MOSTRATI.has(p.tipo)) { if (modo === 'normale' && visibile(p, s)) return; g.passo++; continue; }
     if (p.tipo === 'scelta') return;
     if (p.tipo === 'partita') { if (modo === 'scelta') { g.passo++; continue; } return; }
-    applica(c, s, p, eventi, modo !== 'normale');
+    applica(s, p, eventi, modo !== 'normale');
     g.passo++;
   }
 }
 
-function esci(c: Carriera, s: Stato, d: Destinazione, eventi: Evento[]) {
+function esci(s: Stato, d: Destinazione) {
   const g = s.giro;
   g.nodo = null; g.passo = 0; g.ritento = null; g.sconfitta = false;
-  if ('fine' in d) { g.fine = d.fine; g.prossimi = []; s.account.giri++; }
+  if ('fine' in d) { g.fine = d.fine; g.finale = idFinale(d); aggiungi(s.account.finali, g.finale); g.prossimi = []; s.account.giri++; }
   else g.prossimi = [d];
-  void c; void eventi;
 }
 
 const fatto = (c: Carriera, s: Stato, eventi: Evento[]): Risultato => { controllaAchievement(c, s, eventi); return {stato: s, eventi}; };
@@ -202,13 +238,13 @@ export function entra(c: Carriera, s0: Stato, id: string): Risultato {
 
 export const entrabile = (c: Carriera, s: Stato, id: string) => valuta(nodo(c, id).condizione, s);
 
-/** Tocco su una battuta, una narrazione, un messaggio o una battuta di ritento. */
+/** Tocco su una battuta, una narrazione, un messaggio o la battuta di ritento. */
 export function avanti(c: Carriera, s0: Stato): Risultato {
   const s = copia(s0); const eventi: Evento[] = [];
-  const g = s.giro; const v = vista(c, s0);
-  if (v.tipo === 'ritento') { const r = (g.ritento ?? 0) + 1; const p = nodo(c, g.nodo!).passi[g.passo] as Partita; g.ritento = p.ritento && r < p.ritento.length ? r : null; return fatto(c, s, eventi); }
+  const v = vista(c, s0);
+  if (v.tipo === 'ritento') { s.giro.ritento = null; return fatto(c, s, eventi); }
   if (v.tipo !== 'battuta' && v.tipo !== 'narrazione' && v.tipo !== 'messaggio') throw new Error(`avanti non vale su ${v.tipo}`);
-  g.passo++;
+  s.giro.passo++;
   assesta(c, s, eventi, 'normale');
   return fatto(c, s, eventi);
 }
@@ -231,7 +267,7 @@ export function scegli(c: Carriera, s0: Stato, indice: number): Risultato {
   const o = v.scelta.opzioni[indice];
   Object.assign(s.giro.segni, o.segni ?? {});
   for (const id of o.sblocchi ?? []) sblocca(s, id, eventi);
-  if (o.verso) esci(c, s, o.verso, eventi);
+  if (o.verso) esci(s, o.verso);
   else { s.giro.passo++; assesta(c, s, eventi, 'normale'); }
   return fatto(c, s, eventi);
 }
@@ -245,31 +281,28 @@ export function vinci(c: Carriera, s0: Stato): Risultato {
   return fatto(c, s, eventi);
 }
 
+/** Una sconfitta che apre un ramo porta lì da sola (P3); le altre portano alla schermata del ritento. */
 export function perdi(c: Carriera, s0: Stato): Risultato {
-  if (vista(c, s0).tipo !== 'partita') throw new Error('nessuna partita da perdere');
-  const s = copia(s0);
-  aggiungi(s.giro.persi, s.giro.nodo!);
-  s.giro.sconfitta = true;
-  return fatto(c, s, []);
+  const v = vista(c, s0);
+  if (v.tipo !== 'partita') throw new Error('nessuna partita da perdere');
+  const s = copia(s0); const eventi: Evento[] = [];
+  const g = s.giro;
+  aggiungi(g.persi, g.nodo!);
+  g.tentativi[g.nodo!] = (g.tentativi[g.nodo!] ?? 0) + 1;
+  if (v.partita.sconfitta) { esci(s, v.partita.sconfitta); eventi.push({tipo: 'ramo'}); }
+  else g.sconfitta = true;
+  return fatto(c, s, eventi);
 }
 
-/** Dopo la sconfitta: le battute di ritento (saltabili), poi di nuovo la partita. */
+/** Dopo la sconfitta: una battuta di ritento, a turno fra quelle scritte (P2, saltabile), poi di nuovo la partita. */
 export function ritenta(c: Carriera, s0: Stato): Risultato {
   const v = vista(c, s0);
   if (v.tipo !== 'sconfitta') throw new Error('nessuna sconfitta');
   const s = copia(s0);
+  const n = v.partita.ritento?.length ?? 0;
   s.giro.sconfitta = false;
-  s.giro.ritento = v.partita.ritento?.length ? 0 : null;
+  s.giro.ritento = n ? ((s.giro.tentativi[s.giro.nodo!] ?? 1) - 1) % n : null;
   return fatto(c, s, []);
-}
-
-/** Dopo una sconfitta che apre un ramo: prendere l'altra strada (P3, proposta: la sceglie il giocatore). */
-export function prendiRamo(c: Carriera, s0: Stato): Risultato {
-  const v = vista(c, s0);
-  if (v.tipo !== 'sconfitta' || !v.ramo) throw new Error('questa sconfitta non apre un ramo');
-  const s = copia(s0); const eventi: Evento[] = [];
-  esci(c, s, v.ramo, eventi);
-  return fatto(c, s, eventi);
 }
 
 /** L'indizio da mostrare: l'ultimo la cui condizione vale (D19). */

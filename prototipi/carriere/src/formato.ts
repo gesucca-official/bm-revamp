@@ -29,7 +29,7 @@ export type Nodo = {
 /** Dove porta la fine di un nodo, un'opzione di una scelta o una sconfitta. */
 export type Destinazione =
   | {nodo: string; da?: 'scelta'}  // da: 'scelta' rientra nel nodo saltando fino alla sua scelta (ritorno alla scelta)
-  | {fine: Esito};
+  | {fine: Esito; finale?: string};  // finale: titolo di una fine con nome (P7), per distinguere più fini con lo stesso esito
 
 export type Esito = 'completata' | 'fallita';
 
@@ -106,6 +106,7 @@ export type Condizione =
   | {esplorato: string}                // in un giro qualsiasi (dato dell'account)
   | {achievement: string}
   | {giri: number}                     // giri completati sull'account, almeno n
+  | {finale: string}                   // finale visto in un giro qualsiasi (id: il titolo in minuscolo con trattini, o l'esito)
   | {non: Condizione}
   | {tutti: Condizione[]}
   | {uno: Condizione[]};
@@ -122,7 +123,8 @@ export type Achievement = {
 /** Cast condiviso fra le carriere (dati/cast.json), scritto dalla regia: nomi, espressioni, velocità, asset. */
 export type Cast = {
   radiceAsset: string;
-  personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[];
+  // espressioniFuture: previste ma ancora senza ritratto (P8); il convertitore le rifiuta con un messaggio che lo dice.
+  personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[]; espressioniFuture?: string[];
     velocita?: number; ritratto?: string; sprite?: string}>;
   // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
   sfondi: Record<string, {file: string; varianti?: Record<string, string>;

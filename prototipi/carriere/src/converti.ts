@@ -83,10 +83,11 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
   const rinvii: Rinvio[] = [];
   const condizioniDaRisolvere: {c: Condizione; riga: number}[] = [];
   const destinazione = (grezzo: string, riga: number, applica: (d: Destinazione) => void) => {
-    const f = /^fine:\s*(\S+)/i.exec(grezzo.trim());
+    // «Fine: completata» o, per una fine con nome (P7), «Fine: completata, Grappino scappa di nuovo».
+    const f = /^fine:\s*([^,\s]+)\s*(?:,\s*(.+))?$/i.exec(grezzo.trim());
     if (f) {
       if (!ESITI.includes(f[1].toLowerCase())) errore(riga, `esito sconosciuto: «${f[1]}» (completata, fallita)`);
-      applica({fine: f[1].toLowerCase() as 'completata'});
+      applica({fine: f[1].toLowerCase() as 'completata', ...(f[2] ? {finale: f[2].trim()} : {})});
     } else rinvii.push({grezzo: grezzo.trim(), riga, applica});
   };
   const condizione = (testo: string, riga: number): Condizione | undefined => {
@@ -134,6 +135,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
         const e = slug(m[2]);
         if (e === 'fuori-campo') fuoriCampo = true;
         else if (p?.ombra) avviso(riga, `${p.nome} è una figura in ombra: l'espressione «${m[2]}» non si vede`);
+        else if (p?.espressioniFuture?.includes(e)) errore(riga, `espressione prevista ma ancora senza ritratto per ${p.nome}: «${m[2]}» (P8)`);
         else if (p && !p.espressioni?.includes(e)) errore(riga, `espressione sconosciuta per ${p.nome}: «${m[2]}»`);
         else espressione = e;
       } else if (p && !p.ombra) errore(riga, `battuta di ${p.nome} senza espressione`);
@@ -219,6 +221,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
             const [n, ...e] = s.split(/\s+/);
             const chi = personaggio(n, riga);
             const espr = slug(e.join(' '));
+            if (chi && cast.personaggi[chi].espressioniFuture?.includes(espr)) { errore(riga, `espressione prevista ma ancora senza ritratto per ${n}: «${e.join(' ')}» (P8)`); return []; }
             if (chi && !cast.personaggi[chi].espressioni?.includes(espr)) { errore(riga, `espressione sconosciuta per ${n}: «${e.join(' ')}»`); return []; }
             return chi ? [{chi, espressione: espr}] : [];
           });
@@ -367,6 +370,7 @@ export function leggiCondizione(testo: string, riga: number, errore: (r: number,
     if ((m = /^(visto|vinto|perso|esplorato)\s+(.+)$/.exec(s))) return {[m[1]]: m[2].trim()} as Condizione;
     if ((m = /^achievement\s+(.+)$/.exec(s))) return {achievement: slug(m[1])};
     if ((m = /^giri\s+(\d+)$/.exec(s))) return {giri: Number(m[1])};
+    if ((m = /^finale\s+(.+)$/.exec(s))) return {finale: slug(m[1])};
     errore(riga, `condizione non riconosciuta: «${s}»`);
     return undefined;
   };
@@ -460,10 +464,10 @@ function controllaStruttura(c: Carriera, cast: Cast, errore: (r: number, m: stri
   }
   for (const a of c.achievement) { leggi(a.quando, 0); a.indizi.forEach(i => leggi(i.se, 0)); }
 
-  // Archi, con gli sblocchi raccolti nel nodo fino al punto in cui si esce.
+  // Archi, con gli sblocchi raccolti nel nodo fino al punto in cui si esce. Una fine è «fine:<esito>:<finale>».
   type Arco = {da: string; a: string; sblocchi: Set<string>};
   const archi: Arco[] = [];
-  const meta = (d: Destinazione) => 'fine' in d ? `fine:${d.fine}` : d.nodo;
+  const meta = (d: Destinazione) => 'fine' in d ? `fine:${d.fine}:${d.finale ? slug(d.finale) : d.fine}` : d.nodo;
   for (const n of c.nodi) {
     const presi = new Set<string>();
     for (const p of n.passi) {
@@ -484,8 +488,19 @@ function controllaStruttura(c: Carriera, cast: Cast, errore: (r: number, m: stri
   for (const n of c.nodi) if (![...raggiungibili(n.id)].some(x => x.startsWith('fine:'))) errore(n.riga, `vicolo cieco: da ${n.id} non si arriva a nessuna fine`);
   for (const s of c.obbligatori) {
     if (!archi.some(a => a.sblocchi.has(s))) { errore(0, `sblocco obbligatorio mai dato: ${s}`); continue; }
-    if (raggiungibili(c.inizio, a => !a.sblocchi.has(s)).has('fine:completata')) errore(0, `sblocco obbligatorio non presente su ogni percorso: ${s}`);
+    if ([...raggiungibili(c.inizio, a => !a.sblocchi.has(s))].some(x => x.startsWith('fine:completata:'))) errore(0, `sblocco obbligatorio non presente su ogni percorso: ${s}`);
   }
+  // Le condizioni sui finali (P7) devono nominare un finale che esiste.
+  const finali = new Set(archi.filter(a => a.a.startsWith('fine:')).map(a => a.a.split(':')[2]));
+  const finaliLetti = (x: Condizione | undefined, riga: number): void => {
+    if (!x) return;
+    if ('non' in x) return finaliLetti(x.non, riga);
+    if ('tutti' in x) return x.tutti.forEach(y => finaliLetti(y, riga));
+    if ('uno' in x) return x.uno.forEach(y => finaliLetti(y, riga));
+    if ('finale' in x && !finali.has(x.finale)) errore(riga, `finale sconosciuto nella condizione: ${x.finale}`);
+  };
+  for (const n of c.nodi) { finaliLetti(n.condizione, n.riga); for (const p of n.passi) { if ('se' in p) finaliLetti(p.se, p.riga); if (p.tipo === 'scelta') p.opzioni.forEach(o => finaliLetti(o.se, p.riga)); } }
+  for (const a of c.achievement) { finaliLetti(a.quando, 0); a.indizi.forEach(i => finaliLetti(i.se, 0)); }
   for (const a of c.achievement) {
     const dato = c.nodi.some(n => n.passi.some(p => p.tipo === 'achievement' && p.achievement === a.id));
     if (!dato && !a.quando) errore(0, `achievement «${a.titolo}» senza [Quando: …] e mai dato da un passo`);

@@ -1,10 +1,9 @@
-// CA-0a, Fase A: prove dell'abbozzo del convertitore.
+// CA-0a: prove del convertitore (abbozzo della Fase A, completato in Fase B).
 // node --experimental-strip-types --test prototipi/carriere/tests/*.test.ts (dalla radice del repository)
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {converti, leggiCondizione} from '../src/converti.ts';
-import {applicaIntegrazioni} from './integrazioni-tutorial.ts';
 import type {Cast, Nodo, Passo} from '../src/formato.ts';
 
 const leggi = (p: string) => fs.readFileSync(new URL(p, import.meta.url), 'utf8');
@@ -14,14 +13,20 @@ const prova = leggi('../storie/prova.md');
 const errori = (md: string) => converti(md, cast, 'prova').problemi.filter(p => p.livello === 'errore').map(p => p.messaggio);
 const passi = (n: Nodo, tipo: Passo['tipo']) => n.passi.filter(p => p.tipo === tipo);
 
-test('il tutorial così com\'è si converte, e le mancanze sono quelle elencate nella proposta', () => {
-  const e = errori(tutorial);
+test('le forme a parole di prima delle integrazioni (P1) restano errori chiari', () => {
+  const vecchio = tutorial
+    .replace('→ Partita 3: {tutorial_con} (giocatore) contro gli altri fra Mara, Spazienzio e Piera', '→ Partita 3: tutti contro tutti a tre, col personaggio scelto')
+    .replace('→ Scelta muta: con Mara [Segno: tutorial_con = mara] · con Spazienzio [Segno: tutorial_con = spazienzio]', '→ Scelta muta: con Mara · con Spazienzio')
+    .replace('→ Epilogo del fallimento — il giocatore', '→ il giocatore')
+    .replace('→ Fine: completata [Sblocca: carriera-principale] — il giocatore', '→ il giocatore')
+    .replace('→ Torna a: Scena 4, scelta\n', '');
+  const e = errori(vecchio);
   for (const atteso of [/partita non riconosciuta: «Partita 3/, /segno mai assegnato: tutorial_con/, /destinazione sconosciuta: «il giocatore raggiunge/,
     /destinazione sconosciuta: «il giocatore resta/, /Epilogo del fallimento» non ha uscita/]) assert.ok(e.some(m => atteso.test(m)), `manca ${atteso}`);
 });
 
-test('il tutorial con le integrazioni proposte è un grafo valido', () => {
-  const {carriera, problemi} = converti(applicaIntegrazioni(tutorial), cast, 'tutorial');
+test('il tutorial, con le integrazioni ora nel testo (P1), è un grafo valido', () => {
+  const {carriera, problemi} = converti(tutorial, cast, 'tutorial');
   assert.deepEqual(problemi.filter(p => p.livello === 'errore'), []);
   assert.deepEqual(carriera.nodi.map(n => n.id), ['scena-0', 'scena-1', 'scena-2', 'scena-3', 'scena-4', 'epilogo-del-fallimento']);
   assert.equal(carriera.nodi.flatMap(n => passi(n, 'battuta')).length, 44);
@@ -45,7 +50,7 @@ test('la mini-carriera di prova è valida e ha i pezzi che deve dimostrare', () 
   const {carriera, problemi} = converti(prova, cast, 'prova');
   assert.deepEqual(problemi, []);
   const n = Object.fromEntries(carriera.nodi.map(x => [x.id, x]));
-  assert.equal(carriera.nodi.length, 7);
+  assert.equal(carriera.nodi.length, 8);
   assert.equal(n['nodo-f'].segreto, true);
   const c2 = passi(n['nodo-c'], 'partita')[0];
   assert.ok(c2.tipo === 'partita' && c2.sconfitta && 'nodo' in c2.sconfitta && c2.sconfitta.nodo === 'nodo-e');
@@ -83,4 +88,19 @@ test('condizioni: «o» lega meno di «e», «non» vale per un atomo', () => {
   let msg = '';
   leggiCondizione('quando piove', 1, (_r, m) => { msg = m; });
   assert.match(msg, /condizione non riconosciuta/);
+});
+
+test('espressioni future (P8): previste nel cast, rifiutate finché non hanno un ritratto', () => {
+  assert.ok(errori(prova.replace('**Mara** (agitata): Ma che dici?', '**Mara** (esasperata): Ma che dici?'))
+    .includes('espressione prevista ma ancora senza ritratto per Mara: «esasperata» (P8)'));
+  assert.ok(errori(prova.replace('[Stacchi: Mara neutra, Spazienzio quasi calmo]', '[Stacchi: Mara neutra, Spazienzio esasperato]'))
+    .includes('espressione prevista ma ancora senza ritratto per Spazienzio: «esasperato» (P8)'));
+});
+
+test('fine con nome (P7): «→ Fine: completata, titolo»', () => {
+  const {carriera} = converti(prova, cast, 'prova');
+  const h = carriera.nodi.find(n => n.id === 'nodo-h')!;
+  assert.deepEqual(h.uscita, {verso: {fine: 'completata', finale: 'Grappino scappa di nuovo'}});
+  assert.ok(errori(prova.replace('[Quando: finale Grappino è tornato e', '[Quando: finale Grappino in vacanza e'))
+    .includes('finale sconosciuto nella condizione: grappino-in-vacanza'));
 });

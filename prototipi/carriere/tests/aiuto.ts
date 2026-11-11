@@ -1,12 +1,11 @@
-// Carriere convertite per le prove: il tutorial con le integrazioni (in memoria, P1) e la mini-carriera.
+// Carriere convertite per le prove: il tutorial e la mini-carriera.
 import fs from 'node:fs';
 import {converti} from '../src/converti.ts';
-import {applicaIntegrazioni} from './integrazioni-tutorial.ts';
 import type {Carriera, Cast} from '../src/formato.ts';
 
 const leggi = (p: string) => fs.readFileSync(new URL(p, import.meta.url), 'utf8');
 export const cast = JSON.parse(leggi('../dati/cast.json')) as Cast;
-export const mdTutorial = applicaIntegrazioni(leggi('../../../docs/design/carriere/tutorial-dialoghi.md'));
+export const mdTutorial = leggi('../../../docs/design/carriere/tutorial-dialoghi.md');
 export const mdProva = leggi('../storie/prova.md');
 
 /** tollera: i controlli strutturali del convertitore non fermano la prova (serve per verificare il controllo del grafo da solo). */

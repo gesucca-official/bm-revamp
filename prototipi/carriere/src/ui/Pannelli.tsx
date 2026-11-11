@@ -1,6 +1,6 @@
 // Elenco delle carriere, achievement e pannello dello stato per le prove.
 import type {Carriera} from '../formato.ts';
-import {indizio, vista, type Stato} from '../motore.ts';
+import {finali, indizio, vista, type Stato} from '../motore.ts';
 import {nomeSblocco} from './dati.ts';
 
 export function Elenco({carriere, stati, nome, onNome, onApri, onNuovoGiro, onAchievement, onAzzera}: {carriere: Carriera[]; stati: Record<string, Stato>;
@@ -20,7 +20,7 @@ export function Elenco({carriere, stati, nome, onNome, onApri, onNuovoGiro, onAc
               <h2>{c.titolo}</h2>
               <p>{s.giro.fine ? `Giro ${s.giro.numero} finito` : iniziata ? `Giro ${s.giro.numero} in corso` : `Giro ${s.giro.numero} da iniziare`}
                 {' · '}giri completati {s.account.giri}</p>
-              <p>Nodi esplorati {s.account.esplorati.length}/{noti.length} · achievement {s.account.achievement.length}/{c.achievement.length}</p>
+              <p>Nodi esplorati {s.account.esplorati.length}/{noti.length} · finali {s.account.finali.length}/{finali(c).length} · achievement {s.account.achievement.length}/{c.achievement.length}</p>
               {s.account.sblocchi.length > 0 && <p className="nota">Sblocchi: {s.account.sblocchi.map(nomeSblocco).join(', ')}</p>}
               <div className="pulsanti">
                 <button className="primario" data-testid={`apri-${c.id}`} onClick={() => onApri(c.id)}>{iniziata || v.tipo === 'fine' ? 'Continua' : 'Inizia'}</button>
@@ -67,10 +67,12 @@ export function PannelloStato({s, onChiudi}: {s: Stato; onChiudi: () => void}) {
       {riga('Visti', g.visti.join(', '))}
       {riga('Vinti', g.vinti.join(', '))}
       {riga('Persi', g.persi.join(', '))}
+      {riga('Sconfitte per nodo', Object.entries(g.tentativi).map(([k, v]) => `${k} ${v}`).join(', '))}
       {riga('Prossimi', g.prossimi.map(d => 'nodo' in d ? d.nodo + (d.da ? ` (da ${d.da})` : '') : `fine ${d.fine}`).join(', '))}
       {riga('Account: esplorati', s.account.esplorati.join(', '))}
       {riga('Account: sblocchi', s.account.sblocchi.join(', '))}
       {riga('Account: achievement', s.account.achievement.join(', '))}
+      {riga('Account: finali', s.account.finali.join(', '))}
       {riga('Account: giri', String(s.account.giri))}
     </div>
   );

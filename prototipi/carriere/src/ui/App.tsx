@@ -28,7 +28,8 @@ export function App() {
     setEventi(x => [...x.slice(-20), ...conId]);
     for (const {id, e} of conId) {
       const testo = e.tipo === 'sblocco' ? `Sbloccato: ${nomeSblocco(e.sblocco)}`
-        : e.tipo === 'achievement' ? `Achievement: ${c.achievement.find(a => a.id === e.achievement)?.titolo ?? e.achievement}` : null;
+        : e.tipo === 'achievement' ? `Achievement: ${c.achievement.find(a => a.id === e.achievement)?.titolo ?? e.achievement}`
+        : e.tipo === 'ramo' ? 'Hai perso… e si apre un\'altra strada' : null;
       if (!testo) continue;
       setAvvisi(x => [...x, {id, testo}]);
       window.setTimeout(() => setAvvisi(x => x.filter(a => a.id !== id)), 3200);

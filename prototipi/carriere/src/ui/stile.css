@@ -96,6 +96,8 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .casella.escluso { opacity: .4; text-decoration: line-through; }
 .casella.bloccato { opacity: .6; border-color: var(--rosso); }
 .casella.scelta { outline: 2px solid var(--blu); }
+.casella.finale { border-radius: 32px; background: #241a12; }
+.casella.finale.fatto { border-color: var(--accento); background: #4a3418; }
 .pannello-nodo { border-top: 1px solid var(--bordo); padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
 .dettaglio { display: flex; flex-direction: column; gap: 4px; }
 .legenda { margin: 0; color: var(--tenue); font-size: .8em; display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
@@ -140,3 +142,4 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
   .casella { width: 132px; }
   .pannello-stato { width: 100vw; top: auto; height: 50%; border-left: none; border-top: 1px solid var(--bordo); }
 }
+.riquadro.fine { min-width: min(360px, 90vw); }

@@ -117,7 +117,7 @@ async function giro(nome, viewport) {
   await tid('fine').waitFor();
   await foto('14-fine-tutorial', 400);
 
-  // Prova: con Spazienzio, sconfitta che apre il retrobottega, vicolo segreto, poi nuovo giro.
+  // Prova: con Spazienzio, la sconfitta porta da sola al retrobottega (P3), vicolo segreto; poi un nuovo giro fino al secondo finale (P7).
   await page.getByText('Elenco').last().click();
   await tid('apri-prova').click();
   await continua();
@@ -126,11 +126,10 @@ async function giro(nome, viewport) {
   await continua();
   await salta();
   await tid('perdi').click();
-  await tid('ramo').waitFor();
-  await foto('15-sconfitta-ramo', 300);
-  await tid('ramo').click();
+  await tid('mappa').waitFor();
+  atteso(!(await tid('ritenta').count()), 'nessun «Ritenta» dopo la sconfitta che apre un ramo');
   atteso(await statoNodo('nodo-e') === 'disponibile', 'il retrobottega disponibile dopo la sconfitta');
-  await foto('16-mappa-ramo', 300);
+  await foto('15-sconfitta-ramo', 300);
   await continua();
   await salta();
   await continua();
@@ -150,6 +149,25 @@ async function giro(nome, viewport) {
   await tid('mappa-nuovo-giro').click();
   atteso(await statoNodo('nodo-f') === 'aperto', 'il vicolo visibile al nuovo giro');
   await foto('20-mappa-nuovo-giro', 300);
+  // Secondo giro: con Mara, poi in D con Mara verso la porta aperta, il secondo finale.
+  await continua();
+  await salta();
+  await tid('opzione-0').click();
+  await continua();
+  await salta();
+  await tid('vinci').click();
+  await continua();
+  await salta();
+  await tid('vinci').click();
+  await tid('opzione-2').click();
+  await continua();
+  await salta();
+  await tid('fine').waitFor();
+  atteso((await tid('finale').textContent()).includes('Grappino scappa di nuovo'), 'il nome del secondo finale');
+  await foto('22-secondo-finale', 600);
+  await tid('fine').getByRole('button', {name: 'Mappa'}).click();
+  atteso(await statoNodo('fine:grappino-scappa-di-nuovo') === 'fatto', 'il secondo finale fatto sulla mappa');
+  await foto('23-mappa-due-finali', 300);
   await tid('apri-achievement').click();
   await foto('21-achievement', 200);
 

@@ -3,7 +3,9 @@
 > Mini-carriera di prova del prototipo CA-0a, scritta dalla regia l'11 novembre 2026 con battute segnaposto: **non è una storia del
 > gioco** e non va nel serbatoio. Serve a mostrare rami, segni, condizioni, sconfitte che aprono un ramo, un nodo segreto, uno sblocco su
 > ogni percorso e due achievement, con i soli asset del tutorial. Grafo e cosa dimostra ogni nodo:
-> [proposta della Fase A](../../../docs/design/carriere/prototipo-fase-a.md#la-mini-carriera-di-prova).
+> [proposta della Fase A](../../../docs/design/carriere/prototipo-fase-a.md#la-mini-carriera-di-prova). In Fase B, dopo la risposta P7
+> del proprietario («sì, una seconda fine»), un secondo finale: il nodo H, «Grappino scappa di nuovo», con un terzo achievement per chi
+> vede tutti e due i finali ([rapporto della Fase B](../../../docs/design/carriere/prototipo-fase-b.md)).
 
 [Carriera: prova; obbligatori: starter-piera]
 
@@ -76,6 +78,7 @@
 
 - con Piera → Nodo G
 - con Spazienzio, che fiuta qualcosa [Se visto Nodo E] → Nodo F
+- con Mara, che ha una consegna proprio lì fuori → Nodo H
 
 ## Nodo E — Il retrobottega
 
@@ -119,7 +122,25 @@
 
 [Se segno alleato = spazienzio] **Spazienzio** (soddisfatto): IL CANE È TORNATO. FESTEGGIAMOLO A BOTTE.
 
-→ Fine: completata
+→ Fine: completata, Grappino è tornato
+
+## Nodo H — La porta aperta
+
+[Sfondo: S1]
+
+[Entra: bici-mara] [Entra: grappino seduto]
+
+**Mara** (contenta): Consegna lampo: kebab tripla cipolla per il civico accanto. Torno subito, {giocatore}, tienimi la porta.
+
+*La porta resta aperta. Grappino annusa l'aria, annusa il kebab, annusa la libertà.*
+
+[Esce: grappino]
+
+**Mara** (agitata): No. No no no. Il cane. Era qui un secondo fa. Lo sapevo, è addestrato a scappare dalle porte aperte.
+
+[Se segno alleato = spazienzio] **Spazienzio** (fumante): ORA LO CERCHIAMO DI NUOVO. CERCHIAMOLO PIÙ FORTE.
+
+→ Fine: completata, Grappino scappa di nuovo
 
 ## Achievement
 
@@ -139,3 +160,12 @@ Hai cercato Grappino sia con Mara sia con Spazienzio.
 [Quando: esplorato Nodo B e esplorato Nodo C]
 
 - Indizio: Chi ti accompagna la prima volta non è l'unico che poteva farlo.
+
+### Cane che va, cane che torna
+
+Hai visto Grappino tornare e Grappino scappare di nuovo.
+
+[Quando: finale Grappino è tornato e finale Grappino scappa di nuovo]
+
+- Indizio: Non tutte le storie di cani finiscono sul divano.
+- Indizio, se finale Grappino è tornato: Chi porta i kebab lascia sempre qualche porta aperta.

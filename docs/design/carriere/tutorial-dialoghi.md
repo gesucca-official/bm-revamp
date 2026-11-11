@@ -16,9 +16,13 @@ Piera *brilla, offesa, assonnata, contenta*.
 
 Il cane di Piera si chiama **Grappino**: proposta della regia, adottata dal proprietario, che nella scena 4 ci gioca col bicchierino di grappa.
 
+[Carriera: tutorial; obbligatori: starter-mara, starter-spazienzio, carriera-principale]
+
 ## Scena 0 — Davanti al bar
 
 [Sfondo: S1, esterno di sera. Regia: l'insegna «BAR IL SERRAGLIO» sfarfalla; la combriccola, in ombra, esita sulla porta.]
+
+[Sfarfallio: insegna-spenta] [Entra: combriccola davanti alla porta]
 
 **Un amico**: ...ma siamo sicuri che il posto sia questo?
 
@@ -30,9 +34,13 @@ Il cane di Piera si chiama **Grappino**: proposta della regia, adottata dal prop
 
 [Regia: frenata; Mara entra in bici e inchioda a un palmo dai piedi del giocatore.]
 
+[Suono: frenata] [Entra: bici-mara] [Scossa]
+
 **Mara** (agitata): Tutti Navaho qua. Eccone altri, sempre pronti a tutto pur di non stare nella loro terra promessa.
 
 [Regia: la combriccola se la dà a gambe e lascia indietro il giocatore.]
+
+[Esce: combriccola in fuga]
 
 **Mara** (sospettosa): Tu. Kebab tripla cipolla, triplo piccante. È tuo. Dimmi il codice... anzi, non importa: lo so io e lo sa il kebab.
 
@@ -52,6 +60,8 @@ portarglielo.
 
 [Regia: Mara trascina dentro il giocatore per la manica. Sfondo: S2, interno del bar. Spazienzio rovescia un tavolino; lo schermo trema.]
 
+[Scossa]
+
 **Spazienzio** (furioso): UCCIDIAMOTI...! UCCIDIAMOTI, HO DETTO! FERMI, LASCIATEVI CAROTARE... AAARGH!
 
 **Spazienzio** (fumante): E VOI CHI SIETE? FACCE NUOVE. ODIO LE FACCE NUOVE.
@@ -65,6 +75,8 @@ portarglielo.
 → Partita 1: Mara (giocatore) contro Spazienzio
 
 **Ritento.** **Mara** (agitata): Di nuovo. Più veloce, o il suo kebab si fredda. · **Spazienzio** (fumante): ANCORA VOI? ANNICHILIAMOVI.
+
+[Sblocca: starter-mara]
 
 ## Scena 2 — Il cane di Piera
 
@@ -82,15 +94,21 @@ portarglielo.
 
 [Regia: abbaio. Piera si gira dal bancone, molto lentamente, con Grappino accanto.]
 
+[Entra: grappino seduto]
+
 **Piera** (offesa): Ma chi è... che ce l'ha... col mio Grappino... che lui è bono... che se lo toccavi a me... a me mi... che quando ero
 piccola io... la mia nonna... che lei diceva sempre...
 
 [Regia: testo lentissimo, a pezzi. Fra un pezzo e l'altro stacchi su chi ascolta: Mara che si guarda le unghie, poi l'orologio; Spazienzio
 che tamburella sempre più forte. Spazienzio interrompe prima che la frase finisca.]
 
+[Stacchi: Mara neutra, Spazienzio quasi calmo] [Interrotta]
+
 **Spazienzio** (furioso): AAAAARGH!!!
 
 [Regia: ringhio; Grappino punta la caviglia del giocatore.]
+
+[Sprite: grappino ringhia]
 
 **Piera** (offesa): Ma che vuoi... sei te che hai... detto di aver...
 
@@ -106,6 +124,8 @@ che tamburella sempre più forte. Spazienzio interrompe prima che la frase finis
 
 **Ritento.** **Spazienzio** (furioso): ANDAVA QUASI BENE. ORA PERÒ PIÙ FORTE. · **Piera** (brilla): Ancora te... che mi fai... venire sete...
 
+[Sblocca: starter-spazienzio]
+
 ## Scena 3 — Con chi stai?
 
 [Sfondo: S2 con lo strato del disordine dopo la rissa. Regia: Piera seduta per terra; Grappino le lecca il bicchiere.]
@@ -113,6 +133,8 @@ che tamburella sempre più forte. Spazienzio interrompe prima che la frase finis
 **Piera** (assonnata): Va bene... facciamo che... il prossimo giro... lo offro io... così... si calmeranno... gli animi e...
 
 [Regia: stessa lentezza e stessi stacchi su chi ascolta. Mara interrompe.]
+
+[Stacchi: Mara neutra, Spazienzio quasi calmo] [Interrotta]
 
 **Mara** (pensierosa): Il cane. Era tutto calcolato. Ha provato a farsi bere da Spazienzio per somministrargli qualcosa. È un cane
 addestrato. Da chi? Pensateci.
@@ -129,13 +151,13 @@ addestrato. Da chi? Pensateci.
 
 **Spazienzio** (furioso): LA FACCIA NUOVA STARÀ CON ME. IMPARERÀ A FAR SMETTERE LE BAGGIANATE CON LA MORTE.
 
-→ Scelta muta: con Mara · con Spazienzio
+→ Scelta muta: con Mara [Segno: tutorial_con = mara] · con Spazienzio [Segno: tutorial_con = spazienzio]
 
 [Se segno tutorial_con = mara] **Spazienzio** (fumante): MI MOLLI PER QUELLA CHE PORTA I KEBAB? AFFETTIAMOTI ALLORA!
 
 [Se segno tutorial_con = spazienzio] **Mara** (sospettosa): Ah. Dovevo immaginarlo. Anche tu hai sentito i miei pensieri alla radio, vero?
 
-→ Partita 3: tutti contro tutti a tre, col personaggio scelto
+→ Partita 3: {tutorial_con} (giocatore) contro gli altri fra Mara, Spazienzio e Piera
 
 **Ritento.** **Mara** (agitata): No... questo non l'ho mai detto a nessuno... · **Spazienzio** (furioso): STAVOLTA CESSERETE LA VITA.
 
@@ -143,11 +165,15 @@ addestrato. Da chi? Pensateci.
 
 [Sfondo: S2 con il disordine. Regia: silenzio; Grappino russa.]
 
+[Sprite: grappino russa]
+
 **Spazienzio** (quasi calmo): NON È MALE, LA FACCIA NUOVA. LA GENTE SA FARLA SMETTERE, È UNA QUALITÀ CHE APPREZZO.
 
 **Piera** (contenta): Tutta questa vivacità... mi ha messo sonno, quindi... mi sa che... prendo un altro... Grappino!
 
 [Regia: Grappino abbaia. Mara interrompe.]
+
+[Interrotta]
 
 **Mara** (contenta): Il kebab! Me lo stavo dimenticando.
 
@@ -159,14 +185,16 @@ addestrato. Da chi? Pensateci.
 
 [Regia: notifica sul telefono del giocatore, dalla combriccola.]
 
+[Telefono: combriccola]
+
 *«Sei ancora tra i vivi? Noi siamo tutti al Dimmi Di Sì.»*
 
 **Spazienzio** (furioso): MOLLA QUEL TELEFONO E COMINCIA A BERE, ALTRIMENTI DOVRÒ SBRONZARTI DI BOTTE.
 
 → Scelta: la risposta alla combriccola
 
-- *«Me la sono cavata per un pelo, arrivo.»* → il giocatore raggiunge gli amici: **il tutorial finisce e fallisce**.
-- *«Sticazzi di quel posto da fighetti, venite voi qui! È fantastico.»* → il giocatore resta nel bar: **il tutorial si completa** e si sblocca
+- *«Me la sono cavata per un pelo, arrivo.»* → Epilogo del fallimento — il giocatore raggiunge gli amici: **il tutorial finisce e fallisce**.
+- *«Sticazzi di quel posto da fighetti, venite voi qui! È fantastico.»* → Fine: completata [Sblocca: carriera-principale] — il giocatore resta nel bar: **il tutorial si completa** e si sblocca
   la carriera principale del Set Base.
 
 ## Epilogo del fallimento — da scrivere
@@ -177,6 +205,21 @@ Confermato dal proprietario il 10 novembre 2026, sulla proposta della regia.
 
 Poche battute comiche della combriccola, poi l'achievement nascosto (D19) per chi ha scelto gli amici, e si torna alla scelta finale con i
 dialoghi saltabili. Gli starter già sbloccati restano.
+
+[Achievement: Amici del Dimmi Di Sì]
+
+→ Torna a: Scena 4, scelta
+
+## Achievement
+
+### Amici del Dimmi Di Sì
+
+[Nascosto]
+
+Hai preferito un Virgin Cuba Libre a sedici euro.
+
+- Indizio: Certi amici scrivono sempre al momento sbagliato.
+- Indizio, se esplorato Scena 4: E se alla combriccola rispondessi come vorrebbe lei?
 
 ## Note per la revisione
 

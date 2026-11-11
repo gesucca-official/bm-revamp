@@ -19,17 +19,33 @@ test('tutorial e prova passano il controllo del grafo', () => {
 });
 
 test('vicolo cieco: un ciclo senza uscita verso una fine', () => {
-  assert.ok(errori(mdProva.replace('→ Fine: completata', '→ Vai a: Nodo F')).some(e => e.startsWith('vicolo cieco')));
+  assert.ok(errori(mdProva.replace('→ Fine: completata, Grappino è tornato', '→ Vai a: Nodo F')).some(e => e.startsWith('vicolo cieco')));
 });
 
 test('una scelta con tutte le opzioni nascoste su qualche percorso', () => {
-  const md = mdProva.replace('- con Piera → Nodo G', '- con Piera [Se segno alleato = mara] → Nodo G');
+  const md = mdProva.replace('- con Piera → Nodo G', '- con Piera [Se segno alleato = mara] → Nodo G')
+    .replace('- con Mara, che ha una consegna proprio lì fuori → Nodo H', '- con Mara, che ha una consegna proprio lì fuori [Se segno alleato = mara] → Nodo H');
   assert.ok(errori(md).some(e => e.startsWith('scelta senza opzioni visibili al nodo nodo-d')));
 });
 
 test('uno sblocco obbligatorio che manca su un percorso', () => {
   const md = mdProva.replace('[Sblocca: starter-piera]\n', '').replace('→ Vai a: Nodo D\n\n## Nodo C', '[Sblocca: starter-piera]\n\n→ Vai a: Nodo D\n\n## Nodo C');
   assert.ok(errori(md).includes('sblocco obbligatorio non presente su ogni percorso: starter-piera'));
+});
+
+test('uno sblocco obbligatorio presente su un finale e non sull\'altro (P7)', () => {
+  // Spostato in G, lo sblocco c'è su «Grappino è tornato» ma manca su «Grappino scappa di nuovo».
+  const md = mdProva.replace('[Sblocca: starter-piera]\n', '').replace('→ Fine: completata, Grappino è tornato', '[Sblocca: starter-piera]\n\n→ Fine: completata, Grappino è tornato');
+  const r = controllaGrafo(carriera(md, true));
+  assert.ok(r.errori.includes('sblocco obbligatorio non presente su ogni percorso: starter-piera'));
+  assert.deepEqual(Object.keys(controllaGrafo(prova()).finali).sort(), ['grappino-e-tornato', 'grappino-scappa-di-nuovo']);
+});
+
+test('un achievement su un finale che non si raggiunge mai', () => {
+  const md = mdProva.replace('- con Mara, che ha una consegna proprio lì fuori → Nodo H', '- con Mara, che ha una consegna proprio lì fuori [Se visto Nodo H] → Nodo H');
+  const e = errori(md);
+  assert.ok(e.includes('nodo non raggiungibile: nodo-h'));
+  assert.ok(e.includes('achievement senza percorso: cane-che-va-cane-che-torna'));
 });
 
 test('un nodo segreto che le condizioni rendono irraggiungibile', () => {
@@ -81,16 +97,21 @@ test('mappa: disposizione a colonne e stati dei nodi lungo due giri', () => {
   const c = prova();
   const {posizione} = disposizione(c);
   assert.deepEqual(Object.fromEntries(Object.entries(posizione).map(([k, p]) => [k, [p.colonna, p.riga]])),
-    {'nodo-a': [0, 0], 'nodo-b': [1, 0], 'nodo-c': [1, 1], 'nodo-e': [2, 1], 'nodo-d': [3, 0], 'nodo-f': [4, 0], 'nodo-g': [5, 0]});
+    {'nodo-a': [0, 0], 'nodo-b': [1, 0], 'nodo-c': [1, 1], 'nodo-e': [2, 1], 'nodo-d': [3, 0], 'nodo-f': [4, 0], 'nodo-h': [4, 1], 'nodo-g': [5, 0],
+      'fine:grappino-scappa-di-nuovo': [5, 1], 'fine:grappino-e-tornato': [6, 0]});
   let s = nuovoGiro(c, nuovoAccount());
   const stato = () => Object.fromEntries(Object.entries(statiMappa(c, s)).map(([k, v]) => [k, v.stato + (v.noto ? '' : '?')]));
-  assert.deepEqual(stato(), {'nodo-a': 'disponibile?', 'nodo-b': 'aperto?', 'nodo-c': 'aperto?', 'nodo-d': 'aperto?', 'nodo-e': 'aperto?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?'});
+  const fini = {'fine:grappino-e-tornato': 'aperto?', 'fine:grappino-scappa-di-nuovo': 'aperto?'};
+  assert.deepEqual(stato(), {...fini, 'nodo-a': 'disponibile?', 'nodo-b': 'aperto?', 'nodo-c': 'aperto?', 'nodo-d': 'aperto?', 'nodo-e': 'aperto?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?', 'nodo-h': 'aperto?'});
   s = scegli(c, salta(c, entra(c, s, 'nodo-a').stato).stato, 0).stato;
-  assert.deepEqual(stato(), {'nodo-a': 'fatto', 'nodo-b': 'disponibile?', 'nodo-c': 'escluso?', 'nodo-d': 'aperto?', 'nodo-e': 'escluso?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?'});
+  assert.deepEqual(stato(), {...fini, 'nodo-a': 'fatto', 'nodo-b': 'disponibile?', 'nodo-c': 'escluso?', 'nodo-d': 'aperto?', 'nodo-e': 'escluso?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?', 'nodo-h': 'aperto?'});
   // Al giro dopo, i nodi visti hanno il titolo; un segreto visto resta sulla mappa.
   s = nuovoGiro(c, {...s.account, esplorati: [...s.account.esplorati, 'nodo-f']}, s.giro);
   assert.deepEqual(stato()['nodo-a'], 'disponibile');
   assert.deepEqual(stato()['nodo-b'], 'aperto?', 'B scelto ma mai entrato: ancora «???»');
   assert.deepEqual(stato()['nodo-f'], 'aperto');
   assert.deepEqual(stato()['nodo-c'], 'aperto?');
+  // A fine giro, il finale raggiunto è «fatto» e resta noto; l'altro è escluso e ancora «???».
+  s = {...s, giro: {...s.giro, fine: 'completata', finale: 'grappino-scappa-di-nuovo', prossimi: []}, account: {...s.account, finali: ['grappino-scappa-di-nuovo']}};
+  assert.deepEqual([stato()['fine:grappino-scappa-di-nuovo'], stato()['fine:grappino-e-tornato']], ['fatto', 'escluso?']);
 });
