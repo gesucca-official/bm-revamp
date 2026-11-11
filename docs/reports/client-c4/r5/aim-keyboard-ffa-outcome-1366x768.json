@@ -1,0 +1,187 @@
+{
+ "date": "2026-11-11T17:49:21.747Z",
+ "url": "http://127.0.0.1:4320",
+ "viewport": {
+  "width": 1366,
+  "height": 768
+ },
+ "kind": "automated browser run on PC (Edge via Playwright) against the local server started by this script on a temporary database; real 30 s waits; not a physical device",
+ "scenarios": {
+  "keyboard-ffa": {
+   "ffa": true,
+   "reduced": true,
+   "turns": [
+    {
+     "turn": 0,
+     "first": "Desiderio Incontrollabile, AZIONE BASE, ruolo og",
+     "tabOrder": [
+      "hand",
+      "hand",
+      "hand",
+      "hand",
+      "hand",
+      "hand",
+      "person",
+      "item",
+      "person",
+      "status",
+      "item",
+      "person",
+      "person",
+      "person",
+      "status",
+      "BUTTON"
+     ],
+     "ring": {
+      "shadow": "rgb(20, 12, 8) 0px 0px 0px 9px",
+      "outline": "solid 3px"
+     },
+     "played": {
+      "card": "Desiderio Incontrollabile",
+      "target": "item-devAlice-0",
+      "key": "card-1"
+     }
+    },
+    {
+     "turn": 1,
+     "focusAtStart": "Desiderio Incontrollabile, AZIONE BASE, ruolo og",
+     "escape": {
+      "selected": null,
+      "target": null,
+      "focus": "Desiderio Incontrollabile, AZIONE BASE, ruolo og"
+     },
+     "played": {
+      "card": "Ago Marcio e Spezzato",
+      "target": "person-ComPlayer_5173",
+      "key": "card-3"
+     }
+    },
+    {
+     "turn": 2,
+     "focusAtStart": "Desiderio Incontrollabile, AZIONE BASE, ruolo og",
+     "cancelButton": {
+      "selected": null,
+      "target": null,
+      "focus": "Desiderio Incontrollabile, AZIONE BASE, ruolo og"
+     },
+     "played": {
+      "card": "Dose di Eroina da Cavalli",
+      "target": "person-devAlice",
+      "key": "card-4"
+     }
+    },
+    {
+     "turn": 3,
+     "focusAtStart": "Desiderio Incontrollabile, AZIONE BASE, ruolo og",
+     "played": {
+      "card": "Ghigno co' i' Denti Marci",
+      "target": "person-ComPlayer_5173",
+      "key": "card-2"
+     }
+    },
+    {
+     "turn": 4,
+     "focusAtStart": "Desiderio Incontrollabile, AZIONE BASE, ruolo og",
+     "played": {
+      "card": "Ago Marcio e Spezzato",
+      "target": "person-ComPlayer_5173",
+      "key": "card-3"
+     }
+    },
+    {
+     "turn": 5,
+     "focusAtStart": "Desiderio Incontrollabile, AZIONE BASE, ruolo og",
+     "played": {
+      "card": "Riflessi Aumentati dalla Speed",
+      "target": "person-devAlice",
+      "key": "card-8"
+     }
+    }
+   ],
+   "oneTabToTarget": 8,
+   "confirmFocus": 8,
+   "end": {
+    "over": true,
+    "eliminated": true,
+    "winner": "ComPlayer_3603",
+    "turns": 6,
+    "canceled": 2
+   },
+   "focus": {
+    "samples": 258,
+    "lost": [
+     47,
+     50,
+     47,
+     27
+    ]
+   },
+   "sequenceEnds": [],
+   "summary": {
+    "turns": 6,
+    "confirmFocus": 8,
+    "canceled": 2,
+    "lostMax": 50
+   },
+   "outcomeFocus": "Nuova partita",
+   "newGame": "ffa-queue",
+   "left": "keyboard-queue"
+  }
+ },
+ "checks": {
+  "server": {
+   "database": "temporary",
+   "jar": "target/bm-server-0.0.1-SNAPSHOT.jar"
+  },
+  "keyboard-ffa-1366x768": {
+   "turns": 6,
+   "end": {
+    "over": true,
+    "eliminated": true,
+    "winner": "ComPlayer_3603",
+    "turns": 6,
+    "canceled": 2
+   },
+   "focus": {
+    "samples": 258,
+    "lost": [
+     47,
+     50,
+     47,
+     27
+    ]
+   },
+   "confirmFocus": 8,
+   "tabOrder": [
+    "hand",
+    "hand",
+    "hand",
+    "hand",
+    "hand",
+    "hand",
+    "person",
+    "item",
+    "person",
+    "status",
+    "item",
+    "person",
+    "person",
+    "person",
+    "status",
+    "BUTTON"
+   ],
+   "sequenceEnds": []
+  }
+ },
+ "errors": [],
+ "scenarioSummary": {
+  "keyboard-ffa": {
+   "turns": 6,
+   "confirmFocus": 8,
+   "canceled": 2,
+   "lostMax": 50
+  }
+ },
+ "ok": true,
+ "problems": []
+}

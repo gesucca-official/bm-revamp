@@ -640,6 +640,8 @@ non è provato.
 
 **Fase B (11 novembre 2026): fatta, C4 chiusa dal proprietario.** Dopo il controllo dal vivo di [C4-12](#c4-12--eliminazione-ed-esito-dopo-la-sequenza) il proprietario ha scritto «ho fatto il controllo dal vivo mi sembra che vada bene»; alla domanda della regia «Approvi C4-12 e chiudi C4?» ha risposto «Approvo, chiudi C4». Matrice completa di fine C4 24/25 sulla build di `7687802`, con il solo rosso R5 (script di `VerifyAim` `keyboard-ffa`, correzione in un blocco a parte prima di C5); a 750×292 R1 e R4. Rimandati: il punto 2 di C4-8b e la dichiarazione dell'IA, finché il client non sarà servito fuori dal locale; O31 dopo C5 con VE-1; a C5 la prova umana C, O19 e il ritmo. Elenco completo nel [rapporto](reports/client-c4/c4-9.md#fase-b-11-novembre-2026).
 
+**R5 chiusa (11 novembre 2026):** `kbdLeave` in FFA controlla la coda dopo «Nuova partita» e ne esce da tastiera; `VerifyAim` verde a 1366×768 e 844×390 e ramo provato con un esito vero ([rapporto](reports/client-c4/r5.md)).
+
 ### C4-12 — Eliminazione ed esito dopo la sequenza
 
 **Origine.** Prova del proprietario di C4-9 (11 novembre 2026, [sopra](#c4-9--consolidamento-e-giudizio-del-proprietario)): in FFA la scritta «ELIMINATO» compare sul posto prima delle animazioni del turno; vittoria e sconfitta compaiono prima che la sequenza abbia fatto il suo giro.

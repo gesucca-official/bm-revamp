@@ -539,6 +539,12 @@ const page_arm=p=>p.page.evaluate(()=>{window.__kw.armed=true;});
 // Out of the game from the keyboard: the outcome panel (Tab reaches «Nuova partita» first) or the menu and the farewell dialog.
 async function kbdLeave(p,scope,rec,over){
  if(over){const a=await tabTo(p,x=>x.test==='again',10);rec.outcomeFocus=a?.label??null;if(!a)bad(scope,'Tab never reaches «Nuova partita» on the outcome panel');
+  else if(rec.ffa){
+   // R5: in the FFA «Nuova partita» puts the player back in the FFA queue (D11 of C2b), no hand comes: check the queue and leave it from the keyboard.
+   await press(p,'Enter');const q=await p.page.getByTestId('ffa-list').waitFor({timeout:15000}).then(()=>true,()=>false);rec.newGame=q?'ffa-queue':null;
+   if(!q){bad(scope,'«Nuova partita» from the keyboard in the FFA did not lead to the FFA queue');return;}
+   const x=await tabTo(p,a=>a.test==='leave-queue',20);if(!x){bad(scope,'Tab never reaches «Esci dalla coda» in the FFA queue');return;}
+   await press(p,'Enter');await p.page.getByTestId('quick').waitFor({timeout:15000}).then(()=>{rec.left='keyboard-queue';},()=>bad(scope,'«Esci dalla coda» from the keyboard did not lead back to the hub'));return;}
   else{await press(p,'Enter');await p.page.waitForTimeout(400);const s=await p.wait(x=>x&&x.hits.some(h=>h.kind==='hand'),30000,'new game').catch(()=>null);rec.newGame=!!s;if(!s)bad(scope,'«Nuova partita» from the keyboard did not start a game');}}
  await p.page.keyboard.press('Escape');await p.page.waitForTimeout(100);
  const m=await tabTo(p,a=>a.label==='Apri menu',60);if(!m){bad(scope,'Tab never reaches the menu');return;}
