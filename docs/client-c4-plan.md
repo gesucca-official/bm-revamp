@@ -593,6 +593,8 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 
 **Scelta del proprietario (11 novembre 2026)** sullo STOP, alla domanda «Come procede C4-8b?»: «Misura, poi sfocature». Si fa l'opzione 0 del [rapporto](reports/client-c4/c4-8b.md#opzioni-in-ordine) (strumento di misura nuovo che localizza i picchi FFA) e poi l'opzione 1(a) (le sfocature dello sfondo in una texture ferma, stessa resa); il resto solo se la misura mostra che serve. Il punto 2 (compressione e caricamento mirato) resta fermo finché il proprietario non risponde.
 
+**Opzione 0 fatta (11 novembre 2026).** Lo strumento nuovo `client-web/tools/draw-probe.mjs` localizza i picchi FFA all'arrivo della vista, in `beginSequence`, soprattutto nella ricerca del posto dei primi piani (`closeUp`, 30–85 ms); le sfocature dello sfondo costano in CPU 0,02–0,18 ms per frame e non sono nei picchi ([rapporto](reports/client-c4/c4-8b.md#opzione-0-la-misura-scelta-del-proprietario-misura-poi-sfocature)). L'opzione 1(a) **non è fatta**: la misura ne smentisce la premessa; si attende la scelta del proprietario.
+
 **Dipendenze.** Tutti i blocchi visivi; D9.
 
 **File toccati.** `scene.ts`, `readability.ts`, eventualmente `art.ts`, documenti comuni.
