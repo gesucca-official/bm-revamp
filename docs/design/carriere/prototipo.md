@@ -71,3 +71,20 @@ markdown, cosa dimostra la mini-carriera), e il giudizio sul prototipo finito.
 - **In Fase A:** se il formato è comodo da scrivere (il markdown resta suo) e se la mini-carriera dimostra quello che serve.
 - **In Fase B:** il prototipo usato, su PC e su telefono: se la mappa fa capire dove si è e cosa manca, se le scene «si leggono» come una
   visual novel, se il ritmo del tutorial regge, se le scelte e la sconfitta che apre un ramo funzionano come se le immagina.
+
+## Fase C, ritocchi dopo la prova
+
+Avviata dalla regia l'11 novembre 2026, dopo la [prova del proprietario](prototipo-fase-b.md#prova-del-proprietario) («la direzione è
+giusta»), nella stessa sessione delle fasi A e B. Due parti:
+
+1. **Ritocchi diretti**, decisi dalla regia sulle impressioni del proprietario:
+   - finestra di dialogo più bassa, al più tre righe: circa il 20% dell'altezza in orizzontale e il 22% in verticale (la
+     [specifica](specifica-asset.md#come-appare-la-scena) si aggiorna di conseguenza);
+   - carattere dei dialoghi più grande e con più personalità: due o tre font liberi (SIL OFL), salvati in locale, da confrontare nel
+     prototipo con un selettore, per la scelta del proprietario sul telefono (candidati: Shantell Sans, Patrick Hand, Comic Neue);
+   - ritratti più grandi in verticale, circa il 75% dell'altezza;
+   - stacchi su chi ascolta Piera che restano fino al tocco, con una durata minima;
+   - pulsanti più grandi sul telefono (almeno 48 px), con le azioni principali in basso;
+   - meno incroci fra gli archi della mappa.
+2. **La [bacheca a lettere](bacheca.md)**, scelta dal proprietario per la mappa e per l'aspetto generale: prima un **bozzetto statico** della
+   mappa a metà giro, nei due orientamenti, da far giudicare al proprietario; la mappa intera e il resto dell'aspetto solo dopo il suo via.
