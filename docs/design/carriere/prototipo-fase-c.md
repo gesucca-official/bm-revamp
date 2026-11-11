@@ -222,3 +222,13 @@ usa luci SVG che sul telefono potrebbero essere lente (è un'immagine ferma, qui
 2. La combriccola in verticale: se adesso poggia.
 3. Il bozzetto: le lettere sono abbastanza «plasticose»; le puntine abbastanza raccattate; lo sporco abbastanza sporco (o troppo); la
    verticale abbastanza piena; e se si passa alla mappa vera, con la cornice generata.
+
+### Giudizio del proprietario, secondo giro
+
+11 novembre 2026, con le sue parole:
+
+- **Font:** «decidiamolo alla fine di questo prototipo».
+- **Combriccola:** «meglio».
+- **Bacheca:** «lettere ok, centraggio ok, puntine ok ma più 3D (generiamo pure asset se servono), fili ok ma più 3D anche quelli
+  (penzoleranno e avranno un'ombra), sporco giusto ma forse anche macchie più grandi e parti consunte».
+- **Prossimo passo:** «io partirei a fare la mappa vera». Si apre la [Fase D](prototipo.md#fase-d-la-mappa-vera-come-bacheca).

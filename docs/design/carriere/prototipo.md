@@ -88,3 +88,22 @@ giusta»), nella stessa sessione delle fasi A e B. Due parti:
    - meno incroci fra gli archi della mappa.
 2. **La [bacheca a lettere](bacheca.md)**, scelta dal proprietario per la mappa e per l'aspetto generale: prima un **bozzetto statico** della
    mappa a metà giro, nei due orientamenti, da far giudicare al proprietario; la mappa intera e il resto dell'aspetto solo dopo il suo via.
+
+## Fase D, la mappa vera come bacheca
+
+Avviata dalla regia l'11 novembre 2026 dopo il [secondo giudizio](prototipo-fase-c.md#giudizio-del-proprietario-secondo-giro) del
+proprietario sul bozzetto («io partirei a fare la mappa vera»), nella stessa sessione delle fasi precedenti. Il font dei dialoghi si sceglie
+alla fine del prototipo.
+
+1. **La mappa vera diventa la [bacheca](bacheca.md),** al posto della mappa a caselle, nei due orientamenti e per tutte e due le carriere:
+   si tocca un nodo disponibile per entrare, «Continua» resta, tutti gli stati dei nodi e delle cordicelle come nel bozzetto, intestazione,
+   finali come «piatti del giorno», legenda. Il bozzetto statico si toglie.
+2. **Più tridimensione,** come chiede il proprietario:
+   - **cordicelle che penzolano** con la loro gravità (più lunghe, più pendenti) e proiettano un'ombra sul feltro; tese per il percorso fatto;
+   - **puntine più 3D,** con un'ombra portata calcolata dal client; disegnate dal codice finché non arrivano le
+     [immagini generate](prompt-bacheca.md), poi sostituite, con la possibilità di ricolorare quelle di plastica;
+   - **macchie più grandi e parti consunte:** aloni di vino più ampi, feltro spelacchiato e schiarito in alcune zone, sempre in posizioni
+     fisse decise dai dati.
+3. **La cornice generata** al posto di quella disegnata, tagliata in nove fette, quando arriva.
+4. **Prestazioni sul telefono:** la bacheca è un disegno SVG con filtri; la mappa si apre spesso, quindi va misurato il tempo di apertura e,
+   se serve, il fondo fisso (feltro, scanalature, macchie) si disegna una volta sola in un'immagine.
