@@ -1034,3 +1034,335 @@ Composizioni con Pillow, geometria e finestra della fetta; WebP qualità 90. Gra
 - [b-grappino-russa.webp](composizioni/b-grappino-russa.webp): 1366×768 px, WEBP, RGB, 330816 byte; SHA-256 `bbd49ae19448cc111b6099cd1994faf45dab1b22290574fb39609400e105f06d`
 - [b-spazienzio-serio.webp](composizioni/b-spazienzio-serio.webp): 1366×768 px, WEBP, RGB, 271832 byte; SHA-256 `c03b56b88d690574cb2f61fe100c3304fdbc5eb0227a51f18ee04ac6ead0ad54`
 - [a-spazienzio-serio.webp](composizioni/a-spazienzio-serio.webp): 1366×768 px, WEBP, RGB, 271832 byte; SHA-256 `c03b56b88d690574cb2f61fe100c3304fdbc5eb0227a51f18ee04ac6ead0ad54`
+
+## Giro C
+
+### s1-esterno-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:18:01 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione guidata da due riferimenti |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 3204251 byte; SHA-256 `e6d852489fec118e8983be58132b75130c0c2ce1f27cc0b673ee5a6272bdf139` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; sfondo opaco richiesto |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; 2. `docs/design/carriere/asset/tutorial/originali/s2-interno-2.png` SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-86ac3741-fe9f-4ee1-84d2-eee856ef5367.png`, copia `originali/s1-esterno-1.png`; SHA-256 `e6d852489fec118e8983be58132b75130c0c2ce1f27cc0b673ee5a6272bdf139` |
+| Anteprima / consegna | [s1-esterno.webp](sfondi/s1-esterno.webp); 1536×1024 px, WEBP, RGB, 548546 byte; SHA-256 `19f020fe6689b2de7261dfe7c1bcff9608a6509539c7fb5ab18363a85687a1d6` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; opaco |
+| Esito del tentativo | candidato per il giudizio del proprietario; originale conservato come riferimento della catena |
+
+Testo inviato integralmente:
+
+~~~text
+Background illustration for a visual-novel dialogue scene in the original card game Botte Micidiali. One opaque landscape image, 1536 x 1024 pixels, aspect ratio 3:2. Use image 1 only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Use image 2, the approved interior of the same bar, only as the reference for drawing style, level of detail and mood, so that the two backgrounds belong together; do not copy its content.
+
+The scene: the outside of a run-down Italian neighbourhood dive bar at night, seen at eye level from the street, nobody around. In the central third of the width: the entrance door with a worn frame and a small shop window beside it, warm dirty light inside, and above the door a plain rectangular lit sign panel with no lettering at all. To the left of the door, a stretch of stained wall where a bicycle could lean, left empty. Towards the sides: peeling plaster, a drainpipe, a rusty shutter, a dim street lamp, as disposable side context. The air of a place where you might catch tetanus. The lower quarter is plain worn pavement with no important details, because a dialogue box will cover it, and the centre stays uncluttered, because a character portrait will stand in front of it. Everything important must stay inside the central third.
+
+Avoid: any text, letters, numbers, signs with writing, labels, logos, brands, signatures or watermarks; neon writing; people, faces, hands, silhouettes; playing cards, game interface, frames or borders; photographic or 3D-rendered style; dominant yellow-and-black colours.
+~~~
+### s1-esterno-insegna-spenta-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:19:45 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione guidata dal riferimento |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2713500 byte; SHA-256 `862e480b4feadcf11f51fb76d97a6702b658b99b13cb70c7e4e22741c6732ef2` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; sfondo opaco richiesto |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/s1-esterno-1.png` SHA-256 `e6d852489fec118e8983be58132b75130c0c2ce1f27cc0b673ee5a6272bdf139`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-fb6ca173-838a-4bd5-92d1-c3db2c8daf06.png`, copia `originali/s1-esterno-insegna-spenta-1.png`; SHA-256 `862e480b4feadcf11f51fb76d97a6702b658b99b13cb70c7e4e22741c6732ef2` |
+| Anteprima / consegna | [s1-esterno-insegna-spenta.webp](sfondi/s1-esterno-insegna-spenta.webp); 1536×1024 px, WEBP, RGB, 408548 byte; SHA-256 `5ad93b928a3d990752e9880ff9afe36d2ca2f796270c64d3f3223d73606edd8e` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; opaco |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the street, the bar front, the door, the shop window, the wall, the street lamp, the colours, the hand-inked European comic style and the composition. Change only this: the rectangular sign panel above the door is switched off, dark and dull, with no glow around it. The rest of the lighting stays as it is.
+
+Avoid: any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; people; photographic or 3D-rendered style.
+~~~
+
+### s2-interno-disordine-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:20:37 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione guidata dal riferimento |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2823882 byte; SHA-256 `ea2a12812870ee240c6d2ac592f3d56cdfe18085754c7b10084f336fadcacdb7` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; sfondo opaco richiesto |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/s2-interno-2.png` SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-e71b5b3a-fb0f-4e5a-afd8-2b3175a7bde7.png`, copia `originali/s2-interno-disordine-1.png`; SHA-256 `ea2a12812870ee240c6d2ac592f3d56cdfe18085754c7b10084f336fadcacdb7` |
+| Anteprima / consegna | [s2-interno-disordine.webp](sfondi/s2-interno-disordine.webp); 1536×1024 px, WEBP, RGB, 461576 byte; SHA-256 `1b099923963f32db79263940856eb2cb2e2c0266b60401d94a554053363e5ee4` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; opaco |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the room, the counter, the shelves and bottles, the espresso machine, the walls, the wall lamps, the light, the colours, the hand-inked European comic style and the composition. Change only this: show the aftermath of a bar brawl, with one small table knocked over, two chairs lying on the floor, a stool on its side, broken glass and spilled drinks on the floor, a crooked picture frame. Keep the mess mostly on the floor and at the sides; the centre behind where a character will stand stays readable, and the lower quarter stays without important details.
+
+Avoid: any other change to the image; people, faces, hands, silhouettes, blood; any text, letters, numbers, signs, labels, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### s3-dimmi-di-si-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:21:10 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione guidata dal riferimento |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGB, 2835549 byte; SHA-256 `82445de8c48d34295bed429253e10940edd22a69196aad6caf9f56c6237432f7` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; sfondo opaco richiesto |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; 2. `docs/design/carriere/asset/tutorial/originali/s2-interno-2.png` SHA-256 `d91fe39d1891e0f32edce7b667e46d0df6a6d2b11ba0108f83d1b54ccc9bc74a`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-d5fa659d-cd09-4179-9c2d-fc1c8878fc68.png`, copia `originali/s3-dimmi-di-si-1.png`; SHA-256 `82445de8c48d34295bed429253e10940edd22a69196aad6caf9f56c6237432f7` |
+| Anteprima / consegna | [s3-dimmi-di-si.webp](sfondi/s3-dimmi-di-si.webp); 1536×1024 px, WEBP, RGB, 433192 byte; SHA-256 `ff5d85bec81ffd9dc7f6400a6efe9df1294e348d68b70adf319e5854bd8b719e` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; opaco |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Background illustration for a visual-novel dialogue scene in the original card game Botte Micidiali. One opaque landscape image, 1536 x 1024 pixels, aspect ratio 3:2. Use image 1 only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Use image 2, the approved interior of a grimy dive bar from the same game, only as the reference for drawing style and level of detail; the place to draw is its exact opposite.
+
+The scene: the interior of an expensive, trendy cocktail bar at night, seen at eye level, nobody in it. In the central third of the width: a sleek, spotless counter with designer stools, perfectly arranged premium bottles with blank labels, a few elaborate cocktails with tiny umbrellas and fruit on the counter. Towards the sides: velvet armchairs, hanging plants, soft indirect lighting, polished floor, as disposable side context. It must feel pretentious and overpriced, still drawn in the same hand-inked comic style, with cleaner, cooler colours than the dive bar. The lower quarter is plain polished floor with no important details, and the centre stays uncluttered. Everything important must stay inside the central third.
+
+Avoid: any text, letters, numbers, signs with writing, labels, logos, brands, signatures or watermarks; neon writing; people, faces, hands, silhouettes; playing cards, game interface, frames or borders; photographic or 3D-rendered style; dominant yellow-and-black colours.
+~~~
+
+### bici-mara-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:22:16 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1869183 byte; SHA-256 `afe6e6cafb44a812c54d74a82fdebe1717b7f49c9da89306c7f1ccecd2ef1fb7` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/mara.png` SHA-256 `0b4482a42b502249e7484506c79adfdc684dd582ab1e1e4971690cc84648923d`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-9db8e375-3435-46d1-8808-0ab94ed81c71.png`, copia `originali/bici-mara-1.png`; SHA-256 `afe6e6cafb44a812c54d74a82fdebe1717b7f49c9da89306c7f1ccecd2ef1fb7` |
+| Anteprima / consegna | [bici-mara.webp](sprite/bici-mara.webp); 1254×1254 px, WEBP, RGBA, 564202 byte; SHA-256 `71c92456021da3f51452eb10fd8f65a233daaa50a55c06ea400fbff914339e56` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Draw only Mara's bicycle, as a standalone sprite for a visual-novel scene, in the same hand-inked European comic style and colours as the attached approved character sheet of its owner, a food-delivery rider: an old, battered city bike with a rusty frame, mismatched pedals, a wire basket, the handlebar grips wrapped in crumpled aluminium foil, seen from the side, standing on its kickstand. Canvas 1024 x 1024 pixels, square. The whole bike inside the canvas with a small empty margin around it. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture.
+
+Avoid: the woman or any other character; any text, letters, numbers, logos, brand names or recognizable branding of any real bicycle or delivery company, signatures or watermarks; scenery; photographic or 3D-rendered style.
+~~~
+
+### combriccola-davanti-alla-porta-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:22:53 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione senza allegati |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGBA, 867750 byte; SHA-256 `3ed42f4416d4459f74e7ba36b2b19f0bca1376ea749b3effe8f9c56520c2a982` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | nessuno |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-85c6bad2-b9bc-4748-894c-b1339955cd1e.png`, copia `originali/combriccola-davanti-alla-porta-1.png`; SHA-256 `3ed42f4416d4459f74e7ba36b2b19f0bca1376ea749b3effe8f9c56520c2a982` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: gruppo largo circa metà della tela invece di circa il terzo centrale; piedi più in basso dei tre quarti |
+
+Testo inviato integralmente:
+
+~~~text
+Draw a group of four generic young friends as solid, uniform, very dark charcoal silhouettes, with no faces, no internal details, no clothing details and no colours, for a visual-novel scene where minor characters stay anonymous. Canvas 1536 x 1024 pixels, landscape. The group stands at about the scale of people seen from a few metres away in a street, occupying roughly the central third of the width and the middle of the height, feet at about three quarters of the image height. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF). Recognizable only by their outlines and poses: standing close together and hesitating: one points up at something above them, one has arms crossed, one leans back doubtfully, one holds a phone.
+
+Avoid: faces, eyes, features, inner lines, colours, gradients or highlights inside the silhouettes; any text, letters, numbers, logos, brands, signatures or watermarks; scenery; photographic or 3D-rendered style.
+~~~
+
+### combriccola-davanti-alla-porta-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:24:30 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione senza allegati |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGBA, 835620 byte; SHA-256 `dc4309411fd020f2dd0202c3936a7fa4331cc1d007615820cc6a6aec964c528f` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | nessuno |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-1005ef5b-0213-4774-bd65-1e61e413ffe7.png`, copia `originali/combriccola-davanti-alla-porta-2.png`; SHA-256 `dc4309411fd020f2dd0202c3936a7fa4331cc1d007615820cc6a6aec964c528f` |
+| Anteprima / consegna | [combriccola-davanti-alla-porta.webp](sprite/combriccola-davanti-alla-porta.webp); 1536×1024 px, WEBP, RGBA, 63954 byte; SHA-256 `6643795460d0702fa20075bb0307d8cd457123522346abaadc973a020bd0fd04` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | non conforme: gruppo largo circa metà della tela invece di circa il terzo centrale; piedi più in basso dei tre quarti; consegnato per esame |
+
+Testo inviato integralmente:
+
+~~~text
+Draw a group of four generic young friends as solid, uniform, very dark charcoal silhouettes, with no faces, no internal details, no clothing details and no colours, for a visual-novel scene where minor characters stay anonymous. Canvas 1536 x 1024 pixels, landscape. The group stands at about the scale of people seen from a few metres away in a street, occupying roughly the central third of the width and the middle of the height, feet at about three quarters of the image height. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF). Recognizable only by their outlines and poses: standing close together and hesitating: one points up at something above them, one has arms crossed, one leans back doubtfully, one holds a phone.
+
+Avoid: faces, eyes, features, inner lines, colours, gradients or highlights inside the silhouettes; any text, letters, numbers, logos, brands, signatures or watermarks; scenery; photographic or 3D-rendered style.
+~~~
+
+### combriccola-in-fuga-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:23:28 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione senza allegati |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGBA, 871896 byte; SHA-256 `e9ac05737f80b48c1d88432cffd5faa6a7752eb69475f881a3d8a827a4ce4c24` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | nessuno |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-88d67f87-6baf-4572-a32e-f6d8d3aa913a.png`, copia `originali/combriccola-in-fuga-1.png`; SHA-256 `e9ac05737f80b48c1d88432cffd5faa6a7752eb69475f881a3d8a827a4ce4c24` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: gruppo largo circa tre quarti della tela invece di circa il terzo centrale |
+
+Testo inviato integralmente:
+
+~~~text
+Draw a group of four generic young friends as solid, uniform, very dark charcoal silhouettes, with no faces, no internal details, no clothing details and no colours, for a visual-novel scene where minor characters stay anonymous. Canvas 1536 x 1024 pixels, landscape. The group stands at about the scale of people seen from a few metres away in a street, occupying roughly the central third of the width and the middle of the height, feet at about three quarters of the image height. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF). Recognizable only by their outlines and poses: running away in a panic toward the right side, arms flailing, one looking back over the shoulder, one losing a shoe.
+
+Avoid: faces, eyes, features, inner lines, colours, gradients or highlights inside the silhouettes; any text, letters, numbers, logos, brands, signatures or watermarks; scenery; photographic or 3D-rendered style.
+~~~
+
+### combriccola-in-fuga-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:25:10 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-c--sfondi-varianti-bici-e-combriccola); testo integrale sotto |
+| Modalità | generazione senza allegati |
+| Dimensioni richieste | 1536×1024 px |
+| Dimensioni effettive / formato | 1536×1024 px, PNG, RGBA, 926076 byte; SHA-256 `9620ab32da39f376b6ce1ed0e73622068561ce02e39ab9ebf147ea9ffcd33c8c` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | nessuno |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-cab2a18b-927d-4f3f-baee-0f42f5b547b5.png`, copia `originali/combriccola-in-fuga-2.png`; SHA-256 `9620ab32da39f376b6ce1ed0e73622068561ce02e39ab9ebf147ea9ffcd33c8c` |
+| Anteprima / consegna | [combriccola-in-fuga.webp](sprite/combriccola-in-fuga.webp); 1536×1024 px, WEBP, RGBA, 76046 byte; SHA-256 `5a1a0f19383753b627471ac13320eda6e24a5782850b96036426844e4826ec3b` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | non conforme: gruppo largo circa tre quarti della tela invece di circa il terzo centrale; consegnato per esame |
+
+Testo inviato integralmente:
+
+~~~text
+Draw a group of four generic young friends as solid, uniform, very dark charcoal silhouettes, with no faces, no internal details, no clothing details and no colours, for a visual-novel scene where minor characters stay anonymous. Canvas 1536 x 1024 pixels, landscape. The group stands at about the scale of people seen from a few metres away in a street, occupying roughly the central third of the width and the middle of the height, feet at about three quarters of the image height. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF). Recognizable only by their outlines and poses: running away in a panic toward the right side, arms flailing, one looking back over the shoulder, one losing a shoe.
+
+Avoid: faces, eyes, features, inner lines, colours, gradients or highlights inside the silhouettes; any text, letters, numbers, logos, brands, signatures or watermarks; scenery; photographic or 3D-rendered style.
+~~~
+
+### Composizioni del giro C
+
+Composizioni con Pillow, geometria e finestra della fetta; WebP qualità 90. Sagome sovrapposte con la scala della tela, così resta visibile la difformità di inquadratura; bici ridimensionata e posta a sinistra della porta. Alfa nativo, nessuno scontorno.
+
+- [c-s1-esterno.webp](composizioni/c-s1-esterno.webp): 1366×768 px, WEBP, RGB, 304852 byte; SHA-256 `0ba0902ec75271e6f457cc00391c005a6b0d4b7a03d5500360c121da9bf44e7b`
+- [c-s1-esterno-insegna-spenta.webp](composizioni/c-s1-esterno-insegna-spenta.webp): 1366×768 px, WEBP, RGB, 282296 byte; SHA-256 `edeac01b239a807842c1e268fe99913fa31a87676b9527ef29dd3b8ba4a8d9b6`
+- [c-s2-interno-disordine.webp](composizioni/c-s2-interno-disordine.webp): 1366×768 px, WEBP, RGB, 256110 byte; SHA-256 `4d220533ad981e686bd6374df1037bd8a3439d848aa070a82ea542429819a776`
+- [c-s3-dimmi-di-si.webp](composizioni/c-s3-dimmi-di-si.webp): 1366×768 px, WEBP, RGB, 271844 byte; SHA-256 `1ba907e1a3320f37c03c7287fbf34f4820927d52d7171580a6d4edf37aec0919`
+- [c-bici-mara.webp](composizioni/c-bici-mara.webp): 1366×768 px, WEBP, RGB, 373146 byte; SHA-256 `969a6f6443cb75c9075125fec701326714fad8284ea95f2a6a5fb2222444dbb6`
+- [c-combriccola-davanti-alla-porta.webp](composizioni/c-combriccola-davanti-alla-porta.webp): 1366×768 px, WEBP, RGB, 229706 byte; SHA-256 `f81601d174792bf2322cadc0b12febe3ad1fa3c7ebcb9847bd28154bc3e3203f`
+- [c-combriccola-in-fuga.webp](composizioni/c-combriccola-in-fuga.webp): 1366×768 px, WEBP, RGB, 312600 byte; SHA-256 `a063a11cf4efda195f195834bf06274891ab466e754c98f2d264fb266ceba729`

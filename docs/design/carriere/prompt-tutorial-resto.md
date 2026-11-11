@@ -304,3 +304,10 @@ Avoid: faces, eyes, features, inner lines, colours, gradients or highlights insi
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| s1-esterno | [WebP](asset/tutorial/sfondi/s1-esterno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-1) |  |
+| s1-esterno-insegna-spenta | [WebP](asset/tutorial/sfondi/s1-esterno-insegna-spenta.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-insegna-spenta-1) |  |
+| s2-interno-disordine | [WebP](asset/tutorial/sfondi/s2-interno-disordine.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-disordine-1) |  |
+| s3-dimmi-di-si | [WebP](asset/tutorial/sfondi/s3-dimmi-di-si.webp) | [Scheda](asset/tutorial/registro.md#s3-dimmi-di-si-1) |  |
+| bici-mara | [WebP](asset/tutorial/sprite/bici-mara.webp) | [Scheda](asset/tutorial/registro.md#bici-mara-1) |  |
+| combriccola-davanti-alla-porta | [WebP](asset/tutorial/sprite/combriccola-davanti-alla-porta.webp) (non conforme: inquadratura) | [Scheda](asset/tutorial/registro.md#combriccola-davanti-alla-porta-2) |  |
+| combriccola-in-fuga | [WebP](asset/tutorial/sprite/combriccola-in-fuga.webp) (non conforme: inquadratura) | [Scheda](asset/tutorial/registro.md#combriccola-in-fuga-2) |  |
