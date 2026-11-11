@@ -164,7 +164,8 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-11 | Spazio e profondità: **fatto, approvato dal proprietario l'11 novembre 2026** | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
 | C4-8a | Accessibilità e residui O21: **Fase B fatta, approvata dal proprietario l'11 novembre 2026** ([rapporto](reports/client-c4/c4-8a.md#fase-b)) | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
 | C4-8b | Prestazioni e budget: **fatto, approvato dal proprietario l'11 novembre 2026 («Sì, chiudi»)** (STOP del punto 3, strumento di misura nuovo, ricerca dei primi piani più veloce a risultato identico; picchi FFA al livello di C4-1b, input FFA un poco sopra; [rapporto](reports/client-c4/c4-8b.md)) | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
-| C4-9 | Consolidamento e giudizio del proprietario: **Fase A fatta, STOP per il giudizio del proprietario (11 novembre 2026)** (matrice completa 25/25 verde sulla build di `61ff59f`, 750×292 con i soli rossi R1 e R4 della base; [rapporto](reports/client-c4/c4-9.md), [scheda di prova](reports/client-c4/c4-9/prova-scheda.md)) | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
+| C4-9 | Consolidamento e giudizio del proprietario: **Fase A fatta (11 novembre 2026); prova del proprietario con due anticipi da correggere in C4-12, poi Fase B** (matrice completa 25/25 verde sulla build di `61ff59f`, 750×292 con i soli rossi R1 e R4 della base; [rapporto](reports/client-c4/c4-9.md), [scheda di prova](reports/client-c4/c4-9/prova-scheda.md)) | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
+| C4-12 | Eliminazione ed esito dopo la sequenza (prova del proprietario di C4-9, 11 novembre 2026): **in corso** ([sezione](#c4-12--eliminazione-ed-esito-dopo-la-sequenza)) | C4-9 Fase A | Opus, alto | Tempi della sequenza e del pannello dell'esito: regole 1–9 e J2 a rischio; ultimo codice di C4, porta con sé la matrice completa |
 
 La colonna «Modello, sforzo» è indicativa: per i blocchi ancora da eseguire la proposta accompagna il prompt e l'esecutore lo sceglie il proprietario ([metodo](orchestrazione-lavoro.md#proposta-di-modello-e-sforzo)).
 
@@ -184,7 +185,7 @@ configurazioni diverse). Il criterio giusto è **un solo punto che avvia i serve
 
 ### Ordine e parallelo
 
-**Ordine (D14, D15):** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-7-ter → C4-10 → C4-1c → C4-11 → C4-8a → C4-8b → C4-9 (C4-6* saltato per D1 (a), 6 novembre 2026; C4-7-ter, C4-10 e C4-11 aggiunti con D15 il 7 novembre 2026). I numeri 10 e 11 non indicano l'ordine: i due blocchi vengono **prima** di C4-8a. C4-8a e C4-8b vengono dopo
+**Ordine (D14, D15):** C4-1 → C4-1b → C4-3 → C4-2 → C4-4 → C4-5a → C4-5b → C4-6* → C4-7* → C4-7-ter → C4-10 → C4-1c → C4-11 → C4-8a → C4-8b → C4-9 Fase A → C4-12 → C4-9 Fase B (C4-12 aggiunto l'11 novembre 2026 dalla prova del proprietario di C4-9; C4-6* saltato per D1 (a), 6 novembre 2026; C4-7-ter, C4-10 e C4-11 aggiunti con D15 il 7 novembre 2026). I numeri 10 e 11 non indicano l'ordine: i due blocchi vengono **prima** di C4-8a. C4-8a e C4-8b vengono dopo
 tutti gli asset e tutte le animazioni, perché movimento ridotto, peso e cadenza vanno misurati su quelli veri.
 **Deroga del 10 novembre 2026 ([D16](#decisioni-del-proprietario)):** la Fase B di C4-11 è stata svolta mentre C4-1c (strumenti, su un'altra macchina) era in corso; C4-11 non tocca gli strumenti e i cambi di C4-1c ai documenti comuni si uniscono al rebase. Dopo C4-9, prima di C5, la [matrice completa di fine C4](#matrice-completa-di-fine-c4).
 
@@ -206,7 +207,7 @@ tutti gli asset e tutte le animazioni, perché movimento ridotto, peso e cadenza
 | C4-8b | ● | ● | | | ● | |
 
 **Non possono andare in parallelo:** C4-3, C4-2, C4-4, C4-7-ter, C4-10, C4-11, C4-8a, C4-8b fra loro; C4-5b con C4-3, C4-2, C4-4 e C4-8a (`style.css` e
-shell); C4-9 con qualunque altro. **Possono andare in parallelo solo le parti senza codice:** selezione di simboli e font e bozza
+shell); C4-9 e C4-12 con qualunque altro. **Possono andare in parallelo solo le parti senza codice:** selezione di simboli e font e bozza
 dell'inventario (C4-3), generazione della texture (C4-5a), generazione delle illustrazioni (C4-6), scelta dei suoni (C4-7), mentre
 un altro blocco lavora sul client. Quelle parti producono file e registro; l'integrazione rientra in fila.
 
@@ -634,6 +635,22 @@ non è provato.
 **Verifiche.** Tutte.
 
 **Stato (11 novembre 2026): Fase A fatta, STOP per il giudizio del proprietario.** Nessun codice cambiato. Sulla stessa build (commit `091b1f1`, ultimo di codice `61ff59f`, `dist` `433dccadf326d201`, jar rifatto dal sorgente attuale, che chiude il residuo di C4-5a-bis): `VerifyAll -Parallel 4 -Split 'resolution,ffa'` **25/25 verde**, nessun controllo perso rispetto a C4-1c Fase B; regola 18 a 750×292 con `Verify` e `VerifyAim` verdi, `VerifyLayout` rosso noto R1, `VerifyFfa` rosso come alla base di C4-1b (registrato come R4); test del client 328/328, `build.ps1 -Task Test` verde, `check-rules.py` e `verify-match-manifests.py` PASS, contesto Spring 775 test e 0 falliti; `Verify` con audio negato 3/3 senza avvii udibili né origini esterne. Regole 1–18 dichiarate una per una, righe P, inventario riconciliato, budget contro D9 rivista (texture 82,6% del tetto) nel [rapporto](reports/client-c4/c4-9.md). Rimandati: il punto 2 di C4-8b (finché il client non sarà servito fuori dal locale); a C5 la prova umana C, O19 e le osservazioni di ritmo. Dichiarazione dell'IA nella pagina pubblica: «Rimanda (b)» (proprietario, 11 novembre 2026), si fa quando il client sarà servito fuori dal locale, come il punto 2 di C4-8b. Termini d'uso dello strumento di immagini confermati dal proprietario («per le immagini confermo», 11 novembre 2026). Aperta per il proprietario: la [prova della scheda](reports/client-c4/c4-9/prova-scheda.md). **C4 non è chiusa** finché il proprietario non giudica.
+
+**Prova del proprietario (11 novembre 2026)**, alla lettera: «nel ffa quando un personaggio muore, si vede subito l'overlay "eliminato" sulla sua carta, prima ancora che le animazioni del turno avvengano»; «allo stesso modo, vittoria e sconfitta compaiono prima che le animazioni abbiano fatto il loro giro»; «le risorse non sono immediatamente visibili, richiedono sforzo per andarle a consultare. l'idea del concept di usare i sottobicchieri per le risorse di ciascun personaggio non mi sembrava male, dovremmo provare a riutilizzarla». **Scelte del proprietario alla regia:** i due anticipi in un blocco [C4-12](#c4-12--eliminazione-ed-esito-dopo-la-sequenza) prima di chiudere C4 (ordine C4-9 Fase A → C4-12 → C4-9 Fase B); le risorse sui sottobicchieri come osservazione nuova [O31](client-roadmap.md#osservazioni-registrate-durante-c4), dopo C5 con il mockup VE-1, senza codice in C4. Poiché C4-12 cambia codice, la matrice di fine C4 si rifà sulla build di C4-12; la Fase B (giudizio, «C4 chiusa») viene dopo. Dettaglio nel [rapporto](reports/client-c4/c4-9.md#prova-del-proprietario-11-novembre-2026).
+
+### C4-12 — Eliminazione ed esito dopo la sequenza
+
+**Origine.** Prova del proprietario di C4-9 (11 novembre 2026, [sopra](#c4-9--consolidamento-e-giudizio-del-proprietario)): in FFA la scritta «ELIMINATO» compare sul posto prima delle animazioni del turno; vittoria e sconfitta compaiono prima che la sequenza abbia fatto il suo giro.
+
+**Perimetro.** (1) Dichiarare da quando c'è l'anticipo, dal codice e da `git log`. (2) Il posto eliminato (velo e scritta «ELIMINATO» in `scene.ts`) segue lo stato mostrato dalla sequenza, come le barre con `display`: compare al cartello della coda, non all'arrivo della vista; lo stesso per «FORFAIT» se ha lo stesso difetto. (3) Il pannello dell'esito (`table.tsx`), compresa la propria eliminazione in FFA (D11 di C2b, «puoi guardare fino all'esito»), si apre dopo lo striscione di fine sequenza; subito se la sequenza è saltata, interrotta (vista nascosta, dialogo), assente o con movimento ridotto alla fine di ciò che si mostra. L'audio dell'esito (J2) segue il pannello. Nessun esito resta senza pannello: limite di tempo dichiarato. (4) Test unitari che fissano l'ordine. Nessun atteso esistente cambia senza una decisione registrata.
+
+**File toccati.** `client-web/src` (`scene.ts`, `table.tsx`; `lifecycle.ts` e `model.ts` solo se serve), `client-web/tests`, `client-web/tools` solo in aggiunta; [rapporto](reports/client-c4/c4-12.md).
+
+**Verifiche.** Economiche; mirate `VerifyFfa`, `VerifyLifecycle`, `VerifyOutcomeAudio`, `VerifyResolution` ridotta; poi, ultimo codice di C4, la [matrice completa](#matrice-completa-di-fine-c4) sulla build finale con la regola 18; contesto Spring e `verify-match-manifests.py` come esiti separati.
+
+**Chiusura.** Fase unica con STOP per il controllo dal vivo del proprietario (FFA con un'eliminazione, duello fino all'esito, sequenza saltata). La riga «C4 chiusa» la scrive C4-9 Fase B dopo il giudizio.
+
+**Stato (11 novembre 2026):** in corso.
 
 ### Matrice completa di fine C4
 
