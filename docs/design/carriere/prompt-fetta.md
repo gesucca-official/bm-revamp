@@ -85,3 +85,8 @@ compila solo il proprietario, tramite la regia.
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| s2-interno | [WebP](asset/tutorial/sfondi/s2-interno.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-1) |  |
+| mara-contenta | [WebP](asset/tutorial/ritratti/mara-contenta.webp) | [Scheda](asset/tutorial/registro.md#mara-contenta-1) |  |
+| mara-neutra | [WebP](asset/tutorial/ritratti/mara-neutra.webp) | [Scheda](asset/tutorial/registro.md#mara-neutra-1) |  |
+| spazienzio-furioso | [WebP](asset/tutorial/ritratti/spazienzio-furioso.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-furioso-1) |  |
+| spazienzio-fumante | [WebP](asset/tutorial/ritratti/spazienzio-fumante.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-fumante-1) |  |
