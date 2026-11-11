@@ -207,6 +207,14 @@ Avoid: any other change to the image; mirroring; extra or missing tattoos; any t
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| piera-contenta | [WebP](asset/tutorial/ritratti/piera-contenta.webp) | [Scheda](asset/tutorial/registro.md#piera-contenta-1) |  |
+| piera-brilla | [WebP](asset/tutorial/ritratti/piera-brilla.webp) | [Scheda](asset/tutorial/registro.md#piera-brilla-2) |  |
+| piera-offesa | [WebP](asset/tutorial/ritratti/piera-offesa.webp) | [Scheda](asset/tutorial/registro.md#piera-offesa-1) |  |
+| piera-assonnata | [WebP](asset/tutorial/ritratti/piera-assonnata.webp) | [Scheda](asset/tutorial/registro.md#piera-assonnata-1) |  |
+| grappino-seduto | [WebP](asset/tutorial/sprite/grappino-seduto.webp) (non conforme: tela e orecchie) | [Scheda](asset/tutorial/registro.md#grappino-seduto-2) |  |
+| grappino-ringhia | [WebP](asset/tutorial/sprite/grappino-ringhia.webp) (non conforme: tela) | [Scheda](asset/tutorial/registro.md#grappino-ringhia-2) |  |
+| grappino-russa | [WebP](asset/tutorial/sprite/grappino-russa.webp) (non conforme: tela) | [Scheda](asset/tutorial/registro.md#grappino-russa-2) |  |
+| spazienzio-serio | [WebP](asset/tutorial/ritratti/spazienzio-serio.webp) (ritocco non riuscito) | [Scheda](asset/tutorial/registro.md#spazienzio-serio-3) |  |
 
 ## Giro C — sfondi, varianti, bici e combriccola
 

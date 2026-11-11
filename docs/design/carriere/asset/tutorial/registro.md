@@ -564,3 +564,473 @@ Nessuno scontorno: alfa nativo. Composizioni con Pillow, stessa geometria e fine
 - [a-spazienzio-quasi-calmo.webp](composizioni/a-spazienzio-quasi-calmo.webp): 1366×768 px, WEBP, RGB, 266560 byte; SHA-256 `81ed26f5b18b5bf5e91df0931d6a4a03b77f5cf56251175ce70d0e0f0ced72e5`
 - [a-spazienzio-soddisfatto.webp](composizioni/a-spazienzio-soddisfatto.webp): 1366×768 px, WEBP, RGB, 264570 byte; SHA-256 `50c586e3aa7af952d072979112ca8bf8c755c35e3cf9dfa555d473cef2a3416f`
 - [a-spazienzio-serio.webp](composizioni/a-spazienzio-serio.webp): 1366×768 px, WEBP, RGB, 270286 byte; SHA-256 `821159b5b321002654f56de2c5f0cf0995ad9051ee17b3579b603deb1c53e9c4`
+
+## Giro B
+
+### piera-contenta-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:57:53 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2552235 byte; SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-c0e07609-de9a-4168-aada-7c0cff3827cb.png`, copia `originali/piera-contenta-1.png`; SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1` |
+| Anteprima / consegna | [piera-contenta.webp](ritratti/piera-contenta.webp); 1024×1536 px, WEBP, RGBA, 405566 byte; SHA-256 `03694d2ad750b3ac05e38e86cc2a46acd6b3a81bebd85f146b864a10a3086f73` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario; originale conservato come riferimento della catena |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same woman for a visual-novel dialogue scene, without the dog. Keep her face, body, curly black hair in a messy bun with the pencil stuck in it, enormous black sweatshirt, the small glass of grappa in her hand, colours and hand-inked European comic style exactly as in the reference; do not redesign her. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: she is very broad, so frame her from a little further away than a normal half-body portrait: her whole shoulders and both arms, the glass included, fit inside the canvas with a small empty margin on both sides; from the top of her bun, with a small empty margin above it, down to her waist or a little below at the bottom edge; her eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: serene and contented, the approved face of the reference: heavy half-closed eyelids, a slow content smile, cheeks and nose flushed red from wine, raising the small glass a little.
+
+Avoid: any other change to the character; the dog (it is a separate image); mirroring; mocking body-shaming distortions, the humour is in her attitude; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+### piera-brilla-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:59:10 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2653086 byte; SHA-256 `b4c39c326c2f5788ca4ef798fb196f9a645aaf4426affa046c531cedf6b543af` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/piera-contenta-1.png` SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-bf5b6351-2466-4051-93b9-40e22c37b68f.png`, copia `originali/piera-brilla-1.png`; SHA-256 `b4c39c326c2f5788ca4ef798fb196f9a645aaf4426affa046c531cedf6b543af` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: braccio tagliato sul bordo |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, curly black hair in a messy bun with the pencil, enormous black sweatshirt, the small glass of grappa, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, the pose of her arms and head: tipsy and swaying, head tilted, eyes slightly crossed, a lopsided grin, raising the small glass as if for a toast.
+
+Avoid: any other change to the character; the dog (it is a separate image); mirroring; mocking body-shaming distortions, the humour is in her attitude; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### piera-brilla-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:01:27 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2569597 byte; SHA-256 `c9f7ac82d389707693746662f766aabdf363eb75232d21dcb6b4de53b0d95e7a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/piera-contenta-1.png` SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-6dc6960f-3d74-4b2b-ba08-0229da00a001.png`, copia `originali/piera-brilla-2.png`; SHA-256 `c9f7ac82d389707693746662f766aabdf363eb75232d21dcb6b4de53b0d95e7a` |
+| Anteprima / consegna | [piera-brilla.webp](ritratti/piera-brilla.webp); 1024×1536 px, WEBP, RGBA, 364138 byte; SHA-256 `837b24dcdf4f107e1f0af6dc4626fa15664542fa3a0d8d68e5500e0dc96f9a71` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, curly black hair in a messy bun with the pencil, enormous black sweatshirt, the small glass of grappa, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, the pose of her arms and head: tipsy and swaying, head tilted, eyes slightly crossed, a lopsided grin, raising the small glass as if for a toast.
+
+Avoid: any other change to the character; the dog (it is a separate image); mirroring; mocking body-shaming distortions, the humour is in her attitude; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### piera-offesa-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:59:42 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2497875 byte; SHA-256 `2fcf96b02457712d45836b9029bb8989577502edc88afa265d0f37549edaba91` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/piera-contenta-1.png` SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-944e32aa-5109-46da-a31d-493449c78ab8.png`, copia `originali/piera-offesa-1.png`; SHA-256 `2fcf96b02457712d45836b9029bb8989577502edc88afa265d0f37549edaba91` |
+| Anteprima / consegna | [piera-offesa.webp](ritratti/piera-offesa.webp); 1024×1536 px, WEBP, RGBA, 340850 byte; SHA-256 `f63e60a6c8218ac2921b71e86b48785433e1327ce0c31a7811e02b8c7f3862d4` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, curly black hair in a messy bun with the pencil, enormous black sweatshirt, the small glass of grappa, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, the pose of her arms and head: offended and indignant, chin up, lips pushed out in a pout, eyebrows drawn together, her free hand on her chest, the glass held close.
+
+Avoid: any other change to the character; the dog (it is a separate image); mirroring; mocking body-shaming distortions, the humour is in her attitude; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### piera-assonnata-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:00:29 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2568767 byte; SHA-256 `cea64debfa3bee1a3a5f032350624d92e093bb2bf926baf185fc5749f9f18376` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/piera-contenta-1.png` SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-17289eff-293e-497f-92c2-2995023829e4.png`, copia `originali/piera-assonnata-1.png`; SHA-256 `cea64debfa3bee1a3a5f032350624d92e093bb2bf926baf185fc5749f9f18376` |
+| Anteprima / consegna | [piera-assonnata.webp](ritratti/piera-assonnata.webp); 1024×1536 px, WEBP, RGBA, 362012 byte; SHA-256 `5a7c80b87eff4857d8193ed2a0ff508a2b0e6e8da8d9b612263a7cb2b72fe6c6` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, curly black hair in a messy bun with the pencil, enormous black sweatshirt, the small glass of grappa, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, the pose of her arms and head: drowsy, eyelids drooping almost shut, a big slow yawn, head tilting to one side, the glass sagging in her hand.
+
+Avoid: any other change to the character; the dog (it is a separate image); mirroring; mocking body-shaming distortions, the humour is in her attitude; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### grappino-seduto-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:02:24 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1889052 byte; SHA-256 `a96416bf2d211a6336275fdfe30ce2153b614e0082ddc31f6797ed7a44b818df` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-450efdbe-a0a2-4727-b1da-3fed04184edd.png`, copia `originali/grappino-seduto-1.png`; SHA-256 `a96416bf2d211a6336275fdfe30ce2153b614e0082ddc31f6797ed7a44b818df` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: tela 1254×1254 anziché 1024×1024 e entrambe le orecchie abbassate |
+
+Testo inviato integralmente:
+
+~~~text
+Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: sitting, looking up with a scruffy, slightly dim, innocent expression, one ear up and one down.
+
+Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### grappino-seduto-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:05:05 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1955557 byte; SHA-256 `f6a9bb289b0c461ad3e4eb80986dbe3c3abe6575d7effe3c4d92dec13c54c3a5` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-8b0e8f16-875d-4842-8980-f8baa4468c07.png`, copia `originali/grappino-seduto-2.png`; SHA-256 `f6a9bb289b0c461ad3e4eb80986dbe3c3abe6575d7effe3c4d92dec13c54c3a5` |
+| Anteprima / consegna | [grappino-seduto.webp](sprite/grappino-seduto.webp); 1254×1254 px, WEBP, RGBA, 442378 byte; SHA-256 `edbe7fe0699e12a9981783782870ec43e5b7a1ecd4bbbfa892dc1d9ff6004e93` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | non conforme: tela 1254×1254 e entrambe le orecchie abbassate; consegnato per esame, nessun ulteriore tentativo |
+
+Testo inviato integralmente:
+
+~~~text
+Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: sitting, looking up with a scruffy, slightly dim, innocent expression, one ear up and one down.
+
+Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### grappino-ringhia-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:03:21 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1622355 byte; SHA-256 `166efeb7a7713010aadce8ccc1a44bbfe968f833578f93221470a31ad0c0ae86` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-fd64490c-8789-4aa8-aa10-1687c8e63c32.png`, copia `originali/grappino-ringhia-1.png`; SHA-256 `166efeb7a7713010aadce8ccc1a44bbfe968f833578f93221470a31ad0c0ae86` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: tela 1254×1254 anziché 1024×1024 |
+
+Testo inviato integralmente:
+
+~~~text
+Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: growling, crouched forward, teeth bared, hackles raised, ears back, comically fierce for such a small dog.
+
+Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### grappino-ringhia-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:06:02 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1671357 byte; SHA-256 `1b5e341691ea9e7d0481b42e9138551c8e18ac99cdcd7a19d8f3f36d055eb713` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-5289b085-4983-4992-8961-f3ea929beee2.png`, copia `originali/grappino-ringhia-2.png`; SHA-256 `1b5e341691ea9e7d0481b42e9138551c8e18ac99cdcd7a19d8f3f36d055eb713` |
+| Anteprima / consegna | [grappino-ringhia.webp](sprite/grappino-ringhia.webp); 1254×1254 px, WEBP, RGBA, 391118 byte; SHA-256 `39a7c80e32bc7326c21341bc91c6c90fa90c5d28b2e00debfa016f80bd5452e2` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | non conforme: tela 1254×1254 anziché 1024×1024; consegnato per esame, nessun ulteriore tentativo |
+
+Testo inviato integralmente:
+
+~~~text
+Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: growling, crouched forward, teeth bared, hackles raised, ears back, comically fierce for such a small dog.
+
+Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### grappino-russa-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:04:17 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1739876 byte; SHA-256 `beff8bfd5dfe06a0e2e2636c454a9417897fe3d532e993242b06f662bc2ab289` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ac4ec12e-dac5-4888-89f8-d8b6bd118b3a.png`, copia `originali/grappino-russa-1.png`; SHA-256 `beff8bfd5dfe06a0e2e2636c454a9417897fe3d532e993242b06f662bc2ab289` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: tela 1254×1254 anziché 1024×1024 |
+
+Testo inviato integralmente:
+
+~~~text
+Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: curled up asleep on the floor, eyes shut, mouth slightly open as if snoring, with no sound effects or symbols.
+
+Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### grappino-russa-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:06:56 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `48961ad` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1024 px |
+| Dimensioni effettive / formato | 1254×1254 px, PNG, RGBA, 1840279 byte; SHA-256 `94e10f8f68f4de0192d2b512d8f22e1f2329084c09dad19e4de410c4a4eb702a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/riferimenti/piera.png` SHA-256 `8106e214afb0fb1cb05fa6eeeb060af9548b354a99eaa1d14af35f86d170d24c`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-3cd50c98-c26a-42d7-8f94-78eb8fefdd6c.png`, copia `originali/grappino-russa-2.png`; SHA-256 `94e10f8f68f4de0192d2b512d8f22e1f2329084c09dad19e4de410c4a4eb702a` |
+| Anteprima / consegna | [grappino-russa.webp](sprite/grappino-russa.webp); 1254×1254 px, WEBP, RGBA, 388698 byte; SHA-256 `a08d0de63e687eaba0f8a494b42792010ab6f47dec0d9b77da5384d4ba1a685a` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | non conforme: tela 1254×1254 anziché 1024×1024; consegnato per esame, nessun ulteriore tentativo |
+
+Testo inviato integralmente:
+
+~~~text
+Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: curled up asleep on the floor, eyes shut, mouth slightly open as if snoring, with no sound effects or symbols.
+
+Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-serio-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:07:45 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `a0e78aa` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2905967 byte; SHA-256 `df676df093ec007c54cb407bd616e3f3d54918b1168a223b2aac2d323c26cfd0` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/spazienzio-serio-1.png` SHA-256 `84331dedc266b43da1525f456b5e98ce402abac8ada42b7e8e60563d671c91d3`; 2. `docs/design/carriere/asset/tutorial/originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-3614b91e-9dd0-46ed-90f6-feb363e8ef89.png`, copia `originali/spazienzio-serio-2.png`; SHA-256 `df676df093ec007c54cb407bd616e3f3d54918b1168a223b2aac2d323c26cfd0` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: il cuore rimane sul braccio alto anziché sull’avambraccio |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached dialogue portrait (image 1). Use the second attached image (image 2) only as the reference for the placement of his tattoos. Keep everything else in image 1 exactly the same: the same man, his face and stern expression, the finger pointing at the viewer, his body, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only the tattoos on his arms so that they sit as in image 2: on his right arm, on the left side of the picture, the skull on the shoulder and the anchor on the forearm; on his left arm, the pointing one, the snake on the shoulder and the heart pierced by an arrow on the forearm, not on the upper arm. The chicken-like eagle stays on his chest.
+
+Avoid: any other change to the image; mirroring; extra or missing tattoos; any text, letters, numbers, logos, brands, signatures or watermarks; steam, smoke, drips or lines coming out of his nose or head; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-serio-3
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 20:08:47 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `a0e78aa` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-b--piera-e-grappino); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2650660 byte; SHA-256 `11305a8ef94bdfc509dfa2f0ad93e200d982bb9fc672ef5be56d88d5474418c8` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/spazienzio-serio-1.png` SHA-256 `84331dedc266b43da1525f456b5e98ce402abac8ada42b7e8e60563d671c91d3`; 2. `docs/design/carriere/asset/tutorial/originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-209313c7-3817-482b-8fe6-552f30d4fbb8.png`, copia `originali/spazienzio-serio-3.png`; SHA-256 `11305a8ef94bdfc509dfa2f0ad93e200d982bb9fc672ef5be56d88d5474418c8` |
+| Anteprima / consegna | [spazienzio-serio.webp](ritratti/spazienzio-serio.webp); 1024×1536 px, WEBP, RGBA, 370820 byte; SHA-256 `0812fb736627cccfcd726735c8a1c8a52663fc0792bf55b39a0b8046e9031452` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | non conforme: il cuore rimane sul braccio alto; consegnato per esame, nessun ulteriore tentativo |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached dialogue portrait (image 1). Use the second attached image (image 2) only as the reference for the placement of his tattoos. Keep everything else in image 1 exactly the same: the same man, his face and stern expression, the finger pointing at the viewer, his body, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only the tattoos on his arms so that they sit as in image 2: on his right arm, on the left side of the picture, the skull on the shoulder and the anchor on the forearm; on his left arm, the pointing one, the snake on the shoulder and the heart pierced by an arrow on the forearm, not on the upper arm. The chicken-like eagle stays on his chest.
+
+Avoid: any other change to the image; mirroring; extra or missing tattoos; any text, letters, numbers, logos, brands, signatures or watermarks; steam, smoke, drips or lines coming out of his nose or head; photographic or 3D-rendered style.
+~~~
+
+### Composizioni del giro B e ritocco
+
+Composizioni con Pillow, geometria e finestra della fetta; WebP qualità 90. Grappino senza finestra, a un quarto della larghezza e alto un sesto dello schermo, sul pavimento davanti al bancone. Alfa nativo, nessuno scontorno. Le immagini non conformi sono rese visibili per il giudizio del proprietario.
+
+- [b-piera-contenta.webp](composizioni/b-piera-contenta.webp): 1366×768 px, WEBP, RGB, 253476 byte; SHA-256 `6dc9067d9e0d6b21d64f61653ddb80d8646d11aaa34d4208e2ba54d658011b19`
+- [b-piera-brilla.webp](composizioni/b-piera-brilla.webp): 1366×768 px, WEBP, RGB, 247978 byte; SHA-256 `e1fc74bee3208ef809d8d849237edb1b75f532fcf48e27e05ea30458b6cb068b`
+- [b-piera-offesa.webp](composizioni/b-piera-offesa.webp): 1366×768 px, WEBP, RGB, 248352 byte; SHA-256 `68da2099a6bc18e7a8441d30a3038078276e023a39260bd7386660bc43d9a1c8`
+- [b-piera-assonnata.webp](composizioni/b-piera-assonnata.webp): 1366×768 px, WEBP, RGB, 249908 byte; SHA-256 `3013695db2b47355b0a2a284023805dd718c813691bcde0a2b589a98f3b90f24`
+- [b-grappino-seduto.webp](composizioni/b-grappino-seduto.webp): 1366×768 px, WEBP, RGB, 327138 byte; SHA-256 `84fbd6c90c2018ec1ef3effe1e8c7adf31abbf4c7edbfc5006373d4dfaf54df6`
+- [b-grappino-ringhia.webp](composizioni/b-grappino-ringhia.webp): 1366×768 px, WEBP, RGB, 328538 byte; SHA-256 `57bc681f1f14ddcd7575c413ea2064ca420575f19045cb2e62c4a324775973f4`
+- [b-grappino-russa.webp](composizioni/b-grappino-russa.webp): 1366×768 px, WEBP, RGB, 330816 byte; SHA-256 `bbd49ae19448cc111b6099cd1994faf45dab1b22290574fb39609400e105f06d`
+- [b-spazienzio-serio.webp](composizioni/b-spazienzio-serio.webp): 1366×768 px, WEBP, RGB, 271832 byte; SHA-256 `c03b56b88d690574cb2f61fe100c3304fdbc5eb0227a51f18ee04ac6ead0ad54`
+- [a-spazienzio-serio.webp](composizioni/a-spazienzio-serio.webp): 1366×768 px, WEBP, RGB, 271832 byte; SHA-256 `c03b56b88d690574cb2f61fe100c3304fdbc5eb0227a51f18ee04ac6ead0ad54`
