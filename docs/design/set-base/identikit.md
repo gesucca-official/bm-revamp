@@ -49,6 +49,11 @@ carte e ritratti, perché nel terzo giro lo strumento ha bloccato la modifica. *
 strumento integrato ha bloccato due volte Spazienzio a torso nudo (categoria dichiarata «sexual»); il blocco può ripetersi, e l'opzione
 (a) di D11, con lo strumento del proprietario, resta la via di riserva.
 
+**Mappa dei tatuaggi**, dal riferimento approvato, da rispettare in ogni immagine (fissata l'11 novembre 2026, dopo che un ritratto del
+tutorial aveva spostato il cuore): sul petto l'aquila che sembra un pollo; braccio destro (a sinistra di chi guarda) il teschio sulla
+spalla e l'ancora sull'avambraccio; braccio sinistro (a destra di chi guarda) il serpente sulla spalla e il cuore trafitto da una freccia
+sull'avambraccio. Nessuna scritta.
+
 *Varianti della regia, da provare:*
 
 - **Età apparente:** fra i quaranta e i cinquanta.

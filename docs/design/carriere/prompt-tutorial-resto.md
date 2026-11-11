@@ -104,13 +104,13 @@ Avoid: any other change to the character, his framing or his position on the can
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| mara-agitata | [WebP](asset/tutorial/ritratti/mara-agitata.webp) | [Scheda](asset/tutorial/registro.md#mara-agitata-1) |  |
-| mara-sospettosa | [WebP](asset/tutorial/ritratti/mara-sospettosa.webp) | [Scheda](asset/tutorial/registro.md#mara-sospettosa-1) |  |
-| mara-illuminata | [WebP](asset/tutorial/ritratti/mara-illuminata.webp) | [Scheda](asset/tutorial/registro.md#mara-illuminata-1) |  |
-| mara-pensierosa | [WebP](asset/tutorial/ritratti/mara-pensierosa.webp) | [Scheda](asset/tutorial/registro.md#mara-pensierosa-1) |  |
-| spazienzio-quasi-calmo | [WebP](asset/tutorial/ritratti/spazienzio-quasi-calmo.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-quasi-calmo-1) |  |
-| spazienzio-soddisfatto | [WebP](asset/tutorial/ritratti/spazienzio-soddisfatto.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-soddisfatto-1) |  |
-| spazienzio-serio | [WebP](asset/tutorial/ritratti/spazienzio-serio.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-serio-1) |  |
+| mara-agitata | [WebP](asset/tutorial/ritratti/mara-agitata.webp) | [Scheda](asset/tutorial/registro.md#mara-agitata-1) | **Approvato** (11 novembre 2026): «a me piacciono» |
+| mara-sospettosa | [WebP](asset/tutorial/ritratti/mara-sospettosa.webp) | [Scheda](asset/tutorial/registro.md#mara-sospettosa-1) | **Approvato** (11 novembre 2026): «a me piacciono» |
+| mara-illuminata | [WebP](asset/tutorial/ritratti/mara-illuminata.webp) | [Scheda](asset/tutorial/registro.md#mara-illuminata-1) | **Approvato** (11 novembre 2026): «a me piacciono» |
+| mara-pensierosa | [WebP](asset/tutorial/ritratti/mara-pensierosa.webp) | [Scheda](asset/tutorial/registro.md#mara-pensierosa-1) | **Approvato** (11 novembre 2026): «a me piacciono» |
+| spazienzio-quasi-calmo | [WebP](asset/tutorial/ritratti/spazienzio-quasi-calmo.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-quasi-calmo-1) | **Approvato** (11 novembre 2026): «a me piacciono» |
+| spazienzio-soddisfatto | [WebP](asset/tutorial/ritratti/spazienzio-soddisfatto.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-soddisfatto-1) | **Approvato** (11 novembre 2026): «a me piacciono» |
+| spazienzio-serio | [WebP](asset/tutorial/ritratti/spazienzio-serio.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-serio-1) | (11 novembre 2026) «A me piacciono», ma d'accordo con la regia: il cuore con la freccia è finito sul braccio alto invece che sull'avambraccio. [Ritocco](#ritocco-del-giro-a-spazienzio-serio) col giro B |
 
 ## Giro B — Piera e Grappino
 
@@ -184,6 +184,23 @@ Avoid: the woman or any other character; any change to the dog's look; mirroring
 Using the dog in the attached approved character sheet as the reference, draw only the dog, as a standalone sprite for a visual-novel scene: the same small scruffy mixed-breed dog, short-haired, white with brown patches, unkempt and neglected, in the same hand-inked European comic style and colours. Canvas 1024 x 1024 pixels, square. The whole dog inside the canvas with a small empty margin around it, three-quarter view. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Pose: curled up asleep on the floor, eyes shut, mouth slightly open as if snoring, with no sound effects or symbols.
 
 Avoid: the woman or any other character; any change to the dog's look; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery, ground shadows that are not flat; photographic or 3D-rendered style.
+~~~
+
+### Ritocco del giro A: Spazienzio serio
+
+Il proprietario ha approvato il giro A tranne questo ritratto, d'accordo con la regia: il cuore trafitto è finito sul braccio alto. Si
+corregge insieme al giro B, modificando il suo originale, con la [mappa dei tatuaggi](../set-base/identikit.md#spazienzio-de-la-ucciso)
+dell'identikit; l'esito va nella tabella del giro B. Il file consegnato mantiene il nome `spazienzio-serio.webp`.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| Immagine 1 | `docs/design/carriere/asset/tutorial/originali/spazienzio-serio-1.png` | 84331dedc266b43da1525f456b5e98ce402abac8ada42b7e8e60563d671c91d3 |
+| Immagine 2 | `docs/design/carriere/asset/tutorial/originali/spazienzio-fumante-2.png` | f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23 |
+
+~~~text
+Edit the first attached dialogue portrait (image 1). Use the second attached image (image 2) only as the reference for the placement of his tattoos. Keep everything else in image 1 exactly the same: the same man, his face and stern expression, the finger pointing at the viewer, his body, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only the tattoos on his arms so that they sit as in image 2: on his right arm, on the left side of the picture, the skull on the shoulder and the anchor on the forearm; on his left arm, the pointing one, the snake on the shoulder and the heart pierced by an arrow on the forearm, not on the upper arm. The chicken-like eagle stays on his chest.
+
+Avoid: any other change to the image; mirroring; extra or missing tattoos; any text, letters, numbers, logos, brands, signatures or watermarks; steam, smoke, drips or lines coming out of his nose or head; photographic or 3D-rendered style.
 ~~~
 
 ### Esiti del giro B
