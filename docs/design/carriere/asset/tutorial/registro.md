@@ -304,3 +304,263 @@ Nessuno scontorno: alfa nativo. Composizioni con Pillow, script `%TEMP%\bm-fetta
 - [fetta-orizzontale-spazienzio.webp](composizioni/fetta-orizzontale-spazienzio.webp): 1366×768 px, WEBP, RGB, 270806 byte; SHA-256 `43fd4003c5989117534c712bb6b7fe406cb3867bd7ccc3938a5b04ae5cb4fd21`
 - [fetta-verticale-mara.webp](composizioni/fetta-verticale-mara.webp): 390×844 px, WEBP, RGB, 92824 byte; SHA-256 `d72dd17b02297c178c0872f7569865c93e01551696020f6e5e3e8bddd568a3c7`
 - [fetta-verticale-spazienzio.webp](composizioni/fetta-verticale-spazienzio.webp): 390×844 px, WEBP, RGB, 97742 byte; SHA-256 `9fbe4b3828e47d399d5ae8a8ecebd4a87900ee9c1b162a7003328b4b9602ffc7`
+
+## Giro A
+
+
+### mara-agitata-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:16:04 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 3032219 byte; SHA-256 `e6b305bfadf86afc360eaa4bde4f21195e8377577253b096f432039c68fcf0a6` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-8b9fb7de-43dd-42bb-9ab5-4a1786b7b524.png`, copia `originali/mara-agitata-1.png`; SHA-256 `e6b305bfadf86afc360eaa4bde4f21195e8377577253b096f432039c68fcf0a6` |
+| Anteprima / consegna | [mara-agitata.webp](ritratti/mara-agitata.webp); 1024×1536 px, WEBP, RGBA, 491464 byte; SHA-256 `c33191c05d5ef88b5b60dce9bb771c492b55a2cbceea2c28bd9df976b30db0e5` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, long black hair with the badly self-cut fringe, headphones, teal reflective vest over the dark hoodie, backpack straps, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her free hand: alarmed and jittery, eyes wide open, eyebrows raised, mouth open mid-sentence, her free hand raised with the palm out as if warning everyone about something terrible.
+
+Avoid: any other change to the character, her framing or her position on the canvas; mirroring; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### mara-sospettosa-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:16:57 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2889787 byte; SHA-256 `fc9f8e4eafe2cc4f1919b4f6b3f13063c492ad2b0922e9f50c2bac33854b0d97` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-d6e0ec77-8dce-4eaf-8e28-a84ff60e236a.png`, copia `originali/mara-sospettosa-1.png`; SHA-256 `fc9f8e4eafe2cc4f1919b4f6b3f13063c492ad2b0922e9f50c2bac33854b0d97` |
+| Anteprima / consegna | [mara-sospettosa.webp](ritratti/mara-sospettosa.webp); 1024×1536 px, WEBP, RGBA, 442040 byte; SHA-256 `8490bbbad460886e51bdb687c90ad2d9f9c526b4ed52dee94cb373b3040c27ab` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, long black hair with the badly self-cut fringe, headphones, teal reflective vest over the dark hoodie, backpack straps, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her free hand: deeply suspicious, a sideways glance with narrowed eyes, one eyebrow raised, lips pursed, her free hand lowered and half-closed, as if she has just caught someone lying.
+
+Avoid: any other change to the character, her framing or her position on the canvas; mirroring; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### mara-illuminata-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:17:42 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 3032478 byte; SHA-256 `9562c38e9ae4e6b57489315c2a8fb36c0f631565feabb024f97b322412d5ba71` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-2246c296-7ce7-4723-a04b-d5bdef0e4cc9.png`, copia `originali/mara-illuminata-1.png`; SHA-256 `9562c38e9ae4e6b57489315c2a8fb36c0f631565feabb024f97b322412d5ba71` |
+| Anteprima / consegna | [mara-illuminata.webp](ritratti/mara-illuminata.webp); 1024×1536 px, WEBP, RGBA, 482314 byte; SHA-256 `2d060914ce42ac8f2ee42eeaaccc70afc5fd9718236bdd76579e76701f48dcf3` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, long black hair with the badly self-cut fringe, headphones, teal reflective vest over the dark hoodie, backpack straps, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her free hand: a sudden revelation, eyes wide and shining, a crooked triumphant grin, her free hand raised with the index finger up, as in eureka.
+
+Avoid: any other change to the character, her framing or her position on the canvas; mirroring; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### mara-pensierosa-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:18:28 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2995414 byte; SHA-256 `4ff3c9ab0586eb899cdbd5d79c3d7b626ad6ac0c18c94f896502b37cc26c581b` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-6d9daa0c-71a0-4de8-a4da-d972c92f388a.png`, copia `originali/mara-pensierosa-1.png`; SHA-256 `4ff3c9ab0586eb899cdbd5d79c3d7b626ad6ac0c18c94f896502b37cc26c581b` |
+| Anteprima / consegna | [mara-pensierosa.webp](ritratti/mara-pensierosa.webp); 1024×1536 px, WEBP, RGBA, 473974 byte; SHA-256 `28163961bf44eb45dec1da1bce0c74a92e0a46cf32c0aa0c0ed02a8762c7246c` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same woman, her face, long black hair with the badly self-cut fringe, headphones, teal reflective vest over the dark hoodie, backpack straps, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression and, where needed, her free hand: brooding over a theory, eyes turned up and to the side, lips pressed, her free hand bringing one finger to her chin, tapping it.
+
+Avoid: any other change to the character, her framing or her position on the canvas; mirroring; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-quasi-calmo-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:19:15 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2808278 byte; SHA-256 `3eaa0e304f9c6734d7d0ac8222b76d216e37b16cc6b4f599738f41b0567f9fe6` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-4c98f0f9-d7f3-4e3e-82f6-3285ea8743c5.png`, copia `originali/spazienzio-quasi-calmo-1.png`; SHA-256 `3eaa0e304f9c6734d7d0ac8222b76d216e37b16cc6b4f599738f41b0567f9fe6` |
+| Anteprima / consegna | [spazienzio-quasi-calmo.webp](ritratti/spazienzio-quasi-calmo.webp); 1024×1536 px, WEBP, RGBA, 423250 byte; SHA-256 `14a2c42f5d2eac352067f753e0c4048b0f396f5d8bdfd86530676408623c7055` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours, hand-inked European comic style, framing, size and position on the canvas, with his whole shoulders and arms inside it, and the transparent background. Change only his facial expression and the pose of his arms and fists: a forced, effortful calm: eyes closed, nostrils wide as he takes a long deep breath through clenched teeth, face still a little red, fists slowly unclenching at his sides. It must look comically strained. Nothing comes out of his nose or head.
+
+Avoid: any other change to the character, his framing or his position on the canvas; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, vapour, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-soddisfatto-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:20:02 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2672702 byte; SHA-256 `bd333d304209e59196caa8606dc91daffaca54b1e8a1689b195c1ea46ab4957b` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-fee64e7f-b1c9-4a03-a649-327900b24332.png`, copia `originali/spazienzio-soddisfatto-1.png`; SHA-256 `bd333d304209e59196caa8606dc91daffaca54b1e8a1689b195c1ea46ab4957b` |
+| Anteprima / consegna | [spazienzio-soddisfatto.webp](ritratti/spazienzio-soddisfatto.webp); 1024×1536 px, WEBP, RGBA, 398738 byte; SHA-256 `d3be86215ad60af528ec516680dc15f613f1e3da4901c94e17730fa032fed0ca` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours, hand-inked European comic style, framing, size and position on the canvas, with his whole shoulders and arms inside it, and the transparent background. Change only his facial expression and the pose of his arms and fists: smug and eager satisfaction, a wide grin, eyebrows up, punching one fist into the open palm of his other hand, as if he has finally been given permission to fight. Nothing comes out of his nose or head.
+
+Avoid: any other change to the character, his framing or his position on the canvas; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, vapour, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-serio-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 11/11/2026 19:20:46 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `b8896df` |
+| Prompt | [prompt-tutorial-resto.md](../../prompt-tutorial-resto.md#giro-a--mara-e-spazienzio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | 1024×1536 px, come originale |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2755943 byte; SHA-256 `84331dedc266b43da1525f456b5e98ce402abac8ada42b7e8e60563d671c91d3` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `docs/design/carriere/asset/tutorial/originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; impronta corrispondente, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-4acd6cad-738f-4010-a5fd-87ea73285a3a.png`, copia `originali/spazienzio-serio-1.png`; SHA-256 `84331dedc266b43da1525f456b5e98ce402abac8ada42b7e8e60563d671c91d3` |
+| Anteprima / consegna | [spazienzio-serio.webp](ritratti/spazienzio-serio.webp); 1024×1536 px, WEBP, RGBA, 416348 byte; SHA-256 `a0097a92ceaf805f679444523481392820087da59dc1022e99881e2454bd0aa0` |
+| Conversione | Pillow 13.0.0, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa nativo conservato, nessuno scontorno |
+| Esito del tentativo | candidato per il giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours, hand-inked European comic style, framing, size and position on the canvas, with his whole shoulders and arms inside it, and the transparent background. Change only his facial expression and the pose of his arms and fists: stern and serious, leaning slightly toward the viewer, eyebrows low, mouth a straight hard line, pointing one thick finger straight at the viewer, as if asking a very important question. Nothing comes out of his nose or head.
+
+Avoid: any other change to the character, his framing or his position on the canvas; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, vapour, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Composizioni del giro A
+
+Nessuno scontorno: alfa nativo. Composizioni con Pillow, stessa geometria e finestra di dialogo dello script della fetta `%TEMP%\bm-fetta-secondo.py`; WebP qualità 90, sfondo ritagliato al centro, ritratti non specchiati.
+
+- [a-mara-agitata.webp](composizioni/a-mara-agitata.webp): 1366×768 px, WEBP, RGB, 270406 byte; SHA-256 `db549bb6d8d57f66334ca902073803ca1f6fdf5fe281f51e8aed19f91dc76926`
+- [a-mara-sospettosa.webp](composizioni/a-mara-sospettosa.webp): 1366×768 px, WEBP, RGB, 265264 byte; SHA-256 `c26f6bf5f22afec35caefc4699225d4341ac9335b4ea4954b9687df7b2233aed`
+- [a-mara-illuminata.webp](composizioni/a-mara-illuminata.webp): 1366×768 px, WEBP, RGB, 265416 byte; SHA-256 `395718675c815921dc94afc59f0a1c6ce1bd6910832a1afc4c76b0b49b907f68`
+- [a-mara-pensierosa.webp](composizioni/a-mara-pensierosa.webp): 1366×768 px, WEBP, RGB, 269728 byte; SHA-256 `f00c81e696b8057b838b827c8bb4a19c09ee7bd725f6b79c18bb9b10146c9172`
+- [a-spazienzio-quasi-calmo.webp](composizioni/a-spazienzio-quasi-calmo.webp): 1366×768 px, WEBP, RGB, 266560 byte; SHA-256 `81ed26f5b18b5bf5e91df0931d6a4a03b77f5cf56251175ce70d0e0f0ced72e5`
+- [a-spazienzio-soddisfatto.webp](composizioni/a-spazienzio-soddisfatto.webp): 1366×768 px, WEBP, RGB, 264570 byte; SHA-256 `50c586e3aa7af952d072979112ca8bf8c755c35e3cf9dfa555d473cef2a3416f`
+- [a-spazienzio-serio.webp](composizioni/a-spazienzio-serio.webp): 1366×768 px, WEBP, RGB, 270286 byte; SHA-256 `821159b5b321002654f56de2c5f0cf0995ad9051ee17b3579b603deb1c53e9c4`

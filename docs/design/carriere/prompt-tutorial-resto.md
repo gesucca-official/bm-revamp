@@ -104,6 +104,13 @@ Avoid: any other change to the character, his framing or his position on the can
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| mara-agitata | [WebP](asset/tutorial/ritratti/mara-agitata.webp) | [Scheda](asset/tutorial/registro.md#mara-agitata-1) |  |
+| mara-sospettosa | [WebP](asset/tutorial/ritratti/mara-sospettosa.webp) | [Scheda](asset/tutorial/registro.md#mara-sospettosa-1) |  |
+| mara-illuminata | [WebP](asset/tutorial/ritratti/mara-illuminata.webp) | [Scheda](asset/tutorial/registro.md#mara-illuminata-1) |  |
+| mara-pensierosa | [WebP](asset/tutorial/ritratti/mara-pensierosa.webp) | [Scheda](asset/tutorial/registro.md#mara-pensierosa-1) |  |
+| spazienzio-quasi-calmo | [WebP](asset/tutorial/ritratti/spazienzio-quasi-calmo.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-quasi-calmo-1) |  |
+| spazienzio-soddisfatto | [WebP](asset/tutorial/ritratti/spazienzio-soddisfatto.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-soddisfatto-1) |  |
+| spazienzio-serio | [WebP](asset/tutorial/ritratti/spazienzio-serio.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-serio-1) |  |
 
 ## Giro B — Piera e Grappino
 
