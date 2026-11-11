@@ -123,3 +123,18 @@ ancora la finestra e i pulsanti di prima.
    - i post-it per i «???» e la puntina rossa per «sei qui»;
    - la legenda sul cartoncino: utile o da togliere;
    - se va bene così per trasformare la mappa vera e il resto dell'aspetto, e se serve la cornice generata.
+
+## Giudizio del proprietario
+
+11 novembre 2026, con le sue parole:
+
+- **Ritocchi:** «i ritocchi vanno bene»; per il font, «aggiungiamo altri font alla scelta, così poi ci penso meglio».
+- **Combriccola in verticale:** «è brutta, sembrano delle figure volanti».
+- **Bozzetto della bacheca:** «mi piace, ma»:
+  - «vorrei che le lettere trasmettessero un certo senso di rotondità plasticosa»;
+  - «gli spilli li vorrei un po' fatti meglio, magari puntine da bacheche di sughero, anche diverse fra loro: è un bar marcio, usano quello
+    che trovano, che gli frega»;
+  - «vorrei la bacheca un po' sporca, con vecchie macchie di vino in alcuni punti o altro»;
+  - «in verticale la parte destra è quasi tutta vuota, possiamo centrare un po' meglio».
+
+Prossimo passo: un secondo giro della Fase C con questi punti.

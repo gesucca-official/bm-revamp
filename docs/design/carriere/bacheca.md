@@ -75,6 +75,10 @@ del proprietario su tutta la mappa:
 3. **Le parti illustrate, generate o disegnate:** la cornice vecchia e graffiata, il post-it, la puntina, qualche lettera caduta. Se servono
    immagini, un piccolo giro di prompt con lo stesso processo degli altri asset (D11 del piano C4), nello stile del gioco.
 
+**Dopo il primo bozzetto** (proprietario, 11 novembre 2026): lettere con «un certo senso di rotondità plasticosa»; puntine da bacheca di
+sughero, «anche diverse fra loro: è un bar marcio, usano quello che trovano»; bacheca «un po' sporca, con vecchie macchie di vino in alcuni
+punti o altro».
+
 **Regole per non perdere il carattere:** imperfezioni decise dai dati e ripetibili (lo stesso nodo ha sempre la stessa «e» storta), mai
 casuali a ogni apertura; leggibilità prima di tutto, soprattutto sul telefono; niente marchi o loghi; niente scritte generate dentro le
 immagini.
