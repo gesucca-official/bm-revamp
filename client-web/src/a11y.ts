@@ -19,6 +19,21 @@ type HitLike={id:string;kind:string};
 const inHand=(h:HitLike)=>h.kind==='hand'||h.kind==='preview';
 /** 2c: the order of Tab of the semantic layer: the hand (and the card in preview) first, the rest after, each in the order the view gives. Stable; the visual order is not touched. */
 export function semanticOrder<T extends HitLike>(hits:readonly T[]):T[]{return [...hits.filter(inHand),...hits.filter(h=>!inHand(h))];}
+/**
+ * The order of Tab while a card is being played (owner's trial of 11 November 2026: after Invio on a card, Tab reached another card of the hand and Invio on a
+ * target the card does not admit cancelled the choice, with no sign of what to do). Choosing: the targets it admits come right after the chosen card (where the focus is, so
+ * the first Tab reaches one), the rest keeps its order; the targets it does not admit leave the order (a click still reaches them). The chosen card itself does not move. Discard due: the cards that can be thrown away first. Otherwise the resting order (`semanticOrder`).
+ */
+export function aimOrder<T extends HitLike>(hits:readonly T[],s:{selected:string|null;targeted:boolean;discarding:boolean;allowed:(h:T)=>boolean;discardable:(h:T)=>boolean}):{order:T[];skipped:Set<string>}{
+ const base=semanticOrder(hits),skipped=new Set<string>();
+ if(!s.selected)return {order:base,skipped};
+ const target=(h:T)=>h.kind==='person'||h.kind==='item';
+ if(s.discarding){const first=base.filter(h=>h.kind==='hand'&&s.discardable(h));return {order:[...first,...base.filter(h=>!first.includes(h))],skipped};}
+ if(s.targeted)return {order:base,skipped};
+ const admitted=base.filter(h=>target(h)&&s.allowed(h));
+ for(const h of base)if(target(h)&&!s.allowed(h))skipped.add(h.id);
+ const rest=base.filter(h=>!admitted.includes(h)&&!skipped.has(h.id)),at=rest.findIndex(h=>h.id===s.selected);
+ return {order:[...rest.slice(0,at+1),...admitted,...rest.slice(at+1),...base.filter(h=>skipped.has(h.id))],skipped};}
 /** 2c: the card the arrows reach from `id`, one step along the hand, stopping at the ends; null when `id` is not a card of the hand or the key is not an arrow. */
 export function handNeighbour(hits:readonly HitLike[],id:string,key:string):string|null{
  const step=key==='ArrowRight'?1:key==='ArrowLeft'?-1:0;if(!step)return null;

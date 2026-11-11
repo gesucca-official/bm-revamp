@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {InputMode,deckLabel,handNeighbour,isKeyboardKey,roundLabel,semanticOrder,shouldFocusConfirm,shouldFocusHand,stepInGroup,tabStop} from '../src/a11y.ts';
+import {InputMode,aimOrder,deckLabel,handNeighbour,isKeyboardKey,roundLabel,semanticOrder,shouldFocusConfirm,shouldFocusHand,stepInGroup,tabStop} from '../src/a11y.ts';
 
 // C4-8a (owner's choice of 10 November 2026, points 2, 7 and 8): the decisions of keyboard access, apart from the DOM.
 test('2a/2b: the last input is the keyboard after Tab, Enter, Space, Escape, arrows and I; a pointer press says it is not; Ctrl/Meta combinations do not count',()=>{
@@ -67,4 +67,23 @@ test('7a: the box of the round says how many cards, and on the pile the top card
  assert.equal(roundLabel(p,true,who),'Carte del round: 3 carte, in cima «Sip» di c, 1 annullata; apri Ultimo turno');
  assert.equal(roundLabel([p[0],p[1]],true,who),'Carte del round: 2 carte, in cima «Dodge» di b (annullata); apri Ultimo turno','the voided top is said once');
  assert.equal(deckLabel(1),'mazzo 1 carta');assert.equal(deckLabel(14),'mazzo 14 carte');assert.equal(deckLabel(0),'mazzo 0 carte');assert.equal(deckLabel(null),'');assert.equal(deckLabel(undefined),'');
+});
+
+// Owner's trial of 11 November 2026: Invio on a card, Tab, Invio did not show the confirmation (Tab went to another card, or to a target the card does not admit and Invio cancelled).
+test('2c: while a card is chosen, Tab reaches the card, the targets it admits, the rest; the targets it does not admit leave the order',()=>{
+ const h=[{id:'c1',kind:'hand'},{id:'c2',kind:'hand'},{id:'c3',kind:'hand'},{id:'prev',kind:'preview'},{id:'person-b',kind:'person'},{id:'status-b',kind:'status'},{id:'person-a',kind:'person'},{id:'item-a-0',kind:'item'}];
+ const base={selected:'prev',targeted:false,discarding:false,allowed:(x:{id:string})=>x.id==='item-a-0'||x.id==='person-b',discardable:()=>false};
+ const r=aimOrder(h,base);
+ assert.deepEqual(r.order.map(x=>x.id),['c1','c2','c3','prev','person-b','item-a-0','status-b','person-a'],'the admitted targets right after the chosen card, the rest in order, what is skipped last');
+ const mid=aimOrder(h,{...base,selected:'c2'}).order.map(x=>x.id);
+ assert.deepEqual(mid.slice(0,4),['c1','c2','person-b','item-a-0'],'a card still in the hand (before the target is chosen): the targets come right after it, so the first Tab reaches one');
+ assert.deepEqual([...r.skipped],['person-a'],'a target not admitted is out of the order of Tab');
+ assert.deepEqual(aimOrder(h,{...base,selected:null}).order.map(x=>x.id),semanticOrder(h).map(x=>x.id),'no card chosen: the resting order, nothing skipped');
+ assert.equal(aimOrder(h,{...base,selected:null}).skipped.size,0);
+ assert.deepEqual(aimOrder(h,{...base,targeted:true}).order.map(x=>x.id),semanticOrder(h).map(x=>x.id),'the target is chosen: the resting order');
+ assert.equal(aimOrder(h,{...base,targeted:true}).skipped.size,0);
+ const d=aimOrder(h,{...base,targeted:true,discarding:true,discardable:x=>x.id==='c2'||x.id==='c3'});
+ assert.deepEqual(d.order.slice(0,2).map(x=>x.id),['c2','c3'],'a discard is due: the cards that can be thrown away come first');
+ assert.deepEqual([...d.order.map(x=>x.id)].sort(),h.map(x=>x.id).sort(),'nothing lost or repeated');
+ assert.equal(aimOrder(h,{...base,allowed:()=>false}).order.length,h.length,'no admitted target: all the same present');
 });

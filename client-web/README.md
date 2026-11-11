@@ -531,7 +531,8 @@ cornici, simboli e texture restano a C4.
 - **Tastiera (2a, 2b, 2c, `src/a11y.ts`):** `InputMode` sa se l'ultimo input era la tastiera (Tab, Invio, Spazio, Esc, frecce, I);
   solo allora ✓ prende il focus dopo il bersaglio (e lo scarto) e la prima carta della mano lo riprende quando si apre una scelta
   e il focus è perso (turno nuovo, annullamento). `semanticOrder`: la mano (e l'anteprima) per prima nell'ordine di Tab; le
-  frecce percorrono la mano (`handNeighbour`), Maiusc con le frecce la riordina come prima.
+  frecce percorrono la mano (`handNeighbour`), Maiusc con le frecce la riordina come prima. Mentre si sceglie una carta (`aimOrder`) i
+  bersagli ammessi seguono subito la carta scelta nell'ordine di Tab e quelli non ammessi ne escono (prova del proprietario dell'11 novembre 2026).
 - **Contorno ai tre simboli (3b, `edgeFor` in `src/symbols.ts`):** 1 px (tratto di 2 px sotto il riempimento) di luce attorno al cuore
   sulla plancia scura, d'inchiostro attorno ad alcol e tossicità su moneta chiara; stesso disegno in Pixi (`drawLayers`) e in SVG
   (`svgParts`, `SymbolMark ground`). I colori non cambiano.

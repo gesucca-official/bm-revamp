@@ -462,15 +462,16 @@ async function kbdChoose(p,scope,rec,skip=0){
   if(t.selected!==order[i].key){await press(p,'Escape');continue;}
   // The arrows draw the admitted targets; pick the first one Tab reaches (the opponents come before the objects).
   const want=t.arrows.map(a=>a.id);let tg=null;
-  for(let n=0;n<40&&!tg;n++){await press(p,'Tab');const a=await active(p);if(a?.hit&&want.includes(a.hit))tg=a.hit;}
+  let tabs=0;for(;tabs<40&&!tg;){await press(p,'Tab');tabs++;const a=await active(p);if(a?.hit&&(want.includes(a.hit)||(tabs===1&&/^(person|item)-/.test(a.hit))))tg=a.hit;}// the arrows draw one object per seat, the model admits them all: the first Tab may land on another admitted object
+  // Owner's trial of 11 November 2026: one Tab after the card must be on an admitted target (Invio on it aims; on a target not admitted it would cancel).
+  if(tg&&tabs!==1)bad(scope,`${name}: ${tabs} Tab from the chosen card to its first admitted target, not 1`);else rec.oneTabToTarget=(rec.oneTabToTarget??0)+1;
   if(!tg){bad(scope,`${name}: Tab never reaches a target of ${JSON.stringify(want)}`);await press(p,'Escape');continue;}
   await press(p,'Enter');t=await settle(p,140);
   if(!t.target){bad(scope,`${name}: Enter on ${tg} did not aim`);await press(p,'Escape');continue;}
   if(t.message.includes('scartare')&&!t.discard){
-   // The hand comes first in the order, so Shift+Tab from the target walks back to it.
-   const back=await tabTo(p,a=>isCard(a)&&a.hit!==order[i].key,40,'Shift+Tab');// the chosen card (in preview) is not a card of the hand: the arrows do not start from itif(!back){bad(scope,`${name}: no way back to the hand for the discard`);await press(p,'Escape');continue;}
-   let done=false;at=order.findIndex(c=>c.key===back.hit);
-   for(const {c,j} of spare){if(at<0)break;await goTo(j);await press(p,'Enter');const d=await settle(p,140);if(d.discard){done=true;break;}}
+   // The cards that can be thrown away come first in the order (aimOrder), so Shift+Tab from the target walks back to one of them.
+   let done=false;
+   for(const {c} of spare){const a=await tabTo(p,x=>x.hit===c.key,40,'Shift+Tab');if(!a)continue;await press(p,'Enter');const d=await settle(p,140);if(d.discard){done=true;break;}}
    if(!done){bad(scope,`${name}: no discard accepted`);await press(p,'Escape');continue;}}
   const a=await active(p);
   if(a?.test!=='confirm'){bad(scope,`${name}: after the target the focus is ${JSON.stringify(a)}, not ✓`);}

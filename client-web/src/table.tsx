@@ -7,7 +7,8 @@ import {TableScene,subtype,type Hit,type Inspection} from './scene.ts';
 import {playerName} from './presence.ts';
 import {ROLES,roleOf,shortfall,damageOf,damageLabel,damageReport,leftV,gainsOf,chipsOf,confirmTextBox,shortSummary} from './readability.ts';
 import {frameOf} from './frames.ts';
-import {InputMode,roundLabel,semanticOrder,shouldFocusConfirm,shouldFocusHand} from './a11y.ts';
+import {InputMode,aimOrder,roundLabel,shouldFocusConfirm,shouldFocusHand} from './a11y.ts';
+import {regular} from './model.ts';
 import {Cost,DamagePills,Gains,Mark,MeasuredFrame,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
 import {outcome,forfeitLabel,forfeitOwn,secondsLeft,reconnecting} from './lifecycle.ts';
 import {resolve,roundNote,roundReport,briefLine,type ResolutionFacts} from './resolution.ts';
@@ -100,10 +101,12 @@ export function Table({session,model}:{session:Session;model:Model}){
  // C4-8a (2a, 2b): from the keyboard, ✓ takes the focus when the move can be confirmed (Enter confirms, Esc cancels), and the first hand card does when a new choice opens and the focus was lost with the turn or the cancel.
  useEffect(()=>{if(shouldFocusConfirm({keyboard:input.current.keyboard,confirmShown:!!confirmAt,needsDiscard:!!needsDiscard}))document.querySelector<HTMLButtonElement>('[data-testid=confirm]')?.focus();},[!!confirmAt,!!needsDiscard,model.discard]);
  useEffect(()=>{const a=document.activeElement;if(shouldFocusHand({keyboard:input.current.keyboard,phase:model.phase,finished,dialogOpen:!!modal,focusLost:!a||a===document.body}))document.querySelector<HTMLButtonElement>('[data-hit^=card-]')?.focus();},[model.phase,model.view.turn,chosen]);
+ // C4-8a (2c): while a card is played, Tab reaches first what it admits (aimOrder).
+ const aimed=aimOrder(hits,{selected:model.selected,targeted:!!model.target,discarding:!!needsDiscard,allowed:h=>!!h.target&&model.allows(h.target),discardable:h=>{const c=model.hand.find(x=>x.key===h.id);return !!c&&h.id!==model.selected&&regular(c.card);}});
  const showTool=(title:string,data:unknown)=>{setTool({title,data});console.info(`[${title}]`,data);};
  return <main aria-label="Tavolo di Botte Micidiali">
   <div ref={host} className="table-host"/>
-  <div className="semantic-layer" aria-label="Carte e bersagli">{semanticOrder(hits).map(hit=><PressButton key={hit.id} data-hit={hit.id} className="semantic" aria-label={hit.label} aria-pressed={hit.kind==='hand'||hit.kind==='preview'?model.selected===hit.key:undefined} style={{left:hit.x-hit.w/2,top:hit.y-hit.h/2,width:hit.w,height:hit.h,transform:`rotate(${hit.angle}rad)`}} onClick={()=>table?.activate(hit.id)} onFocus={()=>table?.focus(hit.id)} onBlur={()=>table?.focus(null)} onKeyDown={e=>table?.key(hit.id,e.nativeEvent)}><span>{hit.label}</span></PressButton>)}</div>
+  <div className="semantic-layer" aria-label="Carte e bersagli">{aimed.order.map(hit=><PressButton key={hit.id} data-hit={hit.id} className="semantic" tabIndex={aimed.skipped.has(hit.id)?-1:undefined} aria-label={hit.label} aria-pressed={hit.kind==='hand'||hit.kind==='preview'?model.selected===hit.key:undefined} style={{left:hit.x-hit.w/2,top:hit.y-hit.h/2,width:hit.w,height:hit.h,transform:`rotate(${hit.angle}rad)`}} onClick={()=>table?.activate(hit.id)} onFocus={()=>table?.focus(hit.id)} onBlur={()=>table?.focus(null)} onKeyDown={e=>table?.key(hit.id,e.nativeEvent)}><span>{hit.label}</span></PressButton>)}</div>
   <div className="brand" aria-hidden="true">BOTTE<br/>MICIDIALI</div>
   <div className="top-actions">{!panel&&away.map(a=><span key={a.id} className="clock away" role="status" aria-label={`${name(a.id)} è fuori linea: rientro entro ${a.seconds} secondi`}>{name(a.id)} fuori linea · {a.seconds} s</span>)}{clock!==null&&!finished&&<span className="clock" aria-label="Tempo indicativo per la mossa">◷ {model.phase==='pending'?'—':`${clock} s`}</span>}<span className="turn" aria-label={`Turno ${view.turn+1}`}>T{view.turn+1}</span><PressButton className="menu-button round" aria-label="Apri menu" onClick={()=>open('menu')}>•••</PressButton></div>
   {!panel&&chosen&&table?.layout&&<p className={`hint confirming ${model.phase}`} role="status" aria-live="polite" style={{maxWidth:confirmTextBox(table.layout,innerHeight).w}}><span><b>{choice!.name}</b> → {targetLabel}</span><span hidden={!!needsDiscard}><em>{choice!.characterBound&&!discardable.length?'Nessuna regolare da scartare':model.message}</em></span></p>}
