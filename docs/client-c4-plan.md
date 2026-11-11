@@ -591,6 +591,8 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 
 **Stato (11 novembre 2026): STOP del punto 3, senza codice.** Misura su desktop a 1366×768, 844×390 e 1920×1080, da sole e a macchina ferma: tutte verdi, criterio di C3-L rispettato ovunque (quota entro soglia ≥ 98,9%, input ≤ 41,5 ms), duello e 844×390 uguali o migliori di C4-1b; in FFA a 1366×768 l'input massimo per turno (21,9–41,5 ms su otto turni) e i picchi isolati (128–146 ms, sistematici) superano la base. Diagnosi, opzioni in ordine e `Size` (verde, texture 82,6% del tetto) nel [rapporto](reports/client-c4/c4-8b.md); asset e codice invariati. Le misure in Edge non dicono nulla sull'iPhone.
 
+**Scelta del proprietario (11 novembre 2026)** sullo STOP, alla domanda «Come procede C4-8b?»: «Misura, poi sfocature». Si fa l'opzione 0 del [rapporto](reports/client-c4/c4-8b.md#opzioni-in-ordine) (strumento di misura nuovo che localizza i picchi FFA) e poi l'opzione 1(a) (le sfocature dello sfondo in una texture ferma, stessa resa); il resto solo se la misura mostra che serve. Il punto 2 (compressione e caricamento mirato) resta fermo finché il proprietario non risponde.
+
 **Dipendenze.** Tutti i blocchi visivi; D9.
 
 **File toccati.** `scene.ts`, `readability.ts`, eventualmente `art.ts`, documenti comuni.
