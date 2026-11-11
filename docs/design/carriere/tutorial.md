@@ -14,8 +14,8 @@ chiama «faccia nuova».
 
 ### Scena 0 — Davanti al bar
 
-Il giocatore decide di provare un bar nuovo, **[BAR]** (nome provvisorio, da inventare), con la sua combriccola di amici. Il nome potrebbe
-diventare anche il nome del gioco, se viene in mente qualcosa di meglio di «Botte Micidiali».
+Il giocatore decide di provare un bar nuovo, **Il Serraglio** («dove le botte sono piene e la gente ubriaca»; nome scelto dal proprietario
+l'11 novembre 2026), con la sua combriccola di amici. Se il nome diventerà anche il titolo del gioco è ancora da decidere.
 
 La combriccola esita sulla porta: gli shottini costano due euro, ma c'è il tetano, e qualcuno vorrebbe tornare al **Dimmi Di Sì**, il loro
 bar solito, col Virgin Cuba Libre a sedici euro.
@@ -123,7 +123,7 @@ Restano fuori, per la principale: oggetti ed equip in dettaglio, POISON, la L di
 
 ## Domande aperte
 
-1. **Nome del bar,** forse anche titolo del gioco: per ora `[BAR]`.
+1. **Titolo del gioco:** il bar ora si chiama Il Serraglio; se diventerà anche il titolo, al posto di «Botte Micidiali», è da decidere.
 2. **La last resort nella partita a tre:** da misurare col runner; se non arriva al momento giusto, mazzi accorciati.
 3. **L'inizio della carriera principale,** quando ci sarà la sua storia.
 

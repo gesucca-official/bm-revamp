@@ -48,7 +48,7 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
 - **Oggetti e animali** che entrano ed escono dalla scena (la bici di Mara, Grappino) sono **sprite**: figura intera su fondo trasparente o
   magenta, tela quadrata (1024×1024 di norma; lo strumento può restituire 1254×1254, che va bene lo stesso perché il client scala),
   posati dal client davanti allo sfondo.
-- **Nessuna scritta:** l'insegna di [BAR] e ogni testo li sovrappone il client.
+- **Nessuna scritta:** l'insegna («BAR IL SERRAGLIO») e ogni testo li sovrappone il client.
 
 ## Figure in ombra
 

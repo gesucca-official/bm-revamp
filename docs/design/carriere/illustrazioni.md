@@ -31,9 +31,9 @@
 
 | Id | Scena | Contenuto | Varianti e sprite |
 |---|---|---|---|
-| S1 | 0 | Esterno del bar di sera, quartiere di strada, aria da tetano: porta, vetrina, insegna che sfarfalla, il muro dove Mara lascia la bici. La scritta «BAR» e il nome del bar li sovrappone il client | Sprite della bici di Mara, che entra con lei; variante con l'insegna spenta, per lo sfarfallio |
+| S1 | 0 | Esterno del bar di sera, quartiere di strada, aria da tetano: porta, vetrina, insegna che sfarfalla, il muro dove Mara lascia la bici. La scritta dell'insegna, «BAR IL SERRAGLIO», la sovrappone il client | Sprite della bici di Mara, che entra con lei; variante con l'insegna spenta, per lo sfarfallio |
 | S2 | 1, 2, 3, 4 | Interno dello stesso bar del tavolo di gioco: bancone, tavolini, sedie spaiate e rattoppate, bottiglie, luce calda e sporca | Variante col disordine dopo la rissa: tavolino rovesciato, sedie a terra, vetri (scene 3 e 4) |
-| S3 | epilogo del fallimento | Il Dimmi Di Sì, bar caro e alla moda, tutto il contrario di [BAR] | — |
+| S3 | epilogo del fallimento | Il Dimmi Di Sì, bar caro e alla moda, tutto il contrario del Serraglio | — |
 
 ### Ritratti e sprite
 

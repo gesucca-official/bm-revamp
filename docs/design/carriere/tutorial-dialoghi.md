@@ -18,7 +18,7 @@ Il cane di Piera si chiama **Grappino**: proposta della regia, adottata dal prop
 
 ## Scena 0 — Davanti al bar
 
-[Sfondo: S1, esterno di sera. Regia: l'insegna di [BAR] sfarfalla; la combriccola, in ombra, esita sulla porta.]
+[Sfondo: S1, esterno di sera. Regia: l'insegna «BAR IL SERRAGLIO» sfarfalla; la combriccola, in ombra, esita sulla porta.]
 
 **Un amico**: ...ma siamo sicuri che il posto sia questo?
 

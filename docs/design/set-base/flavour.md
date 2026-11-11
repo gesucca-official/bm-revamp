@@ -36,8 +36,11 @@ cantiere» o «Rutto a distanza sociale».
 
 *Idee del proprietario* (10 novembre 2026, dal [tutorial](../carriere/tutorial-dialoghi.md#scena-0--davanti-al-bar)):
 
-- **Il bar** ha un nome ancora da inventare, `[BAR]` nei testi, che potrebbe diventare anche il titolo del gioco. Sull'insegna c'è scritto
-  BAR; gli shottini costano due euro, e c'è chi ha paura di prendersi il tetano.
+- **Il bar si chiama «Il Serraglio»** (proprietario, 11 novembre 2026), con una tagline se dovesse servire: **«dove le botte sono piene e
+  la gente ubriaca»**, sul proverbio della botte piena e della moglie ubriaca. Il nome era già nel cast: è quello del Tossico, «Tossico del
+  Serraglio». **L'insegna dice «BAR IL SERRAGLIO»** (proprietario, 11 novembre 2026), così regge la battuta della combriccola «sull'insegna
+  c'è scritto BAR»; dove usare la tagline è da decidere. Gli shottini costano due euro, e c'è chi ha paura di prendersi il tetano. Se il nome diventerà
+  anche il titolo del gioco è ancora da decidere.
 - **Il Dimmi Di Sì** è il bar caro e alla moda dove va di solito la combriccola del giocatore: Virgin Cuba Libre a sedici euro, un posto
   da fighetti («pottini», a Prato: figli di papà).
 
