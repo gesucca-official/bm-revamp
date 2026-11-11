@@ -46,7 +46,8 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
   **modificando lo sfondo approvato**, stessa tela e stessa inquadratura, che il client sostituisce o dissolve sopra l'altro. Uno strato
   trasparente generato a parte non si allinea in modo affidabile allo sfondo (corretto l'11 novembre 2026, preparando gli ultimi giri).
 - **Oggetti e animali** che entrano ed escono dalla scena (la bici di Mara, Grappino) sono **sprite**: figura intera su fondo trasparente o
-  magenta, tela 1024×1024, posati dal client davanti allo sfondo.
+  magenta, tela quadrata (1024×1024 di norma; lo strumento può restituire 1254×1254, che va bene lo stesso perché il client scala),
+  posati dal client davanti allo sfondo.
 - **Nessuna scritta:** l'insegna di [BAR] e ogni testo li sovrappone il client.
 
 ## Figure in ombra
