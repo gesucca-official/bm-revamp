@@ -42,14 +42,17 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
   centrale di circa il 30%. I lati sono contorno sacrificabile.
 - **Parte bassa tranquilla:** il quarto inferiore finisce sotto la finestra di dialogo, quindi niente dettagli importanti lì. Anche il
   centro dietro il ritratto resta poco affollato.
-- **Strati separati** per ciò che cambia fra le scene (la bici di Mara, l'insegna accesa e spenta, il disordine dopo la rissa): stessa
-  tela e stessa inquadratura dello sfondo, fondo trasparente o magenta come per i ritratti.
+- **Varianti, non strati,** per ciò che cambia fra le scene (l'insegna spenta, il disordine dopo la rissa): uno sfondo intero ottenuto
+  **modificando lo sfondo approvato**, stessa tela e stessa inquadratura, che il client sostituisce o dissolve sopra l'altro. Uno strato
+  trasparente generato a parte non si allinea in modo affidabile allo sfondo (corretto l'11 novembre 2026, preparando gli ultimi giri).
+- **Oggetti e animali** che entrano ed escono dalla scena (la bici di Mara, Grappino) sono **sprite**: figura intera su fondo trasparente o
+  magenta, tela 1024×1024, posati dal client davanti allo sfondo.
 - **Nessuna scritta:** l'insegna di [BAR] e ogni testo li sovrappone il client.
 
 ## Figure in ombra
 
-Chi non è un personaggio del gioco (la combriccola) è una sagoma scura uniforme, senza volto, con la stessa tela e le stesse regole dei
-ritratti. Le sagome si possono anche disegnare a mano o ricavare da un ritratto: non servono alla fetta verticale.
+Chi non è un personaggio del gioco (la combriccola) è una sagoma scura uniforme, senza volto né dettagli interni, su fondo trasparente o
+magenta. Per un gruppo la tela è quella degli sfondi, 1536×1024, così il client lo posa davanti allo sfondo alla stessa scala.
 
 ## File e registro
 

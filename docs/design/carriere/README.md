@@ -53,7 +53,7 @@ seconda dei segni; battute di ritento; salto delle scene già viste e di tutte a
 
 | Carriera | Forma | Stato |
 |---|---|---|
-| [Tutorial](tutorial.md) | Lineare, tre partite | Scaletta, [dialoghi](tutorial-dialoghi.md) e [illustrazioni](illustrazioni.md#tutorial) necessarie (10 novembre 2026); [specifica degli asset](specifica-asset.md) e [fetta verticale](prompt-fetta.md) della scena 1, chiusa con S2 e quattro ritratti approvati (11 novembre 2026) |
+| [Tutorial](tutorial.md) | Lineare, tre partite | Scaletta, [dialoghi](tutorial-dialoghi.md) e [illustrazioni](illustrazioni.md#tutorial) necessarie (10 novembre 2026); [specifica degli asset](specifica-asset.md) e [fetta verticale](prompt-fetta.md) della scena 1, chiusa con S2 e quattro ritratti approvati, e [prompt del resto](prompt-tutorial-resto.md) in tre giri (11 novembre 2026) |
 | Principale del Set Base | A rami, da rigiocare (D16) | Da scrivere; storia del proprietario |
 | Sergio Sommerso | Mini-carriera, sbloccata trovandolo in una busta (D17) | Da scrivere |
 | Duccio Braccio Teso | Mini-carriera, sbloccata trovandolo in una busta (D17) | Da scrivere |
