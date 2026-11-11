@@ -9,6 +9,7 @@ import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
 import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
 import {deckLabel,handNeighbour} from './a11y.ts';
+import {seatMark,heldBack} from './lifecycle.ts';
 import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
@@ -96,7 +97,10 @@ hits:Hit[]=[];backs:Record<string,number>={};faces=new WeakMap<Container,FaceInf
  private advancesAtStart=0;private flights:Flight[]=[];private zooms:Zoom[]=[];private accents:Accent[]=[];private shakes:Shake[]=[];private pace:Pace|null=null;
  // C3-4: values the boards show while a sequence runs (previous view, then each step), and the steps still to apply.
  // Decisions always use the final view (rule 2): only the drawing of resources reads `display`.
- display:Record<string,Partial<Record<Resource,number>>>|null=null;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
+ display:Record<string,Partial<Record<Resource,number>>>|null=null;
+ // C4-12: seats whose death or forfeit the running sequence stamps at its tail: drawn as before until then, like `display`; whether the sequence
+ // shows the end of the game for this player, and when it started (never moved by a tap), for the outcome panel of table.tsx.
+ private stamping=new Set<string>();private seqEnding=false;private seqBegan=0;private events:{at:number;run:()=>void}[]=[];private plan:Timeline|null=null;
  layout:TableLayout|null=null;
  /** C3-6: where the shell puts the short summary line, clear of everything on the table; null when there is no room. */
  brief:{box:Box;lines:number;font:number}|null=null;private briefFor='';
@@ -342,7 +346,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    if(id!==me){const final=p.cardsInHand as number,count=this.staged?.backs[id]??final,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=final;
     for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
    const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true,'','character');person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
-   const dead=p.character.dead,forfeit=view.forfeits[id];if(dead||forfeit){person.alpha=.55;this.text(person,dead?'ELIMINATO':'FORFAIT',0,0,compact?11:16,cw,0xffffff);}
+   const dead=p.character.dead,forfeit=view.forfeits[id],mark=seatMark({dead,forfeit:!!forfeit},this.stamping.has(id));if(mark){person.alpha=.55;this.text(person,mark,0,0,compact?11:16,cw,0xffffff);}
    const r=p.character.resources,summary=RESOURCES.map(k=>`${LETTER[k]} ${r[k]??0}`).join(', ');
    const charHit:Hit={id:`person-${id}`,kind:'person',x,y,w:cw,h:ch,angle:person.rotation,target:{owner:id},label:`${id===me?'Tu':this.name(id)}, ${p.character.name}, salute ${r.HEALTH}${dead?', eliminato':forfeit?', forfait':''}; risorse ${summary}${deckLabel(p.deck)?`; ${deckLabel(p.deck)}`:''}`,node:person};this.hits.push(charHit);
    if(this.model.allows({owner:id})&&!this.model.locked)this.halo(person,cw,ch,this.model.target?.owner===id&&this.model.target.itemIndex===undefined?0xf1e4c4:PETROL);
@@ -617,7 +621,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    change(p.endOfTurn.at+p.endOfTurn.dur*BEAT_PHASE.endLabel,T.endOfTurn.steps);}
   // 5. Tail: without verified lines the bars go from the previous to the final value (D5); deaths and forfeits are stamped.
   if(T.bars==='total')change(p.tail.at,T.totals);
-  this.events.push({at:p.tail.at,run:()=>{this.display=null;}});
+  this.events.push({at:p.tail.at,run:()=>{this.display=null;this.stamping.clear();}});
   // C3-5: an elimination also knocks the seat and sends out a wine ring; a forfeit is only stamped. The outcome closes the tail with its banner.
   const tailEnd=T.outcome?p.tail.at+p.tail.dur-PACE.outcome:p.tail.at+p.tail.dur;
   for(const e of T.emphasis){const s=seat(e.seat);if(!s)continue;const stamp=add(this.stamp(e.kind==='died'?'ELIMINATO':'FORFAIT',C));stamp.position.set(s.x,s.y);this.accents.push({node:stamp,at:p.tail.at,dur:tailEnd-p.tail.at,kind:'stamp'});count.emphasis++;
@@ -634,7 +638,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // C4-7-ter: every nominal hit uses its own cue; outcome belongs to the HTML panel.
   const cues=hitCues(T,registry),cue=null;
   this.stats.sequencePlans.push({key:k,moves:T.moves.length,total:p.total,expected:beats(T),pace:p,cue,cues,started:Math.round(performance.now())});
-  this.staged=shown;this.sounds?.beginRound(k);this.cue.arm(k,cues);this.trace({type:'begin',key:k,cues,impacts:this.stats.impacts.filter(x=>x.key===k)});this.seqStarted=performance.now();this.stats.sequences++;this.draw();
+  const held=heldBack(T,this.model.me);this.stamping=held.seats;this.seqEnding=held.ending;this.staged=shown;this.sounds?.beginRound(k);this.cue.arm(k,cues);this.trace({type:'begin',key:k,cues,impacts:this.stats.impacts.filter(x=>x.key===k)});this.seqStarted=performance.now();this.seqBegan=this.seqStarted;this.stats.sequences++;this.draw();
  }
 /** C3-5: the mark of one impact, vector only (D9): a burst for a blow, a slash for a cut, a drop for poison, the symbol of its role in a ring where the type does not apply, a cross for a voided move. */
  // The blow's shock wave: a ring with a soft disc that grows and fades like an explosion, under the burst (owner trial, C3-7).
@@ -667,6 +671,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   c.position.set(box.x,box.y);c.visible=false;this.fx.addChild(c);const entry:Label={seat:s.seat,resource:s.resource,box,from:Math.round(at),to:Math.round(at+dur),first:0,last:0,end:0,gap:0};this.labels.push(entry);
   this.accents.push({node:c,at,dur,kind:'pop',label:entry});this.stats.aggregateDeltas++;return true;}
  get sequenceRunning(){return !!this.seqStarted;}
+ /** C4-12: start (performance.now) of the running sequence that shows the end of the game for this player; null without one. */
+ get endingSince(){return this.seqStarted&&this.seqEnding?this.seqBegan:null;}
  private readonly cue=new RoundCue({round:(key,kind,id,scale)=>this.sounds?.round(key,kind,id,scale)??false});
  /** Verification only (C4-7-bis): a probe may set `window.__bmAudioTrace` to follow the sequences; absent, nothing happens. */
  private trace(e:Record<string,unknown>){try{(window as unknown as {__bmAudioTrace?:(e:Record<string,unknown>)=>void}).__bmAudioTrace?.(e);}catch{}}
@@ -681,7 +687,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  skip(){this.sounds?.stopAll();this.finish('skip');}
  stopEffects(sound:EndSound='all'){this.cue.end('stop');if(sound==='round')this.sounds?.interruptRound();else this.sounds?.endRound(sound==='all');if(this.seqStarted){this.stats.sequenceMs.push(performance.now()-this.seqStarted);const f=this.stats.flown.at(-1);if(f&&this.staged){f.itemsEnd=Object.fromEntries(Object.entries(this.staged.items).map(([id,l])=>[id,l.map(c=>c.name)]));f.advanced=f.advanced||this.stats.advances!==this.advancesAtStart;}
    for(const l of this.labels)this.stats.labels.push({key:this.seqKey,seat:l.seat,resource:l.resource,box:l.box,from:l.from,to:l.to,readable:l.first?Math.round((l.end||l.last)-l.first):0,gap:Math.round(l.gap)});if(this.stats.labels.length>3000)this.stats.labels.splice(0,1000);}
-  this.staged=null;this.arriving.clear();this.labels=[];this.guideBeats=[];this.seqStarted=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
+  this.staged=null;this.arriving.clear();this.labels=[];this.guideBeats=[];this.seqStarted=0;this.stamping=new Set();this.seqEnding=false;this.seqBegan=0;this.pace=null;this.plan=null;this.display=null;this.events=[];this.flights=[];this.zooms=[];this.accents=[];for(const sh of this.shakes){const h=this.hits.find(z=>z.id===`person-${sh.id}`);if(h){h.node.tint=0xffffff;h.node.x=h.x;}}this.shakes=[];this.fx.removeChildren().forEach(c=>c.destroy({children:true}));this.ghost=null;}
  private lastTick=0;
  // ---- C4-10: visual guide, strategy B «Richiamo». Focus and motion are pure (readability.ts); here they are only applied, over nodes that
  // draw() recreates: every node moved goes back to rest at the next frame, and the hits are never touched. `still` stops it for the measures.

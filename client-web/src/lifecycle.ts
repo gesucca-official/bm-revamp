@@ -35,3 +35,28 @@ export const secondsLeft = (deadline: number | undefined, now: number) => deadli
 /** Other players dropped and still within their reconnect deadline. */
 export const reconnecting = (view: View, me: string, now: number) => view.over ? [] :
   Object.entries(view.reconnectDeadlines ?? {}).filter(([id]) => id !== me).map(([id, d]) => ({id, seconds: secondsLeft(d, now)!}));
+
+// ---- C4-12: elimination and outcome after the sequence (owner's trial of C4-9, 11 November 2026).
+
+/** The mark on a seat: the view's death or forfeit, unless the running sequence has still to stamp it at its tail (as the boards follow `display`). */
+export function seatMark(p: {dead: boolean; forfeit: boolean}, pending: boolean): 'ELIMINATO' | 'FORFAIT' | null {
+  if (pending) return null;
+  return p.dead ? 'ELIMINATO' : p.forfeit ? 'FORFAIT' : null;
+}
+
+/** What a round's sequence holds back until its tail: the seats it stamps (died, forfeit) and whether it shows the end of the game for `me`
+ * (the outcome banner, or the own stamp in an FFA that goes on, D11 of C2b). */
+export function heldBack(t: {emphasis: {seat: string}[]; outcome: unknown}, me: string) {
+  return {seats: new Set(t.emphasis.map(e => e.seat)), ending: !!t.outcome || t.emphasis.some(e => e.seat === me)};
+}
+
+/** Longest wait of the outcome panel: the cap of 20 s per round (rule 9) and 2 s of margin. No outcome stays without its panel past it. */
+export const OUTCOME_WAIT_MS = 22000;
+
+/** Milliseconds the outcome panel (and its sound, J2) still waits; 0 opens it. It waits only while the sequence that shows the end of the game
+ * runs (`since`, its start): skipped, interrupted (hidden view, resize, a new view), absent (reduced motion, a jump) or ended, it opens at once.
+ * A dialog opens it too (the sequence goes on behind it); once open for the same stage of the game it stays open. */
+export function outcomeWait(s: {finished: boolean; since: number | null; now: number; dialog: boolean; opened: boolean}): number {
+  if (!s.finished || s.opened || s.dialog || s.since === null) return 0;
+  return Math.max(0, OUTCOME_WAIT_MS - Math.max(0, s.now - s.since));
+}
