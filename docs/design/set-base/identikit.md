@@ -57,7 +57,7 @@ strumento integrato ha bloccato due volte Spazienzio a torso nudo (categoria dic
   con baffoni a manubrio.
 - **Tatuaggi:** venuti male, senza scritte; per esempio un'aquila che sembra un pollo.
 - **Sotto la cintura:** (A) pantaloni della tuta bordeaux sformati, calzini e ciabatte; (B) jeans sporchi e scarponi da cantiere.
-- **Postura e gesti:** spalle in avanti, pugni stretti, sbuffa; quando è «fumante» il vapore gli esce dalla testa.
+- **Postura e gesti:** spalle in avanti, pugni stretti, sbuffa. «Fumante» è in senso figurato: niente vapore (proprietario, 11 novembre 2026).
 
 ## Mara Contromano
 

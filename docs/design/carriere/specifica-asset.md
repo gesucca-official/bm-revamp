@@ -1,6 +1,7 @@
 # Carriere — specifica degli asset delle scene di dialogo
 
-> Specifica di progetto, senza valore normativo, scritta l'11 novembre 2026 per produrre il materiale vero del [tutorial](tutorial.md)
+> Specifica di progetto, senza valore normativo, scritta l'11 novembre 2026 e corretta lo stesso giorno dopo la fetta verticale (composizione
+> generale approvata dal proprietario) per produrre il materiale vero del [tutorial](tutorial.md)
 > prima che la scena di dialogo esista nel client (CA-0, dopo C5). **Va confermata dalla [fetta verticale](prompt-fetta.md):** se la
 > composizione di prova mostra che una misura non regge, si corregge qui prima di generare il resto. Cosa serve, scena per scena, è in
 > [illustrazioni](illustrazioni.md#tutorial); l'aspetto dei personaggi nell'[identikit](../set-base/identikit.md).
@@ -25,6 +26,11 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
   Personaggi più bassi (Piera) restano con gli occhi alla stessa altezza; cambia la corporatura, non l'inquadratura.
 - **Posa:** di tre quarti, rivolto verso chi guarda; braccia e oggetti iconici dentro la tela quando possibile. **Mai specchiare** un
   ritratto: tatuaggi e dettagli sono asimmetrici.
+- **Personaggi larghi** (Spazienzio): spalle e braccia per intero dentro la tela, con un piccolo margine ai lati, quindi inquadrati un po' più
+  da lontano; gli occhi restano a un quarto dell'altezza e il bordo inferiore può scendere sotto la vita. Corretto dopo la fetta
+  verticale, dove le braccia erano tagliate e gli occhi al 14%.
+- **Le espressioni sono in senso figurato** salvo indicazione contraria: «fumante» è rabbia che bolle, non vapore (proprietario, 11
+  novembre 2026). Ogni prompt descrive l'espressione con parole sue, senza affidarsi al nome.
 - **Sfondo trasparente** se lo strumento lo consente. Altrimenti fondo piatto uniforme magenta `#FF00FF`, senza ombre né sfumature, e
   scontorno nel registro; se lo scontorno non viene pulito, si tiene il fondo e lo si annota: lo deciderà la fetta verticale.
 - **Niente dal naso di Spazienzio** (scelta del proprietario), nessuna scritta, nessun marchio, come negli identikit.

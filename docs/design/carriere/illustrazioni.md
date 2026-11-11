@@ -37,7 +37,7 @@
 | Chi | Espressioni | Note |
 |---|---|---|
 | Mara | neutra, agitata, sospettosa, illuminata, pensierosa, contenta | Rider con lo zaino delle consegne; il kebab tripla cipolla in mano in qualche scena, e la sua stagnola (oggetti separati) |
-| Spazienzio | furioso, fumante, quasi calmo, soddisfatto, serio | Il bullo del quartiere; «fumante» può avere il vapore come strato separato |
+| Spazienzio | furioso, fumante, quasi calmo, soddisfatto, serio | Il bullo del quartiere. «Fumante» è in senso figurato, rabbia trattenuta che bolle, **senza vapore** (proprietario, 11 novembre 2026); «furioso» è l'esplosione, al massimo |
 | Piera | brilla, offesa, assonnata, contenta | Grassa, alticcia, bicchiere in mano |
 | Grappino, il cane di Piera | seduto, ringhia, russa | Meticcio piccolo, pelo corto, bianco a macchie marroni, malandato e mal tenuto ([flavour](../set-base/flavour.md#concept-visivi-per-sb-32)) |
 | La combriccola | davanti alla porta, in fuga | Gruppo generico di amici del giocatore come **figure in ombra**, la regola per chi non è un personaggio del gioco: torna allo sblocco del PvP |

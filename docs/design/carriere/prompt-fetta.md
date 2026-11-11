@@ -85,8 +85,47 @@ compila solo il proprietario, tramite la regia.
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| s2-interno | [WebP](asset/tutorial/sfondi/s2-interno.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-1) |  |
-| mara-contenta | [WebP](asset/tutorial/ritratti/mara-contenta.webp) | [Scheda](asset/tutorial/registro.md#mara-contenta-1) |  |
-| mara-neutra | [WebP](asset/tutorial/ritratti/mara-neutra.webp) | [Scheda](asset/tutorial/registro.md#mara-neutra-1) |  |
-| spazienzio-furioso | [WebP](asset/tutorial/ritratti/spazienzio-furioso.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-furioso-1) |  |
-| spazienzio-fumante | [WebP](asset/tutorial/ritratti/spazienzio-fumante.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-fumante-1) |  |
+| s2-interno | [WebP](asset/tutorial/sfondi/s2-interno.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-1) | (11 novembre 2026) Composizione generale approvata, «solo che magari quella lampada sopra la testa della gente non è il massimo». Secondo giro |
+| mara-contenta | [WebP](asset/tutorial/ritratti/mara-contenta.webp) | [Scheda](asset/tutorial/registro.md#mara-contenta-1) | **Approvato** (11 novembre 2026): «Mara va bene» |
+| mara-neutra | [WebP](asset/tutorial/ritratti/mara-neutra.webp) | [Scheda](asset/tutorial/registro.md#mara-neutra-1) | **Approvato** (11 novembre 2026): «Mara va bene» |
+| spazienzio-furioso | [WebP](asset/tutorial/ritratti/spazienzio-furioso.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-furioso-1) | (11 novembre 2026) «Furioso me lo aspettavo più furioso». In più, per la regia, braccia tagliate dalla tela e occhi troppo in alto. Secondo giro |
+| spazienzio-fumante | [WebP](asset/tutorial/ritratti/spazienzio-fumante.webp) | [Scheda](asset/tutorial/registro.md#spazienzio-fumante-1) | (11 novembre 2026) «Non me lo aspettavo in senso letterale»: niente vapore. Stessa inquadratura da correggere. Secondo giro |
+
+## Secondo giro
+
+11 novembre 2026. Dopo il giudizio del proprietario sulla fetta ([esiti](#esiti)): la composizione generale va bene e Mara è approvata;
+si rifanno lo sfondo S2 senza la lampada sopra la testa dei personaggi e i due ritratti di Spazienzio, più furioso il furioso e
+«fumante» in senso figurato, con l'inquadratura corretta per i personaggi larghi ([specifica](specifica-asset.md#ritratti)).
+
+Stesse [istruzioni](#istruzioni) del primo giro. Gli originali nuovi prendono il suffisso `-2`; i file consegnati mantengono il nome e
+sostituiscono i candidati precedenti, che restano nella storia di git e nel registro. **Composizioni:** si rifanno le due di Spazienzio,
+più `composizioni/fetta-verticale-mara.webp` per vedere lo sfondo nuovo in verticale, con le stesse battute.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| S2 | `docs/design/carriere/asset/tutorial/originali/s2-interno-1.png` | 73a6fa8aa34d7c87e19c643fec1270b4e4dacf842d1fe9d4e8d7125e96ea66b5 |
+| Spazienzio, entrambi | `docs/design/set-base/identikit/riferimenti/spazienzio.png` | c4fae42acbb44d618731ae2d8b6c43dd810af9e52e64afd1c8bf199fde54f7d3 |
+
+### S2 — senza la lampada al centro
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the room, the counter, the stools, the bottles, the espresso machine, the tables and chairs, the walls, the wall lamps, the colours, the hand-inked European comic style and the composition. Change only this: remove the large hanging lamp above the centre of the counter, together with its cord and its bright pool of light, and fill that area naturally with the same ceiling beams, shelves and wall behind it. The room stays lit by the wall lamps at the sides, with the same warm, dim, dirty mood.
+
+Avoid: any other change to the image; any text, letters, numbers, signs, labels, logos, brands, signatures or watermarks; neon signs; people, faces, hands, silhouettes; photographic or 3D-rendered style.
+~~~
+
+### Spazienzio — furioso, al massimo
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: he is very broad, so frame him from a little further away than a normal half-body portrait: his whole shoulders and both arms, fists included, fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: explosive rage at its absolute peak, completely out of control: bellowing at the top of his lungs with his mouth wide open, eyes bulging, every vein on his head and neck swollen, face purple-red, leaning forward aggressively, both fists raised and shaking. Nothing comes out of his nose.
+
+Avoid: any other change to the character; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Spazienzio — fumante, in senso figurato
+
+~~~text
+Edit the attached approved character sheet into a single half-body portrait of the same man for a visual-novel dialogue scene. Keep his face, short bristly beard, bald head, enormous shirtless body, tattoos, colours and hand-inked European comic style exactly as in the reference; do not redesign him. Canvas 1024 x 1536 pixels, portrait 2:3. Framing: he is very broad, so frame him from a little further away than a normal half-body portrait: his whole shoulders and both arms, fists included, fit inside the canvas with a small empty margin on both sides; from the top of his head, with a small empty margin above it, down to his waist or a little below at the bottom edge; his eyes at about one quarter of the image height. Three-quarter view, turned toward the viewer. Background: fully transparent if supported; otherwise a perfectly flat, uniform magenta (#FF00FF) with no shadows, gradients or texture. Expression: seething, barely contained rage, about to explode but still holding it in: teeth grinding, jaw clenched so hard his cheeks bulge, eyes narrowed to slits, face flushed deep red, the vein on his temple throbbing, shoulders tense and fists clenched at his sides, trembling with the effort. This is figurative fuming: no steam, smoke or vapour anywhere.
+
+Avoid: any other change to the character; mirroring; arms or fists cut off by the edges of the canvas; steam, smoke, vapour, drips or lines coming out of his nose or head; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
