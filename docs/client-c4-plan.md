@@ -163,7 +163,7 @@ Numeri della bozza del proprietario, con le tre correzioni di D14 sotto. Opziona
 | C4-1c | Verifiche più veloci (parallelo, divisione per scenari): **fatto, approvato dal proprietario l'11 novembre 2026; scelta «Sì, tutte» del 10 novembre 2026** | C4-1 | Opus, alto | Strumenti condivisi con il Set Base; un controllo indebolito o un tempo falsato dal carico passerebbero inosservati |
 | C4-11 | Spazio e profondità: **fatto, approvato dal proprietario l'11 novembre 2026** | C4-10, D15 | Opus, alto | Geometria per misura dello schermo e tetto delle texture quasi pieno |
 | C4-8a | Accessibilità e residui O21: **Fase B fatta, approvata dal proprietario l'11 novembre 2026** ([rapporto](reports/client-c4/c4-8a.md#fase-b)) | tutti i blocchi visivi | Sonnet, alto | Molti percorsi, controlli nuovi |
-| C4-8b | Prestazioni e budget | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
+| C4-8b | Prestazioni e budget: **STOP dell'11 novembre 2026, senza codice** (criterio di C3-L rispettato, input FFA peggiorato rispetto a C4-1b; [rapporto](reports/client-c4/c4-8b.md)), in attesa della scelta del proprietario | tutti i blocchi visivi | Opus, alto | Ridisegno incrementale in `scene.ts`: rischio più alto di regressioni |
 | C4-9 | Consolidamento e giudizio del proprietario | tutti | Opus, medio | Serve soprattutto dichiarare con esattezza cosa è provato |
 
 La colonna «Modello, sforzo» è indicativa: per i blocchi ancora da eseguire la proposta accompagna il prompt e l'esecutore lo sceglie il proprietario ([metodo](orchestrazione-lavoro.md#proposta-di-modello-e-sforzo)).
@@ -588,6 +588,8 @@ elencata; ogni controllo interattivo ha un focus visibile (cattura); movimento r
 **Condizione attivata (6 novembre 2026).** Nella prova di C4-7 il proprietario ha segnalato su iPhone: «le animazioni su safari non sono proprio fluidissime». È la segnalazione da iPhone prevista sopra: C4-8b la tratta come disagio da misurare e affrontare con lo stesso ordine (ridisegno incrementale e decorazioni prima del renderer), distinguendo il ritardo di rete; quanto sia grave va chiarito col proprietario, e le misure in Edge non lo dimostrano. Dal 7 novembre 2026 (D15) O28 (spazio tolto da Safari in orizzontale) passa a C4-11 e O29 (riepilogo giallo) a C4-10 ([roadmap](client-roadmap.md#osservazioni-registrate-durante-c4)); C4-8b misura anche le animazioni e la profondità aggiunte da quei blocchi.
 
 **Condizione rientrata (11 novembre 2026).** Alla domanda della regia «Nell'ultima prova su iPhone, dopo C4-10 e C4-11, com'era la fluidità?» il proprietario ha risposto «Accettabile ora». La segnalazione del 6 novembre non attiva più il ridisegno incrementale: C4-8b lo fa solo se la misura su desktop esce dal criterio di C3-L o l'input peggiora rispetto a C4-1b, e in quel caso si ferma con numeri, diagnosi e opzioni prima di scrivere codice.
+
+**Stato (11 novembre 2026): STOP del punto 3, senza codice.** Misura su desktop a 1366×768, 844×390 e 1920×1080, da sole e a macchina ferma: tutte verdi, criterio di C3-L rispettato ovunque (quota entro soglia ≥ 98,9%, input ≤ 41,5 ms), duello e 844×390 uguali o migliori di C4-1b; in FFA a 1366×768 l'input massimo per turno (21,9–41,5 ms su otto turni) e i picchi isolati (128–146 ms, sistematici) superano la base. Diagnosi, opzioni in ordine e `Size` (verde, texture 82,6% del tetto) nel [rapporto](reports/client-c4/c4-8b.md); asset e codice invariati. Le misure in Edge non dicono nulla sull'iPhone.
 
 **Dipendenze.** Tutti i blocchi visivi; D9.
 
