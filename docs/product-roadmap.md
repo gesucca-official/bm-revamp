@@ -1,6 +1,6 @@
 # Roadmap del prodotto — dopo C5 e il Set Base
 
-Scritta il 10 novembre 2026 (versione 5, stesso giorno: come si racconta la carriera, rami, achievement e tutorial), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
+Scritta il 10 novembre 2026 (versione 6 dell'11 novembre 2026: [lavori anticipati](#lavori-anticipati) e D22), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
 **Solo roadmap:** come ogni roadmap (R00 del [regolamento](game-rules.md)), non introduce regole attive; le tappe che cambiano il
 gioco aggiornano prima il regolamento o il documento interessato. Lo stato del progetto resta nell'[indice](README.md#stato-corrente);
 qui ci sono l'ordine delle tappe, le decisioni prese e i punti critici. I piani di dettaglio, con blocchi e verifiche, si scrivono
@@ -8,7 +8,8 @@ all'avvio di ciascuna tappa, come per [C4](client-c4-plan.md) e il [Set Base](se
 
 **Quando parte ([D1](#decisioni-del-proprietario)):** dopo la chiusura di C5. Nulla di questa roadmap interferisce con C4, C5 e i
 blocchi del Set Base in corso. Le prove umane che quei piani chiedono le fa il proprietario come oggi; i ritorni di amici e tester
-arrivati dopo si correggono dopo.
+arrivati dopo si correggono dopo. **Eccezione ([D22](#decisioni-del-proprietario)):** il lavoro di progetto e di contenuto delle carriere,
+che non tocca `client-web` né i piani in corso, procede già ora; lo stato è nella sezione [lavori anticipati](#lavori-anticipati).
 
 ## Punto di partenza
 
@@ -47,6 +48,27 @@ un picco più alto, ma non può essere una comune migliore allo stesso costo.
 4. **Poi:** CA-3, CA-4, CA-5, AP-2 e le carriere successive.
 5. **Quando ci sono abbastanza giocatori:** PV-2.
 6. **Su decisione del proprietario:** PU, con AP-3.
+
+## Lavori anticipati
+
+Lavori di questa roadmap fatti prima che la sua tappa parta, per [D22](#decisioni-del-proprietario). **Questa tabella è la fonte del loro
+stato:** si aggiorna a ogni passo, l'[indice](README.md#stato-corrente) ne riporta solo una riga corta. I documenti di dettaglio stanno nel
+[serbatoio delle carriere](design/carriere/README.md) e nell'[identikit](design/set-base/identikit.md).
+
+| Lavoro | Tappa | Stato | Documenti |
+|---|---|---|---|
+| Storia e dialoghi del tutorial | CA-1 | **Fatto** (10–11 novembre 2026), testo del proprietario; manca l'epilogo del fallimento | [scaletta](design/carriere/tutorial.md), [dialoghi](design/carriere/tutorial-dialoghi.md) |
+| Identikit dei personaggi | CA, SB-32 | **Spazienzio, Mara e Piera approvati** (11 novembre 2026), originali di riferimento in git; gli altri quattro da fare | [identikit](design/set-base/identikit.md) |
+| Specifica degli asset del dialogo | CA-0 | **Confermata** dalla fetta verticale (11 novembre 2026) | [specifica](design/carriere/specifica-asset.md) |
+| Materiale visivo del tutorial | CA-1 | **Completo e approvato** (11 novembre 2026): 3 sfondi con 2 varianti, 15 ritratti, 3 pose di Grappino, la bici, 2 sagome | [fetta](design/carriere/prompt-fetta.md), [tre giri](design/carriere/prompt-tutorial-resto.md) |
+| Nome del bar | CA | **Deciso** (11 novembre 2026): Il Serraglio, insegna «BAR IL SERRAGLIO»; resta se farne il titolo del gioco | [flavour](design/set-base/flavour.md#il-mondo) |
+| **CA-0a** Prototipo delle carriere | CA-0 | **Fase A in corso** (11 novembre 2026), in una sessione avviata dalla regia, che rivede e avvia la Fase B per delega del proprietario | [prototipo](design/carriere/prototipo.md) |
+| Epilogo del tutorial | CA-1 | Da scrivere: battute al Dimmi Di Sì per chi raggiunge gli amici | [dialoghi](design/carriere/tutorial-dialoghi.md#epilogo-del-fallimento--da-scrivere) |
+
+**CA-0a, il prototipo.** È il primo pezzo di [CA-0](#ca--carriera-single-player) anticipato, usa e getta, in una cartella sua fuori da
+`client-web`: definisce il formato dei dati delle carriere (nodi, scelte, segni, condizioni, battute), un convertitore dalle storie in
+markdown, un lettore di scene con gli asset veri, la mappa dei rami, partite simulate con «vinci» e «perdi», una mini-carriera finta a
+rombi e il controllo automatico del grafo. Formato, convertitore e controllo potranno passare in CA-0; il resto si butta.
 
 ## ST — Strumenti di verifica
 
@@ -319,6 +341,7 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
 | D19 | Un sistema di achievement fa sapere al giocatore quali rami della carriera gli mancano da scoprire e gli dà indizi su come arrivarci. |
 | D20 | Direzione per trovare Sergio e Duccio in un tempo ragionevole (esempio del proprietario, da dettagliare in EC-0): buste speciali in cui la rara è sicuramente un personaggio non ancora in collezione, che non vengono più offerte quando non restano personaggi di quel set da trovare. |
 | D21 | Le battute delle carriere che si rivolgono al giocatore o parlano di lui sono neutre rispetto al genere. |
+| D22 | (11 novembre 2026) Il lavoro sulle carriere che non tocca il client né i piani in corso procede in anticipo, in parallelo a C5 e al Set Base: storie, identikit, materiale visivo e ora il prototipo («potremmo cominciare a fare il prototipo che si diceva per le carriere?»). La roadmap tiene traccia di questi lavori («utilizziamola per segnarci quello che facciamo»). |
 
 ## Domande aperte
 
@@ -343,5 +366,7 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
   e sostituite.
 - **Versione 4 — 10 novembre 2026:** CA-1 descritto con le tre partite della scaletta del tutorial; aperto il
   [serbatoio delle carriere](design/carriere/README.md).
+- **Versione 6 — 11 novembre 2026:** sezione dei lavori anticipati, che tiene lo stato del lavoro sulle carriere fatto prima della tappa;
+  D22; CA-0a, il prototipo delle carriere.
 - **Versione 5 — 10 novembre 2026:** battute neutre sul giocatore (D21); CA-1 con la scelta finale del tutorial, dialoghi scritti dal
   proprietario.

@@ -58,4 +58,6 @@ seconda dei segni; battute di ritento; salto delle scene già viste e di tutte a
 | Sergio Sommerso | Mini-carriera, sbloccata trovandolo in una busta (D17) | Da scrivere |
 | Duccio Braccio Teso | Mini-carriera, sbloccata trovandolo in una busta (D17) | Da scrivere |
 
-Decisioni D13–D20 nella [roadmap del prodotto](../../product-roadmap.md#decisioni-del-proprietario).
+Il prototipo delle carriere (CA-0a) è descritto in [prototipo.md](prototipo.md); il suo stato è nei
+[lavori anticipati](../../product-roadmap.md#lavori-anticipati). Decisioni D13–D22 nella
+[roadmap del prodotto](../../product-roadmap.md#decisioni-del-proprietario).
