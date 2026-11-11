@@ -167,3 +167,20 @@ Dal vivo, su PC e sul telefono ([cosa giudica](prototipo.md#cosa-giudica-il-prop
 finali compresi; se le scene «si leggono» come una visual novel (velocità del testo, regia di Piera, insegna, sagome, bici, Grappino); se
 il ritmo del tutorial regge, con la prima partita dopo la scena 1; se la scelta muta, la risposta sul telefono, la sconfitta che porta da
 sola al retrobottega e il secondo finale funzionano come se le immagina.
+
+## Prova del proprietario
+
+11 novembre 2026, su PC e su telefono. **«In generale comunque la direzione è giusta.»** Impressioni, con le sue parole:
+
+1. **Finestra di dialogo troppo alta:** «su schermo verticale, la sezione dei dialoghi è troppo alta. Anche su schermo orizzontale, ma sul
+   verticale è proprio esagerata».
+2. **Carattere dei dialoghi:** «il font con cui si scrivono i dialoghi è troppo piccolo e poco coinvolgente, possiamo trovarne uno più bello».
+3. **Ritratti in verticale:** «le figure a schermo verticale possono essere più grandi».
+4. **Stacchi di Piera troppo brevi:** «quando Piera parla, le figure che compaiono stanno troppo poco, non si fa in tempo a vederle. Le farei
+   andare avanti con un click o con un tap, o semplicemente ce le farei stare di più».
+5. **Mappa e aspetto generale scarni:** «la mappa, ma anche il feel generale, è troppo scarno. Immagino che sia perché è un prototipo, ma
+   manca di carattere e di profondità. È un videogioco, ma sembra un organigramma di una qualche app business».
+6. **Pulsanti sul telefono:** «non sono facilissimi da premere, li farei più grandi e immediati».
+7. **Intrecci nel grafo della mappa:** «ci sono un po' di intrecci».
+
+Prossimo passo: una fase di ritocchi, con i concetti per dare carattere alla mappa scelti dal proprietario.
