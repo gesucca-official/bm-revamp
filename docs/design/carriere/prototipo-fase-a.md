@@ -1,8 +1,8 @@
 # Carriere — prototipo CA-0a, proposta della Fase A
 
-> Proposta dell'esecutore della Fase A, scritta l'11 novembre 2026 sul [documento del prototipo](prototipo.md). **In attesa della
-> revisione della regia,** che decide le domande tecniche e porta al proprietario quelle di gusto e di scrittura
-> ([fasi](prototipo.md#fasi)). Lo stato sta nella riga di CA-0a dei [lavori anticipati](../../product-roadmap.md#lavori-anticipati).
+> Proposta dell'esecutore della Fase A, scritta l'11 novembre 2026 sul [documento del prototipo](prototipo.md). **Rivista dalla regia
+> lo stesso giorno** ([revisione](#revisione-della-regia)): domande tecniche decise, Fase B avviata per delega del proprietario
+> ([fasi](prototipo.md#fasi)), domande di gusto portate al proprietario. Lo stato sta nella riga di CA-0a dei [lavori anticipati](../../product-roadmap.md#lavori-anticipati).
 > Senza valore normativo. Nessun codice dell'interfaccia: in `prototipi/carriere/` c'è solo l'abbozzo del convertitore, con le sue prove.
 
 ## In breve
@@ -447,3 +447,26 @@ Sette prove verdi; `tsc --strict` pulito su `src/` (con il TypeScript 5.9.3 inst
 7. **P7. La mini-carriera** «Dov'è Grappino?» dimostra quello che ti serve vedere, o manca qualcosa (per esempio una seconda fine)?
 8. **P8. Stacchi di Piera:** per chi ascolta bastano «neutra» e «quasi calmo», o vuoi vedere sul prototipo che servono espressioni
    d'ascolto apposta?
+
+## Revisione della regia
+
+11 novembre 2026. Rivista nel repository: perimetro rispettato (solo questa proposta, la riga della roadmap e `prototipi/carriere/`);
+rilanciate le sette prove dell'abbozzo (verdi) e le due conversioni, la mini-carriera senza errori né avvisi e il tutorial con le
+integrazioni senza errori, con i due avvisi attesi dell'epilogo «da scrivere». La proposta copre tutto il perimetro.
+
+**Decisioni sulle domande tecniche:**
+
+| Domanda | Decisione |
+|---|---|
+| T1 | Tipi TypeScript con un controllo di validità scritto a mano nel prototipo; il JSON Schema in CA-0. |
+| T2 | Dati generati in `dati/generati/`, ignorati da git e rigenerati da `Convert`. |
+| T3 | Sì: lock derivato da quello di client-web, con lo script che lo rigenera committato. |
+| T4 | Playwright 1.56.1 dalla cache per le catture, come in client-web. |
+| T5 | `Phone` senza codice d'accesso: serve solo file statici del prototipo e asset già nel repository, e parte solo quando lo si chiede. |
+| T6 | Sì, esplorazione degli stati con atomi dell'account liberi e tetto a 200 000 stati. |
+| T7 | Sì, rapporto in `prototipo-fase-b.md`. |
+| T8 | Sì, non pertinenti: il blocco non tocca client-web né il server. |
+| T9 | Fuori dal prototipo e fuori dal formato 1; i segni fra carriere si fissano in CA-0. |
+
+**Domande P1–P8:** portate al proprietario. Finché non risponde, la Fase B usa le proposte come valori iniziali e **non modifica
+tutorial-dialoghi.md** (P1): le integrazioni restano nel loro file e si applicano in memoria.
