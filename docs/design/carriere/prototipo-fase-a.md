@@ -478,5 +478,5 @@ integrazioni senza errori, con i due avvisi attesi dell'epilogo «da scrivere».
 | P4 | «sulla scena»: la scelta con chi andare si fa nella scena, con i ritratti di chi si offre |
 | P5 | «sì»: «???» per i nodi mai visti, segreti invisibili finché non li trovi |
 | P6 | «vanno bene i tuoi per il prototipo» |
-| P7 | Il proprietario ha chiesto una spiegazione; in attesa |
+| P7 | Dopo la spiegazione della regia, «sì, una seconda fine»: la mini-carriera avrà due finali diversi, per vedere come mappa, fine del giro e achievement li mostrano |
 | P8 | «serviranno sicuramente espressioni esasperate»: per chi ascolta Piera servono ritratti apposta; nel prototipo restano «neutra» e «quasi calmo» finché non ci sono |
