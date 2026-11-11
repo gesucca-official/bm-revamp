@@ -435,9 +435,23 @@ export function closeUp(person:Box,screen:{w:number;h:number},avoid:Box[],o:{max
  const shape=(s:number,x:number,y:number):CloseUp=>{const pw=person.w*s,ph=person.h*s,ch=ph*.82,cw=ch/1.38,gap=Math.max(6,pw*.08),w=pw+gap+cw;
   return {person:{x:x-w/2+pw/2,y,w:pw,h:ph},card:{x:x+w/2-cw/2,y,w:cw,h:ch},box:{x,y,w,h:ph},scale:s,placed:'middle'};};
  for(let k=Math.round(max*20);k>=Math.round(min*20);k--){const s=k/20,probe=shape(s,0,0).box;let best:CloseUp|null=null,dist=Infinity;
-  for(let y=probe.h/2+m;y<=screen.h-probe.h/2-m;y+=step)for(let x=probe.w/2+m;x<=screen.w-probe.w/2-m;x+=step){
-   const d=Math.hypot(x-mid.x,y-mid.y);if(d>=dist)continue;const c=shape(s,x,y),pad={...c.box,w:c.box.w+2*m,h:c.box.h+2*m};
-   if(avoid.some(a=>overlap(pad,a)>0))continue;best=c;dist=d;}
+  // C4-8b: the same scan, point by point and in the same order, with the same distance and the same test as overlap(pad,a)>0, written out
+  // in numbers with overlap's own operations: the padded box has the same width W and height H at every point of a scale, and overlap()
+  // is positive exactly when its horizontal and its vertical factor both are. A row keeps only the boxes whose vertical factor is
+  // positive there; a row whose nearest point is no nearer than the best so far is passed over (hypot(dx,dy) ≥ |dy|); the shape is built
+  // only for the point chosen. Same result as the plain search (tests/closeup-search.test.ts), without an object per point.
+  const W=probe.w+2*m,H=probe.h+2*m;let bx=0,by=0,found=false;
+  for(let y=probe.h/2+m;y<=screen.h-probe.h/2-m;y+=step){if(Math.abs(y-mid.y)>=dist)continue;
+   const row=avoid.filter(a=>Math.min(y+H/2,a.y+a.h/2)-Math.max(y-H/2,a.y-a.h/2)>0);
+   // The box that blocked the previous point is tried first: along a row the same box usually blocks a run of points. A blocked point is
+   // never taken, so testing it before the distance changes nothing.
+   let last:Box|null=null;
+   for(let x=probe.w/2+m;x<=screen.w-probe.w/2-m;x+=step){
+    if(last&&Math.min(x+W/2,last.x+last.w/2)-Math.max(x-W/2,last.x-last.w/2)>0)continue;last=null;
+    const d=Math.hypot(x-mid.x,y-mid.y);if(d>=dist)continue;
+    for(const a of row)if(Math.min(x+W/2,a.x+a.w/2)-Math.max(x-W/2,a.x-a.w/2)>0){last=a;break;}
+    if(last)continue;bx=x;by=y;dist=d;found=true;}}
+  if(found)best=shape(s,bx,by);
   if(best&&dist<=near)return best;if(best&&dist<nearestD-1){nearest=best;nearestD=dist;}}
  if(nearest)return nearest;
  const c=shape(min,person.x,person.y),bx=Math.max(c.box.w/2+m,Math.min(screen.w-c.box.w/2-m,c.box.x+c.box.w/2-c.person.w/2)),by=Math.max(c.box.h/2+m,Math.min(screen.h-c.box.h/2-m,c.box.y));
