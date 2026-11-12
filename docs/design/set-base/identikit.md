@@ -28,12 +28,16 @@
 | Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | **Approvato**: [riferimento](identikit/riferimenti/spazienzio.png), più le strisce ai pantaloni |
 | Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | **Approvata**: [riferimento](identikit/riferimenti/mara.png) |
 | Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | **Approvata**: [riferimento](identikit/riferimenti/piera.png) |
-| Celestina | *Proposta:* curva e storta, tutta angoli | Bassa | *Proposta:* verde bottiglia malaticcio | *Da decidere* | Da scrivere |
-| Beppe | *Proposta:* robusto e piantato, tuta da lavoro | Media | *Proposta:* blu petrolio da tuta da officina | Attrezzi che spuntano dalle tasche | Da scrivere |
-| Sergio | Alto e secco, stona con gli altri ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | *Proposta:* grigio e beige da ufficio | *Da decidere* | Da scrivere |
-| Duccio | *Da decidere,* ridicolo e satirico | *Da decidere* | *Da decidere,* senza simboli espliciti | *Da decidere* | Da scrivere |
+| Celestina | Magra, curva e storta, coi capelli corti e ritti | Bassa | Rosso dei capelli; *variante:* verde bottiglia malaticcio | *Variante:* la cosa appena raccolta da terra | Idee del proprietario; prove da generare |
+| Beppe | Robusto e piantato, la salopette e il bun in cima | Media | *Variante:* tabacco della salopette di tela | Gli attrezzi in tasca; *variante:* il calibro nel taschino | Idee del proprietario; prove da generare |
+| Sergio | Alto e secco, una linea dritta nell'abito ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | Blu petrolio dell'abito, bianco della camicia | La sigaretta sottile di contrabbando | Idee del proprietario; prove da generare |
+| Duccio | Tarchiato e molle, testa rasata, petto in fuori | Medio-bassa | Nero della maglietta; *variante:* l'accento rosa del cocktail | *Variante:* il cocktail dolce con l'ombrellino | Idee del proprietario; prove da generare |
 
-Le proposte per gli ultimi quattro servono solo a non far collidere sagome e colori dei primi tre: si decidono con i loro identikit.
+Le idee del proprietario sugli ultimi quattro sono del 12 novembre 2026; il resto della tabella è *variante della regia*, da confermare con
+le prove. **Colori:** il blu petrolio, che la regia aveva proposto per la tuta di Beppe, va all'abito di Sergio per scelta del proprietario,
+e Beppe passa al tabacco. Il nero intero resta di Piera; Duccio lo porta solo nella maglietta, e lo distingue l'accento rosa del cocktail,
+l'unico colore fuori palette del cast, piccolo e voluto. **Stature:** sette figure non possono essere tutte diverse; si distinguono per
+sagoma più che per altezza.
 
 ## Spazienzio de la Ucciso
 
@@ -107,6 +111,95 @@ nel [secondo giro](identikit-prompt.md#secondo-giro).
 - **Oggetti:** il bicchierino di grappa sempre in mano; Grappino ai piedi, meticcio piccolo a pelo corto, bianco a macchie marroni,
   malandato e mal tenuto ([flavour](flavour.md#concept-visivi-per-sb-32)), che sul nero risalta.
 - **Postura e gesti:** appoggiata al bancone o seduta, si muove pochissimo e lentamente.
+
+## Celestina Bucatina
+
+**Idee del proprietario (12 novembre 2026):** capelli rossi, corti; voce rovinata; magra e con la pelle un po' cadente nonostante sia molto
+giovane; ogni scusa è buona per drogarsi; in realtà è molto intelligente e furba. Dalla [scheda](schede-personaggi.md): vive di quello che
+trova per terra e se lo mette in corpo.
+
+*Varianti della regia, da provare:*
+
+- **Età apparente:** sui ventitré anni, chiaramente adulta: il contrasto è fra il viso giovane e la pelle che non lo è più.
+- **Viso:** occhi svegli e calcolatori, l'unica cosa sana che ha, ed è lì che si vede che è furba; occhiaie, labbra screpolate, un
+  sorrisetto storto.
+- **Capelli:** (A) rossi, corti e ritti, tagliati da sé; (B) rossi, rasati ai lati con un ciuffo più lungo e scolorito.
+- **Vestiti:** (A) un parka verde bottiglia troppo grande, preso chissà dove, con le tasche gonfie di cose raccolte da terra; (B) una tuta
+  verde bottiglia sformata e scolorita, un marsupio pieno di roba, scarpe spaiate.
+- **Oggetto:** quello che ha appena raccolto da terra, tenuto in alto ed esaminato come un gioielliere esamina una pietra: (A) un tappo di
+  bottiglia; (B) una caramella incartata trovata sotto il bancone.
+- **Postura e gesti:** curva e storta, tutta angoli; (A) in piedi, ingobbita; (B) accovacciata, come chi ha appena visto qualcosa per terra.
+- **Mai nelle immagini:** siringhe, polveri, pasticche o altri oggetti riconoscibili della droga. La sua tossicità si racconta con le cose
+  raccolte da terra, come nella scheda; è anche ciò che lo strumento di generazione lascia passare.
+
+## Beppe Bulletta
+
+**Idee del proprietario (12 novembre 2026):** classico metalmeccanico, salopette e sporco di grasso, ma non troppo caricaturale; capelli
+lunghi raccolti in un bun per non sporcarseli; è un metallaro, e sotto la salopette ha una maglietta vistosa di un gruppo metal e un
+tatuaggio di un altro gruppo; ascolta solo metal estremo. Dalla [scheda](schede-personaggi.md): tornitore, meccanico in nero, ha sempre
+l'attrezzo giusto in tasca.
+
+*Varianti della regia, da provare:*
+
+- **Età apparente:** sui quarantacinque.
+- **I gruppi non esistono:** maglietta e tatuaggio portano loghi inventati, illeggibili come quelli veri del metal estremo, tutti spine e
+  radici. Così non ci sono scritte né gruppi reali, e la battuta funziona lo stesso.
+- **Salopette:** di tela color tabacco; (A) con tutte e due le bretelle su, lucida di grasso sulle ginocchia; (B) con una bretella giù, che
+  lascia vedere di più la maglietta.
+- **Viso:** (A) barba folta e lunga, sguardo tranquillo di chi ne ha viste tante; (B) pizzetto lungo e baffi, sopracciglia folte, un ghigno.
+- **Oggetti:** (A) il calibro, attrezzo del tornitore, nel taschino del petto e una chiave inglese nella tasca; (B) uno straccio unto nella
+  tasca dietro e la chiave inglese in mano.
+- **Tatuaggio:** sull'avambraccio, il logo illeggibile dell'altro gruppo.
+- **Postura e gesti:** piantato sulle gambe; (A) braccia incrociate; (B) la mano libera fa le corna.
+
+## Sergio Sommerso
+
+**Idee del proprietario (12 novembre 2026):** sarcastico, tagliente ogni volta che apre bocca; si crede sempre il più furbo, il più sveglio
+e il più in gamba in ogni situazione, e spesso lo è; la sua arroganza lo porta a ignorare le cose più banali; abito elegante blu petrolio,
+senza cravatta né gilet, su una camicia bianca col colletto slacciato; faccia affilata e tagliente, capelli corti castani; fuma sigarette
+sottili di contrabbando. Dalla [scheda](schede-personaggi.md): alto e secco, stona con gli altri avventori. Dallo stesso giorno è il
+proprietario segreto del Serraglio ([flavour](flavour.md#cesira-la-malalingua--booster-da-scrivere-in-sb-17)).
+
+*Varianti della regia, da provare:*
+
+- **Età apparente:** (A) sui quarantacinque, rasato di fresco, capelli pettinati all'indietro; (B) sulla cinquantina, tempie grigie e un
+  filo di barba.
+- **Viso:** zigomi e mento a punta, naso sottile; mezzo sorriso sarcastico e un sopracciglio alzato; guarda chi ha davanti dall'alto in
+  basso.
+- **Abito:** ben tagliato, con scarpe a punta lucide: l'unico vestito bene del cast.
+- **L'arroganza che ignora le cose banali,** in un dettaglio che lui non ha notato: (A) un laccio slacciato; (B) i calzini spaiati.
+- **Un indizio del segreto,** da tenere solo se piace: (A) un vecchio mazzo di chiavi, pesante, appeso alla cintura, che stona con l'abito e
+  si capisce dopo la rivelazione; (B) nessun indizio.
+- **Oggetto:** la sigaretta sottile accesa, tenuta con sufficienza; nessun pacchetto in vista, perché avrebbe scritte.
+- **Postura e gesti:** dritto, una mano in tasca.
+
+## Duccio Braccio Teso
+
+**Idee del proprietario (12 novembre 2026):** ragazzetto tarchiato ma non particolarmente muscoloso; tatuaggi simili a croci celtiche su
+varie parti del corpo; testa rasata ma con un minimo di ricrescita, già un po' stempiato nonostante sia giovane; maglietta nera a mezze
+maniche con un simbolo simile a un'aquila bianca; si atteggia a vero uomo, pieno di onore, gloria e amore per la patria, però si comporta da
+perfetto ipocrita e non se ne accorge; gli piacciono i cocktail dolci ed estremamente femminili. Dal
+[flavour](flavour.md#concept-visivi-per-sb-32): «stile estremamente ridicolo e satirico; niente simboli troppo espliciti».
+
+**I simboli, scelta della regia da confermare.** Tatuaggi e aquila alludono ai simboli veri senza esserlo, e la satira sta nel fatto che gli
+sono venuti male. Tre ragioni: la regola del proprietario sullo stile di Duccio; i simboli veri, o troppo somiglianti, possono dare problemi
+nei negozi delle app e in alcuni paesi; lo strumento di generazione li bloccherebbe quasi certamente, come ha bloccato Spazienzio per molto
+meno. La croce celtica vera è quindi fra le cose da evitare in entrambe le varianti.
+
+*Varianti della regia, da provare:*
+
+- **Età apparente:** sui ventidue anni, chiaramente adulto.
+- **Corpo:** tarchiato e molle, pancetta, braccia corte; gonfia il petto, ma sotto non c'è niente.
+- **Tatuaggi:** (A) cerchi con troppi raggi storti, venuti così male da sembrare pizze tagliate a spicchi o ruote di bicicletta; (B) il
+  repertorio da guerriero di bancarella: un elmo antico, una spada, una corona d'alloro, un leone, tutti fatti male.
+- **Maglietta:** nera a mezze maniche, un po' stretta sulla pancia; (A) una grande aquila bianca stilizzata, venuta fuori un piccione
+  impettito; (B) un'aquila bianca generica ad ali aperte, stampata male e screpolata.
+- **Sotto:** (A) pantaloni mimetici con le tasche e anfibi troppo grandi; (B) jeans scuri col risvolto e scarpe da ginnastica bianche
+  immacolate.
+- **Oggetto:** il cocktail dolce, rosa, con l'ombrellino di carta, la ciliegina e la cannuccia a spirale, tenuto col mignolo alzato.
+- **Postura e gesti:** (A) posa eroica e solenne, mento alto, sguardo fiero all'orizzonte, mano sul cuore, e nell'altra mano il cocktail;
+  (B) beato a occhi chiusi mentre succhia dalla cannuccia, e intanto gonfia il petto e mostra un bicipite che non c'è.
+- **Mai nelle immagini:** saluti a braccio teso (basta il cognome), bandiere, rune, svastiche, fasci, croci celtiche vere, scritte.
 
 ## Esiti delle prove
 

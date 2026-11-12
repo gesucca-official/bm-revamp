@@ -187,8 +187,11 @@ ed equipaggiamento in I2a e II2b, la L di Piera in II2a, il mazzo costruito con 
 
 ## Prossimi passi
 
-1. Il proprietario riscrive questa scaletta: nomi dei nodi, scene, chi gioca, finali.
+1. Il proprietario riscrive questa scaletta: nomi dei nodi, scene, chi gioca, finali. Insieme si fanno gli
+   [identikit](../set-base/identikit.md#celestina-bucatina) di Celestina, Beppe, Sergio e Duccio, anticipati su proposta del proprietario
+   («così anche la carriera avrà una direzione e una consistenza artistica più precisa», 12 novembre 2026): aspetto, gesti e oggetti servono ai
+   dialoghi e ai ritratti.
 2. La regia la mette nel formato del prototipo con le partite simulate, e la si prova nel [prototipo](prototipo.md#chiusura) con il
    controllo del grafo: starter su ogni percorso, PvP prima di metà, segreti raggiungibili, achievement possibili.
 3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): prima stesura della regia o direttamente del proprietario.
-4. Gli identikit di Celestina, Beppe, Sergio e Duccio, e gli sfondi nuovi (il Dimmi Di Sì dentro, il retro del bar).
+4. Gli sfondi nuovi (il Dimmi Di Sì dentro, il retro del bar) e i ritratti dei quattro, dagli identikit approvati.

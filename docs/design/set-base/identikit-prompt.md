@@ -177,3 +177,96 @@ Edit the attached character concept sheet. Keep everything else exactly the same
 
 Avoid: any other change to the image; making her healthy, glamorous or curvy; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
 ~~~
+
+## Celestina, Beppe, Sergio e Duccio
+
+12 novembre 2026. Prove del primo giro per gli ultimi quattro personaggi, dalle idee del proprietario e dalle varianti della regia
+nell'[identikit](identikit.md#celestina-bucatina). Valgono le [istruzioni del primo giro](#istruzioni-al-proprietario), con la stessa [parte
+comune](#parte-comune) e lo stesso unico allegato, `duel.png`, con la stessa impronta.
+
+- **Nomi:** `<personaggio>-A-1.png` e `<personaggio>-B-1.png` per gli originali, `.webp` per le anteprime, in
+  `docs/design/set-base/identikit/prove/`; una scheda per tentativo nel [registro](identikit/registro.md).
+- **Otto immagini, una per prompt.** Si possono generare tutte o solo alcune.
+- **Se lo strumento blocca un prompt,** cosa possibile per Duccio e Celestina, non si riformula: si annota il blocco nel registro, con il
+  messaggio dello strumento, e si passa al successivo. Un solo nuovo tentativo, identico, se il risultato non c'entra con il prompt.
+- **Scritte:** i loghi dei gruppi di Beppe devono restare illeggibili; se nell'immagine compaiono lettere leggibili, si annota nel registro.
+
+### Celestina A — parka e tappo di bottiglia
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young woman around twenty-three, clearly adult, who lives off whatever she finds on the floor and looks worn out beyond her age. Short, thin and crooked, hunched and all angles, with pale, slightly sagging skin, dark circles and chapped lips. Short spiky red hair, self-cut. Her eyes are the only lively thing about her: sharp, calculating and intelligent, with a sly crooked little smile. She wears an oversized dusty bottle-green parka from who knows where, its pockets bulging with junk picked up from the floor, worn-out trousers and battered sneakers. Standing hunched, she holds up a bottle cap she has just found and examines it closely, like a jeweller with a gem. Her silhouette reads as small, thin and crooked.
+
+Avoid: any drugs, needles, syringes, pills, powders or drug paraphernalia; glamour or sexualised styling; gore; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Celestina B — tuta e caramella da sotto il bancone
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young woman around twenty-three, clearly adult, who lives off whatever she finds on the floor and looks worn out beyond her age. Short, thin and crooked, all angles, with pale, slightly sagging skin, dark circles and chapped lips. Red hair buzzed short on the sides with a longer faded fringe. Her eyes are the only lively thing about her: sharp, calculating and intelligent. She wears a baggy, faded dusty bottle-green tracksuit, a bum bag stuffed with junk and mismatched sneakers. She crouches as if she has just spotted something on the floor, holding up a wrapped sweet she found under the bar counter, with a sly sideways glance. Her silhouette reads as small, thin and crooked.
+
+Avoid: any drugs, needles, syringes, pills, powders or drug paraphernalia; glamour or sexualised styling; gore; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Beppe A — barba lunga, calibro nel taschino
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a lathe operator and metalworker in his mid-forties who also does car repairs off the books, and a metalhead who listens only to extreme metal. A believable workman, not a caricature. Sturdy and solidly planted, medium height, broad hands. Long dark hair gathered into a bun on top of his head to keep it out of the grease, a thick long beard, the calm look of someone who has seen it all. Tobacco-brown canvas bib overalls with both straps up, shiny with grease at the knees, a few grease smudges on his hands, forearms and clothes, but not too dirty. Under the overalls, a loud black t-shirt of an invented extreme metal band: a lurid cartoon ghoul artwork and an illegible spiky logo made of thorns and roots, with no readable letters. On his forearm, a tattoo of another invented band's illegible spiky logo. A vernier caliper sticks out of his chest pocket and an adjustable wrench out of a side pocket. Heavy work boots, arms crossed. His silhouette reads as sturdy and planted, with the bun on top.
+
+Avoid: any readable lettering on the t-shirt or tattoo, real band names or logos; gore or realistic horror imagery; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Beppe B — pizzetto, bretella giù e le corna
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a lathe operator and metalworker in his mid-forties who also does car repairs off the books, and a metalhead who listens only to extreme metal. A believable workman, not a caricature. Sturdy and solidly planted, medium height, broad hands. Long dark hair gathered into a bun on top of his head to keep it out of the grease, a long goatee and moustache, bushy eyebrows, a wide grin. Tobacco-brown canvas bib overalls with one strap down, a few grease smudges on his hands, forearms and clothes, but not too dirty, a greasy rag hanging from the back pocket. The strap down shows more of his loud black t-shirt of an invented extreme metal band: a lurid cartoon ghoul artwork and an illegible spiky logo made of thorns and roots, with no readable letters. On his forearm, a tattoo of another invented band's illegible spiky logo. Heavy work boots. He holds an adjustable wrench in one hand and makes the heavy metal horns sign with the other. His silhouette reads as sturdy and planted, with the bun on top.
+
+Avoid: any readable lettering on the t-shirt or tattoo, real band names or logos; gore or realistic horror imagery; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Sergio A — rasato, laccio slacciato, mazzo di chiavi
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a mysterious regular whom everybody believes to be rich, sarcastic and cutting, convinced he is the smartest person in any room, and often right. The tallest and thinnest man in the bar, out of place among the scruffy regulars. Around forty-five, a sharp angular face with a pointed chin, high cheekbones and a thin nose, clean-shaven, short brown hair neatly combed back. A sarcastic half-smile and one raised eyebrow, looking down at the viewer. An elegant, well-cut muted petrol-blue suit with no tie and no waistcoat, a crisp white shirt with the collar unbuttoned, polished pointed shoes. He holds a thin, slim lit cigarette with casual disdain. One shoelace is untied and he has not noticed. A heavy old ring of keys hangs from his belt, oddly out of place with the suit. Standing straight, one hand in his trouser pocket. His silhouette reads as a tall, straight, narrow line.
+
+Avoid: designer logos or visible cigarette packets; glamour or fashion-model styling; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Sergio B — tempie grigie e calzini spaiati
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a mysterious regular whom everybody believes to be rich, sarcastic and cutting, convinced he is the smartest person in any room, and often right. The tallest and thinnest man in the bar, out of place among the scruffy regulars. Around fifty, a sharp angular face with a pointed chin, high cheekbones and a thin nose, light stubble, short brown hair greying at the temples. A sarcastic half-smile and one raised eyebrow, looking down at the viewer. An elegant, well-cut muted petrol-blue suit with no tie and no waistcoat, a crisp white shirt with the collar unbuttoned, polished pointed shoes. He holds a thin, slim lit cigarette with casual disdain, a thread of smoke curling up. Between trousers and shoes his socks are mismatched, one patterned and one plain, and he has not noticed. Standing straight, one hand in his trouser pocket. His silhouette reads as a tall, straight, narrow line.
+
+Avoid: designer logos or visible cigarette packets; glamour or fashion-model styling; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Duccio A — posa eroica e piccione
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young far-right blowhard around twenty-two, clearly adult, drawn in an extremely ridiculous, satirical style. Stocky and soft rather than muscular: a small paunch, short arms, a puffed-out chest with nothing behind it. Shaved head with a shadow of regrowth and an already obvious receding hairline despite his age. Amateurish tattoos on his arms and neck: circles with too many crooked spokes, so botched they look like pizzas cut into slices or bicycle wheels. A slightly too-tight black short-sleeved t-shirt with a big white bird print meant to be a proud eagle, which came out looking like a puffed-up pigeon. Camouflage cargo trousers and oversized combat boots. He strikes a solemn heroic pose, chin up, gazing proudly at the horizon, one hand on his heart, while the other hand holds a sweet pink cocktail with a paper umbrella, a cherry and a curly straw, little finger raised. The pink cocktail is the only bright accent on him. His silhouette reads as short, stocky and puffed up.
+
+Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, Celtic cross, fasces or raised-arm salute; likeness of any real politician; heroic or muscular anatomy; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+### Duccio B — guerriero da bancarella e cannuccia
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young far-right blowhard around twenty-two, clearly adult, drawn in an extremely ridiculous, satirical style. Stocky and soft rather than muscular: a small paunch, short arms, a puffed-out chest with nothing behind it. Shaved head with a shadow of regrowth and an already obvious receding hairline despite his age. Amateurish tattoos of pompous souvenir-stall warrior kitsch on his arms and neck: an ancient helmet, a sword, a laurel wreath, a roaring lion, all crooked and badly drawn. A slightly too-tight black short-sleeved t-shirt with a generic white eagle with spread wings, crudely printed, cracked and peeling. Dark rolled-up jeans and spotless white sneakers. Eyes closed in bliss, he sips through the curly straw of a sweet pink cocktail with a paper umbrella and a cherry, while puffing out his chest and flexing a bicep that is not there. The pink cocktail is the only bright accent on him. His silhouette reads as short, stocky and puffed up.
+
+Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, Celtic cross, fasces or raised-arm salute; likeness of any real politician; heroic or muscular anatomy; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~

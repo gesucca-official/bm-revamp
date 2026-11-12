@@ -99,10 +99,11 @@ Esiste già (`ToxicJunkie`); starter «Tutto è droga».
 **Il proprietario conferma il personaggio com'è** (8 novembre 2026) e cambia solo il nome.
 
 - **Nome:** **Celestina Bucatina**: diventa una donna; prima il proprietario aveva scelto Marcetto Colabrodo, il cambio serve al cast (vedi [Incoerenze segnalate](#incoerenze-segnalate) per dove si applica).
-- **Carattere:** —
-- **Voce:** —
+- **Carattere:** ogni scusa è buona per drogarsi; in realtà è molto intelligente e furba (proprietario, 12 novembre 2026).
+- **Voce:** rovinata (proprietario, 12 novembre 2026).
 - **Storia:** —
-- **Aspetto:** —
+- **Aspetto:** capelli rossi e corti; magra, con la pelle un po' cadente nonostante sia molto giovane (proprietario, 12 novembre 2026). Il
+  dettaglio è nell'[identikit](identikit.md#celestina-bucatina).
 - **Battute:** —
 - **Rapporti con gli altri:** —
 
@@ -132,11 +133,14 @@ tutto, ma il vino gli scende nelle gambe.
 giusto in tasca, e quello degli altri lo smonta.
 
 - **Nome:** il proprietario lo chiama **Beppe Bulletta** (vedi [Incoerenze segnalate](#incoerenze-segnalate) per dove si applica).
-- **Carattere:** gli piacciono i soldi contanti e fare lavori a chicchessia.
+- **Carattere:** gli piacciono i soldi contanti e fare lavori a chicchessia. È un metallaro: ascolta solo metal estremo (proprietario, 12
+  novembre 2026).
 - **Voce:** —
 - **Storia:** **esperto tornitore**, metalmeccanico alle macchine utensili; nel tempo libero fa il meccanico di auto in nero, e si spaccia
   per meccanico di auto, moto, biciclette eccetera. Non è più il meccanico del carro attrezzi. Al bar è per bere, come gli altri.
-- **Aspetto:** —
+- **Aspetto:** classico metalmeccanico, salopette e sporco di grasso, ma non troppo caricaturale; capelli lunghi raccolti in un bun per non
+  sporcarli; sotto la salopette la maglietta vistosa di un gruppo metal, e il tatuaggio di un altro gruppo (proprietario, 12 novembre 2026).
+  Il dettaglio è nell'[identikit](identikit.md#beppe-bulletta).
 - **Battute:** —
 - **Rapporti con gli altri:** si spaccia anche per meccanico di biciclette, e Mara arriva in bici: aggancio confermato dal proprietario, da sviluppare.
 
@@ -149,8 +153,9 @@ chi e chi ha litigato con chi; non tira il primo colpo, aspetta che lo tiri tu. 
 letture, risorsa A) resta quello della scheda finché SB-17 non decide altro.
 
 - **Nome:** **Sergio Sommerso** (vedi [Incoerenze segnalate](#incoerenze-segnalate) per dove si applica).
-- **Carattere:** tizio strano. Prende sempre in giro gli altri avventori del bar.
-- **Voce:** —
+- **Carattere:** tizio strano. Prende sempre in giro gli altri avventori del bar. Si crede sempre il più furbo, il più sveglio e il più in
+  gamba in ogni situazione, e spesso lo è; la sua arroganza lo porta a ignorare le cose più banali (proprietario, 12 novembre 2026).
+- **Voce:** sarcastica, tagliente ogni volta che apre bocca (proprietario, 12 novembre 2026).
 - **Storia:** tutti pensano che sia pieno di soldi, ma nessuno sa come li faccia né capisce che lavoro faccia; soprattutto, nessuno capisce
   perché vada a bere proprio in quel bar di marcioni. Si pensa che sia coinvolto in giri strani: frodi fiscali, società apri e chiudi,
   speculazioni finanziarie, ogni genere di nefandezza da colletto bianco. **È il proprietario segreto del Serraglio** (proprietario,
@@ -159,7 +164,9 @@ letture, risorsa A) resta quello della scheda finché SB-17 non decide altro.
   A forza di prendere in giro gli altri, molto spesso ne provoca
   la reazione violenta e deve difendersi in modi non convenzionali: ricattandoli, o banalmente con armi improprie. (Calza con la
   meccanica della scheda: provoca, aspetta la mossa altrui e risponde con contromosse.)
-- **Aspetto:** alto e secco.
+- **Aspetto:** alto e secco. Abito elegante blu petrolio, senza cravatta né gilet, su una camicia bianca col colletto slacciato; faccia
+  affilata e tagliente, capelli corti castani; fuma sigarette sottili di contrabbando (proprietario, 12 novembre 2026). Il dettaglio è
+  nell'[identikit](identikit.md#sergio-sommerso).
 - **Battute:** —
 - **Rapporti con gli altri:** —
 
@@ -172,12 +179,16 @@ conta i colpi e te li restituisce con gli interessi; i colpi li paga lui. «Inca
 quello della scheda finché SB-18 non decide altro.
 
 - **Nome:** **Duccio Braccio Teso** (vedi [Incoerenze segnalate](#incoerenze-segnalate) per dove si applica).
-- **Carattere:** militante di estrema destra.
+- **Carattere:** militante di estrema destra. Si atteggia a vero uomo, pieno di onore, gloria e amor di patria, ma si comporta da perfetto
+  ipocrita e non se ne accorge; gli piacciono i cocktail dolci ed estremamente femminili (proprietario, 12 novembre 2026).
 - **Voce:** non perde mai occasione per ammorbare il prossimo dicendogli che è di destra. Non fa pipponi: è sempre pronto a discutere,
   si infila nelle conversazioni altrui e le porta dove vuole lui, cioè a dire che è di destra.
 - **Storia:** quando inevitabilmente si arriva alla rissa, finisce sempre per prenderle, o per farsi male dandole. (Calza con la meccanica
   della scheda: paga le mosse con la propria salute e incassa.)
-- **Aspetto:** —
+- **Aspetto:** ragazzetto tarchiato ma non particolarmente muscoloso; testa rasata con un minimo di ricrescita, già un po' stempiato
+  nonostante sia giovane; tatuaggi simili a croci celtiche su varie parti del corpo; maglietta nera a mezze maniche con un simbolo simile a
+  un'aquila bianca (proprietario, 12 novembre 2026). Come rendere i simboli nelle immagini è
+  nell'[identikit](identikit.md#duccio-braccio-teso).
 - **Battute:** —
 - **Rapporti con gli altri:** —
 
