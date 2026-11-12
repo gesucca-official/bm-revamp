@@ -10,8 +10,8 @@
 Provare, prima che esista nel client, come funziona una carriera: **la struttura a rombi**, con scelte, segni, condizioni, sconfitte che
 aprono un ramo e nodi segreti, e **le scene di dialogo** con il materiale vero del tutorial. Il valore che resta è **il formato dei dati
 delle carriere**, con il convertitore dalle storie in markdown e il controllo automatico del grafo: sono il cuore di
-[CA-0](../../product-roadmap.md#ca--carriera-single-player) e potranno passarci quasi tali e quali. Il resto, interfaccia compresa, è usa e
-getta.
+[CA-0](../../product-roadmap.md#ca--carriera-single-player) e potranno passarci quasi tali e quali. Il resto, interfaccia compresa, non
+diventa il client; il prototipo resta comunque nel repository (decisione del proprietario alla [chiusura](#chiusura)).
 
 ## Perimetro
 
@@ -239,14 +239,16 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
      `?cartoncini=russo`);
    - restano gli interruttori di prova delle cose rare (`?mosca`, `?angolo`, `?allenta`) e il banco;
    - una sezione di chiusura, in questo documento, che dice cosa passa a CA-0 (formato e convertitore, controllo del grafo, banco della
-     fluidità, misure della scena e della bacheca, lezioni sulle immagini e sulle bocche), cosa si butta, e cosa resta aperto: le due
+     fluidità, misure della scena e della bacheca, lezioni sulle immagini e sulle bocche), cosa non passa al client, e cosa resta aperto: le due
      immagini del [secondo giro delle bocche](prompt-bocche.md#secondo-giro) e la prova su un telefono vero.
 
 ## Chiusura
 
-12 novembre 2026, con la [Fase K](prototipo-fase-k.md), in attesa del giudizio del proprietario. Il prototipo è usa e getta: la cartella
-`prototipi/carriere/` non diventa il client. Passano a [CA-0](../../product-roadmap.md#ca--carriera-single-player) le decisioni, i
-documenti e alcuni strumenti; il resto si butta. Il dettaglio di ogni punto sta nei rapporti delle fasi, dalla
+12 novembre 2026, con la [Fase K](prototipo-fase-k.md), in attesa del giudizio del proprietario. La cartella `prototipi/carriere/` non
+diventa il client: passano a [CA-0](../../product-roadmap.md#ca--carriera-single-player) le decisioni, i documenti e alcuni strumenti.
+**Il prototipo resta nel repository,** funzionante, per decisione del proprietario («teniamoci questo prototipo anche in repo!», 12 novembre
+2026): è il riferimento di come devono apparire e muoversi scene e bacheca, e il posto dove provare le storie nuove, a cominciare dalla
+campagna principale, finché il client non ha la sua scena di dialogo. Il dettaglio di ogni punto sta nei rapporti delle fasi, dalla
 [B](prototipo-fase-b.md) alla [K](prototipo-fase-k.md).
 
 ### Cosa passa a CA-0
@@ -282,15 +284,18 @@ documenti e alcuni strumenti; il resto si butta. Il dettaglio di ogni punto sta 
 - **Lezioni sulle entrate:** nessuno compare di colpo; si entra e si esce di lato, in 0,45 s (Piera 1,5 s); chi parla non esce quando
   qualcuno reagisce, scivola di lato e fa posto; con il movimento ridotto si cambia e basta.
 
-### Cosa si butta
+### Cosa resta nel prototipo, senza passare al client
+
+Tutto resta nel repository e continua a funzionare; questo è ciò che il client non riprende tale e quale.
 
 - Il codice del lettore, della bacheca e dell'elenco (`src/ui/`, React), che il client rifarà nel suo stack; le funzioni pure del movimento
-  restano come riferimento, non come libreria.
-- Le partite simulate (Vinci, Perdi, Salta), il salvataggio in `localStorage`, `run.ps1 -Task Phone` e il pannello dello stato.
-- La mini-carriera di prova `storie/prova.md`: battute segnaposto, non una storia del gioco.
-- Gli interruttori di prova che restano nel prototipo (`?mosca`, `?angolo`, `?allenta`, `?banco`, il livello dei ritratti «✦»): servono
-  solo a provare le cose rare; quelli di confronto (`?fuoco`, `?testa=larga`, `?cartoncini=russo`, i font alternativi) sono già tolti.
-- Catture e registrazioni restano nel repository come documentazione delle fasi, non come riferimento visivo del client.
+  sono il riferimento da cui partire.
+- Le partite simulate (Vinci, Perdi, Salta), il salvataggio in `localStorage`, `run.ps1 -Task Phone` e il pannello dello stato: servono
+  a provare le storie nel prototipo.
+- La mini-carriera di prova `storie/prova.md`: battute segnaposto, non una storia del gioco, utile per provare il formato.
+- Gli interruttori di prova (`?mosca`, `?angolo`, `?allenta`, `?banco`, il livello dei ritratti «✦»), per vedere subito le cose rare;
+  quelli di confronto (`?fuoco`, `?testa=larga`, `?cartoncini=russo`, i font alternativi) sono già tolti.
+- Catture e registrazioni, come documentazione delle fasi.
 
 ### Cosa resta aperto
 

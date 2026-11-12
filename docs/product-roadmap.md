@@ -65,10 +65,11 @@ stato:** si aggiorna a ogni passo, l'[indice](README.md#stato-corrente) ne ripor
 | **CA-0a** Prototipo delle carriere | CA-0 | **Fase K fatta, chiusura in attesa del giudizio del proprietario** (12 novembre 2026): sempre a fuoco chi parla, chi reagisce più piccolo e defilato, il filo che cade e la «sei qui» riprende, nomi dei nodi affrontabili, via i font e le scelte di confronto, [chiusura](design/carriere/prototipo.md#chiusura) scritta. Il proprietario lo giudica riuscito con questi ritocchi; dopo, la scrittura della campagna principale | [prototipo](design/carriere/prototipo.md), [proposta della Fase A](design/carriere/prototipo-fase-a.md), [rapporto della Fase B](design/carriere/prototipo-fase-b.md), [rapporto della Fase C](design/carriere/prototipo-fase-c.md), [rapporto della Fase D](design/carriere/prototipo-fase-d.md), [rapporto della Fase E](design/carriere/prototipo-fase-e.md), [rapporto della Fase F](design/carriere/prototipo-fase-f.md), [rapporto della Fase G](design/carriere/prototipo-fase-g.md), [rapporto della Fase H](design/carriere/prototipo-fase-h.md), [rapporto della Fase I](design/carriere/prototipo-fase-i.md), [rapporto della Fase J](design/carriere/prototipo-fase-j.md), [rapporto della Fase K](design/carriere/prototipo-fase-k.md) |
 | Epilogo del tutorial | CA-1 | Da scrivere: battute al Dimmi Di Sì per chi raggiunge gli amici | [dialoghi](design/carriere/tutorial-dialoghi.md#epilogo-del-fallimento--da-scrivere) |
 
-**CA-0a, il prototipo.** È il primo pezzo di [CA-0](#ca--carriera-single-player) anticipato, usa e getta, in una cartella sua fuori da
+**CA-0a, il prototipo.** È il primo pezzo di [CA-0](#ca--carriera-single-player) anticipato, in una cartella sua fuori da
 `client-web`: definisce il formato dei dati delle carriere (nodi, scelte, segni, condizioni, battute), un convertitore dalle storie in
 markdown, un lettore di scene con gli asset veri, la mappa dei rami, partite simulate con «vinci» e «perdi», una mini-carriera finta a
-rombi e il controllo automatico del grafo. Formato, convertitore e controllo potranno passare in CA-0; il resto si butta.
+rombi e il controllo automatico del grafo. Formato, convertitore e controllo potranno passare in CA-0; il resto
+non diventa il client, ma il prototipo resta nel repository, funzionante, per provare le storie nuove.
 
 ## ST — Strumenti di verifica
 
