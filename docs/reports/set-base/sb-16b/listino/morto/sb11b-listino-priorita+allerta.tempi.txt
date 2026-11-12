@@ -1,0 +1,6 @@
+banco sb-10a/1
+misure priorita+allerta
+thread 32
+partite 225600
+secondi 33.0
+millisecondi per partita (tempo reale) 0.1461

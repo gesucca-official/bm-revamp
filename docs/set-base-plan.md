@@ -313,7 +313,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-14 | Piera Ultimo Giro: bozza e giro | SB-13 | chiuso |
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
 | | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | fatto, giudizio registrato (12 novembre 2026) |
-| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | prossimo |
+| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | Fase A fatta, aspetta la Fase B |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16b |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -761,6 +761,13 @@ l'effetto atteso al tavolo; il costo (regolamento, server, client, bot, giri di 
 in ordine di valore, anche «niente da cambiare» dove è il caso. Lavora da solo: le idee del proprietario arrivano in Fase B, e il prompt
 della Fase A chiede di non leggere l'elenco qui sotto. Le decisioni già prese ([D48](#decisioni-del-proprietario) e le precedenti) si
 rispettano o si discutono apertamente, con il motivo. Solo rapporto: nessuna modifica a regolamento, set, codice o test.
+
+**Fase A fatta il 12 novembre 2026, aspetta la Fase B.** [Rapporto](reports/set-base/sb-16b-report.md). Tre proposte, in ordine di valore:
+**P1**, chi è a terra non colpisce (R04: la mossa di un autore già morto all'inizio del suo gruppo di velocità si annulla, salvo quelle
+su di sé, quindi il salvataggio di D48 resta); **P2**, l'ultimo a cadere (R06: se muoiono tutti vince chi ha più HEALTH); **P3**, nessuna
+parata pura nella griglia. Misure coi bot, circa 8 minuti di calcolo: patte da 16,9% a 9,4% con P1 e allo 0,9% con P1 e P2, durata
+invariata; con P1 Spazienzio–Beppe va a 0,395, mezzo punto fuori dai criteri. Sette domande al proprietario per la Fase B, fra cui
+D12 (playground o gioco vivo). L'esecutore dichiara di aver letto per errore l'elenco qui sotto.
 
 **Fase B — confronto.** Il proprietario porta le sue idee; si discute proposta per proposta. Ogni scelta diventa una decisione registrata,
 compresa quella di non cambiare nulla.

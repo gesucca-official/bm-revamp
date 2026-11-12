@@ -1,0 +1,62 @@
+diff --git a/server/src/main/java/com/gsc/bm/model/game/Game.java b/server/src/main/java/com/gsc/bm/model/game/Game.java
+index 2817ef5..49c3b42 100644
+--- a/server/src/main/java/com/gsc/bm/model/game/Game.java
++++ b/server/src/main/java/com/gsc/bm/model/game/Game.java
+@@ -65,6 +65,9 @@ public class Game implements Serializable {
+         }
+     }
+
++    public static final java.util.concurrent.atomic.AtomicLong DEAD_NO_HIT = new java.util.concurrent.atomic.AtomicLong();
++    static { if (Boolean.getBoolean("sim.rule.deadNoHit")) Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("SB16B deadNoHit cancellations: " + DEAD_NO_HIT.get()))); }
++
+     public void noteOutcome(String reason) { if (outcomeReason == null) { outcomeReason = reason; } }
+
+     private int turn = 0; // why keeping it here? client could use it
+@@ -88,6 +91,17 @@ public class Game implements Serializable {
+             for (String playerId : players.keySet())
+                 if (!isEliminated(playerId))
+                     return Optional.of(players.get(playerId).getPlayerId());
++        // SB-16b experiment only: zero survivors -> highest HEALTH wins, tie stays a draw
++        if (isOver() && Boolean.getBoolean("sim.rule.tiebreak")) {
++            String best = null; int bestHealth = Integer.MIN_VALUE; boolean tie = false;
++            for (String playerId : players.keySet()) {
++                if (forfeits.containsKey(playerId)) continue;
++                int h = players.get(playerId).getCharacter().getResources().get(Resource.HEALTH);
++                if (h > bestHealth) { best = playerId; bestHealth = h; tie = false; }
++                else if (h == bestHealth) tie = true;
++            }
++            if (best != null && !tie) return Optional.of(best);
++        }
+         return Optional.empty();
+     }
+
+@@ -162,7 +176,29 @@ public class Game implements Serializable {
+                         m -> -getSelf((Move) m).getCharacter().getResources().get(Resource.ALERTNESS)
+                 ).thenComparingInt(m -> new ArrayList<>(players.keySet()).indexOf(((Move)m).getPlayerId())));
+
++        boolean deadNoHit = Boolean.getBoolean("sim.rule.deadNoHit");
++        // SB-16b experiment only: speed class = (priority, ALERTNESS after costs), fixed with the order
++        Map<Move, Long> speed = new IdentityHashMap<>();
++        for (Move m : pendingMoves)
++            speed.put(m, ((long) getCardFromHand(m.getPlayerId(), m.getPlayedCardName()).getPriority() << 32)
++                    + getSelf(m).getCharacter().getResources().get(Resource.ALERTNESS));
++        Long currentClass = null;
++        Set<String> downAtClassStart = new HashSet<>();
+         for (Move m : pendingMoves) {
++            // an author already at HEALTH <= 0 when its speed class starts resolves only moves on self or own items;
++            // moves with the same priority and ALERTNESS stay simultaneous
++            if (deadNoHit) {
++                if (!speed.get(m).equals(currentClass)) {
++                    currentClass = speed.get(m);
++                    downAtClassStart.clear();
++                    for (Player p : players.values()) if (p.getCharacter().isDead()) downAtClassStart.add(p.getPlayerId());
++                }
++                if (!m.isVoid() && downAtClassStart.contains(m.getPlayerId())
++                        && !"SELF".equalsIgnoreCase(m.getTargetId()) && !m.getPlayerId().equals(m.getTargetId())) {
++                    m.setVoid(true);
++                    DEAD_NO_HIT.incrementAndGet();
++                }
++            }
+             m.applyEffectTo(this);
+             getSelf(m).discardCard(getCardFromHand(m.getPlayerId(), m.getPlayedCardName()));
+             if (getSelf(m).getCardsInHand().size() < Player.CARDS_IN_HAND)
