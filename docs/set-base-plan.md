@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, in attesa del giudizio del proprietario. **Prossimo:** [SB-16d](#sb-16d--riprogettazione-dei-cinque-starter-p3-e-p5), SB-16e e la prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, domande risposte ([D54](#decisioni-del-proprietario)). **Prossimo:** [SB-16d](#sb-16d--riprogettazione-dei-cinque-starter-p3-e-p5), SB-16e e la prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -315,7 +315,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
 | | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | fatto, giudizio registrato (12 novembre 2026) |
 | | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | chiuso: Fase A e B fatte (12 novembre 2026), D50–D53 |
-| | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), in attesa del giudizio del proprietario |
+| | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), domande risposte (D54) |
 | | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c |  |
 | | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d |  |
 | | SB-16f | Prova umana degli starter rifatti | SB-16e |  |
@@ -340,7 +340,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, in attesa di giudizio. **Prossimo:** SB-16d, SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
+e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, domande risposte (D54). **Prossimo:** SB-16d, SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -809,14 +809,15 @@ Diventa i blocchi SB-16c, SB-16d, SB-16e e SB-16f ([D53](#decisioni-del-propriet
 
 ### SB-16c — Regole decise in SB-16b nel playground
 
-**Fatto il 12 novembre 2026**, in attesa del giudizio del proprietario. [Rapporto](reports/set-base/sb-16c-report.md).
+**Fatto il 12 novembre 2026**; domande risposte dal proprietario lo stesso giorno (D54). [Rapporto](reports/set-base/sb-16c-report.md).
 - **Interruttore:** `Ruleset` (`1.13` o `d50`). Il profilo `bozza` parte con `d50` (`app.bozza.regole`), il runner usa
   `-Dsim.rules=d50`.
 - **Test:** 30 nuovi, uno o più per ogni caso qui sotto; dieci mutazioni, tutte uccise.
 - **Interruttore spento:** test di prima verdi, banco SB-7 identico alla base di SB-16b.
 - **Interruttore acceso:** invarianti di partita a zero. Il banco coincide in ogni campo con la misura «P1 + pavimento + L/4» di SB-16b.
   Il tetto delle bound segnala CinqueMinutiEVado, che con la corazza para: domanda al proprietario.
-- **Domande nel rapporto:** quattro, fra cui l'oggetto trovato dalla ricerca, che va sul campo e la pesca continua.
+- **Domande nel rapporto:** quattro, risposte dal proprietario lo stesso giorno ([D54](#decisioni-del-proprietario)). Si tiene tutto com'è;
+  CinqueMinutiEVado si corregge in SB-16d.
 
 **Perimetro.** Le regole di [D50](#decisioni-del-proprietario) nel server, dietro un interruttore acceso solo dal profilo `bozza` e dal
 runner:
@@ -846,6 +847,13 @@ invarianti a zero sul banco.
 bozza, e lo dichiara. Regolamento, documento del set, catalogo e client non cambiano fino a SB-28 (D12, D50).
 
 ### SB-16d — Riprogettazione dei cinque starter (P3 e P5)
+
+**Da SB-16c ([D54](#decisioni-del-proprietario)).**
+- **CinqueMinutiEVado:** va corretta. Con la corazza dell'alcol (D50, punto 5) supera il tetto delle bound: valore per uso 8,50 contro 4.
+- **Il caricamento è un effetto, non un tipo di carta.** Lo può avere anche un colpo. Serve a dire all'avversario «ho in mano una
+  carta potente, ma sono vulnerabile»: lui sceglie se colpire o difendersi.
+- **Dove sta la ricerca:** nel motore il passo `search` vale in ogni carta che si gioca e poi pesca, cioè azioni regolari, bound e last
+  resort. Non vale in basic e oggetti.
 
 **Perimetro.** Proposta delle carte da cambiare nei cinque starter secondo i principi di [D52](#decisioni-del-proprietario):
 - nessuna parata pura: ogni difesa che vale solo nel turno dà anche circa +5 della risorsa del personaggio, o una piccola cura per le
@@ -1110,6 +1118,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D51 | Criterio delle patte | 12 novembre 2026, con le parole del proprietario: «che ne dici di modificare le carte per non far succedere più del 10% di patte? ti sembra una buona idea? il set base è ancora del tutto wip, quindi possiamo cambiarne valori, funzionamento e tutto quanto come ci pare e piace»; sulla soglia, «va bene la soglia che raccokandi te». **Patte al massimo al 10% in ogni incontro fra starter, specchi compresi**, misurate coi bot; sostituisce «pochi» nei [criteri](#bilanciamento-metodo-e-criteri). Con le regole di D50 oggi la superano lo specchio di Piera (34%), quelli di Celestina e Beppe (19%), Piera–Beppe (16%), Mara–Piera e Celestina–Piera (12%), Celestina–Beppe (11%). Leve: partite più corte, velocità diverse nel finale, last resort con priorità diverse. Precisa D16 |
 | D52 | Principi del set: difese e ritmo | 12 novembre 2026. **(1) Nessuna parata pura (P3):** ogni difesa che vale solo nel turno dà anche qualcosa che resta se l'avversario non attacca, circa +5 della risorsa del personaggio o una piccola cura per le generiche: «sì, mi sembra tutto una buona idea». **(2) Il ritmo caricare-colpire-parare (P5)**, nato dalle risposte del proprietario sulle prove umane: colpo annunciato da uno stato visibile; accumulo rischioso, con un'esposizione che dura anche il turno dopo; difesa che rende e contromossa: «aggiungiamo, mi sembrano ottime considerazioni». **(3) Una coppia caricamento-colpo con ricerca** (D50, punto 6) **per personaggio nel Set Base**, con la ricerca mostrata; ricerche più ampie per le espansioni. Si applicano ai cinque starter in SB-16d e a Sergio e Duccio in SB-17 e SB-18. Precisa D8, D34 e D35 |
 | D53 | Fase C di SB-16b | 12 novembre 2026, con le parole del proprietario: «va bene» (struttura e limiti), «adottiamola, per; prevediamo di testarne bene le implicazioni» (verifiche della ricerca), «registriamo tutto». Quattro blocchi prima di SB-17: **SB-16c**, regole di D50 nel playground, con test di conformità, casi limite della ricerca ed euristica dei bot per caricamenti e coppie; **SB-16d**, proposta di riprogettazione dei cinque starter con D52, approvata dal proprietario; **SB-16e**, giro coi criteri di D16 e D51, al massimo 3 giri e 2 ore di calcolo, delega dei numeri e delle aggiunte di P3 come D38, funzionamento delle carte e composizione degli starter al proprietario, stop e proposta se i criteri non tornano, misure dedicate per ogni coppia con ricerca; **SB-16f**, prova umana del proprietario sugli starter rifatti. Precisa D12, D21 e D38 |
+| D54 | Risposte sulle domande di SB-16c | 12 novembre 2026, con le parole del proprietario, domanda per domanda. **(1) Oggetto trovato dalla ricerca:** va sul campo e la pesca continua, come quando si pesca: «A, anche se non crtedo che faremo carti di caricamento che cercano oggetti». **(2) Carta cercata scartata con una bound:** valgono le due letture provate (la carta di ricerca usata come scarto non cerca; la carta trovata, scartata più tardi, esce dalla mano): «entrambe le letture sono corrette». Sul senso del caricamento: «le carte "di caricamento" alla fine non sono un nuovo tipo di carta, ma è un'effetto che possono avere varie carte (anche colpi, perché no?). il senso è di dare un'informazione all'avversario: ho in mano una carta potente che può farti male e la posso giocare, ma sono vulnerabile, quindi scegli bene che fare, se picchiarmi o difenderti». **(3) CinqueMinutiEVado oltre il tetto delle bound con la corazza dell'alcol:** si corregge la carta in SB-16d, il controllo del tetto resta com'è: «A, possiamo rimaneggiare le carte quanto vogliamo epr bilanciare tutto il set base». **(4) Il profilo `bozza` parte con le regole `d50`:** «A». Nessun cambio al codice di SB-16c. Precisa D50 (punto 6) e D52 (punto 3) |
 
 ## Decisioni ancora aperte
 

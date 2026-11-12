@@ -1,6 +1,6 @@
 # SB-16c — Regole decise in SB-16b nel playground: rapporto
 
-**Fatto il 12 novembre 2026**, in una sola fase. In attesa del giudizio del proprietario.
+**Fatto il 12 novembre 2026**, in una sola fase. Domande risposte dal proprietario lo stesso giorno ([D54](../../set-base-plan.md#decisioni-del-proprietario), [sotto](#risposte-del-proprietario)).
 
 Le regole di [D50](../../set-base-plan.md#decisioni-del-proprietario) (punti 1, 2, 3, 5 e 6) sono nel server, dietro un interruttore,
 `Ruleset`, che vale `1.13` (il gioco vivo) o `d50` (il playground). Lo accendono solo il profilo `bozza`, che parte con `d50`, e il
@@ -221,3 +221,14 @@ Non rilanciate, perché il blocco non tocca il client web: le verifiche di `clie
    diventano difesa?
 4. **Il profilo `bozza` parte con `d50`.** Le prove umane sulla bozza giocano con le regole nuove; per tornare alle 1.13 basta
    `app.bozza.regole: 1.13`. Va bene come predefinito?
+
+## Risposte del proprietario
+
+12 novembre 2026, registrate come [D54](../../set-base-plan.md#decisioni-del-proprietario) con le sue parole. Nessun cambio al codice.
+
+1. **Oggetto trovato:** A, va sul campo e la pesca continua. Il proprietario non crede che ci saranno caricamenti che cercano oggetti.
+2. **Bound:** entrambe le letture sono corrette. Il caricamento è un effetto che possono avere varie carte, anche i colpi, non un tipo
+   di carta. Serve a informare l'avversario: ho una carta potente e posso giocarla, ma sono vulnerabile, quindi scegli se colpire o
+   difenderti.
+3. **CinqueMinutiEVado:** A, si corregge la carta in SB-16d; il controllo del tetto resta.
+4. **Profilo `bozza` con `d50`:** A.
