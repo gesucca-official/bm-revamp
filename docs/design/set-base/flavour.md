@@ -153,7 +153,10 @@ letture, risorsa A) resta quello della scheda finché SB-17 non decide altro.
 - **Voce:** —
 - **Storia:** tutti pensano che sia pieno di soldi, ma nessuno sa come li faccia né capisce che lavoro faccia; soprattutto, nessuno capisce
   perché vada a bere proprio in quel bar di marcioni. Si pensa che sia coinvolto in giri strani: frodi fiscali, società apri e chiudi,
-  speculazioni finanziarie, ogni genere di nefandezza da colletto bianco. A forza di prendere in giro gli altri, molto spesso ne provoca
+  speculazioni finanziarie, ogni genere di nefandezza da colletto bianco. **È il proprietario segreto del Serraglio** (proprietario,
+  12 novembre 2026): lo ha comprato anni fa con dei fondi neri per non farlo chiudere, e ora è tentato da un'offerta per rientrare
+  dell'investimento; è lo spunto della [carriera principale](../carriere/principale.md).
+  A forza di prendere in giro gli altri, molto spesso ne provoca
   la reazione violenta e deve difendersi in modi non convenzionali: ricattandoli, o banalmente con armi improprie. (Calza con la
   meccanica della scheda: provoca, aspetta la mossa altrui e risponde con contromosse.)
 - **Aspetto:** alto e secco.
