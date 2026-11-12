@@ -108,3 +108,5 @@ che si stacca quando si scopre un nodo. Poco e mai mentre si legge o si sceglie:
 
 **Fase I** del [prototipo](prototipo.md#fase-i-piera-lenta-teste-più-ferme-nodi-strappati): il nodo che si chiude in un giro si strappa o
 si accartoccia, e torna intero al giro nuovo.
+
+**Fase J:** il nodo chiuso è sempre strappato, in più punti, con la scritta grigia; l'accartocciato si toglie.

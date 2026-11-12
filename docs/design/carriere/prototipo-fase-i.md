@@ -136,3 +136,16 @@ Le prove a mano con il server di sviluppo sono state fatte sulla porta 4332: sul
 1. Se Piera è lenta abbastanza (0,3) o troppo.
 2. Se la testa ora ondeggia giusta.
 3. Strappi e accartocciati: quanto, quali, e se la scelta per nodo va bene.
+
+## Giudizio del proprietario
+
+12 novembre 2026, con le sue parole:
+
+- **Piera e gli stacchi:** «quando si intramezzano le altre persone mentre Piera parla lentamente, perché dobbiamo far sparire Piera?
+  Mostriamo le altre persone contemporaneamente a lei, magari a fianco».
+- **Entrate:** «quando i personaggi compaiono per parlare, dovrebbero arrivare di lato invece di comparire ingrandendosi come Pokémon».
+- **Nodi chiusi:** «va bene lo strappo, ma strappiamolo in più punti e grigiamo la scritta, così si capisce meglio». L'accartocciato non
+  c'è nel giudizio: la regia lo toglie, resta lo strappo.
+- Piera a un terzo della velocità e la testa più ferma passano senza obiezioni.
+
+Si apre la [Fase J](prototipo.md#fase-j-due-in-scena-solo-di-lato-strappi-più-netti).

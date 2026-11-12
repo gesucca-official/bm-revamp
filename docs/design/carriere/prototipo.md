@@ -199,3 +199,22 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
    poco rimpicciolito). Lo strappo si vede quando un nodo si chiude e poi resta; un nuovo giro rimette la carta intera. Sempre poco, spento
    con il movimento ridotto, come il resto della bacheca.
 4. **Pulsanti della bacheca in verticale:** le etichette non devono tagliarsi (oggi «Achieve…», «Nuovo g…»).
+
+## Fase J, due in scena, solo di lato, strappi più netti
+
+Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla Fase I](prototipo-fase-i.md#giudizio-del-proprietario).
+
+1. **Due in scena durante gli stacchi:** quando qualcuno reagisce mentre Piera parla, Piera non esce. Si sposta di lato e chi reagisce
+   entra dal suo lato e le resta a fianco. Proposta della regia, da far giudicare al proprietario:
+   - chi reagisce resta in scena finché dura la tirata di Piera, poi esce dal suo lato;
+   - chi parla è in piena luce, l'altro un poco più scuro e indietro;
+   - si muove solo la bocca di chi parla;
+   - in verticale i due si sovrappongono un poco, con chi parla davanti;
+   - niente ritratti specchiati, perché i ritratti sono asimmetrici.
+
+   Lo stesso vale, in generale, per ogni stacco di regia su chi ascolta. La [specifica](specifica-asset.md#come-appare-la-scena), che oggi
+   dice «un personaggio alla volta», si aggiorna.
+2. **Si entra solo di lato:** via l'entrata «da lontano» che cresce. Chi compare per parlare arriva di lato, sempre; il comando
+   `[Entrate: …]` e le sue due righe nelle storie si tolgono, o restano solo per lato e stacco se servono ancora.
+3. **Nodi chiusi strappati in più punti, con la scritta grigia:** il post-it di un nodo non più raggiungibile è strappato in due o tre punti
+   e il «???» diventa grigio. Via l'accartocciato.
