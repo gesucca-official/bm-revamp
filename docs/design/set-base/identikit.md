@@ -222,6 +222,15 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 | Piera | A | [Anteprima](identikit/prove/piera-A-1.webp) | [Scheda](identikit/registro.md#piera-a-1) | Scartata, ma se ne prende la faccia serena per la B |
 | Piera | B | [Anteprima](identikit/prove/piera-B-1.webp) | [Scheda](identikit/registro.md#piera-b-1) | **Scelta** (11 novembre 2026), ma con la faccia serena della variante A |
 
+| Celestina | A | [Anteprima](identikit/prove/celestina-A-1.webp) | [Scheda](identikit/registro.md#celestina-a-1) |  |
+| Celestina | B | [Anteprima](identikit/prove/celestina-B-1.webp) | [Scheda](identikit/registro.md#celestina-b-1) |  |
+| Beppe | A | [Anteprima](identikit/prove/beppe-A-1.webp) | [Scheda](identikit/registro.md#beppe-a-1) |  |
+| Beppe | B | [Anteprima](identikit/prove/beppe-B-1.webp) | [Scheda](identikit/registro.md#beppe-b-1) |  |
+| Sergio | A | [Anteprima](identikit/prove/sergio-A-1.webp) | [Scheda](identikit/registro.md#sergio-a-1) |  |
+| Sergio | B | [Anteprima](identikit/prove/sergio-B-1.webp) | [Scheda](identikit/registro.md#sergio-b-1) |  |
+| Duccio | A | [Anteprima](identikit/prove/duccio-A-1.webp) | [Scheda](identikit/registro.md#duccio-a-1) |  |
+| Duccio | B | [Anteprima](identikit/prove/duccio-B-1.webp) | [Scheda](identikit/registro.md#duccio-b-1) |  |
+
 ### Secondo giro
 
 | Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |

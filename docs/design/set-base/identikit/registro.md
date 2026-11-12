@@ -468,3 +468,307 @@ Edit the attached character concept sheet. Keep everything else exactly the same
 
 Avoid: any other change to the image; making her healthy, glamorous or curvy; any text, letters, numbers, logos, brand names or recognizable branding of any real delivery company, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
 ~~~
+
+
+## celestina-A-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:43:18 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Celestina A — parka e tappo di bottiglia; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2937163 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-1bff3898-26d4-4815-b9b7-36b9e7efc99d.png`, copiato senza modifiche in `prove/celestina-A-1.png` (ignorato da git); SHA-256 `a7c203234c140c7318198f0e535b7edd64e0d5c962c2dd07cc0e7f31b20832d4` |
+| Anteprima | [WebP](prove/celestina-A-1.webp), 683×1024 px, 136526 byte; SHA-256 `fde660379a14507a4df4aaa42eb8c824afe398d2178912327660c19855dc0661` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young woman around twenty-three, clearly adult, who lives off whatever she finds on the floor and looks worn out beyond her age. Short, thin and crooked, hunched and all angles, with pale, slightly sagging skin, dark circles and chapped lips. Short spiky red hair, self-cut. Her eyes are the only lively thing about her: sharp, calculating and intelligent, with a sly crooked little smile. She wears an oversized dusty bottle-green parka from who knows where, its pockets bulging with junk picked up from the floor, worn-out trousers and battered sneakers. Standing hunched, she holds up a bottle cap she has just found and examines it closely, like a jeweller with a gem. Her silhouette reads as small, thin and crooked.
+
+Avoid: any drugs, needles, syringes, pills, powders or drug paraphernalia; glamour or sexualised styling; gore; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## celestina-B-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:43:52 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Celestina B — tuta e caramella da sotto il bancone; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 3055534 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-c7cc114b-dd3d-4948-998c-8acb84936991.png`, copiato senza modifiche in `prove/celestina-B-1.png` (ignorato da git); SHA-256 `c36883326e75e31d2facd0e065a494674eb67ff44ca99363315127a3c75790f4` |
+| Anteprima | [WebP](prove/celestina-B-1.webp), 683×1024 px, 118428 byte; SHA-256 `66bd83b2ec87694f5069325e84d3ac341d549f268cef7f21ae255b09048e9d3b` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young woman around twenty-three, clearly adult, who lives off whatever she finds on the floor and looks worn out beyond her age. Short, thin and crooked, all angles, with pale, slightly sagging skin, dark circles and chapped lips. Red hair buzzed short on the sides with a longer faded fringe. Her eyes are the only lively thing about her: sharp, calculating and intelligent. She wears a baggy, faded dusty bottle-green tracksuit, a bum bag stuffed with junk and mismatched sneakers. She crouches as if she has just spotted something on the floor, holding up a wrapped sweet she found under the bar counter, with a sly sideways glance. Her silhouette reads as small, thin and crooked.
+
+Avoid: any drugs, needles, syringes, pills, powders or drug paraphernalia; glamour or sexualised styling; gore; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## beppe-A-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:44:44 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Beppe A — barba lunga, calibro nel taschino; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 3260748 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-d7896782-e8f1-460c-800e-ef217a3ecd22.png`, copiato senza modifiche in `prove/beppe-A-1.png` (ignorato da git); SHA-256 `232236b10436cfd92d0a13d8e7789413ff176a3afbcd982e21593a090288a8fa` |
+| Anteprima | [WebP](prove/beppe-A-1.webp), 683×1024 px, 171502 byte; SHA-256 `0f6d6f9e102e039dab25b75c1407191534a8230f335c997aa2abbf188264abcb` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. Nessuna parola chiaramente leggibile nei loghi osservati. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a lathe operator and metalworker in his mid-forties who also does car repairs off the books, and a metalhead who listens only to extreme metal. A believable workman, not a caricature. Sturdy and solidly planted, medium height, broad hands. Long dark hair gathered into a bun on top of his head to keep it out of the grease, a thick long beard, the calm look of someone who has seen it all. Tobacco-brown canvas bib overalls with both straps up, shiny with grease at the knees, a few grease smudges on his hands, forearms and clothes, but not too dirty. Under the overalls, a loud black t-shirt of an invented extreme metal band: a lurid cartoon ghoul artwork and an illegible spiky logo made of thorns and roots, with no readable letters. On his forearm, a tattoo of another invented band's illegible spiky logo. A vernier caliper sticks out of his chest pocket and an adjustable wrench out of a side pocket. Heavy work boots, arms crossed. His silhouette reads as sturdy and planted, with the bun on top.
+
+Avoid: any readable lettering on the t-shirt or tattoo, real band names or logos; gore or realistic horror imagery; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## beppe-B-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:45:21 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Beppe B — pizzetto, bretella giù e le corna; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2998908 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-80988ea3-5ca0-485e-bdf6-7c9f77739bee.png`, copiato senza modifiche in `prove/beppe-B-1.png` (ignorato da git); SHA-256 `c3a00078816e54baa260230c980e95fc41094e9c7bf5e223c5a5d4b16e243c73` |
+| Anteprima | [WebP](prove/beppe-B-1.webp), 683×1024 px, 144880 byte; SHA-256 `faee4ec68c60b083c015823b28ccba92b70e8faeb8f519f59b3826f2297568c9` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. Nessuna parola chiaramente leggibile nei loghi osservati. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a lathe operator and metalworker in his mid-forties who also does car repairs off the books, and a metalhead who listens only to extreme metal. A believable workman, not a caricature. Sturdy and solidly planted, medium height, broad hands. Long dark hair gathered into a bun on top of his head to keep it out of the grease, a long goatee and moustache, bushy eyebrows, a wide grin. Tobacco-brown canvas bib overalls with one strap down, a few grease smudges on his hands, forearms and clothes, but not too dirty, a greasy rag hanging from the back pocket. The strap down shows more of his loud black t-shirt of an invented extreme metal band: a lurid cartoon ghoul artwork and an illegible spiky logo made of thorns and roots, with no readable letters. On his forearm, a tattoo of another invented band's illegible spiky logo. Heavy work boots. He holds an adjustable wrench in one hand and makes the heavy metal horns sign with the other. His silhouette reads as sturdy and planted, with the bun on top.
+
+Avoid: any readable lettering on the t-shirt or tattoo, real band names or logos; gore or realistic horror imagery; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## sergio-A-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:46:09 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Sergio A — rasato, laccio slacciato, mazzo di chiavi; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2742368 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-b4de62a6-c0d4-4f90-be49-684078c0a5ea.png`, copiato senza modifiche in `prove/sergio-A-1.png` (ignorato da git); SHA-256 `fd4f0a74f0a8ce6ad243d5ca13aba406a8633bd8ffe959cac7eb645d80bfdc70` |
+| Anteprima | [WebP](prove/sergio-A-1.webp), 683×1024 px, 111958 byte; SHA-256 `92ed144d1d478c05e1519e4790aa7c0f2ed4e9f2646149be36aec583a558c735` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a mysterious regular whom everybody believes to be rich, sarcastic and cutting, convinced he is the smartest person in any room, and often right. The tallest and thinnest man in the bar, out of place among the scruffy regulars. Around forty-five, a sharp angular face with a pointed chin, high cheekbones and a thin nose, clean-shaven, short brown hair neatly combed back. A sarcastic half-smile and one raised eyebrow, looking down at the viewer. An elegant, well-cut muted petrol-blue suit with no tie and no waistcoat, a crisp white shirt with the collar unbuttoned, polished pointed shoes. He holds a thin, slim lit cigarette with casual disdain. One shoelace is untied and he has not noticed. A heavy old ring of keys hangs from his belt, oddly out of place with the suit. Standing straight, one hand in his trouser pocket. His silhouette reads as a tall, straight, narrow line.
+
+Avoid: designer logos or visible cigarette packets; glamour or fashion-model styling; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## sergio-B-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:46:56 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Sergio B — tempie grigie e calzini spaiati; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2816172 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-cd191597-2a65-4bc0-9d57-f845f2055a81.png`, copiato senza modifiche in `prove/sergio-B-1.png` (ignorato da git); SHA-256 `29866ae5e78f0a6e64559fea99a0304c0b98a29a25b574e35132b5e944401c69` |
+| Anteprima | [WebP](prove/sergio-B-1.webp), 683×1024 px, 110578 byte; SHA-256 `88f2ffb5f30f6c70b36b0525a57beefa54f395d860b3ffbcb271589c0c2a25eb` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a mysterious regular whom everybody believes to be rich, sarcastic and cutting, convinced he is the smartest person in any room, and often right. The tallest and thinnest man in the bar, out of place among the scruffy regulars. Around fifty, a sharp angular face with a pointed chin, high cheekbones and a thin nose, light stubble, short brown hair greying at the temples. A sarcastic half-smile and one raised eyebrow, looking down at the viewer. An elegant, well-cut muted petrol-blue suit with no tie and no waistcoat, a crisp white shirt with the collar unbuttoned, polished pointed shoes. He holds a thin, slim lit cigarette with casual disdain, a thread of smoke curling up. Between trousers and shoes his socks are mismatched, one patterned and one plain, and he has not noticed. Standing straight, one hand in his trouser pocket. His silhouette reads as a tall, straight, narrow line.
+
+Avoid: designer logos or visible cigarette packets; glamour or fashion-model styling; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## duccio-A-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:48:06 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Duccio A — posa eroica e piccione; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 3296784 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-76a35186-b1a0-4dd8-974b-8c4f1ea36955.png`, copiato senza modifiche in `prove/duccio-A-1.png` (ignorato da git); SHA-256 `823664888e705531a12062b4b24bcc749725e5763c442705df39a4845bdaa6ed` |
+| Anteprima | [WebP](prove/duccio-A-1.webp), 683×1024 px, 153454 byte; SHA-256 `d80b2166a6e92a83b2577c43fb2eacdc8e88e6368bd0716044d85a894f7383f5` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young far-right blowhard around twenty-two, clearly adult, drawn in an extremely ridiculous, satirical style. Stocky and soft rather than muscular: a small paunch, short arms, a puffed-out chest with nothing behind it. Shaved head with a shadow of regrowth and an already obvious receding hairline despite his age. Amateurish tattoos on his arms and neck: circles with too many crooked spokes, so botched they look like pizzas cut into slices or bicycle wheels. His biggest tattoo, on the side of his neck, was meant to be a circle with an equal-armed cross inside, but the tattooist left out a piece: the left half of the circle and the left arm are missing, and the tip of the bottom arm is detached like a dot, so the whole thing reads as a big crooked question mark while still vaguely resembling the design he wanted. A slightly too-tight black short-sleeved t-shirt with a big white bird print meant to be a proud eagle, which came out looking like a puffed-up pigeon. Camouflage cargo trousers and oversized combat boots. He strikes a solemn heroic pose, chin up, gazing proudly at the horizon, one hand on his heart, while the other hand holds a sweet pink cocktail with a paper umbrella, a cherry and a curly straw, little finger raised. The pink cocktail is the only bright accent on him. His silhouette reads as short, stocky and puffed up.
+
+Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, complete and correctly drawn Celtic cross, fasces or raised-arm salute; likeness of any real politician; heroic or muscular anatomy; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~
+
+
+## duccio-B-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 22:49:02 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `3a72505` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#celestina-beppe-sergio-e-duccio), Duccio B — guerriero da bancarella e cannuccia; testo integrale sotto |
+| Modalità | generazione con riferimento di stile |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 3201461 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `docs/design/client-c0/r1/duel.png` SHA-256 `2aa3497f450117a696b796c7bea8153fe918cf5859867f542e3296396a0bf53e`; impronta verificata, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-6392bddd-c985-4e03-8142-b0b7e4281497.png`, copiato senza modifiche in `prove/duccio-B-1.png` (ignorato da git); SHA-256 `73136775a8c5d820ff23ceb0fb4b87a5d586c745c5e17d386d7378a0b71d039a` |
+| Anteprima | [WebP](prove/duccio-B-1.webp), 683×1024 px, 155784 byte; SHA-256 `2366891e22f04a75bcf9f68d4ecdeb0477fa1585fc3a212ab2e8afe744c36b0b` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Character concept sheet for the original card game Botte Micidiali, set in a grimy Italian neighbourhood dive bar. One image, portrait orientation 2:3. Show the same single character twice on a plain warm off-white background: a full-body front view on the left and a larger head-and-shoulders close-up on the right. Use the attached image only as the approved art-direction reference: hand-inked European comic look, irregular dark contours, restrained painted shading, muted palette of walnut, tobacco brown, dusty bottle green, oxblood burgundy, muted petrol and worn ivory. Do not copy anything else from it. Comic and exaggerated, but drawn with care, not a caricature of any real person.
+
+The character: a young far-right blowhard around twenty-two, clearly adult, drawn in an extremely ridiculous, satirical style. Stocky and soft rather than muscular: a small paunch, short arms, a puffed-out chest with nothing behind it. Shaved head with a shadow of regrowth and an already obvious receding hairline despite his age. Amateurish tattoos of pompous souvenir-stall warrior kitsch on his arms and neck: an ancient helmet, a sword, a laurel wreath, a roaring lion, all crooked and badly drawn. His biggest tattoo, on the side of his neck, was meant to be a circle with an equal-armed cross inside, but the tattooist left out a piece: the left half of the circle and the left arm are missing, and the tip of the bottom arm is detached like a dot, so the whole thing reads as a big crooked question mark while still vaguely resembling the design he wanted. A slightly too-tight black short-sleeved t-shirt with a generic white eagle with spread wings, crudely printed, cracked and peeling. Dark rolled-up jeans and spotless white sneakers. Eyes closed in bliss, he sips through the curly straw of a sweet pink cocktail with a paper umbrella and a cherry, while puffing out his chest and flexing a bicep that is not there. The pink cocktail is the only bright accent on him. His silhouette reads as short, stocky and puffed up.
+
+Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, complete and correctly drawn Celtic cross, fasces or raised-arm salute; likeness of any real politician; heroic or muscular anatomy; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
+~~~

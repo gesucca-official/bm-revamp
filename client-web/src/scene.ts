@@ -504,7 +504,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   // (the static summary is already on the table).
   if(!plays(round,this.seqSeen,{reduced:this.reduced||matchMedia('(prefers-reduced-motion: reduce)').matches,hidden:document.hidden,contextLost:this.contextLost}))return;
   const k=round!.facts.key;this.seqSeen=k;this.seqKey=k;
-  const seen=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(previous.players).flatMap(p=>p.character.items),...Object.values(v.players).flatMap(p=>p.character.items)];
+  // SB-16f0: the cards searches found are public (D50 point 6) and fly face up with their own face.
+  const seen=[...this.catalog(),...this.model.hand.map(c=>c.card),...Object.values(previous.players).flatMap(p=>p.character.items),...Object.values(v.players).flatMap(p=>p.character.items),...v.resolvedMoves.flatMap(m=>m.search?.revealed?[m.search.revealed]:[])];
   const registry=[...new Map(seen.map(c=>[c.name,c])).values()];
   // C3-4: the round from certain data only (timeline in resolution.ts), directed card by card by D13: cost, close-ups, flight,
   // voids, objects, changes per card when the report lines are verified (otherwise the totals, D5), then draws and end of turn.
@@ -612,7 +613,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
      if(h){used.add(h.id);this.arriving.add(h.key!);const key=h.key!;this.events.push({at:end,run:()=>{this.arriving.delete(key);}});}
      const node=add(this.card(named(d.name),iw,ih));flight({node,from:src,to:h?{x:h.x,y:h.y}:src,start,end,mode:'travel',s0:pileW?pileW/iw:.5,s1:h?h.w/iw:1,fade:1,tag:'drawHand'});count.draws++;return;}
     const seatBox=place(d.seat),bk=seatBox?.back,b=seatBox?.backs,f=b&&bk?fan(b,{...bk},left[d.seat]+1):null,tail=f?f.step*(left[d.seat]/2):0,dest=b?{x:b.x+tail,y:b.y}:src;left[d.seat]++;
-    const node=add(this.back(bk?.w??(C?18:28),bk?.h??(C?25:39)));flight({node,from:src,to:dest,start,end,mode:'travel',s0:.6,s1:1,fade:1,tag:'drawBack'});this.events.push({at:end,run:()=>{shown.backs[d.seat]=(shown.backs[d.seat]??0)+1;}});count.draws++;});
+    // SB-16f0 (D56): a card a search found and showed to everyone travels the same way, face up at the size of an own draw, shrinking into the fan.
+    const bw=bk?.w??(C?18:28),node=add(d.name?this.card(named(d.name),iw,ih):this.back(bw,bk?.h??(C?25:39)));flight({node,from:src,to:dest,start,end,mode:'travel',s0:d.name?(pileW?pileW/iw:.5):.6,s1:d.name?bw/iw:1,fade:1,tag:'drawBack'});this.events.push({at:end,run:()=>{shown.backs[d.seat]=(shown.backs[d.seat]??0)+1;}});count.draws++;});
    const at=p.draws.at,dur=p.draws.dur;
    for(const o of T.vanished){const b=itemBox(o.seat,o.name,true);if(!b)continue;const node=add(this.card(named(o.name),b.w,b.h,true));objectGoes(at,o.seat,o.name);flight({node,from:{x:b.x,y:b.y},to:{x:b.x,y:b.y},start:at,end:at+dur*.7,mode:'vanish',tag:'itemOut'});count.vanished++;}
    for(const o of T.appeared){const b=itemBox(o.seat,o.name,false);if(!b)continue;const node=add(this.card(named(o.name),b.w,b.h,true));flight({node,from:{x:b.x,y:b.y},to:{x:b.x,y:b.y},start:at+dur*.3,end:at+dur,mode:'pop',tag:'itemIn'});objectComes(at+dur,o.seat,o.name);count.appeared++;}}

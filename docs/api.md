@@ -156,7 +156,7 @@ Mossa esemplificativa, con valori segnaposto: non è stata inviata al server.
 }
 ```
 
-**V:** `choices` usa chiavi `DISCARD_ONE` e `TARGET_ITEM`; può essere null per carte senza scelta. La risposta di una mossa include `moveReport`, mappa SELF/OPPONENT di liste di stringhe, e il getter booleano void. L'ID della partita nel body viene usato per scegliere il motore; quello nel path per i topic. Non c'è un confronto fra i due. [Move](../server/src/main/java/com/gsc/bm/model/game/Move.java), [GameController](../server/src/main/java/com/gsc/bm/api/ws/GameController.java).
+**V:** `choices` usa chiavi `DISCARD_ONE` e `TARGET_ITEM`; può essere null per carte senza scelta. La risposta di una mossa include `moveReport`, mappa SELF/OPPONENT di liste di stringhe, e il getter booleano void. Solo con le regole del playground (profilo `bozza`, D50) una mossa risolta può avere due campi opzionali, in sola lettura e assenti con le regole vive (SB-16f0, D56): `voidReason` (oggi solo `a terra`) e `search` (`card`, binding cercato; `found`; `revealed`, la carta trovata e mostrata a tutti, assente se non trovata). Un comando che li contiene è rifiutato come gli altri campi non ammessi. L'ID della partita nel body viene usato per scegliere il motore; quello nel path per i topic. Non c'è un confronto fra i due. [Move](../server/src/main/java/com/gsc/bm/model/game/Move.java), [GameController](../server/src/main/java/com/gsc/bm/api/ws/GameController.java).
 
 | DTO | Campi significativi |
 |---|---|

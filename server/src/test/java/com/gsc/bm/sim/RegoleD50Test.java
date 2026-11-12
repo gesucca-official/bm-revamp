@@ -536,6 +536,114 @@ class RegoleD50Test {
                 "{'binding':'x','kind':'ITEM','lastBlow':true,'self':[]}".replace('\'', '"'))));
     }
 
+    // ---- SB-16f0 (D56): ricerca e motivo dell'annullamento nella vista pubblica, nient'altro ----
+
+    private static final com.gsc.bm.service.view.ViewExtractorServiceImpl VIEWS = new com.gsc.bm.service.view.ViewExtractorServiceImpl(
+            new com.gsc.bm.service.catalog.CatalogSource() {
+                public List<String> cardBindings() { return List.of(); }
+                public List<String> characterBindings() { return List.of(); }
+                public boolean hasCard(String binding) { return false; }
+                public boolean hasCharacter(String binding) { return true; }
+                public java.util.Optional<CharacterGui> characterGui(String binding) { return java.util.Optional.of(new CharacterGui(binding, null)); }
+            });
+
+    /** La vista che il server manda al giocatore {@code viewer}, come JSON. */
+    private static com.fasterxml.jackson.databind.JsonNode viewFor(Game game, String viewer) {
+        return JSON.valueToTree(VIEWS.extractViewFor(game, viewer));
+    }
+
+    private static com.fasterxml.jackson.databind.JsonNode publicMove(com.fasterxml.jackson.databind.JsonNode view, String player) {
+        for (com.fasterxml.jackson.databind.JsonNode m : view.path("resolvedMoves")) if (player.equals(m.path("playerId").asText())) return m;
+        throw new AssertionError("nessuna mossa di " + player);
+    }
+
+    @Test
+    void theViewPublishesTheFoundCardToEveryoneAndNothingElseOfTheHandOrDeck() {
+        Player a = player("a", 50, 10, List.of(charge("Carica", "t.Colpo cercato", "SELF"), filler("Segreta")),
+                List.of(filler("Cima"), filler("Seconda"), hit("Colpo cercato", 20, 1), filler("Fondo")));
+        Player b = player("b", 50, 10, List.of(filler("Attesa")), List.of(filler("Fb")));
+        Game game = game(Ruleset.D50, a, b);
+        turn(game, move(game, "a", "Carica", "SELF"), move(game, "b", "Attesa", "SELF"));
+        com.fasterxml.jackson.databind.JsonNode forB = viewFor(game, "b"), forA = viewFor(game, "a");
+        com.fasterxml.jackson.databind.JsonNode search = publicMove(forB, "a").path("search");
+        assertEquals("t.Colpo cercato", search.path("card").asText());
+        assertTrue(search.path("found").asBoolean());
+        assertEquals("Colpo cercato", search.path("revealed").path("name").asText());
+        assertEquals("t.Colpo cercato", search.path("revealed").path("bindingName").asText());
+        assertEquals(Set.of("card", "found", "revealed"), fieldNames(search), "solo binding, esito e carta rivelata");
+        assertEquals(search, publicMove(forA, "a").path("search"), "la stessa ricerca per tutti");
+        assertFalse(publicMove(forB, "a").has("voidReason"), "mossa non annullata: nessun motivo");
+        assertFalse(publicMove(forB, "b").has("search"), "mossa senza ricerca: nessun campo");
+        // L'avversario continua a vedere solo il numero di carte in mano e nel mazzo: nessun nome della mano o del mazzo di a.
+        assertTrue(forB.path("players").path("a").path("cardsInHand").isNumber());
+        assertTrue(forB.path("players").path("a").path("deck").isNumber());
+        String wire = forB.toString();
+        for (String hidden : List.of("Segreta", "Cima", "Seconda", "Fondo", "Bound a")) assertFalse(wire.contains(hidden), hidden);
+        assertTrue(forA.toString().contains("Segreta"), "la propria mano resta nella propria vista");
+    }
+
+    @Test
+    void theViewPublishesASearchThatFoundNothingWithoutTheDraw() {
+        Player a = player("a", 50, 10, List.of(charge("Carica", "t.Colpo cercato", "SELF")), List.of(filler("Cima"), filler("Seconda")));
+        Player b = player("b", 50, 10, List.of(filler("Attesa")), List.of(filler("Fb")));
+        Game game = game(Ruleset.D50, a, b);
+        turn(game, move(game, "a", "Carica", "SELF"), move(game, "b", "Attesa", "SELF"));
+        assertTrue(hand(a).contains("Cima"), "pesca normale");
+        com.fasterxml.jackson.databind.JsonNode forB = viewFor(game, "b"), search = publicMove(forB, "a").path("search");
+        assertEquals("t.Colpo cercato", search.path("card").asText());
+        assertFalse(search.path("found").asBoolean());
+        assertFalse(search.has("revealed"), "nessuna carta rivelata");
+        assertFalse(forB.toString().contains("Cima"), "la carta pescata al posto della ricerca resta privata");
+    }
+
+    @Test
+    void theViewPublishesTheReasonOfAMoveVoidedDown() {
+        Player a = player("a", 10, 10, List.of(charge("Carica", "t.Colpo cercato", "OPPONENT")),
+                List.of(filler("Cima"), hit("Colpo cercato", 20, 1)));
+        Player b = player("b", 40, 10, List.of(hit("Veloce", 20, 2)), List.of(filler("Fb")));
+        Game game = game(Ruleset.D50, a, b);
+        turn(game, move(game, "a", "Carica", "b"), move(game, "b", "Veloce", "a"));
+        com.fasterxml.jackson.databind.JsonNode voided = publicMove(viewFor(game, "b"), "a");
+        assertTrue(voided.path("void").asBoolean());
+        assertEquals("a terra", voided.path("voidReason").asText());
+        assertFalse(voided.has("search"), "una mossa annullata non cerca");
+        assertFalse(publicMove(viewFor(game, "b"), "b").has("voidReason"));
+    }
+
+    @Test
+    void withTheLiveRulesTheViewHasNeitherSearchNorReason() {
+        Player a = player("a", 10, 10, List.of(charge("Carica", "t.Colpo cercato", "OPPONENT")),
+                List.of(filler("Cima"), hit("Colpo cercato", 20, 1)));
+        Player b = player("b", 40, 10, List.of(hit("Veloce", 20, 2)), List.of(filler("Fb")));
+        Game game = game(Ruleset.LIVE, a, b);
+        turn(game, move(game, "a", "Carica", "b"), move(game, "b", "Veloce", "a"));
+        for (String viewer : List.of("a", "b"))
+            for (com.fasterxml.jackson.databind.JsonNode m : viewFor(game, viewer).path("resolvedMoves")) {
+                assertFalse(m.has("search"), viewer);
+                assertFalse(m.has("voidReason"), viewer);
+            }
+    }
+
+    @Test
+    void aMoveCommandCannotCarryTheNewFields() {
+        for (String field : List.of("search", "voidReason")) {
+            Player a = player("a", 50, 10, List.of(filler("Attesa")), List.of(filler("Fa")));
+            Player b = player("b", 50, 10, List.of(filler("Attesa")), List.of(filler("Fb")));
+            Game game = game(Ruleset.D50, a, b);
+            com.fasterxml.jackson.databind.node.ObjectNode body = JSON.createObjectNode().put("playedCardName", "Attesa")
+                    .put("playerId", "a").put("targetId", "SELF").put("gameId", game.getGameId()).put(field, "a terra");
+            IllegalMoveException e = assertThrows(IllegalMoveException.class,
+                    () -> new com.gsc.bm.api.ws.MoveCommandValidator().validate(game, "a", game.getGameId(), body));
+            assertEquals("Unexpected move field", e.getWhatHeDid());
+        }
+    }
+
+    private static Set<String> fieldNames(com.fasterxml.jackson.databind.JsonNode node) {
+        Set<String> names = new java.util.TreeSet<>();
+        node.fieldNames().forEachRemaining(names::add);
+        return names;
+    }
+
     // ---- punto 7: ordine dei timer ----
 
     @Test

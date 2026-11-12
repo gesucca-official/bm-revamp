@@ -145,12 +145,12 @@ export function Table({session,model}:{session:Session;model:Model}){
    {modal==='report'&&(()=>{
     // C3-6 (D7): the facts the model gives, in Italian, first; the server's text, unchanged, in a secondary section.
     const catalog=[...session.catalog,...model.hand.map(c=>c.card)],crossed=model.round?.crossed??false,facts=model.round?.facts??resolve(null,view,me,catalog);
-    const r=roundReport(facts,crossed,{me,name,forfeit:(id,code)=>id===me?forfeitOwn(code):`${name(id)} ${forfeitLabel(code)}`,costOf:card=>{const c=catalog.find(x=>x.name===card);return c?{...c.cost}:null;},gainsOf:card=>{const c=catalog.find(x=>x.name===card);return c?gainsOf(c):[];},damageOf:card=>{const c=catalog.find(x=>x.name===card);return c?damageReport(c):null;}});
+    const r=roundReport(facts,crossed,{me,name,forfeit:(id,code)=>id===me?forfeitOwn(code):`${name(id)} ${forfeitLabel(code)}`,costOf:card=>{const c=catalog.find(x=>x.name===card);return c?{...c.cost}:null;},gainsOf:card=>{const c=catalog.find(x=>x.name===card);return c?gainsOf(c):[];},damageOf:card=>{const c=catalog.find(x=>x.name===card);return c?damageReport(c):null;},nameOf:binding=>catalog.find(x=>x.bindingName===binding)?.name??null});
     const server=Object.entries(view.timeBasedEffects).filter(([,l])=>l.length);
     return <section className="report"><h2>Ultimo turno</h2>
      {r.note&&<p className="note" data-testid="report-note">{r.note}</p>}
      <h3>Cosa è successo nel turno {r.turn}</h3>
-     {r.moves.length?<ol className="facts" data-testid="report-facts">{r.moves.map((m,i)=><li key={i}><strong>{m.title}</strong>{m.lines.map((l,j)=><span key={j}>{l}</span>)}</li>)}</ol>:<p>Nessuna risoluzione disponibile.</p>}
+     {r.moves.length?<ol className="facts" data-testid="report-facts">{r.moves.map((m,i)=><li key={i}><strong>{m.title}</strong>{m.lines.map((l,j)=><span key={j}>{l}</span>)}{/* SB-16f0 (D56): the card a search showed to everyone opens in the same card inspection as any other card. */}{m.revealed&&<PressButton className="reveal" data-testid="report-revealed" onClick={()=>{setInspection({title:m.revealed!.card.name,card:m.revealed!.card,owner:m.revealed!.owner});setModal('inspect');}}>Vedi la carta trovata: «{m.revealed.card.name}»</PressButton>}</li>)}</ol>:<p>Nessuna risoluzione disponibile.</p>}
      {r.costNote&&<p className="small">{r.costNote}</p>}
      {r.changes&&<><h3>Variazioni complessive</h3><p className="small">Costi, effetti e fine turno insieme: non sono attribuite a una singola mossa.</p><ul className="facts" data-testid="report-changes">{r.changes.map((l,i)=><li key={i}>{l}</li>)}</ul></>}
      {r.eliminations.length>0&&<><h3>Eliminazioni</h3><ul className="facts" data-testid="report-eliminations">{r.eliminations.map((l,i)=><li key={i}>{l}</li>)}</ul></>}

@@ -2,6 +2,8 @@ package com.gsc.bm.model.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.service.view.model.logging.SlimMoveView;
@@ -41,8 +43,12 @@ public class Move implements Serializable {
 
     private final Map<Card.CardTarget, List<String>> moveReport = new EnumMap<>(Card.CardTarget.class);
 
-    /** SB-16c, playground rules only: why the engine voided the move (D50, point 1: {@link #DOWN}), or null. */
-    @JsonIgnore
+    /**
+     * SB-16c, playground rules only: why the engine voided the move (D50, point 1: {@link #DOWN}), or null.
+     * SB-16f0 (D56): public and read-only in the view; absent when null, so always absent with the live rules.
+     */
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ToString.Exclude
     @Setter
     private String voidReason;
@@ -53,6 +59,27 @@ public class Move implements Serializable {
     @JsonIgnore
     @ToString.Exclude
     private Card searchFound;
+
+    /**
+     * SB-16f0 (D56): the search of this move as the view publishes it, null (absent) without a search, so always with the live
+     * rules. Only what D50 (point 6), D52 and D54 make public: the card searched for, whether a copy was found, and the card found,
+     * which is shown to everyone. Nothing else of the author's hand or deck.
+     */
+    @JsonProperty(value = "search", access = JsonProperty.Access.READ_ONLY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public PublicSearch getPublicSearch() {
+        return searchedFor == null ? null : new PublicSearch(searchedFor, searchFound != null, searchFound);
+    }
+
+    /** SB-16f0: the public search of a move: the binding searched for, whether found, and the revealed card (null if not found). */
+    @Getter
+    @AllArgsConstructor
+    public static class PublicSearch {
+        private final String card;
+        private final boolean found;
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private final Card revealed;
+    }
 
     /** The reason of a move voided because its author was down at the start of its speed group (D50, point 1). */
     public static final String DOWN = "a terra";

@@ -621,6 +621,11 @@ button.primary {
   font-size: 17px;
   color: var(--text-detail);
 }
+/* SB-16f0: the button that opens the card a search showed to everyone, under its line. */
+.report .facts li button.reveal {
+  display: block;
+  margin-top: 4px;
+}
 .server-text {
   margin-top: 18px;
   border-top: 1px solid var(--border);

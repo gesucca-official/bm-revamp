@@ -319,7 +319,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c | fatto (12 novembre 2026), proposta approvata D55; invarianti e tetto bound verdi |
 | | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d | eseguito (12 novembre 2026), STOP dopo 3 giri: criteri non raggiunti; proposta nel rapporto |
 | | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; adottata (c); stop, domande nel rapporto |
-| | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | autorizzato (D56), da eseguire |
+| | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 |  |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
@@ -937,6 +937,13 @@ o prova umana con questi numeri; conferma di (c) su (b).
 Prima della prova umana SB-16f, il minimo intervento proposto lì: binding ed esito della ricerca e motivo dell’annullamento come
 campi strutturati opzionali nella vista del playground; nel client la carta trovata pubblicamente ispezionabile riusando la pesca
 esistente e «annullata: a terra» nel riepilogo italiano. Lo fa un esecutore dopo SB-16e2.
+
+**Fatto il 12 novembre 2026.** [Rapporto](reports/set-base/sb-16f0-report.md). La mossa pubblica ha due campi opzionali in sola
+lettura, `voidReason` e `search` (`card`, `found`, `revealed`). Mancano con le regole vive e non dicono niente della mano o del mazzo
+oltre la carta rivelata. Nel client, «Ultimo turno» scrive «Annullata: a terra.» e la riga della ricerca, riuscita o fallita, con
+il pulsante che apre la carta trovata nell’ispezione. In sequenza la carta trovata dall’avversario esce scoperta, col volo di pesca
+che c’era già. Il test di confine di SB-16e è aggiornato per D56; dieci test nuovi (5 server, 5 client). Mutazioni 10/10.
+Test, contesto Spring completo e catture verdi; niente Playwright, come chiesto.
 
 ### SB-16f — Prova umana degli starter rifatti
 

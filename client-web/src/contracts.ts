@@ -29,7 +29,16 @@ export interface Command {
   playedCardName: string; playerId: string; targetId: string; gameId: string;
   choices: Partial<Record<'DISCARD_ONE' | 'TARGET_ITEM', string>> | null;
 }
-export interface Move extends Command {void: boolean; moveReport: Partial<Record<'SELF' | 'OPPONENT', string[]>>}
+/**
+ * SB-16f0 (D56): with the playground rules (profile `bozza`) a move may carry why the engine voided it (`voidReason`, today only
+ * «a terra», D50 point 1) and the search that replaced its draw (D50 point 6): the binding searched for, whether a copy was found
+ * and the card found, shown to everyone. Both are absent with the live rules.
+ */
+export interface MoveSearch {card: string; found: boolean; revealed?: Card}
+export interface Move extends Command {
+  void: boolean; moveReport: Partial<Record<'SELF' | 'OPPONENT', string[]>>;
+  voidReason?: string; search?: MoveSearch;
+}
 export interface View {
   gameId: string; players: Record<string, Player>; resolvedMoves: Move[];
   timeBasedEffects: Record<string, string[]>; over: boolean; winner: string;

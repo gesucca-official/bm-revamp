@@ -1,4 +1,4 @@
-import type {Card, Move, Resource, View} from './contracts.ts';
+import type {Card, Move, MoveSearch, Resource, View} from './contracts.ts';
 import {impactOf,type Gain} from './readability.ts';
 
 // Certain facts of one resolved round (C3-1, plan D1). Built only from structured fields of two views and the
@@ -23,6 +23,10 @@ export type MoveFact = {
   itemGone: boolean;
   /** Only on a contiguous round: an object of the same name appeared at the author's seat in the same round. */
   itemAtAuthor: boolean;
+  /** SB-16f0 (D56), playground rules only, absent otherwise: why the engine voided the move («a terra»). */
+  voidReason?: string;
+  /** SB-16f0 (D56), playground rules only, absent otherwise: the search that replaced the draw, with the card found shown to everyone. */
+  search?: MoveSearch;
 };
 
 export type ResourceChange = {before: number | null; after: number | null; delta: number};
@@ -81,6 +85,7 @@ function moveFact(m: Move, index: number, costs: Map<string, Card>): MoveFact {
     item: choices.TARGET_ITEM ? {owner: target, name: choices.TARGET_ITEM} : null,
     discard: choices.DISCARD_ONE ?? null, void: !!m.void,
     cost: card ? {...card.cost} : null, itemGone: false, itemAtAuthor: false,
+    ...(m.voidReason ? {voidReason: m.voidReason} : {}), ...(m.search ? {search: m.search} : {}),
   };
 }
 
@@ -238,8 +243,11 @@ export type ReportContext = {
   gainsOf?: (card: string) => Gain[];
   /** Nominal damage of a card as text («colpo 15»), C4-8a D5 (b): the type of damage a reader cannot see when the sequence does not play; null without damage or unknown. */
   damageOf?: (card: string) => string | null;
+  /** SB-16f0: display name of a card by binding, for a search that found nothing; null if unknown (the binding is said). */
+  nameOf?: (binding: string) => string | null;
 };
-export type ReportMove = {title: string; lines: string[]};
+/** `revealed`: SB-16f0, the card a search found and showed to everyone, with the seat that found it, to inspect as any other card. */
+export type ReportMove = {title: string; lines: string[]; revealed?: {card: Card; owner: string}};
 export type RoundReport = {
   turn: number;
   /** After a jump of turns, a round from an earlier connection or a first view: what the facts below do not cover. */
@@ -277,7 +285,8 @@ export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportConte
     const verb = m.author === c.me ? 'giochi' : 'gioca';
     const onto = m.self ? (m.author === c.me ? 'te stesso' : 'se stesso') : m.target === c.me ? 'di te' : c.name(m.target);
     const lines: string[] = [];
-    if (m.void) lines.push('Annullata durante il round (la vista non dice da quale mossa).');
+    // SB-16f0 (D56): the reason when the view gives it (playground rules); the old sentence otherwise.
+    if (m.void) lines.push(m.voidReason ? `Annullata: ${m.voidReason}.` : 'Annullata durante il round (la vista non dice da quale mossa).');
     const nominal = m.cost ?? c.costOf(m.card);
     if (!nominal) lines.push('Costo nominale non noto al client.');
     else {
@@ -295,7 +304,11 @@ export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportConte
       else lines.push(`Oggetto scelto: ${what}. La vista non permette di dire con certezza se sia sparito per questa mossa.`);
     }
     if (m.discard) lines.push(`Carta da scartare indicata: «${m.discard}».`);
-    return {title: `${i + 1}. ${who(m.author)} ${verb} «${m.card}» su ${onto}`, lines};
+    const s = m.search;
+    if (s?.found && s.revealed) lines.push(`Ricerca al posto della pesca: trovata «${s.revealed.name}», mostrata a tutti.`);
+    else if (s) lines.push(`Ricerca al posto della pesca: «${c.nameOf?.(s.card) ?? s.card}» non è nel mazzo, pesca normale.`);
+    const title = `${i + 1}. ${who(m.author)} ${verb} «${m.card}» su ${onto}`;
+    return s?.found && s.revealed ? {title, lines, revealed: {card: s.revealed, owner: m.author}} : {title, lines};
   });
   const changes = diff ? Object.entries(f.seats!).map(([id, s]) => {
     const parts = (Object.entries(s.resources) as [Resource, ResourceChange][]).filter(([, r]) => r.delta)
@@ -545,7 +558,11 @@ export function timeline(previous: View, next: View, facts: ResolutionFacts, cat
     const table = minus(s.itemsAppeared, passedIn).filter(n => known.get(n)?.item).slice(0, left);
     for (const name of table) draws.push({seat: id, to: 'table', name});
     if (s.handArrived) for (const name of s.handArrived) draws.push({seat: id, to: 'hand', name});
-    else for (let k = 0; k < left - table.length; k++) draws.push({seat: id, to: 'hand', name: null});
+    else {
+      // SB-16f0 (D56): a card a search found and showed to everyone arrives face up, like an own draw; the other draws stay backs.
+      const shownToAll = facts.moves.filter(m => m.author === id && !m.void && m.search?.found && m.search.revealed && !m.search.revealed.item).map(m => m.search!.revealed!.name);
+      for (let k = 0; k < left - table.length; k++) draws.push({seat: id, to: 'hand', name: shownToAll[k] ?? null});
+    }
   }
   const vanished: Timeline['vanished'] = [], appeared: Timeline['appeared'] = [];
   for (const [id, s] of Object.entries(seats)) {

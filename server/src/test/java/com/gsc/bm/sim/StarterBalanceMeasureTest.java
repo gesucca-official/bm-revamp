@@ -228,19 +228,34 @@ class StarterBalanceMeasureTest {
         }
     }
 
-    @Test void clientReceivesSearchAndVoidOnlyInServerText() throws Exception {
+    /**
+     * SB-16f0 (D56, «si a entrambe» alla domanda 2 di SB-16e): until SB-16e the client received search and void reason only in the
+     * server's English text; now they are also optional structured fields of the public move, and the English text stays as it was.
+     */
+    @Test void clientReceivesSearchAndVoidAsStructuredFields() throws Exception {
         Draft draft = Draft.fromClasspath("/set-base/bozza.json");
         Move search = new Move("charge", "a", "SELF", "g", Map.of());
         search.recordSearch(HITS[0], draft.card(HITS[0]));
         JsonNode publicSearch = JSON.readTree(JSON.writeValueAsString(search));
         assertFalse(publicSearch.has("searchedFor")); assertFalse(publicSearch.has("searchFound"));
+        assertEquals(HITS[0], publicSearch.path("search").path("card").asText());
+        assertTrue(publicSearch.path("search").path("found").asBoolean());
+        assertEquals(draft.card(HITS[0]).getName(), publicSearch.path("search").path("revealed").path("name").asText());
+        assertFalse(publicSearch.has("voidReason"));
         assertTrue(publicSearch.path("moveReport").toString().contains("shown to everyone"));
         assertTrue(JSON.writeValueAsString(search.getSlimView()).contains(draft.card(HITS[0]).getName()));
+        Move missed = new Move("charge", "a", "SELF", "g", Map.of());
+        missed.recordSearch(HITS[0], null);
+        JsonNode publicMissed = JSON.readTree(JSON.writeValueAsString(missed)).path("search");
+        assertFalse(publicMissed.path("found").asBoolean()); assertFalse(publicMissed.has("revealed"));
         Move down = new Move("hit", "a", "b", "g", Map.of());
         down.setVoid(true); down.setVoidReason(Move.DOWN); down.applyEffectTo(null);
         JsonNode publicDown = JSON.readTree(JSON.writeValueAsString(down));
-        assertFalse(publicDown.has("voidReason")); assertTrue(publicDown.path("void").asBoolean());
+        assertEquals("a terra", publicDown.path("voidReason").asText()); assertTrue(publicDown.path("void").asBoolean());
+        assertFalse(publicDown.has("search"));
         assertTrue(publicDown.path("moveReport").toString().contains("voided: a terra"));
+        JsonNode plain = JSON.readTree(JSON.writeValueAsString(new Move("hit", "a", "b", "g", Map.of())));
+        assertFalse(plain.has("search")); assertFalse(plain.has("voidReason"));
     }
 
     @Test void damageCountersSeparateExposureDefenseArmorAndOverkill() {
