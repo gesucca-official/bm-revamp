@@ -108,3 +108,14 @@ Le catture del bozzetto (`24`) restano perché il [prompt della cornice](prompt-
 3. Sporco e feltro consunto: quantità e grandezza.
 4. In verticale: la fila di pulsanti in alto e la legenda a richiesta.
 5. Quando arriveranno cornice e puntine generate, come stanno sopra il feltro disegnato.
+
+## Giudizio del proprietario
+
+12 novembre 2026: «la mappa vera mi piace, ma ho notato che i fili che legano i punti stanno dietro le lettere e altri elementi, cosa
+impossibile». Una cordicella legata fra due spilli passa sopra tutto ciò che sta sul feltro (lettere, post-it, cartoncino), e sotto la
+testa degli spilli a cui è legata.
+
+**Ritocchi della regia,** notati sulle catture e da fare nello stesso giro: puntine generate senza punta (secondo giro delle
+[immagini](prompt-bacheca.md#secondo-giro)), quindi il punto in cui entrano nel feltro va spostato alla base della testa; puntine più grandi,
+perché a una dozzina di pixel il dettaglio si perde, soprattutto «sei qui»; notifiche degli achievement nello stile della bacheca invece dei
+rettangoli verdi; meno affollamento di cordicelle in verticale a fine giro; nessuna puntina sopra le lettere di un titolo.
