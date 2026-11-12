@@ -178,3 +178,17 @@ perché il registratore di Playwright vuole un suo ffmpeg che qui non c'è e non
 3. **Il livello di animazione:** fermi, movimento o maglia. Se la maglia piace, va estesa agli altri con i loro punti di controllo; se il
    movimento basta, la maglia si toglie.
 4. **I ritagli** di bocca aperta e occhi chiusi: se servono, si chiedono con un giro di prompt.
+
+## Giudizio del proprietario
+
+12 novembre 2026, con le sue parole:
+
+- **Font:** «Russo One, ma un po' meno grassetto se possibile».
+- **Animazioni:** «le animazioni maglia con Spazienzio sono molto belle, le altre mi piacciono ma sono un po' troppo rimbalzanti e scattose.
+  Possiamo tenerle entrambe, a seconda dei casi»; «Piera che tentenna perché è ubriaca è bellissima».
+- **Bocche:** «la bocca che si apre e chiude quando parlano mi piacerebbe» ([prompt](prompt-bocche.md)).
+- **Spazienzio in verticale:** «è sempre troppo basso rispetto allo sfondo».
+- **Finestra di dialogo:** «la sezione del testo dinamica sotto non mi piace: possiamo forzare sempre due righe, così resta della stessa
+  altezza?».
+
+Si apre la [Fase F](prototipo.md#fase-f-rifinitura-finale).

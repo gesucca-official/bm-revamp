@@ -127,3 +127,21 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sui r
    - **solo se servono dopo la prova:** pochi ritagli generati per la bocca aperta o gli occhi chiusi, sovrapposti al ritratto, da chiedere
      con un giro di prompt.
    Il proprietario sceglie dopo averle viste; il movimento si spegne con la preferenza di movimento ridotto.
+
+## Fase F, rifinitura finale
+
+Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla Fase E](prototipo-fase-e.md#giudizio-del-proprietario).
+
+1. **Font dei dialoghi: Russo One,** scelto dal proprietario, «un po' meno grassetto». Russo One ha un solo peso: si prova ad alleggerirlo
+   (per esempio con un contorno del colore della finestra che assottiglia il tratto) e si mettono accanto uno o due font liberi dalla stessa
+   famiglia di forme con più pesi (squadrati, con un asse del peso), per la scelta finale. Gli altri font si tolgono dal prototipo.
+2. **Animazioni a seconda dei casi:** la maglia diventa il modo normale per tutti i personaggi, ciascuno con i suoi punti di controllo; il
+   movimento procedurale resta per i casi in cui serve, più morbido (meno rimbalzi e scatti), e l'ondeggiare di Piera brilla resta com'è.
+   Il cast dice, per personaggio ed espressione, quale si usa.
+3. **Bocca che si apre e si chiude** quando il personaggio parla, alternando il ritratto con la sua versione «bocca»
+   ([prompt](prompt-bocche.md)) al ritmo del testo, sotto la maglia e il movimento; se la seconda versione cambia anche fuori dalla bocca,
+   si prende solo la zona della bocca con una maschera. Gli stacchi su chi ascolta Piera usano le nuove espressioni esasperate. Finché le
+   immagini non ci sono, il lettore funziona come oggi.
+4. **Spazienzio in verticale** più in alto rispetto allo sfondo: misura e correzione per personaggio nel cast.
+5. **Finestra di dialogo ad altezza fissa di due righe:** le battute più lunghe si dividono in pagine da due righe, che si avanzano con un
+   tocco, come nelle visual novel. La [specifica](specifica-asset.md#come-appare-la-scena) si aggiorna.
