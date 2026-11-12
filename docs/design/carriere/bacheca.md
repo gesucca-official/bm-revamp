@@ -105,3 +105,6 @@ immagini.
 Scelto dal proprietario il 12 novembre 2026 (Fase G del [prototipo](prototipo.md#fase-g-la-bacheca-si-muove)): fili che oscillano piano,
 una lettera allentata che tremola, cade e si rimette a posto trascinandola, la puntina «sei qui» che viaggia da un nodo all'altro, il post-it
 che si stacca quando si scopre un nodo. Poco e mai mentre si legge o si sceglie: «non troppo, se no disturba».
+
+**Fase I** del [prototipo](prototipo.md#fase-i-piera-lenta-teste-più-ferme-nodi-strappati): il nodo che si chiude in un giro si strappa o
+si accartoccia, e torna intero al giro nuovo.

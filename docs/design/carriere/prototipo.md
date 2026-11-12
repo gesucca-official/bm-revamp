@@ -184,3 +184,18 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
    sceglie, spento con il movimento ridotto.
 5. **Font di bottoni e cartoncini:** via la scrittura a mano «tipo Comic Sans» da pulsanti, schede, legenda e notifiche; al suo posto
    Russo One alleggerito, il font scelto per i dialoghi, oppure, per i cartoncini scritti a mano, un pennarello meno tondo, da far giudicare.
+
+## Fase I, Piera lenta, teste più ferme, nodi strappati
+
+Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla Fase H](prototipo-fase-h.md#giudizio-del-proprietario).
+
+1. **Piera estremamente lenta:** parla lentamente, e così si muove. Tutte le sue animazioni rallentano molto: l'ondeggiare di Piera brilla,
+   la maglia, il ritmo della bocca, le entrate e le uscite. Un fattore per personaggio nel cast, nello stesso spirito della `velocita` del
+   testo, che per gli altri resta 1.
+2. **Testa meno deformata:** l'oscillazione della testa nella maglia distorce troppo; si limita l'ampiezza della piega, per tutti, perché
+   la testa ondeggi senza sembrare di gomma. Il banco della fluidità resta a zero difetti.
+3. **Nodi chiusi strappati o accartocciati:** un nodo non più raggiungibile in questo giro non è più solo segnato come chiuso. Il suo
+   cartoncino o post-it si strappa un poco (un angolo o un bordo lacerato, un pezzo che manca) oppure si accartoccia (pieghe, ombre, un
+   poco rimpicciolito). Lo strappo si vede quando un nodo si chiude e poi resta; un nuovo giro rimette la carta intera. Sempre poco, spento
+   con il movimento ridotto, come il resto della bacheca.
+4. **Pulsanti della bacheca in verticale:** le etichette non devono tagliarsi (oggi «Achieve…», «Nuovo g…»).

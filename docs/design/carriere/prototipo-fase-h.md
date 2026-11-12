@@ -208,3 +208,18 @@ Le prove a mano con il server di sviluppo sono state fatte sulla porta 4332: sul
 2. Le bocche, dal vivo, ora che non dovrebbero più sfarfallare.
 3. La bacheca viva: angolo di post-it, mosca, lampade, achievement.
 4. Il pennarello dei cartoncini (Caveat Brush) o Russo One anche lì; i pulsanti in Russo One alleggerito.
+
+## Giudizio del proprietario
+
+12 novembre 2026, dopo la prova dal vivo, con le sue parole:
+
+- **In generale:** «ho testato, non noto altri errori strani». Entrate, bocche, bacheca viva e font restano come sono; nessuna obiezione al
+  pennarello dei cartoncini.
+- **Piera:** «siccome Piera parla lentamente, anche le animazioni di Piera dovrebbero essere estremamente lente».
+- **Testa:** «le animazioni sulla testa che oscilla distorcono un po' troppo, le limiterei un po'».
+- **Nodi chiusi:** «i nodi della carriera non più raggiungibili potrebbero strapparsi un po' o accartocciarsi».
+
+La regia aggiunge un difetto visto nelle catture: in verticale le etichette dei pulsanti in alto sulla bacheca si tagliano («Achieve…»,
+«Nuovo g…»), perché Russo One è più largo del font di prima.
+
+Si apre la [Fase I](prototipo.md#fase-i-piera-lenta-teste-più-ferme-nodi-strappati).
