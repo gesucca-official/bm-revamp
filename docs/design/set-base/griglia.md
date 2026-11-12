@@ -46,6 +46,10 @@ il giro 3 usa salute Spazienzio 75, Mara 70, Celestina 70, Piera 85 e Beppe 80; 
 +10 T; L iniziale Piera 10, Un altro e arrivo +20 A e Testata 25 HIT. Funzioni e liste conservate. Motivi e confronto dei tre giri nel
 [rapporto](../../reports/set-base/sb-16e-report.md). Le note dei blocchi precedenti conservano i valori storici.
 
+**Lotto SB-16e2 (D56/D38).** Variante (c) adottata: Un altro e arrivo +20 → **+35 A**; danno a sé di L'ultima dose e
+L'ultimo giro 5 → **2 HIT**. Nessuna variante soddisfa i criteri: dieci violazioni come il controllo. Misure nel
+[rapporto SB-16e2](../../reports/set-base/sb-16e2-report.md).
+
 ## Principi aggiunti con SB-16d (D52, D54, D55)
 
 - **Nessuna parata pura del turno:** un premio che resta anche senza attacco, circa +5 della risorsa personale o una piccola cura
@@ -189,8 +193,8 @@ così chiudono la partita (D29).
 | ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Rarità | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|
 | LR-STR | generica | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 10 HIT | C | `Struggle`, conservata | Spazienzio, Mara, Beppe, Sergio | dati |
-| LR-TOS | Celestina | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 7 POISON e +4 T al bersaglio | NC | `LethalHeroinDose`, riprogettata («L'ultima dose») | Oggi costa salute solo con T alta e il bot non la gioca; qui chiude col veleno | dati |
-| LR-PIN | Piera | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, HIT pari a ~~6~~ 12⁶ + L residua, poi azzera L | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
+| LR-TOS | Celestina | Azione, last resort | DAMAGE | 1 | ~~5~~ 2 HIT a sé (SB-16e2), 7 POISON e +4 T al bersaglio | NC | `LethalHeroinDose`, riprogettata («L'ultima dose») | Oggi costa salute solo con T alta e il bot non la gioca; qui chiude col veleno | dati |
+| LR-PIN | Piera | Azione, last resort | DAMAGE | 1 | ~~5~~ 2 HIT a sé (SB-16e2), HIT pari a ~~6~~ 12⁶ + L residua, poi azzera L | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
 | LR-ROC | Duccio | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT | R | prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati |
 
 ### Azioni d'archetipo (37)
@@ -240,7 +244,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
 | PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
-| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | +15 L e +20 A; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca PIN-AR2 | NC | 2 | «Un altro e arrivo», già Offro io, D55; numero SB-16e | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
+| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | +15 L e +35 A; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca PIN-AR2 | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Piera; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
 
 **Beppe (5)**
@@ -620,7 +624,7 @@ da scrivere solo le carte (SB-11b). Il caso
 ## L e Piera
 
 **Lettura storica precedente a SB-16d.** Le formule di decadimento restano; con D50 A si ferma a zero e L dà corazza.
-PIN-BO1 ora dà +5 L, non +10; PIN-AR4 ora carica +15 L e +20 A (SB-16e, prima +10 A) e cerca Estasi, senza dare L al bersaglio.
+PIN-BO1 ora dà +5 L, non +10; PIN-AR4 ora carica +15 L e +35 A (SB-16e2; +20 A in SB-16e, prima +10 A) e cerca Estasi, senza dare L al bersaglio.
 Le vecchie stime di regime e di disturbo seguenti descrivono la versione misurata in SB-14; le nuove misure sono nel
 [rapporto SB-16e](../../reports/set-base/sb-16e-report.md).
 

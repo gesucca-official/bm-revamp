@@ -318,7 +318,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), domande risposte (D54) |
 | | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c | fatto (12 novembre 2026), proposta approvata D55; invarianti e tetto bound verdi |
 | | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d | eseguito (12 novembre 2026), STOP dopo 3 giri: criteri non raggiunti; proposta nel rapporto |
-| | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | autorizzato (D56), da eseguire |
+| | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; adottata (c); stop, domande nel rapporto |
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | autorizzato (D56), da eseguire |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 |  |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
@@ -922,6 +922,14 @@ Un solo lotto, al massimo 30 minuti di calcolo: controllo col profilo del giro 3
 (a) Un altro e arrivo +20→+35 A, (b) danno a sé di L’ultima dose e L’ultimo giro 5→2, (c) entrambe. Stessi semi, matrice,
 stili e regole `d50`; criteri di D16 e D51 invariati. Nella bozza la variante che li soddisfa tutti, altrimenti quella con meno
 violazioni, dichiarando i criteri falliti, e stop. Niente secondo lotto.
+
+**Eseguito il 12 novembre 2026, criteri non raggiunti.** [Rapporto](reports/set-base/sb-16e2-report.md),
+[incontri per profilo](reports/set-base/sb-16e2/incontri.md). Un lotto, 971,7 s su 1.800; controllo identico al giro 3.
+Tutti e quattro i profili hanno 10 violazioni (2 patte, 2 quote, 6 durate); invarianti e bound a zero. Adottata nella bozza la
+variante **(c)**: Un altro e arrivo +35 A, danno a sé di L'ultima dose e L'ultimo giro 2 HIT. Rispetto al controllo, specchio di
+Celestina 22,32 → 18,57% di patte, di Piera 17,78 → 13,07%; Mara–Piera 0.653 e Celestina–Piera 0.662 ancora fuori quota.
+(b) e (c) erano pari sulle regole fissate prima; spareggio esteso dichiarato nel rapporto. Domande al proprietario: ridisegno
+o prova umana con questi numeri; conferma di (c) su (b).
 
 ### SB-16f0 — Leggibilità della ricerca e dell’annullamento
 

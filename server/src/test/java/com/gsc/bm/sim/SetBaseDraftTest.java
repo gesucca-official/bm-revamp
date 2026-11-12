@@ -353,11 +353,11 @@ class SetBaseDraftTest {
         ((AbstractCard) draft.card("junkie.PervertedMetabolism")).applyEffectOnSelf(tossico);
         assertEquals(65, tossico.getResources().get(Resource.HEALTH));
         assertEquals(0, tossico.getResources().get(Resource.TOXICITY));
-        // L'ultima dose: 5 HIT a sé; 7 POISON e +4 T al bersaglio.
+        // L'ultima dose: 2 HIT a sé (SB-16e2, D56/D38: era 5); 7 POISON e +4 T al bersaglio.
         AbstractCard last = (AbstractCard) draft.card("junkie.LethalHeroinDose");
         last.applyEffectOnSelf(tossico);
         last.applyEffectOnTarget(tossico, spazienzio);
-        assertEquals(60, tossico.getResources().get(Resource.HEALTH));
+        assertEquals(63, tossico.getResources().get(Resource.HEALTH), "SB-16e2, D56: 2 HIT a sé");
         assertEquals(46, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(29, spazienzio.getResources().get(Resource.TOXICITY));
         // Raschiare il fondo: carburante a sé.
@@ -443,16 +443,16 @@ class SetBaseDraftTest {
         assertTrue(draft.card("base.pino.GoingBerserk").getCost().isEmpty());
         assertTrue(draft.card("base.pino.UltimoGiro").getCost().isEmpty());
         // Giro 2 di SB-14: le due carte che spendono tutta la L partono da 10 e da 12 (erano 3 e 6), testi compresi, perché i bot leggono
-        // Il numero del danno nominale; la last resort tiene i 5 HIT a sé (D29). SB-16e/D38/D53: Testata a 25 HIT con salute ridotta.
+        // Il numero del danno nominale; la last resort tiene un danno a sé (D29), 2 HIT da SB-16e2 (D56/D38, era 5). SB-16e/D38/D53: Testata a 25 HIT con salute ridotta.
         JsonNode berserk = card("base.pino.GoingBerserk"), last = card("base.pino.UltimoGiro"), testata = card("base.pino.TestataDaUltimoGiro");
         assertEquals(10, berserk.get("params").get("base").asInt());
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
         assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText());
         assertTrue(berserk.get("gui").get("description").asText().contains("HIT pari a 10 più la propria L residua"));
         assertEquals(12, last.get("params").get("base").asInt());
-        assertEquals(5, last.get("params").get("selfHit").asInt());
+        assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
         assertEquals("HIT 12+x", last.get("gui").get("damageAmount").asText());
-        assertTrue(last.get("gui").get("description").asText().contains("5 HIT a sé; HIT pari a 12 più la propria L residua"));
+        assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé; HIT pari a 12 più la propria L residua"));
         assertEquals(25, testata.get("target").get(0).get("amount").asInt(), "D38/D53: pressione di Piera con meno salute, SB-16e");
         assertEquals("HIT 25", testata.get("gui").get("damageAmount").asText());
         assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 25 HIT al bersaglio"));
@@ -518,12 +518,12 @@ class SetBaseDraftTest {
         resolveOnOpponent(game, "base.pino.GoingBerserk");
         health -= berserk;
         assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
-        // L'ultimo giro: 5 HIT a sé, HIT pari a 6 più la L residua, poi la L a zero; è una last resort.
+        // L'ultimo giro: 2 HIT a sé (SB-16e2, D56), HIT pari a 12 più la L residua, poi la L a zero; è una last resort.
         me.getResources().put(Resource.ALCOHOL, 9);
         resolveOnOpponent(game, "base.pino.UltimoGiro");
         health -= last + 9;
         assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
-        assertEquals(PINO_HEALTH - 5, me.getResources().get(Resource.HEALTH));
+        assertEquals(PINO_HEALTH - 2, me.getResources().get(Resource.HEALTH), "SB-16e2, D56: 2 HIT a sé");
         assertEquals(0, me.getResources().get(Resource.ALCOHOL));
         assertTrue(draft.card("base.pino.UltimoGiro").isLastResort());
         assertFalse(draft.card("base.pino.GoingBerserk").isLastResort());
@@ -538,7 +538,7 @@ class SetBaseDraftTest {
         game.getPlayers().get("seat-1").getCardsInHand().add(charge);
         charge.resolve(game, new Move(charge.getName(), "seat-1", "SELF", game.getGameId(), new java.util.HashMap<>()));
         assertEquals(21, me.getResources().get(Resource.ALCOHOL));
-        assertEquals(35, me.getResources().get(Resource.ALERTNESS), "D38/D53, SB-16e: il caricamento ora dà 20 A");
+        assertEquals(50, me.getResources().get(Resource.ALERTNESS), "SB-16e2, D56/D38: il caricamento dà 35 A (20 in SB-16e)");
         assertEquals(0, spazienzio.getResources().get(Resource.ALCOHOL));
         assertEquals(14, spazienzio.getResources().get(Resource.ALERTNESS));
         // Il bancone regge: HIT ricevuto a metà in questo turno, +5 L.

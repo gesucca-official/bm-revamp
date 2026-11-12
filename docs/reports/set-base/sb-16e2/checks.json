@@ -1,0 +1,1 @@
+{"serverTest":{"tests":713,"failures":0,"errors":0,"skipped":10,"clientDebug":"37/37"},"checkRules":"green","clientTest":"333/333","clientBuild":"green (bundler warnings only)","clientSize":{"jsGzip":350290,"totalGzip":1760434,"textureDecodedBytes":27729048,"limitsPass":true,"ceilingsPass":true},"checkLinks":"290 files, 0 broken","diffCheck":"green","mutations":"4/4"}

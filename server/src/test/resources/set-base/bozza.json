@@ -370,9 +370,9 @@
              "role": "DAMAGE", "gains": "—", "damage": "POISON", "damageAmount": "POISON 2"}},
     {"binding": "junkie.LethalHeroinDose", "rarity": "UNCOMMON", "kind": "ACTION", "lastResort": true, "exclusiveTo": "junkie.character.ToxicJunkie",
      "priority": 1, "targets": ["OPPONENT"],
-     "self": [{"op": "damage", "type": "HIT", "amount": 5}],
+     "self": [{"op": "damage", "type": "HIT", "amount": 2}],
      "target": [{"op": "damage", "type": "POISON", "amount": 7}, {"op": "gain", "resource": "TOXICITY", "amount": 4}],
-     "gui": {"name": "L'ultima dose", "description": "LR-TOS · Last resort di Celestina: 5 HIT a sé; 7 POISON e +4 T al bersaglio.",
+     "gui": {"name": "L'ultima dose", "description": "LR-TOS · Last resort di Celestina: 2 HIT a sé; 7 POISON e +4 T al bersaglio.",
              "role": "DAMAGE", "gains": "—", "damage": "POISON", "damageAmount": "POISON 7"}},
 
     {
@@ -535,8 +535,8 @@
      "gui": {"name": "Coccio", "description": "PIN-BO3 · Bound: 2 CUT al bersaglio (il vetro taglia).",
              "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 2"}},
     {"binding": "base.pino.UltimoGiro", "rarity": "UNCOMMON", "java": true, "exclusiveTo": "base.character.Pino", "cost": {}, "priority": 1,
-     "params": {"base": 12, "selfHit": 5},
-     "gui": {"name": "L'ultimo giro", "description": "LR-PIN · Last resort di Piera: 5 HIT a sé; HIT pari a 12 più la propria L residua al bersaglio, poi azzera la propria L.",
+     "params": {"base": 12, "selfHit": 2},
+     "gui": {"name": "L'ultimo giro", "description": "LR-PIN · Last resort di Piera: 2 HIT a sé; HIT pari a 12 più la propria L residua al bersaglio, poi azzera la propria L.",
              "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12+x"}},
 
     {"binding": "base.pino.TestataDaUltimoGiro", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALCOHOL": 5},
@@ -562,9 +562,9 @@
       ],
       "gui": {
         "name": "Un altro e arrivo",
-        "description": "PIN-AR4 · +15 L, +20 A a sé; HIT, CUT e POISON ricevuti ×1,5 per 2 turni (questo e il successivo). Al posto della pesca successiva cerca Estasi da Coca Etilene, mostralo all’avversario; se assente pesca normalmente.",
+        "description": "PIN-AR4 · +15 L, +35 A a sé; HIT, CUT e POISON ricevuti ×1,5 per 2 turni (questo e il successivo). Al posto della pesca successiva cerca Estasi da Coca Etilene, mostralo all’avversario; se assente pesca normalmente.",
         "role": "RESOURCES",
-        "gains": "+15 L, +20 A",
+        "gains": "+15 L, +35 A",
         "damage": "—",
         "damageAmount": "—"
       },
@@ -577,7 +577,7 @@
         {
           "op": "gain",
           "resource": "ALERTNESS",
-          "amount": 20
+          "amount": 35
         },
         {
           "op": "status",

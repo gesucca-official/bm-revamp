@@ -149,7 +149,7 @@ class StarterRedesignTest {
                     .findFirst().orElseThrow().getSearchFound().getBinding());
             if (pair.deck.equals("starter-pino")) {
                 assertEquals(7, res(a, Resource.ALCOHOL));
-                assertEquals(13, res(a, Resource.ALERTNESS), "D38/D53, SB-16e: +20 A meno 7 per la L");
+                assertEquals(28, res(a, Resource.ALERTNESS), "SB-16e2, D56/D38: +35 A meno 7 per la L (13 con +20)");
             } else if (pair.deck.equals("starter-spazienzio")) {
                 assertEquals(55, res(a, Resource.VIOLENCE)); assertEquals(55, res(a, Resource.ALERTNESS));
             } else if (pair.deck.equals("starter-mara")) assertEquals(55, res(a, Resource.ALERTNESS));
