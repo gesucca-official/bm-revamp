@@ -1,10 +1,8 @@
 /* CA-0a: grafica minima, senza rifinitura (prototipo.md, «Fuori»). Misure della scena dalla specifica degli asset. */
-/* Font SIL OFL salvati in locale (prototipi/carriere/font, licenze accanto): dalla Fase F Russo One e due alternative per i dialoghi,
-   League Gothic per le lettere della bacheca. Fase H: via Patrick Hand («tipo Comic Sans»); pulsanti, legenda e notifiche in Russo One
-   alleggerito, i cartoncini e il «???» dei post-it in Caveat Brush, un pennarello meno tondo (da giudicare: ?cartoncini=russo li fa in Russo One). */
+/* Font SIL OFL salvati in locale (prototipi/carriere/font, licenze accanto): Russo One alleggerito per i dialoghi, i pulsanti, la legenda
+   e le notifiche; League Gothic per le lettere della bacheca; Caveat Brush, un pennarello, per i cartoncini e il «???» dei post-it. Fase K:
+   via le alternative da confrontare (Russo One pieno, Changa, Oxanium) e il confronto ?cartoncini=russo. */
 @font-face { font-family: 'Caveat Brush'; src: url('../../font/caveatbrush/CaveatBrush-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Changa'; src: url('../../font/changa/Changa-Variabile.ttf') format('truetype'); font-weight: 200 800; font-display: swap; }
-@font-face { font-family: 'Oxanium'; src: url('../../font/oxanium/Oxanium-Variabile.ttf') format('truetype'); font-weight: 200 800; font-display: swap; }
 @font-face { font-family: 'Russo One'; src: url('../../font/russoone/RussoOne-Regular.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'League Gothic'; src: url('../../font/leaguegothic/LeagueGothic-Variabile.ttf') format('truetype'); font-stretch: 75% 100%; font-display: swap; }
 :root {
@@ -203,10 +201,5 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
   .azione-bacheca button { flex: 1; }
   .cartoncino { bottom: 84px; }
 }
-.selettore-carattere { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-bottom: 16px; }
-.campione { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 8px 12px; }
-.campione small { color: var(--tenue); font-size: .75em; }
-.campione span { font-size: 21px; line-height: 1.3; background: #100b08; padding: 6px 10px; border-radius: 3px; align-self: stretch; }
 .scelta-livello { margin-bottom: 12px; }
 .scelta-livello button.scelto { border-color: var(--accento); background: #3a2c20; box-shadow: 0 0 0 2px rgba(224,164,58,.35); }
-.campione.scelto { border-color: var(--accento); background: #3a2c20; box-shadow: 0 0 0 2px rgba(224,164,58,.35); }

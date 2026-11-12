@@ -1,7 +1,7 @@
 // CA-0a, Fase G: la bacheca si muove (prototipo.md, «Fase G»). Funzioni pure del tempo e dei dati: le usa la bacheca a ogni fotogramma e
 // le provano le prove. Quattro movimenti, tutti piccoli: le cordicelle che penzolano oscillano, una lettera allentata tremola e cade (e il
 // giocatore la rimette a posto trascinandola), la puntina «sei qui» viaggia al nodo nuovo, il post-it di un nodo appena scoperto si stacca.
-import {caso, pendenza, type Pt, type Punto} from './bacheca.ts';
+import {caso, catenaria, pendenza, type Pt, type Punto} from './bacheca.ts';
 
 /** I tempi, in secondi dell'orologio della bacheca (che si ferma mentre si legge un cartoncino o la legenda). */
 export const TEMPI = {
@@ -273,3 +273,62 @@ export function strappi(seme: string, w: number, h: number): {contorno: Pt[]; pe
 
 /** Quando cominciano a cadere i pezzi di un nodo appena chiuso (secondi dopo l'apertura della bacheca), e lo scarto fra un pezzo e l'altro. */
 export const TEMPO_STRAPPI = {inizio: 0.6, scarto: 0.18};
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Fase K: il filo che resta sospeso. Il proprietario: «quando la puntina viene tolta, il filo resta lì sospeso nel nulla. O lo facciamo
+// cadere e riprendere dalla puntina rossa, o troviamo un'altra soluzione». L'unico caso: all'apertura della bacheca dopo un nodo nuovo,
+// la puntina di quel nodo si toglie per far posto alla «sei qui» che arriva in volo; le cordicelle legate lì restavano a mezz'aria finché
+// non arrivava. Ora la vecchia puntina si sfila, il capo libero di ogni cordicella cade, penzola dall'altro capo e, quando la «sei qui»
+// si pianta, torna su e la puntina rossa lo riprende. Le cordicelle arrotolate intorno a quella puntina cadono con lei e tornano con la rossa.
+
+/** I tempi del filo, in secondi: la vecchia puntina si toglie prima che parta la «sei qui»; il capo torna su in `ripresa` dopo che è arrivata. */
+export const TEMPI_FILO = {anticipo: 0.45, sfila: 0.25, ripresa: 0.4};
+/** Quando si toglie la vecchia puntina e quando la «sei qui» riprende i capi, dato quando parte il suo viaggio. */
+export const tempiFilo = (inizioViaggio: number) =>
+  ({togli: Math.max(0, inizioViaggio - TEMPI_FILO.anticipo), riprendi: inizioViaggio + TEMPI.durataViaggio});
+
+/**
+ * Le cordicelle da far cadere quando si toglie la puntina del nodo `ultimo` (il nodo d'arrivo; `da` è quello di partenza): tutte quelle
+ * legate lì, tranne quella nuova da `da` a `ultimo`, che la «sei qui» si tira dietro in volo. `fisso` è il capo che resta legato; le
+ * arrotolate attorno alla puntina tolta (`da` === ultimo) cadono intere.
+ */
+export function filiDaRiprendere<F extends {da: string; a: string; tipo: 'tesa' | 'lenta' | 'arrotolata'}>(fili: F[], ultimo: string, da: string):
+  {filo: F; fisso: 'da' | 'a' | null}[] {
+  return fili.filter(f => (f.da === ultimo || f.a === ultimo) && !(f.da === da && f.a === ultimo))
+    .filter(f => f.tipo !== 'arrotolata' || f.da === ultimo)
+    .map(f => ({filo: f, fisso: f.tipo === 'arrotolata' ? null : f.da === ultimo ? 'a' : 'da'}));
+}
+
+const lunghezza = (q: Pt[]) => q.reduce((s, p, i) => (i ? s + Math.hypot(p.x - q[i - 1].x, p.y - q[i - 1].y) : 0), 0);
+
+/**
+ * Una cordicella con un capo libero, `t` secondi dopo che la sua puntina si è tolta (`ripresa`: quando la «sei qui» è arrivata). Prima di
+ * togliere (t ≤ 0) e a ripresa finita è la catenaria fra `fisso` e `libero`; in mezzo il capo libero cade e penzola dal capo fisso come un
+ * pendolo che si smorza, la corda si raddrizza (lunga quanto era: non si allunga), poi il capo torna a `libero` e la corda riprende la sua forma.
+ * Restituisce i punti dal capo fisso al capo libero.
+ */
+export function filoPenzolante(fisso: Pt, libero: Pt, tipo: 'tesa' | 'lenta', t: number, ripresa: number, n = 18): {punti: Pt[]; distacco: number[]} {
+  const cat = (a: Pt) => catenaria(fisso, a, tipo, n);
+  if (t <= 0) return cat(libero);
+  const l = lunghezza(cat(libero).punti);
+  const d0 = Math.hypot(libero.x - fisso.x, libero.y - fisso.y) || 1;
+  const pendolo = (s: number): {capo: Pt; forma: number} => {
+    const th0 = Math.atan2(libero.x - fisso.x, libero.y - fisso.y);  // 0 = giù
+    // Lo strappo della puntina tolta dà una spinta di lato: anche un capo che era già sotto il capo fisso dondola, e si vede che è libero.
+    const w = (2 * Math.PI * s) / 1.3, spinta = (th0 >= 0 ? 1 : -1) * 0.45;
+    const th = th0 * Math.exp(-s / 0.7) * Math.cos(w) + spinta * Math.exp(-s / 0.9) * Math.sin(w);
+    const r = d0 + (l - d0) * (1 - Math.exp(-s / 0.12));
+    return {capo: {x: fisso.x + r * Math.sin(th), y: fisso.y + r * Math.cos(th)}, forma: Math.exp(-s / 0.15)};
+  };
+  const u = t <= ripresa ? 0 : Math.min(1, (t - ripresa) / TEMPI_FILO.ripresa);
+  const giu = pendolo(Math.min(t, ripresa));
+  const e = liscia(u);
+  const capo = {x: giu.capo.x + (libero.x - giu.capo.x) * e, y: giu.capo.y + (libero.y - giu.capo.y) * e};
+  const forma = u >= 1 ? 1 : giu.forma + (1 - giu.forma) * e;  // 1: la catenaria; 0: dritta, appesa
+  const c = cat(capo);
+  const punti = c.punti.map((p, i) => {
+    const k = i / n, dritto = {x: fisso.x + (capo.x - fisso.x) * k, y: fisso.y + (capo.y - fisso.y) * k};
+    return {x: dritto.x + (p.x - dritto.x) * forma, y: dritto.y + (p.y - dritto.y) * forma};
+  });
+  return {punti, distacco: c.distacco.map(x => x * forma)};
+}

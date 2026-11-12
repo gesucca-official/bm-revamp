@@ -6,13 +6,12 @@ import {nuovoAccount, nuovoGiro, vista, type Evento, type Stato} from '../motore
 import {carriere, nomeSblocco} from './dati.ts';
 import {Gioco} from './Gioco.tsx';
 import {Bacheca} from './Bacheca.tsx';
-import {useCarattere} from './font.ts';
+import {applicaCarattere} from './font.ts';
 import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
 
 // Fase F: chiave nuova, perché il predefinito è cambiato (il cast decide) e la scelta della Fase E non deve restare.
-// Fase H: ?cartoncini=russo scrive i cartoncini in Russo One invece che a pennarello, per confrontare.
-if (new URLSearchParams(window.location.search).get('cartoncini') === 'russo') document.documentElement.style.setProperty('--font-pennarello', "'Russo One', sans-serif");
+applicaCarattere();
 const CHIAVE_LIVELLO = 'bm-carriere-prototipo-v1:animazione-f';
 type Avviso = {id: number; testo: string; tipo: Evento['tipo']};
 
@@ -20,7 +19,6 @@ export function App() {
   const [nome, setNome] = useState(caricaNome);
   const [stati, setStati] = useState<Record<string, Stato>>(() => Object.fromEntries(carriere.map(c => [c.id, carica(c)])));
   const [aperta, setAperta] = useState<string | null>(null);
-  const [carattere, prossimoCarattere, scegliCarattere] = useCarattere();
   // Ritratti animati (Fase E): fermi, movimento, maglia; si sceglie nell'elenco o con «✦» nella scena e resta salvato nel browser.
   const [livello, setLivello] = useState<Livello>(() => {
     try { const l = localStorage.getItem(CHIAVE_LIVELLO); return LIVELLI.some(x => x.id === l) ? l as Livello : 'cast'; } catch { return 'cast'; }
@@ -56,7 +54,7 @@ export function App() {
   if (!c) {
     return <>
       <Elenco carriere={carriere} stati={stati} nome={nome} onNome={n => { setNome(n); salvaNome(n); }}
-        carattere={carattere.id} onCarattere={scegliCarattere} livello={livello} onLivello={setLivello}
+        livello={livello} onLivello={setLivello}
         onApri={id => { setAperta(id); setPannello('gioco'); }}
         onNuovoGiro={id => { const cc = carriere.find(x => x.id === id)!; imposta(cc, nuovoGiro(cc, stati[id].account, stati[id].giro)); setAperta(id); setPannello('mappa'); }}
         onAchievement={id => { setAperta(id); setPannello('achievement'); }}
@@ -81,7 +79,7 @@ export function App() {
     schermo = <Bacheca c={c} s={s} azione={azione} onRiprendi={() => setPannello('gioco')} onAchievement={() => setPannello('achievement')}
       onNuovoGiro={nuovo} onElenco={() => setAperta(null)} onStato={() => setStatoAperto(x => !x)} />;
   } else {
-    schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} carattere={carattere} onCarattere={prossimoCarattere} livello={livello} onLivello={prossimoLivello} onMappa={() => setPannello('mappa')}
+    schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} livello={livello} onLivello={prossimoLivello} onMappa={() => setPannello('mappa')}
       onStato={() => setStatoAperto(x => !x)} onElenco={() => setAperta(null)} onNuovoGiro={nuovo} onAchievement={() => setPannello('achievement')} />;
   }
   return <>{schermo}{stato}{avvisiDom}</>;

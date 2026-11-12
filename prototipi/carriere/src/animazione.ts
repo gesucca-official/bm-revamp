@@ -103,24 +103,25 @@ const lisca = (a: number, b: number, x: number) => { const t = Math.min(1, Math.
  */
 /**
  * Fase I («le animazioni sulla testa che oscilla distorcono un po' troppo»): ampiezze della piega più piccole e un tetto morbido. Prima la
- * somma poteva superare i 7 gradi; ora resta sotto MASSIMO_TESTA. `larga` rimette le ampiezze di prima, per confrontare (?testa=larga).
+ * somma poteva superare i 7 gradi (ampiezze 2,6, 1,1, 1,8 e 3); ora resta sotto MASSIMO_TESTA. Il confronto con ?testa=larga è tolto nella
+ * Fase K.
  */
 export const MASSIMO_TESTA = 3;
-export const AMPIEZZE_TESTA = {stretta: {parla: 1.4, quieta: 0.7, deriva: 1.0, cenno: 1.6}, larga: {parla: 2.6, quieta: 1.1, deriva: 1.8, cenno: 3}};
+export const AMPIEZZE_TESTA = {parla: 1.4, quieta: 0.7, deriva: 1.0, cenno: 1.6};
 /** Quanto gira la testa, in gradi: la somma dei moti, con il tetto morbido (si avvicina a MASSIMO_TESTA senza superarlo). */
-export function gradiTesta(t: number, parlando: boolean, daParola: number | null, larga = false): number {
-  const a = larga ? AMPIEZZE_TESTA.larga : AMPIEZZE_TESTA.stretta;
+export function gradiTesta(t: number, parlando: boolean, daParola: number | null): number {
+  const a = AMPIEZZE_TESTA;
   const cenno = daParola !== null && daParola >= 0 ? a.cenno * Math.exp(-daParola * 10) : 0;
   const g = (parlando ? a.parla * onda(t, 1.3) : a.quieta * onda(t, 3)) + a.deriva * onda(t, 4.1, 0.7) + cenno;
-  return larga ? g : MASSIMO_TESTA * Math.tanh(g / MASSIMO_TESTA);
+  return MASSIMO_TESTA * Math.tanh(g / MASSIMO_TESTA);
 }
 
-export function deforma(u: number, v: number, t: number, parlando: boolean, daParola: number | null, c: Controlli, larga = false): {u: number; v: number} {
+export function deforma(u: number, v: number, t: number, parlando: boolean, daParola: number | null, c: Controlli): {u: number; v: number} {
   // Peso della testa: pieno sopra la quota «sopra», nullo sotto «sotto», e solo vicino all'asse della testa (le spalle restano ferme).
   const wv = 1 - lisca(c.testa.sopra, c.testa.sotto, v);
   const wu = 1 - lisca(c.testa.raggio * 0.75, c.testa.raggio * 1.25, Math.abs(u - c.testa.u));
   const wTesta = wv * wu;
-  const gradi = gradiTesta(t, parlando, daParola, larga);
+  const gradi = gradiTesta(t, parlando, daParola);
   let x = u, y = v * c.aspetto;  // si ruota in pixel veri, non nelle coordinate stirate dell'immagine
   if (wTesta > 0) {
     const a = (gradi * wTesta * Math.PI) / 180, px = c.perno.u, py = c.perno.v * c.aspetto;
@@ -222,20 +223,28 @@ export function comparsa(verso: 'entra' | 'esce', t: number, lato: 1 | -1 = 1): 
 // ---------------------------------------------------------------------------------------------------------------------------------
 // Due in scena (Fase J): «quando si intramezzano le altre persone mentre Piera parla lentamente, perché dobbiamo far sparire Piera?». Al più
 // due posti: chi parla scivola a sinistra, chi ascolta entra da destra e gli resta a fianco finché dura la battuta, poi esce dal suo lato.
-// Chi è a fuoco (chi reagisce durante lo stacco, chi parla quando il testo riprende) è in piena luce e davanti; l'altro più scuro, un poco
-// più piccolo e dietro. Niente specchiature: i ritratti sono asimmetrici.
+// Fase K: «meglio con sempre a fuoco chi parla»: chi parla è in piena luce e davanti; chi reagisce, «un po' più piccolo e defilato», è più
+// scuro, dietro, più verso il bordo e con la testa più piccola di quella di chi parla (misurata sulla testa del cast, non sull'immagine:
+// Mara, inquadrata più da vicino, sembrava più grande di Piera). Niente specchiature: i ritratti sono asimmetrici.
 
 export type Posto = 'solo' | 'parla' | 'ascolta';
 /** Dove sta un posto, in larghezze del ritratto rispetto al posto da solo. In verticale i due si sovrappongono un poco. */
 export function spostamento(p: Posto, verticale: boolean): number {
   if (p === 'solo') return 0;
   if (p === 'parla') return verticale ? -0.2 : -0.28;
-  return verticale ? 0.22 : 0.72;
+  return verticale ? 0.26 : 0.95;
 }
 /** Da che lato entra ed esce un posto: chi ascolta dal suo, a destra; chi parla da solo entra da destra ed esce a sinistra. */
 export const latoDi = (p: Posto, verso: 'entra' | 'esce'): 1 | -1 => (p === 'ascolta' || verso === 'entra' ? 1 : -1);
-/** La luce e la profondità di chi è a fuoco e di chi no. */
-export const A_FUOCO = {luce: 1, scala: 1}, IN_DISPARTE = {luce: 0.7, scala: 0.95};
+/** Chi reagisce: la sua luce, e quanto è grande la sua testa rispetto a quella di chi parla. */
+export const CHI_REAGISCE = {luce: 0.7, testa: 0.8};
+/**
+ * La scala del ritratto di chi reagisce, perché la sua testa sia l'80% di quella di chi parla. Le teste si misurano dal cast (il raggio della
+ * testa nella maglia, in frazioni della larghezza del ritratto: tutti i ritratti hanno la stessa tela); senza misure, l'80% dell'immagine.
+ */
+export function scalaDiChiReagisce(testaParla?: number, testaReagisce?: number): number {
+  return testaParla && testaReagisce ? (CHI_REAGISCE.testa * testaParla) / testaReagisce : CHI_REAGISCE.testa;
+}
 /** Un valore che si avvicina a quello voluto, senza scatti: dopo `tau` secondi ha fatto i due terzi della strada. */
 export const avvicina = (attuale: number, voluto: number, dt: number, tau: number) => voluto + (attuale - voluto) * Math.exp(-Math.max(0, dt) / tau);
 /** Quanto ci mette a scivolare di posto o a passare dalla luce all'ombra (tau, in secondi, al tempo normale). */

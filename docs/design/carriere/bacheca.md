@@ -46,7 +46,8 @@ La bacheca non può disegnare linee oblique, quindi la struttura a rombi va **co
   - **esplorato in un giro passato:** lettere più ingiallite o un po' storte;
   - **escluso in questo giro:** lettere storte, una caduta in fondo alla cornice;
   - **mai visto («???»):** un **post-it** fissato con una puntina sopra lo spazio della riga, con «???» scritto a penna; è il «quello che non
-    torna» del proprietario;
+    torna» del proprietario. Dalla Fase K solo sui nodi più lontani: un nodo affrontabile subito mostra il nome anche se non lo si è mai
+    visto, e il suo post-it si stacca quando diventa affrontabile;
   - **segreto mai trovato:** niente, nemmeno il post-it;
   - **finali:** in fondo al listino, come i «piatti del giorno».
 - **Le scritte che non sono nodi** (titolo della carriera, giro, sblocchi) stanno in alto come l'intestazione del listino: «SERRAGLIO —

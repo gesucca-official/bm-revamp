@@ -241,3 +241,61 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
    - una sezione di chiusura, in questo documento, che dice cosa passa a CA-0 (formato e convertitore, controllo del grafo, banco della
      fluidità, misure della scena e della bacheca, lezioni sulle immagini e sulle bocche), cosa si butta, e cosa resta aperto: le due
      immagini del [secondo giro delle bocche](prompt-bocche.md#secondo-giro) e la prova su un telefono vero.
+
+## Chiusura
+
+12 novembre 2026, con la [Fase K](prototipo-fase-k.md), in attesa del giudizio del proprietario. Il prototipo è usa e getta: la cartella
+`prototipi/carriere/` non diventa il client. Passano a [CA-0](../../product-roadmap.md#ca--carriera-single-player) le decisioni, i
+documenti e alcuni strumenti; il resto si butta. Il dettaglio di ogni punto sta nei rapporti delle fasi, dalla
+[B](prototipo-fase-b.md) alla [K](prototipo-fase-k.md).
+
+### Cosa passa a CA-0
+
+- **Formato e convertitore.** Le storie si scrivono in markdown di regia ([regole del formato](README.md#come-si-scrivono-le-scene)):
+  battute con espressione, stacchi su chi ascolta, segni e condizioni, scelte mute, partite con ritento, sconfitte che aprono un ramo,
+  sblocchi, nodi segreti, finali, achievement con indizi progressivi. Il convertitore li porta in JSON con errori e avvisi riga per riga, e
+  la validazione controlla i dati convertiti (`src/formato.ts`, `src/converti.ts`, `src/valida.ts`). Dalla Fase J non c'è più
+  `[Entrate: …]`: si entra solo di lato.
+- **Controllo del grafo** (`src/grafo.ts`): esplora gli stati raggiungibili di un giro con le condizioni valutate davvero, gli atomi
+  dell'account come «forse», un tetto di 200 000 stati; trova vicoli ciechi, scelte vuote, sblocchi obbligatori mancanti, segreti
+  irraggiungibili, achievement e battute che non si vedono mai. È per le carriere quello che `check-rules.py` è per le carte.
+- **Banco della fluidità** (`strumenti/banco.mjs`, Fase H, con due ritratti dalla Fase J): registra scene e bacheca a frequenza piena, nei
+  due orientamenti e con la CPU 4× più lenta, e conta da solo ritratti vuoti, lampeggi, salti, veli attorno alla figura, bocche che non
+  combaciano e fotogrammi lunghi. Il metodo passa al client; il criterio è zero difetti visibili prima e dopo ogni modifica.
+- **Misure della scena:** la [specifica degli asset](specifica-asset.md#come-appare-la-scena): finestra sempre di due righe con le pagine,
+  ritratto all'85% dell'altezza in orizzontale e al 75% in verticale, l'innalzamento per personaggio, al più due in scena con chi parla a
+  fuoco e chi reagisce più piccolo (testa all'80%), più scuro e defilato.
+- **Misure e regole della bacheca:** il [concetto della bacheca](bacheca.md): lettere di plastica negli stati dei nodi, post-it solo sui
+  nodi lontani, nomi dei nodi affrontabili, puntine scelte dai dati con la «sei qui» rossa, cordicelle tese, lente o arrotolate, nodi chiusi
+  strappati, il movimento (fili, lettera allentata, puntina che viaggia, post-it che si stacca, filo che cade e si riprende, angolo, mosca,
+  lampade), sempre poco e fermo mentre si legge o con il movimento ridotto.
+- **Lezioni sulle immagini:** i ritratti si rimpiccioliscono prima alla misura della tela (la scheda grafica senza mipmap fa scintillare le
+  linee d'inchiostro); le immagini composte si preparano una volta per espressione e all'inizio del nodo; una tela WebGL pronta non si
+  nasconde più e cambia immagine con una dissolvenza di 180 ms; gli asset devono avere il fondo trasparente per davvero (un velo scuro si
+  vede appena la figura si muove); la grandezza di un personaggio si misura sulla testa del cast, non sull'immagine.
+- **Lezioni sulle bocche:** una seconda versione dello stesso ritratto con la bocca aperta, allineata a quello approvato (il lettore lo
+  controlla); se ne prende solo il colore della bocca, nella zona del cast e solo dove tutte e due le immagini sono piene, a due pixel dal
+  bordo; il ritmo è lento, circa tre cambi e mezzo al secondo, e per Piera un terzo.
+- **Lezioni sulla maglia:** un'immagine sola piegata da una maglia regge lo stile inchiostrato se la testa gira rigida e la piega sta nel
+  collo, con un tetto morbido di 3°; i punti di controllo stanno nel cast per personaggio; un fattore di tempo per personaggio (Piera 0,3)
+  rallenta tutto ciò che si muove di lui.
+- **Lezioni sulle entrate:** nessuno compare di colpo; si entra e si esce di lato, in 0,45 s (Piera 1,5 s); chi parla non esce quando
+  qualcuno reagisce, scivola di lato e fa posto; con il movimento ridotto si cambia e basta.
+
+### Cosa si butta
+
+- Il codice del lettore, della bacheca e dell'elenco (`src/ui/`, React), che il client rifarà nel suo stack; le funzioni pure del movimento
+  restano come riferimento, non come libreria.
+- Le partite simulate (Vinci, Perdi, Salta), il salvataggio in `localStorage`, `run.ps1 -Task Phone` e il pannello dello stato.
+- La mini-carriera di prova `storie/prova.md`: battute segnaposto, non una storia del gioco.
+- Gli interruttori di prova che restano nel prototipo (`?mosca`, `?angolo`, `?allenta`, `?banco`, il livello dei ritratti «✦»): servono
+  solo a provare le cose rare; quelli di confronto (`?fuoco`, `?testa=larga`, `?cartoncini=russo`, i font alternativi) sono già tolti.
+- Catture e registrazioni restano nel repository come documentazione delle fasi, non come riferimento visivo del client.
+
+### Cosa resta aperto
+
+- **Le due immagini del [secondo giro delle bocche](prompt-bocche.md#secondo-giro):** una spazienzio-furioso-bocca che combaci con il
+  ritratto approvato (oggi Spazienzio furioso parla a bocca ferma) e una mara-esasperata con il fondo trasparente per davvero (oggi il
+  lettore prende la sagoma di mara-neutra con `"alfa": {"esasperata": "neutra"}` nel cast). Il prototipo regge con e senza.
+- **La prova su un telefono vero:** tutte le misure sono di Edge sul portatile con la CPU rallentata; `run.ps1 -Task Phone` è pronto, ma
+  nessuna fase è stata giudicata da un telefono.

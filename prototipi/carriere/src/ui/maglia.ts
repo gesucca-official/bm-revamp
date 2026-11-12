@@ -101,13 +101,13 @@ export class Maglia {
   }
 
   /** Disegna al tempo t: piegata se ci sono i punti di controllo, ferma se no; con la bocca nell'altra posizione se `altra`. */
-  disegna(t: number, parlando: boolean, daParola: number | null, c: Controlli | null, altra: boolean, ora = performance.now(), larga = false) {
+  disegna(t: number, parlando: boolean, daParola: number | null, c: Controlli | null, altra: boolean, ora = performance.now()) {
     const gl = this.gl;
     if (!this.tessiture[0]) return;
     const f = Math.min(1, (ora - this.cambio) / DISSOLVENZA);
     for (let j = 0; j < RIGHE; j++) for (let i = 0; i < COLONNE; i++) {
       const u = i / (COLONNE - 1), v = j / (RIGHE - 1);
-      const q = c ? deforma(u, v, t, parlando, daParola, c, larga) : {u, v};
+      const q = c ? deforma(u, v, t, parlando, daParola, c) : {u, v};
       this.posizioni[(j * COLONNE + i) * 2] = q.u; this.posizioni[(j * COLONNE + i) * 2 + 1] = q.v;
     }
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);

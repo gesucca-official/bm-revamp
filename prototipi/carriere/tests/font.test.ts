@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {caratteriDelFont} from './cmap.ts';
-import {CARATTERI} from '../src/ui/font.ts';
+import {CARATTERE} from '../src/ui/font.ts';
 import {componi, statoBozzetto} from '../src/bacheca.ts';
 import {prova, tutorial} from './aiuto.ts';
 import type {Carriera} from '../src/formato.ts';
@@ -22,11 +22,12 @@ function testiDialogo(c: Carriera): string {
   return out.join(' ') + ' Mara Spazienzio Piera La combriccola àèéìòùÀÈÉÌÒÙ «»’…';
 }
 
-test('ogni font dei dialoghi ha tutti i caratteri delle storie, accentate comprese, e la sua licenza', () => {
+test('il font dei dialoghi ha tutti i caratteri delle storie, accentate comprese, e la sua licenza', () => {
   const usati = [...new Set([...testiDialogo(tutorial()) + testiDialogo(prova())])].filter(c => c.trim());
-  // Fase F: Russo One (pieno e alleggerito) e due alternative con l'asse del peso; gli altri font dei dialoghi sono tolti.
-  assert.deepEqual(CARATTERI.map(c => c.id), ['russo-leggero', 'russo', 'changa', 'oxanium']);
-  for (const f of CARATTERI) {
+  // Fase K: resta solo Russo One alleggerito, la scelta del proprietario; le alternative da confrontare sono tolte.
+  assert.equal(CARATTERE.id, 'russo-leggero');
+  assert.ok(CARATTERE.contorno > 0 && CARATTERE.contorno < 0.06, 'alleggerito: un contorno sottile del colore della finestra');
+  for (const f of [CARATTERE]) {
     const set = caratteriDelFont(new URL(f.file, qui));
     const mancano = usati.filter(c => !set.has(c.codePointAt(0)!));
     assert.deepEqual(mancano, [], `${f.nome}: mancano ${mancano.join(' ')}`);
@@ -36,8 +37,9 @@ test('ogni font dei dialoghi ha tutti i caratteri delle storie, accentate compre
 
 test('nella cartella dei font restano solo quelli usati, ciascuno con la sua licenza', () => {
   const cartelle = fs.readdirSync(new URL('font/', qui), {withFileTypes: true}).filter(d => d.isDirectory()).map(d => d.name).sort();
-  // Fase H: Patrick Hand tolto; Caveat Brush per i cartoncini (pennarello), League Gothic per le lettere della bacheca.
-  assert.deepEqual(cartelle, ['caveatbrush', 'changa', 'leaguegothic', 'oxanium', 'russoone']);
+  // Fase H: Patrick Hand tolto; Caveat Brush per i cartoncini (pennarello), League Gothic per le lettere della bacheca. Fase K: via Changa
+  // e Oxanium.
+  assert.deepEqual(cartelle, ['caveatbrush', 'leaguegothic', 'russoone']);
   for (const c of cartelle) assert.match(fs.readFileSync(new URL(`font/${c}/OFL.txt`, qui), 'utf8'), /SIL Open Font License, Version 1\.1/);
 });
 

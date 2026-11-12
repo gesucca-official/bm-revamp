@@ -42,11 +42,15 @@ troppo basso rispetto allo sfondo; il cast lo alza dell'8% dell'altezza dello sc
 **Due in scena (dal 12 novembre 2026, [Fase J](prototipo-fase-j.md#due-in-scena) del prototipo):** su richiesta del proprietario («perché
 dobbiamo far sparire Piera?») il modello «un ritratto per volta» diventa **al più due posti in scena**. Quando arriva uno stacco di regia su
 chi ascolta, chi parla non esce: scivola a sinistra, e chi reagisce entra da destra e le resta a fianco finché dura la battuta, poi esce dal
-suo lato. Vale per ogni stacco su chi ascolta, non solo per Piera. Chi è a fuoco (chi reagisce durante lo stacco, chi parla quando il testo
-riprende) è in piena luce e davanti; l'altro è più scuro e un poco più piccolo, dietro. Si muove solo la bocca di chi parla. In orizzontale i
-due stanno a fianco; in verticale si sovrappongono un poco. Si entra e si esce **solo di lato** (niente più entrata «da lontano» né comando
+suo lato. Vale per ogni stacco su chi ascolta, non solo per Piera. Dalla [Fase K](prototipo-fase-k.md#chi-reagisce) **chi parla è sempre a fuoco**:
+in piena luce e davanti. Chi reagisce è più scuro (70% della luce), dietro, **più piccolo e defilato**: sta verso il bordo destro e la sua
+testa è l'80% di quella di chi parla. Le teste si confrontano sulla misura del cast (il raggio della testa nella maglia, in frazioni della
+larghezza del ritratto), non sull'immagine: Mara, inquadrata più da vicino, accanto a Piera scende al 68% della sua immagine, Spazienzio
+all'80%. Si muove solo la bocca di chi parla. In orizzontale i due stanno a fianco, con spazio fra loro; in verticale si sovrappongono e
+chi reagisce si vede di tre quarti dietro chi parla. Si entra e si esce **solo di lato** (niente più entrata «da lontano» né comando
 `[Entrate: …]`). Conseguenze per gli asset: **niente specchiature** nemmeno qui (chi ascolta sta a destra con il ritratto così com'è); un
-ritratto deve leggersi anche più scuro e in parte coperto dall'altro, quindi il volto non va messo sul bordo della tela; le espressioni di chi
+ritratto deve leggersi anche più scuro, più piccolo e in parte coperto dall'altro, quindi il volto non va messo sul bordo della tela; la
+misura della testa nel cast va presa per ogni personaggio nuovo, perché è quella che decide la grandezza di chi reagisce; le espressioni di chi
 ascolta (`stacco` nel cast) sono quelle che si vedono a fianco di chi parla.
 
 ## Ritratti

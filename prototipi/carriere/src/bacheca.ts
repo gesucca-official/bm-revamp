@@ -15,7 +15,7 @@ export type Punto = {
   riga: number;
   codice: string;
   titolo: Lettera[][];          // una o due righe di lettere, già con le imperfezioni
-  postit: boolean;              // mai visto: post-it con «???» al posto delle lettere
+  postit: boolean;              // mai visto e non affrontabile subito: post-it con «???» al posto delle lettere
   freccia: boolean;             // disponibile: la freccia di plastica davanti alla riga
   corrente: boolean;            // l'ultimo nodo in cui si è stati: puntina colorata, «sei qui»
   caduta?: Lettera;             // la lettera che manca, caduta in fondo alla cornice
@@ -143,7 +143,9 @@ export function componi(c: Carriera, s: Stato, ultimo: string | null, intestazio
       id: x.id, tipo: x.fine ? 'finale' : 'nodo', stato,
       colonna: fine ?? posizione[x.id].colonna, riga: fine === undefined ? posizione[x.id].riga : 0,
       codice: x.fine ? '★' : codice(x.etichetta), titolo,
-      postit: !noto && stato !== 'corrente', freccia: stato === 'disponibile', corrente: x.id === ultimo,
+      // Fase K: un nodo affrontabile subito mostra il nome anche se non lo si è mai visto («vorrei che i nomi dei prossimi nodi affrontabili
+      // siano rivelati»); il post-it resta sui nodi più lontani, e anche su quelli raggiunti ma bloccati dalla loro condizione.
+      postit: !noto && stato !== 'corrente' && stato !== 'disponibile', freccia: stato === 'disponibile', corrente: x.id === ultimo,
       ...(caduta && noto ? {caduta} : {}), inclinazione: (caso(`postit:${x.id}`)() * 2 - 1) * 5, spillo: spilloDi(x.id, x.id === ultimo),
     });
   }

@@ -172,6 +172,22 @@ export function Puntina({id, x, y, lato, s}: {id: string; x: number; y: number; 
   return <g><OmbraPuntina x={x} y={y} r={r} s={s} />{corpo}</g>;
 }
 
+/**
+ * Fase K: una cordicella con un capo che sta per perdere la sua puntina: disegnata come quella ferma, ma con `data-penzola` al posto di
+ * `data-filo`, perché la muova il ciclo della bacheca (che la fa cadere e riprendere) e non l'oscillazione.
+ */
+export function PenzolaCordicella({a, b, tipo, rossa, seme}: {a: Pt; b: Pt; tipo: Filo['tipo']; rossa: boolean; seme: string}) {
+  const colore = rossa ? SPAGO_ROSSO : SPAGO;
+  const {d, ombra} = percorsiCordicella(catenaria(a, b, tipo));
+  return (
+    <g fill="none" strokeLinecap="round" strokeLinejoin="round" data-penzola={seme} data-tipo={tipo}>
+      <path className="ombra" d={ombra} stroke="rgba(0,0,0,.5)" strokeWidth={2.4} filter="url(#sfoca-poco)" />
+      <path className="corda" d={d} stroke={scurisci(colore, 0.35)} strokeWidth={tipo === 'tesa' ? 2.4 : 2.1} />
+      <path className="corda" d={d} stroke={colore} strokeWidth={tipo === 'tesa' ? 1.6 : 1.3} strokeDasharray="3 1.2" />
+    </g>
+  );
+}
+
 /** Un contorno chiuso come percorso SVG, spostato di (dx, dy). */
 const percorso = (q: Pt[], dx = 0, dy = 0) => 'M' + q.map(p => `${(p.x + dx).toFixed(1)},${(p.y + dy).toFixed(1)}`).join(' L') + ' Z';
 

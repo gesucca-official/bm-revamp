@@ -1,7 +1,7 @@
 // CA-0a, Fase E e F: le prove del movimento procedurale dei ritratti, della maglia, della scelta del modo dal cast e della bocca.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {A_FUOCO, avvicina, comparsa, DURATA_ENTRATA, gradiTesta, IN_DISPARTE, IN_SCENA, latoDi, MASSIMO_TESTA, SCIVOLA, spostamento,
+import {AMPIEZZE_TESTA, avvicina, CHI_REAGISCE, comparsa, DURATA_ENTRATA, gradiTesta, IN_SCENA, latoDi, MASSIMO_TESTA, scalaDiChiReagisce, SCIVOLA, spostamento,
   type Posto} from '../src/animazione.ts';
 import {componiPixel, erodi, pesoEllisse} from '../src/ui/maglia.ts';
 import {FERMA, LIVELLI, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
@@ -235,7 +235,7 @@ test('due in scena (Fase J): chi parla a sinistra, chi ascolta a destra e lì en
     // La distanza fra i due centri, in larghezze del ritratto: in orizzontale quasi a fianco, in verticale si coprono un poco.
     const d = a - p;
     if (v) assert.ok(d > 0.35 && d < 0.75, `in verticale si sovrappongono (${d})`);
-    else assert.ok(d >= 0.9 && d < 1.1, `in orizzontale stanno a fianco (${d})`);
+    else assert.ok(d > 1.1 && d < 1.4, `in orizzontale stanno a fianco, chi reagisce defilato verso il bordo (${d})`);
     assert.ok(Math.abs(p) < a, `${v}: chi parla si sposta meno di chi entra`);
   }
   assert.ok(spostamento('ascolta', true) < spostamento('ascolta', false) && spostamento('parla', true) > spostamento('parla', false),
@@ -243,9 +243,27 @@ test('due in scena (Fase J): chi parla a sinistra, chi ascolta a destra e lì en
   const lati: [Posto, 'entra' | 'esce', 1 | -1][] = [['solo', 'entra', 1], ['solo', 'esce', -1], ['parla', 'entra', 1], ['parla', 'esce', -1],
     ['ascolta', 'entra', 1], ['ascolta', 'esce', 1]];
   for (const [p, v, l] of lati) assert.equal(latoDi(p, v), l, `${p} ${v}`);
-  assert.ok(A_FUOCO.luce === 1 && A_FUOCO.scala === 1, 'chi è a fuoco è in piena luce');
-  assert.ok(IN_DISPARTE.luce > 0.55 && IN_DISPARTE.luce < 0.85, 'l\'altro più scuro, ma si vede');
-  assert.ok(IN_DISPARTE.scala < 1 && IN_DISPARTE.scala > 0.9, 'e un poco indietro');
+  assert.ok(CHI_REAGISCE.luce > 0.55 && CHI_REAGISCE.luce < 0.85, 'chi reagisce più scuro, ma si vede');
+  // Fase K: più verso il bordo di prima (Fase J: 0,72 in orizzontale, 0,22 in verticale), ma con il volto ancora dentro lo schermo verticale.
+  assert.ok(spostamento('ascolta', false) > 0.85 && spostamento('ascolta', true) > 0.24 && spostamento('ascolta', true) < 0.3, 'defilato');
+});
+
+test('chi reagisce è più piccolo di chi parla (Fase K), misurato sulla testa del cast e non sull\'immagine', () => {
+  const testa = (chi: string) => cast.personaggi[chi].animazione!.maglia!.testa.raggio;
+  assert.ok(CHI_REAGISCE.testa >= 0.7 && CHI_REAGISCE.testa <= 0.9, 'più piccolo, ma riconoscibile');
+  for (const [parla] of conRitratto) for (const [reagisce] of conRitratto) {
+    if (parla === reagisce) continue;
+    const s = scalaDiChiReagisce(testa(parla), testa(reagisce));
+    // La testa di chi reagisce, in scena, rispetto a quella di chi parla (stessa tela per tutti: la larghezza del ritratto è la stessa).
+    assert.ok(Math.abs((s * testa(reagisce)) / testa(parla) - CHI_REAGISCE.testa) < 1e-9, `${reagisce} accanto a ${parla}`);
+    assert.ok(s < 1, `${reagisce} accanto a ${parla}: più piccolo`);
+  }
+  // Mara ha la testa più grande nell'immagine (inquadrata più da vicino): accanto a Piera si rimpicciolisce più di Spazienzio.
+  assert.ok(testa('mara') > testa('piera'));
+  assert.ok(scalaDiChiReagisce(testa('piera'), testa('mara')) < scalaDiChiReagisce(testa('piera'), testa('spazienzio')));
+  assert.ok(scalaDiChiReagisce(testa('piera'), testa('mara')) < 0.75, 'Mara accanto a Piera: «troppo grande» non più');
+  assert.equal(scalaDiChiReagisce(undefined, 0.2), CHI_REAGISCE.testa, 'senza misure, l\'80% dell\'immagine');
+  assert.equal(scalaDiChiReagisce(0.2, undefined), CHI_REAGISCE.testa);
 });
 
 test('lo scivolare di posto e di luce: verso il voluto senza scatti né rimbalzi, in un tempo breve', () => {
@@ -296,12 +314,11 @@ test('la bocca composta: il colore della versione «-bocca» solo dentro la zona
 
 test('la testa più ferma (Fase I): mai oltre il tetto, meno di prima, e si muove ancora', () => {
   const stretta = campioni(t => Math.abs(gradiTesta(t, true, (t * 7) % 1)), 0, 20, 0.01);
-  const larga = campioni(t => Math.abs(gradiTesta(t, true, (t * 7) % 1, true)), 0, 20, 0.01);
   assert.ok(MASSIMO_TESTA <= 3 && Math.max(...stretta) < 3, `sotto i 3° (${Math.max(...stretta).toFixed(2)})`);
-  assert.ok(Math.max(...larga) > 6, `prima arrivava oltre i 6° (${Math.max(...larga).toFixed(2)})`);
   assert.ok(Math.max(...stretta) > 1.5, 'ma ondeggia ancora');
-  const media = (v: number[]) => v.reduce((a, b) => a + b, 0) / v.length;
-  assert.ok(media(stretta) < media(larga) * 0.6, 'in media molto meno di prima');
+  // Le ampiezze di prima della Fase I (il confronto ?testa=larga è tolto nella Fase K): ora poco più della metà.
+  const prima = {parla: 2.6, quieta: 1.1, deriva: 1.8, cenno: 3};
+  for (const k of ['parla', 'quieta', 'deriva', 'cenno'] as const) assert.ok(AMPIEZZE_TESTA[k] <= prima[k] * 0.65, `${k}: meno di prima`);
   assert.ok(Math.max(...campioni(t => Math.abs(gradiTesta(t, false, null)), 0, 20, 0.01)) < 2, 'in silenzio, meno ancora');
 });
 

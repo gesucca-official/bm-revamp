@@ -7,14 +7,12 @@
 // (senza WebGL o con i ritratti fermi) mostra solo immagini già decodificate. Le immagini composte (bocca, sagoma) si calcolano una volta
 // per espressione e restano in memoria. Il personaggio entra in scena quando il suo ritratto è pronto, nel modo voluto dalla scena.
 import {useEffect, useRef, useState} from 'react';
-import {A_FUOCO, avvicina, boccaAllineata, boccaAltra, comparsa, IN_DISPARTE, IN_SCENA, latoDi, modo as modoDi, movimento, SCIVOLA, spostamento,
+import {avvicina, boccaAllineata, boccaAltra, CHI_REAGISCE, comparsa, IN_SCENA, latoDi, modo as modoDi, movimento, SCIVOLA, spostamento,
   trasformazione, zonaBocca, FERMA, type Comparsa, type Livello, type Posto} from '../animazione.ts';
 import {cast} from './dati.ts';
 import {componiBocca, conAlfaDi, controllaComposta, differenza, Maglia, type Sorgente} from './maglia.ts';
 
 const LARGHEZZA_SU_ALTEZZA = 1024 / 1536;
-/** ?testa=larga: la piega della testa con le ampiezze di prima della Fase I, per confrontare. */
-const TESTA_LARGA = new URLSearchParams(window.location.search).get('testa') === 'larga';
 
 export function useMovimentoRidotto(): boolean {
   const [r, setR] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -66,7 +64,7 @@ export function preparaRitratto(chi: string, src: string, srcBocca: string | nul
 
 const maschera = (srcAlfa?: string | null) =>
   srcAlfa ? {maskImage: `url(${srcAlfa})`, WebkitMaskImage: `url(${srcAlfa})`, maskSize: '100% 100%', WebkitMaskSize: '100% 100%'} : {};
-/** Opacità e luce (Fase J: chi non è a fuoco è più scuro). */
+/** Opacità e luce (Fasi J e K: chi reagisce è più scuro). */
 const stile = (c: Comparsa, luce: number) => ({
   opacity: c.opacita.toFixed(3),
   filter: [c.sfoca > 0.05 ? `blur(${c.sfoca.toFixed(2)}px)` : '', luce < 0.995 ? `brightness(${luce.toFixed(3)})` : ''].filter(Boolean).join(' '),
@@ -75,11 +73,14 @@ const stile = (c: Comparsa, luce: number) => ({
 type Props = {src: string; srcBocca: string | null; /** la sagoma da cui prendere la trasparenza, se il cast la indica */ srcAlfa?: string | null; alt: string; chi: string; espressione?: string; ascolta: boolean;
   /** Il personaggio in quadro sta parlando e il testo scrive. */ parlando: boolean; ultimo?: string; parole: number;
   livello: Livello; altezza: number; alza: number;
-  /** Fase J: il posto in scena (solo, chi parla, chi ascolta), se è a fuoco, se lo schermo è verticale; il nome per le prove. */
-  posto: Posto; fuoco: boolean; verticale: boolean; testid?: string};
+  /**
+   * Fasi J e K: il posto in scena (solo, chi parla, chi reagisce: a fuoco è sempre chi parla), se lo schermo è verticale, la scala di chi
+   * reagisce (scalaDiChiReagisce); il nome per le prove.
+   */
+  posto: Posto; verticale: boolean; scala?: number; testid?: string};
 
-export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta, parlando, ultimo, parole, livello, altezza, alza, posto, fuoco, verticale,
-  testid = 'ritratto'}: Props) {
+export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta, parlando, ultimo, parole, livello, altezza, alza, posto, verticale,
+  scala = 1, testid = 'ritratto'}: Props) {
   const ridotto = useMovimentoRidotto();
   const p = cast.personaggi[chi];
   const modo = modoDi(livello, p?.animazione, espressione, ridotto);
@@ -141,7 +142,8 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
   const base = `translateX(-50%) translateY(${(-alza).toFixed(1)}px)`;
   const larghezza = altezza * LARGHEZZA_SU_ALTEZZA;
   // Fase J: dove sta e quanta luce ha; ci si arriva scivolando (Piera scivola lentissima, come si muove).
-  const voluto = {sposta: spostamento(posto, verticale), ...(fuoco ? A_FUOCO : IN_DISPARTE)};
+  const fuoco = posto !== 'ascolta';
+  const voluto = {sposta: spostamento(posto, verticale), luce: fuoco ? 1 : CHI_REAGISCE.luce, scala: fuoco ? 1 : scala};
   const ora0 = useRef(voluto);
   const vuole = useRef(voluto);
   vuole.current = voluto;
@@ -168,7 +170,7 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
       const c = inScena === null ? {...IN_SCENA, opacita: 0} : comparsa('entra', ((ora - inScena) / 1000) * f, lato);
       el.dataset.entrata = inScena === null || c !== IN_SCENA ? 'si' : 'no';  // anche mentre aspetta di entrare
       if (modo === 'fermo') { applica(c); id = requestAnimationFrame(passo); return; }
-      if (maglia.current && suTela) maglia.current.disegna(t, parla, daParola, controlli, boccaAltra(t, parla, u), ora, TESTA_LARGA);
+      if (maglia.current && suTela) maglia.current.disegna(t, parla, daParola, controlli, boccaAltra(t, parla, u), ora);
       // Il rimbalzo per il cambio d'espressione solo dopo l'entrata; con la maglia l'immagine intera fa solo quello.
       const daIngresso = inScena !== null && ingresso.current > inScena + 50 ? ((ora - ingresso.current) / 1000) * f : 1000;
       const posa = modo === 'maglia' ? movimento(undefined, 0, null, daIngresso) : movimento(ascolta ? undefined : espressione, t, daParola, daIngresso);
@@ -177,7 +179,7 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [modo, controlli, espressione, ascolta, altezza, base, larghezza, ridotto, inScena, suTela, f, lato, fuoco, posto, verticale]);
+  }, [modo, controlli, espressione, ascolta, altezza, base, larghezza, ridotto, inScena, suTela, f, lato, fuoco, posto, verticale, scala]);
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const conImmagine = modo === 'fermo' || !suTela;
@@ -195,8 +197,8 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
  * Chi esce di scena: l'ultima immagine del ritratto, che se ne va di lato dal suo posto (chi ascolta a destra, chi parla a sinistra). Un'immagine
  * semplice, senza tela: dura meno di un secondo (Piera di più). Con il movimento ridotto non c'è.
  */
-export function Uscente({src, srcAlfa, altezza, alza, posto, verticale, luce = 1, tempo = 1}: {src: string; srcAlfa?: string | null; altezza: number; alza: number;
-  posto: Posto; verticale: boolean; luce?: number;
+export function Uscente({src, srcAlfa, altezza, alza, posto, verticale, luce = 1, scala = 1, tempo = 1}: {src: string; srcAlfa?: string | null; altezza: number; alza: number;
+  posto: Posto; verticale: boolean; luce?: number; /** Fase K: chi reagisce esce piccolo com'era. */ scala?: number;
   /** Fase I: il tempo delle animazioni del personaggio (Piera esce lentissima). */ tempo?: number}) {
   const el = useRef<HTMLDivElement>(null);
   const larghezza = altezza * LARGHEZZA_SU_ALTEZZA;
@@ -207,13 +209,13 @@ export function Uscente({src, srcAlfa, altezza, alza, posto, verticale, luce = 1
     let id = 0;
     const passo = () => {
       const c = comparsa('esce', ((performance.now() - t0) / 1000) * tempo, latoDi(posto, 'esce'));
-      e.style.transform = `translateX(-50%) translateY(${(-alza).toFixed(1)}px) translate(${((c.dx + spostamento(posto, verticale)) * larghezza).toFixed(1)}px, ${(c.dy * altezza).toFixed(1)}px) scale(${c.scala.toFixed(4)})`;
+      e.style.transform = `translateX(-50%) translateY(${(-alza).toFixed(1)}px) translate(${((c.dx + spostamento(posto, verticale)) * larghezza).toFixed(1)}px, ${(c.dy * altezza).toFixed(1)}px) scale(${(c.scala * scala).toFixed(4)})`;
       Object.assign(e.style, stile(c, luce));
       if (c.opacita > 0) id = requestAnimationFrame(passo);
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [posto, verticale, alza, altezza, larghezza, luce, tempo]);
+  }, [posto, verticale, alza, altezza, larghezza, luce, scala, tempo]);
   return (
     <div ref={el} className="ritratto uscente" style={{width: larghezza, height: altezza, transform: `translateX(-50%) translateY(${(-alza).toFixed(1)}px)`}}
       data-testid="ritratto-uscente" data-uscita="si" data-src={src.split('/').pop()} aria-hidden="true">

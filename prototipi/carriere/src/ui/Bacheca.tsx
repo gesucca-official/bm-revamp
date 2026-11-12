@@ -7,14 +7,14 @@
 import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} from 'react';
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
-import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, sporco, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
-import {chiusiOra, strappi, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
+import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
+import {chiusiOra, filiDaRiprendere, filoPenzolante, strappi, tempiFilo, TEMPI_FILO, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
 import type {StatoNodo} from '../mappa.ts';
 import {nomeDi, nomeSblocco} from './dati.ts';
-import {CorniceDisegnata, Cordicella, Definizioni, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
+import {CorniceDisegnata, Cordicella, Definizioni, PenzolaCordicella, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
 import {useMovimentoRidotto} from './Ritratto.tsx';
 import {caricaBacheca, salvaBacheca} from './salvataggio.ts';
 
@@ -140,6 +140,10 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     const seme = `${f.da}>${f.a}`;
     return {seme, tipo: f.tipo, a, cat: catenaria(a, b, f.tipo), amp: ampiezzaFilo(f.tipo, Math.hypot(b.x - a.x, b.y - a.y)), ritmo: ritmo(seme), coda: ritmo(seme + ':coda')};
   }), [comp.fili, d.pos]);
+  // Fase K: le cordicelle legate alla puntina del nodo d'arrivo, che si toglie per far posto alla «sei qui»: cadono, penzolano e la «sei
+  // qui» le riprende quando arriva (movimentiBacheca.ts, filoPenzolante). Finché il viaggio non è finito le disegna il movimento.
+  const riprese = useMemo(() => !viaggioFatto && apertura.da && ultimo && d.pos[ultimo]
+    ? filiDaRiprendere(comp.fili, ultimo, apertura.da).filter(r => d.pos[r.filo.da] && d.pos[r.filo.a]) : [], [viaggioFatto, apertura.da, ultimo, comp.fili, d.pos]);
   // I post-it ancora coperti, con la loro posizione: uno di loro ogni tanto solleva un angolo.
   const angoli = useMemo(() => comp.punti.filter(n => n.postit && d.postitY[n.id] !== undefined).map(n => ({
     trasforma: `translate(${d.pos[n.id].x} ${d.postitY[n.id]}) rotate(${n.inclinazione})`, w: d.postit.w, h: d.postit.h,
@@ -204,7 +208,29 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         const filo = svg.querySelector('[data-filo-viaggio]');
         filo?.setAttribute('x2', q.x.toFixed(1)); filo?.setAttribute('y2', q.y.toFixed(1));
         filo?.setAttribute('opacity', tv < 0 ? '0' : '1');
-        if (tv >= 1) { viaggioAnnunciato = true; setViaggioFatto(true); }
+        // Fase K: la vecchia puntina del nodo d'arrivo si sfila; i capi delle sue cordicelle cadono, penzolano e tornano su quando la
+        // «sei qui» si pianta; le arrotolate cadono con la puntina e ricompaiono con la rossa.
+        const tf = tempiFilo(inizioViaggio), sfila = Math.min(1, Math.max(0, (t - tf.togli) / TEMPI_FILO.sfila));
+        const vecchia = svg.querySelector('[data-vecchia-puntina]');
+        vecchia?.setAttribute('transform', `translate(0 ${(-10 * sfila).toFixed(1)})`);
+        vecchia?.setAttribute('opacity', (1 - sfila).toFixed(2));
+        const torna = Math.min(1, Math.max(0, (t - tf.riprendi) / TEMPI_FILO.ripresa));
+        for (const r of riprese) {
+          const e = svg.querySelector<SVGGElement>(`[data-penzola="${r.filo.da}>${r.filo.a}"]`);
+          if (!e) continue;
+          if (!r.fisso) {
+            e.setAttribute('transform', `translate(0 ${(40 * sfila * (1 - torna)).toFixed(1)})`);
+            e.setAttribute('opacity', (torna > 0 ? torna : 1 - sfila).toFixed(2));
+            continue;
+          }
+          const fisso = d.pos[r.filo[r.fisso]], q = filoPenzolante(fisso, d.pos[ultimo], r.filo.tipo === 'tesa' ? 'tesa' : 'lenta', t - tf.togli, tf.riprendi - tf.togli);
+          // Dal capo «da» al capo «a», come la cordicella ferma, perché i trattini non saltino quando torna ferma.
+          const dritta = r.fisso === 'da' ? q : {punti: [...q.punti].reverse(), distacco: [...q.distacco].reverse()};
+          const pc = percorsiCordicella(dritta);
+          e.querySelectorAll('.corda').forEach(x => x.setAttribute('d', pc.d));
+          e.querySelector('.ombra')?.setAttribute('d', pc.ombra);
+        }
+        if (tv >= 1 && t >= tf.riprendi + TEMPI_FILO.ripresa) { viaggioAnnunciato = true; setViaggioFatto(true); }
       }
       // Fasi I e J: i post-it dei nodi appena chiusi. I pezzi che mancano si staccano uno dopo l'altro e cadono, girando attorno al loro
       // centro, uno da una parte e uno dall'altra.
@@ -281,7 +307,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [ridotto, fili, apertura, d, ultimo, posto, giu, gira, inizioViaggio, fineAperture, angoli, piano, schiacciata, presto, danniFatti]);
+  }, [ridotto, fili, apertura, d, ultimo, posto, giu, gira, inizioViaggio, fineAperture, angoli, piano, schiacciata, presto, danniFatti, riprese]);
 
   // Trascinare la lettera caduta: lasciata vicino al suo posto ci torna (e resta), altrove ricade in fondo.
   const punto = (ev: React.PointerEvent) => { const r = sopra.current!.getBoundingClientRect(); return {x: ev.clientX - r.left, y: ev.clientY - r.top}; };
@@ -430,8 +456,16 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
             <tspan rotate={posto.ruota.toFixed(2)}>{posto.c}</tspan>
           </text>
         )}
-        {comp.fili.filter(f => f !== filoNuovo).map(f => <Cordicella key={`${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />)}
+        {comp.fili.filter(f => f !== filoNuovo && !riprese.some(r => r.filo === f)).map(f => <Cordicella key={`${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />)}
+        {/* Fase K: le cordicelle della puntina che si toglie, mosse dal ciclo dei fotogrammi (all'inizio uguali a quelle ferme). */}
+        {riprese.map(({filo: f, fisso}) => fisso
+          ? <PenzolaCordicella key={`p-${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />
+          : <g key={`p-${f.da}>${f.a}`} data-penzola={`${f.da}>${f.a}`}><Cordicella a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`coda:${f.da}>${f.a}`} /></g>)}
         {comp.punti.filter(n => !(inViaggio && n.id === ultimo)).map(n => <Puntina key={n.id} id={n.id} x={d.pos[n.id].x} y={d.pos[n.id].y} lato={d.lato[n.id]} s={n.spillo} />)}
+        {inViaggio && ultimo && (() => {
+          const s = spilloDi(ultimo, false);
+          return <g data-vecchia-puntina><Puntina id={`${ultimo}-vecchia`} x={d.pos[ultimo].x} y={d.pos[ultimo].y} lato={latoPuntina(p, verticale, false) * SCALA[s.forma]} s={s} /></g>;
+        })()}
         {inViaggio && seiQui && (
           <g data-testid="viaggio">
             {filoNuovo && <line data-filo-viaggio x1={d.pos[apertura.da!].x} y1={d.pos[apertura.da!].y} x2={d.pos[apertura.da!].x} y2={d.pos[apertura.da!].y}
@@ -484,7 +518,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       <div className="azione-bacheca">
         {disponibili.length > 0 && (
           <button className="primario" data-testid="mappa-continua" onClick={() => entraIn(disponibili[0].id)}>
-            Continua: {disponibili[0].postit ? '???' : trovaNodo(c, disponibili[0].id).titolo}
+            Continua verso {trovaNodo(c, disponibili[0].id).titolo}
           </button>
         )}
         {corrente && <button className="primario" onClick={onRiprendi}>Riprendi: {corrente.titolo}</button>}

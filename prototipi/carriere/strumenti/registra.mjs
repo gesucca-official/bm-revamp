@@ -1,6 +1,6 @@
 // Registrazioni (CA-0a). Fase G: g-bacheca.webm, la bacheca che si muove. Fase F (quelle della Fase E, e-*.webm, restano come erano): un breve video della prima scena
 // della prova, con i tre personaggi piegati dalla maglia come vuole il cast, la finestra a due righe e, se le versioni «-bocca» dei ritratti ci
-// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=fase-j, fase-i, fase-h, bacheca o scena per una sola parte.
+// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=fase-k, bacheca o scena per una sola parte.
 // Uscita in BM_OUT, o in %TEMP%\bm-carriere-registra. Edge di sistema come le catture. Playwright registra i video con un suo ffmpeg, che qui
 // non c'è e non si scarica: i fotogrammi arrivano dallo screencast di Edge (CDP) e li codifica in webm il browser stesso (MediaRecorder).
 import {chromium} from '@playwright/test';
@@ -131,19 +131,17 @@ try {
     d.textContent = t;
   }, testo);
 
-  // Fase J: due in scena. Piera entra di lato e parla; al primo stacco scivola a sinistra e chi reagisce entra da destra e le resta a
-  // fianco (a fuoco lui durante lo stacco, lei quando riprende); un altro che reagisce prende il suo posto; a fine battuta escono. Poi i
-  // nodi chiusi con due o tre strappi e il «???» grigio.
-  if (quali === 'tutte' || quali === 'fase-j') {
+  // Fase K: chi reagisce più piccolo e defilato, sempre a fuoco chi parla; poi la bacheca: i nomi dei nodi affrontabili (anche nel
+  // pulsante), e il filo che cade, penzola e la «sei qui» riprende quando si toglie la puntina del nodo d'arrivo.
+  if (quali === 'tutte' || quali === 'fase-k') {
     const pezzi = [];
-    const pezzo = async (ctx, page, ms) => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
     {
       const {ctx, page} = await pagina('cast');
       await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
-      await didascalia(page, 'Piera entra di lato; chi reagisce le entra a fianco');
+      await didascalia(page, 'Chi reagisce: più piccolo, defilato; a fuoco chi parla');
       const r = await registra(ctx, page);
-      await page.waitForTimeout(3200);
-      for (let i = 0; i < 3; i++) { await tocca(page); await page.waitForTimeout(1700); }
+      await page.waitForTimeout(3000);
+      for (let i = 0; i < 2; i++) { await tocca(page); await page.waitForTimeout(1700); }
       pezzi.push(await r.ferma());
       await ctx.close();
     }
@@ -152,80 +150,29 @@ try {
       await tid(page, 'apri-prova').click(); await tid(page, 'mappa').waitFor(); await page.waitForTimeout(400);
       await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'opzione-0').click();
       await tid(page, 'mappa').waitFor();
-      await didascalia(page, 'Nodi chiusi: due o tre strappi, il «???» grigio');
-      await pezzo(ctx, page, 3400);
-      await ctx.close();
-    }
-    await codifica(unisci(pezzi), 'j-due-in-scena-strappi.webm');
-  }
-
-  // Fase I: la testa prima e dopo (?testa=larga rimette le ampiezze di prima), Piera lentissima, i nodi chiusi strappati o accartocciati
-  // (dalla Fase J solo strappati: rifatta oggi, questa parte mostra gli strappi nuovi).
-  if (quali === 'fase-i') {
-    const pezzi = [];
-    const pezzo = async (ctx, page, ms) => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
-    for (const [cerca, testo] of [['?testa=larga', 'Testa: prima (Fase H)'], ['', 'Testa: dopo (Fase I), piegata meno']]) {
-      const {ctx, page} = await pagina('cast', cerca);
-      await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
-      await finoA(page, 'Spazienzio', 40);
-      await didascalia(page, testo);
-      await pezzo(ctx, page, 3000);
-      await ctx.close();
-    }
-    {
-      const {ctx, page} = await pagina('cast');
-      await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
-      await didascalia(page, 'Piera: entra, si muove e parla lentissima');
-      await pezzo(ctx, page, 4500);
-      await ctx.close();
-    }
-    {
-      const {ctx, page} = await pagina('cast');
-      await tid(page, 'apri-prova').click(); await tid(page, 'mappa').waitFor(); await page.waitForTimeout(400);
-      await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'opzione-0').click();
+      await didascalia(page, 'I nodi affrontabili con il nome; «Continua verso …»');
+      let r = await registra(ctx, page);
+      await page.waitForTimeout(3000);
+      pezzi.push(await r.ferma());
+      // Si entra nelle tracce in bici e si torna alla bacheca: la «sei qui» viaggia, il filo della puntina tolta cade e viene ripreso.
+      await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click();
+      for (let i = 0; i < 6 && !(await tid(page, 'mappa').count()); i++) {
+        if (await tid(page, 'vinci').count()) await tid(page, 'vinci').click(); else if (await tid(page, 'salta').count()) await tid(page, 'salta').click();
+        await page.waitForTimeout(200);
+      }
       await tid(page, 'mappa').waitFor();
-      await didascalia(page, 'Nodi chiusi: strappati');
-      await pezzo(ctx, page, 3200);
-      await ctx.close();
-    }
-    await codifica(unisci(pezzi), 'i-testa-piera-nodi.webm');
-  }
-
-  // Fase H: entrate, stacchi e bocche nelle scene; poi la bacheca viva (post-it che si stacca, mosca, angolo di post-it).
-  if (quali === 'fase-h') {
-    const pezzi = [];
-    {
-      const {ctx, page} = await pagina('cast');
-      const pezzo = async ms => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
-      // Tutorial: la combriccola, poi Mara che entra di lato e parla (bocca).
-      await tid(page, 'apri-tutorial').click(); await tid(page, 'mappa-continua').click();
-      await page.waitForTimeout(600);
-      await pezzo(1200);
-      await finoA(page, 'Mara', 40);
-      await pezzo(3000);
-      await ctx.close();
-    }
-    {
-      // Prova: Piera che entra da lontano, gli stacchi dissolti su chi ascolta (le esasperate), Mara.
-      const {ctx, page} = await pagina('cast');
-      const pezzo = async ms => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
-      await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
-      await pezzo(2600);
-      for (let i = 0; i < 2; i++) { await tocca(page); await pezzo(1300); }
-      await ctx.close();
-    }
-    {
-      const {ctx, page} = await pagina('cast', '?mosca&angolo');
-      await tid(page, 'apri-prova').click();
-      await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'opzione-1').click();
-      await tid(page, 'mappa').waitFor();
-      const r = await registra(ctx, page);
-      await page.waitForTimeout(6500);
+      await didascalia(page, 'La puntina si toglie: il filo cade, penzola, la «sei qui» lo riprende');
+      r = await registra(ctx, page);
+      await page.waitForTimeout(4200);
       pezzi.push(await r.ferma());
       await ctx.close();
     }
-    await codifica(unisci(pezzi), 'h-scene-e-bacheca.webm');
+    await codifica(unisci(pezzi), 'k-reagisce-filo-nomi.webm');
   }
+
+  // Le registrazioni delle fasi dalla E alla J sono nel repository come erano; le loro parti sono tolte qui nella Fase K perché mostravano
+  // scelte di confronto e modi che non ci sono più (entrate da lontano, ?testa=larga, fuoco su chi reagisce). Restano la scena (Fase F) e
+  // la bacheca (Fase G).
 
   // Fase G: la bacheca che si muove. Il post-it del primo nodo che si stacca; dopo la cucina, la puntina «sei qui» che viaggia e il post-it
   // della cucina; un tocco sul feltro che scuote le cordicelle; una lettera che tremola e cade, e il giocatore che la rimette a posto.

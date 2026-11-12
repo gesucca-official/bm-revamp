@@ -14,7 +14,7 @@ test('il bozzetto è a metà giro, con tutti gli stati dei nodi', () => {
   const comp = bozzetto();
   const per = Object.fromEntries(comp.punti.map(x => [x.id, `${x.stato}${x.postit ? '+postit' : ''}${x.corrente ? '+puntina' : ''}${x.freccia ? '+freccia' : ''}`]));
   assert.deepEqual(per, {
-    'nodo-a': 'fatto', 'nodo-b': 'escluso', 'nodo-c': 'fatto+puntina', 'nodo-d': 'aperto', 'nodo-e': 'disponibile+postit+freccia',
+    'nodo-a': 'fatto', 'nodo-b': 'escluso', 'nodo-c': 'fatto+puntina', 'nodo-d': 'aperto', 'nodo-e': 'disponibile+freccia',
     'nodo-g': 'aperto', 'nodo-h': 'aperto+postit', 'fine:grappino-e-tornato': 'aperto', 'fine:grappino-scappa-di-nuovo': 'aperto+postit',
   }, 'il vicolo segreto mai trovato non c\'è, nemmeno il post-it');
   assert.ok(comp.punti.find(x => x.id === 'nodo-b')!.caduta, 'una lettera del ramo escluso è caduta in fondo alla cornice');

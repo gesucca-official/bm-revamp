@@ -60,27 +60,20 @@ async function giro(nome, viewport) {
   await page.goto(url);
   await tid('elenco').waitFor();
   await foto('01-elenco', 200);
-  // Campionario dei caratteri: la stessa battuta in ogni font (dalla Fase F Russo One, alleggerito e no, e due alternative).
-  // L'elenco scorre dentro sé stesso: per fotografare il campionario intero si allunga la finestra, poi si torna alla misura di prova.
-  await page.setViewportSize({width: viewport.width, height: 2200});
-  await page.waitForTimeout(400);
-  await tid('campionario').screenshot({path: path.join(out, `${nome}-01b-campionario.jpg`), type: 'jpeg', quality: 72});
-  await page.setViewportSize(viewport);
+  // Fase K: niente più campionario dei caratteri né «Aa»: resta Russo One alleggerito.
+  atteso(!(await tid('campionario').count()) && !(await tid('carattere').count()), 'niente scelta del carattere');
 
   // Tutorial, giro intero: perde la partita 2 e ritenta, sceglie Mara, risponde agli amici (epilogo e achievement), poi resta.
   await tid('apri-tutorial').click();
   await tid('mappa').waitFor();
+  // Fase K: il primo nodo è affrontabile: il pulsante dice dove si va, con il nome vero.
+  atteso(/^Continua verso \S/.test(await tid('mappa-continua').textContent()) && !(await tid('mappa-continua').textContent()).includes('???'), 'il nome del nodo affrontabile');
   await foto('02-mappa-inizio', 200);
   await continua();
   await foto('03-scena0-combriccola', 1500);
   for (let i = 0; i < 4; i++) await avanzaUna();
   await immagini();
   await foto('04-scena0-mara', 2600);
-  // I caratteri da confrontare (Fase F): «Aa» passa da Russo One alleggerito (il predefinito) a Russo One pieno, Changa e Oxanium, e torna.
-  atteso((await tid('carattere').textContent()).includes('Russo One alleggerito'), 'Russo One alleggerito, il predefinito');
-  for (const n of ['04b-font-russo-one', '04c-font-changa', '04d-font-oxanium']) { await tid('carattere').click(); await foto(n, 400); }
-  await tid('carattere').click();
-  atteso((await tid('carattere').textContent()).includes('Russo One alleggerito'), 'il ritorno a Russo One alleggerito');
   await salta();
   await continua();
   await salta();
@@ -177,9 +170,12 @@ async function giro(nome, viewport) {
   await tid('mappa').waitFor();
   atteso(!(await tid('ritenta').count()), 'nessun «Ritenta» dopo la sconfitta che apre un ramo');
   atteso(await statoNodo('nodo-e') === 'disponibile', 'il retrobottega disponibile dopo la sconfitta');
-  // Fase G: dalla bancone alla cucina la puntina «sei qui» viaggia, e il post-it della cucina, appena scoperta, si stacca.
+  // Fase G: dal bancone alla cucina la puntina «sei qui» viaggia. Fase K: il post-it della cucina si era già staccato quando era diventata
+  // affrontabile; ora si stacca quello del retrobottega, affrontabile dopo la sconfitta, e il filo della puntina tolta cade.
   atteso(await tid('viaggio').count() === 1, 'la puntina «sei qui» che viaggia');
-  atteso(await page.locator('[data-cade="nodo-c"]').count() === 1, 'il post-it della cucina che si stacca');
+  atteso(await page.locator('[data-cade="nodo-e"]').count() === 1, 'il post-it del retrobottega che si stacca');
+  atteso(await page.locator('[data-cade="nodo-c"]').count() === 0, 'nessun post-it sulla cucina, già col nome');
+  atteso(await page.locator('[data-vecchia-puntina]').count() === 1 && await page.locator('[data-penzola]').count() > 0, 'la puntina tolta e il filo che cade');
   atteso(await tid('mappa').getAttribute('data-movimento') === 'si', 'la bacheca che si muove');
   await foto('15-sconfitta-ramo', 300);
   await continua();
