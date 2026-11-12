@@ -198,3 +198,10 @@ Avoid: any other change to the object; a visible point, needle or shaft; a board
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| cornice | [cornice.webp](asset/bacheca/cornice.webp) | [cornice-2](asset/bacheca/registro.md#cornice-2) | |
+| tonda-rossa | [puntine/tonda-rossa.webp](asset/bacheca/puntine/tonda-rossa.webp) | [tonda-rossa-2](asset/bacheca/registro.md#tonda-rossa-2) | |
+| cilindro | [puntine/cilindro.webp](asset/bacheca/puntine/cilindro.webp) | [cilindro-2](asset/bacheca/registro.md#cilindro-2) | |
+| ottone | [puntine/ottone.webp](asset/bacheca/puntine/ottone.webp) | [ottone-2](asset/bacheca/registro.md#ottone-2) | |
+| spillo | [puntine/spillo.webp](asset/bacheca/puntine/spillo.webp) | [spillo-2](asset/bacheca/registro.md#spillo-2) | |
+| chiodino | [puntine/chiodino.webp](asset/bacheca/puntine/chiodino.webp) | [chiodino-2](asset/bacheca/registro.md#chiodino-2) | |
+| ombrello | [puntine/ombrello.webp](asset/bacheca/puntine/ombrello.webp) | [ombrello-2](asset/bacheca/registro.md#ombrello-2) | |
