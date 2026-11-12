@@ -164,3 +164,23 @@ più la 3 e la 4».
 
 Tutto si spegne con il movimento ridotto del sistema, niente si muove mentre il giocatore legge o sceglie, e il movimento non deve pesare
 sull'apertura della mappa misurata nella [Fase D](prototipo-fase-d.md#prestazioni-sul-telefono).
+
+## Fase H, fluidità, entrate e bacheca viva
+
+Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla Fase G](prototipo-fase-g.md#giudizio-del-proprietario).
+
+1. **Banco della fluidità,** come chiede il proprietario: uno strumento che registra le scene e la bacheca a frequenza piena, nei due
+   orientamenti e con la CPU rallentata, e controlla da solo i fotogrammi: fotogrammi in cui il ritratto manca o lampeggia, salti di
+   posizione, contorni scuri attorno alle figure, zona della bocca che non combacia, fotogrammi lunghi. Dà un rapporto con numeri e
+   fotogrammi incriminati, e si rilancia dopo ogni correzione finché i difetti sono a zero. Resta per CA-0, come le altre verifiche.
+2. **Bocche:** con il banco, eliminare gli sfarfallii e il contorno nero che compare in qualche fotogramma di Mara. Le due immagini da
+   rifare ([prompt](prompt-bocche.md#secondo-giro)) arrivano a parte; il prototipo deve reggere anche prima.
+3. **Entrate e uscite dei personaggi:** niente più comparse di colpo. Il personaggio entra e esce di scena da un lato o arrivando da lontano
+   (piccolo che cresce, con una leggera sfocatura che si toglie), e il cambio di espressione non deve lampeggiare. Il modo si sceglie per
+   scena con un comando di regia nel markdown, con un valore normale nel cast.
+4. **Bacheca viva:** l'achievement per chi rimette a posto le lettere si accende; si aggiungono le altre idee proposte dalla regia e
+   approvate dal proprietario: un angolo di post-it che ogni tanto si solleva e ricade, una mosca che ogni tanto passeggia sul feltro e vola
+   via (o si schiaccia) se toccata, l'ombra delle lampade del bar che scorre piano sulla bacheca. Sempre poco, mai mentre si legge o si
+   sceglie, spento con il movimento ridotto.
+5. **Font di bottoni e cartoncini:** via la scrittura a mano «tipo Comic Sans» da pulsanti, schede, legenda e notifiche; al suo posto
+   Russo One alleggerito, il font scelto per i dialoghi, oppure, per i cartoncini scritti a mano, un pennarello meno tondo, da far giudicare.

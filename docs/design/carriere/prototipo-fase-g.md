@@ -153,3 +153,18 @@ Per non disturbare il Phone del proprietario sulla 4330, le prove a mano sono st
 1. Se i movimenti sono «poco» abbastanza, o troppo, uno per uno: cordicelle, lettera, puntina, post-it.
 2. Quanto spesso si allenta una lettera (oggi una volta su due che si apre la mappa, dopo 4 s di bacheca ferma).
 3. Se accendere l'achievement per chi rimette a posto le lettere.
+
+## Giudizio del proprietario
+
+12 novembre 2026, con le sue parole:
+
+- **Bocche:** «meglio, ma ci sono ancora sfarfallii e un pezzo di contorno nero in qualche fotogramma di Mara».
+- **Entrate e uscite:** «i personaggi compaiono all'improvviso e sfarfallando, non si potrebbe farli entrare e uscire di scena in altri modi?
+  Che ne so, da un lato, o arrivando da lontano...».
+- **Fluidità:** «per diagnosticare e correggere bene questa cosa, non si potrebbe incaricare una sessione di registrare un video e farle
+  controllare e massimizzare la fluidità delle animazioni?».
+- **Bacheca:** «molto bella, le cose che abbiamo introdotto ci stanno molto bene. Mettiamo l'achievement per rimettere la lettera a posto!
+  Possiamo anche provare a implementare le altre idee».
+- **Font:** «non mi piace solo il font tipo Comic Sans delle scritte sui bottoni e sulle card».
+
+Si apre la [Fase H](prototipo.md#fase-h-fluidità-entrate-e-bacheca-viva).
