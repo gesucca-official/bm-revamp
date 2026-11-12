@@ -272,3 +272,12 @@ strumento.
 | Sergio | B | [Anteprima](identikit/prove/sergio-B-1.webp) | [Scheda](identikit/registro.md#sergio-b-1) | Scartata, ma se ne prendono i calzini spaiati |
 | Duccio | A | [Anteprima](identikit/prove/duccio-A-1.webp) | [Scheda](identikit/registro.md#duccio-a-1) | **Scelta** (12 novembre 2026), con l'aquila della B e senza i tatuaggi a cerchio con i raggi; resta il punto interrogativo |
 | Duccio | B | [Anteprima](identikit/prove/duccio-B-1.webp) | [Scheda](identikit/registro.md#duccio-b-1) | Scartata, ma se ne prende l'aquila della maglietta |
+
+### Secondo giro dei quattro
+
+| Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
+|---|---|---|---|
+| Celestina | [Anteprima](identikit/prove/celestina-2-1.webp) | [Scheda](identikit/registro.md#celestina-2-1) |  |
+| Beppe | [Anteprima](identikit/prove/beppe-2-1.webp) | [Scheda](identikit/registro.md#beppe-2-1) |  |
+| Sergio | [Anteprima](identikit/prove/sergio-2-1.webp) | [Scheda](identikit/registro.md#sergio-2-1) |  |
+| Duccio | [Anteprima](identikit/prove/duccio-2-1.webp) | [Scheda](identikit/registro.md#duccio-2-1) |  |

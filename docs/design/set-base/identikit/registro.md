@@ -772,3 +772,147 @@ The character: a young far-right blowhard around twenty-two, clearly adult, draw
 
 Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, complete and correctly drawn Celtic cross, fasces or raised-arm salute; likeness of any real politician; heroic or muscular anatomy; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
 ~~~
+
+
+## celestina-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 23:06:40 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `eb017cc` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro-dei-quattro), Celestina — tuta prugna e viso più giovane; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2882878 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/celestina-B-1.png` SHA-256 `c36883326e75e31d2facd0e065a494674eb67ff44ca99363315127a3c75790f4`; impronte verificate, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-8ba8ff16-db56-4887-a16f-a02d6cec97a3.png`, copiato senza modifiche in `prove/celestina-2-1.png` (ignorato da git); SHA-256 `5e0ff04816d65929762a3eb740ddeaa7a3d74d267423a47af13e37fff751d811` |
+| Anteprima | [WebP](prove/celestina-2-1.webp), 683×1024 px, 115958 byte; SHA-256 `f75d9c6fa4eac2dfc44358800fb6962a596aeff898eeda665c1cc1e03c2b3a7e` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Modifiche principali applicate; conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same woman, crouching pose with one hand on the floor, the wrapped sweet held up in her other hand, red hair buzzed on the sides with the longer fringe, earrings, sly sideways glance, bum bag stuffed with junk, mismatched sneakers, the cut and stripes of the baggy tracksuit, the layout of the full-body view and the close-up, art style and plain background. Change only two things, consistently in both views: first, the tracksuit is no longer green but a faded, washed-out dusty plum colour, with its stripes in worn ivory; second, her face looks younger, clearly in her early twenties, while her skin stays pale, tired and marked, with dark circles.
+
+Avoid: making her healthy or glamorous; any green or teal on her clothes; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+
+## beppe-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 23:07:19 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `eb017cc` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro-dei-quattro), Beppe — niente attrezzi in tasca; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 3118164 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/beppe-A-1.png` SHA-256 `232236b10436cfd92d0a13d8e7789413ff176a3afbcd982e21593a090288a8fa`; impronte verificate, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-02ebf817-5891-4ea2-9f52-87fbe0f6070a.png`, copiato senza modifiche in `prove/beppe-2-1.png` (ignorato da git); SHA-256 `238b9f7aba48483a9e572ca12d130ebcf8e1e9faa26b8b5761619fd1943b2d67` |
+| Anteprima | [WebP](prove/beppe-2-1.webp), 683×1024 px, 165714 byte; SHA-256 `b9fadfc9acc63408655c99e38afad668a700dbbf73bf3e41649ca335fd076fb8` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Modifiche principali applicate; conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same man, face, long beard and hair in a bun, tobacco-brown canvas bib overalls with both straps up and their grease marks, the black t-shirt with its illegible band artwork, the forearm tattoo, crossed arms, work boots, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this, in both views: remove every tool from his pockets, the tool in the chest pocket and the adjustable wrench in the side pocket; the pockets are simply flat and empty.
+
+Avoid: any readable lettering on the t-shirt or tattoo; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+
+## sergio-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 23:08:00 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `eb017cc` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro-dei-quattro), Sergio — calzini spaiati, abito petrolio, senza chiavi; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 2513974 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/sergio-A-1.png` SHA-256 `fd4f0a74f0a8ce6ad243d5ca13aba406a8633bd8ffe959cac7eb645d80bfdc70`<br>2. `docs/design/set-base/identikit/prove/sergio-B-1.png` SHA-256 `29866ae5e78f0a6e64559fea99a0304c0b98a29a25b574e35132b5e944401c69`; impronte verificate, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-fe955361-d1ab-46b6-8568-fb386f2d89cf.png`, copiato senza modifiche in `prove/sergio-2-1.png` (ignorato da git); SHA-256 `27ceebba2f27067cdcd10f2e6c2d96f50f73c7d0db7afdd962cf0c2f0c7e6cbe` |
+| Anteprima | [WebP](prove/sergio-2-1.webp), 683×1024 px, 97940 byte; SHA-256 `8a30297aeb21dfa8b8ae664c8fc2308b2218f50d22a70a75d251fafed7e4a815` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Modifiche principali applicate; conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for the socks. Keep everything else in image 1 exactly the same: the same man, face, expression, hair, the thin lit cigarette, the white shirt with the open collar, the untied shoelace, polished pointed shoes, pose, the layout of the full-body view and the close-up, art style and plain background. Change only three things, consistently in both views: first, remove the ring of keys hanging from his belt; second, his suit becomes a clearer muted petrol blue, a deep blue-green, instead of slate grey; third, between his trousers and shoes show mismatched socks like those in image 2, one with a diamond pattern and one plain dark red.
+
+Avoid: visible cigarette packets; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+
+## duccio-2-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file) | 12/11/2026 23:08:49 UTC+0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `eb017cc` |
+| Prompt | [identikit-prompt.md](../identikit-prompt.md#secondo-giro-dei-quattro), Duccio — l'aquila della B, solo il punto interrogativo; testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | verticale 2:3, 1024×1536 come esempio |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, 3060252 byte, RGB |
+| Parametri | un risultato; qualità e altri parametri non esposti |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegati effettivi in ordine | 1. `docs/design/set-base/identikit/prove/duccio-A-1.png` SHA-256 `823664888e705531a12062b4b24bcc749725e5763c442705df39a4845bdaa6ed`<br>2. `docs/design/set-base/identikit/prove/duccio-B-1.png` SHA-256 `73136775a8c5d820ff23ceb0fb4b87a5d586c745c5e17d386d7378a0b71d039a`; impronte verificate, nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-b82c0419-f4ca-4e68-9208-392e9353cf59.png`, copiato senza modifiche in `prove/duccio-2-1.png` (ignorato da git); SHA-256 `07a0170824c935625c3af8fd491a196cf6ce5efe61b12c3ffc5a9fe94ab80779` |
+| Anteprima | [WebP](prove/duccio-2-1.webp), 683×1024 px, 144770 byte; SHA-256 `6243504e08b1d8567f8e08effc7c290ff01f34a7345993482bbb0e0443c53064` |
+| Conversione | Pillow 13.0.0, Lanczos, lato lungo 1024 px, WebP qualità 80, metodo 4; senza ritaglio o ritocco; metadati non conservati |
+| Esito del tentativo | Modifiche principali applicate; conservato per il giudizio del proprietario. |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for the print on his t-shirt. Keep everything else in image 1 exactly the same: the same young man, face, shaved head, expression, heroic pose with his hand on his heart, the pink cocktail with the umbrella and the raised little finger, the black t-shirt itself, camouflage trousers and combat boots, the question-mark tattoo on his neck, the layout of the full-body view and the close-up, art style, colours and plain background. Change only two things, consistently in both views: first, replace the pigeon print on his t-shirt with the white eagle with spread wings from image 2, crudely printed, cracked and peeling, without any emblem, wreath or symbol around it; second, remove all the round tattoos with spokes from his arms and neck, leaving bare skin, and keep only the question-mark tattoo on his neck.
+
+Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, complete and correctly drawn Celtic cross, fasces or raised-arm salute; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
