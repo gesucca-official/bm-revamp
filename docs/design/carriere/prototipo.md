@@ -145,3 +145,22 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
 4. **Spazienzio in verticale** più in alto rispetto allo sfondo: misura e correzione per personaggio nel cast.
 5. **Finestra di dialogo ad altezza fissa di due righe:** le battute più lunghe si dividono in pagine da due righe, che si avanzano con un
    tocco, come nelle visual novel. La [specifica](specifica-asset.md#come-appare-la-scena) si aggiorna.
+
+## Fase G, la bacheca si muove
+
+Avviata dalla regia il 12 novembre 2026 sulla richiesta del proprietario nel [giudizio sulla Fase F](prototipo-fase-f.md#giudizio-del-proprietario)
+(«la mappa sembra un po' statica… non troppo se no disturba»), con le idee che ha scelto fra quelle proposte dalla regia: «partiamo dalle mie
+più la 3 e la 4».
+
+1. **Fili che oscillano** (idea del proprietario): un ondeggiare lento delle cordicelle che penzolano, come per la corrente della porta; si
+   agitano di più quando si tocca un nodo o quando la puntina «sei qui» si sposta. Le cordicelle tese oscillano poco o niente.
+2. **La lettera che cade** (idea del proprietario): ogni tanto una lettera allentata tremola, poi cade e finisce in fondo alla cornice; il
+   giocatore la rimette al suo posto trascinandola. Al più una lettera allentata per volta, mai durante un'azione, scelta in modo ripetibile
+   dai dati; la lettera rimessa a posto resta a posto. *Variante della regia, da confermare:* un achievement nascosto per chi le rimette a
+   posto tutte.
+3. **La puntina «sei qui» che viaggia:** quando si arriva a un nodo nuovo, la puntina rossa si stacca dal nodo di prima, passa sopra il feltro
+   con la sua ombra e si ripianta con un piccolo colpo; la cordicella nuova si tende dietro di lei.
+4. **Il post-it che si stacca:** quando si scopre un nodo «???», il suo post-it si stacca e cade, e sotto compaiono le lettere del titolo.
+
+Tutto si spegne con il movimento ridotto del sistema, niente si muove mentre il giocatore legge o sceglie, e il movimento non deve pesare
+sull'apertura della mappa misurata nella [Fase D](prototipo-fase-d.md#prestazioni-sul-telefono).

@@ -99,3 +99,9 @@ immagini.
 - [Tile-style letters with CSS](https://tympanus.net/codrops/2012/09/12/creative-web-typography-styles/comment-page-2/), Codrops, e
   [embossed text with text-shadow](https://www.sitepoint.com/using-css-text-shadow-to-create-embossed-text): una lettera per elemento,
   ombre multiple per lo spessore.
+
+## Il movimento
+
+Scelto dal proprietario il 12 novembre 2026 (Fase G del [prototipo](prototipo.md#fase-g-la-bacheca-si-muove)): fili che oscillano piano,
+una lettera allentata che tremola, cade e si rimette a posto trascinandola, la puntina «sei qui» che viaggia da un nodo all'altro, il post-it
+che si stacca quando si scopre un nodo. Poco e mai mentre si legge o si sceglie: «non troppo, se no disturba».
