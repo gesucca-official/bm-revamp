@@ -178,3 +178,8 @@ ritratto resta dietro la finestra. Mara e Piera non si muovono.
   anche fuori dalla bocca, quindi il lettore usa la maschera della bocca; da giudicare dal vivo.
 - **Mappa:** «sembra un po' statica (perché lo è). Possiamo metterci un po' di movimento? Non troppo se no disturba, ma tipo i fili che si
   agitano mentre penzolano, qualche lettera che sta per cadere e tremola, poi cade e l'utente può ritrascinarla al suo posto... cose così».
+
+**Prova delle bocche** (proprietario, 12 novembre 2026): «si muovono troppo velocemente in generale, più altri bug strani: Mara ha una
+cornice nera intorno, come se non fosse stata ritagliata bene; Piera ha artefatti strani quando muove la bocca; Spazienzio invece va bene».
+La regia ha visto che almeno  ha un fondo grigio a quadretti, semitrasparente, invece della trasparenza pulita:
+lo scontorno di quella consegna non è riuscito. Diagnosi e correzione nella sessione dell'esecutore, con la Fase G.
