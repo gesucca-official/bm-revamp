@@ -31,3 +31,15 @@ export function caricaNome(): string {
 export function salvaNome(n: string) {
   try { localStorage.setItem(PREFISSO + 'nome', n); } catch { /* niente */ }
 }
+
+/**
+ * Fase G: cosa ricorda la bacheca di una carriera dall'ultima volta che si è vista, per muoversi quando cambia: dov'era la puntina «sei qui»,
+ * quali nodi avevano il post-it, la lettera caduta (al più una) e quante ne ha rimesse a posto il giocatore. Azzera tutto la cancella.
+ */
+export type MemoriaBacheca = {seiQui: string | null; postit: string[]; caduta: {id: string; k: number} | null; rimesse: number};
+export function caricaBacheca(id: string): MemoriaBacheca | null {
+  try { const t = localStorage.getItem(`${PREFISSO}bacheca:${id}`); return t ? JSON.parse(t) as MemoriaBacheca : null; } catch { return null; }
+}
+export function salvaBacheca(id: string, m: MemoriaBacheca) {
+  try { localStorage.setItem(`${PREFISSO}bacheca:${id}`, JSON.stringify(m)); } catch { /* niente */ }
+}

@@ -1,7 +1,7 @@
 // CA-0a, Fase E e F: le prove del movimento procedurale dei ritratti, della maglia, della scelta del modo dal cast e della bocca.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {FERMA, LIVELLI, boccaAltra, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
+import {FERMA, LIVELLI, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
 import type {Cast} from '../src/formato.ts';
 import castJson from '../dati/cast.json' with {type: 'json'};
 
@@ -139,7 +139,7 @@ for (const [, p] of conRitratto) test(`la maglia di ${p.nome}: la testa si piega
 test('la bocca si alterna solo mentre il testo scrive, al ritmo delle sillabe, e si ferma sulle pause', () => {
   const alterne = campioni(t => Number(boccaAltra(t, true, 'a')), 0, 2, 0.01);
   const cambi = alterne.slice(1).filter((x, i) => x !== alterne[i]).length;
-  assert.ok(cambi >= 20 && cambi <= 28, `sei aperture al secondo, dodici cambi (${cambi} in due secondi)`);
+  assert.ok(cambi >= 6 && cambi <= 8, `tre o quattro cambi al secondo (${cambi} in due secondi)`);
   assert.ok(campioni(t => Number(boccaAltra(t, false, 'a')), 0, 2, 0.01).every(x => x === 0), 'testo fermo: bocca del ritratto');
   for (const pausa of ['.', ',', '!', '?', '…', ':']) assert.ok(campioni(t => Number(boccaAltra(t, true, pausa)), 0, 1, 0.01).every(x => x === 0), `pausa dopo «${pausa}»`);
   assert.ok(campioni(t => Number(boccaAltra(t, true, undefined)), 0, 1, 0.01).some(x => x === 1), 'all\'inizio della battuta si muove');
@@ -164,6 +164,32 @@ test('la zona della bocca: dove le due versioni differiscono, ma solo vicino all
     const b = p.bocca!, m = p.animazione!.maglia!;
     assert.ok(Math.abs(b.u - m.testa.u) < m.testa.raggio && b.v < m.testa.sopra, `${chi}: la bocca sta nella testa`);
   }
+});
+
+test('la versione «-bocca» si usa solo se è allineata al ritratto: fuori dalla bocca quasi niente deve cambiare', () => {
+  const w = 40, h = 60, z = {u: 0.5, v: 0.3, ru: 0.1, rv: 0.05};
+  const d = new Uint8Array(w * h);
+  for (let x = 18; x < 22; x++) for (let y = 17; y < 19; y++) d[y * w + x] = 200;  // la bocca
+  assert.equal(cambiatiFuoriBocca(d, w, h, z), 0);
+  assert.ok(boccaAllineata(d, w, h, z), 'cambia solo la bocca: allineata');
+  // Una riga intera spostata altrove (testa più in alto): il 2,5% dei punti fuori dalla bocca.
+  const storta = d.slice();
+  for (let x = 0; x < w; x++) storta[45 * w + x] = 200;
+  const f = cambiatiFuoriBocca(storta, w, h, z)!;
+  assert.ok(f > 0.015 && f < 0.02, `una riga su sessanta, fuori dalla bocca (${f})`);
+  assert.ok(!boccaAllineata(storta, w, h, z), 'più dell\'1%: non allineata, la bocca non si muove');
+  // Pochi punti sparsi (la compressione, un capello) restano sotto la soglia.
+  const poco = d.slice(); poco[3 * w + 3] = 200; poco[50 * w + 30] = 200;
+  assert.ok(boccaAllineata(poco, w, h, z));
+  assert.ok(boccaAllineata(new Uint8Array(w * h).fill(39), w, h, z), 'sotto la soglia di differenza non conta');
+});
+
+test('nel cast: la sagoma presa da un\'altra espressione esiste, è dello stesso personaggio e ha un ritratto vero', () => {
+  for (const [chi, p] of conRitratto) for (const [espressione, da] of Object.entries(p.alfa ?? {})) {
+    assert.ok([...p.espressioni ?? [], ...p.espressioniFuture ?? []].includes(espressione), `${chi}: ${espressione}`);
+    assert.ok(p.espressioni?.includes(da), `${chi}: la sagoma di ${espressione} viene da ${da}, un'espressione con il ritratto`);
+  }
+  assert.equal(cast.personaggi.mara.alfa?.esasperata, 'neutra', 'mara-esasperata ha il fondo sporco: la sagoma di neutra');
 });
 
 test('nel cast: chi ascolta Piera ha un\'espressione esasperata prevista, Spazienzio sta più in alto in verticale', () => {

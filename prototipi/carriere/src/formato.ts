@@ -137,7 +137,9 @@ export type Cast = {
   // alzare il ritratto in verticale, in frazioni dell'altezza dello schermo).
   personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[]; espressioniFuture?: string[];
     velocita?: number; ritratto?: string; sprite?: string; animazione?: AnimazioneCast; bocca?: ZonaBocca; stacco?: string;
-    verticale?: {alza: number}}>;
+    verticale?: {alza: number};
+    // Fase G: per un'espressione consegnata con il fondo sporco, l'espressione dello stesso personaggio da cui prendere la trasparenza.
+    alfa?: Record<string, string>}>;
   // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
   sfondi: Record<string, {file: string; varianti?: Record<string, string>;
     insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;

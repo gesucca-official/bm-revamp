@@ -35,6 +35,12 @@ export function ritrattoBocca(chi: string, espressione?: string): string | null 
   const rel = relRitratto(chi, espressione)?.replace(/\.webp$/, '-bocca.webp');
   return rel ? file[RADICE + rel] ?? null : null;
 }
+/** Fase G: la sagoma da cui prendere la trasparenza di un ritratto consegnato con il fondo sporco (cast, «alfa»), se c'è. */
+export function ritrattoAlfa(chi: string, espressione?: string): string | null {
+  const da = espressione ? cast.personaggi[chi]?.alfa?.[espressione] : undefined;
+  const rel = da ? relRitratto(chi, da) : null;
+  return rel ? file[RADICE + rel] ?? null : null;
+}
 /**
  * Fase F: l'espressione di chi ascolta Piera durante uno stacco. Il cast ne indica una apposta (le esasperate); finché il suo ritratto
  * non c'è si usa quella scritta nella storia (neutra, quasi calmo).

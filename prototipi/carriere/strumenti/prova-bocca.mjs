@@ -1,67 +1,89 @@
-// Prova della bocca (CA-0a, Fase F) finché le versioni «-bocca» dei ritratti non ci sono: con il server di sviluppo acceso (run.ps1 -Task
-// Dev), prende un ritratto vero, ne fa una seconda versione finta (bocca scurita come se fosse aperta, e in più gli occhi cambiati, come
-// farebbe uno strumento che non tiene ferma l'immagine), e fa girare la stessa catena del lettore: differenza, zona della bocca, maschera.
-// Controlla che la versione usata cambi solo attorno alla bocca e salva un foglio: originale, finta, usata, differenza.
-// Uso: node strumenti/prova-bocca.mjs <uscita.jpg> [ritratto, per esempio spazienzio-serio]
+// Prova delle bocche (CA-0a, Fasi F e G), con il server di sviluppo acceso (run.ps1 -Task Dev; porta in BM_PORT, 4330 se manca).
+// Per ogni ritratto con la sua versione «-bocca» fa girare la stessa catena del lettore (differenza dentro la sagoma, zona della bocca,
+// versione usata con la trasparenza del ritratto approvato) e controlla che la versione usata cambi solo dentro la zona della bocca e abbia
+// esattamente la trasparenza del ritratto approvato. Se un ritratto non ha la versione «-bocca», ne fa una finta (bocca scurita e una macchia
+// sugli occhi, come la Fase F). Salva un foglio: originale, versione consegnata (su fondo magenta, per vedere il fondo sporco), usata, zona.
+// Uso: node strumenti/prova-bocca.mjs <uscita.jpg> [ritratti, per esempio piera-offesa,mara-contenta; tutti se manca]
 import {chromium} from '@playwright/test';
+import fs from 'node:fs';
 
-const [out, nome = 'spazienzio-serio'] = process.argv.slice(2);
-const chi = nome.split('-')[0];
+const [out, quali] = process.argv.slice(2);
+const porta = Number(process.env.BM_PORT ?? 4330);
+const R = 'C:/_simone/claude/bm-revamp-on-laptop/docs/design/carriere/asset/tutorial/ritratti/';
+const tutti = fs.readdirSync(R).filter(f => f.endsWith('.webp') && !f.endsWith('-bocca.webp') && !f.includes('esasperat')).map(f => f.replace('.webp', ''));
+const ritratti = quali ? quali.split(',') : tutti;
 const browser = await chromium.launch({channel: 'msedge'});
-const scadenza = setTimeout(() => { console.error('prova-bocca: tempo scaduto'); process.exit(1); }, 60_000);
+const scadenza = setTimeout(() => { console.error('prova-bocca: tempo scaduto'); process.exit(1); }, 180_000);
+let rosso = false;
 try {
   const page = await browser.newPage({viewport: {width: 1300, height: 560}});
-  await page.goto('http://127.0.0.1:4330/');
-  const esito = await page.evaluate(async ([nome, chi]) => {
-    const {zonaBocca} = await import('/src/animazione.ts');
+  await page.goto(`http://127.0.0.1:${porta}/`);
+  const esiti = await page.evaluate(async ([ritratti, R]) => {
+    const {boccaAllineata, cambiatiFuoriBocca, zonaBocca} = await import('/src/animazione.ts');
     const {componiBocca, differenza} = await import('/src/ui/maglia.ts');
     const cast = (await import('/dati/cast.json')).default;
     const carica = src => { const i = new Image(); i.src = src; return i.decode().then(() => i); };
-    const base = await carica(`/@fs/C:/_simone/claude/bm-revamp-on-laptop/docs/design/carriere/asset/tutorial/ritratti/${nome}.webp`);
-    const w = base.naturalWidth, h = base.naturalHeight, b = cast.personaggi[chi].bocca;
-    // La versione finta: un'ellisse scura sulla bocca del cast e una macchia sugli occhi.
-    const finta = Object.assign(document.createElement('canvas'), {width: w, height: h});
-    const g = finta.getContext('2d');
-    g.drawImage(base, 0, 0);
-    g.fillStyle = '#3a0c0c';
-    g.beginPath(); g.ellipse(b.u * w, (b.v + 0.01) * h, b.ru * w * 0.45, b.rv * h * 0.4, 0, 0, Math.PI * 2); g.fill();
-    g.fillStyle = 'rgba(0,120,255,.6)';
-    g.fillRect(b.u * w - 120, (b.v - 0.12) * h, 240, 40);
-    const fintaImg = await carica(finta.toDataURL('image/png'));
-    const zona = zonaBocca(differenza(base, fintaImg), 128, 192, b);
-    const usata = componiBocca(base, fintaImg, zona);
-    // Dove la versione usata differisce dall'originale: deve stare tutto attorno alla bocca.
-    const usataImg = await carica(usata.toDataURL('image/png'));
-    const d = differenza(base, usataImg, 128, 192);
-    let fuori = 0, dentro = 0;
-    for (let y = 0; y < 192; y++) for (let x = 0; x < 128; x++) {
-      if (d[y * 128 + x] < 40) continue;
-      const u = (x + 0.5) / 128, v = (y + 0.5) / 192;
-      if (((u - zona.u) / zona.ru) ** 2 + ((v - zona.v) / zona.rv) ** 2 <= 1.05) dentro++; else fuori++;
+    const url = n => `/@fs/${R}${n}.webp`;
+    const pixel = s => { const c = Object.assign(document.createElement('canvas'), {width: 1024, height: 1536}); const g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(s, 0, 0, 1024, 1536); return g.getImageData(0, 0, 1024, 1536).data; };
+    const fogli = [], righe = [];
+    for (const nome of ritratti) {
+      const chi = nome.split('-')[0], b = cast.personaggi[chi].bocca;
+      const base = await carica(url(nome));
+      let bocca = await carica(url(nome + '-bocca')).catch(() => null), finta = false;
+      if (!bocca) {
+        finta = true;
+        const c = Object.assign(document.createElement('canvas'), {width: 1024, height: 1536}), g = c.getContext('2d');
+        g.drawImage(base, 0, 0);
+        g.fillStyle = '#3a0c0c'; g.beginPath(); g.ellipse(b.u * 1024, (b.v + 0.01) * 1536, b.ru * 1024 * 0.45, b.rv * 1536 * 0.4, 0, 0, Math.PI * 2); g.fill();
+        g.fillStyle = 'rgba(0,120,255,.6)'; g.fillRect(b.u * 1024 - 120, (b.v - 0.12) * 1536, 240, 40);
+        bocca = await carica(c.toDataURL('image/png'));
+      }
+      const diff = differenza(base, bocca), scarto = cambiatiFuoriBocca(diff, 128, 192, b);
+      if (!boccaAllineata(diff, 128, 192, b)) { righe.push({nome, finta, zona: null, storta: true, scarto}); continue; }
+      const zona = zonaBocca(diff, 128, 192, b);
+      if (!zona) { righe.push({nome, finta, zona: null}); continue; }
+      const usata = componiBocca(base, bocca, zona);
+      // Controlli sui pixel: fuori dall'ellisse niente cambia; la trasparenza è identica a quella del ritratto approvato.
+      const pb = pixel(base), pu = pixel(usata);
+      let fuori = 0, alfa = 0;
+      for (let y = 0; y < 1536; y += 2) for (let x = 0; x < 1024; x += 2) {
+        const k = (y * 1024 + x) * 4, u = x / 1024, v = y / 1536;
+        alfa = Math.max(alfa, Math.abs(pb[k + 3] - pu[k + 3]));
+        const d = Math.max(Math.abs(pb[k] - pu[k]), Math.abs(pb[k + 1] - pu[k + 1]), Math.abs(pb[k + 2] - pu[k + 2]));
+        if (d > 3 && ((u - zona.u) / zona.ru) ** 2 + ((v - zona.v) / zona.rv) ** 2 > 1.01) fuori++;
+      }
+      righe.push({nome, finta, zona, fuori, alfa, scarto});
+      // Foglio: ritagli attorno alla bocca.
+      const f = Object.assign(document.createElement('canvas'), {width: 1290, height: 330}), g = f.getContext('2d');
+      g.fillStyle = '#16100c'; g.fillRect(0, 0, 1290, 330);
+      const t = [Math.max(0, (b.u - 0.22) * 1024), Math.max(0, (b.v - 0.14) * 1536), 0.44 * 1024, 0.28 * 1536];
+      const pannello = (img, i, fondo) => {
+        g.fillStyle = fondo; g.fillRect(8 + i * 320, 24, 310, 300);
+        g.drawImage(img, t[0], t[1], t[2], t[3], 8 + i * 320, 24, 310, 300 * 0 + 310 * t[3] / t[2] > 300 ? 300 : 310 * t[3] / t[2]);
+      };
+      pannello(base, 0, '#16100c'); pannello(bocca, 1, '#f0f'); pannello(usata, 2, '#16100c');
+      const z = Object.assign(document.createElement('canvas'), {width: 1024, height: 1536}), zg = z.getContext('2d');
+      zg.drawImage(usata, 0, 0); zg.strokeStyle = '#0f0'; zg.lineWidth = 4; zg.beginPath(); zg.ellipse(zona.u * 1024, zona.v * 1536, zona.ru * 1024, zona.rv * 1536, 0, 0, Math.PI * 2); zg.stroke();
+      pannello(z, 3, '#16100c');
+      g.fillStyle = '#eadbc4'; g.font = '14px sans-serif';
+      ['originale: ' + nome, finta ? 'versione finta (manca la -bocca)' : 'versione consegnata, su magenta', 'usata dal lettore', 'zona della bocca'].forEach((s, i) => g.fillText(s, 12 + i * 320, 17));
+      fogli.push(f.toDataURL('image/jpeg', 0.82));
     }
-    // Il foglio: originale, finta, usata, differenza (in rosso), ritagliati sulla testa.
-    const foglio = Object.assign(document.createElement('canvas'), {width: 1280, height: 520});
-    const f = foglio.getContext('2d');
-    f.fillStyle = '#16100c'; f.fillRect(0, 0, 1280, 520);
-    const taglio = [Math.max(0, (b.u - 0.25) * w), Math.max(0, (b.v - 0.25) * h), 0.5 * w, 0.5 * h * 1.0];
-    const mappa = Object.assign(document.createElement('canvas'), {width: 128, height: 192});
-    const mg = mappa.getContext('2d'), dati = mg.createImageData(128, 192);
-    for (let k = 0; k < d.length; k++) { dati.data[k * 4] = d[k] >= 40 ? 255 : 30; dati.data[k * 4 + 3] = 255; }
-    mg.putImageData(dati, 0, 0);
-    [base, finta, usata, mappa].forEach((img, i) => {
-      const s = img === mappa ? 128 / w : 1;
-      f.drawImage(img, taglio[0] * s, taglio[1] * s, taglio[2] * s, taglio[3] * s, 8 + i * 318, 30, 310, 310 * taglio[3] / taglio[2]);
-      f.fillStyle = '#eadbc4'; f.font = '15px sans-serif';
-      f.fillText(['originale', 'finta: bocca e occhi cambiati', 'usata: solo la bocca', 'dove cambia la usata'][i], 12 + i * 318, 20);
-    });
-    return {zona, dentro, fuori, foglio: foglio.toDataURL('image/jpeg', 0.85)};
-  }, [nome, chi]);
-  const fs = await import('node:fs');
-  fs.writeFileSync(out, Buffer.from(esito.foglio.split(',')[1], 'base64'));
-  const z = esito.zona;
-  console.log(`${nome}: zona della bocca u ${z.u.toFixed(3)} v ${z.v.toFixed(3)} (${z.ru.toFixed(3)} × ${z.rv.toFixed(3)}); celle cambiate dentro ${esito.dentro}, fuori ${esito.fuori}`);
-  if (!esito.dentro || esito.fuori) { console.error('prova-bocca: la versione usata cambia fuori dalla bocca, o non cambia'); process.exitCode = 1; }
+    // I fogli uno sotto l'altro.
+    const tutti = Object.assign(document.createElement('canvas'), {width: 1290, height: 330 * fogli.length}), tg = tutti.getContext('2d');
+    for (let i = 0; i < fogli.length; i++) tg.drawImage(await carica(fogli[i]), 0, i * 330);
+    return {righe, foglio: tutti.toDataURL('image/jpeg', 0.8)};
+  }, [ritratti, R]);
+  fs.writeFileSync(out, Buffer.from(esiti.foglio.split(',')[1], 'base64'));
+  for (const r of esiti.righe) {
+    if (r.storta) { console.log(`${r.nome}: la versione «-bocca» non è allineata al ritratto (${(r.scarto * 100).toFixed(1)}% dei punti cambia fuori dalla bocca): il lettore non la usa`); continue; }
+    if (!r.zona) { console.log(`${r.nome}: nessuna zona della bocca trovata${r.finta ? ' (versione finta)' : ''}`); rosso = true; continue; }
+    const z = r.zona, buono = r.fuori === 0 && r.alfa <= 1;
+    rosso ||= !buono;
+    console.log(`${r.nome}${r.finta ? ' (finta)' : ''}: zona u ${z.u.toFixed(3)} v ${z.v.toFixed(3)} (${z.ru.toFixed(3)} × ${z.rv.toFixed(3)}); pixel cambiati fuori ${r.fuori}; scarto di trasparenza ${r.alfa}; cambia fuori dalla bocca il ${(r.scarto * 100).toFixed(1)}%${buono ? '' : '  <-- NO'}`);
+  }
 } finally {
   clearTimeout(scadenza);
   await browser.close();
 }
+process.exitCode = rosso ? 1 : 0;

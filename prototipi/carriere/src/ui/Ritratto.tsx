@@ -3,9 +3,9 @@
 // preferenza di movimento ridotto del sistema resta tutto fermo, bocca compresa. Fase F: se c'è la versione «-bocca» del ritratto, mentre
 // il testo scorre la bocca si apre e si chiude (solo la zona della bocca, presa con una maschera).
 import {useEffect, useRef, useState} from 'react';
-import {boccaAltra, modo as modoDi, movimento, trasformazione, zonaBocca, FERMA, type Livello} from '../animazione.ts';
+import {boccaAllineata, boccaAltra, modo as modoDi, movimento, trasformazione, zonaBocca, FERMA, type Livello} from '../animazione.ts';
 import {cast} from './dati.ts';
-import {componiBocca, differenza, Maglia} from './maglia.ts';
+import {componiBocca, conAlfaDi, differenza, Maglia} from './maglia.ts';
 
 const LARGHEZZA_SU_ALTEZZA = 1024 / 1536;
 
@@ -22,11 +22,11 @@ export function useMovimentoRidotto(): boolean {
 
 const carica = (src: string) => { const i = new Image(); i.src = src; return i.decode().then(() => i); };
 
-type Props = {src: string; srcBocca: string | null; alt: string; chi: string; espressione?: string; ascolta: boolean;
+type Props = {src: string; srcBocca: string | null; /** la sagoma da cui prendere la trasparenza, se il cast la indica */ srcAlfa?: string | null; alt: string; chi: string; espressione?: string; ascolta: boolean;
   /** Il personaggio in quadro sta parlando e il testo scrive. */ parlando: boolean; ultimo?: string; parole: number;
   livello: Livello; altezza: number; alza: number};
 
-export function Ritratto({src, srcBocca, alt, chi, espressione, ascolta, parlando, ultimo, parole, livello, altezza, alza}: Props) {
+export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta, parlando, ultimo, parole, livello, altezza, alza}: Props) {
   const ridotto = useMovimentoRidotto();
   const p = cast.personaggi[chi];
   const modo = modoDi(livello, p?.animazione, espressione, ridotto);
@@ -55,11 +55,14 @@ export function Ritratto({src, srcBocca, alt, chi, espressione, ascolta, parland
     if (modo === 'fermo' || !tela.current) return;
     const t = tela.current;
     let vivo = true;
-    Promise.all([carica(src), srcBocca ? carica(srcBocca).catch(() => null) : Promise.resolve(null)]).then(([base, bocca]) => {
+    Promise.all([carica(src), srcBocca ? carica(srcBocca).catch(() => null) : Promise.resolve(null), srcAlfa ? carica(srcAlfa).catch(() => null) : Promise.resolve(null)])
+      .then(([img, bocca, sagoma]) => {
       if (!vivo) return;
+      const base = sagoma ? conAlfaDi(img, sagoma) : img;
       let altra: HTMLCanvasElement | null = null;
       if (bocca && p?.bocca) {
-        const z = zonaBocca(differenza(base, bocca), 128, 192, p.bocca);
+        const diff = differenza(base, bocca);
+        const z = boccaAllineata(diff, 128, 192, p.bocca) ? zonaBocca(diff, 128, 192, p.bocca) : null;
         if (z) altra = componiBocca(base, bocca, z);
       }
       maglia.current ??= Maglia.crea(t);
@@ -68,7 +71,7 @@ export function Ritratto({src, srcBocca, alt, chi, espressione, ascolta, parland
       setPronta(maglia.current ? src : null);
     }).catch(() => { /* resta l'immagine */ });
     return () => { vivo = false; };
-  }, [modo, src, srcBocca, p]);
+  }, [modo, src, srcBocca, srcAlfa, p]);
   // La tela se ne va con il modo fermo: si libera il suo contesto.
   useEffect(() => { if (modo === 'fermo') { maglia.current?.chiudi(); maglia.current = null; setPronta(null); } }, [modo]);
   useEffect(() => () => { maglia.current?.chiudi(); maglia.current = null; }, []);
@@ -99,7 +102,7 @@ export function Ritratto({src, srcBocca, alt, chi, espressione, ascolta, parland
   return (
     <div ref={scatola} className={`ritratto${ascolta ? ' ascolta' : ''}`} style={{width: w, height: altezza}} data-testid="ritratto"
       data-modo={modo} data-bocca={conBocca && suTela ? 'si' : 'no'} role="img" aria-label={alt}>
-      <img src={src} alt="" style={{visibility: suTela ? 'hidden' : 'visible'}} />
+      <img src={src} alt="" style={{visibility: suTela ? 'hidden' : 'visible', ...(srcAlfa ? {maskImage: `url(${srcAlfa})`, WebkitMaskImage: `url(${srcAlfa})`, maskSize: '100% 100%', WebkitMaskSize: '100% 100%'} : {})}} />
       {modo !== 'fermo' && <canvas ref={tela} data-testid="ritratto-tela" width={Math.round(w * dpr)} height={Math.round(altezza * dpr)}
         style={{visibility: suTela ? 'visible' : 'hidden'}} />}
     </div>

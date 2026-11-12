@@ -16,7 +16,7 @@ fs.mkdirSync(out, {recursive: true});
 
 const server = spawn(process.execPath, [path.join(radice, 'node_modules/vite/bin/vite.js'), 'preview', '--strictPort'], {cwd: radice, stdio: 'ignore'});
 let browser;
-const scadenza = setTimeout(() => { console.error('catture: tempo scaduto'); fine(1); }, 240_000);
+const scadenza = setTimeout(() => { console.error('catture: tempo scaduto'); fine(1); }, 420_000);
 async function fine(codice) {
   clearTimeout(scadenza);
   try { await browser?.close(); } catch { /* niente */ }
@@ -42,6 +42,8 @@ async function giro(nome, viewport) {
   const tid = id => page.getByTestId(id);
   const foto = async (n, attesa = 600) => {
     await page.waitForTimeout(attesa);
+    // Fase G: sulla bacheca si fotografa a movimenti d'apertura finiti (post-it che si stacca, puntina che viaggia).
+    if (await tid('mappa').count()) await page.waitForFunction(() => !document.querySelector('[data-testid=viaggio], [data-cade]'), null, {timeout: 6000});
     await page.screenshot({path: path.join(out, `${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
   };
   const immagini = () => page.waitForFunction(() => [...document.images].every(i => i.complete && i.naturalWidth > 0));
@@ -172,6 +174,10 @@ async function giro(nome, viewport) {
   await tid('mappa').waitFor();
   atteso(!(await tid('ritenta').count()), 'nessun «Ritenta» dopo la sconfitta che apre un ramo');
   atteso(await statoNodo('nodo-e') === 'disponibile', 'il retrobottega disponibile dopo la sconfitta');
+  // Fase G: dalla bancone alla cucina la puntina «sei qui» viaggia, e il post-it della cucina, appena scoperta, si stacca.
+  atteso(await tid('viaggio').count() === 1, 'la puntina «sei qui» che viaggia');
+  atteso(await page.locator('[data-cade="nodo-c"]').count() === 1, 'il post-it della cucina che si stacca');
+  atteso(await tid('mappa').getAttribute('data-movimento') === 'si', 'la bacheca che si muove');
   await foto('15-sconfitta-ramo', 300);
   await continua();
   await salta();

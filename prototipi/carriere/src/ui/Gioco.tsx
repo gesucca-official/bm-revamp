@@ -2,7 +2,7 @@
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import type {Carriera} from '../formato.ts';
 import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
-import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoBocca, sfondo, sprite} from './dati.ts';
+import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
 import {pagine, useTesto} from './testo.ts';
 import type {Carattere} from './font.ts';
 import {Ritratto} from './Ritratto.tsx';
@@ -133,7 +133,7 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
-      {volto && <Ritratto src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
+      {volto && <Ritratto src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} srcAlfa={ritrattoAlfa(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
         espressione={inQuadro!.espressione} ascolta={!!t.ascolta} parlando={parla} ultimo={testoPieno[t.scritti - 1]} parole={parole}
         livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={alza} />}
 

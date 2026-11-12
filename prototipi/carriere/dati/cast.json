@@ -8,6 +8,7 @@
       "velocita": 1.2,
       "ritratto": "ritratti/mara-{espressione}.webp",
       "stacco": "esasperata",
+      "alfa": {"esasperata": "neutra"},
       "animazione": {"modo": "maglia",
         "maglia": {"perno": {"u": 0.55, "v": 0.5}, "testa": {"u": 0.55, "raggio": 0.2, "sopra": 0.4, "sotto": 0.5}, "busto": {"da": 0.52, "a": 0.9}, "aspetto": 1.5}},
       "bocca": {"u": 0.64, "v": 0.3, "ru": 0.09, "rv": 0.06}

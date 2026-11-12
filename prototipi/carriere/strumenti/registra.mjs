@@ -1,6 +1,6 @@
-// Registrazioni dei ritratti animati (CA-0a, Fase F; quelle della Fase E, e-*.webm, restano come erano): un breve video della prima scena
+// Registrazioni (CA-0a). Fase G: g-bacheca.webm, la bacheca che si muove. Fase F (quelle della Fase E, e-*.webm, restano come erano): un breve video della prima scena
 // della prova, con i tre personaggi piegati dalla maglia come vuole il cast, la finestra a due righe e, se le versioni «-bocca» dei ritratti ci
-// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs
+// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=bacheca o scena per una sola parte.
 // Uscita in BM_OUT, o in %TEMP%\bm-carriere-registra. Edge di sistema come le catture. Playwright registra i video con un suo ffmpeg, che qui
 // non c'è e non si scarica: i fotogrammi arrivano dallo screencast di Edge (CDP) e li codifica in webm il browser stesso (MediaRecorder).
 import {chromium} from '@playwright/test';
@@ -39,12 +39,12 @@ async function attendiServer() {
 }
 
 /** Apre il prototipo con un livello di animazione già scelto. */
-async function pagina(livello) {
+async function pagina(livello, cerca = '') {
   const ctx = await browser.newContext({viewport: MISURA, deviceScaleFactor: 1});
   const page = await ctx.newPage();
   page.setDefaultTimeout(8000);
   await page.addInitScript(([k, l]) => localStorage.setItem(k, l), [CHIAVE, livello]);
-  await page.goto(url);
+  await page.goto(url + cerca);
   return {ctx, page};
 }
 /** Comincia a raccogliere i fotogrammi della pagina (jpeg con l'istante in secondi); `ferma` li restituisce. */
@@ -112,9 +112,55 @@ try {
   await attendiServer();
   browser = await chromium.launch({channel: 'msedge'});
 
+  // Quali registrazioni: BM_REGISTRA=scena (Fase F), bacheca (Fase G), o tutte.
+  const quali = process.env.BM_REGISTRA ?? 'tutte';
+  const unisci = pezzi => {
+    const tutti = [];
+    for (const p of pezzi) { const sposta = (tutti.at(-1)?.t ?? p[0].t) + (tutti.length ? 0.05 : 0) - p[0].t; tutti.push(...p.map(f => ({...f, t: f.t + sposta}))); }
+    return tutti;
+  };
+
+  // Fase G: la bacheca che si muove. Il post-it del primo nodo che si stacca; dopo la cucina, la puntina «sei qui» che viaggia e il post-it
+  // della cucina; un tocco sul feltro che scuote le cordicelle; una lettera che tremola e cade, e il giocatore che la rimette a posto.
+  if (quali !== 'scena') {
+    const {ctx, page} = await pagina('cast', '?allenta');
+    const pezzi = [];
+    // Un pezzo di registrazione; con `foto`, anche una cattura dopo `a` millisecondi (per il rapporto).
+    const pezzo = async (ms, foto, a = 0) => {
+      const r = await registra(ctx, page);
+      if (foto) { await page.waitForTimeout(a); await page.screenshot({path: path.join(out, foto), type: 'jpeg', quality: 80}); }
+      await page.waitForTimeout(ms - a);
+      pezzi.push(await r.ferma());
+    };
+    await tid(page, 'apri-prova').click();
+    await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'opzione-1').click();
+    await tid(page, 'mappa').waitFor();
+    await pezzo(2300, 'g-postit.jpg', 850);                // il post-it del bancone si stacca
+    await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'perdi').click();
+    await tid(page, 'mappa').waitFor();
+    await pezzo(3400, 'g-viaggio.jpg', 2500);              // post-it della cucina, poi la puntina che viaggia
+    await page.mouse.click(MISURA.width * 0.7, MISURA.height * 0.85);  // un tocco sul feltro
+    await pezzo(1800);
+    await page.waitForTimeout(1500);                       // la bacheca resta ferma un poco (non registrato)
+    await pezzo(3600);                                     // la lettera tremola e cade
+    await tid(page, 'presa-lettera').waitFor();
+    await page.screenshot({path: path.join(out, 'g-lettera.jpg'), type: 'jpeg', quality: 80});
+    const l = await tid(page, 'lettera-caduta').evaluate(e => ({x: +e.getAttribute('x'), y: +e.getAttribute('y'), fs: +e.getAttribute('font-size')}));
+    const c = await tid(page, 'presa-lettera').evaluate(e => ({x: +e.getAttribute('cx'), y: +e.getAttribute('cy')}));
+    const r = await registra(ctx, page);
+    await page.waitForTimeout(300);
+    await page.mouse.move(c.x, c.y); await page.mouse.down();
+    await page.mouse.move(l.x + l.fs * 0.2 + 2, l.y - l.fs * 0.35 - 1, {steps: 30});
+    await page.mouse.up();
+    await page.waitForTimeout(1200);
+    pezzi.push(await r.ferma());
+    await ctx.close();
+    await codifica(unisci(pezzi), 'g-bacheca.webm');
+  }
+
   // 1. La prima scena della prova: Piera (con gli stacchi su chi ascolta), Mara, Spazienzio; ciascuno parla qualche secondo.
   const video = bocche.length ? 'f-bocche.webm' : 'f-scena.webm';
-  {
+  if (quali !== 'bacheca') {
     const {ctx, page} = await pagina('cast');
     await tid(page, 'apri-prova').click();
     await tid(page, 'mappa-continua').click();
@@ -135,6 +181,7 @@ try {
   }
 
   // 2. Fotogrammi: otto istanti di ciascuno dei tre mentre parla, ritagliati sul ritratto, in un foglio solo.
+  if (quali !== 'bacheca') {
   const righe = [];
   for (const chi of ['Piera', 'Mara', 'Spazienzio']) {
     const {ctx, page} = await pagina('cast');
@@ -160,6 +207,7 @@ try {
   await foglio.waitForFunction(() => [...document.images].every(i => i.complete));
   await foglio.locator('body').screenshot({path: path.join(out, 'f-fotogrammi.jpg'), type: 'jpeg', quality: 78});
   console.log(bocche.length ? `bocche: ${bocche.length} ritratti` : 'bocche: nessuna versione «-bocca» ancora');
+  }
 
   console.log(`registrazioni in ${out}`);
   await fine(0);

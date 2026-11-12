@@ -152,6 +152,11 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 /* Fase D: la mappa come bacheca a lettere (bacheca.md) */
 .bacheca { position: fixed; inset: 0; background: #2a1c10; overflow: hidden; }
 .bacheca svg { display: block; position: absolute; inset: 0; }
+/* Fase G: lo strato che si muove (cordicelle, puntine, aree, pezzi in movimento) in un livello suo, così non ridisegna il feltro. */
+.bacheca .sopra { will-change: transform; }
+.bacheca .presa { cursor: grab; touch-action: none; }
+.bacheca .premio-lettere { position: absolute; left: 50%; top: 18%; transform: translateX(-50%) rotate(-2deg); background: #f6df6e; color: #233a8f;
+  font-family: 'Patrick Hand', cursive; font-size: 22px; padding: 10px 18px; box-shadow: 0 6px 16px rgba(0,0,0,.5); pointer-events: none; }
 .bacheca .lettere { font-family: 'League Gothic', 'Arial Narrow', sans-serif; letter-spacing: .06em; }
 .bacheca .penna { font-family: 'Patrick Hand', cursive; fill: #233a8f; }
 .bacheca .area { cursor: pointer; }

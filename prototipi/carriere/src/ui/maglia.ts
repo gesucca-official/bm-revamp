@@ -95,16 +95,20 @@ export class Maglia {
   chiudi() { this.gl.getExtension('WEBGL_lose_context')?.loseContext(); }
 }
 
+const misure = (s: Sorgente) => s instanceof HTMLImageElement ? {w: s.naturalWidth, h: s.naturalHeight} : {w: s.width, h: s.height};
+
 /**
  * La versione con la bocca da usare: il ritratto con, dentro un'ellisse sfumata attorno alla zona dove le due versioni differiscono,
- * i pixel della versione «-bocca». Fuori dalla bocca resta sempre il ritratto approvato, anche se la seconda versione cambia altrove.
- * `zona` la trova il chiamante (zonaBocca, sulla differenza delle due immagini).
+ * il colore della versione «-bocca». Fuori dalla bocca resta sempre il ritratto approvato, anche se la seconda versione cambia altrove.
+ * Fase G (prova del proprietario): la trasparenza è sempre quella del ritratto approvato (si disegna «sopra» le sue sole parti piene),
+ * perché molte versioni «-bocca» hanno un velo scuro al posto del fondo trasparente. `zona` la trova il chiamante (zonaBocca, sulla
+ * differenza delle due immagini).
  */
-export function componiBocca(base: HTMLImageElement, bocca: HTMLImageElement, zona: {u: number; v: number; ru: number; rv: number}): HTMLCanvasElement {
-  const w = base.naturalWidth, h = base.naturalHeight;
+export function componiBocca(base: Sorgente, bocca: Sorgente, zona: {u: number; v: number; ru: number; rv: number}): HTMLCanvasElement {
+  const {w, h} = misure(base);
   const tela = Object.assign(document.createElement('canvas'), {width: w, height: h});
   const g = tela.getContext('2d')!;
-  // La maschera: un'ellisse piena al centro e sfumata sul bordo.
+  // La maschera: un'ellisse piena al centro e sfumata sul bordo, riempita con la versione «-bocca».
   const maschera = Object.assign(document.createElement('canvas'), {width: w, height: h});
   const m = maschera.getContext('2d')!;
   m.translate(zona.u * w, zona.v * h);
@@ -116,14 +120,32 @@ export function componiBocca(base: HTMLImageElement, bocca: HTMLImageElement, zo
   m.setTransform(1, 0, 0, 1, 0, 0);
   m.globalCompositeOperation = 'source-in';
   m.drawImage(bocca, 0, 0, w, h);
-  g.drawImage(base, 0, 0);
+  g.drawImage(base, 0, 0, w, h);
+  g.globalCompositeOperation = 'source-atop';  // solo dove il ritratto approvato è pieno: la sua trasparenza resta
   g.drawImage(maschera, 0, 0);
   return tela;
 }
 
-/** La differenza fra due immagini su una griglia piccola (w×h), 0–255: serve a trovare dove cambia la bocca. */
-export function differenza(a: HTMLImageElement, b: HTMLImageElement, w = 128, h = 192): Uint8Array {
-  const leggi = (img: HTMLImageElement) => {
+/**
+ * Un ritratto con la trasparenza presa da un altro dello stesso personaggio, con la stessa sagoma (il cast lo dice: «alfa»). Per le
+ * espressioni consegnate con un velo scuro al posto del fondo trasparente (mara-esasperata), finché non si rifà lo scontorno.
+ */
+export function conAlfaDi(img: Sorgente, sagoma: Sorgente): HTMLCanvasElement {
+  const {w, h} = misure(img);
+  const tela = Object.assign(document.createElement('canvas'), {width: w, height: h});
+  const g = tela.getContext('2d')!;
+  g.drawImage(img, 0, 0, w, h);
+  g.globalCompositeOperation = 'destination-in';
+  g.drawImage(sagoma, 0, 0, w, h);
+  return tela;
+}
+
+/**
+ * La differenza fra due immagini su una griglia piccola (w×h), 0–255: serve a trovare dove cambia la bocca. Conta solo dentro la sagoma
+ * del ritratto approvato e solo il colore: un fondo sporco nella seconda versione non deve allargare la zona della bocca.
+ */
+export function differenza(a: Sorgente, b: Sorgente, w = 128, h = 192): Uint8Array {
+  const leggi = (img: Sorgente) => {
     const c = Object.assign(document.createElement('canvas'), {width: w, height: h});
     const g = c.getContext('2d', {willReadFrequently: true})!;
     g.drawImage(img, 0, 0, w, h);
@@ -131,7 +153,8 @@ export function differenza(a: HTMLImageElement, b: HTMLImageElement, w = 128, h 
   };
   const da = leggi(a), db = leggi(b), out = new Uint8Array(w * h);
   for (let k = 0; k < w * h; k++) {
-    out[k] = Math.max(Math.abs(da[k * 4] - db[k * 4]), Math.abs(da[k * 4 + 1] - db[k * 4 + 1]), Math.abs(da[k * 4 + 2] - db[k * 4 + 2]), Math.abs(da[k * 4 + 3] - db[k * 4 + 3]));
+    if (da[k * 4 + 3] < 250) continue;
+    out[k] = Math.max(Math.abs(da[k * 4] - db[k * 4]), Math.abs(da[k * 4 + 1] - db[k * 4 + 1]), Math.abs(da[k * 4 + 2] - db[k * 4 + 2]));
   }
   return out;
 }

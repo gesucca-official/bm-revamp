@@ -29,14 +29,15 @@ const scurisci = (hex: string, t: number) => {
 const idColore = (hex: string) => `ricolora-${hex.slice(1)}`;
 
 /** Una riga di lettere di plastica, ciascuna con la sua rotazione, il suo scarto e il suo colore; il filtro dà rilievo e lucido. */
-export function Riga({lettere, x, y, fs, ancora = 'start'}: {lettere: Lettera[]; x: number; y: number; fs: number; ancora?: 'start' | 'middle'}) {
+export function Riga({lettere, x, y, fs, ancora = 'start', nascosta, riga}: {lettere: Lettera[]; x: number; y: number; fs: number;
+  ancora?: 'start' | 'middle'; /** Fase G: la lettera che si è allentata (la disegna la bacheca, sopra) */ nascosta?: number; riga?: string}) {
   let prima = 0;
   return (
-    <text x={x} y={y} fontSize={fs} textAnchor={ancora} className="lettere" filter="url(#plastica)">
+    <text x={x} y={y} fontSize={fs} textAnchor={ancora} className="lettere" filter="url(#plastica)" data-riga={riga}>
       {lettere.map((l, i) => {
         const dy = (l.dy - prima) * fs;
         prima = l.dy;
-        return <tspan key={i} dy={dy.toFixed(2)} rotate={l.ruota.toFixed(2)} fill={l.manca ? 'transparent' : l.colore}>{l.c === ' ' ? ' ' : l.c}</tspan>;
+        return <tspan key={i} dy={dy.toFixed(2)} rotate={l.ruota.toFixed(2)} fill={l.manca || i === nascosta ? 'transparent' : l.colore}>{l.c === ' ' ? ' ' : l.c}</tspan>;
       })}
     </text>
   );
@@ -187,31 +188,40 @@ export function Postit({x, y, w, h, ruota, fs}: {x: number; y: number; w: number
  */
 export function Cordicella({a, b, tipo, rossa, seme}: {a: Pt; b: Pt; tipo: Filo['tipo']; rossa: boolean; seme: string}) {
   const colore = rossa ? SPAGO_ROSSO : SPAGO;
+  // data-filo: la bacheca la ritrova per farla oscillare (Fase G), ricalcolando i percorsi con percorsiCordicella.
   if (tipo === 'arrotolata') {
     const r = caso(seme);
     const giri = [0, 1, 2].map(i => `M${a.x - 7 + i},${a.y} a${7 - i},${4 + r() * 2} 0 1 0 ${14 - 2 * i},0 a${7 - i},${4 + r() * 2} 0 1 0 ${-(14 - 2 * i)},0`).join(' ');
     const dx = b.x - a.x, l = Math.hypot(dx, b.y - a.y) || 1;
     const coda = `M${a.x},${a.y} q${(dx / l) * 10},${20} ${(dx / l) * 6 + 2},${42 + r() * 12}`;
     return (
-      <g fill="none">
-        <path d={coda} stroke="rgba(0,0,0,.45)" strokeWidth={2} transform="translate(3 4)" filter="url(#sfoca-poco)" />
-        <g stroke={colore} strokeWidth={1.5}><path d={giri} /><path d={coda} /></g>
+      <g fill="none" data-filo={seme} data-tipo="arrotolata" data-ax={a.x} data-ay={a.y}>
+        <path d={giri} stroke={colore} strokeWidth={1.5} />
+        <g className="coda">
+          <path d={coda} stroke="rgba(0,0,0,.45)" strokeWidth={2} transform="translate(3 4)" filter="url(#sfoca-poco)" />
+          <path d={coda} stroke={colore} strokeWidth={1.5} />
+        </g>
       </g>
     );
   }
-  const {punti, distacco} = catenaria(a, b, tipo);
-  const d = 'M' + punti.map(q => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' L');
-  const ombra = 'M' + punti.map((q, i) => {
-    const o = 2 + distacco[i] * 7;  // l'ombra si allontana dove la corda si stacca di più dal feltro
-    return `${(q.x + LUCE.x * o).toFixed(1)},${(q.y + LUCE.y * o).toFixed(1)}`;
-  }).join(' L');
+  const {d, ombra} = percorsiCordicella(catenaria(a, b, tipo));
   return (
-    <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <path d={ombra} stroke="rgba(0,0,0,.5)" strokeWidth={2.4} filter="url(#sfoca-poco)" />
-      <path d={d} stroke={scurisci(colore, 0.35)} strokeWidth={tipo === 'tesa' ? 2.4 : 2.1} />
-      <path d={d} stroke={colore} strokeWidth={tipo === 'tesa' ? 1.6 : 1.3} strokeDasharray="3 1.2" />
+    <g fill="none" strokeLinecap="round" strokeLinejoin="round" data-filo={seme} data-tipo={tipo}>
+      <path className="ombra" d={ombra} stroke="rgba(0,0,0,.5)" strokeWidth={2.4} filter="url(#sfoca-poco)" />
+      <path className="corda" d={d} stroke={scurisci(colore, 0.35)} strokeWidth={tipo === 'tesa' ? 2.4 : 2.1} />
+      <path className="corda" d={d} stroke={colore} strokeWidth={tipo === 'tesa' ? 1.6 : 1.3} strokeDasharray="3 1.2" />
     </g>
   );
+}
+
+/** I percorsi di una cordicella (la corda e la sua ombra) dai suoi punti; l'ombra si allontana dove la corda si stacca di più dal feltro. */
+export function percorsiCordicella({punti, distacco}: {punti: Pt[]; distacco: number[]}): {d: string; ombra: string} {
+  const d = 'M' + punti.map(q => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' L');
+  const ombra = 'M' + punti.map((q, i) => {
+    const o = 2 + distacco[i] * 7;
+    return `${(q.x + LUCE.x * o).toFixed(1)},${(q.y + LUCE.y * o).toFixed(1)}`;
+  }).join(' L');
+  return {d, ombra};
 }
 
 /** Sporco del feltro, in posizioni fisse decise dai dati (bacheca.ts, `sporco`): misure in frazioni del pannello. */

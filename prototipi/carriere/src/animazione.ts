@@ -126,8 +126,11 @@ export function deforma(u: number, v: number, t: number, parlando: boolean, daPa
 // ---------------------------------------------------------------------------------------------------------------------------------
 // Bocca (Fase F): il ritratto si alterna con la sua versione «-bocca» mentre il testo scorre.
 
-/** Quante volte al secondo la bocca si apre e si chiude mentre il testo scrive: circa il ritmo delle sillabe. */
-export const SILLABE_AL_SECONDO = 6;
+/**
+ * Quante volte al secondo la bocca si apre (e si chiude) mentre il testo scrive. Fase G, prova del proprietario: «si muovono troppo
+ * velocemente»; prima sei, ora meno di due: circa tre cambi e mezzo al secondo, il ritmo delle parole più che delle sillabe.
+ */
+export const SILLABE_AL_SECONDO = 1.75;
 /**
  * La bocca è nell'altra posizione (la versione «-bocca») al tempo t? Solo mentre il testo scrive, a mezzi periodi alterni; ferma su una
  * pausa (dopo virgola, punto, puntini) e quando il testo si ferma, così fra le frasi resta il ritratto approvato.
@@ -153,4 +156,26 @@ export function zonaBocca(diff: ArrayLike<number>, w: number, h: number, z: Zona
   if (u0 > u1) return null;
   // L'ellisse che contiene il riquadro (semiassi per √2), più un margine di mezza cella.
   return {u: (u0 + u1) / 2, v: (v0 + v1) / 2, ru: ((u1 - u0) / 2) * Math.SQRT2 + 1 / w, rv: ((v1 - v0) / 2) * Math.SQRT2 + 1 / h};
+}
+
+/**
+ * Fase G: la versione «-bocca» è allineata al ritratto? Fuori dalla zona dove si cerca la bocca, dentro la sagoma, le due immagini devono
+ * essere quasi uguali; se più dell'1% dei punti cambia (sulla griglia piccola), la seconda versione è spostata o ridimensionata (spazienzio-furioso, 1,5%; le altre al più 0,3%) e la bocca che
+ * se ne prenderebbe non combacia: meglio non muoverla. `diff` è quella di `differenza` (0 fuori dalla sagoma).
+ */
+export function boccaAllineata(diff: ArrayLike<number>, w: number, h: number, z: ZonaBocca, soglia = 40, massimo = 0.01): boolean {
+  const f = cambiatiFuoriBocca(diff, w, h, z, soglia);
+  return f !== null && f <= massimo;
+}
+/** La frazione dei punti della sagoma, fuori dalla zona della bocca, che cambiano fra le due versioni (null se non ce ne sono). */
+export function cambiatiFuoriBocca(diff: ArrayLike<number>, w: number, h: number, z: ZonaBocca, soglia = 40): number | null {
+  let fuori = 0, cambiati = 0;
+  const ru = z.ru * 1.5, rv = z.rv * 1.5;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const u = (x + 0.5) / w, v = (y + 0.5) / h;
+    if (((u - z.u) / ru) ** 2 + ((v - z.v) / rv) ** 2 <= 1) continue;
+    fuori++;
+    if (diff[y * w + x] >= soglia) cambiati++;
+  }
+  return fuori > 0 ? cambiati / fuori : null;
 }
