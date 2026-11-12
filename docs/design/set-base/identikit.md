@@ -179,18 +179,24 @@ proprietario segreto del Serraglio ([flavour](flavour.md#cesira-la-malalingua--b
 varie parti del corpo; testa rasata ma con un minimo di ricrescita, già un po' stempiato nonostante sia giovane; maglietta nera a mezze
 maniche con un simbolo simile a un'aquila bianca; si atteggia a vero uomo, pieno di onore, gloria e amore per la patria, però si comporta da
 perfetto ipocrita e non se ne accorge; gli piacciono i cocktail dolci ed estremamente femminili. Dal
-[flavour](flavour.md#concept-visivi-per-sb-32): «stile estremamente ridicolo e satirico; niente simboli troppo espliciti».
+[flavour](flavour.md#concept-visivi-per-sb-32): «stile estremamente ridicolo e satirico; niente simboli troppo espliciti». Dopo le prime
+varianti (stesso giorno): «a una delle croci celtiche di duccio potrebbe mancare un pezzo, facendola assomigliare a un punto interrogativo
+ma rendendola cmq simile».
 
 **I simboli, scelta della regia da confermare.** Tatuaggi e aquila alludono ai simboli veri senza esserlo, e la satira sta nel fatto che gli
 sono venuti male. Tre ragioni: la regola del proprietario sullo stile di Duccio; i simboli veri, o troppo somiglianti, possono dare problemi
 nei negozi delle app e in alcuni paesi; lo strumento di generazione li bloccherebbe quasi certamente, come ha bloccato Spazienzio per molto
-meno. La croce celtica vera è quindi fra le cose da evitare in entrambe le varianti.
+meno. La croce celtica vera e completa è quindi fra le cose da evitare in entrambe le varianti. Il tatuaggio a punto interrogativo del
+proprietario sta dentro questa regola: somiglia alla croce, ma il pezzo che manca la rende un'altra cosa, e la battuta è proprio quella.
 
 *Varianti della regia, da provare:*
 
 - **Età apparente:** sui ventidue anni, chiaramente adulto.
 - **Corpo:** tarchiato e molle, pancetta, braccia corte; gonfia il petto, ma sotto non c'è niente.
-- **Tatuaggi:** (A) cerchi con troppi raggi storti, venuti così male da sembrare pizze tagliate a spicchi o ruote di bicicletta; (B) il
+- **Il tatuaggio più grosso,** sul collo, in entrambe le varianti (idea del proprietario): un cerchio con una croce dentro a cui il
+  tatuatore ha lasciato fuori un pezzo, la metà sinistra del cerchio e il braccio sinistro, mentre la punta del braccio in basso è staccata
+  e sembra un puntino. Ne viene fuori un punto interrogativo che somiglia ancora a quello che voleva farsi.
+- **Gli altri tatuaggi:** (A) cerchi con troppi raggi storti, venuti così male da sembrare pizze tagliate a spicchi o ruote di bicicletta; (B) il
   repertorio da guerriero di bancarella: un elmo antico, una spada, una corona d'alloro, un leone, tutti fatti male.
 - **Maglietta:** nera a mezze maniche, un po' stretta sulla pancia; (A) una grande aquila bianca stilizzata, venuta fuori un piccione
   impettito; (B) un'aquila bianca generica ad ali aperte, stampata male e screpolata.
@@ -199,7 +205,7 @@ meno. La croce celtica vera è quindi fra le cose da evitare in entrambe le vari
 - **Oggetto:** il cocktail dolce, rosa, con l'ombrellino di carta, la ciliegina e la cannuccia a spirale, tenuto col mignolo alzato.
 - **Postura e gesti:** (A) posa eroica e solenne, mento alto, sguardo fiero all'orizzonte, mano sul cuore, e nell'altra mano il cocktail;
   (B) beato a occhi chiusi mentre succhia dalla cannuccia, e intanto gonfia il petto e mostra un bicipite che non c'è.
-- **Mai nelle immagini:** saluti a braccio teso (basta il cognome), bandiere, rune, svastiche, fasci, croci celtiche vere, scritte.
+- **Mai nelle immagini:** saluti a braccio teso (basta il cognome), bandiere, rune, svastiche, fasci, croci celtiche vere e complete, scritte.
 
 ## Esiti delle prove
 

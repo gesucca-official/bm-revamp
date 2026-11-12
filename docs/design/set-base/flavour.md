@@ -187,7 +187,8 @@ quello della scheda finché SB-18 non decide altro.
   della scheda: paga le mosse con la propria salute e incassa.)
 - **Aspetto:** ragazzetto tarchiato ma non particolarmente muscoloso; testa rasata con un minimo di ricrescita, già un po' stempiato
   nonostante sia giovane; tatuaggi simili a croci celtiche su varie parti del corpo; maglietta nera a mezze maniche con un simbolo simile a
-  un'aquila bianca (proprietario, 12 novembre 2026). Come rendere i simboli nelle immagini è
+  un'aquila bianca (proprietario, 12 novembre 2026). A una delle croci manca un pezzo, e sembra un punto interrogativo pur restando simile
+  (proprietario, stesso giorno). Come rendere i simboli nelle immagini è
   nell'[identikit](identikit.md#duccio-braccio-teso).
 - **Battute:** —
 - **Rapporti con gli altri:** —
