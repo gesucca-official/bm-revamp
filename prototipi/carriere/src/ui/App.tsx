@@ -10,7 +10,8 @@ import {useCarattere} from './font.ts';
 import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
 
-const CHIAVE_LIVELLO = 'bm-carriere-prototipo-v1:animazione';
+// Fase F: chiave nuova, perché il predefinito è cambiato (il cast decide) e la scelta della Fase E non deve restare.
+const CHIAVE_LIVELLO = 'bm-carriere-prototipo-v1:animazione-f';
 type Avviso = {id: number; testo: string; tipo: Evento['tipo']};
 
 export function App() {
@@ -20,7 +21,7 @@ export function App() {
   const [carattere, prossimoCarattere, scegliCarattere] = useCarattere();
   // Ritratti animati (Fase E): fermi, movimento, maglia; si sceglie nell'elenco o con «✦» nella scena e resta salvato nel browser.
   const [livello, setLivello] = useState<Livello>(() => {
-    try { const l = localStorage.getItem(CHIAVE_LIVELLO); return LIVELLI.some(x => x.id === l) ? l as Livello : 'movimento'; } catch { return 'movimento'; }
+    try { const l = localStorage.getItem(CHIAVE_LIVELLO); return LIVELLI.some(x => x.id === l) ? l as Livello : 'cast'; } catch { return 'cast'; }
   });
   useEffect(() => { try { localStorage.setItem(CHIAVE_LIVELLO, livello); } catch { /* niente */ } }, [livello]);
   const prossimoLivello = () => setLivello(x => LIVELLI[(LIVELLI.findIndex(l => l.id === x) + 1) % LIVELLI.length].id);

@@ -1,5 +1,6 @@
-// Registrazioni dei ritratti animati (CA-0a, Fase E): due brevi video e una striscia di fotogrammi, per far vedere i due livelli
-// (movimento procedurale per tutti, maglia su Spazienzio) a chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs
+// Registrazioni dei ritratti animati (CA-0a, Fase F; quelle della Fase E, e-*.webm, restano come erano): un breve video della prima scena
+// della prova, con i tre personaggi piegati dalla maglia come vuole il cast, la finestra a due righe e, se le versioni «-bocca» dei ritratti ci
+// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs
 // Uscita in BM_OUT, o in %TEMP%\bm-carriere-registra. Edge di sistema come le catture. Playwright registra i video con un suo ffmpeg, che qui
 // non c'è e non si scarica: i fotogrammi arrivano dallo screencast di Edge (CDP) e li codifica in webm il browser stesso (MediaRecorder).
 import {chromium} from '@playwright/test';
@@ -13,7 +14,9 @@ const radice = path.resolve(qui, '..');
 const out = process.env.BM_OUT || path.join(os.tmpdir(), 'bm-carriere-registra');
 const porta = Number(process.env.BM_PREVIEW_PORT ?? 4331);
 const url = `http://127.0.0.1:${porta}/`;
-const CHIAVE = 'bm-carriere-prototipo-v1:animazione';
+const CHIAVE = 'bm-carriere-prototipo-v1:animazione-f';
+const RITRATTI = path.resolve(radice, '../../docs/design/carriere/asset/tutorial/ritratti');
+const bocche = fs.readdirSync(RITRATTI).filter(f => f.endsWith('-bocca.webp'));
 const MISURA = {width: 960, height: 540};
 fs.mkdirSync(out, {recursive: true});
 
@@ -109,68 +112,54 @@ try {
   await attendiServer();
   browser = await chromium.launch({channel: 'msedge'});
 
-  // 1. Movimento: la scena 0 del tutorial, la combriccola che entra e Mara «agitata» (scatti), con il sobbalzo a ogni parola.
+  // 1. La prima scena della prova: Piera (con gli stacchi su chi ascolta), Mara, Spazienzio; ciascuno parla qualche secondo.
+  const video = bocche.length ? 'f-bocche.webm' : 'f-scena.webm';
   {
-    const {ctx, page} = await pagina('movimento');
-    await tid(page, 'apri-tutorial').click();
-    await tid(page, 'mappa-continua').click();
-    await page.waitForTimeout(400);
-    const r = await registra(ctx, page);
-    await finoA(page, 'Mara');
-    await page.waitForTimeout(1200);
-    for (let i = 0; i < 3; i++) { await tocca(page); await page.waitForTimeout(1800); }
-    await page.waitForTimeout(1500);
-    const f = await r.ferma();
-    await ctx.close();
-    await codifica(f, 'e-movimento.webm');
-  }
-
-  // 2. Maglia: la prima scena della prova; Spazienzio ascolta Piera (respiro e inclinazione), poi parla (annuisce a ogni parola).
-  {
-    const {ctx, page} = await pagina('maglia');
+    const {ctx, page} = await pagina('cast');
     await tid(page, 'apri-prova').click();
     await tid(page, 'mappa-continua').click();
-    await finoA(page, 'Piera');
-    // Lo stacco su Spazienzio che ascolta arriva dopo il primo pezzo della battuta di Piera.
-    for (let i = 0; i < 4 && !(await page.getByTestId('ritratto-maglia').count()); i++) { await tocca(page); await page.waitForTimeout(400); }
-    await page.getByTestId('ritratto-maglia').waitFor();
-    // Due pezzi: Spazienzio che ascolta, poi (saltati gli stacchi in mezzo) Spazienzio che parla.
-    const r1 = await registra(ctx, page);
-    await page.waitForTimeout(3500);
-    const f1 = await r1.ferma();
+    await page.waitForTimeout(400);
+    const pezzi = [];
+    const pezzo = async ms => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
+    await pezzo(2500);                       // Piera comincia, lenta
+    for (let i = 0; i < 2; i++) { await tocca(page); await pezzo(1600); }  // gli stacchi su chi ascolta
+    await finoA(page, 'Mara', 40);
+    await pezzo(3200);
     await finoA(page, 'Spazienzio', 40);
-    const r2 = await registra(ctx, page);
-    await page.waitForTimeout(5500);
-    const f2 = await r2.ferma();
+    await pezzo(3200);
     await ctx.close();
-    const sposta = f1.at(-1).t + 0.05 - f2[0].t;
-    await codifica([...f1, ...f2.map(f => ({...f, t: f.t + sposta}))], 'e-maglia.webm');
+    // I pezzi uno dopo l'altro, senza i salti in mezzo.
+    const tutti = [];
+    for (const p of pezzi) { const sposta = (tutti.at(-1)?.t ?? p[0].t) + (tutti.length ? 0.05 : 0) - p[0].t; tutti.push(...p.map(f => ({...f, t: f.t + sposta}))); }
+    await codifica(tutti, video);
   }
 
-  // 3. Fotogrammi: otto istanti di Mara agitata (movimento) e di Spazienzio che parla (maglia), ritagliati sul ritratto, in un foglio solo.
+  // 2. Fotogrammi: otto istanti di ciascuno dei tre mentre parla, ritagliati sul ritratto, in un foglio solo.
   const righe = [];
-  for (const [livello, apri, chi] of [['movimento', 'apri-tutorial', 'Mara'], ['maglia', 'apri-prova', 'Spazienzio']]) {
-    const {ctx, page} = await pagina(livello);
-    await tid(page, apri).click();
+  for (const chi of ['Piera', 'Mara', 'Spazienzio']) {
+    const {ctx, page} = await pagina('cast');
+    await tid(page, 'apri-prova').click();
     await tid(page, 'mappa-continua').click();
-    await finoA(page, chi, 40);
+    if (chi !== 'Piera') await finoA(page, chi, 40);
     await page.waitForTimeout(300);
-    const r = await page.locator('[data-testid^=ritratto]').boundingBox();
+    const modo = await tid(page, 'ritratto').getAttribute('data-modo');
+    const r = await tid(page, 'ritratto').boundingBox();
     const clip = {x: Math.max(0, r.x + r.width * 0.12), y: Math.max(0, r.y), width: r.width * 0.76, height: Math.min(r.height * 0.62, MISURA.height - r.y)};
     const fotogrammi = [];
     for (let i = 0; i < 8; i++) {
       fotogrammi.push((await page.screenshot({clip, type: 'jpeg', quality: 85})).toString('base64'));
       await page.waitForTimeout(160);
     }
-    righe.push({livello, fotogrammi});
+    righe.push({titolo: chi === 'Piera' ? `Piera · ${modo}, poi lo stacco su Mara che ascolta` : `${chi} · ${modo}`, fotogrammi});
     await ctx.close();
   }
   const foglio = await browser.newPage({viewport: {width: 1600, height: 400}});
   await foglio.setContent(`<body style="margin:0;background:#16100c;font:14px sans-serif;color:#eadbc4">${righe.map(r =>
-    `<div style="padding:6px 8px">${r.livello} · un fotogramma ogni 0,16 s</div><div style="display:flex;gap:4px;padding:0 8px 8px">${
-      r.fotogrammi.map(f => `<img style="height:220px" src="data:image/jpeg;base64,${f}">`).join('')}</div>`).join('')}</body>`);
+    `<div style="padding:6px 8px">${r.titolo} · un fotogramma ogni 0,16 s</div><div style="display:flex;gap:4px;padding:0 8px 8px">${
+      r.fotogrammi.map(f => `<img style="height:200px" src="data:image/jpeg;base64,${f}">`).join('')}</div>`).join('')}</body>`);
   await foglio.waitForFunction(() => [...document.images].every(i => i.complete));
-  await foglio.locator('body').screenshot({path: path.join(out, 'e-fotogrammi.jpg'), type: 'jpeg', quality: 78});
+  await foglio.locator('body').screenshot({path: path.join(out, 'f-fotogrammi.jpg'), type: 'jpeg', quality: 78});
+  console.log(bocche.length ? `bocche: ${bocche.length} ritratti` : 'bocche: nessuna versione «-bocca» ancora');
 
   console.log(`registrazioni in ${out}`);
   await fine(0);

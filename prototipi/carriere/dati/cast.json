@@ -6,20 +6,32 @@
       "espressioni": ["neutra", "agitata", "sospettosa", "illuminata", "pensierosa", "contenta"],
       "espressioniFuture": ["esasperata"],
       "velocita": 1.2,
-      "ritratto": "ritratti/mara-{espressione}.webp"
+      "ritratto": "ritratti/mara-{espressione}.webp",
+      "stacco": "esasperata",
+      "animazione": {"modo": "maglia",
+        "maglia": {"perno": {"u": 0.55, "v": 0.5}, "testa": {"u": 0.55, "raggio": 0.2, "sopra": 0.4, "sotto": 0.5}, "busto": {"da": 0.52, "a": 0.9}, "aspetto": 1.5}},
+      "bocca": {"u": 0.64, "v": 0.3, "ru": 0.09, "rv": 0.06}
     },
     "spazienzio": {
       "nome": "Spazienzio",
       "espressioni": ["furioso", "fumante", "quasi-calmo", "soddisfatto", "serio"],
       "espressioniFuture": ["esasperato"],
       "velocita": 1,
-      "ritratto": "ritratti/spazienzio-{espressione}.webp"
+      "ritratto": "ritratti/spazienzio-{espressione}.webp",
+      "stacco": "esasperato",
+      "animazione": {"modo": "maglia",
+        "maglia": {"perno": {"u": 0.47, "v": 0.47}, "testa": {"u": 0.47, "raggio": 0.17, "sopra": 0.4, "sotto": 0.5}, "busto": {"da": 0.48, "a": 0.88}, "aspetto": 1.5}},
+      "bocca": {"u": 0.5, "v": 0.28, "ru": 0.08, "rv": 0.06},
+      "verticale": {"alza": 0.08}
     },
     "piera": {
       "nome": "Piera",
       "espressioni": ["brilla", "offesa", "assonnata", "contenta"],
       "velocita": 0.3,
-      "ritratto": "ritratti/piera-{espressione}.webp"
+      "ritratto": "ritratti/piera-{espressione}.webp",
+      "animazione": {"modo": "maglia", "espressioni": {"brilla": "movimento"},
+        "maglia": {"perno": {"u": 0.5, "v": 0.42}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.32, "sotto": 0.42}, "busto": {"da": 0.45, "a": 0.9}, "aspetto": 1.5}},
+      "bocca": {"u": 0.56, "v": 0.24, "ru": 0.08, "rv": 0.06}
     },
     "combriccola": {
       "nome": "La combriccola",

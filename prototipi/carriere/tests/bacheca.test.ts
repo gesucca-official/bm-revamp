@@ -1,8 +1,7 @@
-// Fase C: composizione della bacheca a lettere (bacheca.md) e misure del testo dei dialoghi.
+// Fase C: composizione della bacheca a lettere (bacheca.md). Le misure del testo dei dialoghi sono in testo.test.ts dalla Fase F.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {aCapo, caso, componi, lettere, ROSSO_SEI_QUI, spilloDi, STILI, statoBozzetto} from '../src/bacheca.ts';
-import {corpo, CARATTERI} from '../src/ui/font.ts';
 import {prova} from './aiuto.ts';
 
 const bozzetto = () => {
@@ -44,21 +43,6 @@ test('i titoli si spezzano in due righe vicino a metà', () => {
   assert.deepEqual(aCapo('IN CUCINA', 13), ['IN CUCINA']);
   assert.deepEqual(aCapo('SULLE TRACCE IN BICI', 13), ['SULLE TRACCE', 'IN BICI']);
   assert.deepEqual(aCapo('DI NUOVO AL BANCONE', 13), ['DI NUOVO', 'AL BANCONE']);
-});
-
-test('il corpo dei dialoghi: al più tre righe, fra il minimo e il massimo', () => {
-  const [shantell] = CARATTERI;
-  assert.equal(corpo('Breve.', 1147, 120, shantell, 15, 36), 31, 'una battuta breve prende il massimo che l\'altezza consente');
-  const lunga = 'I Sioux non scappano dal Kazakistan con i contanti nascosti nelle suole delle scarpe, come i Navaho. I Sioux la mancia la lasciano sempre.';
-  const px = corpo(lunga, 358, 155, shantell, 15, 26);
-  assert.ok(px >= 15 && px <= 26);
-  // Shantell Sans è largo: sul telefono una battuta di 137 caratteri va su quattro righe al corpo minimo, ma resta dentro la finestra.
-  const righe = Math.ceil(lunga.length * px * shantell.larghezza / 358);
-  assert.ok(righe * px * 1.3 <= 155, `sta nella finestra (${righe} righe a ${px} px)`);
-  const patrick = CARATTERI[1];
-  const pp = corpo(lunga, 358, 155, patrick, 15, 26);
-  assert.ok(Math.ceil(lunga.length * pp * patrick.larghezza / 358) <= 3, 'con Patrick Hand sta in tre righe');
-  assert.equal(corpo('x'.repeat(600), 358, 155, shantell), 15, 'le frasi di Piera scendono al minimo');
 });
 
 test('puntine e spilli tutti diversi, scelti dai dati; «sei qui» è una puntina tonda rossa', () => {

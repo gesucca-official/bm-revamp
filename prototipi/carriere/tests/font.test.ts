@@ -24,13 +24,21 @@ function testiDialogo(c: Carriera): string {
 
 test('ogni font dei dialoghi ha tutti i caratteri delle storie, accentate comprese, e la sua licenza', () => {
   const usati = [...new Set([...testiDialogo(tutorial()) + testiDialogo(prova())])].filter(c => c.trim());
-  assert.equal(CARATTERI.length, 14);
+  // Fase F: Russo One (pieno e alleggerito) e due alternative con l'asse del peso; gli altri font dei dialoghi sono tolti.
+  assert.deepEqual(CARATTERI.map(c => c.id), ['russo-leggero', 'russo', 'changa', 'oxanium']);
   for (const f of CARATTERI) {
     const set = caratteriDelFont(new URL(f.file, qui));
     const mancano = usati.filter(c => !set.has(c.codePointAt(0)!));
     assert.deepEqual(mancano, [], `${f.nome}: mancano ${mancano.join(' ')}`);
     assert.match(fs.readFileSync(new URL(f.file.replace(/[^/]+$/, 'OFL.txt'), qui), 'utf8'), /SIL Open Font License, Version 1\.1/);
   }
+});
+
+test('nella cartella dei font restano solo quelli usati, ciascuno con la sua licenza', () => {
+  const cartelle = fs.readdirSync(new URL('font/', qui), {withFileTypes: true}).filter(d => d.isDirectory()).map(d => d.name).sort();
+  // Patrick Hand resta per la penna della bacheca, League Gothic per le sue lettere.
+  assert.deepEqual(cartelle, ['changa', 'leaguegothic', 'oxanium', 'patrickhand', 'russoone']);
+  for (const c of cartelle) assert.match(fs.readFileSync(new URL(`font/${c}/OFL.txt`, qui), 'utf8'), /SIL Open Font License, Version 1\.1/);
 });
 
 test('League Gothic ha tutte le lettere della bacheca', () => {

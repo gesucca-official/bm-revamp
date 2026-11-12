@@ -15,7 +15,7 @@ export function Elenco({carriere, stati, nome, onNome, carattere, onCarattere, l
       <h1>Carriere <small>prototipo CA-0a</small></h1>
       <label className="nome-giocatore">Il tuo nome nelle battute <input value={nome} onChange={e => onNome(e.target.value)} maxLength={24} /></label>
       {/* Campionario dei caratteri (secondo giro della Fase C): la stessa battuta in ogni font, si tocca per sceglierlo. */}
-      {/* Ritratti animati (Fase E): i due livelli da confrontare. */}
+      {/* Ritratti animati (Fase E e F): come dice il cast, o tutti in un modo per confrontare. */}
       <h2 className="titoletto">Ritratti di chi parla</h2>
       <div className="pulsanti scelta-livello" data-testid="livelli">
         {LIVELLI.map(l => <button key={l.id} className={l.id === livello ? 'scelto' : ''} data-testid={`livello-${l.id}`} onClick={() => onLivello(l.id)}>{l.nome}</button>)}
@@ -25,7 +25,7 @@ export function Elenco({carriere, stati, nome, onNome, carattere, onCarattere, l
         {CARATTERI.map(f => (
           <button key={f.id} className={`campione${f.id === carattere ? ' scelto' : ''}`} data-testid={`carattere-${f.id}`} onClick={() => onCarattere(f.id)}>
             <small>{f.nome}{f.id === carattere ? ' · scelto' : ''}</small>
-            <span style={{fontFamily: f.famiglia, textTransform: f.maiuscolo ? 'uppercase' : 'none'}}>{CAMPIONE}</span>
+            <span style={{fontFamily: f.famiglia, fontWeight: f.peso ?? 400, WebkitTextStroke: `${f.contorno ?? 0}em #100b08`}}>{CAMPIONE}</span>
           </button>
         ))}
       </div>

@@ -120,12 +120,24 @@ export type Achievement = {
   indizi: {testo: string; se?: Condizione}[];  // progressivi: si mostra l'ultimo la cui condizione vale
 };
 
+/** Come si muove un personaggio: maglia (testa e busto piegati) o movimento (l'immagine intera), per espressione. */
+export type ModoAnimazione = 'maglia' | 'movimento';
+/** Punti di controllo della maglia, in frazioni del ritratto: perno del collo, zona della testa che gira, zona del busto che respira. */
+export type Controlli = {perno: {u: number; v: number}; testa: {u: number; raggio: number; sopra: number; sotto: number}; busto: {da: number; a: number}; aspetto: number};
+export type AnimazioneCast = {modo: ModoAnimazione; espressioni?: Record<string, ModoAnimazione>; maglia?: Controlli};
+/** Dove cercare la bocca: un'ellisse in frazioni del ritratto (centro u, v e semiassi). */
+export type ZonaBocca = {u: number; v: number; ru: number; rv: number};
+
 /** Cast condiviso fra le carriere (dati/cast.json), scritto dalla regia: nomi, espressioni, velocità, asset. */
 export type Cast = {
   radiceAsset: string;
   // espressioniFuture: previste ma ancora senza ritratto (P8); il convertitore le rifiuta con un messaggio che lo dice.
+  // Fase F: animazione (modo per tutte le espressioni, con le eccezioni, e i punti di controllo della maglia), bocca (dove cercare la
+  // bocca nel ritratto, per la versione «-bocca»), stacco (l'espressione di chi ascolta Piera, se il ritratto c'è), verticale (quanto
+  // alzare il ritratto in verticale, in frazioni dell'altezza dello schermo).
   personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[]; espressioniFuture?: string[];
-    velocita?: number; ritratto?: string; sprite?: string}>;
+    velocita?: number; ritratto?: string; sprite?: string; animazione?: AnimazioneCast; bocca?: ZonaBocca; stacco?: string;
+    verticale?: {alza: number}}>;
   // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
   sfondi: Record<string, {file: string; varianti?: Record<string, string>;
     insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;

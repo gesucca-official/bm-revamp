@@ -1,23 +1,13 @@
 /* CA-0a: grafica minima, senza rifinitura (prototipo.md, «Fuori»). Misure della scena dalla specifica degli asset. */
-/* Fase C: font SIL OFL salvati in locale (prototipi/carriere/font, licenze accanto). */
-@font-face { font-family: 'Shantell Sans'; src: url('../../font/shantellsans/ShantellSans-Variabile.ttf') format('truetype'); font-weight: 300 800; font-display: swap; }
+/* Font SIL OFL salvati in locale (prototipi/carriere/font, licenze accanto): dalla Fase F Russo One e due alternative per i dialoghi,
+   Patrick Hand per la penna della bacheca, League Gothic per le sue lettere. */
 @font-face { font-family: 'Patrick Hand'; src: url('../../font/patrickhand/PatrickHand-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Comic Neue'; src: url('../../font/comicneue/ComicNeue-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
-@font-face { font-family: 'Comic Neue'; src: url('../../font/comicneue/ComicNeue-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
-@font-face { font-family: 'Grandstander'; src: url('../../font/grandstander/Grandstander-Variabile.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
-@font-face { font-family: 'Short Stack'; src: url('../../font/shortstack/ShortStack-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Gochi Hand'; src: url('../../font/gochihand/GochiHand-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Kalam'; src: url('../../font/kalam/Kalam-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Mali'; src: url('../../font/mali/Mali-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Bangers'; src: url('../../font/bangers/Bangers-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Bungee'; src: url('../../font/bungee/Bungee-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Black Ops One'; src: url('../../font/blackopsone/BlackOpsOne-Regular.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Changa'; src: url('../../font/changa/Changa-Variabile.ttf') format('truetype'); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: 'Oxanium'; src: url('../../font/oxanium/Oxanium-Variabile.ttf') format('truetype'); font-weight: 200 800; font-display: swap; }
 @font-face { font-family: 'Russo One'; src: url('../../font/russoone/RussoOne-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Saira Stencil One'; src: url('../../font/sairastencilone/SairaStencilOne-Regular.ttf') format('truetype'); font-display: swap; }
-@font-face { font-family: 'Anton'; src: url('../../font/anton/Anton-Regular.ttf') format('truetype'); font-display: swap; }
 @font-face { font-family: 'League Gothic'; src: url('../../font/leaguegothic/LeagueGothic-Variabile.ttf') format('truetype'); font-stretch: 75% 100%; font-display: swap; }
 :root {
-  --font-dialogo: 'Shantell Sans', system-ui, sans-serif;
+  --font-dialogo: 'Russo One', system-ui, sans-serif; --peso-dialogo: 400; --contorno-dialogo: 0.03em;
   --fondo: #1b1410; --carta: #2a1f18; --bordo: #5a4330; --testo: #f3e7d3; --tenue: #b8a48a;
   --accento: #e0a43a; --verde: #7dbb6a; --rosso: #c8553d; --blu: #6aa3c8;
   font-family: system-ui, "Segoe UI", sans-serif; color: var(--testo); background: var(--fondo);
@@ -52,6 +42,8 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 @keyframes esce { to { transform: translateX(60vw); opacity: 0; } }
 .gioco .ritratto { position: absolute; bottom: 0; left: 38%; height: 85%; transform: translateX(-50%); transform-origin: 50% 100%; pointer-events: none; will-change: transform; }
 .gioco .ritratto.ascolta { filter: brightness(0.92); }
+/* Fase F: il ritratto è un contenitore (che si muove) con dentro l'immagine e, sopra, la tela WebGL quando è pronta. */
+.gioco .ritratto > img, .gioco .ritratto > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .gioco.scossa { animation: scossa 0.45s; }
 @keyframes scossa { 0%,100% { transform: none; } 20% { transform: translate(-12px, 4px); } 40% { transform: translate(10px, -6px); } 60% { transform: translate(-8px, 2px); } 80% { transform: translate(6px, 0); } }
 .gioco .dove { position: absolute; top: 8px; left: 8px; z-index: 5; background: rgba(0,0,0,.55); padding: 4px 10px; border-radius: 8px; font-size: 0.9em; }
@@ -59,17 +51,17 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .barra button { background: rgba(20,14,10,.75); }
 .barra button.primario { background: var(--accento); }
 .barra .carattere small { font-size: .7em; opacity: .8; }
-/* Fase E: alta quanto il testo (al più tre righe) più un margine; il corpo lo calcola Gioco.tsx. Le frasi lunghe di Piera mostrano le ultime righe. */
+/* Fase F: altezza fissa di due righe, sempre; le battute più lunghe vanno a pagine da due righe, avanzate con un tocco. Il corpo lo
+   sceglie Gioco.tsx per orientamento. Il contorno del colore della finestra assottiglia il tratto di Russo One («un po' meno grassetto»). */
 .dialogo { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(16,11,8,.9); border-top: 2px solid var(--bordo);
   padding: 18px 8% 12px; z-index: 3; cursor: pointer; }
-.dialogo .nome { position: absolute; top: -22px; left: 7%; background: var(--accento); color: #20160e; font-family: var(--font-dialogo); font-weight: 700;
-  font-size: 22px; padding: 2px 16px; border-radius: 10px; font-variation-settings: 'INFM' 60, 'BNCE' 40; }
-.dialogo .testo { display: grid; max-height: calc(3 * 1.3em); overflow: hidden; line-height: 1.3; text-transform: var(--maiuscolo-dialogo, none);
-  font-family: var(--font-dialogo); font-weight: 500; font-variation-settings: 'INFM' 40, 'BNCE' 30; max-width: 70em; }
-.dialogo .testo > span { grid-area: 1 / 1; }
-.dialogo .testo .pieno { visibility: hidden; }
-.dialogo .testo.oltre { height: calc(3 * 1.3em); }
-.dialogo .nome { text-transform: var(--maiuscolo-dialogo, none); }
+.dialogo .nome { position: absolute; top: -22px; left: 7%; background: var(--accento); color: #20160e; font-family: var(--font-dialogo);
+  font-weight: max(600, var(--peso-dialogo)); font-size: 22px; padding: 2px 16px; border-radius: 10px; }
+.dialogo .testo { position: relative; height: calc(2 * 1.3em); overflow: hidden; line-height: 1.3; font-family: var(--font-dialogo);
+  font-weight: var(--peso-dialogo); -webkit-text-stroke: var(--contorno-dialogo) #100b08; max-width: 70em; }
+.dialogo .testo .resto { visibility: hidden; }
+/* La copia per misurare dove vanno a capo le parole: stessa larghezza e stesso corpo, fuori dalla vista. */
+.dialogo .misura { position: absolute; left: 0; right: 0; top: 0; visibility: hidden; pointer-events: none; height: auto; overflow: visible; }
 .dialogo .narrazione { font-style: italic; color: var(--tenue); }
 .dialogo .avanti { position: absolute; right: 3%; bottom: 8px; color: var(--accento); font-size: 20px; animation: lampeggia 1s infinite; }
 .dialogo .avanti.stacco { color: var(--testo); }
@@ -135,8 +127,8 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
   .gioco.con-dialogo .barra { background: transparent; }
   .barra button { flex: 1; padding: 6px 4px; min-height: 44px; }
   .barra .carattere small { display: none; }
-  .dialogo { bottom: 0; padding: 20px 16px 62px; }
-  .dialogo .avanti { bottom: 64px; }
+  .dialogo { bottom: 0; padding: 20px 28px 62px 16px; }
+  .dialogo .avanti { bottom: 64px; right: 7px; }
   .dialogo .nome { left: 16px; font-size: 19px; }
   .gioco .dove { font-size: .75em; }
   .notifica { left: 12px; right: 12px; width: auto; top: 52px; }
@@ -190,7 +182,7 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .selettore-carattere { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; margin-bottom: 16px; }
 .campione { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; padding: 8px 12px; }
 .campione small { color: var(--tenue); font-size: .75em; }
-.campione span { font-size: 19px; line-height: 1.3; }
+.campione span { font-size: 21px; line-height: 1.3; background: #100b08; padding: 6px 10px; border-radius: 3px; align-self: stretch; }
 .scelta-livello { margin-bottom: 12px; }
 .scelta-livello button.scelto { border-color: var(--accento); background: #3a2c20; box-shadow: 0 0 0 2px rgba(224,164,58,.35); }
 .campione.scelto { border-color: var(--accento); background: #3a2c20; box-shadow: 0 0 0 2px rgba(224,164,58,.35); }

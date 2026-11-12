@@ -1,6 +1,8 @@
-// CA-0a, Fase E: deformazione a maglia di un unico ritratto con WebGL. L'immagine è una griglia di triangoli con le coordinate di
-// tessitura ferme; a ogni fotogramma si spostano i vertici (deforma, in ../animazione.ts) e la scheda grafica piega l'immagine senza cuciture.
-import {deforma, SPAZIENZIO, type Controlli} from '../animazione.ts';
+// CA-0a, Fase E e F: il ritratto disegnato con WebGL. L'immagine è una griglia di triangoli con le coordinate di tessitura ferme; a ogni
+// fotogramma si spostano i vertici (deforma, in ../animazione.ts) e la scheda grafica piega l'immagine senza cuciture. Senza punti di
+// controllo la griglia resta ferma (il modo «movimento», dove si muove l'immagine intera con CSS). Fase F: due tessiture, il ritratto e
+// la sua versione con la bocca nell'altra posizione, scambiate al ritmo del testo.
+import {deforma, type Controlli} from '../animazione.ts';
 
 const COLONNE = 14, RIGHE = 21;  // pochi vertici: abbastanza per piegare il collo senza spigoli
 
@@ -9,19 +11,22 @@ void main() { t = tessitura; gl_Position = vec4(dove.x * 2.0 - 1.0, 1.0 - dove.y
 const FRAMMENTO = `precision mediump float; varying vec2 t; uniform sampler2D immagine;
 void main() { gl_FragColor = texture2D(immagine, t); }`;
 
+export type Sorgente = HTMLImageElement | HTMLCanvasElement;
+
 export class Maglia {
   private gl: WebGLRenderingContext;
   private dove: WebGLBuffer;
   private posizioni = new Float32Array(COLONNE * RIGHE * 2);
   private quanti: number;
+  private tessiture: [WebGLTexture | null, WebGLTexture | null] = [null, null];
 
-  /** null se WebGL non c'è: il lettore torna al movimento sull'immagine intera. */
-  static crea(tela: HTMLCanvasElement, img: HTMLImageElement, c: Controlli = SPAZIENZIO): Maglia | null {
+  /** null se WebGL non c'è: il lettore resta all'immagine. Una per tela; le immagini si cambiano con `imposta`. */
+  static crea(tela: HTMLCanvasElement): Maglia | null {
     const gl = tela.getContext('webgl', {premultipliedAlpha: true, alpha: true, antialias: true});
-    return gl ? new Maglia(gl, img, c) : null;
+    return gl ? new Maglia(gl) : null;
   }
 
-  private constructor(gl: WebGLRenderingContext, img: HTMLImageElement, private c: Controlli) {
+  private constructor(gl: WebGLRenderingContext) {
     this.gl = gl;
     const shader = (tipo: number, testo: string) => { const s = gl.createShader(tipo)!; gl.shaderSource(s, testo); gl.compileShader(s); return s; };
     const prog = gl.createProgram()!;
@@ -48,27 +53,85 @@ export class Maglia {
     this.quanti = indici.length;
     const bInd = gl.createBuffer()!;
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, bInd); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indici), gl.STATIC_DRAW);
-    const tex = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
   }
 
-  disegna(t: number, parlando: boolean, daParola: number | null) {
+  /** Le immagini da disegnare: il ritratto e, se c'è, la versione con la bocca nell'altra posizione. */
+  imposta(base: Sorgente, bocca: Sorgente | null) {
     const gl = this.gl;
+    for (const t of this.tessiture) if (t) gl.deleteTexture(t);
+    const tessitura = (img: Sorgente) => {
+      const tex = gl.createTexture()!;
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      return tex;
+    };
+    this.tessiture = [tessitura(base), bocca ? tessitura(bocca) : null];
+  }
+
+  /** Disegna al tempo t: piegata se ci sono i punti di controllo, ferma se no; con la bocca nell'altra posizione se `altra`. */
+  disegna(t: number, parlando: boolean, daParola: number | null, c: Controlli | null, altra: boolean) {
+    const gl = this.gl;
+    if (!this.tessiture[0]) return;
     for (let j = 0; j < RIGHE; j++) for (let i = 0; i < COLONNE; i++) {
-      const q = deforma(i / (COLONNE - 1), j / (RIGHE - 1), t, parlando, daParola, this.c);
+      const u = i / (COLONNE - 1), v = j / (RIGHE - 1);
+      const q = c ? deforma(u, v, t, parlando, daParola, c) : {u, v};
       this.posizioni[(j * COLONNE + i) * 2] = q.u; this.posizioni[(j * COLONNE + i) * 2 + 1] = q.v;
     }
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.bindTexture(gl.TEXTURE_2D, altra && this.tessiture[1] ? this.tessiture[1] : this.tessiture[0]);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.dove); gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.posizioni);
     gl.drawElements(gl.TRIANGLES, this.quanti, gl.UNSIGNED_SHORT, 0);
   }
+
+  /** Libera il contesto (i browser ne tengono pochi aperti). */
+  chiudi() { this.gl.getExtension('WEBGL_lose_context')?.loseContext(); }
+}
+
+/**
+ * La versione con la bocca da usare: il ritratto con, dentro un'ellisse sfumata attorno alla zona dove le due versioni differiscono,
+ * i pixel della versione «-bocca». Fuori dalla bocca resta sempre il ritratto approvato, anche se la seconda versione cambia altrove.
+ * `zona` la trova il chiamante (zonaBocca, sulla differenza delle due immagini).
+ */
+export function componiBocca(base: HTMLImageElement, bocca: HTMLImageElement, zona: {u: number; v: number; ru: number; rv: number}): HTMLCanvasElement {
+  const w = base.naturalWidth, h = base.naturalHeight;
+  const tela = Object.assign(document.createElement('canvas'), {width: w, height: h});
+  const g = tela.getContext('2d')!;
+  // La maschera: un'ellisse piena al centro e sfumata sul bordo.
+  const maschera = Object.assign(document.createElement('canvas'), {width: w, height: h});
+  const m = maschera.getContext('2d')!;
+  m.translate(zona.u * w, zona.v * h);
+  m.scale(zona.ru * w, zona.rv * h);
+  const sfuma = m.createRadialGradient(0, 0, 0, 0, 0, 1);
+  sfuma.addColorStop(0, 'rgba(0,0,0,1)'); sfuma.addColorStop(0.7, 'rgba(0,0,0,1)'); sfuma.addColorStop(1, 'rgba(0,0,0,0)');
+  m.fillStyle = sfuma;
+  m.beginPath(); m.arc(0, 0, 1, 0, Math.PI * 2); m.fill();
+  m.setTransform(1, 0, 0, 1, 0, 0);
+  m.globalCompositeOperation = 'source-in';
+  m.drawImage(bocca, 0, 0, w, h);
+  g.drawImage(base, 0, 0);
+  g.drawImage(maschera, 0, 0);
+  return tela;
+}
+
+/** La differenza fra due immagini su una griglia piccola (w×h), 0–255: serve a trovare dove cambia la bocca. */
+export function differenza(a: HTMLImageElement, b: HTMLImageElement, w = 128, h = 192): Uint8Array {
+  const leggi = (img: HTMLImageElement) => {
+    const c = Object.assign(document.createElement('canvas'), {width: w, height: h});
+    const g = c.getContext('2d', {willReadFrequently: true})!;
+    g.drawImage(img, 0, 0, w, h);
+    return g.getImageData(0, 0, w, h).data;
+  };
+  const da = leggi(a), db = leggi(b), out = new Uint8Array(w * h);
+  for (let k = 0; k < w * h; k++) {
+    out[k] = Math.max(Math.abs(da[k * 4] - db[k * 4]), Math.abs(da[k * 4 + 1] - db[k * 4 + 1]), Math.abs(da[k * 4 + 2] - db[k * 4 + 2]), Math.abs(da[k * 4 + 3] - db[k * 4 + 3]));
+  }
+  return out;
 }

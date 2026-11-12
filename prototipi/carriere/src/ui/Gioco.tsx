@@ -2,9 +2,9 @@
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import type {Carriera} from '../formato.ts';
 import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
-import {cast, nomeDi, nomeSblocco, ritratto, sfondo, sprite} from './dati.ts';
-import {useTesto} from './testo.ts';
-import {corpo, larghezzaMedia, type Carattere} from './font.ts';
+import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoBocca, sfondo, sprite} from './dati.ts';
+import {pagine, useTesto} from './testo.ts';
+import type {Carattere} from './font.ts';
 import {Ritratto} from './Ritratto.tsx';
 import {LIVELLI, type Livello} from '../animazione.ts';
 
@@ -13,6 +13,14 @@ type Props = {c: Carriera; s: Stato; nome: string; eventi: {id: number; e: Event
   carattere: Carattere; onCarattere: () => void; livello: Livello; onLivello: () => void; onMappa: () => void; onStato: () => void; onElenco: () => void; onNuovoGiro: () => void; onAchievement: () => void};
 
 const LARGHEZZA_SFONDO = 1536, ALTEZZA_SFONDO = 1024;
+
+/** Il testo a parole, ciascuna in uno span con il carattere da cui comincia: per sapere in che riga la mette il disegno. */
+function parti(testo: string) {
+  const out: (string | ReturnType<typeof Parola>)[] = [];
+  for (const m of testo.matchAll(/\S+|\s+/g)) out.push(/\s/.test(m[0]) ? m[0] : Parola({da: m.index, testo: m[0]}));
+  return out;
+}
+const Parola = ({da, testo}: {da: number; testo: string}) => <span key={da} data-da={da}>{testo}</span>;
 
 export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livello, onLivello, onMappa, onStato, onElenco, onNuovoGiro, onAchievement}: Props) {
   const v = vista(c, s);
@@ -67,7 +75,27 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
   const battuta = v.tipo === 'battuta' || v.tipo === 'ritento' ? v.battuta : null;
   const chiave = `${g.numero}:${g.nodo}:${g.passo}:${g.ritento}`;
   const testoPieno = battuta ? conNome(battuta.testo, nome) : v.tipo === 'narrazione' ? conNome(v.testo, nome) : '';
-  const t = useTesto(chiave, testoPieno, {
+  // Finestra di dialogo (Fase F): sempre alta due righe, con un corpo fisso per orientamento; le battute più lunghe vanno a pagine da
+  // due righe. Dove vanno a capo le parole lo dice il disegno: una copia invisibile del testo intero, parola per parola, nella finestra.
+  const verticale = misura.h > misura.w;
+  const px = Math.round(verticale ? Math.min(22, Math.max(18, misura.w * 0.054)) : Math.min(32, Math.max(20, misura.h * 0.04)));
+  const chiaveMisura = `${testoPieno}|${carattere.id}|${misura.w}x${misura.h}`;
+  const [misurate, setMisurate] = useState({chiave: '', pagine: [0]});
+  const inizioPagine = misurate.chiave === chiaveMisura ? misurate.pagine : [0];
+  const copia = useRef<HTMLDivElement>(null);
+  const [, rimisura] = useState(0);
+  useLayoutEffect(() => {
+    const el = copia.current;
+    if (!el) return;
+    const parole = [...el.querySelectorAll<HTMLElement>('[data-da]')];
+    const cime = [...new Set(parole.map(x => x.offsetTop))].sort((a, b) => a - b);
+    const p = pagine(parole.map(x => Number(x.dataset.da)), parole.map(x => cime.indexOf(x.offsetTop)));
+    if (misurate.chiave !== chiaveMisura || p.join() !== misurate.pagine.join()) setMisurate({chiave: chiaveMisura, pagine: p});
+  });
+  // Quando il font arriva dalla rete gli a capo cambiano: si rimisura.
+  useEffect(() => { let vivo = true; document.fonts?.ready.then(() => { if (vivo) rimisura(x => x + 1); }); return () => { vivo = false; }; }, [carattere.id]);
+
+  const t = useTesto(chiave, testoPieno, inizioPagine, {
     velocita: battuta ? cast.personaggi[battuta.chi]?.velocita ?? 1 : 1,
     stacchi: battuta?.stacchi,
     interrotta: battuta?.interrotta,
@@ -81,39 +109,19 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
     azione(avanti);
   };
 
-  // Chi si vede: chi parla, o chi ascolta durante uno stacco. Nessun ritratto per le figure in ombra e il fuori campo.
-  const inQuadro = t.ascolta ?? (battuta && !battuta.fuoriCampo ? {chi: battuta.chi, espressione: battuta.espressione} : null);
+  // Chi si vede: chi parla, o chi ascolta durante uno stacco (con l'espressione esasperata, se c'è). Nessun ritratto per le figure in
+  // ombra e il fuori campo.
+  const inQuadro = t.ascolta ? {chi: t.ascolta.chi, espressione: espressioneStacco(t.ascolta.chi, t.ascolta.espressione)}
+    : battuta && !battuta.fuoriCampo ? {chi: battuta.chi, espressione: battuta.espressione} : null;
   const volto = inQuadro ? ritratto(inQuadro.chi, inQuadro.espressione) : null;
+  const parla = !!battuta && !t.ascolta && t.scrive;
+  const parole = testoPieno.slice(0, t.scritti).split(/\s+/).filter(Boolean).length;
+  // Fase F: in verticale un personaggio può stare più in alto (Spazienzio sembrava troppo basso rispetto allo sfondo).
+  const alza = verticale && inQuadro ? (cast.personaggi[inQuadro.chi]?.verticale?.alza ?? 0) * misura.h : 0;
   const n = g.nodo ? nodo(c, g.nodo) : null;
   const messaggioPrima = n ? [...n.passi.slice(0, g.passo)].reverse().find(p => p.tipo === 'messaggio') : undefined;
 
-  // Finestra di dialogo (Fase E): alta quanto il testo, al più tre righe, più un margine; non più una fascia fissa. Il corpo si adatta
-  // alla battuta fino a un massimo; una copia nascosta del testo intero fissa l'altezza, così la finestra non cresce mentre il testo scorre.
-  const verticale = misura.h > misura.w;
-  const areaL = verticale ? misura.w - 32 : misura.w * 0.84;
-  const massimo = verticale ? 24 : 34;
-  // Le frasi di Piera (con gli stacchi) sono gag lunghe apposta: corpo più grande del minimo, e la finestra mostra le ultime righe.
-  const minimo = battuta?.stacchi ? (verticale ? 18 : 24) : 15;
-  // La stima del corpo sbaglia di poco con certi font e a capo: dopo il disegno si misura la copia nascosta e, se passa le tre righe,
-  // si scende di un punto alla volta (calo); al minimo si passa alle ultime righe. Il calo vale per questa battuta, font e misura.
-  const chiaveTesto = `${testoPieno}|${carattere.id}|${misura.w}x${misura.h}`;
-  const [calo, setCalo] = useState({chiaveTesto: '', n: 0, oltre: false});
-  const misurato = calo.chiaveTesto === chiaveTesto ? calo : {chiaveTesto, n: 0, oltre: false};
-  const px = Math.max(minimo, corpo(testoPieno, areaL, massimo * 1.3 * 3, carattere, minimo, massimo) - misurato.n);
-  const righe = Math.ceil((testoPieno.length * px * larghezzaMedia(testoPieno, carattere)) / areaL);
-  const oltre = righe > 3 || misurato.oltre;  // più di tre righe: altezza piena e si leggono le ultime
-  const pieno = useRef<HTMLSpanElement>(null);
-  useLayoutEffect(() => {
-    const el = pieno.current;
-    if (!el || el.offsetHeight <= px * 1.3 * 3 + 2) return;
-    setCalo(px > minimo ? {...misurato, n: misurato.n + 1} : {...misurato, oltre: true});
-  });
-  // Quando il font arriva dalla rete la misura cambia: si rimisura.
-  const [, rimisura] = useState(0);
-  useEffect(() => { let vivo = true; document.fonts?.ready.then(() => { if (vivo) rimisura(x => x + 1); }); return () => { vivo = false; }; }, [carattere.id]);
-  const parole = t.visibile.split(/\s+/).filter(Boolean).length;
-  const finestra = useRef<HTMLDivElement>(null);
-  useLayoutEffect(() => { const el = finestra.current; if (el) el.scrollTop = el.scrollHeight; });
+
 
   return (
     <div className={`gioco${scossa ? ' scossa' : ''}${battuta || v.tipo === 'narrazione' ? ' con-dialogo' : ''}`} ref={scena} onClick={tocca} data-testid="scena">
@@ -125,8 +133,9 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
-      {volto && <Ritratto src={volto} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi} espressione={inQuadro!.espressione} ascolta={!!t.ascolta}
-        parlando={!!battuta && !t.completo && !t.ascolta} parole={parole} livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} />}
+      {volto && <Ritratto src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
+        espressione={inQuadro!.espressione} ascolta={!!t.ascolta} parlando={parla} ultimo={testoPieno[t.scritti - 1]} parole={parole}
+        livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={alza} />}
 
       <span className="dove">{c.titolo}{n ? ` · ${n.titolo || n.etichetta}` : ''}</span>
       {/* Azioni: in alto a destra in orizzontale, in basso e grandi in verticale (Fase C, impressione 6). */}
@@ -141,11 +150,11 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       {(battuta || v.tipo === 'narrazione') && (
         <div className="dialogo" data-testid="dialogo">
           {battuta && <div className="nome">{battuta.nome ?? nomeDi(battuta.chi)}{battuta.fuoriCampo ? ' (fuori campo)' : ''}</div>}
-          <div ref={finestra} className={`testo${v.tipo === 'narrazione' ? ' narrazione' : ''}${oltre ? ' oltre' : ''}`} style={{fontSize: px}}>
-            {!oltre && <span ref={pieno} className="pieno" aria-hidden="true">{testoPieno}</span>}
-            <span className="scorre">{t.visibile}</span>
+          <div className={`testo${v.tipo === 'narrazione' ? ' narrazione' : ''}`} style={{fontSize: px}} data-testid="testo">
+            <span className="scorre">{t.visibile}</span><span className="resto" aria-hidden="true">{t.resto}</span>
+            <div ref={copia} className="misura" aria-hidden="true">{parti(testoPieno)}</div>
           </div>
-          {(t.completo || t.inStacco) && <div className={`avanti${t.inStacco ? ' stacco' : ''}`}>▼</div>}
+          {(t.completo || t.inStacco || t.finePagina) && <div className={`avanti${t.inStacco ? ' stacco' : ''}${t.finePagina ? ' pagina' : ''}`}>▼</div>}
         </div>
       )}
 

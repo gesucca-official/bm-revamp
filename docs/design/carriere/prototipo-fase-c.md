@@ -34,7 +34,7 @@ bozzetto si apre dall'elenco.
 
 Scaricati solo dal repository ufficiale di Google Fonts su GitHub, fissato al commit `c30b221beb0c1da59d563feb91ec8656a1fa972a`
 (URL: `https://raw.githubusercontent.com/google/fonts/c30b221beb0c1da59d563feb91ec8656a1fa972a/ofl/<cartella>/<file>`), ciascuno con il suo
-`OFL.txt` accanto, in [`prototipi/carriere/font/`](../../../prototipi/carriere/font/shantellsans/OFL.txt). I file variabili sono rinominati
+`OFL.txt` accanto, in `prototipi/carriere/font/` (tolti nella [Fase F](prototipo-fase-f.md#font-dei-dialoghi), tranne Patrick Hand e League Gothic). I file variabili sono rinominati
 (il nome originale è nella tabella).
 
 | Font | Uso | File (nome originale) | KB | SHA-256 |

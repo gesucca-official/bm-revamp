@@ -14,8 +14,8 @@ La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodo
 | Misura di prova | Orizzontale | Verticale |
 |---|---|---|
 | Schermo | 1366×768 | 390×844 |
-| Finestra di dialogo | in basso, alta quanto il testo (una, due o tre righe) più un margine; con tre righe circa il 20% dell'altezza | come in orizzontale; i pulsanti della scena sono l'ultima fila della finestra, alti circa 46 px (almeno 44), senza una fascia propria |
-| Ritratto | a sinistra del centro, alto circa l'85% dello schermo, con la parte bassa dietro la finestra | centrato, alto circa il 75% dello schermo, con la parte bassa dietro la finestra |
+| Finestra di dialogo | in basso, sempre alta due righe più un margine (circa il 15% dell'altezza); corpo del testo circa 31 px | come in orizzontale, circa il 16% dell'altezza pulsanti compresi; corpo circa 21 px; i pulsanti della scena sono l'ultima fila della finestra, alti circa 46 px (almeno 44) |
+| Ritratto | a sinistra del centro, alto circa l'85% dello schermo, con la parte bassa dietro la finestra | centrato, alto circa il 75% dello schermo, con la parte bassa dietro la finestra; il cast può alzarlo per personaggio (Spazienzio dell'8% dello schermo) |
 
 Misure corrette l'11 novembre 2026 nella Fase C del [prototipo](prototipo.md#fase-c-ritocchi-dopo-la-prova), dopo la
 [prova del proprietario](prototipo-fase-b.md#prova-del-proprietario): prima la finestra era al 28% e al 30% e il ritratto verticale al 60%. Il
@@ -27,6 +27,16 @@ intero) e non lascia spazio vuoto sotto l'ultima riga. Il corpo del testo arriva
 tutte maiuscole prendono un corpo più piccolo, perché le maiuscole sono più larghe. In verticale la fila dei pulsanti è dentro la finestra.
 Conseguenza per gli asset: con battute brevi si vede più ritratto in basso (fino al bordo della finestra, non più al 20–22%), quindi la parte
 bassa dei ritratti, fino alla vita sul bordo inferiore (sezione «Ritratti»), resta spesso in vista e va curata come il volto.
+
+Finestra a due righe dal 12 novembre 2026, nella [Fase F](prototipo-fase-f.md#finestra-a-due-righe-e-pagine) del prototipo, su richiesta del
+proprietario («possiamo forzare sempre due righe, così resta della stessa altezza?»): la finestra ha sempre la stessa altezza, due righe, e
+non cambia più con la battuta. Il corpo del testo è fisso per orientamento; le battute più lunghe si dividono in **pagine da due righe**,
+come nelle visual novel: a fine pagina il testo si ferma con ▼ e un tocco apre la pagina dopo. La divisione segue gli a capo veri del testo
+nella finestra, quindi una pagina comincia sempre a inizio parola. Gli stacchi di Piera restano: se uno stacco cade a fine pagina, finito lo
+stacco si volta pagina senza un tocco in più. Per gli asset vale quanto sopra: la parte bassa dei ritratti resta spesso in vista.
+
+**Ritratto più in alto in verticale (Fase F):** Spazienzio, inquadrato più da lontano degli altri (sezione «Ritratti»), in verticale sembrava
+troppo basso rispetto allo sfondo; il cast lo alza dell'8% dell'altezza dello schermo. Il bordo inferiore del ritratto resta dietro la finestra.
 
 ## Ritratti
 

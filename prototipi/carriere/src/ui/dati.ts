@@ -20,10 +20,29 @@ export const asset = (rel: string): string => {
 };
 
 export const nomeDi = (id: string) => cast.personaggi[id]?.nome ?? id;
-export function ritratto(chi: string, espressione?: string): string | null {
+/** Il file del ritratto, relativo alla radice degli asset (null per le figure in ombra). */
+function relRitratto(chi: string, espressione?: string): string | null {
   const p = cast.personaggi[chi];
   if (!p?.ritratto || p.ombra) return null;
-  return asset(p.ritratto.replace('{espressione}', espressione ?? p.espressioni?.[0] ?? ''));
+  return p.ritratto.replace('{espressione}', espressione ?? p.espressioni?.[0] ?? '');
+}
+export function ritratto(chi: string, espressione?: string): string | null {
+  const rel = relRitratto(chi, espressione);
+  return rel ? asset(rel) : null;
+}
+/** Fase F: la versione del ritratto con la bocca nell'altra posizione («<ritratto>-bocca.webp»), se l'altro esecutore l'ha consegnata. */
+export function ritrattoBocca(chi: string, espressione?: string): string | null {
+  const rel = relRitratto(chi, espressione)?.replace(/\.webp$/, '-bocca.webp');
+  return rel ? file[RADICE + rel] ?? null : null;
+}
+/**
+ * Fase F: l'espressione di chi ascolta Piera durante uno stacco. Il cast ne indica una apposta (le esasperate); finché il suo ritratto
+ * non c'è si usa quella scritta nella storia (neutra, quasi calmo).
+ */
+export function espressioneStacco(chi: string, scritta: string): string {
+  const voluta = cast.personaggi[chi]?.stacco;
+  const rel = voluta ? relRitratto(chi, voluta) : null;
+  return rel && file[RADICE + rel] ? voluta! : scritta;
 }
 export function sfondo(id?: string, variante?: string): string | null {
   if (!id) return null;

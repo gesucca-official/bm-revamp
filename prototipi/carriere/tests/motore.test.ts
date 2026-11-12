@@ -3,7 +3,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {avanti, completa, entra, finali, indizio, nuovoAccount, nuovoGiro, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../src/motore.ts';
-import {pezzi} from '../src/ui/testo.ts';
+import {fermate} from '../src/ui/testo.ts';
 import type {Carriera} from '../src/formato.ts';
 import {prova, tutorial} from './aiuto.ts';
 
@@ -149,6 +149,9 @@ test('le azioni fuori posto sono rifiutate; un salvataggio vecchio si completa',
 });
 
 test('le frasi di Piera si dividono dopo i puntini solo se hanno stacchi', () => {
-  assert.deepEqual(pezzi('Ma chi è... che ce l\'ha... col mio Grappino...', true), ['Ma chi è...', 'che ce l\'ha...', 'col mio Grappino...']);
-  assert.deepEqual(pezzi('Ma chi è... che ce l\'ha...', false), ['Ma chi è... che ce l\'ha...']);
+  // Dalla Fase F i pezzi sono le fermate con lo stacco (testo.ts): dopo ogni «...» seguito da altro testo.
+  const testo = 'Ma chi è... che ce l\'ha... col mio Grappino...';
+  const stacchi = (con: boolean) => fermate(testo, con, [0]).filter(f => f.stacco).map(f => testo.slice(0, f.pos));
+  assert.deepEqual(stacchi(true), ['Ma chi è...', 'Ma chi è... che ce l\'ha...']);
+  assert.deepEqual(stacchi(false), []);
 });

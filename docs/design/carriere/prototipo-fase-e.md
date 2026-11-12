@@ -28,7 +28,7 @@ ad «Aa», e fa il giro dei tre; la scelta resta salvata nel browser. Con «Magl
 
 Scaricati solo dal repository ufficiale di Google Fonts su GitHub, allo stesso commit fissato delle fasi precedenti,
 `c30b221beb0c1da59d563feb91ec8656a1fa972a` (URL: `https://raw.githubusercontent.com/google/fonts/c30b221beb0c1da59d563feb91ec8656a1fa972a/ofl/<cartella>/<file>`),
-ciascuno con il suo `OFL.txt` (SIL Open Font License 1.1) accanto, in [`prototipi/carriere/font/`](../../../prototipi/carriere/font/bangers/OFL.txt).
+ciascuno con il suo `OFL.txt` (SIL Open Font License 1.1) accanto, in `prototipi/carriere/font/` (tolti nella [Fase F](prototipo-fase-f.md#font-dei-dialoghi)).
 
 | Font | Carattere | File | KB | SHA-256 del font | SHA-256 di `OFL.txt` |
 |---|---|---|---|---|---|
