@@ -96,6 +96,9 @@ async function giro(nome, viewport) {
   // Lo stacco resta fino al tocco (Fase C, impressione 4): dopo due secondi chi ascolta è ancora lì.
   await page.waitForTimeout(2000);
   atteso(await page.locator('.ritratto.ascolta').count() === 1, 'lo stacco su chi ascolta che resta fino al tocco');
+  // Fase J: durante lo stacco Piera resta in scena, chi reagisce le sta a fianco.
+  atteso(await tid('ritratto').getAttribute('data-posto') === 'parla' && await tid('ritratto-accanto').getAttribute('data-posto') === 'ascolta',
+    'due in scena: Piera e, a fianco, chi reagisce');
   await foto('07-stacco-piera', 150);
   await salta();
   await tid('perdi').click();

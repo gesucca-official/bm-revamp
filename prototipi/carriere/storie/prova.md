@@ -13,8 +13,6 @@
 
 [Sfondo: S2]
 
-[Entrate: lontano]
-
 **Piera** (offesa): Grappino... non c'è più... era qui... col suo bicchierino... e adesso... c'è solo... il bicchierino...
 
 [Stacchi: Mara neutra, Spazienzio quasi calmo] [Interrotta]

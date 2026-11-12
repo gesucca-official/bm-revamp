@@ -6,7 +6,7 @@ import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ri
 import {pagine, useTesto} from './testo.ts';
 import type {Carattere} from './font.ts';
 import {preparaRitratto, Ritratto, Uscente, useMovimentoRidotto} from './Ritratto.tsx';
-import {DURATA_ENTRATA, LIVELLI, type Entrata, type Livello} from '../animazione.ts';
+import {DURATA_ENTRATA, IN_DISPARTE, LIVELLI, type Livello, type Posto} from '../animazione.ts';
 
 type Azione = (f: (c: Carriera, s: Stato) => {stato: Stato; eventi: Evento[]}) => void;
 type Props = {c: Carriera; s: Stato; nome: string; eventi: {id: number; e: Evento}[]; azione: Azione;
@@ -15,6 +15,11 @@ type Props = {c: Carriera; s: Stato; nome: string; eventi: {id: number; e: Event
 const LARGHEZZA_SFONDO = 1536, ALTEZZA_SFONDO = 1024;
 /** Fase H: con ?banco nell'indirizzo la scena ha un fondo grigio uniforme, per il banco della fluidità (strumenti/banco.mjs). */
 const BANCO = new URLSearchParams(window.location.search).has('banco');
+/**
+ * Fase J: chi è a fuoco quando sono in due. Di norma chi reagisce durante lo stacco e chi parla quando il testo riprende; con ?fuoco=parla
+ * sempre chi parla (l'altra lettura di «chi parla è in piena luce», per confrontare).
+ */
+const FUOCO_SU_CHI_PARLA = new URLSearchParams(window.location.search).get('fuoco') === 'parla';
 
 /** Il testo a parole, ciascuna in uno span con il carattere da cui comincia: per sapere in che riga la mette il disegno. */
 function parti(testo: string) {
@@ -111,15 +116,27 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
     azione(avanti);
   };
 
-  // Chi si vede: chi parla, o chi ascolta durante uno stacco (con l'espressione esasperata, se c'è). Nessun ritratto per le figure in
-  // ombra e il fuori campo.
-  const inQuadro = t.ascolta ? {chi: t.ascolta.chi, espressione: espressioneStacco(t.ascolta.chi, t.ascolta.espressione)}
-    : battuta && !battuta.fuoriCampo ? {chi: battuta.chi, espressione: battuta.espressione} : null;
-  const volto = inQuadro ? ritratto(inQuadro.chi, inQuadro.espressione) : null;
-  const parla = !!battuta && !t.ascolta && t.scrive;
-  const parole = testoPieno.slice(0, t.scritti).split(/\s+/).filter(Boolean).length;
+  // Chi si vede (Fase J: al più due in scena). Chi parla, se non è in ombra né fuori campo; e, da quando arriva il primo stacco di regia su
+  // chi ascolta, chi ascolta (con l'espressione esasperata, se c'è), che resta a fianco fino alla fine della battuta. Durante lo stacco è a
+  // fuoco chi ascolta; quando il testo riprende, chi parla.
+  const parlante = battuta && !battuta.fuoriCampo ? {chi: battuta.chi, espressione: battuta.espressione} : null;
+  const accantoRif = useRef<{chiave: string; chi: string; espressione: string} | null>(null);
+  if (t.ascolta) accantoRif.current = {chiave, chi: t.ascolta.chi, espressione: espressioneStacco(t.ascolta.chi, t.ascolta.espressione)};
+  else if (accantoRif.current && accantoRif.current.chiave !== chiave) accantoRif.current = null;
+  const accanto = accantoRif.current && accantoRif.current.chi !== parlante?.chi ? accantoRif.current : null;
+  type Figura = {chi: string; espressione?: string; src: string; posto: Posto; fuoco: boolean; parla: boolean; ascolta: boolean; alza: number};
   // Fase F: in verticale un personaggio può stare più in alto (Spazienzio sembrava troppo basso rispetto allo sfondo).
-  const alza = verticale && inQuadro ? (cast.personaggi[inQuadro.chi]?.verticale?.alza ?? 0) * misura.h : 0;
+  const alzaDi = (chi: string) => verticale ? (cast.personaggi[chi]?.verticale?.alza ?? 0) * misura.h : 0;
+  const figure: Figura[] = [];
+  if (parlante) {
+    const src = ritratto(parlante.chi, parlante.espressione);
+    if (src) figure.push({...parlante, src, posto: accanto ? 'parla' : 'solo', fuoco: FUOCO_SU_CHI_PARLA || !t.ascolta, parla: !t.ascolta && t.scrive, ascolta: false, alza: alzaDi(parlante.chi)});
+  }
+  if (accanto) {
+    const src = ritratto(accanto.chi, accanto.espressione);
+    if (src) figure.push({...accanto, src, posto: 'ascolta', fuoco: !FUOCO_SU_CHI_PARLA && !!t.ascolta, parla: false, ascolta: true, alza: alzaDi(accanto.chi)});
+  }
+  const parole = testoPieno.slice(0, t.scritti).split(/\s+/).filter(Boolean).length;
   const n = g.nodo ? nodo(c, g.nodo) : null;
   const messaggioPrima = n ? [...n.passi.slice(0, g.passo)].reverse().find(p => p.tipo === 'messaggio') : undefined;
 
@@ -135,30 +152,24 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
     }
   }, [n]);
 
-  // Fase H: entrate e uscite. Ogni personaggio ha il suo ritratto (si rimonta quando cambia chi si vede): entra nel modo della scena
-  // ([Entrate: …] nella storia), o del personaggio, o del cast; chi lascia la scena esce nello stesso modo. Gli stacchi su chi ascolta
-  // Piera, e il ritorno da uno stacco, sono tagli dissolti. Con il movimento ridotto nessuno entra né esce: si cambia e basta.
+  // Fasi H e J: entrate e uscite, solo di lato. Ogni personaggio ha il suo ritratto (si rimonta quando arriva): entra dal suo lato; chi
+  // lascia la scena esce dal suo lato, dal posto dove stava. Con il movimento ridotto nessuno entra né esce: si cambia e basta.
   const ridotto = useMovimentoRidotto();
-  const modoDi = (chi: string): Entrata => g.scena.entrate ?? cast.personaggi[chi]?.entrata ?? cast.entrate ?? 'lato';
-  const chiOra = volto ? inQuadro!.chi : null;
-  const stacco = useRef(false);
-  const entrata = useRef<{chi: string | null; modo: Entrata}>({chi: null, modo: 'lato'});
-  if (chiOra && entrata.current.chi !== chiOra) entrata.current = {chi: chiOra, modo: t.ascolta || stacco.current ? 'stacco' : modoDi(chiOra)};
-  type Visto = {chi: string; src: string; srcAlfa: string | null; ascolta: boolean; alza: number};
-  const visto = useRef<Visto | null>(null);
-  const [uscenti, setUscenti] = useState<(Visto & {id: number; modo: Entrata})[]>([]);
+  type Visto = {chi: string; src: string; srcAlfa: string | null; posto: Posto; fuoco: boolean; alza: number};
+  const visti = useRef<Visto[]>([]);
+  const [uscenti, setUscenti] = useState<(Visto & {id: number})[]>([]);
+  const chiOra = figure.map(x => x.chi).join(',');
   useLayoutEffect(() => {
-    const prima = visto.current;
-    if (prima && prima.chi !== chiOra && !ridotto) {
-      const modo: Entrata = t.ascolta || stacco.current ? 'stacco' : modoDi(prima.chi);
-      const id = performance.now();
-      setUscenti(x => [...x, {...prima, id, modo}]);
-      const tempo = modo === 'stacco' ? 1 : cast.personaggi[prima.chi]?.tempoAnimazioni ?? 1;
-      window.setTimeout(() => setUscenti(x => x.filter(u => u.id !== id)), (DURATA_ENTRATA[modo] / tempo) * 1000 + 100);
+    if (!ridotto) for (const prima of visti.current) {
+      if (figure.some(x => x.chi === prima.chi)) continue;
+      const id = performance.now() + Math.random();
+      setUscenti(x => [...x, {...prima, id}]);
+      const tempo = cast.personaggi[prima.chi]?.tempoAnimazioni ?? 1;
+      window.setTimeout(() => setUscenti(x => x.filter(u => u.id !== id)), (DURATA_ENTRATA / tempo) * 1000 + 100);
     }
-    visto.current = chiOra && volto ? {chi: chiOra, src: volto, srcAlfa: ritrattoAlfa(chiOra, inQuadro!.espressione), ascolta: !!t.ascolta, alza} : null;
-    stacco.current = !!t.ascolta;
-  });
+    visti.current = figure.map(x => ({chi: x.chi, src: x.src, srcAlfa: ritrattoAlfa(x.chi, x.espressione), posto: x.posto, fuoco: x.fuoco, alza: x.alza}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chiOra, figure.map(x => `${x.posto}${x.fuoco}${x.src}`).join()]);
 
 
 
@@ -172,11 +183,12 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
-      {uscenti.map(u => <Uscente key={u.id} src={u.src} srcAlfa={u.srcAlfa} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={u.alza} modo={u.modo} ascolta={u.ascolta}
-        tempo={cast.personaggi[u.chi]?.tempoAnimazioni ?? 1} />)}
-      {volto && <Ritratto key={inQuadro!.chi} src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} srcAlfa={ritrattoAlfa(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
-        espressione={inQuadro!.espressione} ascolta={!!t.ascolta} parlando={parla} ultimo={testoPieno[t.scritti - 1]} parole={parole}
-        livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={alza} entrata={entrata.current.modo} />}
+      {uscenti.map(u => <Uscente key={u.id} src={u.src} srcAlfa={u.srcAlfa} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={u.alza} posto={u.posto}
+        verticale={verticale} luce={u.fuoco ? 1 : IN_DISPARTE.luce} tempo={cast.personaggi[u.chi]?.tempoAnimazioni ?? 1} />)}
+      {figure.map(x => <Ritratto key={x.chi} src={x.src} srcBocca={ritrattoBocca(x.chi, x.espressione)} srcAlfa={ritrattoAlfa(x.chi, x.espressione)} alt={nomeDi(x.chi)} chi={x.chi}
+        espressione={x.espressione} ascolta={x.ascolta} parlando={x.parla} ultimo={testoPieno[t.scritti - 1]} parole={x.parla ? parole : 0}
+        livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={x.alza} posto={x.posto} fuoco={x.fuoco} verticale={verticale}
+        testid={x.ascolta ? 'ritratto-accanto' : 'ritratto'} />)}
 
       <span className="dove">{c.titolo}{n ? ` · ${n.titolo || n.etichetta}` : ''}</span>
       {/* Azioni: in alto a destra in orizzontale, in basso e grandi in verticale (Fase C, impressione 6). */}

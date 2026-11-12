@@ -148,14 +148,10 @@ test('le azioni fuori posto sono rifiutate; un salvataggio vecchio si completa',
   assert.deepEqual(completa(vecchio), s);
 });
 
-test('[Entrate: …] vale da lì in poi nella scena; un altro luogo torna al valore normale; l\'achievement della bacheca', () => {
+test('l\'achievement della bacheca: una volta sola, senza toccare lo stato di prima; la scena non ha più un modo di entrare', () => {
   const c = prova();
   const s = entra(c, nuovoGiro(c, nuovoAccount()), 'nodo-a').stato;
-  assert.equal(s.giro.scena.entrate, 'lontano');
-  // Un passo di sfondo con un altro luogo dimentica il modo della scena.
-  const b = c.nodi.find(n => n.passi.some(p => p.tipo === 'sfondo' && p.sfondo === 'S1'))!;
-  const dopo = entra(c, {...s, giro: {...s.giro, nodo: null, prossimi: [{nodo: b.id}]}} as Stato, b.id).stato;
-  assert.equal(dopo.giro.scena.entrate, undefined);
+  assert.ok(!('entrate' in s.giro.scena));
   const r = ottieniAchievement(c, s, 'al-suo-posto');
   assert.ok(r.stato.account.achievement.includes('al-suo-posto') && !s.account.achievement.includes('al-suo-posto'), 'senza toccare lo stato di prima');
   assert.deepEqual(r.eventi, [{tipo: 'achievement', achievement: 'al-suo-posto'}]);

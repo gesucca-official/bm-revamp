@@ -194,13 +194,12 @@ export function cambiatiFuoriBocca(diff: ArrayLike<number>, w: number, h: number
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------
-// Entrate e uscite (Fase H): i personaggi non compaiono più di colpo. Il modo si sceglie per scena con [Entrate: …] nella storia, con un
-// valore normale nel cast; gli stacchi su chi ascolta Piera restano tagli, ma dissolti.
+// Entrate e uscite (Fasi H e J): i personaggi non compaiono più di colpo. Dalla Fase J solo di lato («dovrebbero arrivare di lato invece
+// di comparire ingrandendosi»): via l'entrata da lontano, via il comando [Entrate: …], via le dissolvenze degli stacchi (chi ascolta ora
+// entra di lato e resta a fianco di chi parla).
 
-export type Entrata = 'lato' | 'lontano' | 'stacco';
-export const ENTRATE: Entrata[] = ['lato', 'lontano', 'stacco'];
-/** Quanto dura un'entrata o un'uscita, in secondi. */
-export const DURATA_ENTRATA: Record<Entrata, number> = {lato: 0.45, lontano: 0.6, stacco: 0.14};
+/** Quanto dura un'entrata o un'uscita, in secondi (al tempo normale: Piera, più lenta, ci mette di più). */
+export const DURATA_ENTRATA = 0.45;
 /** Come sta un ritratto mentre entra o esce: spostamento (in frazioni della sua larghezza e altezza), scala, sfocatura (px), opacità. */
 export type Comparsa = {dx: number; dy: number; scala: number; sfoca: number; opacita: number};
 export const IN_SCENA: Comparsa = {dx: 0, dy: 0, scala: 1, sfoca: 0, opacita: 1};
@@ -209,22 +208,35 @@ const esceCubica = (u: number) => 1 - (1 - u) ** 3;  // parte veloce e rallenta
 const entraCubica = (u: number) => u ** 3;           // parte piano e accelera
 
 /**
- * Il ritratto t secondi dopo l'inizio di un'entrata o di un'uscita. Di lato: entra da destra e rallenta, esce verso sinistra accelerando.
- * Da lontano: entra piccolo, un poco più in alto e sfocato, e cresce mettendosi a fuoco; esce allontanandosi. Stacco: solo dissolvenza.
+ * Il ritratto t secondi dopo l'inizio di un'entrata o di un'uscita, di lato: entra dal lato `lato` (+1 destra, −1 sinistra) e rallenta,
+ * esce verso il lato `lato` accelerando.
  */
-export function comparsa(modo: Entrata, verso: 'entra' | 'esce', t: number): Comparsa {
-  const u = Math.min(1, Math.max(0, t / DURATA_ENTRATA[modo]));
+export function comparsa(verso: 'entra' | 'esce', t: number, lato: 1 | -1 = 1): Comparsa {
+  const u = Math.min(1, Math.max(0, t / DURATA_ENTRATA));
   if (verso === 'entra' && u >= 1) return IN_SCENA;
-  if (modo === 'stacco') return {...IN_SCENA, opacita: verso === 'entra' ? u : 1 - u};
-  if (modo === 'lato') {
-    return verso === 'entra'
-      ? {...IN_SCENA, dx: 0.55 * (1 - esceCubica(u)), opacita: Math.min(1, u * 2.5)}
-      : {...IN_SCENA, dx: -0.45 * entraCubica(u), opacita: 1 - u};
-  }
-  if (verso === 'entra') {
-    const e = esceCubica(u);
-    return {dx: 0, dy: -0.06 * (1 - e), scala: 0.6 + 0.4 * e, sfoca: 8 * (1 - e), opacita: Math.min(1, u * 2)};
-  }
-  const e = entraCubica(u);
-  return {dx: 0, dy: -0.05 * e, scala: 1 - 0.35 * e, sfoca: 6 * e, opacita: 1 - u};
+  return verso === 'entra'
+    ? {...IN_SCENA, dx: lato * 0.55 * (1 - esceCubica(u)), opacita: Math.min(1, u * 2.5)}
+    : {...IN_SCENA, dx: lato * 0.45 * entraCubica(u), opacita: 1 - u};
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Due in scena (Fase J): «quando si intramezzano le altre persone mentre Piera parla lentamente, perché dobbiamo far sparire Piera?». Al più
+// due posti: chi parla scivola a sinistra, chi ascolta entra da destra e gli resta a fianco finché dura la battuta, poi esce dal suo lato.
+// Chi è a fuoco (chi reagisce durante lo stacco, chi parla quando il testo riprende) è in piena luce e davanti; l'altro più scuro, un poco
+// più piccolo e dietro. Niente specchiature: i ritratti sono asimmetrici.
+
+export type Posto = 'solo' | 'parla' | 'ascolta';
+/** Dove sta un posto, in larghezze del ritratto rispetto al posto da solo. In verticale i due si sovrappongono un poco. */
+export function spostamento(p: Posto, verticale: boolean): number {
+  if (p === 'solo') return 0;
+  if (p === 'parla') return verticale ? -0.2 : -0.28;
+  return verticale ? 0.22 : 0.72;
+}
+/** Da che lato entra ed esce un posto: chi ascolta dal suo, a destra; chi parla da solo entra da destra ed esce a sinistra. */
+export const latoDi = (p: Posto, verso: 'entra' | 'esce'): 1 | -1 => (p === 'ascolta' || verso === 'entra' ? 1 : -1);
+/** La luce e la profondità di chi è a fuoco e di chi no. */
+export const A_FUOCO = {luce: 1, scala: 1}, IN_DISPARTE = {luce: 0.7, scala: 0.95};
+/** Un valore che si avvicina a quello voluto, senza scatti: dopo `tau` secondi ha fatto i due terzi della strada. */
+export const avvicina = (attuale: number, voluto: number, dt: number, tau: number) => voluto + (attuale - voluto) * Math.exp(-Math.max(0, dt) / tau);
+/** Quanto ci mette a scivolare di posto o a passare dalla luce all'ombra (tau, in secondi, al tempo normale). */
+export const SCIVOLA = 0.16;

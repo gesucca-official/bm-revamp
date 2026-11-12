@@ -8,7 +8,8 @@
 
 ## Come appare la scena
 
-Uno sfondo, **un personaggio alla volta** con la sua espressione, una finestra di dialogo in basso ([regole del formato](README.md#come-si-scrivono-le-scene)).
+Uno sfondo, **al più due personaggi in scena** ognuno con la sua espressione (di solito uno solo: chi parla; due durante gli stacchi di regia
+su chi ascolta, sezione «Due in scena» qui sotto), una finestra di dialogo in basso ([regole del formato](README.md#come-si-scrivono-le-scene)).
 La scena deve reggere in orizzontale e in verticale (VE della [roadmap del prodotto](../../product-roadmap.md#ve--tavolo-in-verticale)).
 
 | Misura di prova | Orizzontale | Verticale |
@@ -37,6 +38,16 @@ stacco si volta pagina senza un tocco in più. Per gli asset vale quanto sopra: 
 
 **Ritratto più in alto in verticale (Fase F):** Spazienzio, inquadrato più da lontano degli altri (sezione «Ritratti»), in verticale sembrava
 troppo basso rispetto allo sfondo; il cast lo alza dell'8% dell'altezza dello schermo. Il bordo inferiore del ritratto resta dietro la finestra.
+
+**Due in scena (dal 12 novembre 2026, [Fase J](prototipo-fase-j.md#due-in-scena) del prototipo):** su richiesta del proprietario («perché
+dobbiamo far sparire Piera?») il modello «un ritratto per volta» diventa **al più due posti in scena**. Quando arriva uno stacco di regia su
+chi ascolta, chi parla non esce: scivola a sinistra, e chi reagisce entra da destra e le resta a fianco finché dura la battuta, poi esce dal
+suo lato. Vale per ogni stacco su chi ascolta, non solo per Piera. Chi è a fuoco (chi reagisce durante lo stacco, chi parla quando il testo
+riprende) è in piena luce e davanti; l'altro è più scuro e un poco più piccolo, dietro. Si muove solo la bocca di chi parla. In orizzontale i
+due stanno a fianco; in verticale si sovrappongono un poco. Si entra e si esce **solo di lato** (niente più entrata «da lontano» né comando
+`[Entrate: …]`). Conseguenze per gli asset: **niente specchiature** nemmeno qui (chi ascolta sta a destra con il ritratto così com'è); un
+ritratto deve leggersi anche più scuro e in parte coperto dall'altro, quindi il volto non va messo sul bordo della tela; le espressioni di chi
+ascolta (`stacco` nel cast) sono quelle che si vedono a fianco di chi parla.
 
 ## Ritratti
 

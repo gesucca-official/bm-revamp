@@ -4,8 +4,7 @@
 import type {Achievement, Battuta, Carriera, Condizione, Destinazione, Esito, Nodo, Opzione, Partita, Passo, Rif, Scelta} from './formato.ts';
 import {slug} from './converti.ts';
 
-export type Scena = {sfondo?: string; variante?: string; sprite: Record<string, string>;  // sprite: id -> posa ('' = la prima)
-  entrate?: 'lato' | 'lontano' | 'stacco'};  // Fase H: come entrano ed escono i personaggi; un altro luogo torna al valore normale
+export type Scena = {sfondo?: string; variante?: string; sprite: Record<string, string>};  // sprite: id -> posa ('' = la prima)
 
 /** La storia di un giro: si azzera con un nuovo giro (D16). */
 export type Giro = {
@@ -155,11 +154,10 @@ function applica(s: Stato, p: Passo, eventi: Evento[], silenzioso: boolean) {
   switch (p.tipo) {
     case 'sfondo':
       // Un altro luogo svuota la scena (la bici di Mara resta fuori dal bar); una variante dello stesso sfondo no.
-      if (g.scena.sfondo !== p.sfondo) { g.scena.sprite = {}; delete g.scena.entrate; }
+      if (g.scena.sfondo !== p.sfondo) g.scena.sprite = {};
       g.scena.sfondo = p.sfondo;
       if (p.variante) g.scena.variante = p.variante; else delete g.scena.variante;
       break;
-    case 'entrate': g.scena.entrate = p.modo; break;
     case 'sprite':
       // Chi esce sparisce dalla scena; l'interfaccia lo fa uscire con la sua posa (la combriccola in fuga).
       if (p.azione === 'esce') { delete g.scena.sprite[p.sprite]; if (!silenzioso) eventi.push({tipo: 'esce', sprite: p.sprite, ...(p.posa ? {posa: p.posa} : {})}); }

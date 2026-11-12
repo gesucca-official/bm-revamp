@@ -200,12 +200,6 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
           }
           return;
         case 'sfondo': return sfondo(arg, riga, true);
-        case 'entrate': {
-          // Fase H: [Entrate: lato], [Entrate: lontano] o [Entrate: stacco]: come entrano ed escono i personaggi da qui in poi.
-          const modo = slug(arg);
-          if (modo !== 'lato' && modo !== 'lontano' && modo !== 'stacco') return errore(riga, `entrate sconosciute: «${arg}» (lato, lontano o stacco)`);
-          return aggiungi({tipo: 'entrate', modo, riga});
-        }
         case 'regia': {
           aggiungi({tipo: 'regia', nota: arg, riga});
           const s = /Sfondo:\s*(S\d+[^.]*)/.exec(arg);

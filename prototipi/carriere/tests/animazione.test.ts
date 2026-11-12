@@ -1,7 +1,8 @@
 // CA-0a, Fase E e F: le prove del movimento procedurale dei ritratti, della maglia, della scelta del modo dal cast e della bocca.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {comparsa, DURATA_ENTRATA, gradiTesta, IN_SCENA, MASSIMO_TESTA} from '../src/animazione.ts';
+import {A_FUOCO, avvicina, comparsa, DURATA_ENTRATA, gradiTesta, IN_DISPARTE, IN_SCENA, latoDi, MASSIMO_TESTA, SCIVOLA, spostamento,
+  type Posto} from '../src/animazione.ts';
 import {componiPixel, erodi, pesoEllisse} from '../src/ui/maglia.ts';
 import {FERMA, LIVELLI, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
 import type {Cast} from '../src/formato.ts';
@@ -203,25 +204,61 @@ test('nel cast: chi ascolta Piera ha un\'espressione esasperata prevista, Spazie
   assert.ok(alza > 0.04 && alza < 0.15, 'più in alto, ma con il bordo basso ancora dietro la finestra');
 });
 
-test('le entrate: di lato da destra, da lontano piccolo e sfocato che cresce, stacco dissolto; e le uscite', () => {
-  for (const m of ['lato', 'lontano', 'stacco'] as const) {
-    assert.deepEqual(comparsa(m, 'entra', DURATA_ENTRATA[m]), IN_SCENA, `${m}: alla fine dell'entrata è in scena`);
-    assert.deepEqual(comparsa(m, 'entra', 10), IN_SCENA);
-    assert.equal(comparsa(m, 'esce', DURATA_ENTRATA[m]).opacita, 0, `${m}: alla fine dell'uscita non si vede`);
-    assert.equal(comparsa(m, 'entra', 0).opacita, 0, `${m}: all'inizio non si vede`);
-    const op = campioni(t => comparsa(m, 'entra', t).opacita, 0, DURATA_ENTRATA[m], 0.005);
-    assert.ok(op.every((x, i) => i === 0 || x >= op[i - 1]), `${m}: compare senza lampeggiare (l'opacità non torna indietro)`);
+test('le entrate (Fase J): solo di lato, dal lato voluto, senza crescere né sfocare; e le uscite', () => {
+  for (const lato of [1, -1] as const) {
+    assert.deepEqual(comparsa('entra', DURATA_ENTRATA, lato), IN_SCENA, `${lato}: alla fine dell'entrata è in scena`);
+    assert.deepEqual(comparsa('entra', 10, lato), IN_SCENA);
+    assert.equal(comparsa('esce', DURATA_ENTRATA, lato).opacita, 0, `${lato}: alla fine dell'uscita non si vede`);
+    assert.equal(comparsa('entra', 0, lato).opacita, 0, `${lato}: all'inizio non si vede`);
+    const op = campioni(t => comparsa('entra', t, lato).opacita, 0, DURATA_ENTRATA, 0.005);
+    assert.ok(op.every((x, i) => i === 0 || x >= op[i - 1]), `${lato}: compare senza lampeggiare (l'opacità non torna indietro)`);
+    const dx = campioni(t => Math.abs(comparsa('entra', t, lato).dx), 0, DURATA_ENTRATA, 0.005);
+    assert.ok(dx.every((x, i) => i === 0 || x <= dx[i - 1] + 1e-12), `${lato}: arriva senza tornare indietro`);
+    for (const t of [0, 0.05, 0.2, 0.4]) for (const v of ['entra', 'esce'] as const) {
+      const c = comparsa(v, t, lato);
+      assert.ok(c.scala === 1 && c.sfoca === 0 && c.dy === 0, `${v} ${t}: solo di lato, niente «lontano»`);
+    }
   }
-  const lato = comparsa('lato', 'entra', 0.05), lontano = comparsa('lontano', 'entra', 0.05);
-  assert.ok(lato.dx > 0.3 && lato.scala === 1 && lato.sfoca === 0, 'di lato: arriva da destra');
-  assert.ok(comparsa('lato', 'esce', 0.3).dx < -0.1, 'ed esce verso sinistra');
-  assert.ok(lontano.scala < 0.75 && lontano.sfoca > 5 && lontano.dy < 0, 'da lontano: piccolo, sfocato, un poco più in alto');
-  assert.ok(comparsa('lontano', 'esce', 0.5).scala < 0.8, 'ed esce allontanandosi');
-  const st = comparsa('stacco', 'entra', 0.07);
-  assert.ok(st.dx === 0 && st.scala === 1 && st.opacita > 0.4 && st.opacita < 0.6, 'lo stacco: solo una dissolvenza breve');
-  assert.ok(DURATA_ENTRATA.stacco < 0.2 && DURATA_ENTRATA.lato < 0.6 && DURATA_ENTRATA.lontano < 0.8, 'brevi');
-  // Il cast ha un valore normale.
-  assert.equal(cast.entrate, 'lato');
+  assert.ok(comparsa('entra', 0.05, 1).dx > 0.3 && comparsa('entra', 0.05, -1).dx < -0.3, 'arriva dal lato voluto');
+  assert.ok(comparsa('esce', 0.3, -1).dx < -0.1 && comparsa('esce', 0.3, 1).dx > 0.1, 'ed esce verso il lato voluto');
+  assert.ok(comparsa('entra', 0.05).dx > 0, 'senza lato, da destra');
+  assert.ok(DURATA_ENTRATA > 0.3 && DURATA_ENTRATA < 0.6, 'breve, ma si vede');
+  // Il cast non ha più un modo di entrare: c'è solo il lato.
+  assert.ok(!('entrate' in cast) && conRitratto.every(([, p]) => !('entrata' in p)));
+});
+
+test('due in scena (Fase J): chi parla a sinistra, chi ascolta a destra e lì entra ed esce; in verticale si sovrappongono un poco', () => {
+  assert.equal(spostamento('solo', false), 0); assert.equal(spostamento('solo', true), 0);
+  for (const v of [false, true]) {
+    const p = spostamento('parla', v), a = spostamento('ascolta', v);
+    assert.ok(p < 0 && a > 0, `${v}: chi parla a sinistra, chi ascolta a destra`);
+    // La distanza fra i due centri, in larghezze del ritratto: in orizzontale quasi a fianco, in verticale si coprono un poco.
+    const d = a - p;
+    if (v) assert.ok(d > 0.35 && d < 0.75, `in verticale si sovrappongono (${d})`);
+    else assert.ok(d >= 0.9 && d < 1.1, `in orizzontale stanno a fianco (${d})`);
+    assert.ok(Math.abs(p) < a, `${v}: chi parla si sposta meno di chi entra`);
+  }
+  assert.ok(spostamento('ascolta', true) < spostamento('ascolta', false) && spostamento('parla', true) > spostamento('parla', false),
+    'in verticale più stretti: lo schermo è stretto');
+  const lati: [Posto, 'entra' | 'esce', 1 | -1][] = [['solo', 'entra', 1], ['solo', 'esce', -1], ['parla', 'entra', 1], ['parla', 'esce', -1],
+    ['ascolta', 'entra', 1], ['ascolta', 'esce', 1]];
+  for (const [p, v, l] of lati) assert.equal(latoDi(p, v), l, `${p} ${v}`);
+  assert.ok(A_FUOCO.luce === 1 && A_FUOCO.scala === 1, 'chi è a fuoco è in piena luce');
+  assert.ok(IN_DISPARTE.luce > 0.55 && IN_DISPARTE.luce < 0.85, 'l\'altro più scuro, ma si vede');
+  assert.ok(IN_DISPARTE.scala < 1 && IN_DISPARTE.scala > 0.9, 'e un poco indietro');
+});
+
+test('lo scivolare di posto e di luce: verso il voluto senza scatti né rimbalzi, in un tempo breve', () => {
+  assert.equal(avvicina(0, 1, 0, SCIVOLA), 0, 'senza tempo non si muove');
+  assert.equal(avvicina(0, 1, -1, SCIVOLA), 0, 'il tempo all\'indietro non conta');
+  assert.ok(Math.abs(avvicina(0, 1, SCIVOLA, SCIVOLA) - (1 - Math.exp(-1))) < 1e-12, 'in tau i due terzi');
+  assert.ok(Math.abs(avvicina(5, 5, 0.1, SCIVOLA) - 5) < 1e-12, 'arrivato, sta fermo');
+  // A passi di 16 ms: sempre più vicino, mai oltre; in mezzo secondo quasi arrivato; e lo stesso a passi diversi (non dipende dai fotogrammi).
+  let x = 0, y = 0;
+  for (let i = 0; i < 30; i++) { const n = avvicina(x, 1, 1 / 60, SCIVOLA); assert.ok(n > x && n < 1); x = n; }
+  for (let i = 0; i < 15; i++) y = avvicina(y, 1, 1 / 30, SCIVOLA);
+  assert.ok(x > 0.93 && Math.abs(x - y) < 1e-9, `${x} ${y}`);
+  assert.ok(SCIVOLA > 0.08 && SCIVOLA < 0.3);
 });
 
 test('la maschera della bocca: il peso dell\'ellisse e l\'erosione del bordo della sagoma', () => {

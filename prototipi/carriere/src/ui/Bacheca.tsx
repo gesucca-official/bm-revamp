@@ -8,7 +8,7 @@ import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} f
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, sporco, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
-import {accartoccia, avanzaDanno, chiusiOra, danno, strappo, TEMPO_DANNO} from '../movimentiBacheca.ts';
+import {chiusiOra, strappi, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
@@ -76,7 +76,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       ? letteraAllentata(comp.punti, `${c.id}:quale:${rimesse}`) : null;
     const chiusi = comp.punti.filter(n => n.postit && n.stato === 'escluso').map(n => n.id);
     return {
-      // Fase I: i nodi che si sono chiusi dall'ultima volta, nello stesso giro: il loro post-it si strappa o si accartoccia davanti a noi.
+      // Fasi I e J: i nodi che si sono chiusi dall'ultima volta, nello stesso giro: il loro post-it si strappa davanti a noi.
       chiusi: !ridotto && m ? chiusiOra({giro: m.giro ?? -1, chiusi: m.chiusi ?? []}, g.numero, chiusi) : [],
       scoperti: m && !ridotto ? scoperti(m.postit, comp.punti) : [],
       da: m && !ridotto && m.seiQui !== ultimo && esiste(m.seiQui) && esiste(ultimo) ? m.seiQui : null,
@@ -206,23 +206,20 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         filo?.setAttribute('opacity', tv < 0 ? '0' : '1');
         if (tv >= 1) { viaggioAnnunciato = true; setViaggioFatto(true); }
       }
-      // Fase I: i post-it dei nodi appena chiusi. Strappo: il pezzo che manca si stacca e cade. Accartocciato: la carta intera sopra si
-      // stringe e sparisce, sotto resta quella accartocciata.
+      // Fasi I e J: i post-it dei nodi appena chiusi. I pezzi che mancano si staccano uno dopo l'altro e cadono, girando attorno al loro
+      // centro, uno da una parte e uno dall'altra.
       if (!dannoFinito) {
         for (const id of apertura.chiusi) {
           const e = svg.querySelector(`[data-danno-anim="${id}"]`);
           if (!e) continue;
-          if (danno(id) === 'strappo') {
-            const q = staccoPostit(t - TEMPO_DANNO.inizio, d.fondo - d.postitY[id]);
-            e.querySelector('.pezzo')?.setAttribute('transform', `translate(0 ${q.dy.toFixed(1)}) rotate(${(q.ruota * 1.5).toFixed(1)} ${d.postit.w / 2} ${d.postit.h})`);
-            e.setAttribute('opacity', q.opacita.toFixed(2));
-          } else {
-            const a = avanzaDanno(t), s = accartoccia(id, d.postit.w, d.postit.h).scala;
-            e.querySelector('.intero')?.setAttribute('transform', `scale(${(1 - (1 - s) * a).toFixed(3)})`);
-            e.setAttribute('opacity', (1 - a).toFixed(2));
-          }
+          e.querySelectorAll<SVGPathElement>('.pezzo').forEach((el, i) => {
+            const q = staccoPostit(t - TEMPO_STRAPPI.inizio - i * TEMPO_STRAPPI.scarto, d.fondo - d.postitY[id]);
+            const giro = (i % 2 ? -1 : 1) * q.ruota * 1.5;
+            el.setAttribute('transform', `translate(0 ${q.dy.toFixed(1)}) rotate(${giro.toFixed(1)} ${el.dataset.cx} ${el.dataset.cy})`);
+            el.setAttribute('opacity', q.opacita.toFixed(2));
+          });
         }
-        if (t > TEMPO_DANNO.inizio + Math.max(TEMPO_DANNO.durata, 1.6)) { dannoFinito = true; setDanniFatti(true); }
+        if (t > TEMPO_STRAPPI.inizio + 2 * TEMPO_STRAPPI.scarto + TEMPI.staccoPostit) { dannoFinito = true; setDanniFatti(true); }
       }
       // Fase H: ogni tanto un angolo di post-it si solleva e ricade, come per uno spiffero.
       if (angoli.length) {
@@ -326,7 +323,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       const {w: pw, h: ph} = d.postit;
       const py = d.postitY[n.id];
       elementi.push(<Postit key={`p-${n.id}`} x={sp.x} y={py} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2}
-        danno={n.stato === 'escluso' ? {tipo: danno(n.id), seme: n.id} : undefined} />);
+        strappato={n.stato === 'escluso' ? n.id : undefined} />);
       if (n.freccia) elementi.push(<Freccia key={`f-${n.id}`} x={sp.x - pw / 2 - fs * 0.75} y={py + ph * 0.62} fs={fs} />);
       box = {x: sp.x - pw / 2 - (n.freccia ? fs * 0.8 : 0), y: Math.min(sp.y - p, py), w: pw + (n.freccia ? fs * 0.8 : 0), h: py + ph - Math.min(sp.y - p, py)};
     } else {
@@ -406,19 +403,17 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
           const n = comp.punti.find(x => x.id === id)!, {w: pw, h: ph} = d.postit;
           return <g key={`cade-${id}`} data-cade={id}><Postit x={d.pos[id].x} y={d.postitY[id]} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2} /></g>;
         })}
-        {/* Fase I: i post-it dei nodi appena chiusi che si strappano (il pezzo cade) o si accartocciano (la carta intera sparisce). */}
+        {/* Fasi I e J: i post-it dei nodi appena chiusi che si strappano: i pezzi che mancano, che poi cadono. */}
         {!danniFatti && apertura.chiusi.map(id => {
           const n = comp.punti.find(x => x.id === id);
           if (!n) return null;
           const {w: pw, h: ph} = d.postit, tr = `translate(${d.pos[id].x} ${d.postitY[id]}) rotate(${n.inclinazione})`;
-          if (danno(id) === 'strappo') {
-            const pezzo = strappo(id, pw, ph).pezzo;
-            return <g key={`danno-${id}`} data-danno-anim={id} transform={tr} pointerEvents="none">
-              <path className="pezzo" d={'M' + pezzo.map(q => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' L') + ' Z'} fill="url(#carta-postit)" stroke="rgba(0,0,0,.12)" strokeWidth={0.6} />
-            </g>;
-          }
-          return <g key={`danno-${id}`} data-danno-anim={id} pointerEvents="none">
-            <g className="intero-esterno"><g transform={tr}><g className="intero"><Postit x={0} y={0} w={pw} h={ph} ruota={0} fs={p * 2} /></g></g></g>
+          return <g key={`danno-${id}`} data-danno-anim={id} transform={tr} pointerEvents="none">
+            {strappi(id, pw, ph).pezzi.map((pezzo, i) => {
+              const cx = pezzo.reduce((a, q) => a + q.x, 0) / pezzo.length, cy = pezzo.reduce((a, q) => a + q.y, 0) / pezzo.length;
+              return <path key={i} className="pezzo" data-cx={cx.toFixed(1)} data-cy={cy.toFixed(1)}
+                d={'M' + pezzo.map(q => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' L') + ' Z'} fill="url(#carta-postit)" stroke="rgba(0,0,0,.12)" strokeWidth={0.6} />;
+            })}
           </g>;
         })}
         {/* L'angolo di post-it che si solleva: sotto si vede il feltro, sopra il retro della carta. */}

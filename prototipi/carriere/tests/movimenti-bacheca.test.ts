@@ -1,7 +1,7 @@
 // CA-0a, Fase G: la bacheca si muove. Cordicelle che oscillano, puntina che viaggia, post-it che si stacca, lettera che cade e torna.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {accartoccia, avanzaDanno, chiusiOra, danno, strappo, TEMPO_DANNO} from '../src/movimentiBacheca.ts';
+import {chiusiOra, strappi, TEMPO_STRAPPI} from '../src/movimentiBacheca.ts';
 import {angoloPostit, DURATA_ANGOLO, durataMosca, mosca, pianoMosca, prossimoAngolo, toccataMosca, VOLO} from '../src/movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloCoda, cadutaLettera, filoMosso, letteraAllentata, oscillazione, premioLettere, PREMIO_LETTERE,
   scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio} from '../src/movimentiBacheca.ts';
@@ -153,45 +153,58 @@ test('la mosca: una volta su due, arriva in volo dal bordo, passeggia a piccoli 
   assert.ok(toccate.includes('vola') && toccate.includes('schiaccia') && toccate.filter(x => x === 'vola').length > 50, 'toccata, più spesso vola via');
 });
 
-test('i nodi chiusi: strappo o accartocciato, sempre lo stesso per lo stesso nodo; solo quelli chiusi ora, e un nuovo giro non strappa', () => {
-  const ids = Array.from({length: 200}, (_, i) => `nodo-${i}`);
-  const strappi = ids.filter(id => danno(id) === 'strappo').length;
-  assert.ok(strappi > 80 && strappi < 140, `di tutti e due i tipi (${strappi} strappi su 200)`);
-  assert.equal(danno('nodo-b'), danno('nodo-b'));
+test('i nodi chiusi: solo quelli chiusi ora, e un nuovo giro non strappa; i pezzi cadono uno dopo l\'altro', () => {
   assert.deepEqual(chiusiOra({giro: 2, chiusi: ['a']}, 2, ['a', 'b']), ['b'], 'nello stesso giro: solo quelli chiusi dall\'ultima volta');
   assert.deepEqual(chiusiOra({giro: 1, chiusi: []}, 2, ['a', 'b']), [], 'un giro nuovo: niente si strappa davanti a noi');
   assert.deepEqual(chiusiOra(null, 1, ['a']), [], 'la prima volta che si vede la bacheca: niente');
-  assert.equal(avanzaDanno(0), 0); assert.equal(avanzaDanno(TEMPO_DANNO.inizio + TEMPO_DANNO.durata + 0.01), 1);
-  assert.ok(Math.abs(avanzaDanno(TEMPO_DANNO.inizio + TEMPO_DANNO.durata / 2) - 0.5) < 1e-9);
+  assert.ok(TEMPO_STRAPPI.inizio > 0.3 && TEMPO_STRAPPI.inizio < 1, 'si vede la bacheca, poi si strappa');
+  assert.ok(TEMPO_STRAPPI.scarto > 0.08 && TEMPO_STRAPPI.scarto < 0.4, 'uno dopo l\'altro, ma insieme');
+  const fine = TEMPO_STRAPPI.inizio + 2 * TEMPO_STRAPPI.scarto + TEMPI.staccoPostit;
+  assert.equal(staccoPostit(fine - TEMPO_STRAPPI.inizio - 2 * TEMPO_STRAPPI.scarto, 300).opacita, 0, 'alla fine anche il terzo pezzo è sparito');
 });
 
-test('lo strappo: un angolo in basso lacerato, mai in alto dove c\'è la puntina; il pezzo che manca combacia con lo strappo', () => {
+/** Quanto un punto è lontano dalla retta fra a e b. */
+const daRetta = (q: Punto2, a: Punto2, b: Punto2) => Math.abs((b.x - a.x) * (a.y - q.y) - (a.x - q.x) * (b.y - a.y)) / Math.hypot(b.x - a.x, b.y - a.y);
+type Punto2 = {x: number; y: number};
+/** L'area di un poligono (formula dell'allacciamento): positiva se in senso orario sullo schermo (y in giù). */
+const area = (q: Punto2[]) => q.reduce((s, p, i) => { const n = q[(i + 1) % q.length]; return s + p.x * n.y - n.x * p.y; }, 0) / 2;
+
+test('gli strappi (Fase J): due o tre, mai in alto dove c\'è la puntina né sopra il «???»; i pezzi combaciano con gli strappi', () => {
   const w = 120, h = 70;
+  const quanti = new Map<number, number>(), lati = new Set<number>();
   let frastagliati = 0;
-  for (let i = 0; i < 30; i++) {
-    const {contorno, pezzo} = strappo(`n${i}`, w, h);
-    for (const q of [...contorno, ...pezzo]) assert.ok(q.x >= -w / 2 - 6 && q.x <= w / 2 + 6 && q.y >= 0 && q.y <= h + 3, 'dentro il post-it');
-    assert.ok(pezzo.every(q => q.y >= h * 0.3), 'il pezzo sta in basso');
+  for (let i = 0; i < 60; i++) {
+    const {contorno, pezzi} = strappi(`n${i}`, w, h);
+    quanti.set(pezzi.length, (quanti.get(pezzi.length) ?? 0) + 1);
+    for (const q of [...contorno, ...pezzi.flat()]) assert.ok(q.x >= -w / 2 - 6 && q.x <= w / 2 + 6 && q.y >= 0 && q.y <= h + 3, 'dentro il post-it');
     assert.equal(contorno.filter(q => q.y === 0).length, 2, 'il bordo alto resta intero');
-    assert.ok(pezzo.length >= 8, 'un orlo con molti punti');
-    // Frastagliato davvero: i punti dell'orlo si scostano dalla retta fra i due capi del taglio.
-    const [a, b] = [pezzo[0], pezzo[pezzo.length - 2]], l = Math.hypot(b.x - a.x, b.y - a.y);
-    const scarti = pezzo.slice(1, -2).map(q => Math.abs((b.x - a.x) * (a.y - q.y) - (a.x - q.x) * (b.y - a.y)) / l);
-    frastagliati += Math.max(...scarti) > 0.5 ? 1 : 0;
-    // Il pezzo è un angolo: uno dei suoi vertici è un angolo basso del post-it.
-    assert.ok(pezzo.some(q => q.y === h && Math.abs(Math.abs(q.x) - w / 2) < 1e-9));
+    for (const pz of pezzi) assert.ok(pz.every(q => q.y >= h * 0.3), 'i pezzi stanno in basso');
+    // Il «???» sta al centro, fra il 55% e l'85% dell'altezza, largo un terzo: nessun pezzo ci arriva.
+    for (const pz of pezzi) assert.ok(pz.every(q => !(Math.abs(q.x) < w * 0.17 && q.y < h * 0.84)), `${i}: il «???» resta leggibile`);
+    // Il primo è sempre un angolo basso; gli altri morsi nel bordo (i due capi sul bordo, il fondo dentro la carta).
+    const [angolo, ...morsi] = pezzi;
+    assert.ok(angolo.some(q => q.y === h && Math.abs(Math.abs(q.x) - w / 2) < 1e-9), 'un angolo strappato');
+    lati.add(Math.sign(angolo[angolo.length - 1].x));
+    for (const m of morsi) {
+      const [da, a] = [m[0], m[m.length - 1]];
+      const sulBordo = (q: Punto2) => q.y === h || Math.abs(Math.abs(q.x) - w / 2) < 1e-9;
+      assert.ok(sulBordo(da) && sulBordo(a), 'il morso parte e arriva sul bordo');
+      assert.ok(Math.max(...m.map(q => daRetta(q, da, a))) > Math.min(w, h) * 0.06, 'e morde dentro la carta');
+      assert.ok(m.length >= 7, 'con un orlo frastagliato');
+    }
+    // Ogni punto dei pezzi è sul contorno: i pezzi rimessi al loro posto rifanno il post-it intero.
+    for (const pz of pezzi) for (const q of pz.filter(q => !(q.y === h && Math.abs(Math.abs(q.x) - w / 2) < 1e-9))) {
+      assert.ok(contorno.some(c => Math.abs(c.x - q.x) < 1e-9 && Math.abs(c.y - q.y) < 1e-9), `${i}: il pezzo combacia`);
+    }
+    const tolto = pezzi.reduce((s, pz) => s + Math.abs(area(pz)), 0);
+    assert.ok(Math.abs(Math.abs(area(contorno)) + tolto - w * h) < 1e-6, `${i}: carta rimasta più pezzi = post-it intero`);
+    assert.ok(tolto > w * h * 0.025 && tolto < w * h * 0.15, `${i}: si vede, ma resta un post-it (${(tolto / (w * h)).toFixed(3)})`);
+    const [a, b] = [angolo[0], angolo[angolo.length - 2]];
+    frastagliati += Math.max(...angolo.slice(1, -2).map(q => daRetta(q, a, b))) > 0.5 ? 1 : 0;
   }
-  assert.ok(frastagliati >= 25, `un orlo frastagliato, non un taglio dritto (${frastagliati} su 30)`);
-  assert.deepEqual(strappo('n1', w, h), strappo('n1', w, h), 'sempre lo stesso per lo stesso nodo');
-});
-
-test('il post-it accartocciato: bordi rientrati dentro il post-it, tre pieghe, un poco più piccolo', () => {
-  const w = 120, h = 70;
-  for (let i = 0; i < 30; i++) {
-    const {contorno, pieghe, scala} = accartoccia(`n${i}`, w, h);
-    assert.equal(contorno.length, 16);
-    for (const q of contorno) assert.ok(q.x >= -w / 2 - 6 && q.x <= w / 2 + 6 && q.y >= 0 && q.y <= h + 6, 'dentro il post-it');
-    assert.equal(pieghe.length, 3);
-    assert.ok(scala >= 0.9 && scala <= 0.94, 'poco più piccolo: sempre leggero');
-  }
+  assert.ok((quanti.get(2) ?? 0) > 15 && (quanti.get(3) ?? 0) > 15 && quanti.size === 2, `due o tre strappi (${[...quanti]})`);
+  assert.deepEqual([...lati].sort(), [-1, 1], 'l\'angolo strappato a destra o a sinistra');
+  assert.ok(frastagliati >= 55, `un orlo frastagliato, non un taglio dritto (${frastagliati} su 60)`);
+  assert.deepEqual(strappi('n1', w, h), strappi('n1', w, h), 'sempre gli stessi per lo stesso nodo');
+  assert.notDeepEqual(strappi('n1', w, h), strappi('n2', w, h), 'diversi da nodo a nodo');
 });

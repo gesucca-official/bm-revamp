@@ -221,62 +221,55 @@ export function mosca(p: PianoMosca, t: number): {x: number; y: number; angolo: 
 export const toccataMosca = (seme: string): 'vola' | 'schiaccia' => caso(`${seme}:toccata`)() < 0.65 ? 'vola' : 'schiaccia';
 
 // ---------------------------------------------------------------------------------------------------------------------------------
-// Fase I: i nodi chiusi strappati o accartocciati. Un nodo non più raggiungibile in questo giro, ancora coperto dal post-it, ha il
-// post-it un poco strappato (un angolo lacerato, il pezzo che manca) o accartocciato (pieghe, bordi storti, un poco più piccolo). Il danno
-// si sceglie per nodo dai dati; si vede quando il nodo si chiude e poi resta; un nuovo giro rimette la carta intera.
-
-export type Danno = 'strappo' | 'accartocciato';
-/** Il danno di un nodo chiuso: sempre lo stesso per lo stesso nodo; strappi un po' più spesso. */
-export const danno = (id: string): Danno => (caso(`${id}:carta`)() < 0.55 ? 'strappo' : 'accartocciato');
+// Fasi I e J: i nodi chiusi strappati. Un nodo non più raggiungibile in questo giro, ancora coperto dal post-it, ha il post-it strappato
+// in due o tre punti (Fase J: «il post-it chiuso ha due o tre strappi»; l'accartocciato della Fase I non c'è più): un angolo in basso
+// lacerato e uno o due morsi, sul fianco e sul bordo basso; i pezzi che mancano. Gli strappi si scelgono per nodo dai dati; si vedono
+// quando il nodo si chiude e poi restano; un nuovo giro rimette la carta intera.
 
 /** I nodi che si sono chiusi dall'ultima volta che si è vista la bacheca, nello stesso giro (un nuovo giro non strappa niente). */
 export const chiusiOra = (prima: {giro: number; chiusi: string[]} | null, giro: number, chiusi: string[]) =>
   prima && prima.giro === giro ? chiusi.filter(id => !prima.chiusi.includes(id)) : [];
 
-/**
- * Lo strappo: il contorno del post-it (in coordinate locali: x da -w/2 a w/2, y da 0 a h) con un angolo in basso lacerato, e il pezzo che
- * manca. Il taglio va da un punto del bordo basso a uno del bordo laterale, con un orlo frastagliato; mai in alto, dove c'è la puntina.
- */
-export function strappo(seme: string, w: number, h: number): {contorno: Pt[]; pezzo: Pt[]} {
-  const r = caso(`${seme}:strappo`);
-  const destra = r() < 0.6, s = destra ? 1 : -1;
-  const lato = (0.18 + r() * 0.14) * w, alto = (0.24 + r() * 0.18) * h;    // quanto è grande il pezzo: poco
-  const a = {x: s * (w / 2 - lato), y: h}, b = {x: s * w / 2, y: h - alto};
-  const orlo: Pt[] = [];
-  const n = 7;
+/** Un orlo frastagliato da `a` a `b` (esclusi), di `n` tratti: ogni punto si scosta un poco, a caso, dalla retta. */
+function orlo(r: () => number, a: Pt, b: Pt, n: number): Pt[] {
+  const l = Math.hypot(b.x - a.x, b.y - a.y), q: Pt[] = [];
   for (let i = 1; i < n; i++) {
-    const u = i / n, j = (r() - 0.5) * Math.min(lato, alto) * 0.22;
-    orlo.push({x: a.x + (b.x - a.x) * u + j * 0.7, y: a.y + (b.y - a.y) * u + j});
+    const u = i / n, j = (r() - 0.5) * l * 0.16;
+    q.push({x: a.x + (b.x - a.x) * u + j * 0.7, y: a.y + (b.y - a.y) * u + j});
   }
-  const angolo = {x: s * w / 2, y: h};
-  // Il contorno, in senso orario partendo dall'angolo in alto a sinistra.
-  const contorno: Pt[] = destra
-    ? [{x: -w / 2, y: 0}, {x: w / 2, y: 0}, b, ...[...orlo].reverse(), a, {x: -w / 2, y: h}]
-    : [{x: -w / 2, y: 0}, {x: w / 2, y: 0}, {x: w / 2, y: h}, a, ...orlo, b];
-  return {contorno, pezzo: [a, ...orlo, b, angolo]};
+  return q;
 }
+
+/** Un morso nel bordo: da `da` ad `a` (sul bordo) passando dentro la carta per `apice`, con l'orlo frastagliato. */
+const morso = (r: () => number, da: Pt, apice: Pt, a: Pt): Pt[] => [da, ...orlo(r, da, apice, 3), apice, ...orlo(r, apice, a, 3), a];
 
 /**
- * Il post-it accartocciato: un contorno con i bordi storti (rientra un poco, a caso, lungo i quattro lati), qualche piega da un bordo
- * all'altro e una scala un poco più piccola.
+ * Gli strappi: il contorno del post-it (in coordinate locali: x da -w/2 a w/2, y da 0 a h) con due o tre strappi, e i pezzi che mancano.
+ * Sempre un angolo in basso lacerato; poi un morso nel fianco dell'altro lato, sotto la metà; il terzo, quando c'è, un morso nel bordo
+ * basso, fra i due. Mai in alto, dove c'è la puntina; mai sopra il «???», che resta leggibile.
  */
-export function accartoccia(seme: string, w: number, h: number): {contorno: Pt[]; pieghe: [Pt, Pt][]; scala: number} {
-  const r = caso(`${seme}:accartoccia`);
-  const rientro = () => (0.02 + r() * 0.06);
-  const contorno: Pt[] = [];
-  const passi = 4;
-  for (let i = 0; i < passi; i++) contorno.push({x: -w / 2 + (w * i) / passi + (i ? (r() - 0.5) * w * 0.06 : 0), y: i ? rientro() * h : 0});
-  for (let i = 0; i < passi; i++) contorno.push({x: w / 2 - rientro() * w, y: (h * i) / passi + (i ? (r() - 0.5) * h * 0.06 : 0)});
-  for (let i = 0; i < passi; i++) contorno.push({x: w / 2 - (w * i) / passi, y: h - rientro() * h});
-  for (let i = 0; i < passi; i++) contorno.push({x: -w / 2 + rientro() * w, y: h - (h * i) / passi});
-  const pieghe: [Pt, Pt][] = [];
-  for (let i = 0; i < 3; i++) {
-    const p0 = {x: (r() - 0.5) * w * 0.9, y: r() * h * 0.3}, p1 = {x: (r() - 0.5) * w * 0.9, y: h * (0.7 + r() * 0.3)};
-    pieghe.push(i % 2 ? [{x: -w / 2 + w * 0.05, y: p0.y + h * 0.3}, {x: w / 2 - w * 0.05, y: p1.y - h * 0.3}] : [p0, p1]);
-  }
-  return {contorno, pieghe, scala: 0.9 + r() * 0.04};
+export function strappi(seme: string, w: number, h: number): {contorno: Pt[]; pezzi: Pt[][]} {
+  const r = caso(`${seme}:strappi`);
+  const quanti = r() < 0.5 ? 2 : 3;
+  const destra = r() < 0.6;
+  // Si disegna con l'angolo strappato a destra; a sinistra è lo specchio.
+  const lato = (0.17 + r() * 0.1) * w, alto = (0.24 + r() * 0.14) * h;
+  const a = {x: w / 2 - lato, y: h}, b = {x: w / 2, y: h - alto};
+  const taglio = orlo(r, a, b, 7);
+  const angolo: Pt[] = [a, ...taglio, b, {x: w / 2, y: h}];
+  // Il morso nel fianco sinistro: va dal basso verso l'alto, come il contorno.
+  const y0 = (0.5 + r() * 0.14) * h, lunga = (0.16 + r() * 0.08) * h, fondo = (0.08 + r() * 0.05) * w;
+  const fianco = morso(r, {x: -w / 2, y: y0 + lunga}, {x: -w / 2 + fondo, y: y0 + lunga * (0.35 + r() * 0.3)}, {x: -w / 2, y: y0});
+  // Il morso nel bordo basso: da destra verso sinistra, fra l'angolo strappato e l'angolo sinistro.
+  const conFianco = quanti === 3 || r() < 0.5, conBasso = quanti === 3 || !conFianco;
+  const cx = (-0.12 + r() * 0.14) * w, largo = (0.1 + r() * 0.05) * w, giu = (0.1 + r() * 0.05) * h;
+  const basso = conBasso ? morso(r, {x: cx + largo / 2, y: h}, {x: cx + (r() - 0.5) * largo * 0.4, y: h - giu}, {x: cx - largo / 2, y: h}) : [];
+  const pezzi = [angolo, conFianco ? fianco : [], basso].filter(p => p.length);
+  const contorno: Pt[] = [{x: -w / 2, y: 0}, {x: w / 2, y: 0}, b, ...[...taglio].reverse(), a, ...basso, {x: -w / 2, y: h},
+    ...(conFianco ? fianco : [])];
+  const specchio = (q: Pt[]) => (destra ? q : q.map(p => ({x: -p.x, y: p.y})));
+  return {contorno: specchio(contorno), pezzi: pezzi.map(specchio)};
 }
 
-/** Quanto è avanzato il danno di un nodo appena chiuso, t secondi dopo l'apertura della bacheca (0 intero, 1 fatto). */
-export const TEMPO_DANNO = {inizio: 0.6, durata: 0.8};
-export const avanzaDanno = (t: number) => Math.min(1, Math.max(0, (t - TEMPO_DANNO.inizio) / TEMPO_DANNO.durata));
+/** Quando cominciano a cadere i pezzi di un nodo appena chiuso (secondi dopo l'apertura della bacheca), e lo scarto fra un pezzo e l'altro. */
+export const TEMPO_STRAPPI = {inizio: 0.6, scarto: 0.18};

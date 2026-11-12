@@ -37,7 +37,7 @@ export function salvaNome(n: string) {
  * quali nodi avevano il post-it, la lettera caduta (al più una) e quante ne ha rimesse a posto il giocatore. Azzera tutto la cancella.
  */
 export type MemoriaBacheca = {seiQui: string | null; postit: string[]; caduta: {id: string; k: number} | null; rimesse: number;
-  /** Fase I: i nodi chiusi con il post-it (strappato o accartocciato) e in che giro. */ chiusi?: string[]; giro?: number};
+  /** Fasi I e J: i nodi chiusi con il post-it (strappato) e in che giro. */ chiusi?: string[]; giro?: number};
 export function caricaBacheca(id: string): MemoriaBacheca | null {
   try { const t = localStorage.getItem(`${PREFISSO}bacheca:${id}`); return t ? JSON.parse(t) as MemoriaBacheca : null; } catch { return null; }
 }

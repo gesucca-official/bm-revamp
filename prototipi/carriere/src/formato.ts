@@ -42,7 +42,6 @@ export type Passo =
   | {tipo: 'messaggio'; da?: string; testo: string; se?: Condizione; riga: number}
   | {tipo: 'regia'; nota: string; riga: number}                       // testo libero dell'autore: non si legge, non fa nulla
   | {tipo: 'sfondo'; sfondo: string; variante?: string; riga: number}
-  | {tipo: 'entrate'; modo: 'lato' | 'lontano' | 'stacco'; riga: number}  // Fase H: come entrano ed escono i personaggi da qui in poi
   | {tipo: 'sprite'; sprite: string; posa?: string; azione: 'entra' | 'esce' | 'posa'; riga: number}
   | {tipo: 'effetto'; effetto: 'scossa' | 'sfarfallio'; variante?: string; riga: number}
   | {tipo: 'suono'; suono: string; riga: number}                      // fuori dal prototipo: tenuto per CA-0
@@ -141,13 +140,9 @@ export type Cast = {
     verticale?: {alza: number};
     // Fase G: per un'espressione consegnata con il fondo sporco, l'espressione dello stesso personaggio da cui prendere la trasparenza.
     alfa?: Record<string, string>;
-    // Fase H: come entra ed esce di scena, se la scena non dice altro con [Entrate: …].
-    entrata?: 'lato' | 'lontano' | 'stacco';
     // Fase I: quanto vanno veloci le sue animazioni (ondeggiare, maglia, bocca, entrate e uscite), come `velocita` per il testo: 1 normale,
     // meno di 1 più lente (Piera, che parla lentissima, si muove lentissima).
     tempoAnimazioni?: number}>;
-  // Fase H: come entrano ed escono i personaggi, se né la scena né il personaggio dicono altro.
-  entrate?: 'lato' | 'lontano' | 'stacco';
   // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
   sfondi: Record<string, {file: string; varianti?: Record<string, string>;
     insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;

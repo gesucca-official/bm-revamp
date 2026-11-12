@@ -12,7 +12,8 @@
 // - ritratto vuoto: un ritratto in scena senza né l'immagine né la tela visibili;
 // - lampeggio: nel riquadro del ritratto un fotogramma molto diverso dal precedente e dal successivo, che invece si somigliano (A-B-A);
 // - salto: lo stesso ritratto che in un fotogramma si sposta o cambia misura di più del 3% della sua altezza;
-// - velo: pixel non grigi attorno alla figura, fuori dalla sua sagoma allargata (un fondo sporco, un contorno scuro);
+// - velo: pixel non grigi attorno alla figura, fuori dalla sua sagoma allargata (un fondo sporco, un contorno scuro); dalla Fase J, con
+//   due ritratti in scena, fuori dalle sagome di tutti e due;
 // - bocca che non combacia: nelle immagini composte, pixel cambiati sul bordo della sagoma o fuori dalla zona della bocca, o pixel scuri nuovi.
 import {chromium} from '@playwright/test';
 import {spawn} from 'node:child_process';
@@ -45,7 +46,7 @@ function campionatore() {
   let prima = null;
   const passo = ora => {
     if (c.attivo) {
-      const ritratti = [...document.querySelectorAll('[data-testid=ritratto], [data-testid=ritratto-uscente]')].map(e => {
+      const ritratti = [...document.querySelectorAll('[data-testid=ritratto], [data-testid=ritratto-accanto], [data-testid=ritratto-uscente]')].map(e => {
         const r = e.getBoundingClientRect(), img = e.querySelector('img'), tela = e.querySelector('canvas');
         const vis = x => !!x && getComputedStyle(x).visibility !== 'hidden';
         const immagine = vis(img) && img.complete && img.naturalWidth > 0;
@@ -117,12 +118,13 @@ async function giro(nome, scenario, misura, cpu) {
 /** L'analisi dei fotogrammi dello schermo, in una pagina: riquadro del ritratto, lampeggi, velo attorno alla figura. */
 async function analizzaSchermo(pagina, g) {
   const ritrattoA = t => {
-    // Il campione più vicino nel tempo, con un ritratto visibile e non in uscita.
+    // Il campione più vicino nel tempo: i ritratti visibili (Fase J: fino a due), nessuno in uscita.
     let migliore = null, d = Infinity;
     for (const c of g.campioni) { const x = Math.abs(c.t - t); if (x < d) { d = x; migliore = c; } }
     // Durante un'entrata, un'uscita o una dissolvenza la figura è sfocata o trasparente apposta: velo e lampeggio non si guardano.
     if (!migliore || migliore.ritratti.some(r => r.uscita || r.entrata || r.opacita < 0.99)) return null;
-    return migliore.ritratti.find(r => r.immagine || r.tela) ?? null;
+    const visti = migliore.ritratti.filter(r => r.immagine || r.tela).sort((a, b) => a.src.localeCompare(b.src));
+    return visti.length ? visti : null;
   };
   const tutti = g.fotogrammi.map(f => ({t: f.t, r: ritrattoA(f.t)}));
   // A blocchi di 40 fotogrammi, e solo quelli con un ritratto da guardare: tutti insieme la pagina d'analisi non regge.
@@ -168,31 +170,44 @@ async function analizzaBlocco(pagina, dati, stato) {
       const scala = bmp.width / innerWidthGiro(f);
       let crop = null, velo = 0;
       if (f.r) {
-        const x0 = f.r.x * scala, y0 = f.r.y * scala, w = f.r.w * scala, h = f.r.h * scala;
-        const c = new OffscreenCanvas(64, 96), x = c.getContext('2d');
-        x.drawImage(bmp, x0, y0, w, h, 0, 0, 64, 96);
-        const px = x.getImageData(0, 0, 64, 96).data;
-        crop = new Float32Array(64 * 96);
-        for (let k = 0; k < crop.length; k++) crop[k] = (px[k * 4] + px[k * 4 + 1] + px[k * 4 + 2]) / 3;
-        // Velo: celle fuori dalla sagoma allargata, dentro lo schermo, che non sono il grigio del fondo.
-        const s = await sagoma(f.r.src);
-        if (s) for (let k = 0; k < s.length; k++) {
-          if (s[k]) continue;
-          const cy = Math.floor(k / 64), cx = k % 64;
-          const sx = f.r.x + (cx + 0.5) * f.r.w / 64, sy = f.r.y + (cy + 0.5) * f.r.h / 96;
-          if (sx < 0 || sy < 0 || sx > f.vw || sy > f.vh * 0.78) continue;  // sotto la finestra di dialogo non si guarda
-          const r = px[k * 4], gg = px[k * 4 + 1], b = px[k * 4 + 2];
-          if (Math.abs(r - 128) > 14 || Math.abs(gg - 128) > 14 || Math.abs(b - 128) > 14) velo++;
+        // Fase J: fino a due ritratti. Il riquadro di ognuno, uno dopo l'altro; il velo di ognuno fuori dalle sagome di tutti e due (dove
+        // i due si sovrappongono, quello che sta dietro non è un velo di quello davanti).
+        const sagomeQui = await Promise.all(f.r.map(r => sagoma(r.src)));
+        const dentroAltra = (sx, sy, i) => f.r.some((r, j) => {
+          if (j === i || !sagomeQui[j]) return false;
+          const cx = Math.floor(((sx - r.x) / r.w) * 64), cy = Math.floor(((sy - r.y) / r.h) * 96);
+          return cx >= 0 && cy >= 0 && cx < 64 && cy < 96 && sagomeQui[j][cy * 64 + cx] === 1;
+        });
+        crop = new Float32Array(64 * 96 * f.r.length);
+        for (let i = 0; i < f.r.length; i++) {
+          const q = f.r[i];
+          const c = new OffscreenCanvas(64, 96), x = c.getContext('2d');
+          x.drawImage(bmp, q.x * scala, q.y * scala, q.w * scala, q.h * scala, 0, 0, 64, 96);
+          const px = x.getImageData(0, 0, 64, 96).data;
+          for (let k = 0; k < 64 * 96; k++) crop[i * 64 * 96 + k] = (px[k * 4] + px[k * 4 + 1] + px[k * 4 + 2]) / 3;
+          // Velo: celle fuori dalla sagoma allargata, dentro lo schermo, che non sono il grigio del fondo.
+          const s = sagomeQui[i];
+          let suo = 0;
+          if (s) for (let k = 0; k < s.length; k++) {
+            if (s[k]) continue;
+            const cy = Math.floor(k / 64), cx = k % 64;
+            const sx = q.x + (cx + 0.5) * q.w / 64, sy = q.y + (cy + 0.5) * q.h / 96;
+            if (sx < 0 || sy < 0 || sx > f.vw || sy > f.vh * 0.78) continue;  // sotto la finestra di dialogo non si guarda
+            if (dentroAltra(sx, sy, i)) continue;
+            const r = px[k * 4], gg = px[k * 4 + 1], b = px[k * 4 + 2];
+            if (Math.abs(r - 128) > 14 || Math.abs(gg - 128) > 14 || Math.abs(b - 128) > 14) suo++;
+          }
+          velo = Math.max(velo, suo);  // il velo peggiore dei due
         }
       }
       const media = (a, b) => { let d = 0; for (let k = 0; k < a.length; k++) d += Math.abs(a[k] - b[k]); return d / a.length; };
       let lampeggio = false;
-      if (prec2?.crop && prec?.crop && crop && prec.src === prec2.src) {
+      if (prec2?.crop && prec?.crop && crop && prec.src === prec2.src && crop.length === prec.crop.length) {
         const d1 = media(prec2.crop, prec.crop), d2 = media(prec.crop, crop), d3 = media(prec2.crop, crop);
         lampeggio = d1 > 18 && d2 > 18 && d3 < Math.min(d1, d2) * 0.35;
       }
       risultati.push({t: f.t, velo, lampeggio});
-      prec2 = prec; prec = {crop, src: f.r?.src};
+      prec2 = prec; prec = {crop, src: f.r?.map(r => r.src).join(',')};
       bmp.close();
     }
     const serial = x => x ? {crop: x.crop ? Array.from(x.crop) : null, src: x.src} : null;

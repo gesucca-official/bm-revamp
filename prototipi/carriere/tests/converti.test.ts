@@ -13,14 +13,10 @@ const prova = leggi('../storie/prova.md');
 const errori = (md: string) => converti(md, cast, 'prova').problemi.filter(p => p.livello === 'errore').map(p => p.messaggio);
 const passi = (n: Nodo, tipo: Passo['tipo']) => n.passi.filter(p => p.tipo === tipo);
 
-test('[Entrate: …]: lato, lontano o stacco; altro è un errore', () => {
-  const r = converti(prova, cast, 'prova');
-  const a = r.carriera!.nodi.find(n => n.id === 'nodo-a')!;
-  assert.deepEqual(passi(a, 'entrate').map(p => 'modo' in p && p.modo), ['lontano']);
-  const t = converti(tutorial, cast, 'tutorial').carriera!;
-  assert.ok(t.nodi.some(n => passi(n, 'entrate').length), 'anche nel tutorial, alla scena del cane di Piera');
-  const sbagliato = prova.replace('[Entrate: lontano]', '[Entrate: dall\'alto]');
-  assert.ok(errori(sbagliato).some(m => /entrate sconosciute: «dall'alto»/.test(m)));
+test('[Entrate: …] non c\'è più (Fase J: si entra solo di lato): è un comando sconosciuto, e le storie non lo usano', () => {
+  assert.ok(!/\[Entrate:/.test(prova) && !/\[Entrate:/.test(tutorial));
+  const con = prova.replace('[Sfondo: S2]', '[Sfondo: S2]\n\n[Entrate: lontano]');
+  assert.ok(errori(con).some(m => m === 'comando sconosciuto: [Entrate: lontano]'));
 });
 
 test('le forme a parole di prima delle integrazioni (P1) restano errori chiari', () => {
