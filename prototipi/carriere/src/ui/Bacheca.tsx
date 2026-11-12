@@ -6,9 +6,10 @@
 // Un orologio solo, che si ferma mentre si legge un cartoncino o la legenda; con il movimento ridotto del sistema niente si muove.
 import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} from 'react';
 import type {Carriera} from '../formato.ts';
-import {avversari, entra, finali, nodo as trovaNodo, risolvi, type Evento, type Stato} from '../motore.ts';
+import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, sporco, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
-import {agitazione, alPosto, ampiezzaFilo, cadutaLettera, filoMosso, letteraAllentata, oscillazioneDi, PASSO_CORDICELLE, premioLettere, PREMIO_LETTERE,
+import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
+  PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
 import type {StatoNodo} from '../mappa.ts';
 import {nomeDi, nomeSblocco} from './dati.ts';
@@ -79,7 +80,14 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const [rimesse, setRimesse] = useState(apertura.rimesse);
   const [viaggioFatto, setViaggioFatto] = useState(!apertura.da);
   const [postitFatti, setPostitFatti] = useState(!apertura.scoperti.length);
-  const [premio, setPremio] = useState(false);
+  // Fase H: la mosca di questa apertura (una volta su due), e cosa le succede se la si tocca.
+  // ?mosca e ?angolo (per le catture e le registrazioni) fanno arrivare subito la mosca e presto un angolo di post-it.
+  const cerca = new URLSearchParams(window.location.search);
+  const [piano] = useState<PianoMosca | null>(() => ridotto ? null : pianoMosca(`${c.id}:${g.numero}:${g.visti.length}`, cerca.has('mosca')));
+  const presto = cerca.has('angolo');
+  const [schiacciata, setSchiacciata] = useState<Pt | null>(null);
+  const fuga = useRef<{da: Pt; t0: number} | null>(null);
+  const moscaQui = useRef<Pt>({x: -1, y: -1});
   const caduta = lettera && fase !== 'attesa' && fase !== 'trema' && fase !== 'fine' && fase !== 'rientra' ? lettera : null;
   // La memoria si aggiorna a ogni cambio: «sei qui», post-it, lettera caduta, lettere rimesse.
   const postitOra = comp.punti.filter(n => n.postit).map(n => n.id).join(',');
@@ -121,6 +129,18 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     const seme = `${f.da}>${f.a}`;
     return {seme, tipo: f.tipo, a, cat: catenaria(a, b, f.tipo), amp: ampiezzaFilo(f.tipo, Math.hypot(b.x - a.x, b.y - a.y)), ritmo: ritmo(seme), coda: ritmo(seme + ':coda')};
   }), [comp.fili, d.pos]);
+  // I post-it ancora coperti, con la loro posizione: uno di loro ogni tanto solleva un angolo.
+  const angoli = useMemo(() => comp.punti.filter(n => n.postit && d.postitY[n.id] !== undefined).map(n => ({
+    trasforma: `translate(${d.pos[n.id].x} ${d.postitY[n.id]}) rotate(${n.inclinazione})`, w: d.postit.w, h: d.postit.h,
+  })), [comp.punti, d.pos, d.postitY, d.postit]);
+  const toccaMosca = (ev: React.PointerEvent) => {
+    ev.stopPropagation();
+    if (!piano || fuga.current || schiacciata) return;
+    if (toccataMosca(`${c.id}:${g.numero}:${g.visti.length}`) === 'vola') {
+      fuga.current = {da: {x: (moscaQui.current.x - fx) / fw, y: (moscaQui.current.y - fy) / fh}, t0: orologio.current};
+      colpo.current = orologio.current;
+    } else setSchiacciata({...moscaQui.current});
+  };
   const inizioViaggio = TEMPI.viaggio + (apertura.scoperti.length ? TEMPI.staccoPostit - TEMPI.postit : 0);
   const fineAperture = apertura.da ? inizioViaggio + TEMPI.durataViaggio : apertura.scoperti.length ? TEMPI.postit + TEMPI.staccoPostit : 0;
 
@@ -133,7 +153,8 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       const e = svg.querySelector<SVGGElement>(`[data-filo="${f.seme}"]`);
       return {f, corda: e ? [...e.querySelectorAll('.corda')] : [], ombra: e?.querySelector('.ombra') ?? null, coda: e?.querySelector('.coda') ?? null};
     }).filter(x => x.f.tipo === 'arrotolata' ? x.coda : x.f.amp && x.corda.length);
-    let id = 0, prima: number | null = null, ultimeCorde = -1;
+    let id = 0, prima: number | null = null, ultimeCorde = -1, angoloK = 0;
+    const angolo = svg.querySelector('[data-angolo]'), moscaG = svg.querySelector<SVGGElement>('[data-mosca]');
     // I passaggi si annunciano a React una volta sola: chiamarlo a ogni fotogramma lo farebbe ridisegnare tutta la bacheca per niente.
     let postitAnnunciati = postitFatti, viaggioAnnunciato = viaggioFatto;
     const passo = (ora: number) => {
@@ -174,6 +195,41 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         filo?.setAttribute('opacity', tv < 0 ? '0' : '1');
         if (tv >= 1) { viaggioAnnunciato = true; setViaggioFatto(true); }
       }
+      // Fase H: ogni tanto un angolo di post-it si solleva e ricade, come per uno spiffero.
+      if (angoli.length) {
+        while (t > prossimoAngolo(c.id, angoloK, presto) + DURATA_ANGOLO) angoloK++;
+        const t0 = prossimoAngolo(c.id, angoloK, presto), su = angoloPostit(t - t0);
+        const a = angoli[Math.floor(caso(`${c.id}:quale-angolo:${angoloK}`)() * angoli.length)];
+        if (angolo) {
+          angolo.setAttribute('display', su > 0.01 ? 'inline' : 'none');
+          if (su > 0.01) {
+            const s = su * p * 1.4, X = a.w / 2, Y = a.h;
+            angolo.setAttribute('transform', a.trasforma);
+            angolo.querySelector('.buco')?.setAttribute('d', `M${X - s},${Y} L${X},${Y - s} L${X},${Y} Z`);
+            angolo.querySelector('.lembo')?.setAttribute('d', `M${X - s},${Y} L${X},${Y - s} L${X - s * 0.95},${Y - s * 0.95} Z`);
+            angolo.querySelector('.ombra-lembo')?.setAttribute('d', `M${X - s},${Y} L${X},${Y - s} L${X - s * 0.8 + 3},${Y - s * 0.8 + 4} Z`);
+          }
+        }
+      }
+      // Fase H: la mosca. Arriva in volo, passeggia, se ne va; toccata, vola via in fretta (o si schiaccia: lo disegna React).
+      if (piano && moscaG) {
+        const tm = t - piano.inizio;
+        let q = mosca(piano, tm);
+        if (fuga.current) {
+          const u = Math.min(1, (t - fuga.current.t0) / (VOLO * 0.5));
+          q = {x: fuga.current.da.x + (piano.via.x - fuga.current.da.x) * u * u, y: fuga.current.da.y + (piano.via.y - fuga.current.da.y) * u * u, angolo: q.angolo, ali: 1, fase: u >= 1 ? 'andata' : 'via'};
+        }
+        const visibile = q.fase !== 'prima' && q.fase !== 'andata' && tm < durataMosca(piano) + 0.1;
+        moscaG.setAttribute('display', visibile ? 'inline' : 'none');
+        if (visibile) {
+          const x = fx + q.x * fw, y = fy + q.y * fh;
+          moscaQui.current = {x, y};
+          moscaG.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${q.angolo.toFixed(1)})`);
+          const ali = q.ali ? 0.35 + 0.65 * Math.abs(Math.sin(t * 90)) : 1;
+          moscaG.querySelector('.ali')?.setAttribute('transform', `scale(${ali.toFixed(2)} 1)`);
+          moscaG.dataset.fase = q.fase;
+        }
+      }
       // La lettera allentata: aspetta che la bacheca sia ferma da un po', tremola, cade in fondo alla cornice.
       const fl = faseRif.current, e = svg.querySelector('[data-lettera]');
       if (fl.fase === 'attesa' && t > fineAperture + TEMPI.allenta) setFase('trema');
@@ -199,7 +255,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [ridotto, fili, apertura, d, ultimo, posto, giu, gira, inizioViaggio, fineAperture]);
+  }, [ridotto, fili, apertura, d, ultimo, posto, giu, gira, inizioViaggio, fineAperture, angoli, piano, schiacciata, presto]);
 
   // Trascinare la lettera caduta: lasciata vicino al suo posto ci torna (e resta), altrove ricade in fondo.
   const punto = (ev: React.PointerEvent) => { const r = sopra.current!.getBoundingClientRect(); return {x: ev.clientX - r.left, y: ev.clientY - r.top}; };
@@ -225,7 +281,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     if (alPosto(trascinata.current, posto, posto.fs * 0.9)) {
       const n = rimesse + 1;
       setRimesse(n);
-      if (premioLettere(n)) setPremio(true);
+      if (premioLettere(n)) azione((cc, ss) => ottieniAchievement(cc, ss, PREMIO_LETTERE.id));
       setFase(ridotto ? 'fine' : 'rientra');
     } else setFase(ridotto ? 'giu' : 'ricade');
   };
@@ -272,7 +328,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     <g transform={`translate(${l.x} ${l.y}) rotate(${verticale ? -1 : 1.5})`} data-testid={verticale ? undefined : 'legenda'}>
       <rect x={3} y={4} width={l.w} height={l.h} fill="rgba(0,0,0,.45)" filter="url(#sfoca)" />
       <rect width={l.w} height={l.h} fill="#efe8d6" />
-      {l.righe.map((t, i) => <text key={i} x={p * 0.6} y={p * (1.7 + i * (verticale ? 1.25 : 1.15))} fontSize={p * (verticale ? 1.15 : 0.95)} className="penna">{t}</text>)}
+      {l.righe.map((t, i) => <text key={i} x={p * 0.6} y={p * (1.7 + i * (verticale ? 1.25 : 1.15))} fontSize={p * (verticale ? 1.0 : 0.82)} className="scritta">{t}</text>)}
     </g>
   );
   const colori = [...new Set(comp.punti.map(x => x.spillo.colore))];
@@ -311,6 +367,8 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         {elementi}
       </svg>
 
+      {/* Fase H: la luce e l'ombra delle lampade del bar, che oscillano piano sulla bacheca (un'animazione CSS, ferma se si legge). */}
+      {!ridotto && <div className={`lampade${fermo ? ' ferme' : ''}`} style={{left: fx, top: fy, width: fw, height: fh}} aria-hidden="true" />}
       <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="sopra" ref={sopra}>
         {/* Un tocco sul feltro scuote un poco le cordicelle. */}
         <rect x={fx} y={fy} width={fw} height={fh} fill="transparent" onPointerDown={() => { colpo.current = orologio.current; }} />
@@ -318,6 +376,14 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
           const n = comp.punti.find(x => x.id === id)!, {w: pw, h: ph} = d.postit;
           return <g key={`cade-${id}`} data-cade={id}><Postit x={d.pos[id].x} y={d.postitY[id]} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2} /></g>;
         })}
+        {/* L'angolo di post-it che si solleva: sotto si vede il feltro, sopra il retro della carta. */}
+        {angoli.length > 0 && (
+          <g data-angolo display="none" pointerEvents="none">
+            <path className="buco" fill={FELTRO} />
+            <path className="ombra-lembo" fill="rgba(0,0,0,.35)" filter="url(#sfoca-poco)" />
+            <path className="lembo" fill="#e9d77e" stroke="rgba(0,0,0,.15)" strokeWidth={0.6} />
+          </g>
+        )}
         {letteraMossa && (
           <text data-lettera x={posto.x} y={posto.y} fontSize={posto.fs} className={`lettere lettera-mossa ${fase}`} filter="url(#plastica)" fill={posto.colore}
             transform={fase === 'giu' ? giuTrasforma : undefined} data-testid="lettera-caduta" data-fase={fase} pointerEvents="none">
@@ -339,6 +405,25 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         {legenda && verticale && <g data-testid="legenda" onClick={() => setLegendaAperta(false)}>{cartoncinoLegenda(legenda)}
           <Puntina id="legenda" x={legenda.x + legenda.w / 2} y={legenda.y + p * 0.5} lato={latoPuntina(p, verticale, false)} s={{forma: 'ottone', colore: '#d4a944', inclinazione: 0}} /></g>}
         {aree}
+        {/* La mosca: sopra tutto, così la si può toccare; schiacciata, resta una macchiolina che svanisce. */}
+        {piano && !schiacciata && (
+          <g data-mosca display="none" data-testid="mosca">
+            <g transform="scale(1.4)">
+            <ellipse cx={1.5} cy={2.5} rx={p * 0.22} ry={p * 0.32} fill="rgba(0,0,0,.35)" filter="url(#sfoca-poco)" />
+            <g className="ali" opacity={0.55}>
+              <ellipse cx={-p * 0.22} cy={p * 0.05} rx={p * 0.2} ry={p * 0.34} fill="#cfd6dc" transform={`rotate(-25 ${-p * 0.22} ${p * 0.05})`} />
+              <ellipse cx={p * 0.22} cy={p * 0.05} rx={p * 0.2} ry={p * 0.34} fill="#cfd6dc" transform={`rotate(25 ${p * 0.22} ${p * 0.05})`} />
+            </g>
+            <ellipse cx={0} cy={p * 0.08} rx={p * 0.13} ry={p * 0.27} fill="#1b1b1e" />
+            <circle cx={0} cy={-p * 0.22} r={p * 0.11} fill="#2a1a1a" />
+            <circle cx={-p * 0.06} cy={-p * 0.25} r={p * 0.05} fill="#7a2020" /><circle cx={p * 0.06} cy={-p * 0.25} r={p * 0.05} fill="#7a2020" />
+            </g>
+            <circle cx={0} cy={0} r={Math.max(22, p * 1.2)} fill="transparent" onPointerDown={toccaMosca} />
+          </g>
+        )}
+        {schiacciata && <g data-testid="mosca-schiacciata" className="schiacciata" transform={`translate(${schiacciata.x} ${schiacciata.y})`} pointerEvents="none">
+          <ellipse rx={p * 0.28} ry={p * 0.2} fill="#1b1b1e" opacity={0.8} /><ellipse cx={p * 0.2} cy={p * 0.1} rx={p * 0.12} ry={p * 0.06} fill="#5a1414" opacity={0.6} />
+        </g>}
         {letteraMossa && (fase === 'giu' || fase === 'trascina') && (
           // Sopra le aree, così la si prende anche dove sta sotto un titolo; un cerchio largo da toccare con il dito, che tiene il puntatore
           // mentre la si trascina.
@@ -348,7 +433,6 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       </svg>
       {/* La cornice generata, tagliata in nove fette: angoli fermi, lati ripetuti. */}
       {cornice && <div className="cornice" style={{borderWidth: T, borderImage: `url(${cornice}) ${FETTA_CORNICE}% round`}} />}
-      {premio && <div className="premio-lettere" data-testid="premio-lettere">Achievement: {PREMIO_LETTERE.titolo}</div>}
 
       <nav className="comandi-bacheca">
         <button onClick={onAchievement} data-testid="apri-achievement">Achievement</button>

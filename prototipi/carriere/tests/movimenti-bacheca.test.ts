@@ -1,6 +1,7 @@
 // CA-0a, Fase G: la bacheca si muove. Cordicelle che oscillano, puntina che viaggia, post-it che si stacca, lettera che cade e torna.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {angoloPostit, DURATA_ANGOLO, durataMosca, mosca, pianoMosca, prossimoAngolo, toccataMosca, VOLO} from '../src/movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloCoda, cadutaLettera, filoMosso, letteraAllentata, oscillazione, premioLettere, PREMIO_LETTERE,
   scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio} from '../src/movimentiBacheca.ts';
 import {catenaria, componi, statoBozzetto, type Punto} from '../src/bacheca.ts';
@@ -108,11 +109,45 @@ test('la lettera tremola sempre di più, poi cade in fondo girando, con un picco
   assert.ok(y[10] - y[0] < y[50] - y[40], 'accelera cadendo');
 });
 
-test('rimessa a posto se lasciata vicino al suo posto; la variante dell\'achievement è spenta', () => {
+test('rimessa a posto se lasciata vicino al suo posto; l\'achievement alla prima lettera', () => {
   assert.ok(alPosto({x: 105, y: 198}, {x: 100, y: 200}, 30));
   assert.ok(!alPosto({x: 140, y: 200}, {x: 100, y: 200}, 30));
-  assert.equal(PREMIO_LETTERE.attivo, false, 'da confermare: spento');
-  assert.ok(!premioLettere(PREMIO_LETTERE.quante));
-  const acceso = {...PREMIO_LETTERE, attivo: true};
-  assert.ok(premioLettere(acceso.quante, acceso) && !premioLettere(acceso.quante - 1, acceso) && !premioLettere(acceso.quante + 1, acceso), 'acceso: una volta sola');
+  // Fase H: il proprietario lo vuole: acceso, alla prima lettera rimessa a posto, una volta sola.
+  assert.equal(PREMIO_LETTERE.attivo, true);
+  assert.ok(premioLettere(1) && !premioLettere(0) && !premioLettere(2), 'alla prima lettera, una volta sola');
+  assert.ok(!premioLettere(1, {...PREMIO_LETTERE, attivo: false}), 'spento: mai');
+});
+
+test('l\'angolo di post-it: ogni tanto (fra 9 e 16 secondi), si solleva piano, resta un attimo e ricade', () => {
+  const tempi = Array.from({length: 6}, (_, k) => prossimoAngolo('prova', k));
+  for (let k = 1; k < tempi.length; k++) { const d = tempi[k] - tempi[k - 1]; assert.ok(d >= 9 && d <= 16, `fra uno e l'altro ${d.toFixed(1)} s`); }
+  assert.ok(tempi[0] >= 9 && tempi[0] <= 16);
+  assert.deepEqual(tempi, Array.from({length: 6}, (_, k) => prossimoAngolo('prova', k)), 'sempre gli stessi tempi per gli stessi dati');
+  assert.equal(angoloPostit(0), 0); assert.equal(angoloPostit(DURATA_ANGOLO), 0); assert.equal(angoloPostit(-1), 0);
+  assert.equal(angoloPostit(DURATA_ANGOLO * 0.5), 1, 'a metà è sollevato del tutto');
+  const su = campioni(t => angoloPostit(t), 0, DURATA_ANGOLO, 0.01);
+  assert.ok(su.every(x => x >= 0 && x <= 1.0001));
+  assert.ok(su[5] < 0.1, 'comincia piano');
+});
+
+test('la mosca: una volta su due, arriva in volo dal bordo, passeggia a piccoli tratti sul feltro e se ne va', () => {
+  const piani = Array.from({length: 100}, (_, i) => pianoMosca(`semi:${i}`));
+  const quante = piani.filter(Boolean).length;
+  assert.ok(quante > 30 && quante < 70, `una volta su due (${quante} su 100)`);
+  const p = piani.find(Boolean)!;
+  const fuori = (q: {x: number; y: number}) => q.x < 0 || q.x > 1 || q.y < 0 || q.y > 1;
+  assert.ok(fuori(p.arrivo) && fuori(p.via), 'arriva e se ne va dal bordo');
+  assert.ok(p.tappe.every(q => !fuori(q)), 'cammina sul feltro');
+  for (let i = 1; i < p.tappe.length; i++) assert.ok(Math.hypot(p.tappe[i].x - p.tappe[i - 1].x, p.tappe[i].y - p.tappe[i - 1].y) < 0.1, 'a piccoli tratti');
+  assert.ok(p.inizio >= 6 && p.inizio <= 12, 'dopo qualche secondo di bacheca ferma');
+  assert.equal(mosca(p, -1).fase, 'prima');
+  assert.equal(mosca(p, VOLO / 2).fase, 'vola'); assert.equal(mosca(p, VOLO / 2).ali, 1);
+  const fasi = new Set(campioni(t => ['vola', 'cammina', 'ferma', 'via'].indexOf(mosca(p, t).fase), 0, durataMosca(p), 0.05));
+  assert.deepEqual([...fasi].sort(), [0, 1, 2, 3], 'vola, cammina, si ferma, vola via');
+  assert.ok(campioni(t => mosca(p, t).ali, VOLO + 0.01, durataMosca(p) - VOLO - 0.01, 0.05).every(a => a === 0), 'a terra le ali non battono');
+  assert.equal(mosca(p, durataMosca(p) + 1).fase, 'andata');
+  const fine = mosca(p, durataMosca(p) + 1);
+  assert.deepEqual([fine.x, fine.y], [p.via.x, p.via.y]);
+  const toccate = Array.from({length: 100}, (_, i) => toccataMosca(`t:${i}`));
+  assert.ok(toccate.includes('vola') && toccate.includes('schiaccia') && toccate.filter(x => x === 'vola').length > 50, 'toccata, più spesso vola via');
 });

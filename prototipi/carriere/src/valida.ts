@@ -113,6 +113,7 @@ export function valida(dati: unknown, cast: Cast): string[] {
       case 'narrazione': campi(v, dove, [...comuni, 'testo'], ['se']); testo(v.testo, `${dove}.testo`); if ('se' in v) condizione(v.se, `${dove}.se`); return;
       case 'messaggio': campi(v, dove, [...comuni, 'testo'], ['se', 'da']); testo(v.testo, `${dove}.testo`); if ('da' in v) personaggio(v.da, `${dove}.da`); if ('se' in v) condizione(v.se, `${dove}.se`); return;
       case 'regia': campi(v, dove, [...comuni, 'nota'], []); testo(v.nota, `${dove}.nota`); return;
+      case 'entrate': campi(v, dove, [...comuni, 'modo'], []); uno(v.modo, `${dove}.modo`, ['lato', 'lontano', 'stacco']); return;
       case 'sfondo': {
         campi(v, dove, [...comuni, 'sfondo'], ['variante']);
         const sf = cast.sfondi[v.sfondo as string];

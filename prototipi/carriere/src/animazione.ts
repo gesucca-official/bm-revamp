@@ -179,3 +179,39 @@ export function cambiatiFuoriBocca(diff: ArrayLike<number>, w: number, h: number
   }
   return fuori > 0 ? cambiati / fuori : null;
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Entrate e uscite (Fase H): i personaggi non compaiono più di colpo. Il modo si sceglie per scena con [Entrate: …] nella storia, con un
+// valore normale nel cast; gli stacchi su chi ascolta Piera restano tagli, ma dissolti.
+
+export type Entrata = 'lato' | 'lontano' | 'stacco';
+export const ENTRATE: Entrata[] = ['lato', 'lontano', 'stacco'];
+/** Quanto dura un'entrata o un'uscita, in secondi. */
+export const DURATA_ENTRATA: Record<Entrata, number> = {lato: 0.45, lontano: 0.6, stacco: 0.14};
+/** Come sta un ritratto mentre entra o esce: spostamento (in frazioni della sua larghezza e altezza), scala, sfocatura (px), opacità. */
+export type Comparsa = {dx: number; dy: number; scala: number; sfoca: number; opacita: number};
+export const IN_SCENA: Comparsa = {dx: 0, dy: 0, scala: 1, sfoca: 0, opacita: 1};
+
+const esceCubica = (u: number) => 1 - (1 - u) ** 3;  // parte veloce e rallenta
+const entraCubica = (u: number) => u ** 3;           // parte piano e accelera
+
+/**
+ * Il ritratto t secondi dopo l'inizio di un'entrata o di un'uscita. Di lato: entra da destra e rallenta, esce verso sinistra accelerando.
+ * Da lontano: entra piccolo, un poco più in alto e sfocato, e cresce mettendosi a fuoco; esce allontanandosi. Stacco: solo dissolvenza.
+ */
+export function comparsa(modo: Entrata, verso: 'entra' | 'esce', t: number): Comparsa {
+  const u = Math.min(1, Math.max(0, t / DURATA_ENTRATA[modo]));
+  if (verso === 'entra' && u >= 1) return IN_SCENA;
+  if (modo === 'stacco') return {...IN_SCENA, opacita: verso === 'entra' ? u : 1 - u};
+  if (modo === 'lato') {
+    return verso === 'entra'
+      ? {...IN_SCENA, dx: 0.55 * (1 - esceCubica(u)), opacita: Math.min(1, u * 2.5)}
+      : {...IN_SCENA, dx: -0.45 * entraCubica(u), opacita: 1 - u};
+  }
+  if (verso === 'entra') {
+    const e = esceCubica(u);
+    return {dx: 0, dy: -0.06 * (1 - e), scala: 0.6 + 0.4 * e, sfoca: 8 * (1 - e), opacita: Math.min(1, u * 2)};
+  }
+  const e = entraCubica(u);
+  return {dx: 0, dy: -0.05 * e, scala: 1 - 0.35 * e, sfoca: 6 * e, opacita: 1 - u};
+}

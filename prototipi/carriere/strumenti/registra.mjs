@@ -1,6 +1,6 @@
 // Registrazioni (CA-0a). Fase G: g-bacheca.webm, la bacheca che si muove. Fase F (quelle della Fase E, e-*.webm, restano come erano): un breve video della prima scena
 // della prova, con i tre personaggi piegati dalla maglia come vuole il cast, la finestra a due righe e, se le versioni «-bocca» dei ritratti ci
-// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=bacheca o scena per una sola parte.
+// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=fase-h, bacheca o scena per una sola parte.
 // Uscita in BM_OUT, o in %TEMP%\bm-carriere-registra. Edge di sistema come le catture. Playwright registra i video con un suo ffmpeg, che qui
 // non c'è e non si scarica: i fotogrammi arrivano dallo screencast di Edge (CDP) e li codifica in webm il browser stesso (MediaRecorder).
 import {chromium} from '@playwright/test';
@@ -120,9 +120,45 @@ try {
     return tutti;
   };
 
+  // Fase H: entrate, stacchi e bocche nelle scene; poi la bacheca viva (post-it che si stacca, mosca, angolo di post-it).
+  if (quali === 'tutte' || quali === 'fase-h') {
+    const pezzi = [];
+    {
+      const {ctx, page} = await pagina('cast');
+      const pezzo = async ms => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
+      // Tutorial: la combriccola, poi Mara che entra di lato e parla (bocca).
+      await tid(page, 'apri-tutorial').click(); await tid(page, 'mappa-continua').click();
+      await page.waitForTimeout(600);
+      await pezzo(1200);
+      await finoA(page, 'Mara', 40);
+      await pezzo(3000);
+      await ctx.close();
+    }
+    {
+      // Prova: Piera che entra da lontano, gli stacchi dissolti su chi ascolta (le esasperate), Mara.
+      const {ctx, page} = await pagina('cast');
+      const pezzo = async ms => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
+      await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
+      await pezzo(2600);
+      for (let i = 0; i < 2; i++) { await tocca(page); await pezzo(1300); }
+      await ctx.close();
+    }
+    {
+      const {ctx, page} = await pagina('cast', '?mosca&angolo');
+      await tid(page, 'apri-prova').click();
+      await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'opzione-1').click();
+      await tid(page, 'mappa').waitFor();
+      const r = await registra(ctx, page);
+      await page.waitForTimeout(6500);
+      pezzi.push(await r.ferma());
+      await ctx.close();
+    }
+    await codifica(unisci(pezzi), 'h-scene-e-bacheca.webm');
+  }
+
   // Fase G: la bacheca che si muove. Il post-it del primo nodo che si stacca; dopo la cucina, la puntina «sei qui» che viaggia e il post-it
   // della cucina; un tocco sul feltro che scuote le cordicelle; una lettera che tremola e cade, e il giocatore che la rimette a posto.
-  if (quali !== 'scena') {
+  if (quali === 'tutte' || quali === 'bacheca') {
     const {ctx, page} = await pagina('cast', '?allenta');
     const pezzi = [];
     // Un pezzo di registrazione; con `foto`, anche una cattura dopo `a` millisecondi (per il rapporto).
@@ -160,7 +196,7 @@ try {
 
   // 1. La prima scena della prova: Piera (con gli stacchi su chi ascolta), Mara, Spazienzio; ciascuno parla qualche secondo.
   const video = bocche.length ? 'f-bocche.webm' : 'f-scena.webm';
-  if (quali !== 'bacheca') {
+  if (quali === 'tutte' || quali === 'scena') {
     const {ctx, page} = await pagina('cast');
     await tid(page, 'apri-prova').click();
     await tid(page, 'mappa-continua').click();
@@ -181,7 +217,7 @@ try {
   }
 
   // 2. Fotogrammi: otto istanti di ciascuno dei tre mentre parla, ritagliati sul ritratto, in un foglio solo.
-  if (quali !== 'bacheca') {
+  if (quali === 'tutte' || quali === 'scena') {
   const righe = [];
   for (const chi of ['Piera', 'Mara', 'Spazienzio']) {
     const {ctx, page} = await pagina('cast');

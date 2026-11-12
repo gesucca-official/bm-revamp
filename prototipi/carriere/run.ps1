@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Lock','Test','Convert','Check','Build','Dev','Phone','Shots','Misura','Registra')][string]$Task='Build',[switch]$Offline,[string]$Out)
+param([ValidateSet('Install','Lock','Test','Convert','Check','Build','Dev','Phone','Shots','Misura','Registra','Banco')][string]$Task='Build',[switch]$Offline,[string]$Out)
 # CA-0a, prototipo delle carriere: usa e getta, fuori da client-web (docs/design/carriere/prototipo.md).
 $ErrorActionPreference='Stop'
 $repo=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
@@ -24,6 +24,8 @@ try {
     'Misura' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){& node strumenti/misura.mjs 4 5};if($LASTEXITCODE -eq 0){& node strumenti/misura.mjs 6 5}}
     # Registra: due brevi video webm e un foglio di fotogrammi dei ritratti animati (Fase E, movimento e maglia).
     'Registra' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){$saved=$env:BM_OUT;if($Out){$env:BM_OUT=$Out};try{& node strumenti/registra.mjs}finally{$env:BM_OUT=$saved}}}
+    # Banco: il banco della fluidità (Fase H): scene e bacheca registrate e controllate fotogramma per fotogramma, rapporto in -Out.
+    'Banco' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){$saved=$env:BM_OUT;if($Out){$env:BM_OUT=$Out};try{& node strumenti/banco.mjs}finally{$env:BM_OUT=$saved}}}
     'Shots' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){$saved=$env:BM_OUT;if($Out){$env:BM_OUT=$Out};try{& npm run shots}finally{$env:BM_OUT=$saved}}}
   }
   if($LASTEXITCODE -ne 0){throw "prototipo carriere $Task exited with code $LASTEXITCODE"}

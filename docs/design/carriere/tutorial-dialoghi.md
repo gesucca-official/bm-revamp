@@ -82,6 +82,8 @@ portarglielo.
 
 [Sfondo: S2. Regia: Spazienzio si rialza, fumante come prima.]
 
+[Entrate: lontano]
+
 **Spazienzio** (quasi calmo): VA BENE. VA BENE. SONO CALMO.
 
 **Spazienzio** (quasi calmo): QUESTO È IL MIO ESSERE CALMO.

@@ -2,7 +2,7 @@
 // Con le risposte del proprietario: P2 (una battuta di ritento a turno), P3 (la sconfitta che apre un ramo porta lì da sola), P7 (finali).
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {avanti, completa, entra, finali, indizio, nuovoAccount, nuovoGiro, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../src/motore.ts';
+import {avanti, completa, entra, finali, indizio, nuovoAccount, nuovoGiro, ottieniAchievement, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../src/motore.ts';
 import {fermate} from '../src/ui/testo.ts';
 import type {Carriera} from '../src/formato.ts';
 import {prova, tutorial} from './aiuto.ts';
@@ -146,6 +146,20 @@ test('le azioni fuori posto sono rifiutate; un salvataggio vecchio si completa',
   const vecchio = JSON.parse(JSON.stringify(s));
   delete vecchio.giro.tentativi; delete vecchio.giro.finale; delete vecchio.account.finali;
   assert.deepEqual(completa(vecchio), s);
+});
+
+test('[Entrate: …] vale da lì in poi nella scena; un altro luogo torna al valore normale; l\'achievement della bacheca', () => {
+  const c = prova();
+  const s = entra(c, nuovoGiro(c, nuovoAccount()), 'nodo-a').stato;
+  assert.equal(s.giro.scena.entrate, 'lontano');
+  // Un passo di sfondo con un altro luogo dimentica il modo della scena.
+  const b = c.nodi.find(n => n.passi.some(p => p.tipo === 'sfondo' && p.sfondo === 'S1'))!;
+  const dopo = entra(c, {...s, giro: {...s.giro, nodo: null, prossimi: [{nodo: b.id}]}} as Stato, b.id).stato;
+  assert.equal(dopo.giro.scena.entrate, undefined);
+  const r = ottieniAchievement(c, s, 'al-suo-posto');
+  assert.ok(r.stato.account.achievement.includes('al-suo-posto') && !s.account.achievement.includes('al-suo-posto'), 'senza toccare lo stato di prima');
+  assert.deepEqual(r.eventi, [{tipo: 'achievement', achievement: 'al-suo-posto'}]);
+  assert.deepEqual(ottieniAchievement(c, r.stato, 'al-suo-posto').eventi, [], 'una volta sola');
 });
 
 test('le frasi di Piera si dividono dopo i puntini solo se hanno stacchi', () => {

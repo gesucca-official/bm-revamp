@@ -5,14 +5,16 @@ import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vis
 import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
 import {pagine, useTesto} from './testo.ts';
 import type {Carattere} from './font.ts';
-import {Ritratto} from './Ritratto.tsx';
-import {LIVELLI, type Livello} from '../animazione.ts';
+import {preparaRitratto, Ritratto, Uscente, useMovimentoRidotto} from './Ritratto.tsx';
+import {DURATA_ENTRATA, LIVELLI, type Entrata, type Livello} from '../animazione.ts';
 
 type Azione = (f: (c: Carriera, s: Stato) => {stato: Stato; eventi: Evento[]}) => void;
 type Props = {c: Carriera; s: Stato; nome: string; eventi: {id: number; e: Evento}[]; azione: Azione;
   carattere: Carattere; onCarattere: () => void; livello: Livello; onLivello: () => void; onMappa: () => void; onStato: () => void; onElenco: () => void; onNuovoGiro: () => void; onAchievement: () => void};
 
 const LARGHEZZA_SFONDO = 1536, ALTEZZA_SFONDO = 1024;
+/** Fase H: con ?banco nell'indirizzo la scena ha un fondo grigio uniforme, per il banco della fluidità (strumenti/banco.mjs). */
+const BANCO = new URLSearchParams(window.location.search).has('banco');
 
 /** Il testo a parole, ciascuna in uno span con il carattere da cui comincia: per sapere in che riga la mette il disegno. */
 function parti(testo: string) {
@@ -121,10 +123,46 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
   const n = g.nodo ? nodo(c, g.nodo) : null;
   const messaggioPrima = n ? [...n.passi.slice(0, g.passo)].reverse().find(p => p.tipo === 'messaggio') : undefined;
 
+  // Fase H: all'inizio di un nodo si preparano i ritratti che servono (battute e stacchi), così chi entra non aspetta i calcoli.
+  useEffect(() => {
+    if (!n) return;
+    for (const p of n.passi) {
+      if (p.tipo !== 'battuta' || p.fuoriCampo) continue;
+      for (const q of [{chi: p.chi, espressione: p.espressione}, ...(p.stacchi ?? []).map(x => ({chi: x.chi, espressione: espressioneStacco(x.chi, x.espressione)}))]) {
+        const src = q.espressione ? ritratto(q.chi, q.espressione) : null;
+        if (src) preparaRitratto(q.chi, src, ritrattoBocca(q.chi, q.espressione), ritrattoAlfa(q.chi, q.espressione)).catch(() => {});
+      }
+    }
+  }, [n]);
+
+  // Fase H: entrate e uscite. Ogni personaggio ha il suo ritratto (si rimonta quando cambia chi si vede): entra nel modo della scena
+  // ([Entrate: …] nella storia), o del personaggio, o del cast; chi lascia la scena esce nello stesso modo. Gli stacchi su chi ascolta
+  // Piera, e il ritorno da uno stacco, sono tagli dissolti. Con il movimento ridotto nessuno entra né esce: si cambia e basta.
+  const ridotto = useMovimentoRidotto();
+  const modoDi = (chi: string): Entrata => g.scena.entrate ?? cast.personaggi[chi]?.entrata ?? cast.entrate ?? 'lato';
+  const chiOra = volto ? inQuadro!.chi : null;
+  const stacco = useRef(false);
+  const entrata = useRef<{chi: string | null; modo: Entrata}>({chi: null, modo: 'lato'});
+  if (chiOra && entrata.current.chi !== chiOra) entrata.current = {chi: chiOra, modo: t.ascolta || stacco.current ? 'stacco' : modoDi(chiOra)};
+  type Visto = {chi: string; src: string; srcAlfa: string | null; ascolta: boolean; alza: number};
+  const visto = useRef<Visto | null>(null);
+  const [uscenti, setUscenti] = useState<(Visto & {id: number; modo: Entrata})[]>([]);
+  useLayoutEffect(() => {
+    const prima = visto.current;
+    if (prima && prima.chi !== chiOra && !ridotto) {
+      const modo: Entrata = t.ascolta || stacco.current ? 'stacco' : modoDi(prima.chi);
+      const id = performance.now();
+      setUscenti(x => [...x, {...prima, id, modo}]);
+      window.setTimeout(() => setUscenti(x => x.filter(u => u.id !== id)), DURATA_ENTRATA[modo] * 1000 + 100);
+    }
+    visto.current = chiOra && volto ? {chi: chiOra, src: volto, srcAlfa: ritrattoAlfa(chiOra, inQuadro!.espressione), ascolta: !!t.ascolta, alza} : null;
+    stacco.current = !!t.ascolta;
+  });
+
 
 
   return (
-    <div className={`gioco${scossa ? ' scossa' : ''}${battuta || v.tipo === 'narrazione' ? ' con-dialogo' : ''}`} ref={scena} onClick={tocca} data-testid="scena">
+    <div className={`gioco${scossa ? ' scossa' : ''}${battuta || v.tipo === 'narrazione' ? ' con-dialogo' : ''}${BANCO ? ' banco' : ''}`} ref={scena} onClick={tocca} data-testid="scena">
       {sfondo(g.scena.sfondo, sfarfalla ?? g.scena.variante) && <img className="sfondo" src={sfondo(g.scena.sfondo, sfarfalla ?? g.scena.variante)!} alt="" />}
       {g.scena.sfondo && cast.sfondi[g.scena.sfondo]?.insegna && (() => {
         const i = cast.sfondi[g.scena.sfondo!].insegna!;
@@ -133,9 +171,10 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
-      {volto && <Ritratto src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} srcAlfa={ritrattoAlfa(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
+      {uscenti.map(u => <Uscente key={u.id} src={u.src} srcAlfa={u.srcAlfa} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={u.alza} modo={u.modo} ascolta={u.ascolta} />)}
+      {volto && <Ritratto key={inQuadro!.chi} src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} srcAlfa={ritrattoAlfa(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
         espressione={inQuadro!.espressione} ascolta={!!t.ascolta} parlando={parla} ultimo={testoPieno[t.scritti - 1]} parole={parole}
-        livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={alza} />}
+        livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={alza} entrata={entrata.current.modo} />}
 
       <span className="dove">{c.titolo}{n ? ` · ${n.titolo || n.etichetta}` : ''}</span>
       {/* Azioni: in alto a destra in orizzontale, in basso e grandi in verticale (Fase C, impressione 6). */}

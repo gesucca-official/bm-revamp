@@ -11,6 +11,8 @@ import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
 
 // Fase F: chiave nuova, perché il predefinito è cambiato (il cast decide) e la scelta della Fase E non deve restare.
+// Fase H: ?cartoncini=russo scrive i cartoncini in Russo One invece che a pennarello, per confrontare.
+if (new URLSearchParams(window.location.search).get('cartoncini') === 'russo') document.documentElement.style.setProperty('--font-pennarello', "'Russo One', sans-serif");
 const CHIAVE_LIVELLO = 'bm-carriere-prototipo-v1:animazione-f';
 type Avviso = {id: number; testo: string; tipo: Evento['tipo']};
 

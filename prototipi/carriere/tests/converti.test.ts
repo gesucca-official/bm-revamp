@@ -13,6 +13,16 @@ const prova = leggi('../storie/prova.md');
 const errori = (md: string) => converti(md, cast, 'prova').problemi.filter(p => p.livello === 'errore').map(p => p.messaggio);
 const passi = (n: Nodo, tipo: Passo['tipo']) => n.passi.filter(p => p.tipo === tipo);
 
+test('[Entrate: …]: lato, lontano o stacco; altro è un errore', () => {
+  const r = converti(prova, cast, 'prova');
+  const a = r.carriera!.nodi.find(n => n.id === 'nodo-a')!;
+  assert.deepEqual(passi(a, 'entrate').map(p => 'modo' in p && p.modo), ['lontano']);
+  const t = converti(tutorial, cast, 'tutorial').carriera!;
+  assert.ok(t.nodi.some(n => passi(n, 'entrate').length), 'anche nel tutorial, alla scena del cane di Piera');
+  const sbagliato = prova.replace('[Entrate: lontano]', '[Entrate: dall\'alto]');
+  assert.ok(errori(sbagliato).some(m => /entrate sconosciute: «dall'alto»/.test(m)));
+});
+
 test('le forme a parole di prima delle integrazioni (P1) restano errori chiari', () => {
   const vecchio = tutorial
     .replace('→ Partita 3: {tutorial_con} (giocatore) contro gli altri fra Mara, Spazienzio e Piera', '→ Partita 3: tutti contro tutti a tre, col personaggio scelto')

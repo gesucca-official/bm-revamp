@@ -36,9 +36,15 @@ test('ogni font dei dialoghi ha tutti i caratteri delle storie, accentate compre
 
 test('nella cartella dei font restano solo quelli usati, ciascuno con la sua licenza', () => {
   const cartelle = fs.readdirSync(new URL('font/', qui), {withFileTypes: true}).filter(d => d.isDirectory()).map(d => d.name).sort();
-  // Patrick Hand resta per la penna della bacheca, League Gothic per le sue lettere.
-  assert.deepEqual(cartelle, ['changa', 'leaguegothic', 'oxanium', 'patrickhand', 'russoone']);
+  // Fase H: Patrick Hand tolto; Caveat Brush per i cartoncini (pennarello), League Gothic per le lettere della bacheca.
+  assert.deepEqual(cartelle, ['caveatbrush', 'changa', 'leaguegothic', 'oxanium', 'russoone']);
   for (const c of cartelle) assert.match(fs.readFileSync(new URL(`font/${c}/OFL.txt`, qui), 'utf8'), /SIL Open Font License, Version 1\.1/);
+});
+
+test('Caveat Brush, il pennarello dei cartoncini, ha tutti i caratteri delle storie e dei cartoncini', () => {
+  const usati = [...new Set([...testiDialogo(tutorial()) + testiDialogo(prova()) + '—·→'])].filter(c => c.trim() && c !== '→');
+  const set = caratteriDelFont(new URL('font/caveatbrush/CaveatBrush-Regular.ttf', qui));
+  assert.deepEqual(usati.filter(c => !set.has(c.codePointAt(0)!)), []);
 });
 
 test('League Gothic ha tutte le lettere della bacheca', () => {

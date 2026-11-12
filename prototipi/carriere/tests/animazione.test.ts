@@ -1,6 +1,8 @@
 // CA-0a, Fase E e F: le prove del movimento procedurale dei ritratti, della maglia, della scelta del modo dal cast e della bocca.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {comparsa, DURATA_ENTRATA, IN_SCENA} from '../src/animazione.ts';
+import {componiPixel, erodi, pesoEllisse} from '../src/ui/maglia.ts';
 import {FERMA, LIVELLI, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
 import type {Cast} from '../src/formato.ts';
 import castJson from '../dati/cast.json' with {type: 'json'};
@@ -199,4 +201,58 @@ test('nel cast: chi ascolta Piera ha un\'espressione esasperata prevista, Spazie
   }
   const alza = cast.personaggi.spazienzio.verticale?.alza ?? 0;
   assert.ok(alza > 0.04 && alza < 0.15, 'più in alto, ma con il bordo basso ancora dietro la finestra');
+});
+
+test('le entrate: di lato da destra, da lontano piccolo e sfocato che cresce, stacco dissolto; e le uscite', () => {
+  for (const m of ['lato', 'lontano', 'stacco'] as const) {
+    assert.deepEqual(comparsa(m, 'entra', DURATA_ENTRATA[m]), IN_SCENA, `${m}: alla fine dell'entrata è in scena`);
+    assert.deepEqual(comparsa(m, 'entra', 10), IN_SCENA);
+    assert.equal(comparsa(m, 'esce', DURATA_ENTRATA[m]).opacita, 0, `${m}: alla fine dell'uscita non si vede`);
+    assert.equal(comparsa(m, 'entra', 0).opacita, 0, `${m}: all'inizio non si vede`);
+    const op = campioni(t => comparsa(m, 'entra', t).opacita, 0, DURATA_ENTRATA[m], 0.005);
+    assert.ok(op.every((x, i) => i === 0 || x >= op[i - 1]), `${m}: compare senza lampeggiare (l'opacità non torna indietro)`);
+  }
+  const lato = comparsa('lato', 'entra', 0.05), lontano = comparsa('lontano', 'entra', 0.05);
+  assert.ok(lato.dx > 0.3 && lato.scala === 1 && lato.sfoca === 0, 'di lato: arriva da destra');
+  assert.ok(comparsa('lato', 'esce', 0.3).dx < -0.1, 'ed esce verso sinistra');
+  assert.ok(lontano.scala < 0.75 && lontano.sfoca > 5 && lontano.dy < 0, 'da lontano: piccolo, sfocato, un poco più in alto');
+  assert.ok(comparsa('lontano', 'esce', 0.5).scala < 0.8, 'ed esce allontanandosi');
+  const st = comparsa('stacco', 'entra', 0.07);
+  assert.ok(st.dx === 0 && st.scala === 1 && st.opacita > 0.4 && st.opacita < 0.6, 'lo stacco: solo una dissolvenza breve');
+  assert.ok(DURATA_ENTRATA.stacco < 0.2 && DURATA_ENTRATA.lato < 0.6 && DURATA_ENTRATA.lontano < 0.8, 'brevi');
+  // Il cast ha un valore normale.
+  assert.equal(cast.entrate, 'lato');
+});
+
+test('la maschera della bocca: il peso dell\'ellisse e l\'erosione del bordo della sagoma', () => {
+  const z = {u: 0.5, v: 0.5, ru: 0.1, rv: 0.1};
+  assert.equal(pesoEllisse(0.5, 0.5, z), 1); assert.equal(pesoEllisse(0.56, 0.5, z), 1, 'pieno fino al 70%');
+  assert.equal(pesoEllisse(0.61, 0.5, z), 0); assert.ok(Math.abs(pesoEllisse(0.585, 0.5, z) - 0.5) < 1e-9, 'sfuma fra il 70% e il bordo');
+  // Un quadrato pieno 10×10 eroso di 2 resta un quadrato 6×6; un pixel solo sparisce.
+  const w = 14, h = 14, m = new Uint8Array(w * h);
+  for (let y = 2; y < 12; y++) for (let x = 2; x < 12; x++) m[y * w + x] = 1;
+  const e = erodi(m, w, h, 2);
+  assert.equal(e.reduce((a, b) => a + b, 0), 36);
+  assert.equal(e[4 * w + 4], 1); assert.equal(e[3 * w + 3], 0);
+  const uno = new Uint8Array(w * h); uno[7 * w + 7] = 1;
+  assert.equal(erodi(uno, w, h, 1).reduce((a, b) => a + b, 0), 0);
+});
+
+test('la bocca composta: il colore della versione «-bocca» solo dentro la zona e dove tutte e due sono piene, a due pixel dal bordo', () => {
+  // Un ritratto 20×20: pieno al centro (4..15), bordo sfumato attorno; la versione «-bocca» tutta rossa, con il fondo velato (alfa 200).
+  const w = 20, h = 20, a = new Uint8ClampedArray(w * h * 4), b = new Uint8ClampedArray(w * h * 4);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const k = (y * w + x) * 4, dentro = x >= 4 && x <= 15 && y >= 4 && y <= 15, bordo = x >= 3 && x <= 16 && y >= 3 && y <= 16;
+    a.set([100, 100, 100, dentro ? 255 : bordo ? 120 : 0], k);
+    b.set([255, 0, 0, dentro ? 255 : 200], k);
+  }
+  const out = componiPixel(a, b, w, h, {u: 0.5, v: 0.5, ru: 0.6, rv: 0.6});
+  const px = (x: number, y: number) => [...out.slice((y * w + x) * 4, (y * w + x) * 4 + 4)];
+  assert.deepEqual(px(10, 10), [255, 0, 0, 255], 'al centro: la bocca');
+  assert.deepEqual(px(4, 10), [100, 100, 100, 255], 'a meno di due pixel dal bordo della sagoma: il ritratto');
+  assert.deepEqual(px(5, 10), [100, 100, 100, 255]);
+  assert.deepEqual(px(6, 10), [255, 0, 0, 255], 'a due pixel: già la bocca');
+  assert.deepEqual(px(3, 10), [100, 100, 100, 120], 'sul bordo sfumato: il ritratto, con la sua trasparenza');
+  assert.deepEqual(px(0, 0), [100, 100, 100, 0], 'fuori: il fondo trasparente, mai il velo');
+  for (let k = 3; k < out.length; k += 4) assert.equal(out[k], a[k], 'la trasparenza è sempre quella del ritratto');
 });

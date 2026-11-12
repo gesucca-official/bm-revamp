@@ -4,10 +4,16 @@ import tutorialJson from '../../dati/generati/tutorial.json';
 import provaJson from '../../dati/generati/prova.json';
 import type {Carriera, Cast} from '../formato.ts';
 import {comeCarriera} from '../valida.ts';
+import {PREMIO_LETTERE} from '../movimentiBacheca.ts';
 
 export const cast = castJson as unknown as Cast;
 // Il controllo di validità gira anche qui: un JSON rotto si vede subito, con il percorso del campo.
 export const carriere: Carriera[] = [comeCarriera(tutorialJson, cast), comeCarriera(provaJson, cast)];
+// Fase H: l'achievement della bacheca (la lettera rimessa al suo posto) sta in ogni carriera, come gli altri; non viene da una storia.
+for (const c of carriere) {
+  c.achievement.push({id: PREMIO_LETTERE.id, titolo: PREMIO_LETTERE.titolo, descrizione: PREMIO_LETTERE.descrizione, nascosto: true,
+    indizi: [{testo: PREMIO_LETTERE.indizio}]});
+}
 
 // Gli asset non si copiano (prototipo.md, «Come»): Vite li prende da docs/design/carriere/asset/tutorial.
 const RADICE = '../../../../docs/design/carriere/asset/tutorial/';

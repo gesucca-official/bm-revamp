@@ -145,8 +145,77 @@ export function cadutaLettera(t: number, da: Pt, a: Pt, gira: number): {x: numbe
 export const alPosto = (q: Pt, posto: Pt, raggio: number) => Math.hypot(q.x - posto.x, q.y - posto.y) <= raggio;
 
 /**
- * Variante della regia, da confermare (spenta): un achievement nascosto per chi rimette a posto tutte le lettere cadute. «Tutte»: le
- * lettere cadono una alla volta, quindi conta quante ne ha rimesse; con `attivo` falso non si dà mai.
+ * L'achievement della bacheca (Fase H: il proprietario lo vuole, «per rimettere la lettera a posto»): alla prima lettera rimessa al suo
+ * posto. È un achievement come gli altri, nell'elenco di ogni carriera, nascosto finché non arriva.
  */
-export const PREMIO_LETTERE = {attivo: false, quante: 5, titolo: 'Tutte al loro posto'};
+export const PREMIO_LETTERE = {attivo: true, quante: 1, id: 'al-suo-posto', titolo: 'Al suo posto',
+  descrizione: 'Hai rimesso al suo posto una lettera caduta dalla bacheca.', indizio: 'Ogni tanto sulla bacheca una lettera si allenta.'};
 export const premioLettere = (rimesse: number, p = PREMIO_LETTERE) => p.attivo && rimesse === p.quante;
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Fase H: la bacheca viva. Un angolo di post-it che ogni tanto si solleva, una mosca che passeggia, l'ombra delle lampade (in CSS).
+
+/** Quando si solleva un angolo di post-it: la k-esima volta, in secondi di bacheca ferma, decisa dai dati (fra 9 e 16 s l'una dall'altra). */
+export function prossimoAngolo(seme: string, k: number, presto = false): number {
+  let t = presto ? -7 : 0;  // con ?angolo il primo arriva dopo due secondi
+  for (let i = 0; i <= k; i++) t += 9 + caso(`${seme}:angolo:${i}`)() * 7;
+  return t;
+}
+export const DURATA_ANGOLO = 1.8;
+/** Quanto è sollevato l'angolo (0–1), t secondi dopo che comincia: sale piano come per uno spiffero, resta un attimo e ricade. */
+export function angoloPostit(t: number): number {
+  if (t <= 0 || t >= DURATA_ANGOLO) return 0;
+  const u = t / DURATA_ANGOLO;
+  if (u < 0.45) return liscia(u / 0.45);
+  if (u < 0.6) return 1;
+  // Ricade con un piccolo sobbalzo, come la carta.
+  const v = (u - 0.6) / 0.4;
+  return Math.min(1, Math.max(0, (1 - liscia(v)) + Math.sin(v * Math.PI * 2) * 0.08 * (1 - v)));
+}
+
+/** Il piano di una mosca: da dove arriva, dove si posa, dove cammina, quando se ne va. In frazioni del feltro (0–1), tempi in secondi. */
+export type PianoMosca = {arrivo: Pt; tappe: Pt[]; via: Pt; inizio: number};
+export const VOLO = 0.9, PASSO_MOSCA = 0.55, SOSTA = 0.9;
+/** Una mosca ogni tanto (una volta su due che si apre la bacheca), decisa dai dati; arriva dopo qualche secondo di bacheca ferma. */
+export function pianoMosca(seme: string, sempre = false): PianoMosca | null {
+  const r = caso(`${seme}:mosca`);
+  if (r() >= 0.5 && !sempre) return null;
+  const bordo = (): Pt => { const lato = Math.floor(r() * 4), q = r(); return lato === 0 ? {x: q, y: -0.1} : lato === 1 ? {x: 1.1, y: q} : lato === 2 ? {x: q, y: 1.1} : {x: -0.1, y: q}; };
+  const arrivo = bordo();
+  let q = {x: 0.2 + r() * 0.6, y: 0.25 + r() * 0.5};
+  const tappe = [q];
+  for (let i = 0; i < 5; i++) { q = {x: Math.min(0.92, Math.max(0.08, q.x + (r() - 0.5) * 0.12)), y: Math.min(0.9, Math.max(0.15, q.y + (r() - 0.5) * 0.1))}; tappe.push(q); }
+  const via = bordo(), inizio = 6 + r() * 6;
+  return {arrivo, tappe, via, inizio: sempre ? 1.5 : inizio};
+}
+export const durataMosca = (p: PianoMosca) => VOLO + (p.tappe.length - 1) * (PASSO_MOSCA + SOSTA) + SOSTA + VOLO;
+
+/**
+ * Dove sta la mosca t secondi dopo il suo inizio: vola dentro dal bordo, cammina a piccoli tratti fra le tappe (con le soste in cui si
+ * pulisce le zampe), poi vola via. `ali`: quanto battono (0 ferma, 1 in volo); `angolo`: la direzione in cui guarda, in gradi.
+ */
+export function mosca(p: PianoMosca, t: number): {x: number; y: number; angolo: number; ali: number; fase: 'prima' | 'vola' | 'cammina' | 'ferma' | 'via' | 'andata'} {
+  const dir = (a: Pt, b: Pt) => (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI + 90;
+  const tra = (a: Pt, b: Pt, u: number) => ({x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u});
+  if (t < 0) return {...p.arrivo, angolo: dir(p.arrivo, p.tappe[0]), ali: 1, fase: 'prima'};
+  if (t < VOLO) {
+    const u = liscia(t / VOLO), q = tra(p.arrivo, p.tappe[0], u);
+    return {x: q.x + Math.sin(t * 19) * 0.006 * (1 - u), y: q.y + Math.cos(t * 23) * 0.006 * (1 - u), angolo: dir(p.arrivo, p.tappe[0]), ali: 1, fase: 'vola'};
+  }
+  let s = t - VOLO;
+  for (let i = 0; i < p.tappe.length - 1; i++) {
+    const a = p.tappe[i], b = p.tappe[i + 1];
+    if (s < SOSTA) return {...a, angolo: dir(a, b) + Math.sin(s * 9) * 6, ali: 0, fase: 'ferma'};
+    s -= SOSTA;
+    if (s < PASSO_MOSCA) { const q = tra(a, b, s / PASSO_MOSCA); return {...q, angolo: dir(a, b), ali: 0, fase: 'cammina'}; }
+    s -= PASSO_MOSCA;
+  }
+  const ultima = p.tappe[p.tappe.length - 1];
+  if (s < SOSTA) return {...ultima, angolo: dir(ultima, p.via), ali: 0, fase: 'ferma'};
+  s -= SOSTA;
+  if (s < VOLO) { const u = (s / VOLO) ** 2, q = tra(ultima, p.via, u); return {...q, angolo: dir(ultima, p.via), ali: 1, fase: 'via'}; }
+  return {...p.via, angolo: 0, ali: 0, fase: 'andata'};
+}
+
+/** Toccata, la mosca o vola via (più spesso) o si schiaccia: deciso dai dati, una volta per mosca. */
+export const toccataMosca = (seme: string): 'vola' | 'schiaccia' => caso(`${seme}:toccata`)() < 0.65 ? 'vola' : 'schiaccia';
