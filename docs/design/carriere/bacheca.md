@@ -110,3 +110,6 @@ che si stacca quando si scopre un nodo. Poco e mai mentre si legge o si sceglie:
 si accartoccia, e torna intero al giro nuovo.
 
 **Fase J:** il nodo chiuso è sempre strappato, in più punti, con la scritta grigia; l'accartocciato si toglie.
+
+**Fase K:** i nodi affrontabili mostrano il nome già prima di esserci stati; il post-it «???» resta solo sui nodi più lontani e si stacca
+quando il nodo diventa affrontabile. Quando una puntina si toglie, il filo che vi era legato non resta sospeso.

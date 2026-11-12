@@ -137,3 +137,18 @@ Le prove a mano con il server di sviluppo sono state fatte sulla porta 4332: sul
 1. Due in scena: posti, ombra di chi non è a fuoco, quanto si sovrappongono in verticale.
 2. Chi è a fuoco durante lo stacco: chi reagisce (ora) o sempre chi parla (`?fuoco=parla`).
 3. Strappi: quanti, quanto grandi, il grigio del «???».
+
+## Giudizio del proprietario
+
+12 novembre 2026, con le sue parole:
+
+- **Fuoco:** «meglio con sempre a fuoco chi parla».
+- **Chi reagisce:** «chi è non a fuoco perché reagisce è meglio che sia un po' più piccolo e defilato, ad esempio Mara è troppo grande
+  rispetto a Piera».
+- **Il filo:** «sulla mappa, quando la puntina viene tolta, il filo resta lì sospeso nel nulla. O lo facciamo cadere e riprendere dalla
+  puntina rossa, o troviamo un'altra soluzione».
+- **I nodi successivi:** «vorrei che i nomi dei prossimi nodi affrontabili siano rivelati, non che ci sia "continua verso ???"».
+- **In generale:** «sistemiamo queste cose e poi direi che è perfetto, e siamo pronti per scrivere e realizzare la carriera principale del
+  set base».
+
+Si apre la [Fase K](prototipo.md#fase-k-ultimi-ritocchi-e-chiusura), l'ultima del prototipo.

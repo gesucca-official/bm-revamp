@@ -218,3 +218,26 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
    `[Entrate: …]` e le sue due righe nelle storie si tolgono, o restano solo per lato e stacco se servono ancora.
 3. **Nodi chiusi strappati in più punti, con la scritta grigia:** il post-it di un nodo non più raggiungibile è strappato in due o tre punti
    e il «???» diventa grigio. Via l'accartocciato.
+
+## Fase K, ultimi ritocchi e chiusura
+
+Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla Fase J](prototipo-fase-j.md#giudizio-del-proprietario).
+È l'ultima fase: con questi ritocchi il proprietario considera il prototipo riuscito.
+
+1. **Sempre a fuoco chi parla.** Il valore di `?fuoco=parla` diventa quello normale e la scelta si toglie.
+2. **Chi reagisce più piccolo e defilato.** Il personaggio che reagisce sta più verso il bordo, ed è più piccolo di chi parla anche a parità
+   di inquadratura: oggi Mara, inquadrata più da vicino, sembra più grande di Piera. Le misure si prendono dalla testa, non dall'immagine, e
+   la [specifica](specifica-asset.md#come-appare-la-scena) si aggiorna.
+3. **Il filo che resta sospeso.** Quando la puntina di un nodo si toglie, il filo che vi era legato non resta a mezz'aria. Soluzione
+   proposta dal proprietario: il capo libero cade, penzola, e la puntina rossa «sei qui» lo riprende. L'esecutore può proporne un'altra
+   se regge meglio, ma nessun filo deve finire legato al nulla.
+4. **I nodi affrontabili si leggono.** I nodi che il giocatore può affrontare subito mostrano il loro nome sulla bacheca, già prima di
+   esserci stati, e il pulsante dice «Continua verso» con il nome vero. Il post-it «???» resta solo sui nodi più lontani. Il post-it si
+   stacca quando il nodo diventa affrontabile, non più quando ci si arriva; il [concetto della bacheca](bacheca.md) si aggiorna.
+5. **Chiusura del prototipo:**
+   - via i font di prova (Russo One pieno, Changa, Oxanium) e le scelte di confronto che non servono più (`?fuoco`, `?testa=larga`,
+     `?cartoncini=russo`);
+   - restano gli interruttori di prova delle cose rare (`?mosca`, `?angolo`, `?allenta`) e il banco;
+   - una sezione di chiusura, in questo documento, che dice cosa passa a CA-0 (formato e convertitore, controllo del grafo, banco della
+     fluidità, misure della scena e della bacheca, lezioni sulle immagini e sulle bocche), cosa si butta, e cosa resta aperto: le due
+     immagini del [secondo giro delle bocche](prompt-bocche.md#secondo-giro) e la prova su un telefono vero.
