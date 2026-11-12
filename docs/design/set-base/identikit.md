@@ -28,10 +28,10 @@
 | Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | **Approvato**: [riferimento](identikit/riferimenti/spazienzio.png), più le strisce ai pantaloni |
 | Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | **Approvata**: [riferimento](identikit/riferimenti/mara.png) |
 | Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | **Approvata**: [riferimento](identikit/riferimenti/piera.png) |
-| Celestina | Magra, curva e storta, coi capelli corti e ritti, spesso accovacciata | Bassa | Rosso dei capelli, prugna slavata della tuta | La cosa appena raccolta da terra | **Scelta la B** (12 novembre 2026), tuta da ricolorare: secondo giro |
-| Beppe | Robusto e piantato, la salopette e il bun in cima | Media | Tabacco della salopette di tela | La maglietta del gruppo metal; niente attrezzi in vista | **Scelta la A** (12 novembre 2026), senza attrezzi in tasca: secondo giro |
-| Sergio | Alto e secco, una linea dritta nell'abito ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | Blu petrolio dell'abito, bianco della camicia | La sigaretta sottile di contrabbando | **Scelta la A** (12 novembre 2026), con i calzini della B e senza chiavi: secondo giro |
-| Duccio | Tarchiato e molle, testa rasata, petto in fuori | Medio-bassa | Nero della maglietta, con l'accento rosa del cocktail | Il cocktail dolce con l'ombrellino | **Scelta la A** (12 novembre 2026), con l'aquila della B e solo il punto interrogativo: secondo giro |
+| Celestina | Magra, curva e storta, coi capelli corti e ritti, spesso accovacciata | Bassa | Rosso dei capelli, prugna scura della tuta | La cosa appena raccolta da terra | **Approvata**: [riferimento](identikit/riferimenti/celestina.png) |
+| Beppe | Robusto e piantato, la salopette e il bun in cima | Media | Tabacco della salopette di tela | La maglietta del gruppo metal; niente attrezzi in vista | **Approvato**: [riferimento](identikit/riferimenti/beppe.png) |
+| Sergio | Alto e secco, una linea dritta nell'abito ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | Blu petrolio dell'abito, bianco della camicia | La sigaretta sottile di contrabbando | **Approvato**: [riferimento](identikit/riferimenti/sergio.png) |
+| Duccio | Tarchiato e molle, testa rasata, petto in fuori | Medio-bassa | Nero della maglietta, con l'accento rosa del cocktail | Il cocktail dolce con l'ombrellino | **Approvato**: [riferimento](identikit/riferimenti/duccio.png) |
 
 Le idee del proprietario sugli ultimi quattro, e le sue scelte sulle prove, sono del 12 novembre 2026. **Colori:** il blu petrolio, che la regia aveva proposto per la tuta di Beppe, va all'abito di Sergio per scelta del proprietario,
 e Beppe passa al tabacco. Il nero intero resta di Piera; Duccio lo porta solo nella maglietta, e lo distingue l'accento rosa del cocktail,
@@ -124,6 +124,11 @@ di Mara, a una **prugna slavata**, l'unico colore libero nel cast che stia bene 
 Spazienzio; il viso torna più giovane, come voleva il proprietario («molto giovane»), perché nella prova sembra sui quarant'anni, mentre la
 pelle resta segnata. Ritocco nel [secondo giro](identikit-prompt.md#secondo-giro-dei-quattro).
 
+**Approvata il 12 novembre 2026** con l'immagine del secondo giro, conservata come
+[riferimenti/celestina.png](identikit/riferimenti/celestina.png) («Approvo tutti e quattro»). La tuta è venuta prugna scura, quasi bordeaux,
+e il viso è ringiovanito di poco: il proprietario la approva così. Nelle illustrazioni vere conviene tenere la tuta sul viola, lontana dal
+bordeaux di Spazienzio.
+
 *Varianti della regia, da provare:*
 
 - **Età apparente:** sui ventitré anni, chiaramente adulta: il contrasto è fra il viso giovane e la pelle che non lo è più.
@@ -148,6 +153,9 @@ l'attrezzo giusto in tasca.
 **Scelta del proprietario (12 novembre 2026):** variante A, «ma togliamogli gli attrezzi dalle tasche, troppo caricaturali». Restano
 salopette di tela tabacco con le due bretelle su, maglietta nera del gruppo inventato con il logo illeggibile, tatuaggio sull'avambraccio,
 barba lunga, bun, braccia incrociate. Ritocco nel [secondo giro](identikit-prompt.md#secondo-giro-dei-quattro).
+
+**Approvato il 12 novembre 2026** con l'immagine del secondo giro, conservata come [riferimenti/beppe.png](identikit/riferimenti/beppe.png):
+tasche vuote, il resto come la variante A.
 
 *Varianti della regia, da provare:*
 
@@ -174,6 +182,10 @@ proprietario segreto del Serraglio ([flavour](flavour.md#cesira-la-malalingua--b
 chiavi dalla cintura»: i calzini spaiati della B al posto di quelli della A, l'abito spinto verso il blu petrolio (nelle prove tira al
 grigio ardesia), niente mazzo di chiavi. Resta il laccio slacciato. Ritocco nel [secondo
 giro](identikit-prompt.md#secondo-giro-dei-quattro).
+
+**Approvato il 12 novembre 2026** con l'immagine del secondo giro, conservata come
+[riferimenti/sergio.png](identikit/riferimenti/sergio.png): abito blu petrolio, calzini spaiati (uno a rombi, uno rosso scuro), laccio
+slacciato, niente chiavi.
 
 *Varianti della regia, da provare:*
 
@@ -208,6 +220,10 @@ proprietario sta dentro questa regola: somiglia alla croce, ma il pezzo che manc
 mi piacciono». Restano posa eroica, mano sul cuore, cocktail rosa col mignolo alzato, pantaloni mimetici e anfibi, e il tatuaggio a punto
 interrogativo sul collo; la stampa della maglietta diventa l'aquila bianca ad ali aperte della B, screpolata; spariscono i cerchi a raggi su
 braccia e collo. Ritocco nel [secondo giro](identikit-prompt.md#secondo-giro-dei-quattro).
+
+**Approvato il 12 novembre 2026** con l'immagine del secondo giro, conservata come
+[riferimenti/duccio.png](identikit/riferimenti/duccio.png): l'aquila bianca ad ali aperte, screpolata e senza simboli intorno, e sul collo
+solo il tatuaggio a punto interrogativo.
 
 *Varianti della regia, da provare:*
 
@@ -277,7 +293,7 @@ strumento.
 
 | Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| Celestina | [Anteprima](identikit/prove/celestina-2-1.webp) | [Scheda](identikit/registro.md#celestina-2-1) |  |
-| Beppe | [Anteprima](identikit/prove/beppe-2-1.webp) | [Scheda](identikit/registro.md#beppe-2-1) |  |
-| Sergio | [Anteprima](identikit/prove/sergio-2-1.webp) | [Scheda](identikit/registro.md#sergio-2-1) |  |
-| Duccio | [Anteprima](identikit/prove/duccio-2-1.webp) | [Scheda](identikit/registro.md#duccio-2-1) |  |
+| Celestina | [Anteprima](identikit/prove/celestina-2-1.webp) | [Scheda](identikit/registro.md#celestina-2-1) | **Approvata** (12 novembre 2026): «Approvo tutti e quattro». Originale conservato come [riferimento](identikit/riferimenti/celestina.png) |
+| Beppe | [Anteprima](identikit/prove/beppe-2-1.webp) | [Scheda](identikit/registro.md#beppe-2-1) | **Approvato** (12 novembre 2026): «Approvo tutti e quattro». Originale conservato come [riferimento](identikit/riferimenti/beppe.png) |
+| Sergio | [Anteprima](identikit/prove/sergio-2-1.webp) | [Scheda](identikit/registro.md#sergio-2-1) | **Approvato** (12 novembre 2026): «Approvo tutti e quattro». Originale conservato come [riferimento](identikit/riferimenti/sergio.png) |
+| Duccio | [Anteprima](identikit/prove/duccio-2-1.webp) | [Scheda](identikit/registro.md#duccio-2-1) | **Approvato** (12 novembre 2026): «Approvo tutti e quattro». Originale conservato come [riferimento](identikit/riferimenti/duccio.png) |

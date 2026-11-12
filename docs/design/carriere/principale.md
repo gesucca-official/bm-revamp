@@ -190,7 +190,7 @@ ed equipaggiamento in I2a e II2b, la L di Piera in II2a, il mazzo costruito con 
 1. Il proprietario riscrive questa scaletta: nomi dei nodi, scene, chi gioca, finali. Insieme si fanno gli
    [identikit](../set-base/identikit.md#celestina-bucatina) di Celestina, Beppe, Sergio e Duccio, anticipati su proposta del proprietario
    («così anche la carriera avrà una direzione e una consistenza artistica più precisa», 12 novembre 2026): aspetto, gesti e oggetti servono ai
-   dialoghi e ai ritratti.
+   dialoghi e ai ritratti. Approvati tutti e quattro il 12 novembre 2026.
 2. La regia la mette nel formato del prototipo con le partite simulate, e la si prova nel [prototipo](prototipo.md#chiusura) con il
    controllo del grafo: starter su ogni percorso, PvP prima di metà, segreti raggiungibili, achievement possibili.
 3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): prima stesura della regia o direttamente del proprietario.
