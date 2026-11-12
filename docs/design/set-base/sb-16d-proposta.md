@@ -1,6 +1,6 @@
 # SB-16d — Proposta per i cinque starter
 
-**Versione 0.1 — 12 novembre 2026. Solo proposta, da approvare.**
+**Versione 0.2 — 12 novembre 2026. Proposta 0.1 approvata; approvazione registrata, attuazione non eseguita.**
 
 | Starter | Cambi proposti | Coppia con ricerca | Scopo principale |
 |---|---|---|---|
@@ -15,12 +15,31 @@ Sono rispettivamente **2, 3, 2, 1 e 2 carte distinte per starter**, contando Tar
 Le quantità nella tabella sono copie già presenti: nessuna sostituzione di slot nella composizione, nessun aumento delle 20 regolari,
 nessun cambio di rarità, basic, bound o last resort. I numeri sono punti di partenza per SB-16e, sotto la delega D38/D53.
 
+## Approvazione del proprietario
+
+Il 12 novembre 2026, dopo il riepilogo dei cinque starter e delle tre domande finali, il proprietario ha risposto:
+
+> approvo, poi cmq le ritestiamo estensivamente
+
+Sono approvati i nove slot e le cinque coppie descritti nella proposta 0.1, compreso il recupero di A di Piera,
+le esposizioni per due turni, la ricerca esatta e i premi delle tre difese. Copie, rarità e composizione restano quelle proposte.
+I numeri sono indicativi: l'approvazione non certifica il bilanciamento né il raggiungimento del 10% di patte.
+La richiesta di ritestare estesamente si applica alle misure di SB-16e (coppie attive/disattive, tutti gli incontri e gli specchi,
+stili, patte, durata e invarianti) e alla prova umana SB-16f. Restano i limiti di D53: al massimo tre giri e due ore di calcolo;
+nessun ampliamento del budget è stato deciso.
+
+**Consegna arrivata da SB-16c:** il blocco è concluso e le risposte del proprietario sono registrate in
+[D54](../../set-base-plan.md#decisioni-del-proprietario). D54 richiede anche di correggere CinqueMinutiEVado di Piera:
+con la corazza vale 8,50 per uso, oltre il tetto 4. La correzione non era nei nove slot della proposta 0.1 presentata e approvata;
+va integrata nella successiva parte di SB-16d, mantenendo il tetto. Non si considera approvato qui un funzionamento non presentato.
+La registrazione dell'approvazione conclude soltanto la prima parte: griglia, bozza e codice non vengono aggiornati in questa consegna.
+
 ## Perimetro e riferimenti
 
 La proposta applica [SB-16d e D50–D53](../../set-base-plan.md#sb-16d--riprogettazione-dei-cinque-starter-p3-e-p5).
 D8 limita le novità alle meccaniche esistenti, con l'eccezione della ricerca già decisa; D34/D35 fissano slot e identità;
 D38 delega i numeri; D43/D44 conservavano i problemi degli avanzati fino alla prova umana; D45, punto 7, riserva al proprietario
-funzionamento e composizione. Nessun esito di questa proposta costituisce approvazione.
+funzionamento e composizione. L'approvazione del proprietario è riportata sopra; le misure restano da svolgere.
 
 Il «testo di oggi» sotto viene dalla bozza letta sul commit iniziale `d892bc3`, non dalle vecchie ipotesi della griglia:
 `server/src/test/resources/set-base/bozza.json`, SHA-256
@@ -361,6 +380,8 @@ al colpo cercato. In particolare lo scarto per una bound può sacrificare propri
 
 ## Verifiche e limiti di questa consegna
 
+Le verifiche e i rinvii seguenti documentano la prima consegna (0.1); gli esiti della registrazione di approvazione (0.2) sono riportati dopo.
+
 La proposta è una revisione documentale: non ci sono carte implementate, nuove partite, invarianti misurate o prove umane.
 Le misure citate restano quelle di SB-16b, non validazioni di queste carte.
 
@@ -385,7 +406,24 @@ nuovo in questa fase; nessun atteso o soglia cambiato. Nessun rosso emerso nei c
 proposte restano non verificati. Il giudizio sul funzionamento spetta al proprietario; i numeri si tarano in SB-16e e la prova umana
 resta SB-16f.
 
+### Verifiche della registrazione di approvazione (0.2)
+
+Rilanciate in sequenza il 12 novembre 2026 sul checkout con SB-16c concluso, prima del commit di sola approvazione:
+
+- `./scripts/build.ps1 -Task Test -Offline`: verde; server 688 test, zero fallimenti/errori, 7 saltati (misure a richiesta);
+  client-debug 37/37. Questo esito aggiorna il rinvio della prima consegna per i test unitari, non per il contesto Spring completo.
+- `./client-web/run.ps1 -Task Test`, `Build`, `Size`: verdi; 333 test, stesso avviso del bundler e stesse misure Size della 0.1,
+  `BM_OUT` in TEMP e tetti ordinari/C4 rispettati.
+- `python scripts/check-rules.py`: verde; `python scripts/check-links.py`: verde, 273 file, zero link rotti.
+- `git diff --check`: verde. Solo questo documento modificato; nessun atteso, soglia o comportamento cambiato.
+
+Log e `size.json`: `C:\Users\gesucca\AppData\Local\Temp\bm-sb16d-approval-53afe36a2e03420d9bc59b30260b1ec0`.
+Il contesto Spring completo non è stato rilanciato per questa registrazione documentale; nessun banco di bilanciamento o playtest
+è stato eseguito sulle carte proposte, che restano da implementare.
+
 ## Domande al proprietario
+
+**Esito del 12 novembre 2026: tutte e tre approvate**, con le parole riportate in apertura. Le domande si conservano come riferimento della decisione.
 
 1. **Approvi le cinque coppie e i nove slot proposti**, con copie, rarità e composizione conservate? In particolare Slalom,
    Rabbia Psicotica da Meth e Colpo di chiave inglese diventano caricamenti, mantenendo le contromosse degli starter.
@@ -394,4 +432,4 @@ resta SB-16f.
 3. **Approvi esposizione per due turni e ricerca obbligata di un solo colpo**, con fallback alla pesca ordinaria se assente,
    e le tre difese con cura/rimborso? I valori proposti, incluso Tossicone a 12, restano indicativi sotto D38/D53.
 
-Dopo le risposte si registra la decisione; griglia, bozza e implementazione attendono anche la conclusione di SB-16c.
+Le risposte sono registrate in apertura. SB-16c è concluso; l'attuazione e l'integrazione di D54 appartengono alla parte successiva del blocco.
