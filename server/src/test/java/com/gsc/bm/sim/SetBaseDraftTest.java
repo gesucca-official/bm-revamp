@@ -185,8 +185,7 @@ class SetBaseDraftTest {
                     checked++;
                 }
         }
-        assertEquals(12, checked, "Glare, MadeOfStone, Giubbotto, le due parate da due stati, il Bancone di Pino (SB-14); Sotto il cofano "
-                + "(due stati), Guanti e Casco di Gigi (SB-15)");
+        assertEquals(24, checked, "D55/SB-16d: i 12 stati di prima e quattro esposizioni nuove da tre stati ciascuna");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
@@ -219,7 +218,7 @@ class SetBaseDraftTest {
         for (JsonNode c : json.get("characters"))
             if (!Set.of(TOSSICO, PINO, GIGI).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
         assertEquals(Map.of(SPAZIENZIO, 85, MARA, 80), health, "i due personaggi base; Tossico, Pino e Gigi hanno il loro test");
-        Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 5, "base.mara.Sgommata", 15, "base.mara.Slalom", 10,
+        Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 5, "base.mara.Sgommata", 15,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
         alertnessCosts.forEach((binding, cost) -> {
             JsonNode c = card(binding);
@@ -311,18 +310,19 @@ class SetBaseDraftTest {
         assertEquals(7, raschiare.get("self").get(0).get("amount").asInt());
         assertEquals("+7 T", raschiare.get("gui").get("gains").asText());
         assertTrue(raschiare.get("gui").get("description").asText().contains("+7 T a sé"));
-        // Le quattro carte pagate in T costano 10 T (decisione 4 della griglia), e il testo lo dice.
-        for (String binding : List.of("junkie.MethDrivenRage", "junkie.Cough", "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain")) {
+        // D55: MethDrivenRage diventa un caricamento gratuito; le altre tre carte restano a 10 T.
+        assertTrue(draft.card("junkie.MethDrivenRage").getCost().isEmpty());
+        for (String binding : List.of("junkie.Cough", "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain")) {
             JsonNode c = card(binding);
             assertEquals(1, c.get("cost").size(), binding);
             assertEquals(10, c.get("cost").get("TOXICITY").asInt(), binding);
             assertTrue(c.get("gui").get("description").asText().contains("· 10 T:"), binding + ": costo nel testo");
         }
-        // Giro 2: Tossicone Scatarrante da 5 a 8 POISON, testi compresi.
+        // D55/SB-16d: Tossicone Scatarrante da 8 a 12 POISON, testi compresi.
         JsonNode cough = card("junkie.Cough");
-        assertEquals(8, cough.get("target").get(0).get("amount").asInt());
-        assertEquals("POISON 8", cough.get("gui").get("damageAmount").asText());
-        assertTrue(cough.get("gui").get("description").asText().contains("8 POISON e +5 T"));
+        assertEquals(12, cough.get("target").get(0).get("amount").asInt());
+        assertEquals("POISON 12", cough.get("gui").get("damageAmount").asText());
+        assertTrue(cough.get("gui").get("description").asText().contains("12 POISON e +5 T"));
         // Lo slot apre la descrizione delle dieci carte del Tossico.
         Pattern slot = Pattern.compile("^(TOS-(BA|BO\\d|AR\\d)|LR-TOS) · .*");
         int slots = 0;
@@ -342,9 +342,9 @@ class SetBaseDraftTest {
         assertEquals(80, tossico.getResources().get(Resource.HEALTH));
         assertEquals(20, tossico.getResources().get(Resource.TOXICITY));
         assertEquals(75, spazienzio.getResources().get(Resource.HEALTH));
-        // Tossicone Scatarrante: 8 POISON e +5 T al bersaglio.
+        // D55: Tossicone Scatarrante 12 POISON e +5 T al bersaglio.
         ((AbstractCard) draft.card("junkie.Cough")).applyEffectOnTarget(tossico, spazienzio);
-        assertEquals(67, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(63, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(25, spazienzio.getResources().get(Resource.TOXICITY));
         // Metabolismo Corrotto: HEALTH pari a T / 2, poi perde tutta la T.
         tossico.getResources().put(Resource.HEALTH, 50);
@@ -357,7 +357,7 @@ class SetBaseDraftTest {
         last.applyEffectOnSelf(tossico);
         last.applyEffectOnTarget(tossico, spazienzio);
         assertEquals(60, tossico.getResources().get(Resource.HEALTH));
-        assertEquals(60, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(56, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(29, spazienzio.getResources().get(Resource.TOXICITY));
         // Raschiare il fondo: carburante a sé.
         ((AbstractCard) draft.card("base.tossico.bound.RaschiareIlFondo")).applyEffectOnSelf(tossico);
@@ -434,7 +434,7 @@ class SetBaseDraftTest {
             assertFalse(cost.containsKey(Resource.ALERTNESS), binding + ": niente costi in A nello starter di Pino");
             assertTrue(cost.getOrDefault(Resource.ALCOHOL, 0) <= 5, binding + ": costo in L entro 5");
         }
-        for (String binding : List.of("base.pino.TestataDaUltimoGiro", "base.pino.OffroIo", "base.pino.RuttoADistanzaSociale")) {
+        for (String binding : List.of("base.pino.TestataDaUltimoGiro", "base.pino.RuttoADistanzaSociale")) {
             assertEquals(Map.of(Resource.ALCOHOL, 5), draft.card(binding).getCost(), binding);
             assertTrue(card(binding).get("gui").get("description").asText().contains("· 5 L:"), binding + ": costo nel testo");
         }
@@ -532,11 +532,14 @@ class SetBaseDraftTest {
         assertEquals(20 - 6, spazienzio.getResources().get(Resource.ALERTNESS));
         assertEquals(health - 5, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(6, me.getResources().get(Resource.ALCOHOL));
-        // Offro io: +20 L al bersaglio, che a fine turno perde 10 A.
-        resolveOnOpponent(game, "base.pino.OffroIo");
-        assertEquals(20, spazienzio.getResources().get(Resource.ALCOHOL));
-        spazienzio.resolveTimeBasedEffects();
-        assertEquals(14 - 10, spazienzio.getResources().get(Resource.ALERTNESS));
+        // D55: Offro io diventa Un altro e arrivo, caricamento SELF; niente L regalata al bersaglio.
+        Card charge = draft.card("base.pino.OffroIo");
+        game.getPlayers().get("seat-1").getCardsInHand().add(charge);
+        charge.resolve(game, new Move(charge.getName(), "seat-1", "SELF", game.getGameId(), new java.util.HashMap<>()));
+        assertEquals(21, me.getResources().get(Resource.ALCOHOL));
+        assertEquals(25, me.getResources().get(Resource.ALERTNESS));
+        assertEquals(0, spazienzio.getResources().get(Resource.ALCOHOL));
+        assertEquals(14, spazienzio.getResources().get(Resource.ALERTNESS));
         // Il bancone regge: HIT ricevuto a metà in questo turno, +5 L.
         Character standing = draft.character(PINO), hitter = draft.character(SPAZIENZIO);
         ((AbstractCard) draft.card("base.pino.IlBanconeRegge")).applyEffectOnSelf(standing);
@@ -707,8 +710,10 @@ class SetBaseDraftTest {
         assertEquals(12, chiave.get("target").get(0).get("amount").asInt());
         assertEquals("CUT 12", chiave.get("gui").get("damageAmount").asText());
         assertTrue(chiave.get("gui").get("description").asText().contains("12 CUT"));
-        assertEquals(6, colpo.get("target").get(0).get("amount").asInt());
-        assertEquals("HIT 6", colpo.get("gui").get("damageAmount").asText());
+        // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca.
+        assertEquals(10, colpo.get("self").get(0).get("amount").asInt());
+        assertEquals("RESOURCES", colpo.get("gui").get("role").asText());
+        assertEquals("—", colpo.get("gui").get("damageAmount").asText());
         int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
         assertEquals(6, base);
         assertEquals(4, perItem);

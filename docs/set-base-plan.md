@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, domande risposte ([D54](#decisioni-del-proprietario)). **Prossimo:** [SB-16d](#sb-16d--riprogettazione-dei-cinque-starter-p3-e-p5), SB-16e e la prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, domande risposte ([D54](#decisioni-del-proprietario)). **SB-16d attuata il 12 novembre 2026** (proposta approvata D55, invarianti e bound verdi; [rapporto](reports/set-base/sb-16d-report.md)). **Prossimo:** [SB-16e](#sb-16e--giro-sui-cinque-starter-con-le-regole-nuove), poi prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -316,7 +316,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | fatto, giudizio registrato (12 novembre 2026) |
 | | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | chiuso: Fase A e B fatte (12 novembre 2026), D50–D53 |
 | | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), domande risposte (D54) |
-| | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c | proposta approvata (D55); attuazione in corso |
+| | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c | fatto (12 novembre 2026), proposta approvata D55; invarianti e tetto bound verdi |
 | | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d |  |
 | | SB-16f | Prova umana degli starter rifatti | SB-16e |  |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
@@ -340,7 +340,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, domande risposte (D54). **Prossimo:** SB-16d, SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
+e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, domande risposte (D54). SB-16d attuata (D55), invarianti e bound verdi. **Prossimo:** SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -848,7 +848,16 @@ bozza, e lo dichiara. Regolamento, documento del set, catalogo e client non camb
 
 ### SB-16d — Riprogettazione dei cinque starter (P3 e P5)
 
-**Proposta approvata il 12 novembre 2026 (D55); seconda parte in corso.** [Proposta 0.2](design/set-base/sb-16d-proposta.md): nove slot, cinque coppie con ricerca, composizione e rarità conservate. Il proprietario: «approvo, poi cmq le ritestiamo estensivamente». Attuazione nella sola bozza dopo SB-16c, con la correzione numerica di CinqueMinutiEVado sotto D38/D54; nessun giro di bilanciamento prima di SB-16e.
+**Fatto il 12 novembre 2026; proposta approvata (D55).** Il proprietario: «approvo, poi cmq le ritestiamo estensivamente».
+[Proposta 0.2](design/set-base/sb-16d-proposta.md) attuata nella sola bozza dopo SB-16c; [rapporto](reports/set-base/sb-16d-report.md).
+
+- Nove slot approvati, cinque coppie con `search`, esposizioni visibili per due turni e difese con cura/rimborso; griglia aggiornata.
+  Copie, rarità, composizioni e valori iniziali conservati. Nessun cambiamento a motore, client, catalogo, regolamento o documento del set.
+- CinqueMinutiEVado corretta sotto D38/D54 con **+10 → +5 L**, solo numero: valore per uso **3,75**, tetto 4 invariato; +6 varrebbe 5,10.
+- Quattordici nuovi test delle carte, inclusi ricerca e chi è a terra; suite verde (server 702, 7 saltati; client-debug 37).
+- Un solo banco SB-7 con `d50`, 480.000 partite: **otto invarianti a zero e zero bound in violazione**. Nessun giro di bilanciamento.
+  Patte globali 10,06%, cinque incontri ancora oltre il 10%, fra cui gli specchi di Piera 29,15%, Celestina 21,85% e Beppe 14,00%:
+  criteri da raggiungere in SB-16e, non dichiarati superati. Prossimo SB-16e, poi prova umana SB-16f. STOP prima dei giri.
 
 **Da SB-16c ([D54](#decisioni-del-proprietario)).**
 - **CinqueMinutiEVado:** va corretta. Con la corazza dell'alcol (D50, punto 5) supera il tetto delle bound: valore per uso 8,50 contro 4.
