@@ -177,3 +177,9 @@ Le prove a mano con il server di sviluppo sono state fatte sulla porta 4332: sul
 2. Il filo che cade e la «sei qui» che lo riprende.
 3. I nomi dei nodi affrontabili, e la scelta sui segreti.
 4. La [chiusura](prototipo.md#chiusura): se il prototipo è riuscito e si passa a CA-0.
+
+## Giudizio del proprietario
+
+12 novembre 2026: «Sì, chiudiamo». Prima, sui ritocchi di questa fase: «sistemiamo queste cose e poi direi che è perfetto, e siamo pronti
+per scrivere e realizzare la carriera principale del set base»; sulla chiusura: «teniamoci questo prototipo anche in repo!». Il prototipo è
+chiuso e resta nel repository ([chiusura](prototipo.md#chiusura)).

@@ -244,7 +244,7 @@ Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sulla
 
 ## Chiusura
 
-12 novembre 2026, con la [Fase K](prototipo-fase-k.md), in attesa del giudizio del proprietario. La cartella `prototipi/carriere/` non
+12 novembre 2026, con la [Fase K](prototipo-fase-k.md); **chiuso** dal proprietario lo stesso giorno («Sì, chiudiamo»). La cartella `prototipi/carriere/` non
 diventa il client: passano a [CA-0](../../product-roadmap.md#ca--carriera-single-player) le decisioni, i documenti e alcuni strumenti.
 **Il prototipo resta nel repository,** funzionante, per decisione del proprietario («teniamoci questo prototipo anche in repo!», 12 novembre
 2026): è il riferimento di come devono apparire e muoversi scene e bacheca, e il posto dove provare le storie nuove, a cominciare dalla
