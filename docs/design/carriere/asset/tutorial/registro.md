@@ -1366,3 +1366,1129 @@ Composizioni con Pillow, geometria e finestra della fetta; WebP qualità 90. Sag
 - [c-bici-mara.webp](composizioni/c-bici-mara.webp): 1366×768 px, WEBP, RGB, 373146 byte; SHA-256 `969a6f6443cb75c9075125fec701326714fad8284ea95f2a6a5fb2222444dbb6`
 - [c-combriccola-davanti-alla-porta.webp](composizioni/c-combriccola-davanti-alla-porta.webp): 1366×768 px, WEBP, RGB, 229706 byte; SHA-256 `f81601d174792bf2322cadc0b12febe3ad1fa3c7ebcb9847bd28154bc3e3203f`
 - [c-combriccola-in-fuga.webp](composizioni/c-combriccola-in-fuga.webp): 1366×768 px, WEBP, RGB, 312600 byte; SHA-256 `a063a11cf4efda195f195834bf06274891ab466e754c98f2d264fb266ceba729`
+
+## Bocche ed espressioni esasperate
+
+### mara-agitata-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:16:34 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-agitata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2927775 byte; SHA-256 `6e7f8ccd64825fe72e6340e062fce8fa73bde3707fd45713762ea1bb61e92bf0` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-agitata-1.png` SHA-256 `e6b305bfadf86afc360eaa4bde4f21195e8377577253b096f432039c68fcf0a6`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-8f510e42-1f63-488c-80de-02793f0cb367.png`, copia `originali/mara-agitata-bocca-1.png`; SHA-256 `6e7f8ccd64825fe72e6340e062fce8fa73bde3707fd45713762ea1bb61e92bf0` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth almost closed, lips just parted between two words.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-agitata-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:17:48 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-agitata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2938216 byte; SHA-256 `841ec79dfac3dce5e1b9780d54265a8a7bd338d0d5b33145a5d3eed8708a573a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-agitata-1.png` SHA-256 `e6b305bfadf86afc360eaa4bde4f21195e8377577253b096f432039c68fcf0a6`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-d1c03e11-c5ea-4ee5-af3e-41e3e6da04e9.png`, copia `originali/mara-agitata-bocca-2.png`; SHA-256 `841ec79dfac3dce5e1b9780d54265a8a7bd338d0d5b33145a5d3eed8708a573a` |
+| Anteprima / consegna | [mara-agitata-bocca.webp](ritratti/mara-agitata-bocca.webp); 1024×1536 px, WEBP, RGBA, 453634 byte; SHA-256 `d7516d1b838d59e3123682319bb5fae371c55369d64261326c6056843291b966` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-mara-agitata-bocca.webp](composizioni/d-mara-agitata-bocca.webp); 1024×1536 px, WEBP, RGB, 673972 byte; SHA-256 `be094cc0abb50ad211f37c7437d113702bcdf26a123621537756ec402afa539a`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth almost closed, lips just parted between two words.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-contenta-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:20:17 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-contenta); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2709469 byte; SHA-256 `3b50f1e959cee70ad15520adbfe5f9db4bd7c3a00f4756510e0df9012a70bc5d` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-contenta-1.png` SHA-256 `e90356d82796137c36bd9581d4c2e7817f37285fb1ec12b26c658debc0ef723b`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-66b81763-f0ca-4635-93c0-81dfca20a1bd.png`, copia `originali/mara-contenta-bocca-1.png`; SHA-256 `3b50f1e959cee70ad15520adbfe5f9db4bd7c3a00f4756510e0df9012a70bc5d` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth open in the middle of a word, inside the same crooked grin.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-contenta-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:21:05 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-contenta); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2823356 byte; SHA-256 `1a3328fd9c797a2ccf2053e5697063920f9ad0d474e54a52fbe17c1f2eaf2aab` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-contenta-1.png` SHA-256 `e90356d82796137c36bd9581d4c2e7817f37285fb1ec12b26c658debc0ef723b`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-b8a21ec5-354c-486d-baa2-94597625ba9d.png`, copia `originali/mara-contenta-bocca-2.png`; SHA-256 `1a3328fd9c797a2ccf2053e5697063920f9ad0d474e54a52fbe17c1f2eaf2aab` |
+| Anteprima / consegna | [mara-contenta-bocca.webp](ritratti/mara-contenta-bocca.webp); 1024×1536 px, WEBP, RGBA, 503702 byte; SHA-256 `fb97715fa621e8aceb7f34c77708e86b3ee9708609451c23d6c7b3ac7818dbd2` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-mara-contenta-bocca.webp](composizioni/d-mara-contenta-bocca.webp); 1024×1536 px, WEBP, RGB, 578712 byte; SHA-256 `26670dea1afc26afd4f89ecf340a64bc24461b585ff3447d2f68354660424f80`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth open in the middle of a word, inside the same crooked grin.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-illuminata-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:22:11 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-illuminata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2903550 byte; SHA-256 `151750a80480ecc07ca811be1ee2b59def4b609af857db34c8079fff86ec2ea9` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-illuminata-1.png` SHA-256 `9562c38e9ae4e6b57489315c2a8fb36c0f631565feabb024f97b322412d5ba71`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ae6c0bf3-6560-40cd-80c1-6901c65fec4f.png`, copia `originali/mara-illuminata-bocca-1.png`; SHA-256 `151750a80480ecc07ca811be1ee2b59def4b609af857db34c8079fff86ec2ea9` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth opened a little wider in the middle of a word, inside the same triumphant grin.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-illuminata-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:23:57 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-illuminata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2862344 byte; SHA-256 `b19f7b605cfcf8ef24009c6e018605dc3113c0cdee4ec784b33fed22c128a91e` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-illuminata-1.png` SHA-256 `9562c38e9ae4e6b57489315c2a8fb36c0f631565feabb024f97b322412d5ba71`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-dcaff585-f0ce-489b-9007-0997c1bc78af.png`, copia `originali/mara-illuminata-bocca-2.png`; SHA-256 `b19f7b605cfcf8ef24009c6e018605dc3113c0cdee4ec784b33fed22c128a91e` |
+| Anteprima / consegna | [mara-illuminata-bocca.webp](ritratti/mara-illuminata-bocca.webp); 1024×1536 px, WEBP, RGBA, 478114 byte; SHA-256 `e6c4f3c77c87555b6001fb055ca784100a03ce9bb61711fc595516d9cc068b96` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-mara-illuminata-bocca.webp](composizioni/d-mara-illuminata-bocca.webp); 1024×1536 px, WEBP, RGB, 622138 byte; SHA-256 `618d97fb484b20c086b38bb72483ce6bf385b98a929d1d239342e15acbe1df7b`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth opened a little wider in the middle of a word, inside the same triumphant grin.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-neutra-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:25:01 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-neutra); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2831621 byte; SHA-256 `e7b4e79445b3094ce132051498855fcf8beb157bcc85b3f7e012fb0ed73ec699` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-a91cc557-87b4-462d-97d1-f471da15581e.png`, copia `originali/mara-neutra-bocca-1.png`; SHA-256 `e7b4e79445b3094ce132051498855fcf8beb157bcc85b3f7e012fb0ed73ec699` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth slightly open in the middle of a word.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-neutra-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:25:40 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-neutra); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2812013 byte; SHA-256 `022469b4e28df2c424554bca8084f1a47be572556c762ed5c7c1f0504daa5cab` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ca55d849-61d4-490a-b422-f132f7f3ea39.png`, copia `originali/mara-neutra-bocca-2.png`; SHA-256 `022469b4e28df2c424554bca8084f1a47be572556c762ed5c7c1f0504daa5cab` |
+| Anteprima / consegna | [mara-neutra-bocca.webp](ritratti/mara-neutra-bocca.webp); 1024×1536 px, WEBP, RGBA, 408000 byte; SHA-256 `ed279f5308b42c419bea8887237652ce7ff071949b14013b5807ef3461d3b7c1` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-mara-neutra-bocca.webp](composizioni/d-mara-neutra-bocca.webp); 1024×1536 px, WEBP, RGB, 670530 byte; SHA-256 `fb693bb662b45739c49644309bab6bf1e932c8c80785a90830318d08dab4eb2d`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth slightly open in the middle of a word.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-sospettosa-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:26:08 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-sospettosa); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2814447 byte; SHA-256 `bc7451c0688021da9c35bbf9f1a055ea96bbdde5e396d280861d8d980751a8ac` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-sospettosa-1.png` SHA-256 `fc9f8e4eafe2cc4f1919b4f6b3f13063c492ad2b0922e9f50c2bac33854b0d97`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-6b8443d3-1cc1-4810-a50c-c4d6c70c9c64.png`, copia `originali/mara-sospettosa-bocca-1.png`; SHA-256 `bc7451c0688021da9c35bbf9f1a055ea96bbdde5e396d280861d8d980751a8ac` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth slightly open in the middle of a word, still suspicious.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-sospettosa-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:26:36 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-sospettosa); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2811623 byte; SHA-256 `2a02fc314329e1a768ca3cdbf3107af387b76ec8c3e91bd1651f0b3ae6f65234` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-sospettosa-1.png` SHA-256 `fc9f8e4eafe2cc4f1919b4f6b3f13063c492ad2b0922e9f50c2bac33854b0d97`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-a843b88a-16c7-425b-9802-838f42039493.png`, copia `originali/mara-sospettosa-bocca-2.png`; SHA-256 `2a02fc314329e1a768ca3cdbf3107af387b76ec8c3e91bd1651f0b3ae6f65234` |
+| Anteprima / consegna | [mara-sospettosa-bocca.webp](ritratti/mara-sospettosa-bocca.webp); 1024×1536 px, WEBP, RGBA, 485150 byte; SHA-256 `a0c8fb4240e34e3f1ed87d138f1c32226a3323721fc8f6284a9bb1a71131eff5` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-mara-sospettosa-bocca.webp](composizioni/d-mara-sospettosa-bocca.webp); 1024×1536 px, WEBP, RGB, 582730 byte; SHA-256 `227b0405b70b140cbc4ec9053d669023a61a10da6eff1dd1cfd7929538e439f7`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth slightly open in the middle of a word, still suspicious.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-pensierosa-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:27:02 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-pensierosa); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2844519 byte; SHA-256 `9e98a90322706f2a24dc622c2fcbd22e0596eac166e8278d6cd75b9c691ed1bd` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-pensierosa-1.png` SHA-256 `4ff3c9ab0586eb899cdbd5d79c3d7b626ad6ac0c18c94f896502b37cc26c581b`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-2a0797fb-eb06-4329-97be-fb02f511fcd2.png`, copia `originali/mara-pensierosa-bocca-1.png`; SHA-256 `9e98a90322706f2a24dc622c2fcbd22e0596eac166e8278d6cd75b9c691ed1bd` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her lips slightly parted in the middle of a word.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-pensierosa-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:27:45 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-pensierosa); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2901250 byte; SHA-256 `c5c9643e998130b0ec051cb5ee3a2f23f04dc7f6ca6512e918613b41a98afc0a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-pensierosa-1.png` SHA-256 `4ff3c9ab0586eb899cdbd5d79c3d7b626ad6ac0c18c94f896502b37cc26c581b`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-5cb7c5c7-c99f-4820-80cc-4bb169e175bb.png`, copia `originali/mara-pensierosa-bocca-2.png`; SHA-256 `c5c9643e998130b0ec051cb5ee3a2f23f04dc7f6ca6512e918613b41a98afc0a` |
+| Anteprima / consegna | [mara-pensierosa-bocca.webp](ritratti/mara-pensierosa-bocca.webp); 1024×1536 px, WEBP, RGBA, 427274 byte; SHA-256 `e2292105c4bb14b3b5525b86ece4a489ea4ac11498bd331ac4368c6f39abdd6c` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-mara-pensierosa-bocca.webp](composizioni/d-mara-pensierosa-bocca.webp); 1024×1536 px, WEBP, RGB, 671892 byte; SHA-256 `5b6f826ded27991124b551156b4e5bc6a373bb9c896547c206079ecbb7c92660`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her lips slightly parted in the middle of a word.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-furioso-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:28:25 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-furioso); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2875416 byte; SHA-256 `ffe1a5d14499cad70f59db532b33f17b346efd8bf384ab946ea8a2cb1f446194` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-furioso-2.png` SHA-256 `07d791e1d6470ccaf97e43786a55a76404652f495afc333e33b6a4c7648cd9c3`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ebaf7267-1d33-4f53-a255-efba70be37fb.png`, copia `originali/spazienzio-furioso-bocca-1.png`; SHA-256 `ffe1a5d14499cad70f59db532b33f17b346efd8bf384ab946ea8a2cb1f446194` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth half closed between two shouts, teeth still bared.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-furioso-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:29:07 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-furioso); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2819302 byte; SHA-256 `16b088d95ab87025e89aedf4608cde6ab10b9dade29d6d7879ecc1763d7068c5` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-furioso-2.png` SHA-256 `07d791e1d6470ccaf97e43786a55a76404652f495afc333e33b6a4c7648cd9c3`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-87f9b926-268c-4ded-99f1-956e86178cb1.png`, copia `originali/spazienzio-furioso-bocca-2.png`; SHA-256 `16b088d95ab87025e89aedf4608cde6ab10b9dade29d6d7879ecc1763d7068c5` |
+| Anteprima / consegna | [spazienzio-furioso-bocca.webp](ritratti/spazienzio-furioso-bocca.webp); 1024×1536 px, WEBP, RGBA, 573110 byte; SHA-256 `b553b2cc4fc40c98ce0cb19224c233d20cf7225a986213e4c74233d6eef92fb6` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Trasparenza | alfa presente, ma nessun pixel completamente trasparente nel risultato |
+| Differenza | [d-spazienzio-furioso-bocca.webp](composizioni/d-spazienzio-furioso-bocca.webp); 1024×1536 px, WEBP, RGB, 547942 byte; SHA-256 `f19766d2355dc1ecb2e350763d4b0ec5e38ccd80bfeda6944db96e7c22f06da5`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth half closed between two shouts, teeth still bared.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-fumante-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:29:47 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-fumante); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2760565 byte; SHA-256 `babf60b87f9f68278a8b1427533861ca044645c6310d29ac9faa9c61cd63ec4e` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-1d2e6e37-03e8-4911-9ffd-2a20bff9f046.png`, copia `originali/spazienzio-fumante-bocca-1.png`; SHA-256 `babf60b87f9f68278a8b1427533861ca044645c6310d29ac9faa9c61cd63ec4e` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth open in the middle of a word, teeth showing, still seething.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-fumante-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:30:53 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-fumante); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2817080 byte; SHA-256 `32f07747991e2a22e0ab2e464d371b1ed704b4bfca13feeaa27ce621b4b3b492` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-fumante-2.png` SHA-256 `f6b0c73649f027c1d2c07af0eb26034f366ff7c5fd5ce3e9c6d21bf8fff7ae23`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-7aeec05b-b2de-4edd-8351-c7837a41113d.png`, copia `originali/spazienzio-fumante-bocca-2.png`; SHA-256 `32f07747991e2a22e0ab2e464d371b1ed704b4bfca13feeaa27ce621b4b3b492` |
+| Anteprima / consegna | [spazienzio-fumante-bocca.webp](ritratti/spazienzio-fumante-bocca.webp); 1024×1536 px, WEBP, RGBA, 508568 byte; SHA-256 `2bd0638c47bef11163fd6f867a83a891d03cb73bb351f3dfc73916256e8bf046` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-spazienzio-fumante-bocca.webp](composizioni/d-spazienzio-fumante-bocca.webp); 1024×1536 px, WEBP, RGB, 679964 byte; SHA-256 `31c1af6db425bd89007acbced8c0d6362786a540bda6bb98f8c06d446bd36bf9`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth open in the middle of a word, teeth showing, still seething.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-quasi-calmo-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:31:37 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-quasi-calmo); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2813149 byte; SHA-256 `076895511981194283177be38f0a92d0bf256e38cabfd9163226fd0be1beea77` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-quasi-calmo-1.png` SHA-256 `3eaa0e304f9c6734d7d0ac8222b76d216e37b16cc6b4f599738f41b0567f9fe6`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-9e69c135-d20e-453d-ad03-5ce8a5cbc8e1.png`, copia `originali/spazienzio-quasi-calmo-bocca-1.png`; SHA-256 `076895511981194283177be38f0a92d0bf256e38cabfd9163226fd0be1beea77` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth slightly open, breathing out through his teeth.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-quasi-calmo-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:32:19 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-quasi-calmo); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2832241 byte; SHA-256 `bcfe92663b1ef7ba46c3a5c744aa9abb02558eb27f18059d214160c29fda353a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-quasi-calmo-1.png` SHA-256 `3eaa0e304f9c6734d7d0ac8222b76d216e37b16cc6b4f599738f41b0567f9fe6`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ccebcccd-202f-4694-83d1-47445f0a825a.png`, copia `originali/spazienzio-quasi-calmo-bocca-2.png`; SHA-256 `bcfe92663b1ef7ba46c3a5c744aa9abb02558eb27f18059d214160c29fda353a` |
+| Anteprima / consegna | [spazienzio-quasi-calmo-bocca.webp](ritratti/spazienzio-quasi-calmo-bocca.webp); 1024×1536 px, WEBP, RGBA, 531836 byte; SHA-256 `c875e3155dc625397feb8786b2d91d170dcbd6d87abcefbc121e174f357e9327` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Trasparenza | alfa presente, ma nessun pixel completamente trasparente nel risultato |
+| Differenza | [d-spazienzio-quasi-calmo-bocca.webp](composizioni/d-spazienzio-quasi-calmo-bocca.webp); 1024×1536 px, WEBP, RGB, 559112 byte; SHA-256 `8b755c50df890103bce7037a288da1b73eb8601f7165e6e9813b24c61e0debec`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth slightly open, breathing out through his teeth.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-soddisfatto-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:33:01 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-soddisfatto); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2678689 byte; SHA-256 `2b85290feb1f6792eaf315ed18f309be0d909154b248c152116cb6e8b511ad62` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-soddisfatto-1.png` SHA-256 `bd333d304209e59196caa8606dc91daffaca54b1e8a1689b195c1ea46ab4957b`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-d1b8bf6d-b27a-497b-a9a2-bacc6980ec8b.png`, copia `originali/spazienzio-soddisfatto-bocca-1.png`; SHA-256 `2b85290feb1f6792eaf315ed18f309be0d909154b248c152116cb6e8b511ad62` |
+| Anteprima / consegna | [spazienzio-soddisfatto-bocca.webp](ritratti/spazienzio-soddisfatto-bocca.webp); 1024×1536 px, WEBP, RGBA, 524404 byte; SHA-256 `9819df92a4d9f36fbbd8148efc6f092fc5ccd257ded62f08fb79d2e44b7626a0` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Trasparenza | alfa presente, ma nessun pixel completamente trasparente nel risultato |
+| Differenza | [d-spazienzio-soddisfatto-bocca.webp](composizioni/d-spazienzio-soddisfatto-bocca.webp); 1024×1536 px, WEBP, RGB, 519040 byte; SHA-256 `809ec0bf7bbf6e70c00b9ccb8f45841348923a2a6f254c823937bf03b38b7117`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth open in the middle of a word, inside the same wide grin.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-soddisfatto-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL e modello non esposti |
+| Commit preventivo dei prompt | `347a906` |
+| Modalità | modifica guidata dal riferimento |
+| Allegato | `originali/spazienzio-soddisfatto-1.png` SHA-256 `bd333d304209e59196caa8606dc91daffaca54b1e8a1689b195c1ea46ab4957b` |
+| Esito del tentativo | bloccato dal filtro dello strumento: categoria sexual; request ID `6ddcd5ca-e516-4a20-a257-da2317234e9b`; nessun file restituito |
+| Seed, prompt riscritto, parametri e ID job | non esposti |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth open in the middle of a word, inside the same wide grin.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-serio-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:34:22 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-serio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2755666 byte; SHA-256 `a19310e574708cfef2110052c6c41c05f82fc8de35cb9849b358d87673e6cab2` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-serio-3.png` SHA-256 `11305a8ef94bdfc509dfa2f0ad93e200d982bb9fc672ef5be56d88d5474418c8`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-17eef493-627b-4c86-b583-0b2e6ea4ae49.png`, copia `originali/spazienzio-serio-bocca-1.png`; SHA-256 `a19310e574708cfef2110052c6c41c05f82fc8de35cb9849b358d87673e6cab2` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth open in the middle of a word, still stern.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-serio-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:35:06 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-serio); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2736114 byte; SHA-256 `2883e5e480f0afcf9eca828946b6373d60b2c746e99c01e904afc2df2008cbfc` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-serio-3.png` SHA-256 `11305a8ef94bdfc509dfa2f0ad93e200d982bb9fc672ef5be56d88d5474418c8`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-a1c7ab9a-abcf-467e-b30a-ec597547b42b.png`, copia `originali/spazienzio-serio-bocca-2.png`; SHA-256 `2883e5e480f0afcf9eca828946b6373d60b2c746e99c01e904afc2df2008cbfc` |
+| Anteprima / consegna | [spazienzio-serio-bocca.webp](ritratti/spazienzio-serio-bocca.webp); 1024×1536 px, WEBP, RGBA, 530052 byte; SHA-256 `f0d5abe5df7ced2c61278383abc6f848e777c19007fa19e32e106bc7ca57a154` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Trasparenza | alfa presente, ma nessun pixel completamente trasparente nel risultato |
+| Differenza | [d-spazienzio-serio-bocca.webp](composizioni/d-spazienzio-serio-bocca.webp); 1024×1536 px, WEBP, RGB, 476976 byte; SHA-256 `a10f33890fe09ad6e51a45f396324a3f22f534970f4596bae362117d8301b1fb`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth open in the middle of a word, still stern.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-contenta-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:35:47 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-contenta); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2495189 byte; SHA-256 `e0295a54b045724de20396ce7378e61625a0d939fe5beb0e5cdc9c465bf0c3c7` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-contenta-1.png` SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-0b3976b1-886d-4787-ab1e-d873ab258358.png`, copia `originali/piera-contenta-bocca-1.png`; SHA-256 `e0295a54b045724de20396ce7378e61625a0d939fe5beb0e5cdc9c465bf0c3c7` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth slightly open in the middle of a word, inside the same slow serene smile.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-contenta-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:36:36 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-contenta); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2539350 byte; SHA-256 `86c01eb0e2dda689da1cdd7417309acdccb512d3c274824910a0993c74d19478` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-contenta-1.png` SHA-256 `1accca6f64408737380616fa3ccaa458058b1f8884521231ee8fe2ab4b102fc1`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-0d305dbc-d0ea-463a-a5df-9f42d79c63d3.png`, copia `originali/piera-contenta-bocca-2.png`; SHA-256 `86c01eb0e2dda689da1cdd7417309acdccb512d3c274824910a0993c74d19478` |
+| Anteprima / consegna | [piera-contenta-bocca.webp](ritratti/piera-contenta-bocca.webp); 1024×1536 px, WEBP, RGBA, 439660 byte; SHA-256 `b593a9d5a4a2742b3968972be5dca39e081e3f8de5169ca8aaaca750935371e8` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-piera-contenta-bocca.webp](composizioni/d-piera-contenta-bocca.webp); 1024×1536 px, WEBP, RGB, 535854 byte; SHA-256 `97ab1e70de24801c24e130640499691f81adf9dba79392b32f6e16f8989a72ca`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth slightly open in the middle of a word, inside the same slow serene smile.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-brilla-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:37:01 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-brilla); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2508212 byte; SHA-256 `69fde7a18a2c0a6522f8c54f00bd0da957255eeeb2563ae3846f064b1e7c1063` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-brilla-2.png` SHA-256 `c9f7ac82d389707693746662f766aabdf363eb75232d21dcb6b4de53b0d95e7a`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-b9043ebc-a387-4d43-b1a9-6a148eb57866.png`, copia `originali/piera-brilla-bocca-1.png`; SHA-256 `69fde7a18a2c0a6522f8c54f00bd0da957255eeeb2563ae3846f064b1e7c1063` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth open in the middle of a word, still lopsided.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-brilla-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:37:46 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-brilla); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2571420 byte; SHA-256 `f15136cb855fe77762258f7f57f7340238c4ef154e55e24ed4e1bbeb3848e830` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-brilla-2.png` SHA-256 `c9f7ac82d389707693746662f766aabdf363eb75232d21dcb6b4de53b0d95e7a`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-3cbdff53-da9a-4251-85ad-67a11a219df4.png`, copia `originali/piera-brilla-bocca-2.png`; SHA-256 `f15136cb855fe77762258f7f57f7340238c4ef154e55e24ed4e1bbeb3848e830` |
+| Anteprima / consegna | [piera-brilla-bocca.webp](ritratti/piera-brilla-bocca.webp); 1024×1536 px, WEBP, RGBA, 421204 byte; SHA-256 `0bffb3a246eeab73e390ebee5d2fcc15436b1bed4857b4653c4fd8ec63df6c25` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-piera-brilla-bocca.webp](composizioni/d-piera-brilla-bocca.webp); 1024×1536 px, WEBP, RGB, 529732 byte; SHA-256 `9f9adc6239c0ea03efeeb1d2a97cd7b3d22f4cb5c5a0fd89889fef5883820592`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth open in the middle of a word, still lopsided.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-offesa-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:38:13 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-offesa); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2500769 byte; SHA-256 `cf45c4f853b90e4446223956c5c5b07c53e5a6a62fb3fd54e3ba5423e7783a24` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-offesa-1.png` SHA-256 `2fcf96b02457712d45836b9029bb8989577502edc88afa265d0f37549edaba91`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-75a5637d-0a63-4512-9fc2-19e5b995b027.png`, copia `originali/piera-offesa-bocca-1.png`; SHA-256 `cf45c4f853b90e4446223956c5c5b07c53e5a6a62fb3fd54e3ba5423e7783a24` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth open in the middle of a word, still pouting and offended.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-offesa-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:38:55 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-offesa); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2529973 byte; SHA-256 `9447f10bc6ff486b5aaae1596fe6e9dc0709fd71ae5c7b546a43dc4adc19ef56` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-offesa-1.png` SHA-256 `2fcf96b02457712d45836b9029bb8989577502edc88afa265d0f37549edaba91`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-ee25642d-ff8e-4a46-b522-463266db59cd.png`, copia `originali/piera-offesa-bocca-2.png`; SHA-256 `9447f10bc6ff486b5aaae1596fe6e9dc0709fd71ae5c7b546a43dc4adc19ef56` |
+| Anteprima / consegna | [piera-offesa-bocca.webp](ritratti/piera-offesa-bocca.webp); 1024×1536 px, WEBP, RGBA, 429148 byte; SHA-256 `aedb40565663e963cc29bf6bfee998d33918dd3689d007923ac17a0d9e0478e8` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-piera-offesa-bocca.webp](composizioni/d-piera-offesa-bocca.webp); 1024×1536 px, WEBP, RGB, 504284 byte; SHA-256 `9939a98c76c2ff41592c8ec9321783990fa18f8988fa0dd3e1092f25fa1b23b4`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth open in the middle of a word, still pouting and offended.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-assonnata-bocca-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:39:36 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-assonnata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2564605 byte; SHA-256 `026c68063755b1a9896efd8dc24bf65331e3ff09b40bd7c5ac69720243474e82` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-assonnata-1.png` SHA-256 `cea64debfa3bee1a3a5f032350624d92e093bb2bf926baf185fc5749f9f18376`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-d76c6318-203f-428a-a129-d4ca33594807.png`, copia `originali/piera-assonnata-bocca-1.png`; SHA-256 `026c68063755b1a9896efd8dc24bf65331e3ff09b40bd7c5ac69720243474e82` |
+| Anteprima / consegna | nessuna; originale conservato |
+| Conversione | nessuna |
+| Esito del tentativo | scartato: differenze fuori dalla bocca; ripetuto con lo stesso prompt |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth closed at the end of the yawn, still drowsy.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### piera-assonnata-bocca-2
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:40:47 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#piera-assonnata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2582823 byte; SHA-256 `38ee43984f511593cd5d561efbed77151051e55e9a5cb49d87a3aa1e9e33a02a` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/piera-assonnata-1.png` SHA-256 `cea64debfa3bee1a3a5f032350624d92e093bb2bf926baf185fc5749f9f18376`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-6b3041b9-2b59-474e-b1bb-f5671e31bef5.png`, copia `originali/piera-assonnata-bocca-2.png`; SHA-256 `38ee43984f511593cd5d561efbed77151051e55e9a5cb49d87a3aa1e9e33a02a` |
+| Anteprima / consegna | [piera-assonnata-bocca.webp](ritratti/piera-assonnata-bocca.webp); 1024×1536 px, WEBP, RGBA, 421662 byte; SHA-256 `7a8421c7ba4c322004c27391f441ef9d0c5896b5d8447ef1bdcf6c8948c50a23` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Differenza | [d-piera-assonnata-bocca.webp](composizioni/d-piera-assonnata-bocca.webp); 1024×1536 px, WEBP, RGB, 516034 byte; SHA-256 `dce199ba4e2aee54f05fae8b3e2aa1136569c664bd0dfd6e11fa71abd81d0453`; differenza assoluta RGBA amplificata 4×, WebP qualità 90 |
+| Esito del tentativo | consegnato per esame; differenze fuori dalla bocca, utilizzabile con maschera da valutare |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Every pixel outside the mouth area must stay identical, because the two images will alternate quickly while the character speaks. Change only the mouth: her mouth closed at the end of the yawn, still drowsy.
+
+Avoid: any change outside the mouth; a different head position, angle or size; a different expression of the eyes or eyebrows; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-esasperata-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:41:30 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#mara-esasperata); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2915933 byte; SHA-256 `059f74220e1b2c9e0f31c8771c0c32fc5b4a6588f10d96984b661c1dcea59dd0` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/mara-neutra-1.png` SHA-256 `a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-9d1b3106-2b8a-4a9a-b006-e8c1e82dbb35.png`, copia `originali/mara-esasperata-1.png`; SHA-256 `059f74220e1b2c9e0f31c8771c0c32fc5b4a6588f10d96984b661c1dcea59dd0` |
+| Anteprima / consegna | [mara-esasperata.webp](ritratti/mara-esasperata.webp); 1024×1536 px, WEBP, RGBA, 519856 byte; SHA-256 `2b8f81a3c3db7edc9736637ba0733b3a2481e50d3ba14592a5144f42ced5a5d2` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Esito del tentativo | consegnato per esame |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, hair, body, clothes, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only her facial expression: exasperated while listening to someone who will not stop talking: eyes rolled up towards the ceiling, a long silent sigh, mouth closed in a flat line. Keep her hands and pose as they are.
+
+Avoid: any other change; mirroring; a different head position or size; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### spazienzio-esasperato-1
+
+| Campo | Valore |
+|---|---|
+| Operatore | Codex, sessione con generazione integrata |
+| Strumento | image_gen integrato in Codex; URL non esposto |
+| Modello / versione | non esposto |
+| Data e ora (file originale) | 12/11/2026 13:42:17 +0100 |
+| ID job | non esposto |
+| Commit preventivo dei prompt | `347a906` |
+| Prompt | [prompt-bocche.md](../../prompt-bocche.md#spazienzio-esasperato); testo integrale sotto |
+| Modalità | modifica guidata dal riferimento |
+| Dimensioni richieste | stessa dimensione dell’allegato |
+| Dimensioni effettive / formato | 1024×1536 px, PNG, RGBA, 2714395 byte; SHA-256 `1838128abcae756dd53a9c844a2ae5f9905868ba88313ef735561b794b2d1ca0` |
+| Parametri | un risultato; qualità e forza del riferimento non esposte; trasparenza richiesta |
+| Seed | non esposto |
+| Prompt riscritto | non esposto |
+| Campo negativo | paragrafo Avoid nel campo principale; nessun campo negativo separato |
+| Allegati effettivi in ordine | 1. `originali/spazienzio-quasi-calmo-1.png` SHA-256 `3eaa0e304f9c6734d7d0ac8222b76d216e37b16cc6b4f599738f41b0567f9fe6`; nessuna trasformazione |
+| Altri allegati | nessuno |
+| Termini d’uso, condizioni e attribuzioni | non verificati in questa sessione |
+| C2PA | non verificato; originale conservato |
+| Originale restituito | `exec-34449fb7-e92d-4813-a3d6-7a5848930332.png`, copia `originali/spazienzio-esasperato-1.png`; SHA-256 `1838128abcae756dd53a9c844a2ae5f9905868ba88313ef735561b794b2d1ca0` |
+| Anteprima / consegna | [spazienzio-esasperato.webp](ritratti/spazienzio-esasperato.webp); 1024×1536 px, WEBP, RGBA, 386706 byte; SHA-256 `ed5ce4006ccbe939de1715c2830333d8901c3c7c1c7a86dbde1a02624493b444` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; metadati non conservati; alfa conservato |
+| Esito del tentativo | consegnato per esame |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, hair, body, clothes, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression: exasperated and impatient while listening to someone who will not stop talking: eyes rolled up, cheeks puffed out, face turning red, mouth closed. Keep his arms and pose as they are.
+
+Avoid: any other change; mirroring; a different head position or size; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~

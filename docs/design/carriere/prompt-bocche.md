@@ -193,3 +193,20 @@ Avoid: any other change; mirroring; a different head position or size; any text,
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
+| mara-agitata | [mara-agitata-bocca.webp](asset/tutorial/ritratti/mara-agitata-bocca.webp) | [mara-agitata-bocca-2](asset/tutorial/registro.md#mara-agitata-bocca-2) |  |
+| mara-contenta | [mara-contenta-bocca.webp](asset/tutorial/ritratti/mara-contenta-bocca.webp) | [mara-contenta-bocca-2](asset/tutorial/registro.md#mara-contenta-bocca-2) |  |
+| mara-illuminata | [mara-illuminata-bocca.webp](asset/tutorial/ritratti/mara-illuminata-bocca.webp) | [mara-illuminata-bocca-2](asset/tutorial/registro.md#mara-illuminata-bocca-2) |  |
+| mara-neutra | [mara-neutra-bocca.webp](asset/tutorial/ritratti/mara-neutra-bocca.webp) | [mara-neutra-bocca-2](asset/tutorial/registro.md#mara-neutra-bocca-2) |  |
+| mara-sospettosa | [mara-sospettosa-bocca.webp](asset/tutorial/ritratti/mara-sospettosa-bocca.webp) | [mara-sospettosa-bocca-2](asset/tutorial/registro.md#mara-sospettosa-bocca-2) |  |
+| mara-pensierosa | [mara-pensierosa-bocca.webp](asset/tutorial/ritratti/mara-pensierosa-bocca.webp) | [mara-pensierosa-bocca-2](asset/tutorial/registro.md#mara-pensierosa-bocca-2) |  |
+| spazienzio-furioso | [spazienzio-furioso-bocca.webp](asset/tutorial/ritratti/spazienzio-furioso-bocca.webp) | [spazienzio-furioso-bocca-2](asset/tutorial/registro.md#spazienzio-furioso-bocca-2) |  |
+| spazienzio-fumante | [spazienzio-fumante-bocca.webp](asset/tutorial/ritratti/spazienzio-fumante-bocca.webp) | [spazienzio-fumante-bocca-2](asset/tutorial/registro.md#spazienzio-fumante-bocca-2) |  |
+| spazienzio-quasi-calmo | [spazienzio-quasi-calmo-bocca.webp](asset/tutorial/ritratti/spazienzio-quasi-calmo-bocca.webp) | [spazienzio-quasi-calmo-bocca-2](asset/tutorial/registro.md#spazienzio-quasi-calmo-bocca-2) |  |
+| spazienzio-soddisfatto | [spazienzio-soddisfatto-bocca.webp](asset/tutorial/ritratti/spazienzio-soddisfatto-bocca.webp) | [spazienzio-soddisfatto-bocca-1](asset/tutorial/registro.md#spazienzio-soddisfatto-bocca-1) |  |
+| spazienzio-serio | [spazienzio-serio-bocca.webp](asset/tutorial/ritratti/spazienzio-serio-bocca.webp) | [spazienzio-serio-bocca-2](asset/tutorial/registro.md#spazienzio-serio-bocca-2) |  |
+| piera-contenta | [piera-contenta-bocca.webp](asset/tutorial/ritratti/piera-contenta-bocca.webp) | [piera-contenta-bocca-2](asset/tutorial/registro.md#piera-contenta-bocca-2) |  |
+| piera-brilla | [piera-brilla-bocca.webp](asset/tutorial/ritratti/piera-brilla-bocca.webp) | [piera-brilla-bocca-2](asset/tutorial/registro.md#piera-brilla-bocca-2) |  |
+| piera-offesa | [piera-offesa-bocca.webp](asset/tutorial/ritratti/piera-offesa-bocca.webp) | [piera-offesa-bocca-2](asset/tutorial/registro.md#piera-offesa-bocca-2) |  |
+| piera-assonnata | [piera-assonnata-bocca.webp](asset/tutorial/ritratti/piera-assonnata-bocca.webp) | [piera-assonnata-bocca-2](asset/tutorial/registro.md#piera-assonnata-bocca-2) |  |
+| mara-esasperata | [mara-esasperata.webp](asset/tutorial/ritratti/mara-esasperata.webp) | [mara-esasperata-1](asset/tutorial/registro.md#mara-esasperata-1) |  |
+| spazienzio-esasperato | [spazienzio-esasperato.webp](asset/tutorial/ritratti/spazienzio-esasperato.webp) | [spazienzio-esasperato-1](asset/tutorial/registro.md#spazienzio-esasperato-1) |  |
