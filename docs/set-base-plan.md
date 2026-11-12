@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Aspetta il proprietario:** le prove umane SB-12b e SB-16 (sue partite con la bozza, [avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)), senza scheda di prova. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **Prossimo:** [SB-16b](#sb-16b--revisione-critica-delle-regole), revisione critica delle regole (D49). Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -308,12 +308,12 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | Carte | SB-11a | Passi `consume` ed `equip` del formato dati | SB-10b | chiuso |
 | | SB-11b | Bozza degli starter base | SB-11a | chiuso |
 | | SB-12a | Giro coi bot sugli starter base | SB-11b | chiuso |
-| | SB-12b | Prova umana degli starter base | SB-8, SB-12a | prossimo |
+| | SB-12b | Prova umana degli starter base | SB-8, SB-12a | fatto, giudizio registrato (12 novembre 2026) |
 | | SB-13 | Celestina Bucatina: bozza e giro | SB-12a (D42; prima SB-12) | chiuso (anticipato, D42) |
 | | SB-14 | Piera Ultimo Giro: bozza e giro | SB-13 | chiuso |
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
-| | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | prossimo |
-| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 |  |
+| | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | fatto, giudizio registrato (12 novembre 2026) |
+| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | prossimo |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16b |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -335,7 +335,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). **Prossimo:** le prove umane SB-12b e SB-16, poi la revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49), poi SB-17. SB-30 può
+e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. **Prossimo:** la revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49), poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -628,7 +628,9 @@ Tre giri coi bot (il massimo di Q5), circa 40 minuti di calcolo su un tetto di 2
 Restano raccomandazioni per i blocchi che le toccano: scala della salute degli altri personaggi (SB-13), patte e Steal (SB-12b). Dettagli
 nel [rapporto](reports/set-base/sb-12a-report.md).
 
-**SB-12b, stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario.** SB-8 è chiuso (D46): la bozza si gioca con
+**SB-12b fatto il 12 novembre 2026, giudizio registrato.** Il proprietario: «gli starter base mi sembrano abbastanza bilanciati fra loro, anche se nelle mie partite mara mi sembra un po' piu debole di spazienzio. potrebbe essere solo una sensazione però, è evidenza aneddotica». Concorda coi bot: Spazienzio contro Mara 0,525 in SB-12a, dentro il 45–55%. **Osservazione assegnata:** nessun cambio ora, perché è evidenza aneddotica e i numeri sono nei criteri; si riguarda nella prima misura del set intero e nei giri di correzione (SB-20, SB-21) e nella prova con mazzi costruiti (SB-22). Prova del 12 novembre 2026 sulla bozza attuale, con `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e il client servito; nessun problema tecnico. Numero di partite e accoppiamenti non dichiarati. Durante le stesse prove, alla regia: il salvataggio in extremis di Piera, che resta ([D48](#decisioni-del-proprietario)); l'alcol che riduce i danni per tutti, rimandato alla Fase B di [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49); quantità di danno e barriera sull'impatto, osservazione del client [O32](client-roadmap.md#osservazioni-registrate-durante-c4), dopo C5.
+
+*Stato precedente.* **SB-12b, stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario.** SB-8 è chiuso (D46): la bozza si gioca con
 `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e `./client-web/run.ps1 -Task Serve` ([avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)).
 Da guardare, dal [rapporto SB-12a](reports/set-base/sb-12a-report.md#cosa-serve-a-sb-12b): parate e contromosse giocate da un umano (il
 matchup potrebbe spostarsi verso Spazienzio), durata percepita (11 turni di media), patte, Steal, i nomi dei due starter. La regia ha
@@ -732,7 +734,9 @@ serve**; se serve, lo si dichiara e si rilancia la matrice.
 
 **Rischi.** Complessità poco leggibile sul tavolo: va annotata per SB-31.
 
-**Stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario** (richiede SB-8, chiuso con D46). Da guardare, dai rapporti
+**Fatto il 12 novembre 2026, giudizio registrato.** Il proprietario: «anche gli starter avanzati mi sembrano ok, con celestina che sembra leggermente piu debole di beppe bulletta». **I bot dicono il contrario:** Beppe contro Celestina (il Tossico) 0,470 [0,464–0,476] in [SB-15](reports/set-base/sb-15-report.md), cioè Celestina un poco avanti, dentro il 40–60%. Una spiegazione possibile, non provata: le carte di Celestina sono quelle che i bot giocano peggio (sotto), e un umano può giocarle in un altro modo. **Osservazione assegnata:** nessun cambio ora; si riguarda in SB-20, SB-21 e SB-22, prima leva la T iniziale di Celestina (D43). Leggibilità sul tavolo: nessuna segnalazione per SB-31. Prova del 12 novembre 2026 sulla bozza attuale, con `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e il client servito; nessun problema tecnico. Numero di partite e accoppiamenti non dichiarati. Durante le stesse prove, alla regia: il salvataggio in extremis di Piera, che resta ([D48](#decisioni-del-proprietario)); l'alcol che riduce i danni per tutti, rimandato alla Fase B di [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49); quantità di danno e barriera sull'impatto, osservazione del client [O32](client-roadmap.md#osservazioni-registrate-durante-c4), dopo C5.
+
+*Stato precedente.* **Stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario** (richiede SB-8, chiuso con D46). Da guardare, dai rapporti
 [SB-13](reports/set-base/sb-13-report.md), [SB-14](reports/set-base/sb-14-report.md) e [SB-15](reports/set-base/sb-15-report.md): le carte
 che i bot giocano peggio (Celestina: Riflessi, Metabolismo, travaso e Mescolone che toglie l'immunità propria; Piera: «bevi poi
 spendi», Testata, Offro io, il Bancone; Beppe: Steal, Smontiamo tutto, oggetti sul tavolo per «Lavoro fatto bene», Mattone e SeagullFly
