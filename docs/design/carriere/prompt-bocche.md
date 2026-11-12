@@ -210,3 +210,39 @@ Avoid: any other change; mirroring; a different head position or size; any text,
 | piera-assonnata | [piera-assonnata-bocca.webp](asset/tutorial/ritratti/piera-assonnata-bocca.webp) | [piera-assonnata-bocca-2](asset/tutorial/registro.md#piera-assonnata-bocca-2) |  |
 | mara-esasperata | [mara-esasperata.webp](asset/tutorial/ritratti/mara-esasperata.webp) | [mara-esasperata-1](asset/tutorial/registro.md#mara-esasperata-1) |  |
 | spazienzio-esasperato | [spazienzio-esasperato.webp](asset/tutorial/ritratti/spazienzio-esasperato.webp) | [spazienzio-esasperato-1](asset/tutorial/registro.md#spazienzio-esasperato-1) |  |
+
+## Secondo giro
+
+12 novembre 2026. Dopo la prova del proprietario e la diagnosi della [Fase G](prototipo-fase-g.md#bocche) del prototipo: due immagini da
+rifare. **spazienzio-furioso-bocca** non combacia con il ritratto approvato (testa più in alto e più piccola), quindi oggi Spazienzio
+furioso parla a bocca ferma; **mara-esasperata** ha un velo scuro semitrasparente al posto del fondo, che il lettore copre con la sagoma di
+«neutra» ma che non deve arrivare al client vero. Le altre undici versioni «-bocca» con il velo vanno bene per il prototipo, che ne prende
+solo il colore della bocca. Stesse [istruzioni](#istruzioni); originali nuovi con il suffisso `-3` per la bocca di Spazienzio e `-2` per
+Mara esasperata, file consegnati con lo stesso nome; **dopo lo scontorno il fondo dev'essere trasparente per davvero**: l'esecutore
+controlla l'alfa degli angoli e del fondo e lo scrive nel registro.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| spazienzio-furioso-bocca | `originali/spazienzio-furioso-2.png` | 07d791e1d6470ccaf97e43786a55a76404652f495afc333e33b6a4c7648cd9c3 |
+| mara-esasperata | `originali/mara-neutra-1.png` | a2a629d0e1d229ae794990b6863a5f165b4f84e766aaf9a4e790bad880ea7f40 |
+
+### spazienzio-furioso-bocca
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, expression, eyes, hair, body, clothes, pose, colours, hand-inked European comic style and the transparent background. Do not move, rescale, re-centre or crop anything: the head and the body must keep exactly the same size and exactly the same position on the canvas, pixel for pixel, because the two images will alternate quickly while the character speaks. Change only the mouth: his mouth half closed between two shouts, teeth still bared.
+
+Avoid: any change outside the mouth; a different head position, angle or size; zooming in or out; a different expression of the eyes or eyebrows; a dark veil, halo or shadow around the figure; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### mara-esasperata
+
+~~~text
+Edit the attached dialogue portrait. Keep everything exactly the same: the same character, face, hair, body, clothes, colours, hand-inked European comic style, framing, size and position on the canvas. Change only her facial expression: exasperated while listening to someone who will not stop talking: eyes rolled up towards the ceiling, a long silent sigh, mouth closed in a flat line. Keep her hands and pose as they are. The background must stay fully transparent: no dark veil, halo, shadow or tint around the figure.
+
+Avoid: any other change; mirroring; a different head position or size; a dark or semi-transparent background; any text, letters, numbers, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### Esiti del secondo giro
+
+| Asset | File | Scheda del registro | Giudizio del proprietario |
+|---|---|---|---|
