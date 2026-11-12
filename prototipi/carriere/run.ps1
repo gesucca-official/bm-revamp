@@ -1,4 +1,4 @@
-param([ValidateSet('Install','Lock','Test','Convert','Check','Build','Dev','Phone','Shots','Misura')][string]$Task='Build',[switch]$Offline,[string]$Out)
+param([ValidateSet('Install','Lock','Test','Convert','Check','Build','Dev','Phone','Shots','Misura','Registra')][string]$Task='Build',[switch]$Offline,[string]$Out)
 # CA-0a, prototipo delle carriere: usa e getta, fuori da client-web (docs/design/carriere/prototipo.md).
 $ErrorActionPreference='Stop'
 $repo=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
@@ -22,6 +22,8 @@ try {
     'Phone' {& npm run convert;if($LASTEXITCODE -eq 0){$saved=$env:BM_LAN;if(!$env:BM_LAN){$env:BM_LAN='lan'};try{& npm run start}finally{$env:BM_LAN=$saved}}}
     # Misura: apertura della mappa a 390x844 con la CPU 4 e 6 volte più lenta (Fase D, prestazioni sul telefono).
     'Misura' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){& node strumenti/misura.mjs 4 5};if($LASTEXITCODE -eq 0){& node strumenti/misura.mjs 6 5}}
+    # Registra: due brevi video webm e un foglio di fotogrammi dei ritratti animati (Fase E, movimento e maglia).
+    'Registra' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){$saved=$env:BM_OUT;if($Out){$env:BM_OUT=$Out};try{& node strumenti/registra.mjs}finally{$env:BM_OUT=$saved}}}
     'Shots' {& npm run convert;if($LASTEXITCODE -eq 0){& npm run build};if($LASTEXITCODE -eq 0){$saved=$env:BM_OUT;if($Out){$env:BM_OUT=$Out};try{& npm run shots}finally{$env:BM_OUT=$saved}}}
   }
   if($LASTEXITCODE -ne 0){throw "prototipo carriere $Task exited with code $LASTEXITCODE"}

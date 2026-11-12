@@ -1,5 +1,6 @@
 // CA-0a: il prototipo delle carriere. Elenco → mappa → nodo (scena, scelte, partite simulate) → mappa → … → fine del giro.
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
+import {LIVELLI, type Livello} from '../animazione.ts';
 import type {Carriera} from '../formato.ts';
 import {nuovoAccount, nuovoGiro, vista, type Evento, type Stato} from '../motore.ts';
 import {carriere, nomeSblocco} from './dati.ts';
@@ -9,6 +10,7 @@ import {useCarattere} from './font.ts';
 import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
 
+const CHIAVE_LIVELLO = 'bm-carriere-prototipo-v1:animazione';
 type Avviso = {id: number; testo: string; tipo: Evento['tipo']};
 
 export function App() {
@@ -16,6 +18,12 @@ export function App() {
   const [stati, setStati] = useState<Record<string, Stato>>(() => Object.fromEntries(carriere.map(c => [c.id, carica(c)])));
   const [aperta, setAperta] = useState<string | null>(null);
   const [carattere, prossimoCarattere, scegliCarattere] = useCarattere();
+  // Ritratti animati (Fase E): fermi, movimento, maglia; si sceglie nell'elenco o con «✦» nella scena e resta salvato nel browser.
+  const [livello, setLivello] = useState<Livello>(() => {
+    try { const l = localStorage.getItem(CHIAVE_LIVELLO); return LIVELLI.some(x => x.id === l) ? l as Livello : 'movimento'; } catch { return 'movimento'; }
+  });
+  useEffect(() => { try { localStorage.setItem(CHIAVE_LIVELLO, livello); } catch { /* niente */ } }, [livello]);
+  const prossimoLivello = () => setLivello(x => LIVELLI[(LIVELLI.findIndex(l => l.id === x) + 1) % LIVELLI.length].id);
   const [pannello, setPannello] = useState<'gioco' | 'mappa' | 'achievement'>('gioco');
   const [statoAperto, setStatoAperto] = useState(false);
   const [eventi, setEventi] = useState<{id: number; e: Evento}[]>([]);
@@ -45,7 +53,7 @@ export function App() {
   if (!c) {
     return <>
       <Elenco carriere={carriere} stati={stati} nome={nome} onNome={n => { setNome(n); salvaNome(n); }}
-        carattere={carattere.id} onCarattere={scegliCarattere}
+        carattere={carattere.id} onCarattere={scegliCarattere} livello={livello} onLivello={setLivello}
         onApri={id => { setAperta(id); setPannello('gioco'); }}
         onNuovoGiro={id => { const cc = carriere.find(x => x.id === id)!; imposta(cc, nuovoGiro(cc, stati[id].account, stati[id].giro)); setAperta(id); setPannello('mappa'); }}
         onAchievement={id => { setAperta(id); setPannello('achievement'); }}
@@ -70,7 +78,7 @@ export function App() {
     schermo = <Bacheca c={c} s={s} azione={azione} onRiprendi={() => setPannello('gioco')} onAchievement={() => setPannello('achievement')}
       onNuovoGiro={nuovo} onElenco={() => setAperta(null)} onStato={() => setStatoAperto(x => !x)} />;
   } else {
-    schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} carattere={carattere} onCarattere={prossimoCarattere} onMappa={() => setPannello('mappa')}
+    schermo = <Gioco c={c} s={s} nome={nome || 'Giocatore'} eventi={eventi} azione={azione} carattere={carattere} onCarattere={prossimoCarattere} livello={livello} onLivello={prossimoLivello} onMappa={() => setPannello('mappa')}
       onStato={() => setStatoAperto(x => !x)} onElenco={() => setAperta(null)} onNuovoGiro={nuovo} onAchievement={() => setPannello('achievement')} />;
   }
   return <>{schermo}{stato}{avvisiDom}</>;

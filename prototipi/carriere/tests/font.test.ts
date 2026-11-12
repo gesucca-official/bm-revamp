@@ -24,7 +24,7 @@ function testiDialogo(c: Carriera): string {
 
 test('ogni font dei dialoghi ha tutti i caratteri delle storie, accentate comprese, e la sua licenza', () => {
   const usati = [...new Set([...testiDialogo(tutorial()) + testiDialogo(prova())])].filter(c => c.trim());
-  assert.equal(CARATTERI.length, 8);
+  assert.equal(CARATTERI.length, 14);
   for (const f of CARATTERI) {
     const set = caratteriDelFont(new URL(f.file, qui));
     const mancano = usati.filter(c => !set.has(c.codePointAt(0)!));

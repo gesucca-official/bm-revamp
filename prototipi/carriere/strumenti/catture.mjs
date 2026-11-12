@@ -76,8 +76,13 @@ async function giro(nome, viewport) {
   await foto('04-scena0-mara', 2600);
   // I tre caratteri da confrontare (Fase C): si passa dall'uno all'altro con «Aa», poi si torna al primo.
   for (const n of ['04b-font-patrick-hand', '04c-font-comic-neue']) { await tid('carattere').click(); await foto(n, 400); }
-  // «Aa» fa il giro di tutti i font: si torna a Shantell Sans, il predefinito.
-  for (let i = 0; i < 10 && !(await tid('carattere').textContent()).includes('Shantell'); i++) await tid('carattere').click();
+  // «Aa» fa il giro di tutti i font (quattordici dalla Fase E): due dei nuovi, squadrati, poi si torna a Shantell Sans, il predefinito.
+  for (const [n, f] of [['04d-font-bangers', 'Bangers'], ['04e-font-black-ops-one', 'Black Ops One']]) {
+    for (let i = 0; i < 16 && !(await tid('carattere').textContent()).includes(f); i++) await tid('carattere').click();
+    await foto(n, 400);
+  }
+  for (let i = 0; i < 16 && !(await tid('carattere').textContent()).includes('Shantell'); i++) await tid('carattere').click();
+  atteso((await tid('carattere').textContent()).includes('Shantell'), 'il ritorno a Shantell Sans');
   await salta();
   await continua();
   await salta();
@@ -134,6 +139,22 @@ async function giro(nome, viewport) {
   await page.getByText('Elenco').last().click();
   await tid('apri-prova').click();
   await continua();
+  // Ritratti animati (Fase E): «✦» passa dal movimento alla maglia; Spazienzio diventa una tela WebGL, gli altri restano immagini.
+  atteso(await page.locator('[data-testid=ritratto][data-livello=movimento]').count() === 1, 'il ritratto in movimento, il livello predefinito');
+  await tid('animazione').click();
+  // La battuta di Piera ha gli stacchi: fra un tocco e l'altro si lascia comparire il pezzo dopo.
+  for (let i = 0; i < 40 && (await page.locator('.dialogo .nome').textContent()) !== 'Spazienzio'; i++) { await avanzaUna(); await page.waitForTimeout(150); }
+  atteso((await page.locator('.dialogo .nome').textContent()) === 'Spazienzio', 'la battuta di Spazienzio');
+  await tid('ritratto-maglia').waitFor();
+  await foto('16a-maglia-spazienzio', 1200);
+  // Con la preferenza di movimento ridotto tutto resta fermo, anche con la maglia scelta.
+  await page.emulateMedia({reducedMotion: 'reduce'});
+  await page.locator('[data-testid=ritratto][data-livello=fermo]').waitFor();
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  await tid('ritratto-maglia').waitFor();
+  await tid('animazione').click();
+  await tid('animazione').click();
+  atteso((await tid('animazione').textContent()).includes('Movimento'), 'il ritorno al movimento');
   await salta();
   await tid('opzione-1').click();
   await continua();

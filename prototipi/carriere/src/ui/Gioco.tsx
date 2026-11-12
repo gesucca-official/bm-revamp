@@ -4,15 +4,17 @@ import type {Carriera} from '../formato.ts';
 import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
 import {cast, nomeDi, nomeSblocco, ritratto, sfondo, sprite} from './dati.ts';
 import {useTesto} from './testo.ts';
-import {corpo, type Carattere} from './font.ts';
+import {corpo, larghezzaMedia, type Carattere} from './font.ts';
+import {Ritratto} from './Ritratto.tsx';
+import {LIVELLI, type Livello} from '../animazione.ts';
 
 type Azione = (f: (c: Carriera, s: Stato) => {stato: Stato; eventi: Evento[]}) => void;
 type Props = {c: Carriera; s: Stato; nome: string; eventi: {id: number; e: Evento}[]; azione: Azione;
-  carattere: Carattere; onCarattere: () => void; onMappa: () => void; onStato: () => void; onElenco: () => void; onNuovoGiro: () => void; onAchievement: () => void};
+  carattere: Carattere; onCarattere: () => void; livello: Livello; onLivello: () => void; onMappa: () => void; onStato: () => void; onElenco: () => void; onNuovoGiro: () => void; onAchievement: () => void};
 
 const LARGHEZZA_SFONDO = 1536, ALTEZZA_SFONDO = 1024;
 
-export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, onMappa, onStato, onElenco, onNuovoGiro, onAchievement}: Props) {
+export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livello, onLivello, onMappa, onStato, onElenco, onNuovoGiro, onAchievement}: Props) {
   const v = vista(c, s);
   const g = s.giro;
   const scena = useRef<HTMLDivElement>(null);
@@ -85,17 +87,36 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, onMap
   const n = g.nodo ? nodo(c, g.nodo) : null;
   const messaggioPrima = n ? [...n.passi.slice(0, g.passo)].reverse().find(p => p.tipo === 'messaggio') : undefined;
 
-  // Finestra di dialogo (Fase C): 20% dell'altezza in orizzontale, 22% in verticale, al più tre righe; il corpo si adatta alla battuta.
+  // Finestra di dialogo (Fase E): alta quanto il testo, al più tre righe, più un margine; non più una fascia fissa. Il corpo si adatta
+  // alla battuta fino a un massimo; una copia nascosta del testo intero fissa l'altezza, così la finestra non cresce mentre il testo scorre.
   const verticale = misura.h > misura.w;
   const areaL = verticale ? misura.w - 32 : misura.w * 0.84;
-  const areaA = misura.h * (verticale ? 0.22 : 0.2) - (verticale ? 30 : 34);
+  const massimo = verticale ? 24 : 34;
   // Le frasi di Piera (con gli stacchi) sono gag lunghe apposta: corpo più grande del minimo, e la finestra mostra le ultime righe.
-  const px = corpo(testoPieno, areaL, areaA, carattere, battuta?.stacchi ? (verticale ? 18 : 24) : 15, verticale ? 26 : 36);
+  const minimo = battuta?.stacchi ? (verticale ? 18 : 24) : 15;
+  // La stima del corpo sbaglia di poco con certi font e a capo: dopo il disegno si misura la copia nascosta e, se passa le tre righe,
+  // si scende di un punto alla volta (calo); al minimo si passa alle ultime righe. Il calo vale per questa battuta, font e misura.
+  const chiaveTesto = `${testoPieno}|${carattere.id}|${misura.w}x${misura.h}`;
+  const [calo, setCalo] = useState({chiaveTesto: '', n: 0, oltre: false});
+  const misurato = calo.chiaveTesto === chiaveTesto ? calo : {chiaveTesto, n: 0, oltre: false};
+  const px = Math.max(minimo, corpo(testoPieno, areaL, massimo * 1.3 * 3, carattere, minimo, massimo) - misurato.n);
+  const righe = Math.ceil((testoPieno.length * px * larghezzaMedia(testoPieno, carattere)) / areaL);
+  const oltre = righe > 3 || misurato.oltre;  // più di tre righe: altezza piena e si leggono le ultime
+  const pieno = useRef<HTMLSpanElement>(null);
+  useLayoutEffect(() => {
+    const el = pieno.current;
+    if (!el || el.offsetHeight <= px * 1.3 * 3 + 2) return;
+    setCalo(px > minimo ? {...misurato, n: misurato.n + 1} : {...misurato, oltre: true});
+  });
+  // Quando il font arriva dalla rete la misura cambia: si rimisura.
+  const [, rimisura] = useState(0);
+  useEffect(() => { let vivo = true; document.fonts?.ready.then(() => { if (vivo) rimisura(x => x + 1); }); return () => { vivo = false; }; }, [carattere.id]);
+  const parole = t.visibile.split(/\s+/).filter(Boolean).length;
   const finestra = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => { const el = finestra.current; if (el) el.scrollTop = el.scrollHeight; });
 
   return (
-    <div className={`gioco${scossa ? ' scossa' : ''}`} ref={scena} onClick={tocca} data-testid="scena">
+    <div className={`gioco${scossa ? ' scossa' : ''}${battuta || v.tipo === 'narrazione' ? ' con-dialogo' : ''}`} ref={scena} onClick={tocca} data-testid="scena">
       {sfondo(g.scena.sfondo, sfarfalla ?? g.scena.variante) && <img className="sfondo" src={sfondo(g.scena.sfondo, sfarfalla ?? g.scena.variante)!} alt="" />}
       {g.scena.sfondo && cast.sfondi[g.scena.sfondo]?.insegna && (() => {
         const i = cast.sfondi[g.scena.sfondo!].insegna!;
@@ -104,12 +125,14 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, onMap
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
-      {volto && <img className={`ritratto${t.ascolta ? ' ascolta' : ''}`} src={volto} alt={nomeDi(inQuadro!.chi)} />}
+      {volto && <Ritratto src={volto} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi} espressione={inQuadro!.espressione} ascolta={!!t.ascolta}
+        parlando={!!battuta && !t.completo && !t.ascolta} parole={parole} livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} />}
 
       <span className="dove">{c.titolo}{n ? ` · ${n.titolo || n.etichetta}` : ''}</span>
       {/* Azioni: in alto a destra in orizzontale, in basso e grandi in verticale (Fase C, impressione 6). */}
       <div className="barra" onClick={e => e.stopPropagation()}>
         <button className="carattere" data-testid="carattere" title={`Carattere: ${carattere.nome}`} onClick={onCarattere}>Aa <small>{carattere.nome}</small></button>
+        <button className="carattere" data-testid="animazione" title="Ritratti animati" onClick={onLivello}>✦ <small>{LIVELLI.find(l => l.id === livello)!.nome}</small></button>
         <button onClick={onStato}>Stato</button>
         <button data-testid="apri-mappa" onClick={onMappa}>Mappa</button>
         {leggibile && <button className="primario" data-testid="salta" onClick={() => azione(salta)}>{v.tipo === 'ritento' ? 'Salta il ritento' : 'Salta'}</button>}
@@ -118,7 +141,10 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, onMap
       {(battuta || v.tipo === 'narrazione') && (
         <div className="dialogo" data-testid="dialogo">
           {battuta && <div className="nome">{battuta.nome ?? nomeDi(battuta.chi)}{battuta.fuoriCampo ? ' (fuori campo)' : ''}</div>}
-          <div ref={finestra} className={v.tipo === 'narrazione' ? 'testo narrazione' : 'testo'} style={{fontSize: px}}>{t.visibile}</div>
+          <div ref={finestra} className={`testo${v.tipo === 'narrazione' ? ' narrazione' : ''}${oltre ? ' oltre' : ''}`} style={{fontSize: px}}>
+            {!oltre && <span ref={pieno} className="pieno" aria-hidden="true">{testoPieno}</span>}
+            <span className="scorre">{t.visibile}</span>
+          </div>
           {(t.completo || t.inStacco) && <div className={`avanti${t.inStacco ? ' stacco' : ''}`}>▼</div>}
         </div>
       )}
