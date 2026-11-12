@@ -39,6 +39,13 @@ Il proprietario ha approvato tutte e otto le raccomandazioni con «Approvo tutte
    sul calo di L corretto (fatto: vedi [L e Pino](#l-e-pino)).
 8. **Formato dati:** due passi nuovi (equip dentro `status`, `consume`), il resto in Java con i numeri come parametri.
 
+## Taratura SB-16e (D38/D53)
+
+12 novembre 2026, versione di taratura 0.1, soli numeri nel playground. Dopo il giro 2 (Celestina 55/10 T, Piera 100/10 L),
+il giro 3 usa salute Spazienzio 75, Mara 70, Celestina 70, Piera 85 e Beppe 80; T iniziale Celestina 15 e Dose in preparazione
++10 T; L iniziale Piera 10, Un altro e arrivo +20 A e Testata 25 HIT. Funzioni e liste conservate. Motivi e confronto dei tre giri nel
+[rapporto](../../reports/set-base/sb-16e-report.md). Le note dei blocchi precedenti conservano i valori storici.
+
 ## Principi aggiunti con SB-16d (D52, D54, D55)
 
 - **Nessuna parata pura del turno:** un premio che resta anche senza attacco, circa +5 della risorsa personale o una piccola cura
@@ -89,16 +96,16 @@ Nessun bilanciamento in SB-16d: [rapporto](../../reports/set-base/sb-16d-report.
 
 ### Personaggi (7)
 
-Valori approvati in SB-9; non cambiano qui, salvo la salute dei due personaggi base, corretta nei giri di SB-12a (nota ¹ e
-[correzioni di SB-12a](#correzioni-di-sb-12a)).
+Concept approvati in SB-9. Numeri correnti della bozza dopo [SB-16e](#taratura-sb-16e-d38d53); le note conservano la storia
+di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 
 | ID | Personaggio | Tipo | Valori iniziali | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---|---|---|---|---|
-| PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H ~~100~~ 85¹, A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9) | dati |
-| PG-MAR | Mara Contromano | Personaggio, base | H ~~85~~ 80¹, A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio: A e CUT | dati |
-| PG-TOS | Celestina Bucatina | Personaggio, avanzato | H ~~100~~ 80⁵, A 35, T ~~10~~ 20⁵, capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno | dati |
-| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H ~~110~~ 100⁶, A 15, L ~~10~~ 20⁶, capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito | dati |
-| PG-GIG | Beppe Bulletta | Personaggio, avanzato | H ~~100~~ 95⁷, A 25, V ~~15~~ 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip | dati |
+| PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H 75 (SB-16e), A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9); salute precedente 85¹ | dati |
+| PG-MAR | Mara Contromano | Personaggio, base | H 70 (SB-16e), A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio; salute precedente 80¹ | dati |
+| PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 70, A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
+| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H 85, A 15, L 10 (SB-16e), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
+| PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
 | PG-CES | Sergio Sommerso | Personaggio, booster | H 90, A 30, V 10, capacità 2 | R | — | da inventare (concept SB-9) | Contromosse e letture | dati |
 | PG-ROC | Duccio Braccio Teso | Personaggio, booster | H 130, A 15, capacità 2 | R | — | da inventare (concept SB-9; personaggio di prova SB-6a) | La salute come risorsa (D27) | dati |
 
@@ -220,7 +227,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | +15 T; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca TOS-AR2 | C | 2 | «Dose in preparazione», già `MethDrivenRage`, D55 | Accumula annunciando il veleno diretto; esposizione punibile anche dagli immuni | dati + search |
+| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | +10 T; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca TOS-AR2 | C | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Accumula annunciando il veleno diretto; esposizione punibile anche dagli immuni | dati + search |
 | TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 12 POISON e +5 T al bersaglio | C | 2 | `Cough`, «Tossicone Scatarrante», 8 → 12 POISON (D55) | Colpo cercato, utile anche nello specchio immune alla T | dati |
 | TOS-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Guadagna T/2 HEALTH; perde T | C | 2 | `PervertedMetabolism`, conservata | Difesa: curarsi col veleno; 8,3 HIT, in linea | dati |
 | TOS-AR4 | Azione, regolare | COUNTER | F1 (10 T) | 2 | Annulla le mosse successive dirette a lei | NC | 2 | `AmphetamineReflexes`, conservata | Contromossa; sotto il listino anche per i bot | Java |
@@ -230,10 +237,10 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 20 HIT | C | 2 | bozza «Testata da ultimo giro», 10 → 5 L, 25 → 20 HIT | Attacco: costo basso (D33) | dati |
+| PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
 | PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
-| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | +15 L e +10 A; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca PIN-AR2 | NC | 2 | «Un altro e arrivo», già Offro io, D55 | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
+| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | +15 L e +20 A; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca PIN-AR2 | NC | 2 | «Un altro e arrivo», già Offro io, D55; numero SB-16e | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Piera; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
 
 **Beppe (5)**
@@ -468,7 +475,7 @@ Le 31 carte nuove della [proposta](bozza-esterna-proposta-70-carte.md). Tutte as
 | Chiave da tredici | GIG-AR2 | 10 CUT |
 | Cinghiata di traverso | MAR-AR1 | invariata |
 | Rincorsa dal marciapiede | GEN-12 | +5 V, 12 HIT |
-| Testata da ultimo giro | PIN-AR1 | 5 L, 20 HIT (D33) |
+| Testata da ultimo giro | PIN-AR1 | 5 L, 25 HIT (numero SB-16e, prima 20) |
 | Rutto a distanza sociale | PIN-AR5 | −A pari alla L residua |
 | Oh, guarda là | CES-AR1 | più 4 HIT; passa a Sergio, perché Mara ha già Sorpasso |
 | Denti stretti | GEN-14 | invariata |
@@ -613,8 +620,9 @@ da scrivere solo le carte (SB-11b). Il caso
 ## L e Piera
 
 **Lettura storica precedente a SB-16d.** Le formule di decadimento restano; con D50 A si ferma a zero e L dà corazza.
-PIN-BO1 ora dà +5 L, non +10; PIN-AR4 ora carica +15 L e +10 A e cerca Estasi, senza dare L al bersaglio.
-Le vecchie stime di regime e di disturbo seguenti descrivono la versione misurata in SB-14; le nuove misure spettano a SB-16e.
+PIN-BO1 ora dà +5 L, non +10; PIN-AR4 ora carica +15 L e +20 A (SB-16e, prima +10 A) e cerca Estasi, senza dare L al bersaglio.
+Le vecchie stime di regime e di disturbo seguenti descrivono la versione misurata in SB-14; le nuove misure sono nel
+[rapporto SB-16e](../../reports/set-base/sb-16e-report.md).
 
 **La formula.** A fine turno, con L > 0 e senza immunità, si perde A pari a L/2 e poi L pari a L/2 + 1, a divisione intera (R06;
 `Character.java`, righe 54–58).

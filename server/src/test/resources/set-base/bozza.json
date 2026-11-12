@@ -4,19 +4,19 @@
   "rules": {"deckSize": 20, "maxCopies": 2, "basicFixedPerCharacter": true, "boundChoices": 2, "lastResortRequired": true},
   "characters": [
     {"id": "bruiser.character.BigBadBruiser", "rarity": "COMMON", "name": "Spazienzio de la Ucciso",
-     "resources": {"HEALTH": 85, "ALERTNESS": 20, "VIOLENCE": 25, "TOXICITY": 0, "ALCOHOL": 0},
+     "resources": {"HEALTH": 75, "ALERTNESS": 20, "VIOLENCE": 25, "TOXICITY": 0, "ALCOHOL": 0},
      "items": 1, "immunities": [], "basic": "com.basic.BruiserGrab"},
     {"id": "base.character.Mara", "rarity": "COMMON", "name": "Mara Contromano",
-     "resources": {"HEALTH": 80, "ALERTNESS": 40, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 0},
+     "resources": {"HEALTH": 70, "ALERTNESS": 40, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 0},
      "items": 2, "immunities": [], "basic": "base.mara.PresoAlVolo"},
     {"id": "junkie.character.ToxicJunkie", "rarity": "UNCOMMON", "name": "Celestina Bucatina",
-     "resources": {"HEALTH": 80, "ALERTNESS": 35, "VIOLENCE": 0, "TOXICITY": 20, "ALCOHOL": 0},
+     "resources": {"HEALTH": 70, "ALERTNESS": 35, "VIOLENCE": 0, "TOXICITY": 15, "ALCOHOL": 0},
      "items": 2, "immunities": ["TOXICITY"], "basic": "com.basic.ToxicGrab"},
     {"id": "base.character.Pino", "rarity": "UNCOMMON", "name": "Piera Ultimo Giro",
-     "resources": {"HEALTH": 100, "ALERTNESS": 15, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 20},
+     "resources": {"HEALTH": 85, "ALERTNESS": 15, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 10},
      "items": 2, "immunities": [], "basic": "base.pino.QuestoLoFiniscoIo"},
     {"id": "base.character.Gigi", "rarity": "UNCOMMON", "name": "Beppe Bulletta",
-     "resources": {"HEALTH": 95, "ALERTNESS": 25, "VIOLENCE": 25, "TOXICITY": 0, "ALCOHOL": 0},
+     "resources": {"HEALTH": 80, "ALERTNESS": 25, "VIOLENCE": 25, "TOXICITY": 0, "ALCOHOL": 0},
      "items": 3, "immunities": [], "basic": "base.gigi.QuestoTornaUtile"}
   ],
   "cards": [
@@ -387,7 +387,7 @@
         {
           "op": "gain",
           "resource": "TOXICITY",
-          "amount": 15
+          "amount": 10
         },
         {
           "op": "status",
@@ -426,9 +426,9 @@
       ],
       "gui": {
         "name": "Dose in preparazione",
-        "description": "TOS-AR1 · +15 T a sé; HIT, CUT e POISON ricevuti ×1,5 per 2 turni (questo e il successivo). Al posto della pesca successiva cerca Tossicone Scatarrante, mostralo all’avversario; se assente pesca normalmente.",
+        "description": "TOS-AR1 · +10 T a sé; HIT, CUT e POISON ricevuti ×1,5 per 2 turni (questo e il successivo). Al posto della pesca successiva cerca Tossicone Scatarrante, mostralo all’avversario; se assente pesca normalmente.",
         "role": "RESOURCES",
-        "gains": "+15 T",
+        "gains": "+10 T",
         "damage": "—",
         "damageAmount": "—"
       }
@@ -540,9 +540,9 @@
              "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12+x"}},
 
     {"binding": "base.pino.TestataDaUltimoGiro", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALCOHOL": 5},
-     "self": [{"op": "damage", "type": "HIT", "amount": 5}], "target": [{"op": "damage", "type": "HIT", "amount": 20}],
-     "gui": {"name": "Testata da ultimo giro", "description": "PIN-AR1 · 5 L: 5 HIT a sé; 20 HIT al bersaglio.",
-             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 20"}},
+     "self": [{"op": "damage", "type": "HIT", "amount": 5}], "target": [{"op": "damage", "type": "HIT", "amount": 25}],
+     "gui": {"name": "Testata da ultimo giro", "description": "PIN-AR1 · 5 L: 5 HIT a sé; 25 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 25"}},
     {"binding": "base.pino.GoingBerserk", "rarity": "COMMON", "java": true, "cost": {}, "priority": 1, "params": {"base": 10, "selfHit": 0},
      "gui": {"name": "Estasi da Coca Etilene", "description": "PIN-AR2 · HIT pari a 10 più la propria L residua al bersaglio, poi azzera la propria L.",
              "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 10+x"}},
@@ -562,9 +562,9 @@
       ],
       "gui": {
         "name": "Un altro e arrivo",
-        "description": "PIN-AR4 · +15 L, +10 A a sé; HIT, CUT e POISON ricevuti ×1,5 per 2 turni (questo e il successivo). Al posto della pesca successiva cerca Estasi da Coca Etilene, mostralo all’avversario; se assente pesca normalmente.",
+        "description": "PIN-AR4 · +15 L, +20 A a sé; HIT, CUT e POISON ricevuti ×1,5 per 2 turni (questo e il successivo). Al posto della pesca successiva cerca Estasi da Coca Etilene, mostralo all’avversario; se assente pesca normalmente.",
         "role": "RESOURCES",
-        "gains": "+15 L, +10 A",
+        "gains": "+15 L, +20 A",
         "damage": "—",
         "damageAmount": "—"
       },
@@ -577,7 +577,7 @@
         {
           "op": "gain",
           "resource": "ALERTNESS",
-          "amount": 10
+          "amount": 20
         },
         {
           "op": "status",

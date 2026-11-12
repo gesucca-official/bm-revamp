@@ -149,11 +149,11 @@ class StarterRedesignTest {
                     .findFirst().orElseThrow().getSearchFound().getBinding());
             if (pair.deck.equals("starter-pino")) {
                 assertEquals(7, res(a, Resource.ALCOHOL));
-                assertEquals(3, res(a, Resource.ALERTNESS));
+                assertEquals(13, res(a, Resource.ALERTNESS), "D38/D53, SB-16e: +20 A meno 7 per la L");
             } else if (pair.deck.equals("starter-spazienzio")) {
                 assertEquals(55, res(a, Resource.VIOLENCE)); assertEquals(55, res(a, Resource.ALERTNESS));
             } else if (pair.deck.equals("starter-mara")) assertEquals(55, res(a, Resource.ALERTNESS));
-            else if (pair.deck.equals("starter-tossico")) assertEquals(15, res(a, Resource.TOXICITY));
+            else if (pair.deck.equals("starter-tossico")) assertEquals(10, res(a, Resource.TOXICITY), "D38/D53, SB-16e: Dose +10 T");
             else assertEquals(50, res(a, Resource.VIOLENCE));
         }
     }
@@ -363,10 +363,14 @@ class StarterRedesignTest {
 
     private static Draft withAlcoholGain(int amount) {
         ObjectNode json = (ObjectNode) draft.json();
+        // Historical SB-16d probes used L=20. Keep that fixture explicit when SB-16e changes the starter to L=10;
+        // alcoholBound(draft) above still checks the current starter and its unchanged +5 bound/cap.
+        for (JsonNode c : json.get("characters")) if (c.get("id").asText().equals("base.character.Pino"))
+            ((ObjectNode) c.get("resources")).put("ALCOHOL", 20);
         for (JsonNode c : json.get("cards")) if (c.get("binding").asText().equals("base.pino.bound.CinqueMinutiEVado")) {
             ((ObjectNode) c.get("self").get(0)).put("amount", amount);
             ((ObjectNode) c.get("gui")).put("gains", "+" + amount + " L");
         }
-        return draft.derive("solo numero L " + amount, json);
+        return draft.derive("sonda storica con L iniziale 20, guadagno " + amount, json);
     }
 }

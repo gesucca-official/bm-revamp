@@ -256,6 +256,15 @@ final class Listino {
         this.styles = styles;
     }
 
+    /** SB-16e opt-in: price timing on all five starters; historical measurements retain their order and contexts. */
+    private List<String> timingContexts(String... historical) {
+        if (!Boolean.getBoolean("sim.sb16eTiming")) return List.of(historical);
+        List<String> contexts = new ArrayList<>();
+        for (String ctx : List.of(SPAZIENZIO, MARA, TOSSICO, PINO, GIGI))
+            if (base.deckIds().contains(ctx)) contexts.add(ctx);
+        return contexts;
+    }
+
     static int checkedAnchor(int value) {
         if (value < 1 || value > 100) throw new IllegalArgumentException("sim.listinoAnchor vale " + value + ": atteso un intero da 1 a 100 (HIT)");
         return value;
@@ -348,7 +357,8 @@ final class Listino {
 
     private List<Bench.Cell> cells(String a, String b, boolean allPairs) {
         List<Bench.Cell> cells = new ArrayList<>();
-        for (String sa : STYLES) for (String sb : STYLES)
+        List<String> measured = Boolean.getBoolean("sim.sb16eTiming") ? new ArrayList<>(styles.keySet()) : STYLES;
+        for (String sa : measured) for (String sb : measured)
             if (allPairs || sa.equals(sb)) cells.add(new Bench.Cell(a, sa, b, sb));
         return cells;
     }
@@ -606,7 +616,7 @@ final class Listino {
                         "1 " + type + " vale " + ANCHOR + " / x HIT", 0, 30, 1, false,
                         x -> slotProbe(ctx, null, id -> hitter(id, Map.of(), 1, type, x))));
         // Priorità: x HIT gratuiti a priorità 0 o 2 contro l'àncora a priorità 1.
-        for (String ctx : List.of(SPAZIENZIO, MARA, NEUTRO))
+        for (String ctx : timingContexts(SPAZIENZIO, MARA, NEUTRO))
             for (int p : new int[]{0, 2})
                 list.add(new Bisection("priorita-" + p + "-" + ctx.substring(4), "priorita", ctx, "Sonda: gratuita, priorità " + p + ", x HIT",
                         "un punto di priorità vale ±(x − " + ANCHOR + ") HIT", 0, 30, 1, false,
@@ -896,7 +906,7 @@ final class Listino {
                 list.add(new Curve("salute" + (d > 0 ? "+" : "") + d + "-" + ctx.substring(4), "salute", ctx, "HEALTH iniziale " + (d > 0 ? "+" : "") + d,
                         d, x -> shift(ctx, Resource.HEALTH, d)));
         }
-        for (String ctx : List.of(NEUTRO, SPAZIENZIO, MARA))
+        for (String ctx : timingContexts(NEUTRO, SPAZIENZIO, MARA))
             for (int d : new int[]{-10, -3, -1, 1, 3, 10})
                 list.add(new Curve("allerta" + (d > 0 ? "+" : "") + d + "-" + ctx.substring(4), "allerta", ctx, "A iniziale " + (d > 0 ? "+" : "") + d,
                         d, x -> shift(ctx, Resource.ALERTNESS, d)));

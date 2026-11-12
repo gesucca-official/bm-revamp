@@ -317,7 +317,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | chiuso: Fase A e B fatte (12 novembre 2026), D50–D53 |
 | | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), domande risposte (D54) |
 | | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c | fatto (12 novembre 2026), proposta approvata D55; invarianti e tetto bound verdi |
-| | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d |  |
+| | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d | eseguito (12 novembre 2026), STOP dopo 3 giri: criteri non raggiunti; proposta nel rapporto |
 | | SB-16f | Prova umana degli starter rifatti | SB-16e |  |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
@@ -883,6 +883,17 @@ invarianti a zero.
 costa due turni.
 
 ### SB-16e — Giro sui cinque starter con le regole nuove
+
+**Eseguito il 12 novembre 2026, STOP al terzo giro (D53).** [Rapporto](reports/set-base/sb-16e-report.md),
+[tutti gli incontri e specchi per giro](reports/set-base/sb-16e/incontri.md), [coppie e ablazioni](reports/set-base/sb-16e/coppie.md).
+Tetto fissato prima: 3 giri e 2 ore di calcolo, compresi listino e controlli delle coppie; regole D50 e quattro stili invariati.
+Nel giro finale invarianti e bound a zero violazioni, ma Piera è fuori quota contro Mara e Celestina; patte negli specchi
+Celestina **22,32%**, Piera **17,78%**, Beppe **8,22%**. Sei incontri oltre i 12 turni medi: equilibrio non dichiarato raggiunto.
+Bozza e griglia conservano i numeri del terzo giro sotto D38/D53, funzioni e liste di D55 invariate. Prima leva su Piera:
+L iniziale 20→10 nel giro 2; salute 100→85 nel giro 3, poi recupero A del caricamento 10→20 e Testata 20→25.
+Proposte da decidere prima di proseguire: un solo nuovo lotto numerico su recupero A e danni a sé delle last resort;
+per SB-16f, carta cercata e motivo «a terra» mostrati nel flusso ordinario del client (oggi solo nel testo inglese richiudibile).
+Nessun quarto giro, nessun ridisegno o intervento sul client in questo blocco.
 
 **Perimetro.** Giro coi bot con le regole di D50 e le carte di SB-16d, fino ai criteri:
 - base contro base 45–55%, gli altri incontri 40–60%;
