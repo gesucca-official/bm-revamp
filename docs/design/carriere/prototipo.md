@@ -107,3 +107,23 @@ alla fine del prototipo.
 3. **La cornice generata** al posto di quella disegnata, tagliata in nove fette, quando arriva.
 4. **Prestazioni sul telefono:** la bacheca è un disegno SVG con filtri; la mappa si apre spesso, quindi va misurato il tempo di apertura e,
    se serve, il fondo fisso (feltro, scanalature, macchie) si disegna una volta sola in un'immagine.
+
+## Fase E, font, finestra e ritratti animati
+
+Avviata dalla regia il 12 novembre 2026 dopo il [giudizio del proprietario sui ritocchi della mappa](prototipo-fase-d.md#giudizio-del-proprietario-sui-ritocchi).
+
+1. **Font più squadrati e «violenti»:** da quattro a sei font SIL OFL in più nel campionario, dallo stesso repository di Google Fonts, con
+   le accentate italiane: squadrati, pesanti, da lettering di fumetto d'azione o consumati, sempre leggibili sul telefono. Fra questi almeno un
+   lettering da fumetto tutto maiuscolo, che è la convenzione dei fumetti (Spazienzio urla già in maiuscolo). La scelta resta del proprietario.
+2. **Finestra di dialogo più compatta:** alta quanto il testo che contiene, non una fascia fissa; in verticale niente spazio vuoto sotto il
+   testo, e i pulsanti della scena non devono aggiungere altra fascia. La [specifica](specifica-asset.md#come-appare-la-scena) si aggiorna.
+3. **Ritratti animati senza un asset per fotogramma.** La strada proposta dalla regia, in ordine di costo:
+   - **movimento procedurale sull'immagine che c'è già,** zero asset: respiro (lieve allungamento verticale), piccolo sobbalzo a ogni parola
+     mentre il testo scorre, e un movimento per espressione (tremito per «furioso», ondeggiare lento per Piera «brilla», scatti nervosi per
+     Mara «agitata», ingresso con rimbalzo quando cambia espressione), con lo schiacciamento e l'allungamento tipici del fumetto;
+   - **deformazione a maglia di un'unica immagine,** sempre zero asset: la testa che annuisce o si inclina e il busto che respira, piegando
+     l'immagine con pochi punti di controllo, come fanno gli strumenti di animazione 2D a ritaglio. Da provare su un personaggio solo, per
+     vedere se regge lo stile inchiostrato senza sembrare gomma;
+   - **solo se servono dopo la prova:** pochi ritagli generati per la bocca aperta o gli occhi chiusi, sovrapposti al ritratto, da chiedere
+     con un giro di prompt.
+   Il proprietario sceglie dopo averle viste; il movimento si spegne con la preferenza di movimento ridotto.

@@ -147,3 +147,14 @@ giro dei font, che sono otto. **Catture in git:** 12 sostituite, 1,3 MB: mappa d
 
 **Non verificato:** il telefono vero. **Da giudicare:** se le cordicelle sopra le lettere si leggono ancora bene, se le puntine si
 riconoscono sul telefono, le notifiche appese, la fine giro in verticale.
+
+## Giudizio del proprietario sui ritocchi
+
+12 novembre 2026, con le sue parole:
+
+- **Font:** «non ce ne sono di più squadrati, più "violenti"? Il gioco è Botte Micidiali, dopotutto...».
+- **Finestra di dialogo:** «è sempre troppo alta, e sullo schermo verticale quasi un terzo dello schermo è praticamente lo sfondo».
+- **Ritratti animati:** «le figure dei personaggi che parlano sarebbe carino animarle. Animazioni semplici, di pochi frame. Studiamo un modo
+  intelligente per farlo, per non stare a fare un asset per ogni frame».
+
+Si apre la [Fase E](prototipo.md#fase-e-font-finestra-e-ritratti-animati).
