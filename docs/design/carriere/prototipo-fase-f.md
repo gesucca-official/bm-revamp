@@ -167,3 +167,14 @@ ritratto resta dietro la finestra. Mara e Piera non si muovono.
 3. **La maglia per tutti** e il movimento più morbido per Piera brilla.
 4. **Spazienzio in verticale,** se ora è all'altezza giusta.
 5. **Le bocche e gli esasperati,** quando arrivano le immagini.
+
+## Giudizio del proprietario
+
+12 novembre 2026, con le sue parole:
+
+- **Font dei dialoghi:** «Russo One alleggerito». Le alternative (Russo One pieno, Changa, Oxanium) si tolgono alla chiusura del prototipo.
+- **Il resto della Fase F:** «mi sembra a posto».
+- **Bocche ed espressioni esasperate:** arrivate lo stesso giorno ([prompt](prompt-bocche.md)). Tutte le versioni «bocca» cambiano un po'
+  anche fuori dalla bocca, quindi il lettore usa la maschera della bocca; da giudicare dal vivo.
+- **Mappa:** «sembra un po' statica (perché lo è). Possiamo metterci un po' di movimento? Non troppo se no disturba, ma tipo i fili che si
+  agitano mentre penzolano, qualche lettera che sta per cadere e tremola, poi cade e l'utente può ritrascinarla al suo posto... cose così».
