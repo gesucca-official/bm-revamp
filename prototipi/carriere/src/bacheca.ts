@@ -148,11 +148,15 @@ export function componi(c: Carriera, s: Stato, ultimo: string | null, intestazio
     });
   }
   const g = s.giro;
-  const fatto = (id: string) => g.visti.includes(id) || (id.startsWith('fine:') && g.fine !== null && idCasellaFine(g.finale ?? '') === id);
-  // Anche il ritorno alla scelta (epilogo → scena 4) è una cordicella: sulla bacheca non c'è un verso.
+  // Tesa solo la cordicella percorsa davvero in questo giro (nodi visti uno dopo l'altro, e l'ultimo verso il finale raggiunto); lenta
+  // quella che si può ancora prendere; arrotolata ogni altra, anche fra due nodi visti ma per un'altra strada (ritocchi della Fase D:
+  // a fine giro restano tese solo quelle del percorso, e la bacheca non si affolla).
+  const percorso = new Set(g.visti.slice(1).map((x, i) => `${g.visti[i]}>${x}`));
+  if (g.fine && g.visti.length) percorso.add(`${g.visti.at(-1)}>${idCasellaFine(g.finale ?? g.fine)}`);
+  const ancoraPossibile = (id: string) => ['aperto', 'disponibile', 'bloccato'].includes(stati[id].stato);
   const fili: Filo[] = archi(c).filter(a => visibili.has(a.da) && visibili.has(a.a)).map(a => ({
     da: a.da, a: a.a, sconfitta: a.tipo === 'sconfitta',
-    tipo: fatto(a.da) && fatto(a.a) ? 'tesa' : stati[a.da].stato === 'escluso' || stati[a.a].stato === 'escluso' ? 'arrotolata' : 'lenta',
+    tipo: percorso.has(`${a.da}>${a.a}`) ? 'tesa' : ancoraPossibile(a.a) && stati[a.da].stato !== 'escluso' ? 'lenta' : 'arrotolata',
   }));
   const conti = `GIRO ${g.numero} · SBLOCCHI ${s.account.sblocchi.length} · FINALI ${s.account.finali.length}/${finali(c).length}`;
   return {
@@ -240,6 +244,8 @@ export type Disposizione = {
   pos: Record<string, Pt>;              // spillo di ogni punto
   etichette: Record<string, Etichetta>; // dove cominciano le lettere
   postit: {w: number; h: number};
+  lato: Record<string, number>;         // lato dell'immagine di ogni puntina, in pixel
+  postitY: Record<string, number>;      // bordo alto di ogni post-it: la puntina lo trafigge senza coprire il «???»
   legenda: {x: number; y: number; w: number; h: number; righe: string[]} | null;  // in verticale si apre con un pulsante
   fondo: number;                        // dove stanno le lettere cadute
 };
@@ -306,7 +312,8 @@ export function disponi(comp: Composizione, w: number, h: number, alto: number, 
     for (let i = voluti.length - 1; i >= 0; i--) {
       const x = Math.max(fx + p * 20, Math.min(voluti[i].x, limite));  // a sinistra resta la legenda
       pos[voluti[i].f.id] = {x, y: scan(yFinali + p * 2) + p};
-      limite = x - p * 14;
+      // Il finale a sinistra deve finire le sue lettere prima della puntina di questo.
+      limite = x - Math.max(p * 14, i > 0 ? larghezza(voluti[i - 1].f) + fs * 0.55 + p * 5 : 0);
     }
   } else {
     fini.forEach((f, i) => {
@@ -315,14 +322,57 @@ export function disponi(comp: Composizione, w: number, h: number, alto: number, 
       pos[f.id] = {x: f.postit ? centro : Math.max(fx + p, centro - blocco / 2), y: scan(yFinali + p * 2) + p};
     });
   }
+  // Le lettere stanno lontane dalla puntina (ritocchi della Fase D: nessuna puntina sopra un titolo): in orizzontale sotto il punto più
+  // basso della puntina, in verticale e per i finali a destra del punto più a destra; i post-it pendono abbastanza da lasciare libero il «???».
   const etichette: Record<string, Etichetta> = {};
+  const postitY: Record<string, number> = {};
+  const lato = Object.fromEntries(comp.punti.map(x => [x.id, latoPuntina(p, verticale, x.corrente) * SCALA[x.spillo.forma]]));
+  const ph = p * 3.8;
   for (const n of comp.punti) {
     const s = pos[n.id];
-    etichette[n.id] = n.tipo === 'finale' ? {x: s.x + p * 1.1 + fs * 0.55, y: s.y + p * 0.65, ancora: 'start'}
-      : verticale ? {x: s.x + p * 1.1 + (n.freccia ? fs * 0.8 : 0), y: s.y + p * 0.65, ancora: 'start'} : {x: s.x, y: s.y + p * 2.6, ancora: 'middle'};
+    const b = ingombroPuntina(n.spillo, s, lato[n.id]);
+    const destra = Math.max(s.x + p * 1.1, b.x1 + p * 0.4);
+    etichette[n.id] = n.tipo === 'finale' ? {x: destra + fs * 0.55, y: s.y + p * 0.65, ancora: 'start'}
+      : verticale ? {x: destra + (n.freccia ? fs * 0.8 : 0), y: s.y + p * 0.65, ancora: 'start'}
+      : {x: s.x, y: Math.max(s.y + p * 2.6, b.y1 + fs * ALTEZZA_MAIUSCOLE + p * 0.3), ancora: 'middle'};
+    postitY[n.id] = Math.max(s.y - p * 0.5, b.y1 + p * 0.3 - ph * 0.82 + p * 2 * 0.72);
   }
   const legenda = verticale ? null : {x: fx + p * 1.2, y: fy + fh - basso - lh - p * 0.6, w: p * 17, h: lh, righe: LEGENDA};
   const xTitoloFinali = verticale ? fx + fw / 2 : Math.min(...fini.map(f => pos[f.id].x)) - p;
   return {verticale, w, h, T, p, fx, fy, fw, fh, fs, testate, testataFs, yTestata, ySotto, yFinali, xTitoloFinali, pos, etichette,
-    postit: {w: verticale ? p * 7 : p * 8, h: p * 3.8}, legenda, fondo: fy + fh - p * 1.1};
+    postit: {w: verticale ? p * 7 : p * 8, h: ph}, legenda, fondo: fy + fh - p * 1.1, lato, postitY};
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Ritocchi della Fase D: puntine generate senza punta. Dove ogni immagine entra nel feltro (ancora), dov'è il centro della testa (per
+// l'ombra) e quanto occupa, in frazioni del lato dell'immagine (1254 px), misurati sull'alfa dei file in asset/bacheca/puntine.
+export type Geometria = {ancora: Pt; testa: Pt; box: [number, number, number, number]};
+export const GEOMETRIA: Record<Spillo['forma'], Geometria> = {
+  tonda: {ancora: {x: 0.496, y: 0.42}, testa: {x: 0.496, y: 0.387}, box: [0.261, 0.143, 0.731, 0.632]},
+  cilindro: {ancora: {x: 0.493, y: 0.59}, testa: {x: 0.493, y: 0.33}, box: [0.262, 0.096, 0.725, 0.72]},
+  ottone: {ancora: {x: 0.49, y: 0.425}, testa: {x: 0.49, y: 0.425}, box: [0.207, 0.141, 0.773, 0.709]},
+  spillo: {ancora: {x: 0.465, y: 0.523}, testa: {x: 0.598, y: 0.223}, box: [0.456, 0.143, 0.685, 0.526]},  // dove il gambo entra nel feltro
+  chiodino: {ancora: {x: 0.635, y: 0.262}, testa: {x: 0.47, y: 0.686}, box: [0.308, 0.253, 0.672, 0.806]},  // dove finisce il gambo
+  ombrello: {ancora: {x: 0.5, y: 0.555}, testa: {x: 0.5, y: 0.45}, box: [0.168, 0.26, 0.831, 0.611]},
+};
+
+/** Altezza delle maiuscole di League Gothic, in em: per sapere dove comincia una riga di lettere sopra la sua base. */
+export const ALTEZZA_MAIUSCOLE = 0.74;
+/** Lo spillo da sarta ha la testa piccola nell'immagine: si ingrandisce perché la perla si veda. */
+export const SCALA: Record<Spillo['forma'], number> = {tonda: 1, cilindro: 1, ottone: 1, spillo: 1.3, chiodino: 1, ombrello: 1};
+
+/** Lato dell'immagine di una puntina: la testa resta riconoscibile sul telefono (circa 22–30 px), «sei qui» un terzo più grande. */
+export function latoPuntina(p: number, verticale: boolean, corrente: boolean): number {
+  return p * (verticale ? 3.3 : 3.1) * (corrente ? 1.3 : 1);
+}
+
+/** Il rettangolo che una puntina occupa sul feltro, con la sua inclinazione (che ruota intorno all'ancora). */
+export function ingombroPuntina(s: Spillo, ancora: Pt, lato: number): {x0: number; y0: number; x1: number; y1: number} {
+  const g = GEOMETRIA[s.forma];
+  const ang = (s.inclinazione * Math.PI) / 180, cos = Math.cos(ang), sin = Math.sin(ang);
+  const angoli = [[g.box[0], g.box[1]], [g.box[2], g.box[1]], [g.box[0], g.box[3]], [g.box[2], g.box[3]]].map(([fx, fy]) => {
+    const dx = (fx - g.ancora.x) * lato, dy = (fy - g.ancora.y) * lato;
+    return {x: ancora.x + dx * cos - dy * sin, y: ancora.y + dx * sin + dy * cos};
+  });
+  return {x0: Math.min(...angoli.map(q => q.x)), y0: Math.min(...angoli.map(q => q.y)), x1: Math.max(...angoli.map(q => q.x)), y1: Math.max(...angoli.map(q => q.y))};
 }

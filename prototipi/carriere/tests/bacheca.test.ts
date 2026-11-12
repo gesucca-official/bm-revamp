@@ -151,3 +151,65 @@ test('a fine giro cade una sola lettera in tutta la bacheca, mai la prima o l\'u
   assert.ok(i > 0 && r[i - 1].c !== ' ' && r[i + 1] && r[i + 1].c !== ' ');
   assert.ok(comp.punti.filter(x => x.stato === 'escluso').length > 2, 'le altre righe escluse restano solo storte');
 });
+
+// Ritocchi della Fase D, dopo il giudizio del proprietario.
+import {ALTEZZA_MAIUSCOLE, GEOMETRIA, ingombroPuntina, latoPuntina} from '../src/bacheca.ts';
+
+test('nessuna puntina sopra le lettere di un titolo, né sopra il «???» di un post-it', () => {
+  // Gli stati veri, e poi le stesse bacheche con tutte le puntine di una sola forma: ogni forma deve stare lontana dalle lettere.
+  const forme = [null, ...FORME.filter((f, i) => FORME.indexOf(f) === i)];
+  for (const c of [tutorial(), prova()]) for (const {nome, s} of stati(c)) for (const [w, h] of [[1366, 768], [390, 844]]) for (const forma of forme) {
+    const comp = componi(c, s, s.giro.visti.at(-1) ?? null, `Serraglio — carriera: ${c.titolo}`, h > w ? 12 : 13);
+    if (forma) for (const x of comp.punti) x.spillo = {...x.spillo, forma, inclinazione: 0};
+    const d = disponi(comp, w, h, h > w ? 56 : 0, h > w ? 64 : 58);
+    const dove = `${c.id}, ${nome}, ${w}×${h}${forma ? `, tutte ${forma}` : ''}`;
+    const testi = comp.punti.map(x => {
+      const e = d.etichette[x.id], fsR = x.tipo === 'finale' ? d.fs * 0.9 : d.fs;
+      if (x.postit) {
+        // Il «???» scritto a penna: corpo 2p, base all'82% del post-it.
+        const base = d.postitY[x.id] + d.postit.h * 0.82;
+        return {id: x.id, x0: d.pos[x.id].x - d.p * 1.6, x1: d.pos[x.id].x + d.p * 1.6, y0: base - d.p * 2 * 0.72, y1: base};
+      }
+      const lw = Math.max(...x.titolo.map(t => t.length)) * 0.42 * fsR;
+      const x0 = e.ancora === 'middle' ? e.x - lw / 2 : e.x;
+      return {id: x.id, x0, x1: x0 + lw, y0: e.y - fsR * ALTEZZA_MAIUSCOLE, y1: e.y + (x.titolo.length - 1) * d.p * 2};
+    });
+    for (const x of comp.punti) {
+      const b = ingombroPuntina(x.spillo, d.pos[x.id], d.lato[x.id]);
+      for (const t of testi) {
+        const sopra = b.x0 < t.x1 && b.x1 > t.x0 && b.y0 < t.y1 && b.y1 > t.y0;
+        assert.ok(!sopra, `${dove}: la puntina di ${x.id} copre le lettere di ${t.id}`);
+      }
+    }
+  }
+});
+
+test('le puntine sono abbastanza grandi da riconoscersi sul telefono, «sei qui» di più', () => {
+  for (const verticale of [false, true]) {
+    const p = verticale ? 14 : 18;
+    const testa = (forma: keyof typeof GEOMETRIA, corrente = false) => (GEOMETRIA[forma].box[2] - GEOMETRIA[forma].box[0]) * latoPuntina(p, verticale, corrente);
+    assert.ok(testa('tonda') >= 20, `testa tonda ${testa('tonda').toFixed(0)} px`);
+    assert.ok(testa('tonda', true) >= 26, `«sei qui» ${testa('tonda', true).toFixed(0)} px`);
+  }
+});
+
+test('l\'ancora è il punto in cui la puntina entra nel feltro: lì si legano le cordicelle, e l\'inclinazione ruota intorno a lì', () => {
+  const s = {forma: 'chiodino' as const, colore: '#000', inclinazione: 0};
+  const b = ingombroPuntina(s, {x: 100, y: 100}, 100);
+  const g = GEOMETRIA.chiodino;
+  assert.ok(Math.abs(b.x0 - (100 + (g.box[0] - g.ancora.x) * 100)) < 1e-9 && Math.abs(b.y1 - (100 + (g.box[3] - g.ancora.y) * 100)) < 1e-9);
+  const ruotato = ingombroPuntina({...s, inclinazione: 90}, {x: 100, y: 100}, 100);
+  assert.ok(ruotato.x1 <= 100 + 1e-9 + (g.ancora.y - g.box[1]) * 100 && ruotato.x0 < 100);
+});
+
+test('a fine giro sono tese solo le cordicelle del percorso fatto; le altre si arrotolano', () => {
+  const c = prova();
+  let fine = statoBozzetto(c).stato;
+  for (const f of [(x: Stato) => entra(c, x, 'nodo-e'), (x: Stato) => salta(c, x), (x: Stato) => entra(c, x, 'nodo-d'), (x: Stato) => salta(c, x),
+    (x: Stato) => vinci(c, x), (x: Stato) => scegli(c, x, 2), (x: Stato) => entra(c, x, 'nodo-h'), (x: Stato) => salta(c, x)]) fine = f(fine).stato;
+  const fili = componi(c, fine, 'nodo-h', 'x').fili;
+  assert.deepEqual(fili.filter(f => f.tipo === 'tesa').map(f => `${f.da}>${f.a}`).sort(),
+    ['nodo-a>nodo-c', 'nodo-c>nodo-e', 'nodo-d>nodo-h', 'nodo-e>nodo-d', 'nodo-h>fine:grappino-scappa-di-nuovo']);
+  assert.equal(fili.find(f => f.da === 'nodo-c' && f.a === 'nodo-d')!.tipo, 'arrotolata', 'fra due nodi visti, ma non percorsa');
+  assert.ok(!fili.some(f => f.tipo === 'lenta'), 'a giro finito non c\'è più niente da fare');
+});

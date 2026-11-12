@@ -76,7 +76,8 @@ async function giro(nome, viewport) {
   await foto('04-scena0-mara', 2600);
   // I tre caratteri da confrontare (Fase C): si passa dall'uno all'altro con «Aa», poi si torna al primo.
   for (const n of ['04b-font-patrick-hand', '04c-font-comic-neue']) { await tid('carattere').click(); await foto(n, 400); }
-  await tid('carattere').click();
+  // «Aa» fa il giro di tutti i font: si torna a Shantell Sans, il predefinito.
+  for (let i = 0; i < 10 && !(await tid('carattere').textContent()).includes('Shantell'); i++) await tid('carattere').click();
   await salta();
   await continua();
   await salta();

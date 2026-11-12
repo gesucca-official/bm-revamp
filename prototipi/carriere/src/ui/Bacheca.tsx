@@ -4,7 +4,7 @@
 import {useEffect, useState, type ReactNode} from 'react';
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, risolvi, type Evento, type Stato} from '../motore.ts';
-import {caso, CARATTERE_LETTERA, componi, disponi, sporco, LEGENDA, type Punto} from '../bacheca.ts';
+import {caso, CARATTERE_LETTERA, componi, disponi, latoPuntina, sporco, LEGENDA, type Punto} from '../bacheca.ts';
 import type {StatoNodo} from '../mappa.ts';
 import {nomeDi, nomeSblocco} from './dati.ts';
 import {CorniceDisegnata, Cordicella, Definizioni, FELTRO, FETTA_CORNICE, Freccia, immagine, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
@@ -53,9 +53,10 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     let box: {x: number; y: number; w: number; h: number};
     if (n.postit) {
       const {w: pw, h: ph} = d.postit;
-      elementi.push(<Postit key={`p-${n.id}`} x={sp.x} y={sp.y - p * 0.5} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2} />);
-      if (n.freccia) elementi.push(<Freccia key={`f-${n.id}`} x={sp.x - pw / 2 - fs * 0.75} y={sp.y - p * 0.5 + ph * 0.62} fs={fs} />);
-      box = {x: sp.x - pw / 2 - (n.freccia ? fs * 0.8 : 0), y: sp.y - p, w: pw + (n.freccia ? fs * 0.8 : 0), h: ph + p};
+      const py = d.postitY[n.id];
+      elementi.push(<Postit key={`p-${n.id}`} x={sp.x} y={py} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2} />);
+      if (n.freccia) elementi.push(<Freccia key={`f-${n.id}`} x={sp.x - pw / 2 - fs * 0.75} y={py + ph * 0.62} fs={fs} />);
+      box = {x: sp.x - pw / 2 - (n.freccia ? fs * 0.8 : 0), y: Math.min(sp.y - p, py), w: pw + (n.freccia ? fs * 0.8 : 0), h: py + ph - Math.min(sp.y - p, py)};
     } else {
       if (n.tipo === 'finale') elementi.push(<Stella key={`s-${n.id}`} x={e.x - fs * 0.32} y={e.y - fs * 0.3} r={fs * 0.26} colore={n.titolo[0][0]?.colore ?? '#e6d9b2'} />);
       n.titolo.forEach((riga, i) => {
@@ -68,7 +69,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       });
       const lw = larghezza(n), righe = n.titolo.length;
       box = e.ancora === 'middle'
-        ? {x: e.x - lw / 2 - p, y: sp.y - p, w: lw + p * 2, h: p * (2.8 + righe * 2)}
+        ? {x: e.x - lw / 2 - p, y: sp.y - p, w: lw + p * 2, h: e.y - sp.y + p * 1.6 + (righe - 1) * p * 2}
         : {x: sp.x - p, y: sp.y - p * 1.2, w: e.x - sp.x + lw + p * 2, h: p * (1.6 + righe * 2)};
     }
     aree.push(
@@ -81,7 +82,13 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   // Lettere cadute in fondo alla cornice (dai nodi esclusi) e una di sempre, decise dai dati.
   const r = caso(`${c.id}:cadute`);
   const cadute = [...comp.punti.flatMap(n => n.caduta ? [n.caduta] : []), {c: 'E', ruota: 96, dy: 0, colore: '#d2b97c'}];
-  const raggio = p * (verticale ? 0.5 : 0.58);
+  const cartoncinoLegenda = (l: NonNullable<typeof legenda>) => (
+    <g transform={`translate(${l.x} ${l.y}) rotate(${verticale ? -1 : 1.5})`} data-testid={verticale ? undefined : 'legenda'}>
+      <rect x={3} y={4} width={l.w} height={l.h} fill="rgba(0,0,0,.45)" filter="url(#sfoca)" />
+      <rect width={l.w} height={l.h} fill="#efe8d6" />
+      {l.righe.map((t, i) => <text key={i} x={p * 0.6} y={p * (1.7 + i * (verticale ? 1.25 : 1.15))} fontSize={p * (verticale ? 1.15 : 0.95)} className="penna">{t}</text>)}
+    </g>
+  );
   const colori = [...new Set(comp.punti.map(x => x.spillo.colore))];
   const legenda = d.legenda ?? (legendaAperta ? {x: fx + p * 2, y: fy + 70, w: fw - p * 4, h: p * (LEGENDA.length * 1.25 + 1.4), righe: LEGENDA} : null);
 
@@ -106,23 +113,17 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         <Riga lettere={comp.sottotitolo} x={fx + fw / 2} y={d.ySotto} fs={fs * 0.62} ancora="middle" />
         <Riga lettere={comp.titoloFinali} x={d.xTitoloFinali} y={d.yFinali} fs={fs * 0.7} ancora={verticale ? 'middle' : 'start'} />
 
-        {/* Cordicelle sotto le lettere, poi lettere e post-it, poi spilli e puntine */}
-        {comp.fili.map(f => <Cordicella key={`${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />)}
-        {elementi}
-        {comp.punti.map(n => <Puntina key={n.id} id={n.id} x={d.pos[n.id].x} y={d.pos[n.id].y} r={n.corrente ? raggio * 1.35 : raggio} s={n.spillo} />)}
+        {/* Livelli (giudizio del proprietario sulla Fase D): lettere cadute, cartoncino della legenda, lettere e post-it sul feltro; sopra
+            tutto le cordicelle tese fra gli spilli, con la loro ombra che cade su ciò che sta sotto; in cima le teste delle puntine. */}
         {cadute.map((l, i) => <Riga key={`c-${i}`} lettere={[{...l, dy: 0}]} x={fx + fw * (verticale ? 0.82 + i * 0.07 : 0.62 + i * 0.06 + r() * 0.03)} y={d.fondo} fs={fs * 0.9} />)}
-
-        {/* Cartoncino della legenda: fisso in orizzontale, a richiesta in verticale */}
-        {legenda && (
-          <g data-testid="legenda" onClick={() => setLegendaAperta(false)}>
-            <g transform={`translate(${legenda.x} ${legenda.y}) rotate(${verticale ? -1 : 1.5})`}>
-              <rect x={3} y={4} width={legenda.w} height={legenda.h} fill="rgba(0,0,0,.45)" filter="url(#sfoca)" />
-              <rect width={legenda.w} height={legenda.h} fill="#efe8d6" />
-              {legenda.righe.map((t, i) => <text key={i} x={p * 0.6} y={p * (1.5 + i * (verticale ? 1.25 : 1.15))} fontSize={p * (verticale ? 1.15 : 0.95)} className="penna">{t}</text>)}
-            </g>
-            <Puntina id="legenda" x={legenda.x + legenda.w / 2} y={legenda.y + p * 0.3} r={raggio} s={{forma: 'ottone', colore: '#d4a944', inclinazione: 0}} />
-          </g>
-        )}
+        {legenda && !verticale && cartoncinoLegenda(legenda)}
+        {elementi}
+        {comp.fili.map(f => <Cordicella key={`${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />)}
+        {comp.punti.map(n => <Puntina key={n.id} id={n.id} x={d.pos[n.id].x} y={d.pos[n.id].y} lato={d.lato[n.id]} s={n.spillo} />)}
+        {legenda && !verticale && <Puntina id="legenda" x={legenda.x + legenda.w / 2} y={legenda.y + p * 0.5} lato={latoPuntina(p, verticale, false)} s={{forma: 'ottone', colore: '#d4a944', inclinazione: 0}} />}
+        {/* In verticale la legenda si apre sopra la mappa, a richiesta */}
+        {legenda && verticale && <g data-testid="legenda" onClick={() => setLegendaAperta(false)}>{cartoncinoLegenda(legenda)}
+          <Puntina id="legenda" x={legenda.x + legenda.w / 2} y={legenda.y + p * 0.5} lato={latoPuntina(p, verticale, false)} s={{forma: 'ottone', colore: '#d4a944', inclinazione: 0}} /></g>}
         {aree}
       </svg>
       {/* La cornice generata, tagliata in nove fette: angoli fermi, lati ripetuti. */}

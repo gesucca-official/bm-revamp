@@ -1,7 +1,7 @@
 // CA-0a, Fase D: i pezzi disegnati della bacheca (bacheca.md). Feltro, scanalature, lettere, cordicelle e sporco dal codice; cornice e
 // puntine dal codice finché non arrivano le immagini generate (prompt-bacheca.md, in docs/design/carriere/asset/bacheca/), poi da lì.
 import type {ReactNode} from 'react';
-import {caso, catenaria, DI_PLASTICA, ROSSO_SEI_QUI, type Disposizione, type Filo, type Lettera, type Macchia, type Pt, type Spillo} from '../bacheca.ts';
+import {caso, catenaria, DI_PLASTICA, GEOMETRIA, ROSSO_SEI_QUI, type Disposizione, type Filo, type Lettera, type Macchia, type Pt, type Spillo} from '../bacheca.ts';
 
 // Le immagini generate, se ci sono: Vite le trova con il glob; finché la cartella è vuota resta tutto disegnato dal codice.
 const RADICE = '../../../../docs/design/carriere/asset/bacheca/';
@@ -69,17 +69,22 @@ function OmbraPuntina({x, y, r, s}: {x: number; y: number; r: number; s: Spillo}
 
 /**
  * Puntine e spilli trovati nel cassetto. Con l'immagine generata (puntine/<nome>.webp) si usa quella, ricolorata se è di plastica; senza,
- * il disegno del codice. L'ombra portata la calcola sempre il client.
+ * il disegno del codice. (x, y) è il punto in cui la puntina entra nel feltro, dove si legano le cordicelle: per le immagini del secondo
+ * giro, senza punta, è la base della testa, o la fine del gambo per spillo e chiodino (GEOMETRIA in bacheca.ts). L'ombra portata la
+ * calcola il client dal centro della testa.
  */
-export function Puntina({id, x, y, r, s}: {id: string; x: number; y: number; r: number; s: Spillo}) {
+export function Puntina({id, x, y, lato, s}: {id: string; x: number; y: number; lato: number; s: Spillo}) {
   const file = immagine(`puntine/${FILE[s.forma]}.webp`);
+  const r = lato * 0.19;
   if (file) {
-    const lato = r * 3.4;
+    const g = GEOMETRIA[s.forma];
     const ricolora = DI_PLASTICA.has(s.forma) && !(s.forma === 'tonda' && s.colore === ROSSO_SEI_QUI);
+    const ang = (s.inclinazione * Math.PI) / 180, dx = (g.testa.x - g.ancora.x) * lato, dy = (g.testa.y - g.ancora.y) * lato;
+    const testa = {x: x + dx * Math.cos(ang) - dy * Math.sin(ang), y: y + dx * Math.sin(ang) + dy * Math.cos(ang)};
     return (
       <g>
-        <OmbraPuntina x={x} y={y} r={r} s={s} />
-        <image href={file} x={x - lato / 2} y={y - lato / 2} width={lato} height={lato} transform={`rotate(${s.inclinazione} ${x} ${y})`}
+        <OmbraPuntina x={testa.x} y={testa.y} r={r} s={s} />
+        <image href={file} x={x - g.ancora.x * lato} y={y - g.ancora.y * lato} width={lato} height={lato} transform={`rotate(${s.inclinazione} ${x} ${y})`}
           filter={ricolora ? `url(#${idColore(s.colore)})` : undefined} />
       </g>
     );

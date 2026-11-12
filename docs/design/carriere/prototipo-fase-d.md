@@ -119,3 +119,31 @@ testa degli spilli a cui è legata.
 [immagini](prompt-bacheca.md#secondo-giro)), quindi il punto in cui entrano nel feltro va spostato alla base della testa; puntine più grandi,
 perché a una dozzina di pixel il dettaglio si perde, soprattutto «sei qui»; notifiche degli achievement nello stile della bacheca invece dei
 rettangoli verdi; meno affollamento di cordicelle in verticale a fine giro; nessuna puntina sopra le lettere di un titolo.
+
+## Ritocchi dopo il giudizio
+
+12 novembre 2026, sul [giudizio del proprietario](#giudizio-del-proprietario) e sui ritocchi della regia, con le immagini generate del
+[secondo giro](prompt-bacheca.md#secondo-giro) già in `asset/bacheca/` (non toccate).
+
+| Ritocco | Cosa è cambiato |
+|---|---|
+| **Cordicelle sopra le lettere** (il punto del proprietario) | Ordine dei livelli, in tutti e due gli orientamenti e per ogni cordicella (tesa, lenta, arrotolata, rossa): feltro e sporco; lettere cadute, cartoncino della legenda, lettere dei titoli e post-it; poi le cordicelle, con l'ombra che cade su tutto ciò che sta sotto; in cima le teste delle puntine a cui sono legate. In verticale la legenda, che si apre a richiesta, sta sopra a tutto |
+| **Puntine senza punta** | Ho misurato sull'alfa di ogni immagine (1254×1254) l'ingombro, il centro della testa e il punto in cui la puntina entra nel feltro: alla base della testa per tonda, cilindro, ottone e ombrello, alla fine del gambo per spillo e chiodino. L'immagine si posa con quel punto sull'ancora, l'inclinazione ruota intorno a lì, le cordicelle si legano lì e l'ombra parte dal centro della testa (`GEOMETRIA` in `src/bacheca.ts`) |
+| **Puntine più grandi** | Lato dell'immagine 3,1 scanalature in orizzontale e 3,3 in verticale (testa tonda di circa 26 e 22 px), «sei qui» il 30% più grande (circa 34 e 28 px); lo spillo, che ha la perla piccola, il 30% in più |
+| **Nessuna puntina sopra i titoli** | La disposizione calcola dove cominciano le lettere a partire dall'ingombro vero della puntina (sotto il suo punto più basso in orizzontale, a destra del suo punto più a destra in verticale e per i finali), e quanto pende un post-it perché la puntina non copra il «???». I finali in orizzontale si distanziano secondo la lunghezza del titolo a sinistra. Una prova lo controlla per le due carriere, all'inizio, a metà e a fine giro, nei due orientamenti, sia con le puntine vere sia con bacheche di una forma sola, per ognuna delle sei |
+| **Notifiche** | Cartoncini e post-it appesi con una puntina, scritti a penna e un po' storti: post-it giallo con puntina blu per gli achievement, cartoncino con puntina rossa per sblocchi e rami; valgono anche nelle scene |
+| **Meno cordicelle a fine giro** | Tesa solo la cordicella percorsa davvero (nodi visitati uno dopo l'altro, e l'ultimo verso il finale); lenta quella che si può ancora prendere; arrotolata ogni altra, anche fra due nodi visti per un'altra strada. A fine giro in verticale restano tese solo le cinque del percorso |
+
+| Orizzontale, a metà del secondo giro | Verticale, a fine del secondo giro |
+|---|---|
+| ![Mappa a metà giro](../../../prototipi/carriere/catture/o-20b-cartoncino.jpg) | ![Mappa a fine giro](../../../prototipi/carriere/catture/v-23-mappa-due-finali.jpg) |
+
+**Verifiche:** `Test` verde, 47 prove (nuove: nessuna puntina sopra le lettere o il «???», puntine abbastanza grandi, ancora e rotazione,
+a fine giro tese solo le cordicelle del percorso); `Check` e `Build` verdi; `Shots` verde, 52 catture con la cornice e le puntine generate;
+mutazioni 25 su 25 prese (nuove: tese tutte le cordicelle fra nodi visti, lettere e post-it che ignorano l'ingombro della puntina, finali a
+distanza fissa); `check-links`, `check-rules` e `git diff --check` verdi. Lo script delle catture ora torna al font predefinito dopo il
+giro dei font, che sono otto. **Catture in git:** 12 sostituite, 1,3 MB: mappa del tutorial (`06`, `13`) e della prova a metà (`15`,
+`20b`) e a fine giro (`19`, `23`), nei due orientamenti. **Rossi:** nessuno.
+
+**Non verificato:** il telefono vero. **Da giudicare:** se le cordicelle sopra le lettere si leggono ancora bene, se le puntine si
+riconoscono sul telefono, le notifiche appese, la fine giro in verticale.

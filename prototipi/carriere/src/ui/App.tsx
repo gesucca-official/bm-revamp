@@ -9,7 +9,7 @@ import {useCarattere} from './font.ts';
 import {Achievement, Elenco, PannelloStato} from './Pannelli.tsx';
 import {azzeraTutto, carica, caricaNome, salva, salvaNome} from './salvataggio.ts';
 
-type Avviso = {id: number; testo: string};
+type Avviso = {id: number; testo: string; tipo: Evento['tipo']};
 
 export function App() {
   const [nome, setNome] = useState(caricaNome);
@@ -33,13 +33,14 @@ export function App() {
         : e.tipo === 'achievement' ? `Achievement: ${c.achievement.find(a => a.id === e.achievement)?.titolo ?? e.achievement}`
         : e.tipo === 'ramo' ? 'Hai perso… e si apre un\'altra strada' : null;
       if (!testo) continue;
-      setAvvisi(x => [...x, {id, testo}]);
+      setAvvisi(x => [...x, {id, testo, tipo: e.tipo}]);
       window.setTimeout(() => setAvvisi(x => x.filter(a => a.id !== id)), 3200);
     }
   }, []);
 
   const c = carriere.find(x => x.id === aperta);
-  const avvisiDom = <div className="avvisi">{avvisi.map(a => <div key={a.id} className="avviso" data-testid="avviso">{a.testo}</div>)}</div>;
+  // Notifiche nello stile della bacheca (ritocchi della Fase D): post-it per gli achievement, cartoncino per sblocchi e rami.
+  const avvisiDom = <div className="avvisi">{avvisi.map(a => <div key={a.id} className={`avviso ${a.tipo}`} data-testid="avviso">{a.testo}</div>)}</div>;
 
   if (!c) {
     return <>
