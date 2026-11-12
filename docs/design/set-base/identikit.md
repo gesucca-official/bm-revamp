@@ -28,13 +28,12 @@
 | Spazienzio | Blocco squadrato: spalle enormi, testa piccola e calva | Molto alto e largo | Pelle arrossata, bordeaux | Nessuno: il torso nudo | **Approvato**: [riferimento](identikit/riferimenti/spazienzio.png), più le strisce ai pantaloni |
 | Mara | Sottile e spigolosa, con lo zaino cubico delle consegne dietro | Media | Verde acqua da rider, argento della stagnola | Casco coperto di stagnola, sempre in mano | **Approvata**: [riferimento](identikit/riferimenti/mara.png) |
 | Piera | Tonda e larga in basso, con lo chignon in cima | Bassa | Nero | Il bicchierino e Grappino ai piedi | **Approvata**: [riferimento](identikit/riferimenti/piera.png) |
-| Celestina | Magra, curva e storta, coi capelli corti e ritti | Bassa | Rosso dei capelli; *variante:* verde bottiglia malaticcio | *Variante:* la cosa appena raccolta da terra | Idee del proprietario; prove da generare |
-| Beppe | Robusto e piantato, la salopette e il bun in cima | Media | *Variante:* tabacco della salopette di tela | Gli attrezzi in tasca; *variante:* il calibro nel taschino | Idee del proprietario; prove da generare |
-| Sergio | Alto e secco, una linea dritta nell'abito ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | Blu petrolio dell'abito, bianco della camicia | La sigaretta sottile di contrabbando | Idee del proprietario; prove da generare |
-| Duccio | Tarchiato e molle, testa rasata, petto in fuori | Medio-bassa | Nero della maglietta; *variante:* l'accento rosa del cocktail | *Variante:* il cocktail dolce con l'ombrellino | Idee del proprietario; prove da generare |
+| Celestina | Magra, curva e storta, coi capelli corti e ritti, spesso accovacciata | Bassa | Rosso dei capelli, prugna slavata della tuta | La cosa appena raccolta da terra | **Scelta la B** (12 novembre 2026), tuta da ricolorare: secondo giro |
+| Beppe | Robusto e piantato, la salopette e il bun in cima | Media | Tabacco della salopette di tela | La maglietta del gruppo metal; niente attrezzi in vista | **Scelta la A** (12 novembre 2026), senza attrezzi in tasca: secondo giro |
+| Sergio | Alto e secco, una linea dritta nell'abito ([flavour](flavour.md#concept-visivi-per-sb-32)) | Il più alto | Blu petrolio dell'abito, bianco della camicia | La sigaretta sottile di contrabbando | **Scelta la A** (12 novembre 2026), con i calzini della B e senza chiavi: secondo giro |
+| Duccio | Tarchiato e molle, testa rasata, petto in fuori | Medio-bassa | Nero della maglietta, con l'accento rosa del cocktail | Il cocktail dolce con l'ombrellino | **Scelta la A** (12 novembre 2026), con l'aquila della B e solo il punto interrogativo: secondo giro |
 
-Le idee del proprietario sugli ultimi quattro sono del 12 novembre 2026; il resto della tabella è *variante della regia*, da confermare con
-le prove. **Colori:** il blu petrolio, che la regia aveva proposto per la tuta di Beppe, va all'abito di Sergio per scelta del proprietario,
+Le idee del proprietario sugli ultimi quattro, e le sue scelte sulle prove, sono del 12 novembre 2026. **Colori:** il blu petrolio, che la regia aveva proposto per la tuta di Beppe, va all'abito di Sergio per scelta del proprietario,
 e Beppe passa al tabacco. Il nero intero resta di Piera; Duccio lo porta solo nella maglietta, e lo distingue l'accento rosa del cocktail,
 l'unico colore fuori palette del cast, piccolo e voluto. **Stature:** sette figure non possono essere tutte diverse; si distinguono per
 sagoma più che per altezza.
@@ -118,6 +117,13 @@ nel [secondo giro](identikit-prompt.md#secondo-giro).
 giovane; ogni scusa è buona per drogarsi; in realtà è molto intelligente e furba. Dalla [scheda](schede-personaggi.md): vive di quello che
 trova per terra e se lo mette in corpo.
 
+**Scelta del proprietario (12 novembre 2026):** variante B, «ma ha il vestito un po' simile a Mara, lo cambierei. Cambiamogli almeno il
+colore». Restano la posa accovacciata con la mano a terra, la caramella trovata sotto il bancone, i capelli rossi rasati ai lati, il
+marsupio pieno di roba. *Scelte della regia, da confermare col risultato:* la tuta passa dal verde bottiglia, troppo vicino al verde acqua
+di Mara, a una **prugna slavata**, l'unico colore libero nel cast che stia bene coi capelli rossi senza confondersi col bordeaux di
+Spazienzio; il viso torna più giovane, come voleva il proprietario («molto giovane»), perché nella prova sembra sui quarant'anni, mentre la
+pelle resta segnata. Ritocco nel [secondo giro](identikit-prompt.md#secondo-giro-dei-quattro).
+
 *Varianti della regia, da provare:*
 
 - **Età apparente:** sui ventitré anni, chiaramente adulta: il contrasto è fra il viso giovane e la pelle che non lo è più.
@@ -139,6 +145,10 @@ lunghi raccolti in un bun per non sporcarseli; è un metallaro, e sotto la salop
 tatuaggio di un altro gruppo; ascolta solo metal estremo. Dalla [scheda](schede-personaggi.md): tornitore, meccanico in nero, ha sempre
 l'attrezzo giusto in tasca.
 
+**Scelta del proprietario (12 novembre 2026):** variante A, «ma togliamogli gli attrezzi dalle tasche, troppo caricaturali». Restano
+salopette di tela tabacco con le due bretelle su, maglietta nera del gruppo inventato con il logo illeggibile, tatuaggio sull'avambraccio,
+barba lunga, bun, braccia incrociate. Ritocco nel [secondo giro](identikit-prompt.md#secondo-giro-dei-quattro).
+
 *Varianti della regia, da provare:*
 
 - **Età apparente:** sui quarantacinque.
@@ -159,6 +169,11 @@ e il più in gamba in ogni situazione, e spesso lo è; la sua arroganza lo porta
 senza cravatta né gilet, su una camicia bianca col colletto slacciato; faccia affilata e tagliente, capelli corti castani; fuma sigarette
 sottili di contrabbando. Dalla [scheda](schede-personaggi.md): alto e secco, stona con gli altri avventori. Dallo stesso giorno è il
 proprietario segreto del Serraglio ([flavour](flavour.md#cesira-la-malalingua--booster-da-scrivere-in-sb-17)).
+
+**Scelta del proprietario (12 novembre 2026):** variante A con il ritocco proposto dalla regia, «va bene come dici te, ma togliamogli le
+chiavi dalla cintura»: i calzini spaiati della B al posto di quelli della A, l'abito spinto verso il blu petrolio (nelle prove tira al
+grigio ardesia), niente mazzo di chiavi. Resta il laccio slacciato. Ritocco nel [secondo
+giro](identikit-prompt.md#secondo-giro-dei-quattro).
 
 *Varianti della regia, da provare:*
 
@@ -188,6 +203,11 @@ sono venuti male. Tre ragioni: la regola del proprietario sullo stile di Duccio;
 nei negozi delle app e in alcuni paesi; lo strumento di generazione li bloccherebbe quasi certamente, come ha bloccato Spazienzio per molto
 meno. La croce celtica vera e completa è quindi fra le cose da evitare in entrambe le varianti. Il tatuaggio a punto interrogativo del
 proprietario sta dentro questa regola: somiglia alla croce, ma il pezzo che manca la rende un'altra cosa, e la battuta è proprio quella.
+
+**Scelta del proprietario (12 novembre 2026):** variante A, «ma l'aquila/piccione mi piace quella della B e i tatuaggi della croce/pizza non
+mi piacciono». Restano posa eroica, mano sul cuore, cocktail rosa col mignolo alzato, pantaloni mimetici e anfibi, e il tatuaggio a punto
+interrogativo sul collo; la stampa della maglietta diventa l'aquila bianca ad ali aperte della B, screpolata; spariscono i cerchi a raggi su
+braccia e collo. Ritocco nel [secondo giro](identikit-prompt.md#secondo-giro-dei-quattro).
 
 *Varianti della regia, da provare:*
 
@@ -222,15 +242,6 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 | Piera | A | [Anteprima](identikit/prove/piera-A-1.webp) | [Scheda](identikit/registro.md#piera-a-1) | Scartata, ma se ne prende la faccia serena per la B |
 | Piera | B | [Anteprima](identikit/prove/piera-B-1.webp) | [Scheda](identikit/registro.md#piera-b-1) | **Scelta** (11 novembre 2026), ma con la faccia serena della variante A |
 
-| Celestina | A | [Anteprima](identikit/prove/celestina-A-1.webp) | [Scheda](identikit/registro.md#celestina-a-1) |  |
-| Celestina | B | [Anteprima](identikit/prove/celestina-B-1.webp) | [Scheda](identikit/registro.md#celestina-b-1) |  |
-| Beppe | A | [Anteprima](identikit/prove/beppe-A-1.webp) | [Scheda](identikit/registro.md#beppe-a-1) |  |
-| Beppe | B | [Anteprima](identikit/prove/beppe-B-1.webp) | [Scheda](identikit/registro.md#beppe-b-1) |  |
-| Sergio | A | [Anteprima](identikit/prove/sergio-A-1.webp) | [Scheda](identikit/registro.md#sergio-a-1) |  |
-| Sergio | B | [Anteprima](identikit/prove/sergio-B-1.webp) | [Scheda](identikit/registro.md#sergio-b-1) |  |
-| Duccio | A | [Anteprima](identikit/prove/duccio-A-1.webp) | [Scheda](identikit/registro.md#duccio-a-1) |  |
-| Duccio | B | [Anteprima](identikit/prove/duccio-B-1.webp) | [Scheda](identikit/registro.md#duccio-b-1) |  |
-
 ### Secondo giro
 
 | Personaggio | Anteprima | Scheda del registro | Giudizio del proprietario |
@@ -245,3 +256,19 @@ Da compilare quando il proprietario guarda le immagini: cosa piace, cosa no, qua
 |---|---|---|---|
 | Spazienzio | Nessuna: generazione bloccata | [Scheda](identikit/registro.md#spazienzio-3-1) | (11 novembre 2026) Si approva l'immagine del secondo giro così com'è; le strisce ai lati dei pantaloni si recuperano nelle illustrazioni vere |
 | Mara | [Anteprima](identikit/prove/mara-3-1.webp) | [Scheda](identikit/registro.md#mara-3-1) | **Approvata** (11 novembre 2026). Originale conservato come [riferimento](identikit/riferimenti/mara.png) |
+
+### Celestina, Beppe, Sergio e Duccio
+
+Prove del 12 novembre 2026 dai [prompt](identikit-prompt.md#celestina-beppe-sergio-e-duccio) del primo giro dei quattro; nessun blocco dello
+strumento.
+
+| Personaggio | Variante | Anteprima | Scheda del registro | Giudizio del proprietario |
+|---|---|---|---|---|
+| Celestina | A | [Anteprima](identikit/prove/celestina-A-1.webp) | [Scheda](identikit/registro.md#celestina-a-1) | Scartata |
+| Celestina | B | [Anteprima](identikit/prove/celestina-B-1.webp) | [Scheda](identikit/registro.md#celestina-b-1) | **Scelta** (12 novembre 2026), ma con la tuta di un altro colore, troppo simile a Mara |
+| Beppe | A | [Anteprima](identikit/prove/beppe-A-1.webp) | [Scheda](identikit/registro.md#beppe-a-1) | **Scelta** (12 novembre 2026), ma senza attrezzi nelle tasche, «troppo caricaturali» |
+| Beppe | B | [Anteprima](identikit/prove/beppe-B-1.webp) | [Scheda](identikit/registro.md#beppe-b-1) | Scartata |
+| Sergio | A | [Anteprima](identikit/prove/sergio-A-1.webp) | [Scheda](identikit/registro.md#sergio-a-1) | **Scelta** (12 novembre 2026), con i calzini spaiati della B, l'abito più blu petrolio e senza chiavi alla cintura |
+| Sergio | B | [Anteprima](identikit/prove/sergio-B-1.webp) | [Scheda](identikit/registro.md#sergio-b-1) | Scartata, ma se ne prendono i calzini spaiati |
+| Duccio | A | [Anteprima](identikit/prove/duccio-A-1.webp) | [Scheda](identikit/registro.md#duccio-a-1) | **Scelta** (12 novembre 2026), con l'aquila della B e senza i tatuaggi a cerchio con i raggi; resta il punto interrogativo |
+| Duccio | B | [Anteprima](identikit/prove/duccio-B-1.webp) | [Scheda](identikit/registro.md#duccio-b-1) | Scartata, ma se ne prende l'aquila della maglietta |

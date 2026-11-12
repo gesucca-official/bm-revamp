@@ -272,3 +272,56 @@ The character: a young far-right blowhard around twenty-two, clearly adult, draw
 
 Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, complete and correctly drawn Celtic cross, fasces or raised-arm salute; likeness of any real politician; heroic or muscular anatomy; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style; gold trim, neon, dominant yellow-and-black colours; other characters; background scenery; game interface, cards or frames.
 ~~~
+
+## Secondo giro dei quattro
+
+12 novembre 2026. Ritocchi delle varianti scelte dal proprietario ([esiti](identikit.md#celestina-beppe-sergio-e-duccio)), con le sue
+parole: Celestina B «ma ha il vestito un po' simile a Mara, lo cambierei. Cambiamogli almeno il colore»; Beppe A «ma togliamogli gli
+attrezzi dalle tasche, troppo caricaturali»; Sergio A con i calzini della B, «ma togliamogli le chiavi dalla cintura»; Duccio A, «ma
+l'aquila/piccione mi piace quella della B e i tatuaggi della croce/pizza non mi piacciono». *Scelte della regia, da confermare col
+risultato:* la tuta di Celestina diventa prugna slavata e il suo viso più giovane; l'abito di Sergio più blu petrolio.
+
+Stesse [istruzioni del secondo giro](#istruzioni) dei primi tre: modifica guidata dall'originale, commit prima di generare, impronta
+controllata prima di allegare, un solo nuovo tentativo con lo stesso prompt se il risultato cambia altro o non applica la modifica; nomi
+`<personaggio>-2-<n>`. Se lo strumento blocca un prompt, si annota senza riformularlo.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| Celestina | `prove/celestina-B-1.png` | c36883326e75e31d2facd0e065a494674eb67ff44ca99363315127a3c75790f4 |
+| Beppe | `prove/beppe-A-1.png` | 232236b10436cfd92d0a13d8e7789413ff176a3afbcd982e21593a090288a8fa |
+| Sergio, immagine 1 | `prove/sergio-A-1.png` | fd4f0a74f0a8ce6ad243d5ca13aba406a8633bd8ffe959cac7eb645d80bfdc70 |
+| Sergio, immagine 2 | `prove/sergio-B-1.png` | 29866ae5e78f0a6e64559fea99a0304c0b98a29a25b574e35132b5e944401c69 |
+| Duccio, immagine 1 | `prove/duccio-A-1.png` | 823664888e705531a12062b4b24bcc749725e5763c442705df39a4845bdaa6ed |
+| Duccio, immagine 2 | `prove/duccio-B-1.png` | 73136775a8c5d820ff23ceb0fb4b87a5d586c745c5e17d386d7378a0b71d039a |
+
+### Celestina — tuta prugna e viso più giovane
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same woman, crouching pose with one hand on the floor, the wrapped sweet held up in her other hand, red hair buzzed on the sides with the longer fringe, earrings, sly sideways glance, bum bag stuffed with junk, mismatched sneakers, the cut and stripes of the baggy tracksuit, the layout of the full-body view and the close-up, art style and plain background. Change only two things, consistently in both views: first, the tracksuit is no longer green but a faded, washed-out dusty plum colour, with its stripes in worn ivory; second, her face looks younger, clearly in her early twenties, while her skin stays pale, tired and marked, with dark circles.
+
+Avoid: making her healthy or glamorous; any green or teal on her clothes; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Beppe — niente attrezzi in tasca
+
+~~~text
+Edit the attached character concept sheet. Keep everything else exactly the same: the same man, face, long beard and hair in a bun, tobacco-brown canvas bib overalls with both straps up and their grease marks, the black t-shirt with its illegible band artwork, the forearm tattoo, crossed arms, work boots, the layout of the full-body view and the close-up, art style, colours and plain background. Change only this, in both views: remove every tool from his pockets, the tool in the chest pocket and the adjustable wrench in the side pocket; the pockets are simply flat and empty.
+
+Avoid: any readable lettering on the t-shirt or tattoo; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Sergio — calzini spaiati, abito petrolio, senza chiavi
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for the socks. Keep everything else in image 1 exactly the same: the same man, face, expression, hair, the thin lit cigarette, the white shirt with the open collar, the untied shoelace, polished pointed shoes, pose, the layout of the full-body view and the close-up, art style and plain background. Change only three things, consistently in both views: first, remove the ring of keys hanging from his belt; second, his suit becomes a clearer muted petrol blue, a deep blue-green, instead of slate grey; third, between his trousers and shoes show mismatched socks like those in image 2, one with a diamond pattern and one plain dark red.
+
+Avoid: visible cigarette packets; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Duccio — l'aquila della B, solo il punto interrogativo
+
+~~~text
+Edit the first attached character concept sheet (image 1). Use the second attached image (image 2) only as the reference for the print on his t-shirt. Keep everything else in image 1 exactly the same: the same young man, face, shaved head, expression, heroic pose with his hand on his heart, the pink cocktail with the umbrella and the raised little finger, the black t-shirt itself, camouflage trousers and combat boots, the question-mark tattoo on his neck, the layout of the full-body view and the close-up, art style, colours and plain background. Change only two things, consistently in both views: first, replace the pigeon print on his t-shirt with the white eagle with spread wings from image 2, crudely printed, cracked and peeling, without any emblem, wreath or symbol around it; second, remove all the round tattoos with spokes from his arms and neck, leaving bare skin, and keep only the question-mark tattoo on his neck.
+
+Avoid: any real political, extremist or hate symbol, insignia, flag, emblem, rune, swastika, complete and correctly drawn Celtic cross, fasces or raised-arm salute; any other change to the image; any text, letters, numbers, logos, brands, signatures or watermarks; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~

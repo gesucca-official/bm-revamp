@@ -58,7 +58,7 @@ stato:** si aggiorna a ogni passo, l'[indice](README.md#stato-corrente) ne ripor
 | Lavoro | Tappa | Stato | Documenti |
 |---|---|---|---|
 | Storia e dialoghi del tutorial | CA-1 | **Fatto** (10–11 novembre 2026), testo del proprietario; manca l'epilogo del fallimento | [scaletta](design/carriere/tutorial.md), [dialoghi](design/carriere/tutorial-dialoghi.md) |
-| Identikit dei personaggi | CA, SB-32 | **Spazienzio, Mara e Piera approvati** (11 novembre 2026), originali di riferimento in git; **Celestina, Beppe, Sergio e Duccio:** idee del proprietario e prompt delle prove (12 novembre 2026), immagini da generare, prima dei dialoghi della campagna principale | [identikit](design/set-base/identikit.md) |
+| Identikit dei personaggi | CA, SB-32 | **Spazienzio, Mara e Piera approvati** (11 novembre 2026), originali di riferimento in git; **Celestina, Beppe, Sergio e Duccio:** primo giro di prove e varianti scelte (12 novembre 2026), secondo giro di ritocchi da generare, prima dei dialoghi della campagna principale | [identikit](design/set-base/identikit.md) |
 | Specifica degli asset del dialogo | CA-0 | **Confermata** dalla fetta verticale (11 novembre 2026) | [specifica](design/carriere/specifica-asset.md) |
 | Materiale visivo del tutorial | CA-1 | **Completo e approvato** (11 novembre 2026): 3 sfondi con 2 varianti, 15 ritratti, 3 pose di Grappino, la bici, 2 sagome. **Da aggiungere:** Mara e Spazienzio esasperati, per chi ascolta Piera (P8 del prototipo) | [fetta](design/carriere/prompt-fetta.md), [tre giri](design/carriere/prompt-tutorial-resto.md) |
 | Nome del bar | CA | **Deciso** (11 novembre 2026): Il Serraglio, insegna «BAR IL SERRAGLIO»; resta se farne il titolo del gioco | [flavour](design/set-base/flavour.md#il-mondo) |
