@@ -41,6 +41,37 @@ public class Move implements Serializable {
 
     private final Map<Card.CardTarget, List<String>> moveReport = new EnumMap<>(Card.CardTarget.class);
 
+    /** SB-16c, playground rules only: why the engine voided the move (D50, point 1: {@link #DOWN}), or null. */
+    @JsonIgnore
+    @ToString.Exclude
+    @Setter
+    private String voidReason;
+    /** SB-16c, playground rules only (D50, point 6): the card searched for after this move, and the one found (null if none). */
+    @JsonIgnore
+    @ToString.Exclude
+    private String searchedFor;
+    @JsonIgnore
+    @ToString.Exclude
+    private Card searchFound;
+
+    /** The reason of a move voided because its author was down at the start of its speed group (D50, point 1). */
+    public static final String DOWN = "a terra";
+
+    /** Records the search that replaced the draw after this move and writes it in the move's report, shown to everyone. */
+    public void recordSearch(String binding, Card found) {
+        this.searchedFor = binding;
+        this.searchFound = found;
+        appendReport(Card.CardTarget.SELF, found != null
+                ? "Searched the deck for " + binding + ": found " + found.getName() + " (shown to everyone)"
+                : "Searched the deck for " + binding + ": not in the deck, normal draw");
+    }
+
+    private void appendReport(Card.CardTarget where, String line) {
+        List<String> lines = new java.util.ArrayList<>(moveReport.getOrDefault(where, List.of()));
+        lines.add(line);
+        moveReport.put(where, lines);
+    }
+
     @JsonCreator
     public Move(String playedCardName,
                 String playerId,
@@ -117,10 +148,19 @@ public class Move implements Serializable {
                 if (availableResource < cost.getValue())
                     return new MoveCheckResult(false, "cant be cast with current resources");
             }
+            // D50, point 2 (playground only): a HEALTH cost cannot bring its payer to 0 or below, except with «Ultimo colpo».
+            if (!healthCostAllowed(game.getRuleset(), playedCard, playerResources.getOrDefault(Resource.HEALTH, 0)))
+                return new MoveCheckResult(false, "cant pay health down to zero");
         } catch (IllegalMoveException e) {
             return new MoveCheckResult(false, e.getWhatHeDid());
         }
         return new MoveCheckResult(true, "good, cast it");
+    }
+
+    /** D50, point 2: with the playground rules a HEALTH cost must leave its payer above 0, unless the card has «Ultimo colpo». */
+    public static boolean healthCostAllowed(Ruleset ruleset, Card card, int health) {
+        int cost = card.getCost().getOrDefault(Resource.HEALTH, 0);
+        return !ruleset.playground() || cost == 0 || card.isLastBlow() || health > cost;
     }
 
     @JsonIgnore
@@ -135,7 +175,8 @@ public class Move implements Serializable {
     @JsonIgnore
     public void applyEffectTo(Game game) {
         if (this.isVoid) {
-            moveReport.put(Card.CardTarget.SELF, List.of("Didn't do anything!"));
+            moveReport.put(Card.CardTarget.SELF, voidReason == null ? List.of("Didn't do anything!")
+                    : List.of("Didn't do anything! (voided: " + voidReason + ")"));
             return;
         }
         moveReport.putAll(

@@ -1,11 +1,14 @@
 package com.gsc.bm.model;
 
 import com.gsc.bm.model.cards.Card;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.Timer;
 import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 import com.gsc.bm.service.factories.CardFactoryService;
+import lombok.AccessLevel;
 import lombok.Getter;
 import org.apache.commons.collections4.queue.CircularFifoQueue;
 
@@ -25,6 +28,30 @@ public abstract class Character implements Serializable {
     private final List<Status> statuses = new ArrayList<>();
     private final Set<Resource> immunities = new HashSet<>();
     private final Set<Timer> timers = new LinkedHashSet<>();
+
+    /** SB-16c: the rules of the match this character plays, set by {@link com.gsc.bm.model.game.Game#useRuleset}. */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private Ruleset ruleset = Ruleset.LIVE;
+    /** SB-16c: the card a search step asked for in the move being resolved (D50, point 6), or null. */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private String requestedSearch;
+
+    public void useRuleset(Ruleset ruleset) { this.ruleset = Objects.requireNonNull(ruleset); }
+
+    @JsonIgnore
+    public Ruleset ruleset() { return ruleset; }
+
+    /** A search step asks to replace the draw that follows this move (D50, point 6). */
+    public void requestSearch(String binding) { this.requestedSearch = binding; }
+
+    /** The search asked for by the move just resolved, cleared. */
+    public String takeRequestedSearch() {
+        String requested = requestedSearch;
+        requestedSearch = null;
+        return requested;
+    }
 
     public Character(int hp, int speed, int itemsSize) {
         this(null, hp, speed, itemsSize);
@@ -101,11 +128,16 @@ public abstract class Character implements Serializable {
     }
 
     public String takeDamage(Damage damage, Set<StatusType> statusToBeApplied) {
-        return loseResource(
-                Resource.HEALTH,
-                applyStatusToDamage(damage, statusToBeApplied, StatusFlow.INPUT).getAmount(),
-                statusToBeApplied
-        );
+        Damage received = applyStatusToDamage(damage, statusToBeApplied, StatusFlow.INPUT);
+        int absorbed = 0;
+        // D50, point 5 (playground only): ALCOHOL reduces HIT received by L/4, after statuses, not below zero; not CUT or POISON.
+        if (ruleset.playground() && received.getType() == Damage.DamageType.HIT && resources.get(Resource.ALCOHOL) > 0) {
+            int reduced = Math.max(0, received.getAmount() - resources.get(Resource.ALCOHOL) / Ruleset.ALCOHOL_ARMOR_DIVISOR);
+            absorbed = Math.max(0, received.getAmount() - reduced);
+            received.setAmount(reduced);
+        }
+        String line = loseResource(Resource.HEALTH, received.getAmount(), statusToBeApplied);
+        return absorbed > 0 ? line + " (ALCOHOL armor: -" + absorbed + " HIT)" : line;
     }
 
     public String gainResource(Resource res, int amount) {
@@ -133,7 +165,9 @@ public abstract class Character implements Serializable {
     private String editResource(Resource res, int amount, Set<StatusType> toBeApplied) {
         resources.putIfAbsent(res, 0);
         int originalAmount = resources.get(res);
-        getResources().put(res, resources.get(res) + applyStatusToResourceChange(res, amount, toBeApplied));
+        int changed = resources.get(res) + applyStatusToResourceChange(res, amount, toBeApplied);
+        // D50, point 3 (playground only): no resource goes below zero, HEALTH included.
+        getResources().put(res, ruleset.playground() ? Math.max(0, changed) : changed);
         return res + ": " + originalAmount + "->" + resources.get(res) + " (" + (resources.get(res) - originalAmount) + ")";
     }
 

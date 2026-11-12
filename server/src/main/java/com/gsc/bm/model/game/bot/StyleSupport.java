@@ -54,6 +54,14 @@ final class StyleSupport {
             return me;
         }
 
+        /** The cards the seat's search found last round, shown to everyone (SB-16c). */
+        List<BotView.CardSeen> found(BotView.Seat seat) {
+            List<BotView.CardSeen> found = new ArrayList<>();
+            for (BotView.SeenMove m : view.getLastRound())
+                if (m.getPlayerId().equals(seat.getPlayerId()) && m.getSearchFound() != null) found.add(m.getSearchFound());
+            return found;
+        }
+
         int myHealth() { return me.resource(Resource.HEALTH); }
         int foeHealth() { return foe.resource(Resource.HEALTH); }
         boolean poisoned() { return me.resource(Resource.TOXICITY) > 0 && !me.getImmunities().contains(Resource.TOXICITY); }
@@ -200,6 +208,7 @@ final class StyleSupport {
         for (Plan plan : plans) {
             LegalMove move = plan.move;
             double score = scorer.score(situation, plan);
+            if (situation.view.getRuleset().playground()) score += rhythm(situation, plan);
             if (move.getDiscard() != null) score -= keepValue(scorer, situation, move.getDiscard());
             if (score > top + 1e-9) {
                 top = score;
@@ -210,6 +219,48 @@ final class StyleSupport {
             }
         }
         return best.get(random.nextInt(best.size()));
+    }
+
+    /** A charge in progress this bot reads as dangerous: the shown card is a hit at least this strong (nominal damage). */
+    static final int CHARGED_HIT = 10;
+    /** Weights of the rhythm heuristic, on the scale of the styles' scores (a nominal hit of 15 is worth 30–45 there). */
+    static final double FOLLOW_UP = 20, CHARGED_ATTACK = 10, BRACE = 15;
+
+    /**
+     * SB-16c, playground rules only (D50 and D52, point 2): the rhythm charge–hit–parry, the same for every style.
+     * <ul>
+     *   <li>after its own charge, play the hit: the card its search found last round (it is in hand), or any hit while one of its
+     *       temporary GOOD OUTPUT statuses (a damage boost) is on;</li>
+     *   <li>react to a visible charge of the opponent (a hit of at least {@value #CHARGED_HIT} its search showed last round, or a
+     *       temporary GOOD OUTPUT status): defend, counter or heal now.</li>
+     * </ul>
+     * It reads only public data: the moves of the last round with their search, the statuses on the table, the own hand.
+     */
+    static double rhythm(Situation s, Plan p) {
+        double bonus = 0;
+        if (p.hostile && p.damage > 0) {
+            if (s.found(s.me).stream().anyMatch(c -> c.getName().equals(p.card.getName()))) bonus += FOLLOW_UP;
+            if (boosted(s.me)) bonus += CHARGED_ATTACK;
+        }
+        if (charged(s, s.foe) && !p.hostile) {
+            String role = p.card.getRole();
+            if ("DEFENSE".equals(role) || "COUNTER".equals(role)) bonus += BRACE;
+            bonus += Math.max(0, p.gain(Resource.HEALTH)) * 0.5;
+        }
+        if (charged(s, s.foe) && "COUNTER".equals(p.card.getRole()) && p.hostile) bonus += BRACE;
+        return bonus;
+    }
+
+    /** A temporary damage boost on the seat: a GOOD status on its output that is not an equipment. */
+    static boolean boosted(BotView.Seat seat) {
+        return seat.getStatuses().stream().anyMatch(st -> st.getType() == com.gsc.bm.model.game.status.StatusType.GOOD
+                && st.getFlow() == com.gsc.bm.model.game.status.StatusFlow.OUTPUT && !st.isEquip());
+    }
+
+    /** The seat announced a hit: its search showed one last round, or a damage boost is on. */
+    static boolean charged(Situation s, BotView.Seat seat) {
+        if (seat == s.me) return false;
+        return boosted(seat) || s.found(seat).stream().anyMatch(c -> c.nominalDamage() >= CHARGED_HIT);
     }
 
     private static double keepValue(Scorer scorer, Situation situation, String name) {

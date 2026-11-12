@@ -44,6 +44,13 @@ public interface Card {
 
     Map<CardTarget, List<String>> resolve(Game game, Move move);
 
+    /**
+     * SB-16c, playground rules only (D50, point 2): «Ultimo colpo» written on the card. Its HEALTH cost may be paid down to 0 or
+     * below and its move resolves even if its author is down. No live card has it; views never carry it.
+     */
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    default boolean isLastBlow() { return false; }
+
     @Getter
     class DeserializedCard implements Card {
         String name;

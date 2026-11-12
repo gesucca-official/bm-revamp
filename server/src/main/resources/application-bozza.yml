@@ -9,3 +9,5 @@ app:
     pool: ""
     com: pool
     bot: risorse
+    # SB-16c: the rules of the draft matches: d50 (the playground rules of D50) or 1.13 (the live rules).
+    regole: d50

@@ -91,6 +91,11 @@ final class DataCards {
         public boolean lastResort;
         /** Azione base del personaggio (come BruiserGrab): persiste in mano e non si scarta. Solo per ACTION. */
         public boolean basic;
+        /**
+         * SB-16c (D50, point 2), playground rules only: «Ultimo colpo» written on the card. Its HEALTH cost may be paid down to 0 or
+         * below, and its move resolves even if its author is down. Not for items.
+         */
+        public boolean lastBlow;
         public Integer priority;
         public Set<Card.CardTarget> targets;
         public Map<Resource, Integer> cost = Map.of();
@@ -103,6 +108,7 @@ final class DataCards {
             if (lastResort && kind != Kind.ACTION) throw invalid("lastResort vale solo per ACTION");
             if (basic && kind != Kind.ACTION) throw invalid("basic vale solo per ACTION");
             if (basic && lastResort) throw invalid("basic e lastResort si escludono");
+            if (lastBlow && kind == Kind.ITEM) throw invalid("lastBlow non vale per un oggetto: un oggetto non ha costo né bersaglio");
             if (kind == Kind.ITEM) {
                 if (priority != null || targets != null || !cost.isEmpty() || !target.isEmpty())
                     throw invalid("un oggetto ha solo effetti su di sé: priorità, bersaglio e costo sono fissi");
@@ -114,8 +120,32 @@ final class DataCards {
             checkSteps("self", self);
             checkSteps("target", target);
             checkConsume();
+            checkSearch();
         }
 
+        /**
+         * Dove sta il passo search (SB-16c, D50 punto 6): solo in self, una volta, in una carta che lascia la mano e quindi pesca dopo
+         * la sua mossa: non in un oggetto, che non si gioca, né in una basic, che resta in mano.
+         */
+        private void checkSearch() {
+            for (int i = 0; i < target.size(); i++)
+                if (target.get(i) instanceof SearchStep)
+                    throw invalid("target[" + i + "]: search vale solo in self: sostituisce la pesca di chi gioca la carta");
+            int seen = 0;
+            for (int i = 0; i < self.size(); i++) {
+                if (!(self.get(i) instanceof SearchStep)) continue;
+                String where = "self[" + i + "]: search ";
+                if (kind == Kind.ITEM) throw invalid(where + "non è ammesso in un oggetto: un oggetto non si gioca");
+                if (basic) throw invalid(where + "non è ammesso in una basic: resta in mano e non pesca");
+                if (++seen > 1) throw invalid(where + "ripetuto: una sola ricerca per carta");
+            }
+        }
+
+        /** La carta cercata dal passo search, o null. */
+        String searches() {
+            for (Step step : self) if (step instanceof SearchStep) return ((SearchStep) step).card;
+            return null;
+        }
         /** Dove sta il passo consume: solo in self, una volta, in un'azione regolare o basic che bersaglia un oggetto vicino. */
         private void checkConsume() {
             for (int i = 0; i < target.size(); i++)
@@ -197,7 +227,8 @@ final class DataCards {
             @JsonSubTypes.Type(value = EmptyStep.class, name = "empty"),
             @JsonSubTypes.Type(value = StatusStep.class, name = "status"),
             @JsonSubTypes.Type(value = SayStep.class, name = "say"),
-            @JsonSubTypes.Type(value = ConsumeStep.class, name = "consume")
+            @JsonSubTypes.Type(value = ConsumeStep.class, name = "consume"),
+            @JsonSubTypes.Type(value = SearchStep.class, name = "search")
     })
     public interface Step extends Serializable {
         String apply(Character author, Character subject);
@@ -328,6 +359,22 @@ final class DataCards {
         @Override public String missing() { return null; }
     }
 
+    /**
+     * SB-16c (D50, punto 6), solo con le regole del playground: la pesca che segue la mossa diventa la ricerca nel mazzo della carta
+     * indicata ({@code card}, un binding). La carta trovata si mostra a tutti nel rapporto della mossa; se non c'è si pesca
+     * normalmente. Il passo non scrive righe: la riga la scrive la partita quando pesca. Con le regole 1.13 non fa nulla.
+     */
+    public static final class SearchStep implements Step {
+        public String card;
+
+        @Override public String apply(Character author, Character subject) {
+            subject.requestSearch(card);
+            return null;
+        }
+
+        @Override public String missing() { return card == null || card.isBlank() ? "campo card mancante" : null; }
+    }
+
     public static final class SayStep implements Step {
         public String text;
 
@@ -359,6 +406,8 @@ final class DataCards {
         }
 
         @Override public String getBindingName() { return definition.binding; }
+
+        @com.fasterxml.jackson.annotation.JsonIgnore @Override public boolean isLastBlow() { return definition.lastBlow; }
 
         /** Come Grab: l'oggetto si ricontrolla alla risoluzione e, se c'è ancora, esce dal campo. */
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) {
@@ -411,6 +460,7 @@ final class DataCards {
         }
 
         @Override public String getBindingName() { return definition.binding; }
+        @com.fasterxml.jackson.annotation.JsonIgnore @Override public boolean isLastBlow() { return definition.lastBlow; }
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
         @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self); }
         @Override public List<String> applyEffectOnTarget(Character self, Character target) { return run(definition.target, null, self, target); }

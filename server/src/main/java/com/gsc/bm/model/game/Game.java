@@ -53,6 +53,17 @@ public class Game implements Serializable {
     private final Map<String, Long> moveDeadlines = new LinkedHashMap<>();
     private final Map<String, Long> reconnectDeadlines = new LinkedHashMap<>();
     private String outcomeReason;
+    /** SB-16c: {@link Ruleset#LIVE} (regulation 1.13) unless the profile bozza or the runner choose the playground rules. */
+    @JsonIgnore
+    @ToString.Exclude
+    private Ruleset ruleset = Ruleset.LIVE;
+
+    /** Chooses the rules of this match, before its first turn; every character follows them too. */
+    public void useRuleset(Ruleset ruleset) {
+        if (turn != 0 || !resolvedMoves.isEmpty()) throw new IllegalStateException("rules are chosen before the first turn");
+        this.ruleset = Objects.requireNonNull(ruleset);
+        for (Player p : players.values()) p.getCharacter().useRuleset(ruleset);
+    }
 
     public boolean isEliminated(String playerId) {
         return forfeits.containsKey(playerId) || players.get(playerId).getCharacter().isDead();
@@ -114,6 +125,7 @@ public class Game implements Serializable {
         moveDeadlines.clear(); moveDeadlines.putAll(snapshot.moveDeadlines);
         reconnectDeadlines.clear(); reconnectDeadlines.putAll(snapshot.reconnectDeadlines);
         outcomeReason = snapshot.outcomeReason;
+        ruleset = snapshot.ruleset;
     }
 
     public void submitMove(Move move) throws IllegalMoveException {
@@ -162,11 +174,37 @@ public class Game implements Serializable {
                         m -> -getSelf((Move) m).getCharacter().getResources().get(Resource.ALERTNESS)
                 ).thenComparingInt(m -> new ArrayList<>(players.keySet()).indexOf(((Move)m).getPlayerId())));
 
+        // D50, point 1 (playground only): speed group = same priority and same ALERTNESS after costs, fixed with the order.
+        Map<Move, Long> speed = new IdentityHashMap<>();
+        if (ruleset.playground())
+            for (Move m : pendingMoves)
+                speed.put(m, ((long) getCardFromHand(m.getPlayerId(), m.getPlayedCardName()).getPriority() << 32)
+                        + (getSelf(m).getCharacter().getResources().get(Resource.ALERTNESS) & 0xffffffffL));
+        Long group = null;
+        Set<String> downAtGroupStart = new HashSet<>();
+
         for (Move m : pendingMoves) {
+            if (ruleset.playground()) {
+                if (!speed.get(m).equals(group)) {
+                    group = speed.get(m);
+                    downAtGroupStart.clear();
+                    for (Player p : players.values()) if (p.getCharacter().isDead()) downAtGroupStart.add(p.getPlayerId());
+                }
+                voidIfDown(m, downAtGroupStart);
+            }
             m.applyEffectTo(this);
-            getSelf(m).discardCard(getCardFromHand(m.getPlayerId(), m.getPlayedCardName()));
-            if (getSelf(m).getCardsInHand().size() < Player.CARDS_IN_HAND)
-                getSelf(m).drawCard();
+            Player self = getSelf(m);
+            // A search step runs only if the move resolved; a voided move draws normally.
+            String search = self.getCharacter().takeRequestedSearch();
+            self.discardCard(getCardFromHand(m.getPlayerId(), m.getPlayedCardName()));
+            if (self.getCardsInHand().size() < Player.CARDS_IN_HAND) {
+                if (ruleset.playground() && search != null && !m.isVoid()) {
+                    Card found = self.searchCard(search);
+                    m.recordSearch(search, found);
+                    loggedTurnEvents.add("Player " + m.getPlayerId() + " searched the deck for " + search + ": "
+                            + (found != null ? "found " + found.getName() : "not in the deck, normal draw"));
+                } else self.drawCard();
+            }
         }
 
         resolvedMoves.clear();
@@ -186,6 +224,20 @@ public class Game implements Serializable {
         if (!isOver() && isReadyToResolveMoves())
             resolveMoves(endChainCallback, turnEventsLogDrain, observer);
         else endChainCallback.accept(this);
+    }
+
+    /**
+     * D50, point 1: the move of an author already down when its speed group starts is voided, unless it targets the author or
+     * one of its near items, or its card has «Ultimo colpo». Within a group moves stay simultaneous (D48's save stays).
+     */
+    private void voidIfDown(Move m, Set<String> downAtGroupStart) {
+        if (m.isVoid() || !downAtGroupStart.contains(m.getPlayerId())) return;
+        Card card = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
+        boolean onSelf = "SELF".equalsIgnoreCase(m.getTargetId()) || m.getPlayerId().equals(m.getTargetId());
+        if (onSelf || card.isLastBlow()) return;
+        m.setVoid(true);
+        m.setVoidReason(Move.DOWN);
+        loggedTurnEvents.add("Player " + m.getPlayerId() + "'s Move " + m.getPlayedCardName() + " is voided: " + Move.DOWN);
     }
 
     @JsonIgnore

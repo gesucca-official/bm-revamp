@@ -3,9 +3,11 @@ package com.gsc.bm.bozza;
 import com.gsc.bm.model.game.bot.AggressivePolicy;
 import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.model.game.bot.PrudentPolicy;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.bot.ResourceAwarePolicy;
 import com.gsc.bm.service.session.MatchVersions;
 import com.gsc.bm.sim.DraftSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
@@ -29,7 +31,8 @@ import static com.gsc.bm.repo.external.MatchEventRepository.sha256;
  * {@code local} (or {@code test}) and never {@code heroku}. A draft that is not valid stops the start with the loader's message.
  * Properties: {@code app.bozza.sources} (as {@code -Dsim.draft}), {@code app.bozza.pool} (starters for quick and FFA, empty =
  * every deck), {@code app.bozza.com} (the computer's deck, {@code pool} = at random from the pool) and {@code app.bozza.bot}
- * ({@code casuale} = the live ComPlayer, or a heuristic style of SB-4).
+ * ({@code casuale} = the live ComPlayer, or a heuristic style of SB-4). SB-16c: {@code app.bozza.regole} chooses the rules of the
+ * draft matches, {@code d50} (the playground rules of D50, the default) or {@code 1.13} (the live rules); live matches never see them.
  */
 @Component
 @Profile("bozza")
@@ -49,13 +52,21 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
     private final DraftSource draft;
     private final List<String> pool;
     private final String com, bot;
+    private final Ruleset ruleset;
     private final Map<String, Object> identity;
 
+    /** With the default rules of the profile, {@code d50}. */
+    public BozzaDraft(Environment env, String sources, String pool, String com, String bot) throws Exception {
+        this(env, sources, pool, com, bot, Ruleset.D50.id());
+    }
+
+    @Autowired
     public BozzaDraft(Environment env,
                       @Value("${app.bozza.sources}") String sources,
                       @Value("${app.bozza.pool:}") String pool,
                       @Value("${app.bozza.com:" + FROM_POOL + "}") String com,
-                      @Value("${app.bozza.bot:risorse}") String bot) throws Exception {
+                      @Value("${app.bozza.bot:risorse}") String bot,
+                      @Value("${app.bozza.regole:d50}") String rules) throws Exception {
         requireDevelopment(env);
         this.draft = DraftSource.load(sources);
         List<String> chosen = new ArrayList<>();
@@ -71,6 +82,11 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
         this.bot = bot.trim();
         if (!STYLES.containsKey(this.bot))
             throw new IllegalStateException("app.bozza.bot: uno fra " + STYLES.keySet() + ", non " + this.bot);
+        try {
+            this.ruleset = Ruleset.parse(rules);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStateException("app.bozza.regole: " + e.getMessage());
+        }
         List<Map<String, Object>> files = new ArrayList<>();
         for (String source : sources.split(";")) {
             if (source.isBlank()) continue;
@@ -85,6 +101,7 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
         described.put("pool", this.pool);
         described.put("com", this.com);
         described.put("bot", this.bot);
+        described.put("rules", this.ruleset.id());
         this.identity = Collections.unmodifiableMap(described);
     }
 
@@ -111,6 +128,9 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
 
     /** The computer's deck: a deck id, or {@link #FROM_POOL}. */
     public String com() { return com; }
+
+    /** The rules of the draft matches (SB-16c). */
+    public Ruleset ruleset() { return ruleset; }
 
     /** A new heuristic policy for one computer player, or null for the live random ComPlayer. */
     public BotPolicy newPolicy() {

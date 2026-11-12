@@ -801,6 +801,12 @@ final class Draft implements PlayerSource {
                     + (sets.size() > 1 && cards.get(previous).set != null ? " del set " + cards.get(previous).set : "")
                     + " (la mano cerca le carte per nome)");
             Card card = probe(spec.binding, where);
+            String searched = spec.data == null ? null : spec.data.searches();
+            if (searched != null) {
+                // SB-16c (D50, punto 6): la ricerca indica una carta della bozza che il set della carta vede.
+                if (!cards.containsKey(searched)) throw invalid(where, "search: " + searched + " non è una carta della bozza");
+                reach(spec.set, where, "la carta cercata", searched, cards.get(searched).set);
+            }
             if (card.isCharacterBound()) {
                 if (!characters.containsKey(card.getBoundToCharacter()))
                     throw invalid(where, "boundTo " + card.getBoundToCharacter() + " non è un personaggio della bozza" + loaded());

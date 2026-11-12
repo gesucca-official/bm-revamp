@@ -1,6 +1,7 @@
 package com.gsc.bm.sim;
 
 import com.gsc.bm.model.Resource;
+import com.gsc.bm.model.game.Ruleset;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -87,6 +88,8 @@ final class BenchReport {
         o.append("| Voce | Valore |\n|---|---|\n");
         o.append("| Bozza | `").append(Bench.shownSource(r.draft)).append("` |\n");
         o.append("| SHA-256 | `").append(r.sha256).append("` |\n");
+        // SB-16c: le regole si dichiarano solo se non sono quelle del gioco vivo, così il rapporto a 1.13 resta quello di prima.
+        if (s.ruleset != Ruleset.LIVE) o.append("| Regole | ").append(s.ruleset.id()).append(" (playground, D50) |\n");
         o.append("| Formato | ").append(r.draft.format).append(": ").append(r.draft.rules.deckSize).append(" carte, al massimo ")
                 .append(r.draft.rules.maxCopies).append(" copie, ").append(r.draft.rules.boundChoices).append(" bound |\n");
         o.append("| Banco | ").append(Bench.VERSION).append(" |\n");
@@ -311,6 +314,7 @@ final class BenchReport {
         head.put("bozza", Bench.shownSource(r.draft));
         head.put("sha256", r.sha256);
         head.put("formato", r.draft.format);
+        if (s.ruleset != Ruleset.LIVE) head.put("regole", s.ruleset.id());
         head.put("mazzi", s.decks);
         head.put("stili", new ArrayList<>(s.styles.keySet()));
         head.put("primoSeme", s.firstSeed);

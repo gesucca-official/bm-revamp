@@ -7,6 +7,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 import lombok.Value;
@@ -36,6 +37,8 @@ public class BotView {
     List<Opponent> opponents;
     List<SeenMove> lastRound;
     Map<String, List<String>> periodicEffects;
+    /** SB-16c: the rules of the match, public like the table (D50 in the playground, 1.13 in the live game). */
+    Ruleset ruleset;
 
     @Value
     public static class Self {
@@ -94,6 +97,11 @@ public class BotView {
         boolean voided;
         Map<String, String> choices;
         Map<String, List<String>> report;
+        /** SB-16c: why the engine voided the move («a terra»), or null. */
+        String voidReason;
+        /** SB-16c: the card the move searched for (binding) and the card found, shown to everyone; null if none. */
+        String searchedFor;
+        CardSeen searchFound;
     }
 
     /** Public card text and numbers. Policies decide on these, never on card names. */
@@ -114,6 +122,8 @@ public class BotView {
         String gains;
         String damage;
         String damageAmount;
+        /** SB-16c: «Ultimo colpo» written on the card (D50, point 2). */
+        boolean lastBlow;
 
         /** Fixed part of the catalog's nominal damage: "HIT 20+x" gives 20, no damage gives 0. */
         public int nominalDamage() {
@@ -133,7 +143,7 @@ public class BotView {
                 new Self(seat(game, me), cards(me.getCardsInHand()), me.getDeckSize()),
                 opponents,
                 game.getResolvedMoves().stream().map(BotView::seen).collect(Collectors.toUnmodifiableList()),
-                reports(game.getTimeBasedEffects()));
+                reports(game.getTimeBasedEffects()), game.getRuleset());
     }
 
     /** Every move the rules accept now, one per distinct name, target and choice. */
@@ -149,7 +159,10 @@ public class BotView {
     }
 
     private boolean affordable(CardSeen card) {
-        return card.cost.entrySet().stream().allMatch(c -> self.seat.resource(c.getKey()) >= c.getValue());
+        if (!card.cost.entrySet().stream().allMatch(c -> self.seat.resource(c.getKey()) >= c.getValue())) return false;
+        // D50, point 2 (playground only), as Move.healthCostAllowed: a HEALTH cost cannot bring its payer to 0, except with «Ultimo colpo».
+        int health = card.cost.getOrDefault(Resource.HEALTH, 0);
+        return !ruleset.playground() || health == 0 || card.lastBlow || self.seat.resource(Resource.HEALTH) > health;
     }
 
     private List<String> discards(CardSeen card) {
@@ -207,7 +220,7 @@ public class BotView {
         return new CardSeen(card.getName(), card.getBindingName(), card.isItem(), card.isBasicAction(), card.isLastResort(),
                 card.isCharacterBound(), card.getPriority(), Set.copyOf(card.getCanTarget()), Map.copyOf(card.getCost()),
                 text == null ? null : text.getRole(), text == null ? null : text.getGains(),
-                text == null ? null : text.getDamage(), text == null ? null : text.getDamageAmount());
+                text == null ? null : text.getDamage(), text == null ? null : text.getDamageAmount(), card.isLastBlow());
     }
 
     private static SeenMove seen(Move move) {
@@ -217,7 +230,8 @@ public class BotView {
         Map<String, List<String>> report = new LinkedHashMap<>();
         move.getMoveReport().forEach((target, lines) -> report.put(target.name(), List.copyOf(lines)));
         return new SeenMove(move.getPlayerId(), move.getPlayedCardName(), move.getTargetId(), move.isVoid(),
-                Collections.unmodifiableMap(choices), Collections.unmodifiableMap(report));
+                Collections.unmodifiableMap(choices), Collections.unmodifiableMap(report), move.getVoidReason(),
+                move.getSearchedFor(), move.getSearchFound() == null ? null : seen(move.getSearchFound()));
     }
 
     private static Map<String, List<String>> reports(Map<String, List<String>> effects) {

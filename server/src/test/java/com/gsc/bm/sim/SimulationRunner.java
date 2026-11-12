@@ -6,6 +6,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.Timer;
 import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.model.game.status.Status;
@@ -28,6 +29,8 @@ final class SimulationRunner {
     static final int MAX_TURNS = 200;
     private static final ObjectMapper JSON = new ObjectMapper();
     private final PlayerSource catalog;
+    /** SB-16c: le regole delle partite, -Dsim.rules=d50 per quelle del playground (D50); predefinite le 1.13 del gioco vivo. */
+    private final Ruleset ruleset;
 
     static final class Result {
         final Outcome outcome;
@@ -58,7 +61,17 @@ final class SimulationRunner {
         }
     }
 
-    SimulationRunner(PlayerSource catalog) { this.catalog = catalog; }
+    SimulationRunner(PlayerSource catalog) { this(catalog, selectedRuleset()); }
+
+    SimulationRunner(PlayerSource catalog, Ruleset ruleset) {
+        this.catalog = catalog;
+        this.ruleset = ruleset;
+    }
+
+    /** Le regole scelte con -Dsim.rules (1.13 o d50); senza la proprietà, quelle del gioco vivo. */
+    static Ruleset selectedRuleset() { return Ruleset.parse(System.getProperty("sim.rules")); }
+
+    Ruleset ruleset() { return ruleset; }
 
     Game newGame(long seed, boolean bruiserFirst) throws Exception {
         return newGame(seed, new Contender(bruiserFirst ? SimulationCatalog.BRUISER : SimulationCatalog.JUNKIE, null),
@@ -69,7 +82,9 @@ final class SimulationRunner {
         Random source = new Random(seed);
         Player a = catalog.player(first.character, "seat-1", new Random(source.nextLong()), first.policy);
         Player b = catalog.player(second.character, "seat-2", new Random(source.nextLong()), second.policy);
-        return new Game(List.of(a, b), "sim", false);
+        Game game = new Game(List.of(a, b), "sim", false);
+        if (ruleset != Ruleset.LIVE) game.useRuleset(ruleset);
+        return game;
     }
 
     Result run(long seed, Contender first, Contender second) throws Exception {

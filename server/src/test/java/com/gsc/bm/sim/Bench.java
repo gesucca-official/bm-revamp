@@ -8,6 +8,7 @@ import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.bot.BotPolicy;
 import com.gsc.bm.model.game.bot.BotView;
 import com.gsc.bm.model.game.bot.LegalMove;
@@ -65,8 +66,15 @@ final class Bench {
         final int threads;
         final BoundCap.Params cap;
         final String note;
+        /** SB-16c: le regole delle partite; il rapporto le dichiara solo se non sono quelle del gioco vivo. */
+        final Ruleset ruleset;
 
         Settings(int games, long firstSeed, List<String> decks, Map<String, BotPolicy> styles, int threads, BoundCap.Params cap, String note) {
+            this(games, firstSeed, decks, styles, threads, cap, note, SimulationRunner.selectedRuleset());
+        }
+
+        Settings(int games, long firstSeed, List<String> decks, Map<String, BotPolicy> styles, int threads, BoundCap.Params cap, String note,
+                 Ruleset ruleset) {
             if (games < 1) throw new IllegalArgumentException("servono almeno una partita per cella");
             this.games = games;
             this.firstSeed = firstSeed;
@@ -75,6 +83,7 @@ final class Bench {
             this.threads = Math.max(1, threads);
             this.cap = cap;
             this.note = note;
+            this.ruleset = ruleset;
         }
     }
 
@@ -285,7 +294,7 @@ final class Bench {
      * listino di SB-10a, che sceglie da sé quali incontri giocare.
      */
     static void playCells(Draft draft, Settings settings, List<Cell> cells, PlayerSource players) throws Exception {
-        SimulationRunner runner = new SimulationRunner(players);
+        SimulationRunner runner = new SimulationRunner(players, settings.ruleset);
         if (settings.threads == 1) {
             for (Cell cell : cells) play(draft, runner, settings, cell);
         } else {

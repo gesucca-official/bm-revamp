@@ -81,6 +81,27 @@ public class Player implements Serializable {
         if (!cardsInHand.contains(lastResortCard)) cardsInHand.add(lastResortCard);
     }
 
+    /**
+     * SB-16c, playground rules only (D50, point 6): the draw replaced by a search. The copy of the card nearest to the top of the
+     * deck leaves the deck: an action goes to the hand, an item to the field (as when drawn), and then the draw goes on as usual
+     * because an item never fills the hand. Returns the card found, shown to everyone, or null if the deck has no copy: then
+     * the player draws normally (also with an empty deck, which gives the last resort).
+     */
+    public Card searchCard(String binding) {
+        for (int i = deck.size() - 1; i >= 0; i--) {
+            Card card = deck.get(i);
+            if (!card.getBindingName().equals(binding)) continue;
+            deck.remove(i);
+            if (card.isItem()) {
+                character.getItems().add(card);
+                drawCard();
+            } else cardsInHand.add(card);
+            return card;
+        }
+        drawCard();
+        return null;
+    }
+
     public void drawCards(int howMany) {
         for (int i = 0; i < howMany; i++)
             drawCard();

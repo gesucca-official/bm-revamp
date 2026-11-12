@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **Prossimo:** [SB-16c](#sb-16c--regole-decise-in-sb-16b-nel-playground), le regole nuove nel playground; poi SB-16d, SB-16e e la prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, in attesa del giudizio del proprietario. **Prossimo:** [SB-16d](#sb-16d--riprogettazione-dei-cinque-starter-p3-e-p5), SB-16e e la prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -315,7 +315,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
 | | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | fatto, giudizio registrato (12 novembre 2026) |
 | | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | chiuso: Fase A e B fatte (12 novembre 2026), D50–D53 |
-| | SB-16c | Regole decise in SB-16b nel playground | SB-16b | prossimo |
+| | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), in attesa del giudizio del proprietario |
 | | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c |  |
 | | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d |  |
 | | SB-16f | Prova umana degli starter rifatti | SB-16e |  |
@@ -340,7 +340,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). **Prossimo:** SB-16c, SB-16d, SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
+e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, in attesa di giudizio. **Prossimo:** SB-16d, SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -808,6 +808,15 @@ Diventa i blocchi SB-16c, SB-16d, SB-16e e SB-16f ([D53](#decisioni-del-propriet
   **Discussa in Fase B:** adottata come corazza dei soli colpi, a L/4 (D50, punto 5).
 
 ### SB-16c — Regole decise in SB-16b nel playground
+
+**Fatto il 12 novembre 2026**, in attesa del giudizio del proprietario. [Rapporto](reports/set-base/sb-16c-report.md).
+- **Interruttore:** `Ruleset` (`1.13` o `d50`). Il profilo `bozza` parte con `d50` (`app.bozza.regole`), il runner usa
+  `-Dsim.rules=d50`.
+- **Test:** 30 nuovi, uno o più per ogni caso qui sotto; dieci mutazioni, tutte uccise.
+- **Interruttore spento:** test di prima verdi, banco SB-7 identico alla base di SB-16b.
+- **Interruttore acceso:** invarianti di partita a zero. Il banco coincide in ogni campo con la misura «P1 + pavimento + L/4» di SB-16b.
+  Il tetto delle bound segnala CinqueMinutiEVado, che con la corazza para: domanda al proprietario.
+- **Domande nel rapporto:** quattro, fra cui l'oggetto trovato dalla ricerca, che va sul campo e la pesca continua.
 
 **Perimetro.** Le regole di [D50](#decisioni-del-proprietario) nel server, dietro un interruttore acceso solo dal profilo `bozza` e dal
 runner:
