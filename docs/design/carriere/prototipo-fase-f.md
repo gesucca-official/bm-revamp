@@ -181,5 +181,5 @@ ritratto resta dietro la finestra. Mara e Piera non si muovono.
 
 **Prova delle bocche** (proprietario, 12 novembre 2026): «si muovono troppo velocemente in generale, più altri bug strani: Mara ha una
 cornice nera intorno, come se non fosse stata ritagliata bene; Piera ha artefatti strani quando muove la bocca; Spazienzio invece va bene».
-La regia ha visto che almeno  ha un fondo grigio a quadretti, semitrasparente, invece della trasparenza pulita:
+La regia ha visto che almeno `piera-contenta-bocca.webp` ha un fondo grigio a quadretti, semitrasparente, invece della trasparenza pulita:
 lo scontorno di quella consegna non è riuscito. Diagnosi e correzione nella sessione dell'esecutore, con la Fase G.
