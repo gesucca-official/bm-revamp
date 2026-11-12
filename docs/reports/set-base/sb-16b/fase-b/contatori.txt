@@ -1,0 +1,10 @@
+Contatori stampati dal prototipo a fine misura, 480.000 partite per variante (banco SB-7, 2000 partite per cella).
+annullate = mosse annullate perche' l'autore era a terra all'inizio del suo gruppo (P1)
+salvati = personaggi scesi a 0 o sotto durante il turno e di nuovo vivi dopo le mosse (D48)
+assorbiti = HIT tolti dalla corazza dell'alcol
+
+P1 (morto2)                         annullate 139222  salvati  9561
+P1 + pavimento                      annullate 111851  salvati 12046
+P1 + pavimento + spareggio inizio   annullate 111851  salvati 12046
+P1 + pavimento + alcol L/4          annullate 107081  salvati 10686  assorbiti 1817046
+P1 + pavimento + alcol L/2          annullate 100956  salvati  9554  assorbiti 3561962

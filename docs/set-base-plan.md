@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **Prossimo:** [SB-16b](#sb-16b--revisione-critica-delle-regole), revisione critica delle regole (D49). Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **Prossimo:** [SB-16c](#sb-16c--regole-decise-in-sb-16b-nel-playground), le regole nuove nel playground; poi SB-16d, SB-16e e la prova umana SB-16f, prima di SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -267,7 +267,8 @@ bilancia l'intero set.
 | Matchup fra starter base | 45–55% |
 | Altri matchup fra starter | 40–60%, compresi quelli base contro avanzato, perché la coda quick è mista |
 | Durata | Circa 6–12 turni |
-| Patte e mazzi esauriti | Pochi |
+| Patte | Al massimo 10% in ogni incontro fra starter, specchi compresi ([D51](#decisioni-del-proprietario)) |
+| Mazzi esauriti | Pochi |
 | Turni senza mosse legali | Zero, con mazzi conformi |
 | Carte | Nessuna quasi sempre giocata o quasi mai |
 | Mazzi costruiti contro starter | Il migliore può vincere anche al 65–70%: è giusto che **una strategia da scoprire aprendo pacchetti** sia più forte |
@@ -313,8 +314,12 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-14 | Piera Ultimo Giro: bozza e giro | SB-13 | chiuso |
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
 | | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | fatto, giudizio registrato (12 novembre 2026) |
-| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | Fase A fatta, aspetta la Fase B |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16b |  |
+| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 | chiuso: Fase A e B fatte (12 novembre 2026), D50–D53 |
+| | SB-16c | Regole decise in SB-16b nel playground | SB-16b | prossimo |
+| | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c |  |
+| | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d |  |
+| | SB-16f | Prova umana degli starter rifatti | SB-16e |  |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -335,7 +340,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. **Prossimo:** la revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49), poi SB-17. SB-30 può
+e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). **Prossimo:** SB-16c, SB-16d, SB-16e e la prova umana SB-16f (D53), poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -762,7 +767,7 @@ in ordine di valore, anche «niente da cambiare» dove è il caso. Lavora da sol
 della Fase A chiede di non leggere l'elenco qui sotto. Le decisioni già prese ([D48](#decisioni-del-proprietario) e le precedenti) si
 rispettano o si discutono apertamente, con il motivo. Solo rapporto: nessuna modifica a regolamento, set, codice o test.
 
-**Fase A fatta il 12 novembre 2026, aspetta la Fase B.** [Rapporto](reports/set-base/sb-16b-report.md). Tre proposte, in ordine di valore:
+**Fase A fatta il 12 novembre 2026.** [Rapporto](reports/set-base/sb-16b-report.md). Tre proposte, in ordine di valore:
 **P1**, chi è a terra non colpisce (R04: la mossa di un autore già morto all'inizio del suo gruppo di velocità si annulla, salvo quelle
 su di sé, quindi il salvataggio di D48 resta); **P2**, l'ultimo a cadere (R06: se muoiono tutti vince chi ha più HEALTH); **P3**, nessuna
 parata pura nella griglia. Misure coi bot, circa 8 minuti di calcolo: patte da 16,9% a 9,4% con P1 e allo 0,9% con P1 e P2, durata
@@ -772,15 +777,112 @@ D12 (playground o gioco vivo). L'esecutore dichiara di aver letto per errore l'e
 **Fase B — confronto.** Il proprietario porta le sue idee; si discute proposta per proposta. Ogni scelta diventa una decisione registrata,
 compresa quella di non cambiare nulla.
 
+**Fase B fatta il 12 novembre 2026**, con il proprietario, proposta per proposta: decisioni [D50–D53](#decisioni-del-proprietario), misure
+aggiuntive nel [rapporto](reports/set-base/sb-16b-report.md#fase-b--decisioni-e-misure-aggiuntive).
+- **Adottate:** P1, chi è a terra non colpisce; costi pagati solo con quello che si ha, con l'eccezione «Ultimo colpo» scritta sulla
+  carta; pavimento a zero per tutte le risorse; corazza dell'alcol a L/4 sui colpi; ricerca al posto della pesca; P3, nessuna parata
+  pura; P5, il ritmo caricare-colpire-parare; P4, ordine dei timer, nel regolamento 1.14 a SB-28. Pavimento, corazza e ricerca sono
+  idee del proprietario; P5 nasce dalle sue risposte sulle prove umane.
+- **Scartate:** P2 e lo spareggio sulla HEALTH di inizio turno («questa cosa dello spareggio proprio non mi piace»): la patta resta un
+  esito, e il criterio del 10% (D51) si raggiunge con le carte.
+- **Dove:** nel playground fino a SB-28 (D12): il gioco vivo e il regolamento 1.13 non cambiano fino al trasferimento.
+- **Prove umane, risposte del proprietario.** Sul turno decisivo: «nel turno decisivo sì, nel corso del gioco in realtà no. non sentivo
+  una vera scelta, o una vera strategia da ideare e seguire, o delle scelte tattiche, c'era solo da accumulare risorse per tirare il
+  colpo più forte possibile e uccidere l'avversario più velocemente di quanto non lo stesse facendo già lui». Sulla fine a mazzo vuoto:
+  «non mi è sembrata male in realtà, a quel punto ognuno aveva già giocato tutte le sue carte, quindi ci stava». Sulle parate: «le carte
+  di pura difesa sono state quelle che ho preferito meno e che ho scartato più spesso per usare le bound. non riuscivo a tenermele per
+  pararmi da colpi potenti dell'avversario, più che altro perché non avevo modo di riuscire a intuire quando li avrebbe usati». Con la
+  sua avvertenza: «non sono un giocatore bravissimo né molto attento».
+- **Calcolo:** circa 6 minuti in più coi bot (pavimento, spareggio di inizio turno, corazza a L/4 e L/2), 14 in tutto.
+
 **Fase C — solo se si cambia qualcosa.** Prima il regolamento (1.14) o il documento del set, con versione e motivazione (AGENTS); poi test,
 server, catalogo, bot e client se toccati. I giri di bilanciamento da rifare si decidono secondo i cambi, con le parole del proprietario:
 «se dobbiamo rifare dei giri di bilanciamento a seguito di quei cambi, pace, li rifaremo, ma valuteremo a seconda di cosa vogliamo cambiare, se mai decidessimo che c'è da cambiare qualcosa». Può diventare più blocchi.
+Diventa i blocchi SB-16c, SB-16d, SB-16e e SB-16f ([D53](#decisioni-del-proprietario)).
 
 **Idee del proprietario per la Fase B** (non fanno parte della Fase A):
 
 - **Alcol che riduce i danni ricevuti, come regola per tutti** (12 novembre 2026, durante le prove): «mi sa che il tasso alcolemico come risorsa non fa molto, potrebbe ridurre il danno? uno diventa insensibile al dolore quando è brillo»; alla scelta fra le sole carte
   di Piera e una regola per tutti: «mi piacerebbe una regola per tutti, ma aspettiamo a cambiare le regole». Da pesare: oggi ALCOHOL è un costo e a fine turno toglie ALERTNESS (R06); con la regola il
   «giro offerto» di Piera, che dà alcol a tutti gli avversari, li renderebbe più lenti ma anche più resistenti.
+  **Discussa in Fase B:** adottata come corazza dei soli colpi, a L/4 (D50, punto 5).
+
+### SB-16c — Regole decise in SB-16b nel playground
+
+**Perimetro.** Le regole di [D50](#decisioni-del-proprietario) nel server, dietro un interruttore acceso solo dal profilo `bozza` e dal
+runner:
+- P1: gruppi di velocità; chi è a terra all'inizio del proprio gruppo non colpisce, ma le mosse su di sé restano;
+- costi pagati solo con quello che si ha; la HEALTH non si paga fino a 0, salvo le carte con «Ultimo colpo», che si risolvono anche a terra;
+- pavimento a zero per tutte le risorse;
+- corazza dell'alcol: HIT ricevuti ridotti di L/4;
+- ricerca al posto della pesca, come passo nuovo del formato della bozza;
+- nel registro del turno, il motivo dell'annullamento («a terra») e la carta cercata.
+
+Nei bot, un'euristica per reagire a un caricamento visibile e per giocare il colpo dopo il caricamento. Il prototipo di SB-16b
+([diff](reports/set-base/sb-16b/fase-b/variante-regole-fase-b.diff)) è un esperimento, non un punto di partenza obbligato.
+
+**Completamento verificabile.** Test di conformità per ogni regola:
+- colpo di un autore già a terra, annullato; cura su di sé che lo salva (D48); colpo reciproco nello stesso gruppo; bound annullata che
+  non scarta;
+- costo in HEALTH che porterebbe a 0, rifiutato, e accettato con «Ultimo colpo»;
+- risorse che non scendono sotto zero;
+- corazza sui HIT e non su CUT e POISON, anche sui danni a sé;
+- ricerca: carta già in mano, già scartata o assente; mazzo vuoto; oggetto trovato; carta cercata scartata con una bound; due ricerche
+  nello stesso turno; ricerca di chi è a terra.
+
+A interruttore spento la partita viva è identica: test di oggi verdi e banco SB-7 uguale cella per cella. A interruttore acceso,
+invarianti a zero sul banco.
+
+**Rischi.** È un blocco di regole: tocca il motore (`Game`, `Character`, `Move`, la pesca), non solo `com.gsc.bm.sim` e le carte di
+bozza, e lo dichiara. Regolamento, documento del set, catalogo e client non cambiano fino a SB-28 (D12, D50).
+
+### SB-16d — Riprogettazione dei cinque starter (P3 e P5)
+
+**Perimetro.** Proposta delle carte da cambiare nei cinque starter secondo i principi di [D52](#decisioni-del-proprietario):
+- nessuna parata pura: ogni difesa che vale solo nel turno dà anche circa +5 della risorsa del personaggio, o una piccola cura per le
+  generiche;
+- il ritmo caricare-colpire-parare: colpo annunciato da uno stato visibile, accumulo rischioso con un'esposizione che dura anche il
+  turno dopo, una coppia caricamento-colpo con ricerca per personaggio.
+
+Con le regole di D50: senza valori negativi l'abs nei testi non serve più, la corazza dell'alcol pesa sugli incontri, priorità e A
+contano con P1. La [griglia](design/set-base/griglia.md) si aggiorna con i principi e gli slot toccati. Prima la proposta, che il
+proprietario approva per funzionamento e composizione (D45, punto 7); poi la bozza.
+
+**Completamento verificabile.** Proposta approvata; griglia aggiornata; bozza con le carte nuove e le classi o i passi necessari;
+invarianti a zero.
+
+**Rischi.** Troppi cambi insieme: le misure non dicono più quale pesa, quindi pochi cambi per starter. Durata: un colpo annunciato
+costa due turni.
+
+### SB-16e — Giro sui cinque starter con le regole nuove
+
+**Perimetro.** Giro coi bot con le regole di D50 e le carte di SB-16d, fino ai criteri:
+- base contro base 45–55%, gli altri incontri 40–60%;
+- durata circa 6–12 turni;
+- **patte al massimo al 10% in ogni incontro, specchi compresi** (D51);
+- invarianti a zero.
+
+Al massimo 3 giri e 2 ore di calcolo. Delega come D38 per i numeri (salute, costi, danni, risorse iniziali, valore della corazza) e per
+le aggiunte di P3; funzionamento delle carte e composizione degli starter si propongono al proprietario. Leve già note: Piera con la
+corazza, prima la L iniziale e poi la salute (D44); Beppe contro Spazienzio (0,395 con P1). Per ogni coppia con ricerca, misure dedicate:
+con e senza la coppia; quante volte il colpo è cercato, giocato, parato; quante volte l'esposizione è punita; effetto su durata e patte.
+Listino di priorità e A da rimisurare.
+
+**Completamento verificabile.** Criteri raggiunti o, se in 3 giri non tornano, stop con una proposta invece di forzare. Rapporto con le
+misure delle coppie.
+
+**Rischi.** Lo specchio di Piera è il caso più difficile: 34% di patte con P1 e pavimento, 36% con la corazza. I bot leggono male: le
+misure sottostimano letture e corazza.
+
+### SB-16f — Prova umana degli starter rifatti
+
+**Perimetro.** Partite del proprietario con i cinque starter dopo SB-16e, prima di SB-17: letture a metà partita, colpi annunciati e
+ricerche, parate con aggiunta, corazza dell'alcol, turno decisivo con P1.
+
+**Completamento verificabile.** Giudizio registrato; osservazioni assegnate ai blocchi interessati.
+
+**Rischi.** Il client deve mostrare la carta cercata e il motivo dell'annullamento: se non lo fa, serve un piccolo intervento prima
+della prova, da decidere col proprietario.
 
 ### SB-17, SB-18 — Personaggi da booster
 
@@ -788,7 +890,7 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 
-**Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Duccio, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; pagare tutta la salute uccide e la mossa prosegue secondo R04; il bot non si suicida per caso.
+**Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Duccio, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; un costo che porterebbe a 0 o sotto non si paga, salvo le carte con «Ultimo colpo», che si risolvono anche a terra (D50, punto 2); il bot non si suicida per caso.
 
 **Rischi.** Contromosse che rendono frustrante la partita (Sergio); partite infinite o, col prezzo in salute, suicidi facili (Duccio): durata sotto controllo.
 
@@ -995,6 +1097,10 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D47 | Costo in salute di Duccio (prima di SB-18) | 10 novembre 2026, con le parole del proprietario: «per duccio braccio teso va bene la raccomandazione della precedente regia». **Il costo in HEALTH resta** l'identità di Duccio Braccio Teso, come per Sant'Incasso (D27, D34 punto 5): meccanica invariata. Flavour: si preferiscono le letture «si fa male dandole» e «non arretra per principio»; «il martire della causa» si usa con cautela, perché per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola ([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)). Precisa D27 |
 | D48 | Morte in extremis: resta la regola 1.13 | 12 novembre 2026, con le parole del proprietario: «no, ci ho ripensato: lasciamolo così. ha un che di flavour, che uno in punto di morte, prima di accorgersi di essere morto, riesce a salvarsi in extremis». Alla prova umana Piera, portata sotto zero da un attacco di Spazienzio, si è curata con la mossa già presentata ed è sopravvissuta. Non è un difetto: R04 («Una mossa già presentata continua anche se l'autore muore prima di agire o durante il proprio effetto») con R06 («HEALTH <= 0 significa morto», esito a fine turno); il server lo fa così (`Character.isDead`). Il proprietario aveva chiesto la morte immediata salvo carte che lo prevedano, poi l'ha ritirata. Nessuna regola cambia; SB-16b può riparlarne solo dichiarandolo. |
 | D49 | Revisione critica delle regole (SB-16b) | 12 novembre 2026, con le parole del proprietario: «prevediamo a un punto opportuno di SB una attività di valutazione critica dello stato delle regole del gioco, in cui un agente potentissimo impersona un game designer esperto e analizza cosa potrebbe essere cambiato per rendere il gioco più divertente, più soddisfacente, complesso ma non inutilmente complicato, poi mi propone le cose che ha trovato. io farò lo stesso e gli dirò le miee idee e insieme decideremo come agire»; e «se dobbiamo rifare dei giri di bilanciamento a seguito di quei cambi, pace, li rifaremo, ma valuteremo a seconda di cosa vogliamo cambiare, se mai decidessimo che c'è da cambiare qualcosa». Blocco [SB-16b](#sb-16b--revisione-critica-delle-regole) dopo le prove umane SB-12b e SB-16 e prima di SB-17 (punto scelto dalla regia su delega). L'idea dell'alcol che riduce i danni per tutti («mi piacerebbe una regola per tutti, ma aspettiamo a cambiare le regole») passa alla Fase B. |
+| D50 | Regole del sistema decise in SB-16b (Fase B) | 12 novembre 2026, proposta per proposta. **(1) Chi è a terra non colpisce (P1, R04):** le mosse si risolvono per gruppi di velocità (stessa priorità e stessa ALERTNESS dopo i costi); la mossa di un autore morto all'inizio del proprio gruppo si annulla, salvo che bersagli l'autore o un suo oggetto vicino; dentro un gruppo le mosse restano simultanee; il salvataggio in extremis di D48 resta. Parole: «sì, applichiamola». **(2) Costi:** si paga solo con quello che si ha; un costo in HEALTH non si paga se porta a 0 o sotto. Eccezione scritta sulla carta (R00), «Ultimo colpo»: si può pagare anche fino a 0 o sotto e la mossa si risolve anche se l'autore è a terra; nessuna parola chiave. Parole: «direi che è vietato pagare con risorse che non si hanno, ma l'eccezione per chi vuole suicidarsi per un'ultimo colpo la terrei. potremmo specificarlo sulle carte che lo consentono». **(3) Pavimento a zero:** nessuna risorsa scende sotto zero, HEALTH compresa. Parole: «se uno è morto, è morto: non importa di tanto o di poco. anche le altre risorse non hanno senso che vadano in negativo»; dopo la misura, «pacimento a zero per tutte le risorse ok». **(4) Nessuno spareggio:** con zero superstiti resta la patta. Scartati P2 (vince chi è meno sotto zero, incompatibile col pavimento) e lo spareggio sulla HEALTH di inizio turno: «questa cosa dello spareggio proprio non mi piace». **(5) Corazza dell'alcol** (idea del proprietario, D49): chi ha ALCOHOL > 0 riduce i danni HIT ricevuti di L/4, divisione intera, dopo gli stati e non sotto zero; non riduce CUT e POISON; vale per tutti, anche sui danni a sé; il valore si tara in SB-16e. Parole: «l'alcol dovrebbe ridurre i danni da colpo (non quelli da taglio) per tutti»; dopo la misura a L/4 e L/2, «Sì, L/4». **(6) Ricerca al posto della pesca** (idea del proprietario, R02): una carta può sostituire la pesca che segue la sua mossa con la ricerca nel mazzo di una carta indicata; la carta trovata si mostra all'avversario; se non c'è, si pesca normalmente. Parole: «alcune carte di caricamento permettono di sostituire la pescata successiva randomica con la ricercar di una carta ben specifica»; «adottiamola, per; prevediamo di testarne bene le implicazioni». **(7) Ordine dei timer (P4, R06):** i timer che scadono nello stesso turno si eseguono in ordine di creazione, come fa già il server: «va bene». **(8) Dove:** nel playground (profilo `bozza` e runner, dietro un interruttore) fino a SB-28; il regolamento 1.14 si scrive al trasferimento, con P4; il gioco vivo resta al regolamento 1.13. Parola: «A». [Rapporto e misure](reports/set-base/sb-16b-report.md). Precisa D8 (la ricerca è un effetto nuovo, limitato da D52), D12, D27, D28 (la L è anche corazza), D47 e D48 (frase di R04 riscritta, salvataggio conservato) |
+| D51 | Criterio delle patte | 12 novembre 2026, con le parole del proprietario: «che ne dici di modificare le carte per non far succedere più del 10% di patte? ti sembra una buona idea? il set base è ancora del tutto wip, quindi possiamo cambiarne valori, funzionamento e tutto quanto come ci pare e piace»; sulla soglia, «va bene la soglia che raccokandi te». **Patte al massimo al 10% in ogni incontro fra starter, specchi compresi**, misurate coi bot; sostituisce «pochi» nei [criteri](#bilanciamento-metodo-e-criteri). Con le regole di D50 oggi la superano lo specchio di Piera (34%), quelli di Celestina e Beppe (19%), Piera–Beppe (16%), Mara–Piera e Celestina–Piera (12%), Celestina–Beppe (11%). Leve: partite più corte, velocità diverse nel finale, last resort con priorità diverse. Precisa D16 |
+| D52 | Principi del set: difese e ritmo | 12 novembre 2026. **(1) Nessuna parata pura (P3):** ogni difesa che vale solo nel turno dà anche qualcosa che resta se l'avversario non attacca, circa +5 della risorsa del personaggio o una piccola cura per le generiche: «sì, mi sembra tutto una buona idea». **(2) Il ritmo caricare-colpire-parare (P5)**, nato dalle risposte del proprietario sulle prove umane: colpo annunciato da uno stato visibile; accumulo rischioso, con un'esposizione che dura anche il turno dopo; difesa che rende e contromossa: «aggiungiamo, mi sembrano ottime considerazioni». **(3) Una coppia caricamento-colpo con ricerca** (D50, punto 6) **per personaggio nel Set Base**, con la ricerca mostrata; ricerche più ampie per le espansioni. Si applicano ai cinque starter in SB-16d e a Sergio e Duccio in SB-17 e SB-18. Precisa D8, D34 e D35 |
+| D53 | Fase C di SB-16b | 12 novembre 2026, con le parole del proprietario: «va bene» (struttura e limiti), «adottiamola, per; prevediamo di testarne bene le implicazioni» (verifiche della ricerca), «registriamo tutto». Quattro blocchi prima di SB-17: **SB-16c**, regole di D50 nel playground, con test di conformità, casi limite della ricerca ed euristica dei bot per caricamenti e coppie; **SB-16d**, proposta di riprogettazione dei cinque starter con D52, approvata dal proprietario; **SB-16e**, giro coi criteri di D16 e D51, al massimo 3 giri e 2 ore di calcolo, delega dei numeri e delle aggiunte di P3 come D38, funzionamento delle carte e composizione degli starter al proprietario, stop e proposta se i criteri non tornano, misure dedicate per ogni coppia con ricerca; **SB-16f**, prova umana del proprietario sugli starter rifatti. Precisa D12, D21 e D38 |
 
 ## Decisioni ancora aperte
 

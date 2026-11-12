@@ -1,8 +1,10 @@
 # SB-16b — Revisione critica delle regole, Fase A: rapporto del game designer
 
-**Fase A fatta il 12 novembre 2026, aspetta la Fase B**, cioè il confronto con il proprietario
+**Fase A fatta il 12 novembre 2026; Fase B fatta lo stesso giorno** con il proprietario
 ([D49](../../set-base-plan.md#decisioni-del-proprietario), [blocco](../../set-base-plan.md#sb-16b--revisione-critica-delle-regole)).
-È solo un'analisi: regolamento, documento del set, codice, test, catalogo e bozza non cambiano. Esecutore: Claude Opus 5.5.
+Le decisioni della Fase B sono D50–D53 e la sezione [Fase B](#fase-b--decisioni-e-misure-aggiuntive) le riassume con le misure fatte
+durante il confronto. Il resto del rapporto è la Fase A com'era, con due correzioni segnate. Regolamento, documento del set, codice,
+test, catalogo e bozza non cambiano. Esecutore: Claude Opus 5.5.
 
 ## Sintesi
 
@@ -188,7 +190,8 @@ una a priorità 1 da 7 HIT.
   attaccare non ha più «l'ultimo colpo»: il flavour di D48 resta solo per le mosse su di sé.
 - **Carte che bersagliano sé ma toccano l'avversario.** Nel Set Base 0.1 nessuna. Da controllare nella bozza e nelle carte nuove;
   altrimenti la regola si scrive sugli effetti invece che sul bersaglio.
-- **Costi in HEALTH (Sant'Incasso, Duccio).** Oggi chi si porta a zero pagando HEALTH colpisce comunque. Con P1 il suo colpo si annulla
+- **Costi in HEALTH (Duccio, il Sant'Incasso di D27).** *Corretto in Fase B: Sant'Incasso è il nome di prima di Duccio, non un
+  altro personaggio.* Oggi chi si porta a zero pagando HEALTH colpisce comunque. Con P1 il suo colpo si annulla
   e la mossa diventa una trappola. Va deciso (domanda 4).
 
 ### P2 — L'ultimo a cadere (R06)
@@ -226,7 +229,9 @@ Da sola, P2 sposta i matchup di 3,2 punti al massimo (Celestina–Piera 0,570 �
 
 **Rischi e cosa si perde.**
 - **La vittoria ai punti** è meno pulita di un KO e va spiegata bene.
-- **Si perde la patta dei disperati.** Se al proprietario piace, P1 da sola lascia il 9,4% di patte, quasi tutte negli specchi.
+- **La patta diventa rara, non sparisce.** Resta quando chi muore finisce con la stessa HEALTH, per esempio Banzai!!! contro Banzai!!!
+  dalla stessa salute e alla stessa velocità. *Corretto in Fase B: la prima stesura diceva «si perde la patta».* Se al proprietario
+  piace la patta, P1 da sola ne lascia il 9,4%, quasi tutte negli specchi.
 
 **P1 e P2 si completano.** P1 dà una scelta al turno decisivo, P2 gli dà sempre un esito. Raccomando entrambe. Se se ne vuole una sola,
 P1 vale di più per il gioco e P2 costa meno.
@@ -378,6 +383,63 @@ e lascia un dubbio a chi scrive le carte.
 6. **Giro di misura.** Va bene un giro sui cinque starter dopo i cambi, prima di SB-17, con un tetto di un'ora?
 7. **Dalle tue partite.** Nel turno decisivo sentivi di avere una scelta? La fine a mazzo vuoto ti è sembrata automatica? Hai mai giocato
    Tartaruga o Paraurti con soddisfazione?
+
+## Fase B — decisioni e misure aggiuntive
+
+Confronto con il proprietario il 12 novembre 2026, proposta per proposta. Le decisioni sono registrate nel
+[piano](../../set-base-plan.md#decisioni-del-proprietario) come D50–D53.
+
+| Proposta o idea | Esito | Decisione |
+|---|---|---|
+| P1, chi è a terra non colpisce | Adottata | D50, punto 1 |
+| Costi in HEALTH con P1 (domanda 4) | Si paga solo con quello che si ha; eccezione «Ultimo colpo» scritta sulla carta | D50, punto 2 |
+| Pavimento a zero per tutte le risorse (idea del proprietario) | Adottato dopo la misura | D50, punto 3 |
+| P2, l'ultimo a cadere | Scartata: incompatibile col pavimento | D50, punto 4 |
+| Spareggio sulla HEALTH di inizio turno (proposto in Fase B) | Scartato dal proprietario | D50, punto 4 |
+| Corazza dell'alcol (idea del proprietario) | Adottata a L/4 dopo la misura | D50, punto 5 |
+| Ricerca al posto della pesca (idea del proprietario) | Adottata, da verificare bene | D50, punto 6; D52, punto 3 |
+| P4, ordine dei timer | Adottata, nel regolamento 1.14 a SB-28 | D50, punto 7 |
+| Dove applicare le regole (domanda 3) | Playground fino a SB-28 | D50, punto 8 |
+| Patte al massimo al 10% (idea del proprietario) | In ogni incontro, specchi compresi | D51 |
+| P3, nessuna parata pura | Adottata | D52, punto 1 |
+| P5, il ritmo caricare-colpire-parare (nata dalle risposte sulle prove umane) | Adottata | D52, punto 2 |
+| Giro di misura e struttura della Fase C (domande 5 e 6) | SB-16c, SB-16d, SB-16e, SB-16f | D53 |
+
+**Risposte del proprietario sulle prove umane (domanda 7).**
+- **Turno decisivo:** una scelta c'è, ma a metà partita no. C'era solo da accumulare risorse per il colpo più forte.
+- **Fine a mazzo vuoto:** va bene così.
+- **Parate pure:** le carte meno amate, scartate per giocare le bound, perché non c'era modo di intuire quando sarebbe arrivato il colpo.
+
+Il testo esatto è nel [piano](../../set-base-plan.md#sb-16b--revisione-critica-delle-regole). Da qui è nata P5: rendere leggibili i
+colpi forti e rischioso l'accumulo.
+
+**Misure aggiuntive.** Stesso banco della Fase A: 2000 partite per cella, 480.000 per variante, stessi semi, stessa bozza. In tutto
+circa 6 minuti, 14 con la Fase A, sul tetto di un'ora.
+
+| Variante | Patte | Turni medi | Primo posto | Spazienzio–Beppe | Quota del mazzo di Mara | Quota del mazzo di Piera | Patte nello specchio di Piera |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| P1 | 9,4% | 13,54 | 0,503 | 0,395 | 0,489 | 0,491 | 15,9% |
+| P1 + pavimento | 11,1% | 13,45 | 0,502 | 0,395 | 0,518 | 0,480 | 34,1% |
+| P1 + pavimento + spareggio di inizio turno | 0,9% | 13,45 | 0,502 | 0,403 | 0,518 | 0,492 | 2,6% |
+| P1 + pavimento + corazza L/4 | 11,2% | 13,65 | 0,501 | 0,399 | 0,510 | 0,525 | 36,4% |
+| P1 + pavimento + corazza L/2 | 11,3% | 13,80 | 0,499 | 0,404 | 0,501 | 0,587 | 39,4% |
+
+- **Il pavimento** ferma a zero l'A di chi beve. Nello specchio di Piera tutte e due finiscono alla stessa velocità, quindi tornano i colpi
+  reciproci. Mara guadagna circa 3 punti, perché non va più in debito di A.
+- **I salvataggi in extremis** (D48) passano da 9.561 a 12.046 su 480.000 partite: con il pavimento qualunque cura rialza.
+- **La corazza a L/4** porta Piera a 0,525. Contro Spazienzio esce dai criteri: lui va a 0,334. Contro Beppe passa da 0,454 a 0,591.
+  Celestina guadagna circa 2 punti col Negroni Trovato per Terra (+10 L); perdono Beppe e Spazienzio, che colpiscono. Assorbe in media
+  3,8 HIT per partita, e con L/2 7,4.
+- **La ricerca non è misurata:** richiede carte e bot nuovi, e si misura in SB-16e.
+
+Contatori, dati e prototipo aggiornato sono in [`sb-16b/fase-b/`](sb-16b/fase-b/):
+- [confronto del pavimento](sb-16b/fase-b/confronto-pavimento.md);
+- [confronto della corazza](sb-16b/fase-b/confronto-alcol.md);
+- [contatori](sb-16b/fase-b/contatori.txt);
+- [diff del prototipo](sb-16b/fase-b/variante-regole-fase-b.diff), un esperimento sul commit `2e5a1ad`, non per l'adozione.
+
+**Verifiche della Fase B.** `python scripts/check-rules.py`, `python scripts/check-links.py` e `git diff --check` verdi. La build non è
+rilanciata: la Fase B cambia solo documenti ed evidenze.
 
 ## Matchup nelle quattro varianti
 
