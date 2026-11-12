@@ -313,7 +313,8 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-14 | Piera Ultimo Giro: bozza e giro | SB-13 | chiuso |
 | | SB-15 | Beppe Bulletta: bozza e giro | SB-14 | chiuso |
 | | SB-16 | Prova umana degli avanzati | SB-8, SB-15 | prossimo |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16 |  |
+| | SB-16b | Revisione critica delle regole (D49) | SB-12b, SB-16 |  |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16b |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -334,7 +335,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). **Prossimo:** le prove umane SB-12b e SB-16. SB-30 può
+e senza file del client. SB-8 approvato (D46). **Prossimo:** le prove umane SB-12b e SB-16, poi la revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49), poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -739,6 +740,37 @@ ferme in mano); specchi lunghi e patte (Celestina 22%, Piera 35%, Beppe contro P
 avanzato risulta forte: T iniziale di Celestina (D43); L iniziale di Piera, poi Estasi (D44); V iniziale di Beppe, poi la salute (D45).
 Un cambio di composizione di uno starter è un cambio della griglia e lo decide il proprietario.
 
+### SB-16b — Revisione critica delle regole
+
+**Origine ([D49](#decisioni-del-proprietario)).** Il proprietario, 12 novembre 2026, alla fine delle prove umane: «prevediamo a un punto opportuno di SB una attività di valutazione critica dello stato delle regole del gioco, in cui un agente potentissimo impersona un game designer esperto e analizza cosa potrebbe essere cambiato per rendere il gioco più divertente, più soddisfacente, complesso ma non inutilmente complicato, poi mi propone le cose che ha trovato. io farò lo stesso e gli dirò le miee idee e insieme decideremo come agire».
+
+**Perché qui** (punto scelto dalla regia, su delega del proprietario: «a un punto opportuno»). Dopo le prove umane dei cinque starter,
+con le impressioni fresche; prima di SB-17 e SB-18, così Sergio e Duccio nascono con le regole decise e gli eventuali giri da rifare
+riguardano solo i cinque starter; prima del resto del pool (SB-19) e della prima misura del set intero (SB-20).
+
+**Fase A — analisi del game designer.** Un esecutore col modello più potente disponibile e sforzo massimo impersona un game designer
+esperto. Legge il [regolamento](game-rules.md), il [documento del set](sets/base.md), le [schede dei personaggi](design/set-base/schede-personaggi.md),
+la [griglia](design/set-base/griglia.md), il [listino](design/set-base/listino.md), i rapporti dei giri coi bot e le impressioni delle prove
+umane SB-12b e SB-16; può giocare partite coi bot del runner. Cerca cosa cambiare nel sistema (regolamento) e, se serve, nel set, per un
+gioco più divertente e più soddisfacente, profondo ma non inutilmente complicato. Per ogni proposta: il problema, con l'evidenza; il cambio;
+l'effetto atteso al tavolo; il costo (regolamento, server, client, bot, giri di bilanciamento da rifare); i rischi e cosa si perde. Proposte
+in ordine di valore, anche «niente da cambiare» dove è il caso. Lavora da solo: le idee del proprietario arrivano in Fase B, e il prompt
+della Fase A chiede di non leggere l'elenco qui sotto. Le decisioni già prese ([D48](#decisioni-del-proprietario) e le precedenti) si
+rispettano o si discutono apertamente, con il motivo. Solo rapporto: nessuna modifica a regolamento, set, codice o test.
+
+**Fase B — confronto.** Il proprietario porta le sue idee; si discute proposta per proposta. Ogni scelta diventa una decisione registrata,
+compresa quella di non cambiare nulla.
+
+**Fase C — solo se si cambia qualcosa.** Prima il regolamento (1.14) o il documento del set, con versione e motivazione (AGENTS); poi test,
+server, catalogo, bot e client se toccati. I giri di bilanciamento da rifare si decidono secondo i cambi, con le parole del proprietario:
+«se dobbiamo rifare dei giri di bilanciamento a seguito di quei cambi, pace, li rifaremo, ma valuteremo a seconda di cosa vogliamo cambiare, se mai decidessimo che c'è da cambiare qualcosa». Può diventare più blocchi.
+
+**Idee del proprietario per la Fase B** (non fanno parte della Fase A):
+
+- **Alcol che riduce i danni ricevuti, come regola per tutti** (12 novembre 2026, durante le prove): «mi sa che il tasso alcolemico come risorsa non fa molto, potrebbe ridurre il danno? uno diventa insensibile al dolore quando è brillo»; alla scelta fra le sole carte
+  di Piera e una regola per tutti: «mi piacerebbe una regola per tutti, ma aspettiamo a cambiare le regole». Da pesare: oggi ALCOHOL è un costo e a fine turno toglie ALERTNESS (R06); con la regola il
+  «giro offerto» di Piera, che dà alcol a tutti gli avversari, li renderebbe più lenti ma anche più resistenti.
+
 ### SB-17, SB-18 — Personaggi da booster
 
 Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
@@ -950,6 +982,8 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D45 | Approvazione di SB-15 | 8 novembre 2026, con le parole del proprietario: «Approvo SB-15», alla domanda «Approvi SB-15 con le mie raccomandazioni?»; al passo 0 aveva deciso «Sì, tutto in SB-15» per la classe di «Lavoro fatto bene» nei sorgenti di test. Approvati: (1) le rarità della griglia nella bozza, formato `sb-6b/1`, partite invariate (chiude D44 punto 6); (2) le correzioni di Gigi salute 95, V iniziale 25, Chiave da tredici 12 CUT, «Lavoro fatto bene» a 5 V; (3) due giri invece di tre; (4) nome dello starter «Intervento sul posto»; (5) mazzo esaurito spesso e patte contro Pino tenuti fino a SB-16, come per Tossico e Pino; (6) Steal e Smontiamo tutto tenuti per la prova umana; (7) Mattone e SeagullFly ferme in mano da guardare alla prova umana: un cambio di composizione dello starter è un cambio della griglia e lo decide il proprietario. Se la prova umana trova Gigi forte, la prima leva è la V iniziale, poi la salute. Precisa D35, D38 e D44 |
 | D46 | Approvazione di SB-8 | 10 novembre 2026, con le parole del proprietario: «Approvo SB-8», alla domanda «Approvi SB-8?»; la fase A era approvata con «Approvo tutto» (le undici domande con le raccomandazioni, un blocco solo, solo server, prima di ogni fase B di C4 su questa macchina). Approvati: profilo di sviluppo `bozza` solo con `local` o `test` e mai con `heroku`, database separato, bozza letta da file; caricatore e carte Java di bozza in `server/src/main` dietro un'interfaccia di catalogo che lascia identico il percorso del gioco vivo; starter come mazzi pronti in open e riserva per quick, 1v1 e FFA; computer con uno stile euristico (predefinito `risorse`); nessun file del client. Per i giri di bilanciamento la regola «nessun diff in `server/src/main`» esclude ora `com.gsc.bm.sim` e `model/cards/base`. Sblocca le prove umane SB-12b e SB-16. Precisa D30 e D40 |
 | D47 | Costo in salute di Duccio (prima di SB-18) | 10 novembre 2026, con le parole del proprietario: «per duccio braccio teso va bene la raccomandazione della precedente regia». **Il costo in HEALTH resta** l'identità di Duccio Braccio Teso, come per Sant'Incasso (D27, D34 punto 5): meccanica invariata. Flavour: si preferiscono le letture «si fa male dandole» e «non arretra per principio»; «il martire della causa» si usa con cautela, perché per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola ([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)). Precisa D27 |
+| D48 | Morte in extremis: resta la regola 1.13 | 12 novembre 2026, con le parole del proprietario: «no, ci ho ripensato: lasciamolo così. ha un che di flavour, che uno in punto di morte, prima di accorgersi di essere morto, riesce a salvarsi in extremis». Alla prova umana Piera, portata sotto zero da un attacco di Spazienzio, si è curata con la mossa già presentata ed è sopravvissuta. Non è un difetto: R04 («Una mossa già presentata continua anche se l'autore muore prima di agire o durante il proprio effetto») con R06 («HEALTH <= 0 significa morto», esito a fine turno); il server lo fa così (`Character.isDead`). Il proprietario aveva chiesto la morte immediata salvo carte che lo prevedano, poi l'ha ritirata. Nessuna regola cambia; SB-16b può riparlarne solo dichiarandolo. |
+| D49 | Revisione critica delle regole (SB-16b) | 12 novembre 2026, con le parole del proprietario: «prevediamo a un punto opportuno di SB una attività di valutazione critica dello stato delle regole del gioco, in cui un agente potentissimo impersona un game designer esperto e analizza cosa potrebbe essere cambiato per rendere il gioco più divertente, più soddisfacente, complesso ma non inutilmente complicato, poi mi propone le cose che ha trovato. io farò lo stesso e gli dirò le miee idee e insieme decideremo come agire»; e «se dobbiamo rifare dei giri di bilanciamento a seguito di quei cambi, pace, li rifaremo, ma valuteremo a seconda di cosa vogliamo cambiare, se mai decidessimo che c'è da cambiare qualcosa». Blocco [SB-16b](#sb-16b--revisione-critica-delle-regole) dopo le prove umane SB-12b e SB-16 e prima di SB-17 (punto scelto dalla regia su delega). L'idea dell'alcol che riduce i danni per tutti («mi piacerebbe una regola per tutti, ma aspettiamo a cambiare le regole») passa alla Fase B. |
 
 ## Decisioni ancora aperte
 
