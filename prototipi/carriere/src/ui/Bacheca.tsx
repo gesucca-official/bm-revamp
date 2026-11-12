@@ -8,6 +8,7 @@ import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} f
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, sporco, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
+import {accartoccia, avanzaDanno, chiusiOra, danno, strappo, TEMPO_DANNO} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
@@ -25,6 +26,9 @@ const DESCRIZIONE: Record<StatoNodo, string> = {
   fatto: 'Fatto in questo giro.', aperto: 'Ancora raggiungibile in questo giro.', escluso: 'Chiuso in questo giro: un\'altra scelta l\'ha escluso.',
   nascosto: '',
 };
+
+/** Lo spazio per i pulsanti in alto, in verticale: due righe di pulsanti (Fase I). */
+export const ALTO_VERTICALE = 92;
 
 function useMisura() {
   const [m, setM] = useState({w: window.innerWidth, h: window.innerHeight});
@@ -47,7 +51,8 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const ultimo = g.nodo ?? g.visti.at(-1) ?? null;  // «sei qui»: dove si è, o l'ultimo nodo lasciato
   const comp = componi(c, s, ultimo, `Serraglio — carriera: ${c.titolo}`, verticale ? 12 : 13);
   // Spazio per i pulsanti: in orizzontale una fila in basso; in verticale una fila in alto e «Continua» in basso.
-  const d = disponi(comp, w, h, verticale ? 56 : 0, verticale ? 64 : 58);
+  // In verticale i pulsanti in alto stanno su due righe (Fase I): più spazio sopra la bacheca.
+  const d = disponi(comp, w, h, verticale ? ALTO_VERTICALE : 0, verticale ? 64 : 58);
   const {p, fs, fx, fy, fw, fh, T} = d;
   const [scelto, setScelto] = useState<string | null>(null);
   const [legendaAperta, setLegendaAperta] = useState(false);
@@ -69,7 +74,10 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     const forza = new URLSearchParams(window.location.search).has('allenta');  // per le catture e la registrazione
     const allenta = !ridotto && !caduta && (forza || siAllenta(`${c.id}:allenta:${g.numero}:${g.visti.length}`, false))
       ? letteraAllentata(comp.punti, `${c.id}:quale:${rimesse}`) : null;
+    const chiusi = comp.punti.filter(n => n.postit && n.stato === 'escluso').map(n => n.id);
     return {
+      // Fase I: i nodi che si sono chiusi dall'ultima volta, nello stesso giro: il loro post-it si strappa o si accartoccia davanti a noi.
+      chiusi: !ridotto && m ? chiusiOra({giro: m.giro ?? -1, chiusi: m.chiusi ?? []}, g.numero, chiusi) : [],
       scoperti: m && !ridotto ? scoperti(m.postit, comp.punti) : [],
       da: m && !ridotto && m.seiQui !== ultimo && esiste(m.seiQui) && esiste(ultimo) ? m.seiQui : null,
       caduta, rimesse, allenta,
@@ -80,6 +88,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const [rimesse, setRimesse] = useState(apertura.rimesse);
   const [viaggioFatto, setViaggioFatto] = useState(!apertura.da);
   const [postitFatti, setPostitFatti] = useState(!apertura.scoperti.length);
+  const [danniFatti, setDanniFatti] = useState(!apertura.chiusi.length);
   // Fase H: la mosca di questa apertura (una volta su due), e cosa le succede se la si tocca.
   // ?mosca e ?angolo (per le catture e le registrazioni) fanno arrivare subito la mosca e presto un angolo di post-it.
   const cerca = new URLSearchParams(window.location.search);
@@ -91,9 +100,11 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const caduta = lettera && fase !== 'attesa' && fase !== 'trema' && fase !== 'fine' && fase !== 'rientra' ? lettera : null;
   // La memoria si aggiorna a ogni cambio: «sei qui», post-it, lettera caduta, lettere rimesse.
   const postitOra = comp.punti.filter(n => n.postit).map(n => n.id).join(',');
+  const chiusiAdesso = comp.punti.filter(n => n.postit && n.stato === 'escluso').map(n => n.id).join(',');
   useEffect(() => {
-    salvaBacheca(c.id, {seiQui: ultimo, postit: postitOra ? postitOra.split(',') : [], caduta: caduta ? {id: caduta.id, k: caduta.k} : null, rimesse});
-  }, [c.id, ultimo, postitOra, caduta, rimesse]);
+    salvaBacheca(c.id, {seiQui: ultimo, postit: postitOra ? postitOra.split(',') : [], caduta: caduta ? {id: caduta.id, k: caduta.k} : null, rimesse,
+      chiusi: chiusiAdesso ? chiusiAdesso.split(',') : [], giro: g.numero});
+  }, [c.id, ultimo, postitOra, caduta, rimesse, chiusiAdesso, g.numero]);
 
   // Il posto della lettera allentata: dal disegno delle lettere (riga e posizione del carattere), non da una stima.
   const [posto, setPosto] = useState<Posto | null>(null);
@@ -156,7 +167,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     let id = 0, prima: number | null = null, ultimeCorde = -1, angoloK = 0;
     const angolo = svg.querySelector('[data-angolo]'), moscaG = svg.querySelector<SVGGElement>('[data-mosca]');
     // I passaggi si annunciano a React una volta sola: chiamarlo a ogni fotogramma lo farebbe ridisegnare tutta la bacheca per niente.
-    let postitAnnunciati = postitFatti, viaggioAnnunciato = viaggioFatto;
+    let postitAnnunciati = postitFatti, viaggioAnnunciato = viaggioFatto, dannoFinito = danniFatti || !apertura.chiusi.length;
     const passo = (ora: number) => {
       const dt = prima === null ? 0 : Math.min(0.1, (ora - prima) / 1000);
       prima = ora;
@@ -194,6 +205,24 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         filo?.setAttribute('x2', q.x.toFixed(1)); filo?.setAttribute('y2', q.y.toFixed(1));
         filo?.setAttribute('opacity', tv < 0 ? '0' : '1');
         if (tv >= 1) { viaggioAnnunciato = true; setViaggioFatto(true); }
+      }
+      // Fase I: i post-it dei nodi appena chiusi. Strappo: il pezzo che manca si stacca e cade. Accartocciato: la carta intera sopra si
+      // stringe e sparisce, sotto resta quella accartocciata.
+      if (!dannoFinito) {
+        for (const id of apertura.chiusi) {
+          const e = svg.querySelector(`[data-danno-anim="${id}"]`);
+          if (!e) continue;
+          if (danno(id) === 'strappo') {
+            const q = staccoPostit(t - TEMPO_DANNO.inizio, d.fondo - d.postitY[id]);
+            e.querySelector('.pezzo')?.setAttribute('transform', `translate(0 ${q.dy.toFixed(1)}) rotate(${(q.ruota * 1.5).toFixed(1)} ${d.postit.w / 2} ${d.postit.h})`);
+            e.setAttribute('opacity', q.opacita.toFixed(2));
+          } else {
+            const a = avanzaDanno(t), s = accartoccia(id, d.postit.w, d.postit.h).scala;
+            e.querySelector('.intero')?.setAttribute('transform', `scale(${(1 - (1 - s) * a).toFixed(3)})`);
+            e.setAttribute('opacity', (1 - a).toFixed(2));
+          }
+        }
+        if (t > TEMPO_DANNO.inizio + Math.max(TEMPO_DANNO.durata, 1.6)) { dannoFinito = true; setDanniFatti(true); }
       }
       // Fase H: ogni tanto un angolo di post-it si solleva e ricade, come per uno spiffero.
       if (angoli.length) {
@@ -255,7 +284,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [ridotto, fili, apertura, d, ultimo, posto, giu, gira, inizioViaggio, fineAperture, angoli, piano, schiacciata, presto]);
+  }, [ridotto, fili, apertura, d, ultimo, posto, giu, gira, inizioViaggio, fineAperture, angoli, piano, schiacciata, presto, danniFatti]);
 
   // Trascinare la lettera caduta: lasciata vicino al suo posto ci torna (e resta), altrove ricade in fondo.
   const punto = (ev: React.PointerEvent) => { const r = sopra.current!.getBoundingClientRect(); return {x: ev.clientX - r.left, y: ev.clientY - r.top}; };
@@ -296,7 +325,8 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     if (n.postit) {
       const {w: pw, h: ph} = d.postit;
       const py = d.postitY[n.id];
-      elementi.push(<Postit key={`p-${n.id}`} x={sp.x} y={py} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2} />);
+      elementi.push(<Postit key={`p-${n.id}`} x={sp.x} y={py} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2}
+        danno={n.stato === 'escluso' ? {tipo: danno(n.id), seme: n.id} : undefined} />);
       if (n.freccia) elementi.push(<Freccia key={`f-${n.id}`} x={sp.x - pw / 2 - fs * 0.75} y={py + ph * 0.62} fs={fs} />);
       box = {x: sp.x - pw / 2 - (n.freccia ? fs * 0.8 : 0), y: Math.min(sp.y - p, py), w: pw + (n.freccia ? fs * 0.8 : 0), h: py + ph - Math.min(sp.y - p, py)};
     } else {
@@ -332,7 +362,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     </g>
   );
   const colori = [...new Set(comp.punti.map(x => x.spillo.colore))];
-  const legenda = d.legenda ?? (legendaAperta ? {x: fx + p * 2, y: fy + 70, w: fw - p * 4, h: p * (LEGENDA.length * 1.25 + 1.4), righe: LEGENDA} : null);
+  const legenda = d.legenda ?? (legendaAperta ? {x: fx + p * 2, y: fy + ALTO_VERTICALE + 14, w: fw - p * 4, h: p * (LEGENDA.length * 1.25 + 1.4), righe: LEGENDA} : null);
   // Durante il viaggio la puntina «sei qui» e la sua cordicella nuova le disegna il movimento, non lo strato fermo.
   const inViaggio = !viaggioFatto && !!apertura.da && !!ultimo;
   const filoNuovo = inViaggio ? comp.fili.find(f => f.da === apertura.da && f.a === ultimo) : undefined;
@@ -375,6 +405,21 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         {!postitFatti && apertura.scoperti.map(id => {
           const n = comp.punti.find(x => x.id === id)!, {w: pw, h: ph} = d.postit;
           return <g key={`cade-${id}`} data-cade={id}><Postit x={d.pos[id].x} y={d.postitY[id]} w={pw} h={ph} ruota={n.inclinazione} fs={p * 2} /></g>;
+        })}
+        {/* Fase I: i post-it dei nodi appena chiusi che si strappano (il pezzo cade) o si accartocciano (la carta intera sparisce). */}
+        {!danniFatti && apertura.chiusi.map(id => {
+          const n = comp.punti.find(x => x.id === id);
+          if (!n) return null;
+          const {w: pw, h: ph} = d.postit, tr = `translate(${d.pos[id].x} ${d.postitY[id]}) rotate(${n.inclinazione})`;
+          if (danno(id) === 'strappo') {
+            const pezzo = strappo(id, pw, ph).pezzo;
+            return <g key={`danno-${id}`} data-danno-anim={id} transform={tr} pointerEvents="none">
+              <path className="pezzo" d={'M' + pezzo.map(q => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' L') + ' Z'} fill="url(#carta-postit)" stroke="rgba(0,0,0,.12)" strokeWidth={0.6} />
+            </g>;
+          }
+          return <g key={`danno-${id}`} data-danno-anim={id} pointerEvents="none">
+            <g className="intero-esterno"><g transform={tr}><g className="intero"><Postit x={0} y={0} w={pw} h={ph} ruota={0} fs={p * 2} /></g></g></g>
+          </g>;
         })}
         {/* L'angolo di post-it che si solleva: sotto si vede il feltro, sopra il retro della carta. */}
         {angoli.length > 0 && (

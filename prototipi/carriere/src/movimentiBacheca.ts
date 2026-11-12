@@ -219,3 +219,64 @@ export function mosca(p: PianoMosca, t: number): {x: number; y: number; angolo: 
 
 /** Toccata, la mosca o vola via (più spesso) o si schiaccia: deciso dai dati, una volta per mosca. */
 export const toccataMosca = (seme: string): 'vola' | 'schiaccia' => caso(`${seme}:toccata`)() < 0.65 ? 'vola' : 'schiaccia';
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Fase I: i nodi chiusi strappati o accartocciati. Un nodo non più raggiungibile in questo giro, ancora coperto dal post-it, ha il
+// post-it un poco strappato (un angolo lacerato, il pezzo che manca) o accartocciato (pieghe, bordi storti, un poco più piccolo). Il danno
+// si sceglie per nodo dai dati; si vede quando il nodo si chiude e poi resta; un nuovo giro rimette la carta intera.
+
+export type Danno = 'strappo' | 'accartocciato';
+/** Il danno di un nodo chiuso: sempre lo stesso per lo stesso nodo; strappi un po' più spesso. */
+export const danno = (id: string): Danno => (caso(`${id}:carta`)() < 0.55 ? 'strappo' : 'accartocciato');
+
+/** I nodi che si sono chiusi dall'ultima volta che si è vista la bacheca, nello stesso giro (un nuovo giro non strappa niente). */
+export const chiusiOra = (prima: {giro: number; chiusi: string[]} | null, giro: number, chiusi: string[]) =>
+  prima && prima.giro === giro ? chiusi.filter(id => !prima.chiusi.includes(id)) : [];
+
+/**
+ * Lo strappo: il contorno del post-it (in coordinate locali: x da -w/2 a w/2, y da 0 a h) con un angolo in basso lacerato, e il pezzo che
+ * manca. Il taglio va da un punto del bordo basso a uno del bordo laterale, con un orlo frastagliato; mai in alto, dove c'è la puntina.
+ */
+export function strappo(seme: string, w: number, h: number): {contorno: Pt[]; pezzo: Pt[]} {
+  const r = caso(`${seme}:strappo`);
+  const destra = r() < 0.6, s = destra ? 1 : -1;
+  const lato = (0.18 + r() * 0.14) * w, alto = (0.24 + r() * 0.18) * h;    // quanto è grande il pezzo: poco
+  const a = {x: s * (w / 2 - lato), y: h}, b = {x: s * w / 2, y: h - alto};
+  const orlo: Pt[] = [];
+  const n = 7;
+  for (let i = 1; i < n; i++) {
+    const u = i / n, j = (r() - 0.5) * Math.min(lato, alto) * 0.22;
+    orlo.push({x: a.x + (b.x - a.x) * u + j * 0.7, y: a.y + (b.y - a.y) * u + j});
+  }
+  const angolo = {x: s * w / 2, y: h};
+  // Il contorno, in senso orario partendo dall'angolo in alto a sinistra.
+  const contorno: Pt[] = destra
+    ? [{x: -w / 2, y: 0}, {x: w / 2, y: 0}, b, ...[...orlo].reverse(), a, {x: -w / 2, y: h}]
+    : [{x: -w / 2, y: 0}, {x: w / 2, y: 0}, {x: w / 2, y: h}, a, ...orlo, b];
+  return {contorno, pezzo: [a, ...orlo, b, angolo]};
+}
+
+/**
+ * Il post-it accartocciato: un contorno con i bordi storti (rientra un poco, a caso, lungo i quattro lati), qualche piega da un bordo
+ * all'altro e una scala un poco più piccola.
+ */
+export function accartoccia(seme: string, w: number, h: number): {contorno: Pt[]; pieghe: [Pt, Pt][]; scala: number} {
+  const r = caso(`${seme}:accartoccia`);
+  const rientro = () => (0.02 + r() * 0.06);
+  const contorno: Pt[] = [];
+  const passi = 4;
+  for (let i = 0; i < passi; i++) contorno.push({x: -w / 2 + (w * i) / passi + (i ? (r() - 0.5) * w * 0.06 : 0), y: i ? rientro() * h : 0});
+  for (let i = 0; i < passi; i++) contorno.push({x: w / 2 - rientro() * w, y: (h * i) / passi + (i ? (r() - 0.5) * h * 0.06 : 0)});
+  for (let i = 0; i < passi; i++) contorno.push({x: w / 2 - (w * i) / passi, y: h - rientro() * h});
+  for (let i = 0; i < passi; i++) contorno.push({x: -w / 2 + rientro() * w, y: h - (h * i) / passi});
+  const pieghe: [Pt, Pt][] = [];
+  for (let i = 0; i < 3; i++) {
+    const p0 = {x: (r() - 0.5) * w * 0.9, y: r() * h * 0.3}, p1 = {x: (r() - 0.5) * w * 0.9, y: h * (0.7 + r() * 0.3)};
+    pieghe.push(i % 2 ? [{x: -w / 2 + w * 0.05, y: p0.y + h * 0.3}, {x: w / 2 - w * 0.05, y: p1.y - h * 0.3}] : [p0, p1]);
+  }
+  return {contorno, pieghe, scala: 0.9 + r() * 0.04};
+}
+
+/** Quanto è avanzato il danno di un nodo appena chiuso, t secondi dopo l'apertura della bacheca (0 intero, 1 fatto). */
+export const TEMPO_DANNO = {inizio: 0.6, durata: 0.8};
+export const avanzaDanno = (t: number) => Math.min(1, Math.max(0, (t - TEMPO_DANNO.inizio) / TEMPO_DANNO.durata));

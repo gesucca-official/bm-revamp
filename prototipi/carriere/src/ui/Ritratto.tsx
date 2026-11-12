@@ -13,6 +13,8 @@ import {cast} from './dati.ts';
 import {componiBocca, conAlfaDi, controllaComposta, differenza, Maglia, type Sorgente} from './maglia.ts';
 
 const LARGHEZZA_SU_ALTEZZA = 1024 / 1536;
+/** ?testa=larga: la piega della testa con le ampiezze di prima della Fase I, per confrontare. */
+const TESTA_LARGA = new URLSearchParams(window.location.search).get('testa') === 'larga';
 
 export function useMovimentoRidotto(): boolean {
   const [r, setR] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -79,6 +81,8 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
   const p = cast.personaggi[chi];
   const modo = modoDi(livello, p?.animazione, espressione, ridotto);
   const controlli = modo === 'maglia' ? p?.animazione?.maglia ?? null : null;
+  // Fase I: il tempo delle sue animazioni (Piera molto più lenta); le dissolvenze degli stacchi restano brevi.
+  const f = p?.tempoAnimazioni ?? 1;
   const scatola = useRef<HTMLDivElement>(null);
   const tela = useRef<HTMLCanvasElement>(null);
   const ingresso = useRef(performance.now());
@@ -143,22 +147,22 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
     if (ridotto) { applica(inScena === null ? {...IN_SCENA, opacita: 0} : IN_SCENA); el.dataset.entrata = 'no'; return; }
     let id = 0;
     const passo = () => {
-      const ora = performance.now(), t = ora / 1000;
+      const ora = performance.now(), t = (ora / 1000) * f;
       const {parlando: parla, ultimo: u} = stato.current;
-      const daParola = parla && parola.current !== null ? (ora - parola.current) / 1000 : null;
-      const c = inScena === null ? {...IN_SCENA, opacita: 0} : comparsa(entrata, 'entra', (ora - inScena) / 1000);
+      const daParola = parla && parola.current !== null ? ((ora - parola.current) / 1000) * f : null;
+      const c = inScena === null ? {...IN_SCENA, opacita: 0} : comparsa(entrata, 'entra', ((ora - inScena) / 1000) * (entrata === 'stacco' ? 1 : f));
       el.dataset.entrata = inScena === null || c !== IN_SCENA ? 'si' : 'no';  // anche mentre aspetta di entrare
       if (modo === 'fermo') { applica(c); id = requestAnimationFrame(passo); return; }
-      if (maglia.current && suTela) maglia.current.disegna(t, parla, daParola, controlli, boccaAltra(t, parla, u), ora);
+      if (maglia.current && suTela) maglia.current.disegna(t, parla, daParola, controlli, boccaAltra(t, parla, u), ora, TESTA_LARGA);
       // Il rimbalzo per il cambio d'espressione solo dopo l'entrata; con la maglia l'immagine intera fa solo quello.
-      const daIngresso = inScena !== null && ingresso.current > inScena + 50 ? (ora - ingresso.current) / 1000 : 1000;
+      const daIngresso = inScena !== null && ingresso.current > inScena + 50 ? ((ora - ingresso.current) / 1000) * f : 1000;
       const posa = modo === 'maglia' ? movimento(undefined, 0, null, daIngresso) : movimento(ascolta ? undefined : espressione, t, daParola, daIngresso);
       applica(c, posa);
       id = requestAnimationFrame(passo);
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [modo, controlli, espressione, ascolta, altezza, base, larghezza, ridotto, entrata, inScena, suTela]);
+  }, [modo, controlli, espressione, ascolta, altezza, base, larghezza, ridotto, entrata, inScena, suTela, f]);
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const conImmagine = modo === 'fermo' || !suTela;
@@ -176,7 +180,8 @@ export function Ritratto({src, srcBocca, srcAlfa, alt, chi, espressione, ascolta
  * Chi esce di scena: l'ultima immagine del ritratto, che se ne va nel modo voluto (di lato, lontano, dissolta). Un'immagine semplice,
  * senza tela: dura meno di un secondo. Con il movimento ridotto non c'è.
  */
-export function Uscente({src, srcAlfa, altezza, alza, modo, ascolta}: {src: string; srcAlfa?: string | null; altezza: number; alza: number; modo: Entrata; ascolta: boolean}) {
+export function Uscente({src, srcAlfa, altezza, alza, modo, ascolta, tempo = 1}: {src: string; srcAlfa?: string | null; altezza: number; alza: number; modo: Entrata; ascolta: boolean;
+  /** Fase I: il tempo delle animazioni del personaggio (Piera esce lentissima); lo stacco resta breve. */ tempo?: number}) {
   const el = useRef<HTMLDivElement>(null);
   const larghezza = altezza * LARGHEZZA_SU_ALTEZZA;
   useEffect(() => {
@@ -185,14 +190,14 @@ export function Uscente({src, srcAlfa, altezza, alza, modo, ascolta}: {src: stri
     const t0 = performance.now();
     let id = 0;
     const passo = () => {
-      const c = comparsa(modo, 'esce', (performance.now() - t0) / 1000);
+      const c = comparsa(modo, 'esce', ((performance.now() - t0) / 1000) * (modo === 'stacco' ? 1 : tempo));
       e.style.transform = `translateX(-50%) translateY(${(-alza).toFixed(1)}px) translate(${(c.dx * larghezza).toFixed(1)}px, ${(c.dy * altezza).toFixed(1)}px) scale(${c.scala.toFixed(4)})`;
       Object.assign(e.style, stile(c, ascolta));
       if (c.opacita > 0) id = requestAnimationFrame(passo);
     };
     id = requestAnimationFrame(passo);
     return () => cancelAnimationFrame(id);
-  }, [modo, alza, altezza, larghezza, ascolta]);
+  }, [modo, alza, altezza, larghezza, ascolta, tempo]);
   return (
     <div ref={el} className="ritratto uscente" style={{width: larghezza, height: altezza, transform: `translateX(-50%) translateY(${(-alza).toFixed(1)}px)`}}
       data-testid="ritratto-uscente" data-uscita="si" data-src={src.split('/').pop()} aria-hidden="true">

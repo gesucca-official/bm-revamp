@@ -1,6 +1,7 @@
 // CA-0a, Fase D: i pezzi disegnati della bacheca (bacheca.md). Feltro, scanalature, lettere, cordicelle e sporco dal codice; cornice e
 // puntine dal codice finché non arrivano le immagini generate (prompt-bacheca.md, in docs/design/carriere/asset/bacheca/), poi da lì.
 import type {ReactNode} from 'react';
+import {accartoccia, strappo, type Danno} from '../movimentiBacheca.ts';
 import {caso, catenaria, DI_PLASTICA, GEOMETRIA, ROSSO_SEI_QUI, type Disposizione, type Filo, type Lettera, type Macchia, type Pt, type Spillo} from '../bacheca.ts';
 
 // Le immagini generate, se ci sono: Vite le trova con il glob; finché la cartella è vuota resta tutto disegnato dal codice.
@@ -171,7 +172,38 @@ export function Puntina({id, x, y, lato, s}: {id: string; x: number; y: number; 
   return <g><OmbraPuntina x={x} y={y} r={r} s={s} />{corpo}</g>;
 }
 
-export function Postit({x, y, w, h, ruota, fs}: {x: number; y: number; w: number; h: number; ruota: number; fs: number}) {
+/** Un contorno chiuso come percorso SVG, spostato di (dx, dy). */
+const percorso = (q: Pt[], dx = 0, dy = 0) => 'M' + q.map(p => `${(p.x + dx).toFixed(1)},${(p.y + dy).toFixed(1)}`).join(' L') + ' Z';
+
+export function Postit({x, y, w, h, ruota, fs, danno: d}: {x: number; y: number; w: number; h: number; ruota: number; fs: number;
+  /** Fase I: il post-it di un nodo chiuso, strappato o accartocciato. */ danno?: {tipo: Danno; seme: string}}) {
+  if (d?.tipo === 'strappo') {
+    const {contorno} = strappo(d.seme, w, h);
+    return (
+      <g transform={`translate(${x} ${y}) rotate(${ruota})`} data-danno="strappo">
+        <path d={percorso(contorno, 4, 6)} fill="rgba(0,0,0,.45)" filter="url(#sfoca)" />
+        <path d={percorso(contorno)} fill="url(#carta-postit)" />
+        <text x={0} y={h * 0.82} fontSize={fs} textAnchor="middle" className="penna">???</text>
+      </g>
+    );
+  }
+  if (d?.tipo === 'accartocciato') {
+    const {contorno, pieghe, scala} = accartoccia(d.seme, w, h);
+    return (
+      <g transform={`translate(${x} ${y}) rotate(${ruota}) scale(${scala.toFixed(3)})`} data-danno="accartocciato">
+        <path d={percorso(contorno, 3, 4)} fill="rgba(0,0,0,.45)" filter="url(#sfoca)" />
+        <path d={percorso(contorno)} fill="url(#carta-postit)" />
+        {pieghe.map(([a, b], i) => (
+          <g key={i}>
+            <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="rgba(0,0,0,.18)" strokeWidth={1.4} />
+            <line x1={a.x + 1} y1={a.y + 1} x2={b.x + 1} y2={b.y + 1} stroke="rgba(255,255,255,.35)" strokeWidth={0.8} />
+          </g>
+        ))}
+        <path d={percorso(contorno)} fill="rgba(0,0,0,.06)" />
+        <text x={0} y={h * 0.82} fontSize={fs} textAnchor="middle" className="penna">???</text>
+      </g>
+    );
+  }
   return (
     <g transform={`translate(${x} ${y}) rotate(${ruota})`}>
       <path d={`M${-w / 2 + 4},6 H${w / 2 + 5} V${h + 2} Q${w / 2},${h + 8} ${w / 2 - w * 0.15},${h + 6} H${-w / 2 + 4} Z`} fill="rgba(0,0,0,.45)" filter="url(#sfoca)" />

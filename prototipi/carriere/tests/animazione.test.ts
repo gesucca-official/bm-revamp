@@ -1,7 +1,7 @@
 // CA-0a, Fase E e F: le prove del movimento procedurale dei ritratti, della maglia, della scelta del modo dal cast e della bocca.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {comparsa, DURATA_ENTRATA, IN_SCENA} from '../src/animazione.ts';
+import {comparsa, DURATA_ENTRATA, gradiTesta, IN_SCENA, MASSIMO_TESTA} from '../src/animazione.ts';
 import {componiPixel, erodi, pesoEllisse} from '../src/ui/maglia.ts';
 import {FERMA, LIVELLI, boccaAllineata, boccaAltra, cambiatiFuoriBocca, deforma, modo, movimento, trasformazione, zonaBocca} from '../src/animazione.ts';
 import type {Cast} from '../src/formato.ts';
@@ -255,4 +255,21 @@ test('la bocca composta: il colore della versione «-bocca» solo dentro la zona
   assert.deepEqual(px(3, 10), [100, 100, 100, 120], 'sul bordo sfumato: il ritratto, con la sua trasparenza');
   assert.deepEqual(px(0, 0), [100, 100, 100, 0], 'fuori: il fondo trasparente, mai il velo');
   for (let k = 3; k < out.length; k += 4) assert.equal(out[k], a[k], 'la trasparenza è sempre quella del ritratto');
+});
+
+test('la testa più ferma (Fase I): mai oltre il tetto, meno di prima, e si muove ancora', () => {
+  const stretta = campioni(t => Math.abs(gradiTesta(t, true, (t * 7) % 1)), 0, 20, 0.01);
+  const larga = campioni(t => Math.abs(gradiTesta(t, true, (t * 7) % 1, true)), 0, 20, 0.01);
+  assert.ok(MASSIMO_TESTA <= 3 && Math.max(...stretta) < 3, `sotto i 3° (${Math.max(...stretta).toFixed(2)})`);
+  assert.ok(Math.max(...larga) > 6, `prima arrivava oltre i 6° (${Math.max(...larga).toFixed(2)})`);
+  assert.ok(Math.max(...stretta) > 1.5, 'ma ondeggia ancora');
+  const media = (v: number[]) => v.reduce((a, b) => a + b, 0) / v.length;
+  assert.ok(media(stretta) < media(larga) * 0.6, 'in media molto meno di prima');
+  assert.ok(Math.max(...campioni(t => Math.abs(gradiTesta(t, false, null)), 0, 20, 0.01)) < 2, 'in silenzio, meno ancora');
+});
+
+test('Piera si muove lentissima (Fase I): un fattore nel cast, gli altri a tempo normale', () => {
+  assert.equal(cast.personaggi.piera.tempoAnimazioni, 0.3, 'come la velocità del suo testo');
+  assert.equal(cast.personaggi.piera.tempoAnimazioni, cast.personaggi.piera.velocita);
+  for (const chi of ['mara', 'spazienzio']) assert.equal(cast.personaggi[chi].tempoAnimazioni ?? 1, 1);
 });

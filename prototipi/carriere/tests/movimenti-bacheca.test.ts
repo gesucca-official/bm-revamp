@@ -1,6 +1,7 @@
 // CA-0a, Fase G: la bacheca si muove. Cordicelle che oscillano, puntina che viaggia, post-it che si stacca, lettera che cade e torna.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {accartoccia, avanzaDanno, chiusiOra, danno, strappo, TEMPO_DANNO} from '../src/movimentiBacheca.ts';
 import {angoloPostit, DURATA_ANGOLO, durataMosca, mosca, pianoMosca, prossimoAngolo, toccataMosca, VOLO} from '../src/movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloCoda, cadutaLettera, filoMosso, letteraAllentata, oscillazione, premioLettere, PREMIO_LETTERE,
   scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio} from '../src/movimentiBacheca.ts';
@@ -150,4 +151,47 @@ test('la mosca: una volta su due, arriva in volo dal bordo, passeggia a piccoli 
   assert.deepEqual([fine.x, fine.y], [p.via.x, p.via.y]);
   const toccate = Array.from({length: 100}, (_, i) => toccataMosca(`t:${i}`));
   assert.ok(toccate.includes('vola') && toccate.includes('schiaccia') && toccate.filter(x => x === 'vola').length > 50, 'toccata, più spesso vola via');
+});
+
+test('i nodi chiusi: strappo o accartocciato, sempre lo stesso per lo stesso nodo; solo quelli chiusi ora, e un nuovo giro non strappa', () => {
+  const ids = Array.from({length: 200}, (_, i) => `nodo-${i}`);
+  const strappi = ids.filter(id => danno(id) === 'strappo').length;
+  assert.ok(strappi > 80 && strappi < 140, `di tutti e due i tipi (${strappi} strappi su 200)`);
+  assert.equal(danno('nodo-b'), danno('nodo-b'));
+  assert.deepEqual(chiusiOra({giro: 2, chiusi: ['a']}, 2, ['a', 'b']), ['b'], 'nello stesso giro: solo quelli chiusi dall\'ultima volta');
+  assert.deepEqual(chiusiOra({giro: 1, chiusi: []}, 2, ['a', 'b']), [], 'un giro nuovo: niente si strappa davanti a noi');
+  assert.deepEqual(chiusiOra(null, 1, ['a']), [], 'la prima volta che si vede la bacheca: niente');
+  assert.equal(avanzaDanno(0), 0); assert.equal(avanzaDanno(TEMPO_DANNO.inizio + TEMPO_DANNO.durata + 0.01), 1);
+  assert.ok(Math.abs(avanzaDanno(TEMPO_DANNO.inizio + TEMPO_DANNO.durata / 2) - 0.5) < 1e-9);
+});
+
+test('lo strappo: un angolo in basso lacerato, mai in alto dove c\'è la puntina; il pezzo che manca combacia con lo strappo', () => {
+  const w = 120, h = 70;
+  let frastagliati = 0;
+  for (let i = 0; i < 30; i++) {
+    const {contorno, pezzo} = strappo(`n${i}`, w, h);
+    for (const q of [...contorno, ...pezzo]) assert.ok(q.x >= -w / 2 - 6 && q.x <= w / 2 + 6 && q.y >= 0 && q.y <= h + 3, 'dentro il post-it');
+    assert.ok(pezzo.every(q => q.y >= h * 0.3), 'il pezzo sta in basso');
+    assert.equal(contorno.filter(q => q.y === 0).length, 2, 'il bordo alto resta intero');
+    assert.ok(pezzo.length >= 8, 'un orlo con molti punti');
+    // Frastagliato davvero: i punti dell'orlo si scostano dalla retta fra i due capi del taglio.
+    const [a, b] = [pezzo[0], pezzo[pezzo.length - 2]], l = Math.hypot(b.x - a.x, b.y - a.y);
+    const scarti = pezzo.slice(1, -2).map(q => Math.abs((b.x - a.x) * (a.y - q.y) - (a.x - q.x) * (b.y - a.y)) / l);
+    frastagliati += Math.max(...scarti) > 0.5 ? 1 : 0;
+    // Il pezzo è un angolo: uno dei suoi vertici è un angolo basso del post-it.
+    assert.ok(pezzo.some(q => q.y === h && Math.abs(Math.abs(q.x) - w / 2) < 1e-9));
+  }
+  assert.ok(frastagliati >= 25, `un orlo frastagliato, non un taglio dritto (${frastagliati} su 30)`);
+  assert.deepEqual(strappo('n1', w, h), strappo('n1', w, h), 'sempre lo stesso per lo stesso nodo');
+});
+
+test('il post-it accartocciato: bordi rientrati dentro il post-it, tre pieghe, un poco più piccolo', () => {
+  const w = 120, h = 70;
+  for (let i = 0; i < 30; i++) {
+    const {contorno, pieghe, scala} = accartoccia(`n${i}`, w, h);
+    assert.equal(contorno.length, 16);
+    for (const q of contorno) assert.ok(q.x >= -w / 2 - 6 && q.x <= w / 2 + 6 && q.y >= 0 && q.y <= h + 6, 'dentro il post-it');
+    assert.equal(pieghe.length, 3);
+    assert.ok(scala >= 0.9 && scala <= 0.94, 'poco più piccolo: sempre leggero');
+  }
 });

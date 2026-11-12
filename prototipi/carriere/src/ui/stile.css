@@ -194,8 +194,9 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 }
 @media (orientation: portrait) {
   .comandi-bacheca { top: 18px; left: 18px; right: 18px; }
-  .comandi-bacheca { gap: 4px; }
-  .comandi-bacheca button { flex: 1 1 0; min-width: 0; padding: 4px 1px; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Fase I: in Russo One le cinque etichette non stavano in una riga («Achieve…», «Nuovo g…»): due righe, tre colonne, niente tagli. */
+  .comandi-bacheca { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .comandi-bacheca button { min-width: 0; padding: 5px 2px; font-size: 13px; white-space: nowrap; }
   .azione-bacheca { left: 18px; right: 18px; bottom: 18px; }
   .azione-bacheca button { flex: 1; }
   .cartoncino { bottom: 84px; }

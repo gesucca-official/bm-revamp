@@ -153,7 +153,8 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       const modo: Entrata = t.ascolta || stacco.current ? 'stacco' : modoDi(prima.chi);
       const id = performance.now();
       setUscenti(x => [...x, {...prima, id, modo}]);
-      window.setTimeout(() => setUscenti(x => x.filter(u => u.id !== id)), DURATA_ENTRATA[modo] * 1000 + 100);
+      const tempo = modo === 'stacco' ? 1 : cast.personaggi[prima.chi]?.tempoAnimazioni ?? 1;
+      window.setTimeout(() => setUscenti(x => x.filter(u => u.id !== id)), (DURATA_ENTRATA[modo] / tempo) * 1000 + 100);
     }
     visto.current = chiOra && volto ? {chi: chiOra, src: volto, srcAlfa: ritrattoAlfa(chiOra, inQuadro!.espressione), ascolta: !!t.ascolta, alza} : null;
     stacco.current = !!t.ascolta;
@@ -171,7 +172,8 @@ export function Gioco({c, s, nome, eventi, azione, carattere, onCarattere, livel
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
-      {uscenti.map(u => <Uscente key={u.id} src={u.src} srcAlfa={u.srcAlfa} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={u.alza} modo={u.modo} ascolta={u.ascolta} />)}
+      {uscenti.map(u => <Uscente key={u.id} src={u.src} srcAlfa={u.srcAlfa} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={u.alza} modo={u.modo} ascolta={u.ascolta}
+        tempo={cast.personaggi[u.chi]?.tempoAnimazioni ?? 1} />)}
       {volto && <Ritratto key={inQuadro!.chi} src={volto} srcBocca={ritrattoBocca(inQuadro!.chi, inQuadro!.espressione)} srcAlfa={ritrattoAlfa(inQuadro!.chi, inQuadro!.espressione)} alt={nomeDi(inQuadro!.chi)} chi={inQuadro!.chi}
         espressione={inQuadro!.espressione} ascolta={!!t.ascolta} parlando={parla} ultimo={testoPieno[t.scritti - 1]} parole={parole}
         livello={livello} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={alza} entrata={entrata.current.modo} />}

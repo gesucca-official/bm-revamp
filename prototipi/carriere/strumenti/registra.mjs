@@ -1,6 +1,6 @@
 // Registrazioni (CA-0a). Fase G: g-bacheca.webm, la bacheca che si muove. Fase F (quelle della Fase E, e-*.webm, restano come erano): un breve video della prima scena
 // della prova, con i tre personaggi piegati dalla maglia come vuole il cast, la finestra a due righe e, se le versioni «-bocca» dei ritratti ci
-// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=fase-h, bacheca o scena per una sola parte.
+// sono, le bocche; e un foglio di fotogrammi dei tre. Per chi non apre il prototipo. Uso (dopo Build): node strumenti/registra.mjs, con BM_REGISTRA=fase-i, fase-h, bacheca o scena per una sola parte.
 // Uscita in BM_OUT, o in %TEMP%\bm-carriere-registra. Edge di sistema come le catture. Playwright registra i video con un suo ffmpeg, che qui
 // non c'è e non si scarica: i fotogrammi arrivano dallo screencast di Edge (CDP) e li codifica in webm il browser stesso (MediaRecorder).
 import {chromium} from '@playwright/test';
@@ -119,6 +119,47 @@ try {
     for (const p of pezzi) { const sposta = (tutti.at(-1)?.t ?? p[0].t) + (tutti.length ? 0.05 : 0) - p[0].t; tutti.push(...p.map(f => ({...f, t: f.t + sposta}))); }
     return tutti;
   };
+
+  // Fase I: la testa prima e dopo (?testa=larga rimette le ampiezze di prima), Piera lentissima, i nodi chiusi strappati o accartocciati.
+  // Una didascalia in basso dice che cosa si guarda.
+  if (quali === 'tutte' || quali === 'fase-i') {
+    const pezzi = [];
+    const didascalia = (page, testo) => page.evaluate(t => {
+      let d = document.getElementById('didascalia');
+      if (!d) {
+        d = document.createElement('div'); d.id = 'didascalia';
+        Object.assign(d.style, {position: 'fixed', left: '12px', top: '52px', zIndex: '99', background: 'rgba(0,0,0,.72)', color: '#fff', font: '15px sans-serif', padding: '6px 10px', pointerEvents: 'none'});
+        document.body.append(d);
+      }
+      d.textContent = t;
+    }, testo);
+    const pezzo = async (ctx, page, ms) => { const r = await registra(ctx, page); await page.waitForTimeout(ms); pezzi.push(await r.ferma()); };
+    for (const [cerca, testo] of [['?testa=larga', 'Testa: prima (Fase H)'], ['', 'Testa: dopo (Fase I), piegata meno']]) {
+      const {ctx, page} = await pagina('cast', cerca);
+      await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
+      await finoA(page, 'Spazienzio', 40);
+      await didascalia(page, testo);
+      await pezzo(ctx, page, 3000);
+      await ctx.close();
+    }
+    {
+      const {ctx, page} = await pagina('cast');
+      await tid(page, 'apri-prova').click(); await tid(page, 'mappa-continua').click();
+      await didascalia(page, 'Piera: entra, si muove e parla lentissima');
+      await pezzo(ctx, page, 4500);
+      await ctx.close();
+    }
+    {
+      const {ctx, page} = await pagina('cast');
+      await tid(page, 'apri-prova').click(); await tid(page, 'mappa').waitFor(); await page.waitForTimeout(400);
+      await tid(page, 'mappa-continua').click(); await tid(page, 'salta').click(); await tid(page, 'opzione-0').click();
+      await tid(page, 'mappa').waitFor();
+      await didascalia(page, 'Nodi chiusi: la cucina si accartoccia, il retro si strappa');
+      await pezzo(ctx, page, 3200);
+      await ctx.close();
+    }
+    await codifica(unisci(pezzi), 'i-testa-piera-nodi.webm');
+  }
 
   // Fase H: entrate, stacchi e bocche nelle scene; poi la bacheca viva (post-it che si stacca, mosca, angolo di post-it).
   if (quali === 'tutte' || quali === 'fase-h') {

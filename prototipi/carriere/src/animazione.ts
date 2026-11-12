@@ -101,13 +101,26 @@ const lisca = (a: number, b: number, x: number) => { const t = Math.min(1, Math.
  * Dove va un vertice (u, v) dell'immagine al tempo t. La testa ruota intorno al perno (annuisce quando parla, a ogni parola dà un cenno,
  * e si inclina piano); il busto si allarga e si alza un poco col respiro; il bordo basso e i punti lontani dalla testa non si muovono.
  */
-export function deforma(u: number, v: number, t: number, parlando: boolean, daParola: number | null, c: Controlli): {u: number; v: number} {
+/**
+ * Fase I («le animazioni sulla testa che oscilla distorcono un po' troppo»): ampiezze della piega più piccole e un tetto morbido. Prima la
+ * somma poteva superare i 7 gradi; ora resta sotto MASSIMO_TESTA. `larga` rimette le ampiezze di prima, per confrontare (?testa=larga).
+ */
+export const MASSIMO_TESTA = 3;
+export const AMPIEZZE_TESTA = {stretta: {parla: 1.4, quieta: 0.7, deriva: 1.0, cenno: 1.6}, larga: {parla: 2.6, quieta: 1.1, deriva: 1.8, cenno: 3}};
+/** Quanto gira la testa, in gradi: la somma dei moti, con il tetto morbido (si avvicina a MASSIMO_TESTA senza superarlo). */
+export function gradiTesta(t: number, parlando: boolean, daParola: number | null, larga = false): number {
+  const a = larga ? AMPIEZZE_TESTA.larga : AMPIEZZE_TESTA.stretta;
+  const cenno = daParola !== null && daParola >= 0 ? a.cenno * Math.exp(-daParola * 10) : 0;
+  const g = (parlando ? a.parla * onda(t, 1.3) : a.quieta * onda(t, 3)) + a.deriva * onda(t, 4.1, 0.7) + cenno;
+  return larga ? g : MASSIMO_TESTA * Math.tanh(g / MASSIMO_TESTA);
+}
+
+export function deforma(u: number, v: number, t: number, parlando: boolean, daParola: number | null, c: Controlli, larga = false): {u: number; v: number} {
   // Peso della testa: pieno sopra la quota «sopra», nullo sotto «sotto», e solo vicino all'asse della testa (le spalle restano ferme).
   const wv = 1 - lisca(c.testa.sopra, c.testa.sotto, v);
   const wu = 1 - lisca(c.testa.raggio * 0.75, c.testa.raggio * 1.25, Math.abs(u - c.testa.u));
   const wTesta = wv * wu;
-  const cenno = daParola !== null && daParola >= 0 ? 3 * Math.exp(-daParola * 10) : 0;
-  const gradi = (parlando ? 2.6 * onda(t, 1.3) : 1.1 * onda(t, 3)) + 1.8 * onda(t, 4.1, 0.7) + cenno;
+  const gradi = gradiTesta(t, parlando, daParola, larga);
   let x = u, y = v * c.aspetto;  // si ruota in pixel veri, non nelle coordinate stirate dell'immagine
   if (wTesta > 0) {
     const a = (gradi * wTesta * Math.PI) / 180, px = c.perno.u, py = c.perno.v * c.aspetto;

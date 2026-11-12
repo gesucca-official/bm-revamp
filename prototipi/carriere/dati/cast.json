@@ -30,6 +30,7 @@
       "nome": "Piera",
       "espressioni": ["brilla", "offesa", "assonnata", "contenta"],
       "velocita": 0.3,
+      "tempoAnimazioni": 0.3,
       "ritratto": "ritratti/piera-{espressione}.webp",
       "animazione": {"modo": "maglia", "espressioni": {"brilla": "movimento"},
         "maglia": {"perno": {"u": 0.5, "v": 0.42}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.32, "sotto": 0.42}, "busto": {"da": 0.45, "a": 0.9}, "aspetto": 1.5}},
