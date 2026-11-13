@@ -1,8 +1,8 @@
 # SB-16g — Coppie caricamento-colpo, seconda passata
 
-**Versione 0.1 — 13 novembre 2026. Fase 1: proposta da approvare, nessuna attuazione.**
+**Versione 0.2 — 13 novembre 2026. Fase 1 fatta; risposta 1 registrata in D59, altre risposte in corso. Nessuna attuazione.**
 
-| Starter | Caricamenti proposti / colpi | Slot che cedono nello starter | Risorse e colpo cercato, valori iniziali | Conseguenza raccomandata F |
+| Starter | Caricamenti proposti / colpi | Slot che cedono nello starter | Risorse e colpo cercato, valori iniziali | Conseguenza scelta F (D59) |
 |---|---|---|---|---|
 | Spazienzio | 2 PAZIENZA: FINITA + 1 **TI FACCIO SPAZIO** / 2 Impatti | Denti stretti 1 → 0 | Entrambi +25 V; il primo anche +15 A, il nuovo anche 6 HIT. Impatto: 25 V, 40 HIT | Vulnerabilità ×1,5 finché resta in mano la copia trovata, minimo due turni |
 | Mara | 2 Slalom + 1 **Ti stringo la curva** / 2 Sgommate | Spintone 2 → 0 | Slalom +20 A; nuova +15 A e 4 CUT. Sgommata: 15 A, 25 CUT | Stessa regola, legata alla Sgommata trovata |
@@ -12,7 +12,13 @@
 
 **Scelta di progetto proposta:** tre caricamenti per starter, due titoli che cercano lo stesso identico colpo; sei alternative di conseguenza confrontate sotto. Raccomando **F, vulnerabilità mantenuta mentre si trattiene il colpo**, per conservare la scelta richiesta all'inizio. **D, scartare e ripescare oppure tenere restando vulnerabili per un solo turno aggiuntivo**, è la via di mezzo meno severa. **C, scarto e pesca automatici**, è la candidata se si preferisce che l'annuncio scada davvero. **B, perdita permanente di uno spazio**, richiede una decisione di sistema più ampia e una protezione contro l'assenza di mosse.
 
-Tutti i numeri sono indicativi (D38), non risultati di simulazioni. Funzionamenti, composizioni e variante della conseguenza devono essere approvati prima della Fase 2 (D45.7). Questa consegna cambia soltanto questo documento.
+Tutti i numeri sono indicativi (D38), non risultati di simulazioni. Funzionamenti, composizioni e variante della conseguenza devono essere approvati prima della Fase 2 (D45.7). La proposta iniziale cambia soltanto questo documento; la registrazione delle risposte aggiorna anche il piano, su istruzione del proprietario.
+
+## Risposte registrate
+
+**D59 — Domanda 1, scelta F e durata minima (13 novembre 2026).** Il proprietario: «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?».
+
+Confermato: i due turni minimi sono il turno del tutore (N) e quello immediatamente successivo (N+1). Giocare o scartare il colpo entro N+1 non interrompe quel minimo; se la copia trovata resta in mano dopo N+1, la vulnerabilità continua finché esce. Le alternative A–E restano documentate come confronto, non candidate già autorizzate a un lotto. Tipi di danno, cumulo e altri dettagli della domanda 4 restano da decidere. Le altre domande e la divisione della Fase 2 devono ancora essere sottoposte; questa risposta non approva l’intera proposta. Decisione nel [piano](../../set-base-plan.md#decisioni-del-proprietario).
 
 ## Indicazioni del proprietario in questa sessione
 
@@ -321,11 +327,11 @@ Verifiche richieste dal brief: **`python scripts/check-links.py` verde, 292 file
 
 Non eseguiti in questa fase documentale: suite applicative/server/client, contesto Spring completo, nuove partite, simulazioni di bilanciamento, prove umane, verifiche visive o FFA. I dati riportati sono quelli storici identificati oppure calcoli nominali, non evidenze che le nuove carte funzionino o raggiungano D16/D51. Attesi e soglie dei test non cambiano. Il bilanciamento resta non dimostrato.
 
-**STOP alla Fase 1.** Anche una risposta alle domande seguenti va registrata come decisione prima dell'attuazione; nessuna Fase 2 in questa consegna.
+**STOP all’attuazione.** Fase 1 consegnata; risposte registrate progressivamente nel piano e in questa proposta. Nessuna Fase 2 in questa registrazione.
 
 ## Domande numerate al proprietario
 
-1. **Quale conseguenza scegli come candidata per la Fase 2?** Raccomando **F**, vulnerabilità finché resta in mano la copia trovata, minimo questo turno e il prossimo; **D** è la via di mezzo che lascia scegliere fra scartare/ripescare e un solo turno aggiuntivo di rischio. Restano confrontate A (rischio finito), B (spazio permanente), C (scarto/pesca automatici) ed E (spazio per un turno). Se vuoi un confronto numerico aggiuntivo, quale sola alternativa prioritaria mettiamo accanto alla candidata entro il budget esistente?
+1. **Risposta registrata: F, con due turni minimi (D59); confronto numerico aggiuntivo non scelto.** Domanda originaria: **Quale conseguenza scegli come candidata per la Fase 2?** Raccomando **F**, vulnerabilità finché resta in mano la copia trovata, minimo questo turno e il prossimo; **D** è la via di mezzo che lascia scegliere fra scartare/ripescare e un solo turno aggiuntivo di rischio. Restano confrontate A (rischio finito), B (spazio permanente), C (scarto/pesca automatici) ed E (spazio per un turno). Se vuoi un confronto numerico aggiuntivo, quale sola alternativa prioritaria mettiamo accanto alla candidata entro il budget esistente?
 2. **Approvi tre caricamenti e due colpi per ogni starter, con i cinque nuovi titoli e le sostituzioni della tabella?** Il set progettato arriva a 120 carte e 42 azioni d'archetipo; Mara e Beppe hanno una seconda copia della loro rara. Le generiche uscite dagli starter restano nel pool. Se vuoi conservare il totale 115 occorre scegliere altri cinque slot a cui rinunciare.
 3. **Approvi le direzioni di potenza e risorse delle cinque schede**, con numeri da tarare in Fase 2? In particolare: +25 V per finanziare Impatto, Sgommata già potente senza aumento, più POISON diretto e un po' di A per Celestina, L calcolata dopo il decadimento per Piera, Lavoro più forte e più caro per Beppe. I piccoli attacchi dei nuovi caricamenti e le risorse aggiunte ai vecchi sono funzionamenti espliciti, non approvati da D38 da sola.
 4. **Approvi l'esposizione ai tre tipi anche per Spazienzio e il legame alla precisa copia trovata?** Propongo nessuna conseguenza aggiuntiva se il colpo viene giocato e poi annullato/parato, o se viene realmente scartato per una bound; una ricerca fallita non crea un legame. In F restano due turni minimi e poi l'esposizione finisce all'uscita della copia. Due copie trattenute cumulano gli stati secondo R05: preferisci partire così, tarando il fattore, oppure chiedi subito una proposta senza cumulo?
