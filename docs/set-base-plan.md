@@ -7,7 +7,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parall
 ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
 ([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
 nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, domande risposte ([D54](#decisioni-del-proprietario)). **SB-16d attuata il 12 novembre 2026** (proposta approvata D55, invarianti e bound verdi; [rapporto](reports/set-base/sb-16d-report.md)). SB-16e, SB-16e2 (D56, D57), SB-16f0 e la prova umana [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti) fatti fra il 12 e il 13 novembre 2026. **Prossimo:** seconda passata sulle coppie caricamento-colpo, da decidere col proprietario, poi SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
+(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, domande risposte ([D54](#decisioni-del-proprietario)). **SB-16d attuata il 12 novembre 2026** (proposta approvata D55, invarianti e bound verdi; [rapporto](reports/set-base/sb-16d-report.md)). SB-16e, SB-16e2 (D56, D57), SB-16f0 e la prova umana [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti) fatti fra il 12 e il 13 novembre 2026. **Prossimo:** [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata), seconda passata sulle coppie caricamento-colpo, poi SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
 nell'[indice della documentazione](README.md#stato-corrente).
 
 Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
@@ -321,7 +321,8 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; (c) confermata, prima la prova umana (D57) |
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
+| | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | prossimo |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16g |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -342,7 +343,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 **Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
 SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
 SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, domande risposte (D54). SB-16d attuata (D55), invarianti e bound verdi. SB-16e, SB-16e2, SB-16f0 e la prova umana SB-16f fatti (D56, D57). **Prossimo:** seconda passata sulle coppie caricamento-colpo, da decidere col proprietario, poi SB-17. SB-30 può
+e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, domande risposte (D54). SB-16d attuata (D55), invarianti e bound verdi. SB-16e, SB-16e2, SB-16f0 e la prova umana SB-16f fatti (D56, D57). **Prossimo:** [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata), seconda passata sulle coppie caricamento-colpo, poi SB-17. SB-30 può
 essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
 
 ### SB-1 — Regole dei mazzi
@@ -959,12 +960,35 @@ della prova, da decidere col proprietario.
 
 **Lettura della regia sulla bozza di oggi** (variante c). Caricamento e colpo cercato: Spazienzio +15 V e +15 A, colpo 25 V per 40 HIT (il caricamento da solo non basta a pagarlo); Mara +15 A, colpo 15 A per 25 CUT; Celestina +10 T, colpo 10 T per 12 POISON; Piera +15 L e +35 A, colpo gratuito da 10 + L HIT; Beppe +10 V, colpo 5 V per 6 + 4 per oggetto HIT. Una sola carta di caricamento per starter. Oggi l'unico costo è l'esposizione per due turni, che nasce dal caricamento e non dal tenere il colpo.
 
-**Osservazioni assegnate:** tutte e quattro a una seconda passata sulle coppie caricamento-colpo dei cinque starter, prima di SB-17, da decidere col proprietario (proposta della regia: blocco SB-16g, con proposta approvata dal proprietario e giro coi bot). Il malus per chi non gioca il colpo il turno dopo è un funzionamento nuovo (D45, punto 7; D8).
+**Osservazioni assegnate:** tutte e quattro a una seconda passata sulle coppie caricamento-colpo dei cinque starter, prima di SB-17, da decidere col proprietario (blocco [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata), aperto il 13 novembre 2026). Il malus per chi non gioca il colpo il turno dopo è un funzionamento nuovo (D45, punto 7; D8).
 
 *Stato precedente.* **Stato al 13 novembre 2026: prossimo.** Si gioca con i numeri di SB-16e2, variante (c), sapendo che i criteri dei bot non sono
 raggiunti (specchi di Celestina e Piera, Piera contro Mara e Celestina, quattro incontri lunghi): [D57](#decisioni-del-proprietario).
 Da guardare anche quei finali, la leggibilità di SB-16f0 sul tavolo e se le partite sembrano lunghe. Dopo la prova si decide se
 ridisegnare le last resort o il finale degli specchi.
+
+### SB-16g — Coppie caricamento-colpo, seconda passata
+
+**Origine.** Le quattro osservazioni del proprietario nella prova umana [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti), tutte
+sulle carte che cercano i colpi annunciati: più frequenti (una o due per partita), risorse sufficienti a giocare il colpo cercato,
+colpi cercati potenti, una conseguenza per chi carica e non gioca il colpo il turno dopo. Aperto dal proprietario il 13 novembre 2026
+(«procediamo»), dopo la proposta della regia.
+
+**Fase 1 — proposta.** Per ciascuno dei cinque starter: quante carte di caricamento (copie o una seconda carta che cerca, con la
+composizione che cambia di conseguenza); cosa dà il caricamento rispetto al costo del colpo; quanto vale il colpo cercato; la
+conseguenza se il colpo non si gioca il turno dopo, scritta come andrebbe sulla carta, con le meccaniche esistenti (D8) o, se serve
+qualcosa di nuovo, dichiarandolo. Effetto atteso su patte, durata e criteri; cosa serve nella bozza e nei bot. Il funzionamento e la
+composizione li approva il proprietario (D45, punto 7): STOP dopo la proposta.
+
+**Fase 2 — attuazione e giro**, dopo l'approvazione. Carte nella bozza con i test; giro coi bot coi criteri di D16 e D51, al massimo
+3 giri e 2 ore di calcolo, delega dei numeri come D38; misure dedicate delle coppie (quante volte il caricamento è giocato, il colpo
+cercato giocato subito, tenuto, parato; quante volte scatta la conseguenza). Se i criteri non tornano, STOP con una proposta.
+
+**Completamento verificabile.** Proposta approvata e registrata come decisione; bozza e griglia aggiornate; invarianti e tetto delle
+bound a zero; rapporto con le misure delle coppie. Dopo, una breve prova umana del proprietario prima di SB-17.
+
+**Rischi.** Più caricamenti e colpi più forti accorciano le partite e cambiano gli incontri già misurati in SB-16e2. Il malus deve
+lasciare la scelta di tenere il colpo, con un prezzo: non deve diventare un obbligo.
 
 ### SB-17, SB-18 — Personaggi da booster
 
