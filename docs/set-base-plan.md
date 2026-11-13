@@ -984,8 +984,10 @@ composizione li approva il proprietario (D45, punto 7): STOP dopo la proposta.
 3 giri e 2 ore di calcolo, delega dei numeri come D38; misure dedicate delle coppie (quante volte il caricamento è giocato, il colpo
 cercato giocato subito, tenuto, parato; quante volte scatta la conseguenza). Se i criteri non tornano, STOP con una proposta.
 
+**Bot nella Fase 2** (13 novembre 2026, proposta della regia, «Si aggiungi» del proprietario). Oggi l'euristica di SB-16c legge solo la ricerca del round precedente, e in SB-16e il ritmo caricare-colpire non è automatico (Spazienzio attende in media 2,43 turni e lascia inutilizzate circa metà delle copie trovate). Due aggiunte: **(1)** i bot leggono le carte scoperte in mano finché restano lì (D58); **(2)** tre politiche su tenere o giocare il colpo cercato, misurate a confronto: «gioca sempre il turno dopo», «tieni se l'avversario si è parato», «a caso». Se i criteri reggono con tutte e tre, la conseguenza è robusta; se una politica domina, la conseguenza va rivista. I bot misurano numeri e casi estremi; se la scelta è interessante lo giudica la prova umana. Un bot che pianifica più turni avanti non fa parte di questo blocco.
+
 **Completamento verificabile.** Proposta approvata e registrata come decisione; bozza e griglia aggiornate; invarianti e tetto delle
-bound a zero; rapporto con le misure delle coppie. Dopo, una breve prova umana del proprietario prima di SB-17.
+bound a zero; rapporto con le misure delle coppie e delle tre politiche. Dopo, una breve prova umana del proprietario prima di SB-17.
 
 **Rischi.** Più caricamenti e colpi più forti accorciano le partite e cambiano gli incontri già misurati in SB-16e2. Il malus deve
 lasciare la scelta di tenere il colpo, con un prezzo: non deve diventare un obbligo.
