@@ -1,13 +1,15 @@
 # SB-16g, Fase 2a — Carta trovata a faccia in su e gettone di vulnerabilità
 
 13 novembre 2026. Base `2a0c9ca`. Autorizzata da [D68](../../set-base-plan.md#decisioni-del-proprietario) (divisione 2a/2b) con
-D58 e D64–D66; **rivista da [D69](../../set-base-plan.md#decisioni-del-proprietario)**.
+D58 e D64–D66; **rivista da [D69](../../set-base-plan.md#decisioni-del-proprietario)**, domande chiuse da
+[D70](../../set-base-plan.md#decisioni-del-proprietario).
 
 **Storia.** La prima consegna (`41ffadf`) legava la vulnerabilità alla copia esatta, con il minimo di due turni di D59. Alla
 consegna il proprietario ha confermato le domande, «però»: la carta scoperta è un promemoria; il gettone sta sul giocatore, è legato
 al **nome** e non ha timer. Le risposte di dettaglio sono in D69 (`9e4efce`). Questa revisione rifà motore, vista, client, test,
 catture e rapporto. In `41ffadf` restano solo come storia: il legame alla copia, il minimo, la preferenza della copia scoperta
-nella giocata per nome e lo scarto per identità.
+nella giocata per nome e lo scarto per identità. Le due domande di questa revisione hanno avuto risposta in D70 (`1daac7f`):
+durata della ricerca fallita confermata; una ricerca non può cercare un oggetto, ora rifiutato dal caricatore della bozza.
 
 Tutto il comportamento nuovo vale solo con le regole `d50` (profilo `bozza`, runner): con le regole vive 1.13 la partita è identica.
 Non toccati: regolamento, `docs/sets`, catalogo, SQLite, `bozza.json`, la [proposta](../../design/set-base/sb-16g-proposta.md)
@@ -45,8 +47,9 @@ fattore della carta e un id comune.
   dello stesso gruppo sono simultanee (D50, punto 1), quindi un colpo dello stesso gruppo è ancora moltiplicato.
 - Un caricamento annullato non dà né gettone né ricerca. A fine partita, all'eliminazione e al forfait i gettoni e le carte trovate
   del giocatore si tolgono; il risultato non cambia (domanda 3 confermata).
-- Un oggetto trovato va sul campo (D54) e non diventa una carta in mano: il gettone, se c'è, è quello a tempo. Caso non coperto da
-  test: nessuna carta di prova cerca un oggetto.
+- **Nessuna ricerca di oggetti (D70).** Il caricatore della bozza ([Draft](../../../server/src/main/java/com/gsc/bm/sim/Draft.java))
+  rifiuta un passo `search` che indica un oggetto: «una ricerca non può cercare un oggetto (D70)». La bozza attuale non ne ha. Il
+  motore conserva il comportamento di D54 (oggetto trovato sul campo, gettone a tempo), che una bozza valida non raggiunge più.
 
 **La carta trovata a faccia in su (D58, D69 d)** ([Player](../../../server/src/main/java/com/gsc/bm/model/game/Player.java)). È
 una vista, non uno stato fisico della carta. La copia trovata ha un id (lo stesso del suo gettone) e si mostra a tutti nella mano del
@@ -102,7 +105,7 @@ Il colore non porta da solo informazioni: fascia, gettone e nota sono scritti. N
 
 ## Test nuovi
 
-**Server**, [VulnerabilitaD69Test](../../../server/src/test/java/com/gsc/bm/sim/VulnerabilitaD69Test.java), 21 test su partite vere
+**Server**, [VulnerabilitaD69Test](../../../server/src/test/java/com/gsc/bm/sim/VulnerabilitaD69Test.java), 22 test: 21 su partite vere
 con le regole `d50` e carte di prova costruite nel test (bozza del repository non usata). Il danno si misura con un pugno HIT 10
 dell'avversario: 15 vuol dire ×1,5 attiva, 10 nessuna vulnerabilità.
 
@@ -119,6 +122,7 @@ dell'avversario: 15 vuol dire ×1,5 attiva, 10 nessuna vulnerabilità.
 | Riconnessione | `theViewIsRebuiltFromTheMatchAtReconnection` (vista uguale prima e dopo serializzazione e `restoreFrom`, e il gettone funziona ancora) |
 | Fine della partita | `theEndOfTheMatchDropsEveryTokenAndFaceUpCard`, `theEliminationOfTheOwnerDropsItsTokensWithoutChangingTheWinner`, `aForfeitEndsTheMatchAndDropsTheTokens` |
 | Regole vive, vista, bot, formato | `withTheLiveRulesNothingChanges`, `theLiveStatusesKeepTheirShapeInTheView`, `theBotViewReadsTheFaceUpCardsAndTheTokens`, `theDraftFormatDescribesSearchVulnerabilityFactorAndDuration` (anche il vecchio `minTurns` è rifiutato) |
+| Nessuna ricerca di oggetti (D70) | `aDraftSearchCannotTargetAnObject`: la bozza del Set Base passa; con PAZIENZA: FINITA che cerca un oggetto il caricatore la rifiuta |
 
 **Client**, [revealed.test.ts](../../../client-web/tests/revealed.test.ts), 7 test sulle viste reali registrate in
 `resolution-views.json`, con l'aggiunta dei soli campi nuovi:
@@ -137,12 +141,12 @@ Sul codice finale, una alla volta, nell'ordine della tabella.
 
 | Verifica | Esito |
 |---|---|
-| `./scripts/build.ps1 -Task Test -Offline` | Server **739 test, 0 falliti/errori, 10 saltati** (718 + 21); check-rules verde dentro la build; client-debug **37/37** |
+| `./scripts/build.ps1 -Task Test -Offline` | Server **740 test, 0 falliti/errori, 10 saltati** (718 + 22); check-rules verde dentro la build; client-debug **37/37** |
 | Banco SB-7 a regole 1.13 (`BenchMeasureTest#matrix`, 2000 partite per cella, 4 stili, `bozza.json`), base `2a0c9ca` contro codice finale | **Identico byte per byte**: stesso JSON e stesso testo, 240 celle, 480.000 partite, invarianti a zero |
-| Mutazioni server ([mutations-server.json](sb-16g-2a/mutations-server.json)) | **8/8 rilevate**, ciascuna da almeno un test che fallisce, sorgente ripristinato. Due giri prima del finale: una mutazione non compilava (rilevata per errore, corretta) e una sopravviveva perché il filtro «copia in mano» stava sia nel modello sia nelle viste; ho tolto il doppione delle viste e il flag ridondante `shown` |
+| Mutazioni server ([mutations-server.json](sb-16g-2a/mutations-server.json)) | **9/9 rilevate**, ciascuna da almeno un test che fallisce, sorgente ripristinato; la nona, sul divieto di D70, fatta a mano dopo le altre. Due giri prima del finale: una mutazione non compilava (rilevata per errore, corretta) e una sopravviveva perché il filtro «copia in mano» stava sia nel modello sia nelle viste; ho tolto il doppione delle viste e il flag ridondante `shown` |
 | Mutazioni client ([mutations-client.json](sb-16g-2a/mutations-client.json)) | **5/5 rilevate**, sorgente ripristinato |
 | Avvio reale del profilo bozza (jar rifatto, `local,bozza`, database temporaneo, client sulla 4320) | Partito; 2 partite con la bozza del repository e 5 con la copia temporanea, giocate dall'interfaccia, nessun errore di pagina ([captures-reale.json](sb-16g-2a/captures-reale.json), [captures-vulnerabilita.json](sb-16g-2a/captures-vulnerabilita.json)) |
-| `./scripts/build.ps1 -Task TestServerContext -Offline` | **856 test, 0 falliti/errori, 10 saltati** (835 + 21), 7:44 min. Le righe `MATCH_ARCHIVE_WRITE_FAILED` del log sono scenari di guasto voluti dai test. R3 non è comparso |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` | **857 test, 0 falliti/errori, 10 saltati** (835 + 22), 7:36 min, dopo D70. Le righe `MATCH_ARCHIVE_WRITE_FAILED` del log sono scenari di guasto voluti dai test. R3 non è comparso |
 | `python scripts/check-rules.py` | Verde, regolamento 1.13 e Set Base 0.1, SQLite integro |
 | `./client-web/run.ps1 -Task Test` | **345/345** (338 + 7) |
 | `./client-web/run.ps1 -Task Build` | Verde, solito avviso del bundler sui chunk |
@@ -182,7 +186,6 @@ Nessuno. R3 ([registro](../rossi-noti.md)) non è comparso in questo giro di `Te
 
 ## Non verificato
 
-- Oggetto trovato con un gettone: nessuna carta di prova cerca un oggetto (vedi sopra).
 - FFA: carte trovate e gettoni sono disegnati per ogni avversario, ma non ho catture né Playwright in FFA.
 - 750×292 e le matrici Playwright (`Verify`, `VerifyLayout`, `VerifyResolution`): non eseguite, come in SB-16f0 (`Verify` non gira
   sulla bozza). Con le regole vive i campi mancano e il disegno non cambia. Con la bozza la carta trovata prende il posto di un dorso
@@ -193,15 +196,15 @@ Nessuno. R3 ([registro](../rossi-noti.md)) non è comparso in questo giro di `Te
 
 ## Cosa giudica il proprietario
 
-- Se la revisione corrisponde a D69, in particolare la mia lettura di «fino al turno successivo» per la ricerca fallita: il turno del
-  caricamento e quello dopo, come il vecchio minimo.
+- Se la revisione corrisponde a D69 e D70.
 - Le catture: si capisce quale carta dell'avversario è stata vista e che cosa toglie il gettone?
 
 ## Domande numerate al proprietario
 
-1. **Ricerca fallita.** Il gettone a tempo dura il turno del caricamento e il successivo, scritto sulla carta come
-   `turnsIfNotFound: 2`. Va bene?
-2. **Oggetto trovato.** Se una ricerca trova un oggetto, che va sul campo, il gettone è quello a tempo, come per una ricerca fallita.
-   Va bene, anche se oggi nessuna carta cerca un oggetto?
+Nessuna aperta. Le due della revisione D69 hanno avuto risposta in **D70**:
+
+1. **Ricerca fallita.** Il gettone a tempo dura il turno del caricamento e il successivo, `turnsIfNotFound: 2`: «va bene».
+2. **Oggetto trovato.** «una ricerca per ora non può trovare un oggetto, non avrebbe senso»; eventuali tutori di oggetti, in futuro,
+   senza la penalità. Attuato come divieto nel caricatore della bozza.
 
 Il passo a 2b è confermato in D69: parte dopo la proposta aggiornata con le coppie concrete e la sua approvazione.

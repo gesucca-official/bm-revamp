@@ -563,6 +563,21 @@ class VulnerabilitaD69Test {
         }
     }
 
+    @Test
+    void aDraftSearchCannotTargetAnObject() throws Exception {
+        // D70: per ora una ricerca cerca solo carte che vanno in mano. La bozza com'è passa; con PAZIENZA: FINITA che cerca un oggetto
+        // il caricatore la rifiuta.
+        com.fasterxml.jackson.databind.node.ObjectNode root = (com.fasterxml.jackson.databind.node.ObjectNode) Draft.fromClasspath(Listino.SET_BASE).json();
+        Draft.parse("bozza.json", root.deepCopy());
+        for (JsonNode card : root.get("cards"))
+            if ("bruiser.Glare".equals(card.get("binding").asText()))
+                for (JsonNode step : card.get("self"))
+                    if ("search".equals(step.get("op").asText()))
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).put("card", "base.items.PosacenereDiVetro");
+        Exception refused = assertThrows(Exception.class, () -> Draft.parse("ricerca-di-oggetto.json", root));
+        assertTrue(refused.getMessage().contains("una ricerca non può cercare un oggetto (D70)"), refused.getMessage());
+    }
+
     private static List<Card> withStrikeOnTop(int fillers) {
         List<Card> deck = new ArrayList<>();
         deck.add(filler("Cima"));

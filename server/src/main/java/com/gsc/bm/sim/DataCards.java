@@ -362,7 +362,8 @@ final class DataCards {
 
     /**
      * SB-16c (D50, punto 6), solo con le regole del playground: la pesca che segue la mossa diventa la ricerca nel mazzo della carta
-     * indicata ({@code card}, un binding: il colpo cercato). La carta trovata si mostra a tutti nel rapporto della mossa e, da SB-16g
+     * indicata ({@code card}, un binding: il colpo cercato; mai un oggetto, D70, controllato dal caricatore della bozza).
+     * La carta trovata si mostra a tutti nel rapporto della mossa e, da SB-16g
      * 2a (D58, D69), resta disegnata a faccia in su nella mano finché il giocatore non gioca una carta con il suo nome o finché quella
      * copia non esce; se non c'è si pesca normalmente. Il passo non scrive righe: la riga la scrive la partita quando pesca. Con le
      * regole 1.13 non fa nulla.

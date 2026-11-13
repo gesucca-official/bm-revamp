@@ -806,6 +806,9 @@ final class Draft implements PlayerSource {
                 // SB-16c (D50, punto 6): la ricerca indica una carta della bozza che il set della carta vede.
                 if (!cards.containsKey(searched)) throw invalid(where, "search: " + searched + " non è una carta della bozza");
                 reach(spec.set, where, "la carta cercata", searched, cards.get(searched).set);
+                // SB-16g (D70): per ora una ricerca trova solo carte che vanno in mano, mai un oggetto.
+                if (probe(searched, where).isItem())
+                    throw invalid(where, "search: " + searched + " è un oggetto; una ricerca non può cercare un oggetto (D70)");
             }
             if (card.isCharacterBound()) {
                 if (!characters.containsKey(card.getBoundToCharacter()))
