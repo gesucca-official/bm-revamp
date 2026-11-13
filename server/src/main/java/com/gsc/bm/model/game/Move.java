@@ -59,6 +59,10 @@ public class Move implements Serializable {
     @JsonIgnore
     @ToString.Exclude
     private Card searchFound;
+    /** SB-16g 2a (D58): the id of the copy found, face up in the author's hand from now on; null if none went to the hand. */
+    @JsonIgnore
+    @ToString.Exclude
+    private Integer searchCopy;
 
     /**
      * SB-16f0 (D56): the search of this move as the view publishes it, null (absent) without a search, so always with the live
@@ -68,7 +72,7 @@ public class Move implements Serializable {
     @JsonProperty(value = "search", access = JsonProperty.Access.READ_ONLY)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public PublicSearch getPublicSearch() {
-        return searchedFor == null ? null : new PublicSearch(searchedFor, searchFound != null, searchFound);
+        return searchedFor == null ? null : new PublicSearch(searchedFor, searchFound != null, searchFound, searchCopy);
     }
 
     /** SB-16f0: the public search of a move: the binding searched for, whether found, and the revealed card (null if not found). */
@@ -79,6 +83,9 @@ public class Move implements Serializable {
         private final boolean found;
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private final Card revealed;
+        /** SB-16g 2a (D58): the id of the copy, the same as in the hand that holds it face up; absent if none went to the hand. */
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private final Integer copy;
     }
 
     /** The reason of a move voided because its author was down at the start of its speed group (D50, point 1). */
@@ -86,8 +93,14 @@ public class Move implements Serializable {
 
     /** Records the search that replaced the draw after this move and writes it in the move's report, shown to everyone. */
     public void recordSearch(String binding, Card found) {
+        recordSearch(binding, found, null);
+    }
+
+    /** SB-16g 2a: as above, with the id of the copy that stays face up in the author's hand (D58), or null. */
+    public void recordSearch(String binding, Card found, Integer copy) {
         this.searchedFor = binding;
         this.searchFound = found;
+        this.searchCopy = copy;
         appendReport(Card.CardTarget.SELF, found != null
                 ? "Searched the deck for " + binding + ": found " + found.getName() + " (shown to everyone)"
                 : "Searched the deck for " + binding + ": not in the deck, normal draw");

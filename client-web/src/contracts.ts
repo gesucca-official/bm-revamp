@@ -17,6 +17,12 @@ export interface Status {
   name: string; description: string; type: string; flow: string;
   impactedProperty: string; lastsForTurns: number | null; equip: boolean;
   singleUse: boolean; amountFunction: object; typeFunction: object;
+  /**
+   * SB-16g 2a (D59, D64–D66), playground rules only: a vulnerability of a charge, one status per damage type with the same
+   * `exposure`; `factor` multiplies the damage received; `heldBy` is the `copy` of the face-up card that holds it past its minimum
+   * (then `lastsForTurns` is -1). Absent on every other status.
+   */
+  exposure?: number; factor?: number; heldBy?: number;
 }
 export interface Character {
   name: string; bindingName: string; dead: boolean; itemsSize: number;
@@ -24,7 +30,12 @@ export interface Character {
   statuses: Status[]; immunities: Resource[];
   timers: {name: string; timer: number; callback: object}[]; sprite: string | null;
 }
-export interface Player {playerId: string; character: Character; cardsInHand: Card[] | number; deck: number}
+/**
+ * SB-16g 2a (D58), playground rules only: a copy found by a search, face up in its owner's hand for everyone until it is played or
+ * discarded. `copy` is its stable id, `turn` the turn it was found, `slot` its index in `cardsInHand` (own view only).
+ */
+export interface RevealedCard {copy: number; card: Card; turn: number; slot?: number}
+export interface Player {playerId: string; character: Character; cardsInHand: Card[] | number; deck: number; revealed?: RevealedCard[]}
 export interface Command {
   playedCardName: string; playerId: string; targetId: string; gameId: string;
   choices: Partial<Record<'DISCARD_ONE' | 'TARGET_ITEM', string>> | null;
@@ -34,7 +45,7 @@ export interface Command {
  * «a terra», D50 point 1) and the search that replaced its draw (D50 point 6): the binding searched for, whether a copy was found
  * and the card found, shown to everyone. Both are absent with the live rules.
  */
-export interface MoveSearch {card: string; found: boolean; revealed?: Card}
+export interface MoveSearch {card: string; found: boolean; revealed?: Card; copy?: number}
 export interface Move extends Command {
   void: boolean; moveReport: Partial<Record<'SELF' | 'OPPONENT', string[]>>;
   voidReason?: string; search?: MoveSearch;

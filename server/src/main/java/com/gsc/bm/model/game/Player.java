@@ -26,6 +26,28 @@ public class Player implements Serializable {
     private final List<Card> cardsInHand = new ArrayList<>();
     private final Stack<Card> deck = new Stack<>();
 
+    /**
+     * SB-16g 2a, playground rules only (D58): the copies found by a search and still in this hand, oldest first. Each one keeps its
+     * id and stays face up for everyone until it is played or discarded. The copy is the card object itself, not its name: another
+     * copy with the same name stays hidden. Always empty with the live rules.
+     */
+    @JsonIgnore
+    private final List<Revealed> revealed = new ArrayList<>();
+
+    /** SB-16g 2a (D58): a copy found by a search, face up in its owner's hand, with a stable id and the turn it was found. */
+    @Getter
+    public static final class Revealed implements Serializable {
+        private final int id;
+        private final Card card;
+        private final int turn;
+
+        public Revealed(int id, Card card, int turn) {
+            this.id = id;
+            this.card = Objects.requireNonNull(card);
+            this.turn = turn;
+        }
+    }
+
     private final Card lastResortCard;
     // Observation only: top of stack first, before dealing any item/action.
     private final List<String> initialDeckDrawOrder;
@@ -108,8 +130,27 @@ public class Player implements Serializable {
     }
 
     public void discardCard(Card card) {
-        if (!card.isCharacterBound() && !card.isBasicAction())
-            cardsInHand.remove(card);
+        if (card.isCharacterBound() || card.isBasicAction()) return;
+        // SB-16g 2a (D58): the very copy leaves, not the first one with its name. The card comes from this hand, so with the live
+        // rules this is the copy remove(Object) took before (cards are equal by name and the first equal one is the same object).
+        for (int i = 0; i < cardsInHand.size(); i++)
+            if (cardsInHand.get(i) == card) {
+                cardsInHand.remove(i);
+                return;
+            }
+        cardsInHand.remove(card);
+    }
+
+    /** SB-16g 2a (D58): whether this very copy is in hand. */
+    public boolean holds(Card card) {
+        for (Card c : cardsInHand) if (c == card) return true;
+        return false;
+    }
+
+    /** SB-16g 2a (D58): the face-up copy with this id, still in hand, or null. */
+    public Revealed revealedCopy(int id) {
+        for (Revealed r : revealed) if (r.id == id) return r;
+        return null;
     }
 
     @JsonIgnore

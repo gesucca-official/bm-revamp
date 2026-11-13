@@ -45,6 +45,8 @@ public class BotView {
         Seat seat;
         List<CardSeen> hand;
         int deckSize;
+        /** SB-16g 2a (D58): the own copies found by a search, face up for everyone; {@code slot} is their index in {@link #hand}. */
+        List<RevealedSeen> revealed;
     }
 
     @Value
@@ -52,6 +54,20 @@ public class BotView {
         Seat seat;
         int handSize;
         int deckSize;
+        /** SB-16g 2a (D58): the copies of this hand found by a search, face up for everyone until they leave it; no slot. */
+        List<RevealedSeen> revealed;
+    }
+
+    /**
+     * SB-16g 2a (D58), playground rules only: a face-up copy in a hand, as a human sees it: its stable id, the card, the turn it was
+     * found and, in the own hand only, its index. The vulnerability it holds, if any, is the statuses with {@code heldBy} = copy.
+     */
+    @Value
+    public static class RevealedSeen {
+        int copy;
+        CardSeen card;
+        int turn;
+        Integer slot;
     }
 
     @Value
@@ -81,6 +97,10 @@ public class BotView {
         boolean singleUse;
         boolean equip;
         Integer turnsLeft;
+        /** SB-16g 2a (D59, D64–D66): the id of the vulnerability this status belongs to, its factor, and the copy holding it. */
+        Integer exposure;
+        Float factor;
+        Integer heldBy;
     }
 
     @Value
@@ -137,10 +157,10 @@ public class BotView {
         Player me = game.getPlayers().get(playerId);
         List<Opponent> opponents = game.getPlayers().values().stream()
                 .filter(p -> !p.getPlayerId().equals(playerId))
-                .map(p -> new Opponent(seat(game, p), p.getCardsInHand().size(), p.getDeckSize()))
+                .map(p -> new Opponent(seat(game, p), p.getCardsInHand().size(), p.getDeckSize(), revealed(p, false)))
                 .collect(Collectors.toUnmodifiableList());
         return new BotView(game.getTurn(),
-                new Self(seat(game, me), cards(me.getCardsInHand()), me.getDeckSize()),
+                new Self(seat(game, me), cards(me.getCardsInHand()), me.getDeckSize(), revealed(me, true)),
                 opponents,
                 game.getResolvedMoves().stream().map(BotView::seen).collect(Collectors.toUnmodifiableList()),
                 reports(game.getTimeBasedEffects()), game.getRuleset());
@@ -206,9 +226,21 @@ public class BotView {
                 game.getForfeits().containsKey(player.getPlayerId()),
                 Collections.unmodifiableMap(resources), Set.copyOf(c.getImmunities()),
                 c.getStatuses().stream().map(s -> new StatusSeen(s.getName(), s.getDescription(), s.getType(), s.getFlow(),
-                        s.isSingleUse(), s.isEquip(), s.getLastsForTurns())).collect(Collectors.toUnmodifiableList()),
+                        s.isSingleUse(), s.isEquip(), s.getLastsForTurns(), s.getExposure(), s.getFactor(), s.getHeldBy()))
+                        .collect(Collectors.toUnmodifiableList()),
                 c.getTimers().stream().map(t -> new TimerSeen(t.getName(), t.getTimer())).collect(Collectors.toUnmodifiableList()),
                 c.getItemsSize(), cards(c.getItems()));
+    }
+
+    /** SB-16g 2a (D58): the face-up copies of a hand; the slot only for the own hand. Always empty with the live rules. */
+    private static List<RevealedSeen> revealed(Player player, boolean own) {
+        List<RevealedSeen> shown = new ArrayList<>();
+        for (Player.Revealed r : player.getRevealed()) {
+            int slot = -1;
+            for (int i = 0; i < player.getCardsInHand().size(); i++) if (player.getCardsInHand().get(i) == r.getCard()) slot = i;
+            if (slot >= 0) shown.add(new RevealedSeen(r.getId(), seen(r.getCard()), r.getTurn(), own ? slot : null));
+        }
+        return Collections.unmodifiableList(shown);
     }
 
     private static List<CardSeen> cards(Collection<Card> cards) {

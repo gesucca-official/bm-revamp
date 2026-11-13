@@ -7,6 +7,7 @@ import com.gsc.bm.model.game.Timer;
 import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
+import com.gsc.bm.model.game.status.Vulnerability;
 import com.gsc.bm.service.factories.CardFactoryService;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -50,6 +51,21 @@ public abstract class Character implements Serializable {
     public String takeRequestedSearch() {
         String requested = requestedSearch;
         requestedSearch = null;
+        return requested;
+    }
+
+    /** SB-16g 2a: the vulnerability the search step of the move being resolved gives its author (D59, D64), or null. */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private Vulnerability requestedVulnerability;
+
+    /** SB-16g 2a: a search step with a vulnerability (D59, D64): the engine applies it after the move, with the playground rules. */
+    public void requestVulnerability(Vulnerability vulnerability) { this.requestedVulnerability = vulnerability; }
+
+    /** The vulnerability asked for by the move just resolved, cleared. */
+    public Vulnerability takeRequestedVulnerability() {
+        Vulnerability requested = requestedVulnerability;
+        requestedVulnerability = null;
         return requested;
     }
 
@@ -102,7 +118,8 @@ public abstract class Character implements Serializable {
         List<Status> expiredStatuses = new ArrayList<>();  // concurrent access problem with foreach
         for (Status status : statuses) {
             status.aTurnIsPassed();
-            if (status.getLastsForTurns() != null && status.getLastsForTurns() < 0)
+            // SB-16g 2a (D59): a vulnerability held by a copy still in hand outlives its minimum.
+            if (status.getLastsForTurns() != null && status.getLastsForTurns() < 0 && status.getHeldBy() == null)
                 expiredStatuses.add(status);
         }
         statuses.removeAll(expiredStatuses);

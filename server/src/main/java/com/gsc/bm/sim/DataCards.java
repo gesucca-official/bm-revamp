@@ -21,6 +21,7 @@ import com.gsc.bm.model.game.status.StatusAmountFunction;
 import com.gsc.bm.model.game.status.StatusAmountTypeFunction;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
+import com.gsc.bm.model.game.status.Vulnerability;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -361,18 +362,29 @@ final class DataCards {
 
     /**
      * SB-16c (D50, punto 6), solo con le regole del playground: la pesca che segue la mossa diventa la ricerca nel mazzo della carta
-     * indicata ({@code card}, un binding). La carta trovata si mostra a tutti nel rapporto della mossa; se non c'è si pesca
-     * normalmente. Il passo non scrive righe: la riga la scrive la partita quando pesca. Con le regole 1.13 non fa nulla.
+     * indicata ({@code card}, un binding: il colpo cercato). La carta trovata si mostra a tutti nel rapporto della mossa e, da SB-16g
+     * 2a (D58), resta scoperta nella mano finché non esce; se non c'è si pesca normalmente. Il passo non scrive righe: la riga la
+     * scrive la partita quando pesca. Con le regole 1.13 non fa nulla.
+     * <p>
+     * SB-16g 2a (D59, D64–D66): {@code vulnerability}, facoltativo, è la conseguenza F del caricamento: i danni ricevuti dei tipi
+     * {@code damage} (predefiniti HIT, CUT e POISON) si moltiplicano per {@code factor} per almeno {@code minTurns} turni contando
+     * quello del caricamento (2: questo e il prossimo), poi finché la copia trovata da questa ricerca resta in mano. Esempio:
+     * {@code {"op":"search","card":"x.Colpo","vulnerability":{"factor":1.5,"minTurns":2}}}.
      */
     public static final class SearchStep implements Step {
         public String card;
+        public Vulnerability vulnerability;
 
         @Override public String apply(Character author, Character subject) {
             subject.requestSearch(card);
+            if (vulnerability != null) subject.requestVulnerability(vulnerability);
             return null;
         }
 
-        @Override public String missing() { return card == null || card.isBlank() ? "campo card mancante" : null; }
+        @Override public String missing() {
+            if (card == null || card.isBlank()) return "campo card mancante";
+            return vulnerability == null ? null : vulnerability.missing();
+        }
     }
 
     public static final class SayStep implements Step {

@@ -570,7 +570,9 @@ class RegoleD50Test {
         assertTrue(search.path("found").asBoolean());
         assertEquals("Colpo cercato", search.path("revealed").path("name").asText());
         assertEquals("t.Colpo cercato", search.path("revealed").path("bindingName").asText());
-        assertEquals(Set.of("card", "found", "revealed"), fieldNames(search), "solo binding, esito e carta rivelata");
+        // SB-16g 2a (D58): in più l'identità della copia, la stessa che la tiene scoperta nella mano.
+        assertEquals(Set.of("card", "found", "revealed", "copy"), fieldNames(search), "solo binding, esito, carta rivelata e sua copia");
+        assertEquals(search.path("copy"), forB.path("players").path("a").path("revealed").get(0).path("copy"));
         assertEquals(search, publicMove(forA, "a").path("search"), "la stessa ricerca per tutti");
         assertFalse(publicMove(forB, "a").has("voidReason"), "mossa non annullata: nessun motivo");
         assertFalse(publicMove(forB, "b").has("search"), "mossa senza ricerca: nessun campo");

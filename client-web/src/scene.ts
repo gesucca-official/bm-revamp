@@ -12,10 +12,11 @@ import {deckLabel,handNeighbour} from './a11y.ts';
 import {seatMark,heldBack} from './lifecycle.ts';
 import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
-import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
-export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
-export type Inspection={title:string;card?:Card;owner?:string};
+export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status'|'revealed';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
+/** `note`: SB-16g 2a, what a face-up copy says (who found it, when, the vulnerability it holds). */
+export type Inspection={title:string;card?:Card;owner?:string;note?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
 // Times in ms from the start of the sequence. A move card flies from its author, hits (`fly`, fraction of the flight) and then
 // goes to the author's discard (`after`). Other flights: a cost token rises, an object shrinks into its consumer, breaks,
@@ -180,6 +181,13 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    let len=name.length;while(title.height>maxTitle&&len>5){len--;title.text=name.slice(0,len)+'…';}this.fittedTitles.set(fitKey,`${title.style.fontSize}|${title.text}`);}
   if(sub&&!small)this.text(c,sub,0,-h/2+titleH-subH,subSize,w-12);
   this.text(c,footer,0,h/2-footH+3,small?Math.max(7,w*.085):Math.max(12,w*.10),w-10);return c;}
+ /** SB-16g 2a (D58): the own face-up copy this card of the hand is (by identity in the view), if any. */
+ private ownReveal(card:Card){const p=this.model.view.players[this.model.me],cards=Array.isArray(p?.cardsInHand)?p.cardsInHand:[];return p?.revealed?.find(r=>r.slot!==undefined&&cards[r.slot]===card);}
+ /** SB-16g 2a: the mark of a face-up copy, a band with its word (and the factor it holds) at the top or the bottom edge, and a light outline. */
+ private revealMark(c:Container,w:number,h:number,text:string,where:'top'|'bottom'){const g=new Graphics(),bh=Math.max(11,Math.min(22,h*.15)),y=where==='top'?-h/2-bh*.55:h/2-bh*.45;
+  g.roundRect(-w/2,-h/2,w,h,Math.min(8,w*.08)).stroke({color:0xf1e4c4,width:2});g.roundRect(-w/2-2,y,w+4,bh,bh*.3).fill(0x2c6262).stroke({color:0xf1e4c4,width:1.2});c.addChild(g);
+  // On the left, like everything on a face: the fan covers the right part of a card.
+  const t=this.text(c,text,0,y+bh*.12,bh*.68,undefined,0xfff6e2);t.anchor.set(0,0);t.x=-w/2+Math.min(6,w*.06);if(t.width>w-4)t.scale.set((w-4)/t.width);}
  // C2a card face: role stamp under the title, self gains on the art, cost coins and priority in the footer.
  // Everything sits on the left, which stays visible where the fan overlaps. short = unpaid cost resources.
  private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[],costMarks:Resource[]=[],gainMarks:Resource[]=[];const kind=frameOf(c),f=this.face(c.name,artIndex(c.bindingName),w,h,kind==='token'?'TOKEN':c.item?'OGGETTO':'',small,subtype(c),kind);
@@ -253,7 +261,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.world.addChild(c);return own?{values:{...r},reference:Object.fromEntries(RESOURCES.map(k=>[k,meter(0,start[k],k==='HEALTH').reference])),rows}:null;}
  // Statuses, equipment, immunities and timers as chips on the lower art of the character card.
  // Shape and short text carry the meaning; the summary opens on hover, tap or focus.
- private statusChips(b:Box,id:string,p:Player){const chips=chipsOf(id,p.character);if(!chips.length)return;
+ private statusChips(b:Box,id:string,p:Player){const chips=chipsOf(id,p.character,p.revealed);if(!chips.length)return;
   const ch=b.h,cw=Math.min(ch*1.7,b.w/chips.length),step=chips.length>1?Math.min(cw+2,(b.w-cw)/(chips.length-1)):0,fs=ch*.6;
   const fill={good:0x2c6262,bad:WINE,equip:0x86561b,immunity:0x343f6b,timer:INK};
   chips.forEach((chip,i)=>{const x=b.x-b.w/2+cw/2+i*step,y=b.y,c=new Container(),g=new Graphics();c.addChild(g);c.position.set(x,y);
@@ -344,7 +352,16 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const drawnItems:{name:string;frame:FrameKind}[]=[];
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
    if(id!==me){const final=p.cardsInHand as number,count=this.staged?.backs[id]??final,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=final;
-    for(let n=0;n<count;n++){const k=n-(count-1)/2,bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);}}
+    // SB-16g 2a (D58): the copies found by a search stay face up at the right end of the fan, inspectable. During a sequence only
+    // those found in an earlier round: the one found in this round arrives face up with its flight (SB-16f0).
+    const up=(p.revealed??[]).filter(r=>!this.staged||r.turn<view.turn-1).slice(-count),from=count-up.length;
+    for(let n=0;n<count;n++){const k=n-(count-1)/2,r=n>=from?up[n-from]:undefined;
+     if(!r){const bk=this.back(seat.back.w,seat.back.h);bk.position.set(b.x+k*f.step,b.y);bk.rotation=k*f.turn;this.world.addChild(bk);continue;}
+     const {w:bw,h:bh}=seat.back,c=this.card(r.card,bw,bh,true),note=revealedNote(r,this.name(id),p.character),hid=`revealed-${id}-${r.copy}`;
+     c.position.set(b.x+k*f.step,b.y);c.rotation=k*f.turn;this.revealMark(c,bw,bh,note.badge,'bottom');this.world.addChild(c);
+     const hit:Hit={id:hid,kind:'revealed',x:c.x,y:c.y,w:bw,h:bh,angle:c.rotation,target:{owner:id},label:`${r.card.name}, carta di ${this.name(id)}, ${note.label}`,node:c};this.hits.push(hit);
+     // Raised, it also comes down by half its height: the fan sits at the top edge of the table.
+     if(hover===hid||this.peek===hid||this.focused===hid){c.scale.set(1.6);c.y+=bh*.55;hit.y=c.y;hit.w*=1.6;hit.h*=1.6;raised.push(c);}}}
    const person=this.face(p.character.name,artIndex(p.character.bindingName),cw,ch,'PERSONAGGIO',true,'','character');person.position.set(x,y);person.rotation=id===me?-.04:.025;this.world.addChild(person);
    const dead=p.character.dead,forfeit=view.forfeits[id],mark=seatMark({dead,forfeit:!!forfeit},this.stamping.has(id));if(mark){person.alpha=.55;this.text(person,mark,0,0,compact?11:16,cw,0xffffff);}
    const r=p.character.resources,summary=RESOURCES.map(k=>`${LETTER[k]} ${r[k]??0}`).join(', ');
@@ -374,9 +391,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    // slot empty until cancelled. Never remove/reorder it in the authoritative hand.
    if(state.inPreview){hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:state.alpha,inPreview:true,face:null});return;}
    const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);c.alpha=state.alpha;
+   // SB-16g 2a (D58): the own copy found by a search is face up for everyone: marked, with the vulnerability it holds.
+   const shownUp=this.ownReveal(local.card),upNote=shownUp?revealedNote(shownUp,null,view.players[me].character):null;if(upNote)this.revealMark(c,H.w,H.h,upNote.badge,'top');
    // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
    const coming=this.arriving.has(local.key);if(coming)c.visible=false;
-   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${damageLabel(local.card,leftV(local.card,res))?`, danno ${damageLabel(local.card,leftV(local.card,res))}`:''}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
+   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${damageLabel(local.card,leftV(local.card,res))?`, danno ${damageLabel(local.card,leftV(local.card,res))}`:''}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}${upNote?`, ${upNote.label}`:''}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
    // O12: hover (mouse), tap (selection) or focus lifts the whole card; its hit keeps the old slot too, so it does not flicker.
    // O26: the bound's hand copy rests while its discard is still to be chosen,
    // including keyboard/pointer focus. The target preview and its controls stay.
@@ -481,7 +500,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   else if(this.model.selected&&!this.model.locked){this.dropPoint=null;if(!this.model.aim(hit.target!))this.model.cancel();}
   else if(hit.kind==='status'){this.openStatus=this.openStatus===id?null:id;this.draw();this.onState();}else this.inspect(id);
  }
- inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'||hit.kind==='preview'){const card=this.model.hand.find(x=>x.key===hit.key)!.card;this.onInspect({title:card.name,card});}
+ inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'||hit.kind==='preview'){const card=this.model.hand.find(x=>x.key===hit.key)!.card,up=this.ownReveal(card);this.onInspect({title:card.name,card,...(up?{note:revealedNote(up,null,this.model.view.players[this.model.me].character).text}:{})});}
+  else if(hit.kind==='revealed'){const owner=hit.target!.owner,p=this.model.view.players[owner],r=p.revealed?.find(x=>`revealed-${owner}-${x.copy}`===id);if(r)this.onInspect({title:r.card.name,card:r.card,owner,note:revealedNote(r,this.name(owner),p.character).text});}
   else if(hit.kind==='item'){const card=this.model.view.players[hit.target!.owner].character.items[hit.target!.itemIndex!];this.onInspect({title:card.name,card,owner:hit.target!.owner});}
   else this.onInspect({title:this.model.view.players[hit.target!.owner].character.name,owner:hit.target!.owner});}
  /** The status summary to show: hovered, focused or opened by a tap. */

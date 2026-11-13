@@ -156,17 +156,20 @@ Mossa esemplificativa, con valori segnaposto: non è stata inviata al server.
 }
 ```
 
-**V:** `choices` usa chiavi `DISCARD_ONE` e `TARGET_ITEM`; può essere null per carte senza scelta. La risposta di una mossa include `moveReport`, mappa SELF/OPPONENT di liste di stringhe, e il getter booleano void. Solo con le regole del playground (profilo `bozza`, D50) una mossa risolta può avere due campi opzionali, in sola lettura e assenti con le regole vive (SB-16f0, D56): `voidReason` (oggi solo `a terra`) e `search` (`card`, binding cercato; `found`; `revealed`, la carta trovata e mostrata a tutti, assente se non trovata). Un comando che li contiene è rifiutato come gli altri campi non ammessi. L'ID della partita nel body viene usato per scegliere il motore; quello nel path per i topic. Non c'è un confronto fra i due. [Move](../server/src/main/java/com/gsc/bm/model/game/Move.java), [GameController](../server/src/main/java/com/gsc/bm/api/ws/GameController.java).
+**V:** `choices` usa chiavi `DISCARD_ONE` e `TARGET_ITEM`; può essere null per carte senza scelta. La risposta di una mossa include `moveReport`, mappa SELF/OPPONENT di liste di stringhe, e il getter booleano void. Solo con le regole del playground (profilo `bozza`, D50) una mossa risolta può avere due campi opzionali, in sola lettura e assenti con le regole vive (SB-16f0, D56): `voidReason` (oggi solo `a terra`) e `search` (`card`, binding cercato; `found`; `revealed`, la carta trovata e mostrata a tutti, assente se non trovata; `copy`, da SB-16g 2a, l'identità della copia che da lì resta scoperta in mano, assente se nessuna copia è andata in mano, per esempio per un oggetto). Un comando che li contiene è rifiutato come gli altri campi non ammessi. L'ID della partita nel body viene usato per scegliere il motore; quello nel path per i topic. Non c'è un confronto fra i due. [Move](../server/src/main/java/com/gsc/bm/model/game/Move.java), [GameController](../server/src/main/java/com/gsc/bm/api/ws/GameController.java).
 
 | DTO | Campi significativi |
 |---|---|
 | ClientGameView | gameId; players: mappa ID→vista; resolvedMoves; timeBasedEffects: ID→string[]; over; winner (ID o `NONE`) |
-| ClientSelfPlayerView | playerId, character, cardsInHand: Card[], deck: numero |
-| ClientOpponentView | playerId, character, cardsInHand: numero, deck: numero |
+| ClientSelfPlayerView | playerId, character, cardsInHand: Card[], deck: numero; `revealed` facoltativo (sotto) |
+| ClientOpponentView | playerId, character, cardsInHand: numero, deck: numero; `revealed` facoltativo (sotto) |
 | ClientCharacterView | name, itemsSize, items, resources, statuses, immunities, timers, sprite; **non ha dead** |
+| RevealedCardView (SB-16g 2a) | copy: numero, card: Card, turn: numero; slot: numero solo nella propria vista |
 | Card | name, bindingName, effect HTML, flag item/basicAction/lastResort/characterBound, boundToCharacter, priority, cost, canTarget; AbstractCard aggiunge image/sprite |
 | UserAccountInfo | username, email, role, decks, collection |
 | UserGuiDeck | deckId, character: CharacterCardView, basicActionCard, lastResortCard, characterBoundCards[], regularCards[] |
+
+**Carte scoperte e vulnerabilità (SB-16g 2a, D58, D59, D64–D66), solo con le regole del playground.** `revealed` elenca le copie trovate da una ricerca che sono ancora nella mano, a faccia in su per tutti finché vengono giocate o scartate: `copy` è l'identità stabile (la stessa di `search.copy`), `turn` il turno in cui è stata trovata, `slot` l'indice in `cardsInHand`, solo per il proprietario. La mano avversaria resta un numero, che comprende le carte scoperte; nient'altro della mano o del mazzo è pubblico. Con più copie omonime in mano, giocare o scartare quel nome fa uscire per prima la copia scoperta più vecchia. Gli stati di una vulnerabilità (`statuses`, nome `Vulnerable`, uno per tipo di danno) hanno tre campi in più: `exposure` (l'identità della vulnerabilità, comune ai suoi stati), `factor` e `heldBy` (la `copy` che la tiene oltre il minimo, finché è in mano). `lastsForTurns` vale -1 quando il minimo è finito e la tiene la copia. Tutti questi campi mancano quando sono vuoti, quindi sempre con le regole vive. [Rapporto](reports/set-base/sb-16g-2a-report.md).
 
 Fonti: [ClientGameView](../server/src/main/java/com/gsc/bm/service/view/model/client/ClientGameView.java), [ClientCharacterView](../server/src/main/java/com/gsc/bm/service/view/model/client/ClientCharacterView.java), [Card](../server/src/main/java/com/gsc/bm/model/cards/Card.java), [UserGuiDeck](../server/src/main/java/com/gsc/bm/service/account/model/UserGuiDeck.java).
 

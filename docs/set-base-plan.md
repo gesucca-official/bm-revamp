@@ -321,7 +321,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; (c) confermata, prima la prova umana (D57) |
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
-| | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | Fase 1 fatta; risposte registrate D59–D68; divisione 2a/2b approvata; STOP alla registrazione, carte concrete da ripresentare |
+| | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | Fase 1 fatta; risposte registrate D59–D68; divisione 2a/2b approvata; **2a consegnata** il 13 novembre 2026 ([rapporto](reports/set-base/sb-16g-2a-report.md)), da rivedere; 2b non avviata, carte concrete da ripresentare |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16g |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -982,7 +982,7 @@ conseguenza se il colpo non si gioca il turno dopo, scritta come andrebbe sulla 
 qualcosa di nuovo, dichiarandolo. Effetto atteso su patte, durata e criteri; cosa serve nella bozza e nei bot. Il funzionamento e la
 composizione li approva il proprietario (D45, punto 7): STOP dopo la proposta.
 
-**Fase 2 — divisione approvata, non avviata (D68).**
+**Fase 2 — divisione approvata (D68). 2a consegnata il 13 novembre 2026** ([rapporto](reports/set-base/sb-16g-2a-report.md)): carta scoperta e vulnerabilità F nel motore con le regole `d50`, vista, client e test; regole vive invariate. Da rivedere, con cinque domande al proprietario. **2b non avviata.**
 
 - **2a — supporto tecnico e presentazione:** D58 (la copia cercata resta scoperta in mano), conseguenza F nel motore secondo D59 e D64–D66 (minimo turno del tutore e successivo, legame alla copia, tutti i danni, cumulo indipendente moltiplicativo), vista del server e client, con test. Supporto limitato al playground, senza trasferimento alla partita viva. La presenza dei test non equivale ad avvio applicativo riuscito: contesto Spring e avvio reale si verificano separatamente.
 - **2b — carte, bot e bilanciamento:** prima dell’inserimento nella bozza, ripresentare e far approvare coppie concrete e sostituzioni compatibili con D60–D63: 120 carte nel set, 20 regolari per starter; due copie di un caricamento NC verso due copie di un colpo NC e un diverso caricamento NC verso un raro. Poi carte nella bozza, relativi test e griglia coerenti, bot con mano scoperta e le tre politiche già decise, giro coi criteri D16/D51. Inclusa la valutazione della difesa dal POISON (D67), il cui eventuale funzionamento concreto richiede approvazione prima della modifica.
