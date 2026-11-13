@@ -1,6 +1,6 @@
 # SB-16g — Coppie caricamento-colpo, seconda passata
 
-**Versione 0.10 — 13 novembre 2026. Fase 1 fatta; risposte registrate D59–D67. Inclusa la valutazione della difesa dal POISON; carte concrete e divisione della Fase 2 ancora da completare/approvare. Nessuna attuazione.**
+**Versione 0.11 — 13 novembre 2026. Fase 1 fatta, risposte registrate D59–D68. Divisione della Fase 2 in 2a/2b approvata; carte concrete e sostituzioni da ripresentare prima della bozza. STOP dopo la registrazione, nessuna attuazione.**
 
 **Schema corrente approvato (D61–D62), uguale per tutti i cinque starter:**
 
@@ -58,6 +58,13 @@ Approvata la vulnerabilità a HIT, CUT e POISON per tutti i cinque starter, Spaz
 **D66 — Domanda 4, cumulo (13 novembre 2026).** Alla proposta di vulnerabilità indipendenti con fattori moltiplicati, il proprietario risponde: «approvo». Una ×1,5 dà danni ×1,5, due ×1,5 danno ×2,25. Giocare/scartare una copia chiude solo il suo prolungamento, rispettando i due turni minimi; gli altri effetti restano. Non si introduce un tetto o uno stato unico condiviso. Fattori e potenza delle carte si tarano insieme nella Fase 2. La domanda 4 è chiusa; la domanda 5 sulla capacità della mano non si applica, essendo stata scelta F anziché B/E.
 
 **D67 — Domanda 6, valutazione della difesa dal POISON (13 novembre 2026).** Alla domanda «Vuoi includere questa valutazione?», riferita all’eventuale estensione di una difesa regolare esistente al POISON conservando il premio di risorse o cura, il proprietario risponde: «si includiamola». La valutazione entra nella Fase 2; carta candidata e funzionamento concreto devono essere presentati e approvati prima della modifica. Nessun nuovo effetto è già autorizzato da questa risposta. Leggibilità del legame pubblico già compresa in D58; premi condizionati alla ricerca e ridisegno delle last resort restano ipotesi non approvate. Non si riapre il cumulo già deciso in D66.
+
+**D68 — Divisione della Fase 2 (13 novembre 2026).** Alla proposta della divisione seguente, con attuazione ferma, il proprietario risponde: «approvo».
+
+- **2a:** D58 (copia cercata scoperta in mano), conseguenza scelta nel motore, vista server e client, con test. Include minimo di due turni, legame alla copia, vulnerabilità a tutti i danni e cumulo indipendente moltiplicativo (D59, D64–D66).
+- **2b:** carte nella bozza, relativi test e griglia coerenti, bot con le tre politiche e giro di bilanciamento entro tre giri e due ore cumulative di calcolo, con criteri D16/D51 invariati. Inclusa la valutazione della difesa POISON (D67).
+
+**Condizioni conservate:** prima di inserire le carte nella bozza vanno ripresentate e approvate coppie concrete e sostituzioni aggiornate allo schema di rarità D61–D63. Anche la difesa POISON deve avere una proposta concreta approvata prima della modifica. La divisione non amplia il budget e non è un comando di avvio. **Fase 1 fatta, risposte registrate; STOP dopo la registrazione documentale.** Le vecchie schede a un solo bersaglio non diventano carte approvate con D68.
 
 ## Indicazioni del proprietario in questa sessione
 
@@ -366,7 +373,7 @@ Verifiche richieste dal brief: **`python scripts/check-links.py` verde, 292 file
 
 Non eseguiti in questa fase documentale: suite applicative/server/client, contesto Spring completo, nuove partite, simulazioni di bilanciamento, prove umane, verifiche visive o FFA. I dati riportati sono quelli storici identificati oppure calcoli nominali, non evidenze che le nuove carte funzionino o raggiungano D16/D51. Attesi e soglie dei test non cambiano. Il bilanciamento resta non dimostrato.
 
-**STOP all’attuazione.** Fase 1 consegnata; risposte registrate progressivamente nel piano e in questa proposta. Nessuna Fase 2 in questa registrazione.
+**STOP all’attuazione.** Fase 1 fatta e risposte registrate nel piano e in questa proposta (D59–D68). Divisione 2a/2b approvata; carte concrete aggiornate ancora da ripresentare prima della bozza. Nessuna Fase 2 avviata con questa registrazione.
 
 ## Domande numerate al proprietario
 
@@ -376,3 +383,5 @@ Non eseguiti in questa fase documentale: suite applicative/server/client, contes
 4. **Risposte registrate D64–D66: approvati vulnerabilità a tutti i danni, legame alla precisa copia, uscita effettiva, ricerca fallita e cumulo moltiplicativo indipendente. Domanda chiusa.** Domanda originaria: **Approvi l'esposizione ai tre tipi anche per Spazienzio e il legame alla precisa copia trovata?** Propongo nessuna conseguenza aggiuntiva se il colpo viene giocato e poi annullato/parato, o se viene realmente scartato per una bound; una ricerca fallita non crea un legame. In F restano due turni minimi e poi l'esposizione finisce all'uscita della copia. Due copie trattenute cumulano gli stati secondo R05: preferisci partire così, tarando il fattore, oppure chiedi subito una proposta senza cumulo?
 5. **Non applicabile dopo la scelta F (D59), nessuna decisione sulla capacità richiesta.** Domanda condizionata originaria: **Solo se preferisci B o E:** approvi il minimo di quattro carte di capienza, per lasciare sempre almeno uno spazio regolare accanto a basic e bound? La versione permanente senza limite può violare «sempre una mossa legale» nei mazzi con più coppie. Per B/E serve approvare anche il costo tecnico della capacità variabile; non basta lo scarto senza pesca.
 6. **Risposta registrata in D67: inclusa la valutazione della difesa dal POISON; funzionamento concreto da presentare prima di ogni modifica. Le altre ipotesi non sono approvate.** Domanda originaria: **Quali ulteriori migliorie vuoi valutare nella Fase 2?** Raccomando prima la risposta al POISON e la leggibilità del legame pubblico; ricompense condizionate alla ricerca, regola di non cumulo e ridisegno delle last resort restano ipotesi separate, da scegliere solo se utili. Nessuna di queste viene attuata con questa proposta.
+
+**Divisione 2a/2b: approvata in D68.** Si chiude la registrazione delle risposte; nessuna ulteriore approvazione è dedotta per le carte concrete da ripresentare. STOP all’attuazione.
