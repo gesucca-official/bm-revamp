@@ -1,0 +1,20 @@
+{
+  "base": "d701089",
+  "rules": "1.13",
+  "games": 480000,
+  "cells": 240,
+  "files": [
+    {
+      "file": "json",
+      "bytes": 266869,
+      "sha256": "8ebcb6ab8913bea6af02f4ce0f913c5ee037b60554998d0d685813eb0bad34a7",
+      "identical": true
+    },
+    {
+      "file": "md",
+      "bytes": 26112,
+      "sha256": "aa0ea7695c16f8a6a9c9d211dd2be625b9879c0f5a8a03b069446e502e8d42a6",
+      "identical": true
+    }
+  ]
+}

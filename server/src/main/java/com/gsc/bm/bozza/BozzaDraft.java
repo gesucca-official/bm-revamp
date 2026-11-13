@@ -2,6 +2,8 @@ package com.gsc.bm.bozza;
 
 import com.gsc.bm.model.game.bot.AggressivePolicy;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.game.bot.SoughtHitPolicy;
+import com.gsc.bm.model.game.bot.RandomPolicy;
 import com.gsc.bm.model.game.bot.PrudentPolicy;
 import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.bot.ResourceAwarePolicy;
@@ -102,6 +104,7 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
         described.put("com", this.com);
         described.put("bot", this.bot);
         described.put("rules", this.ruleset.id());
+        if (this.ruleset.playground()) described.put("soughtHitTiming", SoughtHitPolicy.Timing.ALWAYS.name());
         this.identity = Collections.unmodifiableMap(described);
     }
 
@@ -135,7 +138,9 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
     /** A new heuristic policy for one computer player, or null for the live random ComPlayer. */
     public BotPolicy newPolicy() {
         Supplier<BotPolicy> style = STYLES.get(bot);
-        return style == null ? null : style.get();
+        BotPolicy base = style == null ? null : style.get();
+        return ruleset.playground() ? new SoughtHitPolicy(base == null ? new RandomPolicy() : base,
+                SoughtHitPolicy.Timing.ALWAYS) : base;
     }
 
     @Override

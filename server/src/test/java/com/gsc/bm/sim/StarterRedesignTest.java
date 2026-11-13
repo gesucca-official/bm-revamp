@@ -137,13 +137,13 @@ class StarterRedesignTest {
             assertEquals(1, a.getDeckSize(), "ricerca al posto della pesca, non aggiuntiva");
             BotView publicView = BotView.of(g, "b");
             BotView.Seat visible = publicView.getOpponents().get(0).getSeat();
-            assertEquals(pair.charge.equals("bruiser.Glare") ? 1 : 3, visible.getStatuses().size());
+            assertEquals(3, visible.getStatuses().size());
             for (BotView.StatusSeen s : visible.getStatuses()) {
-                assertTrue(s.getName().contains(draft.card(pair.hit).getName()), "il nome del colpo è pubblico");
+                assertEquals(draft.card(pair.hit).getName(), s.getUntilPlayed(), "D71: il nome è sul gettone");
                 assertTrue(s.getDescription().contains(draft.card(pair.hit).getName()));
                 assertEquals(StatusType.BAD, s.getType());
                 assertEquals(StatusFlow.INPUT, s.getFlow());
-                assertEquals(0, s.getTurnsLeft(), "dopo il primo fine turno resta il turno successivo");
+                assertNull(s.getTurnsLeft(), "D71: nessun timer finché il nome è disponibile");
             }
             assertEquals(pair.hit, publicView.getLastRound().stream().filter(m -> m.getPlayerId().equals("a"))
                     .findFirst().orElseThrow().getSearchFound().getBinding());
@@ -184,7 +184,7 @@ class StarterRedesignTest {
             assertEquals(pair.hit, resolved(g, "a").getSearchedFor());
             assertNull(resolved(g, "a").getSearchFound());
             assertTrue(holds(a, NORMAL)); assertFalse(holds(a, pair.hit));
-            assertFalse(a.getCharacter().getStatuses().isEmpty(), "esposizione anche se la ricerca manca");
+            assertTrue(a.getCharacter().getStatuses().isEmpty(), "D72: nessuna esposizione se la ricerca manca");
         }
     }
 
@@ -213,21 +213,17 @@ class StarterRedesignTest {
     }
 
     @Test
-    void exposureAmplifiesTheAdvertisedTypesForExactlyTwoTurns() {
+    void everyChargeAmplifiesAllTypesWhileItsNameHasNotBeenPlayedD64D71() {
         for (Pair pair : PAIRS) for (Damage.DamageType type : Damage.DamageType.values()) {
-            Character c = draft.character(draft.characterOf(pair.deck));
-            c.useRuleset(Ruleset.D50);
-            for (Resource r : Resource.values()) c.getResources().put(r, 0);
-            c.getResources().put(Resource.HEALTH, 500);
-            ((AbstractCard) draft.card(pair.charge)).applyEffectOnSelf(c);
-            // Isola i moltiplicatori dai periodici e dalla corazza; le risorse sono verificate nei turni completi sopra.
-            c.getResources().put(Resource.ALCOHOL, 0); c.getResources().put(Resource.TOXICITY, 0);
-            int amplified = !pair.charge.equals("bruiser.Glare") || type == Damage.DamageType.HIT ? 15 : 10;
-            c.takeDamage(new Damage(type, 10)); assertEquals(500 - amplified, c.getResources().get(Resource.HEALTH));
-            c.resolveTimeBasedEffects();
-            c.takeDamage(new Damage(type, 10)); assertEquals(500 - 2 * amplified, c.getResources().get(Resource.HEALTH));
-            c.resolveTimeBasedEffects(); assertTrue(c.getStatuses().isEmpty());
-            c.takeDamage(new Damage(type, 10)); assertEquals(490 - 2 * amplified, c.getResources().get(Resource.HEALTH));
+            Card charge = draft.card(pair.charge);
+            Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(pair.hit)));
+            Player b = foe(); Game g = game(a, b);
+            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            a.getCharacter().getResources().put(Resource.ALCOHOL, 0);
+            int before = res(a, Resource.HEALTH);
+            a.getCharacter().takeDamage(new Damage(type, 10));
+            assertEquals(before - 15, res(a, Resource.HEALTH), pair.charge + " " + type);
+            assertEquals(3, a.getCharacter().getStatuses().size());
         }
     }
 

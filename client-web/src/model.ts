@@ -23,6 +23,9 @@ export class Model {
   subscribe(fn:(why:Change)=>void){this.listeners.add(fn);return ()=>{this.listeners.delete(fn);};}
   emit(why:Change='choice'){this.listeners.forEach(fn=>fn(why));}
   get selectedCard(){return this.hand.find(x=>x.key===this.selected)?.card;}
+  get discardWarning(){const name=this.hand.find(x=>x.key===this.discard)?.card.name;
+    return this.selectedCard?.characterBound&&name&&this.view.players[this.me].lastTokenCopies?.includes(name)
+      ?`Stai scartando l’ultima copia di «${name}», che tiene un gettone. La vulnerabilità resterà fino alla fine del turno successivo.`:null;}
   get eliminated(){return !!this.view.forfeits[this.me]||!!this.view.players[this.me]?.character.dead;}
   get locked(){return this.phase!=='choose'||this.view.over||this.eliminated;}
   // O26: a bound still needs its extra discard, before or after aiming. This is
@@ -40,7 +43,7 @@ export class Model {
     return card.canTarget.includes(own?'SELF':'OPPONENT');}
   aim(target:Target){if(this.locked||!this.allows(target))return false;this.target=target;this.discard=null;this.message=this.selectedCard?.characterBound?'Scegli dalla mano una regolare da scartare':'Controlla la calata e conferma';this.emit();return true;}
   get ready(){return !this.locked&&!!this.target&&this.allows(this.target)&&!!this.selectedCard&&(!this.selectedCard.characterBound||!!this.hand.find(x=>x.key===this.discard&&regular(x.card)));}
-  confirm(){if(!this.ready)return null;const c=this.selectedCard!;const t=this.target!;const choices:NonNullable<Command['choices']>={};
+  confirm(acceptWarning=false){if(!this.ready)return null;if(this.discardWarning&&!acceptWarning){this.message=this.discardWarning;this.emit('feedback');return null;}const c=this.selectedCard!;const t=this.target!;const choices:NonNullable<Command['choices']>={};
     if(c.characterBound)choices.DISCARD_ONE=this.hand.find(x=>x.key===this.discard)!.card.name;
     if(t.itemIndex!==undefined)choices.TARGET_ITEM=this.view.players[t.owner].character.items[t.itemIndex].name;
     const cmd:Command={playedCardName:c.name,playerId:this.me,targetId:t.owner===this.me?'SELF':t.owner,gameId:this.view.gameId,choices:Object.keys(choices).length?choices:null};

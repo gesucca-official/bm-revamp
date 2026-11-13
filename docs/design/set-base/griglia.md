@@ -25,6 +25,8 @@ Fonti: [piano](../../set-base-plan.md) (D1–D33), [listino](listino.md) e [rapp
 R02, R04–R07a), [formato dati di SB-5](../../reports/set-base/sb-5-report.md#decisione-sul-formato), bozze `attuale.json` e
 `prova-sb9.json` di SB-6a.
 
+> SB-16g 2b1, revisione del 13 novembre 2026: i cinque caricamenti seguono [D71–D72](sb-16g-2b1-rules.md), senza nuovi slot o danni.
+
 ## Principi approvati nella fase A
 
 Il proprietario ha approvato tutte e otto le raccomandazioni con «Approvo tutte» (6 novembre 2026):
@@ -208,7 +210,7 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Fr
 |---|---|---|---|---:|---|---|---|---|---|---|
 | SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | 40 HIT | C | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
 | SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 2 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
-| SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | HIT ricevuto ×1,5 per 2 turni; +15 V e +15 A; cerca SPA-AR1 | C | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncia il colpo lento; esposizione già esistente | dati + search |
+| SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | cerca SPA-AR1; trovato: +15 V/+15 A e gettone ×1,5 HIT/CUT/POISON D71; fallito: +5 V/+5 A, pesca senza gettone D72 | C | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncia il colpo lento; esposizione già esistente | dati + search |
 | SPA-AR4 | Azione, regolare | DEFENSE | F0 | 0 | CUT ricevuto ×0,5 per 4 turni; +10 V | C | 2 | `MadeOfStone`, conservata | Difesa che carica, contro chi lo taglia (Mara) | dati |
 | SPA-AR5 | Azione, regolare | COUNTER | F1 (5 V) | 2 | Annulla la mossa successiva dell'avversario | NC | 2 | `YouStop`, riprogettata: tolti i +10 A regalati all'avversario | Contromossa «Fermati!»; sotto il listino anche per i bot (SB-17) | Java |
 
@@ -220,7 +222,7 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Fr
 | MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³ | C | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
 | MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
 | MAR-AR4 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,4 nel turno; +5 A | NC | 2 | «Tra due paraurti», D55 | Difesa che rimborsa il costo anche senza attacco | dati |
-| MAR-AR5 | Azione, regolare | RESOURCES | F0 | 2 | +15 A; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca MAR-AR2 | R | 1 | «Slalom d'avvicinamento», già Slalom, D55 | Rara con picco condizionato alla preparazione esposta; preserva Sorpasso | dati + search |
+| MAR-AR5 | Azione, regolare | RESOURCES | F0 | 2 | cerca MAR-AR2; trovato: +15 A e gettone D71; fallito: +5 A, pesca senza gettone D72 | R | 1 | «Slalom d'avvicinamento», già Slalom, D55 | Rara con picco condizionato alla preparazione esposta; preserva Sorpasso | dati + search |
 
 ² **SB-12a, giro 1** ([correzioni](#correzioni-di-sb-12a)): costi in A −5 su Cinghiata, Sgommata, Paraurti e Slalom (e su GEN-17), il punto di
 partenza di D38. Motivo: il listino a 7 HIT di SB-11b dà alla A di Mara circa 1 HIT, non 0,6; con Spazienzio a 0,937 le sue carte stavano
@@ -231,7 +233,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | +10 T; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca TOS-AR2 | C | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Accumula annunciando il veleno diretto; esposizione punibile anche dagli immuni | dati + search |
+| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | cerca TOS-AR2; trovato: +10 T e gettone D71; fallito: +5 T, pesca senza gettone D72 | C | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Accumula annunciando il veleno diretto; esposizione punibile anche dagli immuni | dati + search |
 | TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 12 POISON e +5 T al bersaglio | C | 2 | `Cough`, «Tossicone Scatarrante», 8 → 12 POISON (D55) | Colpo cercato, utile anche nello specchio immune alla T | dati |
 | TOS-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Guadagna T/2 HEALTH; perde T | C | 2 | `PervertedMetabolism`, conservata | Difesa: curarsi col veleno; 8,3 HIT, in linea | dati |
 | TOS-AR4 | Azione, regolare | COUNTER | F1 (10 T) | 2 | Annulla le mosse successive dirette a lei | NC | 2 | `AmphetamineReflexes`, conservata | Contromossa; sotto il listino anche per i bot | Java |
@@ -244,7 +246,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
 | PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
-| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | +15 L e +35 A; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca PIN-AR2 | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
+| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | cerca PIN-AR2; trovato: +15 L/+35 A e gettone D71; fallito: +5 L/+10 A, pesca senza gettone D72 | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Piera; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
 
 **Beppe (5)**
@@ -253,7 +255,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 |---|---|---|---|---:|---|---|---|---|---|---|
 | GIG-AR1 | Azione, regolare | ITEMS | F1 (5 V) | 1 | Distrugge un oggetto lontano | NC | 2 | `BreakYourToy` riprogettata come bozza «Smontiamo tutto» (era una bound) | Contromossa; distruzione pagata e scartata, non ripetibile | Java |
 | GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | ~~10~~ 12 CUT⁷ | C | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
-| GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | +10 V; HIT, CUT e POISON ricevuti ×1,5 per 2 turni; cerca GIG-AR5 | C | 1 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Prepara il colpo sugli oggetti; furto e distruzione lo possono ridurre | dati + search |
+| GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | cerca GIG-AR5; trovato: +10 V e gettone D71; fallito: +5 V, pesca senza gettone D72 | C | 1 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Prepara il colpo sugli oggetti; furto e distruzione lo possono ridurre | dati + search |
 | GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno; +5 V | C | 1 | «Sotto il cofano», D55 | Copertura e rimborso; non genera V nette | dati |
 | GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ F1 (5 V)⁷ | 1 | 6 HIT più 4 per ogni proprio oggetto sul campo | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
 

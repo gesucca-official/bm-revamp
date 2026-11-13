@@ -59,6 +59,21 @@ public abstract class Character implements Serializable {
     @JsonIgnore
     private Vulnerability requestedVulnerability;
 
+    /** D72: resources printed for each search outcome; consumed once by the engine, d50 only. */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private Map<Resource, Integer> searchFoundGains = Map.of(), searchMissedGains = Map.of();
+
+    public void requestSearchGains(Map<Resource, Integer> found, Map<Resource, Integer> missed) {
+        searchFoundGains = found; searchMissedGains = missed;
+    }
+
+    public Map<Resource, Integer> takeSearchGains(boolean found) {
+        Map<Resource, Integer> gains = found ? searchFoundGains : searchMissedGains;
+        searchFoundGains = Map.of(); searchMissedGains = Map.of();
+        return gains;
+    }
+
     /** SB-16g 2a: a search step with a vulnerability (D64, D69): the engine applies it after the move, with the playground rules. */
     public void requestVulnerability(Vulnerability vulnerability) { this.requestedVulnerability = vulnerability; }
 

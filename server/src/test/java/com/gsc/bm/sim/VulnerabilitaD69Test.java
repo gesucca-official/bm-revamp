@@ -32,11 +32,9 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * SB-16g, Fase 2a rivista da D69: la carta trovata disegnata a faccia in su come vista (D58) e il gettone di vulnerabilità del
- * caricamento (D64, D66, D69), con le regole del playground ({@link Ruleset#D50}). Se la ricerca trova la carta, il gettone è legato
- * al suo nome e non ha timer: finisce quando il giocatore gioca una carta con quel nome; se non la trova, dura come uno stato
- * normale. Le carte sono di prova, scritte nel formato della bozza: nessuna carta della bozza cambia in questa fase. Il turno del
- * caricamento è N; il pugno da 10 dell'avversario misura la vulnerabilità di chi carica (15 = ×1,5, 10 = nessuna).
+ * SB-16g, D69 rivista da D71–D73: gettoni e carta trovata con le sole regole d50.
+ * Giocata omonima: il più vecchio gettone resta fino a fine turno; senza copie resta un turno successivo intero.
+ * La ricerca fallita pesca senza gettone; il pugno da 10 misura l'esposizione (15 = ×1,5).
  */
 class VulnerabilitaD69Test {
     private static final ObjectMapper JSON = new ObjectMapper();
@@ -192,49 +190,47 @@ class VulnerabilitaD69Test {
         return vulnerabilities(p).stream().filter(s -> s.getUntilPlayed() != null).collect(Collectors.toList());
     }
 
-    // ---- D69 (b): la ricerca fallita dà un gettone a tempo ----
+    // ---- D72: la ricerca fallita non dà gettoni ----
 
     @Test
-    void aFailedSearchGivesATokenThatLastsLikeANormalStatus() {
+    void aFailedSearchDrawsWithoutATokenD72() {
         Player a = player("a", aHand(charge()), fillers("Riempitivo", 8));
         Game game = game(Ruleset.D50, a, puncher());
-        assertEquals(15, turn(game, "Carica"), "N: il pugno arriva dopo il caricamento");
-        assertEquals(3, vulnerabilities(a).size(), "HIT, CUT e POISON");
-        assertTrue(vulnerabilities(a).stream().allMatch(s -> s.getUntilPlayed() == null && s.getLastsForTurns() == 0),
-                "non legato a nessuna carta; dopo la fine di N resta un turno");
+        assertEquals(10, turn(game, "Carica"), "D72: ricerca fallita, nessuna vulnerabilità");
+        assertTrue(vulnerabilities(a).isEmpty());
         assertTrue(a.getRevealed().isEmpty());
-        assertEquals(15, turn(game, "Riempitivo"), "N+1");
+        assertEquals(10, turn(game, "Riempitivo"), "N+1");
         assertEquals(10, turn(game, "Riempitivo"), "N+2: finito");
         assertTrue(vulnerabilities(a).isEmpty());
     }
 
     @Test
-    void aTimedTokenIsNotEndedByPlayingTheSearchedName() {
-        // Il colpo è già in mano e il mazzo non ne ha: la ricerca fallisce. Giocare il colpo non tocca il gettone a tempo.
+    void aMissDoesNotExposeAnAlreadyHeldCopyD72() {
+        // D72: il colpo è già in mano, la ricerca fallisce e non crea gettoni.
         Player a = player("a", aHand(charge(), strike()), fillers("Riempitivo", 8));
         Game game = game(Ruleset.D50, a, puncher());
         turn(game, "Carica");
         assertTrue(a.getRevealed().isEmpty());
         assertFalse(viewFor(game, "b").path("players").path("a").has("revealed"), "la copia già in mano resta coperta");
-        assertEquals(15, turn(game, STRIKE), "N+1: il colpo esce prima del pugno, il gettone resta");
+        assertEquals(10, turn(game, STRIKE), "D72: nessun gettone dalla ricerca fallita");
         assertEquals(10, turn(game, "Riempitivo"), "N+2: finito col suo tempo");
     }
 
     @Test
     void theVulnerabilityMultipliesHitCutAndPoison() {
-        Player a = player("a", aHand(charge()), fillers("Riempitivo", 8));
+        Player a = player("a", aHand(charge()), withStrikeOnTop(8));
         List<Card> mixed = new ArrayList<>();
         for (int i = 0; i < 6; i++) mixed.add(hit("Misto", 1, "HIT 10", "CUT 10", "POISON 10"));
         Player b = player("b", List.of(hit("Misto", 1, "HIT 10", "CUT 10", "POISON 10")), mixed);
         Game game = game(Ruleset.D50, a, b);
         assertEquals(45, turn(game, move(game, "a", "Carica", "SELF"), move(game, "b", "Misto", "a")));
         assertEquals(45, turn(game, move(game, "a", "Riempitivo", "SELF"), move(game, "b", "Misto", "a")), "N+1: ancora ×1,5");
-        assertEquals(30, turn(game, move(game, "a", "Riempitivo", "SELF"), move(game, "b", "Misto", "a")), "N+2: ×1");
+        assertEquals(45, turn(game, move(game, "a", "Riempitivo", "SELF"), move(game, "b", "Misto", "a")), "D71: il nome non è stato giocato");
     }
 
     @Test
     void theDamageTypesComeFromTheCard() {
-        Player a = player("a", aHand(charge(",'damage':['HIT']")), fillers("Riempitivo", 8));
+        Player a = player("a", aHand(charge(",'damage':['HIT']")), withStrikeOnTop(8));
         List<Card> mixed = new ArrayList<>();
         for (int i = 0; i < 6; i++) mixed.add(hit("Misto", 1, "HIT 10", "CUT 10"));
         Player b = player("b", List.of(hit("Misto", 1, "HIT 10", "CUT 10")), mixed);
@@ -255,7 +251,7 @@ class VulnerabilitaD69Test {
         assertTrue(vulnerabilities(a).stream().allMatch(s -> STRIKE.equals(s.getUntilPlayed()) && s.getLastsForTurns() == null
                 && Integer.valueOf(copy).equals(s.getExposure())), "legato al nome, nessun timer, stesso id della carta trovata");
         for (int n = 1; n <= 4; n++) assertEquals(15, turn(game, "Riempitivo"), "N+" + n + ": nessun timer");
-        assertEquals(10, turn(game, STRIKE), "il colpo esce nel gruppo prima del pugno: il pugno non è più moltiplicato");
+        assertEquals(15, turn(game, STRIKE), "il colpo esce nel gruppo prima del pugno: il pugno non è più moltiplicato");
         assertTrue(vulnerabilities(a).isEmpty());
         assertTrue(a.getRevealed().isEmpty());
         assertEquals(10, turn(game, "Riempitivo"));
@@ -266,12 +262,12 @@ class VulnerabilitaD69Test {
         Player a = player("a", aHand(charge()), withStrikeOnTop(8));
         Game game = game(Ruleset.D50, a, puncher());
         assertEquals(15, turn(game, "Carica"));
-        assertEquals(10, turn(game, STRIKE), "N+1: il colpo esce prima del pugno e il gettone se ne va subito");
+        assertEquals(15, turn(game, STRIKE), "N+1: il colpo esce prima del pugno e il gettone se ne va subito");
         assertTrue(vulnerabilities(a).isEmpty());
     }
 
     @Test
-    void insideASpeedGroupTheTokenGoesAtTheEndOfTheGroup() {
+    void aTokenStaysThroughTheWholeSpeedGroupAndEndsAtTurnEnd() {
         // D50, punto 1: dentro un gruppo le mosse restano simultanee. Il colpo e il pugno hanno la stessa velocità: il pugno resta
         // moltiplicato qualunque sia l'ordine dei posti.
         for (boolean aFirst : List.of(true, false)) {
@@ -281,7 +277,7 @@ class VulnerabilitaD69Test {
             turn(game, "Carica");
             b.getCardsInHand().add(hit("Pugno veloce", 2, "HIT 10")); // priorità 2 come il colpo: stesso gruppo
             assertEquals(15, turn(game, move(game, "a", STRIKE, "b"), move(game, "b", "Pugno veloce", "a")), "posti a prima: " + aFirst);
-            assertTrue(vulnerabilities(a).isEmpty(), "tolto a fine gruppo");
+            assertTrue(vulnerabilities(a).isEmpty(), "D71: tolto a fine turno");
         }
     }
 
@@ -300,7 +296,7 @@ class VulnerabilitaD69Test {
         assertSame(found, a.getCardsInHand().get(own.path("revealed").get(0).path("slot").asInt()), "il posto indica la copia trovata");
         assertEquals(1, seen.path("revealed").size());
         assertFalse(seen.path("revealed").get(0).has("slot"), "l'avversario non vede il posto nella mano");
-        assertEquals(10, turn(game, STRIKE), "N+1: gettone soddisfatto, nessun minimo");
+        assertEquals(15, turn(game, STRIKE), "N+1: gettone soddisfatto, nessun minimo");
         assertTrue(a.holds(found), "la copia trovata è ancora in mano");
         assertFalse(a.holds(hidden), "è uscita l'altra");
         assertTrue(vulnerabilities(a).isEmpty());
@@ -321,7 +317,7 @@ class VulnerabilitaD69Test {
         assertFalse(viewFor(game, "b").path("players").path("a").has("revealed"));
         assertEquals(3, bound(a).size(), "lo scarto non conta");
         assertEquals(15, turn(game, "Riempitivo"));
-        assertEquals(15, turn(game, "Riempitivo"), "senza timer");
+        assertEquals(10, turn(game, "Riempitivo"), "D71: un turno dopo l'ultima copia, gettone finito");
         // Solo una carta con quel nome, giocata, lo toglie.
         a.getCardsInHand().add(strike());
         assertFalse(viewFor(game, "b").path("players").path("a").has("revealed"), "un'altra copia non diventa scoperta");
@@ -377,29 +373,29 @@ class VulnerabilitaD69Test {
         assertNotEquals(first, second);
         assertEquals(6, bound(a).size());
         assertEquals(22, turn(game, "Riempitivo"), "N+2");
-        assertEquals(15, turn(game, STRIKE), "N+3: una carta giocata toglie un solo gettone, il più vecchio");
+        assertEquals(22, turn(game, STRIKE), "D71: entrambi attivi fino a fine turno, poi cade solo il più vecchio");
         assertEquals(1, a.getRevealed().size());
         assertEquals(second, a.getRevealed().get(0).getId());
         assertTrue(vulnerabilities(a).stream().allMatch(s -> Integer.valueOf(second).equals(s.getExposure())));
-        assertEquals(10, turn(game, STRIKE), "N+4: e il secondo");
+        assertEquals(15, turn(game, STRIKE), "D71: anche il secondo fino a fine turno");
         assertTrue(vulnerabilities(a).isEmpty());
     }
 
     @Test
-    void aFailedSearchAfterASuccessfulOneAddsATimedToken() {
+    void aFailedSearchAfterASuccessfulOneAddsNoTokenD72() {
         List<Card> deck = new ArrayList<>(List.of(strike()));
         deck.addAll(fillers("Riempitivo", 8));
         Player a = player("a", aHand(charge(), charge()), deck);
         Game game = game(Ruleset.D50, a, puncher());
         turn(game, "Carica");
         int first = a.getRevealed().get(0).getId();
-        assertEquals(22, turn(game, "Carica"), "N+1: la seconda ricerca fallisce, ma il gettone c'è");
+        assertEquals(15, turn(game, "Carica"), "D72: la seconda ricerca fallisce, nessun gettone aggiunto");
         assertEquals(1, a.getRevealed().size());
         assertEquals(3, bound(a).size());
         assertTrue(bound(a).stream().allMatch(s -> s.getExposure() == first));
-        assertEquals(22, turn(game, "Riempitivo"), "N+2");
-        assertEquals(15, turn(game, "Riempitivo"), "N+3: finito il gettone a tempo, resta quello legato");
-        assertEquals(10, turn(game, STRIKE));
+        assertEquals(15, turn(game, "Riempitivo"), "N+2");
+        assertEquals(15, turn(game, "Riempitivo"), "D72: resta soltanto il gettone della ricerca riuscita");
+        assertEquals(15, turn(game, STRIKE));
     }
 
     // ---- riconnessione, fine partita, regole vive ----
@@ -434,7 +430,7 @@ class VulnerabilitaD69Test {
         assertEquals(stripIds(forA), stripIds(viewFor(again, "a")));
         // Dopo il ripristino il gettone funziona: giocare il colpo lo toglie.
         assertEquals(15, turn(again, "Riempitivo"));
-        assertEquals(10, turn(again, STRIKE));
+        assertEquals(15, turn(again, STRIKE), "D71: resta fino al fine turno anche dopo restore");
     }
 
     private static JsonNode stripIds(JsonNode view) {
@@ -541,6 +537,90 @@ class VulnerabilitaD69Test {
 
     // ---- formato della bozza ----
 
+    @Test void aSearchOfItsOwnNameDoesNotSatisfyTheNewTokenM3() {
+        String json = "{'binding':'t.Eco','kind':'ACTION','priority':2,'targets':['SELF'],'self':["
+                + "{'op':'search','card':'t.Eco','vulnerability':{'factor':1.5}}]}";
+        Player a = player("a", aHand(card("Eco", json)), List.of(card("Eco", json), filler("Riempitivo")));
+        Game g = game(Ruleset.D50, a, puncher());
+        assertEquals(15, turn(g, "Eco"));
+        assertEquals(3, bound(a).size()); assertEquals(1, a.getShownRevealed().size());
+        assertEquals(15, turn(g, "Eco"), "la giocata successiva soddisfa il vecchio gettone");
+        assertTrue(bound(a).isEmpty()); assertTrue(a.getRevealed().isEmpty());
+    }
+
+    @Test void conditionalSearchResourcesAreAppliedExactlyOnceAndOnlyWithD50() {
+        for (Ruleset rules : Ruleset.values()) for (boolean finds : List.of(true, false)) {
+            Card charge = card("Condizionale", "{'binding':'t.C','kind':'ACTION','priority':2,'targets':['SELF'],'self':["
+                    + "{'op':'search','card':'t." + STRIKE + "','foundGains':{'VIOLENCE':15},'missedGains':{'VIOLENCE':5},"
+                    + "'vulnerability':{'factor':1.5}}]}");
+            Player a = player("a", aHand(charge), finds ? withStrikeOnTop(8) : fillers("Riempitivo", 8));
+            Game g = game(rules, a, puncher());
+            turn(g, "Condizionale");
+            if (rules.playground()) assertTrue(g.getResolvedMoves().stream().filter(m -> m.getPlayerId().equals("a"))
+                    .flatMap(m -> m.getMoveReport().get(Card.CardTarget.SELF).stream()).anyMatch(line -> line.contains("VIOLENCE:")),
+                    "D72: i guadagni condizionali restano leggibili nel riepilogo");
+            assertEquals(rules.playground() ? finds ? 15 : 5 : 0, a.getResources().get(Resource.VIOLENCE));
+            assertEquals(rules.playground() && finds ? 3 : 0, vulnerabilities(a).size());
+            turn(g, "Riempitivo");
+            assertEquals(rules.playground() ? finds ? 16 : 6 : 1, a.getResources().get(Resource.VIOLENCE), "nessun guadagno ripetuto");
+        }
+    }
+
+    @Test void malformedConditionalResourceMapsAreRejected() {
+        for(String invalid:List.of("null","{'VIOLENCE':-1}","{'VIOLENCE':null}","{'UNKNOWN':5}"))
+            for(String field:List.of("foundGains","missedGains"))assertThrows(Exception.class,()->DataCards.definition(JSON.readTree(
+                    ("{'binding':'t.C','kind':'ACTION','targets':['SELF'],'self':[{'op':'search','card':'t.X','"+field+"':"+invalid+"}]}").replace('\'', '"'))));
+    }
+
+    @Test void periodicPoisonIsAmplifiedOnTheTurnThatSatisfiesTheToken() {
+        Player a = player("a", aHand(charge()), withStrikeOnTop(8));
+        Game g = game(Ruleset.D50, a, puncher()); turn(g, "Carica");
+        a.getResources().put(Resource.TOXICITY, 10);
+        assertEquals(22, turn(g, STRIKE), "15 avversario + floor(5 × 1,5) periodico");
+        assertTrue(bound(a).isEmpty());
+    }
+
+    @Test void discardingOneCopyKeepsTheTokenWhileAnotherIsInTheDeck() {
+        List<Card> deck = new ArrayList<>(withStrikeOnTop(8)); deck.add(strike());
+        Player a = player("a", aHand(charge()), deck); Player b = puncher();
+        Game g = game(Ruleset.D50, a, b); turn(g, "Carica");
+        assertFalse(viewFor(g, "a").path("players").path("a").has("lastTokenCopies"));
+        turn(g, boundMove(g, "a", STRIKE), move(g, "b", "Pugno", "a"));
+        for (int i = 0; i < 3; i++) assertEquals(15, turn(g, "Riempitivo"));
+        assertTrue(bound(a).stream().allMatch(s -> s.getLastsForTurns() == null));
+    }
+
+    @Test void theLastCopyWarningIsPrivateAndTheExitSurvivesRestore() {
+        Player a = player("a", aHand(charge()), withStrikeOnTop(8)); Player b = puncher();
+        Game g = game(Ruleset.D50, a, b); turn(g, "Carica");
+        assertEquals(STRIKE, viewFor(g, "a").path("players").path("a").path("lastTokenCopies").get(0).asText());
+        assertFalse(viewFor(g, "b").path("players").path("a").has("lastTokenCopies"));
+        turn(g, boundMove(g, "a", STRIKE), move(g, "b", "Pugno", "a"));
+        assertTrue(bound(a).stream().allMatch(s -> s.getLastsForTurns() == 0));
+        Game copy = (Game) SerializationUtils.deserialize(SerializationUtils.serialize(g));
+        assertEquals(15, turn(copy, "Riempitivo"));
+        assertTrue(bound(copy.getPlayers().get("a")).isEmpty());
+        assertEquals(10, turn(copy, "Riempitivo"));
+    }
+
+    @Test void aFastPlayStaysExposedToEverySlowerFfaOpponent() {
+        Player a = player("a", aHand(charge()), withStrikeOnTop(8));
+        Player b = puncher(); Player c = player("c", List.of(hit("Terzo", 0, "CUT 10")), List.of(hit("Terzo", 0, "CUT 10")));
+        Game g = game(Ruleset.D50, a, b, c);
+        assertEquals(30, turn(g, move(g, "a", "Carica", "SELF"), move(g, "b", "Pugno", "a"), move(g, "c", "Terzo", "a")));
+        assertEquals(30, turn(g, move(g, "a", STRIKE, "b"), move(g, "b", "Pugno", "a"), move(g, "c", "Terzo", "a")));
+        assertTrue(bound(a).isEmpty());
+    }
+
+    @Test void aDownAuthorCanHealWhileTheTokenStillAmplifiesDamageD48() {
+        Card cure = card("Cura", "{'binding':'t.Cura','kind':'ACTION','priority':-1,'targets':['SELF'],'self':[{'op':'gain','resource':'HEALTH','amount':30}]}");
+        Player a = player("a", aHand(charge(), cure), withStrikeOnTop(8)); Player b = puncher();
+        Game g = game(Ruleset.D50, a, b); turn(g, "Carica"); a.getResources().put(Resource.HEALTH, 1);
+        turn(g, "Cura"); assertEquals(30, health(a));
+        assertFalse(g.getResolvedMoves().stream().filter(m -> m.getPlayerId().equals("a")).findFirst().orElseThrow().isVoid());
+        assertEquals(3, bound(a).size());
+    }
+
     @Test
     void theDraftFormatDescribesSearchVulnerabilityFactorAndDuration() throws Exception {
         DataCards.Definition ok = DataCards.definition(JSON.readTree(("{'binding':'t.C','kind':'ACTION','targets':['SELF'],'self':[{'op':'search',"
@@ -551,11 +631,10 @@ class VulnerabilitaD69Test {
         assertEquals(3, v.turnsIfNotFound.intValue());
         assertEquals(Set.of(com.gsc.bm.model.Damage.DamageType.CUT, com.gsc.bm.model.Damage.DamageType.POISON), v.damage);
         List<Status> timed = v.statuses(7, null), named = v.statuses(8, "X");
-        assertEquals(2, timed.size());
-        assertTrue(timed.stream().allMatch(s -> s.getLastsForTurns() == 2 && s.getExposure() == 7 && s.getUntilPlayed() == null));
+        assertTrue(timed.isEmpty(), "D72: nessun gettone quando manca la carta, anche leggendo il vecchio campo durata");
         assertTrue(named.stream().allMatch(s -> s.getLastsForTurns() == null && s.getExposure() == 8 && "X".equals(s.getUntilPlayed())));
         for (String bad : List.of("{'factor':0,'turnsIfNotFound':2}", "{'factor':1.5,'turnsIfNotFound':0}", "{'turnsIfNotFound':2}",
-                "{'factor':1.5}", "{'factor':1.5,'turnsIfNotFound':2,'damage':[]}", "{'factor':1.5,'turnsIfNotFound':2,'altro':1}",
+                "{'factor':1.5,'turnsIfNotFound':2,'damage':[]}", "{'factor':1.5,'turnsIfNotFound':2,'altro':1}",
                 "{'factor':1.5,'minTurns':2}")) {
             String json = ("{'binding':'t.C','kind':'ACTION','targets':['SELF'],'self':[{'op':'search','card':'t.X','vulnerability':" + bad + "}]}")
                     .replace('\'', '"');

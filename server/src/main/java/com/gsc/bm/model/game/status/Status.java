@@ -45,8 +45,8 @@ public class Status implements Serializable {
     private Float factor = null;
     /**
      * SB-16g 2a (D69): the name of the card that ends this token when its owner plays one, any copy with that name (the one found
-     * by the search or another). Such a token has no timer ({@link #lastsForTurns} null). Null for a token of a failed search,
-     * which lasts as a normal status, and for every other status.
+     * by the search or another). D71: no timer while copies remain; after exhaustion it has one last whole turn. A satisfied token
+     * expires after periodic effects. Null for every other status; D72 creates no token on a miss.
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Builder.Default
@@ -60,6 +60,11 @@ public class Status implements Serializable {
     public void expended() {
         this.lastsForTurns = 0; // character clears this out at the end of turn
     }
+
+    /** D71: the last copy is gone; one whole following turn remains, including periodic damage. */
+    public void lastCopyGone() { this.lastsForTurns = 1; }
+
+    public void copyAvailableAgain() { this.lastsForTurns = null; }
 
     public static Set<StatusType> invertViewPoint(Set<StatusType> s) {
         if (ALL.containsAll(s))

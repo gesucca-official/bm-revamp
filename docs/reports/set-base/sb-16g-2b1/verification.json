@@ -1,0 +1,35 @@
+{
+  "serverTests": {
+    "tests": 756,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 12
+  },
+  "debugClient": {
+    "tests": 37,
+    "passed": 37
+  },
+  "webClient": {
+    "tests": 348,
+    "passed": 348
+  },
+  "springContext": {
+    "tests": 873,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 12,
+    "R3Observed": false
+  },
+  "realBozza": true,
+  "rules": "PASS",
+  "links": {
+    "files": 298,
+    "broken": 0
+  },
+  "manifests": "PASS",
+  "diffCheck": "PASS",
+  "byteIdenticalSB7": true,
+  "mutationsDetected": 8,
+  "mutationsTotal": 8,
+  "draftMatchesMeasuredSnapshot": true
+}

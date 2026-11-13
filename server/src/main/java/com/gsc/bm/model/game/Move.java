@@ -63,6 +63,11 @@ public class Move implements Serializable {
     @JsonIgnore
     @ToString.Exclude
     private Integer searchCopy;
+    /** D74: public role of the resolved card, for bot memory; never a command or protocol field. */
+    @JsonIgnore
+    @ToString.Exclude
+    @Setter
+    private String playedRole;
 
     /**
      * SB-16f0 (D56): the search of this move as the view publishes it, null (absent) without a search, so always with the live
@@ -111,6 +116,9 @@ public class Move implements Serializable {
         lines.add(line);
         moveReport.put(where, lines);
     }
+
+    /** D72: the conditional gain is part of the resolved move, like an ordinary gain step. */
+    public void recordSearchGain(String line) { appendReport(Card.CardTarget.SELF, line); }
 
     @JsonCreator
     public Move(String playedCardName,
@@ -185,7 +193,8 @@ public class Move implements Serializable {
             // check if costs can be satisfied
             for (Map.Entry<Resource, Integer> cost : playedCard.getCost().entrySet()) {
                 int availableResource = playerResources.getOrDefault(cost.getKey(), 0);
-                if (availableResource < cost.getValue())
+                if (availableResource < cost.getValue()
+                        && !(game.getRuleset().playground() && playedCard.isLastBlow() && cost.getKey() == Resource.HEALTH))
                     return new MoveCheckResult(false, "cant be cast with current resources");
             }
             // D50, point 2 (playground only): a HEALTH cost cannot bring its payer to 0 or below, except with «Ultimo colpo».

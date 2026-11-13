@@ -89,9 +89,9 @@ export function chipsOf(owner:string,c:Character):Chip[]{
  const chips:Chip[]=[],exposures=vulnerabilitiesOf(c);
  c.immunities.forEach(r=>chips.push({id:`status-${owner}-imm-${r}`,kind:'immunity',short:LETTER[r],resource:r,title:`Immune a ${NAMES[r]??r}`,text:'Blocca il suo effetto di fine turno, non costi, variazioni o veleno.'}));
  c.statuses.forEach((s,i)=>{if(s.exposure!==undefined)return;chips.push({id:`status-${owner}-st-${i}`,kind:s.equip?'equip':s.type==='BAD'?'bad':'good',short:s.lastsForTurns===null?'∞':String(Math.max(0,s.lastsForTurns)),
-  title:`${s.equip?'Equipaggiamento':s.type==='BAD'?'Stato negativo':'Stato positivo'}: ${s.name}`,text:`${statusText(s.name,s.description)}. ${s.singleUse&&!s.equip?'Si consuma dopo l’uso; ':''}${lasting(s.lastsForTurns)}.`});});
+  title:`${s.equip?'Equipaggiamento':s.type==='BAD'?'Stato negativo':'Stato positivo'}: ${s.name}`,text:`${statusText(s.name,s.description).replace(/[.\s]+$/,'')}. ${s.singleUse&&!s.equip?'Si consuma dopo l’uso; ':''}${lasting(s.lastsForTurns)}.`});});
  // SB-16g 2a (D69): one chip per vulnerability token (its statuses, one per damage type, together).
- exposures.forEach(v=>chips.push({id:`status-${owner}-vu-${v.exposure}`,kind:'bad',short:v.untilPlayed!==null?'∞':String(Math.max(0,v.left??0)),
+ exposures.forEach(v=>chips.push({id:`status-${owner}-vu-${v.exposure}`,kind:'bad',short:v.left===null?'∞':String(Math.max(1,v.left+1)),
   title:`Stato negativo: Vulnerabile ${factorText(v.factor)}`,text:`${vulnerabilityText(v)}${exposures.length>1?' Più vulnerabilità si moltiplicano.':''}`}));
  // R06: timers count down at each turn end and fire at zero.
  c.timers.forEach((tm,i)=>chips.push({id:`status-${owner}-tm-${i}`,kind:'timer',short:String(tm.timer),title:`Timer: ${tm.name}`,text:`${tm.timer<=1?'Scatta a fine turno':`Scatta tra ${tm.timer} fine turno`}: ${TIMER_TEXT[tm.name]??'effetto ritardato'}.`}));
@@ -116,7 +116,8 @@ const words=(types:string[])=>{const w=types.map(t=>DAMAGE_WORDS[t]??t);return w
 /** The sentence of a vulnerability token: what it multiplies and what ends it (the play of a card with a name, or its time). */
 export function vulnerabilityText(v:Vulnerable){
  const what=`Danni da ${words(v.types)} ricevuti ${factorText(v.factor)}.`;
- if(v.untilPlayed!==null)return `${what} Nessun timer: finisce quando viene giocata una carta «${v.untilPlayed}», quella trovata o un’altra; scartarla non basta.`;
+ if(v.untilPlayed!==null)return v.left!==null?`${what} Non restano copie di «${v.untilPlayed}» in mano né nel mazzo: finisce alla fine di questo turno.`:
+  `${what} Finisce alla fine del turno in cui giochi una carta «${v.untilPlayed}», quella trovata o un’altra, anche se parata o annullata. Scartarla non basta: se non restano copie in mano né nel mazzo, finisce un turno dopo.`;
  const d=v.left??0;
  return `${what} La ricerca non ha trovato la carta: ${d<=0?'finisce a fine turno':`dura ancora ${d} turn${d===1?'o':'i'} dopo questo`}.`;
 }

@@ -278,6 +278,21 @@ class RegoleD50Test {
         assertTrue(game.getWinner().isEmpty());
     }
 
+    @Test void ultimoColpoPaysOnlyTheHealthLeftAndBotsSeeTheSameMove() {
+        for (Ruleset rules : Ruleset.values()) {
+            Player a = player("a", 3, 10, List.of(healthCost("Ultimo", 10, true)), List.of(filler("Fa")));
+            Player b = player("b", 40, 10, List.of(filler("Attesa")), List.of(filler("Fb")));
+            Game g = game(rules, a, b);
+            assertEquals(rules.playground(), BotView.of(g, "a").legalMoves().stream()
+                    .anyMatch(m -> m.getCard().getName().equals("Ultimo")), "D73: live comparison unchanged");
+            if (rules.playground()) {
+                List<Move> moves = turn(g, move(g, "a", "Ultimo", "b"), move(g, "b", "Attesa", "SELF"));
+                assertFalse(of(moves, "a").isVoid()); assertEquals(0, res(a, Resource.HEALTH));
+                assertEquals(15, res(b, Resource.HEALTH));
+            } else assertThrows(IllegalMoveException.class, () -> g.submitMove(move(g, "a", "Ultimo", "b")));
+        }
+    }
+
     @Test
     void ultimoColpoAlsoResolvesWhenDownedByAFasterHit() {
         Player a = player("a", 10, 10, List.of(healthCost("Ultimo", 1, true)), List.of(filler("Fa")));

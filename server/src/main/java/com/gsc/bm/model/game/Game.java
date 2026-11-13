@@ -191,20 +191,28 @@ public class Game implements Serializable {
                         + (getSelf(m).getCharacter().getResources().get(Resource.ALERTNESS) & 0xffffffffL));
         Long group = null;
         Set<String> downAtGroupStart = new HashSet<>();
-        // SB-16g 2a (D69): the cards played in the current speed group, by player, in order.
-        List<Map.Entry<Player, String>> played = new ArrayList<>();
+        // D71/M3: the preexisting marks satisfied by this turn, kept active through periodic effects.
+        Set<Player.Revealed> satisfied = Collections.newSetFromMap(new IdentityHashMap<>());
 
         for (Move m : pendingMoves) {
             if (ruleset.playground()) {
                 if (!speed.get(m).equals(group)) {
-                    // SB-16g 2a (D69): the tokens satisfied in the group just ended go now, so that inside a group moves stay
-                    // simultaneous (D50, point 1) whatever their order.
-                    settleGroup(played);
                     group = speed.get(m);
                     downAtGroupStart.clear();
                     for (Player p : players.values()) if (p.getCharacter().isDead()) downAtGroupStart.add(p.getPlayerId());
                 }
                 voidIfDown(m, downAtGroupStart);
+            }
+            // D71/M3: only marks that existed before this move can be satisfied by its play.
+            if (ruleset.playground()) {
+                Player owner = getSelf(m);
+                Card announced = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
+                if (announced instanceof com.gsc.bm.model.cards.AbstractCard)
+                    m.setPlayedRole(((com.gsc.bm.model.cards.AbstractCard) announced).getRole());
+                for (Player.Revealed r : owner.getRevealed())
+                    if (!satisfied.contains(r) && r.getCard().getName().equalsIgnoreCase(m.getPlayedCardName())) {
+                        satisfied.add(r); break;
+                    }
             }
             m.applyEffectTo(this);
             Player self = getSelf(m);
@@ -212,8 +220,6 @@ public class Game implements Serializable {
             String search = self.getCharacter().takeRequestedSearch();
             Vulnerability vulnerability = self.getCharacter().takeRequestedVulnerability();
             Card card = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
-            // SB-16g 2a (D69): a card played satisfies the oldest token bound to its name, even if the move is voided.
-            if (ruleset.playground()) played.add(new AbstractMap.SimpleEntry<>(self, card.getName()));
             self.discardCard(card);
             Card found = null;
             boolean searched = false;
@@ -227,11 +233,15 @@ public class Game implements Serializable {
             }
             // SB-16g 2a (D69): the card found goes to the hand (an object found goes to the field and leaves no mark).
             Card inHand = found != null && self.holds(found) ? found : null;
-            Integer copy = ruleset.playground() && !m.isVoid() && (vulnerability != null || inHand != null)
+            Map<Resource, Integer> searchGains = self.getCharacter().takeSearchGains(found != null);
+            if (ruleset.playground() && searched)
+                searchGains.forEach((resource, amount) -> m.recordSearchGain(self.getCharacter().gainResource(resource, amount)));
+            // D72/M6: failed or unexecuted searches never leave a token.
+            Integer copy = ruleset.playground() && !m.isVoid() && inHand != null
                     ? mark(self, inHand, vulnerability) : null;
             if (searched) m.recordSearch(search, found, copy);
         }
-        if (ruleset.playground()) settleGroup(played);
+        if (ruleset.playground()) prepareEndOfTurn(satisfied);
 
         resolvedMoves.clear();
         resolvedMoves.addAll(pendingMoves);
@@ -241,6 +251,10 @@ public class Game implements Serializable {
         for (String playerId : players.keySet())
             if (!isEliminated(playerId))
                 timeBasedEffects.put(playerId, players.get(playerId).getCharacter().resolveTimeBasedEffects());
+        if (ruleset.playground())
+            for (Player p : players.values())
+                p.getRevealed().removeIf(r -> satisfied.contains(r) || (!p.holds(r.getCard())
+                        && p.getCharacter().getStatuses().stream().noneMatch(s -> Objects.equals(s.getExposure(), r.getId()))));
         // SB-16g 2a: at the end of the match, and for an eliminated player, no card stays face up and no token is left.
         for (Player p : players.values())
             if (isOver() || isEliminated(p.getPlayerId())) dropRevealed(p);
@@ -282,8 +296,7 @@ public class Game implements Serializable {
     /**
      * SB-16g 2a (D58, D69): what a resolved charge leaves on its author, with a new id. A card found by the search and gone to the
      * hand becomes a mark bound to its name, shown face up while it is in hand, and the vulnerability token, if any, is bound to
-     * that name with no timer. Without a card in hand the token is bound to nothing and lasts as a normal status. Returns the id
-     * of the mark, or null if there is none.
+     * that name with no timer initially (D71). Called only after a successful search to hand (D72). Returns the mark id.
      */
     private Integer mark(Player self, Card found, Vulnerability vulnerability) {
         int id = ++revealSerial;
@@ -298,26 +311,21 @@ public class Game implements Serializable {
     }
 
     /**
-     * SB-16g 2a (D69), end of a speed group: each card played ends the oldest mark bound to its name, with its token, whichever
-     * copy was played; a token of a failed search is bound to nothing and is not ended by a play. A card found that left the hand
-     * otherwise (discarded) is no longer shown face up, and its token stays until a card with its name is played.
+     * D71: keep satisfied tokens active until after periodic effects. With no named copy in hand or deck, start a one-turn
+     * exit countdown, without treating the discard as a play. A newly created self-search mark was never added to satisfied.
      */
-    private void settleGroup(List<Map.Entry<Player, String>> played) {
-        for (Map.Entry<Player, String> e : played) {
-            Player p = e.getKey();
-            for (Player.Revealed r : p.getRevealed())
-                if (r.getCard().getName().equalsIgnoreCase(e.getValue())) {
-                    p.getRevealed().remove(r);
-                    p.getCharacter().getStatuses().removeIf(s -> Objects.equals(s.getExposure(), r.getId()));
-                    loggedTurnEvents.add("Player " + p.getPlayerId() + " played " + e.getValue() + ": the mark of its search ends");
-                    break;
-                }
+    private void prepareEndOfTurn(Set<Player.Revealed> satisfied) {
+        for (Player p : players.values()) for (Player.Revealed r : p.getRevealed()) {
+            boolean absent = java.util.stream.Stream.concat(p.getCardsInHand().stream(), p.getDeck().stream())
+                    .noneMatch(c -> c.getName().equalsIgnoreCase(r.getCard().getName()));
+            boolean wasAbsent = r.getAbsentSince() != null;
+            r.observeAbsence(absent, turn);
+            p.getCharacter().getStatuses().stream().filter(s -> Objects.equals(s.getExposure(), r.getId())).forEach(s -> {
+                if (satisfied.contains(r)) s.expended();
+                else if (absent && !wasAbsent) s.lastCopyGone();
+                else if (!absent && wasAbsent) s.copyAvailableAgain();
+            });
         }
-        played.clear();
-        // A mark whose copy left the hand is no longer shown; it is kept only while it has a token, to know which name ends it.
-        for (Player p : players.values())
-            p.getRevealed().removeIf(r -> !p.holds(r.getCard())
-                    && p.getCharacter().getStatuses().stream().noneMatch(s -> Objects.equals(s.getExposure(), r.getId())));
     }
 
     /** SB-16g 2a: no face-up card and no vulnerability token left (end of the match, eliminated player). */

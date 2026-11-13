@@ -41,6 +41,13 @@ public class Player implements Serializable {
         private final int id;
         private final Card card;
         private final int turn;
+        /** D71: when the last copy left both hand and deck; null while copies remain. */
+        private Integer absentSince;
+
+        public void observeAbsence(boolean absent, int now) {
+            if (!absent) absentSince = null;
+            else if (absentSince == null) absentSince = now;
+        }
 
         public Revealed(int id, Card card, int turn) {
             this.id = id;
@@ -150,6 +157,19 @@ public class Player implements Serializable {
         List<Revealed> shown = new ArrayList<>();
         for (Revealed r : revealed) if (holds(r.card)) shown.add(r);
         return shown;
+    }
+
+    /** D71/M5: private warning names only; never the deck's contents or order. Empty with live rules. */
+    @JsonIgnore
+    public List<String> getLastTokenCopies() {
+        List<String> names = new ArrayList<>();
+        for (com.gsc.bm.model.game.status.Status s : character.getStatuses()) {
+            String name = s.getUntilPlayed();
+            if (s.getExposure() == null || name == null || names.contains(name)) continue;
+            long hand = cardsInHand.stream().filter(c -> c.getName().equalsIgnoreCase(name)).count();
+            if (hand == 1 && deck.stream().noneMatch(c -> c.getName().equalsIgnoreCase(name))) names.add(name);
+        }
+        return names;
     }
 
     @JsonIgnore

@@ -368,24 +368,33 @@ final class DataCards {
      * copia non esce; se non c'è si pesca normalmente. Il passo non scrive righe: la riga la scrive la partita quando pesca. Con le
      * regole 1.13 non fa nulla.
      * <p>
-     * SB-16g 2a (D64, D66, D69): {@code vulnerability}, facoltativo, è il gettone del caricamento: i danni ricevuti dei tipi
-     * {@code damage} (predefiniti HIT, CUT e POISON) si moltiplicano per {@code factor}. Se la ricerca trova la carta, il gettone è
-     * legato al suo nome e non ha timer: finisce quando il giocatore gioca una carta con quel nome. Se non la trova, dura
-     * {@code turnsIfNotFound} turni contando quello del caricamento (2: questo e il prossimo). Esempio:
-     * {@code {"op":"search","card":"x.Colpo","vulnerability":{"factor":1.5,"turnsIfNotFound":2}}}.
+     * D71–D72: {@code vulnerability} creates a named token only on success, ending after all turn-end effects on play,
+     * or one whole turn after the last copy leaves hand and deck. {@code foundGains}/{@code missedGains} are explicit resource
+     * maps, applied once after the search according to its outcome. A miss draws normally and never creates a token.
+     * Legacy {@code turnsIfNotFound} is accepted but unused.
      */
     public static final class SearchStep implements Step {
         public String card;
         public Vulnerability vulnerability;
+        /** D72: conditional resources printed on the card, not unconditional gain steps. */
+        public Map<Resource, Integer> foundGains = Map.of();
+        public Map<Resource, Integer> missedGains = Map.of();
 
         @Override public String apply(Character author, Character subject) {
             subject.requestSearch(card);
+            subject.requestSearchGains(foundGains, missedGains);
             if (vulnerability != null) subject.requestVulnerability(vulnerability);
             return null;
         }
 
         @Override public String missing() {
             if (card == null || card.isBlank()) return "campo card mancante";
+            for (Map<Resource, Integer> gains : java.util.Arrays.asList(foundGains, missedGains)) {
+                if (gains == null) return "search gains non possono essere null";
+                for (Map.Entry<Resource, Integer> gain : gains.entrySet())
+                    if (gain.getKey() == null || gain.getValue() == null || gain.getValue() < 0)
+                        return "search gains devono essere risorse non negative";
+            }
             return vulnerability == null ? null : vulnerability.missing();
         }
     }

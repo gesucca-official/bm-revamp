@@ -17,3 +17,12 @@ test('same-turn notifications cannot unlock a SEND or an uncertain delivery',()=
 test('privacy invariant rejects an opponent front; dead/forfeit unavailable but values exact',()=>{const m=model(),bad=clone(m.view);bad.players.Bice.cardsInHand=[fixtures.cards.stop];assert.throws(()=>m.receive(bad),/avversaria/);const v=clone(m.view);v.players.Bice.character.dead=true;v.players.Bice.character.resources.HEALTH=-5;v.forfeits={Ada:'leave'};m.receive(v);m.select(m.hand[2].key);assert.equal(m.aim({owner:'Bice'}),false);assert.equal(m.aim({owner:'Ada'}),false);assert.equal(m.view.players.Bice.character.resources.HEALTH,-5);assert.equal(m.view.players.Tu.character.resources.HEALTH,120);});
 test('rejection keeps the choice and its reason through a same-turn reread',()=>{const m=model();m.select(m.hand[2].key);m.aim({owner:'Bice'});m.confirm();m.reject('Rifiutata: costo');m.receive(clone(m.view));assert.equal(m.phase,'choose');assert.equal(m.message,'Rifiutata: costo');assert.equal(m.ready,true);assert.equal(m.commandCount,1);});
 test('outcome uses the wire winner, NONE is a draw',()=>{const m=model(),v=clone(fixtures.after);v.over=true;v.winner='NONE';m.receive(v);assert.equal(m.message,'Pareggio');assert.equal(m.locked,true);const n=model(),w=clone(fixtures.after);w.over=true;w.winner='Tu';n.receive(w);assert.equal(n.message,'Hai vinto');});
+
+
+test('D71/M5: the last token copy requires a warning confirmation and the command is sent once',()=>{
+ const m=model();m.view.players.Tu.lastTokenCopies=['Steal'];m.select(m.hand[1].key);m.aim({owner:'Bice'});m.select(m.hand[3].key);
+ assert.match(m.discardWarning!,/ultima copia.*Steal/);assert.equal(m.confirm(),null);assert.equal(m.commandCount,0);
+ assert.match(m.message,/fine del turno successivo/);assert.equal(m.confirm(true)?.choices?.DISCARD_ONE,'Steal');assert.equal(m.confirm(true),null);assert.equal(m.commandCount,1);
+ const n=model();n.select(n.hand[1].key);n.aim({owner:'Bice'});n.select(n.hand[3].key);assert.equal(n.discardWarning,null);assert.ok(n.confirm());
+ const x=model();x.view.players.Tu.lastTokenCopies=['Steal'];x.select(x.hand[1].key);x.aim({owner:'Bice'});x.select(x.hand[3].key);x.cancel();assert.equal(x.confirm(true),null);
+});

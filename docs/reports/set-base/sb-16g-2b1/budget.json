@@ -1,0 +1,10 @@
+{
+  "decision": "D68/D74",
+  "limitRounds": 3,
+  "limitSeconds": 7200,
+  "usedRounds": 1,
+  "usedSeconds": 121.9582339,
+  "remainingRounds": 2,
+  "remainingSeconds": 7078.0417661,
+  "preflightErrorsGames": 0
+}

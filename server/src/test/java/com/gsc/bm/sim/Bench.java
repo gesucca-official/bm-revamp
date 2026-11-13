@@ -276,13 +276,18 @@ final class Bench {
      * sulla mano, garantiti oggi da Player e non dalla bozza, saprebbero accorgersi di una regressione del motore.
      */
     static Report run(Draft draft, Settings settings, PlayerSource players) throws Exception {
+        return run(draft, settings, players, (stage, game) -> {});
+    }
+
+    /** Optional observer, after the invariant observer; default reports and decisions remain unchanged. */
+    static Report run(Draft draft, Settings settings, PlayerSource players, BiConsumer<String, Game> observation) throws Exception {
         for (String deck : settings.decks)
             if (!draft.deckIds().contains(deck)) throw new IllegalArgumentException("Mazzo assente: " + deck + " (noti: " + draft.deckIds() + ")");
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < settings.decks.size(); i++) for (int j = i; j < settings.decks.size(); j++)
             for (String sa : settings.styles.keySet()) for (String sb : settings.styles.keySet())
                 cells.add(new Cell(settings.decks.get(i), sa, settings.decks.get(j), sb));
-        playCells(draft, settings, cells, players);
+        playCells(draft, settings, cells, players, observation);
         Report report = new Report(draft, sha256(draft), settings, cells, BoundCap.run(draft, settings.cap));
         staticChecks(draft, report.checks);
         for (Cell cell : cells) report.checks.merge(cell.checks); // In ordine di cella: gli esempi non dipendono dai thread.
@@ -294,14 +299,19 @@ final class Bench {
      * listino di SB-10a, che sceglie da sé quali incontri giocare.
      */
     static void playCells(Draft draft, Settings settings, List<Cell> cells, PlayerSource players) throws Exception {
+        playCells(draft, settings, cells, players, (stage, game) -> {});
+    }
+
+    private static void playCells(Draft draft, Settings settings, List<Cell> cells, PlayerSource players,
+                                  BiConsumer<String, Game> observation) throws Exception {
         SimulationRunner runner = new SimulationRunner(players, settings.ruleset);
         if (settings.threads == 1) {
-            for (Cell cell : cells) play(draft, runner, settings, cell);
+            for (Cell cell : cells) play(draft, runner, settings, cell, observation);
         } else {
             ExecutorService pool = Executors.newFixedThreadPool(settings.threads);
             try {
                 List<Future<?>> futures = new ArrayList<>();
-                for (Cell cell : cells) futures.add(pool.submit(() -> { play(draft, runner, settings, cell); return null; }));
+                for (Cell cell : cells) futures.add(pool.submit(() -> { play(draft, runner, settings, cell, observation); return null; }));
                 for (Future<?> future : futures) future.get();
             } finally {
                 pool.shutdownNow();
@@ -318,7 +328,8 @@ final class Bench {
         }
     }
 
-    private static void play(Draft draft, SimulationRunner runner, Settings settings, Cell cell) throws Exception {
+    private static void play(Draft draft, SimulationRunner runner, Settings settings, Cell cell,
+                             BiConsumer<String, Game> observation) throws Exception {
         BotPolicy pa = settings.styles.get(cell.styleA), pb = settings.styles.get(cell.styleB);
         for (long seed = settings.firstSeed; seed < settings.firstSeed + settings.games; seed++) {
             boolean aFirst = seed % 2 == 0;
@@ -327,7 +338,9 @@ final class Bench {
             Watch watch = new Watch(draft, cell, seed,
                     aFirst ? cell.deckA : cell.deckB, aFirst ? cell.styleA : cell.styleB,
                     aFirst ? cell.deckB : cell.deckA, aFirst ? cell.styleB : cell.styleA);
-            SimulationRunner.Result result = runner.run(seed, aFirst ? ca : cb, aFirst ? cb : ca, watch);
+            SimulationRunner.Result result = runner.run(seed, aFirst ? ca : cb, aFirst ? cb : ca, (stage, game) -> {
+                watch.accept(stage, game); observation.accept(stage, game);
+            });
             watch.finish(result, aFirst);
         }
     }

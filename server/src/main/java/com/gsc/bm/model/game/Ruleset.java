@@ -12,6 +12,8 @@ import java.util.Locale;
  *   <li>no resource goes below zero;</li>
  *   <li>ALCOHOL armour: HIT received reduced by ALCOHOL / 4, after statuses, not below zero;</li>
  *   <li>search: a card may replace the draw that follows its move with a search of a given card in the deck.</li>
+ *   <li>D58/D71: found copies are shown only in hand; named tokens expire at turn end on play or one turn after exhaustion;</li>
+ *   <li>D72/D73: failed searches give reduced printed resources without tokens; «Ultimo colpo» pays the health left.</li>
  * </ol>
  */
 public enum Ruleset {

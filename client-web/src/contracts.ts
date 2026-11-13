@@ -19,8 +19,8 @@ export interface Status {
   singleUse: boolean; amountFunction: object; typeFunction: object;
   /**
    * SB-16g 2a (D64, D66, D69), playground rules only: the vulnerability token of a charge, one status per damage type with the
-   * same `exposure`; `factor` multiplies the damage received. `untilPlayed`: the name of the card whose play ends it (any copy),
-   * with no timer (`lastsForTurns` null); absent for the token of a failed search, which lasts as a normal status. Absent on
+   * same `exposure`; `factor` multiplies the damage received. `untilPlayed`: the name of the card whose play ends it at turn end (any copy),
+   * D71: no timer while copies remain, one whole turn after exhaustion. D72: no token on failed search. Absent on
    * every other status.
    */
   exposure?: number; factor?: number; untilPlayed?: string;
@@ -36,7 +36,7 @@ export interface Character {
  * discarded. `copy` is its stable id, `turn` the turn it was found, `slot` its index in `cardsInHand` (own view only).
  */
 export interface RevealedCard {copy: number; card: Card; turn: number; slot?: number}
-export interface Player {playerId: string; character: Character; cardsInHand: Card[] | number; deck: number; revealed?: RevealedCard[]}
+export interface Player {playerId: string; character: Character; cardsInHand: Card[] | number; deck: number; revealed?: RevealedCard[]; lastTokenCopies?: string[]}
 export interface Command {
   playedCardName: string; playerId: string; targetId: string; gameId: string;
   choices: Partial<Record<'DISCARD_ONE' | 'TARGET_ITEM', string>> | null;

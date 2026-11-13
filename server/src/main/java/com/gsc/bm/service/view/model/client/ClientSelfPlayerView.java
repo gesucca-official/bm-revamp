@@ -16,5 +16,7 @@ public class ClientSelfPlayerView extends AbstractClientPlayerView {
     /** SB-16g 2a (D58), playground rules only: the copies found by a search, face up in this hand; absent when there are none. */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<RevealedCardView> revealed;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private final List<String> lastTokenCopies;
     private final int deck;
 }

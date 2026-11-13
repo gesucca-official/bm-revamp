@@ -127,6 +127,7 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
                 .character(toClientView(p.getCharacter()))
                 .cardsInHand(p.getCardsInHand())
                 .revealed(revealed(p, true))
+                .lastTokenCopies(p.getLastTokenCopies())
                 .deck(p.getDeck().size())
                 .build();
     }

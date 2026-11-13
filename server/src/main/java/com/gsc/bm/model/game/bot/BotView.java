@@ -126,6 +126,7 @@ public class BotView {
         /** SB-16c: the card the move searched for (binding) and the card found, shown to everyone; null if none. */
         String searchedFor;
         CardSeen searchFound;
+        String role;
     }
 
     /** Public card text and numbers. Policies decide on these, never on card names. */
@@ -183,7 +184,8 @@ public class BotView {
     }
 
     private boolean affordable(CardSeen card) {
-        if (!card.cost.entrySet().stream().allMatch(c -> self.seat.resource(c.getKey()) >= c.getValue())) return false;
+        if (!card.cost.entrySet().stream().allMatch(c -> self.seat.resource(c.getKey()) >= c.getValue()
+                || (ruleset.playground() && card.lastBlow && c.getKey() == Resource.HEALTH))) return false;
         // D50, point 2 (playground only), as Move.healthCostAllowed: a HEALTH cost cannot bring its payer to 0, except with «Ultimo colpo».
         int health = card.cost.getOrDefault(Resource.HEALTH, 0);
         return !ruleset.playground() || health == 0 || card.lastBlow || self.seat.resource(Resource.HEALTH) > health;
@@ -267,7 +269,7 @@ public class BotView {
         move.getMoveReport().forEach((target, lines) -> report.put(target.name(), List.copyOf(lines)));
         return new SeenMove(move.getPlayerId(), move.getPlayedCardName(), move.getTargetId(), move.isVoid(),
                 Collections.unmodifiableMap(choices), Collections.unmodifiableMap(report), move.getVoidReason(),
-                move.getSearchedFor(), move.getSearchFound() == null ? null : seen(move.getSearchFound()));
+                move.getSearchedFor(), move.getSearchFound() == null ? null : seen(move.getSearchFound()), move.getPlayedRole());
     }
 
     private static Map<String, List<String>> reports(Map<String, List<String>> effects) {

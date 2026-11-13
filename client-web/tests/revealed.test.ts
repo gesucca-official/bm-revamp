@@ -23,7 +23,7 @@ const token=(id:number,until:string|null,left=0,types=['HIT','CUT','POISON'],fac
  name:'Vulnerable',description:`${t} received x${factor}`,type:'BAD',flow:'INPUT',impactedProperty:t,lastsForTurns:until===null?left:null,equip:false,
  singleUse:false,amountFunction:{},typeFunction:{},exposure:id,factor,...(until!==null?{untilPlayed:until}:{})}));
 const parry:Status={name:'YOU CARESS ME',description:'HIT x0.35',type:'GOOD',flow:'INPUT',impactedProperty:'HIT',lastsForTurns:0,equip:false,singleUse:false,amountFunction:{},typeFunction:{}};
-const BOUND=`Danni da colpo, taglio e veleno ricevuti ×1,5. Nessun timer: finisce quando viene giocata una carta «${strike.name}», quella trovata o un’altra; scartarla non basta.`;
+const BOUND=`Danni da colpo, taglio e veleno ricevuti ×1,5. Finisce alla fine del turno in cui giochi una carta «${strike.name}», quella trovata o un’altra, anche se parata o annullata. Scartarla non basta: se non restano copie in mano né nel mazzo, finisce un turno dopo.`;
 
 /** A recorded view in the middle of a match: on `seat`, the card found face up with its bound token, or (found false) a timed token. */
 function withReveal(seat:'me'|'other',found=true,left=0){
@@ -53,7 +53,7 @@ test('the token of a failed search is timed, like a normal status',()=>{
  assert.deepEqual(list.map(x=>[x.exposure,x.factor,x.types,x.left,x.untilPlayed]),[[7,1.5,['HIT','CUT','POISON'],1,null]]);
  assert.equal(vulnerabilityText(list[0]),'Danni da colpo, taglio e veleno ricevuti ×1,5. La ricerca non ha trovato la carta: dura ancora 1 turno dopo questo.');
  const last=withReveal('other',false,0),chip=chipsOf(last.id,last.p.character).find(c=>c.id.includes('-vu-'))!;
- assert.equal(chip.short,'0');assert.equal(chip.text,'Danni da colpo, taglio e veleno ricevuti ×1,5. La ricerca non ha trovato la carta: finisce a fine turno.');
+ assert.equal(chip.short,'1');assert.equal(chip.text,'Danni da colpo, taglio e veleno ricevuti ×1,5. La ricerca non ha trovato la carta: finisce a fine turno.');
  assert.equal(last.p.revealed,undefined);
  const bound=vulnerabilitiesOf(withReveal('other').p.character)[0];assert.equal(bound.left,null);assert.equal(bound.untilPlayed,strike.name);
 });
@@ -64,7 +64,7 @@ test('two tokens: two chips, and the text says that they multiply',()=>{
  assert.deepEqual(chips.map(c=>c.id),[`status-${id}-vu-7`,`status-${id}-vu-9`]);
  assert.ok(chips.every(c=>c.text.endsWith('Più vulnerabilità si moltiplicano.')));
  assert.ok(chips[1].text.startsWith('Danni da colpo ricevuti ×1,5.'));
- assert.equal(chips[0].short,'∞');assert.equal(chips[1].short,'1');
+ assert.equal(chips[0].short,'∞');assert.equal(chips[1].short,'2');
 });
 
 test('the note of a face-up card: whose, since when, until when, the token bound to it; the badge carries the factor',()=>{
@@ -99,4 +99,17 @@ test('with the live rules nothing of this is in the recorded views',()=>{
  for(const c of Object.values(recorded.cases as Record<string,Pair>))for(const v of [c.previous,c.next])for(const p of Object.values(v.players)){
   assert.equal(p.revealed,undefined);for(const s of p.character.statuses){assert.equal(s.exposure,undefined);assert.equal(s.untilPlayed,undefined);}
   assert.ok(!chipsOf(p.playerId,p.character).some(c=>c.id.includes('-vu-')));}
+});
+
+
+test('D71: after the last copy leaves, the named token displays the remaining whole turn',()=>{
+ const {id,p}=withReveal('other');p.character.statuses.forEach(s=>{if(s.exposure!==undefined)s.lastsForTurns=0;});
+ const chip=chipsOf(id,p.character).find(c=>c.id.includes('-vu-'))!;
+ assert.equal(chip.short,'1');assert.match(chip.text,/Non restano copie.*fine di questo turno/);
+});
+
+test('C1: a status description ending in a period gets exactly one separator',()=>{
+ const {id,p}=withReveal('other');p.character.statuses=[{...parry,name:'Custom',description:'Vale questo turno e il prossimo.'}];
+ const text=chipsOf(id,p.character).find(c=>c.title.includes('Custom'))!.text;
+ assert.ok(!text.includes('..'));assert.match(text,/prossimo\. finisce/);
 });

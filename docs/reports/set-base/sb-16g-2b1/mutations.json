@@ -1,0 +1,59 @@
+[
+  {
+    "name": "end-of-turn",
+    "test": "VulnerabilitaD69Test",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "exit-delay",
+    "test": "VulnerabilitaD69Test",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "outcome-gains",
+    "test": "VulnerabilitaD69Test",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "health-under-cost",
+    "test": "RegoleD50Test",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "self-search",
+    "test": "VulnerabilitaD69Test",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "hold-policy",
+    "test": "SoughtHitPolicyTest",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "exposed-target",
+    "test": "SoughtHitPolicyTest",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false
+  },
+  {
+    "name": "discard-warning",
+    "test": "client",
+    "exit": 1,
+    "detectedByAssertion": true,
+    "compileError": false,
+    "note": "Original log uses the spec reporter; AssertionError verified directly."
+  }
+]

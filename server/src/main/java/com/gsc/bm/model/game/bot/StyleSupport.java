@@ -54,11 +54,12 @@ final class StyleSupport {
             return me;
         }
 
-        /** The cards the seat's search found last round, shown to everyone (SB-16c). */
+        /** D58/D71: only copies currently shown in this hand, including searches from earlier rounds. */
         List<BotView.CardSeen> found(BotView.Seat seat) {
             List<BotView.CardSeen> found = new ArrayList<>();
-            for (BotView.SeenMove m : view.getLastRound())
-                if (m.getPlayerId().equals(seat.getPlayerId()) && m.getSearchFound() != null) found.add(m.getSearchFound());
+            if (seat == me) view.getSelf().getRevealed().forEach(r -> found.add(r.getCard()));
+            else for (BotView.Opponent o : view.getOpponents())
+                if (o.getSeat().getPlayerId().equals(seat.getPlayerId())) o.getRevealed().forEach(r -> found.add(r.getCard()));
             return found;
         }
 
@@ -229,9 +230,9 @@ final class StyleSupport {
     /**
      * SB-16c, playground rules only (D50 and D52, point 2): the rhythm charge–hit–parry, the same for every style.
      * <ul>
-     *   <li>after its own charge, play the hit: the card its search found last round (it is in hand), or any hit while one of its
+     *   <li>after its own charge, play the hit: a currently revealed searched card in its hand, or any hit while one of its
      *       temporary GOOD OUTPUT statuses (a damage boost) is on;</li>
-     *   <li>react to a visible charge of the opponent (a hit of at least {@value #CHARGED_HIT} its search showed last round, or a
+     *   <li>react to a visible charge of the opponent (a hit of at least {@value #CHARGED_HIT} still shown in its hand, or a
      *       temporary GOOD OUTPUT status): defend, counter or heal now.</li>
      * </ul>
      * It reads only public data: the moves of the last round with their search, the statuses on the table, the own hand.
@@ -239,6 +240,11 @@ final class StyleSupport {
     static double rhythm(Situation s, Plan p) {
         double bonus = 0;
         if (p.hostile && p.damage > 0) {
+            Map<Integer, Float> tokens = new java.util.HashMap<>();
+            p.target.getStatuses().stream().filter(st -> st.getExposure() != null && st.getFactor() != null)
+                    .forEach(st -> tokens.put(st.getExposure(), st.getFactor()));
+            double factor = tokens.values().stream().mapToDouble(Float::doubleValue).reduce(1, (a, b) -> a * b);
+            bonus += p.damage * Math.max(0, factor - 1) * 3;
             if (s.found(s.me).stream().anyMatch(c -> c.getName().equals(p.card.getName()))) bonus += FOLLOW_UP;
             if (boosted(s.me)) bonus += CHARGED_ATTACK;
         }
@@ -257,7 +263,7 @@ final class StyleSupport {
                 && st.getFlow() == com.gsc.bm.model.game.status.StatusFlow.OUTPUT && !st.isEquip());
     }
 
-    /** The seat announced a hit: its search showed one last round, or a damage boost is on. */
+    /** The seat announced a hit: a searched copy is still shown in hand, or a damage boost is on. */
     static boolean charged(Situation s, BotView.Seat seat) {
         if (seat == s.me) return false;
         return boosted(seat) || s.found(seat).stream().anyMatch(c -> c.nominalDamage() >= CHARGED_HIT);

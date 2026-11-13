@@ -42,7 +42,9 @@ class BozzaDraftTest {
         assertEquals(com.gsc.bm.repo.external.MatchEventRepository.sha256(Files.readAllBytes(Path.of(DRAFT))), sources.get(0).get("sha256"));
         @SuppressWarnings("unchecked") var sets = (Map<String, Map<String, String>>) identity.get("sets");
         assertEquals("bozza", sets.get("base").get("version"));
-        assertNull(new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", "starter-mara", "casuale").newPolicy());
+        assertTrue(new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", "starter-mara", "casuale").newPolicy()
+                instanceof com.gsc.bm.model.game.bot.SoughtHitPolicy, "D74: anche il casuale d50 legge il gettone");
+        assertNull(new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", "starter-mara", "casuale", "1.13").newPolicy());
     }
 
     @Test

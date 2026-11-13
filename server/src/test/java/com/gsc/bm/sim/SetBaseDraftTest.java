@@ -185,7 +185,7 @@ class SetBaseDraftTest {
                     checked++;
                 }
         }
-        assertEquals(24, checked, "D55/SB-16d: i 12 stati di prima e quattro esposizioni nuove da tre stati ciascuna");
+        assertEquals(11, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
@@ -537,8 +537,9 @@ class SetBaseDraftTest {
         Card charge = draft.card("base.pino.OffroIo");
         game.getPlayers().get("seat-1").getCardsInHand().add(charge);
         charge.resolve(game, new Move(charge.getName(), "seat-1", "SELF", game.getGameId(), new java.util.HashMap<>()));
-        assertEquals(21, me.getResources().get(Resource.ALCOHOL));
-        assertEquals(50, me.getResources().get(Resource.ALERTNESS), "SB-16e2, D56/D38: il caricamento dà 35 A (20 in SB-16e)");
+        assertEquals(6, me.getResources().get(Resource.ALCOHOL), "D72: il guadagno attende l'esito della ricerca nel motore d50");
+        assertEquals(15, me.getResources().get(Resource.ALERTNESS));
+        assertEquals(Map.of(Resource.ALCOHOL, 15, Resource.ALERTNESS, 35), me.takeSearchGains(true));
         assertEquals(0, spazienzio.getResources().get(Resource.ALCOHOL));
         assertEquals(14, spazienzio.getResources().get(Resource.ALERTNESS));
         // Il bancone regge: HIT ricevuto a metà in questo turno, +5 L.
@@ -712,7 +713,8 @@ class SetBaseDraftTest {
         assertEquals("CUT 12", chiave.get("gui").get("damageAmount").asText());
         assertTrue(chiave.get("gui").get("description").asText().contains("12 CUT"));
         // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca.
-        assertEquals(10, colpo.get("self").get(0).get("amount").asInt());
+        assertEquals(10, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
+        assertEquals(5, colpo.get("self").get(0).get("missedGains").get("VIOLENCE").asInt(), "D72");
         assertEquals("RESOURCES", colpo.get("gui").get("role").asText());
         assertEquals("—", colpo.get("gui").get("damageAmount").asText());
         int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
