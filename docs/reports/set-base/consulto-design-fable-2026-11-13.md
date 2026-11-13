@@ -405,3 +405,346 @@ Nessun arresto del server durante la sessione (quello segnalato in SB-16f non si
   schede dei personaggi, il flavour, le carriere né i rapporti in `docs/reports/set-base/` per esteso (solo la matrice di SB-16e2).
   Sergio e Duccio li conosco solo dal nome. Dove una proposta urta una decisione che non ho letto, prevale la decisione.
 - **Tempo:** poco più di mezz'ora in tutto.
+
+---
+
+# Approfondimento — 13 novembre 2026
+
+Secondo passaggio, dopo la [revisione indipendente](revisione-fable-2026-11-13.md). Scopo: prove per le domande che bloccano la 2b
+(M1, G2, G5, K1, C3-1, C3-2), non un secondo giro generico. Stessa convenzione: **Oss.** fatto con fonte, **Op.** giudizio.
+
+## AP0. Allestimento e diff usato
+
+- **Worktree separato:** `git worktree add --detach E:\bm-d69 HEAD` su `d14f436`. Tutte le modifiche stanno lì e non sono committate;
+  gli strumenti usa e getta stanno in `E:\bm-d69-tools` (fuori da entrambi).
+- **Bozza D69:** in `E:\bm-d69\server\src\test\resources\set-base\bozza.json`, alle cinque carte di caricamento (bruiser.Glare,
+  base.mara.Slalom, junkie.MethDrivenRage, base.pino.OffroIo, base.gigi.ColpoDiChiaveInglese): tolti i 13 passi `status` di
+  esposizione a due turni (quelli col nome «… → …»), aggiunto `vulnerability` al passo `search`, testo allineato. **Nient'altro
+  cambia**: numeri, copie, costi e colpi cercati sono quelli della variante (c). Non sono le dieci carte della proposta 1.1.
+- **Diff** (`git diff --stat`: 1 file, 10 righe aggiunte, 140 tolte; le 140 tolte sono i 13 blocchi `status`). Righe aggiunte:
+
+```text
+"card": "bruiser.SuperImpact", "vulnerability": {"factor": 1.5, "turnsIfNotFound": 2}
+"card": "base.mara.Sgommata", "vulnerability": {"factor": 1.5, "turnsIfNotFound": 2}
+"card": "junkie.Cough", "vulnerability": {"factor": 1.5, "turnsIfNotFound": 2}
+"card": "base.pino.GoingBerserk", "vulnerability": {"factor": 1.5, "turnsIfNotFound": 2}
+"card": "base.gigi.LavoroFattoBene", "vulnerability": {"factor": 1.5, "turnsIfNotFound": 2}
+SPA-AR3 · D69: HIT, CUT e POISON ricevuti ×1,5 finché non giochi il colpo cercato (2 turni se la ricerca fallisce); +15 V e +15 A. …
+MAR-AR5 / TOS-AR1 / PIN-AR4 / GIG-AR3 · … HIT, CUT e POISON ricevuti ×1,5 finché non giochi il colpo cercato (D69; 2 turni se la ricerca fallisce). …
+```
+
+  Fatto con uno script di tre sostituzioni (espressioni regolari, poi `json.loads` di controllo):
+
+```python
+s = re.sub(r'\{[^{}]*"name":\s*"[^"]*→[^"]*"[^{}]*\},\s*', '', s)                      # 13 blocchi status
+s = re.sub(r'("op":\s*"search",\s*"card":\s*"[^"]+")',
+           r'\1, "vulnerability": {"factor": 1.5, "turnsIfNotFound": 2}', s)            # 5 ricerche
+s = s.replace('per 2 turni (questo e il successivo)', 'finché non giochi il colpo cercato (D69; 2 turni se la ricerca fallisce)')
+```
+
+  Nota: Spazienzio passa così da «soli HIT» a HIT, CUT e POISON, come vuole D64.
+- **Server e client:** una sola istanza ciascuno, quelli di `E:\bm` (jar esistente), col server avviato con
+  `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts -Draft E:\bm-d69\server\src\test\resources\set-base\bozza.json`.
+
+## AP2. Simulazione
+
+**Comando** (da `E:\bm-d69\server`, JDK e Maven di `E:\bm\.tools`), una volta per bozza:
+
+```text
+mvn -s E:/bm/scripts/maven-settings.xml -Dmaven.repo.local=E:/bm/.tools/m2 -B -o -q test
+    -Dsim.rules=d50 -Dsim.styles=aggressivo,prudente,risorse,com -Dsim.threads=8
+    -Dtest=D69ProbeTest#probe -Dsim.d69Games=300 -Dsim.d69Out=<uscita.json> -Dsim.draft=<bozza>
+```
+
+- **Bozze:** «oggi» = `git show HEAD:…/bozza.json` (variante c, esposizione a due turni); «D69» = quella di AP0.
+- **Semi:** 7.000.000–7.000.299 per cella, gli stessi nelle due bozze; 15 incontri × 16 coppie di stili × 300 = **72.000 partite per
+  bozza**; il posto si alterna col seme, come nel banco.
+- **Sonda:** `D69ProbeTest` (usa e getta, nel worktree, mai committata), un osservatore su `ROUND_READY` / `ROUND_COMMITTED` come
+  quello di SB-16e. Misura la **salute persa nel turno** (differenza fra inizio e fine turno, non sotto zero): comprende danni a sé e
+  veleno, e le cure la riducono. Non isola il solo danno avversario.
+- **Limite che pesa su tutto (B1 della revisione):** i bot **non leggono il gettone**. Non colpiscono chi è esposto più di prima e non
+  decidono di tenere o giocare il colpo in base al gettone. Le misure dicono quanto costa il gettone **contro avversari che non lo
+  sfruttano**: è un pavimento del prezzo, non il prezzo.
+
+### AP2.1 Salute persa per turno, per stato di chi la perde (bozza D69)
+
+| Personaggio | Turno normale | Turno del caricamento | Caricamento nei primi turni | Col gettone, gioca il colpo | Col gettone, non lo gioca | Turni col gettone per caricamento |
+|---|---:|---:|---:|---:|---:|---:|
+| Spazienzio | 6,11 | 6,81 | 8,13 | **7,28** | 6,75 | 2,42 |
+| Mara | 6,16 | 9,00 | 13,60 | **5,56** | 7,01 | 1,58 |
+| Celestina | 5,03 | 8,06 | 12,04 | **5,97** | 6,53 | 2,04 |
+| Piera | 5,85 | 6,70 | 8,70 | **5,64** | 8,86 | 1,56 |
+| Beppe | 6,35 | 7,42 | 11,17 | **5,94** | 6,93 | 1,54 |
+
+«Turno normale» = né caricamento né gettone. «Primi turni» = caricamento giocato entro il terzo turno contato dal motore.
+
+**Lo stesso turno «col gettone, gioca il colpo» nella bozza di oggi** (esposizione fissa di due turni, stessi semi): Spazienzio 6,97,
+Mara 6,76, Celestina 6,81, Piera 8,09, Beppe 7,10.
+
+**Oss. (M1).** Passando da «due turni fissi» a «fine gruppo» (D69), nel turno in cui si gioca il colpo cercato la salute persa scende
+per quattro personaggi su cinque (Mara −18%, Celestina −12%, Piera −30%, Beppe −16%) e **sale per Spazienzio** (+4%). Spazienzio è
+l'unico col colpo cercato a priorità 0 (gli altri a priorità 1) e ha A 20: il suo colpo si risolve dopo quelli avversari, quindi il
+gettone è ancora lì quando arrivano. Per Mara, Piera e Beppe quel turno costa **meno di un turno normale**; per Celestina resta sopra
+(5,97 contro 5,03).
+
+**Oss. (turno del caricamento).** Caricare costa in media da +0,7 (Spazienzio, Piera) a +3 punti di salute (Mara, Celestina) rispetto a
+un turno normale; nei primi turni 8–14 punti. I 30 punti che ho preso io al turno 1 nella prima partita sono la coda, non la media.
+
+**Oss. (tenere il colpo).** Un turno passato col gettone senza giocare il colpo costa +0,6…+0,9 a Spazienzio, Mara e Beppe, +1,5 a
+Celestina, **+3 a Piera**. Sommando caricamento e turni di gettone, un caricamento costa ai bot circa 2–5 punti di salute in tutto.
+
+### AP2.2 Ricerche fallite (G2)
+
+| Personaggio | Caricamenti per partita | Ricerche | Fallite | Copie del colpo cercato nello starter di oggi |
+|---|---:|---:|---:|---:|
+| Spazienzio | 0,59 | 16.926 | **21,9%** | 2 |
+| Mara | 0,22 | 6.212 | **25,4%** | 2 |
+| Celestina | 0,36 | 10.299 | **41,2%** | 2 |
+| Piera | 0,74 | 21.110 | **39,5%** | 2 |
+| Beppe | 0,39 | 11.050 | **61,3%** | 1 (rara) |
+
+**Oss.** Fra un quinto e tre quinti dei caricamenti cercano a vuoto, e il caso peggiore è l'unico col colpo in copia singola. È lo
+schema che la proposta 1.1 dà a **tutti e cinque** i colpi rari (un tutore, una copia). I numeri sono identici nella bozza di oggi
+(±0,7 punti): non dipendono da D69.
+
+### AP2.3 Partite con un turno da metà salute (C3-4) e patte negli specchi (G3)
+
+| Incontro | Patte oggi | Patte D69 | Turni D69 | Partite con un turno ≥ 50% della salute iniziale | …e finite in quel turno |
+|---|---:|---:|---:|---:|---:|
+| Spazienzio–Spazienzio | 2,88% | 2,85% | 9,60 | **72,6%** | 7,8% |
+| Spazienzio–Mara | 2,67% | 2,58% | 9,17 | 46,0% | 3,3% |
+| Spazienzio–Celestina | 5,19% | 4,10% | 11,52 | 45,4% | 4,4% |
+| Spazienzio–Piera | 3,98% | 3,79% | 12,25 | 14,9% | 1,9% |
+| Spazienzio–Beppe | 3,00% | 3,02% | 10,19 | 49,3% | 3,4% |
+| Mara–Mara | 3,48% | 3,58% | 8,80 | 4,8% | 0,4% |
+| Mara–Celestina | 5,25% | 5,17% | 10,85 | 5,3% | 0,5% |
+| Mara–Piera | 6,19% | 6,17% | 11,31 | 2,5% | 0,3% |
+| Mara–Beppe | 2,08% | 1,77% | 9,42 | 1,8% | 0,2% |
+| **Celestina–Celestina** | **19,06%** | **19,12%** | **17,90** | 3,7% | 0,9% |
+| Celestina–Piera | 6,98% | 6,90% | 13,48 | 5,5% | 0,7% |
+| Celestina–Beppe | 8,35% | 8,17% | 12,11 | 3,2% | 0,3% |
+| **Piera–Piera** | **13,48%** | **13,40%** | **14,66** | 2,4% | 0,3% |
+| Piera–Beppe | 7,50% | 7,50% | 12,67 | 0,9% | 0,2% |
+| Beppe–Beppe | 8,23% | 8,46% | 10,78 | 0,3% | 0,04% |
+| **Tutte** | 6,55% | 6,44% | 11,65 | 17,2% | 1,6% |
+
+4.800 partite per riga. Con 300 semi per cella invece di 2.000 gli specchi di Celestina e Piera risultano 19,1% e 13,4%, in linea con
+18,57% e 13,07% di SB-16e2.
+
+**Oss. (G3).** D69 da sola non sposta le patte: ±0,3 punti ovunque, tranne Spazienzio–Celestina (−1,1). Gli specchi di Celestina e
+Piera restano fuori soglia e lunghi.
+
+**Oss. (C3-4).** Il «turno da metà salute» oggi è quasi solo di Spazienzio: Impatto fa 40 su salute 70–85, cioè metà salute anche
+**senza** gettone. Negli altri incontri è sotto il 6%. Le partite *finite* in un turno così sono l'1,6%.
+
+**Op.** Tre conclusioni, nei limiti dei bot ciechi:
+
+1. **Il misuratore C3-4 serve, ma la soglia giusta è «finita in quel turno»**, non «è capitato»: la prima colonna è dominata da una
+   carta sola. Oggi 1,6%. La proposta 1.1 porta colpi da 40–54 a tutti e triplica i caricamenti: è il numero da guardare prima e dopo.
+2. **D69 è neutra sul bilanciamento finché nessuno la sfrutta.** Quote, patte e durate di SB-16e2 valgono ancora come base della 2b.
+   È una buona notizia per C3-2 (vedi AP4): cambiare la regola del gettone non ha rimescolato la matrice.
+3. **Il prezzo medio di un caricamento, 2–5 punti di salute, è basso** rispetto a quel che dà (+15 V e +15 A, o +15 L e +35 A).
+   Contro bot che non puniscono, caricare è quasi gratis: il timore di SB-16f («tutori che danno risorse») resta fondato finché i
+   bot non leggono il gettone (B1) o finché non lo misura un umano.
+
+## AP1. Partite giocate con D69 attivo
+
+**Non ho fatto quanto chiesto.** Richiesta: cinque starter contro il computer e due partite devAlice–devBob. Fatto: **una partita
+contro il computer interrotta al turno 4** e **una partita a due finestre interrotta al turno 5**, più la partita del consulto (Beppe,
+senza D69). Mancano Celestina, Beppe e Piera contro il computer con D69, la seconda partita fra umani e ogni finale. Motivo: il tempo;
+ogni turno dal browser mi costa 20–30 secondi e ho dato la precedenza alla simulazione e alle risposte. Quel che segue è poco, ma il
+secondo caso è una prova diretta di M1.
+
+| # | Partita | Turni | Caricamento | Colpo tenuto? | Cosa ha fatto il gettone | Fine |
+|---|---|---|---|---|---|---|
+| 1 | Io Spazienzio («Con un tuo mazzo», `starter-spazienzio`) contro computer Mara | 4 | Mai: PAZIENZA: FINITA non è arrivata in mano; GARGANTUESCO IMPATTO era in mano dal turno 1 e l'ho giocato subito (25 V iniziali) | — | Niente | Abbandonata a 38 contro 23 |
+| 2 | devAlice Piera contro devBob Mara, due schede, clock di 30 s | 5 | Alice al turno 3 («Un altro e arrivo», trovata Estasi) | No: giocato al turno 4, perché con +35 A Piera era diventata più veloce di Mara (36 contro 35) e volevo vedere M1 | **Non ha amplificato nulla**, vedi sotto | Interrotta a 36 contro 27 |
+
+**Oss., partita 2, turno per turno** (testo delle due pagine):
+
+- **Turno 3.** Alice (A 10) gioca il caricamento, Bob (A 40) gioca Sputo da posacenere, 12 POISON. Stessa priorità, Mara più veloce:
+  lo Sputo si risolve **prima** che il gettone esista. Piera 73 → 61: 12 danni, non 18.
+- **Fine turno 3.** Su Piera compare **un solo** stato: «Vulnerabile ×1,5. Danni da colpo, taglio e veleno ricevuti ×1,5. Nessun timer:
+  finisce quando viene giocata una carta «Estasi da Coca Etilene», quella trovata o un'altra; scartarla non basta.» In mano ad Alice la
+  carta è «scoperta, tiene una vulnerabilità ×1,5»; nella scheda di Bob il segnalino sul personaggio mostra ∞. Il testo è chiaro.
+- **Turno 4.** Alice (ora A 36) gioca Estasi, Bob (A 35, 20 dopo il costo) gioca Sgommata, 25 CUT. Il gruppo di Alice si risolve
+  prima, il gettone cade a fine gruppo, la Sgommata arriva dopo. Piera 61 → 36: **25 danni, non 37**. Mara 45 → 27 (10 + 8 L).
+- **Bilancio:** un caricamento che dà +15 L e +35 A, due colpi avversari ricevuti nei due turni «a rischio», **zero danni in più**.
+  Nel turno N perché l'avversario era più veloce (il gettone non c'era ancora), nel turno N+1 perché il caricamento stesso aveva reso
+  più veloce chi caricava (il gettone non c'era più).
+
+**Oss., leggibilità.** Con `vulnerability` il segnalino è uno solo e la frase è buona: il rilievo B2 del consulto («tre stati») era
+della bozza, come dice la revisione. Restano veri: il volto del caricamento mostra solo «RISORSE, +15 L +35 A», e nel turno 4 nulla
+sul tavolo dice che la Sgommata **non** è stata amplificata né perché.
+
+**Oss., clock.** Fra umani i 30 secondi per mossa (R06) bastano per scegliere, non per leggere la (i) di una carta nuova.
+
+## AP3. Quello che avevo saltato: schede, griglia, listino, Sergio e Duccio
+
+Letti ora: [schede dei personaggi](../../design/set-base/schede-personaggi.md) (Sergio, Duccio, confronto), della
+[griglia](../../design/set-base/griglia.md) i principi, gli slot `CES-*` e `ROC-*` e i principi di SB-16d, del
+[listino](../../design/set-base/listino.md) la tabella e le conclusioni. Non letti: le altre righe della griglia una per una, flavour,
+carriere.
+
+**Oss.**
+
+- **Sergio Sommerso** è già il personaggio delle **contromosse e delle letture**: CES-AR2 annulla la mossa successiva e ne esegue
+  l'effetto (15 A), CES-AR3 annulla le mosse dirette a lui, CES-AR1/4/6 tolgono A. «Danno proprio scarso». Rischio dichiarato nella
+  scheda: i bot lo sottostimeranno, «la prova umana conta più che per gli altri».
+- **Duccio Braccio Teso** paga in HEALTH (130 di salute, ROC-AR1 12 HEALTH per 22 HIT, ROC-AR4 20 per 30), para e contrattacca
+  (ROC-AR3), e ha ROC-AR6 «+15 HEALTH; HIT ricevuto ×1,25 per 2 turni».
+- La griglia (principi di SB-16d) dice: «Per Sergio e Duccio la coppia si progetta nei rispettivi blocchi».
+- Il confronto delle schede mette un **paletto**: Spazienzio e Beppe (entrambi V) «restano distinti se […] Beppe non ha colpi grossi».
+- Il listino: priorità «vale quasi niente» e A come precedenza è **ordinale** («conta chi ha più A, non di quanto»), ma è misurato
+  con le regole 1.13, dove il morto agisce comunque. V sopra i 20–25 «intasa la mano»; un'unità gratuita vale circa 6–8 HIT.
+- Numeri delle dieci coppie (proposta 1.1), danno del colpo su salute iniziale di chi lo riceve (70–85): Impatto 40 (47–57%),
+  Sgommata 25, Tossicone 18, Estasi 30–35, Chiave 22; rari: O-AHIO 32–45, Cinghiata 25–45, Rutto 44–54, Lavoro 14–35, travaso 12 più
+  veleno. Guadagno di A dei caricamenti: Piera +35 (entrambi), Mara +20 e +30, Spazienzio +15 e +5, Celestina +5 e 0, Beppe 0 e 0.
+
+**Revisione di A3 (identità).**
+
+- **Op., ritiro una frase.** Avevo scritto che la proposta rende Beppe «più affidabile ma meno Beppe». Detto meglio, con la fonte:
+  Chiave da tredici a 22 CUT e Lavoro fino a 35 HIT **toccano il paletto delle schede** («Beppe non ha colpi grossi»), mentre escono i
+  due Mattoni generici. Non è un errore, ma è una deroga a un paletto scritto e va decisa come tale, non per taratura.
+- **Op., confermo e preciso l'uniformità.** Lo schema è uguale per tutti, ma **il prezzo no**, e non per disegno: dipende dalla A che
+  il caricamento regala. Piera e Mara ricevono dal proprio caricamento la velocità che fa cadere il gettone prima dei colpi
+  avversari (AP1, AP2.1); Spazienzio, Celestina e Beppe no. Oggi la differenza fra i personaggi nel pagare l'annuncio è un effetto
+  collaterale di M1, non un'identità scelta. La proposta A3-a (penalità personale) resta «dopo», ma **prima** va tolto questo
+  effetto involontario (AP4, M1).
+
+**Revisione di A9 e C4-3 (Sergio e Duccio).**
+
+- **Op., ritiro C4-3 com'era scritta.** Proponevo «un personaggio che non annuncia mai e punisce chi annuncia» come idea nuova. Non lo
+  è: **Sergio è già quello**, per scheda e per griglia. La proposta giusta è più stretta: **in SB-17 non dare a Sergio la coppia
+  caricamento-colpo standard.** Un personaggio che vince leggendo non deve annunciare; e le sue carte guadagnano valore proprio
+  perché gli altri cinque ora annunciano (CES-AR2 che ruba un colpo cercato e mostrato è la giocata più bella che il set permette).
+  Serve una riga di deroga a D52(3) per Sergio. *Costo:* una decisione. *Rischio:* è il personaggio che i bot giocano peggio, quindi
+  si decide quasi solo in prova umana. *Verifica:* prova umana, Sergio contro chi annuncia.
+- **Op., Duccio.** Ha già in ROC-AR6 una carta «risorsa adesso, vulnerabile per due turni»: è un caricamento senza ricerca. La sua
+  coppia può nascere lì (cura e ricerca dell'Uppercut, con gettone D69 al posto del ×1,25 a tempo) senza carte nuove. Attenzione a
+  due cose: per lui la «risorsa» è la salute, quindi ×1,5 lo colpisce due volte; e con 130 di salute il colpo unico pesa meno.
+- **Op., A9 resta:** il set base spende la stessa idea su tutti. Con Sergio senza coppia e Duccio con una coppia «sua», i sette
+  personaggi avrebbero tre modi diversi di stare nel ritmo (annuncia, legge, incassa), che è quanto le schede promettono.
+- **Op., una cosa nuova dal listino.** «La priorità non va pagata» e «A è ordinale» erano veri con le regole 1.13. Con P1 (chi è a
+  terra non colpisce) e con il gettone a fine gruppo, arrivare prima vale molto di più: decide chi muore e se il gettone conta. Il
+  listino di priorità e A va rimisurato con d50 e D69 prima di prezzare i +20…+35 A dei caricamenti; SB-16e lo prevedeva
+  («Listino di priorità e A da rimisurare») e la 2b non lo cita.
+
+## AP4. Risposte da designer
+
+### M1 — Il gettone cade a fine gruppo o a fine turno?
+
+**Oss.** (a) Partita 2 di AP1: due turni di rischio, zero danni amplificati. (b) AP2.1: con D69 il turno in cui si gioca il colpo
+costa a quattro personaggi su cinque meno che con l'esposizione a due turni (a tre anche meno di un turno normale), e più solo a
+Spazienzio, l'unico lento col colpo a priorità 0.
+(c) I caricamenti di Piera danno +35 A e quelli di Mara +20/+30 (proposta 1.1): la carta che crea il gettone dà anche la velocità per
+farlo cadere in tempo.
+
+**Op.: fine turno.** Il gettone legato al nome deve cadere **alla fine del turno** in cui si gioca la carta con quel nome, non a fine
+gruppo. Ragioni:
+
+1. D52 chiede «un'esposizione che dura anche il turno dopo». A fine gruppo, per chi è veloce, il turno dopo non c'è.
+2. Il prezzo dell'annuncio non deve dipendere dalla A, che è proprio la risorsa che i caricamenti regalano: altrimenti la leva di
+   bilanciamento e l'effetto da bilanciare sono la stessa cosa.
+3. Si spiega in sei parole («fino alla fine di quel turno»); «fine del gruppo di velocità» chiede di sapere cos'è un gruppo.
+4. Ridà senso alla risposta dell'avversario: chi vede il colpo annunciato sa che nel turno in cui arriva potrà restituirlo ×1,5.
+   Oggi, contro Mara o Piera, sa che non potrà.
+
+*Cosa si perde:* la possibilità di «uscire» dal gettone giocando d'anticipo, che è una bella mossa per Mara. Si può ridare come
+carattere a una sola carta («questo colpo toglie subito il gettone»), scritto sulla carta (R00). *Costo:* una riga in `settleGroup`,
+qualche test di D69 da riscrivere, una frase di D69. *Rischio:* più doppi KO nel turno del colpo, quindi patte: da misurare.
+*Verifica:* la stessa sonda di AP2 sulle due varianti, guardando la colonna «col gettone, gioca il colpo» e le patte; poi il turno 4
+di AP1 rigiocato (deve dare 37, non 25).
+
+**Op. sul turno del caricamento.** Resta «cieco», ma AP2.1 dice che costa in media 1–3 punti: è un prezzo d'ingresso accettabile, e
+ritiro la proposta A2-a del consulto (×1,25 nel turno N): partiva da un mio aneddoto, i numeri non la sostengono.
+
+### G2 — Come far costare la ricerca fallita
+
+**Oss.** AP2.2: 22–61% di ricerche fallite; 61% dove il colpo è in copia unica, che è lo schema di tutti i rari della proposta. Una
+ricerca fallita oggi dà le stesse risorse, un gettone di due turni invece che senza scadenza, e (AP1) spesso nessun danno in più.
+
+**Op.** Fallire non deve essere l'esito migliore. In ordine di preferenza:
+
+1. **Le risorse arrivano solo se la ricerca trova.** «Cerca X. Se lo trovi, guadagni 25 V e 15 A e sei vulnerabile…; se non lo
+   trovi, pesca.» Il caricamento a vuoto diventa un turno perso: costa, e si spiega da solo. Rispetta D63 (le risorse servono a
+   pagare *quel* colpo). *Costo:* un passo condizionale nel formato della bozza. *Rischio:* carta morta in mano a fine mazzo; ma una
+   carta morta è uno scarto per le bound, che è il loro mestiere.
+2. **Ripiego sul colpo NC per il tutore del raro** (A5-b del consulto): dimezza i fallimenti del caso peggiore senza cambiare il
+   prezzo. Compatibile con la 1.
+3. **Gettone anonimo più lungo** (tre turni invece di due): la leva più piccola, ed eredita il difetto di M1.
+
+Sconsiglio «gettone senza scadenza anche se fallisce»: senza una carta da giocare non c'è uscita, ed è G5 moltiplicato.
+*Verifica:* simulazione con la quota di caricamenti giocati a ricerca già impossibile (colpi tutti usciti dal mazzo), per politica;
+è il numero che dice se i bot, e quindi un giocatore pigro, usano il tutore come generatore.
+
+### G5 — Gettone permanente: serve un'uscita?
+
+**Oss.** La sonda non ha potuto contare i gettoni rimasti a fine partita (il motore li pulisce prima). Nella bozza di prova i turni
+col gettone per caricamento sono 1,5–2,4 in media (AP2.1), con Spazienzio più alto perché il suo caricamento non paga il colpo. La
+revisione (M5) ha provato che dopo lo scarto dell'unica copia il gettone resta per sempre.
+
+**Op.: sì, un'uscita sola, cara e visibile.** Tengo «lo scarto non libera» (è il carattere di D69) ma aggiungo: **il gettone cade
+quando chi lo porta non ha più quella carta né in mano né nel mazzo, alla fine del turno successivo.** In pratica: scartare l'ultima
+copia costa ancora un turno intero a ×1,5, poi basta. Così la punizione ha una misura, non dura dieci turni per un tocco sbagliato
+sul telefono, e resta peggiore che giocare il colpo. È la proposta G5 della revisione con un prezzo esplicito. *Costo:* un controllo
+a fine turno. *Rischio:* «scarto e pago un turno» diventa una via d'uscita abituale: il turno a ×1,5 deve restare più caro che
+giocare un colpo parato. *Verifica:* contare nella sonda, prima della pulizia, i gettoni vivi all'ultimo turno e i turni vissuti
+col gettone dopo lo scarto. In ogni caso serve l'avviso del client prima dello scarto (M5).
+
+### K1 — La carta mostrata dopo lo scarto
+
+**Oss.** Proposta 1.1: il promemoria resta finché c'è il gettone, anche dopo lo scarto. Motore: la carta si mostra solo se quella
+copia è in mano. In partita (AP1) il segnalino dice già il nome del colpo, in chiaro.
+
+**Op.: ha ragione il motore, va corretta la proposta.** Una carta disegnata a faccia in su nella mano dell'avversario dice «ce l'ha».
+Se l'ha scartata, è un'informazione falsa su cui l'altro deciderà di pararsi. D69 la chiama «promemoria di ciò che tutti hanno
+visto»: quel compito lo fa il segnalino, che resta. Regola semplice: **la carta scoperta dice dov'è la carta; il segnalino dice che
+il conto è aperto.** Dopo lo scarto: niente carta, segnalino con il nome e, se si adotta l'uscita di G5, il conto alla rovescia.
+*Costo:* una frase della proposta. *Verifica:* nessuna nuova.
+
+### C3-1 — Prova umana prima della 2b?
+
+**Oss.** In due turni di una sola partita fra «umani» è emerso ciò che 72.000 partite di bot mostrano solo come una colonna
+(AP1 contro AP2.1). La prova umana di D69 con le carte di oggi richiede il diff di AP0, pronto e di dieci righe.
+
+**Op.: sì, e la restringo.** Non «tre partite libere», ma **mezz'ora con uno scopo**: il proprietario gioca Spazienzio (lento) e Piera
+o Mara (veloci dopo il caricamento) e guarda una cosa sola: *quante volte il gettone ti ha fatto prendere più danni?* Se la risposta
+per Piera e Mara è «mai», M1 è deciso senza altre misure. Prima di questa prova non approverei le dieci carte: i loro numeri
+(+35 A, colpi da 40–54) sono tarati su un gettone che per metà dei personaggi non morde.
+
+### C3-2 — 2b in uno o due passi?
+
+**Oss.** D69 da sola non sposta quote, patte e durate (AP2.3): la matrice di SB-16e2 è ancora una base valida. I bot non leggono il
+gettone (B1).
+
+**Op.: tre passi corti, nello stesso budget, in quest'ordine.**
+
+1. **Regole e bot, nessuna carta nuova:** decisione su M1, G2, G5, K1; bot che leggono gettone e carte scoperte (B1). Un giro sulle
+   carte di oggi col diff di AP0. Dice quanto costa davvero il gettone quando qualcuno lo sfrutta. È il passo che oggi manca.
+2. **Frequenza:** lo schema 2+2+1+1 con i danni attuali.
+3. **Potenza:** i numeri della proposta, con il contatore «partite finite in un turno da metà salute» (oggi 1,6%).
+
+Un giro unico con tutto insieme misurerebbe carte nuove con bot ciechi su una regola ancora aperta: tre incognite, tre giri di
+budget, nessuna possibilità di attribuire le cause. Ritiro invece C3-5 come condizione: gli specchi non peggiorano con D69, quindi
+il criterio delle patte si può lasciare com'è e rileggere dopo il passo 3.
+
+## AP5. Cosa cambia nelle cinque cose più importanti
+
+| # | Nel consulto | Dopo l'approfondimento |
+|---|---|---|
+| 1 | L'annuncio è l'idea che fa il gioco: provarla prima di moltiplicarla | **Confermata e più urgente.** Con «fine gruppo» per Piera e Mara il gettone non morde (AP1: zero danni in più in due turni; AP2.1). Prima la regola (M1 a fine turno), poi le carte |
+| 2 | Il prezzo cade su chi annuncia al buio (30 su 80 al turno 1) | **Ritirata nella forma.** In media il turno del caricamento costa 1–3 punti, 8–14 nei primi turni: il mio era un caso estremo. Il problema vero è l'opposto: **il prezzo totale è basso (2–5 punti) e dipende dalla velocità.** A2-a ritirata |
+| 3 | La meccanica non si vede su carta e impatto | **Ridotta.** Il segnalino con D69 è uno e si legge bene. Restano il volto del caricamento e il «×1,5» sull'impatto, a cui aggiungo: mostrare quando il gettone **non** ha agito e perché |
+| 4 | Una parola, «Annuncia», al posto di dieci paragrafi | **Confermata, e più facile** se M1, G5 e K1 semplificano la regola: «fino alla fine del turno in cui giochi X» è già una frase da carta |
+| 5 | I bot trovano le rotture, non l'equilibrio | **Confermata con un numero:** D69 non sposta la matrice perché i bot non la vedono. **Nuova al posto di «specchi fuori dal cancello»:** la ricerca fallita è frequente (22–61%) e oggi conviene (G2): le risorse solo se la ricerca trova |
+
+**Nuove, da portare al proprietario insieme:** M1 a fine turno; G2 con risorse condizionate; G5 con uscita a un turno; K1 secondo il
+motore; Sergio senza coppia standard; il paletto «Beppe non ha colpi grossi» da derogare esplicitamente o rispettare; listino di
+priorità e A da rimisurare con d50.
+
+**Cosa non ho fatto in questo approfondimento.** Cinque starter e due partite fra umani (fatte due partite parziali); nessuna
+partita finita; nessuna misura delle varianti proposte (M1 a fine turno, G2, G5: sono proposte, non risultati); nessuna misura con
+le dieci carte della proposta 1.1; la sonda misura la salute persa nel turno, non il solo danno avversario, e non conta i gettoni a
+fine partita; griglia letta per principi e per gli slot di Sergio e Duccio, non riga per riga. Il worktree `E:\bm-d69` e gli
+strumenti in `E:\bm-d69-tools` restano sul disco per chi vuole rifare le misure; si tolgono con `git worktree remove --force E:\bm-d69`.
