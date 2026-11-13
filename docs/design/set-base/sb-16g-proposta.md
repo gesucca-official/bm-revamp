@@ -1,387 +1,324 @@
-# SB-16g — Coppie caricamento-colpo, seconda passata
+# SB-16g — Proposta aggiornata delle carte prima di 2b
 
-**Versione 0.11 — 13 novembre 2026. Fase 1 fatta, risposte registrate D59–D68. Divisione della Fase 2 in 2a/2b approvata; carte concrete e sostituzioni da ripresentare prima della bozza. STOP dopo la registrazione, nessuna attuazione.**
+**Versione 1.0 — 13 novembre 2026. Proposta concreta da approvare (D68).** Sostituisce le schede e le composizioni a un solo bersaglio della versione 0.11. Le decisioni D59–D68 restano valide; queste carte, le sostituzioni e la difesa dal POISON non sono ancora approvate né attuate. I numeri sono indicativi, tarabili in Fase 2 secondo D38.
 
-**Schema corrente approvato (D61–D62), uguale per tutti i cinque starter:**
-
-| Caricamento nello starter | Colpo cercato nello starter |
-|---|---|
-| 2 copie della stessa carta non comune | 2 copie dello stesso colpo non comune |
-| 1 copia di un secondo titolo non comune | 1 copia di un colpo raro diverso |
-
-Tre caricamenti, tre colpi cercabili e quattro titoli distinti per le coppie. I bersagli restano esatti e separati. Le eventuali altre carte nelle buste sono una possibilità futura. **La tabella originaria seguente e le cinque schede con un solo bersaglio per personaggio sono superate nello schema da D61:** si conservano come riferimento dei numeri e delle sostituzioni da rivedere, non come liste approvate.
-
-| Starter | Caricamenti proposti / colpi | Slot che cedono nello starter | Risorse e colpo cercato, valori iniziali | Conseguenza scelta F (D59) |
+| Starter | Coppia NC: 2 copie di ciascun titolo | Coppia rara: 1 copia di ciascun titolo; caricamento sempre NC | Copie che escono rispetto alla bozza corrente | Composizione finale |
 |---|---|---|---|---|
-| Spazienzio | 2 PAZIENZA: FINITA + 1 **TI FACCIO SPAZIO** / 2 Impatti | Denti stretti 1 → 0 | Entrambi +25 V; il primo anche +15 A, il nuovo anche 6 HIT. Impatto: 25 V, 40 HIT | Vulnerabilità ×1,5 finché resta in mano la copia trovata, minimo due turni |
-| Mara | 2 Slalom + 1 **Ti stringo la curva** / 2 Sgommate | Spintone 2 → 0 | Slalom +20 A; nuova +15 A e 4 CUT. Sgommata: 15 A, 25 CUT | Stessa regola, legata alla Sgommata trovata |
-| Celestina | 2 Dose + 1 **Un assaggino** / 2 Tossiconi | Rincorsa 2 → 1 | Dose +10 T e +5 A; nuova +10 T e 4 POISON. Tossicone: 10 T, 20 POISON e +5 T al bersaglio | Stessa regola, legata al Tossicone trovato |
-| Piera | 2 Un altro e arrivo + 1 **Prima il brindisi** / 2 Estasi | Fasciatura 2 → 1 | Primo +25 L e +35 A; nuova +25 L, +20 A e 6 HIT. Estasi gratuita: 18 + L HIT, azzera L | Stessa regola, legata all'Estasi trovata |
-| Beppe | 2 Preparo il lavoro + 1 **Una stretta di prova** / 2 Lavori | Mattone 2 → 0; Spintone 1 → 0 | Primo +15 V; nuova +10 V e 4 CUT. Lavoro: 10 V, 18 + 5 per oggetto HIT | Stessa regola, legata al Lavoro trovato |
+| Spazienzio | PAZIENZA: FINITA → GARGANTUESCO IMPATTO SUL TU: +25 V/+15 A → 25 V, 40 HIT | **TI FACCIO SPAZIO** → SPEDIAMOTI DUNQUE IN O-AHIO: +35 V/+5 A → 10 V, 20 + V residua/2 HIT | 1 SPEDIAMOTI DUNQUE IN O-AHIO (da 2 a 1) | 10 archetipo + 7 generiche + 3 oggetti = **20** |
+| Mara | Slalom d'avvicinamento → Sgommata: +20 A → 15 A, 25 CUT | **Ti stringo la curva** → Cinghiata di traverso: +30 A → 20 A, 20 + A residua/2 CUT | 1 Cinghiata di traverso (2→1); 1 Spintone (2→1) | 10 + 5 + 5 = **20** |
+| Celestina | Dose in preparazione → Tossicone Scatarrante: +10 T/+5 A → 10 T, 18 POISON e +5 T al bersaglio | **Un assaggino** → C'è del sangue nella mia droga: +20 T → 10 T, 12 POISON più travaso della T residua e perdita dell'immunità del bersaglio | 1 Rincorsa dal marciapiede (2→1) | 10 + 5 + 5 = **20** |
+| Piera | Un altro e arrivo → Estasi da Coca Etilene: +25 L/+35 A → gratuita, 18 + L HIT, azzera L | **Prima il brindisi** → Rutto a distanza sociale: +35 L/+35 A → 5 L, 20 + 2×L residua HIT, sottrae quella L alla A avversaria, azzera la propria L | 1 Fasciatura col fazzolettaccio (2→1) | 10 + 5 + 5 = **20** |
+| Beppe | Preparo il lavoro → Chiave da tredici: +15 V → 10 V, 22 CUT | **Una stretta di prova** → Lavoro fatto bene: +10 V e 4 CUT → 10 V, 14 + 7 per proprio oggetto HIT | 2 Mattoni del cantiere (2→0) | 9 + 4 + 7 = **20** |
 
-**Scelta di progetto proposta:** tre caricamenti per starter, due titoli che cercano lo stesso identico colpo; sei alternative di conseguenza confrontate sotto. Raccomando **F, vulnerabilità mantenuta mentre si trattiene il colpo**, per conservare la scelta richiesta all'inizio. **D, scartare e ripescare oppure tenere restando vulnerabili per un solo turno aggiuntivo**, è la via di mezzo meno severa. **C, scarto e pesca automatici**, è la candidata se si preferisce che l'annuncio scada davvero. **B, perdita permanente di uno spazio**, richiede una decisione di sistema più ampia e una protezione contro l'assenza di mosse.
+**Vulnerabilità iniziale per tutti i dieci caricamenti: ×1,5 a HIT, CUT e POISON**, con durata F già decisa: almeno il turno del tutore e il successivo, poi finché resta in mano la precisa copia cercata. Ogni applicazione resta indipendente e si cumula moltiplicativamente (D59, D64–D66). Nessuna vulnerabilità aggiuntiva è impressa sui dieci titoli di colpo: «—» nelle loro schede significa che non ne creano una propria; si applicano normalmente gli stati già presenti.
 
-Tutti i numeri sono indicativi (D38), non risultati di simulazioni. Funzionamenti, composizioni e variante della conseguenza devono essere approvati prima della Fase 2 (D45.7). La proposta iniziale cambia soltanto questo documento; la registrazione delle risposte aggiorna anche il piano, su istruzione del proprietario.
+**D67, difesa candidata:** «Il bancone regge, io pure», due copie già nello starter di Piera: gratuita, priorità 2, bersaglio sé; HIT ricevuti ×0,5 **e POISON ricevuti ×0,5** nel turno; +5 L. Il costo, la priorità e il premio restano quelli attuali. Il POISON comprende anche quello periodico di fine turno; la protezione non toglie T né conferisce immunità. Proposta dettagliata sotto.
 
-## Risposte registrate
+## Perimetro, fonti e riferimento
 
-**D59 — Domanda 1, scelta F e durata minima (13 novembre 2026).** Il proprietario: «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?».
+Questa consegna aggiorna soltanto questo documento. Il piano, la griglia, la bozza, codice, test, client, regolamento, documento del set e catalogo restano fuori dal nostro intervento. La Fase 2a su server/client è assegnata a un altro esecutore: nessun suo file è incluso nel commit. Si progettano qui le carte da sottoporre al proprietario prima della Fase 2b; non si avvia il giro.
 
-Confermato: i due turni minimi sono il turno del tutore (N) e quello immediatamente successivo (N+1). Giocare o scartare il colpo entro N+1 non interrompe quel minimo; se la copia trovata resta in mano dopo N+1, la vulnerabilità continua finché esce. Le alternative A–E restano documentate come confronto, non candidate già autorizzate a un lotto. Tipi di danno, cumulo e altri dettagli della domanda 4 restano da decidere. Le altre domande e la divisione della Fase 2 devono ancora essere sottoposte; questa risposta non approva l’intera proposta. Decisione nel [piano](../../set-base-plan.md#decisioni-del-proprietario).
+Fonti: [decisioni D60–D68 e SB-16g](../../set-base-plan.md#decisioni-del-proprietario), [griglia](griglia.md), [listino](listino.md), [proposta SB-16d](sb-16d-proposta.md), rapporti [SB-16e](../../reports/set-base/sb-16e-report.md) e [SB-16e2](../../reports/set-base/sb-16e2-report.md). Il [regolamento](../../game-rules.md) e il [Set Base](../../sets/base.md) governano la partita viva; i cambi D50 e queste carte restano nel playground fino a SB-28.
 
-**D60 — Domanda 2, approvazione del totale e nuova ipotesi di rarità (13 novembre 2026).** Il proprietario:
+Riferimento delle sostituzioni: [bozza corrente](../../../server/src/test/resources/set-base/bozza.json), variante (c), letta sul commit `ee7f4d3`; SHA-256 `d435a8796e81b7be8955cd27feb0639126cf8d2e3868c6069881e396fc3d8e19`. Il confronto è con quella bozza giocabile, non con le vecchie schede della proposta. Le versioni 0.x e il confronto fra conseguenze alternative restano nella storia Git; la conseguenza scelta è F.
 
-> va bene 120 carte, ma:
->
-> se consideriamo la rarità, potremmo fare due copie di una carta caricamento non comune che cercano un colpo non comune (anche quello in due copie), mentre un'altra carta di caricamento cerca il colpo raro
->
-> che ne pensi?
+## Decisioni del proprietario applicate
 
-Approvato il totale **120**. La struttura delle coppie è ancora in discussione: due copie di un caricamento NC verso due copie di un colpo NC, più un secondo titolo di caricamento verso un colpo raro. Restano da confermare applicazione ai cinque starter, rarità del secondo caricamento, copie del raro e sostituzioni. Le tabelle originarie sotto restano una base di confronto, **non composizioni approvate**.
+Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce da esse l'approvazione dei nuovi numeri o delle carte concrete.
 
-**Valutazione della nuova ipotesi:** raccomando di approfondirla. Differenzia le ricerche: il colpo NC deve essere forte e affidabile; quello raro può avere un picco maggiore legato alla preparazione o al tavolo. I tre caricamenti restano, ma con una copia del raro si arriverebbe a tre colpi cercabili per starter, contro i due della proposta iniziale: occorre un ulteriore slot nelle liste da 20. Due bersagli diversi per personaggio precisano D52; ciascuna carta continua a cercare un solo binding. Per restare a 120, il nuovo bersaglio va ricavato da slot esistenti, rivedendo funzioni e rarità senza aggiungere cinque ulteriori carte. Il tutore del raro può fallire più spesso quando la singola copia è già in mano o negli scarti: vanno misurati frequenza e premio di sole risorse. Nessuna modifica delle carte in questa registrazione.
-
-**D61 — Domanda 2, schema confermato per tutti i cinque starter (13 novembre 2026).** Il proprietario: «Sì, adottiamo questo schema per tutti e cinque gli starter. Precisando, 2 caricamenti non comuni e 2 colpi non comuni sono due copie della stessa carta: è uno starter deck, poi nelle buste ci saranno magari altri caricamenti e altri colpi diversi».
-
-Approvata la struttura 2 copie di un unico caricamento NC → 2 copie di un unico colpo NC, più 1 caricamento di un altro titolo → 1 colpo raro, come nella domanda di conferma. Le coppie usano quindi quattro titoli distinti per starter; i due esemplari NC non sono carte diverse. La proposta delle sostituzioni verrà rivista entro 20 regolari e 120 carte totali. Restano da scegliere rarità del secondo caricamento e carte concrete, prima di approvare nuovi valori/funzionamenti. La possibile varietà nelle buste non amplia il perimetro di questa registrazione.
-
-**D62 — Domanda 2, rarità del secondo caricamento (13 novembre 2026).** Alla proposta «farei non comune anche il caricamento in singola copia che cerca il raro, così il caricamento è accessibile e la rarità caratterizza il colpo. Ti va bene?», il proprietario risponde: «va bene». Entrambi i titoli di caricamento sono NC: il primo in due copie cerca il colpo NC, il secondo in una copia cerca quello raro. Questo dettaglio della domanda 2 è chiuso per tutti i cinque starter; carte concrete e sostituzioni restano da presentare.
-
-**D63 — Domanda 3, direzione di risorse e potenza (13 novembre 2026).** Alla domanda riformulata «ogni caricamento deve dare, partendo da zero e considerando il fine turno, risorse sufficienti per giocare il rispettivo colpo; il colpo non comune deve essere potente e affidabile; il colpo raro deve offrire un picco maggiore, legato alla preparazione o alla situazione sul tavolo», con numeri indicativi tarabili nella Fase 2 e carte concrete da ripresentare nella proposta aggiornata, il proprietario risponde: «approvo». Approvata la direzione delle due coppie per tutti i cinque starter; non sono approvati i vecchi valori/funzionamenti delle schede superate da D61. Resta il normale rischio di interferenza avversaria o di spesa volontaria delle risorse dopo il caricamento.
-
-**D64 — Domanda 4, tipi di danno e idee future (13 novembre 2026).** Il proprietario: «approvo vulnerabilità a tutti i danni. pensiamo anche che, in futuro o nelle buste, possiamo infliggere anche vulnerabilità diverse (tipo un consumo aumentato di risorse per giocare le carte, che non se ne va fino a che non si gioca il colpo cercato), oppure vulnerabilità peggiori (2x, 3x) se serve per bilanciare la forza delle carte».
-
-Approvata la vulnerabilità a HIT, CUT e POISON per tutti i cinque starter, Spazienzio compreso. Si parte dal fattore proposto ×1,5, tarabile nella Fase 2. Fattori ×2/×3 possono essere valutati rispetto alla forza delle carte; non sono adottati con questa registrazione. Per il futuro o le buste si conserva anche l’idea di penalità diverse legate al colpo trattenuto, come maggiori consumi di risorse: servono funzionamento, interazioni e costo nel motore prima di attuarle. La frase «fino a che non si gioca» riguarda quell’ipotesi futura e non modifica D59; il trattamento dello scarto andrà definito nella relativa proposta. Restano da decidere identità della copia/casi di uscita e cumulo.
-
-**D65 — Domanda 4, legame alla copia e casi di uscita (13 novembre 2026).** Alla gestione proposta il proprietario risponde: «si, la vulnerabilità inflitta segue quella precisa copia». Il legame segue l’esemplare trovato, non tutte le carte dello stesso titolo. Giocarlo o scartarlo chiude il prolungamento, ma lascia intatto il minimo del turno del tutore e di quello successivo (D59). Un colpo parato/annullato chiude il prolungamento se esce effettivamente dalla mano; una bound libera il legame soltanto se lo scarto si esegue davvero. Giocare/scartare un’omonima non trovata da quella ricerca non libera la copia cercata. Una ricerca fallita produce soltanto i due turni minimi e nessun legame con copie già in mano o pescate normalmente. Il cumulo di più vulnerabilità resta da sottoporre.
-
-**D66 — Domanda 4, cumulo (13 novembre 2026).** Alla proposta di vulnerabilità indipendenti con fattori moltiplicati, il proprietario risponde: «approvo». Una ×1,5 dà danni ×1,5, due ×1,5 danno ×2,25. Giocare/scartare una copia chiude solo il suo prolungamento, rispettando i due turni minimi; gli altri effetti restano. Non si introduce un tetto o uno stato unico condiviso. Fattori e potenza delle carte si tarano insieme nella Fase 2. La domanda 4 è chiusa; la domanda 5 sulla capacità della mano non si applica, essendo stata scelta F anziché B/E.
-
-**D67 — Domanda 6, valutazione della difesa dal POISON (13 novembre 2026).** Alla domanda «Vuoi includere questa valutazione?», riferita all’eventuale estensione di una difesa regolare esistente al POISON conservando il premio di risorse o cura, il proprietario risponde: «si includiamola». La valutazione entra nella Fase 2; carta candidata e funzionamento concreto devono essere presentati e approvati prima della modifica. Nessun nuovo effetto è già autorizzato da questa risposta. Leggibilità del legame pubblico già compresa in D58; premi condizionati alla ricerca e ridisegno delle last resort restano ipotesi non approvate. Non si riapre il cumulo già deciso in D66.
-
-**D68 — Divisione della Fase 2 (13 novembre 2026).** Alla proposta della divisione seguente, con attuazione ferma, il proprietario risponde: «approvo».
-
-- **2a:** D58 (copia cercata scoperta in mano), conseguenza scelta nel motore, vista server e client, con test. Include minimo di due turni, legame alla copia, vulnerabilità a tutti i danni e cumulo indipendente moltiplicativo (D59, D64–D66).
-- **2b:** carte nella bozza, relativi test e griglia coerenti, bot con le tre politiche e giro di bilanciamento entro tre giri e due ore cumulative di calcolo, con criteri D16/D51 invariati. Inclusa la valutazione della difesa POISON (D67).
-
-**Condizioni conservate:** prima di inserire le carte nella bozza vanno ripresentate e approvate coppie concrete e sostituzioni aggiornate allo schema di rarità D61–D63. Anche la difesa POISON deve avere una proposta concreta approvata prima della modifica. La divisione non amplia il budget e non è un comando di avvio. **Fase 1 fatta, risposte registrate; STOP dopo la registrazione documentale.** Le vecchie schede a un solo bersaglio non diventano carte approvate con D68.
-
-## Indicazioni del proprietario in questa sessione
-
-Registrazione preliminare secondo il [contratto dell'esecutore](../../orchestrazione-lavoro.md#contratto-dellesecutore).
-La visibilità permanente della carta cercata è già registrata in D58 del [piano](../../set-base-plan.md#decisioni-del-proprietario).
-
-- «oltre le copie multiple, possiamo inventarne altre».
-- «perché non valutiamo una soluzione più drastica? se il colpo non viene usato il turno successivo, verrà scartato e da quel punto il giocatore avrà una carta in meno per il resto della partita».
-- Alla domanda se sostituire il vincolo iniziale di poter conservare il colpo o confrontare entrambe le direzioni: «Confronta entrambe nella proposta».
-- «possiamo valutare anche lo scarto del colpo non giocato e il ripescare normalmente un'altra carta, per averne sempre sei in mano (a meno di non aver finito le carte nel mazzo, in tal caso interviene la meccanica normale della last resort)».
-- «se ti vengono in mente proponi anche vie di mezzo».
-- «potrebbe essere: mantenere la vulnerabilità fintanto che il colpo cercato resta in mano. analizziamo anche questa».
-
-Sono richieste di progettazione e confronto, non scelte già approvate. Il confronto comprenderà anche le alternative che rinunciano alla possibilità di conservare il colpo, dichiarando la differenza dal requisito iniziale.
-
-## Base di confronto e criteri
-
-Letture: [SB-16f e SB-16g](../../set-base-plan.md#sb-16f--prova-umana-degli-starter-rifatti), decisioni D8, D16, D38, D45.7, D50–D58 nello stesso piano; [proposta SB-16d](sb-16d-proposta.md), [griglia](griglia.md), [listino](listino.md), rapporti [SB-16e](../../reports/set-base/sb-16e-report.md) e [SB-16e2](../../reports/set-base/sb-16e2-report.md), [bozza corrente](../../../server/src/test/resources/set-base/bozza.json). Base del lavoro `8bc0def`, variante (c) confermata da D57. I nomi vecchi Tossico/Pino/Gigi nei binding non cambiano identità ai personaggi.
-
-Le quattro richieste di SB-16f sono: «ne vorrei di piu, per vederne almeno una o due a partita»; «dovrebbero dare le risorse necessarie a giocare il colpo che cercano»; «i colpi annunciati cercati dovrebbero essere potenti»; «ci dovrebbe essere qualche malus se non si giocano il turno successivo, altrimenti uno li puo usare le carte che cercano solo come tutori che danno risorse, e tenersi il colpo potente per dopo. potrebbe essere una scelta che un giocatore fa, ma ci deve essere una conseguenza».
-
-La lettura della regia dice «una sola carta di caricamento»: nella bozza significa **un solo titolo**, non una sola copia per tutti. Le copie attuali sono **2, 1, 2, 2, 1**; quelle dei colpi **2, 2, 2, 2, 1**. R02 consente al massimo due copie della stessa carta: non propongo tre Glare, tre Dosi o tre Un altro e arrivo.
-
-| Coppia attuale | Risorse del caricamento | Costo e danno del colpo |
-|---|---|---|
-| Spazienzio | +15 V, +15 A | 25 V, 40 HIT: da V=0 il caricamento non basta |
-| Mara | +15 A | 15 A, 25 CUT |
-| Celestina | +10 T | 10 T, 12 POISON e +5 T al bersaglio |
-| Piera | +15 L, +35 A | Gratuito, 10 + L HIT, poi L azzerata |
-| Beppe | +10 V | 5 V, 6 + 4 per oggetto HIT |
-
-Con (c), le violazioni sono **dieci: due di patte, due di quota, sei di durata**. I «quattro incontri lunghi» della chiusura di SB-16e2 sono in aggiunta ai due specchi lunghi.
-
-| Misura della variante (c) | Valore di riferimento |
+| Decisione | Parole del proprietario e vincolo applicato |
 |---|---|
-| Spazienzio–Mara | Quota Spazienzio 0,524; patte 2,56%; 9,52 turni |
-| Celestina–Celestina | Patte 18,57%; 18,22 turni |
-| Piera–Piera | Patte 13,07%; 14,83 turni |
-| Mara–Piera | Quota Mara 0,653; patte 6,15%; 11,29 turni |
-| Celestina–Piera | Quota Celestina 0,662; patte 7,38%; 13,80 turni |
-| Altri incontri lunghi | Spazienzio–Piera 12,44; Celestina–Beppe 12,39; Piera–Beppe 12,88 turni |
-| Beppe–Beppe | Patte 8,22%; 10,84 turni |
+| D59 | «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?» Minimo N e N+1; poi prolungamento mentre si tiene la copia. |
+| D60 | «va bene 120 carte, ma:» e proposta di distinguere colpo NC e raro. Totale **120**, non 125; i bersagli rari riusano slot esistenti. |
+| D61 | «Sì, adottiamo questo schema per tutti e cinque gli starter. Precisando, 2 caricamenti non comuni e 2 colpi non comuni sono due copie della stessa carta: è uno starter deck, poi nelle buste ci saranno magari altri caricamenti e altri colpi diversi». Tre caricamenti e tre colpi, **quattro titoli distinti**, per ogni starter. |
+| D62 | «va bene» al secondo caricamento anch'esso NC, presente in una copia e diretto al raro. |
+| D63 | «approvo» alla direzione: risorse sufficienti da zero dopo il fine turno; NC potente e affidabile; raro con picco legato a preparazione/tavolo. Numeri tarabili, carte da ripresentare. |
+| D64 | «approvo vulnerabilità a tutti i danni.» Registrate anche le possibilità future di costi aumentati o fattori ×2/×3. Qui si parte da ×1,5; non si introduce un modificatore dei costi. |
+| D65 | «si, la vulnerabilità inflitta segue quella precisa copia». Giocata/scarto effettivo concludono il prolungamento; il minimo resta. Ricerca fallita: solo il minimo, nessun legame a carte già in mano o pescate normalmente. |
+| D66 | «approvo» al cumulo moltiplicativo indipendente. Una copia liberata non libera le altre. |
+| D67 | «si includiamola» alla **valutazione** di una difesa regolare anche contro POISON, preservando il premio; carta ed effetto concreti da approvare. |
+| D68 | «approvo» alla divisione **2a** (D58, conseguenza nel motore, vista server/client, test) / **2b** (carte, bot con tre politiche, giro). Prima della bozza si approvano le carte aggiornate. |
 
-Restano i criteri D16/D51: **45–55% fra starter base, 40–60% negli altri incontri; circa 6–12 turni; patte ≤10% per incontro, specchi compresi**. Le quote si calcolano sulle decisive, le patte su tutte le partite. Restano zero turni senza mosse legali, otto invarianti a zero, bound entro il tetto 4 e danno bound massimo 3, pochi mazzi esauriti e nessuna carta sistematicamente inutile o obbligata. Le medie globali non sostituiscono i criteri per incontro.
+## Contratto comune e lettura dei testi
 
-Il listino storico non è un prezzo universale: l'àncora corrente è 7 HIT (D38), D50 ha cambiato il valore della precedenza e della corazza. In SB-16e il gradino fra −1 e +1 A valeva circa 10 punti di quota per Celestina e 20 per Beppe nelle sonde, non sui colpi qui proposti. Non trasformo quei dati in equivalenze certe fra A e danno.
+- Tutti i caricamenti sono azioni regolari NC, non basic o bound. Ogni titolo cerca **un solo binding esatto**, quello indicato nella scheda; non una scelta fra i due colpi. Ricerche riuscite: la copia trovata resta scoperta in mano per tutti fino a giocata/scarto (D58). Assenza del bersaglio: normale pesca, senza recupero dagli scarti e senza ulteriori carte.
+- Nei testi, «la copia trovata» è l'esemplare effettivo di quella ricerca. Un'omonima già in mano non prende il suo posto. Una ricerca fallita lascia il minimo N/N+1 ma non prolunga né rinnova vecchi legami. Una copia realmente giocata o scartata per una bound conclude soltanto il suo prolungamento; colpo parato/annullato: conta se esce dalla mano. Restano sempre i due turni minimi. Identità della copia, gestione della sua uscita e visibilità sono supporto della 2a, non una nuova regola di queste carte.
+- Ogni stato di esposizione applicato rimane indipendente: due ×1,5 hanno fattore composto 2,25 prima degli arrotondamenti del percorso reale. Vale R05, con troncamento a ogni trasformazione, senza tetto o fusione speciali. L'esposizione amplifica anche il POISON periodico di chi non è immune; l'immunità a T non protegge dal danno POISON diretto.
+- Tutte le quantità variabili si leggono **dopo il costo**, alla risoluzione, salvo il valore esplicitamente memorizzato prima di azzerare/travasare una risorsa. Le divisioni sono intere. A dopo i costi fissa il gruppo del turno; guadagni e perdite successivi non riordinano i gruppi già fissati (D50).
+- Gli esempi di finanziamento partono dalla risorsa richiesta a zero, con le proprietà iniziali del personaggio, senza altre spese o interferenze avversarie. Non partono da HEALTH=0 e non promettono di sopravvivere a qualunque attacco. I costi restano pagabili solo con risorse possedute; nessuna riserva protetta e nessun debito.
+- Non si aggiunge autodanno ai caricamenti né l'eccezione «Ultimo colpo». Basic, bound, last resort, salute e risorse iniziali non cambiano qui. Le difese/contromosse personali restano nelle liste. Il raro deve poter essere parato, anticipato o ridimensionato da una risposta: il suo picco non è danno garantito.
+- I colpi hanno lo stesso effetto anche se pescati normalmente. Nessun bonus nascosto «se cercato»; le condizioni del picco sono risorse e oggetti già visibili. L'esposizione parte alla risoluzione, senza aumentare retroattivamente danni arrivati prima.
 
-## Quantità, slot e frequenza
+## Spazienzio — il NC lento e il raro che premia l'accumulo
 
-**Tre caricamenti per ciascuno, tutti regolari:** due copie del titolo attuale e una del nuovo. Tutti i colpi cercati arrivano a due copie. Una seconda carta di caricamento è un piccolo attacco che prepara quello grande: applica l'osservazione di D54 secondo cui il caricamento è un effetto e può stare anche su un colpo. Non introduce un tipo di carta, una risorsa o una parola chiave. Precisa D52: due titoli di caricamento per la stessa coppia, sempre un unico colpo esatto, senza allargare la ricerca ad altre carte.
+| Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
+|---|---|---|---|---|---|
+| PAZIENZA: FINITA, SPA-AR3 (`bruiser.Glare`) | 2; **NC** (da C) | Gratuita | 0; sé | ×1,5, durata F | `bruiser.SuperImpact` |
+| GARGANTUESCO IMPATTO SUL TU, SPA-AR1 (`bruiser.SuperImpact`) | 2; **NC** (da C) | 25 V | 0; un avversario | — | Nessuna |
+| TI FACCIO SPAZIO, nuovo SPA-AR6 (`base.bruiser.TiFaccioSpazio`, ID proposto) | 1; NC | Gratuita | 0; sé | ×1,5, durata F | `bruiser.ExtremelyViolentBlow` |
+| SPEDIAMOTI DUNQUE IN O-AHIO, SPA-AR2 (`bruiser.ExtremelyViolentBlow`) | 1; R | 10 V | 1; un avversario | — | Nessuna |
 
-| Starter | Modifiche delle copie rispetto alla bozza | Archetipo / generiche / oggetti prima → dopo | Titoli regolari distinti prima → dopo |
+**PAZIENZA: FINITA — testo:**
+
+> Guadagni 25 V e 15 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo GARGANTUESCO IMPATTO SUL TU e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+
+**GARGANTUESCO IMPATTO SUL TU — testo:**
+
+> Infliggi 40 danni da colpo al bersaglio.
+
+**TI FACCIO SPAZIO — testo:**
+
+> Guadagni 35 V e 5 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo SPEDIAMOTI DUNQUE IN O-AHIO e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+
+**SPEDIAMOTI DUNQUE IN O-AHIO — testo:**
+
+> Infliggi al bersaglio danni da colpo pari a 20 più metà della tua V rimasta dopo il costo, arrotondata per difetto.
+
+**Finanziamento e picco.** V non decade: da V=0 i due tutori lasciano 25 e 35 V in N+1, sufficienti per 25 e 10. Il NC dà 40 HIT, circa 5,7 unità nominali da 7, senza condizione aggiuntiva. Il raro, da zero e dopo il suo tutore, lascia V=25 dopo il costo e fa **32 HIT a priorità 1**; non supera sempre il NC lento. Con i 25 V iniziali conservati, più il tutore, dopo il costo ha V=50 e fa **45 HIT**. Con altre preparazioni cresce ancora; supera 40 quando V prima del costo è almeno 52. Il raro offre dunque anticipo e picco di accumulo, non un 45 fisso. Spendere V altrove riduce il picco, ma rende sostenibile scegliere una contromossa invece del colpo annunciato.
+
+**Sostituzioni:** entra 1 TI FACCIO SPAZIO; SPEDIAMOTI DUNQUE IN O-AHIO passa 2→1. Nessun altro titolo esce interamente: Denti stretti rimane come preparazione alternativa del raro. Restano NON GIOCARE COL COLTELLO NO e FAI BASTA, due copie ciascuno. Si passa da 12 a 13 titoli regolari distinti.
+
+**Atteso e rischio:** meno Impatti impagabili e meno attesa; l'anticipo del raro può evitare un finale reciproco, ma quantità elevate di V e Posacenere rendono possibili picchi letali. Estendere l'esposizione al CUT espone davvero contro Mara. Controllare il 45–55% fra i due base e Spazienzio–Piera lungo; non dedurre meno patte dal solo aumento dei danni. La formula del raro usa già il tipo di quantità `base + risorsa/divisore`; qui cambiano base 6→20 e la ricerca, non la meccanica di calcolo.
+
+## Mara — taglio affidabile e picco sulla A residua
+
+| Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
+|---|---|---|---|---|---|
+| Slalom d'avvicinamento, MAR-AR5 (`base.mara.Slalom`) | 2; **NC** (da R) | Gratuita | 2; sé | ×1,5, durata F | `base.mara.Sgommata` |
+| Sgommata, MAR-AR2 (`base.mara.Sgommata`) | 2; **NC** (da C) | 15 A | 1; un avversario | — | Nessuna |
+| Ti stringo la curva, nuovo MAR-AR6 (`base.mara.TiStringoLaCurva`, ID proposto) | 1; NC | Gratuita | 2; sé | ×1,5, durata F | `base.mara.CinghiataDiTraverso` |
+| Cinghiata di traverso, MAR-AR1 (`base.mara.CinghiataDiTraverso`) | 1; **R** (da C) | **20 A** (da 5) | 1; un avversario | — | Nessuna |
+
+**Slalom d'avvicinamento — testo:**
+
+> Guadagni 20 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Sgommata e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+
+**Sgommata — testo:**
+
+> Infliggi 25 danni da taglio al bersaglio.
+
+**Ti stringo la curva — testo:**
+
+> Guadagni 30 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Cinghiata di traverso e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+
+**Cinghiata di traverso — testo:**
+
+> Infliggi al bersaglio danni da taglio pari a 20 più metà della tua A rimasta dopo il costo, arrotondata per difetto.
+
+**Finanziamento e picco.** Da A=L=0, il NC arriva a N+1 con A=20; paga 15 e resta a 5. Il raro arriva con A=30; paga 20 e resta a 10, per **25 CUT**. Conservando invece i 40 A iniziali e aggiungendo il suo tutore arriva ad A=70, paga 20, resta a 50 e fa **45 CUT**. Quei 50 A contano anche per la precedenza a priorità 1: il costo maggiore paga sia picco sia velocità residua. NC 25 CUT resta circa 3,6 unità nominali, aggira la corazza ed è già potente; non ne aumento il danno. L ricevuta o sottrazioni avversarie di A possono impedire il seguito: è interazione legittima, non finanziamento garantito contro ogni disturbo.
+
+**Sostituzioni:** Slalom 1→2 ed entra 1 Ti stringo la curva; Cinghiata di traverso 2→1 e Spintone 2→1. Quindi nessun titolo sparisce, ma escono una copia del vecchio attacco economico e una del colpo gratuito. La rara passa dallo slot Slalom alla Cinghiata, senza aggiungere una seconda rara personale nello starter. Restano Sorpasso in curva, Tra due paraurti, Tartaruga e Steal. Titoli distinti 12→13.
+
+**Atteso e rischio:** due attacchi a basso impegno in meno, più preparazioni visibili e un solo picco raro. Possibile riduzione della durata, ma il picco a priorità/A elevate può rendere ancora peggiore il 65,3% di Mara contro Piera nelle decisive della variante (c). Prima di alzare ulteriormente CUT o A, verificare anche il 45–55% contro Spazienzio. La formula variabile usa operazioni già presenti nella bozza; la trasformazione della Cinghiata è un funzionamento da approvare, non una sola taratura di danno.
+
+## Celestina — POISON diretto NC e raro di travaso
+
+| Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
+|---|---|---|---|---|---|
+| Dose in preparazione, TOS-AR1 (`junkie.MethDrivenRage`) | 2; **NC** (da C) | Gratuita | 1; sé | ×1,5, durata F | `junkie.Cough` |
+| Tossicone Scatarrante, TOS-AR2 (`junkie.Cough`) | 2; **NC** (da C) | 10 T | 1; un avversario | — | Nessuna |
+| Un assaggino, nuovo TOS-AR6 (`base.tossico.UnAssaggino`, ID proposto) | 1; NC | Gratuita | 1; sé | ×1,5, durata F | `junkie.ToxicBloodDrain` |
+| C'è del sangue nella mia droga, TOS-AR5 (`junkie.ToxicBloodDrain`, riferimento dello slot) | 1; R | 10 T | 1; un avversario | — | Nessuna |
+
+**Dose in preparazione — testo:**
+
+> Guadagni 10 T e 5 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Tossicone Scatarrante e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+
+**Tossicone Scatarrante — testo:**
+
+> Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T.
+
+**Un assaggino — testo:**
+
+> Guadagni 20 T. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo C'è del sangue nella mia droga e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+
+**C'è del sangue nella mia droga — testo:**
+
+> Dopo il costo, trasferisci tutta la tua T residua al bersaglio e togli al bersaglio l'immunità agli effetti della T. Infliggi anche 12 danni da veleno al bersaglio. Alla fine di questo turno ottieni l'immunità agli effetti della T.
+
+**Ordine concreto del raro:** memorizza la T dopo il costo, azzera quella dell'autore, rimuove l'immunità a T del bersaglio, gli aggiunge la quantità memorizzata e infligge i 12 POISON diretti. Conserva il timer attuale di un turno: dà immunità **all'autore**, non al bersaglio. Non si introduce qui una restituzione dell'immunità al bersaglio o una durata nuova della sua perdita. Il timer si risolve dopo il veleno periodico secondo R06/D50: se l'autore aveva perso l'immunità, ottenerla a fine turno non lo protegge retroattivamente dal periodico appena dovuto. Questo dettaglio già presente nel travaso non è una cura.
+
+**Finanziamento e picco.** T non decade. Da T=0, Dose lascia 10 e Un assaggino 20, sufficienti per il costo 10. Il NC garantisce **18 POISON diretti**, circa 2,6 unità nominali, anche contro l'immune a T; i +5 T sono un effetto separato. Il raro da zero, dopo il suo tutore e il costo, trasferisce 10 T: contro un bersaglio senza T sono 12 diretti e 5 periodici alla sua fase di fine turno, prima degli stati. Con i 15 T iniziali di Celestina conservati più il tutore, trasferisce **25 T**: su un bersaglio a T=0 il primo periodico è 12, quindi 24 nominali nel turno, più i periodici successivi; su un'altra Celestina ancora a T=15 si arriva a T=40 e 20 periodici, più i 12 diretti. Il picco dipende da T accumulata e T/immunità avversarie, non da una semplice etichetta di rarità. Più danni periodici non equivalgono a danno garantito: l'avversario può ridurre POISON o azzerare T.
+
+**Sostituzioni:** entra 1 Un assaggino, esce 1 Rincorsa dal marciapiede (2→1). Restano il travaso nello stesso slot raro, due Metabolismi, due Riflessi e Steal. Titoli distinti 12→13. L'altro oggetto raro, Mescolone Micidiale, resta: «un colpo raro» non significa «una sola carta rara complessiva nello starter».
+
+**Atteso e rischio:** si cerca di abbreviare lo specchio oggi a 18,22 turni/18,57% di patte con pressione che funziona anche sugli immuni e un po' di A differente. La T può però finanziare più cure; già in SB-16e spegnere il caricamento accorciava lo specchio, quindi altra T da sola non risolve. Il raro colpisce direttamente e lascia un veleno persistente: rischio importante di dominio o morti reciproche nello stesso fine turno, soprattutto contro bersagli esposti. La candidata D67 offre a Piera una risposta; il solo miglioramento del danno non prova i criteri. I 12 POISON aggiunti al travaso richiedono un adattamento specifico della carta nel playground, dichiarato nella sezione tecnica.
+
+## Piera — spendere la L per due chiusure differenti
+
+| Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
+|---|---|---|---|---|---|
+| Un altro e arrivo, PIN-AR4 (`base.pino.OffroIo`) | 2; NC | Gratuita | 1; sé | ×1,5, durata F | `base.pino.GoingBerserk` |
+| Estasi da Coca Etilene, PIN-AR2 (`base.pino.GoingBerserk`) | 2; **NC** (da C) | Gratuita | 1; un avversario | — | Nessuna |
+| Prima il brindisi, nuovo PIN-AR6 (`base.pino.PrimaIlBrindisi`, ID proposto) | 1; NC | Gratuita | 1; sé | ×1,5, durata F | `base.pino.RuttoADistanzaSociale` |
+| Rutto a distanza sociale, PIN-AR5 (`base.pino.RuttoADistanzaSociale`) | 1; R | 5 L | 1; un avversario | — | Nessuna |
+
+**Un altro e arrivo — testo:**
+
+> Guadagni 25 L e 35 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Estasi da Coca Etilene e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+
+**Estasi da Coca Etilene — testo:**
+
+> Spendi tutta la tua L. Infliggi al bersaglio danni da colpo pari a 18 più la L spesa in questo modo.
+
+**Prima il brindisi — testo:**
+
+> Guadagni 35 L e 35 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Rutto a distanza sociale e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+
+**Rutto a distanza sociale — testo:**
+
+> Spendi tutta la tua L rimasta dopo il costo. Il bersaglio perde A pari alla L spesa in questo modo. Infliggi al bersaglio danni da colpo pari a 20 più il doppio di quella L.
+
+**Ordine concreto dei due colpi:** Estasi conserva la semantica attuale della classe: memorizza L alla risoluzione e la azzera su sé prima degli effetti sul bersaglio. Il nuovo Rutto memorizza L dopo il costo di 5, la azzera su sé e usa quel valore sia per sottrarre A sia per il danno. «Spendi tutta» è un effetto di azzeramento, distinto dal costo: non richiede L positiva per Estasi e non trattiene la corazza per il resto della mossa o del turno. Il Rutto conserva il disturbo di A ma diventa un vero colpo che scarica tutta la riserva; non si modifica per sbaglio la last resort, che resta base 12 e autodanno 2.
+
+**Finanziamento e picco, dopo R06:** da L=A=0, +25 L/+35 A lascia **L=12, A=23** in N+1: Estasi costa zero e fa **30 HIT**. +35 L/+35 A lascia **L=17, A=18**: il raro paga 5, memorizza 12, toglie 12 A e fa **44 HIT**. Non si usano i 35 L appena guadagnati come se non decadessero. Dai valori iniziali L=10/A=15, i due caricamenti lasciano rispettivamente **L=17/A=33** (Estasi 35 HIT) e **L=22/A=28** (Rutto: costo 5, residuo 17, **54 HIT** e −17 A). Il raro ha un picco più alto ma perde più precedenza nella preparazione e richiede almeno 5 L.
+
+**Sostituzioni:** entra 1 Prima il brindisi; Fasciatura col fazzolettaccio 2→1. Rimangono due Testate, due Banconi, Rutto nello slot raro, una Fasciatura, Spintoni e tutti gli oggetti. Titoli distinti 11→12.
+
+**Atteso e rischio:** meno cura ripetuta, recupero A e chiusure più forti possono ridurre i 14,83 turni/13,07% di patte dello specchio e gli incontri lunghi. La L del caricamento dà anche corazza e consuma A; il raro può fare molto danno ma costa l'intera riserva, compresa la protezione contro l'HIT. Se si rinvia, L decade ancora e il raro può diventare impagabile; restano il sacrificio via bound, gli oggetti e altri caricamenti. Non si nasconde questa pressione sotto la promessa di poter aspettare senza conseguenze. Il nuovo Bancone può offrire una difesa nel turno dell'annuncio, ma prolungare gli incontri: i due interventi vanno separati nelle misure.
+
+## Beppe — NC indipendente dagli oggetti, raro da tavolo preparato
+
+| Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
+|---|---|---|---|---|---|
+| Preparo il lavoro, GIG-AR3 (`base.gigi.ColpoDiChiaveInglese`) | 2; **NC** (da C) | Gratuita | 1; sé | ×1,5, durata F | **`base.gigi.ChiaveDaTredici`** (nuova destinazione) |
+| Chiave da tredici, GIG-AR2 (`base.gigi.ChiaveDaTredici`) | 2; **NC** (da C) | **10 V** (da 5) | 1; un avversario | — | Nessuna |
+| Una stretta di prova, nuovo GIG-AR6 (`base.gigi.UnaStrettaDiProva`, ID proposto) | 1; NC | Gratuita | 1; un avversario; guadagno/esposizione su sé | ×1,5, durata F | `base.gigi.LavoroFattoBene` |
+| Lavoro fatto bene, GIG-AR5 (`base.gigi.LavoroFattoBene`) | 1; R | **10 V** (da 5) | 1; un avversario | — | Nessuna |
+
+**Preparo il lavoro — testo:**
+
+> Guadagni 15 V. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Chiave da tredici e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+
+**Chiave da tredici — testo:**
+
+> Infliggi 22 danni da taglio al bersaglio.
+
+**Una stretta di prova — testo:**
+
+> Guadagni 10 V e infliggi 4 danni da taglio al bersaglio. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Lavoro fatto bene e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+
+**Lavoro fatto bene — testo:**
+
+> Infliggi al bersaglio danni da colpo pari a 14 più 7 per ogni tuo oggetto sul campo.
+
+**Finanziamento e picco.** V non decade: da zero Preparo lascia 15, paga 10 e conserva 5; la nuova carta lascia 10 e paga esattamente il raro. Il NC fa **22 CUT** indipendentemente dagli oggetti, circa 3,1 unità nominali, e supera la corazza. Il raro con 0/1/2/3 oggetti fa **14/21/28/35 HIT** prima degli stati. Due o tre oggetti producono il picco, mentre a campo vuoto il NC è migliore: la condizione deve contare. Equip già consumati non contano come oggetti; possono però potenziare il colpo. Token sul campo contano. Lavoro risolto con tre oggetti e Guanti attivi può arrivare a 43 HIT prima degli stati del bersaglio; consumare Guanti ha però tolto un oggetto, quindi non si presume automaticamente la compresenza del massimo.
+
+**Sostituzioni:** Preparo 1→2 ed entra 1 Una stretta di prova; escono le **due copie di Mattone del cantiere (2→0)**. Lavoro resta una rara in una copia; non se ne aggiunge una seconda. Restano Chiave 2, Smontiamo tutto 2, Sotto il cofano 1, Steal 2, GABBIANO DUNQUE VOLIAMOTI 1, Spintone 1 e sette oggetti. Titoli distinti 13→13.
+
+**Atteso e rischio:** il taglio NC offre pressione subito utile anche a campo povero; il raro continua a premiare tenere oggetti, aspettare o consumare un equip al momento giusto. Furto/distruzione possono abbassarne il picco. Il tutore raro è offensivo: se annullato, anche perché Beppe è già a terra prima del suo gruppo, non concede risorse, stati o ricerca. Una parata che azzera soltanto i 4 CUT non annulla il resto della mossa. Si spera di accorciare Beppe–Celestina/Piera oltre 12 turni; controllare che il suo specchio, già all'8,22% di patte, non peggiori per colpi simultanei più forti.
+## D67 — Difesa candidata contro il POISON
+
+### Il bancone regge, io pure — PIN-AR3
+
+**Binding:** `base.pino.IlBanconeRegge`. **Copie:** 2, già nello starter di Piera. **Rarità:** C, invariata. **Costo:** gratuito. **Priorità:** 2. **Bersaglio:** sé. **Ricerca:** nessuna. **Vulnerabilità propria:** nessuna. **Durata delle riduzioni:** solo il turno corrente, fino al suo fine turno compreso.
+
+**Testo proposto:**
+
+> In questo turno moltiplica per 0,5 i danni da colpo e da veleno che ricevi. Guadagni 5 L.
+
+Rispetto alla bozza si aggiunge soltanto lo stato GOOD INPUT POISON ×0,5 per il turno. Restano HIT ×0,5, gratuità, priorità 2 e guadagno di 5 L anche se nessuno attacca. Il CUT resta pieno; non si aggiunge una cura. La difesa vale anche sul POISON periodico da T nel fine turno corrente, perché quello attraversa gli stati INPUT: restringerla ai soli danni delle carte richiederebbe un filtro diverso, che non propongo.
+
+**Perché questa carta:** Piera è sotto quota contro Celestina e ha già due copie della difesa, quindi non serve aggiungere uno slot o distribuire la stessa generica a tutti. Una protezione gratuita resta giocabile anche quando A è a zero. Conserva il premio previsto da D52/D67 e la possibilità di difendersi nel turno dopo il caricamento, mantenendo il colpo cercato e la relativa vulnerabilità. Il +5 L può finanziare un seguito più forte, ma la L continua a decadere e non cancella il legame F.
+
+**Esempi nominali:** Tossicone proposto da 18 POISON diventa 9 senza altri stati. Se una vulnerabilità ×1,5 è già presente prima del Bancone, il percorso 18→27→13 lascia 13 anziché 27, per il troncamento R05. Il periodico da T=20 scende da 10 a 5 prima di altre modifiche. La corazza dell'alcol non riduce POISON: non viene sommata impropriamente a questi esempi. Rutto, immunità alla risorsa T e azzeramenti di T non vengono alterati dalla difesa.
+
+**Impatto atteso:** ridurre la quota 0,662 di Celestina contro Piera nelle decisive della variante (c), offrire una risposta leggibile all'annuncio di Tossicone/travaso e rendere possibile tenere il colpo in mano a un prezzo sostenibile. Non migliora la difesa di Piera al CUT di Mara, già favorita 0,653. Non modifica direttamente gli specchi di Celestina o Beppe. Può aumentare la durata degli incontri con Celestina e le patte di fine turno; può inoltre migliorare la difesa contro il timer del Mescolone. Per questo il confronto con/senza aggiunta POISON deve essere separato da aumenti di danno e sostituzione della Fasciatura. Il proprietario deve approvare questa carta prima dell'eventuale modifica; l'inclusione della sola valutazione in D67 non basta.
+
+## Liste complete e conto delle 120 carte
+
+Le liste seguenti contano **solo le 20 regolari**; basic fissa, due bound diverse e last resort restano quelle della bozza di riferimento. Nessun titolo ha più di due copie. «Archetipo» segue lo slot progettuale, non il package Java. I nomi propri sono quelli visualizzati nella bozza; gli ID interni Tossico/Pino/Gigi restano riferimenti tecnici.
+
+| Starter | Archetipo | Generiche | Oggetti |
 |---|---|---|---|
-| Spazienzio | +1 nuova SPA-AR6; Denti stretti GEN-14: 1→0 | 10/7/3 → **11/6/3** | 12→12 |
-| Mara | Slalom MAR-AR5: 1→2; +1 nuova MAR-AR6; Spintone GEN-18: 2→0 | 9/6/5 → **11/4/5** | 12→12 |
-| Celestina | +1 nuova TOS-AR6; Rincorsa GEN-12: 2→1 | 9/6/5 → **10/5/5** | 12→13 |
-| Piera | +1 nuova PIN-AR6; Fasciatura GEN-16: 2→1 | 9/6/5 → **10/5/5** | 11→12 |
-| Beppe | Preparo GIG-AR3: 1→2; +1 nuova GIG-AR6; Lavoro GIG-AR5: 1→2; Mattone GEN-06: 2→0; Spintone GEN-18: 1→0 | 7/6/7 → **10/3/7** | 13→12 |
+| Spazienzio | Impatto 2; SPEDIAMOTI DUNQUE IN O-AHIO 1; PAZIENZA: FINITA 2; NON GIOCARE COL COLTELLO NO 2; FAI BASTA 2; TI FACCIO SPAZIO 1 (**10**) | GABBIANO DUNQUE VOLIAMOTI 2; Tartaruga sul marciapiede 2; Mattone del cantiere 1; ORMALE GUARIAMOTI 1; Denti stretti 1 (**7**) | Negroni Trovato per Terra 2; Posacenere di vetro 1 (**3**) |
+| Mara | Cinghiata di traverso 1; Sgommata 2; Sorpasso in curva 2; Tra due paraurti 2; Slalom d'avvicinamento 2; Ti stringo la curva 1 (**10**) | Spintone 1; Sputo da posacenere 2; Tartaruga sul marciapiede 1; Steal 1 (**5**) | Espresso del distributore 2; Panino del kebab dimenticato 2; Giubbotto di finta pelle 1 (**5**) |
+| Celestina | Dose in preparazione 2; Tossicone Scatarrante 2; Metabolismo Corrotto 2; Riflessi Aumentati dalla Speed 2; C'è del sangue nella mia droga 1; Un assaggino 1 (**10**) | Grab 2; Rincorsa dal marciapiede 1; Steal 1; Fasciatura col fazzolettaccio 1 (**5**) | Pasticca trovata sul bancone 2; Panino del kebab dimenticato 2; Mescolone Micidiale 1 (**5**) |
+| Piera | Testata da ultimo giro 2; Estasi da Coca Etilene 2; Il bancone regge, io pure 2; Un altro e arrivo 2; Rutto a distanza sociale 1; Prima il brindisi 1 (**10**) | Grab 2; Spintone 2; Fasciatura col fazzolettaccio 1 (**5**) | Amaro nel bicchiere di plastica 2; Peroni da 66, calda 2; Tennents Super 1 (**5**) |
+| Beppe | Smontiamo tutto 2; Chiave da tredici 2; Preparo il lavoro 2; Sotto il cofano 1; Lavoro fatto bene 1; Una stretta di prova 1 (**9**) | Steal 2; GABBIANO DUNQUE VOLIAMOTI 1; Spintone 1 (**4**) | Guanti da officina 2; Giubbotto di finta pelle 2; Casco da lavoro 2; Espresso del distributore 1 (**7**) |
 
-Ogni riga somma **20 regolari**. Basic, bound, last resort e copie degli oggetti restano quelle correnti. Restano difese e contromosse personali, Steal compresa; nessuna generica rimossa da uno starter viene cancellata dal pool. Beppe conserva SeagullFly e passa da due Mattoni generici a un secondo colpo personale e più preparazione: è una scelta di composizione D45.7, non una correzione numerica già delegata.
+«Impatto» nella lista compatta indica GARGANTUESCO IMPATTO SUL TU, non un titolo aggiuntivo. I titoli distinti finali sono **13, 13, 13, 12, 13**: maggiore varietà rispetto all'indicazione iniziale di dodici, senza aumentare le copie totali o violare il massimo due. Gli attacchi/difese/contromosse personali non vengono sostituiti da una sola sequenza obbligata.
 
-Propongo i cinque nuovi titoli **non comuni**, con ID di slot AR6 provvisori e binding `base.*` da fissare in attuazione; le rarità esistenti restano. Mara avrebbe due copie della rara Slalom, Beppe due della rara Lavoro: R02 lo consente, ma cambia la dotazione dello starter. Il progetto del set passa **115→120 carte e 37→42 azioni d'archetipo**, entro l'intervallo ammesso 110–120 ma consumando tutto il margine alto; generiche 23 invariate. Questa redistribuzione dei cinque archetipi va approvata, non è implicita nell'autorizzazione a inventare. Se si vuole restare a 115 occorre scegliere cinque altri slot da sostituire: non li elimino di nascosto in questa fase.
+**Nuovi titoli nel pool:** esclusivamente SPA-AR6 TI FACCIO SPAZIO, MAR-AR6 Ti stringo la curva, TOS-AR6 Un assaggino, PIN-AR6 Prima il brindisi e GIG-AR6 Una stretta di prova, tutti NC. I dieci bersagli sono carte di slot già esistenti; Cinghiata e Rutto sono riprogettate, non titoli aggiuntivi. Le generiche tolte o ridotte negli starter restano disponibili nel pool; Mattone non viene cancellato dal set.
 
-**Frequenza indicativa, non misura di partita.** In un campione uniforme di 10 carte fra 20, con uno/due/tre caricamenti l'atteso è 0,5/1/1,5 e la probabilità di vederne almeno uno è 50%/76,32%/89,47%. È solo l'ipergeometrica `1 − C(20−k,10)/C(20,10)`: le pescate reali concatenano oggetti, la ricerca altera l'ordine e le partite possono finire prima. Misurare separatamente caricamenti **visti, scelti, risolti** e ricerche riuscite; tre slot non promettono due coppie giocate ogni partita. Con due soli colpi nel mazzo, anche il terzo caricamento può cercare a vuoto: resta la pesca ordinaria, mai il recupero dagli scarti.
+| Categoria di slot | Progetto precedente | Proposta |
+|---|---:|---:|
+| Azioni d'archetipo | 37 | **42** |
+| Azioni generiche | 23 | **23** |
+| Personaggi / basic / bound / last resort / oggetti | 7 / 7 / 21 / 4 / 16 | **Invariati** |
+| Totale, token escluso | 115 | **120** |
 
-## Contratto comune delle carte proposte
+**Rarità dell'intero progetto:** conteggio della griglia attuale **54 C / 41 NC / 20 R**. Otto carte passano C→NC: Impatto, PAZIENZA: FINITA, Sgommata, Dose, Tossicone, Estasi, Chiave e Preparo. Slalom passa R→NC e Cinghiata C→R; si aggiungono cinque nuove NC. Il risultato è **45 C / 55 NC / 20 R = 120**. Il numero di rare non cresce; cambia la loro distribuzione fra gli slot di Mara. La maggioranza di NC è una conseguenza esplicita dello schema approvato, da accettare insieme alle carte o da compensare in un altro blocco; questa proposta non inventa compensazioni sulle carte delle buste non esaminate.
 
-- Gratuiti tutti i caricamenti; nessuno richiede la risorsa che deve procurare. I cinque vecchi titoli bersagliano sé stessi; i cinque nuovi un avversario. I nuovi applicano risorse ed esposizione su sé, piccolo danno sul bersaglio e una sola ricerca esatta al posto della pesca ordinaria.
-- Ogni caricamento espone a **HIT, CUT e POISON ricevuti ×1,5**, almeno nel turno in cui si risolve e nel successivo. Per PAZIENZA: FINITA questo estende esplicitamente l'esposizione attuale dal solo HIT a tutti e tre i tipi: altrimenti trattenere Impatto contro Mara avrebbe spesso un prezzo irrilevante. È funzionamento da approvare. La corazza resta L/4 dopo gli stati e solo sull'HIT; le normali difese continuano a funzionare.
-- La ricerca riguarda solo il binding del colpo indicato, non una famiglia. Si mostra **la precisa copia** trovata; secondo D58 resta scoperta per tutti finché esce dalla mano. Nessun diritto di guardare mazzo o altre carte della mano. Ricerca fallita: pesca normale, esposizione minima comunque applicata, **nessuna conseguenza differita** per una copia non trovata, anche se il colpo era già in mano o arriva con la pesca casuale.
-- Costo pagabile non significa colpo garantito: il caricamento basta da risorsa specifica zero **senza successivi effetti ostili o altre spese volontarie**, e il test deve attraversare il fine turno. Per Mara L ricevuta o sottrazioni di A possono rendere insufficiente la riserva; è interazione avversaria, non una ragione per introdurre risorse riservate o immuni alla spesa.
-- I guadagni di A non riordinano il gruppo del caricamento, già fissato dopo i costi. Il colpo resta giocabile e ugualmente potente se pescato normalmente: nessun bonus segreto «se cercato». Nessuna eccezione «Ultimo colpo», nessun autodanno aggiunto e nessuno spareggio.
-- Un nuovo caricamento offensivo annullato, anche perché l'autore è a terra prima del suo gruppo, non dà risorse, esposizione o ricerca. I vecchi SELF seguono D50, senza ottenere una cura implicita. Una difesa che riduce il piccolo danno a zero non annulla risorse e ricerca della mossa risolta.
+## Verifica del finanziamento da zero
 
-### Sei conseguenze alternative, non cumulative
+N è il turno del tutore, N+1 il primo turno utile per il colpo. V e T non decadono automaticamente; si considerano le immunità iniziali dei personaggi. Per Piera, senza immunità a L, il fine turno sottrae `L//2` A e poi `L//2 + 1` L, con pavimento a zero. La A di Mara è stabile se L=0. Nessun esempio usa danni o risorse negativi.
 
-I testi seguenti sono **clausole da stampare sui caricamenti**, dopo il guadagno, l'esposizione e la ricerca. «La carta trovata» significa soltanto l'esemplare trovato da quella ricerca. La visibilità permanente di D58 è comune a tutte. Il turno del caricamento è N; «prossimo turno» è N+1, non il prossimo turno in cui si decide di attaccare.
+| Starter e destinazione | Guadagno da risorsa zero | Risorsa disponibile a inizio N+1 | Costo del colpo | Residuo dopo costo / danno nominale iniziale |
+|---|---|---|---|---|
+| Spazienzio NC | +25 V, +15 A | V=25 | 25 V | V=0; **40 HIT** |
+| Spazienzio R | +35 V, +5 A | V=35 | 10 V | V=25; **32 HIT** a priorità 1 |
+| Mara NC | +20 A | A=20 | 15 A | A=5; **25 CUT** |
+| Mara R | +30 A | A=30 | 20 A | A=10; **25 CUT**, picco crescente con A conservata |
+| Celestina NC | +10 T, +5 A | T=10 | 10 T | T=0; **18 POISON** e +5 T al bersaglio |
+| Celestina R | +20 T | T=20 | 10 T | T=10 poi travasata; **12 POISON** più periodico dipendente dal bersaglio |
+| Piera NC | +25 L, +35 A | L=12, A=23 | Gratuito | L=12 memorizzata e azzerata; **30 HIT** |
+| Piera R | +35 L, +35 A | L=17, A=18 | 5 L | L=12 memorizzata e azzerata; **44 HIT**, −12 A al bersaglio |
+| Beppe NC | +15 V | V=15 | 10 V | V=5; **22 CUT** |
+| Beppe R | +10 V e 4 CUT | V=10 | 10 V | V=0; **14–35 HIT** secondo 0–3 oggetti; i 4 CUT sono della mossa precedente |
 
-| Variante | Testo da carta | Scelta e costo |
-|---|---|---|
-| **A — Un solo turno in più** | «Se alla fine del prossimo turno la carta trovata è ancora nella tua mano, anche nel turno seguente moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Questa conseguenza si applica una sola volta.» | Puoi tenerla; paghi il rischio di N+2, poi resta soltanto l'informazione pubblica. Prezzo più lieve, forse insufficiente contro l'uso da solo tutore. |
-| **B — Uno spazio perso per sempre, versione letterale** | «Se alla fine del prossimo turno la carta trovata è ancora nella tua mano, scartala senza pescare al suo posto. Per il resto della partita la tua mano può contenere una carta in meno.» | Puoi rinunciare al colpo, ma non conservarlo. La perdita futura riguarda uno spazio, non soltanto la mancata pesca di quel momento. |
-| **C — Scarto e pesca** | «Se alla fine del prossimo turno la carta trovata è ancora nella tua mano, scartala e pesca normalmente una carta al suo posto.» | Perdi quel colpo, mantieni le opzioni della mano; gli oggetti e la last resort seguono la pesca normale. |
-| **D — Scelta fra C e A** | «Se alla fine del prossimo turno la carta trovata è ancora nella tua mano, puoi scartarla e pescare normalmente una carta al suo posto. Se la tieni, anche nel turno seguente moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Questa conseguenza si applica una sola volta.» | Via di mezzo: scelta esplicita fra ricambio e un rischio ulteriore finito. Il giocatore può davvero conservare il colpo. |
-| **E — Uno spazio perso per un turno** | «Se alla fine del prossimo turno la carta trovata è ancora nella tua mano, scartala senza pescare al suo posto. Nel turno seguente la tua mano può contenere una carta in meno. Alla fine di quel turno recuperi quello spazio e pesca normalmente una carta, se la mano non è piena.» | Via di mezzo fra B e C: N+2 con meno opzioni, recupero prima di N+3. Non consente di conservare il colpo; richiede gestione della capacità temporanea. |
-| **F — Finché la tieni, raccomandata** | «L'esposizione di questo caricamento dura almeno questo turno e il prossimo. Se la carta trovata è ancora nella tua mano, l'esposizione continua finché la giochi o la scarti.» | Puoi conservarla senza scadenza, pagando in ogni turno un rischio pubblico. Niente perdita automatica di salute, risorse, carta o spazio. |
+Il requisito D63 è **finanziare il costo**, non assicurare che il raro superi sempre il NC al minimo assoluto di preparazione. I NC restano solidi senza accumuli aggiuntivi; i rari hanno un picco condizionato, con casi in cui conservarli non rende. Stati esterni che cambiano guadagni/costi, T letale senza immunità, avversari che sottraggono risorse o scelte volontarie di spesa sono interazioni da misurare, non risorse da ignorare nella validazione delle mosse.
 
-Per F, «esposizione» nel testo precedente è definita per esteso come moltiplicazione ×1,5 dei tre tipi di danno: **non è una nuova parola chiave**. In stampa si possono unire le due frasi in un unico periodo. I testi completi della conseguenza F, con il nome del colpo, sono nelle cinque schede sotto.
+## Lavoro tecnico previsto per 2b, dopo l'approvazione
 
-**Interpretazione comune da approvare.** «Non giocato» è qui operazionalizzato come **copia ancora in mano alla scadenza**, non «non ha inflitto danno». Un colpo scelto, poi parato o annullato e scartato dal flusso normale, non paga anche la conseguenza; se lo scarto di una bound si risolve sulla copia, il sacrificio del colpo chiude il legame. Una bound annullata che non scarta lascia invece il legame attivo. Questa lettura permette di rinunciare al colpo tramite una bound senza perdere anche uno spazio in B/E. Una lettura letterale «qualunque mancata giocata, anche dopo averlo già scartato» richiederebbe un'altra penalità e una regola per eliminare eventuali carte in eccesso: non la assumo.
+**Il supporto 2a resta quello delle decisioni**, senza nuove richieste sul formato di rete in questo documento: copia scoperta, legame e durata minima, gestione dell'uscita e fattori indipendenti. I nomi degli ID nuovi sono proposti per rendere univoche le ricerche, non una prescrizione di campi JSON prima di leggere il contratto consegnato dalla 2a. Se quella consegna cambia un vincolo rilevante, lo si espone prima dell'attuazione delle carte.
 
-**Tempi e copie.** A–E si verificano dopo tutte le mosse e le relative pescate di N+1, prima degli effetti periodici del fine turno; la nuova esposizione di A/D copre solo N+2, non il veleno già dovuto a N+1. Il collegamento si crea all'esito riuscito della ricerca in N, non alla dichiarazione della mossa. Si distingue una copia cercata da un'omonima pescata: giocare l'omonima non libera quella cercata. Se l'interfaccia invia solo il binding, il costo di distinguere le copie va affrontato esplicitamente, non attribuito a un bot che non può scegliere.
+**Dati già esprimibili:** i cinque nuovi tutori usano guadagni, esposizione collegata e ricerca esatta della 2a; la carta offensiva di Beppe aggiunge danno al bersaglio. NC e rari di Spazienzio/Mara usano danni fissi o `base + risorsa/divisore`; Preparo cambia esplicitamente la sua destinazione da Lavoro a Chiave. Chiave cambia costo/danno e rarità. Estasi e Lavoro riusano le classi parametriche con base/per-oggetto aggiornati. Bancone richiede uno stato POISON del turno in aggiunta a quello HIT, con il guadagno L esistente. Nessuno di questi introduce una nuova risorsa o parola chiave (D8).
 
-Per F, se la copia esce in N o N+1 resta comunque l'esposizione minima fino a fine N+1. Dopo quel minimo, l'estensione cessa all'effettiva uscita della copia dalla mano; il pagamento del costo o l'invio della mossa non bastano. La carta ancora in mano durante la risoluzione resta collegata. L'ordine concreto entro gruppi simultanei e degli eventi di scarto va coperto dai test, senza riscrivere D50. A fine partita il collegamento si elimina; dopo eliminazione del proprietario non si risolve una pesca o una nuova scelta.
+**Due adattamenti specifici di carta, costo dichiarato:**
 
-Due ricerche riuscite su due copie creano **due legami indipendenti**; ogni applicazione di stato è distinta (R05). F non riapplica uno stato ogni turno: mantiene l'originale oltre la scadenza minima. Con due esposizioni attive il fattore può essere 2,25; un caricamento successivo può sovrapporne altre anche se cerca a vuoto. Si registra questo rischio, senza introdurre di nascosto un tetto o una fusione degli stati. Prima leva numerica di F, se troppo severa, fattore 1,5→1,25 per tutti i caricamenti; una regola di non cumulo è invece funzionamento da approvare.
+1. **C'è del sangue nella mia droga:** serve una versione di bozza del travaso con quantità di POISON diretto parametrica, inizialmente 12, oltre a memorizzazione/trasferimento/immunità e timer già esistenti. Costo contenuto ma reale: una variante di carta, metadati e test su ordine, immune/non immune e timer. Non basta cambiare la descrizione; non si modifica silenziosamente la classe usata dalla partita viva.
+2. **Rutto a distanza sociale:** serve memorizzare L dopo il costo, azzerarla e usare il valore per due effetti diversi sul bersaglio: perdita A e danno `20 + 2×L`. La sola lista di effetti su sé viene prima di quella sul bersaglio, quindi un `empty L` più una quantità letta dopo vedrebbe zero. Costo medio: una carta parametrica di bozza con snapshot della risorsa, secondo il modello già usato da Estasi/travaso, più test della formula e della corazza persa. Non serve introdurre un nuovo operatore generale del motore o una condizione sulla ricerca.
 
-### Cosa guadagnano e rischiano le sei alternative
+Questi sono effetti di carta composti da meccaniche esistenti, non nuove regole generali assegnate alla 2a. Se l'implementazione richiedesse invece una modifica del motore condiviso, il passo 0 deve dichiararla e fermarsi su quel punto. I binding di riferimento delle carte esistenti non devono portare il loro nuovo effetto nella partita viva; l'eventuale mappatura a classi di bozza va descritta e testata in 2b.
 
-**A** potrebbe ridurre le attese, ma dopo N+2 torna conveniente accumulare. Se l'avversario non attacca, il rischio non si traduce in danno: è un prezzo tattico, non un pagamento garantito. Non genera patte da autodanno; può comunque aumentare le uccisioni reciproche per esposizione.
+**Bozza e verifiche future:** dopo approvazione, aggiornare effetti, priorità, costi, rarità, copie, descrizioni, ruoli e metadati dei guadagni/danni nella stessa modifica, insieme alla griglia sperimentale. Nessuna modifica agli attesi per accettare regressioni. Nei test mirati coprire:
 
-**B** trasforma un mancato colpo in svantaggio permanente. Può ridurre le patte facendo vincere nettamente chi punisce per primo, ma peggiorare equilibrio e qualità della scelta. Due penalità lasciano soltanto un'azione regolare accanto a basic e due bound. Una terza lascia nessuna carta scartabile e, senza oggetti, nessuna basic giocabile mentre il mazzo non è vuoto: viola il requisito di mosse sempre disponibili. Nei cinque starter con due copie del solo colpo cercato ci si ferma normalmente a due ricerche riuscite, ma nei mazzi costruiti con più coppie il problema esiste. Anche E richiede questa analisi se riduzioni temporanee si sovrappongono.
+- le dieci ricerche esatte e il requisito da zero attraverso il fine turno, non soltanto subito dopo il guadagno;
+- minimo N/N+1, due copie omonime, ricerca fallita, scarto per bound risolta/annullata, colpo parato/annullato e due legami indipendenti, riusando le prove della 2a senza duplicarne tutta l'implementazione;
+- rare di Spazienzio/Mara prima/dopo il costo e soglie del picco; anticipo del raro di Spazienzio e A residua di Mara;
+- travaso: T memorizzata dopo il costo, autore azzerato, immunità del bersaglio rimossa, POISON diretto distinto dal periodico e timer di immunità **all'autore**;
+- Estasi/Rutto: esempi da 0 e dai valori iniziali, L azzerata, A sottratta senza riordinare gruppi già fissati, nessuna variazione alla last resort;
+- Lavoro con 0–3 oggetti, token/equip distinti, furto/distruzione e consumi prima del suo gruppo;
+- Bancone: POISON diretto e periodico, esposizione, arrotondamenti, priorità 2 e guadagno di 5 L anche senza attacco; costo gratuito anche ad A=0;
+- liste da 20, copie massime due, rarità delle due coppie, set da 120 e isolamento del profilo vivo. Mutazioni solo sui nuovi rami di logica che verranno davvero introdotti.
 
-**B protetta**, solo se si vuole perseguire B: aggiungere «La capacità della tua mano non può scendere sotto quattro carte». Quattro comprende basic, due bound e uno spazio regolare/last resort. Dopo il limite il colpo si scarta comunque e la normale pesca ripristina lo spazio minimo, se necessario; la terza penalità non toglie un altro spazio. È una deroga dichiarata alla perdita di uno spazio a ogni omissione, da approvare, non la versione letterale del proprietario. **Non raccomando B senza questo limite.** In E lo stesso minimo vale mentre le riduzioni sono attive; ogni scadenza ripristina solo la riduzione effettivamente applicata.
+**Bot e misure:** mantenere i quattro stili e confrontare le tre politiche decise, «gioca sempre il turno dopo», «tieni se l'avversario si è parato», «a caso». «Si è parato» usa ultimo turno risolto/stati pubblici, non la scelta segreta attuale. Ogni politica legge le copie scoperte persistenti e distingue colpo legale da impagabile; sa sacrificare una copia per chiudere il suo legame. Valutare anche Rare vs NC, risorse spese altrove, campo oggetti e difesa dal POISON. Nessuna conoscenza del mazzo avversario e nessun pianificatore a più turni.
 
-**C** è leggibile e mantiene sei carte quando si parte dalla mano piena: si sostituisce la sola carta scartata, senza introdurre un riempimento generale della mano. Se il mazzo è finito segue la normale last resort, senza duplicarla. È però anche un ricambio gratuito: in N+1 possono avvenire la pesca della mossa ordinaria e quella sostitutiva. Più accesso alle altre carte e più rapido esaurimento del mazzo possono compensare la perdita del colpo, perfino premiare chi usa il caricamento solo per risorse. Misurare separatamente questo vantaggio e l'accesso anticipato alle last resort; non chiamare automaticamente «malus» il solo scarto con sostituzione.
+Il riferimento dei confronti è la variante (c). Separare frequenza/composizione, potenza dei colpi e difesa POISON con ablazioni prefissate entro il budget di **tre giri/due ore cumulative di calcolo** di 2b, non un lotto aggiuntivo implicito per ogni idea. I caricamenti visti, risolti, le ricerche riuscite/mancate, le copie NC/rare giocate subito/tenute/scartate, le esposizioni subite e il danno parato devono avere denominatori separati. Per il raro singolo misurare esplicitamente i tutori che cercano a vuoto. Anche il turno offensivo di Una stretta di prova va distinto dal danno successivo di Lavoro.
 
-**D** è più flessibile di A e C, quindi potenzialmente più forte. La scelta deve essere inviata insieme alla mossa di N+1, con default dichiarato «tieni», ed eseguita solo se la copia è ancora in mano a fine turno. Non apre una finestra per scegliere dopo aver visto mosse segrete altrui. Se non si vuole aggiungere questa scelta al protocollo/client, D ha più costo tecnico di F.
+Restano D16/D51: **45–55% fra i base, 40–60% negli altri incontri, circa 6–12 turni, patte ≤10% in ogni incontro/specchio**, pochi mazzi esauriti, zero turni senza mosse legali, otto invarianti a zero e tetto bound invariato. Quota sulle decisive, patte su tutte le partite; una media globale buona non sana una cella fuori criterio. La variante (c) non li raggiunge: specchi Celestina/Piera, quote contro Piera e sei durate oltre 12. Non si attribuisce al nuovo progetto un esito già misurato. Se criteri o budget non tornano, STOP con dati e proposta. Dopo i bot resta la breve prova umana prima di SB-17.
 
-**E** toglie per un turno una possibilità di risposta senza rovinare tutta la partita. Richiede però una capacità temporanea: il solo «non pescare ora» verrebbe aggirato da una successiva pesca, ad esempio dopo una basic. Stati, ritorno dello spazio, recupero a mazzo vuoto e più scadenze la rendono più complessa di quanto suggerisca la frase sulla carta. Non la preferisco a C o F per il Set Base.
+## Verifiche e limiti di questa consegna
 
-**F** mantiene il colpo e rende pubblico il rischio finché serve. Non consente di attendere una sola scadenza per avere un tutore senza conseguenza. Può creare una situazione in cui trattenere due colpi è troppo pericoloso; può anche rendere troppo prevedibile «gioca sempre subito». Con difesa ×0,4, un'esposizione ×1,5 dà ×0,6 prima della corazza: difendersi e tenere il colpo può ancora avere senso. Questo esempio prova una possibilità, non dimostra che la scelta sia bilanciata. Se F domina o costringe sempre alla giocata immediata, tornare a D/A o ridurre il fattore, non proclamare riuscito il ritmo solo perché aumenta la frequenza del colpo.
-## Spazienzio — il caricamento deve finanziare davvero Impatto
+Checkout inizialmente pulito; fetch riuscito, `main` e `origin/main` allineati a `ee7f4d3`; nessun listener su 8080/4320 al controllo preliminare. Non sono stati avviati server, Maven o verifiche client in concorrenza con la 2a. Le letture tecniche sono state in sola lettura; unico percorso modificato da questo lavoro: `docs/design/set-base/sb-16g-proposta.md`.
 
-**Copie e slot:** Glare/SPA-AR3 resta a 2; nuova SPA-AR6 a 1 al posto di Denti stretti. Impatto/SPA-AR1 resta a 2. Si rinuncia al caricamento generico +10 V/−5 A, non a Tartaruga, MadeOfStone o FAI BASTA.
+Controlli aritmetici eseguiti in memoria sulla bozza: cinque liste da 20, massimo due copie, titoli distinti 13/13/13/12/13; conto delle rarità della griglia 54/41/20 e redistribuzione proposta 45/55/20; esempi di risorse residue attraverso R06. Nessuna bozza alternativa o script di test è stato scritto. Le quantità di danno riportate sono calcoli nominali, non una simulazione.
 
-| Carta | Costo; priorità; bersaglio | Effetto proposto prima degli stati |
-|---|---|---|
-| PAZIENZA: FINITA (`bruiser.Glare`) | Gratuita; 0; sé | +25 V invece di +15, +15 A; esposizione comune; cerca Impatto |
-| TI FACCIO SPAZIO (nuova SPA-AR6) | Gratuita; 0; avversario | +25 V a sé; 6 HIT al bersaglio; esposizione comune; cerca Impatto |
-| GARGANTUESCO IMPATTO SUL TU (`bruiser.SuperImpact`) | 25 V; 0; avversario | 40 HIT, invariato |
+**Esiti delle verifiche documentali:**
 
-Il nuovo caricamento scambia il recupero di A con un colpetto immediato; resta lento e può essere annullato se Spazienzio va a terra. Il primo è più adatto a migliorare la precedenza del colpo successivo. Da V=0 entrambi portano a 25; V non decade, quindi Impatto è pagabile in N+1. Non occorre più invocare i 25 V iniziali del personaggio per far tornare la coppia.
+- `python scripts/check-links.py docs/design/set-base/sb-16g-proposta.md`: **1 documento, 0 link rotti**.
+- `git diff --check`: **verde**, sia globale sia sul solo documento.
+- `python scripts/check-links.py`: **292 documenti, 1 link rotto** nel lavoro parallelo della 2a: `docs/api.md:172` punta a `reports/set-base/sb-16g-2a-report.md`, non ancora presente al controllo. Il riferimento è un’aggiunta nel diff non committato di `docs/api.md`, assente nella versione HEAD; questa proposta non lo introduce e non punta a quel rapporto. Il file dell’altro esecutore non è stato corretto o incluso. È un rosso transitorio fuori perimetro, non una voce preesistente del registro dei rossi noti.
 
-**Potenza:** 40 HIT è circa 5,7 unità nominali da 7, più di metà della salute iniziale attuale di Spazienzio (75). È già un colpo potente: non aumento anche il danno. Con L avversaria 20 e senza altri stati infligge 35; con parata ×0,5 e la stessa L infligge 15. La lentezza, le parate e le contromosse restano risposte credibili. I due turni della coppia non valgono come un singolo attacco gratuito da 40.
+Le cinque liste scritte nel documento sono state ricontate direttamente dalle celle: 10/7/3, 10/5/5, 10/5/5, 10/5/5 e 9/4/7, tutte con totale 20 e massimo due copie. La bozza conserva l’impronta di riferimento al controllo finale. I controlli dei link e degli spazi sono ripetuti prima del commit sul testo conclusivo.
 
-**Conseguenza F, testo sulla carta:**
+Non eseguiti in questa fase documentale: suite server/client, contesto Spring completo, avvio reale, Playwright, giri di bilanciamento, FFA e prove umane. Nessun atteso o soglia modificato; il verde dei link della proposta non prova l’avvio o il bilanciamento del gioco. Nessun push.
 
-> Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Se il GARGANTUESCO IMPATTO SUL TU trovato è ancora nella tua mano, questa vulnerabilità continua finché lo giochi o lo scarti.
-
-Per A–E si sostituisce la clausola F con il testo della variante scelta, riferito alla stessa copia di Impatto. In C rinunciare a 40 danni può essere un prezzo significativo; in B una mano ridotta con colpi costosi può diventare quasi obbligata; in F l'estensione al CUT rende reale il rischio anche contro Mara.
-
-**Attesi D16/D51 e rischi:** più Impatti pagabili dovrebbero ridurre l'attesa media di 2,43 turni osservata in SB-16e e liberare copie prima inutilizzate (8.955 su 18.421 trovate nel campione). Non sono misure della variante (c). Si spera di accorciare soprattutto Spazienzio–Piera (12,44 turni); più esposizione e colpi letali nello stesso gruppo possono invece aumentare patte. Il 45–55% contro Mara, oggi 0,524, è un vincolo stretto. +25 V può finanziare anche ExtremelyViolentBlow e HealingBlow: misurare l'uso da sola generatrice, non solo Impatto.
-
-**Fase 2:** bozza: guadagno V, esposizioni ai tre tipi, nuova carta, lista e testi/metadati. Test: V=0→25→costo 25 nel turno dopo; nuova mossa offensiva annullata senza ricerca; ×1,5 sul CUT ora intenzionale; identificazione delle due copie. Bot: valore di 40 dopo parata/corazza, rischio di priorità 0, alternative che spendono la V, scarto di Impatto invece di trattenere due esposizioni. Nessuna nuova formula di danno oltre al supporto comune della conseguenza.
-
-## Mara — più accesso, senza aumentare anche Sgommata
-
-**Copie e slot:** Slalom/MAR-AR5 1→2 e nuova MAR-AR6 a 1 sostituiscono le due copie di Spintone. Sgommata resta a 2. Sorpasso, Paraurti, Tartaruga, Sputo e Steal restano. Il piccolo danno della carta nuova recupera parte della pressione persa togliendo due attacchi gratuiti da 7.
-
-| Carta | Costo; priorità; bersaglio | Effetto proposto |
-|---|---|---|
-| Slalom d'avvicinamento (`base.mara.Slalom`) | Gratuita; 2; sé | +20 A invece di +15; esposizione comune; cerca Sgommata |
-| Ti stringo la curva (nuova MAR-AR6) | Gratuita; 1; avversario | +15 A a sé; 4 CUT al bersaglio; esposizione comune; cerca Sgommata |
-| Sgommata (`base.mara.Sgommata`) | 15 A; 1; avversario | 25 CUT, invariato |
-
-Da A=0 e L=0, Slalom lascia 20 A e la nuova 15 prima di N+1; dopo il costo restano rispettivamente 5 e 0 A. Questi ultimi valori, non 20 e 15, determinano la precedenza del colpo a pari priorità. Slalom offre margine per una piccola sottrazione e per la velocità; la nuova offre danno. Non garantiscono pagamento dopo ogni possibile disturbo avversario.
-
-**Potenza:** 25 CUT, circa 3,6 unità nominali, ignorano la corazza. Sono già più di un terzo delle 70 HEALTH di Mara/Celestina; non aumento il danno mentre Mara vince il 65,3% delle decisive contro Piera. Una parata CUT ×0,4 riduce il nominale a 10 prima di altri stati. Un colpo potente deve poter essere parato.
-
-**Conseguenza F, testo sulla carta:**
-
-> Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Se la Sgommata trovata è ancora nella tua mano, questa vulnerabilità continua finché la giochi o la scarti.
-
-A–E hanno le stesse clausole comuni sulla Sgommata trovata. C/D rischiano di rendere i tre caricamenti un modo per guadagnare A e cambiare carte gratis; F mantiene il rischio anche se Mara preferisce usare Paraurti e tenere Sgommata. B punirebbe in modo permanente anche una rinuncia tattica dopo un disturbo di A.
-
-**Attesi D16/D51 e rischi:** maggiore frequenza della coppia, con durata tendenzialmente minore; il turno di caricamento e la perdita di Spintone possono compensare parte dell'aumento. Specchio già a 8,78 turni: evitare di scendere sotto circa 6. Controllare insieme Spazienzio–Mara e Mara–Piera: rafforzare l'accesso al CUT potrebbe peggiorare il secondo anche senza cambiare il danno. Le esposizioni reciproche non garantiscono una diminuzione delle patte.
-
-**Fase 2:** bozza: seconda copia Slalom, +20 A, nuova carta e uscita di Spintone. Test: entrambe le partenze da A=0; A dopo il costo, disturbo prima del turno del colpo, L ricevuta; parata riuscita senza conseguenza ulteriore su carta già uscita. Bot: valutare perdita di precedenza, difesa contro minaccia pubblica e vantaggio del ricambio in C/D. Nessuna nuova contromossa di annullamento: Mara conserva la propria identità.
-
-## Celestina — pressione diretta, non soltanto altra T
-
-**Copie e slot:** Dose/TOS-AR1 resta a 2; nuova TOS-AR6 a 1 prende una Rincorsa (2→1). Tossicone resta a 2. Restano cura, Riflessi, travaso, Fasciatura e l'altra Rincorsa: non attribuisco ai bot il potere di eliminare le contromosse.
-
-| Carta | Costo; priorità; bersaglio | Effetto proposto |
-|---|---|---|
-| Dose in preparazione (`junkie.MethDrivenRage`) | Gratuita; 1; sé | +10 T e **+5 A**; esposizione comune; cerca Tossicone |
-| Un assaggino (nuova TOS-AR6) | Gratuita; 1; avversario | +10 T a sé; 4 POISON diretti al bersaglio, senza altra T; esposizione comune; cerca Tossicone |
-| Tossicone Scatarrante (`junkie.Cough`) | 10 T; 1; avversario | **20 POISON** invece di 12; +5 T al bersaglio invariati |
-
-Entrambi danno i 10 T necessari da T=0, senza autodanno aggiunto dalla carta. T non decade: la disponibilità resta in N+1. Il +5 A di Dose è un'aggiunta di funzionamento da approvare, alternativa alla pressione del nuovo titolo; può differenziare chi carica da chi attacca subito senza introdurre priorità casuali. Non cambia il gruppo già fissato in N.
-
-**Potenza:** 20 POISON diretti sono circa 2,9 unità nominali e quasi il 29% della salute iniziale di Celestina; contro un'esposizione ×1,5 diventano 30 prima di altri stati. L'immunità a T non impedisce questo danno. La T aggiunta al bersaglio resta un effetto separato, inefficace sul periodico di un immune; contro gli altri può essere molto forte e non ha un prezzo lineare. Le parate HIT/CUT non fermano il veleno diretto: contromosse e anticipo restano essenziali.
-
-**Conseguenza F, testo sulla carta:**
-
-> Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Se il Tossicone Scatarrante trovato è ancora nella tua mano, questa vulnerabilità continua finché lo giochi o lo scarti.
-
-A–E si riferiscono alla copia di Tossicone. Il POISON nell'esposizione è indispensabile nello specchio. In C, scambiare il colpo per una carta mentre si conserva T potrebbe finanziare Metabolismo e allungare di nuovo lo specchio; in F curarsi e tenere il colpo mantiene un rischio effettivo anche per l'immune.
-
-**Attesi D16/D51 e rischi:** è l'intervento più incerto. In SB-16e spegnere lo slot Dose riduceva lo specchio di 6,55 punti di patte e 2,76 turni nel controllo dedicato; più caricamenti non sono per sé una cura. Il piccolo attacco, il Tossicone più forte e l'A possono anticipare la conclusione rispetto ai 18,22 turni/18,57% di patte della variante (c). Ma +T può ancora alimentare cure, e più POISON può peggiorare quota 0,662 contro Piera e circa 0,600 contro Beppe. Due Tossiconi simultanei potenziati possono aumentare le patte. Nessuna promessa del 10% e nessun taglio nascosto alla last resort.
-
-**Fase 2:** bozza: nuova carta, +5 A su Dose, 20 POISON e metadati, Rincorsa 2→1. Test: immunità a T distinta dal POISON diretto, pagamento da T=0 dopo caricamento, esposizione al veleno, gruppo di velocità dopo i costi. Bot: stimare separatamente danno diretto, T su immune/non immune e valore alternativo della cura; registrare T spesa sul colpo contro T spesa sulle alternative. Isolare nelle ablazioni il danno 12→20, il +5 A e la frequenza, per non attribuire tutto al nuovo malus.
-
-## Piera — contare la L che rimane davvero
-
-**Copie e slot:** Un altro e arrivo/PIN-AR4 resta a 2; nuova PIN-AR6 a 1 prende una Fasciatura (2→1). Estasi resta a 2. Restano Bancone, Rutto, due Testate e tutti gli oggetti. Si riduce una cura ripetuta nel mazzo, senza togliere la difesa caratteristica.
-
-| Carta | Costo; priorità; bersaglio | Effetto proposto |
-|---|---|---|
-| Un altro e arrivo (`base.pino.OffroIo`) | Gratuita; 1; sé | **+25 L** invece di +15, +35 A conservati; esposizione comune; cerca Estasi |
-| Prima il brindisi (nuova PIN-AR6) | Gratuita; 1; avversario | +25 L e +20 A a sé; 6 HIT al bersaglio; esposizione comune; cerca Estasi |
-| Estasi da Coca Etilene (`base.pino.GoingBerserk`) | Gratuita; 1; avversario | **18 + L** HIT invece di 10 + L; spende tutta la L come oggi |
-
-Da L=A=0, il fine turno porta L=25 a **12**, non a 25: si perdono 12 A e 13 L. In N+1 il primo caricamento lascia A=23, il nuovo A=8; entrambi preparano **30 HIT nominali**, senza costo da pagare. Dai valori iniziali attuali L=10/A=15, si arriva a L=17, A=33 oppure 18, e **35 HIT**. Il nuovo può aver inflitto anche 6 HIT in N, se risolto. Nessuna nuova risorsa riservata al colpo e nessuna sospensione del decadimento.
-
-**Potenza:** 30–35 HIT nel normale seguito della preparazione sono circa 4,3–5 unità nominali. L'esposizione e la perdita della propria corazza quando Estasi azzera L restano il prezzo. Senza caricare, Estasi a L=0 farebbe comunque 18: è un aumento importante anche della carta pescata normalmente. La classe attuale memorizza L, la azzera su sé e poi infligge il danno: conservarne l'ordine effettivo, senza promettere che la corazza resti fino a dopo il colpo. **La last resort L'ultimo giro conserva base 12 e selfHit 2**, anche se condivide la classe.
-
-**Conseguenza F, testo sulla carta:**
-
-> Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Se l'Estasi da Coca Etilene trovata è ancora nella tua mano, questa vulnerabilità continua finché la giochi o la scarti.
-
-A–E si riferiscono all'Estasi trovata. La L decade anche mentre si aspetta, ma questo è già un costo del sistema e non sostituisce la conseguenza richiesta. In C Piera può scegliere di far scadere Estasi e conservare L come corazza/carburante della last resort; in F non ottiene una riserva difensiva senza rischio. B può punire troppo una scelta di parare per sopravvivere.
-
-**Attesi D16/D51 e rischi:** più pressione, una Fasciatura in meno e più occasioni di recupero A possono accorciare lo specchio e gli incontri lunghi, ridurre arrivi al finale ad A=0 e aiutare Piera contro Mara/Celestina. Però +25 L aumenta anche la corazza e il calo di A; il netto non è certo. Due Piera che fanno le stesse mosse restano simmetriche. Non aumentare il danno globale della last resort per errore e non leggere meno patte come successo se gli incontri escono dal 40–60%.
-
-**Fase 2:** bozza: +25 L, parametro base di sola Estasi 18, nuova carta e lista. Test: esempi 0/0 e 10/15 attraverso R06, L residua corretta, A dei gruppi, azzeramento e corazza, last resort invariata. Bot: danno con L prevista in N+1 e se si ritarda, difese che valgono dopo la corazza, alternativa Testata/last resort, valore del +A anziché sola L. Isolare aumento L, aumento base e riduzione della cura nelle misure, entro il budget.
-
-## Beppe — il colpo trovato deve valere una preparazione
-
-**Copie e slot:** Preparo/GIG-AR3 1→2, nuova GIG-AR6 a 1, Lavoro/GIG-AR5 1→2; escono due Mattoni e uno Spintone. Restano Steal 2, Smontiamo tutto 2, Sotto il cofano, le Chiavi, SeagullFly e sette oggetti. Le difese equipaggiate non diventano oggetti sul campo.
-
-| Carta | Costo; priorità; bersaglio | Effetto proposto |
-|---|---|---|
-| Preparo il lavoro (`base.gigi.ColpoDiChiaveInglese`) | Gratuita; 1; sé | **+15 V** invece di +10; esposizione comune; cerca Lavoro |
-| Una stretta di prova (nuova GIG-AR6) | Gratuita; 1; avversario | +10 V a sé; 4 CUT al bersaglio; esposizione comune; cerca Lavoro |
-| Lavoro fatto bene (`base.gigi.LavoroFattoBene`) | **10 V** invece di 5; 1; avversario | **18 + 5 per ogni proprio oggetto sul campo** HIT, invece di 6 + 4 |
-
-Da V=0 entrambi finanziano il costo 10 in N+1: il primo lascia anche 5 V dopo il pagamento, il nuovo scambia quel margine con il piccolo taglio. Si alza il costo insieme al danno, rimanendo nella fascia F2 personale di Beppe. Non aggiungo A, visto quanto pesa la precedenza nei suoi specchi.
-
-**Potenza:** con 0/1/2/3 oggetti sul campo il danno è **18/23/28/33 HIT** (circa 2,6–4,7 unità nominali). A tavolo vuoto resta un colpo utilizzabile; con due o tre oggetti è potente, senza eguagliare automaticamente Impatto. Rubare, consumare o distruggere un oggetto riduce il danno di 5. Guanti già consumati non contano come oggetto ma possono modificare il danno tramite lo stato; token sul campo contano secondo la classe attuale. Il picco equipaggiato va provato, non trattato come 33 fisso.
-
-**Conseguenza F, testo sulla carta:**
-
-> Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Se il Lavoro fatto bene trovato è ancora nella tua mano, questa vulnerabilità continua finché lo giochi o lo scarti.
-
-A–E si riferiscono al Lavoro trovato. Aspettare per avere più oggetti è una scelta naturale di Beppe: F le attribuisce un prezzo senza vietarla. C fa perdere la carta proprio mentre si costruisce il tavolo, ma dà accesso ad altri oggetti; B può compromettere l'intera partita per aver atteso un oggetto. Questi comportamenti vanno confrontati, non desunti dal solo danno massimo.
-
-**Attesi D16/D51 e rischi:** con una sola rara, in SB-16e la ricerca riusciva 5.554 volte su 14.847 tentativi; due copie dovrebbero ridurre i fallimenti senza garantirlo. Più colpi personali possono ridurre durata contro Celestina (12,39) e Piera (12,88), ma togliere i Mattoni riduce attacchi immediati indipendenti dagli oggetti. Lo specchio è già sotto soglia (8,22%): colpi più grossi alla stessa velocità possono farlo peggiorare. C/F possono favorire usi molto diversi degli oggetti: aumentare potenza e consistenza insieme è il rischio principale.
-
-**Fase 2:** bozza: costo 10, parametri base 18/perItem 5, +15 V, nuovo titolo e tre sostituzioni. Test: tabella 0–3 oggetti, token/equip distinti, furto/distruzione prima della risoluzione, pagamento da V=0 con entrambi i caricamenti, due copie cercabili e terza ricerca fallita. Bot: conteggio pubblico al momento utile, valore di consumare rispetto a conservare, interazione con Guanti/corazza, vantaggio della seconda copia separato dall'aumento di danno.
-## Costo tecnico: cosa esiste e cosa va aggiunto
-
-Controllo statico mirato di [DataCards](../../../server/src/main/java/com/gsc/bm/sim/DataCards.java), [Game](../../../server/src/main/java/com/gsc/bm/model/game/Game.java), [Player](../../../server/src/main/java/com/gsc/bm/model/game/Player.java) e delle classi [Estasi](../../../server/src/main/java/com/gsc/bm/model/cards/base/pino/GoingBerserk.java) e [Lavoro](../../../server/src/main/java/com/gsc/bm/model/cards/base/gigi/LavoroFattoBene.java). Non è una prova applicativa.
-
-**Già disponibile:** guadagni, perdite, danni dei tre tipi, stati con fattore e durata, una ricerca esatta in `self`, danno in `target` nella stessa azione, pesca ordinaria con catena di oggetti e last resort, conteggio degli oggetti e spesa di L nei due colpi Java. I cinque nuovi titoli non richiedono nuove formule Java per risorse/danno. D8 resta rispettata per questi effetti.
-
-**Nuovo in tutte le alternative:** collegare l'esito di ricerca a una copia reale, conservarne l'identità, renderla pubblica in mano (D58), conoscerne l'uscita effettiva e applicare una condizione nel turno successivo. Il passo `search` corrente prenota solo un binding; `status` conosce durate numeriche, non «finché questa copia resta in mano». Dunque **nessuna delle sei conseguenze è ottenibile con soli numeri della bozza**. Serve un'estensione limitata al playground, esplicitamente approvata; nessun linguaggio generico di script o nuova parola chiave.
-
-| Parte | Lavoro concreto e costo relativo |
-|---|---|
-| Comune D58 | Identità pubblica stabile della sola copia mostrata; legame autore/ricerca/copia/turno; uscita per giocata e scarto; viste server, bot, client e ricostruzione della vista al reconnect. Costo medio, trasversale: non basta un campo nel log del round. |
-| A | Scadenza una volta a N+1 e stato valido in N+2, con pulizia dei legami. Costo medio, oltre D58. |
-| B | Scadenza e scarto, capacità individuale permanente al posto della sola costante 6; tutte le vie di pesca/ricerca, guardia a quattro, UI e invarianti di legalità. Costo alto; modifica ulteriore di sistema. |
-| C | Scadenza, scarto mirato e una pesca normale sostitutiva, eventi strutturati. Costo medio-basso oltre D58; non modifica la capacità della mano. |
-| D | C più scelta per ciascun legame in scadenza nell'invio della mossa; default, validazione server, bot e comando client. Costo medio-alto; niente decisione postuma sulle mosse nascoste. |
-| E | B con riduzioni temporanee, recuperi separati e controllo capienza/pesca al recupero. Costo alto, almeno comparabile a B. |
-| F | Stati collegati alla copia con scadenza minima e rimozione all'uscita dopo il minimo; pulizia e serializzazione del legame, senza duplicare gli stati a ogni turno. Costo medio, oltre D58; nessuna capacità o scelta aggiuntiva. |
-
-Sono stime relative del perimetro, non preventivi o tempi misurati. In termini di componenti F richiede almeno quattro gruppi di lavoro: ciclo di vita ricerca/stato, vista pubblica e scelta della copia, euristiche/osservatore, rendering client; B/E aggiungono il sistema di capacità e le relative garanzie di legalità. Il passo 0 della Fase 2 deve stimare il costo sul codice reale prima dei lotti; le due ore previste sono **calcolo di bilanciamento**, non un preventivo di implementazione.
-
-La bozza deve portare dati strutturati per colpo, conseguenza, fattore, minimo di durata e turno/copia interessati. Non lasciare al bot il compito di dedurre la clausola da una descrizione italiana. I metadati dei cinque nuovi titoli devono rappresentare **sia il danno sia il guadagno e la ricerca**; un solo ruolo grafico non deve farli valutare come semplici colpi o semplici risorse.
-
-Per omonime cercate e non cercate serve una scelta deterministica e visibile dell'esemplare. Raccomando identificatori di istanza nel playground, separati dal binding di catalogo, che consentano a umano e bot di scegliere la stessa copia per giocata/scarto. Un fallback di compatibilità, se necessario, va documentato e testato. Il server non deve esporre identificatori o contenuti delle altre carte nascoste.
-
-Gli stati iniziano alla risoluzione, senza aumentare danni già arrivati. Nell'implementazione di F occorre conservare il minimo di due turni anche dopo l'uscita precoce della copia, ed evitare che la normale scadenza R05 rimuova l'estensione di una copia ancora trattenuta. C/E usano la pesca normale: oggetti sul campo, rispetto della capacità degli oggetti, continuazione della catena, ingresso della last resort e assenza di duplicati. D58 non trasforma queste pescate casuali in carte pubbliche.
-
-**Confine normativo:** restiamo nel playground D50 fino a SB-28, come già deciso. Dopo approvazione, il documento sperimentale interessato deve registrare versione, motivazione e decisione prima dell'implementazione; bozza, test, griglia e descrizioni/metadati sperimentali devono concordare. Il regolamento 1.13, il Set Base 0.1, SQLite e copie della partita viva non si aggiornano anticipatamente. B/E richiedono un'ulteriore decisione esplicita su R02/R03 nel playground: D38 non autorizza un cambiamento della capienza. Questa Fase 1 non modifica nessuno di quei file.
-
-## Verifiche e bot da predisporre nella Fase 2
-
-**Test di conformità, oltre ai casi di ogni starter:**
-
-1. Ogni lista ha 20 regolari, massimo due copie, basic/bound/last resort conformi; nuove rarità e slot espliciti. Nessun cambio alle soglie del banco.
-2. Successo, assenza del colpo, colpo già in mano con un'altra copia nel mazzo, copie entrambe fuori mazzo, ricerca annullata, ricerca usata come scarto di una bound. Solo una copia effettivamente trovata crea il legame.
-3. Mano pubblica D58: copia cercata visibile a tutti in 1v1 e FFA fino all'uscita, anche dopo più turni e reconnect; carte casuali nascoste; nessun dato del mazzo passato al bot. Due omonime con identità distinte e selezione corretta.
-4. In N+1: colpo giocato e risolto, parato fino a zero, annullato da contromossa o perché a terra; copia scartata da bound risolta oppure scarto non avvenuto perché la bound è annullata. Conseguenza sulla copia rimasta, non su tutte le omonime.
-5. F: minimo N/N+1 anche con uscita precoce; persistenza in N+2 e oltre; fine all'uscita effettiva; due legami indipendenti, fattori cumulati secondo R05 e nessuna duplicazione per turno. Ricerca fallita dopo una riuscita non rinnova il vecchio legame. La rimozione di uno stato non deve toccare esposizioni di altre carte.
-6. A/D: una sola conseguenza e solo N+2, non retroattiva sul periodico di N+1. D: scelta registrata prima delle risoluzioni, fallback «tieni», niente scelta su una copia già uscita.
-7. C/D/E: una sola sostituzione quando dovuta, catena di oggetti, mazzo vuoto, last resort già presente, niente duplicati o superamento della mano. Nessuna pesca aggiuntiva se il colpo è già stato giocato/scartato. Ogni ricerca riuscita e ogni scadenza hanno contatori conservativi per copia.
-8. B/E, solo se scelte: mano 6→5→4, terza penalità e minimo approvato, basic senza oggetti, bound con una sola regolare, recuperi temporanei sovrapposti, tutte le vie di pesca e ricerca, assenza di mosse illegali o di turni senza mossa. Nessuna «soluzione» che aggiunga il passo o anticipi la last resort senza decisione.
-9. Morte prima della scadenza, eliminazione FFA, fine partita, stati/equip, corazza L/4, ordine dei timer di D50. Un'attività differita non deve resuscitare, cambiare il vincitore o far scegliere una carta a un eliminato.
-10. Isolamento: profilo vivo senza le nuove regole; descrizioni e metadati uguali agli effetti. Mutazioni sui rami nuovi (identità, scadenza, uscita, fallback, durata e visibilità), senza alterare attesi per nascondere regressioni.
-
-**Bot:** conservare i quattro stili e aggiungere come asse separato le tre politiche già richieste in SB-16g:
-
-- «Gioca sempre il turno dopo», se il colpo è legalmente giocabile; se non lo è, normale scelta legale e registrazione della causa.
-- «Tieni se l'avversario si è parato»: legge **l'ultimo turno risolto e gli stati pubblici ancora attivi**, mai la mossa segreta attuale. Si tratta di un'euristica reattiva, non della certezza che si parerà di nuovo. In B/C/E significa rinunciare alla giocata e subire l'esito previsto; non è possibile conservare comunque la carta.
-- «A caso»: decisione riproducibile col seme, 50% fra colpo legale e alternativa legale; per D estrazione separata e registrata della scelta tenere/scartare. Distinguere una scelta casuale dall'impossibilità di giocare il colpo.
-
-Tutte devono leggere la mano scoperta persistente D58, il fattore di esposizione e le risorse realmente spendibili. In F devono valutare il sacrificio via bound come alternativa alla permanenza; in C il ricambio e l'avvicinamento alla last resort; in B/E la scarsità delle opzioni. Nessun accesso al mazzo avversario o simulazione di scelte nascoste come se fossero note. Nessun pianificatore a più turni in questo blocco.
-
-**Misure e budget:** dopo approvazione, passo 0 di fattibilità e piano di lotti fissato prima dei risultati, **al massimo tre giri e due ore cumulative di calcolo**, come SB-16g. Un confronto di sei varianti per cinque starter e tre politiche può costare troppo: questa proposta non moltiplica automaticamente il budget. Il proprietario sceglie prima la candidata e l'eventuale alternativa prioritaria; se si desidera misurarle tutte serve un piano che rientri nel tetto, altrimenti una nuova autorizzazione. Stessi semi e posti alternati, controllo (c), criteri invariati; le politiche si confrontano anche l'una contro l'altra, non soltanto in specchio con sé stesse.
-
-Contare per starter, incontro, stile e politica: distribuzione 0/1/2/3 caricamenti visti/scelti/risolti; ricerche riuscite/tentate e ragioni del fallimento; copie scoperte giocate in N+1, dopo, scartate o rimaste a fine partita; legalità del colpo in N+1 e risorsa mancante; conseguenze scattate/copie eleggibili; turni e numero di esposizioni attive, danno extra effettivo separato da corazza, parata e overkill; durata, mazzo esaurito, accessi alla last resort, causa delle patte. Aggiungere scarti/pescate sostitutive per C/D/E e turni a capacità ridotta per B/E.
-
-Separare con ablazioni la frequenza/composizione, l'aumento di potenza e la conseguenza, usando sottoinsiemi prefissati se necessario. Il danno del nuovo caricamento non va contato come danno del colpo cercato. Nel confronto fra politiche riportare vantaggio e incertezza campionaria: se una scelta domina sistematicamente, la conseguenza non ha prodotto la decisione cercata. Non scegliere a posteriori lo spareggio più favorevole, come accadde fra (b) e (c) in SB-16e2. Se criteri o budget non tornano, **STOP con proposta**, senza un quarto giro implicito.
-
-Verifiche tecniche future: suite Java e `check-rules.py`, test/build/size client con output fuori dai file tracciati, controllo link e diff; contesto Spring completo e avvio reale `bozza` **separati** dai test unitari, più prove client mirate alla mano scoperta e alla conseguenza scelta. Una breve prova umana dovrà giudicare leggibilità, piacere di giocare la coppia e libertà reale di rinviare, prima di SB-17. Nessuno di questi esiti è anticipato qui.
-
-## Altre migliorie da valutare, senza attuarle
-
-1. **Contromossa leggibile contro il POISON.** Tossicone più forte aggira sia corazza sia molte parate; il campione di SB-16e registra zero parate da stati sui suoi colpi. Prima di aumentare ancora il danno, valutare una difesa regolare esistente che protegga anche dal POISON conservando il premio D52, oppure valorizzare nei bot le contromosse già presenti. Cambiare le difese è un'altra scelta di carte, non una taratura nascosta di questa proposta; non rendere immune al POISON l'immunità alla risorsa T.
-2. **Evitare accumuli di vulnerabilità eccessivi.** F con più copie rende interessante il legame pubblico, ma ×2,25 o più può essere eccessivo. Prima provare un fattore minore; come alternativa di funzionamento, valutare un'unica vulnerabilità per personaggio mantenuta finché c'è almeno una copia cercata trattenuta. Quest'ultima richiede un'eccezione esplicita al cumulo R05, stato condiviso e ulteriori test: non la considero già approvata.
-3. **Ricerche riuscite contro sole risorse.** Con tre caricamenti e due colpi, e soprattutto con C/D, controllare se il caricamento giocato dopo che i colpi sono usciti diventa la mossa migliore per sole risorse e pesca normale. Non cambiare automaticamente il fallback D50; solo se i dati mostrano un abuso, proporre separatamente una parte del premio condizionata alla ricerca riuscita, dichiarando il nuovo ordine degli effetti e il costo tecnico.
-4. **Finali ripetitivi.** Se i colpi anticipati non bastano a riportare gli specchi di Celestina/Piera sotto 10%, tornare al proprietario con i dati su last resort, simmetria dei gruppi e autodanno. Non aggiungere ora casualità alla precedenza, perdita di salute a fine turno o spareggi: sarebbero regole nuove e il proprietario aveva giudicato il resto a posto.
-5. **La scadenza deve leggersi sul tavolo.** Accanto alla copia scoperta mostrare quale caricamento la sostiene e, secondo variante, «vulnerabile finché la tieni», «ultimo turno utile» o «spazio ridotto». Ispezione disponibile anche sul telefono; testo della carta e stato devono dire la stessa cosa. È attuazione D58 e della conseguenza, non una meccanica autonoma.
-
-## Consegna, verifiche e limiti della Fase 1
-
-Preliminare: working tree pulito su `main`, fetch riuscito, HEAD e origin/main allineati a `8bc0def`; porte 8080 e 4320 senza listener. Il sandbox locale non avviava i processi; letture e scrittura autorizzata sono state eseguite tramite il percorso alternativo degli strumenti. Nessuna modifica di configurazione o riparazione dell'ambiente.
-
-Le indicazioni aggiuntive del proprietario sono state registrate per prime nel commit documentale `e55250b`, come da contratto. Non sono un'approvazione di uno dei sei funzionamenti. La presente proposta completa quel documento; **solo `docs/design/set-base/sb-16g-proposta.md` è nel perimetro dei commit**. Piano, bozza, griglia, codice, test, regolamento, documento del set, catalogo e client restano invariati. Nessun push.
-
-Verifiche richieste dal brief: **`python scripts/check-links.py` verde, 292 file controllati e 0 link rotti; `git diff --check` verde**. Controlli aritmetici in memoria: cinque liste da 20 regolari con massimo due copie e conteggi dei titoli coerenti; confermati i quattro esempi di L/A/danno di Piera e le probabilità indicative. Nessuna modifica alla bozza. Nessun rosso nei controlli eseguiti. Il controllo dei link e quello degli spazi vengono ripetuti sul documento finale prima del commit.
-
-Non eseguiti in questa fase documentale: suite applicative/server/client, contesto Spring completo, nuove partite, simulazioni di bilanciamento, prove umane, verifiche visive o FFA. I dati riportati sono quelli storici identificati oppure calcoli nominali, non evidenze che le nuove carte funzionino o raggiungano D16/D51. Attesi e soglie dei test non cambiano. Il bilanciamento resta non dimostrato.
-
-**STOP all’attuazione.** Fase 1 fatta e risposte registrate nel piano e in questa proposta (D59–D68). Divisione 2a/2b approvata; carte concrete aggiornate ancora da ripresentare prima della bozza. Nessuna Fase 2 avviata con questa registrazione.
+**STOP: nessuna carta nella bozza prima dell'approvazione.** La 2a parallela non approva implicitamente le carte o le liste qui proposte.
 
 ## Domande numerate al proprietario
 
-1. **Risposta registrata: F, con due turni minimi (D59); confronto numerico aggiuntivo non scelto.** Domanda originaria: **Quale conseguenza scegli come candidata per la Fase 2?** Raccomando **F**, vulnerabilità finché resta in mano la copia trovata, minimo questo turno e il prossimo; **D** è la via di mezzo che lascia scegliere fra scartare/ripescare e un solo turno aggiuntivo di rischio. Restano confrontate A (rischio finito), B (spazio permanente), C (scarto/pesca automatici) ed E (spazio per un turno). Se vuoi un confronto numerico aggiuntivo, quale sola alternativa prioritaria mettiamo accanto alla candidata entro il budget esistente?
-2. **Risposte registrate D60–D62: approvati 120 carte, due coppie per tutti i cinque starter e rarità NC anche del secondo caricamento. Due copie dello stesso caricamento NC cercano due copie dello stesso colpo NC; un diverso caricamento NC cerca il raro. Carte concrete e sostituzioni da rivedere.** Domanda originaria: **Approvi tre caricamenti e due colpi per ogni starter, con i cinque nuovi titoli e le sostituzioni della tabella?** Il set progettato arriva a 120 carte e 42 azioni d'archetipo; Mara e Beppe hanno una seconda copia della loro rara. Le generiche uscite dagli starter restano nel pool. Se vuoi conservare il totale 115 occorre scegliere altri cinque slot a cui rinunciare.
-3. **Risposta registrata in D63: «approvo» alla domanda riformulata per le due coppie.** Ogni caricamento deve finanziare il rispettivo colpo da risorsa zero, considerando il fine turno; colpo NC potente e affidabile, raro con picco maggiore legato alla preparazione o al tavolo. Numeri tarabili in Fase 2; carte concrete e sostituzioni da ripresentare. La domanda originaria sui valori delle cinque vecchie schede è superata e quei valori non sono approvati da questa risposta.
-4. **Risposte registrate D64–D66: approvati vulnerabilità a tutti i danni, legame alla precisa copia, uscita effettiva, ricerca fallita e cumulo moltiplicativo indipendente. Domanda chiusa.** Domanda originaria: **Approvi l'esposizione ai tre tipi anche per Spazienzio e il legame alla precisa copia trovata?** Propongo nessuna conseguenza aggiuntiva se il colpo viene giocato e poi annullato/parato, o se viene realmente scartato per una bound; una ricerca fallita non crea un legame. In F restano due turni minimi e poi l'esposizione finisce all'uscita della copia. Due copie trattenute cumulano gli stati secondo R05: preferisci partire così, tarando il fattore, oppure chiedi subito una proposta senza cumulo?
-5. **Non applicabile dopo la scelta F (D59), nessuna decisione sulla capacità richiesta.** Domanda condizionata originaria: **Solo se preferisci B o E:** approvi il minimo di quattro carte di capienza, per lasciare sempre almeno uno spazio regolare accanto a basic e bound? La versione permanente senza limite può violare «sempre una mossa legale» nei mazzi con più coppie. Per B/E serve approvare anche il costo tecnico della capacità variabile; non basta lo scarto senza pesca.
-6. **Risposta registrata in D67: inclusa la valutazione della difesa dal POISON; funzionamento concreto da presentare prima di ogni modifica. Le altre ipotesi non sono approvate.** Domanda originaria: **Quali ulteriori migliorie vuoi valutare nella Fase 2?** Raccomando prima la risposta al POISON e la leggibilità del legame pubblico; ricompense condizionate alla ricerca, regola di non cumulo e ridisegno delle last resort restano ipotesi separate, da scegliere solo se utili. Nessuna di queste viene attuata con questa proposta.
-
-**Divisione 2a/2b: approvata in D68.** Si chiude la registrazione delle risposte; nessuna ulteriore approvazione è dedotta per le carte concrete da ripresentare. STOP all’attuazione.
+1. **Approvi le cinque coppie NC/rare concrete, con questi testi, costi, priorità e destinazioni di ricerca?** Tutti i caricamenti sono NC e partono da ×1,5; le risorse bastano da zero dopo il fine turno. I NC sono affidabili; il raro può rendere meno al minimo e avere un picco maggiore con preparazione/tavolo. In particolare Cinghiata diventa rara a danno variabile, il travaso di Celestina aggiunge 12 POISON e Rutto scarica tutta la L per danno e disturbo. I numeri restano indicativi sotto D38.
+2. **Approvi le sostituzioni e le cinque liste da 20, senza eliminare difese e contromosse personali?** Escono una copia di SPEDIAMOTI DUNQUE IN O-AHIO, una Cinghiata e uno Spintone da Mara, una Rincorsa da Celestina, una Fasciatura da Piera e due Mattoni da Beppe. Entrano solo cinque titoli nel pool, uno per starter; il set resta da 120 con **45 C / 55 NC / 20 R**. Il maggiore numero di NC e i 12–13 titoli distinti per starter sono dichiarati, senza compensazioni nascoste su altri slot.
+3. **Approvi «Il bancone regge, io pure» anche contro POISON ×0,5**, diretto e periodico del turno, conservando gratuità, priorità 2 e +5 L? È la candidata D67 per dare a Piera una risposta al veleno; il rischio di allungare gli incontri va misurato separatamente. Nessuna immunità aggiunta né riduzione del CUT.
