@@ -85,7 +85,7 @@ export type Chip={id:string;kind:'good'|'bad'|'equip'|'immunity'|'timer';short:s
 export const statusText=(name:string,fallback:string)=>STATUS_TEXT[name]??fallback;
 // R05: duration d decreases at turn end and the status disappears below zero (0 = this turn only).
 const lasting=(d:number|null)=>d===null?'resta finché non viene tolto':d<=0?'finisce a fine turno':`dura ancora ${d} turn${d===1?'o':'i'} dopo questo`;
-export function chipsOf(owner:string,c:Character):Chip[]{
+export function chipsOf(owner:string,c:Pick<Character,'statuses'|'immunities'|'timers'>):Chip[]{
  const chips:Chip[]=[],exposures=vulnerabilitiesOf(c);
  c.immunities.forEach(r=>chips.push({id:`status-${owner}-imm-${r}`,kind:'immunity',short:LETTER[r],resource:r,title:`Immune a ${NAMES[r]??r}`,text:'Blocca il suo effetto di fine turno, non costi, variazioni o veleno.'}));
  c.statuses.forEach((s,i)=>{if(s.exposure!==undefined)return;chips.push({id:`status-${owner}-st-${i}`,kind:s.equip?'equip':s.type==='BAD'?'bad':'good',short:s.lastsForTurns===null?'∞':String(Math.max(0,s.lastsForTurns)),
@@ -104,7 +104,7 @@ export function chipsOf(owner:string,c:Character):Chip[]{
  * search, which lasts `left` turns after this one (0 = ends at this turn's end). Pure: the server applies the factor.
  */
 export type Vulnerable={exposure:number;factor:number;types:string[];left:number|null;untilPlayed:string|null};
-export function vulnerabilitiesOf(c:Character):Vulnerable[]{
+export function vulnerabilitiesOf(c:Pick<Character,'statuses'>):Vulnerable[]{
  const by=new Map<number,Status[]>();c.statuses.forEach(s=>{if(s.exposure!==undefined)by.set(s.exposure,[...(by.get(s.exposure)??[]),s]);});
  return [...by.entries()].map(([exposure,list])=>{const s=list[0];
   return {exposure,factor:s.factor??1,types:list.map(x=>x.impactedProperty),left:s.lastsForTurns,untilPlayed:s.untilPlayed??null};});

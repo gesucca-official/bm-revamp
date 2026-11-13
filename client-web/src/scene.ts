@@ -7,7 +7,7 @@ import {handCardState,guideFocus,guideMotion,GuideRest,hitAt,handSlot,raisedCard
 import {artIndex,artFrame,loadAtlas} from './art.ts';
 import {playerName} from './presence.ts';
 import type {Card,CharacterCard,Player,Resource,View} from './contracts.ts';
-import {plays,seatMarks,NO_CHANGE,nextStop,timeline,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline} from './resolution.ts';
+import {plays,seatMarks,NO_CHANGE,nextStop,timeline,statusSequence,beats,hitCues,BEAT_PHASE,LABEL,PACE,type Pace,type Round,type SeatMark,type Step,type Timeline,type StatusFrame} from './resolution.ts';
 import {deckLabel,handNeighbour} from './a11y.ts';
 import {seatMark,heldBack} from './lifecycle.ts';
 import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from './symbols.ts';
@@ -109,7 +109,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  // C3-L: round's cards already landed in the middle during a sequence.
  private landed=0;
  // C3-4s: what the table shows during a sequence, until each flight lands; at its end, and for decisions at any time, the view (rule 2).
- private staged:{items:Record<string,Card[]>;slots:TableLayout;backs:Record<string,number>;deck:number;discard:string|null}|null=null;private arriving=new Set<string>();private labels:Label[]=[];
+ private staged:{states:Record<string,StatusFrame>;items:Record<string,Card[]>;slots:TableLayout;backs:Record<string,number>;deck:number;discard:string|null}|null=null;private arriving=new Set<string>();private labels:Label[]=[];
  // C3-L: top of the own discard pile, kept per game and refreshed by each resolved round of the view.
  private pile={game:'',turn:-1,top:null as string|null,middle:null as string|null,before:null as string|null};private starts=new Map<string,Partial<Record<Resource,number>>>();
  // Status chips on the table, for the summary the shell shows on hover, tap or focus.
@@ -261,7 +261,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.world.addChild(c);return own?{values:{...r},reference:Object.fromEntries(RESOURCES.map(k=>[k,meter(0,start[k],k==='HEALTH').reference])),rows}:null;}
  // Statuses, equipment, immunities and timers as chips on the lower art of the character card.
  // Shape and short text carry the meaning; the summary opens on hover, tap or focus.
- private statusChips(b:Box,id:string,p:Player){const chips=chipsOf(id,p.character);if(!chips.length)return;
+ private statusChips(b:Box,id:string,p:Player){const chips=chipsOf(id,this.staged?.states[id]??p.character);if(!chips.length)return;
   const ch=b.h,cw=Math.min(ch*1.7,b.w/chips.length),step=chips.length>1?Math.min(cw+2,(b.w-cw)/(chips.length-1)):0,fs=ch*.6;
   const fill={good:0x2c6262,bad:WINE,equip:0x86561b,immunity:0x343f6b,timer:INK};
   chips.forEach((chip,i)=>{const x=b.x-b.w/2+cw/2+i*step,y=b.y,c=new Container(),g=new Graphics();c.addChild(g);c.position.set(x,y);
@@ -543,7 +543,8 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const ids=Object.keys(v.players),before=(id:string)=>previous.players[id]?.character.items??[],slots=tableLayout(this.width,this.height,ids,this.model.me,Object.fromEntries(ids.map(id=>[id,Math.max(before(id).length,v.players[id].character.items.length)])));
   const objectsBefore=Object.fromEntries(ids.map(id=>[id,[...before(id)]]));
   const handDraws=(id:string)=>T.draws.filter(d=>d.seat===id&&d.to==='hand').length;
-  const shown={items:objectsBefore,slots,backs:Object.fromEntries(ids.filter(id=>id!==this.model.me).map(id=>[id,Math.max(0,(v.players[id].cardsInHand as number)-handDraws(id))])),deck:previous.players[this.model.me]?.deck??v.players[this.model.me]?.deck??0,discard:this.pile.before};
+  const states=statusSequence(previous,v);
+  const shown={states:states.before,items:objectsBefore,slots,backs:Object.fromEntries(ids.filter(id=>id!==this.model.me).map(id=>[id,Math.max(0,(v.players[id].cardsInHand as number)-handDraws(id))])),deck:previous.players[this.model.me]?.deck??v.players[this.model.me]?.deck??0,discard:this.pile.before};
   const slotBox=(id:string,i:number):Box|null=>{const list=slots.seats.find(s=>s.id===id)?.items??[];return i<0?null:list[i]??list.at(-1)??null;};
   const itemBox=(id:string,name:string,old:boolean):Box|null=>{const items=old?before(id):v.players[id]?.character.items??[];return slotBox(id,old?items.findIndex(c=>c.name===name):items.map(c=>c.name).lastIndexOf(name));};
   const itemAt=(id:string,name:string,old:boolean):Point|null=>{const b=itemBox(id,name,old);return b?{x:b.x,y:b.y}:null;};
@@ -621,6 +622,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     else{node.addChild(new Graphics().moveTo(-bw*.1,-bh*.5).lineTo(bw*.08,-bh*.1).lineTo(-bw*.12,bh*.15).lineTo(bw*.05,bh*.5).stroke({color:INK,width:3}));flight({node,from:src,to:{x:src.x,y:src.y+(C?12:20)},start:s,end:e,mode:'break',tag:'itemOut'});}}
    // 6. The card's changes.
    change(P.changes.at,m.steps);
+   this.events.push({at:P.changes.at,run:()=>{for(const [id,added] of Object.entries(states.moves[i]))shown.states[id].statuses.push(...added);}});
    // C4-10: the guide follows author and target of the card in course, on the times already planned (none new).
    this.guideBeats.push({from:P.cost.at,to:end,hit,author:m.author,target:m.target});
    this.stats.schedule.push({key:k,move:i,...at,hit:Math.round(hit),tokens:m.tokens.length?P.cost.at:null,closeUp:P.author.at,goesBack:P.back.at,flies:P.flight.at,targetUp:P.target.at,pops:m.steps.length?P.changes.at:null,costPops:m.costSteps.length?Math.round(P.cost.at+P.cost.dur*.3):null});});

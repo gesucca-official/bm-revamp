@@ -1,0 +1,1 @@
+[{"mutation":"final-instead-of-previous","exitCode":1,"detected":true},{"mutation":"void-additions","exitCode":1,"detected":true},{"mutation":"wrong-exposure","exitCode":1,"detected":true},{"mutation":"wrong-owner","exitCode":1,"detected":true},{"mutation":"ambiguous-claim","exitCode":1,"detected":true},{"mutation":"countdown-is-new","exitCode":1,"detected":true}]

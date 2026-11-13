@@ -1,4 +1,4 @@
-import type {Card, Move, MoveSearch, Resource, View} from './contracts.ts';
+import type {Card, Character, Move, MoveSearch, Resource, Status, View} from './contracts.ts';
 import {impactOf,type Gain} from './readability.ts';
 
 // Certain facts of one resolved round (C3-1, plan D1). Built only from structured fields of two views and the
@@ -409,7 +409,7 @@ export type ReportSteps =
   | {verified: true; costs: Step[]; moveCosts: Step[][]; moves: Step[][]; endOfTurn: Step[]}
   | {verified: false; reason: string};
 
-// The only form read: "RESOURCE: before->after (delta)", written by one server method, ending the line and preceded at
+// For resource steps the only form read: "RESOURCE: before->after (delta)", written by one server method, ending the line and preceded at
 // most by a label in parentheses (end-of-turn lines). Any other line, or any other part of a line, is free text and is
 // never interpreted (D1).
 const REGULAR = /^(?:\([^()]*\) )?(HEALTH|ALERTNESS|VIOLENCE|TOXICITY|ALCOHOL): (-?\d+)->(-?\d+) \((-?\d+)\)$/;
@@ -471,6 +471,45 @@ export function reportSteps(previous: View, next: View, facts: ResolutionFacts, 
       return fail(`${id} ${r}: steps end at ${value[id]?.[r] ?? 0}, view ${p.character.resources[r] ?? 0}`);
   }
   return {verified: true, costs, moveCosts, moves, endOfTurn};
+}
+
+/** The consultable state of a seat, held independently of resources and objects during a sequence. */
+export type StatusFrame = Pick<Character, 'statuses' | 'immunities' | 'timers'>;
+/**
+ * Start with the previous view, including expired states and their old counters. Only additions still present in the
+ * final view can be shown early: a search copy identifies its exposure; an exact, unambiguous Gained Status report
+ * identifies an ordinary status on SELF or OPPONENT. No catalog effect or duration is simulated. Unknown additions,
+ * removals and counter updates wait for sequence completion (or interruption), when the scene uses the final view.
+ */
+export function statusSequence(previous: View, next: View) {
+  const before: Record<string, StatusFrame> = {};
+  const moves: Record<string, Status[]>[] = next.resolvedMoves.map(() => ({}));
+  const identity = (s: Status) => JSON.stringify([s.name, s.description, s.type, s.flow, s.impactedProperty,
+    s.equip, s.singleUse, s.amountFunction, s.typeFunction, s.exposure, s.factor, s.untilPlayed]);
+  for (const [id, p] of Object.entries(next.players)) {
+    const old = previous.players[id]?.character;
+    before[id] = {statuses: [...(old?.statuses ?? [])], immunities: [...(old?.immunities ?? [])], timers: [...(old?.timers ?? [])]};
+    const remaining = before[id].statuses.map(identity);
+    const added: Status[] = [];
+    for (const status of p.character.statuses) {
+      const index = remaining.indexOf(identity(status));
+      if (index >= 0) { remaining.splice(index, 1); continue; }
+      added.push(status);
+    }
+    for (const status of added) {
+      if (status.exposure === undefined && added.filter(s => s.exposure === undefined && s.name === status.name).length !== 1) continue;
+      const claims = next.resolvedMoves.flatMap((m, i) => {
+        if (m.void) return [];
+        if (status.exposure !== undefined)
+          return m.playerId === id && m.search?.found && m.search.copy === status.exposure ? [i] : [];
+        const target = m.targetId === 'SELF' ? m.playerId : m.targetId, report = m.moveReport ?? {};
+        const lines = [...(m.playerId === id ? report.SELF ?? [] : []), ...(target === id ? report.OPPONENT ?? [] : [])];
+        return lines.some(line => /^Gained [sS]tatus: (.+)$/.exec(line)?.[1] === status.name) ? [i] : [];
+      });
+      if (claims.length === 1) (moves[claims[0]][id] ??= []).push(status);
+    }
+  }
+  return {before, moves};
 }
 
 /** What happens to the object a move chose and that left its seat: consumed by its owner, passed to the author, or gone. */
