@@ -1,125 +1,152 @@
-# SB-16g, Fase 2a — Carta scoperta e vulnerabilità legata alla copia
+# SB-16g, Fase 2a — Carta trovata a faccia in su e gettone di vulnerabilità
 
 13 novembre 2026. Base `2a0c9ca`. Autorizzata da [D68](../../set-base-plan.md#decisioni-del-proprietario) (divisione 2a/2b) con
-[D58](../../set-base-plan.md#decisioni-del-proprietario), [D59](../../set-base-plan.md#decisioni-del-proprietario) e D64–D66.
+D58 e D64–D66; **rivista da [D69](../../set-base-plan.md#decisioni-del-proprietario)**.
+
+**Storia.** La prima consegna (`41ffadf`) legava la vulnerabilità alla copia esatta, con il minimo di due turni di D59. Alla
+consegna il proprietario ha confermato le domande, «però»: la carta scoperta è un promemoria; il gettone sta sul giocatore, è legato
+al **nome** e non ha timer. Le risposte di dettaglio sono in D69 (`9e4efce`). Questa revisione rifà motore, vista, client, test,
+catture e rapporto. In `41ffadf` restano solo come storia: il legame alla copia, il minimo, la preferenza della copia scoperta
+nella giocata per nome e lo scarto per identità.
+
 Tutto il comportamento nuovo vale solo con le regole `d50` (profilo `bozza`, runner): con le regole vive 1.13 la partita è identica.
 Non toccati: regolamento, `docs/sets`, catalogo, SQLite, `bozza.json`, la [proposta](../../design/set-base/sb-16g-proposta.md)
 (aggiornata in parallelo da un altro esecutore), client-debug. Nessuna carta nuova o cambiata: sono di 2b.
 
-## Cosa cambia
+## Cosa cambia (D69)
 
 ### Motore (server)
 
-**Identità della copia (D58).** Le carte sono uguali per nome (`AbstractCard.equals`), quindi il legame usa l'identità
-dell'oggetto. Quando la ricerca trova una carta che va in mano, [Game](../../../server/src/main/java/com/gsc/bm/model/game/Game.java)
-le dà un numero (`revealSerial`, un contatore per partita) e la registra fra le carte scoperte del giocatore
-([Player](../../../server/src/main/java/com/gsc/bm/model/game/Player.java), `Revealed(id, card, turn)`). Resta scoperta finché
-quella precisa copia esce dalla mano, giocata o scartata. Giocare o scartare un'omonima non la libera.
+**Formato.** Nuovo campo `vulnerability` dentro il passo `search` di una carta della bozza
+([DataCards](../../../server/src/main/java/com/gsc/bm/sim/DataCards.java),
+[Vulnerability](../../../server/src/main/java/com/gsc/bm/model/game/status/Vulnerability.java)), per esempio
+`{"op":"search","card":"x.Colpo","vulnerability":{"factor":1.5,"turnsIfNotFound":2}}`:
 
-- `Player.discardCard` ora toglie la carta per identità (con ripiego sul nome). Con le regole vive il risultato è lo stesso di prima:
-  le omonime sono indistinguibili.
-- **Ripiego dichiarato.** Il protocollo sceglie la carta per nome. Con più omonime in mano, `getCardFromHand` con le regole `d50` dà
-  per prima la copia scoperta più vecchia. Non c'è un selettore della copia nel comando: giocare la copia scoperta conviene sempre
-  (libera la vulnerabilità e non rivela altro), quindi la scelta automatica coincide con quella migliore. Domanda 1.
-- Un oggetto trovato va sul campo (D54) e non diventa una copia scoperta.
+- `factor`: il fattore scritto sulla carta;
+- `turnsIfNotFound`: la durata del gettone se la ricerca fallisce, contando il turno del caricamento; 2 vuol dire questo turno e il
+  successivo;
+- `damage`: facoltativo, per predefinito HIT, CUT e POISON (D64).
 
-**Vulnerabilità F (D59, D64–D66).** Nuovo passo dei dati: `vulnerability` dentro il passo `search` di una carta della bozza
-([DataCards](../../../server/src/main/java/com/gsc/bm/sim/DataCards.java)), per esempio
-`{"op":"search","card":"x.Colpo","vulnerability":{"factor":1.5,"minTurns":2}}`. Campi
-([Vulnerability](../../../server/src/main/java/com/gsc/bm/model/game/status/Vulnerability.java)): `factor` (dalla carta), `minTurns`
-(2 per D59), `damage` facoltativo (predefinito HIT, CUT e POISON, D64). Il formato si convalida come gli altri passi.
+Il formato si convalida come gli altri passi.
 
-- Il caricamento risolto, non annullato, mette su chi lo gioca uno stato «Vulnerable» per tipo di danno, BAD e INPUT, col fattore
-  della carta. I tre stati condividono un `exposure`; `lastsForTurns = minTurns - 1`, quindi il turno del caricamento e il successivo.
-- Se la ricerca trova la copia, lo stesso numero lega vulnerabilità e copia (`heldBy`). Uno stato tenuto non scade: a fine minimo si
-  ferma a -1 e resta finché la copia è in mano.
-- Quando la copia esce, il legame si scioglie **alla fine del gruppo di velocità** in cui è uscita (D50, punto 1: le mosse dello
-  stesso gruppo sono simultanee), non nell'istante dello scarto. Se il minimo è finito lo stato si toglie subito; se no resta fino
-  alla fine del minimo (uscita anticipata, D59). Domanda 2.
-- Più vulnerabilità sono stati indipendenti e i fattori si moltiplicano come per gli altri stati (D66): due ×1,5 danno ×2,25.
-- Una ricerca fallita lascia solo il minimo: nessun legame con le carte già in mano o pescate (D65).
-- Un caricamento annullato (per esempio «a terra») non dà né vulnerabilità né ricerca. Un colpo parato o annullato esce comunque dalla
-  mano e scioglie il legame. Una bound annullata non scarta e il legame resta (D65).
-- A fine partita, all'eliminazione del giocatore e al forfait tutte le sue copie scoperte e tutti i suoi legami si tolgono (`dropRevealed`).
-  Il vincitore non cambia. Domanda 3.
-- Lo stato è parte della partita, quindi la vista si ricostruisce identica alla riconnessione e dopo `restoreFrom` (la serializzazione
-  Java conserva l'identità degli oggetti).
+**Il gettone** ([Game](../../../server/src/main/java/com/gsc/bm/model/game/Game.java)). Quando il caricamento si risolve e non è
+annullato, mette su chi lo gioca un gettone di vulnerabilità. È uno stato «Vulnerable» per tipo di danno, BAD e INPUT, con il
+fattore della carta e un id comune.
+
+- **Ricerca riuscita (D69 a).** Il gettone è legato al **nome** della carta trovata (`untilPlayed`) e **non ha timer**
+  (`lastsForTurns` null). Finisce quando il giocatore gioca una carta con quel nome: la copia trovata o un'altra, già in mano o pescata
+  dopo. Conta anche se la mossa è parata o annullata. Lo scarto non lo toglie: se la copia trovata viene scartata, il gettone resta
+  finché una carta con quel nome non viene giocata.
+- **Ricerca fallita (D69 b).** Il gettone non è legato a nessuna carta e dura come uno stato normale: il turno del caricamento e il
+  successivo. Giocare una carta con il nome cercato non lo tocca.
+- **Più gettoni (D69 c, D66).** Sono stati indipendenti e i fattori si moltiplicano: due ×1,5 danno ×2,25. Una carta giocata toglie un
+  solo gettone con il suo nome, il più vecchio.
+- Il gettone di una carta giocata se ne va **alla fine del gruppo di velocità** di quella giocata (domanda 2 confermata): le mosse
+  dello stesso gruppo sono simultanee (D50, punto 1), quindi un colpo dello stesso gruppo è ancora moltiplicato.
+- Un caricamento annullato non dà né gettone né ricerca. A fine partita, all'eliminazione e al forfait i gettoni e le carte trovate
+  del giocatore si tolgono; il risultato non cambia (domanda 3 confermata).
+- Un oggetto trovato va sul campo (D54) e non diventa una carta in mano: il gettone, se c'è, è quello a tempo. Caso non coperto da
+  test: nessuna carta di prova cerca un oggetto.
+
+**La carta trovata a faccia in su (D58, D69 d)** ([Player](../../../server/src/main/java/com/gsc/bm/model/game/Player.java)). È
+una vista, non uno stato fisico della carta. La copia trovata ha un id (lo stesso del suo gettone) e si mostra a tutti nella mano del
+giocatore. Smette di mostrarsi quando il giocatore gioca una carta con il suo nome, perché l'informazione è spesa anche se ha giocato
+un'altra copia, oppure quando quella copia esce dalla mano, per esempio con uno scarto. Le altre copie con lo stesso nome restano
+coperte. Una ricerca senza `vulnerability` (oggi tutte quelle della bozza) mostra la carta allo stesso modo.
+
+`Player.discardCard` e `Game.getCardFromHand` tornano come alla base: con il gettone legato al nome non serve più sapere quale copia
+esce.
 
 **Vista e protocollo** ([api.md](../../api.md)). Campi nuovi, tutti assenti quando sono vuoti, quindi sempre assenti con le regole vive:
 
-- `revealed` nella vista di ciascun giocatore ([RevealedCardView](../../../server/src/main/java/com/gsc/bm/service/view/model/client/RevealedCardView.java):
-  `copy`, `card`, `turn`; `slot`, l'indice in `cardsInHand`, solo nella propria vista). La mano avversaria resta un numero:
-  dell'avversario si vede solo la copia scoperta, nient'altro della mano o del mazzo.
-- `search.copy` nella mossa risolta: la stessa identità della copia scoperta.
-- Negli stati: `exposure`, `factor`, `heldBy`.
+- `revealed` nella vista di ciascun giocatore ([RevealedCardView](../../../server/src/main/java/com/gsc/bm/service/view/model/client/RevealedCardView.java)).
+  Contiene `copy`, `card`, `turn` e, solo nella propria vista, `slot`, l'indice in `cardsInHand`. La mano avversaria resta un
+  numero: dell'avversario si vede solo la carta trovata, nient'altro della mano o del mazzo.
+- `search.copy` nella mossa risolta: l'id della carta trovata.
+- Negli stati del gettone: `exposure` (l'id), `factor`, `untilPlayed`.
 
-**Bot** ([BotView](../../../server/src/main/java/com/gsc/bm/model/game/bot/BotView.java)). La vista dei bot legge le carte scoperte
-proprie e altrui (`RevealedSeen`) e i campi della vulnerabilità. Nessuna politica cambiata: usarle è lavoro di 2b.
+La vista è funzione dello stato della partita, quindi si ricostruisce uguale alla riconnessione e dopo `restoreFrom`.
+
+**Bot** ([BotView](../../../server/src/main/java/com/gsc/bm/model/game/bot/BotView.java)). La vista dei bot legge le carte a faccia
+in su proprie e altrui e i campi del gettone. Nessuna politica cambiata: usarli è lavoro di 2b.
 
 ### Client web
 
 - [contracts.ts](../../../client-web/src/contracts.ts): i campi del protocollo.
-- [scene.ts](../../../client-web/src/scene.ts): nel ventaglio dell'avversario la copia scoperta è disegnata **a faccia in su** al posto
-  di un dorso, della stessa misura, all'estremità destra del ventaglio, con contorno e fascia color petrolio «SCOPERTA» (con il fattore se tiene una vulnerabilità, «SCOPERTA ×1,5»). Si solleva
-  al passaggio e si apre nell'ispezione come ogni carta. Nella propria mano la stessa fascia sta sulla copia scoperta (trovata per
-  identità tramite `slot`). Durante la sequenza del round una carta scoperta in quel round compare solo a sequenza finita, così non
-  anticipa la pescata a faccia in su di SB-16f0.
-- [readability.ts](../../../client-web/src/readability.ts): i tre stati di una vulnerabilità sono **un solo gettone** accanto agli altri
-  stati, «Stato negativo: Vulnerabile ×1,5». Il testo dice tipi di danno, fattore e durata nella forma delle altre durate: «Almeno per
-  1 turno dopo questo, poi finché «X», la carta scoperta, resta in mano»; a minimo finito il gettone mostra «∞» e dice «Il minimo è
-  finito: dura finché …» (domanda 4). Con due vulnerabilità ci sono due gettoni e il testo aggiunge «Più vulnerabilità si moltiplicano.».
-- [table.tsx](../../../client-web/src/table.tsx): l'ispezione di una carta scoperta ha una nota: di chi è, quando è stata trovata, che
-  la vedono tutti, quale vulnerabilità tiene.
+- [scene.ts](../../../client-web/src/scene.ts), disegno invariato rispetto alla prima consegna:
+  - nel ventaglio dell'avversario la carta trovata è **a faccia in su** al posto di un dorso, della stessa misura, all'estremità
+    destra, con contorno e fascia «SCOPERTA», oppure «SCOPERTA ×1,5» se ha un gettone; si solleva al passaggio e si apre
+    nell'ispezione;
+  - nella propria mano la stessa fascia sta sulla copia trovata, non sulle omonime;
+  - durante la sequenza del round una carta trovata in quel round compare solo a sequenza finita, così non anticipa la pescata a faccia
+    in su di SB-16f0.
+- [readability.ts](../../../client-web/src/readability.ts): il gettone è **un solo gettone** accanto agli altri stati, «Stato negativo:
+  Vulnerabile ×1,5». Le frasi:
+  - gettone legato: «∞» e «Nessun timer: finisce quando viene giocata una carta «X», quella trovata o un'altra; scartarla non basta.»;
+  - gettone a tempo: il numero di turni e «La ricerca non ha trovato la carta: finisce a fine turno.» (o «dura ancora 1 turno dopo
+    questo»);
+  - con due gettoni il testo aggiunge «Più vulnerabilità si moltiplicano.».
+- [table.tsx](../../../client-web/src/table.tsx): l'ispezione della carta trovata ha una nota. Dice chi l'ha trovata e quando, che la
+  vedono tutti finché resta in mano e finché non si gioca una carta con quel nome, e quale gettone è legato a lei.
 
 Il colore non porta da solo informazioni: fascia, gettone e nota sono scritti. Nessuna animazione nuova.
 
 ## Attesi cambiati e decisione
 
-Uno solo. In [RegoleD50Test](../../../server/src/test/java/com/gsc/bm/sim/RegoleD50Test.java) il test della ricerca trovata (SB-16f0)
-fissava i campi di `search` a `card`, `found`, `revealed`. Per **D58** diventano `card`, `found`, `revealed`, `copy`, e il test ora
-controlla anche che `copy` coincida con la copia scoperta nella vista. Le altre asserzioni (nessun nome della mano o del mazzo
-dell'autore nella vista avversaria) restano.
+- [RegoleD50Test](../../../server/src/test/java/com/gsc/bm/sim/RegoleD50Test.java), test della ricerca trovata (SB-16f0): i campi di
+  `search` passano da `card`, `found`, `revealed` a `card`, `found`, `revealed`, `copy`, con il controllo che `copy` coincida con la
+  carta a faccia in su nella vista. Decisione **D58**, invariato in questa revisione.
+- `VulnerabilitaD59Test` della prima consegna diventa **`VulnerabilitaD69Test`**: i casi del minimo, del legame alla copia esatta e
+  della giocata per nome della copia scoperta sono sostituiti dai casi di **D69**. Erano test nuovi della stessa fase, mai su `main`
+  prima di `41ffadf`.
 
 ## Test nuovi
 
-**Server**, [VulnerabilitaD59Test](../../../server/src/test/java/com/gsc/bm/sim/VulnerabilitaD59Test.java), 23 test su partite vere
-con le regole `d50` e carte di prova costruite nel test (bozza del repository non usata). Il danno si misura con un pugno HIT 10 da
-un altro giocatore, quindi 15 vuol dire ×1,5 attiva e 10 vuol dire nessuna vulnerabilità.
+**Server**, [VulnerabilitaD69Test](../../../server/src/test/java/com/gsc/bm/sim/VulnerabilitaD69Test.java), 21 test su partite vere
+con le regole `d50` e carte di prova costruite nel test (bozza del repository non usata). Il danno si misura con un pugno HIT 10
+dell'avversario: 15 vuol dire ×1,5 attiva, 10 nessuna vulnerabilità.
 
-| Caso del prompt | Test |
+| Caso | Test |
 |---|---|
-| Minimo dei due turni | `aFailedSearchLeavesOnlyTheMinimumOfTwoTurns`, `theVulnerabilityMultipliesHitCutAndPoison`, `theDamageTypesComeFromTheCard` |
-| Uscita anticipata | `anEarlyExitStillKeepsTheMinimum`; tenuta oltre il minimo `theCopyHoldsTheVulnerabilityUntilItLeavesTheHand`; uscita dentro un gruppo, con i due ordini dei posti, `insideASpeedGroupTheExitWaitsForTheEndOfTheGroup` |
-| Copia omonima | `aSameNameCopyNeitherRevealsNorReleases`, `playingByNameTakesTheFaceUpCopyFirst` |
-| Bound che scarta, bound annullata | `aBoundThatDiscardsTheFoundCopyReleasesIt`, `aVoidedBoundDoesNotDiscardAndKeepsTheLink`; inoltre `aVoidedStrikeStillLeavesTheHandAndReleases`, `aVoidedChargeGivesNeitherVulnerabilityNorSearch` |
-| Due legami cumulati | `twoLinksMultiplyAndEndOneAtATime` (22 = 10 × 1,5 × 1,5 troncato, poi 15, poi 10) |
-| Ricerca fallita | `aFailedSearchLeavesOnlyTheMinimumOfTwoTurns`, `aFailedSearchDoesNotBindACopyAlreadyInHand`, `aFailedSearchAfterASuccessfulOneDoesNotRenewTheOldLink` |
-| Riconnessione | `theViewIsRebuiltFromTheMatchAtReconnection` (vista uguale prima e dopo serializzazione e `restoreFrom`, e il legame continua a funzionare) |
-| Fine della partita | `theEndOfTheMatchDropsEveryLink`, `theEliminationOfTheOwnerDropsItsLinksWithoutChangingTheWinner`, `aForfeitEndsTheMatchAndDropsTheLinks` |
-| Regole vive, vista, bot, formato | `withTheLiveRulesNothingChanges`, `theLiveStatusesKeepTheirShapeInTheView`, `theBotViewReadsTheFaceUpCards`, `theDraftFormatDescribesSearchVulnerabilityFactorAndMinimum` |
+| Ricerca fallita: gettone a tempo | `aFailedSearchGivesATokenThatLastsLikeANormalStatus`, `aTimedTokenIsNotEndedByPlayingTheSearchedName` |
+| Tipi di danno e fattore | `theVulnerabilityMultipliesHitCutAndPoison`, `theDamageTypesComeFromTheCard` |
+| Gettone legato senza timer, nessun minimo | `aFoundCardGivesATokenWithoutTimerUntilItsNameIsPlayed` (quattro turni a ×1,5, poi il colpo lo toglie), `thereIsNoMinimum` |
+| Fine del gruppo di velocità, nei due ordini dei posti | `insideASpeedGroupTheTokenGoesAtTheEndOfTheGroup` |
+| Copia omonima | `anotherCopyWithTheSameNameEndsTheTokenAndTheFaceUpCard` (si gioca l'omonima coperta: gettone tolto, la copia trovata resta in mano ma non si mostra più) |
+| Scarto | `discardingTheFoundCardDoesNotEndTheToken` (bound che scarta: gettone resta; un'altra copia, giocata, lo toglie) |
+| Mossa annullata | `aVoidedStrikeStillEndsTheToken`, `aVoidedChargeGivesNeitherTokenNorSearch` |
+| Due gettoni | `twoTokensMultiplyAndOnePlayEndsTheOldest` (22 = 10 × 1,5 × 1,5 troncato, poi 15, poi 10), `aFailedSearchAfterASuccessfulOneAddsATimedToken` |
+| Riconnessione | `theViewIsRebuiltFromTheMatchAtReconnection` (vista uguale prima e dopo serializzazione e `restoreFrom`, e il gettone funziona ancora) |
+| Fine della partita | `theEndOfTheMatchDropsEveryTokenAndFaceUpCard`, `theEliminationOfTheOwnerDropsItsTokensWithoutChangingTheWinner`, `aForfeitEndsTheMatchAndDropsTheTokens` |
+| Regole vive, vista, bot, formato | `withTheLiveRulesNothingChanges`, `theLiveStatusesKeepTheirShapeInTheView`, `theBotViewReadsTheFaceUpCardsAndTheTokens`, `theDraftFormatDescribesSearchVulnerabilityFactorAndDuration` (anche il vecchio `minTurns` è rifiutato) |
 
 **Client**, [revealed.test.ts](../../../client-web/tests/revealed.test.ts), 7 test sulle viste reali registrate in
-`resolution-views.json` con l'aggiunta dei soli campi nuovi: un gettone per vulnerabilità accanto agli altri stati; durata e minimo
-finito; ricerca fallita; due vulnerabilità; nota della carta scoperta (propria e altrui, fattore della sola copia che la tiene);
-il modello accetta le viste con carte scoperte e la mano avversaria resta un numero; riepilogo del round invariato; con le regole vive
-nessun campo nuovo in nessuna registrazione.
+`resolution-views.json`, con l'aggiunta dei soli campi nuovi:
+
+- un gettone accanto agli altri stati, con «∞» e la frase del nome; uguale anche dopo uno scarto, senza carta a faccia in su;
+- il gettone a tempo della ricerca fallita;
+- due gettoni;
+- la nota della carta trovata, propria e altrui, con il fattore del solo gettone legato a lei;
+- il modello accetta le viste e la mano avversaria resta un numero;
+- il riepilogo del round non cambia;
+- con le regole vive nessun campo nuovo in nessuna registrazione.
 
 ## Verifiche
 
-Una alla volta, nell'ordine della tabella.
+Sul codice finale, una alla volta, nell'ordine della tabella.
 
 | Verifica | Esito |
 |---|---|
-| `./scripts/build.ps1 -Task Test -Offline` | Server **741 test, 0 falliti/errori, 10 saltati** (718 + 23); check-rules verde dentro la build; client-debug **37/37** |
-| Banco SB-7 a regole 1.13 (`BenchMeasureTest#matrix`, 2000 partite per cella, 4 stili, `bozza.json`) prima e dopo la modifica | **Identico byte per byte**: stesso JSON e stesso testo, 240 celle, 480.000 partite, invarianti a zero |
-| Mutazioni server ([mutations-server.json](sb-16g-2a/mutations-server.json)) | **8/9 rilevate**, sorgente ripristinato. La nona («vulnerabilità anche da un caricamento annullato») è **equivalente**: una mossa annullata non esegue il passo `search`, quindi non chiede la vulnerabilità e il controllo nel motore è una guardia ridondante. Sostituita da «minimo di un turno in più», rilevata |
-| Mutazioni client ([mutations-client.json](sb-16g-2a/mutations-client.json)) | **5/5 rilevate**, sorgente ripristinato. Due erano sopravvissute al primo giro: test rafforzato (conteggio dei gettoni) e codice semplificato (una copia tiene al più una vulnerabilità), poi rilevate |
-| Avvio reale del profilo bozza (jar, `local,bozza`, database temporaneo, client sulla 4320) | Partito; partite quick 1vCom giocate dall'interfaccia, nessun errore di pagina ([captures-reale.json](sb-16g-2a/captures-reale.json)) |
-| `./scripts/build.ps1 -Task TestServerContext -Offline` | **858 test, 0 falliti/errori, 10 saltati** (835 + 23), 8:11 min. Le righe `MATCH_ARCHIVE_WRITE_FAILED` del log sono scenari di guasto voluti dai test. R3 non è comparso |
+| `./scripts/build.ps1 -Task Test -Offline` | Server **739 test, 0 falliti/errori, 10 saltati** (718 + 21); check-rules verde dentro la build; client-debug **37/37** |
+| Banco SB-7 a regole 1.13 (`BenchMeasureTest#matrix`, 2000 partite per cella, 4 stili, `bozza.json`), base `2a0c9ca` contro codice finale | **Identico byte per byte**: stesso JSON e stesso testo, 240 celle, 480.000 partite, invarianti a zero |
+| Mutazioni server ([mutations-server.json](sb-16g-2a/mutations-server.json)) | **8/8 rilevate**, ciascuna da almeno un test che fallisce, sorgente ripristinato. Due giri prima del finale: una mutazione non compilava (rilevata per errore, corretta) e una sopravviveva perché il filtro «copia in mano» stava sia nel modello sia nelle viste; ho tolto il doppione delle viste e il flag ridondante `shown` |
+| Mutazioni client ([mutations-client.json](sb-16g-2a/mutations-client.json)) | **5/5 rilevate**, sorgente ripristinato |
+| Avvio reale del profilo bozza (jar rifatto, `local,bozza`, database temporaneo, client sulla 4320) | Partito; 2 partite con la bozza del repository e 5 con la copia temporanea, giocate dall'interfaccia, nessun errore di pagina ([captures-reale.json](sb-16g-2a/captures-reale.json), [captures-vulnerabilita.json](sb-16g-2a/captures-vulnerabilita.json)) |
+| `./scripts/build.ps1 -Task TestServerContext -Offline` | **856 test, 0 falliti/errori, 10 saltati** (835 + 21), 7:44 min. Le righe `MATCH_ARCHIVE_WRITE_FAILED` del log sono scenari di guasto voluti dai test. R3 non è comparso |
 | `python scripts/check-rules.py` | Verde, regolamento 1.13 e Set Base 0.1, SQLite integro |
 | `./client-web/run.ps1 -Task Test` | **345/345** (338 + 7) |
 | `./client-web/run.ps1 -Task Build` | Verde, solito avviso del bundler sui chunk |
-| `./client-web/run.ps1 -Task Size`, `BM_OUT` in TEMP | JS gzip **351.880 byte** (+1.223 su SB-16f0), totale **1.762.036**, texture **27.729.048**; limiti e tetto C4 rispettati; `docs/reports/client-c2/size.json` non toccato |
+| `./client-web/run.ps1 -Task Size`, `BM_OUT` in TEMP | JS gzip **351.875 byte** (+1.218 su SB-16f0), totale **1.762.032**, texture **27.729.048**; limiti e tetto C4 rispettati; `docs/reports/client-c2/size.json` non toccato |
 | `python scripts/check-links.py` | **293 file, 0 link rotti** |
 | `git diff --check` | Verde, compresi i file nuovi |
 
@@ -127,27 +154,27 @@ Una alla volta, nell'ordine della tabella.
 
 Script [captures.mjs](sb-16g-2a/captures.mjs), adattato da quello di SB-16f0: jar col profilo `local,bozza` su un database temporaneo,
 Edge a 1366×768, movimento ridotto, specchio Spazienzio contro Spazienzio (`aggressivo`). Gioca prima il caricamento e tiene il colpo
-trovato, così la copia resta scoperta per qualche turno.
+trovato.
 
-La bozza del repository non ha ancora carte con `vulnerability` (sono di 2b). Per le catture della vulnerabilità ho usato una **copia
-temporanea della bozza, fuori dal repository** (`%TEMP%\sb16g2a\bozza-vulnerabilita.json`, passata con `app.bozza.sources`), in cui
-PAZIENZA: FINITA (bruiser.Glare) perde il suo stato HIT e ha `vulnerability {factor:1.5, minTurns:2}` sul passo `search`. Non è una
-proposta di carta: serve solo a vedere il funzionamento. Esiti in [captures-vulnerabilita.json](sb-16g-2a/captures-vulnerabilita.json).
+La bozza del repository non ha ancora carte con `vulnerability` (sono di 2b). Per le catture del gettone ho usato una **copia
+temporanea della bozza, fuori dal repository** (`%TEMP%\sb16g2a\bozza-vulnerabilita.json`, passata con `app.bozza.sources`). In
+quella copia PAZIENZA: FINITA (bruiser.Glare) perde il suo stato HIT e ha `vulnerability {factor:1.5, turnsIfNotFound:2}` sul passo
+`search`. Non è una proposta di carta: serve solo a vedere il funzionamento.
 
-1. [La propria copia scoperta](sb-16g-2a/1-propria-scoperta.jpg): GARGANTUESCO IMPATTO SUL TU in mano con la fascia «SCOPERTA».
-   Bozza del repository.
-2. [La copia scoperta dell'avversario, ispezionata](sb-16g-2a/2-avversario-ispezione.jpg): la carta del computer a faccia in su nel suo
-   ventaglio di dorsi, aperta nell'ispezione intera con la nota «Carta scoperta: Computer l'ha trovata con una ricerca al turno …».
-3. [Copie scoperte e vulnerabilità sui due lati](sb-16g-2a/3-scoperte-con-vulnerabilita.jpg): turno 4, entrambi hanno caricato e
-   tengono il colpo: fascia «SCOPERTA ×1,5» sulla propria copia e su quella del computer, a destra del suo ventaglio; sui due
-   personaggi il gettone della vulnerabilità «▼ 0», l'ultimo turno del minimo.
-4. [Vulnerabilità tenuta oltre il minimo](sb-16g-2a/4-vulnerabilita-tenuta.jpg): il gettone «∞» col testo «Il minimo è finito: dura
-   finché «GARGANTUESCO IMPATTO SUL TU», la carta scoperta, resta in mano.».
-5. [Ispezione della propria copia che tiene la vulnerabilità](sb-16g-2a/5-ispezione-propria-vulnerabilita.jpg).
+1. [La propria carta trovata e un'omonima](sb-16g-2a/1-propria-trovata-e-omonima.jpg): due GARGANTUESCO IMPATTO SUL TU in mano. Solo
+   quella trovata ha la fascia «SCOPERTA ×1,5», l'altra resta normale; sul personaggio il gettone «▼ ∞».
+2. [La carta trovata dall'avversario, ispezionata](sb-16g-2a/2-avversario-ispezione.jpg): «Carta scoperta: Computer l'ha trovata con
+   una ricerca al turno 2. La vedono tutti finché resta nella sua mano e finché non gioca una carta con questo nome.», con il gettone
+   legato.
+3. [Il gettone legato al nome](sb-16g-2a/3-gettone-legato-al-nome.jpg): la scheda del gettone del computer, «Nessun timer: finisce
+   quando viene giocata una carta «GARGANTUESCO IMPATTO SUL TU», quella trovata o un'altra; scartarla non basta.».
+4. [Il gettone di una ricerca fallita](sb-16g-2a/4-gettone-ricerca-fallita.jpg): «▼ 0», «La ricerca non ha trovato la carta:
+   finisce a fine turno.».
+5. [Ispezione della propria carta trovata](sb-16g-2a/5-ispezione-propria.jpg), con la nota e il gettone legato.
+6. [Bozza del repository, senza gettone](sb-16g-2a/6-bozza-reale-avversario.jpg): la carta trovata dal computer a faccia in su con la
+   sola fascia «SCOPERTA».
 
-Le catture precedono una semplificazione di `revealedNote` (`find` al posto di un prodotto su più vulnerabilità per copia) che non
-cambia nulla di visibile, perché una copia tiene al più una vulnerabilità. Le PNG originali restano in `%TEMP%\sb16g2a`. Evidenze
-del blocco: circa 1,1 MB.
+Le PNG originali restano in `%TEMP%\sb16g2a\d69-*`. Evidenze del blocco: circa 1,4 MB.
 
 ## Rossi
 
@@ -155,28 +182,26 @@ Nessuno. R3 ([registro](../rossi-noti.md)) non è comparso in questo giro di `Te
 
 ## Non verificato
 
-- FFA: le carte scoperte e i gettoni sono disegnati per ogni avversario, ma non ho catture né Playwright in FFA.
+- Oggetto trovato con un gettone: nessuna carta di prova cerca un oggetto (vedi sopra).
+- FFA: carte trovate e gettoni sono disegnati per ogni avversario, ma non ho catture né Playwright in FFA.
 - 750×292 e le matrici Playwright (`Verify`, `VerifyLayout`, `VerifyResolution`): non eseguite, come in SB-16f0 (`Verify` non gira
-  sulla bozza). Con le regole vive i campi mancano e il disegno non cambia. Con la bozza la copia scoperta prende il posto di un dorso
+  sulla bozza). Con le regole vive i campi mancano e il disegno non cambia. Con la bozza la carta trovata prende il posto di un dorso
   della stessa misura, ma a 750×292 non ho guardato se fascia e testo restano leggibili.
-- Movimento normale: catture solo col movimento ridotto. La copia scoperta in un round compare a sequenza finita; non l'ho guardata
-  con l'animazione intera.
+- Movimento normale: catture solo col movimento ridotto.
 - Partite umane: le catture sono partite pilotate dallo script.
-- La politica dei bot non usa ancora le carte scoperte (2b).
+- La politica dei bot non usa ancora carte trovate e gettoni (2b).
 
 ## Cosa giudica il proprietario
 
-- Le catture: si capisce a colpo d'occhio quale carta dell'avversario è scoperta e che cosa tiene?
-- Le quattro scelte delle domande, prese da me dove le decisioni non dicevano il dettaglio.
+- Se la revisione corrisponde a D69, in particolare la mia lettura di «fino al turno successivo» per la ricerca fallita: il turno del
+  caricamento e quello dopo, come il vecchio minimo.
+- Le catture: si capisce quale carta dell'avversario è stata vista e che cosa toglie il gettone?
 
 ## Domande numerate al proprietario
 
-1. **Copia giocata per nome.** Il comando sceglie la carta per nome; con più omonime in mano esce per prima la copia scoperta più
-   vecchia. Va bene questo ripiego, o vuoi poter scegliere quale copia giocare (selettore nel protocollo e nel client)?
-2. **Uscita nel gruppo di velocità.** Se la copia esce nello stesso gruppo di un colpo che ti raggiunge, quel colpo è ancora
-   moltiplicato: il legame si scioglie a fine gruppo, perché le mosse del gruppo sono simultanee. Va bene?
-3. **Fine partita ed eliminazione.** Tutte le copie scoperte e i legami del giocatore si tolgono; il risultato non cambia. Va bene?
-4. **Gettone «∞».** A minimo finito il gettone della vulnerabilità mostra «∞» al posto dei turni e il testo dice che dura finché la
-   copia resta in mano. Va bene il simbolo?
-5. **Passo a 2b.** Prima delle carte nella bozza la proposta va ripresentata con le coppie concrete (D68). Procedo quando la proposta
-   aggiornata è approvata?
+1. **Ricerca fallita.** Il gettone a tempo dura il turno del caricamento e il successivo, scritto sulla carta come
+   `turnsIfNotFound: 2`. Va bene?
+2. **Oggetto trovato.** Se una ricerca trova un oggetto, che va sul campo, il gettone è quello a tempo, come per una ricerca fallita.
+   Va bene, anche se oggi nessuna carta cerca un oggetto?
+
+Il passo a 2b è confermato in D69: parte dopo la proposta aggiornata con le coppie concrete e la sua approvazione.

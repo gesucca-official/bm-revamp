@@ -4,7 +4,6 @@ import com.gsc.bm.model.Statistic;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -34,8 +33,8 @@ public class Status implements Serializable {
     private Integer lastsForTurns = null; // boxing allows null value
 
     /**
-     * SB-16g 2a, playground rules only (D59, D64–D66): the vulnerability of a charge, three statuses (HIT, CUT, POISON) with the
-     * same id. Null, and absent from the views, for every other status and always with the live rules.
+     * SB-16g 2a, playground rules only (D59, D64–D66, D69): the vulnerability token of a charge, one status per damage type (HIT,
+     * CUT, POISON) with the same id. Null, and absent from the views, for every other status and always with the live rules.
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Builder.Default
@@ -45,23 +44,17 @@ public class Status implements Serializable {
     @Builder.Default
     private Float factor = null;
     /**
-     * SB-16g 2a (D65): the id of the copy found by the search that holds this vulnerability, while that copy is in its owner's
-     * hand. A held status outlives its minimum duration; once released it ends at once if the minimum is over.
+     * SB-16g 2a (D69): the name of the card that ends this token when its owner plays one, any copy with that name (the one found
+     * by the search or another). Such a token has no timer ({@link #lastsForTurns} null). Null for a token of a failed search,
+     * which lasts as a normal status, and for every other status.
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Setter
     @Builder.Default
-    private Integer heldBy = null;
+    private String untilPlayed = null;
 
     public void aTurnIsPassed() {
-        // A held status past its minimum stays at -1: the minimum is spent, the copy still holds it (D59).
-        if (lastsForTurns != null && !(heldBy != null && lastsForTurns < 0))
+        if (lastsForTurns != null)
             this.lastsForTurns--;
-    }
-
-    /** SB-16g 2a: the minimum duration is over (it would have been cleared at the last end of turn if not held). */
-    public boolean minimumSpent() {
-        return lastsForTurns != null && lastsForTurns < 0;
     }
 
     public void expended() {

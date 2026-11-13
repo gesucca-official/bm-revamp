@@ -18,11 +18,12 @@ export interface Status {
   impactedProperty: string; lastsForTurns: number | null; equip: boolean;
   singleUse: boolean; amountFunction: object; typeFunction: object;
   /**
-   * SB-16g 2a (D59, D64–D66), playground rules only: a vulnerability of a charge, one status per damage type with the same
-   * `exposure`; `factor` multiplies the damage received; `heldBy` is the `copy` of the face-up card that holds it past its minimum
-   * (then `lastsForTurns` is -1). Absent on every other status.
+   * SB-16g 2a (D64, D66, D69), playground rules only: the vulnerability token of a charge, one status per damage type with the
+   * same `exposure`; `factor` multiplies the damage received. `untilPlayed`: the name of the card whose play ends it (any copy),
+   * with no timer (`lastsForTurns` null); absent for the token of a failed search, which lasts as a normal status. Absent on
+   * every other status.
    */
-  exposure?: number; factor?: number; heldBy?: number;
+  exposure?: number; factor?: number; untilPlayed?: string;
 }
 export interface Character {
   name: string; bindingName: string; dead: boolean; itemsSize: number;

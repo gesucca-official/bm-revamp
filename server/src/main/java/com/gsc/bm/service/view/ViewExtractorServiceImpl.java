@@ -145,15 +145,14 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
     }
 
     /**
-     * SB-16g 2a (D58): the face-up copies of a hand, for everyone; the owner also gets their place in the hand. Rebuilt from the
-     * match at every view, so a reconnection shows them again. Empty, hence absent, with the live rules.
+     * SB-16g 2a (D58, D69): the cards found by a search and shown face up in a hand, for everyone; the owner also gets their place
+     * in the hand. Rebuilt from the match at every view, so a reconnection shows them again. Empty, hence absent, with the live rules.
      */
     private static List<RevealedCardView> revealed(Player p, boolean own) {
         List<RevealedCardView> shown = new java.util.ArrayList<>();
-        for (Player.Revealed r : p.getRevealed()) {
+        for (Player.Revealed r : p.getShownRevealed()) {
             int slot = -1;
             for (int i = 0; i < p.getCardsInHand().size(); i++) if (p.getCardsInHand().get(i) == r.getCard()) slot = i;
-            if (slot < 0) continue;
             shown.add(RevealedCardView.builder().copy(r.getId()).slot(own ? slot : null).card(r.getCard()).turn(r.getTurn()).build());
         }
         return shown;

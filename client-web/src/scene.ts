@@ -15,7 +15,7 @@ import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from
 import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status'|'revealed';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
-/** `note`: SB-16g 2a, what a face-up copy says (who found it, when, the vulnerability it holds). */
+/** `note`: SB-16g 2a, what a card found by a search says (who found it, when, the vulnerability token bound to it). */
 export type Inspection={title:string;card?:Card;owner?:string;note?:string};
 type Drag={id:number;key:string;x:number;y:number;lastX:number;lastY:number;moved:boolean;insertion:number|null;touch:boolean};
 // Times in ms from the start of the sequence. A move card flies from its author, hits (`fly`, fraction of the flight) and then
@@ -181,9 +181,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    let len=name.length;while(title.height>maxTitle&&len>5){len--;title.text=name.slice(0,len)+'…';}this.fittedTitles.set(fitKey,`${title.style.fontSize}|${title.text}`);}
   if(sub&&!small)this.text(c,sub,0,-h/2+titleH-subH,subSize,w-12);
   this.text(c,footer,0,h/2-footH+3,small?Math.max(7,w*.085):Math.max(12,w*.10),w-10);return c;}
- /** SB-16g 2a (D58): the own face-up copy this card of the hand is (by identity in the view), if any. */
+ /** SB-16g 2a (D58, D69): the own card found by a search that this card of the hand is (by identity in the view), if any. */
  private ownReveal(card:Card){const p=this.model.view.players[this.model.me],cards=Array.isArray(p?.cardsInHand)?p.cardsInHand:[];return p?.revealed?.find(r=>r.slot!==undefined&&cards[r.slot]===card);}
- /** SB-16g 2a: the mark of a face-up copy, a band with its word (and the factor it holds) at the top or the bottom edge, and a light outline. */
+ /** SB-16g 2a: the mark of a card found by a search, a band with its word (and the factor of its token) at the top or the bottom edge, and a light outline. */
  private revealMark(c:Container,w:number,h:number,text:string,where:'top'|'bottom'){const g=new Graphics(),bh=Math.max(11,Math.min(22,h*.15)),y=where==='top'?-h/2-bh*.55:h/2-bh*.45;
   g.roundRect(-w/2,-h/2,w,h,Math.min(8,w*.08)).stroke({color:0xf1e4c4,width:2});g.roundRect(-w/2-2,y,w+4,bh,bh*.3).fill(0x2c6262).stroke({color:0xf1e4c4,width:1.2});c.addChild(g);
   // On the left, like everything on a face: the fan covers the right part of a card.
@@ -261,7 +261,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   this.world.addChild(c);return own?{values:{...r},reference:Object.fromEntries(RESOURCES.map(k=>[k,meter(0,start[k],k==='HEALTH').reference])),rows}:null;}
  // Statuses, equipment, immunities and timers as chips on the lower art of the character card.
  // Shape and short text carry the meaning; the summary opens on hover, tap or focus.
- private statusChips(b:Box,id:string,p:Player){const chips=chipsOf(id,p.character,p.revealed);if(!chips.length)return;
+ private statusChips(b:Box,id:string,p:Player){const chips=chipsOf(id,p.character);if(!chips.length)return;
   const ch=b.h,cw=Math.min(ch*1.7,b.w/chips.length),step=chips.length>1?Math.min(cw+2,(b.w-cw)/(chips.length-1)):0,fs=ch*.6;
   const fill={good:0x2c6262,bad:WINE,equip:0x86561b,immunity:0x343f6b,timer:INK};
   chips.forEach((chip,i)=>{const x=b.x-b.w/2+cw/2+i*step,y=b.y,c=new Container(),g=new Graphics();c.addChild(g);c.position.set(x,y);
@@ -352,7 +352,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const drawnItems:{name:string;frame:FrameKind}[]=[];
   for(const seat of L.seats){const id=seat.id,p=view.players[id],{x,y,w:cw,h:ch}=seat.person;
    if(id!==me){const final=p.cardsInHand as number,count=this.staged?.backs[id]??final,b=seat.backs,f=fan(b,seat.back,count);this.backs[id]=final;
-    // SB-16g 2a (D58): the copies found by a search stay face up at the right end of the fan, inspectable. During a sequence only
+    // SB-16g 2a (D58, D69): the cards found by a search are drawn face up at the right end of the fan, inspectable. During a sequence only
     // those found in an earlier round: the one found in this round arrives face up with its flight (SB-16f0).
     const up=(p.revealed??[]).filter(r=>!this.staged||r.turn<view.turn-1).slice(-count),from=count-up.length;
     for(let n=0;n<count;n++){const k=n-(count-1)/2,r=n>=from?up[n-from]:undefined;
@@ -391,7 +391,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    // slot empty until cancelled. Never remove/reorder it in the authoritative hand.
    if(state.inPreview){hand.push({key:local.key,name:local.card.name,role,gains,payable,alpha:state.alpha,inPreview:true,face:null});return;}
    const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);c.alpha=state.alpha;
-   // SB-16g 2a (D58): the own copy found by a search is face up for everyone: marked, with the vulnerability it holds.
+   // SB-16g 2a (D58, D69): the own card found by a search is seen by everyone: marked, with the factor of its token.
    const shownUp=this.ownReveal(local.card),upNote=shownUp?revealedNote(shownUp,null,view.players[me].character):null;if(upNote)this.revealMark(c,H.w,H.h,upNote.badge,'top');
    // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
    const coming=this.arriving.has(local.key);if(coming)c.visible=false;

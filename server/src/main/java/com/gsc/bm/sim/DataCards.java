@@ -363,13 +363,15 @@ final class DataCards {
     /**
      * SB-16c (D50, punto 6), solo con le regole del playground: la pesca che segue la mossa diventa la ricerca nel mazzo della carta
      * indicata ({@code card}, un binding: il colpo cercato). La carta trovata si mostra a tutti nel rapporto della mossa e, da SB-16g
-     * 2a (D58), resta scoperta nella mano finché non esce; se non c'è si pesca normalmente. Il passo non scrive righe: la riga la
-     * scrive la partita quando pesca. Con le regole 1.13 non fa nulla.
+     * 2a (D58, D69), resta disegnata a faccia in su nella mano finché il giocatore non gioca una carta con il suo nome o finché quella
+     * copia non esce; se non c'è si pesca normalmente. Il passo non scrive righe: la riga la scrive la partita quando pesca. Con le
+     * regole 1.13 non fa nulla.
      * <p>
-     * SB-16g 2a (D59, D64–D66): {@code vulnerability}, facoltativo, è la conseguenza F del caricamento: i danni ricevuti dei tipi
-     * {@code damage} (predefiniti HIT, CUT e POISON) si moltiplicano per {@code factor} per almeno {@code minTurns} turni contando
-     * quello del caricamento (2: questo e il prossimo), poi finché la copia trovata da questa ricerca resta in mano. Esempio:
-     * {@code {"op":"search","card":"x.Colpo","vulnerability":{"factor":1.5,"minTurns":2}}}.
+     * SB-16g 2a (D64, D66, D69): {@code vulnerability}, facoltativo, è il gettone del caricamento: i danni ricevuti dei tipi
+     * {@code damage} (predefiniti HIT, CUT e POISON) si moltiplicano per {@code factor}. Se la ricerca trova la carta, il gettone è
+     * legato al suo nome e non ha timer: finisce quando il giocatore gioca una carta con quel nome. Se non la trova, dura
+     * {@code turnsIfNotFound} turni contando quello del caricamento (2: questo e il prossimo). Esempio:
+     * {@code {"op":"search","card":"x.Colpo","vulnerability":{"factor":1.5,"turnsIfNotFound":2}}}.
      */
     public static final class SearchStep implements Step {
         public String card;

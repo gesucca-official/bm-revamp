@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.Card;
-import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.Vulnerability;
 import lombok.Getter;
 import lombok.ToString;
@@ -59,7 +58,7 @@ public class Game implements Serializable {
     @JsonIgnore
     @ToString.Exclude
     private Ruleset ruleset = Ruleset.LIVE;
-    /** SB-16g 2a, playground only: the last id given to a vulnerability or to a copy found by a search (D58, D65). */
+    /** SB-16g 2a, playground only: the last id given to a vulnerability token or to a card found by a search (D58, D69). */
     @JsonIgnore
     @ToString.Exclude
     private int revealSerial = 0;
@@ -79,7 +78,7 @@ public class Game implements Serializable {
         if (!isEliminated(playerId)) {
             forfeits.putIfAbsent(playerId, reason);
             pendingMoves.removeIf(m -> playerId.equals(m.getPlayerId()));
-            // SB-16g 2a: an eliminated player holds no face-up copy and no vulnerability past its minimum.
+            // SB-16g 2a: an eliminated player keeps no face-up card and no vulnerability token.
             dropRevealed(players.get(playerId));
             if (isOver()) for (Player p : players.values()) dropRevealed(p);
         }
@@ -192,13 +191,15 @@ public class Game implements Serializable {
                         + (getSelf(m).getCharacter().getResources().get(Resource.ALERTNESS) & 0xffffffffL));
         Long group = null;
         Set<String> downAtGroupStart = new HashSet<>();
+        // SB-16g 2a (D69): the cards played in the current speed group, by player, in order.
+        List<Map.Entry<Player, String>> played = new ArrayList<>();
 
         for (Move m : pendingMoves) {
             if (ruleset.playground()) {
                 if (!speed.get(m).equals(group)) {
-                    // SB-16g 2a: a copy that left a hand in the group just ended releases its vulnerability now, so that inside
-                    // a group moves stay simultaneous (D50, point 1) whatever their order.
-                    releaseCopiesLeft();
+                    // SB-16g 2a (D69): the tokens satisfied in the group just ended go now, so that inside a group moves stay
+                    // simultaneous (D50, point 1) whatever their order.
+                    settleGroup(played);
                     group = speed.get(m);
                     downAtGroupStart.clear();
                     for (Player p : players.values()) if (p.getCharacter().isDead()) downAtGroupStart.add(p.getPlayerId());
@@ -210,25 +211,27 @@ public class Game implements Serializable {
             // A search step runs only if the move resolved; a voided move draws normally.
             String search = self.getCharacter().takeRequestedSearch();
             Vulnerability vulnerability = self.getCharacter().takeRequestedVulnerability();
-            // SB-16g 2a (D59, D64): the vulnerability of a charge starts when the charge resolves, found or not.
-            Integer exposure = null;
-            if (ruleset.playground() && vulnerability != null && !m.isVoid()) {
-                exposure = ++revealSerial;
-                self.getCharacter().getStatuses().addAll(vulnerability.statuses(exposure));
-                loggedTurnEvents.add("Player " + m.getPlayerId() + " is vulnerable: x" + vulnerability.factor + " " + vulnerability.damage);
-            }
-            self.discardCard(getCardFromHand(m.getPlayerId(), m.getPlayedCardName()));
+            Card card = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
+            // SB-16g 2a (D69): a card played satisfies the oldest token bound to its name, even if the move is voided.
+            if (ruleset.playground()) played.add(new AbstractMap.SimpleEntry<>(self, card.getName()));
+            self.discardCard(card);
+            Card found = null;
+            boolean searched = false;
             if (self.getCardsInHand().size() < Player.CARDS_IN_HAND) {
                 if (ruleset.playground() && search != null && !m.isVoid()) {
-                    Card found = self.searchCard(search);
-                    Integer copy = found != null && self.holds(found) ? reveal(self, found, exposure) : null;
-                    m.recordSearch(search, found, copy);
+                    found = self.searchCard(search);
+                    searched = true;
                     loggedTurnEvents.add("Player " + m.getPlayerId() + " searched the deck for " + search + ": "
                             + (found != null ? "found " + found.getName() : "not in the deck, normal draw"));
                 } else self.drawCard();
             }
+            // SB-16g 2a (D69): the card found goes to the hand (an object found goes to the field and leaves no mark).
+            Card inHand = found != null && self.holds(found) ? found : null;
+            Integer copy = ruleset.playground() && !m.isVoid() && (vulnerability != null || inHand != null)
+                    ? mark(self, inHand, vulnerability) : null;
+            if (searched) m.recordSearch(search, found, copy);
         }
-        if (ruleset.playground()) releaseCopiesLeft();
+        if (ruleset.playground()) settleGroup(played);
 
         resolvedMoves.clear();
         resolvedMoves.addAll(pendingMoves);
@@ -238,7 +241,7 @@ public class Game implements Serializable {
         for (String playerId : players.keySet())
             if (!isEliminated(playerId))
                 timeBasedEffects.put(playerId, players.get(playerId).getCharacter().resolveTimeBasedEffects());
-        // SB-16g 2a: at the end of the match, and for an eliminated player, no copy stays face up and no vulnerability is held.
+        // SB-16g 2a: at the end of the match, and for an eliminated player, no card stays face up and no token is left.
         for (Player p : players.values())
             if (isOver() || isEliminated(p.getPlayerId())) dropRevealed(p);
 
@@ -277,58 +280,55 @@ public class Game implements Serializable {
     }
 
     /**
-     * SB-16g 2a (D58, D65): the copy found by a search stays face up in the hand with a new id; the vulnerability of the same charge,
-     * if any, is held by it. Returns the id.
+     * SB-16g 2a (D58, D69): what a resolved charge leaves on its author, with a new id. A card found by the search and gone to the
+     * hand becomes a mark bound to its name, shown face up while it is in hand, and the vulnerability token, if any, is bound to
+     * that name with no timer. Without a card in hand the token is bound to nothing and lasts as a normal status. Returns the id
+     * of the mark, or null if there is none.
      */
-    private int reveal(Player self, Card found, Integer exposure) {
-        int id = exposure != null ? exposure : ++revealSerial;
+    private Integer mark(Player self, Card found, Vulnerability vulnerability) {
+        int id = ++revealSerial;
+        if (vulnerability != null) {
+            self.getCharacter().getStatuses().addAll(vulnerability.statuses(id, found != null ? found.getName() : null));
+            loggedTurnEvents.add("Player " + self.getPlayerId() + " is vulnerable: x" + vulnerability.factor + " " + vulnerability.damage
+                    + (found != null ? " until " + found.getName() + " is played" : " for " + vulnerability.turnsIfNotFound + " turns"));
+        }
+        if (found == null) return null;
         self.getRevealed().add(new Player.Revealed(id, found, turn));
-        if (exposure != null)
-            for (Status s : self.getCharacter().getStatuses())
-                if (exposure.equals(s.getExposure())) s.setHeldBy(id);
         return id;
     }
 
-    /** SB-16g 2a (D65): every face-up copy no longer in its owner's hand releases its vulnerability. */
-    private void releaseCopiesLeft() {
+    /**
+     * SB-16g 2a (D69), end of a speed group: each card played ends the oldest mark bound to its name, with its token, whichever
+     * copy was played; a token of a failed search is bound to nothing and is not ended by a play. A card found that left the hand
+     * otherwise (discarded) is no longer shown face up, and its token stays until a card with its name is played.
+     */
+    private void settleGroup(List<Map.Entry<Player, String>> played) {
+        for (Map.Entry<Player, String> e : played) {
+            Player p = e.getKey();
+            for (Player.Revealed r : p.getRevealed())
+                if (r.getCard().getName().equalsIgnoreCase(e.getValue())) {
+                    p.getRevealed().remove(r);
+                    p.getCharacter().getStatuses().removeIf(s -> Objects.equals(s.getExposure(), r.getId()));
+                    loggedTurnEvents.add("Player " + p.getPlayerId() + " played " + e.getValue() + ": the mark of its search ends");
+                    break;
+                }
+        }
+        played.clear();
+        // A mark whose copy left the hand is no longer shown; it is kept only while it has a token, to know which name ends it.
         for (Player p : players.values())
-            for (Iterator<Player.Revealed> it = p.getRevealed().iterator(); it.hasNext(); ) {
-                Player.Revealed r = it.next();
-                if (p.holds(r.getCard())) continue;
-                it.remove();
-                release(p, r.getId());
-                loggedTurnEvents.add("Player " + p.getPlayerId() + "'s card " + r.getCard().getName() + " found by a search has left the hand");
-            }
+            p.getRevealed().removeIf(r -> !p.holds(r.getCard())
+                    && p.getCharacter().getStatuses().stream().noneMatch(s -> Objects.equals(s.getExposure(), r.getId())));
     }
 
-    /** SB-16g 2a: no face-up copy and no held vulnerability left (end of the match, eliminated player). */
+    /** SB-16g 2a: no face-up card and no vulnerability token left (end of the match, eliminated player). */
     private void dropRevealed(Player p) {
         if (p == null) return;
-        for (Player.Revealed r : p.getRevealed()) release(p, r.getId());
         p.getRevealed().clear();
-    }
-
-    /**
-     * SB-16g 2a (D59, D65): the vulnerability held by the copy is no longer held. If its minimum (the charge's turn and the next)
-     * is over it ends now; otherwise it ends with its minimum.
-     */
-    private static void release(Player p, int id) {
-        for (Iterator<Status> it = p.getCharacter().getStatuses().iterator(); it.hasNext(); ) {
-            Status s = it.next();
-            if (!Objects.equals(s.getHeldBy(), id)) continue;
-            s.setHeldBy(null);
-            if (s.minimumSpent()) it.remove();
-        }
+        p.getCharacter().getStatuses().removeIf(s -> s.getExposure() != null);
     }
 
     @JsonIgnore
     public Card getCardFromHand(String playerId, String cardName) {
-        // SB-16g 2a (D58, D65), playground only: among copies with the same name the face-up one leaves first (the oldest found),
-        // so that playing or discarding it ends what it holds. A hidden copy with the same name stays hidden and holds nothing.
-        Player owner = players.get(playerId);
-        if (ruleset.playground() && owner != null)
-            for (Player.Revealed r : owner.getRevealed())
-                if (r.getCard().getName().equalsIgnoreCase(cardName) && owner.holds(r.getCard())) return r.getCard();
         // getting this card also checks if it is in that player's hand adn throws exception accordingly
         return players.get(playerId).getCardsInHand().stream()
                 .filter(c -> c.getName().equalsIgnoreCase(cardName))

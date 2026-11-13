@@ -1,4 +1,5 @@
-// SB-16g 2a: captures of the face-up copy (D58) and of the vulnerability it holds (D59, D64–D66) on the profile `bozza`, not a check.
+// SB-16g 2a, revised by D69: captures of the card found shown face up (D58) and of the vulnerability token (D64, D66, D69) on the
+// profile `bozza`, not a check. `chip`: the timed token of a failed search; `held`: the token bound to the name of the card found.
 // Adapted from ../sb-16f0/captures.mjs. Starts the jar with the profiles local,bozza on a temporary database (port 8080 free, client
 // served on 4320 by ./client-web/run.ps1 -Task Serve, jar built), plays quick 1vCom games through the UI with reduced motion, keeps
 // the hit found by a search in hand (it plays the charge first and the searched hit last), and saves the table, the inspections and
@@ -98,7 +99,7 @@ async function main(){
   if(own&&WANT.includes('own')&&!got.own){
    await page.mouse.move(5,5);await page.waitForTimeout(150);await shot('own-revealed',s.turn,{label:own.label});
    await page.locator(`[data-hit="${own.id}"]`).focus();await page.keyboard.press('i');await inspection('own-revealed-inspect',s.turn);got.own=true;}
-  for(const [want,re] of [['chip',/Almeno/],['held',/Il minimo è finito/]]){
+  for(const [want,re] of [['chip',/La ricerca non ha trovato/],['held',/Nessun timer/]]){
    const chip=s.hits.find(h=>h.kind==='status'&&h.id.includes('-vu-')&&re.test(h.label));
    if(chip&&WANT.includes(want)&&!got[want]){await page.mouse.move(chip.x,chip.y);await page.waitForTimeout(250);
     const tip=await page.getByTestId('status-tip').allInnerTexts();await shot(`chip-${want}`,s.turn,{label:chip.label,tip});await page.mouse.move(5,5);got[want]=true;}}

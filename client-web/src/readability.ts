@@ -1,4 +1,4 @@
-import type {Card,Character,Player,Resource,Status} from './contracts.ts';
+import type {Card,Character,Resource,Status} from './contracts.ts';
 import {regular,type LocalCard,type Model} from './model.ts';
 // C2a readability helpers. Pure functions over the authoritative view: they only decide how
 // things look. Costs are never subtracted here and the server stays the judge of legality.
@@ -85,52 +85,51 @@ export type Chip={id:string;kind:'good'|'bad'|'equip'|'immunity'|'timer';short:s
 export const statusText=(name:string,fallback:string)=>STATUS_TEXT[name]??fallback;
 // R05: duration d decreases at turn end and the status disappears below zero (0 = this turn only).
 const lasting=(d:number|null)=>d===null?'resta finché non viene tolto':d<=0?'finisce a fine turno':`dura ancora ${d} turn${d===1?'o':'i'} dopo questo`;
-export function chipsOf(owner:string,c:Character,revealed:Player['revealed']=[]):Chip[]{
+export function chipsOf(owner:string,c:Character):Chip[]{
  const chips:Chip[]=[],exposures=vulnerabilitiesOf(c);
  c.immunities.forEach(r=>chips.push({id:`status-${owner}-imm-${r}`,kind:'immunity',short:LETTER[r],resource:r,title:`Immune a ${NAMES[r]??r}`,text:'Blocca il suo effetto di fine turno, non costi, variazioni o veleno.'}));
  c.statuses.forEach((s,i)=>{if(s.exposure!==undefined)return;chips.push({id:`status-${owner}-st-${i}`,kind:s.equip?'equip':s.type==='BAD'?'bad':'good',short:s.lastsForTurns===null?'∞':String(Math.max(0,s.lastsForTurns)),
   title:`${s.equip?'Equipaggiamento':s.type==='BAD'?'Stato negativo':'Stato positivo'}: ${s.name}`,text:`${statusText(s.name,s.description)}. ${s.singleUse&&!s.equip?'Si consuma dopo l’uso; ':''}${lasting(s.lastsForTurns)}.`});});
- // SB-16g 2a: one chip per vulnerability (its three statuses together), with the card that holds it, if any.
- exposures.forEach(v=>{const holder=revealed?.find(r=>r.copy===v.heldBy)?.card.name;
-  chips.push({id:`status-${owner}-vu-${v.exposure}`,kind:'bad',short:v.left===null?'∞':String(v.left),title:`Stato negativo: Vulnerabile ${factorText(v.factor)}`,
-   text:`${vulnerabilityText(v,holder)}${exposures.length>1?' Più vulnerabilità si moltiplicano.':''}`});});
+ // SB-16g 2a (D69): one chip per vulnerability token (its statuses, one per damage type, together).
+ exposures.forEach(v=>chips.push({id:`status-${owner}-vu-${v.exposure}`,kind:'bad',short:v.untilPlayed!==null?'∞':String(Math.max(0,v.left??0)),
+  title:`Stato negativo: Vulnerabile ${factorText(v.factor)}`,text:`${vulnerabilityText(v)}${exposures.length>1?' Più vulnerabilità si moltiplicano.':''}`}));
  // R06: timers count down at each turn end and fire at zero.
  c.timers.forEach((tm,i)=>chips.push({id:`status-${owner}-tm-${i}`,kind:'timer',short:String(tm.timer),title:`Timer: ${tm.name}`,text:`${tm.timer<=1?'Scatta a fine turno':`Scatta tra ${tm.timer} fine turno`}: ${TIMER_TEXT[tm.name]??'effetto ritardato'}.`}));
  return chips;
 }
 
 /**
- * SB-16g 2a (D59, D64–D66): the vulnerabilities on a character, one per `exposure` (its statuses, one per damage type, together).
- * `left`: turns of the minimum still to come after this one (0 = ends at this turn's end), null once the minimum is over and the
- * face-up copy `heldBy` holds it. Pure: the server applies the factor, this only reads it.
+ * SB-16g 2a (D64, D66, D69): the vulnerability tokens on a character, one per `exposure` (its statuses, one per damage type,
+ * together). `untilPlayed`: the name of the card whose play ends it, with no timer (`left` null); null for the token of a failed
+ * search, which lasts `left` turns after this one (0 = ends at this turn's end). Pure: the server applies the factor.
  */
-export type Vulnerable={exposure:number;factor:number;types:string[];left:number|null;heldBy:number|null};
+export type Vulnerable={exposure:number;factor:number;types:string[];left:number|null;untilPlayed:string|null};
 export function vulnerabilitiesOf(c:Character):Vulnerable[]{
  const by=new Map<number,Status[]>();c.statuses.forEach(s=>{if(s.exposure!==undefined)by.set(s.exposure,[...(by.get(s.exposure)??[]),s]);});
- return [...by.entries()].map(([exposure,list])=>{const s=list[0],d=s.lastsForTurns??0;
-  return {exposure,factor:s.factor??1,types:list.map(x=>x.impactedProperty),left:d<0?null:d,heldBy:s.heldBy??null};});
+ return [...by.entries()].map(([exposure,list])=>{const s=list[0];
+  return {exposure,factor:s.factor??1,types:list.map(x=>x.impactedProperty),left:s.lastsForTurns,untilPlayed:s.untilPlayed??null};});
 }
 const DAMAGE_WORDS:Record<string,string>={HIT:'colpo',CUT:'taglio',POISON:'veleno'};
 /** «×1,5»: the factor as the cards write it. */
 export const factorText=(f:number)=>`×${String(Math.round(f*100)/100).replace('.',',')}`;
 const words=(types:string[])=>{const w=types.map(t=>DAMAGE_WORDS[t]??t);return w.length>1?`${w.slice(0,-1).join(', ')} e ${w[w.length-1]}`:w[0]??'';};
-/** The sentence of a vulnerability: what it multiplies, how long at least, and the card that keeps it on (by name). */
-export function vulnerabilityText(v:Vulnerable,holder?:string){
- const what=`Danni da ${words(v.types)} ricevuti ${factorText(v.factor)}.`,card=holder?`«${holder}», la carta scoperta,`:'la carta scoperta';
- if(v.left===null)return `${what} Il minimo è finito: dura finché ${card} resta in mano.`;
- const min=v.left<=0?'Almeno fino a fine turno':`Almeno per ${v.left} turn${v.left===1?'o':'i'} dopo questo`;
- return v.heldBy===null?`${what} ${min}.`:`${what} ${min}, poi finché ${card} resta in mano.`;
+/** The sentence of a vulnerability token: what it multiplies and what ends it (the play of a card with a name, or its time). */
+export function vulnerabilityText(v:Vulnerable){
+ const what=`Danni da ${words(v.types)} ricevuti ${factorText(v.factor)}.`;
+ if(v.untilPlayed!==null)return `${what} Nessun timer: finisce quando viene giocata una carta «${v.untilPlayed}», quella trovata o un’altra; scartarla non basta.`;
+ const d=v.left??0;
+ return `${what} La ricerca non ha trovato la carta: ${d<=0?'finisce a fine turno':`dura ancora ${d} turn${d===1?'o':'i'} dopo questo`}.`;
 }
 /**
- * SB-16g 2a (D58): what a face-up copy says, on the table and in the inspection: who holds it, since when, and the vulnerability it
- * keeps on, if any. `badge` is the short mark drawn on the card.
+ * SB-16g 2a (D58, D69): what a card found by a search says, on the table and in the inspection: who found it, when, until when it
+ * is shown, and the vulnerability token bound to its name, if any. `badge` is the short mark drawn on the card.
  */
 export function revealedNote(r:{copy:number;turn:number;card:Card},owner:string|null,c:Character){
- // A copy holds at most one vulnerability: the one of the charge whose search found it (same id, server Game.reveal).
- const held=vulnerabilitiesOf(c).find(v=>v.heldBy===r.copy);
- const text=(owner===null?`Carta scoperta: l’hai trovata con una ricerca al turno ${r.turn+1} e la vedono tutti finché resta nella tua mano.`
-  :`Carta scoperta: ${owner} l’ha trovata con una ricerca al turno ${r.turn+1} e la vedono tutti finché resta nella sua mano.`)
-  +(held?` Tiene ${owner===null?'la tua':'la sua'} vulnerabilità: ${vulnerabilityText(held,r.card.name)}`:'');
+ // The token of the same charge has the same id as the card it found (server Game.mark).
+ const held=vulnerabilitiesOf(c).find(v=>v.exposure===r.copy);
+ const text=(owner===null?`Carta scoperta: l’hai trovata con una ricerca al turno ${r.turn+1}. La vedono tutti finché resta nella tua mano e finché non giochi una carta con questo nome.`
+  :`Carta scoperta: ${owner} l’ha trovata con una ricerca al turno ${r.turn+1}. La vedono tutti finché resta nella sua mano e finché non gioca una carta con questo nome.`)
+  +(held?` ${owner===null?'La tua':'La sua'} vulnerabilità legata a questa carta: ${vulnerabilityText(held)}`:'');
  return {badge:held?`SCOPERTA ${factorText(held.factor)}`:'SCOPERTA',text,label:held?`scoperta, tiene una vulnerabilità ${factorText(held.factor)}`:'scoperta, la vedono tutti'};
 }
 

@@ -6,10 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 
 /**
- * SB-16g 2a, playground rules only (D58): a copy found by a search, face up in its owner's hand for everyone until it is played or
- * discarded. {@code copy} is its stable id (the same as the move's {@code search.copy} and as {@code heldBy} on the vulnerability it
- * holds, if any); {@code turn} the turn it was found. {@code slot}, only in the owner's own view, is its index in {@code cardsInHand}.
- * Nothing else of a hidden hand is shown.
+ * SB-16g 2a, playground rules only (D58, D69): a card found by a search, shown face up in its owner's hand for everyone, a view of
+ * what everyone has seen. It goes when its owner plays a card with its name (this copy or another) or when this copy leaves the hand.
+ * {@code copy} is its id (the same as the move's {@code search.copy} and as {@code exposure} on its vulnerability token, if any);
+ * {@code turn} the turn it was found. {@code slot}, only in the owner's own view, is its index in {@code cardsInHand}. Nothing else
+ * of a hidden hand is shown.
  */
 @Builder
 @Getter

@@ -54,12 +54,12 @@ public abstract class Character implements Serializable {
         return requested;
     }
 
-    /** SB-16g 2a: the vulnerability the search step of the move being resolved gives its author (D59, D64), or null. */
+    /** SB-16g 2a: the vulnerability the search step of the move being resolved gives its author (D64, D69), or null. */
     @Getter(AccessLevel.NONE)
     @JsonIgnore
     private Vulnerability requestedVulnerability;
 
-    /** SB-16g 2a: a search step with a vulnerability (D59, D64): the engine applies it after the move, with the playground rules. */
+    /** SB-16g 2a: a search step with a vulnerability (D64, D69): the engine applies it after the move, with the playground rules. */
     public void requestVulnerability(Vulnerability vulnerability) { this.requestedVulnerability = vulnerability; }
 
     /** The vulnerability asked for by the move just resolved, cleared. */
@@ -118,8 +118,7 @@ public abstract class Character implements Serializable {
         List<Status> expiredStatuses = new ArrayList<>();  // concurrent access problem with foreach
         for (Status status : statuses) {
             status.aTurnIsPassed();
-            // SB-16g 2a (D59): a vulnerability held by a copy still in hand outlives its minimum.
-            if (status.getLastsForTurns() != null && status.getLastsForTurns() < 0 && status.getHeldBy() == null)
+            if (status.getLastsForTurns() != null && status.getLastsForTurns() < 0)
                 expiredStatuses.add(status);
         }
         statuses.removeAll(expiredStatuses);

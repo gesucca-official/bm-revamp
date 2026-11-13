@@ -27,14 +27,15 @@ public class Player implements Serializable {
     private final Stack<Card> deck = new Stack<>();
 
     /**
-     * SB-16g 2a, playground rules only (D58): the copies found by a search and still in this hand, oldest first. Each one keeps its
-     * id and stays face up for everyone until it is played or discarded. The copy is the card object itself, not its name: another
-     * copy with the same name stays hidden. Always empty with the live rules.
+     * SB-16g 2a, playground rules only (D58, D69): the marks of the cards found by a search, oldest first. A mark is bound to the
+     * name of the card found and ends when its owner plays a card with that name, that copy or another; its vulnerability token, if
+     * any, ends with it. While the very copy found is in hand it is shown face up to everyone: a view of what everyone has seen,
+     * not a physical state of the card. Always empty with the live rules.
      */
     @JsonIgnore
     private final List<Revealed> revealed = new ArrayList<>();
 
-    /** SB-16g 2a (D58): a copy found by a search, face up in its owner's hand, with a stable id and the turn it was found. */
+    /** SB-16g 2a (D58, D69): the mark of a card found by a search, with a stable id and the turn it was found. */
     @Getter
     public static final class Revealed implements Serializable {
         private final int id;
@@ -130,27 +131,25 @@ public class Player implements Serializable {
     }
 
     public void discardCard(Card card) {
-        if (card.isCharacterBound() || card.isBasicAction()) return;
-        // SB-16g 2a (D58): the very copy leaves, not the first one with its name. The card comes from this hand, so with the live
-        // rules this is the copy remove(Object) took before (cards are equal by name and the first equal one is the same object).
-        for (int i = 0; i < cardsInHand.size(); i++)
-            if (cardsInHand.get(i) == card) {
-                cardsInHand.remove(i);
-                return;
-            }
-        cardsInHand.remove(card);
+        if (!card.isCharacterBound() && !card.isBasicAction())
+            cardsInHand.remove(card);
     }
 
-    /** SB-16g 2a (D58): whether this very copy is in hand. */
+    /** SB-16g 2a (D58): whether this very copy is in hand (cards are equal by name, so this compares the objects). */
     public boolean holds(Card card) {
         for (Card c : cardsInHand) if (c == card) return true;
         return false;
     }
 
-    /** SB-16g 2a (D58): the face-up copy with this id, still in hand, or null. */
-    public Revealed revealedCopy(int id) {
-        for (Revealed r : revealed) if (r.id == id) return r;
-        return null;
+    /**
+     * SB-16g 2a (D58, D69): the marks shown face up, those whose very copy found is in hand. A copy that left the hand does not come
+     * back (a card returning to the hand is another object), so a mark not shown is never shown again.
+     */
+    @JsonIgnore
+    public List<Revealed> getShownRevealed() {
+        List<Revealed> shown = new ArrayList<>();
+        for (Revealed r : revealed) if (holds(r.card)) shown.add(r);
+        return shown;
     }
 
     @JsonIgnore
