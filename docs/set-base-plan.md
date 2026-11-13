@@ -318,9 +318,9 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16c | Regole decise in SB-16b nel playground | SB-16b | fatto (12 novembre 2026), domande risposte (D54) |
 | | SB-16d | Riprogettazione dei cinque starter (P3 e P5) | SB-16c | fatto (12 novembre 2026), proposta approvata D55; invarianti e tetto bound verdi |
 | | SB-16e | Giro sui cinque starter con le regole nuove | SB-16d | eseguito (12 novembre 2026), STOP dopo 3 giri: criteri non raggiunti; proposta nel rapporto |
-| | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; adottata (c); stop, domande nel rapporto |
+| | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; (c) confermata, prima la prova umana (D57) |
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
-| | SB-16f | Prova umana degli starter rifatti | SB-16f0 |  |
+| | SB-16f | Prova umana degli starter rifatti | SB-16f0 | prossimo |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16f |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -955,6 +955,11 @@ ricerche, parate con aggiunta, corazza dell'alcol, turno decisivo con P1.
 **Rischi.** Il client deve mostrare la carta cercata e il motivo dell'annullamento: se non lo fa, serve un piccolo intervento prima
 della prova, da decidere col proprietario.
 
+**Stato al 13 novembre 2026: prossimo.** Si gioca con i numeri di SB-16e2, variante (c), sapendo che i criteri dei bot non sono
+raggiunti (specchi di Celestina e Piera, Piera contro Mara e Celestina, quattro incontri lunghi): [D57](#decisioni-del-proprietario).
+Da guardare anche quei finali, la leggibilità di SB-16f0 sul tavolo e se le partite sembrano lunghe. Dopo la prova si decide se
+ridisegnare le last resort o il finale degli specchi.
+
 ### SB-17, SB-18 — Personaggi da booster
 
 Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
@@ -1175,6 +1180,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D54 | Risposte sulle domande di SB-16c | 12 novembre 2026, con le parole del proprietario, domanda per domanda. **(1) Oggetto trovato dalla ricerca:** va sul campo e la pesca continua, come quando si pesca: «A, anche se non crtedo che faremo carti di caricamento che cercano oggetti». **(2) Carta cercata scartata con una bound:** valgono le due letture provate (la carta di ricerca usata come scarto non cerca; la carta trovata, scartata più tardi, esce dalla mano): «entrambe le letture sono corrette». Sul senso del caricamento: «le carte "di caricamento" alla fine non sono un nuovo tipo di carta, ma è un'effetto che possono avere varie carte (anche colpi, perché no?). il senso è di dare un'informazione all'avversario: ho in mano una carta potente che può farti male e la posso giocare, ma sono vulnerabile, quindi scegli bene che fare, se picchiarmi o difenderti». **(3) CinqueMinutiEVado oltre il tetto delle bound con la corazza dell'alcol:** si corregge la carta in SB-16d, il controllo del tetto resta com'è: «A, possiamo rimaneggiare le carte quanto vogliamo epr bilanciare tutto il set base». **(4) Il profilo `bozza` parte con le regole `d50`:** «A». Nessun cambio al codice di SB-16c. Precisa D50 (punto 6) e D52 (punto 3) |
 | D55 | Approvazione della proposta SB-16d | 12 novembre 2026, con le parole del proprietario: «approvo, poi cmq le ritestiamo estensivamente», dopo il riepilogo dei cinque starter e delle tre domande della [proposta 0.2](design/set-base/sb-16d-proposta.md). Approvati i nove slot e le cinque coppie, compreso il recupero di A di Piera, la ricerca esatta, le esposizioni per due turni e i premi delle tre difese; copie, rarità e composizione conservate. Numeri indicativi sotto D38/D53. Restano le misure estese delle coppie e di tutti gli incontri/specchi in SB-16e e la prova umana SB-16f, entro i limiti di D53. La correzione di CinqueMinutiEVado resta quella richiesta da D54: se solo numerica è delegata, un cambio di funzionamento richiede il proprietario. Precisa D52 e D53 |
 | D56 | Seguito dello STOP di SB-16e | 12 novembre 2026, con le parole del proprietario alle domande 1 e 2 del [rapporto SB-16e](reports/set-base/sb-16e-report.md#domande-numerate-al-proprietario): «si a entrambe». **(1)** Autorizzato un solo nuovo lotto numerico, **SB-16e2**: un giro, al massimo 30 minuti di calcolo, controllo col giro 3 e tre varianti prefissate (Un altro e arrivo +20→+35 A; danno a sé di L’ultima dose e L’ultimo giro 5→2; entrambe), stessi semi, matrice completa e soglie invariate; numeri adottati con la delega di D38. **(2)** Approvato il minimo intervento di leggibilità prima di SB-16f, **SB-16f0**: ricerca (binding ed esito) e motivo dell’annullamento come campi strutturati opzionali nella vista del playground; nel client carta trovata ispezionabile riusando la pesca e «annullata: a terra» nel riepilogo italiano. Precisa D38 e D53 |
+| D57 | Seguito dello STOP di SB-16e2 | 13 novembre 2026, risposta del proprietario («Sì, entrambe») alla regia, che gli chiedeva di registrare la variante (c) e la prova umana prima di ridisegnare, cioè le domande 1 e 2 del [rapporto SB-16e2](reports/set-base/sb-16e2-report.md#domande-numerate-al-proprietario). **(1)** Nessun ridisegno prima della prova: si va a [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti) con i numeri attuali; ridisegno delle last resort o del finale degli specchi solo se la prova lo chiede. **(2)** Confermata la variante (c), già nella bozza: Un altro e arrivo +35 A, danno a sé di L’ultima dose e L’ultimo giro 2 HIT. I criteri di D16 e D51 restano invariati e non raggiunti. Precisa D53 e D56 |
 
 ## Decisioni ancora aperte
 
