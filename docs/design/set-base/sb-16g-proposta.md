@@ -1,6 +1,6 @@
 # SB-16g — Proposta aggiornata delle carte prima di 2b
 
-**Versione 1.0 — 13 novembre 2026. Proposta concreta da approvare (D68).** Sostituisce le schede e le composizioni a un solo bersaglio della versione 0.11. Le decisioni D59–D68 restano valide; queste carte, le sostituzioni e la difesa dal POISON non sono ancora approvate né attuate. I numeri sono indicativi, tarabili in Fase 2 secondo D38.
+**Versione 1.1 — 13 novembre 2026. Proposta concreta da approvare, allineata a D69.** D69 rivede D58, D59 e D65: gettone sul giocatore legato al nome del colpo, senza timer; soltanto la ricerca fallita dà un gettone temporaneo. Queste carte, sostituzioni e difesa dal POISON restano da approvare prima di 2b. Quantità, costi, priorità, rarità e liste della versione 1.0 restano proposti senza variazioni numeriche (D38).
 
 | Starter | Coppia NC: 2 copie di ciascun titolo | Coppia rara: 1 copia di ciascun titolo; caricamento sempre NC | Copie che escono rispetto alla bozza corrente | Composizione finale |
 |---|---|---|---|---|
@@ -10,7 +10,7 @@
 | Piera | Un altro e arrivo → Estasi da Coca Etilene: +25 L/+35 A → gratuita, 18 + L HIT, azzera L | **Prima il brindisi** → Rutto a distanza sociale: +35 L/+35 A → 5 L, 20 + 2×L residua HIT, sottrae quella L alla A avversaria, azzera la propria L | 1 Fasciatura col fazzolettaccio (2→1) | 10 + 5 + 5 = **20** |
 | Beppe | Preparo il lavoro → Chiave da tredici: +15 V → 10 V, 22 CUT | **Una stretta di prova** → Lavoro fatto bene: +10 V e 4 CUT → 10 V, 14 + 7 per proprio oggetto HIT | 2 Mattoni del cantiere (2→0) | 9 + 4 + 7 = **20** |
 
-**Vulnerabilità iniziale per tutti i dieci caricamenti: ×1,5 a HIT, CUT e POISON**, con durata F già decisa: almeno il turno del tutore e il successivo, poi finché resta in mano la precisa copia cercata. Ogni applicazione resta indipendente e si cumula moltiplicativamente (D59, D64–D66). Nessuna vulnerabilità aggiuntiva è impressa sui dieci titoli di colpo: «—» nelle loro schede significa che non ne creano una propria; si applicano normalmente gli stati già presenti.
+**Vulnerabilità iniziale per tutti i dieci caricamenti: ×1,5 a HIT, CUT e POISON.** Se la ricerca riesce, il gettone è sul giocatore, legato al **nome del colpo**, senza timer e senza minimo di due turni. Giocare una carta con quel nome, anche un'altra copia e anche con mossa parata/annullata, rimuove a fine gruppo di velocità il più vecchio gettone per quel nome. **Scartare non lo rimuove.** Se la ricerca fallisce, il gettone non è legato a un nome e dura solo il turno del caricamento e il successivo. La carta mostrata è un promemoria pubblico del gettone, non una copia fisicamente vincolata nella mano (D69). Più gettoni restano indipendenti e si moltiplicano (D66). Nessuna vulnerabilità aggiuntiva è impressa sui dieci titoli di colpo: «—» nelle loro schede significa che non ne creano una propria; si applicano normalmente gli stati già presenti.
 
 **D67, difesa candidata:** «Il bancone regge, io pure», due copie già nello starter di Piera: gratuita, priorità 2, bersaglio sé; HIT ricevuti ×0,5 **e POISON ricevuti ×0,5** nel turno; +5 L. Il costo, la priorità e il premio restano quelli attuali. Il POISON comprende anche quello periodico di fine turno; la protezione non toglie T né conferisce immunità. Proposta dettagliata sotto.
 
@@ -18,49 +18,54 @@
 
 Questa consegna aggiorna soltanto questo documento. Il piano, la griglia, la bozza, codice, test, client, regolamento, documento del set e catalogo restano fuori dal nostro intervento. La Fase 2a su server/client è assegnata a un altro esecutore: nessun suo file è incluso nel commit. Si progettano qui le carte da sottoporre al proprietario prima della Fase 2b; non si avvia il giro.
 
-Fonti: [decisioni D60–D68 e SB-16g](../../set-base-plan.md#decisioni-del-proprietario), [griglia](griglia.md), [listino](listino.md), [proposta SB-16d](sb-16d-proposta.md), rapporti [SB-16e](../../reports/set-base/sb-16e-report.md) e [SB-16e2](../../reports/set-base/sb-16e2-report.md). Il [regolamento](../../game-rules.md) e il [Set Base](../../sets/base.md) governano la partita viva; i cambi D50 e queste carte restano nel playground fino a SB-28.
+Fonti: [decisioni D60–D69 e SB-16g](../../set-base-plan.md#decisioni-del-proprietario), [griglia](griglia.md), [listino](listino.md), [proposta SB-16d](sb-16d-proposta.md), rapporti [SB-16e](../../reports/set-base/sb-16e-report.md) e [SB-16e2](../../reports/set-base/sb-16e2-report.md). Il [regolamento](../../game-rules.md) e il [Set Base](../../sets/base.md) governano la partita viva; i cambi D50 e queste carte restano nel playground fino a SB-28.
 
-Riferimento delle sostituzioni: [bozza corrente](../../../server/src/test/resources/set-base/bozza.json), variante (c), letta sul commit `ee7f4d3`; SHA-256 `d435a8796e81b7be8955cd27feb0639126cf8d2e3868c6069881e396fc3d8e19`. Il confronto è con quella bozza giocabile, non con le vecchie schede della proposta. Le versioni 0.x e il confronto fra conseguenze alternative restano nella storia Git; la conseguenza scelta è F.
+Riferimento delle sostituzioni: [bozza corrente](../../../server/src/test/resources/set-base/bozza.json), variante (c), letta sul commit `ee7f4d3`; SHA-256 `d435a8796e81b7be8955cd27feb0639126cf8d2e3868c6069881e396fc3d8e19`. Il confronto delle copie e dei valori è con quella bozza giocabile, non con le vecchie schede della proposta. Per la penalità vale invece D69, registrata in `9e4efce`, che rivede la precedente F. La [consegna iniziale 2a](../../reports/set-base/sb-16g-2a-report.md) precede questa revisione e non dimostra già attuato D69: il piano indica revisione 2a in corso. Le versioni precedenti restano nella storia Git.
 
 ## Decisioni del proprietario applicate
 
-Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce da esse l'approvazione dei nuovi numeri o delle carte concrete.
+Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce da esse l'approvazione dei nuovi numeri o delle carte concrete. Le righe D58/D59/D65 precedenti vanno lette con la revisione D69: i due turni non sono più un minimo per i gettoni legati al nome.
 
 | Decisione | Parole del proprietario e vincolo applicato |
 |---|---|
-| D59 | «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?» Minimo N e N+1; poi prolungamento mentre si tiene la copia. |
+| D59 | «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?» Scelta storica, **rivista da D69**: nessun minimo per il gettone legato al nome; N/N+1 restano soltanto per la ricerca fallita. |
 | D60 | «va bene 120 carte, ma:» e proposta di distinguere colpo NC e raro. Totale **120**, non 125; i bersagli rari riusano slot esistenti. |
 | D61 | «Sì, adottiamo questo schema per tutti e cinque gli starter. Precisando, 2 caricamenti non comuni e 2 colpi non comuni sono due copie della stessa carta: è uno starter deck, poi nelle buste ci saranno magari altri caricamenti e altri colpi diversi». Tre caricamenti e tre colpi, **quattro titoli distinti**, per ogni starter. |
 | D62 | «va bene» al secondo caricamento anch'esso NC, presente in una copia e diretto al raro. |
 | D63 | «approvo» alla direzione: risorse sufficienti da zero dopo il fine turno; NC potente e affidabile; raro con picco legato a preparazione/tavolo. Numeri tarabili, carte da ripresentare. |
 | D64 | «approvo vulnerabilità a tutti i danni.» Registrate anche le possibilità future di costi aumentati o fattori ×2/×3. Qui si parte da ×1,5; non si introduce un modificatore dei costi. |
-| D65 | «si, la vulnerabilità inflitta segue quella precisa copia». Giocata/scarto effettivo concludono il prolungamento; il minimo resta. Ricerca fallita: solo il minimo, nessun legame a carte già in mano o pescate normalmente. |
-| D66 | «approvo» al cumulo moltiplicativo indipendente. Una copia liberata non libera le altre. |
+| D65 | «si, la vulnerabilità inflitta segue quella precisa copia». Scelta storica, **rivista da D69**: basta giocare quel nome, lo scarto non conta. Ricerca fallita: gettone anonimo temporaneo, non legato alle carte in mano. |
+| D66 | «approvo» al cumulo moltiplicativo indipendente. D69 precisa: una carta giocata rimuove soltanto il gettone più vecchio per quel nome, non tutti. |
 | D67 | «si includiamola» alla **valutazione** di una difesa regolare anche contro POISON, preservando il premio; carta ed effetto concreti da approvare. |
 | D68 | «approvo» alla divisione **2a** (D58, conseguenza nel motore, vista server/client, test) / **2b** (carte, bot con tre politiche, giro). Prima della bozza si approvano le carte aggiornate. |
+| D69 | «il gettone della penalità sul danno (o su qualunque altra cosa sia) è sul giocatore, non sulla carta»; «non c'è nessun timer sul gettone, va via quando si gioca una carta col nome che lo ha creato»; sullo scarto «no, solo se viene giocata. se uno scarta la sua unica copia, doveva pensarci prima». La carta mostrata è «solo una vista». Gettone legato al nome, rimosso dalla giocata anche di un'omonima; a ricerca fallita, gettone anonimo per N/N+1; per più gettoni dello stesso nome se ne toglie uno solo, il più vecchio, a fine gruppo. Restano moltiplicazione dei fattori e pulizia a fine partita/eliminazione/forfait. Rivede D58/D59/D65; nessuna scelta della precisa copia richiesta. |
 
 ## Contratto comune e lettura dei testi
 
-- Tutti i caricamenti sono azioni regolari NC, non basic o bound. Ogni titolo cerca **un solo binding esatto**, quello indicato nella scheda; non una scelta fra i due colpi. Ricerche riuscite: la copia trovata resta scoperta in mano per tutti fino a giocata/scarto (D58). Assenza del bersaglio: normale pesca, senza recupero dagli scarti e senza ulteriori carte.
-- Nei testi, «la copia trovata» è l'esemplare effettivo di quella ricerca. Un'omonima già in mano non prende il suo posto. Una ricerca fallita lascia il minimo N/N+1 ma non prolunga né rinnova vecchi legami. Una copia realmente giocata o scartata per una bound conclude soltanto il suo prolungamento; colpo parato/annullato: conta se esce dalla mano. Restano sempre i due turni minimi. Identità della copia, gestione della sua uscita e visibilità sono supporto della 2a, non una nuova regola di queste carte.
+- Tutti i caricamenti sono azioni regolari NC, non basic o bound. Ogni titolo cerca **un solo colpo esatto**, quello identificato nella scheda; non una scelta fra i due bersagli. Se lo trova, mette sul giocatore un gettone legato al nome di quel colpo: la copia fisica non è vincolata. Il colpo mostrato rimane nella vista come promemoria finché c'è il relativo gettone, anche se la copia trovata viene scartata; non è prova che quella copia sia ancora nella mano né una carta giocabile aggiuntiva. Quando il gettone viene rimosso, sparisce anche il suo promemoria, pure se è stata giocata un'altra copia omonima.
+- **Giocata che soddisfa il gettone:** conta qualsiasi carta con quel nome giocata dal proprietario del gettone, trovata da quella ricerca o già posseduta. La mossa può essere parata o annullata: il gettone si rimuove comunque **alla fine del gruppo di velocità** della giocata, così i danni dello stesso gruppo restano simultanei. Non resta un minimo N/N+1 e non si aspetta la fine del turno. Scartare per una bound o per qualunque altro effetto non soddisfa la condizione: dopo lo scarto dell'unica copia il gettone può durare fino a fine partita.
+- **Ricerca fallita:** pesca normale, senza recupero dagli scarti o pesca supplementare; gettone negativo anonimo ×1,5 valido per N e N+1, senza legame a carte già in mano o pescate normalmente. Giocare un'omonima non rimuove questo gettone temporaneo: si esaurisce con la sua durata. Non si crea un promemoria di una ricerca non riuscita.
+- **Più gettoni:** una giocata rimuove un solo gettone legato a quel nome, il più vecchio; gli altri, compresi quelli di altri nomi o i temporanei di ricerche fallite, restano. Due ricerche sullo stesso nome richiedono due giocate per soddisfare due gettoni. I gettoni e i relativi promemoria vengono puliti a fine partita, eliminazione e forfait. Il gettone legato mostra «∞» finché attivo (D69).
 - Ogni stato di esposizione applicato rimane indipendente: due ×1,5 hanno fattore composto 2,25 prima degli arrotondamenti del percorso reale. Vale R05, con troncamento a ogni trasformazione, senza tetto o fusione speciali. L'esposizione amplifica anche il POISON periodico di chi non è immune; l'immunità a T non protegge dal danno POISON diretto.
 - Tutte le quantità variabili si leggono **dopo il costo**, alla risoluzione, salvo il valore esplicitamente memorizzato prima di azzerare/travasare una risorsa. Le divisioni sono intere. A dopo i costi fissa il gruppo del turno; guadagni e perdite successivi non riordinano i gruppi già fissati (D50).
 - Gli esempi di finanziamento partono dalla risorsa richiesta a zero, con le proprietà iniziali del personaggio, senza altre spese o interferenze avversarie. Non partono da HEALTH=0 e non promettono di sopravvivere a qualunque attacco. I costi restano pagabili solo con risorse possedute; nessuna riserva protetta e nessun debito.
 - Non si aggiunge autodanno ai caricamenti né l'eccezione «Ultimo colpo». Basic, bound, last resort, salute e risorse iniziali non cambiano qui. Le difese/contromosse personali restano nelle liste. Il raro deve poter essere parato, anticipato o ridimensionato da una risposta: il suo picco non è danno garantito.
 - I colpi hanno lo stesso effetto anche se pescati normalmente. Nessun bonus nascosto «se cercato»; le condizioni del picco sono risorse e oggetti già visibili. L'esposizione parte alla risoluzione, senza aumentare retroattivamente danni arrivati prima.
 
+**Impatto di D69 sul progetto:** non cambiano risorse o danni nominali delle carte, ma cambia il prezzo tattico. Giocare il nome può liberare il gettone già a fine del proprio gruppo in N+1: attacchi di gruppi successivi non vengono più amplificati da quel gettone. Viceversa, scartare il colpo non è più una via d'uscita; con la rara in singola copia la penalità può restare fino a fine partita. Con più gettoni dello stesso nome una giocata ne libera uno solo. Le stime di ritmo e rischio sotto sono ipotesi da rimisurare con D69, non risultati della vecchia 2a.
+
 ## Spazienzio — il NC lento e il raro che premia l'accumulo
 
 | Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
 |---|---|---|---|---|---|
-| PAZIENZA: FINITA, SPA-AR3 (`bruiser.Glare`) | 2; **NC** (da C) | Gratuita | 0; sé | ×1,5, durata F | `bruiser.SuperImpact` |
+| PAZIENZA: FINITA, SPA-AR3 (`bruiser.Glare`) | 2; **NC** (da C) | Gratuita | 0; sé | ×1,5, gettone D69 | `bruiser.SuperImpact` |
 | GARGANTUESCO IMPATTO SUL TU, SPA-AR1 (`bruiser.SuperImpact`) | 2; **NC** (da C) | 25 V | 0; un avversario | — | Nessuna |
-| TI FACCIO SPAZIO, nuovo SPA-AR6 (`base.bruiser.TiFaccioSpazio`, ID proposto) | 1; NC | Gratuita | 0; sé | ×1,5, durata F | `bruiser.ExtremelyViolentBlow` |
+| TI FACCIO SPAZIO, nuovo SPA-AR6 (`base.bruiser.TiFaccioSpazio`, ID proposto) | 1; NC | Gratuita | 0; sé | ×1,5, gettone D69 | `bruiser.ExtremelyViolentBlow` |
 | SPEDIAMOTI DUNQUE IN O-AHIO, SPA-AR2 (`bruiser.ExtremelyViolentBlow`) | 1; R | 10 V | 1; un avversario | — | Nessuna |
 
 **PAZIENZA: FINITA — testo:**
 
-> Guadagni 25 V e 15 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo GARGANTUESCO IMPATTO SUL TU e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+> Guadagni 25 V e 15 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo GARGANTUESCO IMPATTO SUL TU. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **GARGANTUESCO IMPATTO SUL TU — testo:**
 
@@ -68,7 +73,7 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 **TI FACCIO SPAZIO — testo:**
 
-> Guadagni 35 V e 5 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo SPEDIAMOTI DUNQUE IN O-AHIO e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+> Guadagni 35 V e 5 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **SPEDIAMOTI DUNQUE IN O-AHIO — testo:**
 
@@ -84,14 +89,14 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 | Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
 |---|---|---|---|---|---|
-| Slalom d'avvicinamento, MAR-AR5 (`base.mara.Slalom`) | 2; **NC** (da R) | Gratuita | 2; sé | ×1,5, durata F | `base.mara.Sgommata` |
+| Slalom d'avvicinamento, MAR-AR5 (`base.mara.Slalom`) | 2; **NC** (da R) | Gratuita | 2; sé | ×1,5, gettone D69 | `base.mara.Sgommata` |
 | Sgommata, MAR-AR2 (`base.mara.Sgommata`) | 2; **NC** (da C) | 15 A | 1; un avversario | — | Nessuna |
-| Ti stringo la curva, nuovo MAR-AR6 (`base.mara.TiStringoLaCurva`, ID proposto) | 1; NC | Gratuita | 2; sé | ×1,5, durata F | `base.mara.CinghiataDiTraverso` |
+| Ti stringo la curva, nuovo MAR-AR6 (`base.mara.TiStringoLaCurva`, ID proposto) | 1; NC | Gratuita | 2; sé | ×1,5, gettone D69 | `base.mara.CinghiataDiTraverso` |
 | Cinghiata di traverso, MAR-AR1 (`base.mara.CinghiataDiTraverso`) | 1; **R** (da C) | **20 A** (da 5) | 1; un avversario | — | Nessuna |
 
 **Slalom d'avvicinamento — testo:**
 
-> Guadagni 20 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Sgommata e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+> Guadagni 20 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Sgommata. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Sgommata — testo:**
 
@@ -99,7 +104,7 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 **Ti stringo la curva — testo:**
 
-> Guadagni 30 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Cinghiata di traverso e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+> Guadagni 30 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Cinghiata di traverso. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Cinghiata di traverso — testo:**
 
@@ -115,14 +120,14 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 | Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
 |---|---|---|---|---|---|
-| Dose in preparazione, TOS-AR1 (`junkie.MethDrivenRage`) | 2; **NC** (da C) | Gratuita | 1; sé | ×1,5, durata F | `junkie.Cough` |
+| Dose in preparazione, TOS-AR1 (`junkie.MethDrivenRage`) | 2; **NC** (da C) | Gratuita | 1; sé | ×1,5, gettone D69 | `junkie.Cough` |
 | Tossicone Scatarrante, TOS-AR2 (`junkie.Cough`) | 2; **NC** (da C) | 10 T | 1; un avversario | — | Nessuna |
-| Un assaggino, nuovo TOS-AR6 (`base.tossico.UnAssaggino`, ID proposto) | 1; NC | Gratuita | 1; sé | ×1,5, durata F | `junkie.ToxicBloodDrain` |
+| Un assaggino, nuovo TOS-AR6 (`base.tossico.UnAssaggino`, ID proposto) | 1; NC | Gratuita | 1; sé | ×1,5, gettone D69 | `junkie.ToxicBloodDrain` |
 | C'è del sangue nella mia droga, TOS-AR5 (`junkie.ToxicBloodDrain`, riferimento dello slot) | 1; R | 10 T | 1; un avversario | — | Nessuna |
 
 **Dose in preparazione — testo:**
 
-> Guadagni 10 T e 5 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Tossicone Scatarrante e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+> Guadagni 10 T e 5 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Tossicone Scatarrante. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Tossicone Scatarrante — testo:**
 
@@ -130,7 +135,7 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 **Un assaggino — testo:**
 
-> Guadagni 20 T. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo C'è del sangue nella mia droga e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+> Guadagni 20 T. Al posto della pesca che segue questa mossa cerca nel tuo mazzo C'è del sangue nella mia droga. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **C'è del sangue nella mia droga — testo:**
 
@@ -148,14 +153,14 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 | Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
 |---|---|---|---|---|---|
-| Un altro e arrivo, PIN-AR4 (`base.pino.OffroIo`) | 2; NC | Gratuita | 1; sé | ×1,5, durata F | `base.pino.GoingBerserk` |
+| Un altro e arrivo, PIN-AR4 (`base.pino.OffroIo`) | 2; NC | Gratuita | 1; sé | ×1,5, gettone D69 | `base.pino.GoingBerserk` |
 | Estasi da Coca Etilene, PIN-AR2 (`base.pino.GoingBerserk`) | 2; **NC** (da C) | Gratuita | 1; un avversario | — | Nessuna |
-| Prima il brindisi, nuovo PIN-AR6 (`base.pino.PrimaIlBrindisi`, ID proposto) | 1; NC | Gratuita | 1; sé | ×1,5, durata F | `base.pino.RuttoADistanzaSociale` |
+| Prima il brindisi, nuovo PIN-AR6 (`base.pino.PrimaIlBrindisi`, ID proposto) | 1; NC | Gratuita | 1; sé | ×1,5, gettone D69 | `base.pino.RuttoADistanzaSociale` |
 | Rutto a distanza sociale, PIN-AR5 (`base.pino.RuttoADistanzaSociale`) | 1; R | 5 L | 1; un avversario | — | Nessuna |
 
 **Un altro e arrivo — testo:**
 
-> Guadagni 25 L e 35 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Estasi da Coca Etilene e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+> Guadagni 25 L e 35 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Estasi da Coca Etilene. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Estasi da Coca Etilene — testo:**
 
@@ -163,7 +168,7 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 **Prima il brindisi — testo:**
 
-> Guadagni 35 L e 35 A. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Rutto a distanza sociale e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+> Guadagni 35 L e 35 A. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Rutto a distanza sociale. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Rutto a distanza sociale — testo:**
 
@@ -175,20 +180,20 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 **Sostituzioni:** entra 1 Prima il brindisi; Fasciatura col fazzolettaccio 2→1. Rimangono due Testate, due Banconi, Rutto nello slot raro, una Fasciatura, Spintoni e tutti gli oggetti. Titoli distinti 11→12.
 
-**Atteso e rischio:** meno cura ripetuta, recupero A e chiusure più forti possono ridurre i 14,83 turni/13,07% di patte dello specchio e gli incontri lunghi. La L del caricamento dà anche corazza e consuma A; il raro può fare molto danno ma costa l'intera riserva, compresa la protezione contro l'HIT. Se si rinvia, L decade ancora e il raro può diventare impagabile; restano il sacrificio via bound, gli oggetti e altri caricamenti. Non si nasconde questa pressione sotto la promessa di poter aspettare senza conseguenze. Il nuovo Bancone può offrire una difesa nel turno dell'annuncio, ma prolungare gli incontri: i due interventi vanno separati nelle misure.
+**Atteso e rischio:** meno cura ripetuta, recupero A e chiusure più forti possono ridurre i 14,83 turni/13,07% di patte dello specchio e gli incontri lunghi. La L del caricamento dà anche corazza e consuma A; il raro può fare molto danno ma costa l'intera riserva, compresa la protezione contro l'HIT. Se si rinvia, L decade ancora e il raro può diventare impagabile; per liberare il gettone occorre finanziare e giocare quel nome con oggetti o altri caricamenti. Lo scarto per una bound sacrifica la carta ma non libera il gettone. Non si nasconde questa pressione sotto la promessa di poter aspettare senza conseguenze. Con D69, scartare il raro non libera il gettone: se la L scende sotto 5 e mancano altre fonti di L, la penalità può restare fino a fine partita. Giocare invece Estasi costa zero e può soddisfare il suo nome anche a L=0. Il nuovo Bancone può offrire una difesa nel turno dell'annuncio, ma prolungare gli incontri: i due interventi vanno separati nelle misure.
 
 ## Beppe — NC indipendente dagli oggetti, raro da tavolo preparato
 
 | Carta e slot | Copie; rarità | Costo | Priorità; bersaglio | Vulnerabilità propria | Ricerca esatta |
 |---|---|---|---|---|---|
-| Preparo il lavoro, GIG-AR3 (`base.gigi.ColpoDiChiaveInglese`) | 2; **NC** (da C) | Gratuita | 1; sé | ×1,5, durata F | **`base.gigi.ChiaveDaTredici`** (nuova destinazione) |
+| Preparo il lavoro, GIG-AR3 (`base.gigi.ColpoDiChiaveInglese`) | 2; **NC** (da C) | Gratuita | 1; sé | ×1,5, gettone D69 | **`base.gigi.ChiaveDaTredici`** (nuova destinazione) |
 | Chiave da tredici, GIG-AR2 (`base.gigi.ChiaveDaTredici`) | 2; **NC** (da C) | **10 V** (da 5) | 1; un avversario | — | Nessuna |
-| Una stretta di prova, nuovo GIG-AR6 (`base.gigi.UnaStrettaDiProva`, ID proposto) | 1; NC | Gratuita | 1; un avversario; guadagno/esposizione su sé | ×1,5, durata F | `base.gigi.LavoroFattoBene` |
+| Una stretta di prova, nuovo GIG-AR6 (`base.gigi.UnaStrettaDiProva`, ID proposto) | 1; NC | Gratuita | 1; un avversario; guadagno/esposizione su sé | ×1,5, gettone D69 | `base.gigi.LavoroFattoBene` |
 | Lavoro fatto bene, GIG-AR5 (`base.gigi.LavoroFattoBene`) | 1; R | **10 V** (da 5) | 1; un avversario | — | Nessuna |
 
 **Preparo il lavoro — testo:**
 
-> Guadagni 15 V. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Chiave da tredici e mostrala a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non la trovi, pesca normalmente.
+> Guadagni 15 V. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Chiave da tredici. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Chiave da tredici — testo:**
 
@@ -196,7 +201,7 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 **Una stretta di prova — testo:**
 
-> Guadagni 10 V e infliggi 4 danni da taglio al bersaglio. Per questo turno e il prossimo moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Lavoro fatto bene e mostralo a tutti: la copia trovata resta scoperta nella tua mano finché la giochi o la scarti. Se resta in mano oltre il prossimo turno, la vulnerabilità continua finché quella copia esce dalla mano. Se non lo trovi, pesca normalmente.
+> Guadagni 10 V e infliggi 4 danni da taglio al bersaglio. Al posto della pesca che segue questa mossa cerca nel tuo mazzo Lavoro fatto bene. Se lo trovi, mostralo a tutti e metti su di te un gettone legato a quel nome: moltiplica per 1,5 i danni da colpo, taglio e veleno che ricevi. Il gettone non ha scadenza; il colpo mostrato ne resta un promemoria. Quando giochi una carta con quel nome, anche un’altra copia e anche se la mossa è parata o annullata, rimuovi alla fine di quel gruppo di velocità un solo gettone per quel nome, il più vecchio. Scartare non lo rimuove. Se non lo trovi, pesca normalmente e ricevi invece la stessa vulnerabilità solo per questo turno e il prossimo, senza legarla a un nome.
 
 **Lavoro fatto bene — testo:**
 
@@ -219,7 +224,7 @@ Le approvazioni riguardano lo schema e il comportamento generale. Non si deduce 
 
 Rispetto alla bozza si aggiunge soltanto lo stato GOOD INPUT POISON ×0,5 per il turno. Restano HIT ×0,5, gratuità, priorità 2 e guadagno di 5 L anche se nessuno attacca. Il CUT resta pieno; non si aggiunge una cura. La difesa vale anche sul POISON periodico da T nel fine turno corrente, perché quello attraversa gli stati INPUT: restringerla ai soli danni delle carte richiederebbe un filtro diverso, che non propongo.
 
-**Perché questa carta:** Piera è sotto quota contro Celestina e ha già due copie della difesa, quindi non serve aggiungere uno slot o distribuire la stessa generica a tutti. Una protezione gratuita resta giocabile anche quando A è a zero. Conserva il premio previsto da D52/D67 e la possibilità di difendersi nel turno dopo il caricamento, mantenendo il colpo cercato e la relativa vulnerabilità. Il +5 L può finanziare un seguito più forte, ma la L continua a decadere e non cancella il legame F.
+**Perché questa carta:** Piera è sotto quota contro Celestina e ha già due copie della difesa, quindi non serve aggiungere uno slot o distribuire la stessa generica a tutti. Una protezione gratuita resta giocabile anche quando A è a zero. Conserva il premio previsto da D52/D67 e la possibilità di difendersi nel turno dopo il caricamento, mantenendo il colpo cercato e la relativa vulnerabilità. Il +5 L può finanziare un seguito più forte, ma la L continua a decadere e non rimuove il gettone D69: serve giocare il nome corrispondente.
 
 **Esempi nominali:** Tossicone proposto da 18 POISON diventa 9 senza altri stati. Se una vulnerabilità ×1,5 è già presente prima del Bancone, il percorso 18→27→13 lascia 13 anziché 27, per il troncamento R05. Il periodico da T=20 scende da 10 a 5 prima di altre modifiche. La corazza dell'alcol non riduce POISON: non viene sommata impropriamente a questi esempi. Rutto, immunità alla risorsa T e azzeramenti di T non vengono alterati dalla difesa.
 
@@ -271,7 +276,7 @@ Il requisito D63 è **finanziare il costo**, non assicurare che il raro superi s
 
 ## Lavoro tecnico previsto per 2b, dopo l'approvazione
 
-**Il supporto 2a resta quello delle decisioni**, senza nuove richieste sul formato di rete in questo documento: copia scoperta, legame e durata minima, gestione dell'uscita e fattori indipendenti. I nomi degli ID nuovi sono proposti per rendere univoche le ricerche, non una prescrizione di campi JSON prima di leggere il contratto consegnato dalla 2a. Se quella consegna cambia un vincolo rilevante, lo si espone prima dell'attuazione delle carte.
+**Il supporto richiesto alla revisione 2a è quello di D69:** gettone sul giocatore legato al nome, senza timer; giocata anche di un'omonima e anche annullata/parata che soddisfa il gettone più vecchio a fine gruppo; scarto che non libera; ricerca fallita con gettone anonimo N/N+1; carta mostrata come promemoria della vista. La consegna iniziale 2a era legata alla copia e non va riutilizzata come contratto definitivo. Prima della 2b verificare la consegna della revisione D69, senza richiedere un selettore della copia fisica o una durata minima per i gettoni legati. Nomi degli ID nelle schede e ricerche esatte restano proposti; non si prescrivono qui campi JSON in concorrenza con l'altro esecutore.
 
 **Dati già esprimibili:** i cinque nuovi tutori usano guadagni, esposizione collegata e ricerca esatta della 2a; la carta offensiva di Beppe aggiunge danno al bersaglio. NC e rari di Spazienzio/Mara usano danni fissi o `base + risorsa/divisore`; Preparo cambia esplicitamente la sua destinazione da Lavoro a Chiave. Chiave cambia costo/danno e rarità. Estasi e Lavoro riusano le classi parametriche con base/per-oggetto aggiornati. Bancone richiede uno stato POISON del turno in aggiunta a quello HIT, con il guadagno L esistente. Nessuno di questi introduce una nuova risorsa o parola chiave (D8).
 
@@ -285,7 +290,8 @@ Questi sono effetti di carta composti da meccaniche esistenti, non nuove regole 
 **Bozza e verifiche future:** dopo approvazione, aggiornare effetti, priorità, costi, rarità, copie, descrizioni, ruoli e metadati dei guadagni/danni nella stessa modifica, insieme alla griglia sperimentale. Nessuna modifica agli attesi per accettare regressioni. Nei test mirati coprire:
 
 - le dieci ricerche esatte e il requisito da zero attraverso il fine turno, non soltanto subito dopo il guadagno;
-- minimo N/N+1, due copie omonime, ricerca fallita, scarto per bound risolta/annullata, colpo parato/annullato e due legami indipendenti, riusando le prove della 2a senza duplicarne tutta l'implementazione;
+- ricerca riuscita senza minimo o timer; giocata della carta trovata o di un’altra omonima, anche parata/annullata; rimozione soltanto a fine gruppo e danni ancora amplificati nello stesso gruppo; due gettoni dello stesso nome e rimozione di uno solo, il più vecchio;
+- scarto per bound risolta/annullata che non soddisfa mai il gettone, anche se si perde l’unica copia; ricerca fallita con gettone anonimo per N/N+1 che una giocata omonima non libera; promemoria conservato fino al suo gettone, rimosso anche quando si gioca un’altra copia; pulizia a fine partita/eliminazione/forfait. Riutilizzare le prove della revisione 2a D69 senza duplicarne tutta l’implementazione;
 - rare di Spazienzio/Mara prima/dopo il costo e soglie del picco; anticipo del raro di Spazienzio e A residua di Mara;
 - travaso: T memorizzata dopo il costo, autore azzerato, immunità del bersaglio rimossa, POISON diretto distinto dal periodico e timer di immunità **all'autore**;
 - Estasi/Rutto: esempi da 0 e dai valori iniziali, L azzerata, A sottratta senza riordinare gruppi già fissati, nessuna variazione alla last resort;
@@ -293,32 +299,26 @@ Questi sono effetti di carta composti da meccaniche esistenti, non nuove regole 
 - Bancone: POISON diretto e periodico, esposizione, arrotondamenti, priorità 2 e guadagno di 5 L anche senza attacco; costo gratuito anche ad A=0;
 - liste da 20, copie massime due, rarità delle due coppie, set da 120 e isolamento del profilo vivo. Mutazioni solo sui nuovi rami di logica che verranno davvero introdotti.
 
-**Bot e misure:** mantenere i quattro stili e confrontare le tre politiche decise, «gioca sempre il turno dopo», «tieni se l'avversario si è parato», «a caso». «Si è parato» usa ultimo turno risolto/stati pubblici, non la scelta segreta attuale. Ogni politica legge le copie scoperte persistenti e distingue colpo legale da impagabile; sa sacrificare una copia per chiudere il suo legame. Valutare anche Rare vs NC, risorse spese altrove, campo oggetti e difesa dal POISON. Nessuna conoscenza del mazzo avversario e nessun pianificatore a più turni.
+**Bot e misure:** mantenere i quattro stili e confrontare le tre politiche decise, «gioca sempre il turno dopo», «tieni se l'avversario si è parato», «a caso». «Si è parato» usa ultimo turno risolto/stati pubblici, non la scelta segreta attuale. Ogni politica legge gettoni per nome e promemoria pubblici, distinguendoli dal contenuto certo della mano avversaria: una carta ricordata potrebbe essere stata scartata. Giocare una qualsiasi omonima soddisfa il più vecchio gettone per quel nome; sacrificarla per una bound non libera il gettone, e il bot deve valutare il rischio di scartare l’unica copia. Distinguere colpo legale da impagabile. Valutare anche Rare vs NC, risorse spese altrove, campo oggetti e difesa dal POISON. Nessuna conoscenza del mazzo avversario e nessun pianificatore a più turni.
 
-Il riferimento dei confronti è la variante (c). Separare frequenza/composizione, potenza dei colpi e difesa POISON con ablazioni prefissate entro il budget di **tre giri/due ore cumulative di calcolo** di 2b, non un lotto aggiuntivo implicito per ogni idea. I caricamenti visti, risolti, le ricerche riuscite/mancate, le copie NC/rare giocate subito/tenute/scartate, le esposizioni subite e il danno parato devono avere denominatori separati. Per il raro singolo misurare esplicitamente i tutori che cercano a vuoto. Anche il turno offensivo di Una stretta di prova va distinto dal danno successivo di Lavoro.
+Il riferimento dei confronti è la variante (c). Separare frequenza/composizione, potenza dei colpi e difesa POISON con ablazioni prefissate entro il budget di **tre giri/due ore cumulative di calcolo** di 2b, non un lotto aggiuntivo implicito per ogni idea. I caricamenti visti, risolti, le ricerche riuscite/mancate, i colpi NC/rare giocati subito/dopo o scartati, i gettoni per nome soddisfatti/restanti, le esposizioni subite e il danno parato devono avere denominatori separati. Contare anche durata dei gettoni, casi persistenti dopo scarto dell’unica copia, rimozione a fine gruppo e temporanei da ricerca fallita. Per il raro singolo misurare esplicitamente i tutori che cercano a vuoto. Anche il turno offensivo di Una stretta di prova va distinto dal danno successivo di Lavoro.
 
 Restano D16/D51: **45–55% fra i base, 40–60% negli altri incontri, circa 6–12 turni, patte ≤10% in ogni incontro/specchio**, pochi mazzi esauriti, zero turni senza mosse legali, otto invarianti a zero e tetto bound invariato. Quota sulle decisive, patte su tutte le partite; una media globale buona non sana una cella fuori criterio. La variante (c) non li raggiunge: specchi Celestina/Piera, quote contro Piera e sei durate oltre 12. Non si attribuisce al nuovo progetto un esito già misurato. Se criteri o budget non tornano, STOP con dati e proposta. Dopo i bot resta la breve prova umana prima di SB-17.
 
 ## Verifiche e limiti di questa consegna
 
-Checkout inizialmente pulito; fetch riuscito, `main` e `origin/main` allineati a `ee7f4d3`; nessun listener su 8080/4320 al controllo preliminare. Non sono stati avviati server, Maven o verifiche client in concorrenza con la 2a. Le letture tecniche sono state in sola lettura; unico percorso modificato da questo lavoro: `docs/design/set-base/sb-16g-proposta.md`.
+**Allineamento 1.1 a D69:** base `9e4efce`, fetch riuscito, nessun commit remoto da integrare; checkout già con modifiche dell'altro esecutore per la revisione 2a. Questo lavoro modifica e committa soltanto `docs/design/set-base/sb-16g-proposta.md`, senza includere modifiche o file già in staging dell'altro esecutore. Non sono stati avviati server, Maven o verifiche client in concorrenza con la 2a.
 
-Controlli aritmetici eseguiti in memoria sulla bozza: cinque liste da 20, massimo due copie, titoli distinti 13/13/13/12/13; conto delle rarità della griglia 54/41/20 e redistribuzione proposta 45/55/20; esempi di risorse residue attraverso R06. Nessuna bozza alternativa o script di test è stato scritto. Le quantità di danno riportate sono calcoli nominali, non una simulazione.
+Confronto documentale con la versione 1.0: invariati tabella iniziale delle coppie, costi/priorità/bersagli/ricerche, risorse, danni, liste e tabella di finanziamento. Cambiano i dieci testi dei tutori e il contratto della penalità, i rischi, le indicazioni per bot e verifiche future. Restano cinque liste da 20, massimo due copie, titoli distinti 13/13/13/12/13 e totale progettuale 120 (45 C/55 NC/20 R). Sono calcoli nominali, non una simulazione.
 
-**Esiti delle verifiche documentali:**
+**Controlli documentali dell'allineamento:** il documento ha 0 link rotti; `git diff --check` è verde. Il controllo globale `python scripts/check-links.py` trova per ora **293 documenti e 1 link rotto** nel rapporto della 2a: `docs/reports/set-base/sb-16g-2a-report.md:85` punta al test `VulnerabilitaD59Test.java`, rinominato dall'altro esecutore in `VulnerabilitaD69Test.java` durante la revisione. Questo documento non introduce quel riferimento e non corregge il rapporto altrui. La precedente segnalazione della versione 1.0 sul rapporto 2a mancante non è più attuale: il rapporto è ora presente. I controlli vengono ripetuti sul testo finale prima del commit.
 
-- `python scripts/check-links.py docs/design/set-base/sb-16g-proposta.md`: **1 documento, 0 link rotti**.
-- `git diff --check`: **verde**, sia globale sia sul solo documento.
-- `python scripts/check-links.py`: **292 documenti, 1 link rotto** nel lavoro parallelo della 2a: `docs/api.md:172` punta a `reports/set-base/sb-16g-2a-report.md`, non ancora presente al controllo. Il riferimento è un’aggiunta nel diff non committato di `docs/api.md`, assente nella versione HEAD; questa proposta non lo introduce e non punta a quel rapporto. Il file dell’altro esecutore non è stato corretto o incluso. È un rosso transitorio fuori perimetro, non una voce preesistente del registro dei rossi noti.
-
-Le cinque liste scritte nel documento sono state ricontate direttamente dalle celle: 10/7/3, 10/5/5, 10/5/5, 10/5/5 e 9/4/7, tutte con totale 20 e massimo due copie. La bozza conserva l’impronta di riferimento al controllo finale. I controlli dei link e degli spazi sono ripetuti prima del commit sul testo conclusivo.
-
-Non eseguiti in questa fase documentale: suite server/client, contesto Spring completo, avvio reale, Playwright, giri di bilanciamento, FFA e prove umane. Nessun atteso o soglia modificato; il verde dei link della proposta non prova l’avvio o il bilanciamento del gioco. Nessun push.
+Non eseguiti in questo allineamento documentale: suite server/client, contesto Spring completo, avvio reale, Playwright, giri di bilanciamento, FFA e prove umane. Non si attribuiscono alla revisione D69 gli esiti applicativi della consegna 2a precedente. Nessun atteso o soglia modificato, nessuna bozza alternativa scritta, nessun push.
 
 **STOP: nessuna carta nella bozza prima dell'approvazione.** La 2a parallela non approva implicitamente le carte o le liste qui proposte.
 
 ## Domande numerate al proprietario
 
-1. **Approvi le cinque coppie NC/rare concrete, con questi testi, costi, priorità e destinazioni di ricerca?** Tutti i caricamenti sono NC e partono da ×1,5; le risorse bastano da zero dopo il fine turno. I NC sono affidabili; il raro può rendere meno al minimo e avere un picco maggiore con preparazione/tavolo. In particolare Cinghiata diventa rara a danno variabile, il travaso di Celestina aggiunge 12 POISON e Rutto scarica tutta la L per danno e disturbo. I numeri restano indicativi sotto D38.
+1. **Approvi le cinque coppie NC/rare concrete, con questi testi, costi, priorità e destinazioni di ricerca?** Tutti i caricamenti sono NC e partono da ×1,5 con il gettone D69, senza timer se la ricerca riesce e temporaneo N/N+1 se fallisce; lo scarto non libera la penalità. Le risorse bastano da zero dopo il fine turno. I NC sono affidabili; il raro può rendere meno al minimo e avere un picco maggiore con preparazione/tavolo. In particolare Cinghiata diventa rara a danno variabile, il travaso di Celestina aggiunge 12 POISON e Rutto scarica tutta la L per danno e disturbo. I numeri restano indicativi sotto D38.
 2. **Approvi le sostituzioni e le cinque liste da 20, senza eliminare difese e contromosse personali?** Escono una copia di SPEDIAMOTI DUNQUE IN O-AHIO, una Cinghiata e uno Spintone da Mara, una Rincorsa da Celestina, una Fasciatura da Piera e due Mattoni da Beppe. Entrano solo cinque titoli nel pool, uno per starter; il set resta da 120 con **45 C / 55 NC / 20 R**. Il maggiore numero di NC e i 12–13 titoli distinti per starter sono dichiarati, senza compensazioni nascoste su altri slot.
 3. **Approvi «Il bancone regge, io pure» anche contro POISON ×0,5**, diretto e periodico del turno, conservando gratuità, priorità 2 e +5 L? È la candidata D67 per dare a Piera una risposta al veleno; il rischio di allungare gli incontri va misurato separatamente. Nessuna immunità aggiunta né riduzione del CUT.
