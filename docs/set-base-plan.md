@@ -1271,6 +1271,10 @@ Con la proposta; nessuna blocca i primi blocchi.
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
 | Q7 | Formato definitivo | 20 carte e 2 copie, salvo dati contrari | SB-23 |
 | Q8 | Report del server in «Ultimo turno» | Resta com'è: i fatti in italiano vengono prima, il testo inglese è secondario (D7 del piano C3). Da riconsiderare se la prova umana lo chiede | SB-25 |
+| Q9 | Parola di regolamento «Annuncia» per i caricamenti | Dal [consulto di design](reports/set-base/consulto-design-fable-2026-11-13.md) (A5-a, C3-3): una voce di regolamento al posto del testo lungo ripetuto su ogni caricamento; deroga esplicita a D8 per una sola parola. Testi più corti, leggibili sul telefono | Prima del passo 2 di SB-16g, quando si riscrivono i testi |
+| Q10 | Volto del caricamento e «×1,5» visibile nel client | Dal [consulto](reports/set-base/consulto-design-fable-2026-11-13.md) (B2-a, C4-1): timbro proprio sul volto del caricamento, gettone unico, «×1,5» sull'impatto dei colpi amplificati e indicazione quando il gettone non ha agito e perché | Dopo la prova umana del passo 1 di SB-16g |
+| Q11 | Sergio e Duccio senza la coppia standard di D52(3) | Dal [consulto](reports/set-base/consulto-design-fable-2026-11-13.md) (A9, C4-3): non dare a tutti i sette personaggi lo stesso schema caricamento-colpo; Sergio può essere quello che punisce gli annunci. Richiede di rivedere D52(3) | SB-17 e SB-18 |
+| Q12 | Prova con una persona fuori dal progetto | Dal [consulto](reports/set-base/consulto-design-fable-2026-11-13.md) (C4-2): un'ora di gioco osservata senza aiutare, poi tre domande; primo giudizio non viziato dal conoscere le regole | Prima di SB-17 |
 
 ## Cosa non è in questo piano
 
