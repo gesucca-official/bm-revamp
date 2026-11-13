@@ -3,6 +3,7 @@ package com.gsc.bm.model.cards.bruiser;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.cards.Tunable;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class YouStop extends AbstractCard {
+public class YouStop extends AbstractCard implements PrintedEffects.Source {
 
     private boolean countered = false;
     @Tunable
@@ -45,5 +46,11 @@ public class YouStop extends AbstractCard {
                     target.gainResource(Resource.ALERTNESS, alertnessToTarget));
         else
             return List.of("You were too slow and didn't countered anything.");
+    }
+
+    /** D76: voids the target's later move; the target then gains ALERTNESS. */
+    @Override
+    public PrintedEffects printedEffects() {
+        return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_TARGET).onTarget(true).build()));
     }
 }

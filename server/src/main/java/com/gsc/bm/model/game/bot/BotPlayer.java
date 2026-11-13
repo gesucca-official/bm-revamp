@@ -23,6 +23,7 @@ public class BotPlayer extends ComPlayer {
 
     /** The policy's class name, for the match archive (SB-8). Not a bean property: views never carry it. */
     public String policyName() {
+        if (policy instanceof LethalAwarePolicy) return ((LethalAwarePolicy) policy).archiveName();
         return policy instanceof SoughtHitPolicy ? ((SoughtHitPolicy) policy).archiveName() : policy.getClass().getSimpleName();
     }
 

@@ -4,6 +4,7 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractItemCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Timer;
@@ -11,7 +12,7 @@ import com.gsc.bm.model.cards.Tunable;
 
 import java.util.List;
 
-public class MarvelousCocktail extends AbstractItemCard {
+public class MarvelousCocktail extends AbstractItemCard implements PrintedEffects.Source {
 
     @Tunable
     private int alcohol = 20;
@@ -24,6 +25,16 @@ public class MarvelousCocktail extends AbstractItemCard {
 
     @Override
     public void applyOtherUnfathomableLogic(Game g, Move m) {
+    }
+
+    /** D76: immunity to TOXICITY and ALCOHOL, then the two gains; the timer of the end is not printed as a number. */
+    @Override
+    public PrintedEffects printedEffects() {
+        return new PrintedEffects(List.of(
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.TOXICITY).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.ALCOHOL).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).resource(Resource.ALCOHOL).base(alcohol).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).resource(Resource.TOXICITY).base(toxicity).build()));
     }
 
     @Override

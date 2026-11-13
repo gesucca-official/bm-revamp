@@ -13,6 +13,7 @@ import com.gsc.bm.model.cards.AbstractCharacterBoundCard;
 import com.gsc.bm.model.cards.AbstractItemCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.LoadableCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.IllegalMoveException;
 import com.gsc.bm.model.game.Move;
@@ -407,6 +408,43 @@ final class DataCards {
         @Override public String missing() { return required(text, "text"); }
     }
 
+    /** D76: the printed steps of a definition as plain numbers, self steps first, as {@link AbstractCard#resolve} applies them. */
+    static PrintedEffects printed(Definition definition) {
+        List<PrintedEffects.Step> steps = new ArrayList<>();
+        for (Step step : definition.self) printed(step, false, steps);
+        for (Step step : definition.target) printed(step, true, steps);
+        return new PrintedEffects(List.copyOf(steps));
+    }
+
+    private static void printed(Step step, boolean onTarget, List<PrintedEffects.Step> steps) {
+        PrintedEffects.Step.StepBuilder b = PrintedEffects.Step.builder().onTarget(onTarget);
+        if (step instanceof DamageStep) {
+            DamageStep d = (DamageStep) step;
+            amount(b.kind(PrintedEffects.Kind.DAMAGE).damageType(d.type).applying(d.applying == null ? null : Set.copyOf(d.applying)), d.amount);
+        } else if (step instanceof GainStep) {
+            amount(b.kind(PrintedEffects.Kind.GAIN).resource(((GainStep) step).resource), ((GainStep) step).amount);
+        } else if (step instanceof LoseStep) {
+            amount(b.kind(PrintedEffects.Kind.LOSE).resource(((LoseStep) step).resource), ((LoseStep) step).amount);
+        } else if (step instanceof EmptyStep) {
+            b.kind(PrintedEffects.Kind.EMPTY).resource(((EmptyStep) step).resource);
+        } else if (step instanceof StatusStep) {
+            StatusStep s = (StatusStep) step;
+            b.kind(PrintedEffects.Kind.STATUS).damageType(s.property).flow(s.flow).statusType(s.statusType).factor(s.factor)
+                    .convertTo(s.convertTo);
+        } else if (step instanceof SearchStep) {
+            SearchStep s = (SearchStep) step;
+            b.kind(PrintedEffects.Kind.SEARCH).factor(s.vulnerability == null ? null : s.vulnerability.factor)
+                    .foundGains(Map.copyOf(s.foundGains)).missedGains(Map.copyOf(s.missedGains));
+        } else if (step instanceof ConsumeStep) {
+            b.kind(PrintedEffects.Kind.CONSUME);
+        } else return; // say: no effect
+        steps.add(b.build());
+    }
+
+    private static void amount(PrintedEffects.Step.StepBuilder b, Amount amount) {
+        b.base(amount.base).of(amount.of).divide(amount.divide);
+    }
+
     /** Come le carte Java: niente effetti significa null, non una lista vuota. */
     private static List<String> run(List<Step> steps, Card consumed, Character author, Character subject) {
         if (steps.isEmpty()) return null;
@@ -415,7 +453,7 @@ final class DataCards {
         return report;
     }
 
-    private static final class ActionCard extends AbstractCard {
+    private static final class ActionCard extends AbstractCard implements PrintedEffects.Source {
         private final Definition definition;
         /** L'oggetto preso dal campo in questa risoluzione (come Grab.targetItem), o null se non c'era più. Solo con consume. */
         private Card consumed;
@@ -430,6 +468,8 @@ final class DataCards {
         }
 
         @Override public String getBindingName() { return definition.binding; }
+
+        @Override public PrintedEffects printedEffects() { return printed(definition); }
 
         @com.fasterxml.jackson.annotation.JsonIgnore @Override public boolean isLastBlow() { return definition.lastBlow; }
 
@@ -460,18 +500,20 @@ final class DataCards {
     }
 
     /** Priorità, bersaglio e costo arrivano da AbstractItemCard. Grab fa il cast a questa classe base. */
-    private static final class ItemCard extends AbstractItemCard {
+    private static final class ItemCard extends AbstractItemCard implements PrintedEffects.Source {
         private final Definition definition;
 
         ItemCard(Definition definition) { this.definition = definition; }
 
         @Override public String getBindingName() { return definition.binding; }
+
+        @Override public PrintedEffects printedEffects() { return printed(definition); }
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
         @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self); }
     }
 
     /** Lo scarto obbligatorio arriva da AbstractCharacterBoundCard. */
-    private static final class BoundCard extends AbstractCharacterBoundCard {
+    private static final class BoundCard extends AbstractCharacterBoundCard implements PrintedEffects.Source {
         private final Definition definition;
 
         BoundCard(Definition definition) {
@@ -484,6 +526,8 @@ final class DataCards {
         }
 
         @Override public String getBindingName() { return definition.binding; }
+
+        @Override public PrintedEffects printedEffects() { return printed(definition); }
         @com.fasterxml.jackson.annotation.JsonIgnore @Override public boolean isLastBlow() { return definition.lastBlow; }
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
         @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self); }

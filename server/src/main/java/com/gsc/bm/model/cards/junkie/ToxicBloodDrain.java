@@ -3,6 +3,7 @@ package com.gsc.bm.model.cards.junkie;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Timer;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ToxicBloodDrain extends AbstractCard {
+public class ToxicBloodDrain extends AbstractCard implements PrintedEffects.Source {
 
     int toxicity;
     @Tunable
@@ -43,5 +44,15 @@ public class ToxicBloodDrain extends AbstractCard {
         return List.of(
                 target.gainResource(Resource.TOXICITY, toxicity)
         );
+    }
+
+    /** D76: the author's TOXICITY, read after costs, moves to the target (its immunity lifted for a while). */
+    @Override
+    public PrintedEffects printedEffects() {
+        return new PrintedEffects(List.of(
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.NOT_IMMUNE).onTarget(true).resource(Resource.TOXICITY).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.LOSE).resource(Resource.TOXICITY).of(Resource.TOXICITY).atStart(true).build(),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).onTarget(true).resource(Resource.TOXICITY)
+                        .of(Resource.TOXICITY).atStart(true).build()));
     }
 }

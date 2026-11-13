@@ -1,0 +1,47 @@
+{
+  "file": "server/src/main/java/com/gsc/bm/model/game/bot/TurnForecast.java",
+  "restored": true,
+  "mutations": {
+    "armour off": [
+      "LethalAwarePolicyTest.theAlcoholArmourIsCounted",
+      "LethalAwarePolicyTest.theTargetsArmourIsCounted",
+      "TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn"
+    ],
+    "no void when down": [
+      "LethalAwarePolicyTest.hitsFirstWhenItsGroupComesFirstAndKills",
+      "TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn"
+    ],
+    "search never finds": [
+      "LethalAwarePolicyTest.aChargeThatWouldExposeToTheShownHitIsLeftOut",
+      "TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn"
+    ],
+    "no restriction": [
+      "LethalAwarePolicyTest.aChargeThatWouldExposeToTheShownHitIsLeftOut",
+      "LethalAwarePolicyTest.aHealInTheSameGroupIsUnsureButPreferred",
+      "LethalAwarePolicyTest.aLethalHitThatComesTooLateIsNotPlayed",
+      "LethalAwarePolicyTest.anUnknownVariableHitIsReadAsARange",
+      "LethalAwarePolicyTest.countersTheShownHit",
+      "LethalAwarePolicyTest.hitsFirstWhenItsGroupComesFirstAndKills",
+      "LethalAwarePolicyTest.parriesAShownLethalHit",
+      "LethalAwarePolicyTest.playsTheHitThatTheOpponentsTokenMakesLethal",
+      "LethalAwarePolicyTest.takesTheDrawWhenItFallsAnyway",
+      "LethalAwarePolicyTest.theAlcoholArmourIsCounted",
+      "LethalAwarePolicyTest.theOwnTokenMakesTheShownHitLethal",
+      "LethalAwarePolicyTest.theTargetsArmourIsCounted",
+      "TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn"
+    ],
+    "statuses ignored": [
+      "LethalAwarePolicyTest.aChargeThatWouldExposeToTheShownHitIsLeftOut",
+      "LethalAwarePolicyTest.aLethalHitThatComesTooLateIsNotPlayed",
+      "LethalAwarePolicyTest.anUnknownVariableHitIsReadAsARange",
+      "LethalAwarePolicyTest.parriesAShownLethalHit",
+      "LethalAwarePolicyTest.playsTheHitThatTheOpponentsTokenMakesLethal",
+      "LethalAwarePolicyTest.theAlcoholArmourIsCounted",
+      "LethalAwarePolicyTest.theOwnTokenMakesTheShownHitLethal",
+      "TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn"
+    ],
+    "no periodic poison": [
+      "TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn"
+    ]
+  }
+}

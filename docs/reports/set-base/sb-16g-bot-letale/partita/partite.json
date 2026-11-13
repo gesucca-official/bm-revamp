@@ -1,0 +1,1114 @@
+{
+ "command": "java -jar target/bm-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=local,bozza --app.bozza.pool=starter-spazienzio --app.bozza.com=starter-mara --app.bozza.bot=prudente --app.dev.seed-accounts=true --server.port=8081 (in C:/Users/gesucca/AppData/Local/Temp/bm-d76-pkg/server)",
+ "database": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-d76-qVOaCc\\bozza.sqlite",
+ "games": [
+  {
+   "gameId": "92a1d565e8040fc846eff882e1f4ca22562e2294c2e30505a8a879e18284db51",
+   "turns": [
+    {
+     "turn": 0,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 25,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 70,
+       "ALERTNESS": 40,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "GARGANTUESCO IMPATTO SUL TU",
+      "targetId": "ComPlayer_5509",
+      "choices": null
+     }
+    },
+    {
+     "turn": 1,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 49,
+       "ALERTNESS": 35,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "PAZIENZA: FINITA",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 2,
+     "human": {
+      "resources": {
+       "HEALTH": 63,
+       "ALERTNESS": 35,
+       "VIOLENCE": 15,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 49,
+       "ALERTNESS": 30,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "PAZIENZA: FINITA"
+      }
+     }
+    },
+    {
+     "turn": 3,
+     "human": {
+      "resources": {
+       "HEALTH": 45,
+       "ALERTNESS": 35,
+       "VIOLENCE": 20,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 49,
+       "ALERTNESS": 25,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "ORMALE GUARIAMOTI",
+      "targetId": "ComPlayer_5509",
+      "choices": null
+     }
+    },
+    {
+     "turn": 4,
+     "human": {
+      "resources": {
+       "HEALTH": 35,
+       "ALERTNESS": 35,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 19,
+       "ALERTNESS": 25,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "Denti stretti",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 5,
+     "human": {
+      "resources": {
+       "HEALTH": 17,
+       "ALERTNESS": 30,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 19,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "Tartaruga sul marciapiede",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 6,
+     "human": {
+      "resources": {
+       "HEALTH": 20,
+       "ALERTNESS": 25,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 30,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "targetId": "ComPlayer_5509",
+      "choices": null
+     }
+    },
+    {
+     "turn": 7,
+     "human": {
+      "resources": {
+       "HEALTH": 16,
+       "ALERTNESS": 25,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 23,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "FAI BASTA"
+      }
+     }
+    },
+    {
+     "turn": 8,
+     "human": {
+      "resources": {
+       "HEALTH": 6,
+       "ALERTNESS": 25,
+       "VIOLENCE": 5,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 22,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "FAI BASTA",
+      "targetId": "ComPlayer_5509",
+      "choices": null
+     }
+    },
+    {
+     "turn": 9,
+     "human": {
+      "resources": {
+       "HEALTH": 6,
+       "ALERTNESS": 25,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 21,
+       "ALERTNESS": 10,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "GABBIANO DUNQUE VOLIAMOTI"
+      }
+     }
+    }
+   ],
+   "final": {
+    "turn": 10,
+    "human": {
+     "resources": {
+      "HEALTH": 0,
+      "ALERTNESS": 25,
+      "VIOLENCE": 5,
+      "TOXICITY": 0,
+      "ALCOHOL": 0
+     },
+     "shown": [],
+     "token": []
+    },
+    "computer": {
+     "resources": {
+      "HEALTH": 20,
+      "ALERTNESS": 5,
+      "VIOLENCE": 0,
+      "TOXICITY": 3,
+      "ALCOHOL": 0
+     },
+     "statuses": [],
+     "shown": []
+    }
+   }
+  },
+  {
+   "gameId": "f8407df9c02cef2d920f948890a4972f53f05341e14117d74ec270c79dd54922",
+   "turns": [
+    {
+     "turn": 0,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 25,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 70,
+       "ALERTNESS": 40,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    },
+    {
+     "turn": 1,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 15,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 66,
+       "ALERTNESS": 35,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "FAI BASTA",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    },
+    {
+     "turn": 2,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 66,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "GABBIANO DUNQUE VOLIAMOTI",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    },
+    {
+     "turn": 3,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 59,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "Tartaruga sul marciapiede",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 4,
+     "human": {
+      "resources": {
+       "HEALTH": 78,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 70,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "Denti stretti",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 5,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 10,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 69,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    },
+    {
+     "turn": 6,
+     "human": {
+      "resources": {
+       "HEALTH": 68,
+       "ALERTNESS": 10,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 62,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "NON GIOCARE COL COLTELLO NO",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 7,
+     "human": {
+      "resources": {
+       "HEALTH": 61,
+       "ALERTNESS": 10,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 61,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "GABBIANO DUNQUE VOLIAMOTI",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    },
+    {
+     "turn": 8,
+     "human": {
+      "resources": {
+       "HEALTH": 61,
+       "ALERTNESS": 10,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 53,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "PAZIENZA: FINITA"
+      }
+     }
+    },
+    {
+     "turn": 9,
+     "human": {
+      "resources": {
+       "HEALTH": 55,
+       "ALERTNESS": 10,
+       "VIOLENCE": 5,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 52,
+       "ALERTNESS": 10,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "Mattone del cantiere"
+      }
+     }
+    },
+    {
+     "turn": 10,
+     "human": {
+      "resources": {
+       "HEALTH": 43,
+       "ALERTNESS": 10,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 51,
+       "ALERTNESS": 5,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "Tartaruga sul marciapiede",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 11,
+     "human": {
+      "resources": {
+       "HEALTH": 45,
+       "ALERTNESS": 0,
+       "VIOLENCE": 10,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 50,
+       "ALERTNESS": 5,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "NON GIOCARE COL COLTELLO NO",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 12,
+     "human": {
+      "resources": {
+       "HEALTH": 33,
+       "ALERTNESS": 0,
+       "VIOLENCE": 20,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 49,
+       "ALERTNESS": 0,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "FAI BASTA",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    },
+    {
+     "turn": 13,
+     "human": {
+      "resources": {
+       "HEALTH": 33,
+       "ALERTNESS": 0,
+       "VIOLENCE": 15,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 48,
+       "ALERTNESS": 0,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "ORMALE GUARIAMOTI"
+      }
+     }
+    },
+    {
+     "turn": 14,
+     "human": {
+      "resources": {
+       "HEALTH": 32,
+       "ALERTNESS": 0,
+       "VIOLENCE": 20,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 47,
+       "ALERTNESS": 0,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "LIEVE FASTIDIO",
+      "targetId": "SELF",
+      "choices": {
+       "DISCARD_ONE": "PAZIENZA: FINITA"
+      }
+     }
+    },
+    {
+     "turn": 15,
+     "human": {
+      "resources": {
+       "HEALTH": 31,
+       "ALERTNESS": 0,
+       "VIOLENCE": 25,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 46,
+       "ALERTNESS": 0,
+       "VIOLENCE": 0,
+       "TOXICITY": 3,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "GARGANTUESCO IMPATTO SUL TU",
+      "targetId": "ComPlayer_6789",
+      "choices": null
+     }
+    }
+   ],
+   "final": {
+    "turn": 16,
+    "human": {
+     "resources": {
+      "HEALTH": 21,
+      "ALERTNESS": 0,
+      "VIOLENCE": 0,
+      "TOXICITY": 0,
+      "ALCOHOL": 0
+     },
+     "shown": [],
+     "token": []
+    },
+    "computer": {
+     "resources": {
+      "HEALTH": 0,
+      "ALERTNESS": 0,
+      "VIOLENCE": 0,
+      "TOXICITY": 3,
+      "ALCOHOL": 0
+     },
+     "statuses": [],
+     "shown": []
+    }
+   }
+  },
+  {
+   "gameId": "c5d97612eb761300bb4a727011cc2bd2c7fb5923314a9ae0212a9ef1a40b1a41",
+   "turns": [
+    {
+     "turn": 0,
+     "human": {
+      "resources": {
+       "HEALTH": 75,
+       "ALERTNESS": 20,
+       "VIOLENCE": 25,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [],
+      "token": []
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 70,
+       "ALERTNESS": 40,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "PAZIENZA: FINITA",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 1,
+     "human": {
+      "resources": {
+       "HEALTH": 50,
+       "ALERTNESS": 35,
+       "VIOLENCE": 40,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 70,
+       "ALERTNESS": 25,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "NON GIOCARE COL COLTELLO NO",
+      "targetId": "SELF",
+      "choices": null
+     }
+    },
+    {
+     "turn": 2,
+     "human": {
+      "resources": {
+       "HEALTH": 32,
+       "ALERTNESS": 35,
+       "VIOLENCE": 50,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 70,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "SPEDIAMOTI DUNQUE IN O-AHIO",
+      "targetId": "ComPlayer_3799",
+      "choices": null
+     }
+    },
+    {
+     "turn": 3,
+     "human": {
+      "resources": {
+       "HEALTH": 22,
+       "ALERTNESS": 35,
+       "VIOLENCE": 40,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 44,
+       "ALERTNESS": 20,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "Mattone del cantiere",
+      "targetId": "ComPlayer_3799",
+      "choices": null
+     }
+    },
+    {
+     "turn": 4,
+     "human": {
+      "resources": {
+       "HEALTH": 13,
+       "ALERTNESS": 35,
+       "VIOLENCE": 25,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "shown": [
+       "GARGANTUESCO IMPATTO SUL TU"
+      ],
+      "token": [
+       "HIT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "CUT received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)",
+       "POISON received x1.5 until end of turn when GARGANTUESCO IMPATTO SUL TU is played (D71)"
+      ]
+     },
+     "computer": {
+      "resources": {
+       "HEALTH": 20,
+       "ALERTNESS": 15,
+       "VIOLENCE": 0,
+       "TOXICITY": 0,
+       "ALCOHOL": 0
+      },
+      "statuses": [],
+      "shown": []
+     },
+     "humanMove": {
+      "playedCardName": "GARGANTUESCO IMPATTO SUL TU",
+      "targetId": "ComPlayer_3799",
+      "choices": null
+     }
+    }
+   ],
+   "final": {
+    "turn": 5,
+    "human": {
+     "resources": {
+      "HEALTH": 0,
+      "ALERTNESS": 35,
+      "VIOLENCE": 0,
+      "TOXICITY": 0,
+      "ALCOHOL": 0
+     },
+     "shown": [],
+     "token": []
+    },
+    "computer": {
+     "resources": {
+      "HEALTH": 20,
+      "ALERTNESS": 10,
+      "VIOLENCE": 0,
+      "TOXICITY": 0,
+      "ALCOHOL": 0
+     },
+     "statuses": [],
+     "shown": []
+    }
+   }
+  }
+ ],
+ "serverLog": "C:\\Users\\gesucca\\AppData\\Local\\Temp\\bm-d76-qVOaCc\\server.log",
+ "ok": true
+}

@@ -3,6 +3,7 @@ package com.gsc.bm.model.cards.junkie;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class AmphetamineReflexes extends AbstractCard {
+public class AmphetamineReflexes extends AbstractCard implements PrintedEffects.Source {
 
     private final List<String> countered = new ArrayList<>();
 
@@ -48,4 +49,10 @@ public class AmphetamineReflexes extends AbstractCard {
             return List.of("You didn't countered anything.");
     }
 
+
+    /** D76: voids every later opposing move that targets its author. */
+    @Override
+    public PrintedEffects printedEffects() {
+        return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_ALL).build()));
+    }
 }

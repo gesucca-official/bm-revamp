@@ -122,7 +122,10 @@ async function main() {
       assert.strictEqual(initial.versions.draft.bot, 'risorse');
       // D74: the draft bot keeps its base style and records the public announced-hit timing policy.
       assert.strictEqual(initial.versions.draft.soughtHitTiming, 'ALWAYS');
-      assert.strictEqual(initial.configuration.botPolicy, expect.bot ? 'SoughtHitPolicy(ALWAYS,ResourceAwarePolicy)' : 'random');
+      // D76: around it, the awareness of the lethal hit of the current turn.
+      assert.strictEqual(initial.versions.draft.lethalAware, true);
+      assert.strictEqual(initial.configuration.botPolicy,
+        expect.bot ? 'LethalAwarePolicy(SoughtHitPolicy(ALWAYS,ResourceAwarePolicy))' : 'random');
       for (const p of initial.state.players) assert(characters.includes(p.character), p.character);
       if (expect.character) assert.strictEqual(initial.state.players.find(p => p.playerId === user).character, expect.character);
       assert(['win', 'draw'].includes(final.outcome.result), JSON.stringify(final.outcome));

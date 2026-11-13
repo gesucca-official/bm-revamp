@@ -4,6 +4,7 @@ import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.cards.Tunable;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
@@ -23,7 +24,7 @@ import java.util.Set;
  * <p>
  * Vive nei sorgenti di test: la partita viva non la conosce (SB-28). Costo e priorità arrivano dalla bozza.
  */
-public class GoingBerserk extends AbstractCard {
+public class GoingBerserk extends AbstractCard implements PrintedEffects.Source {
 
     /** Il danno fisso, a cui si somma la L residua. */
     @Tunable
@@ -57,5 +58,16 @@ public class GoingBerserk extends AbstractCard {
     @Override
     public List<String> applyEffectOnTarget(Character self, Character target) {
         return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + alcohol)));
+    }
+
+    /** D76: self HIT if any and ALCOHOL emptied; HIT of base plus the ALCOHOL read after costs, before the self effects. */
+    @Override
+    public PrintedEffects printedEffects() {
+        List<PrintedEffects.Step> steps = new ArrayList<>();
+        if (selfHit > 0) steps.add(PrintedEffects.damage(false, Damage.DamageType.HIT, selfHit));
+        steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.EMPTY).resource(Resource.ALCOHOL).build());
+        steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(true).damageType(Damage.DamageType.HIT)
+                .base(base).of(Resource.ALCOHOL).atStart(true).build());
+        return new PrintedEffects(List.copyOf(steps));
     }
 }

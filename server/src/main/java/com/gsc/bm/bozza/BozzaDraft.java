@@ -2,6 +2,7 @@ package com.gsc.bm.bozza;
 
 import com.gsc.bm.model.game.bot.AggressivePolicy;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.game.bot.LethalAwarePolicy;
 import com.gsc.bm.model.game.bot.SoughtHitPolicy;
 import com.gsc.bm.model.game.bot.RandomPolicy;
 import com.gsc.bm.model.game.bot.PrudentPolicy;
@@ -105,6 +106,7 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
         described.put("bot", this.bot);
         described.put("rules", this.ruleset.id());
         if (this.ruleset.playground()) described.put("soughtHitTiming", SoughtHitPolicy.Timing.ALWAYS.name());
+        if (this.ruleset.playground()) described.put("lethalAware", true);
         this.identity = Collections.unmodifiableMap(described);
     }
 
@@ -135,12 +137,15 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
     /** The rules of the draft matches (SB-16c). */
     public Ruleset ruleset() { return ruleset; }
 
-    /** A new heuristic policy for one computer player, or null for the live random ComPlayer. */
+    /**
+     * A new heuristic policy for one computer player, or null for the live random ComPlayer. With the playground rules: the
+     * style, the timing ALWAYS of the sought hit (D74) and the awareness of the lethal hit (D76).
+     */
     public BotPolicy newPolicy() {
         Supplier<BotPolicy> style = STYLES.get(bot);
         BotPolicy base = style == null ? null : style.get();
-        return ruleset.playground() ? new SoughtHitPolicy(base == null ? new RandomPolicy() : base,
-                SoughtHitPolicy.Timing.ALWAYS) : base;
+        return ruleset.playground() ? new LethalAwarePolicy(new SoughtHitPolicy(base == null ? new RandomPolicy() : base,
+                SoughtHitPolicy.Timing.ALWAYS)) : base;
     }
 
     @Override

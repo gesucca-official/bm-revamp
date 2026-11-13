@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class SoughtHitPolicyTest {
     private static BotView.CardSeen card(String name, int damage) {
         return new BotView.CardSeen(name, name, false, false, false, false, 1, Set.of(Card.CardTarget.OPPONENT),
-                Map.of(), "DAMAGE", "—", "HIT", "HIT " + damage, false);
+                Map.of(), "DAMAGE", "—", "HIT", "HIT " + damage, false, null);
     }
     private static BotView.Seat seat(String id, boolean token) {
         return new BotView.Seat(id, id, false, false, Map.of(Resource.HEALTH, 100), Set.of(), token
                 ? List.of(new BotView.StatusSeen("Vulnerable", "", StatusType.BAD, StatusFlow.INPUT, false, false,
-                null, 1, 1.5f, "Announced")) : List.of(), List.of(), 0, List.of());
+                null, 1, 1.5f, "Announced", null, null, null)) : List.of(), List.of(), 0, List.of());
     }
     private static BotView view(boolean defended, boolean shown, Ruleset rules) {
         return new BotView(5, new BotView.Self(seat("me", true), List.of(card("Other", 5), card("Announced", 20)), 5, List.of()),

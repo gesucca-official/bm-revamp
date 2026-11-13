@@ -110,7 +110,9 @@ class ChargeMeasureTest {
         for(SoughtHitPolicy.Timing t:SoughtHitPolicy.Timing.values())for(Map.Entry<String,BotPolicy> s:PlaygroundTest.styles().entrySet()) {
             if(s.getKey().equals("casuale"))continue;
             BotPolicy base=s.getValue()==null?new RandomPolicy():s.getValue();
-            styles.put(t.name()+"/"+s.getKey(),new SoughtHitPolicy(base,t));
+            // D76: steps 2 and 3 measure with the lethal-aware bots; -Dsim.bots=passo1 reproduces the round of step 1.
+            BotPolicy timed=new SoughtHitPolicy(base,t);
+            styles.put(t.name()+"/"+s.getKey(),"passo1".equals(System.getProperty("sim.bots"))?timed:new LethalAwarePolicy(timed));
         }
         // Exactly the four historical styles (com is wrapped, with the same seeded Random API).
         assertEquals(12,styles.size());

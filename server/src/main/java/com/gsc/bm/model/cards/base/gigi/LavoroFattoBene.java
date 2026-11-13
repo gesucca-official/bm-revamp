@@ -3,6 +3,7 @@ package com.gsc.bm.model.cards.base.gigi;
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.cards.AbstractCard;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.cards.Tunable;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
@@ -21,7 +22,7 @@ import java.util.Set;
  * <p>
  * Vive nei sorgenti di test: la partita viva non la conosce (SB-28). Costo e priorità arrivano dalla bozza.
  */
-public class LavoroFattoBene extends AbstractCard {
+public class LavoroFattoBene extends AbstractCard implements PrintedEffects.Source {
 
     /** Il danno fisso, a tavolo vuoto. */
     @Tunable
@@ -52,5 +53,12 @@ public class LavoroFattoBene extends AbstractCard {
     @Override
     public List<String> applyEffectOnTarget(Character self, Character target) {
         return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + perItem * items)));
+    }
+
+    /** D76: HIT of base plus perItem for each own item counted after costs. */
+    @Override
+    public PrintedEffects printedEffects() {
+        return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(true)
+                .damageType(Damage.DamageType.HIT).base(base).perItem(perItem).atStart(true).build()));
     }
 }

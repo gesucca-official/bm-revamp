@@ -1,13 +1,16 @@
 package com.gsc.bm.model.game.bot;
 
 import com.gsc.bm.model.Character;
+import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.Ruleset;
+import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
 import lombok.Value;
@@ -105,6 +108,13 @@ public class BotView {
         Integer exposure;
         Float factor;
         String untilPlayed;
+        /**
+         * D76: the damage type the status multiplies and its multiplier, as its text states («Hit Damage taken: x0.6»); null when
+         * it does not act on a damage type or is not a plain multiplier; the type it turns that damage into, or null.
+         */
+        Damage.DamageType property;
+        Float scale;
+        Damage.DamageType convertTo;
     }
 
     @Value
@@ -149,6 +159,8 @@ public class BotView {
         String damageAmount;
         /** SB-16c: «Ultimo colpo» written on the card (D50, point 2). */
         boolean lastBlow;
+        /** D76: the printed text as numbers, or null when the card cannot describe itself. */
+        PrintedEffects effects;
 
         /** Fixed part of the catalog's nominal damage: "HIT 20+x" gives 20, no damage gives 0. */
         public int nominalDamage() {
@@ -232,13 +244,22 @@ public class BotView {
                 game.getForfeits().containsKey(player.getPlayerId()),
                 Collections.unmodifiableMap(resources), Set.copyOf(c.getImmunities()),
                 c.getStatuses().stream().map(s -> new StatusSeen(s.getName(), s.getDescription(), s.getType(), s.getFlow(),
-                        s.isSingleUse(), s.isEquip(), s.getLastsForTurns(), s.getExposure(), s.getFactor(), s.getUntilPlayed()))
+                        s.isSingleUse(), s.isEquip(), s.getLastsForTurns(), s.getExposure(), s.getFactor(), s.getUntilPlayed(),
+                        s.getImpactedProperty() instanceof Damage.DamageType && scale(s) != null
+                                ? (Damage.DamageType) s.getImpactedProperty() : null, scale(s), converted(s)))
                         .collect(Collectors.toUnmodifiableList()),
                 c.getTimers().stream().map(t -> new TimerSeen(t.getName(), t.getTimer())).collect(Collectors.toUnmodifiableList()),
                 c.getItemsSize(), cards(c.getItems()));
     }
 
     /** SB-16g 2a (D58, D69): the cards shown face up in a hand; the slot only for the own hand. Always empty with the live rules. */
+    /** D76: the damage type a status turns its damage into, as its text says («turned to Cut Damage»), or null. */
+    private static Damage.DamageType converted(Status status) {
+        if (!(status.getImpactedProperty() instanceof Damage.DamageType) || status.getTypeFunction() == null) return null;
+        Object type = status.getTypeFunction().apply(status.getImpactedProperty());
+        return type instanceof Damage.DamageType && type != status.getImpactedProperty() ? (Damage.DamageType) type : null;
+    }
+
     private static List<RevealedSeen> revealed(Player player, boolean own) {
         List<RevealedSeen> shown = new ArrayList<>();
         for (Player.Revealed r : player.getShownRevealed()) {
@@ -253,12 +274,27 @@ public class BotView {
         return cards.stream().map(BotView::seen).collect(Collectors.toUnmodifiableList());
     }
 
+    /** A card as a player reads it when it is public; for tests that replay a turn, never for a policy's hidden information. */
+    public static CardSeen publicText(Card card) { return seen(card); }
+
     private static CardSeen seen(Card card) {
         AbstractCard text = card instanceof AbstractCard ? (AbstractCard) card : null;
         return new CardSeen(card.getName(), card.getBindingName(), card.isItem(), card.isBasicAction(), card.isLastResort(),
                 card.isCharacterBound(), card.getPriority(), Set.copyOf(card.getCanTarget()), Map.copyOf(card.getCost()),
                 text == null ? null : text.getRole(), text == null ? null : text.getGains(),
-                text == null ? null : text.getDamage(), text == null ? null : text.getDamageAmount(), card.isLastBlow());
+                text == null ? null : text.getDamage(), text == null ? null : text.getDamageAmount(), card.isLastBlow(),
+                card instanceof PrintedEffects.Source ? ((PrintedEffects.Source) card).printedEffects() : null);
+    }
+
+    /**
+     * D76: the multiplier of a status on a damage type, read as its text reads: the amount of one point of damage. Exact for the
+     * statuses of the draft ({@code n × factor} in float, so 1 × factor is the factor itself); null if it is not a plain
+     * multiplier (zero not kept at zero).
+     */
+    private static Float scale(Status status) {
+        if (!(status.getImpactedProperty() instanceof Damage.DamageType) || status.getAmountFunction() == null) return null;
+        Float zero = status.getAmountFunction().apply(0f), one = status.getAmountFunction().apply(1f);
+        return zero == null || one == null || zero != 0f ? null : one;
     }
 
     private static SeenMove seen(Move move) {

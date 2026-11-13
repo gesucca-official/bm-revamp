@@ -1,0 +1,561 @@
+{
+  "games" : 288000,
+  "seconds" : 74.3699521,
+  "seeds" : "7000000-7000299 per cella",
+  "nuovoControVecchio" : {
+    "mazzo nuovo/starter-gigi" : {
+      "quotaNuovoDecisive" : 0.48791966204698733,
+      "vittorieNuovo" : 13167,
+      "partite" : 28800,
+      "vittorieVecchio" : 13819
+    },
+    "mazzo nuovo/starter-mara" : {
+      "quotaNuovoDecisive" : 0.5724451829642742,
+      "vittorieNuovo" : 15847,
+      "partite" : 28800,
+      "vittorieVecchio" : 11836
+    },
+    "mazzo nuovo/starter-pino" : {
+      "quotaNuovoDecisive" : 0.45707089979394033,
+      "vittorieNuovo" : 11978,
+      "partite" : 28800,
+      "vittorieVecchio" : 14228
+    },
+    "mazzo nuovo/starter-spazienzio" : {
+      "quotaNuovoDecisive" : 0.5162391319968384,
+      "vittorieNuovo" : 14369,
+      "partite" : 28800,
+      "vittorieVecchio" : 13465
+    },
+    "mazzo nuovo/starter-tossico" : {
+      "quotaNuovoDecisive" : 0.598750582027006,
+      "vittorieNuovo" : 15431,
+      "partite" : 28800,
+      "vittorieVecchio" : 10341
+    },
+    "stile/aggressivo (stesso stile)" : {
+      "quotaNuovoDecisive" : 0.506385068762279,
+      "vittorieNuovo" : 4124,
+      "partite" : 9000,
+      "vittorieVecchio" : 4020
+    },
+    "stile/aggressivo vs com" : {
+      "quotaNuovoDecisive" : 0.8556583304784744,
+      "vittorieNuovo" : 7493,
+      "partite" : 9000,
+      "vittorieVecchio" : 1264
+    },
+    "stile/aggressivo vs prudente" : {
+      "quotaNuovoDecisive" : 0.5896296296296296,
+      "vittorieNuovo" : 4776,
+      "partite" : 9000,
+      "vittorieVecchio" : 3324
+    },
+    "stile/aggressivo vs risorse" : {
+      "quotaNuovoDecisive" : 0.5441965883335321,
+      "vittorieNuovo" : 4562,
+      "partite" : 9000,
+      "vittorieVecchio" : 3821
+    },
+    "stile/com (stesso stile)" : {
+      "quotaNuovoDecisive" : 0.596985276933863,
+      "vittorieNuovo" : 5109,
+      "partite" : 9000,
+      "vittorieVecchio" : 3449
+    },
+    "stile/com vs aggressivo" : {
+      "quotaNuovoDecisive" : 0.22953066118533744,
+      "vittorieNuovo" : 2010,
+      "partite" : 9000,
+      "vittorieVecchio" : 6747
+    },
+    "stile/com vs prudente" : {
+      "quotaNuovoDecisive" : 0.2312564781757457,
+      "vittorieNuovo" : 2008,
+      "partite" : 9000,
+      "vittorieVecchio" : 6675
+    },
+    "stile/com vs risorse" : {
+      "quotaNuovoDecisive" : 0.2242335105781197,
+      "vittorieNuovo" : 1982,
+      "partite" : 9000,
+      "vittorieVecchio" : 6857
+    },
+    "stile/prudente (stesso stile)" : {
+      "quotaNuovoDecisive" : 0.5024306924188674,
+      "vittorieNuovo" : 3824,
+      "partite" : 9000,
+      "vittorieVecchio" : 3787
+    },
+    "stile/prudente vs aggressivo" : {
+      "quotaNuovoDecisive" : 0.4178677932405567,
+      "vittorieNuovo" : 3363,
+      "partite" : 9000,
+      "vittorieVecchio" : 4685
+    },
+    "stile/prudente vs com" : {
+      "quotaNuovoDecisive" : 0.8453262378528459,
+      "vittorieNuovo" : 7307,
+      "partite" : 9000,
+      "vittorieVecchio" : 1337
+    },
+    "stile/prudente vs risorse" : {
+      "quotaNuovoDecisive" : 0.41807155852031536,
+      "vittorieNuovo" : 3447,
+      "partite" : 9000,
+      "vittorieVecchio" : 4798
+    },
+    "stile/risorse (stesso stile)" : {
+      "quotaNuovoDecisive" : 0.5138721351025332,
+      "vittorieNuovo" : 4260,
+      "partite" : 9000,
+      "vittorieVecchio" : 4030
+    },
+    "stile/risorse vs aggressivo" : {
+      "quotaNuovoDecisive" : 0.4711941549886214,
+      "vittorieNuovo" : 3934,
+      "partite" : 9000,
+      "vittorieVecchio" : 4415
+    },
+    "stile/risorse vs com" : {
+      "quotaNuovoDecisive" : 0.8741346044716831,
+      "vittorieNuovo" : 7702,
+      "partite" : 9000,
+      "vittorieVecchio" : 1109
+    },
+    "stile/risorse vs prudente" : {
+      "quotaNuovoDecisive" : 0.5919874122488502,
+      "vittorieNuovo" : 4891,
+      "partite" : 9000,
+      "vittorieVecchio" : 3371
+    },
+    "tutti" : {
+      "quotaNuovoDecisive" : 0.5264089350912025,
+      "vittorieNuovo" : 70792,
+      "partite" : 144000,
+      "vittorieVecchio" : 63689
+    }
+  },
+  "patte" : {
+    "d76 vs d76" : {
+      "patte" : 4584,
+      "quota" : 0.06366666666666666,
+      "partite" : 72000
+    },
+    "misto" : {
+      "patte" : 9519,
+      "quota" : 0.06610416666666667,
+      "partite" : 144000
+    },
+    "passo1 vs passo1" : {
+      "patte" : 5038,
+      "quota" : 0.06997222222222223,
+      "partite" : 72000
+    }
+  },
+  "patteIncontri" : {
+    "d76|starter-gigi–starter-gigi" : {
+      "patte" : 407,
+      "quota" : 0.08479166666666667,
+      "partite" : 4800
+    },
+    "d76|starter-mara–starter-gigi" : {
+      "patte" : 103,
+      "quota" : 0.021458333333333333,
+      "partite" : 4800
+    },
+    "d76|starter-mara–starter-mara" : {
+      "patte" : 176,
+      "quota" : 0.03666666666666667,
+      "partite" : 4800
+    },
+    "d76|starter-mara–starter-pino" : {
+      "patte" : 278,
+      "quota" : 0.057916666666666665,
+      "partite" : 4800
+    },
+    "d76|starter-mara–starter-tossico" : {
+      "patte" : 273,
+      "quota" : 0.056875,
+      "partite" : 4800
+    },
+    "d76|starter-pino–starter-gigi" : {
+      "patte" : 349,
+      "quota" : 0.07270833333333333,
+      "partite" : 4800
+    },
+    "d76|starter-pino–starter-pino" : {
+      "patte" : 677,
+      "quota" : 0.14104166666666668,
+      "partite" : 4800
+    },
+    "d76|starter-spazienzio–starter-gigi" : {
+      "patte" : 124,
+      "quota" : 0.025833333333333333,
+      "partite" : 4800
+    },
+    "d76|starter-spazienzio–starter-mara" : {
+      "patte" : 136,
+      "quota" : 0.028333333333333332,
+      "partite" : 4800
+    },
+    "d76|starter-spazienzio–starter-pino" : {
+      "patte" : 155,
+      "quota" : 0.03229166666666667,
+      "partite" : 4800
+    },
+    "d76|starter-spazienzio–starter-spazienzio" : {
+      "patte" : 133,
+      "quota" : 0.027708333333333335,
+      "partite" : 4800
+    },
+    "d76|starter-spazienzio–starter-tossico" : {
+      "patte" : 240,
+      "quota" : 0.05,
+      "partite" : 4800
+    },
+    "d76|starter-tossico–starter-gigi" : {
+      "patte" : 346,
+      "quota" : 0.07208333333333333,
+      "partite" : 4800
+    },
+    "d76|starter-tossico–starter-pino" : {
+      "patte" : 314,
+      "quota" : 0.06541666666666666,
+      "partite" : 4800
+    },
+    "d76|starter-tossico–starter-tossico" : {
+      "patte" : 873,
+      "quota" : 0.181875,
+      "partite" : 4800
+    },
+    "passo1|starter-gigi–starter-gigi" : {
+      "patte" : 457,
+      "quota" : 0.09520833333333334,
+      "partite" : 4800
+    },
+    "passo1|starter-mara–starter-gigi" : {
+      "patte" : 110,
+      "quota" : 0.022916666666666665,
+      "partite" : 4800
+    },
+    "passo1|starter-mara–starter-mara" : {
+      "patte" : 167,
+      "quota" : 0.034791666666666665,
+      "partite" : 4800
+    },
+    "passo1|starter-mara–starter-pino" : {
+      "patte" : 295,
+      "quota" : 0.06145833333333333,
+      "partite" : 4800
+    },
+    "passo1|starter-mara–starter-tossico" : {
+      "patte" : 294,
+      "quota" : 0.06125,
+      "partite" : 4800
+    },
+    "passo1|starter-pino–starter-gigi" : {
+      "patte" : 443,
+      "quota" : 0.09229166666666666,
+      "partite" : 4800
+    },
+    "passo1|starter-pino–starter-pino" : {
+      "patte" : 699,
+      "quota" : 0.145625,
+      "partite" : 4800
+    },
+    "passo1|starter-spazienzio–starter-gigi" : {
+      "patte" : 185,
+      "quota" : 0.03854166666666667,
+      "partite" : 4800
+    },
+    "passo1|starter-spazienzio–starter-mara" : {
+      "patte" : 146,
+      "quota" : 0.030416666666666668,
+      "partite" : 4800
+    },
+    "passo1|starter-spazienzio–starter-pino" : {
+      "patte" : 198,
+      "quota" : 0.04125,
+      "partite" : 4800
+    },
+    "passo1|starter-spazienzio–starter-spazienzio" : {
+      "patte" : 155,
+      "quota" : 0.03229166666666667,
+      "partite" : 4800
+    },
+    "passo1|starter-spazienzio–starter-tossico" : {
+      "patte" : 234,
+      "quota" : 0.04875,
+      "partite" : 4800
+    },
+    "passo1|starter-tossico–starter-gigi" : {
+      "patte" : 395,
+      "quota" : 0.08229166666666667,
+      "partite" : 4800
+    },
+    "passo1|starter-tossico–starter-pino" : {
+      "patte" : 325,
+      "quota" : 0.06770833333333333,
+      "partite" : 4800
+    },
+    "passo1|starter-tossico–starter-tossico" : {
+      "patte" : 935,
+      "quota" : 0.19479166666666667,
+      "partite" : 4800
+    }
+  },
+  "gettone" : {
+    "d76 vs d76" : {
+      "ricerche" : 67773,
+      "trovate" : 42193,
+      "dannoAvversarioConGettonePerTrovata" : 15.027303107150475,
+      "amplificazionePerTrovata" : 4.905908563031782,
+      "vittorie" : 67416,
+      "patte" : 9168,
+      "partite" : 144000,
+      "turni" : 1702140
+    },
+    "d76 vs passo1" : {
+      "ricerche" : 68107,
+      "trovate" : 42271,
+      "dannoAvversarioConGettonePerTrovata" : 14.771805729696482,
+      "amplificazionePerTrovata" : 4.816115067067257,
+      "vittorie" : 70792,
+      "patte" : 9519,
+      "partite" : 144000,
+      "turni" : 1714575
+    },
+    "passo1 vs d76" : {
+      "ricerche" : 68756,
+      "trovate" : 42468,
+      "dannoAvversarioConGettonePerTrovata" : 15.151667137609493,
+      "amplificazionePerTrovata" : 4.948172741829142,
+      "vittorie" : 63689,
+      "patte" : 9519,
+      "partite" : 144000,
+      "turni" : 1714575
+    },
+    "passo1 vs passo1" : {
+      "ricerche" : 69144,
+      "trovate" : 42546,
+      "dannoAvversarioConGettonePerTrovata" : 14.902152963850892,
+      "amplificazionePerTrovata" : 4.860339397358153,
+      "vittorie" : 66962,
+      "patte" : 10076,
+      "partite" : 144000,
+      "turni" : 1728084
+    },
+    "starter-gigi|d76 vs d76" : {
+      "ricerche" : 11276,
+      "trovate" : 4552,
+      "dannoAvversarioConGettonePerTrovata" : 14.630492091388401,
+      "amplificazionePerTrovata" : 4.639499121265378,
+      "vittorie" : 12555,
+      "patte" : 1736,
+      "partite" : 28800,
+      "turni" : 322746
+    },
+    "starter-gigi|d76 vs passo1" : {
+      "ricerche" : 11350,
+      "trovate" : 4562,
+      "dannoAvversarioConGettonePerTrovata" : 14.385138097325735,
+      "amplificazionePerTrovata" : 4.5563349408154314,
+      "vittorie" : 13167,
+      "patte" : 1814,
+      "partite" : 28800,
+      "turni" : 325408
+    },
+    "starter-gigi|passo1 vs d76" : {
+      "ricerche" : 11364,
+      "trovate" : 4563,
+      "dannoAvversarioConGettonePerTrovata" : 14.652421652421653,
+      "amplificazionePerTrovata" : 4.647600262984878,
+      "vittorie" : 11701,
+      "patte" : 1893,
+      "partite" : 28800,
+      "turni" : 324930
+    },
+    "starter-gigi|passo1 vs passo1" : {
+      "ricerche" : 11446,
+      "trovate" : 4575,
+      "dannoAvversarioConGettonePerTrovata" : 14.416393442622951,
+      "amplificazionePerTrovata" : 4.567868852459016,
+      "vittorie" : 12270,
+      "patte" : 2047,
+      "partite" : 28800,
+      "turni" : 327905
+    },
+    "starter-mara|d76 vs d76" : {
+      "ricerche" : 6377,
+      "trovate" : 4796,
+      "dannoAvversarioConGettonePerTrovata" : 16.673686405337783,
+      "amplificazionePerTrovata" : 5.304003336113428,
+      "vittorie" : 15170,
+      "patte" : 1142,
+      "partite" : 28800,
+      "turni" : 278859
+    },
+    "starter-mara|d76 vs passo1" : {
+      "ricerche" : 6457,
+      "trovate" : 4830,
+      "dannoAvversarioConGettonePerTrovata" : 16.24575569358178,
+      "amplificazionePerTrovata" : 5.162732919254658,
+      "vittorie" : 15847,
+      "patte" : 1117,
+      "partite" : 28800,
+      "turni" : 281563
+    },
+    "starter-mara|passo1 vs d76" : {
+      "ricerche" : 6473,
+      "trovate" : 4815,
+      "dannoAvversarioConGettonePerTrovata" : 16.768431983385256,
+      "amplificazionePerTrovata" : 5.336656282450675,
+      "vittorie" : 14485,
+      "patte" : 1184,
+      "partite" : 28800,
+      "turni" : 280501
+    },
+    "starter-mara|passo1 vs passo1" : {
+      "ricerche" : 6571,
+      "trovate" : 4849,
+      "dannoAvversarioConGettonePerTrovata" : 16.350587750051556,
+      "amplificazionePerTrovata" : 5.199010105176325,
+      "vittorie" : 15130,
+      "patte" : 1179,
+      "partite" : 28800,
+      "turni" : 283602
+    },
+    "starter-pino|d76 vs d76" : {
+      "ricerche" : 22249,
+      "trovate" : 13077,
+      "dannoAvversarioConGettonePerTrovata" : 10.976523667507838,
+      "amplificazionePerTrovata" : 3.7228722183987153,
+      "vittorie" : 11447,
+      "patte" : 2450,
+      "partite" : 28800,
+      "turni" : 395397
+    },
+    "starter-pino|d76 vs passo1" : {
+      "ricerche" : 22335,
+      "trovate" : 13087,
+      "dannoAvversarioConGettonePerTrovata" : 10.800412623213877,
+      "amplificazionePerTrovata" : 3.663941315809582,
+      "vittorie" : 11978,
+      "patte" : 2594,
+      "partite" : 28800,
+      "turni" : 398000
+    },
+    "starter-pino|passo1 vs d76" : {
+      "ricerche" : 22368,
+      "trovate" : 13083,
+      "dannoAvversarioConGettonePerTrovata" : 11.160284338454483,
+      "amplificazionePerTrovata" : 3.7837651914698465,
+      "vittorie" : 11115,
+      "patte" : 2475,
+      "partite" : 28800,
+      "turni" : 396391
+    },
+    "starter-pino|passo1 vs passo1" : {
+      "ricerche" : 22464,
+      "trovate" : 13093,
+      "dannoAvversarioConGettonePerTrovata" : 10.978538150156572,
+      "amplificazionePerTrovata" : 3.7229053692812952,
+      "vittorie" : 11605,
+      "patte" : 2659,
+      "partite" : 28800,
+      "turni" : 399154
+    },
+    "starter-spazienzio|d76 vs d76" : {
+      "ricerche" : 17080,
+      "trovate" : 13353,
+      "dannoAvversarioConGettonePerTrovata" : 19.04163858308994,
+      "amplificazionePerTrovata" : 6.213210514491125,
+      "vittorie" : 13332,
+      "patte" : 921,
+      "partite" : 28800,
+      "turni" : 298525
+    },
+    "starter-spazienzio|d76 vs passo1" : {
+      "ricerche" : 17124,
+      "trovate" : 13369,
+      "dannoAvversarioConGettonePerTrovata" : 18.78622185653377,
+      "amplificazionePerTrovata" : 6.114593462487845,
+      "vittorie" : 14369,
+      "patte" : 966,
+      "partite" : 28800,
+      "turni" : 300563
+    },
+    "starter-spazienzio|passo1 vs d76" : {
+      "ricerche" : 17653,
+      "trovate" : 13569,
+      "dannoAvversarioConGettonePerTrovata" : 19.090131918343282,
+      "amplificazionePerTrovata" : 6.2319257130223304,
+      "vittorie" : 11811,
+      "patte" : 969,
+      "partite" : 28800,
+      "turni" : 304539
+    },
+    "starter-spazienzio|passo1 vs passo1" : {
+      "ricerche" : 17713,
+      "trovate" : 13586,
+      "dannoAvversarioConGettonePerTrovata" : 18.841675253937876,
+      "amplificazionePerTrovata" : 6.13543353452083,
+      "vittorie" : 12875,
+      "patte" : 1073,
+      "partite" : 28800,
+      "turni" : 306740
+    },
+    "starter-tossico|d76 vs d76" : {
+      "ricerche" : 10791,
+      "trovate" : 6415,
+      "dannoAvversarioConGettonePerTrovata" : 13.979579111457522,
+      "amplificazionePerTrovata" : 4.487763055339049,
+      "vittorie" : 14912,
+      "patte" : 2919,
+      "partite" : 28800,
+      "turni" : 406613
+    },
+    "starter-tossico|d76 vs passo1" : {
+      "ricerche" : 10841,
+      "trovate" : 6423,
+      "dannoAvversarioConGettonePerTrovata" : 13.674139810057605,
+      "amplificazionePerTrovata" : 4.3848668846333485,
+      "vittorie" : 15431,
+      "patte" : 3028,
+      "partite" : 28800,
+      "turni" : 409041
+    },
+    "starter-tossico|passo1 vs d76" : {
+      "ricerche" : 10898,
+      "trovate" : 6438,
+      "dannoAvversarioConGettonePerTrovata" : 14.106554830692762,
+      "amplificazionePerTrovata" : 4.5312208760484625,
+      "vittorie" : 14577,
+      "patte" : 2998,
+      "partite" : 28800,
+      "turni" : 408214
+    },
+    "starter-tossico|passo1 vs passo1" : {
+      "ricerche" : 10950,
+      "trovate" : 6443,
+      "dannoAvversarioConGettonePerTrovata" : 13.823218997361478,
+      "amplificazionePerTrovata" : 4.435821822132547,
+      "vittorie" : 15082,
+      "patte" : 3118,
+      "partite" : 28800,
+      "turni" : 410683
+    }
+  },
+  "decisioniBotNuovo" : {
+    "cambiate" : 23589,
+    "cambiate-conColpoMostrato" : 4119,
+    "cambiate-senzaColpoMostrato" : 19470,
+    "decisioni" : 3416715,
+    "decisioni-conColpoMostrato" : 121615,
+    "decisioni-senzaColpoMostrato" : 3295100,
+    "ristrette" : 156557,
+    "ristrette-conColpoMostrato" : 15699,
+    "ristrette-senzaColpoMostrato" : 140858
+  }
+}
