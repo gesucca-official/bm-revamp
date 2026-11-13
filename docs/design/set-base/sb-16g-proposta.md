@@ -1,6 +1,6 @@
 # SB-16g — Coppie caricamento-colpo, seconda passata
 
-**Versione 0.2 — 13 novembre 2026. Fase 1 fatta; risposta 1 registrata in D59, altre risposte in corso. Nessuna attuazione.**
+**Versione 0.3 — 13 novembre 2026. Fase 1 fatta; risposte registrate D59–D60. Totale 120 approvato, composizioni e altre risposte in corso. Nessuna attuazione.**
 
 | Starter | Caricamenti proposti / colpi | Slot che cedono nello starter | Risorse e colpo cercato, valori iniziali | Conseguenza scelta F (D59) |
 |---|---|---|---|---|
@@ -19,6 +19,18 @@ Tutti i numeri sono indicativi (D38), non risultati di simulazioni. Funzionament
 **D59 — Domanda 1, scelta F e durata minima (13 novembre 2026).** Il proprietario: «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?».
 
 Confermato: i due turni minimi sono il turno del tutore (N) e quello immediatamente successivo (N+1). Giocare o scartare il colpo entro N+1 non interrompe quel minimo; se la copia trovata resta in mano dopo N+1, la vulnerabilità continua finché esce. Le alternative A–E restano documentate come confronto, non candidate già autorizzate a un lotto. Tipi di danno, cumulo e altri dettagli della domanda 4 restano da decidere. Le altre domande e la divisione della Fase 2 devono ancora essere sottoposte; questa risposta non approva l’intera proposta. Decisione nel [piano](../../set-base-plan.md#decisioni-del-proprietario).
+
+**D60 — Domanda 2, approvazione del totale e nuova ipotesi di rarità (13 novembre 2026).** Il proprietario:
+
+> va bene 120 carte, ma:
+>
+> se consideriamo la rarità, potremmo fare due copie di una carta caricamento non comune che cercano un colpo non comune (anche quello in due copie), mentre un'altra carta di caricamento cerca il colpo raro
+>
+> che ne pensi?
+
+Approvato il totale **120**. La struttura delle coppie è ancora in discussione: due copie di un caricamento NC verso due copie di un colpo NC, più un secondo titolo di caricamento verso un colpo raro. Restano da confermare applicazione ai cinque starter, rarità del secondo caricamento, copie del raro e sostituzioni. Le tabelle originarie sotto restano una base di confronto, **non composizioni approvate**.
+
+**Valutazione della nuova ipotesi:** raccomando di approfondirla. Differenzia le ricerche: il colpo NC deve essere forte e affidabile; quello raro può avere un picco maggiore legato alla preparazione o al tavolo. I tre caricamenti restano, ma con una copia del raro si arriverebbe a tre colpi cercabili per starter, contro i due della proposta iniziale: occorre un ulteriore slot nelle liste da 20. Due bersagli diversi per personaggio precisano D52; ciascuna carta continua a cercare un solo binding. Per restare a 120, il nuovo bersaglio va ricavato da slot esistenti, rivedendo funzioni e rarità senza aggiungere cinque ulteriori carte. Il tutore del raro può fallire più spesso quando la singola copia è già in mano o negli scarti: vanno misurati frequenza e premio di sole risorse. Nessuna modifica delle carte in questa registrazione.
 
 ## Indicazioni del proprietario in questa sessione
 
@@ -332,7 +344,7 @@ Non eseguiti in questa fase documentale: suite applicative/server/client, contes
 ## Domande numerate al proprietario
 
 1. **Risposta registrata: F, con due turni minimi (D59); confronto numerico aggiuntivo non scelto.** Domanda originaria: **Quale conseguenza scegli come candidata per la Fase 2?** Raccomando **F**, vulnerabilità finché resta in mano la copia trovata, minimo questo turno e il prossimo; **D** è la via di mezzo che lascia scegliere fra scartare/ripescare e un solo turno aggiuntivo di rischio. Restano confrontate A (rischio finito), B (spazio permanente), C (scarto/pesca automatici) ed E (spazio per un turno). Se vuoi un confronto numerico aggiuntivo, quale sola alternativa prioritaria mettiamo accanto alla candidata entro il budget esistente?
-2. **Approvi tre caricamenti e due colpi per ogni starter, con i cinque nuovi titoli e le sostituzioni della tabella?** Il set progettato arriva a 120 carte e 42 azioni d'archetipo; Mara e Beppe hanno una seconda copia della loro rara. Le generiche uscite dagli starter restano nel pool. Se vuoi conservare il totale 115 occorre scegliere altri cinque slot a cui rinunciare.
+2. **Risposta parziale registrata in D60: approvate 120 carte; struttura delle coppie e composizioni da rivedere con il proprietario.** Domanda originaria: **Approvi tre caricamenti e due colpi per ogni starter, con i cinque nuovi titoli e le sostituzioni della tabella?** Il set progettato arriva a 120 carte e 42 azioni d'archetipo; Mara e Beppe hanno una seconda copia della loro rara. Le generiche uscite dagli starter restano nel pool. Se vuoi conservare il totale 115 occorre scegliere altri cinque slot a cui rinunciare.
 3. **Approvi le direzioni di potenza e risorse delle cinque schede**, con numeri da tarare in Fase 2? In particolare: +25 V per finanziare Impatto, Sgommata già potente senza aumento, più POISON diretto e un po' di A per Celestina, L calcolata dopo il decadimento per Piera, Lavoro più forte e più caro per Beppe. I piccoli attacchi dei nuovi caricamenti e le risorse aggiunte ai vecchi sono funzionamenti espliciti, non approvati da D38 da sola.
 4. **Approvi l'esposizione ai tre tipi anche per Spazienzio e il legame alla precisa copia trovata?** Propongo nessuna conseguenza aggiuntiva se il colpo viene giocato e poi annullato/parato, o se viene realmente scartato per una bound; una ricerca fallita non crea un legame. In F restano due turni minimi e poi l'esposizione finisce all'uscita della copia. Due copie trattenute cumulano gli stati secondo R05: preferisci partire così, tarando il fattore, oppure chiedi subito una proposta senza cumulo?
 5. **Solo se preferisci B o E:** approvi il minimo di quattro carte di capienza, per lasciare sempre almeno uno spazio regolare accanto a basic e bound? La versione permanente senza limite può violare «sempre una mossa legale» nei mazzi con più coppie. Per B/E serve approvare anche il costo tecnico della capacità variabile; non basta lo scarto senza pesca.
