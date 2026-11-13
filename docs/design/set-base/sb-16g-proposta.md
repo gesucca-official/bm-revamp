@@ -1,13 +1,13 @@
 # SB-16g — Coppie caricamento-colpo, seconda passata
 
-**Versione 0.4 — 13 novembre 2026. Fase 1 fatta; risposte registrate D59–D61. Totale 120 e schema delle due coppie approvati; dettagli delle carte e altre risposte in corso. Nessuna attuazione.**
+**Versione 0.5 — 13 novembre 2026. Fase 1 fatta; risposte registrate D59–D62. Totale 120, schema delle due coppie e rarità dei caricamenti approvati; dettagli delle carte e altre risposte in corso. Nessuna attuazione.**
 
-**Schema corrente approvato (D61), uguale per tutti i cinque starter:**
+**Schema corrente approvato (D61–D62), uguale per tutti i cinque starter:**
 
 | Caricamento nello starter | Colpo cercato nello starter |
 |---|---|
 | 2 copie della stessa carta non comune | 2 copie dello stesso colpo non comune |
-| 1 copia di un secondo titolo, rarità da decidere | 1 copia di un colpo raro diverso |
+| 1 copia di un secondo titolo non comune | 1 copia di un colpo raro diverso |
 
 Tre caricamenti, tre colpi cercabili e quattro titoli distinti per le coppie. I bersagli restano esatti e separati. Le eventuali altre carte nelle buste sono una possibilità futura. **La tabella originaria seguente e le cinque schede con un solo bersaglio per personaggio sono superate nello schema da D61:** si conservano come riferimento dei numeri e delle sostituzioni da rivedere, non come liste approvate.
 
@@ -44,6 +44,8 @@ Approvato il totale **120**. La struttura delle coppie è ancora in discussione:
 **D61 — Domanda 2, schema confermato per tutti i cinque starter (13 novembre 2026).** Il proprietario: «Sì, adottiamo questo schema per tutti e cinque gli starter. Precisando, 2 caricamenti non comuni e 2 colpi non comuni sono due copie della stessa carta: è uno starter deck, poi nelle buste ci saranno magari altri caricamenti e altri colpi diversi».
 
 Approvata la struttura 2 copie di un unico caricamento NC → 2 copie di un unico colpo NC, più 1 caricamento di un altro titolo → 1 colpo raro, come nella domanda di conferma. Le coppie usano quindi quattro titoli distinti per starter; i due esemplari NC non sono carte diverse. La proposta delle sostituzioni verrà rivista entro 20 regolari e 120 carte totali. Restano da scegliere rarità del secondo caricamento e carte concrete, prima di approvare nuovi valori/funzionamenti. La possibile varietà nelle buste non amplia il perimetro di questa registrazione.
+
+**D62 — Domanda 2, rarità del secondo caricamento (13 novembre 2026).** Alla proposta «farei non comune anche il caricamento in singola copia che cerca il raro, così il caricamento è accessibile e la rarità caratterizza il colpo. Ti va bene?», il proprietario risponde: «va bene». Entrambi i titoli di caricamento sono NC: il primo in due copie cerca il colpo NC, il secondo in una copia cerca quello raro. Questo dettaglio della domanda 2 è chiuso per tutti i cinque starter; carte concrete e sostituzioni restano da presentare.
 
 ## Indicazioni del proprietario in questa sessione
 
@@ -357,7 +359,7 @@ Non eseguiti in questa fase documentale: suite applicative/server/client, contes
 ## Domande numerate al proprietario
 
 1. **Risposta registrata: F, con due turni minimi (D59); confronto numerico aggiuntivo non scelto.** Domanda originaria: **Quale conseguenza scegli come candidata per la Fase 2?** Raccomando **F**, vulnerabilità finché resta in mano la copia trovata, minimo questo turno e il prossimo; **D** è la via di mezzo che lascia scegliere fra scartare/ripescare e un solo turno aggiuntivo di rischio. Restano confrontate A (rischio finito), B (spazio permanente), C (scarto/pesca automatici) ed E (spazio per un turno). Se vuoi un confronto numerico aggiuntivo, quale sola alternativa prioritaria mettiamo accanto alla candidata entro il budget esistente?
-2. **Risposte registrate D60–D61: approvati 120 carte e due coppie per rarità per tutti i cinque starter, con due copie dello stesso caricamento NC e due dello stesso colpo NC. Carte concrete e sostituzioni da rivedere; rarità del secondo caricamento ancora da decidere.** Domanda originaria: **Approvi tre caricamenti e due colpi per ogni starter, con i cinque nuovi titoli e le sostituzioni della tabella?** Il set progettato arriva a 120 carte e 42 azioni d'archetipo; Mara e Beppe hanno una seconda copia della loro rara. Le generiche uscite dagli starter restano nel pool. Se vuoi conservare il totale 115 occorre scegliere altri cinque slot a cui rinunciare.
+2. **Risposte registrate D60–D62: approvati 120 carte, due coppie per tutti i cinque starter e rarità NC anche del secondo caricamento. Due copie dello stesso caricamento NC cercano due copie dello stesso colpo NC; un diverso caricamento NC cerca il raro. Carte concrete e sostituzioni da rivedere.** Domanda originaria: **Approvi tre caricamenti e due colpi per ogni starter, con i cinque nuovi titoli e le sostituzioni della tabella?** Il set progettato arriva a 120 carte e 42 azioni d'archetipo; Mara e Beppe hanno una seconda copia della loro rara. Le generiche uscite dagli starter restano nel pool. Se vuoi conservare il totale 115 occorre scegliere altri cinque slot a cui rinunciare.
 3. **Approvi le direzioni di potenza e risorse delle cinque schede**, con numeri da tarare in Fase 2? In particolare: +25 V per finanziare Impatto, Sgommata già potente senza aumento, più POISON diretto e un po' di A per Celestina, L calcolata dopo il decadimento per Piera, Lavoro più forte e più caro per Beppe. I piccoli attacchi dei nuovi caricamenti e le risorse aggiunte ai vecchi sono funzionamenti espliciti, non approvati da D38 da sola.
 4. **Approvi l'esposizione ai tre tipi anche per Spazienzio e il legame alla precisa copia trovata?** Propongo nessuna conseguenza aggiuntiva se il colpo viene giocato e poi annullato/parato, o se viene realmente scartato per una bound; una ricerca fallita non crea un legame. In F restano due turni minimi e poi l'esposizione finisce all'uscita della copia. Due copie trattenute cumulano gli stati secondo R05: preferisci partire così, tarando il fattore, oppure chiedi subito una proposta senza cumulo?
 5. **Solo se preferisci B o E:** approvi il minimo di quattro carte di capienza, per lasciare sempre almeno uno spazio regolare accanto a basic e bound? La versione permanente senza limite può violare «sempre una mossa legale» nei mazzi con più coppie. Per B/E serve approvare anche il costo tecnico della capacità variabile; non basta lo scarto senza pesca.
