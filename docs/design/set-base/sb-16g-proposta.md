@@ -1,6 +1,6 @@
 # SB-16g — Proposta aggiornata delle carte prima di 2b
 
-**Versione 1.3 — 14 novembre 2026. Motivazione: applicare D71–D78 alle dieci schede, definire «Annuncia» una volta sola e separare frequenza (passo 2, danni attuali) da potenza e difesa POISON (passo 3). Proposta 1.3 consegnata, in attesa di approvazione. Fase A con STOP: solo documenti, nessuna attuazione.**
+**Versione 1.3 — 14 novembre 2026. Motivazione: applicare D71–D78 alle dieci schede, definire «Annuncia» una volta sola e separare frequenza (passo 2, danni attuali) da potenza e difesa POISON (passo 3). Proposta 1.3 approvata dal proprietario il 14 novembre 2026 («Approvo tutto», [D79](../../set-base-plan.md#decisioni-del-proprietario)). Fase A con STOP: solo documenti, nessuna attuazione.**
 
 La meccanica del [contratto d50 1.0](sb-16g-2b1-rules.md) è approvata (D75); carte concrete e sostituzioni richiedono ancora il giudizio del proprietario. D78 approva «Annuncia», non i numeri delle carte. Gli aumenti della 1.2 restano proposti nella sezione del passo 3.
 
