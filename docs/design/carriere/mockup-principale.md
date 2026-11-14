@@ -201,3 +201,22 @@ segnale che una bacheca di quaranta nodi andrà alleggerita (cordicelle ferme fu
    proposte sopra: passano a CA-0?
 2. «L'alleato con cui hai più segni»: la regola del mockup (chi ti accompagna nell'atto III) va bene, o serve un conteggio?
 3. Dove allungare: le proposte sopra, e una bacheca per atto per reggere più colonne.
+
+## Giudizio del proprietario e della regia
+
+14 novembre 2026. Il proprietario lo ha provato: «io non direi che dobbiamo allungare, quanto piuttosto sistemare la narrazione come già
+ti sei accorto te. A me sembra ok come lunghezza e complessità, anche senza allungarla per forza. I dialoghi ovviamente sono ancora da
+scrivere, ma già ha una sua struttura». E: «non ci sono nodi raggiungibili con sconfitte? Neanche uno?». Sul piano della regia che ne è
+seguito: «mi sembra un ottimo piano». Ne nasce la [scaletta 0.3](principale.md#le-sconfitte-che-aprono-un-ramo).
+
+Risposte alle domande del rapporto:
+
+1. **Le estensioni del formato** (segni e sblocchi con condizione, segreti con condizione, trattino nei segni) **passano a CA-0**, decisione
+   della regia; le **uscite condizionate** (`→ Fine se …`) e la **partita «a scelta»** come selettore del personaggio si fanno con
+   l'aggiornamento del mockup alla 0.3.
+2. **«L'alleato con cui hai più segni»** diventa la regola del mockup, «chi ti ha accompagnato nell'atto III», scritta nella scaletta.
+3. **Non si allunga** (proprietario). Resta valida l'osservazione sulla bacheca: oltre quattordici colonne servirebbe una bacheca per atto,
+   da decidere in CA-0 se una carriera più lunga lo chiederà.
+
+I buchi della narrazione trovati dal mockup sono chiusi nella 0.3: darle retta, a Celestina (I1s, sconfitta in I1); difendere la frase di
+Piera può fallire (II2s); la notte al Serraglio anche senza la chiave (III1s); dove Mara accusa chi; chi gioca S1.
