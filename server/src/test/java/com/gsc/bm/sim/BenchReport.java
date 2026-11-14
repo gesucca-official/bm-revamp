@@ -54,10 +54,11 @@ final class BenchReport {
     }
 
     private static int maxCost(Bench.Report r, String deck, Resource resource) {
-        List<String> cards = new ArrayList<>(r.draft.cardsOf(deck).keySet());
-        cards.add(r.draft.basicOf(deck));
-        cards.addAll(r.draft.boundOf(deck));
-        cards.add(r.draft.lastResortOf(deck));
+        Bench.DeckRef ref = r.settings.deck(r.draft, deck);
+        List<String> cards = new ArrayList<>(ref.draft.cardsOf(ref.id).keySet());
+        cards.add(ref.draft.basicOf(ref.id));
+        cards.addAll(ref.draft.boundOf(ref.id));
+        cards.add(ref.draft.lastResortOf(ref.id));
         int max = 0;
         for (String binding : cards) max = Math.max(max, r.draft.card(binding).getCost().getOrDefault(resource, 0));
         return max;
@@ -333,6 +334,17 @@ final class BenchReport {
         cap.put("colpoDiProva", BoundCap.HIT);
         head.put("tettoBound", cap);
         if (s.note != null) head.put("nota", s.note);
+        if (!s.deckSources.isEmpty()) {
+            Map<String, Object> sources = new LinkedHashMap<>();
+            s.deckSources.forEach((alias, ref) -> {
+                Map<String, Object> metadata = new LinkedHashMap<>();
+                metadata.put("deck", ref.id);
+                metadata.put("deckSize", ref.draft.rules.deckSize);
+                metadata.put("maxCopies", ref.draft.rules.maxCopies);
+                sources.put(alias, metadata);
+            });
+            head.put("variantiMiste", sources);
+        }
         root.put("intestazione", head);
 
         Map<String, Object> inv = new LinkedHashMap<>();

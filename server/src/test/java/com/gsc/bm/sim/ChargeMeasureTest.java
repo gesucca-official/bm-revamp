@@ -216,7 +216,11 @@ class ChargeMeasureTest {
         assertEquals(Ruleset.D50,SimulationRunner.selectedRuleset());
         Path out=Path.of(System.getProperty("sim.chargeOut")); Files.createDirectories(out);
         // SB-16g passo 3 (D82): arm A is the draft, arm B the draft with the Bancone of D67; the rest of the bench is the one of step 2.
-        String arm=SetBaseArms.selected(); Draft draft=SetBaseArms.arm(arm,Draft.selected()); Map<String,BotPolicy> styles=new LinkedHashMap<>();
+        String arm=SetBaseArms.selected(); Draft reference=SetBaseArms.arm(arm,Draft.selected());
+        String variant=System.getProperty("sim.deckVariant");
+        boolean mixed="mixed".equals(variant);
+        Draft draft=variant==null||mixed?reference:DeckSizeVariants.apply(reference,variant);
+        Map<String,BotPolicy> styles=new LinkedHashMap<>();
         for(SoughtHitPolicy.Timing t:SoughtHitPolicy.Timing.values())for(Map.Entry<String,BotPolicy> s:PlaygroundTest.styles().entrySet()) {
             if(s.getKey().equals("casuale"))continue;
             BotPolicy base=s.getValue()==null?new RandomPolicy():s.getValue();
@@ -227,22 +231,44 @@ class ChargeMeasureTest {
         // Exactly the four historical styles (com is wrapped, with the same seeded Random API).
         assertEquals(12,styles.size());
         ThreadLocal<Observe> watches=new ThreadLocal<>(); Observe aggregate=new Observe();
+        ThreadLocal<DeckSizeObserve> deckWatches=new ThreadLocal<>(); DeckSizeObserve deckAggregate=new DeckSizeObserve();
+        Bench.Settings settings=new Bench.Settings(Integer.getInteger("sim.chargeGames",300),7_000_000L,List.of(DECKS),styles,
+                Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b3: D82 power, final round, arm "+arm);
+        List<Bench.Cell> mixedCells=new ArrayList<>();
+        if(mixed) {
+            List<String> aliases=new ArrayList<>();
+            for(String name:List.of("20-2","30-2","30-3")) {
+                Draft d=DeckSizeVariants.apply(reference,name);
+                for(String deck:DECKS) {String alias=deck+"@"+name;aliases.add(alias);settings.deckSources.put(alias,new Bench.DeckRef(d,deck));}
+            }
+            Bench.Settings configured=new Bench.Settings(settings.games,settings.firstSeed,aliases,styles,settings.threads,settings.cap,
+                    "SB-16h D83: ten mixed matchups; A=20/2, B=30/2 or 30/3");
+            configured.deckSources.putAll(settings.deckSources); settings=configured;
+            for(String deck:DECKS)for(String big:List.of("30-2","30-3"))
+                for(String sa:styles.keySet())for(String sb:styles.keySet())
+                    mixedCells.add(new Bench.Cell(deck+"@20-2",sa,deck+"@"+big,sb));
+        }
+        Bench.Settings runSettings=settings;
         PlayerSource source=(deck,id,rng,policy)-> {
-            Player p=draft.player(deck,id,rng,policy);
+            Bench.DeckRef ref=runSettings.deck(draft,deck);
+            Player p=ref.draft.player(ref.id,id,rng,policy);
             String style=styles.entrySet().stream().filter(e->e.getValue()==policy).findFirst().orElseThrow().getKey();
             Field f=Player.class.getDeclaredField("character");f.setAccessible(true); f.set(p,new Measured(p.getCharacter(),deck+"|"+style));
             return p;
         };
         long started=System.nanoTime();
-        Bench.Settings settings=new Bench.Settings(Integer.getInteger("sim.chargeGames",300),7_000_000L,List.of(DECKS),styles,
-                Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b3: D82 power, final round, arm "+arm);
-        Bench.Report report=Bench.run(draft,settings,source,(stage,g)-> {
+        BiConsumer<String,Game> observation=(stage,g)-> {
             if(stage.equals("ROUND_READY")&&g.getTurn()==0)watches.set(new Observe());
             Observe watch=watches.get();if(watch==null){watch=new Observe();watches.set(watch);} watch.accept(stage,g);
+            if(variant!=null) {
+                DeckSizeObserve dw=deckWatches.get(); if(dw==null){dw=new DeckSizeObserve();deckWatches.set(dw);} dw.accept(stage,g);
+                if(stage.equals("ROUND_COMMITTED")&&g.isOver()){deckAggregate.merge(dw);deckWatches.remove();}
+            }
             if(stage.equals("ROUND_COMMITTED")&&g.isOver()) {
                 for(Player p:g.getPlayers().values())aggregate.merge((Measured)p.getCharacter()); watches.remove();
             }
-        });
+        };
+        Bench.Report report=mixed?Bench.runCells(draft,settings,mixedCells,source,observation):Bench.run(draft,settings,source,observation);
         double seconds=(System.nanoTime()-started)/1e9;
         Files.writeString(out.resolve("matrix.json"),JSON.writeValueAsString(JSON.readTree(report.json())));
         Files.writeString(out.resolve("matrix.md"),report.markdown());
@@ -250,6 +276,7 @@ class ChargeMeasureTest {
         Files.writeString(out.resolve("draft.json"),JSON.writeValueAsString(draft.json()));
         Files.writeString(out.resolve("seconds.txt"),String.valueOf(seconds));
         Files.writeString(out.resolve("arm.txt"),arm);
+        if(variant!=null)Files.writeString(out.resolve("deck-observations.json"),JSON.writeValueAsString(deckAggregate.totals));
         for(Counts c:aggregate.totals.values())for(String[] pair:ChargeFrequency.PAIRS) {
             String pre="charge/"+pair[0]+"/";
             assertEquals(c.getOrDefault(pre+"played",0L).longValue(),c.getOrDefault(pre+"resolved",0L)+c.getOrDefault(pre+"notExecuted",0L),pre);

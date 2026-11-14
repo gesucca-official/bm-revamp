@@ -1,0 +1,1 @@
+{"seconds":{"20-2":23.3509371,"25-2":9.2259379,"25-3":7.2775272,"30-2":7.6293286,"30-3":9.0435455,"mixed":4.5971613},"totalBenchSeconds":61.1244376,"phaseSeconds":63.8021194,"measuredSeconds":61.1244376,"estimates":{"300":6996.499229999999,"150":3558.2496149999997},"gamesPerCell":300,"feasible":true,"step0OutsideBudget":true,"formula":"sum(bench seconds) × (N/4) × 1.5 + 120"}

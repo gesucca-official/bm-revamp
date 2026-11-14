@@ -68,6 +68,12 @@ final class Bench {
         final String note;
         /** SB-16c: le regole delle partite; il rapporto le dichiara solo se non sono quelle del gioco vivo. */
         final Ruleset ruleset;
+        /** Optional heterogeneous deck aliases, used only by SB-16h's ten mixed matchups. */
+        final Map<String, DeckRef> deckSources = new LinkedHashMap<>();
+
+        DeckRef deck(Draft fallback, String alias) {
+            return deckSources.getOrDefault(alias, new DeckRef(fallback, alias));
+        }
 
         Settings(int games, long firstSeed, List<String> decks, Map<String, BotPolicy> styles, int threads, BoundCap.Params cap, String note) {
             this(games, firstSeed, decks, styles, threads, cap, note, SimulationRunner.selectedRuleset());
@@ -85,6 +91,12 @@ final class Bench {
             this.note = note;
             this.ruleset = ruleset;
         }
+    }
+
+    static final class DeckRef {
+        final Draft draft;
+        final String id;
+        DeckRef(Draft draft, String id) { this.draft = draft; this.id = id; }
     }
 
     /** Una violazione di un invariante: dice dove trovarla. */
@@ -281,12 +293,20 @@ final class Bench {
 
     /** Optional observer, after the invariant observer; default reports and decisions remain unchanged. */
     static Report run(Draft draft, Settings settings, PlayerSource players, BiConsumer<String, Game> observation) throws Exception {
-        for (String deck : settings.decks)
-            if (!draft.deckIds().contains(deck)) throw new IllegalArgumentException("Mazzo assente: " + deck + " (noti: " + draft.deckIds() + ")");
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < settings.decks.size(); i++) for (int j = i; j < settings.decks.size(); j++)
             for (String sa : settings.styles.keySet()) for (String sb : settings.styles.keySet())
                 cells.add(new Cell(settings.decks.get(i), sa, settings.decks.get(j), sb));
+        return runCells(draft, settings, cells, players, observation);
+    }
+
+    /** Same runner, seeds, checks and reports, with an explicit set of matchups. */
+    static Report runCells(Draft draft, Settings settings, List<Cell> cells, PlayerSource players,
+                           BiConsumer<String, Game> observation) throws Exception {
+        for (String deck : settings.decks) {
+            DeckRef ref = settings.deck(draft, deck);
+            if (!ref.draft.deckIds().contains(ref.id)) throw new IllegalArgumentException("Mazzo assente: " + deck);
+        }
         playCells(draft, settings, cells, players, observation);
         Report report = new Report(draft, sha256(draft), settings, cells, BoundCap.run(draft, settings.cap));
         staticChecks(draft, report.checks);
@@ -335,7 +355,7 @@ final class Bench {
             boolean aFirst = seed % 2 == 0;
             SimulationRunner.Contender ca = new SimulationRunner.Contender(cell.deckA, pa);
             SimulationRunner.Contender cb = new SimulationRunner.Contender(cell.deckB, pb);
-            Watch watch = new Watch(draft, cell, seed,
+            Watch watch = new Watch(draft, settings, cell, seed,
                     aFirst ? cell.deckA : cell.deckB, aFirst ? cell.styleA : cell.styleB,
                     aFirst ? cell.deckB : cell.deckA, aFirst ? cell.styleB : cell.styleA);
             SimulationRunner.Result result = runner.run(seed, aFirst ? ca : cb, aFirst ? cb : ca, (stage, game) -> {
@@ -370,11 +390,12 @@ final class Bench {
         private final long seed;
         private final Map<String, Seat> seats = new LinkedHashMap<>();
 
-        Watch(Draft draft, Cell cell, long seed, String deck1, String style1, String deck2, String style2) {
+        Watch(Draft draft, Settings settings, Cell cell, long seed, String deck1, String style1, String deck2, String style2) {
             this.cell = cell;
             this.seed = seed;
-            seats.put("seat-1", new Seat(draft, deck1, style1));
-            seats.put("seat-2", new Seat(draft, deck2, style2));
+            DeckRef first = settings.deck(draft, deck1), second = settings.deck(draft, deck2);
+            seats.put("seat-1", new Seat(first.draft, first.id, style1));
+            seats.put("seat-2", new Seat(second.draft, second.id, style2));
         }
 
         @Override

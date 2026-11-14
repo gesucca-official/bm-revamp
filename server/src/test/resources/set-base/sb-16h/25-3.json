@@ -1,0 +1,80 @@
+{
+  "deckSize": 25,
+  "maxCopies": 3,
+  "decks": {
+    "starter-spazienzio": {
+      "bruiser.SuperImpact": 3,
+      "bruiser.ExtremelyViolentBlow": 1,
+      "bruiser.Glare": 3,
+      "bruiser.MadeOfStone": 3,
+      "bruiser.YouStop": 2,
+      "base.bruiser.TiFaccioSpazio": 1,
+      "bruiser.SeagullFly": 3,
+      "base.com.TartarugaSulMarciapiede": 2,
+      "base.com.MattoneDelCantiere": 1,
+      "bruiser.HealingBlow": 1,
+      "base.com.DentiStretti": 1,
+      "com.items.CocktailOnTheGround": 3,
+      "base.items.PosacenereDiVetro": 1
+    },
+    "starter-mara": {
+      "base.mara.CinghiataDiTraverso": 1,
+      "base.mara.Sgommata": 3,
+      "base.mara.SorpassoInCurva": 3,
+      "base.mara.TraDueParaurti": 2,
+      "base.mara.Slalom": 3,
+      "base.mara.TiStringoLaCurva": 1,
+      "base.com.Spintone": 1,
+      "base.com.SputoDaPosacenere": 3,
+      "base.com.TartarugaSulMarciapiede": 1,
+      "com.Steal": 1,
+      "base.items.EspressoDelDistributore": 3,
+      "base.items.PaninoDelKebab": 2,
+      "base.items.GiubbottoDiFintaPelle": 1
+    },
+    "starter-tossico": {
+      "junkie.MethDrivenRage": 3,
+      "junkie.Cough": 3,
+      "junkie.PervertedMetabolism": 3,
+      "junkie.AmphetamineReflexes": 2,
+      "junkie.ToxicBloodDrain": 1,
+      "base.tossico.UnAssaggino": 1,
+      "com.Grab": 3,
+      "base.com.RincorsaDalMarciapiede": 1,
+      "com.Steal": 1,
+      "base.com.FasciaturaColFazzolettaccio": 1,
+      "base.items.PasticcaTrovataSulBancone": 3,
+      "base.items.PaninoDelKebab": 2,
+      "com.items.MarvelousCocktail": 1
+    },
+    "starter-pino": {
+      "base.pino.TestataDaUltimoGiro": 3,
+      "base.pino.GoingBerserk": 3,
+      "base.pino.IlBanconeRegge": 2,
+      "base.pino.OffroIo": 3,
+      "base.pino.RuttoADistanzaSociale": 1,
+      "base.pino.PrimaIlBrindisi": 1,
+      "com.Grab": 2,
+      "base.com.Spintone": 3,
+      "base.com.FasciaturaColFazzolettaccio": 1,
+      "base.items.AmaroNelBicchiereDiPlastica": 3,
+      "com.items.RottenBeer": 2,
+      "com.items.AnotherRottenBeer": 1
+    },
+    "starter-gigi": {
+      "bruiser.BreakYourToy": 3,
+      "base.gigi.ChiaveDaTredici": 3,
+      "base.gigi.ColpoDiChiaveInglese": 3,
+      "base.gigi.SottoIlCofano": 1,
+      "base.gigi.LavoroFattoBene": 1,
+      "base.gigi.UnaStrettaDiProva": 1,
+      "com.Steal": 3,
+      "bruiser.SeagullFly": 1,
+      "base.com.Spintone": 1,
+      "base.items.GuantiDaOfficina": 2,
+      "base.items.GiubbottoDiFintaPelle": 2,
+      "base.items.CascoDaLavoro": 3,
+      "base.items.EspressoDelDistributore": 1
+    }
+  }
+}
