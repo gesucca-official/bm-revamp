@@ -218,6 +218,27 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
       avvisi.add(`la battuta della riga ${p.riga} (nodo ${n.id}) non si vede mai`);
   }
 
+  // Mockup della principale 0.3.2 (proprietario: «perdere non dovrebbe essere una meccanica normale per proseguire sulla mappa, ma una
+  // segreta»): un nodo a cui si arriva solo perdendo dev'essere segreto; una tasca si raggiunge solo perdendo.
+  const entrate = new Map<string, Set<'sconfitta' | 'altro'>>();
+  const entra = (d: Destinazione | undefined, tipo: 'sconfitta' | 'altro') => {
+    if (d && 'nodo' in d) (entrate.get(d.nodo) ?? entrate.set(d.nodo, new Set()).get(d.nodo)!).add(tipo);
+  };
+  for (const n of c.nodi) {
+    for (const p of n.passi) {
+      if (p.tipo === 'partita') entra(p.sconfitta, 'sconfitta');
+      if (p.tipo === 'scelta') p.opzioni.forEach(o => entra(o.verso, 'altro'));
+    }
+    for (const u of usciteDi(n)) if (!('nodo' in u.verso && u.verso.da === 'scelta')) entra(u.verso, 'altro');
+  }
+  for (const n of c.nodi) {
+    const e = entrate.get(n.id);
+    if (n.id === c.inizio || !e) continue;
+    if (!e.has('altro') && !n.segreto) avvisi.add(`il nodo ${n.id} si raggiunge solo perdendo ma non è segreto`);
+    if (n.tasca && e.has('altro')) avvisi.add(`la tasca ${n.id} si raggiunge anche senza perdere`);
+  }
+  for (const n of c.nodi) if (n.tasca && !entrate.get(n.id)?.has('sconfitta')) avvisi.add(`la tasca ${n.id} non si raggiunge perdendo`);
+
   const segreti: Record<string, string[]> = {};
   for (const n of c.nodi) if (n.segreto) segreti[n.id] = [...(verso.get(n.id) ?? [])];
   const conta = (e: Esito) => fini.filter(f => f.esito === e).length;

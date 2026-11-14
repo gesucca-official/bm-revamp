@@ -325,3 +325,96 @@ non cambiano. La bacheca ferma torna a 16,7 ms; con il movimento ridotto lo era 
 
 Il carico della macchina, durante queste misure, era più alto di quello della prima stesura (la bacheca della prova, misurata di
 controllo, è passata da 16 a 44 fotogrammi lunghi): i numeri si confrontano fra loro, non con quelli della 0.2.
+
+## Sconfitte segrete
+
+14 novembre 2026, dopo la prova del proprietario sulla 0.3 e la [scaletta 0.3.2](principale.md#le-sconfitte-che-aprono-un-ramo)
+(«Le sconfitte sono un segreto»). `principale.md` non è stato toccato.
+
+### Che cosa aveva visto il proprietario
+
+- Sulla bacheca di una carriera nuova le sconfitte erano già disegnate, con le loro cordicelle rosse: I1 → I1s sulla fila in alto, II2a →
+  II2s, III1 → III1s, III2a → III3c. Lui: «perdere non dovrebbe essere una meccanica normale per proseguire sulla mappa, ma una segreta da
+  usare sporadicamente».
+- **Un difetto:** nella cattura del giro con le tre sconfitte mancava la cordicella I1 → I2a, e il Fabbro stava sulla seconda fila slegato
+  dalla strada. La causa: la strada del giro si disegnava con i nodi visti uno dopo l'altro (I1, I1s, I2a), e l'arco I1s → I2a non
+  esiste. Lo stesso succedeva a II2a → II3 dopo Piera offesa.
+
+### Che cosa cambia
+
+- **I1s, II2s, III1s e III3c sono segreti** (`[Nodo: segreto]`, il meccanismo che c'era già): niente post-it e niente cordicella finché
+  non ci si arriva; quando la sconfitta li apre compaiono, e dopo restano sulla bacheca nei giri seguenti, con il nome, come gli altri
+  nodi già visti. Una carriera nuova mostra una sola cordicella rossa, quella del finale F3, che resta fra i «piatti del giorno».
+- **I1s e II2s sono tasche** (`[Nodo: segreto; tasca]`, estensione minima del formato):
+  - sulla bacheca pendono dal nodo perso, nella sua stessa colonna e sotto di lui, con la sola cordicella rossa d'arrivo: nessuna
+    cordicella esce da una tasca, nemmeno quella del ritorno alla scelta di I1;
+  - non contano per le colonne: II2s non sposta più tutto di una colonna, e la bacheca torna a quattordici colonne di nodi;
+  - la strada del giro salta le tasche e riprende dal nodo perso: nel giro delle sconfitte sono tese I1 → I2a (il difetto è corretto) e
+    II2a → II3, oltre alle cordicelle rosse I1 → I1s e II2a → II2s;
+  - la puntina «sei qui», dopo il pavimento, torna su I1 e non resta sulla tasca.
+- **III1s e III3c sono rami veri:** compaiono con le cordicelle d'arrivo (rossa) e d'uscita (verso la notte al Serraglio, verso i conti)
+  solo quando ci si arriva.
+- **Il controllo del grafo vede le sconfitte** come prima (sono fra i segreti, con il nodo da cui ci si arriva) e ha **tre avvisi nuovi,**
+  per le storie future: un nodo a cui si arriva solo perdendo e non è segreto; una tasca a cui si arriva anche senza perdere; una tasca a
+  cui non si arriva perdendo. Per contare le strade il controllo non considera il ritorno alla scelta (I1s → I1), che non è una strada
+  nuova verso I1.
+- **Due ritocchi della 0.3.1** nella storia, che il mockup non aveva ancora: Mara accusa Piera prima della partita di II2a (così «Ve
+  l'avevo detto» conta un'accusa che c'è sempre), e dopo II2s Piera torna al tavolo in II3 «per Grappino, non per voi».
+
+![La bacheca di una carriera nuova: nessuna sconfitta](../../../prototipi/carriere/catture/p32-o-01-mappa-intera.jpg)
+![Il giro delle tre sconfitte: le tasche sotto I1 e II2a, lo sgombero come ramo, il Fabbro legato a I1](../../../prototipi/carriere/catture/p32-o-02-giro-tre-sconfitte.jpg)
+![Il giro dopo: le sconfitte viste restano, i debiti mai visti no](../../../prototipi/carriere/catture/p32-o-03-giro-dopo.jpg)
+
+Sul telefono: [la bacheca nuova](../../../prototipi/carriere/catture/p32-v-01-mappa-intera.jpg),
+[il giro delle tre sconfitte](../../../prototipi/carriere/catture/p32-v-02-giro-tre-sconfitte.jpg),
+[il giro dopo](../../../prototipi/carriere/catture/p32-v-03-giro-dopo.jpg). Registrazione:
+[`p32-giro-sconfitte.webm`](../../../prototipi/carriere/catture/p32-giro-sconfitte.webm) (27 s, 960×540), la bacheca a ogni ritorno lungo
+il giro delle tre sconfitte: le sconfitte che compaiono una alla volta quando ci si arriva.
+
+- **La bacheca ferma, di nuovo più lenta, corretta:** con le sconfitte nascoste le sedici cordicelle più corte arrivavano a 270 px, e la
+  bacheca ferma della principale era tornata a 33 ms di mediana per fotogramma. Ora, sulla bacheca grande, stanno ferme anche le
+  cordicelle più lunghe del 18% della larghezza del feltro (`soloLePiuCorte`, con la sua prova); il tutorial e la prova non cambiano. La
+  bacheca ferma torna a 16,7 ms di mediana.
+
+### Numeri
+
+Le strade non cambiano: 136 percorsi al primo giro e 204 dopo F1, da 11 a 13 nodi con partita (14 con la rivincita), PvP sempre alla
+quarta partita. Il controllo del grafo: 24 nodi su 24, 333 stati, 0 errori e 0 avvisi; sei segreti (I1s da I1, II2s da II2a, III1s da
+III1, III3c da III2a, S1 da III1, S2 da III5).
+
+### Che cosa resta da decidere
+
+- **La prova** (`storie/prova.md`, la mini-carriera della regia) ha il retrobottega, a cui si arriva solo perdendo in C (risposta P3 della
+  Fase B), e non è segreto: il controllo ora lo dice con un avviso. Non l'ho cambiato, perché la prova non è una storia del gioco e farlo
+  segreto cambierebbe le sue catture e le sue prove; se seguire la regola anche lì lo decide la regia.
+- **Il posto vuoto delle tasche nascoste:** la disposizione della bacheca è fissa, quindi la riga di II2s, sotto II2a, resta libera anche
+  quando II2s non si vede, e II2b e II2c stanno una riga più in basso. Si nota poco; lo stesso fa da sempre S1.
+- **Starter prima della partita (0.3.1):** la scaletta dice che lo starter arriva quando il personaggio si siede al tavolo, ma anche che
+  dopo II2s Piera gioca in II3 «se tocca a lei». Se lo starter di Piera arrivasse prima della partita di II2a, dopo II2s non toccherebbe più
+  a lei. Il mockup tiene lo starter di Piera e di Beppe dopo la vittoria in II2a e II2b (così Piera torna in II3), e prima della partita
+  solo in III1: va chiarito quale delle due regole vale.
+
+### Verifiche
+
+| Comando | Esito |
+|---|---|
+| `run.ps1 -Task Test`, `-Task Check`, `-Task Build` | verdi: 120 prove. Nuove: la bacheca nuova senza sconfitte (una sola cordicella rossa, verso F3), il giro delle tre sconfitte (tasche senza strade proprie, I1 → I2a e II2a → II3 tese, lo sgombero con le sue cordicelle, i debiti ancora nascosti, la puntina che torna su I1), le sconfitte viste nel giro dopo, le tasche nella colonna del nodo perso, gli avvisi nuovi del controllo, il tetto sulla lunghezza delle cordicelle. Il Check segnala l'avviso della prova (sotto «Che cosa resta da decidere») |
+| `strumenti/percorsi.ts` | i numeri sopra |
+| Banco della fluidità, solo sulla bacheca della principale | zero difetti visibili; sotto |
+| Catture (`strumenti/catture-principale.mjs`) | verdi, giocando dall'interfaccia, con i controlli di bordo: le quattro sconfitte e i due segreti nascosti all'inizio, le sconfitte fatte a fine giro, i debiti mai visti nascosti, le sconfitte viste ancora sulla bacheca nel giro dopo |
+| Mutazioni | 14 sulle parti nuove (la strada del giro che salta le tasche, la cordicella d'arrivo, niente strade in uscita, la puntina, le colonne, gli avvisi, il ritorno alla scelta, la tasca nel convertitore, due segreti nella storia, il tetto sulla lunghezza): tutte prese; una all'inizio sfuggiva (il ritorno alla scelta contato come strada): rafforzata la prova |
+| `python scripts/check-links.py`, `python scripts/check-rules.py`, `git diff --check` | verdi sui file di questo lavoro; `check-links` trova un'ancora mancante in `docs/design/set-base/sb-16g-proposta.md`, una modifica non committata di un'altra sessione, che non ho toccato |
+
+**Banco della fluidità** sulla bacheca della principale (il giro del banco apre la bacheca dopo I1 e dopo I2a, con la «sei qui» che
+viaggia e i post-it che si staccano):
+
+| Giro | Con il solo tetto sul numero: lunghi, p95 (ms) | Con il tetto anche sulla lunghezza: lunghi, p95 (ms) | Vuoti, lampeggi, salti, veli, bocche |
+|---|---|---|---|
+| bacheca-principale-o-1x | 121, 100 | 55, 51 | 0 |
+| bacheca-principale-o-4x | 129, 133 | 48, 50 | 0 |
+| bacheca-principale-v-1x | 33, 50 | 7, 17 | 0 |
+| bacheca-principale-v-4x | 42, 67 | 12, 17 | 0 |
+
+In orizzontale i fotogrammi lunghi restano più di quelli della 0.3 dopo la sua correzione (16 e 52): la bacheca, ferma, è a 16,7 ms di
+mediana, ma le aperture con il viaggio della «sei qui» e i post-it pesano di più su una bacheca di 24 nodi. Non si vedono come scatti; è
+un altro segnale che una carriera di queste dimensioni chiederà, nel client, una bacheca più leggera o divisa per atti.

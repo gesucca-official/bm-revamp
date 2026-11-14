@@ -227,6 +227,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
           if (!primo) avviso(riga, '[Nodo: …] va subito sotto il titolo');
           for (const o of arg.split(';').map(s => s.trim()).filter(Boolean)) {
             if (o === 'segreto') nodo.segreto = true;
+            else if (o === 'tasca') nodo.tasca = true;
             else if (o.startsWith('se ')) nodo.condizione = condizione(o.slice(3), riga);
             else errore(riga, `opzione di nodo sconosciuta: «${o}»`);
           }

@@ -20,6 +20,9 @@ export type Nodo = {
   etichetta: string;           // «Scena 1», «B»: come lo chiama l'autore
   titolo: string;              // come appare sulla mappa
   segreto?: true;              // non disegnato sulla mappa finché non lo si è visto in un giro
+  // Mockup della principale 0.3.2: una «tasca», una scena che si apre perdendo e pende dal nodo perso, senza strade proprie sulla bacheca
+  // (la storia riprende dal nodo perso). «[Nodo: segreto; tasca]».
+  tasca?: true;
   condizione?: Condizione;     // per entrarci (oltre all'arco che ci porta)
   passi: Passo[];
   uscita: Uscita;

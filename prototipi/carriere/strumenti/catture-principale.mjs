@@ -1,9 +1,10 @@
-// Mockup della principale (14 novembre 2026, aggiornato alla scaletta 0.3): catture della bacheca della carriera «Il Serraglio chiude»,
-// giocata davvero dall'interfaccia, a 1366×768 e 390×844. La mappa intera all'inizio, e un giro con le tre sconfitte che aprono un ramo
-// (I1 → il pavimento, II2a → Piera non parla più, III1 → lo sgombero e la notte dalla porta sul retro). Le catture della prima stesura,
-// sulla 0.2 (i giri a, b, c e S2 dopo F1), sono nel repository come erano (p-*.jpg). Fa anche da prova di bordo: se un passo atteso non
-// c'è, esce con 1. Uso (dopo Build): node strumenti/catture-principale.mjs; con BM_REGISTRA=si registra anche la bacheca lungo il giro
-// delle sconfitte (p3-giro-sconfitte.webm). Uscita in BM_OUT, o in %TEMP%\bm-carriere-principale.
+// Mockup della principale (14 novembre 2026, aggiornato alla scaletta 0.3.2, «le sconfitte sono un segreto»): catture della bacheca della
+// carriera «Il Serraglio chiude», giocata davvero dall'interfaccia, a 1366×768 e 390×844. La mappa nuova, senza sconfitte visibili; il
+// giro con le tre sconfitte che aprono un ramo (I1 → il pavimento, II2a → Piera non parla più, III1 → lo sgombero), con le tasche e i
+// rami; la bacheca del giro dopo, con le sconfitte ormai viste. Le catture delle stesure di prima (p-*.jpg sulla 0.2, p3-*.jpg sulla 0.3)
+// sono nel repository come erano. Fa anche da prova di bordo: se un passo atteso non c'è, esce con 1. Uso (dopo Build):
+// node strumenti/catture-principale.mjs; con BM_REGISTRA=si registra anche la bacheca lungo il giro delle sconfitte
+// (p32-giro-sconfitte.webm). Uscita in BM_OUT, o in %TEMP%\bm-carriere-principale.
 import {chromium} from '@playwright/test';
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
@@ -99,7 +100,7 @@ async function giro(nome, viewport, registrare) {
   const foto = async (n, attesa = 600) => {
     await page.waitForTimeout(attesa);
     if (await tid('mappa').count()) await page.waitForFunction(() => !document.querySelector('[data-testid=viaggio], [data-cade], [data-penzola]'), null, {timeout: 8000});
-    await page.screenshot({path: path.join(out, `p3-${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
+    await page.screenshot({path: path.join(out, `p32-${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
   };
   const stato = id => tid(`nodo-${id}`).getAttribute('data-stato');
   const pezzi = [];
@@ -152,18 +153,26 @@ async function giro(nome, viewport, registrare) {
   await tid('apri-principale').click();
   await tid('mappa').waitFor();
   atteso(await stato('i1') === 'disponibile', 'I1 affrontabile all\'inizio');
-  atteso(!(await tid('nodo-s1').count()) && !(await tid('nodo-s2').count()), 'i due segreti nascosti');
+  for (const id of ['s1', 's2', 'i1s', 'ii2s', 'iii1s', 'iii3c']) atteso(!(await tid(`nodo-${id}`).count()), `${id} nascosto all'inizio`);
   await foto('01-mappa-intera', 1500);
 
-  // Il giro delle tre sconfitte (0.3): si perde I1 (il pavimento, poi di nuovo la scelta), si perde la frase di Piera (II2s), si perde
-  // contro Duccio (lo sgombero, poi la notte al Serraglio senza la chiave). Finisce con F1.
+  // Il giro delle tre sconfitte: si perde I1 (il pavimento, poi di nuovo la scelta), si perde la frase di Piera (II2s), si perde contro
+  // Duccio (lo sgombero, poi la notte al Serraglio senza la chiave). Finisce con F1. Le tasche pendono dal nodo perso; il Fabbro è legato
+  // a I1 dalla cordicella del giro.
   if (registrare) pezzi.length = 0;
   await gioca(['con Mara', 'con Piera', 'con Beppe, a comprarlo'], ['Il cartello', 'La frase di Piera', 'Sabato sera']);
   atteso((await tid('finale').textContent()).includes('Il Serraglio resta'), 'il giro delle sconfitte: il Serraglio resta');
   await allaBacheca();
   for (const id of ['i1s', 'ii2s', 'iii1s', 'iii3b']) atteso(await stato(id) === 'fatto', `il giro delle sconfitte: ${id}`);
+  atteso(!(await tid('nodo-iii3c').count()), 'i debiti, mai visti, nascosti');
   await foto('02-giro-tre-sconfitte', 800);
-  if (registrare) { await sullaBacheca(); await codifica(unisci(pezzi), 'p3-giro-sconfitte.webm', {width: 960, height: 540}); }
+  if (registrare) { await sullaBacheca(); await codifica(unisci(pezzi), 'p32-giro-sconfitte.webm', {width: 960, height: 540}); }
+
+  // Il giro dopo: le sconfitte ormai viste restano sulla bacheca, con i nomi; i debiti no.
+  await nuovoGiro();
+  for (const id of ['i1s', 'ii2s', 'iii1s']) atteso(await tid(`nodo-${id}`).count() === 1, `${id} visto: resta sulla bacheca`);
+  atteso(!(await tid('nodo-iii3c').count()), 'i debiti ancora nascosti');
+  await foto('03-giro-dopo', 1200);
 
   atteso(!errori.length, `nessun errore nella pagina (${errori.join(' | ')})`);
   await ctx.close();

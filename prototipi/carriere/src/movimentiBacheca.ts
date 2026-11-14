@@ -338,10 +338,13 @@ export const OSCILLANTI = 16;
 /**
  * Mockup della principale 0.3: con trentatré cordicelle, molte lunghe quanto la bacheca, farle oscillare tutte (ognuna con l'ombra sfocata
  * da ridipingere) portava la bacheca ferma a 83 ms per fotogramma. Oscillano al più le OSCILLANTI più corte; le altre penzolano ferme
- * (ampiezza 0). Il tutorial e la prova ne hanno meno, e non cambiano. Cambia le ampiezze sul posto e restituisce la stessa lista.
+ * (ampiezza 0). Sulla bacheca grande stanno ferme anche quelle più lunghe di `lunghe` pixel (0.3.2: con le sconfitte nascoste le sedici
+ * più corte arrivavano a 270 px, e la bacheca ferma tornava a 33 ms per fotogramma). Il tutorial e la prova ne hanno meno, e non cambiano.
+ * Cambia le ampiezze sul posto e restituisce la stessa lista.
  */
-export function soloLePiuCorte<F extends {l: number; amp: number}>(fili: F[], quante = OSCILLANTI): F[] {
+export function soloLePiuCorte<F extends {l: number; amp: number}>(fili: F[], quante = OSCILLANTI, lunghe = Infinity): F[] {
   const mosse = fili.filter(f => f.amp > 0).sort((x, y) => x.l - y.l);
-  for (const f of mosse.slice(quante)) f.amp = 0;
+  if (mosse.length <= quante) return fili;
+  mosse.forEach((f, i) => { if (i >= quante || f.l > lunghe) f.amp = 0; });
   return fili;
 }

@@ -185,7 +185,8 @@ export function valida(dati: unknown, cast: Cast): string[] {
   nodi.forEach((n, i) => {
     const dove = `nodi[${i}]`;
     if (!ogg(n, dove)) return;
-    campi(n, dove, ['id', 'etichetta', 'titolo', 'passi', 'uscita', 'riga'], ['segreto', 'condizione']);
+    campi(n, dove, ['id', 'etichetta', 'titolo', 'passi', 'uscita', 'riga'], ['segreto', 'condizione', 'tasca']);
+    if ('tasca' in n) vero(n.tasca, `${dove}.tasca`);
     testo(n.id, `${dove}.id`, ID); testo(n.etichetta, `${dove}.etichetta`); intero(n.riga, `${dove}.riga`);
     if (typeof n.titolo !== 'string') err(`${dove}.titolo`, 'atteso un testo');
     if ('segreto' in n) vero(n.segreto, `${dove}.segreto`);

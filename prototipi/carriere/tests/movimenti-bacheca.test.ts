@@ -221,4 +221,8 @@ test('su una bacheca grande oscillano solo le cordicelle più corte; su una picc
   const fermate = grande.filter((f, i) => f.amp === 0 && prima33[i].amp > 0);
   assert.equal(fermate.length, prima33.filter(f => f.amp > 0).length - OSCILLANTI);
   assert.ok(fermate.every(f => f.l >= Math.max(...mosse.map(m => m.l))), 'ferme le più lunghe');
+  // Sulla bacheca grande stanno ferme anche le lunghe oltre il limite; su una piccola il limite non conta.
+  const conLimite = soloLePiuCorte(fili(33), OSCILLANTI, 400);
+  assert.ok(conLimite.every(f => f.amp === 0 || f.l <= 400) && conLimite.some(f => f.amp > 0));
+  assert.deepEqual(soloLePiuCorte(fili(10), OSCILLANTI, 150).map(f => f.amp), fili(10).map(f => f.amp), 'piccola: il limite non conta');
 });

@@ -46,12 +46,18 @@ export function archi(c: Carriera): Arco[] {
 
 /** Colonna = il percorso più lungo dall'inizio senza archi all'indietro; riga = quella del predecessore, se libera. */
 export function disposizione(c: Carriera): {posizione: Record<string, {colonna: number; riga: number}>; colonne: number; righe: number} {
-  const avanti = archi(c).filter(a => !a.indietro);
+  // Mockup della principale 0.3.2: le tasche non contano per le colonne; pendono dal nodo perso, nella sua colonna.
+  const tasche = new Set(c.nodi.filter(n => n.tasca).map(n => n.id));
+  const avanti = archi(c).filter(a => !a.indietro && !tasche.has(a.da) && !tasche.has(a.a));
   const tutte = caselle(c);
   const colonna: Record<string, number> = {[c.inizio]: 0};
   for (let cambiato = true, giri = 0; cambiato && giri < tutte.length + 1; giri++) {
     cambiato = false;
     for (const a of avanti) if (colonna[a.da] !== undefined && (colonna[a.a] ?? -1) < colonna[a.da] + 1) { colonna[a.a] = colonna[a.da] + 1; cambiato = true; }
+  }
+  for (const t of tasche) {
+    const da = archi(c).filter(a => a.a === t && !tasche.has(a.da)).map(a => colonna[a.da] ?? 0);
+    colonna[t] = da.length ? Math.max(...da) : 0;
   }
   // Riga: quella del primo predecessore già posato, se libera nella colonna; altrimenti la libera più vicina. Così un ramo resta
   // sulla sua riga (C → E) invece di attraversare gli altri.

@@ -7,7 +7,7 @@
 import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} from 'react';
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
-import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
+import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, seiQui as dovePuntina, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
 import {chiusiOra, filiDaRiprendere, soloLePiuCorte, filoPenzolante, strappi, tempiFilo, TEMPI_FILO, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
@@ -48,7 +48,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const {w, h} = useMisura();
   const verticale = h > w;
   const g = s.giro;
-  const ultimo = g.nodo ?? g.visti.at(-1) ?? null;  // «sei qui»: dove si è, o l'ultimo nodo lasciato
+  const ultimo = dovePuntina(c, s);  // «sei qui»: dove si è, o l'ultimo nodo lasciato (una tasca non conta)
   // Mockup della principale: con molte colonne i titoli vanno a capo prima, per non invadere le colonne vicine.
   const molte = useMemo(() => disposizione(c).colonne > 9, [c]);
   const comp = componi(c, s, ultimo, `Serraglio — carriera: ${c.titolo}`, verticale ? 12 : molte ? 8 : 13);
@@ -143,7 +143,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
       const seme = `${f.da}>${f.a}`, l = Math.hypot(b.x - a.x, b.y - a.y);
       return {seme, tipo: f.tipo, a, l, cat: catenaria(a, b, f.tipo), amp: ampiezzaFilo(f.tipo, l), ritmo: ritmo(seme), coda: ritmo(seme + ':coda')};
     });
-    return soloLePiuCorte(tutti);
+    return soloLePiuCorte(tutti, undefined, d.fw * 0.18);
   }, [comp.fili, d.pos]);
   // Fase K: le cordicelle legate alla puntina del nodo d'arrivo, che si toglie per far posto alla «sei qui»: cadono, penzolano e la «sei
   // qui» le riprende quando arriva (movimentiBacheca.ts, filoPenzolante). Finché il viaggio non è finito le disegna il movimento.

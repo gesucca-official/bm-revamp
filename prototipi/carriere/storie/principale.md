@@ -18,6 +18,8 @@
 >   Celestina per lo sgombero e per Grappino. S1 lo gioca Celestina.
 > - **Starter garantiti:** in II3 e in III1 lo sblocco dello starter ha una condizione (`[Se …] [Sblocca: …]`). In III1, quando Beppe non
 >   ti ha ancora dato le sue carte, lo sblocco viene prima della partita, perché III1 si può perdere.
+> - **Le sconfitte sono un segreto** (0.3.2): I1s, II2s, III1s e III3c sono nodi segreti, sulla bacheca solo dopo esserci arrivati; I1s e
+>   II2s sono tasche (`[Nodo: segreto; tasca]`), che pendono dal nodo perso senza strade proprie.
 > - **Finali:** III5 vinto esce con uscite condizionate (`→ Fine: … [Se …]`, estensione della 0.3): il finale giusto per la strada fatta,
 >   senza pulsanti. Dopo F1, in un giro nuovo, prima delle uscite c'è l'offerta della rivincita S2 (una scelta «se c'è»).
 
@@ -45,6 +47,8 @@
 - con Spazienzio, a SPIEGARLO al Dimmi Di Sì [Segno: via-atto-1 = spazienzio] → I2b
 
 ## I1s — Il pavimento
+
+[Nodo: segreto; tasca]
 
 [Sfondo: S2 disordine, il pavimento del bar.]
 
@@ -152,6 +156,8 @@
 
 [Sfondo: S2]
 
+**Mara** (sospettosa): Piera copre qualcuno. Ve l'avevo detto.
+
 **Piera** (brilla): Dieci anni fa... stava per chiudere... e un signore...
 
 [Stacchi: Spazienzio fumante] [Interrotta]
@@ -166,7 +172,7 @@
 
 [Interrotta]
 
-**Mara** (illuminata): Piera copre qualcuno. Ve l'avevo detto.
+**Mara** (illuminata): Alto e secco. Un alieno.
 
 [Segno: frase]
 
@@ -175,6 +181,8 @@
 → Vai a: II3
 
 ## II2s — Piera non parla più
+
+[Nodo: segreto; tasca]
 
 [Sfondo: S2]
 
@@ -236,6 +244,8 @@
 
 **Duccio** (neutra): Io sto con lui.
 
+[Se visto II2s] **Piera** (offesa): Gioco... per Grappino... non per voi...
+
 [Se segno pista = piera e vinto II2a] [Segno: ii3 = beppe]
 
 [Se non segno ii3 = beppe] [Segno: ii3 = piera]
@@ -274,6 +284,8 @@
 
 ## III1s — Sgomberati
 
+[Nodo: segreto]
+
 [Sfondo: S1 insegna-spenta, il marciapiede.]
 
 **Duccio** (neutra): Fuori tutti. Chiuso.
@@ -301,6 +313,8 @@
 → Vai a: III3a
 
 ## III3c — I debiti
+
+[Nodo: segreto]
 
 [Sfondo: S2 disordine]
 

@@ -5,7 +5,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {converti} from '../src/converti.ts';
 import {controllaGrafo} from '../src/grafo.ts';
-import {statiMappa} from '../src/mappa.ts';
+import {disposizione, statiMappa} from '../src/mappa.ts';
+import {componi, seiQui} from '../src/bacheca.ts';
 import {entra, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliGiocatore, vinci, vista, type Stato} from '../src/motore.ts';
 import {numeri, percorsi} from '../src/percorsi.ts';
 import {ritenta as ritentaS} from '../src/motore.ts';
@@ -27,7 +28,9 @@ test('la principale si converte senza errori né avvisi, con tutti i nodi della 
   assert.deepEqual(c.nodi.filter(n => !n.passi.some(p => p.tipo === 'partita')).map(n => n.etichetta), ['I1s', 'II2s', 'III1s']);
   const sconfitte = Object.fromEntries(c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && p.sconfitta ? [[n.etichetta, 'nodo' in p.sconfitta ? p.sconfitta.nodo : 'fine']] : [])));
   assert.deepEqual(sconfitte, {I1: 'i1s', II2a: 'ii2s', III1: 'iii1s', III2a: 'iii3c', III5: 'fine'}, 'le sconfitte che aprono un ramo');
-  assert.deepEqual(c.nodi.filter(n => n.segreto).map(n => n.etichetta), ['S1', 'S2']);
+  // 0.3.2: le sconfitte sono un segreto; I1s e II2s sono tasche.
+  assert.deepEqual(c.nodi.filter(n => n.segreto).map(n => n.etichetta), ['I1s', 'II2s', 'III1s', 'III3c', 'S1', 'S2']);
+  assert.deepEqual(c.nodi.filter(n => n.tasca).map(n => n.etichetta), ['I1s', 'II2s']);
   assert.deepEqual(c.obbligatori, ['starter-celestina', 'starter-piera', 'starter-beppe', 'pvp']);
   assert.equal(c.achievement.length, 9);
   // «A scelta»: il selettore del personaggio in II1, in III1 (quando non manca nessuno) e in III3a.
@@ -44,7 +47,7 @@ test('il controllo del grafo: tutto raggiungibile, starter e PvP su ogni percors
   assert.deepEqual(r.avvisi, []);
   assert.equal(r.raggiunti.length, 24);
   assert.deepEqual(Object.keys(r.finali).sort(), ['dimmi-di-si-2', 'il-serraglio-e-di-tutti', 'il-serraglio-resta']);
-  assert.deepEqual(r.segreti, {s1: ['iii1'], s2: ['iii5']});
+  assert.deepEqual(r.segreti, {i1s: ['i1'], ii2s: ['ii2a'], iii1s: ['iii1'], iii3c: ['iii2a'], s1: ['iii1'], s2: ['iii5']});
   assert.ok(r.stati < 5000, `stati: ${r.stati}`);
 });
 
@@ -350,4 +353,124 @@ test('i ritratti segnaposto: un cartoncino per i personaggi nuovi, nel prototipo
   }
   assert.ok(cast.personaggi.padrone.ombra && !cast.personaggi.padrone.ritratto);
   assert.ok(fs.readdirSync(new URL('../segnaposto/', import.meta.url)).every(f => f.endsWith('.webp')));
+});
+
+test('le sconfitte sono un segreto (0.3.2): sulla bacheca nuova niente I1s, II2s, III1s, III3c, e nessuna cordicella rossa verso di loro', () => {
+  const c = principale();
+  const comp = componi(c, nuovoGiro(c, nuovoAccount()), null, c.titolo);
+  const segrete = ['i1s', 'ii2s', 'iii1s', 'iii3c'];
+  for (const id of segrete) assert.ok(!comp.punti.some(p => p.id === id), `${id} non c'è`);
+  assert.ok(!comp.fili.some(f => segrete.includes(f.da) || segrete.includes(f.a)), 'nessuna cordicella verso le sconfitte');
+  // L'unica cordicella rossa che si vede subito è quella del finale F3: perdere l'ultimo duello è la fine del giro, non una strada.
+  assert.deepEqual(comp.fili.filter(f => f.sconfitta).map(f => `${f.da}>${f.a}`), ['iii5>fine:dimmi-di-si-2']);
+});
+
+test('il giro delle tre sconfitte: le tasche pendono dal nodo perso senza strade proprie, la strada del giro riprende da lì', () => {
+  const c = principale();
+  const s = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Beppe, a comprarlo'], ['i1', 'ii2a', 'iii1']);
+  const comp = componi(c, s, seiQui(c, s), c.titolo);
+  const fili = Object.fromEntries(comp.fili.map(f => [`${f.da}>${f.a}`, f.tipo + (f.sconfitta ? '+rossa' : '')]));
+  for (const id of ['i1s', 'ii2s', 'iii1s']) assert.ok(comp.punti.some(p => p.id === id), `${id} ora c'è`);
+  // Le tasche: la sola cordicella rossa d'arrivo, tesa; nessuna in uscita.
+  assert.equal(fili['i1>i1s'], 'tesa+rossa');
+  assert.equal(fili['ii2a>ii2s'], 'tesa+rossa');
+  assert.ok(!Object.keys(fili).some(k => k.startsWith('i1s>') || k.startsWith('ii2s>')), 'niente strade dalle tasche');
+  // La strada del giro riprende dal nodo perso: il Fabbro è legato a I1, II3 a II2a (era il difetto della cattura p3-o-02).
+  assert.equal(fili['i1>i2a'], 'tesa');
+  assert.equal(fili['ii2a>ii3'], 'tesa');
+  // Lo sgombero è un ramo vero: entra rosso da III1 ed esce verso la notte.
+  assert.equal(fili['iii1>iii1s'], 'tesa+rossa');
+  assert.equal(fili['iii1s>iii3b'], 'tesa');
+  // III3c non c'è: in questo giro non si è perso il torneo.
+  assert.ok(!comp.punti.some(p => p.id === 'iii3c'));
+  // La puntina «sei qui» dopo il pavimento torna su I1, non resta sulla tasca.
+  let t = nuovoGiro(c, nuovoAccount());
+  t = entra(c, t, 'i1').stato;
+  while (vista(c, t).tipo !== 'partita') t = salta(c, t).stato;
+  t = perdi(c, t).stato;
+  t = entra(c, t, 'i1s').stato;
+  while (vista(c, t).tipo !== 'mappa') t = salta(c, t).stato;
+  assert.equal(seiQui(c, t), 'i1');
+  assert.deepEqual(t.giro.prossimi, [{nodo: 'i1', da: 'scelta'}]);
+});
+
+test('le sconfitte già viste restano sulla bacheca nei giri dopo, con i loro nomi', () => {
+  const c = principale();
+  const s = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Beppe, a comprarlo'], ['i1', 'ii2a', 'iii1']);
+  const dopo = nuovoGiro(c, s.account, s.giro);
+  const comp = componi(c, dopo, null, c.titolo);
+  for (const id of ['i1s', 'ii2s', 'iii1s']) {
+    const p = comp.punti.find(x => x.id === id);
+    assert.ok(p && !p.postit, `${id}: si vede, con il nome`);
+  }
+  assert.ok(!comp.punti.some(p => p.id === 'iii3c'), 'i debiti, mai visti, restano segreti');
+  assert.ok(comp.fili.some(f => f.da === 'i1' && f.a === 'i1s' && f.sconfitta) && !comp.fili.some(f => f.da === 'i1s'));
+});
+
+test('le tasche non aggiungono colonne: pendono nella colonna del nodo perso', () => {
+  const c = principale();
+  const d = disposizione(c).posizione;
+  assert.equal(d.i1s.colonna, d.i1.colonna);
+  assert.equal(d.ii2s.colonna, d.ii2a.colonna);
+  assert.equal(d.ii3.colonna, d.ii2a.colonna + 1, 'II3 subito dopo le piste');
+  assert.equal(disposizione(c).colonne, 14 + 1, 'quattordici colonne di nodi più quella dei finali');
+});
+
+test('il controllo avvisa: un nodo che si raggiunge solo perdendo e non è segreto; una tasca che si raggiunge anche senza perdere', () => {
+  const testo = `# T
+
+## A — Uno
+
+[Sfondo: S1]
+
+→ Partita 1: Mara (giocatore) contro Piera
+
+[Sconfitta: → B]
+
+→ Fine: completata, Uno
+
+## B — Due
+
+[Nodo: segreto; tasca]
+
+**Mara** (agitata): Persa.
+
+→ Torna a: A, scelta
+`;
+  // Una tasca che torna a un nodo senza scelta: per la prova basta che il controllo la veda.
+  assert.deepEqual(controllaGrafo(carriera(testo, true)).avvisi, []);
+  assert.ok(controllaGrafo(carriera(testo.replace('[Nodo: segreto; tasca]', ''), true)).avvisi.includes('il nodo b si raggiunge solo perdendo ma non è segreto'));
+  const anche = testo.replace('→ Fine: completata, Uno', '→ Vai a: B');
+  assert.ok(controllaGrafo(carriera(anche, true)).avvisi.includes('la tasca b si raggiunge anche senza perdere'));
+  // Il ritorno alla scelta non è una strada nuova: un nodo a cui si torna così, ma a cui si arriva solo perdendo, va segnalato.
+  const ritorno = `# T
+
+## A — Uno
+
+[Sfondo: S1]
+
+→ Partita 1: Mara (giocatore) contro Piera
+
+[Sconfitta: → C]
+
+→ Fine: completata, Uno
+
+## C — Tre
+
+[Sfondo: S1]
+
+→ Scelta muta: dove?
+
+- con Mara → D
+- con Piera → Fine: completata, Due
+
+## D — Quattro
+
+[Sfondo: S1]
+
+→ Torna a: C, scelta
+`;
+  assert.ok(controllaGrafo(carriera(ritorno, true)).avvisi.includes('il nodo c si raggiunge solo perdendo ma non è segreto'));
+  const mai = testo.replace('[Sconfitta: → B]', '').replace('→ Fine: completata, Uno', '→ Vai a: B');
+  assert.ok(controllaGrafo(carriera(mai, true)).avvisi.includes('la tasca b non si raggiunge perdendo'));
 });

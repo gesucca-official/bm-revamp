@@ -12,7 +12,10 @@ const errori = (md: string, tetto?: number) => controllaGrafo(carriera(md, true)
 test('tutorial e prova passano il controllo del grafo', () => {
   for (const c of [tutorial(), prova()]) {
     const r = controllaGrafo(c);
-    assert.deepEqual([r.errori, r.avvisi], [[], []], c.id);
+    // Mockup della principale 0.3.2: la regola «le sconfitte sono un segreto» è nuova; la prova (Fase B, risposta P3) ha il retrobottega
+    // a cui si arriva solo perdendo in C, e non è segreto. Il controllo lo dice con un avviso; se farlo segreto lo decide la regia.
+    const attesi = c.id === 'prova' ? ['il nodo nodo-e si raggiunge solo perdendo ma non è segreto'] : [];
+    assert.deepEqual([r.errori, r.avvisi], [[], attesi], c.id);
     assert.equal(r.raggiunti.length, c.nodi.length);
   }
   assert.deepEqual(controllaGrafo(prova()).segreti, {'nodo-f': ['nodo-d']});

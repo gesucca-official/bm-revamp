@@ -153,10 +153,15 @@ export function componi(c: Carriera, s: Stato, ultimo: string | null, intestazio
   // Tesa solo la cordicella percorsa davvero in questo giro (nodi visti uno dopo l'altro, e l'ultimo verso il finale raggiunto); lenta
   // quella che si può ancora prendere; arrotolata ogni altra, anche fra due nodi visti ma per un'altra strada (ritocchi della Fase D:
   // a fine giro restano tese solo quelle del percorso, e la bacheca non si affolla).
-  const percorso = new Set(g.visti.slice(1).map((x, i) => `${g.visti[i]}>${x}`));
-  if (g.fine && g.visti.length) percorso.add(`${g.visti.at(-1)}>${idCasellaFine(g.finale ?? g.fine)}`);
+  // Mockup della principale 0.3.2: una tasca (il pavimento, Piera offesa) pende dal nodo perso con la sola cordicella d'arrivo; la strada
+  // del giro riprende dal nodo perso (I1 → I2a dopo il pavimento, II2a → II3 dopo Piera offesa), senza passare dalla tasca.
+  const tasche = new Set(c.nodi.filter(n => n.tasca).map(n => n.id));
+  const strada = g.visti.filter(x => !tasche.has(x));
+  const percorso = new Set(strada.slice(1).map((x, i) => `${strada[i]}>${x}`));
+  g.visti.forEach((x, i) => { if (tasche.has(x) && i > 0) percorso.add(`${g.visti[i - 1]}>${x}`); });
+  if (g.fine && strada.length) percorso.add(`${strada.at(-1)}>${idCasellaFine(g.finale ?? g.fine)}`);
   const ancoraPossibile = (id: string) => ['aperto', 'disponibile', 'bloccato'].includes(stati[id].stato);
-  const fili: Filo[] = archi(c).filter(a => visibili.has(a.da) && visibili.has(a.a)).map(a => ({
+  const fili: Filo[] = archi(c).filter(a => visibili.has(a.da) && visibili.has(a.a) && !tasche.has(a.da)).map(a => ({
     da: a.da, a: a.a, sconfitta: a.tipo === 'sconfitta',
     tipo: percorso.has(`${a.da}>${a.a}`) ? 'tesa' : ancoraPossibile(a.a) && stati[a.da].stato !== 'escluso' ? 'lenta' : 'arrotolata',
   }));
@@ -382,4 +387,15 @@ export function ingombroPuntina(s: Spillo, ancora: Pt, lato: number): {x0: numbe
     return {x: ancora.x + dx * cos - dy * sin, y: ancora.y + dx * sin + dy * cos};
   });
   return {x0: Math.min(...angoli.map(q => q.x)), y0: Math.min(...angoli.map(q => q.y)), x1: Math.max(...angoli.map(q => q.x)), y1: Math.max(...angoli.map(q => q.y))};
+}
+
+/**
+ * Dove sta la puntina «sei qui»: il nodo in cui si è, o l'ultimo visto. Mockup della principale 0.3.2: una tasca non conta, perché la
+ * storia riprende dal nodo perso (dopo il pavimento la puntina torna su I1).
+ */
+export function seiQui(c: Carriera, s: Stato): string | null {
+  const g = s.giro;
+  if (g.nodo) return g.nodo;
+  const tasche = new Set(c.nodi.filter(n => n.tasca).map(n => n.id));
+  return [...g.visti].reverse().find(x => !tasche.has(x)) ?? null;
 }
