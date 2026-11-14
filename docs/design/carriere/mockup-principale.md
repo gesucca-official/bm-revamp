@@ -418,3 +418,14 @@ viaggia e i post-it che si staccano):
 In orizzontale i fotogrammi lunghi restano più di quelli della 0.3 dopo la sua correzione (16 e 52): la bacheca, ferma, è a 16,7 ms di
 mediana, ma le aperture con il viaggio della «sei qui» e i post-it pesano di più su una bacheca di 24 nodi. Non si vedono come scatti; è
 un altro segnale che una carriera di queste dimensioni chiederà, nel client, una bacheca più leggera o divisa per atti.
+
+### Decisioni della regia sulle sconfitte segrete
+
+14 novembre 2026, dopo il controllo del lavoro: catture, 120 prove, controllo del grafo con le sconfitte fra i segreti.
+
+- **Lo starter:** vale la regola del mockup, ora scritta nella [scaletta 0.3.3](principale.md#atto-ii--di-chi-è-il-serraglio): nella
+  propria pista arriva vincendo, nei nodi di garanzia sedendosi al tavolo.
+- **La prova segue la regola anche lei:** il retrobottega diventa segreto, perché la regola del proprietario vale per ogni carriera e
+  l'avviso del controllo non deve restare acceso. Si fa dopo il risalto del nodo «sei qui», con le catture della prova rifatte solo dove
+  cambiano.
+- **Il posto vuoto delle tasche nascoste** va bene così, come per S1.

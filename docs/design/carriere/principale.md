@@ -3,7 +3,7 @@
 > **Serbatoio di progetto, senza valore normativo** (regole del [serbatoio delle carriere](README.md#regole-del-serbatoio)). Nomi delle
 > carte e numeri non compaiono: le partite dicono chi gioca contro chi e che cosa insegnano, non con quali carte.
 
-**Versione 0.3.2 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
+**Versione 0.3.3 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
 [mockup del grafo](mockup-principale.md).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
 regia*. Le versioni precedenti sono nella [cronologia](#cronologia).
 
@@ -189,8 +189,10 @@ DOPO          S2 Sergio fa sul serio  (superboss: dopo il finale F1, in un giro 
 
 **Starter garantiti.** In II3, se Piera o Beppe non hanno ancora preso le tue parti, lo fa il primo dei due; l'altro lo fa in III1. Così
 i tre starter avanzati stanno su ogni percorso ([D16](../../product-roadmap.md#decisioni-del-proprietario)), e il controllo del grafo lo
-verifica. Lo starter arriva quando il personaggio si siede al tavolo con te, prima della partita: resta anche se la partita si perde, come
-può succedere in III1. Dopo II2s Piera gioca lo stesso in II3, se tocca a lei: torna al tavolo «per Grappino, non per voi».
+verifica. **Quando arriva lo starter:** nella sua pista (II2a, II2b) il personaggio ti dà le sue carte se vinci, perché la fiducia si
+guadagna; nei nodi di garanzia (II3, III1) te le dà quando si siede al tavolo con te, prima della partita, e restano anche se la partita
+si perde, come può succedere in III1. Così dopo II2s, persa la pista, Piera non ti ha ancora dato niente, e gioca in II3 se tocca a lei:
+torna al tavolo «per Grappino, non per voi».
 
 ### Atto III — Domenica
 
@@ -312,3 +314,5 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
   della prima vittoria; F1 anche dopo lo sgombero; Mara accusa Piera prima della partita; S2 facoltativa.
 - **0.3.2 — 14 novembre 2026.** Le sconfitte sono un segreto (proprietario): i nodi che si aprono perdendo non stanno sulla bacheca finché
   non ci si arriva; I1s e II2s sono tasche senza strade proprie, III1s e III3c rami veri; F3 resta visibile.
+- **0.3.3 — 14 novembre 2026.** Quando arriva lo starter: vincendo nella propria pista, sedendosi al tavolo nei nodi di garanzia (la
+  contraddizione l'ha trovata il [mockup](mockup-principale.md#sconfitte-segrete)).
