@@ -115,8 +115,46 @@ si accartoccia, e torna intero al giro nuovo.
 **Fase K:** i nodi affrontabili mostrano il nome già prima di esserci stati; il post-it «???» resta solo sui nodi più lontani e si stacca
 quando il nodo diventa affrontabile. Quando una puntina si toglie, il filo che vi era legato non resta sospeso.
 
-**Da fare: dove sei, a colpo d'occhio.** Il proprietario, 14 novembre 2026, provando il mockup della
+**Dove sei, a colpo d'occhio.** Il proprietario, 14 novembre 2026, provando il mockup della
 [campagna principale](mockup-principale.md): «non si capisce bene dove siamo nella mappa a colpo d'occhio. Si potrebbe anche cerchiare il
-nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore, o trovare qualche altro modo carino per metterlo in risalto». Oggi lo
-dice solo la puntina rossa «sei qui», che su una bacheca di venti nodi si perde. Si prova nel prototipo dopo la correzione delle sconfitte
-segrete: il cerchio a evidenziatore tracciato a mano attorno al nodo, con una variante da confrontare.
+nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore, o trovare qualche altro modo carino per metterlo in risalto». Prima lo
+diceva solo la puntina rossa «sei qui», che su una bacheca di venti nodi si perde. Nel prototipo ci sono due versioni, **in attesa della
+scelta del proprietario**; valgono per tutte le carriere (tutorial, prova, principale).
+
+- **Il cerchio a evidenziatore** (normale): un tratto largo, giallo-verde fluo e un po' trasparente, che gira attorno al nodo della
+  puntina (titolo e puntina insieme) un po' più di un giro, allargandosi: si chiude male, e dove ripassa sull'inizio il colore si carica,
+  come un evidenziatore vero. È storto in modo diverso per ogni nodo, deciso dai dati. Si traccia in 0,4 s come un gesto di mano quando la
+  puntina «sei qui» arriva (finito il suo viaggio, o subito se non viaggia); con il movimento ridotto è già disegnato, fermo. Sta sotto le
+  cordicelle e le puntine, e non passa sulle lettere.
+- **Il nastro adesivo** (variante, `?nastro`): un pezzo di nastro rosa, semitrasparente, con i lati corti strappati, attaccato di sbieco
+  sull'angolo in alto a sinistra del nodo, che si attacca con un piccolo colpo. L'ho preferito al nodo che si alza con la bacheca in
+  penombra perché è un oggetto della bacheca come le puntine e i post-it, e perché una penombra su tutta la bacheca andrebbe ridipinta a
+  ogni oscillazione delle cordicelle. Si nota meno del cerchio: tiene il nodo, non lo indica.
+
+![Il cerchio e il nastro sulla bacheca della principale, a metà giro](../../../prototipi/carriere/catture/r-o-cerchio-e-nastro.jpg)
+![Lo stesso sul telefono](../../../prototipi/carriere/catture/r-v-cerchio-e-nastro.jpg)
+
+Registrazione: [`r-puntina-e-cerchio.webm`](../../../prototipi/carriere/catture/r-puntina-e-cerchio.webm) (4 s, 960×540), la puntina
+che arriva e il cerchio che si traccia. Le catture le rifà `strumenti/catture-risalto.mjs`, che fa anche da prova di bordo: il risalto
+sta sul nodo della puntina, nei due modi e con il movimento ridotto, già tutto disegnato.
+
+**Banco della fluidità** sulle bacheche della prova e della principale, prima e dopo, nei due orientamenti e con la CPU 4× più lenta:
+zero difetti visibili prima e dopo, e il risalto non fa tornare i fotogrammi lunghi (il cerchio si anima una volta sola, 0,4 s, poi è
+fermo).
+
+| Giro | Fotogrammi lunghi prima → dopo | p95 (ms) prima → dopo |
+|---|---|---|
+| bacheca-o-1x | 14 → 12 | 34 → 33 |
+| bacheca-o-4x | 32 → 15 | 50 → 33 |
+| bacheca-v-1x | 7 → 6 | 33 → 17 |
+| bacheca-v-4x | 18 → 13 | 17 → 17 |
+| bacheca-principale-o-1x | 30 → 10 | 50 → 34 |
+| bacheca-principale-o-4x | 24 → 16 | 50 → 34 |
+| bacheca-principale-v-1x | 9 → 4 | 33 → 17 |
+| bacheca-principale-v-4x | 12 → 13 | 33 → 17 |
+
+Le differenze sono nel rumore della macchina (il «dopo» è venuto più calmo del «prima»).
+
+**Prove:** il cerchio gira attorno al riquadro del nodo senza tagliarlo, fa più di un giro e ripassa più largo, è diverso da nodo a nodo e
+sempre uguale per lo stesso; il risalto comincia all'arrivo della puntina; il nastro sta sull'angolo, di sbieco. Sette mutazioni, tutte
+prese (una all'inizio sfuggiva, il cerchio che ripassa senza allargarsi: rafforzata la prova).

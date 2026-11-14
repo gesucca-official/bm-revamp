@@ -189,6 +189,7 @@ export function PenzolaCordicella({a, b, tipo, rossa, seme}: {a: Pt; b: Pt; tipo
 }
 
 /** Un contorno chiuso come percorso SVG, spostato di (dx, dy). */
+export const percorsoChiuso = (q: Pt[], dx = 0, dy = 0) => percorso(q, dx, dy);
 const percorso = (q: Pt[], dx = 0, dy = 0) => 'M' + q.map(p => `${(p.x + dx).toFixed(1)},${(p.y + dy).toFixed(1)}`).join(' L') + ' Z';
 
 export function Postit({x, y, w, h, ruota, fs, strappato}: {x: number; y: number; w: number; h: number; ruota: number; fs: number;

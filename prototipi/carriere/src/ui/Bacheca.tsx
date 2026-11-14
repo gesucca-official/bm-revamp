@@ -8,13 +8,14 @@ import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} f
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, seiQui as dovePuntina, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
+import {cerchioEvidenziatore, inizioRisalto, nastroAdesivo, TEMPI_RISALTO} from '../movimentiBacheca.ts';
 import {chiusiOra, filiDaRiprendere, soloLePiuCorte, filoPenzolante, strappi, tempiFilo, TEMPI_FILO, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
 import {disposizione, type StatoNodo} from '../mappa.ts';
 import {nomeDi, nomeSblocco} from './dati.ts';
-import {CorniceDisegnata, Cordicella, Definizioni, PenzolaCordicella, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
+import {CorniceDisegnata, Cordicella, Definizioni, PenzolaCordicella, percorsoChiuso, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
 import {useMovimentoRidotto} from './Ritratto.tsx';
 import {caricaBacheca, salvaBacheca} from './salvataggio.ts';
 
@@ -347,6 +348,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const nascondi = (id: string, i: number) => lettera && posto && lettera.id === id && posto.riga === i && fase !== 'attesa' && fase !== 'fine' ? posto.indice : undefined;
   const elementi: ReactNode[] = [];
   const aree: ReactNode[] = [];
+  let boxQui: {x: number; y: number; w: number; h: number} | null = null;  // il riquadro del nodo dove sei, per il risalto
   for (const n of comp.punti) {
     const e = d.etichette[n.id], sp = d.pos[n.id];
     let box: {x: number; y: number; w: number; h: number};
@@ -372,6 +374,7 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
         ? {x: e.x - lw / 2 - p, y: sp.y - p, w: lw + p * 2, h: e.y - sp.y + p * 1.6 + (righe - 1) * p * 2}
         : {x: sp.x - p, y: sp.y - p * 1.2, w: e.x - sp.x + lw + p * 2, h: p * (1.6 + righe * 2)};
     }
+    if (n.id === ultimo) boxQui = box;
     aree.push(
       <rect key={`a-${n.id}`} x={box.x} y={box.y} width={box.w} height={box.h} fill="transparent" className={`area ${n.stato}`}
         data-testid={`nodo-${n.id}`} data-stato={n.stato} role="button" aria-label={n.postit ? '???' : n.titolo.map(r => r.map(l => l.c).join('')).join(' ')}
@@ -390,6 +393,40 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
     </g>
   );
   const colori = [...new Set(comp.punti.map(x => x.spillo.colore))];
+  // Dove sei, a colpo d'occhio (14 novembre 2026): il cerchio a evidenziatore attorno al nodo della puntina «sei qui», tracciato quando la
+  // puntina arriva; ?nastro mostra la variante da confrontare, un pezzo di nastro adesivo. Con il movimento ridotto il risalto è già lì.
+  const variante = cerca.has('nastro') ? 'nastro' : 'cerchio';
+  const ritardo = ridotto ? 0 : inizioRisalto(apertura.da && ultimo ? inizioViaggio + TEMPI.durataViaggio : null);
+  const risalto = (() => {
+    if (!ultimo || !boxQui) return null;
+    const stile = {'--ritardo': `${ritardo.toFixed(2)}s`} as React.CSSProperties;
+    if (variante === 'nastro') {
+      const q = nastroAdesivo(ultimo, boxQui, p * 2.1);
+      return (
+        <g key={`risalto-${ultimo}`} className="risalto nastro" data-risalto="nastro" data-nodo={ultimo} style={stile} pointerEvents="none">
+          <path d={percorsoChiuso(q.punti, 2, 3)} fill="rgba(0,0,0,.35)" filter="url(#sfoca-poco)" />
+          <path d={percorsoChiuso(q.punti)} fill="rgba(255, 112, 168, .72)" stroke="rgba(255,255,255,.3)" strokeWidth={0.8} />
+        </g>
+      );
+    }
+    const q = cerchioEvidenziatore(ultimo, boxQui, p * 0.8);
+    // Due passate: il primo giro, poi il pezzo che ripassa sull'inizio; dove si sovrappongono il colore si carica, come un evidenziatore.
+    const n = q.punti.length - 1, taglio = Math.round((n * Math.PI * 2) / q.giro);
+    const primo = q.punti.slice(0, taglio + 1), secondo = q.punti.slice(taglio);
+    const lung = (ps: Pt[]) => ps.reduce((s, x, i) => (i ? s + Math.hypot(x.x - ps[i - 1].x, x.y - ps[i - 1].y) : 0), 0);
+    const l1 = lung(primo), l2 = lung(secondo), tot = l1 + l2, dur = TEMPI_RISALTO.traccia;
+    const passata = (ps: Pt[], l: number, da: number, quanto: number) => (
+      <path className="tratto" d={'M' + ps.map(x => `${x.x.toFixed(1)},${x.y.toFixed(1)}`).join(' L')} fill="none" stroke="rgba(222, 255, 64, .42)"
+        strokeWidth={p * 1.35} strokeLinecap="round" strokeLinejoin="round"
+        style={{strokeDasharray: l.toFixed(1), '--lunghezza': l.toFixed(1), '--ritardo': `${(ritardo + da).toFixed(2)}s`, '--durata': `${quanto.toFixed(2)}s`} as React.CSSProperties} />
+    );
+    return (
+      <g key={`risalto-${ultimo}`} className="risalto cerchio" data-risalto="cerchio" data-nodo={ultimo} pointerEvents="none">
+        {passata(primo, l1, 0, (dur * l1) / tot)}
+        {passata(secondo, l2, (dur * l1) / tot, (dur * l2) / tot)}
+      </g>
+    );
+  })();
   const legenda = d.legenda ?? (legendaAperta ? {x: fx + p * 2, y: fy + ALTO_VERTICALE + 14, w: fw - p * 4, h: p * (LEGENDA.length * 1.25 + 1.4), righe: LEGENDA} : null);
   // Durante il viaggio la puntina «sei qui» e la sua cordicella nuova le disegna il movimento, non lo strato fermo.
   const inViaggio = !viaggioFatto && !!apertura.da && !!ultimo;
@@ -461,11 +498,13 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
             <tspan rotate={posto.ruota.toFixed(2)}>{posto.c}</tspan>
           </text>
         )}
+        {variante === 'cerchio' && risalto}
         {comp.fili.filter(f => f !== filoNuovo && !riprese.some(r => r.filo === f)).map(f => <Cordicella key={`${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />)}
         {/* Fase K: le cordicelle della puntina che si toglie, mosse dal ciclo dei fotogrammi (all'inizio uguali a quelle ferme). */}
         {riprese.map(({filo: f, fisso}) => fisso
           ? <PenzolaCordicella key={`p-${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />
           : <g key={`p-${f.da}>${f.a}`} data-penzola={`${f.da}>${f.a}`}><Cordicella a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`coda:${f.da}>${f.a}`} /></g>)}
+        {variante === 'nastro' && risalto}
         {comp.punti.filter(n => !(inViaggio && n.id === ultimo)).map(n => <Puntina key={n.id} id={n.id} x={d.pos[n.id].x} y={d.pos[n.id].y} lato={d.lato[n.id]} s={n.spillo} />)}
         {inViaggio && ultimo && (() => {
           const s = spilloDi(ultimo, false);

@@ -348,3 +348,57 @@ export function soloLePiuCorte<F extends {l: number; amp: number}>(fili: F[], qu
   mosse.forEach((f, i) => { if (i >= quante || f.l > lunghe) f.amp = 0; });
   return fili;
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Dove sei, a colpo d'occhio (14 novembre 2026). Il proprietario: «non si capisce bene dove siamo nella mappa a colpo d'occhio. Si potrebbe
+// anche cerchiare il nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore». La puntina «sei qui», su una bacheca di venti nodi,
+// si perde. Il cerchio a evidenziatore: un tratto largo, fatto a mano, che gira un po' più di un giro e si chiude storto, tracciato quando
+// la puntina arriva. Variante da confrontare (?nastro): un pezzo di nastro adesivo colorato attaccato di sbieco sull'angolo del nodo.
+
+type Riquadro = {x: number; y: number; w: number; h: number};
+/** Quanto dura il tratto dell'evidenziatore, e quanto dopo l'apertura della bacheca comincia se la puntina non viaggia. */
+export const TEMPI_RISALTO = {traccia: 0.4, senzaViaggio: 0.3};
+
+/**
+ * Il cerchio a evidenziatore attorno al riquadro di un nodo: un'ellisse storta (raggio che ondeggia un poco, leggermente inclinata) che
+ * comincia in alto a sinistra e gira un po' più di un giro, allargandosi, così il tratto finisce sopra l'inizio senza combaciare. Deciso
+ * dai dati: sempre lo stesso per lo stesso nodo. `margine` è lo spazio fra il riquadro e il tratto.
+ */
+export function cerchioEvidenziatore(seme: string, r: Riquadro, margine: number): {punti: Pt[]; lunghezza: number; giro: number} {
+  const c = caso(`${seme}:evidenziatore`);
+  const cx = r.x + r.w / 2, cy = r.y + r.h / 2;
+  // Un'ellisse che circoscrive il riquadro (anche gli angoli, con il tratto che ondeggia), più il margine.
+  const rx = (r.w / 2) * 1.36 + margine * 0.6, ry = (r.h / 2) * 1.36 + margine * 0.6;
+  const inizio = -2.5 + c() * 0.6, giro = Math.PI * 2 + 0.45 + c() * 0.35, inclina = (c() - 0.5) * 0.12;
+  const fase = c() * Math.PI * 2, n = 56;
+  const punti: Pt[] = [];
+  for (let i = 0; i <= n; i++) {
+    const u = i / n, a = inizio + giro * u;
+    const k = 1 + 0.045 * Math.sin(a * 2 + fase) + 0.07 * u;  // un poco storto, e alla fine più largo dell'inizio
+    const x = Math.cos(a) * rx * k, y = Math.sin(a) * ry * k;
+    punti.push({x: cx + x * Math.cos(inclina) - y * Math.sin(inclina), y: cy + x * Math.sin(inclina) + y * Math.cos(inclina)});
+  }
+  const lunghezza = punti.reduce((s, p, i) => (i ? s + Math.hypot(p.x - punti[i - 1].x, p.y - punti[i - 1].y) : 0), 0);
+  return {punti, lunghezza, giro};
+}
+
+/** Quando comincia il risalto, in secondi dall'apertura della bacheca: all'arrivo della puntina, se viaggia; altrimenti subito. */
+export const inizioRisalto = (arrivo: number | null) => arrivo ?? TEMPI_RISALTO.senzaViaggio;
+
+/**
+ * Il nastro adesivo (variante): un rettangolo lungo e stretto, con i due lati corti strappati a zigzag, attaccato di sbieco sull'angolo in
+ * alto a sinistra del riquadro. Deciso dai dati.
+ */
+export function nastroAdesivo(seme: string, r: Riquadro, largo: number): {punti: Pt[]; angolo: number} {
+  const c = caso(`${seme}:nastro`);
+  const lungo = largo * 3.2, angolo = -(24 + c() * 14);
+  const denti = 4, punti: Pt[] = [];
+  // Lato lungo in alto, poi il lato corto destro strappato, il lato lungo in basso, il lato corto sinistro strappato.
+  punti.push({x: -lungo / 2, y: -largo / 2}, {x: lungo / 2, y: -largo / 2});
+  for (let i = 1; i < denti; i++) punti.push({x: lungo / 2 + (i % 2 ? 1 : -1) * largo * (0.08 + c() * 0.06), y: -largo / 2 + (largo * i) / denti});
+  punti.push({x: lungo / 2, y: largo / 2}, {x: -lungo / 2, y: largo / 2});
+  for (let i = denti - 1; i > 0; i--) punti.push({x: -lungo / 2 + (i % 2 ? -1 : 1) * largo * (0.08 + c() * 0.06), y: -largo / 2 + (largo * i) / denti});
+  // Sull'angolo in alto a sinistra, un poco fuori: tiene il nodo come si tiene un foglio, senza coprire le lettere.
+  const a = (angolo * Math.PI) / 180, ox = r.x - largo * 0.1, oy = r.y - largo * 0.15;
+  return {punti: punti.map(p => ({x: ox + p.x * Math.cos(a) - p.y * Math.sin(a), y: oy + p.x * Math.sin(a) + p.y * Math.cos(a)})), angolo};
+}

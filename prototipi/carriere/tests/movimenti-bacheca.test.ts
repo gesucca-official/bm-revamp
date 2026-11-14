@@ -2,6 +2,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {chiusiOra, OSCILLANTI, soloLePiuCorte, strappi, TEMPO_STRAPPI} from '../src/movimentiBacheca.ts';
+import {cerchioEvidenziatore, inizioRisalto, nastroAdesivo, TEMPI_RISALTO} from '../src/movimentiBacheca.ts';
 import {angoloPostit, DURATA_ANGOLO, durataMosca, mosca, pianoMosca, prossimoAngolo, toccataMosca, VOLO} from '../src/movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloCoda, cadutaLettera, filoMosso, letteraAllentata, oscillazione, premioLettere, PREMIO_LETTERE,
   scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio} from '../src/movimentiBacheca.ts';
@@ -225,4 +226,56 @@ test('su una bacheca grande oscillano solo le cordicelle più corte; su una picc
   const conLimite = soloLePiuCorte(fili(33), OSCILLANTI, 400);
   assert.ok(conLimite.every(f => f.amp === 0 || f.l <= 400) && conLimite.some(f => f.amp > 0));
   assert.deepEqual(soloLePiuCorte(fili(10), OSCILLANTI, 150).map(f => f.amp), fili(10).map(f => f.amp), 'piccola: il limite non conta');
+});
+
+test('dove sei: il cerchio a evidenziatore gira attorno al nodo, fuori dal suo riquadro, un po\' più di un giro, storto e sempre uguale', () => {
+  const r = {x: 100, y: 200, w: 160, h: 60}, margine = 12;
+  const dentro = (q: {x: number; y: number}) => q.x > r.x && q.x < r.x + r.w && q.y > r.y && q.y < r.y + r.h;
+  const angoli = new Set<number>();
+  for (const seme of ['i1', 'ii3', 'nodo-c', 'scena-2', 'iii5']) {
+    const c = cerchioEvidenziatore(seme, r, margine);
+    assert.ok(c.punti.every(q => !dentro(q)), `${seme}: il tratto non passa sulle lettere`);
+    assert.ok(c.giro > Math.PI * 2 + 0.3 && c.giro < Math.PI * 2 + 1, `${seme}: si chiude male, ripassando sull'inizio`);
+    // Gira attorno al centro: l'angolo copre più di un giro intero.
+    const cx = r.x + r.w / 2, cy = r.y + r.h / 2;
+    let tot = 0;
+    for (let i = 1; i < c.punti.length; i++) {
+      let d = Math.atan2(c.punti[i].y - cy, c.punti[i].x - cx) - Math.atan2(c.punti[i - 1].y - cy, c.punti[i - 1].x - cx);
+      if (d > Math.PI) d -= 2 * Math.PI; if (d < -Math.PI) d += 2 * Math.PI;
+      tot += d;
+    }
+    assert.ok(Math.abs(tot) > Math.PI * 2, `${seme}: fa il giro intero (${tot.toFixed(2)})`);
+    // La fine non combacia con l'inizio: è più larga (il tratto si allarga girando).
+    const d0 = Math.hypot(c.punti[0].x - cx, c.punti[0].y - cy), d1 = Math.hypot(c.punti.at(-1)!.x - cx, c.punti.at(-1)!.y - cy);
+    assert.ok(Math.abs(d1 - d0) > 2, `${seme}: si chiude storto`);
+    // Dove il tratto ripassa sull'inizio, nello stesso punto dell'angolo, è più largo: si chiude male, non combacia.
+    const polare = (q: {x: number; y: number}) => Math.atan2(q.y - cy, q.x - cx);
+    const coda = c.punti.slice(Math.floor(c.punti.length * 0.8));
+    // Il tratto della fine che passa sopra l'angolo dell'inizio: la sua distanza dal centro, interpolata fra i due punti a cavallo.
+    const a0 = polare(c.punti[0]), scarto = (q: {x: number; y: number}) => Math.atan2(Math.sin(polare(q) - a0), Math.cos(polare(q) - a0));
+    const k = coda.findIndex((q, i) => i > 0 && Math.sign(scarto(coda[i - 1])) !== Math.sign(scarto(q)) && Math.abs(scarto(q)) < 1);
+    assert.ok(k > 0, `${seme}: la fine ripassa sull'inizio`);
+    const [p0, p1] = [coda[k - 1], coda[k]], f = Math.abs(scarto(p0)) / (Math.abs(scarto(p0)) + Math.abs(scarto(p1)));
+    const sopra = Math.hypot(p0.x - cx, p0.y - cy) * (1 - f) + Math.hypot(p1.x - cx, p1.y - cy) * f;
+    assert.ok(sopra > d0 * 1.03, `${seme}: ripassa più largo (${(sopra / d0).toFixed(3)})`);
+    // Abbastanza vicino da sembrare attorno a quel nodo, non a tutta la bacheca.
+    assert.ok(c.punti.every(q => Math.abs(q.x - cx) < r.w * 0.85 + margine && Math.abs(q.y - cy) < r.h * 0.85 + margine));
+    assert.deepEqual(cerchioEvidenziatore(seme, r, margine), c, 'sempre lo stesso per lo stesso nodo');
+    angoli.add(Math.round(Math.atan2(c.punti[0].y - cy, c.punti[0].x - cx) * 100));
+  }
+  assert.ok(angoli.size > 1, 'nodi diversi, cerchi diversi');
+  assert.ok(TEMPI_RISALTO.traccia >= 0.2 && TEMPI_RISALTO.traccia <= 0.6, 'un attimo, come un gesto di mano');
+});
+
+test('dove sei: il risalto parte quando arriva la puntina; senza viaggio, subito; il nastro sta sull\'angolo del nodo, di sbieco', () => {
+  assert.equal(inizioRisalto(2.1), 2.1);
+  assert.equal(inizioRisalto(null), TEMPI_RISALTO.senzaViaggio);
+  assert.ok(TEMPI_RISALTO.senzaViaggio < 0.6);
+  const r = {x: 100, y: 200, w: 160, h: 60};
+  const n = nastroAdesivo('i1', r, 20);
+  assert.ok(n.angolo < -20 && n.angolo > -40, 'di sbieco');
+  const cx = n.punti.reduce((s, q) => s + q.x, 0) / n.punti.length, cy = n.punti.reduce((s, q) => s + q.y, 0) / n.punti.length;
+  assert.ok(Math.abs(cx - r.x) < 40 && Math.abs(cy - r.y) < 30, 'sull\'angolo in alto a sinistra');
+  assert.ok(n.punti.length >= 10, 'i lati corti strappati');
+  assert.deepEqual(nastroAdesivo('i1', r, 20), n);
 });
