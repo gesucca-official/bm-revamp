@@ -322,7 +322,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | Fase 1 fatta; risposte registrate D59–D68; divisione 2a/2b approvata; 2a consegnata il 13 novembre 2026 ([rapporto](reports/set-base/sb-16g-2a-report.md)); **D69** la rivede (gettone legato al nome, senza timer): **2a rivista** lo stesso giorno; domande risposte in D70; consulto esterno il 13 novembre 2026 ([consulto di design](reports/set-base/consulto-design-fable-2026-11-13.md), [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md)); **2b passo 1 fatto** il 13 novembre 2026: D71–D73, cinque caricamenti e tre politiche, 648.000 partite; invarianti/bound verdi, criteri di bilanciamento ancora fuori soglia ([rapporto](reports/set-base/sb-16g-2b1-report.md)). prova umana breve fatta lo stesso giorno, meccanica approvata (**D75**); **bot consapevole del colpo letale (D76) consegnato** lo stesso giorno ([rapporto](reports/set-base/sb-16g-bot-letale-report.md)), risposte in **D77** (14 novembre 2026); Q9 decisa in **D78**; **proposta 1.3** (14 novembre 2026, [carte concrete](design/set-base/sb-16g-proposta.md)) **approvata in D79** lo stesso giorno; **2b passo 2 consegnato** il 14 novembre 2026 ([rapporto](reports/set-base/sb-16g-2b2-report.md)): proposta 1.3 attuata, 648.000 partite in 738,001 s; invarianti/bound verdi, 11 incontri fuori criterio; STOP sui numeri; domande risposte in **D80**; **proposta 1.4 del passo 3 consegnata, in attesa di approvazione** (14 novembre 2026, [documento](design/set-base/sb-16g-proposta.md#passo-3--proposta-corrente-14)); Fase A, solo documenti, nessuna misura; residuo **1 giro/6.340,041 s** intatto |
-| | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g |  |
+| | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | Fase A consegnata il 14 novembre 2026 ([proposta 0.1](design/set-base/sb-16h-proposta.md)), in attesa di approvazione; Fase B dopo il giro finale di SB-16g |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16h |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -1050,6 +1050,8 @@ sul set intero e coi mazzi costruiti.
 
 **Rischi.** Più copie aumentano la costanza delle combo; mazzi più grandi possono allungare le partite che oggi sono già lunghe (specchi).
 
+**Fase A consegnata il 14 novembre 2026**, in parallelo al passo 3 di SB-16g: [proposta 0.1](design/set-base/sb-16h-proposta.md) con cinque varianti (20/2, 25/2, 25/3, 30/2, 30/3), composizioni annidate per i cinque starter, range sconsigliato come formato e misurato solo con un braccio misto facoltativo, budget proprio di un giro e 7.200 s, dieci domande al proprietario. Nessuna misura. **STOP in attesa di approvazione.**
+
 ### SB-17, SB-18 — Personaggi da booster
 
 Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
@@ -1321,7 +1323,7 @@ Con la proposta; nessuna blocca i primi blocchi.
 | ID | Domanda | Proposta | Quando |
 |---|---|---|---|
 | Q1 | Avversari computer in quick | Stessa categoria dell'umano in 1vCom; qualunque starter nei bot aggiunti alla FFA | SB-29 |
-| Q2 | Livelli di difficoltà del bot | Facile (casuale) e normale (euristico), scelti alla partita. Dopo D76 il proprietario chiede «vari livelli di forza e difficoltà» e un bot che giochi bene: la proposta va rifatta, con almeno un livello più forte dell'euristico, e va deciso se anticiparla rispetto a SB-30 | SB-30, o prima se il proprietario lo decide |
+| Q2 | Livelli di difficoltà del bot | Facile (casuale) e normale (euristico), scelti alla partita. Dopo D76 il proprietario chiede «vari livelli di forza e difficoltà» e un bot che giochi bene: la proposta va rifatta, con almeno un livello più forte dell'euristico, e va deciso se anticiparla rispetto a SB-30. Proposta 0.1 del 14 novembre 2026: [livelli del bot](design/set-base/bot-livelli-proposta.md) (Facile, Normale, Difficile, Maestro; nessuno bara; SB-30 diviso in SB-30a dopo SB-28 e SB-30b, il Maestro, anticipabile nel playground), nove domande al proprietario | SB-30, o prima se il proprietario lo decide |
 | Q3 | Anticipare il bot sulle carte attuali | Sì, se si dimostra utile dopo SB-4. Dato di SB-4: con le carte attuali il Junkie euristico schiaccia Bruiser, da decidere prima di anticipare | Dopo SB-4 |
 | Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 115 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
