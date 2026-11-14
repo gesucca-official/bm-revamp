@@ -118,8 +118,9 @@ quando il nodo diventa affrontabile. Quando una puntina si toglie, il filo che v
 **Dove sei, a colpo d'occhio.** Il proprietario, 14 novembre 2026, provando il mockup della
 [campagna principale](mockup-principale.md): «non si capisce bene dove siamo nella mappa a colpo d'occhio. Si potrebbe anche cerchiare il
 nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore, o trovare qualche altro modo carino per metterlo in risalto». Prima lo
-diceva solo la puntina rossa «sei qui», che su una bacheca di venti nodi si perde. Nel prototipo ci sono due versioni, **in attesa della
-scelta del proprietario**; valgono per tutte le carriere (tutorial, prova, principale).
+diceva solo la puntina rossa «sei qui», che su una bacheca di venti nodi si perde. Nel prototipo sono state provate due versioni, per
+tutte le carriere (tutorial, prova, principale). **Scelto il cerchio** dal proprietario, 14 novembre 2026: «teniamo il cerchio». Il
+nastro, variante di confronto, si toglie.
 
 - **Il cerchio a evidenziatore** (normale): un tratto largo, giallo-verde fluo e un po' trasparente, che gira attorno al nodo della
   puntina (titolo e puntina insieme) un po' più di un giro, allargandosi: si chiude male, e dove ripassa sull'inizio il colore si carica,
