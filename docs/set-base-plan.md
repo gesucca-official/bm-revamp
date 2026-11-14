@@ -1187,7 +1187,7 @@ il matchmaking si sistemerà in futuro. Protocollo d'ingresso, `PlayerFactorySer
 
 **Rischi.** Un bot forte non è per forza divertente.
 
-**Livelli decisi in [D85](#decisioni-del-proprietario)** (era Q2; [proposta](design/set-base/bot-livelli-proposta.md)). Il blocco si divide: **SB-30a**, qui, collega Facile (casuale) e Normale (bot consapevole del colpo letale) alla partita viva, con la scelta del livello e la prova «nessuna informazione nascosta»; **SB-30b**, Difficile (due turni) e Maestro, si anticipa come prototipo nel playground dopo il passo 3 di SB-16g, con budget fissato dopo la sonda di costo.
+**Livelli decisi in [D85](#decisioni-del-proprietario)** (era Q2; [proposta](design/set-base/bot-livelli-proposta.md)). Il blocco si divide: **SB-30a**, qui, collega Facile (casuale) e Normale (bot consapevole del colpo letale) alla partita viva, con la scelta del livello e la prova «nessuna informazione nascosta»; **SB-30b**, Difficile (due turni) e Maestro, si anticipa come prototipo nel playground dopo il passo 3 di SB-16g, con budget fissato dopo la sonda di costo. **SB-30b avanzamento:** Fase A (progetto e sonda B4) approvata in [D91](#decisioni-del-proprietario); **B5a fatto** il 14 novembre 2026 ([rapporto](reports/set-base/sb-30b-b5a-report.md)): `ViewTable` nel pacchetto bot e testo stampato completato in modo additivo, quattro scarti della sonda chiusi, bot esistenti, banco e partita viva identici byte per byte, 266 s su 300 del budget B5. Prossimo: B5b (Difficile), dopo la Fase B di SB-16h.
 
 ### SB-31 — Adeguamento del client
 
