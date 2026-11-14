@@ -261,3 +261,9 @@ coperta: non può vederli. Q2, i livelli di forza, resta fuori perimetro.
 4. Un colpo che l'avversario potrebbe avere in mano coperta non conta, anche se l'ha appena cercato e poi scartato la copia
    scoperta. Va bene così finché non arrivano i livelli di forza (Q2)?
 5. Per i passi 2 e 3, `ChargeMeasureTest` usa ora i bot nuovi in tutte e tre le politiche del gettone. Confermi?
+
+## Risposte del proprietario
+
+14 novembre 2026, registrate in [D77](../../set-base-plan.md#decisioni-del-proprietario): «1 niente prova, andiamo avanti / 2 si /
+3 si, è giocare bene / 4 si / 5 si». Nessuna prova umana prima del passo 2; patta preferita alla sconfitta; mosse che espongono il
+bot evitate da sé; colpi in mano coperta esclusi fino a Q2; bot nuovi in tutte e tre le politiche per i passi 2 e 3.
