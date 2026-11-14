@@ -11,6 +11,8 @@ export type Voce = {file: URL; fonte: string};
 export const CARRIERE: Voce[] = [
   {file: new URL('docs/design/carriere/tutorial-dialoghi.md', radice), fonte: 'docs/design/carriere/tutorial-dialoghi.md'},
   {file: new URL('storie/prova.md', qui), fonte: 'prototipi/carriere/storie/prova.md'},
+  // Mockup del grafo della campagna principale (docs/design/carriere/principale.md, versione 0.2), con battute segnaposto.
+  {file: new URL('storie/principale.md', qui), fonte: 'prototipi/carriere/storie/principale.md'},
 ];
 
 export const leggiCast = (): Cast => JSON.parse(fs.readFileSync(new URL('dati/cast.json', qui), 'utf8')) as Cast;

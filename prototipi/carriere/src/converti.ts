@@ -164,7 +164,25 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
         continue;
       }
       if (testo.startsWith('→')) { freccia(testo.slice(1).trim(), riga); continue; }
-      if (SOLO_COMANDI.test(testo)) { for (const m of testo.matchAll(COMANDO)) comando(m[1], riga, i === 0); continue; }
+      if (SOLO_COMANDI.test(testo)) {
+        // «[Se …] [Segno: …] [Sblocca: …]»: la condizione vale per i segni e gli sblocchi che la seguono sulla riga (mockup della principale).
+        const comandi = [...testo.matchAll(COMANDO)].map(m => m[1]);
+        const seCmd = /^Se (.+)$/.exec(comandi[0]);
+        if (seCmd) {
+          const c = condizione(seCmd[1], riga);
+          if (comandi.length < 2) errore(riga, 'dopo [Se …] serve una battuta, una narrazione, un messaggio, un segno o uno sblocco');
+          for (const corpo of comandi.slice(1)) {
+            const [nome] = dividi(corpo);
+            if (nome !== 'segno' && nome !== 'sblocca') { errore(riga, `[Se …] vale solo per [Segno: …] e [Sblocca: …], non per [${corpo}]`); continue; }
+            const prima = nodo.passi.length;
+            comando(corpo, riga, false);
+            if (c) for (const p of nodo.passi.slice(prima)) if (p.tipo === 'segno' || p.tipo === 'sblocco') p.se = c;
+          }
+          continue;
+        }
+        for (const c of comandi) comando(c, riga, i === 0);
+        continue;
+      }
       const se = /^\[Se ([^\]]+)\]\s*([\s\S]+)$/.exec(testo);
       if (se) {
         const p = contenuto(se[2], riga, condizione(se[1], riga));
@@ -324,9 +342,11 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
     }
   }
 
-  // Uscite implicite verso il nodo che segue nel file.
+  // Uscite implicite verso il nodo che segue nel file. Un nodo che finisce con una scelta con destinazioni non ne ha bisogno (mockup della
+  // principale: l'ultimo nodo del file, S2, finisce con una scelta, e prima era segnalato senza uscita).
+  const chiusoDaScelta = (n: Nodo) => n.passi.some(p => p.tipo === 'scelta' && p.opzioni.some(o => o.verso));
   nodi.forEach((n, i) => {
-    if ('verso' in n.uscita && 'nodo' in n.uscita.verso && n.uscita.verso.nodo === SEGUENTE) {
+    if ('verso' in n.uscita && 'nodo' in n.uscita.verso && n.uscita.verso.nodo === SEGUENTE && !chiusoDaScelta(n)) {
       if (nodi[i + 1]) n.uscita = {verso: {nodo: nodi[i + 1].id}};
       else errore(n.riga, `il nodo «${n.etichetta}» non ha uscita (→ Vai a, → Fine, o una scelta con destinazioni)`);
     }
@@ -366,7 +386,8 @@ export function leggiCondizione(testo: string, riga: number, errore: (r: number,
     s = s.trim();
     let m: RegExpExecArray | null;
     if ((m = /^non\s+(.+)$/.exec(s))) { const c = atomo(m[1]); return c && {non: c}; }
-    if ((m = /^segno\s+(\w+)\s*(?:=\s*(.+))?$/.exec(s))) return m[2] ? {segno: m[1], uguale: slug(m[2])} : {segno: m[1]};
+    // Mockup della principale: i segni della scaletta hanno il trattino (via-atto-1, via-atto-3).
+    if ((m = /^segno\s+([\w-]+)\s*(?:=\s*(.+))?$/.exec(s))) return m[2] ? {segno: m[1], uguale: slug(m[2])} : {segno: m[1]};
     if ((m = /^(visto|vinto|perso|esplorato)\s+(.+)$/.exec(s))) return {[m[1]]: m[2].trim()} as Condizione;
     if ((m = /^achievement\s+(.+)$/.exec(s))) return {achievement: slug(m[1])};
     if ((m = /^giri\s+(\d+)$/.exec(s))) return {giri: Number(m[1])};

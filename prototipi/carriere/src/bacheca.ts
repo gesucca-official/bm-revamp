@@ -273,7 +273,10 @@ export function disponi(comp: Composizione, w: number, h: number, alto: number, 
   const fini = comp.punti.filter(x => x.tipo === 'finale');
   const colonne = Math.max(...nodi.map(x => x.colonna)) + 1;
   const righe = Math.max(...nodi.map(x => x.riga)) + 1;
-  const p = verticale ? Math.max(11, Math.min(16, Math.floor((fh - alto - basso) / (18 + colonne * 5.2)))) : 18;
+  // Mockup della principale (14 colonne invece di 4–6): in orizzontale il passo scende finché le colonne ci stanno (un post-it e un poco di
+  // spazio per colonna); in verticale può scendere fino a 8. Per le carriere del prototipo non cambia niente.
+  const p = verticale ? Math.max(colonne > 9 ? 8 : 11, Math.min(16, Math.floor((fh - alto - basso) / (18 + colonne * 5.2))))
+    : Math.max(9, Math.min(18, Math.floor(fw / (colonne * 9.2 + 4))));
   const scan = (y: number) => fy + Math.round((y - fy) / p) * p;
   const fs = p * 1.95;
   const larghezza = (n: Punto) => Math.max(...n.titolo.map(t => t.length)) * CARATTERE_LETTERA * (n.tipo === 'finale' ? fs * 0.9 : fs);
@@ -336,7 +339,9 @@ export function disponi(comp: Composizione, w: number, h: number, alto: number, 
     const destra = Math.max(s.x + p * 1.1, b.x1 + p * 0.4);
     etichette[n.id] = n.tipo === 'finale' ? {x: destra + fs * 0.55, y: s.y + p * 0.65, ancora: 'start'}
       : verticale ? {x: destra + (n.freccia ? fs * 0.8 : 0), y: s.y + p * 0.65, ancora: 'start'}
-      : {x: s.x, y: Math.max(s.y + p * 2.6, b.y1 + fs * ALTEZZA_MAIUSCOLE + p * 0.3), ancora: 'middle'};
+      // Un titolo centrato non esce dal feltro (il primo nodo di una carriera lunga stava a metà fuori).
+      : {x: Math.min(fx + fw - larghezza(n) / 2 - p * 0.5, Math.max(fx + larghezza(n) / 2 + p * 0.5, s.x)),
+        y: Math.max(s.y + p * 2.6, b.y1 + fs * ALTEZZA_MAIUSCOLE + p * 0.3), ancora: 'middle'};
     postitY[n.id] = Math.max(s.y - p * 0.5, b.y1 + p * 0.3 - ph * 0.82 + p * 2 * 0.72);
   }
   const legenda = verticale ? null : {x: fx + p * 1.2, y: fy + fh - basso - lh - p * 0.6, w: p * 17, h: lh, righe: LEGENDA};

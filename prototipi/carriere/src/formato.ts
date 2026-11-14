@@ -45,8 +45,10 @@ export type Passo =
   | {tipo: 'sprite'; sprite: string; posa?: string; azione: 'entra' | 'esce' | 'posa'; riga: number}
   | {tipo: 'effetto'; effetto: 'scossa' | 'sfarfallio'; variante?: string; riga: number}
   | {tipo: 'suono'; suono: string; riga: number}                      // fuori dal prototipo: tenuto per CA-0
-  | {tipo: 'segno'; segno: string; valore: string; riga: number}
-  | {tipo: 'sblocco'; sblocco: string; riga: number}
+  // Mockup della principale (14 novembre 2026): segno e sblocco possono avere una condizione, «[Se …] [Sblocca: …]», per gli starter
+  // garantiti («chi ancora non ha preso le tue parti lo fa qui») e per chi gioca una partita a seconda della strada fatta.
+  | {tipo: 'segno'; segno: string; valore: string; se?: Condizione; riga: number}
+  | {tipo: 'sblocco'; sblocco: string; se?: Condizione; riga: number}
   | {tipo: 'achievement'; achievement: string; riga: number}
   | Partita
   | Scelta;
@@ -142,7 +144,10 @@ export type Cast = {
     alfa?: Record<string, string>;
     // Fase I: quanto vanno veloci le sue animazioni (ondeggiare, maglia, bocca, entrate e uscite), come `velocita` per il testo: 1 normale,
     // meno di 1 più lente (Piera, che parla lentissima, si muove lentissima).
-    tempoAnimazioni?: number}>;
+    tempoAnimazioni?: number;
+    // Mockup della principale: un ritratto segnaposto (un cartoncino con il primo piano dell'identikit, in prototipi/carriere/segnaposto),
+    // senza maglia né bocca (si muove con il movimento procedurale), finché il personaggio non ha i suoi ritratti di scena.
+    segnaposto?: true}>;
   // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
   sfondi: Record<string, {file: string; varianti?: Record<string, string>;
     insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;

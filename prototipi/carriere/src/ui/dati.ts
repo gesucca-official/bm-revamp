@@ -2,13 +2,15 @@
 import castJson from '../../dati/cast.json';
 import tutorialJson from '../../dati/generati/tutorial.json';
 import provaJson from '../../dati/generati/prova.json';
+import principaleJson from '../../dati/generati/principale.json';
 import type {Carriera, Cast} from '../formato.ts';
 import {comeCarriera} from '../valida.ts';
 import {PREMIO_LETTERE} from '../movimentiBacheca.ts';
 
 export const cast = castJson as unknown as Cast;
 // Il controllo di validità gira anche qui: un JSON rotto si vede subito, con il percorso del campo.
-export const carriere: Carriera[] = [comeCarriera(tutorialJson, cast), comeCarriera(provaJson, cast)];
+// Il mockup del grafo della principale (14 novembre 2026) dopo le due carriere del prototipo.
+export const carriere: Carriera[] = [comeCarriera(tutorialJson, cast), comeCarriera(provaJson, cast), comeCarriera(principaleJson, cast)];
 // Fase H: l'achievement della bacheca (la lettera rimessa al suo posto) sta in ogni carriera, come gli altri; non viene da una storia.
 for (const c of carriere) {
   c.achievement.push({id: PREMIO_LETTERE.id, titolo: PREMIO_LETTERE.titolo, descrizione: PREMIO_LETTERE.descrizione, nascosto: true,
@@ -19,8 +21,10 @@ for (const c of carriere) {
 const RADICE = '../../../../docs/design/carriere/asset/tutorial/';
 const file = import.meta.glob('../../../../docs/design/carriere/asset/tutorial/{ritratti,sfondi,sprite}/*.webp',
   {eager: true, query: '?url', import: 'default'}) as Record<string, string>;
+// Mockup della principale: i ritratti segnaposto stanno nel prototipo (segnaposto/), non fra gli asset approvati.
+const segnaposto = import.meta.glob('../../segnaposto/*.webp', {eager: true, query: '?url', import: 'default'}) as Record<string, string>;
 export const asset = (rel: string): string => {
-  const u = file[RADICE + rel];
+  const u = rel.startsWith('segnaposto/') ? segnaposto['../../' + rel] : file[RADICE + rel];
   if (!u) throw new Error(`asset mancante: ${rel}`);
   return u;
 };

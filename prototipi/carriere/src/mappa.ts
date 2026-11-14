@@ -1,7 +1,7 @@
 // CA-0a: la mappa dei rami. Archi, disposizione a colonne e stato di ogni casella per il giro e l'account correnti.
 // Le caselle sono i nodi e i finali (P7): un finale è una casella «fine:<id>», «???» finché non lo si è visto in un giro.
 import type {Carriera, Destinazione} from './formato.ts';
-import {entrabile, finali, idFinale, type Stato} from './motore.ts';
+import {entrabile, finali, idFinale, valuta, type Stato} from './motore.ts';
 
 export type Arco = {da: string; a: string; tipo: 'uscita' | 'scelta' | 'sconfitta'; indietro: boolean};
 export type Casella = {id: string; etichetta: string; titolo: string; segreto?: true; fine?: true};
@@ -102,8 +102,9 @@ export function statiMappa(c: Carriera, s: Stato): Record<string, NodoMappa> {
     const noto = s.account.esplorati.includes(n.id);
     let stato: StatoNodo;
     const prossimo = g.prossimi.some(d => 'nodo' in d && d.nodo === n.id);
-    // Un segreto mai visto non si disegna, finché il giro non ci porta proprio lì.
-    if (n.segreto && !noto && !prossimo && g.nodo !== n.id) stato = 'nascosto';
+    // Un segreto mai visto non si disegna, finché il giro non ci porta proprio lì. Mockup della principale: un segreto con la sua
+    // condizione ([Nodo: segreto; se …]) compare quando la condizione vale (S2, la rivincita di Sergio, dopo aver visto il finale F1).
+    if (n.segreto && !noto && !prossimo && g.nodo !== n.id && !(n.condizione && valuta(n.condizione, s))) stato = 'nascosto';
     else if (g.nodo === n.id) stato = 'corrente';
     else if (prossimo) stato = entrabile(c, s, n.id) ? 'disponibile' : 'bloccato';
     else if (g.visti.includes(n.id)) stato = 'fatto';

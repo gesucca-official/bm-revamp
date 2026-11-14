@@ -9,7 +9,8 @@ import type {Cast} from '../src/formato.ts';
 import castJson from '../dati/cast.json' with {type: 'json'};
 
 const cast = castJson as unknown as Cast;
-const conRitratto = Object.entries(cast.personaggi).filter(([, p]) => p.ritratto && !p.ombra);
+// I ritratti di scena veri: i segnaposto del mockup della principale (cartoncini fermi, senza maglia) sono a parte.
+const conRitratto = Object.entries(cast.personaggi).filter(([, p]) => p.ritratto && !p.ombra && !p.segnaposto);
 
 const LONTANO = 1000;  // un ingresso finito da un pezzo
 const scarto = (a: {tx: number; ty: number; rot: number; sx: number; sy: number}, b = FERMA) =>

@@ -35,6 +35,12 @@
         "maglia": {"perno": {"u": 0.5, "v": 0.42}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.32, "sotto": 0.42}, "busto": {"da": 0.45, "a": 0.9}, "aspetto": 1.5}},
       "bocca": {"u": 0.56, "v": 0.24, "ru": 0.08, "rv": 0.06}
     },
+    "celestina": {"nome": "Celestina", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/celestina.webp", "segnaposto": true},
+    "beppe": {"nome": "Beppe", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/beppe.webp", "segnaposto": true},
+    "sergio": {"nome": "Sergio", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/sergio.webp", "segnaposto": true},
+    "duccio": {"nome": "Duccio", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/duccio.webp", "segnaposto": true},
+    "grappino": {"nome": "Grappino", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/grappino.webp", "segnaposto": true},
+    "padrone": {"nome": "Il padrone del Dimmi Di Sì", "alias": ["Il padrone"], "ombra": true, "velocita": 1},
     "combriccola": {
       "nome": "La combriccola",
       "alias": ["Un amico", "Un altro amico"],

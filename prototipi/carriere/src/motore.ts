@@ -125,7 +125,7 @@ export function vista(c: Carriera, s: Stato): Vista {
   if (p.tipo === 'partita') {
     if (g.sconfitta) return {tipo: 'sconfitta', partita: p};
     if (g.ritento !== null && p.ritento?.[g.ritento]) return {tipo: 'ritento', battuta: p.ritento[g.ritento]};
-    return {tipo: 'partita', partita: p, giocatore: risolvi(p.giocatore, s), avversari: avversari(p, s), sblocchi: sblocchiDopo(c, g.nodo, g.passo)};
+    return {tipo: 'partita', partita: p, giocatore: risolvi(p.giocatore, s), avversari: avversari(p, s), sblocchi: sblocchiDopo(c, g.nodo, g.passo, s)};
   }
   if (p.tipo === 'battuta') return {tipo: 'battuta', battuta: p};
   if (p.tipo === 'narrazione') return {tipo: 'narrazione', testo: p.testo};
@@ -135,11 +135,11 @@ export function vista(c: Carriera, s: Stato): Vista {
 }
 
 /** Gli sblocchi che seguono una partita, fino al passo mostrato successivo: arrivano con la vittoria. */
-export function sblocchiDopo(c: Carriera, idNodo: string, passo: number): string[] {
+export function sblocchiDopo(c: Carriera, idNodo: string, passo: number, s?: Stato): string[] {
   const out: string[] = [];
   for (const p of nodo(c, idNodo).passi.slice(passo + 1)) {
     if (MOSTRATI.has(p.tipo) || p.tipo === 'partita' || p.tipo === 'scelta') break;
-    if (p.tipo === 'sblocco') out.push(p.sblocco);
+    if (p.tipo === 'sblocco' && (!p.se || (s && valuta(p.se, s)))) out.push(p.sblocco);
   }
   return out;
 }
@@ -165,8 +165,8 @@ function applica(s: Stato, p: Passo, eventi: Evento[], silenzioso: boolean) {
       break;
     case 'effetto': if (!silenzioso) eventi.push(p.effetto === 'scossa' ? {tipo: 'scossa'} : {tipo: 'sfarfallio', ...(p.variante ? {variante: p.variante} : {})}); break;
     case 'suono': if (!silenzioso) eventi.push({tipo: 'suono', suono: p.suono}); break;
-    case 'segno': g.segni[p.segno] = p.valore; break;
-    case 'sblocco': sblocca(s, p.sblocco, eventi); break;
+    case 'segno': if (!p.se || valuta(p.se, s)) g.segni[p.segno] = p.valore; break;
+    case 'sblocco': if (!p.se || valuta(p.se, s)) sblocca(s, p.sblocco, eventi); break;
     case 'achievement': ottieni(s, p.achievement, eventi); break;
     default: break;
   }

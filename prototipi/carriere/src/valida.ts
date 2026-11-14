@@ -130,8 +130,8 @@ export function valida(dati: unknown, cast: Cast): string[] {
       }
       case 'effetto': campi(v, dove, [...comuni, 'effetto'], ['variante']); uno(v.effetto, `${dove}.effetto`, ['scossa', 'sfarfallio']); if ('variante' in v) testo(v.variante, `${dove}.variante`, ID); return;
       case 'suono': campi(v, dove, [...comuni, 'suono'], []); testo(v.suono, `${dove}.suono`, ID); return;
-      case 'segno': campi(v, dove, [...comuni, 'segno', 'valore'], []); testo(v.segno, `${dove}.segno`, ID); testo(v.valore, `${dove}.valore`, ID); return;
-      case 'sblocco': campi(v, dove, [...comuni, 'sblocco'], []); testo(v.sblocco, `${dove}.sblocco`, ID); return;
+      case 'segno': campi(v, dove, [...comuni, 'segno', 'valore'], ['se']); testo(v.segno, `${dove}.segno`, ID); testo(v.valore, `${dove}.valore`, ID); if ('se' in v) condizione(v.se, `${dove}.se`); return;
+      case 'sblocco': campi(v, dove, [...comuni, 'sblocco'], ['se']); testo(v.sblocco, `${dove}.sblocco`, ID); if ('se' in v) condizione(v.se, `${dove}.se`); return;
       case 'achievement': campi(v, dove, [...comuni, 'achievement'], []); testo(v.achievement, `${dove}.achievement`); if (!achievementIds.has(v.achievement as string)) err(`${dove}.achievement`, `achievement sconosciuto: ${v.achievement}`); return;
       case 'partita': {
         campi(v, dove, [...comuni, 'id', 'modo', 'giocatore', 'avversari'], ['modificatori', 'ritento', 'sconfitta']);

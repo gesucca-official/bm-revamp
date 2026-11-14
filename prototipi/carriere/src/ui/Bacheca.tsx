@@ -12,7 +12,7 @@ import {chiusiOra, filiDaRiprendere, filoPenzolante, strappi, tempiFilo, TEMPI_F
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
-import type {StatoNodo} from '../mappa.ts';
+import {disposizione, type StatoNodo} from '../mappa.ts';
 import {nomeDi, nomeSblocco} from './dati.ts';
 import {CorniceDisegnata, Cordicella, Definizioni, PenzolaCordicella, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
 import {useMovimentoRidotto} from './Ritratto.tsx';
@@ -49,7 +49,9 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const verticale = h > w;
   const g = s.giro;
   const ultimo = g.nodo ?? g.visti.at(-1) ?? null;  // «sei qui»: dove si è, o l'ultimo nodo lasciato
-  const comp = componi(c, s, ultimo, `Serraglio — carriera: ${c.titolo}`, verticale ? 12 : 13);
+  // Mockup della principale: con molte colonne i titoli vanno a capo prima, per non invadere le colonne vicine.
+  const molte = useMemo(() => disposizione(c).colonne > 9, [c]);
+  const comp = componi(c, s, ultimo, `Serraglio — carriera: ${c.titolo}`, verticale ? 12 : molte ? 8 : 13);
   // Spazio per i pulsanti: in orizzontale una fila in basso; in verticale una fila in alto e «Continua» in basso.
   // In verticale i pulsanti in alto stanno su due righe (Fase I): più spazio sopra la bacheca.
   const d = disponi(comp, w, h, verticale ? ALTO_VERTICALE : 0, verticale ? 64 : 58);

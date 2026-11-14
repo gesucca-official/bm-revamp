@@ -32,9 +32,34 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const fini: {esito: Esito; finale: string; l: Locale}[] = [];
   const archiStato = new Map<string, Set<string>>();
   const verso = new Map<string, Set<string>>();  // nodo -> nodi da cui si entra (per i segreti)
-  const chiave = (i: Ingresso) => JSON.stringify([i.nodo, i.daScelta, Object.entries(i.l.segni).sort(), [...i.l.visti].sort(),
-    [...i.l.vinti].sort(), [...i.l.persi].sort(), [...i.l.sblocchi].sort(), [...i.l.achievement].sort()]);
-  const chiaveFine = (e: Esito, finale: string, l: Locale) => `fine:${e}:${finale}` + JSON.stringify([[...l.sblocchi].sort(), Object.entries(l.segni).sort()]);
+  // Mockup della principale (21 partite, scelte «a scelta»): nella chiave dello stato entrano solo i segni e i nodi che qualche condizione o
+  // qualche partita legge davvero. Due stati che differiscono in altro (un segno mai letto, una partita vinta al primo colpo o dopo un
+  // ritento senza che nessuno chieda «perso») si comportano allo stesso modo: tenerli distinti faceva superare il tetto degli stati.
+  const letti = {segni: new Set<string>(), visto: new Set<string>(), vinto: new Set<string>(), perso: new Set<string>()};
+  const leggi = (x: Condizione | undefined): void => {
+    if (!x) return;
+    if ('non' in x) return leggi(x.non);
+    if ('tutti' in x) return x.tutti.forEach(leggi);
+    if ('uno' in x) return x.uno.forEach(leggi);
+    if ('segno' in x) letti.segni.add(x.segno);
+    if ('visto' in x) letti.visto.add(x.visto);
+    if ('vinto' in x) letti.vinto.add(x.vinto);
+    if ('perso' in x) letti.perso.add(x.perso);
+  };
+  for (const n of c.nodi) {
+    leggi(n.condizione);
+    for (const p of n.passi) {
+      if ('se' in p) leggi(p.se);
+      if (p.tipo === 'scelta') p.opzioni.forEach(o => leggi(o.se));
+      if (p.tipo === 'partita') for (const r of [p.giocatore, ...(Array.isArray(p.avversari) ? p.avversari : [])]) if ('segno' in r) letti.segni.add(r.segno);
+    }
+  }
+  for (const a of c.achievement) { leggi(a.quando); a.indizi.forEach(x => leggi(x.se)); }
+  const solo = (xs: string[], dentro: Set<string>) => xs.filter(x => dentro.has(x)).sort();
+  const segniLetti = (l: Locale) => Object.entries(l.segni).filter(([k]) => letti.segni.has(k)).sort();
+  const chiave = (i: Ingresso) => JSON.stringify([i.nodo, i.daScelta, segniLetti(i.l), solo(i.l.visti, letti.visto),
+    solo(i.l.vinti, letti.vinto), solo(i.l.persi, letti.perso), [...i.l.sblocchi].sort(), [...i.l.achievement].sort()]);
+  const chiaveFine = (e: Esito, finale: string, l: Locale) => `fine:${e}:${finale}` + JSON.stringify([[...l.sblocchi].sort(), segniLetti(l)]);
   const fineVista = new Set<string>();
 
   // Logica a tre valori: gli atomi dell'account sono «forse», salvo giri 0 che vale sempre.
@@ -105,8 +130,14 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
           case 'battuta': case 'narrazione': case 'messaggio':
             if (p.se && !daScelta && val(p.se, l) !== 'f') battuteViste.add(`${n.id}:${p.riga}`);
             break;
-          case 'segno': l.segni[p.segno] = p.valore; break;
-          case 'sblocco': metti(l.sblocchi, p.sblocco); break;
+          case 'segno': case 'sblocco': {
+            // Mockup della principale: un segno o uno sblocco con condizione. Se la condizione è «forse» (un atomo dell'account), le due strade.
+            const v = p.se ? val(p.se, l) : 'v';
+            if (v === 'f') break;
+            if (v === '?') cammina(i + 1, copia(l), daScelta);
+            if (p.tipo === 'segno') l.segni[p.segno] = p.valore; else metti(l.sblocchi, p.sblocco);
+            break;
+          }
           case 'achievement': metti(l.achievement, p.achievement); achievementDati.add(p.achievement); break;
           case 'partita': {
             if (daScelta) break;  // ritorno alla scelta: la partita è già stata giocata

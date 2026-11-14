@@ -88,6 +88,22 @@ const SCENARI = {
     await page.getByTestId('mappa').waitFor();
     await page.waitForTimeout(11000);
   },
+  // Mockup della principale: la bacheca grande (21 nodi, 14 colonne) dopo il primo nodo e dopo il secondo, con la «sei qui» che viaggia,
+  // i post-it che si staccano e il filo che cade.
+  'bacheca-principale': async page => {
+    const finoAllaBacheca = async () => {
+      for (let i = 0; i < 30 && !(await page.getByTestId('mappa').count()); i++) {
+        for (const id of ['vinci', 'opzione-0', 'salta']) if (await page.getByTestId(id).count()) { await page.getByTestId(id).click(); break; }
+        await page.waitForTimeout(100);
+      }
+      await page.getByTestId('mappa').waitFor();
+    };
+    await page.getByTestId('apri-principale').click();
+    await page.getByTestId('mappa-continua').click(); await finoAllaBacheca();
+    await page.waitForTimeout(800);
+    await page.getByTestId('mappa-continua').click(); await finoAllaBacheca();
+    await page.waitForTimeout(11000);
+  },
 };
 
 async function giro(nome, scenario, misura, cpu) {
