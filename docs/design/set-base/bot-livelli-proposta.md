@@ -170,4 +170,4 @@ Totale: circa **6–8 sessioni per SB-30a più B7** (B1–B3, B7: M+S+S/M+M) **e
 
 ## Stato del documento
 
-Versione 0.1: proposta, non approvata. Nessuna decisione registrata: la regia aggiorna il piano (Q2) dopo le risposte. Non sono stati modificati regolamento, documenti del set, codice, test, catalogo, client né piano.
+Versione 0.1: proposta **approvata** il 14 novembre 2026 in [D85](../../set-base-plan.md#decisioni-del-proprietario), con la domanda 5 risolta come raccomandato dalla regia: il Normale è il bot consapevole del colpo letale e il Difficile prevede due turni. Non sono stati modificati regolamento, documenti del set, codice, test, catalogo, client né piano.

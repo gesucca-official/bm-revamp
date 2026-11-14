@@ -74,3 +74,9 @@ previsione, passo 0 e giro.
    viva del travaso, campo `times` della previsione), con identità viva 1.13 e fedeltà della previsione come cancelli?
 2. Per il travaso, invece del parametro nella classe viva, preferisci una classe del playground con binding nuovo? Titoli e copie
    restano uguali, ma cambiano il binding nella lista di Celestina e la ricerca di Un assaggino.
+
+## Risposta del proprietario
+
+14 novembre 2026, «D'accordo con tutte le tue considerazioni», registrata in
+[D84](../../set-base-plan.md#decisioni-del-proprietario): opzione 1 col parametro `poison` nella classe viva del travaso (domanda 2: no
+alla classe nuova).
