@@ -1,10 +1,10 @@
 # SB-16g — Proposta delle carte, passo 3: potenza
 
-**Versione 1.4 — 14 novembre 2026. Motivazione: partire dai risultati del passo 2 e dalle priorità D80, correggere selettivamente potenza e funzionamenti, ripresentare Bancone POISON e prefissare il giro finale a due bracci. Fase A con STOP dopo il commit: solo documenti, nessuna attuazione e nessuna misura.**
+**Versione 1.5 — 14 novembre 2026. Motivazione: dopo il giro finale del passo 3 il proprietario ha scelto il braccio B come bozza di riferimento e chiesto una correzione mirata di Spazienzio e Beppe con un budget di misura nuovo ([D89](../../set-base-plan.md#decisioni-del-proprietario)). Cambiano tre numeri di tre carte, nessun funzionamento. Fase A con STOP dopo il commit: solo questo documento, nessuna attuazione e nessuna misura.** La proposta corrente è il [Passo 3b](#passo-3b--correzione-15), da approvare.
 
-**Approvata dal proprietario il 14 novembre 2026** («Si a tutte», [D82](../../set-base-plan.md#decisioni-del-proprietario)).
+**Versione 1.4 — 14 novembre 2026, attuata e misurata.** Motivazione: partire dai risultati del passo 2 e dalle priorità D80, correggere selettivamente potenza e funzionamenti, ripresentare Bancone POISON e prefissare il giro finale a due bracci. **Approvata dal proprietario il 14 novembre 2026** («Si a tutte», [D82](../../set-base-plan.md#decisioni-del-proprietario)), attuata e misurata nel [passo 3](../../reports/set-base/sb-16g-2b3-report.md).
 
-La sezione [Passo 3](#passo-3--proposta-corrente-14) è la proposta corrente e sostituisce la tabella di potenza della 1.2, conservata sotto come storico. La 1.3 è stata approvata in D79 e attuata nel passo 2; le sue liste restano ferme. La meccanica del [contratto d50 1.1](sb-16g-2b1-rules.md) resta approvata e invariata. I funzionamenti nuovi della 1.4, compreso il braccio B, richiedono il giudizio del proprietario prima dell'attuazione.
+La sezione [Passo 3](#passo-3--proposta-corrente-14) descrive la 1.4 attuata (con la 1.5 vi cambiano soltanto Impatto, Chiave e Lavoro) e sostituisce la tabella di potenza della 1.2, conservata sotto come storico. La 1.3 è stata approvata in D79 e attuata nel passo 2; le sue liste restano ferme. La meccanica del [contratto d50 1.1](sb-16g-2b1-rules.md) resta approvata e invariata. I funzionamenti nuovi della 1.4, compreso il braccio B, richiedono il giudizio del proprietario prima dell'attuazione.
 
 ## Perimetro, fonti e riferimento
 
@@ -50,7 +50,128 @@ Il [regolamento 1.13](../../game-rules.md) e il [Set Base 0.1](../../sets/base.m
 
 **Altre parole chiave: nessuna proposta.** «Spendi tutta la tua L», «trasferisci tutta la tua T» e «per ogni tuo oggetto» sono già brevi; «Scarica», «Travasa» o «Attrezza» richiederebbero di ricordare cosa si azzera o conta, senza un risparmio dimostrato su più carte. «Ultimo colpo» resta la dicitura dell’eccezione esistente, non serve qui. Volto «ANNUNCIO», segnalino unico e ×1,5 sull’impatto di B2-a restano indicazioni per il client, fuori perimetro. A9 segnala il rischio di ripetere lo stesso piano su tutto il set: qui si rispettano i cinque starter D61, senza decidere Sergio, Duccio o l’economia delle buste.
 
+## Passo 3b — correzione 1.5
+
+**14 novembre 2026, proposta da approvare.** Motivazione (D89): dopo il giro finale del passo 3 Spazienzio è passato da dominante a debole e Beppe da ignorato a dominante; insieme spiegano 7 degli 11 incontri fuori criterio. Bozza di riferimento: **braccio B** del passo 3 (bozza 1.4 con Bancone POISON ×0,5). La 1.4 resta come attuata e misurata; la 1.5 cambia **tre numeri di tre carte**, nessun funzionamento, nessuna composizione, nessun premio, nessun bot. Restano fuori, per D89, Celestina–Piera, Mara–Celestina, Mara–Piera e la durata dello specchio di Celestina.
+
+Fonti: [rapporto del passo 3](../../reports/set-base/sb-16g-2b3-report.md#risultati-dei-due-bracci), [riepilogo](../../reports/set-base/sb-16g-2b3/summary.md#braccio-b), contatori `matrix-B.json` e `observations-B.json` della stessa cartella, confrontati con quelli del [passo 2](../../reports/set-base/sb-16g-2b2/summary.md). Le quote per stile sotto sono **ricalcolate da questo documento** sulle celle già pubblicate (decisive, politiche e stili avversari aggregati, specchi esclusi): nessuna partita giocata.
+
+### Spazienzio: il colpo ha perso la soglia dei due colpi, non la preparazione
+
+**Cosa non è cambiato.** Annunci e finanziamento sono quasi identici al passo 2: PAZIENZA giocata 161.647 → 166.749 volte, riuscite 123.049 → 124.810, V media al turno N+1 dopo una riuscita **37,35 → 37,34**; annunci per partita 0,862 → 0,902. Il ritmo caricare–colpire è lo stesso: è cambiato soltanto quanto fa il colpo.
+
+**Cosa è cambiato.** Il calo è uniforme su tutti gli stili, compresi quelli che quasi non annunciano:
+
+| Stile di Spazienzio | contro Mara P2 → B | contro Celestina | contro Piera | contro Beppe |
+|---|---|---|---|---|
+| aggressivo | 71,1 → 57,6 | 67,6 → 42,2 | 74,3 → 38,4 | 74,4 → 43,0 |
+| prudente (0,06 annunci) | 68,7 → 49,7 | 26,4 → 14,1 | 40,7 → 15,0 | 59,5 → 25,1 |
+| risorse | 85,2 → 69,9 | 88,4 → 61,5 | 86,6 → 49,4 | 90,0 → 51,3 |
+| com | 69,2 → 51,9 | 61,7 → 32,0 | 68,2 → 29,8 | 70,2 → 31,0 |
+
+Quindi la perdita viene dal danno per colpo, non dal finanziamento: una leva di costo o di premio (PAZIENZA, Denti stretti) aiuterebbe soprattutto chi già annuncia e paga, cioè lo stile risorse, che è il meno lontano. Contro Mara la quota fuori (57,42%) nasce quasi tutta da Mara `com`: Spazienzio vince il **74,8%** contro Mara `com` e il **51,0–52,2%** contro i tre euristici di Mara, già in quota.
+
+**Perché 40→30 ha tolto così tanto: le soglie.** Salute iniziale: Mara 70, Celestina 70, Spazienzio 75, Beppe 80, Piera 85. Le combinazioni tipiche di Impatto, nominali (prima di stati, corazza di Piera e oggetti difensivi di Beppe, troncamento R05):
+
+| Impatto | 1 colpo | con gettone ×1,5 | 2 colpi | gettone + colpo | 2 colpi bastano per | gettone + colpo basta per |
+|---:|---:|---:|---:|---:|---|---|
+| 40 (passo 2) | 40 | 60 | 80 | 100 | Mara, Celestina, Spazienzio, Beppe | tutti |
+| 30 (passo 3) | 30 | 45 | 60 | 75 | nessuno | Mara, Celestina, Spazienzio |
+| **34 (1.5)** | 34 | 51 | 68 | **85** | nessuno | **tutti** |
+| 35 (rapporto) | 35 | 52 | 70 | 87 | **Mara, Celestina** | tutti |
+
+A 30 il colpo annunciato più un secondo colpo non arriva più a Beppe e Piera: sono proprio i due incontri peggiori (37,61% e 33,16%), mentre contro Mara, dove la soglia resta raggiunta, Spazienzio è ancora sopra quota. Celestina (37,25%) non dipende dalla soglia ma dalla pressione complessiva: travaso e Tossicone più forti della 1.4 hanno alzato l'avversaria mentre Spazienzio era l'unico starter che perdeva soltanto potenza. In tutti i turni da metà salute Impatto resta la seconda carta del set (18.153 su 90.157) e la seconda nei finali in un turno (2.267 su 13.102): il colpo pesa ancora, ma non chiude.
+
+**Leva proposta, una sola: Impatto 30→34 HIT**, costo 25 V, PAZIENZA (+25 V/+15 A), raro, priorità e liste invariati. È il valore più alto che **non** ridà i due colpi letali sui 70 di Mara e Celestina, e il più basso che riporta «gettone + colpo» a 85, cioè su Beppe e Piera. Il candidato del rapporto, 35, riaprirebbe i due colpi letali proprio su Mara, l'unico incontro già sopra quota. Scartate: Impatto a 20 V (aiuta il finanziamento, che non è il problema, e soprattutto lo stile risorse); salute del personaggio (alza tutti gli incontri, Mara compresa); il raro (poco giocato, non è la causa). Limite dichiarato: contro Celestina 34 non cambia alcuna soglia, porta solo 4 danni in più per colpo.
+
+### Beppe: il caricamento è diventato una mossa, Lavoro un finale
+
+**Cosa è cambiato davvero.** Gli euristici di Beppe, che nel passo 2 non giocavano mai i due caricamenti (zero annunci nel 78,73% delle presenze), ora annunciano 1,75/1,57/1,75 volte a partita (aggressivo/prudente/risorse), con bot invariati. Il cambio di comportamento è plausibilmente dovuto ai 4 CUT immediati: è l'unico effetto nuovo dei caricamenti oltre al +15 V di Preparo, e il danno subito è ciò che gli euristici valutano; i dati non espongono i punteggi delle mosse, quindi resta un meccanismo plausibile, non dimostrato. Lo stile `com`, che annunciava già nel passo 2, misura invece la sola potenza delle carte:
+
+| Stile di Beppe | contro Spazienzio P2 → B | contro Mara | contro Celestina | contro Piera |
+|---|---|---|---|---|
+| aggressivo | 38,6 → 70,5 | 65,1 → 80,3 | 58,6 → 81,2 | 82,7 → 73,5 |
+| prudente | 39,9 → 73,2 | 64,1 → 83,7 | 55,8 → 77,4 | 84,3 → 78,0 |
+| risorse | 24,4 → 68,2 | 48,8 → 76,0 | 33,3 → 74,8 | 57,2 → 70,2 |
+| com | 2,5 → 37,5 | 8,5 → 42,5 | 5,1 → 29,7 | 4,2 → 30,1 |
+
+Il passo 2 era sbilanciato al contrario fra stili (euristici forti, `com` quasi sempre sconfitto); ora tutti salgono e gli euristici dominano al 68–84%.
+
+**Peso delle quattro componenti** (stime d'ordine di grandezza dai contatori, non ablazioni):
+
+- **Lavoro fatto bene 14+7 per oggetto/10 V: il picco.** Beppe ha capacità di **3 oggetti** e 7 oggetti su 20 carte: con 2–3 oggetti Lavoro fa 28–35 HIT, più di Impatto, con 10 V. Con **una sola copia** è la prima carta del set nei finali in un turno (**3.792 su 13.102, 28,9%**) e nei turni da metà salute (18.376 su 90.157), contro tutti e cinque gli starter.
+- **Chiave da tredici 22 CUT/10 V: il volume.** Raramente chiude (1.005 turni da metà salute, 312 finali), ma ogni giocata fa 10 danni più del passo 2; le sole copie trovate e giocate dopo Preparo sono 177.576, quindi oltre 1,7 milioni di danni nominali in più.
+- **4 CUT immediati: il comportamento, poco danno.** 396.418 risoluzioni, 1,62 milioni di salute tolta in tutto (4,1 per mossa, circa 6 a partita), di cui 0,46 milioni a ricerca fallita. Sono la ragione per cui gli euristici annunciano; toglierli a ricerca fallita taglierebbe poco danno e rischierebbe di riportare Beppe a non annunciare.
+- **+15 V di Preparo: quasi nulla.** Beppe parte da 25 V e i colpi costano 10: dopo una riuscita ha in media circa 32 V al turno N+1, dopo un ripiego circa 16. La V non è il vincolo; toccarla non cambia gli esiti.
+
+**Leve proposte, due:**
+
+1. **Lavoro fatto bene: 14+7 → 14+4 per oggetto**, costo 10 V invariato. Torna il coefficiente per oggetto del passo 2 con la base della 1.4: 14/18/22/26 HIT con 0/1/2/3 oggetti, picco nominale 26 invece di 35. Toglie il finale in un colpo, resta il raro col picco legato alla preparazione (D63).
+2. **Chiave da tredici: 22 → 18 CUT**, costo 10 V invariato. Allinea il colpo NC di Beppe a Tossicone (18 POISON/10 T) e conserva la relazione della 1.4 fra raro e NC: Lavoro supera Chiave da due oggetti (22>18), come prima (28>22).
+
+Restano i 4 CUT anche a ricerca fallita, i premi di Preparo (+15 V) e Una stretta (+10 V), i ripieghi (+5 V) e Sotto il cofano. Scartate: «4 CUT solo se trova» (funzionamento nuovo, poco danno in meno, rischio di perdere l'uso degli annunci che la 1.4 cercava); meno V da Preparo (non vincolante); un terzo intervento sulla salute o sugli oggetti di Beppe (cambio di personaggio, non di coppia).
+
+### Carte che cambiano nella 1.5
+
+| Carta (binding) | Braccio B del passo 3 | Proposta 1.5: costo; testo breve | Priorità |
+|---|---|---|---:|
+| GARGANTUESCO IMPATTO SUL TU (`bruiser.SuperImpact`) | 25 V; 30 HIT | **25 V**; «Infliggi 34 danni da colpo al bersaglio.» | 0 |
+| Chiave da tredici (`base.gigi.ChiaveDaTredici`) | 10 V; 22 CUT | **10 V**; «Infliggi 18 danni da taglio al bersaglio.» | 1 |
+| Lavoro fatto bene (`base.gigi.LavoroFattoBene`) | 10 V; 14+7 per oggetto HIT | **10 V**; «Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo.» | 1 |
+
+Binding, rarità, copie e mazzi da 20 invariati; 120 slot e 45 C/55 NC/20 R invariati. Tutto il resto è il braccio B del passo 3.
+
+**Finanziamento da zero a N+1 e picchi nominali** (stesse ipotesi della [tabella 1.4](#finanziamento-da-zero-a-n1-e-picchi-nominali-della-14): risorse pertinenti a zero, nessuna interferenza, conti documentali):
+
+| Coppia | Premio pieno; risorse a N+1 da zero | Costo; residuo ed effetto da zero | Picco nominale; confronto NC/R |
+|---|---|---|---|
+| PAZIENZA → Impatto | +25 V/+15 A; V=25/A=15 | 25 V; V=0, **34 HIT** | NC fisso 34; 51 sotto gettone. Il raro SPEDIAMOTI (6+V residua/2) lo supera solo da V residua ≥58, cioè V ≥68 prima del costo (con 30 bastava residua ≥50): il picco del raro resta, ma più lontano. |
+| Preparo → Chiave | +15 V, 4 CUT a N; V=15 | 10 V; V=5, **18 CUT** | NC fisso 18; i 4 CUT di N restano separati. |
+| Una stretta → Lavoro | +10 V, 4 CUT a N; V=10 | 10 V; V=0, **14 HIT** senza oggetti | **14/18/22/26** con 0/1/2/3 oggetti: supera il NC da 2 oggetti. Con Guanti ×1,25 e 3 oggetti presenti, 26→32. |
+
+Tutti e tre i colpi restano pagabili da zero dopo il premio pieno; i ripieghi (+5 V/+5 A, +5 V) non li finanziano da zero, come nella 1.4, ma Beppe parte da 25 V e Spazienzio da 25 V.
+
+### Cosa mi aspetto nei 15 incontri (stima, non misura)
+
+Stima dichiarata a occhio, dalle soglie e dalle quote del passo 2 e del braccio B; le due correzioni interagiscono negli incontri Spazienzio–Beppe. **Non sono previsioni misurate**: possono sbagliare di molti punti, come la 1.4 su Spazienzio.
+
+| Incontro | Braccio B (quota / patte / turni) | Stima 1.5 | Motivo |
+|---|---|---|---|
+| Spazienzio–Spazienzio | 51,90% / 2,44% / 9,67 | in quota, turni −0,3 circa | specchio; colpi più forti |
+| Spazienzio–Mara | **57,42%** / 2,84% / 9,41 | 58–62%, **resta fuori** | più danno senza la soglia dei due colpi; il fuori viene da Mara `com` |
+| Spazienzio–Celestina | **37,25%** / 4,67% / 10,25 | 40–44%, al limite | nessuna soglia nuova, solo più danno |
+| Spazienzio–Piera | **33,16%** / 1,57% / 10,39 | 40–46% | gettone + colpo torna a 85, meno la corazza |
+| Spazienzio–Beppe | **37,61%** / 0,98% / 7,98 | 47–53% | soglia a 80 e Beppe più debole |
+| Mara–Beppe | **29,32%** / 0,55% / 7,23 | 38–44%, al limite | meno picco di Lavoro e meno volume di Chiave |
+| Celestina–Beppe | **34,43%** / 5,85% / 8,43 | 41–47% | come sopra |
+| Piera–Beppe | **37,04%** / 0,80% / 8,14 | 43–49% | come sopra; partite un po' più lunghe |
+| Beppe–Beppe | 51,85% / 7,61% / **6,41** | in quota, turni 7–8, patte possibili in salita verso 8–9% | meno danno per turno in entrambi i posti |
+| Mara–Mara, Mara–Celestina, Mara–Piera, Celestina–Celestina, Celestina–Piera, Piera–Piera | come nel braccio B | **identici** | nessuna carta dei due mazzi cambia (vedi cancello d'identità) |
+
+Quindi, nel caso favorevole, la 1.5 riporta in quota 4–6 dei 7 incontri fuori che riguardano Spazienzio o Beppe; Spazienzio–Mara resta probabilmente sopra, e i 4 incontri esclusi da D89 restano fuori per costruzione. **Il cancello completo D16/D51 non può tornare con questa proposta da sola.**
+
+### Disegno della misura (D89)
+
+- **Un solo braccio:** la bozza 1.5 = braccio B del passo 3 con i tre numeri sopra. Riferimento: **braccio B del passo 3**, confronti appaiati e descrittivi; nessun braccio A, nessun passo 2 rigiocato.
+- **Stesso disegno del passo 3:** semi **7.000.000–7.000.299**, 300 per cella, 15 incontri inclusi gli specchi, quattro stili, tre politiche, bot D76–D77 e politiche del passo 3, tutti gli incroci e posti alternati: **2.160 celle, 648.000 partite**, otto thread. Stesso osservatore del passo 3, nessun contatore che cambi le decisioni dei bot.
+- **Budget nuovo, separato da D68:** **un giro, al più 7.200 s** cumulativi nel blocco, contando passo 0, campioni falliti, diagnosi e giro. Il residuo D68 (0 giri) non si usa.
+- **Passo 0 incluso nella stima:** 4 semi per cella, i primi quattro del giro, 8.640 partite. Si procede solo se **s0 + 75 × 1,5 × s0 + 120 ≤ 7.200 s**, cioè **s0 ≤ 62,38 s**. Riferimento non vincolante: il passo 0 del braccio B è durato 24,558 s, che darebbe una stima di circa 2.907 s.
+- **Cancello d'identità prima del giro:** il cambio tocca solo valori di carte esistenti, non binding, quindi l'ordine delle mescolate non cambia (la lezione di D88). Le celle dei **6 incontri senza Spazienzio né Beppe** devono coincidere con step0-B del passo 3 partita per partita; nel giro, con il braccio B. Una differenza è uno STOP con dati: vuol dire che è cambiato altro oltre ai tre numeri.
+- **Verifiche prima delle partite**, come nel passo 3: dati e testi delle tre carte (bozza, descrizioni, `check-rules`), finanziamento, fedeltà previsione–motore sui tre colpi, invarianti e bound.
+- **Cosa leggere:** criteri D16/D51 su tutti i 15 incontri e sulle celle per politica; quote per stile di Spazienzio e Beppe come nelle tabelle sopra; annunci per stile; soglie e finali in un turno per carta (Impatto, Chiave, Lavoro); 4 CUT effettivi; patte e durata di Beppe–Beppe.
+- **STOP senza rilancio** se fattibilità, identità, invarianti o criteri non tornano: dati, incertezze e proposta al proprietario. Nessuna taratura dopo il passo 0 o dopo il giro, nessun secondo giro dentro questo budget.
+
+### Domande della 1.5
+
+1. Approvi **Impatto 30→34 HIT** come unica leva su Spazienzio, al posto dei 35 del rapporto, con costo, PAZIENZA e raro invariati?
+2. Approvi per Beppe **Lavoro fatto bene 14+4 per oggetto** e **Chiave da tredici 18 CUT**, entrambi a 10 V, tenendo i 4 CUT anche a ricerca fallita e i premi attuali?
+3. Approvi il **disegno della misura**: un braccio da 648.000 partite sul braccio B, semi e bot del passo 3, budget nuovo di un giro e 7.200 s con passo 0 incluso (s0 ≤ 62,38 s), cancello d'identità sui 6 incontri senza Spazienzio né Beppe?
+4. Poiché 4 incontri esclusi da D89 resteranno fuori per costruzione, il giudizio sulla 1.5 va dato sui **9 incontri con Spazienzio o Beppe**, riportando comunque il cancello completo come non raggiunto? Se quei 9 tornano in criterio si fa STOP con una proposta per gli altri; se no, STOP con i dati.
+5. Spazienzio–Mara è fuori soprattutto per Mara `com` (Spazienzio è in quota contro gli euristici di Mara): la consideri da correggere su Mara in una proposta successiva, invece che su Spazienzio?
+
 ## Passo 3 — proposta corrente 1.4
+
+*Attuata e misurata nel [passo 3](../../reports/set-base/sb-16g-2b3-report.md); il titolo resta per non rompere i collegamenti. La proposta corrente è il [Passo 3b](#passo-3b--correzione-15).*
 
 ### Diagnosi e leve, nell'ordine D80
 
