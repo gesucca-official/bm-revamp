@@ -10,7 +10,7 @@ Il lavoro procede su istruzione del proprietario, a blocchi ([metodo](orchestraz
 
 ## Obiettivo e regole comuni
 
-**Risultato:** un Set Base di circa 115 carte, giocabile per intero, in cui gli starter si
+**Risultato:** un Set Base di 120 carte, giocabile per intero, in cui gli starter si
 equivalgono, costruire un mazzo premia chi esplora e nessuna strategia domina. Il bilanciamento
 perfetto non è l'obiettivo: contano l'assenza di strategie dominanti e il peso della lettura
 dell'avversario. Il set deve **esplorare a fondo le meccaniche di base**, senza consumare le idee
@@ -58,7 +58,7 @@ Fotografia di partenza del 2 novembre 2026 (tabella per ambito): [storico](histo
 
 ## Il set in numeri
 
-Intervallo ammesso 110–120 carte, obiettivo 115. Ogni carta ha una rarità.
+Totale **120 carte** (D60, D79; D34 diceva 115), con 45 comuni, 55 non comuni e 20 rare ([griglia](design/set-base/griglia.md)). Ogni carta ha una rarità.
 
 | Blocco | Carte | Note |
 |---|---:|---|
@@ -66,10 +66,10 @@ Intervallo ammesso 110–120 carte, obiettivo 115. Ogni carta ha una rarità.
 | Basic | 7 | Una per personaggio |
 | Bound | 21 | Almeno 3 per personaggio; se ne scelgono 2 |
 | Last resort | 4 | Struggle generica più 3 legate a un personaggio, dove flavour e meccanica si sposano |
-| Azioni d'archetipo | 37 | 5 per personaggio, 6 per Sergio e Duccio ([D34](#decisioni-del-proprietario)): si sposano con la strategia senza esservi vincolate |
+| Azioni d'archetipo | 42 | 6 per personaggio ([griglia](design/set-base/griglia.md), D60–D61; erano 37 in D34): si sposano con la strategia senza esservi vincolate |
 | Azioni generiche | 23 | Giocabili da tutti; compaiono in più starter (erano 25, D34) |
 | Oggetti | 16 | I token non contano, come oggi |
-| **Totale** | **115** | |
+| **Totale** | **120** | |
 
 Il budget è stretto: Bruiser usa 15 carte distinte su 20 slot, quindi cinque starter consumerebbero
 gran parte del pool senza condividere le generiche. Per ogni personaggio ci sono **almeno tre carte
@@ -189,7 +189,7 @@ Copertura massima della bozza (stima del 2 novembre 2026, tabella per blocco): [
 
 ## Struttura per set ed espansioni
 
-Decisa dal proprietario: **il regolamento contiene le regole generali, un documento per set contiene le carte.** Con 115
+Decisa dal proprietario: **il regolamento contiene le regole generali, un documento per set contiene le carte.** Con 120
 carte le tabelle di R07 diventerebbero ingestibili e ogni ritocco cambierebbe la versione delle regole.
 
 - **Regolamento:** sistema, tipologie, risoluzione, danni, regole dei mazzi. Le citazioni di carte specifiche in R04 e R05
@@ -206,7 +206,7 @@ carte le tabelle di R07 diventerebbero ingestibili e ogni ritocco cambierebbe la
 
 ## Bilanciamento: metodo e criteri
 
-**Lavoriamo a strati.** Non si creano tutte le carte per poi provarle: con 115 carte le interazioni sono troppe e i problemi di
+**Lavoriamo a strati.** Non si creano tutte le carte per poi provarle: con 120 carte le interazioni sono troppe e i problemi di
 fondo emergerebbero quando è già tutto da rifare. Si costruisce un personaggio alla volta contro una base stabile, e alla fine si
 bilancia l'intero set.
 
@@ -564,7 +564,7 @@ il matchmaking si sistemerà in futuro. Protocollo d'ingresso, `PlayerFactorySer
 
 ### SB-31 — Adeguamento del client
 
-**Perimetro.** Quanto serve al set: catalogo ed editor con circa 115 carte, filtri per set, rarità e personaggio, scelta di due bound fra quelle disponibili, conteggio verso 20 carte; effetti, stati e simboli di carte nuove, simboli di rarità. Le osservazioni delle prove umane finiscono qui. O15 e O16 sono la cornice naturale: vedi le decisioni aperte.
+**Perimetro.** Quanto serve al set: catalogo ed editor con circa 120 carte, filtri per set, rarità e personaggio, scelta di due bound fra quelle disponibili, conteggio verso 20 carte; effetti, stati e simboli di carte nuove, simboli di rarità. Le osservazioni delle prove umane finiscono qui. O15 e O16 sono la cornice naturale: vedi le decisioni aperte.
 
 **Completamento verificabile.** Verifiche di `client-web` verdi a 1366×768 e 844×390, compreso il peso. Costruire un mazzo valido con il catalogo intero è praticabile. Nessuna carta senza effetto visibile o testo leggibile.
 
@@ -613,7 +613,7 @@ Con la proposta; nessuna blocca i primi blocchi.
 |---|---|---|---|
 | Q1 | Avversari computer in quick | Stessa categoria dell'umano in 1vCom; qualunque starter nei bot aggiunti alla FFA | SB-29 |
 | Q3 | Anticipare il bot sulle carte attuali | Sì, se si dimostra utile dopo SB-4. Dato di SB-4: con le carte attuali il Junkie euristico schiaccia Bruiser, da decidere prima di anticipare | Dopo SB-4 |
-| Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 115 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
+| Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 120 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
 | Q7 | Formato definitivo | 20 carte e 2 copie, confermato dopo la misura di SB-16h in [D94](#decisioni-del-proprietario) | Conferma finale in SB-23 |
 | Q8 | Report del server in «Ultimo turno» | Resta com'è: i fatti in italiano vengono prima, il testo inglese è secondario (D7 del piano C3). Da riconsiderare se la prova umana lo chiede | SB-25 |
