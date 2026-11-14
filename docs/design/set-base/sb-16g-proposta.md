@@ -2,6 +2,8 @@
 
 **Versione 1.4 — 14 novembre 2026. Motivazione: partire dai risultati del passo 2 e dalle priorità D80, correggere selettivamente potenza e funzionamenti, ripresentare Bancone POISON e prefissare il giro finale a due bracci. Fase A con STOP dopo il commit: solo documenti, nessuna attuazione e nessuna misura.**
 
+**Approvata dal proprietario il 14 novembre 2026** («Si a tutte», [D82](../../set-base-plan.md#decisioni-del-proprietario)).
+
 La sezione [Passo 3](#passo-3--proposta-corrente-14) è la proposta corrente e sostituisce la tabella di potenza della 1.2, conservata sotto come storico. La 1.3 è stata approvata in D79 e attuata nel passo 2; le sue liste restano ferme. La meccanica del [contratto d50 1.1](sb-16g-2b1-rules.md) resta approvata e invariata. I funzionamenti nuovi della 1.4, compreso il braccio B, richiedono il giudizio del proprietario prima dell'attuazione.
 
 ## Perimetro, fonti e riferimento
