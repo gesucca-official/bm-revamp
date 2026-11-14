@@ -287,6 +287,9 @@ SB-17 resta dopo la sequenza, non viene sostituita dai numeri.
 2. Per il giro finale va bene il confronto prefissato potenza senza/con Bancone
    POISON, nello stesso giro, con questa misura come riferimento e nuovo passo 0?
 
+**Risposte del proprietario:** 14 novembre 2026, «Sì a entrambe», registrate in
+[D80](../../set-base-plan.md#decisioni-del-proprietario).
+
 ## Comandi riproducibili
 
 Python già presente, senza download: Python 3.13.0 in
