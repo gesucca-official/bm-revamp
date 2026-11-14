@@ -203,7 +203,7 @@ class SetBaseDraftTest {
             assertEquals(name.toUpperCase(Locale.ITALIAN), name, c.get("binding").asText());
             shouting++;
         }
-        assertEquals(9, shouting, "basic, tre bound e cinque carte d'archetipo");
+        assertEquals(10, shouting, "basic, tre bound e cinque carte d'archetipo");
     }
 
     /**
@@ -239,6 +239,9 @@ class SetBaseDraftTest {
     /** La base del listino ricavata dalla bozza: contesti con le àncore al posto di due coppie di generiche, starter intatti. */
     @Test
     void theListinoBaseFromTheDraftHasTheNewContexts() throws Exception {
+        // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
+        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         for (String ctx : List.of(Listino.SPAZIENZIO, Listino.MARA)) {
             List<String> spec = Listino.SET_BASE_CONTEXTS.get(ctx);
@@ -297,13 +300,14 @@ class SetBaseDraftTest {
         expected.put("junkie.AmphetamineReflexes", 2);
         expected.put("junkie.ToxicBloodDrain", 1);
         expected.put("com.Grab", 2);
-        expected.put("base.com.RincorsaDalMarciapiede", 2);
+        expected.put("base.com.RincorsaDalMarciapiede", 1);
         expected.put("com.Steal", 1);
         expected.put("base.com.FasciaturaColFazzolettaccio", 1);
         expected.put("base.items.PasticcaTrovataSulBancone", 2);
         expected.put("base.items.PaninoDelKebab", 2);
         expected.put("com.items.MarvelousCocktail", 1);
-        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 9, generiche 6, oggetti 5, come nella griglia");
+        expected.put("base.tossico.UnAssaggino", 1);
+        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 10, generiche 5, oggetti 5, D79");
 
         // D34, punto 4: la bound di T dà al massimo +10; giro 3: +7, testi compresi.
         JsonNode raschiare = card("base.tossico.bound.RaschiareIlFondo");
@@ -329,7 +333,7 @@ class SetBaseDraftTest {
         int slots = 0;
         for (JsonNode c : json.get("cards"))
             if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
-        assertEquals(10, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
+        assertEquals(11, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
     }
 
     /** Le meccaniche del Tossico su stati costruiti a mano: immunità al periodico di T, veleno al bersaglio, cura col veleno, ultima dose. */
@@ -368,6 +372,9 @@ class SetBaseDraftTest {
     /** SB-13: la base del listino ha anche il contesto del Tossico, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
     @Test
     void theListinoBaseHasTheToxicContextAndItsBoundCurves() throws Exception {
+        // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
+        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.TOSSICO);
         Map<String, Integer> cards = base.cardsOf(Listino.TOSSICO), starter = draft.cardsOf(spec.get(0));
@@ -423,11 +430,12 @@ class SetBaseDraftTest {
         expected.put("base.pino.RuttoADistanzaSociale", 1);
         expected.put("com.Grab", 2);
         expected.put("base.com.Spintone", 2);
-        expected.put("base.com.FasciaturaColFazzolettaccio", 2);
+        expected.put("base.com.FasciaturaColFazzolettaccio", 1);
         expected.put("base.items.AmaroNelBicchiereDiPlastica", 2);
         expected.put("com.items.RottenBeer", 2);
         expected.put("com.items.AnotherRottenBeer", 1);
-        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 9, generiche 6, oggetti 5, come nella griglia");
+        expected.put("base.pino.PrimaIlBrindisi", 1);
+        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 10, generiche 5, oggetti 5, D79");
 
         // D34, punto 7 (e D33): ogni carta di Pino costa al massimo 5 L e nessuna carta dello starter costa A.
         for (String binding : draft.cardsOf(deck).keySet()) {
@@ -467,7 +475,7 @@ class SetBaseDraftTest {
         int slots = 0;
         for (JsonNode c : json.get("cards"))
             if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
-        assertEquals(10, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
+        assertEquals(11, slots, "basic, tre bound, last resort e cinque carte d'archetipo");
     }
 
     /** Una partita fra Pino e Spazienzio, per giocare una carta di Pino con la sua logica speciale (la L memorizzata). */
@@ -553,6 +561,9 @@ class SetBaseDraftTest {
     /** SB-14: la base del listino ha anche il contesto di Pino, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
     @Test
     void theListinoBaseHasThePinoContextAndItsBoundCurves() throws Exception {
+        // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
+        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.PINO);
         Map<String, Integer> cards = base.cardsOf(Listino.PINO), starter = draft.cardsOf(spec.get(0));
@@ -597,17 +608,11 @@ class SetBaseDraftTest {
      * Le rarità della griglia (colonna «Rarità»: C, NC, R) per ogni slot che la bozza contiene, elencate qui perché la prova non legga i
      * documenti. Le stesse le scrive e le confronta col file della griglia docs/reports/set-base/sb-6b/rarita-bozza.py (--check).
      */
+    // D79: approved step-2 rarities, including the five new NC titles.
     static final Map<String, Set<String>> GRID_RARITIES = Map.of(
-            "COMMON", Set.of("PG-SPA", "PG-MAR",
-                    "SPA-BA", "MAR-BA", "SPA-BO1", "SPA-BO2", "MAR-BO1", "MAR-BO2", "TOS-BO1", "TOS-BO2", "PIN-BO1", "PIN-BO2", "LR-STR",
-                    "SPA-AR1", "SPA-AR3", "SPA-AR4", "MAR-AR1", "MAR-AR2", "MAR-AR3", "TOS-AR1", "TOS-AR2", "TOS-AR3",
-                    "PIN-AR1", "PIN-AR2", "PIN-AR3", "GIG-BO1", "GIG-BO2", "GIG-AR2", "GIG-AR3", "GIG-AR4",
-                    "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18",
-                    "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12"),
-            "UNCOMMON", Set.of("PG-TOS", "PG-PIN", "PG-GIG",
-                    "TOS-BA", "PIN-BA", "GIG-BA", "SPA-BO3", "MAR-BO3", "TOS-BO3", "PIN-BO3", "GIG-BO3", "LR-TOS", "LR-PIN",
-                    "SPA-AR5", "MAR-AR4", "TOS-AR4", "PIN-AR4", "GIG-AR1", "GEN-07", "OGG-03", "OGG-09", "OGG-13"),
-            "RARE", Set.of("SPA-AR2", "MAR-AR5", "TOS-AR5", "PIN-AR5", "GIG-AR5", "OGG-04"));
+            "COMMON", Set.of("GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
+            "UNCOMMON", Set.of("GEN-07", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
+            "RARE", Set.of("GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
 
     private static String gridRarity(String slot) {
         List<String> found = new ArrayList<>();
@@ -646,7 +651,7 @@ class SetBaseDraftTest {
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
         }
-        assertEquals(Map.of("COMMON", 46, "RARE", 6, "UNCOMMON", 19), counts, "le settantuno carte della bozza, undici di Gigi (SB-15)");
+        assertEquals(Map.of("COMMON", 37, "RARE", 6, "UNCOMMON", 33), counts, "le 76 carte della bozza, D79");
         for (String deck : STARTERS) {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");
@@ -683,10 +688,9 @@ class SetBaseDraftTest {
         Map<String, Integer> expected = new TreeMap<>();
         expected.put("bruiser.BreakYourToy", 2);
         expected.put("base.gigi.ChiaveDaTredici", 2);
-        expected.put("base.gigi.ColpoDiChiaveInglese", 1);
+        expected.put("base.gigi.ColpoDiChiaveInglese", 2);
         expected.put("base.gigi.SottoIlCofano", 1);
         expected.put("base.gigi.LavoroFattoBene", 1);
-        expected.put("base.com.MattoneDelCantiere", 2);
         expected.put("com.Steal", 2);
         expected.put("bruiser.SeagullFly", 1);
         expected.put("base.com.Spintone", 1);
@@ -694,7 +698,8 @@ class SetBaseDraftTest {
         expected.put("base.items.GiubbottoDiFintaPelle", 2);
         expected.put("base.items.CascoDaLavoro", 2);
         expected.put("base.items.EspressoDelDistributore", 1);
-        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 7, generiche 6, oggetti 7, come nella griglia");
+        expected.put("base.gigi.UnaStrettaDiProva", 1);
+        assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 9, generiche 4, oggetti 7, D79");
         assertEquals(7, draft.cardsOf(deck).entrySet().stream().filter(e -> draft.card(e.getKey()).isItem()).mapToInt(Map.Entry::getValue).sum());
 
         // Costi in V delle carte d'archetipo, testi compresi; Smontiamo tutto è la classe di oggi con costo e priorità della bozza.
@@ -743,7 +748,7 @@ class SetBaseDraftTest {
         int slots = 0;
         for (JsonNode c : json.get("cards"))
             if (slot.matcher(c.get("gui").path("description").asText("")).matches()) slots++;
-        assertEquals(9, slots, "basic, tre bound e cinque carte d'archetipo");
+        assertEquals(10, slots, "basic, tre bound e cinque carte d'archetipo");
     }
 
     /** Una partita fra Gigi e Spazienzio, coi tavoli svuotati: gli oggetti si mettono a mano. */
@@ -855,6 +860,9 @@ class SetBaseDraftTest {
     /** SB-15: la base del listino ha anche il contesto di Gigi, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
     @Test
     void theListinoBaseHasTheGigiContextAndItsBoundCurves() throws Exception {
+        // D79 removes the double generic slots used by these historical SB-11/SB-15 price probes.
+        Draft draft = Draft.fromFile(java.nio.file.Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json"));
+        JsonNode json = draft.json();
         Draft base = Listino.setBaseContexts(draft, 7);
         List<String> spec = Listino.SET_BASE_CONTEXTS.get(Listino.GIGI);
         Map<String, Integer> cards = base.cardsOf(Listino.GIGI), starter = draft.cardsOf(spec.get(0));

@@ -24,11 +24,15 @@ class ChargeMeasureTest {
         final String key;
         final Counts counts = new Counts();
         final int initialHealth;
+        boolean periodic, parried;
         Measured(Character c, String key) {
             super(c.getBindingName(), 0, 0, c.getItemsSize()); this.key = key;
             getResources().putAll(c.getResources()); getItems().addAll(c.getItems());
             getStatuses().addAll(c.getStatuses()); getTimers().addAll(c.getTimers()); getImmunities().addAll(c.getImmunities());
             initialHealth = getResources().get(Resource.HEALTH);
+        }
+        @Override public List<String> resolveTimeBasedEffects() {
+            periodic=true; try { return super.resolveTimeBasedEffects(); } finally { periodic=false; }
         }
         @Override public String inflictDamage(Character target, Damage d, Set<StatusType> types) {
             Measured before = SOURCE.get(); SOURCE.set(this);
@@ -47,11 +51,18 @@ class ChargeMeasureTest {
             return d.getAmount();
         }
         @Override public String takeDamage(Damage d, Set<StatusType> types) {
+            Measured source=SOURCE.get();
+            if(source!=null&&source!=this&&getStatuses().stream().anyMatch(s->s.getFlow()==StatusFlow.INPUT
+                    &&s.getImpactedProperty()==d.getType()&&types.contains(s.getType())&&!s.isEquip()
+                    &&s.getExposure()==null&&s.getAmountFunction().apply(100f)<100f))source.parried=true;
             if (getStatuses().stream().anyMatch(s -> s.getExposure() != null)) {
                 int actual = amount(d,types,false), plain = amount(d,types,true);
                 String who = SOURCE.get() != null && SOURCE.get() != this ? "opponent" : "selfOrPeriodic";
                 counts.add("tokenDamageEvents-"+who); counts.add("tokenDamage-"+who,actual);
                 counts.add("tokenExtra-"+who,actual-plain);
+                String kind=periodic?"periodic":SOURCE.get()==this?"self":"opponent";
+                counts.add("tokenDamage-"+kind+"-"+d.getType(),actual);
+                counts.add("tokenExtra-"+kind+"-"+d.getType(),actual-plain);
             }
             return super.takeDamage(d, types);
         }
@@ -63,10 +74,12 @@ class ChargeMeasureTest {
         final Map<String, Card> played = new HashMap<>();
         final Map<String, Integer> tokensAtStart = new HashMap<>();
         boolean halfTurn, finalHalfTurn;
+        final ChargeFrequency frequency=new ChargeFrequency();
         synchronized void merge(Measured c) { totals.computeIfAbsent(c.key,k->new Counts()).merge(c.counts); }
         // A separate instance per running game, used through the ThreadLocal below.
         @Override public void accept(String stage, Game g) {
             if (stage.equals("ROUND_READY")) {
+                frequency.ready(g);
                 before.clear(); played.clear(); tokensAtStart.clear();
                 for (Player p:g.getPlayers().values()) {
                     before.put(p.getPlayerId(),p.getResources().get(Resource.HEALTH));
@@ -75,6 +88,7 @@ class ChargeMeasureTest {
                 }
                 for (Move m:g.getPendingMoves()) if(!m.isVoid()) played.put(m.getPlayerId(),g.getCardFromHand(m.getPlayerId(),m.getPlayedCardName()));
             } else {
+                frequency.committed(g);
                 boolean half = false;
                 for(Player p:g.getPlayers().values()) {
                     Measured c=(Measured)p.getCharacter(); String id=p.getPlayerId();
@@ -82,8 +96,8 @@ class ChargeMeasureTest {
                     boolean big=lost*2>=c.initialHealth; half|=big;
                     int tokens=tokensAtStart.get(id); if(tokens>0) {c.counts.add("tokenSeatTurns");c.counts.add("tokenSeatTurnHealthLost",lost);}
                     Card card=played.get(id);
-                    if(card!=null && Arrays.asList(HITS).contains(card.getBindingName()) && tokens>0)c.counts.add("soughtHitChosenWithToken");
-                    if(tokens>0 && (card==null || !Arrays.asList(HITS).contains(card.getBindingName())))c.counts.add("tokenHeldTurns");
+                    if(card!=null && ChargeFrequency.isHit(card.getBindingName()) && tokens>0)c.counts.add("soughtHitChosenWithToken");
+                    if(tokens>0 && (card==null || !ChargeFrequency.isHit(card.getBindingName())))c.counts.add("tokenHeldTurns");
                 }
                 halfTurn|=half; finalHalfTurn=half&&g.isOver();
                 for(Move m:g.getResolvedMoves()) if(m.getSearchedFor()!=null) {
@@ -125,7 +139,7 @@ class ChargeMeasureTest {
         };
         long started=System.nanoTime();
         Bench.Settings settings=new Bench.Settings(Integer.getInteger("sim.chargeGames",300),7_000_000L,List.of(DECKS),styles,
-                Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b1: D71-D74, one round");
+                Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b2: D79 frequency, one round");
         Bench.Report report=Bench.run(draft,settings,source,(stage,g)-> {
             if(stage.equals("ROUND_READY")&&g.getTurn()==0)watches.set(new Observe());
             Observe watch=watches.get();if(watch==null){watch=new Observe();watches.set(watch);} watch.accept(stage,g);
@@ -139,6 +153,13 @@ class ChargeMeasureTest {
         Files.writeString(out.resolve("observations.json"),JSON.writeValueAsString(aggregate.totals));
         Files.writeString(out.resolve("draft.json"),JSON.writeValueAsString(draft.json()));
         Files.writeString(out.resolve("seconds.txt"),String.valueOf(seconds));
+        for(Counts c:aggregate.totals.values())for(String[] pair:ChargeFrequency.PAIRS) {
+            String pre="charge/"+pair[0]+"/";
+            assertEquals(c.getOrDefault(pre+"played",0L).longValue(),c.getOrDefault(pre+"resolved",0L)+c.getOrDefault(pre+"notExecuted",0L),pre);
+            assertEquals(c.getOrDefault(pre+"resolved",0L).longValue(),c.getOrDefault(pre+"found",0L)+c.getOrDefault(pre+"missed",0L),pre);
+            assertEquals(c.getOrDefault(pre+"found",0L).longValue(),c.getOrDefault(pre+"foundCopyPlayed",0L)+c.getOrDefault(pre+"foundCopyDiscarded",0L)+c.getOrDefault(pre+"foundCopyHeldAtEnd",0L),pre);
+            assertEquals(c.getOrDefault(pre+"tokensCreated",0L).longValue(),c.getOrDefault(pre+"tokenSatisfied",0L)+c.getOrDefault(pre+"tokenExitD71",0L)+c.getOrDefault(pre+"tokenClosedAtEnd",0L),pre);
+        }
         assertEquals(0,report.checks.total(),report.failures());assertEquals(0,report.boundViolations(),report.failures());
         System.out.println("charge round: "+report.games()+" games, "+seconds+" seconds");
     }
@@ -151,13 +172,14 @@ class ChargeMeasureTest {
         for(long seed=7_000_000;seed<7_000_020;seed++) {
             SimulationRunner.Contender x=new SimulationRunner.Contender(DECKS[(int)(seed%5)],new SoughtHitPolicy(new ResourceAwarePolicy(),SoughtHitPolicy.Timing.ALWAYS));
             SimulationRunner.Contender y=new SimulationRunner.Contender(DECKS[(int)((seed+2)%5)],new SoughtHitPolicy(new AggressivePolicy(),SoughtHitPolicy.Timing.RANDOM));
-            assertEquals(a.continueGame(a.newGame(seed,x,y),seed,true,g->{}).jsonl(), b.continueGame(b.newGame(seed,x,y),seed,true,g->{}).jsonl());
+            Observe observer=new Observe();
+            assertEquals(a.continueGame(a.newGame(seed,x,y),seed,true,g->{}).jsonl(), b.continueGame(b.newGame(seed,x,y),seed,true,g->{},observer).jsonl());
         }
     }
 
-    @Test void theStepChangesOnlyTheFiveExistingCharges() throws Exception {
+    @Test void theHistoricalStepOneChangesOnlyTheFiveExistingCharges() throws Exception {
         com.fasterxml.jackson.databind.JsonNode old=JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16e2/c/draft.json")));
-        com.fasterxml.jackson.databind.JsonNode now=Draft.fromClasspath("/set-base/bozza.json").json();
+        com.fasterxml.jackson.databind.JsonNode now=JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json")));
         for(String key:List.of("characters","decks","rules","set","format"))assertEquals(old.path(key),now.path(key),key);
         int changed=0;
         for(com.fasterxml.jackson.databind.JsonNode card:now.path("cards")) {

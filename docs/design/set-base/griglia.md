@@ -14,7 +14,7 @@
 > decisioni dei blocchi passati restano con i nomi del loro momento. I nomi di lavoro delle carte di Sergio e Duccio legati ai concept
 > vecchi si rifanno in SB-17, SB-18 o SB-24.
 
-**Perché esiste.** Il [piano](../../set-base-plan.md#il-set-in-numeri) fissa circa 115 carte, ma senza una griglia ogni blocco
+**Perché esiste.** Il [piano](../../set-base-plan.md#il-set-in-numeri) fissa 120 carte (D60/D79), ma senza una griglia ogni blocco
 progetterebbe le sue carte da solo, e alla fine il set avrebbe buchi (meccaniche mai usate) e doppioni (tre parate uguali). La griglia dà
 a ogni carta del set un posto, un ruolo, una fascia di costo, una rarità e un motivo prima di scriverla. Usa i prezzi misurati del
 [listino](listino.md), i triangoli delle [schede dei personaggi](schede-personaggi.md) e le idee della
@@ -25,7 +25,7 @@ Fonti: [piano](../../set-base-plan.md) (D1–D33), [listino](listino.md) e [rapp
 R02, R04–R07a), [formato dati di SB-5](../../reports/set-base/sb-5-report.md#decisione-sul-formato), bozze `attuale.json` e
 `prova-sb9.json` di SB-6a.
 
-> SB-16g 2b1, revisione del 13 novembre 2026: i cinque caricamenti seguono [D71–D72](sb-16g-2b1-rules.md), senza nuovi slot o danni.
+> **SB-16g 2b2, 14 novembre 2026 (D79):** attuata la [proposta 1.3](sb-16g-proposta.md): dieci caricamenti con «Annuncia» ([contratto d50 1.1](sb-16g-2b1-rules.md)), cinque nuovi NC, liste da 20; 120 slot, 45 C / 55 NC / 20 R. Solo PAZIENZA anticipa +25 V; danni, costi ed effetti dei colpi invariati. Le note delle fasi precedenti sono storiche.
 
 ## Principi approvati nella fase A
 
@@ -67,9 +67,22 @@ L'ultimo giro 5 → **2 HIT**. Nessuna variante soddisfa i criteri: dieci violaz
 - **PIN-BO1:** solo il guadagno cambia, da +10 a +5 L (D38/D54); 8,50 → 3,75 per uso nel banco D50. La corazza deriva dal sistema,
   non da uno stato di parata aggiunto alla bound. Tetto, tolleranza, pesi e regole del banco restano quelli approvati.
 
-Copie, rarità, composizione, valori iniziali e colpi cercati restano quelli approvati, salvo TOS-AR2 a 12 POISON (D55).
+Questa sezione descrive SB-16d; D79 aggiorna sotto copie, rarità e due ricerche per starter. Valori iniziali e danni restano invariati.
 Le sezioni di correzioni SB-12a–SB-15 e le misure precedenti restano storiche; per questi dieci slot valgono le righe aggiornate.
 Nessun bilanciamento in SB-16d: [rapporto](../../reports/set-base/sb-16d-report.md), poi misure estese in SB-16e e prova umana SB-16f.
+
+## Principi aggiunti con SB-16g 2b2 (D61–D63, D78–D79)
+
+Le righe degli slot e le liste sotto attuano la proposta 1.3: 120 titoli/slot,
+42 azioni d'archetipo, 45 C / 55 NC / 20 R. Le cinque nuove carte sono NC.
+Ogni starter contiene due copie di un caricamento NC verso due copie di un colpo NC,
+più un diverso caricamento NC verso un colpo R in singola copia.
+«Annuncia X» segue il contratto d50 1.1: nome, fine turno, uscita D71 e ripiego senza gettone.
+Preparo cerca ora Chiave da tredici; Una stretta di prova cerca Lavoro fatto bene.
+Ogni caricamento finanzia da zero il suo colpo dopo il fine turno nel caso nominale D63.
+Le formule dei colpi, costi ed effetti restano quelle di oggi: nessun anticipo della potenza
+del passo 3 o della difesa POISON. PAZIENZA è la sola eccezione di risorse, +25 V/+15 A.
+Le sezioni SB-10/SB-16d e le correzioni dei blocchi precedenti documentano la storia.
 
 ## Come si legge
 
@@ -199,65 +212,69 @@ così chiudono la partita (D29).
 | LR-PIN | Piera | Azione, last resort | DAMAGE | 1 | ~~5~~ 2 HIT a sé (SB-16e2), HIT pari a ~~6~~ 12⁶ + L residua, poi azzera L | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
 | LR-ROC | Duccio | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT | R | prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati |
 
-### Azioni d'archetipo (37)
+### Azioni d'archetipo (42)
 
-Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Fra i cinque personaggi con starter: 3 comuni, 1 non comune,
-1 rara. Sergio: 2, 3, 1. Duccio: 3, 2, 1.
+Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Nei cinque starter ogni archetipo ha sei titoli; rarità e copie sono quelle di D79 sotto. Sergio: 2 C, 3 NC, 1 R. Duccio: 3 C, 2 NC, 1 R.
 
-**Spazienzio (5)**
+**Spazienzio (6)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | 40 HIT | C | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
-| SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 2 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
-| SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | cerca SPA-AR1; trovato: +15 V/+15 A e gettone ×1,5 HIT/CUT/POISON D71; fallito: +5 V/+5 A, pesca senza gettone D72 | C | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncia il colpo lento; esposizione già esistente | dati + search |
+| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | 40 HIT | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
+| SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 1 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
+| SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | Annuncia GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. | NC | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | SPA-AR4 | Azione, regolare | DEFENSE | F0 | 0 | CUT ricevuto ×0,5 per 4 turni; +10 V | C | 2 | `MadeOfStone`, conservata | Difesa che carica, contro chi lo taglia (Mara) | dati |
 | SPA-AR5 | Azione, regolare | COUNTER | F1 (5 V) | 2 | Annulla la mossa successiva dell'avversario | NC | 2 | `YouStop`, riprogettata: tolti i +10 A regalati all'avversario | Contromossa «Fermati!»; sotto il listino anche per i bot (SB-17) | Java |
+| SPA-AR6 | Azione, regolare | RESOURCES | F0 | 0 | Annuncia SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +15 V, +15 A. Se non lo trovi: +5 V, +5 A. | NC | 1 | `base.bruiser.TiFaccioSpazio`, «TI FACCIO SPAZIO» | Secondo annuncio verso il raro, D79 | dati + search |
 
-**Mara (5)**
+**Mara (6)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ 5 A²) | 1 | 12 CUT | C | 2 | bozza «Cinghiata di traverso» | Attacco base | dati |
-| MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³ | C | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
+| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ 5 A²) | 1 | 12 CUT | R | 1 | bozza «Cinghiata di traverso» | Attacco base | dati |
+| MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³ | NC | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
 | MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
 | MAR-AR4 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,4 nel turno; +5 A | NC | 2 | «Tra due paraurti», D55 | Difesa che rimborsa il costo anche senza attacco | dati |
-| MAR-AR5 | Azione, regolare | RESOURCES | F0 | 2 | cerca MAR-AR2; trovato: +15 A e gettone D71; fallito: +5 A, pesca senza gettone D72 | R | 1 | «Slalom d'avvicinamento», già Slalom, D55 | Rara con picco condizionato alla preparazione esposta; preserva Sorpasso | dati + search |
+| MAR-AR5 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Sgommata. Se lo trovi: +15 A. Se non lo trovi: +5 A. | NC | 2 | «Slalom d'avvicinamento», già Slalom, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
+| MAR-AR6 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Cinghiata di traverso. Se lo trovi: +15 A. Se non lo trovi: +5 A. | NC | 1 | `base.mara.TiStringoLaCurva`, «Ti stringo la curva» | Secondo annuncio verso il raro, D79 | dati + search |
 
 ² **SB-12a, giro 1** ([correzioni](#correzioni-di-sb-12a)): costi in A −5 su Cinghiata, Sgommata, Paraurti e Slalom (e su GEN-17), il punto di
 partenza di D38. Motivo: il listino a 7 HIT di SB-11b dà alla A di Mara circa 1 HIT, non 0,6; con Spazienzio a 0,937 le sue carte stavano
 sotto la linea. Slalom scende in F1. ³ **Giri 1 e 3:** Sgommata 22 → 26 CUT nel giro 1 (dopo D38 Spazienzio vinceva ancora 0,593), 26 → 25
 nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici (0,484).
 
-**Celestina (5)**
+**Celestina (6)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | cerca TOS-AR2; trovato: +10 T e gettone D71; fallito: +5 T, pesca senza gettone D72 | C | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Accumula annunciando il veleno diretto; esposizione punibile anche dagli immuni | dati + search |
-| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 12 POISON e +5 T al bersaglio | C | 2 | `Cough`, «Tossicone Scatarrante», 8 → 12 POISON (D55) | Colpo cercato, utile anche nello specchio immune alla T | dati |
+| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Tossicone Scatarrante. Se lo trovi: +10 T. Se non lo trovi: +5 T. | NC | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
+| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 12 POISON e +5 T al bersaglio | NC | 2 | `Cough`, «Tossicone Scatarrante», 8 → 12 POISON (D55) | Colpo cercato, utile anche nello specchio immune alla T | dati |
 | TOS-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Guadagna T/2 HEALTH; perde T | C | 2 | `PervertedMetabolism`, conservata | Difesa: curarsi col veleno; 8,3 HIT, in linea | dati |
 | TOS-AR4 | Azione, regolare | COUNTER | F1 (10 T) | 2 | Annulla le mosse successive dirette a lei | NC | 2 | `AmphetamineReflexes`, conservata | Contromossa; sotto il listino anche per i bot | Java |
-| TOS-AR5 | Azione, regolare | DISRUPT | F1 (10 T) | 1 | Travasa tutta la sua T sul bersaglio e gli toglie l'immunità; timer 1 che gliela rende | R | 1 | `ToxicBloodDrain`, conservata | Combo con TOS-BO2: accettata perché costa una carta pagata (SB-9), da misurare in SB-13 | Java |
+| TOS-AR5 | Azione, regolare | DISRUPT | F1 (10 T) | 1 | Trasferisce la T residua dopo il costo al bersaglio, azzera la propria e toglie l'immunità del bersaglio; a fine turno, dopo il periodico, l'autore ottiene immunità a T | R | 1 | `ToxicBloodDrain`, conservata | Combo con TOS-BO2: accettata perché costa una carta pagata (SB-9), da misurare in SB-13 | Java |
+| TOS-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia C'è del sangue nella mia droga. Se lo trovi: +10 T. Se non lo trovi: +5 T. | NC | 1 | `base.tossico.UnAssaggino`, «Un assaggino» | Secondo annuncio verso il raro, D79 | dati + search |
 
-**Piera (5)**
+**Piera (6)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
-| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | C | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | NC | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
-| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | cerca PIN-AR2; trovato: +15 L/+35 A e gettone D71; fallito: +5 L/+10 A, pesca senza gettone D72 | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Carica e recupera A per differenziare i finali; Rutto resta disturbo | dati + search |
+| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Estasi da Coca Etilene. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Piera; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
+| PIN-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Rutto a distanza sociale. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 1 | `base.pino.PrimaIlBrindisi`, «Prima il brindisi» | Secondo annuncio verso il raro, D79 | dati + search |
 
-**Beppe (5)**
+**Beppe (6)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | GIG-AR1 | Azione, regolare | ITEMS | F1 (5 V) | 1 | Distrugge un oggetto lontano | NC | 2 | `BreakYourToy` riprogettata come bozza «Smontiamo tutto» (era una bound) | Contromossa; distruzione pagata e scartata, non ripetibile | Java |
-| GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | ~~10~~ 12 CUT⁷ | C | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
-| GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | cerca GIG-AR5; trovato: +10 V e gettone D71; fallito: +5 V, pesca senza gettone D72 | C | 1 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Prepara il colpo sugli oggetti; furto e distruzione lo possono ridurre | dati + search |
+| GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | ~~10~~ 12 CUT⁷ | NC | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
+| GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Chiave da tredici. Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 2 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno; +5 V | C | 1 | «Sotto il cofano», D55 | Copertura e rimborso; non genera V nette | dati |
 | GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ F1 (5 V)⁷ | 1 | 6 HIT più 4 per ogni proprio oggetto sul campo | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
+| GIG-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Lavoro fatto bene. Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 1 | `base.gigi.UnaStrettaDiProva`, «Una stretta di prova» | Secondo annuncio verso il raro, D79 | dati + search |
 
 **Sergio (6)**
 
@@ -345,15 +362,13 @@ c'è.
 
 | Starter | Basic, bound, last resort | Archetipo | Generiche | Oggetti | Distinte | Rare |
 |---|---|---|---|---|---:|---:|
-| Spazienzio «Pazienza finita» (SB-11b) | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | SuperImpact 2, ExtremelyViolentBlow 2, Glare 2, MadeOfStone 2, YouStop 2 (10) | SeagullFly 2, Tartaruga 2, Mattone 1, HealingBlow 1, Denti stretti 1 (7) | Cocktail 2, Posacenere 1 (3) | 12 | 1 |
-| Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata 2, Sgommata 2, Sorpasso 2, Paraurti 2, Slalom d’avvicinamento 1 (9) | Spintone 2, Sputo 2, Tartaruga 1, Steal 1 (6) | Espresso 2, Kebab 2, Giubbotto 1 (5) | 12 | 1 |
-| Celestina «Tutto è droga» (SB-13) | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | Dose in preparazione 2, Cough 2, PervertedMetabolism 2, AmphetamineReflexes 2, ToxicBloodDrain 1 (9) | Grab 2, Rincorsa 2, Steal 1, Fasciatura 1 (6) | Pasticca 2, Kebab 2, MarvelousCocktail 1 (5) | 12 | 2 |
-| Piera «Chiude quando dico io» (SB-14) | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata 2, GoingBerserk 2, Bancone 2, Un altro e arrivo 2, Rutto 1 (9) | Grab 2, Spintone 2, Fasciatura 2 (6) | Amaro 2, RottenBeer 2, AnotherRottenBeer 1 (5) | 11 | 1 |
-| Beppe «Intervento sul posto» (SB-15) | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Preparo il lavoro 1, Sotto il cofano 1, Lavoro fatto bene 1 (7) | Mattone 2, Steal 2, SeagullFly 1, Spintone 1 (6) | Guanti 2, Giubbotto 2, Casco 2, Espresso 1 (7) | 13 | 1 |
+| Spazienzio «Pazienza finita» | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | GARGANTUESCO IMPATTO SUL TU 2, SPEDIAMOTI DUNQUE IN O-AHIO 1, PAZIENZA: FINITA 2, NON GIOCARE COL COLTELLO NO 2, FAI BASTA 2, TI FACCIO SPAZIO 1 (**10**) | GABBIANO DUNQUE VOLIAMOTI 2, Tartaruga sul marciapiede 2, Mattone del cantiere 1, ORMALE GUARIAMOTI 1, Denti stretti 1 (**7**) | Negroni Trovato per Terra 2, Posacenere di vetro 1 (**3**) | 13 | 1 |
+| Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata di traverso 1, Sgommata 2, Sorpasso in curva 2, Tra due paraurti 2, Slalom d'avvicinamento 2, Ti stringo la curva 1 (**10**) | Spintone 1, Sputo da posacenere 2, Tartaruga sul marciapiede 1, Steal 1 (**5**) | Espresso del distributore 2, Panino del kebab dimenticato 2, Giubbotto di finta pelle 1 (**5**) | 13 | 1 |
+| Celestina «Tutto è droga» | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | Dose in preparazione 2, Tossicone Scatarrante 2, Metabolismo Corrotto 2, Riflessi Aumentati dalla Speed 2, C'è del sangue nella mia droga 1, Un assaggino 1 (**10**) | Grab 2, Rincorsa dal marciapiede 1, Steal 1, Fasciatura col fazzolettaccio 1 (**5**) | Pasticca trovata sul bancone 2, Panino del kebab dimenticato 2, Mescolone Micidiale 1 (**5**) | 13 | 2 |
+| Piera «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata da ultimo giro 2, Estasi da Coca Etilene 2, Il bancone regge, io pure 2, Un altro e arrivo 2, Rutto a distanza sociale 1, Prima il brindisi 1 (**10**) | Grab 2, Spintone 2, Fasciatura col fazzolettaccio 1 (**5**) | Amaro nel bicchiere di plastica 2, Peroni da 66, calda 2, Tennents Super 1 (**5**) | 12 | 1 |
+| Beppe «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Preparo il lavoro 2, Sotto il cofano 1, Lavoro fatto bene 1, Una stretta di prova 1 (**9**) | Steal 2, GABBIANO DUNQUE VOLIAMOTI 1, Spintone 1 (**4**) | Guanti da officina 2, Giubbotto di finta pelle 2, Casco da lavoro 2, Espresso del distributore 1 (**7**) | 13 | 1 |
 
-Varianti rispetto alla forma approvata (5 + 4 + 3): Spazienzio ha 10 carte d'archetipo e 2 oggetti, perché ha capacità 1; Beppe ha 7 carte
-d'archetipo e 4 oggetti; **Piera ha 3 generiche** invece di 4, perché la sua A scende sotto zero in due o tre turni (vedi [L e Piera](#l-e-pino))
-e le generiche a costo A gli resterebbero morte in mano.
+Composizioni D79: archetipo/generiche/oggetti in copie 10/7/3, 10/5/5, 10/5/5, 10/5/5 e 9/4/7. Le generiche ridotte restano nel pool; Mattone esce solo dallo starter di Beppe. Rarità delle copie C/NC/R: 10/9/1, 12/7/1, 11/7/2, 13/6/1, 10/9/1.
 
 **Nota di SB-11b** ([rapporto](../../reports/set-base/sb-11b-report.md)): i due starter base sono scritti nella bozza
 `server/src/test/resources/set-base/bozza.json` come in questa tabella, senza scostamenti. Il proprietario ha scelto il nome dello starter
@@ -510,25 +525,25 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Basic | 7 | 7 |
 | Bound | 21 | 21 |
 | Last resort | 4 | 4 |
-| Azioni d'archetipo | 35 → 37 (decisione 1) | 37 |
+| Azioni d'archetipo | 42 (D79) | 42 |
 | Azioni generiche | 25 → 23 (decisione 1) | 23 |
 | Oggetti | 16 | 16 |
-| **Totale** | **115** | **115** |
+| **Totale** | **120** | **120** |
 
 **Per personaggio** (carte legate: basic, bound, archetipo, last resort propria)
 
 | Personaggio | Basic | Bound | Archetipo | Last resort | Totale |
 |---|---:|---:|---:|---|---:|
-| Spazienzio | 1 | 3 | 5 | Struggle | 9 |
-| Mara | 1 | 3 | 5 | Struggle | 9 |
-| Celestina | 1 | 3 | 5 | propria | 10 |
-| Piera | 1 | 3 | 5 | propria | 10 |
-| Beppe | 1 | 3 | 5 | Struggle | 9 |
+| Spazienzio | 1 | 3 | 6 | Struggle | 10 |
+| Mara | 1 | 3 | 6 | Struggle | 10 |
+| Celestina | 1 | 3 | 6 | propria | 11 |
+| Piera | 1 | 3 | 6 | propria | 11 |
+| Beppe | 1 | 3 | 6 | Struggle | 10 |
 | Sergio | 1 | 3 | 6 | Struggle | 10 |
 | Duccio | 1 | 3 | 6 | propria | 11 |
-| **Totale** | 7 | 21 | 37 | 3 | **68** |
+| **Totale** | 7 | 21 | 42 | 3 | **73** |
 
-Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 115.
+Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 120.
 
 **Per rarità**
 
@@ -538,27 +553,27 @@ Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 115.
 | Basic | 2 | 3 | 2 |
 | Bound | 10 | 11 | 0 |
 | Last resort | 1 | 2 | 1 |
-| Archetipo | 20 | 10 | 7 |
+| Archetipo | 11 | 24 | 7 |
 | Generiche | 11 | 7 | 5 |
 | Oggetti | 8 | 5 | 3 |
-| **Totale** | **54** | **41** | **20** |
+| **Totale** | **45** | **55** | **20** |
 
-La tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
+D79 porta l’archetipo a 11 C / 24 NC / 7 R. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
 Rare negli starter: 1 o 2 ciascuno.
 
-**Per ruolo** (le 108 carte giocabili; ruoli di R07a)
+**Per ruolo** (le 113 carte giocabili; ruoli di R07a)
 
 | Ruolo | Basic | Bound | Last resort | Archetipo | Generiche | Oggetti | Totale |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | DAMAGE | | 13 | 4 | 12 | 9 | | 38 |
 | DEFENSE | | | | 7 | 2 | | 9 |
-| RESOURCES | | 8 | | 7 | 2 | 10 | 27 |
+| RESOURCES | | 8 | | 12 | 2 | 10 | 32 |
 | COUNTER | | | | 4 | | | 4 |
 | DISRUPT | | | | 6 | 3 | | 9 |
 | ITEMS | 7 | | | 1 | 4 | | 12 |
 | OTHER | | | | | 3 | 6 | 9 |
 
-**Curva dei costi per starter** (azioni regolari, in copie)
+**Curva storica SB-10/SB-15 dei costi per starter** (prima di D79; azioni regolari, in copie)
 
 | Starter | F0 | F1 | F2 | F3 | F4 | Azioni |
 |---|---:|---:|---:|---:|---:|---:|

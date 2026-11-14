@@ -41,7 +41,7 @@ class StarterRedesignTest {
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
             new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 12),
             new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 17),
-            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.LavoroFattoBene", 6));
+            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 12));
 
     private static final class Pair {
         final String deck, charge, hit;
@@ -69,7 +69,7 @@ class StarterRedesignTest {
         } catch (Exception e) { throw new IllegalStateException(e); }
     }
 
-    private static Player player(String deck, String id, List<Card> hand, List<Card> topFirst) {
+    static Player player(String deck, String id, List<Card> hand, List<Card> topFirst) {
         Character c = draft.character(draft.characterOf(deck));
         for (Resource r : Resource.values()) c.getResources().put(r, 0);
         c.getResources().put(Resource.HEALTH, 500);
@@ -88,27 +88,27 @@ class StarterRedesignTest {
         return p;
     }
 
-    private static Game game(Player a, Player b) {
+    static Game game(Player a, Player b) {
         Game g = new Game(List.of(a, b), "sb-16d", false);
         g.useRuleset(Ruleset.D50);
         return g;
     }
 
-    private static Move move(Game g, Player p, Card c, String target) {
+    static Move move(Game g, Player p, Card c, String target) {
         return new Move(c.getName(), p.getPlayerId(), target, g.getGameId(), new EnumMap<>(Move.AdditionalAction.class));
     }
 
-    private static Move waitMove(Game g, Player p) {
+    static Move waitMove(Game g, Player p) {
         Card c = probe("Attesa", 0, -1);
         if (!p.getCardsInHand().contains(c)) p.getCardsInHand().add(c);
         return move(g, p, c, "SELF");
     }
 
-    private static void turn(Game g, Move a, Move b) {
+    static void turn(Game g, Move a, Move b) {
         g.submitMove(a); g.submitMove(b); g.resolveMoves(ignored -> {}, (t, events) -> {});
     }
 
-    private static Move resolved(Game g, String id) {
+    static Move resolved(Game g, String id) {
         return g.getResolvedMoves().stream().filter(m -> m.getPlayerId().equals(id)).findFirst().orElseThrow();
     }
 
@@ -118,7 +118,7 @@ class StarterRedesignTest {
 
     private static int res(Player p, Resource resource) { return p.getCharacter().getResources().get(resource); }
 
-    private static Player foe() { return player("starter-tossico", "b", List.of(), List.of()); }
+    static Player foe() { return player("starter-tossico", "b", List.of(), List.of()); }
 
     @Test
     void everyChargeShowsItsExposureAndFoundCardToTheOpponent() {
@@ -151,7 +151,7 @@ class StarterRedesignTest {
                 assertEquals(7, res(a, Resource.ALCOHOL));
                 assertEquals(28, res(a, Resource.ALERTNESS), "SB-16e2, D56/D38: +35 A meno 7 per la L (13 con +20)");
             } else if (pair.deck.equals("starter-spazienzio")) {
-                assertEquals(55, res(a, Resource.VIOLENCE)); assertEquals(55, res(a, Resource.ALERTNESS));
+                assertEquals(65, res(a, Resource.VIOLENCE)); assertEquals(55, res(a, Resource.ALERTNESS));
             } else if (pair.deck.equals("starter-mara")) assertEquals(55, res(a, Resource.ALERTNESS));
             else if (pair.deck.equals("starter-tossico")) assertEquals(10, res(a, Resource.TOXICITY), "D38/D53, SB-16e: Dose +10 T");
             else assertEquals(50, res(a, Resource.VIOLENCE));

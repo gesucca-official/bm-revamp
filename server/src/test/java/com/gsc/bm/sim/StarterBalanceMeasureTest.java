@@ -303,7 +303,8 @@ class StarterBalanceMeasureTest {
     @Test void timingListCanCoverAllFiveStartersWithoutChangingHistoricalDefaults() throws Exception {
         String previous = System.getProperty("sim.sb16eTiming");
         try {
-            Draft base = Listino.setBaseContexts(Draft.fromClasspath("/set-base/bozza.json"), Listino.ANCHOR);
+            // D79: this tests the historical SB-16e timing probes on their original double slots.
+            Draft base = Listino.setBaseContexts(Draft.fromFile(Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json")), Listino.ANCHOR);
             Listino list = new Listino(base, new Listino.Params(1, 1, 1, 1), PlaygroundTest.styles());
             System.clearProperty("sim.sb16eTiming");
             assertEquals(6, list.bisections().stream().filter(b -> b.group.equals("priorita")).count());
