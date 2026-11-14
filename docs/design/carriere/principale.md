@@ -3,7 +3,7 @@
 > **Serbatoio di progetto, senza valore normativo** (regole del [serbatoio delle carriere](README.md#regole-del-serbatoio)). Nomi delle
 > carte e numeri non compaiono: le partite dicono chi gioca contro chi e che cosa insegnano, non con quali carte.
 
-**Versione 0.3 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
+**Versione 0.3.1 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
 [mockup del grafo](mockup-principale.md).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
 regia*. Le versioni precedenti sono nella [cronologia](#cronologia).
 
@@ -104,7 +104,9 @@ da Sergio, che se la lascia scappare («domenica sarete fuori»): un indizio in 
 ### Le sconfitte che aprono un ramo
 
 Nella 0.2 se ne apriva uno solo, i debiti dopo il torneo perso. Nella 0.3 sono quattro, più il finale F3. **Nessuna è una punizione:**
-ognuna fa vedere qualcosa che si vede solo perdendo, e si torna sulla strada senza partite in più.
+ognuna fa vedere qualcosa che si vede solo perdendo, e si torna sulla strada senza partite in più. Il nodo perso, però, in quel giro non
+è vinto, quindi non dà la carta della prima vittoria: le scene delle sconfitte danno un segno, una variante o un achievement. Se debbano
+dare anche altro si decide con i numeri, in [EC-0](../../product-roadmap.md#ec--economia).
 
 | Si perde | Si apre | Che cosa dà |
 |---|---|---|
@@ -163,7 +165,7 @@ DOPO          S2 Sergio fa sul serio  (superboss: dopo il finale F1, in un giro 
 |---|---|---|---|---|---|
 | **II1 Le voci** | Tutti hanno una teoria; Mara accusa uno per uno tutti. Entra per la prima volta Sergio: prende in giro la raccolta firme, il bar, gli avventori, e sa dei conti del bar cose che non dovrebbe sapere. Qualcuno reagisce, e Sergio si difende a modo suo. Mara: «lavora per loro. È evidente» | Uno degli starter posseduti, a scelta del giocatore | Sergio | Duello | Le contromosse, da chi le usa |
 | *Scelta muta* | Tre piste: la memoria di Piera, i soldi di Beppe, la spazzatura di Celestina | — | — | — | Segno `pista` |
-| **II2a La frase di Piera** | Piera si ricorda di quando, dieci anni fa, il Serraglio stava per chiudere e «un signore...». Ci mette tanto che Spazienzio la interrompe a ogni parola: andare con Piera vuol dire menare chi la interrompe. Vinto il duello, arriva a «alto... e secco...», e Mara la interrompe con una teoria: accusa Piera di coprire qualcuno | Piera | Spazienzio | Duello | La L di Piera. Segno `frase`. **Una sconfitta apre un ramo** |
+| **II2a La frase di Piera** | Piera si ricorda di quando, dieci anni fa, il Serraglio stava per chiudere e «un signore...». Prima ancora che cominci, Mara la accusa di coprire qualcuno. Ci mette tanto che Spazienzio la interrompe a ogni parola: andare con Piera vuol dire menare chi la interrompe. Vinto il duello, arriva a «alto... e secco...», e Mara la interrompe con un'altra teoria | Piera | Spazienzio | Duello | La L di Piera. Segno `frase`. **Una sconfitta apre un ramo** |
 | **II2s Piera non parla più** | Solo perdendo II2a. Piera si offende con tutti e parla solo con Grappino, sottovoce; la frase resta a «un signore...». Grappino, per la cronaca, ascolta | — | — | Nessuna | — |
 | **II2b Contanti** | Beppe sa chi gli ha pagato i lavori del bar dieci anni fa, uno con una valigetta di contanti, ma lo dice solo in contanti. Non ne avete: arriva Duccio a riscuotere un debito di Beppe per il Dimmi Di Sì (con il segno `duccio`: «e tu sei quello della porta»). Beppe offre lo sconto a chi lo aiuta, e se non l'avete già, la copia della chiave. Mara accusa Beppe di lavorare per tutti, e ha ragione | Beppe | Duccio | Duello | Gli oggetti dalla parte di chi li usa. Segno `chiave` |
 | **II2c Il bidone** | Celestina fruga nel bidone del bar e trova il bilancio stracciato della «Apri e Chiudi s.r.l.»; mezzo se lo mangia. Mara lo vuole per il suo muro dei complotti, Spazienzio per accendere. La firma non c'è: l'ha strappata un cane piccolo, si vedono i denti. Mara accusa Celestina di aver mangiato la prova apposta | Celestina | Mara, Spazienzio | FFA a tre | Il veleno dalla parte di chi lo usa. Segno `bilancio` |
@@ -171,7 +173,8 @@ DOPO          S2 Sergio fa sul serio  (superboss: dopo il finale F1, in un giro 
 
 **Starter garantiti.** In II3, se Piera o Beppe non hanno ancora preso le tue parti, lo fa il primo dei due; l'altro lo fa in III1. Così
 i tre starter avanzati stanno su ogni percorso ([D16](../../product-roadmap.md#decisioni-del-proprietario)), e il controllo del grafo lo
-verifica.
+verifica. Lo starter arriva quando il personaggio si siede al tavolo con te, prima della partita: resta anche se la partita si perde, come
+può succedere in III1. Dopo II2s Piera gioca lo stesso in II3, se tocca a lei: torna al tavolo «per Grappino, non per voi».
 
 ### Atto III — Domenica
 
@@ -200,7 +203,7 @@ Confermati dal proprietario («no, vanno bene», 14 novembre 2026).
 
 | Finale | Quando | Che cosa succede |
 |---|---|---|
-| **F1 Il Serraglio resta** | Vinto III5 dopo il pedinamento o il segreto | Sergio straccia l'assegno. Tutti sanno che il padrone è lui e fanno finta di niente; la sera dopo lui li prende in giro come sempre. Il Dimmi Di Sì licenzia Duccio: gancio della sua mini-carriera |
+| **F1 Il Serraglio resta** | Vinto III5 dopo il pedinamento, lo sgombero o il segreto | Sergio straccia l'assegno. Tutti sanno che il padrone è lui e fanno finta di niente; la sera dopo lui li prende in giro come sempre. Il Dimmi Di Sì licenzia Duccio: gancio della sua mini-carriera |
 | **F2 Il Serraglio è di tutti** | Vinto III5 dopo il torneo | Sergio rientra dell'investimento con la colletta, e il bar è un po' di tutti: Celestina paga la sua quota in monetine trovate per terra. Duccio licenziato anche qui |
 | **F3 Dimmi Di Sì 2** | Perso III5 | Il Serraglio diventa il Dimmi Di Sì 2: Virgin Cuba Libre a sedici euro, gli habitué seduti fuori sul marciapiede. Celestina dorme sul pavimento nuovo. Finale comico, non un fallimento: c'è un achievement nascosto e si può rigiocare |
 
@@ -208,18 +211,18 @@ Confermati dal proprietario («no, vanno bene», 14 novembre 2026).
 
 Il proprietario ha chiesto come si raggiungono (14 novembre 2026). Tutti e due hanno un indizio prima e un accesso preciso.
 
-- **S1 Il cane sa** (nodo segreto). **Come ci si arriva:** si prende la pista di Celestina nell'atto II (II2c, segno `bilancio`); allora in
-  III1 compare una terza scelta, «dietro a Grappino». L'indizio sta in II2c: la firma è stata strappata coi denti di un cane piccolo.
+- **S1 Il cane sa** (nodo segreto). **Come ci si arriva:** si prende la pista di Celestina nell'atto II (II2c, segno `bilancio`); allora
+  in III1 compare una terza scelta, «dietro a Grappino». L'indizio sta in II2c: la firma è stata strappata coi denti di un cane piccolo.
   **La scena:** Grappino porta in cantina, dove nasconde le sue cose; c'è l'altra metà del bilancio, con la firma «S. Sommerso». Piera
   difende il cane, che non si tocca, e si gioca contro di lei con modificatori di incontro. **Gioca Celestina,** perché ci si arriva dalla
-  sua pista. Mara accusa Grappino, che la guarda. **Dopo:** si va a III4 sapendo tutto
-  (variante sopra) e il finale è F1.
-- **S2 Sergio fa sul serio** (superboss del 100%, [CA-3](../../product-roadmap.md#ca--carriera-single-player)). **Come ci si arriva:** dopo
-  aver visto il finale F1, in un giro nuovo, sulla bacheca compare un nodo dopo III5, «La rivincita»: Sergio non sopporta di aver perso
-  in casa sua. **L'indizio** sta nella scena di F1: «la prossima volta faccio sul serio». **La partita:** Sergio bara **apertamente**,
-  come chiede la raccomandazione della regia, con modificatori dichiarati e mostrati al tavolo che vengono dal suo personaggio: «ha letto
-  i tuoi messaggi» (vede la tua mano), «ha comprato il mazzo» (pesca due volte), «società apri e chiudi» (ogni tanto una sua carta
-  scartata torna in mano). Si vince solo con un mazzo costruito forte: è il punto in cui il 100% chiede buste o tempo.
+  sua pista. Mara accusa Grappino, che la guarda. **Dopo:** si va a III4 sapendo tutto (variante sopra) e il finale è F1.
+- **S2 Sergio fa sul serio** (superboss del 100%, [CA-3](../../product-roadmap.md#ca--carriera-single-player)). **Come ci si arriva:**
+  dopo aver visto il finale F1, in un giro nuovo, sulla bacheca compare un nodo dopo III5, «La rivincita»: Sergio non sopporta di aver
+  perso in casa sua. È **facoltativa:** dopo F1 si offre alla fine di III5 su ogni strada, e si può rifiutare. **L'indizio** sta nella
+  scena di F1: «la prossima volta faccio sul serio». **La partita:** Sergio bara **apertamente**, come chiede la raccomandazione della
+  regia, con modificatori dichiarati e mostrati al tavolo che vengono dal suo personaggio: «ha letto i tuoi messaggi» (vede la tua mano),
+  «ha comprato il mazzo» (pesca due volte), «società apri e chiudi» (ogni tanto una sua carta scartata torna in mano). Si vince solo con
+  un mazzo costruito forte: è il punto in cui il 100% chiede buste o tempo.
 
 ## Achievement, prima idea
 
@@ -288,3 +291,6 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
 - **0.3 — 14 novembre 2026.** Dopo il mockup provato dal proprietario: niente allungamento; tre sconfitte che aprono un ramo (I1s, II2s,
   III1s), che chiudono tre buchi trovati dal mockup (darle retta, a Celestina; difendere Piera può fallire; la notte al Serraglio anche
   senza la chiave); dove Mara accusa chi; chi gioca S1, III4 e III5; «a scelta» come selettore del personaggio; achievement rivisti.
+- **0.3.1 — 14 novembre 2026.** Ritocchi dopo l'[aggiornamento del mockup](mockup-principale.md#aggiornamento-alla-03): lo starter
+  arriva prima della partita e resta anche perdendo; Piera torna al tavolo in II3 dopo II2s; le scene delle sconfitte non danno la carta
+  della prima vittoria; F1 anche dopo lo sgombero; Mara accusa Piera prima della partita; S2 facoltativa.
