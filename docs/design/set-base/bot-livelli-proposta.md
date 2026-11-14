@@ -1,5 +1,7 @@
 # Livelli di forza e difficoltà del bot — proposta per Q2
 
+> **Storico:** proposta 0.1 dei livelli del bot, la cui scala è stata rivista in D85. **In vigore** sono i livelli di [D85](../../set-base-decisioni.md) (Facile, Normale, Difficile, Maestro) e il [progetto di SB-30b](sb-30b-progetto.md).
+
 **Versione 0.1 — 14 novembre 2026. Motivazione: il proprietario ha chiesto un bot «che giochi bene, con vari livelli di forza e difficoltà», perché «il single player contro il computer è una modalità fondamentale nel gioco» ([D76](../../set-base-plan.md#decisioni-del-proprietario)). Q2 è aperta e va rifatta; qui si propone cosa sono i livelli, come si misurano e quando farli. Fase A con STOP: solo questo documento, nessuna attuazione, nessuna misura, nessuna partita simulata.**
 
 Fonti: D76 e [D77](../../set-base-plan.md#decisioni-del-proprietario); righe Q1 e Q2 e blocchi SB-29, SB-30 del [piano](../../set-base-plan.md); [rapporto del bot consapevole del colpo letale](../../reports/set-base/sb-16g-bot-letale-report.md); [rapporto del passo 2](../../reports/set-base/sb-16g-2b2-report.md) per stili e politiche; [roadmap](../../product-roadmap.md) per single player e carriera; il codice dei bot. Metodo: [orchestrazione](../../orchestrazione-lavoro.md).

@@ -178,6 +178,15 @@ chiusura del rapporto. L'uscita segnala dove guardare, non giudica. Il rapporto 
   SB-8) sono anticipati in parallelo a C4 solo con paletti scritti nel piano (D40, D42): niente file di C4, strumenti di verifica pushati prima del
   blocco C4 che li usa, jar rifatto sull'altra macchina dopo il pull.
 
+## Igiene dei documenti del Set Base
+
+Dal consolidamento D96 (14 novembre 2026), per tenere leggibile il Set Base:
+
+- una **riga di decisione** è la citazione del proprietario più punti numerati, di norma entro ~1.200 caratteri; il resto va nel rapporto del blocco;
+- le **righe della tabella dei blocchi** del [piano](set-base-plan.md) riportano solo stato breve e link; le cronologie vanno nei rapporti o nello [storico](history/set-base-plan-storico.md);
+- le **regole nuove del playground** entrano in [regole-playground.md](design/set-base/regole-playground.md) con versione e fonte;
+- una **decisione che ne supera un'altra** aggiorna la colonna «Stato» del [registro](set-base-decisioni.md) nello stesso commit, e le decisioni nuove si aggiungono in fondo al registro, non al piano.
+
 ## Allineamento fra le macchine
 
 Il lavoro procede su due macchine: una porta avanti il Set Base, l'altra C4. Ogni macchina pusha solo i propri blocchi; il proprietario

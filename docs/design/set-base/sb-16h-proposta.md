@@ -1,5 +1,7 @@
 # SB-16h — Proposta delle varianti della dimensione del mazzo (Fase A)
 
+> **Storico:** proposta 0.1 di SB-16h, approvata in D83; SB-16h è chiusa con D94 (formato 20/2). **In vigore** sono il formato 20 carte e 2 copie ([D94](../../set-base-decisioni.md)) e la [bozza di riferimento](bozza-di-riferimento.md).
+
 **Versione 0.1 — 14 novembre 2026.** Prima stesura della Fase A di
 [SB-16h](../../set-base-plan.md#sb-16h--prova-esplorativa-della-dimensione-del-mazzo), chiesta da
 [D81](../../set-base-plan.md#decisioni-del-proprietario). **Motivazione:** il proprietario vuole sapere se il gioco migliora con più

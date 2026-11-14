@@ -1,5 +1,7 @@
 # SB-16d — Proposta per i cinque starter
 
+> **Storico:** proposta 0.2 di SB-16d, approvata in D55 e attuata; le composizioni sono state riviste da D61–D63. **In vigore** sono le regole in [regole-playground.md](regole-playground.md) e le carte in [bozza-di-riferimento.md](bozza-di-riferimento.md).
+
 **Versione 0.2 — 12 novembre 2026. Proposta 0.1 approvata; approvazione registrata, attuazione non eseguita.**
 
 | Starter | Cambi proposti | Coppia con ricerca | Scopo principale |

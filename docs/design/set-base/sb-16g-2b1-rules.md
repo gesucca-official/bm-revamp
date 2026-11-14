@@ -1,5 +1,7 @@
 # SB-16g 2b, passo 1 — contratto d50
 
+> **Storico:** contratto d50 1.1 di SB-16g. **In vigore** è [regole-playground.md](regole-playground.md), versione 1.0, che raccoglie le regole d50 in un posto solo; qui resta il testo originale.
+
 Versione **1.1**, 14 novembre 2026. Motivazione: aggiungere la parola «Annuncia X»
 approvata nella proposta 1.3 (D78–D79), senza cambiare il comportamento d50 1.0.
 La versione 1.0 del 13 novembre 2026 attua D71–D74 del piano per correggere M1–M3,

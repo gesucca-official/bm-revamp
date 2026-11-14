@@ -1,0 +1,51 @@
+Piano prima (8f2608a): 1463 righe (1119 non vuote), 217464 caratteri
+Piano dopo: 698 righe (501 non vuote), 67823 caratteri
+Storico: 799 righe, 101391 caratteri
+Registro: 108 righe, 75447 caratteri
+Righe non vuote tolte dal piano: 661
+  ritrovate identiche nello storico: 563
+  ritrovate identiche nel registro: 98
+  non ritrovate: 0
+Righe non vuote nuove nel piano (riassunti, indici, rimandi): 43
+
+Righe tolte e sostituite da testo nuovo nel piano (riassunti), con la destinazione
+| Righe prima | Non vuote | Righe dopo | Destinazione |
+|---|---:|---|---|
+| 6–11 | 6 | — | storico, «Testa del piano» |
+| 13–19 | 7 | 7–9 | storico, «Testa del piano» |
+| 50–66 | 16 | 40–40 | storico, «Cosa c'è oggi» |
+| 200–210 | 10 | 174–174 | storico, «Bozza esterna di carte» |
+| 224–228 | 4 | 188–188 | storico, «Bozza esterna di carte» |
+| 328–330 | 3 | 288–290 | storico, «Tabella dei blocchi e ordine seguito» |
+| 349–353 | 5 | 309–309 | storico, «Tabella dei blocchi e ordine seguito» |
+| 357–380 | 20 | 313–313 | storico, «SB-1 — Regole dei mazzi» |
+| 384–400 | 13 | 317–317 | storico, «SB-2 — Separazione fra regolamento e set» |
+| 404–416 | 10 | 321–321 | storico, «SB-3 — Runner senza server e seme» |
+| 420–431 | 9 | 325–325 | storico, «SB-4 — Vista limitata e bot euristici» |
+| 435–446 | 9 | 329–329 | storico, «SB-5 — Prova del formato dati» |
+| 450–478 | 24 | 333–333 | storico, «SB-6 — Playground e mini-espansione di prova» |
+| 482–497 | 13 | 337–337 | storico, «SB-7 — Banco di misura e invarianti» |
+| 501–517 | 13 | 341–341 | storico, «SB-7b — Bot e costo in HEALTH» |
+| 521–539 | 16 | 345–345 | storico, «SB-8 — Bozza giocabile da umani» |
+| 543–554 | 9 | 349–349 | storico, «SB-9 — Schede dei personaggi» |
+| 558–588 | 25 | 353–353 | storico, «SB-10 — Griglia degli slot e listino di potenza» |
+| 592–623 | 26 | 357–357 | storico, «SB-11 — Bozza degli starter base» |
+| 627–668 | 34 | 361–361 | storico, «SB-12 — Giro sugli starter base e prova umana» |
+| 672–741 | 60 | 365–365 | storico, «SB-13, SB-14, SB-15 — Starter avanzati» |
+| 745–759 | 11 | 369–369 | storico, «SB-16 — Prova umana degli avanzati» |
+| 763–817 | 47 | 373–373 | storico, «SB-16b — Revisione critica delle regole» |
+| 821–856 | 31 | 377–377 | storico, «SB-16c — Regole decise in SB-16b nel playground» |
+| 860–892 | 27 | 381–381 | storico, «SB-16d — Riprogettazione dei cinque starter (P3 e P5)» |
+| 896–923 | 24 | 385–385 | storico, «SB-16e — Giro sui cinque starter con le regole nuove» |
+| 927–939 | 12 | 389–389 | storico, «SB-16e2 — Lotto numerico dopo lo STOP di SB-16e» |
+| 943–953 | 10 | 393–393 | storico, «SB-16f0 — Leggibilità della ricerca e dell’annullamento» |
+| 957–974 | 12 | 397–397 | storico, «SB-16f — Prova umana degli starter rifatti» |
+| 978–1036 | 37 | 401–402 | storico, «SB-16g — Coppie caricamento-colpo, seconda passata» |
+| 1040–1064 | 19 | 406–406 | storico, «SB-16h — Prova esplorativa della dimensione del mazzo» |
+| 1254–1254 | 1 | 596–596 | registro, righe D1–D96 |
+| 1256–1315 | 60 | 598–598 | registro, righe D1–D96 |
+| 1317–1371 | 38 | 600–606 | registro, righe D1–D96 |
+
+Righe non vuote sostituite da un riassunto: 655; spostate senza sostituto: 6
+
+Esito: ogni riga tolta dal piano compare identica nello storico o nel registro.

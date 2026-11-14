@@ -1,5 +1,7 @@
 # SB-16g — Proposta delle carte, passo 3: potenza
 
+> **Storico:** proposte 1.3, 1.4 e 1.5 di SB-16g, approvate (D79, D82, D90), attuate e misurate. **In vigore** sono le regole del playground in [regole-playground.md](regole-playground.md), le carte in [bozza-di-riferimento.md](bozza-di-riferimento.md) e le decisioni nel [registro](../../set-base-decisioni.md).
+
 **Versione 1.5 — 14 novembre 2026. Motivazione: dopo il giro finale del passo 3 il proprietario ha scelto il braccio B come bozza di riferimento e chiesto una correzione mirata di Spazienzio e Beppe con un budget di misura nuovo ([D89](../../set-base-plan.md#decisioni-del-proprietario)). Cambiano tre numeri di tre carte, nessun funzionamento. Fase A con STOP dopo il commit: solo questo documento, nessuna attuazione e nessuna misura.** La proposta corrente è il [Passo 3b](#passo-3b--correzione-15), da approvare.
 
 **Versione 1.4 — 14 novembre 2026, attuata e misurata.** Motivazione: partire dai risultati del passo 2 e dalle priorità D80, correggere selettivamente potenza e funzionamenti, ripresentare Bancone POISON e prefissare il giro finale a due bracci. **Approvata dal proprietario il 14 novembre 2026** («Si a tutte», [D82](../../set-base-plan.md#decisioni-del-proprietario)), attuata e misurata nel [passo 3](../../reports/set-base/sb-16g-2b3-report.md).
