@@ -70,6 +70,8 @@ Non sono regole di partita ma vincoli sulle carte delle liste ([D52](../../set-b
 
 ## 7. Decise, da attuare in SB-16i (NON sono ancora regole)
 
+**Aggiornata il 14 novembre 2026 con [D97](../../set-base-decisioni.md#decisioni-del-proprietario)**, che approva la [proposta 1.6](sb-16i-proposta.md) con modifiche e prevale sui punti qui sotto dove dice diversamente: la parola chiave di velocità si chiama **«Gioca d'anticipo: E»**; con «Annuncia X o Y» **sceglie il giocatore quando gioca il caricamento**, fra i nomi con almeno una copia nel mazzo, e il gettone si lega al nome scelto e trovato; **dopo ogni ricerca, anche a un nome, il mazzo si mischia**; il premio «Se lo trovi» resta quello della 1.5 e paga di sicuro solo il colpo per cui la carta è fatta; la last resort cresce con la parola chiave **«Rincara X (Y a sé)»**. Le definizioni entrano nelle sezioni 3–6 con la versione 1.1, nella Fase B.
+
 Contenuti di [D94](../../set-base-decisioni.md#decisioni-del-proprietario) e [D95](../../set-base-decisioni.md#decisioni-del-proprietario), decisi dal proprietario il 14 novembre 2026 e da attuare in [SB-16i](../../set-base-plan.md#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima) dopo la Fase A (proposta e STOP). **Fino ad allora il playground si comporta come nelle sezioni 1–6.**
 
 - **«Annuncia» con al massimo due nomi** (D94 (2)), di norma il colpo raro e quello comune dello stesso personaggio; una parola chiave di gruppo solo se resta leggibile; gettone e vulnerabilità legati al nome trovato come oggi. La proposta dice come si sceglie il colpo cercato, come lo sceglie il bot e quali premi cambiano; si misura in un solo giro sul 20/2 ([nota sulle ricerche fallite](../../reports/set-base/ricerche-fallite-20-2.md)).

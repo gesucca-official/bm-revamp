@@ -4,9 +4,9 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-**Stato (14 novembre 2026, dopo il consolidamento della documentazione, [D96](#decisioni-del-proprietario)).** Questo documento è lo **stato**: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md), le decisioni D1–D96 nel [registro](set-base-decisioni.md#decisioni-del-proprietario). Le regole del playground in vigore (d50) sono in [regole-playground.md](design/set-base/regole-playground.md); le liste e i testi degli starter della bozza di riferimento 1.5 in [bozza-di-riferimento.md](design/set-base/bozza-di-riferimento.md).
+**Stato (14 novembre 2026, dopo la Fase A di SB-16i, [D97](#decisioni-del-proprietario)).** Questo documento è lo **stato**: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md), le decisioni D1–D97 nel [registro](set-base-decisioni.md#decisioni-del-proprietario). Le regole del playground in vigore (d50) sono in [regole-playground.md](design/set-base/regole-playground.md); le liste e i testi degli starter della bozza di riferimento 1.5 in [bozza-di-riferimento.md](design/set-base/bozza-di-riferimento.md).
 
-Il lavoro procede su istruzione del proprietario, a blocchi ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati; la partita viva resta al regolamento **1.13** e al Set Base 0.1 (le regole `d50` valgono solo nel playground). SB-16g e SB-16h sono chiusi: la **1.5** è la bozza di riferimento ([D92](#decisioni-del-proprietario)), il formato resta **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)). **Prossimo:** [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), Fase A (proposta e STOP, [D95](#decisioni-del-proprietario)); B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
+Il lavoro procede su istruzione del proprietario, a blocchi ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati; la partita viva resta al regolamento **1.13** e al Set Base 0.1 (le regole `d50` valgono solo nel playground). SB-16g e SB-16h sono chiusi: la **1.5** è la bozza di riferimento ([D92](#decisioni-del-proprietario)), il formato resta **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)). **Prossimo:** [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), Fase B (proposta 1.6 approvata con modifiche in [D97](#decisioni-del-proprietario)), poi il passo del client e la prova umana breve; B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
 ## Obiettivo e regole comuni
 
@@ -287,7 +287,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
-| | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | aperto: Fase A (proposta e STOP) dopo il consolidamento D96 |
+| | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fase A approvata ([D97](#decisioni-del-proprietario), [proposta](design/set-base/sb-16i-proposta.md)); prossima Fase B, poi passo del client |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -306,7 +306,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-32 | Illustrazioni del set | SB-28, SB-31 |  |
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |  |
 
-**Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a, con SB-1 in parallelo a C4 ([D40](#decisioni-del-proprietario)); SB-13 e SB-2 ([D42](#decisioni-del-proprietario)), SB-6b e SB-14, SB-15, SB-8 ([D43](#decisioni-del-proprietario)–[D46](#decisioni-del-proprietario)); prove umane SB-12b e SB-16 e revisione SB-16b–SB-16h (12–14 novembre 2026, [D49](#decisioni-del-proprietario)–[D94](#decisioni-del-proprietario)). **Prossimo:** SB-16i Fase A, poi SB-17 comunque ([D95](#decisioni-del-proprietario), punto 3). SB-30 può essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario. Cronologia completa: [storico](history/set-base-plan-storico.md#tabella-dei-blocchi-e-ordine-seguito).
+**Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a, con SB-1 in parallelo a C4 ([D40](#decisioni-del-proprietario)); SB-13 e SB-2 ([D42](#decisioni-del-proprietario)), SB-6b e SB-14, SB-15, SB-8 ([D43](#decisioni-del-proprietario)–[D46](#decisioni-del-proprietario)); prove umane SB-12b e SB-16 e revisione SB-16b–SB-16h (12–14 novembre 2026, [D49](#decisioni-del-proprietario)–[D94](#decisioni-del-proprietario)). **Prossimo:** SB-16i Fase B (Fase A approvata in [D97](#decisioni-del-proprietario)), passo del client, prova umana breve, poi SB-17 comunque ([D95](#decisioni-del-proprietario), punto 3). SB-30 può essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario. Cronologia completa: [storico](history/set-base-plan-storico.md#tabella-dei-blocchi-e-ordine-seguito).
 
 ### SB-1 — Regole dei mazzi
 
@@ -423,7 +423,9 @@ rapida; nelle carriere i nemici useranno per lo più mazzi personalizzati.
 **Fase A — proposta e STOP.** Carte e testi concreti, modifiche alle liste degli starter, supporto necessario nel motore del playground
 (D50, D84), come bot, `TurnForecast` e `ViewTable` leggono le novità, budget della Fase B. Il proprietario approva.
 
-**Fase B — attuazione e misura.** Solo nel playground. Un giro e al massimo una correzione numerica, nel budget approvato.
+**Fase A approvata il 14 novembre 2026 in [D97](#decisioni-del-proprietario)** ([proposta 0.1](design/set-base/sb-16i-proposta.md)), con modifiche: parola chiave «Gioca d'anticipo»; con due nomi sceglie il giocatore quando gioca il caricamento, fra i nomi ancora nel mazzo, e dopo ogni ricerca il mazzo si mischia; premi dei caricamenti della 1.5 invariati; client e `docs/api.md` (pop-up della scelta, anticipo, contatore) in un passo a parte dopo il giro e prima della prova umana breve.
+
+**Fase B — attuazione e misura.** Solo nel playground. Un giro e al massimo una correzione numerica, nel budget approvato (3.300 s di orologio, [D97](#decisioni-del-proprietario)).
 
 **Completamento verificabile.** Soglia minima D95: ogni incontro fra starter fra 35% e 65% sui bot euristici, patte al massimo 10%, durata
 entro 12 turni fuori dagli specchi; invarianti e bound verdi. Gli scostamenti residui si dichiarano e si passa comunque a SB-17.
@@ -593,13 +595,13 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D96 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D97 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
 - **Bilanciamento e criteri:** D16 criteri riferiti agli starter; D33 e D36 tetto delle bound (4 unità, 3 HIT di danno); D38 delega dei numeri; D51 patte al massimo 10%; D93 criteri sui soli bot euristici; D95 soglia minima fino a SB-18, criteri completi in SB-20 e SB-21; D90 e D92 correzione 1.5 e bozza di riferimento.
 - **Formato e composizione:** D1 e D94 20 carte e 2 copie; D2–D5 bound, basic, last resort, nessun giocatore senza mosse; D7 sette personaggi; D60–D62 e D79 120 carte, liste da 20 e schema delle coppie.
-- **Annuncia e caricamenti:** D52 ritmo caricare-colpire-parare; D63 risorse sufficienti; D64 e D66 gettone ×1,5 e cumulo; D69, D71, D72 gettone legato al nome, uscita, ripiego; D75 meccanica approvata; D78 parole chiave ragionevoli; D94 e D95 «Annuncia» a due nomi, modificatore di velocità, last resort che cresce.
+- **Annuncia e caricamenti:** D52 ritmo caricare-colpire-parare; D63 risorse sufficienti; D64 e D66 gettone ×1,5 e cumulo; D69, D71, D72 gettone legato al nome, uscita, ripiego; D75 meccanica approvata; D78 parole chiave ragionevoli; D94 e D95 «Annuncia» a due nomi, modificatore di velocità, last resort che cresce; D97 scelta del giocatore fra i due nomi, mazzo mischiato dopo ogni ricerca, «Gioca d'anticipo», «Rincara».
 - **Regole del playground:** D12 solo nel playground fino a SB-28; D48 salvataggio in extremis; D50 regole d50; D54 e D70 ricerca; D73 «Ultimo colpo». Testo unico: [regole-playground.md](design/set-base/regole-playground.md).
 - **Bot:** D18 un solo bot per simulatore e partita; D76 e D77 consapevole del colpo letale; D85 quattro livelli; D91 progetto di SB-30b.
 - **Budget di calcolo:** D68, D83 e D90 esauriti; D91 B5 al massimo 1.800 s e B6 al massimo 18.000 s; D95 SB-16i un giro e una correzione numerica.
