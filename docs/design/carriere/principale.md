@@ -3,7 +3,7 @@
 > **Serbatoio di progetto, senza valore normativo** (regole del [serbatoio delle carriere](README.md#regole-del-serbatoio)). Nomi delle
 > carte e numeri non compaiono: le partite dicono chi gioca contro chi e che cosa insegnano, non con quali carte.
 
-**Versione 0.3.1 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
+**Versione 0.3.2 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
 [mockup del grafo](mockup-principale.md).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
 regia*. Le versioni precedenti sono nella [cronologia](#cronologia).
 
@@ -107,6 +107,22 @@ Nella 0.2 se ne apriva uno solo, i debiti dopo il torneo perso. Nella 0.3 sono q
 ognuna fa vedere qualcosa che si vede solo perdendo, e si torna sulla strada senza partite in più. Il nodo perso, però, in quel giro non
 è vinto, quindi non dà la carta della prima vittoria: le scene delle sconfitte danno un segno, una variante o un achievement. Se debbano
 dare anche altro si decide con i numeri, in [EC-0](../../product-roadmap.md#ec--economia).
+
+**Le sconfitte sono un segreto** (proprietario, 14 novembre 2026): «i nodi che si raggiungono con una sconfitta debbano essere "segreti",
+cioè senza cordicella precollegata a loro che li indica come strada. Perdere non dovrebbe essere una meccanica normale per proseguire
+sulla mappa, ma una segreta da usare sporadicamente». Quindi:
+
+- **I1s, II2s, III1s e III3c non stanno sulla bacheca** finché non ci si arriva: niente post-it e niente cordicella. Dopo averli visti
+  restano sulla bacheca nei giri seguenti, come gli altri nodi già visti.
+- **I1s e II2s sono «tasche»:** scene che pendono dal nodo perso, senza strade proprie (il proprietario: «il nodo del pavimento in realtà è
+  un nodo foglia, da lì non si dovrebbe raggiungere niente»). La storia riprende dal nodo perso: dopo il pavimento si sceglie come dopo
+  I1, dopo Piera offesa si va a II3 come dopo II2a, e la cordicella del giro parte da lì.
+- **III1s e III3c sono rami veri,** perché portano altrove (la notte senza chiave, i debiti prima dei conti): compaiono con le loro
+  cordicelle solo quando ci si arriva.
+- **F3 resta sulla bacheca** fra i «piatti del giorno»: è un finale, e il contatore dei finali lo annuncia comunque. Perdere l'ultimo
+  duello non è una strada per proseguire, è la fine del giro.
+- Gli indizi degli achievement («Certe sconfitte ti mettono all'altezza del pavimento», «Al Serraglio c'è sempre un'altra porta») sono il
+  solo modo in cui il gioco lascia capire che perdere, a volte, porta da qualche parte.
 
 | Si perde | Si apre | Che cosa dà |
 |---|---|---|
@@ -294,3 +310,5 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
 - **0.3.1 — 14 novembre 2026.** Ritocchi dopo l'[aggiornamento del mockup](mockup-principale.md#aggiornamento-alla-03): lo starter
   arriva prima della partita e resta anche perdendo; Piera torna al tavolo in II3 dopo II2s; le scene delle sconfitte non danno la carta
   della prima vittoria; F1 anche dopo lo sgombero; Mara accusa Piera prima della partita; S2 facoltativa.
+- **0.3.2 — 14 novembre 2026.** Le sconfitte sono un segreto (proprietario): i nodi che si aprono perdendo non stanno sulla bacheca finché
+  non ci si arriva; I1s e II2s sono tasche senza strade proprie, III1s e III3c rami veri; F3 resta visibile.
