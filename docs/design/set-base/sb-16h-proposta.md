@@ -11,6 +11,8 @@ Celestina, Piera e Beppe e gli specchi lunghi finiscono spesso in patta: sono i 
 ([20 carte regolari, al massimo 2 copie](../../game-rules.md#r02--mazzo-mano-e-oggetti), D1) resta in vigore finché il proprietario non
 sceglie un altro formato. Il proprietario approva varianti, composizioni (D45 punto 7) e budget; le domande sono in fondo.
 
+**Approvata dal proprietario il 14 novembre 2026** («Si a tutte, con le tue aggiunte», [D83](../../set-base-plan.md#decisioni-del-proprietario)). Aggiunte al criterio della domanda 9: nessun criterio D16/D51 peggiora rispetto a 20/2; prova umana del proprietario sulla variante scelta prima di cambiare R02.
+
 Fonti lette: [piano](../../set-base-plan.md) (SB-16h, SB-23, regole dei mazzi, metodo di bilanciamento, D1, D45, D50, D61–D63, D68,
 D76–D77, D79–D81, Q7); [R02](../../game-rules.md#r02--mazzo-mano-e-oggetti); [rapporto del passo 2](../../reports/set-base/sb-16g-2b2-report.md);
 [liste D79](sb-16g-proposta.md#liste-complete-e-conto-delle-120-carte); [griglia](griglia.md); la bozza
