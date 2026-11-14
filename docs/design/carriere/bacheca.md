@@ -114,3 +114,9 @@ si accartoccia, e torna intero al giro nuovo.
 
 **Fase K:** i nodi affrontabili mostrano il nome già prima di esserci stati; il post-it «???» resta solo sui nodi più lontani e si stacca
 quando il nodo diventa affrontabile. Quando una puntina si toglie, il filo che vi era legato non resta sospeso.
+
+**Da fare: dove sei, a colpo d'occhio.** Il proprietario, 14 novembre 2026, provando il mockup della
+[campagna principale](mockup-principale.md): «non si capisce bene dove siamo nella mappa a colpo d'occhio. Si potrebbe anche cerchiare il
+nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore, o trovare qualche altro modo carino per metterlo in risalto». Oggi lo
+dice solo la puntina rossa «sei qui», che su una bacheca di venti nodi si perde. Si prova nel prototipo dopo la correzione delle sconfitte
+segrete: il cerchio a evidenziatore tracciato a mano attorno al nodo, con una variante da confrontare.
