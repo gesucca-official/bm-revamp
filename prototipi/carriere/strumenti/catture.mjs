@@ -171,9 +171,10 @@ async function giro(nome, viewport) {
   atteso(!(await tid('ritenta').count()), 'nessun «Ritenta» dopo la sconfitta che apre un ramo');
   atteso(await statoNodo('nodo-e') === 'disponibile', 'il retrobottega disponibile dopo la sconfitta');
   // Fase G: dal bancone alla cucina la puntina «sei qui» viaggia. Fase K: il post-it della cucina si era già staccato quando era diventata
-  // affrontabile; ora si stacca quello del retrobottega, affrontabile dopo la sconfitta, e il filo della puntina tolta cade.
+  // affrontabile, e il filo della puntina tolta cade. Dal 14 novembre (le sconfitte sono un segreto) il retrobottega non aveva post-it:
+  // non c'era sulla bacheca, e compare adesso, con il nome, perché la sconfitta lo ha aperto.
   atteso(await tid('viaggio').count() === 1, 'la puntina «sei qui» che viaggia');
-  atteso(await page.locator('[data-cade="nodo-e"]').count() === 1, 'il post-it del retrobottega che si stacca');
+  atteso(await page.locator('[data-cade="nodo-e"]').count() === 0, 'il retrobottega, segreto, compare senza post-it');
   atteso(await page.locator('[data-cade="nodo-c"]').count() === 0, 'nessun post-it sulla cucina, già col nome');
   atteso(await page.locator('[data-vecchia-puntina]').count() === 1 && await page.locator('[data-penzola]').count() > 0, 'la puntina tolta e il filo che cade');
   atteso(await tid('mappa').getAttribute('data-movimento') === 'si', 'la bacheca che si muove');

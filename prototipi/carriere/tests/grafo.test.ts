@@ -12,13 +12,11 @@ const errori = (md: string, tetto?: number) => controllaGrafo(carriera(md, true)
 test('tutorial e prova passano il controllo del grafo', () => {
   for (const c of [tutorial(), prova()]) {
     const r = controllaGrafo(c);
-    // Mockup della principale 0.3.2: la regola «le sconfitte sono un segreto» è nuova; la prova (Fase B, risposta P3) ha il retrobottega
-    // a cui si arriva solo perdendo in C, e non è segreto. Il controllo lo dice con un avviso; se farlo segreto lo decide la regia.
-    const attesi = c.id === 'prova' ? ['il nodo nodo-e si raggiunge solo perdendo ma non è segreto'] : [];
-    assert.deepEqual([r.errori, r.avvisi], [[], attesi], c.id);
+    // Dalla regola «le sconfitte sono un segreto» (0.3.2) il retrobottega della prova, a cui si arriva solo perdendo in C, è segreto.
+    assert.deepEqual([r.errori, r.avvisi], [[], []], c.id);
     assert.equal(r.raggiunti.length, c.nodi.length);
   }
-  assert.deepEqual(controllaGrafo(prova()).segreti, {'nodo-f': ['nodo-d']});
+  assert.deepEqual(controllaGrafo(prova()).segreti, {'nodo-e': ['nodo-c'], 'nodo-f': ['nodo-d']});
 });
 
 test('vicolo cieco: un ciclo senza uscita verso una fine', () => {
@@ -105,9 +103,9 @@ test('mappa: disposizione a colonne e stati dei nodi lungo due giri', () => {
   let s = nuovoGiro(c, nuovoAccount());
   const stato = () => Object.fromEntries(Object.entries(statiMappa(c, s)).map(([k, v]) => [k, v.stato + (v.noto ? '' : '?')]));
   const fini = {'fine:grappino-e-tornato': 'aperto?', 'fine:grappino-scappa-di-nuovo': 'aperto?'};
-  assert.deepEqual(stato(), {...fini, 'nodo-a': 'disponibile?', 'nodo-b': 'aperto?', 'nodo-c': 'aperto?', 'nodo-d': 'aperto?', 'nodo-e': 'aperto?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?', 'nodo-h': 'aperto?'});
+  assert.deepEqual(stato(), {...fini, 'nodo-a': 'disponibile?', 'nodo-b': 'aperto?', 'nodo-c': 'aperto?', 'nodo-d': 'aperto?', 'nodo-e': 'nascosto?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?', 'nodo-h': 'aperto?'});
   s = scegli(c, salta(c, entra(c, s, 'nodo-a').stato).stato, 0).stato;
-  assert.deepEqual(stato(), {...fini, 'nodo-a': 'fatto', 'nodo-b': 'disponibile?', 'nodo-c': 'escluso?', 'nodo-d': 'aperto?', 'nodo-e': 'escluso?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?', 'nodo-h': 'aperto?'});
+  assert.deepEqual(stato(), {...fini, 'nodo-a': 'fatto', 'nodo-b': 'disponibile?', 'nodo-c': 'escluso?', 'nodo-d': 'aperto?', 'nodo-e': 'nascosto?', 'nodo-f': 'nascosto?', 'nodo-g': 'aperto?', 'nodo-h': 'aperto?'});
   // Al giro dopo, i nodi visti hanno il titolo; un segreto visto resta sulla mappa.
   s = nuovoGiro(c, {...s.account, esplorati: [...s.account.esplorati, 'nodo-f']}, s.giro);
   assert.deepEqual(stato()['nodo-a'], 'disponibile');

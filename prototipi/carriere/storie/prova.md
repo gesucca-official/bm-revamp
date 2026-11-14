@@ -6,6 +6,8 @@
 > [proposta della Fase A](../../../docs/design/carriere/prototipo-fase-a.md#la-mini-carriera-di-prova). In Fase B, dopo la risposta P7
 > del proprietario («sì, una seconda fine»), un secondo finale: il nodo H, «Grappino scappa di nuovo», con un terzo achievement per chi
 > vede tutti e due i finali ([rapporto della Fase B](../../../docs/design/carriere/prototipo-fase-b.md)).
+> Dal 14 novembre 2026 il retrobottega (nodo E), a cui si arriva solo perdendo in C, è segreto, come chiede la regola «le sconfitte
+> sono un segreto» della [campagna principale](../../../docs/design/carriere/principale.md#le-sconfitte-che-aprono-un-ramo).
 
 [Carriera: prova; obbligatori: starter-piera]
 
@@ -81,6 +83,8 @@
 - con Mara, che ha una consegna proprio lì fuori → Nodo H
 
 ## Nodo E — Il retrobottega
+
+[Nodo: segreto]
 
 [Sfondo: S2 disordine, il retro del bar.]
 
