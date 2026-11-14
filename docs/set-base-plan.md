@@ -322,7 +322,8 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | Fase 1 fatta; risposte registrate D59–D68; divisione 2a/2b approvata; 2a consegnata il 13 novembre 2026 ([rapporto](reports/set-base/sb-16g-2a-report.md)); **D69** la rivede (gettone legato al nome, senza timer): **2a rivista** lo stesso giorno; domande risposte in D70; consulto esterno il 13 novembre 2026 ([consulto di design](reports/set-base/consulto-design-fable-2026-11-13.md), [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md)); **2b passo 1 fatto** il 13 novembre 2026: D71–D73, cinque caricamenti e tre politiche, 648.000 partite; invarianti/bound verdi, criteri di bilanciamento ancora fuori soglia ([rapporto](reports/set-base/sb-16g-2b1-report.md)). prova umana breve fatta lo stesso giorno, meccanica approvata (**D75**); **bot consapevole del colpo letale (D76) consegnato** lo stesso giorno ([rapporto](reports/set-base/sb-16g-bot-letale-report.md)), risposte in **D77** (14 novembre 2026); Q9 decisa in **D78**; **proposta 1.3** (14 novembre 2026, [carte concrete](design/set-base/sb-16g-proposta.md)) **approvata in D79** lo stesso giorno; **2b passo 2 consegnato** il 14 novembre 2026 ([rapporto](reports/set-base/sb-16g-2b2-report.md)): proposta 1.3 attuata, 648.000 partite in 738,001 s; invarianti/bound verdi, 11 incontri fuori criterio; STOP sui numeri; domande risposte in **D80**; prossimo proposta separata del passo 3, residuo **1 giro/6.340,041 s** |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16g |  |
+| | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g |  |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16h |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -1022,6 +1023,32 @@ bound a zero; rapporto con le misure delle coppie e delle tre politiche. Dopo, u
 **Rischi.** Più caricamenti e colpi più forti accorciano le partite e cambiano gli incontri già misurati in SB-16e2. Il malus deve
 lasciare la scelta di tenere il colpo, con un prezzo: non deve diventare un obbligo.
 
+### SB-16h — Prova esplorativa della dimensione del mazzo
+
+**Origine.** Idea del proprietario del 14 novembre 2026: «a che punto ci converrebbe testare se il gioco migliora o meno aumentando le
+carte consentite nel mazzo? ora abbiamo 20 fisse, ma se fosser 25? o 30? o un range fra 20 e 30?». Anticipa la parte di misura di
+SB-23 ([D81](#decisioni-del-proprietario)): deciso il formato prima di Sergio, Duccio e del bilanciamento del set intero, un cambio non
+costringe a rifare SB-17–SB-21.
+
+**Perché ora.** Nel passo 2 di SB-16g il mazzo si esaurisce nel 44–50% delle partite di Celestina, Piera e Beppe, e gli specchi lunghi
+finiscono spesso in patta: due problemi su cui la dimensione agisce direttamente. «Annuncia» cerca nel mazzo, quindi un mazzo più grande
+non rende meno affidabile il colpo cercato; diluisce le altre carte.
+
+**Fase A — proposta e STOP.** Varianti da misurare, almeno 20/2 (riferimento), 25/2, 25/3, 30/2 e 30/3; come comporre gli starter più grandi
+(con 3 copie bastano copie di carte presenti, con 2 copie servono titoli in più, che sono una scelta di composizione da approvare, D45
+punto 7); cosa si misura (quote, patte, durata, mazzi esauriti, annunci per partita, carte morte in mano, costanza dei mazzi). Il range
+20–30 si valuta come domanda di design, non come variante del banco: senza un incentivo chi costruisce sceglie il minimo, che diventa
+il formato vero. Il proprietario approva varianti e composizioni.
+
+**Fase B — misura.** Solo nel playground, con le carte del passo 3 di SB-16g, bot nuovi e stessi semi. Budget proprio, fissato nella Fase
+A, separato dal residuo D68 di SB-16g. Le regole dei mazzi (R02 1.12) non cambiano: se il proprietario sceglie un formato diverso, si
+riapre SB-1 con una nuova versione del regolamento e si rilanciano le misure.
+
+**Completamento verificabile.** Dati presentati al proprietario, che decide il formato (chiude Q7). SB-23 resta per la valutazione finale
+sul set intero e coi mazzi costruiti.
+
+**Rischi.** Più copie aumentano la costanza delle combo; mazzi più grandi possono allungare le partite che oggi sono già lunghe (specchi).
+
 ### SB-17, SB-18 — Personaggi da booster
 
 Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
@@ -1075,7 +1102,7 @@ Massimo proposto: 3 giri prima di tornare dal proprietario.
 
 ### SB-23 — Valutazione delle varianti del formato
 
-**Perimetro.** Si confrontano **20 carte e 2 copie con 25 carte e 3 copie**, e si misura l'effetto della dimensione sul ritmo e sulla costanza dei mazzi.
+**Perimetro.** Si confrontano **20 carte e 2 copie con 25 carte e 3 copie**, e si misura l'effetto della dimensione sul ritmo e sulla costanza dei mazzi. La prima misura è anticipata in [SB-16h](#sb-16h--prova-esplorativa-della-dimensione-del-mazzo) (D81); qui resta la conferma sul set intero e coi mazzi costruiti.
 
 **Completamento verificabile.** Dati presentati al proprietario, che decide. Se il formato cambia, SB-1 si riapre con una nuova versione e si rilanciano le misure.
 
@@ -1284,6 +1311,7 @@ D1–D27 del 2 novembre 2026; le successive riportano la propria data.
 | D78 | Parola chiave «Annuncia» e parole chiave in generale (era Q9) | 14 novembre 2026, alla domanda su Q9, con le parole del proprietario: «si, annuncia va bene. in generale, possiamo inventare tutte le keyword ragionevoli che ci consentono di avere testi delle carte piu concisi, purche non diventino un rebus». Quindi: **(1)** «Annuncia X» è la parola che riassume il caricamento (cerca X, la mostra in mano, gettone ×1,5 legato al nome, ripiego D72), definita una volta sola invece del testo lungo su ogni carta. **(2)** Rivede D8 per le parole chiave: se ne possono introdurre altre, se accorciano davvero i testi e restano intuitive per chi gioca; ogni nuova parola va proposta con la sua definizione e approvata come le carte (D45, punto 7). **(3)** Le definizioni stanno nel contratto delle regole del playground finché le regole restano lì (D50); entrano nel regolamento, con versione e motivazione, al trasferimento nella partita viva (SB-28); i testi per i giocatori le usano in SB-25. Le risorse nuove restano escluse da D8 |
 | D79 | SB-16g: proposta 1.3 delle carte approvata | 14 novembre 2026, alla domanda «Approvi la proposta 1.3 così com'è?», con le parole del proprietario: «Approvo tutto». Approvate le quattro domande della [proposta 1.3](design/set-base/sb-16g-proposta.md#domande-numerate-al-proprietario): **(1)** forma breve «Annuncia X. Se lo trovi: … . Se non lo trovi: …» e definizione unica, senza altre parole chiave; **(2)** dieci caricamenti del passo 2 con danni e costi attuali dei colpi, ripieghi del passo 1 e sola anticipazione PAZIENZA: FINITA +15→+25 V (D63), sapendo che alcuni rari restano deboli nella tappa intermedia (Cinghiata 12 CUT, travaso da zero 0 T); **(3)** sostituzioni, cinque liste da 20, 120 slot e rarità 45 C / 55 NC / 20 R, maggioranza NC accettata; **(4)** potenza della 1.2 e Bancone contro il POISON (D67) restano proposte separate del passo 3, da approvare nel funzionamento prima dell'attuazione. Autorizza il passo 2 entro il residuo D68 |
 | D80 | SB-16g: dopo il passo 2, priorità del passo 3 e giro finale | 14 novembre 2026, alla domanda «Rispondi sì alle due domande del passo 2 (proposta del passo 3, giro finale a due bracci)?», con le parole del proprietario: «Sì a entrambe». Sulle due domande del [rapporto del passo 2](reports/set-base/sb-16g-2b2-report.md#non-verificato-e-domande-numerate): **(1)** si passa alla proposta separata del passo 3 con priorità al vantaggio di Spazienzio, allo scarso uso dei caricamenti di Beppe, ai rari intermedi deboli e agli specchi di Celestina e Beppe; liste D79 e giro residuo fermi fino all'approvazione dei funzionamenti; le formule della 1.2 non si applicano in blocco. **(2)** Il giro finale, prefissato dopo l'approvazione, confronta nello stesso giro due bracci, potenza senza e con l'estensione POISON del Bancone (D67), con la misura del passo 2 come riferimento, stessi semi e bot, nuovo passo 0 entro il residuo di 1 giro/6.340,041 s |
+| D81 | Dimensione del mazzo: misura anticipata (SB-16h) | 14 novembre 2026. Idea del proprietario: «a che punto ci converrebbe testare se il gioco migliora o meno aumentando le carte consentite nel mazzo? ora abbiamo 20 fisse, ma se fosser 25? o 30? o un range fra 20 e 30?». Alla proposta della regia di anticipare la misura dopo il passo 3 di SB-16g e prima di SB-17 («Anticipo la prova sulla dimensione del mazzo dopo il passo 3, prima di SB-17?»): «Sì, anticipala». Nasce il blocco [SB-16h](#sb-16h--prova-esplorativa-della-dimensione-del-mazzo), Fase A con proposta delle varianti e STOP; budget proprio, separato da D68. D1 e R02 1.12 restano in vigore finché il proprietario non sceglie un altro formato. Aggiorna Q7 e SB-23 |
 
 ## Decisioni ancora aperte
 
@@ -1296,7 +1324,7 @@ Con la proposta; nessuna blocca i primi blocchi.
 | Q3 | Anticipare il bot sulle carte attuali | Sì, se si dimostra utile dopo SB-4. Dato di SB-4: con le carte attuali il Junkie euristico schiaccia Bruiser, da decidere prima di anticipare | Dopo SB-4 |
 | Q4 | Deckbuilder O15 e O16 | Anticiparli in SB-31, perché con 115 carte l'editor attuale difficilmente basta. Da valutare insieme a O17 e O18 | Prima di SB-31 |
 | Q5 | Numero massimo di giri | 3, prima di tornare dal proprietario | SB-20 |
-| Q7 | Formato definitivo | 20 carte e 2 copie, salvo dati contrari | SB-23 |
+| Q7 | Formato definitivo | 20 carte e 2 copie, salvo dati contrari. Misura anticipata in SB-16h (D81) | SB-16h; conferma finale in SB-23 |
 | Q8 | Report del server in «Ultimo turno» | Resta com'è: i fatti in italiano vengono prima, il testo inglese è secondario (D7 del piano C3). Da riconsiderare se la prova umana lo chiede | SB-25 |
 | Q10 | Volto del caricamento e «×1,5» visibile nel client | Dal [consulto](reports/set-base/consulto-design-fable-2026-11-13.md) (B2-a, C4-1): timbro proprio sul volto del caricamento, gettone unico, «×1,5» sull'impatto dei colpi amplificati e indicazione quando il gettone non ha agito e perché | Dopo la prova umana del passo 1 di SB-16g |
 | Q11 | Sergio e Duccio senza la coppia standard di D52(3) | Dal [consulto](reports/set-base/consulto-design-fable-2026-11-13.md) (A9, C4-3): non dare a tutti i sette personaggi lo stesso schema caricamento-colpo; Sergio può essere quello che punisce gli annunci. Richiede di rivedere D52(3) | SB-17 e SB-18 |
