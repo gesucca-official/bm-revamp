@@ -430,10 +430,11 @@ final class DataCards {
         } else if (step instanceof StatusStep) {
             StatusStep s = (StatusStep) step;
             b.kind(PrintedEffects.Kind.STATUS).damageType(s.property).flow(s.flow).statusType(s.statusType).factor(s.factor)
-                    .convertTo(s.convertTo);
+                    .convertTo(s.convertTo).name(s.name).description(s.description).turns(s.turns).singleUse(s.singleUse).equip(s.equip);
         } else if (step instanceof SearchStep) {
             SearchStep s = (SearchStep) step;
             b.kind(PrintedEffects.Kind.SEARCH).factor(s.vulnerability == null ? null : s.vulnerability.factor)
+                    .searchedCard(s.card).tokenDamage(s.vulnerability == null ? Set.of() : Set.copyOf(s.vulnerability.damage))
                     .foundGains(Map.copyOf(s.foundGains)).missedGains(Map.copyOf(s.missedGains));
         } else if (step instanceof ConsumeStep) {
             b.kind(PrintedEffects.Kind.CONSUME);
