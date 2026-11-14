@@ -84,6 +84,15 @@ Le formule dei colpi, costi ed effetti restano quelle di oggi: nessun anticipo d
 del passo 3 o della difesa POISON. PAZIENZA è la sola eccezione di risorse, +25 V/+15 A.
 Le sezioni SB-10/SB-16d e le correzioni dei blocchi precedenti documentano la storia.
 
+## Potenza del passo 3 di SB-16g (D82, D84)
+
+14 novembre 2026, [proposta 1.4](sb-16g-proposta.md#passo-3--proposta-corrente-14) attuata nelle righe sopra (barrati i valori del passo 2):
+Impatto 30 HIT; Ti stringo +20 A e Cinghiata 20 A per 18 + A residua/2 CUT; Dose +5 A, Tossicone 18 POISON, Un assaggino +20 T
+e travaso con 12 POISON diretti; Estasi 18 + L spesa; Rutto 14 + 2×L spesa e −A pari alla stessa L, poi L azzerata; Preparo e Una stretta
+infliggono 4 CUT a un avversario anche a ricerca fallita, Preparo +15 V; Chiave 22 CUT/10 V; Lavoro 14 + 7 per oggetto/10 V;
+Sotto il cofano anche +5 A. Liste, copie, binding, priorità e rarità invariati (D79). Il Bancone con POISON ×0,5 esiste solo come
+variante del braccio B del giro finale, `set-base/bancone-b.json`; la bozza resta col Bancone del passo 2 fino alla scelta del braccio.
+
 ## Come si legge
 
 - **ID dello slot:** stabile per tutto il piano, anche se la carta cambia nome. Prefissi: `PG` personaggi, `XXX-BA` basic, `XXX-BO`
@@ -220,7 +229,7 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Ne
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | 40 HIT | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
+| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | ~~40~~ 30 HIT (passo 3, D82) | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
 | SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 1 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
 | SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | Annuncia GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. | NC | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | SPA-AR4 | Azione, regolare | DEFENSE | F0 | 0 | CUT ricevuto ×0,5 per 4 turni; +10 V | C | 2 | `MadeOfStone`, conservata | Difesa che carica, contro chi lo taglia (Mara) | dati |
@@ -231,12 +240,12 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Ne
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ 5 A²) | 1 | 12 CUT | R | 1 | bozza «Cinghiata di traverso» | Attacco base | dati |
+| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ ~~5~~ 20 A², passo 3) | 1 | ~~12 CUT~~ CUT pari a 18 più metà della A residua (passo 3, D82) | R | 1 | bozza «Cinghiata di traverso» | Picco con A preparata | dati |
 | MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³ | NC | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
 | MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
 | MAR-AR4 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,4 nel turno; +5 A | NC | 2 | «Tra due paraurti», D55 | Difesa che rimborsa il costo anche senza attacco | dati |
 | MAR-AR5 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Sgommata. Se lo trovi: +15 A. Se non lo trovi: +5 A. | NC | 2 | «Slalom d'avvicinamento», già Slalom, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
-| MAR-AR6 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Cinghiata di traverso. Se lo trovi: +15 A. Se non lo trovi: +5 A. | NC | 1 | `base.mara.TiStringoLaCurva`, «Ti stringo la curva» | Secondo annuncio verso il raro, D79 | dati + search |
+| MAR-AR6 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Cinghiata di traverso. Se lo trovi: ~~+15~~ +20 A. Se non lo trovi: +5 A. | NC | 1 | `base.mara.TiStringoLaCurva`, «Ti stringo la curva» | Secondo annuncio verso il raro, D79 | dati + search |
 
 ² **SB-12a, giro 1** ([correzioni](#correzioni-di-sb-12a)): costi in A −5 su Cinghiata, Sgommata, Paraurti e Slalom (e su GEN-17), il punto di
 partenza di D38. Motivo: il listino a 7 HIT di SB-11b dà alla A di Mara circa 1 HIT, non 0,6; con Spazienzio a 0,937 le sue carte stavano
@@ -247,22 +256,22 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Tossicone Scatarrante. Se lo trovi: +10 T. Se non lo trovi: +5 T. | NC | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
-| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | 12 POISON e +5 T al bersaglio | NC | 2 | `Cough`, «Tossicone Scatarrante», 8 → 12 POISON (D55) | Colpo cercato, utile anche nello specchio immune alla T | dati |
+| TOS-AR1 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Tossicone Scatarrante. Se lo trovi: +10 T, +5 A (passo 3). Se non lo trovi: +5 T. | NC | 2 | «Dose in preparazione», già `MethDrivenRage`, D55; numero SB-16e | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
+| TOS-AR2 | Azione, regolare | DAMAGE | F1 (10 T) | 1 | ~~12~~ 18 POISON (passo 3, D82) e +5 T al bersaglio | NC | 2 | `Cough`, «Tossicone Scatarrante», 8 → 12 POISON (D55) | Colpo cercato, utile anche nello specchio immune alla T | dati |
 | TOS-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Guadagna T/2 HEALTH; perde T | C | 2 | `PervertedMetabolism`, conservata | Difesa: curarsi col veleno; 8,3 HIT, in linea | dati |
 | TOS-AR4 | Azione, regolare | COUNTER | F1 (10 T) | 2 | Annulla le mosse successive dirette a lei | NC | 2 | `AmphetamineReflexes`, conservata | Contromossa; sotto il listino anche per i bot | Java |
-| TOS-AR5 | Azione, regolare | DISRUPT | F1 (10 T) | 1 | Trasferisce la T residua dopo il costo al bersaglio, azzera la propria e toglie l'immunità del bersaglio; a fine turno, dopo il periodico, l'autore ottiene immunità a T | R | 1 | `ToxicBloodDrain`, conservata | Combo con TOS-BO2: accettata perché costa una carta pagata (SB-9), da misurare in SB-13 | Java |
-| TOS-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia C'è del sangue nella mia droga. Se lo trovi: +10 T. Se non lo trovi: +5 T. | NC | 1 | `base.tossico.UnAssaggino`, «Un assaggino» | Secondo annuncio verso il raro, D79 | dati + search |
+| TOS-AR5 | Azione, regolare | DISRUPT | F1 (10 T) | 1 | Trasferisce la T residua dopo il costo al bersaglio, azzera la propria e toglie l'immunità del bersaglio, poi 12 POISON (passo 3, D82, parametro `poison` D84); a fine turno, dopo il periodico, l'autore ottiene immunità a T | R | 1 | `ToxicBloodDrain`, conservata | Combo con TOS-BO2: accettata perché costa una carta pagata (SB-9), da misurare in SB-13 | Java |
+| TOS-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia C'è del sangue nella mia droga. Se lo trovi: ~~+10~~ +20 T. Se non lo trovi: +5 T. | NC | 1 | `base.tossico.UnAssaggino`, «Un assaggino» | Secondo annuncio verso il raro, D79 | dati + search |
 
 **Piera (6)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
-| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ 10⁶ + L residua, poi azzera L | NC | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
-| PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L | C | 2 | bozza «Il bancone regge, io pure» (era una bound) | Difesa che lo rifornisce | dati |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ ~~10⁶~~ 18 (passo 3) + L residua, poi azzera L | NC | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +5 L. Solo nel braccio B del passo 3: anche POISON ×0,5 nel turno, periodico incluso (D67, D82) | C | 2 | bozza «Il bancone regge, io pure» (era una bound); variante B in `set-base/bancone-b.json` | Difesa che lo rifornisce | dati |
 | PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Estasi da Coca Etilene. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
-| PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Il bersaglio perde A pari alla L residua di Piera; 5 HIT | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | dati |
+| PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Spende tutta la L residua dopo il costo: il bersaglio perde A pari alla L spesa e subisce HIT pari a 14 più il doppio della L spesa (passo 3, D82) | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | Java nuova `base.pino.RuttoADistanzaSociale` (D84): memorizza, azzera, poi colpisce |
 | PIN-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Rutto a distanza sociale. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 1 | `base.pino.PrimaIlBrindisi`, «Prima il brindisi» | Secondo annuncio verso il raro, D79 | dati + search |
 
 **Beppe (6)**
@@ -270,11 +279,11 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | GIG-AR1 | Azione, regolare | ITEMS | F1 (5 V) | 1 | Distrugge un oggetto lontano | NC | 2 | `BreakYourToy` riprogettata come bozza «Smontiamo tutto» (era una bound) | Contromossa; distruzione pagata e scartata, non ripetibile | Java |
-| GIG-AR2 | Azione, regolare | DAMAGE | F1 (5 V) | 1 | ~~10~~ 12 CUT⁷ | NC | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
-| GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Chiave da tredici. Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 2 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
-| GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno; +5 V | C | 1 | «Sotto il cofano», D55 | Copertura e rimborso; non genera V nette | dati |
-| GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ F1 (5 V)⁷ | 1 | 6 HIT più 4 per ogni proprio oggetto sul campo | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
-| GIG-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Lavoro fatto bene. Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 1 | `base.gigi.UnaStrettaDiProva`, «Una stretta di prova» | Secondo annuncio verso il raro, D79 | dati + search |
+| GIG-AR2 | Azione, regolare | DAMAGE | F1 (~~5~~ 10 V, passo 3) | 1 | ~~10~~ ~~12~~ 22 CUT⁷ (passo 3, D82) | NC | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
+| GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | 4 CUT al bersaglio (passo 3). Annuncia Chiave da tredici. Se lo trovi: ~~+10~~ +15 V. Se non lo trovi: +5 V. | NC | 2 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
+| GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno; +5 V, +5 A (passo 3, D82) | C | 1 | «Sotto il cofano», D55 | Copertura e rimborso; non genera V nette, la A separa i gruppi dal turno dopo | dati |
+| GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ ~~F1 (5 V)⁷~~ F2 (10 V, passo 3) | 1 | ~~6~~ 14 HIT più ~~4~~ 7 per ogni proprio oggetto sul campo (passo 3, D82) | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
+| GIG-AR6 | Azione, regolare | RESOURCES | F0 | 1 | 4 CUT al bersaglio (passo 3). Annuncia Lavoro fatto bene. Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 1 | `base.gigi.UnaStrettaDiProva`, «Una stretta di prova» | Secondo annuncio verso il raro, D79 | dati + search |
 
 **Sergio (6)**
 
@@ -628,7 +637,7 @@ HEALTH, che sono l'identità degli avanzati e dei booster, come vuole il piano.
 | `equip` (passo nuovo dentro `status`) | OGG-09/10/11/13, GEN-21, token | 5 + token |
 | Java esistente, numeri come parametri | SPA-AR5, TOS-AR4/5, CES-AR2, GIG-AR1, GEN-02/03/04/10, OGG-03/04 | 11 |
 | Java esistente usata da una seconda carta | CES-AR3 (`AmphetamineReflexes`), OGG-15 (`MarvelousCocktail`) | 2 |
-| Java nuova | GIG-AR5 (conta gli oggetti); PIN-AR2 e LR-PIN (una classe sola che memorizza e azzera L) | 2 classi, 3 carte |
+| Java nuova | GIG-AR5 (conta gli oggetti); PIN-AR2 e LR-PIN (una classe sola che memorizza e azzera L); PIN-AR5 dal passo 3 di SB-16g (D84) | 3 classi, 4 carte |
 | dati di oggi | il resto | ≈ 85 |
 
 Il passo `equip` serve già in SB-11 (Giubbotto nello starter di Mara, Posacenere in quello di Spazienzio), non solo in SB-15.
@@ -678,7 +687,7 @@ azzerarsi mai»: invece 1 e 2 vanno a zero. Le conclusioni non cambiano: L non �
 - **Spendere tutto.** PIN-AR2 e LR-PIN fanno danno pari alla L residua e poi la azzerano, come approvato. Il regolamento però applica gli
   effetti su sé *prima* di quelli sul bersaglio (R04): con i passi di oggi l'azzeramento arriverebbe prima del danno. Serve una classe
   Java che memorizzi la L, la azzeri e poi colpisca, come già fa `ToxicBloodDrain` con la T (decisione B1).
-- **Rutto (PIN-AR5)** legge la L residua senza consumarla: è a dati.
+- **Rutto (PIN-AR5)** legge la L residua senza consumarla: è a dati. *Dal passo 3 di SB-16g (D82, D84) la spende e la azzera, con una classe Java propria.*
 - **I bot.** Leggono solo i propri guadagni e il danno nominale. «HIT 3 + x» rischia di essere sopravvalutato come «20+x» di
   `ExtremelyViolentBlow`: da guardare in SB-14.
 - **L agli altri come costo nascosto.** Il Cocktail (OGG-01) dà +10 L anche a Spazienzio, che perde così 5 A a fine turno. La Bottigliata

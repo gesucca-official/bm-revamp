@@ -45,7 +45,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Tag("context")
 class BozzaProfileOffContextTest extends SqliteContextSupport {
-    private static final List<String> DRAFT_CARDS = List.of("base.pino.UltimoGiro", "base.pino.GoingBerserk", "base.gigi.LavoroFattoBene",
+    private static final List<String> DRAFT_CARDS = List.of("base.pino.UltimoGiro", "base.pino.GoingBerserk", "base.pino.RuttoADistanzaSociale", "base.gigi.LavoroFattoBene",
             "base.mara.Sgommata", "base.mara.PresoAlVolo", "mini.CalcioAlBidone", "mini.RintoccoDiCampana");
     private static final List<String> DRAFT_CHARACTERS = List.of("base.character.Mara", "base.character.Pino", "base.character.Gigi");
 

@@ -17,7 +17,8 @@ class ChargeFrequencyTest {
     static final String OTHER="base.com.Spintone";
     static final Resource[] RES={Resource.VIOLENCE,Resource.ALERTNESS,Resource.TOXICITY,Resource.ALCOHOL};
     // Expected at N+1 from zero, after periodic L decay (independent of card parsing).
-    static final int[][] FULL={{25,15,0,0},{15,15,0,0},{0,15,0,0},{0,15,0,0},{0,0,10,0},{0,0,10,0},{0,28,0,7},{0,28,0,7},{10,0,0,0},{10,0,0,0}};
+    // D82 (proposta 1.4): Ti stringo +20 A, Dose +10 T/+5 A, Un assaggino +20 T, Preparo +15 V.
+    static final int[][] FULL={{25,15,0,0},{15,15,0,0},{0,15,0,0},{0,20,0,0},{0,5,10,0},{0,0,20,0},{0,28,0,7},{0,28,0,7},{15,0,0,0},{10,0,0,0}};
     static final int[][] MISS={{5,5,0,0},{5,5,0,0},{0,5,0,0},{0,5,0,0},{0,0,5,0},{0,0,5,0},{0,8,0,2},{0,8,0,2},{5,0,0,0},{5,0,0,0}};
     @BeforeAll static void load() throws Exception {draft=Draft.fromClasspath("/set-base/bozza.json");StarterRedesignTest.load();}
     static Player zero(int i,List<Card> hand,List<Card> deck) {
@@ -30,7 +31,7 @@ class ChargeFrequencyTest {
             String[] pair=ChargeFrequency.PAIRS[i];Card charge=draft.card(pair[0]),hit=draft.card(pair[1]);
             Player a=zero(i,List.of(charge),found?List.of(draft.card(OTHER),hit):List.of(draft.card(OTHER)));
             Player b=foe();Game g=game(a,b);
-            turn(g,move(g,a,charge,"SELF"),waitMove(g,b));
+            turn(g,move(g,a,charge,on(charge)),waitMove(g,b));
             assertEquals(pair[1],resolved(g,"a").getSearchedFor(),pair[0]);
             assertEquals(found,resolved(g,"a").getSearchFound()!=null,pair[0]);
             for(int r=0;r<RES.length;r++)assertEquals((found?FULL:MISS)[i][r],a.getResources().get(RES[r]),pair[0]+found+RES[r]);
@@ -48,7 +49,7 @@ class ChargeFrequencyTest {
     @Test void preparoSearchesChiaveEvenWhenLavoroIsOnTopAndAnotherChiaveIsHeld() {
         Card charge=draft.card("base.gigi.ColpoDiChiaveInglese"),chiave=draft.card("base.gigi.ChiaveDaTredici");
         Player a=zero(8,List.of(charge,chiave),List.of(draft.card("base.gigi.LavoroFattoBene"),draft.card("base.gigi.ChiaveDaTredici")));
-        Player b=foe();Game g=game(a,b);turn(g,move(g,a,charge,"SELF"),waitMove(g,b));
+        Player b=foe();Game g=game(a,b);turn(g,move(g,a,charge,on(charge)),waitMove(g,b));
         assertEquals("base.gigi.ChiaveDaTredici",resolved(g,"a").getSearchedFor());
         assertEquals(2,a.getCardsInHand().stream().filter(c->c.getName().equals(chiave.getName())).count());
         turn(g,move(g,a,chiave,"b"),waitMove(g,b));assertTrue(a.getCharacter().getStatuses().isEmpty());
@@ -61,7 +62,7 @@ class ChargeFrequencyTest {
             Game g=game(a,b);BotView v=BotView.of(g,"a");
             LegalMove chosen=v.legalMoves().stream().filter(m->m.getCard().getBinding().equals(pair[0])).findFirst().orElseThrow();
             List<Map<String,Integer>> predicted=TurnForecast.variants(v,chosen,new TurnForecast.Threat(v.getOpponents().get(0).getSeat(),BotView.publicText(attack),"a",null));
-            turn(g,move(g,a,charge,"SELF"),move(g,b,attack,"a"));
+            turn(g,move(g,a,charge,on(charge)),move(g,b,attack,"a"));
             assertTrue(predicted.contains(Map.of("a",a.getResources().get(Resource.HEALTH),"b",b.getResources().get(Resource.HEALTH))),pair[0]+" found="+found);
         }
     }
@@ -76,7 +77,7 @@ class ChargeFrequencyTest {
             TurnForecast.Threat threat=new TurnForecast.Threat(v.getOpponents().get(0).getSeat(),BotView.publicText(draft.card(OTHER)),"a",null);
             List<Map<String,Integer>> outcomes=TurnForecast.variants(v,legal,threat);
             assertFalse(outcomes.isEmpty());
-            turn(g,move(g,a,charge,"SELF"),waitMove(g,b));
+            turn(g,move(g,a,charge,on(charge)),waitMove(g,b));
             BotView after=BotView.of(g,"a");
             for(SoughtHitPolicy.Timing timing:SoughtHitPolicy.Timing.values()) {
                 BotPolicy first=(view,moves,rng)->moves.get(0);
@@ -90,7 +91,8 @@ class ChargeFrequencyTest {
     }
     @Test void d79ChangesOnlyTheApprovedCardsAndCopiesAndNeverTheHitsPower() throws Exception {
         com.fasterxml.jackson.databind.JsonNode old=JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16g-2b1/draft.json")));
-        com.fasterxml.jackson.databind.JsonNode now=draft.json();
+        // D82: the power of step 3 changes the hits; this check of D79 now reads the saved snapshot of step 2 (PotenzaD82Test checks 1.4).
+        com.fasterxml.jackson.databind.JsonNode now=JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16g-2b2/draft.json")));
         for(String key:List.of("characters","rules","format","set"))assertEquals(old.path(key),now.path(key));
         for(String[] pair:ChargeFrequency.PAIRS) {
             com.fasterxml.jackson.databind.node.ObjectNode before=(com.fasterxml.jackson.databind.node.ObjectNode)StarterBalanceMeasureTest.card(old,pair[1]).deepCopy();

@@ -42,7 +42,7 @@ public class PrintedEffects implements Serializable {
         NOT_IMMUNE
     }
 
-    /** One printed step. Amounts are {@code base + resource of the author / divide + perItem × items of the author}. */
+    /** One printed step. Amounts are {@code base + times × (resource of the author / divide) + perItem × items of the author}. */
     @Value
     @Builder
     public static class Step implements Serializable {
@@ -55,6 +55,9 @@ public class PrintedEffects implements Serializable {
         Resource of;
         @Builder.Default
         int divide = 1;
+        /** SB-16g passo 3 (D84): the resource part counts {@code times} over: {@code base + times × (resource / divide)}. */
+        @Builder.Default
+        int times = 1;
         int perItem;
         /** The variable part is read when the move starts resolving (after costs), not when the step applies. */
         boolean atStart;

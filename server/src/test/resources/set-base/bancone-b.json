@@ -1,0 +1,48 @@
+{
+  "binding": "base.pino.IlBanconeRegge",
+  "rarity": "COMMON",
+  "kind": "ACTION",
+  "priority": 2,
+  "targets": [
+    "SELF"
+  ],
+  "self": [
+    {
+      "op": "status",
+      "name": "BANCONE - HIT",
+      "description": "Hit Damage taken: x0.5",
+      "statusType": "GOOD",
+      "flow": "INPUT",
+      "property": "HIT",
+      "factor": 0.5,
+      "turns": 0
+    },
+    {
+      "op": "status",
+      "name": "BANCONE - POISON",
+      "description": "Poison Damage taken: x0.5",
+      "statusType": "GOOD",
+      "flow": "INPUT",
+      "property": "POISON",
+      "factor": 0.5,
+      "turns": 0
+    },
+    {
+      "op": "say",
+      "text": "Gained status: BANCONE"
+    },
+    {
+      "op": "gain",
+      "resource": "ALCOHOL",
+      "amount": 5
+    }
+  ],
+  "gui": {
+    "name": "Il bancone regge, io pure",
+    "description": "PIN-AR3 · In questo turno moltiplica per 0,5 i danni da colpo e da veleno che ricevi. Guadagni 5 L.",
+    "role": "DEFENSE",
+    "gains": "+5 L",
+    "damage": "—",
+    "damageAmount": "—"
+  }
+}

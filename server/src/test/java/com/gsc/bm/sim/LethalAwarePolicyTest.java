@@ -104,9 +104,9 @@ class LethalAwarePolicyTest {
 
     // --- 1. Defence -------------------------------------------------------------------------------------------------------
 
-    /** HIT 40 shown and payable (V 30 ≥ 25) against 35 health: only «Tra due paraurti» (×0.4, priority 2) keeps Mara up. */
+    /** HIT 30 shown (D82, was 40) and payable (V 30 ≥ 25) against 25 health: only «Tra due paraurti» (×0.4, priority 2) keeps Mara up. */
     @Test void parriesAShownLethalHit() {
-        BotView v = view(seat("me", 35, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
+        BotView v = view(seat("me", 25, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
         assertEquals(names(PARAURTI), run(v, CINGHIATA).names());
         everyStylePlays(v, PARAURTI);
@@ -114,32 +114,32 @@ class LethalAwarePolicyTest {
 
     /** The same hit with V 20 cannot be paid: no threat, every move offered. */
     @Test void aShownHitThatCannotBePaidChangesNothing() {
-        BotView v = view(seat("me", 35, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
+        BotView v = view(seat("me", 25, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 20, 0, List.of()), List.of(card(SUPER_IMPACT)));
         assertEquals(all(v), run(v, CINGHIATA).names());
     }
 
-    /** At 50 health HIT 40 is not lethal: nothing changes. With the own token (×1.5) it is 60: parry. */
+    /** At 40 health HIT 30 (D82) is not lethal: nothing changes. With the own token (×1.5) it is 45: parry. */
     @Test void theOwnTokenMakesTheShownHitLethal() {
-        BotView plain = view(seat("me", 50, 30, 0, 0, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
+        BotView plain = view(seat("me", 40, 30, 0, 0, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
         assertEquals(all(plain), run(plain, CINGHIATA).names());
-        BotView exposed = view(seat("me", 50, 30, 0, 0, token()), List.of(CINGHIATA, PARAURTI, SPINTONE),
+        BotView exposed = view(seat("me", 40, 30, 0, 0, token()), List.of(CINGHIATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
         assertEquals(names(PARAURTI), run(exposed, CINGHIATA).names());
     }
 
-    /** ALCOHOL 40 absorbs 10 HIT (L/4): 30 against 35 health is not lethal, against 30 it is. */
+    /** ALCOHOL 40 absorbs 10 HIT (L/4): 20 of the HIT 30 (D82) against 25 health is not lethal, against 20 it is. */
     @Test void theAlcoholArmourIsCounted() {
-        BotView armoured = view(seat("me", 35, 30, 0, 40, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
+        BotView armoured = view(seat("me", 25, 30, 0, 40, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
         assertEquals(all(armoured), run(armoured, CINGHIATA).names());
-        BotView short_ = view(seat("me", 30, 30, 0, 40, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
+        BotView short_ = view(seat("me", 20, 30, 0, 40, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
         assertEquals(names(PARAURTI), run(short_, CINGHIATA).names());
     }
 
-    /** «Sgommata» (priority 1) brings the author (25 health) down before its HIT 40 (priority 0): hitting first is safe and kills. */
+    /** «Sgommata» (priority 1) brings the author (25 health) down before its HIT 30 (priority 0): hitting first is safe and kills. */
     @Test void hitsFirstWhenItsGroupComesFirstAndKills() {
         BotView v = view(seat("me", 35, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
                 seat("foe", 25, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -147,7 +147,7 @@ class LethalAwarePolicyTest {
         everyStylePlays(v, SGOMMATA);
     }
 
-    /** «Fai basta» (priority 2) voids the later HIT 40. */
+    /** «Fai basta» (priority 2) voids the later HIT 30. */
     @Test void countersTheShownHit() {
         BotView v = view(seat("me", 30, 20, 10, 0, List.of()), List.of(YOU_STOP, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -156,8 +156,8 @@ class LethalAwarePolicyTest {
     }
 
     /**
-     * Uncertain order: «Fasciatura» (+8 HEALTH, priority 0) in the same group as HIT 40 (priority 0, ALERTNESS 20 both). Healing
-     * after the blow saves (0 → 8, D48), before it does not (18 − 40): unsure, still better than the sure fall of «Spintone».
+     * Uncertain order: «Fasciatura» (+8 HEALTH, priority 0) in the same group as HIT 30 (priority 0, ALERTNESS 20 both). Healing
+     * after the blow saves (0 → 8, D48), before it does not (18 − 30): unsure, still better than the sure fall of «Spintone».
      * With the author faster (ALERTNESS 21) the heal surely comes after: the same choice, now safe.
      */
     @Test void aHealInTheSameGroupIsUnsureButPreferred() {
@@ -184,11 +184,11 @@ class LethalAwarePolicyTest {
     }
 
     /**
-     * Uncertain search: «Slalom» (priority 2) would put the token on Mara before HIT 40 if it finds «Sgommata» (60 against 50
-     * health), not if it misses. Unsure against the sure safety of the other moves: it is left out.
+     * Uncertain search: «Slalom» (priority 2) would put the token on Mara before HIT 30 (D82) if it finds «Sgommata» (45 against
+     * 40 health), not if it misses. Unsure against the sure safety of the other moves: it is left out.
      */
     @Test void aChargeThatWouldExposeToTheShownHitIsLeftOut() {
-        BotView v = view(seat("me", 50, 20, 0, 0, List.of()), List.of(SLALOM, CINGHIATA, SPINTONE),
+        BotView v = view(seat("me", 40, 20, 0, 0, List.of()), List.of(SLALOM, CINGHIATA, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
         Record record = run(v, SLALOM);
         assertEquals(names(CINGHIATA, SPINTONE), record.names());
@@ -207,23 +207,23 @@ class LethalAwarePolicyTest {
         everyStylePlays(exposed, SGOMMATA);
     }
 
-    /** Armour on the target: HIT 40 minus L 20/4 is 35, lethal at 35 health, not at 36. */
+    /** Armour on the target: HIT 30 (D82) minus L 20/4 is 25, lethal at 25 health, not at 26. */
     @Test void theTargetsArmourIsCounted() {
         BotView lethal = view(seat("me", 70, 20, 30, 0, List.of()), List.of(SUPER_IMPACT, SPINTONE, TARTARUGA),
-                seat("foe", 35, 20, 0, 20, List.of()), List.of());
+                seat("foe", 25, 20, 0, 20, List.of()), List.of());
         assertEquals(names(SUPER_IMPACT), run(lethal, TARTARUGA).names());
         BotView short_ = view(seat("me", 70, 20, 30, 0, List.of()), List.of(SUPER_IMPACT, SPINTONE, TARTARUGA),
-                seat("foe", 36, 20, 0, 20, List.of()), List.of());
+                seat("foe", 26, 20, 0, 20, List.of()), List.of());
         assertEquals(all(short_), run(short_, TARTARUGA).names());
     }
 
     /**
-     * Known order: the opponent's «Sgommata» (priority 1) comes before HIT 40 (priority 0) and brings the bot (20 health) down,
-     * so its own lethal hit would be voided. The parry («Tartaruga», ×0.6 then 15 against 23) is chosen instead.
+     * Known order: the opponent's «Sgommata» (priority 1) comes before HIT 30 (priority 0, D82) and brings the bot (20 health) down,
+     * so its own lethal hit (30 against 30) would be voided. The parry («Tartaruga», ×0.6 then 15 against 23) is chosen instead.
      */
     @Test void aLethalHitThatComesTooLateIsNotPlayed() {
         BotView v = view(seat("me", 20, 20, 30, 0, List.of()), List.of(SUPER_IMPACT, TARTARUGA, SPINTONE),
-                seat("foe", 35, 40, 0, 0, List.of()), List.of(card(SGOMMATA)));
+                seat("foe", 30, 40, 0, 0, List.of()), List.of(card(SGOMMATA)));
         assertEquals(names(TARTARUGA), run(v, SUPER_IMPACT).names());
         everyStylePlays(v, TARTARUGA);
     }
@@ -246,7 +246,7 @@ class LethalAwarePolicyTest {
     // --- 3. Elsewhere, today's behaviour ----------------------------------------------------------------------------------
 
     @Test void theLiveRulesAreUntouched() {
-        BotView v = view(seat("me", 35, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
+        BotView v = view(seat("me", 25, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)), Ruleset.LIVE);
         Record record = run(v, CINGHIATA);
         assertSame(record.offered.size(), v.legalMoves().size());

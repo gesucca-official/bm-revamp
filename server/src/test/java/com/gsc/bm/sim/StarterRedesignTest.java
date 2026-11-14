@@ -37,11 +37,12 @@ class StarterRedesignTest {
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final String NORMAL = "base.com.Spintone";
     private static final List<Pair> PAIRS = List.of(
-            new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 40),
+            new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 30),
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
-            new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 12),
-            new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 17),
-            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 12));
+            new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 18),
+            new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 25),
+            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 22));
+    // D82 (proposta 1.4): Impatto 30, Tossicone 18, Estasi 18 + L 7, Chiave 22; Preparo infligge anche 4 CUT a un avversario.
 
     private static final class Pair {
         final String deck, charge, hit;
@@ -120,16 +121,29 @@ class StarterRedesignTest {
 
     static Player foe() { return player("starter-tossico", "b", List.of(), List.of()); }
 
+    /** A card of the draft, for the tests of step 3 (D82). */
+    static Card draftCard(String binding) { return draft.card(binding); }
+
+    /** An opponent's plain HIT of the given amount and priority (a probe, not a draft card). */
+    static Card probeHit(int damage, int priority) { return probe("Colpo", damage, priority); }
+
+    /** D82: Preparo il lavoro and Una stretta di prova target an opponent (4 CUT); the other charges target their author. */
+    static String on(Card charge) { return charge.getCanTarget().contains(Card.CardTarget.SELF) ? "SELF" : "b"; }
+
+    /** The CUT a charge deals to its target on its own (D82), before any status. */
+    static int chargeCut(Card charge) { return on(charge).equals("b") ? 4 : 0; }
+
     @Test
     void everyChargeShowsItsExposureAndFoundCardToTheOpponent() {
         for (Pair pair : PAIRS) {
             Card charge = draft.card(pair.charge);
-            assertEquals(Set.of(Card.CardTarget.SELF), charge.getCanTarget(), pair.charge);
+            assertEquals(Set.of(pair.deck.equals("starter-gigi") ? Card.CardTarget.OPPONENT : Card.CardTarget.SELF), charge.getCanTarget(),
+                    pair.charge + ": D82, Preparo colpisce un avversario");
             assertTrue(charge.getCost().isEmpty(), pair.charge);
             assertFalse(charge.isLastBlow(), "D55: nessuna eccezione Ultimo colpo");
             Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(NORMAL), draft.card(pair.hit)));
             Player b = foe(); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            turn(g, move(g, a, charge, on(charge)), waitMove(g, b));
             assertEquals(pair.hit, resolved(g, "a").getSearchedFor());
             assertEquals(pair.hit, resolved(g, "a").getSearchFound().getBindingName());
             assertTrue(holds(a, pair.hit), pair.charge);
@@ -154,7 +168,7 @@ class StarterRedesignTest {
                 assertEquals(65, res(a, Resource.VIOLENCE)); assertEquals(55, res(a, Resource.ALERTNESS));
             } else if (pair.deck.equals("starter-mara")) assertEquals(55, res(a, Resource.ALERTNESS));
             else if (pair.deck.equals("starter-tossico")) assertEquals(10, res(a, Resource.TOXICITY), "D38/D53, SB-16e: Dose +10 T");
-            else assertEquals(50, res(a, Resource.VIOLENCE));
+            else assertEquals(55, res(a, Resource.VIOLENCE), "D82: Preparo +15 V");
         }
     }
 
@@ -164,13 +178,13 @@ class StarterRedesignTest {
             Card charge = draft.card(pair.charge);
             Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(NORMAL), draft.card(pair.hit)));
             Player b = foe(); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            turn(g, move(g, a, charge, on(charge)), waitMove(g, b));
             turn(g, move(g, a, draft.card(pair.hit), "b"), waitMove(g, b));
             assertFalse(resolved(g, "a").isVoid(), pair.hit);
-            assertEquals(500 - pair.damage, res(b, Resource.HEALTH), pair.hit);
+            assertEquals(500 - pair.damage - chargeCut(charge), res(b, Resource.HEALTH), pair.hit);
             assertTrue(a.getCharacter().getStatuses().isEmpty(), "esposizione scaduta anche dopo il colpo");
             if (pair.deck.equals("starter-pino")) assertEquals(0, res(a, Resource.ALCOHOL));
-            if (pair.deck.equals("starter-tossico")) assertEquals(5, res(b, Resource.TOXICITY), "l'immunità ferma il periodico, non i 12 POISON");
+            if (pair.deck.equals("starter-tossico")) assertEquals(5, res(b, Resource.TOXICITY), "l'immunità ferma il periodico, non i 18 POISON (D82)");
         }
     }
 
@@ -180,7 +194,7 @@ class StarterRedesignTest {
             Card charge = draft.card(pair.charge);
             Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(NORMAL)));
             Player b = foe(); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            turn(g, move(g, a, charge, on(charge)), waitMove(g, b));
             assertEquals(pair.hit, resolved(g, "a").getSearchedFor());
             assertNull(resolved(g, "a").getSearchFound());
             assertTrue(holds(a, NORMAL)); assertFalse(holds(a, pair.hit));
@@ -194,7 +208,7 @@ class StarterRedesignTest {
             Card charge = draft.card(pair.charge);
             Player a = player(pair.deck, "a", List.of(charge), List.of());
             Player b = foe(); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            turn(g, move(g, a, charge, on(charge)), waitMove(g, b));
             assertNull(resolved(g, "a").getSearchFound());
             assertTrue(holds(a, draft.lastResortOf(pair.deck)));
             assertEquals(0, a.getDeckSize());
@@ -207,7 +221,7 @@ class StarterRedesignTest {
             Card charge = draft.card(pair.charge);
             Player a = player(pair.deck, "a", List.of(charge, draft.card(pair.hit)), List.of(draft.card(pair.hit)));
             Player b = foe(); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            turn(g, move(g, a, charge, on(charge)), waitMove(g, b));
             assertEquals(2, a.getCardsInHand().stream().filter(c -> c.getBindingName().equals(pair.hit)).count());
         }
     }
@@ -218,7 +232,7 @@ class StarterRedesignTest {
             Card charge = draft.card(pair.charge);
             Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(pair.hit)));
             Player b = foe(); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), waitMove(g, b));
+            turn(g, move(g, a, charge, on(charge)), waitMove(g, b));
             a.getCharacter().getResources().put(Resource.ALCOHOL, 0);
             int before = res(a, Resource.HEALTH);
             a.getCharacter().takeDamage(new Damage(type, 10));
@@ -233,7 +247,7 @@ class StarterRedesignTest {
             Card charge = draft.card(pair.charge), attack = probe("Colpo", 10, before ? 3 : -1);
             Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(pair.hit)));
             Player b = player("starter-tossico", "b", List.of(attack), List.of()); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), move(g, b, attack, "a"));
+            turn(g, move(g, a, charge, on(charge)), move(g, b, attack, "a"));
             int damage = before ? 10 : pair.deck.equals("starter-pino") ? 12 : 15;
             assertEquals(500 - damage, res(a, Resource.HEALTH), pair.charge + ": niente effetto retroattivo; corazza L/4 dopo ×1,5");
         }
@@ -247,7 +261,7 @@ class StarterRedesignTest {
             Player b = player("starter-spazienzio", "b", List.of(counter), List.of());
             b.getCharacter().getResources().put(Resource.ALERTNESS, 100);
             Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), move(g, b, counter, "a"));
+            turn(g, move(g, a, charge, on(charge)), move(g, b, counter, "a"));
             assertTrue(resolved(g, "a").isVoid(), pair.charge);
             assertNull(resolved(g, "a").getSearchedFor());
             assertTrue(holds(a, NORMAL)); assertFalse(holds(a, pair.hit));
@@ -265,8 +279,13 @@ class StarterRedesignTest {
             Player a = player(pair.deck, "a", List.of(charge), List.of(draft.card(pair.hit)));
             a.getCharacter().getResources().put(Resource.HEALTH, 10);
             Player b = player("starter-tossico", "b", List.of(lethal), List.of()); Game g = game(a, b);
-            turn(g, move(g, a, charge, "SELF"), move(g, b, lethal, "a"));
-            assertFalse(resolved(g, "a").isVoid()); assertTrue(holds(a, pair.hit));
+            turn(g, move(g, a, charge, on(charge)), move(g, b, lethal, "a"));
+            if (on(charge).equals("b")) {
+                // D82: Preparo now targets an opponent, so a down author's charge is voided like any attack (D50, punto 1).
+                assertTrue(resolved(g, "a").isVoid()); assertEquals(Move.DOWN, resolved(g, "a").getVoidReason());
+                assertNull(resolved(g, "a").getSearchedFor(), "nessuna ricerca: la pesca normale resta");
+                assertTrue(a.getCharacter().getStatuses().isEmpty()); assertEquals(500, res(b, Resource.HEALTH));
+            } else { assertFalse(resolved(g, "a").isVoid()); assertTrue(holds(a, pair.hit)); }
             assertEquals(0, res(a, Resource.HEALTH)); assertEquals("b", g.getWinner().orElseThrow());
         }
     }
@@ -295,7 +314,7 @@ class StarterRedesignTest {
             Player b = foe(); Game g = game(a, b);
             turn(g, move(g, a, defense, "SELF"), waitMove(g, b));
             assertEquals(binding.contains("Tartaruga") ? 503 : 500, res(a, Resource.HEALTH));
-            assertEquals(binding.contains("Tartaruga") ? 35 : 40, res(a, Resource.ALERTNESS));
+            assertEquals(binding.contains("Tartaruga") ? 35 : binding.contains("Cofano") ? 45 : 40, res(a, Resource.ALERTNESS), "D82: Cofano +5 A");
             assertEquals(40, res(a, Resource.VIOLENCE), "Cofano rimborsa il costo, non genera 5 V nette");
             assertTrue(a.getCharacter().getStatuses().isEmpty(), "la parata dura solo il turno corrente");
             for (Resource cost : defense.getCost().keySet()) {

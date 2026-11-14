@@ -147,9 +147,12 @@ def code_damages(entry):
         amount = re.sub(r'\s+', '', amount)
         if re.fullmatch(r'[A-Za-z_]\w*', amount):
             # SB-6a: a @Tunable field holds the number; its initializer is the value of the live game.
-            tunable = re.findall(r'@Tunable\s+private\s+int\s+' + amount + r'\s*=\s*(\d+)\s*;', code)
+            tunable = re.findall(r'@Tunable(?:\(optional\s*=\s*true\))?\s+private\s+int\s+' + amount + r'\s*=\s*(\d+)\s*;', code)
             assert len(tunable) == 1, entry['class'] + ': damage amount ' + amount + ' is neither a number nor a @Tunable int field'
             amount = tunable[0]
+            if amount == '0':
+                # SB-16g passo 3 (D84): a tunable worth 0 in the live game deals no damage there (playground-only number).
+                continue
         found.append((kind.rsplit('.', 1)[1], amount, who,
                       path.relative_to(root).as_posix() + ':' + str(code.count('\n', 0, m.start()) + 1)))
     return found

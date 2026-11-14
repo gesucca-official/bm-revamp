@@ -180,7 +180,7 @@ class SetBaseDraftTest {
                 if (c.has(list)) for (JsonNode step : c.get(list)) {
                     if (!step.get("op").asText().equals("status") || !step.has("turns")) continue;
                     Matcher m = turns.matcher(description);
-                    int expected = m.find() ? Integer.parseInt(m.group(1)) - 1 : description.contains("in questo turno") ? 0 : -1;
+                    int expected = m.find() ? Integer.parseInt(m.group(1)) - 1 : description.toLowerCase(java.util.Locale.ROOT).contains("in questo turno") ? 0 : -1; // D82: «In questo turno» a inizio frase
                     assertEquals(expected, step.get("turns").asInt(), c.get("binding").asText() + ": " + description);
                     checked++;
                 }
@@ -218,7 +218,7 @@ class SetBaseDraftTest {
         for (JsonNode c : json.get("characters"))
             if (!Set.of(TOSSICO, PINO, GIGI).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
         assertEquals(Map.of(SPAZIENZIO, 75, MARA, 70), health, "D38/D53, SB-16e: salute dei due base; gli avanzati hanno il loro test");
-        Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 5, "base.mara.Sgommata", 15,
+        Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 20 /* D82, era 5 */, "base.mara.Sgommata", 15,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
         alertnessCosts.forEach((binding, cost) -> {
             JsonNode c = card(binding);
@@ -323,11 +323,11 @@ class SetBaseDraftTest {
             assertEquals(10, c.get("cost").get("TOXICITY").asInt(), binding);
             assertTrue(c.get("gui").get("description").asText().contains("· 10 T:"), binding + ": costo nel testo");
         }
-        // D55/SB-16d: Tossicone Scatarrante da 8 a 12 POISON, testi compresi.
+        // D55/SB-16d: Tossicone Scatarrante da 8 a 12 POISON; D82 (passo 3 di SB-16g): 18 POISON, testi compresi.
         JsonNode cough = card("junkie.Cough");
-        assertEquals(12, cough.get("target").get(0).get("amount").asInt());
-        assertEquals("POISON 12", cough.get("gui").get("damageAmount").asText());
-        assertTrue(cough.get("gui").get("description").asText().contains("12 POISON e +5 T"));
+        assertEquals(18, cough.get("target").get(0).get("amount").asInt());
+        assertEquals("POISON 18", cough.get("gui").get("damageAmount").asText());
+        assertTrue(cough.get("gui").get("description").asText().contains("Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T."));
         // Lo slot apre la descrizione delle dieci carte del Tossico.
         Pattern slot = Pattern.compile("^(TOS-(BA|BO\\d|AR\\d)|LR-TOS) · .*");
         int slots = 0;
@@ -347,9 +347,9 @@ class SetBaseDraftTest {
         assertEquals(70, tossico.getResources().get(Resource.HEALTH));
         assertEquals(15, tossico.getResources().get(Resource.TOXICITY));
         assertEquals(65, spazienzio.getResources().get(Resource.HEALTH));
-        // D55: Tossicone Scatarrante 12 POISON e +5 T al bersaglio.
+        // D55: Tossicone Scatarrante +5 T al bersaglio; D82: 18 POISON (era 12).
         ((AbstractCard) draft.card("junkie.Cough")).applyEffectOnTarget(tossico, spazienzio);
-        assertEquals(53, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(47, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(25, spazienzio.getResources().get(Resource.TOXICITY));
         // Metabolismo Corrotto: HEALTH pari a T / 2, poi perde tutta la T.
         tossico.getResources().put(Resource.HEALTH, 50);
@@ -362,7 +362,7 @@ class SetBaseDraftTest {
         last.applyEffectOnSelf(tossico);
         last.applyEffectOnTarget(tossico, spazienzio);
         assertEquals(63, tossico.getResources().get(Resource.HEALTH), "SB-16e2, D56: 2 HIT a sé");
-        assertEquals(46, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(40, spazienzio.getResources().get(Resource.HEALTH), "47 dopo il Tossicone da 18 (D82), meno 7");
         assertEquals(29, spazienzio.getResources().get(Resource.TOXICITY));
         // Raschiare il fondo: carburante a sé.
         ((AbstractCard) draft.card("base.tossico.bound.RaschiareIlFondo")).applyEffectOnSelf(tossico);
@@ -453,10 +453,10 @@ class SetBaseDraftTest {
         // Giro 2 di SB-14: le due carte che spendono tutta la L partono da 10 e da 12 (erano 3 e 6), testi compresi, perché i bot leggono
         // Il numero del danno nominale; la last resort tiene un danno a sé (D29), 2 HIT da SB-16e2 (D56/D38, era 5). SB-16e/D38/D53: Testata a 25 HIT con salute ridotta.
         JsonNode berserk = card("base.pino.GoingBerserk"), last = card("base.pino.UltimoGiro"), testata = card("base.pino.TestataDaUltimoGiro");
-        assertEquals(10, berserk.get("params").get("base").asInt());
+        assertEquals(18, berserk.get("params").get("base").asInt(), "D82: Estasi 18 + L spesa, era 10");
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
-        assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText());
-        assertTrue(berserk.get("gui").get("description").asText().contains("HIT pari a 10 più la propria L residua"));
+        assertEquals("HIT 18+x", berserk.get("gui").get("damageAmount").asText());
+        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua L. Infliggi danni da colpo pari a 18 più la L spesa."));
         assertEquals(12, last.get("params").get("base").asInt());
         assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
         assertEquals("HIT 12+x", last.get("gui").get("damageAmount").asText());
@@ -535,12 +535,15 @@ class SetBaseDraftTest {
         assertEquals(0, me.getResources().get(Resource.ALCOHOL));
         assertTrue(draft.card("base.pino.UltimoGiro").isLastResort());
         assertFalse(draft.card("base.pino.GoingBerserk").isLastResort());
-        // Rutto: il bersaglio perde A pari alla L residua di Pino, che non si consuma; poi 5 HIT.
+        // Rutto, D82/D84: spende tutta la L residua (qui 6, il costo non passa da resolve): il bersaglio perde 6 A e subisce 14 + 2×6 HIT;
+        // la L va a zero. Prima del passo 3 la L non si consumava e il danno era 5.
         me.getResources().put(Resource.ALCOHOL, 6);
         resolveOnOpponent(game, "base.pino.RuttoADistanzaSociale");
         assertEquals(20 - 6, spazienzio.getResources().get(Resource.ALERTNESS));
-        assertEquals(health - 5, spazienzio.getResources().get(Resource.HEALTH));
-        assertEquals(6, me.getResources().get(Resource.ALCOHOL));
+        health -= 14 + 2 * 6;
+        assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(0, me.getResources().get(Resource.ALCOHOL));
+        me.getResources().put(Resource.ALCOHOL, 6);
         // D55: Offro io diventa Un altro e arrivo, caricamento SELF; niente L regalata al bersaglio.
         Card charge = draft.card("base.pino.OffroIo");
         game.getPlayers().get("seat-1").getCardsInHand().add(charge);
@@ -703,8 +706,8 @@ class SetBaseDraftTest {
         assertEquals(7, draft.cardsOf(deck).entrySet().stream().filter(e -> draft.card(e.getKey()).isItem()).mapToInt(Map.Entry::getValue).sum());
 
         // Costi in V delle carte d'archetipo, testi compresi; Smontiamo tutto è la classe di oggi con costo e priorità della bozza.
-        Map<String, Integer> violence = Map.of("bruiser.BreakYourToy", 5, "base.gigi.ChiaveDaTredici", 5, "base.gigi.SottoIlCofano", 5,
-                "base.gigi.LavoroFattoBene", 5);
+        Map<String, Integer> violence = Map.of("bruiser.BreakYourToy", 5, "base.gigi.ChiaveDaTredici", 10, "base.gigi.SottoIlCofano", 5,
+                "base.gigi.LavoroFattoBene", 10); // D82: Chiave e Lavoro 10 V, erano 5
         violence.forEach((binding, cost) -> {
             assertEquals(Map.of(Resource.VIOLENCE, cost), draft.card(binding).getCost(), binding);
             assertTrue(card(binding).get("gui").get("description").asText().contains("· " + cost + " V:"), binding + ": costo nel testo");
@@ -714,19 +717,19 @@ class SetBaseDraftTest {
         assertEquals(Set.of(Card.CardTarget.FAR_ITEM), draft.card("bruiser.BreakYourToy").getCanTarget(), "distrugge un oggetto lontano");
         // I numeri d'attacco, testi compresi: i bot leggono il danno nominale.
         JsonNode chiave = card("base.gigi.ChiaveDaTredici"), colpo = card("base.gigi.ColpoDiChiaveInglese"), lavoro = card("base.gigi.LavoroFattoBene");
-        assertEquals(12, chiave.get("target").get(0).get("amount").asInt());
-        assertEquals("CUT 12", chiave.get("gui").get("damageAmount").asText());
-        assertTrue(chiave.get("gui").get("description").asText().contains("12 CUT"));
-        // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca.
-        assertEquals(10, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
+        assertEquals(22, chiave.get("target").get(0).get("amount").asInt(), "D82, era 12");
+        assertEquals("CUT 22", chiave.get("gui").get("damageAmount").asText());
+        assertTrue(chiave.get("gui").get("description").asText().contains("Infliggi 22 danni da taglio al bersaglio."));
+        // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca; D82: +15 V e 4 CUT a un avversario anche se non trova.
+        assertEquals(15, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(5, colpo.get("self").get(0).get("missedGains").get("VIOLENCE").asInt(), "D72");
         assertEquals("RESOURCES", colpo.get("gui").get("role").asText());
-        assertEquals("—", colpo.get("gui").get("damageAmount").asText());
+        assertEquals("CUT 4", colpo.get("gui").get("damageAmount").asText());
         int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
-        assertEquals(6, base);
-        assertEquals(4, perItem);
+        assertEquals(14, base, "D82, era 6");
+        assertEquals(7, perItem, "D82, era 4");
         assertEquals("HIT " + base + "+x", lavoro.get("gui").get("damageAmount").asText());
-        assertTrue(lavoro.get("gui").get("description").asText().contains("HIT pari a " + base + " più " + perItem + " per ogni proprio oggetto"));
+        assertTrue(lavoro.get("gui").get("description").asText().contains("Infliggi danni da colpo pari a " + base + " più " + perItem + " per ogni tuo oggetto"));
         // Le bound: +5 V e 3 HIT nello starter (D33, D36), 2 CUT veloce nella collezione; nessuna tocca gli oggetti.
         assertEquals(5, card("base.gigi.bound.UnaStrettaEPassa").get("self").get(0).get("amount").asInt());
         assertEquals("+5 V", card("base.gigi.bound.UnaStrettaEPassa").get("gui").get("gains").asText());
@@ -838,7 +841,7 @@ class SetBaseDraftTest {
     void lavoroFattoBeneLoadsFromTheDraftWithItsParameters() {
         Card lavoro = draft.card("base.gigi.LavoroFattoBene");
         assertEquals("Lavoro fatto bene", lavoro.getName());
-        assertEquals(Map.of(Resource.VIOLENCE, 5), lavoro.getCost());
+        assertEquals(Map.of(Resource.VIOLENCE, 10), lavoro.getCost(), "D82, era 5");
         assertEquals(1, lavoro.getPriority());
         assertEquals(Set.of(Card.CardTarget.OPPONENT), lavoro.getCanTarget());
         for (String missing : List.of("base", "perItem")) {

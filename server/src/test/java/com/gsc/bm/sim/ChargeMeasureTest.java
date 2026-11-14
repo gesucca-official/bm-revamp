@@ -17,7 +17,11 @@ import java.util.function.BiConsumer;
 import static com.gsc.bm.sim.StarterBalanceMeasureTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-/** D74, one opt-in round: full matrix, paired policy comparison and event-level token damage. */
+/**
+ * D74, one opt-in round: full matrix, paired policy comparison and event-level token damage. SB-16g passo 3 (D80, D82): the arm is
+ * chosen with -Dsim.arm=A|B ({@link SetBaseArms}); the turn counters of proposal 1.4 («Giro finale D80») are kept per seat, with the
+ * opponent's deck in the key where the matchup matters. They only read the game: the trace test below covers them.
+ */
 class ChargeMeasureTest {
     static final ThreadLocal<Measured> SOURCE = new ThreadLocal<>();
     static final class Measured extends Character {
@@ -25,6 +29,13 @@ class ChargeMeasureTest {
         final Counts counts = new Counts();
         final int initialHealth;
         boolean periodic, parried;
+        // D80 turn counters, reset at every ROUND_READY. Kinds: 0 opponent, 1 self, 2 periodic, 3 other (timers).
+        static final String[] KINDS = {"opponent", "self", "periodic", "timer"};
+        final int[] lostBy = new int[4];
+        /** POISON received this turn, [0] direct and [1] periodic: nominal, after statuses and armour, health actually lost. */
+        final int[][] poison = new int[2][3];
+        String lethal; int cut4Dealt; boolean usedLastResort;
+        void resetTurn() { Arrays.fill(lostBy, 0); for (int[] p : poison) Arrays.fill(p, 0); lethal = null; cut4Dealt = 0; }
         Measured(Character c, String key) {
             super(c.getBindingName(), 0, 0, c.getItemsSize()); this.key = key;
             getResources().putAll(c.getResources()); getItems().addAll(c.getItems());
@@ -64,7 +75,17 @@ class ChargeMeasureTest {
                 counts.add("tokenDamage-"+kind+"-"+d.getType(),actual);
                 counts.add("tokenExtra-"+kind+"-"+d.getType(),actual-plain);
             }
-            return super.takeDamage(d, types);
+            int kind = periodic ? 2 : source == null ? 3 : source == this ? 1 : 0;
+            int nominal = d.getAmount(), modified = amount(d, types, false), before = getResources().get(Resource.HEALTH);
+            String out = super.takeDamage(d, types);
+            int lost = before - getResources().get(Resource.HEALTH);
+            lostBy[kind] += lost;
+            if (d.getType() == Damage.DamageType.POISON && kind != 1 && kind != 3) {
+                int[] p = poison[kind == 2 ? 1 : 0]; p[0] += nominal; p[1] += modified; p[2] += lost;
+            }
+            if (before > 0 && getResources().get(Resource.HEALTH) <= 0) lethal = KINDS[kind];
+            if (kind == 0 && d.getType() == Damage.DamageType.CUT && nominal == 4) source.cut4Dealt += lost;
+            return out;
         }
     }
 
@@ -73,6 +94,8 @@ class ChargeMeasureTest {
         final Map<String, Integer> before = new HashMap<>();
         final Map<String, Card> played = new HashMap<>();
         final Map<String, Integer> tokensAtStart = new HashMap<>();
+        final Map<String, Integer> alertAtStart = new HashMap<>();
+        final Map<String, int[]> group = new HashMap<>();
         boolean halfTurn, finalHalfTurn;
         final ChargeFrequency frequency=new ChargeFrequency();
         synchronized void merge(Measured c) { totals.computeIfAbsent(c.key,k->new Counts()).merge(c.counts); }
@@ -80,13 +103,18 @@ class ChargeMeasureTest {
         @Override public void accept(String stage, Game g) {
             if (stage.equals("ROUND_READY")) {
                 frequency.ready(g);
-                before.clear(); played.clear(); tokensAtStart.clear();
+                before.clear(); played.clear(); tokensAtStart.clear(); alertAtStart.clear(); group.clear();
                 for (Player p:g.getPlayers().values()) {
+                    ((Measured)p.getCharacter()).resetTurn();
+                    alertAtStart.put(p.getPlayerId(),p.getResources().get(Resource.ALERTNESS));
                     before.put(p.getPlayerId(),p.getResources().get(Resource.HEALTH));
                     tokensAtStart.put(p.getPlayerId(),(int)p.getCharacter().getStatuses().stream().filter(s->s.getExposure()!=null)
                             .map(Status::getExposure).distinct().count());
                 }
                 for (Move m:g.getPendingMoves()) if(!m.isVoid()) played.put(m.getPlayerId(),g.getCardFromHand(m.getPlayerId(),m.getPlayedCardName()));
+                // The speed group as fixed after costs (D50): priority, then ALERTNESS minus the A cost of the card.
+                played.forEach((id,card)->group.put(id,new int[]{card.getPriority(),
+                        alertAtStart.get(id)-card.getCost().getOrDefault(Resource.ALERTNESS,0)}));
             } else {
                 frequency.committed(g);
                 boolean half = false;
@@ -100,6 +128,7 @@ class ChargeMeasureTest {
                     if(tokens>0 && (card==null || !ChargeFrequency.isHit(card.getBindingName())))c.counts.add("tokenHeldTurns");
                 }
                 halfTurn|=half; finalHalfTurn=half&&g.isOver();
+                turnCounters(g);
                 for(Move m:g.getResolvedMoves()) if(m.getSearchedFor()!=null) {
                     Measured c=(Measured)g.getPlayers().get(m.getPlayerId()).getCharacter(); boolean found=m.getSearchFound()!=null;
                     c.counts.add("searches");c.counts.add(found?"found":"missed");
@@ -114,13 +143,80 @@ class ChargeMeasureTest {
                 }
             }
         }
+        static final Set<String> OFFENSIVE=Set.of("base.gigi.ColpoDiChiaveInglese","base.gigi.UnaStrettaDiProva");
+
+        static String bucket(int a) { return a<=0?"0":a<10?"1-9":a<20?"10-19":a<40?"20-39":"40+"; }
+
+        /** D80 («Giro finale D80», proposal 1.4): half-health and one-turn ends, terminal reasons, Bancone and Beppe's 4 CUT. */
+        void turnCounters(Game g) {
+            List<Player> seats=new ArrayList<>(g.getPlayers().values());
+            boolean over=g.isOver(), draw=over&&g.getWinner().isEmpty();
+            int[] ga=group.get(seats.get(0).getPlayerId()), gb=seats.size()>1?group.get(seats.get(1).getPlayerId()):null;
+            boolean sameGroup=ga!=null&&gb!=null&&Arrays.equals(ga,gb);
+            for(Player p:seats) {
+                Measured c=(Measured)p.getCharacter(); String id=p.getPlayerId();
+                Player o=seats.stream().filter(x->x!=p).findFirst().orElseThrow();
+                String vs="vs/"+((Measured)o.getCharacter()).key.split("\\|")[0]+"/";
+                Card mine=played.get(id), theirs=played.get(o.getPlayerId());
+                String by=theirs==null?"none":theirs.getBindingName();
+                int start=before.get(id), health=p.getResources().get(Resource.HEALTH), lost=start-health;
+                boolean token=tokensAtStart.get(id)>0;
+                c.counts.add("playerTurns"); if(token)c.counts.add("playerTurnsWithToken");
+                for(int k=0;k<4;k++)c.counts.add("lost-"+Measured.KINDS[k],c.lostBy[k]);
+                for(int t=0;t<2;t++)for(int v=0;v<3;v++)
+                    c.counts.add("poison-"+(t==0?"direct":"periodic")+"-"+new String[]{"nominal","modified","lost"}[v],c.poison[t][v]);
+                if(lost*2>=c.initialHealth) {
+                    for(String pre:List.of("",vs)) {
+                        c.counts.add(pre+"halfTurn"); if(token)c.counts.add(pre+"halfTurn-withToken");
+                        if(over)c.counts.add(pre+"halfTurn-endedGame");
+                    }
+                    for(int k=0;k<4;k++)c.counts.add("halfTurn-lost-"+Measured.KINDS[k],c.lostBy[k]);
+                    c.counts.add("halfTurn-by/"+by);
+                }
+                if(start*2>=c.initialHealth&&health<=0) {
+                    for(String pre:List.of("",vs)) {
+                        c.counts.add(pre+"oneTurnKO"); c.counts.add(pre+(draw?"oneTurnKO-draw":"oneTurnKO-lost"));
+                        if(sameGroup)c.counts.add(pre+"oneTurnKO-sameGroup");
+                    }
+                    for(int k=0;k<4;k++)c.counts.add("oneTurnKO-lost-"+Measured.KINDS[k],c.lostBy[k]);
+                    c.counts.add("oneTurnKO-by/"+by); c.counts.add("oneTurnKO-lethal-"+c.lethal);
+                    if(token)c.counts.add("oneTurnKO-withToken");
+                }
+                if(mine!=null) {
+                    if(mine.isLastResort()){c.counts.add("lastResortPlayed");c.usedLastResort=true;}
+                    if(mine.getBindingName().equals("base.gigi.SottoIlCofano"))c.counts.add("cofanoPlayed");
+                    if(mine.getBindingName().equals(SetBaseArms.BANCONE)) {
+                        c.counts.add("bancone-turns");
+                        for(int t=0;t<2;t++)for(int v=0;v<3;v++)
+                            c.counts.add("bancone-poison-"+(t==0?"direct":"periodic")+"-"+new String[]{"nominal","modified","lost"}[v],c.poison[t][v]);
+                        c.counts.add("bancone-lost",lost);
+                    }
+                    if(OFFENSIVE.contains(mine.getBindingName()))
+                        for(Move m:g.getResolvedMoves()) if(m.getPlayerId().equals(id)&&!m.isVoid()&&m.getSearchedFor()!=null) {
+                            String pre="charge/"+mine.getBindingName()+"/cut4-"+(m.getSearchFound()!=null?"found":"missed");
+                            c.counts.add(pre+"-moves"); c.counts.add(pre+"-lost",c.cut4Dealt);
+                        }
+                }
+                if(over) {
+                    c.counts.add("finalA-"+bucket(alertAtStart.get(id)));
+                    if(sameGroup)c.counts.add("finalSameGroup");
+                    if(c.usedLastResort)c.counts.add("gamesWithLastResort");
+                    if(draw) {
+                        c.counts.add(vs+"draw-lethal-"+(c.lethal==null?"alive":c.lethal));
+                        c.counts.add("draw-lethal-"+(c.lethal==null?"alive":c.lethal));
+                        if(sameGroup)c.counts.add("draw-sameGroup");
+                    }
+                }
+            }
+        }
     }
 
     @Test @EnabledIfSystemProperty(named="sim.chargeOut", matches=".+")
     void measure() throws Exception {
         assertEquals(Ruleset.D50,SimulationRunner.selectedRuleset());
         Path out=Path.of(System.getProperty("sim.chargeOut")); Files.createDirectories(out);
-        Draft draft=Draft.selected(); Map<String,BotPolicy> styles=new LinkedHashMap<>();
+        // SB-16g passo 3 (D82): arm A is the draft, arm B the draft with the Bancone of D67; the rest of the bench is the one of step 2.
+        String arm=SetBaseArms.selected(); Draft draft=SetBaseArms.arm(arm,Draft.selected()); Map<String,BotPolicy> styles=new LinkedHashMap<>();
         for(SoughtHitPolicy.Timing t:SoughtHitPolicy.Timing.values())for(Map.Entry<String,BotPolicy> s:PlaygroundTest.styles().entrySet()) {
             if(s.getKey().equals("casuale"))continue;
             BotPolicy base=s.getValue()==null?new RandomPolicy():s.getValue();
@@ -139,7 +235,7 @@ class ChargeMeasureTest {
         };
         long started=System.nanoTime();
         Bench.Settings settings=new Bench.Settings(Integer.getInteger("sim.chargeGames",300),7_000_000L,List.of(DECKS),styles,
-                Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b2: D79 frequency, one round");
+                Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b3: D82 power, final round, arm "+arm);
         Bench.Report report=Bench.run(draft,settings,source,(stage,g)-> {
             if(stage.equals("ROUND_READY")&&g.getTurn()==0)watches.set(new Observe());
             Observe watch=watches.get();if(watch==null){watch=new Observe();watches.set(watch);} watch.accept(stage,g);
@@ -153,6 +249,7 @@ class ChargeMeasureTest {
         Files.writeString(out.resolve("observations.json"),JSON.writeValueAsString(aggregate.totals));
         Files.writeString(out.resolve("draft.json"),JSON.writeValueAsString(draft.json()));
         Files.writeString(out.resolve("seconds.txt"),String.valueOf(seconds));
+        Files.writeString(out.resolve("arm.txt"),arm);
         for(Counts c:aggregate.totals.values())for(String[] pair:ChargeFrequency.PAIRS) {
             String pre="charge/"+pair[0]+"/";
             assertEquals(c.getOrDefault(pre+"played",0L).longValue(),c.getOrDefault(pre+"resolved",0L)+c.getOrDefault(pre+"notExecuted",0L),pre);

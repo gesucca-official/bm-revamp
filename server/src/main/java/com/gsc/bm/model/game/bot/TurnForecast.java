@@ -416,7 +416,7 @@ public final class TurnForecast {
         private static int amount(PrintedEffects.Step step, Body author, Map<Resource, Integer> start, int itemsAtStart) {
             int amount = step.getBase();
             if (step.getOf() != null)
-                amount += (step.isAtStart() ? start.get(step.getOf()) : author.get(step.getOf())) / Math.max(1, step.getDivide());
+                amount += step.getTimes() * ((step.isAtStart() ? start.get(step.getOf()) : author.get(step.getOf())) / Math.max(1, step.getDivide()));
             return amount + step.getPerItem() * (step.isAtStart() ? itemsAtStart : author.items.size());
         }
 

@@ -693,7 +693,8 @@ final class Draft implements PlayerSource {
             params.put(entry.getKey(), intValue(entry.getValue(), where + ": params." + entry.getKey()));
         });
         for (String name : tunable.keySet())
-            if (!params.containsKey(name)) throw invalid(where, "parametro mancante params." + name);
+            if (!params.containsKey(name) && !tunable.get(name).getAnnotation(Tunable.class).optional())
+                throw invalid(where, "parametro mancante params." + name);
         Map<Resource, Integer> cost = null;
         Integer priority = null;
         if (probe.isItem()) {

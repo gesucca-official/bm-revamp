@@ -22,7 +22,12 @@ class TurnForecastFidelityTest {
 
     @Test
     void theForecastMatchesTheEngineTurnByTurn() throws Exception {
-        Draft draft = Draft.fromClasspath("/set-base/bozza.json");
+        Draft armA = Draft.fromClasspath("/set-base/bozza.json");
+        check(armA, "A");
+        check(SetBaseArms.arm("B", armA), "B"); // SB-16g passo 3 (D82): the Bancone of arm B is a public effect too.
+    }
+
+    private static void check(Draft draft, String arm) throws Exception {
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         int[] turns = new int[3]; // checked, matched, skipped
         List<String> misses = new ArrayList<>();
@@ -63,7 +68,7 @@ class TurnForecastFidelityTest {
                 }
             });
         }
-        System.out.println("forecast fidelity: " + turns[1] + "/" + turns[0] + " turns, " + turns[2] + " skipped for timers");
+        System.out.println("forecast fidelity, arm " + arm + ": " + turns[1] + "/" + turns[0] + " turns, " + turns[2] + " skipped for timers");
         assertTrue(turns[0] > 5000, "turni controllati: " + turns[0]);
         assertEquals(turns[0], turns[1], String.join("\n", misses));
     }
