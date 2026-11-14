@@ -220,3 +220,108 @@ Risposte alle domande del rapporto:
 
 I buchi della narrazione trovati dal mockup sono chiusi nella 0.3: darle retta, a Celestina (I1s, sconfitta in I1); difendere la frase di
 Piera può fallire (II2s); la notte al Serraglio anche senza la chiave (III1s); dove Mara accusa chi; chi gioca S1.
+
+## Aggiornamento alla 0.3
+
+14 novembre 2026, dopo il giudizio qui sopra. Il mockup segue ora la [scaletta 0.3](principale.md): la storia
+[`storie/principale.md`](../../../prototipi/carriere/storie/principale.md) è aggiornata, `principale.md` non è stato toccato. Le sezioni
+qui sopra restano come erano, sulla 0.2.
+
+### Che cosa è cambiato
+
+- **Tre scene che si aprono perdendo,** senza partita: **I1s Il pavimento** (si perde I1; segno `celestina`; poi di nuovo la scelta di
+  I1), **II2s Piera non parla più** (si perde II2a; niente segno `frase`; poi II3), **III1s Sgomberati** (si perde III1; poi la notte al
+  Serraglio, anche senza la chiave; achievement «Porta sul retro»). Con i debiti e F3, le sconfitte che aprono un ramo sono cinque.
+- **III3b:** si arriva con la chiave dopo il pedinamento (uscita condizionata da III2b) o dallo sgombero; gioca chi ti ha accompagnato
+  (Mara o Celestina); la battuta di Celestina è intera con il segno `celestina`.
+- **III4:** senza il segno `frase` Piera ricomincia «un signore...» e Sergio si rivela da solo («Sono io. Finiamola»).
+- **Chi gioca:** III3b, III4, III5 e S2 il segno `alleato` («chi ti ha accompagnato nell'atto III»: Beppe, Mara, o Celestina dopo lo
+  sgombero o dietro a Grappino); S1 Celestina.
+- **Mara accusa** Sergio in II1, Piera in II2a, Beppe in II2b, Celestina in II2c, Grappino in S1 (battute segnaposto).
+- **Achievement:** «Ve l'avevo detto» con le cinque accuse (esplorati II1, II2a, II2b, II2c e S1, anche in giri diversi); «Lasciatela
+  finire» vincendo II2a e arrivando a III4 nello stesso giro; «Lo diceva Celestina» con I1s e III3b nello stesso giro; nuovo «Porta sul
+  retro», da III1s. Sono nove.
+- **Due estensioni del formato,** accettate dalla regia, con le loro prove:
+  - **Uscite condizionate:** `→ Fine: completata, Il Serraglio è di tutti [Se segno via-atto-3 = torneo]`, una per riga; vale la prima la
+    cui condizione vale; dopo un'uscita senza condizione non ce ne possono essere altre. III5 vinto finisce nel finale della strada fatta,
+    senza pulsanti; anche III2b (la notte con la chiave, altrimenti la firma) ora esce così. Il controllo del grafo segue le condizioni e
+    segnala un nodo dove nessuna uscita vale.
+  - **La partita «a scelta»:** `→ Partita II1: a scelta fra Celestina, Mara e Spazienzio (giocatore) contro Sergio`; prima della partita
+    il tavolo mostra i personaggi fra cui scegliere, e «Vinci» e «Perdi» aspettano la scelta. Con un segno davanti, `{iii1} o a scelta fra
+    …`, la scelta c'è solo se il segno non è assegnato: in III1 gioca Beppe quando non ti ha ancora dato le sue carte, altrimenti si sceglie.
+    Vale per II1, III1 e III3a; le tre scelte mute che facevano questo lavoro nella prima stesura non ci sono più.
+- **Una terza estensione, piccola, per la rivincita:** `→ Scelta muta, se c'è: …` è una scelta che si salta quando nessuna opzione è
+  visibile, e le cui opzioni senza destinazione proseguono fino alle uscite. Serve a offrire S2 solo dopo F1 («con Sergio, che vuole la
+  rivincita» → S2, oppure «con Beppe, a chiudere il bar per stasera» → il finale della strada) senza rimettere il pulsante inutile negli
+  altri giri. Con le sole uscite condizionate la rivincita sarebbe stata obbligatoria dopo F1, cioè un superboss da battere per finire il
+  giro.
+
+![La mappa intera della 0.3](../../../prototipi/carriere/catture/p3-o-01-mappa-intera.jpg)
+![Il giro delle tre sconfitte, con le cordicelle rosse](../../../prototipi/carriere/catture/p3-o-02-giro-tre-sconfitte.jpg)
+
+Sul telefono: [la mappa intera](../../../prototipi/carriere/catture/p3-v-01-mappa-intera.jpg) e
+[il giro delle tre sconfitte](../../../prototipi/carriere/catture/p3-v-02-giro-tre-sconfitte.jpg). Registrazione:
+[`p3-giro-sconfitte.webm`](../../../prototipi/carriere/catture/p3-giro-sconfitte.webm) (28 s, 960×540), la bacheca a ogni ritorno lungo
+il giro delle tre sconfitte: le cordicelle rosse che si tendono, il ritorno alla scelta di I1 dopo il pavimento, la notte dalla porta sul
+retro.
+
+**Sulla bacheca** le sconfitte si vedono bene: ogni scena che si apre perdendo sta subito a destra del suo nodo, legata da una cordicella
+rossa, e a fine giro la strada fatta passa di lì. Il pavimento (I1s) va sulla fila in alto accanto a I1 e sposta di una fila la via di
+Mara. La bacheca passa da quattordici a quindici colonne: II2s sposta di una colonna tutto quello che viene dopo (III1s invece sta nella
+colonna dei nodi che salta). Si legge ancora in orizzontale; sul telefono è fitta come prima.
+
+### I numeri per giro
+
+| | 0.2 | 0.3 |
+|---|---|---|
+| Nodi in tutto | 21 con partita, 3 finali, 2 segreti | 24 (21 con partita, 3 scene delle sconfitte), 3 finali, 2 segreti |
+| Percorsi del primo giro | 40 | 136 |
+| Percorsi dopo F1 | 60 | 204 |
+| Nodi con partita per giro | da 11 a 13 (14 con S2) | uguale: da 11 a 13 (14 con S2) |
+| Nodi attraversati per giro, scene comprese | come i nodi con partita | da 11 a 16 al primo giro (I1 conta due volte dopo il pavimento) |
+| PvP | sempre con la quarta partita (31–36% del giro) | uguale |
+| Controllo del grafo | 1041 stati, 0 errori | 333 stati, 0 errori, 0 avvisi; starter e PvP su ogni percorso, tre finali, S1 da III1 e S2 da III5, nove achievement possibili |
+
+Le sconfitte non allungano il giro in partite: le scene I1s e II2s non hanno partita, e lo sgombero salta la partita dell'atto III (si va
+diretti alla notte), quindi un giro con tutte e tre le sconfitte ha 11 partite e 15 nodi. Gli stati del controllo scendono (333 contro 1041)
+perché le scelte «a scelta» non sono più segni.
+
+### Dove scaletta e formato ancora non combaciano
+
+| Nella 0.3 | Nel mockup | Proposta |
+|---|---|---|
+| III1 si può perdere, e Beppe vi dà il suo starter quando manca | Lo sblocco viene prima della partita: Beppe «prende le tue parti» sedendosi al tavolo, e lo starter resta anche se perdi | Dirlo nella scaletta, o spostare la garanzia di Beppe in un nodo che non si perde |
+| Perso II2a, Piera «parla solo con Grappino» | In II3 Piera gioca lo stesso per te, perché non ti ha ancora dato le sue carte | Una battuta di II3 che la riporta al tavolo («per Grappino, non per voi»), o Beppe in II3 e Piera in III1 |
+| «Nessuna è una punizione» | Perdendo I1, II2a o III1 quel nodo non si vince in quel giro: niente carta della prima vittoria di quel nodo | Decidere con EC-0 se le scene delle sconfitte danno qualcosa |
+| Lo sgombero porta alla firma senza il torneo né il pedinamento | Dopo lo sgombero il finale è F1 (come per il pedinamento) | La tabella dei finali dice F1 «dopo il pedinamento o il segreto»: aggiungere lo sgombero |
+| Mara accusa Piera dopo aver vinto II2a | «Ve l'avevo detto» conta II2a esplorato, anche se la frase si è persa (e l'accusa non c'è) | Spostare l'accusa prima della partita, o una condizione «vinto in un giro qualsiasi», che il formato non ha |
+| II1 «a scelta» fra gli starter posseduti | Il selettore ha una lista fissa (Celestina, Mara, Spazienzio) | In CA-0 la lista viene dagli starter dell'account |
+| La rivincita S2 «dopo III5, in un giro nuovo dopo F1» | Offerta su ogni strada dopo F1, rifiutabile; il rifiuto ha un'etichetta inventata («con Beppe, a chiudere il bar per stasera») | Dire se S2 è facoltativa e da quali strade |
+| I1s «poi la scelta di I1» | La bacheca mostra il ritorno con una cordicella che torna indietro, e I1 due volte nel percorso | — |
+
+### Verifiche dell'aggiornamento
+
+| Comando | Esito |
+|---|---|
+| `run.ps1 -Task Test`, `-Task Check`, `-Task Build` | verdi: 115 prove. Nuove o rifatte: i nodi della 0.3 e le scene senza partita, le cinque sconfitte che aprono un ramo, le tre partite «a scelta», gli starter garantiti anche perdendo II2a o III1, il giro delle tre sconfitte (segni, chi ti accompagna, finale, achievement), «Lo diceva Celestina» solo con il pavimento, III5 che finisce senza pulsanti e la rivincita rifiutabile dopo F1, le tre estensioni con i loro errori, il tetto delle cordicelle che oscillano |
+| `strumenti/percorsi.ts` | i numeri sopra |
+| Banco della fluidità, solo sulla bacheca della principale | zero difetti visibili; sotto |
+| Catture (`strumenti/catture-principale.mjs`) | verdi, giocando dall'interfaccia: la mappa intera e il giro delle tre sconfitte (I1s, II2s, III1s e la notte fatti, F1), con il selettore del personaggio |
+| Mutazioni | 16 sulle estensioni (uscite condizionate, scelta «se c'è», partita «a scelta»), su quattro punti della storia e sul tetto delle cordicelle: tutte prese; quattro all'inizio sfuggivano (la scelta saltata nel controllo, il segno davanti alla partita «a scelta», la scelta da rifare dopo una sconfitta, «Lo diceva Celestina» senza il pavimento): rafforzate le prove |
+| `python scripts/check-links.py`, `python scripts/check-rules.py`, `git diff --check` | verdi, pulito |
+
+**Il banco ha trovato un problema, ora corretto.** Con la 0.3 la bacheca della principale, ferma, andava a 83 ms per fotogramma
+(in orizzontale, CPU normale: 161 fotogrammi lunghi, p95 101 ms, contro 32 e 50 della 0.2). La causa: trentatré cordicelle che oscillano
+tutte, molte lunghe quanto la bacheca, ognuna con l'ombra sfocata da ridipingere a ogni passo. Ora **oscillano al più le sedici più
+corte** (`soloLePiuCorte` in `movimentiBacheca.ts`, con la sua prova); le altre penzolano ferme. Il tutorial e la prova ne hanno meno e
+non cambiano. La bacheca ferma torna a 16,7 ms; con il movimento ridotto lo era già.
+
+| Giro | Prima della correzione: lunghi, p95 (ms) | Dopo: lunghi, p95 (ms) | Vuoti, lampeggi, salti, veli, bocche |
+|---|---|---|---|
+| bacheca-principale-o-1x | 161, 101 | 16, 34 | 0 |
+| bacheca-principale-o-4x | 165, 133 | 52, 50 | 0 |
+| bacheca-principale-v-1x | 89, 67 | 14, 50 | 0 |
+| bacheca-principale-v-4x | 107, 83 | 55, 67 | 0 |
+
+Il carico della macchina, durante queste misure, era più alto di quello della prima stesura (la bacheca della prova, misurata di
+controllo, è passata da 16 a 44 fotogrammi lunghi): i numeri si confrontano fra loro, non con quelli della 0.2.

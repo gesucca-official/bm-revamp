@@ -332,3 +332,16 @@ export function filoPenzolante(fisso: Pt, libero: Pt, tipo: 'tesa' | 'lenta', t:
   });
   return {punti, distacco: c.distacco.map(x => x * forma)};
 }
+
+/** Quante cordicelle oscillano al più sulla bacheca (le più corte). */
+export const OSCILLANTI = 16;
+/**
+ * Mockup della principale 0.3: con trentatré cordicelle, molte lunghe quanto la bacheca, farle oscillare tutte (ognuna con l'ombra sfocata
+ * da ridipingere) portava la bacheca ferma a 83 ms per fotogramma. Oscillano al più le OSCILLANTI più corte; le altre penzolano ferme
+ * (ampiezza 0). Il tutorial e la prova ne hanno meno, e non cambiano. Cambia le ampiezze sul posto e restituisce la stessa lista.
+ */
+export function soloLePiuCorte<F extends {l: number; amp: number}>(fili: F[], quante = OSCILLANTI): F[] {
+  const mosse = fili.filter(f => f.amp > 0).sort((x, y) => x.l - y.l);
+  for (const f of mosse.slice(quante)) f.amp = 0;
+  return fili;
+}

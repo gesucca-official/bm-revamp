@@ -1,7 +1,7 @@
 // Il lettore di scene: sfondo, sprite, un personaggio alla volta, finestra di dialogo, e sopra le scelte, la partita simulata e la fine.
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import type {Carriera} from '../formato.ts';
-import {avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
+import {scegliGiocatore, avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
 import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
 import {pagine, useTesto} from './testo.ts';
 import {CARATTERE} from './font.ts';
@@ -248,7 +248,19 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
         <div className="riquadro partita" onClick={e => e.stopPropagation()}>
           <h2>{v.partita.modo === 'duello' ? 'Duello' : 'Tutti contro tutti'}</h2>
           <div className="tavolo">
-            <figure className="per-te">{ritratto(v.giocatore) && <img src={ritratto(v.giocatore)!} alt="" />}<figcaption>{nomeDi(v.giocatore)}<small>gioca per te</small></figcaption></figure>
+            {v.giocatore === null && v.aScelta ? (
+              // Mockup della principale 0.3: la partita «a scelta», il selettore del personaggio prima della partita.
+              <div className="per-te scegli" data-testid="scegli-giocatore">
+                <small>chi gioca per te?</small>
+                {v.aScelta.map(chi => (
+                  <button key={chi} data-testid={`giocatore-${chi}`} onClick={() => azione((cc, ss) => scegliGiocatore(cc, ss, chi))}>
+                    {ritratto(chi) && <img src={ritratto(chi)!} alt="" />}<span>{nomeDi(chi)}</span>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <figure className="per-te">{ritratto(v.giocatore!) && <img src={ritratto(v.giocatore!)!} alt="" />}<figcaption>{nomeDi(v.giocatore!)}<small>gioca per te</small></figcaption></figure>
+            )}
             <span className="contro">contro</span>
             <div className="avversari">
               {v.avversari.map(a => <figure key={a}>{ritratto(a) && <img src={ritratto(a)!} alt="" />}<figcaption>{nomeDi(a)}</figcaption></figure>)}
@@ -258,8 +270,8 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
           {v.sblocchi.length > 0 && <p className="nota">Se vinci: {v.sblocchi.map(nomeSblocco).join(', ')}</p>}
           <p className="nota">Partita simulata: nel prototipo si sceglie l'esito.</p>
           <div className="pulsanti">
-            <button className="primario" data-testid="vinci" onClick={() => azione(vinci)}>Vinci</button>
-            <button data-testid="perdi" onClick={() => azione(perdi)}>Perdi</button>
+            <button className="primario" data-testid="vinci" disabled={v.giocatore === null} onClick={() => azione(vinci)}>Vinci</button>
+            <button data-testid="perdi" disabled={v.giocatore === null} onClick={() => azione(perdi)}>Perdi</button>
           </div>
         </div>
       )}

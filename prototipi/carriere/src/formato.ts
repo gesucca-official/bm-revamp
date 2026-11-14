@@ -33,8 +33,15 @@ export type Destinazione =
 
 export type Esito = 'completata' | 'fallita';
 
-/** Uscita dal nodo dopo l'ultimo passo. Se l'ultimo passo è una scelta con destinazioni, l'uscita è 'scelta'. */
-export type Uscita = {verso: Destinazione} | {scelta: true};
+/**
+ * Uscita dal nodo dopo l'ultimo passo. Se l'ultimo passo è una scelta con destinazioni, l'uscita è 'scelta'. Mockup della principale 0.3:
+ * uscite condizionate («→ Fine: completata, X [Se …]», una per riga), vale la prima la cui condizione vale.
+ */
+export type Uscita = {verso: Destinazione} | {scelta: true} | {condizionate: {se?: Condizione; verso: Destinazione}[]};
+
+/** Le uscite di un nodo come lista (una sola, senza condizione, per un'uscita semplice; nessuna se esce da una scelta). */
+export const usciteDi = (n: Nodo): {se?: Condizione; verso: Destinazione}[] =>
+  'verso' in n.uscita ? [{verso: n.uscita.verso}] : 'condizionate' in n.uscita ? n.uscita.condizionate : [];
 
 export type Passo =
   | Battuta
@@ -72,20 +79,27 @@ export type Partita = {
   id: string;                  // «partita-1»
   modo: 'duello' | 'ffa';
   giocatore: Rif;              // chi prende le parti del giocatore (D14)
-  avversari: Rif[] | {altriFra: string[]};  // {altriFra}: tutti al tavolo tranne il giocatore
+  avversari: Rif[] | {altriFra: string[]};  // {altriFra}: tutti al tavolo tranne il giocatore (il giocatore non è mai «a scelta» qui)
   modificatori?: string[];     // modificatori di incontro dichiarati (nel prototipo solo mostrati)
   ritento?: Battuta[];         // battute prima di ritentare, sempre saltabili
   sconfitta?: Destinazione;    // assente: si ritenta; presente: la sconfitta apre un ramo
   riga: number;
 };
 
-/** Un personaggio fisso o quello scritto in un segno (per esempio il personaggio scelto). */
-export type Rif = {personaggio: string} | {segno: string};
+/**
+ * Un personaggio fisso o quello scritto in un segno (per esempio il personaggio scelto). Mockup della principale 0.3: «a scelta fra …», il
+ * giocatore sceglie il personaggio prima della partita (non è una scelta di storia); con un segno davanti («{x} o a scelta fra …») la scelta
+ * c'è solo se il segno non è assegnato.
+ */
+export type Rif = {personaggio: string} | {segno: string} | {sceltaFra: string[]; segno?: string};
 
 export type Scelta = {
   tipo: 'scelta';
   modo: 'muta' | 'messaggio';  // muta: con chi andare (D14, D16); messaggio: risposta scritta sul telefono
   domanda?: string;
+  // Mockup della principale 0.3: «→ Scelta muta, se c'è: …». Senza opzioni visibili si salta; le opzioni senza destinazione proseguono
+  // nel nodo, fino alle sue uscite (la rivincita S2, offerta solo dopo il finale F1).
+  facoltativa?: true;
   opzioni: Opzione[];          // o tutte con destinazione (la scelta chiude il nodo) o nessuna (lascia solo segni)
   riga: number;
 };

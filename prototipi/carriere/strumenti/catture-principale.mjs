@@ -1,8 +1,9 @@
-// Mockup della principale (14 novembre 2026): catture della bacheca della carriera «Il Serraglio chiude», giocata davvero dall'interfaccia, a
-// 1366×768 e 390×844. La mappa intera all'inizio; tre giri diversi (a: Mara, Piera, il torneo perso con i debiti; b: Spazienzio, Celestina,
-// dietro a Grappino nel segreto S1; c: con la chiave, la notte al Serraglio); la rivincita S2 che compare dopo il finale F1.
-// Fa anche da prova di bordo: se un passo atteso non c'è, esce con 1. Uso (dopo Build): node strumenti/catture-principale.mjs; con
-// BM_REGISTRA=si registra anche la bacheca lungo il giro b (p-giro-bacheca.webm). Uscita in BM_OUT, o in %TEMP%\bm-carriere-principale.
+// Mockup della principale (14 novembre 2026, aggiornato alla scaletta 0.3): catture della bacheca della carriera «Il Serraglio chiude»,
+// giocata davvero dall'interfaccia, a 1366×768 e 390×844. La mappa intera all'inizio, e un giro con le tre sconfitte che aprono un ramo
+// (I1 → il pavimento, II2a → Piera non parla più, III1 → lo sgombero e la notte dalla porta sul retro). Le catture della prima stesura,
+// sulla 0.2 (i giri a, b, c e S2 dopo F1), sono nel repository come erano (p-*.jpg). Fa anche da prova di bordo: se un passo atteso non
+// c'è, esce con 1. Uso (dopo Build): node strumenti/catture-principale.mjs; con BM_REGISTRA=si registra anche la bacheca lungo il giro
+// delle sconfitte (p3-giro-sconfitte.webm). Uscita in BM_OUT, o in %TEMP%\bm-carriere-principale.
 import {chromium} from '@playwright/test';
 import {spawn} from 'node:child_process';
 import fs from 'node:fs';
@@ -52,7 +53,8 @@ const unisci = pezzi => {
 };
 /** Ridà i fotogrammi in tempo reale su una tela, in un'altra pagina, e li registra in webm (VP9) con MediaRecorder. */
 async function codifica(tutti, file, misura) {
-  const fotogrammi = tutti.filter((f, k) => k === 0 || f.t - tutti[k - 1].t > 0 && Math.floor(f.t * 30) !== Math.floor(tutti[k - 1].t * 30));
+  // Al più 20 fotogrammi al secondo: un giro intero sono decine di ritorni alla bacheca, e la pagina che codifica decodifica tutto insieme.
+  const fotogrammi = tutti.filter((f, k) => k === 0 || f.t - tutti[k - 1].t > 0 && Math.floor(f.t * 20) !== Math.floor(tutti[k - 1].t * 20));
   const p = await browser.newPage({viewport: misura});
   await p.setContent('<body style="margin:0"></body>');
   const t0 = fotogrammi[0].t;
@@ -97,13 +99,13 @@ async function giro(nome, viewport, registrare) {
   const foto = async (n, attesa = 600) => {
     await page.waitForTimeout(attesa);
     if (await tid('mappa').count()) await page.waitForFunction(() => !document.querySelector('[data-testid=viaggio], [data-cade], [data-penzola]'), null, {timeout: 8000});
-    await page.screenshot({path: path.join(out, `p-${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
+    await page.screenshot({path: path.join(out, `p3-${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
   };
   const stato = id => tid(`nodo-${id}`).getAttribute('data-stato');
   const pezzi = [];
   const sullaBacheca = async () => {
     if (!registrare) return;
-    const r = await registra(ctx, page); await page.waitForTimeout(2200); pezzi.push(await r.ferma());
+    const r = await registra(ctx, page); await page.waitForTimeout(1800); pezzi.push(await r.ferma());
   };
 
   /** Gioca dalla bacheca fino alla fine del giro: a ogni scelta l'opzione che comincia con le parole date; perde nei nodi detti. */
@@ -127,6 +129,8 @@ async function giro(nome, viewport, registrare) {
         await opzioni.nth(Math.max(0, i)).click();
         continue;
       }
+      // La partita «a scelta» (0.3): si sceglie il primo personaggio offerto.
+      if (await tid('scegli-giocatore').count()) { await page.locator('[data-testid^=giocatore-]').first().click(); continue; }
       if (await tid('vinci').count()) {
         const perdi = perdiIn.find(x => dove.endsWith(x));
         if (perdi) perdiIn = perdiIn.filter(x => x !== perdi);
@@ -151,31 +155,15 @@ async function giro(nome, viewport, registrare) {
   atteso(!(await tid('nodo-s1').count()) && !(await tid('nodo-s2').count()), 'i due segreti nascosti');
   await foto('01-mappa-intera', 1500);
 
-  // (a) Mara → Piera → il torneo perso con i debiti: F2.
-  await gioca(['con Mara', 'con Piera', 'con Beppe, a comprarlo'], ['Il torneo']);
-  atteso((await tid('finale').textContent()).includes('Il Serraglio è di tutti'), 'il giro a: il Serraglio è di tutti');
-  await allaBacheca();
-  atteso(await stato('iii3c') === 'fatto' && await stato('iii2a') === 'fatto', 'il giro a: il torneo e i debiti');
-  await foto('02-giro-a-torneo-perso', 800);
-
-  // (b) Spazienzio → Celestina → dietro a Grappino (S1): F1. La bacheca prima di scegliere, con S1 che compare.
-  await nuovoGiro();
+  // Il giro delle tre sconfitte (0.3): si perde I1 (il pavimento, poi di nuovo la scelta), si perde la frase di Piera (II2s), si perde
+  // contro Duccio (lo sgombero, poi la notte al Serraglio senza la chiave). Finisce con F1.
   if (registrare) pezzi.length = 0;
-  await gioca(['con Spazienzio', 'con Celestina', 'con Grappino'], []);
-  atteso((await tid('finale').textContent()).includes('Il Serraglio resta'), 'il giro b: il Serraglio resta');
+  await gioca(['con Mara', 'con Piera', 'con Beppe, a comprarlo'], ['Il cartello', 'La frase di Piera', 'Sabato sera']);
+  atteso((await tid('finale').textContent()).includes('Il Serraglio resta'), 'il giro delle sconfitte: il Serraglio resta');
   await allaBacheca();
-  atteso(await stato('s1') === 'fatto' && await stato('ii2c') === 'fatto', 'il giro b: il bidone e il cane');
-  await foto('03-giro-b-dietro-a-grappino', 800);
-  if (registrare) { await sullaBacheca(); await codifica(unisci(pezzi), 'p-giro-bacheca.webm', {width: 960, height: 540}); }
-
-  // (c) Con la chiave (via di Mara, I2a) e la notte al Serraglio: dopo F1 la rivincita S2 compare già all'inizio del giro.
-  await nuovoGiro();
-  atteso(await tid('nodo-s2').count() === 1, 'S2 sulla bacheca dopo F1');
-  await foto('04-s2-dopo-f1', 1200);
-  await gioca(['con Mara', 'con Beppe', 'con Mara, a pedinare', 'con Mara, ad aprire', 'con Sergio, che straccia'], []);
-  await allaBacheca();
-  atteso(await stato('iii3b') === 'fatto' && await stato('i2a') === 'fatto', 'il giro c: la notte al Serraglio con la chiave');
-  await foto('05-giro-c-notte', 800);
+  for (const id of ['i1s', 'ii2s', 'iii1s', 'iii3b']) atteso(await stato(id) === 'fatto', `il giro delle sconfitte: ${id}`);
+  await foto('02-giro-tre-sconfitte', 800);
+  if (registrare) { await sullaBacheca(); await codifica(unisci(pezzi), 'p3-giro-sconfitte.webm', {width: 960, height: 540}); }
 
   atteso(!errori.length, `nessun errore nella pagina (${errori.join(' | ')})`);
   await ctx.close();

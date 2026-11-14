@@ -1,6 +1,6 @@
 // CA-0a: la mappa dei rami. Archi, disposizione a colonne e stato di ogni casella per il giro e l'account correnti.
 // Le caselle sono i nodi e i finali (P7): un finale è una casella «fine:<id>», «???» finché non lo si è visto in un giro.
-import type {Carriera, Destinazione} from './formato.ts';
+import {usciteDi, type Carriera, type Destinazione} from './formato.ts';
 import {entrabile, finali, idFinale, valuta, type Stato} from './motore.ts';
 
 export type Arco = {da: string; a: string; tipo: 'uscita' | 'scelta' | 'sconfitta'; indietro: boolean};
@@ -27,7 +27,7 @@ export function archi(c: Carriera): Arco[] {
       if (p.tipo === 'partita') verso(n.id, p.sconfitta, 'sconfitta');
       if (p.tipo === 'scelta') for (const o of p.opzioni) verso(n.id, o.verso, 'scelta');
     }
-    if ('verso' in n.uscita) verso(n.id, n.uscita.verso, 'uscita');
+    for (const u of usciteDi(n)) verso(n.id, u.verso, 'uscita');
   }
   // Archi all'indietro (il ritorno alla scelta dell'epilogo): quelli che in una visita in profondità tornano a un nodo aperto.
   const indietro = new Set<string>();

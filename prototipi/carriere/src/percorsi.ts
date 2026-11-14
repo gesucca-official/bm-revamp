@@ -4,7 +4,7 @@
 // provano tutte e due. Le scelte si provano tutte; le scelte «a scelta» che non cambiano strada si contano una volta sola.
 import type {Carriera} from './formato.ts';
 import {statiMappa} from './mappa.ts';
-import {entra, nuovoAccount, nuovoGiro, perdi, salta, scegli, vinci, vista, type Account, type Stato} from './motore.ts';
+import {entra, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliGiocatore, vinci, vista, type Account, type Stato} from './motore.ts';
 
 export type Percorso = {
   nodi: string[];           // i nodi del giro, in ordine
@@ -39,10 +39,13 @@ export function percorsi(c: Carriera, account: Account = nuovoAccount(), tetto =
     if (v.tipo === 'scelta') {
       // Le opzioni che portano nello stesso posto con gli stessi segni letti si provano una volta sola.
       const viste = new Set<string>();
+      let mutaPresa = false;
       for (const o of v.opzioni) {
         const k = JSON.stringify([o.opzione.verso ?? null]);
-        const muta = !o.opzione.verso;  // una scelta senza destinazione cambia solo chi gioca: basta la prima
-        if (muta && viste.size) continue;
+        // Fra le opzioni senza destinazione (prima della 0.3: chi gioca) basta la prima; quelle con destinazione si provano tutte.
+        const muta = !o.opzione.verso;
+        if (muta && mutaPresa) continue;
+        if (muta) mutaPresa = true;
         if (!muta && viste.has(k + JSON.stringify(o.opzione.segni ?? {}))) continue;
         viste.add(k + JSON.stringify(o.opzione.segni ?? {}));
         giro(scegli(c, s, o.indice).stato, nodi, partite, pvp);
@@ -50,6 +53,8 @@ export function percorsi(c: Carriera, account: Account = nuovoAccount(), tetto =
       return;
     }
     if (v.tipo === 'partita') {
+      // Una partita «a scelta»: chi gioca non cambia la strada, basta il primo.
+      if (v.giocatore === null) return giro(scegliGiocatore(c, s, v.aScelta![0]).stato, nodi, partite, pvp);
       const qui = [...partite, s.giro.nodo!];
       const dopo = vinci(c, s).stato;
       const conPvp = pvp ?? (dopo.account.sblocchi.includes('pvp') && !s.account.sblocchi.includes('pvp') ? qui.length : null);

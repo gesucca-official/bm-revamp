@@ -2,7 +2,8 @@
 // Serve a mostrare che il formato proposto regge su docs/design/carriere/tutorial-dialoghi.md; in Fase B si completa,
 // con il controllo di validità dello schema e il controllo del grafo per esplorazione degli stati.
 // Sintassi del markdown: docs/design/carriere/prototipo-fase-a.md, «Come si scrive nel markdown».
-import type {Achievement, Battuta, Carriera, Cast, Condizione, Destinazione, Nodo, Opzione, Partita, Passo, Problema, Rif, Scelta} from './formato.ts';
+import {usciteDi, type Achievement, type Battuta, type Carriera, type Cast, type Condizione, type Destinazione, type Nodo, type Opzione, type Partita,
+  type Passo, type Problema, type Rif, type Scelta} from './formato.ts';
 
 export type Risultato = {carriera: Carriera; problemi: Problema[]};
 
@@ -106,7 +107,20 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
     const [etichetta, ...resto] = sez.titolo.split(' — ');
     const nodo: Nodo = {id: slug(etichetta), etichetta: etichetta.trim(), titolo: resto.join(' — ').trim(), passi: [], uscita: {scelta: true}, riga: sez.riga};
     let uscita = false;   // un'uscita esplicita (→ Vai a, → Torna a, → Fine) chiude il nodo
+    const condizionate: {se?: Condizione; verso: Destinazione}[] = [];  // mockup della principale 0.3: «→ Fine: … [Se …]», una per riga
     const esci = (grezzo: string, riga: number, da?: 'scelta') => {
+      const se = /^([\s\S]*?)\s*\[Se ([^\]]+)\]\s*$/.exec(grezzo);
+      if (se || condizionate.length) {
+        if (uscita && !condizionate.length) return errore(riga, 'passo dopo l\'uscita del nodo');
+        if (condizionate.length && !condizionate.at(-1)!.se) return errore(riga, 'un\'uscita dopo un\'uscita senza condizione: non si raggiunge mai');
+        const u: {se?: Condizione; verso: Destinazione} = {verso: {nodo: IGNOTO}};
+        if (se) { const c = condizione(se[2], riga); if (c) u.se = c; }
+        condizionate.push(u);
+        uscita = true;
+        nodo.uscita = {condizionate};
+        destinazione(se ? se[1] : grezzo, riga, d => { u.verso = da && 'nodo' in d ? {...d, da} : d; });
+        return;
+      }
       uscita = true;
       nodo.uscita = {verso: {nodo: IGNOTO}};
       destinazione(grezzo, riga, d => { nodo.uscita = {verso: da && 'nodo' in d ? {...d, da} : d}; });
@@ -284,7 +298,14 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
       let m: RegExpExecArray | null;
       if ((m = /^Partita\s+(\w+):\s*([\s\S]+?)\s*\(giocatore\)\s*contro\s+([\s\S]+)$/i.exec(t))) {
         const rif = (s: string): Rif | undefined => {
-          const g = /^\{(\w+)\}$/.exec(s.trim());
+          // Mockup della principale 0.3: «a scelta fra A, B e C», o «{segno} o a scelta fra …».
+          const sc = /^(?:\{([\w-]+)\}\s+o\s+)?a scelta fra\s+([\s\S]+)$/i.exec(s.trim());
+          if (sc) {
+            const fra = sc[2].split(/,\s*|\s+e\s+/).map(x => x.trim()).filter(Boolean).map(x => personaggio(x, riga)).filter((x): x is string => !!x);
+            if (fra.length < 2) errore(riga, 'una partita «a scelta» ha almeno due personaggi fra cui scegliere');
+            return {sceltaFra: fra, ...(sc[1] ? {segno: sc[1]} : {})};
+          }
+          const g = /^\{([\w-]+)\}$/.exec(s.trim());
           if (g) return {segno: g[1]};
           const p = personaggio(s, riga);
           return p ? {personaggio: p} : undefined;
@@ -301,8 +322,9 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
         return;
       }
       if ((m = /^Partita\b/i.exec(t))) return errore(riga, `partita non riconosciuta: «${t}» (forma: Partita N: X (giocatore) contro Y)`);
-      if ((m = /^Scelta( muta)?:\s*([\s\S]*)$/i.exec(t))) {
-        const s: Scelta = {tipo: 'scelta', modo: m[1] ? 'muta' : 'messaggio', opzioni: [], riga};
+      if ((m = /^Scelta( muta)?(, se c'è)?:\s*([\s\S]*)$/i.exec(t))) {
+        const s: Scelta = {tipo: 'scelta', modo: m[1] ? 'muta' : 'messaggio', opzioni: [], riga, ...(m[2] ? {facoltativa: true as const} : {})};
+        m = [m[0], m[1], m[3]] as unknown as RegExpExecArray;
         if (m[2].includes(' · ')) s.opzioni = m[2].split(' · ').map(o => opzione(o, riga, s));
         else if (m[2]) s.domanda = m[2].trim();
         aggiungi(s);
@@ -344,7 +366,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
 
   // Uscite implicite verso il nodo che segue nel file. Un nodo che finisce con una scelta con destinazioni non ne ha bisogno (mockup della
   // principale: l'ultimo nodo del file, S2, finisce con una scelta, e prima era segnalato senza uscita).
-  const chiusoDaScelta = (n: Nodo) => n.passi.some(p => p.tipo === 'scelta' && p.opzioni.some(o => o.verso));
+  const chiusoDaScelta = (n: Nodo) => n.passi.some(p => p.tipo === 'scelta' && !p.facoltativa && p.opzioni.some(o => o.verso));
   nodi.forEach((n, i) => {
     if ('verso' in n.uscita && 'nodo' in n.uscita.verso && n.uscita.verso.nodo === SEGUENTE && !chiusoDaScelta(n)) {
       if (nodi[i + 1]) n.uscita = {verso: {nodo: nodi[i + 1].id}};
@@ -359,9 +381,10 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
     const idn = perNome.get(slug(r.grezzo));
     if (idn) r.applica({nodo: idn}); else errore(r.riga, `destinazione sconosciuta: «${r.grezzo}»`);
   }
-  // Una scelta chiude il nodo solo se tutte le opzioni hanno destinazione.
+  // Una scelta chiude il nodo solo se tutte le opzioni hanno destinazione. Una scelta «se c'è» non chiude mai il nodo: le sue opzioni
+  // senza destinazione proseguono fino alle uscite (mockup della principale 0.3).
   for (const n of nodi) n.passi.forEach((p, i) => {
-    if (p.tipo !== 'scelta') return;
+    if (p.tipo !== 'scelta' || p.facoltativa) return;
     const con = p.opzioni.filter(o => o.verso).length;
     if (con && con < p.opzioni.length) errore(p.riga, 'una scelta ha opzioni con e senza destinazione');
     if (con && n.passi.slice(i + 1).some(q => q.tipo !== 'regia')) errore(p.riga, 'passi dopo una scelta che chiude il nodo');
@@ -470,7 +493,7 @@ function controllaStruttura(c: Carriera, cast: Cast, errore: (r: number, m: stri
     }
   };
   const rifSegno = (r: Rif, riga: number) => {
-    if (!('segno' in r)) return;
+    if (!('segno' in r) || !r.segno) return;
     const v = valori.get(r.segno);
     if (!v) return errore(riga, `segno mai assegnato: ${r.segno}`);
     for (const x of v) if (!cast.personaggi[x]) errore(riga, `il segno ${r.segno} vale «${x}», che non è un personaggio`);
@@ -496,7 +519,7 @@ function controllaStruttura(c: Carriera, cast: Cast, errore: (r: number, m: stri
       if (p.tipo === 'partita' && p.sconfitta) archi.push({da: n.id, a: meta(p.sconfitta), sblocchi: new Set(presi)});
       if (p.tipo === 'scelta') for (const o of p.opzioni) if (o.verso) archi.push({da: n.id, a: meta(o.verso), sblocchi: new Set([...presi, ...(o.sblocchi ?? [])])});
     }
-    if ('verso' in n.uscita) archi.push({da: n.id, a: meta(n.uscita.verso), sblocchi: presi});
+    for (const u of usciteDi(n)) archi.push({da: n.id, a: meta(u.verso), sblocchi: presi});
   }
   for (const a of archi) if (!a.a.startsWith('fine:') && a.a !== IGNOTO && a.a !== SEGUENTE && !ids.has(a.a)) errore(0, `arco verso un nodo che non esiste: ${a.a}`);
   const raggiungibili = (da: string, ok: (a: Arco) => boolean = () => true) => {

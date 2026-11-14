@@ -1,24 +1,25 @@
 # Il Serraglio chiude — mockup del grafo della campagna principale
 
-> Mockup del grafo della [carriera principale del Set Base](../../../docs/design/carriere/principale.md), versione 0.2 (14 novembre 2026),
-> scritto da un esecutore il 14 novembre 2026 per vedere la carriera sulla bacheca e giocarla da cima a fondo con le partite simulate.
-> **Le battute sono segnaposto**, una o due per scena, prese dalla colonna «Scena» della scaletta: **non sono i dialoghi della carriera** e
-> non vanno nel serbatoio. Nodi, partite, scelte, segni, fili, finali, segreti e achievement seguono la scaletta; dove il formato non la
-> regge, o dove la scaletta non dice abbastanza, la scelta del mockup è annotata qui sotto e nel
-> [rapporto](../../../docs/design/carriere/mockup-principale.md).
+> Mockup del grafo della [carriera principale del Set Base](../../../docs/design/carriere/principale.md), **versione 0.3** (14 novembre
+> 2026; la prima stesura del mockup era sulla 0.2), scritto da un esecutore per vedere la carriera sulla bacheca e giocarla da cima a fondo
+> con le partite simulate. **Le battute sono segnaposto**, una o due per scena, prese dalla colonna «Scena» della scaletta: **non sono i
+> dialoghi della carriera** e non vanno nel serbatoio. Nodi, partite, scelte, segni, fili, sconfitte che aprono un ramo, finali, segreti e
+> achievement seguono la scaletta; dove il formato non la regge, o la scaletta non dice abbastanza, la scelta del mockup è annotata qui
+> sotto e nel [rapporto](../../../docs/design/carriere/mockup-principale.md#aggiornamento-alla-03).
 >
 > - **Ritratti:** Celestina, Beppe, Sergio, Duccio e Grappino hanno un cartoncino segnaposto con il primo piano dell'identikit approvato
 >   (`segnaposto/`, fatto da `strumenti/segnaposto.mjs`); il padrone del Dimmi Di Sì è una figura in ombra, senza nome. Tutti con una sola
 >   espressione, «neutra».
 > - **Sfondi riusati:** il Dimmi Di Sì è S3 (l'esterno del tutorial) anche dentro; il bar di notte e la cantina sono S2 con il disordine;
->   la strada di notte è S1 con l'insegna spenta.
-> - **«A scelta» e «l'alleato con cui hai più segni»:** chi gioca a scelta lo decide una scelta muta senza destinazione prima della partita
->   (II1, III1, III3a). «L'alleato con cui hai più segni» (III4, III5, S2) è il segno `alleato`, dato dalla via dell'atto III: Beppe per il
->   torneo, Mara per il pedinamento, Celestina per Grappino.
-> - **Starter garantiti:** in II3 e in III1 lo sblocco dello starter ha una condizione sulla pista dell'atto II (`[Se …] [Sblocca: …]`,
->   estensione del formato per questo mockup).
-> - **Finali:** III5 vinto finisce con una scelta muta che ha una sola opzione visibile per strada (il formato non ha uscite condizionate);
->   dopo F1, in un giro nuovo, c'è anche la rivincita S2.
+>   la strada di notte e il marciapiede dello sgombero sono S1 con l'insegna spenta.
+> - **«A scelta»** (II1, III1 quando non manca nessuno, III3a) è il selettore del personaggio prima della partita: «→ Partita X: a scelta
+>   fra …» (estensione del formato della 0.3).
+> - **Chi ti ha accompagnato nell'atto III** (III3b, III4, III5, S2) è il segno `alleato`: Beppe per il torneo, Mara per il pedinamento,
+>   Celestina per lo sgombero e per Grappino. S1 lo gioca Celestina.
+> - **Starter garantiti:** in II3 e in III1 lo sblocco dello starter ha una condizione (`[Se …] [Sblocca: …]`). In III1, quando Beppe non
+>   ti ha ancora dato le sue carte, lo sblocco viene prima della partita, perché III1 si può perdere.
+> - **Finali:** III5 vinto esce con uscite condizionate (`→ Fine: … [Se …]`, estensione della 0.3): il finale giusto per la strada fatta,
+>   senza pulsanti. Dopo F1, in un giro nuovo, prima delle uscite c'è l'offerta della rivincita S2 (una scelta «se c'è»).
 
 [Carriera: principale; obbligatori: starter-celestina, starter-piera, starter-beppe, pvp]
 
@@ -36,12 +37,26 @@
 
 → Partita I1: Spazienzio (giocatore) contro Celestina
 
-**Ritento.** **Spazienzio** (fumante): DI NUOVO. SVEGLIAMOLA MEGLIO.
+[Sconfitta: → I1s]
 
 → Scelta muta: chi segui?
 
 - con Mara, a scoprire chi ha venduto [Segno: via-atto-1 = mara] → I2a
 - con Spazienzio, a SPIEGARLO al Dimmi Di Sì [Segno: via-atto-1 = spazienzio] → I2b
+
+## I1s — Il pavimento
+
+[Sfondo: S2 disordine, il pavimento del bar.]
+
+*Spazienzio è per terra, accanto a Celestina, sul suo pavimento. Non può che ascoltarla.*
+
+**Celestina** (neutra): Il padrone passa ogni notte. Si siede. Guarda. Io faccio finta di dormire.
+
+**Spazienzio** (quasi-calmo): NESSUNO TI CREDE. MI RIALZO.
+
+[Segno: celestina]
+
+→ Torna a: I1, scelta
 
 ## I2a — Il fabbro
 
@@ -123,15 +138,9 @@
 
 **Sergio** (neutra): Una raccolta firme per questo letamaio. E i conti del bar, poi: lo sapete che siete sotto da marzo?
 
-→ Scelta muta: chi risponde a Sergio?
+→ Partita II1: a scelta fra Celestina, Mara e Spazienzio (giocatore) contro Sergio
 
-- con Celestina [Segno: ii1 = celestina]
-- con Mara [Segno: ii1 = mara]
-- con Spazienzio [Segno: ii1 = spazienzio]
-
-→ Partita II1: {ii1} (giocatore) contro Sergio
-
-**Mara** (illuminata): Sa troppe cose. Lavora per loro. È evidente.
+**Mara** (illuminata): Sa troppe cose. Sergio lavora per loro. È evidente.
 
 → Scelta muta: quale pista?
 
@@ -151,15 +160,29 @@
 
 → Partita II2a: Piera (giocatore) contro Spazienzio
 
+[Sconfitta: → II2s]
+
 **Piera** (contenta): ...alto... e secco...
 
 [Interrotta]
 
-**Mara** (illuminata): Alto e secco. Un alieno. Ve l'avevo detto.
+**Mara** (illuminata): Piera copre qualcuno. Ve l'avevo detto.
 
 [Segno: frase]
 
 [Sblocca: starter-piera]
+
+→ Vai a: II3
+
+## II2s — Piera non parla più
+
+[Sfondo: S2]
+
+[Entra: grappino seduto]
+
+**Piera** (offesa): Grappino... a te... lo dico... un signore...
+
+*Piera non parla più con nessuno. Grappino, per la cronaca, ascolta.*
 
 → Vai a: II3
 
@@ -176,6 +199,8 @@
 → Partita II2b: Beppe (giocatore) contro Duccio
 
 **Beppe** (neutra): A chi mi aiuta faccio lo sconto. E una copia della chiave del bar, già che ci sono.
+
+**Mara** (sospettosa): Beppe lavora per chi paga. Anche per loro.
 
 [Segno: chiave]
 
@@ -195,6 +220,8 @@
 
 *La firma non c'è: l'ha strappata un cane piccolo. Si vedono i denti.*
 
+**Mara** (sospettosa): Celestina ha mangiato la prova. Apposta.
+
 [Segno: bilancio]
 
 → Vai a: II3
@@ -209,17 +236,17 @@
 
 **Duccio** (neutra): Io sto con lui.
 
-[Se segno pista = piera] [Segno: ii3 = beppe]
+[Se segno pista = piera e vinto II2a] [Segno: ii3 = beppe]
 
-[Se non segno pista = piera] [Segno: ii3 = piera]
+[Se non segno ii3 = beppe] [Segno: ii3 = piera]
 
 → Partita II3: {ii3} (giocatore) contro Sergio e Duccio
 
 **Sergio** (neutra): Non avete capito niente.
 
-[Se segno pista = piera] [Sblocca: starter-beppe]
+[Se segno ii3 = beppe] [Sblocca: starter-beppe]
 
-[Se non segno pista = piera] [Sblocca: starter-piera]
+[Se segno ii3 = piera] [Sblocca: starter-piera]
 
 → Vai a: III1
 
@@ -231,16 +258,11 @@
 
 [Se non segno duccio] **Duccio** (neutra): Sgombero, per conto del Dimmi Di Sì. Fuori tutti.
 
-→ Scelta muta: chi affronta Duccio?
+[Se non segno pista = beppe e non segno ii3 = beppe] [Segno: iii1 = beppe] [Sblocca: starter-beppe]
 
-- con Beppe, che non ti ha ancora dato le sue carte [Se segno pista = celestina] [Segno: iii1 = beppe]
-- con Piera [Se non segno pista = celestina] [Segno: iii1 = piera]
-- con Beppe [Se non segno pista = celestina] [Segno: iii1 = beppe]
-- con Celestina [Se non segno pista = celestina] [Segno: iii1 = celestina]
+→ Partita III1: {iii1} o a scelta fra Piera, Beppe e Celestina (giocatore) contro Duccio
 
-→ Partita III1: {iii1} (giocatore) contro Duccio
-
-[Se segno pista = celestina] [Sblocca: starter-beppe]
+[Sconfitta: → III1s]
 
 **Mara** (pensierosa): Resta la notte. Che facciamo?
 
@@ -249,6 +271,20 @@
 - con Beppe, a comprarlo noi con un torneo [Segno: via-atto-3 = torneo] [Segno: alleato = beppe] → III2a
 - con Mara, a pedinare Sergio [Segno: via-atto-3 = pedinamento] [Segno: alleato = mara] → III2b
 - con Grappino, dietro a lui in cantina [Se segno bilancio] [Segno: via-atto-3 = grappino] [Segno: alleato = celestina] → S1
+
+## III1s — Sgomberati
+
+[Sfondo: S1 insegna-spenta, il marciapiede.]
+
+**Duccio** (neutra): Fuori tutti. Chiuso.
+
+**Celestina** (neutra): Di qua. La porta sul retro non la chiude nessuno da dieci anni.
+
+[Segno: via-atto-3 = sgombero] [Segno: alleato = celestina]
+
+[Achievement: Porta sul retro]
+
+→ Vai a: III3b
 
 ## III2a — Il torneo
 
@@ -282,15 +318,7 @@
 
 **Sergio** (neutra): Una colletta. Che tenerezza. Ecco i miei dieci euro.
 
-→ Scelta muta: chi conta i soldi?
-
-- con Beppe [Segno: iii3a = beppe]
-- con Mara [Segno: iii3a = mara]
-- con Spazienzio [Segno: iii3a = spazienzio]
-- con Celestina [Segno: iii3a = celestina]
-- con Piera [Segno: iii3a = piera]
-
-→ Partita III3a: {iii3a} (giocatore) contro Duccio e Sergio
+→ Partita III3a: a scelta fra Beppe, Mara, Spazienzio, Celestina e Piera (giocatore) contro Duccio e Sergio
 
 → Vai a: III4
 
@@ -304,18 +332,17 @@
 
 → Partita III2b: Mara (giocatore) contro Sergio
 
-→ Scelta muta: e adesso?
+→ Vai a: III3b [Se segno chiave]
 
-- con Mara, ad aprire il bar con la chiave di Beppe [Se segno chiave] → III3b
-- con Mara, ad aspettare domenica [Se non segno chiave] → III4
+→ Vai a: III4
 
 ## III3b — Di notte al Serraglio
 
 [Sfondo: S2 disordine, il bar chiuso e buio.]
 
-[Se segno pista = celestina] **Celestina** (neutra): Ve l'avevo detto che passa ogni notte. E a voi lo dico: è lui.
+[Se segno celestina] **Celestina** (neutra): Ve l'avevo detto che passa ogni notte. Da dieci anni, alle due. Beve un amaro e guarda.
 
-[Se non segno pista = celestina] **Celestina** (neutra): Ve l'avevo detto che passa ogni notte.
+[Se non segno celestina] **Celestina** (neutra): Ve l'avevo detto che passa ogni notte.
 
 *Entra Sergio, con le sue chiavi. Si siede al bancone vuoto e guarda il locale.*
 
@@ -323,11 +350,9 @@
 
 [Se non segno duccio] **Duccio** (neutra): Il contratto, capo. Da firmare.
 
-→ Partita III3b: Mara (giocatore) contro Sergio e Duccio
+→ Partita III3b: {alleato} (giocatore) contro Sergio e Duccio
 
 [Modificatori: ce l'hanno tutti con te]
-
-[Achievement: Lo diceva Celestina]
 
 → Vai a: III4
 
@@ -341,7 +366,9 @@
 
 **Piera** (offesa): Il cane... non si tocca...
 
-→ Partita S1: {alleato} (giocatore) contro Piera
+**Mara** (sospettosa): Il cane. È sempre stato il cane.
+
+→ Partita S1: Celestina (giocatore) contro Piera
 
 [Modificatori: il cane difende le sue cose, la cantina è buia]
 
@@ -363,7 +390,9 @@
 
 [Se segno frase] **Piera** (contenta): ...alto... e secco... e antipatico. Era lui.
 
-[Se non segno frase] **Piera** (offesa): Era lui... quello...
+[Se non segno frase] **Piera** (offesa): Un signore...
+
+[Se non segno frase] **Sergio** (neutra): Sono io. Finiamola.
 
 **Spazienzio** (furioso): VE L'AVEVO DETTO.
 
@@ -383,11 +412,14 @@
 
 [Se non segno via-atto-3 = torneo] **Sergio** (neutra): La prossima volta faccio sul serio.
 
-→ Scelta muta: e il Serraglio?
+→ Scelta muta, se c'è: la rivincita?
 
-- con Sergio, che straccia l'assegno [Se non segno via-atto-3 = torneo] → Fine: completata, Il Serraglio resta
-- con Beppe, e la colletta [Se segno via-atto-3 = torneo] → Fine: completata, Il Serraglio è di tutti
 - con Sergio, che vuole la rivincita [Se finale Il Serraglio resta] → S2
+- con Beppe, a chiudere il bar per stasera [Se finale Il Serraglio resta]
+
+→ Fine: completata, Il Serraglio è di tutti [Se segno via-atto-3 = torneo]
+
+→ Fine: completata, Il Serraglio resta
 
 ## S2 — Sergio fa sul serio
 
@@ -403,18 +435,17 @@
 
 [Achievement: Rivincita]
 
-→ Scelta muta: e il Serraglio?
+→ Fine: completata, Il Serraglio è di tutti [Se segno via-atto-3 = torneo]
 
-- con Sergio, che straccia l'assegno [Se non segno via-atto-3 = torneo] → Fine: completata, Il Serraglio resta
-- con Beppe, e la colletta [Se segno via-atto-3 = torneo] → Fine: completata, Il Serraglio è di tutti
+→ Fine: completata, Il Serraglio resta
 
 ## Achievement
 
 ### Ve l'avevo detto
 
-Mara ha accusato tutti, nessuno escluso: la memoria di Piera, i soldi di Beppe, la spazzatura di Celestina e il cane.
+Mara ha accusato tutti, nessuno escluso: Sergio, Piera, Beppe, Celestina e Grappino, in giri diversi.
 
-[Quando: esplorato II2a e esplorato II2b e esplorato II2c e esplorato S1]
+[Quando: esplorato II1 e esplorato II2a e esplorato II2b e esplorato II2c e esplorato S1]
 
 - Indizio: Mara ha sospetti su tutti. Proprio su tutti?
 - Indizio, se esplorato II2a e esplorato II2b e esplorato II2c: Manca ancora qualcuno. Qualcuno con quattro zampe.
@@ -423,15 +454,18 @@ Mara ha accusato tutti, nessuno escluso: la memoria di Piera, i soldi di Beppe, 
 
 Hai difeso la frase di Piera, e lei l'ha finita alla firma.
 
-[Quando: segno frase e visto III4]
+[Quando: vinto II2a e visto III4]
 
 - Indizio: Qualcuno interrompe sempre Piera.
 
 ### Lo diceva Celestina
 
-Sei entrato di notte al Serraglio.
+Le hai dato retta sul pavimento, e sei entrato di notte al Serraglio nello stesso giro.
+
+[Quando: visto I1s e visto III3b]
 
 - Indizio: Celestina parla nel sonno. Qualcuno l'ha ascoltata?
+- Indizio, se esplorato III3b: Certe sconfitte ti mettono all'altezza del pavimento.
 
 ### Monetine
 
@@ -463,6 +497,12 @@ Hai seguito tutte e tre le piste dell'atto II, in giri diversi.
 [Quando: esplorato II2a e esplorato II2b e esplorato II2c]
 
 - Indizio: Ogni pista porta a Sergio, ma ognuna da un'altra parte.
+
+### Porta sul retro
+
+Sei entrato di notte al Serraglio senza la chiave.
+
+- Indizio: Al Serraglio c'è sempre un'altra porta.
 
 ### Rivincita
 

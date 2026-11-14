@@ -2,7 +2,7 @@
 // Esplora gli stati raggiungibili di un giro (nodo, segni, nodi visti, partite vinte e perse, sblocchi presi) con le condizioni valutate
 // davvero. Gli atomi dell'account (esplorato, achievement, finale, giri) dipendono da altri giri: valgono «forse», cioè tutte e due le
 // possibilità (decisione T6 della regia), con un tetto di 200 000 stati.
-import type {Carriera, Condizione, Destinazione, Esito, Passo} from './formato.ts';
+import {usciteDi, type Carriera, type Condizione, type Destinazione, type Esito, type Passo} from './formato.ts';
 import {idFinale} from './motore.ts';
 
 export const TETTO_STATI = 200_000;
@@ -51,7 +51,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
     for (const p of n.passi) {
       if ('se' in p) leggi(p.se);
       if (p.tipo === 'scelta') p.opzioni.forEach(o => leggi(o.se));
-      if (p.tipo === 'partita') for (const r of [p.giocatore, ...(Array.isArray(p.avversari) ? p.avversari : [])]) if ('segno' in r) letti.segni.add(r.segno);
+      if (p.tipo === 'partita') for (const r of [p.giocatore, ...(Array.isArray(p.avversari) ? p.avversari : [])]) if ('segno' in r && r.segno) letti.segni.add(r.segno);
     }
   }
   for (const a of c.achievement) { leggi(a.quando); a.indizi.forEach(x => leggi(x.se)); }
@@ -119,7 +119,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
     const segnoAssegnato = (p: Passo, l: Locale) => {
       if (p.tipo !== 'partita') return;
       const rifs = [p.giocatore, ...(Array.isArray(p.avversari) ? p.avversari : [])];
-      for (const r of rifs) if ('segno' in r && !(r.segno in l.segni)) errori.add(`partita al nodo ${n.id}: il segno ${r.segno} non è assegnato su qualche percorso`);
+      for (const r of rifs) if ('segno' in r && r.segno && !('sceltaFra' in r) && !(r.segno in l.segni)) errori.add(`partita al nodo ${n.id}: il segno ${r.segno} non è assegnato su qualche percorso`);
     };
 
     // Cammina i passi del nodo; le partite e le scelte senza destinazione biforcano.
@@ -155,6 +155,9 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
           }
           case 'scelta': {
             const vis = p.opzioni.map(o => val(o.se, l));
+            // Mockup della principale 0.3: una scelta «se c'è» senza opzioni visibili si salta.
+            if (p.facoltativa && !vis.includes('v')) cammina(i + 1, copia(l), daScelta);
+            if (p.facoltativa && vis.every(x => x === 'f')) return;
             if (vis.every(x => x === 'f')) { errori.add(`scelta senza opzioni visibili al nodo ${n.id} (riga ${p.riga}) su qualche percorso`); return; }
             p.opzioni.forEach((o, j) => {
               if (vis[j] === 'f') return;
@@ -168,7 +171,16 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
           default: break;
         }
       }
-      if ('verso' in n.uscita) successore(n.uscita.verso, l);
+      // Uscite condizionate (mockup della principale 0.3): la prima che vale; con una condizione «forse», anche le successive.
+      const uscite = usciteDi(n);
+      let presa = false;
+      for (const u of uscite) {
+        const v = u.se ? val(u.se, l) : 'v';
+        if (v === 'f') continue;
+        successore(u.verso, v === 'v' ? l : copia(l));
+        if (v === 'v') { presa = true; break; }
+      }
+      if (uscite.length && !presa) errori.add(`nessuna uscita del nodo ${n.id} vale su qualche percorso`);
     };
     cammina(0, l0, ing.daScelta);
   }

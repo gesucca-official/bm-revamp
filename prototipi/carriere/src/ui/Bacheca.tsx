@@ -8,7 +8,7 @@ import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} f
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
-import {chiusiOra, filiDaRiprendere, filoPenzolante, strappi, tempiFilo, TEMPI_FILO, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
+import {chiusiOra, filiDaRiprendere, soloLePiuCorte, filoPenzolante, strappi, tempiFilo, TEMPI_FILO, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
@@ -137,11 +137,14 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   const faseRif = useRef({fase, inizio: 0});
   if (faseRif.current.fase !== fase) faseRif.current = {fase, inizio: orologio.current};
   const trascinata = useRef<Pt | null>(null);
-  const fili = useMemo(() => comp.fili.filter(f => d.pos[f.da] && d.pos[f.a]).map(f => {
-    const a = d.pos[f.da], b = d.pos[f.a];
-    const seme = `${f.da}>${f.a}`;
-    return {seme, tipo: f.tipo, a, cat: catenaria(a, b, f.tipo), amp: ampiezzaFilo(f.tipo, Math.hypot(b.x - a.x, b.y - a.y)), ritmo: ritmo(seme), coda: ritmo(seme + ':coda')};
-  }), [comp.fili, d.pos]);
+  const fili = useMemo(() => {
+    const tutti = comp.fili.filter(f => d.pos[f.da] && d.pos[f.a]).map(f => {
+      const a = d.pos[f.da], b = d.pos[f.a];
+      const seme = `${f.da}>${f.a}`, l = Math.hypot(b.x - a.x, b.y - a.y);
+      return {seme, tipo: f.tipo, a, l, cat: catenaria(a, b, f.tipo), amp: ampiezzaFilo(f.tipo, l), ritmo: ritmo(seme), coda: ritmo(seme + ':coda')};
+    });
+    return soloLePiuCorte(tutti);
+  }, [comp.fili, d.pos]);
   // Fase K: le cordicelle legate alla puntina del nodo d'arrivo, che si toglie per far posto alla «sei qui»: cadono, penzolano e la «sei
   // qui» le riprende quando arriva (movimentiBacheca.ts, filoPenzolante). Finché il viaggio non è finito le disegna il movimento.
   const riprese = useMemo(() => !viaggioFatto && apertura.da && ultimo && d.pos[ultimo]

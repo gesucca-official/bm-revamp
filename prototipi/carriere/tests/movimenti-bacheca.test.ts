@@ -1,7 +1,7 @@
 // CA-0a, Fase G: la bacheca si muove. Cordicelle che oscillano, puntina che viaggia, post-it che si stacca, lettera che cade e torna.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {chiusiOra, strappi, TEMPO_STRAPPI} from '../src/movimentiBacheca.ts';
+import {chiusiOra, OSCILLANTI, soloLePiuCorte, strappi, TEMPO_STRAPPI} from '../src/movimentiBacheca.ts';
 import {angoloPostit, DURATA_ANGOLO, durataMosca, mosca, pianoMosca, prossimoAngolo, toccataMosca, VOLO} from '../src/movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloCoda, cadutaLettera, filoMosso, letteraAllentata, oscillazione, premioLettere, PREMIO_LETTERE,
   scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio} from '../src/movimentiBacheca.ts';
@@ -207,4 +207,18 @@ test('gli strappi (Fase J): due o tre, mai in alto dove c\'è la puntina né sop
   assert.ok(frastagliati >= 55, `un orlo frastagliato, non un taglio dritto (${frastagliati} su 60)`);
   assert.deepEqual(strappi('n1', w, h), strappi('n1', w, h), 'sempre gli stessi per lo stesso nodo');
   assert.notDeepEqual(strappi('n1', w, h), strappi('n2', w, h), 'diversi da nodo a nodo');
+});
+
+test('su una bacheca grande oscillano solo le cordicelle più corte; su una piccola tutte (mockup della principale 0.3)', () => {
+  const fili = (n: number) => Array.from({length: n}, (_, i) => ({l: 100 + ((i * 37) % 23) * 30, amp: i % 5 === 0 ? 0 : 3}));
+  const piccola = fili(10), prima = piccola.map(f => f.amp);
+  assert.deepEqual(soloLePiuCorte(piccola).map(f => f.amp), prima, 'la prova e il tutorial non cambiano');
+  const prima33 = fili(33), grande = soloLePiuCorte(fili(33));
+  const mosse = grande.filter(f => f.amp > 0);
+  assert.equal(mosse.length, OSCILLANTI);
+  assert.ok(OSCILLANTI >= 10 && OSCILLANTI <= 20);
+  // Fermate dal tetto: quelle che oscillavano e ora no. Sono tutte lunghe almeno quanto la più lunga che oscilla ancora.
+  const fermate = grande.filter((f, i) => f.amp === 0 && prima33[i].amp > 0);
+  assert.equal(fermate.length, prima33.filter(f => f.amp > 0).length - OSCILLANTI);
+  assert.ok(fermate.every(f => f.l >= Math.max(...mosse.map(m => m.l))), 'ferme le più lunghe');
 });

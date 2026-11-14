@@ -83,7 +83,11 @@ export function valida(dati: unknown, cast: Cast): string[] {
   const rif = (v: unknown, dove: string) => {
     if (!ogg(v, dove)) return;
     if ('personaggio' in v) { campi(v, dove, ['personaggio'], []); personaggio(v.personaggio, `${dove}.personaggio`); }
-    else { campi(v, dove, ['segno'], []); testo(v.segno, `${dove}.segno`, ID); }
+    else if ('sceltaFra' in v) {
+      campi(v, dove, ['sceltaFra'], ['segno']);
+      if (lista(v.sceltaFra, `${dove}.sceltaFra`)) (v.sceltaFra as unknown[]).forEach((x, k) => personaggio(x, `${dove}.sceltaFra[${k}]`));
+      if ('segno' in v) testo(v.segno, `${dove}.segno`, ID);
+    } else { campi(v, dove, ['segno'], []); testo(v.segno, `${dove}.segno`, ID); }
   };
   const battuta = (v: unknown, dove: string) => {
     if (!ogg(v, dove)) return;
@@ -153,13 +157,14 @@ export function valida(dati: unknown, cast: Cast): string[] {
         return;
       }
       case 'scelta': {
-        campi(v, dove, [...comuni, 'modo', 'opzioni'], ['domanda']);
+        campi(v, dove, [...comuni, 'modo', 'opzioni'], ['domanda', 'facoltativa']);
         uno(v.modo, `${dove}.modo`, ['muta', 'messaggio']);
+        if ('facoltativa' in v) vero(v.facoltativa, `${dove}.facoltativa`);
         if ('domanda' in v) testo(v.domanda, `${dove}.domanda`);
         if (!lista(v.opzioni, `${dove}.opzioni`)) return;
         if (v.opzioni.length < 2) err(`${dove}.opzioni`, 'almeno due opzioni');
         const conVerso = v.opzioni.filter(o => (o as Oggetto)?.verso).length;
-        if (conVerso && conVerso !== v.opzioni.length) err(`${dove}.opzioni`, 'o tutte con destinazione o nessuna');
+        if (conVerso && conVerso !== v.opzioni.length && !v.facoltativa) err(`${dove}.opzioni`, 'o tutte con destinazione o nessuna');
         v.opzioni.forEach((o, i) => {
           const d = `${dove}.opzioni[${i}]`;
           if (!ogg(o, d)) return;
@@ -193,6 +198,14 @@ export function valida(dati: unknown, cast: Cast): string[] {
         campi(u, `${dove}.uscita`, ['scelta'], []); vero(u.scelta, `${dove}.uscita.scelta`);
         const ultima = [...passi].reverse().find(p => (p as Oggetto)?.tipo !== 'regia') as Oggetto | undefined;
         if (ultima?.tipo !== 'scelta' || !(ultima.opzioni as Oggetto[])?.every(o => o.verso)) err(`${dove}.uscita`, 'l\'ultimo passo non è una scelta con destinazioni');
+      } else if ('condizionate' in u) {
+        // Mockup della principale 0.3: uscite condizionate, la prima che vale.
+        campi(u, `${dove}.uscita`, ['condizionate'], []);
+        if (lista(u.condizionate, `${dove}.uscita.condizionate`)) (u.condizionate as unknown[]).forEach((x, k) => {
+          const d = `${dove}.uscita.condizionate[${k}]`;
+          if (!ogg(x, d)) return;
+          campi(x, d, ['verso'], ['se']); destinazione(x.verso, `${d}.verso`); if ('se' in x) condizione(x.se, `${d}.se`);
+        });
       } else { campi(u, `${dove}.uscita`, ['verso'], []); destinazione(u.verso, `${dove}.uscita.verso`); }
     }
   });

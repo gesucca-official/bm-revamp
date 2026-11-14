@@ -1,7 +1,8 @@
 // CA-0a: stato del giro e dell'account, condizioni e avanzamento dentro i nodi. Funzioni pure, senza React né browser:
 // le stesse le usano l'interfaccia e le prove. Le regole sono quelle della proposta (prototipo-fase-a.md, «Il formato dei dati»),
 // con le risposte del proprietario P2 (battute di ritento a turno), P3 (la sconfitta che apre un ramo porta lì da sola) e P7 (finali).
-import type {Achievement, Battuta, Carriera, Condizione, Destinazione, Esito, Nodo, Opzione, Partita, Passo, Rif, Scelta} from './formato.ts';
+import {usciteDi, type Achievement, type Battuta, type Carriera, type Condizione, type Destinazione, type Esito, type Nodo, type Opzione, type Partita,
+  type Passo, type Rif, type Scelta} from './formato.ts';
 import {slug} from './converti.ts';
 
 export type Scena = {sfondo?: string; variante?: string; sprite: Record<string, string>};  // sprite: id -> posa ('' = la prima)
@@ -23,6 +24,7 @@ export type Giro = {
   finale: string | null;        // id del finale raggiunto (P7)
   scena: Scena;
   nuovi: {sblocchi: string[]; achievement: string[]};  // presi in questo giro, per il riepilogo
+  scelto?: string | null;      // mockup della principale 0.3: chi gioca la partita «a scelta» del nodo, scelto prima della partita
 };
 
 /** Ciò che resta sull'account fra un giro e l'altro (D16), compresi i finali visti (P7). */
@@ -42,7 +44,8 @@ export type Vista =
   | {tipo: 'narrazione'; testo: string}
   | {tipo: 'messaggio'; da?: string; testo: string}
   | {tipo: 'scelta'; scelta: Scelta; opzioni: {indice: number; opzione: Opzione}[]}
-  | {tipo: 'partita'; partita: Partita; giocatore: string; avversari: string[]; sblocchi: string[]}
+  // giocatore null: la partita è «a scelta» e il giocatore deve ancora scegliere fra aScelta (mockup della principale 0.3).
+  | {tipo: 'partita'; partita: Partita; giocatore: string | null; aScelta?: string[]; avversari: string[]; sblocchi: string[]}
   | {tipo: 'sconfitta'; partita: Partita}
   | {tipo: 'ritento'; battuta: Battuta};
 
@@ -75,7 +78,7 @@ export function finali(c: Carriera): Finale[] {
       if (p.tipo === 'partita') vedi(p.sconfitta);
       if (p.tipo === 'scelta') p.opzioni.forEach(o => vedi(o.verso));
     }
-    if ('verso' in n.uscita) vedi(n.uscita.verso);
+    for (const u of usciteDi(n)) vedi(u.verso);
   }
   return [...out.values()];
 }
@@ -101,7 +104,10 @@ export function valuta(cond: Condizione | undefined, s: Stato): boolean {
   return s.account.giri >= cond.giri;
 }
 
-export const risolvi = (r: Rif, s: Stato): string => 'personaggio' in r ? r.personaggio : s.giro.segni[r.segno] ?? '?';
+export const risolvi = (r: Rif, s: Stato): string => 'personaggio' in r ? r.personaggio
+  : 'sceltaFra' in r ? (r.segno && s.giro.segni[r.segno]) || s.giro.scelto || '?' : s.giro.segni[r.segno] ?? '?';
+/** Mockup della principale 0.3: i personaggi fra cui scegliere chi gioca, se la partita è «a scelta» e il segno davanti non è assegnato. */
+const daScegliere = (r: Rif, s: Stato): string[] | null => 'sceltaFra' in r && !(r.segno && s.giro.segni[r.segno]) ? r.sceltaFra : null;
 
 export function avversari(p: Partita, s: Stato): string[] {
   if (Array.isArray(p.avversari)) return p.avversari.map(r => risolvi(r, s));
@@ -125,7 +131,9 @@ export function vista(c: Carriera, s: Stato): Vista {
   if (p.tipo === 'partita') {
     if (g.sconfitta) return {tipo: 'sconfitta', partita: p};
     if (g.ritento !== null && p.ritento?.[g.ritento]) return {tipo: 'ritento', battuta: p.ritento[g.ritento]};
-    return {tipo: 'partita', partita: p, giocatore: risolvi(p.giocatore, s), avversari: avversari(p, s), sblocchi: sblocchiDopo(c, g.nodo, g.passo, s)};
+    const fra = daScegliere(p.giocatore, s);
+    return {tipo: 'partita', partita: p, giocatore: fra && !(g.scelto && fra.includes(g.scelto)) ? null : risolvi(p.giocatore, s), ...(fra ? {aScelta: fra} : {}),
+      avversari: avversari(p, s), sblocchi: sblocchiDopo(c, g.nodo, g.passo, s)};
   }
   if (p.tipo === 'battuta') return {tipo: 'battuta', battuta: p};
   if (p.tipo === 'narrazione') return {tipo: 'narrazione', testo: p.testo};
@@ -202,12 +210,18 @@ function assesta(c: Carriera, s: Stato, eventi: Evento[], modo: 'normale' | 'sal
     const n = nodo(c, g.nodo);
     const p = n.passi[g.passo];
     if (!p) {
-      if ('verso' in n.uscita) esci(s, n.uscita.verso);
+      // Mockup della principale 0.3: delle uscite condizionate vale la prima la cui condizione vale.
+      const u = usciteDi(n).find(x => valuta(x.se, s));
+      if (u) esci(s, u.verso);
       else throw new Error(`il nodo ${n.id} è finito senza uscita`);
       return;
     }
     if (MOSTRATI.has(p.tipo)) { if (modo === 'normale' && visibile(p, s)) return; g.passo++; continue; }
-    if (p.tipo === 'scelta') return;
+    if (p.tipo === 'scelta') {
+      // Una scelta «se c'è» senza opzioni visibili si salta.
+      if (p.facoltativa && !p.opzioni.some(o => valuta(o.se, s))) { g.passo++; continue; }
+      return;
+    }
     if (p.tipo === 'partita') { if (modo === 'scelta') { g.passo++; continue; } return; }
     applica(s, p, eventi, modo !== 'normale');
     g.passo++;
@@ -279,9 +293,21 @@ export function scegli(c: Carriera, s0: Stato, indice: number): Risultato {
   return fatto(c, s, eventi);
 }
 
+/** Mockup della principale 0.3: prima di una partita «a scelta», chi gioca per te. */
+export function scegliGiocatore(c: Carriera, s0: Stato, chi: string): Risultato {
+  const v = vista(c, s0);
+  if (v.tipo !== 'partita' || !v.aScelta?.includes(chi)) throw new Error(`${chi} non si può scegliere qui`);
+  const s = copia(s0);
+  s.giro.scelto = chi;
+  return {stato: s, eventi: []};
+}
+
 export function vinci(c: Carriera, s0: Stato): Risultato {
-  if (vista(c, s0).tipo !== 'partita') throw new Error('nessuna partita da vincere');
+  const v0 = vista(c, s0);
+  if (v0.tipo !== 'partita') throw new Error('nessuna partita da vincere');
+  if (v0.giocatore === null) throw new Error('prima si sceglie chi gioca');
   const s = copia(s0); const eventi: Evento[] = [];
+  s.giro.scelto = null;
   aggiungi(s.giro.vinti, s.giro.nodo!);
   s.giro.passo++;
   assesta(c, s, eventi, 'normale');
@@ -292,8 +318,10 @@ export function vinci(c: Carriera, s0: Stato): Risultato {
 export function perdi(c: Carriera, s0: Stato): Risultato {
   const v = vista(c, s0);
   if (v.tipo !== 'partita') throw new Error('nessuna partita da perdere');
+  if (v.giocatore === null) throw new Error('prima si sceglie chi gioca');
   const s = copia(s0); const eventi: Evento[] = [];
   const g = s.giro;
+  g.scelto = null;
   aggiungi(g.persi, g.nodo!);
   g.tentativi[g.nodo!] = (g.tentativi[g.nodo!] ?? 0) + 1;
   if (v.partita.sconfitta) { esci(s, v.partita.sconfitta); eventi.push({tipo: 'ramo'}); }

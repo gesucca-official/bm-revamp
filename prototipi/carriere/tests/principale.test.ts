@@ -1,13 +1,14 @@
-// Mockup del grafo della campagna principale (14 novembre 2026): la storia storie/principale.md, le estensioni minime del formato che le
-// servono, e i numeri per giro che il controllo del grafo non misura.
+// Mockup del grafo della campagna principale (14 novembre 2026, aggiornato alla scaletta 0.3): la storia storie/principale.md, le
+// estensioni minime del formato che le servono, e i numeri per giro che il controllo del grafo non misura.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {converti} from '../src/converti.ts';
 import {controllaGrafo} from '../src/grafo.ts';
 import {statiMappa} from '../src/mappa.ts';
-import {entra, nuovoAccount, nuovoGiro, salta, scegli, vinci, vista, type Stato} from '../src/motore.ts';
+import {entra, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliGiocatore, vinci, vista, type Stato} from '../src/motore.ts';
 import {numeri, percorsi} from '../src/percorsi.ts';
+import {ritenta as ritentaS} from '../src/motore.ts';
 import {carriera, cast} from './aiuto.ts';
 import type {Carriera} from '../src/formato.ts';
 
@@ -15,17 +16,23 @@ const md = fs.readFileSync(new URL('../storie/principale.md', import.meta.url), 
 const principale = () => carriera(md);
 const errori = (testo: string) => converti(testo, cast, 'x').problemi.filter(p => p.livello === 'errore').map(p => p.messaggio);
 
-test('la principale si converte senza errori né avvisi, con tutti i nodi della scaletta 0.2', () => {
+test('la principale si converte senza errori né avvisi, con tutti i nodi della scaletta 0.3', () => {
   const r = converti(md, cast, 'principale');
   assert.deepEqual(r.problemi, []);
   const c = r.carriera;
   assert.equal(c.id, 'principale');
-  assert.deepEqual(c.nodi.map(n => n.etichetta), ['I1', 'I2a', 'I3a', 'I2b', 'I3b', 'I4', 'II1', 'II2a', 'II2b', 'II2c', 'II3', 'III1', 'III2a',
-    'III3c', 'III3a', 'III2b', 'III3b', 'S1', 'III4', 'III5', 'S2']);
-  assert.ok(c.nodi.every(n => n.passi.some(p => p.tipo === 'partita')), 'ogni nodo ha la sua partita');
+  assert.deepEqual(c.nodi.map(n => n.etichetta), ['I1', 'I1s', 'I2a', 'I3a', 'I2b', 'I3b', 'I4', 'II1', 'II2a', 'II2s', 'II2b', 'II2c', 'II3', 'III1',
+    'III1s', 'III2a', 'III3c', 'III3a', 'III2b', 'III3b', 'S1', 'III4', 'III5', 'S2']);
+  // Le tre scene della 0.3 che si aprono perdendo non hanno partita; tutti gli altri nodi sì.
+  assert.deepEqual(c.nodi.filter(n => !n.passi.some(p => p.tipo === 'partita')).map(n => n.etichetta), ['I1s', 'II2s', 'III1s']);
+  const sconfitte = Object.fromEntries(c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && p.sconfitta ? [[n.etichetta, 'nodo' in p.sconfitta ? p.sconfitta.nodo : 'fine']] : [])));
+  assert.deepEqual(sconfitte, {I1: 'i1s', II2a: 'ii2s', III1: 'iii1s', III2a: 'iii3c', III5: 'fine'}, 'le sconfitte che aprono un ramo');
   assert.deepEqual(c.nodi.filter(n => n.segreto).map(n => n.etichetta), ['S1', 'S2']);
   assert.deepEqual(c.obbligatori, ['starter-celestina', 'starter-piera', 'starter-beppe', 'pvp']);
-  assert.equal(c.achievement.length, 8);
+  assert.equal(c.achievement.length, 9);
+  // «A scelta»: il selettore del personaggio in II1, in III1 (quando non manca nessuno) e in III3a.
+  const aScelta = c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && 'sceltaFra' in p.giocatore ? [n.etichetta] : []));
+  assert.deepEqual(aScelta, ['II1', 'III1', 'III3a']);
   // Le FFA della scaletta: I3a e II2c a tre, I3b e I4 a quattro, III2a e III4 a cinque.
   const ffa = Object.fromEntries(c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && p.modo === 'ffa' && Array.isArray(p.avversari) ? [[n.etichetta, p.avversari.length + 1]] : [])));
   assert.deepEqual(ffa, {I3a: 3, I3b: 4, I4: 4, II2c: 3, II3: 3, III2a: 5, III3c: 3, III3a: 3, III3b: 3, III4: 5});
@@ -35,7 +42,7 @@ test('il controllo del grafo: tutto raggiungibile, starter e PvP su ogni percors
   const r = controllaGrafo(principale());
   assert.deepEqual(r.errori, []);
   assert.deepEqual(r.avvisi, []);
-  assert.equal(r.raggiunti.length, 21);
+  assert.equal(r.raggiunti.length, 24);
   assert.deepEqual(Object.keys(r.finali).sort(), ['dimmi-di-si-2', 'il-serraglio-e-di-tutti', 'il-serraglio-resta']);
   assert.deepEqual(r.segreti, {s1: ['iii1'], s2: ['iii5']});
   assert.ok(r.stati < 5000, `stati: ${r.stati}`);
@@ -60,21 +67,29 @@ test('i fili: la chiave apre la notte, il bilancio apre Grappino, la sconfitta a
   const ps = percorsi(c);
   const conNodo = (id: string) => ps.filter(p => p.nodi.includes(id));
   // III3b solo con la chiave: da I2a (via di Mara) o da II2b (pista di Beppe).
-  for (const p of conNodo('iii3b')) assert.ok(p.nodi.includes('i2a') || p.nodi.includes('ii2b'), p.nodi.join('>'));
+  // III3b con la chiave dopo il pedinamento (da I2a o da II2b), o dalla porta sul retro dopo lo sgombero (III1s), anche senza chiave.
+  for (const p of conNodo('iii3b')) assert.ok(p.nodi.includes('iii1s') || (p.nodi.includes('iii2b') && (p.nodi.includes('i2a') || p.nodi.includes('ii2b'))), p.nodi.join('>'));
+  assert.ok(ps.some(p => p.nodi.includes('iii1s') && p.nodi.includes('i2b') && !p.nodi.includes('ii2b')), 'lo sgombero porta alla notte anche senza chiave');
   assert.ok(ps.some(p => p.nodi.includes('iii2b') && !p.nodi.includes('iii3b')), 'senza chiave dal pedinamento si va alla firma');
   // S1 solo con il bilancio (pista di Celestina).
   for (const p of conNodo('s1')) assert.ok(p.nodi.includes('ii2c'));
   // III3c solo dopo III2a, e porta a III3a.
   for (const p of conNodo('iii3c')) { const i = p.nodi.indexOf('iii3c'); assert.deepEqual([p.nodi[i - 1], p.nodi[i + 1]], ['iii2a', 'iii3a']); }
-  // I finali: F1 dopo il pedinamento o il segreto, F2 dopo il torneo, F3 perdendo III5.
+  // I finali: F1 dopo il pedinamento, lo sgombero o il segreto, F2 dopo il torneo, F3 perdendo III5.
   for (const p of ps) {
-    if (p.finale === 'il-serraglio-resta') assert.ok(p.nodi.includes('iii2b') || p.nodi.includes('s1'));
+    if (p.finale === 'il-serraglio-resta') assert.ok(p.nodi.includes('iii2b') || p.nodi.includes('iii1s') || p.nodi.includes('s1'));
     if (p.finale === 'il-serraglio-e-di-tutti') assert.ok(p.nodi.includes('iii2a'));
   }
+  // Le scene delle sconfitte: I1s torna alla scelta di I1, II2s va a II3, III1s a III3b.
+  for (const p of conNodo('i1s')) assert.equal(p.nodi[p.nodi.indexOf('i1s') + 1], 'i1');
+  for (const p of conNodo('ii2s')) assert.equal(p.nodi[p.nodi.indexOf('ii2s') + 1], 'ii3');
+  for (const p of conNodo('iii1s')) assert.equal(p.nodi[p.nodi.indexOf('iii1s') + 1], 'iii3b');
+  assert.ok(ps.some(p => ['i1s', 'ii2s', 'iii1s'].every(x => p.nodi.includes(x))), 'un giro con tutte e tre le sconfitte');
 });
 
-/** Gioca la principale seguendo le etichette delle opzioni che cominciano con le parole date, vincendo ogni partita. */
-function gioca(c: Carriera, s: Stato, strada: string[]): Stato {
+/** Gioca la principale seguendo le etichette delle opzioni che cominciano con le parole date, vincendo ogni partita salvo quelle in `perdiIn`. */
+function gioca(c: Carriera, s: Stato, strada: string[], perdiIn: string[] = []): Stato {
+  const daPerdere = [...perdiIn];
   for (let passi = 0; passi < 400; passi++) {
     const v = vista(c, s);
     if (v.tipo === 'fine') return s;
@@ -84,23 +99,143 @@ function gioca(c: Carriera, s: Stato, strada: string[]): Stato {
       if (!d.length) return s;
       s = entra(c, s, d[0].id).stato;
     } else if (v.tipo === 'scelta') {
-      const o = v.opzioni.find(x => strada.some(w => x.opzione.etichetta.startsWith(w))) ?? v.opzioni[0];
+      // L'opzione che combacia con la parola più lunga della strada.
+      const punti = v.opzioni.map(x => Math.max(0, ...strada.filter(w => x.opzione.etichetta.startsWith(w)).map(w => w.length)));
+      const o = v.opzioni[punti.indexOf(Math.max(...punti))];
       s = scegli(c, s, o.indice).stato;
-    } else if (v.tipo === 'partita') s = vinci(c, s).stato;
-    else s = salta(c, s).stato;
+    } else if (v.tipo === 'partita') {
+      if (v.giocatore === null) { s = scegliGiocatore(c, s, v.aScelta![0]).stato; continue; }
+      const k = daPerdere.indexOf(s.giro.nodo!);
+      if (k >= 0) { daPerdere.splice(k, 1); s = perdi(c, s).stato; } else s = vinci(c, s).stato;
+    } else s = salta(c, s).stato;
   }
   throw new Error('giro senza fine');
 }
 
-test('gli starter garantiti: chi non ha preso le tue parti lo fa in II3, l\'altro in III1; chi gioca II3 e III1', () => {
+test('gli starter garantiti: chi non ha preso le tue parti lo fa in II3, l\'altro in III1, anche perdendo II2a o III1', () => {
   const c = principale();
-  for (const [pista, ii3] of [['con Piera', 'beppe'], ['con Beppe', 'piera'], ['con Celestina', 'piera']] as const) {
-    const s = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', pista, 'con Celestina']);
-    assert.equal(s.giro.segni.ii3, ii3, pista);
-    for (const x of ['starter-celestina', 'starter-piera', 'starter-beppe', 'pvp']) assert.ok(s.account.sblocchi.includes(x), `${pista}: ${x}`);
-    if (pista === 'con Celestina') assert.equal(s.giro.segni.iii1, 'beppe', 'Beppe, che manca ancora, in III1');
+  const casi: [string, string[], string, string | undefined][] = [
+    ['con Piera', [], 'beppe', undefined], ['con Beppe', [], 'piera', undefined], ['con Celestina', [], 'piera', 'beppe'],
+    // Persa la frase di Piera (II2s), Piera non ti ha dato le sue carte: lo fa in II3, e Beppe in III1.
+    ['con Piera', ['ii2a'], 'piera', 'beppe'],
+    // Perso III1 (lo sgombero), Beppe ti ha già dato le sue carte prima della partita.
+    ['con Celestina', ['iii1'], 'piera', 'beppe'],
+  ];
+  for (const [pista, perdiIn, ii3, iii1] of casi) {
+    const s = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', pista, 'con Beppe, a comprarlo'], perdiIn);
+    assert.equal(s.giro.segni.ii3, ii3, `${pista} ${perdiIn}`);
+    assert.equal(s.giro.segni.iii1, iii1, `${pista} ${perdiIn}: chi gioca III1`);
+    for (const x of ['starter-celestina', 'starter-piera', 'starter-beppe', 'pvp']) assert.ok(s.account.sblocchi.includes(x), `${pista} ${perdiIn}: ${x}`);
   }
 });
+
+test('le tre sconfitte della 0.3: il pavimento, Piera che non parla, lo sgombero; e chi gioca dopo', () => {
+  const c = principale();
+  const s = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Beppe'], ['i1', 'ii2a', 'iii1']);
+  for (const x of ['i1s', 'ii2s', 'iii1s', 'iii3b']) assert.ok(s.giro.visti.includes(x), x);
+  assert.equal(s.giro.segni.celestina, 'si', 'darle retta sul pavimento');
+  assert.ok(!('frase' in s.giro.segni), 'la frase di Piera non va avanti');
+  assert.equal(s.giro.segni.alleato, 'celestina', 'dopo lo sgombero ti accompagna Celestina');
+  assert.equal(s.giro.finale, 'il-serraglio-resta');
+  for (const a of ['lo-diceva-celestina', 'porta-sul-retro']) assert.ok(s.account.achievement.includes(a), a);
+  assert.ok(!s.account.achievement.includes('lasciatela-finire'));
+  // La notte al Serraglio senza aver dato retta a Celestina sul pavimento: «Lo diceva Celestina» no, «Porta sul retro» sì.
+  const senza = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Beppe'], ['iii1']);
+  assert.ok(senza.giro.visti.includes('iii3b') && !senza.giro.visti.includes('i1s'));
+  assert.ok(!senza.account.achievement.includes('lo-diceva-celestina') && senza.account.achievement.includes('porta-sul-retro'));
+});
+
+test('uscite condizionate: III5 vinto finisce nel finale della strada senza pulsanti; dopo F1 c\'è l\'offerta della rivincita', () => {
+  const c = principale();
+  const fino = (s: Stato) => { for (let i = 0; i < 300; i++) { const v = vista(c, s); if (v.tipo === 'partita' && s.giro.nodo === 'iii5') return s; s = gioca1(c, s); } throw new Error('III5 mai'); };
+  const gioca1 = (c2: Carriera, s: Stato): Stato => {
+    const v = vista(c2, s);
+    if (v.tipo === 'mappa') return entra(c2, s, c2.nodi.find(n => statiMappa(c2, s)[n.id].stato === 'disponibile')!.id).stato;
+    if (v.tipo === 'scelta') return scegli(c2, s, (v.opzioni.find(o => /^con (Beppe, a comprarlo|Mara)/.test(o.opzione.etichetta)) ?? v.opzioni[0]).indice).stato;
+    if (v.tipo === 'partita') return v.giocatore === null ? scegliGiocatore(c2, s, v.aScelta![0]).stato : vinci(c2, s).stato;
+    return salta(c2, s).stato;
+  };
+  const a = fino(nuovoGiro(c, nuovoAccount()));
+  const dopo = vinci(c, a).stato;
+  assert.equal(vista(c, dopo).tipo, 'fine', 'subito il finale, senza scelte');
+  assert.equal(dopo.giro.finale, 'il-serraglio-e-di-tutti', 'dopo il torneo: F2');
+  // Dopo F1, in un giro nuovo: prima delle uscite l'offerta della rivincita, che si può rifiutare.
+  const b = fino(nuovoGiro(c, {...nuovoAccount(), finali: ['il-serraglio-resta'], giri: 1}));
+  const offerta = vista(c, vinci(c, b).stato);
+  assert.ok(offerta.tipo === 'scelta' && offerta.opzioni.length === 2);
+  const rifiuta = scegli(c, vinci(c, b).stato, 1).stato;
+  assert.equal(rifiuta.giro.finale, 'il-serraglio-e-di-tutti', 'rifiutata: il finale della strada');
+});
+
+test('estensione: uscite condizionate, la prima che vale; una scelta «se c\'è» si salta senza opzioni; una partita «a scelta»', () => {
+  const testo = `# T
+
+## A — Uno
+
+[Sfondo: S1]
+
+→ Partita 1: a scelta fra Mara, Spazienzio e Piera (giocatore) contro Celestina
+
+→ Scelta muta, se c'è: ancora?
+
+- con Mara, ancora [Se finale Due] → A
+- con Spazienzio, basta [Se finale Due]
+
+→ Fine: completata, Uno [Se perso A]
+
+→ Fine: completata, Due
+`;
+  const r = converti(testo, cast, 't');
+  assert.deepEqual(r.problemi.filter(p => p.livello === 'errore'), []);
+  const a = r.carriera.nodi[0];
+  assert.ok('condizionate' in a.uscita && a.uscita.condizionate.length === 2);
+  const c = carriera(testo);
+  let s = entra(c, nuovoGiro(c, nuovoAccount()), 'a').stato;
+  let v = vista(c, s);
+  assert.ok(v.tipo === 'partita' && v.giocatore === null && v.aScelta?.join() === 'mara,spazienzio,piera', 'si sceglie chi gioca');
+  assert.throws(() => vinci(c, s), /prima si sceglie/);
+  assert.throws(() => scegliGiocatore(c, s, 'sergio'));
+  s = scegliGiocatore(c, s, 'piera').stato;
+  v = vista(c, s);
+  assert.ok(v.tipo === 'partita' && v.giocatore === 'piera');
+  const vinta = vinci(c, s).stato;
+  assert.equal(vinta.giro.finale, 'due', 'la scelta «se c\'è» senza opzioni si salta; vinta: la seconda uscita');
+  const ritentata = perdiRitenta(c, s);
+  const vr = vista(c, ritentata);
+  assert.ok(vr.tipo === 'partita' && vr.giocatore === null, 'dopo una sconfitta si sceglie di nuovo chi gioca');
+  const persa = vinci(c, scegliGiocatore(c, ritentata, 'mara').stato).stato;
+  assert.equal(persa.giro.finale, 'uno', 'persa una volta: la prima uscita');
+  // Con il finale «Due» già visto, la scelta c'è: una opzione torna in A, l'altra prosegue fino alle uscite.
+  let s2 = entra(c, nuovoGiro(c, {...nuovoAccount(), finali: ['due']}), 'a').stato;
+  s2 = vinci(c, scegliGiocatore(c, s2, 'mara').stato).stato;
+  const of = vista(c, s2);
+  assert.ok(of.tipo === 'scelta' && of.opzioni.length === 2);
+  assert.equal(scegli(c, s2, 1).stato.giro.finale, 'due');
+  // Il controllo del grafo segue le uscite condizionate e la scelta facoltativa, anche quando nessuna opzione è visibile su un percorso.
+  assert.deepEqual(controllaGrafo(c).errori, []);
+  const senzaOpzioni = carriera(testo.replaceAll('[Se finale Due]', '[Se perso A]'));
+  const rs = controllaGrafo(senzaOpzioni);
+  assert.deepEqual(rs.errori, [], 'vinta al primo colpo nessuna opzione è visibile: la scelta si salta');
+  assert.deepEqual(Object.keys(rs.finali).sort(), ['due', 'uno'], 'e dopo la scelta saltata si arriva alle uscite');
+  // Con il segno davanti già assegnato non si sceglie: gioca chi dice il segno.
+  const conSegno = carriera(testo.replace('[Sfondo: S1]', '[Sfondo: S1]\n\n[Segno: chi = spazienzio]').replace('a scelta fra Mara, Spazienzio e Piera', '{chi} o a scelta fra Mara e Piera'));
+  const vs = vista(conSegno, entra(conSegno, nuovoGiro(conSegno, nuovoAccount()), 'a').stato);
+  assert.ok(vs.tipo === 'partita' && vs.giocatore === 'spazienzio' && !vs.aScelta, 'il segno decide, niente selettore');
+  // Errori: un'uscita dopo un'uscita senza condizione; una partita «a scelta» fra uno solo; opzioni miste fuori da una scelta «se c'è».
+  assert.ok(errori(testo + '\n→ Fine: completata, Tre\n').some(m => m.includes('non si raggiunge mai')));
+  assert.ok(errori(testo.replace('a scelta fra Mara, Spazienzio e Piera', 'a scelta fra Mara')).some(m => m.includes('almeno due personaggi')));
+  assert.ok(errori(testo.replace("Scelta muta, se c'è:", 'Scelta muta:')).some(m => m.includes('opzioni con e senza destinazione')));
+  // Nessuna uscita vale su qualche percorso: il controllo lo dice.
+  const senza = carriera(testo.replace('→ Fine: completata, Due', '→ Fine: completata, Due [Se non vinto A]'), true);
+  assert.ok(controllaGrafo(senza).errori.some(m => m.startsWith('nessuna uscita del nodo a vale')));
+});
+
+/** Perde la partita e ritenta, tornando alla partita (con il giocatore da riscegliere). */
+function perdiRitenta(c: Carriera, s: Stato): Stato {
+  const dopo = perdi(c, s).stato;
+  return salta(c, ritentaDi(c, dopo)).stato;
+}
+const ritentaDi = (c: Carriera, s: Stato) => { const v = vista(c, s); if (v.tipo !== 'sconfitta') throw new Error(v.tipo); return ritentaS(c, s).stato; };
 
 test('S2 si vede sulla bacheca solo in un giro dopo F1; S1 solo quando è affrontabile', () => {
   const c = principale();

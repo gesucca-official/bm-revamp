@@ -95,6 +95,11 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .partita .per-te img { border-color: var(--verde); }
 .partita figcaption small { display: block; color: var(--verde); }
 .partita .avversari { display: flex; gap: 10px; }
+/* Mockup della principale 0.3: il selettore di chi gioca, per le partite «a scelta». */
+.partita .scegli { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; max-width: 360px; }
+.partita .scegli > small { flex-basis: 100%; color: var(--verde); }
+.partita .scegli button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px; }
+.partita .scegli button img { height: 96px; width: 72px; object-fit: cover; object-position: top; border-radius: 6px; border: 2px solid var(--bordo); }
 .partita .contro { color: var(--tenue); font-weight: 700; }
 .fine p { margin: 6px 0; }
 
