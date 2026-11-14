@@ -8,14 +8,14 @@ import {useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode} f
 import type {Carriera} from '../formato.ts';
 import {avversari, entra, finali, nodo as trovaNodo, ottieniAchievement, risolvi, type Evento, type Stato} from '../motore.ts';
 import {caso, catenaria, CARATTERE_LETTERA, componi, disponi, latoPuntina, SCALA, seiQui as dovePuntina, sporco, spilloDi, LEGENDA, ROSSO_SEI_QUI, type Pt, type Punto} from '../bacheca.ts';
-import {cerchioEvidenziatore, inizioRisalto, nastroAdesivo, TEMPI_RISALTO} from '../movimentiBacheca.ts';
+import {cerchioEvidenziatore, inizioRisalto, TEMPI_RISALTO} from '../movimentiBacheca.ts';
 import {chiusiOra, filiDaRiprendere, soloLePiuCorte, filoPenzolante, strappi, tempiFilo, TEMPI_FILO, TEMPO_STRAPPI} from '../movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloPostit, cadutaLettera, DURATA_ANGOLO, durataMosca, filoMosso, letteraAllentata, mosca, oscillazioneDi,
   PASSO_CORDICELLE, pianoMosca, premioLettere, PREMIO_LETTERE, prossimoAngolo, toccataMosca, VOLO, type PianoMosca,
   ritmo, scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio, type Allentata} from '../movimentiBacheca.ts';
 import {disposizione, type StatoNodo} from '../mappa.ts';
 import {nomeDi, nomeSblocco} from './dati.ts';
-import {CorniceDisegnata, Cordicella, Definizioni, PenzolaCordicella, percorsoChiuso, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
+import {CorniceDisegnata, Cordicella, Definizioni, PenzolaCordicella, FELTRO, FETTA_CORNICE, Freccia, immagine, percorsiCordicella, Postit, Puntina, Riga, Sporco, Stella} from './disegno.tsx';
 import {useMovimentoRidotto} from './Ritratto.tsx';
 import {caricaBacheca, salvaBacheca} from './salvataggio.ts';
 
@@ -394,21 +394,10 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
   );
   const colori = [...new Set(comp.punti.map(x => x.spillo.colore))];
   // Dove sei, a colpo d'occhio (14 novembre 2026): il cerchio a evidenziatore attorno al nodo della puntina «sei qui», tracciato quando la
-  // puntina arriva; ?nastro mostra la variante da confrontare, un pezzo di nastro adesivo. Con il movimento ridotto il risalto è già lì.
-  const variante = cerca.has('nastro') ? 'nastro' : 'cerchio';
+  // puntina arriva (scelto dal proprietario; la variante del nastro è tolta). Con il movimento ridotto il cerchio è già lì.
   const ritardo = ridotto ? 0 : inizioRisalto(apertura.da && ultimo ? inizioViaggio + TEMPI.durataViaggio : null);
   const risalto = (() => {
     if (!ultimo || !boxQui) return null;
-    const stile = {'--ritardo': `${ritardo.toFixed(2)}s`} as React.CSSProperties;
-    if (variante === 'nastro') {
-      const q = nastroAdesivo(ultimo, boxQui, p * 2.1);
-      return (
-        <g key={`risalto-${ultimo}`} className="risalto nastro" data-risalto="nastro" data-nodo={ultimo} style={stile} pointerEvents="none">
-          <path d={percorsoChiuso(q.punti, 2, 3)} fill="rgba(0,0,0,.35)" filter="url(#sfoca-poco)" />
-          <path d={percorsoChiuso(q.punti)} fill="rgba(255, 112, 168, .72)" stroke="rgba(255,255,255,.3)" strokeWidth={0.8} />
-        </g>
-      );
-    }
     const q = cerchioEvidenziatore(ultimo, boxQui, p * 0.8);
     // Due passate: il primo giro, poi il pezzo che ripassa sull'inizio; dove si sovrappongono il colore si carica, come un evidenziatore.
     const n = q.punti.length - 1, taglio = Math.round((n * Math.PI * 2) / q.giro);
@@ -498,13 +487,12 @@ export function Bacheca({c, s, azione, onRiprendi, onAchievement, onNuovoGiro, o
             <tspan rotate={posto.ruota.toFixed(2)}>{posto.c}</tspan>
           </text>
         )}
-        {variante === 'cerchio' && risalto}
+        {risalto}
         {comp.fili.filter(f => f !== filoNuovo && !riprese.some(r => r.filo === f)).map(f => <Cordicella key={`${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />)}
         {/* Fase K: le cordicelle della puntina che si toglie, mosse dal ciclo dei fotogrammi (all'inizio uguali a quelle ferme). */}
         {riprese.map(({filo: f, fisso}) => fisso
           ? <PenzolaCordicella key={`p-${f.da}>${f.a}`} a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`${f.da}>${f.a}`} />
           : <g key={`p-${f.da}>${f.a}`} data-penzola={`${f.da}>${f.a}`}><Cordicella a={d.pos[f.da]} b={d.pos[f.a]} tipo={f.tipo} rossa={f.sconfitta} seme={`coda:${f.da}>${f.a}`} /></g>)}
-        {variante === 'nastro' && risalto}
         {comp.punti.filter(n => !(inViaggio && n.id === ultimo)).map(n => <Puntina key={n.id} id={n.id} x={d.pos[n.id].x} y={d.pos[n.id].y} lato={d.lato[n.id]} s={n.spillo} />)}
         {inViaggio && ultimo && (() => {
           const s = spilloDi(ultimo, false);

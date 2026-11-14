@@ -1,7 +1,8 @@
-// Dove sei, a colpo d'occhio (14 novembre 2026): catture del risalto del nodo dove sei, sulla bacheca della principale a metà giro, a
-// 1366×768 e 390×844. Il cerchio a evidenziatore e la variante del nastro adesivo (?nastro), affiancati in una sola immagine; e una breve
-// registrazione della puntina «sei qui» che arriva e del cerchio che si traccia. Fa anche da prova di bordo: il risalto deve stare sul
-// nodo della puntina, nei due modi e con il movimento ridotto. Uso (dopo Build): node strumenti/catture-risalto.mjs. Uscita in BM_OUT, o in
+// Dove sei, a colpo d'occhio (14 novembre 2026): catture del cerchio a evidenziatore attorno al nodo dove sei, sulla bacheca della
+// principale a metà giro, a 1366×768 e 390×844, e una breve registrazione della puntina «sei qui» che arriva e del cerchio che si traccia.
+// Il proprietario ha scelto il cerchio; la variante del nastro (?nastro) è tolta, e le catture del confronto (r-*-cerchio-e-nastro.jpg)
+// restano nel repository come documentazione della scelta. Fa anche da prova di bordo: il cerchio deve stare sul nodo della puntina, anche
+// con il movimento ridotto. Uso (dopo Build): node strumenti/catture-risalto.mjs. Uscita in BM_OUT, o in
 // %TEMP%\bm-carriere-risalto.
 import {chromium} from '@playwright/test';
 import {spawn} from 'node:child_process';
@@ -78,26 +79,6 @@ async function codifica(tutti, file, misura) {
   fs.writeFileSync(path.join(out, file), Buffer.from(base64, 'base64'));
   console.log(`${file}: ${fotogrammi.length} fotogrammi in ${(fotogrammi.at(-1).t - t0).toFixed(1)} s`);
 }
-/** Due immagini affiancate in una, con un'etichetta sopra ciascuna. */
-async function affianca(a, b, file, etichette) {
-  const p = await browser.newPage();
-  const dati = await p.evaluate(async ([a, b, et]) => {
-    const im = async s => { const i = new Image(); i.src = 'data:image/png;base64,' + s; await i.decode(); return i; };
-    const [x, y] = await Promise.all([im(a), im(b)]);
-    const spazio = 16, testa = 36, c = new OffscreenCanvas(x.width * 2 + spazio, x.height + testa), g = c.getContext('2d');
-    g.fillStyle = '#1b1410'; g.fillRect(0, 0, c.width, c.height);
-    g.drawImage(x, 0, testa); g.drawImage(y, x.width + spazio, testa);
-    g.fillStyle = '#f0e6d0'; g.font = '600 20px system-ui, sans-serif';
-    g.fillText(et[0], 10, 25); g.fillText(et[1], x.width + spazio + 10, 25);
-    const blob = await c.convertToBlob({type: 'image/jpeg', quality: 0.78});
-    const u = new Uint8Array(await blob.arrayBuffer());
-    let s = ''; for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode(...u.subarray(i, i + 0x8000));
-    return btoa(s);
-  }, [a.toString('base64'), b.toString('base64'), etichette]);
-  await p.close();
-  fs.writeFileSync(path.join(out, file), Buffer.from(dati, 'base64'));
-}
-
 async function giro(nome, viewport, registrare) {
   const ctx = await browser.newContext({viewport, deviceScaleFactor: 1});
   const page = await ctx.newPage();
@@ -142,15 +123,7 @@ async function giro(nome, viewport, registrare) {
   await page.waitForTimeout(3800);
   if (registrare) await codifica(await r.ferma(), 'r-puntina-e-cerchio.webm', {width: 960, height: 540});
   const nodo = await controlla('cerchio', 'il cerchio');
-  const cerchio = await page.screenshot({type: 'png'});
-  // La variante: la stessa bacheca con ?nastro (lo stato del giro resta nel browser).
-  await page.goto(url + '?nastro');
-  await tid('apri-principale').click();
-  await tid('mappa').waitFor();
-  await page.waitForTimeout(1200);
-  atteso(await controlla('nastro', 'il nastro') === nodo, 'il nastro sullo stesso nodo del cerchio');
-  const nastro = await page.screenshot({type: 'png'});
-  await affianca(cerchio, nastro, `r-${nome}-cerchio-e-nastro.jpg`, ['Cerchio a evidenziatore', 'Variante: nastro adesivo (?nastro)']);
+  await page.screenshot({path: path.join(out, `r-${nome}-cerchio.jpg`), type: 'jpeg', quality: 72});
   // Con il movimento ridotto il risalto c'è subito, fermo.
   await page.emulateMedia({reducedMotion: 'reduce'});
   await page.goto(url);

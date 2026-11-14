@@ -121,6 +121,8 @@ nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore, o trovare qu
 diceva solo la puntina rossa «sei qui», che su una bacheca di venti nodi si perde. Nel prototipo sono state provate due versioni, per
 tutte le carriere (tutorial, prova, principale). **Scelto il cerchio** dal proprietario, 14 novembre 2026: «teniamo il cerchio». Il
 nastro, variante di confronto, si toglie.
+**Nastro tolto**, 14 novembre 2026: via `?nastro`, il codice, lo stile e le sue prove; `strumenti/catture-risalto.mjs` cattura solo il
+cerchio. Le due catture del confronto qui sotto restano come documentazione della scelta e non si rifanno.
 
 - **Il cerchio a evidenziatore** (normale): un tratto largo, giallo-verde fluo e un po' trasparente, che gira attorno al nodo della
   puntina (titolo e puntina insieme) un po' più di un giro, allargandosi: si chiude male, e dove ripassa sull'inizio il colore si carica,
@@ -136,8 +138,8 @@ nastro, variante di confronto, si toglie.
 ![Lo stesso sul telefono](../../../prototipi/carriere/catture/r-v-cerchio-e-nastro.jpg)
 
 Registrazione: [`r-puntina-e-cerchio.webm`](../../../prototipi/carriere/catture/r-puntina-e-cerchio.webm) (4 s, 960×540), la puntina
-che arriva e il cerchio che si traccia. Le catture le rifà `strumenti/catture-risalto.mjs`, che fa anche da prova di bordo: il risalto
-sta sul nodo della puntina, nei due modi e con il movimento ridotto, già tutto disegnato.
+che arriva e il cerchio che si traccia. Le catture del cerchio le rifà `strumenti/catture-risalto.mjs`, che fa anche da prova di bordo:
+il cerchio sta sul nodo della puntina, anche con il movimento ridotto, già tutto disegnato.
 
 **Banco della fluidità** sulle bacheche della prova e della principale, prima e dopo, nei due orientamenti e con la CPU 4× più lenta:
 zero difetti visibili prima e dopo, e il risalto non fa tornare i fotogrammi lunghi (il cerchio si anima una volta sola, 0,4 s, poi è

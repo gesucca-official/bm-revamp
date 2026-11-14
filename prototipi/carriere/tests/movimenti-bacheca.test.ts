@@ -2,7 +2,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {chiusiOra, OSCILLANTI, soloLePiuCorte, strappi, TEMPO_STRAPPI} from '../src/movimentiBacheca.ts';
-import {cerchioEvidenziatore, inizioRisalto, nastroAdesivo, TEMPI_RISALTO} from '../src/movimentiBacheca.ts';
+import {cerchioEvidenziatore, inizioRisalto, TEMPI_RISALTO} from '../src/movimentiBacheca.ts';
 import {angoloPostit, DURATA_ANGOLO, durataMosca, mosca, pianoMosca, prossimoAngolo, toccataMosca, VOLO} from '../src/movimentiBacheca.ts';
 import {agitazione, alPosto, ampiezzaFilo, angoloCoda, cadutaLettera, filoMosso, letteraAllentata, oscillazione, premioLettere, PREMIO_LETTERE,
   scoperti, siAllenta, staccoPostit, TEMPI, tremolio, trovaLettera, viaggio} from '../src/movimentiBacheca.ts';
@@ -267,15 +267,8 @@ test('dove sei: il cerchio a evidenziatore gira attorno al nodo, fuori dal suo r
   assert.ok(TEMPI_RISALTO.traccia >= 0.2 && TEMPI_RISALTO.traccia <= 0.6, 'un attimo, come un gesto di mano');
 });
 
-test('dove sei: il risalto parte quando arriva la puntina; senza viaggio, subito; il nastro sta sull\'angolo del nodo, di sbieco', () => {
+test('dove sei: il cerchio parte quando arriva la puntina; senza viaggio, subito', () => {
   assert.equal(inizioRisalto(2.1), 2.1);
   assert.equal(inizioRisalto(null), TEMPI_RISALTO.senzaViaggio);
   assert.ok(TEMPI_RISALTO.senzaViaggio < 0.6);
-  const r = {x: 100, y: 200, w: 160, h: 60};
-  const n = nastroAdesivo('i1', r, 20);
-  assert.ok(n.angolo < -20 && n.angolo > -40, 'di sbieco');
-  const cx = n.punti.reduce((s, q) => s + q.x, 0) / n.punti.length, cy = n.punti.reduce((s, q) => s + q.y, 0) / n.punti.length;
-  assert.ok(Math.abs(cx - r.x) < 40 && Math.abs(cy - r.y) < 30, 'sull\'angolo in alto a sinistra');
-  assert.ok(n.punti.length >= 10, 'i lati corti strappati');
-  assert.deepEqual(nastroAdesivo('i1', r, 20), n);
 });

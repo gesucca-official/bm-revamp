@@ -179,14 +179,12 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .bacheca .penna { font-family: var(--font-pennarello); fill: #233a8f; }
 /* Fase J: il «???» di un nodo chiuso è grigio, come una penna che non scrive più. */
 .bacheca .penna.chiusa { fill: #8a8a86; }
-/* Dove sei, a colpo d'occhio (14 novembre 2026): il cerchio a evidenziatore si traccia quando la puntina arriva; il nastro (?nastro) si
-   attacca con un piccolo colpo. Con il movimento ridotto sono già lì, fermi. */
+/* Dove sei, a colpo d'occhio (14 novembre 2026): il cerchio a evidenziatore si traccia quando la puntina arriva; con il movimento ridotto
+   è già lì, fermo. La variante del nastro (?nastro) è tolta dopo la scelta del proprietario. */
 .bacheca .risalto .tratto { stroke-dashoffset: 0; animation: risalto-traccia var(--durata) cubic-bezier(.3, .1, .4, 1) var(--ritardo) both; }
 @keyframes risalto-traccia { from { stroke-dashoffset: var(--lunghezza); } to { stroke-dashoffset: 0; } }
-.bacheca .risalto.nastro { transform-box: fill-box; transform-origin: center; animation: risalto-nastro .22s ease-out var(--ritardo) both; }
-@keyframes risalto-nastro { from { opacity: 0; transform: scale(1.3) rotate(-4deg); } to { opacity: 1; transform: none; } }
-.bacheca[data-movimento=ridotto] .risalto, .bacheca[data-movimento=ridotto] .risalto .tratto { animation: none; }
-@media (prefers-reduced-motion: reduce) { .bacheca .risalto, .bacheca .risalto .tratto { animation: none; } }
+.bacheca[data-movimento=ridotto] .risalto .tratto { animation: none; }
+@media (prefers-reduced-motion: reduce) { .bacheca .risalto .tratto { animation: none; } }
 .bacheca .scritta { font-family: var(--font-scritte); fill: #233a8f; stroke: #efe8d6; stroke-width: .03em; paint-order: normal; }
 .bacheca .area { cursor: pointer; }
 .bacheca .area.disponibile:hover, .bacheca .area.disponibile:focus { fill: rgba(255,255,255,.04); }

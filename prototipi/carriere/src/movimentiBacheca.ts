@@ -353,7 +353,7 @@ export function soloLePiuCorte<F extends {l: number; amp: number}>(fili: F[], qu
 // Dove sei, a colpo d'occhio (14 novembre 2026). Il proprietario: «non si capisce bene dove siamo nella mappa a colpo d'occhio. Si potrebbe
 // anche cerchiare il nodo dove siamo, tipo cerchio fatto come se fosse un evidenziatore». La puntina «sei qui», su una bacheca di venti nodi,
 // si perde. Il cerchio a evidenziatore: un tratto largo, fatto a mano, che gira un po' più di un giro e si chiude storto, tracciato quando
-// la puntina arriva. Variante da confrontare (?nastro): un pezzo di nastro adesivo colorato attaccato di sbieco sull'angolo del nodo.
+// la puntina arriva. Scelto dal proprietario («teniamo il cerchio»); la variante del nastro adesivo (?nastro) è tolta.
 
 type Riquadro = {x: number; y: number; w: number; h: number};
 /** Quanto dura il tratto dell'evidenziatore, e quanto dopo l'apertura della bacheca comincia se la puntina non viaggia. */
@@ -384,21 +384,3 @@ export function cerchioEvidenziatore(seme: string, r: Riquadro, margine: number)
 
 /** Quando comincia il risalto, in secondi dall'apertura della bacheca: all'arrivo della puntina, se viaggia; altrimenti subito. */
 export const inizioRisalto = (arrivo: number | null) => arrivo ?? TEMPI_RISALTO.senzaViaggio;
-
-/**
- * Il nastro adesivo (variante): un rettangolo lungo e stretto, con i due lati corti strappati a zigzag, attaccato di sbieco sull'angolo in
- * alto a sinistra del riquadro. Deciso dai dati.
- */
-export function nastroAdesivo(seme: string, r: Riquadro, largo: number): {punti: Pt[]; angolo: number} {
-  const c = caso(`${seme}:nastro`);
-  const lungo = largo * 3.2, angolo = -(24 + c() * 14);
-  const denti = 4, punti: Pt[] = [];
-  // Lato lungo in alto, poi il lato corto destro strappato, il lato lungo in basso, il lato corto sinistro strappato.
-  punti.push({x: -lungo / 2, y: -largo / 2}, {x: lungo / 2, y: -largo / 2});
-  for (let i = 1; i < denti; i++) punti.push({x: lungo / 2 + (i % 2 ? 1 : -1) * largo * (0.08 + c() * 0.06), y: -largo / 2 + (largo * i) / denti});
-  punti.push({x: lungo / 2, y: largo / 2}, {x: -lungo / 2, y: largo / 2});
-  for (let i = denti - 1; i > 0; i--) punti.push({x: -lungo / 2 + (i % 2 ? -1 : 1) * largo * (0.08 + c() * 0.06), y: -largo / 2 + (largo * i) / denti});
-  // Sull'angolo in alto a sinistra, un poco fuori: tiene il nodo come si tiene un foglio, senza coprire le lettere.
-  const a = (angolo * Math.PI) / 180, ox = r.x - largo * 0.1, oy = r.y - largo * 0.15;
-  return {punti: punti.map(p => ({x: ox + p.x * Math.cos(a) - p.y * Math.sin(a), y: oy + p.x * Math.sin(a) + p.y * Math.cos(a)})), angolo};
-}
