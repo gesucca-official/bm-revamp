@@ -54,7 +54,7 @@ seconda dei segni; battute di ritento; salto delle scene già viste e di tutte a
 | Carriera | Forma | Stato |
 |---|---|---|
 | [Tutorial](tutorial.md) | Lineare, tre partite | Scaletta, [dialoghi](tutorial-dialoghi.md) e [illustrazioni](illustrazioni.md#tutorial) necessarie (10 novembre 2026); [specifica degli asset](specifica-asset.md) e [fetta verticale](prompt-fetta.md) della scena 1, chiusa con S2 e quattro ritratti approvati, e [prompt del resto](prompt-tutorial-resto.md) in tre giri; **materiale visivo completo e approvato** (11 novembre 2026). Il bar si chiama Il Serraglio; restano da scrivere le battute dell'epilogo |
-| [Principale del Set Base](principale.md) | A rami, da rigiocare (D16) | «Il Serraglio chiude», spunto del proprietario (12 novembre 2026): scaletta a rombi della regia, versione 0.3 (14 novembre 2026), con il [mockup del grafo](mockup-principale.md) provato dal proprietario; prossimi il mockup aggiornato e i dialoghi |
+| [Principale del Set Base](principale.md) | A rami, da rigiocare (D16) | «Il Serraglio chiude», spunto del proprietario (12 novembre 2026): scaletta a rombi della regia, versione 0.3.3 (14 novembre 2026), con il [mockup del grafo](mockup-principale.md) provato dal proprietario; [dialoghi](principale-dialoghi.md): prima stesura dell'atto I |
 | Sergio Sommerso | Mini-carriera, sbloccata trovandolo in una busta (D17) | Da scrivere |
 | Duccio Braccio Teso | Mini-carriera, sbloccata trovandolo in una busta (D17) | Da scrivere |
 
