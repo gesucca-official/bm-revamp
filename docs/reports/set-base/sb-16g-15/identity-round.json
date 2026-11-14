@@ -1,0 +1,24 @@
+{
+ "reference": "tmp\\sb16g2b3\\round-B",
+ "new": "tmp\\sb16g15\\round-B",
+ "differences": [],
+ "header": {
+  "sha256": {
+   "reference": "fbdf624981bc873758ed626cd532e9f511df5e37cf13e89110135075ece425bb",
+   "new": "d91cb6e0529292b1f6ff3187c8d55436107ad9b5938d1f1bb6c9abe22a966ab7"
+  }
+ },
+ "celle": {
+  "reference": 864,
+  "new": 864,
+  "identical": 864,
+  "games": 259200
+ },
+ "coppie": {
+  "reference": 6,
+  "new": 6,
+  "identical": 6,
+  "games": 259200
+ },
+ "identical": true
+}

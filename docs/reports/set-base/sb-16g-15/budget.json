@@ -1,0 +1,20 @@
+{
+ "budget": "D90: un giro, 7200 s cumulativi, separato da D68",
+ "entries": [
+  {
+   "what": "passo 0, braccio B 1.5, 8640 partite",
+   "benchSeconds": 18.735456,
+   "mavenWallSeconds": 25.501
+  },
+  {
+   "what": "giro, braccio B 1.5, 648000 partite",
+   "benchSeconds": 501.2427248,
+   "mavenWallSeconds": 508.177
+  }
+ ],
+ "failedSamples": 0,
+ "totalBenchSeconds": 519.978,
+ "totalWallSeconds": 533.678,
+ "remainingSeconds": 6666.322,
+ "remainingRounds": 0
+}

@@ -93,6 +93,12 @@ infliggono 4 CUT a un avversario anche a ricerca fallita, Preparo +15 V; Chiave 
 Sotto il cofano anche +5 A. Liste, copie, binding, priorità e rarità invariati (D79). Il Bancone con POISON ×0,5 esiste solo come
 variante del braccio B del giro finale, `set-base/bancone-b.json`; la bozza resta col Bancone del passo 2 fino alla scelta del braccio.
 
+## Correzione 1.5 di SB-16g (D90)
+
+14 novembre 2026, [correzione 1.5](sb-16g-proposta.md#passo-3b--correzione-15) attuata nelle righe sopra sul braccio B scelto in D89
+(bozza + `set-base/bancone-b.json`): Impatto 30 → **34 HIT** (25 V); Chiave da tredici 22 → **18 CUT** (10 V); Lavoro fatto bene
+14 + 7 → **14 + 4** per oggetto (10 V). Nient'altro: liste, copie, binding, priorità, rarità, premi e Bancone del braccio B invariati.
+
 ## Come si legge
 
 - **ID dello slot:** stabile per tutto il piano, anche se la carta cambia nome. Prefissi: `PG` personaggi, `XXX-BA` basic, `XXX-BO`
@@ -229,7 +235,7 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Ne
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | ~~40~~ 30 HIT (passo 3, D82) | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
+| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | ~~40~~ ~~30~~ 34 HIT (passo 3, D82; correzione 1.5, D90) | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
 | SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 1 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
 | SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | Annuncia GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. | NC | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | SPA-AR4 | Azione, regolare | DEFENSE | F0 | 0 | CUT ricevuto ×0,5 per 4 turni; +10 V | C | 2 | `MadeOfStone`, conservata | Difesa che carica, contro chi lo taglia (Mara) | dati |
@@ -279,10 +285,10 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | GIG-AR1 | Azione, regolare | ITEMS | F1 (5 V) | 1 | Distrugge un oggetto lontano | NC | 2 | `BreakYourToy` riprogettata come bozza «Smontiamo tutto» (era una bound) | Contromossa; distruzione pagata e scartata, non ripetibile | Java |
-| GIG-AR2 | Azione, regolare | DAMAGE | F1 (~~5~~ 10 V, passo 3) | 1 | ~~10~~ ~~12~~ 22 CUT⁷ (passo 3, D82) | NC | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
+| GIG-AR2 | Azione, regolare | DAMAGE | F1 (~~5~~ 10 V, passo 3) | 1 | ~~10~~ ~~12~~ ~~22~~ 18 CUT⁷ (passo 3, D82; correzione 1.5, D90) | NC | 2 | bozza «Chiave da tredici», 8 → 10 CUT | Attacco medio | dati |
 | GIG-AR3 | Azione, regolare | RESOURCES | F0 | 1 | 4 CUT al bersaglio (passo 3). Annuncia Chiave da tredici. Se lo trovi: ~~+10~~ +15 V. Se non lo trovi: +5 V. | NC | 2 | «Preparo il lavoro», già Colpo di chiave inglese, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | GIG-AR4 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,5 e CUT ×0,75 nel turno; +5 V, +5 A (passo 3, D82) | C | 1 | «Sotto il cofano», D55 | Copertura e rimborso; non genera V nette, la A separa i gruppi dal turno dopo | dati |
-| GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ ~~F1 (5 V)⁷~~ F2 (10 V, passo 3) | 1 | ~~6~~ 14 HIT più ~~4~~ 7 per ogni proprio oggetto sul campo (passo 3, D82) | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
+| GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ ~~F1 (5 V)⁷~~ F2 (10 V, passo 3) | 1 | ~~6~~ 14 HIT più ~~4~~ ~~7~~ 4 per ogni proprio oggetto sul campo (passo 3, D82; correzione 1.5, D90) | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
 | GIG-AR6 | Azione, regolare | RESOURCES | F0 | 1 | 4 CUT al bersaglio (passo 3). Annuncia Lavoro fatto bene. Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 1 | `base.gigi.UnaStrettaDiProva`, «Una stretta di prova» | Secondo annuncio verso il raro, D79 | dati + search |
 
 **Sergio (6)**

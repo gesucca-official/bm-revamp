@@ -71,9 +71,10 @@ class PotenzaD82Test {
         assertEquals(new TreeSet<>(CHANGED), changed);
     }
 
+    /** The numbers of 1.4, except the three that correction 1.5 changes (D90): Impatto 34, Chiave 18, Lavoro 14 + 4 per item. */
     @Test void theNumbersAreThoseOfProposal14() {
         JsonNode now = a.json();
-        assertEquals(json("[{'op':'damage','type':'HIT','amount':30}]"), card(now, IMPATTO).get("target"));
+        assertEquals(json("[{'op':'damage','type':'HIT','amount':34}]"), card(now, IMPATTO).get("target")); // D90, 30 in 1.4
         assertEquals(json("{'ALERTNESS':20}"), card(now, TI_STRINGO).get("self").get(0).get("foundGains"));
         assertEquals(json("{'ALERTNESS':5}"), card(now, TI_STRINGO).get("self").get(0).get("missedGains"));
         assertEquals(json("{'ALERTNESS':20}"), card(now, CINGHIATA).get("cost"));
@@ -96,9 +97,9 @@ class PotenzaD82Test {
         assertEquals(json("{'VIOLENCE':15}"), card(now, PREPARO).get("self").get(0).get("foundGains"));
         assertEquals(json("{'VIOLENCE':10}"), card(now, STRETTA).get("self").get(0).get("foundGains"));
         assertEquals(json("{'VIOLENCE':10}"), card(now, CHIAVE).get("cost"));
-        assertEquals(json("[{'op':'damage','type':'CUT','amount':22}]"), card(now, CHIAVE).get("target"));
+        assertEquals(json("[{'op':'damage','type':'CUT','amount':18}]"), card(now, CHIAVE).get("target")); // D90, 22 in 1.4
         assertEquals(json("{'VIOLENCE':10}"), card(now, LAVORO).get("cost"));
-        assertEquals(json("{'base':14,'perItem':7}"), card(now, LAVORO).get("params"));
+        assertEquals(json("{'base':14,'perItem':4}"), card(now, LAVORO).get("params")); // D90, perItem 7 in 1.4
         JsonNode cofano = card(now, COFANO).get("self");
         assertEquals(json("{'op':'gain','resource':'ALERTNESS','amount':5}"), cofano.get(cofano.size() - 1));
         assertEquals(json("{'op':'gain','resource':'VIOLENCE','amount':5}"), cofano.get(cofano.size() - 2));
@@ -266,11 +267,11 @@ class PotenzaD82Test {
 
     @Test void theOtherChangedHitsResolveWithTheirNumbersAndForecast() {
         Object[][] cases = {
-                {"starter-spazienzio", IMPATTO, Map.of(Resource.VIOLENCE, 25), 30},
+                {"starter-spazienzio", IMPATTO, Map.of(Resource.VIOLENCE, 25), 34}, // D90: 1.5, the three numbers below too
                 {"starter-tossico", TOSSICONE, Map.of(Resource.TOXICITY, 10), 18},
                 {"starter-pino", ESTASI, Map.of(Resource.ALCOHOL, 9), 27},
-                {"starter-gigi", CHIAVE, Map.of(Resource.VIOLENCE, 10), 22},
-                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 14 + 7 * 2},
+                {"starter-gigi", CHIAVE, Map.of(Resource.VIOLENCE, 10), 18},
+                {"starter-gigi", LAVORO, Map.of(Resource.VIOLENCE, 10), 14 + 4 * 2},
         };
         for (Object[] c : cases) {
             @SuppressWarnings("unchecked") Map<Resource, Integer> res = (Map<Resource, Integer>) c[2];

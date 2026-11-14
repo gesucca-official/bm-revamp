@@ -104,7 +104,7 @@ class LethalAwarePolicyTest {
 
     // --- 1. Defence -------------------------------------------------------------------------------------------------------
 
-    /** HIT 30 shown (D82, was 40) and payable (V 30 ≥ 25) against 25 health: only «Tra due paraurti» (×0.4, priority 2) keeps Mara up. */
+    /** HIT 34 shown (D90, was 30 in D82 and 40 before) and payable (V 30 ≥ 25) against 25 health: only «Tra due paraurti» (×0.4, priority 2) keeps Mara up. */
     @Test void parriesAShownLethalHit() {
         BotView v = view(seat("me", 25, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -119,7 +119,7 @@ class LethalAwarePolicyTest {
         assertEquals(all(v), run(v, CINGHIATA).names());
     }
 
-    /** At 40 health HIT 30 (D82) is not lethal: nothing changes. With the own token (×1.5) it is 45: parry. */
+    /** At 40 health HIT 34 (D90) is not lethal: nothing changes. With the own token (×1.5) it is 51: parry. */
     @Test void theOwnTokenMakesTheShownHitLethal() {
         BotView plain = view(seat("me", 40, 30, 0, 0, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -129,7 +129,7 @@ class LethalAwarePolicyTest {
         assertEquals(names(PARAURTI), run(exposed, CINGHIATA).names());
     }
 
-    /** ALCOHOL 40 absorbs 10 HIT (L/4): 20 of the HIT 30 (D82) against 25 health is not lethal, against 20 it is. */
+    /** ALCOHOL 40 absorbs 10 HIT (L/4): 24 of the HIT 34 (D90) against 25 health is not lethal, against 20 it is. */
     @Test void theAlcoholArmourIsCounted() {
         BotView armoured = view(seat("me", 25, 30, 0, 40, List.of()), List.of(CINGHIATA, PARAURTI, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -139,7 +139,7 @@ class LethalAwarePolicyTest {
         assertEquals(names(PARAURTI), run(short_, CINGHIATA).names());
     }
 
-    /** «Sgommata» (priority 1) brings the author (25 health) down before its HIT 30 (priority 0): hitting first is safe and kills. */
+    /** «Sgommata» (priority 1) brings the author (25 health) down before its HIT 34 (priority 0): hitting first is safe and kills. */
     @Test void hitsFirstWhenItsGroupComesFirstAndKills() {
         BotView v = view(seat("me", 35, 30, 0, 0, List.of()), List.of(CINGHIATA, SGOMMATA, PARAURTI, SPINTONE),
                 seat("foe", 25, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -147,7 +147,7 @@ class LethalAwarePolicyTest {
         everyStylePlays(v, SGOMMATA);
     }
 
-    /** «Fai basta» (priority 2) voids the later HIT 30. */
+    /** «Fai basta» (priority 2) voids the later HIT 34 (D90). */
     @Test void countersTheShownHit() {
         BotView v = view(seat("me", 30, 20, 10, 0, List.of()), List.of(YOU_STOP, SPINTONE),
                 seat("foe", 60, 20, 30, 0, List.of()), List.of(card(SUPER_IMPACT)));
@@ -156,8 +156,8 @@ class LethalAwarePolicyTest {
     }
 
     /**
-     * Uncertain order: «Fasciatura» (+8 HEALTH, priority 0) in the same group as HIT 30 (priority 0, ALERTNESS 20 both). Healing
-     * after the blow saves (0 → 8, D48), before it does not (18 − 30): unsure, still better than the sure fall of «Spintone».
+     * Uncertain order: «Fasciatura» (+8 HEALTH, priority 0) in the same group as HIT 34 (D90; priority 0, ALERTNESS 20 both). Healing
+     * after the blow saves (0 → 8, D48), before it does not (18 − 34): unsure, still better than the sure fall of «Spintone».
      * With the author faster (ALERTNESS 21) the heal surely comes after: the same choice, now safe.
      */
     @Test void aHealInTheSameGroupIsUnsureButPreferred() {
@@ -184,7 +184,7 @@ class LethalAwarePolicyTest {
     }
 
     /**
-     * Uncertain search: «Slalom» (priority 2) would put the token on Mara before HIT 30 (D82) if it finds «Sgommata» (45 against
+     * Uncertain search: «Slalom» (priority 2) would put the token on Mara before HIT 34 (D90) if it finds «Sgommata» (51 against
      * 40 health), not if it misses. Unsure against the sure safety of the other moves: it is left out.
      */
     @Test void aChargeThatWouldExposeToTheShownHitIsLeftOut() {
@@ -207,19 +207,19 @@ class LethalAwarePolicyTest {
         everyStylePlays(exposed, SGOMMATA);
     }
 
-    /** Armour on the target: HIT 30 (D82) minus L 20/4 is 25, lethal at 25 health, not at 26. */
+    /** Armour on the target: HIT 34 (D90, was 30) minus L 20/4 is 29, lethal at 29 health, not at 30 (D90: were 25 and 26). */
     @Test void theTargetsArmourIsCounted() {
         BotView lethal = view(seat("me", 70, 20, 30, 0, List.of()), List.of(SUPER_IMPACT, SPINTONE, TARTARUGA),
-                seat("foe", 25, 20, 0, 20, List.of()), List.of());
+                seat("foe", 29, 20, 0, 20, List.of()), List.of());
         assertEquals(names(SUPER_IMPACT), run(lethal, TARTARUGA).names());
         BotView short_ = view(seat("me", 70, 20, 30, 0, List.of()), List.of(SUPER_IMPACT, SPINTONE, TARTARUGA),
-                seat("foe", 26, 20, 0, 20, List.of()), List.of());
+                seat("foe", 30, 20, 0, 20, List.of()), List.of());
         assertEquals(all(short_), run(short_, TARTARUGA).names());
     }
 
     /**
-     * Known order: the opponent's «Sgommata» (priority 1) comes before HIT 30 (priority 0, D82) and brings the bot (20 health) down,
-     * so its own lethal hit (30 against 30) would be voided. The parry («Tartaruga», ×0.6 then 15 against 23) is chosen instead.
+     * Known order: the opponent's «Sgommata» (priority 1) comes before HIT 34 (priority 0, D90) and brings the bot (20 health) down,
+     * so its own lethal hit (34 against 30) would be voided. The parry («Tartaruga», ×0.6 then 15 against 23) is chosen instead.
      */
     @Test void aLethalHitThatComesTooLateIsNotPlayed() {
         BotView v = view(seat("me", 20, 20, 30, 0, List.of()), List.of(SUPER_IMPACT, TARTARUGA, SPINTONE),

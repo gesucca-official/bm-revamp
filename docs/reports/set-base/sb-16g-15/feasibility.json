@@ -1,0 +1,11 @@
+{
+ "block": "SB-16g correzione 1.5 (D90)",
+ "arm": "B",
+ "games": 8640,
+ "seconds": 18.735456,
+ "mavenWallSeconds": 25.501,
+ "rule": "s0 + 112.5 * s0 + 120 <= 7200 (s0 <= 62.38)",
+ "estimateSeconds": 2246.474,
+ "estimateWithWallSeconds": 3014.363,
+ "feasible": true
+}

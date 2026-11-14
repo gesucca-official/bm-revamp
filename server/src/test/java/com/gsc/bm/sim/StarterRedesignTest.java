@@ -37,12 +37,13 @@ class StarterRedesignTest {
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final String NORMAL = "base.com.Spintone";
     private static final List<Pair> PAIRS = List.of(
-            new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 30),
+            new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 34),
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
             new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 18),
             new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 25),
-            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 22));
+            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 18));
     // D82 (proposta 1.4): Impatto 30, Tossicone 18, Estasi 18 + L 7, Chiave 22; Preparo infligge anche 4 CUT a un avversario.
+    // D90 (correzione 1.5): Impatto 34, Chiave 18.
 
     private static final class Pair {
         final String deck, charge, hit;

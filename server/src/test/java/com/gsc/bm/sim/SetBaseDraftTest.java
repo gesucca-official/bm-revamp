@@ -717,9 +717,9 @@ class SetBaseDraftTest {
         assertEquals(Set.of(Card.CardTarget.FAR_ITEM), draft.card("bruiser.BreakYourToy").getCanTarget(), "distrugge un oggetto lontano");
         // I numeri d'attacco, testi compresi: i bot leggono il danno nominale.
         JsonNode chiave = card("base.gigi.ChiaveDaTredici"), colpo = card("base.gigi.ColpoDiChiaveInglese"), lavoro = card("base.gigi.LavoroFattoBene");
-        assertEquals(22, chiave.get("target").get(0).get("amount").asInt(), "D82, era 12");
-        assertEquals("CUT 22", chiave.get("gui").get("damageAmount").asText());
-        assertTrue(chiave.get("gui").get("description").asText().contains("Infliggi 22 danni da taglio al bersaglio."));
+        assertEquals(18, chiave.get("target").get(0).get("amount").asInt(), "D90 (correzione 1.5), era 22 in D82 e 12 prima");
+        assertEquals("CUT 18", chiave.get("gui").get("damageAmount").asText());
+        assertTrue(chiave.get("gui").get("description").asText().contains("Infliggi 18 danni da taglio al bersaglio."));
         // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca; D82: +15 V e 4 CUT a un avversario anche se non trova.
         assertEquals(15, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(5, colpo.get("self").get(0).get("missedGains").get("VIOLENCE").asInt(), "D72");
@@ -727,7 +727,7 @@ class SetBaseDraftTest {
         assertEquals("CUT 4", colpo.get("gui").get("damageAmount").asText());
         int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
         assertEquals(14, base, "D82, era 6");
-        assertEquals(7, perItem, "D82, era 4");
+        assertEquals(4, perItem, "D90 (correzione 1.5), era 7 in D82 e 4 prima");
         assertEquals("HIT " + base + "+x", lavoro.get("gui").get("damageAmount").asText());
         assertTrue(lavoro.get("gui").get("description").asText().contains("Infliggi danni da colpo pari a " + base + " più " + perItem + " per ogni tuo oggetto"));
         // Le bound: +5 V e 3 HIT nello starter (D33, D36), 2 CUT veloce nella collezione; nessuna tocca gli oggetti.
