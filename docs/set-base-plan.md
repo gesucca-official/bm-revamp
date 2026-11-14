@@ -3,20 +3,10 @@
 Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 (regolamento **1.13** e Set Base 0.1, da SB-1 e SB-2).
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
-Il lavoro procede su istruzione del proprietario, a blocchi, anche due in parallelo con file separati
-([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). I blocchi che non toccano il client partono senza aspettarne la fine
-([D30](#decisioni-del-proprietario)); quelli che lo toccano (SB-1, SB-2, poi SB-8) sono anticipati in parallelo a C4 con paletti scritti
-nella loro sezione ([D40, D42](#decisioni-del-proprietario)). **Stato in breve:** fondamenta, strumenti, progetto e i cinque starter
-(base e avanzati) chiusi e approvati (tabella dei [blocchi](#blocchi)); chiusa anche SB-8, la bozza giocabile da umani (D46). **Al passaggio alla regia unica (10 novembre 2026):** nessun blocco in corso, nessun esecutore attivo, nessun prompt in sospeso, working tree pulito. **Prove umane SB-12b e SB-16 fatte il 12 novembre 2026**, giudizio nelle sezioni dei due blocchi. **SB-16b fatta il 12 novembre 2026** (Fase A e B, decisioni [D50–D53](#decisioni-del-proprietario)). **SB-16c fatta il 12 novembre 2026**, domande risposte ([D54](#decisioni-del-proprietario)). **SB-16d attuata il 12 novembre 2026** (proposta approvata D55, invarianti e bound verdi; [rapporto](reports/set-base/sb-16d-report.md)). SB-16e, SB-16e2 (D56, D57), SB-16f0 e la prova umana [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti) fatti fra il 12 e il 13 novembre 2026. **Prossimo:** [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata), Fase 2b **passo 1 fatto** e prova umana breve fatta il 13 novembre 2026: meccanica approvata (D75). **Bot consapevole del colpo letale** (D76) consegnato il 13 novembre 2026 ([rapporto](reports/set-base/sb-16g-bot-letale-report.md)), risposte del proprietario registrate il 14 novembre 2026 ([D77](#decisioni-del-proprietario)): nessuna prova, si va avanti. Q9 decisa in D78 («Annuncia»). Proposta 1.3 delle carte **approvata** il 14 novembre 2026 ([D79](#decisioni-del-proprietario)). **Prossimo:** passo 2 (frequenza), poi passo 3. Budget residuo: 2 giri e 7.078 s; poi SB-17. Il costo in salute di Duccio è deciso ([D47](#decisioni-del-proprietario)). Stato corrente
-nell'[indice della documentazione](README.md#stato-corrente).
 
-Fonti lette: [istruzioni](../AGENTS.md), [indice](README.md), [regolamento](game-rules.md),
-[allegato](rules-catalog.json), [appunti sul set](../IDEAS.md), [CLI](cli.md),
-[piano C3](client-c3-plan.md) come modello, [roadmap del client](client-roadmap.md) (O9,
-O15–O18), [bozza esterna di carte](design/set-base/bozza-esterna-proposta-70-carte.md), `cards.sqlite`, `scripts/check-rules.py`, `tools/print-cards/` e, nel server,
-`Game`, `Player`, `ComPlayer`, `AbstractCard`, alcune carte, le factory, `MatchVersions` e la
-validazione dei mazzi. Non sono state lette tutte le carte e non è stata giocata nessuna
-partita per questo piano: ciò che è dedotto e non provato è indicato come tale.
+**Stato (14 novembre 2026, dopo il consolidamento della documentazione, [D96](#decisioni-del-proprietario)).** Questo documento è lo **stato**: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md), le decisioni D1–D96 nel [registro](set-base-decisioni.md#decisioni-del-proprietario).
+
+Il lavoro procede su istruzione del proprietario, a blocchi ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati; la partita viva resta al regolamento **1.13** e al Set Base 0.1 (le regole `d50` valgono solo nel playground). SB-16g e SB-16h sono chiusi: la **1.5** è la bozza di riferimento ([D92](#decisioni-del-proprietario)), il formato resta **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)). **Prossimo:** [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), Fase A (proposta e STOP, [D95](#decisioni-del-proprietario)); B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
 
 ## Obiettivo e regole comuni
 
@@ -47,23 +37,7 @@ Valgono per **ogni** blocco:
 
 ## Cosa c'è oggi
 
-Verificato nei sorgenti il 2 novembre 2026: è la fotografia di partenza. Dove un blocco chiuso l'ha superata, lo dice la colonna di destra.
-
-| Ambito | Stato | Conseguenza per il piano |
-|---|---|---|
-| Set | 39 carte: 2 personaggi, 2 basic, 4 bound, 1 last resort, 26 azioni regolari, 4 oggetti; più 1 token. `SoberUp` è fuori catalogo | Ne servono **fino a 76 nuove** |
-| Carte | Una classe Java per carta con i valori scritti nel costruttore e negli effetti, per esempio `SuperImpact` (25 V, 40 HIT). `CardFactoryServiceImpl` le carica con `Class.forName` | Cambiare un numero richiede una ricompilazione: serve il playground (SB-5, SB-6) |
-| Catalogo | `cards.sqlite`: `CRD001_GUI`, `CRD002_KEYWORDS`, `CRD003_CHARACTERS`, `DCK001_STARTERS`, `DCK002_STARTERS_CH` con due colonne bound. Nessun campo set o rarità | Da estendere (SB-2, SB-28). **Fatto in SB-2:** colonne `C_SET` e `C_RARITY`, rarità vuote fino a SB-28 |
-| Regole ↔ carte | R07 e R07a elencano ogni carta; R04 e R05 citano carte specifiche (Grab, Steal, SeagullFly, MadeOfStone…). `check-rules.py` legge le tabelle di R07; `rules-v1-cards.tsv` è il contratto dei test; `MatchVersions` legge la versione delle regole | La separazione regole/set deve adeguare tutto questo (SB-2). **Fatto in SB-2:** regolamento 1.13 senza carte, schede in [Set Base 0.1](sets/base.md) |
-| Mazzi | Il server chiede solo regolare non vuoto e massimo sei carte iniziali (`UserAccountServiceImpl`); `client-web/src/deck.ts` ammette fino a 5 bound, senza limiti di copie | Da sostituire (SB-1). **Fatto in SB-1:** regole dei mazzi di R02 1.12 su server ed editor |
-| Mazzi sintetici | `verify-decks.mjs` (4 Glare), `cli-open-complete-test.cjs`, `cli-restart-test.cjs` (una carta), `cli-security-test.cjs` (12 SuperImpact) e le verifiche che si basano sulla D8 del piano C3 violano le nuove regole | Vanno riscritti in SB-1, senza indebolire ciò che provano. **Fatto in SB-1** |
-| Quick | `PlayerFactoryServiceImpl.randomPlayer` sceglie fra due personaggi scritti nel codice | Da riscrivere (SB-29) |
-| Bot | `ComPlayer` è casuale: mescola la mano e gioca la prima mossa valida per `isValidFor`. Riceve l'intero `Game` | Vista limitata a R08 e stili fatti in SB-4, non usati dal server fino a SB-30 |
-| Motore | Nessun import di Spring sotto `model`; i test creano `new Game(players, mode, false)` (`GameFixtures`). Le factory invece sono servizi Spring | Runner diretto **provato** in SB-3, con un caricatore proprio |
-| Casualità | `Collections.shuffle` senza seme in `Player`, `ComPlayer`, `BeggingMoney`; `Math.random` in `PlayerFactoryServiceImpl` | Fonte con seme fatta in SB-3; resta `Math.random` in `PlayerFactoryServiceImpl`, da riscrivere in SB-29 |
-| CLI | [`bm-cli.cjs`](cli.md) passa sempre da server, login, REST, SockJS/STOMP e archivio. Le modalità non permettono di scegliere il matchup, e l'open si gioca solo contro il bot casuale | Adatta alle prove end-to-end, non alle simulazioni di massa |
-| Testi delle carte | La descrizione in SQLite è il testo normativo di R07 più «Riferimento: Regolamento 1.10, R02-R07», e `check-rules.py` impone che coincidano. Il giocatore legge quindi `abs(T)`, «15 HIT: solo GOOD dell'autore», lettere al posto delle risorse. Le parole chiave in `CRD002_KEYWORDS` sono in inglese | Testo normativo e testo per i giocatori vanno separati (SB-25) |
-| Illustrazioni | 40 provvisorie generate ex novo (O9), con prompt e provenienza registrati e sorgenti fuori da git. Atlante unico 8×6 da 256 px, cioè 48 riquadri; `atlas.mjs` costruisce dall'allegato e si ferma se le sorgenti non coincidono. Un nome sconosciuto usa il segnaposto | Le carte nuove compaiono col segnaposto fino a SB-32; un atlante non basta |
+Fotografia di partenza del 2 novembre 2026 (tabella per ambito): [storico](history/set-base-plan-storico.md#cosa-cè-oggi). Oggi, secondo i blocchi chiusi: la partita viva è al regolamento **1.13** e al Set Base **0.1** (39 carte), con le regole dei mazzi di R02 1.12 (SB-1) e la separazione fra regolamento e set (SB-2); esistono il runner con seme, i bot euristici e il banco di misura (SB-3, SB-4, SB-7), il playground a dati (SB-5, SB-6) e la bozza giocabile da umani col profilo `bozza` (SB-8), dove le regole `d50` valgono solo nel playground (SB-16c). Catalogo `cards.sqlite`, testi per i giocatori, illustrazioni, quick e bot della partita viva cambiano nei blocchi SB-26, SB-25, SB-32, SB-29 e SB-30.
 
 ### Letture del regolamento che guidano il progetto
 
@@ -197,17 +171,7 @@ piano la rarità è solo un dato del catalogo: non esistono buste né proprietà
 La [proposta da 70 carte](design/set-base/bozza-esterna-proposta-70-carte.md) è conservata come **serbatoio di idee**: non è normativa, non è approvata e non si tiene aggiornata. Le sue carte
 entrano nel set solo passando dai blocchi del piano, e dove contrasta col piano prevale il piano. Il bilanciamento dei suoi numeri non è validato.
 
-Copre circa 31 degli slot nuovi. **Copertura massima**, sommando carte attuali e candidate: carte riprogettate o scartate la riducono.
-
-| Blocco | Nel set | Attuali + bozza | Da inventare |
-|---|---:|---:|---:|
-| Personaggi | 7 | 5 | 2 (Sergio, Duccio) |
-| Basic | 7 | 5 | 2 |
-| Bound | 21 | 10 | 11 (la bozza ne ha due per personaggio) |
-| Last resort | 4 | 1 | 3 |
-| Azioni regolari | 60 | 39 | 21 |
-| Oggetti | 16 | 10 | 6 |
-| **Totale** | **115** | **70** | **45** |
+Copertura massima della bozza (stima del 2 novembre 2026, tabella per blocco): [storico](history/set-base-plan-storico.md#bozza-esterna-di-carte).
 
 **Punti di forza da portare nei blocchi:**
 
@@ -221,11 +185,7 @@ Copre circa 31 degli slot nuovi. **Copertura massima**, sommando carte attuali e
 - **Rischi già individuati**, da verificare nei rispettivi blocchi: A alta di Mara che rende troppo affidabili YouStop e WhatchaDoin; distruzione ripetibile di Beppe; pulizia gratuita che indebolisce la tossicità; accumulo di equip con molte copie.
 - **Leggibilità:** distinguere immunità periodica e POISON, costi e perdite di A, oggetti sul campo ed equip attivi, durate (durata 2 significa tre turni). Va in SB-25 e SB-31.
 
-**Ciò che non vale più:**
-
-- **70 carte, cinque personaggi, nessun limite di copie, nessuna esclusività delle bound, starter di Bruiser e Junkie invariati, regolamento 1.5:** superati da D1, D2, D6, D7 e D14.
-- **«Smontiamo tutto» come bound:** bersaglia un oggetto e viola il [vincolo sulle bound](#nessun-giocatore-senza-mosse). L'idea può vivere come azione regolare.
-- **Immunità di Pino all'effetto periodico di L:** contrasta con l'identità di L che decade. Esclusa da D28; la variante si prova solo nel playground (SB-14).
+**Ciò che non vale più** (70 carte, cinque personaggi, nessun limite di copie, «Smontiamo tutto» come bound, immunità di Pino a L: superati da D1, D2, D6, D7, D14 e D28): [storico](history/set-base-plan-storico.md#bozza-esterna-di-carte).
 
 ## Struttura per set ed espansioni
 
@@ -325,9 +285,9 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16e2 | Lotto numerico dopo lo STOP di SB-16e | SB-16e | eseguito (12 novembre 2026), criteri non raggiunti; (c) confermata, prima la prova umana (D57) |
 | | SB-16f0 | Leggibilità della ricerca e dell’annullamento | SB-16e2 | fatto (12 novembre 2026); da giudicare dal proprietario nelle catture e in SB-16f |
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
-| | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | Fase 1 fatta; risposte registrate D59–D68; divisione 2a/2b approvata; 2a consegnata il 13 novembre 2026 ([rapporto](reports/set-base/sb-16g-2a-report.md)); **D69** la rivede (gettone legato al nome, senza timer): **2a rivista** lo stesso giorno; domande risposte in D70; consulto esterno il 13 novembre 2026 ([consulto di design](reports/set-base/consulto-design-fable-2026-11-13.md), [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md)); **2b passo 1 fatto** il 13 novembre 2026: D71–D73, cinque caricamenti e tre politiche, 648.000 partite; invarianti/bound verdi, criteri di bilanciamento ancora fuori soglia ([rapporto](reports/set-base/sb-16g-2b1-report.md)). prova umana breve fatta lo stesso giorno, meccanica approvata (**D75**); **bot consapevole del colpo letale (D76) consegnato** lo stesso giorno ([rapporto](reports/set-base/sb-16g-bot-letale-report.md)), risposte in **D77** (14 novembre 2026); Q9 decisa in **D78**; **proposta 1.3** (14 novembre 2026, [carte concrete](design/set-base/sb-16g-proposta.md)) **approvata in D79** lo stesso giorno; **2b passo 2 consegnato** il 14 novembre 2026 ([rapporto](reports/set-base/sb-16g-2b2-report.md)): proposta 1.3 attuata, 648.000 partite in 738,001 s; invarianti/bound verdi, 11 incontri fuori criterio; STOP sui numeri; domande risposte in **D80**; **proposta 1.4 del passo 3** (14 novembre 2026, [documento](design/set-base/sb-16g-proposta.md#passo-3--proposta-corrente-14)) **approvata in D82** lo stesso giorno; attuazione **fermata il 14 novembre 2026 prima di toccare bozza o codice** ([rapporto](reports/set-base/sb-16g-2b3-report.md)): travaso con POISON diretto e Rutto non si esprimono coi dati senza classi in `server/src/main`; supporto mirato approvato in D84 (classe nuova D86 provata e abbandonata, D88); **passo 3 consegnato** lo stesso giorno: 1.4 attuata, passo 0 fattibile, **giro finale A/B 1.296.000 partite**, invarianti a zero e bound entro 4, **11 incontri su 15 fuori in entrambi i bracci** (Spazienzio ora sotto quota, Beppe sopra); STOP con proposta e quattro domande; residuo D68 **0 giri/4.682,655 s**; braccio B e proposta 1.5 in D89, 1.5 approvata in **D90**; **correzione 1.5 consegnata** lo stesso giorno ([rapporto](reports/set-base/sb-16g-15-report.md)): un giro da 648.000 partite, identità dei 6 incontri senza Spazienzio né Beppe verificata, **7 dei 9 incontri con Spazienzio o Beppe in criterio**, fuori Spazienzio–Mara e Spazienzio–Piera; cancello completo non raggiunto (6 su 15); STOP con i dati; budget D90 **0 giri/6.666,322 s** |
-| | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | **Fase B consegnata il 14 novembre 2026** ([rapporto](reports/set-base/sb-16h-report.md)), D83/D92/D93: cinque varianti e misto, **3.672.000 partite**, identità 20/2 completa col giro 1.5, invarianti a zero e bound entro 4. Fuori D93 **8/6/6/6/5** incontri (20/2, 25/2, 25/3, 30/2, 30/3); **nessuna alternativa soddisfa D83**. Giro unico: **3.214,403 s su 7.200**, passo 0 fuori budget. **Chiusa in D94**: formato 20/2, «Annuncia» con due nomi nella 1.6 |
-| | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h |  |
+| | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
+| | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
+| | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | aperto: Fase A (proposta e STOP) dopo il consolidamento D96 |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -346,722 +306,104 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-32 | Illustrazioni del set | SB-28, SB-31 |  |
 | | SB-33 | Consolidamento e giudizio del proprietario | tutti |  |
 
-**Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b →
-SB-11a → SB-11b → SB-12a ([D31, D32, D37, D40](#decisioni-del-proprietario)), con SB-1 in parallelo a C4 (D40); poi SB-13 e SB-2 (D42),
-SB-6b e SB-14 (D43, D44), SB-15 con le rarità della griglia nella bozza (D45), poi SB-8 (fase A approvata con «Approvo tutto»), solo server
-e senza file del client. SB-8 approvato (D46). Prove umane SB-12b e SB-16 fatte il 12 novembre 2026. Revisione critica delle regole [SB-16b](#sb-16b--revisione-critica-delle-regole) fatta il 12 novembre 2026 (D50–D53). SB-16c fatta il 12 novembre 2026, domande risposte (D54). SB-16d attuata (D55), invarianti e bound verdi. SB-16e, SB-16e2, SB-16f0 e la prova umana SB-16f fatti (D56, D57). **Prossimo:** [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata), Fase 2b **passo 1 fatto** e prova umana breve fatta il 13 novembre 2026: meccanica approvata (D75). **Bot consapevole del colpo letale** (D76) consegnato il 13 novembre 2026 ([rapporto](reports/set-base/sb-16g-bot-letale-report.md)), risposte del proprietario registrate il 14 novembre 2026 ([D77](#decisioni-del-proprietario)): nessuna prova, si va avanti. Q9 decisa in D78 («Annuncia»). Proposta 1.3 delle carte **approvata** il 14 novembre 2026 ([D79](#decisioni-del-proprietario)). **Prossimo:** passo 2 (frequenza), poi passo 3. Budget residuo: 2 giri e 7.078 s; poi SB-17. SB-30 può
-essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario.
+**Ordine seguito.** SB-3, SB-4 e SB-5; poi, con [D30](#decisioni-del-proprietario), SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b → SB-11a → SB-11b → SB-12a, con SB-1 in parallelo a C4 ([D40](#decisioni-del-proprietario)); SB-13 e SB-2 ([D42](#decisioni-del-proprietario)), SB-6b e SB-14, SB-15, SB-8 ([D43](#decisioni-del-proprietario)–[D46](#decisioni-del-proprietario)); prove umane SB-12b e SB-16 e revisione SB-16b–SB-16h (12–14 novembre 2026, [D49](#decisioni-del-proprietario)–[D94](#decisioni-del-proprietario)). **Prossimo:** SB-16i Fase A, poi SB-17 comunque ([D95](#decisioni-del-proprietario), punto 3). SB-30 può essere anticipato per le carte attuali, se il bot si dimostra utile prima: è una scelta del proprietario. Cronologia completa: [storico](history/set-base-plan-storico.md#tabella-dei-blocchi-e-ordine-seguito).
 
 ### SB-1 — Regole dei mazzi
 
-**Anticipato da [D40](#decisioni-del-proprietario)**, in parallelo a C4: i blocchi C4 rimasti (C4-10, C4-11, C4-8a, C4-8b, C4-9) non toccano
-l'editor dei mazzi (`deck.ts`, `collection.tsx`). Paletti: niente modifiche a `client-web/src/style.css`, su cui lavorano C4-10, C4-11 e C4-8a;
-`verify-decks.mjs` riscritto e pushato prima che parta C4-8a, che usa `VerifyDecks`; dopo il pull l'altra macchina rifà il jar, perché cambiano
-regolamento e validazione del server.
-
-**SB-1 fatto il 7 novembre 2026 e approvato dal proprietario l'8 novembre**, con le sue parole: «Sì, entrambi» ([D42](#decisioni-del-proprietario)), dopo la revisione della regia. Regolamento **1.12**: R02 con le regole dei mazzi concordate per
-starter e mazzi personalizzati, R03 senza la lacuna del giocatore vivo senza mosse, tre carte iniziali. `DeckRules` le applica al salvataggio e
-all'avvio open; basic e last resort riservate con la colonna `C_EXCLUSIVE_TO` (carta `exclusiveToCharacter`, Q1), bound con
-`boundToCharacter`. I mazzi salvati prima restano nel profilo ma non si giocano (Q2). Editor di client-web e client-debug che prevengono e
-segnalano (Q3). Mazzi sintetici di `verify-decks.mjs`, `verify-resolution.mjs` e delle tre CLI riscritti in regola: nessun caso raro perso
-nello scenario open misurato prima e dopo (Q4); lo stato «vivo senza mosse» non si provoca più. Da fare in C4: la frase del menu al tavolo
-su R03 (Q5). [Rapporto SB-1](reports/set-base/sb-1-report.md).
-
-**Perimetro.** Prossima versione del regolamento: R02 con le [regole dei mazzi concordate](#regole-dei-mazzi-concordate), R03 senza la lacuna
-del giocatore senza mosse, R01a e il conteggio delle carte iniziali coerenti. Poi validazione in `UserAccountServiceImpl`, editor di
-`client-web` (`deck.ts`) e `client-debug`, test, catalogo e copia del debug. I mazzi salvati sono provvisori: **si possono perdere, senza
-migrazione**; quelli non validi si rifiutano o si eliminano, secondo la via più semplice.
-
-**Completamento verificabile.** I due starter restano validi e la partita non cambia. Mazzi con 19 o 21 carte, una terza copia, bound
-altrui, bound duplicate, basic altrui o senza last resort vengono rifiutati da server ed editor. I mazzi sintetici di verifiche e CLI sono
-riscritti e continuano a provare gli stessi casi; `TestServerContext` e `VerifyDecks` verdi.
-
-**Rischi.** Le verifiche del client si appoggiano a mazzi fuori regola per provocare casi rari (D8 del piano C3): riscriverli senza
-perdere copertura è la parte più delicata. Oggi Bruiser e Junkie hanno solo due bound, quindi la scelta esiste solo dal Set Base in poi.
+**Chiuso e approvato l'8 novembre 2026** ([D42](#decisioni-del-proprietario)): regolamento **1.12**, con le regole dei mazzi in R02 (20 carte, massimo 2 copie, basic e last resort riservate, due bound) e R03 senza la lacuna del giocatore senza mosse; `DeckRules` su server, editor di client-web e client-debug, mazzi sintetici delle verifiche riscritti. [Rapporto SB-1](reports/set-base/sb-1-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-1--regole-dei-mazzi).
 
 ### SB-2 — Separazione fra regolamento e set
 
-**Anticipato da [D42](#decisioni-del-proprietario)**, in parallelo a C4 e con una fase A che si ferma. A differenza di SB-1 tocca il client: la pagina
-pubblica del regolamento (`public.tsx`, `rules.ts`) mostra R07 e R07a, e `verify-public.mjs`, che le controlla, è usato anche da C4-8a. Paletti:
-niente modifiche a `client-web/src/style.css`, `readability.ts`, `scene.ts`, `table.tsx` (C4-10, C4-11, C4-8a; i commenti che citano R07 restano);
-`verify-public.mjs` e ogni altro strumento di verifica toccato pushati prima che parta C4-8a; dopo il pull l'altra macchina rifà il jar.
-
-**SB-2 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](#decisioni-del-proprietario)). Fase A approvata con «vanno bene tutte le raccomandazioni». Regolamento **1.13**: R00 con la precedenza fra regolamento e documenti di set, R07 «Carte e documenti di set» con convenzioni e rarità, R07a con le sole definizioni; R04 e R05 senza citazioni di carte, con lo stesso esito sulle carte di oggi (la durata 3 di MadeOfStone passa alla scheda). Documento del set [`docs/sets/base.md`](sets/base.md), **Set Base 0.1**, con le 39 carte e il token di prima; colonne `C_SET` e `C_RARITY` (vuota) nel catalogo, allegato del set, descrizioni «Riferimento: Set Base 0.1.»; archivio con `versions.sets`; `check-rules.py` rifiuta i disallineamenti fra documento, allegato e catalogo; pagina pubblica e `VerifyPublic` col set. [Rapporto SB-2](reports/set-base/sb-2-report.md).
-
-**Perimetro.** Nuova versione del regolamento secondo la [struttura concordata](#struttura-per-set-ed-espansioni): R07 e R07a passano a un
-documento per il set attuale; R04 e R05 si ripuliscono dalle citazioni di carte senza cambiarne il senso. `check-rules.py`, allegato,
-`MatchVersions`, `tools/print-cards`, copia nel debug e documenti che rimandano a R07 si adeguano. Campi set e rarità previsti nel
-catalogo. **Le carte del Set Base entrano nel documento solo a bilanciamento concluso** (SB-28).
-
-**Completamento verificabile.** Nessun effetto cambia: `CatalogEffectsTest`, `RulesConformanceTest` e contratti verdi senza toccare gli
-attesi. `check-rules.py` rifiuta un disallineamento fra documento del set, allegato e catalogo. L'archivio partite registra anche la
-versione del set.
-
-**Rischi.** Riscrivere R04 e R05 può cambiare una regola senza volerlo: ogni frase spostata va confrontata. AGENTS e R00 vanno aggiornati.
+**Chiuso e approvato l'8 novembre 2026** ([D43](#decisioni-del-proprietario)): regolamento **1.13** (R00 con la precedenza fra regolamento e documenti di set, R07 «Carte e documenti di set», R04 e R05 senza citazioni di carte) e documento del set [Set Base 0.1](sets/base.md) con le 39 carte e il token di prima; colonne `C_SET` e `C_RARITY` nel catalogo, `check-rules.py` rifiuta i disallineamenti. [Rapporto SB-2](reports/set-base/sb-2-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-2--separazione-fra-regolamento-e-set).
 
 ### SB-3 — Runner senza server e seme
 
-**Chiuso il 5 novembre 2026**, anticipato rispetto a D22 su istruzione del proprietario: la partita non cambia, salvo l'ordine prima
-arbitrario dei timer simultanei, ora quello d'inserimento (R06 non garantisce precedenze). 200 partite vere rigiocate nel motore senza divergenze.
-[Rapporto](reports/set-base/sb-3-report.md).
-
-**Perimetro.** Controllo aperto dal piano: una partita completa in-process, senza Spring, con caricatore proprio delle carte. Fonte di casualità
-con seme iniettabile in `Player`, `ComPlayer`, `BeggingMoney` e negli altri punti trovati; il comportamento di gioco non cambia. Il runner resta
-fuori dall'artefatto distribuito. Usa il bot casuale attuale.
-
-**Completamento verificabile.** Stesso seme, stessa partita, evento per evento. Partite di controllo coerenti con il server reale (via CLI) sulle
-stesse regole. Partite al secondo misurate e dichiarate, così si sa quanto costa una matrice. Prima misura di base **Bruiser contro Junkie**,
-registrata anche se il bot casuale dice poco.
-
-**Rischi.** Dipendenze nascoste da Spring o dai log per turno.
+**Chiuso il 5 novembre 2026:** partita in-process senza Spring, con caricatore proprio e fonte di casualità con seme; la partita non cambia (200 partite vere rigiocate senza divergenze). [Rapporto](reports/set-base/sb-3-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-3--runner-senza-server-e-seme).
 
 ### SB-4 — Vista limitata e bot euristici
 
-**Chiuso il 5 novembre 2026**, anticipato rispetto a D22 su istruzione del proprietario: regole e carte non cambiano, il server usa ancora il casuale.
-Aggressivo, prudente e attento alle risorse battono il casuale in tutti gli abbinamenti. Stile contro stile, Bruiser contro Junkie euristico vince al massimo il 4,6%:
-una carta legata gratuita ripetuta basta a chiudere in 7–8 turni, dato per SB-10 e Q3. [Rapporto](reports/set-base/sb-4-report.md).
-
-**Perimetro.** Il bot riceve **solo ciò che un giocatore può vedere** (R08), non l'intero `Game`, altrimenti bara. Primo bot euristico e **più stili
-di gioco** (aggressivo, prudente, attento alle risorse), riutilizzabili anche in `ComPlayer` senza riscrittura. **Il casuale resta**, come livello
-facile e come metro.
-
-**Completamento verificabile.** Ogni bot euristico batte nettamente il casuale; se non lo fa va rifatto. Un test prova che il bot non può leggere mano o
-mazzo altrui. Con Bruiser e Junkie gli stili producono risultati dichiarati e confrontati.
-
-**Rischi.** Euristiche legate alle carte attuali: devono basarsi su costi, ruolo e danno, non su nomi.
+**Chiuso il 5 novembre 2026:** bot euristici (aggressivo, prudente, attento alle risorse) con la sola vista di R08, che battono il casuale in tutti gli abbinamenti; il casuale resta come livello facile e come metro. Il server usa ancora il casuale. [Rapporto](reports/set-base/sb-4-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-4--vista-limitata-e-bot-euristici).
 
 ### SB-5 — Prova del formato dati
 
-**Chiuso il 5 novembre 2026**, anticipato rispetto a D22 su istruzione del proprietario: la prova sta nei test, partita e regole non cambiano.
-Decisione: JSON con sei passi per le carte semplici, Java per le altre. 20 carte su 37 a dati, identiche alle classi Java in 16.000 partite.
-I numeri delle 17 carte in Java restano nel codice: da risolvere in SB-6 (fatto in SB-6a). Con i passi `consume` ed `equip` di SB-11a le carte a dati salgono a 23 su 37. [Rapporto](reports/set-base/sb-5-report.md).
-
-**Perimetro.** Secondo controllo aperto. Esprimere carte come dati: costo, priorità, bersaglio, effetti su sé e sul bersaglio, a partire da primitive
-già esistenti. **Soluzione ibrida:** le carte semplici sono dati, quelle davvero strane (come `WhatchaDoin`) restano in Java con i numeri esposti come
-parametri. Si convertono in prova alcune carte per tipo.
-
-**Completamento verificabile.** Una carta convertita si comporta come l'originale nei test d'effetto esistenti. Conteggio di quante delle 33 azioni e dei
-4 oggetti possono essere dati, con l'elenco di quelle che restano in Java. Decisione documentata sul formato.
-
-**Rischi.** Un linguaggio per gli effetti troppo ricco: deve coprire le meccaniche di base, non anticipare le espansioni.
+**Chiuso il 5 novembre 2026:** formato dati ibrido, JSON con sei passi per le carte semplici e Java per le altre; 20 carte su 37 a dati identiche alle classi Java in 16.000 partite (23 su 37 dopo SB-11a). [Rapporto](reports/set-base/sb-5-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-5--prova-del-formato-dati).
 
 ### SB-6 — Playground e mini-espansione di prova
 
-Diviso da [D30](#decisioni-del-proprietario) in due blocchi. **SB-6a, nucleo del playground,** anticipato e senza SB-2: bozza in file con carte a
-dati, carte Java parametriche, personaggi, mazzi e parametri del formato, validazione al caricamento, identità con il set di oggi.
-**SB-6b, più set e mini-espansione,** dopo SB-2 e SB-6a: caricamento da più set contemporaneamente, campi set e rarità, mini-espansione di prova.
-Il perimetro che segue vale per i due blocchi insieme.
-
-**SB-6a fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «sb6a dovrebbe aver fatto,
-procediamo?». Bozza in JSON con carte a dati, carte Java coi numeri
-come parametri (`@Tunable`, valori di oggi come predefiniti), personaggi, mazzi e parametri del formato, rifiutata alla lettura se
-errata. La bozza «attuale» gioca come il catalogo in 400 partite a ogni esecuzione e in 10.000 una tantum; una bozza di prova con
-Mara e Rocco di SB-9 gira senza modifiche al motore. [Rapporto](reports/set-base/sb-6a-report.md).
-
-**SB-6b fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D44](#decisioni-del-proprietario)). Fase A approvata con «Approvo tutte». Formato `sb-6b/1`:
-un file per set, con testata (id, nome, versione) e `requires`; i file `sb-6a/1` si leggono come prima e sono il set `base`. Più set
-si caricano insieme (`Draft.load`, `-Dsim.draft` con più fonti separate da `;`), con id unici e prefisso del set, visibilità limitata
-ai set richiesti e rifiuto chiaro di set mancanti, id ripetuti, carte di set non caricati, rarità fuori vocabolario e mazzi misti
-contro R02. Rarità facoltativa su carte e personaggi, col vocabolario di R07 controllato da `check-rules.py`; le carte di oggi restano
-senza rarità fino a SB-28, e quelle della bozza del Set Base le scrive il prossimo blocco che la tocca (Q5, script pronto). Una
-mini-espansione di prova di cinque carte, con una terza bound di Spazienzio e una carta Java parametrica nei sorgenti di test, si
-carica con la bozza «attuale» e con quella del Set Base, gioca partite intere e una matrice col banco senza violazioni, e non cambia
-nessuna partita fra mazzi di base. Motore, regolamento, set e catalogo non cambiano. [Rapporto](reports/set-base/sb-6b-report.md).
-
-**Perimetro.** Una **bozza di set** in file, caricata dal runner, in cui si cambia ciò che si vuole: numeri, carte, personaggi, starter e **parametri del
-formato** (20 o 25 carte, 2 o 3 copie). Da più set contemporaneamente. Nessun legame col regolamento. Una **mini-espansione fittizia di poche carte**,
-solo di prova, verifica la struttura multi-set, comprese bound aggiuntive di un personaggio esistente.
-
-**Completamento verificabile.** Cambiare un numero non richiede ricompilazione. Una bozza errata viene rifiutata con un messaggio chiaro. Aggiungere la
-mini-espansione **non tocca motore né regole generali**; se li tocca, si corregge qui, quando costa poco.
-
-**Rischi.** La bozza che diverge dalla partita viva: le carte non convertite passano dalle stesse classi.
+Diviso da [D30](#decisioni-del-proprietario). **SB-6a** (6 novembre 2026): bozza in file con carte a dati, carte Java con `@Tunable`, parametri del formato, validazione alla lettura; la bozza «attuale» gioca come il catalogo ([rapporto](reports/set-base/sb-6a-report.md)). **SB-6b** (8 novembre 2026, [D44](#decisioni-del-proprietario)): formato `sb-6b/1` con più set insieme, rarità del vocabolario di R07, mini-espansione di prova nei soli test ([rapporto](reports/set-base/sb-6b-report.md)). Testo completo: [storico](history/set-base-plan-storico.md#sb-6--playground-e-mini-espansione-di-prova).
 
 ### SB-7 — Banco di misura e invarianti
 
-**SB-7 fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» (SB-7 e SB-7b). Un comando a richiesta produce la matrice dei matchup per coppia
-di mazzi e di stili, con intervalli di Wilson, e un rapporto in testo e in dati, identico byte per byte a parità di seme e bozza. Lo stesso
-comando controlla otto invarianti in partita e il tetto delle bound sulla ripetizione, con tetto e pesi come parametri. Una ricerca per
-mutazione, convalidata su semi disgiunti, ritrova una carta volutamente superiore. Ogni controllo è provato su una bozza costruita per
-violarlo. Prima fotografia sulla bozza «attuale» e su quella di prova: nessun invariante violato, tutte e quattro le bound attuali oltre il
-tetto. Una matrice da 7 personaggi costa circa 7 minuti su un thread. [Rapporto](reports/set-base/sb-7-report.md).
-
-**Perimetro.** Un comando che produce la **matrice dei matchup** per stile di bot e un rapporto: esiti con intervallo di confidenza, durata, patte, mazzi
-esauriti, tempo fino alla last resort, risorse inutilizzate, carte per giocata e per vittoria quando giocate, carte morte in mano. Controlli automatici
-sulla bozza: **zero turni senza mosse legali**, [vincoli delle bound e delle last resort](#nessun-giocatore-senza-mosse), tetto di debolezza sulla
-ripetizione. Ricerca automatica di mazzi forti (per mutazione) con limiti di copie e formato.
-
-**Completamento verificabile.** Rapporto riproducibile col seme. Un mazzo costruito apposta per violare un invariante viene segnalato. La ricerca ritrova un
-mazzo volutamente superiore inserito come prova.
-
-**Rischi.** Falsa precisione: un intervallo di confidenza non corregge i limiti del bot.
+**Fatto il 6 novembre 2026:** banco di misura con la matrice dei matchup (intervalli di Wilson), rapporto riproducibile col seme, otto invarianti in partita, tetto delle bound sulla ripetizione e ricerca di mazzi per mutazione. [Rapporto](reports/set-base/sb-7-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-7--banco-di-misura-e-invarianti).
 
 ### SB-7b — Bot e costo in HEALTH
 
-Aggiunto da [D31](#decisioni-del-proprietario): mini-blocco prima di SB-10, perché la prima fotografia di SB-7 mostra Rocco che muore pagando in
-HEALTH fino a 180 volte su 9000 partite con lo stile aggressivo, e le misure di SB-10 su Sant'Incasso ne sarebbero falsate.
-
-**SB-7b fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno** («Approvo entrambi»). Sulla bozza di prova le morti pagando scendono da 310 a 0
-su 27.000 partite di Rocco, con la stessa HEALTH spesa per partita. Sulla bozza «attuale» il rapporto del banco resta identico byte per
-byte. [Rapporto](reports/set-base/sb-7b-report.md).
-
-**Perimetro.** Gli stili euristici di `model/game/bot` tengono conto del costo in HEALTH. Una mossa che costa almeno la salute rimasta non
-si gioca mai, nemmeno se ucciderebbe l'avversario: pagando si muore prima degli effetti (R04), quindi si arriva al massimo a una patta, e
-una contromossa può lasciare solo la morte (fase A approvata). La salute spesa pesa come danno subito. Nessuna regola o carta cambia; il server non usa ancora i bot (SB-30).
-Le contromosse sottostimate restano fuori, a SB-17.
-
-**Completamento verificabile.** Sulla bozza di prova di SB-9 le morti pagando misurate dal banco di SB-7 scendono a zero, salvo le mosse
-che uccidono l'avversario. Gli stili battono ancora il casuale come in SB-4; `BotStylesTest` verde senza toccare gli attesi. Matrice di SB-7
-rilanciata e confrontata con la prima fotografia.
-
-**Rischi.** Uno stile troppo cauto con la salute che non paga mai: il banco lo mostra nella HEALTH spesa per partita.
+**Fatto il 6 novembre 2026** ([D31](#decisioni-del-proprietario)): gli stili euristici tengono conto del costo in HEALTH; sulla bozza di prova le morti pagando scendono da 310 a 0 su 27.000 partite, banco della bozza «attuale» identico. [Rapporto](reports/set-base/sb-7b-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-7b--bot-e-costo-in-health).
 
 ### SB-8 — Bozza giocabile da umani
 
-**SB-8 fatto il 10 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo SB-8» ([D46](#decisioni-del-proprietario)). Fase A approvata dal proprietario con «Approvo tutto»
-(undici domande con le raccomandazioni, un blocco solo, solo server). Profilo di sviluppo `bozza`, solo con `local` (o `test`) e mai
-con `heroku`: la bozza si legge da file (`set-base/bozza.json`, fuori dal jar), su un database separato `bm-bozza.sqlite`. La
-collezione è la bozza, i cinque starter sono mazzi pronti in open 1vCom, quick 1vCom, 1v1 e FFA pescano da una riserva, il computer
-gioca uno stile euristico di SB-4 (predefinito `risorse`) o il casuale di oggi. Caricatore (`Draft`, `DataCards`, `PlayerSource`) e
-classi Java di bozza spostati in `server/src/main` con `git mv`; una piccola cucitura del catalogo (`CatalogSource`) fa leggere a
-collezione, convalida dei mazzi e viste dei personaggi la stessa SQLite di prima, o la bozza col profilo. Nessun file del client:
-client-web gioca la bozza con i ripieghi che ha già. L'archivio marca le partite con `versions.draft`. Col profilo normale nessuna
-carta, personaggio o mazzo della bozza è raggiungibile (`BozzaProfileOffContextTest`); partite reali con carte di bozza via CLI
-(`BozzaCliTest`) e nel browser. Avvio in [setup](setup.md#avvio-con-la-bozza-del-set-base-sb-8); regola del diff dei giri precisata in
-[metodo e criteri](#bilanciamento-metodo-e-criteri). [Rapporto](reports/set-base/sb-8-report.md).
-
-**Perimetro.** Il server di sviluppo avvia partite con la bozza, senza toccare il catalogo di produzione; `client-web` le mostra, anche per carte **senza
-illustrazione**. Serve a tutte le prove umane, con un controllo end-to-end via CLI.
-
-**Completamento verificabile.** Partita reale con una carta di bozza, a 1366×768 e 844×390. Col profilo normale nessuna carta di bozza è raggiungibile.
-`TestServerContext` verde.
-
-**Rischi.** Il client presume dati del catalogo come ruolo, danno e immagini: i campi mancanti devono avere un ripiego.
+**Fatto e approvato il 10 novembre 2026** ([D46](#decisioni-del-proprietario)): profilo di sviluppo `bozza` (solo con `local` o `test`, mai `heroku`), bozza letta da file (`set-base/bozza.json`) su un database separato, cinque starter come mazzi pronti, computer con uno stile euristico; caricatore e classi Java di bozza in `server/src/main`, nessun file del client. Avvio in [setup](setup.md#avvio-con-la-bozza-del-set-base-sb-8); regola del diff dei giri in [metodo e criteri](#bilanciamento-metodo-e-criteri). [Rapporto](reports/set-base/sb-8-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-8--bozza-giocabile-da-umani).
 
 ### SB-9 — Schede dei personaggi
 
-**Chiuso il 6 novembre 2026** con l'approvazione del proprietario a tutte le raccomandazioni: [schede dei personaggi](design/set-base/schede-personaggi.md).
-Nomi provvisori Cesira la Malalingua e Rocco «Sant'Incasso»; Spazienzio invariato, Tossico con capacità 2, Mara e Pino con V 0; Q10 e Q6 decise (D28, D29).
-Valori iniziali e indicazioni sulle bound sono ipotesi da misurare in SB-10. [Rapporto](reports/set-base/sb-9-report.md).
-
-**Perimetro.** Scheda di ciascuno dei sette, attingendo alla [bozza esterna](#bozza-esterna-di-carte): nome, chi è, come picchia, risorsa, rischio, valori iniziali (salute e capacità comprese), versione propria del triangolo
-attacco-difesa-contromossa. Revisione dei concept col proprietario, **senza consumare le cartucce creative**: quanto eccede il perimetro va all'elenco per le
-espansioni. Bozza di tono coerente con Spazienzio de la Ucciso e il Tossico del Serraglio.
-
-**Completamento verificabile.** Sette schede approvate dal proprietario, compresi nomi almeno provvisori. Nessuna risorsa o parola chiave nuova.
-
-**Rischi.** Personaggi troppo simili sul piano delle risorse: V, T, L e A coprono solo quattro identità su sette. Malalingua, Gigi e Sant'Incasso si distinguono per
-strategia e devono comunque pagare con le risorse di base.
+**Chiuso il 6 novembre 2026:** [schede dei personaggi](design/set-base/schede-personaggi.md) approvate ([D28](#decisioni-del-proprietario), [D29](#decisioni-del-proprietario)); nomi e flavour aggiornati l'8 novembre (sezione [Personaggi](#personaggi)). [Rapporto](reports/set-base/sb-9-report.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-9--schede-dei-personaggi).
 
 ### SB-10 — Griglia degli slot e listino di potenza
 
-Diviso da [D32](#decisioni-del-proprietario) in due blocchi. **SB-10a, listino di potenza e tetto delle bound,** è di sole misure: danno per
-risorsa, valore della priorità, valore di L che decade, tetto delle bound e suoi pesi, posizione delle carte attuali rispetto al listino.
-**SB-10b, griglia degli slot,** è di progetto e usa il listino. Il perimetro che segue vale per i due blocchi insieme.
-
-**SB-10a fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo, scrivi», insieme alle quattro
-raccomandazioni del rapporto ([D33](#decisioni-del-proprietario)). Il [listino](design/set-base/listino.md) è misurato con duelli fra
-carta sonda e àncora (gratuita, 10 HIT), su cinque contesti e tre stili di bot. In sintesi:
-- V costa circa 1,1 danni per unità fino a 20 V e di più oltre;
-- A e la T del Tossico costano poco, HEALTH circa 1,1–1,2;
-- CUT, POISON e HIT si equivalgono e la priorità vale quasi niente;
-- la precedenza è ordinale;
-- L guadagnata vale circa metà di V e, come costo, è quasi sempre impagabile.
-
-Proposti tetto delle bound a 4 unità e nuovi pesi. Nella ricerca dei mazzi un mutante sostituisce il migliore solo oltre un errore
-standard. [Rapporto](reports/set-base/sb-10a-report.md).
-
-**SB-10b fatto il 6 novembre 2026.** Principi e griglia approvati dal proprietario lo stesso giorno, con le sue parole: «Approvo tutte»
-(fase A, [D34](#decisioni-del-proprietario); fase B, [D35](#decisioni-del-proprietario)). La
-[griglia](design/set-base/griglia.md) dà un posto a tutte le 115 carte, con ruolo, fascia di costo, rarità, starter e motivo; mappa le 39 carte di
-oggi e le 31 della bozza esterna. I predefiniti del banco sono quelli di D33. La misura in partita conferma il tetto di 4 unità per le
-bound di risorsa ma non per quelle di danno; il proprietario ha scelto il tetto 3 per il danno ([D36](#decisioni-del-proprietario)).
-[Rapporto](reports/set-base/sb-10b-report.md).
-
-**Perimetro.** Griglia delle circa 115 carte: slot per archetipo, ruolo, costo e rarità, secondo il [budget](#il-set-in-numeri), con le candidate della [bozza esterna](#bozza-esterna-di-carte) assegnate agli slot; numero di carte distinte per starter (10–15); quali generiche compaiono in quali
-starter; curva dei costi rispetto ai 3 slot regolari in mano. **Listino di potenza** ricavato dalle carte attuali e misurato: danno per risorsa, valore della priorità,
-valore di L che decade. Distribuzione delle rarità con il [paletto](#rarità). Verifica del tetto delle bound. Revisione degli effetti poco evidenti di L.
-
-**Completamento verificabile.** Ogni slot ha un motivo; il totale è fra 110 e 120. Ogni carta attuale è mappata: conservata, riprogettata o sostituita, flavour compreso. Ogni carta della bozza è assegnata a uno slot o scartata con un motivo.
-Listino e tetto delle bound confermati da misure.
-
-**Rischi.** Una griglia troppo rigida frena le idee: gli slot si possono scambiare, purché il totale tenga.
+Diviso da [D32](#decisioni-del-proprietario). **SB-10a** (6 novembre 2026, [D33](#decisioni-del-proprietario)): [listino di potenza](design/set-base/listino.md) misurato e tetto delle bound a 4 unità ([rapporto](reports/set-base/sb-10a-report.md)). **SB-10b** (6 novembre 2026, [D34](#decisioni-del-proprietario), [D35](#decisioni-del-proprietario), [D36](#decisioni-del-proprietario)): [griglia degli slot](design/set-base/griglia.md) per le 115 carte; tetto 3 per le bound di danno ([rapporto](reports/set-base/sb-10b-report.md)). Testo completo: [storico](history/set-base-plan-storico.md#sb-10--griglia-degli-slot-e-listino-di-potenza).
 
 ### SB-11 — Bozza degli starter base
 
-Diviso da [D37](#decisioni-del-proprietario) in due blocchi. **SB-11a, passi `consume` ed `equip` del formato dati,** prepara ciò che gli
-starter base richiedono secondo la [griglia](design/set-base/griglia.md): la presa di oggetti delle basic e di Grab, gli equip da oggetti
-con uso singolo e conversione del danno (Giubbotto e Posacenere, decisione B4 di D35), l'àncora del listino come parametro. **SB-11b, bozza
-degli starter base,** scrive gli starter di Spazienzio e Mara con quei passi. Il perimetro che segue vale per SB-11b.
-
-**SB-11a fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo, scrivi». Il formato dati, nei soli sorgenti di test, ha il passo
-`consume` (presa di un oggetto vicino, con i passi prima e dopo nell'ordine scritto), il passo `equip` dentro `status` (flusso, uso singolo
-o durata, conversione del tipo) e il campo `basic`. Grab, BruiserGrab, ToxicGrab e il token BrokenBeerBottle scritti a dati coincidono
-con le classi Java su 200 stati casuali con oggetti presenti, assenti e spariti, e in partite intere; Giubbotto, Posacenere, BadEducation e la
-scadenza secondo R05 sono provati su stati costruiti a mano. Dopo SB-5 le carte a dati sono 23 su 37, le altre 14 restano in Java. L'àncora del
-listino è un parametro (`-Dsim.listinoAnchor`, 10 di difetto, 7 per l'unità di D33). Regolamento, catalogo, client e classi di produzione non
-cambiano. [Rapporto](reports/set-base/sb-11a-report.md).
-
-**SB-11b fatto il 6 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo, maiuscolo nei dati»; con
-SB-11a, **SB-11 è chiuso**. Le risposte alle domande della fase A sono in
-[D38 e D39](#decisioni-del-proprietario).
-- **La bozza.** È un file unico che crescerà, `server/src/test/resources/set-base/bozza.json`, con gli starter di Spazienzio «Pazienza finita»
-  e di Mara «Consegna sul muso» come nella griglia. Le carte di oggi tengono il binding della loro classe, le nuove hanno il prefisso `base.`.
-- **Controlli.** Invarianti di SB-7 a zero in modo stretto su 96.000 partite; tutte le meccaniche di base coperte.
-- **Il risultato centrale.** **Spazienzio batte Mara 0,937**, mentre gli specchi stanno a 0,50. Partite di 13,5–16,5 turni.
-- **D36 e B2.** D36 regge per Spazienzio ma non per Mara, nemmeno con 2 di danno; la bound +8 A supera il criterio nello specchio, ma
-  toglierla peggiora Mara.
-- **Listino a 7 HIT.** La A di Mara vale circa 1 HIT, non 0,6.
-
-Nulla è bilanciato qui: i correttivi sono misurati su varianti e passano a SB-12. [Rapporto](reports/set-base/sb-11b-report.md).
-
-**Perimetro.** Spazienzio riprogettato e Mara: personaggio, basic, tre bound, last resort, azioni d'archetipo e generiche per due mazzi da 20. Nomi provvisori. Le carte
-devono mostrare danno, difesa, priorità, oggetti e almeno una contromossa.
-
-**Completamento verificabile.** Controlli di SB-7 verdi. Ogni meccanica di base compare in almeno uno dei due mazzi. Solo bozza.
-
-**Rischi.** Semplicità contro interesse: il mazzo base deve insegnare senza annoiare.
+Diviso da [D37](#decisioni-del-proprietario). **SB-11a** (6 novembre 2026): passi `consume` ed `equip` del formato dati ([rapporto](reports/set-base/sb-11a-report.md)). **SB-11b** (6 novembre 2026, [D38](#decisioni-del-proprietario), [D39](#decisioni-del-proprietario)): bozza `set-base/bozza.json` con gli starter di Spazienzio «Pazienza finita» e di Mara «Consegna sul muso»; Spazienzio contro Mara 0,937 passa a SB-12 ([rapporto](reports/set-base/sb-11b-report.md)). Testo completo: [storico](history/set-base-plan-storico.md#sb-11--bozza-degli-starter-base).
 
 ### SB-12 — Giro sugli starter base e prova umana
 
-Diviso da [D40](#decisioni-del-proprietario) in due blocchi. **SB-12a, giro coi bot,** porta gli starter base ai criteri con il banco e
-non aspetta il client. **SB-12b, prova umana,** sono le partite del proprietario e richiede SB-8. Il perimetro che segue vale per i due insieme.
-Con [D42](#decisioni-del-proprietario) SB-13 parte dopo SB-12a, senza aspettare SB-12b.
-
-**SB-12a fatto il 7 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo, anche +6 A» ([D41](#decisioni-del-proprietario)).
-Tre giri coi bot (il massimo di Q5), circa 40 minuti di calcolo su un tetto di 2 ore; correzioni decise con la delega di D38.
-- **Giri.** 1: punto di partenza di D38 e Sgommata 22 → 26 CUT (0,525). 2: salute di Spazienzio 100 → 85 e di Mara 95 → 80, per la durata
-  (0,500, 11 turni). 3: Sgommata 26 → 25, per centrare il matchup anche senza il bot attuale (0,520). Poi, approvata dal proprietario,
-  Cambio marcia (MAR-BO2) da +8 a +6 A.
-- **Esito sulla bozza approvata.** Spazienzio contro Mara **0,525** [0,520–0,531] (0,479 coi soli stili euristici), partite di **11,3
-  turni**, mazzi esauriti 10–16%, patte 10–13%, invarianti a zero su 96.000 partite. Bozza SHA-256 `bf7b97ce…8db0c39`.
-- **Bot.** Parate del turno, contromosse e Steal valgono meno di un colpo semplice in mano ai bot, per tutti e due: tenute, non tagliate.
-- **D36 e B2.** Tutte le bound stanno sotto 4 HEALTH equivalenti per uso; la +8 A di Mara ne valeva circa 4,5, la +6 A circa 3,3.
-- **Listino a 7 HIT.** Prezzi quasi invariati: A di Mara circa 1 HIT, V oltre 20 molto più cara.
-
-Restano raccomandazioni per i blocchi che le toccano: scala della salute degli altri personaggi (SB-13), patte e Steal (SB-12b). Dettagli
-nel [rapporto](reports/set-base/sb-12a-report.md).
-
-**SB-12b fatto il 12 novembre 2026, giudizio registrato.** Il proprietario: «gli starter base mi sembrano abbastanza bilanciati fra loro, anche se nelle mie partite mara mi sembra un po' piu debole di spazienzio. potrebbe essere solo una sensazione però, è evidenza aneddotica». Concorda coi bot: Spazienzio contro Mara 0,525 in SB-12a, dentro il 45–55%. **Osservazione assegnata:** nessun cambio ora, perché è evidenza aneddotica e i numeri sono nei criteri; si riguarda nella prima misura del set intero e nei giri di correzione (SB-20, SB-21) e nella prova con mazzi costruiti (SB-22). Prova del 12 novembre 2026 sulla bozza attuale, con `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e il client servito; nessun problema tecnico. Numero di partite e accoppiamenti non dichiarati. Durante le stesse prove, alla regia: il salvataggio in extremis di Piera, che resta ([D48](#decisioni-del-proprietario)); l'alcol che riduce i danni per tutti, rimandato alla Fase B di [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49); quantità di danno e barriera sull'impatto, osservazione del client [O32](client-roadmap.md#osservazioni-registrate-durante-c4), dopo C5.
-
-*Stato precedente.* **SB-12b, stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario.** SB-8 è chiuso (D46): la bozza si gioca con
-`./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e `./client-web/run.ps1 -Task Serve` ([avvio](setup.md#avvio-con-la-bozza-del-set-base-sb-8)).
-Da guardare, dal [rapporto SB-12a](reports/set-base/sb-12a-report.md#cosa-serve-a-sb-12b): parate e contromosse giocate da un umano (il
-matchup potrebbe spostarsi verso Spazienzio), durata percepita (11 turni di media), patte, Steal, i nomi dei due starter. La regia ha
-proposto una scheda di prova sul modello di quella di C3-7; il 10 novembre 2026 il proprietario ha deciso di non usarla, anche per
-SB-16: «la scheda di prova non importa, segnalerò le impressioni della prova umana così come mi vengono». La regia le registra nelle
-sezioni dei blocchi interessati. La bozza giocata è quella di oggi, con le
-correzioni di D41–D45 e i nomi del flavour; le prove umane occupano le porte 8080 e 4320 come le verifiche del client.
-
-**Perimetro.** Giro di bilanciamento fino ai criteri, poi partite del proprietario. Il risultato è la **base stabile** per i blocchi successivi.
-
-**Punto di partenza da SB-11b** ([D38](#decisioni-del-proprietario)):
-- **Matchup:** Spazienzio contro Mara 0,937. Primo passo: costi di Mara −5 A su Cinghiata, Sgommata, Slalom, Paraurti e Sputo, e HEALTH di
-  Mara 95 (misurato 0,593). Poi un secondo passo.
-- **Prezzi del listino a 7 HIT:** la A di Mara vale circa 1 HIT, la V oltre 20 è molto più cara.
-- **Durata:** sopra l'obiettivo.
-- **D36 e B2:** si rimisurano sugli starter corretti, anche come salute equivalente per uso (al massimo 4).
-- **Bot:** prima di tagliare carte, controllare se sono i bot a giocarle male.
-
-**Completamento verificabile.** Matchup 45–55%, durata e invarianti nei limiti. Giudizio del proprietario registrato, con le osservazioni assegnate.
-
-**Rischi.** Fermarsi ai numeri: se diverte poco, si torna a SB-11.
+Diviso da [D40](#decisioni-del-proprietario). **SB-12a** (7 novembre 2026, [D41](#decisioni-del-proprietario)): tre giri coi bot, Spazienzio contro Mara 0,525 in partite di 11,3 turni, invarianti a zero ([rapporto](reports/set-base/sb-12a-report.md)). **SB-12b** (prova umana, 12 novembre 2026): «gli starter base mi sembrano abbastanza bilanciati fra loro», Mara un po' più debole di Spazienzio (evidenza aneddotica); nessun cambio, si riguarda in SB-20, SB-21 e SB-22. Testo completo: [storico](history/set-base-plan-storico.md#sb-12--giro-sugli-starter-base-e-prova-umana).
 
 ### SB-13, SB-14, SB-15 — Starter avanzati
 
-Un blocco per personaggio, nell'ordine **Celestina Bucatina, Piera Ultimo Giro, Beppe Bulletta**.
-
-**SB-13 anticipato da [D42](#decisioni-del-proprietario)** dopo SB-12a, perché la prova umana (SB-12b) aspetta SB-2, SB-6b e SB-8. Gli starter
-base stabili sono quelli della bozza approvata in SB-12a (D41). Se SB-12b cambierà gli starter base, il giro di Celestina si rilancia contro i nuovi.
-SB-14 resta dopo SB-13; se e quando anticiparlo prima di SB-12b lo decide il proprietario.
-
-**SB-13 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D43](#decisioni-del-proprietario)): numeri e nome dello starter approvati; specchio lungo e Mescolone che toglie l'immunità propria restano fino alla prova umana degli avanzati (SB-16). Lo starter del Tossico, **«Tutto è droga»**, è nella bozza come
-nella griglia, senza blocchi da dividere: ogni carta si scrive coi passi di oggi o con le classi Java esistenti. Tre giri coi bot (il massimo
-di Q5), circa 75 minuti di calcolo su un tetto di 2 ore; correzioni decise con la delega di D38, solo numeri del Tossico.
-- **Giri.** 1: la griglia con la salute di SB-9 meno 15 (85): 0,483 contro Spazienzio, **0,403 contro Mara**, carte da 10 T morte in mano per
-  metà dei turni. 2: **T iniziale 10 → 20, salute 80, Tossicone Scatarrante 8 POISON**. 3: **Raschiare il fondo +10 → +7 T**, perché valeva
-  circa 4,6 HEALTH equivalenti per uso.
-- **Esito.** Tossico contro Spazienzio **0,529**, contro Mara **0,479** (0,558 e 0,412 coi soli euristici), specchio 0,507. Partite di 12,8
-  e 12,2 turni; specchio 16,6 turni con il 22% di patte. Invarianti a zero su 192.000 partite. Bozza SHA-256 `1c1d4a62…254bcc1e`.
-- **Starter base invariati:** le 48 celle dei loro incontri coincidono una per una con SB-12a.
-- **Listino a 7 HIT.** La T vale 0,39 danni per T a 10 T. Le tre bound stanno sotto 4 HEALTH equivalenti per uso (2,1, 3,6, 1,7); il peso
-  di D33 per la T (0,15) le sottostima.
-- **Bot.** Contromossa, cura col veleno, travaso, Grab, Steal e Mescolone valgono meno di un colpo semplice in mano ai bot: tenute, non
-  tagliate. Il Mescolone costa circa 8 punti perché il suo timer toglie anche l'immunità del Tossico.
-
-Da giudicare: le quattro correzioni, il nome dello starter, lo specchio lungo e il mazzo che si esaurisce spesso, il Mescolone. Dettagli
-nel [rapporto](reports/set-base/sb-13-report.md).
-
-**SB-14 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo entrambi» ([D44](#decisioni-del-proprietario)): numeri del giro 3 e nome dello starter approvati; partite lunghe, Offro io e il Bancone restano fino alla prova umana degli avanzati (SB-16). Lo starter di Pino, **«Chiude quando dico io»**, è nella bozza come
-nella griglia. Il passo 0 ha trovato che GoingBerserk riprogettata e «L'ultimo giro» chiedono la classe Java di B1, e il proprietario ha
-deciso di farla nello stesso blocco («Tutto in SB-14»): vive nei sorgenti di test (`base.pino.GoingBerserk` e la sottoclasse last resort
-`base.pino.UltimoGiro`) e non tocca il caricatore. Tre giri coi bot (il massimo di Q5), circa 105 minuti di calcolo su un tetto di 2 ore;
-correzioni decise con la delega di D38, solo numeri di Pino.
-- **Giri.** 1: la griglia con la salute di SB-9 meno 15 (95): **0,122 contro Spazienzio, 0,099 contro Mara e Tossico**; carte da 5 L morte in
-  mano per l'80–88% dei turni, e due stili su tre che non bevono. 2: **L iniziale 10 → 20, Estasi da Coca Etilene da 3 a 10 + L, L'ultimo giro
-  da 6 a 12 + L**, Testata 20 → 25. 3: **Testata di nuovo 20**, perché a 25 stava sopra il prezzo della L, e **salute 95 → 100**.
-- **Esito.** Pino contro Spazienzio **0,591**, contro Mara **0,559**, contro il Tossico **0,431** (0,692, 0,549 e 0,451 coi soli euristici),
-  specchio 0,503. Partite di 14,2–15,1 turni; specchio di 16,1 turni con il 35% di patte; mazzo esaurito nel 77% delle partite. Invarianti a
-  zero su 320.000 partite. Bozza SHA-256 `36788562…182cd2f27d5`.
-- **Starter approvati invariati:** le 96 celle fra Spazienzio, Mara e Tossico coincidono una per una con SB-13.
-- **Listino a 7 HIT.** 5 L valgono 14,5 HIT nel contesto di Pino, e Testata (15 netti) è in linea. Le tre bound stanno sotto 4 HEALTH
-  equivalenti per uso (2,5, 2,0, 1,5).
-- **Bot e immunità.** Offro io e il Bancone valgono meno di un colpo semplice in mano ai bot: tenuti. Con l'immunità a L (D28, solo
-  confronto) Pino vince l'83–91%: il rischio di Q10 è misurato e la scelta di D28 resta.
-
-Da giudicare: le correzioni, il giro 3 contro il giro 2, il nome dello starter, le partite lunghe col mazzo che si esaurisce, Offro io e il
-Bancone, le rarità della bozza proposte da SB-6b (Q5). Dettagli nel [rapporto](reports/set-base/sb-14-report.md).
-
-**SB-15 fatto l'8 novembre 2026 e approvato dal proprietario lo stesso giorno**, con le sue parole: «Approvo SB-15» ([D45](#decisioni-del-proprietario)). Due parti, due commit.
-- **Parte 1, le rarità** (D44, punto 6): la bozza è nel formato `sb-6b/1`, set `base` in versione «bozza», e ogni carta e personaggio ha la
-  rarità della griglia. La matrice dei quattro starter approvati coincide con quella finale di SB-14 in 160 celle su 160.
-- **Parte 2, Gigi.** Lo starter di Gigi, **«Intervento sul posto»**, è nella bozza come nella griglia. Il passo 0 ha trovato che la rara
-  «Lavoro fatto bene» chiede la classe Java di D35, e il proprietario ha deciso «Sì, tutto in SB-15»: vive nei sorgenti di test
-  (`base.gigi.LavoroFattoBene`) e non tocca il caricatore. Due giri coi bot su un massimo di tre, circa 55 minuti di calcolo su un tetto di
-  2 ore; correzioni decise con la delega di D38, solo numeri di Gigi.
-- **Giri.** 1: la griglia con la salute di SB-9 meno 15 (85): **0,148 contro Spazienzio, 0,127 contro Mara, 0,123 contro il Tossico, 0,126
-  contro Pino**; carte pagate in V morte in mano fino all'88% dei turni. 2: **V iniziale 15 → 25, salute 95, Chiave da tredici 12 CUT,
-  «Lavoro fatto bene» da 10 a 5 V**, le due carte sulla linea della fascia F1. Il terzo giro non è servito.
-- **Esito.** Gigi contro Spazienzio **0,589**, contro Mara **0,539**, contro il Tossico **0,470**, contro Pino **0,482** (0,649, 0,541,
-  0,503 e 0,444 coi soli euristici), specchio 0,503. Partite di 12,3–15,1 turni; contro Pino il 28% di patte; mazzo esaurito nel 68% delle
-  partite. Invarianti a zero su 480.000 partite. Bozza SHA-256 `c4accca1…f0a2ecf`.
-- **Starter approvati invariati:** le 160 celle fra Spazienzio, Mara, Tossico e Pino coincidono una per una con SB-14.
-- **Listino a 7 HIT.** Nel contesto di Gigi 5 V valgono 14,5 HIT e 10 V 24,6. Le tre bound stanno sotto 4 HEALTH equivalenti per uso (3,0,
-  1,8, 1,4).
-- **Bot.** Steal e Smontiamo tutto valgono meno di un colpo semplice in mano ai bot: tenuti. La capacità 3 vale circa 4 punti.
-
-Da giudicare: le correzioni, i due giri invece di tre, il nome dello starter, il mazzo che si esaurisce e le patte contro Pino, Steal e
-Smontiamo tutto, Mattone e SeagullFly morti in mano. Dettagli nel [rapporto](reports/set-base/sb-15-report.md).
-
-**Perimetro.** Bozza dello starter (Junkie riprogettato sul primo blocco, conservandone il flavour), poi giro contro tutti gli starter già stabili, **senza toccarli se non
-serve**; se serve, lo si dichiara e si rilancia la matrice.
-
-**Completamento verificabile.** Matchup 40–60% con gli starter stabili, compresi quelli base. Invarianti verdi. Carte d'archetipo davvero giocate dal mazzo.
-
-**Rischi.** Bot che gioca male i mazzi complessi: si aggiunge uno stile prima di correggere le carte. Piera: uso di L che decade o, con l'immunità, GoingBerserk troppo affidabile. Beppe: tavoli vuoti e distruzione ripetibile. Celestina: pulizie gratuite delle altre carte.
+Chiusi e approvati l'8 novembre 2026: Celestina Bucatina, starter «Tutto è droga» ([D43](#decisioni-del-proprietario), [rapporto](reports/set-base/sb-13-report.md)); Piera Ultimo Giro, «Chiude quando dico io» ([D44](#decisioni-del-proprietario), [rapporto](reports/set-base/sb-14-report.md)); Beppe Bulletta, «Intervento sul posto», con le rarità della griglia nella bozza `sb-6b/1` ([D45](#decisioni-del-proprietario), [rapporto](reports/set-base/sb-15-report.md)). Invarianti a zero; i numeri sono stati rivisti da SB-16d in avanti. Testo completo: [storico](history/set-base-plan-storico.md#sb-13-sb-14-sb-15--starter-avanzati).
 
 ### SB-16 — Prova umana degli avanzati
 
-**Perimetro.** Partite del proprietario con i tre avanzati, anche contro i base.
-
-**Completamento verificabile.** Giudizio registrato. Osservazioni assegnate ai blocchi interessati, rifatti se serve.
-
-**Rischi.** Complessità poco leggibile sul tavolo: va annotata per SB-31.
-
-**Fatto il 12 novembre 2026, giudizio registrato.** Il proprietario: «anche gli starter avanzati mi sembrano ok, con celestina che sembra leggermente piu debole di beppe bulletta». **I bot dicono il contrario:** Beppe contro Celestina (il Tossico) 0,470 [0,464–0,476] in [SB-15](reports/set-base/sb-15-report.md), cioè Celestina un poco avanti, dentro il 40–60%. Una spiegazione possibile, non provata: le carte di Celestina sono quelle che i bot giocano peggio (sotto), e un umano può giocarle in un altro modo. **Osservazione assegnata:** nessun cambio ora; si riguarda in SB-20, SB-21 e SB-22, prima leva la T iniziale di Celestina (D43). Leggibilità sul tavolo: nessuna segnalazione per SB-31. Prova del 12 novembre 2026 sulla bozza attuale, con `./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts` e il client servito; nessun problema tecnico. Numero di partite e accoppiamenti non dichiarati. Durante le stesse prove, alla regia: il salvataggio in extremis di Piera, che resta ([D48](#decisioni-del-proprietario)); l'alcol che riduce i danni per tutti, rimandato alla Fase B di [SB-16b](#sb-16b--revisione-critica-delle-regole) (D49); quantità di danno e barriera sull'impatto, osservazione del client [O32](client-roadmap.md#osservazioni-registrate-durante-c4), dopo C5.
-
-*Stato precedente.* **Stato al 10 novembre 2026: prossimo, aspetta le partite del proprietario** (richiede SB-8, chiuso con D46). Da guardare, dai rapporti
-[SB-13](reports/set-base/sb-13-report.md), [SB-14](reports/set-base/sb-14-report.md) e [SB-15](reports/set-base/sb-15-report.md): le carte
-che i bot giocano peggio (Celestina: Riflessi, Metabolismo, travaso e Mescolone che toglie l'immunità propria; Piera: «bevi poi
-spendi», Testata, Offro io, il Bancone; Beppe: Steal, Smontiamo tutto, oggetti sul tavolo per «Lavoro fatto bene», Mattone e SeagullFly
-ferme in mano); specchi lunghi e patte (Celestina 22%, Piera 35%, Beppe contro Piera 28%); mazzi esauriti spesso. Prime leve se un
-avanzato risulta forte: T iniziale di Celestina (D43); L iniziale di Piera, poi Estasi (D44); V iniziale di Beppe, poi la salute (D45).
-Un cambio di composizione di uno starter è un cambio della griglia e lo decide il proprietario.
+**Prova umana del 12 novembre 2026, giudizio registrato:** «anche gli starter avanzati mi sembrano ok, con celestina che sembra leggermente piu debole di beppe bulletta»; i bot dicono il contrario (Beppe contro Celestina 0,470 in [SB-15](reports/set-base/sb-15-report.md)). Nessun cambio, si riguarda in SB-20, SB-21 e SB-22. Testo completo: [storico](history/set-base-plan-storico.md#sb-16--prova-umana-degli-avanzati).
 
 ### SB-16b — Revisione critica delle regole
 
-**Origine ([D49](#decisioni-del-proprietario)).** Il proprietario, 12 novembre 2026, alla fine delle prove umane: «prevediamo a un punto opportuno di SB una attività di valutazione critica dello stato delle regole del gioco, in cui un agente potentissimo impersona un game designer esperto e analizza cosa potrebbe essere cambiato per rendere il gioco più divertente, più soddisfacente, complesso ma non inutilmente complicato, poi mi propone le cose che ha trovato. io farò lo stesso e gli dirò le miee idee e insieme decideremo come agire».
-
-**Perché qui** (punto scelto dalla regia, su delega del proprietario: «a un punto opportuno»). Dopo le prove umane dei cinque starter,
-con le impressioni fresche; prima di SB-17 e SB-18, così Sergio e Duccio nascono con le regole decise e gli eventuali giri da rifare
-riguardano solo i cinque starter; prima del resto del pool (SB-19) e della prima misura del set intero (SB-20).
-
-**Fase A — analisi del game designer.** Un esecutore col modello più potente disponibile e sforzo massimo impersona un game designer
-esperto. Legge il [regolamento](game-rules.md), il [documento del set](sets/base.md), le [schede dei personaggi](design/set-base/schede-personaggi.md),
-la [griglia](design/set-base/griglia.md), il [listino](design/set-base/listino.md), i rapporti dei giri coi bot e le impressioni delle prove
-umane SB-12b e SB-16; può giocare partite coi bot del runner. Cerca cosa cambiare nel sistema (regolamento) e, se serve, nel set, per un
-gioco più divertente e più soddisfacente, profondo ma non inutilmente complicato. Per ogni proposta: il problema, con l'evidenza; il cambio;
-l'effetto atteso al tavolo; il costo (regolamento, server, client, bot, giri di bilanciamento da rifare); i rischi e cosa si perde. Proposte
-in ordine di valore, anche «niente da cambiare» dove è il caso. Lavora da solo: le idee del proprietario arrivano in Fase B, e il prompt
-della Fase A chiede di non leggere l'elenco qui sotto. Le decisioni già prese ([D48](#decisioni-del-proprietario) e le precedenti) si
-rispettano o si discutono apertamente, con il motivo. Solo rapporto: nessuna modifica a regolamento, set, codice o test.
-
-**Fase A fatta il 12 novembre 2026.** [Rapporto](reports/set-base/sb-16b-report.md). Tre proposte, in ordine di valore:
-**P1**, chi è a terra non colpisce (R04: la mossa di un autore già morto all'inizio del suo gruppo di velocità si annulla, salvo quelle
-su di sé, quindi il salvataggio di D48 resta); **P2**, l'ultimo a cadere (R06: se muoiono tutti vince chi ha più HEALTH); **P3**, nessuna
-parata pura nella griglia. Misure coi bot, circa 8 minuti di calcolo: patte da 16,9% a 9,4% con P1 e allo 0,9% con P1 e P2, durata
-invariata; con P1 Spazienzio–Beppe va a 0,395, mezzo punto fuori dai criteri. Sette domande al proprietario per la Fase B, fra cui
-D12 (playground o gioco vivo). L'esecutore dichiara di aver letto per errore l'elenco qui sotto.
-
-**Fase B — confronto.** Il proprietario porta le sue idee; si discute proposta per proposta. Ogni scelta diventa una decisione registrata,
-compresa quella di non cambiare nulla.
-
-**Fase B fatta il 12 novembre 2026**, con il proprietario, proposta per proposta: decisioni [D50–D53](#decisioni-del-proprietario), misure
-aggiuntive nel [rapporto](reports/set-base/sb-16b-report.md#fase-b--decisioni-e-misure-aggiuntive).
-- **Adottate:** P1, chi è a terra non colpisce; costi pagati solo con quello che si ha, con l'eccezione «Ultimo colpo» scritta sulla
-  carta; pavimento a zero per tutte le risorse; corazza dell'alcol a L/4 sui colpi; ricerca al posto della pesca; P3, nessuna parata
-  pura; P5, il ritmo caricare-colpire-parare; P4, ordine dei timer, nel regolamento 1.14 a SB-28. Pavimento, corazza e ricerca sono
-  idee del proprietario; P5 nasce dalle sue risposte sulle prove umane.
-- **Scartate:** P2 e lo spareggio sulla HEALTH di inizio turno («questa cosa dello spareggio proprio non mi piace»): la patta resta un
-  esito, e il criterio del 10% (D51) si raggiunge con le carte.
-- **Dove:** nel playground fino a SB-28 (D12): il gioco vivo e il regolamento 1.13 non cambiano fino al trasferimento.
-- **Prove umane, risposte del proprietario.** Sul turno decisivo: «nel turno decisivo sì, nel corso del gioco in realtà no. non sentivo
-  una vera scelta, o una vera strategia da ideare e seguire, o delle scelte tattiche, c'era solo da accumulare risorse per tirare il
-  colpo più forte possibile e uccidere l'avversario più velocemente di quanto non lo stesse facendo già lui». Sulla fine a mazzo vuoto:
-  «non mi è sembrata male in realtà, a quel punto ognuno aveva già giocato tutte le sue carte, quindi ci stava». Sulle parate: «le carte
-  di pura difesa sono state quelle che ho preferito meno e che ho scartato più spesso per usare le bound. non riuscivo a tenermele per
-  pararmi da colpi potenti dell'avversario, più che altro perché non avevo modo di riuscire a intuire quando li avrebbe usati». Con la
-  sua avvertenza: «non sono un giocatore bravissimo né molto attento».
-- **Calcolo:** circa 6 minuti in più coi bot (pavimento, spareggio di inizio turno, corazza a L/4 e L/2), 14 in tutto.
-
-**Fase C — solo se si cambia qualcosa.** Prima il regolamento (1.14) o il documento del set, con versione e motivazione (AGENTS); poi test,
-server, catalogo, bot e client se toccati. I giri di bilanciamento da rifare si decidono secondo i cambi, con le parole del proprietario:
-«se dobbiamo rifare dei giri di bilanciamento a seguito di quei cambi, pace, li rifaremo, ma valuteremo a seconda di cosa vogliamo cambiare, se mai decidessimo che c'è da cambiare qualcosa». Può diventare più blocchi.
-Diventa i blocchi SB-16c, SB-16d, SB-16e e SB-16f ([D53](#decisioni-del-proprietario)).
-
-**Idee del proprietario per la Fase B** (non fanno parte della Fase A):
-
-- **Alcol che riduce i danni ricevuti, come regola per tutti** (12 novembre 2026, durante le prove): «mi sa che il tasso alcolemico come risorsa non fa molto, potrebbe ridurre il danno? uno diventa insensibile al dolore quando è brillo»; alla scelta fra le sole carte
-  di Piera e una regola per tutti: «mi piacerebbe una regola per tutti, ma aspettiamo a cambiare le regole». Da pesare: oggi ALCOHOL è un costo e a fine turno toglie ALERTNESS (R06); con la regola il
-  «giro offerto» di Piera, che dà alcol a tutti gli avversari, li renderebbe più lenti ma anche più resistenti.
-  **Discussa in Fase B:** adottata come corazza dei soli colpi, a L/4 (D50, punto 5).
+**Fase A e B fatte il 12 novembre 2026** ([D49](#decisioni-del-proprietario); [rapporto](reports/set-base/sb-16b-report.md)): adottati chi è a terra non colpisce (P1), costi pagati con quello che si ha («Ultimo colpo» scritto sulla carta), pavimento a zero, corazza dell'alcol a L/4 sui colpi, ricerca al posto della pesca, nessuna parata pura (P3), ritmo caricare-colpire-parare (P5), ordine dei timer (P4, nel regolamento 1.14 a SB-28); scartati P2 e lo spareggio ([D50](#decisioni-del-proprietario)–[D53](#decisioni-del-proprietario)). Solo nel playground fino a SB-28 ([D12](#decisioni-del-proprietario)). Fase C nei blocchi SB-16c–SB-16f ([D53](#decisioni-del-proprietario)). Testo completo: [storico](history/set-base-plan-storico.md#sb-16b--revisione-critica-delle-regole).
 
 ### SB-16c — Regole decise in SB-16b nel playground
 
-**Fatto il 12 novembre 2026**; domande risposte dal proprietario lo stesso giorno (D54). [Rapporto](reports/set-base/sb-16c-report.md).
-- **Interruttore:** `Ruleset` (`1.13` o `d50`). Il profilo `bozza` parte con `d50` (`app.bozza.regole`), il runner usa
-  `-Dsim.rules=d50`.
-- **Test:** 30 nuovi, uno o più per ogni caso qui sotto; dieci mutazioni, tutte uccise.
-- **Interruttore spento:** test di prima verdi, banco SB-7 identico alla base di SB-16b.
-- **Interruttore acceso:** invarianti di partita a zero. Il banco coincide in ogni campo con la misura «P1 + pavimento + L/4» di SB-16b.
-  Il tetto delle bound segnala CinqueMinutiEVado, che con la corazza para: domanda al proprietario.
-- **Domande nel rapporto:** quattro, risposte dal proprietario lo stesso giorno ([D54](#decisioni-del-proprietario)). Si tiene tutto com'è;
-  CinqueMinutiEVado si corregge in SB-16d.
-
-**Perimetro.** Le regole di [D50](#decisioni-del-proprietario) nel server, dietro un interruttore acceso solo dal profilo `bozza` e dal
-runner:
-- P1: gruppi di velocità; chi è a terra all'inizio del proprio gruppo non colpisce, ma le mosse su di sé restano;
-- costi pagati solo con quello che si ha; la HEALTH non si paga fino a 0, salvo le carte con «Ultimo colpo», che si risolvono anche a terra;
-- pavimento a zero per tutte le risorse;
-- corazza dell'alcol: HIT ricevuti ridotti di L/4;
-- ricerca al posto della pesca, come passo nuovo del formato della bozza;
-- nel registro del turno, il motivo dell'annullamento («a terra») e la carta cercata.
-
-Nei bot, un'euristica per reagire a un caricamento visibile e per giocare il colpo dopo il caricamento. Il prototipo di SB-16b
-([diff](reports/set-base/sb-16b/fase-b/variante-regole-fase-b.diff)) è un esperimento, non un punto di partenza obbligato.
-
-**Completamento verificabile.** Test di conformità per ogni regola:
-- colpo di un autore già a terra, annullato; cura su di sé che lo salva (D48); colpo reciproco nello stesso gruppo; bound annullata che
-  non scarta;
-- costo in HEALTH che porterebbe a 0, rifiutato, e accettato con «Ultimo colpo»;
-- risorse che non scendono sotto zero;
-- corazza sui HIT e non su CUT e POISON, anche sui danni a sé;
-- ricerca: carta già in mano, già scartata o assente; mazzo vuoto; oggetto trovato; carta cercata scartata con una bound; due ricerche
-  nello stesso turno; ricerca di chi è a terra.
-
-A interruttore spento la partita viva è identica: test di oggi verdi e banco SB-7 uguale cella per cella. A interruttore acceso,
-invarianti a zero sul banco.
-
-**Rischi.** È un blocco di regole: tocca il motore (`Game`, `Character`, `Move`, la pesca), non solo `com.gsc.bm.sim` e le carte di
-bozza, e lo dichiara. Regolamento, documento del set, catalogo e client non cambiano fino a SB-28 (D12, D50).
+**Fatto il 12 novembre 2026** ([D54](#decisioni-del-proprietario); [rapporto](reports/set-base/sb-16c-report.md)): le regole di [D50](#decisioni-del-proprietario) nel server dietro l'interruttore `Ruleset` (`1.13` o `d50`); il profilo `bozza` parte con `d50` (`app.bozza.regole`), il runner con `-Dsim.rules=d50`. Trenta test nuovi e dieci mutazioni uccise; con l'interruttore spento banco identico alla base di SB-16b. Testo completo: [storico](history/set-base-plan-storico.md#sb-16c--regole-decise-in-sb-16b-nel-playground).
 
 ### SB-16d — Riprogettazione dei cinque starter (P3 e P5)
 
-**Fatto il 12 novembre 2026; proposta approvata (D55).** Il proprietario: «approvo, poi cmq le ritestiamo estensivamente».
-[Proposta 0.2](design/set-base/sb-16d-proposta.md) attuata nella sola bozza dopo SB-16c; [rapporto](reports/set-base/sb-16d-report.md).
-
-- Nove slot approvati, cinque coppie con `search`, esposizioni visibili per due turni e difese con cura/rimborso; griglia aggiornata.
-  Copie, rarità, composizioni e valori iniziali conservati. Nessun cambiamento a motore, client, catalogo, regolamento o documento del set.
-- CinqueMinutiEVado corretta sotto D38/D54 con **+10 → +5 L**, solo numero: valore per uso **3,75**, tetto 4 invariato; +6 varrebbe 5,10.
-- Quattordici nuovi test delle carte, inclusi ricerca e chi è a terra; suite verde (server 702, 7 saltati; client-debug 37).
-- Un solo banco SB-7 con `d50`, 480.000 partite: **otto invarianti a zero e zero bound in violazione**. Nessun giro di bilanciamento.
-  Patte globali 10,06%, cinque incontri ancora oltre il 10%, fra cui gli specchi di Piera 29,15%, Celestina 21,85% e Beppe 14,00%:
-  criteri da raggiungere in SB-16e, non dichiarati superati. Prossimo SB-16e, poi prova umana SB-16f. STOP prima dei giri.
-
-**Da SB-16c ([D54](#decisioni-del-proprietario)).**
-- **CinqueMinutiEVado:** va corretta. Con la corazza dell'alcol (D50, punto 5) supera il tetto delle bound: valore per uso 8,50 contro 4.
-- **Il caricamento è un effetto, non un tipo di carta.** Lo può avere anche un colpo. Serve a dire all'avversario «ho in mano una
-  carta potente, ma sono vulnerabile»: lui sceglie se colpire o difendersi.
-- **Dove sta la ricerca:** nel motore il passo `search` vale in ogni carta che si gioca e poi pesca, cioè azioni regolari, bound e last
-  resort. Non vale in basic e oggetti.
-
-**Perimetro.** Proposta delle carte da cambiare nei cinque starter secondo i principi di [D52](#decisioni-del-proprietario):
-- nessuna parata pura: ogni difesa che vale solo nel turno dà anche circa +5 della risorsa del personaggio, o una piccola cura per le
-  generiche;
-- il ritmo caricare-colpire-parare: colpo annunciato da uno stato visibile, accumulo rischioso con un'esposizione che dura anche il
-  turno dopo, una coppia caricamento-colpo con ricerca per personaggio.
-
-Con le regole di D50: senza valori negativi l'abs nei testi non serve più, la corazza dell'alcol pesa sugli incontri, priorità e A
-contano con P1. La [griglia](design/set-base/griglia.md) si aggiorna con i principi e gli slot toccati. Prima la proposta, che il
-proprietario approva per funzionamento e composizione (D45, punto 7); poi la bozza.
-
-**Completamento verificabile.** Proposta approvata; griglia aggiornata; bozza con le carte nuove e le classi o i passi necessari;
-invarianti a zero.
-
-**Rischi.** Troppi cambi insieme: le misure non dicono più quale pesa, quindi pochi cambi per starter. Durata: un colpo annunciato
-costa due turni.
+**Fatto il 12 novembre 2026, proposta approvata** ([D55](#decisioni-del-proprietario); [proposta 0.2](design/set-base/sb-16d-proposta.md), [rapporto](reports/set-base/sb-16d-report.md)): cinque coppie caricamento-colpo con `search`, esposizioni per due turni, difese con cura o rimborso; CinqueMinutiEVado da +10 a +5 L. Banco `d50` da 480.000 partite: invarianti e bound a zero, criteri di bilanciamento non ancora raggiunti. Testo completo: [storico](history/set-base-plan-storico.md#sb-16d--riprogettazione-dei-cinque-starter-p3-e-p5).
 
 ### SB-16e — Giro sui cinque starter con le regole nuove
 
-**Eseguito il 12 novembre 2026, STOP al terzo giro (D53).** [Rapporto](reports/set-base/sb-16e-report.md),
-[tutti gli incontri e specchi per giro](reports/set-base/sb-16e/incontri.md), [coppie e ablazioni](reports/set-base/sb-16e/coppie.md).
-Tetto fissato prima: 3 giri e 2 ore di calcolo, compresi listino e controlli delle coppie; regole D50 e quattro stili invariati.
-Nel giro finale invarianti e bound a zero violazioni, ma Piera è fuori quota contro Mara e Celestina; patte negli specchi
-Celestina **22,32%**, Piera **17,78%**, Beppe **8,22%**. Sei incontri oltre i 12 turni medi: equilibrio non dichiarato raggiunto.
-Bozza e griglia conservano i numeri del terzo giro sotto D38/D53, funzioni e liste di D55 invariate. Prima leva su Piera:
-L iniziale 20→10 nel giro 2; salute 100→85 nel giro 3, poi recupero A del caricamento 10→20 e Testata 20→25.
-Proposte da decidere prima di proseguire: un solo nuovo lotto numerico su recupero A e danni a sé delle last resort;
-per SB-16f, carta cercata e motivo «a terra» mostrati nel flusso ordinario del client (oggi solo nel testo inglese richiudibile).
-Nessun quarto giro, nessun ridisegno o intervento sul client in questo blocco.
-
-**Perimetro.** Giro coi bot con le regole di D50 e le carte di SB-16d, fino ai criteri:
-- base contro base 45–55%, gli altri incontri 40–60%;
-- durata circa 6–12 turni;
-- **patte al massimo al 10% in ogni incontro, specchi compresi** (D51);
-- invarianti a zero.
-
-Al massimo 3 giri e 2 ore di calcolo. Delega come D38 per i numeri (salute, costi, danni, risorse iniziali, valore della corazza) e per
-le aggiunte di P3; funzionamento delle carte e composizione degli starter si propongono al proprietario. Leve già note: Piera con la
-corazza, prima la L iniziale e poi la salute (D44); Beppe contro Spazienzio (0,395 con P1). Per ogni coppia con ricerca, misure dedicate:
-con e senza la coppia; quante volte il colpo è cercato, giocato, parato; quante volte l'esposizione è punita; effetto su durata e patte.
-Listino di priorità e A da rimisurare.
-
-**Completamento verificabile.** Criteri raggiunti o, se in 3 giri non tornano, stop con una proposta invece di forzare. Rapporto con le
-misure delle coppie.
-
-**Rischi.** Lo specchio di Piera è il caso più difficile: 34% di patte con P1 e pavimento, 36% con la corazza. I bot leggono male: le
-misure sottostimano letture e corazza.
+**Eseguito il 12 novembre 2026, STOP al terzo giro** ([D53](#decisioni-del-proprietario); [rapporto](reports/set-base/sb-16e-report.md)): invarianti e bound a zero, criteri D16/D51 non raggiunti (Piera fuori quota contro Mara e Celestina; patte negli specchi di Celestina 22,32% e Piera 17,78%). Testo completo: [storico](history/set-base-plan-storico.md#sb-16e--giro-sui-cinque-starter-con-le-regole-nuove).
 
 ### SB-16e2 — Lotto numerico dopo lo STOP di SB-16e
 
-**Autorizzato da [D56](#decisioni-del-proprietario), domanda 1 del [rapporto SB-16e](reports/set-base/sb-16e-report.md#domande-numerate-al-proprietario).**
-Un solo lotto, al massimo 30 minuti di calcolo: controllo col profilo del giro 3 di SB-16e e tre varianti prefissate,
-(a) Un altro e arrivo +20→+35 A, (b) danno a sé di L’ultima dose e L’ultimo giro 5→2, (c) entrambe. Stessi semi, matrice,
-stili e regole `d50`; criteri di D16 e D51 invariati. Nella bozza la variante che li soddisfa tutti, altrimenti quella con meno
-violazioni, dichiarando i criteri falliti, e stop. Niente secondo lotto.
-
-**Eseguito il 12 novembre 2026, criteri non raggiunti.** [Rapporto](reports/set-base/sb-16e2-report.md),
-[incontri per profilo](reports/set-base/sb-16e2/incontri.md). Un lotto, 971,7 s su 1.800; controllo identico al giro 3.
-Tutti e quattro i profili hanno 10 violazioni (2 patte, 2 quote, 6 durate); invarianti e bound a zero. Adottata nella bozza la
-variante **(c)**: Un altro e arrivo +35 A, danno a sé di L'ultima dose e L'ultimo giro 2 HIT. Rispetto al controllo, specchio di
-Celestina 22,32 → 18,57% di patte, di Piera 17,78 → 13,07%; Mara–Piera 0.653 e Celestina–Piera 0.662 ancora fuori quota.
-(b) e (c) erano pari sulle regole fissate prima; spareggio esteso dichiarato nel rapporto. Domande al proprietario: ridisegno
-o prova umana con questi numeri; conferma di (c) su (b).
+**Eseguito il 12 novembre 2026** ([D56](#decisioni-del-proprietario), [D57](#decisioni-del-proprietario); [rapporto](reports/set-base/sb-16e2-report.md)): un lotto numerico, adottata la variante (c) (Un altro e arrivo +35 A, danno a sé di L'ultima dose e L'ultimo giro 2 HIT); criteri non raggiunti, prima la prova umana. Testo completo: [storico](history/set-base-plan-storico.md#sb-16e2--lotto-numerico-dopo-lo-stop-di-sb-16e).
 
 ### SB-16f0 — Leggibilità della ricerca e dell’annullamento
 
-**Autorizzato da [D56](#decisioni-del-proprietario), domanda 2 del [rapporto SB-16e](reports/set-base/sb-16e-report.md#domande-numerate-al-proprietario).**
-Prima della prova umana SB-16f, il minimo intervento proposto lì: binding ed esito della ricerca e motivo dell’annullamento come
-campi strutturati opzionali nella vista del playground; nel client la carta trovata pubblicamente ispezionabile riusando la pesca
-esistente e «annullata: a terra» nel riepilogo italiano. Lo fa un esecutore dopo SB-16e2.
-
-**Fatto il 12 novembre 2026.** [Rapporto](reports/set-base/sb-16f0-report.md). La mossa pubblica ha due campi opzionali in sola
-lettura, `voidReason` e `search` (`card`, `found`, `revealed`). Mancano con le regole vive e non dicono niente della mano o del mazzo
-oltre la carta rivelata. Nel client, «Ultimo turno» scrive «Annullata: a terra.» e la riga della ricerca, riuscita o fallita, con
-il pulsante che apre la carta trovata nell’ispezione. In sequenza la carta trovata dall’avversario esce scoperta, col volo di pesca
-che c’era già. Il test di confine di SB-16e è aggiornato per D56; dieci test nuovi (5 server, 5 client). Mutazioni 10/10.
-Test, contesto Spring completo e catture verdi; niente Playwright, come chiesto.
+**Fatto il 12 novembre 2026** ([D56](#decisioni-del-proprietario); [rapporto](reports/set-base/sb-16f0-report.md)): campi opzionali `voidReason` e `search` nella vista del playground; nel client «Annullata: a terra.» e la carta trovata ispezionabile. Testo completo: [storico](history/set-base-plan-storico.md#sb-16f0--leggibilità-della-ricerca-e-dellannullamento).
 
 ### SB-16f — Prova umana degli starter rifatti
 
-**Perimetro.** Partite del proprietario con i cinque starter dopo SB-16e, prima di SB-17: letture a metà partita, colpi annunciati e
-ricerche, parate con aggiunta, corazza dell'alcol, turno decisivo con P1.
-
-**Completamento verificabile.** Giudizio registrato; osservazioni assegnate ai blocchi interessati.
-
-**Rischi.** Il client deve mostrare la carta cercata e il motivo dell'annullamento: se non lo fa, serve un piccolo intervento prima
-della prova, da decidere col proprietario.
-
-**Fatto il 13 novembre 2026, giudizio registrato.** Il proprietario, sulle carte che cercano i colpi annunciati: «ne vorrei di piu, per vederne almeno una o due a partita»; «dovrebbero dare le risorse necessarie a giocare il colpo che cercano»; «i colpi annunciati cercati dovrebbero essere potenti»; «ci dovrebbe essere qualche malus se non si giocano il turno successivo, altrimenti uno li puo usare le carte che cercano solo come tutori che danno risorse, e tenersi il colpo potente per dopo. potrebbe essere una scelta che un giocatore fa, ma ci deve essere una conseguenza». Sul resto: «il resto mi sembra a posto». Prova sul PC e sul telefono, con la bozza e le regole d50; numero di partite e accoppiamenti non dichiarati. **Problema tecnico:** il server si è fermato da solo una volta senza errori nel log (ultima riga una partita alle 10:25); riavviato, poi nessun altro arresto. Da riguardare se ricapita.
-
-**Lettura della regia sulla bozza di oggi** (variante c). Caricamento e colpo cercato: Spazienzio +15 V e +15 A, colpo 25 V per 40 HIT (il caricamento da solo non basta a pagarlo); Mara +15 A, colpo 15 A per 25 CUT; Celestina +10 T, colpo 10 T per 12 POISON; Piera +15 L e +35 A, colpo gratuito da 10 + L HIT; Beppe +10 V, colpo 5 V per 6 + 4 per oggetto HIT. Una sola carta di caricamento per starter. Oggi l'unico costo è l'esposizione per due turni, che nasce dal caricamento e non dal tenere il colpo.
-
-**Osservazioni assegnate:** tutte e quattro a una seconda passata sulle coppie caricamento-colpo dei cinque starter, prima di SB-17, da decidere col proprietario (blocco [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata), aperto il 13 novembre 2026). Il malus per chi non gioca il colpo il turno dopo è un funzionamento nuovo (D45, punto 7; D8).
-
-*Stato precedente.* **Stato al 13 novembre 2026: prossimo.** Si gioca con i numeri di SB-16e2, variante (c), sapendo che i criteri dei bot non sono
-raggiunti (specchi di Celestina e Piera, Piera contro Mara e Celestina, quattro incontri lunghi): [D57](#decisioni-del-proprietario).
-Da guardare anche quei finali, la leggibilità di SB-16f0 sul tavolo e se le partite sembrano lunghe. Dopo la prova si decide se
-ridisegnare le last resort o il finale degli specchi.
+**Prova umana del 13 novembre 2026, giudizio registrato:** le quattro osservazioni sulle carte che cercano i colpi annunciati (più frequenti, risorse sufficienti, colpi potenti, una conseguenza se il colpo non si gioca il turno dopo) vanno tutte a [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata); «il resto mi sembra a posto». Il server si è fermato una volta da solo, senza errori nel log: da riguardare se ricapita. Testo completo: [storico](history/set-base-plan-storico.md#sb-16f--prova-umana-degli-starter-rifatti).
 
 ### SB-16g — Coppie caricamento-colpo, seconda passata
 
-**Origine.** Le quattro osservazioni del proprietario nella prova umana [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti), tutte
-sulle carte che cercano i colpi annunciati: più frequenti (una o due per partita), risorse sufficienti a giocare il colpo cercato,
-colpi cercati potenti, una conseguenza per chi carica e non gioca il colpo il turno dopo. Aperto dal proprietario il 13 novembre 2026
-(«procediamo»), dopo la proposta della regia.
-
-**Fase 1 fatta il 13 novembre 2026:** [proposta](design/set-base/sb-16g-proposta.md) consegnata; risposte del proprietario registrate una alla volta. **Risposta 1 registrata in D59:** scelta F, vulnerabilità per il turno del tutore e quello successivo, poi finché la copia cercata resta in mano. **D60:** totale 120 approvato. **D61:** schema approvato per tutti i cinque starter: due copie dello stesso caricamento NC verso due copie dello stesso colpo NC, più un caricamento verso un colpo raro; revisione delle sostituzioni nella proposta. **D62:** anche il secondo caricamento è NC. **D63:** approvata la direzione risorse sufficienti dopo il fine turno, colpo NC potente/affidabile e raro con picco maggiore condizionato. **D64:** vulnerabilità a HIT, CUT e POISON approvata per tutti, con possibilità future di altri effetti o fattori più severi. **D65:** approvato il legame alla precisa copia, con uscita effettiva e ricerca fallita gestite come proposto. **D66:** cumulo moltiplicativo di vulnerabilità indipendenti approvato. **D67:** inclusa la valutazione di una difesa regolare estesa al POISON, con funzionamento da presentare prima della modifica. **D68:** divisione 2a/2b approvata. **Fase 1 fatta, risposte registrate D59–D68.** Carte concrete e sostituzioni aggiornate allo schema D61–D63 devono ancora essere ripresentate e approvate prima dell’inserimento nella bozza. **STOP dopo la registrazione; nessuna attuazione avviata o autorizzata da questa registrazione.**
-
-**Fase 1 — proposta.** Per ciascuno dei cinque starter: quante carte di caricamento (copie o una seconda carta che cerca, con la
-composizione che cambia di conseguenza); cosa dà il caricamento rispetto al costo del colpo; quanto vale il colpo cercato; la
-conseguenza se il colpo non si gioca il turno dopo, scritta come andrebbe sulla carta, con le meccaniche esistenti (D8) o, se serve
-qualcosa di nuovo, dichiarandolo. Effetto atteso su patte, durata e criteri; cosa serve nella bozza e nei bot. Il funzionamento e la
-composizione li approva il proprietario (D45, punto 7): STOP dopo la proposta.
-
-**Fase 2 — divisione approvata (D68). 2a consegnata il 13 novembre 2026** ([rapporto](reports/set-base/sb-16g-2a-report.md)): carta scoperta e vulnerabilità F nel motore con le regole `d50`, vista, client e test; regole vive invariate. Le cinque domande hanno avuto risposta in **D69**, che cambia il legame: gettone sul giocatore legato al nome della carta cercata, senza timer, tolto solo giocando una carta con quel nome; la carta scoperta resta come vista. **2a rivista secondo D69** (stesso rapporto); le due domande hanno avuto risposta in **D70** (ricerca fallita per due turni; nessuna ricerca di oggetti, rifiutata dal caricatore). **2b passo 1 fatto** il 13 novembre 2026; dettagli sotto e nel [rapporto](reports/set-base/sb-16g-2b1-report.md).
-
-**Consulto esterno e 2b in tre passi (13 novembre 2026).** Prima della 2b il proprietario ha fatto fare a un modello esterno un [consulto di design](reports/set-base/consulto-design-fable-2026-11-13.md), con approfondimento su partite e simulazioni, e una [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md). Esiti principali: col gettone tolto a fine gruppo, chi diventa veloce col caricamento (Piera, Mara) non subisce danni amplificati; una ricerca fallita costa meno di una riuscita (22–61% dei caricamenti); i bot non leggono il gettone. Decisioni **D71–D73** sulle regole, **D74** sull'organizzazione. La 2b si fa in tre passi, nello stesso budget complessivo di tre giri e due ore di calcolo:
-
-1. **Passo 1 — regole e bot, nessuna carta nuova.** D71 (fine turno, uscita, carta mostrata), D72 (ricerca fallita) e D73 («Ultimo colpo») nel motore con le regole `d50`; correzione della carta che cerca il proprio nome (rilievo M3 della revisione); avviso del client prima di scartare l'ultima copia di una carta che tiene un gettone; i cinque caricamenti di oggi con il gettone e testi allineati; bot che leggono gettoni e carte scoperte, con le tre politiche; un giro di misura con taratura delle risorse della ricerca fallita. Poi **breve prova umana** (Spazienzio lento, Piera o Mara veloci).
-2. **Passo 2 — frequenza.** Schema D61–D62 (due caricamenti NC verso due colpi NC, uno verso un raro) con i danni di oggi, dopo l'approvazione della proposta 1.3 aggiornata a D78. Costi ed effetti dei colpi attuali; la proposta esplicita la sola anticipazione PAZIENZA +25 V per finanziare Impatto da zero (D63), approvata in D79. Bot nuovi in tutte le tre politiche (D77).
-3. **Passo 3 — potenza.** Proposta corrente **1.4**, selettiva dopo i dati del passo 2 (D80), al posto della tabella 1.2 storica; funzionamenti e Bancone POISON (D67) da approvare. Giro finale A potenza / B potenza più Bancone POISON, nuovo passo 0 sui bracci effettivi, misurando anche turni da metà salute e finali in un turno; nessun avvio in Fase A.
-
-**Passo 1 consegnato il 13 novembre 2026** ([rapporto](reports/set-base/sb-16g-2b1-report.md), [contratto d50 1.0](design/set-base/sb-16g-2b1-rules.md)). D71–D73, M3, avviso prima dello scarto dell'ultima copia e punteggiatura degli stati; cinque caricamenti con ×1,5 HIT/CUT/POISON e ripiego D72; tre politiche su vista pubblica. Un giro: **648.000 partite in 121,958 s**, invarianti e bound a zero; 6,881% patte globali, specchi Celestina 19,32% e Piera 14,38% ancora fuori soglia. Danni e liste invariati. Risorse di ricerca fallita mantenute alla partenza arrotondata: SPA +5 V/+5 A, MAR +5 A, TOS +5 T, PIN +5 L/+10 A, GIG +5 V. **Residuo D68 dopo il passo 1: 2 giri, 7.078,042 s. Lo STOP per la prova umana è stato poi soddisfatto da D75; resta lo STOP prima delle carte concrete del passo 2.**
-
-**Prova umana breve fatta il 13 novembre 2026**, sulla consegna del passo 1, contro il computer. Impressioni del proprietario, testuali:
-
-- «il bot con cui si gioca sul client è stupido, non si para se sa che col colpo potente che ho cercato verrebbe ucciso, né sfrutta il mio status negativo per farmi più danni e uccidermi»
-- «il bot va fatto giocare bene, con vari livelli di forza e difficoltà, anche perché poi il single player contro il computer è una modalità fondamentale nel gioco»
-- «la meccanica delle carte che cercano i colpi potenti che abbiamo creato oggi è molto carina, la approvo»
-- «credo di non avere altro da segnalare nella prova umana»
-
-**Lettura della regia.** Il bot conferma la prima osservazione nel codice: `StyleSupport.rhythm` aggiunge solo pesi fissi (pararsi +15 se l'avversario mostra un colpo forte; contro un bersaglio col gettone 1,5 volte il danno del colpo), senza calcolare se il colpo mostrato o quello amplificato sono letali; su punteggi in cui un colpo normale vale 30–45 spesso non bastano. Ne segue che anche le misure del passo 1 (4,4–6,7 danni in più per ricerca riuscita) sono un minimo, contro avversari che non puniscono. Nessuna osservazione su leggibilità del gettone, avviso dello scarto o ripiego di D72: Q10 resta aperta senza urgenza, le risorse del ripiego restano quelle del passo 1. Decisioni: **D75** (meccanica approvata) e **D76** (bot consapevole del colpo letale prima del passo 2; livelli di forza in Q2).
-
-**Bot consapevole del colpo letale consegnato il 13 novembre 2026** ([rapporto](reports/set-base/sb-16g-bot-letale-report.md)), punto 1 di D76, solo con le regole `d50`. `LethalAwarePolicy` avvolge ogni stile e il computer della bozza. Con la sola vista pubblica e senza pianificare oltre il turno, prevede il turno (`TurnForecast`). Se un colpo scoperto e pagabile lo porterebbe a terra, tiene solo le mosse più sicure: parata, contromossa, cura o colpo che arriva prima. Gioca un colpo che porta sicuramente a terra l'avversario, gettoni, stati, corazza e ordine dei gruppi compresi. Nei casi incerti gioca tutte le varianti. La previsione concorda col motore in 6.542 turni reali su 6.542; 16 scenari espliciti; sei mutazioni rilevate. Gioco vivo 1.13 identico byte per byte. Misura di confronto fuori budget D68, 288.000 partite in 72,55 s, semi del passo 1: il bot nuovo vince il **52,64%** delle decisive contro quello del passo 1 (euristici a parità di stile 50,2–51,4%, casuale 59,7%). Patte 6,37% contro 7,00%. Costo del gettone per ricerca riuscita quasi invariato (amplificazione 4,91 contro 4,86). I passi 2 e 3 misureranno coi bot nuovi (`-Dsim.bots=passo1` riproduce il passo 1). Nessuna carta cambiata; Q2 fuori perimetro. **Residuo D68 invariato: 2 giri, 7.078,042 s. STOP dopo il rapporto, cinque domande numerate.**
-
-**Risposte alle cinque domande registrate il 14 novembre 2026 in [D77](#decisioni-del-proprietario).** Nessuna prova umana contro il bot nuovo: si va avanti. Patta scelta quando la sconfitta è inevitabile, mosse che espongono il bot evitate da sé, colpi in mano coperta non considerati fino ai livelli di forza (Q2), bot nuovi in tutte e tre le politiche di `ChargeMeasureTest` per i passi 2 e 3. Q9 decisa lo stesso giorno in [D78](#decisioni-del-proprietario): «Annuncia» e, in generale, parole chiave ragionevoli che accorcino i testi. **Proposta 1.3 consegnata, in attesa di approvazione** il 14 novembre 2026 ([documento](design/set-base/sb-16g-proposta.md)): Fase A, solo documenti. «Annuncia» definita una volta secondo d50 1.0, dieci caricamenti con ripieghi del passo 1, colpi ai danni/costi attuali per il passo 2; unica anticipazione numerica proposta PAZIENZA +15→+25 V per D63. Sostituzioni e liste ricontrollate: 20 regolari per starter, 120 slot, 45 C/55 NC/20 R. Aumenti della 1.2 e difesa POISON separati al passo 3. Nessun'altra parola chiave proposta; quattro domande numerate nel documento. Nessuna bozza, contratto, regola, carta, codice o test modificati, nessuna misura: budget residuo intatto **2 giri/7.078,042 s**. **Approvata dal proprietario lo stesso giorno in [D79](#decisioni-del-proprietario)** («Approvo tutto»): sì alle quattro domande. **Prossimo:** il passo 2 sulle carte della 1.3; il passo 3 resta fermo fino alla sua proposta di funzionamento.
-
-**Passo 2 consegnato il 14 novembre 2026**, secondo D79 ([rapporto](reports/set-base/sb-16g-2b2-report.md)). Contratto d50 1.1 con la sola parola «Annuncia», dieci caricamenti e cinque nuovi NC, liste da 20 conformi alla proposta 1.3, griglia 120 slot/45 C/55 NC/20 R. Danni/costi/effetti dei colpi invariati; PAZIENZA +25 V/+15 A e Preparo verso Chiave. Bot e previsione generici sugli effetti pubblici, verificati sui dieci titoli senza nuove informazioni nascoste. Passo 0 fuori budget: 8.640 partite/22,726 s, stima conservativa 2.676,695 s, fattibile. **Un giro: 648.000 partite/738,001141 s**, 15.155.192 turni di giocatore senza violazioni e bound entro 4. Annunci per partita Spazienzio/Mara/Celestina/Piera/Beppe **0,862/0,596/0,497/1,089/0,345**, con distribuzioni nel rapporto; non garantite una o due per tutti. **11 incontri fuori criterio**, Spazienzio sopra quota contro tutti, specchi Celestina 18,32% e Beppe 15,67% di patte. Piera rientra aggregata all'8,55%, resta lunga. Nessuna taratura dopo il giro. **Residuo D68: 1 giro/6.340,0406251 s (6.340,041 s)**. STOP dopo il commit: prossimo una proposta separata del passo 3, potenza e Bancone POISON da approvare prima dell'attuazione; il giro residuo resta intatto. **Domande del rapporto risposte il 14 novembre 2026 in [D80](#decisioni-del-proprietario):** sì alle priorità del passo 3 e al giro finale a due bracci.
-
-**Stato: proposta 1.4 del passo 3 consegnata e approvata** il 14 novembre 2026 ([D82](#decisioni-del-proprietario), «Si a tutte»); prossimo l'attuazione con passo 0 e giro finale. ([documento corrente](design/set-base/sb-16g-proposta.md#passo-3--proposta-corrente-14)). Fase A con STOP dopo il commit, soltanto i tre documenti autorizzati: nessuna bozza, contratto, griglia, carta, codice, test, regola o misura modificati/eseguiti. Diagnosi D80 e leve candidate: Impatto 40→30 HIT, senza togliere il finanziamento di PAZIENZA; annunci offensivi da 4 CUT per Beppe e colpi più efficaci; picchi condizionati dei rari con conti da zero a N+1; pressione e differenze di A per gli specchi Celestina/Beppe. Sotto il cofano +5 A è proposta separata fuori coppia, non una sostituzione; liste D79 ferme. Le dieci righe della potenza 1.2 sono riesaminate una per una e restano come storico. Bancone POISON diretto/periodico solo nel braccio B, funzionamento ancora da approvare. Disegno concreto: 648.000 partite per braccio, stessi semi/bot del passo 2, 1.296.000 totali nello stesso ultimo giro; nuovo passo 0 di 8.640 partite per braccio e stima conservativa comprensiva del campione entro **1 giro/6.340,0406251 s (6.340,041 s)**. Nessun rilancio se fattibilità o criteri non tornano. Incertezze e cinque domande nel documento; questa consegna non approva le carte né avvia il giro. **Prossimo:** giudizio del proprietario sulla 1.4; soltanto dopo approvazione, attuazione e nuovo passo 0 dei due bracci.
-
-**Passo 3, attuazione fermata il 14 novembre 2026** ([rapporto](reports/set-base/sb-16g-2b3-report.md)), prima di modificare bozza, codice o test. Tutta la 1.4 sta nei dati e nei parametri esistenti, salvo due funzionamenti: il travaso con 12 POISON diretti (`junkie.ToxicBloodDrain` è una classe viva con il solo parametro `turns`) e il Rutto con L memorizzata dopo il costo, azzerata, −A e 14+2×L (manca un moltiplicatore nei dati e nella previsione, e gli effetti su sé precedono quelli sul bersaglio). Classi solo di test scartate: il profilo `bozza` avvia il jar. Proposta raccomandata: classe del playground per il Rutto, parametro `poison` (0 di default) nella classe del travaso, campo `times` in `PrintedEffects` letto dalla previsione, con identità viva e fedeltà come cancelli. Nessuna misura: **residuo D68 intatto, 1 giro/6.340,041 s**. **Prossimo:** risposta del proprietario alle due domande del rapporto, poi attuazione, passo 0 e giro come prefissati.
-
-**Passo 3 consegnato il 14 novembre 2026**, seconda parte dello stesso [rapporto](reports/set-base/sb-16g-2b3-report.md#parte-2--attuazione-passo-0-e-giro-finale-a-due-bracci-d82-d84-d88), sul codice del giro confermato da D88. Proposta 1.4 in bozza e griglia, liste D79 ferme; classe del Rutto, `poison` facoltativo nella classe viva del travaso (valore vivo 0), `times` nella previsione; braccio B con `-Dsim.arm=B` e il solo Bancone POISON ×0,5. Suite 793 e contesto Spring 910 verdi, gioco vivo 1.13 identico byte per byte, previsione fedele su entrambi i bracci, mutazioni rilevate, `check-rules.py` identico alla base su 38 carte. Passo 0 fattibile (s0 43,125 s, stima 5.014,6 s); **giro: A 648.000 partite in 658,138 s, B 648.000 in 849,394 s** (B completato dopo l'interruzione, D87), invarianti a zero, bound entro 4. **11 incontri su 15 fuori criterio in entrambi i bracci:** Spazienzio 57,4% contro Mara e 33–38% contro gli altri, Beppe 1,53 annunci a partita e vincente contro tutti; patte globali 3,8%, specchi Celestina e Beppe rientrati nelle patte, Celestina–Celestina ancora 12,98 turni. B porta Celestina–Piera da 64,13% a 61,53% e cambia solo gli incontri con Piera. Episodi registrati nel rapporto: messaggi non arrivati, interruzione, clic non valido, D86 provata e abbandonata. **Residuo D68: 0 giri/4.682,655 s.** STOP con proposta (braccio B, proposta 1.5 su Spazienzio e Beppe con budget nuovo) e quattro domande.
-
-**Correzione 1.5 consegnata il 14 novembre 2026** ([rapporto](reports/set-base/sb-16g-15-report.md)), secondo D90 sul braccio B scelto in D89: Impatto 30 → 34 HIT, Chiave da tredici 22 → 18 CUT, Lavoro fatto bene 14 + 7 → 14 + 4 per oggetto, nient'altro (bozza, griglia, test con D90 citata, `Correzione15Test`). Suite 801 verde, previsione fedele su entrambi i bracci. Passo 0 18,735 s (stima 2.246,5 s ≤ 7.200 s); cancello d'identità superato, 864/864 celle dei 6 incontri senza Spazienzio né Beppe identiche al passo 0 e al giro del braccio B. **Un giro: 648.000 partite in 501,243 s**, invarianti a zero, bound entro 4. **7 dei 9 incontri con Spazienzio o Beppe in criterio** (B: 2): Beppe a 52–55% contro gli altri starter, Beppe–Beppe 5,99% di patte e 7,63 turni; fuori Spazienzio–Mara 61,82% (ora anche contro gli euristici di Mara) e Spazienzio–Piera 37,67%. Celle per politica fuori 19/81 nei 9 e 51/135 in tutto; **cancello completo D16/D51 non raggiunto** (6 su 15, i 4 esclusi da D89 più i 2 di Spazienzio). Lavoro fatto bene da 3.792 a 526 finali in un turno, Impatto da 2.267 a 4.411. Budget D90: **0 giri/6.666,322 s**. STOP con i dati e quattro domande.
-
-**Stati coerenti con la sequenza del turno, correzione del client il 13 novembre 2026** ([rapporto](reports/set-base/stati-in-sequenza-report.md)). Segnalazione del proprietario dopo la prova umana: il gettone «viene visualizzato a inizio turno, prima che la carta tutore che da risorse sia risolta» e «sparisce subito all'inizio del turno in cui giochi la carta a cui è legato, non quando dovrebbe». Il motore era corretto (gettone creato al passo del caricamento, tolto a fine turno, D71); il client disegnava i segnalini degli stati dalla vista finale anche durante la sequenza. Ora gli stati partono dalla vista precedente: il gettone compare al passo del caricamento e resta per tutto il turno del colpo; gli altri stati compaiono al passo della mossa che li crea quando il rapporto lo dice senza ambiguità, altrimenti a fine sequenza. Solo client, nessuna regola cambiata. Catture prima/dopo nel rapporto; il giudizio sulla comprensibilità resta al proprietario.
-
-- **2a — supporto tecnico e presentazione:** D58 e D64–D66, rivisti da D69 e D71: carta trovata mostrata solo in mano, gettone sul giocatore legato al nome, cumulo indipendente moltiplicativo, fine turno della giocata e uscita un turno dopo che il nome manca da mano e mazzo; vista del server e client, con test. Supporto limitato al playground, senza trasferimento alla partita viva. La presenza dei test non equivale ad avvio applicativo riuscito: contesto Spring e avvio reale si verificano separatamente.
-- **2b — carte, bot e bilanciamento:** prima dell’inserimento nella bozza, ripresentare e far approvare coppie concrete e sostituzioni compatibili con D60–D63: 120 carte nel set, 20 regolari per starter; due copie di un caricamento NC verso due copie di un colpo NC e un diverso caricamento NC verso un raro. Poi carte nella bozza, relativi test e griglia coerenti, bot con mano scoperta e le tre politiche già decise, giro coi criteri D16/D51. Inclusa la valutazione della difesa dal POISON (D67), il cui eventuale funzionamento concreto richiede approvazione prima della modifica.
-
-Per **2b** il tetto originario è **3 giri e 2 ore cumulative di calcolo**; dopo il passo 1 restano **2 giri e 7.078,042 s**, delega dei numeri come D38 e misure dedicate delle coppie: caricamenti giocati, colpi cercati giocati subito/tenuti/parati, conseguenze scattate e confronto delle tre politiche. Il budget non si moltiplica con la divisione in sottofasi. Se criteri o budget non tornano, STOP con dati e proposta. La registrazione originaria di D68 non autorizzava l’avvio; il passo 1 è stato poi richiesto espressamente dal proprietario e consegnato come indicato sopra. Il passo 2 è ora attuato con D79; il passo 3 resta fermo fino alla proposta e approvazione dei funzionamenti. Residuo attuale: **1 giro/6.340,041 s**.
-
-**Bot nella Fase 2** (13 novembre 2026, proposta della regia, «Si aggiungi» del proprietario; attuata nel passo 1 e completata da D76–D77 sopra). All'apertura del blocco l'euristica di SB-16c legge solo la ricerca del round precedente, e in SB-16e il ritmo caricare-colpire non è automatico (Spazienzio attende in media 2,43 turni e lascia inutilizzate circa metà delle copie trovate). Due aggiunte: **(1)** i bot leggono le carte scoperte in mano finché restano lì (D58); **(2)** tre politiche su tenere o giocare il colpo cercato, misurate a confronto: «gioca sempre il turno dopo», «tieni se l'avversario si è parato», «a caso». Se i criteri reggono con tutte e tre, la conseguenza è robusta; se una politica domina, la conseguenza va rivista. I bot misurano numeri e casi estremi; se la scelta è interessante lo giudica la prova umana. Un bot che pianifica più turni avanti non fa parte di questo blocco.
-
-**Completamento verificabile.** La Fase A del passo 3 consegna la proposta 1.4, conti e funzionamenti, due bracci e passo 0 prefissati, verifiche documentali e commit, poi STOP in attesa del proprietario. Non chiude SB-16g. Per completare il blocco restano: proposta approvata e registrata come decisione; attuazione in bozza e griglia con liste D79 ferme; passo 0 fattibile e unico giro finale A/B nel residuo; otto invarianti a zero e bound entro 4, criteri D16/D51 per incontri/specchi e politiche; rapporto con le misure delle coppie, delle tre politiche, turni da metà salute e finali in un turno. Se criteri o budget non tornano, STOP con proposta, nessun rilancio. Dopo, una breve prova umana del proprietario prima di SB-17.
-
-**Rischi.** Più caricamenti e colpi più forti accorciano le partite e cambiano gli incontri già misurati in SB-16e2. Il malus deve
-lasciare la scelta di tenere il colpo, con un prezzo: non deve diventare un obbligo.
+Aperto il 13 novembre 2026 dalle osservazioni di SB-16f; consegnato il 14 novembre 2026. Fase 1 ([D59](#decisioni-del-proprietario)–[D68](#decisioni-del-proprietario)), 2a ([D69](#decisioni-del-proprietario), [D70](#decisioni-del-proprietario)), consulto esterno e 2b in tre passi ([D71](#decisioni-del-proprietario)–[D74](#decisioni-del-proprietario), [D78](#decisioni-del-proprietario)–[D80](#decisioni-del-proprietario), [D82](#decisioni-del-proprietario)–[D88](#decisioni-del-proprietario)), bot consapevole del colpo letale ([D76](#decisioni-del-proprietario), [D77](#decisioni-del-proprietario)), correzione 1.5 ([D89](#decisioni-del-proprietario), [D90](#decisioni-del-proprietario)). **Esito:** la 1.5 è la bozza di riferimento ([D92](#decisioni-del-proprietario)); budget D68 e D90 esauriti; cancello completo dei criteri non raggiunto (6 incontri su 15 fuori); il lavoro prosegue in [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima).
+Rapporti: [2a](reports/set-base/sb-16g-2a-report.md), [2b passo 1](reports/set-base/sb-16g-2b1-report.md), [bot letale](reports/set-base/sb-16g-bot-letale-report.md), [2b passo 2](reports/set-base/sb-16g-2b2-report.md), [2b passo 3](reports/set-base/sb-16g-2b3-report.md), [correzione 1.5](reports/set-base/sb-16g-15-report.md), [stati in sequenza](reports/set-base/stati-in-sequenza-report.md); [consulto](reports/set-base/consulto-design-fable-2026-11-13.md) e [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md). Proposta storica: [sb-16g-proposta.md](design/set-base/sb-16g-proposta.md); contratto: [sb-16g-2b1-rules.md](design/set-base/sb-16g-2b1-rules.md). Testo completo: [storico](history/set-base-plan-storico.md#sb-16g--coppie-caricamento-colpo-seconda-passata).
 
 ### SB-16h — Prova esplorativa della dimensione del mazzo
 
-**Origine.** Idea del proprietario del 14 novembre 2026: «a che punto ci converrebbe testare se il gioco migliora o meno aumentando le
-carte consentite nel mazzo? ora abbiamo 20 fisse, ma se fosser 25? o 30? o un range fra 20 e 30?». Anticipa la parte di misura di
-SB-23 ([D81](#decisioni-del-proprietario)): deciso il formato prima di Sergio, Duccio e del bilanciamento del set intero, un cambio non
-costringe a rifare SB-17–SB-21.
-
-**Perché ora.** Nel passo 2 di SB-16g il mazzo si esaurisce nel 44–50% delle partite di Celestina, Piera e Beppe, e gli specchi lunghi
-finiscono spesso in patta: due problemi su cui la dimensione agisce direttamente. «Annuncia» cerca nel mazzo, quindi un mazzo più grande
-non rende meno affidabile il colpo cercato; diluisce le altre carte.
-
-**Fase A — proposta e STOP.** Varianti da misurare, almeno 20/2 (riferimento), 25/2, 25/3, 30/2 e 30/3; come comporre gli starter più grandi
-(con 3 copie bastano copie di carte presenti, con 2 copie servono titoli in più, che sono una scelta di composizione da approvare, D45
-punto 7); cosa si misura (quote, patte, durata, mazzi esauriti, annunci per partita, carte morte in mano, costanza dei mazzi). Il range
-20–30 si valuta come domanda di design, non come variante del banco: senza un incentivo chi costruisce sceglie il minimo, che diventa
-il formato vero. Il proprietario approva varianti e composizioni.
-
-**Fase B — misura.** Solo nel playground, con le carte del passo 3 di SB-16g, bot nuovi e stessi semi. Budget proprio, fissato nella Fase
-A, separato dal residuo D68 di SB-16g. Le regole dei mazzi (R02 1.12) non cambiano: se il proprietario sceglie un formato diverso, si
-riapre SB-1 con una nuova versione del regolamento e si rilanciano le misure.
-
-**Completamento verificabile.** Dati presentati al proprietario, che decide il formato (chiude Q7). SB-23 resta per la valutazione finale
-sul set intero e coi mazzi costruiti.
-
-**Rischi.** Più copie aumentano la costanza delle combo; mazzi più grandi possono allungare le partite che oggi sono già lunghe (specchi).
-
-**Fase A consegnata il 14 novembre 2026**, in parallelo al passo 3 di SB-16g: [proposta 0.1](design/set-base/sb-16h-proposta.md) con cinque varianti (20/2, 25/2, 25/3, 30/2, 30/3), composizioni annidate per i cinque starter, range sconsigliato come formato e misurato solo con un braccio misto facoltativo, budget proprio di un giro e 7.200 s, dieci domande al proprietario. Nessuna misura. **Approvata lo stesso giorno in [D83](#decisioni-del-proprietario)**, con le due aggiunte al criterio di scelta. **Fase B consegnata il 14 novembre 2026**, sulla bozza 1.5 scelta in D92, con i criteri D93 ([rapporto](reports/set-base/sb-16h-report.md)). Cinque varianti 20/2, 25/2, 25/3, 30/2 e 30/3, più dieci incontri misti 20 contro 30, 300 semi per cella e otto thread in sequenza. Cancello d’identità: 20/2 identico byte per byte alla 1.5 su matrice JSON/Markdown, osservazioni e bozza, sia al passo 0 sia nel giro intero. Passo 0: 48.960 partite, 61,124 s di banco, stima 6.996,499 s; **giro unico: 3.672.000 partite in 3.214,403 s di orologio**, invarianti a zero su 72.223.546 turni di giocatore, bound entro 4. Fuori D93 **8/6/6/6/5** incontri su 15; esaurimenti euristici **15,64/2,47/2,11/0,99/1,55%**. **Nessuna alternativa soddisfa tutto D83:** 25/2 introduce patte e durata dello specchio di Piera, 25/3 e 30/2 nuove uscite di quota; 30/3 peggiora Mara–Piera e allunga Celestina–Celestina da 14,48 a 16,69 turni. Nel misto il vantaggio dipende dal personaggio e dalla lista. **Budget D83: 0 giri e 3.985,597 s residui**, passo 0 e verifiche fuori budget. Nessuna bozza, regola o lista viva cambiata. **STOP: scelta del formato (Q7) e prova umana al proprietario**, prima della proposta 1.6 di D92 e di SB-17. **Chiusa il 14 novembre 2026 in [D94](#decisioni-del-proprietario):** il formato resta 20/2 (Q7); le ricerche fallite si affrontano sulle carte, con un «Annuncia» di al massimo due nomi nella proposta 1.6 ([nota sulle ricerche fallite](reports/set-base/ricerche-fallite-20-2.md)).
+**Chiusa il 14 novembre 2026 in [D94](#decisioni-del-proprietario)** (nata da [D81](#decisioni-del-proprietario); proposta approvata in [D83](#decisioni-del-proprietario); [rapporto](reports/set-base/sb-16h-report.md), [proposta](design/set-base/sb-16h-proposta.md)): Fase B con 3.672.000 partite su 20/2, 25/2, 25/3, 30/2, 30/3 e braccio misto; nessuna alternativa soddisfa [D83](#decisioni-del-proprietario). Il formato resta **20 carte e 2 copie** (Q7); le ricerche fallite si affrontano sulle carte, con «Annuncia» di al massimo due nomi in SB-16i. Testo completo: [storico](history/set-base-plan-storico.md#sb-16h--prova-esplorativa-della-dimensione-del-mazzo).
 
 ### SB-16i — Correzione 1.6: meccaniche di sistema e soglia minima
 
@@ -1251,124 +593,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-D1–D27 del 2 novembre 2026; le successive riportano la propria data.
-
-| ID | Domanda | Decisione |
-|---|---|---|
-| D1 | Dimensione e copie | **Esattamente 20 carte, massimo 2 copie.** 25 con 3 da valutare in seguito (SB-23) |
-| D2 | Bound | **Si scelgono 2 alla costruzione del mazzo**; almeno 3 nel set, quante si vuole nelle espansioni. **Tutte gratuite e deboli, come fallback** |
-| D3 | Basic | **Carta del set, fissa per personaggio, sempre una presa di oggetti** con un tratto personale |
-| D4 | Last resort | **Obbligatoria**; può essere legata a un personaggio |
-| D5 | Giocatore senza mosse | **Risolto con bound e last resort obbligatorie**, senza «passo» |
-| D6 | Junkie | **Passa agli avanzati (premium)** |
-| D7 | Struttura dei personaggi | **7: 2 base, 3 avanzati, 2 da booster**; concept approvati in linea di massima |
-| D8 | Perimetro creativo | **Esplorare le meccaniche di base, senza spararsi subito tutte le cartucce**: niente risorse o parole chiave nuove. **Parole chiave riviste da [D78](#decisioni-del-proprietario)** (14 novembre 2026): ammesse quelle ragionevoli che accorciano i testi |
-| D9 | Rarità | **Complessità e anche potenza**, con il paletto; solo un dato del catalogo |
-| D10 | Fuori dal piano | **Buste, sblocchi, acquisti, proprietà delle carte.** Le illustrazioni erano qui: rientrano con D24 |
-| D11 | Regolamento e set | **Regole generali da una parte, documenti di set dall'altra**, con predisposizione per le espansioni |
-| D12 | Modifiche durante il bilanciamento | **Playground**, trasferito nel regolamento solo a bilanciamento concluso |
-| D13 | Formato di riferimento | **1v1**; FFA come controllo |
-| D14 | Carte attuali | **Riprogettabili**; il flavour non si scarta a prescindere |
-| D15 | Flavour | **Personaggi subito**, nomi delle carte provvisori fino alla passata finale |
-| D16 | Criteri | **Approvati in linea di massima**, con matchup riferiti agli **starter**: una strategia da scoprire può essere più forte |
-| D17 | Simulatore | **Runner Java diretto**; CLI per le prove end-to-end |
-| D18 | Bot | **Lo stesso bot** serve al simulatore e a migliorare l'avversario attuale |
-| D19 | Quick | **Si sceglie base o avanzata, starter a caso. Coda mista;** matchmaking in futuro |
-| D20 | Mazzi salvati | **Provvisori: si possono perdere** |
-| D21 | Giri di bilanciamento | **Espliciti**, per blocco e sull'intero set (SB-20–SB-23) |
-| D22 | Inizio | **A client web completato** |
-| D23 | Testi delle carte | **Passata di abbellimento:** niente formule, simboli letterali e simili nei testi per i giocatori (SB-25) |
-| D24 | Illustrazioni | **Generate nel piano, a carte testate, bilanciate e finalizzate** (SB-32) |
-| D25 | Interpretazioni del piano | **Confermate:** due bound diverse, nessun doppione; lavori a client web completato; segnaposto per le carte nuove fino alle illustrazioni |
-| D26 | Bozza esterna | **Conservata come serbatoio di idee**, da raccordare col piano. Mara, Pino e Gigi prendono il posto dei segnaposto |
-| D27 | Personaggio che usa la salute | **Nel Set Base:** Sant'Incasso paga con la propria HEALTH. Non è una meccanica nuova: `Resource.HEALTH` esiste, `Move` controlla e paga i costi per qualsiasi risorsa, e danni a sé e perdite di salute ci sono già. Da aggiungere alle convenzioni dei costi di scheda e controlli |
-| D28 | Pino immune all'effetto periodico di L (era Q10) | 6 novembre 2026, SB-9: **no.** L resta una risorsa da spendere subito, diversa da V; la variante immune si prova solo nel playground in SB-14 |
-| D29 | Last resort proprie (era Q6) | 6 novembre 2026, SB-9: **Pino, Tossico e Sant'Incasso**; Struggle per gli altri quattro. Gratuite, sempre giocabili e fatte per chiudere la partita; SB-10 le colloca nella griglia |
-| D30 | Ordine dei blocchi senza aspettare il client | 6 novembre 2026, con le parole del proprietario: «sono d'accordo con la tua idea per arrivare a progettare le carte il prima possibile senza aspettare la fine del lavoro sul client». **SB-6 si divide** in SB-6a (nucleo, anticipato, senza dipendere da SB-2) e SB-6b (più set e mini-espansione, dipende da SB-2 e SB-6a). **Ordine: SB-9 → SB-6a → SB-7 → SB-10.** SB-7 dipende da SB-4 e SB-6a; SB-8 da SB-6a e SB-6b. SB-1, SB-2 e SB-6b restano legati al client (l'editor), ma vanno chiusi prima di SB-8. Precisa D22 |
-| D31 | Correzione dei bot sul costo in HEALTH | 6 novembre 2026, SB-7, con le parole del proprietario: «Prima di SB-10». **Mini-blocco SB-7b** dopo SB-7 e prima di SB-10: gli stili euristici smettono di suicidarsi pagando in HEALTH. Le contromosse sottostimate restano a SB-17. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10** |
-| D32 | Divisione di SB-10 | 6 novembre 2026, con le parole del proprietario: «Sì, dividi e scrivi». **SB-10 si divide** in SB-10a (listino di potenza e tetto delle bound, misure) e SB-10b (griglia degli slot, progetto). SB-10a dipende da SB-7b e SB-9; SB-10b da SB-10a; SB-11 da SB-10b. **Ordine: SB-9 → SB-6a → SB-7 → SB-7b → SB-10a → SB-10b** |
-| D33 | Listino e tetto delle bound (SB-10a) | 6 novembre 2026, con le parole del proprietario: «Approvo, scrivi». Accolte le quattro raccomandazioni di SB-10a: **(1)** tetto delle bound a **4 unità per uso, tolleranza 0**, da confermare in partita in SB-10b (una bound da 4 contro bound nulle entro +10 punti di quota); **(2)** pesi **V 0,75, A 0,5, T 0,15 per chi è immune, L 0,35, HEALTH 1** come predefiniti del banco, da rimisurare sugli starter nuovi; **(3)** carte prezzate rispetto a un'**unità gratuita da circa 6–8 HIT** invece che 10; **(4)** **L come costo: costi bassi, 5 o meno**, senza toccare le regole. Cautele per SB-10b: le contromosse risultano sotto il listino anche perché i bot le sottostimano (SB-17); la salute iniziale vale 2,5–4,8 punti di quota per 1 HEALTH |
-| D34 | Principi della griglia (SB-10b, fase A) | 6 novembre 2026, con le parole del proprietario: «Approvo tutte». **(1)** Budget 115 con 37 azioni d'archetipo (6 per Cesira e Rocco) e 23 generiche; **(2)** starter da 12 carte distinte (5 d'archetipo, 4 generiche, 3 oggetti), con varianti per capacità; **(3)** bound senza parate: generatrice, colpetto e una variante a una sola funzione; **(4)** T del Tossico più scarsa, carte prezzate a circa 0,3–0,5 danni per T, bound di T al massimo +10 fino a SB-13; **(5)** costi in HEALTH solo nell'archetipo di Rocco, salute di Mara e Rocco invariata e prima leva nei giri; **(6)** tre rarità, circa 54, 41 e 20, «picco condizionato, media in linea»; **(7)** Pino con costi di 5 L o meno e carte che spendono la L residua; **(8)** passi nuovi `equip` e `consume`, il resto in Java coi parametri |
-| D35 | Griglia degli slot (SB-10b, fase B) | 6 novembre 2026, con le parole del proprietario: «Approvo tutte». [Griglia](design/set-base/griglia.md) approvata con cinque scelte: spendere tutta la L con una classe Java (come `ToxicBloodDrain`); bound +8 A nello starter di Mara, da misurare in SB-11; rarità dell'archetipo 20, 10, 7; Giubbotto e Posacenere negli starter base, quindi passo `equip` da SB-11; una classe Java nuova per la rara di Gigi |
-| D36 | Tetto delle bound di danno (SB-10b, era Q9) | 6 novembre 2026, con le parole del proprietario: «Sì, danno a 3». La misura in partita conferma 4 unità per le bound di risorsa ma non per quelle di danno (4 HIT oltre i +10 punti con Tossico, Rocco e Mara di prova). **Tetto: 4 unità per le bound di risorsa, 3 per quelle di danno**; nel banco il danno inflitto pesa 4/3 (`BoundCap.Params.DEFAULT`). Nella griglia le bound di danno passano da 4 a 3 e le varianti da 3 a 2. Da riconfermare sugli starter veri di Mara (SB-11) e Rocco (SB-18); se 3 supera ancora i +10 punti, si scende a 2 |
-| D37 | Divisione di SB-11 | 6 novembre 2026, con le parole del proprietario: «Sì, dividi e scrivi». **SB-11 si divide** in SB-11a (passi `consume` ed `equip` del formato dati e àncora del listino come parametro, dipende da SB-10b) e SB-11b (bozza degli starter base, dipende da SB-11a). SB-12 dipende da SB-8 e SB-11b. **Ordine: SB-10b → SB-11a → SB-11b** |
-| D38 | Bozza degli starter base (SB-11b, fase A) | 6 novembre 2026, con le parole del proprietario: «approvo le raccomandazioni su queste e anche delle prossime (a questo livello di dettaglio mi fido di te)». **(1)** Bozza in un file unico, `set-base/bozza.json`; carte di oggi col binding della classe, nuove col prefisso del set `base.`, slot nella descrizione; **(2)** durate: «per N turni» = `turns: N − 1` (R05), l'incoerenza dei testi di oggi va a SB-25; **(3)** D36: tetto del danno a 3, non a 2, che sullo starter di Mara non risolve; in SB-12 le bound si valutano anche come salute equivalente per uso, al massimo 4; **(4)** B2: la bound +8 A resta nello starter di Mara; **(5)** SB-12 parte da costi di Mara −5 A su cinque carte e HEALTH 95; **(6)** prezzi del listino a 7 HIT (A di Mara circa 1 HIT, V oltre 20 più cara) registrati qui e usati in SB-12, senza riscrivere ora la griglia; **(7)** limiti dei bot da guardare in SB-12 prima di tagliare carte |
-| D39 | Nome e voce di Spazienzio (SB-11b) | 6 novembre 2026, con le parole del proprietario: «su spazienzio il mazzo lo chiamiamo "pazienza finita" e i nomi delle sue carte li teniamo tutti in maiuscolo (sull'interfaccia, non nei dati o nel codice), perché lui ha perso la pazienza e urla». Lo starter di Spazienzio si chiama **«Pazienza finita»**; i **nomi visualizzati** delle sue carte (slot `SPA-*`) sono **in maiuscolo**, mentre binding, id e codice restano come sono. Precisato dal proprietario all'approvazione di SB-11b: «maiuscolo nei dati», cioè il maiuscolo sta nel nome visualizzato scritto nella bozza (`gui.name`), non è l'interfaccia a trasformarlo. Vale anche per la passata finale (SB-24) e per i testi per i giocatori (SB-25) |
-| D40 | Divisione di SB-12 e anticipo di SB-1 | 7 novembre 2026, con le parole del proprietario: «Sì, entrambi». **SB-12 si divide** in SB-12a (giro coi bot sugli starter base, dipende da SB-11b) e SB-12b (prova umana, dipende da SB-8 e SB-12a). **SB-1 è anticipato** in parallelo a C4, che si è allungato con C4-10 e C4-11, perché è il primo anello verso SB-8 e la prova umana; paletti: niente `style.css`, `verify-decks.mjs` pushato prima di C4-8a, jar rifatto sull'altra macchina dopo il pull. SB-13 resta dopo SB-12 intero; se la prova umana tarda, il proprietario può decidere di anticiparlo dopo SB-12a. Precisa D22 e D30 |
-| D41 | Correzioni degli starter base (SB-12a) | 7 novembre 2026, con le parole del proprietario: «Approvo, anche +6 A». Correzioni decise nei tre giri (Q5) con la delega di D38 e approvate: salute iniziale di **Spazienzio 85** e di **Mara 80**; costi di Mara −5 A su Cinghiata, Sgommata, Slalom, Paraurti e Sputo (D38); **Sgommata 25 CUT**. In più, **MAR-BO2 da +8 a +6 A**: la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 (precisa B2). Steal, parate e contromosse restano negli starter: le varianti mostrano che sono i bot a giocarle male. Restano raccomandazioni: scala della salute degli altri personaggi in SB-13, patte e Steal da guardare in SB-12b. Precisa D34(5), D36, D38 e B2 |
-| D42 | Approvazione di SB-1, anticipo di SB-13 e SB-2 | 8 novembre 2026, con le parole del proprietario: «Sì, entrambi», alla domanda «Approvi SB-1 e anticipiamo SB-13 insieme a SB-2?». **SB-1 approvato** (regolamento 1.12, Q1–Q6). **SB-13 anticipato** dopo SB-12a: la prova umana degli starter base aspetta SB-2, SB-6b e SB-8, e gli starter della bozza approvata (D41) sono la base stabile; se SB-12b li cambierà, il giro del Tossico si rilancia. **SB-2 anticipato** in parallelo a C4, con fase A che si ferma sull'inventario di ciò che tocca nel client; paletti: niente `style.css`, `readability.ts`, `scene.ts`, `table.tsx`; strumenti di verifica toccati pushati prima di C4-8a; jar rifatto sull'altra macchina dopo il pull. Precisa D30 e D40 |
-| D43 | Approvazione di SB-2 e SB-13 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-2 e SB-13 con le mie raccomandazioni?». **SB-2 approvato:** regolamento 1.13 con le sole regole generali e Set Base 0.1 in `docs/sets/base.md` (Q1–Q9 della fase A). **SB-13 approvato** con le raccomandazioni della regia: (1) correzioni del Tossico salute 80, T iniziale 20, Tossicone Scatarrante 8 POISON, Raschiare il fondo +7 T; (2) nome dello starter «Tutto è droga»; (3) specchio lungo (16,6 turni, 22% di patte) e mazzo che si esaurisce spesso tenuti senza ridisegno fino alla prova umana degli avanzati (SB-16), perché i bot non giocano il travaso; (4) il Mescolone che toglie anche l'immunità propria resta per la prova umana, come le contromosse in SB-12a. Se la prova umana trova il Tossico forte, la prima leva è la T iniziale. Precisa D38 e D41 |
-| D44 | Approvazione di SB-6b e SB-14 | 8 novembre 2026, con le parole del proprietario: «Approvo entrambi», alla domanda «Approvi SB-6b e SB-14 con le mie raccomandazioni?». **SB-6b approvato:** formato `sb-6b/1` con più set, rarità del vocabolario di R07, mazzi misti e mini-espansione di prova nei soli test (Q1–Q9 della fase A). **SB-14 approvato** con le raccomandazioni del rapporto: (1) correzioni di Pino salute 100, L iniziale 20, Estasi 10 + L, L'ultimo giro 12 + L, Testata 20; (2) il giro 3 invece del giro 2, perché un umano gioca Testata più dei bot; (3) nome dello starter «Chiude quando dico io»; (4) partite lunghe, specchio con una patta su tre e mazzo esaurito tenuti senza ridisegno fino a SB-16, come per il Tossico (D43); (5) Offro io e il Bancone tenuti per la prova umana; (6) le rarità della griglia nella bozza in un passaggio a sé, che porta la bozza a `sb-6b/1` senza cambiare le partite. Se la prova umana trova Pino forte, la prima leva è la L iniziale, poi Estasi. Precisa D38 e D43 |
-| D45 | Approvazione di SB-15 | 8 novembre 2026, con le parole del proprietario: «Approvo SB-15», alla domanda «Approvi SB-15 con le mie raccomandazioni?»; al passo 0 aveva deciso «Sì, tutto in SB-15» per la classe di «Lavoro fatto bene» nei sorgenti di test. Approvati: (1) le rarità della griglia nella bozza, formato `sb-6b/1`, partite invariate (chiude D44 punto 6); (2) le correzioni di Gigi salute 95, V iniziale 25, Chiave da tredici 12 CUT, «Lavoro fatto bene» a 5 V; (3) due giri invece di tre; (4) nome dello starter «Intervento sul posto»; (5) mazzo esaurito spesso e patte contro Pino tenuti fino a SB-16, come per Tossico e Pino; (6) Steal e Smontiamo tutto tenuti per la prova umana; (7) Mattone e SeagullFly ferme in mano da guardare alla prova umana: un cambio di composizione dello starter è un cambio della griglia e lo decide il proprietario. Se la prova umana trova Gigi forte, la prima leva è la V iniziale, poi la salute. Precisa D35, D38 e D44 |
-| D46 | Approvazione di SB-8 | 10 novembre 2026, con le parole del proprietario: «Approvo SB-8», alla domanda «Approvi SB-8?»; la fase A era approvata con «Approvo tutto» (le undici domande con le raccomandazioni, un blocco solo, solo server, prima di ogni fase B di C4 su questa macchina). Approvati: profilo di sviluppo `bozza` solo con `local` o `test` e mai con `heroku`, database separato, bozza letta da file; caricatore e carte Java di bozza in `server/src/main` dietro un'interfaccia di catalogo che lascia identico il percorso del gioco vivo; starter come mazzi pronti in open e riserva per quick, 1v1 e FFA; computer con uno stile euristico (predefinito `risorse`); nessun file del client. Per i giri di bilanciamento la regola «nessun diff in `server/src/main`» esclude ora `com.gsc.bm.sim` e `model/cards/base`. Sblocca le prove umane SB-12b e SB-16. Precisa D30 e D40 |
-| D47 | Costo in salute di Duccio (prima di SB-18) | 10 novembre 2026, con le parole del proprietario: «per duccio braccio teso va bene la raccomandazione della precedente regia». **Il costo in HEALTH resta** l'identità di Duccio Braccio Teso, come per Sant'Incasso (D27, D34 punto 5): meccanica invariata. Flavour: si preferiscono le letture «si fa male dandole» e «non arretra per principio»; «il martire della causa» si usa con cautela, perché per un personaggio satirico di estrema destra rischia di suonare celebrativa invece che ridicola ([scheda](design/set-base/schede-personaggi.md#domanda-per-sb-18-il-costo-in-salute-con-duccio)). Precisa D27 |
-| D48 | Morte in extremis: resta la regola 1.13 | 12 novembre 2026, con le parole del proprietario: «no, ci ho ripensato: lasciamolo così. ha un che di flavour, che uno in punto di morte, prima di accorgersi di essere morto, riesce a salvarsi in extremis». Alla prova umana Piera, portata sotto zero da un attacco di Spazienzio, si è curata con la mossa già presentata ed è sopravvissuta. Non è un difetto: R04 («Una mossa già presentata continua anche se l'autore muore prima di agire o durante il proprio effetto») con R06 («HEALTH <= 0 significa morto», esito a fine turno); il server lo fa così (`Character.isDead`). Il proprietario aveva chiesto la morte immediata salvo carte che lo prevedano, poi l'ha ritirata. Nessuna regola cambia; SB-16b può riparlarne solo dichiarandolo. |
-| D49 | Revisione critica delle regole (SB-16b) | 12 novembre 2026, con le parole del proprietario: «prevediamo a un punto opportuno di SB una attività di valutazione critica dello stato delle regole del gioco, in cui un agente potentissimo impersona un game designer esperto e analizza cosa potrebbe essere cambiato per rendere il gioco più divertente, più soddisfacente, complesso ma non inutilmente complicato, poi mi propone le cose che ha trovato. io farò lo stesso e gli dirò le miee idee e insieme decideremo come agire»; e «se dobbiamo rifare dei giri di bilanciamento a seguito di quei cambi, pace, li rifaremo, ma valuteremo a seconda di cosa vogliamo cambiare, se mai decidessimo che c'è da cambiare qualcosa». Blocco [SB-16b](#sb-16b--revisione-critica-delle-regole) dopo le prove umane SB-12b e SB-16 e prima di SB-17 (punto scelto dalla regia su delega). L'idea dell'alcol che riduce i danni per tutti («mi piacerebbe una regola per tutti, ma aspettiamo a cambiare le regole») passa alla Fase B. |
-| D50 | Regole del sistema decise in SB-16b (Fase B) | 12 novembre 2026, proposta per proposta. **(1) Chi è a terra non colpisce (P1, R04):** le mosse si risolvono per gruppi di velocità (stessa priorità e stessa ALERTNESS dopo i costi); la mossa di un autore morto all'inizio del proprio gruppo si annulla, salvo che bersagli l'autore o un suo oggetto vicino; dentro un gruppo le mosse restano simultanee; il salvataggio in extremis di D48 resta. Parole: «sì, applichiamola». **(2) Costi:** si paga solo con quello che si ha; un costo in HEALTH non si paga se porta a 0 o sotto. Eccezione scritta sulla carta (R00), «Ultimo colpo»: si può pagare anche fino a 0 o sotto e la mossa si risolve anche se l'autore è a terra; nessuna parola chiave. Parole: «direi che è vietato pagare con risorse che non si hanno, ma l'eccezione per chi vuole suicidarsi per un'ultimo colpo la terrei. potremmo specificarlo sulle carte che lo consentono». **(3) Pavimento a zero:** nessuna risorsa scende sotto zero, HEALTH compresa. Parole: «se uno è morto, è morto: non importa di tanto o di poco. anche le altre risorse non hanno senso che vadano in negativo»; dopo la misura, «pacimento a zero per tutte le risorse ok». **(4) Nessuno spareggio:** con zero superstiti resta la patta. Scartati P2 (vince chi è meno sotto zero, incompatibile col pavimento) e lo spareggio sulla HEALTH di inizio turno: «questa cosa dello spareggio proprio non mi piace». **(5) Corazza dell'alcol** (idea del proprietario, D49): chi ha ALCOHOL > 0 riduce i danni HIT ricevuti di L/4, divisione intera, dopo gli stati e non sotto zero; non riduce CUT e POISON; vale per tutti, anche sui danni a sé; il valore si tara in SB-16e. Parole: «l'alcol dovrebbe ridurre i danni da colpo (non quelli da taglio) per tutti»; dopo la misura a L/4 e L/2, «Sì, L/4». **(6) Ricerca al posto della pesca** (idea del proprietario, R02): una carta può sostituire la pesca che segue la sua mossa con la ricerca nel mazzo di una carta indicata; la carta trovata si mostra all'avversario; se non c'è, si pesca normalmente. Parole: «alcune carte di caricamento permettono di sostituire la pescata successiva randomica con la ricercar di una carta ben specifica»; «adottiamola, per; prevediamo di testarne bene le implicazioni». **(7) Ordine dei timer (P4, R06):** i timer che scadono nello stesso turno si eseguono in ordine di creazione, come fa già il server: «va bene». **(8) Dove:** nel playground (profilo `bozza` e runner, dietro un interruttore) fino a SB-28; il regolamento 1.14 si scrive al trasferimento, con P4; il gioco vivo resta al regolamento 1.13. Parola: «A». [Rapporto e misure](reports/set-base/sb-16b-report.md). Precisa D8 (la ricerca è un effetto nuovo, limitato da D52), D12, D27, D28 (la L è anche corazza), D47 e D48 (frase di R04 riscritta, salvataggio conservato) |
-| D51 | Criterio delle patte | 12 novembre 2026, con le parole del proprietario: «che ne dici di modificare le carte per non far succedere più del 10% di patte? ti sembra una buona idea? il set base è ancora del tutto wip, quindi possiamo cambiarne valori, funzionamento e tutto quanto come ci pare e piace»; sulla soglia, «va bene la soglia che raccokandi te». **Patte al massimo al 10% in ogni incontro fra starter, specchi compresi**, misurate coi bot; sostituisce «pochi» nei [criteri](#bilanciamento-metodo-e-criteri). Con le regole di D50 oggi la superano lo specchio di Piera (34%), quelli di Celestina e Beppe (19%), Piera–Beppe (16%), Mara–Piera e Celestina–Piera (12%), Celestina–Beppe (11%). Leve: partite più corte, velocità diverse nel finale, last resort con priorità diverse. Precisa D16 |
-| D52 | Principi del set: difese e ritmo | 12 novembre 2026. **(1) Nessuna parata pura (P3):** ogni difesa che vale solo nel turno dà anche qualcosa che resta se l'avversario non attacca, circa +5 della risorsa del personaggio o una piccola cura per le generiche: «sì, mi sembra tutto una buona idea». **(2) Il ritmo caricare-colpire-parare (P5)**, nato dalle risposte del proprietario sulle prove umane: colpo annunciato da uno stato visibile; accumulo rischioso, con un'esposizione che dura anche il turno dopo; difesa che rende e contromossa: «aggiungiamo, mi sembrano ottime considerazioni». **(3) Una coppia caricamento-colpo con ricerca** (D50, punto 6) **per personaggio nel Set Base**, con la ricerca mostrata; ricerche più ampie per le espansioni. Si applicano ai cinque starter in SB-16d e a Sergio e Duccio in SB-17 e SB-18. Precisa D8, D34 e D35 |
-| D53 | Fase C di SB-16b | 12 novembre 2026, con le parole del proprietario: «va bene» (struttura e limiti), «adottiamola, per; prevediamo di testarne bene le implicazioni» (verifiche della ricerca), «registriamo tutto». Quattro blocchi prima di SB-17: **SB-16c**, regole di D50 nel playground, con test di conformità, casi limite della ricerca ed euristica dei bot per caricamenti e coppie; **SB-16d**, proposta di riprogettazione dei cinque starter con D52, approvata dal proprietario; **SB-16e**, giro coi criteri di D16 e D51, al massimo 3 giri e 2 ore di calcolo, delega dei numeri e delle aggiunte di P3 come D38, funzionamento delle carte e composizione degli starter al proprietario, stop e proposta se i criteri non tornano, misure dedicate per ogni coppia con ricerca; **SB-16f**, prova umana del proprietario sugli starter rifatti. Precisa D12, D21 e D38 |
-| D54 | Risposte sulle domande di SB-16c | 12 novembre 2026, con le parole del proprietario, domanda per domanda. **(1) Oggetto trovato dalla ricerca:** va sul campo e la pesca continua, come quando si pesca: «A, anche se non crtedo che faremo carti di caricamento che cercano oggetti». **(2) Carta cercata scartata con una bound:** valgono le due letture provate (la carta di ricerca usata come scarto non cerca; la carta trovata, scartata più tardi, esce dalla mano): «entrambe le letture sono corrette». Sul senso del caricamento: «le carte "di caricamento" alla fine non sono un nuovo tipo di carta, ma è un'effetto che possono avere varie carte (anche colpi, perché no?). il senso è di dare un'informazione all'avversario: ho in mano una carta potente che può farti male e la posso giocare, ma sono vulnerabile, quindi scegli bene che fare, se picchiarmi o difenderti». **(3) CinqueMinutiEVado oltre il tetto delle bound con la corazza dell'alcol:** si corregge la carta in SB-16d, il controllo del tetto resta com'è: «A, possiamo rimaneggiare le carte quanto vogliamo epr bilanciare tutto il set base». **(4) Il profilo `bozza` parte con le regole `d50`:** «A». Nessun cambio al codice di SB-16c. Precisa D50 (punto 6) e D52 (punto 3) |
-| D55 | Approvazione della proposta SB-16d | 12 novembre 2026, con le parole del proprietario: «approvo, poi cmq le ritestiamo estensivamente», dopo il riepilogo dei cinque starter e delle tre domande della [proposta 0.2](design/set-base/sb-16d-proposta.md). Approvati i nove slot e le cinque coppie, compreso il recupero di A di Piera, la ricerca esatta, le esposizioni per due turni e i premi delle tre difese; copie, rarità e composizione conservate. Numeri indicativi sotto D38/D53. Restano le misure estese delle coppie e di tutti gli incontri/specchi in SB-16e e la prova umana SB-16f, entro i limiti di D53. La correzione di CinqueMinutiEVado resta quella richiesta da D54: se solo numerica è delegata, un cambio di funzionamento richiede il proprietario. Precisa D52 e D53 |
-| D56 | Seguito dello STOP di SB-16e | 12 novembre 2026, con le parole del proprietario alle domande 1 e 2 del [rapporto SB-16e](reports/set-base/sb-16e-report.md#domande-numerate-al-proprietario): «si a entrambe». **(1)** Autorizzato un solo nuovo lotto numerico, **SB-16e2**: un giro, al massimo 30 minuti di calcolo, controllo col giro 3 e tre varianti prefissate (Un altro e arrivo +20→+35 A; danno a sé di L’ultima dose e L’ultimo giro 5→2; entrambe), stessi semi, matrice completa e soglie invariate; numeri adottati con la delega di D38. **(2)** Approvato il minimo intervento di leggibilità prima di SB-16f, **SB-16f0**: ricerca (binding ed esito) e motivo dell’annullamento come campi strutturati opzionali nella vista del playground; nel client carta trovata ispezionabile riusando la pesca e «annullata: a terra» nel riepilogo italiano. Precisa D38 e D53 |
-| D57 | Seguito dello STOP di SB-16e2 | 13 novembre 2026, risposta del proprietario («Sì, entrambe») alla regia, che gli chiedeva di registrare la variante (c) e la prova umana prima di ridisegnare, cioè le domande 1 e 2 del [rapporto SB-16e2](reports/set-base/sb-16e2-report.md#domande-numerate-al-proprietario). **(1)** Nessun ridisegno prima della prova: si va a [SB-16f](#sb-16f--prova-umana-degli-starter-rifatti) con i numeri attuali; ridisegno delle last resort o del finale degli specchi solo se la prova lo chiede. **(2)** Confermata la variante (c), già nella bozza: Un altro e arrivo +35 A, danno a sé di L’ultima dose e L’ultimo giro 2 HIT. I criteri di D16 e D51 restano invariati e non raggiunti. Precisa D53 e D56 |
-| D58 | La carta trovata resta scoperta in mano | 13 novembre 2026, idea del proprietario: «la carta presa col tutore del colpo annunciato, dovrebbe essere rivelata agli altri player e tenuta a faccia in su nelle loro mani»; «Sono d'accordo» alla proposta della regia. Nel playground (regole d50): la carta trovata con la ricerca (D50, punto 6) resta visibile a tutti, a faccia in su nella mano di chi l'ha cercata, finché non viene giocata o scartata. Oggi ([SB-16f0](reports/set-base/sb-16f0-report.md)) si mostra solo nella sequenza del round e la mano dell'avversario è un numero. Serve: la vista del server che dice quali carte in mano sono scoperte; i bot che la leggono come un umano; il client che la disegna e la fa ispezionare. Si attua nella Fase 2 di [SB-16g](#sb-16g--coppie-caricamento-colpo-seconda-passata). Precisa D50 (punto 6) e D54 |
-
-| D59 | SB-16g: conseguenza F e durata minima | 13 novembre 2026, risposta del proprietario alla domanda 1 della [proposta](design/set-base/sb-16g-proposta.md#domande-numerate-al-proprietario): «Sì, scegliamo F, con almeno due turni di vulnerabilità. Per due turni si intende quello in cui giochi l carta tutore e il turno successivo, in cui potresti giocare o meno il colpo. giusto?». Scelta **F**: vulnerabilità nel turno in cui si gioca il tutore e nel turno immediatamente successivo, anche se il colpo viene giocato o scartato prima della fine di quel secondo turno. Se la copia cercata resta in mano oltre il minimo, la vulnerabilità continua finché quella copia viene giocata o scartata. Gli altri dettagli della domanda 4 (tipi di danno, copie e cumulo), composizioni e numeri non sono approvati da questa sola risposta. Nessuna alternativa aggiuntiva da simulare è stata scelta; divisione della Fase 2 ancora da sottoporre. Registrazione documentale, nessuna attuazione. Precisa D52 e D55 |
-
-| D60 | SB-16g: totale 120 e ipotesi di due coppie per rarità | 13 novembre 2026, risposta alla domanda 2: «va bene 120 carte, ma:»; proposta del proprietario: «se consideriamo la rarità, potremmo fare due copie di una carta caricamento non comune che cercano un colpo non comune (anche quello in due copie), mentre un’altra carta di caricamento cerca il colpo raro»; domanda «che ne pensi?». **Approvato il totale di 120 carte.** Da confermare la struttura suggerita: due caricamenti non comuni verso due copie di un colpo non comune, più un altro caricamento verso il colpo raro. La rarità del secondo caricamento e il numero di copie del raro non sono fissati dalle parole del proprietario. Le composizioni e le sostituzioni precedenti non sono approvate da questa risposta; la domanda 2 resta aperta su questi aspetti. Due destinazioni di ricerca per personaggio richiedono una revisione esplicita di D52, sempre con un solo binding esatto per ciascun caricamento; per restare a 120 occorre riusare/riprogettare slot esistenti. Nessuna attuazione |
-
-| D61 | SB-16g: due coppie per rarità nei cinque starter | 13 novembre 2026, il proprietario: «Sì, adottiamo questo schema per tutti e cinque gli starter. Precisando, 2 caricamenti non comuni e 2 colpi non comuni sono due copie della stessa carta: è uno starter deck, poi nelle buste ci saranno magari altri caricamenti e altri colpi diversi». Approvato per tutti i cinque starter lo schema discusso: **2 copie dello stesso caricamento NC cercano 2 copie dello stesso colpo NC; 1 copia di un secondo titolo di caricamento cerca 1 colpo raro**. Ogni caricamento cerca un solo binding esatto, con due destinazioni distinte per personaggio: precisa D52. Approvata la revisione documentale delle sostituzioni per restare a 20 regolari per starter e 120 carte nel set (D60). La rarità del secondo caricamento resta da decidere; carte concrete, nuovi funzionamenti e valori vanno ancora presentati. La possibile varietà nelle buste è una prospettiva futura, non una richiesta di aggiungere subito altri titoli. Nessuna attuazione |
-
-| D62 | SB-16g: anche il tutore del raro è non comune | 13 novembre 2026, alla proposta «farei non comune anche il caricamento in singola copia che cerca il raro, così il caricamento è accessibile e la rarità caratterizza il colpo. Ti va bene?», il proprietario risponde: «va bene». Per tutti i cinque starter anche il secondo titolo di caricamento, presente in una copia e diretto al colpo raro, è **non comune**. Confermato quindi lo schema D61: 2 copie di un caricamento NC → 2 copie di un colpo NC; 1 copia di un diverso caricamento NC → 1 colpo raro. Restano da presentare carte concrete, sostituzioni e potenza; nessuna attuazione. Precisa D61 |
-
-| D63 | SB-16g: direzione di risorse e potenza delle due coppie | 13 novembre 2026, alla domanda 3 riformulata dopo D61–D62, il proprietario risponde: «approvo». Approvata questa direzione per tutti i cinque starter: ogni caricamento deve dare, partendo da zero e considerando il fine turno, risorse sufficienti per giocare il rispettivo colpo; il colpo NC deve essere potente e affidabile; il raro deve offrire un picco maggiore legato alla preparazione o alla situazione sul tavolo. I numeri sono indicativi e tarabili nella Fase 2 (D38). Le carte concrete e le sostituzioni devono essere ripresentate nella proposta aggiornata: questa risposta non approva i vecchi valori o funzionamenti delle schede superate da D61, né garantisce il pagamento dopo successive spese volontarie o interferenze avversarie. Nessuna attuazione |
-
-| D64 | SB-16g: vulnerabilità a tutti i danni e possibilità future | 13 novembre 2026, il proprietario: «approvo vulnerabilità a tutti i danni. pensiamo anche che, in futuro o nelle buste, possiamo infliggere anche vulnerabilità diverse (tipo un consumo aumentato di risorse per giocare le carte, che non se ne va fino a che non si gioca il colpo cercato), oppure vulnerabilità peggiori (2x, 3x) se serve per bilanciare la forza delle carte». Approvata per tutti i cinque starter la vulnerabilità a **tutti i tipi di danno attuali, HIT, CUT e POISON**, compreso Spazienzio. Il fattore iniziale proposto è ×1,5, tarabile in Fase 2; ×2 e ×3 sono possibilità da valutare per bilanciare la forza delle carte, non valori adottati qui. Registrata come prospettiva futura/per le buste anche una penalità diversa, per esempio aumento del consumo di risorse per giocare carte, persistente fino alla giocata del colpo cercato: richiederebbe una proposta di funzionamento e supporto del motore, non è un effetto approvato da attuare in SB-16g. Il trattamento dello scarto per questa eventuale penalità futura resta da definire; non modifica la durata F già scelta in D59. Legame alla copia, casi di uscita e cumulo restano da discutere. Nessuna attuazione |
-
-| D65 | SB-16g: vulnerabilità legata alla precisa copia cercata | 13 novembre 2026, alla gestione proposta per il legame al colpo, il proprietario risponde: «si, la vulnerabilità inflitta segue quella precisa copia». Approvato il legame alla specifica copia trovata, non al solo titolo/binding. Giocarla o scartarla conclude il prolungamento, rispettando sempre i due turni minimi di D59; anche se il colpo è parato o annullato, la fine del prolungamento dipende dall’effettiva uscita della copia dalla mano. Uno scarto per bound vale solo se realmente eseguito. Giocare/scartare un’altra copia omonima non libera quella cercata. Una ricerca fallita lascia soltanto i due turni minimi del caricamento e non crea un legame con carte già in mano o pescate normalmente. Il cumulo di più vulnerabilità resta da decidere. Nessuna attuazione |
-
-| D66 | SB-16g: cumulo moltiplicativo delle vulnerabilità | 13 novembre 2026, alla proposta di tenere indipendenti le vulnerabilità e moltiplicarne i fattori come per gli stati attuali (una ×1,5 dà ×1,5; due ×1,5 danno ×2,25), il proprietario risponde: «approvo». Ogni vulnerabilità segue la propria copia cercata; giocare o scartare una copia conclude soltanto il relativo prolungamento, rispettando per ciascuna i due turni minimi di D59. Restano attive le altre vulnerabilità. Nessuna fusione o tetto speciale al cumulo; fattori e potenza delle carte si tarano insieme in Fase 2, senza cambiare il funzionamento approvato. Completa la domanda 4 della proposta; nessuna attuazione |
-
-| D67 | SB-16g: valutare una risposta difensiva al POISON | 13 novembre 2026, alla proposta di valutare nella Fase 2 se estendere una difesa regolare esistente anche al POISON, mantenendone il premio di risorse o cura e presentando il funzionamento concreto prima di modificarla, il proprietario risponde: «si includiamola». Inclusa la **valutazione**, non approvata una modifica di carta già definita. La difesa candidata, effetti, costo e impatto su incontri/durata vanno presentati prima dell’eventuale attuazione. Nessuna estensione dell’immunità alla risorsa T al danno POISON. Le altre ipotesi (premi condizionati alla ricerca o ridisegno delle last resort) non sono autorizzate da questa risposta; leggibilità del legame pubblico già nel perimetro D58. Nessuna attuazione |
-
-| D68 | SB-16g: divisione della Fase 2 in 2a e 2b | 13 novembre 2026, alla proposta di divisione in 2a (D58, vulnerabilità scelta nel motore, vista server/client e test) e 2b (carte nella bozza, bot con tre politiche e giro di bilanciamento, inclusa la valutazione della difesa POISON), il proprietario risponde: «approvo». Approvata la divisione del lavoro: **2a** rende disponibile il supporto tecnico di D58 e D59/D64–D66; **2b** applica carte e composizioni approvate, bot e misure D16/D51, entro tre giri e due ore cumulative di calcolo. Prima dell’inserimento delle carte nella bozza devono essere ripresentate e approvate coppie concrete e sostituzioni aggiornate a D61–D63; per la difesa POISON resta il cancello di D67. Questa risposta approva l’organizzazione, non avvia l’attuazione: STOP dopo la registrazione documentale, nessuna bozza/codice/test/client modificati, nessun push |
-
-| D69 | SB-16g: gettone legato al nome, carta scoperta come vista | 13 novembre 2026, alla consegna della Fase 2a ([rapporto](reports/set-base/sb-16g-2a-report.md)), il proprietario conferma le cinque domande «però»: «la carta scoperta conta come un reminder per ricordare ai giocatori che quella carta l'hanno vista, non è "fisicamente" scoperta»; «il gettone della penalità sul danno (o su qualunque altra cosa sia) è sul giocatore, non sulla carta; è legato a una carta con lo stesso nome di quella cercata, quindi se chi ha il gettone ne gioca un'altra copia (perché ce l'aveva già in mano, ad esempio) il gettone considera soddisfatta la sua condizione e si distrugge»; «non c'è nessun timer sul gettone, va via quando si gioca una carta col nome che lo ha creato». Alle domande di dettaglio della regia: ricerca fallita, «si fa un gettone non legato alla carta ma che dura fino al turno successivo, un po' come se fosse un normale status negativo»; scarto, «no, solo se viene giocata. se uno scarta la sua unica copia, doveva pensarci prima»; colpo giocato ma annullato e due gettoni con lo stesso nome, «d'accordo come dici te»; carta scoperta, «manterrei la carta a faccia in su, perché no? è solo una vista. il gettone rimane per dire lo status negativo e quando se ne andrà. se viene giocata una copia diversa ma con lo stesso nome della carta cercata, l'informazione che gli altri giocatori avevano è cmq spesa, quindi non si fa più vedere». Quindi, nel playground: **(a)** se la ricerca trova la carta, il caricamento mette sul giocatore un gettone di vulnerabilità **legato al nome** della carta cercata, **senza timer**: si distrugge quando il giocatore gioca una carta con quel nome, la copia trovata o un'altra, anche se la mossa è parata o annullata; lo scarto non lo toglie. **(b)** Se la ricerca non trova la carta, il gettone non è legato a nessuna carta e dura come uno stato normale, il turno del caricamento e il successivo (lettura della regia di «fino al turno successivo», come il minimo di D59). **(c)** Con più gettoni dello stesso nome, una carta giocata ne toglie uno solo, il più vecchio; i fattori si moltiplicano (D66). **(d)** La carta trovata resta disegnata a faccia in su nella mano finché c'è il suo gettone: è una vista, un promemoria di ciò che tutti hanno visto, e sparisce col gettone anche se il giocatore ha giocato un'altra copia. Confermate le domande 2–4 del rapporto: il gettone sparisce alla fine del gruppo di velocità in cui la carta è giocata; a fine partita, eliminazione e forfait gettoni e carte scoperte si tolgono; «∞» sul gettone legato. La domanda 1 (quale copia giocare) non serve più. Confermato il passo a 2b dopo la proposta aggiornata. **Rivede** D58 (la copia non è fisicamente scoperta), D59 (nessun minimo per il gettone legato) e D65 (legame al nome e non alla copia; giocare un'omonima lo soddisfa; lo scarto non conta). Si attua in una revisione della Fase 2a |
-
-| D70 | SB-16g: durata della ricerca fallita, nessuna ricerca di oggetti | 13 novembre 2026, risposte alle due domande del [rapporto 2a](reports/set-base/sb-16g-2a-report.md#domande-numerate-al-proprietario) dopo D69. **(1)** Gettone della ricerca fallita per il turno del caricamento e il successivo, sulla carta `turnsIfNotFound: 2`: «va bene». **(2)** Oggetto trovato: «una ricerca per ora non può trovare un oggetto, non avrebbe senso; le carte che cercano danno anche le risorse per usare il colpo che trovano, a che servirebbe trovare un oggetto? magari in seguito potremmo fare dei tutori per oggetti, ma senza la meccanica della penalità». Quindi nel playground una ricerca cerca solo carte che vanno in mano: il caricatore della bozza rifiuta un passo `search` che indica un oggetto. Eventuali tutori di oggetti, in futuro, non avranno il gettone di vulnerabilità. **Rivede** D54, punto 1 (l'oggetto trovato sul campo resta solo come comportamento del motore, non raggiungibile da una bozza valida). Precisa D69 |
-
-| D71 | SB-16g: il gettone cade a fine turno, uscita dopo l'ultima copia, carta mostrata solo se in mano | 13 novembre 2026, dopo il [consulto di design](reports/set-base/consulto-design-fable-2026-11-13.md) e la [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md), il proprietario sceglie le proposte della regia. **(M1)** «Fine turno»: il gettone legato al nome cade **alla fine del turno** in cui si gioca una carta con quel nome, non alla fine del gruppo di velocità; nel turno della giocata i colpi avversari sono amplificati qualunque sia la velocità. **(G5)** «Un turno dopo»: quando chi porta il gettone non ha più una carta con quel nome né in mano né nel mazzo, il gettone cade alla fine del turno successivo; il client avvisa prima di scartare l'ultima copia di una carta che tiene un gettone. **(K1)** «Il motore»: la carta trovata si mostra a faccia in su solo finché quella copia è in mano; dopo uno scarto resta soltanto il segnalino col nome. Restano da D69: gettone sul giocatore legato al nome, tolto da qualsiasi omonima giocata anche se parata o annullata, il più vecchio per primo, fattori moltiplicati. **Rivede** D69 (fine gruppo, nessuna uscita) e la proposta SB-16g 1.1. Si attua nel passo 1 della 2b (D74) |
-
-| D72 | SB-16g: la ricerca fallita dà meno risorse e nessun gettone | 13 novembre 2026, alla proposta della regia «le risorse solo se la ricerca trova», il proprietario risponde con una variante: «Meno risorse se non trova: "Cerca X. Se lo trovi guadagni le risorse e sei vulnerabile; se no guadagni molte meno risorse, peschi e non sei vulnerabile." Il caricamento a vuoto così non è un turno del tutto perso». Sulla quantità: «Da tarare nella 2b». Quindi: se la ricerca non trova, si pesca normalmente, si guadagna una parte ridotta delle risorse e non si riceve alcun gettone. Valore di partenza circa un terzo, arrotondato a 5, tarato nel passo 1 della 2b (D38); deve restare chiaramente peggio che trovare. **Rivede** D70, punto 1, e D69 (b): il gettone anonimo di due turni non c'è più. Si attua nel passo 1 della 2b |
-
-| D73 | «Ultimo colpo» si gioca anche con HEALTH sotto il costo | 13 novembre 2026, rilievo M2 della [revisione indipendente](reports/set-base/revisione-fable-2026-11-13.md): il motore rifiuta una carta con «Ultimo colpo» se la HEALTH è sotto il costo, mentre D50 (punto 2) dice «fino a 0 o sotto». Il proprietario: «Si paga quel che c'è». Nel playground una carta con «Ultimo colpo» si può giocare anche con HEALTH inferiore al costo: si paga quello che si ha, si va a 0 e il colpo si risolve da terra. Nessuna carta della bozza lo usa ancora. Precisa D50, punto 2. Si attua nel passo 1 della 2b, con un test sul caso HEALTH sotto il costo |
-
-| D74 | SB-16g: 2b in tre passi, prova umana dopo il primo | 13 novembre 2026, alla proposta del consulto (C3-2) ripresa dalla regia, il proprietario sceglie «Tre passi» e la prova umana «Dopo il passo 1». La 2b si divide: **passo 1** regole D71–D73 e bot che leggono gettoni e carte scoperte, con i cinque caricamenti di oggi dotati di gettone, giro di misura e taratura di D72; **breve prova umana**; **passo 2** frequenza secondo D61–D62 coi danni di oggi; **passo 3** potenza della proposta e difesa dal POISON (D67). Il budget resta quello di D68, tre giri e due ore cumulative di calcolo per tutta la 2b. Le carte concrete del passo 2 vanno ripresentate allineate a D71–D74 e approvate prima dell'inserimento. **Rivede** l'organizzazione della 2b in D68 |
-
-| D75 | SB-16g: meccanica dei caricamenti approvata | 13 novembre 2026, prova umana breve dopo il passo 1 della 2b: «la meccanica delle carte che cercano i colpi potenti che abbiamo creato oggi è molto carina, la approvo». Approvato il funzionamento attuato nel passo 1 secondo D69 e D71–D73 ([contratto d50 1.0](design/set-base/sb-16g-2b1-rules.md)): caricamento che cerca un colpo per nome, gettone ×1,5 sul giocatore fino alla fine del turno in cui gioca quel nome, uscita un turno dopo che il nome manca da mano e mazzo, carta trovata mostrata finché è in mano, ricerca fallita con risorse ridotte e senza gettone. Non approva numeri: fattore, risorse del ripiego e carte del passo 2 restano tarabili (D38) e da presentare. Resta nel playground fino a SB-28 (D50) |
-
-| D76 | Bot che gioca bene: colpo letale prima del passo 2, livelli di forza | 13 novembre 2026, prova umana breve: «il bot con cui si gioca sul client è stupido, non si para se sa che col colpo potente che ho cercato verrebbe ucciso, né sfrutta il mio status negativo per farmi più danni e uccidermi»; alla proposta della regia di renderlo consapevole del colpo letale sul turno in corso prima del passo 2: «sono d'accordo, il bot va fatto giocare bene, con vari livelli di forza e difficoltà, anche perché poi il single player contro il computer è una modalità fondamentale nel gioco». Quindi: **(1)** prima del passo 2 della 2b, i bot euristici, con le sole informazioni lecite e senza pianificare più turni, si parano o si curano se il colpo mostrato dall'avversario, con stati e gettoni visibili, li porterebbe a terra, e colpiscono se un loro colpo, amplificato dal gettone avversario, porta a terra l'avversario; poi le misure dei passi 2 e 3 si fanno con quei bot. **(2)** Il gioco contro il computer è una modalità fondamentale: il bot deve giocare bene e avere più livelli di forza e difficoltà. Aggiorna Q2 (livelli) e rafforza il perimetro di SB-30; quando anticipare i livelli resta da decidere |
-| D77 | SB-16g: risposte sul bot consapevole del colpo letale | 14 novembre 2026, alle cinque domande del [rapporto](reports/set-base/sb-16g-bot-letale-report.md#non-verificato-e-domande-numerate), con le parole del proprietario: «1 niente prova, andiamo avanti / 2 si / 3 si, è giocare bene / 4 si / 5 si». Quindi: **(1)** nessuna prova umana contro il bot nuovo prima del passo 2; il guadagno misurato basta. **(2)** Se cade comunque, il bot sceglie la patta (colpo letale nello stesso gruppo) invece della sconfitta. **(3)** Il bot evita anche le mosse che lo esporrebbero da sé, come un caricamento che renderebbe letale il colpo mostrato: «è giocare bene». **(4)** Un colpo che l'avversario potrebbe avere in mano coperta non conta, finché non arrivano i livelli di forza (Q2). **(5)** I passi 2 e 3 misurano coi bot nuovi in tutte e tre le politiche del gettone (`ChargeMeasureTest`; `-Dsim.bots=passo1` resta per riprodurre il passo 1). Prossimo: Q9 e proposta delle carte del passo 2 |
-| D78 | Parola chiave «Annuncia» e parole chiave in generale (era Q9) | 14 novembre 2026, alla domanda su Q9, con le parole del proprietario: «si, annuncia va bene. in generale, possiamo inventare tutte le keyword ragionevoli che ci consentono di avere testi delle carte piu concisi, purche non diventino un rebus». Quindi: **(1)** «Annuncia X» è la parola che riassume il caricamento (cerca X, la mostra in mano, gettone ×1,5 legato al nome, ripiego D72), definita una volta sola invece del testo lungo su ogni carta. **(2)** Rivede D8 per le parole chiave: se ne possono introdurre altre, se accorciano davvero i testi e restano intuitive per chi gioca; ogni nuova parola va proposta con la sua definizione e approvata come le carte (D45, punto 7). **(3)** Le definizioni stanno nel contratto delle regole del playground finché le regole restano lì (D50); entrano nel regolamento, con versione e motivazione, al trasferimento nella partita viva (SB-28); i testi per i giocatori le usano in SB-25. Le risorse nuove restano escluse da D8 |
-| D79 | SB-16g: proposta 1.3 delle carte approvata | 14 novembre 2026, alla domanda «Approvi la proposta 1.3 così com'è?», con le parole del proprietario: «Approvo tutto». Approvate le quattro domande della [proposta 1.3](design/set-base/sb-16g-proposta.md#domande-numerate-al-proprietario): **(1)** forma breve «Annuncia X. Se lo trovi: … . Se non lo trovi: …» e definizione unica, senza altre parole chiave; **(2)** dieci caricamenti del passo 2 con danni e costi attuali dei colpi, ripieghi del passo 1 e sola anticipazione PAZIENZA: FINITA +15→+25 V (D63), sapendo che alcuni rari restano deboli nella tappa intermedia (Cinghiata 12 CUT, travaso da zero 0 T); **(3)** sostituzioni, cinque liste da 20, 120 slot e rarità 45 C / 55 NC / 20 R, maggioranza NC accettata; **(4)** potenza della 1.2 e Bancone contro il POISON (D67) restano proposte separate del passo 3, da approvare nel funzionamento prima dell'attuazione. Autorizza il passo 2 entro il residuo D68 |
-| D80 | SB-16g: dopo il passo 2, priorità del passo 3 e giro finale | 14 novembre 2026, alla domanda «Rispondi sì alle due domande del passo 2 (proposta del passo 3, giro finale a due bracci)?», con le parole del proprietario: «Sì a entrambe». Sulle due domande del [rapporto del passo 2](reports/set-base/sb-16g-2b2-report.md#non-verificato-e-domande-numerate): **(1)** si passa alla proposta separata del passo 3 con priorità al vantaggio di Spazienzio, allo scarso uso dei caricamenti di Beppe, ai rari intermedi deboli e agli specchi di Celestina e Beppe; liste D79 e giro residuo fermi fino all'approvazione dei funzionamenti; le formule della 1.2 non si applicano in blocco. **(2)** Il giro finale, prefissato dopo l'approvazione, confronta nello stesso giro due bracci, potenza senza e con l'estensione POISON del Bancone (D67), con la misura del passo 2 come riferimento, stessi semi e bot, nuovo passo 0 entro il residuo di 1 giro/6.340,041 s |
-| D81 | Dimensione del mazzo: misura anticipata (SB-16h) | 14 novembre 2026. Idea del proprietario: «a che punto ci converrebbe testare se il gioco migliora o meno aumentando le carte consentite nel mazzo? ora abbiamo 20 fisse, ma se fosser 25? o 30? o un range fra 20 e 30?». Alla proposta della regia di anticipare la misura dopo il passo 3 di SB-16g e prima di SB-17 («Anticipo la prova sulla dimensione del mazzo dopo il passo 3, prima di SB-17?»): «Sì, anticipala». Nasce il blocco [SB-16h](#sb-16h--prova-esplorativa-della-dimensione-del-mazzo), Fase A con proposta delle varianti e STOP; budget proprio, separato da D68. D1 e R02 1.12 restano in vigore finché il proprietario non sceglie un altro formato. Aggiorna Q7 e SB-23 |
-| D82 | SB-16g: proposta 1.4 del passo 3 approvata | 14 novembre 2026, alle cinque domande della [proposta 1.4](design/set-base/sb-16g-proposta.md#incertezze-e-domande-della-14), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «Si a tutte». **(1)** Spazienzio: sola leva Gargantuesco Impatto 40→30 HIT, PAZIENZA +25 V e raro attuali; **(2)** Beppe: Preparo il lavoro e Una stretta di prova infliggono 4 CUT a un avversario anche a ricerca fallita, Preparo +15 V, Chiave 22 CUT/10 V, Lavoro 14+7 per oggetto/10 V, bot invariati; **(3)** Cinghiata 20 A e 18+A residua/2 con Ti stringo +20 A; travaso con 12 POISON diretti e Un assaggino +20 T; Rutto 14+2×L spesa con azzeramento; Estasi 18+L; Tossicone 18 POISON; Dose +5 A, con il rischio dichiarato che Celestina, già sopra quota contro Piera e Beppe, si rafforzi; **(4)** Sotto il cofano +5 A fuori dalle coppie, in entrambi i bracci; Bancone POISON ×0,5 nel solo braccio B, periodico del turno incluso, CUT pieno; **(5)** giro finale come prefissato: due bracci A/B nello stesso giro, 300 semi per cella e braccio, stessi semi e bot del passo 2, passo 0 di 4 semi incluso nel residuo, regola di stima s0 + 112,5×s0 + 120 ≤ 6.340,041 s, STOP senza rilancio se fattibilità o criteri non tornano. Autorizza l'attuazione del passo 3 |
-| D83 | SB-16h: proposta 0.1 della Fase A approvata | 14 novembre 2026, alle dieci domande della [proposta 0.1](design/set-base/sb-16h-proposta.md#6-domande-numerate-al-proprietario), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «Si a tutte, con le tue aggiunte». **(1)** Varianti 20/2, 25/2, 25/3, 30/2, 30/3, senza 20/3 e senza mazzi oltre 30; **(2)** raro e tutore a 1 copia ovunque, coppia NC a 3+3 nelle X/3; **(3)** X/2 con titoli nuovi (varietà), X/3 con carte presenti (costanza); **(4)** composizioni starter per starter come proposte, solo nel playground, da riapprovare se il formato cambia; **(5)** archetipo a un terzo nelle X/2 accettato come parte della misura; **(6)** pool limitato alle carte già nella bozza; **(7)** braccio misto incluso (ogni personaggio a 20/2 contro se stesso a 30/2 e 30/3); **(8)** budget proprio di un giro, al più 7.200 s, separato da D68, passo 0 fuori budget, 150 semi per cella se la stima non ci sta; **(9)** criterio della proposta con due aggiunte della regia: nessun criterio D16/D51 peggiora rispetto a 20/2, e prova umana del proprietario sulla variante scelta prima di cambiare R02; **(10)** Fase B dopo il giro finale di SB-16g e la scelta del braccio, prima di SB-17, mai in contemporanea con un'altra misura |
-| D84 | SB-16g: supporto mirato per travaso e Rutto nel passo 3 | 14 novembre 2026. Il passo 3 si è fermato prima dell'attuazione ([rapporto](reports/set-base/sb-16g-2b3-report.md)): travaso con POISON diretto e Rutto «14 + 2×L spesa» non si esprimono coi dati. Alla raccomandazione della regia (opzione 1 col parametro nella classe viva del travaso, non una classe nuova), con le parole del proprietario: «D'accordo con tutte le tue considerazioni». Quindi: **(1)** perimetro esteso a tre file di `server/src/main`: classe del playground `base.pino.RuttoADistanzaSociale` accanto a quelle di SB-8, binding invariato; parametro `@Tunable poison = 0` in `junkie.ToxicBloodDrain`, che col valore 0 lascia identica la carta viva; campo `times` (default 1) in `PrintedEffects.Step` letto da `TurnForecast`; **(2)** niente classe nuova per il travaso: binding, lista di Celestina e ricerca di Un assaggino invariati. Cancelli: gioco vivo 1.13 identico byte per byte, fedeltà della previsione senza discrepanze sui nuovi effetti, mutazioni sulle due classi. Il resto della 1.4, il passo 0 e il giro restano come in D82 |
-| D85 | Livelli di forza del bot (era Q2) | 14 novembre 2026, alle nove domande della [proposta 0.1](design/set-base/bot-livelli-proposta.md#6-domande-al-proprietario), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «D'accordo con tutte le tue considerazioni». **(1)** Quattro livelli, nomi provvisori Facile, Normale, Difficile, Maestro; nomi definitivi dal mondo del bar più avanti. **(2)** Nessun livello bara, nemmeno il massimo, con la prova permanente «nessuna informazione nascosta»; il superboss «che può barare» (roadmap, D11) è un modificatore d'incontro dichiarato della carriera, non un livello. **(3)** Il Maestro usa le liste degli starter e le carte già viste; con un mazzo personalizzato solo le carte viste e quelle del personaggio. **(4)** Maestro mediana sotto 1 s, tetto 2 s, «sta pensando» nel client; gli altri livelli istantanei. **(5)** Scala rivista rispetto alla proposta: **Facile** casuale; **Normale** il bot consapevole del colpo letale (D76–D77), perché il livello che incontra la maggior parte dei giocatori non deve sembrare stupido; **Difficile** previsione su due turni; **Maestro** ricerca su più turni. **(6)** Il livello lo sceglie chi gioca in quick e lo fissa l'incontro in carriera; lo stile è un'impronta del personaggio. **(7)** Il budget di calcolo dei livelli si fissa dopo la sonda di costo del Maestro (B4); fino ad allora nessuna misura dei livelli. **(8)** SB-30 diviso: **SB-30a** (Facile e Normale collegati alla partita viva, scelta del livello, prova anti-barare, scala) dopo SB-28 e SB-29; **SB-30b** (Difficile a due turni e Maestro) anticipato come prototipo nel playground dopo il passo 3 di SB-16g, senza toccare la partita viva né il banco; le sue misure non girano mai insieme a quelle di bilanciamento. **(9)** Livelli distinti solo per capacità, nessun errore voluto; il rumore si propone solo se la scala non regge |
-| D86 | SB-16g: travaso con classe nuova del playground (rivede D84 punto 2) | 14 novembre 2026. Durante l'attuazione il parametro `poison` nella classe viva `junkie.ToxicBloodDrain` si è rivelato più invasivo del previsto: `scripts/check-rules.py` lo legge come danno nominale vivo e `Draft` esige ogni `@Tunable` nei parametri, rompendo tre bozze di prova (168 test) e la fixture dell'identità viva; la correzione proposta toccava anche `Tunable`, `Draft` e il verificatore. Alla domanda della regia «Per il travaso: classe nuova nel playground o parametro facoltativo nella classe viva?», con raccomandazione per la classe nuova, il proprietario: «Classe nuova». Quindi: il travaso del passo 3 è una **classe nuova del playground** in `server/src/main` (come quelle di SB-8), con **binding nuovo**; la bozza la usa nella lista di Celestina e nella ricerca di Un assaggino al posto di `junkie.ToxicBloodDrain`; titolo, copie, rarità, testo ed effetti della 1.4 invariati. Classe viva `junkie.ToxicBloodDrain`, `Tunable`, `Draft` e `scripts/check-rules.py` restano come alla base: annullata l'autorizzazione della regia alla modifica del verificatore. Il resto di D84 (classe del Rutto, campo `times` della previsione, cancelli) resta. Cosa diventa la carta viva si decide al trasferimento (SB-28) |
-| D87 | SB-16g: giro finale interrotto, completamento del braccio B | 14 novembre 2026. I messaggi della regia con il fermo sul travaso e con D86 non sono arrivati all'esecutore, che ha attuato la 1.4 col parametro facoltativo nella classe viva (non committato), poi passo 0 (8.640 + 8.640 partite, 18,57 s + 24,56 s) e il giro: **braccio A completo** (648.000 partite, 658,14 s); il processo si è chiuso alle 14:12 circa, prima del braccio B, per un evento esterno (chiusura della sessione). Alla raccomandazione della regia, con le parole del proprietario: «facciamo come consigli». Quindi: **(1)** completare il **braccio B** sullo stesso codice e con gli stessi semi del braccio A, senza toccare il codice prima: è il completamento del giro prefissato in D82, non un rilancio; **(2)** solo dopo applicare D86 (classe nuova del playground per il travaso, `ToxicBloodDrain`, `Tunable`, `Draft` e `scripts/check-rules.py` riportati alla base) e dimostrarne l'equivalenza rifacendo il campione del passo 0 dei due bracci, che deve coincidere con quello di prima salvo il binding; **(3)** contare nel residuo D68 tutto il tempo speso, comprese le prove e l'interruzione. Se B non sta nel residuo o fallisce per un difetto, STOP con dati |
-| D88 | SB-16g: si torna al codice del giro, parametro facoltativo nel travaso (rivede D86) | 14 novembre 2026. Dopo il braccio B l'esecutore ha applicato D86 e la prova di equivalenza sul passo 0 non ha coinciso: `Draft` ordina le carte regolari per binding prima di mescolare, il binding nuovo `base.tossico.CeDelSangueNellaMiaDroga` cambia la posizione del travaso nel mazzo di Celestina e quindi le mescolate dei 5 incontri con Celestina (10 su 15 identici); la classe nuova rompe anche `MultiSetTest`. Alla raccomandazione della regia di tornare al codice del giro, con le parole del proprietario: «Parametro (dati validi)». Quindi: codice finale = quello misurato nel giro (D84 con `@Tunable(optional = true) poison = 0` in `junkie.ToxicBloodDrain`, valore vivo usato da `Draft` se il parametro manca, solo per i `@Tunable` facoltativi); classe `base.tossico.CeDelSangueNellaMiaDroga` e binding nuovo abbandonati. Modifica di `scripts/check-rules.py` ammessa alle condizioni della regia: eccezione solo per un `@Tunable` con valore vivo 0, uscita identica alla base per le altre carte, prova che torna rossa con valore vivo diverso da 0. Cancelli finali da ripetere sul codice ricostruito: identità del giro (il passo 0 deve coincidere con step0-A e step0-B), suite, contesto Spring, identità viva 1.13, fedeltà della previsione, mutazioni |
-| D89 | SB-16g: dopo il giro finale, braccio B, proposta 1.5, ordine dei lavori e SB-30b | 14 novembre 2026, alle quattro domande del [rapporto del passo 3](reports/set-base/sb-16g-2b3-report.md#non-verificato-e-domande-numerate), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «Sono d'accordo con te. Andiamo avanti per questa strada e partiamo anche col bot in parallelo». **(1)** Bozza di riferimento: **braccio B** (Bancone con POISON ×0,5), anche con Celestina–Piera ancora fuori quota. **(2)** **Proposta 1.5** solo per Spazienzio (tappa intermedia di Impatto) e Beppe (caricamenti meno forti), Fase A con STOP; misura con **budget nuovo, separato da D68: un giro, al più 7.200 s**, passo 0 incluso nella stima come nel passo 3. **(3)** Prova umana breve **dopo** la misura della 1.5, non su questa bozza. **(4)** `junkie.ToxicBloodDrain` resta col parametro facoltativo fino a SB-28 (D88). Ordine: proposta 1.5 → approvazione → misura → SB-16h Fase B → prova umana → SB-17. **SB-30b** (Difficile a due turni e Maestro, D85) parte ora in parallelo, nel playground, senza cambiare il comportamento dei bot esistenti né il banco; le sue misure non girano mai insieme a quelle di bilanciamento |
-| D90 | SB-16g: proposta 1.5 approvata | 14 novembre 2026, alle cinque domande della [proposta 1.5](design/set-base/sb-16g-proposta.md#domande-della-15), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «Sì, come consigli». **(1)** Spazienzio: Gargantuesco Impatto 30→**34 HIT**, costo, PAZIENZA e raro invariati; **(2)** Beppe: Lavoro fatto bene **14+4 per oggetto**, Chiave da tredici **18 CUT**, entrambi a 10 V; restano i 4 CUT anche a ricerca fallita e i premi; **(3)** misura come disegnata: un braccio da 648.000 partite sul braccio B, semi e bot del passo 3, **budget nuovo di un giro e 7.200 s** separato da D68, passo 0 incluso (s0 ≤ 62,38 s), cancello d'identità sui 6 incontri senza Spazienzio né Beppe; **(4)** giudizio sui 9 incontri con Spazienzio o Beppe, cancello completo dichiarato non raggiunto; **(5)** Spazienzio–Mara, fuori quasi solo contro Mara `com`, si corregge più avanti su Mara; la regia proporrà a parte se il bot casuale debba pesare meno nei criteri |
-| D91 | SB-30b: Fase A approvata | 14 novembre 2026, alle cinque domande del [progetto SB-30b](design/set-base/sb-30b-progetto.md#7-domande-al-proprietario) ([sonda](reports/set-base/sb-30b-sonda-report.md)), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «Sì, come consigli». **(1)** Difficile = previsione su due turni senza mani campionate; il campionamento distingue il Maestro; **(2)** budget dei livelli **opzione A**: B5 ≤ 1.800 s, B6 ≤ 18.000 s, separati da D68 e dalla 1.5, mai insieme a misure di bilanciamento; **(3)** testo stampato completato in `PrintedEffects` e `DataCards` con un cambio additivo, con prove d'identità (banco vivo, fedeltà, misura del passo 3); **(4)** memoria del Maestro in un'istanza per giocatore; **(5)** nelle misure il Maestro gioca con N fisso e senza tempo massimo, che vale solo in partita. Prossimo: B5 (prototipo), dopo la misura della 1.5, perché tocca classi che quella misura usa |
-| D92 | SB-16g: 1.5 bozza di riferimento, Mara e Piera dopo la prova umana | 14 novembre 2026, alle quattro domande del [rapporto della 1.5](reports/set-base/sb-16g-15-report.md#domande-numerate), presentate dalla regia con la sua raccomandazione, con le parole del proprietario: «Sì, come consigli». **(1)** La 1.5 (braccio B con Impatto 34, Chiave 18, Lavoro 14+4) è la **bozza di riferimento** per SB-16h Fase B e per la prova umana breve. **(2)** Spazienzio–Mara si corregge **su Mara**: tre dei sei incontri ancora fuori (Spazienzio–Mara, Mara–Celestina, Mara–Piera) sono Mara debole, come l'impressione del proprietario in SB-12b. **(3)** Una **proposta 1.6** su Mara e sulla corazza di Piera contro i colpi (Spazienzio–Piera, Celestina–Piera), con la durata dello specchio di Celestina, **dopo** la prova umana e la scelta del formato di SB-16h. **(4)** Lo scarto fra lo stile `com` e gli euristici entra nella proposta della regia sul peso del bot casuale nei criteri. Ordine: B5a di SB-30b (lanciato dal proprietario, da solo) → SB-16h Fase B → prova umana → 1.6 → SB-17 |
-| D93 | Criteri di bilanciamento sui soli bot euristici | 14 novembre 2026. Alla proposta della regia («Criteri calcolati solo sui bot euristici, con il casuale come controllo a parte?»: lo stile `com` è il casuale sotto filtro letale, il livello Facile di D85, e pesando quanto gli euristici falsava le quote, per esempio Beppe 50–73% con gli euristici e 13–25% giocato da `com`), con le parole del proprietario: «Sì, come proponi». Quindi: **(1)** i criteri D16/D51 di quota, patte e durata si giudicano sulle sole celle con due stili euristici; **(2)** `com` contro `com` è un controllo a parte della forza grezza delle carte, soglia 35–65% fuori dagli specchi, da guardare e non da correggere da solo; **(3)** i rapporti continuano a riportare gli stili uno per uno e le celle miste; **(4)** la regia ricalcola la 1.5 coi criteri nuovi senza nuove partite: [ricalcolo](reports/set-base/criteri-euristici-1.5.md), **8 incontri su 15 fuori** (6 coi criteri precedenti): Mara debole contro tutti, Spazienzio debole contro Celestina e Piera (30,1%), Beppe in quota con gli euristici |
-| D94 | Formato 20/2; «Annuncia» con due nomi nella 1.6 | 14 novembre 2026, dopo la [Fase B di SB-16h](reports/set-base/sb-16h-report.md). Il proprietario: «a me la meccanica last resort piace, e mi sta bene vederla circa in una partita su dieci, ma mi piace molto meno che in una partita su tre fallisca una ricerca con Annuncia. va bene fallire un tutore, ma così mi sembra un po' troppo», con l'idea di caricamenti che annuncino più colpi (per esempio PAZIENZA: FINITA verso Impatto, Gabbiano o O-Ahio). La regia ha riletto i contatori del 20/2 ([nota](reports/set-base/ricerche-fallite-20-2.md)): una ricerca fallisce solo senza copie nel mazzo, un terzo delle volte col colpo già in mano; 44,7% sui colpi a copia singola, 28,6% su quelli a due copie; la dimensione del mazzo sposta insieme last resort e ricerche (20/2: 9,5% e 34%; 25/3 e 30/3: circa 1% e 13–14%). Alla proposta della regia, con le parole del proprietario: «mi piace la tua proposta, la approvo». Quindi: **(1)** il formato resta **20 carte e 2 copie**: SB-16h chiusa, R02 e D1 invariati, conferma finale in SB-23 (Q7); il range 20–30 non si adotta; **(2)** la **proposta 1.6** di D92 comprende, oltre a Mara, alla corazza di Piera contro i colpi e allo specchio di Celestina, un **«Annuncia» con al massimo due nomi** (di norma il colpo raro e quello comune dello stesso personaggio; una parola chiave di gruppo solo se resta leggibile), con gettone e vulnerabilità legati al nome trovato come oggi; la 1.6 dice come si sceglie il colpo cercato, come lo sceglie il bot e quali premi cambiano, e si misura in un solo giro sul 20/2; il cambio resta nel playground (D50) fino a SB-28; **(3)** nella prova umana sulla 1.5 il proprietario nota quando una ricerca fallisce e quanto pesa. Ordine invariato: prova umana → 1.6 → SB-17; B5b di SB-30b quando il proprietario lo lancia, mai insieme a una misura |
-| D95 | Prova umana della 1.5; prima le meccaniche di sistema, soglia minima per gli starter | 14 novembre 2026. **Prova umana** sulla 1.5 (braccio B, 20/2, computer Normale), impressioni del proprietario: «mara mi ha dato la sensazione di fare danni ma di non essere mai decisiva con la sua caratteristica, cioè la velocità»; «i danni da tossicità sono un problema per chi non può rimuoversela in alcun modo»; «ci sta il mirror match lungo, ma quando si arriva al last resort vorrei che la partita si chiudesse in pochi turno»; sul muro di Piera: «un po' sì, ma posso dirti che mi sembra giusto che un personaggio che picchia forte ne abbia uno che gli faccia un po' da muro, anche se non così tanto»; sulle ricerche fallite: «si piu o meno». Considerazione del proprietario: «noi ci stiamo rompendo la testa per bilanciare questi starter ma mancano ancora la revisione della meccanica Annuncia, gli starter degli altri personaggi e, soprattutto, tutto il resto del set! le occasioni in cui, nel gioco reale, si giocherà starter deck contro starter deck non saranno poi tante, anche nelle carriere sinle player i "nemici" avranno piu spesso che no mazzi personalizzati facciamo una pensata su questo prima di impiegare chissà quanto altro tempo a perfezionare i match up fra starter. certo, bilanciamoli un minimo, ma non scordiamoci la bigger picture!». Alla rotta proposta dalla regia, con tre modifiche: «mi piace una parola chiave che faccia modificatore, tipo: se risolvi prima del bersaglio, effetto aggiuntivo»; «non sistemerei la toxicity con una regola, ma piuttosto con delle carte che la abbassano o la tolgono»; «possiamo prevedere un meccanismo simile al commander di magic the gathering: ogni volta che uno gioca la sua last resort, danni e contraccolpo vengono aumentati di un tot (scritto proprio sulla carta, così possiamo farne anche diverse volendo)»; «detto questo, mi sembra una buona rotta». Quindi: **(1)** nasce [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), correzione 1.6, che sostituisce la proposta 1.6 di D92 e comprende D94, con cinque contenuti: «Annuncia» con al massimo due nomi; una parola chiave modificatore «se risolvi prima del bersaglio» che dia peso alla velocità di Mara, riusabile nel set; carte che abbassano o tolgono la TOXICITY per chi oggi non ha risposta, senza regole nuove (R06 invariata); last resort che cresce: a ogni giocata della propria last resort danni e contraccolpo aumentano di un valore scritto sulla carta, diverso da carta a carta; un po' meno muro di Piera contro i colpi; **(2)** fino a SB-18 gli starter si giudicano con una **soglia minima** al posto dei criteri D16/D51: ogni incontro fra 35% e 65% sui bot euristici (D93), patte al massimo 10%, durata entro 12 turni con gli specchi esclusi dal limite di durata; **(3)** tetto: Fase A di proposta e STOP, poi un giro e al massimo una correzione numerica, poi SB-17 comunque, con gli scostamenti dichiarati; **(4)** la stessa soglia minima vale per Sergio e Duccio in SB-17 e SB-18; **(5)** i criteri completi tornano in SB-20 e SB-21 sul set intero, dove si ricontrollano anche gli starter fra loro per la partita rapida. Sulla misura della 1.5, con la soglia minima, restano fuori Spazienzio–Piera 30,1%, Mara–Celestina 31,5% e Mara–Piera 34,8% |
-| D96 | Consolidamento della documentazione del Set Base prima di SB-16i | 14 novembre 2026. Il proprietario: «prima di lanciare la fase A, dopo tutti questi cambi di regole e di decisioni sarebbe opportuno un giro di consolidamento della documentazione? ho l'impressione che la repo stia diventando difficilmente gestibile data la mole di documenti che abbiamo creato». Alla proposta della regia (piano ridotto a stato leggibile; registro delle decisioni a parte, parola per parola, con l'indicazione delle decisioni superate; un documento delle regole del playground in vigore; un documento della bozza di riferimento; proposte e rapporti chiusi marcati come storici senza riscritture; riga corta nell'indice; regole di igiene dei documenti), con le parole del proprietario: «Sì, preparalo». Quindi: **(1)** consolidamento solo documentale, senza cambi di significato, eseguito da solo **prima** della Fase A di SB-16i e di B5c; **(2)** regolamento, documento del set, codice, bozza, client e carriere non si toccano; **(3)** la regia rivede la consegna prima di lanciare altro |
+Le decisioni D1–D96 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 ## Decisioni ancora aperte
 
