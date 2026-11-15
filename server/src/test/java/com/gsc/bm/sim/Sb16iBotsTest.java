@@ -138,7 +138,7 @@ class Sb16iBotsTest {
         assertEquals(100 - 9 - 1, third.get("me"), "and 5 + 2 x 2 to self, plus the push");
     }
 
-    /** Proposal, section 6: against a shown lethal Impatto (priority 0) a Sgommata (priority 1) comes first and halves it: a save. */
+    /** Proposal, section 6: against a shown lethal Impatto (priority 0) a Sgommata (priority 1) comes first and scales it (1.6: halves it, a save). */
     static Set<String> kept(String draftPath) throws Exception {
         Draft d = Draft.fromClasspath(draftPath);
         List<BotView.CardSeen> hand = new ArrayList<>();
@@ -157,7 +157,8 @@ class Sb16iBotsTest {
     @Test
     void anAheadSgommataIsASaveAgainstAShownLethalHit() throws Exception {
         assertEquals(Set.of("Tra due paraurti"), kept("/set-base/storico/1.5/bozza.json"), "1.5: only the parry");
-        assertEquals(Set.of("Sgommata", "Tra due paraurti"), kept("/set-base/bozza.json"), "1.6: the Sgommata ahead halves the hit");
+        // D99 (7): the 1.6 kept the Sgommata (x0.5: 17 of 34 on 25 health); the 1.6b (x0.8) leaves 27 of 34, still lethal.
+        assertEquals(Set.of("Tra due paraurti"), kept("/set-base/bozza.json"), "1.6b: the Sgommata ahead (x0.8) is no save from 34 on 25");
     }
 
     @Test

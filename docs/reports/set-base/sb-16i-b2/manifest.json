@@ -1,0 +1,50 @@
+{
+ "b2-round-table.json": {
+  "originalBytes": 5327,
+  "originalSha256": "efc048aaaa4bd4236d4358a3b0f99af696cca0cce1ab146cd103c3a0714465dd"
+ },
+ "b2-round-table.md": {
+  "originalBytes": 2230,
+  "originalSha256": "ba534e0944707597520ff594883cc6cc8fcc657905e71980d6882dc6bd1531ea"
+ },
+ "round-deck-observations.json": {
+  "originalBytes": 320683,
+  "originalSha256": "9b2d63e6faa56e189dfcd8026c576e28a3c37ed7572effddb515d937f22aff75"
+ },
+ "round-draft.json": {
+  "originalBytes": 38040,
+  "originalSha256": "e89194461194f655cefef6959c3e2e5402b85ec96b52522c79972fbaa7e02100"
+ },
+ "round-matrix.json": {
+  "originalBytes": 923680,
+  "originalSha256": "6b29cecdd1b136e7d1abe83eed56985090a8fbe1992f05dbd105ab5773ab3973"
+ },
+ "round-matrix.md": {
+  "originalBytes": 82653,
+  "originalSha256": "3f02f04d53294c942b62dbfe1df829cad4df79d9a01f193369a94345e0932ef2"
+ },
+ "round-observations.json": {
+  "originalBytes": 627503,
+  "originalSha256": "a5755541e9b16bd0a232e2898d8a6c83c8fcd13b9b0c6d05f6f09cb4358886d2"
+ },
+ "round-sb16i-observations.json": {
+  "originalBytes": 85625,
+  "originalSha256": "db9dd4ebac17dddc491a3941cbdef3575eea41ff291f6d8a08111ea5d363046a"
+ },
+ "round-summary.json": {
+  "originalBytes": 11171,
+  "originalSha256": "967dddaabeabbe7255ab0491bf8549d9d70082145f0f068774a0d3cf45bef738"
+ },
+ "round-summary.md": {
+  "originalBytes": 5042,
+  "originalSha256": "aba6c8ddfb4d98b2b17497daf5c090b8ebf5250b2f7c4ad153dfc647b3259c9f"
+ },
+ "step0-draft.json": {
+  "originalBytes": 38040,
+  "originalSha256": "e89194461194f655cefef6959c3e2e5402b85ec96b52522c79972fbaa7e02100"
+ },
+ "step0-matrix.json": {
+  "originalBytes": 872845,
+  "originalSha256": "1fdddeca04bc2e1a3334e661e38b6092e89d4146e258c96f76ace6e62225ca24"
+ }
+}

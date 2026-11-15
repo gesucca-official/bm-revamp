@@ -1,23 +1,23 @@
-# Bozza di riferimento 1.6
+# Bozza di riferimento 1.6b
 
-**Versione 1.1 del documento — 15 novembre 2026 — bozza 1.6** ([SB-16i](../../set-base-plan.md#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), Fase B, [D97](../../set-base-decisioni.md#decisioni-del-proprietario)). Versione 1.0 (14 novembre 2026, [D96](../../set-base-decisioni.md#decisioni-del-proprietario)): la bozza 1.5. Non è normativa: è la bozza del playground, che vale fino a SB-28 ([D50](../../set-base-decisioni.md#decisioni-del-proprietario)). Le regole con cui si gioca sono in [regole-playground.md](regole-playground.md) (1.1); le fonti normative restano [docs/game-rules.md](../../game-rules.md) e [docs/sets/base.md](../../sets/base.md).
+**Versione 1.2 del documento — 15 novembre 2026 — bozza 1.6b** ([SB-16i](../../set-base-plan.md#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), Fase B2, [D99](../../set-base-decisioni.md#decisioni-del-proprietario)): la 1.6 con la leva A su Mara. Versione 1.1 (15 novembre 2026, Fase B, [D97](../../set-base-decisioni.md#decisioni-del-proprietario)): la bozza 1.6, che resta nel commit 336e0ff e in [`sb-16i/round-draft.json.gz`](../../reports/set-base/sb-16i/round-draft.json.gz). Versione 1.0 (14 novembre 2026, [D96](../../set-base-decisioni.md#decisioni-del-proprietario)): la bozza 1.5. Non è normativa: è la bozza del playground, che vale fino a SB-28 ([D50](../../set-base-decisioni.md#decisioni-del-proprietario)). Le regole con cui si gioca sono in [regole-playground.md](regole-playground.md) (1.1); le fonti normative restano [docs/game-rules.md](../../game-rules.md) e [docs/sets/base.md](../../sets/base.md).
 
 ## Cos'è
 
-La **bozza di riferimento** è la bozza su cui si misura e si fa la prova umana: dalla Fase B di SB-16i la **1.6**, scritta tutta in **`bozza.json`** (`server/src/test/resources/set-base/bozza.json`), Bancone del braccio B compreso. Rispetto alla 1.5 (proposta 1.6 con le modifiche di D97):
+La **bozza di riferimento** è la bozza su cui si misura e si fa la prova umana: dalla Fase B2 di SB-16i la **1.6b**, scritta tutta in **`bozza.json`** (`server/src/test/resources/set-base/bozza.json`), Bancone del braccio B compreso. Rispetto alla 1.5 (proposta 1.6 con le modifiche di D97, poi la leva A di D99 (1)):
 
 - **«Annuncia X o Y»** sui dieci caricamenti: il secondo nome è il colpo dell'altro caricamento dello stesso personaggio; sceglie il giocatore quando gioca la carta, fra i nomi con almeno una copia nel mazzo; premi della 1.5 invariati; **dopo ogni ricerca il mazzo si mischia** (`rules.searchShuffle`);
-- **«Gioca d'anticipo»** su Sorpasso in curva (+8 A a sé), Sgommata (in questo turno il bersaglio infligge danni ×0,5) e Cinghiata di traverso (+10 CUT);
+- **«Gioca d'anticipo»** su Sorpasso in curva (+4 A a sé), Sgommata (in questo turno il bersaglio infligge danni ×0,8) e Cinghiata di traverso (+5 CUT); nella 1.6 erano +8 A, ×0,5 e +10 CUT (leva A, [D99](../../set-base-decisioni.md#decisioni-del-proprietario) (1));
 - **«Rincara»** sulle last resort: Banzai!!! 5 (2 a sé), L'ultima dose 5 (1 a sé), L'ultimo giro 4 (1 a sé);
 - **Ghiaccio nel tovagliolo** (OGG-14) a Mara al posto di Steal; **Due dita in gola** (GEN-15) a Piera al posto di un Grab e a Beppe al posto di uno Steal;
 - **Il bancone regge, io pure**: HIT ×0,65 e POISON ×0,5 nel turno; **salute di Piera 80**;
 - formato **20 carte e 2 copie** ([D94](../../set-base-decisioni.md#decisioni-del-proprietario) (1)).
 
-Misura della 1.6: [rapporto SB-16i](../../reports/set-base/sb-16i-report.md). **La 1.5** resta riproducibile: `set-base/storico/1.5/bozza.json` (braccio A, copia byte per byte) più `bancone-b.json` (`SetBaseArms.armB`); misure e rapporti della 1.5: [correzione 1.5](../../reports/set-base/sb-16g-15-report.md), [SB-16h](../../reports/set-base/sb-16h-report.md), [ricalcolo coi criteri euristici](../../reports/set-base/criteri-euristici-1.5.md).
+Misura della 1.6b: [rapporto SB-16i B2](../../reports/set-base/sb-16i-b2-report.md); della 1.6: [rapporto SB-16i](../../reports/set-base/sb-16i-report.md). **La 1.5** resta riproducibile: `set-base/storico/1.5/bozza.json` (braccio A, copia byte per byte) più `bancone-b.json` (`SetBaseArms.armB`); misure e rapporti della 1.5: [correzione 1.5](../../reports/set-base/sb-16g-15-report.md), [SB-16h](../../reports/set-base/sb-16h-report.md), [ricalcolo coi criteri euristici](../../reports/set-base/criteri-euristici-1.5.md).
 
 ## Il server della prova umana
 
-Il server col profilo `bozza` legge `bozza.json`, quindi **gioca la 1.6 così com'è misurata**, senza file a parte né `-Draft`. La nota della versione 1.0 sul braccio A è chiusa. La scelta fra due nomi, l'anticipo e il contatore di Rincara si vedono nel client dopo il passo del client di SB-16i; fino ad allora la ricerca prende il primo nome disponibile.
+Il server col profilo `bozza` legge `bozza.json`, quindi **gioca la 1.6b così com'è misurata**, senza file a parte né `-Draft`. La nota della versione 1.0 sul braccio A è chiusa. La scelta fra due nomi, l'anticipo e il contatore di Rincara si vedono nel client dopo il passo del client di SB-16i; fino ad allora la ricerca prende il primo nome disponibile.
 
 ## Come rigenerare le liste
 
@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `c6117062fa8a…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `69cc8e1c00ab…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 78 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 5 personaggi e 5 starter.
 
@@ -73,9 +73,9 @@ Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nes
 | bound | **Passo stretto** (`base.mara.bound.PassoStretto`) | C | MAR-BO1 · Bound: 3 CUT al bersaglio. |
 | bound | **Cambio marcia** (`base.mara.bound.CambioMarcia`) | C | MAR-BO2 · Bound: +6 A a sé. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 1 | **Cinghiata di traverso** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +10 CUT. |
-| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,5. |
-| 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +8 A a sé. |
+| 1 | **Cinghiata di traverso** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +5 CUT. |
+| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,8. |
+| 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +4 A a sé. |
 | 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,4 in questo turno. +5 A a sé. |
 | 2 | **Slalom d'avvicinamento** (`base.mara.Slalom`) | NC | MAR-AR5 · Annuncia Sgommata o Cinghiata di traverso. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |

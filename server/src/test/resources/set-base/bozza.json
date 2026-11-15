@@ -112,7 +112,7 @@
      "gui": {"name": "FAI BASTA", "description": "SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio.",
              "role": "COUNTER", "gains": "—", "damage": "—", "damageAmount": "—"}},
 
-    {"binding": "base.mara.CinghiataDiTraverso", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 20}, "target": [{"op": "damage", "type": "CUT", "amount": {"base": 18, "of": "ALERTNESS", "divide": 2}}, {"op": "anticipo", "steps": [{"op": "damage", "type": "CUT", "amount": 10}]}], "gui": {"name": "Cinghiata di traverso", "description": "MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +10 CUT.", "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 18+x"}},
+    {"binding": "base.mara.CinghiataDiTraverso", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 20}, "target": [{"op": "damage", "type": "CUT", "amount": {"base": 18, "of": "ALERTNESS", "divide": 2}}, {"op": "anticipo", "steps": [{"op": "damage", "type": "CUT", "amount": 5}]}], "gui": {"name": "Cinghiata di traverso", "description": "MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +5 CUT.", "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 18+x"}},
 
     {
       "binding": "base.mara.Sgommata",
@@ -131,11 +131,11 @@
           "type": "CUT",
           "amount": 25
         },
-        {"op": "anticipo", "steps": [{"op": "status", "name": "SGOMMATA - HIT", "description": "Hit Damage dealt: x0.5", "statusType": "BAD", "flow": "OUTPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "status", "name": "SGOMMATA - CUT", "description": "Cut Damage dealt: x0.5", "statusType": "BAD", "flow": "OUTPUT", "property": "CUT", "factor": 0.5, "turns": 0}, {"op": "status", "name": "SGOMMATA - POISON", "description": "Poison Damage dealt: x0.5", "statusType": "BAD", "flow": "OUTPUT", "property": "POISON", "factor": 0.5, "turns": 0}]}
+        {"op": "anticipo", "steps": [{"op": "status", "name": "SGOMMATA - HIT", "description": "Hit Damage dealt: x0.8", "statusType": "BAD", "flow": "OUTPUT", "property": "HIT", "factor": 0.8, "turns": 0}, {"op": "status", "name": "SGOMMATA - CUT", "description": "Cut Damage dealt: x0.8", "statusType": "BAD", "flow": "OUTPUT", "property": "CUT", "factor": 0.8, "turns": 0}, {"op": "status", "name": "SGOMMATA - POISON", "description": "Poison Damage dealt: x0.8", "statusType": "BAD", "flow": "OUTPUT", "property": "POISON", "factor": 0.8, "turns": 0}]}
       ],
       "gui": {
         "name": "Sgommata",
-        "description": "MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,5.",
+        "description": "MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,8.",
         "role": "DAMAGE",
         "gains": "—",
         "damage": "CUT",
@@ -144,9 +144,9 @@
     },
 
     {"binding": "base.mara.SorpassoInCurva", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"],
-     "self": [{"op": "anticipo", "steps": [{"op": "gain", "resource": "ALERTNESS", "amount": 8}]}],
+     "self": [{"op": "anticipo", "steps": [{"op": "gain", "resource": "ALERTNESS", "amount": 4}]}],
      "target": [{"op": "lose", "resource": "ALERTNESS", "amount": 8}, {"op": "damage", "type": "CUT", "amount": 3}],
-     "gui": {"name": "Sorpasso in curva", "description": "MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +8 A a sé.",
+     "gui": {"name": "Sorpasso in curva", "description": "MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +4 A a sé.",
              "role": "DISRUPT", "gains": "—", "damage": "CUT", "damageAmount": "CUT 3"}},
     {
       "binding": "base.mara.TraDueParaurti",
