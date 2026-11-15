@@ -47,27 +47,39 @@ public class GoingBerserk extends AbstractCard implements PrintedEffects.Source 
         alcohol = Math.max(0, g.getSelf(m).getCharacter().getResources().getOrDefault(Resource.ALCOHOL, 0));
     }
 
+    /** SB-16i («Rincara», L'ultimo giro): extra HIT to the target and to self for the current play; none here. */
+    protected int extraBase() { return 0; }
+
+    protected int extraSelf() { return 0; }
+
+    /** SB-16i: the «Rincara» increments printed on the card, to the target and to self; none here. */
+    protected int perPlayTarget() { return 0; }
+
+    protected int perPlaySelf() { return 0; }
+
     @Override
     public List<String> applyEffectOnSelf(Character self) {
         List<String> report = new ArrayList<>();
-        if (selfHit > 0) report.add(self.inflictDamage(self, new Damage(Damage.DamageType.HIT, selfHit)));
+        int hit = selfHit + extraSelf();
+        if (hit > 0) report.add(self.inflictDamage(self, new Damage(Damage.DamageType.HIT, hit)));
         report.add(self.emptyResource(Resource.ALCOHOL));
         return report;
     }
 
     @Override
     public List<String> applyEffectOnTarget(Character self, Character target) {
-        return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + alcohol)));
+        return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + alcohol + extraBase())));
     }
 
     /** D76: self HIT if any and ALCOHOL emptied; HIT of base plus the ALCOHOL read after costs, before the self effects. */
     @Override
     public PrintedEffects printedEffects() {
         List<PrintedEffects.Step> steps = new ArrayList<>();
-        if (selfHit > 0) steps.add(PrintedEffects.damage(false, Damage.DamageType.HIT, selfHit));
+        if (selfHit > 0) steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(false)
+                .damageType(Damage.DamageType.HIT).base(selfHit).perPlay(perPlaySelf()).build());
         steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.EMPTY).resource(Resource.ALCOHOL).build());
         steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(true).damageType(Damage.DamageType.HIT)
-                .base(base).of(Resource.ALCOHOL).atStart(true).build());
+                .base(base).of(Resource.ALCOHOL).atStart(true).perPlay(perPlayTarget()).build());
         return new PrintedEffects(List.copyOf(steps));
     }
 }

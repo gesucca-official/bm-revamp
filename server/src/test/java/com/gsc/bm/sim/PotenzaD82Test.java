@@ -42,7 +42,7 @@ class PotenzaD82Test {
 
     @BeforeAll static void load() throws Exception {
         StarterRedesignTest.load();
-        a = Draft.fromClasspath("/set-base/bozza.json");
+        a = Draft.fromClasspath(SetBaseArms.FROZEN_15); // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
         b = SetBaseArms.arm("B", a);
         stepTwo = JSON.readTree(Files.readString(Path.of("../docs/reports/set-base/sb-16g-2b2/draft.json")));
     }

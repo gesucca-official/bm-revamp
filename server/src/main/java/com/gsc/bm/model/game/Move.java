@@ -70,6 +70,43 @@ public class Move implements Serializable {
     private String playedRole;
 
     /**
+     * SB-16i (D97), playground only: the card chosen by the player for «Annuncia X o Y», a binding printed on the played card
+     * with a copy in the deck when the move is sent; null leaves the first printed name with a copy. Optional, and not yet a
+     * protocol field: the bots set it, the client step of SB-16i will send it.
+     */
+    @JsonIgnore
+    @ToString.Exclude
+    @Setter
+    private String searchChoice;
+    /** SB-16i: the printed names of the search with a copy in the author's deck when the move was sent (engine bookkeeping). */
+    @JsonIgnore
+    @ToString.Exclude
+    @Setter
+    private List<String> searchAvailable;
+    /** SB-16i: every name the search announced, in printed order, when more than one. */
+    @JsonIgnore
+    @ToString.Exclude
+    private List<String> searchAlternatives;
+    /**
+     * SB-16i («Gioca d'anticipo»), playground only: for a card with that keyword, whether the move resolved in a speed group
+     * before the target's move. Public; absent for other cards, so always absent with the live rules.
+     */
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @ToString.Exclude
+    @Setter
+    private Boolean ahead;
+    /**
+     * SB-16i («Rincara»), playground only: for a card with that keyword, how many times its author had already played it in
+     * the match before this move. Public; absent for other cards, so always absent with the live rules.
+     */
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @ToString.Exclude
+    @Setter
+    private Integer plays;
+
+    /**
      * SB-16f0 (D56): the search of this move as the view publishes it, null (absent) without a search, so always with the live
      * rules. Only what D50 (point 6), D52 and D54 make public: the card searched for, whether a copy was found, and the card found,
      * which is shown to everyone. Nothing else of the author's hand or deck.
@@ -77,7 +114,8 @@ public class Move implements Serializable {
     @JsonProperty(value = "search", access = JsonProperty.Access.READ_ONLY)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public PublicSearch getPublicSearch() {
-        return searchedFor == null ? null : new PublicSearch(searchedFor, searchFound != null, searchFound, searchCopy);
+        return searchedFor == null ? null
+                : new PublicSearch(searchedFor, searchFound != null, searchFound, searchCopy, searchAlternatives);
     }
 
     /** SB-16f0: the public search of a move: the binding searched for, whether found, and the revealed card (null if not found). */
@@ -91,6 +129,11 @@ public class Move implements Serializable {
         /** SB-16g 2a (D58): the id of the copy, the same as in the hand that holds it face up; absent if none went to the hand. */
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private final Integer copy;
+        /** SB-16i: every name announced, in printed order, when the card announces two; {@code card} is the one chosen. */
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private final List<String> announced;
+
+        public PublicSearch(String card, boolean found, Card revealed, Integer copy) { this(card, found, revealed, copy, null); }
     }
 
     /** The reason of a move voided because its author was down at the start of its speed group (D50, point 1). */
@@ -116,6 +159,25 @@ public class Move implements Serializable {
         lines.add(line);
         moveReport.put(where, lines);
     }
+
+    /**
+     * SB-16i (D97): a search among several printed names. {@code chosen} is the name searched (the first printed one when none
+     * had a copy). The report says the names announced and the one chosen, shown to everyone.
+     */
+    public void recordSearch(List<String> announced, String chosen, Card found, Integer copy) {
+        if (announced.size() < 2) { recordSearch(chosen, found, copy); return; }
+        this.searchedFor = chosen;
+        this.searchFound = found;
+        this.searchCopy = copy;
+        this.searchAlternatives = List.copyOf(announced);
+        String names = String.join(" or ", announced);
+        appendReport(Card.CardTarget.SELF, found != null
+                ? "Searched the deck for " + names + ": chose " + chosen + ", found " + found.getName() + " (shown to everyone)"
+                : "Searched the deck for " + names + ": none in the deck, normal draw");
+    }
+
+    /** SB-16i: one line of the report about this move, shown to everyone («Gioca d'anticipo», «Rincara»). */
+    public void note(String line) { appendReport(Card.CardTarget.SELF, line); }
 
     /** D72: the conditional gain is part of the resolved move, like an ordinary gain step. */
     public void recordSearchGain(String line) { appendReport(Card.CardTarget.SELF, line); }
@@ -200,6 +262,14 @@ public class Move implements Serializable {
             // D50, point 2 (playground only): a HEALTH cost cannot bring its payer to 0 or below, except with «Ultimo colpo».
             if (!healthCostAllowed(game.getRuleset(), playedCard, playerResources.getOrDefault(Resource.HEALTH, 0)))
                 return new MoveCheckResult(false, "cant pay health down to zero");
+            // SB-16i (D97), playground only: the card chosen for «Annuncia X o Y» is printed on the card and has a copy in the deck.
+            if (searchChoice != null) {
+                if (!game.getRuleset().playground()) return new MoveCheckResult(false, "no search choice with these rules");
+                List<String> printed = com.gsc.bm.model.cards.PrintedEffects.searchedNames(playedCard);
+                if (!printed.contains(searchChoice)) return new MoveCheckResult(false, "the card does not announce " + searchChoice);
+                if (game.getPlayers().get(playerId).getDeck().stream().noneMatch(c -> c.getBindingName().equals(searchChoice)))
+                    return new MoveCheckResult(false, "no copy of " + searchChoice + " in the deck");
+            }
         } catch (IllegalMoveException e) {
             return new MoveCheckResult(false, e.getWhatHeDid());
         }

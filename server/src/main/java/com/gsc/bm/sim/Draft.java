@@ -70,13 +70,21 @@ final class Draft implements PlayerSource {
     static final class Rules {
         final int deckSize, maxCopies, boundChoices;
         final boolean basicFixedPerCharacter, lastResortRequired;
+        /** SB-16i (D97): the deck is shuffled after every search, playground only; false when the field is absent. */
+        final boolean searchShuffle;
 
         Rules(int deckSize, int maxCopies, boolean basicFixedPerCharacter, int boundChoices, boolean lastResortRequired) {
+            this(deckSize, maxCopies, basicFixedPerCharacter, boundChoices, lastResortRequired, false);
+        }
+
+        Rules(int deckSize, int maxCopies, boolean basicFixedPerCharacter, int boundChoices, boolean lastResortRequired,
+              boolean searchShuffle) {
             this.deckSize = deckSize;
             this.maxCopies = maxCopies;
             this.basicFixedPerCharacter = basicFixedPerCharacter;
             this.boundChoices = boundChoices;
             this.lastResortRequired = lastResortRequired;
+            this.searchShuffle = searchShuffle;
         }
     }
 
@@ -550,7 +558,9 @@ final class Draft implements PlayerSource {
     Character character(String id) {
         CharacterSpec spec = characters.get(id);
         if (spec == null) throw new IllegalArgumentException(source + ": personaggio assente: " + id);
-        return new DraftCharacter(spec.id, spec.resources, spec.items, spec.immunities);
+        Character character = new DraftCharacter(spec.id, spec.resources, spec.items, spec.immunities);
+        character.useSearchShuffle(rules.searchShuffle);
+        return character;
     }
 
     /** Le carte che almeno un mazzo usa: basic, bound, last resort e regolari. */
@@ -582,6 +592,7 @@ final class Draft implements PlayerSource {
         for (Map.Entry<String, Integer> entry : deck.cards.entrySet())
             for (int i = 0; i < entry.getValue(); i++) regular.add(card(entry.getKey()));
         Character character = new DraftCharacter(spec.id, spec.resources, spec.items, spec.immunities);
+        character.useSearchShuffle(rules.searchShuffle);
         List<Card> bound = new ArrayList<>();
         for (String binding : deck.bound) bound.add(card(binding));
         Card basic = card(deck.basic), lastResort = card(deck.lastResort);
@@ -593,7 +604,8 @@ final class Draft implements PlayerSource {
 
     private Rules rules(ObjectNode node) {
         String where = "rules";
-        fields(node, where, Set.of("deckSize", "maxCopies", "basicFixedPerCharacter", "boundChoices", "lastResortRequired"), Set.of());
+        fields(node, where, Set.of("deckSize", "maxCopies", "basicFixedPerCharacter", "boundChoices", "lastResortRequired"),
+                Set.of("searchShuffle"));
         int deckSize = integer(node, "deckSize", where), maxCopies = integer(node, "maxCopies", where);
         int boundChoices = integer(node, "boundChoices", where);
         boolean basicFixed = bool(node, "basicFixedPerCharacter", where), lastResort = bool(node, "lastResortRequired", where);
@@ -603,7 +615,7 @@ final class Draft implements PlayerSource {
         if (boundChoices < 0 || 1 + boundChoices > Player.CARDS_IN_HAND - 1)
             throw invalid(where, "boundChoices deve stare fra 0 e " + (Player.CARDS_IN_HAND - 2) + " (mano da " + Player.CARDS_IN_HAND + ")");
         if (!lastResort) throw invalid(where, "lastResortRequired false non è giocabile: il motore richiede una last resort (Player)");
-        return new Rules(deckSize, maxCopies, basicFixed, boundChoices, true);
+        return new Rules(deckSize, maxCopies, basicFixed, boundChoices, true, node.has("searchShuffle") && bool(node, "searchShuffle", where));
     }
 
     private CharacterSpec character(JsonNode raw) {
@@ -802,8 +814,8 @@ final class Draft implements PlayerSource {
                     + (sets.size() > 1 && cards.get(previous).set != null ? " del set " + cards.get(previous).set : "")
                     + " (la mano cerca le carte per nome)");
             Card card = probe(spec.binding, where);
-            String searched = spec.data == null ? null : spec.data.searches();
-            if (searched != null) {
+            // SB-16i (D94): «Annuncia X o Y» controlla ciascun nome come una ricerca a un nome.
+            for (String searched : spec.data == null ? List.<String>of() : spec.data.searchesAll()) {
                 // SB-16c (D50, punto 6): la ricerca indica una carta della bozza che il set della carta vede.
                 if (!cards.containsKey(searched)) throw invalid(where, "search: " + searched + " non è una carta della bozza");
                 reach(spec.set, where, "la carta cercata", searched, cards.get(searched).set);

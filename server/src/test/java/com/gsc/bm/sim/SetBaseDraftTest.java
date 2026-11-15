@@ -185,7 +185,8 @@ class SetBaseDraftTest {
                     checked++;
                 }
         }
-        assertEquals(11, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
+        // SB-16i (D97): + il POISON ×0,5 del Bancone del braccio B, ora in bozza.json (gli stati di «Gioca d'anticipo» sono annidati).
+        assertEquals(12, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
@@ -397,7 +398,7 @@ class SetBaseDraftTest {
     // ---- SB-14: lo starter di Pino «Chiude quando dico io» ----
 
     /** La salute iniziale di Pino (SB-9 meno 15, ipotesi della scala di D41, poi i giri coi bot di SB-14). */
-    static final int PINO_HEALTH = 85; // SB-16e giro 3, delega D38/D53: durata dopo la prova sulla L.
+    static final int PINO_HEALTH = 80; // SB-16e giro 3, delega D38/D53: 85; SB-16i (D97): 80, un po' meno muro.
     /** La L iniziale di Pino: 20 in SB-14, 10 nel giro 2 di SB-16e (D38/D53). */
     static final int PINO_ALCOHOL = 10;
 
@@ -428,7 +429,8 @@ class SetBaseDraftTest {
         expected.put("base.pino.IlBanconeRegge", 2);
         expected.put("base.pino.OffroIo", 2);
         expected.put("base.pino.RuttoADistanzaSociale", 1);
-        expected.put("com.Grab", 2);
+        expected.put("com.Grab", 1); // SB-16i (D97): un Grab lascia il posto a «Due dita in gola».
+        expected.put("base.com.DueDitaInGola", 1);
         expected.put("base.com.Spintone", 2);
         expected.put("base.com.FasciaturaColFazzolettaccio", 1);
         expected.put("base.items.AmaroNelBicchiereDiPlastica", 2);
@@ -553,12 +555,12 @@ class SetBaseDraftTest {
         assertEquals(Map.of(Resource.ALCOHOL, 15, Resource.ALERTNESS, 35), me.takeSearchGains(true));
         assertEquals(0, spazienzio.getResources().get(Resource.ALCOHOL));
         assertEquals(14, spazienzio.getResources().get(Resource.ALERTNESS));
-        // Il bancone regge: HIT ricevuto a metà in questo turno, +5 L.
+        // Il bancone regge: HIT ricevuto ×0,65 in questo turno (SB-16i, D97; era ×0,5), +5 L.
         Character standing = draft.character(PINO), hitter = draft.character(SPAZIENZIO);
         ((AbstractCard) draft.card("base.pino.IlBanconeRegge")).applyEffectOnSelf(standing);
         assertEquals(PINO_ALCOHOL + 5, standing.getResources().get(Resource.ALCOHOL));
         hitter.inflictDamage(standing, new Damage(Damage.DamageType.HIT, 20));
-        assertEquals(PINO_HEALTH - 10, standing.getResources().get(Resource.HEALTH));
+        assertEquals(PINO_HEALTH - 13, standing.getResources().get(Resource.HEALTH));
     }
 
     /** SB-14: la base del listino ha anche il contesto di Pino, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
@@ -613,8 +615,9 @@ class SetBaseDraftTest {
      */
     // D79: approved step-2 rarities, including the five new NC titles.
     static final Map<String, Set<String>> GRID_RARITIES = Map.of(
+            // SB-16i (D97): + GEN-15 e OGG-14, NC nella griglia, ora negli starter.
             "COMMON", Set.of("GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
-            "UNCOMMON", Set.of("GEN-07", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
+            "UNCOMMON", Set.of("GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
             "RARE", Set.of("GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
 
     private static String gridRarity(String slot) {
@@ -654,7 +657,7 @@ class SetBaseDraftTest {
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
         }
-        assertEquals(Map.of("COMMON", 37, "RARE", 6, "UNCOMMON", 33), counts, "le 76 carte della bozza, D79");
+        assertEquals(Map.of("COMMON", 37, "RARE", 6, "UNCOMMON", 35), counts, "le 78 carte della bozza, D79 e SB-16i (D97)");
         for (String deck : STARTERS) {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");
@@ -694,7 +697,8 @@ class SetBaseDraftTest {
         expected.put("base.gigi.ColpoDiChiaveInglese", 2);
         expected.put("base.gigi.SottoIlCofano", 1);
         expected.put("base.gigi.LavoroFattoBene", 1);
-        expected.put("com.Steal", 2);
+        expected.put("com.Steal", 1); // SB-16i (D97): uno Steal lascia il posto a «Due dita in gola».
+        expected.put("base.com.DueDitaInGola", 1);
         expected.put("bruiser.SeagullFly", 1);
         expected.put("base.com.Spintone", 1);
         expected.put("base.items.GuantiDaOfficina", 2);

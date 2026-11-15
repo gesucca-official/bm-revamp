@@ -1,0 +1,66 @@
+{
+ "feasibility.json": {
+  "originalBytes": 123,
+  "originalSha256": "54f3cd135b4659bebf3c8516f5d53800bf3ddcd16ba0edc44f5684b867f83aa4"
+ },
+ "identity-sb16i-observations.json": {
+  "originalBytes": 22790,
+  "originalSha256": "c43a95008cd0f493bcef41bc57f47345b7b604f41d78c4e3468c81365ec0c052"
+ },
+ "identity-try1.json": {
+  "originalBytes": 1364,
+  "originalSha256": "d13d5d510bb5a3015fba5871562d930f4a4082db5324c570ae585974dc5aad45"
+ },
+ "identity.json": {
+  "originalBytes": 1359,
+  "originalSha256": "f2a4d8298edfe02295ff1492b11e93a6200792ac8adad071da1baf911e7181b1"
+ },
+ "round-deck-observations.json": {
+  "originalBytes": 319836,
+  "originalSha256": "c8cb3ed729463befa0cde08490d2013580016ecf0a0db210d5977851f79669cd"
+ },
+ "round-draft.json": {
+  "originalBytes": 38042,
+  "originalSha256": "ae89f0cb9a2fbbb9203113e651548dc9b400066251db5d330892effc6ced0a4a"
+ },
+ "round-matrix.json": {
+  "originalBytes": 923472,
+  "originalSha256": "9b8d39fe1aeaf2227194be3a7f36ccabe5f76d7201e98e7b3e089e943505a418"
+ },
+ "round-matrix.md": {
+  "originalBytes": 82653,
+  "originalSha256": "c23d7cfaf236533c1092b836a779248b90efbe19514639861924712c57a7ec0a"
+ },
+ "round-observations.json": {
+  "originalBytes": 628204,
+  "originalSha256": "5b9cded75bcb6dd89e7c4582e77acbf13eed8edf02a4ceb16df76c6a1529b141"
+ },
+ "round-sb16i-observations.json": {
+  "originalBytes": 85637,
+  "originalSha256": "a37179e1986da47b1730b1f9c041ab3e28cead78bc8b55d66c6c33ab5793f08c"
+ },
+ "step0-deck-observations.json": {
+  "originalBytes": 224014,
+  "originalSha256": "68b00c1f91a4170bb544e42215b67ceca49531efab7fa375c797e07898fffcc4"
+ },
+ "step0-draft.json": {
+  "originalBytes": 38042,
+  "originalSha256": "ae89f0cb9a2fbbb9203113e651548dc9b400066251db5d330892effc6ced0a4a"
+ },
+ "step0-matrix.json": {
+  "originalBytes": 872572,
+  "originalSha256": "a5d5dd3d43174effff3d65db6d024e766a0ee393da811b0c4c38ebd05edcb64f"
+ },
+ "step0-matrix.md": {
+  "originalBytes": 82380,
+  "originalSha256": "a53b35fd1ea7ac931616d06f7448be92a44121db689855c9d29869ba56d7a958"
+ },
+ "step0-observations.json": {
+  "originalBytes": 411137,
+  "originalSha256": "37991d750911dd0878a1986998c4146d32878552c1855ed6fe993be8b3f8ae49"
+ },
+ "step0-sb16i-observations.json": {
+  "originalBytes": 52964,
+  "originalSha256": "3b6032a981ca9062d125254afb2778737a9e38aa650f325ce58b39bf44e2ee0b"
+ }
+}

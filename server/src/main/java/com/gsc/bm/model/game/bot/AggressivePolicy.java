@@ -29,6 +29,8 @@ public class AggressivePolicy implements BotPolicy, StyleSupport.Scorer {
         if ("DISRUPT".equals(p.card.getRole())) score += 8;
         if ("COUNTER".equals(p.card.getRole())) score += 9;
         if (s.myHealth() <= s.foeHealth()) score += p.gain(Resource.HEALTH) * 2;
+        // SB-16i: the POISON it spares itself keeps it alive to close the match.
+        score += p.toxicRelief;
         if ("DEFENSE".equals(p.card.getRole())) score += 1;
         if (p.takesFarItem) score += 2;
         score += s.unlockedDamage(p.fixedGains) * 1.5;

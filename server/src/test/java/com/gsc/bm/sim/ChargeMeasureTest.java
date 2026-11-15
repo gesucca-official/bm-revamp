@@ -40,6 +40,7 @@ class ChargeMeasureTest {
             super(c.getBindingName(), 0, 0, c.getItemsSize()); this.key = key;
             getResources().putAll(c.getResources()); getItems().addAll(c.getItems());
             getStatuses().addAll(c.getStatuses()); getTimers().addAll(c.getTimers()); getImmunities().addAll(c.getImmunities());
+            useSearchShuffle(c.searchShuffle()); // SB-16i (D97): a setting of the draft, carried by the copy
             initialHealth = getResources().get(Resource.HEALTH);
         }
         @Override public List<String> resolveTimeBasedEffects() {
@@ -232,6 +233,9 @@ class ChargeMeasureTest {
         assertEquals(12,styles.size());
         ThreadLocal<Observe> watches=new ThreadLocal<>(); Observe aggregate=new Observe();
         ThreadLocal<DeckSizeObserve> deckWatches=new ThreadLocal<>(); DeckSizeObserve deckAggregate=new DeckSizeObserve();
+        // SB-16i (D97): the SB-16h counters also without a deck variant, and the counters of the 1.6, in their own file.
+        boolean deckObserve=variant!=null||Boolean.getBoolean("sim.deckObserve"), sb16i=Boolean.getBoolean("sim.sb16iCounters");
+        ThreadLocal<Sb16iObserve> sb16iWatches=new ThreadLocal<>(); Sb16iObserve sb16iAggregate=new Sb16iObserve();
         Bench.Settings settings=new Bench.Settings(Integer.getInteger("sim.chargeGames",300),7_000_000L,List.of(DECKS),styles,
                 Integer.getInteger("sim.threads",8),BoundCap.Params.DEFAULT,"SB-16g 2b3: D82 power, final round, arm "+arm);
         List<Bench.Cell> mixedCells=new ArrayList<>();
@@ -260,7 +264,11 @@ class ChargeMeasureTest {
         BiConsumer<String,Game> observation=(stage,g)-> {
             if(stage.equals("ROUND_READY")&&g.getTurn()==0)watches.set(new Observe());
             Observe watch=watches.get();if(watch==null){watch=new Observe();watches.set(watch);} watch.accept(stage,g);
-            if(variant!=null) {
+            if(sb16i) {
+                Sb16iObserve iw=sb16iWatches.get(); if(iw==null){iw=new Sb16iObserve();sb16iWatches.set(iw);} iw.accept(stage,g);
+                if(stage.equals("ROUND_COMMITTED")&&g.isOver()){sb16iAggregate.merge(iw);sb16iWatches.remove();}
+            }
+            if(deckObserve) {
                 DeckSizeObserve dw=deckWatches.get(); if(dw==null){dw=new DeckSizeObserve();deckWatches.set(dw);} dw.accept(stage,g);
                 if(stage.equals("ROUND_COMMITTED")&&g.isOver()){deckAggregate.merge(dw);deckWatches.remove();}
             }
@@ -276,7 +284,8 @@ class ChargeMeasureTest {
         Files.writeString(out.resolve("draft.json"),JSON.writeValueAsString(draft.json()));
         Files.writeString(out.resolve("seconds.txt"),String.valueOf(seconds));
         Files.writeString(out.resolve("arm.txt"),arm);
-        if(variant!=null)Files.writeString(out.resolve("deck-observations.json"),JSON.writeValueAsString(deckAggregate.totals));
+        if(deckObserve)Files.writeString(out.resolve("deck-observations.json"),JSON.writeValueAsString(deckAggregate.totals));
+        if(sb16i)Files.writeString(out.resolve("sb16i-observations.json"),JSON.writeValueAsString(sb16iAggregate.totals));
         for(Counts c:aggregate.totals.values())for(String[] pair:ChargeFrequency.PAIRS) {
             String pre="charge/"+pair[0]+"/";
             assertEquals(c.getOrDefault(pre+"played",0L).longValue(),c.getOrDefault(pre+"resolved",0L)+c.getOrDefault(pre+"notExecuted",0L),pre);

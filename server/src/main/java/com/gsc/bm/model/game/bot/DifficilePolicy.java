@@ -173,7 +173,7 @@ public final class DifficilePolicy implements BotPolicy {
         if (card.getEffects() == null) return List.of();
         List<String> sought = new ArrayList<>();
         for (PrintedEffects.Step step : card.getEffects().getSteps())
-            if (step.getKind() == PrintedEffects.Kind.SEARCH && step.getSearchedCard() != null) sought.add(step.getSearchedCard());
+            if (step.getKind() == PrintedEffects.Kind.SEARCH) sought.addAll(step.searchedNames());
         return sought;
     }
 

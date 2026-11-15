@@ -13,6 +13,7 @@ import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.model.game.status.StatusFlow;
 import com.gsc.bm.model.game.status.StatusType;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 
 import java.util.ArrayList;
@@ -44,12 +45,22 @@ public class BotView {
     Ruleset ruleset;
 
     @Value
+    @AllArgsConstructor
     public static class Self {
         Seat seat;
         List<CardSeen> hand;
         int deckSize;
         /** SB-16g 2a (D58): the own copies found by a search, face up for everyone; {@code slot} is their index in {@link #hand}. */
         List<RevealedSeen> revealed;
+        /**
+         * SB-16i (D97), playground only: for the cards in hand that announce two names, the announced cards with at least one
+         * copy in the own deck, by binding. A player knows it (own list minus what has been seen); no order and no count.
+         */
+        Map<String, CardSeen> searchable;
+
+        public Self(Seat seat, List<CardSeen> hand, int deckSize, List<RevealedSeen> revealed) {
+            this(seat, hand, deckSize, revealed, Map.of());
+        }
     }
 
     @Value
@@ -75,6 +86,7 @@ public class BotView {
     }
 
     @Value
+    @AllArgsConstructor
     public static class Seat {
         String playerId;
         String character;
@@ -86,9 +98,21 @@ public class BotView {
         List<TimerSeen> timers;
         int itemCapacity;
         List<CardSeen> items;
+        /** SB-16i («Rincara»), playground only: how many times this seat played each card, by name in lower case; public. */
+        Map<String, Integer> plays;
+
+        public Seat(String playerId, String character, boolean dead, boolean forfeited, Map<Resource, Integer> resources,
+                    Set<Resource> immunities, List<StatusSeen> statuses, List<TimerSeen> timers, int itemCapacity, List<CardSeen> items) {
+            this(playerId, character, dead, forfeited, resources, immunities, statuses, timers, itemCapacity, items, Map.of());
+        }
 
         public int resource(Resource resource) {
             return resources.getOrDefault(resource, 0);
+        }
+
+        /** SB-16i: the earlier plays of the named card by this seat. */
+        public int plays(String cardName) {
+            return cardName == null ? 0 : plays.getOrDefault(cardName.toLowerCase(java.util.Locale.ROOT), 0);
         }
     }
 
@@ -177,10 +201,24 @@ public class BotView {
                 .map(p -> new Opponent(seat(game, p), p.getCardsInHand().size(), p.getDeckSize(), revealed(p, false)))
                 .collect(Collectors.toUnmodifiableList());
         return new BotView(game.getTurn(),
-                new Self(seat(game, me), cards(me.getCardsInHand()), me.getDeckSize(), revealed(me, true)),
+                new Self(seat(game, me), cards(me.getCardsInHand()), me.getDeckSize(), revealed(me, true),
+                        game.getRuleset().playground() ? searchable(me) : Map.of()),
                 opponents,
                 game.getResolvedMoves().stream().map(BotView::seen).collect(Collectors.toUnmodifiableList()),
                 reports(game.getTimeBasedEffects()), game.getRuleset());
+    }
+
+    /** SB-16i: the announced cards of the two-name searches in hand with a copy in the deck, by binding (sorted). */
+    private static Map<String, CardSeen> searchable(Player me) {
+        Map<String, CardSeen> searchable = new java.util.TreeMap<>();
+        for (Card card : me.getCardsInHand()) {
+            List<String> names = PrintedEffects.searchedNames(card);
+            if (names.size() < 2) continue;
+            for (String name : names)
+                if (!searchable.containsKey(name))
+                    me.getDeck().stream().filter(c -> c.getBindingName().equals(name)).findFirst().ifPresent(c -> searchable.put(name, seen(c)));
+        }
+        return searchable.isEmpty() ? Map.of() : Collections.unmodifiableMap(searchable);
     }
 
     /** Every move the rules accept now, one per distinct name, target and choice. */
@@ -190,9 +228,53 @@ public class BotView {
         for (CardSeen card : self.hand) {
             if (!names.add(card.name) || !affordable(card)) continue;
             List<String> discards = discards(card);
-            for (String discard : discards) addTargets(card, discard, legal);
+            String search = searchChoice(card);
+            for (String discard : discards) addTargets(card, discard, search, legal);
         }
         return Collections.unmodifiableList(legal);
+    }
+
+    /**
+     * SB-16i (D97), the rule shared by every bot (styles and Normale): for a card that announces two names, both with a copy in
+     * the deck, the hit it can pay next turn, counting the printed reward if found (own resources after the card's cost, plus
+     * {@code foundGains}). If both or neither can be paid, the stronger by nominal damage (neither: the cheaper first); the first
+     * printed on a tie. Null when there is nothing to choose: the engine then takes the only name left, or the search fails.
+     */
+    String searchChoice(CardSeen card) {
+        if (card.effects == null || self.searchable.isEmpty()) return null;
+        PrintedEffects.Step search = card.effects.getSteps().stream().filter(s -> s.getKind() == PrintedEffects.Kind.SEARCH)
+                .findFirst().orElse(null);
+        if (search == null || search.searchedNames().size() < 2) return null;
+        List<CardSeen> options = new ArrayList<>();
+        for (String name : search.searchedNames()) if (self.searchable.containsKey(name)) options.add(self.searchable.get(name));
+        if (options.size() < 2) return null;
+        Map<Resource, Integer> after = new EnumMap<>(Resource.class);
+        after.putAll(self.seat.resources);
+        card.cost.forEach((r, c) -> after.merge(r, -c, Integer::sum));
+        if (search.getFoundGains() != null) search.getFoundGains().forEach((r, g) -> after.merge(r, g, Integer::sum));
+        CardSeen best = null;
+        boolean bestPays = false;
+        for (CardSeen option : options) {
+            boolean pays = paysWith(option, after);
+            if (best == null || better(option, pays, best, bestPays)) { best = option; bestPays = pays; }
+        }
+        return best.binding;
+    }
+
+    private static boolean better(CardSeen a, boolean aPays, CardSeen b, boolean bPays) {
+        if (aPays != bPays) return aPays;
+        if (!aPays) {
+            int ca = a.cost.values().stream().mapToInt(Integer::intValue).sum(), cb = b.cost.values().stream().mapToInt(Integer::intValue).sum();
+            if (ca != cb) return ca < cb;
+        }
+        return a.nominalDamage() > b.nominalDamage();
+    }
+
+    private static boolean paysWith(CardSeen card, Map<Resource, Integer> resources) {
+        for (Map.Entry<Resource, Integer> cost : card.cost.entrySet())
+            if (resources.getOrDefault(cost.getKey(), 0) < cost.getValue() && !(card.lastBlow && cost.getKey() == Resource.HEALTH)) return false;
+        int health = card.cost.getOrDefault(Resource.HEALTH, 0);
+        return health == 0 || card.lastBlow || resources.getOrDefault(Resource.HEALTH, 0) > health;
     }
 
     private boolean affordable(CardSeen card) {
@@ -210,22 +292,22 @@ public class BotView {
                 .map(CardSeen::getName).distinct().collect(Collectors.toList());
     }
 
-    private void addTargets(CardSeen card, String discard, List<LegalMove> legal) {
+    private void addTargets(CardSeen card, String discard, String search, List<LegalMove> legal) {
         if (card.canTarget.contains(Card.CardTarget.NEAR_ITEM)) {
-            for (String item : itemNames(self.seat)) legal.add(new LegalMove(card, "SELF", discard, item));
+            for (String item : itemNames(self.seat)) legal.add(new LegalMove(card, "SELF", discard, item, search));
             return;
         }
         if (card.canTarget.contains(Card.CardTarget.FAR_ITEM)) {
             for (Opponent opponent : aliveOpponents())
                 for (String item : itemNames(opponent.seat))
-                    legal.add(new LegalMove(card, opponent.seat.playerId, discard, item));
+                    legal.add(new LegalMove(card, opponent.seat.playerId, discard, item, search));
             return;
         }
         if (card.canTarget.contains(Card.CardTarget.SELF))
-            legal.add(new LegalMove(card, "SELF", discard, null));
+            legal.add(new LegalMove(card, "SELF", discard, null, search));
         if (card.canTarget.contains(Card.CardTarget.OPPONENT))
             for (Opponent opponent : aliveOpponents())
-                legal.add(new LegalMove(card, opponent.seat.playerId, discard, null));
+                legal.add(new LegalMove(card, opponent.seat.playerId, discard, null, search));
     }
 
     private List<Opponent> aliveOpponents() {
@@ -249,7 +331,7 @@ public class BotView {
                                 ? (Damage.DamageType) s.getImpactedProperty() : null, scale(s), converted(s)))
                         .collect(Collectors.toUnmodifiableList()),
                 c.getTimers().stream().map(t -> new TimerSeen(t.getName(), t.getTimer())).collect(Collectors.toUnmodifiableList()),
-                c.getItemsSize(), cards(c.getItems()));
+                c.getItemsSize(), cards(c.getItems()), c.playCounts().isEmpty() ? Map.of() : Map.copyOf(c.playCounts()));
     }
 
     /** SB-16g 2a (D58, D69): the cards shown face up in a hand; the slot only for the own hand. Always empty with the live rules. */

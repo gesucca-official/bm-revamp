@@ -1,0 +1,176 @@
+{
+ "tests": "Sb16iRulesTest,Sb16iBotsTest",
+ "mutations": [
+  {
+   "mutation": "names-order",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.627 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] withoutAChoiceTheFirstPrintedNameWithACopyIsSearched  Time elapsed: 0.056 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.withoutAChoiceTheFirstPrintedNameWithACopyIsSearched:174 both in the deck: the first printed name, not the nearest copy ==> expected: <t.X> but was: <t.Y>"
+   ],
+   "seconds": 58.3
+  },
+  {
+   "mutation": "names-availability",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 3, Skipped: 0, Time elapsed: 0.846 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] theEngineStopsIfTheDeckChangedBetweenThePlayAndTheSearch  Time elapsed: 0.06 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.theEngineStopsIfTheDeckChangedBetweenThePlayAndTheSearch:218 Expected java.lang.IllegalStateException to be thrown, but nothing was thrown.",
+    "[ERROR]   Sb16iRulesTest.theDeckIsShuffledAfterEverySearchOnlyWithTheSetting:234->deckAfter:227->turn:128 � IllegalState"
+   ],
+   "seconds": 67.2
+  },
+  {
+   "mutation": "choice-ignored",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1.046 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] theChosenNameIsFoundAndBindsTheToken  Time elapsed: 0.061 s  <<< FAILURE!",
+    "[ERROR] theNewFieldsArePublicOnlyWhenTheyApply  Time elapsed: 0.131 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.theChosenNameIsFoundAndBindsTheToken:163 expected: <t.Y> but was: <t.X>"
+   ],
+   "seconds": 82.5
+  },
+  {
+   "mutation": "shuffle-never",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 7.828 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] theDeckIsShuffledAfterEverySearchOnlyWithTheSetting  Time elapsed: 0.452 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.theDeckIsShuffledAfterEverySearchOnlyWithTheSetting:241 setting on: the remaining deck shuffled with the player's generator ==> expected: <[A6@756080817, A2@1910896157, A1@753426788, A8@1108706191, A5@479734028, A7@1673916398, A4@388802347, A3@1541046463]> but was: <[A8@1108706191, A7@1673916398, A6@756080817, A5@479734028, A4@388802347, A3@1541046463, A2@1910896157, A1@753426788]>"
+   ],
+   "seconds": 124.9
+  },
+  {
+   "mutation": "shuffle-always",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.866 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] theDeckIsShuffledAfterEverySearchOnlyWithTheSetting  Time elapsed: 0.083 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.theDeckIsShuffledAfterEverySearchOnlyWithTheSetting:237 no setting: the deck keeps its order (historical drafts) ==> expected: <[A8@1541046463, A7@753426788, A6@579447973, A5@1910896157, A4@1586470445, A3@1373577787, A2@479734028, A1@388802347]> but was: <[A6@579447973, A2@479734028, A1@388802347, A8@1541046463, A5@1910896157, A7@753426788, A4@1586470445, A3@1373577787]>"
+   ],
+   "seconds": 100.3
+  },
+  {
+   "mutation": "ahead-same-group",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.868 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] noAheadInTheSameGroupOrWithoutAMove  Time elapsed: 0.036 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.noAheadInTheSameGroupOrWithoutAMove:279 same priority and ALERTNESS after costs: simultaneous ==> expected: <false> but was: <true>"
+   ],
+   "seconds": 92.1
+  },
+  {
+   "mutation": "ahead-priority-only",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.85 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] aheadByAlertnessAfterCosts  Time elapsed: 0.362 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.aheadByAlertnessAfterCosts:273 expected: <true> but was: <false>"
+   ],
+   "seconds": 64.3
+  },
+  {
+   "mutation": "ahead-without-move",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 1.242 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] aheadByAlertnessAfterCosts  Time elapsed: 0.469 s  <<< FAILURE!",
+    "[ERROR] aheadByPriority  Time elapsed: 0.023 s  <<< FAILURE!",
+    "[ERROR] noAheadInTheSameGroupOrWithoutAMove  Time elapsed: 0.02 s  <<< FAILURE!"
+   ],
+   "seconds": 73.1
+  },
+  {
+   "mutation": "ahead-own-move-voided",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.915 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] aheadHoldsWhenTheTargetIsBroughtDownAndNotWhenTheOwnMoveIsVoided  Time elapsed: 0.063 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.aheadHoldsWhenTheTargetIsBroughtDownAndNotWhenTheOwnMoveIsVoided:301 own move voided: no effect, so no �anticipo� ==> expected: <false> but was: <true>"
+   ],
+   "seconds": 73.6
+  },
+  {
+   "mutation": "counter-skips-voided",
+   "file": "model/game/Game.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.254 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] theLastResortGrowsWithEveryEarlierPlayVoidedOnesIncluded  Time elapsed: 0.12 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.theLastResortGrowsWithEveryEarlierPlayVoidedOnesIncluded:357 a voided play counts ==> expected: <1> but was: <0>"
+   ],
+   "seconds": 70.3
+  },
+  {
+   "mutation": "perplay-zero-grows",
+   "file": "sim/DataCards.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 16, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.81 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iRulesTest",
+    "[ERROR] perPlayZeroLeavesTheCardAsPrinted  Time elapsed: 0.029 s  <<< FAILURE!",
+    "[ERROR]   Sb16iRulesTest.perPlayZeroLeavesTheCardAsPrinted:370 expected: <10> but was: <11>"
+   ],
+   "seconds": 59.7
+  },
+  {
+   "mutation": "bot-choice-ignores-payment",
+   "file": "model/game/bot/BotView.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.227 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iBotsTest",
+    "[ERROR] theSharedRuleChoosesTheHitPayableNextTurnThenTheStronger  Time elapsed: 0.03 s  <<< FAILURE!",
+    "[ERROR]   Sb16iBotsTest.theSharedRuleChoosesTheHitPayableNextTurnThenTheStronger:70 expected: <t.Y> but was: <t.X>"
+   ],
+   "seconds": 67.3
+  },
+  {
+   "mutation": "bot-toxicity-ignored",
+   "file": "model/game/bot/StyleSupport.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.152 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iBotsTest",
+    "[ERROR] theStylesValueEmptyingTheirOwnToxicity  Time elapsed: 0.118 s  <<< FAILURE!",
+    "[ERROR]   Sb16iBotsTest.theStylesValueEmptyingTheirOwnToxicity:99 AggressivePolicy: 20 T, 10 POISON a turn spared for two turns, minus 5 HIT ==> expected: <Dita> but was: <Attesa>"
+   ],
+   "seconds": 80.0
+  },
+  {
+   "mutation": "forecast-ahead-same-group",
+   "file": "model/game/bot/TurnForecast.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.444 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iBotsTest",
+    "[ERROR] theForecastAppliesTheConditionalStepsAndTheCounter  Time elapsed: 0.023 s  <<< FAILURE!",
+    "[ERROR]   Sb16iBotsTest.theForecastAppliesTheConditionalStepsAndTheCounter:135->forecast:127 expected: <1> but was: <2>"
+   ],
+   "seconds": 80.5
+  },
+  {
+   "mutation": "table-counter-frozen",
+   "file": "model/game/bot/ViewTable.java",
+   "detected": true,
+   "failures": [
+    "[ERROR] Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.456 s <<< FAILURE! - in com.gsc.bm.sim.Sb16iBotsTest",
+    "[ERROR] theTableAppliesTheConditionalStepsAndCountsEveryPlay  Time elapsed: 0.058 s  <<< FAILURE!",
+    "[ERROR]   Sb16iBotsTest.theTableAppliesTheConditionalStepsAndCountsEveryPlay:172 the counter of the table grows with the play ==> expected: <2> but was: <1>"
+   ],
+   "seconds": 67.1
+  }
+ ],
+ "detected": 15,
+ "total": 15,
+ "greenAfterRestore": true
+}

@@ -103,6 +103,8 @@ final class DataCards {
         public Map<Resource, Integer> cost = Map.of();
         public List<Step> self = List.of();
         public List<Step> target = List.of();
+        /** SB-16i: the printed effects, built once (a definition does not change after it is read). Not a JSON field. */
+        private transient PrintedEffects printedCache;
 
         void check() {
             if (binding == null || kind == null) throw invalid("binding e kind sono obbligatori");
@@ -143,10 +145,16 @@ final class DataCards {
             }
         }
 
-        /** La carta cercata dal passo search, o null. */
+        /** La carta cercata dal passo search (la prima stampata), o null. */
         String searches() {
-            for (Step step : self) if (step instanceof SearchStep) return ((SearchStep) step).card;
-            return null;
+            List<String> all = searchesAll();
+            return all.isEmpty() ? null : all.get(0);
+        }
+
+        /** SB-16i: tutte le carte che il passo search può cercare, nell'ordine stampato; vuota senza ricerca. */
+        List<String> searchesAll() {
+            for (Step step : self) if (step instanceof SearchStep) return ((SearchStep) step).names();
+            return List.of();
         }
         /** Dove sta il passo consume: solo in self, una volta, in un'azione regolare o basic che bersaglia un oggetto vicino. */
         private void checkConsume() {
@@ -185,23 +193,33 @@ final class DataCards {
         int priorityOrDefault() { return priority == null ? 1 : priority; }
     }
 
-    /** Un numero fisso, o base + risorsa dell'autore / divide (divisione intera), letta quando l'effetto si applica. */
+    /**
+     * Un numero fisso, o base + risorsa dell'autore / divide (divisione intera), letta quando l'effetto si applica.
+     * SB-16i («Rincara X»): {@code perPlay}, facoltativo e 0 se manca, si aggiunge una volta per ogni giocata precedente della
+     * carta da parte del suo autore nella partita (solo con le regole del playground, che contano le giocate).
+     */
     public static final class Amount implements Serializable {
         public Integer base;
         public Resource of;
         public int divide = 1;
+        public int perPlay;
 
         public Amount() { }
 
         @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
         public Amount(int fixed) { base = fixed; }
 
-        int value(Character author) { return of == null ? base : base + author.getResources().get(of) / divide; }
+        int value(Character author) { return value(author, 0); }
+
+        int value(Character author, int plays) {
+            return (of == null ? base : base + author.getResources().get(of) / divide) + perPlay * plays;
+        }
 
         /** Il campo mancante o non valido, o null. */
         String missing(String field) {
             if (base == null) return "campo " + field + ".base mancante";
             if (divide <= 0) return "campo " + field + ".divide deve essere positivo";
+            if (perPlay < 0) return "campo " + field + ".perPlay non può essere negativo";
             return null;
         }
     }
@@ -230,7 +248,8 @@ final class DataCards {
             @JsonSubTypes.Type(value = StatusStep.class, name = "status"),
             @JsonSubTypes.Type(value = SayStep.class, name = "say"),
             @JsonSubTypes.Type(value = ConsumeStep.class, name = "consume"),
-            @JsonSubTypes.Type(value = SearchStep.class, name = "search")
+            @JsonSubTypes.Type(value = SearchStep.class, name = "search"),
+            @JsonSubTypes.Type(value = AnticipoStep.class, name = "anticipo")
     })
     public interface Step extends Serializable {
         String apply(Character author, Character subject);
@@ -244,6 +263,11 @@ final class DataCards {
             return line == null ? List.of() : List.of(line);
         }
 
+        /** SB-16i («Rincara»): as above, knowing the earlier plays of the card by its author; only the amounts read them. */
+        default List<String> lines(Card consumed, Character author, Character subject, int plays) {
+            return lines(consumed, author, subject);
+        }
+
         /** Il primo campo obbligatorio mancante o non valido, o null: un passo incompleto si rifiuta alla lettura. */
         String missing();
     }
@@ -254,9 +278,15 @@ final class DataCards {
         /** Se presente, i soli tipi di stato che modificano questo danno; altrimenti tutti. */
         public Set<StatusType> applying;
 
-        @Override public String apply(Character author, Character subject) {
-            Damage damage = new Damage(type, amount.value(author));
+        @Override public String apply(Character author, Character subject) { return apply(author, subject, 0); }
+
+        String apply(Character author, Character subject, int plays) {
+            Damage damage = new Damage(type, amount.value(author, plays));
             return applying == null ? author.inflictDamage(subject, damage) : author.inflictDamage(subject, damage, applying);
+        }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject, int plays) {
+            return List.of(apply(author, subject, plays));
         }
 
         @Override public String missing() { return first(required(type, "type"), amount(amount)); }
@@ -266,8 +296,10 @@ final class DataCards {
         public Resource resource;
         public Amount amount;
 
-        @Override public String apply(Character author, Character subject) {
-            return subject.gainResource(resource, amount.value(author));
+        @Override public String apply(Character author, Character subject) { return subject.gainResource(resource, amount.value(author)); }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject, int plays) {
+            return List.of(subject.gainResource(resource, amount.value(author, plays)));
         }
 
         @Override public String missing() { return first(required(resource, "resource"), amount(amount)); }
@@ -277,8 +309,10 @@ final class DataCards {
         public Resource resource;
         public Amount amount;
 
-        @Override public String apply(Character author, Character subject) {
-            return subject.loseResource(resource, amount.value(author));
+        @Override public String apply(Character author, Character subject) { return subject.loseResource(resource, amount.value(author)); }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject, int plays) {
+            return List.of(subject.loseResource(resource, amount.value(author, plays)));
         }
 
         @Override public String missing() { return first(required(resource, "resource"), amount(amount)); }
@@ -376,20 +410,34 @@ final class DataCards {
      */
     public static final class SearchStep implements Step {
         public String card;
+        /**
+         * SB-16i (D94, D97): «Annuncia X o Y», uno o due binding distinti nell'ordine stampato, al posto di {@code card}; il
+         * giocatore sceglie, quando gioca la carta, fra quelli con almeno una copia nel mazzo.
+         */
+        public List<String> cards;
         public Vulnerability vulnerability;
         /** D72: conditional resources printed on the card, not unconditional gain steps. */
         public Map<Resource, Integer> foundGains = Map.of();
         public Map<Resource, Integer> missedGains = Map.of();
 
+        /** I binding cercati, nell'ordine stampato. */
+        List<String> names() { return cards != null ? List.copyOf(cards) : card == null ? List.of() : List.of(card); }
+
         @Override public String apply(Character author, Character subject) {
-            subject.requestSearch(card);
+            if (cards == null) subject.requestSearch(card);
+            else subject.requestSearchAmong(cards);
             subject.requestSearchGains(foundGains, missedGains);
             if (vulnerability != null) subject.requestVulnerability(vulnerability);
             return null;
         }
 
         @Override public String missing() {
-            if (card == null || card.isBlank()) return "campo card mancante";
+            if (cards != null) {
+                if (card != null) return "campi card e cards insieme: uno solo";
+                if (cards.isEmpty() || cards.size() > 2) return "campo cards: uno o due binding";
+                for (String c : cards) if (c == null || c.isBlank()) return "campo cards: binding vuoto";
+                if (cards.size() == 2 && cards.get(0).equals(cards.get(1))) return "campo cards: due binding uguali";
+            } else if (card == null || card.isBlank()) return "campo card mancante";
             for (Map<Resource, Integer> gains : java.util.Arrays.asList(foundGains, missedGains)) {
                 if (gains == null) return "search gains non possono essere null";
                 for (Map.Entry<Resource, Integer> gain : gains.entrySet())
@@ -397,6 +445,43 @@ final class DataCards {
                         return "search gains devono essere risorse non negative";
             }
             return vulnerability == null ? null : vulnerability.missing();
+        }
+    }
+
+    /**
+     * SB-16i (D97), «Gioca d'anticipo: E», solo con le regole del playground: i passi annidati ({@code steps}) si applicano, dopo
+     * quelli scritti prima, solo se la mossa si risolve in un gruppo di velocità precedente a quello della mossa del bersaglio;
+     * lo decide la partita ({@link Character#isAhead()}). Non contiene ricerche, consumi né altri anticipi.
+     */
+    public static final class AnticipoStep implements Step {
+        public List<Step> steps;
+
+        @Override public String apply(Character author, Character subject) {
+            throw new IllegalStateException("anticipo si esegue con lines()");
+        }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject) {
+            return lines(consumed, author, subject, 0);
+        }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject, int plays) {
+            if (!author.isAhead()) return List.of();
+            List<String> report = new ArrayList<>();
+            for (Step step : steps) report.addAll(step.lines(consumed, author, subject, plays));
+            return report;
+        }
+
+        @Override public String missing() {
+            if (steps == null || steps.isEmpty()) return "campo steps mancante o vuoto";
+            for (int i = 0; i < steps.size(); i++) {
+                Step step = steps.get(i);
+                if (step == null) return "steps[" + i + "] è null";
+                if (step instanceof SearchStep || step instanceof ConsumeStep || step instanceof AnticipoStep)
+                    return "steps[" + i + "]: anticipo non contiene search, consume né anticipo";
+                String missing = step.missing();
+                if (missing != null) return "steps[" + i + "]: " + missing;
+            }
+            return null;
         }
     }
 
@@ -410,14 +495,24 @@ final class DataCards {
 
     /** D76: the printed steps of a definition as plain numbers, self steps first, as {@link AbstractCard#resolve} applies them. */
     static PrintedEffects printed(Definition definition) {
+        PrintedEffects cached = definition.printedCache;
+        if (cached == null) definition.printedCache = cached = build(definition);
+        return cached;
+    }
+
+    private static PrintedEffects build(Definition definition) {
         List<PrintedEffects.Step> steps = new ArrayList<>();
-        for (Step step : definition.self) printed(step, false, steps);
-        for (Step step : definition.target) printed(step, true, steps);
+        for (Step step : definition.self) printed(step, false, false, steps);
+        for (Step step : definition.target) printed(step, true, false, steps);
         return new PrintedEffects(List.copyOf(steps));
     }
 
-    private static void printed(Step step, boolean onTarget, List<PrintedEffects.Step> steps) {
-        PrintedEffects.Step.StepBuilder b = PrintedEffects.Step.builder().onTarget(onTarget);
+    private static void printed(Step step, boolean onTarget, boolean ahead, List<PrintedEffects.Step> steps) {
+        if (step instanceof AnticipoStep) {
+            for (Step nested : ((AnticipoStep) step).steps) printed(nested, onTarget, true, steps);
+            return;
+        }
+        PrintedEffects.Step.StepBuilder b = PrintedEffects.Step.builder().onTarget(onTarget).ahead(ahead);
         if (step instanceof DamageStep) {
             DamageStep d = (DamageStep) step;
             amount(b.kind(PrintedEffects.Kind.DAMAGE).damageType(d.type).applying(d.applying == null ? null : Set.copyOf(d.applying)), d.amount);
@@ -434,7 +529,7 @@ final class DataCards {
         } else if (step instanceof SearchStep) {
             SearchStep s = (SearchStep) step;
             b.kind(PrintedEffects.Kind.SEARCH).factor(s.vulnerability == null ? null : s.vulnerability.factor)
-                    .searchedCard(s.card).tokenDamage(s.vulnerability == null ? Set.of() : Set.copyOf(s.vulnerability.damage))
+                    .searchedCard(s.names().get(0)).searchedCards(s.cards == null ? null : List.copyOf(s.cards)).tokenDamage(s.vulnerability == null ? Set.of() : Set.copyOf(s.vulnerability.damage))
                     .foundGains(Map.copyOf(s.foundGains)).missedGains(Map.copyOf(s.missedGains));
         } else if (step instanceof ConsumeStep) {
             b.kind(PrintedEffects.Kind.CONSUME);
@@ -443,14 +538,19 @@ final class DataCards {
     }
 
     private static void amount(PrintedEffects.Step.StepBuilder b, Amount amount) {
-        b.base(amount.base).of(amount.of).divide(amount.divide);
+        b.base(amount.base).of(amount.of).divide(amount.divide).perPlay(amount.perPlay);
     }
 
     /** Come le carte Java: niente effetti significa null, non una lista vuota. */
     private static List<String> run(List<Step> steps, Card consumed, Character author, Character subject) {
+        return run(steps, consumed, author, subject, 0);
+    }
+
+    /** SB-16i: {@code plays}, the earlier plays of the card by its author, reaches the amounts with «Rincara». */
+    private static List<String> run(List<Step> steps, Card consumed, Character author, Character subject, int plays) {
         if (steps.isEmpty()) return null;
         List<String> report = new ArrayList<>();
-        for (Step step : steps) report.addAll(step.lines(consumed, author, subject));
+        for (Step step : steps) report.addAll(step.lines(consumed, author, subject, plays));
         return report;
     }
 
@@ -486,11 +586,13 @@ final class DataCards {
             g.getSelf(m).getCharacter().getItems().remove(consumed);
         }
 
-        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, consumed, self, self); }
+        @Override public List<String> applyEffectOnSelf(Character self) {
+            return run(definition.self, consumed, self, self, self.playsOf(getName()));
+        }
 
         /** Gli effetti sul bersaglio dell'oggetto consumato seguono quelli della carta, come in Grab. */
         @Override public List<String> applyEffectOnTarget(Character self, Character target) {
-            List<String> own = run(definition.target, consumed, self, target);
+            List<String> own = run(definition.target, consumed, self, target, self.playsOf(getName()));
             List<String> fromItem = consumed == null ? null : ((AbstractItemCard) consumed).applyEffectOnTarget(self, target);
             if (fromItem == null) return own;
             if (own == null) return fromItem;
@@ -531,7 +633,9 @@ final class DataCards {
         @Override public PrintedEffects printedEffects() { return printed(definition); }
         @com.fasterxml.jackson.annotation.JsonIgnore @Override public boolean isLastBlow() { return definition.lastBlow; }
         @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
-        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self); }
-        @Override public List<String> applyEffectOnTarget(Character self, Character target) { return run(definition.target, null, self, target); }
+        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self, self.playsOf(getName())); }
+        @Override public List<String> applyEffectOnTarget(Character self, Character target) {
+            return run(definition.target, null, self, target, self.playsOf(getName()));
+        }
     }
 }

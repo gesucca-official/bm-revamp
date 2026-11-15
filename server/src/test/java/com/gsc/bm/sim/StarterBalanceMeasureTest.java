@@ -57,8 +57,10 @@ class StarterBalanceMeasureTest {
             getStatuses().addAll(original.getStatuses());
             getTimers().addAll(original.getTimers());
             getImmunities().addAll(original.getImmunities());
+            useSearchShuffle(original.searchShuffle()); // SB-16i: a setting of the draft, carried by the copy
         }
         @Override public void requestSearch(String binding) { window++; super.requestSearch(binding); }
+        @Override public void requestSearchAmong(List<String> bindings) { window++; super.requestSearchAmong(bindings); }
         @Override public List<String> resolveTimeBasedEffects() {
             endOfTurn = true;
             try { return super.resolveTimeBasedEffects(); }

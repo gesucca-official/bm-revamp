@@ -2,6 +2,8 @@ package com.gsc.bm.model.game.bot;
 
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.cards.PrintedEffects;
+import com.gsc.bm.model.game.status.StatusFlow;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -133,13 +135,25 @@ final class StyleSupport {
         final boolean suicidal;
         final boolean usesItem;
         final boolean takesFarItem;
+        /**
+         * SB-16i (D95), playground only: the POISON of TOXICITY the move spares its author over {@link #TOXIC_HORIZON} turns, when
+         * it empties the own TOXICITY and the author is not immune, net of the damage the move deals to its author. In
+         * health points; each style weighs it like a heal.
+         */
+        final double toxicRelief;
+        /** SB-16i («Gioca d'anticipo»), playground only: 1 if the public estimate says the move resolves before the target's, else 0. */
+        final double aheadChance;
+        /** SB-16i: the damage of the target's answer the move would spare if ahead (a lower output of the target), in health points. */
+        final double aheadGuard;
 
         Plan(Situation situation, LegalMove move) {
             this.move = move;
             this.card = move.getCard();
             this.target = situation.seatOf(move.getTargetId());
             this.hostile = target != situation.me;
-            this.damage = hostile ? damageOf(card) : 0;
+            boolean playground = situation.view.getRuleset().playground();
+            this.aheadChance = playground && hostile ? aheadChance(situation, card, target) : 0;
+            this.damage = hostile ? damageOf(card) + (playground ? extraDamage(situation, card, aheadChance) : 0) : 0;
             this.cost = card.getCost();
             this.healthCost = cost.getOrDefault(Resource.HEALTH, 0);
             this.costTotal = cost.values().stream().mapToInt(Integer::intValue).sum() - healthCost;
@@ -153,8 +167,16 @@ final class StyleSupport {
                         parseGains(item.getGains(), VARIABLE).forEach((r, v) -> total.merge(r, v, Double::sum));
                         parseGains(item.getGains(), 0).forEach((r, v) -> fixed.merge(r, v, Double::sum));
                     });
+            if (playground && aheadChance > 0) for (PrintedEffects.Step st : steps(card))
+                if (st.isAhead() && !st.isOnTarget() && st.getKind() == PrintedEffects.Kind.GAIN && st.getResource() != null)
+                    total.merge(st.getResource(), aheadChance * st.getBase(), Double::sum);
             this.gains = total;
             this.fixedGains = fixed;
+            this.aheadGuard = playground && aheadChance > 0 ? aheadChance * guard(situation, card, target) : 0;
+            List<PrintedEffects.Step> own = new ArrayList<>(steps(card));
+            if (usesItem) situation.me.getItems().stream().filter(i -> i.getName().equals(move.getItem())).findFirst()
+                    .ifPresent(item -> own.addAll(steps(item)));
+            this.toxicRelief = playground ? toxicRelief(situation, own, target == situation.me) : 0;
             this.repeated = situation.view.getLastRound().stream()
                     .anyMatch(m -> m.getPlayerId().equals(situation.me.getPlayerId()) && m.getCardName().equals(card.getName()));
         }
@@ -162,6 +184,72 @@ final class StyleSupport {
         double gain(Resource resource) { return gains.getOrDefault(resource, 0.0); }
         double spent(Resource resource) { return cost.getOrDefault(resource, 0); }
         boolean role(String role) { return role.equals(card.getRole()); }
+    }
+
+    /** SB-16i: the printed steps of a card, or none if it cannot describe itself. */
+    static List<PrintedEffects.Step> steps(BotView.CardSeen card) {
+        return card.getEffects() == null ? List.of() : card.getEffects().getSteps();
+    }
+
+    /** Turns over which the POISON of TOXICITY spared by a cleaning move is counted (SB-16i, proposal section 6). */
+    static final int TOXIC_HORIZON = 2;
+
+    /**
+     * SB-16i: TOXICITY emptied on the author («azzera la tua T»), T/2 of POISON spared at each end of turn for
+     * {@link #TOXIC_HORIZON} turns, minus the HIT the move deals to its author; zero if immune or nothing emptied.
+     * <p>
+     * Only EMPTY counts, not LOSE: in the 1.5 a LOSE of the own TOXICITY exists only on two cards of the character immune to it,
+     * who loses the immunity only in its mirror, after the card that lifts it; valuing it there changed the 1.5 (first identity
+     * step 0 of SB-16i, 81 cells of that mirror). The two cleaning cards of the 1.6 empty the TOXICITY.
+     */
+    static double toxicRelief(Situation s, List<PrintedEffects.Step> steps, boolean onSelf) {
+        int toxicity = s.me.resource(Resource.TOXICITY);
+        if (toxicity <= 0 || s.me.getImmunities().contains(Resource.TOXICITY)) return 0;
+        int removed = 0, selfDamage = 0;
+        for (PrintedEffects.Step st : steps) {
+            boolean mine = !st.isOnTarget() || onSelf;
+            if (!mine) continue;
+            if (st.getResource() == Resource.TOXICITY && st.getKind() == PrintedEffects.Kind.EMPTY) removed = toxicity;
+            else if (st.getKind() == PrintedEffects.Kind.DAMAGE) selfDamage += st.getBase();
+        }
+        if (removed <= 0) return 0;
+        return Math.max(0, removed / 2 * TOXIC_HORIZON - selfDamage);
+    }
+
+    /**
+     * SB-16i («Gioca d'anticipo»), a public estimate: ahead if the card's priority is above the target's typical one (the highest
+     * among its cards shown face up, 1 without any), or equal with the own ALERTNESS after the card's cost above the target's.
+     * In the same group, or after: 0.
+     */
+    static double aheadChance(Situation s, BotView.CardSeen card, BotView.Seat target) {
+        if (steps(card).stream().noneMatch(PrintedEffects.Step::isAhead)) return 0;
+        int typical = s.found(target).stream().mapToInt(BotView.CardSeen::getPriority).max().orElse(1);
+        int mine = s.me.resource(Resource.ALERTNESS) - card.getCost().getOrDefault(Resource.ALERTNESS, 0);
+        if (card.getPriority() != typical) return card.getPriority() > typical ? 1 : 0;
+        return mine > target.resource(Resource.ALERTNESS) ? 1 : 0;
+    }
+
+    /** SB-16i: the hit damage a lower output of the target spares, against its strongest card shown or {@link #CHARGED_HIT}. */
+    static double guard(Situation s, BotView.CardSeen card, BotView.Seat target) {
+        double factor = 1;
+        for (PrintedEffects.Step st : steps(card))
+            if (st.isAhead() && st.isOnTarget() && st.getKind() == PrintedEffects.Kind.STATUS && st.getFlow() == StatusFlow.OUTPUT
+                    && st.getFactor() != null && st.getFactor() < 1) factor = Math.min(factor, st.getFactor());
+        if (factor >= 1) return 0;
+        double threat = s.found(target).stream().mapToDouble(StyleSupport::damageOf).max().orElse(CHARGED_HIT);
+        return (1 - factor) * Math.max(threat, CHARGED_HIT);
+    }
+
+    /** SB-16i: «Rincara» (the public play count) and «Gioca d'anticipo» (weighted) added to the nominal damage to the target. */
+    static double extraDamage(Situation s, BotView.CardSeen card, double aheadChance) {
+        double extra = 0;
+        int plays = s.me.plays(card.getName());
+        for (PrintedEffects.Step st : steps(card)) {
+            if (!st.isOnTarget() || st.getKind() != PrintedEffects.Kind.DAMAGE) continue;
+            if (st.isAhead()) extra += aheadChance * st.getBase();
+            else extra += st.getPerPlay() * plays;
+        }
+        return extra;
     }
 
     static double damageOf(BotView.CardSeen card) {
@@ -248,6 +336,8 @@ final class StyleSupport {
             if (s.found(s.me).stream().anyMatch(c -> c.getName().equals(p.card.getName()))) bonus += FOLLOW_UP;
             if (boosted(s.me)) bonus += CHARGED_ATTACK;
         }
+        // SB-16i: the answer of the target spared by «Gioca d'anticipo» counts like damage avoided.
+        bonus += p.aheadGuard * 2;
         if (charged(s, s.foe) && !p.hostile) {
             String role = p.card.getRole();
             if ("DEFENSE".equals(role) || "COUNTER".equals(role)) bonus += BRACE;

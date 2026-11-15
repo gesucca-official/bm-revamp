@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""Genera le liste e i testi dei cinque starter della bozza di riferimento (D92, formato 20/2 di D94).
+"""Genera le liste e i testi dei cinque starter della bozza di riferimento (formato 20/2 di D94).
 
-Legge, senza modificarli, server/src/test/resources/set-base/bozza.json (braccio A) e
-server/src/test/resources/set-base/bancone-b.json (la carta «Il bancone regge, io pure» del braccio B), e applica
-la stessa sostituzione di SetBaseArms.armB (test del server): la carta con binding base.pino.IlBanconeRegge
-di bozza.json è rimpiazzata da quella di bancone-b.json. Il resto è identico.
+Dalla 1.6 (SB-16i, D97) legge, senza modificarlo, il solo server/src/test/resources/set-base/bozza.json, che contiene già
+il Bancone del braccio B: nessuna sostituzione. La 1.5 resta in set-base/storico/1.5/bozza.json più bancone-b.json.
 
 Uso (dalla radice del repository):
     python docs/design/set-base/genera-bozza-di-riferimento.py            # stampa la sezione generata
@@ -21,9 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 BOZZA = ROOT / "server/src/test/resources/set-base/bozza.json"
-BANCONE_B = ROOT / "server/src/test/resources/set-base/bancone-b.json"
 DOC = Path(__file__).resolve().with_name("bozza-di-riferimento.md")
-BANCONE = "base.pino.IlBanconeRegge"
 START, END = "<!-- inizio generato -->", "<!-- fine generato -->"
 RES = {"HEALTH": "salute", "ALERTNESS": "A", "VIOLENCE": "V", "TOXICITY": "T", "ALCOHOL": "L"}
 RARITY = {"COMMON": "C", "UNCOMMON": "NC", "RARE": "R"}
@@ -33,19 +29,8 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
 
 
-def load_arm_b():
-    draft = json.loads(BOZZA.read_text(encoding="utf-8"))
-    card = json.loads(BANCONE_B.read_text(encoding="utf-8"))
-    if card.get("binding") != BANCONE:
-        raise SystemExit("bancone-b.json: non è il Bancone")
-    n = 0
-    for i, c in enumerate(draft["cards"]):
-        if c.get("binding") == BANCONE:
-            draft["cards"][i] = card
-            n += 1
-    if n != 1:
-        raise SystemExit(f"braccio B: {n} carte Bancone in bozza.json")
-    return draft
+def load():
+    return json.loads(BOZZA.read_text(encoding="utf-8"))
 
 
 def cell(text):
@@ -61,15 +46,17 @@ def card_line(card, copies=None):
 
 
 def generate():
-    draft = load_arm_b()
+    draft = load()
     rules = draft["rules"]
     cards = {c["binding"]: c for c in draft["cards"]}
     chars = {c["id"]: c for c in draft["characters"]}
     out = [
-        f"Generato da `genera-bozza-di-riferimento.py` da `bozza.json` (SHA-256 `{sha(BOZZA)}…`) e `bancone-b.json` "
-        f"(SHA-256 `{sha(BANCONE_B)}…`). Formato `{draft['format']}`, set `{draft['set']['id']}` versione «{draft['set']['version']}»; "
+        f"Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `{sha(BOZZA)}…`). "
+        f"Formato `{draft['format']}`, set `{draft['set']['id']}` versione «{draft['set']['version']}»; "
         f"regole dei mazzi: {rules['deckSize']} carte regolari, massimo {rules['maxCopies']} copie, "
-        f"{rules['boundChoices']} bound, basic fissa, last resort obbligatoria. Rarità: C comune, NC non comune, R rara.",
+        f"{rules['boundChoices']} bound, basic fissa, last resort obbligatoria"
+        + ("; il mazzo si mischia dopo ogni ricerca" if rules.get("searchShuffle") else "")
+        + ". Rarità: C comune, NC non comune, R rara.",
         "",
         f"Il file contiene {len(cards)} carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), "
         f"{len(draft['characters'])} personaggi e {len(draft['decks'])} starter.",
@@ -119,7 +106,7 @@ def main(argv):
             if new != doc:
                 print("bozza-di-riferimento.md non è allineato: rigenerare con --scrivi")
                 return 1
-            print("bozza-di-riferimento.md allineato a bozza.json e bancone-b.json")
+            print("bozza-di-riferimento.md allineato a bozza.json")
             return 0
         DOC.write_text(new, encoding="utf-8", newline="\n")
         print("sezione generata riscritta in", DOC.name)

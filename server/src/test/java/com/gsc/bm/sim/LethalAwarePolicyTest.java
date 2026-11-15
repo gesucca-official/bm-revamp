@@ -29,7 +29,8 @@ class LethalAwarePolicyTest {
             FASCIATURA = "base.com.FasciaturaColFazzolettaccio", TARTARUGA = "base.com.TartarugaSulMarciapiede",
             YOU_STOP = "bruiser.YouStop";
 
-    @BeforeAll static void load() throws Exception { draft = Draft.fromClasspath("/set-base/bozza.json"); }
+    // SB-16i (D97): the D76 cases are written on the cards of the 1.5, read from the frozen copy; the 1.6 cases are in Sb16iBotsTest.
+    @BeforeAll static void load() throws Exception { draft = Draft.fromClasspath(SetBaseArms.FROZEN_15); }
 
     static BotView.CardSeen card(String binding) { return BotView.publicText(draft.card(binding)); }
 

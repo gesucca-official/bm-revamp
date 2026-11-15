@@ -16,6 +16,11 @@ import java.util.Objects;
 final class SetBaseArms {
     static final String BANCONE = "base.pino.IlBanconeRegge";
     static final String ARM_B = "/set-base/bancone-b.json";
+    /**
+     * SB-16i (D97): the 1.5 frozen byte for byte (arm A; with {@link #ARM_B} it is arm B, the reference 1.5). The tests that
+     * reproduce historical measures read it; those describing the current draft read {@code bozza.json}, the 1.6.
+     */
+    static final String FROZEN_15 = "/set-base/storico/1.5/bozza.json";
     private static final ObjectMapper JSON = new ObjectMapper();
 
     private SetBaseArms() { }
@@ -27,8 +32,21 @@ final class SetBaseArms {
         }
     }
 
+    /**
+     * SB-16i (D97): the 1.6 carries arm B's Bancone in {@code bozza.json} (with HIT x0.65). A draft whose Bancone already halves
+     * POISON is arm B as it is: the arm is then an identity, and only the frozen 1.5 is turned into arm B.
+     */
+    static boolean carriesArmB(JsonNode draft) {
+        for (JsonNode card : draft.path("cards"))
+            if (BANCONE.equals(card.path("binding").asText()))
+                for (JsonNode step : card.path("self"))
+                    if ("status".equals(step.path("op").asText()) && "POISON".equals(step.path("property").asText())) return true;
+        return false;
+    }
+
     /** A copy of the draft of arm A with the single Bancone card replaced by the one of arm B. */
     static JsonNode armB(JsonNode armA) throws Exception {
+        if (carriesArmB(armA)) return armA.deepCopy();
         JsonNode card = banconeB();
         if (!BANCONE.equals(card.path("binding").asText())) throw new IllegalStateException(ARM_B + ": not the Bancone");
         ObjectNode root = armA.deepCopy();
@@ -44,7 +62,7 @@ final class SetBaseArms {
     static Draft arm(String name, Draft armA) throws Exception {
         if ("A".equals(name)) return armA;
         // Not a classpath source: the bench fingerprints arm B from its JSON (Bench.sha256), arm A from the file.
-        if ("B".equals(name)) return Draft.parse(Bench.draftName(armA) + " + bancone-b.json", armB(armA.json()));
+        if ("B".equals(name)) return carriesArmB(armA.json()) ? armA : Draft.parse(Bench.draftName(armA) + " + bancone-b.json", armB(armA.json()));
         throw new IllegalArgumentException("sim.arm: A or B, not " + name);
     }
 

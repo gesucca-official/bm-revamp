@@ -34,6 +34,8 @@ public class PrudentPolicy implements BotPolicy, StyleSupport.Scorer {
         if ("DEFENSE".equals(role)) score += 40 * need + 2 * p.card.getPriority();
         if ("COUNTER".equals(role)) score += 25 * need + 2 * p.card.getPriority();
         score += p.gain(Resource.HEALTH) * 2 * need;
+        // SB-16i: the POISON it spares itself is a heal over the next turns.
+        score += p.toxicRelief * 2 * need;
         if (s.poisoned()) {
             score -= p.gain(Resource.TOXICITY) * 1.5;
             score += p.spent(Resource.TOXICITY) * 0.4;

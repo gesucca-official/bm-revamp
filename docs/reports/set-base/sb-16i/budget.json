@@ -1,0 +1,49 @@
+{
+ "capWallSeconds": 3300,
+ "items": [
+  {
+   "phase": "identity",
+   "voice": "identity",
+   "capVoice": 150,
+   "wallSeconds": 42.558865999999995,
+   "benchSeconds": 29.8164965,
+   "gamesPerCell": 4,
+   "exit": 0
+  },
+  {
+   "phase": "identity-try1",
+   "voice": "identity",
+   "capVoice": 150,
+   "wallSeconds": 58.5272308,
+   "benchSeconds": 26.396532,
+   "gamesPerCell": 4,
+   "exit": 0
+  },
+  {
+   "phase": "round",
+   "voice": "round",
+   "capVoice": 1500,
+   "wallSeconds": 854.6999836,
+   "benchSeconds": 809.0007876,
+   "gamesPerCell": 300,
+   "exit": 0
+  },
+  {
+   "phase": "step0",
+   "voice": "step0",
+   "capVoice": 150,
+   "wallSeconds": 58.949900199999995,
+   "benchSeconds": 22.0097322,
+   "gamesPerCell": 4,
+   "exit": 0
+  }
+ ],
+ "note": "D97: wall-clock seconds of the Maven runs, failed samples and reruns included",
+ "spentByVoice": {
+  "identity": 101.08609679999999,
+  "round": 854.6999836,
+  "step0": 58.949900199999995
+ },
+ "spentTotal": 1014.7359806,
+ "residual": 2285.2640194
+}

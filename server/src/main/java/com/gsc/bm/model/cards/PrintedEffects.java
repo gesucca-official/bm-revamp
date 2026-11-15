@@ -84,6 +84,42 @@ public class PrintedEffects implements Serializable {
         String spawnedItem;
         Map<Resource, Integer> foundGains;
         Map<Resource, Integer> missedGains;
+        /**
+         * SB-16i (D94, D97), playground only: every binding the search may look for, in printed order («Annuncia X o Y»); the
+         * player chooses among those with a copy in the deck when playing the card. {@code searchedCard} is the first. Null for
+         * steps written before SB-16i, which search {@code searchedCard} only.
+         */
+        List<String> searchedCards;
+        /** SB-16i (D97, «Gioca d'anticipo»): the step applies only if the move resolves in a speed group before the target's move. */
+        boolean ahead;
+        /** SB-16i («Rincara X»): added to the amount once for every earlier play of this card by its author in the match. */
+        int perPlay;
+
+        /** The bindings the search may look for, in printed order: {@code searchedCards}, or {@code searchedCard} alone. */
+        public List<String> searchedNames() {
+            if (searchedCards != null && !searchedCards.isEmpty()) return searchedCards;
+            return searchedCard == null ? List.of() : List.of(searchedCard);
+        }
+    }
+
+    /** SB-16i: the bindings the card's search may look for, in printed order; empty without a search or a printed text. */
+    public static List<String> searchedNames(Card card) {
+        if (!(card instanceof Source)) return List.of();
+        PrintedEffects effects = ((Source) card).printedEffects();
+        if (effects == null) return List.of();
+        for (Step s : effects.getSteps()) if (s.getKind() == Kind.SEARCH) return s.searchedNames();
+        return List.of();
+    }
+
+    /** SB-16i: whether the card has a «Gioca d'anticipo» part, or a «Rincara» amount, in its printed text. */
+    public static boolean hasAhead(Card card) { return anyStep(card, Step::isAhead); }
+
+    public static boolean hasPerPlay(Card card) { return anyStep(card, s -> s.getPerPlay() != 0); }
+
+    private static boolean anyStep(Card card, java.util.function.Predicate<Step> test) {
+        if (!(card instanceof Source)) return false;
+        PrintedEffects effects = ((Source) card).printedEffects();
+        return effects != null && effects.getSteps().stream().anyMatch(test);
     }
 
     List<Step> steps;

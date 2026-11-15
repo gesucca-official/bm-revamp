@@ -15,7 +15,7 @@ import static com.gsc.bm.sim.StarterBalanceMeasureTest.DECKS;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeckSizeVariantsTest {
-    static Draft reference() throws Exception { return SetBaseArms.arm("B", Draft.fromClasspath("/set-base/bozza.json")); }
+    static Draft reference() throws Exception { return SetBaseArms.arm("B", Draft.fromClasspath(SetBaseArms.FROZEN_15)); } // SB-16i (D97): historical measure of the 1.5, read from the frozen copy.
 
     @Test void approvedListsAreStrictValidNestedAndKeepEveryFixedPart() throws Exception {
         Draft base = reference();

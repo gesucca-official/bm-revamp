@@ -34,10 +34,29 @@ public abstract class Character implements Serializable {
     @Getter(AccessLevel.NONE)
     @JsonIgnore
     private Ruleset ruleset = Ruleset.LIVE;
-    /** SB-16c: the card a search step asked for in the move being resolved (D50, point 6), or null. */
+    /** SB-16c: the cards a search step asked for in the move being resolved (D50, point 6), in printed order, or null. */
     @Getter(AccessLevel.NONE)
     @JsonIgnore
-    private String requestedSearch;
+    private List<String> requestedSearch;
+
+    /**
+     * SB-16i (D97), playground only: the deck is shuffled after every search, found or not. A setting of the draft
+     * ({@code rules.searchShuffle}); false when absent, so the historical drafts keep their deck order.
+     */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private boolean searchShuffle;
+    /** SB-16i («Gioca d'anticipo»), playground only: set by the engine while this character's move resolves ahead of its target. */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private boolean ahead;
+    /**
+     * SB-16i («Rincara»), playground only: how many times this character played each card, by name in lower case, voided
+     * plays included. Public: every play is shown to everyone. Always empty with the live rules.
+     */
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
+    private final Map<String, Integer> plays = new LinkedHashMap<>();
 
     public void useRuleset(Ruleset ruleset) { this.ruleset = Objects.requireNonNull(ruleset); }
 
@@ -45,14 +64,39 @@ public abstract class Character implements Serializable {
     public Ruleset ruleset() { return ruleset; }
 
     /** A search step asks to replace the draw that follows this move (D50, point 6). */
-    public void requestSearch(String binding) { this.requestedSearch = binding; }
+    public void requestSearch(String binding) { this.requestedSearch = List.of(binding); }
 
-    /** The search asked for by the move just resolved, cleared. */
-    public String takeRequestedSearch() {
-        String requested = requestedSearch;
+    /** SB-16i (D94, D97): a search of one of these cards, in printed order; the player chose among them when playing. */
+    public void requestSearchAmong(List<String> bindings) { this.requestedSearch = List.copyOf(bindings); }
+
+    /** The search asked for by the move just resolved, in printed order, cleared; null without a search. */
+    public List<String> takeRequestedSearches() {
+        List<String> requested = requestedSearch;
         requestedSearch = null;
         return requested;
     }
+
+    public void useSearchShuffle(boolean shuffle) { this.searchShuffle = shuffle; }
+
+    @JsonIgnore
+    public boolean searchShuffle() { return searchShuffle; }
+
+    public void setAhead(boolean ahead) { this.ahead = ahead; }
+
+    @JsonIgnore
+    public boolean isAhead() { return ahead; }
+
+    /** SB-16i: one more play of the named card, counted by the engine after its move, voided or not. */
+    public void countPlay(String cardName) { plays.merge(cardName.toLowerCase(Locale.ROOT), 1, Integer::sum); }
+
+    /** SB-16i: the earlier plays of the named card by this character in the match. */
+    public int playsOf(String cardName) {
+        return cardName == null ? 0 : plays.getOrDefault(cardName.toLowerCase(Locale.ROOT), 0);
+    }
+
+    /** SB-16i: every play count, by card name in lower case; public information. */
+    @JsonIgnore
+    public Map<String, Integer> playCounts() { return Collections.unmodifiableMap(plays); }
 
     /** SB-16g 2a: the vulnerability the search step of the move being resolved gives its author (D64, D69), or null. */
     @Getter(AccessLevel.NONE)

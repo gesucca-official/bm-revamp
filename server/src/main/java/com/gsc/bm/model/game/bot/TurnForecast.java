@@ -227,8 +227,11 @@ public final class TurnForecast {
         final List<BotView.CardSeen> items;
         boolean toxicImmune;
         final boolean upAtStart;
+        /** SB-16i («Rincara»): the public play counts of the seat. */
+        final BotView.Seat seat;
 
         Body(BotView.Seat seat) {
+            this.seat = seat;
             this.id = seat.getPlayerId();
             for (Resource r : Resource.values()) res.put(r, seat.resource(r));
             for (BotView.StatusSeen s : seat.getStatuses())
@@ -254,6 +257,8 @@ public final class TurnForecast {
         final boolean mine;
         long speed;
         boolean voided;
+        /** SB-16i («Gioca d'anticipo»): the act resolves in a group before an act of its target. */
+        boolean ahead;
 
         Act(Body author, Body target, BotView.CardSeen card, String item, List<PrintedEffects.Step> steps, boolean mine) {
             this.author = author;
@@ -297,6 +302,11 @@ public final class TurnForecast {
             List<Act> order = new ArrayList<>(acts);
             order.sort((a, b) -> a.speed != b.speed ? Long.compare(b.speed, a.speed)
                     : Boolean.compare(b.mine == mineFirst, a.mine == mineFirst));
+            // SB-16i («Gioca d'anticipo», D97): from the order fixed after costs; no act of the target, or the same group: no.
+            for (int i = 0; i < order.size(); i++)
+                for (int j = i + 1; j < order.size(); j++)
+                    if (order.get(i).target != order.get(i).author && order.get(j).author == order.get(i).target
+                            && order.get(j).speed != order.get(i).speed) order.get(i).ahead = true;
             Long group = null;
             Set<Body> downAtGroupStart = new HashSet<>();
             for (int i = 0; i < order.size(); i++) {
@@ -329,19 +339,24 @@ public final class TurnForecast {
             boolean searched = false;
             Map<Resource, Integer> foundGains = Map.of(), missedGains = Map.of();
             Float token = null;
+            int plays = act.author.seat.plays(act.card.getName());
             for (PrintedEffects.Step step : act.steps) {
+                if (step.isAhead() && !act.ahead) continue;
                 Body subject = step.isOnTarget() ? act.target : act.author;
                 switch (step.getKind()) {
                     case DAMAGE:
-                        damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart), step.getApplying());
+                        damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart) + step.getPerPlay() * plays,
+                                step.getApplying());
                         break;
                     case GAIN:
                         if (step.getResource() != null)
-                            subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart));
+                            subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart)
+                                    + step.getPerPlay() * plays);
                         break;
                     case LOSE:
                         if (step.getResource() != null)
-                            subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart));
+                            subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart)
+                                    - step.getPerPlay() * plays);
                         break;
                     case EMPTY:
                         if (step.getResource() != null) subject.set(step.getResource(), 0);
@@ -406,6 +421,9 @@ public final class TurnForecast {
                                 step.getConvertTo()));
                     else if (step.getKind() == PrintedEffects.Kind.IMMUNE && step.getResource() == Resource.TOXICITY)
                         act.author.toxicImmune = true;
+                    // SB-16i: an item that empties a resource («Ghiaccio nel tovagliolo», the own TOXICITY).
+                    else if (step.getKind() == PrintedEffects.Kind.EMPTY && step.getResource() != null)
+                        act.author.set(step.getResource(), 0);
                     else if (step.getKind() == PrintedEffects.Kind.DAMAGE)
                         damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0), step.getApplying());
                 }

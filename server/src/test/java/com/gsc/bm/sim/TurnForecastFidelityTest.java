@@ -22,9 +22,11 @@ class TurnForecastFidelityTest {
 
     @Test
     void theForecastMatchesTheEngineTurnByTurn() throws Exception {
-        Draft armA = Draft.fromClasspath("/set-base/bozza.json");
+        // SB-16i (D97): the 1.5 frozen, both arms as before, and the 1.6 of bozza.json with its three new effects.
+        Draft armA = Draft.fromClasspath(SetBaseArms.FROZEN_15);
         check(armA, "A");
         check(SetBaseArms.arm("B", armA), "B"); // SB-16g passo 3 (D82): the Bancone of arm B is a public effect too.
+        check(Draft.fromClasspath("/set-base/bozza.json"), "1.6");
     }
 
     private static void check(Draft draft, String arm) throws Exception {

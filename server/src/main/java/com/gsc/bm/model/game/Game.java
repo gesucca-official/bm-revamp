@@ -139,9 +139,10 @@ public class Game implements Serializable {
 
     public void submitMove(Move move) throws IllegalMoveException {
         Move.MoveCheckResult moveCheckResult = move.isValidFor(this);
-        if (moveCheckResult.isValid())
+        if (moveCheckResult.isValid()) {
+            if (ruleset.playground() && !move.isVoid()) move.setSearchAvailable(available(move));
             pendingMoves.add(move);
-        else {
+        } else {
             loggedTurnEvents.add("An Invalid Move has been Submitted: " + move);
             throw new IllegalMoveException(move.getPlayerId(), moveCheckResult.getComment());
         }
@@ -214,21 +215,44 @@ public class Game implements Serializable {
                         satisfied.add(r); break;
                     }
             }
+            // SB-16i («Gioca d'anticipo»), playground only: decided when the move resolves, from the order already fixed.
+            Card played = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
+            boolean keywordAhead = ruleset.playground() && com.gsc.bm.model.cards.PrintedEffects.hasAhead(played);
+            boolean ahead = keywordAhead && !m.isVoid() && aheadOfTarget(m, speed);
+            if (keywordAhead) getSelf(m).getCharacter().setAhead(ahead);
             m.applyEffectTo(this);
             Player self = getSelf(m);
+            self.getCharacter().setAhead(false);
+            if (keywordAhead) {
+                m.setAhead(ahead);
+                m.note("Gioca d'anticipo: " + (ahead ? "sì" : "no"));
+            }
+            // SB-16i («Rincara»), playground only: every play counts, voided too; the move shows the earlier plays.
+            if (ruleset.playground()) {
+                if (com.gsc.bm.model.cards.PrintedEffects.hasPerPlay(played)) m.setPlays(self.getCharacter().playsOf(m.getPlayedCardName()));
+                self.getCharacter().countPlay(m.getPlayedCardName());
+            }
             // A search step runs only if the move resolved; a voided move draws normally.
-            String search = self.getCharacter().takeRequestedSearch();
+            List<String> searches = self.getCharacter().takeRequestedSearches();
+            String search = searches == null ? null : chosen(m, self, searches);
             Vulnerability vulnerability = self.getCharacter().takeRequestedVulnerability();
             Card card = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
             self.discardCard(card);
             Card found = null;
             boolean searched = false;
             if (self.getCardsInHand().size() < Player.CARDS_IN_HAND) {
-                if (ruleset.playground() && search != null && !m.isVoid()) {
-                    found = self.searchCard(search);
+                if (ruleset.playground() && searches != null && !m.isVoid()) {
+                    // D97: with no announced card left in the deck the search fails and the player draws normally.
+                    if (search != null) found = self.searchCard(search);
+                    else self.drawCard();
                     searched = true;
-                    loggedTurnEvents.add("Player " + m.getPlayerId() + " searched the deck for " + search + ": "
-                            + (found != null ? "found " + found.getName() : "not in the deck, normal draw"));
+                    if (searches.size() < 2)
+                        loggedTurnEvents.add("Player " + m.getPlayerId() + " searched the deck for " + searches.get(0) + ": "
+                                + (found != null ? "found " + found.getName() : "not in the deck, normal draw"));
+                    else loggedTurnEvents.add("Player " + m.getPlayerId() + " searched the deck for " + String.join(" or ", searches)
+                            + ": " + (found != null ? "chose and found " + found.getName() : "none in the deck, normal draw"));
+                    // D97: after every search, found or not, the deck is shuffled (a setting of the draft).
+                    if (self.getCharacter().searchShuffle()) Collections.shuffle(self.getDeck(), self.random());
                 } else self.drawCard();
             }
             // SB-16g 2a (D69): the card found goes to the hand (an object found goes to the field and leaves no mark).
@@ -239,7 +263,7 @@ public class Game implements Serializable {
             // D72/M6: failed or unexecuted searches never leave a token.
             Integer copy = ruleset.playground() && !m.isVoid() && inHand != null
                     ? mark(self, inHand, vulnerability) : null;
-            if (searched) m.recordSearch(search, found, copy);
+            if (searched) m.recordSearch(searches, search != null ? search : searches.get(0), found, copy);
         }
         if (ruleset.playground()) prepareEndOfTurn(satisfied);
 
@@ -267,6 +291,48 @@ public class Game implements Serializable {
         if (!isOver() && isReadyToResolveMoves())
             resolveMoves(endChainCallback, turnEventsLogDrain, observer);
         else endChainCallback.accept(this);
+    }
+
+    /** SB-16i (D97): the printed names of the move's search with a copy in its author's deck now; null if the card does not search. */
+    private List<String> available(Move move) {
+        List<String> names = com.gsc.bm.model.cards.PrintedEffects.searchedNames(getCardFromHand(move.getPlayerId(), move.getPlayedCardName()));
+        if (names.isEmpty()) return null;
+        Player p = players.get(move.getPlayerId());
+        List<String> available = new ArrayList<>();
+        for (String name : names) if (p.getDeck().stream().anyMatch(c -> c.getBindingName().equals(name))) available.add(name);
+        return available;
+    }
+
+    /**
+     * SB-16i (D97): the card searched among the announced ones: the player's choice, made when the move was sent among the names
+     * with a copy in the deck, or else the first printed name with a copy; null if none has one (the search fails). Nothing can
+     * change a deck between the play and the search (no card touches another player's deck, and the author draws only after its
+     * own search); the engine checks it, so a future card that did would stop the match instead of searching another deck.
+     */
+    private String chosen(Move m, Player self, List<String> names) {
+        List<String> now = new ArrayList<>();
+        for (String name : names) if (self.getDeck().stream().anyMatch(c -> c.getBindingName().equals(name))) now.add(name);
+        if (m.getSearchAvailable() != null && !m.getSearchAvailable().equals(now))
+            throw new IllegalStateException("SB-16i: the deck of " + m.getPlayerId() + " changed between the play and the search: "
+                    + m.getSearchAvailable() + " then " + now);
+        if (m.getSearchChoice() != null && now.contains(m.getSearchChoice())) return m.getSearchChoice();
+        return now.isEmpty() ? null : now.get(0);
+    }
+
+    /**
+     * SB-16i («Gioca d'anticipo», D97): the move resolves in a speed group before the move of its target. Not when the target is
+     * the author, has no move (no move sent, an empty move, eliminated) or plays in the same group; yes when the target's move is
+     * in a later group, even if it will be voided later. Pending moves are already sorted by speed group.
+     */
+    private boolean aheadOfTarget(Move m, Map<Move, Long> speed) {
+        String target = m.getTargetId();
+        if (target == null || "SELF".equalsIgnoreCase(target) || target.equals(m.getPlayerId())) return false;
+        int mine = pendingMoves.indexOf(m);
+        for (int i = mine + 1; i < pendingMoves.size(); i++) {
+            Move other = pendingMoves.get(i);
+            if (target.equals(other.getPlayerId()) && !speed.get(other).equals(speed.get(m))) return true;
+        }
+        return false;
     }
 
     /**

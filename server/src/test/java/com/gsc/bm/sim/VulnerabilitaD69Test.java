@@ -651,10 +651,23 @@ class VulnerabilitaD69Test {
         for (JsonNode card : root.get("cards"))
             if ("bruiser.Glare".equals(card.get("binding").asText()))
                 for (JsonNode step : card.get("self"))
-                    if ("search".equals(step.get("op").asText()))
+                    if ("search".equals(step.get("op").asText())) {
+                        // SB-16i: from the 1.6 the charge announces two names (cards); the check is the same on a single name.
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).remove("cards");
                         ((com.fasterxml.jackson.databind.node.ObjectNode) step).put("card", "base.items.PosacenereDiVetro");
+                    }
         Exception refused = assertThrows(Exception.class, () -> Draft.parse("ricerca-di-oggetto.json", root));
         assertTrue(refused.getMessage().contains("una ricerca non può cercare un oggetto (D70)"), refused.getMessage());
+        // SB-16i (D94): every name of «Annuncia X o Y» is checked the same way.
+        for (JsonNode card : root.get("cards"))
+            if ("bruiser.Glare".equals(card.get("binding").asText()))
+                for (JsonNode step : card.get("self"))
+                    if ("search".equals(step.get("op").asText())) {
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).remove("card");
+                        ((com.fasterxml.jackson.databind.node.ObjectNode) step).putArray("cards").add("bruiser.SuperImpact").add("base.items.PosacenereDiVetro");
+                    }
+        Exception second = assertThrows(Exception.class, () -> Draft.parse("ricerca-di-oggetto-2.json", root));
+        assertTrue(second.getMessage().contains("una ricerca non può cercare un oggetto (D70)"), second.getMessage());
     }
 
     private static List<Card> withStrikeOnTop(int fillers) {

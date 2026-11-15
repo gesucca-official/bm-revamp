@@ -34,16 +34,28 @@ public final class ViewTable {
         public final String target;
         public final String discard;
         public final String item;
+        /**
+         * SB-16i (D97): the card chosen for «Annuncia X o Y» (a binding), or null: then the first announced name the table
+         * knows to be in the deck (world mode, or the own deck from the view), else the first printed.
+         */
+        public final String search;
 
         public Play(String seat, BotView.CardSeen card, String target, String discard, String item) {
+            this(seat, card, target, discard, item, null);
+        }
+
+        public Play(String seat, BotView.CardSeen card, String target, String discard, String item, String search) {
             this.seat = seat;
             this.card = card;
             this.target = target;
             this.discard = discard;
             this.item = item;
+            this.search = search;
         }
 
-        public static Play of(String seat, LegalMove m) { return new Play(seat, m.getCard(), m.getTargetId(), m.getDiscard(), m.getItem()); }
+        public static Play of(String seat, LegalMove m) {
+            return new Play(seat, m.getCard(), m.getTargetId(), m.getDiscard(), m.getItem(), m.getSearch());
+        }
     }
 
     /** A status: a damage multiplier as the engine applies it, or an opaque one that only ticks. */
@@ -113,6 +125,12 @@ public final class ViewTable {
         int deckSize;
         BotView.CardSeen lastResort;
         List<Mark> marks = new ArrayList<>();
+        /** SB-16i («Rincara»): public play counts by card name in lower case. */
+        Map<String, Integer> plays = new HashMap<>();
+        /** SB-16i (D97): own announced cards known to be in the deck (from the view); empty for the others. */
+        Map<String, BotView.CardSeen> searchable = Map.of();
+
+        int plays(String name) { return name == null ? 0 : plays.getOrDefault(name.toLowerCase(java.util.Locale.ROOT), 0); }
 
         int get(Resource r) { return res.getOrDefault(r, 0); }
         void set(Resource r, int value) { res.put(r, Math.max(0, value)); }
@@ -133,6 +151,7 @@ public final class ViewTable {
             s.deck = deck == null ? null : new ArrayList<>(deck);
             s.deckSize = deckSize; s.lastResort = lastResort;
             for (Mark m : marks) { Mark n = new Mark(m.id, m.card, m.turn); n.absentSince = m.absentSince; s.marks.add(n); }
+            s.plays = new HashMap<>(plays); s.searchable = searchable;
             return s;
         }
 
@@ -142,7 +161,7 @@ public final class ViewTable {
             List<BotView.StatusSeen> seen = new ArrayList<>();
             for (Stat t : statuses) seen.add(t.seen());
             return new BotView.Seat(id, character, down(), false, Collections.unmodifiableMap(r), Set.copyOf(immunities),
-                    Collections.unmodifiableList(seen), timers, itemCapacity, List.copyOf(items));
+                    Collections.unmodifiableList(seen), timers, itemCapacity, List.copyOf(items), Map.copyOf(plays));
         }
 
         List<BotView.RevealedSeen> revealed(boolean own) {
@@ -213,6 +232,7 @@ public final class ViewTable {
         s.items = new ArrayList<>(seat.getItems());
         s.timers = seat.getTimers();
         s.itemCapacity = seat.getItemCapacity();
+        s.plays = new HashMap<>(seat.getPlays());
         return s;
     }
 
@@ -226,6 +246,7 @@ public final class ViewTable {
         me.handKnown = true;
         me.hand = new ArrayList<>(view.getSelf().getHand());
         me.deckSize = view.getSelf().getDeckSize();
+        me.searchable = view.getSelf().getSearchable();
         for (BotView.RevealedSeen r : view.getSelf().getRevealed()) me.marks.add(new Mark(r.getCopy(), me.hand.get(r.getSlot()), r.getTurn()));
         byId.put(me.id, me);
         for (BotView.Opponent o : view.getOpponents()) {
@@ -325,6 +346,8 @@ public final class ViewTable {
         final int seatIndex;
         long speed;
         boolean voided;
+        /** SB-16i («Gioca d'anticipo»): resolves in a group before an act of its target. */
+        boolean ahead;
 
         Act(Side author, Side target, Play play, int seatIndex) {
             this.author = author;
@@ -364,6 +387,11 @@ public final class ViewTable {
                 a.author.set(cost.getKey(), a.author.get(cost.getKey()) - cost.getValue());
         for (Act a : acts) a.speed = ((long) a.play.card.getPriority() << 32) + a.author.get(Resource.ALERTNESS);
         acts.sort((a, b) -> a.speed != b.speed ? Long.compare(b.speed, a.speed) : Integer.compare(a.seatIndex, b.seatIndex));
+        // SB-16i («Gioca d'anticipo», D97), from the order fixed after costs.
+        for (int i = 0; i < acts.size(); i++)
+            for (int j = i + 1; j < acts.size(); j++)
+                if (acts.get(i).target != acts.get(i).author && acts.get(j).author == acts.get(i).target
+                        && acts.get(j).speed != acts.get(i).speed) acts.get(i).ahead = true;
         Long group = null;
         Set<Side> downAtGroupStart = new HashSet<>();
         Set<Mark> satisfied = new HashSet<>();
@@ -411,6 +439,8 @@ public final class ViewTable {
                 if (!act.play.card.isCharacterBound() && !act.play.card.isBasicAction()) removeByName(act.author, act.play.card.getName());
                 if (act.author.handCount() < HAND_LIMIT) drawCard(act.author);
             }
+            // SB-16i («Rincara»): every play counts, voided too.
+            act.author.plays.merge(act.play.card.getName().toLowerCase(java.util.Locale.ROOT), 1, Integer::sum);
             seen.add(new BotView.SeenMove(act.play.seat, act.play.card.getName(), act.play.target, act.voided, Map.of(), Map.of(),
                     act.voided ? "a terra" : null, searchedFor, found, act.play.card.getRole()));
         }
@@ -447,6 +477,7 @@ public final class ViewTable {
 
     /** The search after the move: in world mode from the sampled deck, in forecast mode as the flag says. */
     private BotView.CardSeen find(Side s, Search search, boolean flag) {
+        if (worldMode && search.failed) { drawCard(s); return null; }
         if (worldMode) {
             for (int i = s.deck.size() - 1; i >= 0; i--) {
                 BotView.CardSeen c = s.deck.get(i);
@@ -470,28 +501,51 @@ public final class ViewTable {
 
     private static final class Search {
         String binding;
+        /** SB-16i: world mode, no announced card in the deck: the search fails and the player draws. */
+        boolean failed;
         Float factor;
         Set<Damage.DamageType> damage;
         Map<Resource, Integer> foundGains = Map.of(), missedGains = Map.of();
     }
 
+    /**
+     * SB-16i (D97): the card searched: the move's choice; else, in world mode, the first announced name with a copy in the deck
+     * (null: the search fails); in forecast mode the first announced name the own view knows in the deck, else the first printed.
+     */
+    private String chosen(Act act, List<String> names) {
+        if (names.isEmpty()) return null;
+        if (act.play.search != null && names.contains(act.play.search)) return act.play.search;
+        if (worldMode) {
+            for (String name : names)
+                if (act.author.deck.stream().anyMatch(c -> c.getBinding().equals(name))) return name;
+            return names.get(0); // none in the deck: the search of the first fails and the player draws, as before
+        }
+        for (String name : names) if (act.author.searchable.containsKey(name)) return name;
+        return names.get(0);
+    }
+
     private Search resolve(Act act, List<Act> later) {
         Map<Resource, Integer> start = new EnumMap<>(act.author.res);
         int itemsAtStart = act.author.items.size();
+        int plays = act.author.plays(act.play.card.getName());
         Search search = null;
         for (PrintedEffects.Step step : act.steps) {
+            if (step.isAhead() && !act.ahead) continue;
             Side subject = step.isOnTarget() ? act.target : act.author;
             switch (step.getKind()) {
                 case DAMAGE:
-                    damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart), step.getApplying());
+                    damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart) + step.getPerPlay() * plays,
+                            step.getApplying());
                     break;
                 case GAIN:
                     if (step.getResource() != null)
-                        subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart));
+                        subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart)
+                                + step.getPerPlay() * plays);
                     break;
                 case LOSE:
                     if (step.getResource() != null)
-                        subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart));
+                        subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart)
+                                - step.getPerPlay() * plays);
                     break;
                 case EMPTY:
                     if (step.getResource() != null) subject.set(step.getResource(), 0);
@@ -501,12 +555,13 @@ public final class ViewTable {
                     break;
                 case SEARCH:
                     search = new Search();
-                    search.binding = step.getSearchedCard();
+                    search.binding = chosen(act, step.searchedNames());
                     search.factor = step.getFactor();
                     search.damage = step.getTokenDamage() == null ? Set.of() : step.getTokenDamage();
                     search.foundGains = step.getFoundGains() == null ? Map.of() : step.getFoundGains();
                     search.missedGains = step.getMissedGains() == null ? Map.of() : step.getMissedGains();
-                    if (search.binding == null) search = null;
+                    if (search.binding == null && worldMode) search.failed = true;
+                    else if (search.binding == null) search = null;
                     break;
                 case CONSUME:
                     consume(act);
@@ -569,6 +624,9 @@ public final class ViewTable {
                     if (step.getDamageType() != null && step.getFactor() != null) act.author.statuses.add(status(step));
                 } else if (step.getKind() == PrintedEffects.Kind.IMMUNE && step.getResource() != null)
                     act.author.immunities.add(step.getResource());
+                // SB-16i: an item that empties a resource («Ghiaccio nel tovagliolo», the own TOXICITY).
+                else if (step.getKind() == PrintedEffects.Kind.EMPTY && step.getResource() != null)
+                    act.author.set(step.getResource(), 0);
                 else if (step.getKind() == PrintedEffects.Kind.DAMAGE)
                     damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0), step.getApplying());
             }

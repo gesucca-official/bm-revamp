@@ -57,6 +57,8 @@ public class ResourceAwarePolicy implements BotPolicy, StyleSupport.Scorer {
         }
         double healthWorth = s.myHealth() < s.foeHealth() ? 1.5 : 0.6;
         score += p.gain(Resource.HEALTH) * healthWorth;
+        // SB-16i: the POISON it spares itself, at the price it puts on health.
+        score += p.toxicRelief * healthWorth;
         // Health paid is spent like any resource, at the price it puts on health gained.
         score -= p.healthCost * healthWorth;
         if (p.usesItem && s.me.getItems().size() >= s.me.getItemCapacity()) score += 5;

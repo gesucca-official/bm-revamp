@@ -21,9 +21,11 @@ class ViewTableFidelityTest {
 
     @Test
     void equivalenceAndTwoTurnFidelity() throws Exception {
-        Draft a = Draft.fromClasspath(DRAFT);
-        check(a, "A");
-        check(SetBaseArms.arm("B", a), "B");
+        // SB-16i (D97): the 1.5 frozen, both arms with their probe regressions, and the 1.6 of bozza.json.
+        Draft a = Draft.fromClasspath(SetBaseArms.FROZEN_15);
+        check(a, "A", true);
+        check(SetBaseArms.arm("B", a), "B", true);
+        check(Draft.fromClasspath(DRAFT), "1.6", false);
     }
 
     private static Map<String, BotView.CardSeen> text(Draft draft) throws Exception {
@@ -44,13 +46,13 @@ class ViewTableFidelityTest {
         return text;
     }
 
-    private static void check(Draft draft, String arm) throws Exception {
+    private static void check(Draft draft, String arm, boolean probeRegressions) throws Exception {
         long started = System.nanoTime();
         Map<String, BotView.CardSeen> catalog = text(draft);
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         int games = 300;
         long[] one = new long[2], two = new long[2], twoRes = new long[2], drawn = new long[2];
-        long[] skipped = new long[1];
+        long[] skipped = new long[1], unmodeled = new long[1];
         int[] regressionWindows = new int[1];
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
@@ -74,9 +76,12 @@ class ViewTableFidelityTest {
                     List<ViewTable.Play> now = new ArrayList<>();
                     Map<String, BotView> seen = new HashMap<>();
                     for (Move m : g.getPendingMoves()) {
+                        // SB-16i: the card the move will search, as the engine decides it when the move is sent (D97).
+                        String search = m.getSearchChoice() != null ? m.getSearchChoice()
+                                : m.getSearchAvailable() != null && !m.getSearchAvailable().isEmpty() ? m.getSearchAvailable().get(0) : null;
                         now.add(new ViewTable.Play(m.getPlayerId(), BotView.publicText(g.getCardFromHand(m.getPlayerId(), m.getPlayedCardName())),
                                 m.getTargetId(), m.getChoices().get(Move.AdditionalAction.DISCARD_ONE),
-                                m.getChoices().get(Move.AdditionalAction.TARGET_ITEM)));
+                                m.getChoices().get(Move.AdditionalAction.TARGET_ITEM), search));
                         seen.put(m.getPlayerId(), BotView.of(g, m.getPlayerId()));
                     }
                     views.put(t, seen);
@@ -102,6 +107,10 @@ class ViewTableFidelityTest {
                                 labels[0] + " first-turn equivalence seen by " + me);
                         pending1.put(me, ends);
                         if (!views.containsKey(t - 1)) continue;
+                        // SB-16i: a card without printed text that takes or destroys a far item (Steal, «Smontiamo tutto») is outside
+                        // the table's model; on the 1.6 the windows after one are counted apart (first seen at seed 7100197, turn 12).
+                        if (!probeRegressions && plays.get(t - 1).stream().anyMatch(p -> p.card.getEffects() == null
+                                && p.card.getCanTarget().contains(Card.CardTarget.FAR_ITEM))) { unmodeled[0]++; continue; }
                         Set<Map<String, Integer>> ends2 = new HashSet<>();
                         Set<Map<String, Map<Resource, Integer>>> res2 = new HashSet<>();
                         boolean itemsKnown = false;
@@ -140,7 +149,7 @@ class ViewTableFidelityTest {
                             return;
                         }
                         two[0]++;
-                        if ((s == 7_100_093 && g.getTurn() - 1 == 8) || (s == 7_100_115 && g.getTurn() - 1 == 9)) {
+                        if (probeRegressions && ((s == 7_100_093 && g.getTurn() - 1 == 8) || (s == 7_100_115 && g.getTurn() - 1 == 9))) {
                             regressionWindows[0]++;
                             assertTrue(ends.contains(actual), labels[0] + " legacy bottle regression " + id);
                         }
@@ -160,10 +169,10 @@ class ViewTableFidelityTest {
         double seconds = (System.nanoTime() - started) / 1e9;
         System.out.println("ViewTable fidelity " + arm + ": first " + one[1] + "/" + one[0] + ", two health "
                 + two[1] + "/" + two[0] + ", resources " + twoRes[1] + "/" + twoRes[0] + ", excluded items " + drawn[0]
-                + ", skipped " + skipped[0] + ", seconds " + seconds);
+                + ", skipped " + skipped[0] + ", unmodeled far item " + unmodeled[0] + ", seconds " + seconds);
         assertTrue(one[0] > 5000);
         assertTrue(two[0] > 1000);
-        assertEquals(4, regressionWindows[0], "both seats of the two probe regressions remain covered in arm " + arm);
+        if (probeRegressions) assertEquals(4, regressionWindows[0], "both seats of the two probe regressions remain covered in arm " + arm);
         assertEquals(one[0], one[1], String.join("\n", misses));
         assertEquals(two[0], two[1], String.join("\n", misses));
         assertEquals(twoRes[0], twoRes[1], String.join("\n", misses));
