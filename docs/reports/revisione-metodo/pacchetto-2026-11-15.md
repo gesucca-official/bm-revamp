@@ -1,7 +1,7 @@
 # Pacchetto di prove per la revisione del metodo
 
-**15 novembre 2026, preparato dalla regia del Set Base su richiesta del proprietario.** Materiale per una revisione esterna di
-[docs/orchestrazione-lavoro.md](../../orchestrazione-lavoro.md). Solo fatti misurati sulla repo e un campione dei manufatti;
+**15 novembre 2026, preparato dalla regia del Set Base su richiesta del proprietario.** Materiale per chi rivede e riscrive direttamente
+[docs/orchestrazione-lavoro.md](../../orchestrazione-lavoro.md) insieme al proprietario. Solo fatti misurati sulla repo e un campione dei manufatti;
 **nessuna opinione della regia**, di proposito, per non orientare la revisione. Dove un dato manca lo dice.
 
 ## 1. Come si lavora oggi (riassunto del metodo)
@@ -47,13 +47,16 @@
 - **Revisione del bilanciamento SB-16b…SB-16i** (12–14 novembre): 10 sottoblocchi, decisioni **D49–D97 (49 decisioni in tre giorni)**,
   nello stesso periodo 86 commit del Set Base (compresi SB-30b e i documenti della regia). Criteri completi non raggiunti; il proprietario in D95 ha ridimensionato l'obiettivo («non scordiamoci la
   bigger picture»).
+- **Il numero di decisioni non è di per sé un costo del metodo.** Si sta progettando un gioco: cambiare idea spesso è normale e
+  voluto (indicazione del proprietario, 15 novembre 2026). Il costo da guardare è quanto lavoro di prompt, lettura e scrittura
+  produce ogni cambio di idea.
 
 ## 4. Episodi con costo (dal registro e dal piano)
 
 | Episodio | Riferimento | Cosa è successo |
 |---|---|---|
 | STOP dopo tre giri senza criteri | SB-16e, D56; SB-16e2, D57 | giri di bilanciamento conclusi senza risultato, poi prova umana |
-| Regola del gettone riscritta più volte | D58 → D59 → D65 → D69 → D71 → D72 | sei decisioni sulla stessa meccanica in due giorni |
+| Regola del gettone riscritta più volte | D58 → D59 → D65 → D69 → D71 → D72 | sei decisioni sulla stessa meccanica in due giorni: normale nel design; conta quanto ciascuna ha richiesto di riscrivere (proposte, contratto d50, regole, test) |
 | Messaggi della regia non arrivati all'esecutore | D86, D87 | l'esecutore ha attuato la versione superata; giro proseguito sul codice sbagliato |
 | Giro interrotto dalla chiusura della sessione | D87 | braccio B da completare a parte |
 | Andata e ritorno sul travaso | D84 → D86 → D88 | classe nuova, poi abbandonata perché rompeva l'identità; ritorno al parametro |
@@ -67,17 +70,12 @@ Il 14–15 novembre una regia nuova è ripartita da un prompt di consegna di cir
 circa 1.200 righe (metodo intero, stato e sezioni del piano, righe D85–D97, regole del playground, testa della bozza, chiusure di
 quattro rapporti). La revisione di una consegna di Fase A ha richiesto la lettura completa della proposta (317 righe).
 
-## 6. Usage (da compilare dal proprietario)
+## 6. Usage
 
-La repo non registra i token. Se il proprietario la compila prima della revisione, è il dato più utile.
-
-| Tipo di sessione | Modello e sforzo | Usage stimato | Note |
-|---|---|---|---|
-| Regia, una giornata | | | |
-| Fase A (proposta, senza codice) | | | |
-| Fase B con codice e giro | | | |
-| Blocco di client (C4) | | | |
-| Consolidamento documentale (D96) | | | |
+La repo non registra i token e il proprietario non li ricava facilmente. **L'usage si stima dal lavoro che un prompt chiede**:
+quanto si legge (righe e file), quanto si scrive (proposte, rapporti, righe di registro), quante fasi e STOP, quanti giri di
+domande, quante verifiche e misure lunghe, quanti passaggi di consegne fra sessioni. I numeri delle sezioni 2–5 servono a
+questa stima.
 
 ## 7. Manufatti da campionare
 
