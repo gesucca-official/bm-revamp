@@ -12,7 +12,7 @@ import {deckLabel,handNeighbour} from './a11y.ts';
 import {seatMark,heldBack} from './lifecycle.ts';
 import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
-import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,playsNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status'|'revealed';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 /** `note`: SB-16g 2a, what a card found by a search says (who found it, when, the vulnerability token bound to it). */
@@ -184,8 +184,9 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
  /** SB-16g 2a (D58, D69): the own card found by a search that this card of the hand is (by identity in the view), if any. */
  private ownReveal(card:Card){const p=this.model.view.players[this.model.me],cards=Array.isArray(p?.cardsInHand)?p.cardsInHand:[];return p?.revealed?.find(r=>r.slot!==undefined&&cards[r.slot]===card);}
  /** SB-16g 2a: the mark of a card found by a search, a band with its word (and the factor of its token) at the top or the bottom edge, and a light outline. */
- private revealMark(c:Container,w:number,h:number,text:string,where:'top'|'bottom'){const g=new Graphics(),bh=Math.max(11,Math.min(22,h*.15)),y=where==='top'?-h/2-bh*.55:h/2-bh*.45;
-  g.roundRect(-w/2,-h/2,w,h,Math.min(8,w*.08)).stroke({color:0xf1e4c4,width:2});g.roundRect(-w/2-2,y,w+4,bh,bh*.3).fill(0x2c6262).stroke({color:0xf1e4c4,width:1.2});c.addChild(g);
+ private revealMark(c:Container,w:number,h:number,text:string,where:'top'|'bottom',frame=true){const g=new Graphics(),bh=Math.max(11,Math.min(22,h*.15)),y=where==='top'?-h/2-bh*.55:h/2-bh*.45;
+  // SB-16i: the play counter of a last resort uses the same band, without the frame that marks a card seen by everyone.
+  if(frame)g.roundRect(-w/2,-h/2,w,h,Math.min(8,w*.08)).stroke({color:0xf1e4c4,width:2});g.roundRect(-w/2-2,y,w+4,bh,bh*.3).fill(0x2c6262).stroke({color:0xf1e4c4,width:1.2});c.addChild(g);
   // On the left, like everything on a face: the fan covers the right part of a card.
   const t=this.text(c,text,0,y+bh*.12,bh*.68,undefined,0xfff6e2);t.anchor.set(0,0);t.x=-w/2+Math.min(6,w*.06);if(t.width>w-4)t.scale.set((w-4)/t.width);}
  // C2a card face: role stamp under the title, self gains on the art, cost coins and priority in the footer.
@@ -393,9 +394,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
    const c=this.card(local.card,H.w,H.h,false,short,leftV(local.card,res));c.position.set(x,y);c.rotation=a;this.world.addChild(c);c.alpha=state.alpha;
    // SB-16g 2a (D58, D69): the own card found by a search is seen by everyone: marked, with the factor of its token.
    const shownUp=this.ownReveal(local.card),upNote=shownUp?revealedNote(shownUp,null,view.players[me].character):null;if(upNote)this.revealMark(c,H.w,H.h,upNote.badge,'top');
+   // SB-16i («Rincara», D97): the own last resort says how many times it was played; only when the view has the counter (playground rules).
+   const played=upNote?null:playsNote(local.card,view.players[me].character);if(played)this.revealMark(c,H.w,H.h,played.badge,'top',false);
    // A card drawn this round appears when its flight from the deck lands; it can be chosen at once all the same (rule 4).
    const coming=this.arriving.has(local.key);if(coming)c.visible=false;
-   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${damageLabel(local.card,leftV(local.card,res))?`, danno ${damageLabel(local.card,leftV(local.card,res))}`:''}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}${upNote?`, ${upNote.label}`:''}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
+   const hit:Hit={id:local.key,kind:'hand',key:local.key,x,y,w:H.w,h:H.h,angle:a,label:`${local.card.name}, ${subtype(local.card)}${role?`, ruolo ${ROLES[role].label.toLowerCase()}`:''}, costo ${cost(local.card)}${damageLabel(local.card,leftV(local.card,res))?`, danno ${damageLabel(local.card,leftV(local.card,res))}`:''}${payable?'':', risorse insufficienti'}${gains.length?`, dà ${gains.join(' ')}`:''}, priorità ${local.card.priority}${upNote?`, ${upNote.label}`:''}${played?`, ${played.label}`:''}, copia ${i+1}`,node:c,hidden:coming};this.hits.push(hit);
    // O12: hover (mouse), tap (selection) or focus lifts the whole card; its hit keeps the old slot too, so it does not flicker.
    // O26: the bound's hand copy rests while its discard is still to be chosen,
    // including keyboard/pointer focus. The target preview and its controls stay.
@@ -500,7 +503,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   else if(this.model.selected&&!this.model.locked){this.dropPoint=null;if(!this.model.aim(hit.target!))this.model.cancel();}
   else if(hit.kind==='status'){this.openStatus=this.openStatus===id?null:id;this.draw();this.onState();}else this.inspect(id);
  }
- inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'||hit.kind==='preview'){const card=this.model.hand.find(x=>x.key===hit.key)!.card,up=this.ownReveal(card);this.onInspect({title:card.name,card,...(up?{note:revealedNote(up,null,this.model.view.players[this.model.me].character).text}:{})});}
+ inspect(id:string){const hit=this.hits.find(h=>h.id===id);if(!hit)return;if(hit.kind==='hand'||hit.kind==='preview'){const card=this.model.hand.find(x=>x.key===hit.key)!.card,up=this.ownReveal(card),own=this.model.view.players[this.model.me].character,played=up?null:playsNote(card,own);this.onInspect({title:card.name,card,...(up?{note:revealedNote(up,null,own).text}:played?{note:played.text}:{})});}
   else if(hit.kind==='revealed'){const owner=hit.target!.owner,p=this.model.view.players[owner],r=p.revealed?.find(x=>`revealed-${owner}-${x.copy}`===id);if(r)this.onInspect({title:r.card.name,card:r.card,owner,note:revealedNote(r,this.name(owner),p.character).text});}
   else if(hit.kind==='item'){const card=this.model.view.players[hit.target!.owner].character.items[hit.target!.itemIndex!];this.onInspect({title:card.name,card,owner:hit.target!.owner});}
   else this.onInspect({title:this.model.view.players[hit.target!.owner].character.name,owner:hit.target!.owner});}

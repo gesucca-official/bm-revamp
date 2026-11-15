@@ -26,6 +26,8 @@ export class Model {
   get discardWarning(){const name=this.hand.find(x=>x.key===this.discard)?.card.name;
     return this.selectedCard?.characterBound&&name&&this.view.players[this.me].lastTokenCopies?.includes(name)
       ?`Stai scartando l’ultima copia di «${name}», che tiene un gettone. La vulnerabilità resterà fino alla fine del turno successivo.`:null;}
+  /** SB-16i (D97, D102): the names the selected card may search, from the own view (playground rules); two means the player chooses. */
+  get searchOptions():string[]{const card=this.selectedCard;return card?this.view.players[this.me]?.searchable?.[card.bindingName]??[]:[];}
   get eliminated(){return !!this.view.forfeits[this.me]||!!this.view.players[this.me]?.character.dead;}
   get locked(){return this.phase!=='choose'||this.view.over||this.eliminated;}
   // O26: a bound still needs its extra discard, before or after aiming. This is
@@ -43,10 +45,13 @@ export class Model {
     return card.canTarget.includes(own?'SELF':'OPPONENT');}
   aim(target:Target){if(this.locked||!this.allows(target))return false;this.target=target;this.discard=null;this.message=this.selectedCard?.characterBound?'Scegli dalla mano una regolare da scartare':'Controlla la calata e conferma';this.emit();return true;}
   get ready(){return !this.locked&&!!this.target&&this.allows(this.target)&&!!this.selectedCard&&(!this.selectedCard.characterBound||!!this.hand.find(x=>x.key===this.discard&&regular(x.card)));}
-  confirm(acceptWarning=false){if(!this.ready)return null;if(this.discardWarning&&!acceptWarning){this.message=this.discardWarning;this.emit('feedback');return null;}const c=this.selectedCard!;const t=this.target!;const choices:NonNullable<Command['choices']>={};
+  // SB-16i: with two names available the command needs one of them; with one or none it goes as before, without the field.
+  confirm(acceptWarning=false,searchChoice?:string){if(!this.ready)return null;if(this.discardWarning&&!acceptWarning){this.message=this.discardWarning;this.emit('feedback');return null;}
+    const options=this.searchOptions,choosing=options.length===2;if(choosing&&!(searchChoice&&options.includes(searchChoice))){this.message='Scegli quale carta cercare';this.emit('feedback');return null;}
+    const c=this.selectedCard!;const t=this.target!;const choices:NonNullable<Command['choices']>={};
     if(c.characterBound)choices.DISCARD_ONE=this.hand.find(x=>x.key===this.discard)!.card.name;
     if(t.itemIndex!==undefined)choices.TARGET_ITEM=this.view.players[t.owner].character.items[t.itemIndex].name;
-    const cmd:Command={playedCardName:c.name,playerId:this.me,targetId:t.owner===this.me?'SELF':t.owner,gameId:this.view.gameId,choices:Object.keys(choices).length?choices:null};
+    const cmd:Command={playedCardName:c.name,playerId:this.me,targetId:t.owner===this.me?'SELF':t.owner,gameId:this.view.gameId,choices:Object.keys(choices).length?choices:null,...(choosing?{searchChoice}:{})};
     this.phase='sending';this.message='Invio in corso';this.commandCount++;this.lastCommand=clone(cmd);this.history.push(clone(cmd));this.emit();return cmd;}
   reorder(keys:string[]){if(this.locked||keys.length!==this.hand.length||new Set(keys).size!==keys.length||keys.some(k=>!this.hand.some(c=>c.key===k)))return;
     this.hand=keys.map(k=>this.hand.find(c=>c.key===k)!);this.emit();}

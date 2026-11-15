@@ -2,9 +2,11 @@ package com.gsc.bm.service.view;
 
 import com.gsc.bm.model.Character;
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.status.Status;
 import com.gsc.bm.service.catalog.CatalogSource;
 import com.gsc.bm.service.view.model.client.*;
@@ -16,7 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.SerializationUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -100,8 +105,8 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
                         .stream()
                         .map(p -> {
                             if (!p.getPlayerId().equals(playerId))
-                                return toClientViewForOpponents(p);
-                            else return toClientViewForSelf(p);
+                                return toClientViewForOpponents(p, gameClone.getRuleset());
+                            else return toClientViewForSelf(p, gameClone.getRuleset());
                         })
                         .collect(Collectors.toMap(AbstractClientPlayerView::getPlayerId, Function.identity()))
                 )
@@ -118,27 +123,28 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
                 .build();
     }
 
-    private ClientSelfPlayerView toClientViewForSelf(Player player) {
+    private ClientSelfPlayerView toClientViewForSelf(Player player, Ruleset ruleset) {
         byte[] bytes = SerializationUtils.serialize(player);
         Player p = (Player) SerializationUtils.deserialize(bytes);
         assert p != null;
         return ClientSelfPlayerView.builder()
                 .playerId(p.getPlayerId())
-                .character(toClientView(p.getCharacter()))
+                .character(toClientView(p.getCharacter(), ruleset))
                 .cardsInHand(p.getCardsInHand())
                 .revealed(revealed(p, true))
                 .lastTokenCopies(p.getLastTokenCopies())
                 .deck(p.getDeck().size())
+                .searchable(ruleset.playground() ? searchable(p) : null)
                 .build();
     }
 
-    private ClientOpponentView toClientViewForOpponents(Player player) {
+    private ClientOpponentView toClientViewForOpponents(Player player, Ruleset ruleset) {
         byte[] bytes = SerializationUtils.serialize(player);
         Player p = (Player) SerializationUtils.deserialize(bytes);
         assert p != null;
         return ClientOpponentView.builder()
                 .playerId(p.getPlayerId())
-                .character(toClientView(p.getCharacter()))
+                .character(toClientView(p.getCharacter(), ruleset))
                 .cardsInHand(p.getCardsInHand().size())
                 .revealed(revealed(p, false))
                 .deck(p.getDeck().size())
@@ -160,9 +166,26 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
     }
 
 
+    /**
+     * SB-16i (D97, D102): for each card in the hand announcing two names, by binding, the names with a copy in the deck, in printed
+     * order. Only which names have a copy: no order of the deck, no count of copies.
+     */
+    private static Map<String, List<String>> searchable(Player p) {
+        Map<String, List<String>> searchable = new TreeMap<>();
+        for (Card card : p.getCardsInHand()) {
+            List<String> names = PrintedEffects.searchedNames(card);
+            if (names.size() < 2 || searchable.containsKey(card.getBindingName())) continue;
+            List<String> available = new ArrayList<>();
+            for (String name : names)
+                if (p.getDeck().stream().anyMatch(c -> name.equals(c.getBindingName()))) available.add(name);
+            searchable.put(card.getBindingName(), available);
+        }
+        return searchable;
+    }
+
     // TODO duplicate code come on g
 
-    private ClientCharacterView toClientView(Character character) {
+    private ClientCharacterView toClientView(Character character, Ruleset ruleset) {
         byte[] bytes = SerializationUtils.serialize(character);
         Character c = (Character) SerializationUtils.deserialize(bytes);
         assert c != null;
@@ -179,6 +202,7 @@ public class ViewExtractorServiceImpl implements ViewExtractorService {
                 .immunities(c.getImmunities())
                 .timers(c.getTimers())
                 .sprite(record.getSprite()) // TODO load this at once in a character factory??
+                .plays(ruleset.playground() ? new TreeMap<>(c.playCounts()) : null)
                 .build();
     }
 

@@ -134,6 +134,28 @@ export function revealedNote(r:{copy:number;turn:number;card:Card},owner:string|
  return {badge:held?`SCOPERTA ${factorText(held.factor)}`:'SCOPERTA',text,label:held?`scoperta, tiene una vulnerabilità ${factorText(held.factor)}`:'scoperta, la vedono tutti'};
 }
 
+/**
+ * SB-16i («Rincara», D97): how many times a last resort has been played by its owner, from the public counter of the character view.
+ * Null for any other card and without the counter (live rules): nothing new is drawn then.
+ */
+export function playsNote(card:Card,c:Character){
+ if(!card.lastResort||!c.plays)return null;
+ const n=c.plays[card.name.toLowerCase()]??0,times=`${n} ${n===1?'volta':'volte'}`;
+ return {badge:n?`GIOCATA ${n} ${n===1?'VOLTA':'VOLTE'}`:'MAI GIOCATA',
+  text:n?`Giocata ${times} in questa partita, contando anche quelle annullate.`:'Mai giocata in questa partita.',label:n?`giocata ${times}`:'mai giocata'};
+}
+
+/**
+ * SB-16i («Rincara», D97): the last resorts in the counter of a character, with their plays, for the character's inspection; the
+ * names come from the cards the client knows. «mai giocata» when none was played; null without the counter (live rules).
+ */
+export function lastResortPlays(c:Character,known:Card[]):string|null{
+ if(!c.plays)return null;
+ const names=new Map(known.filter(k=>k.lastResort).map(k=>[k.name.toLowerCase(),k.name]));
+ const played=Object.entries(c.plays).filter(([k,n])=>n>0&&names.has(k)).map(([k,n])=>`«${names.get(k)}» giocata ${n} ${n===1?'volta':'volte'}`);
+ return played.length?played.join(', '):'mai giocata';
+}
+
 /** O12: card sizes and seat geometry. Sizes follow the height so the compact landscape
  * (844×390) and the desktop (1366×768) share one rule; the five-seat FFA uses the same table. */
 export type Box={x:number;y:number;w:number;h:number};

@@ -14,7 +14,7 @@ public class MoveCommandValidator {
     }
     public Move validate(Game game, String user, String pathGame, JsonNode body) {
         require(body != null && body.isObject(), user, "Invalid move command");
-        Set<String> allowed = Set.of("playedCardName", "playerId", "targetId", "gameId", "choices");
+        Set<String> allowed = Set.of("playedCardName", "playerId", "targetId", "gameId", "choices", "searchChoice");
         body.fieldNames().forEachRemaining(key -> require(allowed.contains(key), user, "Unexpected move field"));
         for (String key : List.of("playedCardName", "playerId", "targetId", "gameId")) {
             require(body.path(key).isTextual() && !body.path(key).asText().isBlank(), user, "Missing " + key);
@@ -48,6 +48,11 @@ public class MoveCommandValidator {
         require(card.isCharacterBound() || !choices.containsKey(Move.AdditionalAction.DISCARD_ONE), user, "Unexpected discard");
         require(targets.contains(Card.CardTarget.NEAR_ITEM) || targets.contains(Card.CardTarget.FAR_ITEM)
                 || !choices.containsKey(Move.AdditionalAction.TARGET_ITEM), user, "Unexpected item");
-        return new Move(card.getName(), user, target, pathGame, choices.isEmpty() ? null : choices);
+        // SB-16i (D102): the name chosen for «Annuncia X o Y», checked by the engine (Move.isValidFor), refused with the live rules.
+        JsonNode searchChoice = body.get("searchChoice");
+        require(searchChoice == null || searchChoice.isTextual() && !searchChoice.asText().isBlank(), user, "Invalid search choice");
+        Move move = new Move(card.getName(), user, target, pathGame, choices.isEmpty() ? null : choices);
+        if (searchChoice != null) move.setSearchChoice(searchChoice.asText());
+        return move;
     }
 }

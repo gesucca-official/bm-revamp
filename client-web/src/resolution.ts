@@ -27,6 +27,10 @@ export type MoveFact = {
   voidReason?: string;
   /** SB-16f0 (D56), playground rules only, absent otherwise: the search that replaced the draw, with the card found shown to everyone. */
   search?: MoveSearch;
+  /** SB-16i (D97), playground rules only, absent otherwise: for a card with «Gioca d'anticipo», whether it came before the target's move. */
+  ahead?: boolean;
+  /** SB-16i (D97), playground rules only, absent otherwise: for a card with «Rincara», the author's earlier plays of it. */
+  plays?: number;
 };
 
 export type ResourceChange = {before: number | null; after: number | null; delta: number};
@@ -86,6 +90,7 @@ function moveFact(m: Move, index: number, costs: Map<string, Card>): MoveFact {
     discard: choices.DISCARD_ONE ?? null, void: !!m.void,
     cost: card ? {...card.cost} : null, itemGone: false, itemAtAuthor: false,
     ...(m.voidReason ? {voidReason: m.voidReason} : {}), ...(m.search ? {search: m.search} : {}),
+    ...(typeof m.ahead === 'boolean' ? {ahead: m.ahead} : {}), ...(typeof m.plays === 'number' ? {plays: m.plays} : {}),
   };
 }
 
@@ -262,6 +267,8 @@ export type RoundReport = {
   outcome: string | null;
 };
 
+/** «1 volta», «3 volte». */
+export const times = (n: number) => `${n} ${n === 1 ? 'volta' : 'volte'}`;
 const quoted = (names: string[]) => names.map(n => `«${n}»`).join(', ');
 
 /** What the facts of a round cannot say, in the words of D4 and rule 3; null for a round with its difference. */
@@ -304,9 +311,21 @@ export function roundReport(f: ResolutionFacts, crossed: boolean, c: ReportConte
       else lines.push(`Oggetto scelto: ${what}. La vista non permette di dire con certezza se sia sparito per questa mossa.`);
     }
     if (m.discard) lines.push(`Carta da scartare indicata: «${m.discard}».`);
-    const s = m.search;
-    if (s?.found && s.revealed) lines.push(`Ricerca al posto della pesca: trovata «${s.revealed.name}», mostrata a tutti.`);
-    else if (s) lines.push(`Ricerca al posto della pesca: «${c.nameOf?.(s.card) ?? s.card}» non è nel mazzo, pesca normale.`);
+    const s = m.search, named = (binding: string) => `«${c.nameOf?.(binding) ?? binding}»`;
+    // SB-16i (D97): a card announcing two names says both and the one chosen.
+    if (s?.announced && s.announced.length > 1) {
+      const both = s.announced.map(named).join(' o ');
+      if (s.found && s.revealed) lines.push(`Ricerca al posto della pesca: ${both}, scelta «${s.revealed.name}», trovata e mostrata a tutti.`);
+      else lines.push(`Ricerca al posto della pesca: ${both}, nessuna delle due nel mazzo, pesca normale.`);
+    }
+    else if (s?.found && s.revealed) lines.push(`Ricerca al posto della pesca: trovata «${s.revealed.name}», mostrata a tutti.`);
+    else if (s) lines.push(`Ricerca al posto della pesca: ${named(s.card)} non è nel mazzo, pesca normale.`);
+    // SB-16i (D97): «Gioca d'anticipo» says whether the move came first, and before which card when the target played one.
+    if (m.ahead !== undefined) {
+      const before = m.ahead && !m.self ? f.moves.find(o => o.author === m.target && o.index !== m.index) : undefined;
+      lines.push(m.ahead ? `Gioca d’anticipo: sì${before ? `, prima di «${before.card}»` : ''}.` : 'Gioca d’anticipo: no.');
+    }
+    if (m.plays !== undefined) lines.push(m.plays === 0 ? 'Rincara: prima giocata della partita.' : `Rincara: già giocata ${times(m.plays)} prima di questa.`);
     const title = `${i + 1}. ${who(m.author)} ${verb} «${m.card}» su ${onto}`;
     return s?.found && s.revealed ? {title, lines, revealed: {card: s.revealed, owner: m.author}} : {title, lines};
   });

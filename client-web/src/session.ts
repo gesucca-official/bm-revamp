@@ -249,10 +249,10 @@ export class Session {
     this.link.send(`/app/game/${this.gameId}/${this.user}/view`);
   }
 
-  submit(acceptWarning=false) {
+  submit(acceptWarning=false, searchChoice?: string) {
     const model = this.model;
     if (!model || !this.link || !this.gameId) return;
-    const command = model.confirm(acceptWarning);
+    const command = model.confirm(acceptWarning, searchChoice);
     if (!command) return;
     this.link.send(`/app/game/${this.gameId}/move`, JSON.stringify(command));
     this.emit();

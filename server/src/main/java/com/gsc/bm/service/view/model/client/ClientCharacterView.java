@@ -4,6 +4,7 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Timer;
 import com.gsc.bm.model.game.status.Status;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -26,4 +27,11 @@ public class ClientCharacterView {
     private final Set<Timer> timers;
 
     private final String sprite;
+    /**
+     * SB-16i («Rincara», D97), playground rules only: how many times this character played each card in the match, voided plays
+     * included, by card name in lower case. Public, as every play is. Always present with these rules (empty before the first
+     * play, so the client can say «never played»); absent with the live rules.
+     */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final Map<String, Integer> plays;
 }

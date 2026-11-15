@@ -71,10 +71,10 @@ public class Move implements Serializable {
 
     /**
      * SB-16i (D97), playground only: the card chosen by the player for «Annuncia X o Y», a binding printed on the played card
-     * with a copy in the deck when the move is sent; null leaves the first printed name with a copy. Optional, and not yet a
-     * protocol field: the bots set it, the client step of SB-16i will send it.
+     * with a copy in the deck when the move is sent; null leaves the first printed name with a copy. Optional. The bots set it;
+     * the client step of SB-16i (D102) sends it in the move command, so it is writable and never shown when the move is read.
      */
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ToString.Exclude
     @Setter
     private String searchChoice;
