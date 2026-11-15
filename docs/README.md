@@ -5,6 +5,17 @@ i documenti. Le altre pagine rimandano qui invece di ripetere lo stato.
 Il [regolamento](game-rules.md), con i documenti di set ([Set Base](sets/base.md)), resta la fonte normativa del gioco e prevale
 su codice, test, catalogo e documentazione storica ([istruzioni](../AGENTS.md)).
 
+## Filoni attivi
+
+Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza» in testa al piano
+([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)). Ogni filone aggiorna solo la propria riga.
+
+| Filone | Piano e stato | Macchina | Prossimo passo |
+|---|---|---|---|
+| Set Base | [piano](set-base-plan.md) | portatile | giudizio del proprietario sulla Fase B di SB-16i, poi passo del client e prova umana breve |
+| Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
+| Carriere, lavori anticipati | [tabella](product-roadmap.md#lavori-anticipati) | — | scrittura della campagna principale (CA-2) |
+
 ## Stato corrente
 
 Aggiornato al **14 novembre 2026**.
@@ -40,8 +51,10 @@ Documenti da seguire per lavorare sul progetto nello stato attuale.
 | Documento | Contenuto |
 |---|---|
 | [README del monorepo](../README.md) | Struttura, avvio rapido, conservazione delle cronologie |
-| [AGENTS.md](../AGENTS.md), [CONTRIBUTING.md](../CONTRIBUTING.md) | Regole di modifica e **verifiche obbligatorie** (fonte unica dei comandi di verifica) |
-| [Orchestrazione del lavoro](orchestrazione-lavoro.md) | Metodo, non stato: ruoli, prompt per gli esecutori, proposta di modello e sforzo, revisione delle relazioni, insidie delle verifiche, coordinamento |
+| [AGENTS.md](../AGENTS.md), [CONTRIBUTING.md](../CONTRIBUTING.md) | Regole di modifica e **comandi di verifica** (fonte unica dei comandi; quali eseguire lo dice la tabella delle aree) |
+| [Orchestrazione del lavoro](orchestrazione-lavoro.md) | Metodo, non stato, per ogni filone e macchina: ruoli, le quattro righe del prompt, STOP, contratto dell'esecutore, decisioni e deviazioni, revisione, parallelo, avvio di un filone, allineamento fra le macchine |
+| [Aree protette e verifiche](aree-protette.md) | Fonte unica per **scegliere** le verifiche: per ogni area, quali modifiche fanno scattare quale verifica e con quale esito si prosegue |
+| [Verifiche del client](verifiche-client.md) | Insidie degli strumenti di `client-web` e punti di revisione propri del client; si legge solo quando servono |
 | [Guida locale](setup.md) | Installazione, avvio, dati locali, verifiche e candidato I22 |
 | [CLI](cli.md) | Client testuale per scenari applicativi |
 | [Regolamento 1.13](game-rules.md) e [Set Base 0.1](sets/base.md) | Fonte normativa: sistema e carte del set; le copie client, l'allegato e il catalogo sono controllati da `scripts/check-rules.py` |

@@ -4,9 +4,14 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-**Stato (15 novembre 2026, dopo la Fase B di SB-16i, [D97](#decisioni-del-proprietario)).** Questo documento è lo **stato**: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md), le decisioni D1–D97 nel [registro](set-base-decisioni.md#decisioni-del-proprietario). Le regole del playground in vigore (d50) sono in [regole-playground.md](design/set-base/regole-playground.md); le liste e i testi degli starter della bozza di riferimento 1.6 in [bozza-di-riferimento.md](design/set-base/bozza-di-riferimento.md).
+> **Ripartenza** (aggiornata il 15 novembre 2026, dopo la Fase B di SB-16i, commit `336e0ff`). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+>
+> - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); ultima bozza di riferimento approvata **1.5** ([D92](#decisioni-del-proprietario)).
+> - **In attesa:** giudizio del proprietario sulla Fase B di [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima): la **1.6** è attuata e misurata ([rapporto](reports/set-base/sb-16i-report.md), [domande](reports/set-base/sb-16i-report.md#domande-al-proprietario); liste e testi in [bozza-di-riferimento.md](design/set-base/bozza-di-riferimento.md)).
+> - **Prossimo:** dopo il giudizio, il passo del client e la prova umana breve, poi SB-17. B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D97).
 
-Il lavoro procede su istruzione del proprietario, a blocchi ([metodo](orchestrazione-lavoro.md#sessioni-avviate-dalla-regia)). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati; la partita viva resta al regolamento **1.13** e al Set Base 0.1 (le regole `d50` valgono solo nel playground). SB-16g e SB-16h sono chiusi: la **1.5** è la bozza di riferimento ([D92](#decisioni-del-proprietario)), il formato resta **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)). **Prossimo:** giudizio del proprietario sulla Fase B di [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima) ([rapporto](reports/set-base/sb-16i-report.md)), poi il passo del client e la prova umana breve; B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura. Stato corrente nell'[indice della documentazione](README.md#stato-corrente).
+Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
 ## Obiettivo e regole comuni
 
@@ -24,10 +29,9 @@ Valgono per **ogni** blocco:
   aggiorna un atteso per accettare una regressione.
 - **Il playground non è normativo.** Finché una carta vive nella bozza si può cambiare senza
   toccare il regolamento. Nulla della bozza raggiunge le partite normali prima di SB-28.
-- **Verifiche:** `./scripts/build.ps1 -Task Test -Offline` e `python scripts/check-rules.py`
-  sempre; `./scripts/build.ps1 -Task TestServerContext -Offline` quando il blocco tocca il contesto
-  Spring o i percorsi CLI (test unitari verdi non provano l'avvio); le verifiche di `client-web`
-  quando il blocco tocca il client. Vale il [metodo del piano C3](client-c3-plan.md#obiettivo-e-regole-comuni)
+- **Verifiche:** secondo la [tabella delle aree](aree-protette.md), che dice quali modifiche fanno
+  scattare test del server, `check-rules.py`, contesto Spring, identità e verifiche di `client-web`
+  (test unitari verdi non provano l'avvio). Per il client vale il [metodo del piano C3](client-c3-plan.md#obiettivo-e-regole-comuni)
   (partite reali, database temporaneo, 1366×768 e 844×390).
 - **Numeri riproducibili:** ogni misura dichiara seme, numero di partite, bot e versione della
   bozza. Un risultato senza questi dati non motiva una modifica.
@@ -251,7 +255,7 @@ senza file di `server/src/main`. Da SB-8 il caricatore della bozza (`com.gsc.bm.
 sviluppo (profilo `bozza`) deve giocarle; senza il profilo non sono raggiungibili. La regola diventa: **nessun file di `server/src/main`
 cambiato fuori da `com/gsc/bm/sim` e `com/gsc/bm/model/cards/base`**, più nessun cambiamento a `cards.sqlite`, regolamento, documento
 del set, allegato e client. Un cambiamento a quei due package resta un cambiamento della bozza, non della partita viva; uno a
-`com/gsc/bm/bozza` (le fabbriche del profilo) è uno strumento, da dichiarare.
+`com/gsc/bm/bozza` (le fabbriche del profilo) è uno strumento, da dichiarare. Dal 15 novembre 2026 condizioni e verifiche operative di questa regola sono nella [tabella delle aree](aree-protette.md#playground-e-misure); motore e bot stanno fuori dai due package e seguono la riga della partita viva.
 
 ## Blocchi
 

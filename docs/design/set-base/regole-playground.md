@@ -8,7 +8,7 @@
 
 **Interruttore.** `Ruleset`: `1.13` (partita viva) o `d50`. Il profilo `bozza` parte con `d50` (`app.bozza.regole`), il runner con `-Dsim.rules=d50` ([D54](../../set-base-decisioni.md#decisioni-del-proprietario), punto 4; [SB-16c](../../set-base-plan.md#sb-16c--regole-decise-in-sb-16b-nel-playground)). Con `1.13` nessuna regola qui sotto vale.
 
-Come si cambia questo documento: una regola nuova del playground entra qui con versione e fonte ([igiene dei documenti](../../orchestrazione-lavoro.md#igiene-dei-documenti-del-set-base)); una regola rivista cambia versione e dice quale fonte sostituisce.
+Come si cambia questo documento: una regola nuova del playground entra qui con versione e fonte ([igiene dei documenti](../../orchestrazione-lavoro.md#igiene-dei-documenti)); una regola rivista cambia versione e dice quale fonte sostituisce.
 
 ## 1. Regole di sistema (SB-16b, D50)
 

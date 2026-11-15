@@ -2,7 +2,7 @@
 
 > **Origine.** Registro delle decisioni D1–D96 del proprietario sul Set Base, spostate da [docs/set-base-plan.md](set-base-plan.md) nel consolidamento della documentazione (decisione D96, 14 novembre 2026; piano di partenza: commit `8f2608a`), **parola per parola e nello stesso ordine**. Unici adattamenti: i target dei link (le ancore che puntavano al piano ora puntano al piano o a questo registro) e la colonna «Stato» aggiunta in fondo a ogni riga, scritta dal consolidamento. Le righe separate da righe vuote nel piano sono qui una tabella continua. Prova: [verifica-spostamenti.py](reports/set-base/consolidamento/verifica-spostamenti.py).
 >
-> **Colonna «Stato».** «in vigore»; «superata da Dxx»; «in parte superata da Dxx (punto n)»; «da verificare» (dubbio da sciogliere con la regia). Una decisione è segnata come superata solo se una decisione successiva lo dice esplicitamente («rivede», «sostituisce») o se è incompatibile in modo evidente; «precisa» e «comprende» non la superano. Chi supera una decisione ne aggiorna lo stato nello stesso commit ([igiene dei documenti](orchestrazione-lavoro.md#igiene-dei-documenti-del-set-base)).
+> **Colonna «Stato».** «in vigore»; «superata da Dxx»; «in parte superata da Dxx (punto n)»; «da verificare» (dubbio da sciogliere con la regia). Una decisione è segnata come superata solo se una decisione successiva lo dice esplicitamente («rivede», «sostituisce») o se è incompatibile in modo evidente; «precisa» e «comprende» non la superano. Chi supera una decisione ne aggiorna lo stato nello stesso commit ([igiene dei documenti](orchestrazione-lavoro.md#igiene-dei-documenti)).
 
 ## Decisioni del proprietario
 

@@ -8,7 +8,10 @@ Ogni cambiamento deliberato al comportamento richiede prima una versione e una
 motivazione nel regolamento (sistema) o nel documento del set (carte), poi test, codice, descrizioni SQLite e copia client
 nella stessa modifica. Non aggiornare gli attesi per accettare regressioni.
 
-Prima di proporre una modifica eseguire dalla radice:
+Quali verifiche eseguire dipende da ciò che la modifica tocca: lo stabilisce la
+[tabella delle aree](docs/aree-protette.md), fonte unica della scelta. Questa
+pagina dà i comandi. Quelli del server, dalla radice (i primi due per ogni
+modifica al server, gli altri due quando la tabella li chiede):
 
 ```powershell
 ./scripts/build.ps1 -Task Test -Offline
@@ -43,6 +46,7 @@ Un rosso del pool si rilancia da solo a macchina ferma, prima di attribuirlo; pe
 `-Only`, `-Measures`, `-Quick`, `-ReuseJar` e `-ReuseClient` dichiarano giri parziali o riusi nel riepilogo; per `-Only` includere sempre
 `test,build,size`. `-Measures 1920x1080 -Only 'test,build,size,verify,layout'` resta disponibile come giro dichiarato, non pubblicabile.
 Per blocco valgono le verifiche mirate D16; la matrice completa si esegue alla fine di C4.
+Insidie e punti di revisione: [verifiche del client](docs/verifiche-client.md).
 
 Documenti e revisione. Il controllo dei link (relativi e ancore dei `.md` in `docs/`, `CONTRIBUTING.md`, `AGENTS.md`,
 `client-web/README.md`; esce con 1 se ce ne sono di rotti) e il riepilogo di un blocco per chi lo rivede (file per categoria e fuori
