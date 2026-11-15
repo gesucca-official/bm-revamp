@@ -246,3 +246,8 @@ dopo aver ricevuto il lavoro di un'altra.
    l'allegato del catalogo vivo e si ferma alla prima carta della bozza; SB-8 l'ha provato da una copia fuori dal repository
    ([diff](reports/set-base/sb-8/verify-bozza.diff)). Un'opzione che scelga il riferimento è un cambiamento a
    `client-web/tools/verify.mjs`, da valutare dentro un blocco che tocca lo strumento.
+2. **Dal Set Base al client: `restOn` robusto** ([D103](set-base-decisioni.md#decisioni-del-proprietario) (1), rosso noto
+   [R6](reports/rossi-noti.md#aperte)). In `client-web/tools/verify-resolution.mjs` `restOn` chiede il riquadro del pulsante (i)
+   senza controllare che ci sia ancora: nella corsa voluta col clic su ✓ può essere già sparito, ed è un esito della corsa, non un
+   errore. Blocco piccolo che tocca lo strumento, dopo la prova umana breve della 1.6b, con le verifiche dell'area «Client web»;
+   chiude R6.
