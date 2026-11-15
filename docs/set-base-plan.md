@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 15 novembre 2026, dopo D99). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 15 novembre 2026, dopo la Fase B2 di SB-16i e D100). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
-> - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); ultima bozza di riferimento approvata **1.5** ([D92](#decisioni-del-proprietario)); la 1.6 è in `bozza.json`, misurata ma non approvata ([rapporto](reports/set-base/sb-16i-report.md)).
-> - **In attesa:** revisione del [rapporto della Fase B2](reports/set-base/sb-16i-b2-report.md) di [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), domanda 1 (adozione della 1.6b, ora in `bozza.json`: 1 incontro su 15 fuori, le patte accettate dello specchio di Celestina).
-> - **Prossimo:** rapporto della B2 al proprietario, poi il passo del client e la prova umana breve, poi SB-17. B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D99).
+> - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); ultima bozza di riferimento approvata **1.5** ([D92](#decisioni-del-proprietario)); in `bozza.json` la **1.6b** (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario)), misurata ma non ancora adottata ([rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.6 resta nel commit `336e0ff`.
+> - **In attesa:** il proprietario, dopo la revisione della regia, sul [rapporto della Fase B2](reports/set-base/sb-16i-b2-report.md) di [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), domanda 1 (adozione della 1.6b, ora in `bozza.json`: 1 incontro su 15 fuori, le patte accettate dello specchio di Celestina).
+> - **Prossimo:** dopo l'adozione, il passo del client e la prova umana breve, poi SB-17. B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D100).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -609,7 +609,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D99 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D100 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
