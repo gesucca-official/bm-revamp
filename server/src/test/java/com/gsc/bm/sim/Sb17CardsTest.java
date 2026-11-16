@@ -328,7 +328,7 @@ class Sb17CardsTest {
     // ---- Lo sanno tutti (CES-AR5, D110 (1)): the unconditional strike ----
 
     @Test
-    void loSannoTuttiCostsTwentyAlertnessAndDealsTwentyFourHit() {
+    void loSannoTuttiCostsFifteenAlertnessAndDealsTwentyFourHit() {
         Card card = draft.card("base.cesira.LoSannoTutti");
         assertEquals(1, card.getPriority());
         assertEquals(Map.of(Damage.DamageType.HIT, 24), base("base.cesira.LoSannoTutti"), "20, riserva R1 del giro 1 (D110)");
@@ -336,7 +336,7 @@ class Sb17CardsTest {
         Game game = game(sergio("base.cesira.LoSannoTutti"), b);
         int before = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
         assertEquals(24, turn(game, move(game, "s", "Lo sanno tutti", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
-        assertEquals(before - 20, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "20 A paid: 15, riserva R3 del giro 2 (D110)");
+        assertEquals(before - 15, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "15 A paid: R3 (20 A) tolta, stato del giro 2 (D112)");
     }
 
     // ---- generics and items of the test deck (D107) ----

@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `4ee884cf156a…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `d35297bde561…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 93 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 6 personaggi, 5 starter e, di prova, 1 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -162,25 +162,25 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 
 ### Mazzo di prova di Sergio Sommerso — `prova-sergio`
 
-Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 5 · NC 12 · R 3).
+Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 7 · NC 10 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
 | basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +5 A a sé, poi consuma un proprio oggetto. |
-| bound | **Mi informo** (`base.cesira.bound.MiInformo`) | NC | CES-BO1 · Bound: +8 A a sé. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
+| bound | **Frecciatina al volo** (`base.cesira.bound.FrecciatinaAlVolo`) | NC | CES-BO3 · Bound: 2 HIT al bersaglio. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Oh, guarda là** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Conto salato o Malelingue. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
+| 2 | **Oh, guarda là** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Lo sanno tutti o Conto salato. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 A: annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 2 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 A: annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
-| 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 12 HIT. |
-| 2 | **Fare il vago** (`base.cesira.FareIlVago`) | C | CES-AR5 · 5 A: CUT ricevuto ×0,5 e HIT ×0,75 in questo turno. +5 A a sé. |
+| 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
-| 2 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 V: −10 A e 12 HIT al bersaglio. |
+| 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 V: −10 A e 12 HIT al bersaglio. |
 | 1 | **Sgambetto** (`base.com.Sgambetto`) | R | GEN-23 · 10 A: −10 V e 5 HIT al bersaglio. |
-| 1 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità. |
 | 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio. |
-| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 
