@@ -195,7 +195,8 @@ final class DataCards {
                 String where = "self[" + i + "]: vendi ";
                 if (kind == Kind.ITEM) throw invalid(where + "non è ammesso in un oggetto: un oggetto non si gioca");
                 if (kind == Kind.BOUND) throw invalid(where + "non è ammesso in una bound: una bound non può bersagliare oggetti");
-                if (!basic) throw invalid(where + "vale solo in una basic: vende l'oggetto che la basic bersaglia");
+                // SB-17 B5e (D120, deroga del playground, sim): ammessa anche in una regolare (non last resort) col solo bersaglio NEAR_ITEM.
+                if (lastResort) throw invalid(where + "non è ammesso in una last resort: deve essere sempre giocabile");
                 if (!Set.of(Card.CardTarget.NEAR_ITEM).equals(targets))
                     throw invalid(where + "richiede targets solo NEAR_ITEM: si vende l'oggetto bersagliato");
                 if (consumes()) throw invalid(where + "e consume si escludono");

@@ -513,8 +513,9 @@ class Sb17CardsTest {
         Map<String, String> cases = new java.util.LinkedHashMap<>();
         cases.put(bound + "'targets':['SELF'],'self':[" + sale + "]}", "non è ammesso in una bound");
         cases.put(bound + "'targets':['NEAR_ITEM'],'self':[" + sale + "]}", "non è ammesso in una bound");
-        cases.put("{'binding':'t.V','kind':'ACTION','targets':['NEAR_ITEM'],'self':[" + sale + "]}", "vale solo in una basic");
-        cases.put("{'binding':'t.V','kind':'ACTION','lastResort':true,'targets':['NEAR_ITEM'],'self':[" + sale + "]}", "vale solo in una basic");
+        // B5e (D120, deroga del playground, sim): una regolare può vendere, ma solo con bersaglio NEAR_ITEM e mai come last resort.
+        cases.put("{'binding':'t.V','kind':'ACTION','targets':['SELF'],'self':[" + sale + "]}", "richiede targets solo NEAR_ITEM");
+        cases.put("{'binding':'t.V','kind':'ACTION','lastResort':true,'targets':['NEAR_ITEM'],'self':[" + sale + "]}", "non è ammesso in una last resort");
         cases.put(basic + "'targets':['SELF'],'self':[" + sale + "]}", "richiede targets solo NEAR_ITEM");
         cases.put(basic + "'targets':['SELF','NEAR_ITEM'],'self':[" + sale + "]}", "richiede targets solo NEAR_ITEM");
         cases.put(basic + "'targets':['NEAR_ITEM'],'target':[" + sale + "]}", "vendi vale solo in self");
@@ -534,6 +535,8 @@ class Sb17CardsTest {
             assertTrue(text.toString().contains(message), json + " -> " + text);
         });
         assertDoesNotThrow(() -> DataCards.definition(JSON.readTree((basic + "'targets':['NEAR_ITEM'],'self':[" + sale + "]}").replace('\'', '"'))));
+        assertDoesNotThrow(() -> DataCards.definition(JSON.readTree(("{'binding':'t.V','kind':'ACTION','targets':['NEAR_ITEM'],'self':[" + sale + "]}")
+                .replace('\'', '"'))), "B5e: a regular card with only NEAR_ITEM may sell");
     }
 
     // ---- Fare il vago (CES-BO3, D118 (4)): the light parry bound ----
