@@ -304,7 +304,7 @@ public final class ViewTable {
     private static BotView.CardSeen copyCard(BotView.CardSeen c) {
         return new BotView.CardSeen(c.getName(), c.getBinding(), c.isItem(), c.isBasicAction(), c.isLastResort(),
                 c.isCharacterBound(), c.getPriority(), c.getCanTarget(), c.getCost(), c.getRole(), c.getGains(),
-                c.getDamage(), c.getDamageAmount(), c.isLastBlow(), c.getEffects());
+                c.getDamage(), c.getDamageAmount(), c.isLastBlow(), c.getEffects(), c.getConsumed());
     }
 
     /** A token whose mark is not shown (the copy left the hand) still has a mark in the engine: keep it, without a card. */

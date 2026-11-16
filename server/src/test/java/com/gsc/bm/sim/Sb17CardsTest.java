@@ -254,7 +254,7 @@ class Sb17CardsTest {
         assertFalse(game.getPlayers().get("b").getRevealed().isEmpty(), "the mark of the found card stays with the token");
         assertEquals(50, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "60 − 10 A paid");
         // As after a discard (D71): with no copy left, the token lasts one more whole turn.
-        assertEquals(30, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 12) × 1,5, riserva del giro 3");
+        assertEquals(21, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 6) × 1,5, B2 (D110)");
         assertTrue(tokens(game, "b").isEmpty(), "ended a turn after the last copy left the hand");
     }
 
@@ -293,7 +293,7 @@ class Sb17CardsTest {
     // ---- Conto salato (CES-AR4): the condition on the token ----
 
     @Test
-    void contoSalatoDealsEightOrTwentyOnAToken() {
+    void contoSalatoDealsEightOrFourteenOnAToken() {
         List<Card> deck = new ArrayList<>(List.of(filler("Riempitivo")));
         deck.addAll(strikeOnTop()); // the first draw is a filler: the strike is still in the deck for the charge
         Player b = opponent(List.of(charge()), deck);
@@ -301,7 +301,7 @@ class Sb17CardsTest {
         assertEquals(8, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "no token");
         turn(game, move(game, "s", "Riempitivo", "SELF"), move(game, "b", "Carica", "SELF"));
         assertFalse(tokens(game, "b").isEmpty());
-        assertEquals(30, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 12) × 1,5, riserva del giro 3");
+        assertEquals(21, turn(game, move(game, "s", "Conto salato", "b"), move(game, "b", "Riempitivo", "SELF"))[1], "(8 + 6) × 1,5, B2 (D110)");
     }
 
     @Test
@@ -314,14 +314,29 @@ class Sb17CardsTest {
                 + "'target':[{'op':'gettone','steps':[{'op':'gettone','steps':[]}]}]}").replace('\'', '"'))));
         PrintedEffects printed = ((PrintedEffects.Source) draft.card("base.cesira.ContoSalato")).printedEffects();
         assertEquals(2, printed.getSteps().stream().filter(st -> st.getKind() == PrintedEffects.Kind.DAMAGE).count());
-        assertEquals(1, printed.getSteps().stream().filter(PrintedEffects.Step::isIfToken).count(), "the second 8 HIT only on a token");
+        assertEquals(1, printed.getSteps().stream().filter(PrintedEffects.Step::isIfToken).count(), "the +6 HIT (B2, D110) only on a token");
     }
 
     // ---- Oh, guarda là (CES-AR1, D106 (1)): Sergio's charge ----
 
     @Test
-    void ohGuardaLaAnnouncesContoSalatoOrMalelingue() {
-        assertEquals(List.of("base.cesira.ContoSalato", "base.cesira.Malelingue"), PrintedEffects.searchedNames(draft.card("base.cesira.OhGuardaLa")));
+    void ohGuardaLaAnnouncesLoSannoTuttiOrContoSalato() {
+        // SB-17 B2 (D110): Lo sanno tutti o Conto salato (era Conto salato o Malelingue).
+        assertEquals(List.of("base.cesira.LoSannoTutti", "base.cesira.ContoSalato"), PrintedEffects.searchedNames(draft.card("base.cesira.OhGuardaLa")));
+    }
+
+    // ---- Lo sanno tutti (CES-AR5, D110 (1)): the unconditional strike ----
+
+    @Test
+    void loSannoTuttiCostsTwentyAlertnessAndDealsTwentyFourHit() {
+        Card card = draft.card("base.cesira.LoSannoTutti");
+        assertEquals(1, card.getPriority());
+        assertEquals(Map.of(Damage.DamageType.HIT, 24), base("base.cesira.LoSannoTutti"), "20, riserva R1 del giro 1 (D110)");
+        Player b = opponent(List.of(filler("Riempitivo")), fillers(10));
+        Game game = game(sergio("base.cesira.LoSannoTutti"), b);
+        int before = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
+        assertEquals(24, turn(game, move(game, "s", "Lo sanno tutti", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
+        assertEquals(before - 20, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "20 A paid: 15, riserva R3 del giro 2 (D110)");
     }
 
     // ---- generics and items of the test deck (D107) ----

@@ -1,0 +1,5 @@
+banco sb-7/1
+bozza classpath:/set-base/bozza.json
+ricerche 2
+thread 8
+secondi 136.329

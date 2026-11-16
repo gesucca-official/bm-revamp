@@ -165,6 +165,7 @@ public class BotView {
 
     /** Public card text and numbers. Policies decide on these, never on card names. */
     @Value
+    @AllArgsConstructor
     public static class CardSeen {
         private static final Pattern FIRST_NUMBER = Pattern.compile("\\d+");
 
@@ -185,6 +186,25 @@ public class BotView {
         boolean lastBlow;
         /** D76: the printed text as numbers, or null when the card cannot describe itself. */
         PrintedEffects effects;
+        /**
+         * SB-17 B2 (D111): for an item that cannot describe itself (a legacy Java item, {@code effects} null), its public consumed
+         * text read by {@link PrintedEffects#consumedText}; null otherwise. Only the forecast of a grab reads it: the styles keep
+         * reading {@code effects}, so the boundary of the legacy items for their choices does not move.
+         */
+        PrintedEffects consumed;
+
+        /** The text without a consumed part, as before SB-17 B2. */
+        public CardSeen(String name, String binding, boolean item, boolean basicAction, boolean lastResort, boolean characterBound,
+                        int priority, Set<Card.CardTarget> canTarget, Map<Resource, Integer> cost, String role, String gains,
+                        String damage, String damageAmount, boolean lastBlow, PrintedEffects effects) {
+            this(name, binding, item, basicAction, lastResort, characterBound, priority, canTarget, cost, role, gains, damage,
+                    damageAmount, lastBlow, effects, null);
+        }
+
+        /** What a grab of this item applies to its author: the printed effects, else the consumed text, else null. */
+        public PrintedEffects consumedEffects() {
+            return effects != null ? effects : consumed;
+        }
 
         /** Fixed part of the catalog's nominal damage: "HIT 20+x" gives 20, no damage gives 0. */
         public int nominalDamage() {
@@ -361,11 +381,14 @@ public class BotView {
 
     private static CardSeen seen(Card card) {
         AbstractCard text = card instanceof AbstractCard ? (AbstractCard) card : null;
+        PrintedEffects effects = card instanceof PrintedEffects.Source ? ((PrintedEffects.Source) card).printedEffects() : null;
+        // SB-17 B2 (D111): a legacy Java item keeps effects null for the styles; its consumed text is for the forecast only.
+        PrintedEffects consumed = effects == null && card.isItem() ? PrintedEffects.consumedText(card) : null;
         return new CardSeen(card.getName(), card.getBindingName(), card.isItem(), card.isBasicAction(), card.isLastResort(),
                 card.isCharacterBound(), card.getPriority(), Set.copyOf(card.getCanTarget()), Map.copyOf(card.getCost()),
                 text == null ? null : text.getRole(), text == null ? null : text.getGains(),
                 text == null ? null : text.getDamage(), text == null ? null : text.getDamageAmount(), card.isLastBlow(),
-                card instanceof PrintedEffects.Source ? ((PrintedEffects.Source) card).printedEffects() : null);
+                effects, consumed);
     }
 
     /**

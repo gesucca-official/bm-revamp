@@ -1,0 +1,41 @@
+{
+ "note": "SB-17 B2 (D111), fidelity tests per mutation",
+ "results": [
+  {
+   "mutation": "forecast ignores the consumed text",
+   "file": "TurnForecast.java",
+   "killed": true,
+   "seconds": 25.2,
+   "failures": [
+    "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 6.724 s <<< FAILURE! - in com.gsc.bm.sim.ViewTableFidelityTest",
+    "[ERROR]   TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn:32->check:88 seed 7100203 turn 3 seen by seat-2: {seat-2=51, seat-1=57} not in [{seat-2=51, seat-1=55}] moves [Move(playedCardName=Grab, playerId=seat-1, targetId=SELF, gameId=6c8927a33e6d9d02c6dad983c130f095eb05ad2c10d1a80e058",
+    "[ERROR]   ViewTableFidelityTest.equivalenceAndTwoTurnFidelity:30->check:74->lambda$check$12:111 seed 7100203 turn 3 moves seat-1:Grab, seat-2:STORDIAMOTI HO DETTO after seat-1:Estasi da Coca Etilene, seat-2:Frecciatina al volo first-turn equivalence seen by seat-2 ==> expected: <[{seat-2=51, seat-1=",
+    "[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "consumed text given to non-items only",
+   "file": "BotView.java",
+   "killed": true,
+   "seconds": 25.3,
+   "failures": [
+    "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 6.771 s <<< FAILURE! - in com.gsc.bm.sim.ViewTableFidelityTest",
+    "[ERROR]   TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn:32->check:88 seed 7100203 turn 3 seen by seat-2: {seat-2=51, seat-1=57} not in [{seat-2=51, seat-1=55}] moves [Move(playedCardName=Grab, playerId=seat-1, targetId=SELF, gameId=39696b690561b1212e1c3a6c3f4f5878d1f54d85da2b2799aa5",
+    "[ERROR]   ViewTableFidelityTest.equivalenceAndTwoTurnFidelity:30->check:74->lambda$check$12:111 seed 7100203 turn 3 moves seat-1:Grab, seat-2:STORDIAMOTI HO DETTO after seat-1:Estasi da Coca Etilene, seat-2:Frecciatina al volo first-turn equivalence seen by seat-2 ==> expected: <[{seat-2=51, seat-1=",
+    "[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "consumed text preferred to the printed effects",
+   "file": "BotView.java",
+   "killed": true,
+   "seconds": 16.7,
+   "failures": [
+    "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.109 s <<< FAILURE! - in com.gsc.bm.sim.ViewTableFidelityTest",
+    "[ERROR]   TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn:27->check:88 seed 7100002 turn 10 seen by seat-2: {seat-2=9, seat-1=26} not in [{seat-2=10, seat-1=26}, {seat-2=10, seat-1=26}] moves [Move(playedCardName=Dose in preparazione, playerId=seat-1, targetId=SELF, gameId=2aee3aafdd8",
+    "[ERROR]   ViewTableFidelityTest.equivalenceAndTwoTurnFidelity:26->check:74->lambda$check$12:111 seed 7100002 turn 10 moves seat-1:Dose in preparazione, seat-2:ADOPERIAMOTI after seat-1:Ago Marcio e Spezzato, seat-2:NON GIOCARE COL COLTELLO NO first-turn equivalence seen by seat-2 ==> expected: <[{se",
+    "[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0"
+   ]
+  }
+ ]
+}

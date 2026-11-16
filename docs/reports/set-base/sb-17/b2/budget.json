@@ -1,0 +1,9 @@
+{"capWallSeconds":1000,"items":[
+ {"phase":"feasibility","cap":50,"wallSeconds":8.8,"gamesPerCell":4},
+ {"phase":"round-1","cap":200,"wallSeconds":115.9,"gamesPerCell":300,"draft":"D110"},
+ {"phase":"round-2","cap":200,"wallSeconds":107.2,"gamesPerCell":300,"draft":"D110 + R1"},
+ {"phase":"round-3","cap":200,"wallSeconds":114.1,"gamesPerCell":300,"draft":"D110 + R1 + R3"},
+ {"phase":"search","cap":200,"wallSeconds":140.2}],
+ "spentWallSeconds":486.2,"reserveUsed":0,
+ "outside":"step0 base/new 22.5, live identity base/new 152.6, suites, TestServerContext, mutations ~67, diagnosis",
+ "runner":"docs/reports/set-base/sb-17/run.ps1 -OutputRoot %TEMP%/bm-sb17-b2/run"}

@@ -214,9 +214,9 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | GIG-BO1 | Beppe | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Beppe | bozza «Una stretta e passa», senza i 3 HIT | Generatrice della moneta degli attrezzi | dati |
 | GIG-BO2 | Beppe | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Beppe | da inventare («Colpo di cacciavite») | Colpetto, amplificato dai guanti | dati |
 | GIG-BO3 | Beppe | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | da inventare («Lima») | Variante veloce | dati |
-| CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Mi informo» (SB-17) | Generatrice: le letture costano A | dati |
+| CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Mi informo» (SB-17), nella collezione (B2, D110) | Generatrice: le letture costano A | dati |
 | CES-BO2 | Sergio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | bozza «Battutina» (SB-17) | Colpetto | dati |
-| CES-BO3 | Sergio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | bozza «Frecciatina al volo» (SB-17), nella collezione | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
+| CES-BO3 | Sergio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | bozza «Frecciatina al volo» (SB-17), ~~nella collezione~~ nel mazzo di prova (B2, D110) | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
 | ROC-BO1 | Duccio | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
 | ROC-BO2 | Duccio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
 | ROC-BO3 | Duccio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Duccio ha la A più bassa | dati |
@@ -305,11 +305,11 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| CES-AR1 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | −10 A al bersaglio; 4 HIT. Annuncia Conto salato o Malelingue (SB-17, D106). Se lo trovi: +15 A. Se non lo trovi: +5 A | NC | — | bozza «Oh, guarda là», più 4 HIT; C → NC (SB-17, D106) | Attacco: la frecciatina | dati |
+| CES-AR1 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | −10 A al bersaglio; 4 HIT. Annuncia ~~Conto salato o Malelingue (SB-17, D106)~~ Lo sanno tutti o Conto salato (SB-17 B2, D110). Se lo trovi: +15 A. Se non lo trovi: +5 A | NC | — | bozza «Oh, guarda là», più 4 HIT; C → NC (SB-17, D106) | Attacco: la frecciatina | dati |
 | CES-AR2 | Azione, regolare | COUNTER | F2 (15 A) | 2 | ~~Annulla la mossa successiva e ne esegue l'effetto sul bersaglio come autore~~ Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo (SB-17, D106) | NC | — | «Ricatto», al posto di `WhatchaDoin` (SB-17) | Il suo cuore; oggi non si gioca mai per i costi doppi | Java |
 | CES-AR3 | Azione, regolare | COUNTER | F1 (10 A) | 2 | ~~Annulla le mosse successive dirette a lei~~ Annulla la mossa del bersaglio se arriva dopo; se annulli il colpo che ha annunciato, il suo gettone resta (SB-17, D106, D108) | NC | — | bozza «Lo sapevo» (SB-17) | Seconda lettura | Java (`base.cesira.LoSapevo`) |
-| CES-AR4 | Azione, regolare | DAMAGE | F1 (~~5 V +~~ 5 A) | ~~2~~ 1 | ~~5 HIT; −5 A al bersaglio~~ 8 HIT; se il bersaglio ha un gettone di vulnerabilità, altri ~~8~~ 12 HIT (SB-17: D106, riserva del giro 3) | NC | — | «Conto salato», già «Parli troppo vicino» (SB-17) | Incassa la lettura | dati (gettone) |
-| CES-AR5 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | CUT ricevuto ×0,5 e HIT ×0,75 nel turno; +5 A a sé (SB-17) | C | — | bozza «Fare il vago» (SB-17) | Difesa | dati |
+| CES-AR4 | Azione, regolare | DAMAGE | F1 (~~5 V +~~ 5 A) | ~~2~~ 1 | ~~5 HIT; −5 A al bersaglio~~ 8 HIT; se il bersaglio ha un gettone di vulnerabilità, altri ~~8~~ ~~12~~ 6 HIT (SB-17: D106, riserva del giro 3; B2, D110) | NC | — | «Conto salato», già «Parli troppo vicino» (SB-17) | Incassa la lettura | dati (gettone) |
+| CES-AR5 | Azione, regolare | ~~DEFENSE~~ DAMAGE | ~~F1 (5 A)~~ F2 (~~15~~ 20 A, riserva R3 del giro 2) | ~~2~~ 1 | ~~CUT ricevuto ×0,5 e HIT ×0,75 nel turno; +5 A a sé (SB-17)~~ ~~20~~ 24 HIT al bersaglio (SB-17 B2, D110; riserva R1 del giro 1) | C | — | ~~bozza «Fare il vago» (SB-17)~~ «Lo sanno tutti» (SB-17 B2, D110) | ~~Difesa~~ Colpo proprio non condizionato | dati |
 | CES-AR6 | Azione, regolare | DISRUPT | F1 (10 A) | ~~2~~ 1 | Il bersaglio perde A pari a metà della A residua di Sergio; ~~5 HIT~~ HIT pari a 5 più metà della A residua (SB-17) | R | — | bozza «Malelingue» (SB-17) | Picco con A alta | dati (`of`) |
 
 **Duccio (6)**
@@ -444,7 +444,7 @@ La ricerca per mutazione di SB-7 dà poi il mazzo più forte di ciascuno come li
 | Celestina | TOS-AR2 (preparata da TOS-AR1) | TOS-AR3 | TOS-AR4 (annulla) |
 | Piera | PIN-AR1, PIN-AR2 (preparata da PIN-AR4) | PIN-AR3 | PIN-AR5 (−A) |
 | Beppe | GIG-AR2, GIG-AR5 (preparata da GIG-AR3), OGG-09 | GIG-AR4, OGG-10, OGG-11 | GIG-AR1 (distrugge); GEN-02 |
-| Sergio | CES-AR1, CES-AR6 | CES-AR5 | CES-AR2, CES-AR3 (annullano) |
+| Sergio | CES-AR1, CES-AR4, CES-AR5 (SB-17 B2), CES-AR6 | ~~CES-AR5~~ — (SB-17 B2, D110: nessuna parata pura, D52 (1)) | CES-AR2, CES-AR3 (annullano) |
 | Duccio | ROC-AR1, ROC-AR4 | ROC-AR2 | ROC-AR3 (para e risponde) |
 
 Coppie da tenere distinte (SB-9): Mara non annulla, Sergio sì; Beppe non ha colpi oltre F2, salvo GEN-06 in prestito.

@@ -445,9 +445,11 @@ public final class TurnForecast {
                 BotView.CardSeen item = act.author.items.get(i);
                 if (!item.getName().equals(act.item)) continue;
                 act.author.items.remove(i);
-                if (item.getEffects() == null) return;
+                // SB-17 B2 (D111): a legacy Java item (Tennents Super) applies its consumed text, as the engine does.
+                PrintedEffects text = item.consumedEffects();
+                if (text == null) return;
                 Map<Resource, Integer> start = new EnumMap<>(act.author.res);
-                for (PrintedEffects.Step step : item.getEffects().getSteps()) {
+                for (PrintedEffects.Step step : text.getSteps()) {
                     if (step.getKind() == PrintedEffects.Kind.GAIN && step.getResource() != null)
                         act.author.set(step.getResource(), act.author.get(step.getResource()) + amount(step, act.author, start, 0));
                     else if (step.getKind() == PrintedEffects.Kind.LOSE && step.getResource() != null)
