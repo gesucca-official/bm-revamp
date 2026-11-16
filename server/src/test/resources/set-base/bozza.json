@@ -773,11 +773,11 @@
         "base.cesira.Malelingue": 1,
         "bruiser.StunningBlow": 1,
         "base.com.Sgambetto": 1,
-        "base.com.TartarugaSulMarciapiede": 1,
+        "base.com.TartarugaSulMarciapiede": 2,
         "base.com.Spintone": 1,
-        "base.items.SantinoDellaPortinaia": 2,
+        "base.items.SantinoDellaPortinaia": 1,
         "base.items.EspressoDelDistributore": 2,
-        "com.items.RottenBeer": 1
+        "base.com.AcquaInFaccia": 1
       }
     }
   ]

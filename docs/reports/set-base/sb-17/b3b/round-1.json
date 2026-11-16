@@ -1,0 +1,461 @@
+{
+ "run": "round-1",
+ "games": 259200,
+ "violations": {
+  "senza-mosse": 0,
+  "mossa-vuota": 0,
+  "bound-gratuite": 0,
+  "basic-bound-in-mano": 0,
+  "last-resort-in-mano": 0,
+  "last-resort-giocabile": 0,
+  "bound-giocabile": 0,
+  "limite-turni": 0
+ },
+ "boundViolations": 0,
+ "rows": [
+  {
+   "foe": "prova-sergio",
+   "heur": {
+    "games": 24300,
+    "share": 45.49522154648132,
+    "draws": 5.267489711934156,
+    "turns": 11.333827160493827
+   },
+   "all": {
+    "games": 43200,
+    "share": 46.81650718294884,
+    "draws": 6.381944444444445,
+    "turns": 13.026875
+   },
+   "com": {
+    "games": 2700,
+    "share": 46.70027497708524,
+    "draws": 19.185185185185187,
+    "turns": 18.99962962962963
+   },
+   "gaps": {}
+  },
+  {
+   "foe": "starter-spazienzio",
+   "heur": {
+    "games": 24300,
+    "share": 72.88546808332636,
+    "draws": 1.6213991769547325,
+    "turns": 9.253374485596709
+   },
+   "all": {
+    "games": 43200,
+    "share": 66.87541670635298,
+    "draws": 2.787037037037037,
+    "turns": 10.215972222222222
+   },
+   "com": {
+    "games": 2700,
+    "share": 46.985210466439135,
+    "draws": 2.3333333333333335,
+    "turns": 13.251111111111111
+   },
+   "gaps": {
+    "quota": 7.89
+   }
+  },
+  {
+   "foe": "starter-mara",
+   "heur": {
+    "games": 24300,
+    "share": 67.17401471025892,
+    "draws": 3.205761316872428,
+    "turns": 10.41329218106996
+   },
+   "all": {
+    "games": 43200,
+    "share": 61.810504090789124,
+    "draws": 3.5208333333333335,
+    "turns": 11.004282407407407
+   },
+   "com": {
+    "games": 2700,
+    "share": 52.34093637454982,
+    "draws": 7.444444444444445,
+    "turns": 14.283333333333333
+   },
+   "gaps": {
+    "quota": 2.17
+   }
+  },
+  {
+   "foe": "starter-tossico",
+   "heur": {
+    "games": 24300,
+    "share": 41.355947214595695,
+    "draws": 7.0699588477366255,
+    "turns": 11.086008230452675
+   },
+   "all": {
+    "games": 43200,
+    "share": 41.722881481116744,
+    "draws": 5.976851851851852,
+    "turns": 11.41900462962963
+   },
+   "com": {
+    "games": 2700,
+    "share": 43.98570861452958,
+    "draws": 6.703703703703703,
+    "turns": 13.35037037037037
+   },
+   "gaps": {}
+  },
+  {
+   "foe": "starter-pino",
+   "heur": {
+    "games": 24300,
+    "share": 53.75599128540305,
+    "draws": 5.555555555555555,
+    "turns": 10.335843621399176
+   },
+   "all": {
+    "games": 43200,
+    "share": 52.77407793088417,
+    "draws": 4.414351851851852,
+    "turns": 11.384629629629629
+   },
+   "com": {
+    "games": 2700,
+    "share": 62.36385639370714,
+    "draws": 8.185185185185185,
+    "turns": 16.191481481481482
+   },
+   "gaps": {}
+  },
+  {
+   "foe": "starter-gigi",
+   "heur": {
+    "games": 24300,
+    "share": 58.61660246370063,
+    "draws": 2.786008230452675,
+    "turns": 8.216707818930042
+   },
+   "all": {
+    "games": 43200,
+    "share": 58.88152424393605,
+    "draws": 2.5625,
+    "turns": 9.33363425925926
+   },
+   "com": {
+    "games": 2700,
+    "share": 73.7357898863191,
+    "draws": 5.518518518518518,
+    "turns": 14.786666666666667
+   },
+   "gaps": {}
+  }
+ ],
+ "outside": [
+  "Spazienzio",
+  "Mara"
+ ],
+ "cardUse": {
+  "games": 170100,
+  "cards": [
+   {
+    "binding": "base.cesira.ContoSalato",
+    "name": "Conto salato",
+    "playedGamesShare": 83.15696649029982,
+    "playsPerGame": 1.1901998824221047,
+    "byFoe": {
+     "prova-sergio": 82.37,
+     "starter-spazienzio": 80.45,
+     "starter-mara": 84.11,
+     "starter-tossico": 87.9,
+     "starter-pino": 86.81,
+     "starter-gigi": 78.08
+    }
+   },
+   {
+    "binding": "base.cesira.LoMettoInConto",
+    "name": "Lo metto in conto",
+    "playedGamesShare": 76.97648442092887,
+    "playsPerGame": 1.1346796002351558,
+    "byFoe": {
+     "prova-sergio": 87.35,
+     "starter-spazienzio": 67.3,
+     "starter-mara": 81.0,
+     "starter-tossico": 78.74,
+     "starter-pino": 76.73,
+     "starter-gigi": 60.37
+    }
+   },
+   {
+    "binding": "base.cesira.LoSannoTutti",
+    "name": "Lo sanno tutti",
+    "playedGamesShare": 96.27395649617871,
+    "playsPerGame": 1.5745443856554968,
+    "byFoe": {
+     "prova-sergio": 95.24,
+     "starter-spazienzio": 96.79,
+     "starter-mara": 95.86,
+     "starter-tossico": 97.66,
+     "starter-pino": 97.83,
+     "starter-gigi": 95.3
+    }
+   },
+   {
+    "binding": "base.cesira.LoSapevo",
+    "name": "Lo sapevo",
+    "playedGamesShare": 24.542621987066433,
+    "playsPerGame": 0.30783068783068784,
+    "byFoe": {
+     "prova-sergio": 23.81,
+     "starter-spazienzio": 24.0,
+     "starter-mara": 22.74,
+     "starter-tossico": 27.77,
+     "starter-pino": 25.23,
+     "starter-gigi": 24.44
+    }
+   },
+   {
+    "binding": "base.cesira.Malelingue",
+    "name": "Malelingue",
+    "playedGamesShare": 51.6931216931217,
+    "playsPerGame": 0.5169312169312169,
+    "byFoe": {
+     "prova-sergio": 48.6,
+     "starter-spazienzio": 49.58,
+     "starter-mara": 52.41,
+     "starter-tossico": 61.24,
+     "starter-pino": 55.44,
+     "starter-gigi": 45.99
+    }
+   },
+   {
+    "binding": "base.cesira.OhGuardaLa",
+    "name": "Oh, guarda là",
+    "playedGamesShare": 75.80246913580247,
+    "playsPerGame": 1.0038154027042916,
+    "byFoe": {
+     "prova-sergio": 73.81,
+     "starter-spazienzio": 74.51,
+     "starter-mara": 75.67,
+     "starter-tossico": 83.12,
+     "starter-pino": 79.93,
+     "starter-gigi": 69.77
+    }
+   },
+   {
+    "binding": "base.cesira.Ricatto",
+    "name": "Ricatto",
+    "playedGamesShare": 18.520282186948855,
+    "playsPerGame": 0.1974132863021752,
+    "byFoe": {
+     "prova-sergio": 16.49,
+     "starter-spazienzio": 21.36,
+     "starter-mara": 14.12,
+     "starter-tossico": 12.67,
+     "starter-pino": 19.79,
+     "starter-gigi": 28.72
+    }
+   },
+   {
+    "binding": "base.cesira.bound.Battutina",
+    "name": "Battutina",
+    "playedGamesShare": 73.82186948853615,
+    "playsPerGame": 1.86885949441505,
+    "byFoe": {
+     "prova-sergio": 85.15,
+     "starter-spazienzio": 63.04,
+     "starter-mara": 77.71,
+     "starter-tossico": 77.53,
+     "starter-pino": 72.48,
+     "starter-gigi": 55.7
+    }
+   },
+   {
+    "binding": "base.cesira.bound.LoRivendo",
+    "name": "Lo rivendo",
+    "playedGamesShare": 23.947089947089946,
+    "playsPerGame": 0.3069370958259847,
+    "byFoe": {
+     "prova-sergio": 33.22,
+     "starter-spazienzio": 18.81,
+     "starter-mara": 23.1,
+     "starter-tossico": 16.96,
+     "starter-pino": 25.8,
+     "starter-gigi": 16.51
+    }
+   },
+   {
+    "binding": "base.com.AcquaInFaccia",
+    "name": "Acqua in faccia",
+    "playedGamesShare": 27.962375073486186,
+    "playsPerGame": 0.27962375073486184,
+    "byFoe": {
+     "prova-sergio": 27.95,
+     "starter-spazienzio": 26.9,
+     "starter-mara": 26.95,
+     "starter-tossico": 36.05,
+     "starter-pino": 29.75,
+     "starter-gigi": 20.19
+    }
+   },
+   {
+    "binding": "base.com.Sgambetto",
+    "name": "Sgambetto",
+    "playedGamesShare": 31.937095825984716,
+    "playsPerGame": 0.3193709582598471,
+    "byFoe": {
+     "prova-sergio": 31.02,
+     "starter-spazienzio": 30.16,
+     "starter-mara": 30.99,
+     "starter-tossico": 41.42,
+     "starter-pino": 34.44,
+     "starter-gigi": 24.51
+    }
+   },
+   {
+    "binding": "base.com.Spintone",
+    "name": "Spintone",
+    "playedGamesShare": 67.15402704291593,
+    "playsPerGame": 0.6715402704291593,
+    "byFoe": {
+     "prova-sergio": 71.76,
+     "starter-spazienzio": 61.61,
+     "starter-mara": 67.95,
+     "starter-tossico": 71.15,
+     "starter-pino": 68.56,
+     "starter-gigi": 57.29
+    }
+   },
+   {
+    "binding": "base.com.TartarugaSulMarciapiede",
+    "name": "Tartaruga sul marciapiede",
+    "playedGamesShare": 22.73721340388007,
+    "playsPerGame": 0.22737213403880072,
+    "byFoe": {
+     "prova-sergio": 22.99,
+     "starter-spazienzio": 21.7,
+     "starter-mara": 22.6,
+     "starter-tossico": 24.22,
+     "starter-pino": 22.71,
+     "starter-gigi": 21.96
+    }
+   },
+   {
+    "binding": "bruiser.StunningBlow",
+    "name": "STORDIAMOTI HO DETTO",
+    "playedGamesShare": 64.3068783068783,
+    "playsPerGame": 0.6430687830687831,
+    "byFoe": {
+     "prova-sergio": 61.34,
+     "starter-spazienzio": 64.12,
+     "starter-mara": 68.86,
+     "starter-tossico": 72.08,
+     "starter-pino": 67.82,
+     "starter-gigi": 54.59
+    }
+   },
+   {
+    "binding": "com.last.Struggle",
+    "name": "Last Resort: Banzai!!!",
+    "playedGamesShare": 3.0699588477366255,
+    "playsPerGame": 0.039653145208700766,
+    "byFoe": {
+     "prova-sergio": 5.33,
+     "starter-spazienzio": 1.64,
+     "starter-mara": 2.2,
+     "starter-tossico": 6.47,
+     "starter-pino": 0.5,
+     "starter-gigi": 0.02
+    }
+   }
+  ]
+ },
+ "sergioCounters": {
+  "prova-sergio|prova-sergio": {
+   "Conto salato/noToken": 48753,
+   "Conto salato/onToken": 5762,
+   "Lo rivendo/sold/Espresso del distributore": 3786,
+   "Lo rivendo/sold/Santino della portinaia": 14781,
+   "Lo rivendo/withItem": 18567,
+   "Lo rivendo/withoutItem": 3005,
+   "Lo sapevo/keptToken": 1037,
+   "Lo sapevo/selfVoided": 272,
+   "Lo sapevo/tooSlow": 1357,
+   "Lo sapevo/voided": 13347,
+   "Ricatto/selfVoided": 205,
+   "Ricatto/tooSlow": 508,
+   "Ricatto/voided": 7973
+  },
+  "prova-sergio|starter-gigi": {
+   "Conto salato/noToken": 18599,
+   "Conto salato/onToken": 5807,
+   "Lo rivendo/sold/Espresso del distributore": 1059,
+   "Lo rivendo/sold/Santino della portinaia": 3202,
+   "Lo rivendo/withItem": 4261,
+   "Lo rivendo/withoutItem": 503,
+   "Lo sapevo/keptToken": 1854,
+   "Lo sapevo/tooSlow": 278,
+   "Lo sapevo/voided": 6575,
+   "Ricatto/tooSlow": 73,
+   "Ricatto/voided": 7190
+  },
+  "prova-sergio|starter-mara": {
+   "Conto salato/noToken": 26927,
+   "Conto salato/onToken": 1959,
+   "Lo rivendo/sold/Espresso del distributore": 1181,
+   "Lo rivendo/sold/Santino della portinaia": 5439,
+   "Lo rivendo/withItem": 6620,
+   "Lo rivendo/withoutItem": 448,
+   "Lo sapevo/keptToken": 414,
+   "Lo sapevo/tooSlow": 1542,
+   "Lo sapevo/voided": 5333,
+   "Ricatto/tooSlow": 591,
+   "Ricatto/voided": 3041
+  },
+  "prova-sergio|starter-pino": {
+   "Conto salato/noToken": 27843,
+   "Conto salato/onToken": 2555,
+   "Lo rivendo/sold/Espresso del distributore": 1559,
+   "Lo rivendo/sold/Santino della portinaia": 5808,
+   "Lo rivendo/withItem": 7367,
+   "Lo rivendo/withoutItem": 336,
+   "Lo sapevo/keptToken": 778,
+   "Lo sapevo/tooSlow": 335,
+   "Lo sapevo/voided": 7470,
+   "Ricatto/tooSlow": 158,
+   "Ricatto/voided": 5032
+  },
+  "prova-sergio|starter-spazienzio": {
+   "Conto salato/noToken": 23106,
+   "Conto salato/onToken": 3048,
+   "Lo rivendo/sold/Espresso del distributore": 1083,
+   "Lo rivendo/sold/Santino della portinaia": 3902,
+   "Lo rivendo/withItem": 4985,
+   "Lo rivendo/withoutItem": 475,
+   "Lo sapevo/keptToken": 1000,
+   "Lo sapevo/selfVoided": 86,
+   "Lo sapevo/tooSlow": 125,
+   "Lo sapevo/voided": 6925,
+   "Ricatto/selfVoided": 38,
+   "Ricatto/tooSlow": 84,
+   "Ricatto/voided": 5401
+  },
+  "prova-sergio|starter-tossico": {
+   "Conto salato/noToken": 29879,
+   "Conto salato/onToken": 1261,
+   "Lo rivendo/sold/Espresso del distributore": 799,
+   "Lo rivendo/sold/Santino della portinaia": 4059,
+   "Lo rivendo/withItem": 4858,
+   "Lo rivendo/withoutItem": 131,
+   "Lo sapevo/keptToken": 500,
+   "Lo sapevo/selfVoided": 105,
+   "Lo sapevo/voided": 8612,
+   "Ricatto/selfVoided": 50,
+   "Ricatto/voided": 3236
+  }
+ },
+ "searches": {
+  "searches": 168795,
+  "missRate": 5.067685654195918,
+  "exhausted": 9.423280423280424
+ }
+}

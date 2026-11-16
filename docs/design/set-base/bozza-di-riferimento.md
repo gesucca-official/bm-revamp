@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `f9f12cb3df3b…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `cfc53c69d174…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 93 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 6 personaggi, 5 starter e, di prova, 1 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -162,7 +162,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 
 ### Mazzo di prova di Sergio Sommerso — `prova-sergio`
 
-Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 7 · NC 9 · R 4).
+Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 7 · NC 10 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -178,10 +178,10 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
 | 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 V: −10 A e 12 HIT al bersaglio. |
 | 1 | **Sgambetto** (`base.com.Sgambetto`) | R | GEN-23 · 10 A: −10 V e 5 HIT al bersaglio. |
-| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
-| 2 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni. |
+| 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
-| 1 | **Peroni da 66, calda** (`com.items.RottenBeer`) | C | OGG-02 · Consumato: +10 L. |
+| 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio. |
 
 <!-- fine generato -->

@@ -125,3 +125,55 @@ comando (`api/ws/MoveCommandValidator.java`, che rifiuta `TARGET_ITEM` su una ca
 dal perimetro. Proposte: A (scelta nel motore e nei bot ora, l'umano vende il più vecchio fino al passo del client), B (validatore e
 client dentro la B3), C (bersaglio `NEAR_ITEM`, contro R03). Il proprietario ha scelto A, col client dopo: D115. Il link di D115
 punta ora a questa sezione, perché il rapporto dello STOP è stato riscritto in questo.
+
+## 8. Giro sul mazzo intermedio (D116)
+
+**16 novembre 2026 (esecutore). Esito: il mazzo intermedio (giro 1) lascia fuori D95 Spazienzio (72,9%) e Mara (67,2%); il mazzo
+della B2 con Lo rivendo R1 (giro 2) ne lascia fuori uno solo, Spazienzio (69,7%). Resta in bozza il giro 2. Scostamento dichiarato:
+Spazienzio 69,7% contro la soglia del 68,3% (+1,4 punti). STOP per il proprietario, poi la prova finale (D116 (2)).**
+
+Solo dati: `bozza.json` (`prova-sergio`), bozza di riferimento rigenerata, questa sezione e il piano. Niente codice, nessun atteso di
+test cambiato (nessun test conta il mazzo di `prova-sergio`; il server resta verde, 892 test, 21 saltati). Lanciatore e semi della B2
+([run.ps1](sb-17/run.ps1), `-OutputRoot %TEMP%\bm-sb17-b3b\run`), regole `d50`, 259.200 partite per giro, invarianti 0 e bound oltre il
+tetto 0 in entrambi. Lo rivendo con R1 (+5 con l'oggetto, +2 senza). Dettagli: [giro 1](sb-17/b3b/round-1.md), [giro 2](sb-17/b3b/round-2.md).
+
+- **Giro 1:** Santino ×2, Espresso ×2, Acqua in faccia ×1, Tartaruga ×1, niente Peroni (4 oggetti). Orologio 66,9 s (70,4 di parete).
+- **Giro 2:** Santino ×1, Espresso ×2, Tartaruga ×2, Acqua in faccia ×1, niente Peroni (3 oggetti). Orologio 67,3 s (70,7 di parete).
+- Budget di orologio: 134,2 s su 240 (giro 1: 66,9 su 120; giro 2: 67,3 su 120).
+
+Quota / patte / turni medi, soli euristici (D93), colonna del giro 2 della B3 (mazzo di Peroni, R1) a confronto:
+
+| Incontro | B3, giro 2 (Peroni, 5 oggetti) | **Giro 1 (intermedio, 4 oggetti)** | **Giro 2 (mazzo B2, R1)** | D95 |
+|---|---|---|---|---|
+| Sergio–Sergio | 46,4% / 5,2% / 11,3 | 45,5% / 5,3% / 11,3 | 46,4% / 4,9% / 11,9 | dentro |
+| Sergio–Spazienzio | 74,9% / 2,5% / 9,2 | **72,9%** / 1,6% / 9,3 | **69,7%** / 2,1% / 9,5 | fuori in entrambi (quota +7,89 e +4,68 per l'analisi; soglia 68,3%) |
+| Sergio–Mara | 69,2% / 3,8% / 10,3 | **67,2%** / 3,2% / 10,4 | 63,4% / 4,1% / 10,6 | giro 1 fuori (+2,2), giro 2 dentro |
+| Sergio–Celestina | 45,3% / 7,6% / 11,0 | 41,4% / 7,1% / 11,1 | 38,2% / 6,3% / 11,2 | dentro |
+| Sergio–Piera | 55,2% / 5,5% / 10,3 | 53,8% / 5,6% / 10,3 | 50,9% / 5,4% / 10,5 | dentro |
+| Sergio–Beppe | 64,7% / 2,3% / 8,1 | 58,6% / 2,8% / 8,2 | 58,0% / 3,0% / 8,4 | dentro |
+
+Patte entro il 10% e durata entro 12 turni in ogni incontro di entrambi i giri.
+
+**Letture della § 4 (non criteri):**
+
+| Lettura | B3, giro 2 | Giro 1 | Giro 2 |
+|---|---|---|---|
+| Partite con Lo rivendo; giocate per partita | 24,9%; 0,34 | 23,95%; 0,31 | 21,72%; 0,26 |
+| Quota del ramo con l'oggetto | 93,6% | 90,5% | 86,0% |
+| Oggetti venduti: Santino / Peroni / Espresso | 55,2% / 31,3% / 13,5% | 79,7% / — / 20,3% | 58,8% / — / 41,2% |
+| Lo metto in conto: partite; giocate per partita | 78,0%; 1,23 | 77,0%; 1,13 | 74,0%; 1,04 |
+| Battutina: giocate per partita | 1,73 | 1,87 | 2,31 |
+| Mazzo esaurito | 14,8% | 9,4% | 8,0% |
+
+Quota del ramo e oggetti venduti sono somme dei contatori «Effetti nuovi» di Sergio in tutti gli incontri euristici dei due `round-N.md`.
+Con un solo Santino (giro 2) l'Espresso viene venduto spesso, perché dopo il Santino è l'unico oggetto o è accanto a un altro Espresso; con due Santino
+(giro 1) la regola «mai un Espresso se c'è un Santino» lo protegge di più.
+
+**Lettura.** Togliere la Peroni e rimettere Acqua in faccia (giro 1) toglie circa 2 punti a Spazienzio e Mara, non basta: il mazzo
+della B2 (un solo Santino, due Tartarughe) li porta a 69,7% e 63,4%, con Lo rivendo R1 che da sola costa poco (cfr. § 5). Lo stato
+migliore per D95 è il giro 2. Per portare anche Spazienzio sotto il 68,3% servirebbe un'altra leva, fuori dal perimetro di D116.
+
+**Stato in bozza.** `prova-sergio` col mazzo della B2: Santino ×1, Espresso ×2, Tartaruga ×2, Acqua in faccia ×1, Oh guarda là ×2,
+Ricatto ×2, Lo sapevo ×2, Conto salato ×2, Lo sanno tutti ×2, Malelingue, STORDIAMOTI, Sgambetto, Spintone ×1 (20 carte); bound Battutina
+e Lo rivendo (R1). Verifiche: `git diff --check`, `check-links.py` (372 file, 0 rotti), `check-rules.py`, `rarita-bozza.py --check`,
+bozza di riferimento `--scrivi` e `--verifica` allineata, `./scripts/build.ps1 -Task Test -Offline` verde (892 test, 21 saltati; 37 del client).
