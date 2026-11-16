@@ -531,8 +531,10 @@ public final class ViewTable {
         int itemsAtStart = act.author.items.size();
         int plays = act.author.plays(act.play.card.getName());
         Search search = null;
+        boolean sold = false;
         for (PrintedEffects.Step step : act.steps) {
             if (step.isAhead() && !act.ahead) continue;
+            if (!step.appliesAfterSale(sold)) continue;
             Side subject = step.isOnTarget() ? act.target : act.author;
             if (step.isIfToken() && subject.statuses.stream().noneMatch(t -> t.exposure != null)) continue;
             switch (step.getKind()) {
@@ -592,6 +594,10 @@ public final class ViewTable {
                     break;
                 case SWAP_ITEMS:
                     swap(act.author, act.target);
+                    break;
+                case SELL:
+                    // SB-17 («Lo rivendo», RP-25): as the engine, the same rule as the forecast.
+                    sold = TurnForecast.sell(act.author.items, act.play.item);
                     break;
                 case COUNTER_ALL:
                     for (Side foe : sides.values()) {

@@ -197,6 +197,8 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 Tutte con una sola funzione, entro 4 unità per uso col danno pesato 4/3 (D36: al massimo 3 di danno), senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
 token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter sono nello starter (comuni), la terza nella collezione.
 
+**Deroga di SB-17 (D113, D114, D115):** CES-BO3 «Lo rivendo» rivende un proprio oggetto per salute. Non bersaglia oggetti (bersaglio: sé; l'oggetto è un campo facoltativo della mossa, [RP-25](regole-playground.md#9-vendere-un-oggetto-12-sb-17)) e resta sempre giocabile, ma usa un oggetto e cura: deroga al principio «senza oggetti… né cure» qui sopra, solo per questa carta. Prezzo: netto ≤ 4 unità sull'oggetto di riferimento da 3 unità ([proposta A3](sb-17-proposta-a3.md#valore-rispetto-al-tetto)); il banco delle bound, che gioca senza oggetti, vede solo il ramo da 2 unità.
+
 | ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Unità per uso | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---:|---|---|---|---|---|
 | SPA-BO1 | Spazienzio | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Spazienzio | `LittleRage`, riprogettata: tolta la parata | Generatrice; due funzioni oggi, 6,75 unità | dati |
@@ -216,7 +218,7 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | GIG-BO3 | Beppe | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | da inventare («Lima») | Variante veloce | dati |
 | CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Mi informo» (SB-17), nella collezione (B2, D110) | Generatrice: le letture costano A | dati |
 | CES-BO2 | Sergio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | bozza «Battutina» (SB-17) | Colpetto | dati |
-| CES-BO3 | Sergio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | bozza «Frecciatina al volo» (SB-17), ~~nella collezione~~ nel mazzo di prova (B2, D110) | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
+| CES-BO3 | Sergio | Azione, bound | RESOURCES | 0 | ~~2 HIT~~ un proprio oggetto (scelto; se la mossa non lo dice, il più vecchio) esce dal campo senza il suo effetto, ~~+7~~ +5 HEALTH a sé (riserva R1, B3); senza oggetti +2 HEALTH a sé⁶ | ~~4~~ 2 netto con l'oggetto, 2 senza | NC | — | bozza «Lo rivendo» (SB-17 A3, D114); sostituisce «Frecciatina al volo» (2 HIT, priorità 2), uscita dalla bozza | Variante di scambio: oggetto → salute, sempre giocabile (deroga sopra) | dati |
 | ROC-BO1 | Duccio | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
 | ROC-BO2 | Duccio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
 | ROC-BO3 | Duccio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Duccio ha la A più bassa | dati |
@@ -224,6 +226,8 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 ⁴ **SB-12a, dopo il giro 3, decisione del proprietario** ([correzioni](#correzioni-di-sb-12a), D41): MAR-BO2 da +8 a +6 A. Sugli
 starter corretti la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 scelto da D38 per Mara; la +6 A circa 3,3, col
 matchup quasi fermo.
+
+⁶ **SB-17, Fase A3 e B3** ([D114](../../set-base-decisioni.md#decisioni-del-proprietario), [D115](../../set-base-decisioni.md#decisioni-del-proprietario)): l'oggetto lo sceglie il giocatore; finché il passo del client non c'è, l'umano vende il più vecchio. Se l'oggetto scelto è sparito alla risoluzione vale il ramo senza oggetti. Riserva R1 del giro corto, applicata dopo il giro 1 della B3 (Sergio–Spazienzio 76,9%, oltre il 68,3%): +7 → +5 HEALTH con l'oggetto.
 
 ### Last resort (4)
 

@@ -81,7 +81,7 @@ class SetBaseDraftTest {
         assertEquals(decks, new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
         for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
-                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.MiInformo")) { // SB-17 B2 (D110): Frecciatina al volo entra nel mazzo di prova, Mi informo resta nella collezione
+                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.MiInformo")) { // SB-17 B2 (D110), B3 (D114): Lo rivendo nel mazzo di prova al posto di Frecciatina, Mi informo resta nella collezione
             assertTrue(draft.cardBindings().contains(third), third);
             assertFalse(draft.deckCards().contains(third), third + " non va negli starter");
         }

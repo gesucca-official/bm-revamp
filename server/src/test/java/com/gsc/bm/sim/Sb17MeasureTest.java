@@ -1,6 +1,7 @@
 package com.gsc.bm.sim;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
@@ -67,6 +68,13 @@ class Sb17MeasureTest {
                         break;
                     case "Conto salato":
                         if (!m.isVoid()) c.add(card + (Boolean.TRUE.equals(tokenOnTarget.get(m.getPlayerId())) ? "/onToken" : "/noToken"));
+                        break;
+                    case "Lo rivendo": // SB-17 B3 (D114): the branch played and the item sold, from the report of the move
+                        if (m.isVoid()) break;
+                        String sold = m.getMoveReport().getOrDefault(Card.CardTarget.SELF, List.of()).stream()
+                                .filter(l -> l.startsWith("Sold Item ")).findFirst().orElse(null);
+                        c.add(card + (sold == null ? "/withoutItem" : "/withItem"));
+                        if (sold != null) c.add(card + "/sold/" + sold.substring("Sold Item ".length()));
                         break;
                     default:
                 }

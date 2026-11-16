@@ -324,10 +324,26 @@ public class BotView {
             return;
         }
         if (card.canTarget.contains(Card.CardTarget.SELF))
-            legal.add(new LegalMove(card, "SELF", discard, null, search));
+            legal.add(new LegalMove(card, "SELF", discard, sellChoice(card), search));
         if (card.canTarget.contains(Card.CardTarget.OPPONENT))
             for (Opponent opponent : aliveOpponents())
                 legal.add(new LegalMove(card, opponent.seat.playerId, discard, null, search));
+    }
+
+    /**
+     * SB-17 («Lo rivendo», playground rules 1.2, RP-25), the rule shared by every bot, like {@link #searchChoice}: for a card that
+     * sells an own item, the least valuable own item by {@link StyleSupport#itemWorth}, the oldest on a tie; null when the card does
+     * not sell or there is no item (then the card plays its branch without items).
+     */
+    String sellChoice(CardSeen card) {
+        if (!PrintedEffects.sells(card.effects) || self.seat.items.isEmpty()) return null;
+        CardSeen cheapest = null;
+        double worth = Double.POSITIVE_INFINITY;
+        for (CardSeen item : self.seat.items) {
+            double w = StyleSupport.itemWorth(item);
+            if (w < worth - 1e-9) { worth = w; cheapest = item; }
+        }
+        return cheapest.name;
     }
 
     private List<Opponent> aliveOpponents() {

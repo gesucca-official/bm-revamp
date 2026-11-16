@@ -49,7 +49,13 @@ public class PrintedEffects implements Serializable {
         /** The subject loses its immunity to {@code resource}. */
         NOT_IMMUNE,
         /** SB-17, like ShuffleFeet: the author and the target swap their near items, each tray keeping its capacity. */
-        SWAP_ITEMS
+        SWAP_ITEMS,
+        /**
+         * SB-17 («Lo rivendo», playground rules 1.2, RP-25): an own item leaves the field without its effect. The item is the move's
+         * choice ({@code TARGET_ITEM}) if still on the author's field, the oldest if the move does not say; none if the author has no
+         * items or the chosen one is gone. The steps with {@link Step#getSold()} apply according to the outcome.
+         */
+        SELL
     }
 
     /** One printed step. Amounts are {@code base + times × (resource of the author / divide) + perItem × items of the author}. */
@@ -105,6 +111,14 @@ public class PrintedEffects implements Serializable {
         boolean ifToken;
         /** SB-17 («Lo sapevo», D106 (3)): on a COUNTER_TARGET, the voided move does not satisfy its author's token. */
         boolean keepsToken;
+        /**
+         * SB-17 («Lo rivendo», RP-25): the branch of a {@link Kind#SELL}. Null: the step always applies; true: only if an item was
+         * sold; false: only if none was.
+         */
+        Boolean sold;
+
+        /** SB-17: whether the step applies after a sale with the given outcome (null: no sale in this card). */
+        public boolean appliesAfterSale(boolean itemSold) { return sold == null || sold == itemSold; }
 
         /** The bindings the search may look for, in printed order: {@code searchedCards}, or {@code searchedCard} alone. */
         public List<String> searchedNames() {
@@ -120,6 +134,11 @@ public class PrintedEffects implements Serializable {
         if (effects == null) return List.of();
         for (Step s : effects.getSteps()) if (s.getKind() == Kind.SEARCH) return s.searchedNames();
         return List.of();
+    }
+
+    /** SB-17: whether the printed text sells an own item («Lo rivendo»). */
+    public static boolean sells(PrintedEffects effects) {
+        return effects != null && effects.getSteps().stream().anyMatch(s -> s.getKind() == Kind.SELL);
     }
 
     /** SB-16i: whether the card has a «Gioca d'anticipo» part, or a «Rincara» amount, in its printed text. */

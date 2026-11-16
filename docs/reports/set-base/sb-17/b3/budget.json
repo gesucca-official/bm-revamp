@@ -1,0 +1,9 @@
+{"capWallSeconds":500,"items":[
+ {"phase":"feasibility","cap":50,"wallSeconds":19.6,"gamesPerCell":4,"draft":"D114 (+7 HEALTH)"},
+ {"phase":"diagnosis, HEAD draft (B2 round 2) with the new code","cap":"feasibility share","wallSeconds":8.3,"gamesPerCell":4},
+ {"phase":"diagnosis, Lo rivendo with the deck of HEAD","cap":"feasibility share","wallSeconds":9.1,"gamesPerCell":4,"draft":"D114 + R1, prova-sergio cards of HEAD"},
+ {"phase":"round-1","cap":200,"wallSeconds":111.5,"gamesPerCell":300,"draft":"D114 (+7 HEALTH)"},
+ {"phase":"round-2","cap":200,"wallSeconds":112.0,"gamesPerCell":300,"draft":"D114 + R1 (+5 HEALTH)"}],
+ "spentWallSeconds":260.5,"marginUsed":0,
+ "outside":"step0 13.5, live identity 76.3, suite 94.4 and 84.5, TestServerContext 500.9 and the rerun on the final draft, mutations 161.1",
+ "runner":"docs/reports/set-base/sb-17/run.ps1 -OutputRoot %TEMP%/bm-sb17-b3/run (diagnoses in %TEMP%/bm-sb17-b3/diag and diag2)"}

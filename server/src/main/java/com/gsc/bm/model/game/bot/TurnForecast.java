@@ -161,6 +161,19 @@ public final class TurnForecast {
         return ends;
     }
 
+    /**
+     * SB-17 («Lo rivendo», playground rules 1.2, RP-25), as the engine: the chosen item if still on the field, else none; without a
+     * choice the oldest (the first of the tray). The item leaves without its effect. Whether one was sold.
+     */
+    static boolean sell(List<BotView.CardSeen> items, String choice) {
+        for (int i = 0; i < items.size(); i++)
+            if (choice == null || items.get(i).getName().equals(choice)) {
+                items.remove(i);
+                return true;
+            }
+        return false;
+    }
+
     private static boolean searches(BotView.CardSeen card) {
         return steps(card, false).stream().anyMatch(s -> s.getKind() == PrintedEffects.Kind.SEARCH);
     }
@@ -354,8 +367,10 @@ public final class TurnForecast {
             Map<Resource, Integer> foundGains = Map.of(), missedGains = Map.of();
             Float token = null;
             int plays = act.author.seat.plays(act.card.getName());
+            boolean sold = false;
             for (PrintedEffects.Step step : act.steps) {
                 if (step.isAhead() && !act.ahead) continue;
+                if (!step.appliesAfterSale(sold)) continue;
                 Body subject = step.isOnTarget() ? act.target : act.author;
                 if (step.isIfToken() && !subject.token) continue;
                 switch (step.getKind()) {
@@ -407,6 +422,9 @@ public final class TurnForecast {
                         break;
                     case SWAP_ITEMS:
                         swap(act.author, act.target);
+                        break;
+                    case SELL:
+                        sold = sell(act.author.items, act.item);
                         break;
                     case COUNTER_ALL:
                         for (Body foe : bodies.values()) {

@@ -1,0 +1,105 @@
+{
+ "note": "SB-17 B3 (D114, D115), tests per mutation of Lo rivendo",
+ "results": [
+  {
+   "mutation": "engine: the branches swapped (with and without the item)",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 17.4,
+   "failures": [
+    "[ERROR]   Sb17CardsTest.loRivendoWithAChosenItemNotOnTheFieldHealsTwo:436 the chosen item is not there: the branch without items, no other item sold ==> expected: <-2> but was: <-7>",
+    "[ERROR]   Sb17CardsTest.loRivendoWithoutAChoiceSellsTheOldest:417 expected: <-7> but was: <-2>",
+    "[ERROR]   Sb17CardsTest.loRivendoWithoutItemsHealsTwo:428 +2 HEALTH without items ==> expected: <-2> but was: <-7>",
+    "[ERROR] Tests run: 27, Failures: 5, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "engine: no choice sells nothing instead of the oldest",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 16.9,
+   "failures": [
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.581 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.loRivendoWithoutAChoiceSellsTheOldest:417 expected: <-7> but was: <-2>",
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "engine: a chosen item gone at resolution falls back to the oldest",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 17.0,
+   "failures": [
+    "[ERROR] Tests run: 27, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.566 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.loRivendoOnAnItemDestroyedEarlierInTheTurnHealsTwo:451 RP-25: the chosen item is gone at resolution, the branch without items ==> expected: <-2> but was: <-7>",
+    "[ERROR]   Sb17CardsTest.loRivendoWithAChosenItemNotOnTheFieldHealsTwo:436 the chosen item is not there: the branch without items, no other item sold ==> expected: <-2> but was: <-7>",
+    "[ERROR] Tests run: 27, Failures: 2, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "bots: the most valuable item instead of the least",
+   "file": "BotView.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 16.8,
+   "failures": [
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.562 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.theBotsSellTheLeastValuableItem:479 [Espresso del distributore, Santino della portinaia]: never an Espresso while a Santino is there ==> expected: <Santino della portinaia> but was: <Espresso del distributore>",
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "forecast: both branches applied",
+   "file": "TurnForecast.java",
+   "tests": "Sb17CardsTest,TurnForecastFidelityTest,ViewTableFidelityTest",
+   "killed": true,
+   "seconds": 29.3,
+   "failures": [
+    "[ERROR]   Sb17CardsTest.theForecastPlaysTheBranchOfTheSale:493 [{s=509, b=500}] ==> expected: <507> but was: <509>",
+    "[ERROR]   TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn:32->check:91 seed 7100001 turn 7 seen by seat-2: {seat-2=7, seat-1=11} not in [{seat-2=9, seat-1=11}] moves [Move(playedCardName=Sorpasso in curva, playerId=seat-1, targetId=seat-2, gameId=86b49082f325532f1c97e022aef31fa70d3898",
+    "[ERROR]   ViewTableFidelityTest.equivalenceAndTwoTurnFidelity:30->check:75->lambda$check$12:113 seed 7100001 turn 7 moves seat-1:Sorpasso in curva, seat-2:Lo rivendo after seat-1:Passo stretto, seat-2:STORDIAMOTI HO DETTO first-turn equivalence seen by seat-2 ==> expected: <[{seat-2=9, seat-1=11}]> ",
+    "[ERROR] Tests run: 29, Failures: 3, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "view table: both branches applied",
+   "file": "ViewTable.java",
+   "tests": "TurnForecastFidelityTest,ViewTableFidelityTest",
+   "killed": true,
+   "seconds": 27.3,
+   "failures": [
+    "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.286 s - in com.gsc.bm.sim.TurnForecastFidelityTest",
+    "[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 6.591 s <<< FAILURE! - in com.gsc.bm.sim.ViewTableFidelityTest",
+    "[ERROR]   ViewTableFidelityTest.equivalenceAndTwoTurnFidelity:30->check:75->lambda$check$12:113 seed 7100001 turn 7 moves seat-1:Sorpasso in curva, seat-2:Lo rivendo after seat-1:Passo stretto, seat-2:STORDIAMOTI HO DETTO first-turn equivalence seen by seat-2 ==> expected: <[{seat-2=7, seat-1=11}]> ",
+    "[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "loader: a sale with targets other than SELF accepted",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 18.4,
+   "failures": [
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.613 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.theLoaderRefusesASaleOutOfPlace:514->lambda$theLoaderRefusesASaleOutOfPlace$14:515 {'binding':'t.V','kind':'BOUND','boundTo':'x','targets':['SELF','NEAR_ITEM'],'self':[{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':7}],'seNo':[{'op':'gain','resource':'HEALTH",
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "loader: a sale inside anticipo accepted",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 17.9,
+   "failures": [
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.602 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.theLoaderRefusesASaleOutOfPlace:514->lambda$theLoaderRefusesASaleOutOfPlace$14:515 {'binding':'t.V','kind':'ACTION','targets':['SELF'],'self':[{'op':'anticipo','steps':[{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':7}],'seNo':[{'op':'gain','resource':'HEALT",
+    "[ERROR] Tests run: 27, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  }
+ ]
+}

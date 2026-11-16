@@ -159,7 +159,8 @@ final class StyleSupport {
             this.costTotal = cost.values().stream().mapToInt(Integer::intValue).sum() - healthCost;
             this.suicidal = healthCost > 0 && healthCost >= situation.myHealth();
             this.usesItem = move.getItem() != null && card.getCanTarget().contains(Card.CardTarget.NEAR_ITEM);
-            this.takesFarItem = move.getItem() != null && !usesItem;
+            // SB-17: an item named by a sale (a SELF card) is not taken from afar; for the other cards nothing changes.
+            this.takesFarItem = move.getItem() != null && !usesItem && !PrintedEffects.sells(card.getEffects());
             Map<Resource, Double> total = parseGains(card.getGains(), VARIABLE);
             Map<Resource, Double> fixed = parseGains(card.getGains(), 0);
             if (usesItem) situation.me.getItems().stream().filter(i -> i.getName().equals(move.getItem())).findFirst()
@@ -167,6 +168,22 @@ final class StyleSupport {
                         parseGains(item.getGains(), VARIABLE).forEach((r, v) -> total.merge(r, v, Double::sum));
                         parseGains(item.getGains(), 0).forEach((r, v) -> fixed.merge(r, v, Double::sum));
                     });
+            // SB-17 («Lo rivendo», RP-25): the gains of the branch the move plays, with the item it sells or without.
+            if (PrintedEffects.sells(card.getEffects())) {
+                total.clear();
+                fixed.clear();
+                boolean withItem = move.getItem() != null;
+                for (PrintedEffects.Step st : steps(card)) {
+                    if (st.isOnTarget() || st.getResource() == null || !st.appliesAfterSale(withItem)) continue;
+                    if (st.getKind() == PrintedEffects.Kind.GAIN) {
+                        total.merge(st.getResource(), (double) st.getBase(), Double::sum);
+                        fixed.merge(st.getResource(), (double) st.getBase(), Double::sum);
+                    } else if (st.getKind() == PrintedEffects.Kind.LOSE) {
+                        total.merge(st.getResource(), (double) -st.getBase(), Double::sum);
+                        fixed.merge(st.getResource(), (double) -st.getBase(), Double::sum);
+                    }
+                }
+            }
             if (playground && aheadChance > 0) for (PrintedEffects.Step st : steps(card))
                 if (st.isAhead() && !st.isOnTarget() && st.getKind() == PrintedEffects.Kind.GAIN && st.getResource() != null)
                     total.merge(st.getResource(), aheadChance * st.getBase(), Double::sum);
@@ -310,6 +327,40 @@ final class StyleSupport {
             }
         }
         return value;
+    }
+
+    /** SB-17 («Lo rivendo»): weights of an item's gains, those of the bound bench (D33, D36), HEALTH 1. */
+    static final Map<Resource, Double> ITEM_WEIGHTS = Map.of(Resource.HEALTH, 1.0, Resource.VIOLENCE, 0.75, Resource.ALERTNESS, 0.5,
+            Resource.ALCOHOL, 0.35, Resource.TOXICITY, 0.15);
+    /** SB-17: worth of an equip or of an emptied TOXICITY, and of an immunity, in the same units. */
+    static final double ITEM_STATUS = 3, ITEM_IMMUNITY = 0.5;
+
+    /**
+     * SB-17 («Lo rivendo», RP-25): the worth of an own item from its public text, to choose the one to sell (the least valuable).
+     * Gains and losses at {@link #ITEM_WEIGHTS}; a status or an emptied resource {@link #ITEM_STATUS}; an immunity
+     * {@link #ITEM_IMMUNITY}. An item that cannot describe itself is read from its catalog gains. A Santino (an immunity) is worth
+     * 0.5, a Peroni (+10 L) 3.5, an Espresso (+15 A) 7.5.
+     */
+    static double itemWorth(BotView.CardSeen item) {
+        PrintedEffects text = item.getEffects() != null ? item.getEffects() : item.consumedEffects();
+        double worth = 0;
+        if (text == null) {
+            for (Map.Entry<Resource, Double> g : parseGains(item.getGains(), VARIABLE).entrySet())
+                worth += ITEM_WEIGHTS.getOrDefault(g.getKey(), 0.5) * g.getValue();
+            return worth;
+        }
+        for (PrintedEffects.Step st : text.getSteps()) {
+            double weight = st.getResource() == null ? 0 : ITEM_WEIGHTS.getOrDefault(st.getResource(), 0.5);
+            switch (st.getKind()) {
+                case GAIN: worth += weight * st.getBase(); break;
+                case LOSE: worth -= weight * st.getBase(); break;
+                case STATUS:
+                case EMPTY: worth += ITEM_STATUS; break;
+                case IMMUNE: worth += ITEM_IMMUNITY; break;
+                default: break;
+            }
+        }
+        return worth;
     }
 
     static double damageOf(BotView.CardSeen card) {

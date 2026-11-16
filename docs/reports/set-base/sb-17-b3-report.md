@@ -1,68 +1,127 @@
 # SB-17 — Fase B3: Lo rivendo (rapporto)
 
-**16 novembre 2026. Esito: STOP 1 prima di scrivere documenti e codice, per la condizione scritta nel prompt.** Far scegliere
-l'oggetto all'umano chiede codice fuori dalla deroga del playground (validatore del comando, `api`) e codice del client; nel motore
-non c'è una scelta del giocatore alla risoluzione che un umano possa usare con una carta che bersaglia sé. Nessun file di gioco
-cambiato, nessuna misura, nessuna verifica costosa lanciata. Segue una proposta (§ 3) e le domande al proprietario (§ 4).
+**16 novembre 2026. Esito: Lo rivendo funziona in bozza, con la scelta dell'oggetto nel motore e nei bot (D114, D115); verifiche
+verdi; il giro corto esce dalla soglia D95 anche con la riserva R1. STOP per il proprietario.** Al giro finale (R1: +5 HEALTH con
+l'oggetto) Sergio è **sopra** contro Spazienzio (74,9%, soglia 68,3%) e Mara (69,2%); dentro negli altri quattro incontri, specchio
+compreso. Una diagnosi di fattibilità indica che il salto rispetto alla B2 viene soprattutto dai ritocchi del mazzo di prova (§ 3
+della proposta A3), non dalla bound (§ 5).
+
+Prima chiusura, alle 13: STOP prima del codice (la scelta dell'umano chiedeva validatore e client). Il proprietario ha scelto
+«A, client dopo» ([D115](../../set-base-decisioni.md#decisioni-del-proprietario), commit `7b1dd5e`): scelta nel motore ora, campo
+facoltativo, il più vecchio se la mossa non lo dice; il passo del client dopo.
 
 ## Stato
 
-- Preliminare: working tree pulito, `git fetch` fatto, main avanti di 2 commit su origin/main (non pushati, del proprietario), origin
-  non avanti.
-- Diagnosi: letti D112–D114, la [proposta A3](../../design/set-base/sb-17-proposta-a3.md), le
-  [regole del playground](../../design/set-base/regole-playground.md) 1.1 e la [deroga](../../aree-protette.md#playground-e-misure);
-  cercati nel motore, nel validatore e nel client i meccanismi di scelta esistenti.
-- Modifica: solo questo rapporto. Passo 0, codice, verifiche e giro non eseguiti.
+- Documenti: [regole del playground](../../design/set-base/regole-playground.md#9-vendere-un-oggetto-12-sb-17) **1.2** (RP-25, RP-26 e
+  la regola dei bot nella § 6); in [griglia](../../design/set-base/griglia.md) la deroga di SB-17 al principio delle bound, CES-BO3
+  e la nota ⁶; `bozza.json` con Lo rivendo NC, Frecciatina fuori, `prova-sergio` come la § 3 della proposta (93 carte).
+- Codice: `DataCards` (passo `vendi`, rifiuti del caricatore), `PrintedEffects` (passo `SELL` e segno di ramo), `TurnForecast` e
+  `ViewTable` (la vendita e il ramo dell'esito), `BotView` (la scelta dell'oggetto, una regola per tutti i bot) e `StyleSupport`
+  (valore degli oggetti, guadagni del ramo nel piano). Più i contatori di Lo rivendo in `Sb17MeasureTest`, per le letture.
+- Giro: due giri da 259.200 partite, il secondo con R1. Budget di orologio **260,5 s su 500**.
+- Nessun push. Fuori perimetro non toccati: regolamento, `docs/sets/`, catalogo, client, `api`.
 
-## 1. I meccanismi di scelta che esistono
+## 1. La lettura di R03 (RP-25, RP-26)
 
-| Meccanismo | Dove | Perché non basta per Lo rivendo |
-|---|---|---|
-| `choices.TARGET_ITEM` (Grab, Steal, BreakYourToy; `consume` di `DataCards`) | `Move`, `Move.isValidFor`, `MoveCommandValidator`, client `model.ts` | È un **bersaglio**: il validatore (`api/ws/MoveCommandValidator.java`, righe 45–50) rifiuta `TARGET_ITEM` («Unexpected item») per una carta senza `NEAR_ITEM`/`FAR_ITEM`; con `NEAR_ITEM` lo esige («Item required») e `Move.isValidFor` rende la carta ingiocabile senza oggetti, contro R03 e contro il ramo +2 HEALTH. Il client lo manda solo quando il bersaglio cliccato è un oggetto (`t.itemIndex`). |
-| `searchChoice` («Annuncia X o Y», RP-13, RP-23) | `Move`, `Move.isValidFor`, validatore, client `table.tsx` | Il motore accetta solo un nome stampato nella ricerca della carta e con una copia nel mazzo; il client apre la scelta solo con due nomi di ricerca. Riusarlo per un oggetto cambia `Move` (modello vivo) e il client. |
-| `DISCARD_ONE` | idem | È lo scarto della bound, già usato da Lo rivendo stessa. |
+Lo rivendo bersaglia **sé**; l'oggetto è un **campo facoltativo della mossa** (`choices.TARGET_ITEM`), non un bersaglio: alla
+giocata non si controlla e la carta si gioca anche senza oggetti. Alla risoluzione, dopo lo scarto della bound: se l'oggetto scelto
+è ancora fra i propri esce dal campo **senza il suo effetto** (registro «Sold Item X») e vale il ramo con l'oggetto; se manca, o non
+ci sono oggetti, il ramo senza oggetti (+2 HEALTH); se la mossa non dice la scelta, il più vecchio. Il caricatore accetta `vendi`
+solo in `self`, una volta, con `seHai`/`seNo` di soli `gain`, `lose`, `say`, in una carta non oggetto con bersaglio solo `SELF`, mai
+con `consume`, mai dentro `anticipo` o `gettone`.
 
-Per i **bot** la strada c'è senza uscire dal perimetro del prompt: una mossa con `TARGET_ITEM` su una carta che bersaglia sé passa
-`Move.isValidFor` (che controlla l'oggetto solo per `NEAR_ITEM`/`FAR_ITEM`), i bot non passano dal validatore, `DataCards` legge già
-`choices` per `consume`, e `BotView.legalMoves` può generare una mossa per oggetto come fa con lo scarto. Per l'**umano** no: ogni
-via passa da `api` (fuori deroga, quindi identità viva e contesto obbligatori e un perimetro che il prompt non dà) e dal client
-(fuori perimetro).
+L'umano oggi non manda il campo (il validatore `api` lo rifiuta su una carta che bersaglia sé, RP-26): **vende il più vecchio** fino
+al passo del client (D115 (2)). I bot scelgono: il proprio oggetto **meno prezioso** per `StyleSupport.itemWorth` (guadagni pesati
+come il banco delle bound, D33/D36: HEALTH 1, V 0,75, A 0,5, L 0,35, T 0,15; equipaggiamento o svuota-T 3; immunità 0,5), il più
+vecchio a pari valore. Santino 0,5, Peroni 3,5, Espresso 7,5: **mai un Espresso se c'è un Santino** (test e mutazione).
 
-## 2. Cosa non ho scritto e perché
+## 2. Verifiche
 
-Non ho scritto la riga RP 1.2, CES-BO3 in griglia, `bozza.json` né codice: la riga RP dovrebbe nominare il meccanismo di scelta, e
-quello per l'umano oggi non esiste. Scrivere i documenti prima della decisione avrebbe fissato una lettura di R03 che potrebbe
-cambiare con la risposta alla domanda 1.
+| Verifica | Esito |
+|---|---|
+| Passo 0 sulla 1.6b (`b2/step0.ps1`, 8.640 partite, prima di cambiare la bozza) | **identico** alla base della B2: `arm.txt`, osservazioni, `draft.json`; `matrix.json` e `matrix.md` diversi solo per il percorso della bozza nell'intestazione |
+| `./scripts/build.ps1 -Task Test -Offline` | verde, 892 test (21 saltati), 37 test del client; rilanciata dopo R1, verde |
+| Identità viva 1.13 (480.000 partite, `%TEMP%/bm-sb16g2b2-live`) | **identica byte per byte** alle impronte della B2 (JSON 266.869 B `ca131721…`, Markdown 26.112 B `16d3bde4…`) |
+| `-Task TestServerContext -Offline` e `verify-match-manifests.py` | verdi (1.010 test, 21 saltati; manifest PASS), rilanciati sulla bozza finale ([impronte](sb-17/b3/identity.json)) |
+| Fedeltà `TurnForecastFidelityTest`, `ViewTableFidelityTest` | **100%** su tutti i bracci; sergio sulla bozza finale: 6.282/6.282 turni; Lo rivendo nel campione 234 volte con l'oggetto e 168 senza (prima di R1: 246 e 172) |
+| Mutazioni ([script](sb-17/b3/mutations.py), [esiti](sb-17/b3/mutations.json)) | **8/8 uccise** da asserzioni: rami scambiati, nessuna vendita senza scelta, ripiego sul più vecchio con l'oggetto sparito, bot sull'oggetto più prezioso, previsione e tavolo coi due rami, caricatore con bersagli diversi da SELF e dentro `anticipo` |
+| `genera-bozza-di-riferimento.py --scrivi`, poi `--verifica` | allineata (rigenerata dopo R1) |
+| `git diff --check`, `check-links.py`, `check-rules.py` | verdi |
 
-## 3. Proposta
+**Test nuovi** (`Sb17CardsTest`, 9): oggetto scelto venduto senza effetto (niente immunità del Santino, niente A dell'Espresso),
+il più vecchio senza scelta, +2 senza oggetti, +2 con l'oggetto scelto assente, +2 con l'oggetto distrutto prima nello stesso turno
+da «Smontiamo tutto» (priorità 1), effetti stampati, scelta dei bot, previsione dei due rami, 11 rifiuti del caricatore.
 
-**Raccomandata — A: scelta nel motore ora, per l'umano col passo del client (come RP-23).** Lo stesso schema già in vigore per
-«Annuncia X o Y»: la scelta è un campo facoltativo della mossa; **se la mossa non la dice, vale il più vecchio dei propri oggetti**;
-il campo per l'umano arriva con il prossimo passo del client.
+**Attesi cambiati.** Nessun atteso preesistente: `SetBaseDraftTest` cambia solo un commento; `Sb17.CARDS` (il campione delle carte
+di Sergio) passa da Frecciatina a Lo rivendo (D114); le fedeltà contano in più i due rami di Lo rivendo e li esigono nel campione.
+Con R1 cambiano i +7 dei test nuovi in +5 (`Sb17CardsTest`: due esiti, l'effetto stampato, la previsione).
 
-- Riga RP 1.2: Lo rivendo bersaglia sé; l'oggetto si sceglie fra i propri oggetti in campo con `choices.TARGET_ITEM` (campo della
-  mossa, non bersaglio: nessun controllo di presenza alla giocata, la carta resta giocabile senza oggetti); alla risoluzione, se
-  l'oggetto scelto c'è ancora esce senza effetto, +7 HEALTH; se manca o la mossa non lo dice e non hai oggetti, +2 HEALTH; se la
-  mossa non lo dice e hai oggetti, il più vecchio. Nel profilo `bozza` l'umano oggi vende quindi il più vecchio.
-- Codice tutto nel perimetro del prompt: `DataCards` (passo `vendi`), `PrintedEffects`, `TurnForecast`, `BotView`/`LegalMove` (una
-  mossa per oggetto proprio, più la mossa senza scelta se non ci sono oggetti) e stili (il meno prezioso, mai un Espresso se c'è un
-  Santino). Verifiche come nel prompt.
-- Poi un blocco del client piccolo (fuori da SB-17 o come sua coda): validatore che accetta `TARGET_ITEM` con le regole del
-  playground su una carta col passo `vendi`, e nel client una finestra «Quale oggetto vendi?» come quella di `searchChoice`. Con le
-  verifiche di `api` (identità viva, `TestServerContext`, manifest) e del client.
-- Costo per la prova finale del proprietario: finché il passo del client non c'è, il proprietario vende sempre il più vecchio;
-  i bot scelgono.
+## 3. Giro
 
-**B: tutto in B3.** Prompt allargato a `MoveCommandValidator` e al client (finestra di scelta). Stessa logica di A, ma con il
-blocco del client dentro la B3: più verifiche (area client con le Playwright che la regia sceglie), budget e perimetro da
-riscrivere. Il proprietario prova subito con la scelta.
+Lanciatore e semi della B2 ([run.ps1](sb-17/run.ps1), `-OutputRoot %TEMP%\bm-sb17-b3\run`): regole `d50`, 12 stili letali, 144 celle
+per incontro, 300 semi, 259.200 partite per giro. Quote di Sergio sulle decisive, soli euristici (D93); invarianti 0 e bound oltre il
+tetto 0 in entrambi i giri. In colonna B2 il giro 2 della B2, cioè lo stato di partenza (D112).
 
-**C (non raccomandata): bersaglio `NEAR_ITEM`.** Esiste già tutto, client compreso, ma è un bersaglio d'oggetto in una bound:
-viola R03 e toglie il ramo senza oggetti (la carta non si gioca senza oggetti).
+| Incontro | B2, giro 2 (partenza) | Giro 1 (D114: +7) | **Giro 2 (+R1: +5)** | D95 al giro 2 |
+|---|---|---|---|---|
+| Sergio–Sergio | 47,1% / 3,3% / 11,2 | 47,8% / 8,1% / 11,9 | 46,4% / 5,2% / 11,3 | dentro |
+| Sergio–Spazienzio | 68,3% / 2,0% / 9,3 | **76,9%** / 2,3% / 9,3 | **74,9%** / 2,5% / 9,2 | **quota +9,9** (soglia 68,3%) |
+| Sergio–Mara | 62,8% / 3,9% / 10,4 | **72,8%** / 4,6% / 10,5 | **69,2%** / 3,8% / 10,3 | **quota +4,2** |
+| Sergio–Celestina | 38,3% / 6,4% / 11,1 | 46,2% / 8,6% / 11,1 | 45,3% / 7,6% / 11,0 | dentro |
+| Sergio–Piera | 49,3% / 5,9% / 10,3 | 58,9% / 6,5% / 10,5 | 55,2% / 5,5% / 10,3 | dentro |
+| Sergio–Beppe | 57,9% / 2,8% / 8,3 | **66,7%** / 3,3% / 8,2 | 64,7% / 2,3% / 8,1 | dentro |
 
-## 4. Domande al proprietario
+Quota / patte / turni medi. Dettagli: [giro 1](sb-17/b3/round-1.md), [giro 2](sb-17/b3/round-2.md). Patte entro il 10% e durata entro
+12 turni in ogni incontro di entrambi i giri.
 
-1. A (scelta nel motore e nei bot ora, l'umano vende il più vecchio fino al passo del client), B (validatore e client dentro la
-   B3) o C?
-2. Con A: il passo del client per la scelta va in coda a SB-17 prima della prova finale, o dopo, insieme ai due blocchi piccoli
-   del client già in attesa (`12+x`, `restOn`)?
+**Riserva.** Dopo il giro 1 tre incontri oltre il 65% (Spazienzio oltre il 68,3%): **R1**, Lo rivendo con l'oggetto +7 → +5 HEALTH,
+ramo senza invariato (bozza, griglia, RP-25 e test). Dopo il giro 2 Spazienzio e Mara restano fuori: la riserva era una sola.
+**Scostamento dichiarato e STOP**, come scritto nella proposta.
+
+## 4. Letture (non criteri)
+
+| Lettura | B2, giro 2 | Giro 1 | Giro 2 (+R1) |
+|---|---|---|---|
+| Partite con Lo rivendo; giocate per partita | — | 35,4%; 0,53 | 24,9%; 0,34 |
+| Quota del ramo con l'oggetto | — | 96,6% | 93,6% |
+| Oggetti venduti: Santino / Peroni / Espresso | — | 56,5% / 29,6% / 13,9% | 55,2% / 31,3% / 13,5% |
+| Lo metto in conto: partite; giocate per partita | 75,1%; 1,07 | 77,2%; 1,18 | 78,0%; 1,23 |
+| Battutina: giocate per partita | 2,29 | 1,76 | 1,73 |
+| Mazzo esaurito | 6,0% | 19,6% | 14,8% |
+
+L'Espresso si vende solo quando è l'unico oggetto o accanto all'altro Espresso: la regola «mai un Espresso se c'è un Santino» vale.
+Lo rivendo si gioca poco e quasi sempre con un oggetto; con R1 il bot la sceglie ancora meno.
+
+## 5. Da dove viene il salto (diagnosi, 4 semi per cella)
+
+Lo rivendo cura in media meno di 2 HEALTH a partita: non spiega 10–20 punti. Due fattibilità di diagnosi, dentro la quota di
+fattibilità del budget (colonna «tutti gli stili», circa 576 partite per incontro; solo indicative):
+
+| Incontro | Bozza di HEAD (Frecciatina, mazzo B2) | Lo rivendo (+5), mazzo B2 | Bozza B3 (+7, mazzo § 3) |
+|---|---|---|---|
+| Sergio–Spazienzio | 57,7% | 66,1% | 71,2% |
+| Sergio–Mara | 40,1% | 43,8% | 68,2% |
+| Sergio–Celestina | 50,3% | 51,3% | 65,1% |
+| Sergio–Piera | 60,0% | 59,2% | 72,7% |
+| Sergio–Beppe | 62,1% | 64,2% | 86,3% |
+
+([HEAD](sb-17/b3/diag-head.md), [solo la bound](sb-17/b3/diag-bound-only.md), [bozza B3](sb-17/b3/feasibility.md).) Con il mazzo
+della B2 la bound sposta poco; il salto arriva coi ritocchi del mazzo (Santino 1 → 2, Peroni 1, Acqua in faccia e una Tartaruga
+fuori). Una lettura possibile, non misurata: con 5 oggetti su 20 invece di 3, Lo metto in conto (basic, consuma un proprio oggetto)
+è più spesso giocabile e Sergio perde meno turni. Il mazzo esaurito triplicato va nella stessa direzione.
+
+## 6. Domande al proprietario
+
+1. Quale stato tenere in bozza? (a) Questo (R1, Spazienzio e Mara sopra, scostamento dichiarato); (b) Lo rivendo con R1 ma il mazzo
+   della B2 (3 oggetti), che la diagnosi indica vicino alla partenza, da misurare con un giro; (c) una via di mezzo sul mazzo (per
+   esempio Acqua in faccia di nuovo al posto della Peroni), da misurare con un giro.
+2. La prova finale del proprietario si fa su questo stato, come previsto, o dopo la scelta della domanda 1?
+
+## 7. Lo STOP 1 prima del codice
+
+Alle 13 la B3 si era fermata prima di documenti e codice (commit `ed40100`, il testo intero è in quel commit): nel motore c'erano
+tre meccanismi di scelta (`choices.TARGET_ITEM`, `searchChoice`, `DISCARD_ONE`), ma per l'umano ogni via passava dal validatore del
+comando (`api/ws/MoveCommandValidator.java`, che rifiuta `TARGET_ITEM` su una carta senza bersaglio d'oggetto) e dal client, fuori
+dal perimetro. Proposte: A (scelta nel motore e nei bot ora, l'umano vende il più vecchio fino al passo del client), B (validatore e
+client dentro la B3), C (bersaglio `NEAR_ITEM`, contro R03). Il proprietario ha scelto A, col client dopo: D115. Il link di D115
+punta ora a questa sezione, perché il rapporto dello STOP è stato riscritto in questo.
