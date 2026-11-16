@@ -50,6 +50,8 @@ def generate():
     rules = draft["rules"]
     cards = {c["binding"]: c for c in draft["cards"]}
     chars = {c["id"]: c for c in draft["characters"]}
+    starters = [d for d in draft["decks"] if d["id"].startswith("starter-")]
+    tests = [d for d in draft["decks"] if not d["id"].startswith("starter-")]
     out = [
         f"Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `{sha(BOZZA)}…`). "
         f"Formato `{draft['format']}`, set `{draft['set']['id']}` versione «{draft['set']['version']}»; "
@@ -59,7 +61,8 @@ def generate():
         + ". Rarità: C comune, NC non comune, R rara.",
         "",
         f"Il file contiene {len(cards)} carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), "
-        f"{len(draft['characters'])} personaggi e {len(draft['decks'])} starter.",
+        f"{len(draft['characters'])} personaggi, {len(starters)} starter e, di prova, {len(tests)} mazzo/i "
+        "(l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).",
         "",
     ]
     for deck in draft["decks"]:
@@ -74,7 +77,7 @@ def generate():
             by_rar[r] = by_rar.get(r, 0) + n
         slots = " · ".join(f"{r} {by_rar[r]}" for r in ("C", "NC", "R") if r in by_rar)
         out += [
-            f"### Starter di {ch['name']} — `{deck['id']}`",
+            f"### {'Starter' if deck in starters else 'Mazzo di prova'} di {ch['name']} — `{deck['id']}`",
             "",
             f"Personaggio: **{ch['name']}** ({RARITY.get(ch.get('rarity'), ch.get('rarity'))}), {res}; oggetti {ch.get('items', 0)}; "
             f"immunità: {imm}. Regolari: **{total}** carte, {len(regs)} titoli ({slots}).",

@@ -76,7 +76,7 @@ client web non cambia: il server gli manda le carte e la collezione della bozza.
 - **Il proprio starter:** in «Con un tuo mazzo» (open 1vCom) compaiono i cinque starter della bozza come mazzi pronti, in sola lettura
   (`starter-spazienzio`, `starter-mara`, `starter-tossico`, `starter-pino`, `starter-gigi`). La collezione e l'editor mostrano
   le carte della bozza; i mazzi costruiti con quelle carte si salvano nel database della bozza.
-- **Quick 1vCom, quick 1v1 e FFA:** starter a caso dalla riserva `-Pool` (predefinita: i cinque), per esempio
+- **Quick 1vCom, quick 1v1 e FFA:** starter a caso dalla riserva `-Pool` (predefinita: i cinque starter, gli id `starter-*`; un mazzo di prova come `prova-sergio` ci entra solo con `-Pool` esplicito, ed è scelto in «Con un tuo mazzo» o con `-Com`), per esempio
   `-Pool 'starter-spazienzio,starter-mara'` per giocare solo quel matchup.
 - **Computer:** `-Com` sceglie il suo mazzo (`pool` = a caso dalla riserva, predefinito, oppure uno starter) e `-Bot` il suo
   stile: `risorse` (predefinito), `aggressivo`, `prudente` (i bot euristici di SB-4) o `casuale` (il computer della partita viva).

@@ -34,8 +34,8 @@ class BozzaDraftTest {
     @Test
     void theSetBaseDraftWithItsFiveStarters() throws Exception {
         BozzaDraft bozza = new BozzaDraft(profiles("local", "bozza"), DRAFT, "", "pool", "risorse");
-        // SB-17: with an empty app.bozza.pool every deck of the draft is in the pool, prova-sergio included.
-        assertEquals(List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi", "prova-sergio"), bozza.pool());
+        // SB-17t: with an empty app.bozza.pool the pool is the five starters; prova-sergio is a test deck, not in the pool.
+        assertEquals(List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi"), bozza.pool());
         assertNotNull(bozza.newPolicy());
         Map<String, Object> identity = bozza.describe();
         @SuppressWarnings("unchecked") var sources = (List<Map<String, Object>>) identity.get("sources");
@@ -50,6 +50,17 @@ class BozzaDraftTest {
                 "D74: anche il casuale d50 legge il gettone");
         assertEquals(true, identity.get("lethalAware"));
         assertNull(new BozzaDraft(profiles("test", "bozza"), DRAFT, "starter-mara, starter-pino", "starter-mara", "casuale", "1.13").newPolicy());
+    }
+
+    @Test
+    void aTestDeckIsChosenExplicitly() throws Exception {
+        var env = profiles("local", "bozza");
+        BozzaDraft pooled = new BozzaDraft(env, DRAFT, "prova-sergio, starter-mara", "pool", "risorse");
+        assertEquals(List.of("prova-sergio", "starter-mara"), pooled.pool());
+        BozzaDraft computer = new BozzaDraft(env, DRAFT, "", "prova-sergio", "risorse");
+        assertEquals("prova-sergio", computer.com());
+        assertEquals(5, computer.pool().size());
+        assertTrue(computer.draft().deckIds().contains("prova-sergio"));
     }
 
     @Test

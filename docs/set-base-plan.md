@@ -7,7 +7,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 16 novembre 2026, dopo D110). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): proposta A2 di Sergio approvata in D110; Fase B2 da lanciare.
+> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): proposta A2 di Sergio approvata in D110; Fase B2 da lanciare. In attesa: revisione di SB-17t (riserva `-Pool` = i cinque starter).
 > - **Prossimo:** SB-17 Fase B2 (D110: dati di Sergio A2 in `bozza.json`, un giro e al più due di riserva, 1.000 s), e il blocco tecnico SB-17t di D109 (3), mai insieme alla misura. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
 > - **Decisioni da leggere:** D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D110).
 
@@ -474,6 +474,8 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 **Fase A2 consegnata il 16 novembre 2026, STOP per il proprietario** ([proposta](design/set-base/sb-17-proposta-a2.md)). Ricerca di diagnosi sui cinque personaggi degli starter (628,7 s su 900, [evidenze](reports/set-base/sb-17/a2-search/search.md)): tutti arrivano al 77–99,5% coi mazzi costruiti tenendo al più 4 carte d'archetipo proprie; Estasi da Coca Etilene in tutte le ricerche dei non-Piera. Il 95% viene dal pool, ma lo starter di Sergio (21,8% contro 47–61,5%) è debole per conto suo. Proposta: «Lo sanno tutti» (15 A, 20 HIT) al posto di Fare il vago, Conto salato 8 + 6 sul gettone, Oh, guarda là che annuncia il colpo nuovo, mazzo di prova rivisto; riserve R1–R4, budget 1.000 s. Cinque domande.
 
 **Fase A2 approvata il 16 novembre 2026 in [D110](#decisioni-del-proprietario)**, come raccomandata: Lo sanno tutti al posto di Fare il vago, Conto salato 8 + 6 sul gettone, Oh, guarda là che annuncia Lo sanno tutti o Conto salato, mazzo di prova rivisto con Spintone; Fase B2 con le riserve R1–R4 e 1.000 s. Il criterio dei mazzi costruiti non è un cancello per SB-17 e SB-18.
+
+**Blocco tecnico SB-17t (D109 (3)) eseguito il 16 novembre 2026, da rivedere.** Senza `-Pool` la riserva del profilo bozza sono i mazzi con id `starter-*` (i cinque); `prova-sergio` resta scelto in «Con un tuo mazzo», con `-Com` e con `-Pool` esplicito; la bozza di riferimento lo chiama «mazzo di prova».
 
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 

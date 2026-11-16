@@ -33,7 +33,7 @@ import static com.gsc.bm.repo.external.MatchEventRepository.sha256;
  * SB-8: the set draft played by the development server. Exists only with the profile {@code bozza}, which requires
  * {@code local} (or {@code test}) and never {@code heroku}. A draft that is not valid stops the start with the loader's message.
  * Properties: {@code app.bozza.sources} (as {@code -Dsim.draft}), {@code app.bozza.pool} (starters for quick and FFA, empty =
- * every deck), {@code app.bozza.com} (the computer's deck, {@code pool} = at random from the pool) and {@code app.bozza.bot}
+ * the decks whose id starts with {@code starter-}, test decks excluded), {@code app.bozza.com} (the computer's deck, {@code pool} = at random from the pool) and {@code app.bozza.bot}
  * ({@code casuale} = the live ComPlayer, or a heuristic style of SB-4). SB-16c: {@code app.bozza.regole} chooses the rules of the
  * draft matches, {@code d50} (the playground rules of D50, the default) or {@code 1.13} (the live rules); live matches never see them.
  */
@@ -41,7 +41,7 @@ import static com.gsc.bm.repo.external.MatchEventRepository.sha256;
 @Profile("bozza")
 public class BozzaDraft implements MatchVersions.DraftIdentity {
 
-    public static final String PROFILE = "bozza", FROM_POOL = "pool", RANDOM_BOT = "casuale";
+    public static final String PROFILE = "bozza", FROM_POOL = "pool", RANDOM_BOT = "casuale", STARTER_PREFIX = "starter-";
 
     private static final Map<String, Supplier<BotPolicy>> STYLES = new LinkedHashMap<>();
 
@@ -74,7 +74,12 @@ public class BozzaDraft implements MatchVersions.DraftIdentity {
         this.draft = DraftSource.load(sources);
         List<String> chosen = new ArrayList<>();
         for (String deck : pool.split(",")) if (!deck.isBlank()) chosen.add(deck.trim());
-        if (chosen.isEmpty()) chosen.addAll(draft.deckIds());
+        if (chosen.isEmpty()) {
+            // SB-17t: an empty pool is the starters (id prefix STARTER_PREFIX); the other decks (test decks such as prova-sergio)
+            // stay selectable in «Con un tuo mazzo», in -Com and in an explicit pool. A draft without starters: every deck.
+            for (String deck : draft.deckIds()) if (deck.startsWith(STARTER_PREFIX)) chosen.add(deck);
+            if (chosen.isEmpty()) chosen.addAll(draft.deckIds());
+        }
         for (String deck : chosen)
             if (!draft.deckIds().contains(deck))
                 throw new IllegalStateException("app.bozza.pool: mazzo assente nella bozza: " + deck + " (mazzi: " + draft.deckIds() + ")");
