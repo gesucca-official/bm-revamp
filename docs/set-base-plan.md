@@ -4,13 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D109). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D110). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): Fase B consegnata e rivista, Sergio sotto la soglia D95; deciso in D109.
-> - **In attesa:** revisione della [proposta A2 di SB-17](design/set-base/sb-17-proposta-a2.md) (ricerca sugli starter fatta), domande 1–5.
-> - **Prossimo:** SB-17 Fase A2 (D109): prima la ricerca di diagnosi sui personaggi dei cinque starter, poi la proposta di Sergio riprogettato, STOP per il proprietario. Dopo la ricerca, il blocco tecnico di D109 (3) (bozza di riferimento e riserva predefinita del profilo `bozza`). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D109).
+> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): proposta A2 di Sergio approvata in D110; Fase B2 da lanciare.
+> - **Prossimo:** SB-17 Fase B2 (D110: dati di Sergio A2 in `bozza.json`, un giro e al più due di riserva, 1.000 s), e il blocco tecnico SB-17t di D109 (3), mai insieme alla misura. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D110).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -293,7 +292,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fase B consegnata ([rapporto](reports/set-base/sb-17-report.md)): Sergio sotto D95 contro 4 starter ([D109](#decisioni-del-proprietario)); Fase A2 consegnata ([proposta](design/set-base/sb-17-proposta-a2.md)), STOP per il proprietario |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fase B consegnata ([rapporto](reports/set-base/sb-17-report.md)): Sergio sotto D95 contro 4 starter ([D109](#decisioni-del-proprietario)); Fase A2 approvata ([proposta](design/set-base/sb-17-proposta-a2.md), [D110](#decisioni-del-proprietario)); Fase B2 da lanciare |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -474,6 +473,8 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Fase A2 consegnata il 16 novembre 2026, STOP per il proprietario** ([proposta](design/set-base/sb-17-proposta-a2.md)). Ricerca di diagnosi sui cinque personaggi degli starter (628,7 s su 900, [evidenze](reports/set-base/sb-17/a2-search/search.md)): tutti arrivano al 77–99,5% coi mazzi costruiti tenendo al più 4 carte d'archetipo proprie; Estasi da Coca Etilene in tutte le ricerche dei non-Piera. Il 95% viene dal pool, ma lo starter di Sergio (21,8% contro 47–61,5%) è debole per conto suo. Proposta: «Lo sanno tutti» (15 A, 20 HIT) al posto di Fare il vago, Conto salato 8 + 6 sul gettone, Oh, guarda là che annuncia il colpo nuovo, mazzo di prova rivisto; riserve R1–R4, budget 1.000 s. Cinque domande.
 
+**Fase A2 approvata il 16 novembre 2026 in [D110](#decisioni-del-proprietario)**, come raccomandata: Lo sanno tutti al posto di Fare il vago, Conto salato 8 + 6 sul gettone, Oh, guarda là che annuncia Lo sanno tutti o Conto salato, mazzo di prova rivisto con Spintone; Fase B2 con le riserve R1–R4 e 1.000 s. Il criterio dei mazzi costruiti non è un cancello per SB-17 e SB-18.
+
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 
 **Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Duccio, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; un costo che porterebbe a 0 o sotto non si paga, salvo le carte con «Ultimo colpo», che si risolvono anche a terra (D50, punto 2); il bot non si suicida per caso. Contro gli starter vale la soglia minima di [D95](#decisioni-del-proprietario); i criteri completi tornano in SB-21.
@@ -494,6 +495,8 @@ qui; la meccanica non cambia. I nomi di lavoro delle carte legati ai concept vec
 **Completamento verificabile.** Griglia completa: totale fra 110 e 120, ogni carta con rarità. Gli starter non peggiorano.
 
 **Rischi.** Il pool può arrivare stanco: le generiche devono restare interessanti, non riempitivi.
+
+**In ingresso ([D110](#decisioni-del-proprietario)).** La [ricerca di diagnosi di SB-17](reports/set-base/sb-17/a2-search/search.md): coi mazzi costruiti ogni personaggio batte gli starter al 77–99,5%. Ricorrono Estasi da Coca Etilene (PIN-AR2, un colpo da 18 senza costo per chi non ha L, in tutti i mazzi vincenti di chi non è Piera), Sgommata e gli oggetti. Da guardare qui e in SB-20, insieme alle carte d'archetipo giocate fuori dal loro personaggio; parte del dato può venire dai bot.
 
 ### SB-20 — Prima misura dell'intero set
 
@@ -632,7 +635,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D109 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D110 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
