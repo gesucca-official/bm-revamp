@@ -173,6 +173,7 @@ dopo il pull e senza verifiche in corso (usano le stesse porte 8080 e 4320):
 
 ```powershell
 ./scripts/build.ps1 -Task Server -Offline
+./client-web/run.ps1 -Task Build    # Serve non ricostruisce: senza, si serve la build vecchia in dist (D104)
 ./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts -Pool 'starter-mara,starter-spazienzio,starter-tossico' -Com pool -Bot risorse
 # in un secondo terminale, dalla radice:
 ./client-web/run.ps1 -Task Serve      # http://127.0.0.1:4320, account sintetici come in docs/setup.md

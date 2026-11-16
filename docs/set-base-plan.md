@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D103). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D104). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** nulla. Passo del client di [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima) consegnato, rivisto e chiuso con D103.
-> - **Prossimo:** la prova umana breve della 1.6b, il 17 novembre 2026 sull'altra macchina (D103 (4)): prima il push da qui e il pull di là con l'[allineamento fra le macchine](orchestrazione-lavoro.md#allineamento-fra-le-macchine), poi i [comandi](reports/set-base/sb-16i-client-report.md#prova-umana-breve-sulla-16b); il giudizio si registra con le parole del proprietario. Poi SB-17. Dopo la prova anche due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D103).
+> - **In corso:** nulla. [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima) chiuso con D104: prova umana breve della 1.6b superata il 16 novembre 2026.
+> - **Prossimo:** SB-17 (Sergio Sommerso: bozza e giro), con Q11 aperta. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D104).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -291,7 +291,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16f | Prova umana degli starter rifatti | SB-16f0 | fatto, giudizio registrato (13 novembre 2026) |
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
-| | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve il 17 novembre 2026 sull'altra macchina |
+| | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i |  |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
@@ -448,6 +448,8 @@ rapida; nelle carriere i nemici useranno per lo più mazzi personalizzati.
 **Rivisto dalla regia il 16 novembre 2026.** Nessun file fuori dal perimetro (D102 compreso), nessun atteso cambiato, solo test nuovi; impronte dell'identità viva uguali a quelle della Fase B; D102 conforme alla trascrizione dell'esecutore. Con le regole vive il percorso del clic su ✓ non cambia; il rosso viene da `restOn` (`client-web/tools/verify-resolution.mjs`), che non controlla un riquadro nullo nella corsa voluta col clic. Fuori dal blocco: per «L'ultimo giro» di Piera «Ultimo turno» legge «12+x» come metà della V residua, mentre la carta somma la L residua; è un difetto preesistente del client, da correggere in un suo blocco.
 
 **Domande del passo del client decise il 16 novembre 2026 in [D103](#decisioni-del-proprietario).** Il rosso dello strumento è il rosso noto R6 e la correzione di `restOn` è la consegna 2 al client; contatore dell'avversario e «prossima: …» restano come sono fino alla prova umana breve, che il proprietario fa il 17 novembre 2026 sull'altra macchina. Dopo la prova, in un blocco piccolo del client del Set Base, la lettura di «12+x» per «L'ultimo giro» (`client-web/src/readability.ts`).
+
+**Prova umana breve della 1.6b fatta il 16 novembre 2026, SB-16i chiuso ([D104](#decisioni-del-proprietario)).** Su questa macchina e un giorno prima del previsto. La finestra della scelta all'inizio non compariva per una build vecchia del client (i comandi della prova ora la ricostruiscono); dopo, il proprietario: «dalla prova sul lavoro fatto non emergono criticità». Contatore dell'avversario e assenza di «prossima: …» restano come sono.
 
 **Completamento verificabile.** Soglia minima D95: ogni incontro fra starter fra 35% e 65% sui bot euristici, patte al massimo 10%, durata
 entro 12 turni fuori dagli specchi; invarianti e bound verdi. Gli scostamenti residui si dichiarano e si passa comunque a SB-17.
@@ -617,7 +619,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D103 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D104 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
