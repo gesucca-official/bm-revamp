@@ -150,7 +150,7 @@ di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 | PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 70, A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
 | PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H ~~85~~ 80 (SB-16i), A 15, L 10 (SB-16e), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
 | PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
-| PG-CES | Sergio Sommerso | Personaggio, booster | H 90, A 30, V 10, capacità 2 | R | — | da inventare (concept SB-9) | Contromosse e letture | dati |
+| PG-CES | Sergio Sommerso | Personaggio, booster | H ~~90~~ ~~75~~ 85 (SB-17: D106, riserva del giro 2), A 30, V 10, capacità 2 | R | — | bozza (SB-17), concept SB-9 | Contromosse e letture | dati |
 | PG-ROC | Duccio Braccio Teso | Personaggio, booster | H 130, A 15, capacità 2 | R | — | da inventare (concept SB-9; personaggio di prova SB-6a) | La salute come risorsa (D27) | dati |
 
 **Salute iniziale (cautela di SB-10a).** A 2,5–4,8 punti di quota per 1 HEALTH, Mara a −15 vale sulla carta da −37 a −72 punti e Duccio
@@ -189,7 +189,7 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 | TOS-BA | Celestina | Azione, basic | ITEMS | 1 | +5 T a sé, poi consuma | NC | Celestina | `ToxicGrab`, riprogettata (assorbe il flavour di `EverythingIsDrug`) | «Tutto è droga»: oggi perde metà della A, che è un tratto solo punitivo | consume |
 | PIN-BA | Piera | Azione, basic | ITEMS | 0 | +5 L a sé, poi consuma | NC | Piera | bozza «Questo lo finisco io» | Beve quello che trova | consume |
 | GIG-BA | Beppe | Azione, basic | ITEMS | 0 | +4 V a sé, poi consuma | NC | Beppe | bozza «Questo torna utile», senza −5 A, priorità −1 → 0 | Ogni oggetto gli dà moneta per gli attrezzi; diversa da quella di Spazienzio | consume |
-| CES-BA | Sergio | Azione, basic | ITEMS | 1 | +5 A a sé, poi consuma | R | — | da inventare («Me lo tengo io») | Raccoglie e tiene da parte | consume |
+| CES-BA | Sergio | Azione, basic | ITEMS | 1 | +5 A a sé, poi consuma | R | — | bozza «Lo metto in conto» (SB-17) | Raccoglie e tiene da parte | consume |
 | ROC-BA | Duccio | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | da inventare («La mancia») | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
 
 ### Bound (21)
@@ -214,9 +214,9 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | GIG-BO1 | Beppe | Azione, bound | RESOURCES | 0 | +5 V a sé | 3,75 | C | Beppe | bozza «Una stretta e passa», senza i 3 HIT | Generatrice della moneta degli attrezzi | dati |
 | GIG-BO2 | Beppe | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | C | Beppe | da inventare («Colpo di cacciavite») | Colpetto, amplificato dai guanti | dati |
 | GIG-BO3 | Beppe | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | da inventare («Lima») | Variante veloce | dati |
-| CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Affacciarsi») | Generatrice: le letture costano A | dati |
-| CES-BO2 | Sergio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | da inventare («Battuta») | Colpetto | dati |
-| CES-BO3 | Sergio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Frecciatina al volo») | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
+| CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Mi informo» (SB-17) | Generatrice: le letture costano A | dati |
+| CES-BO2 | Sergio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | bozza «Battutina» (SB-17) | Colpetto | dati |
+| CES-BO3 | Sergio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | bozza «Frecciatina al volo» (SB-17), nella collezione | Variante veloce; nessun annullamento né −A (decisione 8 di SB-9) | dati |
 | ROC-BO1 | Duccio | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
 | ROC-BO2 | Duccio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
 | ROC-BO3 | Duccio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Duccio ha la A più bassa | dati |
@@ -305,12 +305,12 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| CES-AR1 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | −10 A al bersaglio; 4 HIT | C | — | bozza «Oh, guarda là», più 4 HIT | Attacco: la frecciatina | dati |
-| CES-AR2 | Azione, regolare | COUNTER | F2 (15 A) | 2 | Annulla la mossa successiva e ne esegue l'effetto sul bersaglio come autore | NC | — | `WhatchaDoin`, riprogettata: 10 V + 10 A → 15 A | Il suo cuore; oggi non si gioca mai per i costi doppi | Java |
-| CES-AR3 | Azione, regolare | COUNTER | F1 (10 A) | 2 | Annulla le mosse successive dirette a lei | NC | — | da inventare («Lo sapevo») | Seconda lettura | Java (classe di `AmphetamineReflexes`) |
-| CES-AR4 | Azione, regolare | DISRUPT | F1 (5 V + 5 A) | 2 | 5 HIT; −5 A al bersaglio | NC | — | bozza «Parli troppo vicino» | Usa la V come seconda risorsa | dati |
-| CES-AR5 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | CUT ricevuto ×0,5 e HIT ×0,75 nel turno | C | — | da inventare («Fare la vaga») | Difesa | dati |
-| CES-AR6 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde A pari a metà della A residua di Sergio; 5 HIT | R | — | da inventare («Malelingue») | Picco con A alta | dati |
+| CES-AR1 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | −10 A al bersaglio; 4 HIT. Annuncia Conto salato o Malelingue (SB-17, D106). Se lo trovi: +15 A. Se non lo trovi: +5 A | NC | — | bozza «Oh, guarda là», più 4 HIT; C → NC (SB-17, D106) | Attacco: la frecciatina | dati |
+| CES-AR2 | Azione, regolare | COUNTER | F2 (15 A) | 2 | ~~Annulla la mossa successiva e ne esegue l'effetto sul bersaglio come autore~~ Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo (SB-17, D106) | NC | — | «Ricatto», al posto di `WhatchaDoin` (SB-17) | Il suo cuore; oggi non si gioca mai per i costi doppi | Java |
+| CES-AR3 | Azione, regolare | COUNTER | F1 (10 A) | 2 | ~~Annulla le mosse successive dirette a lei~~ Annulla la mossa del bersaglio se arriva dopo; se annulli il colpo che ha annunciato, il suo gettone resta (SB-17, D106, D108) | NC | — | bozza «Lo sapevo» (SB-17) | Seconda lettura | Java (`base.cesira.LoSapevo`) |
+| CES-AR4 | Azione, regolare | DAMAGE | F1 (~~5 V +~~ 5 A) | ~~2~~ 1 | ~~5 HIT; −5 A al bersaglio~~ 8 HIT; se il bersaglio ha un gettone di vulnerabilità, altri ~~8~~ 12 HIT (SB-17: D106, riserva del giro 3) | NC | — | «Conto salato», già «Parli troppo vicino» (SB-17) | Incassa la lettura | dati (gettone) |
+| CES-AR5 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | CUT ricevuto ×0,5 e HIT ×0,75 nel turno; +5 A a sé (SB-17) | C | — | bozza «Fare il vago» (SB-17) | Difesa | dati |
+| CES-AR6 | Azione, regolare | DISRUPT | F1 (10 A) | ~~2~~ 1 | Il bersaglio perde A pari a metà della A residua di Sergio; ~~5 HIT~~ HIT pari a 5 più metà della A residua (SB-17) | R | — | bozza «Malelingue» (SB-17) | Picco con A alta | dati (`of`) |
 
 **Duccio (6)**
 

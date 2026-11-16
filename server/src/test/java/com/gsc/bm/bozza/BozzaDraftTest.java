@@ -34,7 +34,8 @@ class BozzaDraftTest {
     @Test
     void theSetBaseDraftWithItsFiveStarters() throws Exception {
         BozzaDraft bozza = new BozzaDraft(profiles("local", "bozza"), DRAFT, "", "pool", "risorse");
-        assertEquals(List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi"), bozza.pool());
+        // SB-17: with an empty app.bozza.pool every deck of the draft is in the pool, prova-sergio included.
+        assertEquals(List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi", "prova-sergio"), bozza.pool());
         assertNotNull(bozza.newPolicy());
         Map<String, Object> identity = bozza.describe();
         @SuppressWarnings("unchecked") var sources = (List<Map<String, Object>>) identity.get("sources");

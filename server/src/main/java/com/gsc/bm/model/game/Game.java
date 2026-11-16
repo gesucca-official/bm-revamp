@@ -210,7 +210,8 @@ public class Game implements Serializable {
                 Card announced = getCardFromHand(m.getPlayerId(), m.getPlayedCardName());
                 if (announced instanceof com.gsc.bm.model.cards.AbstractCard)
                     m.setPlayedRole(((com.gsc.bm.model.cards.AbstractCard) announced).getRole());
-                for (Player.Revealed r : owner.getRevealed())
+                // SB-17 (D106 (3)): a move voided by a counter printed with «il suo gettone resta» satisfies no token.
+                if (!m.isKeepsToken()) for (Player.Revealed r : owner.getRevealed())
                     if (!satisfied.contains(r) && r.getCard().getName().equalsIgnoreCase(m.getPlayedCardName())) {
                         satisfied.add(r); break;
                     }

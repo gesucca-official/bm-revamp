@@ -165,6 +165,15 @@ public final class TurnForecast {
         return steps(card, false).stream().anyMatch(s -> s.getKind() == PrintedEffects.Kind.SEARCH);
     }
 
+    /**
+     * SB-17 («Ricatto»): the base damage of a card as the engine reads it ({@link PrintedEffects#baseDamage}), or from its public
+     * damage text for a card that cannot describe itself.
+     */
+    static Map<Damage.DamageType, Integer> baseOf(BotView.CardSeen card) {
+        if (card.getEffects() != null) return PrintedEffects.baseDamage(card.getEffects());
+        return PrintedEffects.nominalDamage(card.getDamage(), card.getDamageAmount());
+    }
+
     private static boolean hits(BotView.CardSeen card) {
         if (card.getEffects() == null) return card.nominalDamage() > 0;
         return card.getEffects().getSteps().stream().anyMatch(s -> s.getKind() == PrintedEffects.Kind.DAMAGE && s.isOnTarget());
@@ -226,6 +235,9 @@ public final class TurnForecast {
         final List<Multiplier> statuses = new ArrayList<>();
         final List<BotView.CardSeen> items;
         boolean toxicImmune;
+        /** SB-17: the seat has a vulnerability token («se il bersaglio ha un gettone»). */
+        boolean token;
+        final int itemCapacity;
         final boolean upAtStart;
         /** SB-16i («Rincara»): the public play counts of the seat. */
         final BotView.Seat seat;
@@ -239,6 +251,8 @@ public final class TurnForecast {
                     statuses.add(new Multiplier(s.getProperty(), s.getFlow(), s.getType(), s.getScale(), s.getConvertTo()));
             this.items = new ArrayList<>(seat.getItems());
             this.toxicImmune = seat.getImmunities().contains(Resource.TOXICITY);
+            this.token = seat.getStatuses().stream().anyMatch(s -> s.getExposure() != null);
+            this.itemCapacity = seat.getItemCapacity();
             this.upAtStart = !seat.isDead() && res.get(Resource.HEALTH) > 0;
         }
 
@@ -343,6 +357,7 @@ public final class TurnForecast {
             for (PrintedEffects.Step step : act.steps) {
                 if (step.isAhead() && !act.ahead) continue;
                 Body subject = step.isOnTarget() ? act.target : act.author;
+                if (step.isIfToken() && !subject.token) continue;
                 switch (step.getKind()) {
                     case DAMAGE:
                         damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart) + step.getPerPlay() * plays,
@@ -381,7 +396,17 @@ public final class TurnForecast {
                         break;
                     case COUNTER_TARGET:
                         for (Act next : later)
-                            if (next.author == act.target) { next.voided = true; break; }
+                            if (next.author == act.target) {
+                                // SB-17 («Ricatto»): a move not voided yet reflects its base damage.
+                                if (!next.voided && step.getFactor() != null)
+                                    baseOf(next.card).forEach((type, base) ->
+                                            damage(act.author, act.target, type, PrintedEffects.reflected(base, step.getFactor()), null));
+                                next.voided = true;
+                                break;
+                            }
+                        break;
+                    case SWAP_ITEMS:
+                        swap(act.author, act.target);
                         break;
                     case COUNTER_ALL:
                         for (Body foe : bodies.values()) {
@@ -398,9 +423,20 @@ public final class TurnForecast {
             // D71–D72: the search after the move; the token and the full gains only if the card is found.
             boolean hit = act.mine ? found : theyFind;
             (hit ? foundGains : missedGains).forEach((r, n) -> act.author.set(r, act.author.get(r) + n));
-            if (hit && token != null)
+            if (hit && token != null) {
                 for (Damage.DamageType type : Damage.DamageType.values())
                     act.author.statuses.add(new Multiplier(type, StatusFlow.INPUT, StatusType.BAD, token, null));
+                act.author.token = true;
+            }
+        }
+
+        /** SB-17, as ShuffleFeet: each tray takes the other's items, keeping the most recent ones up to its capacity. */
+        private static void swap(Body author, Body target) {
+            List<BotView.CardSeen> mine = new ArrayList<>(author.items), theirs = new ArrayList<>(target.items);
+            author.items.clear();
+            author.items.addAll(theirs.subList(Math.max(0, theirs.size() - author.itemCapacity), theirs.size()));
+            target.items.clear();
+            target.items.addAll(mine.subList(Math.max(0, mine.size() - target.itemCapacity), mine.size()));
         }
 
         /** A grab: the chosen near item leaves the field and its own printed effects apply to the author. */

@@ -1,0 +1,664 @@
+{
+  "intestazione" : {
+    "banco" : "sb-7/1",
+    "bozza" : "classpath:/set-base/bozza.json",
+    "sha256" : "4ee884cf156a61572f5812d16b450f9da3247360091acfe2ab87f9b9bb2edb72",
+    "avversari" : [
+      "starter-spazienzio",
+      "starter-mara",
+      "starter-tossico",
+      "starter-pino",
+      "starter-gigi",
+      "prova-sergio"
+    ],
+    "stili" : [
+      "aggressivo",
+      "prudente",
+      "risorse"
+    ],
+    "lambda" : 12,
+    "partitePerCombinazione" : 16,
+    "generazioniMassime" : 25,
+    "pazienza" : 10,
+    "margineSostituzione" : 1,
+    "semeRicerca" : 7100000,
+    "semeConvalida" : 7900000,
+    "partiteConvalida" : 300,
+    "semeMutazioni" : 7000007,
+    "nota" : "SB-17 Fase B"
+  },
+  "ricerche" : [
+    {
+      "personaggio" : "base.character.Cesira",
+      "partenza" : "starter",
+      "generazioni" : 25,
+      "arresto" : "numero massimo di generazioni (25)",
+      "storia" : [
+        0.2222,
+        0.4583,
+        0.3993,
+        0.4485,
+        0.5428,
+        0.6036,
+        0.7922,
+        0.8495,
+        0.9028,
+        0.8958,
+        0.9277,
+        0.9664,
+        0.9398,
+        0.9589,
+        0.9722,
+        0.9444,
+        0.9323,
+        0.9664,
+        0.9444,
+        0.9728,
+        0.9659,
+        0.9659,
+        0.9444,
+        0.9907,
+        0.9803,
+        0.9763
+      ],
+      "mazzi" : [
+        {
+          "etichetta" : "ultimo",
+          "bound" : [
+            "base.cesira.bound.Battutina",
+            "base.cesira.bound.FrecciatinaAlVolo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.com.DentiStretti" : 1,
+            "base.com.Sgambetto" : 1,
+            "base.com.Spintone" : 1,
+            "base.com.SputoDaPosacenere" : 2,
+            "base.items.AmaroNelBicchiereDiPlastica" : 1,
+            "base.items.GhiaccioNelTovagliolo" : 1,
+            "base.items.GiubbottoDiFintaPelle" : 2,
+            "base.mara.Sgommata" : 2,
+            "base.pino.GoingBerserk" : 2,
+            "base.pino.PrimaIlBrindisi" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.StunningBlow" : 1,
+            "com.items.AnotherRottenBeer" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.9763,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 2574,
+              "sconfitte" : 123,
+              "patte" : 3,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 2592,
+              "sconfitte" : 95,
+              "patte" : 13,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 2665,
+              "sconfitte" : 16,
+              "patte" : 19,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 2568,
+              "sconfitte" : 103,
+              "patte" : 29,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 2588,
+              "sconfitte" : 104,
+              "patte" : 8,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 2686,
+              "sconfitte" : 6,
+              "patte" : 8,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "base.cesira.bound.FrecciatinaAlVolo",
+            "base.cesira.bound.MiInformo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.com.Sgambetto" : 1,
+            "base.com.SputoDaPosacenere" : 2,
+            "base.gigi.ChiaveDaTredici" : 1,
+            "base.items.AmaroNelBicchiereDiPlastica" : 1,
+            "base.items.GiubbottoDiFintaPelle" : 2,
+            "base.items.SantinoDellaPortinaia" : 1,
+            "base.mara.Sgommata" : 2,
+            "base.pino.GoingBerserk" : 2,
+            "base.pino.PrimaIlBrindisi" : 2,
+            "bruiser.StunningBlow" : 2,
+            "com.items.AnotherRottenBeer" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.9826,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 2476,
+              "sconfitte" : 213,
+              "patte" : 11,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 2529,
+              "sconfitte" : 153,
+              "patte" : 18,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 2553,
+              "sconfitte" : 105,
+              "patte" : 42,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 2479,
+              "sconfitte" : 193,
+              "patte" : 28,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 2451,
+              "sconfitte" : 246,
+              "patte" : 3,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 2651,
+              "sconfitte" : 18,
+              "patte" : 31,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "base.cesira.bound.FrecciatinaAlVolo",
+            "base.cesira.bound.MiInformo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.com.Sgambetto" : 1,
+            "base.com.SputoDaPosacenere" : 2,
+            "base.gigi.ChiaveDaTredici" : 1,
+            "base.items.AmaroNelBicchiereDiPlastica" : 1,
+            "base.items.GiubbottoDiFintaPelle" : 2,
+            "base.items.SantinoDellaPortinaia" : 1,
+            "base.mara.Sgommata" : 2,
+            "base.pino.GoingBerserk" : 2,
+            "base.pino.PrimaIlBrindisi" : 2,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.StunningBlow" : 1,
+            "com.items.AnotherRottenBeer" : 1,
+            "com.items.CocktailOnTheGround" : 2,
+            "junkie.ToxicBloodDrain" : 1
+          },
+          "punteggioRicerca" : 0.956,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 2510,
+              "sconfitte" : 181,
+              "patte" : 9,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 2532,
+              "sconfitte" : 149,
+              "patte" : 19,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 2573,
+              "sconfitte" : 91,
+              "patte" : 36,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 2512,
+              "sconfitte" : 162,
+              "patte" : 26,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 2488,
+              "sconfitte" : 211,
+              "patte" : 1,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 2651,
+              "sconfitte" : 16,
+              "patte" : 33,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "starter",
+          "bound" : [
+            "base.cesira.bound.Battutina",
+            "base.cesira.bound.MiInformo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.cesira.ContoSalato" : 2,
+            "base.cesira.FareIlVago" : 2,
+            "base.cesira.LoSapevo" : 2,
+            "base.cesira.Malelingue" : 1,
+            "base.cesira.OhGuardaLa" : 2,
+            "base.cesira.Ricatto" : 2,
+            "base.com.AcquaInFaccia" : 1,
+            "base.com.Sgambetto" : 1,
+            "base.com.ShuffleFeet" : 1,
+            "base.com.TartarugaSulMarciapiede" : 1,
+            "base.items.EspressoDelDistributore" : 2,
+            "base.items.SantinoDellaPortinaia" : 1,
+            "bruiser.StunningBlow" : 2
+          },
+          "punteggioRicerca" : null,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 980,
+              "sconfitte" : 1553,
+              "patte" : 167,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 672,
+              "sconfitte" : 1831,
+              "patte" : 197,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 58,
+              "sconfitte" : 2566,
+              "patte" : 76,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 114,
+              "sconfitte" : 2543,
+              "patte" : 43,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 452,
+              "sconfitte" : 2144,
+              "patte" : 104,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 1029,
+              "sconfitte" : 1196,
+              "patte" : 475,
+              "limite" : 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "personaggio" : "base.character.Cesira",
+      "partenza" : "casuale",
+      "generazioni" : 25,
+      "arresto" : "numero massimo di generazioni (25)",
+      "storia" : [
+        0.2112,
+        0.533,
+        0.7118,
+        0.7882,
+        0.8802,
+        0.9468,
+        0.9282,
+        0.9352,
+        0.9589,
+        0.9294,
+        0.9659,
+        0.9653,
+        0.934,
+        0.9502,
+        0.9502,
+        0.9601,
+        0.9682,
+        0.9612,
+        0.9317,
+        0.9676,
+        0.9497,
+        0.9456,
+        0.9288,
+        0.9462,
+        0.9398,
+        0.941
+      ],
+      "mazzi" : [
+        {
+          "etichetta" : "ultimo",
+          "bound" : [
+            "base.cesira.bound.Battutina",
+            "base.cesira.bound.FrecciatinaAlVolo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.cesira.LoSapevo" : 1,
+            "base.com.MattoneDelCantiere" : 1,
+            "base.gigi.ChiaveDaTredici" : 1,
+            "base.items.AmaroNelBicchiereDiPlastica" : 1,
+            "base.items.EspressoDelDistributore" : 1,
+            "base.items.GhiaccioNelTovagliolo" : 1,
+            "base.items.GiubbottoDiFintaPelle" : 1,
+            "base.items.GuantiDaOfficina" : 1,
+            "base.items.PaninoDelKebab" : 2,
+            "base.mara.CinghiataDiTraverso" : 1,
+            "base.mara.Sgommata" : 1,
+            "base.mara.SorpassoInCurva" : 1,
+            "base.pino.GoingBerserk" : 2,
+            "base.pino.OffroIo" : 1,
+            "bruiser.BreakYourToy" : 2,
+            "bruiser.Glare" : 1,
+            "bruiser.StunningBlow" : 1
+          },
+          "punteggioRicerca" : 0.941,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 2446,
+              "sconfitte" : 239,
+              "patte" : 15,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 2459,
+              "sconfitte" : 195,
+              "patte" : 46,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 2305,
+              "sconfitte" : 264,
+              "patte" : 131,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 2509,
+              "sconfitte" : 160,
+              "patte" : 31,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 2408,
+              "sconfitte" : 264,
+              "patte" : 28,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 2667,
+              "sconfitte" : 5,
+              "patte" : 28,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "base.cesira.bound.Battutina",
+            "base.cesira.bound.FrecciatinaAlVolo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.cesira.ContoSalato" : 1,
+            "base.com.MattoneDelCantiere" : 1,
+            "base.com.ShuffleFeet" : 1,
+            "base.com.SputoDaPosacenere" : 1,
+            "base.gigi.SottoIlCofano" : 1,
+            "base.items.CascoDaLavoro" : 1,
+            "base.items.EspressoDelDistributore" : 1,
+            "base.items.GhiaccioNelTovagliolo" : 1,
+            "base.items.GiubbottoDiFintaPelle" : 1,
+            "base.items.GuantiDaOfficina" : 1,
+            "base.items.PaninoDelKebab" : 1,
+            "base.mara.CinghiataDiTraverso" : 2,
+            "base.mara.Sgommata" : 1,
+            "base.mara.SorpassoInCurva" : 1,
+            "base.pino.GoingBerserk" : 2,
+            "bruiser.Glare" : 1,
+            "bruiser.StunningBlow" : 1,
+            "com.Steal" : 1
+          },
+          "punteggioRicerca" : 0.9479,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 2510,
+              "sconfitte" : 188,
+              "patte" : 2,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 2526,
+              "sconfitte" : 151,
+              "patte" : 23,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 2432,
+              "sconfitte" : 176,
+              "patte" : 92,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 2514,
+              "sconfitte" : 162,
+              "patte" : 24,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 2423,
+              "sconfitte" : 267,
+              "patte" : 10,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 2693,
+              "sconfitte" : 2,
+              "patte" : 5,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "precedente",
+          "bound" : [
+            "base.cesira.bound.FrecciatinaAlVolo",
+            "base.cesira.bound.MiInformo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.bruiser.TiFaccioSpazio" : 1,
+            "base.com.ShuffleFeet" : 1,
+            "base.com.SputoDaPosacenere" : 1,
+            "base.gigi.SottoIlCofano" : 1,
+            "base.items.CascoDaLavoro" : 2,
+            "base.items.GhiaccioNelTovagliolo" : 1,
+            "base.items.GiubbottoDiFintaPelle" : 1,
+            "base.items.GuantiDaOfficina" : 1,
+            "base.items.PaninoDelKebab" : 2,
+            "base.mara.CinghiataDiTraverso" : 1,
+            "base.mara.Sgommata" : 1,
+            "base.mara.SorpassoInCurva" : 1,
+            "base.pino.GoingBerserk" : 2,
+            "bruiser.Glare" : 1,
+            "bruiser.SeagullFly" : 1,
+            "bruiser.StunningBlow" : 1,
+            "com.Steal" : 1
+          },
+          "punteggioRicerca" : 0.9439,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 2462,
+              "sconfitte" : 230,
+              "patte" : 8,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 2575,
+              "sconfitte" : 109,
+              "patte" : 16,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 2454,
+              "sconfitte" : 163,
+              "patte" : 83,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 2572,
+              "sconfitte" : 111,
+              "patte" : 17,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 2412,
+              "sconfitte" : 266,
+              "patte" : 22,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 2683,
+              "sconfitte" : 1,
+              "patte" : 16,
+              "limite" : 0
+            }
+          }
+        },
+        {
+          "etichetta" : "starter",
+          "bound" : [
+            "base.cesira.bound.Battutina",
+            "base.cesira.bound.MiInformo"
+          ],
+          "lastResort" : "com.last.Struggle",
+          "carte" : {
+            "base.cesira.ContoSalato" : 2,
+            "base.cesira.FareIlVago" : 2,
+            "base.cesira.LoSapevo" : 2,
+            "base.cesira.Malelingue" : 1,
+            "base.cesira.OhGuardaLa" : 2,
+            "base.cesira.Ricatto" : 2,
+            "base.com.AcquaInFaccia" : 1,
+            "base.com.Sgambetto" : 1,
+            "base.com.ShuffleFeet" : 1,
+            "base.com.TartarugaSulMarciapiede" : 1,
+            "base.items.EspressoDelDistributore" : 2,
+            "base.items.SantinoDellaPortinaia" : 1,
+            "bruiser.StunningBlow" : 2
+          },
+          "punteggioRicerca" : null,
+          "convalida" : {
+            "starter-spazienzio" : {
+              "partite" : 2700,
+              "vittorie" : 980,
+              "sconfitte" : 1553,
+              "patte" : 167,
+              "limite" : 0
+            },
+            "starter-mara" : {
+              "partite" : 2700,
+              "vittorie" : 672,
+              "sconfitte" : 1831,
+              "patte" : 197,
+              "limite" : 0
+            },
+            "starter-tossico" : {
+              "partite" : 2700,
+              "vittorie" : 58,
+              "sconfitte" : 2566,
+              "patte" : 76,
+              "limite" : 0
+            },
+            "starter-pino" : {
+              "partite" : 2700,
+              "vittorie" : 114,
+              "sconfitte" : 2543,
+              "patte" : 43,
+              "limite" : 0
+            },
+            "starter-gigi" : {
+              "partite" : 2700,
+              "vittorie" : 452,
+              "sconfitte" : 2144,
+              "patte" : 104,
+              "limite" : 0
+            },
+            "prova-sergio" : {
+              "partite" : 2700,
+              "vittorie" : 1029,
+              "sconfitte" : 1196,
+              "patte" : 475,
+              "limite" : 0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

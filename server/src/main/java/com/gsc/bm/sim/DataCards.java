@@ -125,6 +125,9 @@ final class DataCards {
             checkSteps("target", target);
             checkConsume();
             checkSearch();
+            for (int i = 0; i < self.size(); i++)
+                if (self.get(i) instanceof GettoneStep)
+                    throw invalid("self[" + i + "]: gettone vale solo in target: la condizione è sul bersaglio");
         }
 
         /**
@@ -249,7 +252,8 @@ final class DataCards {
             @JsonSubTypes.Type(value = SayStep.class, name = "say"),
             @JsonSubTypes.Type(value = ConsumeStep.class, name = "consume"),
             @JsonSubTypes.Type(value = SearchStep.class, name = "search"),
-            @JsonSubTypes.Type(value = AnticipoStep.class, name = "anticipo")
+            @JsonSubTypes.Type(value = AnticipoStep.class, name = "anticipo"),
+            @JsonSubTypes.Type(value = GettoneStep.class, name = "gettone")
     })
     public interface Step extends Serializable {
         String apply(Character author, Character subject);
@@ -485,6 +489,47 @@ final class DataCards {
         }
     }
 
+    /**
+     * SB-17 («se il bersaglio ha un gettone», Conto salato), solo nella lista target: i passi annidati ({@code steps}) si applicano,
+     * dopo quelli scritti prima, solo se il bersaglio ha un gettone di vulnerabilità quando il passo si applica. Con le regole 1.13
+     * non ci sono gettoni e i passi annidati non si applicano mai. Non contiene ricerche, consumi, anticipi né altri gettoni.
+     */
+    public static final class GettoneStep implements Step {
+        public List<Step> steps;
+
+        @Override public String apply(Character author, Character subject) {
+            throw new IllegalStateException("gettone si esegue con lines()");
+        }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject) {
+            return lines(consumed, author, subject, 0);
+        }
+
+        @Override public List<String> lines(Card consumed, Character author, Character subject, int plays) {
+            if (!hasToken(subject)) return List.of();
+            List<String> report = new ArrayList<>();
+            for (Step step : steps) report.addAll(step.lines(consumed, author, subject, plays));
+            return report;
+        }
+
+        static boolean hasToken(Character subject) {
+            return subject.getStatuses().stream().anyMatch(s -> s.getExposure() != null);
+        }
+
+        @Override public String missing() {
+            if (steps == null || steps.isEmpty()) return "campo steps mancante o vuoto";
+            for (int i = 0; i < steps.size(); i++) {
+                Step step = steps.get(i);
+                if (step == null) return "steps[" + i + "] è null";
+                if (step instanceof SearchStep || step instanceof ConsumeStep || step instanceof AnticipoStep || step instanceof GettoneStep)
+                    return "steps[" + i + "]: gettone non contiene search, consume, anticipo né gettone";
+                String missing = step.missing();
+                if (missing != null) return "steps[" + i + "]: " + missing;
+            }
+            return null;
+        }
+    }
+
     public static final class SayStep implements Step {
         public String text;
 
@@ -502,17 +547,21 @@ final class DataCards {
 
     private static PrintedEffects build(Definition definition) {
         List<PrintedEffects.Step> steps = new ArrayList<>();
-        for (Step step : definition.self) printed(step, false, false, steps);
-        for (Step step : definition.target) printed(step, true, false, steps);
+        for (Step step : definition.self) printed(step, false, false, false, steps);
+        for (Step step : definition.target) printed(step, true, false, false, steps);
         return new PrintedEffects(List.copyOf(steps));
     }
 
-    private static void printed(Step step, boolean onTarget, boolean ahead, List<PrintedEffects.Step> steps) {
+    private static void printed(Step step, boolean onTarget, boolean ahead, boolean ifToken, List<PrintedEffects.Step> steps) {
         if (step instanceof AnticipoStep) {
-            for (Step nested : ((AnticipoStep) step).steps) printed(nested, onTarget, true, steps);
+            for (Step nested : ((AnticipoStep) step).steps) printed(nested, onTarget, true, ifToken, steps);
             return;
         }
-        PrintedEffects.Step.StepBuilder b = PrintedEffects.Step.builder().onTarget(onTarget).ahead(ahead);
+        if (step instanceof GettoneStep) {
+            for (Step nested : ((GettoneStep) step).steps) printed(nested, onTarget, ahead, true, steps);
+            return;
+        }
+        PrintedEffects.Step.StepBuilder b = PrintedEffects.Step.builder().onTarget(onTarget).ahead(ahead).ifToken(ifToken);
         if (step instanceof DamageStep) {
             DamageStep d = (DamageStep) step;
             amount(b.kind(PrintedEffects.Kind.DAMAGE).damageType(d.type).applying(d.applying == null ? null : Set.copyOf(d.applying)), d.amount);

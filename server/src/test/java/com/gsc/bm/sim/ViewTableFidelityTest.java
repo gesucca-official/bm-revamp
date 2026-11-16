@@ -26,11 +26,15 @@ class ViewTableFidelityTest {
         check(a, "A", true);
         check(SetBaseArms.arm("B", a), "B", true);
         check(Draft.fromClasspath(DRAFT), "1.6", false);
+        // SB-17: prova-sergio in one seat (alternating), the starters in the other.
+        check(Draft.fromClasspath(DRAFT), "sergio", false);
     }
 
     private static Map<String, BotView.CardSeen> text(Draft draft) throws Exception {
         Map<String, BotView.CardSeen> text = new HashMap<>();
-        for (String deck : DECKS) {
+        List<String> decks = new ArrayList<>(List.of(DECKS));
+        if (draft.deckIds().contains(Sb17.DECK)) decks.add(Sb17.DECK); // SB-17
+        for (String deck : decks) {
             Player p = draft.player(deck, "text", new Random(0), null);
             List<Card> cards = new ArrayList<>(p.getCardsInHand());
             cards.addAll(p.getDeck()); cards.addAll(p.getCharacter().getItems()); cards.add(p.getLastResortCard());
@@ -57,6 +61,7 @@ class ViewTableFidelityTest {
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
+            if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
             Map<Integer, Map<String, BotView>> views = new HashMap<>();

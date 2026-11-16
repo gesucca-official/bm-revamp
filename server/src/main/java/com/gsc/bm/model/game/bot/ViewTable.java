@@ -348,6 +348,8 @@ public final class ViewTable {
         boolean voided;
         /** SB-16i («Gioca d'anticipo»): resolves in a group before an act of its target. */
         boolean ahead;
+        /** SB-17 («Lo sapevo»): voided by a counter that keeps its author's token. */
+        boolean keepsToken;
 
         Act(Side author, Side target, Play play, int seatIndex) {
             this.author = author;
@@ -404,7 +406,7 @@ public final class ViewTable {
                 for (Side s : sides.values()) if (s.down()) downAtGroupStart.add(s);
             }
             if (downAtGroupStart.contains(act.author) && act.target != act.author && !act.play.card.isLastBlow()) act.voided = true;
-            for (Mark m : act.author.marks)
+            if (!act.keepsToken) for (Mark m : act.author.marks)
                 if (!satisfied.contains(m) && m.card != null && m.card.getName().equalsIgnoreCase(act.play.card.getName())) {
                     satisfied.add(m); break;
                 }
@@ -532,6 +534,7 @@ public final class ViewTable {
         for (PrintedEffects.Step step : act.steps) {
             if (step.isAhead() && !act.ahead) continue;
             Side subject = step.isOnTarget() ? act.target : act.author;
+            if (step.isIfToken() && subject.statuses.stream().noneMatch(t -> t.exposure != null)) continue;
             switch (step.getKind()) {
                 case DAMAGE:
                     damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart) + step.getPerPlay() * plays,
@@ -574,7 +577,21 @@ public final class ViewTable {
                     }
                     break;
                 case COUNTER_TARGET:
-                    for (Act next : later) if (next.author == act.target) { next.voided = true; break; }
+                    for (Act next : later)
+                        if (next.author == act.target) {
+                            if (!next.voided) {
+                                // SB-17: «Ricatto» reflects the base damage, «Lo sapevo» keeps the token.
+                                if (step.getFactor() != null)
+                                    TurnForecast.baseOf(next.play.card).forEach((type, base) ->
+                                            damage(act.author, act.target, type, PrintedEffects.reflected(base, step.getFactor()), null));
+                                if (step.isKeepsToken()) next.keepsToken = true;
+                            }
+                            next.voided = true;
+                            break;
+                        }
+                    break;
+                case SWAP_ITEMS:
+                    swap(act.author, act.target);
                     break;
                 case COUNTER_ALL:
                     for (Side foe : sides.values()) {
@@ -632,6 +649,15 @@ public final class ViewTable {
             }
             return;
         }
+    }
+
+    /** SB-17, as ShuffleFeet: each tray takes the other's items, keeping the most recent ones up to its capacity. */
+    private static void swap(Side author, Side target) {
+        List<BotView.CardSeen> mine = new ArrayList<>(author.items), theirs = new ArrayList<>(target.items);
+        author.items.clear();
+        author.items.addAll(theirs.subList(Math.max(0, theirs.size() - author.itemCapacity), theirs.size()));
+        target.items.clear();
+        target.items.addAll(mine.subList(Math.max(0, mine.size() - target.itemCapacity), mine.size()));
     }
 
     /** Circular item tray: the oldest item leaves when a new one arrives at capacity. */

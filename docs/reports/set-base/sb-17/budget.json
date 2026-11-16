@@ -1,0 +1,66 @@
+{
+ "capWallSeconds": 2000,
+ "items": [
+  {
+   "phase": "step0-base",
+   "voice": "step0+feasibility",
+   "capVoice": 150,
+   "wallSeconds": 28.3
+  },
+  {
+   "phase": "step0-new",
+   "voice": "step0+feasibility",
+   "capVoice": 150,
+   "wallSeconds": 24.4
+  },
+  {
+   "phase": "feasibility",
+   "voice": "step0+feasibility",
+   "capVoice": 150,
+   "wallSeconds": 18.0,
+   "exit": 0,
+   "gamesPerCell": 4,
+   "benchSeconds": 5.0
+  },
+  {
+   "phase": "round-1",
+   "voice": "round",
+   "capVoice": 400,
+   "wallSeconds": 109.1,
+   "exit": 0,
+   "gamesPerCell": 300,
+   "benchSeconds": 105.6
+  },
+  {
+   "phase": "round-2",
+   "voice": "round",
+   "capVoice": 400,
+   "wallSeconds": 117.2,
+   "exit": 0,
+   "gamesPerCell": 300,
+   "benchSeconds": 113.8
+  },
+  {
+   "phase": "round-3",
+   "voice": "round",
+   "capVoice": 400,
+   "wallSeconds": 121.2,
+   "exit": 0,
+   "gamesPerCell": 300,
+   "benchSeconds": 117.7
+  },
+  {
+   "phase": "search",
+   "voice": "mutation search",
+   "capVoice": 450,
+   "wallSeconds": 132.5,
+   "exit": 0,
+   "gamesPerCell": 0
+  }
+ ],
+ "totalWallSeconds": 550.7,
+ "reserveUsedSeconds": 0,
+ "outsideBudget": {
+  "liveIdentity": "about 181 s (base and new, 89-92 s each), required by the prompt, not a round"
+ }
+}

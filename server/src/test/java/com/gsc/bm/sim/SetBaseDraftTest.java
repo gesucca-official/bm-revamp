@@ -74,11 +74,14 @@ class SetBaseDraftTest {
     void theDraftLoadsWithTheTwoStartersAndAllTheirCards() {
         // SB-13 aggiunge il Tossico, SB-14 Pino e SB-15 Gigi: cinque personaggi e cinque starter, ciascuno con la sua terza bound fuori dallo
         // starter.
-        assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO, PINO, GIGI), draft.characterIds());
-        assertEquals(new TreeSet<>(STARTERS), new TreeSet<>(draft.deckIds()));
+        // SB-17 (D106): + Sergio and his test deck, which is not a starter.
+        assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO, PINO, GIGI, Sb17.SERGIO), draft.characterIds());
+        TreeSet<String> decks = new TreeSet<>(STARTERS);
+        decks.add(Sb17.DECK);
+        assertEquals(decks, new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
         for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
-                "base.pino.bound.Coccio", "base.gigi.bound.Lima")) {
+                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.FrecciatinaAlVolo")) {
             assertTrue(draft.cardBindings().contains(third), third);
             assertFalse(draft.deckCards().contains(third), third + " non va negli starter");
         }
@@ -121,8 +124,9 @@ class SetBaseDraftTest {
                 BoundCap.Params.DEFAULT, null));
         assertEquals(0L, report.checks.total(), report.failures());
         assertEquals(0L, report.boundViolations(), report.failures());
-        assertEquals(15, report.bounds.size(), "le quindici bound della bozza, comprese le terze (tre per personaggio)");
-        assertEquals(15L * 9 * 12, report.games(), "quindici coppie di mazzi fra cinque starter");
+        // SB-17: Sergio and prova-sergio are in the bench too: 18 bounds, 21 pairs of decks among six.
+        assertEquals(18, report.bounds.size(), "le diciotto bound della bozza, comprese le terze (tre per personaggio)");
+        assertEquals(21L * 9 * 12, report.games(), "ventuno coppie di mazzi fra i cinque starter e prova-sergio");
         assertTrue(report.checks.seatTurns > report.games() * 2, "i turni sono controllati");
     }
 
@@ -132,7 +136,7 @@ class SetBaseDraftTest {
         Map<String, BotPolicy> styles = PlaygroundTest.styles();
         Bench.Report report = Bench.run(draft, new Bench.Settings(2, 7_300_000L, new ArrayList<>(draft.deckIds()), styles, 2,
                 BoundCap.Params.DEFAULT, null));
-        assertEquals(15L * styles.size() * styles.size() * 2, report.games(), "quindici coppie di mazzi fra cinque starter");
+        assertEquals(21L * styles.size() * styles.size() * 2, report.games(), "ventuno coppie di mazzi fra i cinque starter e prova-sergio (SB-17)");
         assertEquals(0L, report.checks.total(), report.failures());
         for (Bench.Cell cell : report.cells) assertEquals(0L, cell.tally.limits, cell.deckA + " contro " + cell.deckB);
     }
@@ -186,7 +190,8 @@ class SetBaseDraftTest {
                 }
         }
         // SB-16i (D97): + il POISON ×0,5 del Bancone del braccio B, ora in bozza.json (gli stati di «Gioca d'anticipo» sono annidati).
-        assertEquals(12, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
+        // SB-17: + the two states of «Fare il vago» (CES-AR5, in questo turno).
+        assertEquals(14, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
@@ -217,7 +222,7 @@ class SetBaseDraftTest {
     void theStartersCarryTheSb12aCorrections() {
         Map<String, Integer> health = new LinkedHashMap<>();
         for (JsonNode c : json.get("characters"))
-            if (!Set.of(TOSSICO, PINO, GIGI).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
+            if (!Set.of(TOSSICO, PINO, GIGI, Sb17.SERGIO).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
         assertEquals(Map.of(SPAZIENZIO, 75, MARA, 70), health, "D38/D53, SB-16e: salute dei due base; gli avanzati hanno il loro test");
         Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 20 /* D82, era 5 */, "base.mara.Sgommata", 15,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
@@ -608,7 +613,7 @@ class SetBaseDraftTest {
 
     /** Lo slot della griglia di ogni personaggio della bozza. */
     static final Map<String, String> CHARACTER_SLOTS = Map.of(SPAZIENZIO, "PG-SPA", MARA, "PG-MAR", TOSSICO, "PG-TOS", PINO, "PG-PIN",
-            GIGI, "PG-GIG");
+            GIGI, "PG-GIG", Sb17.SERGIO, "PG-CES");
     /**
      * Le rarità della griglia (colonna «Rarità»: C, NC, R) per ogni slot che la bozza contiene, elencate qui perché la prova non legga i
      * documenti. Le stesse le scrive e le confronta col file della griglia docs/reports/set-base/sb-6b/rarita-bozza.py (--check).
@@ -616,9 +621,10 @@ class SetBaseDraftTest {
     // D79: approved step-2 rarities, including the five new NC titles.
     static final Map<String, Set<String>> GRID_RARITIES = Map.of(
             // SB-16i (D97): + GEN-15 e OGG-14, NC nella griglia, ora negli starter.
-            "COMMON", Set.of("GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
-            "UNCOMMON", Set.of("GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
-            "RARE", Set.of("GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
+            // SB-17 (D106, D107): + Sergio (PG-CES, CES-*) and GEN-03, GEN-09, GEN-22, GEN-23, OGG-15 of his test deck.
+            "COMMON", Set.of("CES-AR5", "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
+            "UNCOMMON", Set.of("CES-AR1", "CES-AR2", "CES-AR3", "CES-AR4", "CES-BO1", "CES-BO2", "CES-BO3", "GEN-03", "GEN-09", "GEN-22", "GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
+            "RARE", Set.of("PG-CES", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
 
     private static String gridRarity(String slot) {
         List<String> found = new ArrayList<>();
@@ -657,7 +663,7 @@ class SetBaseDraftTest {
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
         }
-        assertEquals(Map.of("COMMON", 37, "RARE", 6, "UNCOMMON", 35), counts, "le 78 carte della bozza, D79 e SB-16i (D97)");
+        assertEquals(Map.of("COMMON", 38, "RARE", 10, "UNCOMMON", 45), counts, "le 93 carte della bozza, D79, SB-16i (D97) e SB-17 (15 nuove)");
         for (String deck : STARTERS) {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");

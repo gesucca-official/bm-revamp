@@ -105,6 +105,14 @@ public class Move implements Serializable {
     @ToString.Exclude
     @Setter
     private Integer plays;
+    /**
+     * SB-17 (D106 (3), D108), playground only: a counter printed with «il suo gettone resta» voided this move, so playing it does
+     * not satisfy its author's vulnerability token (a printed exception to RP-15, R00). Engine bookkeeping, never shown.
+     */
+    @JsonIgnore
+    @ToString.Exclude
+    @Setter
+    private boolean keepsToken;
 
     /**
      * SB-16f0 (D56): the search of this move as the view publishes it, null (absent) without a search, so always with the live

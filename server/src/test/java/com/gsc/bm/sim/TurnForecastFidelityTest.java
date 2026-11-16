@@ -27,14 +27,18 @@ class TurnForecastFidelityTest {
         check(armA, "A");
         check(SetBaseArms.arm("B", armA), "B"); // SB-16g passo 3 (D82): the Bancone of arm B is a public effect too.
         check(Draft.fromClasspath("/set-base/bozza.json"), "1.6");
+        // SB-17: prova-sergio in one seat (alternating), the starters in the other: reflection, kept token, token condition, swap.
+        check(Draft.fromClasspath("/set-base/bozza.json"), "sergio");
     }
 
     private static void check(Draft draft, String arm) throws Exception {
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         int[] turns = new int[3]; // checked, matched, skipped
+        int[] sergio = new int[4]; // SB-17, in checked turns: reflections, kept tokens, Conto salato on a token, swaps of the trays
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_300; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
+            if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
             Map<String, List<Map<String, Integer>>> forecasts = new HashMap<>();
@@ -58,9 +62,17 @@ class TurnForecastFidelityTest {
                                 theirs.getTargetId(), theirs.getChoices().get(Move.AdditionalAction.TARGET_ITEM));
                         forecasts.put(mine.getPlayerId(), TurnForecast.variants(view, legal, other));
                     }
+                    for (Move m : g.getPendingMoves())
+                        if (m.getPlayedCardName().equals("Conto salato") && g.getPlayers().containsKey(m.getTargetId()) && g.getPlayers()
+                                .get(m.getTargetId()).getCharacter().getStatuses().stream().anyMatch(st -> st.getExposure() != null)) sergio[2]++;
                 } else if (!forecasts.isEmpty()) {
                     Map<String, Integer> actual = new HashMap<>();
                     for (Player p : g.getPlayers().values()) actual.put(p.getPlayerId(), p.getCharacter().getResources().get(Resource.HEALTH));
+                    for (Move m : g.getResolvedMoves()) {
+                        if (m.getPlayedCardName().equals("Ricatto") && g.getResolvedMoves().stream().anyMatch(o -> o != m && o.isVoid())) sergio[0]++;
+                        if (m.isKeepsToken()) sergio[1]++;
+                        if (m.getPlayedCardName().equals("Scatto Repentino") && !m.isVoid()) sergio[3]++;
+                    }
                     forecasts.forEach((id, ends) -> {
                         turns[0]++;
                         if (ends.contains(actual)) turns[1]++;
@@ -73,5 +85,10 @@ class TurnForecastFidelityTest {
         System.out.println("forecast fidelity, arm " + arm + ": " + turns[1] + "/" + turns[0] + " turns, " + turns[2] + " skipped for timers");
         assertTrue(turns[0] > 5000, "turni controllati: " + turns[0]);
         assertEquals(turns[0], turns[1], String.join("\n", misses));
+        if (arm.equals("sergio")) {
+            System.out.println("forecast fidelity, sergio: reflections " + sergio[0] + ", kept tokens " + sergio[1]
+                    + ", Conto salato on a token " + sergio[2] + ", swaps " + sergio[3]);
+            for (int n : sergio) assertTrue(n > 0, "every new effect is in the checked sample");
+        }
     }
 }

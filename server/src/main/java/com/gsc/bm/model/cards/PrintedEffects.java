@@ -35,14 +35,21 @@ public class PrintedEffects implements Serializable {
         SEARCH,
         /** The chosen near item is consumed: its own printed effects apply to the author. */
         CONSUME,
-        /** Like YouStop: voids the next move of the target if it resolves later. */
+        /**
+         * Like YouStop: voids the next move of the target if it resolves later. SB-17: with {@code factor} (the reflection, «Ricatto»),
+         * if the voided card is a hit its base damage ({@link #baseDamage}) times {@code factor}, truncated
+         * ({@link #reflected}), of the same type, goes from the author to the target; with {@code keepsToken} («Lo sapevo») the
+         * voided move does not satisfy its author's vulnerability token.
+         */
         COUNTER_TARGET,
         /** Like AmphetamineReflexes: voids every later opposing move that targets the author. */
         COUNTER_ALL,
         /** The subject becomes immune to {@code resource} (no periodic effect of it). */
         IMMUNE,
         /** The subject loses its immunity to {@code resource}. */
-        NOT_IMMUNE
+        NOT_IMMUNE,
+        /** SB-17, like ShuffleFeet: the author and the target swap their near items, each tray keeping its capacity. */
+        SWAP_ITEMS
     }
 
     /** One printed step. Amounts are {@code base + times × (resource of the author / divide) + perItem × items of the author}. */
@@ -94,6 +101,10 @@ public class PrintedEffects implements Serializable {
         boolean ahead;
         /** SB-16i («Rincara X»): added to the amount once for every earlier play of this card by its author in the match. */
         int perPlay;
+        /** SB-17 («se il bersaglio ha un gettone»): the step applies only if its subject has a vulnerability token when it applies. */
+        boolean ifToken;
+        /** SB-17 («Lo sapevo», D106 (3)): on a COUNTER_TARGET, the voided move does not satisfy its author's token. */
+        boolean keepsToken;
 
         /** The bindings the search may look for, in printed order: {@code searchedCards}, or {@code searchedCard} alone. */
         public List<String> searchedNames() {
@@ -121,6 +132,40 @@ public class PrintedEffects implements Serializable {
         PrintedEffects effects = ((Source) card).printedEffects();
         return effects != null && effects.getSteps().stream().anyMatch(test);
     }
+
+    /**
+     * SB-17 («Ricatto»): the base damage of a hit as printed, by type in printed order: the {@code base} of every DAMAGE step on
+     * the target that always applies (not «Gioca d'anticipo», not «se il bersaglio ha un gettone»), without the parts read from
+     * resources, items or plays. Empty when the card does not hit. Engine and bots read it the same way.
+     */
+    public static Map<Damage.DamageType, Integer> baseDamage(PrintedEffects effects) {
+        Map<Damage.DamageType, Integer> base = new java.util.LinkedHashMap<>();
+        if (effects == null) return base;
+        for (Step s : effects.getSteps())
+            if (s.getKind() == Kind.DAMAGE && s.isOnTarget() && !s.isAhead() && !s.isIfToken() && s.getDamageType() != null && s.getBase() > 0)
+                base.merge(s.getDamageType(), s.getBase(), Integer::sum);
+        return base;
+    }
+
+    /**
+     * SB-17: the base damage of a card that cannot describe itself, read from its public damage text (for example «HIT 25» or
+     * «HIT 12+x»: the first number, of the first damage type named). Empty without a number.
+     */
+    public static Map<Damage.DamageType, Integer> nominalDamage(String damage, String damageAmount) {
+        Map<Damage.DamageType, Integer> base = new java.util.LinkedHashMap<>();
+        if (damageAmount == null) return base;
+        java.util.regex.Matcher number = java.util.regex.Pattern.compile("\\d+").matcher(damageAmount);
+        if (!number.find()) return base;
+        Damage.DamageType type = Damage.DamageType.HIT;
+        String text = damage != null ? damage + " " + damageAmount : damageAmount;
+        for (Damage.DamageType t : Damage.DamageType.values()) if (text.contains(t.name())) { type = t; break; }
+        int amount = Integer.parseInt(number.group());
+        if (amount > 0) base.put(type, amount);
+        return base;
+    }
+
+    /** SB-17: a reflected amount, the same truncation for engine and bots. */
+    public static int reflected(int base, float factor) { return (int) ((float) base * factor); }
 
     List<Step> steps;
 

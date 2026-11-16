@@ -59,7 +59,8 @@ class Bozza16Test {
 
     @Test
     void the16ChangesExactlyWhatD97Approved() throws Exception {
-        JsonNode old = SetBaseArms.armB(resource(SetBaseArms.FROZEN_15)), now = resource("/set-base/bozza.json");
+        // SB-17 (D106, D107): Sergio, his cards and prova-sergio are stripped; the rest is the 1.6b as approved.
+        JsonNode old = SetBaseArms.armB(resource(SetBaseArms.FROZEN_15)), now = Sb17.without(resource("/set-base/bozza.json"));
         assertTrue(SetBaseArms.carriesArmB(now), "arm B inside");
         ObjectNode rules = old.path("rules").deepCopy();
         rules.put("searchShuffle", true);

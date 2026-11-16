@@ -153,7 +153,7 @@ final class StyleSupport {
             this.hostile = target != situation.me;
             boolean playground = situation.view.getRuleset().playground();
             this.aheadChance = playground && hostile ? aheadChance(situation, card, target) : 0;
-            this.damage = hostile ? damageOf(card) + (playground ? extraDamage(situation, card, aheadChance) : 0) : 0;
+            this.damage = hostile ? damageOf(card) + (playground ? extraDamage(situation, card, aheadChance, target) : 0) : 0;
             this.cost = card.getCost();
             this.healthCost = cost.getOrDefault(Resource.HEALTH, 0);
             this.costTotal = cost.values().stream().mapToInt(Integer::intValue).sum() - healthCost;
@@ -240,16 +240,76 @@ final class StyleSupport {
         return (1 - factor) * Math.max(threat, CHARGED_HIT);
     }
 
-    /** SB-16i: «Rincara» (the public play count) and «Gioca d'anticipo» (weighted) added to the nominal damage to the target. */
-    static double extraDamage(Situation s, BotView.CardSeen card, double aheadChance) {
+    /**
+     * SB-16i: «Rincara» (the public play count) and «Gioca d'anticipo» (weighted) added to the nominal damage to the target.
+     * SB-17: the damage printed «se il bersaglio ha un gettone», if the target shows a token now.
+     */
+    static double extraDamage(Situation s, BotView.CardSeen card, double aheadChance, BotView.Seat target) {
         double extra = 0;
         int plays = s.me.plays(card.getName());
         for (PrintedEffects.Step st : steps(card)) {
             if (!st.isOnTarget() || st.getKind() != PrintedEffects.Kind.DAMAGE) continue;
-            if (st.isAhead()) extra += aheadChance * st.getBase();
+            if (st.isIfToken()) { if (hasToken(target)) extra += st.getBase(); }
+            else if (st.isAhead()) extra += aheadChance * st.getBase();
             else extra += st.getPerPlay() * plays;
         }
         return extra;
+    }
+
+    /** SB-17: the seat has a vulnerability token. */
+    static boolean hasToken(BotView.Seat seat) {
+        return seat.getStatuses().stream().anyMatch(st -> st.getExposure() != null);
+    }
+
+    /** The product of the distinct vulnerability tokens on the seat (1 without any). */
+    static double tokenFactor(BotView.Seat seat) {
+        Map<Integer, Float> tokens = new java.util.HashMap<>();
+        seat.getStatuses().stream().filter(st -> st.getExposure() != null && st.getFactor() != null)
+                .forEach(st -> tokens.put(st.getExposure(), st.getFactor()));
+        return tokens.values().stream().mapToDouble(Float::doubleValue).reduce(1, (a, b) -> a * b);
+    }
+
+    /** Weight of the SB-17 counter values, on the scale of {@link #rhythm}: damage avoided or dealt, counted twice. */
+    static final double COUNTER_WEIGHT = 2;
+    /** Worth of one item more on the own side after a swap of the trays (SB-17, SWAP_ITEMS). */
+    static final double SWAP_ITEM = 3;
+
+    /**
+     * SB-17, playground only, the same for every style: what the printed text of a counter or a swap adds to the move.
+     * <ul>
+     *   <li>reflection («Ricatto»): the reflected part of the base damage of the strongest card the target shows, times the
+     *       target's tokens;</li>
+     *   <li>the token that stays («Lo sapevo»), only against a shown card with a token: the extra damage the token adds to the
+     *       strongest own hit in hand;</li>
+     *   <li>a swap of the trays (SWAP_ITEMS): the difference in items.</li>
+     * </ul>
+     * A counter is worth something only if the target moves after it: the styles already weigh that ({@link #rhythm}).
+     */
+    static double printedValue(Situation s, Plan p) {
+        if (!p.hostile) return 0;
+        double value = 0;
+        for (PrintedEffects.Step st : steps(p.card)) {
+            if (st.getKind() == PrintedEffects.Kind.SWAP_ITEMS)
+                value += SWAP_ITEM * (p.target.getItems().size() - s.me.getItems().size());
+            if (st.getKind() != PrintedEffects.Kind.COUNTER_TARGET) continue;
+            List<BotView.CardSeen> shown = s.found(p.target);
+            if (st.getFactor() != null) {
+                double best = 0;
+                for (BotView.CardSeen c : shown) {
+                    double reflected = 0;
+                    for (int base : TurnForecast.baseOf(c).values()) reflected += PrintedEffects.reflected(base, st.getFactor());
+                    best = Math.max(best, reflected);
+                }
+                value += best * tokenFactor(p.target) * COUNTER_WEIGHT;
+            }
+            if (st.isKeepsToken() && !shown.isEmpty() && hasToken(p.target)) {
+                double hit = 0;
+                for (BotView.CardSeen c : s.view.getSelf().getHand())
+                    if (!c.getName().equals(p.card.getName())) hit = Math.max(hit, damageOf(c));
+                value += hit * (tokenFactor(p.target) - 1) * COUNTER_WEIGHT;
+            }
+        }
+        return value;
     }
 
     static double damageOf(BotView.CardSeen card) {
@@ -297,7 +357,7 @@ final class StyleSupport {
         for (Plan plan : plans) {
             LegalMove move = plan.move;
             double score = scorer.score(situation, plan);
-            if (situation.view.getRuleset().playground()) score += rhythm(situation, plan);
+            if (situation.view.getRuleset().playground()) score += rhythm(situation, plan) + printedValue(situation, plan);
             if (move.getDiscard() != null) score -= keepValue(scorer, situation, move.getDiscard());
             if (score > top + 1e-9) {
                 top = score;

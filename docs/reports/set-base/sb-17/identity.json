@@ -1,0 +1,27 @@
+{
+  "base": "0b8806e, exported with git archive (server only) to a scratch folder, same .tools and m2 as the checkout",
+  "javaProcessesBefore": 0,
+  "step0": {
+    "draft": "classpath:/set-base/bozza.json at 0b8806e (the 1.6b, unchanged)",
+    "settings": "d50, arm B, 8 threads, 4 seeds per cell, deckObserve, sb16iCounters; ChargeMeasureTest#measure; 8640 games per build",
+    "files": ["arm.txt","deck-observations.json","draft.json","matrix.json","matrix.md","observations.json","sb16i-observations.json"],
+    "identical": true,
+    "onlyDifferent": "seconds.txt (wall clock)",
+    "alsoIdenticalTo": "sb-16i-b2/step0-matrix.json.gz (matrix.json)",
+    "wallSeconds": {"base": 28.3, "new": 24.4}
+  },
+  "live": {
+    "rules": "1.13",
+    "gamesPerBuild": 480000,
+    "fixture": "d701089:server/src/test/resources/set-base/bozza.json with CRLF line ends",
+    "fixtureSha256": "faf265fad50ee0bedca125209f7008434a73660131f786ad272800235567d7c5",
+    "folder": "%TEMP%/bm-sb16g2b2-live (recreated; the earlier folder was gone)",
+    "files": [
+      {"file": "json", "bytes": 266869, "sha256": "ca131721c9bd6549c8e302bdfcd959a41b9c99903f911ba6a78f9186641e49a4", "identicalToBase": true},
+      {"file": "md", "bytes": 26112, "sha256": "16d3bde4c385cc3a353e1720707dce5e9367f170db1b4a6377407c0c385ecef4", "identicalToBase": true}
+    ],
+    "historicalNote": "one byte more than sb-16i/live-identity.json in both files: the header carries the draft path, written here with forward slashes after C:/Users/...; the comparison that counts is with the base run in the same folder",
+    "wallSeconds": {"base": 91.5, "new": 88.9}
+  },
+  "note": "SB-17 Fase B, before changing bozza.json; outside the D106 game budget except the step0 share"
+}

@@ -1,0 +1,15 @@
+{
+ "note": "SB-17 Fase B: mutations on the new branches, one at a time, source restored after each (sha256 checked), no Java process left. Each patched a single occurrence and ran the named tests offline.",
+ "results": [
+  {"id": "M1", "file": "model/game/Game.java", "mutation": "the kept-token guard removed (every voided move satisfies the token)", "killedBy": "Sb17CardsTest (Lo sapevo)"},
+  {"id": "M2", "file": "model/cards/base/cesira/Ricatto.java", "mutation": "percent / 100f -> percent / 50f (full reflection)", "killedBy": "Sb17CardsTest (reflection)"},
+  {"id": "M3", "file": "model/cards/PrintedEffects.java", "mutation": "base damage counts «Gioca d'anticipo» steps", "killedBy": "Sb17CardsTest (Ricatto on Cinghiata)"},
+  {"id": "M4", "file": "sim/DataCards.java", "mutation": "the token condition always true", "killedBy": "Sb17CardsTest (Conto salato)"},
+  {"id": "M5", "file": "model/game/bot/TurnForecast.java", "mutation": "the reflection never forecast", "killedBy": "TurnForecastFidelityTest (arm sergio)"},
+  {"id": "M6", "file": "model/game/bot/ViewTable.java", "mutation": "the kept token never marked", "killedBy": "ViewTableFidelityTest (two turns)"},
+  {"id": "M7", "file": "model/game/bot/TurnForecast.java", "mutation": "the token condition ignored", "killedBy": "TurnForecastFidelityTest (arm sergio)"}
+ ],
+ "killed": 7,
+ "total": 7,
+ "notMutated": "the bots' value of the new effects (StyleSupport), which no fidelity test pins"
+}
