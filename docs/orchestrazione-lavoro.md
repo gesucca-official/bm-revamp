@@ -63,6 +63,11 @@ Quello che segue vale sempre, salvo che il prompt dica altro in modo esplicito.
 **Letture.** AGENTS.md, questo contratto con i quattro STOP, le [insidie](#insidie-degli-strumenti-di-verifica-windows) e solo le
 sezioni che il prompt nomina. Non leggere per intero piani, registri, rapporti o roadmap: cercare la sezione che serve.
 
+**Contesto.** Letture indipendenti nella stessa chiamata e per sezione (prima la ricerca, poi solo le righe che servono), non file
+interi uno alla volta. A ogni tappa (diagnosi, modifica, verifica) due righe di stato nel rapporto del blocco: dopo una
+compattazione si riparte da prompt e rapporto, non dalla memoria. In ambiente Claude la compattazione automatica è fissata a 200K
+su ogni macchina (`CLAUDE_CODE_AUTO_COMPACT_WINDOW` in `~/.claude/settings.json`; si controlla con `/context`).
+
 **Preliminare.** Working tree pulito; `git fetch`; main allineato a origin/main (se origin è avanti, rebase seguendo
 [l'allineamento fra le macchine](#allineamento-fra-le-macchine), compreso il jar); porte libere. Se il prompt riporta una scelta o
 un'approvazione del proprietario non ancora nel repository, registrarla per prima, con le sue parole, in un commit di soli documenti.
