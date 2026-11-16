@@ -8,7 +8,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
 > - **In corso:** nulla. [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima) chiuso con D104: prova umana breve della 1.6b superata il 16 novembre 2026.
-> - **Prossimo:** [SB-17](#sb-17-sb-18--personaggi-da-booster) Fase A, proposta di Sergio Sommerso aggiornata alla 1.6b con la risposta a Q11, poi STOP per il proprietario (D105). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Prossimo:** in attesa della revisione della [proposta di SB-17](design/set-base/sb-17-proposta.md) (Sergio, Fase A), domande 1–5; poi la Fase B di [SB-17](#sb-17-sb-18--personaggi-da-booster). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
 > - **Decisioni da leggere:** D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D105).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
@@ -292,7 +292,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fase A (proposta) da lanciare ([D105](#decisioni-del-proprietario)) |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fase A consegnata, STOP per il proprietario ([proposta](design/set-base/sb-17-proposta.md), domande 1–5) |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -462,6 +462,8 @@ che oggi sono belle lunghe.
 Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Senza starter: basic, bound, carte d'archetipo e un **mazzo di prova**.
 
 **Passo con proposta ([D105](#decisioni-del-proprietario)).** Fase A: proposta breve in `docs/design/set-base/sb-17-proposta.md`, con le carte di Sergio aggiornate alla bozza di riferimento 1.6b e alle regole `d50` (le righe `CES-*` della griglia sono precedenti), la risposta a Q11, il mazzo di prova, il lavoro di codice per i bot e il budget della Fase B; STOP per il proprietario. Fase B: bozza, giro e mazzo di prova.
+
+**Fase A consegnata il 16 novembre 2026, STOP per il proprietario** ([proposta](design/set-base/sb-17-proposta.md)). Q11: Sergio senza coppia né «Annuncia», punisce gli annunci altrui; revisione proposta di D52 (3). Quattro carte cambiano (Ricatto con metà del danno base al posto di WhatchaDoin, Lo sapevo col gettone che resta, Conto salato sul gettone, Fare il vago con +5 A), Malelingue più forte, salute 75 (stima). Mazzo di prova con le sole generiche della bozza; tre effetti Java nuovi e il lavoro dei bot; budget della Fase B 2.000 s, al più 3 giri. Cinque domande.
 
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 
