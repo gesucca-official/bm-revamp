@@ -189,12 +189,12 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 | TOS-BA | Celestina | Azione, basic | ITEMS | 1 | +5 T a sé, poi consuma | NC | Celestina | `ToxicGrab`, riprogettata (assorbe il flavour di `EverythingIsDrug`) | «Tutto è droga»: oggi perde metà della A, che è un tratto solo punitivo | consume |
 | PIN-BA | Piera | Azione, basic | ITEMS | 0 | +5 L a sé, poi consuma | NC | Piera | bozza «Questo lo finisco io» | Beve quello che trova | consume |
 | GIG-BA | Beppe | Azione, basic | ITEMS | 0 | +4 V a sé, poi consuma | NC | Beppe | bozza «Questo torna utile», senza −5 A, priorità −1 → 0 | Ogni oggetto gli dà moneta per gli attrezzi; diversa da quella di Spazienzio | consume |
-| CES-BA | Sergio | Azione, basic | ITEMS | 1 | ~~+5 A a sé, poi consuma~~ vende il proprio oggetto bersagliato: esce senza il suo effetto, ~~+6~~ +8 HEALTH a sé (riserva R1, B4); se l'oggetto è sparito alla risoluzione, nessun guadagno⁷ | R | — | bozza «Lo rivendo» (SB-17 A4, D118); ~~«Lo metto in conto»~~, uscita dalla bozza | ~~Raccoglie e tiene da parte~~ Non usa gli oggetti, li rivende (deroga a D3 sotto) | dati (`vendi`) |
+| CES-BA | Sergio | Azione, basic | ITEMS | 1 | +5 A a sé, poi consuma (di nuovo, D121; ~~vende il proprio oggetto: +8 HEALTH~~, passata a CES-AR7) | R | — | bozza «Lo metto in conto» (SB-17, B3 e B5e V4, D121); ~~«Lo rivendo»~~ da basic (B4, D118) ritirata | Raccoglie e tiene da parte | consume |
 | ROC-BA | Duccio | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | da inventare («La mancia») | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
 
-**Deroga di SB-17 a D3 (D117, D118):** CES-BA «Lo rivendo» resta una presa del proprio oggetto bersagliato, ma **senza il suo effetto**: il tratto è il ricavato (~~+6~~ +8 HEALTH dopo la riserva R1 della B4, ~~6~~ 8 unità al banco D33, il più alto delle basic, contro il tratto più l'oggetto delle altre). Solo per questa carta ([proposta A4, § 2](sb-17-proposta-a4.md#2-lo-rivendo-come-basic), [RP-25](regole-playground.md#9-vendere-un-oggetto-12-sb-17)).
+~~**Deroga di SB-17 a D3 (D117, D118):** CES-BA «Lo rivendo» resta una presa del proprio oggetto bersagliato, ma senza il suo effetto.~~ **Ritirata da D121:** CES-BA «Lo metto in conto» torna una presa come le altre basic (+5 A poi consuma, D3 rispettata). La vendita è l'effetto della carta regolare CES-AR7, sotto, con la sua deroga.
 
-⁷ **SB-17, Fase A4 e B4** ([D118](../../set-base-decisioni.md#decisioni-del-proprietario)): il ricavato è la vendita, non un «altro effetto» di R04: con l'oggetto rubato, distrutto o scalzato prima della risoluzione la carta non dà niente. Il bersaglio d'oggetto lo sceglie il giocatore come per ogni basic. Riserva R1 del giro corto: ±2 HEALTH sul ricavato; applicata dopo il giro 1 della B4 (Sergio sotto il 35% contro Mara, Celestina, Piera e Beppe): +6 → +8 HEALTH.
+⁷ **SB-17, Fase A4, B4 e B6** ([D118](../../set-base-decisioni.md#decisioni-del-proprietario), [D121](../../set-base-decisioni.md#decisioni-del-proprietario)): la vendita (con l'oggetto rubato, distrutto o scalzato prima della risoluzione la carta non dà niente) passa dalla basic alla carta regolare CES-AR7 «Lo rivendo» (+8 HEALTH, riserva R1 della B4 conservata). CES-BA torna «Lo metto in conto», +5 A poi consuma; riserva R1 della B6, se serve: +5 → +7 A, una volta. Storia: nella B4 la basic era «Lo rivendo» (+6 → +8 HEALTH); nella B5e il giro 2 (+8 HEALTH) e la V4 la confrontano.
 
 ### Bound (21)
 
@@ -249,7 +249,7 @@ così chiudono la partita (D29).
 
 ### Azioni d'archetipo (42)
 
-Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Nei cinque starter ogni archetipo ha sei titoli; rarità e copie sono quelle di D79 sotto. Sergio: 2 C, 3 NC, 1 R. Duccio: 3 C, 2 NC, 1 R.
+Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Nei cinque starter ogni archetipo ha sei titoli; rarità e copie sono quelle di D79 sotto. Sergio: 2 C, 3 NC, 1 R, più CES-AR7 NC, carta del playground fuori dal conto delle 42 (D121). Duccio: 3 C, 2 NC, 1 R.
 
 **Spazienzio (6)**
 
@@ -311,7 +311,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | GIG-AR5 | Azione, regolare | DAMAGE | ~~F2 (10 V)~~ ~~F1 (5 V)⁷~~ F2 (10 V, passo 3) | 1 | ~~6~~ 14 HIT più ~~4~~ ~~7~~ 4 per ogni proprio oggetto sul campo (passo 3, D82; correzione 1.5, D90) | R | 1 | da inventare («Lavoro fatto bene») | Picco a tavolo pieno, debole a tavolo vuoto | Java nuova: conta gli oggetti propri, poi colpisce (`base.gigi.LavoroFattoBene`, SB-15) |
 | GIG-AR6 | Azione, regolare | RESOURCES | F0 | 1 | 4 CUT al bersaglio (passo 3). Annuncia Lavoro fatto bene o Chiave da tredici (SB-16i). Se lo trovi: +10 V. Se non lo trovi: +5 V. | NC | 1 | `base.gigi.UnaStrettaDiProva`, «Una stretta di prova» | Secondo annuncio verso il raro, D79 | dati + search |
 
-**Sergio (6)**
+**Sergio (6 + 1 del playground)**
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
@@ -321,6 +321,11 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | CES-AR4 | Azione, regolare | DAMAGE | F1 (~~5 V +~~ 5 A) | ~~2~~ 1 | ~~5 HIT; −5 A al bersaglio~~ 8 HIT; se il bersaglio ha un gettone di vulnerabilità, altri ~~8~~ ~~12~~ 6 HIT (SB-17: D106, riserva del giro 3; B2, D110) | NC | — | «Conto salato», già «Parli troppo vicino» (SB-17) | Incassa la lettura | dati (gettone) |
 | CES-AR5 | Azione, regolare | ~~DEFENSE~~ DAMAGE | ~~F1 (5 A)~~ F2 (15 A; ~~20 A, riserva R3 del giro 2~~, tolta da D112) | ~~2~~ 1 | ~~CUT ricevuto ×0,5 e HIT ×0,75 nel turno; +5 A a sé (SB-17)~~ ~~20~~ 24 HIT al bersaglio (SB-17 B2, D110; riserva R1 del giro 1) | C | — | ~~bozza «Fare il vago» (SB-17)~~ «Lo sanno tutti» (SB-17 B2, D110) | ~~Difesa~~ Colpo proprio non condizionato | dati |
 | CES-AR6 | Azione, regolare | DISRUPT | F1 (10 A) | ~~2~~ 1 | Il bersaglio perde A pari a metà della A residua di Sergio; ~~5 HIT~~ HIT pari a 5 più metà della A residua (SB-17) | R | — | bozza «Malelingue» (SB-17) | Picco con A alta | dati (`of`) |
+| CES-AR7 | Azione, regolare | ITEMS | F0 | 1 | Vende il proprio oggetto bersagliato: esce dal campo senza il suo effetto, +8 HEALTH a sé; se l'oggetto è sparito alla risoluzione, nessun guadagno⁸ | NC | — | bozza «Lo rivendo» (SB-17 B5e V4, D121), già basic CES-BA (B4) | Le dà un uso agli oggetti senza consumarli: un ricavato in salute (deroga sotto) | dati (`vendi`) |
+
+**Deroga di SB-17 a D3 e a R04 (D118, D121):** CES-AR7 «Lo rivendo» bersaglia un proprio oggetto (come una presa, D3) ma lo **vende**: l'oggetto esce senza il suo effetto e il ricavato è +8 HEALTH a sé (8 unità al banco D33, F0, priorità 1). Il ricavato è la condizione stampata della vendita, non un «altro effetto» di R04: con l'oggetto sparito alla risoluzione la carta non dà niente ([RP-25](regole-playground.md#9-vendere-un-oggetto-12-sb-17)). Carta del playground **fuori dal conto dei 120** (la slot è aggiunta dal blocco SB-17, come CES-BO3 era uno scambio): il conto del set lo rivede SB-18.
+
+⁸ **SB-17, Fase B6** ([D121](../../set-base-decisioni.md#decisioni-del-proprietario)): ×2 nel mazzo di prova di Sergio, al posto di una copia di Lo sapevo e di Sgambetto; Santino ×1 ed Espresso ×2 come nella V4 della B5e.
 
 **Duccio (6)**
 

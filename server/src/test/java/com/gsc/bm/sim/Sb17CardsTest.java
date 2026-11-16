@@ -377,14 +377,14 @@ class Sb17CardsTest {
         assertEquals(PrintedEffects.Kind.SWAP_ITEMS, ((PrintedEffects.Source) shuffle).printedEffects().getSteps().get(0).getKind());
     }
 
-    // ---- Lo rivendo (CES-BA, D118; regole del playground 1.3, RP-25, RP-26) ----
+    // ---- Lo metto in conto (CES-BA) and Lo rivendo (CES-AR7, D121; regole del playground 1.4, RP-25, RP-26) ----
 
     private static final String RIVENDO = "base.cesira.LoRivendo";
     private static final String SANTINO = "Santino della portinaia", ESPRESSO = "Espresso del distributore", PERONI = "Peroni da 66, calda";
     private static final Map<String, String> ITEM_BINDINGS = Map.of(SANTINO, "base.items.SantinoDellaPortinaia",
             ESPRESSO, "base.items.EspressoDelDistributore", PERONI, "com.items.RottenBeer");
 
-    /** Sergio with Lo rivendo (his basic) in hand and the given items on the field, oldest first; b only plays fillers. */
+    /** Sergio with Lo rivendo (a regular card since D121) in hand and the given items on the field, oldest first; b only plays fillers. */
     private static Game rivendo(String... items) {
         Game game = game(sergio(RIVENDO), opponent(List.of(), fillers(10)));
         for (String item : items) game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(item)));
@@ -407,14 +407,31 @@ class Sb17CardsTest {
     }
 
     @Test
-    void loRivendoIsSergiosBasicOnAnOwnItem() {
+    void loMettoInContoIsSergiosBasicAndLoRivendoARegularCard() {
+        Card basic = draft.card("base.cesira.LoMettoInConto");
+        assertTrue(basic.isBasicAction());
+        assertFalse(basic.isCharacterBound());
+        assertEquals(1, basic.getPriority());
+        assertEquals(Set.of(Card.CardTarget.NEAR_ITEM), basic.getCanTarget());
+        assertEquals("base.cesira.LoMettoInConto", draft.characterBasic(Sb17.SERGIO), "D121 (1): the basic is back, D118 (1) withdrawn for it");
         Card card = draft.card(RIVENDO);
-        assertTrue(card.isBasicAction());
+        assertFalse(card.isBasicAction(), "D121 (1): Lo rivendo is a deck card");
         assertFalse(card.isCharacterBound());
         assertEquals(1, card.getPriority());
-        assertEquals(Set.of(Card.CardTarget.NEAR_ITEM), card.getCanTarget(), "R03: a basic may target an item");
-        assertEquals(RIVENDO, draft.characterBasic(Sb17.SERGIO), "D118 (1), (3): Lo metto in conto is out");
-        assertFalse(draft.cardBindings().contains("base.cesira.LoMettoInConto"));
+        assertEquals(Set.of(Card.CardTarget.NEAR_ITEM), card.getCanTarget(), "R03: a regular card may target an item");
+    }
+
+    @Test
+    void loMettoInContoGivesAlertnessThenConsumesTheItem() {
+        Game game = game(sergio("base.cesira.LoMettoInConto"), opponent(List.of(), fillers(10)));
+        game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(SANTINO)));
+        int a = alertness(game, "s");
+        Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
+        choices.put(Move.AdditionalAction.TARGET_ITEM, SANTINO);
+        turn(game, new Move("Lo metto in conto", "s", "SELF", game.getGameId(), choices), move(game, "b", "Riempitivo", "SELF"));
+        assertEquals(a + 5, alertness(game, "s"), "+5 A (D121 (1); reserve R1 of B6, if needed: +7)");
+        assertEquals(List.of(), items(game, "s"), "the item is consumed with its effect");
+        assertTrue(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "the Santino's effect applies");
     }
 
     @Test
@@ -428,16 +445,15 @@ class Sb17CardsTest {
             assertFalse(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "without the Santino's effect");
             assertEquals(a, alertness(game, "s"), "without the Espresso's +15 A");
             assertTrue(selfReport(game).contains("Sold Item " + target), selfReport(game).toString());
-            assertTrue(game.getPlayers().get("s").getCardsInHand().stream().anyMatch(c -> c.getName().equals("Lo rivendo")), "a basic stays in hand");
         }
     }
 
     @Test
     void loRivendoNeedsAnItemToBePlayed() {
         Game game = rivendo();
-        assertThrows(Exception.class, () -> game.submitMove(sell(game, SANTINO)), "R03: the item a basic targets must be there");
+        assertThrows(Exception.class, () -> game.submitMove(sell(game, SANTINO)), "R03: the item the card targets must be there");
         Game none = rivendo(ESPRESSO);
-        assertThrows(Exception.class, () -> none.submitMove(sell(none, null)), "a basic on an item says which one");
+        assertThrows(Exception.class, () -> none.submitMove(sell(none, null)), "a card on an item says which one");
     }
 
     @Test
@@ -483,7 +499,7 @@ class Sb17CardsTest {
             assertEquals(c[1], sales.get(0).getItem(), java.util.Arrays.toString((String[]) c[0]) + ": never an Espresso while a Santino is there");
         }
         assertTrue(com.gsc.bm.model.game.bot.BotView.of(rivendo(), "s").legalMoves().stream()
-                .noneMatch(m -> m.getCard().getName().equals("Lo rivendo")), "without items the basic cannot be played");
+                .noneMatch(m -> m.getCard().getName().equals("Lo rivendo")), "without items the card cannot be played");
     }
 
     @Test
