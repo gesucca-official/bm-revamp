@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D114). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D116). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): Fase B3 consegnata, STOP per il proprietario ([rapporto](reports/set-base/sb-17-b3-report.md)): Lo rivendo in bozza con la scelta dell'oggetto (D114, D115); col giro e R1 Sergio resta sopra la soglia D95 contro Spazienzio (74,9%) e Mara (69,2%).
-> - **Prossimo:** la risposta del proprietario alle domande della B3, poi la prova finale del proprietario che chiude SB-17; poi SB-18 (Duccio). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D115).
+> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): Fase B3 fatta e rivista; Lo rivendo con R1 in bozza; giro sul mazzo di prova intermedio da lanciare (D116).
+> - **Prossimo:** giro di SB-17 sul mazzo intermedio (D116), poi la prova finale del proprietario che chiude SB-17; poi SB-18 (Duccio). Da pianificare: il passo del client per la scelta dell'oggetto di Lo rivendo (validatore e finestra, D115 (2)). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D116).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -487,7 +487,7 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Proposta A3 approvata il 16 novembre 2026 in [D114](#decisioni-del-proprietario)**, con una modifica: l'oggetto che Lo rivendo vende lo sceglie il giocatore, non è il più vecchio in automatico. Prossimo: Fase B3.
 
-**Fase B3 consegnata il 16 novembre 2026, STOP per il proprietario** ([rapporto](reports/set-base/sb-17-b3-report.md)). Prima uno STOP prima del codice: la scelta dell'umano chiedeva validatore e client; con [D115](#decisioni-del-proprietario) («A, client dopo») la scelta è un campo facoltativo della mossa, il più vecchio se manca, i bot scelgono l'oggetto meno prezioso; il passo del client viene dopo. Regole del playground 1.2 (RP-25, RP-26), Lo rivendo in `bozza.json` con il mazzo della § 3; passo 0 e identità viva identici, fedeltà al 100%, contesto e manifest verdi, mutazioni 8/8. Giro: Spazienzio 76,9% e Mara 72,8%, con R1 (+5 HEALTH con l'oggetto) 74,9% e 69,2%; scostamento dichiarato. Una diagnosi a 4 semi attribuisce il salto ai ritocchi del mazzo più che alla bound; domande al proprietario sullo stato da tenere.
+**Fase B3 rivista dalla regia; il proprietario sceglie il mazzo intermedio e un giro prima della prova finale ([D116](#decisioni-del-proprietario)).** **Fase B3 consegnata il 16 novembre 2026, STOP per il proprietario** ([rapporto](reports/set-base/sb-17-b3-report.md)). Prima uno STOP prima del codice: la scelta dell'umano chiedeva validatore e client; con [D115](#decisioni-del-proprietario) («A, client dopo») la scelta è un campo facoltativo della mossa, il più vecchio se manca, i bot scelgono l'oggetto meno prezioso; il passo del client viene dopo. Regole del playground 1.2 (RP-25, RP-26), Lo rivendo in `bozza.json` con il mazzo della § 3; passo 0 e identità viva identici, fedeltà al 100%, contesto e manifest verdi, mutazioni 8/8. Giro: Spazienzio 76,9% e Mara 72,8%, con R1 (+5 HEALTH con l'oggetto) 74,9% e 69,2%; scostamento dichiarato. Una diagnosi a 4 semi attribuisce il salto ai ritocchi del mazzo più che alla bound; domande al proprietario sullo stato da tenere.
 
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 
@@ -649,7 +649,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D114 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D116 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
