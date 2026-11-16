@@ -162,12 +162,13 @@ public final class TurnForecast {
     }
 
     /**
-     * SB-17 («Lo rivendo», playground rules 1.2, RP-25), as the engine: the chosen item if still on the field, else none; without a
-     * choice the oldest (the first of the tray). The item leaves without its effect. Whether one was sold.
+     * SB-17 («Lo rivendo», playground rules 1.3, RP-25), as the engine: the targeted item if still on the field, else none, with no
+     * fallback. The item leaves without its effect. Whether one was sold.
      */
-    static boolean sell(List<BotView.CardSeen> items, String choice) {
+    public static boolean sell(List<BotView.CardSeen> items, String choice) {
+        if (choice == null) return false;
         for (int i = 0; i < items.size(); i++)
-            if (choice == null || items.get(i).getName().equals(choice)) {
+            if (items.get(i).getName().equals(choice)) {
                 items.remove(i);
                 return true;
             }

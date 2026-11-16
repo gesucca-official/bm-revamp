@@ -36,7 +36,7 @@ class TurnForecastFidelityTest {
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         int[] turns = new int[3]; // checked, matched, skipped
         int[] sergio = new int[4]; // SB-17, in checked turns: reflections, kept tokens, Conto salato on a token, Lo sanno tutti resolved (B2, D110)
-        int[] sales = new int[2]; // SB-17 B3 (D114, D115): Lo rivendo resolved in checked turns, with an item and without
+        int[] sales = new int[2]; // SB-17 B4 (D118): resolved in checked turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_300; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
@@ -74,8 +74,8 @@ class TurnForecastFidelityTest {
                         if (m.getPlayedCardName().equals("Ricatto") && g.getResolvedMoves().stream().anyMatch(o -> o != m && o.isVoid())) sergio[0]++;
                         if (m.isKeepsToken()) sergio[1]++;
                         if (m.getPlayedCardName().equals("Lo sanno tutti") && !m.isVoid()) sergio[3]++;
-                        if (m.getPlayedCardName().equals("Lo rivendo") && !m.isVoid())
-                            sales[m.getChoices().get(Move.AdditionalAction.TARGET_ITEM) != null ? 0 : 1]++;
+                        if (m.getPlayedCardName().equals("Lo rivendo") && !m.isVoid()) sales[0]++;
+                        if (m.getPlayedCardName().equals("Fare il vago") && !m.isVoid()) sales[1]++;
                     }
                     forecasts.forEach((id, ends) -> {
                         turns[0]++;
@@ -93,8 +93,8 @@ class TurnForecastFidelityTest {
             System.out.println("forecast fidelity, sergio: reflections " + sergio[0] + ", kept tokens " + sergio[1]
                     + ", Conto salato on a token " + sergio[2] + ", Lo sanno tutti " + sergio[3]);
             for (int n : sergio) assertTrue(n > 0, "every new effect is in the checked sample");
-            System.out.println("forecast fidelity, sergio: Lo rivendo with an item " + sales[0] + ", without " + sales[1]);
-            for (int n : sales) assertTrue(n > 0, "both branches of Lo rivendo are in the checked sample");
+            System.out.println("forecast fidelity, sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
+            for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the checked sample");
         }
     }
 }

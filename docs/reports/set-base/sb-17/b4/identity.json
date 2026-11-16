@@ -1,0 +1,57 @@
+{
+ "note": "SB-17 B4 (D118): identity and checks",
+ "step0": {
+  "rules": "1.6b",
+  "games": 8640,
+  "base_vs_new": "identical except seconds.txt"
+ },
+ "live_identity": {
+  "test": "ChargeMeasureTest#liveBenchOnTheSameHistoricalDraft",
+  "rules": "1.13",
+  "games": 480000,
+  "final-live.json": {
+   "sha256_prefix": "ca131721",
+   "bytes": 266869
+  },
+  "final-live.md": {
+   "sha256_prefix": "16d3bde4",
+   "bytes": 26112
+  },
+  "same_as_B3": true
+ },
+ "suite": {
+  "tests": 894,
+  "failures": 0,
+  "skipped": 21,
+  "client": "37/37",
+  "after_r1": true
+ },
+ "context": {
+  "task": "TestServerContext",
+  "tests": 1012,
+  "failures": 0,
+  "skipped": 21,
+  "verify-match-manifests": "PASS"
+ },
+ "fidelity": {
+  "TurnForecast": {
+   "sergio": "7546/7546",
+   "Lo rivendo": 392,
+   "Fare il vago": 543,
+   "arm A": "5526/5526",
+   "arm B": "5536/5536",
+   "1.6": "5408/5408"
+  },
+  "ViewTable": {
+   "first": "7546/7546",
+   "two": "4862/4862",
+   "Lo rivendo": 395,
+   "Fare il vago": 544
+  }
+ },
+ "mutations": {
+  "killed": 7,
+  "total": 8,
+  "file": "mutations.json"
+ }
+}

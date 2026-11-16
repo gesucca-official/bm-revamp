@@ -181,9 +181,9 @@ final class DataCards {
         boolean consumes() { return self.stream().anyMatch(step -> step instanceof ConsumeStep); }
 
         /**
-         * SB-17 («Lo rivendo», regole del playground 1.2, RP-25, RP-26): dove sta il passo vendi. Solo in self, una volta, in una carta
-         * (non un oggetto) che bersaglia solo SELF e non consuma: vendere non è bersagliare un oggetto, e la carta resta giocabile
-         * anche senza oggetti.
+         * SB-17 («Lo rivendo», regole del playground 1.3, RP-25, RP-26): dove sta il passo vendi. Solo in self, una volta, in una basic
+         * che bersaglia solo NEAR_ITEM e non consuma: si vende l'oggetto bersagliato, come una presa senza l'effetto. Mai in una bound
+         * (come consume: una bound non può bersagliare oggetti), né in un'azione regolare o in un oggetto.
          */
         private void checkVendi() {
             for (int i = 0; i < target.size(); i++)
@@ -194,8 +194,10 @@ final class DataCards {
                 if (!(self.get(i) instanceof VendiStep)) continue;
                 String where = "self[" + i + "]: vendi ";
                 if (kind == Kind.ITEM) throw invalid(where + "non è ammesso in un oggetto: un oggetto non si gioca");
-                if (!Set.of(Card.CardTarget.SELF).equals(targets))
-                    throw invalid(where + "richiede targets solo SELF: l'oggetto è una scelta della mossa, non un bersaglio (R03)");
+                if (kind == Kind.BOUND) throw invalid(where + "non è ammesso in una bound: una bound non può bersagliare oggetti");
+                if (!basic) throw invalid(where + "vale solo in una basic: vende l'oggetto che la basic bersaglia");
+                if (!Set.of(Card.CardTarget.NEAR_ITEM).equals(targets))
+                    throw invalid(where + "richiede targets solo NEAR_ITEM: si vende l'oggetto bersagliato");
                 if (consumes()) throw invalid(where + "e consume si escludono");
                 if (++seen > 1) throw invalid(where + "ripetuto: una sola vendita per carta");
             }
@@ -557,14 +559,13 @@ final class DataCards {
     }
 
     /**
-     * SB-17 («Lo rivendo», regole del playground 1.2, RP-25), solo in self: la carta ha già tolto dal campo l'oggetto venduto, senza
-     * il suo effetto (scelto con {@code TARGET_ITEM} se c'è ancora, il più vecchio se la mossa non lo dice). Con l'oggetto scrive
-     * «Sold Item X» e applica {@code seHai}; senza oggetti, o se quello scelto è sparito, applica {@code seNo}. I passi annidati
-     * sono soli guadagni e perdite di chi gioca ({@code gain}, {@code lose}, {@code say}).
+     * SB-17 («Lo rivendo», regole del playground 1.3, RP-25), solo in self di una basic: la carta ha già tolto dal campo l'oggetto
+     * bersagliato, senza il suo effetto, se c'era ancora. Con l'oggetto scrive «Sold Item X» e applica {@code seHai}, il ricavato;
+     * se l'oggetto è sparito scrive «Nothing to sell» e non applica nulla (D118 (2)). I passi annidati sono soli guadagni e perdite
+     * di chi gioca ({@code gain}, {@code lose}, {@code say}). Il campo {@code seNo} della 1.2 non c'è più.
      */
     public static final class VendiStep implements Step {
         public List<Step> seHai;
-        public List<Step> seNo;
 
         @Override public String apply(Character author, Character subject) {
             throw new IllegalStateException("vendi ha bisogno dell'oggetto venduto: si esegue con lines()");
@@ -576,40 +577,39 @@ final class DataCards {
 
         @Override public List<String> lines(Card sold, Character author, Character subject, int plays) {
             List<String> report = new ArrayList<>();
-            if (sold != null) report.add("Sold Item " + sold.getName());
-            for (Step step : sold != null ? seHai : seNo) report.addAll(step.lines(null, author, subject, plays));
+            if (sold == null) {
+                report.add("Nothing to sell");
+                return report;
+            }
+            report.add("Sold Item " + sold.getName());
+            for (Step step : seHai) report.addAll(step.lines(null, author, subject, plays));
             return report;
         }
 
         @Override public String missing() {
             if (seHai == null || seHai.isEmpty()) return "campo seHai mancante o vuoto";
-            if (seNo == null) return "campo seNo mancante";
-            for (String branch : List.of("seHai", "seNo")) {
-                List<Step> steps = "seHai".equals(branch) ? seHai : seNo;
-                for (int i = 0; i < steps.size(); i++) {
-                    Step step = steps.get(i);
-                    if (step == null) return branch + "[" + i + "] è null";
-                    if (!(step instanceof GainStep || step instanceof LoseStep || step instanceof SayStep))
-                        return branch + "[" + i + "]: vendi contiene solo gain, lose e say";
-                    String missing = step.missing();
-                    if (missing != null) return branch + "[" + i + "]: " + missing;
-                }
+            for (int i = 0; i < seHai.size(); i++) {
+                Step step = seHai.get(i);
+                if (step == null) return "seHai[" + i + "] è null";
+                if (!(step instanceof GainStep || step instanceof LoseStep || step instanceof SayStep))
+                    return "seHai[" + i + "]: vendi contiene solo gain, lose e say";
+                String missing = step.missing();
+                if (missing != null) return "seHai[" + i + "]: " + missing;
             }
             return null;
         }
     }
 
     /**
-     * SB-17 («Lo rivendo», RP-25): l'oggetto da vendere, tolto dal campo alla risoluzione. La scelta della mossa ({@code TARGET_ITEM})
-     * se è ancora fra gli oggetti di chi gioca, altrimenti nessuno; senza scelta il più vecchio, se ce n'è uno. Non passa da
+     * SB-17 («Lo rivendo», RP-25, 1.3): l'oggetto da vendere, tolto dal campo alla risoluzione: il bersaglio della mossa
+     * ({@code TARGET_ITEM}) se è ancora fra gli oggetti di chi gioca, altrimenti nessuno; nessun ripiego. Non passa da
      * {@link Game#getItem}, che scrive nel registro un tentativo illegale: un oggetto sparito qui è un esito previsto.
      */
     static Card sell(Game g, Move m) {
         java.util.Queue<Card> items = g.getSelf(m).getCharacter().getItems();
         String choice = m.getChoices() == null ? null : m.getChoices().get(Move.AdditionalAction.TARGET_ITEM);
         Card sold = null;
-        if (choice == null) sold = items.peek();
-        else for (Card item : items) if (item.getName().equals(choice)) { sold = item; break; }
+        if (choice != null) for (Card item : items) if (item.getName().equals(choice)) { sold = item; break; }
         if (sold != null) items.remove(sold);
         return sold;
     }
@@ -646,10 +646,9 @@ final class DataCards {
             return;
         }
         if (step instanceof VendiStep) {
-            // SB-17 (RP-25): the sale first, then both branches, each marked; the reader applies the one of the outcome.
+            // SB-17 (RP-25, 1.3): the sale first, then the proceeds, marked; the reader applies them only if an item was sold.
             steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.SELL).onTarget(onTarget).build());
             for (Step nested : ((VendiStep) step).seHai) printed(nested, onTarget, ahead, ifToken, Boolean.TRUE, steps);
-            for (Step nested : ((VendiStep) step).seNo) printed(nested, onTarget, ahead, ifToken, Boolean.FALSE, steps);
             return;
         }
         PrintedEffects.Step.StepBuilder b = PrintedEffects.Step.builder().onTarget(onTarget).ahead(ahead).ifToken(ifToken).sold(sold);
@@ -775,11 +774,8 @@ final class DataCards {
 
         @Override public PrintedEffects printedEffects() { return printed(definition); }
         @com.fasterxml.jackson.annotation.JsonIgnore @Override public boolean isLastBlow() { return definition.lastBlow; }
-        /** SB-17: l'oggetto venduto in questa risoluzione, o null. Solo con vendi. */
-        private Card sold;
-        /** SB-17 («Lo rivendo», RP-25): la vendita si decide alla risoluzione, dopo lo scarto della bound. */
-        @Override public void applyOtherUnfathomableLogic(Game g, Move m) { sold = definition.sells() ? sell(g, m) : null; }
-        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, sold, self, self, self.playsOf(getName())); }
+        @Override public void applyOtherUnfathomableLogic(Game g, Move m) { }
+        @Override public List<String> applyEffectOnSelf(Character self) { return run(definition.self, null, self, self, self.playsOf(getName())); }
         @Override public List<String> applyEffectOnTarget(Character self, Character target) {
             return run(definition.target, null, self, target, self.playsOf(getName()));
         }

@@ -51,9 +51,9 @@ public class PrintedEffects implements Serializable {
         /** SB-17, like ShuffleFeet: the author and the target swap their near items, each tray keeping its capacity. */
         SWAP_ITEMS,
         /**
-         * SB-17 («Lo rivendo», playground rules 1.2, RP-25): an own item leaves the field without its effect. The item is the move's
-         * choice ({@code TARGET_ITEM}) if still on the author's field, the oldest if the move does not say; none if the author has no
-         * items or the chosen one is gone. The steps with {@link Step#getSold()} apply according to the outcome.
+         * SB-17 («Lo rivendo», playground rules 1.3, RP-25): an own item leaves the field without its effect. The item is the move's
+         * target ({@code TARGET_ITEM}, a basic on NEAR_ITEM) if still on the author's field, else none. The steps with
+         * {@link Step#getSold()} apply according to the outcome.
          */
         SELL
     }

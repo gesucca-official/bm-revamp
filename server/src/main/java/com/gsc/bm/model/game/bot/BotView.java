@@ -314,6 +314,11 @@ public class BotView {
 
     private void addTargets(CardSeen card, String discard, String search, List<LegalMove> legal) {
         if (card.canTarget.contains(Card.CardTarget.NEAR_ITEM)) {
+            String sale = sellChoice(card);
+            if (sale != null) {
+                legal.add(new LegalMove(card, "SELF", discard, sale, search));
+                return;
+            }
             for (String item : itemNames(self.seat)) legal.add(new LegalMove(card, "SELF", discard, item, search));
             return;
         }
@@ -324,16 +329,16 @@ public class BotView {
             return;
         }
         if (card.canTarget.contains(Card.CardTarget.SELF))
-            legal.add(new LegalMove(card, "SELF", discard, sellChoice(card), search));
+            legal.add(new LegalMove(card, "SELF", discard, null, search));
         if (card.canTarget.contains(Card.CardTarget.OPPONENT))
             for (Opponent opponent : aliveOpponents())
                 legal.add(new LegalMove(card, opponent.seat.playerId, discard, null, search));
     }
 
     /**
-     * SB-17 («Lo rivendo», playground rules 1.2, RP-25), the rule shared by every bot, like {@link #searchChoice}: for a card that
-     * sells an own item, the least valuable own item by {@link StyleSupport#itemWorth}, the oldest on a tie; null when the card does
-     * not sell or there is no item (then the card plays its branch without items).
+     * SB-17 («Lo rivendo», playground rules 1.3, RP-25), the rule shared by every bot, like {@link #searchChoice}: for a basic that
+     * sells the own item it targets, a single move, on the least valuable own item by {@link StyleSupport#itemWorth}, the oldest on
+     * a tie; null when the card does not sell or there is no item (then the card cannot be played).
      */
     String sellChoice(CardSeen card) {
         if (!PrintedEffects.sells(card.effects) || self.seat.items.isEmpty()) return null;

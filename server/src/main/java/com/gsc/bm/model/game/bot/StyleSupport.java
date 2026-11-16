@@ -159,8 +159,7 @@ final class StyleSupport {
             this.costTotal = cost.values().stream().mapToInt(Integer::intValue).sum() - healthCost;
             this.suicidal = healthCost > 0 && healthCost >= situation.myHealth();
             this.usesItem = move.getItem() != null && card.getCanTarget().contains(Card.CardTarget.NEAR_ITEM);
-            // SB-17: an item named by a sale (a SELF card) is not taken from afar; for the other cards nothing changes.
-            this.takesFarItem = move.getItem() != null && !usesItem && !PrintedEffects.sells(card.getEffects());
+            this.takesFarItem = move.getItem() != null && !usesItem;
             Map<Resource, Double> total = parseGains(card.getGains(), VARIABLE);
             Map<Resource, Double> fixed = parseGains(card.getGains(), 0);
             if (usesItem) situation.me.getItems().stream().filter(i -> i.getName().equals(move.getItem())).findFirst()
@@ -168,8 +167,9 @@ final class StyleSupport {
                         parseGains(item.getGains(), VARIABLE).forEach((r, v) -> total.merge(r, v, Double::sum));
                         parseGains(item.getGains(), 0).forEach((r, v) -> fixed.merge(r, v, Double::sum));
                     });
-            // SB-17 («Lo rivendo», RP-25): the gains of the branch the move plays, with the item it sells or without.
-            if (PrintedEffects.sells(card.getEffects())) {
+            // SB-17 («Lo rivendo», RP-25, 1.3): the proceeds of the sale in place of the item's gains, which the sale throws away.
+            boolean sells = PrintedEffects.sells(card.getEffects());
+            if (sells) {
                 total.clear();
                 fixed.clear();
                 boolean withItem = move.getItem() != null;
@@ -191,7 +191,7 @@ final class StyleSupport {
             this.fixedGains = fixed;
             this.aheadGuard = playground && aheadChance > 0 ? aheadChance * guard(situation, card, target) : 0;
             List<PrintedEffects.Step> own = new ArrayList<>(steps(card));
-            if (usesItem) situation.me.getItems().stream().filter(i -> i.getName().equals(move.getItem())).findFirst()
+            if (usesItem && !sells) situation.me.getItems().stream().filter(i -> i.getName().equals(move.getItem())).findFirst()
                     .ifPresent(item -> own.addAll(steps(item)));
             this.toxicRelief = playground ? toxicRelief(situation, own, target == situation.me) : 0;
             this.repeated = situation.view.getLastRound().stream()

@@ -1,0 +1,104 @@
+{
+ "note": "SB-17 B4 (D118), tests per mutation of Lo rivendo basic and Fare il vago",
+ "results": [
+  {
+   "mutation": "engine: the proceeds with the item gone at resolution",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 16.2,
+   "failures": [
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.55 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.loRivendoOnAnItemDestroyedEarlierInTheTurnGainsNothing:455 D118 (2): the targeted item is gone at resolution, no sale and no gain ==> expected: <0> but was: <-6>",
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "engine: the targeted item gone at resolution falls back to the oldest",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 15.0,
+   "failures": [
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.539 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.loRivendoOnAnItemDestroyedEarlierInTheTurnGainsNothing:455 D118 (2): the targeted item is gone at resolution, no sale and no gain ==> expected: <0> but was: <-6>",
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "bots: the most valuable item instead of the least",
+   "file": "BotView.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 14.0,
+   "failures": [
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.478 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.theBotsSellTheLeastValuableItemWithASingleMove:483 [Espresso del distributore, Santino della portinaia]: never an Espresso while a Santino is there ==> expected: <Santino della portinaia> but was: <Espresso del distributore>",
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "bots: one move per item instead of a single sale",
+   "file": "BotView.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 14.4,
+   "failures": [
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.493 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.theBotsSellTheLeastValuableItemWithASingleMove:482 [Espresso del distributore, Santino della portinaia]: one move, the rule shared by every bot ==> expected: <1> but was: <2>",
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "loader: a sale in a bound accepted",
+   "file": "DataCards.java",
+   "tests": "Sb17CardsTest",
+   "killed": true,
+   "seconds": 14.7,
+   "failures": [
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.531 s <<< FAILURE! - in com.gsc.bm.sim.Sb17CardsTest",
+    "[ERROR]   Sb17CardsTest.theLoaderRefusesASaleOutOfPlace:530->lambda$theLoaderRefusesASaleOutOfPlace$17:534 {'binding':'t.V','kind':'BOUND','boundTo':'x','targets':['SELF'],'self':[{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':6}]}]} -> Carta t.V: self[0]: vendi richiede targets so",
+    "[ERROR] Tests run: 29, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "forecast and view table: the targeted item not removed",
+   "file": "TurnForecast.java",
+   "tests": "Sb17CardsTest,TurnForecastFidelityTest,ViewTableFidelityTest",
+   "killed": true,
+   "seconds": 25.6,
+   "failures": [
+    "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.119 s - in com.gsc.bm.sim.TurnForecastFidelityTest",
+    "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.889 s - in com.gsc.bm.sim.ViewTableFidelityTest",
+    "[ERROR]   Sb17CardsTest.theForecastSellsTheTargetedItem:502 expected: <[Espresso del distributore]> but was: <[Espresso del distributore, Santino della portinaia]>",
+    "[ERROR] Tests run: 31, Failures: 1, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "bots: the parry of a bound ignored by the forecast",
+   "file": "TurnForecast.java",
+   "tests": "Sb17CardsTest,TurnForecastFidelityTest,ViewTableFidelityTest",
+   "killed": true,
+   "seconds": 24.2,
+   "failures": [
+    "[ERROR]   Sb17CardsTest.theBotParriesAShownLethalHitWithFareIlVago:577 the only move that keeps Sergio up ==> expected: <[Fare il vago]> but was: <[Fare il vago, Spintone]>",
+    "[ERROR]   TurnForecastFidelityTest.theForecastMatchesTheEngineTurnByTurn:32->check:91 seed 7100001 turn 8 seen by seat-2: {seat-2=4, seat-1=22} not in [{seat-2=3, seat-1=22}] moves [Move(playedCardName=Fare il vago, playerId=seat-2, targetId=SELF, gameId=4ecde5022fcca8b71103290181904e619cc7738e0c9e3",
+    "[ERROR]   ViewTableFidelityTest.equivalenceAndTwoTurnFidelity:30->check:75->lambda$check$12:116 seed 7100001 turn 8 moves seat-1:Passo stretto, seat-2:Fare il vago after seat-1:Sorpasso in curva, seat-2:Fare il vago first-turn equivalence seen by seat-2 ==> expected: <[{seat-2=3, seat-1=22}]> but wa",
+    "[ERROR] Tests run: 31, Failures: 3, Errors: 0, Skipped: 0"
+   ]
+  },
+  {
+   "mutation": "styles: the item's own text counted in a sale",
+   "file": "StyleSupport.java",
+   "tests": "Sb17CardsTest,TurnForecastFidelityTest,ViewTableFidelityTest",
+   "killed": false,
+   "seconds": 25.1,
+   "failures": [
+    "[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.509 s - in com.gsc.bm.sim.Sb17CardsTest",
+    "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.917 s - in com.gsc.bm.sim.TurnForecastFidelityTest",
+    "[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.258 s - in com.gsc.bm.sim.ViewTableFidelityTest",
+    "[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0"
+   ]
+  }
+ ]
+}

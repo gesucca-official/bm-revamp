@@ -58,7 +58,7 @@ class ViewTableFidelityTest {
         long[] one = new long[2], two = new long[2], twoRes = new long[2], drawn = new long[2];
         long[] skipped = new long[1], unmodeled = new long[1];
         int[] regressionWindows = new int[1];
-        int[] sales = new int[2]; // SB-17 B3 (D114, D115): Lo rivendo in compared turns, with an item and without
+        int[] sales = new int[2]; // SB-17 B4 (D118): in compared turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
@@ -92,7 +92,10 @@ class ViewTableFidelityTest {
                     }
                     views.put(t, seen);
                     plays.put(t, now);
-                    for (ViewTable.Play p : now) if (p.card.getName().equals("Lo rivendo")) sales[p.item != null ? 0 : 1]++;
+                    for (ViewTable.Play p : now) {
+                        if (p.card.getName().equals("Lo rivendo")) sales[0]++;
+                        if (p.card.getName().equals("Fare il vago")) sales[1]++;
+                    }
                     labels[0] = "seed " + s + " turn " + t + " moves " + now.stream().map(p -> p.seat + ":" + p.card.getName())
                             .reduce((x, y) -> x + ", " + y).orElse("") + (plays.containsKey(t - 1) ? " after " + plays.get(t - 1).stream()
                             .map(p -> p.seat + ":" + p.card.getName()).reduce((x, y) -> x + ", " + y).orElse("") : "");
@@ -181,8 +184,8 @@ class ViewTableFidelityTest {
         assertTrue(two[0] > 1000);
         if (probeRegressions) assertEquals(4, regressionWindows[0], "both seats of the two probe regressions remain covered in arm " + arm);
         if (arm.equals("sergio")) {
-            System.out.println("ViewTable fidelity sergio: Lo rivendo with an item " + sales[0] + ", without " + sales[1]);
-            for (int n : sales) assertTrue(n > 0, "both branches of Lo rivendo are in the compared sample");
+            System.out.println("ViewTable fidelity sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
+            for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the compared sample");
         }
         assertEquals(one[0], one[1], String.join("\n", misses));
         assertEquals(two[0], two[1], String.join("\n", misses));

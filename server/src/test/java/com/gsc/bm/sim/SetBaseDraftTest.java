@@ -81,7 +81,7 @@ class SetBaseDraftTest {
         assertEquals(decks, new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
         for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
-                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.MiInformo")) { // SB-17 B2 (D110), B3 (D114): Lo rivendo nel mazzo di prova al posto di Frecciatina, Mi informo resta nella collezione
+                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.MiInformo")) { // SB-17 B2 (D110), B3 (D114), B4 (D118): Fare il vago nel mazzo di prova al posto di Lo rivendo, ora basic; Mi informo resta nella collezione
             assertTrue(draft.cardBindings().contains(third), third);
             assertFalse(draft.deckCards().contains(third), third + " non va negli starter");
         }
@@ -191,7 +191,8 @@ class SetBaseDraftTest {
         }
         // SB-16i (D97): + il POISON ×0,5 del Bancone del braccio B, ora in bozza.json (gli stati di «Gioca d'anticipo» sono annidati).
         // SB-17: + the two states of «Fare il vago» (CES-AR5, in questo turno); SB-17 B2 (D110): CES-AR5 is «Lo sanno tutti», no states.
-        assertEquals(12, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
+        // SB-17 B4 (D118): + the two states of «Fare il vago», now the bound CES-BO3 (in questo turno): 12 → 14.
+        assertEquals(14, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());

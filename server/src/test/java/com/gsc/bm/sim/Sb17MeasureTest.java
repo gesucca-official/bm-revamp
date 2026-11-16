@@ -35,6 +35,9 @@ class Sb17MeasureTest {
     static final class SergioObserve implements BiConsumer<String, Game> {
         final Map<String, String> keys = new HashMap<>();
         final Map<String, Boolean> tokenOnTarget = new HashMap<>();
+        /** SB-17 B4 (D118): at ROUND_READY, whether the player's opponent shows a found card, and the A the player's move costs. */
+        final Map<String, Boolean> foeShows = new HashMap<>();
+        final Map<String, Integer> alertnessCost = new HashMap<>();
         final Map<String, Counts> totals = new TreeMap<>();
 
         private Counts counts(String player) { return totals.computeIfAbsent(keys.get(player), k -> new Counts()); }
@@ -52,11 +55,16 @@ class Sb17MeasureTest {
                     Player target = g.getPlayers().get(m.getTargetId());
                     tokenOnTarget.put(m.getPlayerId(), target != null
                             && target.getCharacter().getStatuses().stream().anyMatch(s -> s.getExposure() != null));
+                    Player author = g.getPlayers().get(m.getPlayerId());
+                    foeShows.put(m.getPlayerId(), g.getPlayers().values().stream().anyMatch(o -> o != author && !o.getRevealed().isEmpty()));
+                    alertnessCost.put(m.getPlayerId(), author.getCardsInHand().stream().filter(c -> c.getName().equals(m.getPlayedCardName()))
+                            .findFirst().map(c -> c.getCost().getOrDefault(com.gsc.bm.model.Resource.ALERTNESS, 0)).orElse(0));
                 }
                 return;
             }
             if (!stage.equals("ROUND_COMMITTED")) return;
             List<Move> moves = g.getResolvedMoves();
+            if (g.isOver()) for (Player p : g.getPlayers().values()) counts(p.getPlayerId()).add("games"); // SB-17 B4: per-game readings
             for (Move m : moves) {
                 String card = m.getPlayedCardName();
                 boolean otherVoided = moves.stream().anyMatch(o -> o != m && o.isVoid());
@@ -69,7 +77,12 @@ class Sb17MeasureTest {
                     case "Conto salato":
                         if (!m.isVoid()) c.add(card + (Boolean.TRUE.equals(tokenOnTarget.get(m.getPlayerId())) ? "/onToken" : "/noToken"));
                         break;
-                    case "Lo rivendo": // SB-17 B3 (D114): the branch played and the item sold, from the report of the move
+                    case "Fare il vago": // SB-17 B4 (D118): the parry bound, and how often against a found card the opponent shows
+                        if (m.isVoid()) break;
+                        c.add(card + "/played");
+                        if (Boolean.TRUE.equals(foeShows.get(m.getPlayerId()))) c.add(card + "/foeShows");
+                        break;
+                    case "Lo rivendo": // SB-17 B3 (D114), B4 (D118): with the item sold or nothing to sell, from the report of the move
                         if (m.isVoid()) break;
                         String sold = m.getMoveReport().getOrDefault(Card.CardTarget.SELF, List.of()).stream()
                                 .filter(l -> l.startsWith("Sold Item ")).findFirst().orElse(null);
@@ -78,6 +91,7 @@ class Sb17MeasureTest {
                         break;
                     default:
                 }
+                c.add("A spent", alertnessCost.getOrDefault(m.getPlayerId(), 0)); // SB-17 B4: costs are paid even by a voided move (R04)
                 // The mark is set on every move Lo sapevo voids; a token is kept only if the voided card is one its author revealed.
                 if (m.isKeepsToken() && g.getPlayers().get(m.getPlayerId()).getRevealed().stream()
                         .anyMatch(r -> r.getCard().getName().equalsIgnoreCase(card)))

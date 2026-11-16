@@ -1,0 +1,28 @@
+{
+ "note": "SB-17 B4 (D118): clock budget of the short round, 300 s; step 0, live identity, suite, context and mutations outside the budget",
+ "budget_s": 300,
+ "rounds": [
+  {
+   "round": "round-1",
+   "rule": "Lo rivendo +6 HEALTH",
+   "clock_s": 109.0,
+   "wall_s": 123.4
+  },
+  {
+   "round": "round-2",
+   "rule": "R1: Lo rivendo +8 HEALTH",
+   "clock_s": 89.9,
+   "wall_s": 101.0
+  }
+ ],
+ "used_wall_s": 224.4,
+ "outside_budget": {
+  "step0_base_s": 9.96,
+  "step0_new_s": 10.24,
+  "live_identity_s": 79.6,
+  "suite_s": 67.9,
+  "suite_after_r1_s": 67.2,
+  "context_s": 481.0,
+  "mutations_s": 149
+ }
+}

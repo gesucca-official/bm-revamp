@@ -11,6 +11,14 @@ import com.gsc.bm.model.game.Game;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
 import com.gsc.bm.model.game.Ruleset;
+import com.gsc.bm.model.game.bot.AggressivePolicy;
+import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.game.bot.BotView;
+import com.gsc.bm.model.game.bot.LethalAwarePolicy;
+import com.gsc.bm.model.game.bot.PrudentPolicy;
+import com.gsc.bm.model.game.bot.RandomPolicy;
+import com.gsc.bm.model.game.bot.ResourceAwarePolicy;
+import com.gsc.bm.model.game.bot.SoughtHitPolicy;
 import com.gsc.bm.model.game.status.Status;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,7 +35,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * SB-17 Fase B (D106–D108): the new cards of Sergio Sommerso in the engine, with the d50 rules of the playground. «s» is Sergio, faster
+ * SB-17 Fase B (D106–D108), B3 and B4 (D114, D118): the new cards of Sergio Sommerso in the engine, with the d50 rules of the playground. «s» is Sergio, faster
  * than «b» at equal priority (more A); «b» plays test cards built as in {@link VulnerabilitaD69Test}.
  */
 class Sb17CardsTest {
@@ -369,14 +377,14 @@ class Sb17CardsTest {
         assertEquals(PrintedEffects.Kind.SWAP_ITEMS, ((PrintedEffects.Source) shuffle).printedEffects().getSteps().get(0).getKind());
     }
 
-    // ---- Lo rivendo (CES-BO3, D114, D115; regole del playground 1.2, RP-25, RP-26) ----
+    // ---- Lo rivendo (CES-BA, D118; regole del playground 1.3, RP-25, RP-26) ----
 
-    private static final String RIVENDO = "base.cesira.bound.LoRivendo";
+    private static final String RIVENDO = "base.cesira.LoRivendo";
     private static final String SANTINO = "Santino della portinaia", ESPRESSO = "Espresso del distributore", PERONI = "Peroni da 66, calda";
     private static final Map<String, String> ITEM_BINDINGS = Map.of(SANTINO, "base.items.SantinoDellaPortinaia",
             ESPRESSO, "base.items.EspressoDelDistributore", PERONI, "com.items.RottenBeer");
 
-    /** Sergio with Lo rivendo in hand and the given items on the field, oldest first; b only plays fillers. */
+    /** Sergio with Lo rivendo (his basic) in hand and the given items on the field, oldest first; b only plays fillers. */
     private static Game rivendo(String... items) {
         Game game = game(sergio(RIVENDO), opponent(List.of(), fillers(10)));
         for (String item : items) game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(item)));
@@ -385,12 +393,13 @@ class Sb17CardsTest {
 
     private static Move sell(Game game, String item) {
         Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
-        choices.put(Move.AdditionalAction.DISCARD_ONE, "Riempitivo");
         if (item != null) choices.put(Move.AdditionalAction.TARGET_ITEM, item);
         return new Move("Lo rivendo", "s", "SELF", game.getGameId(), choices);
     }
 
     private static List<String> items(Game game, String id) { return names(game.getPlayers().get(id).getCharacter().getItems()); }
+
+    private static int alertness(Game game, String id) { return game.getPlayers().get(id).getCharacter().getResources().get(Resource.ALERTNESS); }
 
     private static List<String> selfReport(Game game) {
         return game.getResolvedMoves().stream().filter(m -> m.getPlayerId().equals("s")).findFirst().orElseThrow()
@@ -398,117 +407,124 @@ class Sb17CardsTest {
     }
 
     @Test
-    void loRivendoSellsTheChosenItemWithoutItsEffect() {
-        Game game = rivendo(ESPRESSO, SANTINO);
-        int alertness = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
-        int[] lost = turn(game, sell(game, SANTINO), move(game, "b", "Riempitivo", "SELF"));
-        assertEquals(-5, lost[0], "+5 HEALTH with the item (reserve R1 of the B3 round, was +7)");
-        assertEquals(List.of(ESPRESSO), items(game, "s"), "the chosen one leaves, not the oldest");
-        assertFalse(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "without the Santino's effect");
-        assertEquals(alertness, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS));
-        assertTrue(selfReport(game).contains("Sold Item " + SANTINO), selfReport(game).toString());
+    void loRivendoIsSergiosBasicOnAnOwnItem() {
+        Card card = draft.card(RIVENDO);
+        assertTrue(card.isBasicAction());
+        assertFalse(card.isCharacterBound());
+        assertEquals(1, card.getPriority());
+        assertEquals(Set.of(Card.CardTarget.NEAR_ITEM), card.getCanTarget(), "R03: a basic may target an item");
+        assertEquals(RIVENDO, draft.characterBasic(Sb17.SERGIO), "D118 (1), (3): Lo metto in conto is out");
+        assertFalse(draft.cardBindings().contains("base.cesira.LoMettoInConto"));
     }
 
     @Test
-    void loRivendoWithoutAChoiceSellsTheOldest() {
-        Game game = rivendo(ESPRESSO, SANTINO);
-        int alertness = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
-        int[] lost = turn(game, sell(game, null), move(game, "b", "Riempitivo", "SELF"));
-        assertEquals(-5, lost[0]);
-        assertEquals(List.of(SANTINO), items(game, "s"), "D115 (1): no choice, the oldest");
-        assertEquals(alertness, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "the Espresso leaves without +15 A");
-        assertTrue(selfReport(game).contains("Sold Item " + ESPRESSO), selfReport(game).toString());
+    void loRivendoSellsTheTargetedItemWithoutItsEffect() {
+        for (String target : List.of(SANTINO, ESPRESSO)) {
+            Game game = rivendo(ESPRESSO, SANTINO);
+            int a = alertness(game, "s");
+            int[] lost = turn(game, sell(game, target), move(game, "b", "Riempitivo", "SELF"));
+            assertEquals(-8, lost[0], target + ": +8 HEALTH (D118 (1): +6; reserve R1 of the B4 round: +8)");
+            assertEquals(List.of(SANTINO.equals(target) ? ESPRESSO : SANTINO), items(game, "s"), "the targeted one leaves, not the oldest");
+            assertFalse(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "without the Santino's effect");
+            assertEquals(a, alertness(game, "s"), "without the Espresso's +15 A");
+            assertTrue(selfReport(game).contains("Sold Item " + target), selfReport(game).toString());
+            assertTrue(game.getPlayers().get("s").getCardsInHand().stream().anyMatch(c -> c.getName().equals("Lo rivendo")), "a basic stays in hand");
+        }
     }
 
     @Test
-    void loRivendoWithoutItemsHealsTwo() {
+    void loRivendoNeedsAnItemToBePlayed() {
         Game game = rivendo();
-        int[] lost = turn(game, sell(game, null), move(game, "b", "Riempitivo", "SELF"));
-        assertFalse(voided(game, "s"), "R03: the bound is always playable");
-        assertEquals(-2, lost[0], "+2 HEALTH without items");
-        assertTrue(selfReport(game).stream().noneMatch(l -> l.startsWith("Sold Item")), selfReport(game).toString());
+        assertThrows(Exception.class, () -> game.submitMove(sell(game, SANTINO)), "R03: the item a basic targets must be there");
+        Game none = rivendo(ESPRESSO);
+        assertThrows(Exception.class, () -> none.submitMove(sell(none, null)), "a basic on an item says which one");
     }
 
     @Test
-    void loRivendoWithAChosenItemNotOnTheFieldHealsTwo() {
-        Game game = rivendo(ESPRESSO);
-        int[] lost = turn(game, sell(game, PERONI), move(game, "b", "Riempitivo", "SELF"));
-        assertEquals(-2, lost[0], "the chosen item is not there: the branch without items, no other item sold");
-        assertEquals(List.of(ESPRESSO), items(game, "s"));
-    }
-
-    @Test
-    void loRivendoOnAnItemDestroyedEarlierInTheTurnHealsTwo() {
-        Card breaker = draft.card("bruiser.BreakYourToy"); // «Smontiamo tutto», priority 1: before Lo rivendo (0)
-        Game game = game(sergio(RIVENDO), opponent(List.of(breaker), fillers(10)));
+    void loRivendoOnAnItemDestroyedEarlierInTheTurnGainsNothing() {
+        Card breaker = draft.card("bruiser.BreakYourToy"); // «Smontiamo tutto», priority 1 like Lo rivendo: b is faster (90 A against 60)
+        Game game = game(sergio(RIVENDO), player("b", 90, List.of(breaker), fillers(10)));
         game.getPlayers().get("b").getCharacter().getResources().put(Resource.VIOLENCE, 10);
         game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(SANTINO)));
         game.getPlayers().get("s").getCharacter().getItems().add(draft.card(ITEM_BINDINGS.get(ESPRESSO)));
         Map<Move.AdditionalAction, String> destroy = new EnumMap<>(Move.AdditionalAction.class);
         destroy.put(Move.AdditionalAction.TARGET_ITEM, SANTINO);
+        int a = alertness(game, "s");
         int[] lost = turn(game, sell(game, SANTINO), new Move(breaker.getName(), "b", "s", game.getGameId(), destroy));
         assertFalse(voided(game, "b"));
-        assertEquals(-2, lost[0], "RP-25: the chosen item is gone at resolution, the branch without items");
-        assertEquals(List.of(ESPRESSO), items(game, "s"), "the other item stays");
+        assertEquals(0, lost[0], "D118 (2): the targeted item is gone at resolution, no sale and no gain");
+        assertEquals(List.of(ESPRESSO), items(game, "s"), "no fallback: the other item stays");
+        assertEquals(a, alertness(game, "s"));
+        assertEquals(List.of("Nothing to sell"), selfReport(game));
     }
 
     @Test
-    void loRivendoPrintsTheSaleAndBothBranches() {
+    void loRivendoPrintsTheSaleAndItsProceeds() {
         List<PrintedEffects.Step> steps = ((PrintedEffects.Source) draft.card(RIVENDO)).printedEffects().getSteps();
-        assertEquals(3, steps.size());
+        assertEquals(2, steps.size());
         assertEquals(PrintedEffects.Kind.SELL, steps.get(0).getKind());
         assertNull(steps.get(0).getSold());
-        assertEquals(List.of(5, 2), List.of(steps.get(1).getBase(), steps.get(2).getBase()), "R1 of the B3 round: +7 → +5");
-        assertEquals(List.of(true, false), List.of(steps.get(1).getSold(), steps.get(2).getSold()));
-        assertTrue(steps.get(1).appliesAfterSale(true) && !steps.get(1).appliesAfterSale(false));
-        assertTrue(!steps.get(2).appliesAfterSale(true) && steps.get(2).appliesAfterSale(false));
+        assertEquals(PrintedEffects.Kind.GAIN, steps.get(1).getKind());
+        assertEquals(Resource.HEALTH, steps.get(1).getResource());
+        assertEquals(8, steps.get(1).getBase(), "R1 of the B4 round: +6 → +8");
+        assertTrue(steps.get(1).appliesAfterSale(true) && !steps.get(1).appliesAfterSale(false), "the proceeds only after a sale");
         assertTrue(PrintedEffects.sells(((PrintedEffects.Source) draft.card(RIVENDO)).printedEffects()));
-        assertEquals(Set.of(Card.CardTarget.SELF), draft.card(RIVENDO).getCanTarget(), "R03: a self target, never an item");
     }
 
     @Test
-    void theBotsSellTheLeastValuableItem() {
+    void theBotsSellTheLeastValuableItemWithASingleMove() {
         Object[][] cases = {{new String[] {ESPRESSO, SANTINO}, SANTINO}, {new String[] {ESPRESSO, PERONI}, PERONI},
-                {new String[] {SANTINO, ESPRESSO}, SANTINO}, {new String[] {ESPRESSO}, ESPRESSO}, {new String[] {}, null}};
+                {new String[] {SANTINO, ESPRESSO}, SANTINO}, {new String[] {ESPRESSO}, ESPRESSO}};
         for (Object[] c : cases) {
             Game game = rivendo((String[]) c[0]);
             List<com.gsc.bm.model.game.bot.LegalMove> sales = com.gsc.bm.model.game.bot.BotView.of(game, "s").legalMoves().stream()
                     .filter(m -> m.getCard().getName().equals("Lo rivendo")).collect(Collectors.toList());
-            assertFalse(sales.isEmpty(), "always playable");
-            for (com.gsc.bm.model.game.bot.LegalMove m : sales)
-                assertEquals(c[1], m.getItem(), java.util.Arrays.toString((String[]) c[0]) + ": never an Espresso while a Santino is there");
+            assertEquals(1, sales.size(), java.util.Arrays.toString((String[]) c[0]) + ": one move, the rule shared by every bot");
+            assertEquals(c[1], sales.get(0).getItem(), java.util.Arrays.toString((String[]) c[0]) + ": never an Espresso while a Santino is there");
         }
+        assertTrue(com.gsc.bm.model.game.bot.BotView.of(rivendo(), "s").legalMoves().stream()
+                .noneMatch(m -> m.getCard().getName().equals("Lo rivendo")), "without items the basic cannot be played");
     }
 
     @Test
-    void theForecastPlaysTheBranchOfTheSale() {
-        Object[][] cases = {{new String[] {ESPRESSO, SANTINO}, 5}, {new String[] {}, 2}};
-        for (Object[] c : cases) {
-            Game game = rivendo((String[]) c[0]);
-            com.gsc.bm.model.game.bot.BotView view = com.gsc.bm.model.game.bot.BotView.of(game, "s");
-            com.gsc.bm.model.game.bot.LegalMove sale = view.legalMoves().stream().filter(m -> m.getCard().getName().equals("Lo rivendo"))
-                    .findFirst().orElseThrow();
-            List<Map<String, Integer>> ends = com.gsc.bm.model.game.bot.TurnForecast.variants(view, sale, null);
-            assertFalse(ends.isEmpty());
-            for (Map<String, Integer> end : ends) assertEquals(health(game, "s") + (int) c[1], end.get("s"), ends.toString());
-        }
+    void theForecastSellsTheTargetedItem() {
+        Game game = rivendo(ESPRESSO, SANTINO);
+        com.gsc.bm.model.game.bot.BotView view = com.gsc.bm.model.game.bot.BotView.of(game, "s");
+        com.gsc.bm.model.game.bot.LegalMove sale = view.legalMoves().stream().filter(m -> m.getCard().getName().equals("Lo rivendo"))
+                .findFirst().orElseThrow();
+        List<Map<String, Integer>> ends = com.gsc.bm.model.game.bot.TurnForecast.variants(view, sale, null);
+        assertFalse(ends.isEmpty());
+        for (Map<String, Integer> end : ends) assertEquals(health(game, "s") + 8, end.get("s"), ends.toString());
+        // The step shared by the forecast and the view table: the targeted item leaves; nothing without a target or once it is gone.
+        List<com.gsc.bm.model.game.bot.BotView.CardSeen> tray = new ArrayList<>();
+        for (String item : List.of(ESPRESSO, SANTINO)) tray.add(com.gsc.bm.model.game.bot.BotView.publicText(draft.card(ITEM_BINDINGS.get(item))));
+        assertTrue(com.gsc.bm.model.game.bot.TurnForecast.sell(tray, SANTINO));
+        assertEquals(List.of(ESPRESSO), tray.stream().map(com.gsc.bm.model.game.bot.BotView.CardSeen::getName).collect(Collectors.toList()));
+        assertFalse(com.gsc.bm.model.game.bot.TurnForecast.sell(tray, SANTINO), "gone: no sale");
+        assertFalse(com.gsc.bm.model.game.bot.TurnForecast.sell(tray, null), "no fallback on the oldest");
+        assertEquals(1, tray.size());
     }
 
     @Test
     void theLoaderRefusesASaleOutOfPlace() {
-        String sale = "{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':7}],'seNo':[{'op':'gain','resource':'HEALTH','amount':2}]}";
+        String sale = "{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':6}]}";
+        String basic = "{'binding':'t.V','kind':'ACTION','basic':true,";
         String bound = "{'binding':'t.V','kind':'BOUND','boundTo':'x',";
         Map<String, String> cases = new java.util.LinkedHashMap<>();
-        cases.put(bound + "'targets':['OPPONENT'],'self':[" + sale + "]}", "richiede targets solo SELF");
-        cases.put(bound + "'targets':['SELF','NEAR_ITEM'],'self':[" + sale + "]}", "richiede targets solo SELF");
-        cases.put(bound + "'targets':['SELF'],'target':[" + sale + "]}", "vendi vale solo in self");
-        cases.put(bound + "'targets':['SELF'],'self':[" + sale + "," + sale + "]}", "ripetuto");
-        cases.put("{'binding':'t.V','kind':'ACTION','targets':['SELF'],'self':[{'op':'consume'}," + sale + "]}", "consume");
+        cases.put(bound + "'targets':['SELF'],'self':[" + sale + "]}", "non è ammesso in una bound");
+        cases.put(bound + "'targets':['NEAR_ITEM'],'self':[" + sale + "]}", "non è ammesso in una bound");
+        cases.put("{'binding':'t.V','kind':'ACTION','targets':['NEAR_ITEM'],'self':[" + sale + "]}", "vale solo in una basic");
+        cases.put("{'binding':'t.V','kind':'ACTION','lastResort':true,'targets':['NEAR_ITEM'],'self':[" + sale + "]}", "vale solo in una basic");
+        cases.put(basic + "'targets':['SELF'],'self':[" + sale + "]}", "richiede targets solo NEAR_ITEM");
+        cases.put(basic + "'targets':['SELF','NEAR_ITEM'],'self':[" + sale + "]}", "richiede targets solo NEAR_ITEM");
+        cases.put(basic + "'targets':['NEAR_ITEM'],'target':[" + sale + "]}", "vendi vale solo in self");
+        cases.put(basic + "'targets':['NEAR_ITEM'],'self':[" + sale + "," + sale + "]}", "ripetuto");
+        cases.put(basic + "'targets':['NEAR_ITEM'],'self':[{'op':'consume'}," + sale + "]}", "consume");
         cases.put("{'binding':'t.V','kind':'ITEM','self':[" + sale + "]}", "non è ammesso in un oggetto");
-        cases.put(bound + "'targets':['SELF'],'self':[{'op':'vendi','seHai':[{'op':'damage','type':'HIT','amount':3}],'seNo':[]}]}",
+        cases.put(basic + "'targets':['NEAR_ITEM'],'self':[{'op':'vendi','seHai':[{'op':'damage','type':'HIT','amount':3}]}]}",
                 "vendi contiene solo gain, lose e say");
-        cases.put(bound + "'targets':['SELF'],'self':[{'op':'vendi','seNo':[]}]}", "seHai mancante");
-        cases.put(bound + "'targets':['SELF'],'self':[{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':7}]}]}", "seNo mancante");
+        cases.put(basic + "'targets':['NEAR_ITEM'],'self':[{'op':'vendi'}]}", "seHai mancante");
+        cases.put(basic + "'targets':['NEAR_ITEM'],'self':[{'op':'vendi','seHai':[{'op':'gain','resource':'HEALTH','amount':6}],'seNo':[]}]}", "seNo");
         cases.put("{'binding':'t.V','kind':'ACTION','targets':['SELF'],'self':[{'op':'anticipo','steps':[" + sale + "]}]}", "anticipo non contiene");
         cases.put("{'binding':'t.V','kind':'ACTION','targets':['OPPONENT'],'target':[{'op':'gettone','steps':[" + sale + "]}]}", "gettone non contiene");
         cases.forEach((json, message) -> {
@@ -517,6 +533,67 @@ class Sb17CardsTest {
             for (Throwable t = e; t != null; t = t.getCause()) text.append(t.getMessage()).append(" | ");
             assertTrue(text.toString().contains(message), json + " -> " + text);
         });
+        assertDoesNotThrow(() -> DataCards.definition(JSON.readTree((basic + "'targets':['NEAR_ITEM'],'self':[" + sale + "]}").replace('\'', '"'))));
+    }
+
+    // ---- Fare il vago (CES-BO3, D118 (4)): the light parry bound ----
+
+    private static final String VAGO = "base.cesira.bound.FareIlVago";
+
+    @Test
+    void fareIlVagoIsAParryOfTheTurnWithoutGains() {
+        Card card = draft.card(VAGO);
+        assertTrue(card.isCharacterBound());
+        assertEquals(2, card.getPriority());
+        assertEquals(Set.of(Card.CardTarget.SELF), card.getCanTarget());
+        assertTrue(card.getCost().isEmpty());
+        List<PrintedEffects.Step> steps = ((PrintedEffects.Source) card).printedEffects().getSteps();
+        assertEquals(2, steps.stream().filter(st -> st.getKind() == PrintedEffects.Kind.STATUS).count());
+        assertTrue(steps.stream().filter(st -> st.getKind() == PrintedEffects.Kind.STATUS)
+                .allMatch(st -> Math.abs(st.getFactor() - 0.75) < 1e-6), "HIT and CUT ×0,75");
+        assertTrue(steps.stream().noneMatch(st -> st.getKind() == PrintedEffects.Kind.GAIN), "one function only (lesson 2 of SB-4)");
+        assertEquals(List.of("base.cesira.bound.Battutina", VAGO), draft.boundOf(Sb17.DECK));
+    }
+
+    @Test
+    void fareIlVagoParriesHitAndCutOnlyThisTurn() {
+        Player b = opponent(List.of(hit("Misto", 1, "HIT 20", "CUT 8"), hit("Misto", 1, "HIT 20", "CUT 8")), fillers(10));
+        Game game = game(sergio(VAGO), b);
+        Map<Move.AdditionalAction, String> discard = new EnumMap<>(Move.AdditionalAction.class);
+        discard.put(Move.AdditionalAction.DISCARD_ONE, "Riempitivo");
+        int[] lost = turn(game, new Move("Fare il vago", "s", "SELF", game.getGameId(), discard), move(game, "b", "Misto", "s"));
+        assertEquals(21, lost[0], "20 × 0,75 + 8 × 0,75 = 15 + 6");
+        assertEquals(28, turn(game, move(game, "s", "Riempitivo", "SELF"), move(game, "b", "Misto", "s"))[0], "the turn after: in full");
+    }
+
+    @Test
+    void theBotParriesAShownLethalHitWithFareIlVago() {
+        // GARGANTUESCO IMPATTO (HIT 34, priority 0) shown and payable against 30 health: Fare il vago (priority 2) leaves 34 × 0,75 = 25.
+        BotView.CardSeen impact = BotView.publicText(draft.card("bruiser.SuperImpact"));
+        BotView v = new BotView(4, new BotView.Self(LethalAwarePolicyTest.seat("me", 30, 30, 10, 0, List.of()),
+                List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),
+                List.of(new BotView.Opponent(LethalAwarePolicyTest.seat("foe", 60, 20, 30, 0, List.of()), 5, 10,
+                        List.of(new BotView.RevealedSeen(1, impact, 3, null)))), List.of(), Map.of(), Ruleset.D50);
+        assertEquals(Set.of("Fare il vago"), offered(v), "the only move that keeps Sergio up");
+        for (BotPolicy style : List.of(new AggressivePolicy(), new PrudentPolicy(), new ResourceAwarePolicy(), new RandomPolicy()))
+            for (long seed = 0; seed < 5; seed++)
+                assertEquals("Fare il vago", new LethalAwarePolicy(new SoughtHitPolicy(style, SoughtHitPolicy.Timing.ALWAYS))
+                        .choose(v, v.legalMoves(), new Random(seed)).getCard().getName(), style.getClass().getSimpleName());
+        BotView safe = new BotView(4, new BotView.Self(LethalAwarePolicyTest.seat("me", 60, 30, 10, 0, List.of()),
+                List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),
+                List.of(new BotView.Opponent(LethalAwarePolicyTest.seat("foe", 60, 20, 30, 0, List.of()), 5, 10,
+                        List.of(new BotView.RevealedSeen(1, impact, 3, null)))), List.of(), Map.of(), Ruleset.D50);
+        assertEquals(Set.of("Fare il vago", "Spintone"), offered(safe), "not lethal: nothing is forced");
+    }
+
+    /** The cards the lethal-aware bot leaves to its style. */
+    private static Set<String> offered(BotView v) {
+        Set<String> names = new java.util.TreeSet<>();
+        new LethalAwarePolicy((view, legal, random) -> {
+            legal.forEach(m -> names.add(m.getCard().getName()));
+            return legal.get(0);
+        }).choose(v, v.legalMoves(), new Random(1));
+        return names;
     }
 
     private static List<String> names(java.util.Collection<Card> cards) {
