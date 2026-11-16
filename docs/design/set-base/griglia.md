@@ -189,15 +189,21 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 | TOS-BA | Celestina | Azione, basic | ITEMS | 1 | +5 T a sé, poi consuma | NC | Celestina | `ToxicGrab`, riprogettata (assorbe il flavour di `EverythingIsDrug`) | «Tutto è droga»: oggi perde metà della A, che è un tratto solo punitivo | consume |
 | PIN-BA | Piera | Azione, basic | ITEMS | 0 | +5 L a sé, poi consuma | NC | Piera | bozza «Questo lo finisco io» | Beve quello che trova | consume |
 | GIG-BA | Beppe | Azione, basic | ITEMS | 0 | +4 V a sé, poi consuma | NC | Beppe | bozza «Questo torna utile», senza −5 A, priorità −1 → 0 | Ogni oggetto gli dà moneta per gli attrezzi; diversa da quella di Spazienzio | consume |
-| CES-BA | Sergio | Azione, basic | ITEMS | 1 | +5 A a sé, poi consuma | R | — | bozza «Lo metto in conto» (SB-17) | Raccoglie e tiene da parte | consume |
+| CES-BA | Sergio | Azione, basic | ITEMS | 1 | ~~+5 A a sé, poi consuma~~ vende il proprio oggetto bersagliato: esce senza il suo effetto, +6 HEALTH a sé; se l'oggetto è sparito alla risoluzione, nessun guadagno⁷ | R | — | bozza «Lo rivendo» (SB-17 A4, D118); ~~«Lo metto in conto»~~, uscita dalla bozza | ~~Raccoglie e tiene da parte~~ Non usa gli oggetti, li rivende (deroga a D3 sotto) | dati (`vendi`) |
 | ROC-BA | Duccio | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | da inventare («La mancia») | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
+
+**Deroga di SB-17 a D3 (D117, D118):** CES-BA «Lo rivendo» resta una presa del proprio oggetto bersagliato, ma **senza il suo effetto**: il tratto è il ricavato (+6 HEALTH, 6 unità al banco D33, il più alto delle basic, contro il tratto più l'oggetto delle altre). Solo per questa carta ([proposta A4, § 2](sb-17-proposta-a4.md#2-lo-rivendo-come-basic), [RP-25](regole-playground.md#9-vendere-un-oggetto-12-sb-17)).
+
+⁷ **SB-17, Fase A4 e B4** ([D118](../../set-base-decisioni.md#decisioni-del-proprietario)): il ricavato è la vendita, non un «altro effetto» di R04: con l'oggetto rubato, distrutto o scalzato prima della risoluzione la carta non dà niente. Il bersaglio d'oggetto lo sceglie il giocatore come per ogni basic. Riserva R1 del giro corto: ±2 HEALTH sul ricavato.
 
 ### Bound (21)
 
 Tutte con una sola funzione, entro 4 unità per uso col danno pesato 4/3 (D36: al massimo 3 di danno), senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
 token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter sono nello starter (comuni), la terza nella collezione.
 
-**Deroga di SB-17 (D113, D114, D115):** CES-BO3 «Lo rivendo» rivende un proprio oggetto per salute. Non bersaglia oggetti (bersaglio: sé; l'oggetto è un campo facoltativo della mossa, [RP-25](regole-playground.md#9-vendere-un-oggetto-12-sb-17)) e resta sempre giocabile, ma usa un oggetto e cura: deroga al principio «senza oggetti… né cure» qui sopra, solo per questa carta. Prezzo: netto ≤ 4 unità sull'oggetto di riferimento da 3 unità ([proposta A3](sb-17-proposta-a3.md#valore-rispetto-al-tetto)); il banco delle bound, che gioca senza oggetti, vede solo il ramo da 2 unità.
+~~**Deroga di SB-17 (D113, D114, D115):** CES-BO3 «Lo rivendo» rivende un proprio oggetto per salute.~~ Ritirata dalla Fase A4 (D118): Lo rivendo è diventata la basic CES-BA e la bound non usa più oggetti né cura.
+
+**Deroga di SB-17 (D117, D118):** CES-BO3 «Fare il vago» è una **parata del turno** (HIT e CUT ricevuti ×0,75, 2,5 unità al banco delle bound contro il colpo di prova da 10 HIT, sotto il tetto di 4): deroga al principio approvato 3 della Fase A, «bound senza parate», solo per questa carta. Una funzione sola, senza guadagni (lezione 2 di SB-4); niente POISON ([proposta A4, § 3](sb-17-proposta-a4.md#3-una-bound-di-difesa-leggera)).
 
 | ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Unità per uso | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---:|---|---|---|---|---|
@@ -218,7 +224,7 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | GIG-BO3 | Beppe | Azione, bound | DAMAGE | 2 | 2 CUT | 2,67 | NC | — | da inventare («Lima») | Variante veloce | dati |
 | CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Mi informo» (SB-17), nella collezione (B2, D110) | Generatrice: le letture costano A | dati |
 | CES-BO2 | Sergio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | bozza «Battutina» (SB-17) | Colpetto | dati |
-| CES-BO3 | Sergio | Azione, bound | RESOURCES | 0 | ~~2 HIT~~ un proprio oggetto (scelto; se la mossa non lo dice, il più vecchio) esce dal campo senza il suo effetto, ~~+7~~ +5 HEALTH a sé (riserva R1, B3); senza oggetti +2 HEALTH a sé⁶ | ~~4~~ 2 netto con l'oggetto, 2 senza | NC | — | bozza «Lo rivendo» (SB-17 A3, D114); sostituisce «Frecciatina al volo» (2 HIT, priorità 2), uscita dalla bozza | Variante di scambio: oggetto → salute, sempre giocabile (deroga sopra) | dati |
+| CES-BO3 | Sergio | Azione, bound | ~~RESOURCES~~ DEFENSE | ~~0~~ 2 | ~~2 HIT~~ ~~un proprio oggetto esce dal campo senza il suo effetto, +5 HEALTH a sé; senza oggetti +2 HEALTH a sé~~ HIT e CUT ricevuti ×0,75 in questo turno⁶ | ~~2 netto con l'oggetto, 2 senza~~ 2,5 | NC | — | bozza «Fare il vago» (SB-17 A4, D118, nome di lavoro); sostituisce «Lo rivendo», diventata la basic CES-BA; prima ancora «Frecciatina al volo» | ~~Variante di scambio~~ Difesa leggera sempre in mano (deroga sopra) | dati |
 | ROC-BO1 | Duccio | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
 | ROC-BO2 | Duccio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
 | ROC-BO3 | Duccio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Duccio ha la A più bassa | dati |
@@ -227,7 +233,7 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 starter corretti la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 scelto da D38 per Mara; la +6 A circa 3,3, col
 matchup quasi fermo.
 
-⁶ **SB-17, Fase A3 e B3** ([D114](../../set-base-decisioni.md#decisioni-del-proprietario), [D115](../../set-base-decisioni.md#decisioni-del-proprietario)): l'oggetto lo sceglie il giocatore; finché il passo del client non c'è, l'umano vende il più vecchio. Se l'oggetto scelto è sparito alla risoluzione vale il ramo senza oggetti. Riserva R1 del giro corto, applicata dopo il giro 1 della B3 (Sergio–Spazienzio 76,9%, oltre il 68,3%): +7 → +5 HEALTH con l'oggetto.
+⁶ **SB-17, Fasi A3–B4** ([D114](../../set-base-decisioni.md#decisioni-del-proprietario), [D115](../../set-base-decisioni.md#decisioni-del-proprietario), [D118](../../set-base-decisioni.md#decisioni-del-proprietario)): nella B3 CES-BO3 era «Lo rivendo» (oggetto scelto, +5 HEALTH dopo la riserva R1, +2 senza oggetti). Con la A4 la vendita passa alla basic CES-BA (nota ⁷) e lo slot diventa «Fare il vago», la parata del turno che la [scheda di Sergio](schede-personaggi.md#6-sergio-sommerso-cesira-la-malalingua--booster-concept-nuovo) prevede fra le sue bound. ×0,6 arriverebbe al tetto, come la Tartaruga senza costo.
 
 ### Last resort (4)
 
