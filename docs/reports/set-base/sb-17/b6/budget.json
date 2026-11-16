@@ -1,0 +1,9 @@
+{
+ "note": "SB-17 B6 (D121): clock budget of the short round, 300 s; suite and checks outside the budget",
+ "budget_s": 300,
+ "rounds": [
+  {"round": "round-1", "rule": "V4: Lo metto in conto +5 A, Lo rivendo +8 HEALTH regular card", "clock_s": 101.5, "wall_s": 105.0},
+  {"round": "round-2", "rule": "R1: Lo metto in conto +7 A", "clock_s": 96.3, "wall_s": 107.0}
+ ],
+ "used_wall_s": 212.0
+}
