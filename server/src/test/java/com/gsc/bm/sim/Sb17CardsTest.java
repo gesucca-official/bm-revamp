@@ -429,7 +429,7 @@ class Sb17CardsTest {
         Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
         choices.put(Move.AdditionalAction.TARGET_ITEM, SANTINO);
         turn(game, new Move("Lo metto in conto", "s", "SELF", game.getGameId(), choices), move(game, "b", "Riempitivo", "SELF"));
-        assertEquals(a + 5, alertness(game, "s"), "+5 A (D121 (1); reserve R1 of B6, if needed: +7)");
+        assertEquals(a + 7, alertness(game, "s"), "+7 A (D121 (1): +5; reserve R1 of the B6 round: +7)");
         assertEquals(List.of(), items(game, "s"), "the item is consumed with its effect");
         assertTrue(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "the Santino's effect applies");
     }

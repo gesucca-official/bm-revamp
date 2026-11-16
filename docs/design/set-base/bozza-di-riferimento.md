@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `1049f725d9fc…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `0a5df67f17e9…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 94 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 6 personaggi, 5 starter e, di prova, 1 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -166,7 +166,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +5 A a sé, poi consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 A a sé, poi consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
