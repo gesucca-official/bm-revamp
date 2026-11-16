@@ -9,7 +9,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
 > - **In corso:** nulla. [SB-16i](#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima) chiuso con D104: prova umana breve della 1.6b superata il 16 novembre 2026.
 > - **Prossimo:** Fase B di [SB-17](#sb-17-sb-18--personaggi-da-booster) (Sergio), con la [proposta](design/set-base/sb-17-proposta.md) approvata con le modifiche di D106 e D107. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D107).
+> - **Decisioni da leggere:** D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D108).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -625,7 +625,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D107 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D108 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
