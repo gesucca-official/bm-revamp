@@ -1,6 +1,6 @@
 # Roadmap del prodotto — dopo C5 e il Set Base
 
-Scritta il 10 novembre 2026 (versione 6 dell'11 novembre 2026: [lavori anticipati](#lavori-anticipati) e D22), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
+Scritta il 10 novembre 2026 (versione 7 del 16 novembre 2026: [qualità e igiene](#qi--qualità-e-igiene-della-codebase) e D23), a partire dalle idee del proprietario raccolte e riordinate con la regia lo stesso giorno.
 **Solo roadmap:** come ogni roadmap (R00 del [regolamento](game-rules.md)), non introduce regole attive; le tappe che cambiano il
 gioco aggiornano prima il regolamento o il documento interessato. Lo stato del progetto resta nell'[indice](README.md#stato-corrente);
 qui ci sono l'ordine delle tappe, le decisioni prese e i punti critici. I piani di dettaglio, con blocchi e verifiche, si scrivono
@@ -37,6 +37,7 @@ un picco più alto, ma non può essere una comune migliore allo stesso costo.
 | [Verticale](#ve--tavolo-in-verticale) | VE-1…VE-3 | ST-1 | Duello e FFA col telefono in verticale |
 | [Economia](#ec--economia) | EC-0…EC-2 | C5, SB-28 | Due valute, collezione posseduta, jolly, buste e negozio con le sole valute di gioco |
 | [Carriera](#ca--carriera-single-player) | CA-0…CA-5 | SB-30, EC-0 | Tutorial, campagna principale a rami con achievement, completamento al 100%, endgame infinito, carriere di Sergio e Duccio |
+| [Qualità e igiene](#qi--qualità-e-igiene-della-codebase) | QI-1…QI-3 | chiusura di C, SB, CA, VE e DE (D23) | Ricognizione dell'intera codebase, qualità dei test e bonifiche prioritarie |
 | [PvP](#pv--pvp-e-classifica) | PV-1, PV-2 | EC-1, CA-2 | Mazzi costruiti contro persone, poi classifica del solo duello |
 | [Apertura al pubblico](#pu--apertura-al-pubblico) | PU | decisione del proprietario | Registrazione aperta, parere legale e fiscale, acquisti con soldi veri, cosmetici, store |
 
@@ -46,8 +47,9 @@ un picco più alto, ma non può essere una comune migliore allo stesso costo.
 2. **Poi:** AP-1, DE-2 e DE-3, VE-1 → VE-2 → VE-3; in parallelo, come soli documenti, EC-0 e CA-0.
 3. **A Set Base trasferito nella partita viva (SB-28) e bot in partita (SB-30):** EC-1, CA-1, CA-2, EC-2, PV-1.
 4. **Poi:** CA-3, CA-4, CA-5, AP-2 e le carriere successive.
-5. **Quando ci sono abbastanza giocatori:** PV-2.
-6. **Su decisione del proprietario:** PU, con AP-3.
+5. **Dopo la chiusura di C, SB, CA, VE e DE:** QI-1 → QI-2 → QI-3, prima della successiva espansione del prodotto (D23).
+6. **Quando ci sono abbastanza giocatori:** PV-2.
+7. **Su decisione del proprietario:** PU, con AP-3.
 
 ## Lavori anticipati
 
@@ -286,6 +288,47 @@ mini-carriera).
 è il contenuto: scrittura, illustrazioni degli avversari, bilanciamento degli incontri. La CLI permette di giocare in automatico, quindi le
 ricompense vanno protette dal farming lato server.
 
+## QI — Qualità e igiene della codebase
+
+**Collocazione ([D23](#decisioni-del-proprietario)):** dopo la chiusura delle tappe previste dei filoni C (fino a C5), SB, CA,
+VE e DE. Si pianifica ora il filone; ricognizione completa e bonifiche si svolgono allora, sul codice risultante. Il piano di
+dettaglio si scrive all'avvio. Questa previsione non avvia lavori né verifiche sui blocchi in corso, compreso SB-17.
+
+**Obiettivo:** ridurre il debito accumulato fra i filoni e rendere attendibile la rete di verifiche. La ricognizione copre server,
+client, bot, simulazioni, script e relativa documentazione; gli interventi procedono in blocchi piccoli, con priorità e perimetro
+espliciti. La lunghezza di un file o una preferenza di stile, da sole, non giustificano una riscrittura.
+
+**QI-1 Ricognizione senza correzioni.** Censire duplicazioni, percorsi provvisori o superati, responsabilità confuse, dipendenze
+inutili, gestione degli errori e incoerenze documentali. Ogni rilievo riporta evidenza sul codice corrente, conseguenza, priorità
+e intervento proposto. I censimenti storici, incluso il [debito tecnico](technical-debt.md), sono indizi da verificare.
+
+**QI-2 Qualità dei test.** Riesaminare prima le aree critiche e campioni rappresentativi delle altre, estendendo l'esame dove
+emergono problemi: comportamenti scoperti, asserzioni deboli, attesi calcolati dallo stesso algoritmo verificato, dipendenze
+dall'ordine di esecuzione e accoppiamento a dettagli interni. Per i test rivisti, provare che un errore deliberato nel comportamento
+richiesto faccia fallire il test per il motivo giusto e che una riorganizzazione interna a comportamento invariato resti ammessa.
+Restano motivate le verifiche interne che proteggono contratti di architettura, isolamento o riproducibilità, inclusi i confronti
+byte per byte delle simulazioni dove prescritti.
+
+**QI-3 Bonifiche prioritarie.** Attuare gli interventi a maggior beneficio in blocchi circoscritti, con verifiche scelte dalla
+[tabella delle aree](aree-protette.md) e confronto con una base stabile. Per il gioco, gli attesi si fondano su regolamento e set:
+fotografare l'output corrente non ne dimostra la correttezza. Le discrepanze si trattano esplicitamente prima del refactoring;
+nessun atteso, soglia o protezione si allenta per ottenere il verde. Le nuove scoperte entrano nell'elenco prioritario, senza
+allargare automaticamente il blocco in corso.
+
+**Criteri di chiusura del primo ciclo:**
+
+- Tutte le aree della codebase sono state censite; i test dei comportamenti critici sono stati riesaminati e sono dichiarati
+  campioni esaminati, estensioni e limiti della revisione delle altre aree.
+- I rilievi prioritari sono stati trattati; quelli rinviati hanno motivazione e rischio residuo espliciti, sottoposti al
+  proprietario. L'elenco del lavoro residuo è circoscritto e identificato, senza una pulizia aperta a tempo indefinito.
+- Le bonifiche hanno superato le verifiche pertinenti; per i test rivisti ci sono evidenze che rilevino gli errori deliberati
+  e ammettano le riorganizzazioni interne che conservano il comportamento, senza indebolire i contratti protetti.
+- Documentazione corrente e codice risultano coerenti nei punti esaminati; sono dichiarati gli eventuali limiti non verificati.
+
+**Nel frattempo:** ogni blocco continua a correggere i difetti scoperti, mantenere attendibili i test, eliminare il codice reso
+obsoleto dalla propria modifica e annotare il debito più ampio. ST-1 mantiene la propria collocazione; le verifiche necessarie
+prima di esporre il servizio restano in DE. QI non rinvia queste responsabilità.
+
 ## PV — PvP e classifica
 
 **PV-1 PvP con mazzi costruiti e sfide fra amici.** Oggi open PvP non esiste (R01): serve una modifica del regolamento, coi mazzi conformi a
@@ -318,7 +361,7 @@ Solo su decisione del proprietario ([D2](#decisioni-del-proprietario)). Comprend
 
 ## Decisioni del proprietario
 
-Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
+Del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap, salvo dove indicato.
 
 | # | Decisione |
 |---|---|
@@ -344,6 +387,7 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
 | D20 | Direzione per trovare Sergio e Duccio in un tempo ragionevole (esempio del proprietario, da dettagliare in EC-0): buste speciali in cui la rara è sicuramente un personaggio non ancora in collezione, che non vengono più offerte quando non restano personaggi di quel set da trovare. |
 | D21 | Le battute delle carriere che si rivolgono al giocatore o parlano di lui sono neutre rispetto al genere. |
 | D22 | (11 novembre 2026) Il lavoro sulle carriere che non tocca il client né i piani in corso procede in anticipo, in parallelo a C5 e al Set Base: storie, identikit, materiale visivo e ora il prototipo («potremmo cominciare a fare il prototipo che si diceva per le carriere?»). La roadmap tiene traccia di questi lavori («utilizziamola per segnarci quello che facciamo»). |
+| D23 | (16 novembre 2026) «Sì, aggiungi QI alla roadmap dopo C, SB, CA, VE e DE, con gli obiettivi e i criteri di chiusura che abbiamo discusso. Occhio al lavoro in corso su SB-17, non interferire». 1. QI è previsto dopo la chiusura delle tappe di questi filoni; ricognizione completa e bonifiche si svolgono allora. 2. Obiettivi e chiusura sono nella sezione QI: intera codebase, test orientati ai comportamenti, bonifiche prioritarie e rinvii motivati. 3. Restano le responsabilità ordinarie dei blocchi e le verifiche preventive di DE; nessun intervento sul lavoro SB-17. |
 
 ## Domande aperte
 
@@ -372,3 +416,5 @@ Tutte del 10 novembre 2026, nella conversazione che ha prodotto questa roadmap.
   D22; CA-0a, il prototipo delle carriere.
 - **Versione 5 — 10 novembre 2026:** battute neutre sul giocatore (D21); CA-1 con la scelta finale del tutorial, dialoghi scritti dal
   proprietario.
+- **Versione 7 — 16 novembre 2026:** previsto QI dopo C, SB, CA, VE e DE (D23), con obiettivi, prime tre tappe e criteri di
+  chiusura; ricognizione e bonifiche rinviate alla loro conclusione, senza interferire con SB-17.
