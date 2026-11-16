@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D116). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D117). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): Fase B3 fatta e rivista; giro sul mazzo intermedio fatto (D116): in bozza il mazzo della B2 con Lo rivendo R1, Spazienzio 69,7% (scostamento dichiarato); resta la prova finale del proprietario.
-> - **Prossimo:** la prova finale del proprietario che chiude SB-17; poi SB-18 (Duccio). Da pianificare: il passo del client per la scelta dell'oggetto di Lo rivendo (validatore e finestra, D115 (2)). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D116).
+> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): prova finale del proprietario fatta (D117): forza in linea; Fase A4 da lanciare (Lo rivendo come basic sull'oggetto, bound di difesa leggera).
+> - **Prossimo:** SB-17 Fase A4 (D117): proposta senza codice, STOP per il proprietario; poi bozza, giro e prova; poi SB-18 (Duccio). Il passo del client per la scelta dell'oggetto (D115 (2)) si riconsidera nella A4. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D117).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -292,7 +292,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B e B2 fatte ([rapporto B](reports/set-base/sb-17-report.md), [rapporto B2](reports/set-base/sb-17-b2-report.md)); proposta A3 approvata ([D114](#decisioni-del-proprietario)); Fase B3 consegnata ([rapporto B3](reports/set-base/sb-17-b3-report.md)); giro sul mazzo intermedio fatto ([§ 8](reports/set-base/sb-17-b3-report.md#8-giro-sul-mazzo-intermedio-d116)), in bozza il mazzo della B2, STOP per il proprietario prima della prova finale |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B e B2 fatte ([rapporto B](reports/set-base/sb-17-report.md), [rapporto B2](reports/set-base/sb-17-b2-report.md)); proposta A3 approvata ([D114](#decisioni-del-proprietario)); Fase B3 consegnata ([rapporto B3](reports/set-base/sb-17-b3-report.md)); giro sul mazzo intermedio fatto ([§ 8](reports/set-base/sb-17-b3-report.md#8-giro-sul-mazzo-intermedio-d116)), in bozza il mazzo della B2; prova finale fatta, Fase A4 sulla basic ([D117](#decisioni-del-proprietario)) |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -491,6 +491,8 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Giro sul mazzo intermedio fatto il 16 novembre 2026 (D116), STOP per il proprietario** ([rapporto, § 8](reports/set-base/sb-17-b3-report.md#8-giro-sul-mazzo-intermedio-d116)). Solo dati. Giro 1 (Santino ×2, Espresso ×2, Acqua in faccia ×1, niente Peroni): Spazienzio 72,9% e Mara 67,2%, fuori D95. Giro 2 (mazzo della B2, Lo rivendo R1): solo Spazienzio fuori, 69,7% contro 68,3% (scostamento dichiarato); Mara 63,4%. Invarianti e bound oltre il tetto a 0. Resta in bozza il mazzo della B2; bozza di riferimento rigenerata; 134,2 s su 240. La prova finale del proprietario si fa su questo stato.
 
+**Prova finale del proprietario, 16 novembre 2026 ([D117](#decisioni-del-proprietario)).** Forza in linea, «un po' forte»; le due bound «ci stanno»; Lo rivendo piace ma dovrebbe bersagliare l'oggetto. Idea del proprietario: Lo rivendo come basic, Sergio non usa gli oggetti ma li rivende; bound una di danno e una di difesa leggera. Prossimo: Fase A4, proposta.
+
 **Perimetro.** Bozza e giro contro gli starter e fra loro. Possono essere più forti degli starter se la costruzione del mazzo lo richiede.
 
 **Completamento verificabile.** Mazzi di prova competitivi ma non dominanti secondo i criteri per i mazzi costruiti. Invarianti verdi. Alcune partite del proprietario con il mazzo di prova. Per Duccio, test sul costo in HEALTH: la mossa si presenta solo con salute sufficiente; un costo che porterebbe a 0 o sotto non si paga, salvo le carte con «Ultimo colpo», che si risolvono anche a terra (D50, punto 2); il bot non si suicida per caso. Contro gli starter vale la soglia minima di [D95](#decisioni-del-proprietario); i criteri completi tornano in SB-21.
@@ -511,6 +513,8 @@ qui; la meccanica non cambia. I nomi di lavoro delle carte legati ai concept vec
 **Completamento verificabile.** Griglia completa: totale fra 110 e 120, ogni carta con rarità. Gli starter non peggiorano.
 
 **Rischi.** Il pool può arrivare stanco: le generiche devono restare interessanti, non riempitivi.
+
+**In ingresso ([D117](#decisioni-del-proprietario)).** Dalla prova di Sergio: oggetti con un malus per chi li ha in campo (Sergio li rivende); carte che anticipano i guadagni di risorse, anche rubandole all'avversario.
 
 **In ingresso ([D110](#decisioni-del-proprietario)).** La [ricerca di diagnosi di SB-17](reports/set-base/sb-17/a2-search/search.md): coi mazzi costruiti ogni personaggio batte gli starter al 77–99,5%. Ricorrono Estasi da Coca Etilene (PIN-AR2, un colpo da 18 senza costo per chi non ha L, in tutti i mazzi vincenti di chi non è Piera), Sgommata e gli oggetti. Da guardare qui e in SB-20, insieme alle carte d'archetipo giocate fuori dal loro personaggio; parte del dato può venire dai bot.
 
@@ -651,7 +655,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D116 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D117 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
