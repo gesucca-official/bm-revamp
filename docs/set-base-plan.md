@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D120). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D121). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): Fase B4 fatta, Sergio fuori D95 dal basso; Fase B5e fatta (D120): quattro varianti misurate, raccomandata V4, scelta del proprietario.
-> - **Prossimo:** SB-17, scelta della variante dopo la B5e ([rapporto](reports/set-base/sb-17-b5e-report.md)), poi una fase con le verifiche complete e la prova del proprietario che chiude SB-17; poi SB-18 (Duccio). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D120).
+> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): B5e fatta, scelta la V4 (D121: Lo metto in conto basic, Lo rivendo carta del mazzo); Fase B6 da lanciare.
+> - **Prossimo:** SB-17 Fase B6 (D121: V4 in bozza, un giro con riserva), poi la prova del proprietario che chiude SB-17; poi SB-18 (Duccio). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D121).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -292,7 +292,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B4 fatte ([rapporto B3](reports/set-base/sb-17-b3-report.md), [rapporto B4](reports/set-base/sb-17-b4-report.md)); Lo rivendo basic e Fare il vago ([D118](#decisioni-del-proprietario)); Fase B5e fatta ([rapporto](reports/set-base/sb-17-b5e-report.md)): quattro varianti misurate, raccomandata V4 (Lo metto in conto basic, Lo rivendo regolare ×2), un solo incontro fuori D95; STOP per il proprietario |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B4 e B5e fatte ([rapporto B4](reports/set-base/sb-17-b4-report.md), [rapporto B5e](reports/set-base/sb-17-b5e-report.md)); scelta la V4 ([D121](#decisioni-del-proprietario)); Fase B6 da lanciare |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
@@ -495,6 +495,8 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Fase B4 consegnata il 16 novembre 2026, STOP per il proprietario** ([rapporto](reports/set-base/sb-17-b4-report.md)). Regole del playground 1.3 e griglia (commit `53cb385`); Lo rivendo basic di Sergio (+6 HEALTH, con R1 +8), Lo metto in conto fuori, Fare il vago bound, mazzo di prova con Espresso ×1 e Santino ×2; caricatore, bot, previsore e tavolo come la § 6 della proposta. Passo 0 e identità viva identici, suite, contesto e manifest verdi, fedeltà al 100%, mutazioni 7/8 (una equivalente sugli oggetti di oggi). Giro: Sergio sotto D95 contro Celestina, Piera, Mara e Beppe (15–33%), specchio con patte al 19%; Spazienzio 47,1%. Letture: Fare il vago giocata 3,8 volte a partita, una su sei contro un colpo mostrato; mazzo esaurito nel 43% delle partite. Tre domande. Il passo del client di D115 (2) è chiuso: l'oggetto è il bersaglio della basic (D118 (6)).
 
+**B5e rivista dalla regia il 16 novembre 2026; scelta in [D121](#decisioni-del-proprietario).** Solo la V4 porta Sergio quasi dentro D95 (fuori Celestina 31,6%), mazzo esaurito 27%, patte basse. Prossimo: Fase B6, V4 in bozza con un giro e la riserva R1 (Lo metto in conto +7 A), poi la prova del proprietario.
+
 **Fase B5e esplorativa ([D120](#decisioni-del-proprietario)), al posto della B5 di D119.** Quattro varianti con lo stesso giro, a confronto con la B4: V1 Lo rivendo con A e HEALTH; V2 carte di A nel mazzo; V3 carte che usano gli oggetti nel mazzo; V4 Lo metto in conto di nuovo basic e Lo rivendo carta del mazzo. Poi STOP con una raccomandazione.
 
 **Fase B5e eseguita il 16 novembre 2026** ([rapporto](reports/set-base/sb-17-b5e-report.md)): un giro per variante, nessuna riserva. Incontri fuori D95: controllo 5, V1 3, V2 4, V3 4, **V4 1** (Celestina, 3,44 punti); mazzo esaurito 43% → 33 / 39 / 36 / **27**%. Raccomandazione: V4. Richiede una deroga: `vendi` in una regolare (caricatore, sim, con test). STOP per il proprietario.
@@ -545,6 +547,8 @@ Massimo proposto: 3 giri prima di tornare dal proprietario.
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 
 **Rischi.** Inseguire il perfetto: una strategia un po' più forte è ammessa. Correzioni che rompono gli starter stabili: la matrice lo mostra.
+
+**In ingresso ([D121](#decisioni-del-proprietario)).** I bot giocano Fare il vago (bound di difesa di Sergio) 3,3 volte a partita, una su sei contro un colpo mostrato: insegnare a giocarla solo contro un colpo mostrato o previsto.
 
 ### SB-22 — Prova umana con mazzi costruiti
 
@@ -665,7 +669,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D120 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D121 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
