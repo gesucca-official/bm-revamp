@@ -87,12 +87,21 @@ final class StyleSupport {
                 boolean payableNow = true, payableThen = true;
                 for (Map.Entry<Resource, Integer> cost : card.getCost().entrySet()) {
                     double have = me.resource(cost.getKey());
-                    if (have < cost.getValue()) payableNow = false;
-                    if (have + gains.getOrDefault(cost.getKey(), 0.0) < cost.getValue()) payableThen = false;
+                    if (!pays(card, cost.getKey(), have, cost.getValue())) payableNow = false;
+                    if (!pays(card, cost.getKey(), have + gains.getOrDefault(cost.getKey(), 0.0), cost.getValue())) payableThen = false;
                 }
                 if (!payableNow && payableThen) best = damage;
             }
             return best;
+        }
+
+        /**
+         * SB-18 B2 (D126 (2)): whether {@code have} pays one cost of the card. With the playground rules a HEALTH cost needs more health
+         * than it costs (RP-2, as {@code Move.healthCostAllowed}) and «Ultimo colpo» is always payable (RP-3); otherwise {@code have >= cost}.
+         */
+        private boolean pays(BotView.CardSeen card, Resource resource, double have, int cost) {
+            if (resource == Resource.HEALTH && view.getRuleset().playground()) return card.isLastBlow() || have > cost;
+            return have >= cost;
         }
 
         boolean affordableAfter(BotView.CardSeen card, Map<Resource, Integer> spent) {

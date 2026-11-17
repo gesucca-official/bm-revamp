@@ -20,7 +20,10 @@
      "items": 3, "immunities": [], "basic": "base.gigi.QuestoTornaUtile"},
     {"id": "base.character.Cesira", "rarity": "RARE", "name": "Sergio Sommerso",
      "resources": {"HEALTH": 85, "ALERTNESS": 30, "VIOLENCE": 10, "TOXICITY": 0, "ALCOHOL": 0},
-     "items": 2, "immunities": [], "basic": "base.cesira.LoMettoInConto"}
+     "items": 2, "immunities": [], "basic": "base.cesira.LoMettoInConto"},
+    {"id": "base.character.Rocco", "rarity": "RARE", "name": "Duccio Braccio Teso",
+     "resources": {"HEALTH": 115, "ALERTNESS": 15, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 0},
+     "items": 2, "immunities": [], "basic": "base.rocco.PrimaIo"}
   ],
   "cards": [
     {"binding": "com.basic.BruiserGrab", "rarity": "COMMON", "kind": "ACTION", "basic": true, "priority": -1, "targets": ["NEAR_ITEM"],
@@ -633,7 +636,18 @@
     {"binding": "base.com.Sgambetto", "rarity": "RARE", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 10}, "target": [{"op": "lose", "resource": "VIOLENCE", "amount": 10}, {"op": "damage", "type": "HIT", "amount": 5}], "gui": {"name": "Sgambetto", "description": "GEN-23 · 10 A: −10 V e 5 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 5"}},
     {"binding": "base.com.ShuffleFeet", "rarity": "UNCOMMON", "java": true, "cost": {}, "priority": -1, "params": {}, "gui": {"name": "Scatto Repentino", "description": "GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità.", "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
     {"binding": "base.com.AcquaInFaccia", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 5}, "target": [{"op": "empty", "resource": "ALCOHOL"}, {"op": "damage", "type": "HIT", "amount": 3}], "gui": {"name": "Acqua in faccia", "description": "GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
-    {"binding": "base.items.SantinoDellaPortinaia", "rarity": "RARE", "java": true, "params": {"turns": 3}, "gui": {"name": "Santino della portinaia", "description": "OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}}
+    {"binding": "base.items.SantinoDellaPortinaia", "rarity": "RARE", "java": true, "params": {"turns": 3}, "gui": {"name": "Santino della portinaia", "description": "OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.PrimaIo", "rarity": "RARE", "kind": "ACTION", "basic": true, "priority": 0, "targets": ["NEAR_ITEM"], "self": [{"op": "consume"}, {"op": "gain", "resource": "HEALTH", "amount": 3}], "gui": {"name": "Prima io", "description": "ROC-BA · Basic: consuma un proprio oggetto, poi +3 HEALTH a sé.", "role": "ITEMS", "gains": "+3 H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.bound.Colpetto", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Rocco", "priority": 0, "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 3}], "gui": {"name": "Colpetto", "description": "ROC-BO1 · Bound: 3 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.rocco.bound.Gomitata", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Rocco", "priority": 2, "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 2}], "gui": {"name": "Gomitata", "description": "ROC-BO2 · Bound: 2 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 2"}},
+    {"binding": "base.rocco.bound.AlzoLaVoce", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Rocco", "priority": 0, "targets": ["SELF"], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 8}], "gui": {"name": "Alzo la voce", "description": "ROC-BO3 · Bound: +8 A a sé.", "role": "RESOURCES", "gains": "+8 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.NeHoPreseDiPeggio", "rarity": "RARE", "kind": "ACTION", "lastResort": true, "priority": 0, "targets": ["OPPONENT"], "self": [{"op": "damage", "type": "HIT", "amount": {"base": 6, "perPlay": 2}}], "target": [{"op": "damage", "type": "HIT", "amount": {"base": 12, "perPlay": 5}}], "gui": {"name": "Ne ho prese di peggio", "description": "LR-ROC · Last resort: 6 HIT a sé; 12 HIT al bersaglio. Rincara 5 (2 a sé).", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12"}},
+    {"binding": "base.rocco.NoccheSbucciate", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 16}, "target": [{"op": "damage", "type": "HIT", "amount": 18}], "gui": {"name": "Nocche sbucciate", "description": "ROC-AR1 · 16 HEALTH: 18 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 18"}},
+    {"binding": "base.rocco.Incassare", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"], "self": [{"op": "status", "name": "INCASSARE - HIT", "description": "Hit Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "say", "text": "Gained status: INCASSARE"}, {"op": "gain", "resource": "HEALTH", "amount": 3}], "gui": {"name": "Incassare", "description": "ROC-AR2 · HIT ricevuto ×0,5 in questo turno. +3 HEALTH a sé.", "role": "DEFENSE", "gains": "+3 H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.EAllora", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"HEALTH": 10}, "self": [{"op": "status", "name": "E ALLORA - HIT", "description": "Hit Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "say", "text": "Gained status: E ALLORA"}], "target": [{"op": "damage", "type": "HIT", "amount": 8}], "gui": {"name": "E allora?", "description": "ROC-AR3 · 10 HEALTH: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio.", "role": "COUNTER", "gains": "—", "damage": "HIT", "damageAmount": "HIT 8"}},
+    {"binding": "base.rocco.Capocciata", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 28}, "target": [{"op": "damage", "type": "HIT", "amount": 26}], "gui": {"name": "Capocciata", "description": "ROC-AR4 · 28 HEALTH: 26 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 26"}},
+    {"binding": "base.rocco.TeLoSpiegoIo", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "self": [{"op": "search", "cards": ["base.rocco.Capocciata", "base.rocco.TestaDura"], "vulnerability": {"factor": 1.5}, "foundGains": {"HEALTH": 6}, "missedGains": {"HEALTH": 2}}], "target": [{"op": "damage", "type": "HIT", "amount": 4}], "gui": {"name": "Te lo spiego io", "description": "ROC-AR5 · Caricamento: 4 HIT al bersaglio. Annuncia Capocciata o Testa dura. Se lo trovi: +6 HEALTH. Se non lo trovi: +2 HEALTH.", "role": "DISRUPT", "gains": "+6 HEALTH", "damage": "HIT", "damageAmount": "HIT 4"}},
+    {"binding": "base.rocco.TestaDura", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 33}, "target": [{"op": "damage", "type": "HIT", "amount": 30}], "gui": {"name": "Testa dura", "description": "ROC-AR6 · 33 HEALTH: 30 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}}
   ],
   "decks": [
     {
@@ -779,6 +793,29 @@
         "base.items.EspressoDelDistributore": 2,
         "base.com.AcquaInFaccia": 1,
         "base.cesira.LoRivendo": 2
+      }
+    },
+    {
+      "id": "prova-duccio",
+      "character": "base.character.Rocco",
+      "bound": [
+        "base.rocco.bound.Colpetto",
+        "base.rocco.bound.AlzoLaVoce"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.rocco.TeLoSpiegoIo": 2,
+        "base.rocco.Capocciata": 2,
+        "base.rocco.TestaDura": 1,
+        "base.rocco.NoccheSbucciate": 2,
+        "base.rocco.Incassare": 2,
+        "base.rocco.EAllora": 2,
+        "base.com.Spintone": 2,
+        "base.com.SputoDaPosacenere": 2,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.PaninoDelKebab": 2,
+        "base.items.GhiaccioNelTovagliolo": 1
       }
     }
   ]

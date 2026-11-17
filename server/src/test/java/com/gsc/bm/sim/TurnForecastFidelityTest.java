@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * must be one of the forecast's variants. Only turns whose seats carry timers are excluded: their callbacks are not printed.
  */
 class TurnForecastFidelityTest {
+    /** SB-18 B2 (D126): Duccio's cards paid in HEALTH, by their printed names. */
+    static final List<String> HEALTH_COSTS = List.of("Nocche sbucciate", "E allora?", "Capocciata", "Testa dura");
 
     @Test
     void theForecastMatchesTheEngineTurnByTurn() throws Exception {
@@ -30,17 +32,23 @@ class TurnForecastFidelityTest {
         // SB-17: prova-sergio in one seat (alternating), the starters in the other: reflection, kept token, token condition, swap.
         // SB-17 B2 (D110): Scatto Repentino left prova-sergio; the fourth counter is now Lo sanno tutti, the new strike.
         check(Draft.fromClasspath("/set-base/bozza.json"), "sergio");
+        // SB-18 B2 (D126): prova-duccio in one seat (alternating), the starters in the other: the four cards paid in HEALTH.
+        check(Draft.fromClasspath("/set-base/bozza.json"), "duccio");
     }
 
     private static void check(Draft draft, String arm) throws Exception {
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
         int[] turns = new int[3]; // checked, matched, skipped
         int[] sergio = new int[4]; // SB-17, in checked turns: reflections, kept tokens, Conto salato on a token, Lo sanno tutti resolved (B2, D110)
+        int[] duccio = new int[4]; // SB-18 B2 (D126), resolved in checked turns: Nocche sbucciate, E allora?, Capocciata, Testa dura (HEALTH costs)
         int[] sales = new int[2]; // SB-17 B4 (D118): resolved in checked turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
         List<String> misses = new ArrayList<>();
-        for (long seed = 7_100_000; seed < 7_100_300; seed++) {
+        // SB-18 B2 (D126): Duccio's games are shorter, so his arm takes 400 seeds to keep the floor of 5,000 checked turns.
+        int games = arm.equals("duccio") ? 400 : 300;
+        for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
+            if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
             Map<String, List<Map<String, Integer>>> forecasts = new HashMap<>();
@@ -76,6 +84,8 @@ class TurnForecastFidelityTest {
                         if (m.getPlayedCardName().equals("Lo sanno tutti") && !m.isVoid()) sergio[3]++;
                         if (m.getPlayedCardName().equals("Lo rivendo") && !m.isVoid()) sales[0]++;
                         if (m.getPlayedCardName().equals("Fare il vago") && !m.isVoid()) sales[1]++;
+                        int paid = HEALTH_COSTS.indexOf(m.getPlayedCardName());
+                        if (paid >= 0 && !m.isVoid()) duccio[paid]++;
                     }
                     forecasts.forEach((id, ends) -> {
                         turns[0]++;
@@ -95,6 +105,10 @@ class TurnForecastFidelityTest {
             for (int n : sergio) assertTrue(n > 0, "every new effect is in the checked sample");
             System.out.println("forecast fidelity, sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
             for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the checked sample");
+        }
+        if (arm.equals("duccio")) {
+            System.out.println("forecast fidelity, duccio: " + HEALTH_COSTS + " " + java.util.Arrays.toString(duccio));
+            for (int n : duccio) assertTrue(n > 0, "every card paid in HEALTH is in the checked sample");
         }
     }
 }

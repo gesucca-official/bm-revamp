@@ -28,12 +28,15 @@ class ViewTableFidelityTest {
         check(Draft.fromClasspath(DRAFT), "1.6", false);
         // SB-17: prova-sergio in one seat (alternating), the starters in the other.
         check(Draft.fromClasspath(DRAFT), "sergio", false);
+        // SB-18 B2 (D126): prova-duccio in one seat (alternating), the starters in the other: the four cards paid in HEALTH.
+        check(Draft.fromClasspath(DRAFT), "duccio", false);
     }
 
     private static Map<String, BotView.CardSeen> text(Draft draft) throws Exception {
         Map<String, BotView.CardSeen> text = new HashMap<>();
         List<String> decks = new ArrayList<>(List.of(DECKS));
         if (draft.deckIds().contains(Sb17.DECK)) decks.add(Sb17.DECK); // SB-17
+        if (draft.deckIds().contains(Sb18.DECK)) decks.add(Sb18.DECK); // SB-18 B2
         for (String deck : decks) {
             Player p = draft.player(deck, "text", new Random(0), null);
             List<Card> cards = new ArrayList<>(p.getCardsInHand());
@@ -54,15 +57,17 @@ class ViewTableFidelityTest {
         long started = System.nanoTime();
         Map<String, BotView.CardSeen> catalog = text(draft);
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
-        int games = 300;
+        int games = arm.equals("duccio") ? 400 : 300; // SB-18 B2 (D126): Duccio's games are shorter; 400 seeds keep the floor of 5,000 compared turns
         long[] one = new long[2], two = new long[2], twoRes = new long[2], drawn = new long[2];
         long[] skipped = new long[1], unmodeled = new long[1];
         int[] regressionWindows = new int[1];
+        int[] duccio = new int[4]; // SB-18 B2 (D126): in compared turns, the four cards paid in HEALTH (TurnForecastFidelityTest.HEALTH_COSTS)
         int[] sales = new int[2]; // SB-17 B4 (D118): in compared turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
+            if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
             Map<Integer, Map<String, BotView>> views = new HashMap<>();
@@ -95,6 +100,8 @@ class ViewTableFidelityTest {
                     for (ViewTable.Play p : now) {
                         if (p.card.getName().equals("Lo rivendo")) sales[0]++;
                         if (p.card.getName().equals("Fare il vago")) sales[1]++;
+                        int paid = TurnForecastFidelityTest.HEALTH_COSTS.indexOf(p.card.getName());
+                        if (paid >= 0) duccio[paid]++;
                     }
                     labels[0] = "seed " + s + " turn " + t + " moves " + now.stream().map(p -> p.seat + ":" + p.card.getName())
                             .reduce((x, y) -> x + ", " + y).orElse("") + (plays.containsKey(t - 1) ? " after " + plays.get(t - 1).stream()
@@ -186,6 +193,10 @@ class ViewTableFidelityTest {
         if (arm.equals("sergio")) {
             System.out.println("ViewTable fidelity sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
             for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the compared sample");
+        }
+        if (arm.equals("duccio")) {
+            System.out.println("ViewTable fidelity duccio: " + TurnForecastFidelityTest.HEALTH_COSTS + " " + java.util.Arrays.toString(duccio));
+            for (int n : duccio) assertTrue(n > 0, "every card paid in HEALTH is in the compared sample");
         }
         assertEquals(one[0], one[1], String.join("\n", misses));
         assertEquals(two[0], two[1], String.join("\n", misses));

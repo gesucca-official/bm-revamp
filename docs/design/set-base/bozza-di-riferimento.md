@@ -35,9 +35,9 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `0a5df67f17e9…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `7e143b4ac45d…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
-Il file contiene 94 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 6 personaggi, 5 starter e, di prova, 1 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
+Il file contiene 105 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 2 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
 ### Starter di Spazienzio de la Ucciso — `starter-spazienzio`
 
@@ -183,5 +183,28 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+
+### Mazzo di prova di Duccio Braccio Teso — `prova-duccio`
+
+Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 12 · NC 7 · R 1).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Prima io** (`base.rocco.PrimaIo`) | R | ROC-BA · Basic: consuma un proprio oggetto, poi +3 HEALTH a sé. |
+| bound | **Colpetto** (`base.rocco.bound.Colpetto`) | NC | ROC-BO1 · Bound: 3 HIT al bersaglio. |
+| bound | **Alzo la voce** (`base.rocco.bound.AlzoLaVoce`) | NC | ROC-BO3 · Bound: +8 A a sé. |
+| last resort | **Ne ho prese di peggio** (`base.rocco.NeHoPreseDiPeggio`) | R | LR-ROC · Last resort: 6 HIT a sé; 12 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **Te lo spiego io** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · Caricamento: 4 HIT al bersaglio. Annuncia Capocciata o Testa dura. Se lo trovi: +6 HEALTH. Se non lo trovi: +2 HEALTH. |
+| 2 | **Capocciata** (`base.rocco.Capocciata`) | NC | ROC-AR4 · 28 HEALTH: 26 HIT al bersaglio. |
+| 1 | **Testa dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 33 HEALTH: 30 HIT al bersaglio. |
+| 2 | **Nocche sbucciate** (`base.rocco.NoccheSbucciate`) | C | ROC-AR1 · 16 HEALTH: 18 HIT al bersaglio. |
+| 2 | **Incassare** (`base.rocco.Incassare`) | C | ROC-AR2 · HIT ricevuto ×0,5 in questo turno. +3 HEALTH a sé. |
+| 2 | **E allora?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 HEALTH: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
+| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 1 | **Fasciatura col fazzolettaccio** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 A a sé; +8 HEALTH a sé. |
+| 2 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
+| 1 | **Ghiaccio nel tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | OGG-14 · Consumato: +10 HEALTH; azzera la tua T. |
 
 <!-- fine generato -->

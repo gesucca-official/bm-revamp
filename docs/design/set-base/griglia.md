@@ -151,7 +151,7 @@ di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 | PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H ~~85~~ 80 (SB-16i), A 15, L 10 (SB-16e), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
 | PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
 | PG-CES | Sergio Sommerso | Personaggio, booster | H ~~90~~ ~~75~~ 85 (SB-17: D106, riserva del giro 2), A 30, V 10, capacità 2 | R | — | bozza (SB-17), concept SB-9 | Contromosse e letture | dati |
-| PG-ROC | Duccio Braccio Teso | Personaggio, booster | H 130, A 15, capacità 2 | R | — | da inventare (concept SB-9; personaggio di prova SB-6a) | La salute come risorsa (D27) | dati |
+| PG-ROC | Duccio Braccio Teso | Personaggio, booster | H ~~130~~ ~~110~~ 115 (SB-18: D124, D126; riserva R2), A 15, capacità 2 | R | — | bozza (SB-18 B2), concept SB-9; personaggio di prova SB-6a | La salute come risorsa (D27) | dati |
 
 **Salute iniziale (cautela di SB-10a).** A 2,5–4,8 punti di quota per 1 HEALTH, Mara a −15 vale sulla carta da −37 a −72 punti e Duccio
 a +30 da +75 a +144. La griglia le compensa con le carte, senza cambiare i valori (decisione 5): Mara ha costi in A bassi, una bound di A e
@@ -190,7 +190,7 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 | PIN-BA | Piera | Azione, basic | ITEMS | 0 | +5 L a sé, poi consuma | NC | Piera | bozza «Questo lo finisco io» | Beve quello che trova | consume |
 | GIG-BA | Beppe | Azione, basic | ITEMS | 0 | +4 V a sé, poi consuma | NC | Beppe | bozza «Questo torna utile», senza −5 A, priorità −1 → 0 | Ogni oggetto gli dà moneta per gli attrezzi; diversa da quella di Spazienzio | consume |
 | CES-BA | Sergio | Azione, basic | ITEMS | 1 | ~~+5~~ +7 A a sé, poi consuma (di nuovo, D121; riserva R1 della B6; ~~vende il proprio oggetto: +8 HEALTH~~, passata a CES-AR7) | R | — | bozza «Lo metto in conto» (SB-17, B3 e B5e V4, D121); ~~«Lo rivendo»~~ da basic (B4, D118) ritirata | Raccoglie e tiene da parte | consume |
-| ROC-BA | Duccio | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | da inventare («La mancia») | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
+| ROC-BA | Duccio | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | bozza «Prima io» (SB-18, nome di lavoro, D124 (5)); già «La mancia» | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
 
 ~~**Deroga di SB-17 a D3 (D117, D118):** CES-BA «Lo rivendo» resta una presa del proprio oggetto bersagliato, ma senza il suo effetto.~~ **Ritirata da D121:** CES-BA «Lo metto in conto» torna una presa come le altre basic (+7 A poi consuma, D3 rispettata). La vendita è l'effetto della carta regolare CES-AR7, sotto, con la sua deroga.
 
@@ -225,9 +225,9 @@ token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter 
 | CES-BO1 | Sergio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Mi informo» (SB-17), nella collezione (B2, D110) | Generatrice: le letture costano A | dati |
 | CES-BO2 | Sergio | Azione, bound | DAMAGE | 1 | 3 HIT | 4 | NC | — | bozza «Battutina» (SB-17) | Colpetto | dati |
 | CES-BO3 | Sergio | Azione, bound | ~~RESOURCES~~ DEFENSE | ~~0~~ 2 | ~~2 HIT~~ ~~un proprio oggetto esce dal campo senza il suo effetto, +5 HEALTH a sé; senza oggetti +2 HEALTH a sé~~ HIT e CUT ricevuti ×0,75 in questo turno⁶ | ~~2 netto con l'oggetto, 2 senza~~ 2,5 | NC | — | bozza «Fare il vago» (SB-17 A4, D118, nome di lavoro); sostituisce «Lo rivendo», diventata la basic CES-BA; prima ancora «Frecciatina al volo» | ~~Variante di scambio~~ Difesa leggera sempre in mano (deroga sopra) | dati |
-| ROC-BO1 | Duccio | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
-| ROC-BO2 | Duccio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | da inventare («Diretto») | Variante veloce | dati |
-| ROC-BO3 | Duccio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | da inventare («Saltellare»); sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Duccio ha la A più bassa | dati |
+| ROC-BO1 | Duccio | Azione, bound | DAMAGE | 0 | 3 HIT | 4 | NC | — | bozza «Colpetto» (SB-18); prova «Colpetto», 5 → 3 HIT | Colpetto | dati |
+| ROC-BO2 | Duccio | Azione, bound | DAMAGE | 2 | 2 HIT | 2,67 | NC | — | bozza «Gomitata» (SB-18, nome di lavoro, D124 (5)), nella collezione, fuori dal mazzo di prova; già «Diretto» | Variante veloce | dati |
+| ROC-BO3 | Duccio | Azione, bound | RESOURCES | 0 | +8 A a sé | 4 | NC | — | bozza «Alzo la voce» (SB-18, nome di lavoro, D124 (5)); già «Saltellare»; sostituisce la prova «Fiato» (+5 HEALTH, una cura) | Duccio ha la A più bassa | dati |
 
 ⁴ **SB-12a, dopo il giro 3, decisione del proprietario** ([correzioni](#correzioni-di-sb-12a), D41): MAR-BO2 da +8 a +6 A. Sugli
 starter corretti la +8 A valeva circa 4,5 HEALTH equivalenti per uso, sopra il tetto di 4 scelto da D38 per Mara; la +6 A circa 3,3, col
@@ -245,11 +245,11 @@ così chiudono la partita (D29).
 | LR-STR | generica | Azione, last resort | DAMAGE | 1 | 5 HIT a sé, 10 HIT; Rincara 5 (2 a sé) (SB-16i) | C | `Struggle`, conservata | Spazienzio, Mara, Beppe, Sergio | dati |
 | LR-TOS | Celestina | Azione, last resort | DAMAGE | 1 | ~~5~~ 2 HIT a sé (SB-16e2), 7 POISON e +4 T al bersaglio; Rincara 5 (1 a sé) (SB-16i) | NC | `LethalHeroinDose`, riprogettata («L'ultima dose») | Oggi costa salute solo con T alta e il bot non la gioca; qui chiude col veleno | dati |
 | LR-PIN | Piera | Azione, last resort | DAMAGE | 1 | ~~5~~ 2 HIT a sé (SB-16e2), HIT pari a ~~6~~ 12⁶ + L residua, poi azzera L; Rincara 4 (1 a sé) (SB-16i) | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
-| LR-ROC | Duccio | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT | R | prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati |
+| LR-ROC | Duccio | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT; Rincara 5 (2 a sé) (SB-18) | R | bozza «Ne ho prese di peggio» (SB-18, nome di lavoro, D124 (5)); prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati (`perPlay`) |
 
 ### Azioni d'archetipo (42)
 
-Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Nei cinque starter ogni archetipo ha sei titoli; rarità e copie sono quelle di D79 sotto. Sergio: 2 C, 3 NC, 1 R, più CES-AR7 NC, carta del playground fuori dal conto delle 42 (D121). Duccio: 3 C, 2 NC, 1 R.
+Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Nei cinque starter ogni archetipo ha sei titoli; rarità e copie sono quelle di D79 sotto. Sergio: 2 C, 3 NC, 1 R, più CES-AR7 NC, carta del playground fuori dal conto delle 42 (D121). Duccio: ~~3 C, 2 NC, 1 R~~ 2 C, 3 NC, 1 R (SB-18, D124 (6)); conto del set e rarità li rifà SB-19.
 
 **Spazienzio (6)**
 
@@ -331,12 +331,14 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| ROC-AR1 | Azione, regolare | DAMAGE | F2 (12 HEALTH) | 0 | 22 HIT | C | — | prova «Colpo pagato col sangue», 15 → 12 HEALTH, 35 → 22 HIT | Attacco; la prova stava 11 HIT sopra la linea | dati |
-| ROC-AR2 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno | C | — | prova «Incassare» | Difesa; nulla contro CUT e POISON | dati |
-| ROC-AR3 | Azione, regolare | DEFENSE | F1 (8 HEALTH) | 2 | HIT ricevuto ×0,5 nel turno; 8 HIT | NC | — | prova «Contrattacco» | Contromossa: para e risponde; sprecata se l'avversario non attacca | dati |
-| ROC-AR4 | Azione, regolare | DAMAGE | F3 (20 HEALTH) | 0 | 30 HIT | NC | — | da inventare («Uppercut della sagra») | Il colpo grosso, che lo avvicina allo zero | dati |
-| ROC-AR5 | Azione, regolare | DAMAGE | F0 | 1 | 6 HIT | C | — | da inventare («Tre schiaffi, un euro») | Il colpo gratuito per i turni senza salute da spendere | dati |
-| ROC-AR6 | Azione, regolare | RESOURCES | F0 | 0 | +15 HEALTH; HIT ricevuto ×1,25 per 2 turni | R | — | da inventare («Secondo fiato») | Picco: la cura vale doppio per lui (SB-9); rischio di partite lunghe da misurare in SB-18 | dati |
+| ROC-AR1 | Azione, regolare | DAMAGE | ~~F2 (12 HEALTH)~~ ~~15~~ 16 HEALTH (SB-18 B2, D126; riserva R1)⁹ | 0 | ~~22~~ 18 HIT | C | — | bozza «Nocche sbucciate» (SB-18, nome di lavoro, D124 (5)); prova «Colpo pagato col sangue», 15 → 12 HEALTH, 35 → 22 HIT | Attacco; la prova stava 11 HIT sopra la linea | dati |
+| ROC-AR2 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ×0,5 nel turno; +3 HEALTH a sé (SB-18) | C | — | bozza «Incassare» (SB-18); prova «Incassare» | Difesa; nulla contro CUT e POISON; nessuna parata pura (D52 (1)) | dati |
+| ROC-AR3 | Azione, regolare | ~~DEFENSE~~ COUNTER | ~~F1 (8 HEALTH)~~ ~~9~~ 10 HEALTH (SB-18 B2, D126; riserva R1)⁹ | 2 | HIT ricevuto ×0,5 nel turno; 8 HIT | NC | — | bozza «E allora?» (SB-18, nome di lavoro, D124 (5)); prova «Contrattacco» | Contromossa: para e risponde; sprecata se l'avversario non attacca | dati |
+| ROC-AR4 | Azione, regolare | DAMAGE | ~~F3 (20 HEALTH)~~ ~~26~~ 28 HEALTH (SB-18 B2, D126; riserva R1)⁹ | 0 | ~~30~~ 26 HIT | NC | — | bozza «Capocciata» (SB-18, nome di lavoro, D124 (5)); già «Uppercut della sagra» | Il colpo grosso, che lo avvicina allo zero; il colpo cercato da ROC-AR5 | dati |
+| ROC-AR5 | Azione, regolare | ~~DAMAGE~~ DISRUPT | F0 | 1 | ~~6 HIT~~ Caricamento: 4 HIT al bersaglio. Annuncia Capocciata o Testa dura. Se lo trovi: +6 HEALTH. Se non lo trovi: +2 HEALTH (SB-18: D124 (2), V3) | NC | — | bozza «Te lo spiego io» (SB-18, nome di lavoro, D124 (5)), C → NC (D124 (2)); già «Tre schiaffi, un euro» | L'«Annuncia» di Duccio (D52 (3)): il premio è nella risorsa che paga il colpo cercato | dati (search) |
+| ROC-AR6 | Azione, regolare | ~~RESOURCES~~ DAMAGE | ~~F0~~ ~~30~~ 33 HEALTH (SB-18 B2, D126; riserva R1)⁹ | 0 | ~~+15 HEALTH; HIT ricevuto ×1,25 per 2 turni~~ 30 HIT al bersaglio; senza «Ultimo colpo» (D125 (3)) | R | — | bozza «Testa dura» (SB-18, nome di lavoro, D124 (5)); ~~«Secondo fiato»~~ fuori dalla bozza, in ingresso a SB-19 come idea per una generica (D124 (6)) | Picco raro del colpo in salute; la cura rara allungava le partite (SB-18, proposta § 2) | dati |
+
+⁹ **SB-18, Fasi B, B1e e B2** ([D124](../../set-base-decisioni.md#decisioni-del-proprietario)–[D126](../../set-base-decisioni.md#decisioni-del-proprietario)): la leva di Duccio sono i costi in HEALTH (D126 (1)). Base la V3 della Fase B (Nocche 8, E allora? 5, Capocciata 14, Testa dura 16 HEALTH; 18, 8, 26, 30 HIT; D125 (1)); la taratura della B2 la porta a ×1,85 (15, 9, 26, 30 HEALTH), stessi HIT; la riserva R1 del giro finale (Mara 33,9%, media 52,3%, verso scritto: +0,1) a ×1,95 (16, 10, 28, 33); la riserva R2 (Mara 26,5%, media 43,8%, verso scritto: +5) porta la salute a 115 ([rapporto della B2](../../reports/set-base/sb-18-b2-report.md)). Con d50 la carta si offre solo con salute **maggiore** del costo (RP-2). Mazzo di prova `prova-duccio` della [proposta, § 5](sb-18-proposta.md#5-mazzo-di-prova-prova-duccio-20-carte-al-più-2-copie-d94).
 
 ### Azioni generiche (23)
 
@@ -460,7 +462,7 @@ La ricerca per mutazione di SB-7 dà poi il mazzo più forte di ciascuno come li
 | Piera | PIN-AR1, PIN-AR2 (preparata da PIN-AR4) | PIN-AR3 | PIN-AR5 (−A) |
 | Beppe | GIG-AR2, GIG-AR5 (preparata da GIG-AR3), OGG-09 | GIG-AR4, OGG-10, OGG-11 | GIG-AR1 (distrugge); GEN-02 |
 | Sergio | CES-AR1, CES-AR4, CES-AR5 (SB-17 B2), CES-AR6 | ~~CES-AR5~~ — (SB-17 B2, D110: nessuna parata pura, D52 (1)) | CES-AR2, CES-AR3 (annullano) |
-| Duccio | ROC-AR1, ROC-AR4 | ROC-AR2 | ROC-AR3 (para e risponde) |
+| Duccio | ROC-AR1, ROC-AR4, ROC-AR6 (SB-18) | ROC-AR2 | ROC-AR3 (para e risponde) |
 
 Coppie da tenere distinte (SB-9): Mara non annulla, Sergio sì; Beppe non ha colpi oltre F2, salvo GEN-06 in prestito.
 
@@ -641,7 +643,7 @@ di quelle spese.
 | Ricerca esatta e caricamento visibile | SPA-AR3, MAR-AR5, TOS-AR1, PIN-AR4, GIG-AR3 | entrambi |
 | Svuotare il bersaglio | GEN-07, GEN-22 | Spazienzio (GEN-07) |
 | −V sul bersaglio | GEN-23 | — |
-| Cure | GEN-13, OGG-07, GEN-16, TOS-AR3, ROC-AR6, OGG-14, ROC-BA | Mara (OGG-07) |
+| Cure | GEN-13, OGG-07, GEN-16, TOS-AR3, ~~ROC-AR6~~, OGG-14, ROC-BA, ROC-AR2, ROC-AR5 (SB-18) | Mara (OGG-07) |
 | Pulizia propria | GEN-15, OGG-08, OGG-14 | — |
 | Stati INPUT, durata 0 e oltre | SPA-AR3/4, MAR-AR4, GEN-13, GEN-11… | entrambi |
 | Stati OUTPUT ed equip da oggetti | OGG-09/10/11/13, GEN-21, token | entrambi (OGG-10, OGG-13) |
@@ -652,7 +654,7 @@ di quelle spese.
 | Prendere, rubare, scambiare, distruggere, copiare | basic, GEN-01/02/03/04, GIG-AR1 | entrambi (basic, GEN-02) |
 | Quantità variabile | SPA-AR2, PIN-AR2/5, CES-AR6, LR-PIN | entrambi |
 | Danno a sé | Struggle, PIN-AR1, GEN-15, SPA-BO3, last resort | entrambi (Struggle) |
-| Costo in HEALTH | ROC-AR1/3/4 | — (Duccio) |
+| Costo in HEALTH | ROC-AR1/3/4/6 (SB-18) | — (Duccio) |
 | Costi in V, A, T, L | ovunque | V e A |
 | Priorità da −1 a 2 | ovunque | entrambi |
 | Capacità degli oggetti | PG-*, GIG-AR5 | entrambi (1 e 2) |
