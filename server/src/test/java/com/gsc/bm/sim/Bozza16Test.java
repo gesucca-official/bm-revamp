@@ -61,7 +61,8 @@ class Bozza16Test {
     void the16ChangesExactlyWhatD97Approved() throws Exception {
         // SB-17 (D106, D107): Sergio, his cards and prova-sergio are stripped; the rest is the 1.6b as approved.
         // SB-18 B2 (D126): Duccio, his cards and prova-duccio too.
-        JsonNode old = SetBaseArms.armB(resource(SetBaseArms.FROZEN_15)), now = Sb18.without(Sb17.without(resource("/set-base/bozza.json")));
+        // SB-19 B1 (D129): the nine cards of the missing slots and the nine decks with the additions too.
+        JsonNode old = SetBaseArms.armB(resource(SetBaseArms.FROZEN_15)), now = Sb19.without(Sb18.without(Sb17.without(resource("/set-base/bozza.json"))));
         assertTrue(SetBaseArms.carriesArmB(now), "arm B inside");
         ObjectNode rules = old.path("rules").deepCopy();
         rules.put("searchShuffle", true);

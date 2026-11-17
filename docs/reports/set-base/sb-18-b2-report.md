@@ -55,7 +55,7 @@ riepiloghi [K170](sb-18/b2/round-k170.md) e [K185](sb-18/b2/round-k185.md). Temp
 
 `bozza.json` è la copia K185 con una sola differenza di testo: la descrizione della last resort apre con `LR-ROC` (la riga della griglia) al
 posto di `ROC-LR`, perché `rarita-bozza.py --check` e `SetBaseDraftTest` leggono lo slot dalla descrizione. Righe `ROC-*`, `PG-ROC` e
-`LR-ROC` della [griglia](../../design/set-base/griglia.md#azioni-darchetipo-42) coi valori K185 e i nomi di lavoro di D124 (5), nota ⁹; Duccio a
+`LR-ROC` della [griglia](../../design/set-base/griglia.md#azioni-darchetipo-43) coi valori K185 e i nomi di lavoro di D124 (5), nota ⁹; Duccio a
 2 C / 3 NC / 1 R (D124 (6)). `regole-playground.md` non cambia: RP-2 dice già che un costo in HEALTH si paga solo sopra il costo.
 
 ## 4. Giro finale e riserve

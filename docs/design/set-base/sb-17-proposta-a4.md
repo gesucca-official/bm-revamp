@@ -20,7 +20,7 @@ e una difesa leggera. Il kit di Sergio dopo la A4:
 
 Le carte d'archetipo, la salute (85) e la last resort non cambiano. Il conto delle carte resta 93: Lo metto in conto esce, entra
 Fare il vago. I nomi restano di lavoro fino a SB-24 (D113 (3)); «Fare il vago» riprende il nome della difesa che Sergio aveva in
-Fase A ([griglia, CES-AR5](griglia.md#azioni-darchetipo-42)).
+Fase A ([griglia, CES-AR5](griglia.md#azioni-darchetipo-43)).
 
 Confine: gli oggetti col malus per chi li ha in campo e le carte che anticipano o rubano risorse sono di SB-19 (D117 (3)). Qui gli
 oggetti del mazzo di prova restano quelli di oggi; con la basic di vendita i futuri oggetti col malus avranno in Sergio un cliente

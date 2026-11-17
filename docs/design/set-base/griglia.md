@@ -6,6 +6,7 @@
 > **SB-16d, 12 novembre 2026 (D52, D54, D55):** nove slot riprogettati secondo la [proposta approvata](sb-16d-proposta.md),
 > più PIN-BO1 ridotta da +10 a +5 L sotto la delega D38: valore per uso 3,75 con D50, tetto 4 invariato.
 > SB-12a ha corretto coi bot alcuni numeri degli starter base, approvati dal proprietario: vedi [Correzioni di SB-12a](#correzioni-di-sb-12a).
+> **SB-19, Fase B1, 17 novembre 2026 ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza le nove carte che mancavano (GEN-04, 08, 10, 11, 19, 20, 21; OGG-08, 16): il set è a **121 carte**, 44 C / 58 NC / 19 R, con CES-AR7 contata dentro (D121); i conti qui sotto (blocchi, rarità, ruoli) sono riscritti dalla bozza. Con OGG-17 e OGG-18 della B2 il set va a 123 ([nota ¹⁰](#azioni-generiche-23)).
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -247,7 +248,7 @@ così chiudono la partita (D29).
 | LR-PIN | Piera | Azione, last resort | DAMAGE | 1 | ~~5~~ 2 HIT a sé (SB-16e2), HIT pari a ~~6~~ 12⁶ + L residua, poi azzera L; Rincara 4 (1 a sé) (SB-16i) | NC | da inventare («L'ultimo giro») | L'ultima carta è l'ultimo bicchiere | Java nuova, la stessa di PIN-AR2 (decisione B1) |
 | LR-ROC | Duccio | Azione, last resort | DAMAGE | 0 | 6 HIT a sé, 12 HIT; Rincara 5 (2 a sé) (SB-18) | R | bozza «Ne ho prese di peggio» (SB-18, nome di lavoro, D124 (5)); prova «Porgi l'altra guancia» | Il danno a sé è un effetto, non un costo in HEALTH: resta gratuita | dati (`perPlay`) |
 
-### Azioni d'archetipo (42)
+### Azioni d'archetipo (43)
 
 Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Nei cinque starter ogni archetipo ha sei titoli; rarità e copie sono quelle di D79 sotto. Sergio: 2 C, 3 NC, 1 R, più CES-AR7 NC, carta del playground fuori dal conto delle 42 (D121). Duccio: ~~3 C, 2 NC, 1 R~~ 2 C, 3 NC, 1 R (SB-18, D124 (6)); conto del set e rarità li rifà SB-19.
 
@@ -349,14 +350,14 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 | GEN-01 | Azione, regolare | ITEMS | F0 | 1 | Consuma un proprio oggetto | C | Celestina 2, Piera 2 | `Grab`, conservata | Presa più rapida di molte basic | consume |
 | GEN-02 | Azione, regolare | ITEMS | F1 (10 A) | 0 | Ruba un oggetto lontano | C | Mara 1, Celestina 1, Beppe 2 | `Steal`, conservata | Furto; oggi mai giocata, da rimisurare con avversari ricchi di oggetti | Java |
 | GEN-03 | Azione, regolare | ITEMS | F0 | −1 | Scambia tutti gli oggetti | NC | — | `ShuffleFeet`, conservata | Scambio; tecnica contro Beppe | Java |
-| GEN-04 | Azione, regolare | ITEMS | F1 (10 A) | 0 | Copia vicino a sé un oggetto casuale del bersaglio | R | — | `BeggingMoney`, riprogettata: 25 T → 10 A, niente −10 A | Copia; aperta a tutti | Java |
+| GEN-04 | Azione, regolare | ITEMS | F1 (10 A) | 0 | Copia vicino a sé un oggetto casuale del bersaglio | R | — | «Elemosina molesta» (`BeggingMoney`, riprogettata: 25 T → 10 A, niente −10 A; sottoclasse `base.com.BeggingMoney`, SB-19 B1¹⁰) | Copia; aperta a tutti | Java |
 | GEN-05 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | 18 HIT (solo stati GOOD dell'autore) | C | Spazienzio 2, Beppe 1 | `SeagullFly`, 15 → 18 HIT | Colpo medio a V; oggi sotto la linea | dati |
 | GEN-06 | Azione, regolare | DAMAGE | F3 (15 V) | 0 | 24 HIT | C | Spazienzio 1, Beppe 2 | bozza «Mattone del cantiere», 10 V/18 → 15 V/24 | Colpo grosso generico, diverso da GEN-05 | dati |
 | GEN-07 | Azione, regolare | DAMAGE | F3 (20 V) | 1 | 30 HIT; azzera T e L del bersaglio | NC | Spazienzio 1 | `HealingBlow`, conservata | Tecnica contro Celestina e Piera; in linea | dati |
-| GEN-08 | Azione, regolare | DAMAGE | F3 (15 V) | 1 | 10 HIT; +10 T al bersaglio | C | — | `SickeningBlow`, conservata | Veleno per chi non è Celestina; in linea con l'unità a 7 | dati |
+| GEN-08 | Azione, regolare | DAMAGE | F3 (15 V) | 1 | 10 HIT; +10 T al bersaglio | C | — | «Colpo allo stomaco» (`SickeningBlow`, conservata, a dati) | Veleno per chi non è Celestina; in linea con l'unità a 7 | dati |
 | GEN-09 | Azione, regolare | DISRUPT | F2 (10 V) | 1 | −10 A al bersaglio; 12 HIT | NC | — | `StunningBlow`, 15 → 10 V, 10 → 12 HIT | Oggi peggio di una carta morta: la precedenza è ordinale | dati |
-| GEN-10 | Azione, regolare | OTHER | F1 (5 V) | 1 | Toglie gli equip al bersaglio; 8 HIT | NC | — | `BadEducation`, 10 → 5 V | Tecnica contro Beppe, ora che gli equip esistono | Java |
-| GEN-11 | Azione, regolare | DEFENSE | F2 (10 V) | 2 | HIT ricevuto ×0,35 nel turno | NC | — | `CantFeelAnything`, 20 → 10 V, tolti +10 A | Parata forte; oggi quasi mai giocata | dati |
+| GEN-10 | Azione, regolare | OTHER | F1 (5 V) | 1 | Toglie gli equip al bersaglio; 8 HIT | NC | — | «Maleducazione» (`BadEducation`, 10 → 5 V; la classe viva con costo, priorità e `hitDamage` 8 dalla bozza) | Tecnica contro Beppe, ora che gli equip esistono | Java |
+| GEN-11 | Azione, regolare | DEFENSE | F2 (10 V) | 2 | HIT ricevuto ×0,35 nel turno; +5 A a sé | NC | — | «Non sento niente» (`CantFeelAnything`, 20 → 10 V, +10 A → +5 A: il guadagno di D52 (1), SB-19 A) | Parata forte con il premio che resta anche senza attacco; oggi quasi mai giocata | dati |
 | GEN-12 | Azione, regolare | DAMAGE | F1 (10 A) | 0 | +5 V a sé; 12 HIT | C | Celestina 2 | bozza «Rincorsa dal marciapiede», +10 → +5 V, 15 → 12 HIT | Colpo a costo A aperto a tutti | dati |
 | GEN-13 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,6 nel turno; +3 HEALTH | C | Spazienzio 2, Mara 1 | «Tartaruga sul marciapiede», D55 | Difesa generica con piccola cura anche se non viene attaccata | dati |
 | GEN-14 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +10 V | C | Spazienzio 1 | bozza «Denti stretti» | Carica per chi usa V | dati |
@@ -364,11 +365,13 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 | GEN-16 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +8 HEALTH | C | Celestina 1, Piera 2 | bozza «Fasciatura col fazzolettaccio», resa gratuita | Cura generica; la perdita di A è un effetto, quindi è giocabile anche da Piera | dati |
 | GEN-17 | Azione, regolare | DAMAGE | F1 (~~10~~ 5 A²) | 1 | 12 POISON | C | Mara 2 | bozza «Sputo da posacenere», 5 T → 10 A | POISON diretto per tutti: aggira le parate contro HIT e CUT | dati |
 | GEN-18 | Azione, regolare | DAMAGE | F0 | 1 | 7 HIT | C | Mara 2, Piera 2, Beppe 1 | da inventare («Spintone») | La carta da un'unità: riempitivo onesto, mai morto | dati |
-| GEN-19 | Azione, regolare | DAMAGE | F2 (10 V + 5 L) | 1 | 25 HIT | R | — | da inventare («Bottigliata») | Picco condizionato: serve sia V sia L (Cocktail, Grappa) | dati |
-| GEN-20 | Azione, regolare | DAMAGE | F3 (20 V) | 0 | 30 HIT; HIT ricevuto ×1,25 per 2 turni | R | — | da inventare («Sedia in testa») | Picco più alto, con un rischio | dati |
-| GEN-21 | Azione, regolare | OTHER | F1 (5 V) | 1 | Equip: il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo | R | — | da inventare («Coccio di bottiglia»), effetto del token `BrokenBeerBottle` | Prepara il colpo e aggira le parate contro HIT | equip |
+| GEN-19 | Azione, regolare | DISRUPT | F0 | 1 | −5 A al bersaglio; +5 A a sé | C | — | ~~da inventare («Bottigliata»)~~ «Mano lesta» (D117, SB-19 A¹⁰) | Rubare risorse: anticipa un guadagno togliendolo all'altro; A è la sola risorsa che hanno tutti | dati |
+| GEN-20 | Azione, regolare | RESOURCES | F0 | 0 | ~~+15~~ +12 HEALTH (valore A2, SB-19 B1) a sé; HIT e CUT ricevuti ×1,25 per 2 turni | R | — | ~~da inventare («Sedia in testa»)~~ «Secondo fiato» (D124, SB-19 A¹⁰) | Cura col rischio: picco contro chi non picchia, in linea contro gli altri | dati |
+| GEN-21 | Azione, regolare | OTHER | F1 (5 V) | 1 | Equip: il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo | R | — | «Coccio di bottiglia» (da inventare), effetto del token `BrokenBeerBottle` | Prepara il colpo e aggira le parate contro HIT | equip |
 | GEN-22 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | Azzera la L del bersaglio; 3 HIT | NC | — | da inventare («Acqua in faccia») | Tecnica economica contro Piera | dati |
 | GEN-23 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde 10 V; 5 HIT | R | — | da inventare («Sgambetto») | Picco contro chi accumula V (Spazienzio, Beppe) | dati |
+
+¹⁰ **SB-19, Fase B1** ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario); [proposta A](sb-19-proposta.md#3-le-carte), [A2](sb-19-proposta-a2.md#7-la-fase-b-riscritta)): le nove carte che mancavano alla bozza entrano coi nomi di lavoro della proposta: GEN-04, 08, 10, 11, 19, 20, 21, OGG-08 e OGG-16. **Mano lesta** (D117, rubare risorse) prende lo slot di «Bottigliata», **Secondo fiato** (D124) quello di «Sedia in testa»; Grappa non esce (D129 (1)). GEN-04 è la sola classe Java nuova (sottoclasse in `model/cards/base/com`, senza il −10 A della carta viva); GEN-10 usa la classe viva con costo, priorità e `hitDamage` dalla bozza. **Secondo fiato** entra a +12 HEALTH, il valore A2 (riserva della regola di scelta: nei mazzi con le aggiunte l'A1 la portava a +10,5 su Mara; [rapporto](../../reports/set-base/sb-19-b1-report.md#6-riserva-applicata)). Il set è a **121 carte**, 44 C / 58 NC / 19 R; con OGG-17 e OGG-18 della B2 (D130) arriva a 123, 44 C / 59 NC / 20 R.
 
 ² **SB-12a, giro 1:** GEN-17 da 10 a 5 A con le carte di Mara (D38), perché nello starter base la usa solo lei. È una generica: chi la
 mette in un altro starter (Duccio, SB-18) la prende a 5 A, e il suo prezzo va riguardato lì.
@@ -386,7 +389,7 @@ Si consumano con una presa; il loro valore è quello di una presa, non di uno sl
 | OGG-05 | Oggetto | RESOURCES | +20 L; −5 A | ≈ 4,5 | C | Piera 2 | bozza «Amaro nel bicchiere di plastica» | La presa grande di Piera: 20 → 9 L il turno dopo | dati |
 | OGG-06 | Oggetto | RESOURCES | +15 A | 7,5 | C | Mara 2, Beppe 1 | bozza «Espresso del distributore», senza +5 T | La T avvelenava chi non è immune | dati |
 | OGG-07 | Oggetto | RESOURCES | +12 HEALTH; +3 T | ≈ 12 | C | Mara 2, Celestina 2 | bozza «Panino del kebab dimenticato», +10/+5 → +12/+3 | Cura; la T è carburante per Celestina e un piccolo veleno per gli altri | dati |
-| OGG-08 | Oggetto | OTHER | Azzera la propria L | secondo il contesto | NC | — | bozza «Mezza minerale sgasata» | Controlla la propria L; Offro io riprogettata in SB-16d | dati |
+| OGG-08 | Oggetto | OTHER | Azzera la propria L; +5 A | ≈ 3 più il contesto | NC | — | bozza «Mezza minerale sgasata», +5 A (SB-19 A¹⁰) | Controlla la propria L; il +5 A la rende utile anche senza L addosso; Offro io riprogettata in SB-16d | dati |
 | OGG-09 | Oggetto | OTHER | Equip: HIT inflitto ×1,25 per 3 turni | ≈ 5–8 | NC | Beppe 2 | bozza «Guanti da officina» | Equip d'attacco | equip |
 | OGG-10 | Oggetto | OTHER | Equip: CUT ricevuto ×0,75 per 3 turni | ≈ 3–8 | C | Mara 1, Beppe 2 | bozza «Giubbotto di finta pelle» | Equip di difesa contro CUT | equip |
 | OGG-11 | Oggetto | OTHER | Equip: HIT ricevuto ×0,8 per 3 turni | ≈ 4–8 | C | Beppe 2 | da inventare («Casco da lavoro») | Equip di difesa contro HIT | equip |
@@ -394,7 +397,7 @@ Si consumano con una presa; il loro valore è quello di una presa, non di uno sl
 | OGG-13 | Oggetto | OTHER | Equip: il prossimo HIT inflitto ×1,5, uso singolo | picco con SuperImpact | NC | Spazienzio 1 | da inventare («Posacenere di vetro») | L'oggetto di chi tira colpi grossi; capacità 1 | equip |
 | OGG-14 | Oggetto | RESOURCES | +10 HEALTH; azzera la propria T | ≈ 10 | NC | Mara 1 (SB-16i) | bozza «Ghiaccio nel tovagliolo» | Cura e pulizia per i mazzi costruiti | dati |
 | OGG-15 | Oggetto | OTHER | Immunità all'effetto periodico di L; timer 3 che la toglie | secondo il contesto | R | — | da inventare («Santino della portinaia») | Tecnica contro l'alcol altrui | Java (classe di `MarvelousCocktail`) |
-| OGG-16 | Oggetto | RESOURCES | +25 L; −5 A | ≈ 6,3 | R | — | da inventare («Grappa della casa») | Picco per chi spende L; con GEN-19 | dati |
+| OGG-16 | Oggetto | RESOURCES | +25 L; −5 A | ≈ 6,3 | R | — | «Grappa della casa» (da inventare; D129 (1): resta) | Picco per chi spende L (Piera); fuori da Piera alimenta Estasi, rischio 1 di SB-19 | dati |
 | token | Token (non contato) | OTHER | Equip: HIT inflitto ×1,5 convertito in CUT, uso singolo | — | — | da OGG-03 | `BrokenBeerBottle`, conservato | Unico token del set | equip |
 
 ## Starter
@@ -441,7 +444,7 @@ le nuove usano il nome di lavoro. La stessa modifica porta la bozza al formato `
 personaggio (D44, punto 6), senza cambiare le partite.
 
 **Generiche condivise:** 11 distinte su 20 usi. Ogni starter ne condivide almeno 2, nessuna è in più di 3 starter, e le due base
-condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16). Dalla 1.6 (SB-16i) GEN-15 è in due starter e OGG-14 in uno: fuori dagli starter restano 11 generiche e 3 oggetti; i conteggi delle condivise si rifanno in SB-19.
+condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 08, 09, 10, 11, 15, 19–23) e 4 oggetti (OGG-08, 14, 15, 16). Dalla 1.6 (SB-16i) GEN-15 è in due starter e OGG-14 in uno: fuori dagli starter restano 11 generiche e 3 oggetti; i conteggi delle condivise si rifanno in SB-19. Dopo SB-19 B1 le nove carte nuove sono nella collezione e nei mazzi di prova `prova-b1-*` (sotto), mai negli starter.
 
 **Mazzi di prova dei personaggi da booster** (SB-17, SB-18; forma, non composizione fissata):
 
@@ -451,6 +454,8 @@ condividono solo Tartaruga. Restano nella collezione 12 generiche (GEN-03, 04, 0
 | Duccio | 6 distinte, 11 carte | Spintone, Fasciatura, Sputo, Grab (5 carte) | Ghiaccio 2, Kebab 2 |
 
 La ricerca per mutazione di SB-7 dà poi il mazzo più forte di ciascuno come limite superiore: contro gli starter può arrivare al 65–70%.
+
+**Mazzi con le aggiunte di SB-19 B1** (D129; scritti prima di misurare, [rapporto](../../reports/set-base/sb-19-b1-report.md#2-i-mazzi-con-le-aggiunte)): uno per ciascuno dei sette mazzi di riferimento (cinque starter, `prova-sergio`, `prova-duccio`), con al più 6 copie cambiate e 2 copie di ogni carta nuova, più due mazzi dei rischi 3 (equip impilati, su Beppe) e 1 (Estasi ×2 e Grappa ×2 in uno starter senza L, su Beppe). Ogni carta nuova è in almeno due mazzi. Id `prova-b1-*` in `bozza.json`, non starter.
 
 ## Triangoli
 
@@ -567,10 +572,10 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Basic | 7 | 7 |
 | Bound | 21 | 21 |
 | Last resort | 4 | 4 |
-| Azioni d'archetipo | 42 (D79) | 42 |
+| Azioni d'archetipo | 42 (D79) + CES-AR7 (D121) | 43 |
 | Azioni generiche | 25 → 23 (decisione 1) | 23 |
 | Oggetti | 16 | 16 |
-| **Totale** | **120** | **120** |
+| **Totale** | **120** (D129: si può superare di poco) | **121** |
 
 **Per personaggio** (carte legate: basic, bound, archetipo, last resort propria)
 
@@ -581,11 +586,11 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Celestina | 1 | 3 | 6 | propria | 11 |
 | Piera | 1 | 3 | 6 | propria | 11 |
 | Beppe | 1 | 3 | 6 | Struggle | 10 |
-| Sergio | 1 | 3 | 6 | Struggle | 10 |
+| Sergio | 1 | 3 | 7 (CES-AR7, D121) | Struggle | 11 |
 | Duccio | 1 | 3 | 6 | propria | 11 |
-| **Totale** | 7 | 21 | 42 | 3 | **73** |
+| **Totale** | 7 | 21 | 43 | 3 | **74** |
 
-Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 120.
+Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 121.
 
 **Per rarità**
 
@@ -595,24 +600,24 @@ Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 120.
 | Basic | 2 | 3 | 2 |
 | Bound | 10 | 11 | 0 |
 | Last resort | 1 | 2 | 1 |
-| Archetipo | 11 | 24 | 7 |
-| Generiche | 11 | 7 | 5 |
+| Archetipo | 9 | 27 | 7 |
+| Generiche | 12 | 7 | 4 |
 | Oggetti | 8 | 5 | 3 |
-| **Totale** | **45** | **55** | **20** |
+| **Totale** | **44** | **58** | **19** |
 
-D79 porta l’archetipo a 11 C / 24 NC / 7 R. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
+D79 porta l’archetipo a 11 C / 24 NC / 7 R; la bozza di oggi ha 9 C / 27 NC / 7 R (Duccio 2 / 3 / 1 e Sergio 1 / 4 / 1 in D124 e D121, CES-AR7 dentro), e SB-19 B1 riscrive la tabella dalla bozza (44 / 58 / 19, ex 45 / 55 / 20): l'archetipo di D79 non torna più, e restano 19 rare, una in meno di D79, perché «Bottigliata» è diventata Mano lesta comune. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
 Rare negli starter: 1 o 2 ciascuno.
 
-**Per ruolo** (le 113 carte giocabili; ruoli di R07a)
+**Per ruolo** (le 114 carte giocabili della bozza dopo SB-19 B1; ruoli di R07a letti dal campo `gui.role` di `bozza.json`: riscritta il 17 novembre 2026, la tabella di D79 contava 113 carte e non teneva i ruoli di Sergio e Duccio)
 
 | Ruolo | Basic | Bound | Last resort | Archetipo | Generiche | Oggetti | Totale |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| DAMAGE | | 13 | 4 | 12 | 9 | | 38 |
-| DEFENSE | | | | 7 | 2 | | 9 |
-| RESOURCES | | 8 | | 12 | 2 | 10 | 32 |
-| COUNTER | | | | 4 | | | 4 |
-| DISRUPT | | | | 6 | 3 | | 9 |
-| ITEMS | 7 | | | 1 | 4 | | 12 |
+| DAMAGE | | 12 | 4 | 14 | 7 | | 37 |
+| DEFENSE | | 1 | | 5 | 2 | | 8 |
+| RESOURCES | | 8 | | 11 | 3 | 10 | 32 |
+| COUNTER | | | | 5 | | | 5 |
+| DISRUPT | | | | 6 | 4 | | 10 |
+| ITEMS | 7 | | | 2 | 4 | | 13 |
 | OTHER | | | | | 3 | 6 | 9 |
 
 **Curva storica SB-10/SB-15 dei costi per starter** (prima di D79; azioni regolari, in copie)
@@ -639,11 +644,11 @@ di quelle spese.
 | CUT | MAR-AR1/2, GIG-AR2, bound | Mara |
 | POISON diretto | GEN-17, TOS-AR2, TOS-BO3, LR-TOS | Mara (GEN-17) |
 | Veleno da T sul bersaglio | GEN-08, TOS-AR2, TOS-AR5, LR-TOS | — (Celestina) |
-| −A sul bersaglio | MAR-AR3, GEN-09, CES-AR1/4/6, PIN-AR5 | Mara |
+| −A sul bersaglio | MAR-AR3, GEN-09, GEN-19, CES-AR1/4/6, PIN-AR5 | Mara |
 | Ricerca esatta e caricamento visibile | SPA-AR3, MAR-AR5, TOS-AR1, PIN-AR4, GIG-AR3 | entrambi |
 | Svuotare il bersaglio | GEN-07, GEN-22 | Spazienzio (GEN-07) |
 | −V sul bersaglio | GEN-23 | — |
-| Cure | GEN-13, OGG-07, GEN-16, TOS-AR3, ~~ROC-AR6~~, OGG-14, ROC-BA, ROC-AR2, ROC-AR5 (SB-18) | Mara (OGG-07) |
+| Cure | GEN-13, OGG-07, GEN-16, GEN-20, TOS-AR3, ~~ROC-AR6~~, OGG-14, ROC-BA, ROC-AR2, ROC-AR5 (SB-18) | Mara (OGG-07) |
 | Pulizia propria | GEN-15, OGG-08, OGG-14 | — |
 | Stati INPUT, durata 0 e oltre | SPA-AR3/4, MAR-AR4, GEN-13, GEN-11… | entrambi |
 | Stati OUTPUT ed equip da oggetti | OGG-09/10/11/13, GEN-21, token | entrambi (OGG-10, OGG-13) |

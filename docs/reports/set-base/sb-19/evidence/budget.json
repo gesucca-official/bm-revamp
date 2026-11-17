@@ -1,0 +1,90 @@
+{
+ "budgetSeconds": {
+  "roundAndIsolations": 1200,
+  "search": 1200,
+  "total": 2400
+ },
+ "usedSeconds": {
+  "roundAndIsolations": 1050.0,
+  "search": 847.1,
+  "step0": 28.6
+ },
+ "runs": {
+  "feasibility-a1": {
+   "wallSeconds": 18.5468941,
+   "exit": 0,
+   "rows": "prova-b1-spazienzio,prova-b1-mara,prova-b1-celestina,prova-b1-piera,prova-b1-beppe,prova-b1-sergio,prova-b1-duccio,prova-b1-equip,prova-b1-estasi",
+   "gamesPerCell": 4
+  },
+  "feasibility-a2": {
+   "wallSeconds": 12.0678026,
+   "exit": 0,
+   "rows": "prova-b1-mara,prova-b1-celestina,prova-b1-duccio,iso-mara-fiato,iso-celestina-fiato",
+   "gamesPerCell": 4
+  },
+  "feasibility-iso": {
+   "wallSeconds": 18.4046864,
+   "exit": 0,
+   "rows": "iso-estasi-estasi,iso-estasi-grappa,iso-celestina-elemosina,iso-celestina-fiato,iso-mara-mano,iso-mara-elemosina,iso-mara-fiato,iso-beppe-colpo,iso-beppe-maleducazione,iso-beppe-coccio",
+   "gamesPerCell": 4
+  },
+  "feasibility-rif-new": {
+   "wallSeconds": 11.556130099999999,
+   "exit": 0,
+   "gamesPerCell": 4
+  },
+  "feasibility-rif-today": {
+   "wallSeconds": 11.686093,
+   "exit": 0,
+   "gamesPerCell": 4
+  },
+  "round-a1": {
+   "wallSeconds": 289.88772309999996,
+   "exit": 0,
+   "rows": "prova-b1-spazienzio,prova-b1-mara,prova-b1-celestina,prova-b1-piera,prova-b1-beppe,prova-b1-sergio,prova-b1-duccio,prova-b1-equip,prova-b1-estasi",
+   "gamesPerCell": 100
+  },
+  "round-a2": {
+   "wallSeconds": 152.7437492,
+   "exit": 0,
+   "rows": "prova-b1-mara,prova-b1-celestina,prova-b1-duccio,iso-mara-fiato,iso-celestina-fiato",
+   "gamesPerCell": 100
+  },
+  "round-iso": {
+   "wallSeconds": 303.6610568,
+   "exit": 0,
+   "rows": "iso-estasi-estasi,iso-estasi-grappa,iso-celestina-elemosina,iso-celestina-fiato,iso-mara-mano,iso-mara-elemosina,iso-mara-fiato,iso-beppe-colpo,iso-beppe-maleducazione,iso-beppe-coccio",
+   "gamesPerCell": 100
+  },
+  "round-rif-new": {
+   "wallSeconds": 121.14208889999999,
+   "exit": 0,
+   "gamesPerCell": 100
+  },
+  "round-rif-today": {
+   "wallSeconds": 110.3392835,
+   "exit": 0,
+   "gamesPerCell": 100
+  },
+  "search-prima1": {
+   "wallSeconds": 424.2383779,
+   "exit": 0,
+   "characters": "bruiser.character.BigBadBruiser,base.character.Mara,junkie.character.ToxicJunkie,base.character.Pino"
+  },
+  "search-prima2": {
+   "wallSeconds": 422.8245426,
+   "exit": 0,
+   "characters": "base.character.Gigi,base.character.Cesira,base.character.Rocco"
+  },
+  "step0-base": {
+   "wallSeconds": 10.681428499999999,
+   "exit": 0,
+   "gamesPerCell": 4
+  },
+  "step0-new": {
+   "wallSeconds": 17.870602599999998,
+   "exit": 0,
+   "gamesPerCell": 4
+  }
+ }
+}

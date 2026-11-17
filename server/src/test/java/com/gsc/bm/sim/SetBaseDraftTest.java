@@ -76,10 +76,12 @@ class SetBaseDraftTest {
         // starter.
         // SB-17 (D106): + Sergio and his test deck, which is not a starter.
         // SB-18 B2 (D126): + Duccio and his test deck, which is not a starter.
+        // SB-19 B1 (D129, D130): + the nine decks with the additions (prova-b1-*), which are not starters either.
         assertEquals(Set.of(SPAZIENZIO, MARA, TOSSICO, PINO, GIGI, Sb17.SERGIO, Sb18.DUCCIO), draft.characterIds());
         TreeSet<String> decks = new TreeSet<>(STARTERS);
         decks.add(Sb17.DECK);
         decks.add(Sb18.DECK);
+        decks.addAll(Sb19.DECKS);
         assertEquals(decks, new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
         for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
@@ -129,8 +131,9 @@ class SetBaseDraftTest {
         assertEquals(0L, report.boundViolations(), report.failures());
         // SB-17: Sergio and prova-sergio are in the bench too: 18 bounds, 21 pairs of decks among six.
         // SB-18 B2 (D126): + Duccio and prova-duccio: 21 bounds, 28 pairs of decks among seven.
+        // SB-19 B1 (D129, D130): + the nine decks with the additions: 136 pairs of decks among sixteen (the bounds do not change).
         assertEquals(21, report.bounds.size(), "le ventuno bound della bozza, comprese le terze (tre per personaggio)");
-        assertEquals(28L * 9 * 12, report.games(), "ventotto coppie di mazzi fra i cinque starter, prova-sergio e prova-duccio");
+        assertEquals(136L * 9 * 12, report.games(), "centotrentasei coppie di mazzi fra i cinque starter, prova-sergio, prova-duccio e i nove mazzi con le aggiunte di SB-19");
         assertTrue(report.checks.seatTurns > report.games() * 2, "i turni sono controllati");
     }
 
@@ -140,7 +143,7 @@ class SetBaseDraftTest {
         Map<String, BotPolicy> styles = PlaygroundTest.styles();
         Bench.Report report = Bench.run(draft, new Bench.Settings(2, 7_300_000L, new ArrayList<>(draft.deckIds()), styles, 2,
                 BoundCap.Params.DEFAULT, null));
-        assertEquals(28L * styles.size() * styles.size() * 2, report.games(), "ventotto coppie di mazzi fra i cinque starter, prova-sergio (SB-17) e prova-duccio (SB-18)");
+        assertEquals(136L * styles.size() * styles.size() * 2, report.games(), "centotrentasei coppie di mazzi fra i cinque starter, prova-sergio (SB-17), prova-duccio (SB-18) e i nove mazzi con le aggiunte (SB-19)");
         assertEquals(0L, report.checks.total(), report.failures());
         for (Bench.Cell cell : report.cells) assertEquals(0L, cell.tally.limits, cell.deckA + " contro " + cell.deckB);
     }
@@ -197,7 +200,8 @@ class SetBaseDraftTest {
         // SB-17: + the two states of «Fare il vago» (CES-AR5, in questo turno); SB-17 B2 (D110): CES-AR5 is «Lo sanno tutti», no states.
         // SB-17 B4 (D118): + the two states of «Fare il vago», now the bound CES-BO3 (in questo turno): 12 → 14.
         // SB-18 B2 (D126): + the states of Incassare (ROC-AR2) and E allora? (ROC-AR3), both «in questo turno»: 14 → 16.
-        assertEquals(16, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
+        // SB-19 B1 (D129): + the state of Non sento niente (GEN-11, in questo turno) and the two of Secondo fiato (GEN-20, per 2 turni): 16 → 19.
+        assertEquals(19, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
@@ -629,9 +633,10 @@ class SetBaseDraftTest {
             // SB-16i (D97): + GEN-15 e OGG-14, NC nella griglia, ora negli starter.
             // SB-17 (D106, D107): + Sergio (PG-CES, CES-*) and GEN-03, GEN-09, GEN-22, GEN-23, OGG-15 of his test deck.
             // SB-18 B2 (D126, D124 (6)): + Duccio (PG-ROC, ROC-*, LR-ROC), 2 C / 3 NC / 1 R and the basic, bounds and last resort.
-            "COMMON", Set.of("ROC-AR1", "ROC-AR2", "CES-AR5", "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
-            "UNCOMMON", Set.of("ROC-AR3", "ROC-AR4", "ROC-AR5", "ROC-BO1", "ROC-BO2", "ROC-BO3", "CES-AR1", "CES-AR2", "CES-AR3", "CES-AR4", "CES-AR7", "CES-BO1", "CES-BO2", "CES-BO3", "GEN-03", "GEN-09", "GEN-22", "GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
-            "RARE", Set.of("PG-ROC", "ROC-BA", "ROC-AR6", "LR-ROC", "PG-CES", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
+            // SB-19 B1 (D129, D130): + the nine slots that were missing: GEN-08 and GEN-19 C; GEN-10, GEN-11 and OGG-08 NC; GEN-04, GEN-20, GEN-21 and OGG-16 R.
+            "COMMON", Set.of("GEN-08", "GEN-19", "ROC-AR1", "ROC-AR2", "CES-AR5", "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
+            "UNCOMMON", Set.of("GEN-10", "GEN-11", "OGG-08", "ROC-AR3", "ROC-AR4", "ROC-AR5", "ROC-BO1", "ROC-BO2", "ROC-BO3", "CES-AR1", "CES-AR2", "CES-AR3", "CES-AR4", "CES-AR7", "CES-BO1", "CES-BO2", "CES-BO3", "GEN-03", "GEN-09", "GEN-22", "GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
+            "RARE", Set.of("GEN-04", "GEN-20", "GEN-21", "OGG-16", "PG-ROC", "ROC-BA", "ROC-AR6", "LR-ROC", "PG-CES", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
 
     private static String gridRarity(String slot) {
         List<String> found = new ArrayList<>();
@@ -670,7 +675,7 @@ class SetBaseDraftTest {
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
         }
-        assertEquals(Map.of("COMMON", 40, "RARE", 13, "UNCOMMON", 52), counts, "le 105 carte della bozza, D79, SB-16i (D97), SB-17 (16 nuove, D121: Lo metto in conto e Lo rivendo) e SB-18 (11 di Duccio, D126)");
+        assertEquals(Map.of("COMMON", 42, "RARE", 17, "UNCOMMON", 55), counts, "le 114 carte della bozza, D79, SB-16i (D97), SB-17 (16 nuove, D121: Lo metto in conto e Lo rivendo), SB-18 (11 di Duccio, D126) e SB-19 B1 (9 carte: 2 C, 3 NC, 4 R, D129)");
         for (String deck : STARTERS) {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");

@@ -647,7 +647,16 @@
     {"binding": "base.rocco.EAllora", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"HEALTH": 10}, "self": [{"op": "status", "name": "E ALLORA - HIT", "description": "Hit Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "say", "text": "Gained status: E ALLORA"}], "target": [{"op": "damage", "type": "HIT", "amount": 8}], "gui": {"name": "E allora?", "description": "ROC-AR3 · 10 HEALTH: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio.", "role": "COUNTER", "gains": "—", "damage": "HIT", "damageAmount": "HIT 8"}},
     {"binding": "base.rocco.Capocciata", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 28}, "target": [{"op": "damage", "type": "HIT", "amount": 26}], "gui": {"name": "Capocciata", "description": "ROC-AR4 · 28 HEALTH: 26 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 26"}},
     {"binding": "base.rocco.TeLoSpiegoIo", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "self": [{"op": "search", "cards": ["base.rocco.Capocciata", "base.rocco.TestaDura"], "vulnerability": {"factor": 1.5}, "foundGains": {"HEALTH": 6}, "missedGains": {"HEALTH": 2}}], "target": [{"op": "damage", "type": "HIT", "amount": 4}], "gui": {"name": "Te lo spiego io", "description": "ROC-AR5 · Caricamento: 4 HIT al bersaglio. Annuncia Capocciata o Testa dura. Se lo trovi: +6 HEALTH. Se non lo trovi: +2 HEALTH.", "role": "DISRUPT", "gains": "+6 HEALTH", "damage": "HIT", "damageAmount": "HIT 4"}},
-    {"binding": "base.rocco.TestaDura", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 33}, "target": [{"op": "damage", "type": "HIT", "amount": 30}], "gui": {"name": "Testa dura", "description": "ROC-AR6 · 33 HEALTH: 30 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}}
+    {"binding": "base.rocco.TestaDura", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 33}, "target": [{"op": "damage", "type": "HIT", "amount": 30}], "gui": {"name": "Testa dura", "description": "ROC-AR6 · 33 HEALTH: 30 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}},
+    {"binding": "base.com.BeggingMoney", "rarity": "RARE", "java": true, "cost": {"ALERTNESS": 10}, "priority": 0, "params": {"alertnessFromTarget": 0}, "gui": {"name": "Elemosina molesta", "description": "GEN-04 · 10 A: copia vicino a te un oggetto casuale del bersaglio.", "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "bruiser.SickeningBlow", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 15}, "target": [{"op": "damage", "type": "HIT", "amount": 10}, {"op": "gain", "resource": "TOXICITY", "amount": 10}], "gui": {"name": "Colpo allo stomaco", "description": "GEN-08 · 15 V: 10 HIT e +10 T al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 10"}},
+    {"binding": "bruiser.BadEducation", "rarity": "UNCOMMON", "java": true, "cost": {"VIOLENCE": 5}, "priority": 1, "params": {"hitDamage": 8}, "gui": {"name": "Maleducazione", "description": "GEN-10 · 5 V: toglie gli equip al bersaglio; 8 HIT al bersaglio.", "role": "OTHER", "gains": "—", "damage": "HIT", "damageAmount": "HIT 8"}},
+    {"binding": "bruiser.CantFeelAnything", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"], "cost": {"VIOLENCE": 10}, "self": [{"op": "status", "name": "NON SENTO NIENTE", "description": "Hit Damage taken: x0.35", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.35, "turns": 0}, {"op": "say", "text": "Gained status: NON SENTO NIENTE"}, {"op": "gain", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Non sento niente", "description": "GEN-11 · 10 V: HIT ricevuto ×0,35 in questo turno. +5 A a sé.", "role": "DEFENSE", "gains": "+5 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.ManoLesta", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 5}], "target": [{"op": "lose", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Mano lesta", "description": "GEN-19 · −5 A al bersaglio; +5 A a sé.", "role": "DISRUPT", "gains": "+5 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.SecondoFiato", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["SELF"], "self": [{"op": "status", "name": "SECONDO FIATO - HIT", "description": "Hit Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "HIT", "factor": 1.25, "turns": 1}, {"op": "status", "name": "SECONDO FIATO - CUT", "description": "Cut Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "CUT", "factor": 1.25, "turns": 1}, {"op": "say", "text": "Gained status: SECONDO FIATO"}, {"op": "gain", "resource": "HEALTH", "amount": 12}], "gui": {"name": "Secondo fiato", "description": "GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni.", "role": "RESOURCES", "gains": "+12 H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.CoccioDiBottiglia", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["SELF"], "cost": {"VIOLENCE": 5}, "self": [{"op": "status", "name": "COCCIO DI BOTTIGLIA", "description": "Hit Damage dealt x1.5 and turned to Cut Damage", "statusType": "GOOD", "flow": "OUTPUT", "property": "HIT", "factor": 1.5, "equip": true, "singleUse": true, "convertTo": "CUT"}, {"op": "say", "text": "Equipped status: COCCIO DI BOTTIGLIA"}], "gui": {"name": "Coccio di bottiglia", "description": "GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.MezzaMineraleSgasata", "rarity": "UNCOMMON", "kind": "ITEM", "self": [{"op": "empty", "resource": "ALCOHOL"}, {"op": "gain", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Mezza minerale sgasata", "description": "OGG-08 · Consumato: azzera la tua L; +5 A.", "role": "OTHER", "gains": "+5 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.GrappaDellaCasa", "rarity": "RARE", "kind": "ITEM", "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 25}, {"op": "lose", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Grappa della casa", "description": "OGG-16 · Consumato: +25 L, −5 A.", "role": "RESOURCES", "gains": "+25 L", "damage": "—", "damageAmount": "—"}}
   ],
   "decks": [
     {
@@ -816,6 +825,215 @@
         "base.com.FasciaturaColFazzolettaccio": 1,
         "base.items.PaninoDelKebab": 2,
         "base.items.GhiaccioNelTovagliolo": 1
+      }
+    },
+    {
+      "id": "prova-b1-spazienzio",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "base.com.DentiStretti": 1,
+        "com.items.CocktailOnTheGround": 2,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1,
+        "bruiser.CantFeelAnything": 2,
+        "bruiser.SickeningBlow": 2,
+        "base.com.CoccioDiBottiglia": 2
+      }
+    },
+    {
+      "id": "prova-b1-mara",
+      "character": "base.character.Mara",
+      "bound": [
+        "base.mara.bound.PassoStretto",
+        "base.mara.bound.CambioMarcia"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.mara.CinghiataDiTraverso": 1,
+        "base.mara.Sgommata": 2,
+        "base.mara.SorpassoInCurva": 2,
+        "base.mara.TraDueParaurti": 2,
+        "base.mara.Slalom": 2,
+        "base.com.SputoDaPosacenere": 1,
+        "base.items.EspressoDelDistributore": 2,
+        "base.mara.TiStringoLaCurva": 1,
+        "base.items.GhiaccioNelTovagliolo": 1,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2,
+        "base.com.SecondoFiato": 2
+      }
+    },
+    {
+      "id": "prova-b1-celestina",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 1,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "base.items.PasticcaTrovataSulBancone": 2,
+        "base.items.PaninoDelKebab": 1,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.com.BeggingMoney": 2,
+        "base.com.SecondoFiato": 2
+      }
+    },
+    {
+      "id": "prova-b1-piera",
+      "character": "base.character.Pino",
+      "bound": [
+        "base.pino.bound.CinqueMinutiEVado",
+        "base.pino.bound.SpallataAlBancone"
+      ],
+      "lastResort": "base.pino.UltimoGiro",
+      "cards": {
+        "base.pino.TestataDaUltimoGiro": 2,
+        "base.pino.GoingBerserk": 2,
+        "base.pino.IlBanconeRegge": 2,
+        "base.pino.OffroIo": 2,
+        "base.pino.RuttoADistanzaSociale": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 2,
+        "com.items.AnotherRottenBeer": 1,
+        "base.pino.PrimaIlBrindisi": 1,
+        "base.com.DueDitaInGola": 1,
+        "base.items.GrappaDellaCasa": 2,
+        "base.com.ManoLesta": 2,
+        "base.items.MezzaMineraleSgasata": 2
+      }
+    },
+    {
+      "id": "prova-b1-beppe",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.CascoDaLavoro": 1,
+        "base.items.EspressoDelDistributore": 1,
+        "base.gigi.UnaStrettaDiProva": 1,
+        "bruiser.SickeningBlow": 2,
+        "bruiser.BadEducation": 2,
+        "base.com.CoccioDiBottiglia": 2
+      }
+    },
+    {
+      "id": "prova-b1-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.items.EspressoDelDistributore": 2,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2
+      }
+    },
+    {
+      "id": "prova-b1-duccio",
+      "character": "base.character.Rocco",
+      "bound": [
+        "base.rocco.bound.Colpetto",
+        "base.rocco.bound.AlzoLaVoce"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.rocco.TeLoSpiegoIo": 2,
+        "base.rocco.Capocciata": 2,
+        "base.rocco.TestaDura": 1,
+        "base.rocco.NoccheSbucciate": 2,
+        "base.rocco.Incassare": 2,
+        "base.rocco.EAllora": 2,
+        "base.com.SputoDaPosacenere": 2,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.com.SecondoFiato": 2,
+        "base.com.ManoLesta": 2,
+        "base.items.MezzaMineraleSgasata": 2
+      }
+    },
+    {
+      "id": "prova-b1-equip",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "bruiser.SeagullFly": 1,
+        "base.com.Spintone": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.EspressoDelDistributore": 1,
+        "base.gigi.UnaStrettaDiProva": 1,
+        "base.com.CoccioDiBottiglia": 2,
+        "base.items.PosacenereDiVetro": 2,
+        "bruiser.BadEducation": 2
+      }
+    },
+    {
+      "id": "prova-b1-estasi",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "bruiser.SeagullFly": 1,
+        "base.com.Spintone": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.GiubbottoDiFintaPelle": 2,
+        "base.items.CascoDaLavoro": 2,
+        "base.com.DueDitaInGola": 1,
+        "base.pino.GoingBerserk": 2,
+        "base.items.GrappaDellaCasa": 2
       }
     }
   ]
