@@ -1,0 +1,822 @@
+{
+  "format": "sb-6b/1",
+  "set": {"id": "base", "name": "Set Base", "version": "bozza"},
+  "rules": {"deckSize": 20, "maxCopies": 2, "basicFixedPerCharacter": true, "boundChoices": 2, "lastResortRequired": true, "searchShuffle": true},
+  "characters": [
+    {"id": "bruiser.character.BigBadBruiser", "rarity": "COMMON", "name": "Spazienzio de la Ucciso",
+     "resources": {"HEALTH": 75, "ALERTNESS": 20, "VIOLENCE": 25, "TOXICITY": 0, "ALCOHOL": 0},
+     "items": 1, "immunities": [], "basic": "com.basic.BruiserGrab"},
+    {"id": "base.character.Mara", "rarity": "COMMON", "name": "Mara Contromano",
+     "resources": {"HEALTH": 70, "ALERTNESS": 40, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 0},
+     "items": 2, "immunities": [], "basic": "base.mara.PresoAlVolo"},
+    {"id": "junkie.character.ToxicJunkie", "rarity": "UNCOMMON", "name": "Celestina Bucatina",
+     "resources": {"HEALTH": 70, "ALERTNESS": 35, "VIOLENCE": 0, "TOXICITY": 15, "ALCOHOL": 0},
+     "items": 2, "immunities": ["TOXICITY"], "basic": "com.basic.ToxicGrab"},
+    {"id": "base.character.Pino", "rarity": "UNCOMMON", "name": "Piera Ultimo Giro",
+     "resources": {"HEALTH": 80, "ALERTNESS": 15, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 10},
+     "items": 2, "immunities": [], "basic": "base.pino.QuestoLoFiniscoIo"},
+    {"id": "base.character.Gigi", "rarity": "UNCOMMON", "name": "Beppe Bulletta",
+     "resources": {"HEALTH": 80, "ALERTNESS": 25, "VIOLENCE": 25, "TOXICITY": 0, "ALCOHOL": 0},
+     "items": 3, "immunities": [], "basic": "base.gigi.QuestoTornaUtile"},
+    {"id": "base.character.Cesira", "rarity": "RARE", "name": "Sergio Sommerso",
+     "resources": {"HEALTH": 85, "ALERTNESS": 30, "VIOLENCE": 10, "TOXICITY": 0, "ALCOHOL": 0},
+     "items": 2, "immunities": [], "basic": "base.cesira.LoMettoInConto"},
+    {"id": "base.character.Rocco", "rarity": "RARE", "name": "Duccio Braccio Teso",
+     "resources": {"HEALTH": 130, "ALERTNESS": 15, "VIOLENCE": 0, "TOXICITY": 0, "ALCOHOL": 0},
+     "items": 2, "immunities": [], "basic": "base.rocco.PrimaIo"}
+  ],
+  "cards": [
+    {"binding": "com.basic.BruiserGrab", "rarity": "COMMON", "kind": "ACTION", "basic": true, "priority": -1, "targets": ["NEAR_ITEM"],
+     "self": [{"op": "consume"}],
+     "gui": {"name": "ADOPERIAMOTI", "description": "SPA-BA · Basic: consuma un proprio oggetto, come Grab.",
+             "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.mara.PresoAlVolo", "rarity": "COMMON", "kind": "ACTION", "basic": true, "priority": 2, "targets": ["NEAR_ITEM"],
+     "self": [{"op": "lose", "resource": "ALERTNESS", "amount": 5}, {"op": "consume"}],
+     "gui": {"name": "Preso al volo", "description": "MAR-BA · Basic: −5 A a sé, poi consuma un proprio oggetto.",
+             "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "bruiser.character.LittleRage", "rarity": "COMMON", "kind": "BOUND", "boundTo": "bruiser.character.BigBadBruiser", "priority": 0,
+     "targets": ["SELF"], "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 5}],
+     "gui": {"name": "LIEVE FASTIDIO", "description": "SPA-BO1 · Bound: +5 V a sé.",
+             "role": "RESOURCES", "gains": "+5 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "bruiser.character.LittleSmack", "rarity": "COMMON", "kind": "BOUND", "boundTo": "bruiser.character.BigBadBruiser", "priority": 1,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 3}],
+     "gui": {"name": "SVEGLIAMOCI MA TU NO", "description": "SPA-BO2 · Bound: 3 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.spazienzio.bound.TestaAlMuro", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "bruiser.character.BigBadBruiser", "priority": 0,
+     "targets": ["SELF"],
+     "self": [{"op": "damage", "type": "HIT", "amount": 3}, {"op": "gain", "resource": "VIOLENCE", "amount": 8}],
+     "gui": {"name": "TESTA AL MURO", "description": "SPA-BO3 · Bound: 3 HIT a sé, poi +8 V a sé.",
+             "role": "RESOURCES", "gains": "+8 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.mara.bound.PassoStretto", "rarity": "COMMON", "kind": "BOUND", "boundTo": "base.character.Mara", "priority": 1,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "CUT", "amount": 3}],
+     "gui": {"name": "Passo stretto", "description": "MAR-BO1 · Bound: 3 CUT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 3"}},
+    {"binding": "base.mara.bound.CambioMarcia", "rarity": "COMMON", "kind": "BOUND", "boundTo": "base.character.Mara", "priority": 0,
+     "targets": ["SELF"], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 6}],
+     "gui": {"name": "Cambio marcia", "description": "MAR-BO2 · Bound: +6 A a sé.",
+             "role": "RESOURCES", "gains": "+6 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.mara.bound.ColpoDiStriscio", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Mara", "priority": 2,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "CUT", "amount": 2}],
+     "gui": {"name": "Colpo di striscio", "description": "MAR-BO3 · Bound: 2 CUT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 2"}},
+
+    {"binding": "com.last.Struggle", "rarity": "COMMON", "kind": "ACTION", "lastResort": true, "priority": 1, "targets": ["OPPONENT"],
+     "self": [{"op": "damage", "type": "HIT", "amount": {"base": 5, "perPlay": 2}}], "target": [{"op": "damage", "type": "HIT", "amount": {"base": 10, "perPlay": 5}}],
+     "gui": {"name": "Last Resort: Banzai!!!", "description": "LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé).",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 10"}},
+
+    {"binding": "bruiser.SuperImpact", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 25}, "target": [{"op": "damage", "type": "HIT", "amount": 34}], "gui": {"name": "GARGANTUESCO IMPATTO SUL TU", "description": "SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 34"}},
+
+    {"binding": "bruiser.ExtremelyViolentBlow", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 10},
+     "target": [{"op": "damage", "type": "HIT", "amount": {"base": 6, "of": "VIOLENCE", "divide": 2}}],
+     "gui": {"name": "SPEDIAMOTI DUNQUE IN O-AHIO", "description": "SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 6+x"}},
+    {
+      "binding": "bruiser.Glare",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 0,
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "search",
+          "cards": ["bruiser.SuperImpact", "bruiser.ExtremelyViolentBlow"],
+          "vulnerability": {
+            "factor": 1.5
+          },
+          "foundGains": {
+            "VIOLENCE": 25,
+            "ALERTNESS": 15
+          },
+          "missedGains": {
+            "VIOLENCE": 5,
+            "ALERTNESS": 5
+          }
+        }
+      ],
+      "gui": {
+        "name": "PAZIENZA: FINITA",
+        "description": "SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A.",
+        "role": "RESOURCES",
+        "gains": "+25 V, +15 A",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+
+    {"binding": "bruiser.MadeOfStone", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["SELF"],
+     "self": [{"op": "status", "name": "MADE OF STONE", "description": "Cut Damage Taken: x0.5", "statusType": "GOOD",
+               "flow": "INPUT", "property": "CUT", "factor": 0.5, "turns": 3},
+              {"op": "say", "text": "Gained Status: MADE OF STONE"},
+              {"op": "gain", "resource": "VIOLENCE", "amount": 10}],
+     "gui": {"name": "NON GIOCARE COL COLTELLO NO", "description": "SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V.",
+             "role": "DEFENSE", "gains": "+10 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "bruiser.YouStop", "rarity": "UNCOMMON", "java": true, "cost": {"VIOLENCE": 5}, "priority": 2, "params": {"alertnessToTarget": 0},
+     "gui": {"name": "FAI BASTA", "description": "SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio.",
+             "role": "COUNTER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "base.mara.CinghiataDiTraverso", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 20}, "target": [{"op": "damage", "type": "CUT", "amount": {"base": 18, "of": "ALERTNESS", "divide": 2}}, {"op": "anticipo", "steps": [{"op": "damage", "type": "CUT", "amount": 5}]}], "gui": {"name": "Cinghiata di traverso", "description": "MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +5 CUT.", "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 18+x"}},
+
+    {
+      "binding": "base.mara.Sgommata",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 1,
+      "targets": [
+        "OPPONENT"
+      ],
+      "cost": {
+        "ALERTNESS": 15
+      },
+      "target": [
+        {
+          "op": "damage",
+          "type": "CUT",
+          "amount": 25
+        },
+        {"op": "anticipo", "steps": [{"op": "status", "name": "SGOMMATA - HIT", "description": "Hit Damage dealt: x0.8", "statusType": "BAD", "flow": "OUTPUT", "property": "HIT", "factor": 0.8, "turns": 0}, {"op": "status", "name": "SGOMMATA - CUT", "description": "Cut Damage dealt: x0.8", "statusType": "BAD", "flow": "OUTPUT", "property": "CUT", "factor": 0.8, "turns": 0}, {"op": "status", "name": "SGOMMATA - POISON", "description": "Poison Damage dealt: x0.8", "statusType": "BAD", "flow": "OUTPUT", "property": "POISON", "factor": 0.8, "turns": 0}]}
+      ],
+      "gui": {
+        "name": "Sgommata",
+        "description": "MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,8.",
+        "role": "DAMAGE",
+        "gains": "—",
+        "damage": "CUT",
+        "damageAmount": "CUT 25"
+      }
+    },
+
+    {"binding": "base.mara.SorpassoInCurva", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"],
+     "self": [{"op": "anticipo", "steps": [{"op": "gain", "resource": "ALERTNESS", "amount": 4}]}],
+     "target": [{"op": "lose", "resource": "ALERTNESS", "amount": 8}, {"op": "damage", "type": "CUT", "amount": 3}],
+     "gui": {"name": "Sorpasso in curva", "description": "MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +4 A a sé.",
+             "role": "DISRUPT", "gains": "—", "damage": "CUT", "damageAmount": "CUT 3"}},
+    {
+      "binding": "base.mara.TraDueParaurti",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 2,
+      "targets": [
+        "SELF"
+      ],
+      "cost": {
+        "ALERTNESS": 5
+      },
+      "self": [
+        {
+          "op": "status",
+          "name": "TRA DUE PARAURTI - HIT",
+          "description": "Hit Damage taken: x0.4",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "HIT",
+          "factor": 0.4,
+          "turns": 0
+        },
+        {
+          "op": "status",
+          "name": "TRA DUE PARAURTI - CUT",
+          "description": "Cut Damage taken: x0.4",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "CUT",
+          "factor": 0.4,
+          "turns": 0
+        },
+        {
+          "op": "say",
+          "text": "Gained status: TRA DUE PARAURTI"
+        },
+        {
+          "op": "gain",
+          "resource": "ALERTNESS",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "Tra due paraurti",
+        "description": "MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,4 in questo turno. +5 A a sé.",
+        "role": "DEFENSE",
+        "gains": "+5 A",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {
+      "binding": "base.mara.Slalom",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 2,
+      "targets": [
+        "SELF"
+      ],
+      "gui": {
+        "name": "Slalom d'avvicinamento",
+        "description": "MAR-AR5 · Annuncia Sgommata o Cinghiata di traverso. Se lo trovi: +15 A. Se non lo trovi: +5 A.",
+        "role": "RESOURCES",
+        "gains": "+15 A",
+        "damage": "—",
+        "damageAmount": "—"
+      },
+      "self": [
+        {
+          "op": "search",
+          "cards": ["base.mara.Sgommata", "base.mara.CinghiataDiTraverso"],
+          "vulnerability": {
+            "factor": 1.5
+          },
+          "foundGains": {
+            "ALERTNESS": 15
+          },
+          "missedGains": {
+            "ALERTNESS": 5
+          }
+        }
+      ]
+    },
+
+    {"binding": "com.Steal", "rarity": "COMMON", "java": true, "cost": {"ALERTNESS": 10}, "priority": 0, "params": {},
+     "gui": {"name": "Steal", "description": "GEN-02 · 10 A: ruba un oggetto lontano e lo mette vicino a sé.",
+             "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "bruiser.SeagullFly", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 10},
+     "target": [{"op": "damage", "type": "HIT", "amount": 18, "applying": ["GOOD"]}],
+     "gui": {"name": "GABBIANO DUNQUE VOLIAMOTI", "description": "GEN-05 · 10 V: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 18"}},
+    {"binding": "base.com.MattoneDelCantiere", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 15},
+     "target": [{"op": "damage", "type": "HIT", "amount": 24}],
+     "gui": {"name": "Mattone del cantiere", "description": "GEN-06 · 15 V: 24 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 24"}},
+    {"binding": "bruiser.HealingBlow", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 20},
+     "target": [{"op": "damage", "type": "HIT", "amount": 30}, {"op": "empty", "resource": "TOXICITY"}, {"op": "empty", "resource": "ALCOHOL"}],
+     "gui": {"name": "ORMALE GUARIAMOTI", "description": "GEN-07 · 20 V: 30 HIT al bersaglio; azzera T e L del bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}},
+    {
+      "binding": "base.com.TartarugaSulMarciapiede",
+      "rarity": "COMMON",
+      "kind": "ACTION",
+      "priority": 2,
+      "targets": [
+        "SELF"
+      ],
+      "cost": {
+        "ALERTNESS": 5
+      },
+      "self": [
+        {
+          "op": "status",
+          "name": "TARTARUGA - HIT",
+          "description": "Hit Damage taken: x0.6",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "HIT",
+          "factor": 0.6,
+          "turns": 0
+        },
+        {
+          "op": "status",
+          "name": "TARTARUGA - CUT",
+          "description": "Cut Damage taken: x0.6",
+          "statusType": "GOOD",
+          "flow": "INPUT",
+          "property": "CUT",
+          "factor": 0.6,
+          "turns": 0
+        },
+        {
+          "op": "say",
+          "text": "Gained status: TARTARUGA"
+        },
+        {
+          "op": "gain",
+          "resource": "HEALTH",
+          "amount": 3
+        }
+      ],
+      "gui": {
+        "name": "Tartaruga sul marciapiede",
+        "description": "GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé.",
+        "role": "DEFENSE",
+        "gains": "+3 H",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {"binding": "base.com.DentiStretti", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["SELF"],
+     "self": [{"op": "lose", "resource": "ALERTNESS", "amount": 5}, {"op": "gain", "resource": "VIOLENCE", "amount": 10}],
+     "gui": {"name": "Denti stretti", "description": "GEN-14 · −5 A a sé; +10 V a sé.",
+             "role": "RESOURCES", "gains": "+10 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.SputoDaPosacenere", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 5},
+     "target": [{"op": "damage", "type": "POISON", "amount": 12}],
+     "gui": {"name": "Sputo da posacenere", "description": "GEN-17 · 5 A: 12 POISON al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "POISON", "damageAmount": "POISON 12"}},
+    {"binding": "base.com.Spintone", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"],
+     "target": [{"op": "damage", "type": "HIT", "amount": 7}],
+     "gui": {"name": "Spintone", "description": "GEN-18 · 7 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 7"}},
+
+    {"binding": "com.items.CocktailOnTheGround", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 12}, {"op": "gain", "resource": "ALCOHOL", "amount": 10},
+              {"op": "gain", "resource": "TOXICITY", "amount": 3}],
+     "gui": {"name": "Negroni Trovato per Terra", "description": "OGG-01 · Consumato: +12 V, +10 L, +3 T.",
+             "role": "RESOURCES", "gains": "+12 V, +10 L, +3 T", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.PosacenereDiVetro", "rarity": "UNCOMMON", "kind": "ITEM",
+     "self": [{"op": "status", "name": "POSACENERE", "description": "Next Hit Damage dealt: x1.5", "statusType": "GOOD",
+               "flow": "OUTPUT", "property": "HIT", "factor": 1.5, "equip": true, "singleUse": true},
+              {"op": "say", "text": "Equipped status: POSACENERE"}],
+     "gui": {"name": "Posacenere di vetro", "description": "OGG-13 · Consumato: equip, il prossimo HIT inflitto ×1,5, uso singolo.",
+             "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.EspressoDelDistributore", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 15}],
+     "gui": {"name": "Espresso del distributore", "description": "OGG-06 · Consumato: +15 A.",
+             "role": "RESOURCES", "gains": "+15 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.GhiaccioNelTovagliolo", "rarity": "UNCOMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "HEALTH", "amount": 10}, {"op": "empty", "resource": "TOXICITY"}],
+     "gui": {"name": "Ghiaccio nel tovagliolo", "description": "OGG-14 · Consumato: +10 HEALTH; azzera la tua T.",
+             "role": "RESOURCES", "gains": "+10 H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.DueDitaInGola", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["SELF"],
+     "self": [{"op": "damage", "type": "HIT", "amount": 5}, {"op": "empty", "resource": "TOXICITY"}, {"op": "empty", "resource": "ALCOHOL"}],
+     "gui": {"name": "Due dita in gola", "description": "GEN-15 · 5 HIT a sé; azzera la tua T e la tua L.",
+             "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.PaninoDelKebab", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "HEALTH", "amount": 12}, {"op": "gain", "resource": "TOXICITY", "amount": 3}],
+     "gui": {"name": "Panino del kebab dimenticato", "description": "OGG-07 · Consumato: +12 HEALTH, +3 T.",
+             "role": "RESOURCES", "gains": "+12 H, +3 T", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.GiubbottoDiFintaPelle", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "status", "name": "FINTA PELLE", "description": "Cut Damage taken: x0.75", "statusType": "GOOD",
+               "flow": "INPUT", "property": "CUT", "factor": 0.75, "equip": true, "turns": 2},
+              {"op": "say", "text": "Equipped status: FINTA PELLE"}],
+     "gui": {"name": "Giubbotto di finta pelle", "description": "OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni (questo e i due successivi).",
+             "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "com.basic.ToxicGrab", "rarity": "UNCOMMON", "kind": "ACTION", "basic": true, "priority": 1, "targets": ["NEAR_ITEM"],
+     "self": [{"op": "gain", "resource": "TOXICITY", "amount": 5}, {"op": "consume"}],
+     "gui": {"name": "Desiderio Incontrollabile", "description": "TOS-BA · Basic: +5 T a sé, poi consuma un proprio oggetto. Tutto è droga.",
+             "role": "ITEMS", "gains": "+5 T", "damage": "—", "damageAmount": "—"}},
+    {"binding": "junkie.character.PatheticBlade", "rarity": "COMMON", "kind": "BOUND", "boundTo": "junkie.character.ToxicJunkie", "priority": 1,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "CUT", "amount": 3}],
+     "gui": {"name": "Ago Marcio e Spezzato", "description": "TOS-BO1 · Bound: 3 CUT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 3"}},
+    {"binding": "base.tossico.bound.RaschiareIlFondo", "rarity": "COMMON", "kind": "BOUND", "boundTo": "junkie.character.ToxicJunkie", "priority": 0,
+     "targets": ["SELF"], "self": [{"op": "gain", "resource": "TOXICITY", "amount": 7}],
+     "gui": {"name": "Raschiare il fondo", "description": "TOS-BO2 · Bound: +7 T a sé.",
+             "role": "RESOURCES", "gains": "+7 T", "damage": "—", "damageAmount": "—"}},
+    {"binding": "junkie.character.RottenSmile", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "junkie.character.ToxicJunkie", "priority": 2,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "POISON", "amount": 2}],
+     "gui": {"name": "Ghigno co' i' Denti Marci", "description": "TOS-BO3 · Bound: 2 POISON al bersaglio (alito marcio).",
+             "role": "DAMAGE", "gains": "—", "damage": "POISON", "damageAmount": "POISON 2"}},
+    {"binding": "junkie.LethalHeroinDose", "rarity": "UNCOMMON", "kind": "ACTION", "lastResort": true, "exclusiveTo": "junkie.character.ToxicJunkie",
+     "priority": 1, "targets": ["OPPONENT"],
+     "self": [{"op": "damage", "type": "HIT", "amount": {"base": 2, "perPlay": 1}}],
+     "target": [{"op": "damage", "type": "POISON", "amount": {"base": 7, "perPlay": 5}}, {"op": "gain", "resource": "TOXICITY", "amount": 4}],
+     "gui": {"name": "L'ultima dose", "description": "LR-TOS · Last resort di Celestina: 2 HIT a sé; 7 POISON e +4 T al bersaglio. Rincara 5 (1 a sé).",
+             "role": "DAMAGE", "gains": "—", "damage": "POISON", "damageAmount": "POISON 7"}},
+
+    {"binding": "junkie.MethDrivenRage", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["SELF"], "self": [{"op": "search", "cards": ["junkie.Cough", "junkie.ToxicBloodDrain"], "vulnerability": {"factor": 1.5}, "foundGains": {"TOXICITY": 10, "ALERTNESS": 5}, "missedGains": {"TOXICITY": 5}}], "gui": {"name": "Dose in preparazione", "description": "TOS-AR1 · Annuncia Tossicone Scatarrante o C'è del sangue nella mia droga. Se lo trovi: +10 T, +5 A. Se non lo trovi: +5 T.", "role": "RESOURCES", "gains": "+10 T, +5 A", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "junkie.Cough", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"TOXICITY": 10}, "target": [{"op": "damage", "type": "POISON", "amount": 18}, {"op": "gain", "resource": "TOXICITY", "amount": 5}], "gui": {"name": "Tossicone Scatarrante", "description": "TOS-AR2 · 10 T: Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T.", "role": "DAMAGE", "gains": "—", "damage": "POISON", "damageAmount": "POISON 18"}},
+
+    {"binding": "junkie.PervertedMetabolism", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["SELF"],
+     "self": [{"op": "gain", "resource": "HEALTH", "amount": {"base": 0, "of": "TOXICITY", "divide": 2}},
+              {"op": "lose", "resource": "TOXICITY", "amount": {"base": 0, "of": "TOXICITY", "divide": 1}}],
+     "gui": {"name": "Metabolismo Corrotto", "description": "TOS-AR3 · Guadagna HEALTH pari a T / 2, poi perde tutta la T.",
+             "role": "RESOURCES", "gains": "+x H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "junkie.AmphetamineReflexes", "rarity": "UNCOMMON", "java": true, "cost": {"TOXICITY": 10}, "priority": 2, "params": {},
+     "gui": {"name": "Riflessi Aumentati dalla Speed", "description": "TOS-AR4 · 10 T: annulla le mosse dirette a sé che arrivano dopo.",
+             "role": "COUNTER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "junkie.ToxicBloodDrain", "rarity": "RARE", "java": true, "cost": {"TOXICITY": 10}, "priority": 1, "params": {"turns": 1, "poison": 12}, "gui": {"name": "C'è del sangue nella mia droga", "description": "TOS-AR5 · 10 T: Trasferisci tutta la tua T residua al bersaglio e togligli l'immunità a T. Infliggi anche 12 danni da veleno. A fine turno ottieni l'immunità a T.", "role": "DISRUPT", "gains": "—", "damage": "POISON", "damageAmount": "POISON 12"}},
+
+    {"binding": "com.Grab", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["NEAR_ITEM"], "self": [{"op": "consume"}],
+     "gui": {"name": "Grab", "description": "GEN-01 · Consuma un proprio oggetto.",
+             "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.RincorsaDalMarciapiede", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 10},
+     "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 5}], "target": [{"op": "damage", "type": "HIT", "amount": 12}],
+     "gui": {"name": "Rincorsa dal marciapiede", "description": "GEN-12 · 10 A: +5 V a sé; 12 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "+5 V", "damage": "HIT", "damageAmount": "HIT 12"}},
+    {"binding": "base.com.FasciaturaColFazzolettaccio", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["SELF"],
+     "self": [{"op": "lose", "resource": "ALERTNESS", "amount": 5}, {"op": "gain", "resource": "HEALTH", "amount": 8}],
+     "gui": {"name": "Fasciatura col fazzolettaccio", "description": "GEN-16 · −5 A a sé; +8 HEALTH a sé.",
+             "role": "RESOURCES", "gains": "+8 H", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "base.items.PasticcaTrovataSulBancone", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "TOXICITY", "amount": 12}],
+     "gui": {"name": "Pasticca trovata sul bancone", "description": "OGG-12 · Consumato: +12 T.",
+             "role": "RESOURCES", "gains": "+12 T", "damage": "—", "damageAmount": "—"}},
+    {"binding": "com.items.MarvelousCocktail", "rarity": "RARE", "java": true, "params": {"alcohol": 20, "toxicity": 20, "turns": 5, "poison": 20},
+     "gui": {"name": "Mescolone Micidiale", "description": "OGG-04 · Consumato: immunità a T e L; +20 L, +20 T; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON.",
+             "role": "RESOURCES", "gains": "+20 L, +20 T", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "base.pino.QuestoLoFiniscoIo", "rarity": "UNCOMMON", "kind": "ACTION", "basic": true, "priority": 0, "targets": ["NEAR_ITEM"],
+     "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 5}, {"op": "consume"}],
+     "gui": {"name": "Questo lo finisco io", "description": "PIN-BA · Basic: +5 L a sé, poi consuma un proprio oggetto.",
+             "role": "ITEMS", "gains": "+5 L", "damage": "—", "damageAmount": "—"}},
+    {
+      "binding": "base.pino.bound.CinqueMinutiEVado",
+      "rarity": "COMMON",
+      "kind": "BOUND",
+      "boundTo": "base.character.Pino",
+      "priority": 0,
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "gain",
+          "resource": "ALCOHOL",
+          "amount": 5
+        }
+      ],
+      "gui": {
+        "name": "Cinque minuti e vado",
+        "description": "PIN-BO1 · Bound: +5 L a sé.",
+        "role": "RESOURCES",
+        "gains": "+5 L",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {"binding": "base.pino.bound.SpallataAlBancone", "rarity": "COMMON", "kind": "BOUND", "boundTo": "base.character.Pino", "priority": 1,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 3}],
+     "gui": {"name": "Spallata al bancone", "description": "PIN-BO2 · Bound: 3 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.pino.bound.Coccio", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Pino", "priority": 1,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "CUT", "amount": 2}],
+     "gui": {"name": "Coccio", "description": "PIN-BO3 · Bound: 2 CUT al bersaglio (il vetro taglia).",
+             "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 2"}},
+    {"binding": "base.pino.UltimoGiro", "rarity": "UNCOMMON", "java": true, "exclusiveTo": "base.character.Pino", "cost": {}, "priority": 1,
+     "params": {"base": 12, "selfHit": 2, "perPlay": 4, "perPlaySelf": 1},
+     "gui": {"name": "L'ultimo giro", "description": "LR-PIN · Last resort di Piera: 2 HIT a sé; HIT pari a 12 più la propria L residua al bersaglio, poi azzera la propria L. Rincara 4 (1 a sé).",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12+x"}},
+
+    {"binding": "base.pino.TestataDaUltimoGiro", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALCOHOL": 5},
+     "self": [{"op": "damage", "type": "HIT", "amount": 5}], "target": [{"op": "damage", "type": "HIT", "amount": 25}],
+     "gui": {"name": "Testata da ultimo giro", "description": "PIN-AR1 · 5 L: 5 HIT a sé; 25 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 25"}},
+    {"binding": "base.pino.GoingBerserk", "rarity": "UNCOMMON", "java": true, "cost": {}, "priority": 1, "params": {"base": 18, "selfHit": 0}, "gui": {"name": "Estasi da Coca Etilene", "description": "PIN-AR2 · Spendi tutta la tua L. Infliggi danni da colpo pari a 18 più la L spesa.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 18+x"}},
+
+    {"binding": "base.pino.IlBanconeRegge", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"],
+     "self": [{"op": "status", "name": "BANCONE - HIT", "description": "Hit Damage taken: x0.65", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.65, "turns": 0},
+              {"op": "status", "name": "BANCONE - POISON", "description": "Poison Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "POISON", "factor": 0.5, "turns": 0},
+              {"op": "say", "text": "Gained status: BANCONE"}, {"op": "gain", "resource": "ALCOHOL", "amount": 5}],
+     "gui": {"name": "Il bancone regge, io pure", "description": "PIN-AR3 · In questo turno moltiplica per 0,65 i danni da colpo e per 0,5 quelli da veleno che ricevi. Guadagni 5 L.",
+             "role": "DEFENSE", "gains": "+5 L", "damage": "—", "damageAmount": "—"}},
+    {
+      "binding": "base.pino.OffroIo",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 1,
+      "targets": [
+        "SELF"
+      ],
+      "gui": {
+        "name": "Un altro e arrivo",
+        "description": "PIN-AR4 · Annuncia Estasi da Coca Etilene o Rutto a distanza sociale. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A.",
+        "role": "RESOURCES",
+        "gains": "+15 L, +35 A",
+        "damage": "—",
+        "damageAmount": "—"
+      },
+      "self": [
+        {
+          "op": "search",
+          "cards": ["base.pino.GoingBerserk", "base.pino.RuttoADistanzaSociale"],
+          "vulnerability": {
+            "factor": 1.5
+          },
+          "foundGains": {
+            "ALCOHOL": 15,
+            "ALERTNESS": 35
+          },
+          "missedGains": {
+            "ALCOHOL": 5,
+            "ALERTNESS": 10
+          }
+        }
+      ]
+    },
+
+    {"binding": "base.pino.RuttoADistanzaSociale", "rarity": "RARE", "java": true, "cost": {"ALCOHOL": 5}, "priority": 1, "params": {"base": 14, "perAlcohol": 2}, "gui": {"name": "Rutto a distanza sociale", "description": "PIN-AR5 · 5 L: Spendi tutta la tua L residua. Il bersaglio perde A pari alla L spesa. Infliggi danni da colpo pari a 14 più il doppio della L spesa.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 14+x"}},
+
+    {"binding": "base.items.AmaroNelBicchiereDiPlastica", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 20}, {"op": "lose", "resource": "ALERTNESS", "amount": 5}],
+     "gui": {"name": "Amaro nel bicchiere di plastica", "description": "OGG-05 · Consumato: +20 L, −5 A.",
+             "role": "RESOURCES", "gains": "+20 L", "damage": "—", "damageAmount": "—"}},
+    {"binding": "com.items.RottenBeer", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 10}],
+     "gui": {"name": "Peroni da 66, calda", "description": "OGG-02 · Consumato: +10 L.",
+             "role": "RESOURCES", "gains": "+10 L", "damage": "—", "damageAmount": "—"}},
+    {"binding": "com.items.AnotherRottenBeer", "rarity": "UNCOMMON", "java": true, "params": {"alcohol": 10},
+     "gui": {"name": "Tennents Super", "description": "OGG-03 · Consumato: +10 L; crea il token BrokenBeerBottle vicino a sé.",
+             "role": "RESOURCES", "gains": "+10 L", "damage": "—", "damageAmount": "—"}},
+
+    {"binding": "base.gigi.QuestoTornaUtile", "rarity": "UNCOMMON", "kind": "ACTION", "basic": true, "priority": 0, "targets": ["NEAR_ITEM"],
+     "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 4}, {"op": "consume"}],
+     "gui": {"name": "Questo torna utile", "description": "GIG-BA · Basic: +4 V a sé, poi consuma un proprio oggetto.",
+             "role": "ITEMS", "gains": "+4 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.gigi.bound.UnaStrettaEPassa", "rarity": "COMMON", "kind": "BOUND", "boundTo": "base.character.Gigi", "priority": 0,
+     "targets": ["SELF"], "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 5}],
+     "gui": {"name": "Una stretta e passa", "description": "GIG-BO1 · Bound: +5 V a sé.",
+             "role": "RESOURCES", "gains": "+5 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.gigi.bound.ColpoDiCacciavite", "rarity": "COMMON", "kind": "BOUND", "boundTo": "base.character.Gigi", "priority": 1,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 3}],
+     "gui": {"name": "Colpo di cacciavite", "description": "GIG-BO2 · Bound: 3 HIT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.gigi.bound.Lima", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Gigi", "priority": 2,
+     "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "CUT", "amount": 2}],
+     "gui": {"name": "Lima", "description": "GIG-BO3 · Bound: 2 CUT al bersaglio.",
+             "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 2"}},
+
+    {"binding": "bruiser.BreakYourToy", "rarity": "UNCOMMON", "java": true, "cost": {"VIOLENCE": 5}, "priority": 1, "params": {},
+     "gui": {"name": "Smontiamo tutto", "description": "GIG-AR1 · 5 V: distrugge un oggetto lontano.",
+             "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.gigi.ChiaveDaTredici", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 10}, "target": [{"op": "damage", "type": "CUT", "amount": 18}], "gui": {"name": "Chiave da tredici", "description": "GIG-AR2 · 10 V: Infliggi 18 danni da taglio al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "CUT", "damageAmount": "CUT 18"}},
+
+    {"binding": "base.gigi.ColpoDiChiaveInglese", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "gui": {"name": "Preparo il lavoro", "description": "GIG-AR3 · Infliggi 4 danni da taglio al bersaglio. Annuncia Chiave da tredici o Lavoro fatto bene. Se lo trovi: +15 V. Se non lo trovi: +5 V.", "role": "RESOURCES", "gains": "+15 V", "damage": "CUT", "damageAmount": "CUT 4"}, "self": [{"op": "search", "cards": ["base.gigi.ChiaveDaTredici", "base.gigi.LavoroFattoBene"], "vulnerability": {"factor": 1.5}, "foundGains": {"VIOLENCE": 15}, "missedGains": {"VIOLENCE": 5}}], "target": [{"op": "damage", "type": "CUT", "amount": 4}]},
+
+    {"binding": "base.gigi.SottoIlCofano", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"], "cost": {"VIOLENCE": 5}, "self": [{"op": "status", "name": "SOTTO IL COFANO - HIT", "description": "Hit Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "status", "name": "SOTTO IL COFANO - CUT", "description": "Cut Damage taken: x0.75", "statusType": "GOOD", "flow": "INPUT", "property": "CUT", "factor": 0.75, "turns": 0}, {"op": "say", "text": "Gained status: SOTTO IL COFANO"}, {"op": "gain", "resource": "VIOLENCE", "amount": 5}, {"op": "gain", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Sotto il cofano", "description": "GIG-AR4 · 5 V: In questo turno moltiplica per 0,5 i danni da colpo e per 0,75 quelli da taglio che ricevi. Guadagni 5 V e 5 A.", "role": "DEFENSE", "gains": "+5 V, +5 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.gigi.LavoroFattoBene", "rarity": "RARE", "java": true, "cost": {"VIOLENCE": 10}, "priority": 1, "params": {"base": 14, "perItem": 4}, "gui": {"name": "Lavoro fatto bene", "description": "GIG-AR5 · 10 V: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 14+x"}},
+
+    {"binding": "base.items.GuantiDaOfficina", "rarity": "UNCOMMON", "kind": "ITEM",
+     "self": [{"op": "status", "name": "GUANTI DA OFFICINA", "description": "Hit Damage dealt: x1.25", "statusType": "GOOD",
+               "flow": "OUTPUT", "property": "HIT", "factor": 1.25, "equip": true, "turns": 2},
+              {"op": "say", "text": "Equipped status: GUANTI DA OFFICINA"}],
+     "gui": {"name": "Guanti da officina", "description": "OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni.",
+             "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.CascoDaLavoro", "rarity": "COMMON", "kind": "ITEM",
+     "self": [{"op": "status", "name": "CASCO DA LAVORO", "description": "Hit Damage taken: x0.8", "statusType": "GOOD",
+               "flow": "INPUT", "property": "HIT", "factor": 0.8, "equip": true, "turns": 2},
+              {"op": "say", "text": "Equipped status: CASCO DA LAVORO"}],
+     "gui": {"name": "Casco da lavoro", "description": "OGG-11 · Consumato: equip, HIT ricevuto ×0,8 per 3 turni.",
+             "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {
+      "binding": "base.bruiser.TiFaccioSpazio",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 0,
+      "targets": [
+        "SELF"
+      ],
+      "self": [
+        {
+          "op": "search",
+          "cards": ["bruiser.ExtremelyViolentBlow", "bruiser.SuperImpact"],
+          "vulnerability": {
+            "factor": 1.5
+          },
+          "foundGains": {
+            "VIOLENCE": 15,
+            "ALERTNESS": 15
+          },
+          "missedGains": {
+            "VIOLENCE": 5,
+            "ALERTNESS": 5
+          }
+        }
+      ],
+      "gui": {
+        "name": "TI FACCIO SPAZIO",
+        "description": "SPA-AR6 · Annuncia SPEDIAMOTI DUNQUE IN O-AHIO o GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +15 V, +15 A. Se non lo trovi: +5 V, +5 A.",
+        "role": "RESOURCES",
+        "gains": "+15 V, +15 A",
+        "damage": "—",
+        "damageAmount": "—"
+      }
+    },
+    {"binding": "base.mara.TiStringoLaCurva", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"], "gui": {"name": "Ti stringo la curva", "description": "MAR-AR6 · Annuncia Cinghiata di traverso o Sgommata. Se lo trovi: +20 A. Se non lo trovi: +5 A.", "role": "RESOURCES", "gains": "+20 A", "damage": "—", "damageAmount": "—"}, "self": [{"op": "search", "cards": ["base.mara.CinghiataDiTraverso", "base.mara.Sgommata"], "vulnerability": {"factor": 1.5}, "foundGains": {"ALERTNESS": 20}, "missedGains": {"ALERTNESS": 5}}]},
+    {"binding": "base.tossico.UnAssaggino", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["SELF"], "self": [{"op": "search", "cards": ["junkie.ToxicBloodDrain", "junkie.Cough"], "vulnerability": {"factor": 1.5}, "foundGains": {"TOXICITY": 20}, "missedGains": {"TOXICITY": 5}}], "gui": {"name": "Un assaggino", "description": "TOS-AR6 · Annuncia C'è del sangue nella mia droga o Tossicone Scatarrante. Se lo trovi: +20 T. Se non lo trovi: +5 T.", "role": "RESOURCES", "gains": "+20 T", "damage": "—", "damageAmount": "—"}},
+    {
+      "binding": "base.pino.PrimaIlBrindisi",
+      "rarity": "UNCOMMON",
+      "kind": "ACTION",
+      "priority": 1,
+      "targets": [
+        "SELF"
+      ],
+      "gui": {
+        "name": "Prima il brindisi",
+        "description": "PIN-AR6 · Annuncia Rutto a distanza sociale o Estasi da Coca Etilene. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A.",
+        "role": "RESOURCES",
+        "gains": "+15 L, +35 A",
+        "damage": "—",
+        "damageAmount": "—"
+      },
+      "self": [
+        {
+          "op": "search",
+          "cards": ["base.pino.RuttoADistanzaSociale", "base.pino.GoingBerserk"],
+          "vulnerability": {
+            "factor": 1.5
+          },
+          "foundGains": {
+            "ALCOHOL": 15,
+            "ALERTNESS": 35
+          },
+          "missedGains": {
+            "ALCOHOL": 5,
+            "ALERTNESS": 10
+          }
+        }
+      ]
+    },
+    {"binding": "base.gigi.UnaStrettaDiProva", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "gui": {"name": "Una stretta di prova", "description": "GIG-AR6 · Infliggi 4 danni da taglio al bersaglio. Annuncia Lavoro fatto bene o Chiave da tredici. Se lo trovi: +10 V. Se non lo trovi: +5 V.", "role": "RESOURCES", "gains": "+10 V", "damage": "CUT", "damageAmount": "CUT 4"}, "self": [{"op": "search", "cards": ["base.gigi.LavoroFattoBene", "base.gigi.ChiaveDaTredici"], "vulnerability": {"factor": 1.5}, "foundGains": {"VIOLENCE": 10}, "missedGains": {"VIOLENCE": 5}}], "target": [{"op": "damage", "type": "CUT", "amount": 4}]},
+    {"binding": "base.cesira.LoMettoInConto", "rarity": "RARE", "kind": "ACTION", "basic": true, "priority": 1, "targets": ["NEAR_ITEM"], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 7}, {"op": "consume"}], "gui": {"name": "Lo metto in conto", "description": "CES-BA · Basic: +7 A a sé, poi consuma un proprio oggetto.", "role": "ITEMS", "gains": "+7 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.cesira.LoRivendo", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["NEAR_ITEM"], "self": [{"op": "vendi", "seHai": [{"op": "gain", "resource": "HEALTH", "amount": 8}]}], "gui": {"name": "Lo rivendo", "description": "CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente.", "role": "ITEMS", "gains": "+8 H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.cesira.bound.MiInformo", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Cesira", "priority": 0, "targets": ["SELF"], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 8}], "gui": {"name": "Mi informo", "description": "CES-BO1 · Bound: +8 A a sé.", "role": "RESOURCES", "gains": "+8 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.cesira.bound.Battutina", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Cesira", "priority": 1, "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 3}], "gui": {"name": "Battutina", "description": "CES-BO2 · Bound: 3 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.cesira.bound.FareIlVago", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Cesira", "priority": 2, "targets": ["SELF"], "self": [{"op": "status", "name": "FARE IL VAGO - HIT", "description": "Hit Damage taken: x0.75", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.75, "turns": 0}, {"op": "status", "name": "FARE IL VAGO - CUT", "description": "Cut Damage taken: x0.75", "statusType": "GOOD", "flow": "INPUT", "property": "CUT", "factor": 0.75, "turns": 0}, {"op": "say", "text": "Gained status: FARE IL VAGO"}], "gui": {"name": "Fare il vago", "description": "CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno.", "role": "DEFENSE", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.cesira.OhGuardaLa", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 5}, "gui": {"name": "Oh, guarda là", "description": "CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Lo sanno tutti o Conto salato. Se lo trovi: +15 A. Se non lo trovi: +5 A.", "role": "DISRUPT", "gains": "+15 A", "damage": "HIT", "damageAmount": "HIT 4"}, "self": [{"op": "search", "cards": ["base.cesira.LoSannoTutti", "base.cesira.ContoSalato"], "vulnerability": {"factor": 1.5}, "foundGains": {"ALERTNESS": 15}, "missedGains": {"ALERTNESS": 5}}], "target": [{"op": "lose", "resource": "ALERTNESS", "amount": 10}, {"op": "damage", "type": "HIT", "amount": 4}]},
+    {"binding": "base.cesira.Ricatto", "rarity": "UNCOMMON", "java": true, "cost": {"ALERTNESS": 15}, "priority": 2, "params": {"percent": 50}, "gui": {"name": "Ricatto", "description": "CES-AR2 · 15 A: annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo.", "role": "COUNTER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.cesira.LoSapevo", "rarity": "UNCOMMON", "java": true, "cost": {"ALERTNESS": 10}, "priority": 2, "params": {}, "gui": {"name": "Lo sapevo", "description": "CES-AR3 · 10 A: annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta.", "role": "COUNTER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.cesira.ContoSalato", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 5}, "target": [{"op": "damage", "type": "HIT", "amount": 8}, {"op": "gettone", "steps": [{"op": "damage", "type": "HIT", "amount": 6}]}], "gui": {"name": "Conto salato", "description": "CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 8"}},
+    {"binding": "base.cesira.LoSannoTutti", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 15}, "target": [{"op": "damage", "type": "HIT", "amount": 24}], "gui": {"name": "Lo sanno tutti", "description": "CES-AR5 · 15 A: 24 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 24"}},
+    {"binding": "base.cesira.Malelingue", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 10}, "target": [{"op": "lose", "resource": "ALERTNESS", "amount": {"base": 0, "of": "ALERTNESS", "divide": 2}}, {"op": "damage", "type": "HIT", "amount": {"base": 5, "of": "ALERTNESS", "divide": 2}}], "gui": {"name": "Malelingue", "description": "CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 5+x"}},
+    {"binding": "bruiser.StunningBlow", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 10}, "target": [{"op": "lose", "resource": "ALERTNESS", "amount": 10}, {"op": "damage", "type": "HIT", "amount": 12}], "gui": {"name": "STORDIAMOTI HO DETTO", "description": "GEN-09 · 10 V: −10 A e 12 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12"}},
+    {"binding": "base.com.Sgambetto", "rarity": "RARE", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 10}, "target": [{"op": "lose", "resource": "VIOLENCE", "amount": 10}, {"op": "damage", "type": "HIT", "amount": 5}], "gui": {"name": "Sgambetto", "description": "GEN-23 · 10 A: −10 V e 5 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 5"}},
+    {"binding": "base.com.ShuffleFeet", "rarity": "UNCOMMON", "java": true, "cost": {}, "priority": -1, "params": {}, "gui": {"name": "Scatto Repentino", "description": "GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità.", "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.com.AcquaInFaccia", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 5}, "target": [{"op": "empty", "resource": "ALCOHOL"}, {"op": "damage", "type": "HIT", "amount": 3}], "gui": {"name": "Acqua in faccia", "description": "GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.items.SantinoDellaPortinaia", "rarity": "RARE", "java": true, "params": {"turns": 3}, "gui": {"name": "Santino della portinaia", "description": "OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.PrimaIo", "rarity": "RARE", "kind": "ACTION", "basic": true, "priority": 0, "targets": ["NEAR_ITEM"], "self": [{"op": "consume"}, {"op": "gain", "resource": "HEALTH", "amount": 3}], "gui": {"name": "Prima io", "description": "ROC-BA · Basic: consuma un proprio oggetto, poi +3 HEALTH a sé.", "role": "ITEMS", "gains": "+3 H", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.bound.Colpetto", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Rocco", "priority": 0, "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 3}], "gui": {"name": "Colpetto", "description": "ROC-BO1 · Bound: 3 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
+    {"binding": "base.rocco.bound.Gomitata", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Rocco", "priority": 2, "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 2}], "gui": {"name": "Gomitata", "description": "ROC-BO2 · Bound: 2 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 2"}},
+    {"binding": "base.rocco.bound.AlzoLaVoce", "rarity": "UNCOMMON", "kind": "BOUND", "boundTo": "base.character.Rocco", "priority": 0, "targets": ["SELF"], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 8}], "gui": {"name": "Alzo la voce", "description": "ROC-BO3 · Bound: +8 A a sé.", "role": "RESOURCES", "gains": "+8 A", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.NeHoPreseDiPeggio", "rarity": "RARE", "kind": "ACTION", "lastResort": true, "priority": 0, "targets": ["OPPONENT"], "self": [{"op": "damage", "type": "HIT", "amount": 6}], "target": [{"op": "damage", "type": "HIT", "amount": 12}], "gui": {"name": "Ne ho prese di peggio", "description": "ROC-LR · Last resort: 6 HIT a sé; 12 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12"}},
+    {"binding": "base.rocco.NoccheSbucciate", "rarity": "COMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 12}, "target": [{"op": "damage", "type": "HIT", "amount": 22}], "gui": {"name": "Nocche sbucciate", "description": "ROC-AR1 · 12 HEALTH: 22 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 22"}},
+    {"binding": "base.rocco.Incassare", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"], "self": [{"op": "status", "name": "INCASSARE - HIT", "description": "Hit Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "say", "text": "Gained status: INCASSARE"}], "gui": {"name": "Incassare", "description": "ROC-AR2 · HIT ricevuto ×0,5 in questo turno.", "role": "DEFENSE", "gains": "—", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.rocco.EAllora", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"HEALTH": 8}, "self": [{"op": "status", "name": "E ALLORA - HIT", "description": "Hit Damage taken: x0.5", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.5, "turns": 0}, {"op": "say", "text": "Gained status: E ALLORA"}], "target": [{"op": "damage", "type": "HIT", "amount": 8}], "gui": {"name": "E allora?", "description": "ROC-AR3 · 8 HEALTH: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio.", "role": "COUNTER", "gains": "—", "damage": "HIT", "damageAmount": "HIT 8"}},
+    {"binding": "base.rocco.Capocciata", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 0, "targets": ["OPPONENT"], "cost": {"HEALTH": 20}, "target": [{"op": "damage", "type": "HIT", "amount": 30}], "gui": {"name": "Capocciata", "description": "ROC-AR4 · 20 HEALTH: 30 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}},
+    {"binding": "base.rocco.TeLoSpiegoIo", "rarity": "COMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "target": [{"op": "damage", "type": "HIT", "amount": 6}], "gui": {"name": "Te lo spiego io", "description": "ROC-AR5 · 6 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 6"}},
+    {"binding": "base.rocco.SecondoFiato", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["SELF"], "self": [{"op": "status", "name": "SECONDO FIATO - HIT", "description": "Hit Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "HIT", "factor": 1.25, "turns": 1}, {"op": "say", "text": "Gained status: SECONDO FIATO"}, {"op": "gain", "resource": "HEALTH", "amount": 15}], "gui": {"name": "Secondo fiato", "description": "ROC-AR6 · +15 HEALTH a sé; HIT ricevuto ×1,25 per 2 turni (questo e il successivo).", "role": "RESOURCES", "gains": "+15 H", "damage": "—", "damageAmount": "—"}}
+  ],
+  "decks": [
+    {
+      "id": "starter-spazienzio",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "bruiser.SeagullFly": 2,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.MattoneDelCantiere": 1,
+        "bruiser.HealingBlow": 1,
+        "base.com.DentiStretti": 1,
+        "com.items.CocktailOnTheGround": 2,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1
+      }
+    },
+    {
+      "id": "starter-mara",
+      "character": "base.character.Mara",
+      "bound": [
+        "base.mara.bound.PassoStretto",
+        "base.mara.bound.CambioMarcia"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.mara.CinghiataDiTraverso": 1,
+        "base.mara.Sgommata": 2,
+        "base.mara.SorpassoInCurva": 2,
+        "base.mara.TraDueParaurti": 2,
+        "base.mara.Slalom": 2,
+        "base.com.Spintone": 1,
+        "base.com.SputoDaPosacenere": 2,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.items.EspressoDelDistributore": 2,
+        "base.items.PaninoDelKebab": 2,
+        "base.items.GiubbottoDiFintaPelle": 1,
+        "base.mara.TiStringoLaCurva": 1,
+        "base.items.GhiaccioNelTovagliolo": 1
+      }
+    },
+    {
+      "id": "starter-tossico",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 2,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "com.Steal": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.PasticcaTrovataSulBancone": 2,
+        "base.items.PaninoDelKebab": 2,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1
+      }
+    },
+    {
+      "id": "starter-pino",
+      "character": "base.character.Pino",
+      "bound": [
+        "base.pino.bound.CinqueMinutiEVado",
+        "base.pino.bound.SpallataAlBancone"
+      ],
+      "lastResort": "base.pino.UltimoGiro",
+      "cards": {
+        "base.pino.TestataDaUltimoGiro": 2,
+        "base.pino.GoingBerserk": 2,
+        "base.pino.IlBanconeRegge": 2,
+        "base.pino.OffroIo": 2,
+        "base.pino.RuttoADistanzaSociale": 1,
+        "com.Grab": 1,
+        "base.com.Spintone": 2,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 2,
+        "com.items.RottenBeer": 2,
+        "com.items.AnotherRottenBeer": 1,
+        "base.pino.PrimaIlBrindisi": 1,
+        "base.com.DueDitaInGola": 1
+      }
+    },
+    {
+      "id": "starter-gigi",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "bruiser.SeagullFly": 1,
+        "base.com.Spintone": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.GiubbottoDiFintaPelle": 2,
+        "base.items.CascoDaLavoro": 2,
+        "base.items.EspressoDelDistributore": 1,
+        "base.gigi.UnaStrettaDiProva": 1,
+        "base.com.DueDitaInGola": 1
+      }
+    },
+    {
+      "id": "prova-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "bruiser.StunningBlow": 1,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.Spintone": 1,
+        "base.items.SantinoDellaPortinaia": 1,
+        "base.items.EspressoDelDistributore": 2,
+        "base.com.AcquaInFaccia": 1,
+        "base.cesira.LoRivendo": 2
+      }
+    },
+    {
+      "id": "prova-duccio",
+      "character": "base.character.Rocco",
+      "bound": [
+        "base.rocco.bound.Colpetto",
+        "base.rocco.bound.AlzoLaVoce"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.rocco.TeLoSpiegoIo": 2,
+        "base.rocco.Capocciata": 2,
+        "base.rocco.SecondoFiato": 1,
+        "base.rocco.NoccheSbucciate": 2,
+        "base.rocco.Incassare": 2,
+        "base.rocco.EAllora": 2,
+        "base.com.Spintone": 2,
+        "base.com.SputoDaPosacenere": 2,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.PaninoDelKebab": 2,
+        "base.items.GhiaccioNelTovagliolo": 1
+      }
+    }
+  ]
+}
