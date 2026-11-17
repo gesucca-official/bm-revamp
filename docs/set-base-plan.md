@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 16 novembre 2026, dopo D122). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 17 novembre 2026, dopo D123). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-17](#sb-17-sb-18--personaggi-da-booster): B6 fatta e rivista, Celestina al 32,2% accettata (D122); manca la prova del proprietario che chiude il blocco.
-> - **Prossimo:** prova del proprietario con prova-sergio, chiusura di SB-17, poi SB-18 (Duccio) con proposta prima della bozza. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D122).
+> - **In corso:** [SB-18](#sb-17-sb-18--personaggi-da-booster) (Duccio): Fase A, proposta senza codice, da lanciare. SB-17 chiuso il 17 novembre 2026 ([D123](#decisioni-del-proprietario)).
+> - **Prossimo:** SB-18 Fase A (proposta, STOP), poi bozza, giro e prova del proprietario; poi SB-19. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D123).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -292,8 +292,8 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16g | Coppie caricamento-colpo, seconda passata | SB-16f | consegnato (passi 1–3 e correzione 1.5): 1.5 bozza di riferimento ([D92](#decisioni-del-proprietario)); budget esauriti, cancello completo non raggiunto; prosegue in SB-16i. [Sezione](#sb-16g--coppie-caricamento-colpo-seconda-passata), [rapporto 1.5](reports/set-base/sb-16g-15-report.md) |
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
-| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B6 fatte ([rapporto B5e](reports/set-base/sb-17-b5e-report.md), [rapporto B6](reports/set-base/sb-17-b6-report.md)); in bozza la V4 con R1, Celestina 32,2% accettata ([D122](#decisioni-del-proprietario)); manca la prova del proprietario |
-| | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 |  |
+| | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B6 fatte ([rapporto B5e](reports/set-base/sb-17-b5e-report.md), [rapporto B6](reports/set-base/sb-17-b6-report.md)); in bozza la V4 con R1, Celestina 32,2% accettata ([D122](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D123](#decisioni-del-proprietario)) |
+| | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fase A (proposta) da lanciare |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
 | | SB-21 | Giri di correzione | SB-20 |  |
@@ -495,6 +495,8 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Fase B4 consegnata il 16 novembre 2026, STOP per il proprietario** ([rapporto](reports/set-base/sb-17-b4-report.md)). Regole del playground 1.3 e griglia (commit `53cb385`); Lo rivendo basic di Sergio (+6 HEALTH, con R1 +8), Lo metto in conto fuori, Fare il vago bound, mazzo di prova con Espresso ×1 e Santino ×2; caricatore, bot, previsore e tavolo come la § 6 della proposta. Passo 0 e identità viva identici, suite, contesto e manifest verdi, fedeltà al 100%, mutazioni 7/8 (una equivalente sugli oggetti di oggi). Giro: Sergio sotto D95 contro Celestina, Piera, Mara e Beppe (15–33%), specchio con patte al 19%; Spazienzio 47,1%. Letture: Fare il vago giocata 3,8 volte a partita, una su sei contro un colpo mostrato; mazzo esaurito nel 43% delle partite. Tre domande. Il passo del client di D115 (2) è chiuso: l'oggetto è il bersaglio della basic (D118 (6)).
 
+**SB-17 chiuso il 17 novembre 2026 ([D123](#decisioni-del-proprietario)).** Prova del proprietario sulla B6: «mi sembra tutto ok per lo stato in cui siamo». **SB-18 (Duccio): passo con proposta come SB-17.** Fase A: proposta breve in `docs/design/set-base/sb-18-proposta.md`, con due o tre varianti da misurare insieme nel primo giro della Fase B (lezione della B5e); STOP per il proprietario.
+
 **B6 rivista dalla regia il 16 novembre 2026; decisione in [D122](#decisioni-del-proprietario).** V4 in bozza con R1 (Lo metto in conto +7 A); dentro D95 tutti gli incontri salvo Celestina al 32,2%, scostamento accettato; verifiche verdi, fedeltà al 100%, nessun codice in `server/src/main`. Resta la prova del proprietario.
 
 **B5e rivista dalla regia il 16 novembre 2026; scelta in [D121](#decisioni-del-proprietario).** Solo la V4 porta Sergio quasi dentro D95 (fuori Celestina 31,6%), mazzo esaurito 27%, patte basse. Prossimo: Fase B6, V4 in bozza con un giro e la riserva R1 (Lo metto in conto +7 A), poi la prova del proprietario.
@@ -673,7 +675,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D122 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D123 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
