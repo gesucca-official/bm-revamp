@@ -1,0 +1,60 @@
+{
+ "note": "SB-18 B2 (D126), UnlockedDamageHealthTest,Sb18CardsTest per mutation",
+ "results": [
+  {
+   "mutation": "fix reverted: HEALTH paid at equality under d50",
+   "file": "StyleSupport.java",
+   "killed": true,
+   "seconds": 17.9,
+   "failures": [
+    "[ERROR]   UnlockedDamageHealthTest.withD50HealthEqualToTheCostDoesNotPay:71 C does not pay C, C + 1 does: +1 unlocks it ==> expected: <26.0> but was: <0.0>"
+   ]
+  },
+  {
+   "mutation": "«Ultimo colpo» not always payable",
+   "file": "StyleSupport.java",
+   "killed": true,
+   "seconds": 17.3,
+   "failures": [
+    "[ERROR]   UnlockedDamageHealthTest.ultimoColpoIsAlwaysPayableUnderD50:89 payable now: nothing to unlock ==> expected: <0.0> but was: <26.0>"
+   ]
+  },
+  {
+   "mutation": "the d50 reading also under the live rules",
+   "file": "StyleSupport.java",
+   "killed": true,
+   "seconds": 17.1,
+   "failures": [
+    "[ERROR]   UnlockedDamageHealthTest.ultimoColpoIsAlwaysPayableUnderD50:90 1.13 knows no �Ultimo colpo� ==> expected: <26.0> but was: <0.0>",
+    "[ERROR]   UnlockedDamageHealthTest.withTheLiveRulesAndForOtherResourcesTheCostIsReachedAtEquality:79 1.13: C pays C ==> expected: <0.0> but was: <26.0>"
+   ]
+  },
+  {
+   "mutation": "other resources need more than the cost",
+   "file": "StyleSupport.java",
+   "killed": true,
+   "seconds": 17.0,
+   "failures": [
+    "[ERROR]   UnlockedDamageHealthTest.withTheLiveRulesAndForOtherResourcesTheCostIsReachedAtEquality:79 1.13: C pays C ==> expected: <0.0> but was: <26.0>"
+   ]
+  },
+  {
+   "mutation": "engine: HEALTH cost paid down to zero",
+   "file": "Move.java",
+   "killed": true,
+   "seconds": 17.1,
+   "failures": [
+    "[ERROR]   Sb18CardsTest.aHealthCostIsOfferedOnlyAboveItsCostAndNobodyDiesPaying:145 Nocche sbucciate ==> Expected com.gsc.bm.model.game.IllegalMoveException to be thrown, but nothing was thrown."
+   ]
+  },
+  {
+   "mutation": "BotView: HEALTH cost offered at equality",
+   "file": "BotView.java",
+   "killed": true,
+   "seconds": 17.2,
+   "failures": [
+    "[ERROR]   Sb18CardsTest.aHealthCostIsOfferedOnlyAboveItsCostAndNobodyDiesPaying:143 Nocche sbucciate at 16 health: not offered by BotView ==> expected: <false> but was: <true>"
+   ]
+  }
+ ]
+}

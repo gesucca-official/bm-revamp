@@ -1,0 +1,8 @@
+{
+ "note": "SB-18 B2 (D126): identity checks before changing draft and code.",
+ "step0": {"draft": "1.6b (0b8806e, sha 69cc8e1c...)", "games": 8640, "baseSeconds": 10.46, "newSeconds": 16.93,
+           "result": "all files identical byte for byte except seconds.txt", "script": "step0.ps1"},
+ "live": {"test": "ChargeMeasureTest#liveBenchOnTheSameHistoricalDraft", "games": 480000, "seconds": 61.1,
+          "finalLiveJson": "ca131721..., 266869 B", "finalLiveMd": "16d3bde4..., 26112 B",
+          "result": "identical byte for byte to the SB-17 B4 prints once the output folder in the header is the same (bm-sb16g2b2-live)"}
+}

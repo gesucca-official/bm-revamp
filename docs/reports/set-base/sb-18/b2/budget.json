@@ -1,0 +1,12 @@
+{
+ "note": "SB-18 B2 (D126): measures only, wall seconds of run.ps1 (verifications outside the budget). Budget 450 s.",
+ "measures": [
+  {"step": "taratura K170", "seconds": 57.1},
+  {"step": "taratura K185", "seconds": 64.1},
+  {"step": "giro 1 (bozza K185 + fix)", "seconds": 60.3},
+  {"step": "giro 2 (riserva R1, costi x1,95)", "seconds": 78.5},
+  {"step": "giro 3 (riserva R2, salute 115)", "seconds": 77.4}
+ ],
+ "total": 337.4,
+ "budget": 450
+}
