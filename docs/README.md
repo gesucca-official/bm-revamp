@@ -12,7 +12,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza�
 
 | Filone | Piano e stato | Macchina | Prossimo passo |
 |---|---|---|---|
-| Set Base | [piano](set-base-plan.md) | portatile | SB-18 (SB-17 chiuso con D123) |
+| Set Base | [piano](set-base-plan.md) | portatile | SB-19 (SB-18 chiuso con D128) |
 | Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
 | Carriere, lavori anticipati | [tabella](product-roadmap.md#lavori-anticipati) | — | scrittura della campagna principale (CA-2) |
 
