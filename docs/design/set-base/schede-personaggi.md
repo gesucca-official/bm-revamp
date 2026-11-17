@@ -363,7 +363,7 @@ a incassare è lento a chiudere. CUT e POISON aggirano le riduzioni dell'HIT. Le
 rallenta.
 
 **Valori iniziali proposti:** HEALTH 130, A 15, nessuna risorsa speciale (V 0), capacità 2, nessuna immunità. 130 è il conto di
-circa 30–40 salute spese in una partita per restare all'altezza degli altri: da misurare in SB-18.
+circa 30–40 salute spese in una partita per restare all'altezza degli altri: da misurare in SB-18. **Misurato in SB-18** ([D127](../../set-base-decisioni.md#decisioni-del-proprietario)): con salute 115 e costi 16 / 10 / 28 / 33 Duccio spende circa 63 di salute a partita e ne recupera circa 12.
 
 **Il suo triangolo.**
 

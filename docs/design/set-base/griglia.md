@@ -155,7 +155,7 @@ di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 
 **Salute iniziale (cautela di SB-10a).** A 2,5–4,8 punti di quota per 1 HEALTH, Mara a −15 vale sulla carta da −37 a −72 punti e Duccio
 a +30 da +75 a +144. La griglia le compensa con le carte, senza cambiare i valori (decisione 5): Mara ha costi in A bassi, una bound di A e
-due difese pagate in A; Duccio spende circa 30–40 di salute a partita. Se in SB-12 Mara resta sotto il 45%, la prima leva è la salute
+due difese pagate in A; Duccio spende circa 30–40 di salute a partita (misurati circa 63 in SB-18, [D127](../../set-base-decisioni.md#decisioni-del-proprietario)). Se in SB-12 Mara resta sotto il 45%, la prima leva è la salute
 (85 → 90–95), prima delle carte; per Duccio la stessa domanda va in SB-18.
 
 ¹ **SB-12a, giri 1 e 2** ([correzioni](#correzioni-di-sb-12a)). Giro 1: Mara 85 → 95, il punto di partenza di D38. Giro 2: salute tolta a
