@@ -1,0 +1,311 @@
+{
+ "run": "round-l4",
+ "games": 259200,
+ "violations": {
+  "senza-mosse": 0,
+  "mossa-vuota": 0,
+  "bound-gratuite": 0,
+  "basic-bound-in-mano": 0,
+  "last-resort-in-mano": 0,
+  "last-resort-giocabile": 0,
+  "bound-giocabile": 0,
+  "limite-turni": 0
+ },
+ "boundViolations": 0,
+ "rows": [
+  {
+   "foe": "prova-duccio",
+   "heur": {
+    "games": 24300,
+    "share": 50.75585284280937,
+    "draws": 7.716049382716049,
+    "turns": 6.71835390946502
+   },
+   "all": {
+    "games": 43200,
+    "share": 50.495581270445776,
+    "draws": 5.180555555555555,
+    "turns": 7.308333333333334
+   },
+   "com": {
+    "games": 2700,
+    "share": 48.164964055996975,
+    "draws": 2.111111111111111,
+    "turns": 10.605555555555556
+   },
+   "gaps": {}
+  },
+  {
+   "foe": "starter-spazienzio",
+   "heur": {
+    "games": 24300,
+    "share": 89.89894823674985,
+    "draws": 0.22633744855967078,
+    "turns": 5.83761316872428
+   },
+   "all": {
+    "games": 43200,
+    "share": 85.50630261872645,
+    "draws": 0.4675925925925926,
+    "turns": 6.6943981481481485
+   },
+   "com": {
+    "games": 2700,
+    "share": 80.51320193380438,
+    "draws": 0.4074074074074074,
+    "turns": 9.242592592592592
+   },
+   "gaps": {
+    "quota": 24.9
+   }
+  },
+  {
+   "foe": "starter-mara",
+   "heur": {
+    "games": 24300,
+    "share": 79.38479493164388,
+    "draws": 1.2674897119341564,
+    "turns": 6.480946502057614
+   },
+   "all": {
+    "games": 43200,
+    "share": 76.52862734069231,
+    "draws": 1.2291666666666667,
+    "turns": 7.082685185185185
+   },
+   "com": {
+    "games": 2700,
+    "share": 82.80492353599404,
+    "draws": 0.7037037037037037,
+    "turns": 9.056666666666667
+   },
+   "gaps": {
+    "quota": 14.38
+   }
+  },
+  {
+   "foe": "starter-tossico",
+   "heur": {
+    "games": 24300,
+    "share": 90.4486005197461,
+    "draws": 3.403292181069959,
+    "turns": 6.807901234567901
+   },
+   "all": {
+    "games": 43200,
+    "share": 83.66106542724347,
+    "draws": 2.8819444444444446,
+    "turns": 7.511018518518519
+   },
+   "com": {
+    "games": 2700,
+    "share": 82.57055682684974,
+    "draws": 2.888888888888889,
+    "turns": 9.219259259259259
+   },
+   "gaps": {
+    "quota": 25.45
+   }
+  },
+  {
+   "foe": "starter-pino",
+   "heur": {
+    "games": 24300,
+    "share": 89.8989898989899,
+    "draws": 0.5925925925925926,
+    "turns": 6.214444444444444
+   },
+   "all": {
+    "games": 43200,
+    "share": 85.55260584043593,
+    "draws": 0.5972222222222222,
+    "turns": 7.145347222222222
+   },
+   "com": {
+    "games": 2700,
+    "share": 88.01191362620997,
+    "draws": 0.5185185185185185,
+    "turns": 10.04962962962963
+   },
+   "gaps": {
+    "quota": 24.9
+   }
+  },
+  {
+   "foe": "starter-gigi",
+   "heur": {
+    "games": 24300,
+    "share": 90.10558442629713,
+    "draws": 0.2222222222222222,
+    "turns": 5.366172839506173
+   },
+   "all": {
+    "games": 43200,
+    "share": 86.33421800065186,
+    "draws": 0.5694444444444444,
+    "turns": 6.191689814814815
+   },
+   "com": {
+    "games": 2700,
+    "share": 93.25130499627144,
+    "draws": 0.6666666666666666,
+    "turns": 9.062592592592592
+   },
+   "gaps": {
+    "quota": 25.11
+   }
+  }
+ ],
+ "outside": [
+  "Spazienzio",
+  "Mara",
+  "Celestina",
+  "Piera",
+  "Beppe"
+ ],
+ "cardUse": {
+  "games": 170100,
+  "cards": [
+   {
+    "binding": "base.com.FasciaturaColFazzolettaccio",
+    "name": "Fasciatura col fazzolettaccio",
+    "playedGamesShare": 5.116990005878895,
+    "playsPerGame": 0.05116990005878895
+   },
+   {
+    "binding": "base.com.Spintone",
+    "name": "Spintone",
+    "playedGamesShare": 56.65608465608466,
+    "playsPerGame": 0.7176014109347443
+   },
+   {
+    "binding": "base.com.SputoDaPosacenere",
+    "name": "Sputo da posacenere",
+    "playedGamesShare": 68.07231040564373,
+    "playsPerGame": 0.8732686654908877
+   },
+   {
+    "binding": "base.com.TartarugaSulMarciapiede",
+    "name": "Tartaruga sul marciapiede",
+    "playedGamesShare": 14.793650793650794,
+    "playsPerGame": 0.14793650793650795
+   },
+   {
+    "binding": "base.rocco.Capocciata",
+    "name": "Capocciata",
+    "playedGamesShare": 79.71663727219283,
+    "playsPerGame": 1.0402586713697826
+   },
+   {
+    "binding": "base.rocco.EAllora",
+    "name": "E allora?",
+    "playedGamesShare": 59.97178130511464,
+    "playsPerGame": 0.75564961787184
+   },
+   {
+    "binding": "base.rocco.Incassare",
+    "name": "Incassare",
+    "playedGamesShare": 18.1875367430923,
+    "playsPerGame": 0.24323927101704879
+   },
+   {
+    "binding": "base.rocco.NoccheSbucciate",
+    "name": "Nocche sbucciate",
+    "playedGamesShare": 72.08054085831864,
+    "playsPerGame": 0.9178424456202234
+   },
+   {
+    "binding": "base.rocco.PrimaIo",
+    "name": "Prima io",
+    "playedGamesShare": 13.893592004703116,
+    "playsPerGame": 0.17456202233980012
+   },
+   {
+    "binding": "base.rocco.TeLoSpiegoIo",
+    "name": "Te lo spiego io",
+    "playedGamesShare": 43.15520282186949,
+    "playsPerGame": 0.5071017048794827
+   },
+   {
+    "binding": "base.rocco.TestaDura",
+    "name": "Testa dura",
+    "playedGamesShare": 66.78542034097589,
+    "playsPerGame": 0.667854203409759
+   },
+   {
+    "binding": "base.rocco.bound.AlzoLaVoce",
+    "name": "Alzo la voce",
+    "playedGamesShare": 0.4079952968841858,
+    "playsPerGame": 0.004079952968841858
+   },
+   {
+    "binding": "base.rocco.bound.Colpetto",
+    "name": "Colpetto",
+    "playedGamesShare": 16.973544973544975,
+    "playsPerGame": 0.20569077013521458
+   }
+  ]
+ },
+ "readings": {
+  "games": 170100,
+  "exhausted": 0.003527336860670194,
+  "endWithLastResort": 0.03350970017636684,
+  "searches": 84276,
+  "searchMissRate": 2.7101428639233,
+  "turnsPerGame": 6.306255144032922,
+  "healthSpentPerGame": 36.37027630805409,
+  "healthRecoveredPerGame": 2.7812286890064666,
+  "healthLostToDamagePerGame": 58.020358612580836,
+  "boundShare": 3.326391310103347,
+  "lowHealthTurnsShare": 15.62859492082551,
+  "lowHealthMoves": 167647,
+  "lowHealthBoundShare": 8.028178255501143,
+  "healthSpentByCardPerGame": {
+   "base.rocco.Capocciata": 14.563621399176954,
+   "base.rocco.EAllora": 3.7782480893592005,
+   "base.rocco.NoccheSbucciate": 7.3427395649617875,
+   "base.rocco.TestaDura": 10.685667254556144
+  },
+  "payToZeroWithoutLastBlow": 0,
+  "payToZero": {
+   "diedInPayingTurn/base.rocco.Capocciata": 8610,
+   "diedInPayingTurn/base.rocco.EAllora": 1404,
+   "diedInPayingTurn/base.rocco.NoccheSbucciate": 4134,
+   "diedInPayingTurn/base.rocco.TestaDura": 7710
+  },
+  "lastResortPlaysPerGame": 0.0,
+  "lastResortGamesShare": 0.0
+ },
+ "byStyle": {
+  "aggressivo": {
+   "games": 75600,
+   "healthSpentPerGame": 36.95861111111111,
+   "playsPerGame": {
+    "NoccheSbucciate": 0.8843121693121693,
+    "EAllora": 0.7253835978835979,
+    "Capocciata": 1.040925925925926,
+    "TestaDura": 0.7302645502645503
+   }
+  },
+  "prudente": {
+   "games": 75600,
+   "healthSpentPerGame": 36.8764417989418,
+   "playsPerGame": {
+    "NoccheSbucciate": 1.0073544973544974,
+    "EAllora": 0.8426851851851852,
+    "Capocciata": 1.0856349206349207,
+    "TestaDura": 0.5878306878306878
+   }
+  },
+  "risorse": {
+   "games": 75600,
+   "healthSpentPerGame": 36.88112433862434,
+   "playsPerGame": {
+    "NoccheSbucciate": 0.8876984126984127,
+    "EAllora": 0.7187169312169313,
+    "Capocciata": 1.0399338624338625,
+    "TestaDura": 0.7266798941798942
+   }
+  }
+ }
+}
