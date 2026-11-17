@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 17 novembre 2026, dopo D125). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 17 novembre 2026, dopo D126). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-18](#sb-17-sb-18--personaggi-da-booster) (Duccio): Fase B1e fatta; **in attesa: revisione del [rapporto B1e](reports/set-base/sb-18-b1e-report.md), domande 1–4** (costi ×2 portano Duccio al 44,7% contro gli starter, −47 punti; raccomandata una taratura ×1,7–2 prima della B2).
-> - **Prossimo:** SB-18 scelta fra taratura (B1f) e Fase B2 con le verifiche complete e la prova del proprietario; poi SB-19. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D125).
+> - **In corso:** [SB-18](#sb-17-sb-18--personaggi-da-booster) (Duccio): B1e fatta, la leva sono i costi in HEALTH; Fase B2 con la taratura dentro da lanciare (D126).
+> - **Prossimo:** SB-18 Fase B2 (D126), poi la prova del proprietario che chiude SB-18; poi SB-19. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D126, D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D126).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -293,7 +293,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16h | Prova esplorativa della dimensione del mazzo (SB-23 anticipata, D81) | SB-16g | chiusa in [D94](#decisioni-del-proprietario): formato 20/2 ([rapporto](reports/set-base/sb-16h-report.md)) |
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B6 fatte ([rapporto B5e](reports/set-base/sb-17-b5e-report.md), [rapporto B6](reports/set-base/sb-17-b6-report.md)); in bozza la V4 con R1, Celestina 32,2% accettata ([D122](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D123](#decisioni-del-proprietario)) |
-| | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | proposta approvata ([D124](#decisioni-del-proprietario)); Fase B fatta ([rapporto](reports/set-base/sb-18-b-report.md)), Duccio troppo forte; Fase B1e fatta ([rapporto](reports/set-base/sb-18-b1e-report.md), [D125](#decisioni-del-proprietario)): i costi sono la leva, taratura o B2 da decidere |
+| | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fasi B e B1e fatte ([rapporto B](reports/set-base/sb-18-b-report.md), [rapporto B1e](reports/set-base/sb-18-b1e-report.md)); la leva sono i costi; Fase B2 con la taratura dentro da lanciare ([D126](#decisioni-del-proprietario)) |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 |  |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
 | | SB-21 | Giri di correzione | SB-20 |  |
@@ -499,6 +499,8 @@ Un blocco per personaggio: **Sergio Sommerso**, poi **Duccio Braccio Teso**. Sen
 
 **Fase B di SB-18 eseguita il 17 novembre 2026, STOP per il proprietario** ([rapporto](reports/set-base/sb-18-b-report.md)). Controllo e tre varianti nello stesso giro, 259.200 partite l'uno, nessuna riserva, nessun codice in `server/src/main`, passo 0 identico prima e dopo il banco. Incontri fuori D95: C 6, V1 6, V2 6, **V3 5**: per la regola scritta vince la V3, ma Duccio vince l'85–99% contro ogni starter in tutte e quattro, cioè 20–34 punti oltre il 65%. Mazzo esaurito sotto l'1,1% (partite da 5 a 8 turni), salute spesa 37–48 a partita contro 3–9 recuperata, Testa dura da suicida nel 3,5% (V1) e 2,6% (V2) dei posti-partita, con patta una volta su due (V1) o su tre (V2). 283,6 s su 600. Tre domande: quale variante e se serve un giro di taratura prima della B2, «Ultimo colpo» su Testa dura, patte dello specchio.
 
+**Fase B1e rivista dalla regia il 17 novembre 2026; decisione in [D126](#decisioni-del-proprietario).** Solo dati, verifiche verdi. Costi ×2: media 44,7%, fuori solo Mara 26,3%; salute 85: 60,0%, due fuori; HIT e cure spostano poco. Candidato ×1,85 con Mara e Spazienzio al bordo. Prossimo: Fase B2, taratura a ×1,7 e ×1,85 dentro, poi bozza e verifiche complete.
+
 **Fase B rivista dalla regia il 17 novembre 2026; decisione in [D125](#decisioni-del-proprietario).** Solo dati e test, passo 0 identico, verifiche verdi. In tutte le varianti Duccio vince dall'85% al 99% contro gli starter, partite di 5–7 turni; la meno lontana è la V3. Prossimo: Fase B1e, giro esplorativo sulle leve con base V3, «Ultimo colpo» fuori.
 
 **Proposta di SB-18 approvata il 17 novembre 2026 in [D124](#decisioni-del-proprietario)**, con tutte le raccomandazioni. Prossimo: Fase B, controllo e tre varianti di Duccio nello stesso giro.
@@ -687,7 +689,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D125 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D126 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
