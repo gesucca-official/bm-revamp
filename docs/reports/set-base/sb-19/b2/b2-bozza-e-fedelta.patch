@@ -9,7 +9,7 @@ index 844c9bc..91bf994 100644
 +        // SB-19 B2 (D130, RP-27): a deck with the in-play items in one seat (alternating), the starters in the other.
 +        check(Draft.fromClasspath("/set-base/bozza.json"), "malus");
      }
- 
+
      private static void check(Draft draft, String arm) throws Exception {
 @@ -42,22 +44,29 @@ class TurnForecastFidelityTest {
          int[] sergio = new int[4]; // SB-17, in checked turns: reflections, kept tokens, Conto salato on a token, Lo sanno tutti resolved (B2, D110)
@@ -91,7 +91,7 @@ index f30d26b..808e52b 100644
 +            for (Card c : p.getCharacter().getItems()) if (!PrintedEffects.inPlay(c).isEmpty()) holders.put(c, p.getPlayerId());
 +        return holders;
      }
- 
+
      private static Map<String, BotView.CardSeen> text(Draft draft) throws Exception {
 @@ -37,6 +50,7 @@ class ViewTableFidelityTest {
          List<String> decks = new ArrayList<>(List.of(DECKS));
