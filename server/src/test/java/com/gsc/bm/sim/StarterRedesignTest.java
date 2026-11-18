@@ -37,13 +37,13 @@ class StarterRedesignTest {
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final String NORMAL = "base.com.Spintone";
     private static final List<Pair> PAIRS = List.of(
-            new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 34),
+            new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 35),
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
             new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 18),
             new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 25),
             new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 18));
     // D82 (proposta 1.4): Impatto 30, Tossicone 18, Estasi 18 + L 7, Chiave 22; Preparo infligge anche 4 CUT a un avversario.
-    // D90 (correzione 1.5): Impatto 34, Chiave 18.
+    // D90 (correzione 1.5): Impatto 34, Chiave 18. D139 (SB-20b): Impatto 35.
 
     private static final class Pair {
         final String deck, charge, hit;
@@ -330,7 +330,7 @@ class StarterRedesignTest {
     @Test
     void theThreeDefensesStillParryTheirTypesBeforeExpiring() {
         String[] bindings = {"base.com.TartarugaSulMarciapiede", "base.mara.TraDueParaurti", "base.gigi.SottoIlCofano"};
-        int[] damage = {3, 4, 5}; // 6 meno cura 3; HIT ×0,4; HIT ×0,5.
+        int[] damage = {2, 5, 5}; // D139: 5 (×0,5) meno cura 3; HIT ×0,5 (era ×0,4); HIT ×0,5.
         for (int i = 0; i < bindings.length; i++) {
             Card defense = draft.card(bindings[i]), attack = probe("Colpo", 10, 0);
             Player a = player("starter-mara", "a", List.of(defense), List.of(draft.card(NORMAL)));

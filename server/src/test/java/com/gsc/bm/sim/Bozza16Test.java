@@ -33,10 +33,15 @@ class Bozza16Test {
         PAIRS.put("base.gigi.ColpoDiChiaveInglese", List.of("base.gigi.ChiaveDaTredici", "base.gigi.LavoroFattoBene"));
         PAIRS.put("base.gigi.UnaStrettaDiProva", List.of("base.gigi.LavoroFattoBene", "base.gigi.ChiaveDaTredici"));
     }
+    // SB-20b (D139, D140): numbers cleaned after the 1.6b (Impatto 35 HIT, Paraurti and Tartaruga x0.5, Casco x0.75); the checks on
+    // rarity, kind, priority, targets, cost, java and exclusiveTo below still hold for them.
+    static final Set<String> D139 = Set.of("bruiser.SuperImpact", "base.mara.TraDueParaurti", "base.com.TartarugaSulMarciapiede",
+            "base.items.CascoDaLavoro");
     static final Set<String> CHANGED = new TreeSet<>(PAIRS.keySet());
     static {
         CHANGED.addAll(List.of("base.mara.SorpassoInCurva", "base.mara.Sgommata", "base.mara.CinghiataDiTraverso", "com.last.Struggle",
                 "junkie.LethalHeroinDose", "base.pino.UltimoGiro", SetBaseArms.BANCONE));
+        CHANGED.addAll(D139);
     }
 
     static JsonNode resource(String path) throws Exception {

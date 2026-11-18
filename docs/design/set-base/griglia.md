@@ -257,7 +257,7 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Ne
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | ~~40~~ ~~30~~ 34 HIT (passo 3, D82; correzione 1.5, D90) | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
+| SPA-AR1 | Azione, regolare | DAMAGE | F4 (25 V) | 0 | ~~40~~ ~~30~~ ~~34~~ 35 HIT (passo 3, D82; correzione 1.5, D90; SB-20b, D139) | NC | 2 | `SuperImpact`, conservata | Attacco: il colpo grosso; in linea con l'unità a 7 | dati |
 | SPA-AR2 | Azione, regolare | DAMAGE | F2 (10 V) | 1 | HIT pari a 6 + V residua / 2 | R | 1 | `ExtremelyViolentBlow`, riprogettata (oggi 20 V e 20 + V/2) | Quantità variabile; oggi peggio di una carta morta. Media sotto la linea, picco se accumula | dati |
 | SPA-AR3 | Azione, regolare | RESOURCES | F0 | 0 | Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO (SB-16i). Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. | NC | 2 | `Glare`, «PAZIENZA: FINITA», D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | SPA-AR4 | Azione, regolare | DEFENSE | F0 | 0 | CUT ricevuto ×0,5 per 4 turni; +10 V | C | 2 | `MadeOfStone`, conservata | Difesa che carica, contro chi lo taglia (Mara) | dati |
@@ -268,10 +268,10 @@ Ogni archetipo ha attacco, difesa e contromossa (§ [triangoli](#triangoli)). Ne
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ ~~5~~ 20 A², passo 3) | 1 | ~~12 CUT~~ CUT pari a 18 più metà della A residua (passo 3, D82); Gioca d'anticipo: +10 CUT (SB-16i) | R | 1 | bozza «Cinghiata di traverso» | Picco con A preparata | dati |
-| MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³; Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,5 (SB-16i) | NC | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
-| MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT; Gioca d'anticipo: +8 A a sé (SB-16i) | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
-| MAR-AR4 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,4 nel turno; +5 A | NC | 2 | «Tra due paraurti», D55 | Difesa che rimborsa il costo anche senza attacco | dati |
+| MAR-AR1 | Azione, regolare | DAMAGE | F1 (~~10~~ ~~5~~ 20 A², passo 3) | 1 | ~~12 CUT~~ CUT pari a 18 più metà della A residua (passo 3, D82); Gioca d'anticipo: ~~+10~~ +5 CUT (SB-16i; D99) | R | 1 | bozza «Cinghiata di traverso» | Picco con A preparata | dati |
+| MAR-AR2 | Azione, regolare | DAMAGE | F2 (~~20~~ 15 A²) | 1 | ~~22~~ 25 CUT³; Gioca d'anticipo: in questo turno il bersaglio infligge danni ~~×0,5~~ ×0,8 (SB-16i; D99) | NC | 2 | prova «Sgommata», 15 A → 20 A | Il taglio grosso, pagato in precedenza | dati |
+| MAR-AR3 | Azione, regolare | DISRUPT | F0 | 2 | −8 A al bersaglio; 3 CUT; Gioca d'anticipo: ~~+8~~ +4 A a sé (SB-16i; D99) | C | 2 | prova «Sorpasso in curva», resa gratuita | Contromossa senza annullare: le toglie la parità | dati |
+| MAR-AR4 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ~~×0,4~~ ×0,5 nel turno (D139); +5 A | NC | 2 | «Tra due paraurti», D55 | Difesa che rimborsa il costo anche senza attacco | dati |
 | MAR-AR5 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Sgommata o Cinghiata di traverso (SB-16i). Se lo trovi: +15 A. Se non lo trovi: +5 A. | NC | 2 | «Slalom d'avvicinamento», già Slalom, D55 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | MAR-AR6 | Azione, regolare | RESOURCES | F0 | 2 | Annuncia Cinghiata di traverso o Sgommata (SB-16i). Se lo trovi: ~~+15~~ +20 A. Se non lo trovi: +5 A. | NC | 1 | `base.mara.TiStringoLaCurva`, «Ti stringo la curva» | Secondo annuncio verso il raro, D79 | dati + search |
 
@@ -360,7 +360,7 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 | GEN-10 | Azione, regolare | OTHER | F1 (5 V) | 1 | Toglie gli equip al bersaglio; 8 HIT | NC | — | «Maleducazione» (`BadEducation`, 10 → 5 V; la classe viva con costo, priorità e `hitDamage` 8 dalla bozza) | Tecnica contro Beppe, ora che gli equip esistono | Java |
 | GEN-11 | Azione, regolare | DEFENSE | F1 (5 V) | 2 | HIT ricevuto ×0,25 nel turno; +5 A a sé | NC | — | «Non sento niente» (`CantFeelAnything`, 20 → ~~10~~ 5 V, ~~×0,35~~ ×0,25 (SB-19 B1b, D131), +10 A → +5 A: il guadagno di D52 (1), SB-19 A) | Parata forte con il premio che resta anche senza attacco; oggi quasi mai giocata | dati |
 | GEN-12 | Azione, regolare | DAMAGE | F1 (10 A) | 0 | +5 V a sé; 12 HIT | C | Celestina 2 | bozza «Rincorsa dal marciapiede», +10 → +5 V, 15 → 12 HIT | Colpo a costo A aperto a tutti | dati |
-| GEN-13 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ×0,6 nel turno; +3 HEALTH | C | Spazienzio 2, Mara 1 | «Tartaruga sul marciapiede», D55 | Difesa generica con piccola cura anche se non viene attaccata | dati |
+| GEN-13 | Azione, regolare | DEFENSE | F1 (5 A) | 2 | HIT e CUT ricevuti ~~×0,6~~ ×0,5 nel turno (D139); +3 HEALTH | C | Spazienzio 2, Mara 1 | «Tartaruga sul marciapiede», D55 | Difesa generica con piccola cura anche se non viene attaccata | dati |
 | GEN-14 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +10 V | C | Spazienzio 1 | bozza «Denti stretti» | Carica per chi usa V | dati |
 | GEN-15 | Azione, regolare | OTHER | F0 | 1 | 5 HIT a sé; azzera la propria T e la propria L | NC | Piera 1, Beppe 1 (SB-16i) | bozza «Due dita in gola» | Pulizia propria; costa salute, così non annulla gratis Celestina | dati |
 | GEN-16 | Azione, regolare | RESOURCES | F0 | 0 | −5 A a sé; +8 HEALTH | C | Celestina 1, Piera 2 | bozza «Fasciatura col fazzolettaccio», resa gratuita | Cura generica; la perdita di A è un effetto, quindi è giocabile anche da Piera | dati |
@@ -393,7 +393,7 @@ Si consumano con una presa; il loro valore è quello di una presa, non di uno sl
 | OGG-08 | Oggetto | OTHER | Azzera la propria L; ~~+5 A~~ +20 A (SB-19 B1b, D131) | ≈ 3 più il contesto (+5 A); ≈ 11 con +20 A | NC | — | bozza «Mezza minerale sgasata», ~~+5 A~~ +20 A (SB-19 A¹⁰) | Controlla la propria L; il +5 A la rende utile anche senza L addosso; Offro io riprogettata in SB-16d | dati |
 | OGG-09 | Oggetto | OTHER | Equip: HIT inflitto ×1,25 per 3 turni | ≈ 5–8 | NC | Beppe 2 | bozza «Guanti da officina» | Equip d'attacco | equip |
 | OGG-10 | Oggetto | OTHER | Equip: CUT ricevuto ×0,75 per 3 turni | ≈ 3–8 | C | Mara 1, Beppe 2 | bozza «Giubbotto di finta pelle» | Equip di difesa contro CUT | equip |
-| OGG-11 | Oggetto | OTHER | Equip: HIT ricevuto ×0,8 per 3 turni | ≈ 4–8 | C | Beppe 2 | da inventare («Casco da lavoro») | Equip di difesa contro HIT | equip |
+| OGG-11 | Oggetto | OTHER | Equip: HIT ricevuto ~~×0,8~~ ×0,75 per 3 turni (D139) | ≈ 4–8 | C | Beppe 2 | da inventare («Casco da lavoro») | Equip di difesa contro HIT | equip |
 | OGG-12 | Oggetto | RESOURCES | +12 T | 1,8 per chi è immune | C | Celestina 2 | da inventare («Pasticca trovata sul bancone») | Carburante; veleno per gli altri | dati |
 | OGG-13 | Oggetto | OTHER | Equip: il prossimo HIT inflitto ×1,5, uso singolo | picco con SuperImpact | NC | Spazienzio 1 | da inventare («Posacenere di vetro») | L'oggetto di chi tira colpi grossi; capacità 1 | equip |
 | OGG-14 | Oggetto | RESOURCES | +10 HEALTH; azzera la propria T | ≈ 10 | NC | Mara 1 (SB-16i) | bozza «Ghiaccio nel tovagliolo» | Cura e pulizia per i mazzi costruiti | dati |

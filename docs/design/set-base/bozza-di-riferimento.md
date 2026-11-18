@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `0ecb69eb1494…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `d8d20308fa30…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 116 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -49,13 +49,13 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 | bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 V a sé. |
 | bound | **SVEGLIAMOCI MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio. |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 35 danni da colpo al bersaglio. |
 | 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2. |
 | 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. |
 | 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V. |
 | 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio. |
 | 2 | **GABBIANO DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 V: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +3 H a sé. |
 | 1 | **Mattone del cantiere** (`base.com.MattoneDelCantiere`) | C | GEN-06 · 15 V: 24 HIT al bersaglio. |
 | 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | GEN-07 · 20 V: 30 HIT al bersaglio; azzera T e L del bersaglio. |
 | 1 | **Denti stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 A a sé; +10 V a sé. |
@@ -76,11 +76,11 @@ Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nes
 | 1 | **Cinghiata di traverso** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +5 CUT. |
 | 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,8. |
 | 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +4 A a sé. |
-| 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,4 in questo turno. +5 A a sé. |
+| 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +5 A a sé. |
 | 2 | **Slalom d'avvicinamento** (`base.mara.Slalom`) | NC | MAR-AR5 · Annuncia Sgommata o Cinghiata di traverso. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
-| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +3 H a sé. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 2 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
 | 1 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni (questo e i due successivi). |
@@ -155,7 +155,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
 | 2 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni (questo e i due successivi). |
-| 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,8 per 3 turni. |
+| 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
 | 1 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 1 | **Una stretta di prova** (`base.gigi.UnaStrettaDiProva`) | NC | GIG-AR6 · Infliggi 4 danni da taglio al bersaglio. Annuncia Lavoro fatto bene o Chiave da tredici. Se lo trovi: +10 V. Se non lo trovi: +5 V. |
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; azzera la tua T e la tua L. |
@@ -177,12 +177,12 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
 | 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 V: −10 A e 12 HIT al bersaglio. |
-| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +3 H a sé. |
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio. |
-| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
 
 ### Mazzo di prova di Duccio Braccio Teso — `prova-duccio`
 
@@ -202,7 +202,7 @@ Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità
 | 2 | **E allora?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 HEALTH: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
 | 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
-| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +3 H a sé. |
 | 1 | **Fasciatura col fazzolettaccio** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 A a sé; +8 HEALTH a sé. |
 | 2 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
 | 1 | **Ghiaccio nel tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | OGG-14 · Consumato: +10 HEALTH; azzera la tua T. |
@@ -217,7 +217,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 | bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 V a sé. |
 | bound | **SVEGLIAMOCI MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio. |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 35 danni da colpo al bersaglio. |
 | 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2. |
 | 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. |
 | 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V. |
@@ -243,7 +243,7 @@ Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nes
 | 1 | **Cinghiata di traverso** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 A: Infliggi danni da taglio pari a 18 più metà della tua A residua, arrotondata per difetto. Gioca d'anticipo: +5 CUT. |
 | 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,8. |
 | 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +4 A a sé. |
-| 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,4 in questo turno. +5 A a sé. |
+| 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +5 A a sé. |
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
@@ -317,7 +317,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Lavoro fatto bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 V: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo. |
 | 1 | **Steal** (`com.Steal`) | C | GEN-02 · 10 A: ruba un oggetto lontano e lo mette vicino a sé. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 1 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,8 per 3 turni. |
+| 1 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
 | 1 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 1 | **Una stretta di prova** (`base.gigi.UnaStrettaDiProva`) | NC | GIG-AR6 · Infliggi 4 danni da taglio al bersaglio. Annuncia Lavoro fatto bene o Chiave da tredici. Se lo trovi: +10 V. Se non lo trovi: +5 V. |
 | 2 | **Colpo allo stomaco** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 V: 10 HIT e +10 T al bersaglio. |
@@ -341,7 +341,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
-| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
 | 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
@@ -411,7 +411,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
 | 2 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni (questo e i due successivi). |
-| 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,8 per 3 turni. |
+| 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; azzera la tua T e la tua L. |
 | 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua L. Infliggi danni da colpo pari a 18 più la L spesa. |
 | 2 | **Grappa della casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 L, −5 A. |
@@ -426,7 +426,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 | bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 V a sé. |
 | bound | **SVEGLIAMOCI MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio. |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 35 danni da colpo al bersaglio. |
 | 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2. |
 | 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. |
 | 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V. |
@@ -456,7 +456,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Lavoro fatto bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 V: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo. |
 | 1 | **Steal** (`com.Steal`) | C | GEN-02 · 10 A: ruba un oggetto lontano e lo mette vicino a sé. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
-| 1 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,8 per 3 turni. |
+| 1 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
 | 2 | **Colpo allo stomaco** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 V: 10 HIT e +10 T al bersaglio. |
 | 2 | **Maleducazione** (`bruiser.BadEducation`) | NC | GEN-10 · 5 V: toglie gli equip al bersaglio; 8 HIT al bersaglio. |
 | 2 | **Coccio di bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo. |
@@ -478,7 +478,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
 | 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
-| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
 | 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
@@ -500,7 +500,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
 | 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
-| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
 | 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
@@ -570,7 +570,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
 | 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
-| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
 | 2 | **Conto del tavolo sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V. |
@@ -586,13 +586,13 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 | bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 V a sé. |
 | bound | **SVEGLIAMOCI MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio. |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 35 danni da colpo al bersaglio. |
 | 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2. |
 | 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. |
 | 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V. |
 | 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio. |
 | 2 | **GABBIANO DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 V: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +3 H a sé. |
 | 1 | **Mattone del cantiere** (`base.com.MattoneDelCantiere`) | C | GEN-06 · 15 V: 24 HIT al bersaglio. |
 | 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | GEN-07 · 20 V: 30 HIT al bersaglio; azzera T e L del bersaglio. |
 | 1 | **Denti stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 A a sé; +10 V a sé. |
@@ -641,11 +641,11 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
 | 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 V: −10 A e 12 HIT al bersaglio. |
-| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,5 in questo turno. +3 H a sé. |
 | 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni. |
 | 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio. |
-| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Sigaretta accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A. |
 
 <!-- fine generato -->

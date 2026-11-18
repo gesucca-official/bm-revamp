@@ -587,7 +587,7 @@ class Sb17CardsTest {
 
     @Test
     void theBotParriesAShownLethalHitWithFareIlVago() {
-        // GARGANTUESCO IMPATTO (HIT 34, priority 0) shown and payable against 30 health: Fare il vago (priority 2) leaves 34 × 0,75 = 25.
+        // GARGANTUESCO IMPATTO (HIT 35 in D139, priority 0) shown and payable against 30 health: Fare il vago (priority 2) leaves 35 × 0,75 = 26.
         BotView.CardSeen impact = BotView.publicText(draft.card("bruiser.SuperImpact"));
         BotView v = new BotView(4, new BotView.Self(LethalAwarePolicyTest.seat("me", 30, 30, 10, 0, List.of()),
                 List.of(BotView.publicText(draft.card(VAGO)), BotView.publicText(draft.card("base.com.Spintone"))), 10, List.of()),

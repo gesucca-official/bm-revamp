@@ -7,9 +7,9 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 18 novembre 2026, dopo D139). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In corso:** [SB-20b](#sb-20--prima-misura-dellintero-set) Fase B, sulla [proposta](design/set-base/sb-20b-proposta.md) approvata in D139. In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
+> - **In attesa:** revisione del [rapporto della Fase B di SB-20b](reports/set-base/sb-20b-report.md) (cinque cambi di D139 tenuti, criteri rispettati, suite verde dopo D140; nessuna domanda). In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
 > - **Prossimo:** SB-20c testi stampati; poi le scelte di D136 e la rarità P (D137); poi [SB-20](#sb-20--prima-misura-dellintero-set). Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D139, D138, D137, D136; per la Fase B anche D90, D95, D97, D99, D127, D132, D134. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D139).
+> - **Decisioni da leggere:** D139, D138, D137, D136; per la Fase B anche D90, D95, D97, D99, D127, D132, D134. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D140).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -607,6 +607,8 @@ controllo FFA.
 
 **Consegna SB-20b, Fase A (18 novembre 2026), STOP per il proprietario** ([proposta](design/set-base/sb-20b-proposta.md)). Solo documenti. Quattro regole controllabili (R1 non interi, R2 moltiplicatori a quarti, R3 importi fuori scala, R4 testo e dati); «non multiplo di 5» scartata perché segnalerebbe 62 carte su 116. Il set è già quasi pulito: proposti **3 moltiplicatori** (MAR-AR4 ×0,4 → ×0,5, GEN-13 ×0,6 → ×0,5, OGG-11 ×0,8 → ×0,75), **GARGANTUESCO IMPATTO 34 → 35** (eccezione argomentata a D90 (1)), il testo di CES-AR7 e il riallineamento della griglia su tre carte di Mara (D99); intoccabili D134, D127, D132, D97, D99. Fase B: applicazione, «Rif» prima e dopo con gli strumenti di SB-19, identità sui mazzi senza carte toccate, ritiro del singolo cambio che spinge una coppia fuori da D95, budget 1.200 s. Cinque domande. **Approvata in [D139](#decisioni-del-proprietario)** («Sì, tutte»): tutti i cambi proposti, nessun arrotondamento di MAR-AR3 e GIG-BA, controllo `controlla-numeri.py` in Fase B.
 
+**Consegna SB-20b, Fase B (18 novembre 2026)** ([rapporto](reports/set-base/sb-20b-report.md)). In `bozza.json` i cinque cambi di D139: MAR-AR4 e GEN-13 ×0,5, OGG-11 ×0,75, GARGANTUESCO IMPATTO 35 HIT, CES-AR7 senza «0 A:»; griglia riallineata (MAR-AR1–AR3 a D99). «Rif» prima e dopo: base identica a B2a, criteri 1–4 rispettati (spostamento massimo 2,66, Spazienzio–Mara; Mara–Beppe 39,58%), riserva non usata, 229 s su 1.200. Spazienzio 43,2% → 44,9% di media non-specchio, Mara 52,6% → 51,5%. Nuovo controllo [controlla-numeri.py](design/set-base/controlla-numeri.py) (R1–R4, valori tenuti citati), verde. Attesi di cinque test cambiati per D139 (`Bozza16Test` con D140, dopo uno STOP 1); suite `Test` verde.
+
 **In ingresso ([D134](#decisioni-del-proprietario)).** Rimisurare Conto e Sigaretta nei mazzi di Sergio senza togliere gli Espresso (con lo scambio della B2 escono a −31/−32, −23/−18 anche senza malus); rifare intera la ricerca «dopo» (nella B2 solo 4 personaggi su 7; il banco a 26 mazzi costa circa 2,6 volte la «prima»).
 
 **In ingresso ([D131](#decisioni-del-proprietario)).** Le carte da booster rendono il mazzo più forte dello starter, fra 0 e +10 punti di media, mai oltre +15 in un confronto: vale per tutte le carte fuori dagli starter, anche quelle d'archetipo. Estasi (nel mazzo vincente di 14 ricerche su 14 prima di SB-19) e Grappa (+11,5 da sola in un mazzo di Beppe senza chi usa L, da spiegare) si correggono qui.
@@ -753,7 +755,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D139 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D140 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 

@@ -766,13 +766,13 @@ class SetBaseDraftTest {
         for (String b : List.of("base.gigi.bound.UnaStrettaEPassa", "base.gigi.bound.ColpoDiCacciavite", "base.gigi.bound.Lima"))
             for (Card.CardTarget target : draft.card(b).getCanTarget())
                 assertFalse(target == Card.CardTarget.NEAR_ITEM || target == Card.CardTarget.FAR_ITEM, b + ": nessuna bound tocca gli oggetti");
-        // Gli equip di Gigi: Guanti HIT inflitto ×1,25, Casco HIT ricevuto ×0,8, per 3 turni.
+        // Gli equip di Gigi: Guanti HIT inflitto ×1,25, Casco HIT ricevuto ×0,75 (D139, era ×0,8), per 3 turni.
         JsonNode guanti = card("base.items.GuantiDaOfficina").get("self").get(0), casco = card("base.items.CascoDaLavoro").get("self").get(0);
         assertTrue(guanti.get("equip").asBoolean() && casco.get("equip").asBoolean());
         assertEquals("OUTPUT", guanti.get("flow").asText());
         assertEquals(1.25, guanti.get("factor").asDouble());
         assertEquals("INPUT", casco.get("flow").asText());
-        assertEquals(0.8, casco.get("factor").asDouble());
+        assertEquals(0.75, casco.get("factor").asDouble());
         // Lo slot apre la descrizione delle nove carte di Gigi (Struggle è generica).
         Pattern slot = Pattern.compile("^GIG-(BA|BO\\d|AR\\d) · .*");
         int slots = 0;
@@ -851,7 +851,7 @@ class SetBaseDraftTest {
         assertTrue(spazienzio.getItems().isEmpty(), "l'oggetto è distrutto");
         assertEquals(2, me.getItems().size(), "gli oggetti di Gigi restano");
 
-        // Sotto il cofano: HIT ricevuto ×0,5 e CUT ×0,75 in questo turno; il Casco HIT ×0,8.
+        // Sotto il cofano: HIT ricevuto ×0,5 e CUT ×0,75 in questo turno; il Casco HIT ×0,75 (D139).
         Character standing = draft.character(GIGI), hitter = draft.character(SPAZIENZIO);
         ((AbstractCard) draft.card("base.gigi.SottoIlCofano")).applyEffectOnSelf(standing);
         hitter.inflictDamage(standing, new Damage(Damage.DamageType.HIT, 20));
@@ -860,7 +860,7 @@ class SetBaseDraftTest {
         Character helmeted = draft.character(GIGI);
         ((AbstractCard) draft.card("base.items.CascoDaLavoro")).applyEffectOnSelf(helmeted);
         hitter.inflictDamage(helmeted, new Damage(Damage.DamageType.HIT, 20));
-        assertEquals(GIGI_HEALTH - 16, helmeted.getResources().get(Resource.HEALTH));
+        assertEquals(GIGI_HEALTH - 15, helmeted.getResources().get(Resource.HEALTH));
     }
 
     /** SB-15: la classe di «Lavoro fatto bene» si carica dalla bozza solo coi suoi due parametri, e costo e priorità vengono dal file. */
