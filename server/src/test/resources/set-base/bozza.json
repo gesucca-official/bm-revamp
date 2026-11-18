@@ -656,7 +656,9 @@
     {"binding": "base.com.SecondoFiato", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["SELF"], "self": [{"op": "status", "name": "SECONDO FIATO - HIT", "description": "Hit Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "HIT", "factor": 1.25, "turns": 1}, {"op": "status", "name": "SECONDO FIATO - CUT", "description": "Cut Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "CUT", "factor": 1.25, "turns": 1}, {"op": "say", "text": "Gained status: SECONDO FIATO"}, {"op": "gain", "resource": "HEALTH", "amount": 12}], "gui": {"name": "Secondo fiato", "description": "GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni.", "role": "RESOURCES", "gains": "+12 H", "damage": "—", "damageAmount": "—"}},
     {"binding": "base.com.CoccioDiBottiglia", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["SELF"], "cost": {"VIOLENCE": 5}, "self": [{"op": "status", "name": "COCCIO DI BOTTIGLIA", "description": "Hit Damage dealt x1.5 and turned to Cut Damage", "statusType": "GOOD", "flow": "OUTPUT", "property": "HIT", "factor": 1.5, "equip": true, "singleUse": true, "convertTo": "CUT"}, {"op": "say", "text": "Equipped status: COCCIO DI BOTTIGLIA"}], "gui": {"name": "Coccio di bottiglia", "description": "GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
     {"binding": "base.items.MezzaMineraleSgasata", "rarity": "UNCOMMON", "kind": "ITEM", "self": [{"op": "empty", "resource": "ALCOHOL"}, {"op": "gain", "resource": "ALERTNESS", "amount": 20}], "gui": {"name": "Mezza minerale sgasata", "description": "OGG-08 · Consumato: azzera la tua L; +20 A.", "role": "OTHER", "gains": "+20 A", "damage": "—", "damageAmount": "—"}},
-    {"binding": "base.items.GrappaDellaCasa", "rarity": "RARE", "kind": "ITEM", "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 25}, {"op": "lose", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Grappa della casa", "description": "OGG-16 · Consumato: +25 L, −5 A.", "role": "RESOURCES", "gains": "+25 L", "damage": "—", "damageAmount": "—"}}
+    {"binding": "base.items.GrappaDellaCasa", "rarity": "RARE", "kind": "ITEM", "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 25}, {"op": "lose", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Grappa della casa", "description": "OGG-16 · Consumato: +25 L, −5 A.", "role": "RESOURCES", "gains": "+25 L", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.ContoDelTavoloSei", "rarity": "UNCOMMON", "kind": "ITEM", "inPlay": [{"op": "lose", "resource": "ALERTNESS", "amount": 3}], "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 15}], "gui": {"name": "Conto del tavolo sei", "description": "OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V.", "inPlay": "−3 A", "role": "RESOURCES", "gains": "+15 V", "damage": "—", "damageAmount": "—"}},
+    {"binding": "base.items.SigarettaAccesa", "rarity": "RARE", "kind": "ITEM", "inPlay": [{"op": "gain", "resource": "TOXICITY", "amount": 2}], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 10}], "gui": {"name": "Sigaretta accesa", "description": "OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A.", "inPlay": "+2 T", "role": "RESOURCES", "gains": "+10 A", "damage": "—", "damageAmount": "—"}}
   ],
   "decks": [
     {
@@ -1034,6 +1036,238 @@
         "base.com.DueDitaInGola": 1,
         "base.pino.GoingBerserk": 2,
         "base.items.GrappaDellaCasa": 2
+      }
+    },
+    {
+      "id": "prova-b2-spazienzio",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "base.com.DentiStretti": 1,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1,
+        "bruiser.CantFeelAnything": 2,
+        "bruiser.SickeningBlow": 2,
+        "base.com.CoccioDiBottiglia": 2,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "prova-b2-beppe",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.UnaStrettaEPassa",
+        "base.gigi.bound.ColpoDiCacciavite"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.BreakYourToy": 2,
+        "base.gigi.ChiaveDaTredici": 2,
+        "base.gigi.ColpoDiChiaveInglese": 2,
+        "base.gigi.SottoIlCofano": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "com.Steal": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.CascoDaLavoro": 1,
+        "bruiser.SickeningBlow": 2,
+        "bruiser.BadEducation": 2,
+        "base.com.CoccioDiBottiglia": 2,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "prova-b2-sergio-conto",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "prova-b2-sergio-sigaretta",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.com.BeggingMoney": 2,
+        "base.items.SigarettaAccesa": 2
+      }
+    },
+    {
+      "id": "prova-b2-celestina",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 1,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "base.items.PaninoDelKebab": 1,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.com.BeggingMoney": 2,
+        "base.com.SecondoFiato": 2,
+        "base.items.SigarettaAccesa": 2
+      }
+    },
+    {
+      "id": "prova-b2-rischio9",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 1,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "base.items.PaninoDelKebab": 1,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.com.SecondoFiato": 2,
+        "base.items.SigarettaAccesa": 2,
+        "base.com.ShuffleFeet": 2
+      }
+    },
+    {
+      "id": "prova-b2-rischio10",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "base.cesira.LoRivendo": 2,
+        "bruiser.CantFeelAnything": 2,
+        "base.com.ManoLesta": 2,
+        "base.items.ContoDelTavoloSei": 2,
+        "base.com.ShuffleFeet": 2
+      }
+    },
+    {
+      "id": "iso-b2-conto",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "bruiser.character.LittleRage",
+        "bruiser.character.LittleSmack"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "bruiser.SuperImpact": 2,
+        "bruiser.ExtremelyViolentBlow": 1,
+        "bruiser.Glare": 2,
+        "bruiser.MadeOfStone": 2,
+        "bruiser.YouStop": 2,
+        "bruiser.SeagullFly": 2,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.MattoneDelCantiere": 1,
+        "bruiser.HealingBlow": 1,
+        "base.com.DentiStretti": 1,
+        "base.items.PosacenereDiVetro": 1,
+        "base.bruiser.TiFaccioSpazio": 1,
+        "base.items.ContoDelTavoloSei": 2
+      }
+    },
+    {
+      "id": "iso-b2-sigaretta",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "junkie.character.PatheticBlade",
+        "base.tossico.bound.RaschiareIlFondo"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "junkie.MethDrivenRage": 2,
+        "junkie.Cough": 2,
+        "junkie.PervertedMetabolism": 2,
+        "junkie.AmphetamineReflexes": 2,
+        "junkie.ToxicBloodDrain": 1,
+        "com.Grab": 2,
+        "base.com.RincorsaDalMarciapiede": 1,
+        "com.Steal": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.items.PaninoDelKebab": 2,
+        "com.items.MarvelousCocktail": 1,
+        "base.tossico.UnAssaggino": 1,
+        "base.items.SigarettaAccesa": 2
+      }
+    },
+    {
+      "id": "iso-b2-sigaretta-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.OhGuardaLa": 2,
+        "base.cesira.Ricatto": 2,
+        "base.cesira.LoSapevo": 1,
+        "base.cesira.ContoSalato": 2,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Malelingue": 1,
+        "bruiser.StunningBlow": 1,
+        "base.com.TartarugaSulMarciapiede": 2,
+        "base.com.Spintone": 1,
+        "base.items.SantinoDellaPortinaia": 1,
+        "base.com.AcquaInFaccia": 1,
+        "base.cesira.LoRivendo": 2,
+        "base.items.SigarettaAccesa": 2
       }
     }
   ]

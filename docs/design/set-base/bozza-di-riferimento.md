@@ -35,9 +35,9 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `a8ffef96e449…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `0ecb69eb1494…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
-Il file contiene 114 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 11 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
+Il file contiene 116 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
 ### Starter di Spazienzio de la Ucciso — `starter-spazienzio`
 
@@ -415,5 +415,237 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; azzera la tua T e la tua L. |
 | 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua L. Infliggi danni da colpo pari a 18 più la L spesa. |
 | 2 | **Grappa della casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 L, −5 A. |
+
+### Mazzo di prova di Spazienzio de la Ucciso — `prova-b2-spazienzio`
+
+Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 5 · NC 12 · R 3).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | SPA-BA · Basic: consuma un proprio oggetto, come Grab. |
+| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 V a sé. |
+| bound | **SVEGLIAMOCI MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: 3 HIT al bersaglio. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio. |
+| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2. |
+| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. |
+| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V. |
+| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio. |
+| 1 | **Denti stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 A a sé; +10 V a sé. |
+| 1 | **Posacenere di vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, il prossimo HIT inflitto ×1,5, uso singolo. |
+| 1 | **TI FACCIO SPAZIO** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia SPEDIAMOTI DUNQUE IN O-AHIO o GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +15 V, +15 A. Se non lo trovi: +5 V, +5 A. |
+| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
+| 2 | **Colpo allo stomaco** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 V: 10 HIT e +10 T al bersaglio. |
+| 2 | **Coccio di bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo. |
+| 2 | **Conto del tavolo sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V. |
+
+### Mazzo di prova di Beppe Bulletta — `prova-b2-beppe`
+
+Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 5 · NC 12 · R 3).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Questo torna utile** (`base.gigi.QuestoTornaUtile`) | NC | GIG-BA · Basic: +4 V a sé, poi consuma un proprio oggetto. |
+| bound | **Una stretta e passa** (`base.gigi.bound.UnaStrettaEPassa`) | C | GIG-BO1 · Bound: +5 V a sé. |
+| bound | **Colpo di cacciavite** (`base.gigi.bound.ColpoDiCacciavite`) | C | GIG-BO2 · Bound: 3 HIT al bersaglio. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **Smontiamo tutto** (`bruiser.BreakYourToy`) | NC | GIG-AR1 · 5 V: distrugge un oggetto lontano. |
+| 2 | **Chiave da tredici** (`base.gigi.ChiaveDaTredici`) | NC | GIG-AR2 · 10 V: Infliggi 18 danni da taglio al bersaglio. |
+| 2 | **Preparo il lavoro** (`base.gigi.ColpoDiChiaveInglese`) | NC | GIG-AR3 · Infliggi 4 danni da taglio al bersaglio. Annuncia Chiave da tredici o Lavoro fatto bene. Se lo trovi: +15 V. Se non lo trovi: +5 V. |
+| 1 | **Sotto il cofano** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 V: In questo turno moltiplica per 0,5 i danni da colpo e per 0,75 quelli da taglio che ricevi. Guadagni 5 V e 5 A. |
+| 1 | **Lavoro fatto bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 V: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo. |
+| 1 | **Steal** (`com.Steal`) | C | GEN-02 · 10 A: ruba un oggetto lontano e lo mette vicino a sé. |
+| 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
+| 1 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,8 per 3 turni. |
+| 2 | **Colpo allo stomaco** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 V: 10 HIT e +10 T al bersaglio. |
+| 2 | **Maleducazione** (`bruiser.BadEducation`) | NC | GEN-10 · 5 V: toglie gli equip al bersaglio; 8 HIT al bersaglio. |
+| 2 | **Coccio di bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo. |
+| 2 | **Conto del tavolo sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V. |
+
+### Mazzo di prova di Sergio Sommerso — `prova-b2-sergio-conto`
+
+Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 11 titoli (C 4 · NC 13 · R 3).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 A a sé, poi consuma un proprio oggetto. |
+| bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
+| bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **Oh, guarda là** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Lo sanno tutti o Conto salato. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
+| 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 A: annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
+| 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 A: annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
+| 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
+| 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
+| 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
+| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
+| 2 | **Conto del tavolo sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V. |
+
+### Mazzo di prova di Sergio Sommerso — `prova-b2-sergio-sigaretta`
+
+Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 11 titoli (C 4 · NC 11 · R 5).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 A a sé, poi consuma un proprio oggetto. |
+| bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
+| bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **Oh, guarda là** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Lo sanno tutti o Conto salato. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
+| 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 A: annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
+| 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 A: annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
+| 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
+| 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
+| 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
+| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
+| 2 | **Sigaretta accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A. |
+
+### Mazzo di prova di Celestina Bucatina — `prova-b2-celestina`
+
+Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 5 · NC 7 · R 8).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 T a sé, poi consuma un proprio oggetto. Tutto è droga. |
+| bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 T a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort di Celestina: 2 HIT a sé; 7 POISON e +4 T al bersaglio. Rincara 5 (1 a sé). |
+| 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia Tossicone Scatarrante o C'è del sangue nella mia droga. Se lo trovi: +10 T, +5 A. Se non lo trovi: +5 T. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 T: Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagna HEALTH pari a T / 2, poi perde tutta la T. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 T: annulla le mosse dirette a sé che arrivano dopo. |
+| 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 T: Trasferisci tutta la tua T residua al bersaglio e togligli l'immunità a T. Infliggi anche 12 danni da veleno. A fine turno ottieni l'immunità a T. |
+| 1 | **Grab** (`com.Grab`) | C | GEN-01 · Consuma un proprio oggetto. |
+| 1 | **Rincorsa dal marciapiede** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 A: +5 V a sé; 12 HIT al bersaglio. |
+| 1 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a T e L; +20 L, +20 T; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
+| 1 | **Un assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia C'è del sangue nella mia droga o Tossicone Scatarrante. Se lo trovi: +20 T. Se non lo trovi: +5 T. |
+| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
+| 2 | **Secondo fiato** (`base.com.SecondoFiato`) | R | GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni. |
+| 2 | **Sigaretta accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A. |
+
+### Mazzo di prova di Celestina Bucatina — `prova-b2-rischio9`
+
+Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 5 · NC 9 · R 6).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 T a sé, poi consuma un proprio oggetto. Tutto è droga. |
+| bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 T a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort di Celestina: 2 HIT a sé; 7 POISON e +4 T al bersaglio. Rincara 5 (1 a sé). |
+| 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia Tossicone Scatarrante o C'è del sangue nella mia droga. Se lo trovi: +10 T, +5 A. Se non lo trovi: +5 T. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 T: Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagna HEALTH pari a T / 2, poi perde tutta la T. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 T: annulla le mosse dirette a sé che arrivano dopo. |
+| 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 T: Trasferisci tutta la tua T residua al bersaglio e togligli l'immunità a T. Infliggi anche 12 danni da veleno. A fine turno ottieni l'immunità a T. |
+| 1 | **Grab** (`com.Grab`) | C | GEN-01 · Consuma un proprio oggetto. |
+| 1 | **Rincorsa dal marciapiede** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 A: +5 V a sé; 12 HIT al bersaglio. |
+| 1 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a T e L; +20 L, +20 T; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
+| 1 | **Un assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia C'è del sangue nella mia droga o Tossicone Scatarrante. Se lo trovi: +20 T. Se non lo trovi: +5 T. |
+| 2 | **Secondo fiato** (`base.com.SecondoFiato`) | R | GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni. |
+| 2 | **Sigaretta accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A. |
+| 2 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità. |
+
+### Mazzo di prova di Sergio Sommerso — `prova-b2-rischio10`
+
+Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 11 titoli (C 4 · NC 15 · R 1).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 A a sé, poi consuma un proprio oggetto. |
+| bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
+| bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **Oh, guarda là** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Lo sanno tutti o Conto salato. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
+| 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 A: annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
+| 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 A: annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
+| 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
+| 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
+| 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
+| 2 | **Conto del tavolo sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V. |
+| 2 | **Scatto Repentino** (`base.com.ShuffleFeet`) | NC | GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità. |
+
+### Mazzo di prova di Spazienzio de la Ucciso — `iso-b2-conto`
+
+Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 8 · NC 11 · R 1).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **ADOPERIAMOTI** (`com.basic.BruiserGrab`) | C | SPA-BA · Basic: consuma un proprio oggetto, come Grab. |
+| bound | **LIEVE FASTIDIO** (`bruiser.character.LittleRage`) | C | SPA-BO1 · Bound: +5 V a sé. |
+| bound | **SVEGLIAMOCI MA TU NO** (`bruiser.character.LittleSmack`) | C | SPA-BO2 · Bound: 3 HIT al bersaglio. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **GARGANTUESCO IMPATTO SUL TU** (`bruiser.SuperImpact`) | NC | SPA-AR1 · 25 V: Infliggi 34 danni da colpo al bersaglio. |
+| 1 | **SPEDIAMOTI DUNQUE IN O-AHIO** (`bruiser.ExtremelyViolentBlow`) | R | SPA-AR2 · 10 V: HIT pari a 6 + V residua / 2. |
+| 2 | **PAZIENZA: FINITA** (`bruiser.Glare`) | NC | SPA-AR3 · Annuncia GARGANTUESCO IMPATTO SUL TU o SPEDIAMOTI DUNQUE IN O-AHIO. Se lo trovi: +25 V, +15 A. Se non lo trovi: +5 V, +5 A. |
+| 2 | **NON GIOCARE COL COLTELLO NO** (`bruiser.MadeOfStone`) | C | SPA-AR4 · CUT ricevuto ×0,5 per 4 turni (questo e i tre successivi); +10 V. |
+| 2 | **FAI BASTA** (`bruiser.YouStop`) | NC | SPA-AR5 · 5 V: annulla la mossa del bersaglio se arriva dopo. Niente A al bersaglio. |
+| 2 | **GABBIANO DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 V: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 1 | **Mattone del cantiere** (`base.com.MattoneDelCantiere`) | C | GEN-06 · 15 V: 24 HIT al bersaglio. |
+| 1 | **ORMALE GUARIAMOTI** (`bruiser.HealingBlow`) | NC | GEN-07 · 20 V: 30 HIT al bersaglio; azzera T e L del bersaglio. |
+| 1 | **Denti stretti** (`base.com.DentiStretti`) | C | GEN-14 · −5 A a sé; +10 V a sé. |
+| 1 | **Posacenere di vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, il prossimo HIT inflitto ×1,5, uso singolo. |
+| 1 | **TI FACCIO SPAZIO** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia SPEDIAMOTI DUNQUE IN O-AHIO o GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +15 V, +15 A. Se non lo trovi: +5 V, +5 A. |
+| 2 | **Conto del tavolo sei** (`base.items.ContoDelTavoloSei`) | NC | OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V. |
+
+### Mazzo di prova di Celestina Bucatina — `iso-b2-sigaretta`
+
+Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 9 · NC 7 · R 4).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 T a sé, poi consuma un proprio oggetto. Tutto è droga. |
+| bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 T a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort di Celestina: 2 HIT a sé; 7 POISON e +4 T al bersaglio. Rincara 5 (1 a sé). |
+| 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia Tossicone Scatarrante o C'è del sangue nella mia droga. Se lo trovi: +10 T, +5 A. Se non lo trovi: +5 T. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 T: Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T. |
+| 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagna HEALTH pari a T / 2, poi perde tutta la T. |
+| 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 T: annulla le mosse dirette a sé che arrivano dopo. |
+| 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 T: Trasferisci tutta la tua T residua al bersaglio e togligli l'immunità a T. Infliggi anche 12 danni da veleno. A fine turno ottieni l'immunità a T. |
+| 2 | **Grab** (`com.Grab`) | C | GEN-01 · Consuma un proprio oggetto. |
+| 1 | **Rincorsa dal marciapiede** (`base.com.RincorsaDalMarciapiede`) | C | GEN-12 · 10 A: +5 V a sé; 12 HIT al bersaglio. |
+| 1 | **Steal** (`com.Steal`) | C | GEN-02 · 10 A: ruba un oggetto lontano e lo mette vicino a sé. |
+| 1 | **Fasciatura col fazzolettaccio** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 A a sé; +8 HEALTH a sé. |
+| 2 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
+| 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a T e L; +20 L, +20 T; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
+| 1 | **Un assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia C'è del sangue nella mia droga o Tossicone Scatarrante. Se lo trovi: +20 T. Se non lo trovi: +5 T. |
+| 2 | **Sigaretta accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A. |
+
+### Mazzo di prova di Sergio Sommerso — `iso-b2-sigaretta-sergio`
+
+Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 5 · NC 11 · R 4).
+
+| Copie | Carta | Rarità | Testo |
+|---:|---|---|---|
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 A a sé, poi consuma un proprio oggetto. |
+| bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
+| bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
+| last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
+| 2 | **Oh, guarda là** (`base.cesira.OhGuardaLa`) | NC | CES-AR1 · 5 A: −10 A e 4 HIT al bersaglio. Annuncia Lo sanno tutti o Conto salato. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
+| 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 A: annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
+| 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 A: annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
+| 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 A: 8 HIT al bersaglio; se ha un gettone di vulnerabilità, altri 6 HIT. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 A: 24 HIT al bersaglio. |
+| 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
+| 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 V: −10 A e 12 HIT al bersaglio. |
+| 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di L per 3 turni. |
+| 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 A: azzera la L del bersaglio; 3 HIT al bersaglio. |
+| 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
+| 2 | **Sigaretta accesa** (`base.items.SigarettaAccesa`) | R | OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A. |
 
 <!-- fine generato -->

@@ -21,6 +21,12 @@ final class Sb19 {
             COCCIO = "base.com.CoccioDiBottiglia", MINERALE = "base.items.MezzaMineraleSgasata", GRAPPA = "base.items.GrappaDellaCasa";
     /** The nine cards, in the order of the slots. */
     static final List<String> CARDS = List.of(ELEMOSINA, COLPO, MALEDUCAZIONE, NON_SENTO_NIENTE, MANO_LESTA, SECONDO_FIATO, COCCIO, MINERALE, GRAPPA);
+    /** SB-19 B2 (D130): the two items with the «In campo» effect, OGG-17 and OGG-18 (RP-27, RP-28). */
+    static final String CONTO = "base.items.ContoDelTavoloSei", SIGARETTA = "base.items.SigarettaAccesa";
+    static final List<String> CARDS_B2 = List.of(CONTO, SIGARETTA);
+    /** SB-19 B2 (D130): the ten decks of the phase: seven test decks and three isolation decks (make-bozza-b2.py). */
+    static final List<String> DECKS_B2 = List.of("prova-b2-spazienzio", "prova-b2-beppe", "prova-b2-sergio-conto", "prova-b2-sergio-sigaretta",
+            "prova-b2-celestina", "prova-b2-rischio9", "prova-b2-rischio10", "iso-b2-conto", "iso-b2-sigaretta", "iso-b2-sigaretta-sergio");
     /** The decks with the additions: the seven characters, then the two of the risks 3 (equip stack) and 1 (Estasi and Grappa). */
     static final List<String> DECKS = List.of("prova-b1-spazienzio", "prova-b1-mara", "prova-b1-celestina", "prova-b1-piera", "prova-b1-beppe",
             "prova-b1-sergio", "prova-b1-duccio", "prova-b1-equip", "prova-b1-estasi");
@@ -31,11 +37,16 @@ final class Sb19 {
     private Sb19() {
     }
 
-    /** A copy of the draft without the nine cards and the nine decks (nor Sergio and Duccio: strip those with their own classes). */
+    /**
+     * A copy of the draft without the nine cards and the nine decks of the B1, nor the two items and the ten decks of the B2 (D130); and
+     * not Sergio and Duccio: strip those with their own classes.
+     */
     static JsonNode without(JsonNode draft) {
         ObjectNode copy = draft.deepCopy();
         remove((ArrayNode) copy.get("cards"), "binding", Set.copyOf(CARDS));
+        remove((ArrayNode) copy.get("cards"), "binding", Set.copyOf(CARDS_B2));
         remove((ArrayNode) copy.get("decks"), "id", Set.copyOf(DECKS));
+        remove((ArrayNode) copy.get("decks"), "id", Set.copyOf(DECKS_B2));
         return copy;
     }
 

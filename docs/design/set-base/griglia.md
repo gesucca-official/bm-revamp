@@ -6,7 +6,8 @@
 > **SB-16d, 12 novembre 2026 (D52, D54, D55):** nove slot riprogettati secondo la [proposta approvata](sb-16d-proposta.md),
 > più PIN-BO1 ridotta da +10 a +5 L sotto la delega D38: valore per uso 3,75 con D50, tetto 4 invariato.
 > SB-12a ha corretto coi bot alcuni numeri degli starter base, approvati dal proprietario: vedi [Correzioni di SB-12a](#correzioni-di-sb-12a).
-> **SB-19, Fase B1, 17 novembre 2026 ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza le nove carte che mancavano (GEN-04, 08, 10, 11, 19, 20, 21; OGG-08, 16): il set è a **121 carte**, 44 C / 58 NC / 19 R, con CES-AR7 contata dentro (D121); i conti qui sotto (blocchi, rarità, ruoli) sono riscritti dalla bozza. Con OGG-17 e OGG-18 della B2 il set va a 123 ([nota ¹⁰](#azioni-generiche-23)).
+> **SB-19, Fase B1, 17 novembre 2026 ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza le nove carte che mancavano (GEN-04, 08, 10, 11, 19, 20, 21; OGG-08, 16): il set è a **121 carte**, 44 C / 58 NC / 19 R, con CES-AR7 contata dentro (D121); i conti qui sotto (blocchi, rarità, ruoli) sono riscritti dalla bozza. Con OGG-17 e OGG-18 della B2 il set va a 123 (riga qui sotto).
+> **SB-19, Fase B2, 18 novembre 2026 ([D130](../../set-base-decisioni.md#decisioni-del-proprietario), [D133](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza i due oggetti con l'effetto «In campo» (RP-27, [regole del playground 1.5](regole-playground.md)): OGG-17 «Conto del tavolo sei» (NC) e OGG-18 «Sigaretta accesa» (R). Il set è a **123 carte**, 44 C / 59 NC / 20 R; i conti qui sotto sono riscritti dalla bozza ([nota ¹¹](#oggetti-18-e-token)).
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -376,7 +377,7 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 ² **SB-12a, giro 1:** GEN-17 da 10 a 5 A con le carte di Mara (D38), perché nello starter base la usa solo lei. È una generica: chi la
 mette in un altro starter (Duccio, SB-18) la prende a 5 A, e il suo prezzo va riguardato lì.
 
-### Oggetti (16) e token
+### Oggetti (18) e token
 
 Si consumano con una presa; il loro valore è quello di una presa, non di uno slot in mano (listino).
 
@@ -398,7 +399,11 @@ Si consumano con una presa; il loro valore è quello di una presa, non di uno sl
 | OGG-14 | Oggetto | RESOURCES | +10 HEALTH; azzera la propria T | ≈ 10 | NC | Mara 1 (SB-16i) | bozza «Ghiaccio nel tovagliolo» | Cura e pulizia per i mazzi costruiti | dati |
 | OGG-15 | Oggetto | OTHER | Immunità all'effetto periodico di L; timer 3 che la toglie | secondo il contesto | R | — | da inventare («Santino della portinaia») | Tecnica contro l'alcol altrui | Java (classe di `MarvelousCocktail`) |
 | OGG-16 | Oggetto | RESOURCES | +25 L; −5 A | ≈ 6,3 | R | — | «Grappa della casa» (da inventare; D129 (1): resta) | Picco per chi spende L (Piera); fuori da Piera alimenta Estasi, rischio 1 di SB-19 | dati |
+| OGG-17 | Oggetto | RESOURCES | In campo: a fine turno −3 A a chi lo ha vicino; consumato: +15 V (RP-27, RP-28; SB-19 B2, D130) | ≈ 8 con due turni in campo (11,25 meno 1,5 per turno) | NC | — | «Conto del tavolo sei» (da inventare; idea pilota di SB-19) | Un investimento: la tassa in A la pagano tutti, il ricavo in V serve a chi spende V | dati (`inPlay`)¹¹ |
+| OGG-18 | Oggetto | RESOURCES | In campo: a fine turno +2 T a chi lo ha vicino; consumato: +10 A (RP-27, RP-28; SB-19 B2, D130) | immune: 5 più 0,3 per turno; gli altri: 5 meno 1,4–2,9 per turno | R | — | «Sigaretta accesa» (da inventare; SB-19, D130 (2)) | Carburante per chi è immune a T, un veleno lento per gli altri; rischio 9 sulla tossicità | dati (`inPlay`)¹¹ |
 | token | Token (non contato) | OTHER | Equip: HIT inflitto ×1,5 convertito in CUT, uso singolo | — | — | da OGG-03 | `BrokenBeerBottle`, conservato | Unico token del set | equip |
+
+¹¹ **SB-19, Fase B2** ([D130](../../set-base-decisioni.md#decisioni-del-proprietario), [proposta A2](sb-19-proposta-a2.md#3-i-due-oggetti), [regole del playground 1.5](regole-playground.md#10-oggetti-con-un-effetto-in-campo-15-sb-19)): i due oggetti hanno un effetto «In campo» (RP-27) che agisce a fine turno su chi li ha vicino in quel momento, anche nel turno in cui arrivano, mai su HEALTH; il campo `inPlay` della bozza (RP-28) lo scrive. Consumati, venduti o scalzati non agiscono. Sono carte del playground, in `d50` e solo in bozza.
 
 ## Starter
 
@@ -574,8 +579,8 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Last resort | 4 | 4 |
 | Azioni d'archetipo | 42 (D79) + CES-AR7 (D121) | 43 |
 | Azioni generiche | 25 → 23 (decisione 1) | 23 |
-| Oggetti | 16 | 16 |
-| **Totale** | **120** (D129: si può superare di poco) | **121** |
+| Oggetti | 16 → 18 (D130) | 18 |
+| **Totale** | **120** (D129: si può superare di poco) | **123** |
 
 **Per personaggio** (carte legate: basic, bound, archetipo, last resort propria)
 
@@ -590,7 +595,7 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Duccio | 1 | 3 | 6 | propria | 11 |
 | **Totale** | 7 | 21 | 43 | 3 | **74** |
 
-Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 121.
+Più Struggle, 23 generiche, 18 oggetti e 7 personaggi: 123.
 
 **Per rarità**
 
@@ -602,19 +607,19 @@ Più Struggle, 23 generiche, 16 oggetti e 7 personaggi: 121.
 | Last resort | 1 | 2 | 1 |
 | Archetipo | 9 | 27 | 7 |
 | Generiche | 12 | 7 | 4 |
-| Oggetti | 8 | 5 | 3 |
-| **Totale** | **44** | **58** | **19** |
+| Oggetti | 8 | 6 | 4 |
+| **Totale** | **44** | **59** | **20** |
 
-D79 porta l’archetipo a 11 C / 24 NC / 7 R; la bozza di oggi ha 9 C / 27 NC / 7 R (Duccio 2 / 3 / 1 e Sergio 1 / 4 / 1 in D124 e D121, CES-AR7 dentro), e SB-19 B1 riscrive la tabella dalla bozza (44 / 58 / 19, ex 45 / 55 / 20): l'archetipo di D79 non torna più, e restano 19 rare, una in meno di D79, perché «Bottigliata» è diventata Mano lesta comune. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
+D79 porta l’archetipo a 11 C / 24 NC / 7 R; la bozza di oggi ha 9 C / 27 NC / 7 R (Duccio 2 / 3 / 1 e Sergio 1 / 4 / 1 in D124 e D121, CES-AR7 dentro), e SB-19 B1 riscrive la tabella dalla bozza (44 / 58 / 19, ex 45 / 55 / 20): l'archetipo di D79 non torna più, e restano 19 rare, una in meno di D79, perché «Bottigliata» è diventata Mano lesta comune. SB-19 B2 (D130) aggiunge OGG-17 (NC) e OGG-18 (R): 44 / 59 / 20. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
 Rare negli starter: 1 o 2 ciascuno.
 
-**Per ruolo** (le 114 carte giocabili della bozza dopo SB-19 B1; ruoli di R07a letti dal campo `gui.role` di `bozza.json`: riscritta il 17 novembre 2026, la tabella di D79 contava 113 carte e non teneva i ruoli di Sergio e Duccio)
+**Per ruolo** (le 116 carte giocabili della bozza dopo SB-19 B2, D130, con OGG-17 e OGG-18 fra le RESOURCES; le 114 dopo SB-19 B1; ruoli di R07a letti dal campo `gui.role` di `bozza.json`: riscritta il 17 novembre 2026, la tabella di D79 contava 113 carte e non teneva i ruoli di Sergio e Duccio)
 
 | Ruolo | Basic | Bound | Last resort | Archetipo | Generiche | Oggetti | Totale |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | DAMAGE | | 12 | 4 | 14 | 7 | | 37 |
 | DEFENSE | | 1 | | 5 | 2 | | 8 |
-| RESOURCES | | 8 | | 11 | 3 | 10 | 32 |
+| RESOURCES | | 8 | | 11 | 3 | 12 | 34 |
 | COUNTER | | | | 5 | | | 5 |
 | DISRUPT | | | | 6 | 4 | | 10 |
 | ITEMS | 7 | | | 2 | 4 | | 13 |
