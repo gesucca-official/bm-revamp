@@ -57,7 +57,8 @@ Valgono per tutti e in ogni passo. Fermarsi, dire cosa manca, aspettare il propr
 
 ## Contratto dell'esecutore
 
-Il prompt dice **«Segui il contratto dell'esecutore in docs/orchestrazione-lavoro.md»** e poi solo ciò che è proprio del blocco.
+Il prompt rimanda a questo contratto (in inglese, come tutto il prompt: [sotto](#il-prompt)) e poi dice solo ciò che è proprio
+del blocco.
 Quello che segue vale sempre, salvo che il prompt dica altro in modo esplicito.
 
 **Letture.** AGENTS.md, questo contratto con i quattro STOP, le [insidie](#insidie-degli-strumenti-di-verifica-windows) e solo le
@@ -110,7 +111,7 @@ delle aree.
 Proposta di modello e sforzo fuori dal blocco ([sotto](#proposta-di-modello-e-sforzo)). Dentro, in quest'ordine e senza ripetere
 il contratto:
 
-1. Percorso, «leggi AGENTS.md e segui il contratto dell'esecutore in docs/orchestrazione-lavoro.md», blocco.
+1. Percorso, l'invito a leggere AGENTS.md e a seguire il contratto dell'esecutore in docs/orchestrazione-lavoro.md, blocco.
 2. Le quattro righe.
 3. Sezioni da leggere e righe di decisione, citate per numero e non riscritte.
 4. Scelte o approvazioni del proprietario con le sue parole, se non sono già nel repository.
@@ -202,7 +203,8 @@ Una sessione a banco con il proprietario, che produce:
 - un **piano corto**, indicativamente entro 10.000 caratteri: obiettivo, criterio di chiusura, dipendenze, aree toccate, i primi
   due o tre blocchi in dettaglio, gli altri come titoli di una riga. Il dettaglio di un blocco si scrive quando è il prossimo;
 - in testa al piano il riquadro **«Ripartenza»**, indicativamente entro 1.500 caratteri: in vigore, in attesa, prossimo, righe di
-  decisione da leggere. Lo aggiorna chi chiude un blocco e la regia a ogni decisione; sostituisce il prompt di consegna fra regie;
+  decisione da leggere (solo quelle che servono al prossimo passo, non l'elenco di tutte quelle in vigore). Lo aggiorna chi
+  chiude un blocco e la regia a ogni decisione; sostituisce il prompt di consegna fra regie;
 - la riga in «Filoni attivi» dell'[indice](README.md#filoni-attivi);
 - una riga nella tabella delle aree solo se il filone apre un'area nuova.
 
@@ -260,5 +262,5 @@ dopo aver ricevuto il lavoro di un'altra.
 2. **Dal Set Base al client: `restOn` robusto** ([D103](set-base-decisioni.md#decisioni-del-proprietario) (1), rosso noto
    [R6](reports/rossi-noti.md#aperte)). In `client-web/tools/verify-resolution.mjs` `restOn` chiede il riquadro del pulsante (i)
    senza controllare che ci sia ancora: nella corsa voluta col clic su ✓ può essere già sparito, ed è un esito della corsa, non un
-   errore. Blocco piccolo che tocca lo strumento, dopo la prova umana breve della 1.6b, con le verifiche dell'area «Client web»;
-   chiude R6.
+   errore. Blocco piccolo che tocca lo strumento, con le verifiche dell'area «Client web»; si lancia quando il proprietario lo
+   decide (la prova umana breve della 1.6b che lo precedeva è fatta, D104); chiude R6.
