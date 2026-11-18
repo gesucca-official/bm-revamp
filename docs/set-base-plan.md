@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 18 novembre 2026, dopo D135). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 18 novembre 2026, dopo la Fase A di SB-20b). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
-> - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-20b](#sb-20--prima-misura-dellintero-set) **Fase A consegnata** il 18 novembre 2026 (commit locale), **STOP per il proprietario**: [proposta](design/set-base/sb-20b-proposta.md) (regole R1–R4, cinque carte da cambiare, piano della fase B); **in attesa: risposta alle domande 1–5**. Nessun dato del gioco cambiato. [SB-20a](#sb-20--prima-misura-dellintero-set) consegnata il 18 novembre 2026: pagina di revisione delle 123 carte (`docs/design/set-base/revisione/genera-pagina.py`, [rapporto](reports/set-base/sb-20a-report.md)); revisione del proprietario in corso (nomi, flavour, illustrazioni). Prima: [SB-19](#sb-19--resto-del-pool-e-giro-di-blocco) **chiuso** il 18 novembre 2026 dopo la prova del proprietario ([D135](#decisioni-del-proprietario)): set a 123 carte, Conto e Sigaretta ai valori di M1 ([D134](#decisioni-del-proprietario)).
-> - **Prossimo:** [D138](#decisioni-del-proprietario): SB-20b Fase B (applicazione dei numeri, con «Rif» e la soglia di D95) dopo le risposte del proprietario; poi SB-20c testi stampati generati dai dati; poi le scelte del proprietario (D136) e la rarità P (D137); poi [SB-20](#sb-20--prima-misura-dellintero-set). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D138, D137, D136, D135, D134, D133, D132, D131, D130, D129, D128, D127, D126, D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D138).
+> - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
+> - **In attesa:** [SB-20b](#sb-20--prima-misura-dellintero-set) Fase A consegnata, STOP: risposte alle domande 1–5 della [proposta](design/set-base/sb-20b-proposta.md#8-domande-al-proprietario). In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
+> - **Prossimo:** SB-20b Fase B; poi SB-20c testi stampati; poi le scelte di D136 e la rarità P (D137); poi [SB-20](#sb-20--prima-misura-dellintero-set). Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
+> - **Decisioni da leggere:** D138, D137, D136; per la Fase B anche D90, D95, D97, D99, D127, D132, D134. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D138).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -23,7 +23,8 @@ creative destinate alle espansioni, e la struttura deve accogliere le espansioni
 
 Valgono per **ogni** blocco:
 
-- **Un blocco = una sessione = un commit**, in ordine, solo dopo l'istruzione del proprietario.
+- **Un blocco parte solo dopo l'istruzione del proprietario** e segue il [contratto dell'esecutore](orchestrazione-lavoro.md#contratto-dellesecutore)
+  (passo, STOP, commit con il prefisso del blocco).
 - **Il regolamento viene prima del codice** per tutto ciò che cambia la partita viva (AGENTS):
   versione e motivazione, poi test, codice, catalogo, copia del debug nella stessa modifica. Non si
   aggiorna un atteso per accettare una regressione.
@@ -35,8 +36,9 @@ Valgono per **ogni** blocco:
   (partite reali, database temporaneo, 1366×768 e 844×390).
 - **Numeri riproducibili:** ogni misura dichiara seme, numero di partite, bot e versione della
   bozza. Un risultato senza questi dati non motiva una modifica.
-- **Documenti nello stesso commit:** una sezione «SB-n» in `docs/reports/set-base-report.md`
-  (creato in SB-1), evidenze in `docs/reports/set-base/sb-n/`, stato in questo piano e nell'indice.
+- **Documenti nello stesso commit:** rapporto in `docs/reports/set-base/sb-n-report.md` (una proposta in
+  `docs/design/set-base/`), evidenze in `docs/reports/set-base/sb-n/`, stato nella riga e nella sezione del blocco e nella
+  Ripartenza; l'indice solo se cambia il prossimo passo (contratto).
 - Testi nuovi in italiano; identificatori stabili e nomi visualizzati restano separati.
 
 ## Cosa c'è oggi
