@@ -1,0 +1,10 @@
+{"test":"ViewTableFidelityTest (two-turn windows counted per seat) before and after the B2a, same seeds",
+ "before":{"A":{"first":5526,"twoHealth":3026,"twoResources":3026,"timerTurnsSkipped":72},"B":{"first":5536,"twoHealth":3032,"twoResources":3032,"timerTurnsSkipped":73},
+  "1.6":{"first":5408,"twoHealth":2966,"twoResources":2966,"timerTurnsSkipped":62},"sergio":{"first":6392,"twoHealth":3952,"twoResources":3952,"timerTurnsSkipped":138},
+  "duccio":{"first":6734,"twoHealth":4108,"twoResources":4108,"timerTurnsSkipped":24},"malus":{"first":"8160/8160","twoHealth":"5018/5024","twoResources":"4578/5024","note":"red; with the patch of the B2"}},
+ "after":{"A":{"first":"5670/5670","twoHealth":"3156/3156","twoResources":"3156/3156","timerTurns":72,"excludedByDraw":0},"B":{"first":"5682/5682","twoHealth":"3162/3162","twoResources":"3162/3162","timerTurns":73,"excludedByDraw":0},
+  "1.6":{"first":"5532/5532","twoHealth":"3070/3070","twoResources":"3070/3070","timerTurns":62,"excludedByDraw":0},"sergio":{"first":"6668/6668","twoHealth":"4230/4230","twoResources":"4230/4230","timerTurns":138,"excludedByDraw":0},
+  "duccio":{"first":"6782/6782","twoHealth":"4142/4142","twoResources":"4142/4142","timerTurns":24,"excludedByDraw":0},
+  "malus":{"first":"8342/8342","twoHealth":"4592/4592","twoResources":"4592/4592","timerTurns":91,"excludedByDraw":{"an in-play item arrived by a draw":532,"an in-play item was displaced by a drawn item":36},
+   "counters":{"turnsWithInPlayItem":687,"effectsApplied":702,"itemsThatChangedSeat":11}}},
+ "turnForecastFidelity":"unchanged: 100% on every arm, same turn counts as the B2 (A 5526, B 5536, 1.6 5408, sergio 6392, duccio 6734, malus 8160)"}
