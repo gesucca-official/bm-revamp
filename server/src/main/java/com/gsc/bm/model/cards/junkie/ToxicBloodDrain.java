@@ -68,6 +68,8 @@ public class ToxicBloodDrain extends AbstractCard implements PrintedEffects.Sour
                 PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).onTarget(true).resource(Resource.TOXICITY)
                         .of(Resource.TOXICITY).atStart(true).build()));
         if (poison > 0) steps.add(PrintedEffects.damage(true, Damage.DamageType.POISON, poison));
-        return new PrintedEffects(List.copyOf(steps));
+        // SB-19 B2a (D133): the timer of applyEffectOnTarget, written apart as data for the bots' table: the author gets TOXICITY immunity back.
+        return new PrintedEffects(List.copyOf(steps), List.of(), List.of(PrintedEffects.TimerText.builder().name("Blood Drain").turns(turns)
+                .grants(List.of(Resource.TOXICITY)).build()));
     }
 }

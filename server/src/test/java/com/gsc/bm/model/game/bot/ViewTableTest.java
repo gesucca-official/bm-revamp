@@ -146,6 +146,166 @@ class ViewTableTest {
         assertEquals(65, copy.health().get("a"));
     }
 
+    // ---- SB-19 B2a (D133): timers ----
+
+    private static PrintedEffects.TimerText timer(String name, int turns, List<Resource> grants, List<Resource> revokes, boolean clears, int poison) {
+        return PrintedEffects.TimerText.builder().name(name).turns(turns).grants(grants).revokes(revokes).clears(clears).poison(poison).build();
+    }
+
+    /** A card that starts the given timers on its author. */
+    private static BotView.CardSeen timed(String name, boolean item, List<PrintedEffects.TimerText> timers, PrintedEffects.Step... steps) {
+        return new BotView.CardSeen(name, name, item, false, false, false, 1, Set.of(Card.CardTarget.SELF, Card.CardTarget.OPPONENT),
+                Map.of(), "", "", "", "", false, new PrintedEffects(List.of(steps), List.of(), timers));
+    }
+
+    private static BotView.Seat seatWith(String id, Set<Resource> immunities, List<BotView.StatusSeen> statuses, List<BotView.TimerSeen> timers,
+                                         Map<Resource, Integer> resources, List<BotView.CardSeen> items) {
+        Map<Resource, Integer> res = new EnumMap<>(Resource.class);
+        for (Resource r : Resource.values()) res.put(r, 0);
+        res.put(Resource.HEALTH, 100); res.putAll(resources);
+        return new BotView.Seat(id, "public", false, false, res, immunities, statuses, timers, 1, items);
+    }
+
+    private static BotView twoSeats(BotView.Seat a, BotView.Seat b, List<BotView.CardSeen> hand) {
+        return new BotView(1, new BotView.Self(a, hand, 3, List.of()), List.of(new BotView.Opponent(b, 6, 3, List.of())), List.of(), Map.of(),
+                Ruleset.D50);
+    }
+
+    private static Map<String, BotView.CardSeen> catalogOf(BotView.CardSeen... cards) {
+        Map<String, BotView.CardSeen> catalog = new HashMap<>();
+        for (BotView.CardSeen c : cards) catalog.put(c.getBinding(), c);
+        return catalog;
+    }
+
+    private static List<String> timersOf(ViewTable table, String id) {
+        List<String> names = new ArrayList<>();
+        for (BotView.TimerSeen t : table.view(id).getSelf().getSeat().getTimers()) names.add(t.getName() + ":" + t.getTurnsLeft());
+        return names;
+    }
+
+    @Test void aTimerInTheViewTicksEveryEndOfTurnAndFiresAtZero() {
+        BotView.CardSeen source = timed("source", false, List.of(timer("grace", 2, List.of(Resource.TOXICITY), List.of(), false, 0)));
+        BotView input = twoSeats(seatWith("a", Set.of(), List.of(), List.of(new BotView.TimerSeen("grace", 2)), Map.of(), List.of()),
+                seatWith("b", Set.of(), List.of(), List.of(), Map.of(), List.of()), List.of());
+        ViewTable table = ViewTable.forecast(input, catalogOf(source));
+        table.playTurn(List.of(), FOUND);
+        assertEquals(List.of("grace:1"), timersOf(table, "a"));
+        assertTrue(table.view("a").getSelf().getSeat().getImmunities().isEmpty());
+        ViewTable branch = table.copy();
+        branch.playTurn(List.of(), FOUND);
+        assertTrue(timersOf(branch, "a").isEmpty());
+        assertEquals(Set.of(Resource.TOXICITY), branch.view("a").getSelf().getSeat().getImmunities());
+        // The copy ticked, the table did not: a branch never changes the table it came from, nor the view it was built from.
+        assertEquals(List.of("grace:1"), timersOf(table, "a"));
+        assertEquals(2, input.getSelf().getSeat().getTimers().get(0).getTurnsLeft());
+    }
+
+    @Test void aTimerFiresAfterThePeriodicEffectsOfItsTurn() {
+        BotView.CardSeen source = timed("source", false, List.of(timer("grace", 1, List.of(Resource.TOXICITY), List.of(), false, 0)));
+        BotView input = twoSeats(seatWith("a", Set.of(), List.of(), List.of(new BotView.TimerSeen("grace", 1)), Map.of(Resource.TOXICITY, 10), List.of()),
+                seatWith("b", Set.of(), List.of(), List.of(), Map.of(), List.of()), List.of());
+        ViewTable table = ViewTable.forecast(input, catalogOf(source));
+        table.playTurn(List.of(), FOUND);
+        assertEquals(95, table.health().get("a")); // the poison of this turn comes first, then the immunity
+        assertEquals(Set.of(Resource.TOXICITY), table.view("a").getSelf().getSeat().getImmunities());
+        table.playTurn(List.of(), FOUND);
+        assertEquals(95, table.health().get("a"));
+    }
+
+    @Test void aCardStartsATimerOnItsAuthorAndTheTurnItIsPlayedCounts() {
+        PrintedEffects.Step notImmune = PrintedEffects.Step.builder().kind(PrintedEffects.Kind.NOT_IMMUNE).onTarget(true)
+                .resource(Resource.TOXICITY).build();
+        BotView.CardSeen drainNow = timed("drain 1", false, List.of(timer("Blood Drain", 1, List.of(Resource.TOXICITY), List.of(), false, 0)), notImmune);
+        BotView.CardSeen drainLater = timed("drain 2", false, List.of(timer("Blood Drain", 2, List.of(Resource.TOXICITY), List.of(), false, 0)), notImmune);
+        BotView input = twoSeats(seatWith("a", Set.of(), List.of(), List.of(), Map.of(), List.of()),
+                seatWith("b", Set.of(Resource.TOXICITY), List.of(), List.of(), Map.of(), List.of()), List.of(drainNow, drainLater));
+        Map<String, BotView.CardSeen> catalog = catalogOf(drainNow, drainLater);
+        ViewTable one = ViewTable.forecast(input, catalog);
+        play(one, "a", drainNow, "b", null);
+        assertTrue(timersOf(one, "a").isEmpty()); // one turn: it fires at the end of the turn it was played
+        assertEquals(Set.of(Resource.TOXICITY), one.view("a").getSelf().getSeat().getImmunities());
+        assertTrue(one.view("b").getSelf().getSeat().getImmunities().isEmpty()); // the target stays without it
+        ViewTable two = ViewTable.forecast(input, catalog);
+        play(two, "a", drainLater, "b", null);
+        assertEquals(List.of("Blood Drain:1"), timersOf(two, "a"));
+        assertTrue(two.view("a").getSelf().getSeat().getImmunities().isEmpty());
+        two.playTurn(List.of(), FOUND);
+        assertTrue(timersOf(two, "a").isEmpty());
+        assertEquals(Set.of(Resource.TOXICITY), two.view("a").getSelf().getSeat().getImmunities());
+    }
+
+    @Test void aVoidedCardStartsNoTimer() {
+        PrintedEffects.Step notImmune = PrintedEffects.Step.builder().kind(PrintedEffects.Kind.NOT_IMMUNE).onTarget(true)
+                .resource(Resource.TOXICITY).build();
+        BotView.CardSeen drain = timed("drain", false, List.of(timer("Blood Drain", 3, List.of(Resource.TOXICITY), List.of(), false, 0)), notImmune);
+        BotView.CardSeen stop = card("stop", false, PrintedEffects.Step.builder().kind(PrintedEffects.Kind.COUNTER_TARGET).build());
+        BotView input = twoSeats(seatWith("a", Set.of(), List.of(), List.of(), Map.of(), List.of()),
+                seatWith("b", Set.of(), List.of(), List.of(), Map.of(Resource.ALERTNESS, 10), List.of()), List.of(drain));
+        ViewTable countered = ViewTable.forecast(input, catalogOf(drain, stop));
+        countered.playTurn(List.of(new ViewTable.Play("a", drain, "b", null, null), new ViewTable.Play("b", stop, "a", null, null)), FOUND);
+        assertTrue(timersOf(countered, "a").isEmpty());
+        ViewTable free = ViewTable.forecast(input, catalogOf(drain, stop));
+        free.playTurn(List.of(new ViewTable.Play("a", drain, "b", null, null)), FOUND);
+        assertEquals(List.of("Blood Drain:2"), timersOf(free, "a"));
+    }
+
+    @Test void aConsumedItemStartsItsTimerAndItsEndTakesTheImmunityAway() {
+        BotView.CardSeen santino = timed("santino", true, List.of(timer("Santino", 2, List.of(), List.of(Resource.ALCOHOL), false, 0)),
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.ALCOHOL).build());
+        BotView.CardSeen consume = card("consume", false, PrintedEffects.Step.builder().kind(PrintedEffects.Kind.CONSUME).build());
+        BotView input = twoSeats(seatWith("a", Set.of(), List.of(), List.of(), Map.of(), List.of(santino)),
+                seatWith("b", Set.of(), List.of(), List.of(), Map.of(), List.of()), List.of(consume));
+        ViewTable table = ViewTable.forecast(input, catalogOf(santino, consume));
+        play(table, "a", consume, "SELF", "santino");
+        assertEquals(Set.of(Resource.ALCOHOL), table.view("a").getSelf().getSeat().getImmunities());
+        assertEquals(List.of("Santino:1"), timersOf(table, "a"));
+        table.playTurn(List.of(), FOUND);
+        assertTrue(table.view("a").getSelf().getSeat().getImmunities().isEmpty());
+        assertTrue(timersOf(table, "a").isEmpty());
+    }
+
+    @Test void aTimerThatClearsTakesEveryImmunityAndStatusThenPoisons() {
+        BotView.CardSeen cocktail = timed("cocktail", true, List.of(timer("Cocktail", 1, List.of(), List.of(), true, 20)));
+        BotView.StatusSeen status = new BotView.StatusSeen("guard", "", StatusType.GOOD, StatusFlow.INPUT, false, false, 5, null, null, null,
+                DamageType.HIT, .5f, null);
+        BotView input = twoSeats(seatWith("a", Set.of(Resource.TOXICITY, Resource.ALCOHOL), List.of(status), List.of(new BotView.TimerSeen("Cocktail", 1)),
+                Map.of(), List.of()), seatWith("b", Set.of(), List.of(), List.of(), Map.of(), List.of()), List.of());
+        ViewTable table = ViewTable.forecast(input, catalogOf(cocktail));
+        table.playTurn(List.of(), FOUND);
+        assertEquals(80, table.health().get("a"));
+        assertTrue(table.view("a").getSelf().getSeat().getImmunities().isEmpty());
+        assertTrue(table.view("a").getSelf().getSeat().getStatuses().isEmpty());
+        assertTrue(timersOf(table, "a").isEmpty());
+    }
+
+    @Test void theTimerTextsOfTheCardsNameAndMeasureTheEngineTimers() {
+        com.gsc.bm.model.Character a = new com.gsc.bm.model.cards.junkie.character.ToxicJunkie(),
+                b = new com.gsc.bm.model.cards.bruiser.character.BigBadBruiser();
+        new com.gsc.bm.model.cards.junkie.ToxicBloodDrain().applyEffectOnTarget(a, b);
+        new com.gsc.bm.model.cards.com.items.MarvelousCocktail().applyEffectOnSelf(b);
+        new com.gsc.bm.model.cards.base.items.SantinoDellaPortinaia().applyEffectOnSelf(b);
+        Map<String, Integer> engine = new TreeMap<>();
+        for (com.gsc.bm.model.game.Timer timer : a.getTimers()) engine.put(timer.getName(), timer.getTimer());
+        for (com.gsc.bm.model.game.Timer timer : b.getTimers()) engine.put(timer.getName(), timer.getTimer());
+        Map<String, Integer> text = new TreeMap<>();
+        for (PrintedEffects effects : List.of(new com.gsc.bm.model.cards.junkie.ToxicBloodDrain().printedEffects(),
+                new com.gsc.bm.model.cards.com.items.MarvelousCocktail().printedEffects(),
+                new com.gsc.bm.model.cards.base.items.SantinoDellaPortinaia().printedEffects()))
+            for (PrintedEffects.TimerText timer : effects.getTimers()) text.put(timer.getName(), timer.getTurns());
+        assertEquals(3, engine.size());
+        assertEquals(engine, text);
+    }
+
+    @Test void aTimerTheCatalogDoesNotKnowOnlyTicksAndGoes() {
+        BotView input = twoSeats(seatWith("a", Set.of(Resource.TOXICITY), List.of(), List.of(new BotView.TimerSeen("mystery", 1)), Map.of(), List.of()),
+                seatWith("b", Set.of(), List.of(), List.of(), Map.of(), List.of()), List.of());
+        ViewTable table = ViewTable.forecast(input, Map.of());
+        table.playTurn(List.of(), FOUND);
+        assertTrue(timersOf(table, "a").isEmpty());
+        assertEquals(Set.of(Resource.TOXICITY), table.view("a").getSelf().getSeat().getImmunities());
+        assertEquals(100, table.health().get("a"));
+    }
+
     @Test void tableCannotImportEngineOrReflection() throws Exception {
         String source = Files.readString(Path.of("src/main/java/com/gsc/bm/model/game/bot/ViewTable.java"));
         assertFalse(java.util.regex.Pattern.compile("(?m)^import .*\\b(Game|Player|ComPlayer|Character|Move);|java\\.lang\\.reflect")

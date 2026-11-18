@@ -193,12 +193,45 @@ public class PrintedEffects implements Serializable {
      * every card without it, so every reader of the consumed text is unchanged.
      */
     List<Step> inPlay;
+    /**
+     * SB-19 B2a (D133): the timers the card starts on its author, a list apart like {@link #inPlay}: what the engine's {@code Timer}
+     * does when it runs out, written as data so the bots' table can run it. Empty for every card without a timer, so every reader of
+     * the consumed text is unchanged.
+     */
+    List<TimerText> timers;
 
-    public PrintedEffects(List<Step> steps) { this(steps, List.of()); }
+    public PrintedEffects(List<Step> steps) { this(steps, List.of(), List.of()); }
 
-    public PrintedEffects(List<Step> steps, List<Step> inPlay) {
+    public PrintedEffects(List<Step> steps, List<Step> inPlay) { this(steps, inPlay, List.of()); }
+
+    public PrintedEffects(List<Step> steps, List<Step> inPlay, List<TimerText> timers) {
         this.steps = steps;
         this.inPlay = inPlay == null ? List.of() : inPlay;
+        this.timers = timers == null ? List.of() : timers;
+    }
+
+    /**
+     * SB-19 B2a (D133): a timer of a card, as {@code com.gsc.bm.model.game.Timer} runs it on the character that holds it: it ticks at
+     * every end of turn, after the periodic effects and before the statuses, and when it reaches zero it fires once and goes. The public
+     * view shows only its {@link #name} and the turns left; this text says what firing does.
+     */
+    @Value
+    @Builder
+    public static class TimerText implements Serializable {
+        /** The name the engine gives the timer, as the public view shows it. */
+        String name;
+        /** Turns before it fires, counting the end of the turn in which the card is played. */
+        int turns;
+        /** Firing gives the holder immunity to these resources. */
+        @Builder.Default
+        List<Resource> grants = List.of();
+        /** Firing takes immunity to these resources away. */
+        @Builder.Default
+        List<Resource> revokes = List.of();
+        /** Firing clears every immunity and every status of the holder (Marvelous Cocktail). */
+        boolean clears;
+        /** Firing then deals this much POISON to the holder, through its statuses (0: none). */
+        int poison;
     }
 
     /** SB-19 (RP-27): the «In campo» steps of a card, empty when it has none or cannot describe itself. */

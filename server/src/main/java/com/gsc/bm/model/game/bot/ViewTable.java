@@ -22,7 +22,9 @@ import java.util.Set;
 /**
  * D85/D91, B5a: a continuing table on copies of public views and card text. No engine objects or hidden information.
  * Forecast mode leaves draws unknown and branches on searches/order. World mode accepts concrete sampled hands/decks;
- * sampling is the caller's responsibility. Timers and resource-changing statuses are outside this model.
+ * sampling is the caller's responsibility. Resource-changing statuses are outside this model. SB-19 B2a (D133): timers are in it, as
+ * the engine runs them: a timer in the view ticks at each end of turn and fires when it reaches zero; a card that starts one says
+ * so in its public text ({@link PrintedEffects.TimerText}); a timer whose text the catalog does not have only ticks and goes.
  */
 public final class ViewTable {
     private static final int HAND_LIMIT = 6;
@@ -114,6 +116,7 @@ public final class ViewTable {
         Set<Resource> immunities = new HashSet<>();
         List<Stat> statuses = new ArrayList<>();
         List<BotView.CardSeen> items = new ArrayList<>();
+        /** SB-19 B2a (D133): the timers of the character; never changed in place, a copy of the side copies the list. */
         List<BotView.TimerSeen> timers = new ArrayList<>();
         int itemCapacity;
         boolean handKnown;
@@ -146,7 +149,7 @@ public final class ViewTable {
             Side s = new Side();
             s.id = id; s.character = character; s.res.putAll(res); s.immunities = new HashSet<>(immunities);
             for (Stat t : statuses) s.statuses.add(t.copy());
-            s.items = new ArrayList<>(items); s.timers = timers; s.itemCapacity = itemCapacity; s.handKnown = handKnown;
+            s.items = new ArrayList<>(items); s.timers = new ArrayList<>(timers); s.itemCapacity = itemCapacity; s.handKnown = handKnown;
             s.hand = new ArrayList<>(hand); s.handSize = handSize; s.unknownOwnCards = unknownOwnCards;
             s.deck = deck == null ? null : new ArrayList<>(deck);
             s.deckSize = deckSize; s.lastResort = lastResort;
@@ -161,7 +164,7 @@ public final class ViewTable {
             List<BotView.StatusSeen> seen = new ArrayList<>();
             for (Stat t : statuses) seen.add(t.seen());
             return new BotView.Seat(id, character, down(), false, Collections.unmodifiableMap(r), Set.copyOf(immunities),
-                    Collections.unmodifiableList(seen), timers, itemCapacity, List.copyOf(items), Map.copyOf(plays));
+                    Collections.unmodifiableList(seen), List.copyOf(timers), itemCapacity, List.copyOf(items), Map.copyOf(plays));
         }
 
         List<BotView.RevealedSeen> revealed(boolean own) {
@@ -194,6 +197,8 @@ public final class ViewTable {
 
     final Map<String, Side> sides = new LinkedHashMap<>();
     final Map<String, BotView.CardSeen> catalog;
+    /** SB-19 B2a (D133): what each timer of the catalog does when it fires, by the name the public view shows. */
+    final Map<String, PrintedEffects.TimerText> timerTexts;
     final Ruleset ruleset;
     final boolean worldMode;
     int turn;
@@ -202,12 +207,28 @@ public final class ViewTable {
 
     private ViewTable(Map<String, BotView.CardSeen> catalog, Ruleset ruleset, boolean worldMode) {
         this.catalog = Map.copyOf(catalog);
+        this.timerTexts = timerTexts(this.catalog);
         this.ruleset = ruleset;
         this.worldMode = worldMode;
     }
 
+    /** A copy shares the catalog and its timer texts: read only. */
+    private ViewTable(ViewTable from) {
+        this.catalog = from.catalog;
+        this.timerTexts = from.timerTexts;
+        this.ruleset = from.ruleset;
+        this.worldMode = from.worldMode;
+    }
+
+    private static Map<String, PrintedEffects.TimerText> timerTexts(Map<String, BotView.CardSeen> catalog) {
+        Map<String, PrintedEffects.TimerText> texts = new HashMap<>();
+        for (BotView.CardSeen c : catalog.values())
+            if (c.getEffects() != null) for (PrintedEffects.TimerText timer : c.getEffects().getTimers()) texts.putIfAbsent(timer.getName(), timer);
+        return texts;
+    }
+
     public ViewTable copy() {
-        ViewTable w = new ViewTable(catalog, ruleset, worldMode);
+        ViewTable w = new ViewTable(this);
         sides.forEach((id, s) -> w.sides.put(id, s.copy()));
         w.turn = turn; w.serial = serial; w.lastRound = lastRound;
         return w;
@@ -230,7 +251,7 @@ public final class ViewTable {
         s.immunities = new HashSet<>(seat.getImmunities());
         for (BotView.StatusSeen t : seat.getStatuses()) s.statuses.add(Stat.of(t));
         s.items = new ArrayList<>(seat.getItems());
-        s.timers = seat.getTimers();
+        s.timers = new ArrayList<>(seat.getTimers());
         s.itemCapacity = seat.getItemCapacity();
         s.plays = new HashMap<>(seat.getPlays());
         return s;
@@ -610,7 +631,14 @@ public final class ViewTable {
                     break;
             }
         }
+        startTimers(act.author, act.play.card.getEffects());
         return search;
+    }
+
+    /** SB-19 B2a (D133): the timers a played card or a consumed item starts on its author, as the engine adds them to the character. */
+    private static void startTimers(Side author, PrintedEffects effects) {
+        if (effects == null) return;
+        for (PrintedEffects.TimerText timer : effects.getTimers()) author.timers.add(new BotView.TimerSeen(timer.getName(), timer.getTurns()));
     }
 
     private static Stat status(PrintedEffects.Step step) {
@@ -653,6 +681,7 @@ public final class ViewTable {
                 else if (step.getKind() == PrintedEffects.Kind.DAMAGE)
                     damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0), step.getApplying());
             }
+            startTimers(act.author, item.getEffects());
             return;
         }
     }
@@ -703,7 +732,7 @@ public final class ViewTable {
         subject.set(Resource.HEALTH, subject.get(Resource.HEALTH) - damage);
     }
 
-    /** As Game.prepareEndOfTurn and Character.resolveTimeBasedEffects, without timers. */
+    /** As Game.prepareEndOfTurn and Character.resolveTimeBasedEffects. */
     private void endOfTurn(Set<Mark> satisfied) {
         for (Side s : sides.values())
             for (Mark m : s.marks) {
@@ -733,6 +762,7 @@ public final class ViewTable {
                 s.set(Resource.ALERTNESS, s.get(Resource.ALERTNESS) - alcohol / 2);
                 s.set(Resource.ALCOHOL, alcohol - (alcohol / 2 + 1));
             }
+            tickTimers(s);
             List<Stat> kept = new ArrayList<>();
             for (Stat t : s.statuses) {
                 if (t.turnsLeft != null) t.turnsLeft--;
@@ -751,6 +781,26 @@ public final class ViewTable {
                     && s.statuses.stream().noneMatch(t -> t.exposure != null && t.exposure == m.id)));
         if (over())
             for (Side s : sides.values()) { s.marks.clear(); s.statuses.removeIf(t -> t.exposure != null); }
+    }
+
+    /**
+     * SB-19 B2a (D133): as Character.resolveTimeBasedEffects, after the periodic effects and before the statuses: every timer ticks, in
+     * the order it was started, and the ones that reach zero fire (the callback sees what the earlier ones did) and go.
+     */
+    private void tickTimers(Side s) {
+        if (s.timers.isEmpty()) return;
+        List<BotView.TimerSeen> kept = new ArrayList<>();
+        for (BotView.TimerSeen timer : s.timers) {
+            int left = timer.getTurnsLeft() - 1;
+            if (left > 0) { kept.add(new BotView.TimerSeen(timer.getName(), left)); continue; }
+            PrintedEffects.TimerText text = timerTexts.get(timer.getName());
+            if (text == null) continue; // a timer whose text the catalog does not have: it only goes
+            s.immunities.addAll(text.getGrants());
+            s.immunities.removeAll(text.getRevokes());
+            if (text.isClears()) { s.immunities.clear(); s.statuses.clear(); }
+            if (text.getPoison() > 0) damage(null, s, Damage.DamageType.POISON, text.getPoison(), null);
+        }
+        s.timers = kept;
     }
 
     /** SB-19 (RP-27): the «In campo» steps of a public item, empty without them. */

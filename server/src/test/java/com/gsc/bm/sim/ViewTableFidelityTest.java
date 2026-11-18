@@ -30,6 +30,57 @@ class ViewTableFidelityTest {
         check(Draft.fromClasspath(DRAFT), "sergio", false);
         // SB-18 B2 (D126): prova-duccio in one seat (alternating), the starters in the other: the four cards paid in HEALTH.
         check(Draft.fromClasspath(DRAFT), "duccio", false);
+        // SB-19 B2 (D130, RP-27): a deck with the items of the «In campo» effect in one seat (alternating), the starters in the other.
+        check(Draft.fromClasspath(DRAFT), "malus", false);
+    }
+
+    /** SB-19 B2: the decks of the «malus» arm, by seed: the two items, Scatto Repentino, «Lo rivendo»; Steal is in two starters. */
+    static final String[] MALUS_DECKS = {"prova-b2-rischio9", "prova-b2-rischio10", "prova-b2-sergio-sigaretta", "prova-b2-beppe"};
+
+    /** SB-19 B2a (D133): the causes of the draw exclusion of a compared turn, in the order they are tried. */
+    static final String DRAW_ARRIVED = "an in-play item arrived by a draw", DRAW_DISPLACED = "an in-play item was displaced by a drawn item";
+
+    /** SB-19 B2a: the cards in a player's deck, by identity (the deck has no getter: the engine does not show it, the test may). */
+    @SuppressWarnings("unchecked")
+    static Set<Card> deckOf(Player p) {
+        try {
+            java.lang.reflect.Field f = Player.class.getDeclaredField("deck");
+            f.setAccessible(true);
+            Set<Card> deck = Collections.newSetFromMap(new IdentityHashMap<>());
+            deck.addAll((Collection<Card>) f.get(p));
+            return deck;
+        } catch (ReflectiveOperationException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    /**
+     * SB-19 B2a (D133, RP-27): why the compared turn cannot be forecast from the turn before, or null. What a draw puts on the field
+     * ends the turn already acting (RP-27), and the table cannot know the draw. Only two things count: an item with an «In campo»
+     * effect that a draw of the turn put on a field ({@link #DRAW_ARRIVED}), and one that was on a field at the start of the turn and is
+     * gone while a drawn item arrived at a field now full ({@link #DRAW_DISPLACED}). Every other change of the field stays compared.
+     * {@code deckAtReady} and {@code fieldAtReady} are the decks and the fields at the start of the compared turn.
+     */
+    static String drawCause(com.gsc.bm.model.game.Game g, Map<String, Set<Card>> deckAtReady, Map<String, List<Card>> fieldAtReady) {
+        boolean arrived = false, displaced = false;
+        for (Player p : g.getPlayers().values()) {
+            Set<Card> deck = deckAtReady.getOrDefault(p.getPlayerId(), Set.of());
+            List<Card> field = new ArrayList<>(p.getCharacter().getItems());
+            boolean drawn = false;
+            for (Card c : field) if (deck.contains(c)) { drawn = true; if (!PrintedEffects.inPlay(c).isEmpty()) arrived = true; }
+            if (drawn && field.size() == p.getCharacter().getItemsSize())
+                for (Card c : fieldAtReady.getOrDefault(p.getPlayerId(), List.of()))
+                    if (!PrintedEffects.inPlay(c).isEmpty() && field.stream().noneMatch(x -> x == c)) displaced = true;
+        }
+        return arrived ? DRAW_ARRIVED : displaced ? DRAW_DISPLACED : null;
+    }
+
+    /** SB-19 B2: the in-play item instances near each player. */
+    static Map<Card, String> inPlayHolders(com.gsc.bm.model.game.Game g) {
+        Map<Card, String> holders = new IdentityHashMap<>();
+        for (Player p : g.getPlayers().values())
+            for (Card c : p.getCharacter().getItems()) if (!PrintedEffects.inPlay(c).isEmpty()) holders.put(c, p.getPlayerId());
+        return holders;
     }
 
     private static Map<String, BotView.CardSeen> text(Draft draft) throws Exception {
@@ -37,6 +88,7 @@ class ViewTableFidelityTest {
         List<String> decks = new ArrayList<>(List.of(DECKS));
         if (draft.deckIds().contains(Sb17.DECK)) decks.add(Sb17.DECK); // SB-17
         if (draft.deckIds().contains(Sb18.DECK)) decks.add(Sb18.DECK); // SB-18 B2
+        for (String d : MALUS_DECKS) if (draft.deckIds().contains(d)) decks.add(d); // SB-19 B2
         for (String deck : decks) {
             Player p = draft.player(deck, "text", new Random(0), null);
             List<Card> cards = new ArrayList<>(p.getCardsInHand());
@@ -57,17 +109,21 @@ class ViewTableFidelityTest {
         long started = System.nanoTime();
         Map<String, BotView.CardSeen> catalog = text(draft);
         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
-        int games = arm.equals("duccio") ? 400 : 300; // SB-18 B2 (D126): Duccio's games are shorter; 400 seeds keep the floor of 5,000 compared turns
+        int games = arm.equals("duccio") || arm.equals("malus") ? 400 : 300; // SB-18 B2 (D126): Duccio's games are shorter; 400 seeds keep the floor of 5,000 compared turns
         long[] one = new long[2], two = new long[2], twoRes = new long[2], drawn = new long[2];
         long[] skipped = new long[1], unmodeled = new long[1];
         int[] regressionWindows = new int[1];
         int[] duccio = new int[4]; // SB-18 B2 (D126): in compared turns, the four cards paid in HEALTH (TurnForecastFidelityTest.HEALTH_COSTS)
+        long[] malus = new long[3]; // SB-19 B2 (RP-27), in compared two-turn windows: turns with an in-play item, effects applied, items that changed seat
+        Map<String, Long> drawExcluded = new TreeMap<>(); // SB-19 B2a (D133): two-turn windows left out for a draw of the compared turn, by cause
+        long[] timerTurns = new long[1]; // SB-19 B2a (D133): compared turns that begin with a timer on some character
         int[] sales = new int[2]; // SB-17 B4 (D118): in compared turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
         List<String> misses = new ArrayList<>();
         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
             if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
+            if (arm.equals("malus")) { String m = MALUS_DECKS[(int) ((seed / 2) % MALUS_DECKS.length)]; if (seed % 2 == 0) a = m; else b = m; }
             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
             Map<Integer, Map<String, BotView>> views = new HashMap<>();
@@ -76,14 +132,20 @@ class ViewTableFidelityTest {
             Map<String, Set<Map<String, Map<Resource, Integer>>>> pending2Res = new HashMap<>();
             Map<String, Boolean> pendingDrawn = new HashMap<>();
             String[] labels = new String[1];
+            Map<Card, String> holdersAtReady = new IdentityHashMap<>();
+            Map<String, Set<Card>> deckAtReady = new HashMap<>();
+            Map<String, List<Card>> fieldAtReady = new HashMap<>();
             long s = seed;
             runner.run(seed, new SimulationRunner.Contender(a, pa), new SimulationRunner.Contender(b, pb), (stage, g) -> {
                 if (stage.equals("ROUND_READY")) {
                     pending1.clear(); pending2.clear(); pending2Res.clear();
                     int t = g.getTurn();
-                    boolean valid = g.getPendingMoves().size() == 2 && g.getPendingMoves().stream().noneMatch(Move::isVoid)
-                            && g.getPlayers().values().stream().allMatch(p -> p.getCharacter().getTimers().isEmpty());
+                    boolean valid = g.getPendingMoves().size() == 2 && g.getPendingMoves().stream().noneMatch(Move::isVoid);
                     if (!valid) { skipped[0]++; return; }
+                    // SB-19 B2a (D133): the table runs timers now, so a turn that begins with one is compared; only the one-turn
+                    // forecast of TurnForecast, which has no timers (TurnForecastFidelityTest still leaves them out), is not asked to agree.
+                    boolean timers = g.getPlayers().values().stream().anyMatch(p -> !p.getCharacter().getTimers().isEmpty());
+                    if (timers) timerTurns[0]++;
                     List<ViewTable.Play> now = new ArrayList<>();
                     Map<String, BotView> seen = new HashMap<>();
                     for (Move m : g.getPendingMoves()) {
@@ -97,6 +159,12 @@ class ViewTableFidelityTest {
                     }
                     views.put(t, seen);
                     plays.put(t, now);
+                    holdersAtReady.clear(); holdersAtReady.putAll(inPlayHolders(g));
+                    deckAtReady.clear(); fieldAtReady.clear();
+                    for (Player p : g.getPlayers().values()) {
+                        deckAtReady.put(p.getPlayerId(), deckOf(p));
+                        fieldAtReady.put(p.getPlayerId(), new ArrayList<>(p.getCharacter().getItems()));
+                    }
                     for (ViewTable.Play p : now) {
                         if (p.card.getName().equals("Lo rivendo")) sales[0]++;
                         if (p.card.getName().equals("Fare il vago")) sales[1]++;
@@ -120,7 +188,7 @@ class ViewTableFidelityTest {
                                 && Objects.equals(m.getItem(), mine.item)).findFirst().orElseThrow();
                         TurnForecast.Threat threat = new TurnForecast.Threat(seen.get(me).getOpponents().get(0).getSeat(),
                                 theirs.card, theirs.target, theirs.item);
-                        assertEquals(new HashSet<>(TurnForecast.variants(seen.get(me), legal, threat)), ends,
+                        if (!timers) assertEquals(new HashSet<>(TurnForecast.variants(seen.get(me), legal, threat)), ends,
                                 labels[0] + " first-turn equivalence seen by " + me);
                         pending1.put(me, ends);
                         if (!views.containsKey(t - 1)) continue;
@@ -159,12 +227,22 @@ class ViewTableFidelityTest {
                         actualRes.put(p.getPlayerId(), new EnumMap<>(p.getCharacter().getResources()));
                     }
                     pending1.forEach((id, ends) -> { one[0]++; if (ends.contains(actual)) one[1]++; });
+                    // SB-19 B2a (D133): a draw of this turn that puts an in-play item on a field, or pushes one off, is hidden information.
+                    String drawCause = pending2.isEmpty() ? null : drawCause(g, deckAtReady, fieldAtReady);
+                    if (drawCause == null && pendingDrawn.values().stream().anyMatch(d -> !d)) {
+                        Map<Card, String> after = inPlayHolders(g);
+                        if (!after.isEmpty()) malus[0]++;
+                        for (Map.Entry<Card, String> e : after.entrySet()) if (!g.getPlayers().get(e.getValue()).getCharacter().isDead()) malus[1]++;
+                        for (Map.Entry<Card, String> e : holdersAtReady.entrySet())
+                            if (after.containsKey(e.getKey()) && !after.get(e.getKey()).equals(e.getValue())) malus[2]++;
+                    }
                     pending2.forEach((id, ends) -> {
                         if (pendingDrawn.get(id)) {
                             drawn[0]++;
                             if (ends.contains(actual)) drawn[1]++;
                             return;
                         }
+                        if (drawCause != null) { drawExcluded.merge(drawCause, 1L, Long::sum); return; }
                         two[0]++;
                         if (probeRegressions && ((s == 7_100_093 && g.getTurn() - 1 == 8) || (s == 7_100_115 && g.getTurn() - 1 == 9))) {
                             regressionWindows[0]++;
@@ -186,13 +264,24 @@ class ViewTableFidelityTest {
         double seconds = (System.nanoTime() - started) / 1e9;
         System.out.println("ViewTable fidelity " + arm + ": first " + one[1] + "/" + one[0] + ", two health "
                 + two[1] + "/" + two[0] + ", resources " + twoRes[1] + "/" + twoRes[0] + ", excluded items " + drawn[0]
-                + ", skipped " + skipped[0] + ", unmodeled far item " + unmodeled[0] + ", seconds " + seconds);
+                + ", skipped " + skipped[0] + ", unmodeled far item " + unmodeled[0] + ", timer turns " + timerTurns[0]
+                + ", excluded by a draw of the compared turn " + drawExcluded + ", seconds " + seconds);
         assertTrue(one[0] > 5000);
         assertTrue(two[0] > 1000);
         if (probeRegressions) assertEquals(4, regressionWindows[0], "both seats of the two probe regressions remain covered in arm " + arm);
         if (arm.equals("sergio")) {
             System.out.println("ViewTable fidelity sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
             for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the compared sample");
+        }
+        // SB-19 B2a (D133): an arm without in-play items leaves no window out for a draw: its compared windows are what they were.
+        if (!arm.equals("malus")) assertTrue(drawExcluded.isEmpty(), "windows left out for a draw in arm " + arm + ": " + drawExcluded);
+        if (arm.equals("malus")) {
+            System.out.println("ViewTable fidelity malus: turns with an in-play item " + malus[0] + ", effects applied " + malus[1]
+                    + ", items that changed seat " + malus[2]);
+            assertTrue(two[0] >= 4000, "compared two-turn windows in the malus arm: " + two[0]);
+            assertTrue(malus[0] >= 500, "turns with an in-play item in the compared sample: " + malus[0]);
+            assertTrue(malus[1] >= 500, "in-play effects applied in the compared sample: " + malus[1]);
+            assertTrue(malus[2] >= 5, "in-play items that changed seat in the compared sample: " + malus[2]);
         }
         if (arm.equals("duccio")) {
             System.out.println("ViewTable fidelity duccio: " + TurnForecastFidelityTest.HEALTH_COSTS + " " + java.util.Arrays.toString(duccio));

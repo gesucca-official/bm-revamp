@@ -30,11 +30,13 @@ public class MarvelousCocktail extends AbstractItemCard implements PrintedEffect
     /** D76: immunity to TOXICITY and ALCOHOL, then the two gains; the timer of the end is not printed as a number. */
     @Override
     public PrintedEffects printedEffects() {
+        // SB-19 B2a (D133): the timer is written apart as data, for the bots' table; the engine's timer below is unchanged.
         return new PrintedEffects(List.of(
                 PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.TOXICITY).build(),
                 PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.ALCOHOL).build(),
                 PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).resource(Resource.ALCOHOL).base(alcohol).build(),
-                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).resource(Resource.TOXICITY).base(toxicity).build()));
+                PrintedEffects.Step.builder().kind(PrintedEffects.Kind.GAIN).resource(Resource.TOXICITY).base(toxicity).build()),
+                List.of(), List.of(PrintedEffects.TimerText.builder().name("Marvelous Cocktail").turns(turns).clears(true).poison(poison).build()));
     }
 
     @Override

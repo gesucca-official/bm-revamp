@@ -33,9 +33,14 @@ public class SantinoDellaPortinaia extends AbstractItemCard implements PrintedEf
         return List.of("Gained a temporary immunity to ALCOHOL");
     }
 
-    /** SB-17: immunity to ALCOHOL; the timer that ends it is not printed as a number, as for MarvelousCocktail. */
+    /**
+     * SB-17: immunity to ALCOHOL. SB-19 B2a (D133): the timer that ends it is written apart, as data ({@link PrintedEffects#getTimers()}),
+     * for the bots' table; the engine's timer above is unchanged.
+     */
     @Override
     public PrintedEffects printedEffects() {
-        return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.ALCOHOL).build()));
+        return new PrintedEffects(List.of(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.IMMUNE).resource(Resource.ALCOHOL).build()),
+                List.of(), List.of(PrintedEffects.TimerText.builder().name("Santino della portinaia").turns(turns)
+                        .revokes(List.of(Resource.ALCOHOL)).build()));
     }
 }
