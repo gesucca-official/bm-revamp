@@ -176,6 +176,7 @@ Cosmetici molto più avanti.
 - **Jolly,** da bilanciare fra quattro fonti candidate: dentro le buste al posto di una carta, con garanzia ogni N buste; dai doppioni
   oltre le 2 copie utili (R02), convertiti in frammenti, che sono anche la protezione dai doppioni; dalle tappe importanti della
   carriera; con la valuta forte, solo dopo le simulazioni e con prezzo alto o limite, perché vuol dire comprare la carta esatta.
+- **Rarità P dei personaggi** ([D137 del Set Base](set-base-decisioni.md#decisioni-del-proprietario)): «funziona un po' come la mythic rarity di mtga»; frequenza nelle buste e jolly propri da progettare qui.
 - **Tetti contro farming e inflazione:** ricompense giornaliere o decrescenti, decise dal server.
 - **Obiettivo free to play misurabile:** per esempio un mazzo da classifica in N settimane di gioco normale.
 - **Simulatore,** con la stessa cultura del banco di misura: guadagno medio per giorno, tempo per ogni traguardo.

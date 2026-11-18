@@ -9,7 +9,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
 > - **In corso:** [SB-20a](#sb-20--prima-misura-dellintero-set) **consegnata** il 18 novembre 2026 (commit locale): pagina di revisione delle 123 carte, script `docs/design/set-base/revisione/genera-pagina.py`, [rapporto](reports/set-base/sb-20a-report.md); **revisione del proprietario da fare**, con le sue domande (rapporto, sez. 10). Nessun dato del gioco cambiato. Prima: [SB-19](#sb-19--resto-del-pool-e-giro-di-blocco) **chiuso** il 18 novembre 2026 dopo la prova del proprietario ([D135](#decisioni-del-proprietario)): set a 123 carte, Conto e Sigaretta ai valori di M1 ([D134](#decisioni-del-proprietario)).
 > - **Prossimo:** la revisione del proprietario sulla pagina SB-20a ([D136](#decisioni-del-proprietario)), con le sue domande (rapporto, sez. 10); poi le sue scelte applicate e [SB-20](#sb-20--prima-misura-dellintero-set) (prima misura dell'intero set), con le note in ingresso. Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D136, D135, D134, D133, D132, D131, D130, D129, D128, D127, D126, D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D136).
+> - **Decisioni da leggere:** D137, D136, D135, D134, D133, D132, D131, D130, D129, D128, D127, D126, D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D137).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -595,6 +595,8 @@ controllo FFA.
 
 **Rischi.** Molti problemi insieme: si parte da quelli che spostano più matchup.
 
+**In ingresso ([D137](#decisioni-del-proprietario)).** Rarità P per i sette personaggi (42 C / 56 NC / 18 R / 7 P), regolamento 1.14: nel blocco che applica la revisione del proprietario, prima di SB-20.
+
 **In ingresso ([D136](#decisioni-del-proprietario)).** Prima di SB-20: SB-20a (pagina HTML locale con le 123 carte, campi modificabili, esportazione delle modifiche), revisione del proprietario, sue scelte applicate. SB-20 resta senza correzioni: Estasi e Grappa (D131) si misurano e vanno in cima all'elenco dei problemi, si correggono nel primo giro di SB-21.
 
 **SB-20a rivista dalla regia il 18 novembre 2026.** Nessun dato toccato, script e conti (123; 44 C / 59 NC / 20 R) rifatti. Domande 1 e 2 del rapporto risolte senza il proprietario: base.md descrive il vivo e la bozza il playground, la differenza è attesa; i turni hanno una sola convenzione (`turns` conta i turni dopo quello corrente, il testo li conta tutti), nessun errore. Flavour e illustrazioni delle carte partono vuoti: li scrive il proprietario nella pagina. Le intestazioni di `flavour.md` coi nomi precedenti si sistemano nel blocco che applica la revisione.
@@ -741,7 +743,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D136 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D137 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
