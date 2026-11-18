@@ -616,6 +616,8 @@ Massimo proposto: 3 giri prima di tornare dal proprietario.
 
 **Rischi.** Inseguire il perfetto: una strategia un po' più forte è ammessa. Correzioni che rompono gli starter stabili: la matrice lo mostra.
 
+**Anticipato ([D138](#decisioni-del-proprietario)).** La pulizia dei numeri «brutti» (SB-20b) si fa prima di SB-20, perché SB-20 misuri il set già pulito. Restano qui le correzioni che vengono dalla misura, comprese Estasi e Grappa ([D136](#decisioni-del-proprietario)).
+
 **In ingresso ([D121](#decisioni-del-proprietario)).** I bot giocano Fare il vago (bound di difesa di Sergio) 3,3 volte a partita, una su sei contro un colpo mostrato: insegnare a giocarla solo contro un colpo mostrato o previsto.
 
 **In ingresso ([D127](#decisioni-del-proprietario)).** `StyleSupport.affordableAfter` legge ancora un costo in HEALTH con `>=`: con d50 un bot può stimare pagabile una carta a salute pari al costo (il motore la rifiuta). Allinearlo alla correzione di `unlockedDamage` della B2 di SB-18.
@@ -649,6 +651,8 @@ effetto; in quel caso, ultimo controllo di SB-7. Rarità definitive. **Congelame
 
 **Rischi.** Ritocchi che riaprono il bilanciamento: ogni variazione di numeri torna a SB-21.
 
+**Anticipato ([D136](#decisioni-del-proprietario), [D137](#decisioni-del-proprietario)).** Il proprietario rivede nomi, flavour e illustrazioni sulla pagina di SB-20a e la rarità P dei personaggi entra prima di SB-20. Nomi e flavour scelti allora sono **provvisori**: le correzioni di SB-21 possono cambiare l'effetto di una carta o toglierla. Restano qui la conferma di nomi e flavour sulle carte finali, le rarità definitive e il congelamento.
+
 ### SB-25 — Testi delle carte per i giocatori
 
 **Perimetro.** Passata di abbellimento su **tutti** i testi che il giocatore legge: effetti delle carte, personaggi, oggetti e token, parole chiave
@@ -664,6 +668,8 @@ nell'ispezione a 1366×768 e 844×390. Nessun effetto cambia.
 
 **Rischi.** Un testo gradevole ma impreciso inganna il giocatore: per i casi sottili conta la scheda, che resta consultabile. Carte molto complesse possono non entrare: si
 accorcia il testo o si semplifica la carta, tornando a SB-24. Le frasi del report del server in «Ultimo turno» sono fuori, salvo Q8.
+
+**Anticipato ([D138](#decisioni-del-proprietario)).** SB-20c genera i testi stampati dai dati, con segnaposto per i simboli delle risorse disegnati dal client, così testo e dati non divergono durante SB-21 e la prova di SB-22. Restano qui il glossario, la passata di stile in italiano semplice, il campione approvato dal proprietario, il controllo automatico delle formule e la prova di ingombro.
 
 ### SB-26 — Generazione del catalogo dal set
 
