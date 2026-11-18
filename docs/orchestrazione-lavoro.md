@@ -9,7 +9,7 @@ rompere, non dal filone a cui appartiene.
 
 - **Proprietario:** decide, sceglie chi esegue ogni blocco, giudica guardando o giocando, dà il comando di push («pusha»; mai
   prima) e compie le azioni fuori dal repository (account, servizi esposti, credenziali, spese, pubblicazioni: l'agente prepara
-  script e istruzioni). Parla italiano, vuole risposte brevi e prompt pronti da incollare in un blocco di codice.
+  script e istruzioni). Parla italiano, vuole risposte brevi e prompt pronti da incollare in un blocco di codice (in inglese, [sotto](#il-prompt)).
 - **Regia** di un filone: non scrive codice di prodotto. Legge il repository, scrive i prompt, rivede le consegne, registra le
   decisioni, propone modello e sforzo. Non tiene lo stato in chat: lo cerca e lo lascia nel repository.
 - **Esecutori:** sessioni nuove e usa e getta, una per blocco. Leggono AGENTS.md e il prompt, lavorano, riportano.
@@ -116,6 +116,12 @@ il contratto:
 4. Scelte o approvazioni del proprietario con le sue parole, se non sono già nel repository.
 5. Lavoro: cosa fare e in che ordine; con altri esecutori sulla macchina, i loro file e il turno delle verifiche esclusive.
 6. Cosa deve dire la chiusura, se c'è qualcosa oltre al contratto.
+
+**Lingua e forma** (proprietario, 18 novembre 2026). Il prompt si scrive **in inglese**, che costa meno token. Una riga
+dice all'esecutore che documenti, rapporti, piano e registro restano in italiano e i commit in inglese. Le citazioni del
+proprietario e i nomi di carte, file e sezioni restano come sono, senza tradurli. Prima del prompt la regia riassume in una
+frase italiana cosa farà l'esecutore e aspetta il via del proprietario, che può chiedere cambi. Nel prompt non si scrive come
+firmare i commit.
 
 ## Decisioni e deviazioni
 
