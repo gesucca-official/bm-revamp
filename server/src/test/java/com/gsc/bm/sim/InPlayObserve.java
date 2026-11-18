@@ -66,7 +66,9 @@ final class InPlayObserve {
                         && item.getName().equals(m.getChoices().get(Move.AdditionalAction.TARGET_ITEM))).findFirst().orElse(null);
                 boolean destroyed = g.getResolvedMoves().stream().anyMatch(m -> !m.isVoid() && !m.getPlayerId().equals(p.getPlayerId())
                         && "Smontiamo tutto".equals(m.getPlayedCardName()));
-                if (passed) exit = "passed";
+                boolean stolen = g.getResolvedMoves().stream().anyMatch(m -> !m.isVoid() && !m.getPlayerId().equals(p.getPlayerId())
+                        && "Steal".equals(m.getPlayedCardName()));
+                if (passed) exit = stolen ? "stolen" : "passed";
                 else if (own != null) exit = "Lo rivendo".equals(own.getPlayedCardName()) ? "sold" : "consumed";
                 else if (destroyed) exit = "destroyed";
                 else exit = "displaced";

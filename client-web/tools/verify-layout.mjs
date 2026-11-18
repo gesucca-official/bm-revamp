@@ -190,10 +190,14 @@ const pills=(card,left)=>{const amount=card.catalogAmount??card.damageAmount;if(
 // C4-3: costs and gains as symbols, never letters. The coins of the face name the resources of the catalog cost, in order; the gains are a prefix of the catalog gains (one that does not fit is left out, as before);
 // no text of the face is a number with the letter of a resource, nor a letter alone.
 const LETTER_RES={H:'HEALTH',A:'ALERTNESS',V:'VIOLENCE',T:'TOXICITY',L:'ALCOHOL'};
-function symbolProblems(f,card){const out=[],gainsWant=[...(card.gains??'').matchAll(/\+(?:\d+|x) ([HAVTL])\b/g)].map(m=>LETTER_RES[m[1]]),costWant=card.item?[]:Object.keys(card.cost??{});
+function symbolProblems(f,card){const out=[],gainsWant=[...(card.gains??'').matchAll(/\+(?:\d+|x) ([HAVTL])\b/g)].map(m=>LETTER_RES[m[1]]),costWant=card.item?[]:Object.keys(card.cost??{}),inPlayWant=[...(card.inPlay??'').matchAll(/[−+-]\d+ ([HAVTL])\b/g)].map(m=>LETTER_RES[m[1]]);
  if(!f.marks)return ['the face does not report its symbols'];
  if(JSON.stringify(f.marks.cost)!==JSON.stringify(costWant))out.push(`cost symbols ${JSON.stringify(f.marks.cost)}, catalog ${JSON.stringify(costWant)}`);
  if(JSON.stringify(f.marks.gains)!==JSON.stringify(gainsWant.slice(0,f.marks.gains.length)))out.push(`gain symbols ${JSON.stringify(f.marks.gains)}, catalog ${JSON.stringify(gainsWant)} (gains ${JSON.stringify(card.gains)})`);
+ // SB-19: the pill of the «In campo» effect of an item: the resources of its catalog text, in order (one that does not fit is left out, as for the gains); no other card has one; the sign is the true minus or the plus.
+ if(JSON.stringify(f.marks.inPlay)!==JSON.stringify(inPlayWant.slice(0,f.marks.inPlay.length)))out.push(`in play symbols ${JSON.stringify(f.marks.inPlay)}, catalog ${JSON.stringify(inPlayWant)} (inPlay ${JSON.stringify(card.inPlay)})`);
+ if(card.item&&inPlayWant.length&&!f.marks.inPlay.length)out.push('an item with an effect in play shows no pill for it');
+ if(!card.item&&f.marks.inPlay.length)out.push('a card that is not an item with an in-play pill');
  const letters=f.texts.filter(t=>/^[!+\s]*(\d+|x)\s*[HAVTL]$/.test(t)||/^[HAVTL]$/.test(t));if(letters.length)out.push(`a letter of a resource on the face: ${JSON.stringify(letters)}`);
  return out;}
 // C4-2: this check never fired (a backspace stood in the source for the word boundary): it proves itself at every run on a built case.

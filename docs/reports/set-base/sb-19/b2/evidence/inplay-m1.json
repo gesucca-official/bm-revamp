@@ -1,0 +1,151 @@
+{
+ "byHolder": {
+  "Conto del tavolo sei": {
+   "base.character.Cesira": {
+    "applied": 1212347,
+    "atEnd": 114099,
+    "consumed": 139331,
+    "destroyed": 2060,
+    "displaced": 1823,
+    "passed": 6537,
+    "sold": 31426,
+    "stolen": 1974
+   },
+   "base.character.Gigi": {
+    "applied": 466549,
+    "atEnd": 65178,
+    "consumed": 47187,
+    "destroyed": 546,
+    "displaced": 16276,
+    "passed": 45,
+    "stolen": 402
+   },
+   "base.character.Mara": {
+    "applied": 3348,
+    "atEnd": 168,
+    "consumed": 371,
+    "displaced": 381,
+    "passed": 51
+   },
+   "base.character.Pino": {
+    "applied": 3527,
+    "atEnd": 290,
+    "consumed": 540,
+    "displaced": 231,
+    "passed": 20
+   },
+   "base.character.Rocco": {
+    "applied": 1821,
+    "atEnd": 305,
+    "consumed": 135,
+    "displaced": 36,
+    "passed": 24
+   },
+   "bruiser.character.BigBadBruiser": {
+    "applied": 513944,
+    "atEnd": 50743,
+    "consumed": 107819,
+    "destroyed": 1032,
+    "displaced": 56445,
+    "passed": 27,
+    "stolen": 1207
+   },
+   "junkie.character.ToxicJunkie": {
+    "applied": 8403,
+    "atEnd": 1036,
+    "consumed": 1105,
+    "destroyed": 12,
+    "displaced": 531,
+    "passed": 51,
+    "stolen": 3
+   }
+  },
+  "Sigaretta accesa": {
+   "base.character.Cesira": {
+    "applied": 860095,
+    "atEnd": 134933,
+    "consumed": 106905,
+    "destroyed": 1658,
+    "displaced": 8271,
+    "passed": 19,
+    "sold": 23713,
+    "stolen": 1326,
+    "toxicityNotImmune": 1719862
+   },
+   "base.character.Gigi": {
+    "applied": 6833,
+    "atEnd": 989,
+    "consumed": 492,
+    "displaced": 820,
+    "passed": 40,
+    "toxicityNotImmune": 13590
+   },
+   "base.character.Mara": {
+    "applied": 1663,
+    "atEnd": 191,
+    "consumed": 236,
+    "displaced": 184,
+    "passed": 18,
+    "toxicityNotImmune": 3212
+   },
+   "base.character.Pino": {
+    "applied": 1658,
+    "atEnd": 194,
+    "consumed": 327,
+    "displaced": 134,
+    "passed": 21,
+    "toxicityNotImmune": 3204
+   },
+   "base.character.Rocco": {
+    "applied": 1234,
+    "atEnd": 304,
+    "consumed": 84,
+    "displaced": 21,
+    "passed": 6,
+    "toxicityNotImmune": 2390
+   },
+   "bruiser.character.BigBadBruiser": {
+    "applied": 1085,
+    "atEnd": 185,
+    "consumed": 197,
+    "displaced": 61,
+    "passed": 16,
+    "toxicityNotImmune": 2170
+   },
+   "junkie.character.ToxicJunkie": {
+    "applied": 1496822,
+    "atEnd": 185505,
+    "consumed": 120913,
+    "destroyed": 2486,
+    "displaced": 88397,
+    "passed": 5174,
+    "stolen": 2010,
+    "toxicityNotImmune": 165156
+   }
+  }
+ },
+ "total": {
+  "Conto del tavolo sei": {
+   "applied": 2209939,
+   "consumed": 296488,
+   "sold": 31426,
+   "stolen": 3586,
+   "passed": 6755,
+   "destroyed": 3650,
+   "displaced": 75723,
+   "atEnd": 231819,
+   "toxicityNotImmune": 0
+  },
+  "Sigaretta accesa": {
+   "applied": 2369390,
+   "consumed": 229154,
+   "sold": 23713,
+   "stolen": 3336,
+   "passed": 5294,
+   "destroyed": 4144,
+   "displaced": 97888,
+   "atEnd": 322301,
+   "toxicityNotImmune": 1909584
+  }
+ }
+}

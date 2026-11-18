@@ -52,6 +52,11 @@ export function cardType(c:Card):CardType{
 export type Gain={resource:Resource;amount:number|null};
 export const gainsOf=(card:Card):Gain[]=>{
  const out:Gain[]=[];for(const m of (card.gains??'').matchAll(/\+(\d+|x) ([HAVTL])\b/g))out.push({resource:BY_LETTER[m[2]],amount:m[1]==='x'?null:Number(m[1])});return out;};
+/** SB-19 (RP-27): the «In campo» effect of an item as the catalog publishes it, e.g. "−3 A" (a cost: the item takes it every end of turn) or "+2 T". */
+export type InPlay={resource:Resource;amount:number;sign:1|-1};
+export const inPlayOf=(card:Card):InPlay[]=>{
+ const out:InPlay[]=[];for(const m of (card.inPlay??'').matchAll(/([−+-])(\d+) ([HAVTL])\b/g))out.push({resource:BY_LETTER[m[3]],amount:Number(m[2]),sign:m[1]==='+'?1:-1});return out;};
+export const inPlayText=(p:InPlay)=>`${p.sign<0?'−':'+'}${p.amount}`;
 export const gainText=(g:Gain)=>`+${g.amount??'x'} ${LETTER[g.resource]}`;
 
 /** O4: indicator against the character's starting value. No caps or floors (R01): the number is

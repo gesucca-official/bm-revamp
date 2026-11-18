@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {affordable,shortfall,roleOf,gainsOf,gainText,meter,chipsOf,statusText,tableLayout,overlap,inside,ROLES,type Box} from '../src/readability.ts';
+import {affordable,shortfall,roleOf,gainsOf,gainText,inPlayOf,inPlayText,meter,chipsOf,statusText,tableLayout,overlap,inside,ROLES,type Box} from '../src/readability.ts';
 import {Model} from '../src/model.ts';
 import type {Card} from '../src/contracts.ts';
 const fixtures=JSON.parse(readFileSync(new URL('./fixtures.json',import.meta.url),'utf8'));
@@ -331,4 +331,12 @@ test('C4-2: no free place at all: the old place of the layout, never an error',(
 const BASE_750:Record<number,number[]>={2:[6,6,6,5],5:[11,11,12,14]};
 for(const n of [2,5])test(`C4-2, rule 18: layoutProblems at 750×292 with ${n} seats do not exceed the base`,()=>{const ids=['me','b','c','d','e'].slice(0,n);
  BASE_750[n].forEach((base,items)=>{const count=layoutProblems(tableLayout(750,292,ids,'me',Object.fromEntries(ids.map(i=>[i,items]))),750,292).length;assert.ok(count<=base,`${items} objects: ${count} problems, base ${base}`);});
+});
+
+test('SB-19: the effect in play of an item is read from its short text, a loss with the true minus and a gain with the plus; no card without it has one',()=>{
+ assert.deepEqual(inPlayOf(card({inPlay:'−3 A'})),[{resource:'ALERTNESS',amount:3,sign:-1}]);
+ assert.deepEqual(inPlayOf(card({inPlay:'+2 T'})),[{resource:'TOXICITY',amount:2,sign:1}]);
+ assert.deepEqual(inPlayOf(card({inPlay:'-3 A, +1 T'})).map(inPlayText),['−3','+1'],'the ASCII minus is read too, and drawn as the true one');
+ assert.deepEqual(inPlayOf(card({inPlay:undefined})),[]);assert.deepEqual(inPlayOf(card({inPlay:null})),[]);
+ assert.deepEqual(inPlayOf(card({gains:'+15 V'})),[],'the gains of the consumption are another thing');
 });

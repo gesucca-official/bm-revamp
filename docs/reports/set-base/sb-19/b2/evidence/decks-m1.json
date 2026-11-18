@@ -1,0 +1,162 @@
+{
+ "prova-b2-spazienzio": {
+  "mean": -0.01952191411321889,
+  "max": 12.885235184514002,
+  "maxFoe": "prova-sergio",
+  "draws": 6.246913580246914,
+  "turns": 10.252716049382716,
+  "gaps": {
+   "media": 0.01952191411321889,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 0.01952191411321889,
+  "inBand": false,
+  "toFive": 5.019521914113219
+ },
+ "prova-b2-beppe": {
+  "mean": 5.832440324003549,
+  "max": 17.069466005721885,
+  "maxFoe": "starter-spazienzio",
+  "draws": 6.185185185185185,
+  "turns": 9.95604938271605,
+  "gaps": {
+   "media": 0.0,
+   "massimo": 2.0694660057218854,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 2.0694660057218854,
+  "inBand": false,
+  "toFive": 0.8324403240035494
+ },
+ "prova-b2-sergio-conto": {
+  "mean": -31.1912785654688,
+  "max": -21.243057839013574,
+  "maxFoe": "prova-duccio",
+  "draws": 3.4074074074074074,
+  "turns": 12.23246913580247,
+  "gaps": {
+   "media": 31.1912785654688,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.23246913580246975
+  },
+  "distance": 31.423747701271267,
+  "inBand": false,
+  "toFive": 36.1912785654688
+ },
+ "prova-b2-sergio-sigaretta": {
+  "mean": -32.09617598389063,
+  "max": -23.97611222883337,
+  "maxFoe": "prova-duccio",
+  "draws": 4.172839506172839,
+  "turns": 10.06469135802469,
+  "gaps": {
+   "media": 32.09617598389063,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 32.09617598389063,
+  "inBand": false,
+  "toFive": 37.09617598389063
+ },
+ "prova-b2-celestina": {
+  "mean": 2.6212440017674257,
+  "max": 11.07377801616309,
+  "maxFoe": "starter-mara",
+  "draws": 11.604938271604938,
+  "turns": 11.022469135802469,
+  "gaps": {
+   "media": 0.0,
+   "massimo": 0.0,
+   "patte": 1.6049382716049383,
+   "durata": 0.0
+  },
+  "distance": 1.6049382716049383,
+  "inBand": false,
+  "toFive": 2.3787559982325743
+ },
+ "prova-b2-rischio9": {
+  "mean": 2.1185561032652527,
+  "max": 9.574276873870119,
+  "maxFoe": "starter-mara",
+  "draws": 9.901234567901234,
+  "turns": 11.009629629629629,
+  "gaps": {
+   "media": 0.0,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 0.0,
+  "inBand": true,
+  "toFive": 2.8814438967347473
+ },
+ "prova-b2-rischio10": {
+  "mean": -30.830235171054735,
+  "max": -20.090643866653885,
+  "maxFoe": "prova-duccio",
+  "draws": 2.9382716049382718,
+  "turns": 12.194938271604938,
+  "gaps": {
+   "media": 30.830235171054735,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.19493827160493815
+  },
+  "distance": 31.02517344265967,
+  "inBand": false,
+  "toFive": 35.83023517105474
+ },
+ "iso-b2-conto": {
+  "mean": 3.572694591221745,
+  "max": 7.108915843441288,
+  "maxFoe": "starter-spazienzio",
+  "draws": 4.679012345679013,
+  "turns": 10.43962962962963,
+  "gaps": {
+   "media": 0.0,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 0.0,
+  "inBand": true,
+  "toFive": 1.4273054087782548
+ },
+ "iso-b2-sigaretta": {
+  "mean": 7.899404365762366,
+  "max": 14.229869006987997,
+  "maxFoe": "starter-mara",
+  "draws": 11.024691358024691,
+  "turns": 10.367901234567901,
+  "gaps": {
+   "media": 0.0,
+   "massimo": 0.0,
+   "patte": 1.0246913580246915,
+   "durata": 0.0
+  },
+  "distance": 1.0246913580246915,
+  "inBand": false,
+  "toFive": 2.899404365762366
+ },
+ "iso-b2-sigaretta-sergio": {
+  "mean": -22.905910689383862,
+  "max": -14.51201421822795,
+  "maxFoe": "starter-tossico",
+  "draws": 4.518518518518518,
+  "turns": 9.78962962962963,
+  "gaps": {
+   "media": 22.905910689383862,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 22.905910689383862,
+  "inBand": false,
+  "toFive": 27.905910689383862
+ }
+}

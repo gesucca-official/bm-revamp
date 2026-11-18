@@ -1,0 +1,50 @@
+{
+ "prova-b2-beppe": {
+  "mean": 7.195168033104509,
+  "max": 18.06651709019453,
+  "maxFoe": "starter-spazienzio",
+  "draws": 12.876543209876543,
+  "turns": 9.92283950617284,
+  "gaps": {
+   "media": 0.0,
+   "massimo": 3.0665170901945302,
+   "patte": 2.8765432098765427,
+   "durata": 0.0
+  },
+  "distance": 5.943060300071073,
+  "inBand": false,
+  "toFive": 2.195168033104509
+ },
+ "prova-b2-sergio-conto": {
+  "mean": -23.260121481839978,
+  "max": -8.875499305067898,
+  "maxFoe": "prova-duccio",
+  "draws": 5.493827160493828,
+  "turns": 12.076172839506173,
+  "gaps": {
+   "media": 23.260121481839978,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.07617283950617271
+  },
+  "distance": 23.336294321346152,
+  "inBand": false,
+  "toFive": 28.260121481839978
+ },
+ "prova-b2-sergio-sigaretta": {
+  "mean": -18.46959856318629,
+  "max": -7.308957633489506,
+  "maxFoe": "prova-duccio",
+  "draws": 4.197530864197531,
+  "turns": 11.982098765432099,
+  "gaps": {
+   "media": 18.46959856318629,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 18.46959856318629,
+  "inBand": false,
+  "toFive": 23.46959856318629
+ }
+}

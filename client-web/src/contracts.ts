@@ -9,6 +9,8 @@ export interface Card {
   image: string | null; sprite: string | null;
   // Descriptive catalog fields (regulation 1.7 R07a, 1.9 and 1.10); absent on older servers.
   // `damage`: "HIT", "CUT", "POISON", several as "HIT, CUT" or "—"; `damageAmount`: "HIT 15", "HIT 20+x", "—".
+  // SB-19 (RP-27, RP-28): the «In campo» effect of an item as short text, e.g. "−3 A" or "+2 T"; absent on every other card.
+  inPlay?: string | null;
   role?: string | null; gains?: string | null; damage?: string | null; damageAmount?: string | null;
   // Regulation 1.12 R02: the character a basic or last resort is reserved to (null = generic); read by the deck editor.
   exclusiveToCharacter?: string | null;

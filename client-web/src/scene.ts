@@ -12,7 +12,7 @@ import {deckLabel,handNeighbour} from './a11y.ts';
 import {seatMark,heldBack} from './lifecycle.ts';
 import {drawSymbol,drawMark,edgeFor,type Ground,type Pen,type SymbolKind} from './symbols.ts';
 import {drawFrame,frameOf,cardShadow,CARD_SHADOW,FRAME_GREY,type FrameKind} from './frames.ts';
-import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,playsNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
+import {RESOURCES,LETTER,RES_COLOR,ROLE_COLOR,ROLES,roleOf,gainsOf,gainText,inPlayOf,inPlayText,damageOf,damageText,damageLabel,leftV,impactOf,impactMotion,DAMAGE_SHAPES,DAMAGE_ACCENT_SHAPES,DAMAGE_ACCENT,DAMAGE_COLOR,type DamageType,type ImpactKind,shortfall,meter,chipsOf,revealedNote,playsNote,tableLayout,stripPlan,briefSpot,briefFont,fan,coveredItems,touchRaises,aimArrows,arrowShape,confirmButtons,previewSpot,closeUp,targetOf,seatBoxes,closeUpRange,nextPile,labelSpot,pileTag,tableFrame,shiftLayout,type AimTarget,type Arrow,type Box,type Chip,type CloseUp,type Role,type StripPlan,type TableLayout} from './readability.ts';
 // `hidden` (C3-4s): during a sequence the card or object is in the view but has not arrived on the table yet.
 export type Hit={id:string;kind:'hand'|'preview'|'person'|'item'|'status'|'revealed';x:number;y:number;w:number;h:number;angle:number;key?:string;target?:Target;label:string;node:Container;covered?:boolean;hidden?:boolean};
 /** `note`: SB-16g 2a, what a card found by a search says (who found it, when, the vulnerability token bound to it). */
@@ -39,7 +39,7 @@ type Label={seat:string;resource:Resource;box:Box;from:number;to:number;first:nu
 /** C3-5: what a drawn face shows, in its own coordinates (centre at the middle of the card): damage pills, cost chips and every text, for the checks. */
 type DrawnDamage={type:DamageType;text:string;box:Box};
 /** `marks`: the resources whose symbol the face draws on its cost coins and on its gains, in drawing order (C4-3: never a letter on the face; the letters stay in `texts` only where the catalog gives them as text). */
-export type FaceInfo={w:number;h:number;frame:FrameKind;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean;marks:{cost:Resource[];gains:Resource[]}};
+export type FaceInfo={w:number;h:number;frame:FrameKind;damage:DrawnDamage[];costs:Box[];texts:string[];role:boolean;marks:{cost:Resource[];gains:Resource[];inPlay:Resource[]}};
 const INK=0x30231e, PAPER=0xe8d7b4, PETROL=0x6eafaf, WINE=0x742e33;
 // Plain vector marks (symbols.ts, shared with the HTML shell): the shape carries the meaning, the colour only reinforces it (O3, O14).
 // C4-8a 3b: `ground` is the ground the symbol lies on; the heart on dark and alcohol or toxicity on light get a 1 px outline (symbols.ts, `edgeFor`).
@@ -191,7 +191,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const t=this.text(c,text,0,y+bh*.12,bh*.68,undefined,0xfff6e2);t.anchor.set(0,0);t.x=-w/2+Math.min(6,w*.06);if(t.width>w-4)t.scale.set((w-4)/t.width);}
  // C2a card face: role stamp under the title, self gains on the art, cost coins and priority in the footer.
  // Everything sits on the left, which stays visible where the fan overlaps. short = unpaid cost resources.
- private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[],costMarks:Resource[]=[],gainMarks:Resource[]=[];const kind=frameOf(c),f=this.face(c.name,artIndex(c.bindingName),w,h,kind==='token'?'TOKEN':c.item?'OGGETTO':'',small,subtype(c),kind);
+ private card(c:Card,w:number,h:number,small=false,short:Resource[]=[],left:number|null=null){const costBoxes:Box[]=[],drawnDamage:DrawnDamage[]=[],costMarks:Resource[]=[],gainMarks:Resource[]=[],inPlayMarks:Resource[]=[];const kind=frameOf(c),f=this.face(c.name,artIndex(c.bindingName),w,h,kind==='token'?'TOKEN':c.item?'OGGETTO':'',small,subtype(c),kind);
   const titleH=small?h*.27:h*.24,footH=small?h*.17:h*.18,role=roleOf(c),g=new Graphics();f.addChild(g);
   // The small card of the round shows the symbol of its damage at the bottom right: a role circle beside it would repeat it (owner trial, C3-7).
   const roleDrawn=!!role&&!(small&&damageOf(c).length);
@@ -203,6 +203,11 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
   const gains=gainsOf(c);if(gains.length){const fs=small?Math.max(8,w*.12):Math.max(10,w*.075),ch=fs*1.45;let gx=-w/2+7;const gy=h/2-footH-5-ch/2;
    for(const gain of gains){const label=this.text(f,`+${gain.amount??'x'}`,0,0,fs,undefined,INK);label.anchor.set(0,.5);const gd=ch*.78,cw=label.width+gd+9;if(gx+cw>w/2-4){label.destroy();break;}
     g.roundRect(gx,gy-ch/2,cw,ch,ch*.3).fill(0xf6efd9).stroke({color:RES_COLOR[gain.resource],width:1.5});label.position.set(gx+4,gy);f.addChild(label);glyph(g,gain.resource,gx+4+label.width+2+gd/2,gy,gd,RES_COLOR[gain.resource],undefined,'light');gainMarks.push(gain.resource);gx+=cw+3;}}
+  // SB-19 (RP-27): the effect an item has while it is on the table, a pill in the colour of the costs (the item takes it from its holder) in the footer, where an item has no costs.
+  if(c.item){const fs=small?Math.max(7,w*.085,Math.min(10,w*.11)):Math.max(11,w*.088),fy=h/2-footH/2-1,ch=fs*1.4;let cx=-w/2+8;
+   for(const p of inPlayOf(c)){const label=this.text(f,inPlayText(p),0,0,fs,undefined,0xfff6e2);label.anchor.set(0,.5);const dd=ch*.8,cw=label.width+dd+10,dx=cx+5+label.width+2+dd/2;
+    if(cx+cw>w/2-4){label.destroy();break;}
+    g.roundRect(cx,fy-ch/2,cw,ch,ch*.45).fill(INK);label.position.set(cx+5,fy);f.addChild(label);g.circle(dx,fy,dd/2).fill(0xf6efd9);glyph(g,p.resource,dx,fy,dd*.78,RES_COLOR[p.resource],undefined,'light');inPlayMarks.push(p.resource);cx+=cw+3;}}
   if(!c.item){const fs=small?Math.max(7,w*.085,Math.min(10,w*.11)):Math.max(11,w*.088),fy=h/2-footH/2-1,ch=fs*1.4;let cx=-w/2+8;
    const costs=Object.entries(c.cost) as [Resource,number][];
    if(!costs.length){const dash=this.text(f,'—',cx+4,fy,fs,undefined,INK);dash.anchor.set(0,.5);}
@@ -211,7 +216,7 @@ readout:Readout={layout:{hand:{w:0,h:0},person:{w:0,h:0},item:{w:0,h:0}},piles:n
     g.circle(dx,fy,dd/2).fill(0xf6efd9);glyph(g,k,dx,fy,dd*.78,RES_COLOR[k],undefined,'light');costMarks.push(k);
     if(unpaid)g.moveTo(cx+3,fy+ch*.3).lineTo(cx+cw-3,fy-ch*.3).stroke({color:0xffd9d9,width:1.5});cx+=cw+3;}
    if(small)this.damageMarks(f,c,w,h,footH,drawnDamage);else this.damageBadges(f,c,w,fy,fs,cx,left,drawnDamage);}
-  this.faces.set(f,{w,h,frame:kind,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text),marks:{cost:costMarks,gains:gainMarks}});
+  this.faces.set(f,{w,h,frame:kind,role:roleDrawn,damage:drawnDamage,costs:costBoxes,texts:f.children.filter((x):x is Text=>x instanceof Text).map(x=>x.text),marks:{cost:costMarks,gains:gainMarks,inPlay:inPlayMarks}});
   return f;}
  /** C4-4: the mark of the role comes out of the fillet, from the left edge of the card to the end of its word. */
  private roleTab(g:Graphics,color:number|null,tx:number,ty:number,tw:number,th:number,w:number){const t=ty-th/2,b=ty+th/2,l=-w/2+2.5,r=tx+tw;g.poly([l,t,r-th*.2,t,r,t+th*.2,r,b-th*.2,r-th*.2,b,l,b]);if(color!==null)g.fill(color);g.stroke({color:color===null?FRAME_GREY:INK,width:1});}
