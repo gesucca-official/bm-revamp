@@ -31,6 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * <li>{@code -Dsim.sb19Games}: seeds per cell (4 for the feasibility, 100 for the round).</li>
  * </ul>
  * Writes the matrix, the deck observations (plays of every card, as in SB-17 and SB-18) and the draft read; nothing about the engine changes.
+ * SB-19 Fase B2: with a draft that has items with an «In campo» effect (RP-27), also {@code in-play.json} ({@link InPlayObserve});
+ * without them nothing more is written, so the output of the «Rif» arm stays the same.
  */
 class Sb19MeasureTest {
     private static final ObjectMapper JSON = new ObjectMapper();
@@ -74,12 +76,22 @@ class Sb19MeasureTest {
         };
         ThreadLocal<DeckSizeObserve> deckWatches = new ThreadLocal<>();
         DeckSizeObserve deckAggregate = new DeckSizeObserve();
+        boolean inPlay = InPlayObserve.any(draft);
+        ThreadLocal<InPlayObserve> inPlayWatches = new ThreadLocal<>();
+        InPlayObserve inPlayAggregate = new InPlayObserve();
         long started = System.nanoTime();
         BiConsumer<String, Game> observation = (stage, g) -> {
             if (stage.equals("ROUND_READY") && g.getTurn() == 0) deckWatches.remove();
             DeckSizeObserve dw = deckWatches.get();
             if (dw == null) { dw = new DeckSizeObserve(); deckWatches.set(dw); }
             dw.accept(stage, g);
+            if (inPlay) {
+                if (stage.equals("ROUND_READY") && g.getTurn() == 0) inPlayWatches.remove();
+                InPlayObserve iw = inPlayWatches.get();
+                if (iw == null) { iw = new InPlayObserve(); inPlayWatches.set(iw); }
+                iw.accept(stage, g);
+                if (stage.equals("ROUND_COMMITTED") && g.isOver()) { inPlayAggregate.merge(iw); inPlayWatches.remove(); }
+            }
             if (stage.equals("ROUND_COMMITTED") && g.isOver()) { deckAggregate.merge(dw); deckWatches.remove(); }
         };
         Bench.Report report = Bench.runCells(draft, settings, cells, source, observation);
@@ -89,6 +101,7 @@ class Sb19MeasureTest {
         Files.writeString(out.resolve("deck-observations.json"), JSON.writeValueAsString(deckAggregate.totals));
         Files.writeString(out.resolve("draft.json"), JSON.writeValueAsString(draft.json()));
         Files.writeString(out.resolve("seconds.txt"), String.valueOf(seconds));
+        if (inPlay) Files.writeString(out.resolve("in-play.json"), JSON.writeValueAsString(inPlayAggregate.totals));
         assertEquals(0, report.checks.total(), report.failures());
         assertEquals(0, report.boundViolations(), report.failures());
         System.out.println("sb-19 round: " + report.games() + " games, " + seconds + " seconds");

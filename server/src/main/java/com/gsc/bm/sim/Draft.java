@@ -91,8 +91,16 @@ final class Draft implements PlayerSource {
     /** I testi e i dati descrittivi che i bot e la traccia leggono. */
     static final class Gui {
         final String name, description, image, sprite, role, gains, damage, damageAmount;
+        /** SB-19 (RP-28): the short text of an item's «In campo» effect, e.g. "−3 A"; null when the card has none. */
+        final String inPlay;
 
         Gui(String name, String description, String image, String sprite, String role, String gains, String damage, String damageAmount) {
+            this(name, description, image, sprite, role, gains, damage, damageAmount, null);
+        }
+
+        Gui(String name, String description, String image, String sprite, String role, String gains, String damage, String damageAmount,
+            String inPlay) {
+            this.inPlay = inPlay;
             this.name = name;
             this.description = description;
             this.image = image;
@@ -659,6 +667,7 @@ final class Draft implements PlayerSource {
         if (node.has("java")) {
             fields(node, where, Set.of("binding", "java", "gui"), Set.of("cost", "priority", "params", "exclusiveTo", "rarity", "set"));
             if (!node.get("java").isBoolean() || !node.get("java").asBoolean()) throw invalid(where, "java, se presente, vale true");
+            if (gui.inPlay != null) throw invalid(where, "gui.inPlay senza il campo inPlay (RP-28): vale solo per un oggetto a dati");
             return javaCard(node, binding, where, gui, exclusiveTo, set, rarity);
         }
         ObjectNode definition = node.deepCopy();
@@ -666,6 +675,9 @@ final class Draft implements PlayerSource {
         definition.remove("exclusiveTo");
         definition.remove("rarity");
         definition.remove("set");
+        boolean inPlay = definition.has("inPlay") && definition.get("inPlay").isArray() && definition.get("inPlay").size() > 0;
+        if (inPlay && gui.inPlay == null) throw invalid(where, "campo gui.inPlay mancante: lo chiede il campo inPlay (RP-28)");
+        if (!inPlay && gui.inPlay != null) throw invalid(where, "gui.inPlay senza il campo inPlay (RP-28)");
         try {
             return new CardSpec(binding, set, rarity, gui, exclusiveTo, DataCards.definition(definition), null, null, null, null);
         } catch (JsonMappingException error) {
@@ -733,9 +745,10 @@ final class Draft implements PlayerSource {
         String at = where + ": gui";
         if (raw == null) throw invalid(where, "campo gui mancante");
         ObjectNode node = object(raw, at);
-        fields(node, at, Set.of("name", "role", "gains", "damage", "damageAmount"), Set.of("description", "image", "sprite"));
+        fields(node, at, Set.of("name", "role", "gains", "damage", "damageAmount"), Set.of("description", "image", "sprite", "inPlay"));
         return new Gui(text(node, "name", at), optional(node, "description", at), optional(node, "image", at), optional(node, "sprite", at),
-                text(node, "role", at), text(node, "gains", at), text(node, "damage", at), text(node, "damageAmount", at));
+                text(node, "role", at), text(node, "gains", at), text(node, "damage", at), text(node, "damageAmount", at),
+                optional(node, "inPlay", at));
     }
 
     private DeckSpec deck(JsonNode raw) {
@@ -884,6 +897,7 @@ final class Draft implements PlayerSource {
         card.setGuiRole(gui.role, gui.gains);
         card.setGuiDamage(gui.damage);
         card.setGuiDamageAmount(gui.damageAmount);
+        if (gui.inPlay != null) card.setGuiInPlay(gui.inPlay);
         return card;
     }
 

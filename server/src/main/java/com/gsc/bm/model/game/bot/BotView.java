@@ -338,14 +338,15 @@ public class BotView {
     /**
      * SB-17 («Lo rivendo», playground rules 1.3, RP-25), the rule shared by every bot, like {@link #searchChoice}: for a basic that
      * sells the own item it targets, a single move, on the least valuable own item by {@link StyleSupport#itemWorth}, the oldest on
-     * a tie; null when the card does not sell or there is no item (then the card cannot be played).
+     * a tie; null when the card does not sell or there is no item (then the card cannot be played). SB-19: the worth counts the
+     * «In campo» effect as the seller reads it, with its immunities.
      */
     String sellChoice(CardSeen card) {
         if (!PrintedEffects.sells(card.effects) || self.seat.items.isEmpty()) return null;
         CardSeen cheapest = null;
         double worth = Double.POSITIVE_INFINITY;
         for (CardSeen item : self.seat.items) {
-            double w = StyleSupport.itemWorth(item);
+            double w = StyleSupport.itemWorth(item, self.seat.getImmunities());
             if (w < worth - 1e-9) { worth = w; cheapest = item; }
         }
         return cheapest.name;

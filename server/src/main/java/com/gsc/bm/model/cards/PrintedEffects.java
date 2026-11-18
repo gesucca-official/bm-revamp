@@ -187,6 +187,34 @@ public class PrintedEffects implements Serializable {
     public static int reflected(int base, float factor) { return (int) ((float) base * factor); }
 
     List<Step> steps;
+    /**
+     * SB-19 (playground rules 1.5, RP-27 and RP-28): the «In campo» effect of an item, a list apart from the consumed text
+     * ({@link #steps}): GAIN or LOSE steps of a fixed {@code base}, on whoever has the item near at the end of the turn. Empty for
+     * every card without it, so every reader of the consumed text is unchanged.
+     */
+    List<Step> inPlay;
+
+    public PrintedEffects(List<Step> steps) { this(steps, List.of()); }
+
+    public PrintedEffects(List<Step> steps, List<Step> inPlay) {
+        this.steps = steps;
+        this.inPlay = inPlay == null ? List.of() : inPlay;
+    }
+
+    /** SB-19 (RP-27): the «In campo» steps of a card, empty when it has none or cannot describe itself. */
+    public static List<Step> inPlay(Card card) {
+        if (!(card instanceof Source)) return List.of();
+        PrintedEffects effects = ((Source) card).printedEffects();
+        return effects == null ? List.of() : effects.getInPlay();
+    }
+
+    /**
+     * SB-19 (RP-27): the change an «In campo» step makes to its resource, signed (a LOSE is negative). The engine and the bots'
+     * table read it the same way.
+     */
+    public static int inPlayChange(Step step) {
+        return step.getKind() == Kind.LOSE ? -Math.abs(step.getBase()) : Math.abs(step.getBase());
+    }
 
     /** A card whose printed effects can be read as numbers. */
     public interface Source {

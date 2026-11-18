@@ -18,4 +18,7 @@ public interface LoadableCard extends Card {
 
     void setGuiExclusiveTo(String character);
 
+    /** SB-19 (RP-28): the short text of an item's «In campo» effect; set only by the playground loader. */
+    void setGuiInPlay(String inPlay);
+
 }

@@ -739,12 +739,23 @@ public final class ViewTable {
                 if (t.turnsLeft == null || t.turnsLeft >= 0) kept.add(t);
             }
             s.statuses = kept;
+            // SB-19 (playground rules 1.5, RP-27): as Character.resolveTimeBasedEffects, the «In campo» effects of the items near
+            // the side, oldest first, after the other periodic effects; not for a side the poison above put down.
+            if (ruleset.playground() && !s.down())
+                for (BotView.CardSeen item : new ArrayList<>(s.items))
+                    for (PrintedEffects.Step step : inPlayOf(item))
+                        s.set(step.getResource(), s.get(step.getResource()) + PrintedEffects.inPlayChange(step));
         }
         for (Side s : sides.values())
             s.marks.removeIf(m -> satisfied.contains(m) || ((m.card == null || !s.holds(m.card))
                     && s.statuses.stream().noneMatch(t -> t.exposure != null && t.exposure == m.id)));
         if (over())
             for (Side s : sides.values()) { s.marks.clear(); s.statuses.removeIf(t -> t.exposure != null); }
+    }
+
+    /** SB-19 (RP-27): the «In campo» steps of a public item, empty without them. */
+    static List<PrintedEffects.Step> inPlayOf(BotView.CardSeen item) {
+        return item.getEffects() == null ? List.of() : item.getEffects().getInPlay();
     }
 
     public Map<String, Integer> health() {

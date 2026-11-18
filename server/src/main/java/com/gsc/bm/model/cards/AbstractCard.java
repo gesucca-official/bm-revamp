@@ -84,6 +84,11 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     // Only deck validation reads it; no effect depends on it. Bound ownership stays in boundToCharacter.
     @Setter(AccessLevel.NONE)
     private String exclusiveToCharacter;
+    // SB-19 (playground rules 1.5, RP-28): the short text of an item's «In campo» effect, e.g. "−3 A", descriptive like gains.
+    // Null for every card without the effect, and then not serialized: the views of today stay the same byte for byte.
+    @Setter(AccessLevel.NONE)
+    @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
+    private String inPlay;
 
     @Override
     public void setGuiName(String name) {
@@ -119,6 +124,11 @@ public abstract class AbstractCard implements Card, LoadableCard, Serializable {
     @Override
     public void setGuiDamageAmount(String damageAmount) {
         this.damageAmount = damageAmount;
+    }
+
+    @Override
+    public void setGuiInPlay(String inPlay) {
+        this.inPlay = inPlay;
     }
 
     @Override

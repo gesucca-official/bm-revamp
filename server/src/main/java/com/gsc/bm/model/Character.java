@@ -1,6 +1,7 @@
 package com.gsc.bm.model;
 
 import com.gsc.bm.model.cards.Card;
+import com.gsc.bm.model.cards.PrintedEffects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.Timer;
@@ -182,6 +183,15 @@ public abstract class Character implements Serializable {
         }
         statuses.removeAll(expiredStatuses);
         effectsReport.addAll(expiredStatuses.stream().map(s -> "Cleared out of " + s.getName() + " status").collect(Collectors.toList()));
+
+        // SB-19 (playground rules 1.5, RP-27): the «In campo» effects of the items near this character, after its other periodic
+        // effects, one item at a time from the oldest. Not a damage: no status changes it; never HEALTH (RP-28); not for a character
+        // eliminated by the effects above (R06). Every live card has none.
+        if (ruleset.playground() && !isDead())
+            for (Card item : new ArrayList<>(items))
+                for (PrintedEffects.Step step : PrintedEffects.inPlay(item))
+                    effectsReport.add("(" + item.getName() + ") "
+                            + editResource(step.getResource(), PrintedEffects.inPlayChange(step), Set.of()));
 
         return effectsReport;
     }

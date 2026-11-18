@@ -103,6 +103,11 @@ final class DataCards {
         public Map<Resource, Integer> cost = Map.of();
         public List<Step> self = List.of();
         public List<Step> target = List.of();
+        /**
+         * SB-19 (regole del playground 1.5, RP-27 e RP-28): l'effetto «In campo» di un oggetto, a fine turno su chi lo ha vicino.
+         * Facoltativo; vuoto se manca, e allora la carta si carica come prima.
+         */
+        public List<Step> inPlay = List.of();
         /** SB-16i: the printed effects, built once (a definition does not change after it is read). Not a JSON field. */
         private transient PrintedEffects printedCache;
 
@@ -123,6 +128,7 @@ final class DataCards {
                     throw invalid("cost: " + entry.getKey() + " deve avere un valore intero non negativo");
             checkSteps("self", self);
             checkSteps("target", target);
+            checkInPlay();
             checkConsume();
             checkSearch();
             checkVendi();
@@ -205,6 +211,37 @@ final class DataCards {
         }
 
         boolean sells() { return self.stream().anyMatch(step -> step instanceof VendiStep); }
+
+        /**
+         * SB-19 (RP-28): il campo inPlay vale solo in un oggetto, con uno o due passi: lose di ALERTNESS o VIOLENCE, gain di TOXICITY o
+         * ALCOHOL, quantità fissa e positiva. Niente HEALTH, nessun altro passo, nessuna quantità variabile.
+         */
+        private void checkInPlay() {
+            if (inPlay == null) throw invalid("inPlay non può essere null");
+            if (inPlay.isEmpty()) return;
+            if (kind != Kind.ITEM) throw invalid("inPlay vale solo per un oggetto (RP-28)");
+            if (inPlay.size() > 2) throw invalid("inPlay ha al più due passi (RP-28)");
+            for (int i = 0; i < inPlay.size(); i++) {
+                Step step = inPlay.get(i);
+                String where = "inPlay[" + i + "]: ";
+                Resource resource;
+                Amount amount;
+                if (step instanceof LoseStep) {
+                    resource = ((LoseStep) step).resource;
+                    amount = ((LoseStep) step).amount;
+                    if (resource != Resource.ALERTNESS && resource != Resource.VIOLENCE)
+                        throw invalid(where + "lose vale solo per ALERTNESS o VIOLENCE (RP-28), non " + resource);
+                } else if (step instanceof GainStep) {
+                    resource = ((GainStep) step).resource;
+                    amount = ((GainStep) step).amount;
+                    if (resource != Resource.TOXICITY && resource != Resource.ALCOHOL)
+                        throw invalid(where + "gain vale solo per TOXICITY o ALCOHOL (RP-28), non " + resource);
+                } else throw invalid(where + "ammessi solo lose e gain (RP-28)");
+                if (amount.of != null || amount.perPlay != 0 || amount.divide != 1)
+                    throw invalid(where + "la quantità è fissa (RP-28): niente of, divide o perPlay");
+                if (amount.base <= 0) throw invalid(where + "la quantità è positiva");
+            }
+        }
 
         private void checkSteps(String list, List<Step> steps) {
             if (steps == null) throw invalid(list + " non può essere null");
@@ -634,7 +671,11 @@ final class DataCards {
         List<PrintedEffects.Step> steps = new ArrayList<>();
         for (Step step : definition.self) printed(step, false, false, false, null, steps);
         for (Step step : definition.target) printed(step, true, false, false, null, steps);
-        return new PrintedEffects(List.copyOf(steps));
+        if (definition.inPlay.isEmpty()) return new PrintedEffects(List.copyOf(steps));
+        // SB-19 (RP-27): the «In campo» steps, a list apart; they are GAIN or LOSE of a fixed base (RP-28, checked on reading).
+        List<PrintedEffects.Step> inPlay = new ArrayList<>();
+        for (Step step : definition.inPlay) printed(step, false, false, false, null, inPlay);
+        return new PrintedEffects(List.copyOf(steps), List.copyOf(inPlay));
     }
 
     private static void printed(Step step, boolean onTarget, boolean ahead, boolean ifToken, Boolean sold, List<PrintedEffects.Step> steps) {

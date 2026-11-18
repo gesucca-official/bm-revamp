@@ -65,6 +65,9 @@ public interface Card {
         int priority;
         Set<CardTarget> canTarget;
         Map<Resource, Integer> cost;
+        /** SB-19 (RP-28): the short «In campo» text, present only on the items that have the effect. */
+        @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
+        String inPlay;
 
         @Override
         public Map<CardTarget, List<String>> resolve(Game game, Move move) {

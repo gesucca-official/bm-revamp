@@ -10,6 +10,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -350,9 +351,10 @@ final class StyleSupport {
      * {@link #ITEM_IMMUNITY}. An item that cannot describe itself is read from its catalog gains. A Santino (an immunity) is worth
      * 0.5, a Peroni (+10 L) 3.5, an Espresso (+15 A) 7.5.
      */
-    static double itemWorth(BotView.CardSeen item) {
+    static double itemWorth(BotView.CardSeen item, Set<Resource> holderImmunities) {
         PrintedEffects text = item.getEffects() != null ? item.getEffects() : item.consumedEffects();
-        double worth = 0;
+        // SB-19 (RP-27): an «In campo» effect counts for IN_PLAY_HORIZON turns, as its holder reads it; zero without one.
+        double worth = IN_PLAY_HORIZON * inPlayPerTurn(item, holderImmunities);
         if (text == null) {
             for (Map.Entry<Resource, Double> g : parseGains(item.getGains(), VARIABLE).entrySet())
                 worth += ITEM_WEIGHTS.getOrDefault(g.getKey(), 0.5) * g.getValue();
@@ -370,6 +372,62 @@ final class StyleSupport {
             }
         }
         return worth;
+    }
+
+    /** SB-19 (RP-27): turns over which an «In campo» effect is counted, in the worth of an item and in a move that takes or gives it. */
+    static final int IN_PLAY_HORIZON = 2;
+    /** SB-19: weight of the «In campo» values on the scale of the styles' scores, as {@link #COUNTER_WEIGHT}. */
+    static final double IN_PLAY_WEIGHT = 2;
+    /** SB-19: one point of TOXICITY that poisons its holder, in the units of {@link #ITEM_WEIGHTS} (proposal A2, section 5). */
+    static final double IN_PLAY_POISON = 1;
+
+    /**
+     * SB-19 (RP-27): one end of turn of the item's «In campo» effect on a holder with the given immunities, in the units of
+     * {@link #ITEM_WEIGHTS}: a lost resource at its weight; a TOXICITY or ALCOHOL gained is worth its weight to a holder immune to
+     * it and costs {@link #IN_PLAY_POISON} (TOXICITY) or its weight (ALCOHOL) a point to the others. Zero without the effect.
+     */
+    static double inPlayPerTurn(BotView.CardSeen item, Set<Resource> holderImmunities) {
+        double value = 0;
+        for (PrintedEffects.Step st : ViewTable.inPlayOf(item)) {
+            Resource r = st.getResource();
+            int change = PrintedEffects.inPlayChange(st);
+            double weight = ITEM_WEIGHTS.getOrDefault(r, 0.5);
+            boolean periodic = r == Resource.TOXICITY || r == Resource.ALCOHOL;
+            if (periodic && change > 0 && !holderImmunities.contains(r))
+                value -= (r == Resource.TOXICITY ? IN_PLAY_POISON : weight) * change;
+            else value += weight * change;
+        }
+        return value;
+    }
+
+    /**
+     * SB-19 (RP-27), playground only, the same for every style: what the «In campo» effects change in a move, zero when no item
+     * on the table has one.
+     * <ul>
+     *   <li>consuming an own item (not selling it, RP-25): the effect of the next end of turn, avoided;</li>
+     *   <li>taking a far item (GEN-02): its effect on the author for {@link #IN_PLAY_HORIZON} turns;</li>
+     *   <li>a swap of the trays (SWAP_ITEMS): the effects received minus the effects given away, each for {@link #IN_PLAY_HORIZON}
+     *       turns (the author keeps the most recent items of the target up to its capacity).</li>
+     * </ul>
+     */
+    static double inPlayValue(Situation s, Plan p) {
+        double value = 0;
+        Set<Resource> mine = s.me.getImmunities();
+        if (p.usesItem && !PrintedEffects.sells(p.card.getEffects()))
+            for (BotView.CardSeen item : s.me.getItems())
+                if (item.getName().equals(p.move.getItem())) { value -= inPlayPerTurn(item, mine); break; }
+        if (p.takesFarItem)
+            for (BotView.CardSeen item : p.target.getItems())
+                if (item.getName().equals(p.move.getItem())) { value += IN_PLAY_HORIZON * inPlayPerTurn(item, mine); break; }
+        if (p.hostile)
+            for (PrintedEffects.Step st : steps(p.card)) {
+                if (st.getKind() != PrintedEffects.Kind.SWAP_ITEMS) continue;
+                List<BotView.CardSeen> theirs = p.target.getItems();
+                for (BotView.CardSeen item : theirs.subList(Math.max(0, theirs.size() - s.me.getItemCapacity()), theirs.size()))
+                    value += IN_PLAY_HORIZON * inPlayPerTurn(item, mine);
+                for (BotView.CardSeen item : s.me.getItems()) value -= IN_PLAY_HORIZON * inPlayPerTurn(item, mine);
+            }
+        return IN_PLAY_WEIGHT * value;
     }
 
     static double damageOf(BotView.CardSeen card) {
@@ -417,7 +475,8 @@ final class StyleSupport {
         for (Plan plan : plans) {
             LegalMove move = plan.move;
             double score = scorer.score(situation, plan);
-            if (situation.view.getRuleset().playground()) score += rhythm(situation, plan) + printedValue(situation, plan);
+            if (situation.view.getRuleset().playground())
+                score += rhythm(situation, plan) + printedValue(situation, plan) + inPlayValue(situation, plan);
             if (move.getDiscard() != null) score -= keepValue(scorer, situation, move.getDiscard());
             if (score > top + 1e-9) {
                 top = score;
