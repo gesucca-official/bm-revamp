@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 18 novembre 2026, dopo la B1b di SB-19). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 18 novembre 2026, dopo D132). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato **20 carte e 2 copie** ([D94](#decisioni-del-proprietario)); soglia minima per gli starter ([D95](#decisioni-del-proprietario)); bozza di riferimento **1.6b** in `bozza.json` (1.6 con la leva A su Mara, [D99](#decisioni-del-proprietario), adottata in [D101](#decisioni-del-proprietario); [rapporto della B2](reports/set-base/sb-16i-b2-report.md)); la 1.5 in `set-base/storico/1.5/`, la 1.6 nel commit `336e0ff`.
-> - **In corso:** [SB-19](#sb-19--resto-del-pool-e-giro-di-blocco) (resto del pool): Fase B1 fatta, le 9 carte in bozza ([rapporto](reports/set-base/sb-19-b1-report.md)); principio delle carte da booster e banda 0 / +10 in [D131](#decisioni-del-proprietario); Fase B1b fatta, STOP per il proprietario con le domande del [rapporto](reports/set-base/sb-19-b1b-report.md#8-domande-per-il-proprietario).
-> - **Prossimo:** SB-19 B2, dopo le risposte alla B1b; poi la B2 (RP-27, motore, bot, due oggetti, client, prova del proprietario). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
-> - **Decisioni da leggere:** D131, D130, D129, D128, D127, D126, D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D131).
+> - **In corso:** [SB-19](#sb-19--resto-del-pool-e-giro-di-blocco) (resto del pool): Fasi B1 e B1b fatte, le 9 carte in bozza ([rapporto B1b](reports/set-base/sb-19-b1b-report.md)); accettate in [D132](#decisioni-del-proprietario) come limite dei bot; Fase B2 da lanciare.
+> - **Prossimo:** SB-19 Fase B2 (RP-27, motore, bot, Conto del tavolo sei e Sigaretta accesa, client, prova del proprietario). Quando il proprietario li lancia, due blocchi piccoli del client: la lettura di «12+x» per «L'ultimo giro» e `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)). B5c di SB-30b (Maestro) quando il proprietario lo lancia, mai insieme a una misura.
+> - **Decisioni da leggere:** D132, D131, D130, D129, D128, D127, D126, D125, D124, D123, D122, D121, D120, D119, D118, D117, D116, D115, D114, D113, D112, D111, D110, D109, D108, D107, D106, D105, D104, D103, D102, D101, D99, D98, D97, D95, D94, D92 nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D132).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -294,7 +294,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-16i | Correzione 1.6: meccaniche di sistema e soglia minima (D95) | SB-16h | Fasi A, B, A2 e B2 fatte: **1.6b** bozza di riferimento ([D101](#decisioni-del-proprietario)), fuori solo le patte accettate dello specchio di Celestina ([rapporto B](reports/set-base/sb-16i-report.md), [rapporto B2](reports/set-base/sb-16i-b2-report.md)); passo del client consegnato e chiuso ([rapporto](reports/set-base/sb-16i-client-report.md), [D102](#decisioni-del-proprietario), [D103](#decisioni-del-proprietario)); prova umana breve superata, **chiuso** il 16 novembre 2026 ([D104](#decisioni-del-proprietario)) |
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B6 fatte ([rapporto B5e](reports/set-base/sb-17-b5e-report.md), [rapporto B6](reports/set-base/sb-17-b6-report.md)); in bozza la V4 con R1, Celestina 32,2% accettata ([D122](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D123](#decisioni-del-proprietario)) |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fasi B e B1e fatte ([rapporto B](reports/set-base/sb-18-b-report.md), [rapporto B1e](reports/set-base/sb-18-b1e-report.md)); la leva sono i costi; Fase B2 fatta ([rapporto B2](reports/set-base/sb-18-b2-report.md)): Duccio in bozza, scostamento su Mara accettato ([D127](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D128](#decisioni-del-proprietario)) |
-| | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fase B1 fatta ([rapporto](reports/set-base/sb-19-b1-report.md)); banda delle carte da booster ([D131](#decisioni-del-proprietario)); Fase B1b fatta, STOP per il proprietario ([rapporto](reports/set-base/sb-19-b1b-report.md)) |
+| | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fasi B1 e B1b fatte ([rapporto B1](reports/set-base/sb-19-b1-report.md), [rapporto B1b](reports/set-base/sb-19-b1b-report.md)), accettate ([D131](#decisioni-del-proprietario), [D132](#decisioni-del-proprietario)); Fase B2 da lanciare |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
 | | SB-21 | Giri di correzione | SB-20 |  |
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
@@ -579,6 +579,8 @@ controllo FFA.
 
 **In ingresso ([D131](#decisioni-del-proprietario)).** Le carte da booster rendono il mazzo più forte dello starter, fra 0 e +10 punti di media, mai oltre +15 in un confronto: vale per tutte le carte fuori dagli starter, anche quelle d'archetipo. Estasi (nel mazzo vincente di 14 ricerche su 14 prima di SB-19) e Grappa (+11,5 da sola in un mazzo di Beppe senza chi usa L, da spiegare) si correggono qui.
 
+**Fase B1b rivista dalla regia il 18 novembre 2026; decisione in [D132](#decisioni-del-proprietario).** Solo dati, Rif identico, attesi cambiati solo per le tre varianti scelte. I numeri muovono poco: il limite è come i bot giocano le carte nuove; il progresso vero viene dagli scambi rivisti di Mara e Duccio. Accettata come limite dei bot. Prossimo: Fase B2.
+
 **B1b, 18 novembre 2026** ([rapporto](reports/set-base/sb-19-b1b-report.md)). Misurate 3 varianti per carta in isolamento (1.049 s su 1.800): nessuna carta nuova esce dalla banda nel verso che serve ai mazzi con le aggiunte, perché il limite non sono i numeri ma quanto poco i bot giocano le carte (Mano lesta 0,12 giocate per partita, Coccio con tre moltiplicatori identici); la sola vera correzione è lo scambio dei mazzi di Mara e Duccio (Mano lesta ora sta al posto di carte della sua famiglia: da −13,5 a +4,4 in isolamento). Scelte: Elemosina gratis, Non sento niente 5 V ×0,25, Mezza minerale +20 A; Mano lesta, Coccio, Maleducazione, Colpo e Secondo fiato (+12) restano. Dei nove mazzi nessuno sta nella banda (Mara + è in su, +11,6); la riserva non ha varianti che cambino qualcosa.
 
 ### SB-21 — Giri di correzione
@@ -593,6 +595,8 @@ Massimo proposto: 3 giri prima di tornare dal proprietario.
 **In ingresso ([D121](#decisioni-del-proprietario)).** I bot giocano Fare il vago (bound di difesa di Sergio) 3,3 volte a partita, una su sei contro un colpo mostrato: insegnare a giocarla solo contro un colpo mostrato o previsto.
 
 **In ingresso ([D127](#decisioni-del-proprietario)).** `StyleSupport.affordableAfter` legge ancora un costo in HEALTH con `>=`: con d50 un bot può stimare pagabile una carta a salute pari al costo (il motore la rifiuta). Allinearlo alla correzione di `unlockedDamage` della B2 di SB-18.
+
+**In ingresso ([D132](#decisioni-del-proprietario)).** I bot quasi non giocano Mano lesta (0,12 volte a partita) e non sfruttano Coccio di bottiglia (stesso risultato a ×1,5, ×2 e ×2,5): insegnare a leggerle, poi rimisurare i mazzi con le aggiunte di SB-19 contro la banda di D131.
 
 **In ingresso ([D128](#decisioni-del-proprietario)).** Dalla prova di Duccio: morti nel turno in cui paga in salute il colpo che crede decisivo, partite molto brevi («si muore o si vince molto alla svelta»). Ricontrollare col set intero, insieme a Duccio–Mara (33,00%, D127).
 
@@ -715,7 +719,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D131 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D132 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
