@@ -1,0 +1,9 @@
+{
+ "sameCells": true,
+ "cells": 4032,
+ "games": 403200,
+ "sameInvariants": true,
+ "violations": 0,
+ "firstDifferences": [],
+ "sameMarkdownBody": null
+}

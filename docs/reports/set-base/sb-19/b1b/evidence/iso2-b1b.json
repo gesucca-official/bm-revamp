@@ -1,0 +1,146 @@
+{
+ "cards": {
+  "Mano lesta": {
+   "V0": {
+    "mean": 4.3629489234057175,
+    "max": 9.440977205219767,
+    "maxFoe": "prova-sergio",
+    "draws": 6.91358024691358,
+    "turns": 11.307777777777778,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 0.0,
+    "inBand": true,
+    "toFive": 0.6370510765942825
+   },
+   "V1": {
+    "mean": 6.73828896009212,
+    "max": 12.67049550917114,
+    "maxFoe": "prova-sergio",
+    "draws": 6.864197530864198,
+    "turns": 11.299259259259259,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 0.0,
+    "inBand": true,
+    "toFive": 1.7382889600921203
+   },
+   "V2": {
+    "mean": 7.637043489813325,
+    "max": 13.694006607813314,
+    "maxFoe": "prova-sergio",
+    "draws": 8.0,
+    "turns": 11.264567901234567,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 0.0,
+    "inBand": true,
+    "toFive": 2.6370434898133253
+   },
+   "V3": {
+    "mean": 10.211433087285403,
+    "max": 18.173640417362435,
+    "maxFoe": "prova-sergio",
+    "draws": 6.703703703703703,
+    "turns": 11.089876543209877,
+    "gaps": {
+     "media": 0.21143308728540333,
+     "massimo": 3.173640417362435,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 3.3850735046478384,
+    "inBand": false,
+    "toFive": 5.211433087285403
+   }
+  },
+  "Elemosina molesta": {
+   "V0": {
+    "mean": 0.22004214413050857,
+    "max": 4.778357098748103,
+    "maxFoe": "starter-mara",
+    "draws": 12.679012345679013,
+    "turns": 10.809382716049383,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.0,
+     "patte": 2.6790123456790127,
+     "durata": 0.0
+    },
+    "distance": 2.6790123456790127,
+    "inBand": false,
+    "toFive": 4.779957855869491
+   },
+   "V1": {
+    "mean": 0.05563024737184362,
+    "max": 4.778357098748103,
+    "maxFoe": "starter-mara",
+    "draws": 12.493827160493828,
+    "turns": 10.808641975308642,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.0,
+     "patte": 2.4938271604938276,
+     "durata": 0.0
+    },
+    "distance": 2.4938271604938276,
+    "inBand": false,
+    "toFive": 4.944369752628156
+   },
+   "V2": {
+    "mean": -0.13610392074295113,
+    "max": 4.69920142592489,
+    "maxFoe": "starter-mara",
+    "draws": 12.049382716049383,
+    "turns": 10.84530864197531,
+    "gaps": {
+     "media": 0.13610392074295113,
+     "massimo": 0.0,
+     "patte": 2.049382716049383,
+     "durata": 0.0
+    },
+    "distance": 2.185486636792334,
+    "inBand": false,
+    "toFive": 5.1361039207429515
+   },
+   "V3": {
+    "mean": -0.13610392074295113,
+    "max": 4.69920142592489,
+    "maxFoe": "starter-mara",
+    "draws": 12.049382716049383,
+    "turns": 10.84530864197531,
+    "gaps": {
+     "media": 0.13610392074295113,
+     "massimo": 0.0,
+     "patte": 2.049382716049383,
+     "durata": 0.0
+    },
+    "distance": 2.185486636792334,
+    "inBand": false,
+    "toFive": 5.1361039207429515
+   }
+  }
+ },
+ "choice": {
+  "Mano lesta": {
+   "variant": "V0",
+   "flagged": false
+  },
+  "Elemosina molesta": {
+   "variant": "V2",
+   "flagged": true
+  }
+ }
+}

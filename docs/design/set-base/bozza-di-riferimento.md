@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `bbc14174c15d…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `a8ffef96e449…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 114 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 11 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -226,13 +226,13 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 | 2 | **Negroni Trovato per Terra** (`com.items.CocktailOnTheGround`) | C | OGG-01 · Consumato: +12 V, +10 L, +3 T. |
 | 1 | **Posacenere di vetro** (`base.items.PosacenereDiVetro`) | NC | OGG-13 · Consumato: equip, il prossimo HIT inflitto ×1,5, uso singolo. |
 | 1 | **TI FACCIO SPAZIO** (`base.bruiser.TiFaccioSpazio`) | NC | SPA-AR6 · Annuncia SPEDIAMOTI DUNQUE IN O-AHIO o GARGANTUESCO IMPATTO SUL TU. Se lo trovi: +15 V, +15 A. Se non lo trovi: +5 V, +5 A. |
-| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 10 V: HIT ricevuto ×0,35 in questo turno. +5 A a sé. |
+| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
 | 2 | **Colpo allo stomaco** (`bruiser.SickeningBlow`) | C | GEN-08 · 15 V: 10 HIT e +10 T al bersaglio. |
 | 2 | **Coccio di bottiglia** (`base.com.CoccioDiBottiglia`) | R | GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo. |
 
 ### Mazzo di prova di Mara Contromano — `prova-b1-mara`
 
-Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 7 · NC 8 · R 5).
+Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 9 · NC 6 · R 5).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -244,13 +244,13 @@ Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nes
 | 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 A: 25 CUT al bersaglio. Gioca d'anticipo: in questo turno il bersaglio infligge danni ×0,8. |
 | 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · −8 A e 3 CUT al bersaglio. Gioca d'anticipo: +4 A a sé. |
 | 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 A: HIT e CUT ricevuti ×0,4 in questo turno. +5 A a sé. |
-| 2 | **Slalom d'avvicinamento** (`base.mara.Slalom`) | NC | MAR-AR5 · Annuncia Sgommata o Cinghiata di traverso. Se lo trovi: +15 A. Se non lo trovi: +5 A. |
-| 1 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 1 | **Ti stringo la curva** (`base.mara.TiStringoLaCurva`) | NC | MAR-AR6 · Annuncia Cinghiata di traverso o Sgommata. Se lo trovi: +20 A. Se non lo trovi: +5 A. |
 | 1 | **Ghiaccio nel tovagliolo** (`base.items.GhiaccioNelTovagliolo`) | NC | OGG-14 · Consumato: +10 HEALTH; azzera la tua T. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
-| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · 10 A: copia vicino a te un oggetto casuale del bersaglio. |
+| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
 | 2 | **Secondo fiato** (`base.com.SecondoFiato`) | R | GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni. |
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b1-celestina`
@@ -274,7 +274,7 @@ Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immu
 | 1 | **Panino del kebab dimenticato** (`base.items.PaninoDelKebab`) | C | OGG-07 · Consumato: +12 HEALTH, +3 T. |
 | 1 | **Mescolone Micidiale** (`com.items.MarvelousCocktail`) | R | OGG-04 · Consumato: immunità a T e L; +20 L, +20 T; timer 5 che toglie tutte le immunità e gli stati, poi 20 POISON. |
 | 1 | **Un assaggino** (`base.tossico.UnAssaggino`) | NC | TOS-AR6 · Annuncia C'è del sangue nella mia droga o Tossicone Scatarrante. Se lo trovi: +20 T. Se non lo trovi: +5 T. |
-| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · 10 A: copia vicino a te un oggetto casuale del bersaglio. |
+| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
 | 2 | **Secondo fiato** (`base.com.SecondoFiato`) | R | GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni. |
 
 ### Mazzo di prova di Piera Ultimo Giro — `prova-b1-piera`
@@ -298,7 +298,7 @@ Personaggio: **Piera Ultimo Giro** (NC), salute 80, A 15, L 10; oggetti 2; immun
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; azzera la tua T e la tua L. |
 | 2 | **Grappa della casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 L, −5 A. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
-| 2 | **Mezza minerale sgasata** (`base.items.MezzaMineraleSgasata`) | NC | OGG-08 · Consumato: azzera la tua L; +5 A. |
+| 2 | **Mezza minerale sgasata** (`base.items.MezzaMineraleSgasata`) | NC | OGG-08 · Consumato: azzera la tua L; +20 A. |
 
 ### Mazzo di prova di Beppe Bulletta — `prova-b1-beppe`
 
@@ -342,13 +342,13 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 A: il bersaglio perde A pari a metà della tua A residua; HIT pari a 5 più metà della tua A residua, arrotondate per difetto. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 A. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · 0 A: vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 HEALTH a sé. Se l'oggetto non c'è più, niente. |
-| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 10 V: HIT ricevuto ×0,35 in questo turno. +5 A a sé. |
+| 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 V: HIT ricevuto ×0,25 in questo turno. +5 A a sé. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
-| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · 10 A: copia vicino a te un oggetto casuale del bersaglio. |
+| 2 | **Elemosina molesta** (`base.com.BeggingMoney`) | R | GEN-04 · copia vicino a te un oggetto casuale del bersaglio. |
 
 ### Mazzo di prova di Duccio Braccio Teso — `prova-b1-duccio`
 
-Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 11 titoli (C 9 · NC 8 · R 3).
+Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 11 titoli (C 10 · NC 7 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -356,17 +356,17 @@ Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità
 | bound | **Colpetto** (`base.rocco.bound.Colpetto`) | NC | ROC-BO1 · Bound: 3 HIT al bersaglio. |
 | bound | **Alzo la voce** (`base.rocco.bound.AlzoLaVoce`) | NC | ROC-BO3 · Bound: +8 A a sé. |
 | last resort | **Ne ho prese di peggio** (`base.rocco.NeHoPreseDiPeggio`) | R | LR-ROC · Last resort: 6 HIT a sé; 12 HIT al bersaglio. Rincara 5 (2 a sé). |
-| 2 | **Te lo spiego io** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · Caricamento: 4 HIT al bersaglio. Annuncia Capocciata o Testa dura. Se lo trovi: +6 HEALTH. Se non lo trovi: +2 HEALTH. |
+| 1 | **Te lo spiego io** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · Caricamento: 4 HIT al bersaglio. Annuncia Capocciata o Testa dura. Se lo trovi: +6 HEALTH. Se non lo trovi: +2 HEALTH. |
 | 2 | **Capocciata** (`base.rocco.Capocciata`) | NC | ROC-AR4 · 28 HEALTH: 26 HIT al bersaglio. |
 | 1 | **Testa dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 33 HEALTH: 30 HIT al bersaglio. |
 | 2 | **Nocche sbucciate** (`base.rocco.NoccheSbucciate`) | C | ROC-AR1 · 16 HEALTH: 18 HIT al bersaglio. |
 | 2 | **Incassare** (`base.rocco.Incassare`) | C | ROC-AR2 · HIT ricevuto ×0,5 in questo turno. +3 HEALTH a sé. |
 | 2 | **E allora?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 HEALTH: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 A: 12 POISON al bersaglio. |
-| 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 A: HIT e CUT ricevuti ×0,6 in questo turno. +3 H a sé. |
 | 2 | **Secondo fiato** (`base.com.SecondoFiato`) | R | GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · −5 A al bersaglio; +5 A a sé. |
-| 2 | **Mezza minerale sgasata** (`base.items.MezzaMineraleSgasata`) | NC | OGG-08 · Consumato: azzera la tua L; +5 A. |
+| 2 | **Mezza minerale sgasata** (`base.items.MezzaMineraleSgasata`) | NC | OGG-08 · Consumato: azzera la tua L; +20 A. |
 
 ### Mazzo di prova di Beppe Bulletta — `prova-b1-equip`
 

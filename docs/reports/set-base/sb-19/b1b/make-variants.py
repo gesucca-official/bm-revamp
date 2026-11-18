@@ -21,7 +21,8 @@ def card(draft, binding):
 
 
 def set_cost(c, resource, amount):
-    if amount: c['cost'] = {resource: amount}
+    # a Java card (Elemosina, Maleducazione) must keep its «cost» field, even at 0; a data card without cost has none
+    if amount or c.get('java'): c['cost'] = {resource: amount}
     else: c.pop('cost', None)
 
 
@@ -79,6 +80,7 @@ def fiato(h):
 
 # level -> card key -> mutator (the table of the report, § 1)
 VARIANTS = {
+    'v0': {'mano': mano(5)},
     'v1': {'mano': mano(8), 'coccio': coccio(2.0), 'elemosina': elemosina(5, 0), 'nsn': nsn(5, 0.35), 'minerale': minerale(10),
            'maleducazione': maleducazione(10, 5), 'fiato': fiato(15)},
     'v2': {'mano': mano(10), 'coccio': coccio(2.5), 'elemosina': elemosina(0, 0), 'nsn': nsn(10, 0.25), 'minerale': minerale(15),
@@ -87,10 +89,30 @@ VARIANTS = {
            'maleducazione': maleducazione(12, 0)},
 }
 
+# Revision of the swaps (declared in the report, § 6): Mano lesta (DISRUPT) took the place of DAMAGE cards (Spintone, Sputo) in the decks of Mara
+# and Duccio (Piera has no card of a near role to give up without touching her L engine: unchanged), a clear change of role; now it takes cards of its own family (A generators, disrupts, a defence). Nothing else changes.
+REVISED = {
+    'prova-b1-mara': {M.MANO: ({'base.mara.Slalom': 2}, {M.MANO: 2})},
+    'prova-b1-duccio': {M.MANO: ({'base.rocco.TeLoSpiegoIo': 1, M.TART: 1}, {M.MANO: 2})},
+}
+
+
+def revised_decks():
+    out = []
+    for deck_id, base, swaps in M.DECKS:
+        new = []
+        for out_, into in swaps:
+            rev = REVISED.get(deck_id, {})
+            hit = [k for k in into if k in rev]
+            new.append(rev[hit[0]] if hit else (out_, into))
+        out.append((deck_id, base, new))
+    return out
+
+
 # iso id -> (card key, deck of make-bozza.py or the starter + swap, card)
 ISO = {
-    'iso-mara-mano': ('mano', 'prova-b1-mara', M.MANO), 'iso-beppe-coccio': ('coccio', 'prova-b1-beppe', M.COCCIO),
-    'iso-mara-elemosina': ('elemosina', 'prova-b1-mara', M.ELEMOSINA), 'iso-beppe-maleducazione': ('maleducazione', 'prova-b1-beppe', M.MALEDUCAZIONE),
+    'iso-mara-mano2': ('mano', 'prova-b1-mara', M.MANO), 'iso-beppe-coccio': ('coccio', 'prova-b1-beppe', M.COCCIO),
+    'iso-celestina-elemosina': ('elemosina', 'prova-b1-celestina', M.ELEMOSINA), 'iso-beppe-maleducazione': ('maleducazione', 'prova-b1-beppe', M.MALEDUCAZIONE),
     'iso-mara-fiato': ('fiato', 'prova-b1-mara', M.FIATO),
     'iso-spazienzio-nsn': ('nsn', 'prova-b1-spazienzio', M.NSN), 'iso-duccio-minerale': ('minerale', 'prova-b1-duccio', M.MINERALE),
 }
@@ -100,7 +122,7 @@ def build(level):
     draft = json.loads(M.DRAFT.read_text(encoding='utf-8'))
     values = VARIANTS[level]
     for fn in values.values(): fn(draft)
-    specs = {s[0]: s for s in M.DECKS}
+    specs = {s[0]: s for s in revised_decks()}
     for iso, (key, deck, binding) in ISO.items():
         if key not in values: continue
         _, base, swaps = specs[deck]

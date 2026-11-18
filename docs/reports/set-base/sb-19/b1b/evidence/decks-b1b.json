@@ -1,0 +1,146 @@
+{
+ "prova-b1-spazienzio": {
+  "mean": -4.510734283903021,
+  "max": 7.256487156082933,
+  "maxFoe": "starter-spazienzio",
+  "draws": 5.901234567901234,
+  "turns": 10.022716049382716,
+  "gaps": {
+   "media": 4.510734283903021,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 4.510734283903021,
+  "inBand": false,
+  "toFive": 9.510734283903021
+ },
+ "prova-b1-mara": {
+  "mean": 11.643797886212054,
+  "max": 19.56747629562281,
+  "maxFoe": "starter-mara",
+  "draws": 8.54320987654321,
+  "turns": 12.023703703703704,
+  "gaps": {
+   "media": 1.6437978862120541,
+   "massimo": 4.567476295622811,
+   "patte": 0.0,
+   "durata": 0.02370370370370445
+  },
+  "distance": 6.234977885538569,
+  "inBand": false,
+  "toFive": 6.643797886212054
+ },
+ "prova-b1-celestina": {
+  "mean": -3.9236722522421865,
+  "max": 3.7847657246127753,
+  "maxFoe": "starter-mara",
+  "draws": 10.987654320987655,
+  "turns": 11.07925925925926,
+  "gaps": {
+   "media": 3.9236722522421865,
+   "massimo": 0.0,
+   "patte": 0.9876543209876552,
+   "durata": 0.0
+  },
+  "distance": 4.911326573229841,
+  "inBand": false,
+  "toFive": 8.923672252242186
+ },
+ "prova-b1-piera": {
+  "mean": -8.679096470832446,
+  "max": -3.0003982449755924,
+  "maxFoe": "starter-spazienzio",
+  "draws": 7.987654320987654,
+  "turns": 10.636543209876542,
+  "gaps": {
+   "media": 8.679096470832446,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 8.679096470832446,
+  "inBand": false,
+  "toFive": 13.679096470832446
+ },
+ "prova-b1-beppe": {
+  "mean": -0.01741713485113142,
+  "max": 9.595254005786543,
+  "maxFoe": "prova-sergio",
+  "draws": 12.160493827160494,
+  "turns": 9.862592592592593,
+  "gaps": {
+   "media": 0.01741713485113142,
+   "massimo": 0.0,
+   "patte": 2.1604938271604937,
+   "durata": 0.0
+  },
+  "distance": 2.1779109620116253,
+  "inBand": false,
+  "toFive": 5.017417134851131
+ },
+ "prova-b1-sergio": {
+  "mean": -16.995319031064643,
+  "max": -8.360121980429234,
+  "maxFoe": "starter-spazienzio",
+  "draws": 4.444444444444445,
+  "turns": 11.878024691358025,
+  "gaps": {
+   "media": 16.995319031064643,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 16.995319031064643,
+  "inBand": false,
+  "toFive": 21.995319031064643
+ },
+ "prova-b1-duccio": {
+  "mean": -1.9009933648725956,
+  "max": 2.683560753736195,
+  "maxFoe": "prova-duccio",
+  "draws": 5.839506172839506,
+  "turns": 8.472222222222221,
+  "gaps": {
+   "media": 1.9009933648725956,
+   "massimo": 0.0,
+   "patte": 0.0,
+   "durata": 0.0
+  },
+  "distance": 1.9009933648725956,
+  "inBand": false,
+  "toFive": 6.900993364872596
+ },
+ "prova-b1-equip": {
+  "mean": -3.9428575048275536,
+  "max": 1.1201966697959875,
+  "maxFoe": "starter-tossico",
+  "draws": 11.679012345679013,
+  "turns": 9.490493827160494,
+  "gaps": {
+   "media": 3.9428575048275536,
+   "massimo": 0.0,
+   "patte": 1.6790123456790127,
+   "durata": 0.0
+  },
+  "distance": 5.621869850506567,
+  "inBand": false,
+  "toFive": 8.942857504827554
+ },
+ "prova-b1-estasi": {
+  "mean": 21.197308720873046,
+  "max": 29.058377987652108,
+  "maxFoe": "starter-tossico",
+  "draws": 10.419753086419753,
+  "turns": 8.889753086419754,
+  "gaps": {
+   "media": 11.197308720873046,
+   "massimo": 14.058377987652108,
+   "patte": 0.4197530864197532,
+   "durata": 0.0
+  },
+  "distance": 25.675439794944907,
+  "inBand": false,
+  "toFive": 16.197308720873046
+ }
+}

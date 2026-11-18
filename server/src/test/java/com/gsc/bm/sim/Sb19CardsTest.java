@@ -118,10 +118,10 @@ class Sb19CardsTest {
     void theNineCardsArePricedAsTheProposalWritesThem() {
         // binding -> slot, rarity, cost, priority
         Map<String, Object[]> expected = new LinkedHashMap<>();
-        expected.put(Sb19.ELEMOSINA, new Object[]{"GEN-04", "RARE", Map.of(Resource.ALERTNESS, 10), 0});
+        expected.put(Sb19.ELEMOSINA, new Object[]{"GEN-04", "RARE", Map.of(Resource.ALERTNESS, 0), 0});
         expected.put(Sb19.COLPO, new Object[]{"GEN-08", "COMMON", Map.of(Resource.VIOLENCE, 15), 1});
         expected.put(Sb19.MALEDUCAZIONE, new Object[]{"GEN-10", "UNCOMMON", Map.of(Resource.VIOLENCE, 5), 1});
-        expected.put(Sb19.NON_SENTO_NIENTE, new Object[]{"GEN-11", "UNCOMMON", Map.of(Resource.VIOLENCE, 10), 2});
+        expected.put(Sb19.NON_SENTO_NIENTE, new Object[]{"GEN-11", "UNCOMMON", Map.of(Resource.VIOLENCE, 5), 2});
         expected.put(Sb19.MANO_LESTA, new Object[]{"GEN-19", "COMMON", Map.of(), 1});
         expected.put(Sb19.SECONDO_FIATO, new Object[]{"GEN-20", "RARE", Map.of(), 0});
         expected.put(Sb19.COCCIO, new Object[]{"GEN-21", "RARE", Map.of(Resource.VIOLENCE, 5), 1});
@@ -190,16 +190,16 @@ class Sb19CardsTest {
     @Test
     void nonSentoNienteParriesHitsAndGives5Alertness() throws Exception {
         Game g = turn(res(Resource.VIOLENCE, 10, Resource.ALERTNESS, 0), res(), Sb19.NON_SENTO_NIENTE, true, x -> { });
-        assertEquals(0, res(g, "a", Resource.VIOLENCE), "10 V");
+        assertEquals(5, res(g, "a", Resource.VIOLENCE), "5 V of 10 (B1b: 10 → 5 V)");
         assertEquals(5, res(g, "a", Resource.ALERTNESS), "+5 A (D52 (1))");
-        // The status lasts this turn only (turns 0): it is gone after the turn, and it multiplies HIT by 0,35.
+        // The status lasts this turn only (turns 0): it is gone after the turn, and it multiplies HIT by 0,25 (B1b: 0,35 → 0,25).
         Card card = draft.card(Sb19.NON_SENTO_NIENTE);
         Character self = character("x", res(Resource.VIOLENCE, 10), 2);
         ((AbstractCard) card).applyEffectOnSelf(self);
         Status s = self.getStatuses().stream().filter(x -> x.getName().equals("NON SENTO NIENTE")).findFirst().orElseThrow();
         assertEquals(StatusType.GOOD, s.getType());
         assertEquals(StatusFlow.INPUT, s.getFlow());
-        assertEquals(35f, s.getAmountFunction().apply(100f), 1e-3, "HIT ×0,35");
+        assertEquals(25f, s.getAmountFunction().apply(100f), 1e-3, "HIT ×0,25");
         assertEquals(0, s.getLastsForTurns());
     }
 
@@ -239,13 +239,13 @@ class Sb19CardsTest {
         Game g = turn(res(Resource.ALERTNESS, 20), res(Resource.ALERTNESS, 30), Sb19.ELEMOSINA, false, game -> {
             game.getPlayers().get("b").getCharacter().getItems().add(draft.card(Sb19.GRAPPA));
         });
-        assertEquals(10, res(g, "a", Resource.ALERTNESS), "10 A, no refund");
+        assertEquals(20, res(g, "a", Resource.ALERTNESS), "free (B1b: 10 → 0 A)");
         assertEquals(30, res(g, "b", Resource.ALERTNESS), "the −10 A of the live card is gone");
         assertEquals(1, g.getPlayers().get("a").getCharacter().getItems().size(), "a copy next to the author");
         assertEquals(1, g.getPlayers().get("b").getCharacter().getItems().size(), "the target keeps its own");
         Game none = turn(res(Resource.ALERTNESS, 20), res(Resource.ALERTNESS, 30), Sb19.ELEMOSINA, false, x -> { });
         assertEquals(0, none.getPlayers().get("a").getCharacter().getItems().size(), "nothing to copy: nothing");
-        assertEquals(10, res(none, "a", Resource.ALERTNESS), "the cost is paid anyway");
+        assertEquals(20, res(none, "a", Resource.ALERTNESS), "free, nothing paid");
     }
 
     @Test
@@ -253,7 +253,7 @@ class Sb19CardsTest {
         Character self = character("x", res(Resource.ALCOHOL, 17, Resource.ALERTNESS, 3), 2);
         ((AbstractCard) draft.card(Sb19.MINERALE)).applyEffectOnSelf(self);
         assertEquals(0, self.getResources().get(Resource.ALCOHOL), "OGG-08 empties the L");
-        assertEquals(8, self.getResources().get(Resource.ALERTNESS), "and gives 5 A");
+        assertEquals(23, self.getResources().get(Resource.ALERTNESS), "and gives 20 A (B1b: +5 → +20)");
         Character other = character("y", res(Resource.ALCOHOL, 10, Resource.ALERTNESS, 10), 2);
         ((AbstractCard) draft.card(Sb19.GRAPPA)).applyEffectOnSelf(other);
         assertEquals(35, other.getResources().get(Resource.ALCOHOL), "OGG-16: +25 L");
@@ -294,5 +294,14 @@ class Sb19CardsTest {
         assertEquals(2, equip.get(Sb19.COCCIO));
         assertEquals(2, equip.get("base.items.PosacenereDiVetro"));
         assertEquals(2, equip.get("base.items.GuantiDaOfficina"), "Coccio ×1,5, Posacenere ×1,5 and Guanti ×1,25 in one deck (rischio 3)");
+        // B1b (report § 6): Mano lesta (DISRUPT) no longer takes the place of damage cards in the decks of Mara and Duccio.
+        Map<String, Integer> mara = draft.cardsOf("prova-b1-mara"), maraBase = draft.cardsOf("starter-mara");
+        assertEquals(maraBase.get("base.com.Spintone"), mara.get("base.com.Spintone"), "Mara keeps her damage cards");
+        assertEquals(maraBase.get("base.com.SputoDaPosacenere"), mara.get("base.com.SputoDaPosacenere"));
+        assertNull(mara.get("base.mara.Slalom"), "Mano lesta takes the place of the two Slalom (A generators)");
+        Map<String, Integer> duccio = draft.cardsOf("prova-b1-duccio"), duccioBase = draft.cardsOf(Sb18.DECK);
+        assertEquals(duccioBase.get("base.com.Spintone"), duccio.get("base.com.Spintone"), "Duccio keeps his damage cards");
+        assertEquals(1, duccio.get("base.rocco.TeLoSpiegoIo"), "Mano lesta takes one Te lo spiego io and the Tartaruga");
+        assertNull(duccio.get("base.com.TartarugaSulMarciapiede"));
     }
 }

@@ -1,0 +1,78 @@
+{
+ "budgetSeconds": 1800,
+ "usedSeconds": 1048.6,
+ "runs": {
+  "feasibility-final": {
+   "wallSeconds": 18.4123384,
+   "exit": 0,
+   "rows": "prova-b1-spazienzio,prova-b1-mara,prova-b1-celestina,prova-b1-piera,prova-b1-beppe,prova-b1-sergio,prova-b1-duccio,prova-b1-equip,prova-b1-estasi",
+   "gamesPerCell": 4
+  },
+  "feasibility-v1": {
+   "wallSeconds": 33.3944409,
+   "exit": 0,
+   "rows": "iso-mara-mano,iso-beppe-coccio,iso-mara-elemosina,iso-beppe-maleducazione,iso-mara-fiato,iso-spazienzio-nsn,iso-duccio-minerale",
+   "gamesPerCell": 4
+  },
+  "round-final": {
+   "wallSeconds": 217.48495929999999,
+   "exit": 0,
+   "rows": "prova-b1-spazienzio,prova-b1-mara,prova-b1-celestina,prova-b1-piera,prova-b1-beppe,prova-b1-sergio,prova-b1-duccio,prova-b1-equip,prova-b1-estasi",
+   "gamesPerCell": 100
+  },
+  "round-rif": {
+   "wallSeconds": 94.98272779999999,
+   "exit": 0,
+   "rows": "",
+   "gamesPerCell": 100
+  },
+  "round-rv0": {
+   "wallSeconds": 38.9338779,
+   "exit": 0,
+   "rows": "iso-mara-mano2",
+   "gamesPerCell": 100
+  },
+  "round-rv1": {
+   "wallSeconds": 58.967669199999996,
+   "exit": 0,
+   "rows": "iso-mara-mano2,iso-celestina-elemosina",
+   "gamesPerCell": 100
+  },
+  "round-rv2": {
+   "wallSeconds": 52.1625525,
+   "exit": 0,
+   "rows": "iso-mara-mano2,iso-celestina-elemosina",
+   "gamesPerCell": 100
+  },
+  "round-rv3": {
+   "wallSeconds": 62.824258699999994,
+   "exit": 0,
+   "rows": "iso-mara-mano2,iso-celestina-elemosina",
+   "gamesPerCell": 100
+  },
+  "round-v1": {
+   "wallSeconds": 177.83811409999998,
+   "exit": 0,
+   "rows": "iso-mara-mano,iso-beppe-coccio,iso-mara-elemosina,iso-beppe-maleducazione,iso-mara-fiato,iso-spazienzio-nsn,iso-duccio-minerale",
+   "gamesPerCell": 100
+  },
+  "round-v2": {
+   "wallSeconds": 3.4129695,
+   "exit": 1,
+   "rows": "iso-mara-mano,iso-beppe-coccio,iso-mara-elemosina,iso-beppe-maleducazione,iso-mara-fiato,iso-spazienzio-nsn,iso-duccio-minerale",
+   "gamesPerCell": 100
+  },
+  "round-v2b": {
+   "wallSeconds": 153.5323846,
+   "exit": 0,
+   "rows": "iso-mara-mano,iso-beppe-coccio,iso-mara-elemosina,iso-beppe-maleducazione,iso-mara-fiato,iso-spazienzio-nsn,iso-duccio-minerale",
+   "gamesPerCell": 100
+  },
+  "round-v3b": {
+   "wallSeconds": 136.68633359999998,
+   "exit": 0,
+   "rows": "iso-mara-mano,iso-beppe-coccio,iso-mara-elemosina,iso-beppe-maleducazione,iso-spazienzio-nsn,iso-duccio-minerale",
+   "gamesPerCell": 100
+  }
+ }
+}

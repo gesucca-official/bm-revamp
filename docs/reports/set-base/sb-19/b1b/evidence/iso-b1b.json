@@ -1,0 +1,470 @@
+{
+ "cards": {
+  "Mano lesta": {
+   "V0": {
+    "mean": -13.4567069947407,
+    "max": -9.753288819375094,
+    "maxFoe": "prova-sergio",
+    "draws": 6.308641975308642,
+    "turns": 11.651975308641976,
+    "gaps": {
+     "media": 13.4567069947407,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 13.4567069947407,
+    "inBand": false,
+    "toFive": 18.4567069947407
+   },
+   "V1": {
+    "mean": -12.909504433556183,
+    "max": -9.308665406057905,
+    "maxFoe": "prova-sergio",
+    "draws": 5.950617283950617,
+    "turns": 11.630617283950617,
+    "gaps": {
+     "media": 12.909504433556183,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.909504433556183,
+    "inBand": false,
+    "toFive": 17.909504433556183
+   },
+   "V2": {
+    "mean": -12.645375998469959,
+    "max": -8.413629396012844,
+    "maxFoe": "prova-sergio",
+    "draws": 6.037037037037037,
+    "turns": 11.629382716049383,
+    "gaps": {
+     "media": 12.645375998469959,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.645375998469959,
+    "inBand": false,
+    "toFive": 17.64537599846996
+   },
+   "V3": {
+    "mean": -12.014688941124998,
+    "max": -7.386981483261536,
+    "maxFoe": "prova-sergio",
+    "draws": 5.91358024691358,
+    "turns": 11.611975308641975,
+    "gaps": {
+     "media": 12.014688941124998,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.014688941124998,
+    "inBand": false,
+    "toFive": 17.014688941124998
+   }
+  },
+  "Coccio di bottiglia": {
+   "V0": {
+    "mean": -12.15314991137687,
+    "max": -8.247833754034147,
+    "maxFoe": "prova-duccio",
+    "draws": 8.518518518518519,
+    "turns": 9.82641975308642,
+    "gaps": {
+     "media": 12.15314991137687,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.15314991137687,
+    "inBand": false,
+    "toFive": 17.15314991137687
+   },
+   "V1": {
+    "mean": -12.15314991137687,
+    "max": -8.247833754034147,
+    "maxFoe": "prova-duccio",
+    "draws": 8.518518518518519,
+    "turns": 9.82641975308642,
+    "gaps": {
+     "media": 12.15314991137687,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.15314991137687,
+    "inBand": false,
+    "toFive": 17.15314991137687
+   },
+   "V2": {
+    "mean": -12.15314991137687,
+    "max": -8.247833754034147,
+    "maxFoe": "prova-duccio",
+    "draws": 8.518518518518519,
+    "turns": 9.82641975308642,
+    "gaps": {
+     "media": 12.15314991137687,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.15314991137687,
+    "inBand": false,
+    "toFive": 17.15314991137687
+   },
+   "V3": {
+    "mean": -12.292136331808402,
+    "max": -8.831926218300339,
+    "maxFoe": "starter-tossico",
+    "draws": 8.518518518518519,
+    "turns": 9.824567901234568,
+    "gaps": {
+     "media": 12.292136331808402,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 12.292136331808402,
+    "inBand": false,
+    "toFive": 17.2921363318084
+   }
+  },
+  "Elemosina molesta": {
+   "V0": {
+    "mean": -4.375057193750327,
+    "max": -2.0715220586625023,
+    "maxFoe": "starter-spazienzio",
+    "draws": 5.938271604938271,
+    "turns": 11.136913580246913,
+    "gaps": {
+     "media": 4.375057193750327,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 4.375057193750327,
+    "inBand": false,
+    "toFive": 9.375057193750326
+   },
+   "V1": {
+    "mean": -4.4634829109359355,
+    "max": -2.1429961300365505,
+    "maxFoe": "starter-spazienzio",
+    "draws": 6.08641975308642,
+    "turns": 11.149506172839507,
+    "gaps": {
+     "media": 4.4634829109359355,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 4.4634829109359355,
+    "inBand": false,
+    "toFive": 9.463482910935936
+   },
+   "V2": {
+    "mean": -3.892547283367265,
+    "max": -2.1545596972835668,
+    "maxFoe": "starter-spazienzio",
+    "draws": 5.716049382716049,
+    "turns": 11.131728395061728,
+    "gaps": {
+     "media": 3.892547283367265,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 3.892547283367265,
+    "inBand": false,
+    "toFive": 8.892547283367264
+   },
+   "V3": {
+    "mean": -3.892547283367265,
+    "max": -2.1545596972835668,
+    "maxFoe": "starter-spazienzio",
+    "draws": 5.716049382716049,
+    "turns": 11.131728395061728,
+    "gaps": {
+     "media": 3.892547283367265,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 3.892547283367265,
+    "inBand": false,
+    "toFive": 8.892547283367264
+   }
+  },
+  "Non sento niente": {
+   "V1": {
+    "mean": -1.5260609281500186,
+    "max": 1.7896191177385745,
+    "maxFoe": "starter-tossico",
+    "draws": 5.728395061728395,
+    "turns": 10.159012345679013,
+    "gaps": {
+     "media": 1.5260609281500186,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 1.5260609281500186,
+    "inBand": false,
+    "toFive": 6.526060928150018
+   },
+   "V2": {
+    "mean": -1.7744308482197053,
+    "max": 1.4732907568299325,
+    "maxFoe": "starter-tossico",
+    "draws": 5.753086419753086,
+    "turns": 10.098888888888888,
+    "gaps": {
+     "media": 1.7744308482197053,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 1.7744308482197053,
+    "inBand": false,
+    "toFive": 6.774430848219705
+   },
+   "V3": {
+    "mean": -1.174480120217996,
+    "max": 2.01873180610049,
+    "maxFoe": "starter-spazienzio",
+    "draws": 5.728395061728395,
+    "turns": 10.198518518518519,
+    "gaps": {
+     "media": 1.174480120217996,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 1.174480120217996,
+    "inBand": false,
+    "toFive": 6.174480120217996
+   }
+  },
+  "Mezza minerale sgasata": {
+   "V1": {
+    "mean": -1.7979733207516222,
+    "max": 3.5865096878362124,
+    "maxFoe": "starter-spazienzio",
+    "draws": 9.753086419753087,
+    "turns": 7.726296296296296,
+    "gaps": {
+     "media": 1.7979733207516222,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 1.7979733207516222,
+    "inBand": false,
+    "toFive": 6.797973320751622
+   },
+   "V2": {
+    "mean": -1.733726090145607,
+    "max": 3.444454930795615,
+    "maxFoe": "starter-spazienzio",
+    "draws": 9.753086419753087,
+    "turns": 7.722962962962963,
+    "gaps": {
+     "media": 1.733726090145607,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 1.733726090145607,
+    "inBand": false,
+    "toFive": 6.733726090145607
+   },
+   "V3": {
+    "mean": -1.604429726618207,
+    "max": 3.573341910666109,
+    "maxFoe": "starter-spazienzio",
+    "draws": 9.753086419753087,
+    "turns": 7.722716049382716,
+    "gaps": {
+     "media": 1.604429726618207,
+     "massimo": 0.0,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 1.604429726618207,
+    "inBand": false,
+    "toFive": 6.604429726618207
+   }
+  },
+  "Maleducazione": {
+   "V0": {
+    "mean": 3.75528980420363,
+    "max": 9.915633244571431,
+    "maxFoe": "starter-tossico",
+    "draws": 12.950617283950617,
+    "turns": 9.278395061728395,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.0,
+     "patte": 2.950617283950617,
+     "durata": 0.0
+    },
+    "distance": 2.950617283950617,
+    "inBand": false,
+    "toFive": 1.2447101957963702
+   },
+   "V1": {
+    "mean": 8.177176653034381,
+    "max": 15.45693316971223,
+    "maxFoe": "starter-tossico",
+    "draws": 13.37037037037037,
+    "turns": 9.139135802469136,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.4569331697122294,
+     "patte": 3.3703703703703702,
+     "durata": 0.0
+    },
+    "distance": 3.8273035400825997,
+    "inBand": false,
+    "toFive": 3.1771766530343815
+   },
+   "V2": {
+    "mean": 11.847556182567445,
+    "max": 20.312002265790625,
+    "maxFoe": "starter-tossico",
+    "draws": 13.08641975308642,
+    "turns": 8.968024691358025,
+    "gaps": {
+     "media": 1.8475561825674447,
+     "massimo": 5.312002265790625,
+     "patte": 3.0864197530864192,
+     "durata": 0.0
+    },
+    "distance": 10.245978201444489,
+    "inBand": false,
+    "toFive": 6.847556182567445
+   },
+   "V3": {
+    "mean": 16.480532860551524,
+    "max": 25.488874438532704,
+    "maxFoe": "starter-tossico",
+    "draws": 9.481481481481481,
+    "turns": 8.664197530864197,
+    "gaps": {
+     "media": 6.4805328605515236,
+     "massimo": 10.488874438532704,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 16.969407299084228,
+    "inBand": false,
+    "toFive": 11.480532860551524
+   }
+  },
+  "Secondo fiato": {
+   "V0": {
+    "mean": 15.359738956947483,
+    "max": 22.32591067061398,
+    "maxFoe": "starter-mara",
+    "draws": 9.777777777777779,
+    "turns": 12.365679012345678,
+    "gaps": {
+     "media": 5.359738956947483,
+     "massimo": 7.325910670613979,
+     "patte": 0.0,
+     "durata": 0.36567901234567834
+    },
+    "distance": 13.05132863990714,
+    "inBand": false,
+    "toFive": 10.359738956947483
+   },
+   "V1": {
+    "mean": 15.219598250248424,
+    "max": 21.932989690721655,
+    "maxFoe": "starter-mara",
+    "draws": 9.666666666666666,
+    "turns": 12.37037037037037,
+    "gaps": {
+     "media": 5.219598250248424,
+     "massimo": 6.932989690721655,
+     "patte": 0.0,
+     "durata": 0.37037037037037024
+    },
+    "distance": 12.52295831134045,
+    "inBand": false,
+    "toFive": 10.219598250248424
+   },
+   "V2": {
+    "mean": 9.860911102964801,
+    "max": 15.811408549133567,
+    "maxFoe": "starter-pino",
+    "draws": 9.654320987654321,
+    "turns": 12.119876543209877,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 0.8114085491335672,
+     "patte": 0.0,
+     "durata": 0.11987654320987673
+    },
+    "distance": 0.9312850923434439,
+    "inBand": false,
+    "toFive": 4.860911102964801
+   }
+  },
+  "Colpo allo stomaco": {
+   "V0": {
+    "mean": 6.432697279821001,
+    "max": 17.248982105962163,
+    "maxFoe": "starter-spazienzio",
+    "draws": 9.938271604938272,
+    "turns": 9.63962962962963,
+    "gaps": {
+     "media": 0.0,
+     "massimo": 2.2489821059621633,
+     "patte": 0.0,
+     "durata": 0.0
+    },
+    "distance": 2.2489821059621633,
+    "inBand": false,
+    "toFive": 1.4326972798210011
+   }
+  }
+ },
+ "choice": {
+  "Mano lesta": {
+   "variant": "V3",
+   "flagged": true
+  },
+  "Coccio di bottiglia": {
+   "variant": "V0",
+   "flagged": true
+  },
+  "Elemosina molesta": {
+   "variant": "V2",
+   "flagged": true
+  },
+  "Non sento niente": {
+   "variant": "V3",
+   "flagged": true
+  },
+  "Mezza minerale sgasata": {
+   "variant": "V3",
+   "flagged": true
+  },
+  "Maleducazione": {
+   "variant": "V0",
+   "flagged": true
+  },
+  "Secondo fiato": {
+   "variant": "V2",
+   "flagged": true
+  },
+  "Colpo allo stomaco": {
+   "variant": "V0",
+   "flagged": true
+  }
+ }
+}
