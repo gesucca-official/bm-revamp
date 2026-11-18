@@ -1,0 +1,32 @@
+{
+ "test": "ViewTableFidelityTest, arm malus, two-turn windows (per seat)",
+ "misses": 446,
+ "byCause": {
+  "res: in-play item arrived during the turn (draw)": 412,
+  "res: in-play item left the field without being consumed (displaced by a drawn item)": 28,
+  "health: no in-play item moved; timer of C'e del sangue in the turn before": 4,
+  "health: in-play item arrived during the turn (draw)": 2
+ },
+ "examples": {
+  "res: in-play item arrived during the turn (draw)": [
+   "seed 7100002 turn 8 moves seat-1:Battutina, seat-2:SVEGLIAMOCI MA TU NO after seat-1:Battutina, seat-2:SVEGLIAMOCI MA TU NO",
+   "seed 7100002 turn 8 moves seat-1:Battutina, seat-2:SVEGLIAMOCI MA TU NO after seat-1:Battutina, seat-2:SVEGLIAMOCI MA TU NO",
+   "seed 7100004 turn 14 moves seat-1:Mano lesta, seat-2:ADOPERIAMOTI after seat-1:Battutina, seat-2:NON GIOCARE COL COLTELLO NO"
+  ],
+  "res: in-play item left the field without being consumed (displaced by a drawn item)": [
+   "seed 7100006 turn 4 moves seat-1:Chiave da tredici, seat-2:Sgommata after seat-1:Lavoro fatto bene, seat-2:Sputo da posacenere",
+   "seed 7100006 turn 4 moves seat-1:Chiave da tredici, seat-2:Sgommata after seat-1:Lavoro fatto bene, seat-2:Sputo da posacenere",
+   "seed 7100064 turn 8 moves seat-1:Ago Marcio e Spezzato, seat-2:Ago Marcio e Spezzato after seat-1:Ago Marcio e Spezzato, seat-2:Ago Marcio e Spezzato"
+  ],
+  "health: no in-play item moved; timer of C'e del sangue in the turn before": [
+   "seed 7100136 turn 6 moves seat-1:Un assaggino, seat-2:Ago Marcio e Spezzato after seat-1:C'? del sangue nella mia droga, seat-2:Fasciatura col fazzolettaccio",
+   "seed 7100136 turn 6 moves seat-1:Un assaggino, seat-2:Ago Marcio e Spezzato after seat-1:C'? del sangue nella mia droga, seat-2:Fasciatura col fazzolettaccio",
+   "seed 7100360 turn 8 moves seat-1:Ago Marcio e Spezzato, seat-2:Metabolismo Corrotto after seat-1:C'? del sangue nella mia droga, seat-2:Fasciatura col fazzolettaccio"
+  ],
+  "health: in-play item arrived during the turn (draw)": [
+   "seed 7100336 turn 13 moves seat-1:Secondo fiato, seat-2:Tossicone Scatarrante after seat-1:C'? del sangue nella mia droga, seat-2:Desiderio Incontrollabile",
+   "seed 7100336 turn 13 moves seat-1:Secondo fiato, seat-2:Tossicone Scatarrante after seat-1:C'? del sangue nella mia droga, seat-2:Desiderio Incontrollabile"
+  ]
+ },
+ "rawLog": "%TEMP%/bm-sb19-b2/diag-malus.txt (from a temporary copy of the test, deleted)"
+}

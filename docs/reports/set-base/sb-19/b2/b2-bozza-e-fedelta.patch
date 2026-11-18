@@ -1,0 +1,422 @@
+diff --git a/server/src/test/java/com/gsc/bm/sim/TurnForecastFidelityTest.java b/server/src/test/java/com/gsc/bm/sim/TurnForecastFidelityTest.java
+index 844c9bc..91bf994 100644
+--- a/server/src/test/java/com/gsc/bm/sim/TurnForecastFidelityTest.java
++++ b/server/src/test/java/com/gsc/bm/sim/TurnForecastFidelityTest.java
+@@ -34,6 +34,8 @@ class TurnForecastFidelityTest {
+         check(Draft.fromClasspath("/set-base/bozza.json"), "sergio");
+         // SB-18 B2 (D126): prova-duccio in one seat (alternating), the starters in the other: the four cards paid in HEALTH.
+         check(Draft.fromClasspath("/set-base/bozza.json"), "duccio");
++        // SB-19 B2 (D130, RP-27): a deck with the in-play items in one seat (alternating), the starters in the other.
++        check(Draft.fromClasspath("/set-base/bozza.json"), "malus");
+     }
+ 
+     private static void check(Draft draft, String arm) throws Exception {
+@@ -42,22 +44,29 @@ class TurnForecastFidelityTest {
+         int[] sergio = new int[4]; // SB-17, in checked turns: reflections, kept tokens, Conto salato on a token, Lo sanno tutti resolved (B2, D110)
+         int[] duccio = new int[4]; // SB-18 B2 (D126), resolved in checked turns: Nocche sbucciate, E allora?, Capocciata, Testa dura (HEALTH costs)
+         int[] sales = new int[2]; // SB-17 B4 (D118): resolved in checked turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
++        long[] malus = new long[3]; // SB-19 B2 (RP-27), in checked turns: turns with an in-play item, effects applied, items that changed seat
+         List<String> misses = new ArrayList<>();
+         // SB-18 B2 (D126): Duccio's games are shorter, so his arm takes 400 seeds to keep the floor of 5,000 checked turns.
+-        int games = arm.equals("duccio") ? 400 : 300;
++        int games = arm.equals("duccio") || arm.equals("malus") ? 400 : 300;
+         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
+             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
+             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
+             if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
++            if (arm.equals("malus")) {
++                String m = ViewTableFidelityTest.MALUS_DECKS[(int) ((seed / 2) % ViewTableFidelityTest.MALUS_DECKS.length)];
++                if (seed % 2 == 0) a = m; else b = m;
++            }
+             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
+             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
+             Map<String, List<Map<String, Integer>>> forecasts = new HashMap<>();
++            Map<com.gsc.bm.model.cards.Card, String> holdersAtReady = new IdentityHashMap<>();
+             long s = seed;
+             runner.run(seed, new SimulationRunner.Contender(a, pa), new SimulationRunner.Contender(b, pb), (stage, g) -> {
+                 if (stage.equals("ROUND_READY")) {
+                     forecasts.clear();
+                     if (g.getPendingMoves().size() != 2 || g.getPendingMoves().stream().anyMatch(Move::isVoid)) return;
+                     if (g.getPlayers().values().stream().anyMatch(p -> !p.getCharacter().getTimers().isEmpty())) { turns[2]++; return; }
++                    holdersAtReady.clear(); holdersAtReady.putAll(ViewTableFidelityTest.inPlayHolders(g));
+                     for (Move mine : g.getPendingMoves()) {
+                         Move theirs = g.getPendingMoves().stream().filter(m -> m != mine).findFirst().orElseThrow();
+                         BotView view = BotView.of(g, mine.getPlayerId());
+@@ -87,6 +96,12 @@ class TurnForecastFidelityTest {
+                         int paid = HEALTH_COSTS.indexOf(m.getPlayedCardName());
+                         if (paid >= 0 && !m.isVoid()) duccio[paid]++;
+                     }
++                    Map<com.gsc.bm.model.cards.Card, String> after = ViewTableFidelityTest.inPlayHolders(g);
++                    if (!after.isEmpty()) malus[0]++;
++                    for (Map.Entry<com.gsc.bm.model.cards.Card, String> e : after.entrySet())
++                        if (!g.getPlayers().get(e.getValue()).getCharacter().isDead()) malus[1]++;
++                    for (Map.Entry<com.gsc.bm.model.cards.Card, String> e : holdersAtReady.entrySet())
++                        if (after.containsKey(e.getKey()) && !after.get(e.getKey()).equals(e.getValue())) malus[2]++;
+                     forecasts.forEach((id, ends) -> {
+                         turns[0]++;
+                         if (ends.contains(actual)) turns[1]++;
+@@ -106,6 +121,13 @@ class TurnForecastFidelityTest {
+             System.out.println("forecast fidelity, sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
+             for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the checked sample");
+         }
++        if (arm.equals("malus")) {
++            System.out.println("forecast fidelity, malus: turns with an in-play item " + malus[0] + ", effects applied " + malus[1]
++                    + ", items that changed seat " + malus[2]);
++            assertTrue(malus[0] >= 500, "turns with an in-play item in the checked sample: " + malus[0]);
++            assertTrue(malus[1] >= 500, "in-play effects applied in the checked sample: " + malus[1]);
++            assertTrue(malus[2] >= 5, "in-play items that changed seat in the checked sample: " + malus[2]);
++        }
+         if (arm.equals("duccio")) {
+             System.out.println("forecast fidelity, duccio: " + HEALTH_COSTS + " " + java.util.Arrays.toString(duccio));
+             for (int n : duccio) assertTrue(n > 0, "every card paid in HEALTH is in the checked sample");
+diff --git a/server/src/test/java/com/gsc/bm/sim/ViewTableFidelityTest.java b/server/src/test/java/com/gsc/bm/sim/ViewTableFidelityTest.java
+index f30d26b..808e52b 100644
+--- a/server/src/test/java/com/gsc/bm/sim/ViewTableFidelityTest.java
++++ b/server/src/test/java/com/gsc/bm/sim/ViewTableFidelityTest.java
+@@ -30,6 +30,19 @@ class ViewTableFidelityTest {
+         check(Draft.fromClasspath(DRAFT), "sergio", false);
+         // SB-18 B2 (D126): prova-duccio in one seat (alternating), the starters in the other: the four cards paid in HEALTH.
+         check(Draft.fromClasspath(DRAFT), "duccio", false);
++        // SB-19 B2 (D130, RP-27): a deck with the items of the «In campo» effect in one seat (alternating), the starters in the other.
++        check(Draft.fromClasspath(DRAFT), "malus", false);
++    }
++
++    /** SB-19 B2: the decks of the «malus» arm, by seed: the two items, Scatto Repentino, «Lo rivendo»; Steal is in two starters. */
++    static final String[] MALUS_DECKS = {"prova-b2-rischio9", "prova-b2-rischio10", "prova-b2-sergio-sigaretta", "prova-b2-beppe"};
++
++    /** SB-19 B2: the in-play item instances near each player. */
++    static Map<Card, String> inPlayHolders(com.gsc.bm.model.game.Game g) {
++        Map<Card, String> holders = new IdentityHashMap<>();
++        for (Player p : g.getPlayers().values())
++            for (Card c : p.getCharacter().getItems()) if (!PrintedEffects.inPlay(c).isEmpty()) holders.put(c, p.getPlayerId());
++        return holders;
+     }
+ 
+     private static Map<String, BotView.CardSeen> text(Draft draft) throws Exception {
+@@ -37,6 +50,7 @@ class ViewTableFidelityTest {
+         List<String> decks = new ArrayList<>(List.of(DECKS));
+         if (draft.deckIds().contains(Sb17.DECK)) decks.add(Sb17.DECK); // SB-17
+         if (draft.deckIds().contains(Sb18.DECK)) decks.add(Sb18.DECK); // SB-18 B2
++        for (String d : MALUS_DECKS) if (draft.deckIds().contains(d)) decks.add(d); // SB-19 B2
+         for (String deck : decks) {
+             Player p = draft.player(deck, "text", new Random(0), null);
+             List<Card> cards = new ArrayList<>(p.getCardsInHand());
+@@ -57,17 +71,19 @@ class ViewTableFidelityTest {
+         long started = System.nanoTime();
+         Map<String, BotView.CardSeen> catalog = text(draft);
+         SimulationRunner runner = new SimulationRunner(draft, Ruleset.D50);
+-        int games = arm.equals("duccio") ? 400 : 300; // SB-18 B2 (D126): Duccio's games are shorter; 400 seeds keep the floor of 5,000 compared turns
++        int games = arm.equals("duccio") || arm.equals("malus") ? 400 : 300; // SB-18 B2 (D126): Duccio's games are shorter; 400 seeds keep the floor of 5,000 compared turns
+         long[] one = new long[2], two = new long[2], twoRes = new long[2], drawn = new long[2];
+         long[] skipped = new long[1], unmodeled = new long[1];
+         int[] regressionWindows = new int[1];
+         int[] duccio = new int[4]; // SB-18 B2 (D126): in compared turns, the four cards paid in HEALTH (TurnForecastFidelityTest.HEALTH_COSTS)
++        long[] malus = new long[3]; // SB-19 B2 (RP-27), in compared two-turn windows: turns with an in-play item, effects applied, items that changed seat
+         int[] sales = new int[2]; // SB-17 B4 (D118): in compared turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
+         List<String> misses = new ArrayList<>();
+         for (long seed = 7_100_000; seed < 7_100_000 + games; seed++) {
+             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
+             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
+             if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
++            if (arm.equals("malus")) { String m = MALUS_DECKS[(int) ((seed / 2) % MALUS_DECKS.length)]; if (seed % 2 == 0) a = m; else b = m; }
+             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
+             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);
+             Map<Integer, Map<String, BotView>> views = new HashMap<>();
+@@ -76,6 +92,7 @@ class ViewTableFidelityTest {
+             Map<String, Set<Map<String, Map<Resource, Integer>>>> pending2Res = new HashMap<>();
+             Map<String, Boolean> pendingDrawn = new HashMap<>();
+             String[] labels = new String[1];
++            Map<Card, String> holdersAtReady = new IdentityHashMap<>();
+             long s = seed;
+             runner.run(seed, new SimulationRunner.Contender(a, pa), new SimulationRunner.Contender(b, pb), (stage, g) -> {
+                 if (stage.equals("ROUND_READY")) {
+@@ -97,6 +114,7 @@ class ViewTableFidelityTest {
+                     }
+                     views.put(t, seen);
+                     plays.put(t, now);
++                    holdersAtReady.clear(); holdersAtReady.putAll(inPlayHolders(g));
+                     for (ViewTable.Play p : now) {
+                         if (p.card.getName().equals("Lo rivendo")) sales[0]++;
+                         if (p.card.getName().equals("Fare il vago")) sales[1]++;
+@@ -159,6 +177,13 @@ class ViewTableFidelityTest {
+                         actualRes.put(p.getPlayerId(), new EnumMap<>(p.getCharacter().getResources()));
+                     }
+                     pending1.forEach((id, ends) -> { one[0]++; if (ends.contains(actual)) one[1]++; });
++                    if (pendingDrawn.values().stream().anyMatch(d -> !d)) {
++                        Map<Card, String> after = inPlayHolders(g);
++                        if (!after.isEmpty()) malus[0]++;
++                        for (Map.Entry<Card, String> e : after.entrySet()) if (!g.getPlayers().get(e.getValue()).getCharacter().isDead()) malus[1]++;
++                        for (Map.Entry<Card, String> e : holdersAtReady.entrySet())
++                            if (after.containsKey(e.getKey()) && !after.get(e.getKey()).equals(e.getValue())) malus[2]++;
++                    }
+                     pending2.forEach((id, ends) -> {
+                         if (pendingDrawn.get(id)) {
+                             drawn[0]++;
+@@ -194,6 +219,13 @@ class ViewTableFidelityTest {
+             System.out.println("ViewTable fidelity sergio: Lo rivendo " + sales[0] + ", Fare il vago " + sales[1]);
+             for (int n : sales) assertTrue(n > 0, "the selling basic and the parry bound are in the compared sample");
+         }
++        if (arm.equals("malus")) {
++            System.out.println("ViewTable fidelity malus: turns with an in-play item " + malus[0] + ", effects applied " + malus[1]
++                    + ", items that changed seat " + malus[2]);
++            assertTrue(malus[0] >= 500, "turns with an in-play item in the compared sample: " + malus[0]);
++            assertTrue(malus[1] >= 500, "in-play effects applied in the compared sample: " + malus[1]);
++            assertTrue(malus[2] >= 5, "in-play items that changed seat in the compared sample: " + malus[2]);
++        }
+         if (arm.equals("duccio")) {
+             System.out.println("ViewTable fidelity duccio: " + TurnForecastFidelityTest.HEALTH_COSTS + " " + java.util.Arrays.toString(duccio));
+             for (int n : duccio) assertTrue(n > 0, "every card paid in HEALTH is in the compared sample");
+diff --git a/server/src/test/resources/set-base/bozza.json b/server/src/test/resources/set-base/bozza.json
+index 1e08f86..5cf2669 100644
+--- a/server/src/test/resources/set-base/bozza.json
++++ b/server/src/test/resources/set-base/bozza.json
+@@ -656,7 +656,9 @@
+     {"binding": "base.com.SecondoFiato", "rarity": "RARE", "kind": "ACTION", "priority": 0, "targets": ["SELF"], "self": [{"op": "status", "name": "SECONDO FIATO - HIT", "description": "Hit Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "HIT", "factor": 1.25, "turns": 1}, {"op": "status", "name": "SECONDO FIATO - CUT", "description": "Cut Damage taken: x1.25", "statusType": "BAD", "flow": "INPUT", "property": "CUT", "factor": 1.25, "turns": 1}, {"op": "say", "text": "Gained status: SECONDO FIATO"}, {"op": "gain", "resource": "HEALTH", "amount": 12}], "gui": {"name": "Secondo fiato", "description": "GEN-20 · +12 HEALTH a sé; HIT e CUT ricevuti ×1,25 per 2 turni.", "role": "RESOURCES", "gains": "+12 H", "damage": "—", "damageAmount": "—"}},
+     {"binding": "base.com.CoccioDiBottiglia", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["SELF"], "cost": {"VIOLENCE": 5}, "self": [{"op": "status", "name": "COCCIO DI BOTTIGLIA", "description": "Hit Damage dealt x1.5 and turned to Cut Damage", "statusType": "GOOD", "flow": "OUTPUT", "property": "HIT", "factor": 1.5, "equip": true, "singleUse": true, "convertTo": "CUT"}, {"op": "say", "text": "Equipped status: COCCIO DI BOTTIGLIA"}], "gui": {"name": "Coccio di bottiglia", "description": "GEN-21 · 5 V: equip, il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},
+     {"binding": "base.items.MezzaMineraleSgasata", "rarity": "UNCOMMON", "kind": "ITEM", "self": [{"op": "empty", "resource": "ALCOHOL"}, {"op": "gain", "resource": "ALERTNESS", "amount": 20}], "gui": {"name": "Mezza minerale sgasata", "description": "OGG-08 · Consumato: azzera la tua L; +20 A.", "role": "OTHER", "gains": "+20 A", "damage": "—", "damageAmount": "—"}},
+-    {"binding": "base.items.GrappaDellaCasa", "rarity": "RARE", "kind": "ITEM", "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 25}, {"op": "lose", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Grappa della casa", "description": "OGG-16 · Consumato: +25 L, −5 A.", "role": "RESOURCES", "gains": "+25 L", "damage": "—", "damageAmount": "—"}}
++    {"binding": "base.items.GrappaDellaCasa", "rarity": "RARE", "kind": "ITEM", "self": [{"op": "gain", "resource": "ALCOHOL", "amount": 25}, {"op": "lose", "resource": "ALERTNESS", "amount": 5}], "gui": {"name": "Grappa della casa", "description": "OGG-16 · Consumato: +25 L, −5 A.", "role": "RESOURCES", "gains": "+25 L", "damage": "—", "damageAmount": "—"}},
++    {"binding": "base.items.ContoDelTavoloSei", "rarity": "UNCOMMON", "kind": "ITEM", "inPlay": [{"op": "lose", "resource": "ALERTNESS", "amount": 3}], "self": [{"op": "gain", "resource": "VIOLENCE", "amount": 15}], "gui": {"name": "Conto del tavolo sei", "description": "OGG-17 · In campo: a fine turno −3 A. Consumato: +15 V.", "inPlay": "−3 A", "role": "RESOURCES", "gains": "+15 V", "damage": "—", "damageAmount": "—"}},
++    {"binding": "base.items.SigarettaAccesa", "rarity": "RARE", "kind": "ITEM", "inPlay": [{"op": "gain", "resource": "TOXICITY", "amount": 2}], "self": [{"op": "gain", "resource": "ALERTNESS", "amount": 10}], "gui": {"name": "Sigaretta accesa", "description": "OGG-18 · In campo: a fine turno +2 T. Consumato: +10 A.", "inPlay": "+2 T", "role": "RESOURCES", "gains": "+10 A", "damage": "—", "damageAmount": "—"}}
+   ],
+   "decks": [
+     {
+@@ -1035,6 +1037,238 @@
+         "base.pino.GoingBerserk": 2,
+         "base.items.GrappaDellaCasa": 2
+       }
++    },
++    {
++      "id": "prova-b2-spazienzio",
++      "character": "bruiser.character.BigBadBruiser",
++      "bound": [
++        "bruiser.character.LittleRage",
++        "bruiser.character.LittleSmack"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "bruiser.SuperImpact": 2,
++        "bruiser.ExtremelyViolentBlow": 1,
++        "bruiser.Glare": 2,
++        "bruiser.MadeOfStone": 2,
++        "bruiser.YouStop": 2,
++        "base.com.DentiStretti": 1,
++        "base.items.PosacenereDiVetro": 1,
++        "base.bruiser.TiFaccioSpazio": 1,
++        "bruiser.CantFeelAnything": 2,
++        "bruiser.SickeningBlow": 2,
++        "base.com.CoccioDiBottiglia": 2,
++        "base.items.ContoDelTavoloSei": 2
++      }
++    },
++    {
++      "id": "prova-b2-beppe",
++      "character": "base.character.Gigi",
++      "bound": [
++        "base.gigi.bound.UnaStrettaEPassa",
++        "base.gigi.bound.ColpoDiCacciavite"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "bruiser.BreakYourToy": 2,
++        "base.gigi.ChiaveDaTredici": 2,
++        "base.gigi.ColpoDiChiaveInglese": 2,
++        "base.gigi.SottoIlCofano": 1,
++        "base.gigi.LavoroFattoBene": 1,
++        "com.Steal": 1,
++        "base.items.GuantiDaOfficina": 2,
++        "base.items.CascoDaLavoro": 1,
++        "bruiser.SickeningBlow": 2,
++        "bruiser.BadEducation": 2,
++        "base.com.CoccioDiBottiglia": 2,
++        "base.items.ContoDelTavoloSei": 2
++      }
++    },
++    {
++      "id": "prova-b2-sergio-conto",
++      "character": "base.character.Cesira",
++      "bound": [
++        "base.cesira.bound.Battutina",
++        "base.cesira.bound.FareIlVago"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "base.cesira.OhGuardaLa": 2,
++        "base.cesira.Ricatto": 2,
++        "base.cesira.LoSapevo": 1,
++        "base.cesira.ContoSalato": 2,
++        "base.cesira.LoSannoTutti": 2,
++        "base.cesira.Malelingue": 1,
++        "base.cesira.LoRivendo": 2,
++        "bruiser.CantFeelAnything": 2,
++        "base.com.ManoLesta": 2,
++        "base.com.BeggingMoney": 2,
++        "base.items.ContoDelTavoloSei": 2
++      }
++    },
++    {
++      "id": "prova-b2-sergio-sigaretta",
++      "character": "base.character.Cesira",
++      "bound": [
++        "base.cesira.bound.Battutina",
++        "base.cesira.bound.FareIlVago"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "base.cesira.OhGuardaLa": 2,
++        "base.cesira.Ricatto": 2,
++        "base.cesira.LoSapevo": 1,
++        "base.cesira.ContoSalato": 2,
++        "base.cesira.LoSannoTutti": 2,
++        "base.cesira.Malelingue": 1,
++        "base.cesira.LoRivendo": 2,
++        "bruiser.CantFeelAnything": 2,
++        "base.com.ManoLesta": 2,
++        "base.com.BeggingMoney": 2,
++        "base.items.SigarettaAccesa": 2
++      }
++    },
++    {
++      "id": "prova-b2-celestina",
++      "character": "junkie.character.ToxicJunkie",
++      "bound": [
++        "junkie.character.PatheticBlade",
++        "base.tossico.bound.RaschiareIlFondo"
++      ],
++      "lastResort": "junkie.LethalHeroinDose",
++      "cards": {
++        "junkie.MethDrivenRage": 2,
++        "junkie.Cough": 2,
++        "junkie.PervertedMetabolism": 2,
++        "junkie.AmphetamineReflexes": 2,
++        "junkie.ToxicBloodDrain": 1,
++        "com.Grab": 1,
++        "base.com.RincorsaDalMarciapiede": 1,
++        "base.items.PaninoDelKebab": 1,
++        "com.items.MarvelousCocktail": 1,
++        "base.tossico.UnAssaggino": 1,
++        "base.com.BeggingMoney": 2,
++        "base.com.SecondoFiato": 2,
++        "base.items.SigarettaAccesa": 2
++      }
++    },
++    {
++      "id": "prova-b2-rischio9",
++      "character": "junkie.character.ToxicJunkie",
++      "bound": [
++        "junkie.character.PatheticBlade",
++        "base.tossico.bound.RaschiareIlFondo"
++      ],
++      "lastResort": "junkie.LethalHeroinDose",
++      "cards": {
++        "junkie.MethDrivenRage": 2,
++        "junkie.Cough": 2,
++        "junkie.PervertedMetabolism": 2,
++        "junkie.AmphetamineReflexes": 2,
++        "junkie.ToxicBloodDrain": 1,
++        "com.Grab": 1,
++        "base.com.RincorsaDalMarciapiede": 1,
++        "base.items.PaninoDelKebab": 1,
++        "com.items.MarvelousCocktail": 1,
++        "base.tossico.UnAssaggino": 1,
++        "base.com.SecondoFiato": 2,
++        "base.items.SigarettaAccesa": 2,
++        "base.com.ShuffleFeet": 2
++      }
++    },
++    {
++      "id": "prova-b2-rischio10",
++      "character": "base.character.Cesira",
++      "bound": [
++        "base.cesira.bound.Battutina",
++        "base.cesira.bound.FareIlVago"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "base.cesira.OhGuardaLa": 2,
++        "base.cesira.Ricatto": 2,
++        "base.cesira.LoSapevo": 1,
++        "base.cesira.ContoSalato": 2,
++        "base.cesira.LoSannoTutti": 2,
++        "base.cesira.Malelingue": 1,
++        "base.cesira.LoRivendo": 2,
++        "bruiser.CantFeelAnything": 2,
++        "base.com.ManoLesta": 2,
++        "base.items.ContoDelTavoloSei": 2,
++        "base.com.ShuffleFeet": 2
++      }
++    },
++    {
++      "id": "iso-b2-conto",
++      "character": "bruiser.character.BigBadBruiser",
++      "bound": [
++        "bruiser.character.LittleRage",
++        "bruiser.character.LittleSmack"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "bruiser.SuperImpact": 2,
++        "bruiser.ExtremelyViolentBlow": 1,
++        "bruiser.Glare": 2,
++        "bruiser.MadeOfStone": 2,
++        "bruiser.YouStop": 2,
++        "bruiser.SeagullFly": 2,
++        "base.com.TartarugaSulMarciapiede": 2,
++        "base.com.MattoneDelCantiere": 1,
++        "bruiser.HealingBlow": 1,
++        "base.com.DentiStretti": 1,
++        "base.items.PosacenereDiVetro": 1,
++        "base.bruiser.TiFaccioSpazio": 1,
++        "base.items.ContoDelTavoloSei": 2
++      }
++    },
++    {
++      "id": "iso-b2-sigaretta",
++      "character": "junkie.character.ToxicJunkie",
++      "bound": [
++        "junkie.character.PatheticBlade",
++        "base.tossico.bound.RaschiareIlFondo"
++      ],
++      "lastResort": "junkie.LethalHeroinDose",
++      "cards": {
++        "junkie.MethDrivenRage": 2,
++        "junkie.Cough": 2,
++        "junkie.PervertedMetabolism": 2,
++        "junkie.AmphetamineReflexes": 2,
++        "junkie.ToxicBloodDrain": 1,
++        "com.Grab": 2,
++        "base.com.RincorsaDalMarciapiede": 1,
++        "com.Steal": 1,
++        "base.com.FasciaturaColFazzolettaccio": 1,
++        "base.items.PaninoDelKebab": 2,
++        "com.items.MarvelousCocktail": 1,
++        "base.tossico.UnAssaggino": 1,
++        "base.items.SigarettaAccesa": 2
++      }
++    },
++    {
++      "id": "iso-b2-sigaretta-sergio",
++      "character": "base.character.Cesira",
++      "bound": [
++        "base.cesira.bound.Battutina",
++        "base.cesira.bound.FareIlVago"
++      ],
++      "lastResort": "com.last.Struggle",
++      "cards": {
++        "base.cesira.OhGuardaLa": 2,
++        "base.cesira.Ricatto": 2,
++        "base.cesira.LoSapevo": 1,
++        "base.cesira.ContoSalato": 2,
++        "base.cesira.LoSannoTutti": 2,
++        "base.cesira.Malelingue": 1,
++        "bruiser.StunningBlow": 1,
++        "base.com.TartarugaSulMarciapiede": 2,
++        "base.com.Spintone": 1,
++        "base.items.SantinoDellaPortinaia": 1,
++        "base.com.AcquaInFaccia": 1,
++        "base.cesira.LoRivendo": 2,
++        "base.items.SigarettaAccesa": 2
++      }
+     }
+   ]
+ }
