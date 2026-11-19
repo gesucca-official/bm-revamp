@@ -3,8 +3,8 @@
 > **Serbatoio di progetto, senza valore normativo** (regole del [serbatoio delle carriere](README.md#regole-del-serbatoio)). Nomi delle
 > carte e numeri non compaiono: le partite dicono chi gioca contro chi e che cosa insegnano, non con quali carte.
 
-**Versione 0.3.3 — 14 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario e dopo il
-[mockup del grafo](mockup-principale.md).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
+**Versione 0.3.4 — 19 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario, dopo il
+[mockup del grafo](mockup-principale.md) e dopo l'atto I riscritto dal proprietario ([dialoghi](principale-dialoghi.md)).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
 regia*. Le versioni precedenti sono nella [cronologia](#cronologia).
 
 ## Lo spunto
@@ -57,7 +57,7 @@ Il proprietario, 14 novembre 2026: «come impressione generale mi piace, ma l'at
 più intrecci se possibile fra le varie linee, con motivi narrativi forti, senza però rendere tutto un groviglio»; e, sul momento della
 rivelazione, «forse meglio alla fine». La versione 0.2 risponde così:
 
-- **La rivelazione va alla fine,** e diventa il cuore dell'atto III: la firma di domenica, Sergio che si siede dalla parte di chi vende,
+- **La rivelazione va alla fine,** e diventa il cuore dell'atto III: la firma di lunedì mattina, Sergio che si siede dalla parte di chi vende,
   la sua confessione e l'ultimo duello con lui.
 - **L'atto II depista.** Tutti gli indizi sembrano dire che Sergio **lavora per** il Dimmi Di Sì: sa troppe cose, sa la data, sta sempre
   con Duccio. È la conclusione sbagliata giusta: Sergio c'entra, ma dall'altra parte del tavolo.
@@ -73,7 +73,7 @@ si aprono perdendo** ([sotto](#le-sconfitte-che-aprono-un-ramo)), che chiudono a
 |---|---|---|---|
 | **I — Chiude** | Il Serraglio chiude davvero? Chi lo vende? | CA-2 (primo terzo) | Starter di Celestina, PvP con il ritorno della combriccola |
 | **II — Di chi è il Serraglio?** | Chi c'è dietro? | CA-3 | Starter di Piera e di Beppe |
-| **III — Domenica** | Si firma? E chi firma? | CA-3 | La rivelazione, i finali, i segreti, il superboss |
+| **III — Lunedì** | Si firma? E chi firma? | CA-3 | La rivelazione, i finali, i segreti, il superboss |
 
 **Il filo comico.** Mara vede complotti dappertutto e nessuno le crede. Accusa uno per uno tutti, ognuno nella sua scena: Sergio in II1,
 Piera in II2a, Beppe in II2b, Celestina in II2c, Grappino in S1. Le piste si escludono, quindi per sentirle tutte servono più giri
@@ -81,8 +81,9 @@ Piera in II2a, Beppe in II2b, Celestina in II2c, Grappino in S1. Le piste si esc
 dice lei: lo urla Spazienzio, che non l'aveva detto. Mara non se ne accorge, è già passata al complotto successivo.
 
 **Il cattivo che non combatte.** Il padrone del Dimmi Di Sì resta **senza nome** (proprietario, 14 novembre 2026: «per ora rimane senza
-nome»): una figura in ombra, come la combriccola, con il suo assegno e i suoi messaggi. Non si gioca mai contro di lui; manda avanti
-Duccio, il suo buttafuori (confermato dal proprietario: «sì, ci sta»), e paga Beppe, che lavora per chi paga in contanti.
+nome»): una figura in ombra, come la combriccola, con il suo assegno e i suoi messaggi; dall'atto I riscritto (0.3.4) entra in scena solo
+alla firma. Non si gioca mai contro di lui; Duccio è il suo buttafuori (confermato dal proprietario: «sì, ci sta»), ma in I3b a dargli
+ordini è Sergio, ed è il primo depistaggio.
 
 **Sergio e Duccio si fanno «annusare»** ([D17](../../product-roadmap.md#decisioni-del-proprietario)): sono avversari, mai personaggi
 giocabili nella principale. Sergio è il cuore della storia: la sua [mini-carriera](README.md#carriere-previste) è **il prequel**, cioè
@@ -92,14 +93,14 @@ come ha comprato il Serraglio con i fondi neri.
 
 | Filo | Dove nasce | Dove torna | Che cosa cambia |
 |---|---|---|---|
-| **La chiave di Beppe** | I2a (via di Mara): Beppe cambia la serratura e, per abitudine, si tiene una copia di ogni chiave che fa. Chi non è passato da I2a la ottiene in II2b | III2b → **III3b Di notte al Serraglio**: con la chiave si entra nel bar chiuso la notte prima della firma. Chi perde III1 ci entra lo stesso, senza chiave, dalla porta sul retro che conosce Celestina (III1s) | Apre un nodo (segno `chiave`) |
+| **La chiave di Beppe** | I2a (via di Mara): Beppe cambia la serratura e si tiene sempre una copia in più, «per motivi personali». Chi non è passato da I2a la ottiene in II2b | III2b → **III3b Di notte al Serraglio**: con la chiave si entra nel bar chiuso la notte prima della firma. Chi perde III1 ci entra lo stesso, senza chiave, dalla porta sul retro che conosce Celestina (III1s) | Apre un nodo (segno `chiave`) |
 | **La frase di Piera** | Nel tutorial comincia «un signore...»; in II2a, se la difendi da chi la interrompe, arriva a «alto... e secco...». Se perdi, si offende (II2s) | III4, alla firma: con il segno la finisce, ed è la rivelazione detta da lei; senza, la interrompono di nuovo e Sergio si rivela da solo | Varianti di battuta (segno `frase`), achievement «Lasciatela finire» |
-| **Celestina lo sapeva** | I1: mezza addormentata sul pavimento, minaccia di dirlo «al padrone, quando passa stanotte». Nessuno la ascolta, salvo chi perde e ci finisce accanto (I1s) | III3b: il padrone passa davvero ogni notte, e lei lo vede da anni. È furba: lo dice per intero solo a chi le ha dato retta sul pavimento | Varianti di battuta (segno `celestina`); achievement «Lo diceva Celestina» |
-| **Il bilancio mangiato** | II2c (pista di Celestina): metà del bilancio della «Apri e Chiudi s.r.l.»; la firma manca, strappata coi denti di un cane piccolo | III1 → **S1 Il cane sa**: Grappino porta all'altra metà, con la firma | Apre il nodo segreto (segno `bilancio`) |
+| **Celestina lo sapeva** | I1s: solo chi perde I1 finisce sul pavimento accanto a lei e la ascolta: sapeva da tempo che il proprietario voleva vendere, viene di notte e guarda; dal pavimento ne ha visto solo le scarpe, a punta e lucide | III3b: il padrone passa davvero ogni notte, e lei lo vede da anni. È furba: lo dice per intero solo a chi le ha dato retta sul pavimento | Varianti di battuta (segno `celestina`); achievement «Lo diceva Celestina» |
+| **Il bilancio mangiato** | II2c (pista di Celestina): metà del bilancio della «Apri e Chiudi GmbH»; la firma manca, strappata coi denti di un cane piccolo | III1 → **S1 Il cane sa**: Grappino porta all'altra metà, con la firma | Apre il nodo segreto (segno `bilancio`) |
 | **Duccio offeso** | I2b (via di Spazienzio): Spazienzio lo umilia sulla porta del Dimmi Di Sì | II2b, III1, III3b: per Duccio diventa personale, e lo dice | Varianti di battuta (segno `duccio`) |
 
-A questi si aggiunge **la data**: in I3b il padrone del Dimmi Di Sì dice che si firma domenica. Chi è passato dall'altra via la sente in II3
-da Sergio, che se la lascia scappare («domenica sarete fuori»): un indizio in più contro di lui.
+A questi si aggiunge **la data**: in I3b Sergio, ancora senza nome, dice che il passaggio di proprietà si firma lunedì mattina. Chi è
+passato dall'altra via la sente in II3 da lui, che se la lascia scappare («lunedì sarete fuori»): un indizio in più contro di lui.
 
 ### Le sconfitte che aprono un ramo
 
@@ -130,7 +131,7 @@ sulla mappa, ma una segreta da usare sporadicamente». Quindi:
 | II2a, la frase di Piera | **II2s Piera non parla più** (scena senza partita), poi II3 | Piera, offesa, parla solo con Grappino: la frase non va avanti, e alla firma la interrompono di nuovo. Difenderla può fallire |
 | III1, contro Duccio | **III1s Sgomberati** (scena senza partita), poi III3b | Duccio butta fuori tutti; la notte sul marciapiede c'è anche Celestina, che conosce la porta sul retro: la notte al Serraglio senza la chiave |
 | III2a, il torneo | **III3c I debiti**, poi III3a | Come nella 0.2 |
-| III5, contro Sergio | **F3 Dimmi Di Sì 2** | Il finale comico |
+| III5, contro Sergio | **F3 Disco pub** | Il finale comico |
 
 ## La mappa
 
@@ -151,7 +152,7 @@ ATTO II       II1 Le voci
                  └── con Celestina ─── II2c Il bidone [bilancio]
               II3 Il muro dei complotti  (riunione: starter garantiti)
 
-ATTO III      III1 Sabato sera ── perso ── III1s Sgomberati ── (porta sul retro) ── III3b
+ATTO III      III1 Domenica sera ── perso ── III1s Sgomberati ── (porta sul retro) ── III3b
                  ├── con Beppe ─────── III2a Il torneo ──┬─ vinto ── III3a I conti ─────────────┐
                  │                                      └─ perso ─── III3c I debiti ── III3a    │
                  ├── con Mara ──────── III2b Il pedinamento ─┬─ [chiave] ── III3b Di notte ──────┤
@@ -166,26 +167,26 @@ DOPO          S2 Sergio fa sul serio  (superboss: dopo il finale F1, in un giro 
 
 | Nodo | Scena | Gioca | Contro | Partita | Insegna |
 |---|---|---|---|---|---|
-| **I1 Il cartello** | La mattina dopo il tutorial, sulla porta: «CHIUSO PER CESSIONE ATTIVITÀ. PROSSIMAMENTE: DIMMI DI SÌ 2». Spazienzio vuole sfondare la porta, Mara annusa un complotto. Dentro, sul pavimento, dorme Celestina (confermato dal proprietario: «sì, ci sta»): se il bar chiude perde il suo pavimento, e crede che siate venuti a rubarglielo. Mezza addormentata, minaccia di dirlo «al padrone, quando passa stanotte». Nessuno la ascolta | Spazienzio | Celestina | Duello | Il veleno (POISON), da chi lo usa |
-| **I1s Il pavimento** | Solo perdendo I1. Spazienzio finisce per terra accanto a Celestina, sul suo pavimento, e non può che ascoltarla: «il padrone passa ogni notte. Si siede. Guarda. Io faccio finta di dormire». Nessuno le crede, ma tu l'hai sentita. Poi Spazienzio si rialza, e si sceglie | — | — | Nessuna | Segno `celestina` |
-| *Scelta muta* | Mara vuole scoprire chi ha venduto («qualcuno sta mentendo, e sono tutti»); Spazienzio vuole andare a SPIEGARE al Dimmi Di Sì | — | — | — | Segno `via-atto-1` |
-| **I2a Il fabbro** | Beppe sta cambiando la serratura, pagato in contanti da una società che non ha mai visto: «Apri e Chiudi s.r.l.», sede in Svizzera. Perso il duello, confessa che di ogni chiave che fa si tiene una copia, «non si sa mai chi paga due volte» | Mara | Beppe | Duello | Oggetti ed equipaggiamento, da chi li usa. Segno `chiave` |
-| **I3a La bici** | Beppe, per farsi perdonare, «ripara» la bici di Mara (aggancio del proprietario); la bici esce peggio di prima, e Spazienzio ci si siede sopra | Mara | Beppe, Spazienzio | FFA a tre | Bersagli in FFA con un alleato di comodo |
-| **I2b La porta** | Alla porta del bar dei fighetti c'è Duccio, buttafuori, che prima di menare deve spiegare che è di destra. Le prende davanti a tutta la fila, e non lo dimenticherà | Spazienzio | Duccio | Duello | La difesa contro chi incassa. Segno `duccio` |
-| **I3b Virgin Cuba Libre** | Dentro, a sedici euro a bicchiere: Mara consegna un kebab che nessuno ha ordinato, Beppe monta il bancone nuovo in nero. Dall'ombra, il padrone del Dimmi Di Sì: «il vostro padrone ha già detto quasi sì. Si firma domenica» | Spazienzio | Duccio, Mara, Beppe | FFA a quattro | La FFA grande |
-| **I4 Venite voi qui!** | Serata «Salviamo il Serraglio». Arriva la combriccola, quella del «venite voi qui!» del tutorial, in ombra. Celestina prende le tue parti per la prima volta e ti dà il suo starter. La combriccola, a fine serata: «allora sfidateci voi» | Celestina | Mara, Spazienzio, Beppe | FFA a quattro | **Sblocco del PvP** e del mazzo costruito ([D5](../../product-roadmap.md#decisioni-del-proprietario)), con la busta e il negozio delle buste |
+| **I1 Il cartello** | La sera dopo il tutorial, sulla serranda: «CHIUSO PER CESSIONE ATTIVITÀ. NUOVA GESTIONE: DIMMI DI SÌ DISCO PUB». Mara annusa un complotto, Spazienzio solleva la serranda a mani nude. Dentro, sul pavimento, dorme Celestina (confermato dal proprietario: «sì, ci sta»): crede che siate venuti a saccheggiare prima della nuova gestione, e se il bar chiude perde la sua casa | Spazienzio | Celestina | Duello | Il veleno (POISON), da chi lo usa |
+| **I1s Il pavimento** | Solo perdendo I1. Spazienzio finisce per terra e Celestina gli si accoccola accanto: sapeva da tempo che il proprietario voleva vendere; «viene di notte, quando è chiuso. Si siede al bancone e guarda»; dal pavimento ne ha visto solo le scarpe, a punta e lucide. Poi si sceglie | — | — | Nessuna | Segno `celestina` |
+| *Scelta muta* | Mara vuole scoprire chi ha venduto («qui c'è un complotto, come dappertutto»); Spazienzio vuole spiegare le vostre ragioni al Dimmi Di Sì, «a modo nostro» | — | — | — | Segno `via-atto-1` |
+| **I2a Il fabbro** | La mattina dopo Beppe sta cambiando la serratura, incaricato con una lettera dalla «Apri e Chiudi GmbH», sede in Svizzera. Mara lo accusa di essere parte del codice. Perso il duello, le dà la chiave: se ne tiene sempre una copia in più, «per motivi personali» | Mara | Beppe | Duello | Oggetti ed equipaggiamento, da chi li usa. Segno `chiave` |
+| **I3a La bici** | Beppe «ripara» la bici di Mara per dieci euro in contanti (aggancio del proprietario): il manubrio esce al contrario, «così vedi chi ti segue», e Spazienzio ci si siede sopra. Mara li accusa tutti e due di essersi venduti alla massoneria | Mara | Beppe, Spazienzio | FFA a tre | Bersagli in FFA con un alleato di comodo |
+| **I2b La porta** | Alla porta del bar dei fighetti c'è Duccio, buttafuori, che dà della zecca a Spazienzio e deve spiegare che è di destra. Le prende davanti a tutta la fila, e non lo dimenticherà: «il rancore è una cosa di destra» | Spazienzio | Duccio | Duello | La difesa contro chi incassa. Segno `duccio` |
+| **I3b Virgin Cuba Libre** | Dentro, a sedici euro a bicchiere: Mara consegna uno stinco a Beppe, chiamato in nero da un signore per il Mercedes. Il signore è Sergio, che nell'atto I non ha ancora un nome («Un signore»): sa della serranda, dice che lunedì mattina si firma il passaggio di proprietà, e comanda Duccio | Spazienzio | Duccio, Mara, Beppe | FFA a quattro | La FFA grande |
+| **I4 Venite voi qui!** | Serata «Salviamo il Serraglio»: Mara o Spazienzio, secondo la via, fanno chiamare la combriccola, quella del «venite voi qui!» del tutorial, in ombra. Celestina vuole stare con voi, e chi ti ha accompagnato dubita di lei: «mettetemi alla prova». Vinta la partita ti dà il suo starter; la combriccola: «qui si fa a botte continuamente» | Celestina | Mara, Spazienzio | FFA a tre | **Sblocco del PvP** e del mazzo costruito ([D5](../../product-roadmap.md#decisioni-del-proprietario)), con la busta e il negozio delle buste |
 
 ### Atto II — Di chi è il Serraglio?
 
 | Nodo | Scena | Gioca | Contro | Partita | Insegna |
 |---|---|---|---|---|---|
-| **II1 Le voci** | Tutti hanno una teoria; Mara accusa uno per uno tutti. Entra per la prima volta Sergio: prende in giro la raccolta firme, il bar, gli avventori, e sa dei conti del bar cose che non dovrebbe sapere. Qualcuno reagisce, e Sergio si difende a modo suo. Mara: «lavora per loro. È evidente» | Uno degli starter posseduti, a scelta del giocatore | Sergio | Duello | Le contromosse, da chi le usa |
+| **II1 Le voci** | Tutti hanno una teoria; Mara accusa uno per uno tutti. Entra Sergio, e ha un nome (chi è passato da I3b lo riconosce: «il signore del Mercedes»): prende in giro la raccolta firme, il bar, gli avventori, e sa dei conti del bar cose che non dovrebbe sapere. Qualcuno reagisce, e Sergio si difende a modo suo. Mara: «lavora per loro. È evidente» | Uno degli starter posseduti, a scelta del giocatore | Sergio | Duello | Le contromosse, da chi le usa |
 | *Scelta muta* | Tre piste: la memoria di Piera, i soldi di Beppe, la spazzatura di Celestina | — | — | — | Segno `pista` |
 | **II2a La frase di Piera** | Piera si ricorda di quando, dieci anni fa, il Serraglio stava per chiudere e «un signore...». Prima ancora che cominci, Mara la accusa di coprire qualcuno. Ci mette tanto che Spazienzio la interrompe a ogni parola: andare con Piera vuol dire menare chi la interrompe. Vinto il duello, arriva a «alto... e secco...», e Mara la interrompe con un'altra teoria | Piera | Spazienzio | Duello | La L di Piera. Segno `frase`. **Una sconfitta apre un ramo** |
 | **II2s Piera non parla più** | Solo perdendo II2a. Piera si offende con tutti e parla solo con Grappino, sottovoce; la frase resta a «un signore...». Grappino, per la cronaca, ascolta | — | — | Nessuna | — |
 | **II2b Contanti** | Beppe sa chi gli ha pagato i lavori del bar dieci anni fa, uno con una valigetta di contanti, ma lo dice solo in contanti. Non ne avete: arriva Duccio a riscuotere un debito di Beppe per il Dimmi Di Sì (con il segno `duccio`: «e tu sei quello della porta»). Beppe offre lo sconto a chi lo aiuta, e se non l'avete già, la copia della chiave. Mara accusa Beppe di lavorare per tutti, e ha ragione | Beppe | Duccio | Duello | Gli oggetti dalla parte di chi li usa. Segno `chiave` |
-| **II2c Il bidone** | Celestina fruga nel bidone del bar e trova il bilancio stracciato della «Apri e Chiudi s.r.l.»; mezzo se lo mangia. Mara lo vuole per il suo muro dei complotti, Spazienzio per accendere. La firma non c'è: l'ha strappata un cane piccolo, si vedono i denti. Mara accusa Celestina di aver mangiato la prova apposta | Celestina | Mara, Spazienzio | FFA a tre | Il veleno dalla parte di chi lo usa. Segno `bilancio` |
-| **II3 Il muro dei complotti** | Mara mette insieme gli indizi sul suo muro: tutti portano a Sergio, che per lei «lavora per il Dimmi Di Sì». Lo affrontate al bancone, e Duccio si mette dalla sua parte: sembrano d'accordo. Chi non ha sentito la data in I3b la sente qui da Sergio («domenica sarete fuori»). Sergio, battuto, se ne va: «non avete capito niente». Chi ancora non ha preso le tue parti fra Piera e Beppe lo fa qui | Piera o Beppe, il primo che non lo ha ancora fatto | Sergio, Duccio | FFA a tre | Una partita in cui si sceglie chi colpire fra due che sembrano alleati |
+| **II2c Il bidone** | Celestina fruga nel bidone del bar e trova il bilancio stracciato della «Apri e Chiudi GmbH»; mezzo se lo mangia. Mara lo vuole per il suo muro dei complotti, Spazienzio per accendere. La firma non c'è: l'ha strappata un cane piccolo, si vedono i denti. Mara accusa Celestina di aver mangiato la prova apposta | Celestina | Mara, Spazienzio | FFA a tre | Il veleno dalla parte di chi lo usa. Segno `bilancio` |
+| **II3 Il muro dei complotti** | Mara mette insieme gli indizi sul suo muro: tutti portano a Sergio, che per lei «lavora per il Dimmi Di Sì». Lo affrontate al bancone, e Duccio si mette dalla sua parte: sembrano d'accordo. Chi non ha sentito la data in I3b la sente qui da Sergio («lunedì sarete fuori»). Sergio, battuto, se ne va: «non avete capito niente». Chi ancora non ha preso le tue parti fra Piera e Beppe lo fa qui | Piera o Beppe, il primo che non lo ha ancora fatto | Sergio, Duccio | FFA a tre | Una partita in cui si sceglie chi colpire fra due che sembrano alleati |
 
 **Starter garantiti.** In II3, se Piera o Beppe non hanno ancora preso le tue parti, lo fa il primo dei due; l'altro lo fa in III1. Così
 i tre starter avanzati stanno su ogni percorso ([D16](../../product-roadmap.md#decisioni-del-proprietario)), e il controllo del grafo lo
@@ -194,11 +195,11 @@ guadagna; nei nodi di garanzia (II3, III1) te le dà quando si siede al tavolo c
 si perde, come può succedere in III1. Così dopo II2s, persa la pista, Piera non ti ha ancora dato niente, e gioca in II3 se tocca a lei:
 torna al tavolo «per Grappino, non per voi».
 
-### Atto III — Domenica
+### Atto III — Lunedì
 
 | Nodo | Scena | Gioca | Contro | Partita | Insegna |
 |---|---|---|---|---|---|
-| **III1 Sabato sera** | L'ultima sera prima della firma. Duccio viene a «sgomberare» gli habitué per conto del Dimmi Di Sì (con il segno `duccio` è la sua rivincita della porta). Battuto lui, resta la notte: che cosa fare? | Chi manca fra Piera e Beppe, altrimenti a scelta | Duccio | Duello | **Una sconfitta apre un ramo** |
+| **III1 Domenica sera** | L'ultima sera prima della firma. Duccio viene a «sgomberare» gli habitué per conto del Dimmi Di Sì (con il segno `duccio` è la sua rivincita della porta). Battuto lui, resta la notte: che cosa fare? | Chi manca fra Piera e Beppe, altrimenti a scelta | Duccio | Duello | **Una sconfitta apre un ramo** |
 | **III1s Sgomberati** | Solo perdendo III1. Duccio butta fuori tutti e chiude. Sul marciapiede, al freddo, c'è anche Celestina, sfrattata dal suo pavimento: «di qua. La porta sul retro non la chiude nessuno da dieci anni». Si entra di notte senza la chiave | — | — | Nessuna | Porta a III3b |
 | *Scelta muta* | Beppe: comprarlo noi, con un torneo a pagamento e la colletta. Mara: pedinare Sergio, che «stanotte va a prendere ordini». **Solo con il segno `bilancio`:** Grappino ha in bocca un pezzo di carta e scappa in cantina | — | — | — | Segno `via-atto-3` |
 | **III2a Il torneo** | Torneo del Serraglio, iscrizione dieci euro, scommesse al bancone; l'incasso va nella colletta per una controfferta | Beppe | Mara, Spazienzio, Celestina, Piera | FFA a cinque | La FFA a cinque. **Una sconfitta apre un ramo** |
@@ -206,7 +207,7 @@ torna al tavolo «per Grappino, non per voi».
 | **III3a I conti** | Contate i soldi: mancano sempre dieci euro, e comunque non bastano. Duccio pretende la sua parte «per il disturbo»; Sergio ride della colletta, e ci mette dieci euro | A scelta | Duccio, Sergio | FFA a tre | — |
 | **III2b Il pedinamento** | Mara segue Sergio nella notte, convinta che vada dal padrone del Dimmi Di Sì. Sergio se ne accorge e la ricatta: sa del kebab mai consegnato, e di tutti gli altri | Mara | Sergio | Duello | Le contromosse dalla parte di chi le subisce |
 | **III3b Di notte al Serraglio** | Con la chiave di Beppe, dopo il pedinamento, o dalla porta sul retro, dopo lo sgombero. Il bar è chiuso e buio; c'è Celestina, sveglia: «ve l'avevo detto che passa ogni notte» (con il segno `celestina` lo racconta per intero: da quanti anni, a che ora, che cosa beve). Entra Sergio, **con le sue chiavi**, si siede al bancone vuoto e guarda il locale. Arriva Duccio con il contratto da firmare; vi scoprono | Mara dopo il pedinamento, Celestina dopo lo sgombero | Sergio, Duccio | FFA a tre, «ce l'hanno tutti con te» ([D11](../../product-roadmap.md#decisioni-del-proprietario)) | La variante dichiarata dei bersagli |
-| **III4 La firma** | Domenica, al Serraglio. Il padrone del Dimmi Di Sì entra in persona, in ombra, con l'assegno. Si aspetta chi vende: entra Sergio, e si siede dalla sua parte del tavolo. Con il segno `frase` Piera finisce la frase: «...alto... e secco... e antipatico. Era lui». Senza, comincia «un signore...», la interrompono di nuovo, e Sergio sbuffa: «sono io. Finiamola». Spazienzio: «VE L'AVEVO DETTO». Tutti al bancone, e la firma finisce in rissa | Chi ti ha accompagnato nell'atto III | Sergio, Duccio, Spazienzio, Piera | FFA a cinque | — |
+| **III4 La firma** | Lunedì mattina, al Serraglio. Il padrone del Dimmi Di Sì entra in persona, in ombra, con l'assegno. Si aspetta chi vende: entra Sergio, e si siede dalla sua parte del tavolo. Con il segno `frase` Piera finisce la frase: «...alto... e secco... e antipatico. Era lui». Senza, comincia «un signore...», la interrompono di nuovo, e Sergio sbuffa: «sono io. Finiamola». Spazienzio: «VE L'AVEVO DETTO». Tutti al bancone, e la firma finisce in rissa | Chi ti ha accompagnato nell'atto III | Sergio, Duccio, Spazienzio, Piera | FFA a cinque | — |
 | **III5 Rientrare** | A bancone chiuso, Sergio racconta (spunto del proprietario): ha comprato il Serraglio anni fa con dei fondi neri, per non farlo chiudere; ora l'offerta gli farebbe rientrare dell'investimento. «È solo business. E poi qui fate schifo.» Ma ogni sera è lì. L'ultima parola si dice a carte | Chi ti ha accompagnato nell'atto III | Sergio | Duello | Il duello contro chi annulla le mosse, al meglio delle sue carte |
 
 **Chi ti ha accompagnato nell'atto III** (regola scrivibile presa dal mockup, al posto di «l'alleato con cui hai più segni»): Beppe dopo
@@ -223,7 +224,7 @@ Confermati dal proprietario («no, vanno bene», 14 novembre 2026).
 |---|---|---|
 | **F1 Il Serraglio resta** | Vinto III5 dopo il pedinamento, lo sgombero o il segreto | Sergio straccia l'assegno. Tutti sanno che il padrone è lui e fanno finta di niente; la sera dopo lui li prende in giro come sempre. Il Dimmi Di Sì licenzia Duccio: gancio della sua mini-carriera |
 | **F2 Il Serraglio è di tutti** | Vinto III5 dopo il torneo | Sergio rientra dell'investimento con la colletta, e il bar è un po' di tutti: Celestina paga la sua quota in monetine trovate per terra. Duccio licenziato anche qui |
-| **F3 Dimmi Di Sì 2** | Perso III5 | Il Serraglio diventa il Dimmi Di Sì 2: Virgin Cuba Libre a sedici euro, gli habitué seduti fuori sul marciapiede. Celestina dorme sul pavimento nuovo. Finale comico, non un fallimento: c'è un achievement nascosto e si può rigiocare |
+| **F3 Disco pub** | Perso III5 | Il Serraglio diventa il «Dimmi Di Sì Disco Pub» del cartello: Virgin Cuba Libre a sedici euro, gli habitué seduti fuori sul marciapiede. Celestina dorme sul pavimento nuovo. Finale comico, non un fallimento: c'è un achievement nascosto e si può rigiocare |
 
 ### Segreti e 100%
 
@@ -296,7 +297,8 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
 1. Il [mockup del grafo](mockup-principale.md) nel prototipo, fatto sulla 0.2 e provato dal proprietario, si aggiorna alla 0.3: le
    tre sconfitte che aprono un ramo, le varianti di battuta nuove, i due achievement cambiati e quello nuovo.
 2. Il proprietario riscrive la scaletta dove serve: nomi dei nodi, scene, chi gioca.
-3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): prima stesura della regia o direttamente del proprietario.
+3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): l'atto I è riscritto dal proprietario (19 novembre
+   2026); seguono gli atti II e III, prima stesura della regia o direttamente del proprietario.
 4. Gli sfondi nuovi (il Dimmi Di Sì dentro, il retro del bar, la cantina) e i ritratti dei quattro, dagli
    [identikit](../set-base/identikit.md#celestina-bucatina) approvati il 12 novembre 2026.
 
@@ -316,3 +318,8 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
   non ci si arriva; I1s e II2s sono tasche senza strade proprie, III1s e III3c rami veri; F3 resta visibile.
 - **0.3.3 — 14 novembre 2026.** Quando arriva lo starter: vincendo nella propria pista, sedendosi al tavolo nei nodi di garanzia (la
   contraddizione l'ha trovata il [mockup](mockup-principale.md#sconfitte-segrete)).
+- **0.3.4 — 19 novembre 2026.** Allineata all'atto I riscritto dal proprietario: Sergio compare già in I3b, senza nome, al posto del
+  padrone del Dimmi Di Sì, e dice la data; la firma è lunedì mattina (III1 «Domenica sera», atto III «Lunedì»); in I1 Celestina non
+  minaccia più nulla e il filo «Celestina lo sapeva» nasce in I1s, dove dal pavimento vede solo le scarpe; «Apri e Chiudi GmbH»; I4 a
+  tre, con lo starter di Celestina dopo la vittoria; cartello «DIMMI DI SÌ DISCO PUB» e F3 «Disco pub»; II1 con la variante per chi ha
+  già visto Sergio.
