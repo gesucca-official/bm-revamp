@@ -1,0 +1,412 @@
+{
+ "draftSha256": "1923ed9b0e71d95884376745f0ada4563c1baa40285907923417406ede9644cc",
+ "standard": {
+  "head": "95d9dd1db2036e5d72633dc0c0daf48d5278a243",
+  "jar": "c1c1d5db55130e4a",
+  "dist": "4519cc996d44afe6",
+  "results": [
+   {
+    "name": "verify",
+    "measure": "1366x768",
+    "ok": true,
+    "seconds": 92,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "verify",
+    "measure": "844x390",
+    "ok": true,
+    "seconds": 108,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "verify",
+    "measure": "1920x1080",
+    "ok": true,
+    "seconds": 152,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "decks",
+    "measure": "1366x768",
+    "ok": true,
+    "seconds": 56,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "layout",
+    "measure": "1366x768",
+    "ok": true,
+    "seconds": 153,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "decks",
+    "measure": "844x390",
+    "ok": true,
+    "seconds": 44,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "layout",
+    "measure": "844x390",
+    "ok": true,
+    "seconds": 152,
+    "exit": 0,
+    "problems": 0
+   },
+   {
+    "name": "layout",
+    "measure": "1920x1080",
+    "ok": true,
+    "seconds": 156,
+    "exit": 0,
+    "problems": 0
+   }
+  ]
+ },
+ "750x292": {
+  "base": {
+   "summary": {
+    "head": "86b682728bb85a3de77046772b03f403ac63879f",
+    "jar": "84a520032c362be5",
+    "dist": "f4b8e8d4f8a6316e",
+    "results": [
+     {
+      "name": "build",
+      "measure": "—",
+      "ok": true,
+      "seconds": 19,
+      "exit": 0,
+      "problems": 0
+     },
+     {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 71,
+      "exit": 0,
+      "problems": 0
+     },
+     {
+      "name": "ffa",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 11,
+      "exit": 1,
+      "problems": 0
+     },
+     {
+      "name": "aim",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 210,
+      "exit": 1,
+      "problems": 2
+     },
+     {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 224,
+      "exit": 1,
+      "problems": 48
+     }
+    ]
+   },
+   "verify": {
+    "games": 2,
+    "checks": [
+     "resumedAtStart",
+     "login",
+     "noScroll",
+     "reorder",
+     "rejoin",
+     "o1o5",
+     "dragFollow",
+     "item",
+     "bound",
+     "c2a",
+     "hubReturn"
+    ],
+    "errors": []
+   },
+   "aim": {
+    "ok": false,
+    "errors": [],
+    "problems": {
+     "pending-750x292: item-Computer-0: the text of the move over a seat": 2
+    }
+   },
+   "ffa": {
+    "ok": false,
+    "queueExit": true,
+    "errors": [],
+    "problems": {
+     "devAlice/Computer overlap": 4,
+     "Computer/devAlice overlap": 4,
+     "Computer fan over devAlice": 1,
+     "Computer over the hand": 4
+    },
+    "unmatchedFailure": null
+   },
+   "layout": {
+    "ok": false,
+    "errors": [],
+    "problems": {
+     "duel-750x292 T0: overlaps Computer/hand": 1,
+     "duel-750x292 T0: layout no round cards,devAlice over hand, shell, round cards or piles,Computer over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+     "duel-750x292 T0: own 80 not larger than Computer 80": 1,
+     "duel-750x292 T0: no round cards": 1,
+     "duel-750x292 T0 close-up Computer: placed seat": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1: overlaps Computer/hand": 1,
+     "duel-750x292 T1: layout no round cards,devAlice over hand, shell, round cards or piles,Computer over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+     "duel-750x292 T1: own 80 not larger than Computer 80": 1,
+     "duel-750x292 T1: no round cards": 1,
+     "duel-750x292: no link on the round cards": 2,
+     "duel-750x292 T1 close-up Computer: placed seat": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T2: overlaps Computer/hand": 1,
+     "duel-750x292 T2: layout no round cards,devAlice over hand, shell, round cards or piles,Computer over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+     "duel-750x292 T2: own 80 not larger than Computer 80": 1,
+     "duel-750x292 T2: no round cards": 1,
+     "ffa-750x292 T0: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+     "ffa-750x292 T0: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+     "ffa-750x292 T0: own 60 not larger than Computer 60": 4,
+     "ffa-750x292 T0: no round cards": 1,
+     "ffa-750x292 T1: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+     "ffa-750x292 T1: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+     "ffa-750x292 T1: own 60 not larger than Computer 60": 4,
+     "ffa-750x292 T1: no round cards": 1,
+     "ffa-750x292: no link on the round cards": 2,
+     "ffa-750x292 T2: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+     "ffa-750x292 T2: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+     "ffa-750x292 T2: own 60 not larger than Computer 60": 4,
+     "ffa-750x292 T2: no round cards": 1,
+     "chips-750x292: status-Computer-imm-TOXICITY: «Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.» not in the inspection: ": 1
+    },
+    "total": 48,
+    "turns": {
+     "duel": [
+      6,
+      6,
+      6
+     ],
+     "ffa": [
+      11,
+      11,
+      11
+     ]
+    }
+   }
+  },
+  "b2": {
+   "summary": {
+    "head": "95d9dd1db2036e5d72633dc0c0daf48d5278a243",
+    "jar": "c1c1d5db55130e4a",
+    "dist": "4519cc996d44afe6",
+    "results": [
+     {
+      "name": "verify",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 140,
+      "exit": 0,
+      "problems": 0
+     },
+     {
+      "name": "ffa",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 10,
+      "exit": 1,
+      "problems": 0
+     },
+     {
+      "name": "aim",
+      "measure": "750x292",
+      "ok": true,
+      "seconds": 201,
+      "exit": 0,
+      "problems": 0
+     },
+     {
+      "name": "layout",
+      "measure": "750x292",
+      "ok": false,
+      "seconds": 218,
+      "exit": 1,
+      "problems": 49
+     }
+    ]
+   },
+   "verify": {
+    "games": 5,
+    "checks": [
+     "resumedAtStart",
+     "login",
+     "noScroll",
+     "reorder",
+     "rejoin",
+     "o1o5",
+     "dragFollow",
+     "bound",
+     "item",
+     "c2a",
+     "hubReturn"
+    ],
+    "errors": []
+   },
+   "aim": {
+    "ok": true,
+    "errors": [],
+    "problems": {}
+   },
+   "ffa": {
+    "ok": false,
+    "queueExit": true,
+    "errors": [],
+    "problems": {
+     "devAlice/Computer overlap": 4,
+     "Computer/devAlice overlap": 4,
+     "Computer fan over devAlice": 1,
+     "Computer over the hand": 4
+    },
+    "unmatchedFailure": null
+   },
+   "layout": {
+    "ok": false,
+    "errors": [],
+    "problems": {
+     "duel-750x292 T0: overlaps Computer/hand": 1,
+     "duel-750x292 T0: layout no round cards,Computer over hand, shell, round cards or piles,devAlice over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+     "duel-750x292 T0: own 80 not larger than Computer 80": 1,
+     "duel-750x292 T0: no round cards": 1,
+     "duel-750x292 T0 close-up Computer: placed seat": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1: overlaps Computer/hand": 1,
+     "duel-750x292 T1: layout no round cards,Computer over hand, shell, round cards or piles,devAlice over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+     "duel-750x292 T1: own 80 not larger than Computer 80": 1,
+     "duel-750x292 T1: no round cards": 1,
+     "duel-750x292: no link on the round cards": 2,
+     "duel-750x292 T1 close-up Computer: placed seat": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}": 1,
+     "duel-750x292 T2: overlaps Computer/hand": 1,
+     "duel-750x292 T2: layout no round cards,Computer over hand, shell, round cards or piles,devAlice over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+     "duel-750x292 T2: own 80 not larger than Computer 80": 1,
+     "duel-750x292 T2: no round cards": 1,
+     "ffa-750x292 T0: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+     "ffa-750x292 T0: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+     "ffa-750x292 T0: own 60 not larger than Computer 60": 4,
+     "ffa-750x292 T0: no round cards": 1,
+     "ffa-750x292 T1: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+     "ffa-750x292 T1: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+     "ffa-750x292 T1: own 60 not larger than Computer 60": 4,
+     "ffa-750x292 T1: no round cards": 1,
+     "ffa-750x292: no link on the round cards": 2,
+     "ffa-750x292 T2: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+     "ffa-750x292 T2: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+     "ffa-750x292 T2: own 60 not larger than Computer 60": 4,
+     "ffa-750x292 T2: no round cards": 1,
+     "chips-750x292: status-devAlice-imm-TOXICITY: «Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.» not in the inspection: Spazienzio de la Ucciso\n\nComputer 3 · ID Computer\n\nSalute\n100\nAllerta\n20\nViolenza\n25\nTossicità\n0\nAlcol\n0\nOggetti\n1 / 1\nMazzo\n16 carte\nStati, immunità e timer\n\nNessuno.\n\nTorna al tavolo": 1,
+     "chips-750x292: status-Computer-imm-TOXICITY: «Immune a tossicità. Blocca il suo effetto di fine turno, non costi, variazioni o veleno.» not in the inspection: ": 1
+    },
+    "total": 49,
+    "turns": {
+     "duel": [
+      6,
+      6,
+      6
+     ],
+     "ffa": [
+      11,
+      11,
+      11
+     ]
+    }
+   }
+  },
+  "b2LayoutRerun": {
+   "jar": "c1c1d5db55130e4a",
+   "dist": "4519cc996d44afe6",
+   "ok": false,
+   "errors": [],
+   "problems": {
+    "duel-750x292 T0: overlaps Computer/hand": 1,
+    "duel-750x292 T0: layout no round cards,devAlice over hand, shell, round cards or piles,Computer over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+    "duel-750x292 T0: own 80 not larger than Computer 80": 1,
+    "duel-750x292 T0: no round cards": 1,
+    "duel-750x292 T0 close-up Computer: placed seat": 1,
+    "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T0 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T1: overlaps Computer/hand": 1,
+    "duel-750x292 T1: layout no round cards,devAlice over hand, shell, round cards or piles,Computer over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+    "duel-750x292 T1: own 80 not larger than Computer 80": 1,
+    "duel-750x292 T1: no round cards": 1,
+    "duel-750x292: no link on the round cards": 2,
+    "duel-750x292 T1 close-up Computer: placed seat": 1,
+    "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":365,\"y\":208,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":437,\"y\":205,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":509,\"y\":205,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T1 close-up Computer: over the hand {\"x\":461,\"y\":99,\"w\":175,\"h\":127} {\"x\":581,\"y\":208,\"w\":120,\"h\":166}": 1,
+    "duel-750x292 T2: overlaps Computer/hand": 1,
+    "duel-750x292 T2: layout no round cards,devAlice over hand, shell, round cards or piles,Computer over hand, shell, round cards or piles,arrow to person-Computer,arrow to item-Computer,Computer close-up": 1,
+    "duel-750x292 T2: own 80 not larger than Computer 80": 1,
+    "duel-750x292 T2: no round cards": 1,
+    "ffa-750x292 T0: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+    "ffa-750x292 T0: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+    "ffa-750x292 T0: own 60 not larger than Computer 60": 4,
+    "ffa-750x292 T0: no round cards": 1,
+    "ffa-750x292 T1: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+    "ffa-750x292 T1: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+    "ffa-750x292 T1: own 60 not larger than Computer 60": 4,
+    "ffa-750x292 T1: no round cards": 1,
+    "ffa-750x292: no link on the round cards": 2,
+    "ffa-750x292 T2: overlaps devAlice/Computer,Computer/piles,Computer/hand": 1,
+    "ffa-750x292 T2: layout no round cards,devAlice/Computer,devAlice/backs of Computer,Computer over hand, shell, round cards or piles,Computer/devAlice,Computer over hand, shell, round cards or piles,devAlice target close-up,Computer target close-up,Computer close-up,Computer close-up,Computer close-up": 1,
+    "ffa-750x292 T2: own 60 not larger than Computer 60": 4,
+    "ffa-750x292 T2: no round cards": 1
+   },
+   "total": 47,
+   "turns": {
+    "duel": [
+     6,
+     6,
+     6
+    ],
+    "ffa": [
+     11,
+     11,
+     11
+    ]
+   }
+  },
+  "chipsProblem": {
+   "b2FirstRun": "chips: status-devAlice-imm-TOXICITY not in the inspection (inspection opened on the Computer seat)",
+   "b2Rerun": "not reproduced",
+   "base": "chips: status-Computer-imm-TOXICITY not in the inspection (same check, same cause, other seat)",
+   "verdict": "flaky, unrelated to B2: the check depends on which seat the inspection opens and on the random characters; present on the base"
+  }
+ }
+}

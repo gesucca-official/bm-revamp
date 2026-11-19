@@ -6,7 +6,7 @@ import {subtype} from './scene.ts';
 import {groupKeyDown} from './a11y.ts';
 import {ROLES,roleOf} from './readability.ts';
 import {frameOf,type FrameKind} from './frames.ts';
-import {CardFrame,Cost,DamagePills,Gains,PressButton,effect,resourceNames,targetNames} from './ui.tsx';
+import {CardFrame,Cost,DamagePills,EffectText,Gains,PressButton,resourceNames,targetNames} from './ui.tsx';
 import {BOUND_CARDS,INITIAL_CARDS,MAX_COPIES,REGULAR_CARDS,addRegular,allowedLastResorts,canAdd,catalogOrder,copies,copiesOf,editCopy,emptyDraft,initialCards,
  ownBasics,ownBounds,payload,problems,removeRegular,setBasic,setCharacter,setLastResort,setName,shown,toggleBound,type Draft,type Pool} from './deck.ts';
 
@@ -21,7 +21,7 @@ function CardFace({card,full=false,count}:{card:Card;full?:boolean;count?:number
    <small>{subtype(card).toLocaleLowerCase('it')}{!card.item&&<> · costo <Cost card={card}/></>}{!card.item&&<DamagePills card={card}/>}</small>
    {(role||(card.gains&&card.gains!=='—'))&&<small>{role&&`${ROLES[role].label.toLowerCase()}`}{card.gains&&card.gains!=='—'&&<>{role&&' · '}ti dà <Gains card={card}/></>}</small>}
    {full&&!card.item&&<small>Bersaglio: {card.canTarget.map(t=>targetNames[t]).join(' / ')}</small>}
-   <p>{effect(card)}</p></div></div>;
+   <p><EffectText card={card}/></p></div></div>;
 }
 function CharacterFace({character}:{character:CharacterCard}){
  return <div className="cc" data-testid="character-face" data-binding={character.bindingName} data-frame="character"><Art binding={character.bindingName} kind="character"/>

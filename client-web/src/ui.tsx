@@ -7,7 +7,7 @@ import {MARK_LAYERS,SYMBOL_LAYERS,edgeFor,svgParts,symbolColors,type Ground,type
 
 export const resourceNames:Record<string,string>=RESOURCE_NAMES;
 export const targetNames:Record<string,string>={SELF:'Te stesso',OPPONENT:'Un avversario',NEAR_ITEM:'Un tuo oggetto',FAR_ITEM:'Un oggetto avversario'};
-export const effect=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effect,'text/html');return (doc.querySelector('p:last-child')?.textContent||doc.body.textContent||'').replace(/\s*Riferimento: Regolamento[\s\S]*$/,'').trim();};
+const effect=(c:Card)=>{const doc=new DOMParser().parseFromString(c.effect,'text/html');return (doc.querySelector('p:last-child')?.textContent||doc.body.textContent||'').replace(/\s*Riferimento: Regolamento[\s\S]*$/,'').trim();};
 
 const hex=(n:number)=>`#${n.toString(16).padStart(6,'0')}`;
 /** C4-3: a symbol of symbols.ts in HTML: the same layers the table draws with Pixi, as SVG (catalog, editor, inspection, help). */
@@ -24,6 +24,31 @@ export function MeasuredFrame({kind}:{kind:FrameKind}){const holder=useRef<HTMLS
 /** `ground`: C4-8a 3b, the ground it lies on (the coins and pills of the shell are light): the three symbols that need it get an outline there. */
 export const SymbolMark=({kind,className,colors,px,ground}:{kind:SymbolKind;className?:string;colors?:{main:string;accent?:string};px?:number;ground?:Ground})=>{const edge=edgeFor(kind,ground);
  return <SvgMark layers={SYMBOL_LAYERS[kind]} colors={{...(colors??symbolColors(kind)),...(edge!==undefined?{edge:hex(edge)}:{})}} className={className} px={px}/>;};
+
+const effectResources=new Map<string,Resource>([
+ ['[[H]]','HEALTH'],['[[A]]','ALERTNESS'],['[[V]]','VIOLENCE'],['[[T]]','TOXICITY'],['[[L]]','ALCOHOL']
+]);
+export function EffectText({card}:{card:Card}){
+ const text=effect(card);
+ const parts:React.ReactNode[]=[];
+ let start=0;
+ // Keep the quantity and adjacent punctuation with the symbol when the line wraps.
+ for(const match of text.matchAll(/([+−-]?\d+ )?(\[\[[\s\S]*?\]\])([.,;:!?)»])?/gu)){
+  const [whole,amount,token,punctuation]=match;
+  const resource=effectResources.get(token);
+  if(!resource)continue;
+  const index=match.index;
+  const name=resourceNames[resource].toLowerCase();
+  parts.push(text.slice(start,index),<span key={index} className="effect-term">{amount}
+   <span className="effect-resource" role="img" aria-label={name} title={name}><SymbolMark kind={resource} ground="light"/></span>
+   {punctuation}</span>);
+  start=index+whole.length;
+ }
+ if(!parts.length)return text;
+ parts.push(text.slice(start));
+ return parts;
+}
+
 /** ✓ and ✕ as shapes in the colour of the text, in place of the glyphs Impact and Arial lack. */
 export const Mark=({kind,className}:{kind:MarkKind;className?:string})=><SvgMark layers={MARK_LAYERS[kind]} colors={{main:'currentColor'}} className={`mark${className?` ${className}`:''}`} px={20}/>;
 /** C3-5: the symbol of a type of damage in HTML (catalog, editor, inspection). */

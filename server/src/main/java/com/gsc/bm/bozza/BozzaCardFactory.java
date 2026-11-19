@@ -9,6 +9,7 @@ import com.gsc.bm.sim.DraftSource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class BozzaCardFactory implements CardFactoryService {
         if (card.isCharacterBound()) keyword(out, "fallbackMove");
         if (card.getPriority() > 1) keyword(out, "firstStrike");
         if (card.getPriority() < 1) keyword(out, "lastStrike");
-        return out.append("<p>").append(description).append("</p>").toString();
+        return out.append("<p>").append(HtmlUtils.htmlEscape(description, "UTF-8")).append("</p>").toString();
     }
 
     private void keyword(StringBuilder out, String keyword) {

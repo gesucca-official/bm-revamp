@@ -333,6 +333,20 @@ dialog p,dialog dd,dialog dt {
   border-top: 1px solid var(--border);
   padding-top: 16px;
 }
+.effect-term {
+  white-space: nowrap;
+}
+.effect-resource {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -.12em;
+}
+.effect-resource svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .menu {
   padding: 12px 24px;
 }
