@@ -7,7 +7,11 @@
 > ([regole](README.md#come-si-scrivono-le-scene)).
 >
 > **Atto II riscritto dal proprietario il 19 novembre 2026,** sulla prima stesura della regia dello stesso giorno e sulla
-> [scaletta 0.3.5](principale.md), con le correzioni approvate elencate nelle [note](#atto-ii). Poi l'atto III.
+> [scaletta 0.3.5](principale.md), con le correzioni approvate elencate nelle [note](#atto-ii).
+>
+> **Atto III, prima stesura della regia del 19 novembre 2026,** sulla [scaletta 0.3.6](principale.md) e sulle sue note
+> [«Da tenere per l'atto III»](principale.md#da-tenere-per-latto-iii): l'atto, i finali F1–F3, i segreti S1 e S2 e gli
+> achievement. Da rivedere dal proprietario; scelte, proposte e domande sono nelle [note](#atto-iii).
 
 **Come si legge.** Come il [tutorial](tutorial-dialoghi.md#tutorial--dialoghi): `**Nome** (espressione): testo` è una battuta; chi non è
 un personaggio del gioco (la combriccola) è una figura in ombra; `[Regia: …]` e gli altri comandi fra parentesi quadre non si leggono; il
@@ -639,6 +643,660 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 → Vai a: III1
 
+## III1 — Domenica sera
+
+[Sfondo: S2 di sera. Regia: l'ultima sera del Serraglio. Lo striscione «SALVIAMO IL SERRAGLIO» pende da un lato solo. In fondo al bancone Sergio, la sigaretta sottile accesa sopra un posacenere di latta; Piera al suo posto.] [Entra: grappino seduto]
+
+**Mara** (agitata): Domenica sera. Domani mattina firmano, e noi abbiamo una petizione con tre firme. Una è una macchia.
+
+**Spazienzio** (serio): LA MACCHIA È LA MIA. È LA FIRMA PIÙ BELLA CHE HO.
+
+[Regia: la porta si spalanca. Entra Duccio, un rotolo di nastro bianco e rosso in una mano e il cocktail nell'altra.]
+
+**Duccio** (fiero): Sgombero! Per conto del Dimmi Di Sì. Da stasera qui dentro si entra solo con la lista.
+
+[Se segno duccio] **Duccio** (fiero): E tu, zecca della porta: te l'avevo detto che il rancore è una cosa di destra. Stasera esci per primo, a calci.
+
+**Mara** (sospettosa): E lui? Lui non lo sgomberi?
+
+**Duccio** (serio): Il signore è un cliente pagante. Resta quanto gli pare.
+
+**Sergio** (strafottente): Godetevi l'ultima sera, gente. Domani mattina alle nove si firma, e alle nove e cinque si ristruttura.
+
+[Se non segno pista = beppe e non segno ii3 = beppe] **Beppe** (tranquillo): Sgombero? Il Dimmi Di Sì mi paga con il bonifico. Io odio il bonifico. Stasera sto con voi.
+
+[Se non segno pista = beppe e non segno ii3 = beppe] [Segno: iii1 = beppe] [Sblocca: starter-beppe]
+
+**Spazienzio** (furioso): SGOMBERARE ME? IO QUI SONO ARREDAMENTO! INCHIODIAMOTI AL PAVIMENTO!
+
+→ Partita III1: {iii1} o a scelta fra Mara, Spazienzio, Celestina, Piera e Beppe (giocatore) contro Duccio
+
+[Sconfitta: → III1s]
+
+[Regia: Duccio esce zoppicando, il nastro bianco e rosso avvolto intorno a una gamba.]
+
+**Duccio** (dolorante): Ci vediamo domattina. E domattina il nastro lo taglio io!
+
+[Regia: Sergio spegne la sigaretta nel posacenere, lascia sul bancone esattamente il conto ed esce senza fretta.]
+
+**Sergio** (annoiato): Bella rissa. L'ultima. Buonanotte, gente.
+
+**Mara** (illuminata): Esce a mezzanotte, di domenica. Va a prendere ordini, ve lo dico io. Stanotte lo seguo.
+
+**Beppe** (pensieroso): Oppure il Serraglio ce lo compriamo noi. Un torneo, dieci euro l'iscrizione, scommesse al bancone. In contanti.
+
+**Spazienzio** (soddisfatto): UN TORNEO? MENIAMOCI A PAGAMENTO!
+
+[Regia: Grappino trotta fino al posacenere di Sergio, lo annusa a lungo, poi guarda la porta da cui Sergio è uscito.]
+
+**Piera** (brilla): Grappino... lascia stare... la roba... degli altri...
+
+[Se segno bilancio] *Grappino tira fuori da sotto lo sgabello di Sergio un pezzo di carta unta, se lo mette in bocca e scappa giù per le scale della cantina.*
+
+[Se segno bilancio] **Celestina** (furba): Carta buona, unta, con i segni dei denti. La conosco. Il cane sa qualcosa che noi non sappiamo.
+
+→ Scelta muta: e stanotte?
+
+- con Beppe, a comprarlo noi con un torneo [Segno: via-atto-3 = torneo] [Segno: alleato = beppe] → III2a
+- con Mara, a pedinare Sergio [Segno: via-atto-3 = pedinamento] [Segno: alleato = mara] → III2b
+- con Celestina, dietro a Grappino in cantina [Se segno bilancio] [Segno: via-atto-3 = grappino] [Segno: alleato = celestina] → S1
+
+## III1s — Sgomberati
+
+[Nodo: segreto]
+
+[Sfondo: S1 insegna-spenta, di notte. Regia: il marciapiede davanti al Serraglio. Duccio abbassa la serranda e ci incrocia sopra il nastro bianco e rosso. Il gruppo è fuori, al freddo.]
+
+**Duccio** (beato): Fuori tutti, e chiuso. Ah, che soddisfazione. Domattina lo racconto al padrone.
+
+[Se segno duccio] **Duccio** (fiero): E tu, zecca: la porta del Dimmi Di Sì me la sono ripresa con gli interessi. Il rancore è una cosa di destra.
+
+[Regia: Duccio se ne va col suo cocktail. Sul marciapiede, avvolta in una coperta presa chissà dove, c'è anche Celestina.]
+
+**Spazienzio** (fumante): CI HANNO BUTTATO FUORI DAL NOSTRO BAR. STANOTTE DORMIAMO PER STRADA. ACCAMPIAMOCI!
+
+**Celestina** (triste): Voi una casa ce l'avete. Io avevo un pavimento.
+
+[Se segno chiave] **Mara** (illuminata): Ma noi abbiamo la chiave di Beppe! Apriamo e rientriamo!
+
+[Se segno chiave] **Celestina** (furba): Dalla serranda, sotto il naso di Duccio che fa il giro dell'isolato? Brava. Così ci prende tutti.
+
+**Celestina** (furba): Di qua. La porta sul retro non la chiude nessuno da dieci anni.
+
+**Mara** (sospettosa): Dieci anni? E tu come lo sai?
+
+**Celestina** (furba): Perché da dieci anni ci entro io.
+
+[Segno: via-atto-3 = sgombero] [Segno: alleato = celestina]
+
+[Achievement: Porta sul retro]
+
+→ Vai a: III3b
+
+## III2a — Il torneo
+
+[Sfondo: S2 di sera. Regia: i tavolini messi in fila. Su una lavagna, a gesso: «TORNEO DEL SERRAGLIO — ISCRIZIONE 10 € — SCOMMESSE AL BANCONE». Beppe ha le cuffie al collo e una scatola di latta per i soldi.]
+
+**Beppe** (contento): Torneo del Serraglio! Dieci euro l'iscrizione, in contanti. L'incasso va nella colletta, e con la colletta ci compriamo il bar.
+
+**Mara** (sospettosa): E la cassa chi la tiene? Tu? Quello che lavora per chiunque paghi?
+
+**Beppe** (tranquillo): Stavolta pago io: il montepremi lo anticipo di tasca mia. Se vinco, resta tutto nella colletta.
+
+**Spazienzio** (eccitato): UN TORNEO DOVE CI SI MENA TUTTI CONTRO TUTTI? ISCRIVIAMOTI SUBITO!
+
+[Regia: Celestina rovescia il marsupio sul bancone: monetine, un bottone, una caramella incartata.]
+
+**Celestina** (furba): Dieci euro. Contali pure. Il bottone è la mancia.
+
+**Piera** (brilla): Io... scommetto... su di me... che io... a carte... dieci anni fa...
+
+[Stacchi: Spazienzio fumante, Mara neutra] [Interrotta]
+
+**Beppe** (contento): Piera è iscritta. Musica!
+
+[Regia: Beppe si mette le cuffie; ne esce un metal piccolissimo e cattivo.]
+
+→ Partita III2a: Beppe (giocatore) contro Mara, Spazienzio, Celestina e Piera
+
+[Sconfitta: → III3c]
+
+**Beppe** (contento): Vinto! Il montepremi resta in famiglia. Contiamo, gente.
+
+→ Vai a: III3a
+
+## III3c — I debiti
+
+[Nodo: segreto]
+
+[Sfondo: S2 disordine, di sera. Regia: i tavolini rovesciati. Beppe guarda dentro la scatola di latta: è vuota.]
+
+**Beppe** (scocciato): Perso. Il montepremi l'avevo anticipato io, le scommesse le ho coperte io. Adesso devo soldi a mezzo bar.
+
+**Celestina** (furba): A me, per esempio. Avevo scommesso contro di te. Quarantadue euro, anche in monetine.
+
+[Regia: la porta si apre. Entra Duccio, con il blocchetto delle ricevute.]
+
+**Duccio** (fiero): Beppe. Il Dimmi Di Sì rivuole l'anticipo dei lavori. Stasera, tutto, in contanti.
+
+[Se non segno pista = beppe] **Mara** (illuminata): L'anticipo dei lavori? Allora lavori per loro! Lo sapevo!
+
+[Se non segno pista = beppe] **Beppe** (tranquillo): Per loro, per voi, per chiunque. Stasera però lavoro per pagare.
+
+**Beppe** (serio): Facciamo così: doppio o niente. Se vinco, siamo pari. Se perdo, lavori in nero gratis, per tutti, fino a Natale.
+
+**Duccio** (beato): Lavoro gratis fino a Natale. Questa sì che è una cosa di destra. Ci sto.
+
+**Celestina** (contenta): Anch'io. Mi serve un comodino. Per il pavimento.
+
+→ Partita III3c: Beppe (giocatore) contro Duccio e Celestina
+
+**Ritento.** **Beppe** (annoiato): Fino a Natale no. Mi metto in cuffia qualcosa di più pesante. · **Duccio** (fiero): Altro giro! Il lavoro gratis nobilita!
+
+**Duccio** (dolorante): Pari... per stasera. L'anticipo però lo rivoglio.
+
+**Beppe** (tranquillo): Pari. E la colletta è a zero. Andiamo a contare quello che resta.
+
+→ Vai a: III3a
+
+## III3a — I conti
+
+[Sfondo: S2 di notte. Regia: sul bancone la scatola di latta aperta: monetine in pile storte, banconote stropicciate, un bottone. Duccio appoggiato al bancone con il blocchetto delle ricevute; Sergio è tornato sul suo sgabello, come se non se ne fosse mai andato.]
+
+**Mara** (pensierosa): Trecentoquaranta... trecentoquarantacinque... Mancano dieci euro. Mancano sempre dieci euro.
+
+[Se visto III3c] **Beppe** (scocciato): Mancano dieci euro, i debiti e il montepremi. Diciamo che mancano dieci euro e basta.
+
+**Beppe** (pensieroso): E comunque non basta. Per un bar ci vuole... beh, un po' di più.
+
+**Duccio** (fiero): Una colletta è una transazione, e le transazioni le controlla il Dimmi Di Sì. Il dieci per cento, per il disturbo.
+
+**Spazienzio** (furioso): IL DISTURBO TE LO DO IO! DISTURBIAMOTI!
+
+**Duccio** (offeso): Calma, zecca! Io qui faccio l'arbitro. L'arbitro non si tocca: è una cosa di destra.
+
+**Sergio** (strafottente): Una colletta. Che tenerezza. Volete comprare un bar con le monetine trovate per terra?
+
+**Celestina** (furba): Ehi. Le monetine sono mie.
+
+**Sergio** (malvagio): Facciamo così: una partita, voi contro me. Se vincete, ci metto i miei dieci euro. Così almeno il conto torna.
+
+→ Partita III3a: a scelta fra Beppe, Mara, Spazienzio, Celestina e Piera (giocatore) contro Sergio
+
+**Ritento.** **Sergio** (annoiato): Ancora? I miei dieci euro sono al sicuro come in Svizzera. · **Duccio** (fiero): L'arbitro dice: si rigioca!
+
+[Regia: Sergio posa sul bancone una banconota da dieci euro piegata in quattro. Duccio la prende al volo.]
+
+**Duccio** (beato): Il mio dieci per cento. Per il disturbo.
+
+**Mara** (agitata): Visto? Mancano di nuovo dieci euro! È un complotto matematico!
+
+**Sergio** (strafottente): Domattina alle nove, gente. Portate la colletta: mi farà ridere.
+
+→ Vai a: III4
+
+## III2b — Il pedinamento
+
+[Sfondo: S1 insegna-spenta, di notte. Regia: la strada dietro al Serraglio. Mara rasente il muro, il casco di stagnola stretto in mano come una torcia; più avanti una sagoma alta e la brace di una sigaretta sottile.]
+
+**Mara** (sospettosa): Giù, {giocatore}. Stanotte va a prendere ordini dal Dimmi Di Sì, e noi lo becchiamo con le mani nel sacco.
+
+**Mara** (agitata): Se si gira, fai finta di essere un lampione. I lampioni vedono tutto, ma nessuno guarda i lampioni.
+
+[Regia: Sergio si ferma sotto un lampione, senza voltarsi.]
+
+**Sergio** (annoiato): Contromano. Mi segui da tre isolati con un casco di carta stagnola in mano. Ti si vede dalla luna.
+
+**Mara** (agitata): Come fai a sapere il mio cognome? Chi te l'ha detto? I Navaho?
+
+**Sergio** (strafottente): So tante cose. Per esempio: kebab tripla cipolla, triplo piccante. Rifiutato, mai consegnato.
+
+**Sergio** (malvagio): Ero sul mio sgabello, quella sera. L'ordine sulla tua app è ancora aperto. Una recensione, e consegni a piedi per sempre.
+
+**Mara** (arrabbiata): Questo è un ricatto! Lo sapevo che eri tu a leggermi i pensieri!
+
+**Sergio** (strafottente): E non c'è solo il kebab. Il sushi di martedì, la pizza di giovedì... Vuoi che continui?
+
+**Mara** (seria): No. Voglio che tu stia zitto.
+
+→ Partita III2b: Mara (giocatore) contro Sergio
+
+**Ritento.** **Sergio** (annoiato): Recensione: una stella. Vuoi riprovare? · **Mara** (agitata): Non mi interessa! La stagnola mi protegge!
+
+[Regia: Sergio si sistema la giacca, si gira e sparisce nel buio, verso il Serraglio.]
+
+**Sergio** (strafottente): Tieniti il kebab. Stanotte ho cose più importanti da fare.
+
+**Mara** (illuminata): Va verso il Serraglio! L'incontro segreto è lì, nel nostro bar!
+
+[Se segno chiave] **Mara** (contenta): E noi abbiamo la chiave di Beppe. Entriamo dalla serratura nuova, piano piano.
+
+[Se non segno chiave] **Mara** (pensierosa): E noi la chiave non ce l'abbiamo. Va bene: domattina, alla firma, lo smaschero davanti a tutti.
+
+→ Vai a: III3b [Se segno chiave]
+
+→ Vai a: III4
+
+## III3b — Di notte al Serraglio
+
+[Sfondo: S2 al buio. Regia: il bar chiuso, le sedie sui tavoli. L'unica luce è la brace di una sigaretta sottile in fondo al bancone: Sergio è già lì, sul suo sgabello, e guarda il locale vuoto. Non si accorge di nessuno.]
+
+[Se segno via-atto-3 = pedinamento] *La chiave di Beppe gira nella serratura nuova senza un rumore. Per terra, dietro al bancone, due occhi svegli: Celestina.*
+
+[Se segno via-atto-3 = sgombero] *La porta sul retro si apre con una spallata di Celestina. Dentro, odore di birra e di candeggina.*
+
+**Celestina** (furba): Giù, per terra. Da quaggiù nessuno ti nota, ma si vede tutto.
+
+[Se segno celestina] **Celestina** (furba): Ve l'avevo detto che viene di notte. Da dieci anni, alle due in punto. Si versa un amaro da solo, e guarda.
+
+[Se segno celestina] **Celestina** (triste): Perché non l'ho detto prima? E a chi? A una che dorme per terra non crede nessuno.
+
+[Se non segno celestina] **Celestina** (neutra): Qui passa qualcuno, dopo la chiusura. Tutte le notti. Io faccio finta di dormire.
+
+**Mara** (sospettosa): Visto? Aspetta qualcuno. È qui che prende gli ordini.
+
+[Regia: la serranda si alza a metà con uno strattone. Entra Duccio, piegato in due, con una busta gialla chiusa.]
+
+**Duccio** (serio): Capo, la busta per domattina, da parte del padrone. Chiusa, come ha detto lei.
+
+**Sergio** (annoiato): Bravo. Posala lì e non toccare niente.
+
+**Mara** (agitata): La busta coi soldi! Lo pagano per farci chiudere!
+
+[Se segno duccio] **Duccio** (fiero): Chi ha parlato? Tu! La zecca della porta! Stanotte mi prendo la rivincita, e al buio non ci vede nessuno.
+
+[Se non segno duccio] **Duccio** (fiero): Chi c'è là sotto? Capo, ci sono delle zecche sotto il bancone!
+
+**Sergio** (strafottente): Ma guarda: le pantegane del Serraglio. Duccio, sgombera. E stavolta fallo bene.
+
+→ Partita III3b: {alleato} (giocatore) contro Sergio e Duccio
+
+[Modificatori: ce l'hanno tutti con te]
+
+**Ritento.** **Sergio** (annoiato): Ancora qui? Questo bar attira gli scarafaggi. · **Duccio** (fiero): Al buio sono ancora più di destra!
+
+[Regia: Duccio scappa dalla serranda, zoppicando. Sergio si infila la busta in tasca senza aprirla e va verso l'uscita.]
+
+**Sergio** (strafottente): Domattina alle nove. Puntuali, mi raccomando: non vorrei che vi perdeste lo spettacolo.
+
+**Celestina** (assonnata): Viene, guarda, se ne va. Adesso qualcuno mi canta la ninna nanna?
+
+→ Vai a: III4
+
+## S1 — Il cane sa
+
+[Nodo: segreto]
+
+[Sfondo: S2 al buio. Regia: la cantina del Serraglio, fra casse vuote e fusti di birra. In un angolo il nascondiglio di Grappino: un tappo, una ciabatta nera col pelo, mozziconi di sigarette sottili, carte unte. Grappino ci sta seduto sopra, il suo pezzo di carta fra le zampe.] [Entra: grappino seduto]
+
+**Celestina** (furba): Ecco dove finisce la roba che sparisce dal bancone. Una ciabatta di Piera, un tappo... e mozziconi di sigarette sottili.
+
+**Mara** (illuminata): Il cane! È sempre stato il cane! Ruba documenti per conto di qualcuno. È addestrato, l'ho sempre detto!
+
+[Sprite: grappino ringhia]
+
+**Mara** (sospettosa): Per chi lavori, eh? Parla!
+
+*Grappino guarda Mara. Mara guarda Grappino. Vince Grappino.*
+
+[Regia: dalle scale scende Piera, lentissima, il bicchierino in mano.]
+
+**Piera** (offesa): Il cane... non si tocca... che lui... è bono... e quella roba... è sua...
+
+**Celestina** (furba): Piera, a me serve solo un foglio. Quello unto, lì sotto.
+
+**Piera** (offesa): Allora... devi passare... da me... che io... dieci anni fa... a carte...
+
+[Stacchi: Mara neutra] [Interrotta]
+
+**Celestina** (contenta): Ho capito, si gioca. Al buio, contro una che difende un cane. Una sera qualunque.
+
+→ Partita S1: Celestina (giocatore) contro Piera
+
+[Modificatori: il cane difende le sue cose, la cantina è buia]
+
+**Ritento.** **Piera** (brilla): Ancora te... che vuoi... la roba... del Grappino... · **Celestina** (assonnata): Al buio ci vedo benissimo. È che mi viene sonno.
+
+[Regia: Piera alza il bicchierino. Grappino molla tutto e corre da lei.]
+
+**Piera** (contenta): Grappino... vieni... un altro... grappino...
+
+*Il pezzo di carta di Grappino è la metà che mancava al bilancio della Apri e Chiudi GmbH, con i segni dei denti. In fondo, la firma: «S. Sommerso».*
+
+**Celestina** (pensierosa): S. Sommerso. Sergio. Il Serraglio è suo. È lui che vende.
+
+**Mara** (illuminata): No, no, no. È un prestanome! I poteri forti usano sempre un prestanome. E i prestanome usano i cani!
+
+**Celestina** (furba): «Uno scemo, o uno che in fondo gli vuole bene». E Sergio scemo non è.
+
+**Celestina** (contenta): {giocatore}, tienilo tu. Domattina lo posi sul tavolo, e stiamo a guardare che faccia fa.
+
+[Achievement: Il cane sa]
+
+→ Vai a: III4
+
+## III4 — La firma
+
+[Sfondo: S1 di giorno. Regia: lunedì mattina, le nove meno cinque. Davanti alla serranda chiusa: il padrone del Dimmi Di Sì, in ombra, con una cartellina e un assegno; Duccio dietro di lui, il cocktail anche a quest'ora; tutto il Serraglio sul marciapiede.]
+
+**Il padrone del Dimmi Di Sì**: Buongiorno. Aspetto chi vende, il rappresentante della Apri e Chiudi GmbH. Le chiavi le ha lui.
+
+[Regia: arriva Sergio, senza fretta, la sigaretta sottile accesa. Tira fuori di tasca un mazzo di chiavi vecchio e pesante e apre la serratura nuova al primo colpo.]
+
+**Beppe** (pensieroso): Quella serratura l'ho montata io. E quel mazzo di chiavi l'ho spedito io. In Svizzera.
+
+**Mara** (illuminata): In Svizzera? Allora è un agente svizzero! I poteri forti sono neutrali, lo sanno tutti!
+
+[Regia: Sfondo: S2 di giorno. Al centro un tavolino con due sedie, una di fronte all'altra. Il padrone si siede da una parte e posa l'assegno.]
+
+[Se segno via-atto-3 = grappino] *Prima che Sergio si sieda, {giocatore} posa sul tavolo l'altra metà del bilancio, quella con la firma. Senza dire niente.*
+
+[Regia: Sergio si siede dall'altra parte del tavolo: dalla parte di chi vende.]
+
+[Se segno frase] **Piera** (contenta): ...dieci anni fa... il signore... che ha salvato... il Serraglio... era alto... e secco...
+
+[Stacchi: Spazienzio quasi calmo, Mara neutra]
+
+[Se segno frase] **Piera** (contenta): ...e antipatico. Era lui.
+
+[Se segno frase] **Sergio** (annoiato): Dieci anni per finire una frase. Complimenti, Piera.
+
+[Se non segno frase] **Piera** (brilla): Dieci anni fa... un signore...
+
+[Stacchi: Spazienzio fumante] [Interrotta]
+
+[Se non segno frase] **Sergio** (annoiato): Sì, sono io. Finiamola.
+
+**Spazienzio** (estremamente furioso): VE L'AVEVO DETTO!
+
+**Mara** (agitata): Nessuno tocchi l'assegno! È un assegno che si autodistrugge, l'ho visto in un film!
+
+[Se segno celestina] **Celestina** (furba): Le scarpe. A punta, lucide. Te l'avevo detto, Spazienzio: si siede al bancone e guarda.
+
+**Duccio** (offeso): Un momento. Capo... e capo? Ma allora io per chi lavoro?
+
+**Il padrone del Dimmi Di Sì**: Per me.
+
+**Sergio** (strafottente): Per chi paga, Duccio. Come tutti, qui dentro. Dov'è la penna?
+
+**Spazienzio** (furioso): LA PENNA? IO VI FIRMO LA FACCIA! RIBALTIAMOTI!
+
+[Regia: Spazienzio ribalta il tavolino. Il bicchierino di Piera vola, Grappino morde la prima caviglia che trova, ed è la rissa.] [Scossa]
+
+**Piera** (offesa): Il mio... bicchierino... adesso... menate... tutti...
+
+[Se segno alleato = beppe] **Beppe** (contento): Cuffie, metal, e giù botte. Questa la offre la casa!
+
+[Se segno alleato = mara] **Mara** (seria): {giocatore}, al tavolo! Io tengo il casco, così i pensieri restano al sicuro.
+
+[Se segno alleato = celestina] **Celestina** (contenta): Una rissa al bancone di lunedì mattina. Mi mancava.
+
+→ Partita III4: {alleato} (giocatore) contro Sergio, Duccio, Spazienzio e Piera
+
+**Ritento.** **Spazienzio** (furioso): NON È FINITA FINCHÉ NON HO RIBALTATO TUTTO! · **Sergio** (annoiato): Che noia. Rifacciamo.
+
+[Regia: la rissa finisce. Il padrone del Dimmi Di Sì aspetta in un angolo, l'assegno in mano, intatto.]
+
+**Il padrone del Dimmi Di Sì**: L'offerta resta valida fino a stasera. Poi la ritiro.
+
+→ Vai a: III5
+
+## III5 — Rientrare
+
+[Sfondo: S2 di sera. Regia: a bancone chiuso, le sedie sui tavoli, l'assegno sul bancone. Sergio sul suo sgabello in fondo; tutti gli altri in piedi davanti a lui.]
+
+**Sergio** (annoiato): Volete la storia? Dieci anni fa questo posto stava per chiudere. Debiti fino al soffitto.
+
+**Sergio** (neutro): L'ho comprato io, con dei fondi neri, a nome di una società che apre e chiude. La cosa più onesta che abbiano mai comprato.
+
+**Sergio** (annoiato): Adesso il Dimmi Di Sì mi offre il triplo. Rientro dell'investimento, e anche di più. È solo business.
+
+**Sergio** (malvagio): E poi qui fate schifo. Il bere fa schifo, la gente fa schifo, e il cane mi ruba le carte.
+
+[Se segno via-atto-3 = grappino] **Sergio** (neutro): E tu, {giocatore}, l'hai capito prima di tutti. Col cane. Pensavo che le mie carte se le mangiasse.
+
+**Celestina** (furba): Però tutte le sere sei qui. E di notte pure. E il pavimento non me l'hai mai chiesto indietro.
+
+**Sergio** (annoiato): Il pavimento è l'unica cosa che qui non fa schifo. Te lo lascio perché stai zitta.
+
+**Celestina** (contenta): E io sto zitta perché me lo lasci. Patti chiari.
+
+[Se segno via-atto-3 = torneo] **Beppe** (serio): E se il Serraglio te lo compriamo noi? Con la colletta.
+
+[Se segno via-atto-3 = torneo] **Sergio** (strafottente): Con una scatola di latta piena di monetine. Che tenerezza.
+
+**Sergio** (malvagio): L'ultima parola la dicono le carte. Se vinco io, stasera firmo. Se vincete voi... ci penso.
+
+→ Partita III5: {alleato} (giocatore) contro Sergio
+
+[Sconfitta: → F3]
+
+**Sergio** (annoiato): ...Va bene. Ci ho pensato.
+
+[Se finale Il Serraglio resta] **Sergio** (malvagio): No, aspettate. In casa mia non si perde due volte. Rivincita: stavolta faccio sul serio.
+
+→ Scelta muta, se c'è: la rivincita?
+
+- con Sergio, che vuole la rivincita [Se finale Il Serraglio resta] → S2
+- con Spazienzio, che ha già tirato giù la serranda [Se finale Il Serraglio resta]
+
+→ Vai a: F2 [Se segno via-atto-3 = torneo]
+
+→ Vai a: F1
+
+## F1 — Il Serraglio resta
+
+[Sfondo: S2 di sera. Regia: Sergio prende l'assegno dal bancone, lo guarda, lo straccia in quattro e lo lascia cadere nel posacenere.]
+
+**Il padrone del Dimmi Di Sì**: Peccato. Duccio, sei licenziato.
+
+**Duccio** (offeso): Licenziato? Ma io... io sono di destra!
+
+**Il padrone del Dimmi Di Sì**: Lo sappiamo tutti, Duccio.
+
+[Regia: il padrone esce. Duccio resta in mezzo al bar, con il cocktail in mano e l'ombrellino storto.]
+
+**Duccio** (dolorante): Licenziato... Il licenziamento è una cosa di sinistra.
+
+*La sera dopo.*
+
+[Regia: il Serraglio aperto, come sempre. Sergio sul suo sgabello in fondo al bancone. Tutti fanno finta di niente.]
+
+**Spazienzio** (quasi calmo): BUONASERA... SIGNOR PROPRIETARIO.
+
+**Sergio** (strafottente): Proprietario di cosa? Io qui bevo e basta. E voi fate schifo, come sempre.
+
+**Mara** (pensierosa): Comunque io ho una teoria nuova. Sui lampioni. Fidatevi.
+
+**Celestina** (assonnata): Buonanotte, padrone.
+
+[Se non visto S2] **Sergio** (malvagio): Godetevela. Ho perso in casa mia, e non mi piace. La prossima volta faccio sul serio.
+
+[Se visto S2] **Sergio** (annoiato): Due volte in casa mia. Alla prossima vi faccio pagare l'affitto.
+
+→ Fine: completata, Il Serraglio resta
+
+## F2 — Il Serraglio è di tutti
+
+[Sfondo: S2 di sera. Regia: sul bancone la scatola di latta della colletta, rovesciata. Sergio conta con due dita, come si tocca una cosa sporca.]
+
+**Sergio** (annoiato): Trecentotrenta euro, un bottone e una caramella. Per un bar.
+
+**Beppe** (tranquillo): Acconto. Il resto a rate: in contanti, una rata a settimana. Per sempre.
+
+**Sergio** (strafottente): A rate, con gli interessi. E il bottone lo tengo come garanzia.
+
+**Celestina** (contenta): La mia quota: monetine trovate per terra. Sono tutte di questo bar, quindi tornano a casa.
+
+[Se segno pista = beppe] **Mara** (seria): E la mia: dieci euro. Le mance di tutto il mese. Stavolta non li prende Beppe.
+
+[Se segno pista = beppe] **Beppe** (contento): Li prende Sergio. Fa lo stesso: sono contanti.
+
+[Regia: Sergio prende l'assegno del Dimmi Di Sì, lo gira e ci scrive sopra: «RICEVUTA».]
+
+**Il padrone del Dimmi Di Sì**: Ho perso un bar contro una colletta. Duccio, sei licenziato.
+
+**Duccio** (offeso): Licenziato? Ma io sono di destra!
+
+**Il padrone del Dimmi Di Sì**: Lo sappiamo tutti, Duccio.
+
+**Duccio** (dolorante): Licenziato... Il licenziamento è una cosa di sinistra.
+
+**Spazienzio** (soddisfatto): IL SERRAGLIO È DI TUTTI! QUINDI È ANCHE MIO! BRINDIAMOTI!
+
+**Sergio** (strafottente): È di tutti, e i debiti pure. Benvenuta nella proprietà, gente. Fa schifo, eh?
+
+[Achievement: Monetine]
+
+→ Fine: completata, Il Serraglio è di tutti
+
+## F3 — Disco pub
+
+[Sfondo: S1 di sera. Regia: la stessa strada, una settimana dopo. Al posto dell'insegna del Serraglio, il neon «DIMMI DI SÌ DISCO PUB»; un cordone di velluto, una fila di fighetti in ombra. Gli habitué sono seduti fuori, sul marciapiede, con le birre del supermercato.]
+
+**Duccio** (fiero): Clienti paganti, in fila a destra! Ovviamente a destra!
+
+[Regia: con l'ombrellino del cocktail, Duccio indica la fila di sinistra. Metà dei fighetti si sposta.]
+
+**Spazienzio** (fumante): SEDICI EURO PER UN VIRGIN CUBA LIBRE. NEL MIO BAR. PIANGIAMOTI.
+
+**Mara** (pensierosa): Ci hanno chiuso fuori. Ma non è finita: ho una teoria sui neon. Emettono onde.
+
+**Piera** (brilla): Io... lì dentro... non ci entro... che il Grappino... non lo fanno... entrare...
+
+**Beppe** (tranquillo): Io ci entro domani: mi hanno chiamato per i lavori. In nero.
+
+[Regia: dietro al cordone di velluto, sul pavimento nuovo e lucido, una sagoma accoccolata: Celestina.]
+
+**Celestina** (assonnata): Il pavimento nuovo è più freddo. Però è pulito. Mi ci abituo.
+
+[Regia: dietro la vetrina, su un divanetto bianco, Sergio con un Virgin Cuba Libre in mano.]
+
+**Sergio** (annoiato): Sedici euro. Fa schifo uguale.
+
+[Entra: combriccola davanti-alla-porta]
+
+**Un amico**: {giocatore}! Che ci fai qui fuori sul marciapiede? Entra, offriamo noi!
+
+**Un altro amico**: Qui il Virgin Cuba Libre è buonissimo, e non si fa mai a botte. Non è fantastico?
+
+[Achievement: Sedici euro]
+
+→ Fine: completata, Disco pub
+
+## S2 — Sergio fa sul serio
+
+[Nodo: segreto; se finale Il Serraglio resta]
+
+[Sfondo: S2 di notte. Regia: le sedie sui tavoli, una sola lampada sopra il bancone. Sergio si è tolto la giacca. Davanti a lui, un mazzo nuovo ancora incellofanato.]
+
+**Sergio** (malvagio): Ho perso in casa mia. Non succederà più. Stavolta faccio sul serio.
+
+**Sergio** (strafottente): Regole nuove, dette prima, così nessuno piange. Uno: ho letto i tuoi messaggi. So che carte hai.
+
+**Spazienzio** (furioso): QUESTO È BARARE!
+
+**Sergio** (annoiato): Barare è quando non lo dici. Questo è business. Due: ho comprato il mazzo, e pesco due volte.
+
+**Mara** (agitata): Ve l'avevo detto che ci leggono i pensieri! Anzi, i messaggi! È uguale!
+
+**Sergio** (malvagio): Tre: la mia società apre e chiude. Ogni tanto una carta scartata... riapre.
+
+**Celestina** (furba): Tre trucchi, tutti dichiarati. È quasi onesto. Mi fa paura.
+
+→ Partita S2: {alleato} (giocatore) contro Sergio
+
+[Modificatori: ha letto i tuoi messaggi, ha comprato il mazzo, società apri e chiudi]
+
+**Ritento.** **Sergio** (strafottente): Te l'ho detto: faccio sul serio. Torna con un mazzo vero. · **Spazienzio** (furioso): ANCORA! STAVOLTA GLI LEGGO IO I MESSAGGI!
+
+**Sergio** (annoiato): Con tutti i trucchi dichiarati. Battuto lo stesso. In casa mia.
+
+**Sergio** (strafottente): Andate a festeggiare, prima che cambi idea.
+
+[Achievement: Rivincita]
+
+→ Vai a: F2 [Se segno via-atto-3 = torneo]
+
+→ Vai a: F1
+
+## Achievement
+
+### Ve l'avevo detto
+
+Mara ha accusato tutti, nessuno escluso: Sergio, Piera, Beppe, Celestina e Grappino, in giri diversi.
+
+[Quando: esplorato II1 e esplorato II2a e esplorato II2b e esplorato II2c e esplorato S1]
+
+- Indizio: Mara ha sospetti su tutti. Proprio su tutti?
+- Indizio, se esplorato II2a e esplorato II2b e esplorato II2c: Manca ancora qualcuno. Qualcuno con quattro zampe.
+
+### Lasciatela finire
+
+Hai difeso la frase di Piera, e lei l'ha finita alla firma.
+
+[Quando: vinto II2a e visto III4]
+
+- Indizio: Qualcuno interrompe sempre Piera.
+- Indizio, se esplorato II2a: Se nessuno la interrompe, una frase di Piera arriva fino a lunedì.
+
+### Lo diceva Celestina
+
+Le hai dato retta sul pavimento, e di notte sei entrato al Serraglio nello stesso giro.
+
+[Quando: visto I1s e visto III3b]
+
+- Indizio: Celestina parla nel sonno. Qualcuno l'ha ascoltata?
+- Indizio, se esplorato III3b: Certe sconfitte ti mettono all'altezza del pavimento.
+
+### Porta sul retro
+
+Sei entrato di notte al Serraglio dalla porta che non chiude nessuno.
+
+- Indizio: Al Serraglio c'è sempre un'altra porta.
+- Indizio, se esplorato III3b: La porta sul retro la trova solo chi è stato buttato fuori.
+
+### Monetine
+
+Il Serraglio è di tutti, a rate.
+
+- Indizio: Il Serraglio potrebbe essere di tutti.
+- Indizio, se esplorato III2a: Vinci l'ultima partita dopo il torneo di Beppe.
+
+### Sedici euro
+
+Il Serraglio è diventato il Dimmi Di Sì Disco Pub.
+
+[Nascosto]
+
+- Indizio: A volte perdere è il finale più caro.
+- Indizio, se esplorato III5: Perdi l'ultima parola con Sergio.
+
+### Il cane sa
+
+Hai seguito Grappino in cantina.
+
+- Indizio: Grappino guarda Sergio in un modo strano.
+- Indizio, se esplorato II2c: Chi ha strappato la firma del bilancio? Uno con i denti piccoli.
+
+### Tre vie
+
+Hai seguito tutte e tre le piste dell'atto II, in giri diversi.
+
+[Quando: esplorato II2a e esplorato II2b e esplorato II2c]
+
+- Indizio: Ogni pista porta a Sergio, ma ognuna da un'altra parte.
+- Indizio, se esplorato II1: Nell'atto II le piste sono tre: la memoria di Piera, i soldi di Beppe, il bidone di Celestina.
+
+### Rivincita
+
+Hai battuto Sergio quando faceva sul serio.
+
+[Nascosto]
+
+- Indizio: Sergio non sopporta di perdere in casa sua.
+- Indizio, se finale Il Serraglio resta: Vinci di nuovo l'ultima partita, e Sergio chiederà la rivincita.
+
 ## Note per la revisione
 
 ### Atto II
@@ -714,3 +1372,112 @@ bacheca; tenute come le ha scritte il proprietario.
 
 **Formato:** il testo si mette nel prototipo, al posto delle battute segnaposto del mockup in `prototipi/carriere/storie/principale.md`,
 quando i tre atti sono pronti; il convertitore segnalerà le espressioni nuove finché non sono nel cast.
+
+### Atto III
+
+**Prima stesura della regia, 19 novembre 2026,** sulla [scaletta 0.3.6](principale.md) e sulle note
+[«Da tenere per l'atto III»](principale.md#da-tenere-per-latto-iii). Nodi nell'ordine della scaletta, poi i finali, S2 e gli achievement.
+Gli atti I e II non sono toccati.
+
+**Le note «Da tenere per l'atto III», una per una:**
+
+1. **III3b non brucia la rivelazione.** Sergio è già al bancone quando arrivate e non si accorge di nessuno; Duccio porta una busta gialla
+   chiusa «da parte del padrone» e Sergio la intasca senza aprirla. Mara la scambia per la paga del Dimmi Di Sì: il depistaggio regge
+   fino alla firma. Le chiavi di Sergio si vedono in III4, quando apre davanti a tutti la serratura nuova di Beppe.
+2. **«Ve l'avevo detto che viene di notte»** solo con `celestina`, con anni, ora e bevuta (dieci anni, le due, un amaro); senza, «Qui passa
+   qualcuno, dopo la chiusura». Perché ha taciuto: domanda 1.
+3. **Domenica sera e «domani mattina»** in III1, detti da Mara e da Sergio («alle nove si firma»); l'ora torna in III3a e III3b.
+4. **Il ricatto del kebab** ha la sua fonte: Sergio era sul suo sgabello la sera del tutorial, l'ordine sull'app di Mara è ancora aperto, e
+   lui minaccia una recensione. «Tutti gli altri» sono il sushi di martedì e la pizza di giovedì.
+5. **La colletta non basta:** F2 è un acconto con il resto a rate (domanda 2). I dieci euro delle mance di Mara tornano sulla pista di
+   Beppe, accanto alle monetine di Celestina, che le ha già messe sul bancone per l'iscrizione in III2a.
+6. **Duccio.** In III3a fa l'arbitro della colletta e incassa «il dieci per cento, per il disturbo»; si gioca contro Sergio. Il duello di
+   III1 resta. Con `duccio` la porta torna in III1, III1s e III3b. I suoi due referenti si incontrano in III4 («Capo... e capo? Ma allora
+   io per chi lavoro?» «Per me.» «Per chi paga, Duccio»); il licenziamento arriva in F1 e in F2 dal padrone del Dimmi Di Sì, con la
+   stessa battuta finale («Il licenziamento è una cosa di sinistra»): è il gancio della sua mini-carriera.
+7. **Grappino** annusa il posacenere di Sergio in III1 su ogni percorso, così l'indizio dell'achievement «Il cane sa» si vede anche senza
+   il segno; con `bilancio` prende la carta da sotto lo sgabello e scappa in cantina. In S1 Piera lo richiama col bicchierino, e nel suo
+   nascondiglio ci sono i mozziconi di sigarette sottili della pista di Beppe.
+8. **III4.** Spazienzio ruba «VE L'AVEVO DETTO», Mara è già all'assegno che si autodistrugge (dopo l'«agente svizzero»). Senza `frase`
+   Piera comincia «Dieci anni fa... un signore...» e la interrompe Sergio stesso: «Sì, sono io. Finiamola».
+9. **F3.** Celestina è sdraiata dietro al cordone, sul pavimento nuovo; Duccio dice «a destra» e con l'ombrellino indica la fila di
+   sinistra.
+10. **S1 svela Sergio,** come premio del segreto: Celestina legge «S. Sommerso» e capisce; Mara no («è un prestanome»), così la firma
+    resta una scena anche per chi arriva da lì. Il foglio torna in III4, posato in silenzio, e Sergio reagisce in III5.
+
+Dalla [revisione di coerenza](coerenza-principale.md) anche: l'alleato ha una battuta in scena prima della FFA di III4 (Beppe, Mara o
+Celestina secondo la via); serratura o retro in III3b secondo la via, con Celestina già dentro dopo il pedinamento e col gruppo dopo lo
+sgombero; fondi neri e motivo della vendita in III5; il richiamo alla rivincita in F1.
+
+**Dove tornano i fili:**
+
+- `chiave`: III2b → III3b dalla serratura nuova. In III1s Mara vorrebbe usarla, ma davanti c'è Duccio e Celestina sceglie il retro:
+  l'achievement «Porta sul retro» arriva con o senza chiave. In III4 la serratura di Beppe smaschera le chiavi di Sergio.
+- `frase`: III4, Piera la finisce («...e antipatico. Era lui.») e Sergio commenta «Dieci anni per finire una frase».
+- `celestina`: III3b (il racconto per intero e perché non l'ha detto) e III4 (le scarpe a punta, lucide, che aveva visto in I1s).
+- `bilancio`: III1 (la carta e la terza scelta) → S1 (la firma) → III4 (il foglio sul tavolo) → III5 (Sergio: «pensavo che le mie carte se
+  le mangiasse»).
+- `duccio`: III1, III1s, III3b.
+- **I dieci euro,** gag nuova dell'atto, nata dalla bici di I3a e dalle mance di II2b: l'iscrizione al torneo, i dieci che mancano sempre,
+  quelli di Sergio che finiscono a Duccio «per il disturbo», le mance di Mara in F2.
+
+**Starter, partite e uscite.** Beppe arriva in III1 con `[Se non segno pista = beppe e non segno ii3 = beppe]`, prima della partita, e il
+suo starter resta anche perdendo. Piera in III1 è già al suo posto, con Grappino, e non porta nessuno starter (domanda 5). Niente ritento
+in III1, III2a e III5, dove perdere apre un ramo o un finale. S2 si offre con una scelta «se c'è» dopo III5 vinto, con la condizione
+`finale Il Serraglio resta`; si può rifiutare, e dopo porta al finale della strada fatta (F1, o F2 dopo il torneo). F1 dice «la prossima
+volta faccio sul serio» solo a chi non ha appena giocato S2.
+
+**Scelte prese:** in III3c Beppe ha anticipato il montepremi e coperto le scommesse, per questo i debiti; Celestina aveva scommesso contro
+di lui. In III3a Sergio scommette i suoi dieci euro, e a partita vinta li prende Duccio. In III2b Sergio chiama Mara per cognome
+(«Contromano»). In F3 Sergio è dentro, a sedici euro, e la combriccola torna, felice. Achievement: ognuno ha un secondo indizio più
+chiaro; «Porta sul retro», «Il cane sa», «Monetine», «Sedici euro» e «Rivincita» si danno nella scena, gli altri con `[Quando: …]`.
+
+**Proposte per la scaletta** (non applicate, la 0.3.6 resta com'è):
+
+1. **III3a** nella tabella: duello contro Sergio, con Duccio arbitro, come dice la nota approvata (oggi la tabella dice FFA a tre).
+2. **III4** comincia sul marciapiede, davanti alla serranda chiusa, e passa dentro: serve a far vedere le chiavi di Sergio.
+3. **Piera nella rissa di III4:** entra perché le vola il bicchierino; la scaletta non diceva perché sta contro di te.
+4. **Il licenziamento di Duccio** in scena in F1 e F2, per bocca del padrone del Dimmi Di Sì, che resta fino a sera (l'offerta è «valida
+   fino a stasera»).
+5. **S2:** Sergio dichiara a voce i tre trucchi prima della partita, uno per battuta, come i modificatori.
+
+**Sfondi e sprite:** S1 di notte (III1s, III2b), S1 di giorno (III4), S1 con il neon «DIMMI DI SÌ DISCO PUB» e il cordone (F3), S2 al buio
+(III3b), la cantina (S1, per ora S2 al buio come nel mockup). Grappino che annusa il posacenere è solo regia: nessuna posa nuova. La
+combriccola torna in F3 con lo sprite di I4.
+
+**Espressioni:** nessuna nuova; tutte già usate negli atti I–II o nel tutorial.
+
+**Forme neutre:** dove il plurale includeva il giocatore ho usato «gente» o forme invariabili («Ci hanno buttato fuori», «Benvenuta nella
+proprietà, gente», «le pantegane del Serraglio», come le «zecche» di Duccio). Restano al maschile solo plurali che non includono il
+giocatore.
+
+**Lunghezza** (battute prima della partita, o di tutta la scena per quelle senza partita; l'intervallo dipende dai segni):
+
+| Nodo | Battute | Nodo | Battute |
+|---|---|---|---|
+| III1 | 7–9 | III3b | 8–9 |
+| III1s (senza partita) | 6–9 | S1 | 7 |
+| III2a | 7 | III4 | **12–15** |
+| III3c | 6–8 | III5 | 8–10 |
+| III3a | 8–9 | F1, F2, F3 | 9, 10–12, 9 |
+| III2b | 9 | S2 | 7 |
+
+**Sopra misura solo III4,** che è la rivelazione: ci tornano quasi tutti i fili (chiavi, `frase`, `celestina`, il foglio di S1, i due capi
+di Duccio, l'alleato) e la rissa deve dire perché Piera e Spazienzio stanno contro. Se serve tagliare: l'«agente svizzero» di Mara e il «Per
+me» del padrone (domanda 3).
+
+**Convertitore:** restano solo gli errori attesi (espressioni non ancora nel cast, «Un signore» in I3b) e i tre avvisi delle scelte di
+II1. Con un cast di prova in memoria che accetta le espressioni e «Un signore», passa anche il controllo di validità: nessun vicolo cieco,
+gli starter e il PvP su ogni percorso.
+
+**Domande per il proprietario:**
+
+1. **Perché Celestina ha taciuto** (proposta, da decidere): tutte e due le risposte, una dopo l'altra. In III3b, con il segno, «A una che
+   dorme per terra non crede nessuno»; in III5, dopo la rivelazione, il patto: «Te lo lascio perché stai zitta» / «E io sto zitta perché
+   me lo lasci». Va bene, o una sola?
+2. **F2 acconto e rate** (proposta, da decidere): la colletta è l'acconto, il resto a rate settimanali «per sempre», con il bottone come
+   garanzia. Va bene?
+3. **III4 sopra misura:** si tiene così o si taglia?
+4. **S2 si ritenta come gli altri nodi:** va bene, o una sconfitta in S2 porta comunque al finale, perché il bar è già salvo?
+5. **Piera in III1:** è al suo posto con Grappino, che serve all'indizio del posacenere, ma non «arriva» e non dà starter. Va bene, o
+   Grappino deve arrivare da solo?
