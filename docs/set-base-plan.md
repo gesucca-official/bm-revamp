@@ -7,8 +7,8 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 19 novembre 2026, dopo D152). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139 e D149, set a 123 carte (D135).
-> - **In corso:** SB-20c B2 consegnata, in attesa della revisione della regia ([rapporto](reports/set-base/sb-20c-b2-report.md)). [SB-21t](reports/set-base/sb-21t-report.md) chiuso senza tetto ([D151](#decisioni-del-proprietario)). A ogni cambio di `bozza.json` i controlli di D143.
-> - **Prossimo:** dopo la revisione di B2, [SB-21e](#sb-21--giri-di-correzione): Estasi torna a 10 T + 10 L, la meccanica di oggi passa a una carta nuova nello slot PIN-AR2, indebolita in un giro breve ([D152](#decisioni-del-proprietario)); poi [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) con le liste costruite e il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
+> - **In corso:** nessun blocco. [SB-20c B2](reports/set-base/sb-20c-b2-report.md) rivista e chiusa: simboli delle risorse nel client col profilo `bozza`. Per le prove al tavolo, `tools/print-cards/generate.py --bozza` stampa bozza e starter ([rapporto](reports/set-base/stampa-bozza-report.md)). A ogni cambio di `bozza.json` i controlli di D143.
+> - **Prossimo:** [SB-21e](#sb-21--giri-di-correzione): Estasi torna a 10 T + 10 L, la meccanica di oggi passa a una carta nuova nello slot PIN-AR2, indebolita in un giro breve ([D152](#decisioni-del-proprietario)); poi [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) con le liste costruite e il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
 > - **Decisioni da leggere:** D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D152).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
@@ -619,7 +619,7 @@ controllo FFA.
 
 **SB-20c, Fase B1 consegnata.** [Rapporto](reports/set-base/sb-20c-b1-report.md). Testi in bozza per 116 carte, controllo esatto verde e undici mutazioni respinte. «Rif» identico alla base su 403.200 partite, suite `Test` verde. Il controllo accompagna R1–R4 a ogni diff di SB-21 (D142). **Chiusa** il 19 novembre 2026 ([D143](#decisioni-del-proprietario)); i due controlli entrano nella tabella delle aree. Resta la **Fase B2** (escape nella fabbrica della bozza, simboli nel client web), da fare prima delle prove umane.
 
-**SB-20c, Fase B2 consegnata il 19 novembre 2026** ([rapporto](reports/set-base/sb-20c-b2-report.md)). Escape nella fabbrica della bozza e simboli delle risorse nel client (ispezione, collezione, volto Pixi), con i cinque nomi accessibili in italiano. Nessun dato di `bozza.json` toccato. Suite `Test` e contesto verdi, 367 test web, matrice del vivo 8/8, identità del vivo e profilo bozza verificati, mutazioni nel browser respinte. A 750×292 nessun problema nuovo rispetto alla base (un problema isolato del layout non si ripresenta e c'è anche sulla base). Prima di SB-22 valgono l'ordine di D152 e il blocco separato per «12+x» di «L'ultimo giro». STOP per la revisione della regia.
+**SB-20c, Fase B2 consegnata il 19 novembre 2026, rivista dalla regia e chiusa** ([rapporto](reports/set-base/sb-20c-b2-report.md)). Escape nella fabbrica della bozza e simboli delle risorse nel client (ispezione, collezione, volto Pixi), con i cinque nomi accessibili in italiano. Nessun dato di `bozza.json` toccato. Suite `Test` e contesto verdi, 367 test web, matrice del vivo 8/8, identità del vivo e profilo bozza verificati, mutazioni nel browser respinte. A 750×292 nessun problema nuovo rispetto alla base (un problema isolato del layout non si ripresenta e c'è anche sulla base). Prima di SB-22 valgono l'ordine di D152 e il blocco separato per «12+x» di «L'ultimo giro». STOP per la revisione della regia.
 
 ### SB-21 — Giri di correzione
 
@@ -661,6 +661,8 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 **Completamento verificabile.** **Giudizio del proprietario** registrato: è il criterio decisivo.
 
 **Rischi.** Pochi giocatori: il giudizio resta soggettivo, ed è dichiarato come tale.
+
+**Per il tavolo.** Oltre al client, la bozza e gli starter si stampano con `tools/print-cards/generate.py --bozza` (anche `--starter`), che rilegge `bozza.json` a ogni esecuzione e mette l'impronta sulle carte ([rapporto](reports/set-base/stampa-bozza-report.md)). Ristampare dopo ogni cambio della bozza, a partire da SB-21e.
 
 ### SB-23 — Valutazione delle varianti del formato
 
