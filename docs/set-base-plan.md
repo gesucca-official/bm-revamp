@@ -7,7 +7,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 19 novembre 2026, dopo D150). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139 e D149, set a 123 carte (D135).
-> - **In corso:** SB-21t, tetto al danno di Estasi a 30 o 35 HIT, al più 3.000 s, con le verifiche della partita viva per `PrintedEffects` e bot ([D150](#decisioni-del-proprietario)). [SB-21](#sb-21--giri-di-correzione) **chiuso** dopo il [giro 3b](reports/set-base/sb-21-giro-3b-report.md): starter in equilibrio, costruiti molto sopra gli starter, Piera costruita dominante. A ogni cambio di `bozza.json` i controlli di D143.
+> - **In attesa:** revisione di [SB-21t](reports/set-base/sb-21t-report.md), nessun tetto adottato (D150), bozza D149 confermata. [SB-21](#sb-21--giri-di-correzione) resta chiuso. A ogni cambio di `bozza.json` i controlli di D143.
 > - **Prossimo:** SB-20c B2 (simboli nel client), poi [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) con le liste costruite e il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
 > - **Decisioni da leggere:** D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D150).
 
@@ -633,6 +633,8 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 **Giro 3a rifatto (19 novembre 2026), D149 superata.** Estasi 10 + 2 × L, verificata nei tre isolamenti. Tutte le coppie nel 35–65% e fuori obiettivo 5 → 3. La bozza consegnata è l'ingresso del giro 3b ([rapporto](reports/set-base/sb-21-giro-3a-bis-report.md)).
 
 **Giro 3b (19 novembre 2026), STOP per il proprietario.** Ricerca dei sette e scontri diretti completi. Tutti i 35 incroci costruito–starter sopra il 70%, Piera senza incroci sfavorevoli. Tre passate scartate per D149, bozza del 3a-bis confermata. [Rapporto e domande](reports/set-base/sb-21-giro-3b-report.md).
+
+**SB-21t (19 novembre 2026), consegnato.** Nessun tetto adottato (D150). Entrambe le matrici falliscono D149. Per SB-22 valgono i sette finalisti del giro 3b. [Rapporto](reports/set-base/sb-21t-report.md).
 
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 

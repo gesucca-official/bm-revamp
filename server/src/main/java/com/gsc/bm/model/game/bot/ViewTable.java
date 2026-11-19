@@ -560,18 +560,16 @@ public final class ViewTable {
             if (step.isIfToken() && subject.statuses.stream().noneMatch(t -> t.exposure != null)) continue;
             switch (step.getKind()) {
                 case DAMAGE:
-                    damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart) + step.getPerPlay() * plays,
+                    damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart, plays),
                             step.getApplying());
                     break;
                 case GAIN:
                     if (step.getResource() != null)
-                        subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart)
-                                + step.getPerPlay() * plays);
+                        subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart, plays));
                     break;
                 case LOSE:
                     if (step.getResource() != null)
-                        subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart)
-                                - step.getPerPlay() * plays);
+                        subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart, plays));
                     break;
                 case EMPTY:
                     if (step.getResource() != null) subject.set(step.getResource(), 0);
@@ -668,9 +666,9 @@ public final class ViewTable {
             for (PrintedEffects.Step step : item.getEffects().getSteps()) {
                 if (step.getSpawnedItem() != null) addItem(act.author, catalog.get(step.getSpawnedItem()));
                 if (step.getKind() == PrintedEffects.Kind.GAIN && step.getResource() != null)
-                    act.author.set(step.getResource(), act.author.get(step.getResource()) + amount(step, act.author, start, 0));
+                    act.author.set(step.getResource(), act.author.get(step.getResource()) + amount(step, act.author, start, 0, 0));
                 else if (step.getKind() == PrintedEffects.Kind.LOSE && step.getResource() != null)
-                    act.author.set(step.getResource(), act.author.get(step.getResource()) - amount(step, act.author, start, 0));
+                    act.author.set(step.getResource(), act.author.get(step.getResource()) - amount(step, act.author, start, 0, 0));
                 else if (step.getKind() == PrintedEffects.Kind.STATUS) {
                     if (step.getDamageType() != null && step.getFactor() != null) act.author.statuses.add(status(step));
                 } else if (step.getKind() == PrintedEffects.Kind.IMMUNE && step.getResource() != null)
@@ -679,7 +677,7 @@ public final class ViewTable {
                 else if (step.getKind() == PrintedEffects.Kind.EMPTY && step.getResource() != null)
                     act.author.set(step.getResource(), 0);
                 else if (step.getKind() == PrintedEffects.Kind.DAMAGE)
-                    damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0), step.getApplying());
+                    damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0, 0), step.getApplying());
             }
             startTimers(act.author, item.getEffects());
             return;
@@ -701,12 +699,13 @@ public final class ViewTable {
         side.items.add(java.util.Objects.requireNonNull(item, "public text of spawned item"));
     }
 
-    private static int amount(PrintedEffects.Step step, Side author, Map<Resource, Integer> start, int itemsAtStart) {
+    private static int amount(PrintedEffects.Step step, Side author, Map<Resource, Integer> start, int itemsAtStart, int plays) {
         int amount = step.getBase();
         if (step.getOf() != null)
             amount += step.getTimes() * ((step.isAtStart() ? start.getOrDefault(step.getOf(), 0) : author.get(step.getOf()))
                     / Math.max(1, step.getDivide()));
-        return amount + step.getPerItem() * (step.isAtStart() ? itemsAtStart : author.items.size());
+        amount += step.getPerItem() * (step.isAtStart() ? itemsAtStart : author.items.size());
+        return step.capAmount(amount + step.getPerPlay() * plays);
     }
 
     /** As Character.inflictDamage and takeDamage: OUTPUT statuses, INPUT statuses (single use expended), armour, floor. */

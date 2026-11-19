@@ -58,7 +58,9 @@ public class PrintedEffects implements Serializable {
         SELL
     }
 
-    /** One printed step. Amounts are {@code base + times × (resource of the author / divide) + perItem × items of the author}. */
+    /**
+     * One printed step. Amounts add the base, the resource and item contributions, and any per-play increment before the cap.
+     */
     @Value
     @Builder
     public static class Step implements Serializable {
@@ -75,6 +77,8 @@ public class PrintedEffects implements Serializable {
         @Builder.Default
         int times = 1;
         int perItem;
+        /** Maximum computed amount before statuses and armour; 0 means no cap. */
+        int cap;
         /** The variable part is read when the move starts resolving (after costs), not when the step applies. */
         boolean atStart;
         /** Status types that modify this damage; null means all. */
@@ -116,6 +120,10 @@ public class PrintedEffects implements Serializable {
          * sold; false: only if none was.
          */
         Boolean sold;
+
+        public int capAmount(int amount) {
+            return cap > 0 ? Math.min(amount, cap) : amount;
+        }
 
         /** SB-17: whether the step applies after a sale with the given outcome (null: no sale in this card). */
         public boolean appliesAfterSale(boolean itemSold) { return sold == null || sold == itemSold; }

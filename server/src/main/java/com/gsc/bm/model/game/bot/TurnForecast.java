@@ -376,18 +376,16 @@ public final class TurnForecast {
                 if (step.isIfToken() && !subject.token) continue;
                 switch (step.getKind()) {
                     case DAMAGE:
-                        damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart) + step.getPerPlay() * plays,
+                        damage(act.author, subject, step.getDamageType(), amount(step, act.author, start, itemsAtStart, plays),
                                 step.getApplying());
                         break;
                     case GAIN:
                         if (step.getResource() != null)
-                            subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart)
-                                    + step.getPerPlay() * plays);
+                            subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart, plays));
                         break;
                     case LOSE:
                         if (step.getResource() != null)
-                            subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart)
-                                    - step.getPerPlay() * plays);
+                            subject.set(step.getResource(), subject.get(step.getResource()) - amount(step, act.author, start, itemsAtStart, plays));
                         break;
                     case EMPTY:
                         if (step.getResource() != null) subject.set(step.getResource(), 0);
@@ -470,9 +468,9 @@ public final class TurnForecast {
                 Map<Resource, Integer> start = new EnumMap<>(act.author.res);
                 for (PrintedEffects.Step step : text.getSteps()) {
                     if (step.getKind() == PrintedEffects.Kind.GAIN && step.getResource() != null)
-                        act.author.set(step.getResource(), act.author.get(step.getResource()) + amount(step, act.author, start, 0));
+                        act.author.set(step.getResource(), act.author.get(step.getResource()) + amount(step, act.author, start, 0, 0));
                     else if (step.getKind() == PrintedEffects.Kind.LOSE && step.getResource() != null)
-                        act.author.set(step.getResource(), act.author.get(step.getResource()) - amount(step, act.author, start, 0));
+                        act.author.set(step.getResource(), act.author.get(step.getResource()) - amount(step, act.author, start, 0, 0));
                     else if (step.getKind() == PrintedEffects.Kind.STATUS && step.getDamageType() != null && step.getFactor() != null)
                         act.author.statuses.add(new Multiplier(step.getDamageType(), step.getFlow(), step.getStatusType(), step.getFactor(),
                                 step.getConvertTo()));
@@ -482,17 +480,18 @@ public final class TurnForecast {
                     else if (step.getKind() == PrintedEffects.Kind.EMPTY && step.getResource() != null)
                         act.author.set(step.getResource(), 0);
                     else if (step.getKind() == PrintedEffects.Kind.DAMAGE)
-                        damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0), step.getApplying());
+                        damage(act.author, act.author, step.getDamageType(), amount(step, act.author, start, 0, 0), step.getApplying());
                 }
                 return;
             }
         }
 
-        private static int amount(PrintedEffects.Step step, Body author, Map<Resource, Integer> start, int itemsAtStart) {
+        private static int amount(PrintedEffects.Step step, Body author, Map<Resource, Integer> start, int itemsAtStart, int plays) {
             int amount = step.getBase();
             if (step.getOf() != null)
                 amount += step.getTimes() * ((step.isAtStart() ? start.get(step.getOf()) : author.get(step.getOf())) / Math.max(1, step.getDivide()));
-            return amount + step.getPerItem() * (step.isAtStart() ? itemsAtStart : author.items.size());
+            amount += step.getPerItem() * (step.isAtStart() ? itemsAtStart : author.items.size());
+            return step.capAmount(amount + step.getPerPlay() * plays);
         }
 
         /** As Character.inflictDamage and takeDamage: the author's OUTPUT statuses, the subject's INPUT ones, armour, floor. */

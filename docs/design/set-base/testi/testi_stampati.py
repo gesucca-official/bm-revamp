@@ -46,7 +46,7 @@ JAVA = {
         "{base} HIT al bersaglio, più la [[L]] spesa. Rincara {perPlay} ({perPlaySelf} a sé)"
     ),
     "base.pino.GoingBerserk": (
-        "{autodanno}Spendi tutta la tua [[L]]{residua}. Infliggi danni da colpo pari a {base} più {dannoAlcohol}"
+        "{autodanno}Spendi tutta la tua [[L]]{residua}. Infliggi danni da colpo pari a {base} più {dannoAlcohol}{tetto}"
     ),
     "base.pino.RuttoADistanzaSociale": (
         "Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. "
@@ -234,7 +234,7 @@ def verifica_carta(carta, nomi):
             raise ValueError("java: deve valere true")
         binding = carta["binding"]
         scelta(binding, JAVA, "binding Java")
-        facoltativi = "perAlcohol" if binding == "base.pino.GoingBerserk" else ""
+        facoltativi = "perAlcohol maxDamage" if binding == "base.pino.GoingBerserk" else ""
         campi(carta["params"], "params", PARAMETRI_JAVA.get(binding, ""), facoltativi)
         for nome, valore in carta["params"].items():
             intero(valore, f"params.{nome}")
@@ -481,6 +481,8 @@ def testo_java(carta):
         valori["residua"] = " residua" if carta.get("cost", {}).get("ALCOHOL", 0) else ""
         valori["dannoAlcohol"] = ("la [[L]] spesa" if params.get("perAlcohol", 1) == 1
                                  else f'{valori["moltiplicatore"]} della [[L]] spesa')
+        tetto = params.get("maxDamage", 0)
+        valori["tetto"] = f", fino a un massimo di {tetto}" if tetto else ""
     if "percent" in params:
         n = params["percent"]
         valori["quota"] = "metà" if n == 50 else f"il {n}%"

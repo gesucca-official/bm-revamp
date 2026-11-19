@@ -20,7 +20,7 @@ import java.util.Set;
  * R04 applica gli effetti su sé prima di quelli sul bersaglio, quindi con i passi dati l'azzeramento arriverebbe prima del danno.
  * Come {@code ToxicBloodDrain} con la T (decisione B1 della griglia), la classe memorizza la L dell'autore nella logica speciale,
  * dopo i costi; poi, su sé, infligge {@code selfHit} HIT se positivo e azzera la L; infine infligge al bersaglio HIT pari a
- * {@code base} più {@code perAlcohol} volte la L memorizzata.
+ * {@code base} più {@code perAlcohol} volte la L memorizzata, con il tetto facoltativo {@code maxDamage} (D150).
  * <p>
  * Solo nella bozza del Set Base: la partita viva non la conosce (SB-28). Costo e priorità arrivano dalla bozza.
  */
@@ -32,6 +32,9 @@ public class GoingBerserk extends AbstractCard implements PrintedEffects.Source 
     /** Il danno per ogni punto di L spesa. */
     @Tunable(optional = true)
     private int perAlcohol = 1;
+    /** Il tetto del danno al bersaglio; 0 lascia il danno senza limite. */
+    @Tunable(optional = true)
+    private int maxDamage = 0;
     /** Il danno a sé (la last resort): 0 per non infliggerne. */
     @Tunable
     private int selfHit = 0;
@@ -71,7 +74,9 @@ public class GoingBerserk extends AbstractCard implements PrintedEffects.Source 
 
     @Override
     public List<String> applyEffectOnTarget(Character self, Character target) {
-        return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, base + perAlcohol * alcohol + extraBase())));
+        int hit = base + perAlcohol * alcohol + extraBase();
+        if (maxDamage > 0) hit = Math.min(hit, maxDamage);
+        return List.of(self.inflictDamage(target, new Damage(Damage.DamageType.HIT, hit)));
     }
 
     /** D76: self HIT if any and ALCOHOL emptied; HIT of base plus perAlcohol times the ALCOHOL read after costs. */
@@ -82,7 +87,7 @@ public class GoingBerserk extends AbstractCard implements PrintedEffects.Source 
                 .damageType(Damage.DamageType.HIT).base(selfHit).perPlay(perPlaySelf()).build());
         steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.EMPTY).resource(Resource.ALCOHOL).build());
         steps.add(PrintedEffects.Step.builder().kind(PrintedEffects.Kind.DAMAGE).onTarget(true).damageType(Damage.DamageType.HIT)
-                .base(base).of(Resource.ALCOHOL).times(perAlcohol).atStart(true).perPlay(perPlayTarget()).build());
+                .base(base).of(Resource.ALCOHOL).times(perAlcohol).atStart(true).perPlay(perPlayTarget()).cap(maxDamage).build());
         return new PrintedEffects(List.copyOf(steps));
     }
 }
