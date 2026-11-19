@@ -243,7 +243,7 @@ class SetBaseDraftTest {
         alertnessCosts.forEach((binding, cost) -> {
             JsonNode c = card(binding);
             assertEquals(cost, c.get("cost").get("ALERTNESS").asInt(), binding);
-            assertTrue(c.get("gui").get("description").asText().contains("· " + cost + " A:"), binding + ": costo nel testo");
+            assertTrue(c.get("gui").get("description").asText().contains("· " + cost + " [[A]]:"), binding + ": costo nel testo (D142)");
         });
         JsonNode sgommata = card("base.mara.Sgommata");
         assertEquals(25, sgommata.get("target").get(0).get("amount").asInt());
@@ -253,7 +253,7 @@ class SetBaseDraftTest {
         JsonNode cambio = card("base.mara.bound.CambioMarcia");
         assertEquals(6, cambio.get("self").get(0).get("amount").asInt());
         assertEquals("+6 A", cambio.get("gui").get("gains").asText());
-        assertTrue(cambio.get("gui").get("description").asText().contains("+6 A"));
+        assertTrue(cambio.get("gui").get("description").asText().contains("+6 [[A]]"));
     }
 
     /** La base del listino ricavata dalla bozza: contesti con le àncore al posto di due coppie di generiche, starter intatti. */
@@ -334,20 +334,20 @@ class SetBaseDraftTest {
         assertTrue(raschiare.get("self").get(0).get("amount").asInt() <= 10);
         assertEquals(7, raschiare.get("self").get(0).get("amount").asInt());
         assertEquals("+7 T", raschiare.get("gui").get("gains").asText());
-        assertTrue(raschiare.get("gui").get("description").asText().contains("+7 T a sé"));
+        assertTrue(raschiare.get("gui").get("description").asText().contains("+7 [[T]] a sé"));
         // D55: MethDrivenRage diventa un caricamento gratuito; le altre tre carte restano a 10 T.
         assertTrue(draft.card("junkie.MethDrivenRage").getCost().isEmpty());
         for (String binding : List.of("junkie.Cough", "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain")) {
             JsonNode c = card(binding);
             assertEquals(1, c.get("cost").size(), binding);
             assertEquals(10, c.get("cost").get("TOXICITY").asInt(), binding);
-            assertTrue(c.get("gui").get("description").asText().contains("· 10 T:"), binding + ": costo nel testo");
+            assertTrue(c.get("gui").get("description").asText().contains("· 10 [[T]]:"), binding + ": costo nel testo");
         }
         // D55/SB-16d: Tossicone Scatarrante da 8 a 12 POISON; D82 (passo 3 di SB-16g): 18 POISON, testi compresi.
         JsonNode cough = card("junkie.Cough");
         assertEquals(18, cough.get("target").get(0).get("amount").asInt());
         assertEquals("POISON 18", cough.get("gui").get("damageAmount").asText());
-        assertTrue(cough.get("gui").get("description").asText().contains("Infliggi 18 danni da veleno al bersaglio. Il bersaglio guadagna 5 T."));
+        assertTrue(cough.get("gui").get("description").asText().contains("18 POISON al bersaglio; +5 [[T]] al bersaglio."));
         // Lo slot apre la descrizione delle dieci carte del Tossico.
         Pattern slot = Pattern.compile("^(TOS-(BA|BO\\d|AR\\d)|LR-TOS) · .*");
         int slots = 0;
@@ -466,7 +466,7 @@ class SetBaseDraftTest {
         }
         for (String binding : List.of("base.pino.TestataDaUltimoGiro", "base.pino.RuttoADistanzaSociale")) {
             assertEquals(Map.of(Resource.ALCOHOL, 5), draft.card(binding).getCost(), binding);
-            assertTrue(card(binding).get("gui").get("description").asText().contains("· 5 L:"), binding + ": costo nel testo");
+            assertTrue(card(binding).get("gui").get("description").asText().contains("· 5 [[L]]:"), binding + ": costo nel testo");
         }
         // Le due carte che spendono tutta la L sono gratuite (B1, D33).
         assertTrue(draft.card("base.pino.GoingBerserk").getCost().isEmpty());
@@ -477,11 +477,11 @@ class SetBaseDraftTest {
         assertEquals(18, berserk.get("params").get("base").asInt(), "D82: Estasi 18 + L spesa, era 10");
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
         assertEquals("HIT 18+x", berserk.get("gui").get("damageAmount").asText());
-        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua L. Infliggi danni da colpo pari a 18 più la L spesa."));
+        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 18 più la [[L]] spesa."));
         assertEquals(12, last.get("params").get("base").asInt());
         assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
         assertEquals("HIT 12+x", last.get("gui").get("damageAmount").asText());
-        assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé; HIT pari a 12 più la propria L residua"));
+        assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa."));
         assertEquals(25, testata.get("target").get(0).get("amount").asInt(), "D38/D53: pressione di Piera con meno salute, SB-16e");
         assertEquals("HIT 25", testata.get("gui").get("damageAmount").asText());
         assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 25 HIT al bersaglio"));
@@ -490,7 +490,7 @@ class SetBaseDraftTest {
         int alcohol = cinque.get("self").get(0).get("amount").asInt();
         assertTrue(alcohol <= 10);
         assertEquals("+" + alcohol + " L", cinque.get("gui").get("gains").asText());
-        assertTrue(cinque.get("gui").get("description").asText().contains("+" + alcohol + " L a sé"));
+        assertTrue(cinque.get("gui").get("description").asText().contains("+" + alcohol + " [[L]] a sé"));
         // Lo slot apre la descrizione delle dieci carte di Pino.
         Pattern slot = Pattern.compile("^(PIN-(BA|BO\\d|AR\\d)|LR-PIN) · .*");
         int slots = 0;
@@ -737,7 +737,7 @@ class SetBaseDraftTest {
                 "base.gigi.LavoroFattoBene", 10); // D82: Chiave e Lavoro 10 V, erano 5
         violence.forEach((binding, cost) -> {
             assertEquals(Map.of(Resource.VIOLENCE, cost), draft.card(binding).getCost(), binding);
-            assertTrue(card(binding).get("gui").get("description").asText().contains("· " + cost + " V:"), binding + ": costo nel testo");
+            assertTrue(card(binding).get("gui").get("description").asText().contains("· " + cost + " [[V]]:"), binding + ": costo nel testo");
         });
         assertTrue(draft.card("base.gigi.ColpoDiChiaveInglese").getCost().isEmpty());
         assertEquals(1, draft.card("bruiser.BreakYourToy").getPriority());
@@ -746,7 +746,7 @@ class SetBaseDraftTest {
         JsonNode chiave = card("base.gigi.ChiaveDaTredici"), colpo = card("base.gigi.ColpoDiChiaveInglese"), lavoro = card("base.gigi.LavoroFattoBene");
         assertEquals(18, chiave.get("target").get(0).get("amount").asInt(), "D90 (correzione 1.5), era 22 in D82 e 12 prima");
         assertEquals("CUT 18", chiave.get("gui").get("damageAmount").asText());
-        assertTrue(chiave.get("gui").get("description").asText().contains("Infliggi 18 danni da taglio al bersaglio."));
+        assertTrue(chiave.get("gui").get("description").asText().contains("18 CUT al bersaglio."));
         // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca; D82: +15 V e 4 CUT a un avversario anche se non trova.
         assertEquals(15, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(5, colpo.get("self").get(0).get("missedGains").get("VIOLENCE").asInt(), "D72");

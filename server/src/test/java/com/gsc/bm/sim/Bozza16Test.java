@@ -53,6 +53,12 @@ class Bozza16Test {
         return null;
     }
 
+    private static JsonNode withoutPrintedText(JsonNode card) {
+        ObjectNode comparable = card.deepCopy();
+        ((ObjectNode) comparable.get("gui")).remove(List.of("description", "gains", "damageAmount"));
+        return comparable;
+    }
+
     @Test
     void theFrozenCopyIsThe15() throws Exception {
         // The 1.5 as committed before SB-16i (370a364): byte for byte, so the historical measures are reproduced exactly.
@@ -87,7 +93,8 @@ class Bozza16Test {
             String b = c.path("binding").asText();
             JsonNode before = card(old, b);
             if (before == null) { seen.add(b); continue; }
-            if (!CHANGED.contains(b)) assertEquals(before, c, b);
+            // D142: i tre campi stampati ora hanno come riferimento il generatore, controllato da controlla-testi.py.
+            if (!CHANGED.contains(b)) assertEquals(withoutPrintedText(before), withoutPrintedText(c), b);
             else {
                 assertNotEquals(before, c, b);
                 for (String key : List.of("rarity", "kind", "priority", "targets", "cost", "java", "exclusiveTo"))
