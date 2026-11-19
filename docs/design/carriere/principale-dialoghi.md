@@ -86,8 +86,6 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 → Partita I1: Spazienzio (giocatore) contro Celestina
 
-**Ritento.** **Celestina** (furba): Sarai anche grande e grosso, ma sei proprio tonto. · **Spazienzio** (furioso): BWAAARGH! ESPLODIAMOTI!
-
 [Sconfitta: → I1s]
 
 **Celestina** (arrabbiata): Va bene, va bene. Scusami se ti ho provocato.
@@ -104,7 +102,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 → Scelta muta: chi segui?
 
-- con Mara, a scoprire chi ha venduto [Segno: via-atto-1 = mara] → I2a
+- con Mara, a scoprire chi vuole vendere [Segno: via-atto-1 = mara] → I2a
 - con Spazienzio, a spiegarlo al Dimmi Di Sì [Segno: via-atto-1 = spazienzio] → I2b
 
 ## I1s — Il pavimento
@@ -113,7 +111,9 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S2 al buio. Regia: Spazienzio è per terra, lungo disteso. Celestina gli si accoccola accanto come a un cuscino.]
 
-**Celestina** (assonnata): Come sei comodo… mi concili proprio il sonno.
+**Celestina** (furba): Sarai anche grande e grosso, ma sei proprio tonto.
+
+**Celestina** (assonnata): Però sei comodo… mi concili proprio il sonno.
 
 **Celestina** (furba): Sai che quaggiù nessuno ti nota, ma si vede e si sente tutto? Io lo sapevo da tempo che il proprietario voleva vendere.
 
@@ -285,7 +285,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S2. Regia: il Serraglio aperto fino a domenica, con uno striscione storto: «SALVIAMO IL SERRAGLIO», le lettere di stagnola.]
 
-[Se segno via-atto-1 = mara] **Mara** (illuminata): Una società svizzera fa cambiare la chiave da un metalmeccanico tuttofare. Qui ci sono di mezzo i poteri forti! Forza, {giocatore}, dobbiamo mobilitare l'opinione pubblica!
+[Se segno via-atto-1 = mara] **Mara** (illuminata): Una società svizzera fa cambiare la serratura da un metalmeccanico tuttofare. Qui ci sono di mezzo i poteri forti! Forza, {giocatore}, dobbiamo mobilitare l'opinione pubblica!
 
 [Se segno via-atto-1 = spazienzio] **Spazienzio** (soddisfatto): LUNEDÌ RISTRUTTURANO, EH? DOVRANNO PASSARE SUI NOSTRI CADAVERI! ORDUNQUE {giocatore}, CHIAMA PIÙ GENTE CHE PUOI.
 
@@ -333,7 +333,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S2. Regia: il Serraglio aperto, lo striscione storto; sul bancone un foglio a quadretti: «PETIZIONE CONTRO LA CHIUSURA», tre firme, una è una macchia.]
 
-**Spazienzio** (furioso): ASPETTARE MI INNERVOSISCE! CHE FACCIAMO? ANDIAMO DI NUOVO A SPACCARE IL DIMMI DI SÌ! È TUTTA COLPA LORO!
+**Spazienzio** (furioso): ASPETTARE MI INNERVOSISCE! CHE FACCIAMO? ANDIAMO A SPACCARE IL DIMMI DI SÌ! È TUTTA COLPA LORO!
 
 **Celestina** (furba): Il Dimmi Di Sì compra, ma non è l'unico responsabile. Se qualcuno può comprare, è perché qualcun altro sta vendendo.
 
@@ -435,8 +435,6 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 → Partita II2a: Piera (giocatore) contro Spazienzio
 
-**Ritento.** **Piera** (assonnata): Allora... ricomincio... dieci anni fa... · **Spazienzio** (fumante): NOOO.
-
 [Sconfitta: → II2s]
 
 [Regia: Spazienzio è seduto, zitto, con Grappino in braccio che gli lecca la mano. Silenzio.]
@@ -491,7 +489,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 **Celestina** (furba): E chi lo farebbe? Comunque… diversi anni fa hai fatto dei lavori proprio qui al Serraglio. Ricordi chi ti ha pagato?
 
-**Beppe** (tranquillo): Me lo ricordo benissimo, e ve lo dirò volentieri…
+**Beppe** (tranquillo): Mi ricordo benissimo come mi hanno pagato, e ve lo dirò volentieri…
 
 **Beppe** (contento): …per, uhm… diciamo venti euro. Ovviamente, in contanti.
 
@@ -531,7 +529,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 **Mara** (illuminata): Sigarette sottili, eh? È roba da uomini raffinati, roba da poteri forti. Torna tutto.
 
-[Se non segno chiave] **Beppe** (tranquillo): Sentite, io qua dovrei davvero montare almeno la serratura nuova, se no la prossima volta mi sparano invece di mandare solo quel coglione a menarmi. Ce l'ho già nel furgone, e visto che per ora vi autogestite il bar, tenete: questa è una delle sue chiavi.
+[Se non segno chiave] **Beppe** (tranquillo): Sentite, io qua dovrei davvero montare almeno la serratura nuova, se no la prossima volta mi sparano invece di mandare solo quel coglione a menarmi. Ce l'ho già nel furgone: la monto adesso, due minuti. E visto che per ora vi autogestite il bar, tenete: questa è una delle sue chiavi.
 
 [Se non segno chiave] [Segno: chiave]
 
@@ -581,17 +579,19 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 ## II3 — Il muro dei complotti
 
-[Sfondo: S2. Regia: sul muro del bagno, la parete dei complotti di Mara: fogli, fili di lana rossa, stagnola dappertutto. Tutti i fili finiscono su un tovagliolo con scritto «SERGIO».]
+[Sfondo: S2. Regia: Mara stringe al petto il casco di stagnola. Sul muro del bagno, la parete dei complotti di Mara: fogli, fili di lana rossa, stagnola dappertutto. Tutti i fili finiscono su un tovagliolo con scritto «SERGIO».]
 
 **Mara** (illuminata): Guardate e ammirate. Ho capito tutto!
 
-**Mara** (agitata): Speriamo solo che non mi leggano i pensieri… presto! Il mio cappello di carta stagnola!
+**Mara** (agitata): Speriamo solo che non mi leggano i pensieri… presto! Il mio casco di stagnola!
 
 **Spazienzio** (furioso): COS'È TUTTA QUESTA ROBA? CHE DIAVOLO HAI FATTO AL MIO BAGNO?
 
 **Mara** (seria): Lascia perdere il bagno, guarda! È tutto pianificato, tutto studiato da chi ci controlla… Guardate tutti questi elementi! Torna tutto!
 
-[Se segno bilancio] **Mara** (seria): Chi controlla il Dimmi Di Sì sapeva che il Serraglio era pieno di debiti e che il suo proprietario non vedeva l'ora di liberarsene!
+[Se segno bilancio] **Mara** (seria): Chi controlla il Dimmi Di Sì sapeva che il Serraglio perde soldi da ogni parte. E chi ha un bar che perde soldi da ogni parte, prima o poi lo vende!
+
+[Se segno frase] **Mara** (seria): E il signore di Piera, quello di dieci anni fa: alto e secco. Chi è alto e secco, qui dentro?
 
 [Se segno pista = beppe] **Mara** (seria): Chi ha finanziato i lavori al Serraglio anni fa? Chi è che ha giri loschi e fuma delle sigarette sottili?
 
@@ -605,9 +605,11 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 **Sergio** (strafottente): Guarda, guarda… il gruppo del disagio. Che volete da me?
 
-[Se segno via-atto-1 = mara] **Sergio** (malvagio): State ancora cercando di salvare questa topaia? Risparmiatevi pure la fatica. Lunedì sarà tutto finito.
+[Se segno via-atto-1 = mara] **Sergio** (malvagio): State ancora cercando di salvare questa topaia? Risparmiatevi pure la fatica. Lunedì mattina si firma, e sarà tutto finito.
 
 [Se segno via-atto-1 = mara] **Spazienzio** (furioso): AMMETTI ORDUNQUE LA TUA COLPA? ESPIAMOTI ALLORA!
+
+[Se non segno duccio] **Sergio** (strafottente): Vi presento Duccio, il buttafuori del Dimmi Di Sì. Fa anche da guardia del corpo, quando pago io.
 
 **Duccio** (fiero): Frena, piccolo sindacalista bastardo. Lui è protetto da me. Io sto dalla parte di chi ha i soldi: è una cosa di destra.
 
@@ -619,11 +621,11 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Se non segno frase] [Segno: ii3 = piera] [Sblocca: starter-piera]
 
-[Se visto II2s] **Piera** (offesa): Anche io… voglio partecipare… per il Grappino... mica per voi...
+[Se visto II2s] **Piera** (offesa): Grappino... digli che... gioco anche io... per te... mica per loro...
 
-[Se segno pista = beppe] **Piera** (brilla): Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno...
+[Se segno pista = beppe] **Piera** (brilla): Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno... e io... sto con te...
 
-[Se segno pista = celestina] **Piera** (brilla): Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno...
+[Se segno pista = celestina] **Piera** (brilla): Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno... e io... sto con te...
 
 → Partita II3: {ii3} (giocatore) contro Duccio
 
@@ -650,10 +652,16 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
    contro, poi con te» e tiene insieme «non mi hai interrotta mai» e l'offesa di II2s. «SE CI TIENI AL SILENZIO» Spazienzio lo dice a lei.
 3. **In II2b gioca Beppe contro Duccio,** e chi lo accompagna fa il tifo: è la sua scena vetrina. Ritocchi alle sue battute e ai ritenti.
 4. **Mara conosce già Beppe** (l'ha incontrato su tutte e due le vie dell'atto I): «Beppe, il tuttofare della mafia dei meccanici».
-5. **La chiave in II2b:** la serratura nuova Beppe ce l'ha già nel furgone, e la chiave è una delle sue.
+5. **La chiave in II2b:** la serratura nuova Beppe ce l'ha già nel furgone e la monta lì per lì, poi vi dà una delle sue chiavi.
 6. **Mara accusa Celestina in II2c** («apri la bocca»), per il filo comico e l'achievement «Ve l'avevo detto».
 7. **Battute rivolte al giocatore neutre:** «Mi vai a genio» (Piera), «Bel tifo, gente» (Beppe).
 8. **Refusi:** accenti delle maiuscole, «le mani», «dopo la chiusura», «lavoravo», «bilancio» ripetuto, formato della partita.
+
+**Dalla [revisione di coerenza](coerenza-principale.md)** (approvata dal proprietario: «Sì, integra»): niente ritento in I1 e II2a, dove
+perdere apre un ramo (la battuta di Celestina apre I1s); «chi vuole vendere» nella scelta di I1; «serratura» in I4; niente «di nuovo» in
+II1; Beppe ricorda come lo hanno pagato, non chi, e monta la serratura prima di dare la chiave; in II3 il casco di stagnola in mano
+(identikit), il muro con l'«alto e secco» di Piera e una deduzione dai conti, la data con la firma sulla via di Mara, Sergio che presenta
+Duccio a chi non lo conosce, Piera che dopo II2s parla al cane e che sulle altre piste si unisce a voi (una battuta per pista: il formato non ammette due condizioni sulla stessa riga).
 
 **Tenuto dal testo del proprietario, e riportato nella scaletta 0.3.5:** II3 è un duello contro Duccio, con Sergio che guarda e commenta;
 Sergio si combatte nell'atto II solo in II1.

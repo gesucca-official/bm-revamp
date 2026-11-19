@@ -3,8 +3,9 @@
 > **Serbatoio di progetto, senza valore normativo** (regole del [serbatoio delle carriere](README.md#regole-del-serbatoio)). Nomi delle
 > carte e numeri non compaiono: le partite dicono chi gioca contro chi e che cosa insegnano, non con quali carte.
 
-**Versione 0.3.5 — 19 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario, dopo il
-[mockup del grafo](mockup-principale.md) e dopo gli atti I e II riscritti dal proprietario ([dialoghi](principale-dialoghi.md)).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
+**Versione 0.3.6 — 19 novembre 2026. Scaletta della regia, rivista dopo le impressioni e le risposte del proprietario, dopo il
+[mockup del grafo](mockup-principale.md) e dopo gli atti I e II riscritti dal proprietario ([dialoghi](principale-dialoghi.md)) e dopo la
+[revisione di coerenza](coerenza-principale.md).** Tutto quello che non è segnato come idea o decisione del proprietario è *variante della
 regia*. Le versioni precedenti sono nella [cronologia](#cronologia).
 
 ## Lo spunto
@@ -27,7 +28,7 @@ e di giocarci, presentando i personaggi**. È quello che dicono già le decision
 - **Ogni personaggio si presenta due volte: prima contro, poi con te.** Lo si subisce da avversario, con il suo stile di gioco in bella
   vista, e poco dopo lo si gioca, quando prende le tue parti e ti dà il suo starter
   ([D18](../../product-roadmap.md#decisioni-del-proprietario)). Celestina contro in I1, con te in I4; Beppe contro in I2a o I3b, con te in
-  II2b, II3 o III1; Piera contro nel tutorial, con te in II2a, II3 o III1. Ogni personaggio ha la sua scena «vetrina», in cui la partita
+  II2b, II3 o III1; Piera contro nel tutorial, con te in II2a o II3. Ogni personaggio ha la sua scena «vetrina», in cui la partita
   mostra quello che sa fare (la colonna «Insegna»).
 - **Sergio e Duccio si vedono molto e non si giocano mai** ([D17, D18](../../product-roadmap.md#decisioni-del-proprietario)). Sono avversari
   ricorrenti, con le loro meccaniche vere: le contromosse e i ricatti di Sergio, Duccio che incassa e si fa male. Così il giocatore ne
@@ -48,7 +49,7 @@ e di giocarci, presentando i personaggi**. È quello che dicono già le decision
 - **Il percorso si finisce con gli starter, il 100% no** ([D6](../../product-roadmap.md#decisioni-del-proprietario)). Ogni nodo può avere
   una sfida in più, del tipo «vinci I2a con Mara in meno di N round» o «con un mazzo costruito di Beppe». Per questo servono mazzi migliori
   di quel personaggio, quindi carte, quindi buste o tempo.
-- **Tutti insieme al tavolo.** Le FFA a quattro e a cinque (I3b, I4, III2a, III4) mettono in scena tutto il cast insieme, che è anche la
+- **Tutti insieme al tavolo.** Le FFA a quattro e a cinque (I3b, III2a, III4) mettono in scena tutto il cast insieme, che è anche la
   forma di gioco con cui la carriera fa venire voglia di giocare con gli amici ([D4](../../product-roadmap.md#decisioni-del-proprietario)).
 
 ## Il racconto in tre atti
@@ -72,7 +73,7 @@ si aprono perdendo** ([sotto](#le-sconfitte-che-aprono-un-ramo)), che chiudono a
 | Atto | Domanda | Tappa | Cosa sblocca |
 |---|---|---|---|
 | **I — Chiude** | Il Serraglio chiude davvero? Chi lo vende? | CA-2 (primo terzo) | Starter di Celestina, PvP con il ritorno della combriccola |
-| **II — Di chi è il Serraglio?** | Chi c'è dietro? | CA-3 | Starter di Piera e di Beppe |
+| **II — Di chi è il Serraglio?** | Chi c'è dietro? | CA-3 | Starter di Piera, e di Beppe se non arriva in III1 |
 | **III — Lunedì** | Si firma? E chi firma? | CA-3 | La rivelazione, i finali, i segreti, il superboss |
 
 **Il filo comico.** Mara vede complotti dappertutto e nessuno le crede. Accusa uno per uno tutti, ognuno nella sua scena: Sergio in II1,
@@ -94,7 +95,7 @@ come ha comprato il Serraglio con i fondi neri.
 | Filo | Dove nasce | Dove torna | Che cosa cambia |
 |---|---|---|---|
 | **La chiave di Beppe** | I2a (via di Mara): Beppe cambia la serratura e si tiene sempre una copia in più, «per motivi personali». Chi non è passato da I2a la ottiene in II2b | III2b → **III3b Di notte al Serraglio**: con la chiave si entra nel bar chiuso la notte prima della firma. Chi perde III1 ci entra lo stesso, senza chiave, dalla porta sul retro che conosce Celestina (III1s) | Apre un nodo (segno `chiave`) |
-| **La frase di Piera** | Nel tutorial comincia «un signore...»; in II2a, se la difendi da chi la interrompe, arriva a «alto... e secco...». Se perdi, si offende (II2s) | III4, alla firma: con il segno la finisce, ed è la rivelazione detta da lei; senza, la interrompono di nuovo e Sergio si rivela da solo | Varianti di battuta (segno `frase`), achievement «Lasciatela finire» |
+| **La frase di Piera** | Nasce in II2a: comincia «dieci anni fa... un signore...»; se la difendi da chi la interrompe, arriva a «alto... e secco...». Se perdi, si offende (II2s) | III4, alla firma: con il segno la finisce, ed è la rivelazione detta da lei; senza, la interrompono di nuovo e Sergio si rivela da solo | Varianti di battuta (segno `frase`), achievement «Lasciatela finire» |
 | **Celestina lo sapeva** | I1s: solo chi perde I1 finisce sul pavimento accanto a lei e la ascolta: sapeva da tempo che il proprietario voleva vendere, viene di notte e guarda; dal pavimento ne ha visto solo le scarpe, a punta e lucide. In II1 insinua che Sergio torni dopo la chiusura: sa più di quanto dice | III3b: il padrone passa davvero ogni notte, e lei lo vede da anni. È furba: lo dice per intero solo a chi le ha dato retta sul pavimento, e deve dire perché non l'ha detto prima | Varianti di battuta (segno `celestina`); achievement «Lo diceva Celestina» |
 | **Il bilancio mangiato** | II2c (pista di Celestina): metà del bilancio della «Apri e Chiudi GmbH»; la firma manca, strappata coi denti di un cane piccolo | III1 → **S1 Il cane sa**: Grappino porta all'altra metà, con la firma | Apre il nodo segreto (segno `bilancio`) |
 | **Duccio offeso** | I2b (via di Spazienzio): Spazienzio lo umilia sulla porta del Dimmi Di Sì | II2b, III1, III3b: per Duccio diventa personale, e lo dice | Varianti di battuta (segno `duccio`) |
@@ -105,7 +106,7 @@ passato dall'altra via la sente in II3 da lui, che se la lascia scappare («lune
 ### Le sconfitte che aprono un ramo
 
 Nella 0.2 se ne apriva uno solo, i debiti dopo il torneo perso. Nella 0.3 sono quattro, più il finale F3. **Nessuna è una punizione:**
-ognuna fa vedere qualcosa che si vede solo perdendo, e si torna sulla strada senza partite in più. Il nodo perso, però, in quel giro non
+ognuna fa vedere qualcosa che si vede solo perdendo, e si torna sulla strada senza partite in più, salvo III3c, che ha la sua. Il nodo perso, però, in quel giro non
 è vinto, quindi non dà la carta della prima vittoria: le scene delle sconfitte danno un segno, una variante o un achievement. Se debbano
 dare anche altro si decide con i numeri, in [EC-0](../../product-roadmap.md#ec--economia).
 
@@ -234,10 +235,10 @@ Il proprietario ha chiesto come si raggiungono (14 novembre 2026). Tutti e due h
   in III1 compare una terza scelta, «dietro a Grappino». L'indizio sta in II2c: la firma è stata strappata coi denti di un cane piccolo.
   **La scena:** Grappino porta in cantina, dove nasconde le sue cose; c'è l'altra metà del bilancio, con la firma «S. Sommerso». Piera
   difende il cane, che non si tocca, e si gioca contro di lei con modificatori di incontro. **Gioca Celestina,** perché ci si arriva dalla
-  sua pista. Mara accusa Grappino, che la guarda. **Dopo:** si va a III4 sapendo tutto (variante sopra) e il finale è F1.
+  sua pista. Mara accusa Grappino, che la guarda. **Dopo:** si va a III4 sapendo tutto (variante sopra); vincendo III5 il finale è F1, perdendo è F3.
 - **S2 Sergio fa sul serio** (superboss del 100%, [CA-3](../../product-roadmap.md#ca--carriera-single-player)). **Come ci si arriva:**
   dopo aver visto il finale F1, in un giro nuovo, sulla bacheca compare un nodo dopo III5, «La rivincita»: Sergio non sopporta di aver
-  perso in casa sua. È **facoltativa:** dopo F1 si offre alla fine di III5 su ogni strada, e si può rifiutare. **L'indizio** sta nella
+  perso in casa sua. È **facoltativa:** a chi ha già visto F1 in un giro precedente si offre alla fine di III5 vinto, su ogni strada, e si può rifiutare. **L'indizio** sta nella
   scena di F1: «la prossima volta faccio sul serio». **La partita:** Sergio bara **apertamente**, come chiede la raccomandazione della
   regia, con modificatori dichiarati e mostrati al tavolo che vengono dal suo personaggio: «ha letto i tuoi messaggi» (vede la tua mano),
   «ha comprato il mazzo» (pesca due volte), «società apri e chiudi» (ogni tanto una sua carta scartata torna in mano). Si vince solo con
@@ -250,7 +251,7 @@ Il proprietario ha chiesto come si raggiungono (14 novembre 2026). Tutti e due h
 | Ve l'avevo detto | Mara accusa tutti, nessuno escluso: Sergio, Piera, Beppe, Celestina e Grappino, in giri diversi | «Mara ha sospetti su tutti. Proprio su tutti?» |
 | Lasciatela finire | Vinci II2a, e Piera finisce la frase alla firma | «Qualcuno interrompe sempre Piera» |
 | Lo diceva Celestina | Le dai retta sul pavimento (I1s) ed entri di notte al Serraglio (III3b) nello stesso giro | «Celestina parla nel sonno. Qualcuno l'ha ascoltata?», poi «Certe sconfitte ti mettono all'altezza del pavimento» |
-| Porta sul retro | Entri di notte al Serraglio senza la chiave (III1s) | «Al Serraglio c'è sempre un'altra porta» |
+| Porta sul retro | Entri di notte al Serraglio dalla porta sul retro (III1s), che tu abbia la chiave o no | «Al Serraglio c'è sempre un'altra porta» |
 | Monetine | F2 | «Il Serraglio potrebbe essere di tutti» |
 | Sedici euro | F3 | (nascosto) |
 | Il cane sa | S1 | «Grappino guarda Sergio in un modo strano» |
@@ -292,13 +293,37 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
 1. **L'ultimo duello contro Sergio** (III5) come vera fine della storia, dopo la rissa della firma: va bene che il «boss» della principale
    sia lui, al meglio delle sue carte, e che il superboss S2 sia lo stesso Sergio che bara? Si può decidere anche scrivendo i dialoghi.
 
+## Da tenere per l'atto III
+
+Dalla [revisione di coerenza](coerenza-principale.md) del 19 novembre 2026, approvate dal proprietario («Sì, integra»), da usare scrivendo
+i dialoghi.
+
+- **III3b non deve bruciare la rivelazione:** Sergio che entra con le sue chiavi la notte prima, e Duccio con il contratto, lo dicono
+  proprietario. Proposta: Sergio è già al bancone quando arrivate (Celestina sa che passa ogni notte), Duccio porta una busta chiusa;
+  le chiavi di Sergio si vedono in III4.
+- **«Ve l'avevo detto che passa ogni notte»** in III3b solo con il segno `celestina`; senza, «qui passa qualcuno dopo la chiusura».
+  Celestina deve dire perché ha taciuto (domanda aperta: nessuno le crede, o Sergio le lascia il pavimento?).
+- **In III1** ribadire che è domenica sera e che si firma «domani mattina».
+- **Il ricatto del kebab** (III2b) ha bisogno di una fonte, perché nel tutorial il kebab è stato rifiutato: Sergio l'ha visto dal suo
+  sgabello, e minaccia una recensione per l'ordine rimasto aperto.
+- **La colletta non basta** per F2, nemmeno con i dieci euro di Sergio: proposta, acconto e il resto a rate (domanda aperta). In F2 i
+  dieci euro delle mance di Mara (II2b) tornano come sua quota, accanto alle monetine di Celestina.
+- **Duccio** si combatte da 3 a 8 volte a giro. Proposta: in III3a fa l'arbitro della colletta e si gioca contro Sergio; il duello di
+  III1 resta. Con il segno `duccio` ricordare la porta in III1 e III3b.
+- **Grappino** annusa il posacenere di Sergio prima di scappare con la carta (III1, S1): è l'indizio «Grappino guarda Sergio in un modo
+  strano». In S1 Piera lo richiama col bicchierino.
+- **III4:** dopo che Spazienzio le ruba «VE L'AVEVO DETTO», Mara è già al complotto successivo: l'assegno si autodistrugge. Senza il
+  segno `frase`, Piera comincia «dieci anni fa... un signore...» prima di essere interrotta.
+- **F3:** Celestina è già sdraiata dietro al cordone del disco pub, e Duccio con l'ombrellino indica la fila sbagliata.
+- **S1 svela Sergio prima della firma:** voluto, è il premio del segreto. La revisione lo segnalava come errore; si tiene.
+
 ## Prossimi passi
 
 1. Il [mockup del grafo](mockup-principale.md) nel prototipo, fatto sulla 0.2 e provato dal proprietario, si aggiorna alla 0.3: le
    tre sconfitte che aprono un ramo, le varianti di battuta nuove, i due achievement cambiati e quello nuovo.
 2. Il proprietario riscrive la scaletta dove serve: nomi dei nodi, scene, chi gioca.
-3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): l'atto I è riscritto dal proprietario (19 novembre
-   2026); seguono gli atti II e III, prima stesura della regia o direttamente del proprietario.
+3. Poi i dialoghi, scena per scena, come per il [tutorial](tutorial-dialoghi.md): gli atti I e II sono riscritti dal proprietario (19
+   novembre 2026); segue l'atto III, prima stesura della regia o direttamente del proprietario, con le [note](#da-tenere-per-latto-iii).
 4. Gli sfondi nuovi (il Dimmi Di Sì dentro, il retro del bar, la cantina) e i ritratti dei quattro, dagli
    [identikit](../set-base/identikit.md#celestina-bucatina) approvati il 12 novembre 2026.
 
@@ -327,3 +352,6 @@ narrazione, aggiungere le sconfitte che aprono un ramo. Lunghezza e complessità
   Duccio l'anticipo della ristrutturazione e ricorda valigetta e sigarette sottili; il bilancio dice che il Serraglio lo tiene aperto chi
   gli vuole bene; II3 duello contro Duccio, con Sergio che guarda; Celestina sa più di quanto dice. Restano Piera in II2a e Beppe in II2b
   come giocati, e la conclusione sbagliata di Mara in II3 («lavora per il Dimmi Di Sì»).
+- **0.3.6 — 19 novembre 2026.** Dalla [revisione di coerenza](coerenza-principale.md): la frase di Piera nasce in II2a; Piera arriva
+  sempre entro II3, solo Beppe può arrivare in III1; III3c è la sola sconfitta con una partita; S1 dà F1 o F3; S2 dopo III5 vinto;
+  «Porta sul retro» da III1s comunque; I4 fuori dalle FFA grandi; note per l'atto III.
