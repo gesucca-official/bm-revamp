@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 18 novembre 2026, dopo D141). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D142). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In attesa:** decisione sulla [proposta SB-20c, Fase A](design/set-base/sb-20c-proposta.md#domande) (domande 1–3). [SB-20b](reports/set-base/sb-20b-report.md) **chiuso** (D141). In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
+> - **In corso:** SB-20c Fase B1 (testi generati in bozza e controllo), sulla [proposta](design/set-base/sb-20c-proposta.md) approvata in D142; poi B2 (simboli nel client). [SB-20b](reports/set-base/sb-20b-report.md) **chiuso** (D141). In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
 > - **Prossimo:** le scelte di D136 e la rarità P (D137); poi [SB-20](#sb-20--prima-misura-dellintero-set). Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D141, D140, D139, D138, D137, D136. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D141).
+> - **Decisioni da leggere:** D142, D141, D139, D138, D137, D136. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D142).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -613,7 +613,7 @@ controllo FFA.
 
 **In ingresso ([D131](#decisioni-del-proprietario)).** Le carte da booster rendono il mazzo più forte dello starter, fra 0 e +10 punti di media, mai oltre +15 in un confronto: vale per tutte le carte fuori dagli starter, anche quelle d'archetipo. Estasi (nel mazzo vincente di 14 ricerche su 14 prima di SB-19) e Grappa (+11,5 da sola in un mazzo di Beppe senza chi usa L, da spiegare) si correggono qui.
 
-**SB-20c, Fase A.** [Proposta sui testi generati](design/set-base/sb-20c-proposta.md) e prototipo su 116 carte; STOP per decisione del proprietario.
+**SB-20c, Fase A.** [Proposta sui testi generati](design/set-base/sb-20c-proposta.md) e prototipo su 116 carte; STOP per decisione del proprietario. **Approvata in [D142](#decisioni-del-proprietario)** («Sì, tutto»), con la Fase B in due: B1 testi in bozza e controllo, B2 simboli nel client.
 
 ### SB-21 — Giri di correzione
 
@@ -757,7 +757,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D141 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D142 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
