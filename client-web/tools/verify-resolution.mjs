@@ -666,7 +666,10 @@ try{
  }
  // What happens during the round before the probes. The last two send with Enter on ✓, the pointer left on an (i).
  const ACTIONS=['let it run','tap','skip','card during the sequence','inspection during the sequence','rest on the (i) through the close-ups','rest on the (i) of the card sent','rest on the (i) of an object','to the (i) right after ✓, mouse only'];
- const restOn=async p=>{const label=await infoLabel(p,200);if(label){const b=await infoButton(p).first().boundingBox();await p.page.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.page.waitForTimeout(40);}return label;};
+ // The box of the (i) may be gone by now: in the deliberate race with the click on ✓ the view with the pending move can already have removed the button.
+ // That is an outcome of the race (the label was seen, the pointer does not move), not an error; any other failure still throws.
+ const boxOf=async loc=>{try{return await loc.boundingBox({timeout:300});}catch(e){if(e?.name==='TimeoutError')return null;throw e;}};
+ const restOn=async p=>{const label=await infoLabel(p,200);if(label){const b=await boxOf(infoButton(p).first());if(b){await p.page.mouse.move(b.x+b.width/2,b.y+b.height/2);await p.page.waitForTimeout(40);}}return label;};
  const enterOnConfirm=async p=>{await p.page.getByTestId('confirm').focus();await p.page.keyboard.press('Enter');};
  async function infoGames(p,label,{start,games=2,maxRounds=16,touch=false}){
   const rows=[],probe=touch?probeTouch:probeMouse;let firstLoss=null,round=0,newGameAfterLoss=null;
