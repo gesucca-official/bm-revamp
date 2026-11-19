@@ -1,13 +1,13 @@
 # Il Serraglio chiude — dialoghi
 
 > **Atto I riscritto dal proprietario il 19 novembre 2026,** sulla prima stesura della regia del 14 novembre e sulla
-> [scaletta 0.3.4](principale.md), con le correzioni di coerenza proposte dalla regia e approvate dal proprietario («Sì, applica»):
-> sono elencate nelle [note](#note-per-la-revisione). Senza valore normativo; le battute sono provvisorie quanto i nomi delle carte. Il
+> scaletta 0.3.4, con le correzioni di coerenza proposte dalla regia e approvate dal proprietario («Sì, applica»):
+> sono elencate nelle [note](#atto-i). Senza valore normativo; le battute sono provvisorie quanto i nomi delle carte. Il
 > giocatore non parla mai direttamente, e le battute che si rivolgono a lui o parlano di lui sono neutre rispetto al genere
 > ([regole](README.md#come-si-scrivono-le-scene)).
 >
-> **Atto II: prima stesura della regia, 19 novembre 2026,** sulla scaletta 0.3.4, da riscrivere dal proprietario; note e domande
-> [in fondo](#atto-ii-prima-stesura-della-regia-19-novembre-2026). Poi l'atto III.
+> **Atto II riscritto dal proprietario il 19 novembre 2026,** sulla prima stesura della regia dello stesso giorno e sulla
+> [scaletta 0.3.5](principale.md), con le correzioni approvate elencate nelle [note](#atto-ii). Poi l'atto III.
 
 **Come si legge.** Come il [tutorial](tutorial-dialoghi.md#tutorial--dialoghi): `**Nome** (espressione): testo` è una battuta; chi non è
 un personaggio del gioco (la combriccola) è una figura in ombra; `[Regia: …]` e gli altri comandi fra parentesi quadre non si leggono; il
@@ -333,59 +333,75 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S2. Regia: il Serraglio aperto, lo striscione storto; sul bancone un foglio a quadretti: «PETIZIONE CONTRO LA CHIUSURA», tre firme, una è una macchia.]
 
-**Spazienzio** (furioso): È STATO IL DIMMI DI SÌ. È OVVIO. TORNIAMO LÀ E SPIEGHIAMOCI DI NUOVO.
+**Spazienzio** (furioso): ASPETTARE MI INNERVOSISCE! CHE FACCIAMO? ANDIAMO DI NUOVO A SPACCARE IL DIMMI DI SÌ! È TUTTA COLPA LORO!
 
-**Celestina** (furba): Il Dimmi Di Sì compra. Ma qualcuno vende.
+**Celestina** (furba): Il Dimmi Di Sì compra, ma non è l'unico responsabile. Se qualcuno può comprare, è perché qualcun altro sta vendendo.
 
-**Mara** (pensierosa): Esatto. E chi vende? Ho ristretto il campo dei sospetti.
+**Mara** (pensierosa): Ha senso... ma chi è che sta vendendo il Serraglio? La gente qua si serve da sola, non c'è mai stato neanche un barista, figuriamoci un proprietario.
 
-**Mara** (illuminata): Siete tutti voi.
+**Mara** (illuminata): Ho ristretto il campo dei sospetti: siete tutti voi!
 
-**Spazienzio** (fumante): ANCHE IO?
+**Spazienzio** (fumante): ANCHE IO?!
 
-**Mara** (sospettosa): Soprattutto tu. Chi è che apre le serrande a mani nude? Uno che ha qualcosa da nascondere dietro.
+**Mara** (sospettosa): Soprattutto tu. Usa il cervello, Mohawk che non sei altro!
+
+**Mara** (sospettosa): Questo casino del bar che viene venduto ti sta facendo menare le mani a più non posso, e tu adori menare le mani!
 
 [Regia: dal fondo del bancone, uno sgabello che nessuno aveva mai guardato. Sergio si alza, la sigaretta sottile spenta fra le dita.]
 
-**Sergio** (strafottente): Una petizione. Tre firme, e una è di un cane.
+**Sergio** (strafottente): Ma vi sentite quando parlate? Siete patetici.
 
-[Se visto I3b] **Spazienzio** (furioso): TU! IL SIGNORE DEL MERCEDES! CHE CI FAI NEL NOSTRO BAR?
+[Se visto I3b] **Spazienzio** (furioso): TU SEI QUELLO CHE SI È FATTO AGGIUSTARE IL MERCEDES DAL MECCANICO METALLARO! CHE CI FAI NEL NOSTRO BAR?
 
-[Se visto I3b] **Sergio** (annoiato): Ci bevo. Tutte le sere, da dieci anni. Siete voi che non guardate mai più in alto del bicchiere.
+[Se visto I3b] **Sergio** (annoiato): Quello che fate voialtri: bevo. Tutte le sere, da molti anni. Non mi stupisce che non mi abbiate mai notato, rintronati come siete.
 
-[Se non visto I3b] **Mara** (neutra): Lui è Sergio. Sta sempre in fondo al bancone, prende in giro tutti e nessuno sa che lavoro fa. Io lo so: nessuno.
+[Se non visto I3b] **Mara** (agitata): E tu chi sei?
 
-**Sergio** (strafottente): Sergio Sommerso, piacere mio. Volete salvare questo posto? Siete sotto da marzo con il fornitore, il frigo delle birre è del duemilasei e la spina la pagate il triplo di quanto costa.
+[Se non visto I3b] **Celestina** (neutra): Stai calma, lui è Sergio. Sta quasi sempre per conto suo…
+
+[Se non visto I3b] **Celestina** (furba): …ma a volte sospetto che torni anche dopo la chiusura, per incontrarsi con tutta una serie di persone… difficili da inquadrare.
+
+**Sergio** (neutro): Sergio Sommerso, piacere mio.
+
+**Sergio** (strafottente): Volete davvero salvare questo posto? Cominciate a bere il triplo, allora, e soprattutto cominciate a pagare le bevute! Questa baracca ha debiti con chiunque, è spacciata.
 
 **Mara** (sospettosa): E tu come fai a saperlo?
 
-**Sergio** (malvagio): Io so sempre tutto. Siete voi che non sapete niente. E tu, faccia nuova: pochi giorni qui e hai già addosso la puzza di questo posto.
+**Sergio** (malvagio): Ho i miei metodi per sapere le cose. Siete voi che non sapete niente, anzi, non valete niente. Mi verrebbe quasi voglia di insegnarvi come funziona il mondo…
 
 → Partita II1: a scelta fra Celestina, Mara e Spazienzio (giocatore) contro Sergio
 
-**Ritento.** **Sergio** (strafottente): Riprova pure. Ti ho già letto le carte in faccia.
+**Ritento.** **Sergio** (strafottente): Ancora? E perché mai dovrebbe andare diversamente?
 
-**Sergio** (annoiato): Bene, vi siete sfogati. Io non firmo niente senza un avvocato. Buona serata, marcioni.
+**Sergio** (annoiato): Bene, sfogare vi siete sfogati. Direi che possiamo andare avanti con le nostre vite. Buona serata, perdenti!
 
 [Regia: Sergio torna al suo sgabello in fondo, come se niente fosse.]
 
-**Mara** (illuminata): Sa troppe cose. Sergio lavora per loro. È evidente.
+**Mara** (illuminata): Quello là sa troppe cose. Lavora per loro, per i poteri forti!
 
-**Celestina** (furba): O sa troppe cose perché le paga.
+**Celestina** (furba): Oppure ha qualche informatore. Che lavoro fa, esattamente?
 
-**Mara** (sospettosa): Appunto. Paga il Dimmi Di Sì. Celestina, ogni tanto ci arrivi anche tu.
+**Mara** (sospettosa): Non ne ho la minima idea. Io credo che sia pagato dal Dimmi Di Sì.
+
+**Celestina** (pensierosa): No, non avrebbe senso. Però… non si sa mai. Se fosse davvero così, avrebbe lasciato qualche traccia. Tracce che io so dove trovare.
+
+**Spazienzio** (serio): IO DICO CHE CONVIENE ANDARE A FARLO PARLARE.
+
+**Celestina** (neutra): Non gli caveremo niente. Però… questo bar è frequentato sempre dalla stessa gente. Forse qualcuno degli altri avventori sa qualcosa che io non so.
+
+**Celestina** (neutra): {giocatore}, tu che dici? Che facciamo?
 
 → Scelta muta: quale pista?
 
-- con Piera, che si ricorda di dieci anni fa [Segno: pista = piera] → II2a
-- con Beppe, che sa chi pagava in contanti [Segno: pista = beppe] → II2b
-- con Celestina, che fruga nel bidone [Segno: pista = celestina] → II2c
+- Chiedi a Piera, che si ricorda di dieci anni fa [Segno: pista = piera] → II2a
+- Chiedi a Beppe, che sa chi pagava in contanti [Segno: pista = beppe] → II2b
+- Vai con Celestina, che fruga nel bidone [Segno: pista = celestina] → II2c
 
 ## II2a — La frase di Piera
 
 [Sfondo: S2. Regia: Piera al suo posto al bancone, Grappino ai suoi piedi; davanti a lei un bicchierino.] [Entra: grappino seduto]
 
-**Mara** (sospettosa): Piera. Tu c'eri, dieci anni fa. Tu sai. E stai coprendo qualcuno, ce l'hai scritto nel bicchiere.
+**Mara** (sospettosa): Piera, tu vieni in questo posto da quasi quindici anni. Tu sai qualcosa. Forse stai coprendo qualcuno.
 
 **Piera** (offesa): Io... non copro... nessuno... al massimo... il Grappino... quando ha freddo...
 
@@ -397,15 +413,25 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Stacchi: Spazienzio fumante] [Interrotta]
 
-**Spazienzio** (furioso): UN SIGNORE CHI? DILLO! CONCLUDIAMOTI!
+**Spazienzio** (furioso): UN SIGNORE CHI? CONCLUDIAMOTI!
 
-**Piera** (offesa): Se... mi interrompi... ricomincio... da capo...
+**Piera** (offesa): Se... mi interrompi... ricomincio... da capo... allora… dicevo…
 
-**Spazienzio** (furioso): NO! DA CAPO NO! TACCIAMOCI TUTTI!
+**Spazienzio** (spaventato): NO! DA CAPO NO! TACCIAMOCI TUTTI!
+
+**Piera** (offesa): Mi stai ancora… interrompendo…
 
 [Sprite: grappino ringhia]
 
-**Mara** (contenta): {giocatore}, se vuoi sentire la fine, qualcuno deve far stare zitto Spazienzio. Io non posso: devo interromperla io, dopo.
+**Mara** (contenta): {giocatore}, se vogliamo farle dire quello che ha da dire, qualcuno deve far stare zitto Spazienzio.
+
+**Spazienzio** (spaventato): MA SONO ZITTO!
+
+**Piera** (offesa): Non… abbastanza…
+
+**Spazienzio** (furioso): IO STO ZITTO SOLO QUANDO SPACCO OSSA, VA BENE?
+
+**Spazienzio** (furioso): SE CI TIENI AL SILENZIO, LO RICEVERAI A MODO MIO!
 
 → Partita II2a: Piera (giocatore) contro Spazienzio
 
@@ -423,11 +449,11 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Interrotta]
 
-**Mara** (illuminata): Alto e secco. Un lampione. Ma certo: i lampioni vedono tutto, hanno le telecamere. Il Serraglio l'ha salvato il Comune!
+**Mara** (illuminata): Alto e secco. Un lampione! Ma certo: i lampioni vedono tutto, hanno le telecamere. Il Serraglio l'ha salvato il Comune!
 
 **Piera** (offesa): Ma... chi ha... parlato... di lampioni...
 
-**Piera** (contenta): Comunque... tu, {giocatore}... non mi hai... interrotta... mai... Tieni... le mie carte... che io... tanto... con questi qui...
+**Piera** (contenta): Comunque... tu, {giocatore}... non mi hai... interrotta... mai... Mi vai a genio… io… sono con te…
 
 [Segno: frase]
 
@@ -443,7 +469,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 **Piera** (offesa): Io... con voi... non parlo più... Parlo solo... col Grappino... che lui... non interrompe mai...
 
-**Spazienzio** (quasi calmo): MEGLIO COSÌ.
+**Spazienzio** (quasi calmo): GRAZIE AL CIELO.
 
 **Piera** (offesa): Grappino... a te... lo dico... dieci anni fa... un signore...
 
@@ -455,57 +481,61 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S2. Regia: Beppe al bancone, cuffie al collo, un panino in mano; sul tavolo la cassetta degli attrezzi.]
 
-**Mara** (sospettosa): Beppe. I lavori del Serraglio di dieci anni fa li hai fatti tu. Chi ti ha pagato?
+**Mara** (sospettosa): Beppe, il tuttofare della mafia dei meccanici. Proprio te cercavamo.
 
-**Beppe** (tranquillo): Me lo ricordo benissimo. E ve lo dico volentieri.
+**Beppe** (confuso): Non mi definirei proprio così, ma…
 
-**Beppe** (contento): In contanti. Cinquanta euro.
+**Celestina** (furba): Sì, è lui. Ma non è solo un meccanico, è anche idraulico, carpentiere, imbianchino… dico bene?
 
-**Mara** (agitata): Cinquanta euro? Io ne ho dieci, e sono le mance di tutto il mese!
+**Beppe** (tranquillo): Beh, non dico mai di no a un bel lavoretto in nero.
 
-**Spazienzio** (fumante): IO NON HO SOLDI. HO SOLO MANI.
+**Celestina** (furba): E chi lo farebbe? Comunque… diversi anni fa hai fatto dei lavori proprio qui al Serraglio. Ricordi chi ti ha pagato?
+
+**Beppe** (tranquillo): Me lo ricordo benissimo, e ve lo dirò volentieri…
+
+**Beppe** (contento): …per, uhm… diciamo venti euro. Ovviamente, in contanti.
+
+**Mara** (agitata): Venti euro? Io ne ho dieci, e sono le mance di tutto il mese!
+
+**Spazienzio** (fumante): IO NON HO SOLDI, PERÒ HO LE MANI. VOGLIAMO USARLE?
 
 [Regia: la porta si apre; entra Duccio, con un blocchetto delle ricevute.]
 
-[Se segno duccio] **Duccio** (fiero): Guarda chi c'è, la zecca della porta. Il rancore è una cosa di destra, te l'avevo detto. Ma oggi sono qui per lavoro.
+[Se segno duccio] **Duccio** (fiero): Guarda chi c'è, la zecca dell'altra volta. Verrà il giorno in cui potrò darti quello che ti meriti, ma non è oggi. Oggi sono qui per lavoro.
 
-**Duccio** (serio): Beppe. Il Dimmi Di Sì ti ha dato l'anticipo per ristrutturare questo cesso, e tu non hai fatto niente. O lavori, o restituisci.
+**Duccio** (serio): Beppe, il Dimmi Di Sì ti ha dato l'anticipo per ristrutturare questo cesso, e tu ancora non hai fatto niente.
 
-**Mara** (illuminata): L'anticipo? Per ristrutturare il Serraglio? Tu lavori per loro!
+**Beppe** (neutro): Mi avevano anche detto di aspettare fino al passaggio di proprietà.
 
-**Beppe** (tranquillo): Sì.
-
-**Mara** (agitata): E per la Apri e Chiudi!
+**Mara** (illuminata): L'anticipo per ristrutturare il Serraglio? Tu lavori per loro!
 
 **Beppe** (tranquillo): Sì.
 
-**Mara** (agitata): E per noi?
+**Celestina** (furba): Lavoreresti anche per noi, se ti pagassimo?
 
-**Beppe** (tranquillo): Se pagate, sì. Lavoro per tutti quelli che pagano. Non è un complotto, è la partita IVA che non ho.
+**Beppe** (tranquillo): Certo. Io lavoro per chiunque, soprattutto per chi mi paga in nero.
 
-**Mara** (perplessa): …Non vale, se lo ammetti.
+**Duccio** (fiero): Basta chiacchiere. Restituisci l'anticipo che ti è stato dato, o te la vedrai con me. Ti avverto: io sono di destra!
 
-**Duccio** (fiero): Basta chiacchiere. Restituisci, o ti sfratto io l'anticipo dalle tasche.
-
-**Beppe** (contento): Facciamo così: se mi date una mano con questo qua, vi faccio lo sconto. Mettiamo su qualcosa di cattivo.
+**Beppe** (annoiato): Sentite, voialtri, facciamo così: tenetemi il panino, a questo idiota ci penso io. Voi fate il tifo, e se lo sistemo vi dirò quello che volete sapere.
 
 → Partita II2b: Beppe (giocatore) contro Duccio
 
-**Ritento.** **Beppe** (tranquillo): Aspetta, giro il disco. Il lato B è più cattivo. · **Duccio** (fiero): Onore, ordine, rispetto! E anticipo.
+**Ritento.** **Beppe** (tranquillo): Aspetta, mi metto in cuffia un po' di metal per caricarmi! · **Duccio** (fiero): Non sei tu che sei scarso, sono io che sono di destra!
 
 [Regia: Duccio se ne va zoppicando, il blocchetto delle ricevute stropicciato.]
 
-**Beppe** (contento): Sconto meritato. Allora: dieci anni fa. Una valigetta di pelle buona, piena di contanti. La faccia non l'ho mai vista: le buste me le lasciava sotto la porta dell'officina.
+**Beppe** (contento): Bel tifo, gente. Allora: i lavori qui al Serraglio, giusto? È passato tanto tempo, ma ricordo una valigetta di pelle piena di contanti che mi aspettava proprio sul bancone a lavoro finito.
 
-**Beppe** (pensieroso): Una cosa me la ricordo, però. I soldi puzzavano di sigaretta. Di quelle sottili.
+**Beppe** (pensieroso): Mi ricordo anche un'altra cosa, però: nel barattolo di vernice che usavo come portacenere mentre lavoravo, ogni tanto comparivano dei mozziconi di sigarette molto sottili. Mi sono sempre chiesto chi fosse a fumarle.
 
-**Mara** (illuminata): Sigarette sottili. Sigarette di contrabbando. Il contrabbando è dei poteri forti. Torna tutto.
+**Mara** (illuminata): Sigarette sottili, eh? È roba da uomini raffinati, roba da poteri forti. Torna tutto.
 
-[Se non segno chiave] **Beppe** (tranquillo): E visto che siete clienti, vi do anche questa. Una copia della chiave nuova del Serraglio. Per motivi personali.
+[Se non segno chiave] **Beppe** (tranquillo): Sentite, io qua dovrei davvero montare almeno la serratura nuova, se no la prossima volta mi sparano invece di mandare solo quel coglione a menarmi. Ce l'ho già nel furgone, e visto che per ora vi autogestite il bar, tenete: questa è una delle sue chiavi.
 
 [Se non segno chiave] [Segno: chiave]
 
-**Beppe** (contento): E le mie carte. Così la prossima volta la rissa la pagate voi.
+**Beppe** (contento): E comunque, sapete come divertirvi: mi piacete. Sto dalla vostra parte!
 
 [Sblocca: starter-beppe]
 
@@ -515,37 +545,35 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S1 di sera. Regia: dietro il bar, Celestina è dentro il bidone fino alla vita; spuntano solo le gambe.]
 
-**Mara** (sospettosa): Celestina. Che stai facendo nel bidone?
+**Mara** (sospettosa): Celestina, tutto a posto?
 
-**Celestina** (furba): La spesa.
+**Celestina** (neutra): Sì, va tutto a meraviglia. È incredibile quanta roba la gente butti via…
 
 [Regia: Celestina riemerge con un foglio stropicciato e unto, mezzo rosicchiato.]
 
-**Celestina** (contenta): Guarda qua. Carta buona, intestata. «Apri e Chiudi GmbH. Bilancio.» Sa di soldi.
+**Celestina** (contenta): Guardate un po' qua. Carta buona, intestata alla «Apri e Chiudi GmbH». Sembra una specie di bilancio… è del Serraglio!
 
-**Celestina** (furba): Il Serraglio perde soldi da dieci anni. Ogni anno qualcuno ci rimette, e non fiata. Chi butta via i soldi così, o è scemo, o gli vuole bene.
+**Celestina** (furba): Ha ragione quel tizio insopportabile: il Serraglio perde soldi da ogni parte. Chi terrebbe aperto un bar del genere? Uno scemo, o uno che in fondo gli vuole bene.
 
-**Mara** (illuminata): Dammelo! Va sul mio muro dei complotti, al centro, con la puntina rossa!
+**Mara** (illuminata): Fammi vedere! Quella è la prova del complotto dei poteri forti! Va dritto sul mio muro dei complotti!
 
-**Spazienzio** (soddisfatto): DAMMELO A ME. È CARTA. CI ACCENDO IL BARBECUE. BRUCIAMOCI!
+**Spazienzio** (soddisfatto): LASCIA PERDERE, DAMMELO A ME. È CARTA, E LA CARTA È FATTA PER BRUCIARE!
 
-**Celestina** (arrabbiata): Ce l'ho trovato io. Il bidone è mio come il pavimento.
-
-[Regia: Celestina dà un morso all'angolo del foglio, per marcare il territorio.]
+**Celestina** (arrabbiata): L'ho trovato io!
 
 → Partita II2c: Celestina (giocatore) contro Mara e Spazienzio
 
-**Ritento.** **Celestina** (assonnata): Aspettate. Mi è andata di traverso la Svizzera.
+**Ritento.** **Celestina** (assonnata): Sempre a fare a cazzotti, ma che vita di merda è?
 
 *In fondo al foglio, dove dovrebbe esserci la firma, manca un pezzo. Non l'ha strappato Celestina: i segni sono di denti piccoli, di un cane piccolo.*
 
-**Mara** (sospettosa): Celestina. Apri la bocca.
+**Celestina** (annoiata): Tanta confusione per niente. Proprio dove dovrebbe esserci il nome di chi l'ha redatto, è strappato!
+
+**Mara** (sospettosa): Celestina, apri la bocca. Te la sei mangiata apposta, la firma! Chi stai coprendo?
 
 **Celestina** (furba): Io mordo di lato. Questi sono morsi di fronte.
 
-**Mara** (agitata): Te la sei mangiata apposta, la firma! Per coprire qualcuno! Chi ti paga, il bidone?
-
-**Celestina** (furba): Ho fame, mica complotti. Tieni, metà a te per il muro. L'altra metà è la mia cena.
+**Mara** (illuminata): Non importa, non importa! Questo è il tassello che mi mancava! Venite con me, presto!
 
 [Segno: bilancio]
 
@@ -555,83 +583,95 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S2. Regia: sul muro del bagno, la parete dei complotti di Mara: fogli, fili di lana rossa, stagnola dappertutto. Tutti i fili finiscono su un tovagliolo con scritto «SERGIO».]
 
-**Mara** (illuminata): Ecco. La Apri e Chiudi, la chiave, i soldi in contanti, il Dimmi Di Sì. Tutti i fili portano a lui.
+**Mara** (illuminata): Guardate e ammirate. Ho capito tutto!
 
-[Se segno bilancio] **Mara** (illuminata): E il bilancio rosicchiato, qui. Sotto la stagnola, così non lo leggono dal satellite.
+**Mara** (agitata): Speriamo solo che non mi leggano i pensieri… presto! Il mio cappello di carta stagnola!
 
-[Se segno pista = beppe] **Mara** (illuminata): E le sigarette sottili. Chi le fuma, qui dentro? Uno solo.
+**Spazienzio** (furioso): COS'È TUTTA QUESTA ROBA? CHE DIAVOLO HAI FATTO AL MIO BAGNO?
 
-**Mara** (seria): Sergio lavora per il Dimmi Di Sì. Gli fa da spia, gli porta i conti. Lo affrontiamo. Adesso.
+**Mara** (seria): Lascia perdere il bagno, guarda! È tutto pianificato, tutto studiato da chi ci controlla… Guardate tutti questi elementi! Torna tutto!
+
+[Se segno bilancio] **Mara** (seria): Chi controlla il Dimmi Di Sì sapeva che il Serraglio era pieno di debiti e che il suo proprietario non vedeva l'ora di liberarsene!
+
+[Se segno pista = beppe] **Mara** (seria): Chi ha finanziato i lavori al Serraglio anni fa? Chi è che ha giri loschi e fuma delle sigarette sottili?
+
+**Mara** (seria): Sergio!
+
+**Mara** (seria): Lui lavora per il Dimmi Di Sì: è il loro uomo qui dentro, quello che convince il proprietario a vendere!
+
+**Spazienzio** (furioso): QUEL GABBIANO RIVESTITO FA IL GALOPPINO DEI FIGHETTI?
 
 [Regia: al bancone. Sergio sul suo sgabello, Duccio accanto a lui con un cocktail con l'ombrellino.]
 
-**Sergio** (strafottente): Il muro dei complotti. Con i fili di lana. Ci avete messo tutto il pomeriggio, immagino.
+**Sergio** (strafottente): Guarda, guarda… il gruppo del disagio. Che volete da me?
 
-[Se segno via-atto-1 = mara] **Sergio** (malvagio): Fate pure i vostri disegnini. Tanto lunedì mattina si firma, e lunedì sarete fuori.
+[Se segno via-atto-1 = mara] **Sergio** (malvagio): State ancora cercando di salvare questa topaia? Risparmiatevi pure la fatica. Lunedì sarà tutto finito.
 
-[Se segno via-atto-1 = mara] **Spazienzio** (furioso): LUNEDÌ? COME FAI A SAPERLO? ECCO, LO SA! È LUI!
+[Se segno via-atto-1 = mara] **Spazienzio** (furioso): AMMETTI ORDUNQUE LA TUA COLPA? ESPIAMOTI ALLORA!
 
-**Duccio** (fiero): Chi tocca lui tocca me. Io sto dalla parte di chi ha i soldi. È una cosa di destra.
+**Duccio** (fiero): Frena, piccolo sindacalista bastardo. Lui è protetto da me. Io sto dalla parte di chi ha i soldi: è una cosa di destra.
 
 **Mara** (illuminata): Visto? Sono d'accordo! Ve l'avevo detto!
 
-[Se segno frase] **Beppe** (contento): Contro Duccio ci sto anche gratis. Una volta tanto.
+[Se segno frase] **Beppe** (contento): Avverto nell'aria una certa voglia di schiaffi. Posso unirmi? Ho proprio voglia di sfogarmi un po'.
 
 [Se segno frase] [Segno: ii3 = beppe] [Sblocca: starter-beppe]
 
 [Se non segno frase] [Segno: ii3 = piera] [Sblocca: starter-piera]
 
-[Se visto II2s] **Piera** (offesa): Gioco... per il Grappino... mica per voi...
+[Se visto II2s] **Piera** (offesa): Anche io… voglio partecipare… per il Grappino... mica per voi...
 
 [Se segno pista = beppe] **Piera** (brilla): Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno...
 
 [Se segno pista = celestina] **Piera** (brilla): Quello lì... in dieci anni... non ha mai offerto... un giro... a nessuno...
 
-→ Partita II3: {ii3} (giocatore) contro Sergio e Duccio
+→ Partita II3: {ii3} (giocatore) contro Duccio
 
-**Ritento.** **Sergio** (annoiato): Di nuovo? Va bene. Tanto il tempo è dalla mia parte.
+**Ritento.** **Sergio** (annoiato): Di nuovo? Va bene. La storia mi darà ragione!
 
-**Duccio** (dolorante): Capo, io andrei. Mi sono fatto male da solo con l'ombrellino.
+**Duccio** (dolorante): Mi dispiace, capo. Forse non sono abbastanza di destra…
 
-**Sergio** (annoiato): Non avete capito niente. Proprio niente.
+**Sergio** (annoiato): Sparisci, idiota. Me ne vado anche io… non vorrei farmi attaccare la povertà da questi quattro scemi.
 
 [Regia: Sergio lascia i soldi sul bancone, esattamente il conto, e se ne va. Duccio lo segue zoppicando.]
-
-**Mara** (illuminata): Ha detto che non abbiamo capito niente. Quindi abbiamo capito tutto.
-
-**Spazienzio** (soddisfatto): IO NON HO CAPITO NIENTE, MA L'HO PICCHIATO. VA BENE LO STESSO.
 
 → Vai a: III1
 
 ## Note per la revisione
 
-### Atto II, prima stesura della regia (19 novembre 2026)
+### Atto II
 
-Da riscrivere dal proprietario come l'atto I. Usa solo le espressioni già in uso nell'atto I e nel tutorial.
+**Correzioni della regia al testo del proprietario** (19 novembre 2026, approvate: «sì, applica»):
 
-- **Sergio è un habitué** ([flavour](../set-base/flavour.md#cesira-la-malalingua--booster-da-scrivere-in-sb-17): beve al Serraglio e
-  nessuno capisce perché). In II1 si alza dal suo sgabello in fondo al bancone: chi lo ha visto in I3b lo riconosce come «il signore del
-  Mercedes», e lui risponde che ci beve da dieci anni, «siete voi che non guardate mai più in alto del bicchiere». Chi non è passato da
-  I3b lo conosce da Mara. È la regia a proporlo: va confermato, perché decide che in I3b Spazienzio non l'aveva riconosciuto.
-- **Gli indizi dell'atto II puntano tutti a Sergio, per il motivo sbagliato:** sa i conti del bar (II1); «un signore... alto... e secco»
-  (II2a); la valigetta e le sigarette sottili (II2b); il bilancio di chi ci rimette da dieci anni «e non fiata... o è scemo, o gli vuole
-  bene» (II2c), che è anche il primo indizio del finale; la data (II3, per chi viene dalla via di Mara); Duccio dalla sua parte (II3).
-  Mara ne trae «lavora per il Dimmi Di Sì».
-- **Mara accusa:** tutti in II1, compreso Spazienzio; Sergio in II1 e II3; Piera in II2a; Beppe in II2b, che ammette tutto («non vale,
-  se lo ammetti»); Celestina in II2c. Grappino resta per S1. In II2c Mara non accusa il cane, perché i morsi «di un cane piccolo» devono
-  restare l'indizio per S1.
-- **Beppe e l'anticipo:** in II2b Duccio riscuote l'anticipo che il Dimmi Di Sì ha dato a Beppe per la ristrutturazione. Spiega perché
-  Beppe gli deve dei soldi e conferma che lavora per tutti. La chiave arriva in II2b solo a chi non l'ha già presa in I2a.
-- **Starter:** Piera e Beppe danno le carte vincendo nella loro pista. In II3 la condizione è il segno `frase`, che si prende solo vincendo
-  II2a: con il segno gioca Beppe, senza gioca Piera (pista di Beppe, pista di Celestina o II2s), e lo starter arriva prima della partita.
-- **Convertitore del prototipo:** nessun errore di sintassi. Restano gli errori attesi: espressioni dei nuovi non ancora nel cast,
-  «Un signore» (I3b) da aggiungere al cast come nome di Sergio, l'atto III non ancora scritto.
-- **Sfondi:** S2 e S1 di sera; il muro dei complotti si propone come strato di S2. **Sprite:** Grappino seduto e che ringhia, già fatti.
-- **Lunghezza:** circa 120 battute in sette nodi, più 7 di ritento. II1 e II2b superano le 6–10 battute prima della partita: da guardare
-  sul prototipo.
-- **Domande per il proprietario:** (1) Sergio habitué che nessuno nota, e Spazienzio che in I3b non l'aveva riconosciuto: va bene?
-  (2) Le sigarette sottili di II2b sono un indizio forte: troppo? (3) La frase di Celestina in II2c, «o è scemo, o gli vuole bene», anticipa
-  il cuore della confessione di III5: la teniamo o è troppo presto?
+1. **In II3 Mara non scopre la verità:** «Lui vuole vendere il Serraglio» diceva che Sergio è il proprietario, cioè la rivelazione che
+   la scaletta tiene per III4. Ora Sergio «lavora per il Dimmi Di Sì: è il loro uomo qui dentro, quello che convince il proprietario a
+   vendere», e Spazienzio: «FA IL GALOPPINO DEI FIGHETTI?».
+2. **In II2a gioca Piera contro Spazienzio,** come nella scaletta: non ripete la partita del tutorial, insegna la sua L, rispetta «prima
+   contro, poi con te» e tiene insieme «non mi hai interrotta mai» e l'offesa di II2s. «SE CI TIENI AL SILENZIO» Spazienzio lo dice a lei.
+3. **In II2b gioca Beppe contro Duccio,** e chi lo accompagna fa il tifo: è la sua scena vetrina. Ritocchi alle sue battute e ai ritenti.
+4. **Mara conosce già Beppe** (l'ha incontrato su tutte e due le vie dell'atto I): «Beppe, il tuttofare della mafia dei meccanici».
+5. **La chiave in II2b:** la serratura nuova Beppe ce l'ha già nel furgone, e la chiave è una delle sue.
+6. **Mara accusa Celestina in II2c** («apri la bocca»), per il filo comico e l'achievement «Ve l'avevo detto».
+7. **Battute rivolte al giocatore neutre:** «Mi vai a genio» (Piera), «Bel tifo, gente» (Beppe).
+8. **Refusi:** accenti delle maiuscole, «le mani», «dopo la chiusura», «lavoravo», «bilancio» ripetuto, formato della partita.
+
+**Tenuto dal testo del proprietario, e riportato nella scaletta 0.3.5:** II3 è un duello contro Duccio, con Sergio che guarda e commenta;
+Sergio si combatte nell'atto II solo in II1.
+
+**Per l'atto III:**
+
+- **Celestina sa chi è il proprietario.** Dorme lì ogni notte, e in II1 dice che Sergio torna dopo la chiusura: fa la furba, coerente con il
+  filo «Celestina lo sapeva». In III3b deve dire perché non l'ha detto prima (per esempio: nessuno crede a una che dorme per terra).
+- **Duccio** si combatte in I2b, I3b, II2b e II3, e la scaletta lo rimette in III1, III3a, III3b, III3c e III4: da alleggerire scrivendo
+  l'atto III.
+
+**Espressioni nuove dell'atto II,** da aggiungere a quelle da decidere: Celestina *neutra, pensierosa, annoiata* (nell'atto I «normale»);
+Sergio *neutro*; Beppe *confuso, neutro, annoiato*; Spazienzio *spaventato*.
+
+**Convertitore:** nessun errore di sintassi. Restano gli errori attesi: espressioni non ancora nel cast, «Un signore» (I3b) da aggiungere
+al cast come nome di Sergio, l'atto III non ancora scritto. Tre avvisi: le scelte di II1 («Chiedi a Piera», «Chiedi a
+Beppe», «Vai con Celestina») non cominciano con «con <personaggio>», la forma che il prototipo si aspetta per le etichette della
+bacheca; tenute come le ha scritte il proprietario.
 
 ### Atto I
 
