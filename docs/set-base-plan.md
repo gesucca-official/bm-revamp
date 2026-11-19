@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D146). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D147). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In corso:** [SB-21](#sb-21--giri-di-correzione) giro 2: Estasi a 18 esclusiva di Piera, Grappa invariata, matrice e ricerca sui sette un personaggio per volta ([D146](#decisioni-del-proprietario)). Giro 1 rivisto: nessuna variante numerica di Estasi regge Piera. A ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
+> - **In corso:** [SB-21](#sb-21--giri-di-correzione) giro 2: Estasi resta generica, si provano un costo in L (5 o 10) e più peso alla L (10 o 6 + 2 × L), Grappa invariata, poi matrice e ricerca sui sette un personaggio per volta ([D147](#decisioni-del-proprietario), che supera l'esclusiva di D146). A ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
 > - **Prossimo:** giro 3 di SB-21, poi il proprietario; SB-20c B2 prima delle prove umane di [SB-22](#sb-22--prova-umana-con-mazzi-costruiti), che fa anche il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D146, D145, D143, D136, D134, D132, D131, D127, D121, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D146).
+> - **Decisioni da leggere:** D147, D146, D145, D143, D136, D134, D132, D131, D127, D121, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D147).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -298,7 +298,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fasi B e B1e fatte ([rapporto B](reports/set-base/sb-18-b-report.md), [rapporto B1e](reports/set-base/sb-18-b1e-report.md)); la leva sono i costi; Fase B2 fatta ([rapporto B2](reports/set-base/sb-18-b2-report.md)): Duccio in bozza, scostamento su Mara accettato ([D127](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D128](#decisioni-del-proprietario)) |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fasi B1 e B1b fatte e accettate ([D131](#decisioni-del-proprietario), [D132](#decisioni-del-proprietario)); Fase B2 ferma al passo 2 ([rapporto](reports/set-base/sb-19-b2-report.md)); Fase B2a dei bot fatta, patch assorbita, set a 123 ([rapporto](reports/set-base/sb-19-b2a-report.md)); ripresa della B2 fatta: oggetti tenuti coi valori di M1 ([D134](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 18 novembre 2026 ([D135](#decisioni-del-proprietario)) |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 | STOP 4, budget esaurito: porta verde, matrice completa, ricerca 4/7 ([rapporto](reports/set-base/sb-20-report.md)); **chiuso** il 19 novembre 2026 con la fotografia parziale ([D145](#decisioni-del-proprietario)) |
-| | SB-21 | Giri di correzione | SB-20 | Giro 1 in STOP di selezione ([rapporto](reports/set-base/sb-21-giro-1-report.md)); giro 2 con Estasi esclusiva di Piera ([D146](#decisioni-del-proprietario)) |
+| | SB-21 | Giri di correzione | SB-20 | Giro 1 in STOP di selezione ([rapporto](reports/set-base/sb-21-giro-1-report.md)); giro 2 con Estasi generica, costo in L o più peso alla L ([D147](#decisioni-del-proprietario)) |
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 |  |
 | Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 |  |
@@ -765,7 +765,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D146 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D147 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
