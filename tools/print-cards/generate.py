@@ -24,6 +24,7 @@ INK = HexColor('#202e38')
 COLORS = {'Personaggio': '#344d70', 'Regolare': '#b65332', 'Base': '#257a84',
           'Legata al personaggio': '#77528f', 'Ultima risorsa': '#9b6b19',
           'Oggetto': '#47744c', 'Token': '#59725b'}
+DEFAULT_BOZZA = ROOT/'server/src/test/resources/set-base/bozza.json'
 RESOURCE = [('H', 'HEALTH'), ('A', 'ALERTNESS'), ('V', 'VIOLENCE'), ('T', 'TOXICITY'), ('L', 'ALCOHOL')]
 
 
@@ -228,7 +229,7 @@ def main():
     parser.add_argument('--rules', type=Path, default=ROOT/'docs/game-rules.md')
     parser.add_argument('--annex', type=Path, default=ROOT/'docs/rules-catalog.json')
     parser.add_argument('--set', type=Path, default=ROOT/'docs/sets/base.md', help='Documento del set con le schede')
-    parser.add_argument('--output', type=Path, default=ROOT/'output/pdf/botte-micidiali-carte.pdf')
+    parser.add_argument('--output', type=Path, help='Destinazione; predefinita output/pdf/botte-micidiali-carte.pdf (con --bozza: bozza-set-base.pdf, o bozza-starter.pdf per i mazzi)')
     parser.add_argument('--width-mm', type=float, default=62)
     parser.add_argument('--height-mm', type=float, default=87)
     parser.add_argument('--margin-mm', type=float, default=9)
@@ -240,11 +241,22 @@ def main():
     parser.add_argument('--list-starters', action='store_true', help='Elenca gli starter disponibili senza generare PDF')
     parser.add_argument('--copies-file', type=Path, help='JSON: identificatore completo -> numero di copie (anche 0)')
     parser.add_argument('--font-dir', type=Path)
+    parser.add_argument('--bozza', nargs='?', type=Path, const=DEFAULT_BOZZA, default=None, metavar='PERCORSO',
+                        help='Stampa la bozza del Set Base (bozza.json) invece del catalogo vivo; senza percorso usa quella del repository')
+    parser.add_argument('--all-decks', action='store_true', help='Solo con --bozza --all-starters: anche i mazzi di misura (prova-*, iso-*), non solo gli starter-*')
     args = parser.parse_args()
+    bozza_mode = args.bozza is not None
+    if args.all_decks and not bozza_mode:
+        parser.error('--all-decks si usa con --bozza')
+    if args.output is None:
+        args.output = ROOT/'output/pdf'/(('bozza-starter.pdf' if args.starter or args.all_starters else 'bozza-set-base.pdf') if bozza_mode else 'botte-micidiali-carte.pdf')
     if not all(math.isfinite(v) for v in (args.width_mm, args.height_mm, args.margin_mm, args.gap_mm)):
         parser.error('Dimensioni non finite')
     if min(args.width_mm, args.height_mm) <= 0 or args.margin_mm < 5 or args.gap_mm < 3 or args.copies < 0:
         parser.error('Dimensioni positive; margini >=5 mm; spazio >=3 mm; copie >=0')
+    if bozza_mode:
+        from bozza import run as run_bozza
+        return run_bozza(args, parser)
     cards, rules, version, starters, initial = load_catalog(args.database, args.rules, args.annex, args.set)
     decks = starter_decks(cards, starters, initial)
     by_id = {c['id']: c for c in cards}
