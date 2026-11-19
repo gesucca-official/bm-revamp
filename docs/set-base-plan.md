@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D150). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D151). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139 e D149, set a 123 carte (D135).
-> - **In attesa:** revisione di [SB-21t](reports/set-base/sb-21t-report.md), nessun tetto adottato (D150), bozza D149 confermata. [SB-21](#sb-21--giri-di-correzione) resta chiuso. A ogni cambio di `bozza.json` i controlli di D143.
+> - **In corso:** nessun blocco. [SB-21t](reports/set-base/sb-21t-report.md) consegnato: nessun tetto a Estasi, bozza D149 confermata, niente altri giri prima della prova umana ([D151](#decisioni-del-proprietario)). A ogni cambio di `bozza.json` i controlli di D143.
 > - **Prossimo:** SB-20c B2 (simboli nel client), poi [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) con le liste costruite e il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D150).
+> - **Decisioni da leggere:** D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D151).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -298,7 +298,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fasi B e B1e fatte ([rapporto B](reports/set-base/sb-18-b-report.md), [rapporto B1e](reports/set-base/sb-18-b1e-report.md)); la leva sono i costi; Fase B2 fatta ([rapporto B2](reports/set-base/sb-18-b2-report.md)): Duccio in bozza, scostamento su Mara accettato ([D127](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D128](#decisioni-del-proprietario)) |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fasi B1 e B1b fatte e accettate ([D131](#decisioni-del-proprietario), [D132](#decisioni-del-proprietario)); Fase B2 ferma al passo 2 ([rapporto](reports/set-base/sb-19-b2-report.md)); Fase B2a dei bot fatta, patch assorbita, set a 123 ([rapporto](reports/set-base/sb-19-b2a-report.md)); ripresa della B2 fatta: oggetti tenuti coi valori di M1 ([D134](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 18 novembre 2026 ([D135](#decisioni-del-proprietario)) |
 | Set intero | SB-20 | Prima misura dell'intero set | SB-19 | STOP 4, budget esaurito: porta verde, matrice completa, ricerca 4/7 ([rapporto](reports/set-base/sb-20-report.md)); **chiuso** il 19 novembre 2026 con la fotografia parziale ([D145](#decisioni-del-proprietario)) |
-| | SB-21 | Giri di correzione | SB-20 | Giri 1, 2, 3a, 3a bis e 3b fatti ([rapporto 3a bis](reports/set-base/sb-21-giro-3a-bis-report.md), [rapporto 3b](reports/set-base/sb-21-giro-3b-report.md)); **chiuso** il 19 novembre 2026 con la bozza di D149; segue SB-21t sul tetto di Estasi ([D150](#decisioni-del-proprietario)) |
+| | SB-21 | Giri di correzione | SB-20 | Giri 1, 2, 3a, 3a bis e 3b fatti ([rapporto 3a bis](reports/set-base/sb-21-giro-3a-bis-report.md), [rapporto 3b](reports/set-base/sb-21-giro-3b-report.md)); **chiuso** il 19 novembre 2026 con la bozza di D149; SB-21t sul tetto di Estasi chiuso senza tetto ([D151](#decisioni-del-proprietario)) |
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 |  |
 | Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 |  |
@@ -634,7 +634,7 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 
 **Giro 3b (19 novembre 2026), STOP per il proprietario.** Ricerca dei sette e scontri diretti completi. Tutti i 35 incroci costruito–starter sopra il 70%, Piera senza incroci sfavorevoli. Tre passate scartate per D149, bozza del 3a-bis confermata. [Rapporto e domande](reports/set-base/sb-21-giro-3b-report.md).
 
-**SB-21t (19 novembre 2026), consegnato.** Nessun tetto adottato (D150). Entrambe le matrici falliscono D149. Per SB-22 valgono i sette finalisti del giro 3b. [Rapporto](reports/set-base/sb-21t-report.md).
+**SB-21t (19 novembre 2026), chiuso.** Nessun tetto adottato: a 35 e 30 HIT Piera costruita resta all'87% contro i costruiti e la matrice degli starter esce dal controllo di D149. Per SB-22 valgono i sette finalisti del giro 3b; niente altri giri prima della prova umana ([D151](#decisioni-del-proprietario)). [Rapporto](reports/set-base/sb-21t-report.md).
 
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 
@@ -677,7 +677,7 @@ effetto; in quel caso, ultimo controllo di SB-7. Rarità definitive. **Congelame
 
 **Rischi.** Ritocchi che riaprono il bilanciamento: ogni variazione di numeri torna a SB-21.
 
-**Anticipato ([D136](#decisioni-del-proprietario), [D137](#decisioni-del-proprietario)).** Il proprietario rivede nomi, flavour e illustrazioni sulla pagina di SB-20a e la rarità P dei personaggi entra prima di SB-20. Nomi e flavour scelti allora sono **provvisori**: le correzioni di SB-21 possono cambiare l'effetto di una carta o toglierla. Restano qui la conferma di nomi e flavour sulle carte finali, le rarità definitive e il congelamento.
+**Anticipato ([D136](#decisioni-del-proprietario), [D137](#decisioni-del-proprietario)), poi riportato qui da [D144](#decisioni-del-proprietario) e [D151](#decisioni-del-proprietario); resta come storia.** Il proprietario rivede nomi, flavour e illustrazioni sulla pagina di SB-20a e la rarità P dei personaggi entra prima di SB-20. Nomi e flavour scelti allora sono **provvisori**: le correzioni di SB-21 possono cambiare l'effetto di una carta o toglierla. Restano qui la conferma di nomi e flavour sulle carte finali, le rarità definitive e il congelamento.
 
 ### SB-25 — Testi delle carte per i giocatori
 

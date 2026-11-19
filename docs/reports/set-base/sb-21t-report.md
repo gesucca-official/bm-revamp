@@ -32,7 +32,8 @@ Le tre coppie fuori obiettivo restano Mara–Beppe, Celestina–Sergio e Piera�
 - Tre mutazioni rilevate su tre. Togliere il tetto dal motore, da `TurnForecast` o da `ViewTable` fa fallire i due casi sopra il limite nel test mirato. [Esiti](sb-21t/mutazioni.json).
 - `Test -Offline` verde con 956 test server scoperti, 23 saltati, zero fallimenti ed errori, e 37/37 test del client di debug.
 - Fedeltà verde nei sei bracci (A, B, 1.6, Sergio, Duccio e malus). `TurnForecastFidelityTest` coincide in 37.768/37.768 confronti, con 459 turni con timer saltati come da test. `ViewTableFidelityTest` coincide in 38.686/38.686 confronti a un turno e in 22.394/22.394 a due turni per salute e risorse. Le esclusioni previste per gli oggetti arrivati o spostati con le pescate e per gli oggetti lontani non modellati sono dichiarate per braccio in `test-offline.log`.
-- `git diff --check`, `check-links.py` (440 file, zero link rotti), `check-rules.py`, numeri e testi D143, `genera-bozza-di-riferimento.py --verifica` e `rarita-bozza.py --check` verdi. I due controlli D143 sono verdi anche su entrambe le copie di misura.- `TestServerContext -Offline` verde con 1.074 test rilevati, 23 saltati, zero fallimenti ed errori, incluso `BozzaProfileOffContextTest` (6/6). Il controllo dei manifest riporta `allChecks: PASS`. I log sono in `%TEMP%/bm-sb21t`.
+- `git diff --check`, `check-links.py` (440 file, zero link rotti), `check-rules.py`, numeri e testi D143, `genera-bozza-di-riferimento.py --verifica` e `rarita-bozza.py --check` verdi. I due controlli D143 sono verdi anche su entrambe le copie di misura.
+- `TestServerContext -Offline` verde con 1.074 test rilevati, 23 saltati, zero fallimenti ed errori, incluso `BozzaProfileOffContextTest` (6/6). Il controllo dei manifest riporta `allChecks: PASS`. I log sono in `%TEMP%/bm-sb21t`.
 
 ## Metodo e riproduzione
 
