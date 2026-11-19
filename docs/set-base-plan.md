@@ -7,7 +7,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 18 novembre 2026, dopo D141). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In corso:** SB-20c, testi stampati generati dai dati (D138 (2)). [SB-20b](reports/set-base/sb-20b-report.md) **chiuso** (D141). In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
+> - **In attesa:** decisione sulla [proposta SB-20c, Fase A](design/set-base/sb-20c-proposta.md#domande) (domande 1–3). [SB-20b](reports/set-base/sb-20b-report.md) **chiuso** (D141). In parallelo la revisione del proprietario su nomi, flavour e illustrazioni ([SB-20a](reports/set-base/sb-20a-report.md)).
 > - **Prossimo:** le scelte di D136 e la rarità P (D137); poi [SB-20](#sb-20--prima-misura-dellintero-set). Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
 > - **Decisioni da leggere:** D141, D140, D139, D138, D137, D136. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D141).
 
@@ -612,6 +612,8 @@ controllo FFA.
 **In ingresso ([D134](#decisioni-del-proprietario)).** Rimisurare Conto e Sigaretta nei mazzi di Sergio senza togliere gli Espresso (con lo scambio della B2 escono a −31/−32, −23/−18 anche senza malus); rifare intera la ricerca «dopo» (nella B2 solo 4 personaggi su 7; il banco a 26 mazzi costa circa 2,6 volte la «prima»).
 
 **In ingresso ([D131](#decisioni-del-proprietario)).** Le carte da booster rendono il mazzo più forte dello starter, fra 0 e +10 punti di media, mai oltre +15 in un confronto: vale per tutte le carte fuori dagli starter, anche quelle d'archetipo. Estasi (nel mazzo vincente di 14 ricerche su 14 prima di SB-19) e Grappa (+11,5 da sola in un mazzo di Beppe senza chi usa L, da spiegare) si correggono qui.
+
+**SB-20c, Fase A.** [Proposta sui testi generati](design/set-base/sb-20c-proposta.md) e prototipo su 116 carte; STOP per decisione del proprietario.
 
 ### SB-21 — Giri di correzione
 
