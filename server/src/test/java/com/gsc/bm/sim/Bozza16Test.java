@@ -91,7 +91,7 @@ class Bozza16Test {
             if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 66);
             assertEquals(expected, c, c.path("id").asText());
         }
-        // Cards: the seventeen changed, two new, the rest identical.
+        // D152 adds GEN-24 and renames the existing PIN-AR2 binding.
         Set<String> seen = new TreeSet<>();
         for (JsonNode c : now.path("cards")) {
             String b = c.path("binding").asText();
@@ -101,8 +101,10 @@ class Bozza16Test {
             if (!CHANGED.contains(b)) {
                 ObjectNode expected = (ObjectNode) withoutPrintedText(before);
                 // D149: exact changes to the draft cards, with the rest of each card still checked.
-                if (b.equals("base.pino.GoingBerserk"))
+                if (b.equals("base.pino.GoingBerserk")) {
                     ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 2);
+                    ((ObjectNode) expected.path("gui")).put("name", "Giro secco");
+                }
                 if (b.equals("base.pino.QuestoLoFiniscoIo"))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
                 assertEquals(expected, withoutPrintedText(c), b);
@@ -113,8 +115,8 @@ class Bozza16Test {
                 assertEquals(before.path("gui").path("name"), c.path("gui").path("name"));
             }
         }
-        assertEquals(Set.of("base.items.GhiaccioNelTovagliolo", "base.com.DueDitaInGola"), seen);
-        assertEquals(old.path("cards").size() + 2, now.path("cards").size());
+        assertEquals(Set.of("base.items.GhiaccioNelTovagliolo", "base.com.DueDitaInGola", "base.com.EstasiDaCocaEtilene"), seen);
+        assertEquals(old.path("cards").size() + 3, now.path("cards").size());
         // Charges: second name, rewards and token of the 1.5 unchanged (D97 (3)-(4)).
         for (Map.Entry<String, List<String>> e : PAIRS.entrySet()) {
             JsonNode before = card(old, e.getKey()).path("self"), after = card(now, e.getKey()).path("self");

@@ -9,9 +9,12 @@ import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.AbstractCard;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.game.Game;
+import com.gsc.bm.model.game.IllegalMoveException;
 import com.gsc.bm.model.game.Move;
 import com.gsc.bm.model.game.Player;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.bot.BotPolicy;
+import com.gsc.bm.model.game.bot.BotView;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +32,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -642,7 +646,7 @@ class SetBaseDraftTest {
             // SB-19 B2 (D130): + OGG-17 «Conto del tavolo sei» NC and OGG-18 «Sigaretta accesa» R.
             "COMMON", Set.of("GEN-08", "GEN-19", "ROC-AR1", "ROC-AR2", "CES-AR5", "GEN-01", "GEN-02", "GEN-05", "GEN-06", "GEN-12", "GEN-13", "GEN-14", "GEN-16", "GEN-17", "GEN-18", "GIG-AR4", "GIG-BO1", "GIG-BO2", "LR-STR", "MAR-AR3", "MAR-BA", "MAR-BO1", "MAR-BO2", "OGG-01", "OGG-02", "OGG-05", "OGG-06", "OGG-07", "OGG-10", "OGG-11", "OGG-12", "PG-MAR", "PG-SPA", "PIN-AR1", "PIN-AR3", "PIN-BO1", "PIN-BO2", "SPA-AR4", "SPA-BA", "SPA-BO1", "SPA-BO2", "TOS-AR3", "TOS-BO1", "TOS-BO2"),
             "UNCOMMON", Set.of("GEN-10", "GEN-11", "OGG-08", "OGG-17", "ROC-AR3", "ROC-AR4", "ROC-AR5", "ROC-BO1", "ROC-BO2", "ROC-BO3", "CES-AR1", "CES-AR2", "CES-AR3", "CES-AR4", "CES-AR7", "CES-BO1", "CES-BO2", "CES-BO3", "GEN-03", "GEN-09", "GEN-22", "GEN-07", "GEN-15", "OGG-14", "GIG-AR1", "GIG-AR2", "GIG-AR3", "GIG-AR6", "GIG-BA", "GIG-BO3", "LR-PIN", "LR-TOS", "MAR-AR2", "MAR-AR4", "MAR-AR5", "MAR-AR6", "MAR-BO3", "OGG-03", "OGG-09", "OGG-13", "PG-GIG", "PG-PIN", "PG-TOS", "PIN-AR2", "PIN-AR4", "PIN-AR6", "PIN-BA", "PIN-BO3", "SPA-AR1", "SPA-AR3", "SPA-AR5", "SPA-AR6", "SPA-BO3", "TOS-AR1", "TOS-AR2", "TOS-AR4", "TOS-AR6", "TOS-BA", "TOS-BO3"),
-            "RARE", Set.of("GEN-04", "GEN-20", "GEN-21", "OGG-16", "OGG-18", "PG-ROC", "ROC-BA", "ROC-AR6", "LR-ROC", "PG-CES", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
+            "RARE", Set.of("GEN-04", "GEN-20", "GEN-21", "GEN-24", "OGG-16", "OGG-18", "PG-ROC", "ROC-BA", "ROC-AR6", "LR-ROC", "PG-CES", "CES-BA", "CES-AR6", "GEN-23", "OGG-15", "GIG-AR5", "MAR-AR1", "OGG-04", "PIN-AR5", "SPA-AR2", "TOS-AR5"));
 
     private static String gridRarity(String slot) {
         List<String> found = new ArrayList<>();
@@ -681,11 +685,50 @@ class SetBaseDraftTest {
             assertTrue(Draft.RARITIES.contains(rarity), id + ": rarità " + rarity + " fuori dal vocabolario di R07");
             assertEquals(gridRarity(CHARACTER_SLOTS.get(id)), rarity, id);
         }
-        assertEquals(Map.of("COMMON", 42, "RARE", 18, "UNCOMMON", 56), counts, "le 116 carte della bozza, D79, SB-16i (D97), SB-17 (16 nuove, D121: Lo metto in conto e Lo rivendo), SB-18 (11 di Duccio, D126), SB-19 B1 (9 carte: 2 C, 3 NC, 4 R, D129) e SB-19 B2 (2 oggetti: 1 NC, 1 R, D130)");
+        assertEquals(Map.of("COMMON", 42, "RARE", 19, "UNCOMMON", 56), counts,
+                "117 carte più 7 personaggi dopo l'aggiunta di GEN-24 (D152)");
         for (String deck : STARTERS) {
             long rares = draft.cardsOf(deck).keySet().stream().filter(b -> "RARE".equals(draft.rarityOf(b))).count();
             assertTrue(rares >= 1 && rares <= 2, deck + ": " + rares + " rare distinte");
         }
+    }
+
+    @Test
+    void estasiRequiresAndSpendsBothResources() {
+        Player celestina = draft.player("starter-tossico", "seat-1", new Random(1), null);
+        Player spazienzio = draft.player("starter-spazienzio", "seat-2", new Random(2), null);
+        Game game = new Game(List.of(celestina, spazienzio), "sim", false);
+        game.useRuleset(Ruleset.D50);
+        Card estasi = draft.card("base.com.EstasiDaCocaEtilene");
+        celestina.getCardsInHand().add(estasi);
+        Move play = new Move(estasi.getName(), "seat-1", "seat-2", game.getGameId(), Map.of());
+
+        assertEquals(Map.of(Resource.TOXICITY, 10, Resource.ALCOHOL, 10), estasi.getCost());
+        assertEquals(Set.of(Card.CardTarget.OPPONENT), estasi.getCanTarget());
+        assertEquals("GEN-24 · 10 [[T]] + 10 [[L]]: 30 HIT al bersaglio.", estasi.getEffect());
+        Map<Resource, Integer> own = celestina.getCharacter().getResources();
+        own.putAll(estasi.getCost());
+        for (Resource missing : estasi.getCost().keySet()) {
+            own.put(missing, 9);
+            assertThrows(IllegalMoveException.class, () -> game.submitMove(play), missing.name());
+            assertFalse(BotView.of(game, "seat-1").legalMoves().stream()
+                    .anyMatch(m -> m.getCard().getBinding().equals(estasi.getBindingName())), missing.name());
+            own.put(missing, 10);
+        }
+
+        assertTrue(BotView.of(game, "seat-1").legalMoves().stream()
+                .anyMatch(m -> m.getCard().getBinding().equals(estasi.getBindingName())));
+        Map<Resource, Integer> expectedOwn = new LinkedHashMap<>(own);
+        expectedOwn.put(Resource.TOXICITY, 0);
+        expectedOwn.put(Resource.ALCOHOL, 0);
+        Map<Resource, Integer> other = spazienzio.getCharacter().getResources();
+        Map<Resource, Integer> expectedOther = new LinkedHashMap<>(other);
+        expectedOther.merge(Resource.HEALTH, -30, Integer::sum);
+        game.submitMove(play);
+        play.applyCostTo(game);
+        play.applyEffectTo(game);
+        assertEquals(expectedOwn, own);
+        assertEquals(expectedOther, other);
     }
 
     // ---- SB-15, parte 2: lo starter di Gigi «Intervento sul posto» ----

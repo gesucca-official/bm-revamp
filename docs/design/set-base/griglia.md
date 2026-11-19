@@ -7,7 +7,8 @@
 > più PIN-BO1 ridotta da +10 a +5 L sotto la delega D38: valore per uso 3,75 con D50, tetto 4 invariato.
 > SB-12a ha corretto coi bot alcuni numeri degli starter base, approvati dal proprietario: vedi [Correzioni di SB-12a](#correzioni-di-sb-12a).
 > **SB-19, Fase B1, 17 novembre 2026 ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza le nove carte che mancavano (GEN-04, 08, 10, 11, 19, 20, 21; OGG-08, 16): il set è a **121 carte**, 44 C / 58 NC / 19 R, con CES-AR7 contata dentro (D121); i conti qui sotto (blocchi, rarità, ruoli) sono riscritti dalla bozza. Con OGG-17 e OGG-18 della B2 il set va a 123 (riga qui sotto).
-> **SB-19, Fase B2, 18 novembre 2026 ([D130](../../set-base-decisioni.md#decisioni-del-proprietario), [D133](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza i due oggetti con l'effetto «In campo» (RP-27, [regole del playground 1.5](regole-playground.md)): OGG-17 «Conto del tavolo sei» (NC) e OGG-18 «Sigaretta accesa» (R). Il set è a **123 carte**, 44 C / 59 NC / 20 R; i conti qui sotto sono riscritti dalla bozza ([nota ¹¹](#oggetti-18-e-token)).
+> **SB-19, Fase B2, 18 novembre 2026 ([D130](../../set-base-decisioni.md#decisioni-del-proprietario), [D133](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza i due oggetti con l'effetto «In campo» (RP-27, [regole del playground 1.5](regole-playground.md)): OGG-17 «Conto del tavolo sei» (NC) e OGG-18 «Sigaretta accesa» (R). Il set arriva a 123 carte, 44 C / 59 NC / 20 R ([nota ¹¹](#oggetti-18-e-token)).
+> **Bozza SB-21e, 19 novembre 2026 ([D152](../../set-base-decisioni.md#decisioni-del-proprietario)).** Estasi torna come generica rara (GEN-24), premio per chi accumula T e L. I 10 L di costo sono la deroga deliberata a D33 (4). PIN-AR2 diventa «Giro secco», nome di lavoro fino a SB-24. Il set sale a **124 carte**, 44 C / 59 NC / 21 R.
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -296,11 +297,11 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
-| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | Spendi tutta la L. Infliggi 10 HIT più il doppio della L spesa (D149) | NC | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | Spendi tutta la L. Infliggi 10 HIT più il doppio della L spesa (D149) | NC | 2 | «Giro secco» (D152), binding `base.pino.GoingBerserk` | Spendi tutto subito; mai morta | Java: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ~~×0,5~~ ×0,65 (SB-16i) nel turno; +5 L; POISON ×0,5 nel turno, periodico incluso (braccio B, D67, D82; in `bozza.json` dalla 1.6) | C | 2 | bozza «Il bancone regge, io pure» (era una bound); variante B in `set-base/bancone-b.json` | Difesa che lo rifornisce | dati |
-| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Estasi da Coca Etilene o Rutto a distanza sociale (SB-16i). Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
+| PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Giro secco o Rutto a distanza sociale. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Spende tutta la L residua dopo il costo: il bersaglio perde A pari alla L spesa e subisce HIT pari a 14 più il doppio della L spesa (passo 3, D82) | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | Java nuova `base.pino.RuttoADistanzaSociale` (D84): memorizza, azzera, poi colpisce |
-| PIN-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Rutto a distanza sociale o Estasi da Coca Etilene (SB-16i). Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 1 | `base.pino.PrimaIlBrindisi`, «Prima il brindisi» | Secondo annuncio verso il raro, D79 | dati + search |
+| PIN-AR6 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Rutto a distanza sociale o Giro secco. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 1 | `base.pino.PrimaIlBrindisi`, «Prima il brindisi» | Secondo annuncio verso il raro, D79 | dati + search |
 
 **Beppe (6)**
 
@@ -342,7 +343,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 ⁹ **SB-18, Fasi B, B1e e B2** ([D124](../../set-base-decisioni.md#decisioni-del-proprietario)–[D126](../../set-base-decisioni.md#decisioni-del-proprietario)): la leva di Duccio sono i costi in HEALTH (D126 (1)). Base la V3 della Fase B (Nocche 8, E allora? 5, Capocciata 14, Testa dura 16 HEALTH; 18, 8, 26, 30 HIT; D125 (1)); la taratura della B2 la porta a ×1,85 (15, 9, 26, 30 HEALTH), stessi HIT; la riserva R1 del giro finale (Mara 33,9%, media 52,3%, verso scritto: +0,1) a ×1,95 (16, 10, 28, 33); la riserva R2 (Mara 26,5%, media 43,8%, verso scritto: +5) porta la salute a 115 ([rapporto della B2](../../reports/set-base/sb-18-b2-report.md)). Con d50 la carta si offre solo con salute **maggiore** del costo (RP-2). Mazzo di prova `prova-duccio` della [proposta, § 5](sb-18-proposta.md#5-mazzo-di-prova-prova-duccio-20-carte-al-più-2-copie-d94).
 
-### Azioni generiche (23)
+### Azioni generiche (24)
 
 Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa HEALTH (decisione 5).
 
@@ -371,6 +372,7 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 | GEN-21 | Azione, regolare | OTHER | F1 (5 V) | 1 | Equip: il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo | R | — | «Coccio di bottiglia» (da inventare), effetto del token `BrokenBeerBottle` | Prepara il colpo e aggira le parate contro HIT | equip |
 | GEN-22 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | Azzera la L del bersaglio; 3 HIT | NC | — | da inventare («Acqua in faccia») | Tecnica economica contro Piera | dati |
 | GEN-23 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde 10 V; 5 HIT | R | — | da inventare («Sgambetto») | Picco contro chi accumula V (Spazienzio, Beppe) | dati |
+| GEN-24 | Azione, regolare | DAMAGE | 10 T + 10 L | 1 | 30 HIT al bersaglio | R | — | «Estasi da Coca Etilene» (D152) | Premio per chi costruisce T e L insieme | dati |
 
 ¹⁰ **SB-19, Fase B1** ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario); [proposta A](sb-19-proposta.md#3-le-carte), [A2](sb-19-proposta-a2.md#7-la-fase-b-riscritta)): le nove carte che mancavano alla bozza entrano coi nomi di lavoro della proposta: GEN-04, 08, 10, 11, 19, 20, 21, OGG-08 e OGG-16. **Mano lesta** (D117, rubare risorse) prende lo slot di «Bottigliata», **Secondo fiato** (D124) quello di «Sedia in testa»; Grappa non esce (D129 (1)). GEN-04 è la sola classe Java nuova (sottoclasse in `model/cards/base/com`, senza il −10 A della carta viva); GEN-10 usa la classe viva con costo, priorità e `hitDamage` dalla bozza. **Secondo fiato** entra a +12 HEALTH, il valore A2 (riserva della regola di scelta: nei mazzi con le aggiunte l'A1 la portava a +10,5 su Mara; [rapporto](../../reports/set-base/sb-19-b1-report.md#6-riserva-applicata)). Il set è a **121 carte**, 44 C / 58 NC / 19 R; con OGG-17 e OGG-18 della B2 (D130) arriva a 123, 44 C / 59 NC / 20 R. **B1b** ([D131](../../set-base-decisioni.md#decisioni-del-proprietario), [rapporto](../../reports/set-base/sb-19-b1b-report.md)): con la banda 0 / +10 le carte provano varianti più forti in isolamento; entrano **Elemosina molesta gratis** (GEN-04), **Non sento niente 5 V e ×0,25** (GEN-11) e **Mezza minerale +20 A** (OGG-08); Mano lesta, Coccio, Maleducazione, Colpo e Secondo fiato (+12) restano come sono (nessuna variante migliore, o carta ferma da D131 (4)).
 
@@ -415,7 +417,7 @@ c'è.
 | Spazienzio «Pazienza finita» | SPA-BA · SPA-BO1, SPA-BO2 · Struggle | GARGANTUESCO IMPATTO SUL TU 2, SPEDIAMOTI DUNQUE IN O-AHIO 1, PAZIENZA: FINITA 2, NON GIOCARE COL COLTELLO NO 2, FAI BASTA 2, TI FACCIO SPAZIO 1 (**10**) | GABBIANO DUNQUE VOLIAMOTI 2, Tartaruga sul marciapiede 2, Mattone del cantiere 1, ORMALE GUARIAMOTI 1, Denti stretti 1 (**7**) | Negroni Trovato per Terra 2, Posacenere di vetro 1 (**3**) | 13 | 1 |
 | Mara «Consegna sul muso» | MAR-BA · MAR-BO1, MAR-BO2 · Struggle | Cinghiata di traverso 1, Sgommata 2, Sorpasso in curva 2, Tra due paraurti 2, Slalom d'avvicinamento 2, Ti stringo la curva 1 (**10**) | Spintone 1, Sputo da posacenere 2, Tartaruga sul marciapiede 1, ~~Steal 1~~ (**4**, SB-16i) | Espresso del distributore 2, Panino del kebab dimenticato 2, Giubbotto di finta pelle 1, Ghiaccio nel tovagliolo 1 (**6**, SB-16i) | 13 | 1 |
 | Celestina «Tutto è droga» | TOS-BA · TOS-BO1, TOS-BO2 · L'ultima dose | Dose in preparazione 2, Tossicone Scatarrante 2, Metabolismo Corrotto 2, Riflessi Aumentati dalla Speed 2, C'è del sangue nella mia droga 1, Un assaggino 1 (**10**) | Grab 2, Rincorsa dal marciapiede 1, Steal 1, Fasciatura col fazzolettaccio 1 (**5**) | Pasticca trovata sul bancone 2, Panino del kebab dimenticato 2, Mescolone Micidiale 1 (**5**) | 13 | 2 |
-| Piera «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata da ultimo giro 2, Estasi da Coca Etilene 2, Il bancone regge, io pure 2, Un altro e arrivo 2, Rutto a distanza sociale 1, Prima il brindisi 1 (**10**) | Grab ~~2~~ 1, Spintone 2, Fasciatura col fazzolettaccio 1, Due dita in gola 1 (**5**, SB-16i) | Amaro nel bicchiere di plastica 2, Peroni da 66, calda 2, Tennents Super 1 (**5**) | 12 | 1 |
+| Piera «Chiude quando dico io» | PIN-BA · PIN-BO1, PIN-BO2 · L'ultimo giro | Testata da ultimo giro 2, Giro secco 2, Il bancone regge, io pure 2, Un altro e arrivo 2, Rutto a distanza sociale 1, Prima il brindisi 1 (**10**) | Grab ~~2~~ 1, Spintone 2, Fasciatura col fazzolettaccio 1, Due dita in gola 1 (**5**, SB-16i) | Amaro nel bicchiere di plastica 2, Peroni da 66, calda 2, Tennents Super 1 (**5**) | 12 | 1 |
 | Beppe «Intervento sul posto» | GIG-BA · GIG-BO1, GIG-BO2 · Struggle | Smontiamo tutto 2, Chiave da tredici 2, Preparo il lavoro 2, Sotto il cofano 1, Lavoro fatto bene 1, Una stretta di prova 1 (**9**) | Steal ~~2~~ 1, GABBIANO DUNQUE VOLIAMOTI 1, Spintone 1, Due dita in gola 1 (**4**, SB-16i) | Guanti da officina 2, Giubbotto di finta pelle 2, Casco da lavoro 2, Espresso del distributore 1 (**7**) | 13 | 1 |
 
 Composizioni D79: archetipo/generiche/oggetti in copie 10/7/3, 10/5/5, 10/5/5, 10/5/5 e 9/4/7 (dalla 1.6 di SB-16i Mara 10/4/6). Le generiche ridotte restano nel pool; Mattone esce solo dallo starter di Beppe. Rarità delle copie C/NC/R: 10/9/1, 12/7/1, 11/7/2, 13/6/1, 10/9/1; dalla 1.6 Mara 11/8/1, Piera 12/7/1, Beppe 9/10/1.
@@ -437,8 +439,8 @@ immunità, compresa quella propria del Tossico, che resta senza finché non gioc
 **Nota di SB-14** ([rapporto](../../reports/set-base/sb-14-report.md)): lo starter di Pino è scritto nella stessa bozza come in questa
 tabella, senza scostamenti nella composizione; il nome proprio resta quello della bozza esterna, **«Chiude quando dico io»**, e i numeri
 cambiati sono in [Correzioni di SB-14](#correzioni-di-sb-14). PIN-AR2 e LR-PIN usano la classe di B1, scritta nei sorgenti di test
-(`base.pino.GoingBerserk` e la sottoclasse `base.pino.UltimoGiro`, che è last resort). PIN-AR2 tiene il nome del catalogo di
-`GoingBerserk`, «Estasi da Coca Etilene»; OGG-02 e OGG-03 tengono «Peroni da 66, calda» e «Tennents Super»; le nuove usano il nome di lavoro.
+(`base.pino.GoingBerserk` e la sottoclasse `base.pino.UltimoGiro`, che è last resort). Per D152, PIN-AR2 prende il nome di lavoro «Giro secco»
+ed Estasi da Coca Etilene passa a GEN-24. OGG-02 e OGG-03 tengono «Peroni da 66, calda» e «Tennents Super».
 
 **Nota di SB-15** ([rapporto](../../reports/set-base/sb-15-report.md)): lo starter di Gigi è scritto nella stessa bozza come in questa
 tabella, senza scostamenti nella composizione; il nome proprio resta quello della bozza esterna, **«Intervento sul posto»**, e i numeri
@@ -513,7 +515,7 @@ scendono di circa 3 HIT (stima). «Peggio di morta»: una gemella mai giocata la
 | `BeggingMoney` | riprogettata (10 A, niente −10 A), generica | GEN-04 | invariato | sotto | La copia di oggetti resta nel set, aperta a tutti |
 | `Cough` | riprogettata (12 POISON e +5 T, D55) | TOS-AR2 | invariato | sotto (3,9) | Intossicare: POISON diretto |
 | `EverythingIsDrug` | **sostituita** | TOS-BA | nella basic | sotto; peggio di morta | Consumare un oggetto senza effetti per T non serve |
-| `GoingBerserk` | riprogettata (gratuita, L residua) | PIN-AR2 | invariato; passa a Piera | vale il suo danno, ma spesso impagabile | D33: niente costi in L oltre 5 |
+| `GoingBerserk` | Estasi a dati, 10 T + 10 L per 30 HIT (D152) | GEN-24 | PIN-AR2 conserva la meccanica ad alcol come «Giro secco» | isolamento in SB-21e | Deroga D152 a D33 (4) |
 | `LethalHeroinDose` | riprogettata, last resort | LR-TOS | invariato | sotto; il bot non la gioca | D29: l'ultima dose |
 | `MethDrivenRage` | caricamento gratuito di T (D55) | TOS-AR1 | Dose in preparazione | da rimisurare in SB-16e | Cerca TOS-AR2 e si espone |
 | `PervertedMetabolism` | conservata | TOS-AR3 | invariato | in linea (8,3) | Difesa di Celestina |
@@ -578,9 +580,9 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Bound | 21 | 21 |
 | Last resort | 4 | 4 |
 | Azioni d'archetipo | 42 (D79) + CES-AR7 (D121) | 43 |
-| Azioni generiche | 25 → 23 (decisione 1) | 23 |
+| Azioni generiche | 25 → 23 (decisione 1), poi +1 (D152) | 24 |
 | Oggetti | 16 → 18 (D130) | 18 |
-| **Totale** | **120** (D129: si può superare di poco) | **123** |
+| **Totale** | **120** (D129: si può superare di poco) | **124** |
 
 **Per personaggio** (carte legate: basic, bound, archetipo, last resort propria)
 
@@ -595,7 +597,7 @@ bound che bersagliano oggetti, gli starter di Bruiser e Junkie invariati e il re
 | Duccio | 1 | 3 | 6 | propria | 11 |
 | **Totale** | 7 | 21 | 43 | 3 | **74** |
 
-Più Struggle, 23 generiche, 18 oggetti e 7 personaggi: 123.
+Con Struggle, 24 generiche, 18 oggetti e 7 personaggi il totale è 124.
 
 **Per rarità**
 
@@ -606,18 +608,18 @@ Più Struggle, 23 generiche, 18 oggetti e 7 personaggi: 123.
 | Bound | 10 | 11 | 0 |
 | Last resort | 1 | 2 | 1 |
 | Archetipo | 9 | 27 | 7 |
-| Generiche | 12 | 7 | 4 |
+| Generiche | 12 | 7 | 5 |
 | Oggetti | 8 | 6 | 4 |
-| **Totale** | **44** | **59** | **20** |
+| **Totale** | **44** | **59** | **21** |
 
 D79 porta l’archetipo a 11 C / 24 NC / 7 R; la bozza di oggi ha 9 C / 27 NC / 7 R (Duccio 2 / 3 / 1 e Sergio 1 / 4 / 1 in D124 e D121, CES-AR7 dentro), e SB-19 B1 riscrive la tabella dalla bozza (44 / 58 / 19, ex 45 / 55 / 20): l'archetipo di D79 non torna più, e restano 19 rare, una in meno di D79, perché «Bottigliata» è diventata Mano lesta comune. SB-19 B2 (D130) aggiunge OGG-17 (NC) e OGG-18 (R): 44 / 59 / 20. Nota storica: la tabella della fase A dava all'archetipo 19, 9 e 9, che non torna con i totali approvati (54, 41, 20): qui 20, 10 e 7 (decisione B3).
 Rare negli starter: 1 o 2 ciascuno.
 
-**Per ruolo** (le 116 carte giocabili della bozza dopo SB-19 B2, D130, con OGG-17 e OGG-18 fra le RESOURCES; le 114 dopo SB-19 B1; ruoli di R07a letti dal campo `gui.role` di `bozza.json`: riscritta il 17 novembre 2026, la tabella di D79 contava 113 carte e non teneva i ruoli di Sergio e Duccio)
+**Per ruolo** (117 carte giocabili dopo SB-21e, D152. Ruoli di R07a dal campo `gui.role` di `bozza.json`)
 
 | Ruolo | Basic | Bound | Last resort | Archetipo | Generiche | Oggetti | Totale |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| DAMAGE | | 12 | 4 | 14 | 7 | | 37 |
+| DAMAGE | | 12 | 4 | 14 | 8 | | 38 |
 | DEFENSE | | 1 | | 5 | 2 | | 8 |
 | RESOURCES | | 8 | | 11 | 3 | 12 | 34 |
 | COUNTER | | | | 5 | | | 5 |
@@ -645,7 +647,7 @@ di quelle spese.
 
 | Meccanica | Slot | In uno starter base |
 |---|---|---|
-| HIT | SPA-AR1, GEN-05, GEN-18, ROC-AR1… | Spazienzio |
+| HIT | SPA-AR1, GEN-05, GEN-18, GEN-24, ROC-AR1… | Spazienzio |
 | CUT | MAR-AR1/2, GIG-AR2, bound | Mara |
 | POISON diretto | GEN-17, TOS-AR2, TOS-BO3, LR-TOS | Mara (GEN-17) |
 | Veleno da T sul bersaglio | GEN-08, TOS-AR2, TOS-AR5, LR-TOS | — (Celestina) |

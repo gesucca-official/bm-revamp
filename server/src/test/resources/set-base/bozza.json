@@ -454,7 +454,7 @@
      "self": [{"op": "damage", "type": "HIT", "amount": 5}], "target": [{"op": "damage", "type": "HIT", "amount": 25}],
      "gui": {"name": "Testata da ultimo giro", "description": "PIN-AR1 · 5 [[L]]: 5 HIT a sé; 25 HIT al bersaglio.",
              "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 25"}},
-    {"binding": "base.pino.GoingBerserk", "rarity": "UNCOMMON", "java": true, "cost": {}, "priority": 1, "params": {"base": 10, "perAlcohol": 2, "selfHit": 0}, "gui": {"name": "Estasi da Coca Etilene", "description": "PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 10+x"}},
+    {"binding": "base.pino.GoingBerserk", "rarity": "UNCOMMON", "java": true, "cost": {}, "priority": 1, "params": {"base": 10, "perAlcohol": 2, "selfHit": 0}, "gui": {"name": "Giro secco", "description": "PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 10+x"}},
 
     {"binding": "base.pino.IlBanconeRegge", "rarity": "COMMON", "kind": "ACTION", "priority": 2, "targets": ["SELF"],
      "self": [{"op": "status", "name": "BANCONE - HIT", "description": "Hit Damage taken: x0.65", "statusType": "GOOD", "flow": "INPUT", "property": "HIT", "factor": 0.65, "turns": 0},
@@ -472,7 +472,7 @@
       ],
       "gui": {
         "name": "Un altro e arrivo",
-        "description": "PIN-AR4 · Annuncia «Estasi da Coca Etilene» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]].",
+        "description": "PIN-AR4 · Annuncia «Giro secco» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]].",
         "role": "RESOURCES",
         "gains": "+15 L, +35 A",
         "damage": "—",
@@ -596,7 +596,7 @@
       ],
       "gui": {
         "name": "Prima il brindisi",
-        "description": "PIN-AR6 · Annuncia «Rutto a distanza sociale» o «Estasi da Coca Etilene». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]].",
+        "description": "PIN-AR6 · Annuncia «Rutto a distanza sociale» o «Giro secco». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]].",
         "role": "RESOURCES",
         "gains": "+15 L, +35 A",
         "damage": "—",
@@ -634,6 +634,7 @@
     {"binding": "base.cesira.Malelingue", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 10}, "target": [{"op": "lose", "resource": "ALERTNESS", "amount": {"base": 0, "of": "ALERTNESS", "divide": 2}}, {"op": "damage", "type": "HIT", "amount": {"base": 5, "of": "ALERTNESS", "divide": 2}}], "gui": {"name": "Malelingue", "description": "CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 5+x"}},
     {"binding": "bruiser.StunningBlow", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"VIOLENCE": 10}, "target": [{"op": "lose", "resource": "ALERTNESS", "amount": 10}, {"op": "damage", "type": "HIT", "amount": 12}], "gui": {"name": "STORDIAMOTI HO DETTO", "description": "GEN-09 · 10 [[V]]: −10 [[A]] al bersaglio; 12 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 12"}},
     {"binding": "base.com.Sgambetto", "rarity": "RARE", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 10}, "target": [{"op": "lose", "resource": "VIOLENCE", "amount": 10}, {"op": "damage", "type": "HIT", "amount": 5}], "gui": {"name": "Sgambetto", "description": "GEN-23 · 10 [[A]]: −10 [[V]] al bersaglio; 5 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 5"}},
+    {"binding": "base.com.EstasiDaCocaEtilene", "rarity": "RARE", "kind": "ACTION", "priority": 1, "targets": ["OPPONENT"], "cost": {"TOXICITY": 10, "ALCOHOL": 10}, "target": [{"op": "damage", "type": "HIT", "amount": 30}], "gui": {"name": "Estasi da Coca Etilene", "description": "GEN-24 · 10 [[T]] + 10 [[L]]: 30 HIT al bersaglio.", "role": "DAMAGE", "gains": "—", "damage": "HIT", "damageAmount": "HIT 30"}},
     {"binding": "base.com.ShuffleFeet", "rarity": "UNCOMMON", "java": true, "cost": {}, "priority": -1, "params": {}, "gui": {"name": "Scatto Repentino", "description": "GEN-03 · Scambia tutti gli oggetti col bersaglio, rispettando le capacità.", "role": "ITEMS", "gains": "—", "damage": "—", "damageAmount": "—"}},
     {"binding": "base.com.AcquaInFaccia", "rarity": "UNCOMMON", "kind": "ACTION", "priority": 2, "targets": ["OPPONENT"], "cost": {"ALERTNESS": 5}, "target": [{"op": "empty", "resource": "ALCOHOL"}, {"op": "damage", "type": "HIT", "amount": 3}], "gui": {"name": "Acqua in faccia", "description": "GEN-22 · 5 [[A]]: Azzera [[L]] del bersaglio; 3 HIT al bersaglio.", "role": "DISRUPT", "gains": "—", "damage": "HIT", "damageAmount": "HIT 3"}},
     {"binding": "base.items.SantinoDellaPortinaia", "rarity": "RARE", "java": true, "params": {"turns": 3}, "gui": {"name": "Santino della portinaia", "description": "OGG-15 · Consumato: immunità all'effetto periodico di [[L]] per 3 turni.", "role": "OTHER", "gains": "—", "damage": "—", "damageAmount": "—"}},

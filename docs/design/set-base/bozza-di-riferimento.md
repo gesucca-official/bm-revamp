@@ -35,9 +35,9 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `1923ed9b0e71…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `26670945940b…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
-Il file contiene 116 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
+Il file contiene 117 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
 ### Starter di Spazienzio de la Ucciso — `starter-spazienzio`
 
@@ -122,9 +122,9 @@ Personaggio: **Piera Ultimo Giro** (NC), salute 82, A 15, L 15; oggetti 2; immun
 | bound | **Spallata al bancone** (`base.pino.bound.SpallataAlBancone`) | C | PIN-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **L'ultimo giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (1 a sé). |
 | 2 | **Testata da ultimo giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 25 HIT al bersaglio. |
-| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
+| 2 | **Giro secco** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
 | 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,65 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
-| 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Estasi da Coca Etilene» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Giro secco» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Rutto a distanza sociale** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 14 più il doppio della [[L]] spesa. |
 | 1 | **Grab** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
 | 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
@@ -132,7 +132,7 @@ Personaggio: **Piera Ultimo Giro** (NC), salute 82, A 15, L 15; oggetti 2; immun
 | 2 | **Amaro nel bicchiere di plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
 | 2 | **Peroni da 66, calda** (`com.items.RottenBeer`) | C | OGG-02 · Consumato: +10 [[L]]. |
 | 1 | **Tennents Super** (`com.items.AnotherRottenBeer`) | NC | OGG-03 · Consumato: +10 [[L]]; crea il token BrokenBeerBottle vicino a sé. |
-| 1 | **Prima il brindisi** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a distanza sociale» o «Estasi da Coca Etilene». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 1 | **Prima il brindisi** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a distanza sociale» o «Giro secco». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
 
 ### Starter di Beppe Bulletta — `starter-gigi`
@@ -288,13 +288,13 @@ Personaggio: **Piera Ultimo Giro** (NC), salute 82, A 15, L 15; oggetti 2; immun
 | bound | **Spallata al bancone** (`base.pino.bound.SpallataAlBancone`) | C | PIN-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **L'ultimo giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (1 a sé). |
 | 2 | **Testata da ultimo giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 25 HIT al bersaglio. |
-| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
+| 2 | **Giro secco** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
 | 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,65 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
-| 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Estasi da Coca Etilene» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Giro secco» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Rutto a distanza sociale** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 14 più il doppio della [[L]] spesa. |
 | 2 | **Amaro nel bicchiere di plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
 | 1 | **Tennents Super** (`com.items.AnotherRottenBeer`) | NC | OGG-03 · Consumato: +10 [[L]]; crea il token BrokenBeerBottle vicino a sé. |
-| 1 | **Prima il brindisi** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a distanza sociale» o «Estasi da Coca Etilene». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
+| 1 | **Prima il brindisi** (`base.pino.PrimaIlBrindisi`) | NC | PIN-AR6 · Annuncia «Rutto a distanza sociale» o «Giro secco». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
 | 2 | **Grappa della casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 [[L]]; −5 [[A]]. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
@@ -413,7 +413,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 2 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
 | 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
-| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
+| 2 | **Giro secco** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
 | 2 | **Grappa della casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 [[L]]; −5 [[A]]. |
 
 ### Mazzo di prova di Spazienzio de la Ucciso — `prova-b2-spazienzio`
