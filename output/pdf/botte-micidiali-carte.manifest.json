@@ -1,9 +1,16 @@
 {
-  "rules_version": "1.5",
+  "rules_version": "1.13",
+  "set": "Set Base 0.1",
   "catalog_count": 40,
   "printed_count": 40,
+  "selection": {
+    "mode": "catalog",
+    "starters": [],
+    "multiplier": 1,
+    "overrides": {}
+  },
   "card_pages": 5,
-  "total_pages": 8,
+  "total_pages": 9,
   "grid": [
     3,
     3
@@ -14,9 +21,10 @@
   ],
   "minimum_body_pt": 9,
   "sources": {
-    "bm-server\\src\\main\\resources\\cards.sqlite": "781c467d96acafdd6818427b638a855fbb1b6bc35e462d7396acecc5b2696963",
-    "docs\\game-rules.md": "7f592939e8269ee73b7affc94f451850d4ceaeacac2b6bebe0f5357ed216e5cc",
-    "docs\\rules-catalog.json": "5d34bab69bdde7f11a7d6c0f68933a164338fe3338064e6cef56863706dac280"
+    "server\\src\\main\\resources\\cards.sqlite": "6d8b921d0042d5b062215031135fcffe7e8128673857454425eb5fd47821d745",
+    "docs\\game-rules.md": "82658531d92e38a5e8916c8990f3e93417656cf3d390b51692dec123c0b036bb",
+    "docs\\rules-catalog.json": "583b5dfa739661cef90d8e02f9ed70a88c6cd365763abb9020363aafe9d0b282",
+    "docs\\sets\\base.md": "db42568c1ca206931df3cab0e4d3c0b5c002bb7ffb42526bfef1f07cb173dc0c"
   },
   "inventory": [
     {
