@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D143). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D144). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In attesa:** la revisione del proprietario su nomi, flavour e illustrazioni sulla pagina di [SB-20a](reports/set-base/sb-20a-report.md) e la sua esportazione. [SB-20c B1](reports/set-base/sb-20c-b1-report.md) **chiusa** (D143): testi generati in bozza; a ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
-> - **Prossimo:** le scelte di D136 e la rarità P (D137), dopo l'esportazione; poi [SB-20]; SB-20c B2 prima delle prove umane(#sb-20--prima-misura-dellintero-set). Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D143, D142, D138, D137, D136. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D143).
+> - **In corso:** [SB-20](#sb-20--prima-misura-dellintero-set), prima misura dell'intero set ([D144](#decisioni-del-proprietario): revisione di nomi e flavour e rarità P spostate a SB-24). [SB-20c B1](reports/set-base/sb-20c-b1-report.md) **chiusa** (D143): a ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
+> - **Prossimo:** [SB-21](#sb-21--giri-di-correzione); SB-20c B2 prima delle prove umane. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
+> - **Decisioni da leggere:** D144, D143, D142, D139, D135, D134, D132, D131, D95. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D144).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -597,7 +597,7 @@ controllo FFA.
 
 **Rischi.** Molti problemi insieme: si parte da quelli che spostano più matchup.
 
-**In ingresso ([D137](#decisioni-del-proprietario)).** Rarità P per i sette personaggi (42 C / 56 NC / 18 R / 7 P), regolamento 1.14: nel blocco che applica la revisione del proprietario, prima di SB-20.
+**In ingresso ([D137](#decisioni-del-proprietario)).** Rarità P per i sette personaggi (42 C / 56 NC / 18 R / 7 P), regolamento 1.14: spostata a SB-24 da [D144](#decisioni-del-proprietario).
 
 **In ingresso ([D136](#decisioni-del-proprietario)).** Prima di SB-20: SB-20a (pagina HTML locale con le 123 carte, campi modificabili, esportazione delle modifiche), revisione del proprietario, sue scelte applicate. SB-20 resta senza correzioni: Estasi e Grappa (D131) si misurano e vanno in cima all'elenco dei problemi, si correggono nel primo giro di SB-21.
 
@@ -658,6 +658,8 @@ Massimo proposto: 3 giri prima di tornare dal proprietario.
 effetto; in quel caso, ultimo controllo di SB-7. Rarità definitive. **Congelamento della bozza.**
 
 **Completamento verificabile.** Approvazione del proprietario. Nessuna carta con nome provvisorio. Misure finali sulla versione congelata.
+
+**In ingresso ([D144](#decisioni-del-proprietario)).** La revisione del proprietario di nomi, flavour e illustrazioni sulla pagina di SB-20a (rigenerata allora) e la rarità P dei personaggi (D137, regolamento 1.14) si fanno qui. Le battute tolte dai testi stampati in SB-20c (per esempio «Tutto è droga», «alito marcio») possono tornare come flavour.
 
 **Rischi.** Ritocchi che riaprono il bilanciamento: ogni variazione di numeri torna a SB-21.
 
@@ -759,7 +761,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D143 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D144 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
