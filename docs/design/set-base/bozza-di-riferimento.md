@@ -35,7 +35,7 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `26767a506e0a…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `1923ed9b0e71…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 116 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
@@ -65,7 +65,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 
 ### Starter di Mara Contromano — `starter-mara`
 
-Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 11 · NC 8 · R 1).
+Personaggio: **Mara Contromano** (C), salute 69, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 11 · NC 8 · R 1).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -89,7 +89,7 @@ Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nes
 
 ### Starter di Celestina Bucatina — `starter-tossico`
 
-Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 11 · NC 7 · R 2).
+Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 11 · NC 7 · R 2).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -113,16 +113,16 @@ Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immu
 
 ### Starter di Piera Ultimo Giro — `starter-pino`
 
-Personaggio: **Piera Ultimo Giro** (NC), salute 80, A 15, L 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 12 · NC 7 · R 1).
+Personaggio: **Piera Ultimo Giro** (NC), salute 82, A 15, L 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 12 · NC 7 · R 1).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo lo finisco io** (`base.pino.QuestoLoFiniscoIo`) | NC | PIN-BA · Basic: +5 [[L]] a sé; consuma un proprio oggetto. |
+| basic | **Questo lo finisco io** (`base.pino.QuestoLoFiniscoIo`) | NC | PIN-BA · Basic: +15 [[L]] a sé; consuma un proprio oggetto. |
 | bound | **Cinque minuti e vado** (`base.pino.bound.CinqueMinutiEVado`) | C | PIN-BO1 · Bound: +5 [[L]] a sé. |
 | bound | **Spallata al bancone** (`base.pino.bound.SpallataAlBancone`) | C | PIN-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **L'ultimo giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (1 a sé). |
 | 2 | **Testata da ultimo giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 25 HIT al bersaglio. |
-| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 18 più la [[L]] spesa. |
+| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
 | 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,65 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
 | 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Estasi da Coca Etilene» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Rutto a distanza sociale** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 14 più il doppio della [[L]] spesa. |
@@ -232,7 +232,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 
 ### Mazzo di prova di Mara Contromano — `prova-b1-mara`
 
-Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 9 · NC 6 · R 5).
+Personaggio: **Mara Contromano** (C), salute 69, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 9 · NC 6 · R 5).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -255,7 +255,7 @@ Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nes
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b1-celestina`
 
-Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 7 · NC 7 · R 6).
+Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 7 · NC 7 · R 6).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -279,16 +279,16 @@ Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immu
 
 ### Mazzo di prova di Piera Ultimo Giro — `prova-b1-piera`
 
-Personaggio: **Piera Ultimo Giro** (NC), salute 80, A 15, L 10; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 8 · NC 9 · R 3).
+Personaggio: **Piera Ultimo Giro** (NC), salute 82, A 15, L 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 8 · NC 9 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Questo lo finisco io** (`base.pino.QuestoLoFiniscoIo`) | NC | PIN-BA · Basic: +5 [[L]] a sé; consuma un proprio oggetto. |
+| basic | **Questo lo finisco io** (`base.pino.QuestoLoFiniscoIo`) | NC | PIN-BA · Basic: +15 [[L]] a sé; consuma un proprio oggetto. |
 | bound | **Cinque minuti e vado** (`base.pino.bound.CinqueMinutiEVado`) | C | PIN-BO1 · Bound: +5 [[L]] a sé. |
 | bound | **Spallata al bancone** (`base.pino.bound.SpallataAlBancone`) | C | PIN-BO2 · Bound: 3 HIT al bersaglio. |
 | last resort | **L'ultimo giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (1 a sé). |
 | 2 | **Testata da ultimo giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 25 HIT al bersaglio. |
-| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 18 più la [[L]] spesa. |
+| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
 | 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,65 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
 | 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Estasi da Coca Etilene» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Rutto a distanza sociale** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 14 più il doppio della [[L]] spesa. |
@@ -413,7 +413,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 2 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
 | 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
 | 1 | **Due dita in gola** (`base.com.DueDitaInGola`) | NC | GEN-15 · 5 HIT a sé; Azzera [[T]] a sé; Azzera [[L]] a sé. |
-| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 18 più la [[L]] spesa. |
+| 2 | **Estasi da Coca Etilene** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa. |
 | 2 | **Grappa della casa** (`base.items.GrappaDellaCasa`) | R | OGG-16 · Consumato: +25 [[L]]; −5 [[A]]. |
 
 ### Mazzo di prova di Spazienzio de la Ucciso — `prova-b2-spazienzio`
@@ -508,7 +508,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b2-celestina`
 
-Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 5 · NC 7 · R 8).
+Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 5 · NC 7 · R 8).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -532,7 +532,7 @@ Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immu
 
 ### Mazzo di prova di Celestina Bucatina — `prova-b2-rischio9`
 
-Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 5 · NC 9 · R 6).
+Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 5 · NC 9 · R 6).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -602,7 +602,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 
 ### Mazzo di prova di Celestina Bucatina — `iso-b2-sigaretta`
 
-Personaggio: **Celestina Bucatina** (NC), salute 70, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 9 · NC 7 · R 4).
+Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immunità: T. Regolari: **20** carte, 13 titoli (C 9 · NC 7 · R 4).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|

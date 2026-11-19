@@ -148,9 +148,9 @@ di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 | ID | Personaggio | Tipo | Valori iniziali | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---|---|---|---|---|
 | PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H 75 (SB-16e), A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9); salute precedente 85¹ | dati |
-| PG-MAR | Mara Contromano | Personaggio, base | H 70 (SB-16e), A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio; salute precedente 80¹ | dati |
-| PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 70, A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
-| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H ~~85~~ 80 (SB-16i), A 15, L 10 (SB-16e), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
+| PG-MAR | Mara Contromano | Personaggio, base | H 69 (D149), A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio; salute precedente 80¹ | dati |
+| PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 66 (D149), A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
+| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H 82, A 15, L 15 (D149), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
 | PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
 | PG-CES | Sergio Sommerso | Personaggio, booster | H ~~90~~ ~~75~~ 85 (SB-17: D106, riserva del giro 2), A 30, V 10, capacità 2 | R | — | bozza (SB-17), concept SB-9 | Contromosse e letture | dati |
 | PG-ROC | Duccio Braccio Teso | Personaggio, booster | H ~~130~~ ~~110~~ 115 (SB-18: D124, D126; riserva R2), A 15, capacità 2 | R | — | bozza (SB-18 B2), concept SB-9; personaggio di prova SB-6a | La salute come risorsa (D27) | dati |
@@ -189,7 +189,7 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 | SPA-BA | Spazienzio | Azione, basic | ITEMS | −1 | Consuma come Grab | C | Spazienzio | `BruiserGrab`, conservata | Il tratto è la lentezza; con capacità 1 gli oggetti sono pochi | consume |
 | MAR-BA | Mara | Azione, basic | ITEMS | 2 | −5 A a sé, poi consuma | C | Mara | bozza «Preso al volo», −10 → −5 A | Consuma prima che le rubino l'oggetto, pagando precedenza | consume |
 | TOS-BA | Celestina | Azione, basic | ITEMS | 1 | +5 T a sé, poi consuma | NC | Celestina | `ToxicGrab`, riprogettata (assorbe il flavour di `EverythingIsDrug`) | «Tutto è droga»: oggi perde metà della A, che è un tratto solo punitivo | consume |
-| PIN-BA | Piera | Azione, basic | ITEMS | 0 | +5 L a sé, poi consuma | NC | Piera | bozza «Questo lo finisco io» | Beve quello che trova | consume |
+| PIN-BA | Piera | Azione, basic | ITEMS | 0 | +15 L a sé, poi consuma (D149) | NC | Piera | bozza «Questo lo finisco io» | Beve quello che trova | consume |
 | GIG-BA | Beppe | Azione, basic | ITEMS | 0 | +4 V a sé, poi consuma | NC | Beppe | bozza «Questo torna utile», senza −5 A, priorità −1 → 0 | Ogni oggetto gli dà moneta per gli attrezzi; diversa da quella di Spazienzio | consume |
 | CES-BA | Sergio | Azione, basic | ITEMS | 1 | ~~+5~~ +7 A a sé, poi consuma (di nuovo, D121; riserva R1 della B6; ~~vende il proprio oggetto: +8 HEALTH~~, passata a CES-AR7) | R | — | bozza «Lo metto in conto» (SB-17, B3 e B5e V4, D121); ~~«Lo rivendo»~~ da basic (B4, D118) ritirata | Raccoglie e tiene da parte | consume |
 | ROC-BA | Duccio | Azione, basic | ITEMS | 0 | Consuma, poi +3 HEALTH | R | — | bozza «Prima io» (SB-18, nome di lavoro, D124 (5)); già «La mancia» | La sua risorsa è la salute; la cura è limitata dagli oggetti, non ripetibile come una bound | consume |
@@ -296,7 +296,7 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
 | PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
-| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | HIT pari a ~~3~~ ~~10⁶~~ 18 (passo 3) + L residua, poi azzera L | NC | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | Spendi tutta la L. Infliggi 10 HIT più il doppio della L spesa (D149) | NC | 2 | `GoingBerserk`, riprogettata (oggi 10 L, spesso impagabile) | Spendi tutto subito; mai morta | Java nuova: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ~~×0,5~~ ×0,65 (SB-16i) nel turno; +5 L; POISON ×0,5 nel turno, periodico incluso (braccio B, D67, D82; in `bozza.json` dalla 1.6) | C | 2 | bozza «Il bancone regge, io pure» (era una bound); variante B in `set-base/bancone-b.json` | Difesa che lo rifornisce | dati |
 | PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Estasi da Coca Etilene o Rutto a distanza sociale (SB-16i). Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Spende tutta la L residua dopo il costo: il bersaglio perde A pari alla L spesa e subisce HIT pari a 14 più il doppio della L spesa (passo 3, D82) | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | Java nuova `base.pino.RuttoADistanzaSociale` (D84): memorizza, azzera, poi colpisce |

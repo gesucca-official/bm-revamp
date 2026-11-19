@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * SB-16i (D97): the 1.6 in {@code bozza.json} against the 1.5 frozen in {@code storico/1.5/bozza.json} (with arm B's Bancone).
- * Exactly the changes of the approved proposal, with D97's modifications; nothing else. The frozen copy is the 1.5 byte for byte.
+ * The changes of the approved proposal (D97) and the subsequent decisions cited below. The frozen copy is the 1.5 byte for byte.
  */
 class Bozza16Test {
     static final ObjectMapper JSON = new ObjectMapper();
@@ -79,12 +79,16 @@ class Bozza16Test {
         rules.put("searchShuffle", true);
         assertEquals(rules, now.path("rules"));
         for (String key : List.of("format", "set")) assertEquals(old.path(key), now.path(key), key);
-        // Characters: Piera's health only.
+        // Characters: D97 adjusted Piera's health. D149 adjusts Piera, Mara and Celestina.
         for (JsonNode c : now.path("characters")) {
             JsonNode before = null;
             for (JsonNode o : old.path("characters")) if (o.path("id").equals(c.path("id"))) before = o;
             ObjectNode expected = before.deepCopy();
-            if (c.path("id").asText().equals("base.character.Pino")) ((ObjectNode) expected.get("resources")).put("HEALTH", 80);
+            ObjectNode resources = (ObjectNode) expected.get("resources");
+            String id = c.path("id").asText();
+            if (id.equals("base.character.Pino")) resources.put("HEALTH", 82).put("ALCOHOL", 15);
+            if (id.equals("base.character.Mara")) resources.put("HEALTH", 69);
+            if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 66);
             assertEquals(expected, c, c.path("id").asText());
         }
         // Cards: the seventeen changed, two new, the rest identical.
@@ -94,8 +98,15 @@ class Bozza16Test {
             JsonNode before = card(old, b);
             if (before == null) { seen.add(b); continue; }
             // D142: i tre campi stampati ora hanno come riferimento il generatore, controllato da controlla-testi.py.
-            if (!CHANGED.contains(b)) assertEquals(withoutPrintedText(before), withoutPrintedText(c), b);
-            else {
+            if (!CHANGED.contains(b)) {
+                ObjectNode expected = (ObjectNode) withoutPrintedText(before);
+                // D149: exact changes to the draft cards, with the rest of each card still checked.
+                if (b.equals("base.pino.GoingBerserk"))
+                    ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 2);
+                if (b.equals("base.pino.QuestoLoFiniscoIo"))
+                    ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
+                assertEquals(expected, withoutPrintedText(c), b);
+            } else {
                 assertNotEquals(before, c, b);
                 for (String key : List.of("rarity", "kind", "priority", "targets", "cost", "java", "exclusiveTo"))
                     assertEquals(before.path(key), c.path(key), b + " " + key);

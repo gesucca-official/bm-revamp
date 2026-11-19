@@ -119,6 +119,8 @@ guadagna V, il che attenua il rischio, già segnalato dalla bozza, di contromoss
 > partenza di D38), poi 95 → **80** nel giro 2 insieme a Spazienzio, per la durata. Resta 5 sotto di lui, come in D38: «due colpi seri e non
 > si rialza» vale ancora (SuperImpact fa 40, metà della sua salute). [Rapporto](../../reports/set-base/sb-12a-report.md).
 
+> **SB-21, giro 3a rifatto ([D149](../../set-base-decisioni.md#decisioni-del-proprietario)).** La bozza porta la salute da 70 a 69. Vedi il [rapporto](../../reports/set-base/sb-21-giro-3a-bis-report.md).
+
 **Il suo triangolo.**
 
 | Attacco | Difesa | Contromossa |
@@ -167,6 +169,8 @@ come attrezzi. Il resto non cambia: la causa del dominio misurato in SB-4 è la 
 > **T 10 → 20** nel giro 2. Con 10 T le carte pagate in T restavano morte in mano per metà dei turni e il Tossico perdeva contro Mara (0,403);
 > con T 20 e salute 80, e dopo le correzioni delle carte (Tossicone 8 POISON, bound di T a +7), sta a 0,529 contro Spazienzio e 0,479 contro
 > Mara. A 35, capacità 2 e immunità non cambiano. Il nome dello starter è «Tutto è droga». [Rapporto](../../reports/set-base/sb-13-report.md).
+
+> **SB-21, giro 3a rifatto (D149).** La salute iniziale della bozza passa da 70 a 66 per correggere gli incontri con Piera e Sergio. Vedi il [rapporto](../../reports/set-base/sb-21-giro-3a-bis-report.md).
 
 **Il suo triangolo.**
 
@@ -219,6 +223,9 @@ e scende a L 6: impara subito che l'alcol va speso.
 > Cambiano anche due carte: GoingBerserk riprogettata e «L'ultimo giro» partono da 10 e 12 HIT più la L residua. A 15, V 0, capacità 2 e
 > nessuna immunità non cambiano; con l'immunità a L (variante di D28, solo confronto) Pino vince l'83–91%, il rischio di Q10 misurato. Il
 > nome dello starter resta «Chiude quando dico io». [Rapporto](../../reports/set-base/sb-14-report.md).
+
+> **SB-21, giro 3a rifatto (D149).** La bozza porta la salute da 80 a 82 e la L iniziale da 10 a 15.
+> Questo lo finisco io dà +15 L ed Estasi infligge 10 HIT più il doppio della L spesa. Vedi il [rapporto](../../reports/set-base/sb-21-giro-3a-bis-report.md).
 
 **Il suo triangolo.**
 

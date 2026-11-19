@@ -40,7 +40,7 @@ class StarterRedesignTest {
             new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 35),
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
             new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 18),
-            new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 25),
+            new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 10 + 2 * 7), // D149: base e L spesa
             new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 18));
     // D82 (proposta 1.4): Impatto 30, Tossicone 18, Estasi 18 + L 7, Chiave 22; Preparo infligge anche 4 CUT a un avversario.
     // D90 (correzione 1.5): Impatto 34, Chiave 18. D139 (SB-20b): Impatto 35.
