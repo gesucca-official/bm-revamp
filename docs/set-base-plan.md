@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D151). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D152). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139 e D149, set a 123 carte (D135).
-> - **In corso:** nessun blocco. [SB-21t](reports/set-base/sb-21t-report.md) consegnato: nessun tetto a Estasi, bozza D149 confermata, niente altri giri prima della prova umana ([D151](#decisioni-del-proprietario)). A ogni cambio di `bozza.json` i controlli di D143.
-> - **Prossimo:** SB-20c B2 (simboli nel client), poi [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) con le liste costruite e il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D151).
+> - **In corso:** SB-20c B2 (escape nella fabbrica della bozza, simboli nel client). [SB-21t](reports/set-base/sb-21t-report.md) chiuso senza tetto ([D151](#decisioni-del-proprietario)). A ogni cambio di `bozza.json` i controlli di D143.
+> - **Prossimo:** dopo B2, [SB-21e](#sb-21--giri-di-correzione): Estasi torna a 10 T + 10 L, la meccanica di oggi passa a una carta nuova nello slot PIN-AR2, indebolita in un giro breve ([D152](#decisioni-del-proprietario)); poi [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) con le liste costruite e il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
+> - **Decisioni da leggere:** D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D152).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -634,7 +634,9 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 
 **Giro 3b (19 novembre 2026), STOP per il proprietario.** Ricerca dei sette e scontri diretti completi. Tutti i 35 incroci costruito–starter sopra il 70%, Piera senza incroci sfavorevoli. Tre passate scartate per D149, bozza del 3a-bis confermata. [Rapporto e domande](reports/set-base/sb-21-giro-3b-report.md).
 
-**SB-21t (19 novembre 2026), chiuso.** Nessun tetto adottato: a 35 e 30 HIT Piera costruita resta all'87% contro i costruiti e la matrice degli starter esce dal controllo di D149. Per SB-22 valgono i sette finalisti del giro 3b; niente altri giri prima della prova umana ([D151](#decisioni-del-proprietario)). [Rapporto](reports/set-base/sb-21t-report.md).
+**SB-21t (19 novembre 2026), chiuso.** Nessun tetto adottato: a 35 e 30 HIT Piera costruita resta all'87% contro i costruiti e la matrice degli starter esce dal controllo di D149. Per SB-22 valgono i sette finalisti del giro 3b; niente altri giri prima della prova umana ([D151](#decisioni-del-proprietario)).
+
+**SB-21e ([D152](#decisioni-del-proprietario)), dopo SB-20c B2.** Estasi da Coca Etilene torna carta generica a dati, 10 T + 10 L per 30 HIT, rarità R (set a 124). Lo slot PIN-AR2 tiene la meccanica di oggi con un nome di lavoro e si indebolisce, dalla leva più leggera (colpo a sé, poi danno base), fino a far perdere a Piera costruita almeno uno scontro, con isolamenti in banda D131 e starter nel controllo di D149 (4). Una sessione da 5.500 s; Estasi riportata solo misurata (STOP se fuori banda). [Rapporto](reports/set-base/sb-21t-report.md).
 
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 
