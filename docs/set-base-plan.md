@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D144). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 19 novembre 2026, dopo D145). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In attesa:** [SB-20](#sb-20--prima-misura-dellintero-set), STOP 4. Il proprietario rivede il [rapporto e le tre domande](reports/set-base/sb-20-report.md#domande-per-il-proprietario) prima di decidere ripresa della misura e giri di SB-21. [SB-20c B1](reports/set-base/sb-20c-b1-report.md) **chiusa** (D143): a ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
-> - **Prossimo:** [SB-21](#sb-21--giri-di-correzione); SB-20c B2 prima delle prove umane. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
-> - **Decisioni da leggere:** D144, D143, D142, D139, D135, D134, D132, D131, D95. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D144).
+> - **In corso:** [SB-21](#sb-21--giri-di-correzione), giro 1 di al massimo tre (5.500 s ciascuno): Estasi e Grappa, poi ricerca sui sette un personaggio per volta ([D145](#decisioni-del-proprietario)). [SB-20](reports/set-base/sb-20-report.md) **chiuso** con la fotografia parziale. A ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
+> - **Prossimo:** giri 2 e 3 di SB-21; SB-20c B2 prima delle prove umane di [SB-22](#sb-22--prova-umana-con-mazzi-costruiti), che fa anche il controllo FFA. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
+> - **Decisioni da leggere:** D145, D143, D136, D134, D132, D131, D127, D121, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D145).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -297,7 +297,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B6 fatte ([rapporto B5e](reports/set-base/sb-17-b5e-report.md), [rapporto B6](reports/set-base/sb-17-b6-report.md)); in bozza la V4 con R1, Celestina 32,2% accettata ([D122](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D123](#decisioni-del-proprietario)) |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fasi B e B1e fatte ([rapporto B](reports/set-base/sb-18-b-report.md), [rapporto B1e](reports/set-base/sb-18-b1e-report.md)); la leva sono i costi; Fase B2 fatta ([rapporto B2](reports/set-base/sb-18-b2-report.md)): Duccio in bozza, scostamento su Mara accettato ([D127](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D128](#decisioni-del-proprietario)) |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fasi B1 e B1b fatte e accettate ([D131](#decisioni-del-proprietario), [D132](#decisioni-del-proprietario)); Fase B2 ferma al passo 2 ([rapporto](reports/set-base/sb-19-b2-report.md)); Fase B2a dei bot fatta, patch assorbita, set a 123 ([rapporto](reports/set-base/sb-19-b2a-report.md)); ripresa della B2 fatta: oggetti tenuti coi valori di M1 ([D134](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 18 novembre 2026 ([D135](#decisioni-del-proprietario)) |
-| Set intero | SB-20 | Prima misura dell'intero set | SB-19 | STOP 4, budget esaurito. Porta verde, matrice completa e ricerca 4/7 ([rapporto](reports/set-base/sb-20-report.md)). In attesa del proprietario. |
+| Set intero | SB-20 | Prima misura dell'intero set | SB-19 | STOP 4, budget esaurito: porta verde, matrice completa, ricerca 4/7 ([rapporto](reports/set-base/sb-20-report.md)); **chiuso** il 19 novembre 2026 con la fotografia parziale ([D145](#decisioni-del-proprietario)) |
 | | SB-21 | Giri di correzione | SB-20 |  |
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 |  |
@@ -597,7 +597,7 @@ controllo FFA.
 
 **Rischi.** Molti problemi insieme: si parte da quelli che spostano più matchup.
 
-**Consegna SB-20 (19 novembre 2026), STOP 4** ([rapporto](reports/set-base/sb-20-report.md)). Bozza D143, porta «Rif» identica a SB-20c B1, matrice dei sette riferimenti completa. Ricerca «dopo» conclusa per quattro personaggi su sette prima di esaurire 4.000 s. In attesa della decisione sulla ripresa della misura, sui giri di SB-21 e sul FFA.
+**Consegna SB-20 (19 novembre 2026), STOP 4** ([rapporto](reports/set-base/sb-20-report.md)). Bozza D143, porta «Rif» identica a SB-20c B1, matrice dei sette riferimenti completa. Ricerca «dopo» conclusa per quattro personaggi su sette prima di esaurire 4.000 s. **Chiuso** il 19 novembre 2026 ([D145](#decisioni-del-proprietario)): niente ripresa, i tre personaggi mancanti si misurano nel giro 1 di SB-21; FFA alla prova umana di SB-22.
 
 **In ingresso ([D137](#decisioni-del-proprietario)).** Rarità P per i sette personaggi (42 C / 56 NC / 18 R / 7 P), regolamento 1.14: spostata a SB-24 da [D144](#decisioni-del-proprietario).
 
@@ -622,7 +622,7 @@ controllo FFA.
 ### SB-21 — Giri di correzione
 
 **Perimetro.** Ripetibile. Un giro per sessione. Si corregge secondo l'[ordine concordato](#bilanciamento-metodo-e-criteri), si rilancia matrice e ricerca e si registra cosa è cambiato. Da [D95](#decisioni-del-proprietario) qui si ricontrollano anche gli starter fra loro, per la partita rapida, coi criteri completi.
-Massimo proposto: 3 giri prima di tornare dal proprietario.
+Massimo: 3 giri da 5.500 s di misura ciascuno prima di tornare dal proprietario; il primo su Estasi e Grappa; ricerca un personaggio per volta ([D145](#decisioni-del-proprietario)).
 
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 
@@ -763,7 +763,7 @@ all'avvio. Decisioni di C4 su cornici e grafica vanno rispettate. Il segnaposto 
 
 ## Decisioni del proprietario
 
-Le decisioni D1–D144 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
+Le decisioni D1–D145 del proprietario sono nel [registro delle decisioni](set-base-decisioni.md#decisioni-del-proprietario): spostate dal piano parola per parola nel consolidamento D96 (14 novembre 2026), con una colonna «Stato» (in vigore, superata o da verificare). Le citazioni «Dn» di questo piano rimandano là.
 
 **Decisioni in vigore per tema** (solo numeri; il testo e lo stato di ciascuna sono nel [registro](set-base-decisioni.md#decisioni-del-proprietario), dove le decisioni «superate» non si seguono):
 
