@@ -7,7 +7,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 19 novembre 2026, dopo D144). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101), set a 123 carte (D135).
-> - **In corso:** [SB-20](#sb-20--prima-misura-dellintero-set), prima misura dell'intero set ([D144](#decisioni-del-proprietario): revisione di nomi e flavour e rarità P spostate a SB-24). [SB-20c B1](reports/set-base/sb-20c-b1-report.md) **chiusa** (D143): a ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
+> - **In attesa:** [SB-20](#sb-20--prima-misura-dellintero-set), STOP 4. Il proprietario rivede il [rapporto e le tre domande](reports/set-base/sb-20-report.md#domande-per-il-proprietario) prima di decidere ripresa della misura e giri di SB-21. [SB-20c B1](reports/set-base/sb-20c-b1-report.md) **chiusa** (D143): a ogni cambio di `bozza.json` i controlli dei numeri e dei testi ([tabella delle aree](aree-protette.md#playground-e-misure)).
 > - **Prossimo:** [SB-21](#sb-21--giri-di-correzione); SB-20c B2 prima delle prove umane. Quando il proprietario li lancia: la lettura di «12+x» per «L'ultimo giro» nel client, `restOn` ([consegna 2](orchestrazione-lavoro.md#allineamento-fra-le-macchine)), B5c di SB-30b (mai insieme a una misura).
 > - **Decisioni da leggere:** D144, D143, D142, D139, D135, D134, D132, D131, D95. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D144).
 
@@ -297,7 +297,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-17 | Sergio Sommerso: bozza e giro | SB-16i | Fasi B–B6 fatte ([rapporto B5e](reports/set-base/sb-17-b5e-report.md), [rapporto B6](reports/set-base/sb-17-b6-report.md)); in bozza la V4 con R1, Celestina 32,2% accettata ([D122](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D123](#decisioni-del-proprietario)) |
 | | SB-18 | Duccio Braccio Teso: bozza e giro | SB-17 | Fasi B e B1e fatte ([rapporto B](reports/set-base/sb-18-b-report.md), [rapporto B1e](reports/set-base/sb-18-b1e-report.md)); la leva sono i costi; Fase B2 fatta ([rapporto B2](reports/set-base/sb-18-b2-report.md)): Duccio in bozza, scostamento su Mara accettato ([D127](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 17 novembre 2026 ([D128](#decisioni-del-proprietario)) |
 | | SB-19 | Resto del pool e giro di blocco | SB-18 | Proposte A e A2 approvate ([D129](#decisioni-del-proprietario), [D130](#decisioni-del-proprietario)); Fasi B1 e B1b fatte e accettate ([D131](#decisioni-del-proprietario), [D132](#decisioni-del-proprietario)); Fase B2 ferma al passo 2 ([rapporto](reports/set-base/sb-19-b2-report.md)); Fase B2a dei bot fatta, patch assorbita, set a 123 ([rapporto](reports/set-base/sb-19-b2a-report.md)); ripresa della B2 fatta: oggetti tenuti coi valori di M1 ([D134](#decisioni-del-proprietario)); prova del proprietario superata, **chiuso** il 18 novembre 2026 ([D135](#decisioni-del-proprietario)) |
-| Set intero | SB-20 | Prima misura dell'intero set | SB-19 |  |
+| Set intero | SB-20 | Prima misura dell'intero set | SB-19 | STOP 4, budget esaurito. Porta verde, matrice completa e ricerca 4/7 ([rapporto](reports/set-base/sb-20-report.md)). In attesa del proprietario. |
 | | SB-21 | Giri di correzione | SB-20 |  |
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 |  |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 |  |
@@ -597,6 +597,8 @@ controllo FFA.
 
 **Rischi.** Molti problemi insieme: si parte da quelli che spostano più matchup.
 
+**Consegna SB-20 (19 novembre 2026), STOP 4** ([rapporto](reports/set-base/sb-20-report.md)). Bozza D143, porta «Rif» identica a SB-20c B1, matrice dei sette riferimenti completa. Ricerca «dopo» conclusa per quattro personaggi su sette prima di esaurire 4.000 s. In attesa della decisione sulla ripresa della misura, sui giri di SB-21 e sul FFA.
+
 **In ingresso ([D137](#decisioni-del-proprietario)).** Rarità P per i sette personaggi (42 C / 56 NC / 18 R / 7 P), regolamento 1.14: spostata a SB-24 da [D144](#decisioni-del-proprietario).
 
 **In ingresso ([D136](#decisioni-del-proprietario)).** Prima di SB-20: SB-20a (pagina HTML locale con le 123 carte, campi modificabili, esportazione delle modifiche), revisione del proprietario, sue scelte applicate. SB-20 resta senza correzioni: Estasi e Grappa (D131) si misurano e vanno in cima all'elenco dei problemi, si correggono nel primo giro di SB-21.
@@ -611,7 +613,7 @@ controllo FFA.
 
 **In ingresso ([D134](#decisioni-del-proprietario)).** Rimisurare Conto e Sigaretta nei mazzi di Sergio senza togliere gli Espresso (con lo scambio della B2 escono a −31/−32, −23/−18 anche senza malus); rifare intera la ricerca «dopo» (nella B2 solo 4 personaggi su 7; il banco a 26 mazzi costa circa 2,6 volte la «prima»).
 
-**In ingresso ([D131](#decisioni-del-proprietario)).** Le carte da booster rendono il mazzo più forte dello starter, fra 0 e +10 punti di media, mai oltre +15 in un confronto: vale per tutte le carte fuori dagli starter, anche quelle d'archetipo. Estasi (nel mazzo vincente di 14 ricerche su 14 prima di SB-19) e Grappa (+11,5 da sola in un mazzo di Beppe senza chi usa L, da spiegare) si correggono qui.
+**In ingresso ([D131](#decisioni-del-proprietario)).** Le carte da booster rendono il mazzo più forte dello starter, fra 0 e +10 punti di media, mai oltre +15 in un confronto: vale per tutte le carte fuori dagli starter, anche quelle d'archetipo. Estasi (nel mazzo vincente di 14 ricerche su 14 prima di SB-19) e Grappa (+11,5 da sola in un mazzo di Beppe senza chi usa L, da spiegare) si misurano qui e si correggono nel primo giro di SB-21 (D136).
 
 **SB-20c, Fase A.** [Proposta sui testi generati](design/set-base/sb-20c-proposta.md) e prototipo su 116 carte; STOP per decisione del proprietario. **Approvata in [D142](#decisioni-del-proprietario)** («Sì, tutto»), con la Fase B in due: B1 testi in bozza e controllo, B2 simboli nel client.
 
