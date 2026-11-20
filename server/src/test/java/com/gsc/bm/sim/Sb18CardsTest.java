@@ -39,7 +39,7 @@ class Sb18CardsTest {
         COSTS.put(Sb18.NOCCHE, 16);
         COSTS.put(Sb18.E_ALLORA, 10);
         COSTS.put(Sb18.CAPOCCIATA, 28);
-        COSTS.put(Sb18.TESTA_DURA, 33);
+        COSTS.put(Sb18.TESTA_DURA, 35); // D158
     }
     private static Draft draft;
 
@@ -124,7 +124,7 @@ class Sb18CardsTest {
         int i = 0;
         for (Map.Entry<String, Integer> e : COSTS.entrySet()) {
             Card card = draft.card(e.getKey());
-            assertEquals(Map.of(Resource.HEALTH, e.getValue()), card.getCost(), e.getKey() + ": D126, the B2 costs");
+            assertEquals(Map.of(Resource.HEALTH, e.getValue()), card.getCost(), e.getKey() + ": HEALTH costs of the current draft (D126 and D158)");
             assertFalse(card.isLastBlow(), e.getKey() + ": no «Ultimo colpo» (D125 (3))");
             assertEquals("HIT " + hits[i++], gui(e.getKey()).get("damageAmount").asText(), e.getKey() + ": the V3 hits");
         }

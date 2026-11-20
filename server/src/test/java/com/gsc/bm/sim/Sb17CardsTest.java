@@ -336,14 +336,14 @@ class Sb17CardsTest {
     // ---- Lo sanno tutti (CES-AR5, D110 (1)): the unconditional strike ----
 
     @Test
-    void loSannoTuttiCostsFifteenAlertnessAndDealsTwentyFourHit() {
+    void loSannoTuttiCostsFifteenAlertnessAndDealsTwentyFiveHit() {
         Card card = draft.card("base.cesira.LoSannoTutti");
         assertEquals(1, card.getPriority());
-        assertEquals(Map.of(Damage.DamageType.HIT, 24), base("base.cesira.LoSannoTutti"), "20, riserva R1 del giro 1 (D110)");
+        assertEquals(Map.of(Damage.DamageType.HIT, 25), base("base.cesira.LoSannoTutti"), "25 nel bilanciamento SB-21g");
         Player b = opponent(List.of(filler("Riempitivo")), fillers(10));
         Game game = game(sergio("base.cesira.LoSannoTutti"), b);
         int before = game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS);
-        assertEquals(24, turn(game, move(game, "s", "Lo sanno tutti", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
+        assertEquals(25, turn(game, move(game, "s", "Lo sanno tutti", "b"), move(game, "b", "Riempitivo", "SELF"))[1]);
         assertEquals(before - 15, game.getPlayers().get("s").getCharacter().getResources().get(Resource.ALERTNESS), "15 A paid: R3 (20 A) tolta, stato del giro 2 (D112)");
     }
 
@@ -429,7 +429,7 @@ class Sb17CardsTest {
         Map<Move.AdditionalAction, String> choices = new EnumMap<>(Move.AdditionalAction.class);
         choices.put(Move.AdditionalAction.TARGET_ITEM, SANTINO);
         turn(game, new Move("Lo metto in conto", "s", "SELF", game.getGameId(), choices), move(game, "b", "Riempitivo", "SELF"));
-        assertEquals(a + 7, alertness(game, "s"), "+7 A (D121 (1): +5; reserve R1 of the B6 round: +7)");
+        assertEquals(a + 8, alertness(game, "s"), "+8 A (SB-21g, D158)");
         assertEquals(List.of(), items(game, "s"), "the item is consumed with its effect");
         assertTrue(game.getPlayers().get("s").getCharacter().getImmunities().contains(Resource.ALCOHOL), "the Santino's effect applies");
     }

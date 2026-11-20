@@ -50,6 +50,7 @@ class SetBaseDraftTest {
     static final String RESOURCE = "/set-base/bozza.json";
     static final String SPAZIENZIO = "bruiser.character.BigBadBruiser", MARA = "base.character.Mara", TOSSICO = "junkie.character.ToxicJunkie",
             PINO = "base.character.Pino", GIGI = "base.character.Gigi";
+    static final int SPAZIENZIO_HEALTH = 78; // SB-21g, compenso degli starter.
     static final List<String> BASE_STARTERS = List.of("starter-spazienzio", "starter-mara");
     static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi");
 
@@ -241,7 +242,7 @@ class SetBaseDraftTest {
         Map<String, Integer> health = new LinkedHashMap<>();
         for (JsonNode c : json.get("characters"))
             if (!Set.of(TOSSICO, PINO, GIGI, Sb17.SERGIO, Sb18.DUCCIO).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
-        assertEquals(Map.of(SPAZIENZIO, 75, MARA, 69), health, "SB-16e e D149: salute dei due base; gli avanzati hanno il loro test");
+        assertEquals(Map.of(SPAZIENZIO, SPAZIENZIO_HEALTH, MARA, 70), health, "SB-21g: salute dei due base; gli avanzati hanno il loro test");
         Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 20 /* D82, era 5 */, "base.mara.Sgommata", 15,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
         alertnessCosts.forEach((binding, cost) -> {
@@ -333,12 +334,12 @@ class SetBaseDraftTest {
         expected.put("base.tossico.UnAssaggino", 1);
         assertEquals(expected, new TreeMap<>(draft.cardsOf(deck)), "archetipo 10, generiche 5, oggetti 5, D79");
 
-        // D34, punto 4: la bound di T dà al massimo +10; giro 3: +7, testi compresi.
+        // D34, punto 4: la bound di T dà al massimo +10; SB-21g (D158): +6, testi compresi.
         JsonNode raschiare = card("base.tossico.bound.RaschiareIlFondo");
         assertTrue(raschiare.get("self").get(0).get("amount").asInt() <= 10);
-        assertEquals(7, raschiare.get("self").get(0).get("amount").asInt());
-        assertEquals("+7 T", raschiare.get("gui").get("gains").asText());
-        assertTrue(raschiare.get("gui").get("description").asText().contains("+7 [[T]] a sé"));
+        assertEquals(6, raschiare.get("self").get(0).get("amount").asInt());
+        assertEquals("+6 T", raschiare.get("gui").get("gains").asText());
+        assertTrue(raschiare.get("gui").get("description").asText().contains("+6 [[T]] a sé"));
         // D55: MethDrivenRage diventa un caricamento gratuito; le altre tre carte restano a 10 T.
         assertTrue(draft.card("junkie.MethDrivenRage").getCost().isEmpty());
         for (String binding : List.of("junkie.Cough", "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain")) {
@@ -347,11 +348,11 @@ class SetBaseDraftTest {
             assertEquals(10, c.get("cost").get("TOXICITY").asInt(), binding);
             assertTrue(c.get("gui").get("description").asText().contains("· 10 [[T]]:"), binding + ": costo nel testo");
         }
-        // D55/SB-16d: Tossicone Scatarrante da 8 a 12 POISON; D82 (passo 3 di SB-16g): 18 POISON, testi compresi.
+        // SB-21g: Tossicone Scatarrante sale da 18 a 20 POISON, testi compresi.
         JsonNode cough = card("junkie.Cough");
-        assertEquals(18, cough.get("target").get(0).get("amount").asInt());
-        assertEquals("POISON 18", cough.get("gui").get("damageAmount").asText());
-        assertTrue(cough.get("gui").get("description").asText().contains("18 POISON al bersaglio; +5 [[T]] al bersaglio."));
+        assertEquals(20, cough.get("target").get(0).get("amount").asInt());
+        assertEquals("POISON 20", cough.get("gui").get("damageAmount").asText());
+        assertTrue(cough.get("gui").get("description").asText().contains("20 POISON al bersaglio; +5 [[T]] al bersaglio."));
         // Lo slot apre la descrizione delle dieci carte del Tossico.
         Pattern slot = Pattern.compile("^(TOS-(BA|BO\\d|AR\\d)|LR-TOS) · .*");
         int slots = 0;
@@ -370,10 +371,10 @@ class SetBaseDraftTest {
         spazienzio.resolveTimeBasedEffects();
         assertEquals(66, tossico.getResources().get(Resource.HEALTH), "D149: salute iniziale");
         assertEquals(15, tossico.getResources().get(Resource.TOXICITY));
-        assertEquals(65, spazienzio.getResources().get(Resource.HEALTH));
-        // D55: Tossicone Scatarrante +5 T al bersaglio; D82: 18 POISON (era 12).
+        assertEquals(SPAZIENZIO_HEALTH - 10, spazienzio.getResources().get(Resource.HEALTH));
+        // Tossicone Scatarrante: +5 T al bersaglio (D55) e 20 POISON (SB-21g).
         ((AbstractCard) draft.card("junkie.Cough")).applyEffectOnTarget(tossico, spazienzio);
-        assertEquals(47, spazienzio.getResources().get(Resource.HEALTH));
+        assertEquals(SPAZIENZIO_HEALTH - 10 - 20, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(25, spazienzio.getResources().get(Resource.TOXICITY));
         // Metabolismo Corrotto: HEALTH pari a T / 2, poi perde tutta la T.
         tossico.getResources().put(Resource.HEALTH, 50);
@@ -381,16 +382,16 @@ class SetBaseDraftTest {
         ((AbstractCard) draft.card("junkie.PervertedMetabolism")).applyEffectOnSelf(tossico);
         assertEquals(65, tossico.getResources().get(Resource.HEALTH));
         assertEquals(0, tossico.getResources().get(Resource.TOXICITY));
-        // L'ultima dose: 2 HIT a sé (SB-16e2, D56/D38: era 5); 7 POISON e +4 T al bersaglio.
+        // L'ultima dose: 2 HIT a sé (SB-16e2, D56/D38: era 5); 8 POISON (D158) e +4 T al bersaglio.
         AbstractCard last = (AbstractCard) draft.card("junkie.LethalHeroinDose");
         last.applyEffectOnSelf(tossico);
         last.applyEffectOnTarget(tossico, spazienzio);
         assertEquals(63, tossico.getResources().get(Resource.HEALTH), "SB-16e2, D56: 2 HIT a sé");
-        assertEquals(40, spazienzio.getResources().get(Resource.HEALTH), "47 dopo il Tossicone da 18 (D82), meno 7");
+        assertEquals(SPAZIENZIO_HEALTH - 10 - 20 - 8, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(29, spazienzio.getResources().get(Resource.TOXICITY));
         // Raschiare il fondo: carburante a sé.
         ((AbstractCard) draft.card("base.tossico.bound.RaschiareIlFondo")).applyEffectOnSelf(tossico);
-        assertEquals(7, tossico.getResources().get(Resource.TOXICITY));
+        assertEquals(6, tossico.getResources().get(Resource.TOXICITY));
     }
 
     /** SB-13: la base del listino ha anche il contesto del Tossico, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
@@ -421,9 +422,9 @@ class SetBaseDraftTest {
     // ---- SB-14: lo starter di Pino «Chiude quando dico io» ----
 
     /** La salute iniziale di Pino (SB-9 meno 15, ipotesi della scala di D41, poi i giri coi bot di SB-14). */
-    static final int PINO_HEALTH = 79; // SB-21f: compenso starter per D149 (4), prima 82.
-    /** La L iniziale di Pino: 20 in SB-14, 10 in SB-16e, 15 con D149. */
-    static final int PINO_ALCOHOL = 15;
+    static final int PINO_HEALTH = 78; // SB-21g (D158), prima 79.
+    /** La L iniziale di Pino, ridotta da 15 nel bilanciamento SB-21g. */
+    static final int PINO_ALCOHOL = 14;
 
     /**
      * SB-14: lo starter di Pino come nella griglia (basic, due bound comuni, last resort propria, 9 carte d'archetipo, 6 generiche, 5 oggetti).
@@ -543,7 +544,7 @@ class SetBaseDraftTest {
         me.getResources().put(Resource.ALCOHOL, 12);
         int berserk = card("base.pino.GoingBerserk").get("params").get("base").asInt(),
                 last = card("base.pino.UltimoGiro").get("params").get("base").asInt();
-        int health = 75 - berserk - 12; // D156: un HIT per L spesa; SB-16e: salute iniziale di Spazienzio.
+        int health = SPAZIENZIO_HEALTH - berserk - 12; // D156: un HIT per L spesa.
         resolveOnOpponent(game, "base.pino.GoingBerserk");
         assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(0, me.getResources().get(Resource.ALCOHOL));
@@ -579,12 +580,12 @@ class SetBaseDraftTest {
         assertEquals(Map.of(Resource.ALCOHOL, 15, Resource.ALERTNESS, 35), me.takeSearchGains(true));
         assertEquals(0, spazienzio.getResources().get(Resource.ALCOHOL));
         assertEquals(14, spazienzio.getResources().get(Resource.ALERTNESS));
-        // Il bancone regge: HIT ricevuto ×0,65 in questo turno (SB-16i, D97; era ×0,5), +5 L.
+        // Il bancone regge: HIT ricevuto ×0,75 in questo turno (SB-21g, D158), +5 L.
         Character standing = draft.character(PINO), hitter = draft.character(SPAZIENZIO);
         ((AbstractCard) draft.card("base.pino.IlBanconeRegge")).applyEffectOnSelf(standing);
         assertEquals(PINO_ALCOHOL + 5, standing.getResources().get(Resource.ALCOHOL));
         hitter.inflictDamage(standing, new Damage(Damage.DamageType.HIT, 20));
-        assertEquals(PINO_HEALTH - 13, standing.getResources().get(Resource.HEALTH));
+        assertEquals(PINO_HEALTH - 15, standing.getResources().get(Resource.HEALTH));
     }
 
     /** SB-14: la base del listino ha anche il contesto di Pino, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
@@ -880,7 +881,7 @@ class SetBaseDraftTest {
         assertTrue(me.getStatuses().stream().anyMatch(s -> s.isEquip()), "i Guanti sono un equip");
         Character reference = draft.character(SPAZIENZIO);
         me.inflictDamage(reference, new Damage(Damage.DamageType.HIT, base + 2 * perItem));
-        int gloved = 75 - reference.getResources().get(Resource.HEALTH);
+        int gloved = SPAZIENZIO_HEALTH - reference.getResources().get(Resource.HEALTH);
         assertTrue(gloved > base + 2 * perItem, "i Guanti moltiplicano l'HIT inflitto: " + gloved);
         resolveOnOpponent(game, "base.gigi.LavoroFattoBene");
         health -= gloved;

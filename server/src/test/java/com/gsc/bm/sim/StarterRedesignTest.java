@@ -39,7 +39,7 @@ class StarterRedesignTest {
     private static final List<Pair> PAIRS = List.of(
             new Pair("starter-spazienzio", "bruiser.Glare", "bruiser.SuperImpact", 35),
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
-            new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 18),
+            new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 20),
             new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 10 + 7), // D156: base e L spesa
             new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 18));
     // D82 (proposta 1.4): Impatto 30, Tossicone 18, Estasi 18 + L 7, Chiave 22; Preparo infligge anche 4 CUT a un avversario.
@@ -185,7 +185,7 @@ class StarterRedesignTest {
             assertEquals(500 - pair.damage - chargeCut(charge), res(b, Resource.HEALTH), pair.hit);
             assertTrue(a.getCharacter().getStatuses().isEmpty(), "esposizione scaduta anche dopo il colpo");
             if (pair.deck.equals("starter-pino")) assertEquals(0, res(a, Resource.ALCOHOL));
-            if (pair.deck.equals("starter-tossico")) assertEquals(5, res(b, Resource.TOXICITY), "l'immunità ferma il periodico, non i 18 POISON (D82)");
+            if (pair.deck.equals("starter-tossico")) assertEquals(5, res(b, Resource.TOXICITY), "l'immunità ferma il periodico, non i 20 POISON (SB-21g)");
         }
     }
 

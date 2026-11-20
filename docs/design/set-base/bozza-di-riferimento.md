@@ -1,10 +1,12 @@
 # Bozza di riferimento 1.6b
 
+**Versione 1.3 del documento — 20 novembre 2026 — bozza SB-21g.** Revisione di importi e fattori con D158 e controllo del bilanciamento. I valori correnti sono nelle liste generate e nella [griglia](griglia.md). [Rapporto SB-21g](../../reports/set-base/sb-21g-report.md).
+
 **Versione 1.2 del documento — 15 novembre 2026 — bozza 1.6b** ([SB-16i](../../set-base-plan.md#sb-16i--correzione-16-meccaniche-di-sistema-e-soglia-minima), Fase B2, [D99](../../set-base-decisioni.md#decisioni-del-proprietario)): la 1.6 con la leva A su Mara. Versione 1.1 (15 novembre 2026, Fase B, [D97](../../set-base-decisioni.md#decisioni-del-proprietario)): la bozza 1.6, che resta nel commit 336e0ff e in [`sb-16i/round-draft.json.gz`](../../reports/set-base/sb-16i/round-draft.json.gz). Versione 1.0 (14 novembre 2026, [D96](../../set-base-decisioni.md#decisioni-del-proprietario)): la bozza 1.5. Non è normativa: è la bozza del playground, che vale fino a SB-28 ([D50](../../set-base-decisioni.md#decisioni-del-proprietario)). Le regole con cui si gioca sono in [regole-playground.md](regole-playground.md) (1.1); le fonti normative restano [docs/game-rules.md](../../game-rules.md) e [docs/sets/base.md](../../sets/base.md).
 
 ## Cos'è
 
-La **bozza di riferimento** è la bozza su cui si misura e si fa la prova umana: dalla Fase B2 di SB-16i la **1.6b**, scritta tutta in **`bozza.json`** (`server/src/test/resources/set-base/bozza.json`), Bancone del braccio B compreso. Rispetto alla 1.5 (proposta 1.6 con le modifiche di D97, poi la leva A di D99 (1)):
+La **bozza di riferimento** è la bozza su cui si misura e si fa la prova umana: dalla Fase B2 di SB-16i la **1.6b**, scritta tutta in **`bozza.json`** (`server/src/test/resources/set-base/bozza.json`), Bancone del braccio B compreso. Il riepilogo seguente descrive il passaggio storico dalla 1.5 alla 1.6b (proposta 1.6 con le modifiche di D97, poi la leva A di D99 (1)):
 
 - **«Annuncia X o Y»** sui dieci caricamenti: il secondo nome è il colpo dell'altro caricamento dello stesso personaggio; sceglie il giocatore quando gioca la carta, fra i nomi con almeno una copia nel mazzo; premi della 1.5 invariati; **dopo ogni ricerca il mazzo si mischia** (`rules.searchShuffle`);
 - **«Gioca d'anticipo»** su Sorpasso in curva (+4 A a sé), Sgommata (in questo turno il bersaglio infligge danni ×0,8) e Cinghiata di traverso (+5 CUT); nella 1.6 erano +8 A, ×0,5 e +10 CUT (leva A, [D99](../../set-base-decisioni.md#decisioni-del-proprietario) (1));
@@ -17,7 +19,7 @@ Misura della 1.6b: [rapporto SB-16i B2](../../reports/set-base/sb-16i-b2-report.
 
 ## Il server della prova umana
 
-Il server col profilo `bozza` legge `bozza.json`, quindi **gioca la 1.6b così com'è misurata**, senza file a parte né `-Draft`. La nota della versione 1.0 sul braccio A è chiusa. La scelta fra due nomi, l'anticipo e il contatore di Rincara si vedono nel client dopo il passo del client di SB-16i; fino ad allora la ricerca prende il primo nome disponibile.
+Il server col profilo `bozza` legge `bozza.json`, quindi **gioca la bozza SB-21g così com'è misurata**, senza file a parte né `-Draft`. La nota della versione 1.0 sul braccio A è chiusa. La scelta fra due nomi, l'anticipo e il contatore di Rincara si vedono nel client dopo il passo del client di SB-16i; fino ad allora la ricerca prende il primo nome disponibile.
 
 ## Come rigenerare le liste
 
@@ -35,13 +37,13 @@ I testi sono quelli dei campi `gui` della bozza (provvisori fino a SB-25). Il nu
 
 <!-- inizio generato -->
 
-Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `0e56eebbc3aa…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
+Generato da `genera-bozza-di-riferimento.py` dal solo `bozza.json` (SHA-256 `bb182da96a63…`). Formato `sb-6b/1`, set `base` versione «bozza»; regole dei mazzi: 20 carte regolari, massimo 2 copie, 2 bound, basic fissa, last resort obbligatoria; il mazzo si mischia dopo ogni ricerca. Rarità: C comune, NC non comune, R rara.
 
 Il file contiene 117 carte (basic, bound, last resort, azioni e oggetti; i personaggi sono a parte), 7 personaggi, 5 starter e, di prova, 21 mazzo/i (l'id che comincia per `starter-` è uno starter, ogni altro mazzo è di prova: non è nella riserva predefinita del server).
 
 ### Starter di Spazienzio de la Ucciso — `starter-spazienzio`
 
-Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 10 · NC 9 · R 1).
+Personaggio: **Spazienzio de la Ucciso** (C), salute 78, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 10 · NC 9 · R 1).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -65,7 +67,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 
 ### Starter di Mara Contromano — `starter-mara`
 
-Personaggio: **Mara Contromano** (C), salute 69, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 11 · NC 8 · R 1).
+Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 11 · NC 8 · R 1).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -74,11 +76,11 @@ Personaggio: **Mara Contromano** (C), salute 69, A 40; oggetti 2; immunità: nes
 | bound | **Cambio marcia** (`base.mara.bound.CambioMarcia`) | C | MAR-BO2 · Bound: +6 [[A]] a sé. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
 | 1 | **Cinghiata di traverso** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 [[A]]: CUT al bersaglio pari a 18 più metà della tua [[A]] residua, arrotondata per difetto. Gioca d'anticipo: 5 CUT al bersaglio. |
-| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 [[A]]: 25 CUT al bersaglio. Gioca d'anticipo: Il bersaglio: HIT, CUT e POISON inflitti ×0,8 in questo turno. |
+| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 [[A]]: 25 CUT al bersaglio. Gioca d'anticipo: Il bersaglio: HIT, CUT e POISON inflitti ×0,75 in questo turno. |
 | 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · Gioca d'anticipo: +4 [[A]] a sé. −8 [[A]] al bersaglio; 3 CUT al bersaglio. |
 | 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +5 [[A]] a sé. |
 | 2 | **Slalom d'avvicinamento** (`base.mara.Slalom`) | NC | MAR-AR5 · Annuncia «Sgommata» o «Cinghiata di traverso». Se lo trovi: +15 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 12 POISON al bersaglio. |
 | 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +3 [[H]] a sé. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
@@ -95,10 +97,10 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 |---:|---|---|---|
 | basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
 | bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
-| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 [[T]] a sé. |
-| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 7 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +6 [[T]] a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
 | 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «C'è del sangue nella mia droga». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 18 POISON al bersaglio; +5 [[T]] al bersaglio. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
 | 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
 | 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
 | 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 12 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
@@ -113,7 +115,7 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 
 ### Starter di Piera Ultimo Giro — `starter-pino`
 
-Personaggio: **Piera Ultimo Giro** (NC), salute 79, A 15, L 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 12 · NC 7 · R 1).
+Personaggio: **Piera Ultimo Giro** (NC), salute 78, A 15, L 14; oggetti 2; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 12 · NC 7 · R 1).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -123,11 +125,11 @@ Personaggio: **Piera Ultimo Giro** (NC), salute 79, A 15, L 15; oggetti 2; immun
 | last resort | **L'ultimo giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (1 a sé). |
 | 2 | **Testata da ultimo giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 35 HIT al bersaglio. |
 | 2 | **Giro secco** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa. |
-| 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,65 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
+| 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,75 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
 | 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Giro secco» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Rutto a distanza sociale** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 14 più il doppio della [[L]] spesa. |
 | 1 | **Grab** (`com.Grab`) | C | GEN-01 · consuma un proprio oggetto. |
-| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 1 | **Fasciatura col fazzolettaccio** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
 | 2 | **Amaro nel bicchiere di plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
 | 2 | **Peroni da 66, calda** (`com.items.RottenBeer`) | C | OGG-02 · Consumato: +10 [[L]]. |
@@ -152,7 +154,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Lavoro fatto bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo. |
 | 1 | **Steal** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
 | 1 | **GABBIANO DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
 | 2 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
 | 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
@@ -166,7 +168,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 [[A]] a sé; consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
@@ -174,11 +176,11 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 24 HIT al bersaglio. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
 | 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 [[V]]: −10 [[A]] al bersaglio; 12 HIT al bersaglio. |
 | 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +3 [[H]] a sé. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di [[L]] per 3 turni. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
 | 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 [[A]]: Azzera [[L]] del bersaglio; 3 HIT al bersaglio. |
@@ -196,11 +198,11 @@ Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità
 | last resort | **Ne ho prese di peggio** (`base.rocco.NeHoPreseDiPeggio`) | R | LR-ROC · Last resort: 6 HIT a sé; 12 HIT al bersaglio. Rincara 5 (2 a sé). |
 | 2 | **Te lo spiego io** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · 4 HIT al bersaglio. Annuncia «Capocciata» o «Testa dura». Se lo trovi: +6 [[H]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +2 [[H]]. |
 | 2 | **Capocciata** (`base.rocco.Capocciata`) | NC | ROC-AR4 · 28 [[H]]: 26 HIT al bersaglio. |
-| 1 | **Testa dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 33 [[H]]: 30 HIT al bersaglio. |
+| 1 | **Testa dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 35 [[H]]: 30 HIT al bersaglio. |
 | 2 | **Nocche sbucciate** (`base.rocco.NoccheSbucciate`) | C | ROC-AR1 · 16 [[H]]: 18 HIT al bersaglio. |
 | 2 | **Incassare** (`base.rocco.Incassare`) | C | ROC-AR2 · HIT ricevuto ×0,5 in questo turno; +3 [[H]] a sé. |
 | 2 | **E allora?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 [[H]]: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
-| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 12 POISON al bersaglio. |
 | 1 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +3 [[H]] a sé. |
 | 1 | **Fasciatura col fazzolettaccio** (`base.com.FasciaturaColFazzolettaccio`) | C | GEN-16 · −5 [[A]] a sé; +8 [[H]] a sé. |
@@ -209,7 +211,7 @@ Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità
 
 ### Mazzo di prova di Spazienzio de la Ucciso — `prova-b1-spazienzio`
 
-Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 7 · NC 10 · R 3).
+Personaggio: **Spazienzio de la Ucciso** (C), salute 78, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 7 · NC 10 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -232,7 +234,7 @@ Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; 
 
 ### Mazzo di prova di Mara Contromano — `prova-b1-mara`
 
-Personaggio: **Mara Contromano** (C), salute 69, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 9 · NC 6 · R 5).
+Personaggio: **Mara Contromano** (C), salute 70, A 40; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 9 · NC 6 · R 5).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -241,10 +243,10 @@ Personaggio: **Mara Contromano** (C), salute 69, A 40; oggetti 2; immunità: nes
 | bound | **Cambio marcia** (`base.mara.bound.CambioMarcia`) | C | MAR-BO2 · Bound: +6 [[A]] a sé. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
 | 1 | **Cinghiata di traverso** (`base.mara.CinghiataDiTraverso`) | R | MAR-AR1 · 20 [[A]]: CUT al bersaglio pari a 18 più metà della tua [[A]] residua, arrotondata per difetto. Gioca d'anticipo: 5 CUT al bersaglio. |
-| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 [[A]]: 25 CUT al bersaglio. Gioca d'anticipo: Il bersaglio: HIT, CUT e POISON inflitti ×0,8 in questo turno. |
+| 2 | **Sgommata** (`base.mara.Sgommata`) | NC | MAR-AR2 · 15 [[A]]: 25 CUT al bersaglio. Gioca d'anticipo: Il bersaglio: HIT, CUT e POISON inflitti ×0,75 in questo turno. |
 | 2 | **Sorpasso in curva** (`base.mara.SorpassoInCurva`) | C | MAR-AR3 · Gioca d'anticipo: +4 [[A]] a sé. −8 [[A]] al bersaglio; 3 CUT al bersaglio. |
 | 2 | **Tra due paraurti** (`base.mara.TraDueParaurti`) | NC | MAR-AR4 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +5 [[A]] a sé. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 12 POISON al bersaglio. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
 | 1 | **Ti stringo la curva** (`base.mara.TiStringoLaCurva`) | NC | MAR-AR6 · Annuncia «Cinghiata di traverso» o «Sgommata». Se lo trovi: +20 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[A]]. |
@@ -261,10 +263,10 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 |---:|---|---|---|
 | basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
 | bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
-| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 [[T]] a sé. |
-| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 7 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +6 [[T]] a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
 | 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «C'è del sangue nella mia droga». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 18 POISON al bersaglio; +5 [[T]] al bersaglio. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
 | 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
 | 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
 | 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 12 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
@@ -279,7 +281,7 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 
 ### Mazzo di prova di Piera Ultimo Giro — `prova-b1-piera`
 
-Personaggio: **Piera Ultimo Giro** (NC), salute 79, A 15, L 15; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 8 · NC 9 · R 3).
+Personaggio: **Piera Ultimo Giro** (NC), salute 78, A 15, L 14; oggetti 2; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 8 · NC 9 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -289,7 +291,7 @@ Personaggio: **Piera Ultimo Giro** (NC), salute 79, A 15, L 15; oggetti 2; immun
 | last resort | **L'ultimo giro** (`base.pino.UltimoGiro`) | NC | LR-PIN · Last resort: 2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa. Rincara 4 (1 a sé). |
 | 2 | **Testata da ultimo giro** (`base.pino.TestataDaUltimoGiro`) | C | PIN-AR1 · 5 [[L]]: 5 HIT a sé; 35 HIT al bersaglio. |
 | 2 | **Giro secco** (`base.pino.GoingBerserk`) | NC | PIN-AR2 · Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa. |
-| 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,65 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
+| 2 | **Il bancone regge, io pure** (`base.pino.IlBanconeRegge`) | C | PIN-AR3 · HIT ricevuto ×0,75 in questo turno; POISON ricevuto ×0,5 in questo turno; +5 [[L]] a sé. |
 | 2 | **Un altro e arrivo** (`base.pino.OffroIo`) | NC | PIN-AR4 · Annuncia «Giro secco» o «Rutto a distanza sociale». Se lo trovi: +15 [[L]], +35 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[L]], +10 [[A]]. |
 | 1 | **Rutto a distanza sociale** (`base.pino.RuttoADistanzaSociale`) | R | PIN-AR5 · 5 [[L]]: Spendi tutta la tua [[L]] residua. Il bersaglio perde [[A]] pari alla [[L]] spesa. Infliggi danni da colpo pari a 14 più il doppio della [[L]] spesa. |
 | 2 | **Amaro nel bicchiere di plastica** (`base.items.AmaroNelBicchiereDiPlastica`) | C | OGG-05 · Consumato: +20 [[L]]; −5 [[A]]. |
@@ -330,7 +332,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 [[A]] a sé; consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
@@ -338,7 +340,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 24 HIT al bersaglio. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
 | 2 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
@@ -358,11 +360,11 @@ Personaggio: **Duccio Braccio Teso** (R), salute 115, A 15; oggetti 2; immunità
 | last resort | **Ne ho prese di peggio** (`base.rocco.NeHoPreseDiPeggio`) | R | LR-ROC · Last resort: 6 HIT a sé; 12 HIT al bersaglio. Rincara 5 (2 a sé). |
 | 1 | **Te lo spiego io** (`base.rocco.TeLoSpiegoIo`) | NC | ROC-AR5 · 4 HIT al bersaglio. Annuncia «Capocciata» o «Testa dura». Se lo trovi: +6 [[H]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +2 [[H]]. |
 | 2 | **Capocciata** (`base.rocco.Capocciata`) | NC | ROC-AR4 · 28 [[H]]: 26 HIT al bersaglio. |
-| 1 | **Testa dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 33 [[H]]: 30 HIT al bersaglio. |
+| 1 | **Testa dura** (`base.rocco.TestaDura`) | R | ROC-AR6 · 35 [[H]]: 30 HIT al bersaglio. |
 | 2 | **Nocche sbucciate** (`base.rocco.NoccheSbucciate`) | C | ROC-AR1 · 16 [[H]]: 18 HIT al bersaglio. |
 | 2 | **Incassare** (`base.rocco.Incassare`) | C | ROC-AR2 · HIT ricevuto ×0,5 in questo turno; +3 [[H]] a sé. |
 | 2 | **E allora?** (`base.rocco.EAllora`) | NC | ROC-AR3 · 10 [[H]]: HIT ricevuto ×0,5 in questo turno; 8 HIT al bersaglio. |
-| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 2 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Sputo da posacenere** (`base.com.SputoDaPosacenere`) | C | GEN-17 · 5 [[A]]: 12 POISON al bersaglio. |
 | 2 | **Secondo fiato** (`base.com.SecondoFiato`) | R | GEN-20 · HIT e CUT ricevuti ×1,25 per 2 turni; +12 [[H]] a sé. |
 | 2 | **Mano lesta** (`base.com.ManoLesta`) | C | GEN-19 · +5 [[A]] a sé; −5 [[A]] al bersaglio. |
@@ -384,7 +386,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Sotto il cofano** (`base.gigi.SottoIlCofano`) | C | GIG-AR4 · 5 [[V]]: HIT ricevuto ×0,5 in questo turno; CUT ricevuto ×0,75 in questo turno; +5 [[V]] a sé; +5 [[A]] a sé. |
 | 1 | **Lavoro fatto bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo. |
 | 1 | **GABBIANO DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
 | 1 | **Espresso del distributore** (`base.items.EspressoDelDistributore`) | C | OGG-06 · Consumato: +15 [[A]]. |
 | 1 | **Una stretta di prova** (`base.gigi.UnaStrettaDiProva`) | NC | GIG-AR6 · 4 CUT al bersaglio. Annuncia «Lavoro fatto bene» o «Chiave da tredici». Se lo trovi: +10 [[V]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[V]]. |
@@ -408,7 +410,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 | 1 | **Lavoro fatto bene** (`base.gigi.LavoroFattoBene`) | R | GIG-AR5 · 10 [[V]]: Infliggi danni da colpo pari a 14 più 4 per ogni tuo oggetto sul campo. |
 | 1 | **Steal** (`com.Steal`) | C | GEN-02 · 10 [[A]]: Ruba un oggetto lontano e lo mette vicino a sé. |
 | 1 | **GABBIANO DUNQUE VOLIAMOTI** (`bruiser.SeagullFly`) | C | GEN-05 · 10 [[V]]: 18 HIT al bersaglio; dell'autore valgono solo gli stati GOOD. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 2 | **Guanti da officina** (`base.items.GuantiDaOfficina`) | NC | OGG-09 · Consumato: equip, HIT inflitto ×1,25 per 3 turni. |
 | 2 | **Giubbotto di finta pelle** (`base.items.GiubbottoDiFintaPelle`) | C | OGG-10 · Consumato: equip, CUT ricevuto ×0,75 per 3 turni. |
 | 2 | **Casco da lavoro** (`base.items.CascoDaLavoro`) | C | OGG-11 · Consumato: equip, HIT ricevuto ×0,75 per 3 turni. |
@@ -418,7 +420,7 @@ Personaggio: **Beppe Bulletta** (NC), salute 80, A 25, V 25; oggetti 3; immunit�
 
 ### Mazzo di prova di Spazienzio de la Ucciso — `prova-b2-spazienzio`
 
-Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 5 · NC 12 · R 3).
+Personaggio: **Spazienzio de la Ucciso** (C), salute 78, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 12 titoli (C 5 · NC 12 · R 3).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -468,7 +470,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 [[A]] a sé; consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
@@ -476,7 +478,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 24 HIT al bersaglio. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
@@ -490,7 +492,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 [[A]] a sé; consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
@@ -498,7 +500,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 24 HIT al bersaglio. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
@@ -514,10 +516,10 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 |---:|---|---|---|
 | basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
 | bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
-| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 [[T]] a sé. |
-| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 7 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +6 [[T]] a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
 | 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «C'è del sangue nella mia droga». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 18 POISON al bersaglio; +5 [[T]] al bersaglio. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
 | 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
 | 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
 | 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 12 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
@@ -538,10 +540,10 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 |---:|---|---|---|
 | basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
 | bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
-| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 [[T]] a sé. |
-| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 7 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +6 [[T]] a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
 | 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «C'è del sangue nella mia droga». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 18 POISON al bersaglio; +5 [[T]] al bersaglio. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
 | 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
 | 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
 | 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 12 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
@@ -560,7 +562,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 [[A]] a sé; consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
@@ -568,7 +570,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 24 HIT al bersaglio. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |
 | 2 | **Non sento niente** (`bruiser.CantFeelAnything`) | NC | GEN-11 · 5 [[V]]: HIT ricevuto ×0,25 in questo turno; +5 [[A]] a sé. |
@@ -578,7 +580,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 ### Mazzo di prova di Spazienzio de la Ucciso — `iso-b2-conto`
 
-Personaggio: **Spazienzio de la Ucciso** (C), salute 75, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 8 · NC 11 · R 1).
+Personaggio: **Spazienzio de la Ucciso** (C), salute 78, A 20, V 25; oggetti 1; immunità: nessuna. Regolari: **20** carte, 13 titoli (C 8 · NC 11 · R 1).
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
@@ -608,10 +610,10 @@ Personaggio: **Celestina Bucatina** (NC), salute 66, A 35, T 15; oggetti 2; immu
 |---:|---|---|---|
 | basic | **Desiderio Incontrollabile** (`com.basic.ToxicGrab`) | NC | TOS-BA · Basic: +5 [[T]] a sé; consuma un proprio oggetto. |
 | bound | **Ago Marcio e Spezzato** (`junkie.character.PatheticBlade`) | C | TOS-BO1 · Bound: 3 CUT al bersaglio. |
-| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +7 [[T]] a sé. |
-| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 7 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
+| bound | **Raschiare il fondo** (`base.tossico.bound.RaschiareIlFondo`) | C | TOS-BO2 · Bound: +6 [[T]] a sé. |
+| last resort | **L'ultima dose** (`junkie.LethalHeroinDose`) | NC | LR-TOS · Last resort: 2 HIT a sé; 8 POISON al bersaglio; +4 [[T]] al bersaglio. Rincara 5 (1 a sé). |
 | 2 | **Dose in preparazione** (`junkie.MethDrivenRage`) | NC | TOS-AR1 · Annuncia «Tossicone Scatarrante» o «C'è del sangue nella mia droga». Se lo trovi: +10 [[T]], +5 [[A]]; gettone di vulnerabilità (HIT, CUT e POISON ricevuti ×1,5). Se non lo trovi: +5 [[T]]. |
-| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 18 POISON al bersaglio; +5 [[T]] al bersaglio. |
+| 2 | **Tossicone Scatarrante** (`junkie.Cough`) | NC | TOS-AR2 · 10 [[T]]: 20 POISON al bersaglio; +5 [[T]] al bersaglio. |
 | 2 | **Metabolismo Corrotto** (`junkie.PervertedMetabolism`) | C | TOS-AR3 · Guadagno di [[H]] a sé pari a metà della tua [[T]] residua, arrotondata per difetto; Perdita di [[T]] a sé pari a [[T]] residua. |
 | 2 | **Riflessi Aumentati dalla Speed** (`junkie.AmphetamineReflexes`) | NC | TOS-AR4 · 10 [[T]]: Annulla le mosse dirette a sé che arrivano dopo. |
 | 1 | **C'è del sangue nella mia droga** (`junkie.ToxicBloodDrain`) | R | TOS-AR5 · 10 [[T]]: Trasferisci tutta la tua [[T]] residua al bersaglio e togligli l'immunità a [[T]]. 12 POISON al bersaglio. A fine turno ottieni l'immunità a [[T]]. |
@@ -630,7 +632,7 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 
 | Copie | Carta | Rarità | Testo |
 |---:|---|---|---|
-| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +7 [[A]] a sé; consuma un proprio oggetto. |
+| basic | **Lo metto in conto** (`base.cesira.LoMettoInConto`) | R | CES-BA · Basic: +8 [[A]] a sé; consuma un proprio oggetto. |
 | bound | **Battutina** (`base.cesira.bound.Battutina`) | NC | CES-BO2 · Bound: 3 HIT al bersaglio. |
 | bound | **Fare il vago** (`base.cesira.bound.FareIlVago`) | NC | CES-BO3 · Bound: HIT e CUT ricevuti ×0,75 in questo turno. |
 | last resort | **Last Resort: Banzai!!!** (`com.last.Struggle`) | C | LR-STR · Last resort: 5 HIT a sé; 10 HIT al bersaglio. Rincara 5 (2 a sé). |
@@ -638,11 +640,11 @@ Personaggio: **Sergio Sommerso** (R), salute 85, A 30, V 10; oggetti 2; immunit�
 | 2 | **Ricatto** (`base.cesira.Ricatto`) | NC | CES-AR2 · 15 [[A]]: Annulla la mossa del bersaglio se arriva dopo; se era un colpo, gli infligge metà del suo danno base, dello stesso tipo. |
 | 1 | **Lo sapevo** (`base.cesira.LoSapevo`) | NC | CES-AR3 · 10 [[A]]: Annulla la mossa del bersaglio se arriva dopo. Se annulli il colpo che ha annunciato, il suo gettone resta. |
 | 2 | **Conto salato** (`base.cesira.ContoSalato`) | NC | CES-AR4 · 5 [[A]]: 8 HIT al bersaglio. Se il bersaglio ha un gettone di vulnerabilità: 6 HIT al bersaglio. |
-| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 24 HIT al bersaglio. |
+| 2 | **Lo sanno tutti** (`base.cesira.LoSannoTutti`) | C | CES-AR5 · 15 [[A]]: 25 HIT al bersaglio. |
 | 1 | **Malelingue** (`base.cesira.Malelingue`) | R | CES-AR6 · 10 [[A]]: Perdita di [[A]] al bersaglio pari a metà della tua [[A]] residua, arrotondata per difetto; HIT al bersaglio pari a 5 più metà della tua [[A]] residua, arrotondata per difetto. |
 | 1 | **STORDIAMOTI HO DETTO** (`bruiser.StunningBlow`) | NC | GEN-09 · 10 [[V]]: −10 [[A]] al bersaglio; 12 HIT al bersaglio. |
 | 2 | **Tartaruga sul marciapiede** (`base.com.TartarugaSulMarciapiede`) | C | GEN-13 · 5 [[A]]: HIT e CUT ricevuti ×0,5 in questo turno; +3 [[H]] a sé. |
-| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 7 HIT al bersaglio. |
+| 1 | **Spintone** (`base.com.Spintone`) | C | GEN-18 · 8 HIT al bersaglio. |
 | 1 | **Santino della portinaia** (`base.items.SantinoDellaPortinaia`) | R | OGG-15 · Consumato: immunità all'effetto periodico di [[L]] per 3 turni. |
 | 1 | **Acqua in faccia** (`base.com.AcquaInFaccia`) | NC | GEN-22 · 5 [[A]]: Azzera [[L]] del bersaglio; 3 HIT al bersaglio. |
 | 2 | **Lo rivendo** (`base.cesira.LoRivendo`) | NC | CES-AR7 · Vendi il tuo oggetto bersagliato, che esce senza il suo effetto: +8 [[H]] a sé. Se l'oggetto non c'è più, niente. |

@@ -86,8 +86,9 @@ class Bozza16Test {
             ObjectNode expected = before.deepCopy();
             ObjectNode resources = (ObjectNode) expected.get("resources");
             String id = c.path("id").asText();
-            if (id.equals("base.character.Pino")) resources.put("HEALTH", 79).put("ALCOHOL", 15);
-            if (id.equals("base.character.Mara")) resources.put("HEALTH", 69);
+            if (id.equals("base.character.Pino")) resources.put("HEALTH", 78).put("ALCOHOL", 14);
+            if (id.equals("base.character.Mara")) resources.put("HEALTH", 70);
+            if (id.equals("bruiser.character.BigBadBruiser")) resources.put("HEALTH", 78);
             if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 66);
             assertEquals(expected, c, c.path("id").asText());
         }
@@ -109,6 +110,13 @@ class Bozza16Test {
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
                 if (b.equals("base.pino.TestataDaUltimoGiro"))
                     ((ObjectNode) expected.path("target").path(0)).put("amount", 35);
+                // SB-21g (D158): compliant imports and the kept compensation to the toxic starter.
+                if (b.equals("base.com.Spintone"))
+                    ((ObjectNode) expected.path("target").path(0)).put("amount", 8);
+                if (b.equals("base.tossico.bound.RaschiareIlFondo"))
+                    ((ObjectNode) expected.path("self").path(0)).put("amount", 6);
+                if (b.equals("junkie.Cough"))
+                    ((ObjectNode) expected.path("target").path(0)).put("amount", 20);
                 assertEquals(expected, withoutPrintedText(c), b);
             } else {
                 assertNotEquals(before, c, b);
