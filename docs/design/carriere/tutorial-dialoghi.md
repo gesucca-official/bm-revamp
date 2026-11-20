@@ -197,14 +197,30 @@ addestrato. Da chi? Pensateci.
 - *«Sticazzi di quel posto da fighetti, venite voi qui! È fantastico.»* → Fine: completata [Sblocca: carriera-principale] — il giocatore resta nel bar: **il tutorial si completa** e si sblocca
   la carriera principale del Set Base.
 
-## Epilogo del fallimento — da scrivere
+## Epilogo del fallimento — Il Virgin Cuba Libre
 
-Confermato dal proprietario il 10 novembre 2026, sulla proposta della regia.
+> **Stesura della regia del 20 novembre 2026, approvata dal proprietario lo stesso giorno** («l'epilogo mi piace, approvo»). Confermato dal proprietario il 10 novembre 2026,
+> sulla proposta della regia: poche battute comiche della combriccola, poi l'achievement nascosto (D19) per chi ha scelto gli amici, e si
+> torna alla scelta finale con i dialoghi saltabili. Gli starter già sbloccati restano.
 
-[Sfondo: S3, il Dimmi Di Sì. Regia: il giocatore con la combriccola, in ombra, davanti a un Virgin Cuba Libre a sedici euro.]
+[Sfondo: S3, il Dimmi Di Sì. Regia: musica che non è musica; il giocatore con la combriccola, in ombra, intorno a un tavolino bianco,
+davanti a un Virgin Cuba Libre a sedici euro con l'ombrellino.]
 
-Poche battute comiche della combriccola, poi l'achievement nascosto (D19) per chi ha scelto gli amici, e si torna alla scelta finale con i
-dialoghi saltabili. Gli starter già sbloccati restano.
+[Entra: combriccola davanti alla porta]
+
+**Un amico**: {giocatore}! Allora sei ancora tra i vivi. Niente tetano?
+
+**Un altro amico**: Racconta, racconta! Anzi no, prima ordina. Qui il Virgin Cuba Libre costa sedici euro, ma il ghiaccio è d'importazione.
+
+**Un amico**: Norvegese. C'è scritto sul menù.
+
+**Un altro amico**: E là dentro com'era? Gente strana?
+
+**Un amico**: Sssh, parte la playlist. Stasera fanno quella rilassante, ma più rilassante.
+
+[Regia: nessuno aspetta la risposta. Il giocatore guarda il bicchiere; l'ombrellino si chiude da solo.]
+
+*Il ghiaccio norvegese si scioglie piano. Da qualche parte, lontano, qualcuno sta urlando «UCCIDIAMOTI».*
 
 [Achievement: Amici del Dimmi Di Sì]
 
