@@ -22,13 +22,13 @@ const errori = (testo: string) => converti(testo, cast, 'x').problemi.filter(p =
 test('la principale si converte senza errori, con i soli avvisi dichiarati, con tutti i nodi della scaletta 0.3.7', () => {
   const r = converti(md, cast, 'principale');
   assert.deepEqual(r.problemi.filter(p => p.livello === 'errore'), []);
-  // Gli avvisi dichiarati nel rapporto: le espressioni e gli sfondi senza immagine (ripieghi del cast) e le tre scelte di II1 senza
-  // «con <personaggio>», tenute come le ha scritte il proprietario.
+  // Gli avvisi dichiarati nel rapporto: le espressioni e gli sfondi senza immagine (ripieghi del cast). Le tre scelte di II1 dicono
+  // «con <personaggio>» dal 20 novembre 2026 (proprietario: «Sì, applica»), quindi non danno più avvisi.
   const tipo = (m: string) => m.startsWith('espressione senza ritratto') ? 'espressione' : m.startsWith('sfondo senza immagine') ? 'sfondo'
     : m.startsWith('scelta muta senza') ? 'scelta' : m;
   const conta: Record<string, number> = {};
   for (const p of r.problemi) conta[tipo(p.messaggio)] = (conta[tipo(p.messaggio)] ?? 0) + 1;
-  assert.deepEqual(conta, {espressione: 245, sfondo: 10, scelta: 3});
+  assert.deepEqual(conta, {espressione: 245, sfondo: 10});
   const c = r.carriera;
   assert.equal(c.id, 'principale');
   // 0.3.7: F1, F2 e F3 sono scene (F2 dà «Monetine» e prosegue in F1, che chiude; F3 «Disco pub» chiude dopo la catena persa).
@@ -133,10 +133,8 @@ function gioca(c: Carriera, s: Stato, strada: string[], perdiIn: string[] = []):
       if (!d.length) return s;
       s = entra(c, s, d[0].id).stato;
     } else if (v.tipo === 'scelta') {
-      // L'opzione che combacia con la parola più lunga della strada. Le piste di II1 nei dialoghi sono «Chiedi a Piera», «Chiedi a
-      // Beppe» e «Vai con Celestina» (avviso del convertitore): qui si leggono come «con Piera», «con Beppe», «con Celestina».
-      const etichetta = (e: string) => e.replace(/^(Chiedi a|Vai con) /, 'con ');
-      const punti = v.opzioni.map(x => Math.max(0, ...strada.filter(w => etichetta(x.opzione.etichetta).startsWith(w)).map(w => w.length)));
+      // L'opzione che combacia con la parola più lunga della strada.
+      const punti = v.opzioni.map(x => Math.max(0, ...strada.filter(w => x.opzione.etichetta.startsWith(w)).map(w => w.length)));
       const o = v.opzioni[punti.indexOf(Math.max(...punti))];
       s = scegli(c, s, o.indice).stato;
     } else if (v.tipo === 'partita') {

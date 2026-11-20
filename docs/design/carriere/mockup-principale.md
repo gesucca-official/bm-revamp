@@ -713,3 +713,12 @@ nodo che finisce con una scelta non ha uscite. La condizione era ridondante ed �
 3. **La citazione nell'epilogo del tutorial:** il blocco `> **Stesura della regia…**` sotto il titolo dell'epilogo è una nota di
    redazione dentro la scena; il convertitore la tiene come nota e avvisa. Spostarla nelle note in fondo a `tutorial-dialoghi.md` toglie
    l'avviso; in alternativa il convertitore può accettare le citazioni come note senza avviso.
+
+### Risposte del proprietario e della regia
+
+20 novembre 2026, revisione della regia: blocco approvato, verifiche rifatte (133 prove, Check verde, testi del proprietario intatti).
+
+1. **F3 visibile:** già deciso dal proprietario nella 0.3.2 («F3 resta visibile»); la scelta del prototipo è giusta.
+2. **Piste di II1:** il proprietario approva la forma «con Piera, …», «con Beppe, …», «con Celestina, …» («Sì, applica»), applicata nei
+   dialoghi; i tre avvisi spariscono e la prova della principale non li conta più (255 avvisi, solo ripieghi).
+3. **Nota nell'epilogo:** spostata dalla regia nelle note in fondo a `tutorial-dialoghi.md` (commit `3f799f6`); l'avviso sparisce.

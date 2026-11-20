@@ -398,9 +398,9 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 → Scelta muta: quale pista?
 
-- Chiedi a Piera, che si ricorda di dieci anni fa [Segno: pista = piera] → II2a
-- Chiedi a Beppe, che sa chi pagava in contanti [Segno: pista = beppe] → II2b
-- Vai con Celestina, che fruga nel bidone [Segno: pista = celestina] → II2c
+- con Piera, che si ricorda di dieci anni fa [Segno: pista = piera] → II2a
+- con Beppe, che sa chi pagava in contanti [Segno: pista = beppe] → II2b
+- con Celestina, che fruga nel bidone [Segno: pista = celestina] → II2c
 
 ## II2a — La frase di Piera
 
@@ -1378,7 +1378,9 @@ Sergio *neutro*; Beppe *confuso, neutro, annoiato*; Spazienzio *spaventato*.
 **Convertitore:** nessun errore di sintassi. Restano gli errori attesi: espressioni non ancora nel cast, «Un signore» (I3b) da aggiungere
 al cast come nome di Sergio, l'atto III non ancora scritto. Tre avvisi: le scelte di II1 («Chiedi a Piera», «Chiedi a
 Beppe», «Vai con Celestina») non cominciano con «con <personaggio>», la forma che il prototipo si aspetta per le etichette della
-bacheca; tenute come le ha scritte il proprietario.
+bacheca; tenute come le ha scritte il proprietario. Il 20 novembre 2026, dopo il
+[mockup sui dialoghi veri](mockup-principale.md#domande-per-il-proprietario), il proprietario ha approvato la forma «con Piera, …»,
+«con Beppe, …», «con Celestina, …» («Sì, applica»).
 
 ### Atto I
 
