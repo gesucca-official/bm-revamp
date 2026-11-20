@@ -1,0 +1,11 @@
+# SB-21z, riga di Spazienzio contro i sei (quota di Spazienzio, 100 semi da 7.000.000, stili euristici). Ultima colonna: scarto medio dal 50%.
+# Le prime due righe sono Celestina e Piera rimisurate su z0b. spa-vecchie: z0 con SPA-BO1 e SPA-BO2 di SB-21g (+5 V; 3 HIT); spa-vecchia-a/b: una sola delle due.
+# z0c-spa-a-v2: SPA-BO2 = +2 V e 2 HIT; z0c-spa-a-hit2: SPA-BO2 = solo 2 HIT.
+starter-tossico {'starter-spazienzio': 39.4, 'starter-mara': 39.7, 'starter-pino': 49.0, 'starter-gigi': 27.4, 'prova-sergio': 57.0, 'prova-duccio': 37.5}
+starter-pino {'starter-spazienzio': 37.8, 'starter-mara': 39.6, 'starter-tossico': 54.2, 'starter-gigi': 44.4, 'prova-sergio': 63.4, 'prova-duccio': 50.0}
+z0 {'starter-mara': 64.1, 'starter-tossico': 64.5, 'starter-pino': 63.4, 'starter-gigi': 64.1, 'prova-sergio': 62.8, 'prova-duccio': 61.5} 13.4
+spa-vecchie {'starter-mara': 52.1, 'starter-tossico': 58.0, 'starter-pino': 51.7, 'starter-gigi': 53.4, 'prova-sergio': 55.9, 'prova-duccio': 53.3} 4.1
+spa-vecchia-b {'starter-mara': 61.9, 'starter-tossico': 62.5, 'starter-pino': 60.8, 'starter-gigi': 60.8, 'prova-sergio': 58.2, 'prova-duccio': 55.0} 9.9
+spa-vecchia-a {'starter-mara': 53.5, 'starter-tossico': 58.1, 'starter-pino': 52.8, 'starter-gigi': 54.0, 'prova-sergio': 57.6, 'prova-duccio': 56.5} 5.4
+z0c-spa-a-v2 {'starter-mara': 67.4, 'starter-tossico': 67.6, 'starter-pino': 64.6, 'starter-gigi': 64.1, 'prova-sergio': 63.1, 'prova-duccio': 59.6} 14.4
+z0c-spa-a-hit2 {'starter-mara': 64.1, 'starter-tossico': 62.9, 'starter-pino': 63.5, 'starter-gigi': 64.1, 'prova-sergio': 62.7, 'prova-duccio': 61.5} 13.1

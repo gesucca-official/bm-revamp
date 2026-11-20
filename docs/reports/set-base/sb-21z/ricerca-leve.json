@@ -1,0 +1,251 @@
+{
+ "base": "z0b.json",
+ "shaBase": "b4c52db69aa9dfedc0bc75a9ac98b40d37637fc0932bff0e8308ba5805930276",
+ "storia": [
+  {
+   "nome": "c1-starter-gigi-health70",
+   "mazzo": "starter-gigi",
+   "campo": "resources.HEALTH",
+   "prima": 80,
+   "dopo": 70,
+   "dev": 6.571559763920998,
+   "dev2": -4.875258481642654,
+   "costo": 1294.6415349318497,
+   "costo2": 1249.35707015396
+  },
+  {
+   "nome": "c2-starter-gigi-health75",
+   "mazzo": "starter-gigi",
+   "campo": "resources.HEALTH",
+   "prima": 70,
+   "dopo": 75,
+   "dev": -4.875258481642654,
+   "dev2": 3.121961720552143,
+   "costo": 1249.35707015396,
+   "costo2": 2218.1135180848705
+  },
+  {
+   "nome": "c3-starter-gigi-violence30",
+   "mazzo": "starter-gigi",
+   "campo": "resources.VIOLENCE",
+   "prima": 25,
+   "dopo": 30,
+   "dev": -4.875258481642654,
+   "dev2": -4.060291789938623,
+   "costo": 1249.35707015396,
+   "costo2": 1103.4516748632873
+  },
+  {
+   "nome": "c4-starter-gigi-health75",
+   "mazzo": "starter-gigi",
+   "campo": "resources.HEALTH",
+   "prima": 70,
+   "dopo": 75,
+   "dev": -4.060291789938623,
+   "dev2": 4.107794085002315,
+   "costo": 1103.4516748632873,
+   "costo2": 2499.873173870264
+  },
+  {
+   "nome": "c6-starter-spazienzio-health70",
+   "mazzo": "starter-spazienzio",
+   "campo": "resources.HEALTH",
+   "prima": 80,
+   "dopo": 70,
+   "dev": 13.254112007580227,
+   "dev2": 2.47719369776326,
+   "costo": 1103.4516748632873,
+   "costo2": 784.7884219304091
+  },
+  {
+   "nome": "c7-starter-tossico-health70",
+   "mazzo": "starter-tossico",
+   "campo": "resources.HEALTH",
+   "prima": 65,
+   "dopo": 70,
+   "dev": -8.408482055689865,
+   "dev2": 3.010356849883825,
+   "costo": 784.7884219304091,
+   "costo2": 373.9637611017427
+  },
+  {
+   "nome": "c8-starter-gigi-health75",
+   "mazzo": "starter-gigi",
+   "campo": "resources.HEALTH",
+   "prima": 70,
+   "dopo": 75,
+   "dev": -5.451378843710593,
+   "dev2": 5.159202977443351,
+   "costo": 373.9637611017427,
+   "costo2": 516.2791127527366
+  },
+  {
+   "nome": "c9-starter-gigi-violence35",
+   "mazzo": "starter-gigi",
+   "campo": "resources.VIOLENCE",
+   "prima": 30,
+   "dopo": 35,
+   "dev": -5.451378843710593,
+   "dev2": -2.6462105262863163,
+   "costo": 373.9637611017427,
+   "costo2": 354.43411591640074
+  },
+  {
+   "nome": "c10-starter-mara-health65",
+   "mazzo": "starter-mara",
+   "campo": "resources.HEALTH",
+   "prima": 70,
+   "dopo": 65,
+   "dev": 3.2534602921475653,
+   "dev2": -4.336653548106974,
+   "costo": 354.43411591640074,
+   "costo2": 216.83748604872147
+  },
+  {
+   "nome": "c11-starter-mara-health70",
+   "mazzo": "starter-mara",
+   "campo": "resources.HEALTH",
+   "prima": 65,
+   "dopo": 70,
+   "dev": -4.336653548106974,
+   "dev2": 5.699083638596712,
+   "costo": 216.83748604872147,
+   "costo2": 355.258882261225
+  },
+  {
+   "nome": "c12-starter-mara-alertness45",
+   "mazzo": "starter-mara",
+   "campo": "resources.ALERTNESS",
+   "prima": 40,
+   "dopo": 45,
+   "dev": -4.336653548106974,
+   "dev2": 3.076117767563595,
+   "costo": 216.83748604872147,
+   "costo2": 203.78130396264746
+  },
+  {
+   "nome": "c13-starter-gigi-health75",
+   "mazzo": "starter-gigi",
+   "campo": "resources.HEALTH",
+   "prima": 70,
+   "dopo": 75,
+   "dev": -3.1099106160399566,
+   "dev2": 5.352265421885215,
+   "costo": 203.78130396264746,
+   "costo2": 356.4374952688166
+  },
+  {
+   "nome": "c14-starter-gigi-violence40",
+   "mazzo": "starter-gigi",
+   "campo": "resources.VIOLENCE",
+   "prima": 35,
+   "dopo": 40,
+   "dev": -3.1099106160399566,
+   "dev2": -2.3167489967476933,
+   "costo": 203.78130396264746,
+   "costo2": 206.77700753932993
+  },
+  {
+   "nome": "c15-starter-mara-health60",
+   "mazzo": "starter-mara",
+   "campo": "resources.HEALTH",
+   "prima": 65,
+   "dopo": 60,
+   "dev": 3.076117767563595,
+   "dev2": -5.132710400220065,
+   "costo": 203.78130396264746,
+   "costo2": 319.62163425131774
+  }
+ ],
+ "manuali": [
+  {
+   "nome": "g75v25k",
+   "mod": [
+    "base.character.Gigi:resources.HEALTH:75",
+    "base.character.Gigi:resources.VIOLENCE:25"
+   ],
+   "righe": [
+    "starter-gigi"
+   ],
+   "costo": 307.3084914999275
+  },
+  {
+   "nome": "c65t20k",
+   "mod": [
+    "junkie.character.ToxicJunkie:resources.HEALTH:65",
+    "junkie.character.ToxicJunkie:resources.TOXICITY:20"
+   ],
+   "righe": [
+    "starter-tossico"
+   ],
+   "costo": 91.39766337576066
+  },
+  {
+   "nome": "s-a35",
+   "mod": [
+    "base.character.Cesira:resources.ALERTNESS:35"
+   ],
+   "righe": [
+    "prova-sergio"
+   ],
+   "costo": 56.60305166478203
+  },
+  {
+   "nome": "lrtos-fisso",
+   "mod": [
+    "junkie.LethalHeroinDose:self.0.amount:2"
+   ],
+   "righe": [
+    "starter-tossico"
+   ],
+   "costo": 52.16900698976042
+  }
+ ],
+ "finali": [
+  [
+   "bruiser.character.BigBadBruiser",
+   "resources.HEALTH",
+   70
+  ],
+  [
+   "base.character.Mara",
+   "resources.HEALTH",
+   65
+  ],
+  [
+   "base.character.Mara",
+   "resources.ALERTNESS",
+   45
+  ],
+  [
+   "base.character.Gigi",
+   "resources.HEALTH",
+   75
+  ],
+  [
+   "base.character.Gigi",
+   "resources.VIOLENCE",
+   25
+  ],
+  [
+   "junkie.character.ToxicJunkie",
+   "resources.HEALTH",
+   65
+  ],
+  [
+   "junkie.character.ToxicJunkie",
+   "resources.TOXICITY",
+   20
+  ],
+  [
+   "base.character.Cesira",
+   "resources.ALERTNESS",
+   35
+  ],
+  [
+   "junkie.LethalHeroinDose",
+   "self.0.amount",
+   2
+  ]
+ ]
+}

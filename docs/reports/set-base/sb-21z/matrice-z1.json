@@ -1,0 +1,311 @@
+{
+ "bozza": "z1.json",
+ "sha": "60792d957e5244a5a2d2f79c3dceb5500071abe27389894e33e59617f940cdd6",
+ "semi": "7000000 e 7500000, 100 per cella ciascuno",
+ "passa": true,
+ "turni": 8.467716049382716,
+ "patte": 4.084876543209877,
+ "fuori": [],
+ "fuori4060": [
+  [
+   "starter-spazienzio",
+   "prova-duccio",
+   39.7
+  ],
+  [
+   "starter-mara",
+   "starter-tossico",
+   60.7
+  ],
+  [
+   "starter-mara",
+   "prova-sergio",
+   38.4
+  ],
+  [
+   "starter-mara",
+   "prova-duccio",
+   60.5
+  ],
+  [
+   "starter-tossico",
+   "prova-sergio",
+   60.4
+  ],
+  [
+   "prova-sergio",
+   "prova-duccio",
+   63.7
+  ]
+ ],
+ "specchi": [
+  [
+   "starter-spazienzio",
+   7.5,
+   1.52
+  ],
+  [
+   "starter-mara",
+   7.45,
+   3.28
+  ],
+  [
+   "starter-tossico",
+   13.14,
+   11.0
+  ],
+  [
+   "starter-pino",
+   10.16,
+   7.33
+  ],
+  [
+   "starter-gigi",
+   5.57,
+   11.28
+  ],
+  [
+   "prova-sergio",
+   13.53,
+   0.81
+  ],
+  [
+   "prova-duccio",
+   6.51,
+   7.61
+  ]
+ ],
+ "violazioni": {
+  "quota": [],
+  "turniMedi": false,
+  "patte": false,
+  "specchiTurni": [],
+  "specchiPatte": []
+ },
+ "coppie": [
+  {
+   "a": "starter-spazienzio",
+   "b": "starter-spazienzio",
+   "quota": 52.89582549830764,
+   "turni": 7.502592592592593,
+   "patte": 1.5185185185185186,
+   "partite": 16200
+  },
+  {
+   "a": "starter-spazienzio",
+   "b": "starter-mara",
+   "quota": 48.81569901881132,
+   "turni": 7.305370370370371,
+   "patte": 1.228395061728395,
+   "partite": 16200
+  },
+  {
+   "a": "starter-spazienzio",
+   "b": "starter-tossico",
+   "quota": 51.322194448098934,
+   "turni": 9.302098765432099,
+   "patte": 6.160493827160494,
+   "partite": 16200
+  },
+  {
+   "a": "starter-spazienzio",
+   "b": "starter-pino",
+   "quota": 53.663629460895976,
+   "turni": 8.414814814814815,
+   "patte": 2.4444444444444446,
+   "partite": 16200
+  },
+  {
+   "a": "starter-spazienzio",
+   "b": "starter-gigi",
+   "quota": 57.855439829338685,
+   "turni": 6.457222222222223,
+   "patte": 1.617283950617284,
+   "partite": 16200
+  },
+  {
+   "a": "starter-spazienzio",
+   "b": "prova-sergio",
+   "quota": 41.82689316159542,
+   "turni": 8.801481481481481,
+   "patte": 0.7962962962962963,
+   "partite": 16200
+  },
+  {
+   "a": "starter-spazienzio",
+   "b": "prova-duccio",
+   "quota": 39.71225733492492,
+   "turni": 6.310432098765432,
+   "patte": 1.7469135802469136,
+   "partite": 16200
+  },
+  {
+   "a": "starter-mara",
+   "b": "starter-mara",
+   "quota": 49.67132554725892,
+   "turni": 7.450987654320988,
+   "patte": 3.2777777777777777,
+   "partite": 16200
+  },
+  {
+   "a": "starter-mara",
+   "b": "starter-tossico",
+   "quota": 60.714285714285715,
+   "turni": 8.895925925925926,
+   "patte": 6.320987654320987,
+   "partite": 16200
+  },
+  {
+   "a": "starter-mara",
+   "b": "starter-pino",
+   "quota": 58.60946178892932,
+   "turni": 8.595432098765432,
+   "patte": 3.314814814814815,
+   "partite": 16200
+  },
+  {
+   "a": "starter-mara",
+   "b": "starter-gigi",
+   "quota": 43.493639466335715,
+   "turni": 6.3042592592592595,
+   "patte": 0.5246913580246914,
+   "partite": 16200
+  },
+  {
+   "a": "starter-mara",
+   "b": "prova-sergio",
+   "quota": 38.40802256345973,
+   "turni": 10.229753086419754,
+   "patte": 1.5123456790123457,
+   "partite": 16200
+  },
+  {
+   "a": "starter-mara",
+   "b": "prova-duccio",
+   "quota": 60.513899515429735,
+   "turni": 6.613456790123457,
+   "patte": 3.185185185185185,
+   "partite": 16200
+  },
+  {
+   "a": "starter-tossico",
+   "b": "starter-tossico",
+   "quota": 47.89152448328478,
+   "turni": 13.14179012345679,
+   "patte": 11.0,
+   "partite": 16200
+  },
+  {
+   "a": "starter-tossico",
+   "b": "starter-pino",
+   "quota": 57.38482384823848,
+   "turni": 10.838333333333333,
+   "patte": 8.88888888888889,
+   "partite": 16200
+  },
+  {
+   "a": "starter-tossico",
+   "b": "starter-gigi",
+   "quota": 41.33547437441456,
+   "turni": 7.931851851851852,
+   "patte": 7.7407407407407405,
+   "partite": 16200
+  },
+  {
+   "a": "starter-tossico",
+   "b": "prova-sergio",
+   "quota": 60.37076131415754,
+   "turni": 10.873456790123457,
+   "patte": 6.432098765432099,
+   "partite": 16200
+  },
+  {
+   "a": "starter-tossico",
+   "b": "prova-duccio",
+   "quota": 48.085444084385955,
+   "turni": 7.286975308641975,
+   "patte": 6.660493827160494,
+   "partite": 16200
+  },
+  {
+   "a": "starter-pino",
+   "b": "starter-pino",
+   "quota": 48.37141144341571,
+   "turni": 10.157469135802469,
+   "patte": 7.327160493827161,
+   "partite": 16200
+  },
+  {
+   "a": "starter-pino",
+   "b": "starter-gigi",
+   "quota": 48.52526770618073,
+   "turni": 7.047962962962963,
+   "patte": 1.4259259259259258,
+   "partite": 16200
+  },
+  {
+   "a": "starter-pino",
+   "b": "prova-sergio",
+   "quota": 57.72496831432193,
+   "turni": 11.47425925925926,
+   "patte": 2.5925925925925926,
+   "partite": 16200
+  },
+  {
+   "a": "starter-pino",
+   "b": "prova-duccio",
+   "quota": 50.91547049441786,
+   "turni": 7.91679012345679,
+   "patte": 3.240740740740741,
+   "partite": 16200
+  },
+  {
+   "a": "starter-gigi",
+   "b": "starter-gigi",
+   "quota": 48.19092680211522,
+   "turni": 5.571851851851852,
+   "patte": 11.283950617283951,
+   "partite": 16200
+  },
+  {
+   "a": "starter-gigi",
+   "b": "prova-sergio",
+   "quota": 42.68943436499466,
+   "turni": 8.029074074074074,
+   "patte": 1.6728395061728396,
+   "partite": 16200
+  },
+  {
+   "a": "starter-gigi",
+   "b": "prova-duccio",
+   "quota": 44.26897286457354,
+   "turni": 5.986358024691358,
+   "patte": 1.5,
+   "partite": 16200
+  },
+  {
+   "a": "prova-sergio",
+   "b": "prova-sergio",
+   "quota": 49.35275080906149,
+   "turni": 13.530864197530864,
+   "patte": 0.8148148148148148,
+   "partite": 16200
+  },
+  {
+   "a": "prova-sergio",
+   "b": "prova-duccio",
+   "quota": 63.68991069732092,
+   "turni": 8.612716049382716,
+   "patte": 2.537037037037037,
+   "partite": 16200
+  },
+  {
+   "a": "prova-duccio",
+   "b": "prova-duccio",
+   "quota": 51.95429945880938,
+   "turni": 6.512469135802469,
+   "patte": 7.611111111111111,
+   "partite": 16200
+  }
+ ]
+}

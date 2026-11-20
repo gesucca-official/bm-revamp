@@ -71,7 +71,7 @@ JAVA = {
         "Bound: annulla la mossa del bersaglio se deve ancora risolversi e contiene Annuncia"
     ),
     "base.rocco.bound.MiRialzo": (
-        "Bound: se alla risoluzione hai da {healthAtLeast} a {healthAtMost} [[H]], recuperi {heal} [[H]]"
+        "Bound: se alla risoluzione hai al più {healthAtMost} [[H]], recuperi {heal} [[H]]"
     ),
 }
 
@@ -90,7 +90,7 @@ PARAMETRI_JAVA = {
     "base.com.BeggingMoney": "alertnessFromTarget",
     "bruiser.BadEducation": "hitDamage",
     "base.cesira.bound.NeRiparliamoFuori": "",
-    "base.rocco.bound.MiRialzo": "heal healthAtLeast healthAtMost",
+    "base.rocco.bound.MiRialzo": "heal healthAtLeast healthAtMost",  # SB-21z (D161 (3)): healthAtLeast 1 (vivo) non si stampa
 }
 
 
@@ -464,7 +464,8 @@ def testo_dati(carta, nomi):
             for passi in (avversari, propri)
         ]
         if any(aumenti):
-            corpo.append(f"Rincara {aumenti[0]} ({aumenti[1]} a sé)")
+            # SB-21z (D161 (3)): senza rincaro a sé non si stampa «(0 a sé)».
+            corpo.append(f"Rincara {aumenti[0]}" + (f" ({aumenti[1]} a sé)" if aumenti[1] else ""))
     if not corpo:
         raise ValueError("self/target: manca un effetto stampabile")
     frasi = ("Annuncia ", "Gioca d'anticipo: ", "Se il bersaglio ha ", "Rincara ")

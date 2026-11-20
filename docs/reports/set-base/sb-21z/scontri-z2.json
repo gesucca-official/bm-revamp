@@ -1,0 +1,198 @@
+{
+ "fraCostruiti": {
+  "costruito-spazienzio": {
+   "costruito-mara": 47.4,
+   "costruito-celestina": 24.4,
+   "costruito-piera": 34.8,
+   "costruito-beppe": 13.9,
+   "costruito-sergio": 19.7,
+   "costruito-duccio": 7.9
+  },
+  "costruito-mara": {
+   "costruito-spazienzio": 52.6,
+   "costruito-celestina": 15.5,
+   "costruito-piera": 25.6,
+   "costruito-beppe": 14.1,
+   "costruito-sergio": 9.3,
+   "costruito-duccio": 2.1
+  },
+  "costruito-celestina": {
+   "costruito-spazienzio": 75.6,
+   "costruito-mara": 84.5,
+   "costruito-piera": 42.2,
+   "costruito-beppe": 39.1,
+   "costruito-sergio": 36.5,
+   "costruito-duccio": 51.8
+  },
+  "costruito-piera": {
+   "costruito-spazienzio": 65.2,
+   "costruito-mara": 74.4,
+   "costruito-celestina": 57.8,
+   "costruito-beppe": 38.0,
+   "costruito-sergio": 52.7,
+   "costruito-duccio": 16.2
+  },
+  "costruito-beppe": {
+   "costruito-spazienzio": 86.1,
+   "costruito-mara": 85.9,
+   "costruito-celestina": 60.9,
+   "costruito-piera": 62.0,
+   "costruito-sergio": 59.0,
+   "costruito-duccio": 11.1
+  },
+  "costruito-sergio": {
+   "costruito-spazienzio": 80.3,
+   "costruito-mara": 90.7,
+   "costruito-celestina": 63.5,
+   "costruito-piera": 47.3,
+   "costruito-beppe": 41.0,
+   "costruito-duccio": 6.8
+  },
+  "costruito-duccio": {
+   "costruito-spazienzio": 92.1,
+   "costruito-mara": 97.9,
+   "costruito-celestina": 48.2,
+   "costruito-piera": 83.8,
+   "costruito-beppe": 88.9,
+   "costruito-sergio": 93.2
+  }
+ },
+ "controStarter": {
+  "costruito-spazienzio": {
+   "starter-spazienzio": 77.0,
+   "starter-mara": 68.4,
+   "starter-tossico": 88.7,
+   "starter-pino": 76.0,
+   "starter-gigi": 71.9,
+   "prova-sergio": 73.0,
+   "prova-duccio": 73.8
+  },
+  "costruito-mara": {
+   "starter-spazienzio": 75.0,
+   "starter-mara": 61.4,
+   "starter-tossico": 79.7,
+   "starter-pino": 72.0,
+   "starter-gigi": 66.4,
+   "prova-sergio": 58.9,
+   "prova-duccio": 72.9
+  },
+  "costruito-celestina": {
+   "starter-spazienzio": 90.3,
+   "starter-mara": 92.1,
+   "starter-tossico": 88.9,
+   "starter-pino": 95.7,
+   "starter-gigi": 93.4,
+   "prova-sergio": 94.6,
+   "prova-duccio": 83.6
+  },
+  "costruito-piera": {
+   "starter-spazienzio": 83.3,
+   "starter-mara": 88.2,
+   "starter-tossico": 97.6,
+   "starter-pino": 90.7,
+   "starter-gigi": 83.3,
+   "prova-sergio": 97.9,
+   "prova-duccio": 94.0
+  },
+  "costruito-beppe": {
+   "starter-spazienzio": 96.9,
+   "starter-mara": 88.7,
+   "starter-tossico": 99.7,
+   "starter-pino": 94.3,
+   "starter-gigi": 97.3,
+   "prova-sergio": 94.0,
+   "prova-duccio": 97.5
+  },
+  "costruito-sergio": {
+   "starter-spazienzio": 94.0,
+   "starter-mara": 97.0,
+   "starter-tossico": 99.9,
+   "starter-pino": 93.3,
+   "starter-gigi": 96.7,
+   "prova-sergio": 90.6,
+   "prova-duccio": 97.0
+  },
+  "costruito-duccio": {
+   "starter-spazienzio": 98.6,
+   "starter-mara": 99.7,
+   "starter-tossico": 98.8,
+   "starter-pino": 99.3,
+   "starter-gigi": 99.9,
+   "prova-sergio": 99.9,
+   "prova-duccio": 100.0
+  }
+ },
+ "vittorie": {
+  "costruito-spazienzio": 0,
+  "costruito-mara": 1,
+  "costruito-celestina": 3,
+  "costruito-piera": 4,
+  "costruito-beppe": 5,
+  "costruito-sergio": 3,
+  "costruito-duccio": 5
+ },
+ "oltre70": [
+  [
+   "costruito-beppe",
+   "costruito-duccio",
+   88.9
+  ],
+  [
+   "costruito-beppe",
+   "costruito-mara",
+   85.9
+  ],
+  [
+   "costruito-beppe",
+   "costruito-spazienzio",
+   86.1
+  ],
+  [
+   "costruito-celestina",
+   "costruito-mara",
+   84.5
+  ],
+  [
+   "costruito-celestina",
+   "costruito-spazienzio",
+   75.6
+  ],
+  [
+   "costruito-duccio",
+   "costruito-mara",
+   97.9
+  ],
+  [
+   "costruito-duccio",
+   "costruito-piera",
+   83.8
+  ],
+  [
+   "costruito-duccio",
+   "costruito-sergio",
+   93.2
+  ],
+  [
+   "costruito-duccio",
+   "costruito-spazienzio",
+   92.1
+  ],
+  [
+   "costruito-mara",
+   "costruito-piera",
+   74.4
+  ],
+  [
+   "costruito-mara",
+   "costruito-sergio",
+   90.7
+  ],
+  [
+   "costruito-sergio",
+   "costruito-spazienzio",
+   80.3
+  ]
+ ],
+ "dominio": [],
+ "passa": false
+}

@@ -34,7 +34,8 @@ TENUTI = {
     ('ROC-AR6', 'R3', 'HEALTH', 33): 'D127 (2): costo di Duccio 33 HEALTH',
 }
 
-NON_IMPORTI = {'priority', 'turns', 'divide', 'perPlay', 'perPlaySelf', 'perItem', 'perAlcohol', 'factor', 'percent'}
+NON_IMPORTI = {'priority', 'turns', 'divide', 'perPlay', 'perPlaySelf', 'perItem', 'perAlcohol', 'factor', 'percent',
+               'healthAtLeast'}  # SB-21z: soglia «vivo» di Mi rialzo, non stampata
 QUARTI = {0.25 * i for i in range(1, 9)}
 SLOT = re.compile(r'^\s*([A-Z]{2,3}-[A-Z0-9]+)\s*·\s*')
 NUMERO = re.compile(r'(?<![\w])\d+(?:,\d+)?')
