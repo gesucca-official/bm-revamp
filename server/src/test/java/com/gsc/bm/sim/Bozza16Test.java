@@ -86,7 +86,7 @@ class Bozza16Test {
             ObjectNode expected = before.deepCopy();
             ObjectNode resources = (ObjectNode) expected.get("resources");
             String id = c.path("id").asText();
-            if (id.equals("base.character.Pino")) resources.put("HEALTH", 82).put("ALCOHOL", 15);
+            if (id.equals("base.character.Pino")) resources.put("HEALTH", 79).put("ALCOHOL", 15);
             if (id.equals("base.character.Mara")) resources.put("HEALTH", 69);
             if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 66);
             assertEquals(expected, c, c.path("id").asText());
@@ -100,13 +100,15 @@ class Bozza16Test {
             // D142: i tre campi stampati ora hanno come riferimento il generatore, controllato da controlla-testi.py.
             if (!CHANGED.contains(b)) {
                 ObjectNode expected = (ObjectNode) withoutPrintedText(before);
-                // D149: exact changes to the draft cards, with the rest of each card still checked.
+                // D149 and SB-21f: exact changes to the draft cards, with the rest of each card still checked.
                 if (b.equals("base.pino.GoingBerserk")) {
-                    ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 2);
+                    ((ObjectNode) expected.path("params")).put("base", 10).put("perAlcohol", 1);
                     ((ObjectNode) expected.path("gui")).put("name", "Giro secco");
                 }
                 if (b.equals("base.pino.QuestoLoFiniscoIo"))
                     ((ObjectNode) expected.path("self").path(0)).put("amount", 15);
+                if (b.equals("base.pino.TestataDaUltimoGiro"))
+                    ((ObjectNode) expected.path("target").path(0)).put("amount", 35);
                 assertEquals(expected, withoutPrintedText(c), b);
             } else {
                 assertNotEquals(before, c, b);

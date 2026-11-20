@@ -421,7 +421,7 @@ class SetBaseDraftTest {
     // ---- SB-14: lo starter di Pino «Chiude quando dico io» ----
 
     /** La salute iniziale di Pino (SB-9 meno 15, ipotesi della scala di D41, poi i giri coi bot di SB-14). */
-    static final int PINO_HEALTH = 82; // D149: 80 in SB-16i, 90 al compenso, 82 dopo la passata 2.
+    static final int PINO_HEALTH = 79; // SB-21f: compenso starter per D149 (4), prima 82.
     /** La L iniziale di Pino: 20 in SB-14, 10 in SB-16e, 15 con D149. */
     static final int PINO_ALCOHOL = 15;
 
@@ -478,18 +478,18 @@ class SetBaseDraftTest {
         // Giro 2 di SB-14: le due carte che spendono tutta la L partono da 10 e da 12 (erano 3 e 6), testi compresi, perché i bot leggono
         // Il numero del danno nominale; la last resort tiene un danno a sé (D29), 2 HIT da SB-16e2 (D56/D38, era 5). SB-16e/D38/D53: Testata a 25 HIT con salute ridotta.
         JsonNode berserk = card("base.pino.GoingBerserk"), last = card("base.pino.UltimoGiro"), testata = card("base.pino.TestataDaUltimoGiro");
-        assertEquals(10, berserk.get("params").get("base").asInt(), "D149: Estasi 10 + 2 × L spesa");
-        assertEquals(2, berserk.get("params").get("perAlcohol").asInt(), "D149");
+        assertEquals(10, berserk.get("params").get("base").asInt(), "D156: Giro secco 10 + L spesa");
+        assertEquals(1, berserk.get("params").get("perAlcohol").asInt(), "D156");
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
         assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText(), "D149");
-        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più il doppio della [[L]] spesa."), "D149");
+        assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa."), "D156");
         assertEquals(12, last.get("params").get("base").asInt());
         assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
         assertEquals("HIT 12+x", last.get("gui").get("damageAmount").asText());
         assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa."));
-        assertEquals(25, testata.get("target").get(0).get("amount").asInt(), "D38/D53: pressione di Piera con meno salute, SB-16e");
-        assertEquals("HIT 25", testata.get("gui").get("damageAmount").asText());
-        assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 25 HIT al bersaglio"));
+        assertEquals(35, testata.get("target").get(0).get("amount").asInt(), "SB-21f: compenso starter D149 (4), D153");
+        assertEquals("HIT 35", testata.get("gui").get("damageAmount").asText());
+        assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 35 HIT al bersaglio"));
         // D34, punto 7: la bound di L dà al massimo +10, testi compresi.
         JsonNode cinque = card("base.pino.bound.CinqueMinutiEVado");
         int alcohol = cinque.get("self").get(0).get("amount").asInt();
@@ -537,13 +537,13 @@ class SetBaseDraftTest {
         ((AbstractCard) draft.card("base.com.FasciaturaColFazzolettaccio")).applyEffectOnSelf(pino);
         assertEquals(-5, pino.getResources().get(Resource.ALERTNESS));
 
-        // D149: Estasi infligge 10 HIT più il doppio della L spesa; nessun danno a sé.
+        // D156: Giro secco infligge 10 HIT più la L spesa, senza danno a sé.
         Game game = pinoAgainstSpazienzio();
         Character me = game.getPlayers().get("seat-1").getCharacter(), spazienzio = game.getPlayers().get("seat-2").getCharacter();
         me.getResources().put(Resource.ALCOHOL, 12);
         int berserk = card("base.pino.GoingBerserk").get("params").get("base").asInt(),
                 last = card("base.pino.UltimoGiro").get("params").get("base").asInt();
-        int health = 75 - berserk - 2 * 12; // D149: moltiplicatore di Estasi; SB-16e: salute iniziale di Spazienzio.
+        int health = 75 - berserk - 12; // D156: un HIT per L spesa; SB-16e: salute iniziale di Spazienzio.
         resolveOnOpponent(game, "base.pino.GoingBerserk");
         assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(0, me.getResources().get(Resource.ALCOHOL));
@@ -705,7 +705,7 @@ class SetBaseDraftTest {
 
         assertEquals(Map.of(Resource.TOXICITY, 10, Resource.ALCOHOL, 10), estasi.getCost());
         assertEquals(Set.of(Card.CardTarget.OPPONENT), estasi.getCanTarget());
-        assertEquals("GEN-24 · 10 [[T]] + 10 [[L]]: 30 HIT al bersaglio.", estasi.getEffect());
+        assertEquals("GEN-24 · 10 [[T]] + 10 [[L]]: 40 HIT al bersaglio.", estasi.getEffect());
         Map<Resource, Integer> own = celestina.getCharacter().getResources();
         own.putAll(estasi.getCost());
         for (Resource missing : estasi.getCost().keySet()) {
@@ -723,7 +723,7 @@ class SetBaseDraftTest {
         expectedOwn.put(Resource.ALCOHOL, 0);
         Map<Resource, Integer> other = spazienzio.getCharacter().getResources();
         Map<Resource, Integer> expectedOther = new LinkedHashMap<>(other);
-        expectedOther.merge(Resource.HEALTH, -30, Integer::sum);
+        expectedOther.merge(Resource.HEALTH, -40, Integer::sum);
         game.submitMove(play);
         play.applyCostTo(game);
         play.applyEffectTo(game);

@@ -45,6 +45,8 @@ class EstasiDamageCapTest {
     void capsD149DamageInTheEngineAndBothBotModels(Integer cap, int alcohol, int expectedHit) {
         ObjectNode json = draft.json().deepCopy();
         ObjectNode params = (ObjectNode) StarterBalanceMeasureTest.card(json, ESTASI).get("params");
+        // D156 changes the delivered draft. Keep the D149 input for this cap experiment.
+        params.put("perAlcohol", 2);
         params.remove("maxDamage");
         if (cap != null) params.put("maxDamage", cap);
         Card card = Draft.parse("Estasi D150", json).card(ESTASI);

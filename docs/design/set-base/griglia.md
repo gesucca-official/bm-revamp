@@ -9,6 +9,7 @@
 > **SB-19, Fase B1, 17 novembre 2026 ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza le nove carte che mancavano (GEN-04, 08, 10, 11, 19, 20, 21; OGG-08, 16): il set è a **121 carte**, 44 C / 58 NC / 19 R, con CES-AR7 contata dentro (D121); i conti qui sotto (blocchi, rarità, ruoli) sono riscritti dalla bozza. Con OGG-17 e OGG-18 della B2 il set va a 123 (riga qui sotto).
 > **SB-19, Fase B2, 18 novembre 2026 ([D130](../../set-base-decisioni.md#decisioni-del-proprietario), [D133](../../set-base-decisioni.md#decisioni-del-proprietario)):** entrano in bozza i due oggetti con l'effetto «In campo» (RP-27, [regole del playground 1.5](regole-playground.md)): OGG-17 «Conto del tavolo sei» (NC) e OGG-18 «Sigaretta accesa» (R). Il set arriva a 123 carte, 44 C / 59 NC / 20 R ([nota ¹¹](#oggetti-18-e-token)).
 > **Bozza SB-21e, 19 novembre 2026 ([D152](../../set-base-decisioni.md#decisioni-del-proprietario)).** Estasi torna come generica rara (GEN-24), premio per chi accumula T e L. I 10 L di costo sono la deroga deliberata a D33 (4). PIN-AR2 diventa «Giro secco», nome di lavoro fino a SB-24. Il set sale a **124 carte**, 44 C / 59 NC / 21 R.
+> **Bozza SB-21f, 20 novembre 2026 ([D156](../../set-base-decisioni.md#decisioni-del-proprietario)).** Dopo la prova al client, Giro secco scende a 10 HIT più la L spesa ed Estasi sale a 40 HIT per premiare il doppio costo. Per D149 (4) e D153, Testata da ultimo giro sale a 35 HIT e Piera scende a 79 salute.
 > **Non normativo:** il regolamento vigente è
 > [game-rules.md](../../game-rules.md) e la partita viva non cambia. Nessuna carta è scritta qui come dato giocabile: le carte nascono in
 > SB-11 e nei blocchi seguenti, che possono scambiare gli slot purché i totali tengano ([piano, SB-10](../../set-base-plan.md#sb-10--griglia-degli-slot-e-listino-di-potenza)).
@@ -151,7 +152,7 @@ di SB-12a–SB-15. Nessun cambiamento al gioco vivo.
 | PG-SPA | Spazienzio de la Ucciso | Personaggio, base | H 75 (SB-16e), A 20, V 25, capacità 1 | C | Spazienzio | `BigBadBruiser`, conservato | Il metro del set (SB-9); salute precedente 85¹ | dati |
 | PG-MAR | Mara Contromano | Personaggio, base | H 69 (D149), A 40, capacità 2 | C | Mara | bozza, V 10 → 0 | Contrasto di Spazienzio; salute precedente 80¹ | dati |
 | PG-TOS | Celestina Bucatina | Personaggio, avanzato | H 66 (D149), A 35, T 15 (SB-16e), capacità 2, immune all'effetto periodico di T | NC | Celestina | `ToxicJunkie`, capacità 3 → 2 | T come carburante e veleno; precedenti 80/20⁵ | dati |
-| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H 82, A 15, L 15 (D149), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
+| PG-PIN | Piera Ultimo Giro | Personaggio, avanzato | H 79 (SB-21f), A 15, L 15 (D149), capacità 2 | NC | Piera | bozza, V 10 → 0, nessuna immunità (D28) | L da spendere subito; precedenti 100/20⁶ | dati |
 | PG-GIG | Beppe Bulletta | Personaggio, avanzato | H 80 (SB-16e), A 25, V 25⁷, capacità 3 | NC | Beppe | bozza | Oggetti ed equip; salute precedente 95⁷ | dati |
 | PG-CES | Sergio Sommerso | Personaggio, booster | H ~~90~~ ~~75~~ 85 (SB-17: D106, riserva del giro 2), A 30, V 10, capacità 2 | R | — | bozza (SB-17), concept SB-9 | Contromosse e letture | dati |
 | PG-ROC | Duccio Braccio Teso | Personaggio, booster | H ~~130~~ ~~110~~ 115 (SB-18: D124, D126; riserva R2), A 15, capacità 2 | R | — | bozza (SB-18 B2), concept SB-9; personaggio di prova SB-6a | La salute come risorsa (D27) | dati |
@@ -296,8 +297,8 @@ nel giro 3 per centrare il matchup fra i quattro stili (0,522) e i tre euristici
 
 | ID | Tipo | Ruolo | Fascia | Pr. | Effetto indicativo | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---|---|---|---|---|
-| PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 25 HIT | C | 2 | bozza «Testata da ultimo giro», 20 → 25 HIT in SB-16e | Attacco: costo basso (D33), pressione con meno salute | dati |
-| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | Spendi tutta la L. Infliggi 10 HIT più il doppio della L spesa (D149) | NC | 2 | «Giro secco» (D152), binding `base.pino.GoingBerserk` | Spendi tutto subito; mai morta | Java: memorizza la L, la azzera, poi colpisce (decisione B1) |
+| PIN-AR1 | Azione, regolare | DAMAGE | F1 (5 L) | 1 | 5 HIT a sé; 35 HIT | C | 2 | bozza «Testata da ultimo giro», 25 → 35 HIT in SB-21f | Attacco: costo basso (D33), pressione con meno salute | dati |
+| PIN-AR2 | Azione, regolare | DAMAGE | F0 | 1 | Spendi tutta la L. Infliggi 10 HIT più la L spesa (D156) | NC | 2 | «Giro secco» (D152), binding `base.pino.GoingBerserk` | Spendi tutto subito; mai morta | Java: memorizza la L, la azzera, poi colpisce (decisione B1) |
 | PIN-AR3 | Azione, regolare | DEFENSE | F0 | 2 | HIT ricevuto ~~×0,5~~ ×0,65 (SB-16i) nel turno; +5 L; POISON ×0,5 nel turno, periodico incluso (braccio B, D67, D82; in `bozza.json` dalla 1.6) | C | 2 | bozza «Il bancone regge, io pure» (era una bound); variante B in `set-base/bancone-b.json` | Difesa che lo rifornisce | dati |
 | PIN-AR4 | Azione, regolare | RESOURCES | F0 | 1 | Annuncia Giro secco o Rutto a distanza sociale. Se lo trovi: +15 L, +35 A. Se non lo trovi: +5 L, +10 A. | NC | 2 | «Un altro e arrivo», già Offro io, D55; numeri SB-16e e SB-16e2 | Annuncio D79; premio pieno e ripiego alternativi | dati + search |
 | PIN-AR5 | Azione, regolare | DISRUPT | F1 (5 L) | 1 | Spende tutta la L residua dopo il costo: il bersaglio perde A pari alla L spesa e subisce HIT pari a 14 più il doppio della L spesa (passo 3, D82) | R | 1 | bozza «Rutto a distanza sociale», riprogettata a quantità variabile | Picco con tanta L | Java nuova `base.pino.RuttoADistanzaSociale` (D84): memorizza, azzera, poi colpisce |
@@ -372,7 +373,7 @@ Giocabili da tutti. Nessuna annulla mosse (Mara non deve averne) e nessuna costa
 | GEN-21 | Azione, regolare | OTHER | F1 (5 V) | 1 | Equip: il prossimo HIT inflitto ×1,5 e convertito in CUT, uso singolo | R | — | «Coccio di bottiglia» (da inventare), effetto del token `BrokenBeerBottle` | Prepara il colpo e aggira le parate contro HIT | equip |
 | GEN-22 | Azione, regolare | DISRUPT | F1 (5 A) | 2 | Azzera la L del bersaglio; 3 HIT | NC | — | da inventare («Acqua in faccia») | Tecnica economica contro Piera | dati |
 | GEN-23 | Azione, regolare | DISRUPT | F1 (10 A) | 2 | Il bersaglio perde 10 V; 5 HIT | R | — | da inventare («Sgambetto») | Picco contro chi accumula V (Spazienzio, Beppe) | dati |
-| GEN-24 | Azione, regolare | DAMAGE | 10 T + 10 L | 1 | 30 HIT al bersaglio | R | — | «Estasi da Coca Etilene» (D152) | Premio per chi costruisce T e L insieme | dati |
+| GEN-24 | Azione, regolare | DAMAGE | 10 T + 10 L | 1 | 40 HIT al bersaglio | R | — | «Estasi da Coca Etilene» (D152, D156) | Premio per chi costruisce T e L insieme | dati |
 
 ¹⁰ **SB-19, Fase B1** ([D129](../../set-base-decisioni.md#decisioni-del-proprietario), [D130](../../set-base-decisioni.md#decisioni-del-proprietario); [proposta A](sb-19-proposta.md#3-le-carte), [A2](sb-19-proposta-a2.md#7-la-fase-b-riscritta)): le nove carte che mancavano alla bozza entrano coi nomi di lavoro della proposta: GEN-04, 08, 10, 11, 19, 20, 21, OGG-08 e OGG-16. **Mano lesta** (D117, rubare risorse) prende lo slot di «Bottigliata», **Secondo fiato** (D124) quello di «Sedia in testa»; Grappa non esce (D129 (1)). GEN-04 è la sola classe Java nuova (sottoclasse in `model/cards/base/com`, senza il −10 A della carta viva); GEN-10 usa la classe viva con costo, priorità e `hitDamage` dalla bozza. **Secondo fiato** entra a +12 HEALTH, il valore A2 (riserva della regola di scelta: nei mazzi con le aggiunte l'A1 la portava a +10,5 su Mara; [rapporto](../../reports/set-base/sb-19-b1-report.md#6-riserva-applicata)). Il set è a **121 carte**, 44 C / 58 NC / 19 R; con OGG-17 e OGG-18 della B2 (D130) arriva a 123, 44 C / 59 NC / 20 R. **B1b** ([D131](../../set-base-decisioni.md#decisioni-del-proprietario), [rapporto](../../reports/set-base/sb-19-b1b-report.md)): con la banda 0 / +10 le carte provano varianti più forti in isolamento; entrano **Elemosina molesta gratis** (GEN-04), **Non sento niente 5 V e ×0,25** (GEN-11) e **Mezza minerale +20 A** (OGG-08); Mano lesta, Coccio, Maleducazione, Colpo e Secondo fiato (+12) restano come sono (nessuna variante migliore, o carta ferma da D131 (4)).
 
@@ -515,7 +516,7 @@ scendono di circa 3 HIT (stima). «Peggio di morta»: una gemella mai giocata la
 | `BeggingMoney` | riprogettata (10 A, niente −10 A), generica | GEN-04 | invariato | sotto | La copia di oggetti resta nel set, aperta a tutti |
 | `Cough` | riprogettata (12 POISON e +5 T, D55) | TOS-AR2 | invariato | sotto (3,9) | Intossicare: POISON diretto |
 | `EverythingIsDrug` | **sostituita** | TOS-BA | nella basic | sotto; peggio di morta | Consumare un oggetto senza effetti per T non serve |
-| `GoingBerserk` | Estasi a dati, 10 T + 10 L per 30 HIT (D152) | GEN-24 | PIN-AR2 conserva la meccanica ad alcol come «Giro secco» | isolamento in SB-21e | Deroga D152 a D33 (4) |
+| `GoingBerserk` | Estasi a dati, 10 T + 10 L per 40 HIT (D152, D156) | GEN-24 | PIN-AR2 conserva la meccanica ad alcol come «Giro secco» | isolamenti SB-21e e SB-21f | Deroga D152 a D33 (4) |
 | `LethalHeroinDose` | riprogettata, last resort | LR-TOS | invariato | sotto; il bot non la gioca | D29: l'ultima dose |
 | `MethDrivenRage` | caricamento gratuito di T (D55) | TOS-AR1 | Dose in preparazione | da rimisurare in SB-16e | Cerca TOS-AR2 e si espone |
 | `PervertedMetabolism` | conservata | TOS-AR3 | invariato | in linea (8,3) | Difesa di Celestina |
@@ -550,7 +551,7 @@ Le 31 carte nuove della [proposta](bozza-esterna-proposta-70-carte.md). Tutte as
 | Chiave da tredici | GIG-AR2 | 10 CUT |
 | Cinghiata di traverso | MAR-AR1 | invariata |
 | Rincorsa dal marciapiede | GEN-12 | +5 V, 12 HIT |
-| Testata da ultimo giro | PIN-AR1 | 5 L, 25 HIT (numero SB-16e, prima 20) |
+| Testata da ultimo giro | PIN-AR1 | 5 L, 35 HIT (SB-21f, prima 25) |
 | Rutto a distanza sociale | PIN-AR5 | −A pari alla L residua |
 | Oh, guarda là | CES-AR1 | più 4 HIT; passa a Sergio, perché Mara ha già Sorpasso |
 | Denti stretti | GEN-14 | invariata |
