@@ -199,10 +199,6 @@ addestrato. Da chi? Pensateci.
 
 ## Epilogo del fallimento — Il Virgin Cuba Libre
 
-> **Stesura della regia del 20 novembre 2026, approvata dal proprietario lo stesso giorno** («l'epilogo mi piace, approvo»). Confermato dal proprietario il 10 novembre 2026,
-> sulla proposta della regia: poche battute comiche della combriccola, poi l'achievement nascosto (D19) per chi ha scelto gli amici, e si
-> torna alla scelta finale con i dialoghi saltabili. Gli starter già sbloccati restano.
-
 [Sfondo: S3, il Dimmi Di Sì. Regia: musica che non è musica; il giocatore con la combriccola, in ombra, intorno a un tavolino bianco,
 davanti a un Virgin Cuba Libre a sedici euro con l'ombrellino.]
 
@@ -250,3 +246,6 @@ Hai preferito un Virgin Cuba Libre a sedici euro.
 - **Le frasi di Piera** superano apposta la misura delle due righe: sono la gag, insieme agli stacchi su chi ascolta.
 - **Il giocatore risponde ai messaggi.** Non parla mai direttamente, ma alla combriccola risponde scegliendo fra due messaggi scritti: è la
   seconda scelta del tutorial, e l'unica che può farlo fallire.
+- **Epilogo del fallimento:** stesura della regia del 20 novembre 2026, approvata dal proprietario lo stesso giorno («l'epilogo mi piace,
+  approvo»), sulla proposta confermata il 10 novembre 2026: poche battute comiche della combriccola, poi l'achievement nascosto (D19) per
+  chi ha scelto gli amici, e si torna alla scelta finale con i dialoghi saltabili. Gli starter già sbloccati restano.
