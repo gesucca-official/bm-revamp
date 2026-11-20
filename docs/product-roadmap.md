@@ -247,7 +247,7 @@ un'attività con aspetti fiscali e legali (sotto, [PU](#pu--apertura-al-pubblico
 - **Ordine di grandezza di partenza,** da correggere scrivendo le storie: principale con 15–20 incontri per giro e 30–40 nodi in tutto;
   secondarie con 8–12 nodi.
 
-**CA-0 Motore e formato delle carriere.** Ogni carriera è un pacchetto di dati con un documento e una versione, come
+**CA-0 Motore e formato delle carriere** ([piano](ca-plan.md), avviato il 20 novembre 2026 per D22: oggi solo formato e strumenti, il resto dopo C5 e SB-28). Ogni carriera è un pacchetto di dati con un documento e una versione, come
 [`docs/sets/base.md`](sets/base.md) per le carte. È un grafo: incontri come nodi (alleato e avversario, personaggi e mazzi, duello o FFA,
 modificatori, testi e dialoghi, ricompense), scelte come archi, segni lasciati dalle scelte e condizioni sui nodi (rami presi, segni,
 obiettivi secondari come «vinci con Mara in meno di N round»), più gli achievement con i loro indizi. Niente linguaggio di scripting: bastano

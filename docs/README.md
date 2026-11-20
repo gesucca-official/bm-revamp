@@ -14,7 +14,7 @@ Una riga corta per filone: chi apre una regia parte da qui e dalla «Ripartenza�
 |---|---|---|---|
 | Set Base | [piano](set-base-plan.md) | portatile | SB-20b e SB-20c, poi SB-20 (D138) |
 | Client web | [roadmap](client-roadmap.md); [piano C4](client-c4-plan.md), chiusa | l'altra | C5 (playtest finali) |
-| Carriere, lavori anticipati | [tabella](product-roadmap.md#lavori-anticipati) | — | scrittura della campagna principale (CA-2) |
+| Carriere | [piano CA-0](ca-plan.md); contenuti nella [tabella dei lavori anticipati](product-roadmap.md#lavori-anticipati) | portatile | CA-0b (formato delle carriere 0.1) |
 
 ## Stato corrente
 
