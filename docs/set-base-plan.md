@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 20 novembre 2026, dopo SB-21g). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 20 novembre 2026, dopo D159). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
-> - **In corso:** [SB-22](#sb-22--prova-umana-con-mazzi-costruiti), in attesa del giudizio del proprietario sulla bozza e sui finalisti di [SB-21g](reports/set-base/sb-21g-report.md) (Q12 compresa).
-> - **Prossimo:** chiudere SB-22 dopo la prova con starter e finalisti SB-21g e qualche FFA, poi le correzioni che ne escono. Guardare Piera e Mara costruite e il divario fra costruiti e starter. Per le prove al tavolo, `tools/print-cards/generate.py --bozza` stampa bozza e starter ([rapporto](reports/set-base/stampa-bozza-report.md)). B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
-> - **Decisioni da leggere:** D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D158).
+> - **In corso:** SB-21h Fase A ([D159](#decisioni-del-proprietario)): proposta delle bound nuove (danno con risorsa o pulizia, risorsa con difesa ×0,75 di un turno, variante nelle buste) e del criterio dei +10 punti al posto del tetto in unità. [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) è aperto: la prova con la bozza di SB-21g ha portato a D159.
+> - **Prossimo:** approvazione della Fase A, poi SB-21h Fase B (misura e ribilanciamento), poi prova del proprietario (Q12 compresa) e chiusura di SB-22. Per le prove al tavolo, `tools/print-cards/generate.py --bozza`. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
+> - **Decisioni da leggere:** D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D159).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -643,6 +643,8 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 **SB-21f (20 novembre 2026), STOP per il proprietario.** Giro secco a 10 + L ed Estasi a 40 HIT ([D156](#decisioni-del-proprietario)). Starter nel controllo D149 con Testata a 35 HIT e Piera a 79 salute. Ricerca dei sette completa. Piera vince 6/6 anche nei due candidati ricercati, e 32/35 incroci costruito–starter superano il 70%. Giro secco in Beppe ed Estasi in Celestina sono sotto D131. Banco 5.974,56 s su 6.000, incluso il confronto rapido con la copia arrotondata. [Rapporto e finalisti](reports/set-base/sb-21f-report.md). **Rivisto dalla regia e chiuso con [D157](#decisioni-del-proprietario):** bozza adottata, si riprende SB-22.
 
 **SB-21g ([D158](#decisioni-del-proprietario)), concluso e rivisto dalla regia il 20 novembre 2026.** Bozza conforme. Starter 21/21 nel 35–65%, 2 fuori obiettivo, patte 4,164%, durata 8,702 turni, tutte le bound entro D33/D36. Giro secco in Beppe ed Estasi in Celestina sotto banda D131. Ricerca dei sette e due matrici complete. Piera vince 6/6, 35/35 incroci costruito–starter oltre il 70%. Banco 5.239,78 s su 6.000. [Rapporto e finalisti](reports/set-base/sb-21g-report.md).
+
+**SB-21h ([D159](#decisioni-del-proprietario)), bound ripensate.** Ogni personaggio: (a) danno più risorsa o pulizia, (b) risorsa più HIT, CUT e POISON ricevuti ×0,75 per un turno, (c) variante per i costruiti fuori dagli starter. Criterio: +10 punti al massimo contro bound nulle, al posto del tetto in unità. Fase A proposta, Fase B misura e ribilanciamento.
 
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 
