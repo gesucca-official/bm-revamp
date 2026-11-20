@@ -148,8 +148,9 @@ Dalla radice; area `server/target/sb-21z`. Le misure passano da [run.ps1](sb-21z
   - binding di CES-BO1 (`MiInformo` → `NeRiparliamoFuori`, variante Java di SB-21h).
   Un fallimento era un errore vero: le bound di Spazienzio devono avere il nome in maiuscolo (`spazienziosCardsShoutTheirNames`), corretto nel candidato.
 - Sulla bozza in vigore (SB-21g, ripristinata), con le modifiche di questo blocco a generatore e controlli: server 970 test, 0 falliti, 23 saltati; client 37/37; `controlla-numeri`, `controlla-testi`, `genera-bozza-di-riferimento.py --verifica` verdi. Il contesto Spring completo non è rilanciato: nessun file Java toccato da questo blocco.
+- Dopo [D162](../../set-base-decisioni.md#decisioni-del-proprietario), con z2 in `bozza.json`: i 31 test adeguati ai valori nuovi in 8 classi, ognuno con il richiamo a SB-21z/D162; il tetto D33/D36 resta solo riportato (D159); le liste che tolgono le carte di Sergio e Duccio (`Sb17`, `Sb18`) seguono i binding nuovi. Corretto in bozza un testo non rigenerato: `gui.inPlay` del Conto del tavolo sei diceva «−3 A» con l'effetto a −4 (il candidato in `sb-21z/` resta com'era misurato; l'effetto non cambia). `controlla-numeri` senza più valori tenuti (D161 li supera tutti). `./scripts/build.ps1 -Task Test -Offline`: server 970 test, 0 falliti, 23 saltati; `controlla-numeri` (0), `controlla-testi` (117), `belli.py` (0), `genera-bozza-di-riferimento.py --verifica`, `rarita-bozza.py --check consistent`, `check-rules.py`, `check-links.py`, `git diff --check` verdi. Contesto Spring completo non rilanciato: solo test e dati di test toccati.
 
 ## Stato
 
-- Starter, numeri belli e bound: fatti nel candidato z2; `bozza.json` è ancora quella di SB-21g.
-- Costruiti: oltre il 70% in 12 scontri; la scelta è del proprietario (sopra).
+- Chiuso con [D162](../../set-base-decisioni.md#decisioni-del-proprietario): il proprietario sceglie la prova umana; z2 è `bozza.json`.
+- Costruiti: oltre il 70% in 12 scontri; si giudicano al tavolo in SB-22, con le liste di `sb-21z/liste-z2.json`.

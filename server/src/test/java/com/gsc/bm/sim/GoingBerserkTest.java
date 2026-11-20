@@ -46,13 +46,14 @@ class GoingBerserkTest {
         author.getCharacter().countPlay(card.getName());
         card.resolve(game, move(game, author, card, target.getPlayerId()));
 
-        assertEquals(500 - (12 + 3 + 4), target.getResources().get(Resource.HEALTH));
-        assertEquals(500 - (2 + 1), author.getResources().get(Resource.HEALTH));
+        // SB-21z (D162): base 10 (era 12), rincaro a se' 2 (era 1).
+        assertEquals(500 - (10 + 3 + 4), target.getResources().get(Resource.HEALTH));
+        assertEquals(500 - (2 + 2), author.getResources().get(Resource.HEALTH));
         assertEquals(0, author.getResources().get(Resource.ALCOHOL));
         assertEquals(List.of(
-                damage(false, 2).perPlay(1).build(),
+                damage(false, 2).perPlay(2).build(),
                 emptyAlcohol(),
-                damage(true, 12).of(Resource.ALCOHOL).times(1).atStart(true).perPlay(4).build()
+                damage(true, 10).of(Resource.ALCOHOL).times(1).atStart(true).perPlay(4).build()
         ), ((PrintedEffects.Source) card).printedEffects().getSteps());
     }
 

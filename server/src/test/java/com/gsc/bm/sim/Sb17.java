@@ -16,7 +16,8 @@ final class Sb17 {
 
     static final String SERGIO = "base.character.Cesira";
     static final String DECK = "prova-sergio";
-    static final List<String> CARDS = List.of("base.cesira.LoRivendo", "base.cesira.LoMettoInConto", "base.cesira.bound.MiInformo", "base.cesira.bound.Battutina",
+    // SB-21z (D162): Mi informo diventa Ne riparliamo fuori.
+    static final List<String> CARDS = List.of("base.cesira.LoRivendo", "base.cesira.LoMettoInConto", "base.cesira.bound.NeRiparliamoFuori", "base.cesira.bound.Battutina",
             "base.cesira.bound.FareIlVago", "base.cesira.OhGuardaLa", "base.cesira.Ricatto", "base.cesira.LoSapevo",
             "base.cesira.ContoSalato", "base.cesira.LoSannoTutti", "base.cesira.Malelingue", "bruiser.StunningBlow", "base.com.Sgambetto",
             "base.com.ShuffleFeet", "base.com.AcquaInFaccia", "base.items.SantinoDellaPortinaia");

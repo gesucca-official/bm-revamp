@@ -19,7 +19,8 @@ final class Sb18 {
     static final String DECK = "prova-duccio";
     static final String NOCCHE = "base.rocco.NoccheSbucciate", E_ALLORA = "base.rocco.EAllora", CAPOCCIATA = "base.rocco.Capocciata",
             TESTA_DURA = "base.rocco.TestaDura";
-    static final List<String> CARDS = List.of("base.rocco.PrimaIo", "base.rocco.bound.Colpetto", "base.rocco.bound.Gomitata",
+    // SB-21z (D162): Gomitata diventa Mi rialzo.
+    static final List<String> CARDS = List.of("base.rocco.PrimaIo", "base.rocco.bound.Colpetto", "base.rocco.bound.MiRialzo",
             "base.rocco.bound.AlzoLaVoce", "base.rocco.NeHoPreseDiPeggio", NOCCHE, "base.rocco.Incassare", E_ALLORA, CAPOCCIATA,
             "base.rocco.TeLoSpiegoIo", TESTA_DURA);
 

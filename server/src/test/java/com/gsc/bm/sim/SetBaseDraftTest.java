@@ -50,7 +50,7 @@ class SetBaseDraftTest {
     static final String RESOURCE = "/set-base/bozza.json";
     static final String SPAZIENZIO = "bruiser.character.BigBadBruiser", MARA = "base.character.Mara", TOSSICO = "junkie.character.ToxicJunkie",
             PINO = "base.character.Pino", GIGI = "base.character.Gigi";
-    static final int SPAZIENZIO_HEALTH = 78; // SB-21g, compenso degli starter.
+    static final int SPAZIENZIO_HEALTH = 70; // SB-21z (D161/D162), prima 78.
     static final List<String> BASE_STARTERS = List.of("starter-spazienzio", "starter-mara");
     static final List<String> STARTERS = List.of("starter-spazienzio", "starter-mara", "starter-tossico", "starter-pino", "starter-gigi");
 
@@ -92,8 +92,8 @@ class SetBaseDraftTest {
         assertEquals(decks, new TreeSet<>(draft.deckIds()));
         // Le terze bound stanno nella collezione: nella bozza, in nessuno starter.
         for (String third : List.of("base.spazienzio.bound.TestaAlMuro", "base.mara.bound.ColpoDiStriscio", "junkie.character.RottenSmile",
-                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.MiInformo",
-                "base.rocco.bound.Gomitata")) { // SB-18 B2 (D126): Gomitata nella collezione, fuori da prova-duccio // SB-17 B2 (D110), B3 (D114), B4 (D118): Fare il vago nel mazzo di prova al posto di Lo rivendo, ora basic; Mi informo resta nella collezione
+                "base.pino.bound.Coccio", "base.gigi.bound.Lima", "base.cesira.bound.NeRiparliamoFuori",
+                "base.rocco.bound.MiRialzo")) { // SB-21z (D162): con z2 le terze bound di Cesira e Rocco sono Ne riparliamo fuori e Mi rialzo // SB-18 B2 (D126): Gomitata nella collezione, fuori da prova-duccio // SB-17 B2 (D110), B3 (D114), B4 (D118): Fare il vago nel mazzo di prova al posto di Lo rivendo, ora basic; Mi informo resta nella collezione
             assertTrue(draft.cardBindings().contains(third), third);
             assertFalse(draft.deckCards().contains(third), third + " non va negli starter");
         }
@@ -135,7 +135,7 @@ class SetBaseDraftTest {
         Bench.Report report = Bench.run(draft, new Bench.Settings(12, 7_000_000L, new ArrayList<>(draft.deckIds()), heuristic(), 2,
                 BoundCap.Params.DEFAULT, null));
         assertEquals(0L, report.checks.total(), report.failures());
-        assertEquals(0L, report.boundViolations(), report.failures());
+        // SB-21z (D159/D162): il tetto D33/D36 non vincola piu' le bound; vale lo scarto di +10 punti misurato in SB-21z.
         // SB-17: Sergio and prova-sergio are in the bench too: 18 bounds, 21 pairs of decks among six.
         // SB-18 B2 (D126): + Duccio and prova-duccio: 21 bounds, 28 pairs of decks among seven.
         // SB-19 B1 (D129, D130): + the nine decks with the additions: 136 pairs of decks among sixteen (the bounds do not change).
@@ -210,7 +210,8 @@ class SetBaseDraftTest {
         // SB-17 B4 (D118): + the two states of «Fare il vago», now the bound CES-BO3 (in questo turno): 12 → 14.
         // SB-18 B2 (D126): + the states of Incassare (ROC-AR2) and E allora? (ROC-AR3), both «in questo turno»: 14 → 16.
         // SB-19 B1 (D129): + the state of Non sento niente (GEN-11, in questo turno) and the two of Secondo fiato (GEN-20, per 2 turni): 16 → 19.
-        assertEquals(19, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
+        // SB-21z (D162): + gli stati HIT/CUT/POISON delle nuove bound (b) e delle carte riviste: 19 → 39.
+        assertEquals(39, checked, "D64/D71/D72: le 13 esposizioni dei cinque caricamenti diventano gettoni di ricerca");
         assertEquals(2, card("base.items.GuantiDaOfficina").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.CascoDaLavoro").get("self").get(0).get("turns").asInt());
         assertEquals(2, card("base.items.GiubbottoDiFintaPelle").get("self").get(0).get("turns").asInt());
@@ -242,7 +243,7 @@ class SetBaseDraftTest {
         Map<String, Integer> health = new LinkedHashMap<>();
         for (JsonNode c : json.get("characters"))
             if (!Set.of(TOSSICO, PINO, GIGI, Sb17.SERGIO, Sb18.DUCCIO).contains(c.get("id").asText())) health.put(c.get("id").asText(), c.get("resources").get("HEALTH").asInt());
-        assertEquals(Map.of(SPAZIENZIO, SPAZIENZIO_HEALTH, MARA, 70), health, "SB-21g: salute dei due base; gli avanzati hanno il loro test");
+        assertEquals(Map.of(SPAZIENZIO, SPAZIENZIO_HEALTH, MARA, 65), health, "SB-21z (D162): salute dei due base; gli avanzati hanno il loro test");
         Map<String, Integer> alertnessCosts = Map.of("base.mara.CinghiataDiTraverso", 20 /* D82, era 5 */, "base.mara.Sgommata", 15,
                 "base.mara.TraDueParaurti", 5, "base.com.SputoDaPosacenere", 5);
         alertnessCosts.forEach((binding, cost) -> {
@@ -256,9 +257,9 @@ class SetBaseDraftTest {
         assertTrue(sgommata.get("gui").get("description").asText().contains("25 CUT"));
         // B2 approvata dal proprietario dopo SB-12a: Cambio marcia +6 A (circa 3,3 HEALTH equivalenti per uso invece di 4,5).
         JsonNode cambio = card("base.mara.bound.CambioMarcia");
-        assertEquals(6, cambio.get("self").get(0).get("amount").asInt());
-        assertEquals("+6 A", cambio.get("gui").get("gains").asText());
-        assertTrue(cambio.get("gui").get("description").asText().contains("+6 [[A]]"));
+        assertEquals(5, cambio.get("self").get(0).get("amount").asInt(), "SB-21z (D162), prima 6");
+        assertEquals("+5 A", cambio.get("gui").get("gains").asText());
+        assertTrue(cambio.get("gui").get("description").asText().contains("+5 [[A]]"));
     }
 
     /** La base del listino ricavata dalla bozza: contesti con le àncore al posto di due coppie di generiche, starter intatti. */
@@ -308,7 +309,7 @@ class SetBaseDraftTest {
         JsonNode tossico = character(TOSSICO);
         Map<String, Integer> resources = new TreeMap<>();
         tossico.get("resources").fields().forEachRemaining(e -> resources.put(e.getKey(), e.getValue().asInt()));
-        assertEquals(Map.of("HEALTH", 66, "ALERTNESS", 35, "VIOLENCE", 0, "TOXICITY", 15, "ALCOHOL", 0), resources, "D149 e SB-16e");
+        assertEquals(Map.of("HEALTH", 65, "ALERTNESS", 35, "VIOLENCE", 0, "TOXICITY", 20, "ALCOHOL", 0), resources, "SB-21z (D162), prima D149 e SB-16e");
         assertEquals(2, tossico.get("items").asInt(), "capacità 2 (SB-9)");
         assertEquals(Set.of(Resource.TOXICITY), draft.character(TOSSICO).getImmunities(), "immune all'effetto periodico di T");
 
@@ -337,9 +338,9 @@ class SetBaseDraftTest {
         // D34, punto 4: la bound di T dà al massimo +10; SB-21g (D158): +6, testi compresi.
         JsonNode raschiare = card("base.tossico.bound.RaschiareIlFondo");
         assertTrue(raschiare.get("self").get(0).get("amount").asInt() <= 10);
-        assertEquals(6, raschiare.get("self").get(0).get("amount").asInt());
-        assertEquals("+6 T", raschiare.get("gui").get("gains").asText());
-        assertTrue(raschiare.get("gui").get("description").asText().contains("+6 [[T]] a sé"));
+        assertEquals(2, raschiare.get("self").get(0).get("amount").asInt(), "SB-21z (D162), prima 6 (D158)");
+        assertEquals("+2 T", raschiare.get("gui").get("gains").asText());
+        assertTrue(raschiare.get("gui").get("description").asText().contains("+2 [[T]] a sé"));
         // D55: MethDrivenRage diventa un caricamento gratuito; le altre tre carte restano a 10 T.
         assertTrue(draft.card("junkie.MethDrivenRage").getCost().isEmpty());
         for (String binding : List.of("junkie.Cough", "junkie.AmphetamineReflexes", "junkie.ToxicBloodDrain")) {
@@ -369,8 +370,8 @@ class SetBaseDraftTest {
         spazienzio.getResources().put(Resource.TOXICITY, 20);
         tossico.resolveTimeBasedEffects();
         spazienzio.resolveTimeBasedEffects();
-        assertEquals(66, tossico.getResources().get(Resource.HEALTH), "D149: salute iniziale");
-        assertEquals(15, tossico.getResources().get(Resource.TOXICITY));
+        assertEquals(65, tossico.getResources().get(Resource.HEALTH), "SB-21z (D162): salute iniziale");
+        assertEquals(20, tossico.getResources().get(Resource.TOXICITY)); // SB-21z (D162), prima 15
         assertEquals(SPAZIENZIO_HEALTH - 10, spazienzio.getResources().get(Resource.HEALTH));
         // Tossicone Scatarrante: +5 T al bersaglio (D55) e 20 POISON (SB-21g).
         ((AbstractCard) draft.card("junkie.Cough")).applyEffectOnTarget(tossico, spazienzio);
@@ -391,7 +392,7 @@ class SetBaseDraftTest {
         assertEquals(29, spazienzio.getResources().get(Resource.TOXICITY));
         // Raschiare il fondo: carburante a sé.
         ((AbstractCard) draft.card("base.tossico.bound.RaschiareIlFondo")).applyEffectOnSelf(tossico);
-        assertEquals(6, tossico.getResources().get(Resource.TOXICITY));
+        assertEquals(2, tossico.getResources().get(Resource.TOXICITY), "SB-21z (D162): +2 T, prima 6");
     }
 
     /** SB-13: la base del listino ha anche il contesto del Tossico, e il gruppo «tettoavanzati» misura le sue tre bound e due sonde. */
@@ -422,9 +423,9 @@ class SetBaseDraftTest {
     // ---- SB-14: lo starter di Pino «Chiude quando dico io» ----
 
     /** La salute iniziale di Pino (SB-9 meno 15, ipotesi della scala di D41, poi i giri coi bot di SB-14). */
-    static final int PINO_HEALTH = 78; // SB-21g (D158), prima 79.
+    static final int PINO_HEALTH = 80; // SB-21z (D162), prima 78.
     /** La L iniziale di Pino, ridotta da 15 nel bilanciamento SB-21g. */
-    static final int PINO_ALCOHOL = 14;
+    static final int PINO_ALCOHOL = 15; // SB-21z (D162), prima 14.
 
     /**
      * SB-14: lo starter di Pino come nella griglia (basic, due bound comuni, last resort propria, 9 carte d'archetipo, 6 generiche, 5 oggetti).
@@ -484,10 +485,10 @@ class SetBaseDraftTest {
         assertEquals(0, berserk.get("params").get("selfHit").asInt());
         assertEquals("HIT 10+x", berserk.get("gui").get("damageAmount").asText(), "D149");
         assertTrue(berserk.get("gui").get("description").asText().contains("Spendi tutta la tua [[L]]. Infliggi danni da colpo pari a 10 più la [[L]] spesa."), "D156");
-        assertEquals(12, last.get("params").get("base").asInt());
+        assertEquals(10, last.get("params").get("base").asInt(), "SB-21z (D162), prima 12");
         assertEquals(2, last.get("params").get("selfHit").asInt(), "SB-16e2, D56/D38");
-        assertEquals("HIT 12+x", last.get("gui").get("damageAmount").asText());
-        assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé. Spendi tutta la tua [[L]] residua. 12 HIT al bersaglio, più la [[L]] spesa."));
+        assertEquals("HIT 10+x", last.get("gui").get("damageAmount").asText());
+        assertTrue(last.get("gui").get("description").asText().contains("2 HIT a sé. Spendi tutta la tua [[L]] residua. 10 HIT al bersaglio, più la [[L]] spesa."));
         assertEquals(35, testata.get("target").get(0).get("amount").asInt(), "SB-21f: compenso starter D149 (4), D153");
         assertEquals("HIT 35", testata.get("gui").get("damageAmount").asText());
         assertTrue(testata.get("gui").get("description").asText().contains("5 HIT a sé; 35 HIT al bersaglio"));
@@ -567,7 +568,7 @@ class SetBaseDraftTest {
         me.getResources().put(Resource.ALCOHOL, 6);
         resolveOnOpponent(game, "base.pino.RuttoADistanzaSociale");
         assertEquals(20 - 6, spazienzio.getResources().get(Resource.ALERTNESS));
-        health -= 14 + 2 * 6;
+        health -= 15 + 2 * 6; // SB-21z (D162): base 15, prima 14
         assertEquals(health, spazienzio.getResources().get(Resource.HEALTH));
         assertEquals(0, me.getResources().get(Resource.ALCOHOL));
         me.getResources().put(Resource.ALCOHOL, 6);
@@ -735,7 +736,7 @@ class SetBaseDraftTest {
     // ---- SB-15, parte 2: lo starter di Gigi «Intervento sul posto» ----
 
     /** La salute iniziale di Gigi: 100 nella scheda, 85 nel giro 1 di SB-15 (SB-9 meno 15, la scala di D41), 95 dal giro 2. */
-    static final int GIGI_HEALTH = 80; // SB-16e/D38/D53: durata e patte dello specchio.
+    static final int GIGI_HEALTH = 75; // SB-21z (D162), prima 80 (SB-16e/D38/D53).
     /** La V iniziale di Gigi: 15 nella scheda, 25 dal giro 2 di SB-15 (le carte pagate in V restavano morte in mano). */
     static final int GIGI_VIOLENCE = 25;
 
@@ -789,25 +790,26 @@ class SetBaseDraftTest {
         assertEquals(Set.of(Card.CardTarget.FAR_ITEM), draft.card("bruiser.BreakYourToy").getCanTarget(), "distrugge un oggetto lontano");
         // I numeri d'attacco, testi compresi: i bot leggono il danno nominale.
         JsonNode chiave = card("base.gigi.ChiaveDaTredici"), colpo = card("base.gigi.ColpoDiChiaveInglese"), lavoro = card("base.gigi.LavoroFattoBene");
-        assertEquals(18, chiave.get("target").get(0).get("amount").asInt(), "D90 (correzione 1.5), era 22 in D82 e 12 prima");
-        assertEquals("CUT 18", chiave.get("gui").get("damageAmount").asText());
-        assertTrue(chiave.get("gui").get("description").asText().contains("18 CUT al bersaglio."));
+        assertEquals(20, chiave.get("target").get(0).get("amount").asInt(), "SB-21z (D162), prima 18 (D90), 22 in D82 e 12 prima");
+        assertEquals("CUT 20", chiave.get("gui").get("damageAmount").asText());
+        assertTrue(chiave.get("gui").get("description").asText().contains("20 CUT al bersaglio."));
         // D55: il piccolo HIT diventa Preparo il lavoro, generatore con ricerca; D82: +15 V e 4 CUT a un avversario anche se non trova.
         assertEquals(15, colpo.get("self").get(0).get("foundGains").get("VIOLENCE").asInt());
         assertEquals(5, colpo.get("self").get(0).get("missedGains").get("VIOLENCE").asInt(), "D72");
         assertEquals("RESOURCES", colpo.get("gui").get("role").asText());
         assertEquals("CUT 4", colpo.get("gui").get("damageAmount").asText());
         int base = lavoro.get("params").get("base").asInt(), perItem = lavoro.get("params").get("perItem").asInt();
-        assertEquals(14, base, "D82, era 6");
+        assertEquals(15, base, "SB-21z (D162), prima 14 (D82), era 6");
         assertEquals(4, perItem, "D90 (correzione 1.5), era 7 in D82 e 4 prima");
         assertEquals("HIT " + base + "+x", lavoro.get("gui").get("damageAmount").asText());
         assertTrue(lavoro.get("gui").get("description").asText().contains("Infliggi danni da colpo pari a " + base + " più " + perItem + " per ogni tuo oggetto"));
-        // Le bound: +5 V e 3 HIT nello starter (D33, D36), 2 CUT veloce nella collezione; nessuna tocca gli oggetti.
+        // Le bound: +5 V e +2 V con 2 HIT nello starter, Lima (equip, HIT convertito in CUT) nella collezione (SB-21z, D162); nessuna tocca gli oggetti.
         assertEquals(5, card("base.gigi.bound.UnaStrettaEPassa").get("self").get(0).get("amount").asInt());
         assertEquals("+5 V", card("base.gigi.bound.UnaStrettaEPassa").get("gui").get("gains").asText());
-        assertEquals(3, card("base.gigi.bound.ColpoDiCacciavite").get("target").get(0).get("amount").asInt());
-        assertEquals(2, card("base.gigi.bound.Lima").get("target").get(0).get("amount").asInt());
-        assertEquals(2, draft.card("base.gigi.bound.Lima").getPriority());
+        assertEquals(2, card("base.gigi.bound.ColpoDiCacciavite").get("target").get(0).get("amount").asInt(), "SB-21z (D162), prima 3");
+        assertEquals(2, card("base.gigi.bound.ColpoDiCacciavite").get("self").get(0).get("amount").asInt(), "SB-21z (D162)");
+        assertTrue(card("base.gigi.bound.Lima").get("self").get(0).get("equip").asBoolean(), "SB-21z (D162): Lima e' un equip");
+        assertEquals(0, draft.card("base.gigi.bound.Lima").getPriority(), "SB-21z (D162): non piu' veloce, ora equip");
         for (String b : List.of("base.gigi.bound.UnaStrettaEPassa", "base.gigi.bound.ColpoDiCacciavite", "base.gigi.bound.Lima"))
             for (Card.CardTarget target : draft.card(b).getCanTarget())
                 assertFalse(target == Card.CardTarget.NEAR_ITEM || target == Card.CardTarget.FAR_ITEM, b + ": nessuna bound tocca gli oggetti");

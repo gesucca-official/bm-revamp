@@ -171,9 +171,9 @@ class Sb19InPlayTest {
             assertEquals(has, c.get("gui").has("inPlay"), c.get("binding").asText() + ": gui.inPlay goes with the field");
             if (has) assertEquals("ITEM", c.get("kind").asText());
         }
-        assertEquals(List.of("LOSE ALERTNESS 3"), shapeOf(conto()), "OGG-17: −3 A");
+        assertEquals(List.of("LOSE ALERTNESS 4"), shapeOf(conto()), "OGG-17: −4 A (SB-21z, D162: was −3)");
         assertEquals(List.of("GAIN TOXICITY 2"), shapeOf(sigaretta()), "OGG-18: +2 T");
-        assertNull(loadWith((ArrayNode) card(draft.json(), Sb19.CONTO).get("inPlay").deepCopy(), "−3 A"), "the draft as it is loads");
+        assertNull(loadWith((ArrayNode) card(draft.json(), Sb19.CONTO).get("inPlay").deepCopy(), "−4 A"), "the draft as it is loads");
     }
 
     private static List<String> shapeOf(Card item) {
@@ -252,7 +252,7 @@ class Sb19InPlayTest {
 
     @Test
     void theTextAndTheViewOfAnItemAreThereOnlyWhenTheItemHasTheEffect() throws Exception {
-        assertTrue(JSON.writeValueAsString(conto()).contains("\"inPlay\":\"−3 A\""), "the view carries the text");
+        assertTrue(JSON.writeValueAsString(conto()).contains("\"inPlay\":\"−4 A\""), "the view carries the text");
         Card espresso = draft.card("base.items.EspressoDelDistributore");
         assertFalse(JSON.writeValueAsString(espresso).contains("inPlay"), "the views of today stay as they are, byte for byte");
     }
@@ -271,7 +271,7 @@ class Sb19InPlayTest {
         assertTrue(report.get(0).startsWith("(TOXICITY effect)"), report.toString());
         assertTrue(report.get(1).startsWith("Timer expired for Prova"), report.toString());
         assertTrue(report.get(2).startsWith("(Sigaretta accesa) TOXICITY: 4->6"), "the oldest first: " + report);
-        assertTrue(report.get(3).startsWith("(Conto del tavolo sei) ALERTNESS: 10->7 (-3)"), report.toString());
+        assertTrue(report.get(3).startsWith("(Conto del tavolo sei) ALERTNESS: 10->6 (-4)"), report.toString());
         assertEquals(100 - 2, c.getResources().get(Resource.HEALTH), "the poison of T 4 (2), taken before the +2 T");
         c.resolveTimeBasedEffects();
         assertEquals(100 - 2 - 3, c.getResources().get(Resource.HEALTH), "the T that the Sigaretta gave poisons from the next turn: 6/2");
@@ -313,7 +313,7 @@ class Sb19InPlayTest {
                 .type(com.gsc.bm.model.game.status.StatusType.GOOD).flow(com.gsc.bm.model.game.status.StatusFlow.INPUT)
                 .impactedProperty(Damage.DamageType.HIT).amountFunction(x -> x * 0.5f).equip(true).build());
         c.resolveTimeBasedEffects();
-        assertEquals(7, c.getResources().get(Resource.ALERTNESS), "a status that halves what the character takes does not halve it");
+        assertEquals(6, c.getResources().get(Resource.ALERTNESS), "a status that halves what the character takes does not halve it");
         assertEquals(100, c.getResources().get(Resource.HEALTH));
     }
 
@@ -345,7 +345,7 @@ class Sb19InPlayTest {
         game.getPlayers().get("b").getCharacter().getItems().add(conto());
         turn(game, move(game, "s", "Steal", "b", "Conto del tavolo sei"), move(game, "b", "Riempitivo", "SELF", null));
         assertEquals(List.of("Conto del tavolo sei"), names(game.getPlayers().get("s").getCharacter()));
-        assertEquals(60 - 10 - 3, res(game, "s", Resource.ALERTNESS), "10 A for the Steal, then −3");
+        assertEquals(60 - 10 - 4, res(game, "s", Resource.ALERTNESS), "10 A for the Steal, then −4");
         assertEquals(30, res(game, "b", Resource.ALERTNESS), "the previous holder pays nothing");
     }
 
@@ -357,7 +357,7 @@ class Sb19InPlayTest {
         assertEquals(List.of(), names(game.getPlayers().get("s").getCharacter()));
         assertEquals(List.of("Conto del tavolo sei"), names(game.getPlayers().get("b").getCharacter()));
         assertEquals(60, res(game, "s", Resource.ALERTNESS));
-        assertEquals(27, res(game, "b", Resource.ALERTNESS));
+        assertEquals(26, res(game, "b", Resource.ALERTNESS)); // SB-21z (D162): −4 A, was −3
     }
 
     @Test

@@ -41,7 +41,7 @@ class StarterRedesignTest {
             new Pair("starter-mara", "base.mara.Slalom", "base.mara.Sgommata", 25),
             new Pair("starter-tossico", "junkie.MethDrivenRage", "junkie.Cough", 20),
             new Pair("starter-pino", "base.pino.OffroIo", "base.pino.GoingBerserk", 10 + 7), // D156: base e L spesa
-            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 18));
+            new Pair("starter-gigi", "base.gigi.ColpoDiChiaveInglese", "base.gigi.ChiaveDaTredici", 20)); // SB-21z (D162): was 18
     // D82 (proposta 1.4): Impatto 30, Tossicone 18, Estasi 18 + L 7, Chiave 22; Preparo infligge anche 4 CUT a un avversario.
     // D90 (correzione 1.5): Impatto 34, Chiave 18. D139 (SB-20b): Impatto 35.
 
@@ -314,7 +314,7 @@ class StarterRedesignTest {
             Player a = player("starter-mara", "a", List.of(defense), List.of(draft.card(NORMAL)));
             Player b = foe(); Game g = game(a, b);
             turn(g, move(g, a, defense, "SELF"), waitMove(g, b));
-            assertEquals(binding.contains("Tartaruga") ? 503 : 500, res(a, Resource.HEALTH));
+            assertEquals(binding.contains("Tartaruga") ? 502 : 500, res(a, Resource.HEALTH), "SB-21z (D162): Tartaruga +2 H, was +3");
             assertEquals(binding.contains("Tartaruga") ? 35 : binding.contains("Cofano") ? 45 : 40, res(a, Resource.ALERTNESS), "D82: Cofano +5 A");
             assertEquals(40, res(a, Resource.VIOLENCE), "Cofano rimborsa il costo, non genera 5 V nette");
             assertTrue(a.getCharacter().getStatuses().isEmpty(), "la parata dura solo il turno corrente");
@@ -330,7 +330,7 @@ class StarterRedesignTest {
     @Test
     void theThreeDefensesStillParryTheirTypesBeforeExpiring() {
         String[] bindings = {"base.com.TartarugaSulMarciapiede", "base.mara.TraDueParaurti", "base.gigi.SottoIlCofano"};
-        int[] damage = {2, 5, 5}; // D139: 5 (×0,5) meno cura 3; HIT ×0,5 (era ×0,4); HIT ×0,5.
+        int[] damage = {3, 5, 5}; // D139: 5 (×0,5) meno cura 2 (SB-21z, D162: was 3); HIT ×0,5 (era ×0,4); HIT ×0,5.
         for (int i = 0; i < bindings.length; i++) {
             Card defense = draft.card(bindings[i]), attack = probe("Colpo", 10, 0);
             Player a = player("starter-mara", "a", List.of(defense), List.of(draft.card(NORMAL)));
@@ -349,7 +349,7 @@ class StarterRedesignTest {
         a.getCharacter().getResources().put(Resource.HEALTH, 2);
         Player b = player("starter-tossico", "b", List.of(lethal), List.of()); Game g = game(a, b);
         turn(g, move(g, a, defense, "SELF"), move(g, b, lethal, "a"));
-        assertFalse(resolved(g, "a").isVoid()); assertEquals(3, res(a, Resource.HEALTH));
+        assertFalse(resolved(g, "a").isVoid()); assertEquals(2, res(a, Resource.HEALTH), "SB-21z (D162): cura 2, was 3");
         assertTrue(g.getWinner().isEmpty(), "D48: la cura salva, il caricamento no");
     }
 
@@ -362,9 +362,10 @@ class StarterRedesignTest {
             BoundCap.Result previous = alcoholBound(withAlcoholGain(10));
             BoundCap.Result six = alcoholBound(withAlcoholGain(6));
             System.out.println("SB-16d bound D50: +10=" + previous.max() + ", +6=" + six.max() + ", +5=" + corrected.max());
-            assertFalse(corrected.violates(), corrected.reasons(BoundCap.Params.DEFAULT));
-            assertEquals(3.75, corrected.max(), 1e-9);
-            assertTrue(previous.overCap); assertEquals(8.5, previous.max(), 1e-9);
+            // SB-21z (D159/D162): the bound now also parries (×0,75 this turn); the D36 cap is only reported, the criterion is +10 points.
+            assertEquals(6.75, corrected.max(), 1e-9);
+            // SB-21z (D162): the historical probes now carry the parry too, so only their side of the cap is kept (was 8.5 for +10).
+            assertTrue(previous.overCap);
             assertTrue(six.overCap, "+6 L supera il tetto 4 con la corazza");
             assertEquals(4, BoundCap.Params.DEFAULT.limit());
         } finally {

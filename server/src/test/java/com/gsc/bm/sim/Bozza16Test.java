@@ -68,6 +68,23 @@ class Bozza16Test {
         assertFalse(SetBaseArms.carriesArmB(resource(SetBaseArms.FROZEN_15)));
     }
 
+    /** SB-21z (D161/D162): the cards the z2 candidate rewrote; their values are checked by SetBaseDraftTest and the reference draft. */
+    static final Set<String> SB21Z = Set.of(
+            "bruiser.character.LittleRage", "bruiser.character.LittleSmack", "base.spazienzio.bound.TestaAlMuro",
+            "base.mara.bound.PassoStretto", "base.mara.bound.CambioMarcia", "base.mara.bound.ColpoDiStriscio",
+            "base.mara.CinghiataDiTraverso", "base.mara.SorpassoInCurva", "bruiser.SeagullFly", "base.com.MattoneDelCantiere",
+            "base.com.TartarugaSulMarciapiede", "base.com.SputoDaPosacenere", "com.items.CocktailOnTheGround",
+            "base.items.PaninoDelKebab", "junkie.character.PatheticBlade", "base.tossico.bound.RaschiareIlFondo",
+            "junkie.character.RottenSmile", "junkie.LethalHeroinDose", "junkie.ToxicBloodDrain", "base.com.RincorsaDalMarciapiede",
+            "base.items.PasticcaTrovataSulBancone", "base.pino.bound.CinqueMinutiEVado", "base.pino.bound.SpallataAlBancone",
+            "base.pino.bound.Coccio", "base.pino.UltimoGiro", "base.pino.RuttoADistanzaSociale",
+            "base.gigi.bound.UnaStrettaEPassa", "base.gigi.bound.ColpoDiCacciavite", "base.gigi.bound.Lima",
+            "base.gigi.ChiaveDaTredici", "base.gigi.LavoroFattoBene", "base.cesira.bound.Battutina",
+            "base.cesira.bound.FareIlVago", "bruiser.StunningBlow", "base.com.AcquaInFaccia", "base.rocco.PrimaIo",
+            "base.rocco.bound.Colpetto", "base.rocco.bound.AlzoLaVoce", "base.rocco.NeHoPreseDiPeggio",
+            "base.rocco.NoccheSbucciate", "base.rocco.Incassare", "base.rocco.Capocciata", "base.com.SecondoFiato",
+            "base.items.ContoDelTavoloSei");
+
     @Test
     void the16ChangesExactlyWhatD97Approved() throws Exception {
         // SB-17 (D106, D107): Sergio, his cards and prova-sergio are stripped; the rest is the 1.6b as approved.
@@ -79,17 +96,18 @@ class Bozza16Test {
         rules.put("searchShuffle", true);
         assertEquals(rules, now.path("rules"));
         for (String key : List.of("format", "set")) assertEquals(old.path(key), now.path(key), key);
-        // Characters: D97 adjusted Piera's health. D149 adjusts Piera, Mara and Celestina.
+        // Characters: D97 adjusted Piera's health. D149 adjusts Piera, Mara and Celestina. SB-21z (D162): the z2 values.
         for (JsonNode c : now.path("characters")) {
             JsonNode before = null;
             for (JsonNode o : old.path("characters")) if (o.path("id").equals(c.path("id"))) before = o;
             ObjectNode expected = before.deepCopy();
             ObjectNode resources = (ObjectNode) expected.get("resources");
             String id = c.path("id").asText();
-            if (id.equals("base.character.Pino")) resources.put("HEALTH", 78).put("ALCOHOL", 14);
-            if (id.equals("base.character.Mara")) resources.put("HEALTH", 70);
-            if (id.equals("bruiser.character.BigBadBruiser")) resources.put("HEALTH", 78);
-            if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 66);
+            if (id.equals("base.character.Pino")) resources.put("HEALTH", 80).put("ALCOHOL", 15);
+            if (id.equals("base.character.Mara")) resources.put("HEALTH", 65).put("ALERTNESS", 45);
+            if (id.equals("base.character.Gigi")) resources.put("HEALTH", 75);
+            if (id.equals("bruiser.character.BigBadBruiser")) resources.put("HEALTH", 70);
+            if (id.equals("junkie.character.ToxicJunkie")) resources.put("HEALTH", 65).put("TOXICITY", 20);
             assertEquals(expected, c, c.path("id").asText());
         }
         // D152 adds GEN-24 and renames the existing PIN-AR2 binding.
@@ -99,6 +117,7 @@ class Bozza16Test {
             JsonNode before = card(old, b);
             if (before == null) { seen.add(b); continue; }
             // D142: i tre campi stampati ora hanno come riferimento il generatore, controllato da controlla-testi.py.
+            if (SB21Z.contains(b)) { assertNotEquals(before, c, b); continue; } // SB-21z (D162)
             if (!CHANGED.contains(b)) {
                 ObjectNode expected = (ObjectNode) withoutPrintedText(before);
                 // D149 and SB-21f: exact changes to the draft cards, with the rest of each card still checked.
@@ -165,8 +184,8 @@ class Bozza16Test {
             assertTrue(PrintedEffects.hasAhead(draft.card(b)), b);
         for (String b : List.of("com.last.Struggle", "junkie.LethalHeroinDose", "base.pino.UltimoGiro"))
             assertTrue(PrintedEffects.hasPerPlay(draft.card(b)), b);
-        Map<String, int[]> perPlay = Map.of("com.last.Struggle", new int[]{2, 5}, "junkie.LethalHeroinDose", new int[]{1, 5},
-                "base.pino.UltimoGiro", new int[]{1, 4});
+        Map<String, int[]> perPlay = Map.of("com.last.Struggle", new int[]{2, 5}, "junkie.LethalHeroinDose", new int[]{0, 5},
+                "base.pino.UltimoGiro", new int[]{2, 4}); // SB-21z (D162): niente rincaro a se' per Celestina, 2 a se' per Piera
         perPlay.forEach((b, n) -> {
             Card c = draft.card(b);
             List<PrintedEffects.Step> damage = new ArrayList<>();

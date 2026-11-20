@@ -218,8 +218,8 @@ class Sb17CardsTest {
 
     @Test
     void theBaseDamageIgnoresAheadVariablePartsAndPerPlay() {
-        // Cinghiata di traverso: 18 + half the author's A, ahead +5 → base 18. Struggle: 10 + 5 per play, 5 + 2 to self → base 10.
-        assertEquals(Map.of(Damage.DamageType.CUT, 18), base("base.mara.CinghiataDiTraverso"));
+        // Cinghiata di traverso: 20 + half the author's A, ahead +5 → base 20 (SB-21z, D162: was 18). Struggle: 10 + 5 per play, 5 + 2 to self → base 10.
+        assertEquals(Map.of(Damage.DamageType.CUT, 20), base("base.mara.CinghiataDiTraverso"));
         assertEquals(Map.of(Damage.DamageType.HIT, 10), base("com.last.Struggle"));
         assertEquals(Map.of(Damage.DamageType.HIT, 8), base("base.cesira.ContoSalato"), "the part on the token is not base");
         assertEquals(Map.of(Damage.DamageType.HIT, 5), base("base.cesira.Malelingue"));
@@ -236,8 +236,8 @@ class Sb17CardsTest {
         Card cinghiata = draft.card("base.mara.CinghiataDiTraverso");
         Player b = player("b", 40, List.of(cinghiata), fillers(10));
         Game game = game(sergio("base.cesira.Ricatto"), b);
-        assertArrayEquals(new int[]{0, 9}, turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", cinghiata.getName(), "s")),
-                "18 CUT of base, half reflected; the A of b and the ahead bonus do not count");
+        assertArrayEquals(new int[]{0, 10}, turn(game, move(game, "s", "Ricatto", "b"), move(game, "b", cinghiata.getName(), "s")),
+                "20 CUT of base (SB-21z, D162), half reflected; the A of b and the ahead bonus do not count");
     }
 
     @Test
@@ -567,9 +567,9 @@ class Sb17CardsTest {
         assertEquals(Set.of(Card.CardTarget.SELF), card.getCanTarget());
         assertTrue(card.getCost().isEmpty());
         List<PrintedEffects.Step> steps = ((PrintedEffects.Source) card).printedEffects().getSteps();
-        assertEquals(2, steps.stream().filter(st -> st.getKind() == PrintedEffects.Kind.STATUS).count());
+        assertEquals(3, steps.stream().filter(st -> st.getKind() == PrintedEffects.Kind.STATUS).count(), "SB-21z (D162): HIT, CUT and POISON");
         assertTrue(steps.stream().filter(st -> st.getKind() == PrintedEffects.Kind.STATUS)
-                .allMatch(st -> Math.abs(st.getFactor() - 0.75) < 1e-6), "HIT and CUT ×0,75");
+                .allMatch(st -> Math.abs(st.getFactor() - 0.75) < 1e-6), "HIT, CUT and POISON ×0,75");
         assertTrue(steps.stream().noneMatch(st -> st.getKind() == PrintedEffects.Kind.GAIN), "one function only (lesson 2 of SB-4)");
         assertEquals(List.of("base.cesira.bound.Battutina", VAGO), draft.boundOf(Sb17.DECK));
     }

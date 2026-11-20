@@ -204,9 +204,9 @@ class Sb19CardsTest {
     }
 
     @Test
-    void secondoFiatoHeals12AndMakesHitAndCutTaken125ForTwoTurns() throws Exception {
+    void secondoFiatoHeals10AndMakesHitAndCutTaken125ForTwoTurns() throws Exception {
         Game g = turn(res(Resource.HEALTH, 40), res(), Sb19.SECONDO_FIATO, true, x -> { });
-        assertEquals(52, res(g, "a", Resource.HEALTH), "+12 HEALTH, free (A2 value, SB-19 B1 reserve)");
+        assertEquals(50, res(g, "a", Resource.HEALTH), "+10 HEALTH, free (SB-21z, D162: was 12)");
         Card card = draft.card(Sb19.SECONDO_FIATO);
         Character self = character("x", res(Resource.HEALTH, 40), 2);
         ((AbstractCard) card).applyEffectOnSelf(self);

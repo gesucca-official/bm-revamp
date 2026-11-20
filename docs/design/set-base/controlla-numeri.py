@@ -26,13 +26,8 @@ ROOT = Path(__file__).resolve().parents[3]
 DEFAULT = ROOT / 'server/src/test/resources/set-base/bozza.json'
 
 # (slot, regola, campo, valore): tenuti per decisione del proprietario.
-TENUTI = {
-    ('PIN-AR3', 'R2', 'factor', 0.65): 'D97 (4): Bancone HIT ×0,65',
-    ('MAR-AR2', 'R2', 'factor', 0.8): 'D99 (1): Sgommata, anticipo ×0,8',
-    ('ROC-AR1', 'R3', 'HEALTH', 16): 'D127 (2): costo di Duccio 16 HEALTH',
-    ('ROC-AR4', 'R3', 'amount', 26): 'D125 (1), D127: colpo di Duccio 26 HIT',
-    ('ROC-AR6', 'R3', 'HEALTH', 33): 'D127 (2): costo di Duccio 33 HEALTH',
-}
+# SB-21z (D161/D162): i numeri belli valgono senza eccezioni; i tenuti di D97, D99, D125 e D127 sono usciti con z2.
+TENUTI = {}
 
 NON_IMPORTI = {'priority', 'turns', 'divide', 'perPlay', 'perPlaySelf', 'perItem', 'perAlcohol', 'factor', 'percent',
                'healthAtLeast'}  # SB-21z: soglia «vivo» di Mi rialzo, non stampata

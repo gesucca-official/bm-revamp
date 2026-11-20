@@ -36,9 +36,10 @@ class Sb18CardsTest {
     /** The calibrated costs (B2: ×1,85 of the V3, then ×1,95 with the reserve R1 of the final round), in the order of the proposal. */
     static final Map<String, Integer> COSTS = new LinkedHashMap<>();
     static {
-        COSTS.put(Sb18.NOCCHE, 16);
+        // SB-21z (D162): Nocche 15 (was 16), Capocciata 30 (was 28).
+        COSTS.put(Sb18.NOCCHE, 15);
         COSTS.put(Sb18.E_ALLORA, 10);
-        COSTS.put(Sb18.CAPOCCIATA, 28);
+        COSTS.put(Sb18.CAPOCCIATA, 30);
         COSTS.put(Sb18.TESTA_DURA, 35); // D158
     }
     private static Draft draft;
@@ -120,7 +121,7 @@ class Sb18CardsTest {
         assertEquals(115, resources.get("HEALTH"), "D124 (1), D126 (1); reserve R2 of the B2 round");
         assertEquals(15, resources.get("ALERTNESS"));
         assertEquals("base.rocco.PrimaIo", draft.characterBasic(Sb18.DUCCIO));
-        int[] hits = {18, 8, 26, 30};
+        int[] hits = {20, 8, 25, 30}; // SB-21z (D162): was {18, 8, 26, 30}
         int i = 0;
         for (Map.Entry<String, Integer> e : COSTS.entrySet()) {
             Card card = draft.card(e.getKey());
@@ -156,15 +157,14 @@ class Sb18CardsTest {
     }
 
     @Test
-    void duccioBoundsStayUnderTheD36Cap() throws Exception {
+    void duccioBoundsAreReportedAgainstTheD36Cap() throws Exception {
         int seen = 0;
         for (BoundCap.Result r : BoundCap.run(draft, BoundCap.Params.DEFAULT)) {
             if (!r.character.equals(Sb18.DUCCIO)) continue;
-            assertFalse(r.violates(), r.bound + ": " + r.reasons(BoundCap.Params.DEFAULT));
-            assertTrue(r.max() <= BoundCap.Params.DEFAULT.limit() + 1e-9, r.bound + ": " + r.max());
+            // SB-21z (D159/D162): the D36 cap no longer binds the bounds, only reported; the criterion is the +10 points measured in SB-21z.
             System.out.println("D36 cap, " + r.bound + ": max " + r.max() + " of " + BoundCap.Params.DEFAULT.limit());
             seen++;
         }
-        assertEquals(3, seen, "Colpetto, Gomitata, Alzo la voce");
+        assertEquals(3, seen, "Colpetto, Mi rialzo, Alzo la voce");
     }
 }
