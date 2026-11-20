@@ -4,12 +4,12 @@ Scritto il 2 novembre 2026 col regolamento 1.10, aggiornato all'8 novembre 2026 
 **Solo piano:** questo documento, come ogni roadmap (R00), non introduce regole attive; le regole cambiano solo nei blocchi che
 aggiornano il regolamento. La partita viva resta quella del regolamento vigente: nulla della bozza la raggiunge prima di SB-28.
 
-> **Ripartenza** (aggiornata il 20 novembre 2026, dopo D155). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
+> **Ripartenza** (aggiornata il 20 novembre 2026, dopo D156). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
-> - **In corso:** [SB-22](#sb-22--prova-umana-con-mazzi-costruiti), prova umana del proprietario con la bozza di SB-21e ([D155](#decisioni-del-proprietario)), Q12 compresa. A ogni cambio di `bozza.json` valgono i controlli D143.
-> - **Prossimo:** giudizio del proprietario su SB-22 (finalisti del giro 3b, starter, qualche FFA), poi le correzioni che ne escono. Per le prove al tavolo, `tools/print-cards/generate.py --bozza` stampa bozza e starter ([rapporto](reports/set-base/stampa-bozza-report.md)). B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
-> - **Decisioni da leggere:** D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D155).
+> - **In corso:** SB-21f ([D156](#decisioni-del-proprietario)): Giro secco a 10 + L ed Estasi a 40 HIT, poi controllo degli starter, ricerca completa dei costruiti e bilanciamento, 12.000 s. [SB-22](#sb-22--prova-umana-con-mazzi-costruiti) è aperto e riprende con la sua bozza (Q12 compresa). A ogni cambio di `bozza.json` valgono i controlli D143.
+> - **Prossimo:** dopo SB-21f, giudizio del proprietario su SB-22 (finalisti del giro 3b, starter, qualche FFA), poi le correzioni che ne escono. Per le prove al tavolo, `tools/print-cards/generate.py --bozza` stampa bozza e starter ([rapporto](reports/set-base/stampa-bozza-report.md)). B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
+> - **Decisioni da leggere:** D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D156).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
 
@@ -639,6 +639,8 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 **SB-21t (19 novembre 2026), chiuso.** Nessun tetto adottato: a 35 e 30 HIT Piera costruita resta all'87% contro i costruiti e la matrice degli starter esce dal controllo di D149. Per SB-22 valgono i sette finalisti del giro 3b; niente altri giri prima della prova umana ([D151](#decisioni-del-proprietario)).
 
 **SB-21e ([D152–D154](#decisioni-del-proprietario)), STOP per il proprietario.** Estasi da Coca Etilene torna come GEN-24, rara, 10 T + 10 L per 30 HIT. Il set arriva a 124 carte e l'isolamento con Celestina perde 12,17 punti di media. Giro secco, nome di lavoro di PIN-AR2, resta gratuito e fa 10 HIT più il doppio della L spesa, con 0 HIT a sé. Con i finalisti del giro 3b Piera costruita vince tutti e sei gli scontri con ogni candidato misurato. [Rapporto e domande](reports/set-base/sb-21e-report.md). **Rivisto dalla regia il 20 novembre 2026 e chiuso con [D155](#decisioni-del-proprietario):** bozza adottata così com'è. Giro secco è in tutte e sette le liste costruite, quindi indebolirlo toglie forza anche agli avversari; il dominio di Piera viene dal suo motore a L. Si va a SB-22.
+
+**SB-21f ([D156](#decisioni-del-proprietario)), dopo la prima partita di SB-22 al client.** Giro secco a 10 + L ed Estasi a 40 HIT, valori fissati dal proprietario. Poi, in 12.000 s: controllo degli starter di D149 (4), isolamenti, ricerca completa dei sette costruiti, compensi di Piera sul suo motore a L per D150 (3) e, se uno starter esce, sulle leve del personaggio interessato.
 
 **Completamento verificabile.** Criteri di arrivo raggiunti o scostamenti residui dichiarati e sottoposti al proprietario.
 
