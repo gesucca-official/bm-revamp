@@ -9,9 +9,9 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 >
 > - **In vigore:** confini di [DC1](#decisioni): niente `client-web`, `server`, regolamento e documenti di set fino a C5 e SB-28. Le storie
 >   restano nel [serbatoio](design/carriere/README.md), senza valore normativo ([DC4](#decisioni)). Il [prototipo](design/carriere/prototipo.md)
->   (CA-0a) è il riferimento del formato finché CA-0b non è deciso.
-> - **In attesa:** decisione sulla proposta di [CA-0b](reports/ca/ca-0b.md#domande-per-il-proprietario), domande 1–4.
-> - **Prossimo:** [CA-0b](#ca-0b--formato-delle-carriere-01), proposta del formato 0.1; poi [CA-0c](#ca-0c--strumento-delle-carriere).
+>   (CA-0a) resta il posto dove provare le storie; il formato è il [formato delle carriere 0.1](carriere/formato.md) (CA-0b).
+> - **In attesa:** nulla.
+> - **Prossimo:** [CA-0c](#ca-0c--strumento-delle-carriere), lo strumento delle carriere sul [formato 0.1](carriere/formato.md).
 > - **Fuori dal piano, nel serbatoio:** le due immagini del secondo giro delle bocche, quando torna lo strumento di generazione
 >   ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
 > - **Decisioni da leggere:** DC1–DC4.
@@ -42,7 +42,7 @@ contro computer, progressi e achievement salvati lato server. Il tutorial vero �
 | Blocco | Cosa | Quando | Passo | Stato |
 |---|---|---|---|---|
 | CA-0a | Prototipo delle carriere | — | a fasi | **Chiuso** il 12 novembre 2026 ([chiusura](design/carriere/prototipo.md#chiusura)) |
-| [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Proposta** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md)): in attesa della decisione |
+| [CA-0b](#ca-0b--formato-delle-carriere-01) | Formato delle carriere 0.1, documento normativo | subito | con proposta | **Chiuso** il 21 novembre 2026 ([rapporto](reports/ca/ca-0b.md), [formato 0.1](carriere/formato.md)) |
 | [CA-0c](#ca-0c--strumento-delle-carriere) | Strumento: convertitore, validazione, controllo del grafo | dopo CA-0b | diretto | — |
 | CA-0d | Pacchetto JSON con versione e impronte, controllato come `check-rules.py` controlla le carte | dopo CA-0c | diretto | — |
 | CA-0e | Modificatori di incontro nel regolamento, con la precedenza di R00 | dopo SB-28 | con proposta | — |
@@ -74,8 +74,8 @@ piano, la sezione «Come si scrivono le scene» del serbatoio (solo il rimando).
 **Fatto quando:** ogni costrutto che il convertitore accetta sulle tre storie è descritto, con un esempio preso da una storia; nessuna
 regola descritta manca al convertitore senza essere segnata come domanda; proposta, STOP, decisione del proprietario, poi la versione 0.1.
 
-**Stato:** proposta scritta il 21 novembre 2026 in [`docs/carriere/formato.md`](carriere/formato.md), marcata «Proposta, non in
-vigore»; [rapporto](reports/ca/ca-0b.md) con le domande 1–4. STOP per la decisione del proprietario.
+**Stato:** chiuso il 21 novembre 2026. [`docs/carriere/formato.md`](carriere/formato.md) è in vigore nella versione 0.1, con la
+[decisione del proprietario](reports/ca/ca-0b.md#decisione-del-proprietario) sulle domande 1–4.
 
 ### CA-0c — Strumento delle carriere
 
@@ -86,7 +86,9 @@ storie del serbatoio. Il prototipo usa lo strumento al posto della sua copia ([D
 **Perimetro:** `tools/carriere/**` (nuovo), `prototipi/carriere/**`, una riga nuova in [aree-protette.md](aree-protette.md) («se cambia
 una storia, il cast, il formato o lo strumento → il controllo delle carriere»), il comando in `CONTRIBUTING.md`, rapporto e stato di
 questo piano. **Protetto:** le storie del serbatoio; i numeri del controllo sulle tre storie (nodi, stati, finali, avvisi) uguali a quelli
-del prototipo prima dell'estrazione; le prove del prototipo verdi. **Fatto quando:** il comando dello strumento dà gli stessi numeri del
+del prototipo prima dell'estrazione; le prove del prototipo verdi. **Dal formato 0.1:** lo strumento rifiuta ciò che il formato non ammette, quindi la storia di prova va adattata alla 0.1 (niente «giri
+n»); un `**Ritento.**` che dopo una `[Sconfitta: …]` non si vede mai è un avviso candidato ([discrepanza 4 di CA-0b](reports/ca/ca-0b.md)).
+**Fatto quando:** il comando dello strumento dà gli stessi numeri del
 prototipo, il prototipo li ottiene passando dallo strumento, e la tabella delle aree ha la riga nuova.
 
 ## Decisioni

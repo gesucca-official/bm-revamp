@@ -1,8 +1,5 @@
 # Botte Micidiali — Formato delle carriere
 
-> **Proposta, non in vigore.** Proposta di CA-0b del [piano CA-0](../ca-plan.md#ca-0b--formato-delle-carriere-01), in attesa della
-> decisione del proprietario. Fino ad allora il riferimento del formato resta il [prototipo](../design/carriere/prototipo.md) (CA-0a).
-
 Versione **0.1 — 21 novembre 2026**. Documento normativo del formato in cui si scrive una carriera single-player: la storia in markdown
 di regia, il cast che condivide con le altre carriere e ciò che il controllo garantisce su entrambi.
 
@@ -68,7 +65,8 @@ quelle del personaggio.
   > `[Stacchi: Mara neutra, Spazienzio quasi calmo] [Interrotta]`
 - **Narrazione:** un paragrafo in corsivo, `*…*`, letto nella finestra senza nome né ritratto.
   > `*Il ghiaccio norvegese si scioglie piano. Da qualche parte, lontano, qualcuno sta urlando «UCCIDIAMOTI».*`
-- **Messaggio sul telefono:** un paragrafo `*«…»*`. `[Telefono: Nome]` subito prima dice chi lo manda.
+- **Messaggio sul telefono:** un paragrafo `*«…»*`, sempre e solo un messaggio sul telefono del giocatore. `[Telefono: Nome]` subito
+  prima dice chi lo manda. Una scritta in scena (un cartello, un'insegna) è narrazione.
   > `[Telefono: combriccola]` e poi `*«Sei ancora tra i vivi? Noi siamo tutti al Dimmi Di Sì.»*`
 
 Battute, narrazioni e messaggi possono avere una condizione davanti: si leggono solo se vale (F8).
@@ -86,8 +84,7 @@ Comandi fra parentesi quadre, anche più d'uno sulla stessa riga, che cambiano l
   suo nome compare a parole intere nella descrizione. Dopo «Regia:» la descrizione è una nota dell'autore.
   > `[Sfondo: S1 insegna-spenta, di notte. Regia: il marciapiede davanti al Serraglio. …]`
 
-  Anche `Sfondo: Sn …` dentro una nota di regia cambia lo sfondo in quel punto:
-  > `[Regia: Sfondo: S1 di sera. La stessa strada, una settimana dopo. …]`
+  Lo sfondo cambia solo con `[Sfondo: …]`, anche a metà scena; scritto dentro una nota di regia non cambia nulla.
 - **`[Entra: …]`, `[Esce: …]`, `[Sprite: …]`**: uno sprite del cast, eventualmente seguito dalla posa; entra, esce o cambia posa.
   > `[Suono: frenata] [Entra: bici-mara]` · `[Sprite: grappino ringhia]` · `[Esce: combriccola in fuga]`
 - **`[Scossa]`** scuote la scena; **`[Sfarfallio: variante]`** fa sfarfallare lo sfondo verso una sua variante.
@@ -189,7 +186,7 @@ Senza linguaggio di scripting. Atomi:
 | `esplorato N` | il nodo N è stato visto in un giro qualsiasi | account |
 | `finale F` | il finale F è stato visto in un giro qualsiasi | account |
 
-`non` nega un atomo; `e` li unisce. I nodi si citano per etichetta o per titolo, i finali per nome. Un segno citato in una condizione
+`non` nega un atomo; `e` li unisce. Non ci sono altri atomi né altri operatori. I nodi si citano per etichetta o per titolo, i finali per nome. Un segno citato in una condizione
 dev'essere assegnato da qualche parte, e con quel valore.
 
 > `[Se non segno pista = beppe e non segno ii3 = beppe]` · `[Quando: vinto II2a e visto III4]` · `- Indizio, se esplorato Scena 4: …`
@@ -275,7 +272,11 @@ raggiunto solo perdendo che non è segreto (salvo una scena finale); una tasca c
 
 ## Revisioni
 
-- **0.1 — 21 novembre 2026, CA-0b:** prima versione, proposta. Descrive i costrutti che il convertitore del prototipo CA-0a accetta sul
+- **0.1 — 21 novembre 2026, CA-0b:** prima versione. Descrive i costrutti che il convertitore del prototipo CA-0a accetta sul
   tutorial e sulla campagna principale con i dialoghi veri, e le garanzie del suo controllo del grafo. Ciò che il prototipo accetta ma
-  nessuna storia vera usa resta fuori, in attesa della decisione del proprietario (rapporto di CA-0b). Motivazione: una carriera
-  diventa un pacchetto con una versione che uno strumento valida e il gioco legge (piano CA-0, DC4).
+  nessuna storia vera usa resta fuori. Motivazione: una carriera diventa un pacchetto con una versione che uno strumento valida e il
+  gioco legge (piano CA-0, DC4). Decisione del proprietario sulla proposta, 21 novembre 2026 (rapporto di CA-0b): la condizione
+  «giri n», usata solo dalla storia di prova, resta fuori ed entra quando la usa una storia vera; `→ Fine: fallita`, «(fuori campo)»,
+  le condizioni `perso` e `achievement`, l'operatore «o» e `→ Torna a` senza «scelta» restano fuori e lo strumento li rifiuta; `*«…»*` è
+  sempre un messaggio sul telefono, e il cartello di I1 della principale è diventato narrazione; lo sfondo cambia solo con
+  `[Sfondo: …]`, e le tre righe che lo scrivevano dentro una nota di regia (tutorial Scena 1, principale III4 e F3) sono corrette.

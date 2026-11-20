@@ -58,7 +58,9 @@ lasciano sempre.
 **Mara** (contenta): Ah, allora non sei tu, Sioux della malora che non sei altro. Ho capito chi ha ordinato questo kebab. Vieni, andiamo a
 portarglielo.
 
-[Regia: Mara trascina dentro il giocatore per la manica. Sfondo: S2, interno del bar. Spazienzio rovescia un tavolino; lo schermo trema.]
+[Regia: Mara trascina dentro il giocatore per la manica.]
+
+[Sfondo: S2, interno del bar. Regia: Spazienzio rovescia un tavolino; lo schermo trema.]
 
 [Scossa]
 

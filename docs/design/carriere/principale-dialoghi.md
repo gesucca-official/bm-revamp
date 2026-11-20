@@ -41,7 +41,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Sfondo: S1 di sera. Regia: la serranda del Serraglio è abbassata; sopra, un cartello stampato bene, troppo bene per quella strada.]
 
-*«CHIUSO PER CESSIONE ATTIVITÀ. NUOVA GESTIONE: DIMMI DI SÌ DISCO PUB».*
+*CHIUSO PER CESSIONE ATTIVITÀ. NUOVA GESTIONE: DIMMI DI SÌ DISCO PUB.*
 
 [Suono: frenata] [Entra: bici-mara]
 
@@ -998,7 +998,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 **Mara** (illuminata): In Svizzera? Lo sapevo, lo sapevo! È un agente svizzero!
 
-[Regia: Sfondo: S2 di giorno. Al centro un tavolino con due sedie, una di fronte all'altra. Il padrone si siede da una parte e posa l'assegno.]
+[Sfondo: S2 di giorno. Regia: Al centro un tavolino con due sedie, una di fronte all'altra. Il padrone si siede da una parte e posa l'assegno.]
 
 [Se segno via-atto-3 = grappino] *Prima che Sergio si sieda, {giocatore} posa sul tavolo l'altra metà del bilancio, quella con la firma. Senza dire niente.*
 
@@ -1187,7 +1187,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 **Sergio** (annoiato): Patetici. Avete dimostrato quanto valete: niente.
 
-[Regia: Sfondo: S1 di sera. La stessa strada, una settimana dopo. Al posto dell'insegna del Serraglio, il neon «DIMMI DI SÌ DISCO PUB»; un cordone di velluto, una fila di fighetti in ombra. Gli habitué sono seduti fuori, sul marciapiede, con le birre del supermercato.]
+[Sfondo: S1 di sera. Regia: La stessa strada, una settimana dopo. Al posto dell'insegna del Serraglio, il neon «DIMMI DI SÌ DISCO PUB»; un cordone di velluto, una fila di fighetti in ombra. Gli habitué sono seduti fuori, sul marciapiede, con le birre del supermercato.]
 
 **Duccio** (fiero): La fila è a destra! Ovviamente a destra!
 

@@ -3,8 +3,9 @@
 21 novembre 2026, esecutore avviato dalla regia delle carriere. Blocco [CA-0b](../../ca-plan.md#ca-0b--formato-delle-carriere-01),
 passo con proposta.
 
-**Esito:** proposta scritta in [`docs/carriere/formato.md`](../../carriere/formato.md), marcata «Proposta, non in vigore». **STOP** per la
-decisione del proprietario sulle domande 1–4. Storie, prototipo, regolamento, set, client e server non sono toccati.
+**Esito:** **chiuso** il 21 novembre 2026. Il [formato delle carriere 0.1](../../carriere/formato.md) è in vigore, con la
+[decisione del proprietario](#decisione-del-proprietario) sulle domande 1–4 applicata. Regolamento, set, client e server non sono
+toccati; delle storie cambiano solo le quattro righe decise, del prototipo un atteso di prova (sotto).
 
 ## In breve
 
@@ -69,8 +70,10 @@ Il controllo sulle tre storie, rifatto con `run.ps1 -Task Check`: tutorial 6/6 n
    propri (`[Sfondo]`, `[Entra]`, `[Esce]`, `[Sprite]`, `[Suono]`, `[Scossa]`, `[Sfarfallio]`) e la regia è solo una nota, salvo
    `Sfondo:` al suo interno. Scrive `[Se segno = …]` per ciò che è `[Se segno x = v]`. Prevede il «fuori campo», che nessuna storia
    usa, e la velocità del testo, che sta nel cast. Dopo la decisione il README rimanda al formato e queste righe non si ripetono più.
-2. **Principale, I1:** il cartello sulla serranda è scritto `*«CHIUSO PER CESSIONE ATTIVITÀ. …»*`, cioè come messaggio sul telefono senza
-   mittente. Il convertitore lo accetta e non avvisa: è la domanda 3.
+2. **Principale, I1:** il cartello sulla serranda era scritto `*«CHIUSO PER CESSIONE ATTIVITÀ. … DISCO PUB».*`, che si legge come un
+   messaggio sul telefono senza mittente (domanda 3). **Correzione:** il convertitore lo leggeva già come narrazione, perché il punto
+   finale sta fuori dalle virgolette basse e la forma del messaggio, `*«…»*`, non combacia; la domanda nasceva da questa ambiguità per chi
+   legge, non da un errore del convertitore. La correzione decisa la toglie.
 3. **Tutorial, epilogo del fallimento:** la scaletta dice che il tutorial «finisce e fallisce», ma il dato è un ritorno alla scelta
    (`→ Torna a: Scena 4, scelta`), come deciso dal proprietario il 10 novembre 2026. Nessuna storia ha quindi una `Fine: fallita`
    (domanda 2).
@@ -101,7 +104,29 @@ Il controllo sulle tre storie, rifatto con `run.ps1 -Task Check`: tutorial 6/6 n
 4. **Lo sfondo dentro una nota di regia** (`[Regia: Sfondo: S1 di sera. …]`, tre righe). **Proposta:** ammesso nella 0.1, come le storie
    lo scrivono. In alternativa il formato chiede sempre `[Sfondo: …]` e le tre righe si correggono con CA-1 e CA-2.
 
-## Dopo la decisione
+## Decisione del proprietario
 
-Si toglie «Proposta, non in vigore», si applicano le risposte con la loro voce nelle Revisioni, si mette il rimando nella sezione «Come
-si scrivono le scene» del README e si chiude la riga di CA-0b.
+21 novembre 2026, tramite la regia, scegliendo fra le opzioni proposte:
+
+1. **«giri n»:** «Fuori per ora». Resta fuori dalla 0.1; entra quando la usa una storia vera.
+2. **Costrutti mai usati:** «Fuori, rifiutati». Restano fuori; lo strumento di CA-0c li rifiuta con un messaggio che rimanda al formato.
+3. **Cartello di I1:** «Correggo ora la riga». La riga diventa narrazione, `*CHIUSO PER CESSIONE ATTIVITÀ. NUOVA GESTIONE: DIMMI DI SÌ
+   DISCO PUB.*`, con le parole del proprietario; la regola «`*«…»*` è sempre un messaggio sul telefono» resta.
+4. **Sfondo dentro una nota:** «Correggo ora le tre righe». Il formato chiede sempre `[Sfondo: …]`. Tutorial Scena 1: la nota si divide
+   in `[Regia: Mara trascina dentro il giocatore per la manica.]` e `[Sfondo: S2, interno del bar. Regia: Spazienzio rovescia un
+   tavolino; lo schermo trema.]`; principale III4 e F3: `[Regia: Sfondo: Sn …. …]` diventa `[Sfondo: Sn …. Regia: …]`. Il resto delle
+   note non cambia.
+
+**Applicazione.** Tolto «Proposta, non in vigore»; le risposte sono nella voce 0.1 delle Revisioni; F3 dice che un cartello è
+narrazione, F4 descrive solo `[Sfondo: …]`, F8 che non ci sono altri atomi né operatori. Rimando al formato nella sezione «Come si
+scrivono le scene» del README. Nel piano, riga di CA-0b chiusa, «Prossimo» su CA-0c e una riga nella sezione di CA-0c: la storia di
+prova va adattata alla 0.1 (senza «giri n»), e un ritento che dopo una `[Sconfitta: …]` non si vede mai è un avviso candidato
+(discrepanza 4).
+
+**Atteso cambiato, per questa decisione:** in `prototipi/carriere/tests/converti.test.ts` la riga dello sblocco `starter-mara` del
+tutorial passa da 79 a 81, perché la nota della Scena 1 ora occupa due paragrafi. Nessun altro atteso cambia. I numeri del controllo
+sono gli stessi (tutorial 12 stati, prova 15, principale 665, 0 errori e 0 avvisi del grafo, 255 avvisi di ripiego nella principale);
+le note di regia del tutorial passano da 16 a 17, per la stessa divisione. Lo sfondo di ogni scena toccata resta quello di prima.
+
+**Verifiche della chiusura:** `run.ps1 -Task Convert`, `-Task Check` e `-Task Test` (133 prove) verdi, nessun file tracciato cambiato dai
+comandi; `git diff --check` pulito; `python scripts/check-links.py` senza link rotti.

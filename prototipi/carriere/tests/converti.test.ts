@@ -43,7 +43,7 @@ test('il tutorial, con le integrazioni ora nel testo (P1), è un grafo valido', 
   assert.ok(p1.tipo === 'partita');
   assert.deepEqual([p1.id, p1.modo, p1.giocatore, p1.avversari, p1.ritento?.map(b => b.chi)],
     ['partita-1', 'duello', {personaggio: 'mara'}, [{personaggio: 'spazienzio'}], ['mara', 'spazienzio']]);
-  assert.deepEqual(s1.passi.at(-1), {tipo: 'sblocco', sblocco: 'starter-mara', riga: 79});
+  assert.deepEqual(s1.passi.at(-1), {tipo: 'sblocco', sblocco: 'starter-mara', riga: 81});
   const p3 = passi(s3, 'partita')[0];
   assert.ok(p3.tipo === 'partita' && p3.modo === 'ffa' && 'segno' in p3.giocatore && p3.giocatore.segno === 'tutorial_con');
   assert.ok(passi(s3, 'sfondo').some(p => p.tipo === 'sfondo' && p.variante === 'disordine'));

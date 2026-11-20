@@ -25,6 +25,9 @@ Aperto il 10 novembre 2026. Le storie sono del proprietario; le varianti propost
 
 ## Come si scrivono le scene
 
+**Il formato è normativo dal 21 novembre 2026:** [formato delle carriere](../../carriere/formato.md), versione 0.1 (CA-0b). Dove le
+righe qui sotto non combaciano, prevale il formato.
+
 Formato vicino ai dati che diventerà con CA-0, così non va riscritto:
 
 - `**Personaggio** (espressione): testo` per ogni battuta; espressioni da una lista breve per personaggio
