@@ -1,8 +1,9 @@
-// Mockup della principale (14 novembre 2026; aggiornato alla scaletta 0.3.7, la partita a catena di III5): catture della bacheca della
+// Mockup della principale (14 novembre 2026; aggiornato alla scaletta 0.3.7, la partita a catena di III5; dal 20 novembre 2026 sui
+// dialoghi veri, principale-dialoghi.md, con le catture p37d-*): catture della bacheca della
 // carriera «Il Serraglio chiude», giocata davvero dall'interfaccia, a 1366×768 e 390×844. La mappa di una carriera nuova; il tavolo
 // della catena di III5 a metà (due duelli vinti, si sceglie chi gioca) e al primo duello; la bacheca a giro finito. Un secondo giro
 // perde il primo duello della catena e deve finire in F3, «Disco pub» (prova di bordo, senza cattura). Le catture delle stesure di
-// prima (p-*.jpg sulla 0.2, p3-*.jpg sulla 0.3, p32-*.jpg sulla 0.3.2) sono nel repository come erano. Se un passo atteso non c'è,
+// prima (p-*.jpg sulla 0.2, p3-*.jpg sulla 0.3, p32-*.jpg sulla 0.3.2, p37-*.jpg sulla 0.3.7 segnaposto) sono nel repository come erano. Se un passo atteso non c'è,
 // esce con 1. Uso (dopo Build): node strumenti/catture-principale.mjs. Uscita in BM_OUT, o in %TEMP%m-carriere-principale.
 import {chromium} from '@playwright/test';
 import {spawn} from 'node:child_process';
@@ -48,7 +49,7 @@ async function giro(nome, viewport) {
     // I cartoncini degli sblocchi durano 3,2 s: si aspetta che spariscano, così non coprono il tavolo.
     await page.waitForFunction(() => !document.querySelector('[data-testid=avviso]'), null, {timeout: 8000});
     if (await tid('mappa').count()) await page.waitForFunction(() => !document.querySelector('[data-testid=viaggio], [data-cade], [data-penzola]'), null, {timeout: 8000});
-    await page.screenshot({path: path.join(out, `p37-${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
+    await page.screenshot({path: path.join(out, `p37d-${nome}-${n}.jpg`), type: 'jpeg', quality: 72});
   };
   const stato = id => tid(`nodo-${id}`).getAttribute('data-stato');
   const vintiInCatena = async () => page.locator('[data-testid^=catena-][data-stato=vinto]').count();
@@ -103,12 +104,13 @@ async function giro(nome, viewport) {
   await tid('apri-principale').click();
   await tid('mappa').waitFor();
   atteso(await stato('i1') === 'disponibile', 'I1 affrontabile all\'inizio');
+  atteso(await tid('nodo-f3').count() === 1, 'F3, la scena finale della catena persa, sulla bacheca nuova');
   for (const id of ['s1', 's2', 'i1s', 'ii2s', 'iii1s', 'iii3c']) atteso(!(await tid(`nodo-${id}`).count()), `${id} nascosto all'inizio`);
   await foto('01-mappa-intera', 1500);
 
   // Il primo giro: strada pulita fino a III5, dove la catena si fotografa a metà (Beppe e Mara hanno già battuto Sergio, si sceglie il
   // terzo) e di nuovo con il primo duello in corso; poi si vincono tutti e cinque, e dopo il torneo si passa da F2 e F1.
-  await gioca(['con Beppe, a comprarlo', 'con Mara'], {
+  await gioca(['con Beppe, a raccogliere', 'con Mara'], {
     ordine: ['beppe', 'mara', 'piera', 'celestina', 'spazienzio'],
     allaCatena: async () => {
       atteso(await tid('catena').count() === 1, 'il tavolo della catena');
@@ -127,10 +129,11 @@ async function giro(nome, viewport) {
 
   // Il secondo giro: si perde il primo duello della catena, e il giro finisce subito in F3, «Disco pub».
   await nuovoGiro();
-  await gioca(['con Beppe, a comprarlo', 'con Mara'], {perdiDuello: 0});
+  await gioca(['con Beppe, a raccogliere', 'con Mara'], {perdiDuello: 0});
   atteso((await tid('finale').textContent()).includes('Disco pub'), 'la prima sconfitta della catena porta a «Disco pub»');
   await allaBacheca();
   atteso(await stato('iii5') === 'fatto' && await stato('f1') !== 'fatto', 'III5 visto, ma F1 no: la catena persa non prosegue');
+  atteso(await stato('f3') === 'fatto', 'F3 giocata come scena');
 
   atteso(!errori.length, `nessun errore nella pagina (${errori.join(' | ')})`);
   await ctx.close();

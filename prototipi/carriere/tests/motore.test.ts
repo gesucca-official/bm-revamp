@@ -53,6 +53,10 @@ test('tutorial: un giro intero, con sconfitta, ritento, scelta muta, epilogo e r
   p.vinci().entra('scena-4').salta();
   assert.ok(p.v.tipo === 'scelta' && p.v.scelta.modo === 'messaggio');
   p.scegli(0).entra('epilogo-del-fallimento');
+  // L'epilogo approvato (commit 1040bdc): prima le battute della combriccola, poi l'achievement.
+  assert.ok(p.v.tipo === 'battuta' && p.v.battuta.nome === 'Un amico');
+  assert.ok(!p.s.account.achievement.includes('amici-del-dimmi-di-si'), "l'achievement arriva dopo le battute");
+  p.salta();
   assert.ok(p.s.account.achievement.includes('amici-del-dimmi-di-si'));
   assert.deepEqual(p.s.giro.prossimi, [{nodo: 'scena-4', da: 'scelta'}]);
   p.entra('scena-4');

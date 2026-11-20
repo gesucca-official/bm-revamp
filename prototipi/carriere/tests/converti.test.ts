@@ -35,7 +35,8 @@ test('il tutorial, con le integrazioni ora nel testo (P1), è un grafo valido', 
   const {carriera, problemi} = converti(tutorial, cast, 'tutorial');
   assert.deepEqual(problemi.filter(p => p.livello === 'errore'), []);
   assert.deepEqual(carriera.nodi.map(n => n.id), ['scena-0', 'scena-1', 'scena-2', 'scena-3', 'scena-4', 'epilogo-del-fallimento']);
-  assert.equal(carriera.nodi.flatMap(n => passi(n, 'battuta')).length, 44);
+  // 44 → 49: l'epilogo del fallimento ha ora le sue cinque battute della combriccola (stesura approvata dal proprietario, commit 1040bdc).
+  assert.equal(carriera.nodi.flatMap(n => passi(n, 'battuta')).length, 49);
   const [s0, s1, , s3, s4, epi] = carriera.nodi;
   assert.deepEqual(passi(s0, 'battuta')[0], {tipo: 'battuta', chi: 'combriccola', nome: 'Un amico', testo: '...ma siamo sicuri che il posto sia questo?', riga: 27});
   const p1 = passi(s1, 'partita')[0];

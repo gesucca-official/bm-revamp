@@ -252,7 +252,10 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   for (const n of c.nodi) {
     const e = entrate.get(n.id);
     if (n.id === c.inizio || !e) continue;
-    if (!e.has('altro') && !n.segreto) avvisi.add(`il nodo ${n.id} si raggiunge solo perdendo ma non è segreto`);
+    // Mockup 0.3.7: una scena finale (ha uscite, e sono tutte fini, come F3 «Disco pub» dopo la catena persa; un nodo che finisce con
+    // una scelta non ha uscite) sta fra i finali, sempre visibili come «piatti del giorno»: non è una sconfitta da nascondere.
+    const finale = usciteDi(n).length > 0 && usciteDi(n).every(u => !('nodo' in u.verso));
+    if (!e.has('altro') && !n.segreto && !finale) avvisi.add(`il nodo ${n.id} si raggiunge solo perdendo ma non è segreto`);
     if (n.tasca && e.has('altro')) avvisi.add(`la tasca ${n.id} si raggiunge anche senza perdere`);
   }
   for (const n of c.nodi) if (n.tasca && !entrate.get(n.id)?.has('sconfitta')) avvisi.add(`la tasca ${n.id} non si raggiunge perdendo`);

@@ -541,3 +541,175 @@ F2 → F1 e le uscite condizionate; l'offerta di S2; il rientro dalla porta e da
 | Il controllo non verifica che ci siano tutti in catena | 1: il controllo della catena |
 
 Otto su otto prese. Nessuna è sfuggita, quindi non ho dovuto rafforzare le prove.
+
+## Aggiornamento alla 0.3.7 con i dialoghi veri
+
+20 novembre 2026. Rapporto dell'esecutore. Il prototipo non legge più la storia segnaposto: la carriera «Il Serraglio chiude» si
+converte direttamente da [`principale-dialoghi.md`](principale-dialoghi.md), come il tutorial da `tutorial-dialoghi.md`. I testi del
+proprietario (`principale-dialoghi.md`, `principale.md`, `tutorial-dialoghi.md`) non sono stati toccati. Le sezioni qui sopra restano
+come erano.
+
+### In breve
+
+- **Convert e Check verdi sul testo vero:** 27 nodi su 27 raggiunti; i tre finali (nel controllo: Disco pub 52, Il Serraglio resta 36, è
+  di tutti 16 fini); S1 da III1 e S2 da III5; le quattro sconfitte segrete (I1s, II2s, III1s, III3c); gli starter di Celestina, Piera e
+  Beppe e il PvP su ogni percorso; la catena di III5 con cinque personaggi su ogni percorso. Controllo: 0 errori, 0 avvisi.
+- **La campagna si gioca da cima a fondo sulla bacheca** con le partite simulate, catena di III5 compresa: un giro che vince la catena e
+  passa da F2 e F1, un giro che perde il primo duello e finisce nella scena F3 «Disco pub», a 1366×768 e a 390×844.
+- **I numeri non cambiano** rispetto al mockup segnaposto 0.3.7: 136 percorsi al primo giro, da 11 a 13 nodi con partita (14 con S2),
+  da 11 a 17 partite contando i duelli (18 con S2), PvP sempre con la quarta partita.
+- **Lo scarto fra testo e formato è piccolo:** nessun errore di sintassi. Le differenze sono le espressioni e gli sfondi senza immagine
+  (ora ripiegano su quelli del cast, con un avviso), «Un signore» (ora alias di Sergio), F3 come scena raggiunta solo perdendo e il PvP
+  che arriva dopo qualche battuta. Tre domande per il proprietario, in fondo.
+- **Le due prove del tutorial** sono allineate all'epilogo del fallimento approvato (commit `1040bdc`, ribasato su origin/main come
+  `f78340d`): cambio di contenuto deliberato. 133 prove verdi.
+
+### Che cosa cambia
+
+- **La fonte:** in [`strumenti/carriere.ts`](../../../prototipi/carriere/strumenti/carriere.ts) la voce «principale» punta a
+  `docs/design/carriere/principale-dialoghi.md`. La storia segnaposto
+  [`storie/principale.md`](../../../prototipi/carriere/storie/principale.md) resta come storia, con una nota in testa, e non è più
+  registrata.
+- **Il cast** ([`dati/cast.json`](../../../prototipi/carriere/dati/cast.json)): i ripieghi delle espressioni e degli sfondi (sotto) e
+  l'alias «Un signore» di Sergio.
+- **Le prove della principale** ([`tests/principale.test.ts`](../../../prototipi/carriere/tests/principale.test.ts)) leggono i dialoghi:
+  F1, F2 e F3 sono scene (nell'ordine del file); la sconfitta della catena va al nodo F3, che dà «Sedici euro» e chiude con il finale;
+  la cordicella rossa visibile su una bacheca nuova è III5 → F3; le piste di II1 si scelgono con le etichette del testo; il rientro dopo
+  lo sgombero si legge dai segni `chiave` e `via-atto-3` (il segnaposto aveva un segno `rientro` che il testo non usa).
+- **Il tutorial:** [`tests/converti.test.ts`](../../../prototipi/carriere/tests/converti.test.ts) conta 49 battute (erano 44: le cinque
+  della combriccola nell'epilogo); [`tests/motore.test.ts`](../../../prototipi/carriere/tests/motore.test.ts) legge le battute
+  dell'epilogo prima dell'achievement. Attesi cambiati per il commit `1040bdc`.
+- **Le catture:** [`strumenti/catture-principale.mjs`](../../../prototipi/carriere/strumenti/catture-principale.mjs) usa le etichette del
+  testo («con Beppe, a raccogliere…»), controlla F3 sulla bacheca nuova e giocata come scena, e scrive `p37d-*`.
+
+### Estensioni del prototipo
+
+Tutte dal lato del prototipo; il formato delle storie non cambia.
+
+1. **Ripieghi delle espressioni** (`ripieghi` di un personaggio nel cast): un'espressione scritta nei dialoghi ma senza ritratto si mostra
+   come quella dichiarata, con un **avviso** («espressione senza ritratto per Celestina: «furba», si mostra «neutra»»); `*` vale per ogni
+   espressione che manca (i cartoncini segnaposto). Vale anche negli `[Stacchi: …]`. Senza ripiego resta un errore, e le espressioni
+   previste (P8, `espressioniFuture`) restano errori.
+2. **Ripieghi degli sfondi** (`ripieghi` di uno sfondo nel cast): un'ambientazione senza immagine («al buio», «di notte», «di giorno»,
+   «dentro») si mostra come la variante dichiarata, o come l'immagine di base, con un avviso. Il riconoscimento delle varianti ora vuole
+   parole intere.
+3. **Una scena finale raggiunta perdendo non deve essere segreta** (controllo del grafo): un nodo che ha uscite, e sono tutte fini, come
+   F3, sta fra i finali, sempre visibili. L'avviso «si raggiunge solo perdendo ma non è segreto» resta per i nodi che proseguono.
+4. **Il PvP dopo qualche battuta** (`src/percorsi.ts`): in I4 `[Sblocca: pvp]` viene dopo due battute della combriccola, e il conteggio
+   non lo attribuiva a nessuna partita. Ora conta la partita appena giocata.
+
+### Dove testo e formato non combaciano
+
+| Nel testo | Nel prototipo | Esito |
+|---|---|---|
+| 245 battute con un'espressione senza ritratto: tutte quelle di Celestina, Beppe, Duccio e Sergio, e le corsive di Mara e Spazienzio | Ripiego del cast, con avviso (elenco sotto) | Avviso; si decide con i ritratti |
+| Sfondi «di giorno», «al buio», «di notte», «dentro il Dimmi Di Sì», la cantina | Ripiego del cast, con avviso (elenco sotto) | Avviso; si decide con gli sfondi nuovi |
+| «Un signore» in I3b (cinque battute) | Alias di Sergio: il nome nella finestra, il ritratto di Sergio (correzione 1 dell'atto I) | Risolto nel cast |
+| F3 è una scena raggiunta solo perdendo la catena, non segreta | Scena finale: visibile da subito con la sua cordicella rossa; il controllo non la chiede segreta (estensione 3) | Domanda 1 |
+| Le piste di II1: «Chiedi a Piera…», «Chiedi a Beppe…», «Vai con Celestina…» | Avviso «scelta muta senza “con <personaggio>”»: la bacheca non ha il personaggio dell'opzione | Domanda 2 |
+| `[Sblocca: pvp]` in I4 dopo due battute | Lo sblocco arriva leggendo, non con la vittoria; conteggio dei percorsi corretto (estensione 4) | Risolto nel prototipo |
+| F3: il cambio di sfondo sta dentro una nota (`[Regia: Sfondo: S1 di sera. …]`) | Il convertitore lo legge come cambio di sfondo a metà scena | Nessuna azione |
+| Il blocco di citazione in testa all'epilogo del tutorial | Avviso «testo libero non riconosciuto»: tenuto come nota dell'autore, non si legge | Domanda 3 |
+
+Nessun segno assegnato e mai letto, nessuna condizione su un segno mai assegnato, nessuna battuta condizionata che non si vede mai (il
+controllo lo dice con 0 avvisi), nessuna uscita mancante.
+
+### Ripieghi dichiarati
+
+**Espressioni** (fra parentesi le battute); i cartoncini segnaposto mostrano sempre «neutra».
+
+| Personaggio | Espressione del testo → mostrata |
+|---|---|
+| Mara | seria (8), normale (2) → neutra; arrabbiata (2) → agitata; perplessa (1), triste (1) → pensierosa; dubbiosa (1) → sospettosa |
+| Spazienzio | estremamente furioso (3) → fumante; normale (3), spaventato (2) → quasi calmo; eccitato (2), malvagio (1) → soddisfatto; arrabbiato (1) → furioso; dubbioso (1) → serio |
+| Celestina (segnaposto) | furba (30), assonnata (8), contenta (7), arrabbiata (3), triste (3), pensierosa (2), annoiata (1), normale (1) → neutra |
+| Beppe (segnaposto) | tranquillo (16), contento (11), pensieroso (7), scocciato (5), serio (5), annoiato (2), allegro, confuso, contrariato, neutro (1 ciascuna) → neutra |
+| Duccio (segnaposto) | fiero (15), dolorante (6), offeso (4), serio (4), beato (3), pensieroso (1), preoccupato (1) → neutra |
+| Sergio (segnaposto, anche come «Un signore») | annoiato (28), strafottente (23), malvagio (17), neutro (7), pensieroso (2), serio (1) → neutra |
+
+Piera e Grappino non ne hanno bisogno: Piera usa solo le sue quattro espressioni, Grappino non parla.
+
+**Sfondi**, come nel mockup della 0.3 (il bar di notte e la cantina con il disordine; il Dimmi Di Sì dentro come fuori):
+
+| Nel testo | Si mostra | Dove |
+|---|---|---|
+| S2 al buio | S2 disordine | I1s, III3b, S1 (la cantina) |
+| S2 di notte | S2 disordine | III3a, S2 |
+| S1 di giorno, S2 di giorno | S1, S2 | I2a, I3a, III4 |
+| S3, dentro il Dimmi Di Sì | S3 (l'esterno) | I3b |
+| S1 di notte | S1 insegna spenta (già scritta nel testo, senza avviso) | III1s, III2b |
+| di sera | l'immagine di base, senza avviso | tutte le altre |
+
+Il retro del bar non compare come sfondo nel testo: III3b è «S2 al buio».
+
+### Numeri per giro
+
+| | 0.3 segnaposto | 0.3.7 segnaposto | 0.3.7 dialoghi |
+|---|---|---|---|
+| Nodi | 24, 3 finali, 2 segreti | 26 (F2 e F1 scene) | **27** (F1, F2 e F3 scene) |
+| Percorsi, primo giro / dopo tutti i finali | 136 / 204 | 136 / 204 | 136 / 204 |
+| Nodi con partita per giro | da 11 a 13 (14 con S2) | uguale | uguale: al primo giro 52 percorsi da 11, 52 da 12, 32 da 13 |
+| Partite contando i duelli della catena | — | da 11 a 17 (18 con S2) | uguale |
+| PvP | con la quarta partita, al più tardi al 36% | uguale | uguale: su tutti i 340 percorsi con la quarta partita (I4) |
+| Controllo del grafo | 333 stati | 469 stati | 665 stati, 0 errori, 0 avvisi |
+
+Gli stati crescono perché il testo legge più segni del segnaposto (`chiave` in II2b, `duccio` in III1 e III1s, `celestina` in III4, i
+`[Se visto …]`). L'elenco completo dei percorsi (`strumenti/percorsi.ts --elenco`) è in `%TEMP%\percorsi-037d.txt`.
+
+![La bacheca di una carriera nuova, sui dialoghi veri](../../../prototipi/carriere/catture/p37d-o-01-mappa-intera.jpg)
+![La catena di III5 a metà: Mara e Beppe hanno vinto, si sceglie chi gioca](../../../prototipi/carriere/catture/p37d-o-02-catena-a-meta.jpg)
+![La bacheca a giro finito, dopo il torneo, F2 e F1](../../../prototipi/carriere/catture/p37d-o-03-fine-giro.jpg)
+
+Sul telefono: [la bacheca nuova](../../../prototipi/carriere/catture/p37d-v-01-mappa-intera.jpg),
+[la catena a metà](../../../prototipi/carriere/catture/p37d-v-02-catena-a-meta.jpg),
+[la bacheca a giro finito](../../../prototipi/carriere/catture/p37d-v-03-fine-giro.jpg). Sei catture, 684 KB in tutto.
+
+### Verifiche
+
+| Comando | Esito |
+|---|---|
+| `run.ps1 -Task Test` | verdi: 133 prove (prima 130). Nuove: i ripieghi (espressioni, stacchi, sfondi, «Un signore»), la scena finale nel controllo, il PvP dopo le battute |
+| `run.ps1 -Task Check` | verde: tutorial 6/6, prova 8/8, principale 27/27; 0 errori e 0 avvisi su tutte e tre |
+| `run.ps1 -Task Build` | verde (`tsc` e `vite`). Lanciato con l'uscita rediretta (`*>`), un avviso di vite su stderr diventa un'eccezione di PowerShell 5.1; senza redirezione è verde |
+| Convert | 0 errori; avvisi: 258 sulla principale (245 espressioni, 10 sfondi, 3 scelte di II1), 1 sul tutorial (domanda 3) |
+| `strumenti/catture-principale.mjs` | verde, giocando dall'interfaccia: sconfitte e segreti nascosti all'inizio, F3 sulla bacheca nuova, la catena a metà, F1 dopo la catena vinta, il secondo giro perso al primo duello che finisce in «Disco pub» con F3 giocata |
+| `git diff --check`, `python scripts/check-rules.py`, `python scripts/check-links.py` | verdi; nessun link rotto |
+| Mutazioni | 7 sulla logica nuova, tutte prese (sotto) |
+
+Non eseguiti, come chiesto: Misura, Banco e Registra (il Set Base può avere una misura lunga in corso su questa macchina).
+
+| Mutazione | Prove che la prendono |
+|---|---|
+| Ripiego senza `*` | 19 |
+| Ripiego verso un'espressione che il personaggio non ha | 1: i ripieghi |
+| Ripiego dello sfondo senza la variante | 1: i ripieghi |
+| Negli stacchi il ripiego si scarta | 1: i ripieghi |
+| Nessuna esenzione per la scena finale | 2: il controllo della principale, la scena finale |
+| Ogni nodo raggiunto perdendo conta come scena finale | 2: l'avviso del nodo non segreto, la scena finale |
+| Il PvP dopo le battute non si conta | 2: i numeri per giro, il PvP dopo le battute |
+
+Una prima versione dell'esenzione chiedeva anche «nessuna scelta nel nodo»: la mutazione che lo toglieva non rompeva niente, perché un
+nodo che finisce con una scelta non ha uscite. La condizione era ridondante ed è stata tolta.
+
+### Scelte prese
+
+- **`storie/principale.md` resta come storia**, con una nota in testa, invece di cancellarla: tre sezioni qui sopra la linkano.
+- **I ripieghi stanno nel cast**, non nel convertitore: quando arriva un ritratto o uno sfondo si toglie la voce e l'avviso sparisce.
+- **Mara e Spazienzio hanno ripieghi uno per uno**, scelti fra i ritratti che ci sono; i cartoncini un `*` verso «neutra».
+- **La notte e il buio di S2 sono il disordine**, come nel mockup della 0.3; «di giorno» e «dentro» l'immagine di base.
+- **«Un signore» è un alias di Sergio** nel cast: niente nome, ritratto di Sergio.
+- **F3 è visibile da subito**, come gli altri finali, con la sua cordicella rossa (domanda 1).
+- **Le prove del segnaposto sono diventate prove del testo**, con gli stessi controlli dove il testo li regge; quelle sul segno `rientro`,
+  che il testo non ha, leggono ora `chiave` e `via-atto-3`.
+
+### Domande per il proprietario
+
+1. **F3 visibile o segreta?** Nel testo F3 è una scena senza `[Nodo: …]`, quindi sulla bacheca nuova si vede con la cordicella rossa da
+   III5, come il vecchio finale «Disco pub». Se deve comparire solo dopo averla persa, la modifica al testo è una riga sotto
+   `## F3 — Disco pub`: `[Nodo: segreto]`. Il prototipo la tiene visibile (scelta presa).
+2. **Le piste di II1:** per avere il personaggio sull'etichetta della bacheca, le tre opzioni diventerebbero
+   `- con Piera, che si ricorda di dieci anni fa …`, `- con Beppe, che sa chi pagava in contanti …` e
+   `- con Celestina, che fruga nel bidone …`. Senza la modifica funziona tutto, con tre avvisi.
+3. **La citazione nell'epilogo del tutorial:** il blocco `> **Stesura della regia…**` sotto il titolo dell'epilogo è una nota di
+   redazione dentro la scena; il convertitore la tiene come nota e avvisa. Spostarla nelle note in fondo a `tutorial-dialoghi.md` toglie
+   l'avviso; in alternativa il convertitore può accettare le citazioni come note senza avviso.

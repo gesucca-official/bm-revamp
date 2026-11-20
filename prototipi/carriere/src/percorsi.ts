@@ -83,7 +83,11 @@ export function percorsi(c: Carriera, account: Account = nuovoAccount(), tetto =
       giro(t, nodi, qui, conPvp, catene + 1, duelli + n);
       return;
     }
-    giro(salta(c, s).stato, nodi, partite, pvp, catene, duelli);
+    // Uno sblocco dopo qualche battuta (in principale-dialoghi.md il PvP arriva in I4 dopo le battute della combriccola): conta la
+    // partita appena giocata.
+    const dopo = salta(c, s).stato;
+    const conPvp = pvp ?? (dopo.account.sblocchi.includes('pvp') && !s.account.sblocchi.includes('pvp') ? partite.length : null);
+    giro(dopo, nodi, partite, conPvp, catene, duelli);
   };
   const s0 = nuovoGiro(c, structuredClone(account));
   // Lo sblocco «pvp» preso in un giro precedente non conta: si misura in ogni giro, togliendolo dall'account di partenza.

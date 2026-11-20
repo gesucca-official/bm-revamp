@@ -1,5 +1,10 @@
 # Il Serraglio chiude — mockup del grafo della campagna principale
 
+> **Ritirata il 20 novembre 2026.** Il prototipo legge ora i dialoghi veri,
+> [`principale-dialoghi.md`](../../../docs/design/carriere/principale-dialoghi.md)
+> ([rapporto](../../../docs/design/carriere/mockup-principale.md#aggiornamento-alla-037-con-i-dialoghi-veri)). Questo file resta come storia
+> del mockup segnaposto e non è più registrato fra le carriere del prototipo.
+
 > Mockup del grafo della [carriera principale del Set Base](../../../docs/design/carriere/principale.md), **versione 0.3.7** (20 novembre
 > 2026; la prima stesura del mockup era sulla 0.2, poi sulla 0.3 e sulla 0.3.2), scritto da un esecutore per vedere la carriera sulla
 > bacheca e giocarla da cima a fondo con le partite simulate. **Le battute sono segnaposto**, una o due per scena, prese dalla colonna

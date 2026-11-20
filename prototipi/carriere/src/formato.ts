@@ -171,10 +171,13 @@ export type ZonaBocca = {u: number; v: number; ru: number; rv: number};
 export type Cast = {
   radiceAsset: string;
   // espressioniFuture: previste ma ancora senza ritratto (P8); il convertitore le rifiuta con un messaggio che lo dice.
+  // ripieghi (mockup 0.3.7): un'espressione scritta nei dialoghi ma senza ritratto, verso quella che si mostra al suo posto; «*» vale
+  // per ogni espressione che non c'è (i cartoncini segnaposto). Il convertitore la accetta con un avviso che dice il ripiego.
   // Fase F: animazione (modo per tutte le espressioni, con le eccezioni, e i punti di controllo della maglia), bocca (dove cercare la
   // bocca nel ritratto, per la versione «-bocca»), stacco (l'espressione di chi ascolta Piera, se il ritratto c'è), verticale (quanto
   // alzare il ritratto in verticale, in frazioni dell'altezza dello schermo).
   personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[]; espressioniFuture?: string[];
+    ripieghi?: Record<string, string>;
     velocita?: number; ritratto?: string; sprite?: string; animazione?: AnimazioneCast; bocca?: ZonaBocca; stacco?: string;
     verticale?: {alza: number};
     // Fase G: per un'espressione consegnata con il fondo sporco, l'espressione dello stesso personaggio da cui prendere la trasparenza.
@@ -186,7 +189,9 @@ export type Cast = {
     // senza maglia né bocca (si muove con il movimento procedurale), finché il personaggio non ha i suoi ritratti di scena.
     segnaposto?: true}>;
   // insegna: la scritta che il client sovrappone (gli sfondi non hanno scritte), in frazioni dello sfondo; spenta nelle varianti elencate.
-  sfondi: Record<string, {file: string; varianti?: Record<string, string>;
+  // ripieghi (mockup 0.3.7): un'ambientazione scritta nei dialoghi ma senza immagine («al buio», «dentro il Dimmi Di Sì»), verso la
+  // variante che si mostra al suo posto («» è l'immagine di base). Il convertitore la accetta con un avviso.
+  sfondi: Record<string, {file: string; varianti?: Record<string, string>; ripieghi?: Record<string, string>;
     insegna?: {testo: string; x: number; y: number; larghezza: number; spentaIn?: string[]}}>;
   // Dove il lettore posa lo sprite, in frazioni della scena: x del centro, y dei piedi, altezza (la specifica lascia la scala al client).
   // verticale: in verticale, piedi e altezza in frazioni dello schermo, per ancorare la figura come i ritratti, con la parte bassa

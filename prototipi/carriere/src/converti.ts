@@ -13,6 +13,12 @@ type Rinvio = {grezzo: string; riga: number; applica: (d: Destinazione) => void}
 export const slug = (s: string): string => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/['’]/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+/** L'espressione da mostrare al posto di una senza ritratto, se il cast la dichiara (mockup 0.3.7): prima la voce esatta, poi «*». */
+const ripiego = (p: Cast['personaggi'][string], e: string): string | undefined => {
+  const r = p.ripieghi?.[e] ?? p.ripieghi?.['*'];
+  return r && p.espressioni?.includes(r) ? r : undefined;
+};
+
 const SOLO_COMANDI = /^(\[[^\[\]]*\]\s*)+$/;
 const COMANDO = /\[([^\[\]]*)\]/g;
 const BATTUTA = /^\*\*([^*]+?)\*\*(?:\s*\(([^)]+)\))?:\s*([\s\S]+)$/;
@@ -153,8 +159,11 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
         if (e === 'fuori-campo') fuoriCampo = true;
         else if (p?.ombra) avviso(riga, `${p.nome} è una figura in ombra: l'espressione «${m[2]}» non si vede`);
         else if (p?.espressioniFuture?.includes(e)) errore(riga, `espressione prevista ma ancora senza ritratto per ${p.nome}: «${m[2]}» (P8)`);
-        else if (p && !p.espressioni?.includes(e)) errore(riga, `espressione sconosciuta per ${p.nome}: «${m[2]}»`);
-        else espressione = e;
+        else if (p && !p.espressioni?.includes(e)) {
+          const r = ripiego(p, e);
+          if (r) { avviso(riga, `espressione senza ritratto per ${p.nome}: «${m[2]}», si mostra «${r}» (ripiego del cast)`); espressione = r; }
+          else errore(riga, `espressione sconosciuta per ${p.nome}: «${m[2]}»`);
+        } else espressione = e;
       } else if (p && !p.ombra) errore(riga, `battuta di ${p.nome} senza espressione`);
       const b: Battuta = {tipo: 'battuta', chi: chi ?? m[1], ...(nome ? {nome} : {}), ...(espressione ? {espressione} : {}),
         ...(fuoriCampo ? {fuoriCampo: true as const} : {}), testo: m[3].trim(), ...(se ? {se} : {}), riga};
@@ -274,7 +283,12 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
             const chi = personaggio(n, riga);
             const espr = slug(e.join(' '));
             if (chi && cast.personaggi[chi].espressioniFuture?.includes(espr)) { errore(riga, `espressione prevista ma ancora senza ritratto per ${n}: «${e.join(' ')}» (P8)`); return []; }
-            if (chi && !cast.personaggi[chi].espressioni?.includes(espr)) { errore(riga, `espressione sconosciuta per ${n}: «${e.join(' ')}»`); return []; }
+            if (chi && !cast.personaggi[chi].espressioni?.includes(espr)) {
+              const r = ripiego(cast.personaggi[chi], espr);
+              if (!r) { errore(riga, `espressione sconosciuta per ${n}: «${e.join(' ')}»`); return []; }
+              avviso(riga, `espressione senza ritratto per ${n}: «${e.join(' ')}», si mostra «${r}» (ripiego del cast)`);
+              return [{chi, espressione: r}];
+            }
             return chi ? [{chi, espressione: espr}] : [];
           });
           return;
@@ -312,7 +326,16 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
       if (!m || !cast.sfondi[m[1]]) return errore(riga, `sfondo sconosciuto: «${arg}»`);
       // La variante è riconosciuta se il suo nome compare nella descrizione («S2 con lo strato del disordine»).
       const desc = slug(m[2].split(/\.\s*Regia:/)[0]);
-      const variante = Object.keys(cast.sfondi[m[1]].varianti ?? {}).find(v => desc.split('-').join(' ').includes(v.split('-').join(' ')));
+      const contiene = (v: string) => ` ${desc.split('-').join(' ')} `.includes(` ${v.split('-').join(' ')} `);
+      let variante = Object.keys(cast.sfondi[m[1]].varianti ?? {}).find(contiene);
+      if (!variante) {
+        const r = Object.keys(cast.sfondi[m[1]].ripieghi ?? {}).find(contiene);
+        if (r !== undefined) {
+          const v = cast.sfondi[m[1]].ripieghi![r];
+          avviso(riga, `sfondo senza immagine: ${m[1]} «${r.split('-').join(' ')}», si mostra ${v ? `${m[1]} ${v}` : m[1]} (ripiego del cast)`);
+          if (v && cast.sfondi[m[1]].varianti?.[v]) variante = v;
+        }
+      }
       aggiungi({tipo: 'sfondo', sfondo: m[1], ...(variante ? {variante} : {}), riga});
       let nota = m[2].replace(/^[,.\s]+/, '').replace(/\.\s*Regia:\s*/, '. ').trim();
       if (variante) nota = nota.replace(new RegExp(`^${variante.replace(/-/g, '[- ]')}[,.\\s]*`, 'i'), '').trim();
