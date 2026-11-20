@@ -61,6 +61,7 @@ export type Passo =
   | {tipo: 'sblocco'; sblocco: string; se?: Condizione; riga: number}
   | {tipo: 'achievement'; achievement: string; riga: number}
   | Partita
+  | Catena
   | Scelta;
 
 export type Battuta = {
@@ -86,6 +87,25 @@ export type Partita = {
   modificatori?: string[];     // modificatori di incontro dichiarati (nel prototipo solo mostrati)
   ritento?: Battuta[];         // battute prima di ritentare, sempre saltabili
   sconfitta?: Destinazione;    // assente: si ritenta; presente: la sconfitta apre un ramo
+  riga: number;
+};
+
+/**
+ * Mockup della principale 0.3.7 (III5, il boss finale): una partita a catena. Ogni personaggio sbloccato in quel giro fa un duello contro lo
+ * stesso avversario, uno alla volta nell'ordine che sceglie il giocatore, senza ritento. Si vince solo se vincono tutti; la prima sconfitta
+ * finisce la catena e porta alla sconfitta (obbligatoria). Prima di ogni duello l'avversario ha una battuta per chi gioca.
+ * Nel markdown: «→ Partita N, a catena: … contro X», «[Catena: …]» (la regola, a parole), «[Sconfitta: → …]» e, per ogni personaggio,
+ * «[Catena, prima di Y] **X** (espressione): battuta».
+ */
+export type Catena = {
+  tipo: 'catena';
+  id: string;                  // «partita-iii5»
+  avversario: Rif;
+  // Chi può essere in catena: i personaggi con una battuta «prima di». `sblocco`: lo starter da avere preso in questo giro per esserci
+  // (assente per chi viene dal tutorial: Mara e Spazienzio, sempre in catena). Il convertitore lo ricava dalla convenzione `starter-<id>`.
+  giocatori: {personaggio: string; sblocco?: string; prima?: Battuta}[];
+  modificatori?: string[];
+  sconfitta: Destinazione;     // la prima sconfitta finisce la catena
   riga: number;
 };
 

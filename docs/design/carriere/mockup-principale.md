@@ -429,3 +429,115 @@ un altro segnale che una carriera di queste dimensioni chiederà, nel client, un
   l'avviso del controllo non deve restare acceso. Si fa dopo il risalto del nodo «sei qui», con le catture della prova rifatte solo dove
   cambiano.
 - **Il posto vuoto delle tasche nascoste** va bene così, come per S1.
+
+## Aggiornamento alla 0.3.7
+
+20 novembre 2026, dopo la [scaletta 0.3.7](principale.md) e le decisioni del proprietario sul finale: III5 è una **partita a catena**. Il mockup
+segue ora la 0.3.7: la storia [`storie/principale.md`](../../../prototipi/carriere/storie/principale.md) è aggiornata (righe segnaposto, una o
+due per scena) e il formato, il convertitore, il motore, la bacheca e il controllo del grafo conoscono la catena. `principale.md`,
+`product-roadmap.md` e `docs/README.md` non sono stati toccati. Le sezioni qui sopra restano come erano.
+
+### Che cosa è cambiato
+
+- **III5 a catena.** Ogni personaggio sbloccato in quel giro sfida Sergio a turno, **nell'ordine che sceglie il giocatore**. Prima di ogni
+  duello Sergio dice la sua battuta per chi gioca. Si vince se vincono tutti; **senza ritento**, la prima sconfitta chiude la catena e porta
+  a F3 «Disco pub» (achievement «Sedici euro»). Chi è in catena: Mara e Spazienzio (dal tutorial, senza sblocco) più chi ha il suo
+  `starter-<id>` preso in quel giro, cioè cinque su ogni percorso.
+- **Il resto dell'atto III:** III1s dà la scena «Sgomberati» con il rientro dalla porta (se si ha la chiave) o dalla finestra del bagno,
+  e l'achievement «Rientro abusivo» (prima era «Porta sul retro»); III3a è un duello contro Sergio, a scelta fra i cinque; III3b segue
+  il rientro (porta, finestra, nessuno dei due); III1 si intitola «Domenica sera».
+- **F2 e F1 sono scene,** non più uscite dirette: vinta la catena, la bacheca offre F2 (se si è fatto il torneo; dà «Monetine») e poi F1,
+  che chiude con il finale della strada («è di tutti» dopo il torneo, altrimenti «resta»). Le uscite condizionate sono quelle della 0.3.
+- **S2** si offre dopo III5 vinto, solo a chi ha già visto «Il Serraglio resta»: «con chi sei d'accordo?», con Sergio (si va a S2) o con
+  Spazienzio (si prosegue). S2 si gioca **a scelta** fra i cinque e dà «Superboss» (prima «Rivincita»). Sergio parla in I3b senza il suo
+  alias («Un signore» resta nei dialoghi, non nel mockup).
+- **Achievement:** escono «Porta sul retro» e «Rivincita»; entrano «Rientro abusivo», «Monetine» e «Superboss». Sono ancora nove.
+- **Come si scrive la catena nel formato** (invariato rispetto a `principale-dialoghi.md`, che non ha dovuto cambiare):
+
+  ```
+  → Partita III5, a catena: ogni personaggio sbloccato (giocatore), uno alla volta nell'ordine che sceglie il giocatore, contro Sergio, boss finale
+  [Catena: si vince se tutti battono Sergio; alla prima sconfitta la catena finisce]
+  [Sconfitta: → F3]
+  [Catena, prima di Mara] **Sergio** (neutra): …
+  ```
+
+  La freccia dà l'avversario (dopo «contro»); `[Catena: …]` è documentario; `[Sconfitta: …]` è obbligatoria e dice dove va la prima
+  sconfitta; `[Catena, prima di X]` è la battuta dell'avversario prima del duello di X, e i personaggi della catena sono quelli che hanno
+  una battuta. Lo sblocco di ognuno si ricava da `starter-<id>`: se la carriera lo sblocca, il personaggio è in catena solo dopo averlo preso.
+- **Convertitore:** un passo nuovo `catena` (nel formato: avversario, giocatori con sblocco e battuta, modificatori, sconfitta). Errori chiari
+  per catena senza `[Sconfitta: …]`, con meno di due personaggi, con battuta di un altro, con battuta doppia, con ritento, senza avversario,
+  e per `[Catena: …]` o `[Catena, prima di …]` senza una catena prima. `valida` controlla lo stesso sui dati.
+- **Motore e tavolo:** il tavolo mostra la fila (chi ha vinto, chi gioca, chi aspetta) e, nella scelta, i pulsanti; poi la battuta di Sergio;
+  poi «Vinci» e «Perdi». Chi ha vinto non si sceglie più; vinti tutti il nodo prosegue, alla prima sconfitta si va a `[Sconfitta]` senza ritento.
+- **Controllo del grafo:** su ogni percorso devono esserci tutti i personaggi dichiarati (altrimenti errore con il nome e lo starter che
+  manca), la sconfitta della catena deve portare da qualche parte (F3 deve poter essere raggiunto) e la vittoria prosegue.
+- **Percorsi:** la catena è **un nodo con partita**; i suoi duelli si contano a parte (da 1, se si perde subito, a 5).
+
+![La bacheca di una carriera nuova, 0.3.7](../../../prototipi/carriere/catture/p37-o-01-mappa-intera.jpg)
+![La catena di III5 a metà: Mara e Beppe hanno vinto, si sceglie chi gioca](../../../prototipi/carriere/catture/p37-o-02-catena-a-meta.jpg)
+![La bacheca a giro finito, dopo il torneo, F2 e F1](../../../prototipi/carriere/catture/p37-o-03-fine-giro.jpg)
+
+Sul telefono: [la bacheca nuova](../../../prototipi/carriere/catture/p37-v-01-mappa-intera.jpg),
+[la catena a metà](../../../prototipi/carriere/catture/p37-v-02-catena-a-meta.jpg),
+[la bacheca a giro finito](../../../prototipi/carriere/catture/p37-v-03-fine-giro.jpg). Sono giocate dall'interfaccia; un secondo giro perde il
+primo duello e deve finire in «Disco pub» (prova di bordo, senza cattura).
+
+### Numeri
+
+| | 0.3.2 | 0.3.7 |
+|---|---|---|
+| Nodi | 24 | 26 (F2 e F1 sono scene) |
+| Finali | 3 (il finale della sconfitta era «Dimmi Di Sì 2») | 3 («Disco pub» al posto di quello) |
+| Percorsi, primo giro / dopo tutti i finali | 136 / 204 | 136 / 204 |
+| Nodi con partita per giro | da 11 a 13 (14 con S2) | uguale: la catena è un nodo, F2 e F1 non hanno partita |
+| **Duelli della catena** | — | da 1 (si perde il primo) a 5 |
+| **Partite, contando i duelli** | da 11 a 13 (14) | da 11 a 17 (18 con S2) |
+| PvP | al più tardi al 36% delle partite | uguale |
+| Controllo del grafo | 333 stati, 0 errori, 0 avvisi | **469 stati,** 0 errori, 0 avvisi; fini completate 104; finali Disco pub (52), Il Serraglio resta (36), è di tutti (16); `catene: iii5 (5 su 5 su ogni percorso)` |
+| Colonne della bacheca | 15 (14 di nodi e i finali) | 17 (16 di nodi e i finali) |
+| Prove | 122 | 130 |
+
+Una vittoria di tutta la catena vale cinque partite in un nodo solo: se si contano i duelli, il giro più lungo è di 17 partite, non di 13.
+Questo è il numero che conta per il ritmo del giro, e la scaletta (che dice «da 11 a 13») conta la catena una volta sola.
+
+### Dove scaletta e formato non combaciano
+
+| Nella 0.3.7 | Nel mockup | Proposta |
+|---|---|---|
+| F3 è una scena in `principale-dialoghi.md` (il neon, gli habitué, «Sedici euro»), raggiunta da `[Sconfitta: → F3]` | F3 è un **finale** senza scena, come lo era «Dimmi Di Sì 2» nella 0.3.2: `[Sconfitta: → Fine: completata, Disco pub]`. Come scena, il controllo avviserebbe (nodo raggiunto solo perdendo, non segreto) | Decidere se F3 è una scena vera: sarebbe un nodo `[Nodo: segreto]` visibile come finale, o una regola che esenta i finali |
+| La bacheca è di «circa quattordici colonne» | 16 di nodi più i finali: F2 e F1 sono ora scene, quindi due colonne in più | Se è troppo fitta, F2 e F1 possono dividere una colonna, o stare su due righe |
+| S2 dopo «con chi sei d'accordo?», «con Sergio» | Offerta solo a chi ha già visto «Il Serraglio resta»; il rifiuto prosegue senza S2; si gioca a scelta fra i cinque | Dire se la rivincita è per chiunque o solo dopo F1 |
+| III5: «tutti i personaggi sbloccati» | Sono sempre cinque (Mara e Spazienzio dal tutorial, tre starter nell'atto): il controllo lo prova su ogni percorso | Se un giro potesse arrivare a III5 con meno starter, la catena si accorcia da sola, ma il controllo lo segnala come errore |
+| «Patetici, avete dimostrato quanto valete» apre F3 (scelta della regia); «sapete come divertirvi» e la risposta di Spazienzio, dopo la catena vinta, valgono per tutti | «Patetici» non c'è, perché F3 non ha scena; le altre due battute stanno in III5, dopo l'ultimo duello | Si risolve con la decisione su F3 |
+| «Un signore» e le espressioni non ancora nel cast | Il mockup usa quelle del cast: Sergio in I3b senza alias, `neutra` dove i dialoghi hanno `strafottente`, `annoiato`, `malvagio` | Aggiungere le espressioni al cast, poi riportarle |
+
+### Verifiche
+
+| Comando | Esito |
+|---|---|
+| `run.ps1 -Task Test` | verdi: 130 prove (prima: 122). **Ambiente:** `node_modules` non c'era, e il primo avvio era rosso per un modulo mancante (`react`): non una regressione. Si è installato con `run.ps1 -Task Install -Offline` (non entra nel repository) |
+| `run.ps1 -Task Check`, `-Task Build` | verdi: il Check come nei numeri; il Build (`tsc` e `vite`) senza errori |
+| `strumenti/percorsi.ts` | i numeri sopra |
+| Catture (`strumenti/catture-principale.mjs`) | verdi, giocando dall'interfaccia, a 1366×768 e 390×844; i controlli di bordo: le sconfitte e i segreti nascosti all'inizio, la catena a metà (due vinti, tre da scegliere, Sergio sul tavolo), vinta la catena non è F3, F1 sulla bacheca, il secondo giro perso al primo duello porta a «Disco pub» |
+| `git diff --check`, `python scripts/check-links.py`, `python scripts/check-rules.py` | vedi il rapporto in chat |
+| Il convertitore su `principale-dialoghi.md` | nessun errore sulla catena né su F3; restano gli errori noti (espressioni non ancora nel cast, «Un signore» in I3b) e tre avvisi di scelte in II1 |
+
+**Prove nuove o rifatte:** la catena nel convertitore (la forma intera e tutti gli errori), nei dati (`valida`) e nel controllo del grafo
+(starter mancante su un percorso, starter dato dopo la catena, F3 irraggiungibile); il tavolo (cinque in catena, l'ordine scelto, Sergio che
+parla a ciascuno, vincono tutti o perde il primo, senza ritento, perso dopo 0, 1 o 4 vittorie); la fila che dipende dagli starter del giro;
+F2 → F1 e le uscite condizionate; l'offerta di S2; il rientro dalla porta e dalla finestra; la catena di `principale-dialoghi.md`.
+
+**Mutazioni** (solo sulla logica nuova; ognuna rompe almeno una prova, e le sorgenti sono tornate come erano):
+
+| Mutazione | Prove che la prendono |
+|---|---|
+| La sconfitta non chiude la catena (si può riprovare) | 3: il tavolo, i fili, i numeri |
+| La catena finisce alla prima vittoria | 4: il tavolo, la fila, le uscite, i numeri |
+| La catena finisce un duello prima | 4: le stesse |
+| L'ordine non lo sceglie il giocatore (sempre il primo) | 1: il tavolo |
+| Sergio non parla prima del duello | 1: il tavolo |
+| La fila ignora gli starter del giro | 1: la fila per starter |
+| Il controllo non segue la sconfitta della catena (F3 irraggiungibile) | 3: il controllo dei tre finali, il controllo della catena, la catena nel convertitore |
+| Il controllo non verifica che ci siano tutti in catena | 1: il controllo della catena |
+
+Otto su otto prese. Nessuna è sfuggita, quindi non ho dovuto rafforzare le prove.

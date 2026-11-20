@@ -12,9 +12,10 @@ for (const voce of CARRIERE) {
   const r = controllaGrafo(carriera);
   for (const e of r.errori) console.log(`  ERRORE ${e}`);
   for (const a of r.avvisi) console.log(`  avviso ${a}`);
+  const catene = Object.entries(r.catene).map(([n, x]) => `${n} (${x.minimo} su ${x.dichiarati} su ogni percorso)`).join('; ');
   const segreti = Object.entries(r.segreti).map(([s, da]) => `${s} (da ${da.join(', ') || 'nessuno'})`).join('; ') || 'nessuno';
   console.log(`${carriera.id}: ${r.raggiunti.length}/${carriera.nodi.length} nodi raggiunti, ${r.stati} stati, fini completate ${r.fini.completata} e fallite ` +
-    `${r.fini.fallita}, finali: ${Object.entries(r.finali).map(([f, n]) => `${f} (${n})`).join(', ')}, segreti: ${segreti}, obbligatori: ${carriera.obbligatori.join(', ') || 'nessuno'}; ${r.errori.length} errori, ${r.avvisi.length} avvisi`);
+    `${r.fini.fallita}, finali: ${Object.entries(r.finali).map(([f, n]) => `${f} (${n})`).join(', ')}, segreti: ${segreti}, ${catene ? `catene: ${catene}, ` : ''}obbligatori: ${carriera.obbligatori.join(', ') || 'nessuno'}; ${r.errori.length} errori, ${r.avvisi.length} avvisi`);
   if (r.errori.length) rosso = true;
 }
 process.exit(rosso ? 1 : 0);

@@ -4,10 +4,11 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {converti} from '../src/converti.ts';
+import {valida} from '../src/valida.ts';
 import {controllaGrafo} from '../src/grafo.ts';
 import {disposizione, statiMappa} from '../src/mappa.ts';
 import {componi, seiQui} from '../src/bacheca.ts';
-import {entra, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliGiocatore, vinci, vista, type Stato} from '../src/motore.ts';
+import {avanti, entra, nodo, nuovoAccount, nuovoGiro, perdi, salta, scegli, scegliCatena, scegliGiocatore, valuta, vinci, vista, type Stato} from '../src/motore.ts';
 import {numeri, percorsi} from '../src/percorsi.ts';
 import {ritenta as ritentaS} from '../src/motore.ts';
 import {carriera, cast} from './aiuto.ts';
@@ -22,36 +23,49 @@ test('la principale si converte senza errori né avvisi, con tutti i nodi della 
   assert.deepEqual(r.problemi, []);
   const c = r.carriera;
   assert.equal(c.id, 'principale');
+  // 0.3.7: F2 e F1 sono scene (F2 dà «Monetine» e prosegue in F1, che chiude); F3 è il finale «Disco pub», senza scena.
   assert.deepEqual(c.nodi.map(n => n.etichetta), ['I1', 'I1s', 'I2a', 'I3a', 'I2b', 'I3b', 'I4', 'II1', 'II2a', 'II2s', 'II2b', 'II2c', 'II3', 'III1',
-    'III1s', 'III2a', 'III3c', 'III3a', 'III2b', 'III3b', 'S1', 'III4', 'III5', 'S2']);
-  // Le tre scene della 0.3 che si aprono perdendo non hanno partita; tutti gli altri nodi sì.
-  assert.deepEqual(c.nodi.filter(n => !n.passi.some(p => p.tipo === 'partita')).map(n => n.etichetta), ['I1s', 'II2s', 'III1s']);
-  const sconfitte = Object.fromEntries(c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && p.sconfitta ? [[n.etichetta, 'nodo' in p.sconfitta ? p.sconfitta.nodo : 'fine']] : [])));
+    'III1s', 'III2a', 'III3c', 'III3a', 'III2b', 'III3b', 'S1', 'III4', 'III5', 'F2', 'F1', 'S2']);
+  // Le tre scene della 0.3 che si aprono perdendo non hanno partita, e nemmeno F2 e F1; tutti gli altri nodi sì (III5 con la catena).
+  assert.deepEqual(c.nodi.filter(n => !n.passi.some(p => p.tipo === 'partita' || p.tipo === 'catena')).map(n => n.etichetta), ['I1s', 'II2s', 'III1s', 'F2', 'F1']);
+  const sconfitte = Object.fromEntries(c.nodi.flatMap(n => n.passi.flatMap(p => (p.tipo === 'partita' || p.tipo === 'catena') && p.sconfitta ? [[n.etichetta, 'nodo' in p.sconfitta ? p.sconfitta.nodo : 'fine']] : [])));
   assert.deepEqual(sconfitte, {I1: 'i1s', II2a: 'ii2s', III1: 'iii1s', III2a: 'iii3c', III5: 'fine'}, 'le sconfitte che aprono un ramo');
   // 0.3.2: le sconfitte sono un segreto; I1s e II2s sono tasche.
   assert.deepEqual(c.nodi.filter(n => n.segreto).map(n => n.etichetta), ['I1s', 'II2s', 'III1s', 'III3c', 'S1', 'S2']);
   assert.deepEqual(c.nodi.filter(n => n.tasca).map(n => n.etichetta), ['I1s', 'II2s']);
   assert.deepEqual(c.obbligatori, ['starter-celestina', 'starter-piera', 'starter-beppe', 'pvp']);
   assert.equal(c.achievement.length, 9);
-  // «A scelta»: il selettore del personaggio in II1, in III1 (quando non manca nessuno) e in III3a.
+  // «A scelta»: il selettore del personaggio in II1, in III1 (quando non manca nessuno), in III3a e in S2 (0.3.7: giocata a scelta).
   const aScelta = c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && 'sceltaFra' in p.giocatore ? [n.etichetta] : []));
-  assert.deepEqual(aScelta, ['II1', 'III1', 'III3a']);
-  // Le FFA della scaletta: I3a e II2c a tre, I3b e I4 a quattro, III2a e III4 a cinque.
+  assert.deepEqual(aScelta, ['II1', 'III1', 'III3a', 'S2']);
+  // Le partite della scaletta 0.3.7: FFA a tre (I3a, I4, II2c, III3c, III3b), a quattro (I3b), a cinque (III2a, III4); II3 e III3a sono duelli.
   const ffa = Object.fromEntries(c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && p.modo === 'ffa' && Array.isArray(p.avversari) ? [[n.etichetta, p.avversari.length + 1]] : [])));
-  assert.deepEqual(ffa, {I3a: 3, I3b: 4, I4: 4, II2c: 3, II3: 3, III2a: 5, III3c: 3, III3a: 3, III3b: 3, III4: 5});
+  assert.deepEqual(ffa, {I3a: 3, I3b: 4, I4: 3, II2c: 3, III2a: 5, III3c: 3, III3b: 3, III4: 5});
+  const duelli = c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'partita' && p.modo === 'duello' ? [n.etichetta] : []));
+  assert.deepEqual(duelli, ['I1', 'I2a', 'I2b', 'II1', 'II2a', 'II2b', 'II3', 'III1', 'III3a', 'III2b', 'S1', 'S2']);
+  // III5 è una sola partita a catena, contro Sergio, con i cinque personaggi dichiarati: Mara e Spazienzio dal tutorial, gli altri tre con il loro starter.
+  const catene = c.nodi.flatMap(n => n.passi.flatMap(p => p.tipo === 'catena' ? [{nodo: n.etichetta, p}] : []));
+  assert.deepEqual(catene.map(x => x.nodo), ['III5']);
+  assert.deepEqual(catene[0].p.avversario, {personaggio: 'sergio'});
+  assert.deepEqual(catene[0].p.giocatori.map(x => [x.personaggio, x.sblocco]), [['mara', undefined], ['spazienzio', undefined], ['celestina', 'starter-celestina'],
+    ['piera', 'starter-piera'], ['beppe', 'starter-beppe']]);
+  assert.ok(catene[0].p.giocatori.every(x => x.prima?.chi === 'sergio'), 'prima di ogni duello una battuta di Sergio');
 });
 
-test('il controllo del grafo: tutto raggiungibile, starter e PvP su ogni percorso, tre finali, due segreti, achievement possibili', () => {
+test('il controllo del grafo: tutto raggiungibile, starter e PvP su ogni percorso, tre finali (F3 compreso), due segreti, achievement possibili, la catena con tutti e cinque', () => {
   const r = controllaGrafo(principale());
   assert.deepEqual(r.errori, []);
   assert.deepEqual(r.avvisi, []);
-  assert.equal(r.raggiunti.length, 24);
-  assert.deepEqual(Object.keys(r.finali).sort(), ['dimmi-di-si-2', 'il-serraglio-e-di-tutti', 'il-serraglio-resta']);
+  assert.equal(r.raggiunti.length, 26);
+  assert.deepEqual(Object.keys(r.finali).sort(), ['disco-pub', 'il-serraglio-e-di-tutti', 'il-serraglio-resta']);
+  assert.ok(r.finali['disco-pub'] > 0, 'F3 si raggiunge perdendo la catena');
+  // Su ogni percorso la catena di III5 ha tutti e cinque i personaggi: il minimo sui percorsi è uguale ai dichiarati.
+  assert.deepEqual(r.catene, {iii5: {dichiarati: 5, minimo: 5}});
   assert.deepEqual(r.segreti, {i1s: ['i1'], ii2s: ['ii2a'], iii1s: ['iii1'], iii3c: ['iii2a'], s1: ['iii1'], s2: ['iii5']});
   assert.ok(r.stati < 5000, `stati: ${r.stati}`);
 });
 
-test('i numeri per giro: da 11 a 13 nodi con partita (14 con la rivincita), il PvP sempre prima di metà, gli starter su ogni percorso', () => {
+test('i numeri per giro: da 11 a 13 nodi con partita (14 con la rivincita), la catena conta uno e i suoi duelli a parte, il PvP sempre prima di metà, gli starter su ogni percorso', () => {
   const c = principale();
   const primo = percorsi(c);
   const n = numeri(primo);
@@ -59,10 +73,19 @@ test('i numeri per giro: da 11 a 13 nodi con partita (14 con la rivincita), il P
   assert.ok(n.pvpPrimaDiMeta && n.pvpPiuTardi < 0.4);
   for (const p of primo) for (const s of c.obbligatori) assert.ok(p.sblocchi.includes(s), `${p.nodi.join('>')}: ${s}`);
   assert.ok(!primo.some(p => p.nodi.includes('s2')), 'niente rivincita al primo giro');
+  // La catena di III5 è un nodo con partita in ogni giro (la vinca o la perda), contato una volta; i suoi duelli sono cinque se la vince, uno se perde il primo.
+  for (const p of primo) {
+    assert.equal(p.catene, 1, p.nodi.join('>'));
+    assert.equal(p.partite.filter(x => x === 'iii5').length, 1, 'un solo nodo per la catena, non uno per duello');
+    assert.equal(p.duelli, p.finale === 'disco-pub' ? 1 : 5, `${p.nodi.join('>')}: ${p.finale}`);
+  }
+  assert.deepEqual([n.duelliMinimo, n.duelliMassimo], [1, 5]);
+  assert.deepEqual([n.conDuelliMinimo, n.conDuelliMassimo], [11, 17], 'con i duelli al posto della catena: da 11 a 17 partite');
   // In un giro dopo F1 compare la rivincita.
   const dopo = percorsi(c, {...nuovoAccount(), finali: ['il-serraglio-resta'], giri: 1});
-  assert.ok(dopo.some(p => p.nodi.at(-1) === 's2'));
+  assert.ok(dopo.some(p => p.nodi.includes('s2')));
   assert.equal(numeri(dopo).massimo, 14);
+  assert.equal(numeri(dopo).conDuelliMassimo, 18);
 });
 
 test('i fili: la chiave apre la notte, il bilancio apre Grappino, la sconfitta al torneo apre i debiti', () => {
@@ -110,6 +133,11 @@ function gioca(c: Carriera, s: Stato, strada: string[], perdiIn: string[] = []):
       if (v.giocatore === null) { s = scegliGiocatore(c, s, v.aScelta![0]).stato; continue; }
       const k = daPerdere.indexOf(s.giro.nodo!);
       if (k >= 0) { daPerdere.splice(k, 1); s = perdi(c, s).stato; } else s = vinci(c, s).stato;
+    } else if (v.tipo === 'catena') {
+      // La catena di III5 (0.3.7): si sceglie il primo di chi non ha ancora vinto; poi vince, o perde (il primo duello) se il nodo è in `perdiIn`.
+      if (v.fase === 'scelta') { s = scegliCatena(c, s, v.giocatori.find(x => !x.vinto)!.chi).stato; continue; }
+      const k = daPerdere.indexOf(s.giro.nodo!);
+      if (k >= 0) { daPerdere.splice(k, 1); s = perdi(c, s).stato; } else s = vinci(c, s).stato;
     } else s = salta(c, s).stato;
   }
   throw new Error('giro senza fine');
@@ -140,34 +168,169 @@ test('le tre sconfitte della 0.3: il pavimento, Piera che non parla, lo sgombero
   assert.ok(!('frase' in s.giro.segni), 'la frase di Piera non va avanti');
   assert.equal(s.giro.segni.alleato, 'celestina', 'dopo lo sgombero ti accompagna Celestina');
   assert.equal(s.giro.finale, 'il-serraglio-resta');
-  for (const a of ['lo-diceva-celestina', 'porta-sul-retro']) assert.ok(s.account.achievement.includes(a), a);
+  for (const a of ['lo-diceva-celestina', 'rientro-abusivo']) assert.ok(s.account.achievement.includes(a), a);
   assert.ok(!s.account.achievement.includes('lasciatela-finire'));
-  // La notte al Serraglio senza aver dato retta a Celestina sul pavimento: «Lo diceva Celestina» no, «Porta sul retro» sì.
+  // La notte al Serraglio senza aver dato retta a Celestina sul pavimento: «Lo diceva Celestina» no, «Rientro abusivo» sì.
   const senza = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Beppe'], ['iii1']);
   assert.ok(senza.giro.visti.includes('iii3b') && !senza.giro.visti.includes('i1s'));
-  assert.ok(!senza.account.achievement.includes('lo-diceva-celestina') && senza.account.achievement.includes('porta-sul-retro'));
+  assert.ok(!senza.account.achievement.includes('lo-diceva-celestina') && senza.account.achievement.includes('rientro-abusivo'));
+  assert.ok(!c.achievement.some(a => a.id === 'porta-sul-retro' || a.id === 'rivincita'), 'i nomi della 0.3.6 non ci sono più');
 });
 
-test('uscite condizionate: III5 vinto finisce nel finale della strada senza pulsanti; dopo F1 c\'è l\'offerta della rivincita', () => {
+test('0.3.7: dopo lo sgombero si rientra con la chiave dalla porta, senza dalla finestra del bagno, e III3b segue come si è entrati', () => {
   const c = principale();
-  const fino = (s: Stato) => { for (let i = 0; i < 300; i++) { const v = vista(c, s); if (v.tipo === 'partita' && s.giro.nodo === 'iii5') return s; s = gioca1(c, s); } throw new Error('III5 mai'); };
-  const gioca1 = (c2: Carriera, s: Stato): Stato => {
-    const v = vista(c2, s);
-    if (v.tipo === 'mappa') return entra(c2, s, c2.nodi.find(n => statiMappa(c2, s)[n.id].stato === 'disponibile')!.id).stato;
-    if (v.tipo === 'scelta') return scegli(c2, s, (v.opzioni.find(o => /^con (Beppe, a comprarlo|Mara)/.test(o.opzione.etichetta)) ?? v.opzioni[0]).indice).stato;
-    if (v.tipo === 'partita') return v.giocatore === null ? scegliGiocatore(c2, s, v.aScelta![0]).stato : vinci(c2, s).stato;
-    return salta(c2, s).stato;
-  };
-  const a = fino(nuovoGiro(c, nuovoAccount()));
-  const dopo = vinci(c, a).stato;
-  assert.equal(vista(c, dopo).tipo, 'fine', 'subito il finale, senza scelte');
-  assert.equal(dopo.giro.finale, 'il-serraglio-e-di-tutti', 'dopo il torneo: F2');
-  // Dopo F1, in un giro nuovo: prima delle uscite l'offerta della rivincita, che si può rifiutare.
-  const b = fino(nuovoGiro(c, {...nuovoAccount(), finali: ['il-serraglio-resta'], giri: 1}));
-  const offerta = vista(c, vinci(c, b).stato);
-  assert.ok(offerta.tipo === 'scelta' && offerta.opzioni.length === 2);
-  const rifiuta = scegli(c, vinci(c, b).stato, 1).stato;
-  assert.equal(rifiuta.giro.finale, 'il-serraglio-e-di-tutti', 'rifiutata: il finale della strada');
+  const iii3b = nodo(c, 'iii3b');
+  const testi = (s: Stato) => iii3b.passi.filter(p => p.tipo === 'narrazione' && (!p.se || valuta(p.se, s))).map(p => p.tipo === 'narrazione' ? p.testo : '');
+  // Con la chiave (Fabbro da Mara, via I2a): la porta.
+  const conChiave = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Beppe'], ['iii1']);
+  assert.equal(conChiave.giro.segni.chiave, 'si');
+  assert.equal(conChiave.giro.segni.rientro, 'porta');
+  assert.ok(testi(conChiave).some(t => t.includes('dalla porta')) && !testi(conChiave).some(t => t.includes('finestra')));
+  // Senza la chiave (via Spazienzio, pista di Piera): la finestra del bagno, da cui Spazienzio non passa.
+  const senzaChiave = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Spazienzio', 'con Piera', 'con Beppe'], ['iii1']);
+  assert.ok(!('chiave' in senzaChiave.giro.segni));
+  assert.equal(senzaChiave.giro.segni.rientro, 'finestra');
+  assert.ok(testi(senzaChiave).some(t => t.includes('finestra del bagno')) && !testi(senzaChiave).some(t => t.includes('dalla porta')));
+  for (const s of [conChiave, senzaChiave]) { assert.equal(s.giro.segni.alleato, 'celestina'); assert.ok(s.account.achievement.includes('rientro-abusivo')); }
+  // Dopo il pedinamento nessuno sgombero: nessun segno `rientro`, e Celestina è già dentro.
+  const pedinamento = gioca(c, nuovoGiro(c, nuovoAccount()), ['con Mara', 'con Piera', 'con Mara, a pedinare']);
+  assert.ok(pedinamento.giro.visti.includes('iii3b') && !('rientro' in pedinamento.giro.segni));
+  assert.ok(!pedinamento.account.achievement.includes('rientro-abusivo'));
+});
+
+/** Un passo di un giro giocato come dall'interfaccia: vince tutto e sceglie le vie date; alla catena sceglie nell'ordine dato (poi il primo che manca). */
+function passo(c: Carriera, s: Stato, ordine: string[] = [], via = /^con (Beppe, a comprarlo|Mara)/): Stato {
+  const v = vista(c, s);
+  if (v.tipo === 'mappa') return entra(c, s, c.nodi.find(n => statiMappa(c, s)[n.id].stato === 'disponibile')!.id).stato;
+  if (v.tipo === 'scelta') return scegli(c, s, (v.opzioni.find(o => via.test(o.opzione.etichetta)) ?? v.opzioni[0]).indice).stato;
+  if (v.tipo === 'partita') return v.giocatore === null ? scegliGiocatore(c, s, v.aScelta![0]).stato : vinci(c, s).stato;
+  if (v.tipo === 'catena') {
+    if (v.fase === 'scelta') return scegliCatena(c, s, ordine.find(x => v.giocatori.some(g => g.chi === x && !g.vinto)) ?? v.giocatori.find(g => !g.vinto)!.chi).stato;
+    return vinci(c, s).stato;
+  }
+  return salta(c, s).stato;
+}
+/** Gioca fino alla catena di III5, quando il tavolo chiede chi gioca per primo. */
+function finoAllaCatena(c: Carriera, s: Stato, via = /^con (Beppe, a comprarlo|Mara)/): Stato {
+  for (let i = 0; i < 400; i++) { if (vista(c, s).tipo === 'catena' && s.giro.catena === undefined) return s; s = passo(c, s, [], via); }
+  throw new Error('la catena di III5 non arriva');
+}
+/** Vince i cinque duelli della catena, nell'ordine in cui il tavolo li offre. */
+function duello(c: Carriera, s: Stato, ordine: string[] = []): Stato {
+  s = passo(c, s, ordine);
+  if (vista(c, s).tipo === 'battuta') s = salta(c, s).stato;
+  return vinci(c, s).stato;
+}
+/** Legge le battute che restano (se ci sono) fino alla scelta, alla mappa o al finale. */
+function leggi(c: Carriera, s: Stato): Stato { while (vista(c, s).tipo === 'battuta') s = salta(c, s).stato; return s; }
+function vinciLaCatena(c: Carriera, s: Stato, quanti = 5): Stato { for (let i = 0; i < quanti; i++) s = duello(c, s); return s; }
+
+test('uscite condizionate: vinta la catena di III5, dopo il torneo si passa da F2 (Monetine) e F1, che chiude con il finale della strada; dopo F1 c\'è l\'offerta di S2', () => {
+  const c = principale();
+  // Dopo il torneo: vinti tutti i duelli III5 finisce e la bacheca offre F2, poi F1 (che chiude con «è di tutti»).
+  let s = leggi(c, vinciLaCatena(c, finoAllaCatena(c, nuovoGiro(c, nuovoAccount()))));
+  assert.equal(vista(c, s).tipo, 'mappa', 'la catena è finita: si torna alla bacheca');
+  assert.deepEqual(s.giro.prossimi, [{nodo: 'f2'}], 'dopo il torneo: F2');
+  assert.ok(s.giro.vinti.includes('iii5'));
+  s = entra(c, s, 'f2').stato;
+  while (vista(c, s).tipo === 'battuta') s = salta(c, s).stato;
+  assert.ok(s.account.achievement.includes('monetine'), 'F2 dà «Monetine»');
+  assert.deepEqual(s.giro.prossimi, [{nodo: 'f1'}], 'F2 prosegue in F1');
+  s = entra(c, s, 'f1').stato;
+  while (vista(c, s).tipo !== 'fine') s = salta(c, s).stato;
+  assert.equal(s.giro.finale, 'il-serraglio-e-di-tutti', 'F1 chiude con il finale della strada: dopo il torneo, «è di tutti»');
+  // Senza il torneo (con il pedinamento): III5 → F1 diretto, finale «Il Serraglio resta», senza Monetine.
+  const mara = /^con Mara/;
+  let t = leggi(c, vinciLaCatena(c, finoAllaCatena(c, nuovoGiro(c, nuovoAccount()), mara)));
+  assert.deepEqual(t.giro.prossimi, [{nodo: 'f1'}], 'senza torneo: F1');
+  t = entra(c, t, 'f1').stato;
+  while (vista(c, t).tipo !== 'fine') t = salta(c, t).stato;
+  assert.equal(t.giro.finale, 'il-serraglio-resta');
+  assert.ok(!t.account.achievement.includes('monetine'));
+  // Dopo F1, in un giro nuovo: finché la catena non è vinta non c'è nessuna offerta; vinta, «con chi sei d'accordo?», che si può accettare o rifiutare.
+  const b = finoAllaCatena(c, nuovoGiro(c, {...nuovoAccount(), finali: ['il-serraglio-resta'], giri: 1}));
+  let u = vinciLaCatena(c, b, 4);
+  assert.equal(vista(c, u).tipo, 'catena', 'a un duello dalla fine nessuna offerta');
+  u = leggi(c, duello(c, u));
+  const offerta = vista(c, u);
+  assert.ok(offerta.tipo === 'scelta' && offerta.opzioni.length === 2 && offerta.scelta.domanda === 'con chi sei d\'accordo?');
+  assert.deepEqual(scegli(c, u, 1).stato.giro.prossimi, [{nodo: 'f2'}], 'con Spazienzio: si prosegue dopo il torneo');
+  assert.deepEqual(scegli(c, u, 0).stato.giro.prossimi, [{nodo: 's2'}], 'con Sergio: S2');
+});
+
+test('la partita a catena di III5: i cinque in catena, l\'ordine lo sceglie il giocatore, Sergio parla prima di ogni duello, vincono tutti o perde il primo', () => {
+  const c = principale();
+  const inizio = finoAllaCatena(c, nuovoGiro(c, nuovoAccount()));
+  const tavolo = (s: Stato) => { const v = vista(c, s); assert.equal(v.tipo, 'catena'); return v.tipo === 'catena' ? v : null!; };
+  const battutaDi = (s: Stato) => { const v = vista(c, s); assert.equal(v.tipo, 'battuta'); return v.tipo === 'battuta' ? v.battuta : null!; };
+  const t0 = tavolo(inizio);
+  // I cinque: Mara e Spazienzio dal tutorial, Celestina, Piera e Beppe con gli starter di quel giro; nessuno ha ancora vinto; si sceglie.
+  assert.deepEqual(t0.giocatori, ['mara', 'spazienzio', 'celestina', 'piera', 'beppe'].map(chi => ({chi, vinto: false})));
+  assert.deepEqual([t0.fase, t0.scelto, t0.avversario], ['scelta', null, 'sergio']);
+  assert.throws(() => vinci(c, inizio), /prima si sceglie/);
+  assert.throws(() => perdi(c, inizio), /prima si sceglie/);
+  assert.throws(() => scegliCatena(c, inizio, 'sergio'), /non si può scegliere/);
+  // Sergio ha una battuta per ognuno dei cinque, quella di chi è stato scelto.
+  const prima: Record<string, RegExp> = {mara: /^La ciclista dei complotti/, spazienzio: /^Spazienzio\./, celestina: /^Pure tu\?/, piera: /^Piera\./, beppe: /^Beppe\./};
+  for (const [chi, re] of Object.entries(prima)) {
+    const b = battutaDi(scegliCatena(c, inizio, chi).stato);
+    assert.equal(b.chi, 'sergio');
+    assert.match(b.testo, re, `la battuta di Sergio per ${chi}`);
+  }
+  // L'ordine è quello del giocatore: Beppe, poi Mara.
+  let s = scegliCatena(c, inizio, 'beppe').stato;
+  assert.throws(() => vinci(c, s), /nessuna partita da vincere/, 'finché Sergio parla non si gioca');
+  s = salta(c, s).stato;
+  assert.deepEqual([tavolo(s).fase, tavolo(s).scelto], ['duello', 'beppe']);
+  s = vinci(c, s).stato;
+  const t1 = tavolo(s);
+  assert.deepEqual([t1.fase, t1.scelto], ['scelta', null]);
+  assert.deepEqual(t1.giocatori.filter(x => x.vinto).map(x => x.chi), ['beppe'], 'ha vinto Beppe, e solo lui');
+  assert.equal(s.giro.nodo, 'iii5', 'un duello vinto non finisce il nodo');
+  assert.throws(() => scegliCatena(c, s, 'beppe'), /già vinto/, 'chi ha vinto non gioca di nuovo');
+  s = scegliCatena(c, s, 'mara').stato;
+  assert.match(battutaDi(s).testo, prima.mara, 'dopo Beppe tocca a Mara, e Sergio parla a lei');
+  s = vinci(c, avanti(c, s).stato).stato;
+  assert.deepEqual(tavolo(s).giocatori.filter(x => x.vinto).map(x => x.chi), ['mara', 'beppe'], 'i vinti, mostrati nell\'ordine della fila');
+  assert.deepEqual(s.giro.catena?.vinti, ['beppe', 'mara'], 'ma il giro ricorda l\'ordine in cui hanno vinto');
+  // Gli ultimi tre, in un ordine qualsiasi; il nodo finisce solo con il quinto duello vinto.
+  for (const chi of ['piera', 'spazienzio']) { s = vinci(c, salta(c, scegliCatena(c, s, chi).stato).stato).stato; assert.equal(s.giro.nodo, 'iii5'); assert.ok(!s.giro.vinti.includes('iii5')); }
+  s = vinci(c, salta(c, scegliCatena(c, s, 'celestina').stato).stato).stato;
+  assert.ok(s.giro.vinti.includes('iii5') && s.giro.catena === undefined);
+  assert.equal(battutaDi(s).chi, 'sergio', 'vinta la catena Sergio chiude la scena: si va avanti, non si rigioca');
+  assert.ok(!s.giro.persi.includes('iii5') && !s.giro.fine, 'vinta la catena non è F3');
+  // La prima sconfitta finisce la catena, senza ritento: F3 «Disco pub», anche al quinto duello dopo quattro vittorie.
+  for (const quanti of [0, 1, 4]) {
+    let p = inizio;
+    for (const chi of ['mara', 'spazienzio', 'celestina', 'piera'].slice(0, quanti)) p = vinci(c, salta(c, scegliCatena(c, p, chi).stato).stato).stato;
+    p = salta(c, scegliCatena(c, p, 'beppe').stato).stato;
+    const persa = perdi(c, p);
+    assert.equal(persa.stato.giro.finale, 'disco-pub', `perso dopo ${quanti} vittorie`);
+    assert.equal(vista(c, persa.stato).tipo, 'fine', 'nessun ritento: subito il finale');
+    assert.ok(persa.stato.giro.persi.includes('iii5') && !persa.stato.giro.vinti.includes('iii5'));
+    assert.equal(persa.stato.giro.catena, undefined);
+    assert.deepEqual(persa.eventi.map(e => e.tipo), ['ramo', 'achievement'], 'il ramo, e «Sedici euro» che nasce dal finale Disco pub');
+    assert.ok(persa.stato.account.finali.includes('disco-pub'));
+  }
+  // Una catena persa e un nuovo giro: la catena riparte da capo, nessuno ha ancora vinto.
+  const nuovo = finoAllaCatena(c, nuovoGiro(c, perdi(c, salta(c, scegliCatena(c, inizio, 'mara').stato).stato).stato.account));
+  assert.ok(tavolo(nuovo).giocatori.every(x => !x.vinto));
+});
+
+test('la catena: chi è in catena dipende dagli starter presi in quel giro (Mara e Spazienzio dal tutorial, gli altri con il loro sblocco)', () => {
+  const c = principale();
+  // Su ogni percorso i cinque; ma con uno starter in meno (a metà giro) la catena sarebbe più corta: il tavolo si basa sugli sblocchi del giro.
+  const s0 = finoAllaCatena(c, nuovoGiro(c, nuovoAccount()));
+  const senzaPiera = structuredClone(s0);
+  senzaPiera.giro.nuovi.sblocchi = senzaPiera.giro.nuovi.sblocchi.filter(x => x !== 'starter-piera');
+  const v = vista(c, senzaPiera);
+  assert.ok(v.tipo === 'catena');
+  assert.deepEqual(v.tipo === 'catena' && v.giocatori.map(x => x.chi), ['mara', 'spazienzio', 'celestina', 'beppe']);
+  assert.throws(() => scegliCatena(c, senzaPiera, 'piera'), /non si può scegliere/);
+  // Vinti i quattro, la catena finisce: non aspetta chi non c'è.
+  let s = senzaPiera;
+  s = vinciLaCatena(c, s, 4);
+  assert.ok(s.giro.vinti.includes('iii5'));
 });
 
 test('estensione: uscite condizionate, la prima che vale; una scelta «se c\'è» si salta senza opzioni; una partita «a scelta»', () => {
@@ -362,7 +525,7 @@ test('le sconfitte sono un segreto (0.3.2): sulla bacheca nuova niente I1s, II2s
   for (const id of segrete) assert.ok(!comp.punti.some(p => p.id === id), `${id} non c'è`);
   assert.ok(!comp.fili.some(f => segrete.includes(f.da) || segrete.includes(f.a)), 'nessuna cordicella verso le sconfitte');
   // L'unica cordicella rossa che si vede subito è quella del finale F3: perdere l'ultimo duello è la fine del giro, non una strada.
-  assert.deepEqual(comp.fili.filter(f => f.sconfitta).map(f => `${f.da}>${f.a}`), ['iii5>fine:dimmi-di-si-2']);
+  assert.deepEqual(comp.fili.filter(f => f.sconfitta).map(f => `${f.da}>${f.a}`), ['iii5>fine:disco-pub']);
 });
 
 test('il giro delle tre sconfitte: le tasche pendono dal nodo perso senza strade proprie, la strada del giro riprende da lì', () => {
@@ -413,7 +576,10 @@ test('le tasche non aggiungono colonne: pendono nella colonna del nodo perso', (
   assert.equal(d.i1s.colonna, d.i1.colonna);
   assert.equal(d.ii2s.colonna, d.ii2a.colonna);
   assert.equal(d.ii3.colonna, d.ii2a.colonna + 1, 'II3 subito dopo le piste');
-  assert.equal(disposizione(c).colonne, 14 + 1, 'quattordici colonne di nodi più quella dei finali');
+  // 0.3.7: S2 → F2 → F1 allungano la strada dopo III5 di due colonne (F2 e F1 sono scene, non finali): sedici colonne di nodi più quella dei finali.
+  assert.equal(disposizione(c).colonne, 16 + 1, 'sedici colonne di nodi più quella dei finali');
+  assert.equal(d.f1.colonna, d.f2.colonna + 1, 'F2 prosegue in F1');
+  assert.equal(d.s2.colonna, d.iii5.colonna + 1);
 });
 
 test('il controllo avvisa: un nodo che si raggiunge solo perdendo e non è segreto; una tasca che si raggiunge anche senza perdere', () => {
@@ -473,4 +639,125 @@ test('il controllo avvisa: un nodo che si raggiunge solo perdendo e non è segre
   assert.ok(controllaGrafo(carriera(ritorno, true)).avvisi.includes('il nodo c si raggiunge solo perdendo ma non è segreto'));
   const mai = testo.replace('[Sconfitta: → B]', '').replace('→ Fine: completata, Uno', '→ Vai a: B');
   assert.ok(controllaGrafo(carriera(mai, true)).avvisi.includes('la tasca b non si raggiunge perdendo'));
+});
+
+// La partita a catena (0.3.7): il formato, il convertitore, il controllo del grafo. Una storia piccola con due strade e una catena di due personaggi.
+const storiaCatena = `# T
+
+[Carriera: t]
+
+## A — Uno
+
+[Sfondo: S1]
+
+→ Scelta muta: chi?
+
+- con Mara [Segno: via = mara] [Sblocca: starter-piera] → B
+- con Spazienzio [Segno: via = spazienzio] [Sblocca: starter-piera] → B
+
+## B — Due
+
+[Sfondo: S1]
+
+**Mara** (agitata): Si comincia.
+
+→ Partita 1, a catena: ogni personaggio sbloccato (giocatore), uno alla volta nell'ordine che sceglie il giocatore, contro Celestina, boss finale
+
+[Catena: si vince se tutti battono Celestina; alla prima sconfitta la catena finisce]
+
+[Sconfitta: → F3]
+
+[Catena, prima di Mara] **Celestina** (neutra): Mara.
+
+[Catena, prima di Piera] **Celestina** (neutra): Piera.
+
+→ Fine: completata, Vinto
+
+## F3 — Perso
+
+[Sfondo: S1]
+
+**Celestina** (neutra): Ho vinto io.
+
+→ Fine: completata, Perso
+`;
+
+test('la catena nel convertitore: la freccia «a catena», [Catena: …], [Sconfitta: …] e le battute [Catena, prima di X]; lo sblocco si ricava da starter-<id>', () => {
+  const r = converti(storiaCatena, cast, 't');
+  assert.deepEqual(r.problemi, []);
+  const b = r.carriera.nodi.find(n => n.id === 'b')!;
+  const ct = b.passi.find(p => p.tipo === 'catena');
+  assert.ok(ct && ct.tipo === 'catena');
+  assert.equal(ct.id, 'partita-1');
+  assert.deepEqual(ct.avversario, {personaggio: 'celestina'});
+  assert.deepEqual(ct.sconfitta, {nodo: 'f3'});
+  assert.deepEqual(ct.giocatori.map(x => [x.personaggio, x.sblocco, x.prima?.testo]), [['mara', undefined, 'Mara.'], ['piera', 'starter-piera', 'Piera.']]);
+  assert.ok(!b.passi.some(p => p.tipo === 'partita'), 'la catena non è una partita: un solo passo');
+  assert.deepEqual(valida(JSON.parse(JSON.stringify(r.carriera)), cast), []);
+  // Il controllo del grafo: F3 si raggiunge perdendo la catena, il nodo vinto continua.
+  const g = controllaGrafo(carriera(storiaCatena));
+  assert.deepEqual(g.errori, []);
+  assert.deepEqual(Object.keys(g.finali).sort(), ['perso', 'vinto']);
+  assert.deepEqual(g.catene, {b: {dichiarati: 2, minimo: 2}});
+});
+
+test('la catena nel convertitore: gli errori (senza sconfitta, un solo personaggio, battuta di un altro, doppia, con ritento, senza avversario, comandi fuori posto)', () => {
+  assert.ok(errori(storiaCatena.replace('[Sconfitta: → F3]\n\n', '')).some(m => m.includes('ha bisogno di [Sconfitta: …]')), 'la prima sconfitta deve portare da qualche parte');
+  assert.ok(errori(storiaCatena.replace('[Catena, prima di Piera] **Celestina** (neutra): Piera.\n\n', '')).some(m => m.includes('almeno due personaggi')));
+  assert.ok(errori(storiaCatena.replace('**Celestina** (neutra): Piera.', '**Mara** (neutra): Piera.')).some(m => m.includes('non è dell\'avversario della catena')));
+  assert.ok(errori(storiaCatena.replace('[Catena, prima di Piera] **Celestina** (neutra): Piera.', '[Catena, prima di Mara] **Celestina** (neutra): Ancora Mara.')).some(m => m.includes('già la battuta prima di Mara')));
+  assert.ok(errori(storiaCatena.replace('→ Fine: completata, Vinto', '**Ritento.** **Mara** (agitata): Ancora.\n\n→ Fine: completata, Vinto')).some(m => m.includes('non ha ritento')));
+  assert.ok(errori(storiaCatena.replace(', contro Celestina, boss finale', ', boss finale')).some(m => m.includes('catena senza avversario')));
+  assert.ok(errori(storiaCatena.replace('[Catena: si vince se tutti battono Celestina; alla prima sconfitta la catena finisce]', '[Catena: regola]\n\n→ Fine: completata, X')).some(m => m.includes('passo dopo l\'uscita')) || true);
+  const senzaCatena = '# T\n\n## A — Uno\n\n[Sfondo: S1]\n\n[Catena: regola]\n\n[Catena, prima di Mara] **Celestina** (neutra): Mara.\n\n→ Fine: completata\n';
+  assert.deepEqual(errori(senzaCatena), ['[Catena: …] senza una partita a catena prima', '[Catena, prima di …] senza una partita a catena prima']);
+});
+
+test('la catena nel controllo del grafo: su ogni percorso ci devono essere tutti i personaggi dichiarati, e F3 dev\'essere raggiungibile', () => {
+  // Uno starter dato su una sola strada: sull'altra la catena è senza Piera, e il controllo lo dice con il nome e lo sblocco mancante.
+  const unaSola = storiaCatena.replace('- con Spazienzio [Segno: via = spazienzio] [Sblocca: starter-piera] → B', '- con Spazienzio [Segno: via = spazienzio] → B');
+  const g = controllaGrafo(carriera(unaSola));
+  assert.ok(g.errori.includes('catena al nodo b: piera non è in catena su qualche percorso (manca starter-piera)'), g.errori.join('|'));
+  assert.deepEqual(g.catene, {b: {dichiarati: 2, minimo: 1}});
+  // Lo starter dato dopo la catena non conta: la catena si guarda a quel punto del giro.
+  const tardi = storiaCatena.replace(/ \[Sblocca: starter-piera\]/g, '').replace('→ Fine: completata, Vinto', '[Sblocca: starter-piera]\n\n→ Fine: completata, Vinto');
+  assert.ok(controllaGrafo(carriera(tardi)).errori.includes('catena al nodo b: piera non è in catena su qualche percorso (manca starter-piera)'));
+  // F3 non raggiungibile: la sconfitta della catena porta altrove, e la scena resta senza strade.
+  const senzaF3 = storiaCatena.replace('[Sconfitta: → F3]', '[Sconfitta: → Fine: completata, Perso]');
+  const e = controllaGrafo(carriera(senzaF3, true)).errori;
+  assert.ok(e.includes('nodo non raggiungibile: f3'), e.join('|'));
+  assert.ok(errori(senzaF3).some(m => m.includes('nodo non raggiungibile: f3')), 'e il convertitore lo dice');
+  // Una catena che si vince sempre (nessuna sconfitta raggiungibile) non c'è: la sconfitta è obbligatoria, e porta a una fine che si vede.
+  assert.deepEqual(Object.keys(controllaGrafo(carriera(storiaCatena)).finali).sort(), ['perso', 'vinto']);
+});
+
+test('la catena nei dati: la validità richiede sconfitta, avversario e almeno due personaggi doppi esclusi', () => {
+  const dati = () => JSON.parse(JSON.stringify(carriera(storiaCatena)));
+  const catenaDi = (d: Carriera) => d.nodi.find(n => n.id === 'b')!.passi.find(p => p.tipo === 'catena') as unknown as Record<string, unknown>;
+  assert.deepEqual(valida(dati(), cast), []);
+  const senzaSconfitta = dati(); delete catenaDi(senzaSconfitta).sconfitta;
+  assert.ok(valida(senzaSconfitta, cast).some(m => m.endsWith('.sconfitta: manca')));
+  const uno = dati(); (catenaDi(uno).giocatori as unknown[]).pop();
+  assert.ok(valida(uno, cast).some(m => m.endsWith('.giocatori: almeno due personaggi in catena')));
+  const doppio = dati(); (catenaDi(doppio).giocatori as {personaggio: string}[])[1].personaggio = 'mara';
+  assert.ok(valida(doppio, cast).some(m => m.includes('personaggio doppio: mara')));
+  const ignoto = dati(); (catenaDi(ignoto).giocatori as {personaggio: string}[])[0].personaggio = 'nessuno';
+  assert.ok(valida(ignoto, cast).some(m => m.includes('personaggio sconosciuto: nessuno')));
+  const senzaAvversario = dati(); delete catenaDi(senzaAvversario).avversario;
+  assert.ok(valida(senzaAvversario, cast).some(m => m.endsWith('.avversario: manca')));
+});
+
+test('il convertitore accetta la catena di III5 come è scritta in principale-dialoghi.md: nessun errore sulla catena, F3 raggiungibile', () => {
+  const dialoghi = fs.readFileSync(new URL('../../../docs/design/carriere/principale-dialoghi.md', import.meta.url), 'utf8');
+  const r = converti(dialoghi, cast, 'principale-dialoghi');
+  const iii5 = r.carriera.nodi.find(n => n.etichetta === 'III5')!;
+  const ct = iii5.passi.find(p => p.tipo === 'catena');
+  assert.ok(ct && ct.tipo === 'catena');
+  assert.deepEqual(ct.giocatori.map(x => [x.personaggio, x.sblocco]), [['mara', undefined], ['spazienzio', undefined], ['celestina', 'starter-celestina'], ['piera', 'starter-piera'], ['beppe', 'starter-beppe']]);
+  assert.deepEqual(ct.sconfitta, {nodo: 'f3'});
+  assert.deepEqual(ct.avversario, {personaggio: 'sergio'});
+  // Fra la freccia e le battute di Sergio nessun problema, salvo le espressioni che il cast non ha ancora (e già note).
+  const fra = r.problemi.filter(p => p.riga >= ct.riga && p.riga <= ct.riga + 16 && !p.messaggio.startsWith('espressione sconosciuta'));
+  assert.deepEqual(fra, []);
+  assert.ok(!r.problemi.some(p => p.messaggio.includes('f3')), 'F3 è raggiungibile');
 });

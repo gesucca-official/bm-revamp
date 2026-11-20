@@ -156,6 +156,28 @@ export function valida(dati: unknown, cast: Cast): string[] {
         if ('sconfitta' in v) destinazione(v.sconfitta, `${dove}.sconfitta`);
         return;
       }
+      case 'catena': {
+        // Mockup della principale 0.3.7: la partita a catena. La sconfitta c'è sempre (senza ritento la prima sconfitta la chiude).
+        campi(v, dove, [...comuni, 'id', 'avversario', 'giocatori', 'sconfitta'], ['modificatori']);
+        testo(v.id, `${dove}.id`, ID);
+        rif(v.avversario, `${dove}.avversario`);
+        if (lista(v.giocatori, `${dove}.giocatori`)) {
+          if (v.giocatori.length < 2) err(`${dove}.giocatori`, 'almeno due personaggi in catena');
+          const visti = new Set<string>();
+          v.giocatori.forEach((x, k) => {
+            const d = `${dove}.giocatori[${k}]`;
+            if (!ogg(x, d)) return;
+            campi(x, d, ['personaggio'], ['sblocco', 'prima']);
+            personaggio(x.personaggio, `${d}.personaggio`);
+            if (typeof x.personaggio === 'string') { if (visti.has(x.personaggio)) err(`${d}.personaggio`, `personaggio doppio: ${x.personaggio}`); visti.add(x.personaggio); }
+            if ('sblocco' in x) testo(x.sblocco, `${d}.sblocco`, ID);
+            if ('prima' in x) battuta(x.prima, `${d}.prima`);
+          });
+        }
+        if ('modificatori' in v && lista(v.modificatori, `${dove}.modificatori`)) v.modificatori.forEach((x, i) => testo(x, `${dove}.modificatori[${i}]`, ID));
+        destinazione(v.sconfitta, `${dove}.sconfitta`);
+        return;
+      }
       case 'scelta': {
         campi(v, dove, [...comuni, 'modo', 'opzioni'], ['domanda', 'facoltativa']);
         uno(v.modo, `${dove}.modo`, ['muta', 'messaggio']);

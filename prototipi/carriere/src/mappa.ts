@@ -24,7 +24,7 @@ export function archi(c: Carriera): Arco[] {
   };
   for (const n of c.nodi) {
     for (const p of n.passi) {
-      if (p.tipo === 'partita') verso(n.id, p.sconfitta, 'sconfitta');
+      if (p.tipo === 'partita' || p.tipo === 'catena') verso(n.id, p.sconfitta, 'sconfitta');
       if (p.tipo === 'scelta') for (const o of p.opzioni) verso(n.id, o.verso, 'scelta');
     }
     for (const u of usciteDi(n)) verso(n.id, u.verso, 'uscita');

@@ -19,6 +19,7 @@ export type Esito3 = {
   finali: Record<string, number>;  // stati di fine distinti per finale (P7)
   raggiunti: string[];             // nodi
   segreti: Record<string, string[]>;  // nodo segreto -> nodi da cui ci si arriva
+  catene: Record<string, {dichiarati: number; minimo: number}>;  // nodo con una partita a catena -> personaggi dichiarati e minimo in catena
 };
 
 export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
@@ -28,6 +29,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const raggiunti = new Set<string>();
   const battuteViste = new Set<string>();        // `${nodo}:${riga}` delle battute con condizione mostrate almeno una volta
   const achievementDati = new Set<string>();
+  const catene = new Map<string, {dichiarati: number; minimo: number}>();  // nodo -> personaggi dichiarati e minimo in catena sui percorsi
   const istantanee: Locale[] = [];               // stato a fine nodo e a fine giro, per achievement e indizi
   const fini: {esito: Esito; finale: string; l: Locale}[] = [];
   const archiStato = new Map<string, Set<string>>();
@@ -52,6 +54,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
       if ('se' in p) leggi(p.se);
       if (p.tipo === 'scelta') p.opzioni.forEach(o => leggi(o.se));
       if (p.tipo === 'partita') for (const r of [p.giocatore, ...(Array.isArray(p.avversari) ? p.avversari : [])]) if ('segno' in r && r.segno) letti.segni.add(r.segno);
+      if (p.tipo === 'catena' && 'segno' in p.avversario && p.avversario.segno) letti.segni.add(p.avversario.segno);
     }
   }
   for (const a of c.achievement) { leggi(a.quando); a.indizi.forEach(x => leggi(x.se)); }
@@ -153,6 +156,21 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
             metti(l.vinti, n.id);  // vittoria al primo colpo
             break;
           }
+          case 'catena': {
+            // Mockup della principale 0.3.7: la partita a catena. Chi è in catena dipende dagli sblocchi presi in questo giro: su ogni percorso
+            // ci devono essere tutti i personaggi dichiarati (è la promessa del boss finale), e il controllo lo prova. Senza ritento le strade sono
+            // due: vincono tutti (il nodo prosegue) o la prima sconfitta (si va dove dice [Sconfitta: …], e F3 deve poter essere raggiunto).
+            if (daScelta) break;  // ritorno alla scelta: la catena è già stata giocata
+            if ('segno' in p.avversario && p.avversario.segno && !(p.avversario.segno in l.segni)) errori.add(`catena al nodo ${n.id}: il segno ${p.avversario.segno} non è assegnato su qualche percorso`);
+            const mancano = p.giocatori.filter(x => x.sblocco && !l.sblocchi.includes(x.sblocco)).map(x => x.personaggio);
+            for (const m of mancano) errori.add(`catena al nodo ${n.id}: ${m} non è in catena su qualche percorso (manca ${p.giocatori.find(x => x.personaggio === m)!.sblocco})`);
+            const dimensione = p.giocatori.length - mancano.length;
+            const prima = catene.get(n.id);
+            catene.set(n.id, {dichiarati: p.giocatori.length, minimo: Math.min(prima?.minimo ?? Infinity, dimensione)});
+            const lp = copia(l); metti(lp.persi, n.id); successore(p.sconfitta, lp);
+            metti(l.vinti, n.id);
+            break;
+          }
           case 'scelta': {
             const vis = p.opzioni.map(o => val(o.se, l));
             // Mockup della principale 0.3: una scelta «se c'è» senza opzioni visibili si salta.
@@ -226,7 +244,7 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   };
   for (const n of c.nodi) {
     for (const p of n.passi) {
-      if (p.tipo === 'partita') entra(p.sconfitta, 'sconfitta');
+      if (p.tipo === 'partita' || p.tipo === 'catena') entra(p.sconfitta, 'sconfitta');
       if (p.tipo === 'scelta') p.opzioni.forEach(o => entra(o.verso, 'altro'));
     }
     for (const u of usciteDi(n)) if (!('nodo' in u.verso && u.verso.da === 'scelta')) entra(u.verso, 'altro');
@@ -245,5 +263,5 @@ export function controllaGrafo(c: Carriera, tetto = TETTO_STATI): Esito3 {
   const perFinale: Record<string, number> = {};
   for (const f of fini) perFinale[f.finale] = (perFinale[f.finale] ?? 0) + 1;
   return {errori: [...errori], avvisi: [...avvisi], stati: visti.size, fini: {completata: conta('completata'), fallita: conta('fallita')}, finali: perFinale,
-    raggiunti: [...raggiunti], segreti};
+    raggiunti: [...raggiunti], segreti, catene: Object.fromEntries(catene)};
 }

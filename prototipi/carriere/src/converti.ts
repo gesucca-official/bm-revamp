@@ -2,7 +2,7 @@
 // Serve a mostrare che il formato proposto regge su docs/design/carriere/tutorial-dialoghi.md; in Fase B si completa,
 // con il controllo di validità dello schema e il controllo del grafo per esplorazione degli stati.
 // Sintassi del markdown: docs/design/carriere/prototipo-fase-a.md, «Come si scrive nel markdown».
-import {usciteDi, type Achievement, type Battuta, type Carriera, type Cast, type Condizione, type Destinazione, type Nodo, type Opzione, type Partita,
+import {usciteDi, type Achievement, type Battuta, type Carriera, type Catena, type Cast, type Condizione, type Destinazione, type Nodo, type Opzione, type Partita,
   type Passo, type Problema, type Rif, type Scelta} from './formato.ts';
 
 export type Risultato = {carriera: Carriera; problemi: Problema[]};
@@ -98,6 +98,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
   };
 
   const nodi: Nodo[] = [];
+  const conSconfitta = new Set<Catena>();   // le catene che hanno una [Sconfitta: …]
   const achievement: Achievement[] = [];
   const achievementCitati: {nome: string; riga: number}[] = [];
 
@@ -126,7 +127,8 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
       destinazione(grezzo, riga, d => { nodo.uscita = {verso: da && 'nodo' in d ? {...d, da} : d}; });
     };
     let ultimaBattuta: Battuta | null = null;
-    let ultimaPartita: Partita | null = null;
+    let ultimaPartita: Partita | Catena | null = null;
+    let ultimaCatena: Catena | null = null;   // mockup della principale 0.3.7: la partita a catena a cui si riferiscono [Catena…], [Sconfitta…]
     let sceltaAperta: Scelta | null = null;
     let telefono: string | undefined;
     const aggiungi = (p: Passo) => {
@@ -134,7 +136,8 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
       if (p.tipo !== 'regia') sceltaAperta = p.tipo === 'scelta' ? sceltaAperta : null;
       nodo.passi.push(p);
       if (p.tipo === 'battuta') ultimaBattuta = p;
-      if (p.tipo === 'partita') ultimaPartita = p;
+      if (p.tipo === 'partita' || p.tipo === 'catena') ultimaPartita = p;
+      if (p.tipo === 'catena') ultimaCatena = p;
     };
     const battuta = (testo: string, riga: number, se?: Condizione): Battuta | null => {
       const m = BATTUTA.exec(testo);
@@ -197,6 +200,9 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
         for (const c of comandi) comando(c, riga, i === 0);
         continue;
       }
+      // Mockup della principale 0.3.7: «[Catena, prima di Mara] **Sergio** (strafottente): …», la battuta dell'avversario prima del duello di Mara.
+      const prima = /^\[Catena,\s*prima di\s+([^\]]+)\]\s*([\s\S]+)$/i.exec(testo);
+      if (prima) { primaDi(prima[1], prima[2], riga); continue; }
       const se = /^\[Se ([^\]]+)\]\s*([\s\S]+)$/.exec(testo);
       if (se) {
         const p = contenuto(se[2], riga, condizione(se[1], riga));
@@ -206,6 +212,7 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
       const rit = /^\*\*Ritento\.\*\*\s*([\s\S]+)$/.exec(testo);
       if (rit) {
         if (!ultimaPartita) { errore(riga, 'Ritento senza una partita prima'); continue; }
+        if ((ultimaPartita as Partita | Catena).tipo === 'catena') { errore(riga, 'una partita a catena non ha ritento: la prima sconfitta porta alla sconfitta'); continue; }
         (ultimaPartita as Partita).ritento = rit[1].split(' · ').map(t => battuta(t.trim(), riga)).filter((b): b is Battuta => {
           if (!b) errore(riga, 'battuta di ritento non riconosciuta'); return !!b; });
         continue;
@@ -219,6 +226,18 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
     // Uscita esplicita; altrimenti il nodo che segue nel file (una scelta con destinazioni la sostituisce più sotto).
     if (!uscita) nodo.uscita = {verso: {nodo: SEGUENTE}};
     nodi.push(nodo);
+
+    function primaDi(chiNome: string, resto: string, riga: number) {
+      if (!ultimaCatena) return errore(riga, '[Catena, prima di …] senza una partita a catena prima');
+      const catena = ultimaCatena as Catena;
+      const chi = personaggio(chiNome, riga);
+      const b = battuta(resto, riga);
+      if (!b) return errore(riga, "dopo [Catena, prima di …] serve la battuta dell'avversario");
+      if ('personaggio' in catena.avversario && b.chi !== catena.avversario.personaggio) errore(riga, `la battuta prima di ${chiNome.trim()} non è dell'avversario della catena (${catena.avversario.personaggio})`);
+      if (!chi) return;
+      if (catena.giocatori.some(x => x.personaggio === chi)) return errore(riga, `la catena ha già la battuta prima di ${chiNome.trim()}`);
+      catena.giocatori.push({personaggio: chi, prima: b});
+    }
 
     function comando(corpo: string, riga: number, primo: boolean) {
       const [nome, arg] = dividi(corpo);
@@ -274,9 +293,14 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
         case 'modificatori':
           if (!ultimaPartita) return errore(riga, '[Modificatori: …] senza una partita prima');
           (ultimaPartita as Partita).modificatori = arg.split(',').map(s => slug(s)); return;
+        case 'catena':
+          // La regola della catena a parole («si vince se tutti battono Sergio; alla prima sconfitta la catena finisce»): non si legge.
+          if (!ultimaCatena) return errore(riga, '[Catena: …] senza una partita a catena prima');
+          return;
         case 'sconfitta': {
           if (!ultimaPartita) return errore(riga, '[Sconfitta: …] senza una partita prima');
-          const p = ultimaPartita as Partita;
+          const p = ultimaPartita as Partita | Catena;
+          if (p.tipo === 'catena') conSconfitta.add(p);
           return destinazione(arg.replace(/^→\s*/, ''), riga, d => { p.sconfitta = d; });
         }
         default: errore(riga, `comando sconosciuto: [${corpo}]`);
@@ -297,20 +321,29 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
 
     function freccia(t: string, riga: number) {
       let m: RegExpExecArray | null;
+      const rif = (s: string): Rif | undefined => {
+        // Mockup della principale 0.3: «a scelta fra A, B e C», o «{segno} o a scelta fra …».
+        const sc = /^(?:\{([\w-]+)\}\s+o\s+)?a scelta fra\s+([\s\S]+)$/i.exec(s.trim());
+        if (sc) {
+          const fra = sc[2].split(/,\s*|\s+e\s+/).map(x => x.trim()).filter(Boolean).map(x => personaggio(x, riga)).filter((x): x is string => !!x);
+          if (fra.length < 2) errore(riga, 'una partita «a scelta» ha almeno due personaggi fra cui scegliere');
+          return {sceltaFra: fra, ...(sc[1] ? {segno: sc[1]} : {})};
+        }
+        const g = /^\{([\w-]+)\}$/.exec(s.trim());
+        if (g) return {segno: g[1]};
+        const p = personaggio(s, riga);
+        return p ? {personaggio: p} : undefined;
+      };
+      if ((m = /^Partita\s+(\w+),\s*a catena\b([\s\S]*)$/i.exec(t))) {
+        const c = /\bcontro\s+([^,]+?)\s*(?:,[\s\S]*)?$/i.exec(m[2]);
+        if (!c) return errore(riga, `catena senza avversario: «${t}» (forma: Partita N, a catena: …, contro Y)`);
+        const avversario = rif(c[1]);
+        if (!avversario) return;
+        const catena: Catena = {tipo: 'catena', id: `partita-${slug(m[1])}`, avversario, giocatori: [], sconfitta: {nodo: IGNOTO}, riga};
+        aggiungi(catena);
+        return;
+      }
       if ((m = /^Partita\s+(\w+):\s*([\s\S]+?)\s*\(giocatore\)\s*contro\s+([\s\S]+)$/i.exec(t))) {
-        const rif = (s: string): Rif | undefined => {
-          // Mockup della principale 0.3: «a scelta fra A, B e C», o «{segno} o a scelta fra …».
-          const sc = /^(?:\{([\w-]+)\}\s+o\s+)?a scelta fra\s+([\s\S]+)$/i.exec(s.trim());
-          if (sc) {
-            const fra = sc[2].split(/,\s*|\s+e\s+/).map(x => x.trim()).filter(Boolean).map(x => personaggio(x, riga)).filter((x): x is string => !!x);
-            if (fra.length < 2) errore(riga, 'una partita «a scelta» ha almeno due personaggi fra cui scegliere');
-            return {sceltaFra: fra, ...(sc[1] ? {segno: sc[1]} : {})};
-          }
-          const g = /^\{([\w-]+)\}$/.exec(s.trim());
-          if (g) return {segno: g[1]};
-          const p = personaggio(s, riga);
-          return p ? {personaggio: p} : undefined;
-        };
         const giocatore = rif(m[2]);
         const lista = (s: string) => s.split(/,\s*|\s+e\s+/).map(x => x.trim()).filter(Boolean);
         const altri = /^gli altri fra\s+([\s\S]+)$/i.exec(m[3].trim());
@@ -374,6 +407,21 @@ export function converti(md: string, cast: Cast, fonte: string): Risultato {
       else errore(n.riga, `il nodo «${n.etichetta}» non ha uscita (→ Vai a, → Fine, o una scelta con destinazioni)`);
     }
   });
+
+  // Mockup della principale 0.3.7, le partite a catena: la prima sconfitta le chiude, quindi ci vuole una [Sconfitta: …]; una catena ha almeno
+  // due personaggi, ognuno con la sua battuta; chi ha un sblocco `starter-<id>` nella carriera è in catena solo se l'ha preso in quel giro,
+  // chi non ce l'ha (Mara e Spazienzio, dal tutorial) c'è sempre.
+  const sbloccati = new Set<string>();
+  for (const n of nodi) for (const p of n.passi) {
+    if (p.tipo === 'sblocco') sbloccati.add(p.sblocco);
+    if (p.tipo === 'scelta') for (const o of p.opzioni) for (const x of o.sblocchi ?? []) sbloccati.add(x);
+  }
+  for (const n of nodi) for (const p of n.passi) {
+    if (p.tipo !== 'catena') continue;
+    if (!conSconfitta.has(p)) errore(p.riga, 'una partita a catena senza ritento ha bisogno di [Sconfitta: …]: la prima sconfitta la chiude');
+    if (p.giocatori.length < 2) errore(p.riga, 'una partita a catena ha almeno due personaggi, ognuno con la sua battuta: [Catena, prima di X] **Avversario** (espressione): …');
+    for (const g of p.giocatori) if (sbloccati.has(`starter-${g.personaggio}`)) g.sblocco = `starter-${g.personaggio}`;
+  }
 
   // Riferimenti ai nodi per etichetta o per titolo.
   const perNome = new Map<string, string>();
@@ -505,6 +553,7 @@ function controllaStruttura(c: Carriera, cast: Cast, errore: (r: number, m: stri
       if ('se' in p) leggi(p.se, p.riga);
       if (p.tipo === 'scelta') for (const o of p.opzioni) leggi(o.se, p.riga);
       if (p.tipo === 'partita') { rifSegno(p.giocatore, p.riga); if (Array.isArray(p.avversari)) p.avversari.forEach(r => rifSegno(r, p.riga)); }
+      if (p.tipo === 'catena') rifSegno(p.avversario, p.riga);
     }
   }
   for (const a of c.achievement) { leggi(a.quando, 0); a.indizi.forEach(i => leggi(i.se, 0)); }
@@ -517,7 +566,7 @@ function controllaStruttura(c: Carriera, cast: Cast, errore: (r: number, m: stri
     const presi = new Set<string>();
     for (const p of n.passi) {
       if (p.tipo === 'sblocco') presi.add(p.sblocco);
-      if (p.tipo === 'partita' && p.sconfitta) archi.push({da: n.id, a: meta(p.sconfitta), sblocchi: new Set(presi)});
+      if ((p.tipo === 'partita' || p.tipo === 'catena') && p.sconfitta) archi.push({da: n.id, a: meta(p.sconfitta), sblocchi: new Set(presi)});
       if (p.tipo === 'scelta') for (const o of p.opzioni) if (o.verso) archi.push({da: n.id, a: meta(o.verso), sblocchi: new Set([...presi, ...(o.sblocchi ?? [])])});
     }
     for (const u of usciteDi(n)) archi.push({da: n.id, a: meta(u.verso), sblocchi: presi});

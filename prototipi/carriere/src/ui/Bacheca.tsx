@@ -577,6 +577,7 @@ function Cartoncino({c, s, n, onEntra, onRiprendi, onChiudi}: {c: Carriera; s: S
   }
   const nodo = trovaNodo(c, n.id);
   const partite = nodo.passi.flatMap(p => p.tipo === 'partita' ? [p] : []);
+  const catene = nodo.passi.flatMap(p => p.tipo === 'catena' ? [p] : []);
   const sblocchi = nodo.passi.flatMap(p => p.tipo === 'sblocco' ? [p.sblocco] : []);
   return (
     <div className="cartoncino" data-testid="dettaglio">
@@ -584,6 +585,9 @@ function Cartoncino({c, s, n, onEntra, onRiprendi, onChiudi}: {c: Carriera; s: S
       <span>{DESCRIZIONE[n.stato]}</span>
       {noto && partite.map(p => (
         <span key={p.id}>{p.modo === 'duello' ? 'Duello' : 'Tutti contro tutti'}: {nomeDi(risolvi(p.giocatore, s))} contro {avversari(p, s).map(nomeDi).join(', ')}</span>
+      ))}
+      {noto && catene.map(p => (
+        <span key={p.id}>Catena di duelli: {nomeDi(risolvi(p.avversario, s))} contro tutti i personaggi sbloccati, uno alla volta; la prima sconfitta la chiude</span>
       ))}
       {noto && sblocchi.length > 0 && <span>Sblocca: {sblocchi.map(nomeSblocco).join(', ')}</span>}
       <span className="pulsanti">

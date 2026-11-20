@@ -21,7 +21,7 @@ const riepilogo = (c: Carriera, problemi: Problema[], validita: string[]) => {
   const conta = (t: string) => passi.filter(p => p.tipo === t).length;
   const ritento = passi.reduce((s, p) => s + (p.tipo === 'partita' ? p.ritento?.length ?? 0 : 0), 0);
   const errori = problemi.filter(p => p.livello === 'errore').length + validita.length;
-  console.log(`${c.id}: ${c.nodi.length} nodi, ${conta('battuta')} battute, ${ritento} di ritento, ${conta('partita')} partite, ` +
+  console.log(`${c.id}: ${c.nodi.length} nodi, ${conta('battuta')} battute, ${ritento} di ritento, ${conta('partita')} partite${conta('catena') ? ` e ${conta('catena')} a catena` : ''}, ` +
     `${conta('scelta')} scelte, ${conta('regia')} note di regia, ${c.achievement.length} achievement; ` +
     `${errori} errori, ${problemi.filter(p => p.livello === 'avviso').length} avvisi`);
   if (errori) rosso = true;
@@ -36,7 +36,8 @@ if (args.includes('--tutti')) {
     fs.writeFileSync(new URL(`${carriera.id}.json`, dir), JSON.stringify(carriera, null, 2) + '\n');
   }
 } else {
-  const file = args.find(a => !a.startsWith('--') && a !== args[args.indexOf('--json') + 1]);
+  const uscita = args.indexOf('--json') >= 0 ? args[args.indexOf('--json') + 1] : undefined;  // senza --json non c'è nessun argomento da escludere
+  const file = args.find(a => !a.startsWith('--') && a !== uscita);
   if (!file) { console.error('uso: converti.ts --tutti | <storia.md> [--json <uscita.json>]'); process.exit(2); }
   const md = fs.readFileSync(file, 'utf8');
   const {carriera, problemi} = converti(md, cast, file.replaceAll('\\', '/'));

@@ -1,27 +1,32 @@
 # Il Serraglio chiude — mockup del grafo della campagna principale
 
-> Mockup del grafo della [carriera principale del Set Base](../../../docs/design/carriere/principale.md), **versione 0.3** (14 novembre
-> 2026; la prima stesura del mockup era sulla 0.2), scritto da un esecutore per vedere la carriera sulla bacheca e giocarla da cima a fondo
-> con le partite simulate. **Le battute sono segnaposto**, una o due per scena, prese dalla colonna «Scena» della scaletta: **non sono i
-> dialoghi della carriera** e non vanno nel serbatoio. Nodi, partite, scelte, segni, fili, sconfitte che aprono un ramo, finali, segreti e
-> achievement seguono la scaletta; dove il formato non la regge, o la scaletta non dice abbastanza, la scelta del mockup è annotata qui
-> sotto e nel [rapporto](../../../docs/design/carriere/mockup-principale.md#aggiornamento-alla-03).
+> Mockup del grafo della [carriera principale del Set Base](../../../docs/design/carriere/principale.md), **versione 0.3.7** (20 novembre
+> 2026; la prima stesura del mockup era sulla 0.2, poi sulla 0.3 e sulla 0.3.2), scritto da un esecutore per vedere la carriera sulla
+> bacheca e giocarla da cima a fondo con le partite simulate. **Le battute sono segnaposto**, una o due per scena, prese dalla colonna
+> «Scena» della scaletta e dai [dialoghi](../../../docs/design/carriere/principale-dialoghi.md): **non sono i dialoghi della carriera** e non
+> vanno nel serbatoio. Nodi, partite, scelte, segni, fili, sconfitte che aprono un ramo, finali, segreti e achievement seguono la scaletta;
+> dove il formato non la regge, o la scaletta non dice abbastanza, la scelta del mockup è annotata qui sotto e nel
+> [rapporto](../../../docs/design/carriere/mockup-principale.md#aggiornamento-alla-037).
 >
 > - **Ritratti:** Celestina, Beppe, Sergio, Duccio e Grappino hanno un cartoncino segnaposto con il primo piano dell'identikit approvato
 >   (`segnaposto/`, fatto da `strumenti/segnaposto.mjs`); il padrone del Dimmi Di Sì è una figura in ombra, senza nome. Tutti con una sola
->   espressione, «neutra».
+>   espressione, «neutra». In I3b Sergio non ha ancora un nome: il cast non ha l'alias «Un signore», quindi parla come Sergio.
 > - **Sfondi riusati:** il Dimmi Di Sì è S3 (l'esterno del tutorial) anche dentro; il bar di notte e la cantina sono S2 con il disordine;
 >   la strada di notte e il marciapiede dello sgombero sono S1 con l'insegna spenta.
-> - **«A scelta»** (II1, III1 quando non manca nessuno, III3a) è il selettore del personaggio prima della partita: «→ Partita X: a scelta
->   fra …» (estensione del formato della 0.3).
-> - **Chi ti ha accompagnato nell'atto III** (III3b, III4, III5, S2) è il segno `alleato`: Beppe per il torneo, Mara per il pedinamento,
->   Celestina per lo sgombero e per Grappino. S1 lo gioca Celestina.
-> - **Starter garantiti:** in II3 e in III1 lo sblocco dello starter ha una condizione (`[Se …] [Sblocca: …]`). In III1, quando Beppe non
->   ti ha ancora dato le sue carte, lo sblocco viene prima della partita, perché III1 si può perdere.
+> - **«A scelta»** (II1, III1 quando non manca nessuno, III3a, S2) è il selettore del personaggio prima della partita: «→ Partita X: a
+>   scelta fra …» (estensione del formato della 0.3).
+> - **Chi ti ha accompagnato nell'atto III** (III3b, III4) è il segno `alleato`: Beppe per il torneo, Mara per il pedinamento, Celestina
+>   per lo sgombero e per Grappino. S1 lo gioca Celestina. III5 è una catena: giocano tutti.
+> - **Starter garantiti:** in II3 e in III1 lo sblocco dello starter ha una condizione (`[Se …] [Sblocca: …]`) e viene prima della
+>   partita (0.3.3): chi si siede al tavolo ti dà le sue carte, e restano anche se la partita si perde.
 > - **Le sconfitte sono un segreto** (0.3.2): I1s, II2s, III1s e III3c sono nodi segreti, sulla bacheca solo dopo esserci arrivati; I1s e
->   II2s sono tasche (`[Nodo: segreto; tasca]`), che pendono dal nodo perso senza strade proprie.
-> - **Finali:** III5 vinto esce con uscite condizionate (`→ Fine: … [Se …]`, estensione della 0.3): il finale giusto per la strada fatta,
->   senza pulsanti. Dopo F1, in un giro nuovo, prima delle uscite c'è l'offerta della rivincita S2 (una scelta «se c'è»).
+>   II2s sono tasche (`[Nodo: segreto; tasca]`), che pendono dal nodo perso senza strade proprie. F3 non è un nodo: è il finale «Disco
+>   pub», un piatto del giorno sempre visibile, che si raggiunge perdendo la catena di III5.
+> - **III5 è una partita a catena** (0.3.7, estensione del formato): tutti i personaggi sbloccati in quel giro, uno alla volta nell'ordine
+>   che sceglie il giocatore, contro Sergio, senza ritento. Vincono tutti → III5 finisce; la prima sconfitta → F3.
+> - **Finali:** III5 vinto esce con uscite condizionate (`→ Vai a: F2 [Se …]`, estensione della 0.3): F2 (Monetine) dopo il torneo e poi F1,
+>   che chiude con il finale giusto per la strada fatta. Prima delle uscite c'è la scelta «con chi sei d'accordo?»: S2 si offre solo a chi ha
+>   già visto il finale «Il Serraglio resta» in un giro precedente.
 
 [Carriera: principale; obbligatori: starter-celestina, starter-piera, starter-beppe, pvp]
 
@@ -29,13 +34,13 @@
 
 [Sfondo: S1 insegna-spenta]
 
-*Sulla porta: «CHIUSO PER CESSIONE ATTIVITÀ. PROSSIMAMENTE: DIMMI DI SÌ 2».*
+*Sulla serranda: «CHIUSO PER CESSIONE ATTIVITÀ. NUOVA GESTIONE: DIMMI DI SÌ DISCO PUB».*
 
-**Mara** (sospettosa): Qualcuno sta mentendo. E sono tutti.
+**Mara** (sospettosa): Qualcuno ha venduto. Qui c'è un complotto, come dappertutto.
 
-**Spazienzio** (furioso): SFONDIAMO LA PORTA. SFONDIAMOLA ADESSO.
+**Spazienzio** (furioso): SOLLEVIAMO LA SERRANDA. A MANI NUDE.
 
-**Celestina** (neutra): Il pavimento è mio. Lo dico al padrone, quando passa stanotte.
+**Celestina** (neutra): Chi siete? Io qui ci dormo. Se il bar chiude, perdo casa.
 
 → Partita I1: Spazienzio (giocatore) contro Celestina
 
@@ -54,7 +59,7 @@
 
 *Spazienzio è per terra, accanto a Celestina, sul suo pavimento. Non può che ascoltarla.*
 
-**Celestina** (neutra): Il padrone passa ogni notte. Si siede. Guarda. Io faccio finta di dormire.
+**Celestina** (neutra): Il proprietario viene di notte, quando è chiuso. Dal pavimento ho visto solo le scarpe: a punta e lucide.
 
 **Spazienzio** (quasi-calmo): NESSUNO TI CREDE. MI RIALZO.
 
@@ -66,11 +71,11 @@
 
 [Sfondo: S1]
 
-**Beppe** (neutra): Serratura nuova, pagata in contanti. «Apri e Chiudi s.r.l.», sede in Svizzera. Mai vista.
+**Beppe** (neutra): Serratura nuova, pagata in contanti. «Apri e Chiudi GmbH», sede in Svizzera. Mai vista.
 
 → Partita I2a: Mara (giocatore) contro Beppe
 
-**Beppe** (neutra): Va bene: di ogni chiave che faccio mi tengo una copia. Non si sa mai chi paga due volte.
+**Beppe** (neutra): Va bene: di ogni chiave che faccio mi tengo una copia. Per motivi personali.
 
 [Segno: chiave]
 
@@ -80,7 +85,7 @@
 
 [Sfondo: S1] [Entra: bici-mara]
 
-**Beppe** (neutra): Per farmi perdonare ti ho riparato la bici. Più o meno.
+**Beppe** (neutra): Per farmi perdonare ti ho riparato la bici. Più o meno: il manubrio è al contrario, così vedi chi ti segue.
 
 **Spazienzio** (soddisfatto): CI SEDIAMO SOPRA. VEDIAMO SE REGGE.
 
@@ -96,7 +101,7 @@
 
 → Partita I2b: Spazienzio (giocatore) contro Duccio
 
-**Duccio** (neutra): Davanti a tutta la fila. Questa non la dimentico.
+**Duccio** (neutra): Davanti a tutta la fila. Questa non la dimentico: il rancore è una cosa di destra.
 
 [Segno: duccio]
 
@@ -106,9 +111,9 @@
 
 [Sfondo: S3, dentro il Dimmi Di Sì: si riusa l'esterno.]
 
-**Mara** (agitata): Un kebab. Nessuno l'ha ordinato? Lo lascio qui.
+**Mara** (agitata): Sedici euro a bicchiere. Qui il complotto è il listino.
 
-**Il padrone del Dimmi Di Sì**: Il vostro padrone ha già detto quasi sì. Si firma domenica.
+**Sergio** (neutra): Un signore, senza nome, che sa della serranda. Lunedì mattina si firma il passaggio di proprietà.
 
 → Partita I3b: Spazienzio (giocatore) contro Duccio, Mara e Beppe
 
@@ -120,9 +125,9 @@
 
 **Un amico**: Serata «Salviamo il Serraglio»? Venite voi qui!
 
-**Celestina** (neutra): Stasera sto con voi. Tenete, il mio mazzo.
+**Celestina** (neutra): Mettetemi alla prova. Se vinco, vi do il mio mazzo.
 
-→ Partita I4: Celestina (giocatore) contro Mara, Spazienzio e Beppe
+→ Partita I4: Celestina (giocatore) contro Mara e Spazienzio
 
 [Sblocca: starter-celestina]
 
@@ -140,7 +145,11 @@
 
 **Mara** (sospettosa): È stato Spazienzio. No: Piera. No: Grappino. Lavorano tutti per loro.
 
-**Sergio** (neutra): Una raccolta firme per questo letamaio. E i conti del bar, poi: lo sapete che siete sotto da marzo?
+**Sergio** (neutra): Cliente fisso, dal fondo del bancone. I conti del Serraglio? Siete sotto da anni.
+
+[Se visto I3b] **Mara** (sospettosa): Il signore del Mercedes. Lo riconosco: lavora per loro.
+
+[Se non visto I3b] **Celestina** (neutra): Quello? Torna dopo la chiusura. Si siede e guarda.
 
 → Partita II1: a scelta fra Celestina, Mara e Spazienzio (giocatore) contro Sergio
 
@@ -198,15 +207,15 @@
 
 [Sfondo: S2 disordine]
 
-**Beppe** (neutra): Chi mi pagò i lavori dieci anni fa? Ve lo dico. In contanti.
+**Beppe** (neutra): Chi mi pagò i lavori dieci anni fa? Ve lo dico. Per venti euro. In contanti.
 
-[Se segno duccio] **Duccio** (neutra): E tu sei quello della porta. Beppe mi deve dei soldi; tu mi devi una faccia.
+[Se segno duccio] **Duccio** (neutra): E tu sei quello della porta. Beppe mi deve l'anticipo; tu mi devi una faccia.
 
-[Se non segno duccio] **Duccio** (neutra): Beppe. Il Dimmi Di Sì rivuole i suoi soldi.
+[Se non segno duccio] **Duccio** (neutra): Beppe. Il Dimmi Di Sì rivuole l'anticipo della ristrutturazione.
 
 → Partita II2b: Beppe (giocatore) contro Duccio
 
-**Beppe** (neutra): A chi mi aiuta faccio lo sconto. E una copia della chiave del bar, già che ci sono.
+**Beppe** (neutra): Una valigetta di contanti sul bancone, e mozziconi di sigarette sottili nel barattolo di vernice. E una copia della chiave, già che ci sono.
 
 **Mara** (sospettosa): Beppe lavora per chi paga. Anche per loro.
 
@@ -220,7 +229,7 @@
 
 [Sfondo: S1]
 
-**Celestina** (neutra): Il bilancio della «Apri e Chiudi s.r.l.». Metà. Sa di carta buona.
+**Celestina** (neutra): Il bilancio della «Apri e Chiudi GmbH». Metà. Il Serraglio perde soldi da ogni parte: lo tiene aperto uno scemo, o uno che in fondo gli vuole bene.
 
 **Mara** (illuminata): Quello va sul mio muro dei complotti.
 
@@ -240,9 +249,9 @@
 
 **Mara** (illuminata): Tutti i fili portano a lui. Sergio lavora per il Dimmi Di Sì.
 
-[Se non visto I3b] **Sergio** (neutra): Fate pure. Tanto domenica sarete fuori.
+[Se non visto I3b] **Sergio** (neutra): Fate pure. Lunedì sarà tutto finito.
 
-**Duccio** (neutra): Io sto con lui.
+**Duccio** (neutra): Io sto dalla parte di chi ha i soldi.
 
 [Se visto II2s] **Piera** (offesa): Gioco... per Grappino... non per voi...
 
@@ -250,23 +259,23 @@
 
 [Se non segno ii3 = beppe] [Segno: ii3 = piera]
 
-→ Partita II3: {ii3} (giocatore) contro Sergio e Duccio
-
-**Sergio** (neutra): Non avete capito niente.
-
 [Se segno ii3 = beppe] [Sblocca: starter-beppe]
 
 [Se segno ii3 = piera] [Sblocca: starter-piera]
 
+→ Partita II3: {ii3} (giocatore) contro Duccio
+
+**Sergio** (neutra): Non avete capito niente. Ma poi vi vedo tutti la sera, qui al bancone.
+
 → Vai a: III1
 
-## III1 — Sabato sera
+## III1 — Domenica sera
 
 [Sfondo: S2]
 
 [Se segno duccio] **Duccio** (neutra): Ti ricordi la porta? Stasera sgombero io. E tu esci per primo.
 
-[Se non segno duccio] **Duccio** (neutra): Sgombero, per conto del Dimmi Di Sì. Fuori tutti.
+[Se non segno duccio] **Duccio** (neutra): Sgombero, per conto del Dimmi Di Sì. Fuori tutti: domani si firma.
 
 [Se non segno pista = beppe e non segno ii3 = beppe] [Segno: iii1 = beppe] [Sblocca: starter-beppe]
 
@@ -290,11 +299,17 @@
 
 **Duccio** (neutra): Fuori tutti. Chiuso.
 
-**Celestina** (neutra): Di qua. La porta sul retro non la chiude nessuno da dieci anni.
+[Se segno chiave] **Celestina** (neutra): Una notte in più al coperto: la chiave ce l'avete, si rientra dalla porta.
+
+[Se non segno chiave] **Celestina** (neutra): La finestra del bagno si apre anche da fuori. Spazienzio non ci passa.
+
+[Se segno chiave] [Segno: rientro = porta]
+
+[Se non segno chiave] [Segno: rientro = finestra]
 
 [Segno: via-atto-3 = sgombero] [Segno: alleato = celestina]
 
-[Achievement: Porta sul retro]
+[Achievement: Rientro abusivo]
 
 → Vai a: III3b
 
@@ -318,7 +333,7 @@
 
 [Sfondo: S2 disordine]
 
-**Beppe** (neutra): Perso tutto. Adesso devo fare lavori in nero per tutti.
+**Beppe** (neutra): Perso tutto. Adesso devo coprire le scommesse, e Duccio rivuole l'anticipo.
 
 → Partita III3c: Beppe (giocatore) contro Duccio e Celestina
 
@@ -330,9 +345,9 @@
 
 **Mara** (pensierosa): Mancano sempre dieci euro. E comunque non bastano.
 
-**Sergio** (neutra): Una colletta. Che tenerezza. Ecco i miei dieci euro.
+**Sergio** (neutra): Una colletta. Che tenerezza. Metto i miei dieci euro in palio.
 
-→ Partita III3a: a scelta fra Beppe, Mara, Spazienzio, Celestina e Piera (giocatore) contro Duccio e Sergio
+→ Partita III3a: a scelta fra Beppe, Mara, Spazienzio, Celestina e Piera (giocatore) contro Sergio
 
 → Vai a: III4
 
@@ -342,7 +357,7 @@
 
 **Mara** (sospettosa): Stanotte va a prendere ordini. Lo seguo.
 
-**Sergio** (neutra): Mi segui? So del kebab mai consegnato. E di tutti gli altri.
+**Sergio** (neutra): Ti sento da due isolati, ragazzina. Torna a casa.
 
 → Partita III2b: Mara (giocatore) contro Sergio
 
@@ -354,15 +369,19 @@
 
 [Sfondo: S2 disordine, il bar chiuso e buio.]
 
-[Se segno celestina] **Celestina** (neutra): Ve l'avevo detto che passa ogni notte. Da dieci anni, alle due. Beve un amaro e guarda.
+[Se segno rientro = porta] *Si rientra dalla porta, con la chiave.*
 
-[Se non segno celestina] **Celestina** (neutra): Ve l'avevo detto che passa ogni notte.
+[Se segno rientro = finestra] *Si rientra dalla finestra del bagno. Spazienzio non ci passa.*
 
-*Entra Sergio, con le sue chiavi. Si siede al bancone vuoto e guarda il locale.*
+[Se non segno rientro] **Celestina** (neutra): Che ci fate voi qui?
 
-[Se segno duccio] **Duccio** (neutra): Ancora tu. Ho il contratto. E la mia rivincita.
+[Se segno celestina] **Celestina** (neutra): Ve l'avevo detto che da quaggiù si vede tutto. Lui passa ogni notte.
 
-[Se non segno duccio] **Duccio** (neutra): Il contratto, capo. Da firmare.
+[Se non segno celestina] **Celestina** (neutra): Qui passa qualcuno, dopo la chiusura.
+
+*Sergio è già al bancone. Duccio porta una busta chiusa: «un piccolo incentivo» del padrone.*
+
+**Mara** (agitata): Una bustarella! Ci hanno scoperti, ma io ho scoperto loro.
 
 → Partita III3b: {alleato} (giocatore) contro Sergio e Duccio
 
@@ -400,15 +419,17 @@
 
 [Se segno via-atto-3 = grappino] *Prima che Sergio si sieda, il foglio con la firma è già sul tavolo.*
 
-*Entra Sergio, e si siede dalla parte di chi vende.*
+[Se segno via-atto-3 = grappino] **Sergio** (neutra): Pensavo che quel cane le mie carte se le mangiasse, non che le portasse in giro.
+
+*Entra Sergio, con le sue chiavi, e si siede dalla parte di chi vende.*
 
 [Se segno frase] **Piera** (contenta): ...alto... e secco... e antipatico. Era lui.
 
 [Se non segno frase] **Piera** (offesa): Un signore...
 
-[Se non segno frase] **Sergio** (neutra): Sono io. Finiamola.
+[Se non segno frase] **Sergio** (neutra): Basta così. Andiamo avanti.
 
-**Spazienzio** (furioso): VE L'AVEVO DETTO.
+[Se non segno frase] **Spazienzio** (furioso): IL SERRAGLIO È TUO!
 
 → Partita III4: {alleato} (giocatore) contro Sergio, Duccio, Spazienzio e Piera
 
@@ -418,18 +439,64 @@
 
 [Sfondo: S2]
 
-**Sergio** (neutra): Fondi neri, anni fa, per non farlo chiudere. Adesso rientro. È solo business. E poi qui fate schifo.
+**Sergio** (neutra): Dieci anni fa ho comprato questa baracca con fondi neri, per abbattere l'imponibile. Adesso rientro. È solo business.
 
-→ Partita III5: {alleato} (giocatore) contro Sergio
+**Celestina** (neutra): Eppure vieni qui ogni notte, e mi lasci il pavimento. Un motivo c'è.
 
-[Sconfitta: → Fine: completata, Dimmi Di Sì 2]
+**Sergio** (neutra): Datemi un motivo per non vendere. Uno alla volta.
 
-[Se non segno via-atto-3 = torneo] **Sergio** (neutra): La prossima volta faccio sul serio.
+→ Partita III5, a catena: ogni personaggio sbloccato (giocatore), uno alla volta nell'ordine che sceglie il giocatore, contro Sergio, boss finale
 
-→ Scelta muta, se c'è: la rivincita?
+[Catena: si vince se tutti battono Sergio; alla prima sconfitta la catena finisce]
 
-- con Sergio, che vuole la rivincita [Se finale Il Serraglio resta] → S2
-- con Beppe, a chiudere il bar per stasera [Se finale Il Serraglio resta]
+[Sconfitta: → Fine: completata, Disco pub]
+
+[Catena, prima di Mara] **Sergio** (neutra): La ciclista dei complotti. Chi ti manda stavolta, gli Illuminati o i satelliti?
+
+[Catena, prima di Spazienzio] **Sergio** (neutra): Spazienzio. Cerca di non ribaltare il bancone: è ancora mio.
+
+[Catena, prima di Celestina] **Sergio** (neutra): Pure tu? Dieci anni a dormire gratis sul mio pavimento, ed ecco come mi ripaghi.
+
+[Catena, prima di Piera] **Sergio** (neutra): Piera. Se aspetto che finisci una frase, chiudo per vecchiaia. Gioca.
+
+[Catena, prima di Beppe] **Sergio** (neutra): Beppe. Se vinco io, la ristrutturazione la fai gratis. In nero, come piace a te.
+
+**Sergio** (neutra): Sapete come divertirvi, voialtri. Chissà... forse un giorno vi farò vedere quanto valgo davvero.
+
+**Spazienzio** (soddisfatto): CE L'HAI GIÀ FATTO VEDERE, E HAI PERSO! GIUBILIAMOCI!
+
+→ Scelta muta, se c'è: con chi sei d'accordo?
+
+- con Sergio, che crede di saper fare di meglio [Se finale Il Serraglio resta] → S2
+- con Spazienzio, che è contento di aver vinto [Se finale Il Serraglio resta]
+
+→ Vai a: F2 [Se segno via-atto-3 = torneo]
+
+→ Vai a: F1
+
+## F2 — Il Serraglio è di tutti
+
+[Sfondo: S2]
+
+**Sergio** (neutra): Trecento e rotti, un bottone e una caramella. D'accordo, il resto lo anticipo io con la Apri e Chiudi. La caramella me la tengo, come garanzia.
+
+[Achievement: Monetine]
+
+→ Vai a: F1
+
+## F1 — Il Serraglio resta
+
+[Sfondo: S2]
+
+**Il padrone del Dimmi Di Sì**: Lei ha fatto un grave errore. Duccio, mi sei costato un sacco di soldi: sparisci.
+
+**Duccio** (neutra): Mi licenzia? Ma io sono di destra!
+
+*La sera dopo il Serraglio è aperto, come sempre. Sergio, sul suo sgabello in fondo al bancone, fa finta di niente.*
+
+[Se non visto S2] **Sergio** (neutra): Tutto è bene quel che finisce bene, che noia. Un po' mi pento di non aver fatto sul serio.
+
+[Se visto S2] **Sergio** (neutra): Tutto è bene quel che finisce bene, che noia. Godetevi la vostra normalità.
 
 → Fine: completata, Il Serraglio è di tutti [Se segno via-atto-3 = torneo]
 
@@ -441,17 +508,19 @@
 
 [Sfondo: S2]
 
-**Sergio** (neutra): Ho perso in casa mia. Adesso faccio sul serio.
+**Sergio** (neutra): Volete davvero vedere di cosa sono capace? Se puoi barare, non è barare.
 
-→ Partita S2: {alleato} (giocatore) contro Sergio
+→ Partita S2: a scelta fra Mara, Spazienzio, Celestina, Piera e Beppe (giocatore) contro Sergio
 
 [Modificatori: ha letto i tuoi messaggi, ha comprato il mazzo, società apri e chiudi]
 
-[Achievement: Rivincita]
+**Sergio** (neutra): Questo era davvero il meglio che potevo fare. Ve lo riconosco: siete in gamba. Forza, sciò: andate a bere.
 
-→ Fine: completata, Il Serraglio è di tutti [Se segno via-atto-3 = torneo]
+[Achievement: Superboss]
 
-→ Fine: completata, Il Serraglio resta
+→ Vai a: F2 [Se segno via-atto-3 = torneo]
+
+→ Vai a: F1
 
 ## Achievement
 
@@ -471,31 +540,39 @@ Hai difeso la frase di Piera, e lei l'ha finita alla firma.
 [Quando: vinto II2a e visto III4]
 
 - Indizio: Qualcuno interrompe sempre Piera.
+- Indizio, se esplorato II2a: Se nessuno la interrompe, una frase di Piera arriva fino a lunedì.
 
 ### Lo diceva Celestina
 
-Le hai dato retta sul pavimento, e sei entrato di notte al Serraglio nello stesso giro.
+Hai dato retta a Celestina sul pavimento e hai fatto ritorno al Serraglio di notte, nello stesso giro.
 
 [Quando: visto I1s e visto III3b]
 
 - Indizio: Celestina parla nel sonno. Qualcuno l'ha ascoltata?
 - Indizio, se esplorato III3b: Certe sconfitte ti mettono all'altezza del pavimento.
 
+### Rientro abusivo
+
+Dopo lo sgombero, Celestina ti ha riportato dentro di notte: con la chiave o dalla finestra del bagno.
+
+- Indizio: Dal Serraglio non ti cacciano così facilmente.
+- Indizio, se esplorato III3b: Se Duccio ti butta fuori, segui Celestina.
+
 ### Monetine
 
-Il Serraglio è di tutti.
-
-[Quando: finale Il Serraglio è di tutti]
+Il Serraglio è di tutti, a rate.
 
 - Indizio: Il Serraglio potrebbe essere di tutti.
+- Indizio, se esplorato III2a: Vinci l'ultima partita dopo il torneo di Beppe.
 
 ### Sedici euro
 
-Il Serraglio è diventato il Dimmi Di Sì 2.
+Il Serraglio è diventato il Dimmi Di Sì Disco Pub.
 
-[Nascosto] [Quando: finale Dimmi Di Sì 2]
+[Nascosto] [Quando: finale Disco pub]
 
 - Indizio: A volte perdere è il finale più caro.
+- Indizio, se esplorato III5: Contro Sergio basta che uno solo perda.
 
 ### Il cane sa
 
@@ -511,17 +588,13 @@ Hai seguito tutte e tre le piste dell'atto II, in giri diversi.
 [Quando: esplorato II2a e esplorato II2b e esplorato II2c]
 
 - Indizio: Ogni pista porta a Sergio, ma ognuna da un'altra parte.
+- Indizio, se esplorato II1: Nell'atto II le piste sono tre: la memoria di Piera, i soldi di Beppe, il bidone di Celestina.
 
-### Porta sul retro
-
-Sei entrato di notte al Serraglio senza la chiave.
-
-- Indizio: Al Serraglio c'è sempre un'altra porta.
-
-### Rivincita
+### Superboss
 
 Hai battuto Sergio quando faceva sul serio.
 
 [Nascosto]
 
 - Indizio: Sergio non sopporta di perdere in casa sua.
+- Indizio, se finale Il Serraglio resta: Vinta l'ultima partita, dai ragione a Sergio.

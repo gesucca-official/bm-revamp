@@ -1,7 +1,7 @@
 // Il lettore di scene: sfondo, sprite, un personaggio alla volta, finestra di dialogo, e sopra le scelte, la partita simulata e la fine.
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import type {Carriera} from '../formato.ts';
-import {scegliGiocatore, avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
+import {scegliCatena, scegliGiocatore, avanti, conNome, finali, nodo, perdi, ritenta, salta, scegli, vinci, vista, type Evento, type Stato} from '../motore.ts';
 import {cast, espressioneStacco, nomeDi, nomeSblocco, ritratto, ritrattoAlfa, ritrattoBocca, sfondo, sprite} from './dati.ts';
 import {pagine, useTesto} from './testo.ts';
 import {CARATTERE} from './font.ts';
@@ -75,7 +75,7 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
   };
 
   const battuta = v.tipo === 'battuta' || v.tipo === 'ritento' ? v.battuta : null;
-  const chiave = `${g.numero}:${g.nodo}:${g.passo}:${g.ritento}`;
+  const chiave = `${g.numero}:${g.nodo}:${g.passo}:${g.ritento}:${g.catena?.vinti.length ?? ''}`;
   const testoPieno = battuta ? conNome(battuta.testo, nome) : v.tipo === 'narrazione' ? conNome(v.testo, nome) : '';
   // Finestra di dialogo (Fase F): sempre alta due righe, con un corpo fisso per orientamento; le battute più lunghe vanno a pagine da
   // due righe. Dove vanno a capo le parole lo dice il disegno: una copia invisibile del testo intero, parola per parola, nella finestra.
@@ -273,6 +273,40 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
             <button className="primario" data-testid="vinci" disabled={v.giocatore === null} onClick={() => azione(vinci)}>Vinci</button>
             <button data-testid="perdi" disabled={v.giocatore === null} onClick={() => azione(perdi)}>Perdi</button>
           </div>
+        </div>
+      )}
+
+      {v.tipo === 'catena' && (
+        // Mockup della principale 0.3.7: la partita a catena. Il tavolo mostra chi è in catena, chi ha già vinto e, nella scelta, chi può essere
+        // il prossimo; la battuta dell'avversario per chi ha scelto è la finestra di dialogo di prima.
+        <div className="riquadro partita catena" onClick={e => e.stopPropagation()} data-testid="catena">
+          <h2>Catena contro {nomeDi(v.avversario)}</h2>
+          <div className="tavolo">
+            <div className="fila-catena" data-testid="fila-catena">
+              {v.giocatori.map(({chi, vinto}) => {
+                const ora = v.scelto === chi;
+                const stato = vinto ? 'vinto' : ora ? 'ora' : 'attesa';
+                const corpo = <>{ritratto(chi) && <img src={ritratto(chi)!} alt="" />}<span>{nomeDi(chi)}</span><small>{vinto ? 'ha vinto ✓' : ora ? 'gioca ora' : 'da giocare'}</small></>;
+                return v.fase === 'scelta' && !vinto
+                  ? <button key={chi} className="in-catena" data-testid={`catena-${chi}`} data-stato={stato} onClick={() => azione((cc, ss) => scegliCatena(cc, ss, chi))}>{corpo}</button>
+                  : <figure key={chi} className={`in-catena ${stato}`} data-testid={`catena-${chi}`} data-stato={stato}>{corpo}</figure>;
+              })}
+            </div>
+            <span className="contro">contro</span>
+            <figure className="avversario-catena">{ritratto(v.avversario) && <img src={ritratto(v.avversario)!} alt="" />}<figcaption>{nomeDi(v.avversario)}</figcaption></figure>
+          </div>
+          {v.catena.modificatori?.length ? <p className="nota">Modificatori: {v.catena.modificatori.join(', ')}</p> : null}
+          <p className="nota">Vinti {v.giocatori.filter(x => x.vinto).length} di {v.giocatori.length}. Senza ritento: si vince se vincono tutti, la prima sconfitta chiude la catena.</p>
+          {v.sblocchi.length > 0 && <p className="nota">Se vincono tutti: {v.sblocchi.map(nomeSblocco).join(', ')}</p>}
+          {v.fase === 'scelta' ? <p className="nota" data-testid="catena-scegli">Scegli chi gioca ora.</p> : (
+            <>
+              <p className="nota">Partita simulata: nel prototipo si sceglie l'esito.</p>
+              <div className="pulsanti">
+                <button className="primario" data-testid="vinci" onClick={() => azione(vinci)}>Vinci</button>
+                <button data-testid="perdi" onClick={() => azione(perdi)}>Perdi</button>
+              </div>
+            </>
+          )}
         </div>
       )}
 

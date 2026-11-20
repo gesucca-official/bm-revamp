@@ -101,6 +101,15 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
 .partita .scegli button { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px; }
 .partita .scegli button img { height: 96px; width: 72px; object-fit: cover; object-position: top; border-radius: 6px; border: 2px solid var(--bordo); }
 .partita .contro { color: var(--tenue); font-weight: 700; }
+/* Mockup della principale 0.3.7: la partita a catena, una fila di chi è in catena (chi ha vinto in verde, chi gioca ora in evidenza). */
+.partita .fila-catena { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 620px; }
+.partita .in-catena { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px; margin: 0; }
+.partita .in-catena img { height: 110px; width: 84px; object-fit: cover; object-position: top; border-radius: 6px; border: 2px solid var(--bordo); }
+.partita .in-catena small { color: var(--tenue); }
+.partita .in-catena.vinto img { border-color: var(--verde); opacity: .55; }
+.partita .in-catena.vinto small, .partita .in-catena.ora small { color: var(--verde); }
+.partita .in-catena.ora { outline: 3px solid var(--accento); border-radius: 8px; }
+.partita .avversario-catena img { height: 140px; width: 108px; border-color: #b4402e; }
 .fine p { margin: 6px 0; }
 
 /* Achievement, stato, avvisi */
@@ -150,6 +159,10 @@ button.primario { background: var(--accento); color: #20160e; border-color: var(
   .offerta img { height: 90px; width: 70px; }
   .partita .tavolo { flex-direction: column; }
   .partita figure img { height: 120px; width: 96px; }
+  .partita .in-catena img { height: 64px; width: 50px; }
+  .partita .in-catena { padding: 3px; font-size: .72em; }
+  .partita .avversario-catena img { height: 84px; width: 66px; }
+  .partita.catena .tavolo { gap: 6px; }
   .riquadro { padding: 14px; }
   .telefono { padding: 6px; }
   .schede, .achievement ul { grid-template-columns: 1fr; }
