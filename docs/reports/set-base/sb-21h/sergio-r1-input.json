@@ -1,0 +1,1 @@
+{"binding":"base.cesira.bound.Battutina","self":[{"op":"gain","resource":"ALERTNESS","amount":1}],"target":[{"op":"damage","type":"HIT","amount":2}],"sha256":"67523ab601c3495c7ecb59e91ce8665f9be8b960be1d6baf2eb950bfd1d135f1"}
