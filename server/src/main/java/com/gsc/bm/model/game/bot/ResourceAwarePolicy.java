@@ -67,7 +67,9 @@ public class ResourceAwarePolicy implements BotPolicy, StyleSupport.Scorer {
             score += s.foe.resource(Resource.ALERTNESS) >= s.me.resource(Resource.ALERTNESS) ? 4 : 2;
         if ("COUNTER".equals(p.card.getRole())) score += 2;
         if (p.repeated && p.damage == 0) score -= 6;
-        if (StyleSupport.Situation.soonestTimer(s.me) <= 2 && "DEFENSE".equals(p.card.getRole())) score += 4;
+        if (StyleSupport.Situation.soonestTimer(s.me) <= 2 && "DEFENSE".equals(p.card.getRole()) && !p.guardForm) score += 4;
+        // SB-21h: a defensive bound is worth the damage it is expected to spare, at the price it puts on health.
+        score += p.guard * healthWorth;
         score += p.card.getPriority() * 0.5;
         return score;
     }

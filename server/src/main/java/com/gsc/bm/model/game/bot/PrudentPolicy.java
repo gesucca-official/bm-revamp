@@ -31,7 +31,9 @@ public class PrudentPolicy implements BotPolicy, StyleSupport.Scorer {
             if (p.damage >= p.target.resource(Resource.HEALTH)) score += 1000;
         }
         String role = p.card.getRole();
-        if ("DEFENSE".equals(role)) score += 40 * need + 2 * p.card.getPriority();
+        if ("DEFENSE".equals(role) && !p.guardForm) score += 40 * need + 2 * p.card.getPriority();
+        // SB-21h: a defensive bound is worth the damage it is expected to spare, weighed like a heal.
+        score += p.guard * 2 * need;
         if ("COUNTER".equals(role)) score += 25 * need + 2 * p.card.getPriority();
         score += p.gain(Resource.HEALTH) * 2 * need;
         // SB-16i: the POISON it spares itself is a heal over the next turns.
@@ -45,7 +47,7 @@ public class PrudentPolicy implements BotPolicy, StyleSupport.Scorer {
         if (!s.me.getImmunities().contains(Resource.ALCOHOL)) score -= p.gain(Resource.ALCOHOL) * 0.4;
         score += p.gain(Resource.ALERTNESS) * 0.3;
         if (p.card.isLastResort()) score -= 8;
-        if (StyleSupport.Situation.soonestTimer(s.me) <= 2) score += ("DEFENSE".equals(role) ? 5 : 0);
+        if (StyleSupport.Situation.soonestTimer(s.me) <= 2) score += ("DEFENSE".equals(role) && !p.guardForm ? 5 : 0);
         score -= p.costTotal * 0.2;
         // Health paid is damage taken, weighed like the heals it wants: more the worse it stands.
         score -= p.healthCost * 2 * need;

@@ -564,7 +564,8 @@ public final class ViewTable {
                             step.getApplying());
                     break;
                 case GAIN:
-                    if (step.getResource() != null)
+                    // SB-21h (ROC-BO2): a gain with a HEALTH condition, read on the subject when it applies.
+                    if (step.getResource() != null && step.healthAllows(subject.get(Resource.HEALTH)))
                         subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart, plays));
                     break;
                 case LOSE:
@@ -600,6 +601,9 @@ public final class ViewTable {
                 case COUNTER_TARGET:
                     for (Act next : later)
                         if (next.author == act.target) {
+                            // SB-21h (CES-BO1): only a card that contains «Annuncia»; otherwise nothing happens.
+                            if (step.isIfSearch() && (next.play.card.getEffects() == null || next.play.card.getEffects().getSteps().stream()
+                                    .noneMatch(x -> x.getKind() == PrintedEffects.Kind.SEARCH))) break;
                             if (!next.voided) {
                                 // SB-17: «Ricatto» reflects the base damage, «Lo sapevo» keeps the token.
                                 if (step.getFactor() != null)

@@ -31,7 +31,9 @@ public class AggressivePolicy implements BotPolicy, StyleSupport.Scorer {
         if (s.myHealth() <= s.foeHealth()) score += p.gain(Resource.HEALTH) * 2;
         // SB-16i: the POISON it spares itself keeps it alive to close the match.
         score += p.toxicRelief;
-        if ("DEFENSE".equals(p.card.getRole())) score += 1;
+        if ("DEFENSE".equals(p.card.getRole()) && !p.guardForm) score += 1;
+        // SB-21h: the damage a defensive bound spares keeps it alive to close the match, like a heal.
+        score += p.guard * (s.myHealth() <= s.foeHealth() ? 2 : 1);
         if (p.takesFarItem) score += 2;
         score += s.unlockedDamage(p.fixedGains) * 1.5;
         score += p.gain(Resource.VIOLENCE) * 0.3;

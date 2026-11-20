@@ -29,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * <li>{@code -Dsim.sb19Foes}: the same for the other side; default the seven reference decks. Rows equal to foes give the 28 pairs of the
  * «Rif» arm (the seven decks among themselves, mirrors included); the nine decks with the additions against the seven give the 63 of the arms.</li>
  * <li>{@code -Dsim.sb19Games}: seeds per cell (4 for the feasibility, 100 for the round).</li>
+ * <li>{@code -Dsim.sb19Seed}: first seed (SB-21h, independent confirmations; 7,000,000 by default, as every earlier round).</li>
  * </ul>
  * Writes the matrix, the deck observations (plays of every card, as in SB-17 and SB-18) and the draft read; nothing about the engine changes.
  * SB-19 Fase B2: with a draft that has items with an «In campo» effect (RP-27), also {@code in-play.json} ({@link InPlayObserve});
@@ -58,7 +59,7 @@ class Sb19MeasureTest {
         List<String> rows = list("sim.sb19Rows", Sb19.REFERENCES), foes = list("sim.sb19Foes", Sb19.REFERENCES);
         List<String> decks = new ArrayList<>(rows);
         for (String foe : foes) if (!decks.contains(foe)) decks.add(foe);
-        Bench.Settings settings = new Bench.Settings(Integer.getInteger("sim.sb19Games", 100), 7_000_000L, decks, styles,
+        Bench.Settings settings = new Bench.Settings(Integer.getInteger("sim.sb19Games", 100), Long.getLong("sim.sb19Seed", 7_000_000L), decks, styles,
                 Integer.getInteger("sim.threads", 8), BoundCap.Params.DEFAULT, "SB-19 Fase B1: " + rows + " against " + foes);
         List<Bench.Cell> cells = new ArrayList<>();
         Set<String> pairs = new HashSet<>();
@@ -103,7 +104,8 @@ class Sb19MeasureTest {
         Files.writeString(out.resolve("seconds.txt"), String.valueOf(seconds));
         if (inPlay) Files.writeString(out.resolve("in-play.json"), JSON.writeValueAsString(inPlayAggregate.totals));
         assertEquals(0, report.checks.total(), report.failures());
-        assertEquals(0, report.boundViolations(), report.failures());
+        // SB-21h (D159 (2), D160): the unit cap of D33/D36 no longer holds for the bounds; its quantities stay in matrix.json as
+        // diagnostics and the bounds are judged against null bounds (+10 points at most), not here.
         System.out.println("sb-19 round: " + report.games() + " games, " + seconds + " seconds");
     }
 }

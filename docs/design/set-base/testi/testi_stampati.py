@@ -66,6 +66,13 @@ JAVA = {
     "base.items.SantinoDellaPortinaia": "Consumato: immunità all'effetto periodico di [[L]] per {turns} turni",
     "base.com.BeggingMoney": "Copia vicino a te un oggetto casuale del bersaglio",
     "bruiser.BadEducation": "Toglie gli equip al bersaglio; {hitDamage} HIT al bersaglio",
+    # SB-21h (D159, D160): le due bound variante che le op a dati non esprimono.
+    "base.cesira.bound.NeRiparliamoFuori": (
+        "Bound: annulla la mossa del bersaglio se deve ancora risolversi e contiene Annuncia"
+    ),
+    "base.rocco.bound.MiRialzo": (
+        "Bound: se alla risoluzione hai da {healthAtLeast} a {healthAtMost} [[H]], recuperi {heal} [[H]]"
+    ),
 }
 
 # I parametri vengono passati alle classi come interi. I binding senza parametri hanno una mappa vuota.
@@ -82,6 +89,8 @@ PARAMETRI_JAVA = {
     "base.items.SantinoDellaPortinaia": "turns",
     "base.com.BeggingMoney": "alertnessFromTarget",
     "bruiser.BadEducation": "hitDamage",
+    "base.cesira.bound.NeRiparliamoFuori": "",
+    "base.rocco.bound.MiRialzo": "heal healthAtLeast healthAtMost",
 }
 
 
@@ -281,6 +290,9 @@ def formula(valore):
     divisore = dati.get("divide", 1)
     if divisore == 2:
         risorsa = "metà della tua " + risorsa + ", arrotondata per difetto"
+    elif divisore == 4:
+        # SB-21h (D160 (3)): «perdi un quarto della tua T e/o L, per difetto».
+        risorsa = "un quarto della tua " + risorsa + ", arrotondato per difetto"
     elif divisore != 1:
         risorsa = f"{risorsa} / {divisore}, arrotondata per difetto"
     return f"{base} più {risorsa}" if base else risorsa

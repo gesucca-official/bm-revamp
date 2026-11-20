@@ -32,6 +32,9 @@ class ViewTableFidelityTest {
         check(Draft.fromClasspath(DRAFT), "duccio", false);
         // SB-19 B2 (D130, RP-27): a deck with the items of the «In campo» effect in one seat (alternating), the starters in the other.
         check(Draft.fromClasspath(DRAFT), "malus", false);
+        // SB-21h (D159, D160): the measured candidate with the new bounds, the starters and then a variant deck in one seat.
+        check(Draft.fromClasspath(Sb21h.CANDIDATE), "1.6", false);
+        check(Draft.fromClasspath(Sb21h.CANDIDATE), "sb21h", false);
     }
 
     /** SB-19 B2: the decks of the «malus» arm, by seed: the two items, Scatto Repentino, «Lo rivendo»; Steal is in two starters. */
@@ -123,6 +126,7 @@ class ViewTableFidelityTest {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
             if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
+            if (arm.equals("sb21h")) { String v = Sb21h.VARIANT_DECKS[(int) ((seed / 2) % 2)]; if (seed % 2 == 0) a = v; else b = v; }
             if (arm.equals("malus")) { String m = MALUS_DECKS[(int) ((seed / 2) % MALUS_DECKS.length)]; if (seed % 2 == 0) a = m; else b = m; }
             BotPolicy pa = new LethalAwarePolicy(new SoughtHitPolicy(new AggressivePolicy(), SoughtHitPolicy.Timing.ALWAYS));
             BotPolicy pb = new SoughtHitPolicy(seed % 2 == 0 ? new PrudentPolicy() : new RandomPolicy(), SoughtHitPolicy.Timing.ALWAYS);

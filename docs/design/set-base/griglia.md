@@ -38,7 +38,7 @@ Il proprietario ha approvato tutte e otto le raccomandazioni con «Approvo tutte
 
 1. **Budget 115:** 37 azioni d'archetipo (6 per Cesira e Rocco, 5 per gli altri) e 23 generiche; il resto come da piano.
 2. **Starter da 12 carte distinte** (5 d'archetipo, 4 generiche, 3 oggetti), con varianti per Gigi (più oggetti) e Spazienzio (meno).
-3. **Bound senza parate:** generatrice, colpetto e una variante a una sola funzione.
+3. ~~**Bound senza parate:** generatrice, colpetto e una variante a una sola funzione.~~ Superato da [D159](../../set-base-decisioni.md#decisioni-del-proprietario) (SB-21h): vedi [Bound](#bound-21).
 4. **T del Tossico più scarsa,** carte prezzate a circa 0,3–0,5 danni per T, bound di T al massimo +10 fino a SB-13.
 5. **Costi in HEALTH solo nell'archetipo di Rocco;** salute di Mara e Rocco invariata, prima leva nei giri di SB-12 e SB-18.
 6. **Tre rarità,** circa 54 comuni, 41 non comuni e 20 rare, con la regola «picco condizionato, media in linea».
@@ -203,12 +203,14 @@ Tutte prese di un proprio oggetto (D3), gratuite, permanenti; il tratto è il pa
 
 ### Bound (21)
 
-Tutte con una sola funzione, entro 4 unità per uso col danno pesato 4/3 (D36: al massimo 3 di danno), senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
-token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter sono nello starter (comuni), la terza nella collezione.
+~~Tutte con una sola funzione, entro 4 unità per uso col danno pesato 4/3 (D36: al massimo 3 di danno), senza bersagliare oggetti, senza nulla che resti sull'avversario, senza oggetti,
+token, equip, cure o annullamenti. Le prime due di ogni personaggio con starter sono nello starter (comuni), la terza nella collezione.~~
+
+**SB-21h, 20 novembre 2026 ([D159](../../set-base-decisioni.md#decisioni-del-proprietario), [D160](../../set-base-decisioni.md#decisioni-del-proprietario), [proposta](sb-21h-bound-proposta.md), [report](../../reports/set-base/sb-21h-report.md)):** ogni personaggio ha tre bound gratuite, scarto R02 invariato: **(a)** danno più una risorsa a sé o una pulizia («perdi un quarto della tua T e/o L, per difetto»; mai sul carburante: Celestina T, Piera L); **(b)** una risorsa a sé, partendo dalla generatrice di oggi, più HIT, CUT e POISON ricevuti ×0,75 fino a fine turno (priorità 2); **(c)** una variante per mazzi costruiti, nelle buste. Gli starter e i mazzi `prova-sergio`/`prova-duccio` portano (a) e (b). Il tetto in unità di D33 (1)/D36 non vale più per le bound: ogni bound, con una bound nulla, contro due bound nulle, non sposta la quota di più di **+10 punti** (D159 (2)); le quantità del banco restano diagnostica. Numeri nel criterio di D158. Niente bersaglio oggetto; le due varianti condizionali CES-BO1 e ROC-BO2 sono classi Java del playground, le altre dati. **Valori non ancora in bozza:** la Fase B si è fermata al punto 4 di D160 (gli starter con le bound nuove non passano D149 (4)); `bozza.json` resta quella di SB-21g e le righe qui sotto non cambiano finché il proprietario non sceglie. Il candidato misurato (valori tenuti per bound, fra cui Sergio (b) senza risorsa) è nel [report](../../reports/set-base/sb-21h-report.md#valori-tenuti).
 
 ~~**Deroga di SB-17 (D113, D114, D115):** CES-BO3 «Lo rivendo» rivende un proprio oggetto per salute.~~ Ritirata dalla Fase A4 (D118): Lo rivendo è diventata la basic CES-BA e la bound non usa più oggetti né cura.
 
-**Deroga di SB-17 (D117, D118):** CES-BO3 «Fare il vago» è una **parata del turno** (HIT e CUT ricevuti ×0,75, 2,5 unità al banco delle bound contro il colpo di prova da 10 HIT, sotto il tetto di 4): deroga al principio approvato 3 della Fase A, «bound senza parate», solo per questa carta. Una funzione sola, senza guadagni (lezione 2 di SB-4); niente POISON ([proposta A4, § 3](sb-17-proposta-a4.md#3-una-bound-di-difesa-leggera)).
+~~**Deroga di SB-17 (D117, D118):**~~ (superata da D159: ora ogni (b) ha la sua difesa) CES-BO3 «Fare il vago» è una **parata del turno** (HIT e CUT ricevuti ×0,75, 2,5 unità al banco delle bound contro il colpo di prova da 10 HIT, sotto il tetto di 4): deroga al principio approvato 3 della Fase A, «bound senza parate», solo per questa carta. Una funzione sola, senza guadagni (lezione 2 di SB-4); niente POISON ([proposta A4, § 3](sb-17-proposta-a4.md#3-una-bound-di-difesa-leggera)).
 
 | ID | Personaggio | Tipo | Ruolo | Pr. | Effetto indicativo | Unità per uso | Rarità | Starter | Candidata | Motivo | Forma |
 |---|---|---|---|---:|---|---:|---|---|---|---|---|

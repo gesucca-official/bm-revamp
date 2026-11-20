@@ -1,9 +1,12 @@
 package com.gsc.bm.model.game.bot;
 
+import com.gsc.bm.model.Damage;
 import com.gsc.bm.model.Resource;
 import com.gsc.bm.model.cards.Card;
 import com.gsc.bm.model.cards.PrintedEffects;
+import com.gsc.bm.model.game.Ruleset;
 import com.gsc.bm.model.game.status.StatusFlow;
+import com.gsc.bm.model.game.status.StatusType;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -155,6 +158,13 @@ final class StyleSupport {
         final double aheadChance;
         /** SB-16i: the damage of the target's answer the move would spare if ahead (a lower output of the target), in health points. */
         final double aheadGuard;
+        /**
+         * SB-21h (D159 (1b), D160 (4)), playground only: the move is a bound that gives its author a resource and a defensive status
+         * of one turn ({@link StyleSupport#guardForm}); then the styles weigh {@link #guard} instead of their fixed DEFENSE bonus.
+         */
+        final boolean guardForm;
+        /** SB-21h: the health the defensive status of a {@link #guardForm} bound is expected to spare this turn ({@link StyleSupport#guard}). */
+        final double guard;
 
         Plan(Situation situation, LegalMove move) {
             this.move = move;
@@ -194,6 +204,13 @@ final class StyleSupport {
                     }
                 }
             }
+            // SB-21h (ROC-BO2): a bound's gain under a HEALTH condition, which the catalog gains cannot state, if the own HEALTH allows it now.
+            if (playground && card.isCharacterBound()) for (PrintedEffects.Step st : steps(card))
+                if (st.getKind() == PrintedEffects.Kind.GAIN && !st.isOnTarget() && st.getResource() != null && st.getHealthAtMost() > 0
+                        && st.healthAllows(situation.myHealth())) {
+                    total.merge(st.getResource(), (double) st.getBase(), Double::sum);
+                    fixed.merge(st.getResource(), (double) st.getBase(), Double::sum);
+                }
             if (playground && aheadChance > 0) for (PrintedEffects.Step st : steps(card))
                 if (st.isAhead() && !st.isOnTarget() && st.getKind() == PrintedEffects.Kind.GAIN && st.getResource() != null)
                     total.merge(st.getResource(), aheadChance * st.getBase(), Double::sum);
@@ -203,7 +220,11 @@ final class StyleSupport {
             List<PrintedEffects.Step> own = new ArrayList<>(steps(card));
             if (usesItem && !sells) situation.me.getItems().stream().filter(i -> i.getName().equals(move.getItem())).findFirst()
                     .ifPresent(item -> own.addAll(steps(item)));
-            this.toxicRelief = playground ? toxicRelief(situation, own, target == situation.me) : 0;
+            // SB-21h (D159 (1a)): a bound's partial cleanup of the own T and L joins the POISON spared, in health points.
+            this.toxicRelief = playground ? toxicRelief(situation, own, target == situation.me)
+                    + (card.isCharacterBound() ? cleanse(situation, card, target == situation.me) : 0) : 0;
+            this.guardForm = playground && card.isCharacterBound() && guardForm(card);
+            this.guard = guardForm ? guard(situation, card) : 0;
             this.repeated = situation.view.getLastRound().stream()
                     .anyMatch(m -> m.getPlayerId().equals(situation.me.getPlayerId()) && m.getCardName().equals(card.getName()));
         }
@@ -241,6 +262,113 @@ final class StyleSupport {
         }
         if (removed <= 0) return 0;
         return Math.max(0, removed / 2 * TOXIC_HORIZON - selfDamage);
+    }
+
+    /** SB-21h: the damage types a defensive status of one turn may lower. */
+    private static final Set<Damage.DamageType> GUARDED = Set.of(Damage.DamageType.HIT, Damage.DamageType.CUT, Damage.DamageType.POISON);
+    /** SB-21h: the hit a defensive bound expects from an opponent whose hand shows no payable hit (a typical starter hit, in HP). */
+    static final double UNSEEN_HIT = 8;
+
+    /** SB-21h: a defensive status the card puts on its author: GOOD, INPUT, a factor below 1 on HIT, CUT or POISON, for this turn. */
+    private static boolean guardStep(PrintedEffects.Step st) {
+        return st.getKind() == PrintedEffects.Kind.STATUS && !st.isOnTarget() && st.getFlow() == StatusFlow.INPUT
+                && st.getStatusType() == StatusType.GOOD && st.getFactor() != null && st.getFactor() < 1
+                && GUARDED.contains(st.getDamageType()) && st.getConvertTo() == null && st.getTurns() != null && st.getTurns() == 0;
+    }
+
+    /**
+     * SB-21h (D159 (1b)): the form of the defensive bound, read from its printed effects and never from its name: at least one
+     * defensive status of this turn on the author ({@link #guardStep}) together with a resource gained by the author.
+     */
+    static boolean guardForm(BotView.CardSeen card) {
+        List<PrintedEffects.Step> steps = steps(card);
+        return steps.stream().anyMatch(StyleSupport::guardStep) && steps.stream().anyMatch(st -> st.getKind() == PrintedEffects.Kind.GAIN
+                && !st.isOnTarget() && st.getResource() != null && st.getResource() != Resource.HEALTH && st.getBase() > 0);
+    }
+
+    /**
+     * SB-21h (D160 (4)): the health a defensive bound is expected to spare this turn, from public data only. The status starts when
+     * the bound resolves (its priority, ALERTNESS after costs on a tie) and lasts to the end of the turn, the POISON of the own
+     * TOXICITY included. Per type it spares (1 - factor) of:
+     * <ul>
+     *   <li>the strongest hit an opponent shows and can pay that resolves after the bound (half on a tie of speed), of the types
+     *       the bound guards, but at least {@link #UNSEEN_HIT} of HIT ({@link #CHARGED_HIT} against a visible charge), since the
+     *       hand may hold another one;</li>
+     *   <li>the POISON of the own TOXICITY at the end of the turn, when not immune;</li>
+     * </ul>
+     * both times the own vulnerability tokens. The discard is weighed apart, as for every bound, and the resource by each style.
+     */
+    static double guard(Situation s, BotView.CardSeen card) {
+        Map<Damage.DamageType, Double> factor = new EnumMap<>(Damage.DamageType.class);
+        for (PrintedEffects.Step st : steps(card))
+            if (guardStep(st)) factor.merge(st.getDamageType(), (double) st.getFactor(), Math::min);
+        int myAlertness = s.me.resource(Resource.ALERTNESS) - card.getCost().getOrDefault(Resource.ALERTNESS, 0);
+        double shown = 0;
+        for (BotView.Opponent o : s.view.getOpponents()) {
+            BotView.Seat seat = o.getSeat();
+            if (seat.isDead() || seat.isForfeited()) continue;
+            for (BotView.RevealedSeen r : o.getRevealed()) {
+                BotView.CardSeen c = r.getCard();
+                if (!c.getCanTarget().contains(Card.CardTarget.OPPONENT) || !TurnForecast.payable(seat, c)) continue;
+                double after;
+                if (c.getPriority() != card.getPriority()) after = c.getPriority() < card.getPriority() ? 1 : 0;
+                else {
+                    int theirs = seat.resource(Resource.ALERTNESS) - c.getCost().getOrDefault(Resource.ALERTNESS, 0);
+                    after = theirs < myAlertness ? 1 : theirs > myAlertness ? 0 : 0.5;
+                }
+                double spared = 0;
+                for (Map.Entry<Damage.DamageType, Integer> d : TurnForecast.baseOf(c).entrySet())
+                    spared += (1 - factor.getOrDefault(d.getKey(), 1.0)) * d.getValue();
+                shown = Math.max(shown, after * spared);
+            }
+        }
+        double usual = (1 - factor.getOrDefault(Damage.DamageType.HIT, 1.0)) * (charged(s, s.foe) ? CHARGED_HIT : UNSEEN_HIT);
+        double poison = s.poisoned()
+                ? (1 - factor.getOrDefault(Damage.DamageType.POISON, 1.0)) * (s.me.resource(Resource.TOXICITY) / 2) : 0;
+        return (Math.max(shown, usual) + poison) * tokenFactor(s.me);
+    }
+
+    /**
+     * SB-21h (D159 (1a)), bounds only: the partial cleanup of the own TOXICITY and ALCOHOL («perdi un quarto della tua T e/o L»), in
+     * health points, from the amounts the printed steps really remove after the costs:
+     * <ul>
+     *   <li>TOXICITY, when not immune: the POISON spared at each end of turn for {@link #TOXIC_HORIZON} turns;</li>
+     *   <li>ALCOHOL, when not immune: the ALERTNESS not drained at the next end of turn (at its weight), minus the armour lost
+     *       against one HIT this turn;</li>
+     *   <li>minus the nominal damage of the best card in hand that is payable now and no longer after the loss (fuel the hand
+     *       needs), immune or not.</li>
+     * </ul>
+     * Zero when the bound removes nothing.
+     */
+    static double cleanse(Situation s, BotView.CardSeen card, boolean onSelf) {
+        Map<Resource, Integer> after = new EnumMap<>(Resource.class);
+        double value = 0;
+        for (PrintedEffects.Step st : steps(card)) {
+            Resource r = st.getResource();
+            if (st.getKind() != PrintedEffects.Kind.LOSE || (st.isOnTarget() && !onSelf)
+                    || (r != Resource.TOXICITY && r != Resource.ALCOHOL)) continue;
+            int have = after.containsKey(r) ? after.get(r) : s.me.resource(r) - card.getCost().getOrDefault(r, 0);
+            int amount = st.getBase();
+            if (st.getOf() != null) {
+                int of = st.getOf() == r ? have : s.me.resource(st.getOf()) - card.getCost().getOrDefault(st.getOf(), 0);
+                amount += st.getTimes() * (Math.max(0, of) / Math.max(1, st.getDivide()));
+            }
+            int left = Math.max(0, have - Math.max(0, amount));
+            if (left == have) continue;
+            after.put(r, left);
+            if (s.me.getImmunities().contains(r)) continue;
+            if (r == Resource.TOXICITY) value += (have / 2 - left / 2) * TOXIC_HORIZON;
+            else value += (have / 2 - left / 2) * ITEM_WEIGHTS.get(Resource.ALERTNESS)
+                    - (have / Ruleset.ALCOHOL_ARMOR_DIVISOR - left / Ruleset.ALCOHOL_ARMOR_DIVISOR);
+        }
+        if (after.isEmpty()) return 0;
+        double locked = 0;
+        for (BotView.CardSeen c : s.view.getSelf().getHand()) {
+            if (c.getName().equals(card.getName()) || !s.affordableNow(c)) continue;
+            for (Map.Entry<Resource, Integer> left : after.entrySet())
+                if (c.getCost().getOrDefault(left.getKey(), 0) > left.getValue()) { locked = Math.max(locked, damageOf(c)); break; }
+        }
+        return value - locked;
     }
 
     /**
@@ -519,7 +647,8 @@ final class StyleSupport {
         bonus += p.aheadGuard * 2;
         if (charged(s, s.foe) && !p.hostile) {
             String role = p.card.getRole();
-            if ("DEFENSE".equals(role) || "COUNTER".equals(role)) bonus += BRACE;
+            // SB-21h: a defensive bound weighs its expected spared damage (Plan.guard) instead.
+            if (("DEFENSE".equals(role) && !p.guardForm) || "COUNTER".equals(role)) bonus += BRACE;
             bonus += Math.max(0, p.gain(Resource.HEALTH)) * 0.5;
         }
         if (charged(s, s.foe) && "COUNTER".equals(p.card.getRole()) && p.hostile) bonus += BRACE;

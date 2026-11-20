@@ -37,11 +37,16 @@ public abstract class Contromossa extends AbstractCard implements PrintedEffects
         g.getPendingMoveOfTargetIfMovesAfterPlayer(m.getPlayerId(), m.getTargetId())
                 .ifPresent(move -> {
                     if (move.isVoid()) return;
-                    countered = g.getCardFromHand(move.getPlayerId(), move.getPlayedCardName());
+                    Card pending = g.getCardFromHand(move.getPlayerId(), move.getPlayedCardName());
+                    if (!voids(pending)) return;
+                    countered = pending;
                     move.setVoid(true);
                     onVoided(move);
                 });
     }
+
+    /** SB-21h: whether the card voids this pending card; every pending card by default («Ricatto», «Lo sapevo»). */
+    protected boolean voids(Card pending) { return true; }
 
     /** What the card prints beyond the void, on the move just voided. */
     protected void onVoided(Move voided) { }

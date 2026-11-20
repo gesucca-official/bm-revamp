@@ -120,6 +120,20 @@ public class PrintedEffects implements Serializable {
          * sold; false: only if none was.
          */
         Boolean sold;
+        /**
+         * SB-21h (D159, D160, CES-BO1), playground only: on a {@link Kind#COUNTER_TARGET}, the target's later move is voided only if its
+         * card searches («contiene Annuncia»: a {@link Kind#SEARCH} step); otherwise nothing happens. False for every older card.
+         */
+        boolean ifSearch;
+        /**
+         * SB-21h (D159, D160, ROC-BO2), playground only: on a {@link Kind#GAIN}, the step applies only if its subject has from
+         * {@code healthAtLeast} to {@code healthAtMost} HEALTH when it applies; {@code healthAtMost} 0 means no condition (every older card).
+         */
+        int healthAtLeast;
+        int healthAtMost;
+
+        /** SB-21h: whether the HEALTH condition, if any, lets the step apply to a subject with this HEALTH. */
+        public boolean healthAllows(int health) { return healthAtMost <= 0 || (health >= healthAtLeast && health <= healthAtMost); }
 
         public int capAmount(int amount) {
             return cap > 0 ? Math.min(amount, cap) : amount;
@@ -153,6 +167,9 @@ public class PrintedEffects implements Serializable {
     public static boolean hasAhead(Card card) { return anyStep(card, Step::isAhead); }
 
     public static boolean hasPerPlay(Card card) { return anyStep(card, s -> s.getPerPlay() != 0); }
+
+    /** SB-21h (CES-BO1): whether the card's printed text searches («contiene Annuncia»); the bots' models read the same step. */
+    public static boolean searches(Card card) { return anyStep(card, s -> s.getKind() == Kind.SEARCH); }
 
     private static boolean anyStep(Card card, java.util.function.Predicate<Step> test) {
         if (!(card instanceof Source)) return false;

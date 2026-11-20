@@ -380,7 +380,8 @@ public final class TurnForecast {
                                 step.getApplying());
                         break;
                     case GAIN:
-                        if (step.getResource() != null)
+                        // SB-21h (ROC-BO2): a gain with a HEALTH condition, read on the subject when it applies.
+                        if (step.getResource() != null && step.healthAllows(subject.get(Resource.HEALTH)))
                             subject.set(step.getResource(), subject.get(step.getResource()) + amount(step, act.author, start, itemsAtStart, plays));
                         break;
                     case LOSE:
@@ -411,6 +412,8 @@ public final class TurnForecast {
                     case COUNTER_TARGET:
                         for (Act next : later)
                             if (next.author == act.target) {
+                                // SB-21h (CES-BO1): only a card that contains «Annuncia»; otherwise nothing happens.
+                                if (step.isIfSearch() && !searches(next.card)) break;
                                 // SB-17 («Ricatto»): a move not voided yet reflects its base damage.
                                 if (!next.voided && step.getFactor() != null)
                                     baseOf(next.card).forEach((type, base) ->

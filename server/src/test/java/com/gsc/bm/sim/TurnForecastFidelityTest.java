@@ -36,6 +36,10 @@ class TurnForecastFidelityTest {
         check(Draft.fromClasspath("/set-base/bozza.json"), "duccio");
         // SB-19 B2 (D130, RP-27): a deck with the in-play items in one seat (alternating), the starters in the other.
         check(Draft.fromClasspath("/set-base/bozza.json"), "malus");
+        // SB-21h (D159, D160): the measured candidate, with the defense of one turn plus a gain, the partial cleanup and the two Java
+        // variants (counter on «Annuncia», heal from 1 to 30): the starters among themselves, then a variant deck in one seat.
+        check(Draft.fromClasspath(Sb21h.CANDIDATE), "1.6");
+        check(Draft.fromClasspath(Sb21h.CANDIDATE), "sb21h");
     }
 
     private static void check(Draft draft, String arm) throws Exception {
@@ -44,6 +48,7 @@ class TurnForecastFidelityTest {
         int[] sergio = new int[4]; // SB-17, in checked turns: reflections, kept tokens, Conto salato on a token, Lo sanno tutti resolved (B2, D110)
         int[] duccio = new int[4]; // SB-18 B2 (D126), resolved in checked turns: Nocche sbucciate, E allora?, Capocciata, Testa dura (HEALTH costs)
         int[] sales = new int[2]; // SB-17 B4 (D118): resolved in checked turns, Lo rivendo (the basic that sells) and Fare il vago (the parry bound)
+        int[] variants = new int[2]; // SB-21h: resolved in checked turns, «Ne riparliamo fuori» and «Mi rialzo dal marciapiede»
         long[] malus = new long[3]; // SB-19 B2 (RP-27), in checked turns: turns with an in-play item, effects applied, items that changed seat
         List<String> misses = new ArrayList<>();
         // SB-18 B2 (D126): Duccio's games are shorter, so his arm takes 400 seeds to keep the floor of 5,000 checked turns.
@@ -52,6 +57,7 @@ class TurnForecastFidelityTest {
             String a = DECKS[(int) (seed % 5)], b = DECKS[(int) ((seed / 5) % 5)];
             if (arm.equals("sergio")) { if (seed % 2 == 0) a = Sb17.DECK; else b = Sb17.DECK; }
             if (arm.equals("duccio")) { if (seed % 2 == 0) a = Sb18.DECK; else b = Sb18.DECK; }
+            if (arm.equals("sb21h")) { String v = Sb21h.VARIANT_DECKS[(int) ((seed / 2) % 2)]; if (seed % 2 == 0) a = v; else b = v; }
             if (arm.equals("malus")) {
                 String m = ViewTableFidelityTest.MALUS_DECKS[(int) ((seed / 2) % ViewTableFidelityTest.MALUS_DECKS.length)];
                 if (seed % 2 == 0) a = m; else b = m;
@@ -93,6 +99,8 @@ class TurnForecastFidelityTest {
                         if (m.getPlayedCardName().equals("Lo sanno tutti") && !m.isVoid()) sergio[3]++;
                         if (m.getPlayedCardName().equals("Lo rivendo") && !m.isVoid()) sales[0]++;
                         if (m.getPlayedCardName().equals("Fare il vago") && !m.isVoid()) sales[1]++;
+                        if (m.getPlayedCardName().equals(Sb21h.COUNTER) && !m.isVoid()) variants[0]++;
+                        if (m.getPlayedCardName().equals(Sb21h.RISE) && !m.isVoid()) variants[1]++;
                         int paid = HEALTH_COSTS.indexOf(m.getPlayedCardName());
                         if (paid >= 0 && !m.isVoid()) duccio[paid]++;
                     }
@@ -127,6 +135,10 @@ class TurnForecastFidelityTest {
             assertTrue(malus[0] >= 500, "turns with an in-play item in the checked sample: " + malus[0]);
             assertTrue(malus[1] >= 500, "in-play effects applied in the checked sample: " + malus[1]);
             assertTrue(malus[2] >= 5, "in-play items that changed seat in the checked sample: " + malus[2]);
+        }
+        if (arm.equals("sb21h")) {
+            System.out.println("forecast fidelity, sb21h: " + Sb21h.COUNTER + " " + variants[0] + ", " + Sb21h.RISE + " " + variants[1]);
+            for (int n : variants) assertTrue(n > 0, "both Java variants are in the checked sample");
         }
         if (arm.equals("duccio")) {
             System.out.println("forecast fidelity, duccio: " + HEALTH_COSTS + " " + java.util.Arrays.toString(duccio));
