@@ -7,8 +7,8 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 21 novembre 2026, dopo D163). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
-> - **In corso:** nessun blocco. **SB-23 chiuso** ([D165](#decisioni-del-proprietario), [report](reports/set-base/sb-23-report.md)): formato 20/2 confermato (a 20/2 ricerche fallite 17,6%, last resort 9,9%; il 25/3 esce dai criteri D161 sulle coppie). **SB-22 chiuso** ([D163](#decisioni-del-proprietario)): il set piace, la bozza di D162 resta in vigore.
-> - **Prossimo:** [SB-24](#sb-24--flavour-finale-e-congelamento), flavour finale, rarità definitive e congelamento della bozza; la regia ne prepara la proposta. Q12 resta aperta.
+> - **In corso:** [SB-24](#sb-24--flavour-finale-e-congelamento) Fase A consegnata: in attesa della revisione del proprietario sulla [pagina](design/set-base/sb-24/revisione.html) e delle risposte alle domande 1–5 della [proposta](design/set-base/sb-24-proposta.md). **SB-23 chiuso** ([D165](#decisioni-del-proprietario), [report](reports/set-base/sb-23-report.md)): formato 20/2 confermato (a 20/2 ricerche fallite 17,6%, last resort 9,9%; il 25/3 esce dai criteri D161 sulle coppie). **SB-22 chiuso** ([D163](#decisioni-del-proprietario)): il set piace, la bozza di D162 resta in vigore.
+> - **Prossimo:** la regia legge `design/set-base/sb-24/revisione-proprietario.json` e registra le scelte; poi Fase B di SB-24 (regolamento 1.14 per la rarità P, nomi e flavour nella bozza, congelamento). Q12 resta aperta.
 > - **Decisioni da leggere:** D165, D164, D163, D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D165).
 
 Questo documento è lo **stato** del filone: obiettivo, regole di lavoro, criteri in vigore, blocchi aperti e futuri. La cronologia dei blocchi chiusi è nello [storico](history/set-base-plan-storico.md). Fondamenta, strumenti, progetto e i cinque starter sono chiusi e approvati.
@@ -301,7 +301,7 @@ del set, allegato e client. Un cambiamento a quei due package resta un cambiamen
 | | SB-21 | Giri di correzione | SB-20 | Giri 1, 2, 3a, 3a bis e 3b fatti ([rapporto 3a bis](reports/set-base/sb-21-giro-3a-bis-report.md), [rapporto 3b](reports/set-base/sb-21-giro-3b-report.md)); **chiuso** il 19 novembre 2026 con la bozza di D149; SB-21t sul tetto di Estasi chiuso senza tetto ([D151](#decisioni-del-proprietario)) |
 | | SB-22 | Prova umana con mazzi costruiti | SB-21 | **chiuso** il 21 novembre 2026 ([D163](#decisioni-del-proprietario)): il set piace, i costruiti non bloccano ([guida](reports/set-base/sb-22-prova.md)) |
 | | SB-23 | Valutazione delle varianti del formato | SB-21 | **chiuso** il 21 novembre 2026: formato 20/2 confermato ([D165](#decisioni-del-proprietario), [report](reports/set-base/sb-23-report.md)) |
-| Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 |  |
+| Congelamento | SB-24 | Flavour finale e congelamento | SB-22, SB-23 | Fase A consegnata: [proposta](design/set-base/sb-24-proposta.md) e [pagina di revisione](design/set-base/sb-24/revisione.html); in attesa del proprietario |
 | | SB-25 | Testi delle carte per i giocatori | SB-24 |  |
 | | SB-26 | Generazione del catalogo dal set | SB-25 |  |
 | | SB-27 | Carte d'effetto speciale in forma definitiva | SB-26 |  |
@@ -696,6 +696,8 @@ effetto; in quel caso, ultimo controllo di SB-7. Rarità definitive. **Congelame
 **In ingresso ([D144](#decisioni-del-proprietario)).** La revisione del proprietario di nomi, flavour e illustrazioni sulla pagina di SB-20a (rigenerata allora) e la rarità P dei personaggi (D137, regolamento 1.14) si fanno qui. Le battute tolte dai testi stampati in SB-20c (per esempio «Tutto è droga», «alito marcio») possono tornare come flavour.
 
 **Rischi.** Ritocchi che riaprono il bilanciamento: ogni variazione di numeri torna a SB-21.
+
+**Fase A consegnata il 21 novembre 2026.** [Proposta](design/set-base/sb-24-proposta.md) con tono, nomi provvisori e proposti, rarità P (42 C / 56 NC / 19 R / 7 P), piano del congelamento e domande 1–5. Nomi, flavour, illustrazioni e rarità di tutte le 125 voci in [proposta.json](design/set-base/sb-24/proposta.json); la [pagina di revisione](design/set-base/sb-24/revisione.html), generata da [genera-revisione.py](design/set-base/sb-24/genera-revisione.py), salva il lavoro del proprietario in `design/set-base/sb-24/revisione-proprietario.json`, nel repository, per rivedere a rate da qualunque PC. Nessun dato del gioco cambia. In attesa: revisione del proprietario e risposte alle domande.
 
 **Anticipato ([D136](#decisioni-del-proprietario), [D137](#decisioni-del-proprietario)), poi riportato qui da [D144](#decisioni-del-proprietario) e [D151](#decisioni-del-proprietario); resta come storia.** Il proprietario rivede nomi, flavour e illustrazioni sulla pagina di SB-20a e la rarità P dei personaggi entra prima di SB-20. Nomi e flavour scelti allora sono **provvisori**: le correzioni di SB-21 possono cambiare l'effetto di una carta o toglierla. Restano qui la conferma di nomi e flavour sulle carte finali, le rarità definitive e il congelamento.
 
