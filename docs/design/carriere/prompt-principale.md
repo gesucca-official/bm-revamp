@@ -16,6 +16,9 @@ prototipo la legge già. Le versioni con la bocca dei personaggi nuovi sono rima
 
 ## Istruzioni comuni
 
+- **Deroga del proprietario (21 novembre 2026):** «affinché le faccia tutte in una volta». I tre giri si generano di seguito, nell'ordine
+  E, F, G, senza fermarsi per il giudizio; il giro F allega i ritratti base appena generati nel giro E. Il proprietario giudica tutto alla
+  fine: se boccia un ritratto base, le espressioni nate da quello si rifanno. La regola che segue resta per i giri futuri.
 - **Un giro per volta,** nell'ordine E, F, G. Il giro successivo parte dopo il giudizio del proprietario sul precedente, perché un giudizio
   può cambiare i prompt che seguono. Il giro G non dipende da E ed F: il proprietario può anticiparlo.
 - **Ogni blocco inglese va incollato integralmente,** paragrafo «Avoid» compreso, con i soli allegati della tabella del giro, dopo averne
