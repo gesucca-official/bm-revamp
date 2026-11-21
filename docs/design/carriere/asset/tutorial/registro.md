@@ -3580,3 +3580,94 @@ Edit the attached approved dialogue portrait. Keep everything exactly the same: 
 
 Avoid: any other change to the character; raised-arm salutes, flags, runes, swastikas, fasces, complete or real Celtic crosses, or any real political symbol; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
 ~~~
+
+## Ritocchi della campagna principale — 21 novembre 2026
+
+Il confronto della cantina usa l’originale allegato; entrambi i tentativi modificano anche pixel fuori dal bottino. Scelto il primo, con minore scarto medio nelle zone superiori e a sinistra.
+
+### beppe-scocciato-3
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:42:04 +0100 |
+| Commit preventivo / prompt | `4e41b65`; [ritocchi](../../prompt-principale.md#ritocchi); testo integrale sotto |
+| Modalità / parametri | modifica guidata dal solo riferimento; un risultato; seed e forza non esposti; trasparenza richiesta |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `originali/beppe-tranquillo-2.png`; SHA-256 `450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4`; impronta verificata prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `exec-3fd12c04-1683-42e4-9632-37e2036559aa.png`, copia `originali/beppe-scocciato-3.png`; 1024×1536 px, PNG, RGBA, 2832016 byte; SHA-256 `fe4fa717eda6125013f09c0bdbe78c55770caa1d812337ab5d7b79546726cd57` |
+| Consegna | [beppe-scocciato.webp](ritratti/beppe-scocciato.webp); 1024×1536 px, WEBP, RGBA, 561488 byte; SHA-256 `a16104060daaffc49108df79d2a7cef05e1e8e28afaab48bdb1f4b92b9796477` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; alpha conservato, metadati non conservati |
+| Alpha | angoli alto-sinistra, alto-destra, basso-sinistra, basso-destra e fondo (100,100), (100,400): 153, 107, 2, 85, 214, 115; intervallo (0, 253) |
+| Controllo | nessun elemento esce da bocca o naso; alone semitrasparente visibile intorno al ritratto nella composizione, alpha non nullo agli angoli e nei campioni di fondo |
+| Composizioni | [f-beppe-scocciato.webp](composizioni/f-beppe-scocciato.webp); 1366×768 px, WEBP, RGB, 268246 byte; SHA-256 `1f39310c8d52fc45c2587e5a8ceb848776f29d4da91ffe87607e54e3c02d06e2` |
+| Scala della prova | finestra e inquadratura del tutorial |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: fed up and irritated, rolling his eyes up, cheeks slightly puffed and lips pressed together as if letting out a long weary sigh through the nose, arms crossed more tightly, shoulders slumped. The sigh is shown only by his face: nothing comes out of his mouth or nose.
+
+Avoid: any other change to the character; puffs, clouds, breath, steam, smoke, vapour, motion lines or symbols near his mouth or nose; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### s4-cantina-3
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:41:14 +0100 |
+| Commit preventivo / prompt | `4e41b65`; [ritocchi](../../prompt-principale.md#ritocchi); testo integrale sotto |
+| Modalità / parametri | modifica guidata dal solo riferimento; un risultato; seed e forza non esposti; sfondo opaco |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `originali/s4-cantina-2.png`; SHA-256 `d76ceb6d55ec3461f91925c9752cc6895cf5d6d89478ad4259b8107de6324048`; impronta verificata prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `exec-0ce1a4e8-eb9b-48cd-aaf8-e42496b59c36.png`, copia `originali/s4-cantina-3.png`; 1536×1024 px, PNG, RGB, 2912924 byte; SHA-256 `789d5645720d5d71ba0f126c2c4a374bcd58ed181e7be20c63ba7ba8a5d79f2e` |
+| Consegna | [s4-cantina.webp](sfondi/s4-cantina.webp); 1536×1024 px, WEBP, RGB, 433302 byte; SHA-256 `45e6c87b2b0ae338285963c9391d4171c8940baf25119dc96b558bba2908f7fb` |
+| Conversione | Pillow, WebP qualità 90, metodo 4, piena risoluzione; alpha conservato, metadati non conservati |
+| Alpha | sfondo opaco; alpha non applicabile |
+| Controllo | bottino più piccolo; differenze anche fuori dal bottino: scarto medio RGB rispetto all’allegato nella fascia superiore 10,34 / 7,63 / 5,47; a sinistra 9,37 / 6,59 / 4,70 su scala 0–255 |
+| Composizioni | [g-s4-cantina.webp](composizioni/g-s4-cantina.webp); 1366×768 px, WEBP, RGB, 279194 byte; SHA-256 `c1442cd0022e1c9697d0daef0bece2d97c81b8255a6c80f51acbfc241c866ed3`<br>[g-s4-cantina-mara.webp](composizioni/g-s4-cantina-mara.webp); 1366×768 px, WEBP, RGB, 306398 byte; SHA-256 `03fa7fb91b6a69c69aed19489274c7db8686df036f696e0936c33dde93c4faa0` |
+| Scala della prova | Grappino: tela 131×131 px, piedi a y=568; centrato sul bottino. Ritaglio dello sfondo centrato verticalmente a 0,70; Mara stessa inquadratura. |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | candidato per giudizio del proprietario |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the vaulted brick cellar, the bare light bulb, the shelves with bottles, the crates, the beer kegs, the wooden staircase, the cobwebs, the light, the colours, the hand-inked European comic style and the composition. Change only the small dog's hoard on the floor: redraw it much smaller, at the real scale of the room, as the stash of a small dog no taller than half a beer keg: a tiny bottle cap, one worn black furry slipper of normal adult size, a few thin cigarette butts and some greasy scraps of paper, on a small old rag no wider than one beer keg. Place it on the floor in the central third of the width, a little left of the centre, just above the lowest quarter of the image. Fill the space it leaves with the same plain dusty floor.
+
+Avoid: any other change to the image; oversized objects; animals, people, faces, hands, silhouettes; any text, letters, numbers, labels on crates or kegs, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
+
+### s4-cantina-4
+
+| Campo | Valore |
+|---|---|
+| Operatore / strumento | Codex; image_gen integrato; modello e versione non esposti |
+| Data e ora originale | 21/11/2026 13:43:02 +0100 |
+| Commit preventivo / prompt | `4e41b65`; [ritocchi](../../prompt-principale.md#ritocchi); testo integrale sotto |
+| Modalità / parametri | modifica guidata dal solo riferimento; un risultato; seed e forza non esposti; sfondo opaco |
+| Campo negativo | paragrafo Avoid nel campo principale |
+| Allegato effettivo | `originali/s4-cantina-2.png`; SHA-256 `d76ceb6d55ec3461f91925c9752cc6895cf5d6d89478ad4259b8107de6324048`; impronta verificata prima dell’allegato |
+| Altri allegati | nessuno |
+| Originale restituito | `exec-4ecb9a56-d0e7-45f0-a9de-e1480c11ea33.png`, copia `originali/s4-cantina-4.png`; 1536×1024 px, PNG, RGB, 2899060 byte; SHA-256 `6c2ebbd932c90370462deb1d584b6c31403e51310c008537a1c78e9fa802e00d` |
+| Consegna | non selezionato |
+| Conversione | nessuna |
+| Alpha | sfondo opaco; alpha non applicabile |
+| Controllo | bottino più piccolo; differenze anche fuori dal bottino: scarto medio RGB rispetto all’allegato nella fascia superiore 10,24 / 7,85 / 5,57; a sinistra 9,55 / 7,09 / 5,01 su scala 0–255 |
+| Composizioni | nessuna |
+| Scala della prova | nessuna |
+| Termini / C2PA | non verificati; originale conservato |
+| Esito | secondo tentativo non selezionato |
+
+Testo inviato integralmente:
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the vaulted brick cellar, the bare light bulb, the shelves with bottles, the crates, the beer kegs, the wooden staircase, the cobwebs, the light, the colours, the hand-inked European comic style and the composition. Change only the small dog's hoard on the floor: redraw it much smaller, at the real scale of the room, as the stash of a small dog no taller than half a beer keg: a tiny bottle cap, one worn black furry slipper of normal adult size, a few thin cigarette butts and some greasy scraps of paper, on a small old rag no wider than one beer keg. Place it on the floor in the central third of the width, a little left of the centre, just above the lowest quarter of the image. Fill the space it leaves with the same plain dusty floor.
+
+Avoid: any other change to the image; oversized objects; animals, people, faces, hands, silhouettes; any text, letters, numbers, labels on crates or kegs, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~

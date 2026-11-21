@@ -266,7 +266,7 @@ Avoid: any other change to the character, her framing or her position on the can
 | celestina-triste | [WebP](asset/tutorial/ritratti/celestina-triste.webp) | [Scheda](asset/tutorial/registro.md#celestina-triste-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | beppe-contento | [WebP](asset/tutorial/ritratti/beppe-contento.webp) | [Scheda](asset/tutorial/registro.md#beppe-contento-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | beppe-pensieroso | [WebP](asset/tutorial/ritratti/beppe-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#beppe-pensieroso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
-| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-2) |Da rifare (21 novembre 2026): la nuvoletta del sospiro. [Ritocco](#ritocchi) |
+| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-3) | |
 | beppe-serio | [WebP](asset/tutorial/ritratti/beppe-serio.webp) | [Scheda](asset/tutorial/registro.md#beppe-serio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | duccio-dolorante | [WebP](asset/tutorial/ritratti/duccio-dolorante.webp) | [Scheda](asset/tutorial/registro.md#duccio-dolorante-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | duccio-offeso | [WebP](asset/tutorial/ritratti/duccio-offeso.webp) | [Scheda](asset/tutorial/registro.md#duccio-offeso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
@@ -354,7 +354,7 @@ Avoid: faces, eyes, features, inner lines, colours, gradients or highlights insi
 | s1-esterno-di-giorno | [WebP](asset/tutorial/sfondi/s1-esterno-di-giorno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-di-giorno-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | s2-interno-al-buio | [WebP](asset/tutorial/sfondi/s2-interno-al-buio.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-al-buio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 | s3-esterno | [WebP](asset/tutorial/sfondi/s3-esterno.webp) | [Scheda](asset/tutorial/registro.md#s3-esterno-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia (paletti dorati invece che cromati) |
-| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-2) |Da rifare (21 novembre 2026): il proprietario, «grappino in cantina è alto quasi quanto il soffitto». [Ritocco](#ritocchi) |
+| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-3) | |
 | padrone-in-ombra | [WebP](asset/tutorial/sprite/padrone-in-ombra.webp) | [Scheda](asset/tutorial/registro.md#padrone-in-ombra-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 
 ## Ritocchi
