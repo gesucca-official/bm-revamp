@@ -79,4 +79,4 @@ indicate fra parentesi, con i ripieghi del cast del prototipo. Le versioni con l
 | S4 | La cantina del Serraglio, col nascondiglio di Grappino | nuovo |
 
 **Totale della campagna principale:** 4 ritratti base, 16 espressioni, 2 varianti di sfondo, 2 sfondi nuovi e una sagoma: 25 immagini.
-**Completo e approvato il 21 novembre 2026.** Resta da farle entrare nel prototipo (cast, ripieghi, sfondi).
+**Completo e approvato il 21 novembre 2026.** Entrate nel prototipo il 21 novembre 2026 (cast, ripieghi, sfondi, sagoma del padrone, CA-0a); nei dialoghi la cantina è «S4» e l'esterno del Dimmi Di Sì «S3 esterno», per approvazione del proprietario nella chat di regia.

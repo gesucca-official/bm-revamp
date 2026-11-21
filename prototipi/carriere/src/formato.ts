@@ -180,7 +180,7 @@ export type Cast = {
   // alzare il ritratto in verticale, in frazioni dell'altezza dello schermo).
   personaggi: Record<string, {nome: string; alias?: string[]; ombra?: true; espressioni?: string[]; espressioniFuture?: string[];
     ripieghi?: Record<string, string>;
-    velocita?: number; ritratto?: string; sprite?: string; animazione?: AnimazioneCast; bocca?: BoccaCast; stacco?: string;
+    velocita?: number; ritratto?: string; sprite?: string; inScena?: true; animazione?: AnimazioneCast; bocca?: BoccaCast; stacco?: string;
     verticale?: {alza: number};
     // Fase G: per un'espressione consegnata con il fondo sporco, l'espressione dello stesso personaggio da cui prendere la trasparenza.
     alfa?: Record<string, string>;

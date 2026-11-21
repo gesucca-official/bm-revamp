@@ -3,12 +3,12 @@
   "personaggi": {
     "mara": {
       "nome": "Mara",
-      "espressioni": ["neutra", "agitata", "sospettosa", "illuminata", "pensierosa", "contenta"],
+      "espressioni": ["neutra", "agitata", "sospettosa", "illuminata", "pensierosa", "contenta", "seria"],
       "espressioniFuture": ["esasperata"],
       "velocita": 1.2,
       "ritratto": "ritratti/mara-{espressione}.webp",
       "stacco": "esasperata",
-      "ripieghi": {"normale": "neutra", "seria": "neutra", "perplessa": "pensierosa", "dubbiosa": "sospettosa", "arrabbiata": "agitata", "triste": "pensierosa"},
+      "ripieghi": {"normale": "neutra", "perplessa": "pensierosa", "dubbiosa": "sospettosa", "arrabbiata": "agitata", "triste": "pensierosa"},
       "animazione": {"modo": "maglia",
         "maglia": {"perno": {"u": 0.55, "v": 0.5}, "testa": {"u": 0.55, "raggio": 0.2, "sopra": 0.4, "sotto": 0.5}, "busto": {"da": 0.52, "a": 0.9}, "aspetto": 1.5}},
       "bocca": {"u": 0.64, "v": 0.3, "ru": 0.09, "rv": 0.06}
@@ -20,7 +20,7 @@
       "velocita": 1,
       "ritratto": "ritratti/spazienzio-{espressione}.webp",
       "stacco": "esasperato",
-      "ripieghi": {"normale": "quasi-calmo", "eccitato": "soddisfatto", "arrabbiato": "furioso", "estremamente-furioso": "fumante", "dubbioso": "serio", "spaventato": "quasi-calmo", "malvagio": "soddisfatto"},
+      "ripieghi": {"normale": "quasi-calmo", "eccitato": "soddisfatto", "arrabbiato": "furioso", "estremamente-furioso": "furioso", "dubbioso": "serio", "spaventato": "quasi-calmo", "malvagio": "soddisfatto"},
       "animazione": {"modo": "maglia",
         "maglia": {"perno": {"u": 0.47, "v": 0.47}, "testa": {"u": 0.47, "raggio": 0.17, "sopra": 0.4, "sotto": 0.5}, "busto": {"da": 0.48, "a": 0.88}, "aspetto": 1.5}},
       "bocca": {"u": 0.5, "v": 0.28, "ru": 0.08, "rv": 0.06, "espressioni": {"furioso": {"u": 0.457, "v": 0.395, "ru": 0.1, "rv": 0.075}}},
@@ -36,12 +36,45 @@
         "maglia": {"perno": {"u": 0.5, "v": 0.42}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.32, "sotto": 0.42}, "busto": {"da": 0.45, "a": 0.9}, "aspetto": 1.5}},
       "bocca": {"u": 0.56, "v": 0.24, "ru": 0.08, "rv": 0.06}
     },
-    "celestina": {"nome": "Celestina", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/celestina.webp", "segnaposto": true, "ripieghi": {"*": "neutra"}},
-    "beppe": {"nome": "Beppe", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/beppe.webp", "segnaposto": true, "ripieghi": {"*": "neutra"}},
-    "sergio": {"nome": "Sergio", "alias": ["Un signore"], "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/sergio.webp", "segnaposto": true, "ripieghi": {"*": "neutra"}},
-    "duccio": {"nome": "Duccio", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/duccio.webp", "segnaposto": true, "ripieghi": {"*": "neutra"}},
+    "celestina": {
+      "nome": "Celestina",
+      "espressioni": ["furba", "assonnata", "contenta", "arrabbiata", "triste"],
+      "velocita": 1,
+      "ritratto": "ritratti/celestina-{espressione}.webp",
+      "ripieghi": {"neutra": "furba", "normale": "furba", "pensierosa": "assonnata", "annoiata": "assonnata"},
+      "animazione": {"modo": "maglia",
+        "maglia": {"perno": {"u": 0.5, "v": 0.45}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.38, "sotto": 0.46}, "busto": {"da": 0.48, "a": 0.9}, "aspetto": 1.5}}
+    },
+    "beppe": {
+      "nome": "Beppe",
+      "espressioni": ["tranquillo", "contento", "pensieroso", "scocciato", "serio"],
+      "velocita": 1,
+      "ritratto": "ritratti/beppe-{espressione}.webp",
+      "ripieghi": {"neutro": "tranquillo", "annoiato": "scocciato", "contrariato": "scocciato", "allegro": "contento", "confuso": "pensieroso"},
+      "animazione": {"modo": "maglia",
+        "maglia": {"perno": {"u": 0.5, "v": 0.45}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.38, "sotto": 0.46}, "busto": {"da": 0.48, "a": 0.9}, "aspetto": 1.5}}
+    },
+    "sergio": {
+      "nome": "Sergio",
+      "alias": ["Un signore"],
+      "espressioni": ["annoiato", "strafottente", "malvagio", "pensieroso"],
+      "velocita": 1,
+      "ritratto": "ritratti/sergio-{espressione}.webp",
+      "ripieghi": {"neutro": "annoiato", "serio": "pensieroso"},
+      "animazione": {"modo": "maglia",
+        "maglia": {"perno": {"u": 0.5, "v": 0.45}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.38, "sotto": 0.46}, "busto": {"da": 0.48, "a": 0.9}, "aspetto": 1.5}}
+    },
+    "duccio": {
+      "nome": "Duccio",
+      "espressioni": ["fiero", "dolorante", "offeso", "serio", "beato"],
+      "velocita": 1,
+      "ritratto": "ritratti/duccio-{espressione}.webp",
+      "ripieghi": {"pensieroso": "serio", "preoccupato": "serio"},
+      "animazione": {"modo": "maglia",
+        "maglia": {"perno": {"u": 0.5, "v": 0.45}, "testa": {"u": 0.5, "raggio": 0.17, "sopra": 0.38, "sotto": 0.46}, "busto": {"da": 0.48, "a": 0.9}, "aspetto": 1.5}}
+    },
     "grappino": {"nome": "Grappino", "espressioni": ["neutra"], "velocita": 1, "ritratto": "segnaposto/grappino.webp", "segnaposto": true, "ripieghi": {"*": "neutra"}},
-    "padrone": {"nome": "Il padrone del Dimmi Di Sì", "alias": ["Il padrone"], "ombra": true, "velocita": 1},
+    "padrone": {"nome": "Il padrone del Dimmi Di Sì", "alias": ["Il padrone"], "ombra": true, "sprite": "padrone", "inScena": true, "velocita": 1},
     "combriccola": {
       "nome": "La combriccola",
       "alias": ["Un amico", "Un altro amico"],
@@ -51,14 +84,16 @@
     }
   },
   "sfondi": {
-    "S1": {"file": "sfondi/s1-esterno.webp", "varianti": {"insegna-spenta": "sfondi/s1-esterno-insegna-spenta.webp"},
-      "insegna": {"testo": "BAR IL SERRAGLIO", "x": 0.516, "y": 0.228, "larghezza": 0.3, "spentaIn": ["insegna-spenta"]},
-      "ripieghi": {"di-notte": "insegna-spenta", "di-giorno": ""}},
-    "S2": {"file": "sfondi/s2-interno.webp", "varianti": {"disordine": "sfondi/s2-interno-disordine.webp"},
-      "ripieghi": {"al-buio": "disordine", "di-notte": "disordine", "di-giorno": ""}},
-    "S3": {"file": "sfondi/s3-dimmi-di-si.webp", "ripieghi": {"dentro": ""}}
+    "S1": {"file": "sfondi/s1-esterno.webp", "varianti": {"insegna-spenta": "sfondi/s1-esterno-insegna-spenta.webp", "di-giorno": "sfondi/s1-esterno-di-giorno.webp"},
+      "insegna": {"testo": "BAR IL SERRAGLIO", "x": 0.516, "y": 0.228, "larghezza": 0.3, "spentaIn": ["insegna-spenta", "di-giorno"]},
+      "ripieghi": {"di-notte": "insegna-spenta"}},
+    "S2": {"file": "sfondi/s2-interno.webp", "varianti": {"disordine": "sfondi/s2-interno-disordine.webp", "al-buio": "sfondi/s2-interno-al-buio.webp"},
+      "ripieghi": {"di-notte": "al-buio", "di-giorno": ""}},
+    "S3": {"file": "sfondi/s3-dimmi-di-si.webp", "varianti": {"esterno": "sfondi/s3-esterno.webp"}, "ripieghi": {"dentro": ""}},
+    "S4": {"file": "sfondi/s4-cantina.webp"}
   },
   "sprite": {
+    "padrone": {"pose": {"in-ombra": "sprite/padrone-in-ombra.webp"}, "x": 0.38, "piedi": 0.8, "altezza": 0.5},
     "bici-mara": {"pose": {"ferma": "sprite/bici-mara.webp"}, "x": 0.6, "piedi": 0.74, "altezza": 0.3},
     "grappino": {"pose": {"seduto": "sprite/grappino-seduto.webp", "ringhia": "sprite/grappino-ringhia.webp", "russa": "sprite/grappino-russa.webp"}, "x": 0.56, "piedi": 0.74, "altezza": 0.17},
     "combriccola": {"pose": {"davanti-alla-porta": "sprite/combriccola-davanti-alla-porta.webp", "in-fuga": "sprite/combriccola-in-fuga.webp"}, "x": 0.5, "piedi": 0.77, "altezza": 0.55,

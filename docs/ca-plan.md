@@ -13,7 +13,7 @@ verifiche si scelgono dalla [tabella delle aree](aree-protette.md).
 > - **In attesa:** nulla.
 > - **Prossimo:** [CA-0c](#ca-0c--strumento-delle-carriere), lo strumento delle carriere sul [formato 0.1](carriere/formato.md).
 > - **Fuori dal piano, nel serbatoio:** le illustrazioni della campagna principale, approvate il 21 novembre 2026
->   ([prompt](design/carriere/prompt-principale.md)), da far entrare nel prototipo; il secondo giro delle bocche è approvato e adottato
+>   ([prompt](design/carriere/prompt-principale.md)), entrate nel prototipo il 21 novembre 2026 (CA-0a: ritratti, sfondi e sagoma del padrone; restano i ripieghi dell'elenco); il secondo giro delle bocche è approvato e adottato
 >   ([riga di CA-0a](product-roadmap.md#lavori-anticipati)).
 > - **Decisioni da leggere:** DC1–DC4.
 

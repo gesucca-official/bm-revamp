@@ -28,7 +28,9 @@ test('la principale si converte senza errori, con i soli avvisi dichiarati, con 
     : m.startsWith('scelta muta senza') ? 'scelta' : m;
   const conta: Record<string, number> = {};
   for (const p of r.problemi) conta[tipo(p.messaggio)] = (conta[tipo(p.messaggio)] ?? 0) + 1;
-  assert.deepEqual(conta, {espressione: 245, sfondo: 10});
+  // CA-0a, 21 novembre 2026: le illustrazioni della campagna principale entrano nel prototipo (proprietario: «Sì, avvialo»). Prima 245 e 10;
+  // restano le espressioni che le scene chiedono e che non si generano (ripieghi di illustrazioni.md#campagna-principale) e «dentro» il Dimmi Di Sì.
+  assert.deepEqual(conta, {espressione: 45, sfondo: 4});
   const c = r.carriera;
   assert.equal(c.id, 'principale');
   // 0.3.7: F1, F2 e F3 sono scene (F2 dà «Monetine» e prosegue in F1, che chiude; F3 «Disco pub» chiude dopo la catena persa).
@@ -519,8 +521,16 @@ test('il controllo del grafo conta solo i segni e i nodi che qualche condizione 
   assert.deepEqual(controllaGrafo(c).avvisi, [], 'nel nodo dopo si vedono tutte e due: vincere al primo colpo e dopo un ritento restano distinti');
 });
 
-test('i ritratti segnaposto: un cartoncino per i personaggi nuovi, nel prototipo; il padrone è una figura in ombra', () => {
-  for (const id of ['celestina', 'beppe', 'sergio', 'duccio', 'grappino']) {
+test('i ritratti segnaposto: un cartoncino per Grappino; gli altri personaggi nuovi hanno i ritratti veri; il padrone è una figura in ombra con la sua sagoma', () => {
+  // CA-0a, 21 novembre 2026: Celestina, Beppe, Sergio e Duccio hanno i ritratti approvati della campagna principale (niente più cartoncino).
+  for (const id of ['celestina', 'beppe', 'sergio', 'duccio']) {
+    const p = cast.personaggi[id];
+    assert.ok(!p.segnaposto && p.ritratto === `ritratti/${id}-{espressione}.webp`, id);
+    for (const e of p.espressioni!) assert.ok(fs.existsSync(new URL(`../../../docs/design/carriere/asset/tutorial/ritratti/${id}-${e}.webp`, import.meta.url)), `${id} ${e}: il file c'è`);
+    for (const r of Object.values(p.ripieghi ?? {})) assert.ok(p.espressioni!.includes(r), `${id}: il ripiego «${r}» è un'espressione che c'è`);
+  }
+  assert.ok(cast.personaggi.padrone.inScena && cast.sprite.padrone && fs.existsSync(new URL(`../../../docs/design/carriere/asset/tutorial/${cast.sprite.padrone.pose['in-ombra']}`, import.meta.url)));
+  for (const id of ['grappino']) {
     const p = cast.personaggi[id];
     assert.ok(p.segnaposto && p.ritratto === `segnaposto/${id}.webp`, id);
     assert.ok(!p.animazione && !p.bocca, `${id}: niente maglia né bocca su un cartoncino`);
@@ -681,9 +691,9 @@ const storiaCatena = `# T
 
 [Sconfitta: → F3]
 
-[Catena, prima di Mara] **Celestina** (neutra): Mara.
+[Catena, prima di Mara] **Celestina** (furba): Mara.
 
-[Catena, prima di Piera] **Celestina** (neutra): Piera.
+[Catena, prima di Piera] **Celestina** (furba): Piera.
 
 → Fine: completata, Vinto
 
@@ -691,7 +701,7 @@ const storiaCatena = `# T
 
 [Sfondo: S1]
 
-**Celestina** (neutra): Ho vinto io.
+**Celestina** (furba): Ho vinto io.
 
 → Fine: completata, Perso
 `;
@@ -717,13 +727,13 @@ test('la catena nel convertitore: la freccia «a catena», [Catena: …], [Sconf
 
 test('la catena nel convertitore: gli errori (senza sconfitta, un solo personaggio, battuta di un altro, doppia, con ritento, senza avversario, comandi fuori posto)', () => {
   assert.ok(errori(storiaCatena.replace('[Sconfitta: → F3]\n\n', '')).some(m => m.includes('ha bisogno di [Sconfitta: …]')), 'la prima sconfitta deve portare da qualche parte');
-  assert.ok(errori(storiaCatena.replace('[Catena, prima di Piera] **Celestina** (neutra): Piera.\n\n', '')).some(m => m.includes('almeno due personaggi')));
-  assert.ok(errori(storiaCatena.replace('**Celestina** (neutra): Piera.', '**Mara** (neutra): Piera.')).some(m => m.includes('non è dell\'avversario della catena')));
-  assert.ok(errori(storiaCatena.replace('[Catena, prima di Piera] **Celestina** (neutra): Piera.', '[Catena, prima di Mara] **Celestina** (neutra): Ancora Mara.')).some(m => m.includes('già la battuta prima di Mara')));
+  assert.ok(errori(storiaCatena.replace('[Catena, prima di Piera] **Celestina** (furba): Piera.\n\n', '')).some(m => m.includes('almeno due personaggi')));
+  assert.ok(errori(storiaCatena.replace('**Celestina** (furba): Piera.', '**Mara** (neutra): Piera.')).some(m => m.includes('non è dell\'avversario della catena')));
+  assert.ok(errori(storiaCatena.replace('[Catena, prima di Piera] **Celestina** (furba): Piera.', '[Catena, prima di Mara] **Celestina** (furba): Ancora Mara.')).some(m => m.includes('già la battuta prima di Mara')));
   assert.ok(errori(storiaCatena.replace('→ Fine: completata, Vinto', '**Ritento.** **Mara** (agitata): Ancora.\n\n→ Fine: completata, Vinto')).some(m => m.includes('non ha ritento')));
   assert.ok(errori(storiaCatena.replace(', contro Celestina, boss finale', ', boss finale')).some(m => m.includes('catena senza avversario')));
   assert.ok(errori(storiaCatena.replace('[Catena: si vince se tutti battono Celestina; alla prima sconfitta la catena finisce]', '[Catena: regola]\n\n→ Fine: completata, X')).some(m => m.includes('passo dopo l\'uscita')) || true);
-  const senzaCatena = '# T\n\n## A — Uno\n\n[Sfondo: S1]\n\n[Catena: regola]\n\n[Catena, prima di Mara] **Celestina** (neutra): Mara.\n\n→ Fine: completata\n';
+  const senzaCatena = '# T\n\n## A — Uno\n\n[Sfondo: S1]\n\n[Catena: regola]\n\n[Catena, prima di Mara] **Celestina** (furba): Mara.\n\n→ Fine: completata\n';
   assert.deepEqual(errori(senzaCatena), ['[Catena: …] senza una partita a catena prima', '[Catena, prima di …] senza una partita a catena prima']);
 });
 
@@ -780,9 +790,9 @@ test('il convertitore accetta la catena di III5 come è scritta in principale-di
 test('i ripieghi del cast: un\'espressione o un\'ambientazione senza immagine si mostra come quella dichiarata, con un avviso; senza ripiego resta un errore', () => {
   const testo = (riga: string) => `# T\n\n[Carriera: t]\n\n## A — Uno\n\n${riga}\n\n→ Fine: completata\n`;
   const conv = (riga: string, k: Cast = cast) => converti(testo(riga), k, 'x');
-  // Espressione con ripiego esplicito (Mara «normale» → «neutra») e con il ripiego «*» dei cartoncini (Sergio «strafottente» → «neutra»).
-  for (const [riga, chi, mostra] of [['**Mara** (normale): Ciao.', 'Mara', 'neutra'], ['**Sergio** (strafottente): Ciao.', 'Sergio', 'neutra'],
-    ['**Spazienzio** (estremamente furioso): CIAO.', 'Spazienzio', 'fumante']] as const) {
+  // Espressione con ripiego esplicito (Mara «normale» → «neutra») e con il ripiego «*» dei cartoncini (Sergio «neutro» → «annoiato»).
+  for (const [riga, chi, mostra] of [['**Mara** (normale): Ciao.', 'Mara', 'neutra'], ['**Sergio** (neutro): Ciao.', 'Sergio', 'annoiato'],
+    ['**Spazienzio** (estremamente furioso): CIAO.', 'Spazienzio', 'furioso']] as const) {
     const r = conv(riga);
     assert.deepEqual(r.problemi.map(p => p.livello), ['avviso'], riga);
     assert.ok(r.problemi[0].messaggio.startsWith(`espressione senza ritratto per ${chi}`) && r.problemi[0].messaggio.includes(`«${mostra}»`));
@@ -797,14 +807,18 @@ test('i ripieghi del cast: un\'espressione o un\'ambientazione senza immagine si
   const rotto = structuredClone(cast); rotto.personaggi.mara.ripieghi = {normale: 'inesistente'};
   assert.deepEqual(conv('**Mara** (normale): Ciao.', rotto).problemi.map(p => p.livello), ['errore']);
   // Gli stacchi seguono gli stessi ripieghi.
-  const st = conv('**Piera** (brilla): Allora...\n\n[Stacchi: Mara normale, Sergio annoiato]');
+  const st = conv('**Piera** (brilla): Allora...\n\n[Stacchi: Mara normale, Sergio neutro]');
   const piera = st.carriera.nodi[0].passi.find(p => p.tipo === 'battuta');
-  assert.deepEqual(piera && piera.tipo === 'battuta' && piera.stacchi, [{chi: 'mara', espressione: 'neutra'}, {chi: 'sergio', espressione: 'neutra'}]);
+  assert.deepEqual(piera && piera.tipo === 'battuta' && piera.stacchi, [{chi: 'mara', espressione: 'neutra'}, {chi: 'sergio', espressione: 'annoiato'}]);
   assert.deepEqual(st.problemi.map(p => p.livello), ['avviso', 'avviso']);
   // Sfondi: «al buio» → la variante del disordine; «di giorno» → l'immagine di base; «dentro» il Dimmi Di Sì → S3; le varianti vere senza avviso.
   const sf = (riga: string) => { const r = conv(riga); const p = r.carriera.nodi[0].passi.find(x => x.tipo === 'sfondo'); return [p && p.tipo === 'sfondo' ? p.variante ?? '' : null, r.problemi.length]; };
-  assert.deepEqual(sf('[Sfondo: S2 al buio. Regia: la cantina.]'), ['disordine', 1]);
-  assert.deepEqual(sf('[Sfondo: S1 di giorno]'), ['', 1]);
+  assert.deepEqual(sf('[Sfondo: S2 al buio. Regia: il bar chiuso.]'), ['al-buio', 0], 'S2 al buio ha la sua immagine');
+  assert.deepEqual(sf('[Sfondo: S2, di notte]'), ['al-buio', 1], '«di notte» ripiega sull’immagine al buio');
+  assert.deepEqual(sf('[Sfondo: S2 di giorno]'), ['', 1]);
+  assert.deepEqual(sf('[Sfondo: S1 di giorno]'), ['di-giorno', 0]);
+  assert.deepEqual(sf('[Sfondo: S3 esterno, di sera. Regia: la fila.]'), ['esterno', 0]);
+  assert.deepEqual(sf('[Sfondo: S4. Regia: la cantina.]'), ['', 0]);
   assert.deepEqual(sf('[Sfondo: S3, dentro il Dimmi Di Sì]'), ['', 1]);
   assert.deepEqual(sf('[Sfondo: S1 insegna-spenta, di notte]'), ['insegna-spenta', 0]);
   assert.deepEqual(sf('[Sfondo: S2 di sera]'), ['', 0], '«di sera» è l\'immagine di base, senza avviso');

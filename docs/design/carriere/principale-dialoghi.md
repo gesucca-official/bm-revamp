@@ -204,7 +204,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 ## I2b — La porta
 
-[Sfondo: S3 di sera. Regia: davanti al Dimmi Di Sì una fila di fighetti in ombra; alla porta Duccio, braccia conserte, l'aquila sulla maglietta.]
+[Sfondo: S3 esterno, di sera. Regia: davanti al Dimmi Di Sì una fila di fighetti in ombra; alla porta Duccio, braccia conserte, l'aquila sulla maglietta.]
 
 **Spazienzio** (furioso): VIA, VIA! GABBIANI MALEDETTI, VIA! DEVO SPIEGARE UNA COSA AL PADRONE.
 
@@ -936,7 +936,7 @@ prima stesura: ognuna è un ritratto in più da disegnare, oppure si riconduce a
 
 [Nodo: segreto]
 
-[Sfondo: S2 al buio. Regia: la cantina del Serraglio, fra casse vuote e fusti di birra. In un angolo il nascondiglio di Grappino: un tappo, una ciabatta nera col pelo, mozziconi di sigarette sottili, carte unte. Grappino ci sta seduto sopra, il suo pezzo di carta fra le zampe.] [Entra: grappino seduto]
+[Sfondo: S4. Regia: la cantina del Serraglio, fra casse vuote e fusti di birra. In un angolo il nascondiglio di Grappino: un tappo, una ciabatta nera col pelo, mozziconi di sigarette sottili, carte unte. Grappino ci sta seduto sopra, il suo pezzo di carta fra le zampe.] [Entra: grappino seduto]
 
 **Celestina** (furba): Guarda un po' quanta roba ha accumulato questo cane!
 

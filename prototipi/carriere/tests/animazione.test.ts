@@ -165,7 +165,8 @@ test('la zona della bocca: dove le due versioni differiscono, ma solo vicino all
   assert.equal(zonaBocca(rumore, w, h, z), null);
   // Le zone del cast stanno sul volto, dentro la testa che si piega.
   for (const [chi, p] of conRitratto) {
-    const b = p.bocca!, m = p.animazione!.maglia!;
+    if (!p.bocca) continue;   // i personaggi della campagna principale non hanno ancora le versioni con la bocca
+    const b = p.bocca, m = p.animazione!.maglia!;
     assert.ok(Math.abs(b.u - m.testa.u) < m.testa.raggio && b.v < m.testa.sopra, `${chi}: la bocca sta nella testa`);
   }
 });

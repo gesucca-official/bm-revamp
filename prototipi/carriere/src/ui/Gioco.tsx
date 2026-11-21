@@ -75,6 +75,9 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
   };
 
   const battuta = v.tipo === 'battuta' || v.tipo === 'ritento' ? v.battuta : null;
+  // Una figura in ombra con la sua sagoma nel cast («inScena», il padrone) si vede sulla scena mentre parla, senza un [Entra: …] nella storia.
+  const ombraCast = battuta ? cast.personaggi[battuta.chi] : undefined;
+  const ombraParla = ombraCast?.ombra && ombraCast.inScena && ombraCast.sprite && cast.sprite[ombraCast.sprite] && !g.scena.sprite[ombraCast.sprite] ? ombraCast.sprite : null;
   const chiave = `${g.numero}:${g.nodo}:${g.passo}:${g.ritento}:${g.catena?.vinti.length ?? ''}`;
   const testoPieno = battuta ? conNome(battuta.testo, nome) : v.tipo === 'narrazione' ? conNome(v.testo, nome) : '';
   // Finestra di dialogo (Fase F): sempre alta due righe, con un corpo fisso per orientamento; le battute più lunghe vanno a pagine da
@@ -180,6 +183,7 @@ export function Gioco({c, s, nome, eventi, azione, livello, onLivello, onMappa, 
         return <div className={`insegna${spenta ? ' spenta' : ''}`} style={{left: ox + i.x * bw, top: oy + i.y * bh, width: i.larghezza * bw, fontSize: i.larghezza * bw / 11}}>{i.testo}</div>;
       })()}
       {Object.entries(g.scena.sprite).map(([id, p]) => <img key={id} className="sprite" src={sprite(id, p)} style={posa(id)} alt="" />)}
+      {ombraParla && <img className="sprite" src={sprite(ombraParla, '')} style={posa(ombraParla)} alt="" />}
       {uscite.map(u => <img key={u.id} className="sprite esce" src={sprite(u.sprite, u.posa)} style={posa(u.sprite)} alt="" />)}
       {uscenti.map(u => <Uscente key={u.id} src={u.src} srcAlfa={u.srcAlfa} altezza={misura.h * (verticale ? 0.75 : 0.85)} alza={u.alza} posto={u.posto}
         verticale={verticale} luce={u.posto === 'ascolta' ? CHI_REAGISCE.luce : 1} scala={u.scala} tempo={cast.personaggi[u.chi]?.tempoAnimazioni ?? 1} />)}
