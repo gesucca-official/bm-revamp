@@ -1,0 +1,211 @@
+{
+  "format": "sb-6b/1",
+  "set": {
+    "id": "sb22",
+    "name": "SB-22 costruiti",
+    "version": "z2"
+  },
+  "requires": [
+    {
+      "set": "base"
+    }
+  ],
+  "characters": [],
+  "cards": [],
+  "decks": [
+    {
+      "id": "sb22.costruito-spazienzio",
+      "character": "bruiser.character.BigBadBruiser",
+      "bound": [
+        "base.spazienzio.bound.TestaAlMuro",
+        "bruiser.character.LittleRage"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.cesira.LoRivendo": 1,
+        "base.cesira.LoSannoTutti": 2,
+        "base.cesira.Ricatto": 1,
+        "base.com.SecondoFiato": 1,
+        "base.gigi.SottoIlCofano": 2,
+        "base.items.AmaroNelBicchiereDiPlastica": 1,
+        "base.items.EspressoDelDistributore": 1,
+        "base.items.GhiaccioNelTovagliolo": 1,
+        "base.items.MezzaMineraleSgasata": 1,
+        "base.items.PaninoDelKebab": 1,
+        "base.pino.GoingBerserk": 1,
+        "bruiser.Glare": 1,
+        "bruiser.HealingBlow": 1,
+        "bruiser.SeagullFly": 1,
+        "bruiser.StunningBlow": 1,
+        "bruiser.SuperImpact": 1,
+        "com.items.RottenBeer": 1,
+        "junkie.AmphetamineReflexes": 1
+      }
+    },
+    {
+      "id": "sb22.costruito-mara",
+      "character": "base.character.Mara",
+      "bound": [
+        "base.mara.bound.CambioMarcia",
+        "base.mara.bound.PassoStretto"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.cesira.LoSannoTutti": 1,
+        "base.cesira.Malelingue": 1,
+        "base.com.BeggingMoney": 1,
+        "base.com.Spintone": 1,
+        "base.com.SputoDaPosacenere": 1,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.items.CascoDaLavoro": 1,
+        "base.items.EspressoDelDistributore": 1,
+        "base.items.GhiaccioNelTovagliolo": 1,
+        "base.items.MezzaMineraleSgasata": 2,
+        "base.items.PaninoDelKebab": 1,
+        "base.mara.CinghiataDiTraverso": 1,
+        "base.mara.Sgommata": 2,
+        "base.mara.TiStringoLaCurva": 1,
+        "base.pino.GoingBerserk": 1,
+        "base.rocco.EAllora": 1,
+        "base.rocco.Incassare": 1,
+        "com.items.RottenBeer": 1
+      }
+    },
+    {
+      "id": "sb22.costruito-celestina",
+      "character": "junkie.character.ToxicJunkie",
+      "bound": [
+        "base.tossico.bound.RaschiareIlFondo",
+        "junkie.character.RottenSmile"
+      ],
+      "lastResort": "junkie.LethalHeroinDose",
+      "cards": {
+        "base.cesira.LoSannoTutti": 1,
+        "base.cesira.Ricatto": 1,
+        "base.com.DentiStretti": 1,
+        "base.com.SecondoFiato": 2,
+        "base.items.GhiaccioNelTovagliolo": 1,
+        "base.items.GuantiDaOfficina": 2,
+        "base.items.MezzaMineraleSgasata": 1,
+        "base.items.PaninoDelKebab": 1,
+        "base.items.PasticcaTrovataSulBancone": 1,
+        "base.items.SigarettaAccesa": 1,
+        "base.mara.SorpassoInCurva": 1,
+        "com.items.AnotherRottenBeer": 2,
+        "com.items.MarvelousCocktail": 1,
+        "com.items.RottenBeer": 1,
+        "junkie.AmphetamineReflexes": 1,
+        "junkie.Cough": 2
+      }
+    },
+    {
+      "id": "sb22.costruito-piera",
+      "character": "base.character.Pino",
+      "bound": [
+        "base.pino.bound.CinqueMinutiEVado",
+        "base.pino.bound.SpallataAlBancone"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.LoRivendo": 1,
+        "base.cesira.OhGuardaLa": 1,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.com.Spintone": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 2,
+        "base.items.CascoDaLavoro": 1,
+        "base.items.GhiaccioNelTovagliolo": 2,
+        "base.items.SantinoDellaPortinaia": 1,
+        "base.pino.GoingBerserk": 2,
+        "base.pino.RuttoADistanzaSociale": 1,
+        "base.pino.TestataDaUltimoGiro": 2,
+        "bruiser.Glare": 1,
+        "bruiser.HealingBlow": 1,
+        "com.items.MarvelousCocktail": 1,
+        "com.items.RottenBeer": 1,
+        "junkie.Cough": 1
+      }
+    },
+    {
+      "id": "sb22.costruito-beppe",
+      "character": "base.character.Gigi",
+      "bound": [
+        "base.gigi.bound.Lima",
+        "base.gigi.bound.UnaStrettaEPassa"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.LoSapevo": 1,
+        "base.com.CoccioDiBottiglia": 1,
+        "base.com.Spintone": 1,
+        "base.gigi.ChiaveDaTredici": 1,
+        "base.gigi.LavoroFattoBene": 1,
+        "base.gigi.SottoIlCofano": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 1,
+        "base.items.CascoDaLavoro": 2,
+        "base.items.GhiaccioNelTovagliolo": 2,
+        "base.items.GiubbottoDiFintaPelle": 1,
+        "base.items.GuantiDaOfficina": 1,
+        "base.items.PaninoDelKebab": 1,
+        "base.items.PosacenereDiVetro": 1,
+        "base.items.SantinoDellaPortinaia": 1,
+        "base.mara.Sgommata": 2,
+        "bruiser.HealingBlow": 1,
+        "bruiser.YouStop": 1
+      }
+    },
+    {
+      "id": "sb22.costruito-sergio",
+      "character": "base.character.Cesira",
+      "bound": [
+        "base.cesira.bound.Battutina",
+        "base.cesira.bound.FareIlVago"
+      ],
+      "lastResort": "com.last.Struggle",
+      "cards": {
+        "base.cesira.LoSannoTutti": 2,
+        "base.com.FasciaturaColFazzolettaccio": 1,
+        "base.com.ManoLesta": 1,
+        "base.com.Spintone": 1,
+        "base.com.TartarugaSulMarciapiede": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 2,
+        "base.items.EspressoDelDistributore": 1,
+        "base.items.GiubbottoDiFintaPelle": 1,
+        "base.items.GuantiDaOfficina": 1,
+        "base.items.PaninoDelKebab": 1,
+        "base.items.PosacenereDiVetro": 1,
+        "base.pino.GoingBerserk": 1,
+        "bruiser.SeagullFly": 1,
+        "com.items.CocktailOnTheGround": 1,
+        "com.items.MarvelousCocktail": 1,
+        "com.items.RottenBeer": 2,
+        "junkie.Cough": 1
+      }
+    },
+    {
+      "id": "sb22.costruito-duccio",
+      "character": "base.character.Rocco",
+      "bound": [
+        "base.rocco.bound.AlzoLaVoce",
+        "base.rocco.bound.MiRialzo"
+      ],
+      "lastResort": "base.rocco.NeHoPreseDiPeggio",
+      "cards": {
+        "base.cesira.ContoSalato": 1,
+        "base.cesira.LoSannoTutti": 2,
+        "base.com.DueDitaInGola": 1,
+        "base.com.SputoDaPosacenere": 1,
+        "base.items.AmaroNelBicchiereDiPlastica": 2,
+        "base.items.GhiaccioNelTovagliolo": 1,
+        "base.items.MezzaMineraleSgasata": 1,
+        "base.mara.Sgommata": 2,
+        "base.pino.GoingBerserk": 1,
+        "base.pino.RuttoADistanzaSociale": 2,
+        "base.tossico.UnAssaggino": 1,
+        "bruiser.Glare": 1,
+        "bruiser.SickeningBlow": 2,
+        "bruiser.SuperImpact": 1,
+        "junkie.AmphetamineReflexes": 1
+      }
+    }
+  ]
+}

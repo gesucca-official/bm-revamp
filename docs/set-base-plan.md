@@ -7,7 +7,7 @@ aggiornano il regolamento. La partita viva resta quella del regolamento vigente:
 > **Ripartenza** (aggiornata il 20 novembre 2026, dopo D162). La aggiorna chi chiude un blocco e la regia a ogni decisione ([metodo](orchestrazione-lavoro.md#avvio-di-un-filone)).
 >
 > - **In vigore:** partita viva al regolamento **1.13** e Set Base 0.1; regole `d50` solo nel playground ([regole-playground.md](design/set-base/regole-playground.md)); formato 20/2 (D94); soglia minima per gli starter (D95); bozza di riferimento **1.6b** (D101) con le correzioni di D139, D149 e D152 (Estasi GEN-24, Giro secco in PIN-AR2), set a 124 carte (D152, D155).
-> - **In corso:** **[SB-22](#sb-22--prova-umana-con-mazzi-costruiti)**, prova umana sulla bozza congelata. SB-21z è chiuso ([D162](#decisioni-del-proprietario), [report](reports/set-base/sb-21z-report.md)): il candidato z2 è `bozza.json` (starter nei criteri di D161: 21/21 nel 35–65%, 8,52 turni, patte 4,10%, specchi ≤ 13,81 turni; numeri belli; bound entro +10); i costruiti restano fuori criterio (12 scontri oltre il 70%, forza che segue la salute) e si giudicano al tavolo, con le liste di `docs/reports/set-base/sb-21z/liste-z2.json`.
+> - **In corso:** **[SB-22](#sb-22--prova-umana-con-mazzi-costruiti)**, prova umana sulla bozza congelata ([guida](reports/set-base/sb-22-prova.md): avvio, partite in ordine, cosa annotare; i sette costruiti in `server/src/test/resources/set-base/sb-22/costruiti.json`). SB-21z è chiuso ([D162](#decisioni-del-proprietario), [report](reports/set-base/sb-21z-report.md)): il candidato z2 è `bozza.json` (starter nei criteri di D161: 21/21 nel 35–65%, 8,52 turni, patte 4,10%, specchi ≤ 13,81 turni; numeri belli; bound entro +10); i costruiti restano fuori criterio (12 scontri oltre il 70%, forza che segue la salute) e si giudicano al tavolo, con le liste di `docs/reports/set-base/sb-21z/liste-z2.json`.
 > - **Prossimo:** la prova del proprietario (Q12 compresa; costruiti e Spazienzio da guardare) e chiusura di SB-22; niente più giri di misura, solo correzioni notate al tavolo (D162). Per le prove al tavolo, `tools/print-cards/generate.py --bozza`. B5c di SB-30b quando lo lancia il proprietario, mai insieme a una misura. La lettura delle x nel client va con SB-28 ([rapporto](reports/set-base/sb-client-reston-report.md#fix-1-rimandato)).
 > - **Decisioni da leggere:** D162, D161, D160, D159, D158, D157, D156, D155, D154, D153, D152, D151, D150, D149, D148, D147, D143, D142, D131, D95, D93. Le altre nel [registro](set-base-decisioni.md#decisioni-del-proprietario) (D1–D162).
 
@@ -669,6 +669,8 @@ Massimo: 3 giri prima di tornare dal proprietario, i primi due da 5.500 s, il te
 **Completamento verificabile.** **Giudizio del proprietario** registrato: è il criterio decisivo.
 
 **Rischi.** Pochi giocatori: il giudizio resta soggettivo, ed è dichiarato come tale.
+
+**Guida ([D162](#decisioni-del-proprietario)).** [sb-22-prova.md](reports/set-base/sb-22-prova.md): avvio del server della bozza coi sette costruiti di SB-21z, partite in ordine di importanza, cosa annotare.
 
 **Per il tavolo.** Oltre al client, la bozza e gli starter si stampano con `tools/print-cards/generate.py --bozza` (anche `--starter`), che rilegge `bozza.json` a ogni esecuzione e mette l'impronta sulle carte ([rapporto](reports/set-base/stampa-bozza-report.md)). Ristampare dopo ogni cambio della bozza, a partire da SB-21e.
 
