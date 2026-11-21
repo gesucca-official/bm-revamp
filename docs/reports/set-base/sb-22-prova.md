@@ -16,7 +16,11 @@ Server della bozza, con i sette costruiti in aggiunta agli starter:
 ./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts -Draft "src/test/resources/set-base/bozza.json;src/test/resources/set-base/sb-22/costruiti.json"
 ```
 
-Client, in un secondo terminale:
+Client, in un secondo terminale. `Serve` mostra la build in `client-web/dist`, non i sorgenti: va ricostruita dopo ogni pull, altrimenti si vedono le cose vecchie (per esempio `[[V]]` al posto dei simboli nella (i), arrivati con SB-20c B2):
+
+```powershell
+./client-web/run.ps1 -Task Build
+```
 
 ```powershell
 ./client-web/run.ps1 -Task Serve

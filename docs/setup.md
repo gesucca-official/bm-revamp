@@ -64,6 +64,7 @@ client web non cambia: il server gli manda le carte e la collezione della bozza.
 ./scripts/build.ps1 -Task Server -Offline          # jar aggiornato, una volta dopo ogni pull
 ./scripts/dev.ps1 -Task Server -Bozza -SeedAccounts
 # In un secondo terminale, dalla radice:
+./client-web/run.ps1 -Task Build                   # build aggiornata, una volta dopo ogni pull: Serve mostra dist
 ./client-web/run.ps1 -Task Serve                   # http://127.0.0.1:4320
 ```
 
