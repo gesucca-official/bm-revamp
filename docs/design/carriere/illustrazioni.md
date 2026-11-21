@@ -50,3 +50,32 @@ l'11 novembre 2026:** «serviranno sicuramente espressioni esasperate». **Da ge
 metodo del giro A (modifica dei ritratti approvati); fino ad allora il prototipo usa «neutra» e «quasi calmo».
 
 **Totale del tutorial:** 3 sfondi (S1, S2, S3) con 2 varianti (insegna spenta, disordine) e lo sprite della bici; 15 ritratti, più 3 pose del cane e 2 della combriccola; eventuali 2 espressioni d'ascolto.
+
+## Campagna principale
+
+Liste approvate dal proprietario il 21 novembre 2026 («si»), con i [prompt](prompt-principale.md) in tre giri: E i ritratti base, F le
+altre espressioni, G sfondi, varianti e il padrone. Le espressioni che le scene chiedono e che non si generano ricadono su quelle
+indicate fra parentesi, con i ripieghi del cast del prototipo. Le versioni con la bocca dei personaggi nuovi sono rimandate.
+
+### Ritratti
+
+| Chi | Espressioni da generare | Ripieghi |
+|---|---|---|
+| Celestina | furba (base), assonnata, contenta, arrabbiata, triste | pensierosa, annoiata e normale → assonnata o furba |
+| Beppe | tranquillo (base), contento, pensieroso, scocciato, serio | annoiato, contrariato → scocciato; allegro → contento; confuso → pensieroso |
+| Duccio | fiero (base), dolorante, offeso, serio, beato | pensieroso, preoccupato → serio |
+| Sergio | annoiato (base), strafottente, malvagio, pensieroso | neutro → annoiato; serio → pensieroso |
+| Mara | seria | — |
+| Spazienzio | nessuna nuova | «estremamente furioso» → furioso, non più fumante |
+| Il padrone del Dimmi Di Sì | sagoma in ombra | figura in ombra della [specifica](specifica-asset.md#figure-in-ombra) |
+
+### Sfondi
+
+| Id | Contenuto | Origine |
+|---|---|---|
+| S1 di giorno | Esterno del Serraglio di mattina, serranda abbassata, insegna spenta | variante di S1 |
+| S2 al buio | Interno a bar chiuso, sedie sui tavoli, una sola lampada sopra il bancone; vale anche «di notte» | variante di S2 |
+| S3 esterno | Esterno del Dimmi Di Sì di sera, cordone di velluto; l'interno è già S3 del tutorial | nuovo |
+| S4 | La cantina del Serraglio, col nascondiglio di Grappino | nuovo |
+
+**Totale della campagna principale:** 4 ritratti base, 16 espressioni, 2 varianti di sfondo, 2 sfondi nuovi e una sagoma: 25 immagini.
