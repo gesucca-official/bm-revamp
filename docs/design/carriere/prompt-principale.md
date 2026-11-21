@@ -91,10 +91,10 @@ Avoid: any other change to the character; a bunch of keys on his belt; a cigaret
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| celestina-furba | [WebP](asset/tutorial/ritratti/celestina-furba.webp) | [Scheda](asset/tutorial/registro.md#celestina-furba-2) | |
-| beppe-tranquillo | [WebP](asset/tutorial/ritratti/beppe-tranquillo.webp) | [Scheda](asset/tutorial/registro.md#beppe-tranquillo-2) | |
-| duccio-fiero | [WebP](asset/tutorial/ritratti/duccio-fiero.webp) | [Scheda](asset/tutorial/registro.md#duccio-fiero-2) | |
-| sergio-annoiato | [WebP](asset/tutorial/ritratti/sergio-annoiato.webp) | [Scheda](asset/tutorial/registro.md#sergio-annoiato-2) | |
+| celestina-furba | [WebP](asset/tutorial/ritratti/celestina-furba.webp) | [Scheda](asset/tutorial/registro.md#celestina-furba-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia (tuta che tira al bordeaux, come nel riferimento approvato) |
+| beppe-tranquillo | [WebP](asset/tutorial/ritratti/beppe-tranquillo.webp) | [Scheda](asset/tutorial/registro.md#beppe-tranquillo-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| duccio-fiero | [WebP](asset/tutorial/ritratti/duccio-fiero.webp) | [Scheda](asset/tutorial/registro.md#duccio-fiero-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| sergio-annoiato | [WebP](asset/tutorial/ritratti/sergio-annoiato.webp) | [Scheda](asset/tutorial/registro.md#sergio-annoiato-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia (abito verde petrolio scuro) |
 
 ## Giro F — le altre espressioni
 
@@ -260,22 +260,22 @@ Avoid: any other change to the character, her framing or her position on the can
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| celestina-assonnata | [WebP](asset/tutorial/ritratti/celestina-assonnata.webp) | [Scheda](asset/tutorial/registro.md#celestina-assonnata-1) | |
-| celestina-contenta | [WebP](asset/tutorial/ritratti/celestina-contenta.webp) | [Scheda](asset/tutorial/registro.md#celestina-contenta-1) | |
-| celestina-arrabbiata | [WebP](asset/tutorial/ritratti/celestina-arrabbiata.webp) | [Scheda](asset/tutorial/registro.md#celestina-arrabbiata-1) | |
-| celestina-triste | [WebP](asset/tutorial/ritratti/celestina-triste.webp) | [Scheda](asset/tutorial/registro.md#celestina-triste-1) | |
-| beppe-contento | [WebP](asset/tutorial/ritratti/beppe-contento.webp) | [Scheda](asset/tutorial/registro.md#beppe-contento-1) | |
-| beppe-pensieroso | [WebP](asset/tutorial/ritratti/beppe-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#beppe-pensieroso-1) | |
-| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-2) | |
-| beppe-serio | [WebP](asset/tutorial/ritratti/beppe-serio.webp) | [Scheda](asset/tutorial/registro.md#beppe-serio-1) | |
-| duccio-dolorante | [WebP](asset/tutorial/ritratti/duccio-dolorante.webp) | [Scheda](asset/tutorial/registro.md#duccio-dolorante-1) | |
-| duccio-offeso | [WebP](asset/tutorial/ritratti/duccio-offeso.webp) | [Scheda](asset/tutorial/registro.md#duccio-offeso-1) | |
-| duccio-serio | [WebP](asset/tutorial/ritratti/duccio-serio.webp) | [Scheda](asset/tutorial/registro.md#duccio-serio-2) | |
-| duccio-beato | [WebP](asset/tutorial/ritratti/duccio-beato.webp) | [Scheda](asset/tutorial/registro.md#duccio-beato-1) | |
-| sergio-strafottente | [WebP](asset/tutorial/ritratti/sergio-strafottente.webp) | [Scheda](asset/tutorial/registro.md#sergio-strafottente-1) | |
-| sergio-malvagio | [WebP](asset/tutorial/ritratti/sergio-malvagio.webp) | [Scheda](asset/tutorial/registro.md#sergio-malvagio-1) | |
-| sergio-pensieroso | [WebP](asset/tutorial/ritratti/sergio-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#sergio-pensieroso-1) | |
-| mara-seria | [WebP](asset/tutorial/ritratti/mara-seria.webp) | [Scheda](asset/tutorial/registro.md#mara-seria-1) | |
+| celestina-assonnata | [WebP](asset/tutorial/ritratti/celestina-assonnata.webp) | [Scheda](asset/tutorial/registro.md#celestina-assonnata-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| celestina-contenta | [WebP](asset/tutorial/ritratti/celestina-contenta.webp) | [Scheda](asset/tutorial/registro.md#celestina-contenta-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| celestina-arrabbiata | [WebP](asset/tutorial/ritratti/celestina-arrabbiata.webp) | [Scheda](asset/tutorial/registro.md#celestina-arrabbiata-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| celestina-triste | [WebP](asset/tutorial/ritratti/celestina-triste.webp) | [Scheda](asset/tutorial/registro.md#celestina-triste-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| beppe-contento | [WebP](asset/tutorial/ritratti/beppe-contento.webp) | [Scheda](asset/tutorial/registro.md#beppe-contento-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| beppe-pensieroso | [WebP](asset/tutorial/ritratti/beppe-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#beppe-pensieroso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| beppe-scocciato | [WebP](asset/tutorial/ritratti/beppe-scocciato.webp) | [Scheda](asset/tutorial/registro.md#beppe-scocciato-2) |Da rifare (21 novembre 2026): la nuvoletta del sospiro. [Ritocco](#ritocchi) |
+| beppe-serio | [WebP](asset/tutorial/ritratti/beppe-serio.webp) | [Scheda](asset/tutorial/registro.md#beppe-serio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| duccio-dolorante | [WebP](asset/tutorial/ritratti/duccio-dolorante.webp) | [Scheda](asset/tutorial/registro.md#duccio-dolorante-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| duccio-offeso | [WebP](asset/tutorial/ritratti/duccio-offeso.webp) | [Scheda](asset/tutorial/registro.md#duccio-offeso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| duccio-serio | [WebP](asset/tutorial/ritratti/duccio-serio.webp) | [Scheda](asset/tutorial/registro.md#duccio-serio-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| duccio-beato | [WebP](asset/tutorial/ritratti/duccio-beato.webp) | [Scheda](asset/tutorial/registro.md#duccio-beato-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| sergio-strafottente | [WebP](asset/tutorial/ritratti/sergio-strafottente.webp) | [Scheda](asset/tutorial/registro.md#sergio-strafottente-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| sergio-malvagio | [WebP](asset/tutorial/ritratti/sergio-malvagio.webp) | [Scheda](asset/tutorial/registro.md#sergio-malvagio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| sergio-pensieroso | [WebP](asset/tutorial/ritratti/sergio-pensieroso.webp) | [Scheda](asset/tutorial/registro.md#sergio-pensieroso-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| mara-seria | [WebP](asset/tutorial/ritratti/mara-seria.webp) | [Scheda](asset/tutorial/registro.md#mara-seria-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
 
 ## Giro G — sfondi, varianti e il padrone
 
@@ -351,11 +351,49 @@ Avoid: faces, eyes, features, inner lines, colours, gradients or highlights insi
 
 | Asset | File | Scheda del registro | Giudizio del proprietario |
 |---|---|---|---|
-| s1-esterno-di-giorno | [WebP](asset/tutorial/sfondi/s1-esterno-di-giorno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-di-giorno-1) | |
-| s2-interno-al-buio | [WebP](asset/tutorial/sfondi/s2-interno-al-buio.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-al-buio-1) | |
-| s3-esterno | [WebP](asset/tutorial/sfondi/s3-esterno.webp) | [Scheda](asset/tutorial/registro.md#s3-esterno-2) | |
-| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-2) | |
-| padrone-in-ombra | [WebP](asset/tutorial/sprite/padrone-in-ombra.webp) | [Scheda](asset/tutorial/registro.md#padrone-in-ombra-2) | |
+| s1-esterno-di-giorno | [WebP](asset/tutorial/sfondi/s1-esterno-di-giorno.webp) | [Scheda](asset/tutorial/registro.md#s1-esterno-di-giorno-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| s2-interno-al-buio | [WebP](asset/tutorial/sfondi/s2-interno-al-buio.webp) | [Scheda](asset/tutorial/registro.md#s2-interno-al-buio-1) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+| s3-esterno | [WebP](asset/tutorial/sfondi/s3-esterno.webp) | [Scheda](asset/tutorial/registro.md#s3-esterno-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia (paletti dorati invece che cromati) |
+| s4-cantina | [WebP](asset/tutorial/sfondi/s4-cantina.webp) | [Scheda](asset/tutorial/registro.md#s4-cantina-2) |Da rifare (21 novembre 2026): il proprietario, «grappino in cantina è alto quasi quanto il soffitto». [Ritocco](#ritocchi) |
+| padrone-in-ombra | [WebP](asset/tutorial/sprite/padrone-in-ombra.webp) | [Scheda](asset/tutorial/registro.md#padrone-in-ombra-2) |**Approvato** (21 novembre 2026): «si, rifacciamo beppe», sulle note della regia |
+
+## Ritocchi
+
+21 novembre 2026, dopo il giudizio del proprietario sui tre giri. Due immagini da rifare; stesse istruzioni comuni, un tentativo più un
+solo nuovo tentativo, nuovi originali col numero successivo, file consegnati con lo stesso nome; l'esito va nelle tabelle dei giri.
+
+- **beppe-scocciato:** nei due tentativi il sospiro è diventato una nuvoletta che esce dalla bocca. Stesso prompt del giro F, con il sospiro
+  detto senza nuvola e la nuvola vietata.
+- **s4-cantina:** il proprietario: «grappino in cantina è alto quasi quanto il soffitto, come fa a entrarci una persona?». Due cause. La
+  composizione ha posato Grappino troppo grande: va rifatta con la misura del cast (`grappino`: altezza 0,17 dello schermo, piedi a 0,74),
+  che rispetto ai fusti è quella giusta. E lo sfondo disegna il bottino in scala da persona: alla misura giusta del cane, la ciabatta è più
+  grande di lui e il tappo quanto la sua testa. Si modifica lo sfondo, rimpicciolendo solo il bottino.
+
+| Prompt | Allegato | SHA-256 |
+|---|---|---|
+| beppe-scocciato | `docs/design/carriere/asset/tutorial/originali/beppe-tranquillo-2.png` | 450612d9d45c58cbadeb324c24cdb1e77f23df149aab40343a3f6507039d95a4 |
+| s4-cantina | `docs/design/carriere/asset/tutorial/originali/s4-cantina-2.png` | d76ceb6d55ec3461f91925c9752cc6895cf5d6d89478ad4259b8107de6324048 |
+
+| Asset | Composizione |
+|---|---|
+| beppe-scocciato | Come nel giro F, su S2: «Eh? Io sono un tornitore. L'unico codice che ho è il PIN del bancomat.» |
+| s4-cantina | Lo sfondo nuovo con `grappino-seduto` alla misura del cast, seduto sul bottino; senza battuta. Una seconda composizione con lo stesso sfondo e `mara-neutra`, per vedere che una persona ci sta |
+
+### Ritocco: Beppe — scocciato
+
+~~~text
+Edit the attached approved dialogue portrait. Keep everything exactly the same: the same man, his face, long beard, hair in a bun, tobacco-brown overalls, black band T-shirt with the illegible logo, the forearm tattoo, colours, hand-inked European comic style, framing, size and position on the canvas, and the transparent background. Change only his facial expression and the pose of his arms and hands: fed up and irritated, rolling his eyes up, cheeks slightly puffed and lips pressed together as if letting out a long weary sigh through the nose, arms crossed more tightly, shoulders slumped. The sigh is shown only by his face: nothing comes out of his mouth or nose.
+
+Avoid: any other change to the character; puffs, clouds, breath, steam, smoke, vapour, motion lines or symbols near his mouth or nose; tools in his pockets or hands; readable writing or real band names or logos; mirroring; any text, letters, numbers, logos, brands, signatures or watermarks; scenery or other characters; likeness of any real person or celebrity; photographic or 3D-rendered style.
+~~~
+
+### Ritocco: S4 — la cantina
+
+~~~text
+Edit the attached background illustration. Keep everything exactly the same: the vaulted brick cellar, the bare light bulb, the shelves with bottles, the crates, the beer kegs, the wooden staircase, the cobwebs, the light, the colours, the hand-inked European comic style and the composition. Change only the small dog's hoard on the floor: redraw it much smaller, at the real scale of the room, as the stash of a small dog no taller than half a beer keg: a tiny bottle cap, one worn black furry slipper of normal adult size, a few thin cigarette butts and some greasy scraps of paper, on a small old rag no wider than one beer keg. Place it on the floor in the central third of the width, a little left of the centre, just above the lowest quarter of the image. Fill the space it leaves with the same plain dusty floor.
+
+Avoid: any other change to the image; oversized objects; animals, people, faces, hands, silhouettes; any text, letters, numbers, labels on crates or kegs, logos, brands, signatures or watermarks; photographic or 3D-rendered style.
+~~~
 
 ## Dopo i giri
 
